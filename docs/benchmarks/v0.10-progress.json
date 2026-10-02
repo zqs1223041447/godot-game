@@ -1,0 +1,77 @@
+{
+  "date_utc": "2026-10-02",
+  "engine": "Godot 4.6.3 official headless debug",
+  "scope": "One actual public nova cast or projectile tick with 100 rewarded catalog roots; enemy HP/shield/XP unchanged, fixture live damage100000 and player protection100s. Setup/rendering excluded; model signals, HUD refresh and disk persistence active. Five measured samples plus one warmup for each mode.",
+  "production_main_sha256": "38538c969e560828e764eea80c47104fe7b46baac78b90dadd7ef264b3349f3d",
+  "equality": "All complete-state and saved-byte comparisons passed, preserving model signals.",
+  "samples": [
+    {
+      "mode": "historical_per_signal",
+      "root_kills_per_sample": 100,
+      "samples": 5,
+      "scenario": "roots_cast",
+      "total_root_kills": 500,
+      "totals": {
+        "hud_refreshes": 585,
+        "save_attempts": 585,
+        "save_successes": 585,
+        "signals": 585
+      },
+      "transaction_ms_max": 1311.672,
+      "transaction_ms_mean": 1196.0292,
+      "transaction_ms_p50": 1170.53,
+      "warmups": 1
+    },
+    {
+      "mode": "batched",
+      "root_kills_per_sample": 100,
+      "samples": 5,
+      "scenario": "roots_cast",
+      "total_root_kills": 500,
+      "totals": {
+        "hud_refreshes": 5,
+        "save_attempts": 5,
+        "save_successes": 5,
+        "signals": 585
+      },
+      "transaction_ms_max": 198.407,
+      "transaction_ms_mean": 178.5476,
+      "transaction_ms_p50": 186.543,
+      "warmups": 1
+    },
+    {
+      "mode": "historical_per_signal",
+      "root_kills_per_sample": 100,
+      "samples": 5,
+      "scenario": "mixed_tick",
+      "total_root_kills": 500,
+      "totals": {
+        "hud_refreshes": 595,
+        "save_attempts": 595,
+        "save_successes": 595,
+        "signals": 595
+      },
+      "transaction_ms_max": 1318.502,
+      "transaction_ms_mean": 1224.1496,
+      "transaction_ms_p50": 1205.593,
+      "warmups": 1
+    },
+    {
+      "mode": "batched",
+      "root_kills_per_sample": 100,
+      "samples": 5,
+      "scenario": "mixed_tick",
+      "total_root_kills": 500,
+      "totals": {
+        "hud_refreshes": 5,
+        "save_attempts": 5,
+        "save_successes": 5,
+        "signals": 595
+      },
+      "transaction_ms_max": 259.741,
+      "transaction_ms_mean": 241.3612,
+      "transaction_ms_p50": 247.132,
+      "warmups": 1
+    }
+  ]
+}

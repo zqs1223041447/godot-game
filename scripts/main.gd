@@ -21,6 +21,7 @@ const PLAYER_RADIUS := 15.0
 const MAX_ENEMIES := 100
 const MAX_PROJECTILES := 180
 const MAX_PARTICLES := 180
+const MAX_PROGRESS_FLUSH_PASSES := 8
 
 var visual_cues = VisualCueRuntime.new()
 var visual_settings = Presentation.new()
@@ -29,6 +30,12 @@ var reward_kills: int = 0
 var demo_mode: bool = false
 var density_demo: bool = false
 var use_spatial_separation: bool = true
+# Developer comparison switch: false preserves per-signal HUD/save work.
+var use_progress_batching: bool = true
+# Cumulative main-owned refreshes and Model.save_build calls, not file writes.
+var progress_hud_refresh_count: int = 0
+var progress_save_attempt_count: int = 0
+var progress_save_success_count: int = 0
 var enemy_spatial = SpatialTargets.new()
 var separation_candidate_visits: int = 0
 var separation_full_scan_visits: int = 0
@@ -70,6 +77,13 @@ var _font: Font
 var _stats: Dictionary = {}
 var _autosave_timer: float = 0.0
 var _ready_complete: bool = false
+var _progress_transaction_depth: int = 0
+var _progress_revision: int = 0
+var _progress_hud_dirty: bool = false
+var _progress_save_dirty: bool = false
+var _progress_save_requested: bool = false
+var _progress_flushing: bool = false
+var _progress_saving: bool = false
 
 
 func _ready() -> void:
@@ -123,21 +137,86 @@ func _on_build_changed() -> void:
 	mana = minf(mana, float(_stats.max_mana))
 	shield = minf(shield, float(_stats.max_shield))
 	if _ready_complete:
-		hud.refresh_build()
-		save_build()
+		_progress_revision += 1
+		_progress_hud_dirty = true
+		_progress_save_dirty = true
+		_progress_save_requested = true
+		if not use_progress_batching or _progress_transaction_depth == 0:
+			_flush_progress()
+
+
+func _begin_progress_transaction() -> void:
+	_progress_transaction_depth += 1
+
+
+func _end_progress_transaction() -> void:
+	_progress_transaction_depth -= 1
+	if _progress_transaction_depth == 0:
+		_flush_progress()
+
+
+func _flush_progress(force_save: bool = false) -> bool:
+	if force_save:
+		_progress_save_dirty = true
+		_progress_save_requested = true
+	if _progress_flushing:
+		# Explicit saves during a HUD callback still attempt the current state.
+		# A model-save callback cannot recursively enter the same disk writer.
+		if force_save and not _progress_saving:
+			_attempt_progress_save()
+		return not _progress_save_dirty and not _progress_hud_dirty
+	_progress_flushing = true
+	var passes: int = 0
+	while (_progress_hud_dirty or _progress_save_requested) and passes < MAX_PROGRESS_FLUSH_PASSES:
+		passes += 1
+		if _progress_hud_dirty:
+			# Consume before calling out: reentrant changes schedule another pass.
+			_progress_hud_dirty = false
+			if _ready_complete and is_instance_valid(hud):
+				progress_hud_refresh_count += 1
+				hud.refresh_build()
+		if _progress_save_requested and not _attempt_progress_save():
+			break
+	# A callback that mutates on every refresh/save must not loop forever.
+	# Any remaining work stays dirty; explicit save reports that it is not clean.
+	_progress_flushing = false
+	return not _progress_save_dirty and not _progress_hud_dirty
+
+
+func _attempt_progress_save() -> bool:
+	_progress_save_requested = false
+	var revision: int = _progress_revision
+	_progress_saving = true
+	progress_save_attempt_count += 1
+	var error: Error = state.save_build()
+	if error == OK:
+		progress_save_success_count += 1
+		_progress_save_dirty = _progress_revision != revision
+		if _progress_save_dirty:
+			_progress_save_requested = true
+	else:
+		_progress_save_dirty = true
+		if is_instance_valid(hud):
+			hud.notify(state.save_block_reason() if not state.save_block_reason().is_empty() else "存档失败，请检查保存目录的写入权限")
+		# Keep the latest state pending without retrying on every empty tick.
+		# A later mutation, the existing autosave or an explicit save can retry.
+		_progress_save_requested = false
+	_progress_saving = false
+	return error == OK
 
 
 func save_build() -> bool:
-	var error: Error = state.save_build()
-	if error != OK and is_instance_valid(hud):
-		hud.notify(state.save_block_reason() if not state.save_block_reason().is_empty() else "存档失败，请检查保存目录的写入权限")
-	return error == OK
+	return _flush_progress(true)
 
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		save_build()
-		get_tree().quit()
+		_quit_game()
+
+
+func _quit_game() -> void:
+	get_tree().quit()
 
 
 func restart_run() -> void:
@@ -243,6 +322,12 @@ func _process(delta: float) -> void:
 
 
 func tick(delta: float) -> void:
+	_begin_progress_transaction()
+	_tick(delta)
+	_end_progress_transaction()
+
+
+func _tick(delta: float) -> void:
 	elapsed += delta
 	var new_wave: int = 1 + int(elapsed / 30.0)
 	if new_wave != wave:
@@ -542,6 +627,13 @@ func _shoot(origin: Vector2, direction: Vector2, packet: Dictionary, color: Colo
 
 
 func cast_skill(index: int) -> bool:
+	_begin_progress_transaction()
+	var accepted: bool = _cast_skill(index)
+	_end_progress_transaction()
+	return accepted
+
+
+func _cast_skill(index: int) -> bool:
 	if not alive or not _ready_complete or hud.is_blocking() or index < 0 or index >= state.skill_slots.size():
 		return false
 	var id: String = state.skill_slots[index]

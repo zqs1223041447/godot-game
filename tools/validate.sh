@@ -41,6 +41,7 @@ run_check --script res://tests/damage_preview_test.gd
 run_check --script res://tests/typed_damage_state_test.gd
 run_check --script res://tests/typed_damage_integration_test.gd
 run_check --script res://tests/save_guard_integration_test.gd
+run_check --script res://tests/progress_batch_test.gd
 run_check --script res://tests/equipment_state_test.gd
 run_check --script res://tests/equipment_integration_test.gd
 run_check --script res://tests/skill_compiler_test.gd
@@ -73,4 +74,4 @@ run_check --script res://tests/equipment_art_test.gd
 run_check --script res://tests/material_frame_test.gd
 python3 "$PROJECT_DIR/tests/reference_catalog_test.py"
 run_check --quit-after 300
-echo "Validation passed: import, original equipment rolls/loot, schema7 compatibility/byte-exact backups/protected saves/special passive grants/offline reference data and launch wiring, typed hit bases and previews, compiled supports/cast/UI, wide native camera/100 real enemies/spatial-reference equivalence, fantasy artwork/materials and bounded visual cues, build/save model, passive/jewel/balance invariants, shared mechanisms, monster lifecycle/scene, projectile/damage pipeline, combat/UI integration, and 300-frame startup."
+echo "Validation passed: import, original equipment rolls/loot, transaction-bounded progress flush/exact saved-byte equivalence, schema7 compatibility/byte-exact backups/protected saves/special passive grants/offline reference data and launch wiring, typed hit bases and previews, compiled supports/cast/UI, wide native camera/100 real enemies/spatial-reference equivalence, fantasy artwork/materials and bounded visual cues, build/save model, passive/jewel/balance invariants, shared mechanisms, monster lifecycle/scene, projectile/damage pipeline, combat/UI integration, and 300-frame startup."
