@@ -16,8 +16,11 @@ func _initialize() -> void:
 func _run() -> void:
 	_test_profiles()
 	_test_timing()
+	_test_configured_timing()
 	_test_event_order()
+	_test_staggered_admission()
 	_test_cancellation_and_birth()
+	_test_mixed_cancellation()
 	_test_invalid_inputs()
 	_test_copies_and_rng()
 	_test_shared_damage_path()
@@ -113,6 +116,28 @@ func _test_timing() -> void:
 	_expect(carried.active_count() == 0, "Recovery does not lose the crossing remainder")
 
 
+func _test_configured_timing() -> void:
+	var enemy: Dictionary = _enemy()
+	for profile: Dictionary in [
+		{"windup_seconds": 0.001, "recovery_seconds": 0.001},
+		{"windup_seconds": 60.0, "recovery_seconds": 60.0},
+		{"windup_seconds": 0.25, "recovery_seconds": 0.375},
+	]:
+		var runtime = Runtime.new()
+		_expect(runtime.start(enemy, Vector2.ZERO, profile).ok, "Configured timing is admitted at both bounds and asymmetric durations")
+		var windup: float = float(profile.windup_seconds)
+		var recovery: float = float(profile.recovery_seconds)
+		_expect(runtime.advance(windup * 0.5, [enemy]).is_empty(), "Configured windup does not emit halfway through")
+		var events: Array[Dictionary] = runtime.advance(windup * 0.5, [enemy])
+		_expect(events.size() == 1 and runtime.state_for(1).phase == "recovery", "Configured windup deadline emits once and enters recovery")
+		_expect(runtime.advance(recovery * 0.5, [enemy]).is_empty() and runtime.active_count() == 1, "Configured recovery remains occupied halfway through")
+		_expect(runtime.advance(recovery * 0.5, [enemy]).is_empty() and runtime.active_count() == 0, "Configured recovery frees its slot at the exact deadline")
+		var large_step = Runtime.new()
+		large_step.start(enemy, Vector2.ZERO, profile)
+		_expect(large_step.advance(1.0e300, [enemy]) == events and large_step.active_count() == 0, "Configured split and huge steps emit identical events and finish recovery")
+		_expect(large_step.advance(1.0, [enemy]).is_empty(), "Configured completed attack does not replay")
+
+
 func _test_event_order() -> void:
 	var a: Dictionary = _enemy(9)
 	var b: Dictionary = _enemy(2)
@@ -134,6 +159,29 @@ func _test_event_order() -> void:
 	tied.start(b, Vector2.ZERO)
 	var events: Array[Dictionary] = tied.advance(0.7, [a, b])
 	_expect(events.size() == 2 and events[0].source_id == 2 and events[1].source_id == 9, "Equal deadlines use ascending source identity")
+
+
+func _test_staggered_admission() -> void:
+	var older: Dictionary = _enemy(9)
+	var newer: Dictionary = _enemy(2)
+	var runtime = Runtime.new()
+	var first: Dictionary = runtime.start(older, Vector2(20, 30), {"windup_seconds": 0.8})
+	_expect(first.ok, "Older source starts before staggered admission")
+	runtime.advance(0.65, [older])
+	var before: Dictionary = runtime.state_for(9)
+	_expect(not runtime.start(older, Vector2(999, 999)).ok, "Busy windup rejects retargeting")
+	_expect(not runtime.start(newer, Vector2.ZERO, {"windup_seconds": 0.0}).ok, "Invalid new profile rejects alongside an existing windup")
+	newer.spawn = 0.1
+	_expect(not runtime.start(newer, Vector2.ZERO).ok, "Protected new source rejects alongside an existing windup")
+	_expect(runtime.active_count() == 1 and runtime.state_for(9) == before, "Rejected admissions preserve the existing clock, center and packet")
+	newer.spawn = 0.0
+	var second: Dictionary = runtime.start(newer, Vector2.ZERO, {"windup_seconds": 0.2})
+	_expect(second.ok and second.attack.attack_id == first.attack.attack_id + 1, "Rejected admissions do not consume attack identities")
+	var events: Array[Dictionary] = runtime.advance(0.2, [newer, older])
+	_expect(events.size() == 2, "Staggered sources both reach their deadlines in the next step")
+	if events.size() == 2:
+		_expect(events[0].source_id == 9 and events[1].source_id == 2, "Chronological order uses remaining time despite reversed source IDs and windup lengths")
+		_expect(events[0].center == Vector2(20, 30), "Rejected retargeting leaves the original locked center")
 
 
 func _test_cancellation_and_birth() -> void:
@@ -167,6 +215,35 @@ func _test_cancellation_and_birth() -> void:
 	runtime.advance(0.7, [enemy])
 	enemy.health = 0.0
 	_expect(runtime.advance(0.0, [enemy]).is_empty() and runtime.active_count() == 0, "Death also frees recovery state")
+
+
+func _test_mixed_cancellation() -> void:
+	for phase: String in ["windup", "recovery"]:
+		var runtime = Runtime.new()
+		var sources: Array[Dictionary] = []
+		for id: int in range(1, 7):
+			var enemy: Dictionary = _enemy(id)
+			sources.append(enemy)
+			runtime.start(enemy, Vector2.ZERO)
+		runtime.advance(0.5 if phase == "windup" else 0.7, sources)
+		sources[1].health = 0.0
+		sources[2].spawn = 0.1
+		sources[3].death_processed = true
+		sources[4].health = NAN
+		sources.pop_back()
+		var events: Array[Dictionary] = runtime.advance(0.2 if phase == "windup" else 0.0, sources)
+		if phase == "windup":
+			_expect(events.size() == 1 and events[0].source_id == 1, "Mixed liveness cancels only invalid sources before the windup deadline")
+		else:
+			_expect(events.is_empty(), "Recovery cancellation at zero delta never repeats an event")
+		_expect(runtime.active_count() == 1 and not runtime.state_for(1).is_empty(), "Mixed cancellation preserves the unrelated living source in " + phase)
+		for id: int in range(2, 7):
+			_expect(runtime.state_for(id).is_empty(), "Death, protection, processed death, malformed health and removal each free only their own state")
+		if phase == "windup":
+			_expect(runtime.cancel(1), "Explicit cancellation also frees the surviving recovery state")
+		else:
+			runtime.reset()
+		_expect(runtime.active_count() == 0 and runtime.advance(10.0, sources).is_empty(), "Cancel or reset during recovery leaves no retained or replayable attack")
 
 
 func _test_invalid_inputs() -> void:
