@@ -11,9 +11,9 @@ const Jewels = preload("res://scripts/jewel_data.gd")
 const JewelArt = preload("res://scripts/visuals/equipment_art.gd")
 const MIN_ZOOM: float = 0.15
 const MAX_ZOOM: float = 1.8
-const GOLD: Color = Color("d8b577")
-const CYAN: Color = Color("b8c891")
-const MUTED: Color = Color("8f8b71")
+const GOLD: Color = Color("916722")
+const CYAN: Color = Color("3f602e")
+const MUTED: Color = Color("8c7753")
 
 var zoom: float = 0.34
 var pan: Vector2 = Vector2.ZERO
@@ -277,7 +277,7 @@ func _node_radius(node: Dictionary) -> float:
 
 
 func _draw() -> void:
-	draw_rect(Rect2(Vector2.ZERO, size), Color("22291f"))
+	draw_texture_rect(preload("res://assets/ui/grimoire/parchment.png"), Rect2(Vector2.ZERO,size), false)
 	_draw_backdrop()
 	if _state == null:
 		return
@@ -285,7 +285,7 @@ func _draw() -> void:
 	for edge: Array in _edges:
 		var a: String = str(edge[0])
 		var b: String = str(edge[1])
-		var color: Color = Color("5a5a43")
+		var color: Color = Color("a08b60")
 		var width: float = 1.2
 		if _analysis.get("connected", {}).has(a) and _analysis.get("connected", {}).has(b):
 			color = GOLD.darkened(0.22)
@@ -293,14 +293,17 @@ func _draw() -> void:
 		elif (_analysis.get("connected", {}).has(a) and _reachable.has(b)) or (_analysis.get("connected", {}).has(b) and _reachable.has(a)):
 			color = CYAN.darkened(0.3)
 			width = 1.7
-		draw_line(node_screen_position(a), node_screen_position(b), color, width, true)
+		var from: Vector2=node_screen_position(a)
+		var to: Vector2=node_screen_position(b)
+		var bend: Vector2=(to-from).normalized().orthogonal()*minf(2.0,(to-from).length()*0.02)
+		draw_polyline(PackedVector2Array([from,from.lerp(to,0.33)+bend,from.lerp(to,0.67)+bend*0.6,to]),color,width,true)
 	for id: String in _nodes:
 		_draw_node(id, _nodes[id] as Dictionary)
 	_draw_map_labels()
 	_draw_minimap()
 	var font: Font = get_theme_default_font()
-	draw_string(font, Vector2(15, 23), "星脉图谱", HORIZONTAL_ALIGNMENT_LEFT, -1, 14, Color("b1aa8d"))
-	draw_string(font, Vector2(15, size.y - 16), "拖动空白平移  ·  滚轮缩放  ·  双击分配", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color("a29a80"))
+	draw_string(font, Vector2(15, 23), "星脉图谱", HORIZONTAL_ALIGNMENT_LEFT, -1, 14, Color("604522"))
+	draw_string(font, Vector2(15, size.y - 16), "拖动空白平移  ·  滚轮缩放  ·  双击分配", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color("69523a"))
 
 
 func _draw_jewel_coverage() -> void:
@@ -314,7 +317,7 @@ func _draw_jewel_coverage() -> void:
 		var center: Vector2 = world_to_screen(source.position)
 		var radius: float = float(source.radius) * zoom
 		var chosen: bool = socket_id == selected_node_id or socket_id == hovered_node_id or socket_id == _preview_socket_id or _analysis.get("granted_by", {}).get(selected_node_id, []).has(socket_id) or _analysis.get("granted_by", {}).get(hovered_node_id, []).has(socket_id)
-		var color := Color("c4a063")
+		var color := Color("916722")
 		if source.get("active", true) == false: color = Color("948a72")
 		color.a = 0.065 if chosen else 0.025
 		draw_circle(center, radius, color)
@@ -331,12 +334,10 @@ func _draw_backdrop() -> void:
 		var p: Vector2 = Vector2(fmod(float(i * 137 + 19), maxf(size.x, 1)), fmod(float(i * 83 + 43), maxf(size.y, 1)))
 		var color: Color = Color(0.72, 0.69, 0.47, 0.09 + float(i % 4) * 0.02)
 		draw_circle(p, 0.7 if i % 5 else 1.2, color)
-	var origin: Vector2 = world_to_screen(Vector2.ZERO)
-	for radius: float in [200.0, 450.0, 700.0, 950.0, 1120.0]:
-		draw_arc(origin, radius * zoom, 0, TAU, 144, Color(0.62, 0.60, 0.39, 0.035), 1.0, true)
-	for i: int in range(6):
-		var angle: float = float(i) * TAU / 6.0
-		draw_line(origin + Vector2.from_angle(angle) * 85.0 * zoom, origin + Vector2.from_angle(angle) * 1190.0 * zoom, Color(0.62, 0.60, 0.39, 0.025), 1.0, true)
+	# Fine archival ink marks; no concentric instrument rings or radial dashboard.
+	for i: int in range(7):
+		var p:=Vector2(24+i*103,44+sin(i*1.8)*16)
+		draw_line(p,p+Vector2(6,-3),Color(0.40,0.27,0.12,0.09),1,true)
 
 
 func _draw_node(id: String, node: Dictionary) -> void:
@@ -350,22 +351,22 @@ func _draw_node(id: String, node: Dictionary) -> void:
 	var color: Color = GOLD if allocated else (CYAN if reachable else MUTED)
 	var remote: bool = _analysis.get("remote_nodes", []).has(id)
 	var covered: bool = _analysis.get("granted_by", {}).has(id) or _preview.get("granted_by", {}).has(id) or _radius_preview.get("covered_nodes", []).has(id)
-	if remote: color = Color("e3b978")
-	var fill: Color = Color("2c3024")
+	if remote: color = Color("a45428")
+	var fill: Color = Color("e4c995")
 	if allocated:
-		fill = Color("59492d")
+		fill = Color("c1994a")
 	elif reachable:
-		fill = Color("495338")
+		fill = Color("c6cc9b")
 	if not search_query.is_empty() and not _matches.has(id):
 		color = color.darkened(0.56)
 		fill = fill.darkened(0.45)
 	if selected_node_id == id:
 		draw_circle(p, radius + 9.0, Color(0.69, 0.74, 0.46, 0.06))
-		draw_arc(p, radius + 6.0, 0, TAU, 48, Color("e8d9ad"), 1.2, true)
+		draw_arc(p, radius + 6.0, 0, TAU, 48, Color("7a2f29"), 1.2, true)
 	elif hovered_node_id == id or _matches.has(id):
 		draw_arc(p, radius + 4.0, 0, TAU, 36, CYAN if hovered_node_id == id else GOLD, 1.2, true)
 	if covered and type in ["small", "notable"]:
-		var mark_color := Color("c4a063")
+		var mark_color := Color("916722")
 		mark_color.a = 0.95 if remote else 0.60
 		var at: Vector2 = p + Vector2(radius + 3, -radius - 3)
 		draw_line(at + Vector2(-2, 2), at + Vector2(2, -2), mark_color, 1.4, true)
@@ -387,7 +388,7 @@ func _draw_node(id: String, node: Dictionary) -> void:
 		else:
 			draw_circle(p, 1.5, color)
 	elif type == "start":
-		draw_circle(p, radius + 3, Color("303c29"))
+		draw_circle(p, radius + 3, Color("a99263"))
 		draw_arc(p, radius + 1, 0, TAU, 48, GOLD, 1.5, true)
 		var star: PackedVector2Array = PackedVector2Array()
 		for i: int in range(8):
@@ -423,7 +424,7 @@ func _draw_map_labels() -> void:
 		var caption: String = str(sector.get("name", ""))
 		var width: float = font.get_string_size(caption, HORIZONTAL_ALIGNMENT_LEFT, -1, 13).x
 		var color: Color = sector.get("color", MUTED) as Color
-		draw_string(font, p - Vector2(width * 0.5, -5.0), caption, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, color.darkened(0.12))
+		draw_string(font, p - Vector2(width * 0.5, -5.0), caption, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, color.darkened(0.54))
 
 
 func _draw_minimap() -> void:
@@ -435,7 +436,7 @@ func _draw_minimap() -> void:
 	for edge: Array in _edges:
 		var a: Vector2 = _nodes[str(edge[0])]["position"] as Vector2
 		var b: Vector2 = _nodes[str(edge[1])]["position"] as Vector2
-		draw_line(center + a * scale_value, center + b * scale_value, Color("66634b"), 0.7, true)
+		draw_line(center + a * scale_value, center + b * scale_value, Color("957b4d"), 0.7, true)
 	for id: String in _allocated:
 		if _nodes.has(id):
 			draw_circle(center + (_nodes[id]["position"] as Vector2) * scale_value, 1.7, GOLD)
@@ -443,13 +444,13 @@ func _draw_minimap() -> void:
 	visible_rect = visible_rect.intersection(rect.grow(-2))
 	if visible_rect.has_area():
 		draw_rect(visible_rect, Color(0.64, 0.68, 0.44, 0.08))
-		draw_rect(visible_rect, Color("b1ae83"), false, 1.0)
+		draw_rect(visible_rect, Color("7a2f29"), false, 1.0)
 
 
 func _minimap_style() -> StyleBoxFlat:
 	var style: StyleBoxFlat = StyleBoxFlat.new()
-	style.bg_color = Color(0.11, 0.14, 0.095, 0.94)
-	style.border_color = Color("7c7459")
+	style.bg_color = Color("ebd6a9")
+	style.border_color = Color("8c6b42")
 	style.set_border_width_all(1)
 	style.set_corner_radius_all(5)
 	return style

@@ -9,7 +9,7 @@ func _initialize()->void:
 		var original:StyleBox=theme.get_stylebox(state,"Button")
 		var copied:StyleBox=original.duplicate()
 		expect(original is Frame and copied is Frame,"material resource "+state)
-		for field:String in ["bg_color","border_color","border_width","corner_cut","grain","content_margin_left","content_margin_right","content_margin_top","content_margin_bottom"]:
+		for field:String in ["bg_color","border_color","border_width","corner_cut","grain","book_cover","content_margin_left","content_margin_right","content_margin_top","content_margin_bottom"]:
 			expect(original.get(field)==copied.get(field),"hotbar style duplicate preserves %s %s"%[state,field])
 		expect(original.get_minimum_size()==copied.get_minimum_size(),"unchanged minimum size "+state)
 	expect(theme.get_stylebox("focus","Button").bg_color.a==0,"focus remains transparent")

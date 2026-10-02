@@ -4,16 +4,17 @@ extends VBoxContainer
 
 signal feedback(message: String)
 
+const PresentationTheme = preload("res://scripts/visuals/visual_theme.gd")
 const Passives = preload("res://scripts/passive_data.gd")
 const Jewels = preload("res://scripts/jewel_data.gd")
 const TreeCanvas = preload("res://scripts/passive_tree_view.gd")
 const JewelIcon = preload("res://scripts/visuals/jewel_emblem.gd")
-const TEXT: Color = Color("eee2c7")
-const MUTED: Color = Color("b2aa94")
-const CYAN: Color = Color("b8c891")
-const GOLD: Color = Color("d8b577")
-const RED: Color = Color("ee98a2")
-const BORDER: Color = Color("827354")
+const TEXT: Color = Color("3b281b")
+const MUTED: Color = Color("69523a")
+const CYAN: Color = Color("52623b")
+const GOLD: Color = Color("79571f")
+const RED: Color = Color("a13b2d")
+const BORDER: Color = Color("8c6b42")
 
 var tree_view: PassiveTreeView
 var selected_node_id: String = "origin"
@@ -203,7 +204,7 @@ func _build_ui() -> void:
 	canvas_panel.name = "ConstellationFrame"
 	canvas_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	canvas_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	canvas_panel.add_theme_stylebox_override("panel", _style(Color("22291f"), BORDER, 9, 1, 2))
+	canvas_panel.add_theme_stylebox_override("panel", _style(Color("efdbad"), BORDER, 9, 1, 2))
 	content.add_child(canvas_panel)
 	tree_view = TreeCanvas.new() as PassiveTreeView
 	canvas_panel.add_child(tree_view)
@@ -214,7 +215,7 @@ func _build_ui() -> void:
 	inspector.name = "NodeInspector"
 	inspector.custom_minimum_size.x = 340
 	inspector.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	inspector.add_theme_stylebox_override("panel", _style(Color("2d2e23"), BORDER, 9, 1, 11))
+	inspector.add_theme_stylebox_override("panel", _style(Color("f8ecd0"), BORDER, 9, 1, 11))
 	content.add_child(inspector)
 	var scroll: ScrollContainer = ScrollContainer.new()
 	scroll.name = "InspectorScroll"
@@ -325,7 +326,7 @@ func _build_ui() -> void:
 	legend.add_child(_label("● 已点亮", 11, GOLD))
 	legend.add_child(_label("○ 可分配", 11, CYAN))
 	legend.add_child(_label("● 未连接", 11, MUTED))
-	legend.add_child(_label("◈ 珠宝孔", 11, Color("b8a4e8")))
+	legend.add_child(_label("◈ 珠宝孔", 11, Color("715285")))
 	var tip: Label = _label("⌁ 寻枝覆盖 / 点亮", 11, GOLD)
 	tip.mouse_filter = Control.MOUSE_FILTER_PASS
 	tip.tooltip_text = "淡金范围与枝形标记：特殊珠宝覆盖\n完整枝形：借助寻枝晶玉远程点亮；每个节点仍消耗1点\n未激活的预览范围为灰色；先沿连线点亮珠宝孔"
@@ -402,8 +403,8 @@ func _refresh_jewel_inventory(force: bool = false) -> void:
 		button.add_child(icon)
 		button.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		button.add_theme_font_size_override("font_size", 12)
-		button.add_theme_color_override("font_color", Jewels.get_color(jewel))
-		button.add_theme_stylebox_override("normal", _style(Color("414430") if id == selected_jewel_id else Color("302f25"), CYAN.darkened(0.4) if id == selected_jewel_id else BORDER.darkened(0.2), 5, 1, 7))
+		button.add_theme_color_override("font_color", PresentationTheme.ink(Jewels.get_color(jewel)))
+		button.add_theme_stylebox_override("normal", _style(Color("ead3a2") if id == selected_jewel_id else Color("f8ecd0"), CYAN.darkened(0.4) if id == selected_jewel_id else BORDER.darkened(0.2), 5, 1, 7))
 		button.tooltip_text = _jewel_title(jewel) + "\n" + Jewels.get_description(jewel)
 		_jewel_list.add_child(button)
 	if visible_count == 0:
@@ -421,7 +422,7 @@ func _refresh_jewel_detail() -> void:
 	_jewel_name.text = "选择一颗珠宝查看词缀" if jewel.is_empty() else "　　" + _jewel_title(jewel)
 	_jewel_detail_icon.set("jewel", jewel)
 	_jewel_detail_icon.visible = not jewel.is_empty()
-	_jewel_name.add_theme_color_override("font_color", MUTED if jewel.is_empty() else Jewels.get_color(jewel))
+	_jewel_name.add_theme_color_override("font_color", MUTED if jewel.is_empty() else PresentationTheme.ink(Jewels.get_color(jewel)))
 	var rule: Dictionary = Jewels.allocation_rule(jewel)
 	if jewel.is_empty():
 		_jewel_affixes.text = "选择珠宝 · 悬停查看完整效果"
@@ -558,7 +559,7 @@ func _label(text: String, font_size: int, color: Color) -> Label:
 	var result: Label = Label.new()
 	result.text = text
 	result.add_theme_font_size_override("font_size", font_size)
-	result.add_theme_color_override("font_color", color)
+	result.add_theme_color_override("font_color", PresentationTheme.ink(color))
 	result.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	return result
 
@@ -578,11 +579,11 @@ func _button(text: String, stable_name: String, callback: Callable, width: float
 	result.focus_mode = Control.FOCUS_NONE
 	result.mouse_filter = Control.MOUSE_FILTER_STOP
 	result.add_theme_font_size_override("font_size", 12)
-	result.add_theme_stylebox_override("normal", _style(Color("393729"), BORDER, 5, 1, 7))
-	result.add_theme_stylebox_override("hover", _style(Color("504b35"), CYAN.darkened(0.2), 5, 1, 7))
-	result.add_theme_stylebox_override("pressed", _style(Color("454c31"), CYAN, 5, 1, 7))
-	result.add_theme_stylebox_override("disabled", _style(Color("26271f"), Color("524e3a"), 5, 1, 7))
-	result.add_theme_color_override("font_disabled_color", Color("5f768b"))
+	result.add_theme_stylebox_override("normal", _style(Color("f8ecd0"), BORDER, 5, 1, 7))
+	result.add_theme_stylebox_override("hover", _style(Color("fff2d5"), CYAN.darkened(0.2), 5, 1, 7))
+	result.add_theme_stylebox_override("pressed", _style(Color("ead3a2"), CYAN, 5, 1, 7))
+	result.add_theme_stylebox_override("disabled", _style(Color("d9c8a5"), Color("9b8560"), 5, 1, 7))
+	result.add_theme_color_override("font_disabled_color", Color("82725b"))
 	if callback.is_valid():
 		result.pressed.connect(callback)
 	return result

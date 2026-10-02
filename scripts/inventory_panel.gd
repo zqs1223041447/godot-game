@@ -5,15 +5,16 @@ extends VBoxContainer
 signal feedback(message: String)
 signal open_passives_requested
 
+const PresentationTheme = preload("res://scripts/visuals/visual_theme.gd")
 const GridView = preload("res://scripts/item_grid_view.gd")
 const Data = preload("res://scripts/game_data.gd")
 const Passives = preload("res://scripts/passive_data.gd")
 const Defense = preload("res://scripts/mechanics/defense_rules.gd")
-const TEXT: Color = Color("eee2c7")
-const MUTED: Color = Color("b2aa94")
-const CYAN: Color = Color("b8c891")
-const GOLD: Color = Color("d8b577")
-const BORDER: Color = Color("827354")
+const TEXT: Color = Color("3b281b")
+const MUTED: Color = Color("69523a")
+const CYAN: Color = Color("52623b")
+const GOLD: Color = Color("79571f")
+const BORDER: Color = Color("8c6b42")
 const SLOT_NAMES: Dictionary = {"weapon": "武器", "armor": "护甲", "charm": "饰品"}
 
 var selected_item_key: String = ""
@@ -58,22 +59,22 @@ class EquipmentSlot extends Control:
 	func _draw() -> void:
 		var id: String = str(state.equipped.get(slot, "")) if state != null else ""
 		var selected_now: bool = selected_key == "item:" + id and not id.is_empty()
-		var line: Color = Color("b8c891") if selected_now else Color("877759")
+		var line: Color = Color("52623b") if selected_now else Color("877759")
 		if _drop_state != 0:
-			line = Color("85e2b6") if _drop_state == 1 else Color("f27786")
-		draw_style_box(InventoryPanel.make_style(Color("353426"), line, 6, 2 if selected_now or _drop_state != 0 else 1), Rect2(Vector2.ZERO, size))
+			line = Color("85e2b6") if _drop_state == 1 else Color("a13b2d")
+		draw_style_box(InventoryPanel.make_style(Color("f8ecd0"), line, 6, 2 if selected_now or _drop_state != 0 else 1), Rect2(Vector2.ZERO, size))
 		var font: Font = get_theme_default_font()
-		draw_string(font, Vector2(12, 23), str(InventoryPanel.SLOT_NAMES.get(slot, slot)), HORIZONTAL_ALIGNMENT_LEFT, -1, 13, Color("b2aa94"))
+		draw_string(font, Vector2(12, 23), str(InventoryPanel.SLOT_NAMES.get(slot, slot)), HORIZONTAL_ALIGNMENT_LEFT, -1, 13, Color("69523a"))
 		if id.is_empty():
-			var hint_entry: Dictionary = {"slot": slot, "id": "ember_wand" if slot == "weapon" else "guardian_robe" if slot == "armor" else "azure_charm", "color": Color("77735d")}
+			var hint_entry: Dictionary = {"hint": true, "slot": slot, "id": "ember_wand" if slot == "weapon" else "guardian_robe" if slot == "armor" else "azure_charm", "color": Color("77735d")}
 			GridView.draw_item_icon(self, hint_entry, Rect2(9, 29, 51, 57))
-			draw_string(font, Vector2(69, 60), "空装备槽", HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color("9b957d"))
-			draw_string(font, Vector2(69, 80), "拖入对应装备", HORIZONTAL_ALIGNMENT_LEFT, -1, 11, Color("9b957d"))
+			draw_string(font, Vector2(69, 60), "空装备槽", HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color("69523a"))
+			draw_string(font, Vector2(69, 80), "拖入对应装备", HORIZONTAL_ALIGNMENT_LEFT, -1, 11, Color("69523a"))
 			return
 		var entry: Dictionary = GridView.describe_item(state, "item:" + id)
 		GridView.draw_item_icon(self, entry, Rect2(9, 28, 51, 59))
-		draw_string(font, Vector2(66, 55), str(entry.get("base_name", entry.get("name", "装备"))), HORIZONTAL_ALIGNMENT_LEFT, size.x - 72, 16, entry.get("color", Color.WHITE))
-		draw_string(font, Vector2(66, 77), "已装备 · 点击查看", HORIZONTAL_ALIGNMENT_LEFT, size.x - 72, 11, Color("b2aa94"))
+		draw_string(font, Vector2(66, 55), str(entry.get("base_name", entry.get("name", "装备"))), HORIZONTAL_ALIGNMENT_LEFT, size.x - 72, 16, PresentationTheme.ink(entry.get("color", Color.WHITE)))
+		draw_string(font, Vector2(66, 77), "已装备 · 点击查看", HORIZONTAL_ALIGNMENT_LEFT, size.x - 72, 11, Color("69523a"))
 
 	func _gui_input(event: InputEvent) -> void:
 		if not event is InputEventMouseButton or not event.pressed:
@@ -183,7 +184,7 @@ func select_item(key: String) -> void:
 func _build_interface() -> void:
 	var summary_panel := PanelContainer.new()
 	summary_panel.name = "InventoryStatsSummary"
-	summary_panel.add_theme_stylebox_override("panel", make_style(Color("343729"), Color("747459"), 6, 1, 8))
+	summary_panel.add_theme_stylebox_override("panel", make_style(Color("f8ecd0"), Color("8c6b42"), 6, 1, 8))
 	add_child(summary_panel)
 	var summary_row := HBoxContainer.new()
 	summary_panel.add_child(summary_row)
@@ -191,6 +192,7 @@ func _build_interface() -> void:
 	_stats_summary = _label("", 13, TEXT)
 	_stats_summary.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_stats_summary.name = "DerivedStatsLabel"
+	_stats_summary.mouse_filter = Control.MOUSE_FILTER_PASS
 	_stats_summary.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_stats_summary.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	summary_row.add_child(_stats_summary)
@@ -241,9 +243,9 @@ func _build_interface() -> void:
 	var sort_button: Button = _button("整理", "AutoSortBackpackButton", _sort_backpack)
 	sort_button.custom_minimum_size = Vector2(62, 29)
 	sort_button.add_theme_font_size_override("font_size", 13)
-	sort_button.add_theme_stylebox_override("normal", make_style(Color("3b382a"), BORDER, 5, 1, 4))
-	sort_button.add_theme_stylebox_override("hover", make_style(Color("4c4a35"), CYAN, 5, 1, 4))
-	sort_button.add_theme_stylebox_override("pressed", make_style(Color("434b31"), CYAN, 5, 1, 4))
+	sort_button.add_theme_stylebox_override("normal", make_style(Color("f8ecd0"), BORDER, 5, 1, 4))
+	sort_button.add_theme_stylebox_override("hover", make_style(Color("fff2d5"), CYAN, 5, 1, 4))
+	sort_button.add_theme_stylebox_override("pressed", make_style(Color("ead3a2"), CYAN, 5, 1, 4))
 	bag_header.add_child(sort_button)
 	_grid = GridView.new()
 	_grid.name = "InventoryGrid"
@@ -259,7 +261,7 @@ func _build_interface() -> void:
 	detail_panel.name = "ItemDetailPanel"
 	detail_panel.custom_minimum_size.x = 250
 	detail_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	detail_panel.add_theme_stylebox_override("panel", make_style(Color("2d2e23"), BORDER, 7, 1, 13))
+	detail_panel.add_theme_stylebox_override("panel", make_style(Color("f8ecd0"), BORDER, 7, 1, 13))
 	columns.add_child(detail_panel)
 	var detail := VBoxContainer.new()
 	detail.add_theme_constant_override("separation", 6)
@@ -275,7 +277,7 @@ func _build_interface() -> void:
 	_detail_art = GridView.ItemArt.new()
 	_detail_art.name = "ItemDetailArt"
 	_detail_art.draw_border = false
-	_detail_art.custom_minimum_size = Vector2(80, 48)
+	_detail_art.custom_minimum_size = Vector2(80, 108)
 	_detail_art.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	detail.add_child(_detail_art)
 	_detail_status = _label("", 12, CYAN)
@@ -308,7 +310,7 @@ func _build_interface() -> void:
 	_passives_button = _button("前往天赋星图镶嵌", "OpenPassivesButton", _open_passives)
 	detail.add_child(_passives_button)
 	_discard_button = _button("丢弃这件装备", "DiscardEquipmentButton", _request_discard)
-	_discard_button.add_theme_color_override("font_color",Color("e5a2a0"))
+	_discard_button.add_theme_color_override("font_color",Color("9a382c"))
 	detail.add_child(_discard_button)
 	_discard_dialog = ConfirmationDialog.new()
 	_discard_dialog.name = "DiscardEquipmentConfirmation"
@@ -341,7 +343,7 @@ func _refresh_details() -> void:
 	var dimensions: Vector2i = _state.item_size(selected_item_key)
 	var color: Color = entry.get("color", CYAN)
 	_detail_name.text = str(entry.get("name", "物品"))
-	_detail_name.add_theme_color_override("font_color", color)
+	_detail_name.add_theme_color_override("font_color", PresentationTheme.ink(color))
 	if is_jewel:
 		var serial: int = str(entry.get("id", "")).trim_prefix("jewel_").to_int()
 		_detail_type.text = "普通珠宝  ·  %s  ·  #%03d" % [entry.get("rarity_name", ""), serial]
@@ -429,7 +431,7 @@ func _label(text: String, font_size: int, color: Color) -> Label:
 	var result := Label.new()
 	result.text = text
 	result.add_theme_font_size_override("font_size", font_size)
-	result.add_theme_color_override("font_color", color)
+	result.add_theme_color_override("font_color", PresentationTheme.ink(color))
 	result.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	return result
 

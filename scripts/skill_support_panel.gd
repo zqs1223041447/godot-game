@@ -4,20 +4,22 @@ extends VBoxContainer
 
 signal feedback(message: String)
 
+const Emblem = preload("res://scripts/visuals/skill_emblem.gd")
 const TypedPreview = preload("res://scripts/combat/damage_preview.gd")
 const Supports = preload("res://scripts/combat/support_catalog.gd")
 const PresentationTheme = preload("res://scripts/visuals/visual_theme.gd")
-const TEXT: Color = Color("eee2c7")
-const MUTED: Color = Color("b2aa94")
-const CYAN: Color = Color("b8c891")
-const GOLD: Color = Color("d8b577")
-const RED: Color = Color("f27786")
+const TEXT: Color = Color("3b281b")
+const MUTED: Color = Color("69523a")
+const CYAN: Color = Color("52623b")
+const GOLD: Color = Color("79571f")
+const RED: Color = Color("a13b2d")
 
 var selected_skill_id: String = ""
 var font_scale: float = 1.0
 var _state: BuildState
 var _selected_label: Label
 var _preview_label: Label
+var _selected_art: Control
 var _slot_caption: Label
 var _slot_row: HBoxContainer
 var _add_buttons: Dictionary = {}
@@ -29,12 +31,22 @@ func setup(state: BuildState) -> void:
 	name = "SkillSupportPanel"
 	size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	add_theme_constant_override("separation", 9)
+	var selected_header := HBoxContainer.new()
+	selected_header.add_theme_constant_override("separation",18)
+	add_child(selected_header)
+	_selected_art = Emblem.new()
+	_selected_art.custom_minimum_size = Vector2(112,112)
+	_selected_art.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	selected_header.add_child(_selected_art)
+	var selected_copy := VBoxContainer.new()
+	selected_copy.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	selected_header.add_child(selected_copy)
 	_selected_label = _label("", "SelectedSupportSkill", 20, GOLD)
-	add_child(_selected_label)
+	selected_copy.add_child(_selected_label)
 	_preview_label = _label("", "SupportCastPreview", 16, CYAN)
-	add_child(_preview_label)
+	selected_copy.add_child(_preview_label)
 	_slot_caption = _label("", "SupportSlotCaption", 14, MUTED)
-	add_child(_slot_caption)
+	selected_copy.add_child(_slot_caption)
 	_slot_row = HBoxContainer.new()
 	_slot_row.name = "SupportSlots"
 	add_child(_slot_row)
@@ -47,6 +59,11 @@ func setup(state: BuildState) -> void:
 		var row: HBoxContainer = HBoxContainer.new()
 		row.add_theme_constant_override("separation", 14)
 		card.add_child(row)
+		var gem := Emblem.new()
+		gem.skill_id = support_id
+		gem.custom_minimum_size = Vector2(58,58)
+		gem.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		row.add_child(gem)
 		var copy: VBoxContainer = VBoxContainer.new()
 		copy.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		row.add_child(copy)
@@ -75,6 +92,8 @@ func refresh() -> void:
 	var skill: Dictionary = GameData.SKILLS.get(selected_skill_id, {})
 	var position: int = _state.skill_slots.find(selected_skill_id)
 	_selected_label.text = "辅助目标：%s  ·  %s" % [str(skill.get("name", "未选择技能")), "快捷栏 %d" % (position + 1) if position >= 0 else "未装配"]
+	_selected_art.skill_id = selected_skill_id
+	_selected_art.queue_redraw()
 	var selected: Array[String] = _state.get_skill_supports(selected_skill_id)
 	_slot_caption.text = "独立辅助槽  %d / %d" % [selected.size(), Supports.MAX_SUPPORTS]
 	_rebuild_slots(selected)
@@ -126,6 +145,9 @@ func _rebuild_slots(selected: Array[String]) -> void:
 		# Bind the displayed identities. A repeated stale click cannot remove the
 		# other support that just shifted into this array position.
 		remove.pressed.connect(_remove_support.bind(selected_skill_id, support_id))
+		remove.icon = Emblem.ICONS.get(support_id)
+		remove.expand_icon = true
+		remove.add_theme_constant_override("icon_max_width", 26)
 		box.add_child(remove)
 
 
@@ -164,7 +186,7 @@ func _label(text: String, stable_name: String, font_size: int, color: Color) -> 
 	result.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	result.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	result.add_theme_font_size_override("font_size", font_size)
-	result.add_theme_color_override("font_color", color)
+	result.add_theme_color_override("font_color", PresentationTheme.ink(color))
 	result.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	return result
 
@@ -181,5 +203,5 @@ func _button(text: String, stable_name: String) -> Button:
 func _card() -> PanelContainer:
 	var result: PanelContainer = PanelContainer.new()
 	result.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	result.add_theme_stylebox_override("panel", PresentationTheme.panel(Color("3b382a"), Color("827354")))
+	result.add_theme_stylebox_override("panel", PresentationTheme.panel(Color("f8ecd0"), Color("8c6b42")))
 	return result

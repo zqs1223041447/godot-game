@@ -3,6 +3,8 @@ extends RefCounted
 ## Original, material-led equipment art. Pure drawing: no gameplay/RNG/CanvasItem
 ## property changes. Coordinates are fitted per silhouette and bounded to rect.
 
+const PainterlyArt = preload("res://scripts/visuals/equipment_painterly_art.gd")
+
 const INK := Color("241f1b")
 const BRASS := Color("b38a47")
 const GOLD_LIGHT := Color("e0c58b")
@@ -74,6 +76,8 @@ static func draw_item(canvas: CanvasItem, entry: Dictionary, rect: Rect2) -> voi
 	if canvas == null or not rect.has_area() or rect.size.x <= 2.0 or rect.size.y <= 2.0:
 		return
 	if not rect.position.is_finite() or not rect.size.is_finite():
+		return
+	if PainterlyArt.draw_item(canvas, entry, rect):
 		return
 	var id: String = str(entry.get("base_id", entry.get("id", "")))
 	var slot: String = str(entry.get("slot", ""))

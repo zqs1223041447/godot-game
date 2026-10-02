@@ -169,6 +169,7 @@ func make_surface(row: Dictionary) -> Node:
 			return emblem
 		"equipment", "jewels":
 			var item := ItemSurface.new()
+			item.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 			if row.category == "jewels":
 				item.entry = {"kind": "jewel", "base": row.id}
 			elif row.entry_type == "fixed_item":

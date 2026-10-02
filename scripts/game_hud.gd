@@ -12,13 +12,13 @@ const Emblem = preload("res://scripts/visuals/skill_emblem.gd")
 const Palette = preload("res://scripts/visuals/fantasy_palette.gd")
 
 const INK: Color = Color("161a14")
-const PANEL: Color = Color("29291f")
-const PANEL_LIGHT: Color = Color("3b382a")
-const BORDER: Color = Color("827354")
-const TEXT: Color = Color("eee2c7")
-const MUTED: Color = Color("b2aa94")
-const CYAN: Color = Color("b8c891")
-const GOLD: Color = Color("d8b577")
+const PANEL: Color = Color("f1deb3")
+const PANEL_LIGHT: Color = Color("f8ecd0")
+const BORDER: Color = Color("8c6b42")
+const TEXT: Color = Color("3b281b")
+const MUTED: Color = Color("69523a")
+const CYAN: Color = Color("52623b")
+const GOLD: Color = Color("79571f")
 const RED: Color = Color("c67865")
 const BLUE: Color = Color("839cb4")
 const STAT_NAMES: Dictionary = {
@@ -74,6 +74,7 @@ func setup(arena: Node) -> void:
 	_preferences = arena.get("visual_settings") as VisualSettings
 	layer = 10
 	_root = Control.new()
+	_root.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	_root.name = "HUDRoot"
 	_root.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -86,6 +87,7 @@ func setup(arena: Node) -> void:
 	_build_hint()
 	_build_toast()
 	_build_modal()
+	_style_dark_hud()
 	get_viewport().size_changed.connect(_apply_presentation)
 	_apply_presentation()
 	refresh_build()
@@ -177,7 +179,7 @@ func _label(text: String, font_size: int = 17, color: Color = TEXT) -> Label:
 	var result: Label = Label.new()
 	result.text = text
 	result.add_theme_font_size_override("font_size", font_size)
-	result.add_theme_color_override("font_color", color)
+	result.add_theme_color_override("font_color", PresentationTheme.ink(color))
 	result.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	return result
 
@@ -201,8 +203,10 @@ func _button(text: String, stable_name: String, callback: Callable, width: float
 
 
 func _accent_button(button: Button, accent: Color = CYAN) -> void:
-	button.add_theme_color_override("font_color", accent)
-	button.add_theme_stylebox_override("normal", _style(Color("414430"), accent.darkened(0.4), 8, 1))
+	button.add_theme_color_override("font_color", Color("f8ecd0"))
+	button.add_theme_color_override("font_hover_color", Color("f8ecd0"))
+	button.add_theme_stylebox_override("normal", PresentationTheme.bookmark(true))
+	button.add_theme_stylebox_override("hover", PresentationTheme.bookmark(true))
 
 
 func _place(control: Control, rect: Rect2, preset: int = Control.PRESET_TOP_LEFT) -> void:
@@ -218,7 +222,7 @@ func _build_status() -> void:
 	var panel: PanelContainer = PanelContainer.new()
 	panel.name = "RunStatus"
 	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	panel.add_theme_stylebox_override("panel", _style(Color(0.13, 0.14, 0.10, 0.97), BORDER, 10, 1))
+	panel.add_theme_stylebox_override("panel", _style(Color("38261d"), BORDER, 10, 1))
 	_place(panel, Rect2(20, 18, 294, 88))
 	var box: VBoxContainer = VBoxContainer.new()
 	box.add_theme_constant_override("separation", 4)
@@ -255,6 +259,7 @@ func _build_navigation() -> void:
 func _build_vitals() -> void:
 	var panel: PanelContainer = PanelContainer.new()
 	panel.name = "PlayerVitals"
+	panel.add_theme_stylebox_override("panel", _style(Color("38261d"), BORDER, 8, 1))
 	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_place(panel, Rect2(20, -154, 280, 134), Control.PRESET_BOTTOM_LEFT)
 	var box: VBoxContainer = VBoxContainer.new()
@@ -284,7 +289,7 @@ func _add_vital(parent: VBoxContainer, key: String, caption: String, color: Colo
 	bar.name = key.capitalize() + "Bar"
 	bar.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	bar.show_percentage = false
-	bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	bar.mouse_filter = Control.MOUSE_FILTER_PASS if key == "health" else Control.MOUSE_FILTER_IGNORE
 	var fill: StyleBox = _style(color.darkened(0.17), color, 4, 0)
 	bar.add_theme_stylebox_override("fill", fill)
 	holder.add_child(bar)
@@ -304,6 +309,7 @@ func _add_vital(parent: VBoxContainer, key: String, caption: String, color: Colo
 func _build_hotbar() -> void:
 	var panel: PanelContainer = PanelContainer.new()
 	panel.name = "Hotbar"
+	panel.add_theme_stylebox_override("panel", _style(Color("38261d"), BORDER, 8, 1))
 	_place(panel, Rect2(-270, -145, 540, 125), Control.PRESET_CENTER_BOTTOM)
 	var box: VBoxContainer = VBoxContainer.new()
 	box.add_theme_constant_override("separation", 5)
@@ -324,7 +330,7 @@ func _build_hotbar() -> void:
 		button.add_theme_font_size_override("font_size", 12)
 		for style_name: String in ["normal", "hover", "pressed", "disabled"]:
 			var frame: StyleBox = _root.theme.get_stylebox(style_name,"Button").duplicate()
-			frame.content_margin_top = 39
+			frame.content_margin_top = 43
 			frame.content_margin_bottom = 5
 			frame.content_margin_left = 5
 			frame.content_margin_right = 5
@@ -332,8 +338,8 @@ func _build_hotbar() -> void:
 		row.add_child(button)
 		var emblem := Emblem.new()
 		emblem.set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP)
-		emblem.position = Vector2(-18,4)
-		emblem.size = Vector2(36,36)
+		emblem.position = Vector2(-21,3)
+		emblem.size = Vector2(42,42)
 		button.add_child(emblem)
 		_skill_emblems.append(emblem)
 		var key_label := _label(str(index+1),11,GOLD)
@@ -362,7 +368,7 @@ func _build_toast() -> void:
 	_toast = PanelContainer.new()
 	_toast.name = "NotificationToast"
 	_toast.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_toast.add_theme_stylebox_override("panel", _style(Color("41402c"), CYAN.darkened(0.5), 8, 1))
+	_toast.add_theme_stylebox_override("panel", _style(Color("f1deb3"), CYAN.darkened(0.5), 8, 1))
 	_place(_toast, Rect2(-310, 132, 620, 49), Control.PRESET_CENTER_TOP)
 	_toast_label = _label("", 17, CYAN)
 	_toast_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -379,7 +385,7 @@ func _build_modal() -> void:
 	_root.add_child(_modal)
 	var shade: ColorRect = ColorRect.new()
 	shade.name = "ModalShade"
-	shade.color = Color(0.08, 0.09, 0.065, 0.84)
+	shade.color = Color(0.15, 0.10, 0.065, 0.76)
 	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	shade.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_modal.add_child(shade)
@@ -395,6 +401,7 @@ func _build_modal() -> void:
 	var panel: PanelContainer = PanelContainer.new()
 	panel.name = "BuildPanel"
 	var style: StyleBox = _style(PANEL, BORDER.lightened(0.12), 16, 1)
+	style.book_cover = true
 	style.content_margin_left = 18
 	style.content_margin_right = 18
 	style.content_margin_top = 16
@@ -487,7 +494,7 @@ func _update_live() -> void:
 		emblem.accent = tint
 		emblem.subdued = cooldown > 0.0
 		emblem.queue_redraw()
-		button.add_theme_color_override("font_color", tint if cooldown <= 0.0 else MUTED)
+		button.add_theme_color_override("font_color", PresentationTheme.ink(tint) if cooldown <= 0.0 else MUTED)
 		button.disabled = not valid_cast or not bool(_arena.get("alive")) or is_blocking()
 	_auto_button.text = "自动攻击  %s" % ("开启  ●" if bool(_arena.get("auto_fire")) else "关闭  ○")
 	_auto_button.add_theme_color_override("font_color", CYAN if bool(_arena.get("auto_fire")) else MUTED)
@@ -524,7 +531,11 @@ func _rebuild_panel() -> void:
 	var panel_order: Array[String] = ["inventory", "talents", "skills", "combat", "monsters"]
 	for index: int in range(_panel_tabs.get_child_count()):
 		var tab: Button = _panel_tabs.get_child(index) as Button
-		tab.add_theme_color_override("font_color", CYAN if panel_order[index] == _active_panel else MUTED)
+		var selected: bool = panel_order[index] == _active_panel
+		tab.add_theme_stylebox_override("normal", PresentationTheme.bookmark(selected))
+		tab.add_theme_stylebox_override("hover", PresentationTheme.bookmark(selected))
+		tab.add_theme_color_override("font_color", Color("f8ecd0") if selected else TEXT)
+		tab.add_theme_color_override("font_hover_color", Color("f8ecd0") if selected else TEXT)
 	match _active_panel:
 		"inventory":
 			_build_inventory_panel()
@@ -650,6 +661,9 @@ func _build_skills_panel() -> void:
 		var skill: Dictionary = GameData.SKILLS.get(id, {}) as Dictionary
 		var button: Button = _button("%d  %s" % [index + 1, str(skill.get("short_name", skill.get("name", "空槽")))], "SlotButton%d" % (index + 1), _select_skill_slot.bind(index))
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		button.icon = Emblem.ICONS.get(id)
+		button.expand_icon = true
+		button.add_theme_constant_override("icon_max_width", 34)
 		if index == _selected_skill_slot:
 			_accent_button(button)
 		slots.add_child(button)
@@ -673,6 +687,12 @@ func _build_skills_panel() -> void:
 		if not bool(cast.get("ok", false)):
 			description = "配置无效：%s%s" % [str(cast.get("error", "技能编译失败")), status]
 		var row: HBoxContainer = _card(_panel_body, str(skill.get("name", id)), description, skill.get("color", CYAN) as Color)
+		var art := Emblem.new()
+		art.skill_id = id
+		art.custom_minimum_size = Vector2(64,64)
+		art.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		row.add_child(art)
+		row.move_child(art,0)
 		var select: Button = _button("当前技能" if assigned == _selected_skill_slot else "装入槽 %d" % (_selected_skill_slot + 1), "SelectSkill_" + id, _slot_skill.bind(id), 130)
 		select.disabled = assigned == _selected_skill_slot
 		select.size_flags_vertical = Control.SIZE_SHRINK_CENTER
@@ -690,7 +710,7 @@ func _build_combat_panel() -> void:
 	var row: HBoxContainer = _card(_panel_body, "%d 母箭 → 每枚 3 子箭 → %s → %s" % [int(preview.count), "返回" if returning else "射程结束", "火焰爆炸" if exploding else "消失"],
 		"母箭飞行 150 距离后分裂；子箭飞行 150 距离后判断返回。
 返回时取人物此刻中心方向，穿过中心继续直飞；子箭总寿命 1.7 秒，返回不刷新。
-寿命与射程同时到达：寿命优先。分裂、碰撞消耗、死亡或重置不爆炸。", Color("a6e8aa"))
+寿命与射程同时到达：寿命优先。分裂、碰撞消耗、死亡或重置不爆炸。", Color("426035"))
 	row.add_child(_button("试装完整组合", "EquipTornadoExample", _arena.equip_tornado_example, 160))
 	var toggles := HBoxContainer.new()
 	_panel_body.add_child(toggles)
@@ -991,3 +1011,16 @@ func _save_presentation() -> void:
 	_apply_presentation()
 	var result: Error = _preferences.save_settings()
 	_panel_footer.text = "显示设置已保存" if result == OK else "设置未能保存；本次运行仍会使用新设置"
+
+func _style_dark_hud() -> void:
+	for stable_name: String in ["RunStatus","PlayerVitals","Hotbar","CombatHelp"]:
+		var surface: Node=_root.find_child(stable_name,true,false)
+		if surface==null: continue
+		for child: Node in surface.find_children("*","Label",true,false):
+			var label := child as Label
+			if label.get_parent() is Button: continue
+			label.add_theme_color_override("font_color",Color("f8ecd0"))
+			if stable_name=="CombatHelp":
+				label.add_theme_color_override("font_shadow_color",Color("211b14"))
+				label.add_theme_constant_override("shadow_offset_x",1)
+				label.add_theme_constant_override("shadow_offset_y",1)

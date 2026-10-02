@@ -77,6 +77,8 @@ run_check --script res://tests/combat_cues_integration_test.gd
 run_check --script res://tests/fantasy_actor_test.gd
 run_check --script res://tests/equipment_art_test.gd
 run_check --script res://tests/material_frame_test.gd
+run_check --script res://tests/grimoire_ui_test.gd
+run_check --script res://tests/equipment_painterly_art_test.gd
 python3 "$PROJECT_DIR/tests/reference_catalog_test.py"
 run_check --quit-after 300
 echo "Validation passed: import, immutable equipment pools/RNG, shared fire defense and natural encounter, transaction-bounded progress flush/exact saved-byte equivalence, schema8 compatibility/byte-exact backups/protected saves/special passive grants/offline reference data and launch wiring, typed hit bases and previews, compiled supports/cast/UI, wide native camera/100 real enemies/spatial-reference equivalence, fantasy artwork/materials and bounded visual cues, build/save model, passive/jewel/balance invariants, shared mechanisms, monster lifecycle/scene, projectile/damage pipeline, combat/UI integration, and 300-frame startup."

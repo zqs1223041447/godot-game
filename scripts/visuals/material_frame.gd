@@ -1,11 +1,15 @@
 class_name MaterialFrame
 extends StyleBox
-## Handworked leather/wood panel with an aged metal edge. Geometry preserves layout.
-@export_storage var bg_color: Color = Color("302c24")
-@export_storage var border_color: Color = Color("897958")
+## Original painted paper/leather, nine-sliced with small fixed screen borders.
+## Saved properties and margins survive duplicate() for hotbar state overrides.
+@export_storage var bg_color: Color = Color("f1deb3")
+@export_storage var border_color: Color = Color("8c6b42")
 @export_storage var border_width: float = 1.0
 @export_storage var corner_cut: float = 4.0
 @export_storage var grain: bool = true
+@export_storage var book_cover: bool = false
+const PAPER: Texture2D = preload("res://assets/ui/grimoire/parchment.png")
+const LEATHER: Texture2D = preload("res://assets/ui/grimoire/leather.png")
 
 func _get_minimum_size() -> Vector2:
 	return Vector2.ONE*border_width*2
@@ -24,25 +28,34 @@ func _draw(canvas: RID, rect: Rect2) -> void:
 		outline.append(outline[0])
 		RenderingServer.canvas_item_add_polyline(canvas,outline,PackedColorArray([border_color]),border_width,true)
 		return
-	var border: float=minf(border_width,minf(rect.size.x,rect.size.y)*0.2)
-	RenderingServer.canvas_item_add_polygon(canvas,_shape(rect,corner_cut),PackedColorArray([border_color.darkened(0.32)]))
-	var face: Rect2=rect.grow(-border)
-	RenderingServer.canvas_item_add_polygon(canvas,_shape(face,maxf(0,corner_cut-border)),PackedColorArray([bg_color]))
-	if rect.size.x<12 or rect.size.y<12:
-		return
-	# Fine hand-cut grain is bounded independent of panel size.
-	if grain and face.size.y>22 and face.size.x>35 and bg_color.a>0.1:
-		for i: int in range(7):
-			var y: float=face.position.y+face.size.y*(i+1)/8.0
-			var left: float=face.position.x+5+float((i*17)%29)*0.2
-			var right: float=face.end.x-6-float((i*11)%23)*0.3
-			RenderingServer.canvas_item_add_line(canvas,Vector2(left,y),Vector2(right,y+sin(i*2.3)*1.0),Color(0.77,0.68,0.45,0.022),0.6,true)
-	var warm: Color=border_color.lightened(0.1)
-	warm.a=border_color.a*0.70
-	var shadow: Color=Color(0.055,0.043,0.027,border_color.a*0.7)
-	RenderingServer.canvas_item_add_line(canvas,rect.position+Vector2(corner_cut+2,2),Vector2(rect.end.x-corner_cut-2,rect.position.y+2),warm,1,true)
-	RenderingServer.canvas_item_add_line(canvas,Vector2(rect.position.x+corner_cut+2,rect.end.y-2),rect.end-Vector2(corner_cut+2,2),shadow,1.5,true)
-	if rect.size.x>90 and rect.size.y>34 and bg_color.a>0.1:
-		for point: Vector2 in [rect.position+Vector2(5,5),Vector2(rect.end.x-5,rect.position.y+5),rect.end-Vector2(5,5),Vector2(rect.position.x+5,rect.end.y-5)]:
-			RenderingServer.canvas_item_add_circle(canvas,point,1.3,Color(border_color,border_color.a*0.8),true)
-			RenderingServer.canvas_item_add_circle(canvas,point+Vector2(-0.3,-0.3),0.45,Color("c6af7b"),true)
+	var face: Rect2=rect
+	if book_cover and minf(rect.size.x,rect.size.y)>40:
+		_paint(canvas,rect,LEATHER,Color.WHITE)
+		face=rect.grow(-7)
+	var paper: bool=bg_color.get_luminance()>0.45
+	var texture: Texture2D=PAPER if paper else LEATHER
+	var tint: Color=Color.WHITE
+	if not paper:
+		if bg_color.r>bg_color.g*1.65: tint=Color(1.18,0.64,0.60,bg_color.a)
+		else: tint=Color(0.92,0.89,0.82,bg_color.a)
+	else:
+		tint=Color(clampf(bg_color.r/0.95,0.86,1.06),clampf(bg_color.g/0.88,0.84,1.06),clampf(bg_color.b/0.72,0.82,1.06),bg_color.a)
+	_paint(canvas,face,texture,tint)
+	if border_width>1.0:
+		var outline: PackedVector2Array=_shape(rect.grow(-2),corner_cut)
+		outline.append(outline[0])
+		RenderingServer.canvas_item_add_polyline(canvas,outline,PackedColorArray([border_color]),border_width,true)
+
+func _paint(canvas: RID, rect: Rect2, texture: Texture2D, tint: Color) -> void:
+	var target_edge: float=minf(18.0,minf(rect.size.x,rect.size.y)*0.22)
+	var source_edge: float=texture.get_width()*0.16
+	var source_size: Vector2=texture.get_size()
+	var xs: Array[float]=[0.0,target_edge,rect.size.x-target_edge,rect.size.x]
+	var ys: Array[float]=[0.0,target_edge,rect.size.y-target_edge,rect.size.y]
+	var us: Array[float]=[0.0,source_edge,source_size.x-source_edge,source_size.x]
+	var vs: Array[float]=[0.0,source_edge,source_size.y-source_edge,source_size.y]
+	for y: int in range(3):
+		for x: int in range(3):
+			var to: Rect2=Rect2(rect.position+Vector2(xs[x],ys[y]),Vector2(xs[x+1]-xs[x],ys[y+1]-ys[y]))
+			var source: Rect2=Rect2(Vector2(us[x],vs[y]),Vector2(us[x+1]-us[x],vs[y+1]-vs[y]))
+			RenderingServer.canvas_item_add_texture_rect_region(canvas,to,texture.get_rid(),source,tint,false,true)

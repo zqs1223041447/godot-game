@@ -1,6 +1,6 @@
 class_name ItemGridView
 extends Control
-## Original, code-drawn ARPG item grid. The model owns all occupancy transactions.
+## Material-led ARPG item grid. The model owns all occupancy transactions.
 
 signal item_selected(key: String)
 signal item_activated(key: String)
@@ -35,7 +35,7 @@ class ItemArt extends Control:
 	func _draw() -> void:
 		var accent: Color = entry.get("color", Color("b8c891"))
 		if draw_border:
-			draw_rect(Rect2(Vector2.ZERO, size), Color(0.035, 0.065, 0.105, 0.94))
+			draw_rect(Rect2(Vector2.ZERO, size), Color("38261d"))
 			draw_rect(Rect2(Vector2.ONE, size - Vector2(2, 2)), accent, false, 2.0)
 		ItemGridView.draw_item_icon(self, entry, Rect2(Vector2(4, 4), size - Vector2(8, 8)))
 
@@ -84,13 +84,13 @@ func item_at_position(point: Vector2) -> String:
 
 func _draw() -> void:
 	var grid_rect := Rect2(Vector2(INSET, INSET), Vector2(COLUMNS, ROWS) * CELL)
-	draw_rect(Rect2(Vector2.ZERO, custom_minimum_size), Color("201f18"))
-	draw_rect(Rect2(Vector2.ONE, custom_minimum_size - Vector2(2, 2)), Color("786e51"), false, 1.0)
+	draw_rect(Rect2(Vector2.ZERO, custom_minimum_size), Color("38261d"))
+	draw_rect(Rect2(Vector2.ONE, custom_minimum_size - Vector2(2, 2)), Color("9c7643"), false, 1.0)
 	for y: int in range(ROWS):
 		for x: int in range(COLUMNS):
 			var cell_rect := Rect2(Vector2(x, y) * CELL + grid_rect.position, Vector2.ONE * CELL)
-			draw_rect(cell_rect.grow(-1.0), Color("302e24") if (x + y) % 2 == 0 else Color("2a2a20"))
-			draw_rect(cell_rect.grow(-1.0), Color("4a4937"), false, 1.0)
+			draw_rect(cell_rect.grow(-1.0), Color("423123") if (x + y) % 2 == 0 else Color("3b2b20"))
+			draw_rect(cell_rect.grow(-1.0), Color("78603e"), false, 1.0)
 	if state == null:
 		return
 	var font: Font = get_theme_default_font()
@@ -100,9 +100,11 @@ func _draw() -> void:
 		var accent: Color = entry.get("color", CYAN)
 		var selected: bool = key == selected_key
 		var hovered: bool = key == _hovered_key
-		draw_rect(box, Color("203345") if selected else accent.darkened(0.82))
-		draw_rect(box, CYAN if selected else accent.darkened(0.30 if hovered else 0.52), false, 2.0 if selected or hovered else 1.0)
+		draw_rect(box, Color("58402b") if selected else Color("30261e"))
+		draw_rect(box, Color("e6bc62") if selected else accent.darkened(0.20 if hovered else 0.38), false, 2.0 if selected or hovered else 1.0)
 		draw_rect(Rect2(box.position + Vector2(3, 3), Vector2(3, 10)), accent)
+		if selected:
+			draw_colored_polygon(PackedVector2Array([box.end-Vector2(10,0),box.end,box.end-Vector2(0,10)]),Color("e6bc62"))
 		var art_rect: Rect2 = box.grow(-5.0)
 		if box.size.y > CELL * 1.2:
 			art_rect.size.y -= 21.0

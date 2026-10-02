@@ -1,0 +1,585 @@
+{
+  "schema_version": 1,
+  "method": "built-in image_gen.imagegen",
+  "reference": {
+    "library_file_id": "libfile_d93f1845bfe8819198751f09421d36a6",
+    "file": "warm_magic_concept.png",
+    "sha256": "0e71e5604b891f499d0f40db222efa22f784f349a1826c49d2f1c3d6a4921d4e",
+    "usage": "Style reference inspected in full. No production object was cropped from the reference."
+  },
+  "source_preservation": "PNG files copied byte-for-byte from generated output. No post-generation pixel edits. Renderer crops alpha bounds for layout only.",
+  "runtime_import": {
+    "size_limit": 512,
+    "mipmaps": true
+  },
+  "prompt_file": "generation-prompts.json",
+  "assets": [
+    {
+      "id": "prism_bow",
+      "file": "prism_bow.png",
+      "source_generated_file": "exec-e57fdaad-f44b-47b1-82d2-db681ab7679b.png",
+      "sha256": "a1c8a791b34ce7f9e3351e30ac20be163ee9a7354e5db07c72d539fd78405b90",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "alpha20_bbox": [
+        427,
+        11,
+        810,
+        1525
+      ],
+      "path": "assets/art/equipment/prism_bow.png",
+      "source_url": null,
+      "author": "OpenAI image generation for this project",
+      "license": "Original project-generated asset; no third-party artwork imported",
+      "license_url": null,
+      "changes": "Generated transparent PNG bytes unchanged. Runtime alpha-bounds fit only; Godot import limited to 512px with mipmaps.",
+      "usage": "Equipment/jewel illustration selected by stable canonical ID: prism_bow"
+    },
+    {
+      "id": "ember_wand",
+      "file": "ember_wand.png",
+      "source_generated_file": "exec-66ed64de-990d-42c1-879f-6d176573e903.png",
+      "sha256": "f1fc91216252969e91ee0205af70fd874d7ad8a792db2a015f8f37e1d9619546",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "alpha20_bbox": [
+        347,
+        28,
+        678,
+        1508
+      ],
+      "path": "assets/art/equipment/ember_wand.png",
+      "source_url": null,
+      "author": "OpenAI image generation for this project",
+      "license": "Original project-generated asset; no third-party artwork imported",
+      "license_url": null,
+      "changes": "Generated transparent PNG bytes unchanged. Runtime alpha-bounds fit only; Godot import limited to 512px with mipmaps.",
+      "usage": "Equipment/jewel illustration selected by stable canonical ID: ember_wand"
+    },
+    {
+      "id": "cinder_reed",
+      "file": "cinder_reed.png",
+      "source_generated_file": "exec-2a191bea-cc80-4c46-b58a-4b2315153d3b.png",
+      "sha256": "6a013c9f483b98356226af867b4572453667ecc9e58b4df94fe83f2bd794ec70",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "alpha20_bbox": [
+        282,
+        31,
+        780,
+        1506
+      ],
+      "path": "assets/art/equipment/cinder_reed.png",
+      "source_url": null,
+      "author": "OpenAI image generation for this project",
+      "license": "Original project-generated asset; no third-party artwork imported",
+      "license_url": null,
+      "changes": "Generated transparent PNG bytes unchanged. Runtime alpha-bounds fit only; Godot import limited to 512px with mipmaps.",
+      "usage": "Equipment/jewel illustration selected by stable canonical ID: cinder_reed"
+    },
+    {
+      "id": "runewood_focus",
+      "file": "runewood_focus.png",
+      "source_generated_file": "exec-6a0dc217-b82c-4907-8d69-b897690a0ac8.png",
+      "sha256": "f8b47ebe8a34a1aced56d404c3b3b787b4212527adba5d86bccc3081a2a44a23",
+      "size": [
+        1122,
+        1402
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha20_bbox": [
+        423,
+        23,
+        772,
+        1373
+      ],
+      "path": "assets/art/equipment/runewood_focus.png",
+      "source_url": null,
+      "author": "OpenAI image generation for this project",
+      "license": "Original project-generated asset; no third-party artwork imported",
+      "license_url": null,
+      "changes": "Generated transparent PNG bytes unchanged. Runtime alpha-bounds fit only; Godot import limited to 512px with mipmaps.",
+      "usage": "Equipment/jewel illustration selected by stable canonical ID: runewood_focus"
+    },
+    {
+      "id": "swift_blade",
+      "file": "swift_blade.png",
+      "source_generated_file": "exec-843334e4-6845-45c2-936b-a9cf5a376e0d.png",
+      "sha256": "f309037c262ab8f080f11e2bd8897257c42d45020bd811ac83b673db065e5674",
+      "size": [
+        1122,
+        1402
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha20_bbox": [
+        331,
+        22,
+        786,
+        1367
+      ],
+      "path": "assets/art/equipment/swift_blade.png",
+      "source_url": null,
+      "author": "OpenAI image generation for this project",
+      "license": "Original project-generated asset; no third-party artwork imported",
+      "license_url": null,
+      "changes": "Generated transparent PNG bytes unchanged. Runtime alpha-bounds fit only; Godot import limited to 512px with mipmaps.",
+      "usage": "Equipment/jewel illustration selected by stable canonical ID: swift_blade"
+    },
+    {
+      "id": "gale_spindle",
+      "file": "gale_spindle.png",
+      "source_generated_file": "exec-fc9e8c34-f9c6-4b5a-a2ea-12c3ecfbbf71.png",
+      "sha256": "e420090e9554e4d80b4633525acef6ee2583faafd3462609499ce8f836c42e43",
+      "size": [
+        1122,
+        1402
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha20_bbox": [
+        256,
+        18,
+        1006,
+        1393
+      ],
+      "path": "assets/art/equipment/gale_spindle.png",
+      "source_url": null,
+      "author": "OpenAI image generation for this project",
+      "license": "Original project-generated asset; no third-party artwork imported",
+      "license_url": null,
+      "changes": "Generated transparent PNG bytes unchanged. Runtime alpha-bounds fit only; Godot import limited to 512px with mipmaps.",
+      "usage": "Equipment/jewel illustration selected by stable canonical ID: gale_spindle"
+    },
+    {
+      "id": "guardian_robe",
+      "file": "guardian_robe.png",
+      "source_generated_file": "exec-994ea06a-4fe7-4047-89a1-808d258b20ff.png",
+      "sha256": "88c229adb18494ddb80b51e0d723896ec4183b0a10dbd3b6afc975ed7d5c8ad3",
+      "size": [
+        1122,
+        1402
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha20_bbox": [
+        80,
+        58,
+        1043,
+        1350
+      ],
+      "path": "assets/art/equipment/guardian_robe.png",
+      "source_url": null,
+      "author": "OpenAI image generation for this project",
+      "license": "Original project-generated asset; no third-party artwork imported",
+      "license_url": null,
+      "changes": "Generated transparent PNG bytes unchanged. Runtime alpha-bounds fit only; Godot import limited to 512px with mipmaps.",
+      "usage": "Equipment/jewel illustration selected by stable canonical ID: guardian_robe"
+    },
+    {
+      "id": "tidebound_coat",
+      "file": "tidebound_coat.png",
+      "source_generated_file": "exec-30513f15-54eb-4146-ae41-58d87abe79ad.png",
+      "sha256": "957ad87db77ee17cf62cc3b2a3b74e694c105ec118625a646c6f672fb69372f2",
+      "size": [
+        1122,
+        1402
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha20_bbox": [
+        122,
+        50,
+        1003,
+        1338
+      ],
+      "path": "assets/art/equipment/tidebound_coat.png",
+      "source_url": null,
+      "author": "OpenAI image generation for this project",
+      "license": "Original project-generated asset; no third-party artwork imported",
+      "license_url": null,
+      "changes": "Generated transparent PNG bytes unchanged. Runtime alpha-bounds fit only; Godot import limited to 512px with mipmaps.",
+      "usage": "Equipment/jewel illustration selected by stable canonical ID: tidebound_coat"
+    },
+    {
+      "id": "return_mantle",
+      "file": "return_mantle.png",
+      "source_generated_file": "exec-2791e1e0-429c-45a1-bb47-91592c765b29.png",
+      "sha256": "f633268568c7c5ffd0524e92ecbfc5dcb0e5f723c13623b140cf2067e9c6a8a4",
+      "size": [
+        1122,
+        1402
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha20_bbox": [
+        68,
+        58,
+        1056,
+        1354
+      ],
+      "path": "assets/art/equipment/return_mantle.png",
+      "source_url": null,
+      "author": "OpenAI image generation for this project",
+      "license": "Original project-generated asset; no third-party artwork imported",
+      "license_url": null,
+      "changes": "Generated transparent PNG bytes unchanged. Runtime alpha-bounds fit only; Godot import limited to 512px with mipmaps.",
+      "usage": "Equipment/jewel illustration selected by stable canonical ID: return_mantle"
+    },
+    {
+      "id": "vitality_armor",
+      "file": "vitality_armor.png",
+      "source_generated_file": "exec-8f1ae759-536f-45d3-825f-ea1da6acb834.png",
+      "sha256": "377e1e7ed0304f429db9ea7b87c479c7428512eab4d3656aa91f47ae59e8f047",
+      "size": [
+        1204,
+        1306
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha20_bbox": [
+        73,
+        48,
+        1131,
+        1271
+      ],
+      "path": "assets/art/equipment/vitality_armor.png",
+      "source_url": null,
+      "author": "OpenAI image generation for this project",
+      "license": "Original project-generated asset; no third-party artwork imported",
+      "license_url": null,
+      "changes": "Generated transparent PNG bytes unchanged. Runtime alpha-bounds fit only; Godot import limited to 512px with mipmaps.",
+      "usage": "Equipment/jewel illustration selected by stable canonical ID: vitality_armor"
+    },
+    {
+      "id": "woven_bastion",
+      "file": "woven_bastion.png",
+      "source_generated_file": "exec-1ad05cc1-7fe0-4ab9-a2ca-2649bfa4d6bd.png",
+      "sha256": "98b8337612a9dc259a55932621c9437a5ea18696b76d1e666581de7e15b56fd5",
+      "size": [
+        1122,
+        1402
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha20_bbox": [
+        38,
+        77,
+        1085,
+        1346
+      ],
+      "path": "assets/art/equipment/woven_bastion.png",
+      "source_url": null,
+      "author": "OpenAI image generation for this project",
+      "license": "Original project-generated asset; no third-party artwork imported",
+      "license_url": null,
+      "changes": "Generated transparent PNG bytes unchanged. Runtime alpha-bounds fit only; Godot import limited to 512px with mipmaps.",
+      "usage": "Equipment/jewel illustration selected by stable canonical ID: woven_bastion"
+    },
+    {
+      "id": "emberhide_vest",
+      "file": "emberhide_vest.png",
+      "source_generated_file": "exec-0ba2b2e3-71cc-42b7-8f85-4b3fe0e13371.png",
+      "sha256": "fffe88c5c9601739d9f817dafba1b543384aeaecf2506ab0effdd76db86cd413",
+      "size": [
+        1199,
+        1312
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha20_bbox": [
+        124,
+        62,
+        1077,
+        1253
+      ],
+      "path": "assets/art/equipment/emberhide_vest.png",
+      "source_url": null,
+      "author": "OpenAI image generation for this project",
+      "license": "Original project-generated asset; no third-party artwork imported",
+      "license_url": null,
+      "changes": "Generated transparent PNG bytes unchanged. Runtime alpha-bounds fit only; Godot import limited to 512px with mipmaps.",
+      "usage": "Equipment/jewel illustration selected by stable canonical ID: emberhide_vest"
+    },
+    {
+      "id": "azure_charm",
+      "file": "azure_charm.png",
+      "source_generated_file": "exec-5ed42d91-bc39-4c78-ba5e-c35f59b29204.png",
+      "sha256": "1e5814f71d59dda96762d45add061eed6dc5d6fee845f731977f907321d41cbc",
+      "size": [
+        1225,
+        1284
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha20_bbox": [
+        265,
+        59,
+        972,
+        1182
+      ],
+      "path": "assets/art/equipment/azure_charm.png",
+      "source_url": null,
+      "author": "OpenAI image generation for this project",
+      "license": "Original project-generated asset; no third-party artwork imported",
+      "license_url": null,
+      "changes": "Generated transparent PNG bytes unchanged. Runtime alpha-bounds fit only; Godot import limited to 512px with mipmaps.",
+      "usage": "Equipment/jewel illustration selected by stable canonical ID: azure_charm"
+    },
+    {
+      "id": "storm_charm",
+      "file": "storm_charm.png",
+      "source_generated_file": "exec-cd7c99c8-6c30-4483-aa1b-df7f526b7fa6.png",
+      "sha256": "474ed0d6ffd10054c80bb4599f9fd1485cdd141af8284950797d7ec5d3d9612f",
+      "size": [
+        1122,
+        1402
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha20_bbox": [
+        163,
+        50,
+        991,
+        1358
+      ],
+      "path": "assets/art/equipment/storm_charm.png",
+      "source_url": null,
+      "author": "OpenAI image generation for this project",
+      "license": "Original project-generated asset; no third-party artwork imported",
+      "license_url": null,
+      "changes": "Generated transparent PNG bytes unchanged. Runtime alpha-bounds fit only; Godot import limited to 512px with mipmaps.",
+      "usage": "Equipment/jewel illustration selected by stable canonical ID: storm_charm"
+    },
+    {
+      "id": "detonation_charm",
+      "file": "detonation_charm.png",
+      "source_generated_file": "exec-88141011-fb30-4d67-934f-9f32bfe32698.png",
+      "sha256": "56fb9e5d19f109400b3d0a2f23f9091a2a0403dc79588f2be9195c85c828af0f",
+      "size": [
+        1122,
+        1402
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha20_bbox": [
+        308,
+        117,
+        850,
+        1263
+      ],
+      "path": "assets/art/equipment/detonation_charm.png",
+      "source_url": null,
+      "author": "OpenAI image generation for this project",
+      "license": "Original project-generated asset; no third-party artwork imported",
+      "license_url": null,
+      "changes": "Generated transparent PNG bytes unchanged. Runtime alpha-bounds fit only; Godot import limited to 512px with mipmaps.",
+      "usage": "Equipment/jewel illustration selected by stable canonical ID: detonation_charm"
+    },
+    {
+      "id": "wayglass_token",
+      "file": "wayglass_token.png",
+      "source_generated_file": "exec-0cf5f9ab-7028-4915-ac2d-f94e968d0aed.png",
+      "sha256": "9f68a542f982e64dc60be09cb555541c4c4ad48b3cbc5a0a2d51c2cdfafac772",
+      "size": [
+        1305,
+        1206
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha20_bbox": [
+        281,
+        73,
+        1075,
+        1097
+      ],
+      "path": "assets/art/equipment/wayglass_token.png",
+      "source_url": null,
+      "author": "OpenAI image generation for this project",
+      "license": "Original project-generated asset; no third-party artwork imported",
+      "license_url": null,
+      "changes": "Generated transparent PNG bytes unchanged. Runtime alpha-bounds fit only; Godot import limited to 512px with mipmaps.",
+      "usage": "Equipment/jewel illustration selected by stable canonical ID: wayglass_token"
+    },
+    {
+      "id": "pulse_seed",
+      "file": "pulse_seed.png",
+      "source_generated_file": "exec-8960ed54-dc28-4d45-8249-5013dc07771c.png",
+      "sha256": "748953bc5570a2137d912767d6948a634602ba0b6e7d99e237161b7106e52c1d",
+      "size": [
+        1312,
+        1199
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha20_bbox": [
+        330,
+        55,
+        987,
+        1089
+      ],
+      "path": "assets/art/equipment/pulse_seed.png",
+      "source_url": null,
+      "author": "OpenAI image generation for this project",
+      "license": "Original project-generated asset; no third-party artwork imported",
+      "license_url": null,
+      "changes": "Generated transparent PNG bytes unchanged. Runtime alpha-bounds fit only; Godot import limited to 512px with mipmaps.",
+      "usage": "Equipment/jewel illustration selected by stable canonical ID: pulse_seed"
+    },
+    {
+      "id": "emberheart",
+      "file": "emberheart.png",
+      "source_generated_file": "exec-85a31658-8532-4a05-9ac8-baee903b1fe7.png",
+      "sha256": "aa4e49c57d8a5ffd9b3ee35dc358cb736f4759f7896d6f20e571b61e6cd27b97",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha20_bbox": [
+        197,
+        137,
+        1069,
+        1074
+      ],
+      "path": "assets/art/equipment/emberheart.png",
+      "source_url": null,
+      "author": "OpenAI image generation for this project",
+      "license": "Original project-generated asset; no third-party artwork imported",
+      "license_url": null,
+      "changes": "Generated transparent PNG bytes unchanged. Runtime alpha-bounds fit only; Godot import limited to 512px with mipmaps.",
+      "usage": "Equipment/jewel illustration selected by stable canonical ID: emberheart"
+    },
+    {
+      "id": "tideglass",
+      "file": "tideglass.png",
+      "source_generated_file": "exec-8553ed93-3324-4309-baad-aa5ccdbb04f8.png",
+      "sha256": "a50b7be5a41e33cf31efc02da35b295b1a3f6e5d3d7b79e3c1d851bd0a111d77",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha20_bbox": [
+        366,
+        127,
+        885,
+        1106
+      ],
+      "path": "assets/art/equipment/tideglass.png",
+      "source_url": null,
+      "author": "OpenAI image generation for this project",
+      "license": "Original project-generated asset; no third-party artwork imported",
+      "license_url": null,
+      "changes": "Generated transparent PNG bytes unchanged. Runtime alpha-bounds fit only; Godot import limited to 512px with mipmaps.",
+      "usage": "Equipment/jewel illustration selected by stable canonical ID: tideglass"
+    },
+    {
+      "id": "windweave",
+      "file": "windweave.png",
+      "source_generated_file": "exec-1a9cd5a8-2f07-44be-a6d0-1503110fbc3b.png",
+      "sha256": "d789765eb6d97532ebfcc66e2fd159c3713bfc3e1c22f1be9967d26c95f53baa",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha20_bbox": [
+        352,
+        83,
+        1018,
+        1134
+      ],
+      "path": "assets/art/equipment/windweave.png",
+      "source_url": null,
+      "author": "OpenAI image generation for this project",
+      "license": "Original project-generated asset; no third-party artwork imported",
+      "license_url": null,
+      "changes": "Generated transparent PNG bytes unchanged. Runtime alpha-bounds fit only; Godot import limited to 512px with mipmaps.",
+      "usage": "Equipment/jewel illustration selected by stable canonical ID: windweave"
+    },
+    {
+      "id": "branchfinder",
+      "file": "branchfinder.png",
+      "source_generated_file": "exec-5fdc2d2b-16b6-441a-bbf7-8d54ae1dc9c2.png",
+      "sha256": "cb4b3319ef4161d30b6b629d9b3b8dd605c12ff440468feb55e15f40e572e950",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha20_bbox": [
+        130,
+        92,
+        1177,
+        1147
+      ],
+      "path": "assets/art/equipment/branchfinder.png",
+      "source_url": null,
+      "author": "OpenAI image generation for this project",
+      "license": "Original project-generated asset; no third-party artwork imported",
+      "license_url": null,
+      "changes": "Generated transparent PNG bytes unchanged. Runtime alpha-bounds fit only; Godot import limited to 512px with mipmaps.",
+      "usage": "Equipment/jewel illustration selected by stable canonical ID: branchfinder"
+    }
+  ]
+}

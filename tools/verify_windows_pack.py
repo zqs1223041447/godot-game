@@ -9,6 +9,7 @@ import argparse
 import hashlib
 import json
 import struct
+import re
 
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("executable", type=Path)
@@ -52,10 +53,22 @@ for _ in range(file_count):
     assert not logical_name.startswith(("data/reference/", "tests/", "tools/", "builds/", "docs/")), "Development-only file exported: " + name
     entries.append({"name": name, "size": size, "md5_verified": True})
 assert any(entry["name"].removeprefix("res://") == "data/passive_balance.json" for entry in entries), "Shared balance authority omitted from export"
+# All original paintings must have both their import map and compiled texture.
+project_root = Path(__file__).resolve().parents[1]
+names = {entry["name"].removeprefix("res://") for entry in entries}
+painted_assets_verified = 0
+for folder in ("assets/ui/grimoire", "assets/art/equipment"):
+    for source in sorted((project_root / folder).glob("*.png")):
+        import_file = source.with_name(source.name + ".import")
+        import_name = str(import_file.relative_to(project_root))
+        assert import_name in names, "Painted asset import missing: " + import_name
+        imported_paths = re.findall(r'^path="res://([^"\n]+)"', import_file.read_text(), re.MULTILINE)
+        assert len(imported_paths) == 1 and imported_paths[0] in names, "Painted texture missing: " + import_name
+        painted_assets_verified += 1
 print(json.dumps({
     "pe": "x86_64", "embedded_pck_version": pack_version,
     "godot_version": f"{major}.{minor}.{patch}", "pck_offset": pack_start,
     "pck_bytes": pack_bytes, "file_count": file_count,
-    "all_entry_md5_verified": True,
+    "all_entry_md5_verified": True, "painted_assets_verified": painted_assets_verified,
     "sha256": hashlib.sha256(data).hexdigest(), "files": entries,
 }, indent=2, ensure_ascii=False))
