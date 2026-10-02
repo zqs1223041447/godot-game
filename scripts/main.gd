@@ -5,6 +5,7 @@ extends Node2D
 const Build = preload("res://scripts/build_state.gd")
 const Data = preload("res://scripts/game_data.gd")
 const Hud = preload("res://scripts/game_hud.gd")
+const Jewels = preload("res://scripts/jewel_data.gd")
 const ARENA := Rect2(42, 104, 1196, 462)
 const PLAYER_RADIUS := 15.0
 const MAX_ENEMIES := 55
@@ -59,7 +60,11 @@ func _ready() -> void:
 	hud.setup(self)
 	_ready_complete = true
 	restart_run()
-	hud.notify("WASD 移动 · 自动锁定射击 · 1—5 施放技能 · I / T / K 调整构筑")
+	if state.migrated_from_v1:
+		hud.open_panel("talents")
+		hud.notify(state.migration_message)
+	else:
+		hud.notify("T 打开天赋星图 · 3 颗初始珠宝 · 每 20 次击杀获得新珠宝")
 	print("godot-game: playable arena ready")
 
 
@@ -472,10 +477,23 @@ func _damage_enemy(enemy: Dictionary, amount: float, color: Color, slow: float =
 			hud.notify("升级！获得 1 点天赋 · 按 T 分配")
 			_add_ring(player_pos, 80.0, Color("e7c98d"), 0.7)
 			_add_text(player_pos + Vector2(0, -46), "LEVEL UP", Color("e7c98d"))
+		if kills % 20 == 0:
+			_award_kill_jewel()
 		if kills % 4 == 0:
 			pickups.append({"pos": Vector2(enemy.pos), "life": 22.0})
 		for i: int in range(8):
 			_add_particle(Vector2(enemy.pos), Vector2.RIGHT.rotated(rng.randf() * TAU) * rng.randf_range(35, 120), Color("ce8070"), 3.0, 0.45)
+
+
+func _award_kill_jewel() -> void:
+	var jewel_id: String = state.award_jewel(rng)
+	if jewel_id.is_empty():
+		hud.notify("珠宝藏品已达 64 颗上限，已有珠宝均已保留")
+		return
+	var jewel: Dictionary = state.jewels[jewel_id]
+	hud.notify("获得珠宝：%s · 按 T 查看并镶嵌" % Jewels.display_name(jewel))
+	_add_ring(player_pos, 110.0, Color("dba3f2"), 0.9)
+	_add_text(player_pos + Vector2(0, -58), "+ 珠宝", Color("dba3f2"))
 
 
 func hit_player(amount: float) -> void:

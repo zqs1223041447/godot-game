@@ -2,6 +2,10 @@ class_name GameHUD
 extends CanvasLayer
 ## Responsive, keyboard-friendly combat HUD and live build editor.
 
+const PassivePanel = preload("res://scripts/passive_panel.gd")
+const InventoryPanelView = preload("res://scripts/inventory_panel.gd")
+const Passives = preload("res://scripts/passive_data.gd")
+
 const INK: Color = Color("0b1320")
 const PANEL: Color = Color("111e2e")
 const PANEL_LIGHT: Color = Color("192a3b")
@@ -36,6 +40,10 @@ var _auto_button: Button
 var _toast: PanelContainer
 var _toast_label: Label
 var _toast_left: float = 0.0
+var _inventory_panel: Control
+var _passive_panel: Control
+var _panel_margin: MarginContainer
+var _panel_scroll: ScrollContainer
 var _modal: Control
 var _panel_title: Label
 var _panel_subtitle: Label
@@ -125,7 +133,11 @@ func refresh_build() -> void:
 	if _root == null or _state == null:
 		return
 	_update_live()
-	if not _active_panel.is_empty():
+	if _active_panel == "talents" and is_instance_valid(_passive_panel):
+		_passive_panel.refresh()
+	elif _active_panel == "inventory" and is_instance_valid(_inventory_panel):
+		_inventory_panel.refresh()
+	elif not _active_panel.is_empty():
 		_rebuild_panel()
 
 
@@ -359,6 +371,7 @@ func _build_modal() -> void:
 	shade.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_modal.add_child(shade)
 	var margin: MarginContainer = MarginContainer.new()
+	_panel_margin = margin
 	margin.name = "PanelMargin"
 	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	margin.add_theme_constant_override("margin_left", 80)
@@ -399,6 +412,7 @@ func _build_modal() -> void:
 	_panel_tabs.add_child(_button("天赋成长", "TalentsTab", open_panel.bind("talents"), 140))
 	_panel_tabs.add_child(_button("技能组合", "SkillsTab", open_panel.bind("skills"), 140))
 	var scroll: ScrollContainer = ScrollContainer.new()
+	_panel_scroll = scroll
 	scroll.name = "PanelScroll"
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
@@ -406,6 +420,7 @@ func _build_modal() -> void:
 	_panel_body = VBoxContainer.new()
 	_panel_body.name = "PanelBody"
 	_panel_body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_panel_body.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	_panel_body.add_theme_constant_override("separation", 12)
 	scroll.add_child(_panel_body)
 	_panel_footer = _label("构筑变更会自动保存  ·  关闭面板继续战斗", 13, MUTED)
@@ -458,8 +473,18 @@ func _set_vital(key: String, value: float, maximum: float) -> void:
 
 func _rebuild_panel() -> void:
 	for child: Node in _panel_body.get_children():
+		if child == _passive_panel or child == _inventory_panel:
+			(child as Control).hide()
+			continue
 		_panel_body.remove_child(child)
 		child.queue_free()
+	var is_tree: bool = _active_panel in ["talents", "inventory"]
+	_panel_margin.add_theme_constant_override("margin_left", 24 if is_tree else 80)
+	_panel_margin.add_theme_constant_override("margin_right", 24 if is_tree else 80)
+	_panel_margin.add_theme_constant_override("margin_top", 20 if is_tree else 68)
+	_panel_margin.add_theme_constant_override("margin_bottom", 20 if is_tree else 68)
+	_panel_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED if is_tree else ScrollContainer.SCROLL_MODE_AUTO
+	_panel_scroll.scroll_vertical = 0
 	_close_button.visible = _active_panel != "death"
 	_panel_tabs.visible = _active_panel in ["inventory", "talents", "skills"]
 	_panel_subtitle.text = "战斗已暂停  /  调整构筑后随时继续"
@@ -520,70 +545,47 @@ func _slot_name(slot: String) -> String:
 
 
 func _build_inventory_panel() -> void:
-	_panel_title.text = "装备背包"
-	_section("已装备", "替换装备会立即更新角色属性")
-	var equipped_row: HBoxContainer = HBoxContainer.new()
-	_panel_body.add_child(equipped_row)
-	for slot: String in ["weapon", "armor", "charm"]:
-		var item_id: String = str(_state.equipped.get(slot, ""))
-		var item: Dictionary = GameData.ITEMS.get(item_id, {}) as Dictionary
-		var panel: PanelContainer = PanelContainer.new()
-		panel.name = "Equipped_" + slot
-		panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		equipped_row.add_child(panel)
-		var copy: VBoxContainer = VBoxContainer.new()
-		copy.add_theme_constant_override("separation", 4)
-		panel.add_child(copy)
-		copy.add_child(_label(_slot_name(slot), 13, MUTED))
-		copy.add_child(_label(str(item.get("name", "未装备")), 17, CYAN))
-		copy.add_child(_wrap_label(_stats_text(item.get("stats", {}) as Dictionary), 13, MUTED))
-		var remove: Button = _button("卸下", "Unequip_" + slot, _unequip_item.bind(slot))
-		remove.disabled = item_id.is_empty()
-		remove.add_theme_font_size_override("font_size", 14)
-		copy.add_child(remove)
-	_section("背包", "点击装备，替换相同部位的物品")
-	for id: String in _state.inventory:
-		var item: Dictionary = GameData.ITEMS.get(id, {}) as Dictionary
-		var slot: String = str(item.get("slot", ""))
-		var is_equipped: bool = str(_state.equipped.get(slot, "")) == id
-		var copy: String = "%s  ·  %s" % [_slot_name(slot), str(item.get("description", ""))]
-		var row: HBoxContainer = _card(_panel_body, str(item.get("name", id)), copy, GOLD if is_equipped else TEXT)
-		var equip: Button = _button("已装备" if is_equipped else "装备", "Equip_" + id, _equip_item.bind(id), 110)
-		equip.disabled = is_equipped
-		equip.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-		row.add_child(equip)
-	_section("当前角色属性")
-	var stats: Dictionary = _arena.call("get_stats") as Dictionary
-	var stat_panel: PanelContainer = PanelContainer.new()
-	_panel_body.add_child(stat_panel)
-	_panel_footer.text = "当前属性  ·  生命 %d  /  法力 %d  /  护盾 %d  /  伤害 %.0f  /  攻速 %.2f  /  移速 %.0f" % [int(stats.get("max_health", 0)), int(stats.get("max_mana", 0)), int(stats.get("max_shield", 0)), float(stats.get("damage", 0)), float(stats.get("attack_speed", 0)), float(stats.get("move_speed", 0))]
-	var summary: Label = _wrap_label(_stats_text(stats, "     ·     "), 15, TEXT)
-	summary.name = "DerivedStatsLabel"
-	stat_panel.add_child(summary)
+	_panel_title.text = "行囊 · 装备"
+	_panel_subtitle.text = "整理格子，搭配装备  /  珠宝与装备共用背包"
+	if not is_instance_valid(_inventory_panel):
+		_inventory_panel = InventoryPanelView.new()
+		_inventory_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		_inventory_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		_panel_body.add_child(_inventory_panel)
+		_inventory_panel.setup(_state)
+		_inventory_panel.feedback.connect(notify)
+		_inventory_panel.open_passives_requested.connect(_open_passives_from_inventory)
+	_inventory_panel.show()
+	_inventory_panel.refresh()
+	_panel_footer.text = "拖动摆放物品 · 装备拖入对应槽位 · 珠宝在天赋星图镶嵌 · 一键整理不改变已装备物品"
+
+
+func _open_passives_from_inventory() -> void:
+	var key: String = str(_inventory_panel.get("selected_item_key"))
+	open_panel("talents")
+	if key.begins_with("jewel:") and is_instance_valid(_passive_panel):
+		var selected: String = str(_passive_panel.get("selected_node_id"))
+		if str(Passives.get_nodes().get(selected, {}).get("type", "")) != "socket":
+			for node_id: String in _state.allocated_nodes:
+				if Passives.get_nodes()[node_id]["type"] == "socket":
+					_passive_panel.select_node(node_id)
+					break
+		_passive_panel.select_jewel(key.trim_prefix("jewel:"))
 
 
 func _build_talents_panel() -> void:
-	_panel_title.text = "天赋成长"
-	_section("可分配天赋点  %d" % _state.talent_points, "升级获得天赋点  ·  可随时免费重置")
-	for key: Variant in GameData.TALENTS.keys():
-		var id: String = str(key)
-		var talent: Dictionary = GameData.TALENTS[id] as Dictionary
-		var rank: int = int(_state.talents.get(id, 0))
-		var max_rank: int = int(talent.get("max_rank", 1))
-		var title: String = "%s   %d / %d" % [str(talent.get("name", id)), rank, max_rank]
-		var description: String = str(talent.get("description", ""))
-		var row: HBoxContainer = _card(_panel_body, title, description, GOLD if rank > 0 else TEXT)
-		var allocate: Button = _button("已满级" if rank >= max_rank else "+  分配一点", "Allocate_" + id, _allocate_talent.bind(id), 145)
-		allocate.disabled = rank >= max_rank or _state.talent_points <= 0
-		allocate.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-		row.add_child(allocate)
-	var refund: Button = _button("重置全部天赋 · 返还所有点数", "RefundTalentsButton", _refund_talents)
-	refund.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
-	var allocated: int = 0
-	for value: Variant in _state.talents.values():
-		allocated += int(value)
-	refund.disabled = allocated == 0
-	_panel_body.add_child(refund)
+	_panel_title.text = "天赋星图 · 珠宝"
+	_panel_subtitle.text = "沿连线分配天赋  /  激活珠宝槽，让词缀融入你的构筑"
+	if not is_instance_valid(_passive_panel):
+		_passive_panel = PassivePanel.new()
+		_passive_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		_passive_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		_panel_body.add_child(_passive_panel)
+		_passive_panel.setup(_state)
+		_passive_panel.feedback.connect(notify)
+	_passive_panel.show()
+	_passive_panel.refresh()
+	_panel_footer.text = "左键选中节点 · 拖动空白处平移 · 滚轮缩放 · 退点需保持连通 · 每 20 次击杀获得珠宝"
 
 
 func _build_skills_panel() -> void:
@@ -620,7 +622,7 @@ func _build_pause_panel() -> void:
 	_section("操作指南")
 	var row: HBoxContainer = _card(_panel_body, "移动 · 瞄准 · 释放", "WASD / 方向键：移动   ·   按住鼠标左键：瞄准射击   ·   空格：闪避（需装配冲刺）\n1 – 5：释放技能   ·   Q：切换自动攻击\nI / B：装备背包   ·   T：天赋   ·   K：技能   ·   Esc：关闭面板 / 暂停")
 	row.name = "ControlsGuide"
-	_card(_panel_body, "你的构筑，由你决定", "装备、天赋与五个主动技能可以随时自由组合。\n击败敌人积累经验，升级后打开天赋面板分配点数；重试会保留当前构筑。", GOLD)
+	_card(_panel_body, "你的构筑，由你决定", "装备、天赋、珠宝与五个主动技能可以随时自由组合。\n升级获得天赋点；每 20 次击杀获得随机珠宝。按 T 沿连线分配天赋并镶嵌珠宝；重试保留构筑。", GOLD)
 	var actions: HBoxContainer = HBoxContainer.new()
 	_panel_body.add_child(actions)
 	var resume: Button = _button("继续战斗", "ResumeButton", close_panel, 180)
@@ -684,16 +686,6 @@ func _equip_item(id: String) -> void:
 func _unequip_item(slot: String) -> void:
 	if _state.unequip(slot):
 		notify("已卸下%s" % _slot_name(slot))
-
-
-func _allocate_talent(id: String) -> void:
-	if _state.allocate_talent(id):
-		notify("天赋提升：%s" % str((GameData.TALENTS[id] as Dictionary).get("name", id)))
-
-
-func _refund_talents() -> void:
-	_state.refund_talents()
-	notify("天赋点已全部返还")
 
 
 func _select_skill_slot(index: int) -> void:

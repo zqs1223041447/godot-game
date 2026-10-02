@@ -42,31 +42,38 @@ const SKILLS: Dictionary = {
 
 const ITEMS: Dictionary = {
 	"ember_wand": {
+		"size": Vector2i(1, 3),
 		"name": "余烬法杖", "slot": "weapon", "description": "伤害 +8，魔力恢复 +1 / 秒",
 		"stats": {"damage": 8.0, "mana_regen": 1.0},
 	},
 	"swift_blade": {
+		"size": Vector2i(1, 3),
 		"name": "疾风短刃", "slot": "weapon", "description": "攻击速度 +0.5 / 秒，移动速度 +20",
 		"stats": {"attack_speed": 0.5, "move_speed": 20.0},
 	},
 	"guardian_robe": {
+		"size": Vector2i(2, 3),
 		"name": "守护长袍", "slot": "armor", "description": "最大护盾 +30，护盾恢复 +3 / 秒",
 		"stats": {"max_shield": 30.0, "shield_regen": 3.0},
 	},
 	"vitality_armor": {
+		"size": Vector2i(2, 3),
 		"name": "生机轻甲", "slot": "armor", "description": "最大生命 +50，移动速度 +10",
 		"stats": {"max_health": 50.0, "move_speed": 10.0},
 	},
 	"azure_charm": {
+		"size": Vector2i(1, 1),
 		"name": "湛蓝护符", "slot": "charm", "description": "最大魔力 +30，魔力恢复 +2 / 秒",
 		"stats": {"max_mana": 30.0, "mana_regen": 2.0},
 	},
 	"storm_charm": {
+		"size": Vector2i(1, 1),
 		"name": "风暴护符", "slot": "charm", "description": "伤害 +6，攻击速度 +0.2 / 秒",
 		"stats": {"damage": 6.0, "attack_speed": 0.2},
 	},
 }
 
+## Version-1 migration catalog only. New builds use PassiveData and JewelData.
 const TALENTS: Dictionary = {
 	"power": {
 		"name": "奥术精研", "description": "每级：伤害 +4", "max_rank": 5,

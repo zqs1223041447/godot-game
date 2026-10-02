@@ -1,0 +1,424 @@
+class_name InventoryPanel
+extends VBoxContainer
+## Persistent equipment + backpack inspector. No UI action mutates build data directly.
+
+signal feedback(message: String)
+signal open_passives_requested
+
+const GridView = preload("res://scripts/item_grid_view.gd")
+const Data = preload("res://scripts/game_data.gd")
+const Passives = preload("res://scripts/passive_data.gd")
+const TEXT: Color = Color("e8f1f5")
+const MUTED: Color = Color("9aafbd")
+const CYAN: Color = Color("70e0dc")
+const GOLD: Color = Color("f4ca78")
+const BORDER: Color = Color("304659")
+const SLOT_NAMES: Dictionary = {"weapon": "武器", "armor": "护甲", "charm": "饰品"}
+
+var selected_item_key: String = ""
+var _state: BuildState
+var _built: bool = false
+var _grid: ItemGridView
+var _usage_label: Label
+var _stats_summary: Label
+var _detail_name: Label
+var _detail_type: Label
+var _detail_status: Label
+var _detail_stats: Label
+var _detail_hint: Label
+var _detail_art: GridView.ItemArt
+var _equip_button: Button
+var _unequip_button: Button
+var _passives_button: Button
+var _equipment_slots: Dictionary = {}
+
+
+class EquipmentSlot extends Control:
+	signal selected(key: String)
+	signal activated(key: String)
+	signal feedback(message: String)
+	var state: BuildState
+	var slot: String = "weapon"
+	var selected_key: String = ""
+	var _drop_state: int = 0
+
+	func _ready() -> void:
+		custom_minimum_size = Vector2(186, 96)
+		mouse_filter = Control.MOUSE_FILTER_STOP
+
+	func refresh() -> void:
+		var id: String = str(state.equipped.get(slot, ""))
+		tooltip_text = "%s · 空槽\n将对应装备拖入这里" % InventoryPanel.SLOT_NAMES.get(slot, slot) if id.is_empty() else "%s\n%s\n双击或右键卸回背包；也可拖入空闲格" % [Data.ITEMS[id]["name"], Data.ITEMS[id]["description"]]
+		queue_redraw()
+
+	func _draw() -> void:
+		var id: String = str(state.equipped.get(slot, "")) if state != null else ""
+		var selected_now: bool = selected_key == "item:" + id and not id.is_empty()
+		var line: Color = Color("70e0dc") if selected_now else Color("3c5265")
+		if _drop_state != 0:
+			line = Color("85e2b6") if _drop_state == 1 else Color("f27786")
+		draw_style_box(InventoryPanel.make_style(Color("142333"), line, 6, 2 if selected_now or _drop_state != 0 else 1), Rect2(Vector2.ZERO, size))
+		var font: Font = get_theme_default_font()
+		draw_string(font, Vector2(12, 23), str(InventoryPanel.SLOT_NAMES.get(slot, slot)), HORIZONTAL_ALIGNMENT_LEFT, -1, 13, Color("9aafbd"))
+		if id.is_empty():
+			var hint_entry: Dictionary = {"slot": slot, "id": "ember_wand" if slot == "weapon" else "guardian_robe" if slot == "armor" else "azure_charm", "color": Color("516477")}
+			GridView.draw_item_icon(self, hint_entry, Rect2(9, 29, 51, 57))
+			draw_string(font, Vector2(69, 60), "空装备槽", HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color("71889b"))
+			draw_string(font, Vector2(69, 80), "拖入对应装备", HORIZONTAL_ALIGNMENT_LEFT, -1, 11, Color("71889b"))
+			return
+		var entry: Dictionary = GridView.describe_item(state, "item:" + id)
+		GridView.draw_item_icon(self, entry, Rect2(9, 28, 51, 59))
+		draw_string(font, Vector2(66, 55), str(entry.get("name", "装备")), HORIZONTAL_ALIGNMENT_LEFT, size.x - 72, 16, entry.get("color", Color.WHITE))
+		draw_string(font, Vector2(66, 77), "已装备 · 点击查看", HORIZONTAL_ALIGNMENT_LEFT, size.x - 72, 11, Color("9aafbd"))
+
+	func _gui_input(event: InputEvent) -> void:
+		if not event is InputEventMouseButton or not event.pressed:
+			return
+		var id: String = str(state.equipped.get(slot, ""))
+		if id.is_empty():
+			return
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			selected.emit("item:" + id)
+			if event.double_click:
+				activated.emit("item:" + id)
+			accept_event()
+		elif event.button_index == MOUSE_BUTTON_RIGHT:
+			selected.emit("item:" + id)
+			activated.emit("item:" + id)
+			accept_event()
+
+	func _get_drag_data(_at_position: Vector2) -> Variant:
+		var id: String = str(state.equipped.get(slot, ""))
+		if id.is_empty():
+			return null
+		var key: String = "item:" + id
+		selected.emit(key)
+		set_drag_preview(GridView.make_drag_preview(GridView.describe_item(state, key), Vector2(state.item_size(key)) * GridView.CELL))
+		return {"type": "inventory_item", "key": key, "grab_offset": Vector2i.ZERO, "source_slot": slot}
+
+	func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
+		if not GridView.is_item_drag(data):
+			return false
+		var key: String = str(data["key"])
+		var id: String = key.substr(5) if key.begins_with("item:") else ""
+		var valid: bool = not id.is_empty() and Data.ITEMS.get(id, {}).get("slot", "") == slot and state.inventory.has(id) and state.equipped.get(slot, "") != id
+		_drop_state = 1 if valid else -1
+		queue_redraw()
+		return valid
+
+	func _drop_data(at_position: Vector2, data: Variant) -> void:
+		if not _can_drop_data(at_position, data):
+			return
+		var key: String = str(data["key"])
+		if state.equip(key.substr(5)):
+			selected.emit(key)
+			feedback.emit("已装备 · " + str(Data.ITEMS[key.substr(5)]["name"]))
+		else:
+			feedback.emit("背包没有足够空间，无法替换装备")
+		_drop_state = 0
+		queue_redraw()
+
+	func _process(_delta: float) -> void:
+		if _drop_state != 0 and (not get_viewport().gui_is_dragging() or not get_global_rect().has_point(get_global_mouse_position())):
+			_drop_state = 0
+			queue_redraw()
+
+
+func setup(state: BuildState) -> void:
+	if _state != null and _state.changed.is_connected(refresh):
+		_state.changed.disconnect(refresh)
+	_state = state
+	name = "InventoryPanel"
+	add_theme_constant_override("separation", 9)
+	if not _built:
+		_build_interface()
+		_built = true
+	_grid.setup(state)
+	for slot_control: EquipmentSlot in _equipment_slots.values():
+		slot_control.state = state
+	if not _state.changed.is_connected(refresh):
+		_state.changed.connect(refresh)
+	refresh()
+
+
+func refresh() -> void:
+	if not _built or _state == null:
+		return
+	var keys: Array[String] = _state.get_backpack_items()
+	if selected_item_key.is_empty() or GridView.describe_item(_state, selected_item_key).is_empty():
+		selected_item_key = keys[0] if not keys.is_empty() else ""
+	var used: int = 0
+	var jewel_count: int = 0
+	for key: String in keys:
+		var dimensions: Vector2i = _state.item_size(key)
+		used += dimensions.x * dimensions.y
+		if key.begins_with("jewel:"):
+			jewel_count += 1
+	_usage_label.text = "%d / 96 格  ·  %d 件物品" % [used, keys.size()]
+	_usage_label.tooltip_text = "12 列 × 8 行；背包中的珠宝 %d 颗\n已装备物品和已镶嵌珠宝不占背包空间" % jewel_count
+	var stats: Dictionary = _state.get_stats()
+	_stats_summary.text = "生命 %d     法力 %d     护盾 %d     伤害 %.0f     攻速 %.2f     移速 %.0f" % [int(stats.get("max_health", 0)), int(stats.get("max_mana", 0)), int(stats.get("max_shield", 0)), float(stats.get("damage", 0)), float(stats.get("attack_speed", 0)), float(stats.get("move_speed", 0))]
+	_grid.select_item(selected_item_key)
+	_grid.refresh()
+	for slot_control: EquipmentSlot in _equipment_slots.values():
+		slot_control.selected_key = selected_item_key
+		slot_control.refresh()
+	_refresh_details()
+
+
+func select_item(key: String) -> void:
+	if _state == null or GridView.describe_item(_state, key).is_empty():
+		return
+	selected_item_key = key
+	refresh()
+
+
+func _build_interface() -> void:
+	var summary_panel := PanelContainer.new()
+	summary_panel.name = "InventoryStatsSummary"
+	summary_panel.add_theme_stylebox_override("panel", make_style(Color("112936"), Color("244653"), 6, 1, 8))
+	add_child(summary_panel)
+	var summary_row := HBoxContainer.new()
+	summary_panel.add_child(summary_row)
+	summary_row.add_child(_label("当前属性", 13, CYAN))
+	_stats_summary = _label("", 13, TEXT)
+	_stats_summary.name = "DerivedStatsLabel"
+	_stats_summary.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_stats_summary.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	summary_row.add_child(_stats_summary)
+
+	var columns := HBoxContainer.new()
+	columns.name = "InventoryColumns"
+	columns.add_theme_constant_override("separation", 12)
+	columns.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	add_child(columns)
+
+	var equipment := VBoxContainer.new()
+	equipment.name = "EquipmentColumn"
+	equipment.custom_minimum_size.x = 196
+	equipment.add_theme_constant_override("separation", 8)
+	columns.add_child(equipment)
+	var equipment_header: Label = _label("角色装备", 17, GOLD)
+	equipment_header.custom_minimum_size.y = 30
+	equipment_header.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	equipment.add_child(equipment_header)
+	for slot: String in ["weapon", "armor", "charm"]:
+		var target := EquipmentSlot.new()
+		target.name = "EquipSlot_" + slot
+		target.state = _state
+		target.slot = slot
+		target.selected.connect(select_item)
+		target.activated.connect(_activate_item)
+		target.feedback.connect(_relay_feedback)
+		equipment.add_child(target)
+		_equipment_slots[slot] = target
+	var equipment_help: Label = _label("拖入部位穿戴\n拖回背包卸下", 13, MUTED)
+	equipment_help.custom_minimum_size.y = 44
+	equipment_help.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	equipment.add_child(equipment_help)
+
+	var backpack := VBoxContainer.new()
+	backpack.name = "BackpackColumn"
+	backpack.add_theme_constant_override("separation", 7)
+	columns.add_child(backpack)
+	var bag_header := HBoxContainer.new()
+	bag_header.custom_minimum_size.y = 30
+	backpack.add_child(bag_header)
+	bag_header.add_child(_label("背包", 17, GOLD))
+	_usage_label = _label("", 12, MUTED)
+	_usage_label.name = "BackpackUsageLabel"
+	_usage_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_usage_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	bag_header.add_child(_usage_label)
+	var sort_button: Button = _button("整理", "AutoSortBackpackButton", _sort_backpack)
+	sort_button.custom_minimum_size = Vector2(62, 29)
+	sort_button.add_theme_font_size_override("font_size", 13)
+	sort_button.add_theme_stylebox_override("normal", make_style(Color("192a3b"), BORDER, 5, 1, 4))
+	sort_button.add_theme_stylebox_override("hover", make_style(Color("263c50"), CYAN, 5, 1, 4))
+	sort_button.add_theme_stylebox_override("pressed", make_style(Color("173f48"), CYAN, 5, 1, 4))
+	bag_header.add_child(sort_button)
+	_grid = GridView.new()
+	_grid.name = "InventoryGrid"
+	_grid.item_selected.connect(select_item)
+	_grid.item_activated.connect(_activate_item)
+	_grid.feedback.connect(_relay_feedback)
+	backpack.add_child(_grid)
+	var bag_hint: Label = _label("拖动整理   ·   双击装备   ·   珠宝占 1 格", 12, MUTED)
+	bag_hint.name = "BackpackHelpLabel"
+	backpack.add_child(bag_hint)
+
+	var detail_panel := PanelContainer.new()
+	detail_panel.name = "ItemDetailPanel"
+	detail_panel.custom_minimum_size.x = 266
+	detail_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	detail_panel.add_theme_stylebox_override("panel", make_style(Color("101c2a"), BORDER, 7, 1, 13))
+	columns.add_child(detail_panel)
+	var detail := VBoxContainer.new()
+	detail.add_theme_constant_override("separation", 6)
+	detail_panel.add_child(detail)
+	_detail_type = _label("物品详情", 12, MUTED)
+	_detail_type.name = "ItemTypeLabel"
+	detail.add_child(_detail_type)
+	_detail_name = _label("选择物品", 20, GOLD)
+	_detail_name.name = "ItemNameLabel"
+	_detail_name.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	detail.add_child(_detail_name)
+	_detail_art = GridView.ItemArt.new()
+	_detail_art.name = "ItemDetailArt"
+	_detail_art.draw_border = false
+	_detail_art.custom_minimum_size = Vector2(80, 68)
+	_detail_art.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	detail.add_child(_detail_art)
+	_detail_status = _label("", 12, CYAN)
+	_detail_status.name = "ItemStatusLabel"
+	_detail_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	detail.add_child(_detail_status)
+	var separator := HSeparator.new()
+	separator.modulate = Color("567385")
+	detail.add_child(separator)
+	_detail_stats = _label("", 14, TEXT)
+	_detail_stats.name = "ItemStatsLabel"
+	_detail_stats.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_detail_stats.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	detail.add_child(_detail_stats)
+	_detail_hint = _label("", 12, MUTED)
+	_detail_hint.name = "ItemHintLabel"
+	_detail_hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	detail.add_child(_detail_hint)
+	_equip_button = _button("装备", "EquipSelectedButton", _equip_selected)
+	detail.add_child(_equip_button)
+	_unequip_button = _button("卸回背包", "UnequipSelectedButton", _unequip_selected)
+	detail.add_child(_unequip_button)
+	_passives_button = _button("前往天赋星图镶嵌", "OpenPassivesButton", _open_passives)
+	detail.add_child(_passives_button)
+
+
+func _refresh_details() -> void:
+	var entry: Dictionary = GridView.describe_item(_state, selected_item_key)
+	_equip_button.hide()
+	_unequip_button.hide()
+	_passives_button.hide()
+	_detail_art.entry = entry
+	_detail_art.queue_redraw()
+	if entry.is_empty():
+		_detail_name.text = "选择物品"
+		_detail_type.text = "物品详情"
+		_detail_status.text = "背包中暂时没有物品"
+		_detail_stats.text = "点击背包物品或左侧装备，查看完整属性。"
+		_detail_hint.text = "战斗中获得的珠宝会自动放入背包。"
+		_detail_art.hide()
+		return
+	_detail_art.show()
+	var is_jewel: bool = entry.get("kind", "") == "jewel"
+	var dimensions: Vector2i = _state.item_size(selected_item_key)
+	var color: Color = entry.get("color", CYAN)
+	_detail_name.text = str(entry.get("name", "物品"))
+	_detail_name.add_theme_color_override("font_color", color)
+	if is_jewel:
+		var serial: int = str(entry.get("id", "")).trim_prefix("jewel_").to_int()
+		_detail_type.text = "普通珠宝  ·  %s  ·  #%03d" % [entry.get("rarity_name", ""), serial]
+		var in_bag: bool = _state.backpack_positions.has(selected_item_key)
+		_detail_status.text = "%s  ·  占用 1 × 1 格" % ("背包中" if in_bag else "已镶嵌")
+		_detail_stats.text = str(entry.get("description", ""))
+		_detail_hint.text = "放入已激活的珠宝槽后，全部词缀才会生效。"
+		_passives_button.show()
+	else:
+		var slot: String = str(entry.get("slot", ""))
+		var worn: bool = _state.equipped.get(slot, "") == entry.get("id", "")
+		_detail_type.text = "%s  ·  %s" % [SLOT_NAMES.get(slot, "装备"), entry.get("rarity_name", "装备")]
+		_detail_status.text = "%s  ·  占用 %d × %d 格" % ["已装备" if worn else "背包中", dimensions.x, dimensions.y]
+		_detail_stats.text = _gear_stats(entry.get("stats", {}))
+		_detail_hint.text = "卸下后物品会放回空闲背包格。" if worn else "装备后替换同部位物品，属性立即生效。"
+		_equip_button.visible = not worn
+		_unequip_button.visible = worn
+		_equip_button.text = "装备到" + str(SLOT_NAMES.get(slot, "装备槽"))
+
+
+func _activate_item(key: String) -> void:
+	select_item(key)
+	if key.begins_with("jewel:"):
+		_open_passives()
+		return
+	var entry: Dictionary = GridView.describe_item(_state, key)
+	if _state.equipped.get(entry.get("slot", ""), "") == entry.get("id", ""):
+		_unequip_selected()
+	else:
+		_equip_selected()
+
+
+func _equip_selected() -> void:
+	if not selected_item_key.begins_with("item:"):
+		return
+	var id: String = selected_item_key.substr(5)
+	if _state.equip(id):
+		feedback.emit("已装备 · " + str(Data.ITEMS[id]["name"]))
+	else:
+		feedback.emit("无法装备：请检查部位或背包空闲空间")
+
+
+func _unequip_selected() -> void:
+	if not selected_item_key.begins_with("item:"):
+		return
+	var id: String = selected_item_key.substr(5)
+	var slot: String = str(Data.ITEMS.get(id, {}).get("slot", ""))
+	if _state.equipped.get(slot, "") != id:
+		return
+	if _state.unequip(slot):
+		feedback.emit("已卸回背包 · " + str(Data.ITEMS[id]["name"]))
+	else:
+		feedback.emit("背包没有足够空闲格，无法卸下")
+
+
+func _sort_backpack() -> void:
+	if _state.auto_sort_backpack():
+		refresh()
+		feedback.emit("背包已整理 · 装备与珠宝按大小排列")
+	else:
+		feedback.emit("背包已经整齐排列")
+
+
+func _open_passives() -> void:
+	open_passives_requested.emit()
+
+
+func _relay_feedback(message: String) -> void:
+	feedback.emit(message)
+
+
+func _gear_stats(stats: Dictionary) -> String:
+	var lines: PackedStringArray = []
+	for key: String in stats:
+		lines.append(Passives.describe_stats({key: stats[key]}))
+	return "\n".join(lines)
+
+
+func _label(text: String, font_size: int, color: Color) -> Label:
+	var result := Label.new()
+	result.text = text
+	result.add_theme_font_size_override("font_size", font_size)
+	result.add_theme_color_override("font_color", color)
+	result.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	return result
+
+
+func _button(text: String, stable_name: String, callback: Callable) -> Button:
+	var result := Button.new()
+	result.name = stable_name
+	result.text = text
+	result.custom_minimum_size.y = 35
+	result.add_theme_font_size_override("font_size", 14)
+	result.pressed.connect(callback)
+	return result
+
+
+static func make_style(bg: Color, line: Color, radius: int = 6, border: int = 1, padding: int = 0) -> StyleBoxFlat:
+	var result := StyleBoxFlat.new()
+	result.bg_color = bg
+	result.border_color = line
+	result.set_border_width_all(border)
+	result.set_corner_radius_all(radius)
+	result.content_margin_left = padding
+	result.content_margin_right = padding
+	result.content_margin_top = padding
+	result.content_margin_bottom = padding
+	return result
