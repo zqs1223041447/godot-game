@@ -296,20 +296,25 @@ func _test_queue_priority() -> void:
 
 
 func _contact(enemy: Dictionary, expected_resistance: float) -> void:
+	# v0.16 guard uses its warned attack; retain the real armor/typed settlement test.
+	arena.telegraphs.cancel(int(enemy.id))
 	enemy.pos = arena.player_pos
 	enemy.spawn = 0.0
 	enemy.attack_timer = 0.0
 	_player_ready(100.0, 10.0)
 	var traces: int = arena.incoming_damage_trace.size()
 	arena._update_enemies(0.0)
-	_expect(arena.incoming_damage_trace.size() == traces + 1, "Actual overlapping catalog monster delivers one contact hit")
+	_expect(arena.incoming_damage_trace.size() == traces, "Guard overlap no longer adds instant contact before its warning")
+	arena._start_enemy_telegraphs()
+	arena._advance_enemy_telegraphs(0.7)
+	_expect(arena.incoming_damage_trace.size() == traces + 1, "Actual guard warning delivers one typed heavy hit")
 	var hit: Dictionary = arena.incoming_damage_trace.back()
-	var raw: float = float(enemy.damage)
-	_points(hit.raw_components, {"physical": raw * 0.5, "fire": raw * 0.5}, "Actual guard contact retains native damage split")
-	_near(hit.damage_total, raw * (1.0 - expected_resistance * 0.5), "Actual contact mitigates only the fire half")
-	_near(arena.health, 110.0 - float(hit.damage_total), "Contact applies resistance before shield and health")
-	_expect(hit.source_id == enemy.id, "Real collision retains monster source identity")
-	_near(enemy.attack_timer, 1.0 / float(enemy.attack_speed), "Fire contact retains original attack cadence")
+	var raw: float = float(enemy.damage) * 1.4
+	_points(hit.raw_components, {"physical": raw * 0.5, "fire": raw * 0.5}, "Actual guard heavy hit retains native split and multiplier")
+	_near(hit.damage_total, raw * (1.0 - expected_resistance * 0.5), "Actual heavy attack mitigates only the fire half")
+	_near(arena.health, 110.0 - float(hit.damage_total), "Heavy attack applies resistance before shield and health")
+	_expect(hit.source_id == enemy.id, "Real area collision retains monster source identity")
+	_expect(arena.telegraphs.state_for(int(enemy.id)).phase == "recovery", "Guard enters recovery after its single warned hit")
 
 
 func _test_real_gear_and_contacts() -> void:

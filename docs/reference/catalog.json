@@ -4481,7 +4481,7 @@
 			}
 		}
 	},
-	"game_version": "0.15.0",
+	"game_version": "0.16.0",
 	"jewel_affixes": {
 		"barrier": {
 			"kind": "prefix",
@@ -5529,6 +5529,428 @@
 			]
 		}
 	},
+	"monster_attacks": {
+		"locked_circle": {
+			"automatic_repeat": false,
+			"balance_version": "original-telegraphed-area-v1",
+			"damage_rule": "contact_components_times_multiplier",
+			"defaults": {
+				"damage_multiplier": 1.4,
+				"radius": 90.0,
+				"recovery_seconds": 1.2,
+				"windup_seconds": 0.7
+			},
+			"description": "灰烬守卫以固定范围重击代替接触攻击。先锁定地面位置，再结算一次；移出范围可以躲避。",
+			"event_type": "circle_attack",
+			"example": {
+				"armor_definition": {
+					"added_sources": [],
+					"affix_lines": [],
+					"base_id": "emberhide_vest",
+					"base_name": "灰烬皮甲",
+					"description": "最大生命 +8，火焰抗性 +15%。火焰抗性作用于承受的火焰命中，有效上限 75%。",
+					"effects": [],
+					"id": "gear_000001",
+					"item_level": 5,
+					"name": "普通 · 灰烬皮甲",
+					"rarity": "normal",
+					"size": [
+						2,
+						3
+					],
+					"slot": "armor",
+					"stats": {
+						"fire_resistance": 0.15,
+						"max_health": 8.0
+					}
+				},
+				"armor_instance": {
+					"affixes": [],
+					"base_id": "emberhide_vest",
+					"id": "gear_000001",
+					"item_level": 5,
+					"rarity": "normal"
+				},
+				"cases": {
+					"armored": {
+						"defense_stats": {
+							"fire_resistance": 0.15
+						},
+						"inside": true,
+						"position": [
+							0.0,
+							0.0
+						],
+						"settlement": {
+							"actor": "player",
+							"components": {
+								"fire": 13.851599999999996,
+								"physical": 16.295999999999996
+							},
+							"damage_total": 30.14759999999999,
+							"details": [
+								{
+									"base": 16.295999999999996,
+									"before_defense": 16.295999999999996,
+									"final": 16.295999999999996,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								},
+								{
+									"base": 16.295999999999996,
+									"before_defense": 16.295999999999996,
+									"final": 13.851599999999996,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.15,
+									"type": "fire"
+								}
+							],
+							"effective_resistances": {
+								"fire": 0.15
+							},
+							"health_lost": 20.14759999999999,
+							"mitigated_components": {
+								"fire": 2.4444,
+								"physical": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"fire": 16.295999999999996,
+								"physical": 16.295999999999996
+							},
+							"raw_resistances": {
+								"fire": 0.15
+							},
+							"reason": "",
+							"remaining_health": 79.85240000000002,
+							"remaining_shield": 0.0,
+							"shield_spent": 10.0,
+							"stage": "hit_mitigation"
+						}
+					},
+					"moving": {
+						"defense_stats": {
+							"fire_resistance": 0.0
+						},
+						"inside": false,
+						"position": [
+							168.0,
+							0.0
+						],
+						"settlement": {
+
+						}
+					},
+					"standing": {
+						"defense_stats": {
+							"fire_resistance": 0.0
+						},
+						"inside": true,
+						"position": [
+							0.0,
+							0.0
+						],
+						"settlement": {
+							"actor": "player",
+							"components": {
+								"fire": 16.295999999999996,
+								"physical": 16.295999999999996
+							},
+							"damage_total": 32.59199999999999,
+							"details": [
+								{
+									"base": 16.295999999999996,
+									"before_defense": 16.295999999999996,
+									"final": 16.295999999999996,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								},
+								{
+									"base": 16.295999999999996,
+									"before_defense": 16.295999999999996,
+									"final": 16.295999999999996,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "fire"
+								}
+							],
+							"effective_resistances": {
+								"fire": 0.0
+							},
+							"health_lost": 22.59199999999999,
+							"mitigated_components": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"fire": 16.295999999999996,
+								"physical": 16.295999999999996
+							},
+							"raw_resistances": {
+								"fire": 0.0
+							},
+							"reason": "",
+							"remaining_health": 77.40800000000002,
+							"remaining_shield": 0.0,
+							"shield_spent": 10.0,
+							"stage": "hit_mitigation"
+						}
+					}
+				},
+				"event": {
+					"attack_age": 0.7,
+					"attack_id": 1,
+					"balance_version": "original-telegraphed-area-v1",
+					"center": [
+						0.0,
+						0.0
+					],
+					"packet": {
+						"base": {
+							"fire": 16.295999999999996,
+							"physical": 16.295999999999996
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"profile": {
+						"damage_multiplier": 1.4,
+						"radius": 90.0,
+						"recovery_seconds": 1.2,
+						"windup_seconds": 0.7
+					},
+					"profile_id": "locked_circle",
+					"radius": 90.0,
+					"schema_version": 1,
+					"shape": "circle",
+					"source_id": 1,
+					"type": "circle_attack"
+				},
+				"halfway": {
+					"attack_id": 1,
+					"center": [
+						0.0,
+						0.0
+					],
+					"elapsed": 0.35,
+					"packet": {
+						"base": {
+							"fire": 16.295999999999996,
+							"physical": 16.295999999999996
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"phase": "windup",
+					"profile": {
+						"damage_multiplier": 1.4,
+						"radius": 90.0,
+						"recovery_seconds": 1.2,
+						"windup_seconds": 0.7
+					},
+					"source_id": 1
+				},
+				"health_before": 100.0,
+				"move_speed": 240.0,
+				"movement_assumption": "straight_unobstructed_motion_from_warning_start",
+				"player_radius": 15.0,
+				"recovery": {
+					"attack_id": 1,
+					"center": [
+						0.0,
+						0.0
+					],
+					"elapsed": 0.7,
+					"packet": {
+						"base": {
+							"fire": 16.295999999999996,
+							"physical": 16.295999999999996
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"phase": "recovery",
+					"profile": {
+						"damage_multiplier": 1.4,
+						"radius": 90.0,
+						"recovery_seconds": 1.2,
+						"windup_seconds": 0.7
+					},
+					"source_id": 1
+				},
+				"shield_before": 10.0,
+				"source": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"fire": 0.5,
+						"physical": 0.5
+					},
+					"damage": 23.279999999999998,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {
+						"fire_resistance": 0.25
+					},
+					"equipment_pool": "defense",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 313.5,
+					"id": 1,
+					"kind": 2,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 313.5,
+					"max_shield": 0.0,
+					"mechanism_ids": [],
+					"mechanism_policy": "poe-passive-v1",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_stats": {
+
+					},
+					"name": "灰烬守卫",
+					"pos": [
+						100.0,
+						0.0
+					],
+					"radius": 22.0,
+					"rarity": "rare",
+					"resistances": {
+						"fire": 0.25
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.0,
+					"speed": 47.2,
+					"template_id": "ember_guard",
+					"wave": 3,
+					"xp_reward": 24
+				},
+				"source_wave": 3,
+				"start": {
+					"attack_id": 1,
+					"center": [
+						0.0,
+						0.0
+					],
+					"elapsed": 0.0,
+					"packet": {
+						"base": {
+							"fire": 16.295999999999996,
+							"physical": 16.295999999999996
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"phase": "windup",
+					"profile": {
+						"damage_multiplier": 1.4,
+						"radius": 90.0,
+						"recovery_seconds": 1.2,
+						"windup_seconds": 0.7
+					},
+					"source_id": 1
+				}
+			},
+			"id": "locked_circle",
+			"integrated_templates": [
+				"ember_guard"
+			],
+			"limits": {
+				"damage_multiplier": {
+					"maximum": 100.0,
+					"minimum": 0.0
+				},
+				"radius": {
+					"maximum": 4096.0,
+					"minimum": 0.001
+				},
+				"recovery_seconds": {
+					"maximum": 60.0,
+					"minimum": 0.001
+				},
+				"windup_seconds": {
+					"maximum": 60.0,
+					"minimum": 0.001
+				}
+			},
+			"max_active": 100,
+			"max_events_per_attack": 1,
+			"max_sources_per_advance": 100,
+			"name": "锁点圆形蓄力攻击",
+			"ok": true,
+			"origin": "original",
+			"policy": {
+				"base_attack_speed": 1.1764705882352942,
+				"hold_pursuit_during_action": true,
+				"minimum_attack_speed": 0.2,
+				"profile": {
+					"damage_multiplier": 1.4,
+					"radius": 90.0,
+					"recovery_seconds": 1.2,
+					"windup_seconds": 0.7
+				},
+				"profile_id": "locked_circle",
+				"recovery_scaling": "base_attack_speed_divided_by_current_attack_speed",
+				"replaces_contact": true,
+				"trigger_distance": 150.0
+			},
+			"profile": {
+				"damage_multiplier": 1.4,
+				"radius": 90.0,
+				"recovery_seconds": 1.2,
+				"windup_seconds": 0.7
+			},
+			"reason": "",
+			"schema_version": 1,
+			"settlement": "DamageResolver/DefenseRules",
+			"shape": "circle",
+			"source_refs": [],
+			"spawn_rule": "reject_or_cancel_while_spawn_positive",
+			"states": [
+				"windup",
+				"recovery"
+			],
+			"status": "implemented",
+			"target_rule": "lock_center_at_start"
+		}
+	},
 	"monster_rarities": {
 		"boss": {
 			"affixes": 2,
@@ -5665,6 +6087,9 @@
 				"template_id": "brood_host",
 				"wave": 1,
 				"xp_reward": 24
+			},
+			"telegraph_policy": {
+
 			}
 		},
 		"brute": {
@@ -5742,6 +6167,9 @@
 				"template_id": "brute",
 				"wave": 1,
 				"xp_reward": 6
+			},
+			"telegraph_policy": {
+
 			}
 		},
 		"crawler": {
@@ -5819,6 +6247,9 @@
 				"template_id": "crawler",
 				"wave": 1,
 				"xp_reward": 3
+			},
+			"telegraph_policy": {
+
 			}
 		},
 		"ember_guard": {
@@ -5849,7 +6280,7 @@
 			"equipment_pool": "defense",
 			"example_wave": 3,
 			"kind": 2,
-			"mechanism_text": "火抗 25% · 接触含 50% 火焰",
+			"mechanism_text": "锁点重击 0.7秒 · 范围 90 · 火抗 25% · 重击含 50% 火焰",
 			"mechanisms": [],
 			"name": "灰烬守卫",
 			"rarity": "rare",
@@ -5906,6 +6337,21 @@
 				"template_id": "ember_guard",
 				"wave": 3,
 				"xp_reward": 24
+			},
+			"telegraph_policy": {
+				"base_attack_speed": 1.1764705882352942,
+				"hold_pursuit_during_action": true,
+				"minimum_attack_speed": 0.2,
+				"profile": {
+					"damage_multiplier": 1.4,
+					"radius": 90.0,
+					"recovery_seconds": 1.2,
+					"windup_seconds": 0.7
+				},
+				"profile_id": "locked_circle",
+				"recovery_scaling": "base_attack_speed_divided_by_current_attack_speed",
+				"replaces_contact": true,
+				"trigger_distance": 150.0
 			}
 		},
 		"rift_warden": {
@@ -6002,6 +6448,9 @@
 				"template_id": "rift_warden",
 				"wave": 1,
 				"xp_reward": 48
+			},
+			"telegraph_policy": {
+
 			}
 		},
 		"skitter": {
@@ -6079,6 +6528,9 @@
 				"template_id": "skitter",
 				"wave": 1,
 				"xp_reward": 3
+			},
+			"telegraph_policy": {
+
 			}
 		},
 		"splitter": {
@@ -6178,6 +6630,9 @@
 				"template_id": "splitter",
 				"wave": 1,
 				"xp_reward": 6
+			},
+			"telegraph_policy": {
+
 			}
 		}
 	},

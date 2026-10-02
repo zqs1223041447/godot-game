@@ -1,0 +1,924 @@
+{
+	"damage_health_shield_stats_modified": false,
+	"fixture_changes": [
+		"isolated fresh save",
+		"natural eighth admission at wave3",
+		"other sources removed to isolate one attack",
+		"source/player positioned",
+		"birth and initial attack delay skipped",
+		"auto fire and new spawning disabled",
+		"render phases held between fixed ticks"
+	],
+	"inputs": [],
+	"interactive": false,
+	"records": [
+		{
+			"effects": 2,
+			"health": 120.0,
+			"label": "warning-1280-2",
+			"natural_admissions": 8,
+			"player": [
+				962.0000610351563,
+				459.3846435546875
+			],
+			"resolution": [
+				1280,
+				720
+			],
+			"shield": 90.0,
+			"source_damage": 23.279999999999998,
+			"source_health": 313.5,
+			"source_id": 14,
+			"states": [
+				{
+					"attack_id": 1,
+					"center": [
+						962.0000610351563,
+						459.3846435546875
+					],
+					"elapsed": 0.35,
+					"packet": {
+						"base": {
+							"fire": 16.295999999999996,
+							"physical": 16.295999999999996
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"phase": "windup",
+					"profile": {
+						"damage_multiplier": 1.4,
+						"radius": 90.0,
+						"recovery_seconds": 1.2,
+						"windup_seconds": 0.7
+					},
+					"source_id": 14
+				}
+			],
+			"traces": []
+		},
+		{
+			"effects": 2,
+			"health": 120.0,
+			"label": "impact-1280-2",
+			"natural_admissions": 8,
+			"player": [
+				962.0000610351563,
+				459.3846435546875
+			],
+			"resolution": [
+				1280,
+				720
+			],
+			"shield": 57.40800000000001,
+			"source_damage": 23.279999999999998,
+			"source_health": 313.5,
+			"source_id": 14,
+			"states": [
+				{
+					"attack_id": 1,
+					"center": [
+						962.0000610351563,
+						459.3846435546875
+					],
+					"elapsed": 0.7000000000000005,
+					"packet": {
+						"base": {
+							"fire": 16.295999999999996,
+							"physical": 16.295999999999996
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"phase": "recovery",
+					"profile": {
+						"damage_multiplier": 1.4,
+						"radius": 90.0,
+						"recovery_seconds": 1.2,
+						"windup_seconds": 0.7
+					},
+					"source_id": 14
+				}
+			],
+			"traces": [
+				{
+					"applied": true,
+					"attack_age": 0.7,
+					"attack_id": 1,
+					"balance_version": "original-telegraphed-area-v1",
+					"center": [
+						962.0000610351563,
+						459.3846435546875
+					],
+					"inside": true,
+					"packet": {
+						"base": {
+							"fire": 16.295999999999996,
+							"physical": 16.295999999999996
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"player_position": [
+						962.0000610351563,
+						459.3846435546875
+					],
+					"profile": {
+						"damage_multiplier": 1.4,
+						"radius": 90.0,
+						"recovery_seconds": 1.2,
+						"windup_seconds": 0.7
+					},
+					"profile_id": "locked_circle",
+					"radius": 90.0,
+					"schema_version": 1,
+					"shape": "circle",
+					"source_id": 14,
+					"type": "circle_attack"
+				}
+			]
+		},
+		{
+			"effects": 2,
+			"health": 120.0,
+			"label": "dodge-1280-2",
+			"natural_admissions": 8,
+			"player": [
+				1130.0,
+				459.3846435546875
+			],
+			"resolution": [
+				1280,
+				720
+			],
+			"shield": 90.0,
+			"source_damage": 23.279999999999998,
+			"source_health": 313.5,
+			"source_id": 25,
+			"states": [
+				{
+					"attack_id": 2,
+					"center": [
+						962.0000610351563,
+						459.3846435546875
+					],
+					"elapsed": 0.7000000000000005,
+					"packet": {
+						"base": {
+							"fire": 16.295999999999996,
+							"physical": 16.295999999999996
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"phase": "recovery",
+					"profile": {
+						"damage_multiplier": 1.4,
+						"radius": 90.0,
+						"recovery_seconds": 1.2,
+						"windup_seconds": 0.7
+					},
+					"source_id": 25
+				}
+			],
+			"traces": [
+				{
+					"applied": false,
+					"attack_age": 0.7,
+					"attack_id": 2,
+					"balance_version": "original-telegraphed-area-v1",
+					"center": [
+						962.0000610351563,
+						459.3846435546875
+					],
+					"inside": false,
+					"packet": {
+						"base": {
+							"fire": 16.295999999999996,
+							"physical": 16.295999999999996
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"player_position": [
+						1130.0,
+						459.3846435546875
+					],
+					"profile": {
+						"damage_multiplier": 1.4,
+						"radius": 90.0,
+						"recovery_seconds": 1.2,
+						"windup_seconds": 0.7
+					},
+					"profile_id": "locked_circle",
+					"radius": 90.0,
+					"schema_version": 1,
+					"shape": "circle",
+					"source_id": 25,
+					"type": "circle_attack"
+				}
+			]
+		},
+		{
+			"effects": 0,
+			"health": 120.0,
+			"label": "warning-1280-0",
+			"natural_admissions": 8,
+			"player": [
+				962.0000610351563,
+				459.3846435546875
+			],
+			"resolution": [
+				1280,
+				720
+			],
+			"shield": 90.0,
+			"source_damage": 23.279999999999998,
+			"source_health": 313.5,
+			"source_id": 36,
+			"states": [
+				{
+					"attack_id": 3,
+					"center": [
+						962.0000610351563,
+						459.3846435546875
+					],
+					"elapsed": 0.35,
+					"packet": {
+						"base": {
+							"fire": 16.295999999999996,
+							"physical": 16.295999999999996
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"phase": "windup",
+					"profile": {
+						"damage_multiplier": 1.4,
+						"radius": 90.0,
+						"recovery_seconds": 1.2,
+						"windup_seconds": 0.7
+					},
+					"source_id": 36
+				}
+			],
+			"traces": []
+		},
+		{
+			"effects": 0,
+			"health": 120.0,
+			"label": "impact-1280-0",
+			"natural_admissions": 8,
+			"player": [
+				962.0000610351563,
+				459.3846435546875
+			],
+			"resolution": [
+				1280,
+				720
+			],
+			"shield": 57.40800000000001,
+			"source_damage": 23.279999999999998,
+			"source_health": 313.5,
+			"source_id": 36,
+			"states": [
+				{
+					"attack_id": 3,
+					"center": [
+						962.0000610351563,
+						459.3846435546875
+					],
+					"elapsed": 0.7000000000000005,
+					"packet": {
+						"base": {
+							"fire": 16.295999999999996,
+							"physical": 16.295999999999996
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"phase": "recovery",
+					"profile": {
+						"damage_multiplier": 1.4,
+						"radius": 90.0,
+						"recovery_seconds": 1.2,
+						"windup_seconds": 0.7
+					},
+					"source_id": 36
+				}
+			],
+			"traces": [
+				{
+					"applied": true,
+					"attack_age": 0.7,
+					"attack_id": 3,
+					"balance_version": "original-telegraphed-area-v1",
+					"center": [
+						962.0000610351563,
+						459.3846435546875
+					],
+					"inside": true,
+					"packet": {
+						"base": {
+							"fire": 16.295999999999996,
+							"physical": 16.295999999999996
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"player_position": [
+						962.0000610351563,
+						459.3846435546875
+					],
+					"profile": {
+						"damage_multiplier": 1.4,
+						"radius": 90.0,
+						"recovery_seconds": 1.2,
+						"windup_seconds": 0.7
+					},
+					"profile_id": "locked_circle",
+					"radius": 90.0,
+					"schema_version": 1,
+					"shape": "circle",
+					"source_id": 36,
+					"type": "circle_attack"
+				}
+			]
+		},
+		{
+			"effects": 0,
+			"health": 120.0,
+			"label": "dodge-1280-0",
+			"natural_admissions": 8,
+			"player": [
+				1130.0,
+				459.3846435546875
+			],
+			"resolution": [
+				1280,
+				720
+			],
+			"shield": 90.0,
+			"source_damage": 23.279999999999998,
+			"source_health": 313.5,
+			"source_id": 47,
+			"states": [
+				{
+					"attack_id": 4,
+					"center": [
+						962.0000610351563,
+						459.3846435546875
+					],
+					"elapsed": 0.7000000000000005,
+					"packet": {
+						"base": {
+							"fire": 16.295999999999996,
+							"physical": 16.295999999999996
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"phase": "recovery",
+					"profile": {
+						"damage_multiplier": 1.4,
+						"radius": 90.0,
+						"recovery_seconds": 1.2,
+						"windup_seconds": 0.7
+					},
+					"source_id": 47
+				}
+			],
+			"traces": [
+				{
+					"applied": false,
+					"attack_age": 0.7,
+					"attack_id": 4,
+					"balance_version": "original-telegraphed-area-v1",
+					"center": [
+						962.0000610351563,
+						459.3846435546875
+					],
+					"inside": false,
+					"packet": {
+						"base": {
+							"fire": 16.295999999999996,
+							"physical": 16.295999999999996
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"player_position": [
+						1130.0,
+						459.3846435546875
+					],
+					"profile": {
+						"damage_multiplier": 1.4,
+						"radius": 90.0,
+						"recovery_seconds": 1.2,
+						"windup_seconds": 0.7
+					},
+					"profile_id": "locked_circle",
+					"radius": 90.0,
+					"schema_version": 1,
+					"shape": "circle",
+					"source_id": 47,
+					"type": "circle_attack"
+				}
+			]
+		},
+		{
+			"effects": 2,
+			"health": 120.0,
+			"label": "warning-2560-2",
+			"natural_admissions": 8,
+			"player": [
+				962.0000610351563,
+				459.3846435546875
+			],
+			"resolution": [
+				2560,
+				1440
+			],
+			"shield": 90.0,
+			"source_damage": 23.279999999999998,
+			"source_health": 313.5,
+			"source_id": 58,
+			"states": [
+				{
+					"attack_id": 5,
+					"center": [
+						962.0000610351563,
+						459.3846435546875
+					],
+					"elapsed": 0.35,
+					"packet": {
+						"base": {
+							"fire": 16.295999999999996,
+							"physical": 16.295999999999996
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"phase": "windup",
+					"profile": {
+						"damage_multiplier": 1.4,
+						"radius": 90.0,
+						"recovery_seconds": 1.2,
+						"windup_seconds": 0.7
+					},
+					"source_id": 58
+				}
+			],
+			"traces": []
+		},
+		{
+			"effects": 2,
+			"health": 120.0,
+			"label": "impact-2560-2",
+			"natural_admissions": 8,
+			"player": [
+				962.0000610351563,
+				459.3846435546875
+			],
+			"resolution": [
+				2560,
+				1440
+			],
+			"shield": 57.40800000000001,
+			"source_damage": 23.279999999999998,
+			"source_health": 313.5,
+			"source_id": 58,
+			"states": [
+				{
+					"attack_id": 5,
+					"center": [
+						962.0000610351563,
+						459.3846435546875
+					],
+					"elapsed": 0.7000000000000005,
+					"packet": {
+						"base": {
+							"fire": 16.295999999999996,
+							"physical": 16.295999999999996
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"phase": "recovery",
+					"profile": {
+						"damage_multiplier": 1.4,
+						"radius": 90.0,
+						"recovery_seconds": 1.2,
+						"windup_seconds": 0.7
+					},
+					"source_id": 58
+				}
+			],
+			"traces": [
+				{
+					"applied": true,
+					"attack_age": 0.7,
+					"attack_id": 5,
+					"balance_version": "original-telegraphed-area-v1",
+					"center": [
+						962.0000610351563,
+						459.3846435546875
+					],
+					"inside": true,
+					"packet": {
+						"base": {
+							"fire": 16.295999999999996,
+							"physical": 16.295999999999996
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"player_position": [
+						962.0000610351563,
+						459.3846435546875
+					],
+					"profile": {
+						"damage_multiplier": 1.4,
+						"radius": 90.0,
+						"recovery_seconds": 1.2,
+						"windup_seconds": 0.7
+					},
+					"profile_id": "locked_circle",
+					"radius": 90.0,
+					"schema_version": 1,
+					"shape": "circle",
+					"source_id": 58,
+					"type": "circle_attack"
+				}
+			]
+		},
+		{
+			"effects": 2,
+			"health": 120.0,
+			"label": "dodge-2560-2",
+			"natural_admissions": 8,
+			"player": [
+				1130.0,
+				459.3846435546875
+			],
+			"resolution": [
+				2560,
+				1440
+			],
+			"shield": 90.0,
+			"source_damage": 23.279999999999998,
+			"source_health": 313.5,
+			"source_id": 69,
+			"states": [
+				{
+					"attack_id": 6,
+					"center": [
+						962.0000610351563,
+						459.3846435546875
+					],
+					"elapsed": 0.7000000000000005,
+					"packet": {
+						"base": {
+							"fire": 16.295999999999996,
+							"physical": 16.295999999999996
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"phase": "recovery",
+					"profile": {
+						"damage_multiplier": 1.4,
+						"radius": 90.0,
+						"recovery_seconds": 1.2,
+						"windup_seconds": 0.7
+					},
+					"source_id": 69
+				}
+			],
+			"traces": [
+				{
+					"applied": false,
+					"attack_age": 0.7,
+					"attack_id": 6,
+					"balance_version": "original-telegraphed-area-v1",
+					"center": [
+						962.0000610351563,
+						459.3846435546875
+					],
+					"inside": false,
+					"packet": {
+						"base": {
+							"fire": 16.295999999999996,
+							"physical": 16.295999999999996
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"player_position": [
+						1130.0,
+						459.3846435546875
+					],
+					"profile": {
+						"damage_multiplier": 1.4,
+						"radius": 90.0,
+						"recovery_seconds": 1.2,
+						"windup_seconds": 0.7
+					},
+					"profile_id": "locked_circle",
+					"radius": 90.0,
+					"schema_version": 1,
+					"shape": "circle",
+					"source_id": 69,
+					"type": "circle_attack"
+				}
+			]
+		},
+		{
+			"effects": 0,
+			"health": 120.0,
+			"label": "warning-2560-0",
+			"natural_admissions": 8,
+			"player": [
+				962.0000610351563,
+				459.3846435546875
+			],
+			"resolution": [
+				2560,
+				1440
+			],
+			"shield": 90.0,
+			"source_damage": 23.279999999999998,
+			"source_health": 313.5,
+			"source_id": 80,
+			"states": [
+				{
+					"attack_id": 7,
+					"center": [
+						962.0000610351563,
+						459.3846435546875
+					],
+					"elapsed": 0.35,
+					"packet": {
+						"base": {
+							"fire": 16.295999999999996,
+							"physical": 16.295999999999996
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"phase": "windup",
+					"profile": {
+						"damage_multiplier": 1.4,
+						"radius": 90.0,
+						"recovery_seconds": 1.2,
+						"windup_seconds": 0.7
+					},
+					"source_id": 80
+				}
+			],
+			"traces": []
+		},
+		{
+			"effects": 0,
+			"health": 120.0,
+			"label": "impact-2560-0",
+			"natural_admissions": 8,
+			"player": [
+				962.0000610351563,
+				459.3846435546875
+			],
+			"resolution": [
+				2560,
+				1440
+			],
+			"shield": 57.40800000000001,
+			"source_damage": 23.279999999999998,
+			"source_health": 313.5,
+			"source_id": 80,
+			"states": [
+				{
+					"attack_id": 7,
+					"center": [
+						962.0000610351563,
+						459.3846435546875
+					],
+					"elapsed": 0.7000000000000005,
+					"packet": {
+						"base": {
+							"fire": 16.295999999999996,
+							"physical": 16.295999999999996
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"phase": "recovery",
+					"profile": {
+						"damage_multiplier": 1.4,
+						"radius": 90.0,
+						"recovery_seconds": 1.2,
+						"windup_seconds": 0.7
+					},
+					"source_id": 80
+				}
+			],
+			"traces": [
+				{
+					"applied": true,
+					"attack_age": 0.7,
+					"attack_id": 7,
+					"balance_version": "original-telegraphed-area-v1",
+					"center": [
+						962.0000610351563,
+						459.3846435546875
+					],
+					"inside": true,
+					"packet": {
+						"base": {
+							"fire": 16.295999999999996,
+							"physical": 16.295999999999996
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"player_position": [
+						962.0000610351563,
+						459.3846435546875
+					],
+					"profile": {
+						"damage_multiplier": 1.4,
+						"radius": 90.0,
+						"recovery_seconds": 1.2,
+						"windup_seconds": 0.7
+					},
+					"profile_id": "locked_circle",
+					"radius": 90.0,
+					"schema_version": 1,
+					"shape": "circle",
+					"source_id": 80,
+					"type": "circle_attack"
+				}
+			]
+		},
+		{
+			"effects": 0,
+			"health": 120.0,
+			"label": "dodge-2560-0",
+			"natural_admissions": 8,
+			"player": [
+				1130.0,
+				459.3846435546875
+			],
+			"resolution": [
+				2560,
+				1440
+			],
+			"shield": 90.0,
+			"source_damage": 23.279999999999998,
+			"source_health": 313.5,
+			"source_id": 91,
+			"states": [
+				{
+					"attack_id": 8,
+					"center": [
+						962.0000610351563,
+						459.3846435546875
+					],
+					"elapsed": 0.7000000000000005,
+					"packet": {
+						"base": {
+							"fire": 16.295999999999996,
+							"physical": 16.295999999999996
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"phase": "recovery",
+					"profile": {
+						"damage_multiplier": 1.4,
+						"radius": 90.0,
+						"recovery_seconds": 1.2,
+						"windup_seconds": 0.7
+					},
+					"source_id": 91
+				}
+			],
+			"traces": [
+				{
+					"applied": false,
+					"attack_age": 0.7,
+					"attack_id": 8,
+					"balance_version": "original-telegraphed-area-v1",
+					"center": [
+						962.0000610351563,
+						459.3846435546875
+					],
+					"inside": false,
+					"packet": {
+						"base": {
+							"fire": 16.295999999999996,
+							"physical": 16.295999999999996
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"player_position": [
+						1130.0,
+						459.3846435546875
+					],
+					"profile": {
+						"damage_multiplier": 1.4,
+						"radius": 90.0,
+						"recovery_seconds": 1.2,
+						"windup_seconds": 0.7
+					},
+					"profile_id": "locked_circle",
+					"radius": 90.0,
+					"schema_version": 1,
+					"shape": "circle",
+					"source_id": 91,
+					"type": "circle_attack"
+				}
+			]
+		}
+	]
+}

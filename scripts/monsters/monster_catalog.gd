@@ -3,7 +3,10 @@ extends RefCounted
 ## Species, rarity, and stateful death templates are orthogonal to shared talents.
 const Registry = preload("res://scripts/mechanics/mechanic_registry.gd")
 const Defense = preload("res://scripts/mechanics/defense_rules.gd")
+const TelegraphProfiles = preload("res://scripts/monsters/telegraph_profiles.gd")
 const SCHEMA_VERSION: int = 1
+const BASE_ATTACK_SPEED: float = 1.0 / 0.85
+const TELEGRAPH_TEMPLATES: Dictionary = {"ember_guard": {"trigger_distance": 150.0}}
 const FIRE_ENCOUNTER: Dictionary = {
 	"template_id": "ember_guard", "minimum_wave": 3, "ordinary_admission_interval": 8,
 	"reward_pool": "defense", "reward_rarity": "rare", "reward_count": 1,
@@ -54,6 +57,28 @@ static func contact_components(enemy: Dictionary) -> Dictionary:
 	for type: String in weights:
 		components[type] = float(enemy.get("damage", 0.0)) * float(weights[type])
 	return components
+
+
+static func telegraph_policy(enemy: Dictionary) -> Dictionary:
+	# The guard replaces contact attacks with an explicit locked-ground action.
+	# Attack speed shortens recovery, never the readable warning. All defaults
+	# and legal limits still come from the reviewed runtime's profile authority.
+	var id: String = str(enemy.get("template_id", ""))
+	if not TELEGRAPH_TEMPLATES.has(id):
+		return {}
+	var speed: Variant = enemy.get("attack_speed", BASE_ATTACK_SPEED)
+	if typeof(speed) not in [TYPE_INT, TYPE_FLOAT] or not is_finite(float(speed)) or float(speed) <= 0.0:
+		return {}
+	var recovery: float = float(TelegraphProfiles.DEFAULTS.recovery_seconds) * BASE_ATTACK_SPEED / maxf(0.2, float(speed))
+	recovery = clampf(recovery, float(TelegraphProfiles.LIMITS.recovery_seconds.minimum), float(TelegraphProfiles.LIMITS.recovery_seconds.maximum))
+	var checked: Dictionary = TelegraphProfiles.resolve({"recovery_seconds": recovery})
+	if not checked.ok:
+		return {}
+	return {"profile_id": TelegraphProfiles.PROFILE_ID, "profile": checked.profile,
+		"trigger_distance": float(TELEGRAPH_TEMPLATES[id].trigger_distance),
+		"replaces_contact": true, "hold_pursuit_during_action": true,
+		"recovery_scaling": "base_attack_speed_divided_by_current_attack_speed",
+		"minimum_attack_speed": 0.2, "base_attack_speed": BASE_ATTACK_SPEED}
 
 static func ordinary_roll(rng: RandomNumberGenerator, wave: int) -> Dictionary:
 	var kind: int = 0
@@ -197,7 +222,7 @@ static func make_enemy(id: int, template_id: String, wave: int, position: Vector
 		"equipment_pool": template.get("equipment_pool", ""),
 		"speed": float(species.speed) + mini(wave, 15) * 1.4 + float(modifiers.get("move_speed", 0.0)),
 		"damage": (float(species.damage) + (wave - 1) * 0.7) * float(tier.damage) + float(modifiers.get("damage", 0.0)),
-		"attack_speed": 1.0 / 0.85 + float(modifiers.get("attack_speed", 0.0)),
+		"attack_speed": BASE_ATTACK_SPEED + float(modifiers.get("attack_speed", 0.0)),
 		"radius": float(species.radius) * (1.25 if rarity == "boss" else 1.0), "attack_timer": 0.5,
 		"slow": 0.0, "flash": 0.0, "spawn": 0.6, "knockback": Vector2.ZERO,
 		"death_spawns": template.get("death_spawns", []).duplicate(true), "death_processed": false,
@@ -206,6 +231,9 @@ static func make_enemy(id: int, template_id: String, wave: int, position: Vector
 
 static func mechanism_text(enemy: Dictionary) -> String:
 	var labels: PackedStringArray = []
+	var telegraph: Dictionary = telegraph_policy(enemy)
+	if not telegraph.is_empty():
+		labels.append("锁点重击 %.1f秒 · 范围 %.0f" % [telegraph.profile.windup_seconds, telegraph.profile.radius])
 	for id: String in enemy.get("mechanism_ids", []):
 		labels.append(str(Registry.get_definition(id).get("name", id)))
 	if not enemy.get("death_spawns", []).is_empty():
@@ -213,5 +241,5 @@ static func mechanism_text(enemy: Dictionary) -> String:
 	if float(enemy.get("resistances", {}).get("fire", 0.0)) > 0.0:
 		labels.append("火抗 %.0f%%" % (float(enemy.resistances.fire) * 100.0))
 	if float(enemy.get("contact_weights", {}).get("fire", 0.0)) > 0.0:
-		labels.append("接触含 %.0f%% 火焰" % (float(enemy.contact_weights.fire) * 100.0))
+		labels.append(("重击含 %.0f%% 火焰" if not telegraph.is_empty() else "接触含 %.0f%% 火焰") % (float(enemy.contact_weights.fire) * 100.0))
 	return " · ".join(labels) if not labels.is_empty() else "无额外机制"

@@ -19,6 +19,9 @@ const WeaponLocal = preload("res://scripts/items/weapon_local_rules.gd")
 const Projectiles = preload("res://scripts/combat/projectile_runtime.gd")
 const Craft = preload("res://scripts/items/crafting_rules.gd")
 const CraftPlanner = preload("res://scripts/items/crafting_transaction_planner.gd")
+const Telegraphs = preload("res://scripts/combat/telegraphed_area_runtime.gd")
+const TelegraphProfiles = preload("res://scripts/monsters/telegraph_profiles.gd")
+const Arena = preload("res://scripts/main.gd")
 
 func _initialize() -> void:
 	var target: String = "res://docs/reference/catalog.json"
@@ -53,6 +56,7 @@ static func collect() -> Dictionary:
 			"min_item_level": Equipment.MIN_ITEM_LEVEL, "max_item_level": Equipment.MAX_ITEM_LEVEL}}
 	result["projectile_support_examples"] = piercing_examples()
 	result["crafting"] = crafting_examples()
+	result["monster_attacks"] = telegraph_examples()
 	var base_ids: Array = Equipment.all_base_ids()
 	var affix_ids: Array = Equipment.all_affix_ids()
 	for id: String in base_ids:
@@ -223,6 +227,7 @@ static func collect() -> Dictionary:
 		template["runtime_example"] = Monsters.make_enemy(1, id, example_wave, Vector2.ZERO, context)
 		template["contact_components"] = Monsters.contact_components(template.runtime_example)
 		template["mechanism_text"] = Monsters.mechanism_text(template.runtime_example)
+		template["telegraph_policy"] = Monsters.telegraph_policy(template.runtime_example)
 		template["defense_profile"] = Defense.defense_profile(template.runtime_example.defense_stats, "monster")
 		result.monsters[id] = template
 	result["special_coverage"] = {}
@@ -313,16 +318,54 @@ static func _local_instance(affix_ids: Array = [], rarity: String = "normal") ->
 	return {"id": "gear_000001", "base_id": WeaponLocal.BASE_ID, "rarity": rarity, "item_level": level, "affixes": affixes}
 
 static func local_build(instance: Dictionary) -> RefCounted:
-	assert(Equipment.validate_instance(instance), "Reference bow must be a legal real instance")
+	assert(Equipment.validate_instance(instance), "Reference equipment must be a legal real instance")
 	var build: RefCounted = Build.new()
 	build.equipment_instances = {instance.id: instance.duplicate(true)}
 	build.inventory.append(instance.id)
 	build.next_equipment_id = Equipment.serial_from_id(instance.id) + 1
 	build._sync_backpack()
 	var equipped_ok: bool = build.equip(instance.id)
-	assert(equipped_ok, "Reference bow must equip through BuildState")
+	assert(equipped_ok, "Reference equipment must equip through BuildState")
 	assert(not build._validate_snapshot(build._snapshot()).is_empty(), "Reference build must satisfy actual save schema without writing a save")
 	return build
+
+
+static func telegraph_examples() -> Dictionary:
+	var enemy: Dictionary = Monsters.make_enemy(1, "ember_guard", int(Monsters.FIRE_ENCOUNTER.minimum_wave), Vector2(100, 0), "demo")
+	enemy.spawn = 0.0
+	var policy: Dictionary = Monsters.telegraph_policy(enemy)
+	var runtime := Telegraphs.new()
+	var admitted: Dictionary = runtime.start(enemy, Vector2.ZERO, policy.profile)
+	assert(admitted.ok)
+	var warning: float = float(policy.profile.windup_seconds)
+	assert(runtime.advance(warning * 0.5, [enemy]).is_empty())
+	var halfway: Dictionary = runtime.state_for(1)
+	var events: Array[Dictionary] = runtime.advance(warning * 0.5, [enemy])
+	assert(events.size() == 1)
+	var event: Dictionary = events[0]
+	var armor: Dictionary = {"id": "gear_000001", "base_id": "emberhide_vest", "rarity": "normal", "item_level": 5, "affixes": []}
+	var protected_build: RefCounted = local_build(armor)
+	var fresh: RefCounted = Build.new()
+	var dodged: Vector2 = Vector2(float(fresh.get_stats().move_speed) * warning, 0)
+	var cases: Dictionary = {}
+	for id: String in ["standing", "armored", "moving"]:
+		var player: Vector2 = dodged if id == "moving" else Vector2.ZERO
+		var build_stats: Dictionary = protected_build.get_stats() if id == "armored" else fresh.get_stats()
+		var stats: Dictionary = {"fire_resistance": build_stats.get("fire_resistance", 0.0)}
+		var inside: bool = Telegraphs.overlaps(event, player, Arena.PLAYER_RADIUS)
+		cases[id] = {"position": player, "inside": inside, "defense_stats": stats,
+			"settlement": Defense.incoming_hit(event.packet.base, stats, 10.0, 100.0, "player") if inside else {}}
+		assert(not inside or cases[id].settlement.ok, "Reference heavy hit must use a supported defense profile")
+	var metadata: Dictionary = TelegraphProfiles.metadata(policy.profile)
+	metadata["integrated_templates"] = Monsters.TELEGRAPH_TEMPLATES.keys()
+	metadata["policy"] = policy
+	metadata["description"] = "灰烬守卫以固定范围重击代替接触攻击。先锁定地面位置，再结算一次；移出范围可以躲避。"
+	metadata["example"] = {"source": enemy, "source_wave": enemy.wave, "start": admitted.attack,
+		"halfway": halfway, "event": event, "recovery": runtime.state_for(1), "cases": cases,
+		"player_radius": Arena.PLAYER_RADIUS, "move_speed": fresh.get_stats().move_speed,
+		"shield_before": 10.0, "health_before": 100.0, "armor_instance": armor,
+		"armor_definition": Equipment.definition(armor), "movement_assumption": "straight_unobstructed_motion_from_warning_start"}
+	return {TelegraphProfiles.PROFILE_ID: metadata}
 
 ## Enumerate each zero-, one-, and two-slot candidate exactly once. Available
 ## support count can grow independently of the two-slot equipment limit.

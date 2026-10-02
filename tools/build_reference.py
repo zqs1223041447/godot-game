@@ -12,7 +12,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 REF = ROOT / 'docs/reference'
-CATEGORIES = [('skills','主动技能'),('supports','辅助技能'),('equipment','随机装备'),('affixes','装备词缀'),('fixed_items','固定装备'),('jewels','珠宝'),('jewel_affixes','珠宝词缀'),('passives','天赋星图'),('mechanisms','共用机制'),('weapon_stages','武器局部阶段'),('defenses','受击与防御'),('crafting','制作与回收'),('monsters','怪物图鉴'),('rules','规则与边界')]
+CATEGORIES = [('skills','主动技能'),('supports','辅助技能'),('equipment','随机装备'),('affixes','装备词缀'),('fixed_items','固定装备'),('jewels','珠宝'),('jewel_affixes','珠宝词缀'),('passives','天赋星图'),('mechanisms','共用机制'),('weapon_stages','武器局部阶段'),('defenses','受击与防御'),('crafting','制作与回收'),('monsters','怪物图鉴'),('monster_attacks','怪物攻击'),('rules','规则与边界')]
 RULE_TITLES = {'damage':'伤害如何结算','supports':'辅助装配','projectiles':'分裂、返回与飞行结束','equipment':'装备与阶级','character_rates':'恢复、移动与普通攻击速度','basic_attack':'普通攻击与武器贡献','allocation':'天赋与珠宝规则','shared':'玩家和怪物共享机制','boundaries':'尚未实现的源游戏语义','sources':'数据来源与实现边界'}
 CAPABILITIES = {'initial_projectiles':'初始投射物数量','projectile_hit':'投射物命中','finite_projectile_pierce':'有限穿透'}
 SLOTS = {'weapon':'武器','armor':'护甲','charm':'护符'}
@@ -42,6 +42,19 @@ def piercing_diagram(examples, skills):
         before, after = pair['before'], pair['after']
         content += '<p>命中 '+str(len(before['observed_hits']))+' → '+str(len(after['observed_hits']))+'；耗魔 '+number(before['mana'])+' → '+number(after['mana'])+'；防御前单击 '+number(before['hit_damage'])+' → '+number(after['hit_damage'])+'</p>'
     return content
+
+def telegraph_diagram(attack):
+    sample=attack['example']; event=sample['event']; profile=event['profile']; cases=sample['cases']
+    radius=event['radius']; pr=sample['player_radius']; end=cases['moving']['position'][0]
+    x0=-radius-pr-10; width=end+pr+15-x0
+    pictures=''
+    for mode,label in [('standing','留在原处'),('moving','直线移出')]:
+        x,y=cases[mode]['position']; outcome='范围命中' if cases[mode]['inside'] else '范围外，未命中'
+        pictures+=f'<figure><svg class="mechanism-diagram" viewBox="{x0} {-radius-pr-10} {width} {2*(radius+pr+10)}" role="img" aria-label="{esc(label+outcome)}"><circle cx="0" cy="0" r="{radius}" fill="#d4b888" fill-opacity=".25" stroke="#805b2e" stroke-width="2"/><path d="M 0 0 L {x} {y}" stroke="#775948" stroke-width="2" stroke-dasharray="5 4"/><circle cx="{x}" cy="{y}" r="{pr}" fill="#eee3c6" stroke="#6e302d" stroke-width="2"/><path d="M -5 0 H 5 M 0 -5 V 5" stroke="#805b2e" stroke-width="2"/></svg><figcaption>{label}：{outcome}</figcaption></figure>'
+    values={'radius':radius,'warning':profile['windup_seconds'],'recovery':profile['recovery_seconds'],'standing':cases['standing']['settlement']['damage_total'],'armored':cases['armored']['settlement']['damage_total'],'moving':0.0 if not cases['moving']['inside'] else cases['moving']['settlement']['damage_total']}
+    labels={'radius':'世界半径','warning':'预警秒数','recovery':'默认恢复秒数','standing':'无火抗单次伤害','armored':'穿普通灰烬皮甲','moving':'成功移出后伤害'}
+    rows=''.join(f'<li><span class="flow-step">{labels[key]}</span><strong data-telegraph-value="{key}" data-value="{esc(value)}">{number(value)}</strong></li>' for key,value in values.items())
+    return f'<div class="telegraph-diagram">{pictures}</div><figure class="defense-flow"><figcaption>同源范围与结算 · 第 {sample["source_wave"]} 波灰烬守卫</figcaption><ol>{rows}</ol><p>图形采用实际事件半径与角色半径 {pr}；移动示例假设从预警开始持续直线移动、没有阻挡，移动速度 {sample["move_speed"]}，距离 {number(end)}。命中由同一圆形相交规则判断，伤害由真实分量与防御规则计算。护盾 {sample["shield_before"]} 先承伤，再扣生命；这是一次命中，不是每秒伤害。</p></figure>'
 
 def defense_diagram(example):
     trace=example['trace']
@@ -207,16 +220,22 @@ def build(data, art):
             body+=facts([('可用底材',links('equipment',c['eligible_base_ids'])),('前置条件','在背包中、未穿戴的随机魔法/稀有装备；普通无词缀、固定示例和珠宝不适用'),('保存顺序','完整候选验证 → 原子写盘 → 内存提交与刷新'),('失败保护','拒绝或写盘失败不动装备、材料和序号；回收需确认，校准明确可能降低或不变'),('保持字段','物品ID、底材、物品等级、稀有度、词缀种类/顺序/阶级保持；校准只重掷原档数值')])
             related=link('crafting','calibration_shard')+' · '+link('equipment',source['base_id'])+' · '+links('affixes',[a['id'] for a in source['affixes']])
         cards.append(add('crafting',key,c['name'],c['description'],body,'材料' if c['kind']=='material' else '制作操作',related=related))
+    for key,a in data['monster_attacks'].items():
+        p=a['profile']; policy=a['policy']
+        body=telegraph_diagram(a)+facts([('来源',links('monsters',a['integrated_templates'])),('发动距离',number(policy['trigger_distance'])+' 世界单位'),('原始伤害',component_text(a['example']['event']['packet']['base'])),('倍率',number(p['damage_multiplier'])+' × 来源接触基底'),('攻速作用','只缩放恢复期；预警时间固定；开始后本次时序和伤害冻结'),('期间行动','暂停主动追击；击退仍有效；同一守卫不再叠加贴身接触攻击'),('取消与保护','来源死亡/出生保护/移除、玩家死亡或重开取消；暂停冻结时钟；多次同时命中沿用玩家无敌帧'),('规则版本',esc(a['balance_version']))])
+        cards.append(add('monster_attacks',key,a['name'],a['description'],body,'已实装 · 原创规则',related=links('monsters',a['integrated_templates'])+' · '+link('equipment','emberhide_vest')+' · '+link('defenses','fire_resistance')))
     for key,m in data['monsters'].items():
         e=m['runtime_example']; tier=data['monster_rarities'][m['rarity']]['name']
         children=' · '.join(link('monsters',x['template'])+' × '+str(x['count']) for x in m['death_spawns']) or '无'
         summary=m['mechanism_text']+'。死亡后生成：'+('、'.join(data['monsters'][x['template']]['name']+' × '+str(x['count']) for x in m['death_spawns']) if m['death_spawns'] else '无子怪')
         body=facts([('稀有度',esc(tier)),('共用机制',links('mechanisms',m['mechanisms'])),('死亡子怪',children)])
-        body+=facts([('接触分量 · 防御前',esc(component_text(m['contact_components']))),('有效火焰抗性',percent(m['defense_profile']['effective_resistances']['fire']))])
+        body+=facts([('攻击基底分量 · 防御前',esc(component_text(m['contact_components']))),('有效火焰抗性',percent(m['defense_profile']['effective_resistances']['fire']))])
+        if m.get('telegraph_policy'):
+            body+='<p>'+link('monster_attacks',m['telegraph_policy']['profile_id'],'查看锁点重击：预警、躲避与真实伤害')+'</p>'
         encounter=data['fire_encounter']
         if key==encounter['template_id']:
             body+=details('出现条件与专属装备奖励',f'<p>第 {encounter["minimum_wave"]} 波及之后，普通成功入场计数每逢 {encounter["ordinary_admission_interval"]} 的倍数出现。初始入场计入该计数；满员未入场不递增，重开重置。</p><p>符合奖励资格的原始怪物死亡时，仅结算一次：{encounter["reward_count"]} 件 {esc(data["equipment_rarities"][encounter["reward_rarity"]]["name"])} {esc(TYPES[encounter["reward_pool"]])} 装备。可用底材：{links("equipment",data["equipment_pools"][encounter["reward_pool"]]["base_ids"])}。</p><p>出生节奏、分量、抗性与掉落保障均为本游戏原创平衡。</p>')
-        body+=details(f'第 {m["example_wave"]} 波模板示例',facts([(label,number(e[field])) for label,field in [('生命','max_health'),('护盾','max_shield'),('接触伤害 · 防御前','damage'),('速度','speed'),('攻击频率','attack_speed'),('经验奖励','xp_reward')]])+'<p>包含模板固有稀有度与机制。后续波次、普通随机稀有度和机制组合会改变这些值。</p>')
+        body+=details(f'第 {m["example_wave"]} 波模板示例',facts([(label,number(e[field])) for label,field in [('生命','max_health'),('护盾','max_shield'),('攻击基底 · 防御前','damage'),('速度','speed'),('攻击频率','attack_speed'),('经验奖励','xp_reward')]])+'<p>包含模板固有稀有度与机制。后续波次、普通随机稀有度和机制组合会改变这些值。</p>')
         cards.append(add('monsters',key,m['name'],summary,body,tier,related=link('rules','shared')+' · '+link('defenses','fire_resistance')))
 
     total_weight=sum(p['weight'] for p in data['current_loot_profile'])

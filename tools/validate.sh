@@ -70,6 +70,9 @@ run_check --script res://tests/local_weapon_state_test.gd
 run_check --script res://tests/local_weapon_integration_test.gd
 run_check --script res://tests/local_weapon_budget_test.gd
 run_check --script res://tests/fire_defense_integration_test.gd
+run_check --script res://tests/telegraphed_area_test.gd
+run_check --script res://tests/telegraph_integration_test.gd
+run_check --script res://tests/telegraph_renderer_test.gd
 run_check --script res://tests/damage_base_test.gd
 run_check --script res://tests/damage_preview_test.gd
 run_check --script res://tests/typed_damage_state_test.gd

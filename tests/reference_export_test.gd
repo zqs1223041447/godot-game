@@ -38,6 +38,17 @@ func _initialize() -> void:
 		else:
 			_expect(sample.quote.cost.calibration_shard == 8 and sample.balance_after == 0 and Equipment.validate_instance(sample.after_instance), "Independent calibration economics and legal replacement")
 			_expect(sample.after_instance.id == sample.source.id and sample.after_instance.affixes[0].tier == 3 and sample.after_definition == Exporter.clean(Equipment.definition(sample.after_instance)), "Calibrated definition derives from exact planned result without copying a damage formula")
+	_expect(current.monster_attacks.size() == 1 and current.monster_attacks.has("locked_circle"), "Exactly one implemented monster action is browsable")
+	var attack: Dictionary = current.monster_attacks.locked_circle
+	var heavy_example: Dictionary = attack.example
+	_expect(attack.status == "implemented" and attack.integrated_templates == ["ember_guard"], "Reference distinguishes real guard integration from generic runtime capacity")
+	_expect(heavy_example.start.phase == "windup" and heavy_example.halfway.phase == "windup" and heavy_example.recovery.phase == "recovery", "Example states come from actual runtime transitions")
+	_expect(heavy_example.cases.standing.inside and heavy_example.cases.armored.inside and not heavy_example.cases.moving.inside, "Same geometric helper distinguishes standing and moved target")
+	_expect(heavy_example.cases.moving.settlement.is_empty(), "A dodged event cannot fabricate a damage settlement")
+	_expect(is_equal_approx(heavy_example.cases.standing.settlement.damage_total,32.592) and is_equal_approx(heavy_example.cases.armored.settlement.damage_total,30.1476), "Independent wave-three and 15 percent fire-armor arithmetic")
+	_expect(heavy_example.cases.armored.settlement.components.physical == heavy_example.cases.standing.settlement.components.physical, "Armor reduces only fire in actual heavy hit example")
+	_expect(heavy_example.event.packet.base == heavy_example.start.packet.base and heavy_example.event.center == heavy_example.start.center, "Reference event preserves frozen damage and locked center")
+	_expect(attack.profile == Exporter.clean(Monsters.telegraph_policy(Monsters.make_enemy(1,"ember_guard",3,Vector2.ZERO,"demo")).profile), "Actual default guard policy defines the displayed times and geometry")
 	var piercing: Dictionary = current.projectile_support_examples.skills
 	_expect(piercing.bolt.before.observed_hits == [1, 2] and piercing.bolt.after.observed_hits == [1, 2, 3, 4], "Reference bolt diagram records actual two versus four collisions")
 	_expect(piercing.frost.before.observed_hits == [1, 2, 3] and piercing.frost.after.observed_hits == [1, 2, 3, 4, 5], "Reference frost diagram records actual three versus five collisions")

@@ -17,6 +17,7 @@ const Defense = preload("res://scripts/mechanics/defense_rules.gd")
 const Projectiles = preload("res://scripts/combat/projectile_runtime.gd")
 const Monsters = preload("res://scripts/monsters/monster_catalog.gd")
 const MonsterLifecycle = preload("res://scripts/monsters/monster_runtime.gd")
+const TelegraphRuntime = preload("res://scripts/combat/telegraphed_area_runtime.gd")
 const ARENA := View.WORLD_ARENA
 const PLAYER_RADIUS := 15.0
 const MAX_ENEMIES := 100
@@ -27,6 +28,8 @@ const MAX_PROGRESS_FLUSH_PASSES := 8
 var visual_cues = VisualCueRuntime.new()
 var visual_settings = Presentation.new()
 var monster_runtime = MonsterLifecycle.new()
+var telegraphs = TelegraphRuntime.new()
+var telegraph_trace: Array[Dictionary] = []
 var reward_kills: int = 0
 var ordinary_admissions: int = 0
 var demo_mode: bool = false
@@ -237,6 +240,8 @@ func restart_run() -> void:
 	density_demo = false
 	boss_wave_pending = 0
 	monster_runtime.reset()
+	telegraphs.reset()
+	telegraph_trace.clear()
 	elapsed = 0.0
 	wave = 1
 	alive = true
@@ -364,6 +369,7 @@ func _tick(delta: float) -> void:
 	_update_projectiles(delta)
 	_update_effects(delta)
 	_update_pickups(delta)
+	_start_enemy_telegraphs()
 	_autosave_timer += delta
 	if _autosave_timer >= 15.0:
 		_autosave_timer = 0.0
@@ -538,6 +544,11 @@ func restore_standard_run() -> void:
 
 
 func _update_enemies(delta: float) -> void:
+	# Existing actions advance against the complete source set before birth
+	# protection changes. Admission happens only at the end of the whole tick.
+	_advance_enemy_telegraphs(delta)
+	if not alive:
+		return
 	separation_candidate_visits = 0
 	separation_full_scan_visits = 0
 	if use_spatial_separation:
@@ -556,7 +567,9 @@ func _update_enemies(delta: float) -> void:
 		enemy.spawn = maxf(0.0, float(enemy.spawn) - delta)
 		if float(enemy.spawn) > 0.0:
 			continue
-		var direction: Vector2 = (player_pos - Vector2(enemy.pos)).normalized()
+		var uses_telegraph: bool = Monsters.TELEGRAPH_TEMPLATES.has(str(enemy.get("template_id", "")))
+		var performing: bool = not telegraphs.state_for(int(enemy.id)).is_empty()
+		var direction: Vector2 = Vector2.ZERO if performing else (player_pos - Vector2(enemy.pos)).normalized()
 		var speed: float = float(enemy.speed) * (0.36 if float(enemy.slow) > 0 else 1.0)
 		var separation := Vector2.ZERO
 		var candidates: Array = enemy_spatial.query_circle(enemy.pos, float(enemy.radius) + 3.0) if use_spatial_separation else range(enemies.size())
@@ -576,12 +589,57 @@ func _update_enemies(delta: float) -> void:
 		if use_spatial_separation:
 			enemy_spatial.update(enemy_index)
 		enemy.knockback = Vector2(enemy.knockback).move_toward(Vector2.ZERO, 520.0 * delta)
-		if Vector2(enemy.pos).distance_to(player_pos) < PLAYER_RADIUS + float(enemy.radius) + 1.0:
+		if not uses_telegraph and Vector2(enemy.pos).distance_to(player_pos) < PLAYER_RADIUS + float(enemy.radius) + 1.0:
 			if float(enemy.attack_timer) <= 0.0:
 				enemy.attack_timer = 1.0 / maxf(0.2, float(enemy.get("attack_speed", 1.0 / 0.85)))
 				hit_player_components(Monsters.contact_components(enemy), int(enemy.id))
 				if not alive:
 					return
+
+
+func _start_enemy_telegraphs() -> void:
+	if not alive:
+		return
+	for enemy: Dictionary in enemies:
+		if float(enemy.health) <= 0.0 or float(enemy.spawn) > 0.0 or float(enemy.attack_timer) > 0.0:
+			continue
+		if not telegraphs.state_for(int(enemy.id)).is_empty():
+			continue
+		var policy: Dictionary = Monsters.telegraph_policy(enemy)
+		if policy.is_empty() or Vector2(enemy.pos).distance_squared_to(player_pos) > float(policy.trigger_distance) * float(policy.trigger_distance):
+			continue
+		var result: Dictionary = telegraphs.start(enemy, player_pos, policy.profile)
+		if result.ok:
+			event_counts["enemy_telegraph_started"] = int(event_counts.get("enemy_telegraph_started", 0)) + 1
+
+
+func _advance_enemy_telegraphs(delta: float) -> void:
+	var events: Array[Dictionary] = telegraphs.advance(delta, enemies)
+	for event: Dictionary in events:
+		if not alive:
+			telegraphs.reset()
+			break
+		var inside: bool = TelegraphRuntime.overlaps(event, player_pos, PLAYER_RADIUS)
+		var applied: bool = hit_player_components(event.packet.base, int(event.source_id)) if inside else false
+		var record: Dictionary = event.duplicate(true)
+		record["player_position"] = player_pos
+		record["inside"] = inside
+		record["applied"] = applied
+		telegraph_trace.append(record)
+		if telegraph_trace.size() > 32:
+			telegraph_trace.pop_front()
+		event_counts["enemy_telegraph_resolved"] = int(event_counts.get("enemy_telegraph_resolved", 0)) + 1
+
+
+func telegraph_visual_states() -> Array[Dictionary]:
+	var snapshots: Array[Dictionary] = []
+	if telegraphs.active_count() == 0:
+		return snapshots
+	for enemy: Dictionary in enemies:
+		var copied: Dictionary = telegraphs.state_for(int(enemy.id))
+		if not copied.is_empty():
+			snapshots.append(copied)
+	return snapshots
 
 
 func _nearest_enemy(from: Vector2, max_distance: float = 800.0, excluded: Array[int] = []) -> Dictionary:
@@ -852,6 +910,7 @@ func _apply_enemy_settlement(enemy: Dictionary, settlement: Dictionary, color: C
 	for i: int in range(4):
 		_add_particle(Vector2(enemy.pos), Vector2.RIGHT.rotated(rng.randf() * TAU) * rng.randf_range(40, 130), color, 2.3, 0.3)
 	if float(enemy.health) <= 0.0:
+		telegraphs.cancel(int(enemy.id))
 		var death: Dictionary = monster_runtime.process_death(enemy)
 		if not death.processed:
 			return
@@ -975,6 +1034,7 @@ func hit_player_components(components: Variant, source_id: int = 0) -> bool:
 	_add_text(player_pos + Vector2(0, -30), "−%d" % int(amount), Color("94dafa") if absorbed >= amount else Color("fa8c83"))
 	if health <= 0.0:
 		alive = false
+		telegraphs.reset()
 		monster_runtime.cancel_pending("player_death")
 		projectile_runtime.cancel_all(projectiles, "owner_death")
 		save_build()

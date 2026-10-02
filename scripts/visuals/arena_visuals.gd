@@ -9,6 +9,7 @@ const Palette = preload("res://scripts/visuals/fantasy_palette.gd")
 const ActorArt = preload("res://scripts/visuals/fantasy_actors.gd")
 const View = preload("res://scripts/visuals/world_view.gd")
 const Markers = preload("res://scripts/visuals/world_markers.gd")
+const TelegraphArt = preload("res://scripts/visuals/telegraph_renderer.gd")
 
 static func polygon(canvas: CanvasItem, points: Array, color: Color) -> void:
 	canvas.draw_colored_polygon(PackedVector2Array(points), color)
@@ -41,6 +42,8 @@ static func draw_scene(arena: Node2D, preferences: Settings) -> void:
 	var cue_runtime: Variant = arena.get("visual_cues")
 	if cue_runtime != null:
 		CueRenderer.render(arena,cue_runtime.cues,preferences.effects_level,true)
+	if arena.has_method("telegraph_visual_states"):
+		TelegraphArt.draw(arena, arena.telegraph_visual_states(), preferences)
 	# Stable ordering makes feet/shadows read as grounded figures.
 	var ordered: Array = arena.enemies.duplicate()
 	ordered.sort_custom(func(a: Dictionary,b: Dictionary) -> bool: return a.pos.y < b.pos.y)

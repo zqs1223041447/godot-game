@@ -2,7 +2,16 @@
 
 以 **构筑与技能组合** 为核心的俯视平面竞技场。基于 **Godot 4.6.3 标准版 / GDScript**，目标平台 **Windows x86_64**。
 
-## v0.15.0：回收与数值校准（开发版，未发布）
+## v0.16.0：可躲避的锁点重击（开发版）
+
+- 自然灰烬守卫改用0.7秒预警的固定地面重击，半径90；移出原位置可以躲避
+- 预警与恢复替代贴身接触，不叠加两套伤害；真实结算仍走抗性→护盾→生命，来源死亡立即取消
+- 低特效保留完整边界，时序、真实碰撞和图鉴同源；保留已有画风、UI布局、视距与schema11存档
+- 已完成主场景/伤害/低高效渲染与720p实际键盘躲避定向验收，完整回归与导出仍在收口
+
+[规则与实景证据](docs/TELEGRAPH_INTEGRATION.zh-CN.md) · [重击图鉴](docs/reference/index.html#monster_attacks-locked_circle)
+
+## v0.15.0：回收与数值校准
 
 - I详情原操作区新增一种校准碎片与两种操作；只用于背包中未穿戴的随机蓝/金装
 - 回收有永久消耗确认；校准保持身份/词缀种类/阶级，只重掷现有数值，可能降低或不变
@@ -12,7 +21,7 @@
 
 [完整机制与边界](docs/CRAFTING_INTEGRATION.zh-CN.md) · [制作图鉴](docs/reference/index.html#crafting-calibration_shard) · [最大字号实景](docs/ui/v015-crafting-720.png)
 
-最终串行全量2,043,631项检查与21项字体回归通过，Windows导出及同包Linux启动通过。当前仅为本地验收和Git备份，不代表已有v0.15 GitHub Release。最新已发布版本仍为v0.14；本版Windows成品与HTML浏览器交互尚未验收。
+最终串行全量2,043,631项检查与21项字体回归通过，Windows导出及同包Linux启动通过。[v0.15私有预发布](https://github.com/zqs1223041447/godot-game/releases/tag/v0.15.0)已完成源码与安装包回验；Windows成品与HTML浏览器交互尚未验收。
 
 ## v0.14.0：贯穿辅助与真实串列命中
 
