@@ -10,7 +10,7 @@ const Monsters = preload("res://scripts/monsters/monster_catalog.gd")
 const Rules = preload("res://scripts/passives/allocation_rules.gd")
 const Defense = preload("res://scripts/mechanics/defense_rules.gd")
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
-const Supports = preload("res://scripts/combat/support_catalog.gd")
+const Supports = preload("res://scripts/combat/support_registry.gd")
 const Build = preload("res://scripts/build_state.gd")
 const WeaponLocal = preload("res://scripts/items/weapon_local_rules.gd")
 const Compiler = preload("res://scripts/combat/skill_compiler.gd")
@@ -19,7 +19,17 @@ var failures: int = 0
 var checks: int = 0
 
 func _initialize() -> void:
+	var three_supports: Array = ["volley", "focus", "pierce"]
+	var combinations: Array = Exporter.support_combinations(three_supports)
+	_expect(combinations == [[], ["volley"], ["focus"], ["pierce"], ["volley", "focus"], ["volley", "pierce"], ["focus", "pierce"]], "Three available supports produce exactly seven zero/one/two-slot candidates")
+	_expect(Exporter.support_combinations([]) == [[]] and Exporter.support_combinations(["focus"]) == [[], ["focus"]], "Empty and single-support catalogs contain no duplicate examples")
+	combinations[1].append("changed")
+	_expect(three_supports == ["volley", "focus", "pierce"], "Reference combinations do not alias the source list")
 	var current: Dictionary = Exporter.clean(Exporter.collect())
+	var piercing: Dictionary = current.projectile_support_examples.skills
+	_expect(piercing.bolt.before.observed_hits == [1, 2] and piercing.bolt.after.observed_hits == [1, 2, 3, 4], "Reference bolt diagram records actual two versus four collisions")
+	_expect(piercing.frost.before.observed_hits == [1, 2, 3] and piercing.frost.after.observed_hits == [1, 2, 3, 4, 5], "Reference frost diagram records actual three versus five collisions")
+	_expect(is_equal_approx(piercing.bolt.after.hit_damage, 35.36) and is_equal_approx(piercing.bolt.after.mana, 8.4), "Reference values match independent default-build arithmetic")
 	var existing: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://docs/reference/catalog.json"))
 	_expect(existing is Dictionary, "export parses")
 	if not existing is Dictionary:
@@ -38,14 +48,14 @@ func _initialize() -> void:
 	_ids(current.passives, Passives.get_nodes().keys(), "all original nodes")
 	_ids(current.mechanisms, Registry.get_ids(), "all shared mechanisms")
 	_ids(current.monsters, Monsters.TEMPLATES.keys(), "all monster templates")
-	_expect(current.skills.size() == 8 and current.supports.size() == 2, "bounded skill inventory")
+	_expect(current.skills.size() == 8 and current.supports.size() == 3, "bounded skill inventory")
 	_expect(current.equipment.size() == 9 and current.affixes.size() == 19, "bounded equipment inventory")
 	_expect(current.passives.size() == 181 and current.special_coverage.size() == 12, "complete tree and socket coverage")
 	for skill_id: String in current.skills:
 		var skill: Dictionary = current.skills[skill_id]
 		_expect(skill.compatible_supports == Supports.supports_for_skill(skill_id), "runtime compatibility " + skill_id)
 		for config: String in ["fresh", "full_tornado", "local_normal", "local_max"]:
-			_expect(skill.examples[config].size() == (4 if skill_id in ["tornado", "bolt", "frost"] else 1), "all support combinations " + skill_id + "/" + config)
+			_expect(skill.examples[config].size() == (7 if skill_id in ["bolt", "frost"] else 4 if skill_id == "tornado" else 1), "all support combinations " + skill_id + "/" + config)
 	_expect(current.configurations.fresh.equipped.weapon == "ember_wand", "fresh build does not assume mechanism bow")
 	_expect(current.configurations.full_tornado.equipped.weapon == "prism_bow", "full example explicitly equips mechanism bow")
 	_expect(current.sources.passive.version == "3.29.1", "passive source preserved")

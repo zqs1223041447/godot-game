@@ -1,0 +1,133 @@
+{
+  "runtime_base_commit": "59f173c533ba3d9ff79fdcee7ac665a15d80a67c",
+  "crafting_commit": "c2e711bdcccaefbbfdcc7bb9e8dd41db5010287f",
+  "before": {
+    "mapped_codepoints": 874,
+    "required_codepoints": 871,
+    "required_han": 769,
+    "baseline_codepoints": 874,
+    "fallback_symbols": [
+      8961,
+      9672
+    ],
+    "missing": [
+      19971,
+      20018,
+      20102,
+      20135,
+      20801,
+      21010,
+      21153,
+      21495,
+      22909,
+      24211,
+      24577,
+      24688,
+      26009,
+      30410,
+      35746,
+      35768
+    ],
+    "lost_baseline": [],
+    "empty_han": [],
+    "errors": [],
+    "ok": false
+  },
+  "after": {
+    "mapped_codepoints": 890,
+    "required_codepoints": 871,
+    "required_han": 769,
+    "baseline_codepoints": 874,
+    "fallback_symbols": [
+      8961,
+      9672
+    ],
+    "missing": [],
+    "lost_baseline": [],
+    "empty_han": [],
+    "errors": [],
+    "ok": true
+  },
+  "runtime_files": 48,
+  "supplemental_string_counts": {
+    "scripts/ui/crafting_controls.gd": 10,
+    "scripts/items/crafting_rules.gd": 13,
+    "scripts/items/crafting_transaction_planner.gd": 28
+  },
+  "added_characters": "七串了产允划务号好库态恰料益订许",
+  "font_sha256": "8c522b1e7139e8a5768e5e88ea6a74dbd64ec7dbf31f1a83ca005840cb50aeac",
+  "regeneration_byte_identical": true,
+  "regression_tests": 21,
+  "source_license_byte_identical": true,
+  "godot": {
+    "capture_height": 676,
+    "display_driver": "X11",
+    "engine": "4.6.3-stable (official)",
+    "fallback": false,
+    "font_rids": 1,
+    "han_rasters": 1538,
+    "native_mappings": 1780,
+    "rendered": true,
+    "rendered_rows": [
+      "修订号已达上限，不能产生下一次事务。",
+      "工艺上下文必须恰好包含约定的七个字段。",
+      "材料仅允许非负整数类型的 calibration_shard 余额。",
+      "物品标识必须为非空字符串。",
+      "当前库存未持有此物品。",
+      "工艺规则返回了无效材料数量。",
+      "工艺规则的计划与报价不一致。",
+      "背包物品位置与所有权或穿戴状态不一致。",
+      "回收收益会使材料余额溢出。"
+    ],
+    "sizes": [
+      16,
+      19
+    ],
+    "supported_chars": 890,
+    "font_sha256": "8c522b1e7139e8a5768e5e88ea6a74dbd64ec7dbf31f1a83ca005840cb50aeac",
+    "png_sha256": "28f21e4fe668d7ac3311648684c949d4079488d61bf05494f1a131884a67fd48"
+  },
+  "source_scope": [
+    "project.godot",
+    "scripts/**/*.gd",
+    "scenes/**/*.tscn",
+    "data/**/*.json (outside .gdignore)",
+    "CSV text and textual Godot resources in runtime roots"
+  ],
+  "limitations": [
+    "Same-source font has no U+2301 or U+25C8; existing system-fallback/import settings retained.",
+    "Linux Godot font probe is not Windows packaged-game acceptance.",
+    "Static strings only; arbitrary future downloaded/user-generated text requires separate coverage inputs."
+  ],
+  "initial_integration_commit": "e570b2b4596c908d82968117b90570a0ea515ea3",
+  "baseline_font_sha256": "64e13b9670cb12fe906d1adf736df5aa6d90019aa2b9cdab49559ac75976cea2",
+  "font_baseline_commit": "405ebf71efbe602524381baea01353b382fd4d90",
+  "planner_commit": "5d5bba0baeb680cf56e0244e7c0b53490e290757",
+  "planner_failure_reasons": 28,
+  "final_integration_verification": {
+    "runtime_commit": "fdff527230cbab1b2e17f035a94f55efbd7d75c5",
+    "coverage": {
+      "mapped_codepoints": 890,
+      "required_codepoints": 872,
+      "required_han": 769,
+      "baseline_codepoints": 874,
+      "fallback_symbols": [
+        8961,
+        9672
+      ],
+      "missing": [],
+      "lost_baseline": [],
+      "empty_han": [],
+      "errors": [],
+      "ok": true,
+      "runtime_files": 48,
+      "missing_locations": {}
+    },
+    "pack_font": {
+      "fallback": false,
+      "missing": [],
+      "sha256": "8c522b1e7139e8a5768e5e88ea6a74dbd64ec7dbf31f1a83ca005840cb50aeac"
+    },
+    "note": "The scoped save-path fix adds a backslash string to the required printable set; 769 required Han and the 890-glyph font bytes are unchanged."
+  }
+}

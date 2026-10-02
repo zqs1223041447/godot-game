@@ -3,7 +3,8 @@ extends RefCounted
 ## Pure cast compilation. The same detached result drives execution and previews.
 const Data = preload("res://scripts/game_data.gd")
 const Recipes = preload("res://scripts/combat/combat_data.gd")
-const Supports = preload("res://scripts/combat/support_catalog.gd")
+const Supports = preload("res://scripts/combat/support_registry.gd")
+const Extension = preload("res://scripts/combat/projectile_support_rules.gd")
 const BaseCompiler = preload("res://scripts/combat/damage_base_compiler.gd")
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
 const Weapon = preload("res://scripts/items/weapon_local_rules.gd")
@@ -47,8 +48,12 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 	canonical.sort()
 	var compiled_snapshot: Dictionary = snapshot.duplicate(true)
 	var mana: float = float(skill.mana)
+	var has_extension: bool = false
 	# Compatibility validates every definition before this execution stage.
 	for id: String in canonical:
+		if Extension.SUPPORTS.has(id):
+			has_extension = true
+			continue
 		var definition: Dictionary = Supports.get_definition(id)
 		if definition.is_empty():
 			return _failure("辅助元数据无效")
@@ -68,6 +73,13 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 		initial_count = clampi(initial_count, 1, MAX_INITIAL_PROJECTILES)
 		recipe.initial_count = initial_count
 		compiled_snapshot.initial_count = initial_count
+	if has_extension:
+		var extension: Dictionary = Extension.compile_extension(skill_id, recipe, canonical)
+		if not extension.error.is_empty():
+			return _failure(extension.error)
+		recipe = extension.recipe
+		compiled_snapshot.modifiers.append_array(extension.modifiers)
+		mana *= float(extension.mana_multiplier)
 	if not is_finite(mana):
 		return _failure("编译后的魔力消耗无效")
 	var packets: Dictionary = _compile_packets(skill_id, compiled_snapshot)

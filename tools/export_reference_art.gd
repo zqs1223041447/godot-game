@@ -4,7 +4,7 @@ extends SceneTree
 ## Output: docs/reference/art, or --output-dir /absolute/path, or GODOT_REFERENCE_ART_DIR.
 ## Headless-safe catalog/check: add -- --manifest-only (does not capture pixels).
 const Data = preload("res://scripts/game_data.gd")
-const Supports = preload("res://scripts/combat/support_catalog.gd")
+const Supports = preload("res://scripts/combat/support_registry.gd")
 const Gear = preload("res://scripts/items/equipment_catalog.gd")
 const Jewels = preload("res://scripts/jewel_data.gd")
 const Monsters = preload("res://scripts/monsters/monster_catalog.gd")
@@ -136,7 +136,7 @@ func collect_rows() -> void:
 	for id: String in _sorted_ids(Data.SKILLS):
 		add_row("skills", id, Data.SKILLS[id].name, "SkillEmblem._draw", "GameData.SKILLS", "active_skill")
 	for id: String in _sorted_ids(Supports.SUPPORTS):
-		add_row("supports", id, Supports.SUPPORTS[id].name, "SkillEmblem._draw", "SupportCatalog.SUPPORTS", "support")
+		add_row("supports", id, Supports.SUPPORTS[id].name, "SkillEmblem._draw", "SupportRegistry.SUPPORTS", "support")
 	var base_ids: Array[String] = Gear.all_base_ids()
 	base_ids.sort()
 	for id: String in base_ids:

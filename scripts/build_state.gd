@@ -9,10 +9,13 @@ const Data = preload("res://scripts/game_data.gd")
 const Passives = preload("res://scripts/passive_data.gd")
 const JewelCatalog = preload("res://scripts/jewel_data.gd")
 const Equipment = preload("res://scripts/items/equipment_catalog.gd")
-const SupportCatalog = preload("res://scripts/combat/support_catalog.gd")
+const SupportCatalog = preload("res://scripts/combat/support_registry.gd")
 const SkillCompiler = preload("res://scripts/combat/skill_compiler.gd")
 const AllocationRules = preload("res://scripts/passives/allocation_rules.gd")
-const SAVE_VERSION: int = 9
+const SAVE_VERSION: int = 10
+## Schema10 only adds support vocabulary; equipment still uses schema9 words.
+## Explicit mapping must not make an unknown future save/item version acceptable.
+const EQUIPMENT_VOCABULARY_BY_SAVE_VERSION: Dictionary = {10: 9}
 const MAX_EQUIPMENT: int = 64
 const MAX_EQUIPMENT_ID: int = 999999999
 const MAX_LEVEL: int = 1000
@@ -61,6 +64,7 @@ var migrated_from_v5: bool = false
 var migrated_from_v6: bool = false
 var migrated_from_v7: bool = false
 var migrated_from_v8: bool = false
+var migrated_from_v9: bool = false
 var _migration_version: int = 0
 var migration_message: String = ""
 var migration_backup_path: String = ""
@@ -538,12 +542,12 @@ func save_build(path: String = "user://build_save.json") -> Error:
 		return ERR_INVALID_DATA
 	# Keep the original legacy save before the first migration overwrite.
 	# A backup failure aborts autosave without touching the old file.
-	if ProjectSettings.globalize_path(path) == _migration_source_path and not _migration_source_bytes.is_empty():
-		var backup_error: Error = _backup_legacy_save(path)
+	if _save_paths_match(path, _migration_source_path) and not _migration_source_bytes.is_empty():
+		var backup_error: Error = _backup_legacy_save(_migration_source_path)
 		if backup_error != OK:
 			return backup_error
 	var write_error: Error = _atomic_write(path, serialized)
-	if write_error == OK and ProjectSettings.globalize_path(path) == _migration_source_path:
+	if write_error == OK and _save_paths_match(path, _migration_source_path):
 		_migration_source_bytes = PackedByteArray()
 	return write_error
 
@@ -567,7 +571,9 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	var candidate: Dictionary = _validate_snapshot(parser.data)
 	if candidate.is_empty():
 		return _reject_load(path, "存档数据无效或属于不兼容版本")
-	_blocked_save_paths.erase(ProjectSettings.globalize_path(path))
+	for blocked_path: String in _blocked_save_paths.keys():
+		if _save_paths_match(path, blocked_path):
+			_blocked_save_paths.erase(blocked_path)
 	last_load_error = ""
 	# Commit only after every field, graph connection and jewel location validates.
 	inventory.assign(candidate["inventory"])
@@ -596,6 +602,7 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	migrated_from_v6 = int(parser.data["version"]) == 6
 	migrated_from_v7 = int(parser.data["version"]) == 7
 	migrated_from_v8 = int(parser.data["version"]) == 8
+	migrated_from_v9 = int(parser.data["version"]) == 9
 	_migration_version = int(parser.data["version"])
 	if migrated_from_v1 or migrated_from_v2:
 		for id: String in Data.COMBAT_STARTER_ITEMS:
@@ -616,8 +623,10 @@ func load_build(path: String = "user://build_save.json") -> bool:
 		migration_message = "构筑已升级：原装备掷值、辅助、天赋与珠宝保持不变。新增灰烬皮甲进入正常掉落，可获得火焰抗性；有效火抗上限为 75%。"
 	if migrated_from_v8:
 		migration_message = "构筑已升级：原装备掷值、辅助、天赋与珠宝保持不变。新增白蜡长弓进入正常掉落；本武器词缀仅作用于武器攻击命中。"
+	if migrated_from_v9:
+		migration_message = "构筑已升级：装备、天赋、珠宝与已有辅助保持不变。新增贯穿辅助可用于飞弹和冰霜；按 K 配置。"
 	migration_backup_path = ""
-	_migration_source_path = ProjectSettings.globalize_path(path) if _migration_version < SAVE_VERSION else ""
+	_migration_source_path = path if _migration_version < SAVE_VERSION else ""
 	_migration_source_bytes = source_bytes if _migration_version < SAVE_VERSION else PackedByteArray()
 	_sync_backpack()
 	changed.emit()
@@ -625,7 +634,37 @@ func load_build(path: String = "user://build_save.json") -> bool:
 
 
 func save_block_reason(path: String = "user://build_save.json") -> String:
-	return str(_blocked_save_paths.get(ProjectSettings.globalize_path(path), ""))
+	for blocked_path: String in _blocked_save_paths:
+		if _save_paths_match(path, blocked_path):
+			return str(_blocked_save_paths[blocked_path])
+	return ""
+
+
+static func _save_paths_match(path_a: String, path_b: String) -> bool:
+	if path_a.is_empty() or path_b.is_empty():
+		return false
+	var absolute_a: String = ProjectSettings.globalize_path(path_a).replace("\\", "/")
+	var absolute_b: String = ProjectSettings.globalize_path(path_b).replace("\\", "/")
+	if absolute_a == absolute_b:
+		return true
+	var filesystem: DirAccess = DirAccess.open(".")
+	if filesystem == null:
+		return false
+	if absolute_a.is_relative_path():
+		absolute_a = filesystem.get_current_dir().path_join(absolute_a)
+	if absolute_b.is_relative_path():
+		absolute_b = filesystem.get_current_dir().path_join(absolute_b)
+	if filesystem.is_equivalent(absolute_a, absolute_b):
+		return true
+	# Keep protection when an external lock/deletion prevents querying the file.
+	# Compare directory identity before applying that directory's filename rules.
+	var parent_a: String = absolute_a.get_base_dir()
+	var parent_b: String = absolute_b.get_base_dir()
+	if not filesystem.is_equivalent(parent_a, parent_b):
+		return false
+	return absolute_a.get_file() == absolute_b.get_file() or (
+		not filesystem.is_case_sensitive(parent_a)
+		and absolute_a.get_file().nocasecmp_to(absolute_b.get_file()) == 0)
 
 
 func _reject_load(path: String, reason: String) -> bool:
@@ -672,7 +711,7 @@ func _validate_snapshot(value: Variant) -> Dictionary:
 		if not data["skill_supports"] is Dictionary or data["skill_supports"].size() > Data.SKILLS.size():
 			return {}
 		for skill_id: Variant in data["skill_supports"]:
-			if not skill_id is String or not SupportCatalog.compatibility_reason(skill_id, data["skill_supports"][skill_id]).is_empty():
+			if not skill_id is String or not SupportCatalog.saved_links_reason(skill_id, data["skill_supports"][skill_id], int(data["version"])).is_empty():
 				return {}
 	if not data["allocated_nodes"] is Array:
 		return {}
@@ -769,7 +808,8 @@ func _validate_common(data: Dictionary) -> bool:
 		if instances.size() > MAX_EQUIPMENT:
 			return false
 		for id: Variant in instances:
-			if not id is String or not Equipment.validate_instance_for_version(instances[id], int(data.get("version", 0))):
+			var item_vocabulary: int = int(EQUIPMENT_VOCABULARY_BY_SAVE_VERSION.get(int(data.get("version", 0)), int(data.get("version", 0))))
+			if not id is String or not Equipment.validate_instance_for_version(instances[id], item_vocabulary):
 				return false
 			if instances[id]["id"] != id or Equipment.serial_from_id(id) >= int(data["next_equipment_id"]) or not loaded_inventory.has(id):
 				return false

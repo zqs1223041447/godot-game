@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REF = ROOT / 'docs/reference'
 CATEGORIES = [('skills','主动技能'),('supports','辅助技能'),('equipment','随机装备'),('affixes','装备词缀'),('fixed_items','固定装备'),('jewels','珠宝'),('jewel_affixes','珠宝词缀'),('passives','天赋星图'),('mechanisms','共用机制'),('weapon_stages','武器局部阶段'),('defenses','受击与防御'),('monsters','怪物图鉴'),('rules','规则与边界')]
 RULE_TITLES = {'damage':'伤害如何结算','supports':'辅助装配','projectiles':'分裂、返回与飞行结束','equipment':'装备与阶级','character_rates':'恢复、移动与普通攻击速度','basic_attack':'普通攻击与武器贡献','allocation':'天赋与珠宝规则','shared':'玩家和怪物共享机制','boundaries':'尚未实现的源游戏语义','sources':'数据来源与实现边界'}
+CAPABILITIES = {'initial_projectiles':'初始投射物数量','projectile_hit':'投射物命中','finite_projectile_pierce':'有限穿透'}
 SLOTS = {'weapon':'武器','armor':'护甲','charm':'护符'}
 TYPES = {'small':'小天赋','notable':'显著天赋','socket':'珠宝孔','start':'起点','prefix':'前缀','suffix':'后缀','ordinary':'普通珠宝','special':'特殊珠宝','legacy':'原始词池','expansion':'扩展词池','runewood':'符木点伤池','defense':'火抗防具池','local_weapon':'白蜡长弓池'}
 
@@ -25,6 +26,23 @@ DAMAGE_NAMES = {'physical':'物理','fire':'火焰','cold':'冰霜','lightning':
 def component_text(components):
     return ' + '.join(f'{DAMAGE_NAMES[k]} {number(v)}' for k,v in ((key,components.get(key,0)) for key in DAMAGE_NAMES) if v) or '无'
 def percent(value): return number(value*100)+'%'
+def piercing_diagram(examples, skills):
+    content = '<p>同一直线六个固定目标，仅发射单枚载体；圆点是否点亮由真实碰撞事件导出。去返共用剩余穿透，命中上限不是保证命中数。</p>'
+    for skill_id, pair in examples['skills'].items():
+        content += '<h4>'+esc(skills[skill_id]['name'])+'</h4><svg class="mechanism-diagram" viewBox="0 0 480 132" role="img" aria-label="贯穿前后单枚命中示例">'
+        for row, mode in enumerate(['before','after']):
+            example=pair[mode]; y=36+row*56; hits=example['observed_hits']
+            content += f'<text x="8" y="{y-15}" fill="#3b281b" font-size="13">'+('原配方' if mode=='before' else '贯穿辅助')+f'：{len(hits)} 次命中</text>'
+            content += f'<path d="M 18 {y} H 450" stroke="#aa9c88" stroke-width="2" fill="none"/>'
+            for target in range(1, examples['target_count']+1):
+                x=48+target*60; fill='#8d6734' if target in hits else '#d4c9b8'
+                content += f'<circle cx="{x}" cy="{y}" r="10" fill="{fill}" stroke="#69523a"/>'
+            content += f'<text x="8" y="{y+24}" fill="#69523a" font-size="12" data-pierce-hits="{skill_id}-{mode}" data-value="{len(hits)}">单击 {number(example["hit_damage"])}，耗魔 {number(example["mana"])}</text>'
+        content += '</svg>'
+        before, after = pair['before'], pair['after']
+        content += '<p>命中 '+str(len(before['observed_hits']))+' → '+str(len(after['observed_hits']))+'；耗魔 '+number(before['mana'])+' → '+number(after['mana'])+'；防御前单击 '+number(before['hit_damage'])+' → '+number(after['hit_damage'])+'</p>'
+    return content
+
 def defense_diagram(example):
     trace=example['trace']
     total=sum(trace['raw_components'].values())
@@ -107,7 +125,9 @@ def build(data, art):
         cards.append(add('skills',key,s['name'],s['description'],body,'投射物' if 'projectile_hit' in s['capabilities'] else '其他技能',related=related))
     for key,s in data['supports'].items():
         eligible = [i for i,x in data['skills'].items() if key in x['compatible_supports']]
-        body = facts([('可装配技能',links('skills',eligible)),('能力要求',esc(' / '.join(s['requires'])))])
+        body = facts([('可装配技能',links('skills',eligible)),('能力要求',esc(' / '.join(CAPABILITIES.get(c,c) for c in s['requires']))),('规则来源','本游戏原创；运行版本 '+esc(data['game_version']))])
+        if key == 'pierce':
+            body += piercing_diagram(data['projectile_support_examples'],data['skills'])
         cards.append(add('supports',key,s['name'],s['description'],body,'投射物辅助',related=link('rules','supports')))
     for key,e in data['equipment'].items():
         body = facts([('格数',' × '.join(map(number,e['size']))),('固有属性',lines(e['stats_text']))])+details('可出现的词缀',links('affixes',e['eligible_affixes']))
@@ -191,7 +211,7 @@ def build(data, art):
     basic_rows=''.join(f'<tr><th scope="row">{esc(data["configurations"][config]["name"])}</th><td>{esc(component_text(sample["hits"]["basic"]["packet"]["base"]))}</td><td>{number(sample["hits"]["basic"]["resolved"]["total"])}</td><td>{number(sample["hits"]["basic"]["known_target_resolved"]["total"])}</td></tr>' for config in ['local_normal','local_max'] for sample in [data['weapon_stages']['weapon_local']['examples'][config]])
     rule_defs=[
         ('damage','伤害如何结算','每次施放先冻结构筑快照，再由技能编译器组装命中。条目分别标注防御前与已知目标抗性后的逐次命中，不是总伤害或每秒伤害。',configs+'<p>'+link('defenses','fire_resistance','查看一次命中的抗性与护盾流程')+'</p><p>原有固有分量、支持攻击命中的局部武器物理与匹配攻击/法术标签的外部附加点伤先分路组装；适用的提高同组相加，总增/总降分别相乘。独立爆炸具有自己的标签与附加效用。</p>','implemented'),
-        ('supports','辅助装配','只有拥有所需能力的主动技能可装配辅助。同一技能不能重复装配同一辅助。',f'<p>每技能最多 {data["limits"]["max_supports"]} 个辅助；初始投射物上限 {data["limits"]["initial_projectiles"]}。兼容性来自 SupportCatalog；数值来自 SkillCompiler。</p><p>'+links('supports',data['supports'])+'</p>','implemented'),
+        ('supports','辅助装配','只有拥有所需能力的主动技能可装配辅助。同一技能不能重复装配同一辅助。',f'<p>每技能最多 {data["limits"]["max_supports"]} 个辅助；初始投射物上限 {data["limits"]["initial_projectiles"]}。兼容性来自 SupportRegistry 及各规则模块；数值来自 SkillCompiler。</p><p>'+links('supports',data['supports'])+'</p>','implemented'),
         ('projectiles','分裂、返回与飞行结束','龙卷母箭优先分裂；返回在抵达射程时朝当时角色中心取向，且每个载体至多一次。','<p>自然飞行结束可触发装备授予的爆炸。分裂、碰撞消耗和取消不会触发该爆炸；返回不刷新寿命。投射物增伤与投射物辅助不作用于独立爆炸。</p><p>'+links('fixed_items',['prism_bow','return_mantle','detonation_charm'])+'</p>','implemented'),
         ('equipment','装备与阶级','底材与词缀按自身阶段结算；局部武器项独立于角色统计。T1 → T3 是本游戏原创成长顺序；不是 PoE 官方阶级命名。',f'<p>物品等级 {data["limits"]["min_item_level"]}–{data["limits"]["max_item_level"]}。每次已产生的普通装备奖励按下表权重选择一个词池（当前 {esc(data["current_loot_profile_id"])}，权重合计 100）；不是每只怪物死亡的掉落概率，也不新增奖励分支。同族或同组不能重复出现。</p>'+pool_table+details('稀有度规则',facts([(r['name'],f'{r["min_affixes"]}–{r["max_affixes"]} 条；至多 {r["max_prefixes"]} 前缀 / {r["max_suffixes"]} 后缀') for r in data['equipment_rarities'].values()]))+'<p>装备 damage 仍为角色通用基础加值，护盾为角色全局容量；白蜡长弓的局部物理另由 '+link('weapon_stages','weapon_local')+' 结算。火卫的合格专属奖励仍强制选防御池，沿用一次奖励。</p>'+details('历史配置与存档兼容',historical_pools+f'<p>历史配置留给重放兼容，不再表示当前自然词池选择。当前存档结构 {data["save_version"]}；v8 迁移保留装备 ID、掷值、辅助与珠宝，保存迁移备份。更新不会免费赠送新弓或新增升级奖励。</p>'),'implemented'),
         ('basic_attack','普通攻击与武器贡献','普通自动攻击是独立的攻击消费者，不计入八个主动技能条目。','<p>普通投射物接收本武器物理；法术与独立爆炸不接收。以下两种构筑仅用于说明合法普通长弓与局部双前缀实例，仍保留原有角色基础伤害。</p><div class="table-scroll"><table><thead><tr><th>装备示例</th><th>原始分量</th><th>防御前</th><th>已知目标抗性后</th></tr></thead><tbody>'+basic_rows+'</tbody></table></div><p>'+link('weapon_stages','weapon_local')+' · '+link('rules','character_rates')+'</p>','implemented'),

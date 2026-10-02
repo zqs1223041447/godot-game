@@ -3,7 +3,7 @@ extends SceneTree
 const Data = preload("res://scripts/game_data.gd")
 const Build = preload("res://scripts/build_state.gd")
 const Equipment = preload("res://scripts/items/equipment_catalog.gd")
-const Supports = preload("res://scripts/combat/support_catalog.gd")
+const Supports = preload("res://scripts/combat/support_registry.gd")
 const Compiler = preload("res://scripts/combat/skill_compiler.gd")
 const Preview = preload("res://scripts/combat/damage_preview.gd")
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
@@ -16,6 +16,7 @@ const Rules = preload("res://scripts/passives/allocation_rules.gd")
 const Defense = preload("res://scripts/mechanics/defense_rules.gd")
 const Monsters = preload("res://scripts/monsters/monster_catalog.gd")
 const WeaponLocal = preload("res://scripts/items/weapon_local_rules.gd")
+const Projectiles = preload("res://scripts/combat/projectile_runtime.gd")
 
 func _initialize() -> void:
 	var target: String = "res://docs/reference/catalog.json"
@@ -48,6 +49,7 @@ static func collect() -> Dictionary:
 		"effects": Recipes.EFFECTS, "tornado_recipe": Recipes.TORNADO,
 		"limits": {"max_supports": Supports.MAX_SUPPORTS, "initial_projectiles": Compiler.MAX_INITIAL_PROJECTILES,
 			"min_item_level": Equipment.MIN_ITEM_LEVEL, "max_item_level": Equipment.MAX_ITEM_LEVEL}}
+	result["projectile_support_examples"] = piercing_examples()
 	var base_ids: Array = Equipment.all_base_ids()
 	var affix_ids: Array = Equipment.all_affix_ids()
 	for id: String in base_ids:
@@ -119,14 +121,13 @@ static func collect() -> Dictionary:
 		skill["examples"] = {}
 		for config: String in builds:
 			var build: RefCounted = builds[config]
-			var combinations: Array = [[]]
-			if not skill.compatible_supports.is_empty():
-				for support_id: String in skill.compatible_supports:
-					combinations.append([support_id])
-				combinations.append(skill.compatible_supports.duplicate())
+			var combinations: Array = support_combinations(skill.compatible_supports)
 			skill.examples[config] = []
 			for combination: Array in combinations:
+				if not Supports.compatibility_reason(id, combination).is_empty():
+					continue
 				var cast: Dictionary = Compiler.compile_skill(id, build.get_combat_snapshot(), combination)
+				assert(cast.get("ok", false), "Reference examples require a successful production cast")
 				var packets: Array = []
 				for entry: Dictionary in Preview.entries(cast):
 					var defended: Dictionary = Damage.resolve(entry.packet, cast.snapshot.modifiers, target.resistances)
@@ -280,6 +281,51 @@ static func local_build(instance: Dictionary) -> RefCounted:
 	assert(equipped_ok, "Reference bow must equip through BuildState")
 	assert(not build._validate_snapshot(build._snapshot()).is_empty(), "Reference build must satisfy actual save schema without writing a save")
 	return build
+
+## Enumerate each zero-, one-, and two-slot candidate exactly once. Available
+## support count can grow independently of the two-slot equipment limit.
+static func support_combinations(compatible_ids: Array) -> Array:
+	assert(Supports.MAX_SUPPORTS == 2, "Reference enumeration follows the two-slot contract")
+	var result: Array = [[]]
+	for id: String in compatible_ids:
+		result.append([id])
+	for first: int in range(compatible_ids.size()):
+		for second: int in range(first + 1, compatible_ids.size()):
+			result.append([compatible_ids[first], compatible_ids[second]])
+	return result
+
+
+## One carrier, six stationary targets, no defense or return item. Counts come
+## from actual collision events, not a parallel browser implementation.
+static func piercing_examples() -> Dictionary:
+	var result: Dictionary = {"fixture": "one_carrier_six_stationary_targets", "target_count": 6,
+		"source": "SkillCompiler + ProjectileRuntime.advance + DamageResolver", "skills": {}}
+	var build = Build.new()
+	for skill_id: String in ["bolt", "frost"]:
+		var row: Dictionary = {}
+		for mode: String in ["before", "after"]:
+			var links: Array = [] if mode == "before" else ["pierce"]
+			var cast: Dictionary = Compiler.compile_skill(skill_id, build.get_combat_snapshot(), links)
+			assert(cast.ok, "Pierce reference fixture must compile")
+			var runtime = Projectiles.new()
+			var targets: Array[Dictionary] = []
+			for index: int in range(6):
+				targets.append({"id": index + 1, "pos": Vector2(80.0 * (index + 1), 0),
+					"radius": 10.0, "health": 1000.0, "spawn": 0.0})
+			var spec: Dictionary = {"speed": cast.recipe.speed, "range": 650.0, "lifetime": 1.7,
+				"radius": 5.5, "pierce": cast.recipe.pierce, "slow": cast.recipe.slow}
+			var shots: Array[Dictionary] = [runtime.make_projectile(Vector2.ZERO, Vector2.RIGHT,
+				spec, cast.packets.projectile, cast.snapshot, runtime.new_cast(), Color.WHITE)]
+			var hit_ids: Array[int] = []
+			for event: Dictionary in runtime.advance(shots, 1.6, targets, Vector2.ZERO, 180):
+				if event.type == "hit":
+					hit_ids.append(int(event.target_id))
+			row[mode] = {"supports": cast.support_ids, "pierce": cast.recipe.pierce,
+				"observed_hits": hit_ids, "mana": cast.mana,
+				"hit_damage": Damage.resolve(cast.packets.projectile, cast.snapshot.modifiers).total}
+		result.skills[skill_id] = row
+	return result
+
 
 static func _direct_total(cast: Dictionary) -> float:
 	var total: float = 0.0

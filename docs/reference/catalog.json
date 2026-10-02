@@ -3977,7 +3977,7 @@
 			}
 		}
 	},
-	"game_version": "0.13.0",
+	"game_version": "0.14.0",
 	"jewel_affixes": {
 		"barrier": {
 			"kind": "prefix",
@@ -10101,7 +10101,68 @@
 			"type": "small"
 		}
 	},
-	"save_version": 9,
+	"projectile_support_examples": {
+		"fixture": "one_carrier_six_stationary_targets",
+		"skills": {
+			"bolt": {
+				"after": {
+					"hit_damage": 35.36,
+					"mana": 8.4,
+					"observed_hits": [
+						1,
+						2,
+						3,
+						4
+					],
+					"pierce": 3,
+					"supports": [
+						"pierce"
+					]
+				},
+				"before": {
+					"hit_damage": 41.6,
+					"mana": 7.0,
+					"observed_hits": [
+						1,
+						2
+					],
+					"pierce": 1,
+					"supports": []
+				}
+			},
+			"frost": {
+				"after": {
+					"hit_damage": 18.784999999999997,
+					"mana": 19.2,
+					"observed_hits": [
+						1,
+						2,
+						3,
+						4,
+						5
+					],
+					"pierce": 4,
+					"supports": [
+						"pierce"
+					]
+				},
+				"before": {
+					"hit_damage": 22.099999999999998,
+					"mana": 16.0,
+					"observed_hits": [
+						1,
+						2,
+						3
+					],
+					"pierce": 2,
+					"supports": []
+				}
+			}
+		},
+		"source": "SkillCompiler + ProjectileRuntime.advance + DamageResolver",
+		"target_count": 6
+	},
+	"save_version": 10,
 	"schema_version": 3,
 	"sectors": [
 		{
@@ -10150,7 +10211,8 @@
 			"color": "#76c9ff",
 			"compatible_supports": [
 				"volley",
-				"focus"
+				"focus",
+				"pierce"
 			],
 			"cooldown": 0.8,
 			"description": "发射三枚穿透飞弹，每枚造成 160% 伤害。",
@@ -10801,6 +10863,226 @@
 					},
 					{
 						"cooldown": 0.8,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每枚投射物穿透 3 次，最多命中 4 次；去返共享剩余次数，同相位同目标至多命中一次。\n每枚投射物：闪电 35.36\n固有：闪电 41.60；附加：无；附加效用 1.60\n独立爆炸：火焰 23.40\n固有：火焰 23.40；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+						"initial_count": 3,
+						"mana": 8.4,
+						"packets": [
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"lightning": 35.36
+									},
+									"details": [
+										{
+											"base": 41.6,
+											"before_defense": 35.36,
+											"final": 35.36,
+											"increased": 0.0,
+											"modifiers": [
+												"support:pierce"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 35.36
+								},
+								"known_target_settlement": {
+									"components": {
+										"lightning": 35.36
+									},
+									"damage_total": 35.36,
+									"details": [
+										{
+											"base": 41.6,
+											"before_defense": 35.36,
+											"final": 35.36,
+											"increased": 0.0,
+											"modifiers": [
+												"support:pierce"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"health_lost": 35.36,
+									"mitigated_components": {
+										"lightning": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"lightning": 35.36
+									},
+									"reason": "",
+									"remaining_health": 278.14,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "每枚投射物",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 1.6,
+										"base_coefficient": 1.6,
+										"intrinsic": {
+											"lightning": 41.6
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"lightning": 41.6
+									},
+									"role": "projectile",
+									"skill_id": "bolt",
+									"tags": [
+										"hit",
+										"projectile",
+										"spell"
+									]
+								},
+								"resolved": {
+									"components": {
+										"lightning": 35.36
+									},
+									"details": [
+										{
+											"base": 41.6,
+											"before_defense": 35.36,
+											"final": 35.36,
+											"increased": 0.0,
+											"modifiers": [
+												"support:pierce"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 35.36
+								}
+							},
+							{
+								"active": false,
+								"known_target_resolved": {
+									"components": {
+										"fire": 17.55
+									},
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 17.55
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 17.55
+									},
+									"damage_total": 17.55,
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 17.55,
+									"mitigated_components": {
+										"fire": 5.850000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 23.400000000000002
+									},
+									"reason": "",
+									"remaining_health": 295.95,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "独立爆炸",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.0,
+										"base_coefficient": 0.9,
+										"intrinsic": {
+											"fire": 23.400000000000002
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 23.400000000000002
+									},
+									"role": "secondary",
+									"skill_id": "bolt",
+									"tags": [
+										"hit",
+										"area",
+										"secondary",
+										"explosion"
+									]
+								},
+								"resolved": {
+									"components": {
+										"fire": 23.400000000000002
+									},
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 23.400000000000002,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 23.400000000000002
+								}
+							}
+						],
+						"recipe": {
+							"_projectile_support_ids": [
+								"pierce"
+							],
+							"added_effectiveness": 1.6,
+							"coefficient": 1.6,
+							"damage_type": "lightning",
+							"initial_count": 3,
+							"pierce": 3,
+							"slow": 0.0,
+							"speed": 780.0,
+							"spread": 0.16
+						},
+						"summary": "命中预估（未计敌方防御）：每枚投射物 35.36",
+						"supports": [
+							"pierce"
+						]
+					},
+					{
+						"cooldown": 0.8,
 						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每枚投射物：闪电 41.60\n固有：闪电 41.60；附加：无；附加效用 1.60\n独立爆炸：火焰 23.40\n固有：火焰 23.40；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
 						"initial_count": 5,
 						"mana": 10.920000000000002,
@@ -11018,6 +11300,454 @@
 						"supports": [
 							"focus",
 							"volley"
+						]
+					},
+					{
+						"cooldown": 0.8,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每枚投射物穿透 3 次，最多命中 4 次；去返共享剩余次数，同相位同目标至多命中一次。\n每枚投射物：闪电 28.29\n固有：闪电 41.60；附加：无；附加效用 1.60\n独立爆炸：火焰 23.40\n固有：火焰 23.40；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+						"initial_count": 5,
+						"mana": 10.92,
+						"packets": [
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"lightning": 28.288000000000004
+									},
+									"details": [
+										{
+											"base": 41.6,
+											"before_defense": 28.288000000000004,
+											"final": 28.288000000000004,
+											"increased": 0.0,
+											"modifiers": [
+												"support:volley",
+												"support:pierce"
+											],
+											"more": 0.68,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 28.288000000000004
+								},
+								"known_target_settlement": {
+									"components": {
+										"lightning": 28.288000000000004
+									},
+									"damage_total": 28.288000000000004,
+									"details": [
+										{
+											"base": 41.6,
+											"before_defense": 28.288000000000004,
+											"final": 28.288000000000004,
+											"increased": 0.0,
+											"modifiers": [
+												"support:volley",
+												"support:pierce"
+											],
+											"more": 0.68,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"health_lost": 28.288000000000004,
+									"mitigated_components": {
+										"lightning": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"lightning": 28.288000000000004
+									},
+									"reason": "",
+									"remaining_health": 285.212,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "每枚投射物",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 1.6,
+										"base_coefficient": 1.6,
+										"intrinsic": {
+											"lightning": 41.6
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"lightning": 41.6
+									},
+									"role": "projectile",
+									"skill_id": "bolt",
+									"tags": [
+										"hit",
+										"projectile",
+										"spell"
+									]
+								},
+								"resolved": {
+									"components": {
+										"lightning": 28.288000000000004
+									},
+									"details": [
+										{
+											"base": 41.6,
+											"before_defense": 28.288000000000004,
+											"final": 28.288000000000004,
+											"increased": 0.0,
+											"modifiers": [
+												"support:volley",
+												"support:pierce"
+											],
+											"more": 0.68,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 28.288000000000004
+								}
+							},
+							{
+								"active": false,
+								"known_target_resolved": {
+									"components": {
+										"fire": 17.55
+									},
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 17.55
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 17.55
+									},
+									"damage_total": 17.55,
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 17.55,
+									"mitigated_components": {
+										"fire": 5.850000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 23.400000000000002
+									},
+									"reason": "",
+									"remaining_health": 295.95,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "独立爆炸",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.0,
+										"base_coefficient": 0.9,
+										"intrinsic": {
+											"fire": 23.400000000000002
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 23.400000000000002
+									},
+									"role": "secondary",
+									"skill_id": "bolt",
+									"tags": [
+										"hit",
+										"area",
+										"secondary",
+										"explosion"
+									]
+								},
+								"resolved": {
+									"components": {
+										"fire": 23.400000000000002
+									},
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 23.400000000000002,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 23.400000000000002
+								}
+							}
+						],
+						"recipe": {
+							"_projectile_support_ids": [
+								"pierce"
+							],
+							"added_effectiveness": 1.6,
+							"coefficient": 1.6,
+							"damage_type": "lightning",
+							"initial_count": 5,
+							"pierce": 3,
+							"slow": 0.0,
+							"speed": 780.0,
+							"spread": 0.16
+						},
+						"summary": "命中预估（未计敌方防御）：每枚投射物 28.29",
+						"supports": [
+							"pierce",
+							"volley"
+						]
+					},
+					{
+						"cooldown": 0.8,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每枚投射物穿透 3 次，最多命中 4 次；去返共享剩余次数，同相位同目标至多命中一次。\n每枚投射物：闪电 44.20\n固有：闪电 41.60；附加：无；附加效用 1.60\n独立爆炸：火焰 23.40\n固有：火焰 23.40；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+						"initial_count": 3,
+						"mana": 10.08,
+						"packets": [
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"lightning": 44.2
+									},
+									"details": [
+										{
+											"base": 41.6,
+											"before_defense": 44.2,
+											"final": 44.2,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus",
+												"support:pierce"
+											],
+											"more": 1.0625,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 44.2
+								},
+								"known_target_settlement": {
+									"components": {
+										"lightning": 44.2
+									},
+									"damage_total": 44.2,
+									"details": [
+										{
+											"base": 41.6,
+											"before_defense": 44.2,
+											"final": 44.2,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus",
+												"support:pierce"
+											],
+											"more": 1.0625,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"health_lost": 44.2,
+									"mitigated_components": {
+										"lightning": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"lightning": 44.2
+									},
+									"reason": "",
+									"remaining_health": 269.3,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "每枚投射物",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 1.6,
+										"base_coefficient": 1.6,
+										"intrinsic": {
+											"lightning": 41.6
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"lightning": 41.6
+									},
+									"role": "projectile",
+									"skill_id": "bolt",
+									"tags": [
+										"hit",
+										"projectile",
+										"spell"
+									]
+								},
+								"resolved": {
+									"components": {
+										"lightning": 44.2
+									},
+									"details": [
+										{
+											"base": 41.6,
+											"before_defense": 44.2,
+											"final": 44.2,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus",
+												"support:pierce"
+											],
+											"more": 1.0625,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 44.2
+								}
+							},
+							{
+								"active": false,
+								"known_target_resolved": {
+									"components": {
+										"fire": 17.55
+									},
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 17.55
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 17.55
+									},
+									"damage_total": 17.55,
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 17.55,
+									"mitigated_components": {
+										"fire": 5.850000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 23.400000000000002
+									},
+									"reason": "",
+									"remaining_health": 295.95,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "独立爆炸",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.0,
+										"base_coefficient": 0.9,
+										"intrinsic": {
+											"fire": 23.400000000000002
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 23.400000000000002
+									},
+									"role": "secondary",
+									"skill_id": "bolt",
+									"tags": [
+										"hit",
+										"area",
+										"secondary",
+										"explosion"
+									]
+								},
+								"resolved": {
+									"components": {
+										"fire": 23.400000000000002
+									},
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 23.400000000000002,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 23.400000000000002
+								}
+							}
+						],
+						"recipe": {
+							"_projectile_support_ids": [
+								"pierce"
+							],
+							"added_effectiveness": 1.6,
+							"coefficient": 1.6,
+							"damage_type": "lightning",
+							"initial_count": 3,
+							"pierce": 3,
+							"slow": 0.0,
+							"speed": 780.0,
+							"spread": 0.16
+						},
+						"summary": "命中预估（未计敌方防御）：每枚投射物 44.20",
+						"supports": [
+							"focus",
+							"pierce"
 						]
 					}
 				],
@@ -11724,6 +12454,244 @@
 					},
 					{
 						"cooldown": 0.8,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每枚投射物穿透 3 次，最多命中 4 次；去返共享剩余次数，同相位同目标至多命中一次。\n每枚投射物：闪电 56.85\n固有：闪电 35.20；附加：无；附加效用 1.60\n独立爆炸：火焰 29.70\n固有：火焰 19.80；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+						"initial_count": 3,
+						"mana": 8.4,
+						"packets": [
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"lightning": 56.848000000000006
+									},
+									"details": [
+										{
+											"base": 35.2,
+											"before_defense": 56.848000000000006,
+											"final": 56.848000000000006,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:pierce"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 56.848000000000006
+								},
+								"known_target_settlement": {
+									"components": {
+										"lightning": 56.848000000000006
+									},
+									"damage_total": 56.848000000000006,
+									"details": [
+										{
+											"base": 35.2,
+											"before_defense": 56.848000000000006,
+											"final": 56.848000000000006,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:pierce"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"health_lost": 56.848000000000006,
+									"mitigated_components": {
+										"lightning": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"lightning": 56.848000000000006
+									},
+									"reason": "",
+									"remaining_health": 256.652,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "每枚投射物",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 1.6,
+										"base_coefficient": 1.6,
+										"intrinsic": {
+											"lightning": 35.2
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"lightning": 35.2
+									},
+									"role": "projectile",
+									"skill_id": "bolt",
+									"tags": [
+										"hit",
+										"projectile",
+										"spell"
+									]
+								},
+								"resolved": {
+									"components": {
+										"lightning": 56.848000000000006
+									},
+									"details": [
+										{
+											"base": 35.2,
+											"before_defense": 56.848000000000006,
+											"final": 56.848000000000006,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:pierce"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 56.848000000000006
+								}
+							},
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 22.275000000000002
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"damage_total": 22.275000000000002,
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 22.275000000000002,
+									"mitigated_components": {
+										"fire": 7.425000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 29.700000000000003
+									},
+									"reason": "",
+									"remaining_health": 291.225,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "独立爆炸",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.0,
+										"base_coefficient": 0.9,
+										"intrinsic": {
+											"fire": 19.8
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 19.8
+									},
+									"role": "secondary",
+									"skill_id": "bolt",
+									"tags": [
+										"hit",
+										"area",
+										"secondary",
+										"explosion"
+									]
+								},
+								"resolved": {
+									"components": {
+										"fire": 29.700000000000003
+									},
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 29.700000000000003,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 29.700000000000003
+								}
+							}
+						],
+						"recipe": {
+							"_projectile_support_ids": [
+								"pierce"
+							],
+							"added_effectiveness": 1.6,
+							"coefficient": 1.6,
+							"damage_type": "lightning",
+							"initial_count": 3,
+							"pierce": 3,
+							"slow": 0.0,
+							"speed": 780.0,
+							"spread": 0.16
+						},
+						"summary": "命中预估（未计敌方防御）：每枚投射物 56.85 / 独立爆炸 29.70",
+						"supports": [
+							"pierce"
+						]
+					},
+					{
+						"cooldown": 0.8,
 						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每枚投射物：闪电 66.88\n固有：闪电 35.20；附加：无；附加效用 1.60\n独立爆炸：火焰 29.70\n固有：火焰 19.80；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
 						"initial_count": 5,
 						"mana": 10.920000000000002,
@@ -11959,6 +12927,490 @@
 						"supports": [
 							"focus",
 							"volley"
+						]
+					},
+					{
+						"cooldown": 0.8,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每枚投射物穿透 3 次，最多命中 4 次；去返共享剩余次数，同相位同目标至多命中一次。\n每枚投射物：闪电 45.48\n固有：闪电 35.20；附加：无；附加效用 1.60\n独立爆炸：火焰 29.70\n固有：火焰 19.80；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+						"initial_count": 5,
+						"mana": 10.92,
+						"packets": [
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"lightning": 45.47840000000001
+									},
+									"details": [
+										{
+											"base": 35.2,
+											"before_defense": 45.47840000000001,
+											"final": 45.47840000000001,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:volley",
+												"support:pierce"
+											],
+											"more": 0.68,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 45.47840000000001
+								},
+								"known_target_settlement": {
+									"components": {
+										"lightning": 45.47840000000001
+									},
+									"damage_total": 45.47840000000001,
+									"details": [
+										{
+											"base": 35.2,
+											"before_defense": 45.47840000000001,
+											"final": 45.47840000000001,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:volley",
+												"support:pierce"
+											],
+											"more": 0.68,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"health_lost": 45.47840000000001,
+									"mitigated_components": {
+										"lightning": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"lightning": 45.47840000000001
+									},
+									"reason": "",
+									"remaining_health": 268.0216,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "每枚投射物",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 1.6,
+										"base_coefficient": 1.6,
+										"intrinsic": {
+											"lightning": 35.2
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"lightning": 35.2
+									},
+									"role": "projectile",
+									"skill_id": "bolt",
+									"tags": [
+										"hit",
+										"projectile",
+										"spell"
+									]
+								},
+								"resolved": {
+									"components": {
+										"lightning": 45.47840000000001
+									},
+									"details": [
+										{
+											"base": 35.2,
+											"before_defense": 45.47840000000001,
+											"final": 45.47840000000001,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:volley",
+												"support:pierce"
+											],
+											"more": 0.68,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 45.47840000000001
+								}
+							},
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 22.275000000000002
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"damage_total": 22.275000000000002,
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 22.275000000000002,
+									"mitigated_components": {
+										"fire": 7.425000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 29.700000000000003
+									},
+									"reason": "",
+									"remaining_health": 291.225,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "独立爆炸",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.0,
+										"base_coefficient": 0.9,
+										"intrinsic": {
+											"fire": 19.8
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 19.8
+									},
+									"role": "secondary",
+									"skill_id": "bolt",
+									"tags": [
+										"hit",
+										"area",
+										"secondary",
+										"explosion"
+									]
+								},
+								"resolved": {
+									"components": {
+										"fire": 29.700000000000003
+									},
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 29.700000000000003,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 29.700000000000003
+								}
+							}
+						],
+						"recipe": {
+							"_projectile_support_ids": [
+								"pierce"
+							],
+							"added_effectiveness": 1.6,
+							"coefficient": 1.6,
+							"damage_type": "lightning",
+							"initial_count": 5,
+							"pierce": 3,
+							"slow": 0.0,
+							"speed": 780.0,
+							"spread": 0.16
+						},
+						"summary": "命中预估（未计敌方防御）：每枚投射物 45.48 / 独立爆炸 29.70",
+						"supports": [
+							"pierce",
+							"volley"
+						]
+					},
+					{
+						"cooldown": 0.8,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每枚投射物穿透 3 次，最多命中 4 次；去返共享剩余次数，同相位同目标至多命中一次。\n每枚投射物：闪电 71.06\n固有：闪电 35.20；附加：无；附加效用 1.60\n独立爆炸：火焰 29.70\n固有：火焰 19.80；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+						"initial_count": 3,
+						"mana": 10.08,
+						"packets": [
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"lightning": 71.06000000000002
+									},
+									"details": [
+										{
+											"base": 35.2,
+											"before_defense": 71.06000000000002,
+											"final": 71.06000000000002,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:focus",
+												"support:pierce"
+											],
+											"more": 1.0625,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 71.06000000000002
+								},
+								"known_target_settlement": {
+									"components": {
+										"lightning": 71.06000000000002
+									},
+									"damage_total": 71.06000000000002,
+									"details": [
+										{
+											"base": 35.2,
+											"before_defense": 71.06000000000002,
+											"final": 71.06000000000002,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:focus",
+												"support:pierce"
+											],
+											"more": 1.0625,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"health_lost": 71.06000000000002,
+									"mitigated_components": {
+										"lightning": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"lightning": 71.06000000000002
+									},
+									"reason": "",
+									"remaining_health": 242.44,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "每枚投射物",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 1.6,
+										"base_coefficient": 1.6,
+										"intrinsic": {
+											"lightning": 35.2
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"lightning": 35.2
+									},
+									"role": "projectile",
+									"skill_id": "bolt",
+									"tags": [
+										"hit",
+										"projectile",
+										"spell"
+									]
+								},
+								"resolved": {
+									"components": {
+										"lightning": 71.06000000000002
+									},
+									"details": [
+										{
+											"base": 35.2,
+											"before_defense": 71.06000000000002,
+											"final": 71.06000000000002,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:focus",
+												"support:pierce"
+											],
+											"more": 1.0625,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 71.06000000000002
+								}
+							},
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 22.275000000000002
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"damage_total": 22.275000000000002,
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 22.275000000000002,
+									"mitigated_components": {
+										"fire": 7.425000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 29.700000000000003
+									},
+									"reason": "",
+									"remaining_health": 291.225,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "独立爆炸",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.0,
+										"base_coefficient": 0.9,
+										"intrinsic": {
+											"fire": 19.8
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 19.8
+									},
+									"role": "secondary",
+									"skill_id": "bolt",
+									"tags": [
+										"hit",
+										"area",
+										"secondary",
+										"explosion"
+									]
+								},
+								"resolved": {
+									"components": {
+										"fire": 29.700000000000003
+									},
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 29.700000000000003,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 29.700000000000003
+								}
+							}
+						],
+						"recipe": {
+							"_projectile_support_ids": [
+								"pierce"
+							],
+							"added_effectiveness": 1.6,
+							"coefficient": 1.6,
+							"damage_type": "lightning",
+							"initial_count": 3,
+							"pierce": 3,
+							"slow": 0.0,
+							"speed": 780.0,
+							"spread": 0.16
+						},
+						"summary": "命中预估（未计敌方防御）：每枚投射物 71.06 / 独立爆炸 29.70",
+						"supports": [
+							"focus",
+							"pierce"
 						]
 					}
 				],
@@ -12608,6 +14060,226 @@
 					},
 					{
 						"cooldown": 0.8,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每枚投射物穿透 3 次，最多命中 4 次；去返共享剩余次数，同相位同目标至多命中一次。\n每枚投射物：闪电 24.48\n固有：闪电 28.80；附加：无；附加效用 1.60\n独立爆炸：火焰 16.20\n固有：火焰 16.20；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+						"initial_count": 3,
+						"mana": 8.4,
+						"packets": [
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"lightning": 24.48
+									},
+									"details": [
+										{
+											"base": 28.8,
+											"before_defense": 24.48,
+											"final": 24.48,
+											"increased": 0.0,
+											"modifiers": [
+												"support:pierce"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 24.48
+								},
+								"known_target_settlement": {
+									"components": {
+										"lightning": 24.48
+									},
+									"damage_total": 24.48,
+									"details": [
+										{
+											"base": 28.8,
+											"before_defense": 24.48,
+											"final": 24.48,
+											"increased": 0.0,
+											"modifiers": [
+												"support:pierce"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"health_lost": 24.48,
+									"mitigated_components": {
+										"lightning": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"lightning": 24.48
+									},
+									"reason": "",
+									"remaining_health": 289.02,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "每枚投射物",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 1.6,
+										"base_coefficient": 1.6,
+										"intrinsic": {
+											"lightning": 28.8
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"lightning": 28.8
+									},
+									"role": "projectile",
+									"skill_id": "bolt",
+									"tags": [
+										"hit",
+										"projectile",
+										"spell"
+									]
+								},
+								"resolved": {
+									"components": {
+										"lightning": 24.48
+									},
+									"details": [
+										{
+											"base": 28.8,
+											"before_defense": 24.48,
+											"final": 24.48,
+											"increased": 0.0,
+											"modifiers": [
+												"support:pierce"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 24.48
+								}
+							},
+							{
+								"active": false,
+								"known_target_resolved": {
+									"components": {
+										"fire": 12.149999999999999
+									},
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 12.149999999999999,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 12.149999999999999
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 12.149999999999999
+									},
+									"damage_total": 12.149999999999999,
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 12.149999999999999,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 12.149999999999999,
+									"mitigated_components": {
+										"fire": 4.050000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 16.2
+									},
+									"reason": "",
+									"remaining_health": 301.35,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "独立爆炸",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.0,
+										"base_coefficient": 0.9,
+										"intrinsic": {
+											"fire": 16.2
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 16.2
+									},
+									"role": "secondary",
+									"skill_id": "bolt",
+									"tags": [
+										"hit",
+										"area",
+										"secondary",
+										"explosion"
+									]
+								},
+								"resolved": {
+									"components": {
+										"fire": 16.2
+									},
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 16.2,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 16.2
+								}
+							}
+						],
+						"recipe": {
+							"_projectile_support_ids": [
+								"pierce"
+							],
+							"added_effectiveness": 1.6,
+							"coefficient": 1.6,
+							"damage_type": "lightning",
+							"initial_count": 3,
+							"pierce": 3,
+							"slow": 0.0,
+							"speed": 780.0,
+							"spread": 0.16
+						},
+						"summary": "命中预估（未计敌方防御）：每枚投射物 24.48",
+						"supports": [
+							"pierce"
+						]
+					},
+					{
+						"cooldown": 0.8,
 						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每枚投射物：闪电 28.80\n固有：闪电 28.80；附加：无；附加效用 1.60\n独立爆炸：火焰 16.20\n固有：火焰 16.20；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
 						"initial_count": 5,
 						"mana": 10.920000000000002,
@@ -12825,6 +14497,454 @@
 						"supports": [
 							"focus",
 							"volley"
+						]
+					},
+					{
+						"cooldown": 0.8,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每枚投射物穿透 3 次，最多命中 4 次；去返共享剩余次数，同相位同目标至多命中一次。\n每枚投射物：闪电 19.58\n固有：闪电 28.80；附加：无；附加效用 1.60\n独立爆炸：火焰 16.20\n固有：火焰 16.20；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+						"initial_count": 5,
+						"mana": 10.92,
+						"packets": [
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"lightning": 19.584000000000003
+									},
+									"details": [
+										{
+											"base": 28.8,
+											"before_defense": 19.584000000000003,
+											"final": 19.584000000000003,
+											"increased": 0.0,
+											"modifiers": [
+												"support:volley",
+												"support:pierce"
+											],
+											"more": 0.68,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 19.584000000000003
+								},
+								"known_target_settlement": {
+									"components": {
+										"lightning": 19.584000000000003
+									},
+									"damage_total": 19.584000000000003,
+									"details": [
+										{
+											"base": 28.8,
+											"before_defense": 19.584000000000003,
+											"final": 19.584000000000003,
+											"increased": 0.0,
+											"modifiers": [
+												"support:volley",
+												"support:pierce"
+											],
+											"more": 0.68,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"health_lost": 19.584000000000003,
+									"mitigated_components": {
+										"lightning": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"lightning": 19.584000000000003
+									},
+									"reason": "",
+									"remaining_health": 293.916,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "每枚投射物",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 1.6,
+										"base_coefficient": 1.6,
+										"intrinsic": {
+											"lightning": 28.8
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"lightning": 28.8
+									},
+									"role": "projectile",
+									"skill_id": "bolt",
+									"tags": [
+										"hit",
+										"projectile",
+										"spell"
+									]
+								},
+								"resolved": {
+									"components": {
+										"lightning": 19.584000000000003
+									},
+									"details": [
+										{
+											"base": 28.8,
+											"before_defense": 19.584000000000003,
+											"final": 19.584000000000003,
+											"increased": 0.0,
+											"modifiers": [
+												"support:volley",
+												"support:pierce"
+											],
+											"more": 0.68,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 19.584000000000003
+								}
+							},
+							{
+								"active": false,
+								"known_target_resolved": {
+									"components": {
+										"fire": 12.149999999999999
+									},
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 12.149999999999999,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 12.149999999999999
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 12.149999999999999
+									},
+									"damage_total": 12.149999999999999,
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 12.149999999999999,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 12.149999999999999,
+									"mitigated_components": {
+										"fire": 4.050000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 16.2
+									},
+									"reason": "",
+									"remaining_health": 301.35,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "独立爆炸",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.0,
+										"base_coefficient": 0.9,
+										"intrinsic": {
+											"fire": 16.2
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 16.2
+									},
+									"role": "secondary",
+									"skill_id": "bolt",
+									"tags": [
+										"hit",
+										"area",
+										"secondary",
+										"explosion"
+									]
+								},
+								"resolved": {
+									"components": {
+										"fire": 16.2
+									},
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 16.2,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 16.2
+								}
+							}
+						],
+						"recipe": {
+							"_projectile_support_ids": [
+								"pierce"
+							],
+							"added_effectiveness": 1.6,
+							"coefficient": 1.6,
+							"damage_type": "lightning",
+							"initial_count": 5,
+							"pierce": 3,
+							"slow": 0.0,
+							"speed": 780.0,
+							"spread": 0.16
+						},
+						"summary": "命中预估（未计敌方防御）：每枚投射物 19.58",
+						"supports": [
+							"pierce",
+							"volley"
+						]
+					},
+					{
+						"cooldown": 0.8,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每枚投射物穿透 3 次，最多命中 4 次；去返共享剩余次数，同相位同目标至多命中一次。\n每枚投射物：闪电 30.60\n固有：闪电 28.80；附加：无；附加效用 1.60\n独立爆炸：火焰 16.20\n固有：火焰 16.20；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+						"initial_count": 3,
+						"mana": 10.08,
+						"packets": [
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"lightning": 30.6
+									},
+									"details": [
+										{
+											"base": 28.8,
+											"before_defense": 30.6,
+											"final": 30.6,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus",
+												"support:pierce"
+											],
+											"more": 1.0625,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 30.6
+								},
+								"known_target_settlement": {
+									"components": {
+										"lightning": 30.6
+									},
+									"damage_total": 30.6,
+									"details": [
+										{
+											"base": 28.8,
+											"before_defense": 30.6,
+											"final": 30.6,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus",
+												"support:pierce"
+											],
+											"more": 1.0625,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"health_lost": 30.6,
+									"mitigated_components": {
+										"lightning": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"lightning": 30.6
+									},
+									"reason": "",
+									"remaining_health": 282.9,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "每枚投射物",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 1.6,
+										"base_coefficient": 1.6,
+										"intrinsic": {
+											"lightning": 28.8
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"lightning": 28.8
+									},
+									"role": "projectile",
+									"skill_id": "bolt",
+									"tags": [
+										"hit",
+										"projectile",
+										"spell"
+									]
+								},
+								"resolved": {
+									"components": {
+										"lightning": 30.6
+									},
+									"details": [
+										{
+											"base": 28.8,
+											"before_defense": 30.6,
+											"final": 30.6,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus",
+												"support:pierce"
+											],
+											"more": 1.0625,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 30.6
+								}
+							},
+							{
+								"active": false,
+								"known_target_resolved": {
+									"components": {
+										"fire": 12.149999999999999
+									},
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 12.149999999999999,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 12.149999999999999
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 12.149999999999999
+									},
+									"damage_total": 12.149999999999999,
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 12.149999999999999,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 12.149999999999999,
+									"mitigated_components": {
+										"fire": 4.050000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 16.2
+									},
+									"reason": "",
+									"remaining_health": 301.35,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "独立爆炸",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.0,
+										"base_coefficient": 0.9,
+										"intrinsic": {
+											"fire": 16.2
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 16.2
+									},
+									"role": "secondary",
+									"skill_id": "bolt",
+									"tags": [
+										"hit",
+										"area",
+										"secondary",
+										"explosion"
+									]
+								},
+								"resolved": {
+									"components": {
+										"fire": 16.2
+									},
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 16.2,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 16.2
+								}
+							}
+						],
+						"recipe": {
+							"_projectile_support_ids": [
+								"pierce"
+							],
+							"added_effectiveness": 1.6,
+							"coefficient": 1.6,
+							"damage_type": "lightning",
+							"initial_count": 3,
+							"pierce": 3,
+							"slow": 0.0,
+							"speed": 780.0,
+							"spread": 0.16
+						},
+						"summary": "命中预估（未计敌方防御）：每枚投射物 30.60",
+						"supports": [
+							"focus",
+							"pierce"
 						]
 					}
 				],
@@ -13474,6 +15594,226 @@
 					},
 					{
 						"cooldown": 0.8,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每枚投射物穿透 3 次，最多命中 4 次；去返共享剩余次数，同相位同目标至多命中一次。\n每枚投射物：闪电 24.48\n固有：闪电 28.80；附加：无；附加效用 1.60\n独立爆炸：火焰 16.20\n固有：火焰 16.20；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+						"initial_count": 3,
+						"mana": 8.4,
+						"packets": [
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"lightning": 24.48
+									},
+									"details": [
+										{
+											"base": 28.8,
+											"before_defense": 24.48,
+											"final": 24.48,
+											"increased": 0.0,
+											"modifiers": [
+												"support:pierce"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 24.48
+								},
+								"known_target_settlement": {
+									"components": {
+										"lightning": 24.48
+									},
+									"damage_total": 24.48,
+									"details": [
+										{
+											"base": 28.8,
+											"before_defense": 24.48,
+											"final": 24.48,
+											"increased": 0.0,
+											"modifiers": [
+												"support:pierce"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"health_lost": 24.48,
+									"mitigated_components": {
+										"lightning": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"lightning": 24.48
+									},
+									"reason": "",
+									"remaining_health": 289.02,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "每枚投射物",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 1.6,
+										"base_coefficient": 1.6,
+										"intrinsic": {
+											"lightning": 28.8
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"lightning": 28.8
+									},
+									"role": "projectile",
+									"skill_id": "bolt",
+									"tags": [
+										"hit",
+										"projectile",
+										"spell"
+									]
+								},
+								"resolved": {
+									"components": {
+										"lightning": 24.48
+									},
+									"details": [
+										{
+											"base": 28.8,
+											"before_defense": 24.48,
+											"final": 24.48,
+											"increased": 0.0,
+											"modifiers": [
+												"support:pierce"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 24.48
+								}
+							},
+							{
+								"active": false,
+								"known_target_resolved": {
+									"components": {
+										"fire": 12.149999999999999
+									},
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 12.149999999999999,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 12.149999999999999
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 12.149999999999999
+									},
+									"damage_total": 12.149999999999999,
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 12.149999999999999,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 12.149999999999999,
+									"mitigated_components": {
+										"fire": 4.050000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 16.2
+									},
+									"reason": "",
+									"remaining_health": 301.35,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "独立爆炸",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.0,
+										"base_coefficient": 0.9,
+										"intrinsic": {
+											"fire": 16.2
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 16.2
+									},
+									"role": "secondary",
+									"skill_id": "bolt",
+									"tags": [
+										"hit",
+										"area",
+										"secondary",
+										"explosion"
+									]
+								},
+								"resolved": {
+									"components": {
+										"fire": 16.2
+									},
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 16.2,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 16.2
+								}
+							}
+						],
+						"recipe": {
+							"_projectile_support_ids": [
+								"pierce"
+							],
+							"added_effectiveness": 1.6,
+							"coefficient": 1.6,
+							"damage_type": "lightning",
+							"initial_count": 3,
+							"pierce": 3,
+							"slow": 0.0,
+							"speed": 780.0,
+							"spread": 0.16
+						},
+						"summary": "命中预估（未计敌方防御）：每枚投射物 24.48",
+						"supports": [
+							"pierce"
+						]
+					},
+					{
+						"cooldown": 0.8,
 						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每枚投射物：闪电 28.80\n固有：闪电 28.80；附加：无；附加效用 1.60\n独立爆炸：火焰 16.20\n固有：火焰 16.20；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
 						"initial_count": 5,
 						"mana": 10.920000000000002,
@@ -13691,6 +16031,454 @@
 						"supports": [
 							"focus",
 							"volley"
+						]
+					},
+					{
+						"cooldown": 0.8,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每枚投射物穿透 3 次，最多命中 4 次；去返共享剩余次数，同相位同目标至多命中一次。\n每枚投射物：闪电 19.58\n固有：闪电 28.80；附加：无；附加效用 1.60\n独立爆炸：火焰 16.20\n固有：火焰 16.20；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+						"initial_count": 5,
+						"mana": 10.92,
+						"packets": [
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"lightning": 19.584000000000003
+									},
+									"details": [
+										{
+											"base": 28.8,
+											"before_defense": 19.584000000000003,
+											"final": 19.584000000000003,
+											"increased": 0.0,
+											"modifiers": [
+												"support:volley",
+												"support:pierce"
+											],
+											"more": 0.68,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 19.584000000000003
+								},
+								"known_target_settlement": {
+									"components": {
+										"lightning": 19.584000000000003
+									},
+									"damage_total": 19.584000000000003,
+									"details": [
+										{
+											"base": 28.8,
+											"before_defense": 19.584000000000003,
+											"final": 19.584000000000003,
+											"increased": 0.0,
+											"modifiers": [
+												"support:volley",
+												"support:pierce"
+											],
+											"more": 0.68,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"health_lost": 19.584000000000003,
+									"mitigated_components": {
+										"lightning": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"lightning": 19.584000000000003
+									},
+									"reason": "",
+									"remaining_health": 293.916,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "每枚投射物",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 1.6,
+										"base_coefficient": 1.6,
+										"intrinsic": {
+											"lightning": 28.8
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"lightning": 28.8
+									},
+									"role": "projectile",
+									"skill_id": "bolt",
+									"tags": [
+										"hit",
+										"projectile",
+										"spell"
+									]
+								},
+								"resolved": {
+									"components": {
+										"lightning": 19.584000000000003
+									},
+									"details": [
+										{
+											"base": 28.8,
+											"before_defense": 19.584000000000003,
+											"final": 19.584000000000003,
+											"increased": 0.0,
+											"modifiers": [
+												"support:volley",
+												"support:pierce"
+											],
+											"more": 0.68,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 19.584000000000003
+								}
+							},
+							{
+								"active": false,
+								"known_target_resolved": {
+									"components": {
+										"fire": 12.149999999999999
+									},
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 12.149999999999999,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 12.149999999999999
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 12.149999999999999
+									},
+									"damage_total": 12.149999999999999,
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 12.149999999999999,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 12.149999999999999,
+									"mitigated_components": {
+										"fire": 4.050000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 16.2
+									},
+									"reason": "",
+									"remaining_health": 301.35,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "独立爆炸",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.0,
+										"base_coefficient": 0.9,
+										"intrinsic": {
+											"fire": 16.2
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 16.2
+									},
+									"role": "secondary",
+									"skill_id": "bolt",
+									"tags": [
+										"hit",
+										"area",
+										"secondary",
+										"explosion"
+									]
+								},
+								"resolved": {
+									"components": {
+										"fire": 16.2
+									},
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 16.2,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 16.2
+								}
+							}
+						],
+						"recipe": {
+							"_projectile_support_ids": [
+								"pierce"
+							],
+							"added_effectiveness": 1.6,
+							"coefficient": 1.6,
+							"damage_type": "lightning",
+							"initial_count": 5,
+							"pierce": 3,
+							"slow": 0.0,
+							"speed": 780.0,
+							"spread": 0.16
+						},
+						"summary": "命中预估（未计敌方防御）：每枚投射物 19.58",
+						"supports": [
+							"pierce",
+							"volley"
+						]
+					},
+					{
+						"cooldown": 0.8,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每枚投射物穿透 3 次，最多命中 4 次；去返共享剩余次数，同相位同目标至多命中一次。\n每枚投射物：闪电 30.60\n固有：闪电 28.80；附加：无；附加效用 1.60\n独立爆炸：火焰 16.20\n固有：火焰 16.20；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+						"initial_count": 3,
+						"mana": 10.08,
+						"packets": [
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"lightning": 30.6
+									},
+									"details": [
+										{
+											"base": 28.8,
+											"before_defense": 30.6,
+											"final": 30.6,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus",
+												"support:pierce"
+											],
+											"more": 1.0625,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 30.6
+								},
+								"known_target_settlement": {
+									"components": {
+										"lightning": 30.6
+									},
+									"damage_total": 30.6,
+									"details": [
+										{
+											"base": 28.8,
+											"before_defense": 30.6,
+											"final": 30.6,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus",
+												"support:pierce"
+											],
+											"more": 1.0625,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"health_lost": 30.6,
+									"mitigated_components": {
+										"lightning": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"lightning": 30.6
+									},
+									"reason": "",
+									"remaining_health": 282.9,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "每枚投射物",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 1.6,
+										"base_coefficient": 1.6,
+										"intrinsic": {
+											"lightning": 28.8
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"lightning": 28.8
+									},
+									"role": "projectile",
+									"skill_id": "bolt",
+									"tags": [
+										"hit",
+										"projectile",
+										"spell"
+									]
+								},
+								"resolved": {
+									"components": {
+										"lightning": 30.6
+									},
+									"details": [
+										{
+											"base": 28.8,
+											"before_defense": 30.6,
+											"final": 30.6,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus",
+												"support:pierce"
+											],
+											"more": 1.0625,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 30.6
+								}
+							},
+							{
+								"active": false,
+								"known_target_resolved": {
+									"components": {
+										"fire": 12.149999999999999
+									},
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 12.149999999999999,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 12.149999999999999
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 12.149999999999999
+									},
+									"damage_total": 12.149999999999999,
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 12.149999999999999,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 12.149999999999999,
+									"mitigated_components": {
+										"fire": 4.050000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 16.2
+									},
+									"reason": "",
+									"remaining_health": 301.35,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "独立爆炸",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.0,
+										"base_coefficient": 0.9,
+										"intrinsic": {
+											"fire": 16.2
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 16.2
+									},
+									"role": "secondary",
+									"skill_id": "bolt",
+									"tags": [
+										"hit",
+										"area",
+										"secondary",
+										"explosion"
+									]
+								},
+								"resolved": {
+									"components": {
+										"fire": 16.2
+									},
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 16.2,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 16.2
+								}
+							}
+						],
+						"recipe": {
+							"_projectile_support_ids": [
+								"pierce"
+							],
+							"added_effectiveness": 1.6,
+							"coefficient": 1.6,
+							"damage_type": "lightning",
+							"initial_count": 3,
+							"pierce": 3,
+							"slow": 0.0,
+							"speed": 780.0,
+							"spread": 0.16
+						},
+						"summary": "命中预估（未计敌方防御）：每枚投射物 30.60",
+						"supports": [
+							"focus",
+							"pierce"
 						]
 					}
 				]
@@ -14642,7 +17430,8 @@
 			"color": "#86edff",
 			"compatible_supports": [
 				"volley",
-				"focus"
+				"focus",
+				"pierce"
 			],
 			"cooldown": 4.0,
 			"description": "扇形发射五枚冰弹，造成 85% 伤害并减速 3 秒。",
@@ -15293,6 +18082,226 @@
 					},
 					{
 						"cooldown": 4.0,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每枚投射物穿透 4 次，最多命中 5 次；去返共享剩余次数，同相位同目标至多命中一次。\n每枚投射物：冰霜 18.78\n固有：冰霜 22.10；附加：无；附加效用 0.85\n独立爆炸：火焰 23.40\n固有：火焰 23.40；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+						"initial_count": 5,
+						"mana": 19.2,
+						"packets": [
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"cold": 18.784999999999997
+									},
+									"details": [
+										{
+											"base": 22.099999999999998,
+											"before_defense": 18.784999999999997,
+											"final": 18.784999999999997,
+											"increased": 0.0,
+											"modifiers": [
+												"support:pierce"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"total": 18.784999999999997
+								},
+								"known_target_settlement": {
+									"components": {
+										"cold": 18.784999999999997
+									},
+									"damage_total": 18.784999999999997,
+									"details": [
+										{
+											"base": 22.099999999999998,
+											"before_defense": 18.784999999999997,
+											"final": 18.784999999999997,
+											"increased": 0.0,
+											"modifiers": [
+												"support:pierce"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"health_lost": 18.784999999999997,
+									"mitigated_components": {
+										"cold": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"cold": 18.784999999999997
+									},
+									"reason": "",
+									"remaining_health": 294.71500000000003,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "每枚投射物",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.85,
+										"base_coefficient": 0.85,
+										"intrinsic": {
+											"cold": 22.099999999999998
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"cold": 22.099999999999998
+									},
+									"role": "projectile",
+									"skill_id": "frost",
+									"tags": [
+										"hit",
+										"projectile",
+										"spell"
+									]
+								},
+								"resolved": {
+									"components": {
+										"cold": 18.784999999999997
+									},
+									"details": [
+										{
+											"base": 22.099999999999998,
+											"before_defense": 18.784999999999997,
+											"final": 18.784999999999997,
+											"increased": 0.0,
+											"modifiers": [
+												"support:pierce"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"total": 18.784999999999997
+								}
+							},
+							{
+								"active": false,
+								"known_target_resolved": {
+									"components": {
+										"fire": 17.55
+									},
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 17.55
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 17.55
+									},
+									"damage_total": 17.55,
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 17.55,
+									"mitigated_components": {
+										"fire": 5.850000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 23.400000000000002
+									},
+									"reason": "",
+									"remaining_health": 295.95,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "独立爆炸",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.0,
+										"base_coefficient": 0.9,
+										"intrinsic": {
+											"fire": 23.400000000000002
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 23.400000000000002
+									},
+									"role": "secondary",
+									"skill_id": "frost",
+									"tags": [
+										"hit",
+										"area",
+										"secondary",
+										"explosion"
+									]
+								},
+								"resolved": {
+									"components": {
+										"fire": 23.400000000000002
+									},
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 23.400000000000002,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 23.400000000000002
+								}
+							}
+						],
+						"recipe": {
+							"_projectile_support_ids": [
+								"pierce"
+							],
+							"added_effectiveness": 0.85,
+							"coefficient": 0.85,
+							"damage_type": "cold",
+							"initial_count": 5,
+							"pierce": 4,
+							"slow": 3.0,
+							"speed": 520.0,
+							"spread": 0.14
+						},
+						"summary": "命中预估（未计敌方防御）：每枚投射物 18.78",
+						"supports": [
+							"pierce"
+						]
+					},
+					{
+						"cooldown": 4.0,
 						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每枚投射物：冰霜 22.10\n固有：冰霜 22.10；附加：无；附加效用 0.85\n独立爆炸：火焰 23.40\n固有：火焰 23.40；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
 						"initial_count": 7,
 						"mana": 24.96,
@@ -15510,6 +18519,454 @@
 						"supports": [
 							"focus",
 							"volley"
+						]
+					},
+					{
+						"cooldown": 4.0,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每枚投射物穿透 4 次，最多命中 5 次；去返共享剩余次数，同相位同目标至多命中一次。\n每枚投射物：冰霜 15.03\n固有：冰霜 22.10；附加：无；附加效用 0.85\n独立爆炸：火焰 23.40\n固有：火焰 23.40；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+						"initial_count": 7,
+						"mana": 24.96,
+						"packets": [
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"cold": 15.028
+									},
+									"details": [
+										{
+											"base": 22.099999999999998,
+											"before_defense": 15.028,
+											"final": 15.028,
+											"increased": 0.0,
+											"modifiers": [
+												"support:volley",
+												"support:pierce"
+											],
+											"more": 0.68,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"total": 15.028
+								},
+								"known_target_settlement": {
+									"components": {
+										"cold": 15.028
+									},
+									"damage_total": 15.028,
+									"details": [
+										{
+											"base": 22.099999999999998,
+											"before_defense": 15.028,
+											"final": 15.028,
+											"increased": 0.0,
+											"modifiers": [
+												"support:volley",
+												"support:pierce"
+											],
+											"more": 0.68,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"health_lost": 15.028,
+									"mitigated_components": {
+										"cold": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"cold": 15.028
+									},
+									"reason": "",
+									"remaining_health": 298.472,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "每枚投射物",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.85,
+										"base_coefficient": 0.85,
+										"intrinsic": {
+											"cold": 22.099999999999998
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"cold": 22.099999999999998
+									},
+									"role": "projectile",
+									"skill_id": "frost",
+									"tags": [
+										"hit",
+										"projectile",
+										"spell"
+									]
+								},
+								"resolved": {
+									"components": {
+										"cold": 15.028
+									},
+									"details": [
+										{
+											"base": 22.099999999999998,
+											"before_defense": 15.028,
+											"final": 15.028,
+											"increased": 0.0,
+											"modifiers": [
+												"support:volley",
+												"support:pierce"
+											],
+											"more": 0.68,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"total": 15.028
+								}
+							},
+							{
+								"active": false,
+								"known_target_resolved": {
+									"components": {
+										"fire": 17.55
+									},
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 17.55
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 17.55
+									},
+									"damage_total": 17.55,
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 17.55,
+									"mitigated_components": {
+										"fire": 5.850000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 23.400000000000002
+									},
+									"reason": "",
+									"remaining_health": 295.95,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "独立爆炸",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.0,
+										"base_coefficient": 0.9,
+										"intrinsic": {
+											"fire": 23.400000000000002
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 23.400000000000002
+									},
+									"role": "secondary",
+									"skill_id": "frost",
+									"tags": [
+										"hit",
+										"area",
+										"secondary",
+										"explosion"
+									]
+								},
+								"resolved": {
+									"components": {
+										"fire": 23.400000000000002
+									},
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 23.400000000000002,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 23.400000000000002
+								}
+							}
+						],
+						"recipe": {
+							"_projectile_support_ids": [
+								"pierce"
+							],
+							"added_effectiveness": 0.85,
+							"coefficient": 0.85,
+							"damage_type": "cold",
+							"initial_count": 7,
+							"pierce": 4,
+							"slow": 3.0,
+							"speed": 520.0,
+							"spread": 0.14
+						},
+						"summary": "命中预估（未计敌方防御）：每枚投射物 15.03",
+						"supports": [
+							"pierce",
+							"volley"
+						]
+					},
+					{
+						"cooldown": 4.0,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每枚投射物穿透 4 次，最多命中 5 次；去返共享剩余次数，同相位同目标至多命中一次。\n每枚投射物：冰霜 23.48\n固有：冰霜 22.10；附加：无；附加效用 0.85\n独立爆炸：火焰 23.40\n固有：火焰 23.40；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+						"initial_count": 5,
+						"mana": 23.04,
+						"packets": [
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"cold": 23.48125
+									},
+									"details": [
+										{
+											"base": 22.099999999999998,
+											"before_defense": 23.48125,
+											"final": 23.48125,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus",
+												"support:pierce"
+											],
+											"more": 1.0625,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"total": 23.48125
+								},
+								"known_target_settlement": {
+									"components": {
+										"cold": 23.48125
+									},
+									"damage_total": 23.48125,
+									"details": [
+										{
+											"base": 22.099999999999998,
+											"before_defense": 23.48125,
+											"final": 23.48125,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus",
+												"support:pierce"
+											],
+											"more": 1.0625,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"health_lost": 23.48125,
+									"mitigated_components": {
+										"cold": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"cold": 23.48125
+									},
+									"reason": "",
+									"remaining_health": 290.01875,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "每枚投射物",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.85,
+										"base_coefficient": 0.85,
+										"intrinsic": {
+											"cold": 22.099999999999998
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"cold": 22.099999999999998
+									},
+									"role": "projectile",
+									"skill_id": "frost",
+									"tags": [
+										"hit",
+										"projectile",
+										"spell"
+									]
+								},
+								"resolved": {
+									"components": {
+										"cold": 23.48125
+									},
+									"details": [
+										{
+											"base": 22.099999999999998,
+											"before_defense": 23.48125,
+											"final": 23.48125,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus",
+												"support:pierce"
+											],
+											"more": 1.0625,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"total": 23.48125
+								}
+							},
+							{
+								"active": false,
+								"known_target_resolved": {
+									"components": {
+										"fire": 17.55
+									},
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 17.55
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 17.55
+									},
+									"damage_total": 17.55,
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 17.55,
+									"mitigated_components": {
+										"fire": 5.850000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 23.400000000000002
+									},
+									"reason": "",
+									"remaining_health": 295.95,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "独立爆炸",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.0,
+										"base_coefficient": 0.9,
+										"intrinsic": {
+											"fire": 23.400000000000002
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 23.400000000000002
+									},
+									"role": "secondary",
+									"skill_id": "frost",
+									"tags": [
+										"hit",
+										"area",
+										"secondary",
+										"explosion"
+									]
+								},
+								"resolved": {
+									"components": {
+										"fire": 23.400000000000002
+									},
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 23.400000000000002,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 23.400000000000002
+								}
+							}
+						],
+						"recipe": {
+							"_projectile_support_ids": [
+								"pierce"
+							],
+							"added_effectiveness": 0.85,
+							"coefficient": 0.85,
+							"damage_type": "cold",
+							"initial_count": 5,
+							"pierce": 4,
+							"slow": 3.0,
+							"speed": 520.0,
+							"spread": 0.14
+						},
+						"summary": "命中预估（未计敌方防御）：每枚投射物 23.48",
+						"supports": [
+							"focus",
+							"pierce"
 						]
 					}
 				],
@@ -16216,6 +19673,244 @@
 					},
 					{
 						"cooldown": 4.0,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每枚投射物穿透 4 次，最多命中 5 次；去返共享剩余次数，同相位同目标至多命中一次。\n每枚投射物：冰霜 30.20\n固有：冰霜 18.70；附加：无；附加效用 0.85\n独立爆炸：火焰 29.70\n固有：火焰 19.80；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+						"initial_count": 5,
+						"mana": 19.2,
+						"packets": [
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"cold": 30.2005
+									},
+									"details": [
+										{
+											"base": 18.7,
+											"before_defense": 30.2005,
+											"final": 30.2005,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:pierce"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"total": 30.2005
+								},
+								"known_target_settlement": {
+									"components": {
+										"cold": 30.2005
+									},
+									"damage_total": 30.2005,
+									"details": [
+										{
+											"base": 18.7,
+											"before_defense": 30.2005,
+											"final": 30.2005,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:pierce"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"health_lost": 30.2005,
+									"mitigated_components": {
+										"cold": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"cold": 30.2005
+									},
+									"reason": "",
+									"remaining_health": 283.2995,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "每枚投射物",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.85,
+										"base_coefficient": 0.85,
+										"intrinsic": {
+											"cold": 18.7
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"cold": 18.7
+									},
+									"role": "projectile",
+									"skill_id": "frost",
+									"tags": [
+										"hit",
+										"projectile",
+										"spell"
+									]
+								},
+								"resolved": {
+									"components": {
+										"cold": 30.2005
+									},
+									"details": [
+										{
+											"base": 18.7,
+											"before_defense": 30.2005,
+											"final": 30.2005,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:pierce"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"total": 30.2005
+								}
+							},
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 22.275000000000002
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"damage_total": 22.275000000000002,
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 22.275000000000002,
+									"mitigated_components": {
+										"fire": 7.425000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 29.700000000000003
+									},
+									"reason": "",
+									"remaining_health": 291.225,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "独立爆炸",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.0,
+										"base_coefficient": 0.9,
+										"intrinsic": {
+											"fire": 19.8
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 19.8
+									},
+									"role": "secondary",
+									"skill_id": "frost",
+									"tags": [
+										"hit",
+										"area",
+										"secondary",
+										"explosion"
+									]
+								},
+								"resolved": {
+									"components": {
+										"fire": 29.700000000000003
+									},
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 29.700000000000003,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 29.700000000000003
+								}
+							}
+						],
+						"recipe": {
+							"_projectile_support_ids": [
+								"pierce"
+							],
+							"added_effectiveness": 0.85,
+							"coefficient": 0.85,
+							"damage_type": "cold",
+							"initial_count": 5,
+							"pierce": 4,
+							"slow": 3.0,
+							"speed": 520.0,
+							"spread": 0.14
+						},
+						"summary": "命中预估（未计敌方防御）：每枚投射物 30.20 / 独立爆炸 29.70",
+						"supports": [
+							"pierce"
+						]
+					},
+					{
+						"cooldown": 4.0,
 						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每枚投射物：冰霜 35.53\n固有：冰霜 18.70；附加：无；附加效用 0.85\n独立爆炸：火焰 29.70\n固有：火焰 19.80；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
 						"initial_count": 7,
 						"mana": 24.96,
@@ -16451,6 +20146,490 @@
 						"supports": [
 							"focus",
 							"volley"
+						]
+					},
+					{
+						"cooldown": 4.0,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每枚投射物穿透 4 次，最多命中 5 次；去返共享剩余次数，同相位同目标至多命中一次。\n每枚投射物：冰霜 24.16\n固有：冰霜 18.70；附加：无；附加效用 0.85\n独立爆炸：火焰 29.70\n固有：火焰 19.80；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+						"initial_count": 7,
+						"mana": 24.96,
+						"packets": [
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"cold": 24.160400000000003
+									},
+									"details": [
+										{
+											"base": 18.7,
+											"before_defense": 24.160400000000003,
+											"final": 24.160400000000003,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:volley",
+												"support:pierce"
+											],
+											"more": 0.68,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"total": 24.160400000000003
+								},
+								"known_target_settlement": {
+									"components": {
+										"cold": 24.160400000000003
+									},
+									"damage_total": 24.160400000000003,
+									"details": [
+										{
+											"base": 18.7,
+											"before_defense": 24.160400000000003,
+											"final": 24.160400000000003,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:volley",
+												"support:pierce"
+											],
+											"more": 0.68,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"health_lost": 24.160400000000003,
+									"mitigated_components": {
+										"cold": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"cold": 24.160400000000003
+									},
+									"reason": "",
+									"remaining_health": 289.3396,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "每枚投射物",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.85,
+										"base_coefficient": 0.85,
+										"intrinsic": {
+											"cold": 18.7
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"cold": 18.7
+									},
+									"role": "projectile",
+									"skill_id": "frost",
+									"tags": [
+										"hit",
+										"projectile",
+										"spell"
+									]
+								},
+								"resolved": {
+									"components": {
+										"cold": 24.160400000000003
+									},
+									"details": [
+										{
+											"base": 18.7,
+											"before_defense": 24.160400000000003,
+											"final": 24.160400000000003,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:volley",
+												"support:pierce"
+											],
+											"more": 0.68,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"total": 24.160400000000003
+								}
+							},
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 22.275000000000002
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"damage_total": 22.275000000000002,
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 22.275000000000002,
+									"mitigated_components": {
+										"fire": 7.425000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 29.700000000000003
+									},
+									"reason": "",
+									"remaining_health": 291.225,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "独立爆炸",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.0,
+										"base_coefficient": 0.9,
+										"intrinsic": {
+											"fire": 19.8
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 19.8
+									},
+									"role": "secondary",
+									"skill_id": "frost",
+									"tags": [
+										"hit",
+										"area",
+										"secondary",
+										"explosion"
+									]
+								},
+								"resolved": {
+									"components": {
+										"fire": 29.700000000000003
+									},
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 29.700000000000003,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 29.700000000000003
+								}
+							}
+						],
+						"recipe": {
+							"_projectile_support_ids": [
+								"pierce"
+							],
+							"added_effectiveness": 0.85,
+							"coefficient": 0.85,
+							"damage_type": "cold",
+							"initial_count": 7,
+							"pierce": 4,
+							"slow": 3.0,
+							"speed": 520.0,
+							"spread": 0.14
+						},
+						"summary": "命中预估（未计敌方防御）：每枚投射物 24.16 / 独立爆炸 29.70",
+						"supports": [
+							"pierce",
+							"volley"
+						]
+					},
+					{
+						"cooldown": 4.0,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每枚投射物穿透 4 次，最多命中 5 次；去返共享剩余次数，同相位同目标至多命中一次。\n每枚投射物：冰霜 37.75\n固有：冰霜 18.70；附加：无；附加效用 0.85\n独立爆炸：火焰 29.70\n固有：火焰 19.80；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+						"initial_count": 5,
+						"mana": 23.04,
+						"packets": [
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"cold": 37.750625
+									},
+									"details": [
+										{
+											"base": 18.7,
+											"before_defense": 37.750625,
+											"final": 37.750625,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:focus",
+												"support:pierce"
+											],
+											"more": 1.0625,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"total": 37.750625
+								},
+								"known_target_settlement": {
+									"components": {
+										"cold": 37.750625
+									},
+									"damage_total": 37.750625,
+									"details": [
+										{
+											"base": 18.7,
+											"before_defense": 37.750625,
+											"final": 37.750625,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:focus",
+												"support:pierce"
+											],
+											"more": 1.0625,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"health_lost": 37.750625,
+									"mitigated_components": {
+										"cold": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"cold": 37.750625
+									},
+									"reason": "",
+									"remaining_health": 275.749375,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "每枚投射物",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.85,
+										"base_coefficient": 0.85,
+										"intrinsic": {
+											"cold": 18.7
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"cold": 18.7
+									},
+									"role": "projectile",
+									"skill_id": "frost",
+									"tags": [
+										"hit",
+										"projectile",
+										"spell"
+									]
+								},
+								"resolved": {
+									"components": {
+										"cold": 37.750625
+									},
+									"details": [
+										{
+											"base": 18.7,
+											"before_defense": 37.750625,
+											"final": 37.750625,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:focus",
+												"support:pierce"
+											],
+											"more": 1.0625,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"total": 37.750625
+								}
+							},
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 22.275000000000002
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"damage_total": 22.275000000000002,
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 22.275000000000002,
+									"mitigated_components": {
+										"fire": 7.425000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 29.700000000000003
+									},
+									"reason": "",
+									"remaining_health": 291.225,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "独立爆炸",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.0,
+										"base_coefficient": 0.9,
+										"intrinsic": {
+											"fire": 19.8
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 19.8
+									},
+									"role": "secondary",
+									"skill_id": "frost",
+									"tags": [
+										"hit",
+										"area",
+										"secondary",
+										"explosion"
+									]
+								},
+								"resolved": {
+									"components": {
+										"fire": 29.700000000000003
+									},
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 29.700000000000003,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 29.700000000000003
+								}
+							}
+						],
+						"recipe": {
+							"_projectile_support_ids": [
+								"pierce"
+							],
+							"added_effectiveness": 0.85,
+							"coefficient": 0.85,
+							"damage_type": "cold",
+							"initial_count": 5,
+							"pierce": 4,
+							"slow": 3.0,
+							"speed": 520.0,
+							"spread": 0.14
+						},
+						"summary": "命中预估（未计敌方防御）：每枚投射物 37.75 / 独立爆炸 29.70",
+						"supports": [
+							"focus",
+							"pierce"
 						]
 					}
 				],
@@ -17100,6 +21279,226 @@
 					},
 					{
 						"cooldown": 4.0,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每枚投射物穿透 4 次，最多命中 5 次；去返共享剩余次数，同相位同目标至多命中一次。\n每枚投射物：冰霜 13.00\n固有：冰霜 15.30；附加：无；附加效用 0.85\n独立爆炸：火焰 16.20\n固有：火焰 16.20；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+						"initial_count": 5,
+						"mana": 19.2,
+						"packets": [
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"cold": 13.004999999999999
+									},
+									"details": [
+										{
+											"base": 15.299999999999999,
+											"before_defense": 13.004999999999999,
+											"final": 13.004999999999999,
+											"increased": 0.0,
+											"modifiers": [
+												"support:pierce"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"total": 13.004999999999999
+								},
+								"known_target_settlement": {
+									"components": {
+										"cold": 13.004999999999999
+									},
+									"damage_total": 13.004999999999999,
+									"details": [
+										{
+											"base": 15.299999999999999,
+											"before_defense": 13.004999999999999,
+											"final": 13.004999999999999,
+											"increased": 0.0,
+											"modifiers": [
+												"support:pierce"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"health_lost": 13.004999999999999,
+									"mitigated_components": {
+										"cold": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"cold": 13.004999999999999
+									},
+									"reason": "",
+									"remaining_health": 300.495,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "每枚投射物",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.85,
+										"base_coefficient": 0.85,
+										"intrinsic": {
+											"cold": 15.299999999999999
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"cold": 15.299999999999999
+									},
+									"role": "projectile",
+									"skill_id": "frost",
+									"tags": [
+										"hit",
+										"projectile",
+										"spell"
+									]
+								},
+								"resolved": {
+									"components": {
+										"cold": 13.004999999999999
+									},
+									"details": [
+										{
+											"base": 15.299999999999999,
+											"before_defense": 13.004999999999999,
+											"final": 13.004999999999999,
+											"increased": 0.0,
+											"modifiers": [
+												"support:pierce"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"total": 13.004999999999999
+								}
+							},
+							{
+								"active": false,
+								"known_target_resolved": {
+									"components": {
+										"fire": 12.149999999999999
+									},
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 12.149999999999999,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 12.149999999999999
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 12.149999999999999
+									},
+									"damage_total": 12.149999999999999,
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 12.149999999999999,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 12.149999999999999,
+									"mitigated_components": {
+										"fire": 4.050000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 16.2
+									},
+									"reason": "",
+									"remaining_health": 301.35,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "独立爆炸",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.0,
+										"base_coefficient": 0.9,
+										"intrinsic": {
+											"fire": 16.2
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 16.2
+									},
+									"role": "secondary",
+									"skill_id": "frost",
+									"tags": [
+										"hit",
+										"area",
+										"secondary",
+										"explosion"
+									]
+								},
+								"resolved": {
+									"components": {
+										"fire": 16.2
+									},
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 16.2,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 16.2
+								}
+							}
+						],
+						"recipe": {
+							"_projectile_support_ids": [
+								"pierce"
+							],
+							"added_effectiveness": 0.85,
+							"coefficient": 0.85,
+							"damage_type": "cold",
+							"initial_count": 5,
+							"pierce": 4,
+							"slow": 3.0,
+							"speed": 520.0,
+							"spread": 0.14
+						},
+						"summary": "命中预估（未计敌方防御）：每枚投射物 13.00",
+						"supports": [
+							"pierce"
+						]
+					},
+					{
+						"cooldown": 4.0,
 						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每枚投射物：冰霜 15.30\n固有：冰霜 15.30；附加：无；附加效用 0.85\n独立爆炸：火焰 16.20\n固有：火焰 16.20；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
 						"initial_count": 7,
 						"mana": 24.96,
@@ -17317,6 +21716,454 @@
 						"supports": [
 							"focus",
 							"volley"
+						]
+					},
+					{
+						"cooldown": 4.0,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每枚投射物穿透 4 次，最多命中 5 次；去返共享剩余次数，同相位同目标至多命中一次。\n每枚投射物：冰霜 10.40\n固有：冰霜 15.30；附加：无；附加效用 0.85\n独立爆炸：火焰 16.20\n固有：火焰 16.20；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+						"initial_count": 7,
+						"mana": 24.96,
+						"packets": [
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"cold": 10.404
+									},
+									"details": [
+										{
+											"base": 15.299999999999999,
+											"before_defense": 10.404,
+											"final": 10.404,
+											"increased": 0.0,
+											"modifiers": [
+												"support:volley",
+												"support:pierce"
+											],
+											"more": 0.68,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"total": 10.404
+								},
+								"known_target_settlement": {
+									"components": {
+										"cold": 10.404
+									},
+									"damage_total": 10.404,
+									"details": [
+										{
+											"base": 15.299999999999999,
+											"before_defense": 10.404,
+											"final": 10.404,
+											"increased": 0.0,
+											"modifiers": [
+												"support:volley",
+												"support:pierce"
+											],
+											"more": 0.68,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"health_lost": 10.404,
+									"mitigated_components": {
+										"cold": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"cold": 10.404
+									},
+									"reason": "",
+									"remaining_health": 303.096,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "每枚投射物",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.85,
+										"base_coefficient": 0.85,
+										"intrinsic": {
+											"cold": 15.299999999999999
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"cold": 15.299999999999999
+									},
+									"role": "projectile",
+									"skill_id": "frost",
+									"tags": [
+										"hit",
+										"projectile",
+										"spell"
+									]
+								},
+								"resolved": {
+									"components": {
+										"cold": 10.404
+									},
+									"details": [
+										{
+											"base": 15.299999999999999,
+											"before_defense": 10.404,
+											"final": 10.404,
+											"increased": 0.0,
+											"modifiers": [
+												"support:volley",
+												"support:pierce"
+											],
+											"more": 0.68,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"total": 10.404
+								}
+							},
+							{
+								"active": false,
+								"known_target_resolved": {
+									"components": {
+										"fire": 12.149999999999999
+									},
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 12.149999999999999,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 12.149999999999999
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 12.149999999999999
+									},
+									"damage_total": 12.149999999999999,
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 12.149999999999999,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 12.149999999999999,
+									"mitigated_components": {
+										"fire": 4.050000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 16.2
+									},
+									"reason": "",
+									"remaining_health": 301.35,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "独立爆炸",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.0,
+										"base_coefficient": 0.9,
+										"intrinsic": {
+											"fire": 16.2
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 16.2
+									},
+									"role": "secondary",
+									"skill_id": "frost",
+									"tags": [
+										"hit",
+										"area",
+										"secondary",
+										"explosion"
+									]
+								},
+								"resolved": {
+									"components": {
+										"fire": 16.2
+									},
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 16.2,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 16.2
+								}
+							}
+						],
+						"recipe": {
+							"_projectile_support_ids": [
+								"pierce"
+							],
+							"added_effectiveness": 0.85,
+							"coefficient": 0.85,
+							"damage_type": "cold",
+							"initial_count": 7,
+							"pierce": 4,
+							"slow": 3.0,
+							"speed": 520.0,
+							"spread": 0.14
+						},
+						"summary": "命中预估（未计敌方防御）：每枚投射物 10.40",
+						"supports": [
+							"pierce",
+							"volley"
+						]
+					},
+					{
+						"cooldown": 4.0,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每枚投射物穿透 4 次，最多命中 5 次；去返共享剩余次数，同相位同目标至多命中一次。\n每枚投射物：冰霜 16.26\n固有：冰霜 15.30；附加：无；附加效用 0.85\n独立爆炸：火焰 16.20\n固有：火焰 16.20；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+						"initial_count": 5,
+						"mana": 23.04,
+						"packets": [
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"cold": 16.256249999999998
+									},
+									"details": [
+										{
+											"base": 15.299999999999999,
+											"before_defense": 16.256249999999998,
+											"final": 16.256249999999998,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus",
+												"support:pierce"
+											],
+											"more": 1.0625,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"total": 16.256249999999998
+								},
+								"known_target_settlement": {
+									"components": {
+										"cold": 16.256249999999998
+									},
+									"damage_total": 16.256249999999998,
+									"details": [
+										{
+											"base": 15.299999999999999,
+											"before_defense": 16.256249999999998,
+											"final": 16.256249999999998,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus",
+												"support:pierce"
+											],
+											"more": 1.0625,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"health_lost": 16.256249999999998,
+									"mitigated_components": {
+										"cold": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"cold": 16.256249999999998
+									},
+									"reason": "",
+									"remaining_health": 297.24375,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "每枚投射物",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.85,
+										"base_coefficient": 0.85,
+										"intrinsic": {
+											"cold": 15.299999999999999
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"cold": 15.299999999999999
+									},
+									"role": "projectile",
+									"skill_id": "frost",
+									"tags": [
+										"hit",
+										"projectile",
+										"spell"
+									]
+								},
+								"resolved": {
+									"components": {
+										"cold": 16.256249999999998
+									},
+									"details": [
+										{
+											"base": 15.299999999999999,
+											"before_defense": 16.256249999999998,
+											"final": 16.256249999999998,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus",
+												"support:pierce"
+											],
+											"more": 1.0625,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"total": 16.256249999999998
+								}
+							},
+							{
+								"active": false,
+								"known_target_resolved": {
+									"components": {
+										"fire": 12.149999999999999
+									},
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 12.149999999999999,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 12.149999999999999
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 12.149999999999999
+									},
+									"damage_total": 12.149999999999999,
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 12.149999999999999,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 12.149999999999999,
+									"mitigated_components": {
+										"fire": 4.050000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 16.2
+									},
+									"reason": "",
+									"remaining_health": 301.35,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "独立爆炸",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.0,
+										"base_coefficient": 0.9,
+										"intrinsic": {
+											"fire": 16.2
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 16.2
+									},
+									"role": "secondary",
+									"skill_id": "frost",
+									"tags": [
+										"hit",
+										"area",
+										"secondary",
+										"explosion"
+									]
+								},
+								"resolved": {
+									"components": {
+										"fire": 16.2
+									},
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 16.2,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 16.2
+								}
+							}
+						],
+						"recipe": {
+							"_projectile_support_ids": [
+								"pierce"
+							],
+							"added_effectiveness": 0.85,
+							"coefficient": 0.85,
+							"damage_type": "cold",
+							"initial_count": 5,
+							"pierce": 4,
+							"slow": 3.0,
+							"speed": 520.0,
+							"spread": 0.14
+						},
+						"summary": "命中预估（未计敌方防御）：每枚投射物 16.26",
+						"supports": [
+							"focus",
+							"pierce"
 						]
 					}
 				],
@@ -17966,6 +22813,226 @@
 					},
 					{
 						"cooldown": 4.0,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每枚投射物穿透 4 次，最多命中 5 次；去返共享剩余次数，同相位同目标至多命中一次。\n每枚投射物：冰霜 13.00\n固有：冰霜 15.30；附加：无；附加效用 0.85\n独立爆炸：火焰 16.20\n固有：火焰 16.20；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+						"initial_count": 5,
+						"mana": 19.2,
+						"packets": [
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"cold": 13.004999999999999
+									},
+									"details": [
+										{
+											"base": 15.299999999999999,
+											"before_defense": 13.004999999999999,
+											"final": 13.004999999999999,
+											"increased": 0.0,
+											"modifiers": [
+												"support:pierce"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"total": 13.004999999999999
+								},
+								"known_target_settlement": {
+									"components": {
+										"cold": 13.004999999999999
+									},
+									"damage_total": 13.004999999999999,
+									"details": [
+										{
+											"base": 15.299999999999999,
+											"before_defense": 13.004999999999999,
+											"final": 13.004999999999999,
+											"increased": 0.0,
+											"modifiers": [
+												"support:pierce"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"health_lost": 13.004999999999999,
+									"mitigated_components": {
+										"cold": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"cold": 13.004999999999999
+									},
+									"reason": "",
+									"remaining_health": 300.495,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "每枚投射物",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.85,
+										"base_coefficient": 0.85,
+										"intrinsic": {
+											"cold": 15.299999999999999
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"cold": 15.299999999999999
+									},
+									"role": "projectile",
+									"skill_id": "frost",
+									"tags": [
+										"hit",
+										"projectile",
+										"spell"
+									]
+								},
+								"resolved": {
+									"components": {
+										"cold": 13.004999999999999
+									},
+									"details": [
+										{
+											"base": 15.299999999999999,
+											"before_defense": 13.004999999999999,
+											"final": 13.004999999999999,
+											"increased": 0.0,
+											"modifiers": [
+												"support:pierce"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"total": 13.004999999999999
+								}
+							},
+							{
+								"active": false,
+								"known_target_resolved": {
+									"components": {
+										"fire": 12.149999999999999
+									},
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 12.149999999999999,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 12.149999999999999
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 12.149999999999999
+									},
+									"damage_total": 12.149999999999999,
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 12.149999999999999,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 12.149999999999999,
+									"mitigated_components": {
+										"fire": 4.050000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 16.2
+									},
+									"reason": "",
+									"remaining_health": 301.35,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "独立爆炸",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.0,
+										"base_coefficient": 0.9,
+										"intrinsic": {
+											"fire": 16.2
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 16.2
+									},
+									"role": "secondary",
+									"skill_id": "frost",
+									"tags": [
+										"hit",
+										"area",
+										"secondary",
+										"explosion"
+									]
+								},
+								"resolved": {
+									"components": {
+										"fire": 16.2
+									},
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 16.2,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 16.2
+								}
+							}
+						],
+						"recipe": {
+							"_projectile_support_ids": [
+								"pierce"
+							],
+							"added_effectiveness": 0.85,
+							"coefficient": 0.85,
+							"damage_type": "cold",
+							"initial_count": 5,
+							"pierce": 4,
+							"slow": 3.0,
+							"speed": 520.0,
+							"spread": 0.14
+						},
+						"summary": "命中预估（未计敌方防御）：每枚投射物 13.00",
+						"supports": [
+							"pierce"
+						]
+					},
+					{
+						"cooldown": 4.0,
 						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每枚投射物：冰霜 15.30\n固有：冰霜 15.30；附加：无；附加效用 0.85\n独立爆炸：火焰 16.20\n固有：火焰 16.20；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
 						"initial_count": 7,
 						"mana": 24.96,
@@ -18183,6 +23250,454 @@
 						"supports": [
 							"focus",
 							"volley"
+						]
+					},
+					{
+						"cooldown": 4.0,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每枚投射物穿透 4 次，最多命中 5 次；去返共享剩余次数，同相位同目标至多命中一次。\n每枚投射物：冰霜 10.40\n固有：冰霜 15.30；附加：无；附加效用 0.85\n独立爆炸：火焰 16.20\n固有：火焰 16.20；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+						"initial_count": 7,
+						"mana": 24.96,
+						"packets": [
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"cold": 10.404
+									},
+									"details": [
+										{
+											"base": 15.299999999999999,
+											"before_defense": 10.404,
+											"final": 10.404,
+											"increased": 0.0,
+											"modifiers": [
+												"support:volley",
+												"support:pierce"
+											],
+											"more": 0.68,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"total": 10.404
+								},
+								"known_target_settlement": {
+									"components": {
+										"cold": 10.404
+									},
+									"damage_total": 10.404,
+									"details": [
+										{
+											"base": 15.299999999999999,
+											"before_defense": 10.404,
+											"final": 10.404,
+											"increased": 0.0,
+											"modifiers": [
+												"support:volley",
+												"support:pierce"
+											],
+											"more": 0.68,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"health_lost": 10.404,
+									"mitigated_components": {
+										"cold": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"cold": 10.404
+									},
+									"reason": "",
+									"remaining_health": 303.096,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "每枚投射物",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.85,
+										"base_coefficient": 0.85,
+										"intrinsic": {
+											"cold": 15.299999999999999
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"cold": 15.299999999999999
+									},
+									"role": "projectile",
+									"skill_id": "frost",
+									"tags": [
+										"hit",
+										"projectile",
+										"spell"
+									]
+								},
+								"resolved": {
+									"components": {
+										"cold": 10.404
+									},
+									"details": [
+										{
+											"base": 15.299999999999999,
+											"before_defense": 10.404,
+											"final": 10.404,
+											"increased": 0.0,
+											"modifiers": [
+												"support:volley",
+												"support:pierce"
+											],
+											"more": 0.68,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"total": 10.404
+								}
+							},
+							{
+								"active": false,
+								"known_target_resolved": {
+									"components": {
+										"fire": 12.149999999999999
+									},
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 12.149999999999999,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 12.149999999999999
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 12.149999999999999
+									},
+									"damage_total": 12.149999999999999,
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 12.149999999999999,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 12.149999999999999,
+									"mitigated_components": {
+										"fire": 4.050000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 16.2
+									},
+									"reason": "",
+									"remaining_health": 301.35,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "独立爆炸",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.0,
+										"base_coefficient": 0.9,
+										"intrinsic": {
+											"fire": 16.2
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 16.2
+									},
+									"role": "secondary",
+									"skill_id": "frost",
+									"tags": [
+										"hit",
+										"area",
+										"secondary",
+										"explosion"
+									]
+								},
+								"resolved": {
+									"components": {
+										"fire": 16.2
+									},
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 16.2,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 16.2
+								}
+							}
+						],
+						"recipe": {
+							"_projectile_support_ids": [
+								"pierce"
+							],
+							"added_effectiveness": 0.85,
+							"coefficient": 0.85,
+							"damage_type": "cold",
+							"initial_count": 7,
+							"pierce": 4,
+							"slow": 3.0,
+							"speed": 520.0,
+							"spread": 0.14
+						},
+						"summary": "命中预估（未计敌方防御）：每枚投射物 10.40",
+						"supports": [
+							"pierce",
+							"volley"
+						]
+					},
+					{
+						"cooldown": 4.0,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每枚投射物穿透 4 次，最多命中 5 次；去返共享剩余次数，同相位同目标至多命中一次。\n每枚投射物：冰霜 16.26\n固有：冰霜 15.30；附加：无；附加效用 0.85\n独立爆炸：火焰 16.20\n固有：火焰 16.20；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+						"initial_count": 5,
+						"mana": 23.04,
+						"packets": [
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"cold": 16.256249999999998
+									},
+									"details": [
+										{
+											"base": 15.299999999999999,
+											"before_defense": 16.256249999999998,
+											"final": 16.256249999999998,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus",
+												"support:pierce"
+											],
+											"more": 1.0625,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"total": 16.256249999999998
+								},
+								"known_target_settlement": {
+									"components": {
+										"cold": 16.256249999999998
+									},
+									"damage_total": 16.256249999999998,
+									"details": [
+										{
+											"base": 15.299999999999999,
+											"before_defense": 16.256249999999998,
+											"final": 16.256249999999998,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus",
+												"support:pierce"
+											],
+											"more": 1.0625,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"health_lost": 16.256249999999998,
+									"mitigated_components": {
+										"cold": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"cold": 16.256249999999998
+									},
+									"reason": "",
+									"remaining_health": 297.24375,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "每枚投射物",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.85,
+										"base_coefficient": 0.85,
+										"intrinsic": {
+											"cold": 15.299999999999999
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"cold": 15.299999999999999
+									},
+									"role": "projectile",
+									"skill_id": "frost",
+									"tags": [
+										"hit",
+										"projectile",
+										"spell"
+									]
+								},
+								"resolved": {
+									"components": {
+										"cold": 16.256249999999998
+									},
+									"details": [
+										{
+											"base": 15.299999999999999,
+											"before_defense": 16.256249999999998,
+											"final": 16.256249999999998,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus",
+												"support:pierce"
+											],
+											"more": 1.0625,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"total": 16.256249999999998
+								}
+							},
+							{
+								"active": false,
+								"known_target_resolved": {
+									"components": {
+										"fire": 12.149999999999999
+									},
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 12.149999999999999,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 12.149999999999999
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 12.149999999999999
+									},
+									"damage_total": 12.149999999999999,
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 12.149999999999999,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 12.149999999999999,
+									"mitigated_components": {
+										"fire": 4.050000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 16.2
+									},
+									"reason": "",
+									"remaining_health": 301.35,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "独立爆炸",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.0,
+										"base_coefficient": 0.9,
+										"intrinsic": {
+											"fire": 16.2
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 16.2
+									},
+									"role": "secondary",
+									"skill_id": "frost",
+									"tags": [
+										"hit",
+										"area",
+										"secondary",
+										"explosion"
+									]
+								},
+								"resolved": {
+									"components": {
+										"fire": 16.2
+									},
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 16.2,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 16.2
+								}
+							}
+						],
+						"recipe": {
+							"_projectile_support_ids": [
+								"pierce"
+							],
+							"added_effectiveness": 0.85,
+							"coefficient": 0.85,
+							"damage_type": "cold",
+							"initial_count": 5,
+							"pierce": 4,
+							"slow": 3.0,
+							"speed": 520.0,
+							"spread": 0.14
+						},
+						"summary": "命中预估（未计敌方防御）：每枚投射物 16.26",
+						"supports": [
+							"focus",
+							"pierce"
 						]
 					}
 				]
@@ -29315,6 +34830,32 @@
 			],
 			"requires": [
 				"projectile_hit"
+			]
+		},
+		"pierce": {
+			"description": "飞弹与冰霜穿透 +2；投射物命中伤害总降 15%；魔力消耗 ×1.20。龙卷无限穿透不适配；普攻与独立爆炸不变。",
+			"name": "贯穿辅助",
+			"operations": [
+				{
+					"op": "add_pierce",
+					"value": 2
+				},
+				{
+					"op": "projectile_hit_more",
+					"value": -0.15
+				},
+				{
+					"op": "mana_multiplier",
+					"value": 1.2
+				}
+			],
+			"requires": [
+				"finite_projectile_pierce",
+				"projectile_hit"
+			],
+			"skills": [
+				"bolt",
+				"frost"
 			]
 		},
 		"volley": {

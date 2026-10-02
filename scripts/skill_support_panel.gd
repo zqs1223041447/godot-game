@@ -6,7 +6,7 @@ signal feedback(message: String)
 
 const Emblem = preload("res://scripts/visuals/skill_emblem.gd")
 const TypedPreview = preload("res://scripts/combat/damage_preview.gd")
-const Supports = preload("res://scripts/combat/support_catalog.gd")
+const Supports = preload("res://scripts/combat/support_registry.gd")
 const PresentationTheme = preload("res://scripts/visuals/visual_theme.gd")
 const TEXT: Color = Color("3b281b")
 const MUTED: Color = Color("69523a")
@@ -44,6 +44,8 @@ func setup(state: BuildState) -> void:
 	_selected_label = _label("", "SelectedSupportSkill", 20, GOLD)
 	selected_copy.add_child(_selected_label)
 	_preview_label = _label("", "SupportCastPreview", 16, CYAN)
+	# The detailed cast breakdown must receive hover while still passing scroll.
+	_preview_label.mouse_filter = Control.MOUSE_FILTER_PASS
 	selected_copy.add_child(_preview_label)
 	_slot_caption = _label("", "SupportSlotCaption", 14, MUTED)
 	selected_copy.add_child(_slot_caption)
