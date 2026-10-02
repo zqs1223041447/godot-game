@@ -3,6 +3,7 @@ extends RefCounted
 ## Original scalable vector artwork. This layer only reads the simulation.
 const Monsters = preload("res://scripts/monsters/monster_catalog.gd")
 const Settings = preload("res://scripts/visuals/visual_settings.gd")
+const CueRenderer = preload("res://scripts/visuals/combat_cue_renderer.gd")
 
 static func polygon(canvas: CanvasItem, points: Array, color: Color) -> void:
 	canvas.draw_colored_polygon(PackedVector2Array(points), color)
@@ -32,6 +33,9 @@ static func draw_scene(arena: Node2D, preferences: Settings) -> void:
 		arena.draw_line(p+Vector2(0,-3),p+Vector2(0,3),Color.WHITE,1.5,true)
 	for ring: Dictionary in arena.rings:
 		draw_ring(arena,ring,preferences)
+	var cue_runtime: Variant = arena.get("visual_cues")
+	if cue_runtime != null:
+		CueRenderer.render(arena,cue_runtime.cues,preferences.effects_level,true)
 	# Stable ordering makes feet/shadows read as grounded figures.
 	var ordered: Array = arena.enemies.duplicate()
 	ordered.sort_custom(func(a: Dictionary,b: Dictionary) -> bool: return a.pos.y < b.pos.y)
@@ -40,6 +44,8 @@ static func draw_scene(arena: Node2D, preferences: Settings) -> void:
 	for shot: Dictionary in arena.projectiles:
 		draw_projectile(arena,shot,preferences)
 	draw_player(arena,preferences)
+	if cue_runtime != null:
+		CueRenderer.render(arena,cue_runtime.cues,preferences.effects_level,false)
 	if preferences.effects_level > 0:
 		var index: int = 0
 		for particle: Dictionary in arena.particles:
@@ -222,6 +228,13 @@ static func draw_enemy(arena: Node2D, enemy: Dictionary, preferences: Settings) 
 		elif rarity == "boss":
 			regular(arena,badge,8,3,tier,-PI/2)
 			regular(arena,badge,3,3,Color("171b1c"),-PI/2)
+	if float(enemy.slow)>0:
+		# Slow is an explicit six-arm glyph rather than a rarity-color replacement alone.
+		var status := p+Vector2(-r-7,0)
+		arena.draw_circle(status,6,Color("0e222b"))
+		for i: int in range(6):
+			var v := Vector2.RIGHT.rotated(i*TAU/6)
+			arena.draw_line(status,status+v*4.5,Color("a9e0ec"),1.2,true)
 	if not enemy.get("death_spawns",[]).is_empty():
 		for i: int in range(3):
 			regular(arena,p+Vector2((i-1)*6,r+9),2.5,4,tier,PI/4)
