@@ -12,6 +12,7 @@ const PLAYER_STATS: Array[String] = [
 	"global_increased", "projectile_increased", "elemental_increased", "area_increased",
 	"spell_increased", "fire_increased", "cold_increased", "lightning_increased",
 	"attack_elemental_increased", "attack_speed_increased", "move_speed_increased", "mana_regen_increased",
+	"attack_added_physical", "attack_added_fire", "spell_added_cold", "spell_added_lightning",
 ]
 const MONSTER_STATS: Array[String] = [
 	"damage", "max_health", "max_shield", "attack_speed", "move_speed", "shield_regen",
