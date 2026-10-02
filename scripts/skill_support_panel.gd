@@ -4,12 +4,13 @@ extends VBoxContainer
 
 signal feedback(message: String)
 
+const TypedPreview = preload("res://scripts/combat/damage_preview.gd")
 const Supports = preload("res://scripts/combat/support_catalog.gd")
 const PresentationTheme = preload("res://scripts/visuals/visual_theme.gd")
-const TEXT: Color = Color("eee9dd")
-const MUTED: Color = Color("a9b5b3")
-const CYAN: Color = Color("78d9ce")
-const GOLD: Color = Color("d9b779")
+const TEXT: Color = Color("eee2c7")
+const MUTED: Color = Color("b2aa94")
+const CYAN: Color = Color("b8c891")
+const GOLD: Color = Color("d8b577")
 const RED: Color = Color("f27786")
 
 var selected_skill_id: String = ""
@@ -82,9 +83,12 @@ func refresh() -> void:
 	if valid:
 		var count: int = int(cast.get("initial_count", 0))
 		_preview_label.text = "当前施放：%.2f 法力  ·  %.2f 秒冷却  ·  初始投射物 %d 枚" % [float(cast.get("mana", 0.0)), float(cast.get("cooldown", 0.0)), count]
+		_preview_label.text += "\n" + TypedPreview.summary(cast)
+		_preview_label.tooltip_text = TypedPreview.details(cast)
 		_preview_label.add_theme_color_override("font_color", CYAN)
 	else:
 		_preview_label.text = "无法施放：%s" % str(cast.get("error", "技能编译失败"))
+		_preview_label.tooltip_text = str(cast.get("error", "技能编译失败"))
 		_preview_label.add_theme_color_override("font_color", RED)
 	for support_id: String in _add_buttons:
 		var reason: String = _state.support_reason(selected_skill_id, support_id)
@@ -177,5 +181,5 @@ func _button(text: String, stable_name: String) -> Button:
 func _card() -> PanelContainer:
 	var result: PanelContainer = PanelContainer.new()
 	result.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	result.add_theme_stylebox_override("panel", PresentationTheme.panel(Color("243130"), Color("455754")))
+	result.add_theme_stylebox_override("panel", PresentationTheme.panel(Color("3b382a"), Color("827354")))
 	return result

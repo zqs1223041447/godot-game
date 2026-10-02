@@ -79,8 +79,11 @@ func _ready() -> void:
 	hud.setup(self)
 	_ready_complete = true
 	restart_run()
-	if state.migrated_from_v1 or state.migrated_from_v2 or state.migrated_from_v3 or state.migrated_from_v4:
-		hud.open_panel("talents" if state.migrated_from_v1 else "skills" if state.migrated_from_v4 else "inventory" if state.migrated_from_v3 else "combat")
+	if not state.last_load_error.is_empty():
+		hud.open_panel("pause")
+		hud.notify(state.last_load_error)
+	elif state.migrated_from_v1 or state.migrated_from_v2 or state.migrated_from_v3 or state.migrated_from_v4 or state.migrated_from_v5:
+		hud.open_panel("talents" if state.migrated_from_v1 else "skills" if state.migrated_from_v4 or state.migrated_from_v5 else "inventory" if state.migrated_from_v3 else "combat")
 		hud.notify(state.migration_message)
 	else:
 		hud.notify("F7 怪物机制与分裂试验 · F6 龙卷组合 · T 天赋星图")
@@ -119,7 +122,7 @@ func _on_build_changed() -> void:
 func save_build() -> bool:
 	var error: Error = state.save_build()
 	if error != OK and is_instance_valid(hud):
-		hud.notify("存档失败，请检查保存目录的写入权限")
+		hud.notify(state.save_block_reason() if not state.save_block_reason().is_empty() else "存档失败，请检查保存目录的写入权限")
 	return error == OK
 
 
@@ -451,21 +454,26 @@ func _update_auto_attack() -> void:
 	if not manual and (not auto_fire or _nearest_enemy(player_pos).is_empty()):
 		return
 	player_facing = _aim_direction()
-	_shoot(player_pos, player_facing, float(_stats.damage), Color("75e5df"), 0, 0, 640.0)
-	attack_timer = 1.0 / maxf(0.2, float(_stats.attack_speed))
-
-
-func _shoot(origin: Vector2, direction: Vector2, damage: float, color: Color,
-		pierce: int = 0, slow: float = 0.0, speed: float = 600.0,
-		skill_id: String = "basic", damage_type: String = "physical", context: Dictionary = {}) -> void:
-	if projectiles.size() >= MAX_PROJECTILES:
+	var snapshot: Dictionary = state.get_combat_snapshot()
+	var packet: Dictionary = Combat.event_packet(snapshot, "basic", "projectile")
+	var secondary: Dictionary = Combat.secondary_packet(snapshot, "basic")
+	if packet.is_empty() or secondary.is_empty():
 		return
+	# Basic attacks share typed assembly, while remaining outside support eligibility.
+	snapshot["compiled_skill_id"] = "basic"
+	snapshot["compiled_packets"] = {"projectile": packet.duplicate(true), "secondary": secondary}
+	if _shoot(player_pos, player_facing, packet, Color("75e5df"), 0, 0, 640.0, {"snapshot": snapshot}):
+		attack_timer = 1.0 / maxf(0.2, float(_stats.attack_speed))
+
+
+func _shoot(origin: Vector2, direction: Vector2, packet: Dictionary, color: Color,
+		pierce: int = 0, slow: float = 0.0, speed: float = 600.0, context: Dictionary = {}) -> bool:
+	if projectiles.size() >= MAX_PROJECTILES or packet.is_empty():
+		return false
 	var snapshot: Dictionary = context["snapshot"] if context.has("snapshot") else state.get_combat_snapshot()
 	var cast_id: int = int(context.get("cast_id", 0))
 	if cast_id == 0:
 		cast_id = projectile_runtime.new_cast()
-	var packet: Dictionary = Damage.packet({damage_type: damage},
-		["hit", "projectile", "attack" if skill_id == "basic" else "spell"], skill_id)
 	var spec: Dictionary = {"speed": speed, "range": 650.0, "lifetime": 1.7,
 		"pierce": pierce, "slow": slow}
 	projectiles.append(projectile_runtime.make_projectile(origin + direction * 19.0, direction,
@@ -473,6 +481,7 @@ func _shoot(origin: Vector2, direction: Vector2, damage: float, color: Color,
 	total_shots += 1
 	for i: int in range(3):
 		_add_particle(origin + direction * 20.0, direction.rotated(rng.randf_range(-0.6, 0.6)) * rng.randf_range(20, 90), color, 2.2, 0.16)
+	return true
 
 
 func cast_skill(index: int) -> bool:
@@ -501,7 +510,6 @@ func cast_skill(index: int) -> bool:
 	mana -= mana_cost
 	cooldowns[id] = float(compiled.cooldown)
 	player_facing = _aim_direction()
-	var damage: float = float(compiled.snapshot.base_damage)
 	var color: Color = skill.color
 	var context: Dictionary = {"snapshot": compiled.snapshot, "cast_id": 0 if id == "tornado" else projectile_runtime.new_cast()}
 	match id:
@@ -517,10 +525,10 @@ func cast_skill(index: int) -> bool:
 			var recipe: Dictionary = compiled.recipe
 			for shot_index: int in range(int(compiled.initial_count)):
 				var angle: float = (shot_index - (int(compiled.initial_count) - 1) * 0.5) * float(recipe.spread)
-				_shoot(player_pos, player_facing.rotated(angle), damage * float(recipe.coefficient), color,
-					int(recipe.pierce), float(recipe.slow), float(recipe.speed), id, str(recipe.damage_type), context)
+				_shoot(player_pos, player_facing.rotated(angle), compiled.packets.projectile, color,
+					int(recipe.pierce), float(recipe.slow), float(recipe.speed), context)
 		"nova":
-			_area_damage(player_pos, 155.0, damage * 2.7, color, 0.6, "nova", "lightning", context.snapshot)
+			_area_damage(player_pos, 155.0, compiled.packets.direct, color, 0.6, context.snapshot)
 			visual_cues.emit_cue("nova", player_pos, {"radius": 155.0, "color": color})
 		"dash":
 			var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -541,7 +549,7 @@ func cast_skill(index: int) -> bool:
 		"meteor":
 			var target: Dictionary = _nearest_enemy(player_pos, 700.0)
 			var target_pos: Vector2 = Vector2(target.pos) if not target.is_empty() else _clamp_to_arena(player_pos + player_facing * 220.0, 20.0)
-			_area_damage(target_pos, 110.0, damage * 4.3, color, 0.0, "meteor", "fire", context.snapshot)
+			_area_damage(target_pos, 110.0, compiled.packets.direct, color, 0.0, context.snapshot)
 			visual_cues.emit_cue("meteor", target_pos, {"radius": 110.0, "color": color})
 			for i: int in range(32):
 				_add_particle(target_pos, Vector2.RIGHT.rotated(rng.randf() * TAU) * rng.randf_range(70, 270), color, rng.randf_range(3, 7), 0.6)
@@ -549,7 +557,7 @@ func cast_skill(index: int) -> bool:
 		"chain":
 			var origin: Vector2 = player_pos
 			var excluded: Array[int] = []
-			for i: int in range(5):
+			for i: int in range(compiled.packets.bounces.size()):
 				var target: Dictionary = _nearest_enemy(origin, 600.0 if i == 0 else 220.0, excluded)
 				if target.is_empty():
 					break
@@ -558,17 +566,18 @@ func cast_skill(index: int) -> bool:
 				visual_cues.emit_cue("chain", origin, {"destination": end, "target_id": int(target.id), "color": color})
 				for step: int in range(12):
 					_add_particle(origin.lerp(end, step / 12.0) + Vector2(rng.randf_range(-4, 4), rng.randf_range(-4, 4)), Vector2.ZERO, color, 3.0, 0.25)
-				_apply_damage_packet(target, Damage.packet({"lightning": damage * (2.2 - i * 0.2)}, ["hit", "spell", "chain"], id), context.snapshot, color, 0.35)
+				_apply_damage_packet(target, compiled.packets.bounces[i], context.snapshot, color, 0.35, {"cast_id": context.cast_id})
 				origin = end
 	if id in ["tornado", "bolt", "frost"]:
 		visual_cues.emit_cue("cast", player_pos, {"direction": player_facing, "skill": id, "color": color})
 	return true
 
 
-func _area_damage(origin: Vector2, radius: float, damage: float, color: Color, slow: float,
-		skill_id: String = "nova", type: String = "lightning", snapshot: Dictionary = {}) -> void:
+func _area_damage(origin: Vector2, radius: float, packet: Dictionary, color: Color, slow: float,
+		snapshot: Dictionary = {}) -> void:
+	if packet.is_empty():
+		return
 	var cast_snapshot: Dictionary = state.get_combat_snapshot() if snapshot.is_empty() else snapshot
-	var packet: Dictionary = Damage.packet({type: damage}, ["hit", "spell", "area"], skill_id)
 	for enemy: Dictionary in enemies:
 		if float(enemy.health) > 0.0 and float(enemy.spawn) <= 0.0 and origin.distance_to(Vector2(enemy.pos)) <= radius + float(enemy.radius):
 			_apply_damage_packet(enemy, packet, cast_snapshot, color, slow)
@@ -615,6 +624,7 @@ func _apply_damage_packet(enemy: Dictionary, packet: Dictionary, snapshot: Dicti
 	var result: Dictionary = Damage.resolve(packet, snapshot.get("modifiers", []), enemy.get("resistances", {}))
 	var record: Dictionary = {"target_id": enemy.id, "skill_id": packet.skill_id, "tags": packet.tags.duplicate(),
 		"components": result.components, "details": result.details, "total": result.total,
+		"assembly": packet.get("assembly", {}).duplicate(true),
 		"projectile_id": provenance.get("projectile_id", 0), "cast_id": provenance.get("cast_id", 0),
 		"phase": provenance.get("phase", "direct"), "effect_id": provenance.get("effect_id", "")}
 	damage_trace.append(record)
@@ -636,7 +646,8 @@ func combat_preview() -> Dictionary:
 	var compiled: Dictionary = state.get_skill_cast("tornado")
 	var snapshot: Dictionary = compiled.get("snapshot", state.get_combat_snapshot())
 	var result: Dictionary = {"snapshot": snapshot, "count": int(compiled.get("initial_count", 0)),
-		"mana": float(compiled.get("mana", 0.0)), "supports": compiled.get("support_ids", [])}
+		"mana": float(compiled.get("mana", 0.0)), "supports": compiled.get("support_ids", []),
+		"packets": compiled.get("packets", {})}
 	for role: String in ["parent", "child", "explosion"]:
 		result[role] = Damage.resolve(Combat.tornado_packet(snapshot, role), snapshot.modifiers)
 	return result
@@ -686,7 +697,7 @@ func _award_kill_equipment(enemy: Dictionary) -> void:
 	# Exactly one decision per eligible root death. Descendants/demo never enter here.
 	var rarity: String = "rare" if enemy.get("rarity", "") in ["rare", "boss"] else ""
 	var item_level: int = clampi(wave * 2 - 1, 1, 30)
-	var item_id: String = state.award_equipment(rng, item_level, rarity)
+	var item_id: String = state.award_equipment(rng, item_level, rarity, "loot")
 	if item_id.is_empty():
 		hud.notify("背包保留空间不足，无法领取新装备；已有物品完整保留，可在 I 中清理随机装备")
 		return

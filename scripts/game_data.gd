@@ -17,7 +17,7 @@ const SKILLS: Dictionary = {
 		"description": "发射三枚穿透飞弹，每枚造成 160% 伤害。", "mana": 7.0,
 		"cooldown": 0.8, "color": Color("76c9ff"),
 		"capabilities": ["initial_projectiles", "projectile_hit"],
-		"projectile_recipe": {"initial_count": 3, "spread": 0.16, "coefficient": 1.6,
+		"projectile_recipe": {"initial_count": 3, "spread": 0.16, "coefficient": 1.6, "added_effectiveness": 1.6,
 			"pierce": 1, "slow": 0.0, "speed": 780.0, "damage_type": "lightning"},
 	},
 	"frost": {
@@ -25,7 +25,7 @@ const SKILLS: Dictionary = {
 		"description": "扇形发射五枚冰弹，造成 85% 伤害并减速 3 秒。", "mana": 16.0,
 		"cooldown": 4.0, "color": Color("86edff"),
 		"capabilities": ["initial_projectiles", "projectile_hit"],
-		"projectile_recipe": {"initial_count": 5, "spread": 0.14, "coefficient": 0.85,
+		"projectile_recipe": {"initial_count": 5, "spread": 0.14, "coefficient": 0.85, "added_effectiveness": 0.85,
 			"pierce": 2, "slow": 3.0, "speed": 520.0, "damage_type": "cold"},
 	},
 	"nova": {
@@ -33,6 +33,7 @@ const SKILLS: Dictionary = {
 		"description": "引爆周围 155 范围的奥能，造成 270% 伤害并击退。", "mana": 24.0,
 		"cooldown": 6.0, "color": Color("c89bff"),
 		"capabilities": ["area_hit"],
+		"hit_recipe": {"base_coefficient": 2.7, "added_effectiveness": 2.7, "damage_type": "lightning"},
 	},
 	"dash": {
 		"name": "闪光冲刺", "short_name": "冲刺", "icon": "IV",
@@ -51,12 +52,16 @@ const SKILLS: Dictionary = {
 		"description": "在最近敌人处引爆陨星，造成 430% 范围伤害。", "mana": 32.0,
 		"cooldown": 8.0, "color": Color("ff9778"),
 		"capabilities": ["area_hit"],
+		"hit_recipe": {"base_coefficient": 4.3, "added_effectiveness": 4.3, "damage_type": "fire"},
 	},
 	"chain": {
 		"name": "连锁闪电", "short_name": "闪电", "icon": "VII",
 		"description": "闪电弹跳最多五个敌人，伤害从 220% 逐次递减。", "mana": 22.0,
 		"cooldown": 4.5, "color": Color("ffeb88"),
 		"capabilities": ["chain_hit"],
+		"hit_recipe": {"base_coefficient": 2.2, "base_coefficient_loss_per_bounce": 0.2,
+			"added_effectiveness": 2.2, "added_effectiveness_loss_per_bounce": 0.2,
+			"bounce_count": 5, "damage_type": "lightning"},
 	},
 }
 

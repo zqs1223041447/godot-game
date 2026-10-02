@@ -2,23 +2,25 @@ class_name GameHUD
 extends CanvasLayer
 ## Responsive, keyboard-friendly combat HUD and live build editor.
 
+const TypedPreview = preload("res://scripts/combat/damage_preview.gd")
 const PassivePanel = preload("res://scripts/passive_panel.gd")
 const InventoryPanelView = preload("res://scripts/inventory_panel.gd")
 const SkillSupportPanelView = preload("res://scripts/skill_support_panel.gd")
 const Passives = preload("res://scripts/passive_data.gd")
 const PresentationTheme = preload("res://scripts/visuals/visual_theme.gd")
 const Emblem = preload("res://scripts/visuals/skill_emblem.gd")
+const Palette = preload("res://scripts/visuals/fantasy_palette.gd")
 
-const INK: Color = Color("0b1517")
-const PANEL: Color = Color("152122")
-const PANEL_LIGHT: Color = Color("243130")
-const BORDER: Color = Color("455754")
-const TEXT: Color = Color("eee9dd")
-const MUTED: Color = Color("a9b5b3")
-const CYAN: Color = Color("78d9ce")
-const GOLD: Color = Color("d9b779")
-const RED: Color = Color("f27786")
-const BLUE: Color = Color("729eea")
+const INK: Color = Color("161a14")
+const PANEL: Color = Color("29291f")
+const PANEL_LIGHT: Color = Color("3b382a")
+const BORDER: Color = Color("827354")
+const TEXT: Color = Color("eee2c7")
+const MUTED: Color = Color("b2aa94")
+const CYAN: Color = Color("b8c891")
+const GOLD: Color = Color("d8b577")
+const RED: Color = Color("c67865")
+const BLUE: Color = Color("839cb4")
 const STAT_NAMES: Dictionary = {
 	"max_health": "生命上限", "max_mana": "法力上限", "max_shield": "护盾上限",
 	"shield": "护盾上限", "damage": "伤害", "damage_mult": "伤害倍率",
@@ -130,6 +132,11 @@ func notify(message: String) -> void:
 	if _toast_label == null:
 		return
 	if is_blocking():
+		if _state != null and not _state.save_block_reason().is_empty():
+			_panel_footer.text = "原存档已保护，本次进度未写入；请先备份并恢复有效存档"
+			_panel_footer.tooltip_text = _state.save_block_reason() + "\n" + message
+			_panel_footer.add_theme_color_override("font_color", GOLD)
+			return
 		_panel_footer.text = message
 		_panel_footer.add_theme_color_override("font_color", CYAN)
 		return
@@ -162,7 +169,7 @@ func _make_theme() -> Theme:
 	return PresentationTheme.create_theme()
 
 
-func _style(bg: Color, line: Color, radius: int = 8, border: int = 1) -> StyleBoxFlat:
+func _style(bg: Color, line: Color, radius: int = 8, border: int = 1) -> StyleBox:
 	return PresentationTheme.panel(bg, line, mini(radius, 7), border, 12)
 
 
@@ -195,7 +202,7 @@ func _button(text: String, stable_name: String, callback: Callable, width: float
 
 func _accent_button(button: Button, accent: Color = CYAN) -> void:
 	button.add_theme_color_override("font_color", accent)
-	button.add_theme_stylebox_override("normal", _style(Color("18313d"), accent.darkened(0.4), 8, 1))
+	button.add_theme_stylebox_override("normal", _style(Color("414430"), accent.darkened(0.4), 8, 1))
 
 
 func _place(control: Control, rect: Rect2, preset: int = Control.PRESET_TOP_LEFT) -> void:
@@ -211,7 +218,7 @@ func _build_status() -> void:
 	var panel: PanelContainer = PanelContainer.new()
 	panel.name = "RunStatus"
 	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	panel.add_theme_stylebox_override("panel", _style(Color(0.035, 0.065, 0.105, 0.92), BORDER, 10, 1))
+	panel.add_theme_stylebox_override("panel", _style(Color(0.13, 0.14, 0.10, 0.97), BORDER, 10, 1))
 	_place(panel, Rect2(20, 18, 294, 88))
 	var box: VBoxContainer = VBoxContainer.new()
 	box.add_theme_constant_override("separation", 4)
@@ -278,7 +285,7 @@ func _add_vital(parent: VBoxContainer, key: String, caption: String, color: Colo
 	bar.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	bar.show_percentage = false
 	bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	var fill: StyleBoxFlat = _style(color.darkened(0.17), color, 4, 0)
+	var fill: StyleBox = _style(color.darkened(0.17), color, 4, 0)
 	bar.add_theme_stylebox_override("fill", fill)
 	holder.add_child(bar)
 	var value: Label = _label("0 / 0", 13, Color.WHITE)
@@ -316,7 +323,7 @@ func _build_hotbar() -> void:
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		button.add_theme_font_size_override("font_size", 12)
 		for style_name: String in ["normal", "hover", "pressed", "disabled"]:
-			var frame: StyleBoxFlat = _root.theme.get_stylebox(style_name,"Button").duplicate()
+			var frame: StyleBox = _root.theme.get_stylebox(style_name,"Button").duplicate()
 			frame.content_margin_top = 39
 			frame.content_margin_bottom = 5
 			frame.content_margin_left = 5
@@ -355,7 +362,7 @@ func _build_toast() -> void:
 	_toast = PanelContainer.new()
 	_toast.name = "NotificationToast"
 	_toast.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_toast.add_theme_stylebox_override("panel", _style(Color("17313d"), CYAN.darkened(0.5), 8, 1))
+	_toast.add_theme_stylebox_override("panel", _style(Color("41402c"), CYAN.darkened(0.5), 8, 1))
 	_place(_toast, Rect2(-310, 132, 620, 49), Control.PRESET_CENTER_TOP)
 	_toast_label = _label("", 17, CYAN)
 	_toast_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -372,7 +379,7 @@ func _build_modal() -> void:
 	_root.add_child(_modal)
 	var shade: ColorRect = ColorRect.new()
 	shade.name = "ModalShade"
-	shade.color = Color(0.018, 0.029, 0.045, 0.86)
+	shade.color = Color(0.08, 0.09, 0.065, 0.84)
 	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	shade.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_modal.add_child(shade)
@@ -387,7 +394,7 @@ func _build_modal() -> void:
 	_modal.add_child(margin)
 	var panel: PanelContainer = PanelContainer.new()
 	panel.name = "BuildPanel"
-	var style: StyleBoxFlat = _style(PANEL, BORDER.lightened(0.12), 16, 1)
+	var style: StyleBox = _style(PANEL, BORDER.lightened(0.12), 16, 1)
 	style.content_margin_left = 18
 	style.content_margin_right = 18
 	style.content_margin_top = 16
@@ -467,10 +474,12 @@ func _update_live() -> void:
 		button.tooltip_text = "%s\n基础技能：%s\n当前消耗 %.2f 法力 · 冷却 %.2f 秒" % [str(skill.get("name", id)), str(skill.get("description", "")), mana_cost, float(cast.get("cooldown", 0.0))]
 		if int(cast.get("initial_count", 0)) > 0:
 			button.tooltip_text += "\n当前初始投射物：%d 枚" % int(cast.initial_count)
+		if valid_cast:
+			button.tooltip_text += "\n" + TypedPreview.summary(cast) + "\n" + TypedPreview.details(cast)
 		if not valid_cast:
 			button.text = "%s\n配置无效" % str(skill.get("short_name", id))
 			button.tooltip_text = "%s\n无法施放：%s" % [str(skill.get("name", id)), str(cast.get("error", "技能编译失败"))]
-		var tint: Color = skill.get("color", CYAN) as Color
+		var tint: Color = Palette.skill(id,skill.get("color", CYAN) as Color)
 		var emblem: Control = _skill_emblems[index]
 		emblem.skill_id = id
 		emblem.accent = tint
@@ -531,6 +540,12 @@ func _rebuild_panel() -> void:
 			_build_pause_panel()
 		"death":
 			_build_death_panel()
+	if not _state.save_block_reason().is_empty():
+		_panel_footer.text = "原存档已保护，本次进度未写入；请先备份并恢复有效存档"
+		_panel_footer.tooltip_text = _state.save_block_reason()
+		_panel_footer.add_theme_color_override("font_color", GOLD)
+	else:
+		_panel_footer.tooltip_text = ""
 	PresentationTheme.apply_font_scale(_root, _preferences.font_scale)
 
 
@@ -682,11 +697,15 @@ func _build_combat_panel() -> void:
 	toggles.add_child(_button("母箭数量：%d" % int(preview.count), "ToggleProjectileCount", _toggle_combat_item.bind("prism_bow"), 200))
 	_panel_body.add_child(_wrap_label("按钮实际穿戴或卸下对应装备，并自动保存。仅爆炸：射程处爆炸；仅返回：返回后寿命结束消失；两者都有：返回后寿命结束爆炸。", 14))
 	_section("02  当前构筑的逐分量伤害", "未计敌人抗性 · 非每秒伤害")
-	_panel_body.add_child(_wrap_label("基础伤害 %.1f；全局提高 %.0f%%，投射物提高 %.0f%%，元素提高 %.0f%%。同一分量适用的“提高”先相加。" % [float(snapshot.base_damage), float(_state.get_stats().global_increased) * 100.0, float(_state.get_stats().projectile_increased) * 100.0, float(_state.get_stats().elemental_increased) * 100.0], 15, TEXT))
+	_panel_body.add_child(_wrap_label("通用基础伤害 %.1f；全局提高 %.0f%%，投射物提高 %.0f%%，元素提高 %.0f%%。同一分量适用的“提高”先相加。" % [float(snapshot.base_damage), float(_state.get_stats().global_increased) * 100.0, float(_state.get_stats().projectile_increased) * 100.0, float(_state.get_stats().elemental_increased) * 100.0], 15, TEXT))
 	for role: String in ["parent", "child", "explosion"]:
 		var result: Dictionary = preview[role]
 		var title: String = {"parent": "母箭：攻击 / 投射物击中", "child": "子箭：攻击 / 投射物击中", "explosion": "爆炸：次级 / 范围击中（不属于投射物伤害）"}[role]
 		var details: PackedStringArray = []
+		var packet_role: String = "secondary" if role == "explosion" else role
+		var packet: Dictionary = preview.get("packets", {}).get(packet_role, {})
+		if not packet.is_empty():
+			details.append(TypedPreview.assembly_line(packet))
 		for part: Dictionary in result.details:
 			var type_name: String = {"physical": "物理", "fire": "火焰", "cold": "冰冷", "lightning": "闪电", "chaos": "混沌"}.get(part.type, part.type)
 			details.append("%s %.2f × (1 + %.0f%%) × %.2f = %.2f" % [type_name, float(part.base), float(part.increased) * 100.0, float(part.more), float(part.final)])
@@ -783,7 +802,7 @@ func _build_pause_panel() -> void:
 	actions.add_child(resume)
 	actions.add_child(_button("显示设置", "VisualSettingsButton", open_panel.bind("settings"), 150))
 	actions.add_child(_button("重新开始", "RestartButton", _restart, 150))
-	actions.add_child(_button("保存并退出", "ExitButton", _exit_game, 180))
+	actions.add_child(_button("退出（未保存）" if not _state.save_block_reason().is_empty() else "保存并退出", "ExitButton", _exit_game, 180))
 	_panel_footer.text = "游戏仅保存构筑进度；重新开始会重置本轮战斗"
 
 

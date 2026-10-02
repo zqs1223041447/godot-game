@@ -11,7 +11,7 @@ const JewelCatalog = preload("res://scripts/jewel_data.gd")
 const Equipment = preload("res://scripts/items/equipment_catalog.gd")
 const SupportCatalog = preload("res://scripts/combat/support_catalog.gd")
 const SkillCompiler = preload("res://scripts/combat/skill_compiler.gd")
-const SAVE_VERSION: int = 5
+const SAVE_VERSION: int = 6
 const MAX_EQUIPMENT: int = 64
 const MAX_EQUIPMENT_ID: int = 999999999
 const MAX_LEVEL: int = 1000
@@ -32,6 +32,8 @@ const BASE_STATS: Dictionary = {
 	"spell_increased": 0.0, "fire_increased": 0.0, "cold_increased": 0.0,
 	"lightning_increased": 0.0, "attack_elemental_increased": 0.0,
 	"attack_speed_increased": 0.0, "move_speed_increased": 0.0, "mana_regen_increased": 0.0,
+	"attack_added_physical": 0.0, "attack_added_fire": 0.0,
+	"spell_added_cold": 0.0, "spell_added_lightning": 0.0,
 }
 
 var inventory: Array[String] = ["ember_wand", "swift_blade", "guardian_robe", "vitality_armor", "azure_charm", "storm_charm", "prism_bow", "return_mantle", "detonation_charm"]
@@ -53,11 +55,14 @@ var migrated_from_v1: bool = false
 var migrated_from_v2: bool = false
 var migrated_from_v3: bool = false
 var migrated_from_v4: bool = false
+var migrated_from_v5: bool = false
 var _migration_version: int = 0
 var migration_message: String = ""
 var migration_backup_path: String = ""
 var _migration_source_path: String = ""
 var _migration_source_text: String = ""
+var last_load_error: String = ""
+var _blocked_save_paths: Dictionary = {}
 
 
 func _init() -> void:
@@ -89,7 +94,13 @@ func get_combat_snapshot() -> Dictionary:
 		for effect: String in get_item_definition(id).get("effects", []):
 			if not effects.has(effect):
 				effects.append(effect)
-	return preload("res://scripts/combat/combat_data.gd").snapshot(get_stats(), effects)
+	var snapshot: Dictionary = preload("res://scripts/combat/combat_data.gd").snapshot(get_stats(), effects)
+	var sources: Array[Dictionary] = []
+	for slot: String in EQUIPMENT_SLOTS:
+		for source: Dictionary in get_item_definition(str(equipped.get(slot, ""))).get("added_sources", []):
+			sources.append(source.duplicate(true))
+	snapshot["added_damage_sources"] = sources
+	return snapshot
 
 
 func equip(item_id: String) -> bool:
@@ -126,13 +137,22 @@ static func _definition_for_id(item_id: String, instances: Dictionary) -> Dictio
 	return Equipment.definition(instances.get(item_id, {}))
 
 
-func award_equipment(rng: RandomNumberGenerator, item_level: int, rarity: String = "") -> String:
+func award_equipment(rng: RandomNumberGenerator, item_level: int, rarity: String = "", pool: String = "legacy") -> String:
+	if pool not in ["legacy", "expanded", "loot"]:
+		return ""
 	if rng == null or equipment_instances.size() >= MAX_EQUIPMENT or next_equipment_id > MAX_EQUIPMENT_ID:
 		return ""
 	var id: String = "gear_%06d" % next_equipment_id
 	if equipment_instances.has(id):
 		return ""
-	var instance: Dictionary = Equipment.generate(rng, id, item_level, rarity)
+	var instance: Dictionary
+	match pool:
+		"expanded":
+			instance = Equipment.generate_expanded(rng, id, item_level, rarity)
+		"loot":
+			instance = Equipment.generate_loot(rng, id, item_level, rarity)
+		_:
+			instance = Equipment.generate(rng, id, item_level, rarity)
 	if not Equipment.validate_instance(instance):
 		return ""
 	var candidate_instances: Dictionary = equipment_instances.duplicate(true)
@@ -419,6 +439,8 @@ func xp_required() -> int:
 
 
 func save_build(path: String = "user://build_save.json") -> Error:
+	if not save_block_reason(path).is_empty():
+		return ERR_INVALID_DATA
 	var snapshot: Dictionary = _snapshot()
 	if _validate_snapshot(snapshot).is_empty():
 		return ERR_INVALID_DATA
@@ -440,18 +462,22 @@ func save_build(path: String = "user://build_save.json") -> Error:
 func load_build(path: String = "user://build_save.json") -> bool:
 	var file: FileAccess = FileAccess.open(path, FileAccess.READ)
 	if file == null:
+		if FileAccess.file_exists(path):
+			return _reject_load(path, "存档无法读取")
 		return false
 	if file.get_length() > MAX_SAVE_BYTES:
 		file.close()
-		return false
+		return _reject_load(path, "存档大小超出安全上限")
 	var text: String = file.get_as_text()
 	file.close()
 	var parser := JSON.new()
 	if parser.parse(text) != OK:
-		return false
+		return _reject_load(path, "存档格式损坏")
 	var candidate: Dictionary = _validate_snapshot(parser.data)
 	if candidate.is_empty():
-		return false
+		return _reject_load(path, "存档数据无效或属于不兼容版本")
+	_blocked_save_paths.erase(ProjectSettings.globalize_path(path))
+	last_load_error = ""
 	# Commit only after every field, graph connection and jewel location validates.
 	inventory.assign(candidate["inventory"])
 	equipment_instances = candidate["equipment_instances"].duplicate(true)
@@ -475,6 +501,7 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	migrated_from_v2 = int(parser.data["version"]) == 2
 	migrated_from_v3 = int(parser.data["version"]) == 3
 	migrated_from_v4 = int(parser.data["version"]) == 4
+	migrated_from_v5 = int(parser.data["version"]) == 5
 	_migration_version = int(parser.data["version"])
 	if migrated_from_v1 or migrated_from_v2:
 		for id: String in Data.COMBAT_STARTER_ITEMS:
@@ -487,12 +514,24 @@ func load_build(path: String = "user://build_save.json") -> bool:
 		migration_message = "构筑已升级：原装备、天赋和珠宝保留。现在可获得有独立词缀的随机装备；按 I 查看。"
 	if migrated_from_v4:
 		migration_message = "构筑已升级：装备词缀与原有技能保留。按 K 为龙卷、飞弹或冰霜链接辅助，组合效果与耗魔可直接预览。"
+	if migrated_from_v5:
+		migration_message = "构筑已升级：旧装备与掷值保持不变。新增符木法器进入正常掉落，可获得攻击或法术分类点伤；K 和 F6 可查看构成。"
 	migration_backup_path = ""
 	_migration_source_path = path if _migration_version < SAVE_VERSION else ""
 	_migration_source_text = text if _migration_version < SAVE_VERSION else ""
 	_sync_backpack()
 	changed.emit()
 	return true
+
+
+func save_block_reason(path: String = "user://build_save.json") -> String:
+	return str(_blocked_save_paths.get(ProjectSettings.globalize_path(path), ""))
+
+
+func _reject_load(path: String, reason: String) -> bool:
+	last_load_error = reason + "；已保护原文件并暂停自动保存。请先备份，再使用兼容版本或恢复有效备份。"
+	_blocked_save_paths[ProjectSettings.globalize_path(path)] = last_load_error
+	return false
 
 
 func _snapshot() -> Dictionary:
@@ -588,6 +627,8 @@ func _validate_snapshot(value: Variant) -> Dictionary:
 	if int(data["version"]) < 5:
 		result["version"] = SAVE_VERSION
 		result["skill_supports"] = {}
+	if int(data["version"]) < 6:
+		result["version"] = SAVE_VERSION
 	for skill_id: String in result["skill_supports"]:
 		var canonical: Array[String] = []
 		canonical.assign(result["skill_supports"][skill_id])
@@ -625,7 +666,7 @@ func _validate_common(data: Dictionary) -> bool:
 		if instances.size() > MAX_EQUIPMENT:
 			return false
 		for id: Variant in instances:
-			if not id is String or not Equipment.validate_instance(instances[id]):
+			if not id is String or not Equipment.validate_instance(instances[id], int(data.get("version", 0)) >= 6):
 				return false
 			if instances[id]["id"] != id or Equipment.serial_from_id(id) >= int(data["next_equipment_id"]) or not loaded_inventory.has(id):
 				return false
@@ -768,7 +809,7 @@ static func _item_size_for(key: String, instances: Dictionary = {}) -> Vector2i:
 		# Avoid formatting/validating every affix at each grid collision probe.
 		var instance: Variant = instances.get(id, {})
 		if instance is Dictionary:
-			return Equipment.BASES.get(instance.get("base_id", ""), {}).get("size", Vector2i.ZERO)
+			return Equipment.base_definition(str(instance.get("base_id", ""))).get("size", Vector2i.ZERO)
 		return Vector2i.ZERO
 	if key.begins_with("jewel:"):
 		return Vector2i.ONE

@@ -8,14 +8,15 @@ signal feedback(message: String)
 
 const Data = preload("res://scripts/game_data.gd")
 const Jewels = preload("res://scripts/jewel_data.gd")
+const EquipmentVisuals = preload("res://scripts/visuals/equipment_art.gd")
 const COLUMNS: int = 12
 const ROWS: int = 8
 const CELL: float = 42.0
 const INSET: float = 8.0
-const TEXT: Color = Color("eee9dd")
-const MUTED: Color = Color("8399aa")
-const CYAN: Color = Color("78d9ce")
-const GOLD: Color = Color("d9b779")
+const TEXT: Color = Color("eee2c7")
+const MUTED: Color = Color("a3987e")
+const CYAN: Color = Color("b8c891")
+const GOLD: Color = Color("d8b577")
 const RED: Color = Color("f27786")
 const GREEN: Color = Color("85e2b6")
 
@@ -32,7 +33,7 @@ class ItemArt extends Control:
 	var draw_border: bool = true
 
 	func _draw() -> void:
-		var accent: Color = entry.get("color", Color("78d9ce"))
+		var accent: Color = entry.get("color", Color("b8c891"))
 		if draw_border:
 			draw_rect(Rect2(Vector2.ZERO, size), Color(0.035, 0.065, 0.105, 0.94))
 			draw_rect(Rect2(Vector2.ONE, size - Vector2(2, 2)), accent, false, 2.0)
@@ -83,13 +84,13 @@ func item_at_position(point: Vector2) -> String:
 
 func _draw() -> void:
 	var grid_rect := Rect2(Vector2(INSET, INSET), Vector2(COLUMNS, ROWS) * CELL)
-	draw_rect(Rect2(Vector2.ZERO, custom_minimum_size), Color("080f19"))
-	draw_rect(Rect2(Vector2.ONE, custom_minimum_size - Vector2(2, 2)), Color("465566"), false, 1.0)
+	draw_rect(Rect2(Vector2.ZERO, custom_minimum_size), Color("201f18"))
+	draw_rect(Rect2(Vector2.ONE, custom_minimum_size - Vector2(2, 2)), Color("786e51"), false, 1.0)
 	for y: int in range(ROWS):
 		for x: int in range(COLUMNS):
 			var cell_rect := Rect2(Vector2(x, y) * CELL + grid_rect.position, Vector2.ONE * CELL)
-			draw_rect(cell_rect.grow(-1.0), Color("182b2a") if (x + y) % 2 == 0 else Color("142423"))
-			draw_rect(cell_rect.grow(-1.0), Color("30433c"), false, 1.0)
+			draw_rect(cell_rect.grow(-1.0), Color("302e24") if (x + y) % 2 == 0 else Color("2a2a20"))
+			draw_rect(cell_rect.grow(-1.0), Color("4a4937"), false, 1.0)
 	if state == null:
 		return
 	var font: Font = get_theme_default_font()
@@ -258,66 +259,4 @@ static func item_tooltip(build: BuildState, key: String) -> String:
 
 
 static func draw_item_icon(canvas: CanvasItem, entry: Dictionary, rect: Rect2) -> void:
-	if not rect.has_area():
-		return
-	var accent: Color = entry.get("color", CYAN)
-	var center: Vector2 = rect.get_center()
-	var unit: float = minf(rect.size.x, rect.size.y) * 0.36
-	var id: String = str(entry.get("base_id", entry.get("id", "")))
-	if entry.get("kind", "") == "jewel":
-		var gem_color: Color = Jewels.BASES.get(entry.get("base", ""), {}).get("color", accent)
-		var diamond := PackedVector2Array([center + Vector2(0, -unit), center + Vector2(unit * 0.76, -unit * 0.15), center + Vector2(unit * 0.48, unit * 0.70), center + Vector2(-unit * 0.48, unit * 0.70), center + Vector2(-unit * 0.76, -unit * 0.15)])
-		canvas.draw_colored_polygon(diamond, gem_color.darkened(0.27))
-		canvas.draw_polyline(PackedVector2Array([diamond[0], diamond[1], diamond[2], diamond[3], diamond[4], diamond[0]]), accent, 1.8, true)
-		canvas.draw_line(diamond[0], center + Vector2(0, unit * 0.6), gem_color.lightened(0.35), 1.0, true)
-		canvas.draw_line(diamond[4], diamond[1], gem_color.lightened(0.35), 1.0, true)
-		canvas.draw_line(diamond[4], center + Vector2(0, unit * 0.6), gem_color, 1.0, true)
-		return
-	match str(entry.get("slot", "")):
-		"weapon":
-			var length: float = minf(rect.size.y * 0.67, rect.size.x * 2.0)
-			if id == "prism_bow":
-				var bow_points := PackedVector2Array()
-				for i: int in range(25):
-					var angle: float = lerpf(-PI/2,PI/2,i/24.0)
-					bow_points.append(center+Vector2(cos(angle)*unit*0.85-unit*0.3,sin(angle)*length*0.52))
-				canvas.draw_polyline(bow_points,Color("9fbfb6"),4,true)
-				canvas.draw_line(bow_points[0],bow_points[-1],Color("dcceb3"),1,true)
-				canvas.draw_line(center+Vector2(-unit*0.6,0),center+Vector2(unit*1.2,0),GOLD,2,true)
-				canvas.draw_colored_polygon(PackedVector2Array([center+Vector2(unit*1.3,0),center+Vector2(unit*0.8,-4),center+Vector2(unit*0.8,4)]),accent)
-			elif id in ["ember_wand","cinder_reed"] or str(entry.get("base_name","")).ends_with("杖"):
-				canvas.draw_line(center + Vector2(-unit * 0.18, length * 0.5), center + Vector2(unit * 0.14, -length * 0.30), Color("b08b58"), 5.0, true)
-				canvas.draw_line(center + Vector2(-unit * 0.22, length * 0.43), center + Vector2(unit * 0.08, -length * 0.22), GOLD.lightened(0.1), 1.2, true)
-				var head: Vector2 = center + Vector2(unit * 0.15, -length * 0.40)
-				canvas.draw_circle(head, unit * 0.8, Color(accent, 0.08))
-				canvas.draw_colored_polygon(PackedVector2Array([head + Vector2(0, -unit * 0.72), head + Vector2(unit * 0.6, 0), head + Vector2(0, unit * 0.72), head + Vector2(-unit * 0.6, 0)]), Color("f6af78"))
-				canvas.draw_line(head + Vector2(-unit * 0.65, 0), head + Vector2(0, unit * 0.8), GOLD, 2, true)
-				canvas.draw_line(head + Vector2(unit * 0.65, 0), head + Vector2(0, unit * 0.8), GOLD, 2, true)
-			else:
-				var tip: Vector2 = center + Vector2(unit * 0.25, -length * 0.56)
-				var guard: Vector2 = center + Vector2(-unit * 0.1, length * 0.2)
-				canvas.draw_colored_polygon(PackedVector2Array([tip, guard + Vector2(unit * 0.44, 0), guard + Vector2(-unit * 0.34, 0)]), Color("afcad9"))
-				canvas.draw_line(tip, guard, Color("eef6ff"), 1.6, true)
-				canvas.draw_line(guard + Vector2(-unit * 0.7, 0), guard + Vector2(unit * 0.75, 0), GOLD, 4, true)
-				canvas.draw_line(guard, center + Vector2(-unit * 0.2, length * 0.47), Color("a47650"), 5, true)
-				canvas.draw_circle(center + Vector2(-unit * 0.2, length * 0.48), 3.0, GOLD)
-		"armor":
-			var h: float = minf(rect.size.y * 0.40, rect.size.x * 0.67)
-			var w: float = minf(rect.size.x * 0.31, h * 0.80)
-			var robe: bool = id in ["guardian_robe","return_mantle","tidebound_coat"] or str(entry.get("base_name","")).ends_with("袍")
-			var outline := PackedVector2Array([center + Vector2(-w * 0.46, -h), center + Vector2(-w * 1.2, -h * 0.7), center + Vector2(-w * 1.3, -h * 0.08), center + Vector2(-w * 0.74, h * 0.06), center + Vector2(-w * 0.81 if robe else -w * 0.67, h), center + Vector2(w * 0.81 if robe else w * 0.67, h), center + Vector2(w * 0.74, h * 0.06), center + Vector2(w * 1.3, -h * 0.08), center + Vector2(w * 1.2, -h * 0.7), center + Vector2(w * 0.46, -h), center + Vector2(0, -h * 0.66)])
-			canvas.draw_colored_polygon(outline, Color("42678e") if robe else Color("778973"))
-			var closed: PackedVector2Array = outline.duplicate()
-			closed.append(outline[0])
-			canvas.draw_polyline(closed, accent, 1.8, true)
-			canvas.draw_line(center + Vector2(0, -h * 0.65), center + Vector2(0, h * 0.91), accent, 2, true)
-			canvas.draw_line(center + Vector2(-w * 0.7, h * 0.24), center + Vector2(w * 0.7, h * 0.24), GOLD, 2.5, true)
-			if not robe:
-				canvas.draw_polyline(PackedVector2Array([center + Vector2(-w * 0.6, -h * 0.4), center + Vector2(0, -h * 0.13), center + Vector2(w * 0.6, -h * 0.4)]), GOLD, 2, true)
-		"charm":
-			canvas.draw_arc(center + Vector2(0, -unit * 0.2), unit * 0.65, PI * 0.75, PI * 2.25, 24, GOLD.darkened(0.05), 2.0, true)
-			var gem: Vector2 = center + Vector2(0, unit * 0.45)
-			canvas.draw_colored_polygon(PackedVector2Array([gem + Vector2(0, -unit * 0.63), gem + Vector2(unit * 0.53, 0), gem + Vector2(0, unit * 0.57), gem + Vector2(-unit * 0.53, 0)]), Color("6ebfdb") if id == "azure_charm" else Color("dcc883"))
-			canvas.draw_circle(gem, 2.0, Color("ecf9ff"))
-		_:
-			canvas.draw_circle(center, unit * 0.5, accent)
+	EquipmentVisuals.draw_item(canvas,entry,rect)

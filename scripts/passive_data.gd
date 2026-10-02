@@ -26,6 +26,8 @@ const STAT_LABELS: Dictionary = {
 	"attack_elemental_increased": "攻击元素伤害提高",
 	"attack_speed_increased": "普通攻击速度提高", "move_speed_increased": "移动速度提高",
 	"mana_regen_increased": "魔力恢复速度提高",
+	"attack_added_physical": "攻击附加物理伤害", "attack_added_fire": "攻击附加火焰伤害",
+	"spell_added_cold": "法术附加冰霜伤害", "spell_added_lightning": "法术附加闪电伤害",
 }
 static var _nodes: Dictionary = {}
 static var _edges: Array = []

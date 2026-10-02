@@ -7,12 +7,12 @@ signal feedback(message: String)
 const Passives = preload("res://scripts/passive_data.gd")
 const Jewels = preload("res://scripts/jewel_data.gd")
 const TreeCanvas = preload("res://scripts/passive_tree_view.gd")
-const TEXT: Color = Color("eee9dd")
-const MUTED: Color = Color("a9b5b3")
-const CYAN: Color = Color("78d9ce")
-const GOLD: Color = Color("d9b779")
+const TEXT: Color = Color("eee2c7")
+const MUTED: Color = Color("b2aa94")
+const CYAN: Color = Color("b8c891")
+const GOLD: Color = Color("d8b577")
 const RED: Color = Color("ee98a2")
-const BORDER: Color = Color("455754")
+const BORDER: Color = Color("827354")
 
 var tree_view: PassiveTreeView
 var selected_node_id: String = "origin"
@@ -197,7 +197,7 @@ func _build_ui() -> void:
 	canvas_panel.name = "ConstellationFrame"
 	canvas_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	canvas_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	canvas_panel.add_theme_stylebox_override("panel", _style(Color("0d1a1b"), BORDER, 9, 1, 2))
+	canvas_panel.add_theme_stylebox_override("panel", _style(Color("22291f"), BORDER, 9, 1, 2))
 	content.add_child(canvas_panel)
 	tree_view = TreeCanvas.new() as PassiveTreeView
 	canvas_panel.add_child(tree_view)
@@ -208,7 +208,7 @@ func _build_ui() -> void:
 	inspector.name = "NodeInspector"
 	inspector.custom_minimum_size.x = 340
 	inspector.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	inspector.add_theme_stylebox_override("panel", _style(Color("152422"), BORDER, 9, 1, 11))
+	inspector.add_theme_stylebox_override("panel", _style(Color("2d2e23"), BORDER, 9, 1, 11))
 	content.add_child(inspector)
 	var scroll: ScrollContainer = ScrollContainer.new()
 	scroll.name = "InspectorScroll"
@@ -334,7 +334,7 @@ func _refresh_node() -> void:
 	_allocate_button.tooltip_text = _state.allocation_reason(selected_node_id)
 	_refund_button.tooltip_text = _state.refund_reason(selected_node_id)
 	if kind == "start":
-		_node_reason.text = "从相邻亮青色节点开始；升级获得天赋点"
+		_node_reason.text = "从相邻高亮节点开始；升级获得天赋点"
 	elif allocated:
 		_node_reason.text = _state.refund_reason(selected_node_id) if _refund_button.disabled else "可免费退还 1 点" + ("，珠宝自动回到背包" if kind == "socket" else "；不会切断其他天赋")
 	else:
@@ -364,7 +364,7 @@ func _refresh_jewel_inventory(force: bool = false) -> void:
 		button.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		button.add_theme_font_size_override("font_size", 12)
 		button.add_theme_color_override("font_color", Jewels.get_color(jewel))
-		button.add_theme_stylebox_override("normal", _style(Color("18313e") if id == selected_jewel_id else Color("142337"), CYAN.darkened(0.4) if id == selected_jewel_id else BORDER.darkened(0.2), 5, 1, 7))
+		button.add_theme_stylebox_override("normal", _style(Color("414430") if id == selected_jewel_id else Color("302f25"), CYAN.darkened(0.4) if id == selected_jewel_id else BORDER.darkened(0.2), 5, 1, 7))
 		button.tooltip_text = _jewel_title(jewel) + "\n" + Jewels.get_description(jewel)
 		_jewel_list.add_child(button)
 	if visible_count == 0:
@@ -518,24 +518,18 @@ func _button(text: String, stable_name: String, callback: Callable, width: float
 	result.focus_mode = Control.FOCUS_NONE
 	result.mouse_filter = Control.MOUSE_FILTER_STOP
 	result.add_theme_font_size_override("font_size", 12)
-	result.add_theme_stylebox_override("normal", _style(Color("192a3c"), BORDER, 5, 1, 7))
-	result.add_theme_stylebox_override("hover", _style(Color("263e52"), CYAN.darkened(0.2), 5, 1, 7))
-	result.add_theme_stylebox_override("pressed", _style(Color("214550"), CYAN, 5, 1, 7))
-	result.add_theme_stylebox_override("disabled", _style(Color("101a27"), Color("213346"), 5, 1, 7))
+	result.add_theme_stylebox_override("normal", _style(Color("393729"), BORDER, 5, 1, 7))
+	result.add_theme_stylebox_override("hover", _style(Color("504b35"), CYAN.darkened(0.2), 5, 1, 7))
+	result.add_theme_stylebox_override("pressed", _style(Color("454c31"), CYAN, 5, 1, 7))
+	result.add_theme_stylebox_override("disabled", _style(Color("26271f"), Color("524e3a"), 5, 1, 7))
 	result.add_theme_color_override("font_disabled_color", Color("5f768b"))
 	if callback.is_valid():
 		result.pressed.connect(callback)
 	return result
 
 
-func _style(bg: Color, border: Color, radius: int = 6, border_width: int = 1, margin: int = 8) -> StyleBoxFlat:
-	var result: StyleBoxFlat = StyleBoxFlat.new()
-	result.bg_color = bg
-	result.border_color = border
-	result.set_border_width_all(border_width)
-	result.set_corner_radius_all(radius)
-	result.content_margin_left = margin
-	result.content_margin_right = margin
-	result.content_margin_top = margin
-	result.content_margin_bottom = margin
-	return result
+func _style(bg: Color, border: Color, radius: int = 6, border_width: int = 1, margin: int = 8) -> StyleBox:
+	var frame: StyleBox=preload("res://scripts/visuals/visual_theme.gd").panel(bg,border,radius,border_width,margin)
+	frame.content_margin_top=margin
+	frame.content_margin_bottom=margin
+	return frame
