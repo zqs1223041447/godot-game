@@ -18,6 +18,9 @@ for folder in ('scripts', 'scenes'):
     for path in (root / folder).glob('**/*'):
         if path.suffix in ('.gd', '.tscn'):
             text += path.read_text(encoding='utf-8')
+balance = root / 'data' / 'passive_balance.json'
+if balance.exists():
+    text += balance.read_text(encoding='utf-8')
 font = TTFont(args.source, fontNumber=args.font_number)
 options = subset.Options()
 options.name_IDs = ['*']

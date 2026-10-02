@@ -47,8 +47,11 @@ for _ in range(file_count):
     assert pack_start <= start <= start + size <= len(data) - 12, name
     assert not flags & 1, "Encrypted entry unsupported"
     assert hashlib.md5(data[start:start + size]).digest() == digest, name
-    assert not name.startswith(("tests/", "tools/", "builds/", "docs/")), "Development-only file exported: " + name
+    logical_name = name.removeprefix("res://")
+    assert logical_name != "data/poe_passive_registry.json", "Research-only passive source exported"
+    assert not logical_name.startswith(("data/reference/", "tests/", "tools/", "builds/", "docs/")), "Development-only file exported: " + name
     entries.append({"name": name, "size": size, "md5_verified": True})
+assert any(entry["name"].removeprefix("res://") == "data/passive_balance.json" for entry in entries), "Shared balance authority omitted from export"
 print(json.dumps({
     "pe": "x86_64", "embedded_pck_version": pack_version,
     "godot_version": f"{major}.{minor}.{patch}", "pck_offset": pack_start,
