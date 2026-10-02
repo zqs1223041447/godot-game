@@ -484,7 +484,7 @@ func _test_v7_scene_migration() -> void:
 	_expect(arena.state.equip("swift_blade"), "First real inventory edit triggers migrated autosave")
 	_expect(FileAccess.get_file_as_bytes("user://build_save.json.v7-backup.json") == original,
 		"First scene autosave retains byte-exact whitespace and ordering in v7 backup")
-	_expect(_saved_matches() and JSON.parse_string(FileAccess.get_file_as_string("user://build_save.json")).version == 8,
+	_expect(_saved_matches() and JSON.parse_string(FileAccess.get_file_as_string("user://build_save.json")).version == Model.SAVE_VERSION,
 		"First scene autosave commits the current version-eight build")
 	var reloaded = Model.new()
 	_expect(reloaded.load_build() and reloaded._snapshot() == arena.state._snapshot(), "Version-eight autosave reloads exactly through normal validation")

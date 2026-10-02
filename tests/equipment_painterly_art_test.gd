@@ -1,5 +1,5 @@
 extends SceneTree
-## Headless-safe renderer contract; --require-all requires the complete 21 PNGs.
+## Headless-safe renderer contract; --require-all requires the complete 22 PNGs.
 ## Native pixel/readability QA is separate from these resource and geometry checks.
 const Art = preload("res://scripts/visuals/equipment_art.gd")
 const Painterly = preload("res://scripts/visuals/equipment_painterly_art.gd")
@@ -65,6 +65,8 @@ func test_alpha_bounds() -> void:
 	expect(rgb.get_format() == Image.FORMAT_RGB8, "alpha measurement mutated source format")
 
 func test_identity() -> void:
+	expect(Painterly.canonical_id({"id":"gear_000522", "base_id":"ashwood_bow"}) == "ashwood_bow", "ashwood bow instance must use canonical base_id")
+	expect(Painterly.resource_path({"id":"ashwood_bow"}) == "res://assets/art/equipment/ashwood_bow.png", "ashwood bow raw base must use its own art")
 	expect(Painterly.canonical_id({"id":"gear_000521", "base_id":"runewood_focus"}) == "runewood_focus", "generated gear must use base_id")
 	expect(Painterly.canonical_id({"id":"prism_bow", "base_id":"cinder_reed"}) == "cinder_reed", "base_id takes precedence")
 	expect(Painterly.canonical_id({"id":"prism_bow", "base_id":""}) == "prism_bow", "empty base_id falls back to static id")
@@ -104,7 +106,7 @@ func run() -> void:
 	for id: String in Jewels.BASES.keys() + Jewels.SPECIAL_BASES.keys():
 		entries.append({"id":"jewel_000123", "base":id, "kind":"jewel", "affixes":[{"id":"force", "value":4}]})
 		expected_ids.append(id)
-	expect(expected_ids.size() == 21, "catalog count changed; review painterly manifest")
+	expect(expected_ids.size() == 22, "catalog count changed; review painterly manifest")
 	expect(Painterly.ART_PATHS.size() == expected_ids.size(), "manifest must cover exactly current gear and jewel catalogs")
 	for entry: Dictionary in entries:
 		var id: String = Painterly.canonical_id(entry)
@@ -124,7 +126,7 @@ func run() -> void:
 		expect(Rect2(Vector2.ZERO,texture.get_size()).encloses(source), "alpha crop outside texture: " + id)
 		test_fit(source.size,id)
 	if OS.get_cmdline_user_args().has("--require-all"):
-		expect(available == 21, "complete art pack required; only %d/21 resources loaded" % available)
+		expect(available == 22, "complete art pack required; only %d/22 resources loaded" % available)
 	test_identity()
 	test_alpha_bounds()
 	for dimensions: Vector2 in [Vector2(1024,1536),Vector2(1536,1024),Vector2(1024,1024),Vector2(200,1450),Vector2(1,1)]:
@@ -141,7 +143,7 @@ func run() -> void:
 	expect(Data.ITEMS == frozen_data and Gear.BASES == frozen_bases and Gear.POOL_PROFILES == frozen_profiles and Jewels.BASES == frozen_jewels and Jewels.SPECIAL_BASES == frozen_special, "rendering changed gameplay catalogs")
 	surface.queue_free()
 	if failures.is_empty():
-		print("EQUIPMENT_PAINTERLY_ART_TEST_PASS: %d checks; %d/21 textures available; bounded aspect fit, identity, fallback, alpha threshold, cache, immutable inputs and RNG. Native pixels require separate QA." % [checks,available])
+		print("EQUIPMENT_PAINTERLY_ART_TEST_PASS: %d checks; %d/22 textures available; bounded aspect fit, identity, fallback, alpha threshold, cache, immutable inputs and RNG. Native pixels require separate QA." % [checks,available])
 		quit(0)
 	else:
 		for failure: String in failures:

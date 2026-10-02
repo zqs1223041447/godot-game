@@ -165,7 +165,7 @@ func refresh() -> void:
 	var defense: Dictionary = Defense.defense_profile({"fire_resistance": stats.get("fire_resistance", 0.0)})
 	_stats_summary.text = "生命 %d     法力 %d     护盾 %d     基伤 %.0f     攻速 %.2f     移速 %.0f" % [int(stats.get("max_health", 0)), int(stats.get("max_mana", 0)), int(stats.get("max_shield", 0)), float(stats.get("damage", 0)), float(stats.get("attack_speed", 0)), float(stats.get("move_speed", 0))]
 	_stats_summary.text += "   火抗 %.0f%%" % (float(defense.effective_resistances.fire) * 100.0)
-	_stats_summary.tooltip_text = "基伤是通用基础伤害，不含分类点伤、提高/更多与敌方抗性。K 查看实际技能命中预估，F6 查看固有/附加分量。\n火焰抗性：合计 %.0f%% → 有效 %.0f%%（上限 %.0f%%）。只降低火焰分量，然后先消耗护盾，再消耗生命。" % [float(defense.raw_resistances.fire) * 100.0, float(defense.effective_resistances.fire) * 100.0, Defense.FIRE_RESISTANCE_CAP * 100.0]
+	_stats_summary.tooltip_text = "基伤是保留的通用基础伤害，不含武器本地物理、分类点伤、提高/更多与敌方抗性。K 查看实际技能命中预估，F6 分开查看通用、武器与附加分量。\n火焰抗性：合计 %.0f%% → 有效 %.0f%%（上限 %.0f%%）。只降低火焰分量，然后先消耗护盾，再消耗生命。" % [float(defense.raw_resistances.fire) * 100.0, float(defense.effective_resistances.fire) * 100.0, Defense.FIRE_RESISTANCE_CAP * 100.0]
 	_grid.select_item(selected_item_key)
 	_grid.refresh()
 	for slot_control: EquipmentSlot in _equipment_slots.values():
@@ -358,6 +358,10 @@ func _refresh_details() -> void:
 		_detail_type.text = "%s  ·  %s  ·  物品等级 %d" % [SLOT_NAMES.get(slot, "装备"), entry.get("rarity_name", "装备"),int(entry.get("item_level",1))]
 		_detail_status.text = "%s  ·  占用 %d × %d 格" % ["已装备" if worn else "背包中", dimensions.x, dimensions.y]
 		_detail_stats.text = "装备合计\n" + _gear_stats(entry.get("stats", {}))
+		if entry.has("weapon_damage_summary"):
+			# Local item damage is a separate contribution, never a character stat.
+			var character_stats: String = _gear_stats(entry.get("stats", {}))
+			_detail_stats.text = str(entry.weapon_damage_summary) + "\n\n角色加值\n" + ("无" if character_stats.is_empty() else character_stats)
 		var rolled: Array = entry.get("affix_lines", [])
 		if not rolled.is_empty():
 			_detail_stats.text += "\n\n随机词缀\n" + "\n".join(rolled)

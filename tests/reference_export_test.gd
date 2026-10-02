@@ -11,6 +11,10 @@ const Rules = preload("res://scripts/passives/allocation_rules.gd")
 const Defense = preload("res://scripts/mechanics/defense_rules.gd")
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
 const Supports = preload("res://scripts/combat/support_catalog.gd")
+const Build = preload("res://scripts/build_state.gd")
+const WeaponLocal = preload("res://scripts/items/weapon_local_rules.gd")
+const Compiler = preload("res://scripts/combat/skill_compiler.gd")
+const Recipes = preload("res://scripts/combat/combat_data.gd")
 var failures: int = 0
 var checks: int = 0
 
@@ -35,12 +39,12 @@ func _initialize() -> void:
 	_ids(current.mechanisms, Registry.get_ids(), "all shared mechanisms")
 	_ids(current.monsters, Monsters.TEMPLATES.keys(), "all monster templates")
 	_expect(current.skills.size() == 8 and current.supports.size() == 2, "bounded skill inventory")
-	_expect(current.equipment.size() == 8 and current.affixes.size() == 17, "bounded equipment inventory")
+	_expect(current.equipment.size() == 9 and current.affixes.size() == 19, "bounded equipment inventory")
 	_expect(current.passives.size() == 181 and current.special_coverage.size() == 12, "complete tree and socket coverage")
 	for skill_id: String in current.skills:
 		var skill: Dictionary = current.skills[skill_id]
 		_expect(skill.compatible_supports == Supports.supports_for_skill(skill_id), "runtime compatibility " + skill_id)
-		for config: String in ["fresh", "full_tornado"]:
+		for config: String in ["fresh", "full_tornado", "local_normal", "local_max"]:
 			_expect(skill.examples[config].size() == (4 if skill_id in ["tornado", "bolt", "frost"] else 1), "all support combinations " + skill_id + "/" + config)
 	_expect(current.configurations.fresh.equipped.weapon == "ember_wand", "fresh build does not assume mechanism bow")
 	_expect(current.configurations.full_tornado.equipped.weapon == "prism_bow", "full example explicitly equips mechanism bow")
@@ -85,6 +89,50 @@ func _initialize() -> void:
 				for packet: Dictionary in cast.packets:
 					_expect(packet.known_target_settlement.ok, "known target settlement is valid")
 					_expect(float(packet.known_target_resolved.total) <= float(packet.resolved.total) + 0.00001, "known positive fire defense never increases preview")
+	_expect(current.schema_version == 3 and current.save_version == Build.SAVE_VERSION, "reference and save schemas explicit")
+	_expect(current.current_loot_profile_id == Equipment.CURRENT_LOOT_PROFILE_ID, "current pool profile identity")
+	_expect(current.loot_profiles == Equipment.loot_profiles(), "historical and current pool weights exported")
+	_expect(current.loot_profiles["v0.11"].size() == 3 and current.current_loot_profile.size() == 4, "old reward selection retained separately")
+	var local: Dictionary = current.weapon_stages.weapon_local
+	for key: String in WeaponLocal.metadata():
+		_expect(local[key] == Exporter.clean(WeaponLocal.metadata()[key]), "weapon-local metadata " + key)
+	_expect(local.examples.local_normal.resolved_weapon.components.physical == 4.0, "normal bow has real P4")
+	_expect(local.examples.local_max.resolved_weapon.components.physical == 13.0, "legal local maximum W13")
+	_expect(current.equipment.ashwood_bow.size == [2, 3] and current.equipment.ashwood_bow.pool == "local_weapon", "new bow footprint and pool")
+	_expect(current.equipment.ashwood_bow.normal_definition == Exporter.clean(Equipment.definition(local.examples.local_normal.instance)), "base entry shows real normal weapon definition")
+	for config: String in local.examples:
+		var sample: Dictionary = local.examples[config]
+		_expect(Equipment.validate_instance(sample.instance), "local sample is legal " + config)
+		var build: RefCounted = Exporter.local_build(sample.instance)
+		var snapshot: Dictionary = build.get_combat_snapshot()
+		_expect(sample.snapshot == Exporter.clean(snapshot), "sample uses actual equipped BuildState " + config)
+		_expect(sample.definition == Exporter.clean(build.get_item_definition(build.equipped.weapon)), "weapon summary uses runtime definition " + config)
+		_expect(sample.resolved_weapon == Exporter.clean(WeaponLocal.resolve(snapshot.weapon_profile)), "P/F/L/W uses actual local resolver " + config)
+		_expect(not build.get_stats().has("weapon_added_physical") and not build.get_stats().has("weapon_physical_increased"), "local terms never enter global stats " + config)
+		_expect(build.inventory.has(sample.instance.id) and build.next_equipment_id == 2, "legal sample ownership and next ID " + config)
+		_expect(not build._validate_snapshot(build._snapshot()).is_empty(), "example fully satisfies current build schema in memory " + config)
+		var cast: Dictionary = Compiler.compile_skill("tornado", snapshot, [])
+		for role: String in sample.hits:
+			var packet: Dictionary = Recipes.event_packet(snapshot, "basic", "projectile") if role == "basic" else cast.packets[role]
+			var hit: Dictionary = sample.hits[role]
+			_expect(hit.packet == Exporter.clean(packet), "diagram exact packet " + config + "/" + role)
+			_expect(hit.resolved == Exporter.clean(Damage.resolve(packet, snapshot.modifiers)), "diagram exact damage " + config + "/" + role)
+			_expect(packet.assembly.has("weapon") == (role != "secondary"), "only attack consumers have weapon trace " + config + "/" + role)
+			_expect(hit.known_target_settlement == Exporter.clean(Defense.settle_resolved(hit.known_target_resolved, current.known_target.shield, current.known_target.health)), "diagram known-target settlement " + config + "/" + role)
+	_expect(local.examples.local_normal.hits.secondary.packet == local.examples.local_max.hits.secondary.packet, "local rolls do not affect independent explosion")
+	for affix_id: String in Equipment.LOCAL_WEAPON_AFFIXES:
+		var family: Dictionary = current.affixes[affix_id]
+		_expect(family.eligible_bases == [WeaponLocal.BASE_ID] and family.pools == ["local_weapon"], "local family exclusive scope " + affix_id)
+		_expect(family.affected_skills == ["tornado"] and family.other_consumers == ["basic"], "local family links real active skill and separate basic consumer " + affix_id)
+		var evidence: Dictionary = family.scope_evidence
+		_expect(Equipment.validate_instance(evidence.baseline_instance) and Equipment.validate_instance(evidence.candidate_instance), "local scope compares real legal items " + affix_id)
+		_expect(evidence.baseline_instance.rarity == "normal" and evidence.candidate_instance.rarity == "magic" and evidence.candidate_instance.affixes.size() == 1, "single-affix comparison has normal baseline " + affix_id)
+		_expect(evidence.baseline_stats == evidence.candidate_stats, "local cross-link never mutates character stats " + affix_id)
+		for skill_id: String in evidence.skills:
+			var comparison: Dictionary = evidence.skills[skill_id]
+			_expect((not is_equal_approx(comparison.before, comparison.after)) == (skill_id == "tornado"), "local scope comparison " + affix_id + "/" + skill_id)
+			_expect(comparison.secondary_unchanged, "secondary excluded " + affix_id + "/" + skill_id)
+		_expect(evidence.basic.after.total > evidence.basic.before.total, "ordinary attack independently evidenced " + affix_id)
 	print("Reference export: %d checks, %d failures" % [checks, failures])
 	quit(1 if failures else 0)
 

@@ -241,7 +241,7 @@ static func describe_item(build: BuildState, key: String) -> Dictionary:
 		var rarity: String = str(entry.get("rarity", "magic" if id in ["guardian_robe", "azure_charm", "ember_wand"] else "rare"))
 		entry["color"] = {"normal":Color("d6ded8"),"magic":Color("8dbaff"),"rare":GOLD,"unique":Color("e9a877")}.get(rarity,GOLD)
 		entry["rarity_name"] = {"normal":"普通","magic":"魔法","rare":"稀有","unique":"传奇"}.get(rarity,"装备")
-		entry["short_name"] = {"weapon": "长弓" if id == "prism_bow" else "法杖" if id in ["ember_wand","cinder_reed"] or str(entry.get("base_name","")).ends_with("杖") else "短刃", "armor": "披风" if id == "return_mantle" else "长袍" if id == "guardian_robe" or str(entry.get("base_name","")).ends_with("袍") else "轻甲", "charm": "护符"}.get(entry.get("slot", ""), "装备")
+		entry["short_name"] = {"weapon": "长弓" if id == "prism_bow" or str(entry.get("base_id", "")) == "ashwood_bow" else "法杖" if id in ["ember_wand","cinder_reed"] or str(entry.get("base_name","")).ends_with("杖") else "短刃", "armor": "披风" if id == "return_mantle" else "长袍" if id == "guardian_robe" or str(entry.get("base_name","")).ends_with("袍") else "轻甲", "charm": "护符"}.get(entry.get("slot", ""), "装备")
 		return entry
 	if key.begins_with("jewel:"):
 		var id: String = key.substr(6)

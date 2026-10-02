@@ -15,6 +15,7 @@ const Balance = preload("res://scripts/mechanics/passive_balance_adapter.gd")
 const Rules = preload("res://scripts/passives/allocation_rules.gd")
 const Defense = preload("res://scripts/mechanics/defense_rules.gd")
 const Monsters = preload("res://scripts/monsters/monster_catalog.gd")
+const WeaponLocal = preload("res://scripts/items/weapon_local_rules.gd")
 
 func _initialize() -> void:
 	var target: String = "res://docs/reference/catalog.json"
@@ -32,7 +33,7 @@ func _initialize() -> void:
 	quit(0)
 
 static func collect() -> Dictionary:
-	var result: Dictionary = {"schema_version": 2,
+	var result: Dictionary = {"schema_version": 3,
 		"game_version": ProjectSettings.get_setting("application/config/version", "development"),
 		"sources": {"passive": Balance.source_manifest(), "affix": _affix_source()},
 		"equipment": {}, "affixes": {}, "fixed_items": Data.ITEMS.duplicate(true),
@@ -41,7 +42,8 @@ static func collect() -> Dictionary:
 		"edges": Passives.get_edges().duplicate(true), "sectors": Passives.SECTORS,
 		"mechanisms": {}, "monsters": {}, "monster_rarities": Monsters.RARITIES,
 		"equipment_rarities": Equipment.RARITIES, "jewel_rarities": Jewels.RARITIES,
-		"equipment_pools": Equipment.pool_profiles(), "fire_encounter": Monsters.fire_encounter_policy(), "current_loot_profile": Equipment.current_loot_profile(),
+		"equipment_pools": Equipment.pool_profiles(), "loot_profiles": Equipment.loot_profiles(),
+		"current_loot_profile_id": Equipment.CURRENT_LOOT_PROFILE_ID, "save_version": Build.SAVE_VERSION, "fire_encounter": Monsters.fire_encounter_policy(), "current_loot_profile": Equipment.current_loot_profile(),
 		"passive_caps": Balance.player_caps(), "passive_policy": Balance.policy_version(),
 		"effects": Recipes.EFFECTS, "tornado_recipe": Recipes.TORNADO,
 		"limits": {"max_supports": Supports.MAX_SUPPORTS, "initial_projectiles": Compiler.MAX_INITIAL_PROJECTILES,
@@ -56,6 +58,10 @@ static func collect() -> Dictionary:
 			if Equipment.family_eligible(affix_id, id):
 				base.eligible_affixes.append(affix_id)
 		base["stats_text"] = Passives.describe_stats(base.stats)
+		if base.get("stage") == WeaponLocal.STAGE:
+			var normal: Dictionary = _local_instance()
+			base["normal_instance"] = normal
+			base["normal_definition"] = Equipment.definition(normal)
 		result.equipment[id] = base
 	for id: String in affix_ids:
 		var family: Dictionary = Equipment.affix_definition(id)
@@ -95,15 +101,24 @@ static func collect() -> Dictionary:
 	var full: RefCounted = Build.new()
 	for item_id: String in Data.COMBAT_STARTER_ITEMS:
 		full.equip(item_id)
+	var normal_bow: RefCounted = local_build(_local_instance())
+	var rolled_bow: RefCounted = local_build(_local_instance(["whetstone_edge", "tempered_edge", "wellturn", "beatlink"], "rare"))
+	var builds: Dictionary = {"fresh": fresh, "full_tornado": full, "local_normal": normal_bow, "local_max": rolled_bow}
 	result["configurations"] = {
 		"fresh": {"name": "新建角色", "equipped": fresh.equipped.duplicate(), "allocated_nodes": fresh.allocated_nodes.duplicate(), "socketed_jewels": {}, "stats": fresh.get_stats()},
 		"full_tornado": {"name": "龙卷机制装备示例", "equipped": full.equipped.duplicate(), "allocated_nodes": full.allocated_nodes.duplicate(), "socketed_jewels": {}, "stats": full.get_stats()}}
+	for config: String in ["local_normal", "local_max"]:
+		var build: RefCounted = builds[config]
+		result.configurations[config] = {"name": "普通白蜡长弓" if config == "local_normal" else "白蜡长弓 · 双局部前缀上限示例",
+			"equipped": build.equipped.duplicate(), "allocated_nodes": build.allocated_nodes.duplicate(), "socketed_jewels": {},
+			"stats": build.get_stats(), "equipment_instances": build.equipment_instances.duplicate(true),
+			"weapon_definition": build.get_item_definition(build.equipped.weapon)}
 	for id: String in Data.SKILLS:
 		var skill: Dictionary = Data.SKILLS[id].duplicate(true)
 		skill["compatible_supports"] = Supports.supports_for_skill(id)
 		skill["examples"] = {}
-		for config: String in ["fresh", "full_tornado"]:
-			var build: RefCounted = fresh if config == "fresh" else full
+		for config: String in builds:
+			var build: RefCounted = builds[config]
 			var combinations: Array = [[]]
 			if not skill.compatible_supports.is_empty():
 				for support_id: String in skill.compatible_supports:
@@ -127,13 +142,52 @@ static func collect() -> Dictionary:
 	for affix_id: String in result.affixes:
 		var family: Dictionary = result.affixes[affix_id]
 		family["affected_skills"] = []
-		var boosted: Dictionary = fresh.get_stats()
-		boosted[family.stat] = float(boosted.get(family.stat, 0.0)) + 1.0
+		family["other_consumers"] = []
+		var before_snapshot: Dictionary = fresh.get_combat_snapshot()
+		var after_snapshot: Dictionary
+		if family.get("stage") == WeaponLocal.STAGE:
+			var candidate: RefCounted = local_build(_local_instance([affix_id], "magic"))
+			before_snapshot = normal_bow.get_combat_snapshot()
+			after_snapshot = candidate.get_combat_snapshot()
+			family["scope_evidence"] = {"baseline_instance": normal_bow.equipment_instances[normal_bow.equipped.weapon],
+				"candidate_instance": candidate.equipment_instances[candidate.equipped.weapon],
+				"baseline_stats": normal_bow.get_stats(), "candidate_stats": candidate.get_stats(), "skills": {}}
+		else:
+			var boosted: Dictionary = fresh.get_stats()
+			boosted[family.stat] = float(boosted.get(family.stat, 0.0)) + 1.0
+			after_snapshot = Recipes.snapshot(boosted, [])
 		for skill_id: String in Data.SKILLS:
-			var before: Dictionary = Compiler.compile_skill(skill_id, fresh.get_combat_snapshot(), [])
-			var after: Dictionary = Compiler.compile_skill(skill_id, Recipes.snapshot(boosted, []), [])
+			var before: Dictionary = Compiler.compile_skill(skill_id, before_snapshot, [])
+			var after: Dictionary = Compiler.compile_skill(skill_id, after_snapshot, [])
 			if not is_equal_approx(_direct_total(before), _direct_total(after)):
 				family.affected_skills.append(skill_id)
+			if family.has("scope_evidence"):
+				family.scope_evidence.skills[skill_id] = {"before": _direct_total(before), "after": _direct_total(after),
+					"secondary_unchanged": before.packets.get("secondary", {}) == after.packets.get("secondary", {})}
+		if family.has("scope_evidence"):
+			var before_basic: Dictionary = Recipes.event_packet(before_snapshot, "basic", "projectile")
+			var after_basic: Dictionary = Recipes.event_packet(after_snapshot, "basic", "projectile")
+			family.scope_evidence["basic"] = {"before": Damage.resolve(before_basic, before_snapshot.modifiers),
+				"after": Damage.resolve(after_basic, after_snapshot.modifiers)}
+			if not is_equal_approx(family.scope_evidence.basic.before.total, family.scope_evidence.basic.after.total):
+				family.other_consumers.append("basic")
+	var weapon_stage: Dictionary = WeaponLocal.metadata()
+	weapon_stage["examples"] = {}
+	for config: String in ["local_normal", "local_max"]:
+		var build: RefCounted = builds[config]
+		var snapshot: Dictionary = build.get_combat_snapshot()
+		var resolved: Dictionary = WeaponLocal.resolve(snapshot.weapon_profile)
+		var sample: Dictionary = {"configuration": config, "instance": build.equipment_instances[build.equipped.weapon],
+			"definition": build.get_item_definition(build.equipped.weapon), "resolved_weapon": resolved, "snapshot": snapshot, "hits": {}}
+		var tornado: Dictionary = Compiler.compile_skill("tornado", snapshot, [])
+		for role: String in ["basic", "parent", "child", "secondary"]:
+			var packet: Dictionary = Recipes.event_packet(snapshot, "basic", "projectile") if role == "basic" else tornado.packets[role]
+			var defended: Dictionary = Damage.resolve(packet, snapshot.modifiers, target.resistances)
+			sample.hits[role] = {"packet": packet, "resolved": Damage.resolve(packet, snapshot.modifiers),
+				"known_target_resolved": defended, "known_target_settlement": Defense.settle_resolved(defended, target.shield, target.health),
+				"active": role != "secondary" or snapshot.effects.has("explode_on_flight_end")}
+		weapon_stage.examples[config] = sample
+	result["weapon_stages"] = {weapon_stage.id: weapon_stage}
 	for id: String in Jewels.BASES:
 		var jewel: Dictionary = Jewels.BASES[id].duplicate(true)
 		jewel["kind"] = "ordinary"
@@ -202,6 +256,30 @@ static func collect() -> Dictionary:
 			"disconnected": Rules.analyze([Passives.START_ID, socket_id], sockets, owned),
 			"remote_example": remote_example, "with_remote": Rules.analyze(remote_path, sockets, owned)}
 	return result
+
+## Hand-authored legal examples derive every roll from the live family tiers.
+## No random generator, save path, migration, or player-owned build is accessed.
+static func _local_instance(affix_ids: Array = [], rarity: String = "normal") -> Dictionary:
+	var affixes: Array = []
+	var level: int = Equipment.MIN_ITEM_LEVEL
+	for id: String in affix_ids:
+		var family: Dictionary = Equipment.affix_definition(id)
+		var tier: Dictionary = family.tiers.back()
+		level = maxi(level, int(tier.level))
+		affixes.append({"id": id, "tier": tier.tier, "value": tier.max})
+	return {"id": "gear_000001", "base_id": WeaponLocal.BASE_ID, "rarity": rarity, "item_level": level, "affixes": affixes}
+
+static func local_build(instance: Dictionary) -> RefCounted:
+	assert(Equipment.validate_instance(instance), "Reference bow must be a legal real instance")
+	var build: RefCounted = Build.new()
+	build.equipment_instances = {instance.id: instance.duplicate(true)}
+	build.inventory.append(instance.id)
+	build.next_equipment_id = Equipment.serial_from_id(instance.id) + 1
+	build._sync_backpack()
+	var equipped_ok: bool = build.equip(instance.id)
+	assert(equipped_ok, "Reference bow must equip through BuildState")
+	assert(not build._validate_snapshot(build._snapshot()).is_empty(), "Reference build must satisfy actual save schema without writing a save")
+	return build
 
 static func _direct_total(cast: Dictionary) -> float:
 	var total: float = 0.0

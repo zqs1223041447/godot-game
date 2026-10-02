@@ -59,9 +59,11 @@ static func event_packet(snapshot_value: Dictionary, skill_id: String, role: Str
 		return secondary_packet(snapshot_value, skill_id)
 	if snapshot_value.has("compiled_packets") or snapshot_value.has("compiled_skill_id"):
 		return _frozen_packet(snapshot_value, skill_id, role, index)
+	if snapshot_value.has("weapon_profile") and snapshot_value.weapon_profile is Dictionary and snapshot_value.weapon_profile.is_empty():
+		return {}
 	var recipe: Dictionary = _event_recipe(snapshot_value, skill_id, role, index)
 	return BaseCompiler.assemble(snapshot_value.get("base_damage"), recipe,
-		snapshot_value.get("added_damage", {}), snapshot_value.get("added_damage_sources", []))
+		snapshot_value.get("added_damage", {}), snapshot_value.get("added_damage_sources", []), snapshot_value.get("weapon_profile", {}))
 
 
 static func secondary_packet(snapshot_value: Dictionary, skill_id: String) -> Dictionary:
@@ -69,12 +71,14 @@ static func secondary_packet(snapshot_value: Dictionary, skill_id: String) -> Di
 		return {}
 	if snapshot_value.has("compiled_packets") or snapshot_value.has("compiled_skill_id"):
 		return _frozen_packet(snapshot_value, skill_id, "secondary", 0)
+	if snapshot_value.has("weapon_profile") and snapshot_value.weapon_profile is Dictionary and snapshot_value.weapon_profile.is_empty():
+		return {}
 	var spec: Variant = snapshot_value.get("explosion_recipe", TORNADO.explosion)
 	if not spec is Dictionary or not spec.has_all(["coefficient", "added_effectiveness", "radius"]) or not BaseCompiler._nonnegative(spec.radius):
 		return {}
 	return BaseCompiler.assemble(snapshot_value.get("base_damage"), _hit_recipe(skill_id, "secondary",
 		{"fire": 1.0}, spec.coefficient, spec.added_effectiveness, ["hit", "area", "secondary", "explosion"]),
-		snapshot_value.get("added_damage", {}), snapshot_value.get("added_damage_sources", []))
+		snapshot_value.get("added_damage", {}), snapshot_value.get("added_damage_sources", []), snapshot_value.get("weapon_profile", {}))
 
 
 static func _event_recipe(snapshot_value: Dictionary, skill_id: String, role: String, index: int) -> Dictionary:

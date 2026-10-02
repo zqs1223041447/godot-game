@@ -1,6 +1,6 @@
 # v0.5 随机装备：执行契约与研究边界
 
-本页保留v0.5旧池契约。当前完整目录还包括v0.7法器与v0.11防御池，合计8底材/17词缀族，分别见[TYPED_AFFIXES](TYPED_AFFIXES.zh-CN.md)与[FIRE_DEFENSES](FIRE_DEFENSES.zh-CN.md)；自动汇总见[同源图鉴](reference/index.html)。
+本页保留v0.5旧池契约。当前完整目录还包括v0.7法器、v0.11防御池与v0.13本地物理弓，合计9底材/19词缀族，分别见[TYPED_AFFIXES](TYPED_AFFIXES.zh-CN.md)、[FIRE_DEFENSES](FIRE_DEFENSES.zh-CN.md)与[LOCAL_WEAPON_DAMAGE](LOCAL_WEAPON_DAMAGE.zh-CN.md)；自动汇总见[同源图鉴](reference/index.html)。
 
 ## 可执行范围
 

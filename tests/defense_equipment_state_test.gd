@@ -71,14 +71,14 @@ func _migration() -> void:
 	changes = 0
 	_expect(state.load_build(path) and state.migrated_from_v7 and changes == 1, "Literal v7 with special remote node migrates atomically once")
 	var expected: Dictionary = legacy.duplicate(true)
-	expected.version = 8
+	expected.version = Model.SAVE_VERSION
 	_expect(state._snapshot() == expected and not state.migration_message.is_empty(), "Migration changes version only; every item roll, identity, support, jewel, allocation and location survives")
 	_expect(state.get_stats().fire_resistance == 0.0 and state.equipment_instances.size() == 2, "Old save gets no free defense item or resistance")
 	_expect(FileAccess.get_file_as_bytes(path) == bytes and not FileAccess.file_exists(backup), "Load is read-only and preserves original BOM/CRLF")
 	_expect(state.save_build("user://defense_save_as.json") == OK and not FileAccess.file_exists(backup) and FileAccess.get_file_as_bytes(path) == bytes, "Save-as preserves pending source-byte protection")
 	_expect(state.save_build(ProjectSettings.globalize_path(path)) == OK and FileAccess.get_file_as_bytes(backup) == bytes, "Absolute path alias creates the exact raw v7 backup before overwrite")
 	var restored := Model.new()
-	_expect(restored.load_build(path) and restored._snapshot() == expected and not restored.migrated_from_v7, "V8 reload is exact and does not migrate again")
+	_expect(restored.load_build(path) and restored._snapshot() == expected and not restored.migrated_from_v7, "Current reload is exact and does not migrate again")
 	_expect(restored.save_build(path) == OK and FileAccess.get_file_as_bytes(backup) == bytes, "Subsequent writes preserve original backup")
 	var conflict_path: String = "user://defense_conflict.json"
 	_write(conflict_path, bytes)
@@ -108,11 +108,11 @@ func _roundtrip_and_awards() -> void:
 	_expect(state.get_stats().fire_resistance == 0.0 and state.equip(id), "Unworn armor grants no resistance; equip succeeds")
 	_expect(is_equal_approx(state.get_stats().fire_resistance, Catalog.get_stats(expected).fire_resistance), "Equipped armor reaches actual player stats")
 	var snapshot: Dictionary = state._snapshot()
-	_expect(Model.SAVE_VERSION == 8 and snapshot.size() == 16 and snapshot.equipment_instances[id].size() == 5, "V8 retains the exact 16-field save and five-field item schemas")
+	_expect(Model.SAVE_VERSION == 9 and snapshot.size() == 16 and snapshot.equipment_instances[id].size() == 5, "Current schema retains the exact 16-field save and five-field item schemas")
 	var path: String = "user://defense_v8.json"
 	_expect(state.save_build(path) == OK, "New defense gear saves")
 	var restored := Model.new()
-	_expect(restored.load_build(path) and restored._snapshot() == snapshot and restored.get_stats() == state.get_stats() and restored.get_item_definition(id) == state.get_item_definition(id), "V8 roundtrip preserves display, stat values and exact ownership without rerolling")
+	_expect(restored.load_build(path) and restored._snapshot() == snapshot and restored.get_stats() == state.get_stats() and restored.get_item_definition(id) == state.get_item_definition(id), "Current roundtrip preserves display, stat values and exact ownership without rerolling")
 	var modes: Dictionary = {"legacy": "legacy", "expanded": "runewood", "runewood": "runewood", "defense": "defense"}
 	for mode: String in modes:
 		var single := Model.new()
@@ -161,7 +161,7 @@ func _tamper() -> void:
 		bad.version = version
 		_reject(state, bad, "Defense suffix on original armor in version %d" % version)
 	bad = valid.duplicate(true)
-	bad.version = 9
+	bad.version = Model.SAVE_VERSION + 1
 	_reject(state, bad, "Future schema")
 	for field: String in ["fire_resistance", "stats", "stage", "pool_id"]:
 		bad = valid.duplicate(true)

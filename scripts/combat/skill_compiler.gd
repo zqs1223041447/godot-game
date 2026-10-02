@@ -6,6 +6,7 @@ const Recipes = preload("res://scripts/combat/combat_data.gd")
 const Supports = preload("res://scripts/combat/support_catalog.gd")
 const BaseCompiler = preload("res://scripts/combat/damage_base_compiler.gd")
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
+const Weapon = preload("res://scripts/items/weapon_local_rules.gd")
 const MAX_INITIAL_PROJECTILES: int = 9
 
 
@@ -132,6 +133,11 @@ static func _snapshot_error(snapshot: Dictionary) -> String:
 		return "施放快照缺少必要字段"
 	if not _nonnegative(snapshot.base_damage) or not _integer(snapshot.projectile_count, -1000000, 1000000):
 		return "施放快照基础数值无效"
+	if snapshot.has("weapon_profile") and snapshot.weapon_profile is Dictionary and snapshot.weapon_profile.is_empty():
+		return "施放快照的武器局部配置不可为空"
+	var weapon_error: String = Weapon.profile_error(snapshot.get("weapon_profile", {}))
+	if not weapon_error.is_empty():
+		return weapon_error
 	var additions_error: String = BaseCompiler.additions_error(snapshot.added_damage)
 	if not additions_error.is_empty():
 		return additions_error

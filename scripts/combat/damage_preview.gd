@@ -42,7 +42,12 @@ static func assembly_line(packet: Dictionary) -> String:
 	var trace: Dictionary = packet.get("assembly", {})
 	if trace.is_empty():
 		return ""
-	return "固有：%s；附加：%s；附加效用 %.2f" % [points(trace.get("intrinsic", {})), points(trace.get("added", {})), float(trace.get("added_effectiveness", 0.0))]
+	var line: String = "固有：%s；附加：%s；附加效用 %.2f" % [points(trace.get("intrinsic", {})), points(trace.get("added", {})), float(trace.get("added_effectiveness", 0.0))]
+	if trace.has("weapon"):
+		var weapon: Dictionary = trace.weapon
+		line += "；武器：%s〔(%.2f + %.2f) × (1 + %.2f) × 技能倍率 %.2f〕" % [points(weapon.contribution),
+			float(weapon.profile.base.physical), float(weapon.profile.flat.physical), float(weapon.profile.increased.physical), float(weapon.coefficient)]
+	return line
 
 static func details(cast: Dictionary) -> String:
 	if not bool(cast.get("ok", false)):

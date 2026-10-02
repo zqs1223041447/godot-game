@@ -15,6 +15,7 @@ const ART_PATHS: Dictionary = {
 	"runewood_focus": "res://assets/art/equipment/runewood_focus.png",
 	"emberhide_vest": "res://assets/art/equipment/emberhide_vest.png",
 	"prism_bow": "res://assets/art/equipment/prism_bow.png",
+	"ashwood_bow": "res://assets/art/equipment/ashwood_bow.png",
 	"return_mantle": "res://assets/art/equipment/return_mantle.png",
 	"detonation_charm": "res://assets/art/equipment/detonation_charm.png",
 	"ember_wand": "res://assets/art/equipment/ember_wand.png",

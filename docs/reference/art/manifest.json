@@ -7,11 +7,11 @@
 	"transparent_background": true,
 	"file_paths_relative_to": "manifest.json directory",
 	"status": "complete",
-	"written_images": 38,
+	"written_images": 39,
 	"counts": {
 		"skills": 8,
 		"supports": 2,
-		"equipment": 17,
+		"equipment": 18,
 		"jewels": 4,
 		"monsters": 7
 	},
@@ -105,6 +105,15 @@
 			"source_renderer": "SkillEmblem._draw",
 			"source_catalog": "SupportCatalog.SUPPORTS",
 			"entry_type": "support"
+		},
+		{
+			"category": "equipment",
+			"id": "ashwood_bow",
+			"name": "白蜡长弓",
+			"file": "equipment/ashwood_bow.png",
+			"source_renderer": "EquipmentArt.draw_item",
+			"source_catalog": "EquipmentCatalog.all_base_ids",
+			"entry_type": "base"
 		},
 		{
 			"category": "equipment",

@@ -82,7 +82,7 @@ static func draw_item(canvas: CanvasItem, entry: Dictionary, rect: Rect2) -> voi
 	var id: String = str(entry.get("base_id", entry.get("id", "")))
 	var slot: String = str(entry.get("slot", ""))
 	if slot.is_empty():
-		if id in ["ember_wand", "cinder_reed", "prism_bow", "swift_blade", "gale_spindle", "runewood_focus"]:
+		if id in ["ember_wand", "cinder_reed", "prism_bow", "ashwood_bow", "swift_blade", "gale_spindle", "runewood_focus"]:
 			slot = "weapon"
 		elif id in ["guardian_robe", "tidebound_coat", "return_mantle", "vitality_armor", "woven_bastion", "emberhide_vest"]:
 			slot = "armor"
@@ -97,7 +97,7 @@ static func draw_item(canvas: CanvasItem, entry: Dictionary, rect: Rect2) -> voi
 		return
 	match slot:
 		"weapon":
-			if id == "prism_bow":
+			if id in ["prism_bow", "ashwood_bow"]:
 				_draw_bow(Pen.new(canvas, rect, Vector2(58, 154), hint))
 			elif id == "runewood_focus" or str(entry.get("base_name", "")) == "符木法器":
 				_draw_runewood_focus(Pen.new(canvas, rect, Vector2(48, 144), hint))

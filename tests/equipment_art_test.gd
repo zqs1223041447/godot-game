@@ -35,6 +35,8 @@ class DrawingSurface extends Node2D:
 		Art.draw_item(self, {}, Rect2(0, 0, 28, 28))
 		Art.draw_item(self, {"slot": "weapon", "base_name": "未知杖"}, Rect2(0, 0, 28, 91))
 		Art.draw_item(self, {"slot": "weapon", "base_name": "符木法器"}, Rect2(0, 0, 28, 91))
+		# Hints bypass the PNG and exercise canonical bow fallback dispatch.
+		Art.draw_item(self, {"base_id": "ashwood_bow", "hint": true}, Rect2(0, 0, 42, 42))
 		Art.draw_item(self, {"slot": "armor", "base_name": "未知袍"}, Rect2(0, 0, 70, 91))
 		Art.draw_item(self, {"kind": "jewel", "base": "unknown"}, Rect2(0, 0, 28, 28))
 		Art.draw_item(self, {}, Rect2(Vector2(INF, 0), Vector2(10, 10)))
@@ -54,7 +56,7 @@ func fixture(id: String, rect: Rect2, hint: bool = false) -> Recorder:
 		design = Vector2(46, 154)
 	elif id == "runewood_focus":
 		design = Vector2(48, 144)
-	elif id == "prism_bow":
+	elif id in ["prism_bow", "ashwood_bow"]:
 		design = Vector2(58, 154)
 	elif id in ["swift_blade", "gale_spindle"]:
 		design = Vector2(54, 154)
@@ -71,7 +73,7 @@ func fixture(id: String, rect: Rect2, hint: bool = false) -> Recorder:
 		Art._draw_staff(pen, id == "cinder_reed")
 	elif id == "runewood_focus":
 		Art._draw_runewood_focus(pen)
-	elif id == "prism_bow":
+	elif id in ["prism_bow", "ashwood_bow"]:
 		Art._draw_bow(pen)
 	elif id in ["swift_blade", "gale_spindle"]:
 		Art._draw_sword(pen, id == "gale_spindle")
@@ -124,6 +126,7 @@ func run() -> void:
 					check(point.is_finite(), "non-finite vertex: " + id)
 					check(point.x - stroke >= rect.position.x and point.y - stroke >= rect.position.y and point.x + stroke <= rect.end.x and point.y + stroke <= rect.end.y, "stroke escaped supplied rect: " + id)
 	check(fixture("runewood_focus", Rect2(0, 0, 28, 91)).commands != fixture("gale_spindle", Rect2(0, 0, 28, 91)).commands, "runewood focus incorrectly uses sword geometry")
+	check(fixture("ashwood_bow", Rect2(0, 0, 28, 91)).commands == fixture("prism_bow", Rect2(0, 0, 28, 91)).commands, "ashwood bow must retain the known bow fallback silhouette")
 	check(fixture("branchfinder", Rect2(0, 0, 28, 28)).commands != fixture("windweave", Rect2(0, 0, 28, 28)).commands, "special jewel must have its own branching silhouette")
 	check(fixture("emberhide_vest", Rect2(0,0,70,91)).commands != fixture("vitality_armor", Rect2(0,0,70,91)).commands,"fire ward vest must have distinct leather and stone geometry")
 	# Color/material changes survive subdued slot rendering; rendering itself is pure.
