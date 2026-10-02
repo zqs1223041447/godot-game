@@ -1,0 +1,150 @@
+class_name CraftingControls
+extends VBoxContainer
+## 只展示上层提供的报价并发送请求；不持有模型、钱包、存档或随机数生成器。
+
+signal craft_requested(operation: String, item_id: String, source_instance_copy: Dictionary)
+
+const PresentationTheme = preload("res://scripts/visuals/visual_theme.gd")
+const MATERIAL_ID: String = "calibration_shard"
+
+var _item_id: String = ""
+var _source_instance: Dictionary = {}
+var _material_balance: int = 0
+var _salvage_quote: Dictionary = {}
+var _recalibrate_quote: Dictionary = {}
+var _disabled_reason: String = ""
+var _balance_label: Label
+var _salvage_button: Button
+var _recalibrate_button: Button
+var _pending_requests: Dictionary = {}
+var _request_sequence: int = 0
+
+
+func _ready() -> void:
+	_ensure_interface()
+	_refresh()
+
+
+func set_context(item_id: String, source_instance: Dictionary, material_balance: int,
+		salvage_quote: Dictionary, recalibrate_quote: Dictionary, disabled_reason: String = "") -> void:
+	_item_id = item_id
+	_source_instance = source_instance.duplicate(true)
+	_material_balance = material_balance
+	_salvage_quote = salvage_quote.duplicate(true)
+	_recalibrate_quote = recalibrate_quote.duplicate(true)
+	_disabled_reason = disabled_reason
+	_ensure_interface()
+	_refresh()
+
+
+func _ensure_interface() -> void:
+	if _balance_label != null:
+		return
+	if theme == null:
+		theme = PresentationTheme.create_theme()
+	size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	add_theme_constant_override("separation", 0)
+	var row := HBoxContainer.new()
+	row.name = "CraftingRow"
+	row.add_theme_constant_override("separation", 4)
+	add_child(row)
+	_balance_label = Label.new()
+	_balance_label.name = "MaterialBalanceLabel"
+	_balance_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_balance_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_balance_label.clip_text = true
+	_balance_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	_balance_label.mouse_filter = Control.MOUSE_FILTER_PASS
+	_balance_label.add_theme_font_size_override("font_size", 13)
+	_balance_label.add_theme_color_override("font_color", PresentationTheme.MUTED)
+	row.add_child(_balance_label)
+	_salvage_button = _make_button("回收", "SalvageButton", "salvage")
+	row.add_child(_salvage_button)
+	_recalibrate_button = _make_button("校准", "RecalibrateButton", "recalibrate")
+	row.add_child(_recalibrate_button)
+
+
+func _make_button(caption: String, stable_name: String, operation: String) -> Button:
+	var button := Button.new()
+	button.name = stable_name
+	button.text = caption
+	button.custom_minimum_size = Vector2(44, 28)
+	button.add_theme_font_size_override("font_size", 13)
+	button.add_theme_stylebox_override("normal", PresentationTheme.panel(Color("f8ecd0"), PresentationTheme.BORDER, 4, 1, 4))
+	button.add_theme_stylebox_override("hover", PresentationTheme.panel(Color("fff2d5"), PresentationTheme.ACCENT, 4, 1, 4))
+	button.add_theme_stylebox_override("pressed", PresentationTheme.panel(Color("ead3a2"), PresentationTheme.ACCENT, 4, 1, 4))
+	button.add_theme_stylebox_override("disabled", PresentationTheme.panel(Color("d9c8a5"), Color("9b8560"), 4, 1, 4))
+	button.add_theme_stylebox_override("focus", PresentationTheme.panel(Color(0, 0, 0, 0), PresentationTheme.GOLD, 4, 2, 0))
+	button.button_down.connect(_capture_request.bind(operation))
+	button.button_up.connect(_release_request.bind(operation))
+	button.pressed.connect(_request_craft.bind(operation))
+	return button
+
+
+func _refresh() -> void:
+	_balance_label.text = "校准碎片 %d" % _material_balance
+	_balance_label.tooltip_text = "校准碎片：%d 枚\n回收会消耗所选装备；校准只消耗碎片。" % _material_balance
+	var salvage_reason: String = _blocked_reason("salvage")
+	var recalibrate_reason: String = _blocked_reason("recalibrate")
+	_salvage_button.disabled = not salvage_reason.is_empty()
+	_recalibrate_button.disabled = not recalibrate_reason.is_empty()
+	_salvage_button.tooltip_text = salvage_reason if _salvage_button.disabled else (
+		"回收此装备，获得校准碎片 %d 枚。\n回收会消耗所选装备。" % _shard_amount(_salvage_quote.get("materials")))
+	_recalibrate_button.tooltip_text = recalibrate_reason if _recalibrate_button.disabled else (
+		"消耗校准碎片 %d 枚，重掷现有词缀的数值。\n词缀种类与阶级保持不变，数值可能不变或降低。" % _shard_amount(_recalibrate_quote.get("cost")))
+
+
+func _blocked_reason(operation: String) -> String:
+	if not _disabled_reason.strip_edges().is_empty():
+		return _disabled_reason
+	if _item_id.is_empty() or _source_instance.is_empty():
+		return "请先选择可制作的装备。"
+	var quote: Dictionary = _salvage_quote if operation == "salvage" else _recalibrate_quote
+	var ok: Variant = quote.get("ok", false)
+	if not ok is bool or not ok:
+		var reason: String = str(quote.get("reason", ""))
+		return reason if not reason.is_empty() else "暂无可用的制作报价。"
+	var amount: int = _shard_amount(quote.get("materials" if operation == "salvage" else "cost"))
+	if amount < 0:
+		return "制作报价缺少有效的校准碎片数量。"
+	if operation == "recalibrate" and _material_balance < amount:
+		return "校准碎片不足：需要 %d 枚，现有 %d 枚。" % [amount, _material_balance]
+	return ""
+
+
+func _shard_amount(materials: Variant) -> int:
+	if not materials is Dictionary:
+		return -1
+	var amount: Variant = materials.get(MATERIAL_ID)
+	return amount if amount is int and amount >= 0 else -1
+
+
+func _snapshot(operation: String) -> Dictionary:
+	return {"item_id": _item_id, "source_instance": _source_instance.duplicate(true),
+		"allowed": _blocked_reason(operation).is_empty(), "sequence": _request_sequence}
+
+
+func _capture_request(operation: String) -> void:
+	_request_sequence += 1
+	_pending_requests[operation] = _snapshot(operation)
+
+
+func _release_request(operation: String) -> void:
+	# 松开但未激活（例如拖出按钮）时清理；pressed 会先同步消费快照。
+	var sequence: int = int(_pending_requests.get(operation, {}).get("sequence", -1))
+	_cancel_pending.call_deferred(operation, sequence)
+
+
+func _cancel_pending(operation: String, sequence: int) -> void:
+	if int(_pending_requests.get(operation, {}).get("sequence", -1)) == sequence:
+		_pending_requests.erase(operation)
+
+
+func _request_craft(operation: String) -> void:
+	var request: Dictionary = _pending_requests.get(operation, _snapshot(operation))
+	_pending_requests.erase(operation)
+	var button: Button = _salvage_button if operation == "salvage" else _recalibrate_button
+	if button.disabled or not request.allowed:
+		return
+	# 按下后选择变化仍携带按下时的原快照，由事务所有者验证是否陈旧。
+	craft_requested.emit(operation, request.item_id, request.source_instance.duplicate(true))
