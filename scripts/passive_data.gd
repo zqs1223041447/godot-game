@@ -21,6 +21,11 @@ const STAT_LABELS: Dictionary = {
 	"mana_regen": "魔力恢复", "shield_regen": "护盾恢复",
 	"global_increased": "全局伤害提高", "projectile_increased": "投射物伤害提高",
 	"elemental_increased": "元素伤害提高", "area_increased": "范围伤害提高",
+	"spell_increased": "法术伤害提高", "fire_increased": "火焰伤害提高",
+	"cold_increased": "冰霜伤害提高", "lightning_increased": "闪电伤害提高",
+	"attack_elemental_increased": "攻击元素伤害提高",
+	"attack_speed_increased": "普通攻击速度提高", "move_speed_increased": "移动速度提高",
+	"mana_regen_increased": "魔力恢复速度提高",
 }
 static var _nodes: Dictionary = {}
 static var _edges: Array = []

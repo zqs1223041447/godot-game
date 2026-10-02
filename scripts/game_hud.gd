@@ -5,15 +5,17 @@ extends CanvasLayer
 const PassivePanel = preload("res://scripts/passive_panel.gd")
 const InventoryPanelView = preload("res://scripts/inventory_panel.gd")
 const Passives = preload("res://scripts/passive_data.gd")
+const PresentationTheme = preload("res://scripts/visuals/visual_theme.gd")
+const Emblem = preload("res://scripts/visuals/skill_emblem.gd")
 
-const INK: Color = Color("0b1320")
-const PANEL: Color = Color("111e2e")
-const PANEL_LIGHT: Color = Color("192a3b")
-const BORDER: Color = Color("304659")
-const TEXT: Color = Color("e8f1f5")
-const MUTED: Color = Color("9aafbd")
-const CYAN: Color = Color("70e0dc")
-const GOLD: Color = Color("f4ca78")
+const INK: Color = Color("0b1517")
+const PANEL: Color = Color("152122")
+const PANEL_LIGHT: Color = Color("243130")
+const BORDER: Color = Color("455754")
+const TEXT: Color = Color("eee9dd")
+const MUTED: Color = Color("a9b5b3")
+const CYAN: Color = Color("78d9ce")
+const GOLD: Color = Color("d9b779")
 const RED: Color = Color("f27786")
 const BLUE: Color = Color("729eea")
 const STAT_NAMES: Dictionary = {
@@ -56,11 +58,14 @@ var _close_button: Button
 var _active_panel: String = ""
 var _selected_skill_slot: int = 0
 var _refresh_clock: float = 0.0
+var _skill_emblems: Array[Control] = []
+var _preferences: VisualSettings
 
 
 func setup(arena: Node) -> void:
 	_arena = arena
 	_state = arena.get("state") as BuildState
+	_preferences = arena.get("visual_settings") as VisualSettings
 	layer = 10
 	_root = Control.new()
 	_root.name = "HUDRoot"
@@ -75,6 +80,8 @@ func setup(arena: Node) -> void:
 	_build_hint()
 	_build_toast()
 	_build_modal()
+	get_viewport().size_changed.connect(_apply_presentation)
+	_apply_presentation()
 	refresh_build()
 	_update_live()
 
@@ -100,7 +107,7 @@ func open_panel(panel_name: String) -> void:
 		return
 	if _active_panel == "death" and panel_name != "death":
 		return
-	if panel_name not in ["inventory", "talents", "skills", "combat", "monsters", "pause", "death"]:
+	if panel_name not in ["inventory", "talents", "skills", "combat", "monsters", "settings", "pause", "death"]:
 		panel_name = "pause"
 	_active_panel = panel_name
 	_modal.show()
@@ -144,38 +151,11 @@ func refresh_build() -> void:
 
 
 func _make_theme() -> Theme:
-	var result: Theme = Theme.new()
-	result.default_font_size = 17
-	if ResourceLoader.exists("res://assets/fonts/arena_sans.otf"):
-		result.default_font = load("res://assets/fonts/arena_sans.otf") as Font
-	result.set_color("font_color", "Label", TEXT)
-	result.set_color("font_color", "Button", TEXT)
-	result.set_color("font_hover_color", "Button", Color.WHITE)
-	result.set_color("font_pressed_color", "Button", CYAN)
-	result.set_color("font_disabled_color", "Button", Color("677d8e"))
-	result.set_stylebox("normal", "Button", _style(PANEL_LIGHT, BORDER, 8, 1))
-	result.set_stylebox("hover", "Button", _style(Color("263c50"), CYAN, 8, 1))
-	result.set_stylebox("pressed", "Button", _style(Color("173f48"), CYAN, 8, 2))
-	result.set_stylebox("disabled", "Button", _style(Color("111c29"), Color("233443"), 8, 1))
-	result.set_stylebox("focus", "Button", StyleBoxEmpty.new())
-	result.set_constant("h_separation", "HBoxContainer", 10)
-	result.set_constant("v_separation", "VBoxContainer", 10)
-	result.set_stylebox("panel", "PanelContainer", _style(PANEL, BORDER, 12, 1))
-	result.set_stylebox("background", "ProgressBar", _style(Color("101b29"), Color("273849"), 5, 1))
-	return result
+	return PresentationTheme.create_theme()
 
 
 func _style(bg: Color, line: Color, radius: int = 8, border: int = 1) -> StyleBoxFlat:
-	var result: StyleBoxFlat = StyleBoxFlat.new()
-	result.bg_color = bg
-	result.border_color = line
-	result.set_border_width_all(border)
-	result.set_corner_radius_all(radius)
-	result.content_margin_left = 14.0
-	result.content_margin_right = 14.0
-	result.content_margin_top = 10.0
-	result.content_margin_bottom = 10.0
-	return result
+	return PresentationTheme.panel(bg, line, mini(radius, 7), border, 12)
 
 
 func _label(text: String, font_size: int = 17, color: Color = TEXT) -> Label:
@@ -199,7 +179,7 @@ func _button(text: String, stable_name: String, callback: Callable, width: float
 	result.name = stable_name
 	result.text = text
 	result.custom_minimum_size = Vector2(width, 40.0)
-	result.focus_mode = Control.FOCUS_NONE
+	result.focus_mode = Control.FOCUS_ALL
 	if callback.is_valid():
 		result.pressed.connect(callback)
 	return result
@@ -224,7 +204,7 @@ func _build_status() -> void:
 	panel.name = "RunStatus"
 	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	panel.add_theme_stylebox_override("panel", _style(Color(0.035, 0.065, 0.105, 0.92), BORDER, 10, 1))
-	_place(panel, Rect2(20, 18, 310, 97))
+	_place(panel, Rect2(20, 18, 294, 88))
 	var box: VBoxContainer = VBoxContainer.new()
 	box.add_theme_constant_override("separation", 4)
 	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -233,7 +213,7 @@ func _build_status() -> void:
 	brand.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	box.add_child(brand)
 	brand.add_child(_label("◈  裂隙试炼", 23, CYAN))
-	var edition: Label = _label("构筑实验场", 12, MUTED)
+	var edition: Label = _label("灰烬庭院", 12, MUTED)
 	edition.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	edition.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	edition.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
@@ -261,7 +241,7 @@ func _build_vitals() -> void:
 	var panel: PanelContainer = PanelContainer.new()
 	panel.name = "PlayerVitals"
 	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_place(panel, Rect2(20, -163, 310, 143), Control.PRESET_BOTTOM_LEFT)
+	_place(panel, Rect2(20, -154, 280, 134), Control.PRESET_BOTTOM_LEFT)
 	var box: VBoxContainer = VBoxContainer.new()
 	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	box.add_theme_constant_override("separation", 7)
@@ -309,7 +289,7 @@ func _add_vital(parent: VBoxContainer, key: String, caption: String, color: Colo
 func _build_hotbar() -> void:
 	var panel: PanelContainer = PanelContainer.new()
 	panel.name = "Hotbar"
-	_place(panel, Rect2(-287, -133, 598, 113), Control.PRESET_CENTER_BOTTOM)
+	_place(panel, Rect2(-270, -145, 540, 125), Control.PRESET_CENTER_BOTTOM)
 	var box: VBoxContainer = VBoxContainer.new()
 	box.add_theme_constant_override("separation", 5)
 	panel.add_child(box)
@@ -323,11 +303,27 @@ func _build_hotbar() -> void:
 	row.add_theme_constant_override("separation", 7)
 	box.add_child(row)
 	for index: int in range(5):
-		var button: Button = _button("", "SkillButton%d" % (index + 1), _cast_skill.bind(index), 105)
-		button.custom_minimum_size.y = 65
+		var button: Button = _button("", "SkillButton%d" % (index + 1), _cast_skill.bind(index), 94)
+		button.custom_minimum_size.y = 84
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		button.add_theme_font_size_override("font_size", 14)
+		button.add_theme_font_size_override("font_size", 12)
+		for style_name: String in ["normal", "hover", "pressed", "disabled"]:
+			var frame: StyleBoxFlat = _root.theme.get_stylebox(style_name,"Button").duplicate()
+			frame.content_margin_top = 39
+			frame.content_margin_bottom = 5
+			frame.content_margin_left = 5
+			frame.content_margin_right = 5
+			button.add_theme_stylebox_override(style_name,frame)
 		row.add_child(button)
+		var emblem := Emblem.new()
+		emblem.set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP)
+		emblem.position = Vector2(-18,4)
+		emblem.size = Vector2(36,36)
+		button.add_child(emblem)
+		_skill_emblems.append(emblem)
+		var key_label := _label(str(index+1),11,GOLD)
+		key_label.position = Vector2(8,6)
+		button.add_child(key_label)
 		_skill_buttons.append(button)
 
 
@@ -335,14 +331,14 @@ func _build_hint() -> void:
 	var box: VBoxContainer = VBoxContainer.new()
 	box.name = "CombatHelp"
 	box.add_theme_constant_override("separation", 7)
-	_place(box, Rect2(-271, -116, 251, 96), Control.PRESET_BOTTOM_RIGHT)
+	_place(box, Rect2(-250, -114, 230, 94), Control.PRESET_BOTTOM_RIGHT)
 	_auto_button = _button("自动攻击  开启", "AutoFireButton", _toggle_auto)
 	_auto_button.add_theme_font_size_override("font_size", 14)
 	box.add_child(_auto_button)
-	var move_hint: Label = _label("WASD / 方向键  移动    空格  闪避", 13, MUTED)
+	var move_hint: Label = _label("WASD 移动  ·  空格 闪避", 12, MUTED)
 	move_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	box.add_child(move_hint)
-	var aim_hint: Label = _label("Q 自动攻击  ·  F6 战斗  ·  F7 怪物", 13, MUTED)
+	var aim_hint: Label = _label("Q 自动  /  F6 战斗  /  F7 怪物", 12, MUTED)
 	aim_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	box.add_child(aim_hint)
 
@@ -384,14 +380,14 @@ func _build_modal() -> void:
 	var panel: PanelContainer = PanelContainer.new()
 	panel.name = "BuildPanel"
 	var style: StyleBoxFlat = _style(PANEL, BORDER.lightened(0.12), 16, 1)
-	style.content_margin_left = 26
-	style.content_margin_right = 26
-	style.content_margin_top = 22
-	style.content_margin_bottom = 18
+	style.content_margin_left = 18
+	style.content_margin_right = 18
+	style.content_margin_top = 16
+	style.content_margin_bottom = 14
 	panel.add_theme_stylebox_override("panel", style)
 	margin.add_child(panel)
 	var layout: VBoxContainer = VBoxContainer.new()
-	layout.add_theme_constant_override("separation", 13)
+	layout.add_theme_constant_override("separation", 10)
 	panel.add_child(layout)
 	var header: HBoxContainer = HBoxContainer.new()
 	layout.add_child(header)
@@ -402,7 +398,7 @@ func _build_modal() -> void:
 	_panel_title = _label("构筑", 28, TEXT)
 	_panel_title.name = "PanelTitle"
 	titles.add_child(_panel_title)
-	_panel_subtitle = _label("战斗已暂停", 14, MUTED)
+	_panel_subtitle = _wrap_label("战斗已暂停", 14, MUTED)
 	titles.add_child(_panel_subtitle)
 	_close_button = _button("关闭  Esc", "ClosePanelButton", close_panel, 114)
 	_close_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
@@ -427,7 +423,7 @@ func _build_modal() -> void:
 	_panel_body.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	_panel_body.add_theme_constant_override("separation", 12)
 	scroll.add_child(_panel_body)
-	_panel_footer = _label("构筑变更会自动保存  ·  关闭面板继续战斗", 13, MUTED)
+	_panel_footer = _wrap_label("构筑变更会自动保存  ·  关闭面板继续战斗", 13, MUTED)
 	layout.add_child(_panel_footer)
 	_modal.hide()
 
@@ -457,9 +453,14 @@ func _update_live() -> void:
 		var ready: String = "就绪" if cooldown <= 0.0 else "%.1fs" % cooldown
 		if cooldown <= 0.0 and float(_arena.get("mana")) < mana_cost:
 			ready = "法力不足"
-		button.text = "%d  %s\n%d 法力 · %s" % [index + 1, str(skill.get("short_name", skill.get("name", id))), int(mana_cost), ready]
+		button.text = "%s\n%s" % [str(skill.get("short_name", skill.get("name", id))), ready]
 		button.tooltip_text = "%s\n%s\n消耗 %d 法力 · 冷却 %.1f 秒" % [str(skill.get("name", id)), str(skill.get("description", "")), int(mana_cost), float(skill.get("cooldown", 0.0))]
 		var tint: Color = skill.get("color", CYAN) as Color
+		var emblem: Control = _skill_emblems[index]
+		emblem.skill_id = id
+		emblem.accent = tint
+		emblem.subdued = cooldown > 0.0
+		emblem.queue_redraw()
 		button.add_theme_color_override("font_color", tint if cooldown <= 0.0 else MUTED)
 		button.disabled = not bool(_arena.get("alive")) or is_blocking()
 	_auto_button.text = "自动攻击  %s" % ("开启  ●" if bool(_arena.get("auto_fire")) else "关闭  ○")
@@ -483,11 +484,11 @@ func _rebuild_panel() -> void:
 		_panel_body.remove_child(child)
 		child.queue_free()
 	var is_tree: bool = _active_panel in ["talents", "inventory"]
-	_panel_margin.add_theme_constant_override("margin_left", 24 if is_tree else 80)
-	_panel_margin.add_theme_constant_override("margin_right", 24 if is_tree else 80)
-	_panel_margin.add_theme_constant_override("margin_top", 20 if is_tree else 68)
-	_panel_margin.add_theme_constant_override("margin_bottom", 20 if is_tree else 68)
-	_panel_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED if is_tree else ScrollContainer.SCROLL_MODE_AUTO
+	_panel_margin.add_theme_constant_override("margin_left", 16 if is_tree else 64)
+	_panel_margin.add_theme_constant_override("margin_right", 16 if is_tree else 64)
+	_panel_margin.add_theme_constant_override("margin_top", 14 if is_tree else 36)
+	_panel_margin.add_theme_constant_override("margin_bottom", 14 if is_tree else 36)
+	_panel_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
 	_panel_scroll.scroll_vertical = 0
 	_close_button.visible = _active_panel != "death"
 	_panel_tabs.visible = _active_panel in ["inventory", "talents", "skills", "combat", "monsters"]
@@ -509,10 +510,13 @@ func _rebuild_panel() -> void:
 			_build_combat_panel()
 		"monsters":
 			_build_monsters_panel()
+		"settings":
+			_build_settings_panel()
 		"pause":
 			_build_pause_panel()
 		"death":
 			_build_death_panel()
+	PresentationTheme.apply_font_scale(_root, _preferences.font_scale)
 
 
 func _section(title: String, caption: String = "") -> void:
@@ -744,7 +748,8 @@ func _build_pause_panel() -> void:
 	var resume: Button = _button("继续战斗", "ResumeButton", close_panel, 180)
 	_accent_button(resume)
 	actions.add_child(resume)
-	actions.add_child(_button("重新开始", "RestartButton", _restart, 180))
+	actions.add_child(_button("显示设置", "VisualSettingsButton", open_panel.bind("settings"), 150))
+	actions.add_child(_button("重新开始", "RestartButton", _restart, 150))
 	actions.add_child(_button("保存并退出", "ExitButton", _exit_game, 180))
 	_panel_footer.text = "游戏仅保存构筑进度；重新开始会重置本轮战斗"
 
@@ -826,3 +831,87 @@ func _exit_game() -> void:
 		get_tree().quit()
 	else:
 		notify("构筑保存失败，请检查存储权限后重试")
+
+
+func _apply_presentation() -> void:
+	if _root == null or _preferences == null:
+		return
+	# Canvas-items stretch handles physical pixels; UI zoom has its own transform.
+	# Combat remains exactly 1280×720 regardless of either presentation preference.
+	_root.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
+	_root.scale = Vector2.ONE * _preferences.ui_scale
+	_root.size = get_viewport().get_visible_rect().size / _preferences.ui_scale
+	_root.theme.default_font_size = roundi(16 * _preferences.font_scale)
+	PresentationTheme.apply_font_scale(_root, _preferences.font_scale)
+	var width: float = _root.size.x
+	var vitals: Control = _root.get_node("PlayerVitals")
+	vitals.offset_left = 16
+	vitals.offset_right = 292 if width > 1200 else 264
+	var hotbar: Control = _root.get_node("Hotbar")
+	hotbar.offset_left = -260
+	hotbar.offset_right = 260
+	var help: Control = _root.get_node("CombatHelp")
+	help.visible = width >= 1200
+	# At large zoom the hints move to pause; primary controls keep full hit targets.
+
+
+func _build_settings_panel() -> void:
+	_panel_title.text = "显示与可读性"
+	_panel_subtitle.text = "2K 清晰缩放  /  设置独立保存，不影响战斗与构筑"
+	_section("界面尺寸")
+	_setting_choice("界面缩放", "UI 缩放独立于世界坐标，改变后按钮和面板同步调整", "UIScaleOption", ["90% · 紧凑", "100% · 标准", "110% · 放大"], VisualSettings.UI_SCALES.find(_preferences.ui_scale), _set_ui_scale)
+	_setting_choice("字体大小", "所有面板文字与伤害数字保持中文清晰显示", "FontScaleOption", ["100% · 标准", "110% · 大字", "120% · 特大"], VisualSettings.FONT_SCALES.find(_preferences.font_scale), _set_font_scale)
+	_section("战斗可读性")
+	_setting_choice("特效强度", "减少装饰粒子与辉光；攻击、范围边界与稀有度标记始终保留", "EffectsOption", ["低 · 清晰优先", "中 · 平衡", "高 · 完整"], _preferences.effects_level, _set_effects)
+	var numbers := CheckButton.new()
+	numbers.name = "DamageNumbersToggle"
+	numbers.text = "显示伤害与回复数字"
+	numbers.button_pressed = _preferences.damage_numbers
+	numbers.toggled.connect(func(value: bool) -> void: _preferences.damage_numbers = value; _save_presentation())
+	_panel_body.add_child(numbers)
+	var motion := CheckButton.new()
+	motion.name = "MotionToggle"
+	motion.text = "角色装饰动画"
+	motion.button_pressed = _preferences.motion
+	motion.toggled.connect(func(value: bool) -> void: _preferences.motion = value; _save_presentation())
+	_panel_body.add_child(motion)
+	var actions := HBoxContainer.new()
+	_panel_body.add_child(actions)
+	actions.add_child(_button("恢复默认显示", "ResetVisualSettings", _reset_presentation, 180))
+	actions.add_child(_button("返回暂停菜单", "BackToPause", open_panel.bind("pause"), 180))
+	_panel_footer.text = "建议 2560 × 1440 使用标准界面与大字；低分辨率可选择紧凑界面"
+
+
+func _setting_choice(title: String, description: String, stable_name: String, options: Array, selected: int, callback: Callable) -> void:
+	var row := _card(_panel_body,title,description,GOLD)
+	var select := OptionButton.new()
+	select.name = stable_name
+	select.custom_minimum_size = Vector2(170,42)
+	select.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	for option: String in options:
+		select.add_item(option)
+	select.selected = maxi(0,selected)
+	select.item_selected.connect(callback)
+	row.add_child(select)
+
+func _set_ui_scale(index: int) -> void:
+	_preferences.ui_scale = VisualSettings.UI_SCALES[index]
+	_save_presentation()
+func _set_font_scale(index: int) -> void:
+	_preferences.font_scale = VisualSettings.FONT_SCALES[index]
+	_save_presentation()
+func _set_effects(index: int) -> void:
+	_preferences.effects_level = index
+	_save_presentation()
+func _reset_presentation() -> void:
+	_preferences.ui_scale = 1.0
+	_preferences.font_scale = 1.0
+	_preferences.effects_level = 2
+	_preferences.damage_numbers = true
+	_preferences.motion = true
+	_save_presentation()
+	_rebuild_panel()
+func _save_presentation() -> void:
+	_apply_presentation()
+	var result: Error = _preferences.save_settings()
+	_panel_footer.text = "显示设置已保存" if result == OK else "设置未能保存；本次运行仍会使用新设置"

@@ -7,12 +7,12 @@ signal feedback(message: String)
 const Passives = preload("res://scripts/passive_data.gd")
 const Jewels = preload("res://scripts/jewel_data.gd")
 const TreeCanvas = preload("res://scripts/passive_tree_view.gd")
-const TEXT: Color = Color("e8f1f5")
-const MUTED: Color = Color("91a8bb")
-const CYAN: Color = Color("78e2e2")
-const GOLD: Color = Color("f5ce86")
+const TEXT: Color = Color("eee9dd")
+const MUTED: Color = Color("a9b5b3")
+const CYAN: Color = Color("78d9ce")
+const GOLD: Color = Color("d9b779")
 const RED: Color = Color("ee98a2")
-const BORDER: Color = Color("2c4056")
+const BORDER: Color = Color("455754")
 
 var tree_view: PassiveTreeView
 var selected_node_id: String = "origin"
@@ -54,7 +54,7 @@ func setup(state: BuildState) -> void:
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	size_flags_vertical = Control.SIZE_EXPAND_FILL
-	custom_minimum_size = Vector2(1120, 430)
+	custom_minimum_size = Vector2(0, 400)
 	add_theme_constant_override("separation", 8)
 	if not _built:
 		_build_ui()
@@ -158,7 +158,7 @@ func remove_selected_jewel() -> bool:
 
 
 func _build_ui() -> void:
-	var toolbar: HBoxContainer = HBoxContainer.new()
+	var toolbar: HFlowContainer = HFlowContainer.new()
 	toolbar.name = "TreeToolbar"
 	toolbar.add_theme_constant_override("separation", 8)
 	add_child(toolbar)
@@ -197,7 +197,7 @@ func _build_ui() -> void:
 	canvas_panel.name = "ConstellationFrame"
 	canvas_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	canvas_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	canvas_panel.add_theme_stylebox_override("panel", _style(Color("09111e"), BORDER, 9, 1, 2))
+	canvas_panel.add_theme_stylebox_override("panel", _style(Color("0d1a1b"), BORDER, 9, 1, 2))
 	content.add_child(canvas_panel)
 	tree_view = TreeCanvas.new() as PassiveTreeView
 	canvas_panel.add_child(tree_view)
@@ -206,9 +206,9 @@ func _build_ui() -> void:
 	tree_view.viewport_changed.connect(_refresh_zoom)
 	var inspector: PanelContainer = PanelContainer.new()
 	inspector.name = "NodeInspector"
-	inspector.custom_minimum_size.x = 324
+	inspector.custom_minimum_size.x = 340
 	inspector.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	inspector.add_theme_stylebox_override("panel", _style(Color("101c2b"), BORDER, 9, 1, 11))
+	inspector.add_theme_stylebox_override("panel", _style(Color("152422"), BORDER, 9, 1, 11))
 	content.add_child(inspector)
 	var scroll: ScrollContainer = ScrollContainer.new()
 	scroll.name = "InspectorScroll"
@@ -301,7 +301,7 @@ func _build_ui() -> void:
 	_stat_label = _wrap_label("", 12, CYAN)
 	_stat_label.name = "TreeDerivedStatsLabel"
 	details.add_child(_stat_label)
-	var legend: HBoxContainer = HBoxContainer.new()
+	var legend: HFlowContainer = HFlowContainer.new()
 	legend.name = "TreeLegend"
 	legend.add_theme_constant_override("separation", 18)
 	add_child(legend)

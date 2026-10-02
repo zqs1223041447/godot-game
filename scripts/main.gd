@@ -2,6 +2,8 @@ extends Node2D
 ## First playable slice. BuildState owns progression; this node owns a single run.
 ## All combat positions use the 1280 × 720 logical canvas, independent of window size.
 
+const Visuals = preload("res://scripts/visuals/arena_visuals.gd")
+const Presentation = preload("res://scripts/visuals/visual_settings.gd")
 const Build = preload("res://scripts/build_state.gd")
 const Data = preload("res://scripts/game_data.gd")
 const Hud = preload("res://scripts/game_hud.gd")
@@ -17,6 +19,7 @@ const MAX_ENEMIES := 55
 const MAX_PROJECTILES := 180
 const MAX_PARTICLES := 180
 
+var visual_settings = Presentation.new()
 var monster_runtime = MonsterLifecycle.new()
 var reward_kills: int = 0
 var demo_mode: bool = false
@@ -61,6 +64,7 @@ var _ready_complete: bool = false
 
 
 func _ready() -> void:
+	visual_settings.load_settings()
 	rng.randomize()
 	_font = load("res://assets/fonts/arena_sans.otf")
 	_configure_input()
@@ -73,8 +77,8 @@ func _ready() -> void:
 	hud.setup(self)
 	_ready_complete = true
 	restart_run()
-	if state.migrated_from_v1 or state.migrated_from_v2:
-		hud.open_panel("talents" if state.migrated_from_v1 else "combat")
+	if state.migrated_from_v1 or state.migrated_from_v2 or state.migrated_from_v3:
+		hud.open_panel("talents" if state.migrated_from_v1 else "inventory" if state.migrated_from_v3 else "combat")
 		hud.notify(state.migration_message)
 	else:
 		hud.notify("F7 怪物机制与分裂试验 · F6 龙卷组合 · T 天赋星图")
@@ -481,6 +485,10 @@ func cast_skill(index: int) -> bool:
 	if mana < float(skill.mana):
 		hud.notify("魔力不足 · 等待恢复或拾取补给")
 		return false
+	var volley_size: int = 3 if id == "bolt" else 5 if id == "frost" else 0
+	if volley_size > 0 and projectiles.size() + volley_size > MAX_PROJECTILES:
+		hud.notify("投射物空间不足以发射完整技能，本次未消耗法力或冷却")
+		return false
 	mana -= float(skill.mana)
 	cooldowns[id] = float(skill.cooldown)
 	player_facing = _aim_direction()
@@ -645,6 +653,8 @@ func _damage_enemy(enemy: Dictionary, amount: float, color: Color, slow: float =
 			hud.notify("升级！获得 1 点天赋 · 按 T 分配")
 			_add_ring(player_pos, 80.0, Color("e7c98d"), 0.7)
 			_add_text(player_pos + Vector2(0, -46), "LEVEL UP", Color("e7c98d"))
+		if eligible and (reward_kills % 8 == 0 or enemy.get("rarity", "") in ["rare", "boss"]):
+			_award_kill_equipment(enemy)
 		if eligible and reward_kills % 20 == 0:
 			_award_kill_jewel()
 		if eligible and reward_kills % 4 == 0:
@@ -653,10 +663,24 @@ func _damage_enemy(enemy: Dictionary, amount: float, color: Color, slow: float =
 			_add_particle(Vector2(enemy.pos), Vector2.RIGHT.rotated(rng.randf() * TAU) * rng.randf_range(35, 120), Color("ce8070"), 3.0, 0.45)
 
 
+func _award_kill_equipment(enemy: Dictionary) -> void:
+	# Exactly one decision per eligible root death. Descendants/demo never enter here.
+	var rarity: String = "rare" if enemy.get("rarity", "") in ["rare", "boss"] else ""
+	var item_level: int = clampi(wave * 2 - 1, 1, 30)
+	var item_id: String = state.award_equipment(rng, item_level, rarity)
+	if item_id.is_empty():
+		hud.notify("背包保留空间不足，无法领取新装备；已有物品完整保留，可在 I 中清理随机装备")
+		return
+	var definition: Dictionary = state.get_item_definition(item_id)
+	hud.notify("获得装备：%s · 物品等级 %d · 按 I 比较和穿戴" % [definition.name, item_level])
+	_add_ring(player_pos, 90.0, Color("eac976"), 0.7)
+	_add_text(player_pos + Vector2(0, -76), "+ 装备", Color("eac976"))
+
+
 func _award_kill_jewel() -> void:
 	var jewel_id: String = state.award_jewel(rng)
 	if jewel_id.is_empty():
-		hud.notify("珠宝藏品已达 64 颗上限，已有珠宝均已保留")
+		hud.notify("珠宝上限或背包保留空间不足，已有珠宝均已保留")
 		return
 	var jewel: Dictionary = state.jewels[jewel_id]
 	hud.notify("获得珠宝：%s · 按 T 查看并镶嵌" % Jewels.display_name(jewel))
@@ -728,144 +752,4 @@ func _update_effects(delta: float) -> void:
 
 
 func _draw() -> void:
-	_draw_arena()
-	if not _ready_complete:
-		return
-	for pickup: Dictionary in pickups:
-		var pos: Vector2 = pickup.pos
-		var pulse: float = 0.75 + sin(elapsed * 4.5) * 0.2
-		draw_circle(pos, 14.0, Color(0.25, 0.7, 0.49, 0.10 * pulse))
-		_draw_polygon_shape(pos, 7.0, 4, Color("7bd9a4"), PI / 4.0)
-		draw_line(pos + Vector2(-3, 0), pos + Vector2(3, 0), Color("e8ffee"), 1.8)
-		draw_line(pos + Vector2(0, -3), pos + Vector2(0, 3), Color("e8ffee"), 1.8)
-	for ring: Dictionary in rings:
-		var ratio: float = 1.0 - float(ring.life) / float(ring.max_life)
-		var color: Color = ring.color
-		color.a = (1.0 - ratio) * 0.7
-		draw_arc(Vector2(ring.pos), lerpf(8.0, float(ring.radius), ratio), 0, TAU, 64, color, 2.5, true)
-	for enemy: Dictionary in enemies:
-		_draw_enemy(enemy)
-	for shot: Dictionary in projectiles:
-		var pos: Vector2 = shot.pos
-		var color: Color = Color("bd98ff") if shot.state == "returning" else Color(shot.color)
-		var tail: Vector2 = Vector2(shot.velocity).normalized() * 20.0
-		draw_line(pos - tail, pos, Color(color, 0.28), 8.0, true)
-		draw_line(pos - tail * 0.5, pos, color, 3.0, true)
-		draw_circle(pos, 4.2, color)
-		draw_circle(pos, 2.0, Color("f5fff4"))
-	_draw_player()
-	for particle: Dictionary in particles:
-		var color: Color = particle.color
-		color.a = float(particle.life) / float(particle.max_life)
-		draw_circle(Vector2(particle.pos), float(particle.radius) * color.a, color)
-	if _font:
-		for text: Dictionary in floating_text:
-			var color: Color = text.color
-			color.a = minf(1.0, float(text.life) * 2.0)
-			draw_string(_font, Vector2(text.pos) + Vector2(1, 2), str(text.text), HORIZONTAL_ALIGNMENT_CENTER, -1, 17, Color(0, 0, 0, color.a * 0.7))
-			draw_string(_font, Vector2(text.pos), str(text.text), HORIZONTAL_ALIGNMENT_CENTER, -1, 17, color)
-
-
-func _draw_arena() -> void:
-	draw_rect(Rect2(0, 0, 1280, 720), Color("0b1118"))
-	draw_rect(ARENA.grow(9), Color("18232c"))
-	draw_rect(ARENA.grow(8), Color("263843"), false, 1.0)
-	draw_rect(ARENA, Color("17232b"))
-	# Fixed, deterministic floor pattern stays quiet behind gameplay.
-	for x: int in range(42, 1239, 48):
-		draw_line(Vector2(x, 104), Vector2(x, 566), Color("203039"), 1.0)
-	for y: int in range(104, 567, 48):
-		draw_line(Vector2(42, y), Vector2(1238, y), Color("203039"), 1.0)
-	for x: int in range(66, 1230, 96):
-		for y: int in range(128, 560, 96):
-			draw_circle(Vector2(x, y), 1.0, Color("35434a"))
-	var center: Vector2 = ARENA.get_center()
-	for radius: float in [88.0, 96.0, 130.0]:
-		draw_arc(center, radius, 0, TAU, 96, Color("2b444b"), 1.0, true)
-	for i: int in range(8):
-		var direction := Vector2.RIGHT.rotated(i * TAU / 8.0)
-		draw_line(center + direction * 104, center + direction * 122, Color("456068"), 2.0, true)
-	_draw_polygon_shape(center, 63.0, 4, Color("1d3038"), PI / 4)
-	draw_rect(ARENA.grow(-12), Color("35505a"), false, 1.0)
-	for corner: Vector2 in [Vector2(56, 118), Vector2(1224, 118), Vector2(56, 552), Vector2(1224, 552)]:
-		draw_circle(corner, 15, Color("283c42"))
-		_draw_polygon_shape(corner, 9, 4, Color("bba77d"), PI / 4)
-		_draw_polygon_shape(corner, 4, 4, Color("e3d5a6"), PI / 4)
-	if _font:
-		draw_string(_font, Vector2(66, 140), "01  /  灰烬庭院", HORIZONTAL_ALIGNMENT_LEFT, -1, 15, Color("6b858c"))
-		draw_string(_font, Vector2(1100, 540), "构筑试验场", HORIZONTAL_ALIGNMENT_LEFT, -1, 15, Color("536c74"))
-
-
-func _draw_player() -> void:
-	var pos: Vector2 = player_pos
-	if hurt_flash > 0:
-		pos += Vector2(sin(elapsed * 90) * screen_shake, cos(elapsed * 75) * screen_shake)
-	draw_set_transform(pos + Vector2(0, 15), 0, Vector2(1.0, 0.35))
-	draw_circle(Vector2.ZERO, 21.0, Color(0.01, 0.02, 0.03, 0.6))
-	draw_set_transform(Vector2.ZERO)
-	var shield_ratio: float = shield / maxf(1.0, float(_stats.max_shield))
-	if shield_ratio > 0.0:
-		draw_circle(pos, 25, Color(0.3, 0.7, 0.8, 0.045))
-		draw_arc(pos, 25, -PI / 2, -PI / 2 + TAU * shield_ratio, 64, Color(0.45, 0.82, 0.92, 0.6), 1.6, true)
-	if invulnerable > 0.0:
-		draw_arc(pos, 29, elapsed * 5, elapsed * 5 + PI * 1.4, 48, Color("c7f8e6"), 1.5, true)
-	var body: Color = Color("f3f8e2") if hurt_flash > 0.0 else Color("aadad2")
-	# Cloak, shoulders and focus crystal; facing is readable without external sprites.
-	draw_colored_polygon(PackedVector2Array([pos + Vector2(-12, -4), pos + Vector2(-17, 15), pos + Vector2(0, 10), pos + Vector2(17, 15), pos + Vector2(12, -4)]), Color("365965"))
-	_draw_polygon_shape(pos, 15, 6, Color("305462"), PI / 6)
-	_draw_polygon_shape(pos + Vector2(0, -3), 10, 6, body, PI / 6)
-	draw_line(pos + Vector2(-5, -4), pos + Vector2(5, -4), Color("2b4a58"), 3.0)
-	var staff: Vector2 = pos + player_facing * 19.0
-	draw_line(pos + player_facing * 8.0, staff + player_facing * 9.0, Color("8f7655"), 4.0, true)
-	_draw_polygon_shape(staff, 6.5, 4, Color("e3c792"), player_facing.angle())
-	draw_circle(staff, 2.8, Color("d5fff0"))
-	if not alive:
-		draw_circle(pos, 20, Color(0.4, 0.1, 0.12, 0.7))
-
-
-func _draw_enemy(enemy: Dictionary) -> void:
-	var pos: Vector2 = enemy.pos
-	var radius: float = enemy.radius
-	var kind: int = enemy.kind
-	var rarity: String = str(enemy.get("rarity", "normal"))
-	var tier_color: Color = Monsters.RARITIES[rarity].color
-	var color: Color = tier_color
-	if float(enemy.slow) > 0.0:
-		color = Color("7ac8dd")
-	if float(enemy.flash) > 0.0:
-		color = Color("f9efd8")
-	var spawn_ratio: float = 1.0 - float(enemy.spawn) / 0.6
-	color.a = 0.3 + spawn_ratio * 0.7
-	draw_set_transform(pos + Vector2(0, radius * 0.7), 0, Vector2(1.0, 0.35))
-	draw_circle(Vector2.ZERO, radius + 5, Color(0.01, 0.02, 0.03, 0.4))
-	draw_set_transform(Vector2.ZERO)
-	var angle: float = (player_pos - pos).angle()
-	_draw_polygon_shape(pos, radius, 4 if kind == 1 else 6, color.darkened(0.32), angle)
-	_draw_polygon_shape(pos, radius * 0.73, 4 if kind == 1 else 6, color, angle)
-	var eye_pos := pos + Vector2.RIGHT.rotated(angle) * radius * 0.4
-	draw_circle(eye_pos, 2.5 if kind != 2 else 4.0, Color("ffe7bb"))
-	if rarity != "normal":
-		draw_arc(pos, radius + 6, 0, TAU, 32, tier_color, 2.0, true)
-	if not enemy.get("death_spawns", []).is_empty():
-		for mark: int in range(3):
-			var tip: Vector2 = pos + Vector2.RIGHT.rotated(mark * TAU / 3.0) * (radius + 11)
-			draw_circle(tip, 2.5, tier_color)
-	if kind == 2:
-		draw_arc(pos, radius + 3, 0, TAU, 6, color, 1.0, true)
-	if float(enemy.health) < float(enemy.max_health):
-		draw_rect(Rect2(pos + Vector2(-radius, -radius - 9), Vector2(radius * 2, 3)), Color("101820"))
-		draw_rect(Rect2(pos + Vector2(-radius, -radius - 9), Vector2(radius * 2 * maxf(0, float(enemy.health) / float(enemy.max_health)), 3)), color)
-
-	if float(enemy.get("max_shield", 0.0)) > 0.0:
-		draw_arc(pos, radius + 9, -PI / 2.0, -PI / 2.0 + TAU * float(enemy.get("shield", 0.0)) / float(enemy.max_shield), 32, Color("bfa5f7"), 2.0, true)
-	if rarity != "normal" or demo_mode:
-		var label: String = str(enemy.get("name", "怪物")) + " · " + str(Monsters.RARITIES[rarity].name).split(" · ")[0]
-		var width: float = _font.get_string_size(label, HORIZONTAL_ALIGNMENT_LEFT, -1, 13).x
-		draw_string(_font, pos + Vector2(-width / 2.0, -radius - 17), label, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, tier_color)
-
-
-func _draw_polygon_shape(center: Vector2, radius: float, sides: int, color: Color, angle: float = 0.0) -> void:
-	var points := PackedVector2Array()
-	for i: int in range(sides):
-		points.append(center + Vector2.RIGHT.rotated(angle + i * TAU / sides) * radius)
-	draw_colored_polygon(points, color)
+	Visuals.draw_scene(self, visual_settings)

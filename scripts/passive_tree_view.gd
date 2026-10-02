@@ -10,8 +10,8 @@ const Passives = preload("res://scripts/passive_data.gd")
 const Jewels = preload("res://scripts/jewel_data.gd")
 const MIN_ZOOM: float = 0.15
 const MAX_ZOOM: float = 1.8
-const GOLD: Color = Color("f5ce86")
-const CYAN: Color = Color("78e2e2")
+const GOLD: Color = Color("d9b779")
+const CYAN: Color = Color("78d9ce")
 const MUTED: Color = Color("617689")
 
 var zoom: float = 0.34
@@ -37,7 +37,7 @@ func setup(state: BuildState) -> void:
 	focus_mode = Control.FOCUS_NONE
 	size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	size_flags_vertical = Control.SIZE_EXPAND_FILL
-	custom_minimum_size = Vector2(660, 374)
+	custom_minimum_size = Vector2(450, 290)
 	_nodes = Passives.get_nodes()
 	_edges = Passives.get_edges()
 	if not mouse_exited.is_connected(_on_mouse_exited):
@@ -243,7 +243,7 @@ func _node_radius(node: Dictionary) -> float:
 
 
 func _draw() -> void:
-	draw_rect(Rect2(Vector2.ZERO, size), Color("09111e"))
+	draw_rect(Rect2(Vector2.ZERO, size), Color("0d1a1b"))
 	_draw_backdrop()
 	if _state == null:
 		return

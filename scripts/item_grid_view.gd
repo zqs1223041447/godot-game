@@ -12,10 +12,10 @@ const COLUMNS: int = 12
 const ROWS: int = 8
 const CELL: float = 42.0
 const INSET: float = 8.0
-const TEXT: Color = Color("e8f1f5")
+const TEXT: Color = Color("eee9dd")
 const MUTED: Color = Color("8399aa")
-const CYAN: Color = Color("70e0dc")
-const GOLD: Color = Color("f4ca78")
+const CYAN: Color = Color("78d9ce")
+const GOLD: Color = Color("d9b779")
 const RED: Color = Color("f27786")
 const GREEN: Color = Color("85e2b6")
 
@@ -32,7 +32,7 @@ class ItemArt extends Control:
 	var draw_border: bool = true
 
 	func _draw() -> void:
-		var accent: Color = entry.get("color", Color("70e0dc"))
+		var accent: Color = entry.get("color", Color("78d9ce"))
 		if draw_border:
 			draw_rect(Rect2(Vector2.ZERO, size), Color(0.035, 0.065, 0.105, 0.94))
 			draw_rect(Rect2(Vector2.ONE, size - Vector2(2, 2)), accent, false, 2.0)
@@ -88,8 +88,8 @@ func _draw() -> void:
 	for y: int in range(ROWS):
 		for x: int in range(COLUMNS):
 			var cell_rect := Rect2(Vector2(x, y) * CELL + grid_rect.position, Vector2.ONE * CELL)
-			draw_rect(cell_rect.grow(-1.0), Color("111e2b") if (x + y) % 2 == 0 else Color("101b27"))
-			draw_rect(cell_rect.grow(-1.0), Color("213141"), false, 1.0)
+			draw_rect(cell_rect.grow(-1.0), Color("182b2a") if (x + y) % 2 == 0 else Color("142423"))
+			draw_rect(cell_rect.grow(-1.0), Color("30433c"), false, 1.0)
 	if state == null:
 		return
 	var font: Font = get_theme_default_font()
@@ -175,7 +175,7 @@ func _drop_data(at_position: Vector2, data: Variant) -> void:
 	var destination: Vector2i = cell_at_position(at_position) - Vector2i(data.get("grab_offset", Vector2i.ZERO))
 	var moved: bool = false
 	if key.begins_with("item:"):
-		var slot: String = str(Data.ITEMS.get(key.substr(5), {}).get("slot", ""))
+		var slot: String = str(state.get_item_definition(key.substr(5)).get("slot", ""))
 		if state.equipped.get(slot, "") == key.substr(5):
 			moved = state.unequip_to_backpack(slot, destination)
 		else:
@@ -230,14 +230,15 @@ static func make_drag_preview(entry: Dictionary, dimensions: Vector2, offset: Ve
 static func describe_item(build: BuildState, key: String) -> Dictionary:
 	if key.begins_with("item:"):
 		var id: String = key.substr(5)
-		var entry: Dictionary = Data.ITEMS.get(id, {}).duplicate(true)
+		var entry: Dictionary = build.get_item_definition(id).duplicate(true)
 		if entry.is_empty():
 			return {}
 		entry["id"] = id
 		entry["kind"] = "gear"
-		entry["color"] = Color("9ebce7") if id in ["guardian_robe", "azure_charm", "ember_wand"] else GOLD
-		entry["rarity_name"] = "魔法" if id in ["guardian_robe", "azure_charm", "ember_wand"] else "稀有"
-		entry["short_name"] = {"weapon": "法杖" if id == "ember_wand" else "短刃", "armor": "长袍" if id == "guardian_robe" else "轻甲", "charm": "护符"}.get(entry.get("slot", ""), "装备")
+		var rarity: String = str(entry.get("rarity", "magic" if id in ["guardian_robe", "azure_charm", "ember_wand"] else "rare"))
+		entry["color"] = {"normal":Color("d6ded8"),"magic":Color("8dbaff"),"rare":GOLD,"unique":Color("e9a877")}.get(rarity,GOLD)
+		entry["rarity_name"] = {"normal":"普通","magic":"魔法","rare":"稀有","unique":"传奇"}.get(rarity,"装备")
+		entry["short_name"] = {"weapon": "长弓" if id == "prism_bow" else "法杖" if id in ["ember_wand","cinder_reed"] or str(entry.get("base_name","")).ends_with("杖") else "短刃", "armor": "披风" if id == "return_mantle" else "长袍" if id == "guardian_robe" or str(entry.get("base_name","")).ends_with("袍") else "轻甲", "charm": "护符"}.get(entry.get("slot", ""), "装备")
 		return entry
 	if key.begins_with("jewel:"):
 		var id: String = key.substr(6)
@@ -262,7 +263,7 @@ static func draw_item_icon(canvas: CanvasItem, entry: Dictionary, rect: Rect2) -
 	var accent: Color = entry.get("color", CYAN)
 	var center: Vector2 = rect.get_center()
 	var unit: float = minf(rect.size.x, rect.size.y) * 0.36
-	var id: String = str(entry.get("id", ""))
+	var id: String = str(entry.get("base_id", entry.get("id", "")))
 	if entry.get("kind", "") == "jewel":
 		var gem_color: Color = Jewels.BASES.get(entry.get("base", ""), {}).get("color", accent)
 		var diamond := PackedVector2Array([center + Vector2(0, -unit), center + Vector2(unit * 0.76, -unit * 0.15), center + Vector2(unit * 0.48, unit * 0.70), center + Vector2(-unit * 0.48, unit * 0.70), center + Vector2(-unit * 0.76, -unit * 0.15)])
@@ -275,7 +276,16 @@ static func draw_item_icon(canvas: CanvasItem, entry: Dictionary, rect: Rect2) -
 	match str(entry.get("slot", "")):
 		"weapon":
 			var length: float = minf(rect.size.y * 0.67, rect.size.x * 2.0)
-			if id == "ember_wand":
+			if id == "prism_bow":
+				var bow_points := PackedVector2Array()
+				for i: int in range(25):
+					var angle: float = lerpf(-PI/2,PI/2,i/24.0)
+					bow_points.append(center+Vector2(cos(angle)*unit*0.85-unit*0.3,sin(angle)*length*0.52))
+				canvas.draw_polyline(bow_points,Color("9fbfb6"),4,true)
+				canvas.draw_line(bow_points[0],bow_points[-1],Color("dcceb3"),1,true)
+				canvas.draw_line(center+Vector2(-unit*0.6,0),center+Vector2(unit*1.2,0),GOLD,2,true)
+				canvas.draw_colored_polygon(PackedVector2Array([center+Vector2(unit*1.3,0),center+Vector2(unit*0.8,-4),center+Vector2(unit*0.8,4)]),accent)
+			elif id in ["ember_wand","cinder_reed"] or str(entry.get("base_name","")).ends_with("杖"):
 				canvas.draw_line(center + Vector2(-unit * 0.18, length * 0.5), center + Vector2(unit * 0.14, -length * 0.30), Color("b08b58"), 5.0, true)
 				canvas.draw_line(center + Vector2(-unit * 0.22, length * 0.43), center + Vector2(unit * 0.08, -length * 0.22), GOLD.lightened(0.1), 1.2, true)
 				var head: Vector2 = center + Vector2(unit * 0.15, -length * 0.40)
@@ -294,7 +304,7 @@ static func draw_item_icon(canvas: CanvasItem, entry: Dictionary, rect: Rect2) -
 		"armor":
 			var h: float = minf(rect.size.y * 0.40, rect.size.x * 0.67)
 			var w: float = minf(rect.size.x * 0.31, h * 0.80)
-			var robe: bool = id == "guardian_robe"
+			var robe: bool = id in ["guardian_robe","return_mantle","tidebound_coat"] or str(entry.get("base_name","")).ends_with("袍")
 			var outline := PackedVector2Array([center + Vector2(-w * 0.46, -h), center + Vector2(-w * 1.2, -h * 0.7), center + Vector2(-w * 1.3, -h * 0.08), center + Vector2(-w * 0.74, h * 0.06), center + Vector2(-w * 0.81 if robe else -w * 0.67, h), center + Vector2(w * 0.81 if robe else w * 0.67, h), center + Vector2(w * 0.74, h * 0.06), center + Vector2(w * 1.3, -h * 0.08), center + Vector2(w * 1.2, -h * 0.7), center + Vector2(w * 0.46, -h), center + Vector2(0, -h * 0.66)])
 			canvas.draw_colored_polygon(outline, Color("42678e") if robe else Color("778973"))
 			var closed: PackedVector2Array = outline.duplicate()

@@ -8,11 +8,11 @@ signal open_passives_requested
 const GridView = preload("res://scripts/item_grid_view.gd")
 const Data = preload("res://scripts/game_data.gd")
 const Passives = preload("res://scripts/passive_data.gd")
-const TEXT: Color = Color("e8f1f5")
-const MUTED: Color = Color("9aafbd")
-const CYAN: Color = Color("70e0dc")
-const GOLD: Color = Color("f4ca78")
-const BORDER: Color = Color("304659")
+const TEXT: Color = Color("eee9dd")
+const MUTED: Color = Color("a9b5b3")
+const CYAN: Color = Color("78d9ce")
+const GOLD: Color = Color("d9b779")
+const BORDER: Color = Color("455754")
 const SLOT_NAMES: Dictionary = {"weapon": "武器", "armor": "护甲", "charm": "饰品"}
 
 var selected_item_key: String = ""
@@ -30,6 +30,9 @@ var _detail_art: GridView.ItemArt
 var _equip_button: Button
 var _unequip_button: Button
 var _passives_button: Button
+var _discard_button: Button
+var _discard_dialog: ConfirmationDialog
+var _discard_target: String = ""
 var _equipment_slots: Dictionary = {}
 
 
@@ -43,23 +46,23 @@ class EquipmentSlot extends Control:
 	var _drop_state: int = 0
 
 	func _ready() -> void:
-		custom_minimum_size = Vector2(186, 96)
+		custom_minimum_size = Vector2(160, 96)
 		mouse_filter = Control.MOUSE_FILTER_STOP
 
 	func refresh() -> void:
 		var id: String = str(state.equipped.get(slot, ""))
-		tooltip_text = "%s · 空槽\n将对应装备拖入这里" % InventoryPanel.SLOT_NAMES.get(slot, slot) if id.is_empty() else "%s\n%s\n双击或右键卸回背包；也可拖入空闲格" % [Data.ITEMS[id]["name"], Data.ITEMS[id]["description"]]
+		tooltip_text = "%s · 空槽\n将对应装备拖入这里" % InventoryPanel.SLOT_NAMES.get(slot, slot) if id.is_empty() else "%s\n%s\n双击或右键卸回背包；也可拖入空闲格" % [state.get_item_definition(id)["name"], state.get_item_definition(id)["description"]]
 		queue_redraw()
 
 	func _draw() -> void:
 		var id: String = str(state.equipped.get(slot, "")) if state != null else ""
 		var selected_now: bool = selected_key == "item:" + id and not id.is_empty()
-		var line: Color = Color("70e0dc") if selected_now else Color("3c5265")
+		var line: Color = Color("78d9ce") if selected_now else Color("3c5265")
 		if _drop_state != 0:
 			line = Color("85e2b6") if _drop_state == 1 else Color("f27786")
-		draw_style_box(InventoryPanel.make_style(Color("142333"), line, 6, 2 if selected_now or _drop_state != 0 else 1), Rect2(Vector2.ZERO, size))
+		draw_style_box(InventoryPanel.make_style(Color("1d302e"), line, 6, 2 if selected_now or _drop_state != 0 else 1), Rect2(Vector2.ZERO, size))
 		var font: Font = get_theme_default_font()
-		draw_string(font, Vector2(12, 23), str(InventoryPanel.SLOT_NAMES.get(slot, slot)), HORIZONTAL_ALIGNMENT_LEFT, -1, 13, Color("9aafbd"))
+		draw_string(font, Vector2(12, 23), str(InventoryPanel.SLOT_NAMES.get(slot, slot)), HORIZONTAL_ALIGNMENT_LEFT, -1, 13, Color("a9b5b3"))
 		if id.is_empty():
 			var hint_entry: Dictionary = {"slot": slot, "id": "ember_wand" if slot == "weapon" else "guardian_robe" if slot == "armor" else "azure_charm", "color": Color("516477")}
 			GridView.draw_item_icon(self, hint_entry, Rect2(9, 29, 51, 57))
@@ -69,7 +72,7 @@ class EquipmentSlot extends Control:
 		var entry: Dictionary = GridView.describe_item(state, "item:" + id)
 		GridView.draw_item_icon(self, entry, Rect2(9, 28, 51, 59))
 		draw_string(font, Vector2(66, 55), str(entry.get("name", "装备")), HORIZONTAL_ALIGNMENT_LEFT, size.x - 72, 16, entry.get("color", Color.WHITE))
-		draw_string(font, Vector2(66, 77), "已装备 · 点击查看", HORIZONTAL_ALIGNMENT_LEFT, size.x - 72, 11, Color("9aafbd"))
+		draw_string(font, Vector2(66, 77), "已装备 · 点击查看", HORIZONTAL_ALIGNMENT_LEFT, size.x - 72, 11, Color("a9b5b3"))
 
 	func _gui_input(event: InputEvent) -> void:
 		if not event is InputEventMouseButton or not event.pressed:
@@ -101,7 +104,7 @@ class EquipmentSlot extends Control:
 			return false
 		var key: String = str(data["key"])
 		var id: String = key.substr(5) if key.begins_with("item:") else ""
-		var valid: bool = not id.is_empty() and Data.ITEMS.get(id, {}).get("slot", "") == slot and state.inventory.has(id) and state.equipped.get(slot, "") != id
+		var valid: bool = not id.is_empty() and state.get_item_definition(id).get("slot", "") == slot and state.inventory.has(id) and state.equipped.get(slot, "") != id
 		_drop_state = 1 if valid else -1
 		queue_redraw()
 		return valid
@@ -112,7 +115,7 @@ class EquipmentSlot extends Control:
 		var key: String = str(data["key"])
 		if state.equip(key.substr(5)):
 			selected.emit(key)
-			feedback.emit("已装备 · " + str(Data.ITEMS[key.substr(5)]["name"]))
+			feedback.emit("已装备 · " + str(state.get_item_definition(key.substr(5))["name"]))
 		else:
 			feedback.emit("背包没有足够空间，无法替换装备")
 		_drop_state = 0
@@ -182,6 +185,7 @@ func _build_interface() -> void:
 	summary_panel.add_child(summary_row)
 	summary_row.add_child(_label("当前属性", 13, CYAN))
 	_stats_summary = _label("", 13, TEXT)
+	_stats_summary.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_stats_summary.name = "DerivedStatsLabel"
 	_stats_summary.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_stats_summary.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
@@ -195,7 +199,7 @@ func _build_interface() -> void:
 
 	var equipment := VBoxContainer.new()
 	equipment.name = "EquipmentColumn"
-	equipment.custom_minimum_size.x = 196
+	equipment.custom_minimum_size.x = 168
 	equipment.add_theme_constant_override("separation", 8)
 	columns.add_child(equipment)
 	var equipment_header: Label = _label("角色装备", 17, GOLD)
@@ -233,7 +237,7 @@ func _build_interface() -> void:
 	var sort_button: Button = _button("整理", "AutoSortBackpackButton", _sort_backpack)
 	sort_button.custom_minimum_size = Vector2(62, 29)
 	sort_button.add_theme_font_size_override("font_size", 13)
-	sort_button.add_theme_stylebox_override("normal", make_style(Color("192a3b"), BORDER, 5, 1, 4))
+	sort_button.add_theme_stylebox_override("normal", make_style(Color("243130"), BORDER, 5, 1, 4))
 	sort_button.add_theme_stylebox_override("hover", make_style(Color("263c50"), CYAN, 5, 1, 4))
 	sort_button.add_theme_stylebox_override("pressed", make_style(Color("173f48"), CYAN, 5, 1, 4))
 	bag_header.add_child(sort_button)
@@ -249,15 +253,16 @@ func _build_interface() -> void:
 
 	var detail_panel := PanelContainer.new()
 	detail_panel.name = "ItemDetailPanel"
-	detail_panel.custom_minimum_size.x = 266
+	detail_panel.custom_minimum_size.x = 250
 	detail_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	detail_panel.add_theme_stylebox_override("panel", make_style(Color("101c2a"), BORDER, 7, 1, 13))
+	detail_panel.add_theme_stylebox_override("panel", make_style(Color("152422"), BORDER, 7, 1, 13))
 	columns.add_child(detail_panel)
 	var detail := VBoxContainer.new()
 	detail.add_theme_constant_override("separation", 6)
 	detail_panel.add_child(detail)
 	_detail_type = _label("物品详情", 12, MUTED)
 	_detail_type.name = "ItemTypeLabel"
+	_detail_type.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	detail.add_child(_detail_type)
 	_detail_name = _label("选择物品", 20, GOLD)
 	_detail_name.name = "ItemNameLabel"
@@ -266,7 +271,7 @@ func _build_interface() -> void:
 	_detail_art = GridView.ItemArt.new()
 	_detail_art.name = "ItemDetailArt"
 	_detail_art.draw_border = false
-	_detail_art.custom_minimum_size = Vector2(80, 68)
+	_detail_art.custom_minimum_size = Vector2(80, 48)
 	_detail_art.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	detail.add_child(_detail_art)
 	_detail_status = _label("", 12, CYAN)
@@ -280,7 +285,14 @@ func _build_interface() -> void:
 	_detail_stats.name = "ItemStatsLabel"
 	_detail_stats.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_detail_stats.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	detail.add_child(_detail_stats)
+	var stats_scroll := ScrollContainer.new()
+	stats_scroll.name = "ItemAffixScroll"
+	stats_scroll.custom_minimum_size.y = 86
+	stats_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	stats_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	detail.add_child(stats_scroll)
+	_detail_stats.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	stats_scroll.add_child(_detail_stats)
 	_detail_hint = _label("", 12, MUTED)
 	_detail_hint.name = "ItemHintLabel"
 	_detail_hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -291,6 +303,17 @@ func _build_interface() -> void:
 	detail.add_child(_unequip_button)
 	_passives_button = _button("前往天赋星图镶嵌", "OpenPassivesButton", _open_passives)
 	detail.add_child(_passives_button)
+	_discard_button = _button("丢弃这件装备", "DiscardEquipmentButton", _request_discard)
+	_discard_button.add_theme_color_override("font_color",Color("e5a2a0"))
+	detail.add_child(_discard_button)
+	_discard_dialog = ConfirmationDialog.new()
+	_discard_dialog.name = "DiscardEquipmentConfirmation"
+	_discard_dialog.title = "确认丢弃装备"
+	_discard_dialog.ok_button_text = "确认永久丢弃"
+	_discard_dialog.cancel_button_text = "保留装备"
+	_discard_dialog.confirmed.connect(_confirm_discard)
+	_discard_dialog.canceled.connect(func() -> void: _discard_target = "")
+	add_child(_discard_dialog)
 
 
 func _refresh_details() -> void:
@@ -298,6 +321,7 @@ func _refresh_details() -> void:
 	_equip_button.hide()
 	_unequip_button.hide()
 	_passives_button.hide()
+	_discard_button.hide()
 	_detail_art.entry = entry
 	_detail_art.queue_redraw()
 	if entry.is_empty():
@@ -325,9 +349,14 @@ func _refresh_details() -> void:
 	else:
 		var slot: String = str(entry.get("slot", ""))
 		var worn: bool = _state.equipped.get(slot, "") == entry.get("id", "")
-		_detail_type.text = "%s  ·  %s" % [SLOT_NAMES.get(slot, "装备"), entry.get("rarity_name", "装备")]
+		_detail_type.text = "%s  ·  %s  ·  物品等级 %d" % [SLOT_NAMES.get(slot, "装备"), entry.get("rarity_name", "装备"),int(entry.get("item_level",1))]
 		_detail_status.text = "%s  ·  占用 %d × %d 格" % ["已装备" if worn else "背包中", dimensions.x, dimensions.y]
-		_detail_stats.text = _gear_stats(entry.get("stats", {}))
+		_detail_stats.text = "装备合计\n" + _gear_stats(entry.get("stats", {}))
+		var rolled: Array = entry.get("affix_lines", [])
+		if not rolled.is_empty():
+			_detail_stats.text += "\n\n随机词缀\n" + "\n".join(rolled)
+			_detail_type.text += "\nT1 入门 / T2 中阶 / T3 高阶"
+		_discard_button.visible = not worn and str(entry.get("id","")).begins_with("gear_")
 		_detail_hint.text = "卸下后物品会放回空闲背包格。" if worn else "装备后替换同部位物品，属性立即生效。"
 		_equip_button.visible = not worn
 		_unequip_button.visible = worn
@@ -351,7 +380,7 @@ func _equip_selected() -> void:
 		return
 	var id: String = selected_item_key.substr(5)
 	if _state.equip(id):
-		feedback.emit("已装备 · " + str(Data.ITEMS[id]["name"]))
+		feedback.emit("已装备 · " + str(_state.get_item_definition(id)["name"]))
 	else:
 		feedback.emit("无法装备：请检查部位或背包空闲空间")
 
@@ -360,11 +389,11 @@ func _unequip_selected() -> void:
 	if not selected_item_key.begins_with("item:"):
 		return
 	var id: String = selected_item_key.substr(5)
-	var slot: String = str(Data.ITEMS.get(id, {}).get("slot", ""))
+	var slot: String = str(_state.get_item_definition(id).get("slot", ""))
 	if _state.equipped.get(slot, "") != id:
 		return
 	if _state.unequip(slot):
-		feedback.emit("已卸回背包 · " + str(Data.ITEMS[id]["name"]))
+		feedback.emit("已卸回背包 · " + str(_state.get_item_definition(id)["name"]))
 	else:
 		feedback.emit("背包没有足够空闲格，无法卸下")
 
@@ -422,3 +451,27 @@ static func make_style(bg: Color, line: Color, radius: int = 6, border: int = 1,
 	result.content_margin_top = padding
 	result.content_margin_bottom = padding
 	return result
+
+
+func _request_discard() -> void:
+	if not selected_item_key.begins_with("item:gear_"):
+		return
+	var id: String = selected_item_key.substr(5)
+	var entry: Dictionary = _state.get_item_definition(id)
+	if entry.is_empty() or _state.equipped.values().has(id):
+		return
+	_discard_target = id
+	_discard_dialog.dialog_text = "永久丢弃「%s」？\n该装备将从背包和存档中删除，无法恢复。" % str(entry.name)
+	_discard_dialog.popup_centered(Vector2i(440,180))
+
+func _confirm_discard() -> void:
+	var target: String = _discard_target
+	_discard_target = ""
+	if target.is_empty():
+		return
+	if _state.discard_equipment(target):
+		selected_item_key = ""
+		refresh()
+		feedback.emit("已丢弃装备，背包空位已释放")
+	else:
+		feedback.emit("未丢弃：装备已穿戴或不在背包中")

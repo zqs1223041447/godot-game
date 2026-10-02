@@ -8,7 +8,10 @@ signal changed
 const Data = preload("res://scripts/game_data.gd")
 const Passives = preload("res://scripts/passive_data.gd")
 const JewelCatalog = preload("res://scripts/jewel_data.gd")
-const SAVE_VERSION: int = 3
+const Equipment = preload("res://scripts/items/equipment_catalog.gd")
+const SAVE_VERSION: int = 4
+const MAX_EQUIPMENT: int = 64
+const MAX_EQUIPMENT_ID: int = 999999999
 const MAX_LEVEL: int = 1000
 const MAX_SAVE_BYTES: int = 262144
 const BASE_TALENT_POINTS: int = 5
@@ -24,9 +27,14 @@ const BASE_STATS: Dictionary = {
 	"mana_regen": 9.0, "shield_regen": 13.0,
 	"global_increased": 0.0, "projectile_increased": 0.0, "elemental_increased": 0.0,
 	"area_increased": 0.0, "projectile_count": 0.0,
+	"spell_increased": 0.0, "fire_increased": 0.0, "cold_increased": 0.0,
+	"lightning_increased": 0.0, "attack_elemental_increased": 0.0,
+	"attack_speed_increased": 0.0, "move_speed_increased": 0.0, "mana_regen_increased": 0.0,
 }
 
 var inventory: Array[String] = ["ember_wand", "swift_blade", "guardian_robe", "vitality_armor", "azure_charm", "storm_charm", "prism_bow", "return_mantle", "detonation_charm"]
+var equipment_instances: Dictionary = {}
+var next_equipment_id: int = 1
 var equipped: Dictionary = {"weapon": "ember_wand", "armor": "guardian_robe", "charm": "azure_charm"}
 var skill_slots: Array[String] = ["bolt", "frost", "nova", "dash", "ward"]
 var allocated_nodes: Array[String] = [Passives.START_ID]
@@ -40,6 +48,7 @@ var xp: int = 0
 var talent_points: int = BASE_TALENT_POINTS
 var migrated_from_v1: bool = false
 var migrated_from_v2: bool = false
+var migrated_from_v3: bool = false
 var _migration_version: int = 0
 var migration_message: String = ""
 var migration_backup_path: String = ""
@@ -48,20 +57,24 @@ var _migration_source_text: String = ""
 
 
 func _init() -> void:
-	backpack_positions = _packed_layout(get_backpack_items())
+	backpack_positions = _packed_layout(get_backpack_items(), equipment_instances)
 
 
 func get_stats() -> Dictionary:
 	var result: Dictionary = BASE_STATS.duplicate()
 	for slot: String in EQUIPMENT_SLOTS:
 		var item_id: String = str(equipped.get(slot, ""))
-		if Data.ITEMS.has(item_id):
-			_add_stats(result, Data.ITEMS[item_id]["stats"])
+		var definition: Dictionary = get_item_definition(item_id)
+		if not definition.is_empty():
+			_add_stats(result, definition["stats"])
 	var nodes: Dictionary = Passives.get_nodes()
 	_add_stats(result, Passives.get_allocated_stats(allocated_nodes))
 	for socket_id: String in socketed_jewels:
 		if allocated_nodes.has(socket_id) and nodes.has(socket_id) and nodes[socket_id]["type"] == "socket":
 			_add_stats(result, get_jewel_stats(socketed_jewels[socket_id]))
+	# Percentage character rates are a separate stage from flat points/second.
+	for rate: String in ["attack_speed", "move_speed", "mana_regen"]:
+		result[rate] = float(result[rate]) * (1.0 + float(result[rate + "_increased"]))
 	return result
 
 
@@ -69,16 +82,16 @@ func get_combat_snapshot() -> Dictionary:
 	var effects: Array[String] = []
 	for slot: String in EQUIPMENT_SLOTS:
 		var id: String = str(equipped.get(slot, ""))
-		for effect: String in Data.ITEMS.get(id, {}).get("effects", []):
+		for effect: String in get_item_definition(id).get("effects", []):
 			if not effects.has(effect):
 				effects.append(effect)
 	return preload("res://scripts/combat/combat_data.gd").snapshot(get_stats(), effects)
 
 
 func equip(item_id: String) -> bool:
-	if not Data.ITEMS.has(item_id) or not inventory.has(item_id):
+	if get_item_definition(item_id).is_empty() or not inventory.has(item_id):
 		return false
-	var slot: String = Data.ITEMS[item_id]["slot"]
+	var slot: String = get_item_definition(item_id)["slot"]
 	if equipped.get(slot, "") == item_id:
 		return false
 	equipped[slot] = item_id
@@ -91,6 +104,52 @@ func unequip(slot: String) -> bool:
 	if not EQUIPMENT_SLOTS.has(slot) or not equipped.has(slot):
 		return false
 	equipped.erase(slot)
+	_sync_backpack()
+	changed.emit()
+	return true
+
+
+func get_item_definition(item_id: String) -> Dictionary:
+	return _definition_for_id(item_id, equipment_instances)
+
+
+static func _definition_for_id(item_id: String, instances: Dictionary) -> Dictionary:
+	if Data.ITEMS.has(item_id):
+		var result: Dictionary = Data.ITEMS[item_id].duplicate(true)
+		result.merge({"id": item_id, "base_id": item_id, "rarity": "unique", "item_level": 1,
+			"affix_lines": [], "base_name": result.name})
+		return result
+	return Equipment.definition(instances.get(item_id, {}))
+
+
+func award_equipment(rng: RandomNumberGenerator, item_level: int, rarity: String = "") -> String:
+	if rng == null or equipment_instances.size() >= MAX_EQUIPMENT or next_equipment_id > MAX_EQUIPMENT_ID:
+		return ""
+	var id: String = "gear_%06d" % next_equipment_id
+	if equipment_instances.has(id):
+		return ""
+	var instance: Dictionary = Equipment.generate(rng, id, item_level, rarity)
+	if not Equipment.validate_instance(instance):
+		return ""
+	var candidate_instances: Dictionary = equipment_instances.duplicate(true)
+	candidate_instances[id] = instance
+	var candidate_inventory: Array[String] = inventory.duplicate()
+	candidate_inventory.append(id)
+	if not _owned_items_fit(candidate_inventory, jewels.keys(), candidate_instances):
+		return ""
+	equipment_instances[id] = instance
+	inventory.append(id)
+	next_equipment_id += 1
+	_sync_backpack()
+	changed.emit()
+	return id
+
+
+func discard_equipment(item_id: String) -> bool:
+	if not equipment_instances.has(item_id) or not inventory.has(item_id) or equipped.values().has(item_id):
+		return false
+	inventory.erase(item_id)
+	equipment_instances.erase(item_id)
 	_sync_backpack()
 	changed.emit()
 	return true
@@ -249,6 +308,10 @@ func award_jewel(rng: RandomNumberGenerator) -> String:
 	var jewel: Dictionary = JewelCatalog.generate(rng, id)
 	if not JewelCatalog.validate_instance(jewel):
 		return ""
+	var candidate_jewels: Array = jewels.keys()
+	candidate_jewels.append(id)
+	if not _owned_items_fit(inventory, candidate_jewels, equipment_instances):
+		return ""
 	jewels[id] = jewel
 	jewel_inventory.append(id)
 	next_jewel_id += 1
@@ -328,6 +391,8 @@ func load_build(path: String = "user://build_save.json") -> bool:
 		return false
 	# Commit only after every field, graph connection and jewel location validates.
 	inventory.assign(candidate["inventory"])
+	equipment_instances = candidate["equipment_instances"].duplicate(true)
+	next_equipment_id = int(candidate["next_equipment_id"])
 	equipped = candidate["equipped"].duplicate()
 	skill_slots.assign(candidate["skill_slots"])
 	allocated_nodes.assign(candidate["allocated_nodes"])
@@ -344,6 +409,7 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	talent_points = int(candidate["talent_points"])
 	migrated_from_v1 = int(parser.data["version"]) == 1
 	migrated_from_v2 = int(parser.data["version"]) == 2
+	migrated_from_v3 = int(parser.data["version"]) == 3
 	_migration_version = int(parser.data["version"])
 	if migrated_from_v1 or migrated_from_v2:
 		for id: String in Data.COMBAT_STARTER_ITEMS:
@@ -352,9 +418,11 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	migration_message = "旧版天赋已迁移：所有已用点数已返还，装备与技能保留。现在可分配星图天赋。" if migrated_from_v1 else ""
 	if migrated_from_v2:
 		migration_message = "构筑已升级：原装备、天赋和珠宝保留，已补发三件机制装备。K 可查看战斗机制。"
+	if migrated_from_v3:
+		migration_message = "构筑已升级：原装备、天赋和珠宝保留。现在可获得有独立词缀的随机装备；按 I 查看。"
 	migration_backup_path = ""
-	_migration_source_path = path if migrated_from_v1 or migrated_from_v2 else ""
-	_migration_source_text = text if migrated_from_v1 or migrated_from_v2 else ""
+	_migration_source_path = path if _migration_version < SAVE_VERSION else ""
+	_migration_source_text = text if _migration_version < SAVE_VERSION else ""
 	_sync_backpack()
 	changed.emit()
 	return true
@@ -371,6 +439,7 @@ func _snapshot() -> Dictionary:
 			serialized_positions[key] = null
 	return {
 		"version": SAVE_VERSION, "inventory": inventory.duplicate(), "equipped": equipped.duplicate(),
+		"equipment_instances": equipment_instances.duplicate(true), "next_equipment_id": next_equipment_id,
 		"skill_slots": skill_slots.duplicate(), "level": level, "xp": xp, "talent_points": talent_points,
 		"allocated_nodes": allocated_nodes.duplicate(), "jewels": jewels.duplicate(true),
 		"jewel_inventory": jewel_inventory.duplicate(), "socketed_jewels": socketed_jewels.duplicate(),
@@ -387,6 +456,8 @@ func _validate_snapshot(value: Variant) -> Dictionary:
 	if int(data["version"]) == 1:
 		return _migrate_v1(data)
 	var required: Array[String] = ["version", "inventory", "equipped", "skill_slots", "level", "xp", "talent_points", "allocated_nodes", "jewels", "jewel_inventory", "socketed_jewels", "next_jewel_id", "backpack_positions"]
+	if int(data["version"]) >= 4:
+		required.append_array(["equipment_instances", "next_equipment_id"])
 	if data.size() != required.size() or not data.has_all(required):
 		return {}
 	if not data["allocated_nodes"] is Array:
@@ -434,7 +505,19 @@ func _validate_snapshot(value: Variant) -> Dictionary:
 		return {}
 	if not _validate_backpack(data):
 		return {}
-	return data.duplicate(true)
+	var result: Dictionary = data.duplicate(true)
+	if int(data["version"]) < 4:
+		result["version"] = SAVE_VERSION
+		result["equipment_instances"] = {}
+		result["next_equipment_id"] = 1
+	# JSON numbers decode as floats. Normalize ONLY after exact integer/range
+	# validation so persisted rolls have the same canonical types as fresh loot.
+	for instance: Dictionary in result["equipment_instances"].values():
+		instance["item_level"] = int(instance["item_level"])
+		for affix: Dictionary in instance["affixes"]:
+			affix["tier"] = int(affix["tier"])
+			affix["value"] = int(affix["value"])
+	return result
 
 
 func _validate_common(data: Dictionary) -> bool:
@@ -451,11 +534,23 @@ func _validate_common(data: Dictionary) -> bool:
 		return false
 	var loaded_inventory: Array = data["inventory"]
 	var loaded_skills: Array = data["skill_slots"]
-	if loaded_inventory.size() > Data.ITEMS.size() or loaded_skills.size() != 5:
+	var instances: Dictionary = {}
+	if int(data.get("version", 0)) >= 4:
+		if not data.get("equipment_instances") is Dictionary or not _is_bounded_int(data.get("next_equipment_id"), 1, MAX_EQUIPMENT_ID + 1):
+			return false
+		instances = data["equipment_instances"]
+		if instances.size() > MAX_EQUIPMENT:
+			return false
+		for id: Variant in instances:
+			if not id is String or not Equipment.validate_instance(instances[id]):
+				return false
+			if instances[id]["id"] != id or Equipment.serial_from_id(id) >= int(data["next_equipment_id"]) or not loaded_inventory.has(id):
+				return false
+	if loaded_inventory.size() > Data.ITEMS.size() + instances.size() or loaded_skills.size() != 5:
 		return false
 	var seen: Dictionary = {}
 	for item_id: Variant in loaded_inventory:
-		if not item_id is String or not Data.ITEMS.has(item_id) or seen.has(item_id):
+		if not item_id is String or (not Data.ITEMS.has(item_id) and not instances.has(item_id)) or seen.has(item_id):
 			return false
 		seen[item_id] = true
 	seen.clear()
@@ -470,7 +565,7 @@ func _validate_common(data: Dictionary) -> bool:
 		var item_id: Variant = loaded_equipped[slot]
 		if not item_id is String or not loaded_inventory.has(item_id):
 			return false
-		if Data.ITEMS[item_id]["slot"] != slot:
+		if _definition_for_id(item_id, instances)["slot"] != slot:
 			return false
 	return true
 
@@ -493,6 +588,7 @@ func _migrate_v1(data: Dictionary) -> Dictionary:
 		return {}
 	var result: Dictionary = {
 		"version": SAVE_VERSION, "inventory": data["inventory"].duplicate(), "equipped": data["equipped"].duplicate(),
+		"equipment_instances": {}, "next_equipment_id": 1,
 		"skill_slots": data["skill_slots"].duplicate(), "level": int(data["level"]), "xp": int(data["xp"]),
 		"talent_points": int(data["talent_points"]) + spent_points, "allocated_nodes": [Passives.START_ID],
 		"jewels": JewelCatalog.starter_jewels(), "jewel_inventory": ["jewel_000001", "jewel_000002", "jewel_000003"],
@@ -576,9 +672,21 @@ func get_backpack_items() -> Array[String]:
 	return _backpack_keys(inventory, equipped, jewel_inventory)
 
 
-static func item_size(key: String) -> Vector2i:
-	if key.begins_with("item:") and Data.ITEMS.has(key.substr(5)):
-		return Data.ITEMS[key.substr(5)]["size"]
+func item_size(key: String) -> Vector2i:
+	return _item_size_for(key, equipment_instances)
+
+
+static func _item_size_for(key: String, instances: Dictionary = {}) -> Vector2i:
+	if key.begins_with("item:"):
+		var id: String = key.substr(5)
+		if Data.ITEMS.has(id):
+			return Data.ITEMS[id]["size"]
+		# Instance validity is established before packing; size is base metadata.
+		# Avoid formatting/validating every affix at each grid collision probe.
+		var instance: Variant = instances.get(id, {})
+		if instance is Dictionary:
+			return Equipment.BASES.get(instance.get("base_id", ""), {}).get("size", Vector2i.ZERO)
+		return Vector2i.ZERO
 	if key.begins_with("jewel:"):
 		return Vector2i.ONE
 	return Vector2i.ZERO
@@ -586,7 +694,7 @@ static func item_size(key: String) -> Vector2i:
 
 func can_place_in_backpack(key: String, cell: Vector2i) -> bool:
 	var owned: bool = (key.begins_with("item:") and inventory.has(key.substr(5))) or (key.begins_with("jewel:") and jewel_inventory.has(key.substr(6)))
-	return owned and _fits_in_layout(key, cell, backpack_positions)
+	return owned and _fits_in_layout(key, cell, backpack_positions, equipment_instances)
 
 
 func move_in_backpack(key: String, cell: Vector2i) -> bool:
@@ -612,7 +720,7 @@ func unequip_to_backpack(slot: String, cell: Vector2i) -> bool:
 
 
 func auto_sort_backpack() -> bool:
-	var sorted_layout: Dictionary = _packed_layout(get_backpack_items())
+	var sorted_layout: Dictionary = _packed_layout(get_backpack_items(), equipment_instances)
 	if sorted_layout == backpack_positions:
 		return false
 	backpack_positions = sorted_layout
@@ -624,15 +732,15 @@ func _sync_backpack() -> void:
 	var keys: Array[String] = get_backpack_items()
 	var layout: Dictionary = {}
 	for key: String in keys:
-		if backpack_positions.has(key) and _fits_in_layout(key, backpack_positions[key], layout):
+		if backpack_positions.has(key) and _fits_in_layout(key, backpack_positions[key], layout, equipment_instances):
 			layout[key] = backpack_positions[key]
 	for key: String in keys:
 		if layout.has(key):
 			continue
-		var cell: Vector2i = _first_fit(key, layout)
+		var cell: Vector2i = _first_fit(key, layout, equipment_instances)
 		if cell.x < 0:
 			# Fragmentation cannot lose an item. The owned cap guarantees this pack fits.
-			backpack_positions = _packed_layout(keys)
+			backpack_positions = _packed_layout(keys, equipment_instances)
 			return
 		layout[key] = cell
 	backpack_positions = layout
@@ -648,11 +756,16 @@ static func _backpack_keys(owned_items: Array, worn: Dictionary, loose_jewels: A
 	return result
 
 
-static func _packed_layout(keys: Array[String]) -> Dictionary:
+static func _owned_items_fit(items: Array, owned_jewels: Array, instances: Dictionary) -> bool:
+	var keys: Array[String] = _backpack_keys(items, {}, owned_jewels)
+	return _packed_layout(keys, instances).size() == keys.size()
+
+
+static func _packed_layout(keys: Array[String], instances: Dictionary = {}) -> Dictionary:
 	var sorted_keys: Array[String] = keys.duplicate()
 	sorted_keys.sort_custom(func(a: String, b: String) -> bool:
-		var first: Vector2i = item_size(a)
-		var second: Vector2i = item_size(b)
+		var first: Vector2i = _item_size_for(a, instances)
+		var second: Vector2i = _item_size_for(b, instances)
 		if first.y != second.y:
 			return first.y > second.y
 		if first.x != second.x:
@@ -661,31 +774,31 @@ static func _packed_layout(keys: Array[String]) -> Dictionary:
 	)
 	var layout: Dictionary = {}
 	for key: String in sorted_keys:
-		var cell: Vector2i = _first_fit(key, layout)
+		var cell: Vector2i = _first_fit(key, layout, instances)
 		if cell.x < 0:
 			return {}
 		layout[key] = cell
 	return layout
 
 
-static func _first_fit(key: String, layout: Dictionary) -> Vector2i:
+static func _first_fit(key: String, layout: Dictionary, instances: Dictionary = {}) -> Vector2i:
 	for y: int in range(BACKPACK_ROWS):
 		for x: int in range(BACKPACK_COLUMNS):
 			var cell := Vector2i(x, y)
-			if _fits_in_layout(key, cell, layout):
+			if _fits_in_layout(key, cell, layout, instances):
 				return cell
 	return Vector2i(-1, -1)
 
 
-static func _fits_in_layout(key: String, cell: Vector2i, layout: Dictionary) -> bool:
-	var dimensions: Vector2i = item_size(key)
+static func _fits_in_layout(key: String, cell: Vector2i, layout: Dictionary, instances: Dictionary = {}) -> bool:
+	var dimensions: Vector2i = _item_size_for(key, instances)
 	if dimensions.x <= 0 or dimensions.y <= 0 or cell.x < 0 or cell.y < 0:
 		return false
 	if cell.x + dimensions.x > BACKPACK_COLUMNS or cell.y + dimensions.y > BACKPACK_ROWS:
 		return false
 	var rectangle := Rect2i(cell, dimensions)
 	for other: String in layout:
-		if other != key and rectangle.intersects(Rect2i(layout[other], item_size(other))):
+		if other != key and rectangle.intersects(Rect2i(layout[other], _item_size_for(other, instances))):
 			return false
 	return true
 
@@ -697,6 +810,9 @@ static func _validate_backpack(data: Dictionary) -> bool:
 	var positions: Dictionary = data["backpack_positions"]
 	if positions.size() != expected.size():
 		return false
+	var instances: Dictionary = data.get("equipment_instances", {})
+	if not _owned_items_fit(data["inventory"], data["jewels"].keys(), instances):
+		return false
 	var checked: Dictionary = {}
 	for key: Variant in positions:
 		if not key is String or not expected.has(key) or not positions[key] is Array:
@@ -705,7 +821,7 @@ static func _validate_backpack(data: Dictionary) -> bool:
 		if coordinates.size() != 2 or not _is_bounded_int(coordinates[0], 0, BACKPACK_COLUMNS - 1) or not _is_bounded_int(coordinates[1], 0, BACKPACK_ROWS - 1):
 			return false
 		var cell := Vector2i(int(coordinates[0]), int(coordinates[1]))
-		if not _fits_in_layout(key, cell, checked):
+		if not _fits_in_layout(key, cell, checked, instances):
 			return false
 		checked[key] = cell
 	return true
