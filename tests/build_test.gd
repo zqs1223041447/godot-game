@@ -3,6 +3,7 @@ extends SceneTree
 
 const Model = preload("res://scripts/build_state.gd")
 const Data = preload("res://scripts/game_data.gd")
+const Passives = preload("res://scripts/passive_data.gd")
 const TEST_SAVE: String = "user://build_model_test.json"
 const BAD_SAVE: String = "user://build_model_invalid_test.json"
 
@@ -19,7 +20,7 @@ func _run_checks() -> void:
 	_remove_test_files()
 	_check_catalogs()
 	_check_equipment()
-	_check_talents()
+	_check_passives()
 	_check_skills()
 	_check_progression()
 	_check_persistence()
@@ -31,7 +32,7 @@ func _run_checks() -> void:
 func _check_catalogs() -> void:
 	_expect(Data.SKILLS.size() == 7, "Seven available skills")
 	_expect(Data.ITEMS.size() == 6, "Six initial equipment items")
-	_expect(Data.TALENTS.size() >= 4, "Talent catalog populated")
+	_expect(Passives.get_nodes().size() >= 150, "Expanded passive graph populated")
 	for skill_id: String in Data.SKILLS:
 		var skill: Dictionary = Data.SKILLS[skill_id]
 		_expect(skill.has_all(["name", "short_name", "description", "mana", "cooldown", "color", "icon"]), "Complete skill: " + skill_id)
@@ -40,9 +41,9 @@ func _check_catalogs() -> void:
 		_expect(Model.EQUIPMENT_SLOTS.has(Data.ITEMS[item_id]["slot"]), "Known item slot: " + item_id)
 		for stat: String in Data.ITEMS[item_id]["stats"]:
 			_expect(Model.BASE_STATS.has(stat), "Known item stat: " + stat)
-	for talent_id: String in Data.TALENTS:
-		for stat: String in Data.TALENTS[talent_id]["stats"]:
-			_expect(Model.BASE_STATS.has(stat), "Known talent stat: " + stat)
+	for node_id: String in Passives.get_nodes():
+		for stat: String in Passives.get_nodes()[node_id]["stats"]:
+			_expect(Model.BASE_STATS.has(stat), "Known passive stat: " + stat)
 
 
 func _check_equipment() -> void:
@@ -75,25 +76,34 @@ func _check_equipment() -> void:
 	_expect(is_equal_approx(independent.get_stats()["damage"], 26.0), "Returned stats do not mutate base stats")
 
 
-func _check_talents() -> void:
+func _check_passives() -> void:
 	var build := Model.new()
-	_expect(not build.allocate_talent("unknown"), "Unknown talent rejected")
-	for rank: int in range(5):
-		_expect(build.allocate_talent("power"), "Allocate power rank %d" % (rank + 1))
-	_expect(build.talent_points == 0 and build.talents["power"] == 5, "Talent points spent exactly")
-	_expect(is_equal_approx(build.get_stats()["damage"], 46.0), "Talent stats accumulate per rank")
-	_expect(not build.allocate_talent("vitality"), "Cannot allocate with zero points")
-	_expect(build.add_xp(build.xp_required()), "Gain talent point through level-up")
-	_expect(not build.allocate_talent("power"), "Max rank enforced with points available")
-	_expect(build.allocate_talent("focus"), "Different talent accepts point")
-	_expect(is_equal_approx(build.get_stats()["max_mana"], 142.0), "Multi-stat talent maximum applied")
-	_expect(is_equal_approx(build.get_stats()["mana_regen"], 13.0), "Multi-stat talent regeneration applied")
+	build.changed.connect(_on_changed)
+	change_count = 0
+	_expect(build.allocated_nodes == [Passives.START_ID], "Origin is the only initial passive")
+	_expect(not build.allocate_passive("unknown"), "Unknown passive rejected")
+	_expect(not build.allocate_passive("ember_6_0"), "Distant passive cannot skip path")
+	_expect(not build.allocate_passive(Passives.START_ID), "Origin cannot be allocated twice")
+	_expect(change_count == 0, "Rejected passive allocation emits no signal")
+	var before: Dictionary = build.get_stats()
+	_expect(build.allocate_passive("ember_1_0"), "Allocate adjacent passive")
+	_expect(build.talent_points == 4 and build.allocated_nodes.has("ember_1_0"), "Passive spends exactly one point")
+	for stat: String in Passives.get_nodes()["ember_1_0"]["stats"]:
+		_expect(is_equal_approx(build.get_stats()[stat], before[stat] + Passives.get_nodes()["ember_1_0"]["stats"][stat]), "Passive modifies " + stat)
+	_expect(not build.allocate_passive("ember_1_0"), "Allocated passive cannot spend twice")
+	_expect(build.allocate_passive("ember_2_0"), "Connected path expands")
+	_expect(not build.refund_passive("ember_1_0"), "Cannot refund bridge and disconnect path")
+	_expect(build.refund_passive("ember_2_0"), "Leaf can be refunded")
+	_expect(build.talent_points == 4, "Leaf refund returns one point")
 	build.refund_talents()
-	_expect(build.talent_points == 6, "Refund restores all invested points")
-	_expect(build.talents["power"] == 0 and build.talents["focus"] == 0, "Refund clears ranks")
-	_expect(is_equal_approx(build.get_stats()["damage"], 26.0), "Refund removes talent stats")
+	_expect(build.talent_points == 5 and build.allocated_nodes == [Passives.START_ID], "Reset restores passive budget")
+	_expect(build.get_stats() == before, "Reset removes passive stats")
 	build.refund_talents()
-	_expect(build.talent_points == 6, "Repeated refund cannot duplicate points")
+	_expect(build.talent_points == 5, "Repeated reset cannot duplicate points")
+	for id: String in ["ember_1_0", "grove_1_0", "tide_1_0", "gale_1_0", "aegis_1_0"]:
+		_expect(build.allocate_passive(id), "Spend initial point on " + id)
+	_expect(build.talent_points == 0 and not build.allocate_passive("prism_1_0"), "Zero point budget rejects reachable passive")
+	_expect(build.add_xp(build.xp_required()) and build.allocate_passive("prism_1_0"), "Level-up point allocates newly reachable passive")
 
 
 func _check_skills() -> void:
@@ -130,10 +140,10 @@ func _check_persistence() -> void:
 	build.unequip("armor")
 	build.slot_skill(4, "meteor")
 	build.add_xp(57)
-	build.allocate_talent("focus")
-	build.allocate_talent("aegis")
+	build.allocate_passive("tide_1_0")
+	build.allocate_passive("aegis_1_0")
 	_expect(build.save_build(TEST_SAVE) == OK, "Save valid build")
-	build.allocate_talent("haste")
+	build.allocate_passive("gale_1_0")
 	_expect(build.save_build(TEST_SAVE) == OK, "Atomically replace existing save")
 	var loaded := Model.new()
 	loaded.changed.connect(_on_changed)
@@ -172,17 +182,17 @@ func _check_persistence() -> void:
 	candidate["skill_slots"].pop_back()
 	_expect_invalid(loaded, candidate, "Wrong number of skill slots")
 	candidate = valid.duplicate(true)
-	candidate["talents"]["unknown_talent"] = 0
-	_expect_invalid(loaded, candidate, "Unknown talent")
+	candidate["allocated_nodes"].append("unknown_passive")
+	_expect_invalid(loaded, candidate, "Unknown passive")
 	candidate = valid.duplicate(true)
-	candidate["talents"]["power"] = 6
-	_expect_invalid(loaded, candidate, "Talent exceeds maximum")
+	candidate["allocated_nodes"].append(candidate["allocated_nodes"][0])
+	_expect_invalid(loaded, candidate, "Duplicate passive")
 	candidate = valid.duplicate(true)
-	candidate["talents"]["power"] = -1
-	_expect_invalid(loaded, candidate, "Negative talent rank")
+	candidate["allocated_nodes"].erase(Passives.START_ID)
+	_expect_invalid(loaded, candidate, "Missing origin")
 	candidate = valid.duplicate(true)
-	candidate["talents"]["focus"] = 1.5
-	_expect_invalid(loaded, candidate, "Fractional talent rank")
+	candidate["allocated_nodes"] = "not an array"
+	_expect_invalid(loaded, candidate, "Passive collection wrong type")
 	candidate = valid.duplicate(true)
 	candidate["talent_points"] += 1
 	_expect_invalid(loaded, candidate, "Inconsistent talent point budget")
@@ -234,11 +244,7 @@ func _write_bad_file(contents: String) -> void:
 
 
 func _snapshot(build: Model) -> Dictionary:
-	return {
-		"inventory": build.inventory.duplicate(), "equipped": build.equipped.duplicate(),
-		"talents": build.talents.duplicate(), "skill_slots": build.skill_slots.duplicate(),
-		"level": build.level, "xp": build.xp, "talent_points": build.talent_points,
-	}
+	return build._snapshot().duplicate(true)
 
 
 func _remove_test_files() -> void:
