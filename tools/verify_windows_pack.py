@@ -47,7 +47,7 @@ for _ in range(file_count):
     assert pack_start <= start <= start + size <= len(data) - 12, name
     assert not flags & 1, "Encrypted entry unsupported"
     assert hashlib.md5(data[start:start + size]).digest() == digest, name
-    assert not name.startswith(("tests/", "tools/", "builds/")), "Development-only file exported: " + name
+    assert not name.startswith(("tests/", "tools/", "builds/", "docs/")), "Development-only file exported: " + name
     entries.append({"name": name, "size": size, "md5_verified": True})
 print(json.dumps({
     "pe": "x86_64", "embedded_pck_version": pack_version,
