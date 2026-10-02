@@ -271,6 +271,7 @@ func _test_migration_and_roundtrip() -> void:
 	legacy.version = 3
 	legacy.erase("equipment_instances")
 	legacy.erase("next_equipment_id")
+	legacy.erase("skill_supports")
 	var text: String = "\n  " + JSON.stringify(legacy, "  ", false, true) + "\n\n"
 	var path: String = "user://equipment_schema3.json"
 	var backup: String = path + ".v3-backup.json"

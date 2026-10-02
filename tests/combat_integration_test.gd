@@ -148,7 +148,7 @@ func _test_equipment_snapshot() -> void:
 	_reset()
 	arena.equip_tornado_example()
 	arena.mana = 100.0
-	var original: Dictionary = arena.state.get_combat_snapshot()
+	var original: Dictionary = arena.state.get_skill_cast("tornado").snapshot
 	_expect(arena.cast_skill(0), "Snapshot scenario starts equipped tornado")
 	arena.state.equip("swift_blade")
 	arena.state.equip("guardian_robe")
@@ -274,6 +274,7 @@ func _test_schema_two_migration() -> void:
 	legacy.version = 2
 	legacy.erase("equipment_instances")
 	legacy.erase("next_equipment_id")
+	legacy.erase("skill_supports")
 	_expect(legacy.inventory.size() == 6 and not old._validate_snapshot(legacy).is_empty(), "True schema2 original-six inventory and exact corresponding layout validate")
 	var original_text: String = "\n" + JSON.stringify(legacy, "  ", true, true) + "\n"
 	if not _write_fixture(path, original_text):

@@ -1,5 +1,5 @@
 extends SceneTree
-## Bounded developer stress, isolated user:// by tools/validate.sh.
+## Deterministic bounded stress, isolated user:// by tools/validate.sh.
 const Model = preload("res://scripts/build_state.gd")
 var failures: int = 0
 var checks: int = 0
@@ -19,7 +19,10 @@ func run() -> void:
 	arena.set_process(false)
 	arena.hud.set_process(false)
 	arena.rng.seed = 5050600
+	# Restart after seeding: _ready originally spawns three randomized enemies.
+	arena.restart_run()
 	arena.equip_tornado_example()
+	expect(arena.state.set_skill_supports("tornado", ["volley", "focus"]), "Stress links both supports to seven-parent tornado")
 	arena.hud.close_panel()
 	var max_owned: int = 0
 	var max_live: int = 0
@@ -39,7 +42,7 @@ func run() -> void:
 		if frame % 600 == 0:
 			max_owned = maxi(max_owned, arena.state.equipment_instances.size())
 			max_live = maxi(max_live, arena.enemies.size())
-			expect(arena.enemies.size() <= arena.MAX_ENEMIES and arena.projectiles.size() <= arena.MAX_PROJECTILES, "Combat capacities stay bounded")
+			expect(arena.enemies.size() <= arena.MAX_ENEMIES and arena.projectiles.size() <= arena.MAX_PROJECTILES and arena.visual_cues.cues.size() <= arena.visual_cues.MAX_CUES, "Combat and cue capacities stay bounded")
 			expect(not arena.state._validate_snapshot(arena.state._snapshot()).is_empty(), "Evolving gear, jewels and layout remain save-valid")
 			expect(Model._owned_items_fit(arena.state.inventory, arena.state.jewels.keys(), arena.state.equipment_instances), "All worn and socketed loot retains return capacity")
 			# Free two generated items periodically; monotonically new rolls can refill.
