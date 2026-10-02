@@ -118,6 +118,8 @@ func compile_with_projectile_extension(skill_id: String, snapshot: Dictionary,
 
 `requires` 中的 `finite_projectile_pierce` 是扩展资格描述，**不是**新增伤害标签。现有 `SupportCatalog.definition_error` 尚不认识这个能力或 `add_pierce`，不能直接把扩展元数据塞入原目录而声称完成集成。后续应统一资格查询和支持列表验证入口，再接 K 列表；列表保存仍使用稳定 ID `pierce`，由主集成负责存档版本、迁移与保护策略。本模块既不提升版本也不读写存档。
 
+主集成可由单向 `SupportRegistry` 包装原 `SupportCatalog` 与本扩展，再按上面的顺序先编译旧辅助、后追加扩展。`ProjectileSupportRules` 已经 preload 原目录作为 `Legacy`，因此原 `SupportCatalog` 不应反向 preload 注册表或本扩展，避免加载循环。原辅助的 mana/more 只由 `SkillCompiler` 产生，扩展返回的 mana/more 只追加一次；带 `_projectile_support_ids` 的配方及带编译标记的快照不得重新送入编译入口。
+
 ## 运行时边界
 
 - 同一载体对同一怪物每个相位只命中一次；跨帧持续重叠不会重复命中或消耗穿透。
@@ -145,7 +147,7 @@ test "$result" -eq 0 && ! rg '(^|[[:space:]])(SCRIPT ERROR:|ERROR:)' "$validatio
 
 Godot 可能输出脚本错误却返回退出码 0，因此同时检查日志。需要进行完整项目导入时，请在临时 checkout 中运行 `godot --headless --editor --import`；运行现有完整回归使用 `bash tools/validate.sh`。原 `validate.sh` 未注册新套件，主集成后应补上测试入口。
 
-已执行的独立套件结果：
+前次交付已执行的独立套件结果：
 
 | 基线 | 结果 |
 | --- | --- |
@@ -154,6 +156,16 @@ Godot 可能输出脚本错误却返回退出码 0，因此同时检查日志。
 
 覆盖元数据深复制、所有字段完整校验、未知/重复/超槽位辅助、非法类型/非有限数/越界、无限穿透拒绝、配方重入、失败不产生部分效果、原辅助组合顺序无关，以及真实串列敌人命中次数。串列夹具使用实际默认速度、射程 `650`、寿命 `1.7`、半径 `5.5`，同时跑空间索引和全扫描、单帧和分帧；精确相位与终点测试使用显式固定速度和零半径来构造可核算的边界。另验证活动载体冻结快照、普攻、龙卷分裂及独立爆炸。
 
-现有完整回归**未完成**：已通过运行到 `skill_support_ui_test.gd` 的检查（含原辅助集成 733 项、原辅助 UI 186 项），随后按停止指令在 `equipment_soak_test.gd` 运行期间终止长回归，余下检查未跑。完整日志保存在当前云环境 `/tmp/projectile-full-validation.log`；独立套件日志为 `/tmp/projectile-extension-test.log` 和 `/tmp/projectile-v012-test.log`。未进行游戏中的贯穿 K 列表交互、存档迁移或发布验证，因为这些入口尚未接入，不应把独立运行时测试称为游戏集成已完成。
+2026-10-02 本轮独立审查从已 fetch 并核验的 `61af145e5b05601c36119731799a87eec74a48ab` 继续，未发现需要修改扩展实现的缺陷。仅补充全局 RNG 流保持不变的边界检查，覆盖整套成功、失败、组合与真实运行时夹具；在临时副本中向扩展入口注入一次 `randi()` 后，该检查按预期成为唯一失败，恢复原实现后通过。飞弹/冰霜的真实基础穿透加二、投射物命中总降 15%、独立爆炸和普攻排除、龙卷无限穿透拒绝、完整列表验证、重入及旧辅助 mana/more 不重复应用均由原有夹具复核。
 
-执行配置的可见证据：只读复核子任务的调度参数为 `model=gpt-6-astra`、`reasoning_effort=xhigh`；工具未暴露主执行模型、服务实际路由或 fast 状态，不能把请求参数当成实际后端证明。没有执行额度购买或模型套餐变更操作。
+| 本轮针对性验证 | 结果 |
+| --- | --- |
+| 修改前扩展基线 | `998 checks, 0 failures` |
+| 补充 RNG 检查后扩展 | `999 checks, 0 failures` |
+| 原 `skill_compiler_test.gd` | `319 checks, 0 failures` |
+
+通过的套件均核验退出码和日志，无 `SCRIPT ERROR:` 或 `ERROR:`。本轮仅在临时验证副本和隔离 XDG 目录运行；日志保存在本轮云环境 `/tmp/projectile-review.L1ZE4n/baseline.log`、`/tmp/projectile-review.L1ZE4n/final-extension.log`、`/tmp/projectile-review.L1ZE4n/skill-compiler.log`，预期失败的 RNG 负对照单独保存为 `/tmp/projectile-review.L1ZE4n/rng-negative-control.log`。
+
+此前完整回归**未完成**：已通过运行到 `skill_support_ui_test.gd` 的检查（含原辅助集成 733 项、原辅助 UI 186 项），随后按停止指令在 `equipment_soak_test.gd` 运行期间终止长回归，余下检查未跑。前次完整日志保存在当时的云环境 `/tmp/projectile-full-validation.log`；独立套件日志为 `/tmp/projectile-extension-test.log` 和 `/tmp/projectile-v012-test.log`。本轮没有重跑完整导入或长回归，留待统一主集成；没有进行游戏中的贯穿 K 列表交互、存档迁移或发布验证，因为这些入口尚未接入，不应把独立运行时测试称为游戏集成已完成。
+
+本轮执行配置的**请求值**为 `model=gpt-6.1-sol`、`reasoning_effort=max`、标准速度、禁用 Fast；平台未暴露实际主执行模型、服务路由或速度遥测，不能将请求值当成后端证明。本轮未派发模型子任务，也没有执行额度购买或模型套餐变更操作。

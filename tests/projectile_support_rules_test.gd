@@ -19,6 +19,12 @@ func _initialize() -> void:
 
 
 func _run() -> void:
+	# Every success, rejection and real-runtime fixture must leave global RNG alone.
+	seed(610145)
+	randi()
+	var expected_rng: Array = [randi(), randi(), randi()]
+	seed(610145)
+	randi()
 	_case(_test_metadata, "metadata and corruption")
 	_case(_test_composition, "legacy composition and detached results")
 	_case(_test_rejections, "complete validation and atomic rejection")
@@ -28,6 +34,7 @@ func _run() -> void:
 	_case(_test_return_budget, "return keeps remaining pierce budget")
 	_case(_test_end_boundaries, "range, lifetime, contact and explosion precedence")
 	_case(_test_runtime_detachment, "frozen shots and unrelated carriers")
+	_expect([randi(), randi(), randi()] == expected_rng, "Extension validation, composition and runtime preserve the global RNG stream")
 	print("Projectile support extension: %d checks, %d failures" % [checks, failures])
 	quit(1 if failures > 0 else 0)
 
