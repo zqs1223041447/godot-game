@@ -8,7 +8,7 @@ signal changed
 const Data = preload("res://scripts/game_data.gd")
 const Passives = preload("res://scripts/passive_data.gd")
 const JewelCatalog = preload("res://scripts/jewel_data.gd")
-const SAVE_VERSION: int = 2
+const SAVE_VERSION: int = 3
 const MAX_LEVEL: int = 1000
 const MAX_SAVE_BYTES: int = 262144
 const BASE_TALENT_POINTS: int = 5
@@ -22,9 +22,11 @@ const BASE_STATS: Dictionary = {
 	"max_health": 120.0, "max_mana": 100.0, "max_shield": 60.0,
 	"damage": 18.0, "attack_speed": 1.7, "move_speed": 240.0,
 	"mana_regen": 9.0, "shield_regen": 13.0,
+	"global_increased": 0.0, "projectile_increased": 0.0, "elemental_increased": 0.0,
+	"area_increased": 0.0, "projectile_count": 0.0,
 }
 
-var inventory: Array[String] = ["ember_wand", "swift_blade", "guardian_robe", "vitality_armor", "azure_charm", "storm_charm"]
+var inventory: Array[String] = ["ember_wand", "swift_blade", "guardian_robe", "vitality_armor", "azure_charm", "storm_charm", "prism_bow", "return_mantle", "detonation_charm"]
 var equipped: Dictionary = {"weapon": "ember_wand", "armor": "guardian_robe", "charm": "azure_charm"}
 var skill_slots: Array[String] = ["bolt", "frost", "nova", "dash", "ward"]
 var allocated_nodes: Array[String] = [Passives.START_ID]
@@ -37,6 +39,8 @@ var level: int = 1
 var xp: int = 0
 var talent_points: int = BASE_TALENT_POINTS
 var migrated_from_v1: bool = false
+var migrated_from_v2: bool = false
+var _migration_version: int = 0
 var migration_message: String = ""
 var migration_backup_path: String = ""
 var _migration_source_path: String = ""
@@ -61,6 +65,16 @@ func get_stats() -> Dictionary:
 		if allocated_nodes.has(socket_id) and nodes.has(socket_id) and nodes[socket_id]["type"] == "socket":
 			_add_stats(result, get_jewel_stats(socketed_jewels[socket_id]))
 	return result
+
+
+func get_combat_snapshot() -> Dictionary:
+	var effects: Array[String] = []
+	for slot: String in EQUIPMENT_SLOTS:
+		var id: String = str(equipped.get(slot, ""))
+		for effect: String in Data.ITEMS.get(id, {}).get("effects", []):
+			if not effects.has(effect):
+				effects.append(effect)
+	return preload("res://scripts/combat/combat_data.gd").snapshot(get_stats(), effects)
 
 
 func equip(item_id: String) -> bool:
@@ -331,10 +345,18 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	xp = int(candidate["xp"])
 	talent_points = int(candidate["talent_points"])
 	migrated_from_v1 = int(parser.data["version"]) == 1
+	migrated_from_v2 = int(parser.data["version"]) == 2
+	_migration_version = int(parser.data["version"])
+	if migrated_from_v1 or migrated_from_v2:
+		for id: String in Data.COMBAT_STARTER_ITEMS:
+			if not inventory.has(id):
+				inventory.append(id)
 	migration_message = "旧版天赋已迁移：所有已用点数已返还，装备与技能保留。现在可分配星图天赋。" if migrated_from_v1 else ""
+	if migrated_from_v2:
+		migration_message = "构筑已升级：原装备、天赋和珠宝保留，已补发三件机制装备。K 可查看战斗机制。"
 	migration_backup_path = ""
-	_migration_source_path = path if migrated_from_v1 else ""
-	_migration_source_text = text if migrated_from_v1 else ""
+	_migration_source_path = path if migrated_from_v1 or migrated_from_v2 else ""
+	_migration_source_text = text if migrated_from_v1 or migrated_from_v2 else ""
 	_sync_backpack()
 	changed.emit()
 	return true
@@ -489,7 +511,7 @@ func _migrate_v1(data: Dictionary) -> Dictionary:
 func _backup_legacy_save(path: String) -> Error:
 	if not FileAccess.file_exists(path) or FileAccess.get_file_as_string(path) != _migration_source_text:
 		return ERR_FILE_ALREADY_IN_USE
-	var backup_path: String = path + ".v1-backup.json"
+	var backup_path: String = path + ".v%d-backup.json" % _migration_version
 	if FileAccess.file_exists(backup_path):
 		# Never overwrite a previously preserved legacy build with other bytes.
 		if FileAccess.get_file_as_string(backup_path) != _migration_source_text:

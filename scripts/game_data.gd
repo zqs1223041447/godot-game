@@ -3,6 +3,11 @@ extends RefCounted
 ## Read-only catalogs shared by combat, menus, and build validation.
 
 const SKILLS: Dictionary = {
+	"tornado": {
+		"name": "龙卷射击", "short_name": "龙卷", "icon": "VIII",
+		"description": "发射 3 枚母箭，每枚在射程终点分裂为 3 枚环形子箭。箭伤为物理 60% 与火焰 40%；子箭造成 70% 基础伤害。返回与爆炸由装备分别赋予。",
+		"mana": 18.0, "cooldown": 2.5, "damage": 18.0, "color": Color("a6e8aa"),
+	},
 	"bolt": {
 		"name": "奥术飞弹", "short_name": "飞弹", "icon": "I",
 		"description": "发射三枚穿透飞弹，每枚造成 160% 伤害。", "mana": 7.0,
@@ -40,7 +45,24 @@ const SKILLS: Dictionary = {
 	},
 }
 
+const COMBAT_STARTER_ITEMS: Array[String] = ["prism_bow", "return_mantle", "detonation_charm"]
+
 const ITEMS: Dictionary = {
+	"prism_bow": {
+		"size": Vector2i(1, 3), "name": "棱光长弓", "slot": "weapon",
+		"description": "基础伤害 +4，投射物伤害提高 40%，龙卷额外母箭 +2；其中投射物增伤不作用于爆炸。",
+		"stats": {"damage": 4.0, "projectile_increased": 0.4, "projectile_count": 2.0},
+	},
+	"return_mantle": {
+		"size": Vector2i(2, 3), "name": "归航披风", "slot": "armor",
+		"description": "最大护盾 +15。投射物抵达射程后，朝此刻角色中心方向返回一次；穿过中心继续飞行，不刷新寿命。母箭优先分裂。",
+		"stats": {"max_shield": 15.0}, "effects": ["return_on_range"],
+	},
+	"detonation_charm": {
+		"size": Vector2i(1, 1), "name": "终焰护符", "slot": "charm",
+		"description": "全局伤害提高 20%，元素伤害提高 30%。自然飞行结束爆炸：造成 90% 基础火焰范围伤害。返回可延后爆炸；分裂、碰撞消耗和取消不爆炸。",
+		"stats": {"global_increased": 0.2, "elemental_increased": 0.3}, "effects": ["explode_on_flight_end"],
+	},
 	"ember_wand": {
 		"size": Vector2i(1, 3),
 		"name": "余烬法杖", "slot": "weapon", "description": "伤害 +8，魔力恢复 +1 / 秒",

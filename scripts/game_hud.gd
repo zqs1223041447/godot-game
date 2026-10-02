@@ -23,7 +23,9 @@ const STAT_NAMES: Dictionary = {
 	"mana_regen": "法力回复", "health_regen": "生命回复", "shield_regen": "护盾回复",
 	"armor": "护甲", "crit_chance": "暴击几率", "crit_multiplier": "暴击伤害",
 	"attack_speed": "攻击速度", "cooldown_reduction": "冷却缩减",
-	"projectile_count": "额外投射物", "pickup_radius": "拾取范围",
+	"projectile_count": "额外母箭", "pickup_radius": "拾取范围",
+	"global_increased": "全局伤害提高", "projectile_increased": "投射物伤害提高",
+	"elemental_increased": "元素伤害提高", "area_increased": "范围伤害提高",
 	"area_mult": "范围倍率", "area_multiplier": "范围倍率"
 }
 
@@ -98,7 +100,7 @@ func open_panel(panel_name: String) -> void:
 		return
 	if _active_panel == "death" and panel_name != "death":
 		return
-	if panel_name not in ["inventory", "talents", "skills", "pause", "death"]:
+	if panel_name not in ["inventory", "talents", "skills", "combat", "pause", "death"]:
 		panel_name = "pause"
 	_active_panel = panel_name
 	_modal.show()
@@ -411,6 +413,7 @@ func _build_modal() -> void:
 	_panel_tabs.add_child(_button("装备背包", "InventoryTab", open_panel.bind("inventory"), 140))
 	_panel_tabs.add_child(_button("天赋成长", "TalentsTab", open_panel.bind("talents"), 140))
 	_panel_tabs.add_child(_button("技能组合", "SkillsTab", open_panel.bind("skills"), 140))
+	_panel_tabs.add_child(_button("战斗机制 F6", "CombatTab", open_panel.bind("combat"), 160))
 	var scroll: ScrollContainer = ScrollContainer.new()
 	_panel_scroll = scroll
 	scroll.name = "PanelScroll"
@@ -486,11 +489,11 @@ func _rebuild_panel() -> void:
 	_panel_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED if is_tree else ScrollContainer.SCROLL_MODE_AUTO
 	_panel_scroll.scroll_vertical = 0
 	_close_button.visible = _active_panel != "death"
-	_panel_tabs.visible = _active_panel in ["inventory", "talents", "skills"]
+	_panel_tabs.visible = _active_panel in ["inventory", "talents", "skills", "combat"]
 	_panel_subtitle.text = "战斗已暂停  /  调整构筑后随时继续"
 	_panel_footer.text = "构筑变更会自动保存  ·  关闭面板继续战斗"
 	_panel_footer.add_theme_color_override("font_color", MUTED)
-	var panel_order: Array[String] = ["inventory", "talents", "skills"]
+	var panel_order: Array[String] = ["inventory", "talents", "skills", "combat"]
 	for index: int in range(_panel_tabs.get_child_count()):
 		var tab: Button = _panel_tabs.get_child(index) as Button
 		tab.add_theme_color_override("font_color", CYAN if panel_order[index] == _active_panel else MUTED)
@@ -501,6 +504,8 @@ func _rebuild_panel() -> void:
 			_build_talents_panel()
 		"skills":
 			_build_skills_panel()
+		"combat":
+			_build_combat_panel()
 		"pause":
 			_build_pause_panel()
 		"death":
@@ -590,6 +595,7 @@ func _build_talents_panel() -> void:
 
 func _build_skills_panel() -> void:
 	_panel_title.text = "技能组合"
+	_panel_body.add_child(_button("F6 战斗机制：查看龙卷组合、分类增伤和事件记录", "OpenCombatInspector", open_panel.bind("combat")))
 	_section("先选择要替换的技能槽", "已装配的技能会互换位置，不会重复占槽")
 	var slots: HBoxContainer = HBoxContainer.new()
 	slots.name = "SkillSlotSelector"
@@ -614,6 +620,67 @@ func _build_skills_panel() -> void:
 		select.disabled = assigned == _selected_skill_slot
 		select.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		row.add_child(select)
+
+
+func _build_combat_panel() -> void:
+	_panel_title.text = "战斗机制 · 龙卷实验"
+	_panel_subtitle.text = "技能生成载体，装备改变生命周期，每次命中独立结算伤害"
+	var preview: Dictionary = _arena.call("combat_preview")
+	var snapshot: Dictionary = preview.snapshot
+	var returning: bool = snapshot.effects.has("return_on_range")
+	var exploding: bool = snapshot.effects.has("explode_on_flight_end")
+	_section("01  组合与生命周期", "原型规则 · 施放时锁定构筑")
+	var row: HBoxContainer = _card(_panel_body, "%d 母箭 → 每枚 3 子箭 → %s → %s" % [int(preview.count), "返回" if returning else "射程结束", "火焰爆炸" if exploding else "消失"],
+		"母箭飞行 150 距离后分裂；子箭飞行 150 距离后判断返回。
+返回时取人物此刻中心方向，穿过中心继续直飞；子箭总寿命 1.7 秒，返回不刷新。
+寿命与射程同时到达：寿命优先。分裂、碰撞消耗、死亡或重置不爆炸。", Color("a6e8aa"))
+	row.add_child(_button("试装完整组合", "EquipTornadoExample", _arena.equip_tornado_example, 160))
+	var toggles := HBoxContainer.new()
+	_panel_body.add_child(toggles)
+	toggles.add_child(_button("返回：%s" % ("已装备" if returning else "未装备"), "ToggleReturnEffect", _toggle_combat_item.bind("return_mantle"), 200))
+	toggles.add_child(_button("爆炸：%s" % ("已装备" if exploding else "未装备"), "ToggleExplosionEffect", _toggle_combat_item.bind("detonation_charm"), 200))
+	toggles.add_child(_button("母箭数量：%d" % int(preview.count), "ToggleProjectileCount", _toggle_combat_item.bind("prism_bow"), 200))
+	_panel_body.add_child(_wrap_label("按钮实际穿戴或卸下对应装备，并自动保存。仅爆炸：射程处爆炸；仅返回：返回后寿命结束消失；两者都有：返回后寿命结束爆炸。", 14))
+	_section("02  当前构筑的逐分量伤害", "未计敌人抗性 · 非每秒伤害")
+	_panel_body.add_child(_wrap_label("基础伤害 %.1f；全局提高 %.0f%%，投射物提高 %.0f%%，元素提高 %.0f%%。同一分量适用的“提高”先相加。" % [float(snapshot.base_damage), float(_state.get_stats().global_increased) * 100.0, float(_state.get_stats().projectile_increased) * 100.0, float(_state.get_stats().elemental_increased) * 100.0], 15, TEXT))
+	for role: String in ["parent", "child", "explosion"]:
+		var result: Dictionary = preview[role]
+		var title: String = {"parent": "母箭：攻击 / 投射物击中", "child": "子箭：攻击 / 投射物击中", "explosion": "爆炸：次级 / 范围击中（不属于投射物伤害）"}[role]
+		var details: PackedStringArray = []
+		for part: Dictionary in result.details:
+			var type_name: String = {"physical": "物理", "fire": "火焰", "cold": "冰冷", "lightning": "闪电", "chaos": "混沌"}.get(part.type, part.type)
+			details.append("%s %.2f × (1 + %.0f%%) × %.2f = %.2f" % [type_name, float(part.base), float(part.increased) * 100.0, float(part.more), float(part.final)])
+		_card(_panel_body, "%s · 合计 %.2f%s" % [title, float(result.total), "（未装备爆炸，仅显示配方）" if role == "explosion" and not exploding else ""], "\n".join(details), GOLD if role == "explosion" else CYAN)
+	_section("03  本轮真实事件", "母箭绿 · 子箭青 · 返回紫 · 爆炸橙")
+	var counts: Dictionary = _arena.get("event_counts")
+	_panel_body.add_child(_wrap_label("分裂 %d 次 · 返回 %d 次 · 爆炸 %d 次 · 投射物碰撞 %d 次" % [int(counts.get("split", 0)), int(counts.get("return_started", 0)), int(counts.get("explosion", 0)), int(counts.get("hit", 0))], 15, TEXT))
+	var records: Array = _arena.get("damage_trace")
+	if records.is_empty():
+		_panel_body.add_child(_wrap_label("尚无伤害记录。试装完整组合，关闭面板后按 1 释放，再按 F6 查看实际命中。", 15))
+	else:
+		for index: int in range(maxi(0, records.size() - 5), records.size()):
+			var record: Dictionary = records[index]
+			var parts: PackedStringArray = []
+			for type: String in record.components:
+				parts.append("%s %.2f" % [type, float(record.components[type])])
+			_panel_body.add_child(_wrap_label("施放 #%d / 箭 #%d / 敌人 #%d · %s · %.2f（%s）" % [int(record.cast_id), int(record.projectile_id), int(record.target_id), "爆炸" if record.tags.has("explosion") else "返回命中" if record.phase == "returning" else "去程或直接命中", float(record.total), " + ".join(parts)], 14, GOLD if record.tags.has("explosion") else CYAN))
+	var trace: Array = _arena.get("combat_trace")
+	var lines: PackedStringArray = []
+	var names: Dictionary = {"split": "分裂", "spawned": "子箭生成", "range_reached": "抵达射程", "return_started": "开始返回", "lifetime_expired": "寿命耗尽", "flight_ended": "自然飞行结束", "explosion": "爆炸", "terminated": "已终止", "hit": "碰撞命中", "spawn_rejected": "容量取消"}
+	for index: int in range(maxi(0, trace.size() - 12), trace.size()):
+		var event: Dictionary = trace[index]
+		lines.append("施放 #%d · 箭 #%d ← 母箭 #%d · %.3f 秒 · %s" % [int(event.cast_id), int(event.projectile_id), int(event.parent_id), float(event.age), names.get(event.type, event.type)])
+	if not lines.is_empty():
+		_panel_body.add_child(_wrap_label("\n".join(lines), 13))
+	_panel_footer.text = "F6 随时查看 · 命中按每枚箭每阶段每敌人一次 · 不同子箭与不同爆炸可分别命中 · 记录保留最近事件"
+
+
+func _toggle_combat_item(id: String) -> void:
+	var slot: String = str(GameData.ITEMS[id].slot)
+	if _state.equipped.get(slot, "") == id:
+		_state.unequip(slot)
+	else:
+		_state.equip(id)
 
 
 func _build_pause_panel() -> void:
@@ -657,7 +724,7 @@ func _stats_text(stats: Dictionary, separator: String = "  ·  ") -> String:
 		var id: String = str(key)
 		var value: float = float(stats[key])
 		var shown: String
-		if id.contains("mult") or id == "crit_chance" or id == "cooldown_reduction":
+		if id.contains("mult") or id.ends_with("_increased") or id == "crit_chance" or id == "cooldown_reduction":
 			shown = String.num(value * 100.0, 2) + "%"
 		elif is_equal_approx(value, roundf(value)):
 			shown = "%d" % int(value)

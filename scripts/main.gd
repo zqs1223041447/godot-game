@@ -6,6 +6,9 @@ const Build = preload("res://scripts/build_state.gd")
 const Data = preload("res://scripts/game_data.gd")
 const Hud = preload("res://scripts/game_hud.gd")
 const Jewels = preload("res://scripts/jewel_data.gd")
+const Combat = preload("res://scripts/combat/combat_data.gd")
+const Damage = preload("res://scripts/combat/damage_resolver.gd")
+const Projectiles = preload("res://scripts/combat/projectile_runtime.gd")
 const ARENA := Rect2(42, 104, 1196, 462)
 const PLAYER_RADIUS := 15.0
 const MAX_ENEMIES := 55
@@ -13,6 +16,11 @@ const MAX_PROJECTILES := 180
 const MAX_PARTICLES := 180
 
 var state = Build.new()
+var projectile_runtime = Projectiles.new()
+var combat_trace: Array[Dictionary] = []
+var damage_trace: Array[Dictionary] = []
+var event_counts: Dictionary = {}
+var _simulation_accumulator: float = 0.0
 var hud: CanvasLayer
 var health: float = 120.0
 var mana: float = 100.0
@@ -60,11 +68,11 @@ func _ready() -> void:
 	hud.setup(self)
 	_ready_complete = true
 	restart_run()
-	if state.migrated_from_v1:
-		hud.open_panel("talents")
+	if state.migrated_from_v1 or state.migrated_from_v2:
+		hud.open_panel("talents" if state.migrated_from_v1 else "combat")
 		hud.notify(state.migration_message)
 	else:
-		hud.notify("T 打开天赋星图 · 3 颗初始珠宝 · 每 20 次击杀获得新珠宝")
+		hud.notify("K 配置龙卷射击 · F6 查看机制与伤害 · I 装备归航披风和终焰护符")
 	print("godot-game: playable arena ready")
 
 
@@ -122,7 +130,11 @@ func restart_run() -> void:
 	player_pos = ARENA.get_center()
 	player_facing = Vector2.RIGHT
 	enemies.clear()
-	projectiles.clear()
+	projectile_runtime.cancel_all(projectiles)
+	combat_trace.clear()
+	damage_trace.clear()
+	event_counts.clear()
+	_simulation_accumulator = 0.0
 	particles.clear()
 	floating_text.clear()
 	pickups.clear()
@@ -164,6 +176,9 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	elif key == KEY_T:
 		if alive:
 			hud.open_panel("talents")
+	elif key == KEY_F6:
+		if alive:
+			hud.open_panel("combat")
 	elif key == KEY_K:
 		if alive:
 			hud.open_panel("skills")
@@ -186,8 +201,11 @@ func _process(delta: float) -> void:
 	if not alive or hud.is_blocking():
 		queue_redraw()
 		return
-	# A long OS stall should not teleport enemies through the player.
-	tick(minf(delta, 0.05))
+	# Fixed world observations keep moving-target / return aiming consistent.
+	_simulation_accumulator = minf(0.25, _simulation_accumulator + delta)
+	while _simulation_accumulator >= 1.0 / 60.0 and alive:
+		tick(1.0 / 60.0)
+		_simulation_accumulator -= 1.0 / 60.0
 	queue_redraw()
 
 
@@ -350,12 +368,20 @@ func _update_auto_attack() -> void:
 
 
 func _shoot(origin: Vector2, direction: Vector2, damage: float, color: Color,
-		pierce: int = 0, slow: float = 0.0, speed: float = 600.0) -> void:
+		pierce: int = 0, slow: float = 0.0, speed: float = 600.0,
+		skill_id: String = "basic", damage_type: String = "physical", context: Dictionary = {}) -> void:
 	if projectiles.size() >= MAX_PROJECTILES:
 		return
-	projectiles.append({"pos": origin + direction * 19, "previous": origin,
-		"velocity": direction * speed, "damage": damage, "color": color,
-		"life": 1.7, "radius": 5.5, "pierce": pierce, "slow": slow, "hit_ids": []})
+	var snapshot: Dictionary = context.get("snapshot", state.get_combat_snapshot())
+	var cast_id: int = int(context.get("cast_id", 0))
+	if cast_id == 0:
+		cast_id = projectile_runtime.new_cast()
+	var packet: Dictionary = Damage.packet({damage_type: damage},
+		["hit", "projectile", "attack" if skill_id == "basic" else "spell"], skill_id)
+	var spec: Dictionary = {"speed": speed, "range": 650.0, "lifetime": 1.7,
+		"pierce": pierce, "slow": slow}
+	projectiles.append(projectile_runtime.make_projectile(origin + direction * 19.0, direction,
+		spec, packet, snapshot, cast_id, color))
 	total_shots += 1
 	for i: int in range(3):
 		_add_particle(origin + direction * 20.0, direction.rotated(rng.randf_range(-0.6, 0.6)) * rng.randf_range(20, 90), color, 2.2, 0.16)
@@ -379,15 +405,24 @@ func cast_skill(index: int) -> bool:
 	player_facing = _aim_direction()
 	var damage: float = float(_stats.damage)
 	var color: Color = skill.color
+	var context: Dictionary = {"snapshot": state.get_combat_snapshot(), "cast_id": projectile_runtime.new_cast()}
 	match id:
+		"tornado":
+			var emitted: int = projectile_runtime.spawn_tornado(projectiles, player_pos, player_facing, context.snapshot, MAX_PROJECTILES)
+			if emitted == 0:
+				mana += float(skill.mana)
+				cooldowns[id] = 0.0
+				hud.notify("场上投射物已满，本次龙卷未消耗法力或冷却")
+				return false
+			total_shots += emitted
 		"bolt":
 			for angle: float in [-0.16, 0.0, 0.16]:
-				_shoot(player_pos, player_facing.rotated(angle), damage * 1.6, color, 1, 0.0, 780.0)
+				_shoot(player_pos, player_facing.rotated(angle), damage * 1.6, color, 1, 0.0, 780.0, id, "lightning", context)
 		"frost":
 			for angle: float in [-0.28, -0.14, 0.0, 0.14, 0.28]:
-				_shoot(player_pos, player_facing.rotated(angle), damage * 0.85, color, 2, 3.0, 520.0)
+				_shoot(player_pos, player_facing.rotated(angle), damage * 0.85, color, 2, 3.0, 520.0, id, "cold", context)
 		"nova":
-			_area_damage(player_pos, 155.0, damage * 2.7, color, 0.6)
+			_area_damage(player_pos, 155.0, damage * 2.7, color, 0.6, "nova", "lightning", context.snapshot)
 			_add_ring(player_pos, 155.0, color, 0.45)
 		"dash":
 			var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -407,7 +442,7 @@ func cast_skill(index: int) -> bool:
 		"meteor":
 			var target: Dictionary = _nearest_enemy(player_pos, 700.0)
 			var target_pos: Vector2 = Vector2(target.pos) if not target.is_empty() else _clamp_to_arena(player_pos + player_facing * 220.0, 20.0)
-			_area_damage(target_pos, 110.0, damage * 4.3, color, 0.0)
+			_area_damage(target_pos, 110.0, damage * 4.3, color, 0.0, "meteor", "fire", context.snapshot)
 			_add_ring(target_pos, 110.0, color, 0.7)
 			for i: int in range(32):
 				_add_particle(target_pos, Vector2.RIGHT.rotated(rng.randf() * TAU) * rng.randf_range(70, 270), color, rng.randf_range(3, 7), 0.6)
@@ -423,39 +458,82 @@ func cast_skill(index: int) -> bool:
 				var end: Vector2 = target.pos
 				for step: int in range(12):
 					_add_particle(origin.lerp(end, step / 12.0) + Vector2(rng.randf_range(-4, 4), rng.randf_range(-4, 4)), Vector2.ZERO, color, 3.0, 0.25)
-				_damage_enemy(target, damage * (2.2 - i * 0.2), color, 0.35)
+				_apply_damage_packet(target, Damage.packet({"lightning": damage * (2.2 - i * 0.2)}, ["hit", "spell", "chain"], id), context.snapshot, color, 0.35)
 				origin = end
 	return true
 
 
-func _area_damage(origin: Vector2, radius: float, damage: float, color: Color, slow: float) -> void:
+func _area_damage(origin: Vector2, radius: float, damage: float, color: Color, slow: float,
+		skill_id: String = "nova", type: String = "lightning", snapshot: Dictionary = {}) -> void:
+	var cast_snapshot: Dictionary = state.get_combat_snapshot() if snapshot.is_empty() else snapshot
+	var packet: Dictionary = Damage.packet({type: damage}, ["hit", "spell", "area"], skill_id)
 	for enemy: Dictionary in enemies:
 		if float(enemy.health) > 0.0 and origin.distance_to(Vector2(enemy.pos)) <= radius + float(enemy.radius):
-			_damage_enemy(enemy, damage, color, slow)
+			_apply_damage_packet(enemy, packet, cast_snapshot, color, slow)
 			var direction: Vector2 = (Vector2(enemy.pos) - origin).normalized()
 			enemy.knockback = direction * 190.0
 
 
 func _update_projectiles(delta: float) -> void:
-	for shot: Dictionary in projectiles:
-		shot.life = float(shot.life) - delta
-		shot.previous = shot.pos
-		shot.pos = Vector2(shot.pos) + Vector2(shot.velocity) * delta
-		for enemy: Dictionary in enemies:
-			if float(enemy.health) <= 0.0 or shot.hit_ids.has(int(enemy.id)):
-				continue
-			# Swept segment collision avoids fast projectiles tunneling at low frame rates.
-			var closest: Vector2 = Geometry2D.get_closest_point_to_segment(Vector2(enemy.pos), Vector2(shot.previous), Vector2(shot.pos))
-			if closest.distance_to(Vector2(enemy.pos)) <= float(enemy.radius) + float(shot.radius):
-				shot.hit_ids.append(int(enemy.id))
-				_damage_enemy(enemy, float(shot.damage), Color(shot.color), float(shot.slow))
-				enemy.knockback = Vector2(shot.velocity).normalized() * 45.0
-				if int(shot.pierce) <= 0:
-					shot.life = -1.0
+	var events: Array[Dictionary] = projectile_runtime.advance(projectiles, delta, enemies, player_pos, MAX_PROJECTILES)
+	for event: Dictionary in events:
+		event_counts[event.type] = int(event_counts.get(event.type, 0)) + 1
+		var brief: Dictionary = event.duplicate(true)
+		brief.erase("snapshot")
+		brief.erase("payload")
+		combat_trace.append(brief)
+		if combat_trace.size() > 96:
+			combat_trace.pop_front()
+		if event.type == "hit":
+			for enemy: Dictionary in enemies:
+				if int(enemy.id) == int(event.target_id):
+					_apply_damage_packet(enemy, event.payload, event.snapshot, event.color, float(event.slow), event)
+					enemy.knockback = Vector2(event.direction) * 45.0
 					break
-				shot.pierce = int(shot.pierce) - 1
-	projectiles = projectiles.filter(func(shot: Dictionary) -> bool: return float(shot.life) > 0.0 and ARENA.grow(35).has_point(Vector2(shot.pos)))
+		elif event.type == "explosion":
+			var hit_targets: Dictionary = {}
+			for enemy: Dictionary in enemies:
+				if not hit_targets.has(enemy.id) and float(enemy.health) > 0.0 and Vector2(event.pos).distance_to(enemy.pos) <= float(event.radius) + float(enemy.radius):
+					hit_targets[enemy.id] = true
+					_apply_damage_packet(enemy, event.payload, event.snapshot, event.color, 0.0, event)
+			_add_ring(event.pos, float(event.radius), event.color, 0.55)
+		elif event.type == "return_started":
+			_add_ring(event.pos, 19.0, Color("bd98ff"), 0.24)
+		elif event.type == "split":
+			_add_ring(event.pos, 26.0, Color("a6e8aa"), 0.28)
+		elif event.type == "spawn_rejected":
+			hud.notify("投射物容量不足，本次三子箭整组取消；未触发爆炸")
 	enemies = enemies.filter(func(enemy: Dictionary) -> bool: return float(enemy.health) > 0.0)
+
+
+func _apply_damage_packet(enemy: Dictionary, packet: Dictionary, snapshot: Dictionary, color: Color,
+		slow: float = 0.0, provenance: Dictionary = {}) -> void:
+	if float(enemy.health) <= 0.0:
+		return
+	var result: Dictionary = Damage.resolve(packet, snapshot.get("modifiers", []), enemy.get("resistances", {}))
+	var record: Dictionary = {"target_id": enemy.id, "skill_id": packet.skill_id, "tags": packet.tags.duplicate(),
+		"components": result.components, "details": result.details, "total": result.total,
+		"projectile_id": provenance.get("projectile_id", 0), "cast_id": provenance.get("cast_id", 0),
+		"phase": provenance.get("phase", "direct"), "effect_id": provenance.get("effect_id", "")}
+	damage_trace.append(record)
+	if damage_trace.size() > 32:
+		damage_trace.pop_front()
+	_damage_enemy(enemy, float(result.total), color, slow)
+
+
+func equip_tornado_example() -> void:
+	state.slot_skill(0, "tornado")
+	for id: String in ["prism_bow", "return_mantle", "detonation_charm"]:
+		state.equip(id)
+	hud.notify("已装配龙卷组合：5 母箭 → 15 子箭 → 返回 → 寿命结束爆炸；关闭后按 1 释放")
+
+
+func combat_preview() -> Dictionary:
+	var snapshot: Dictionary = state.get_combat_snapshot()
+	var result: Dictionary = {"snapshot": snapshot, "count": clampi(3 + int(snapshot.projectile_count), 1, 9)}
+	for role: String in ["parent", "child", "explosion"]:
+		result[role] = Damage.resolve(Combat.tornado_packet(snapshot, role), snapshot.modifiers)
+	return result
 
 
 func _damage_enemy(enemy: Dictionary, amount: float, color: Color, slow: float = 0.0) -> void:
@@ -509,6 +587,7 @@ func hit_player(amount: float) -> void:
 	_add_text(player_pos + Vector2(0, -30), "−%d" % int(amount), Color("94dafa") if absorbed >= amount else Color("fa8c83"))
 	if health <= 0.0:
 		alive = false
+		projectile_runtime.cancel_all(projectiles, "owner_death")
 		save_build()
 		hud.show_death()
 
@@ -577,7 +656,7 @@ func _draw() -> void:
 		_draw_enemy(enemy)
 	for shot: Dictionary in projectiles:
 		var pos: Vector2 = shot.pos
-		var color: Color = shot.color
+		var color: Color = Color("bd98ff") if shot.state == "returning" else Color(shot.color)
 		var tail: Vector2 = Vector2(shot.velocity).normalized() * 20.0
 		draw_line(pos - tail, pos, Color(color, 0.28), 8.0, true)
 		draw_line(pos - tail * 0.5, pos, color, 3.0, true)
