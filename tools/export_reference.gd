@@ -22,6 +22,8 @@ const CraftPlanner = preload("res://scripts/items/crafting_transaction_planner.g
 const Telegraphs = preload("res://scripts/combat/telegraphed_area_runtime.gd")
 const TelegraphProfiles = preload("res://scripts/monsters/telegraph_profiles.gd")
 const Arena = preload("res://scripts/main.gd")
+const EncounterCatalog = preload("res://scripts/encounters/encounter_catalog.gd")
+const EncounterCompiler = preload("res://scripts/encounters/encounter_compiler.gd")
 
 func _initialize() -> void:
 	var target: String = "res://docs/reference/catalog.json"
@@ -57,6 +59,7 @@ static func collect() -> Dictionary:
 	result["projectile_support_examples"] = piercing_examples()
 	result["crafting"] = crafting_examples()
 	result["monster_attacks"] = telegraph_examples()
+	result["encounters"] = encounter_examples()
 	var base_ids: Array = Equipment.all_base_ids()
 	var affix_ids: Array = Equipment.all_affix_ids()
 	for id: String in base_ids:
@@ -366,6 +369,24 @@ static func telegraph_examples() -> Dictionary:
 		"shield_before": 10.0, "health_before": 100.0, "armor_instance": armor,
 		"armor_definition": Equipment.definition(armor), "movement_assumption": "straight_unobstructed_motion_from_warning_start"}
 	return {TelegraphProfiles.PROFILE_ID: metadata}
+
+
+static func encounter_examples() -> Dictionary:
+	var result: Dictionary = {}
+	for id: String in EncounterCatalog.get_ids():
+		var definition: Dictionary = EncounterCatalog.get_definition(id)
+		var compiled: Dictionary = EncounterCompiler.compile([id])
+		assert(compiled.ok)
+		definition["profile"] = compiled.profile.duplicate(true)
+		definition["status"] = "implemented"
+		definition["examples"] = {}
+		for template: String in ["crawler","ember_guard","brood_host"]:
+			var before: Dictionary = Monsters.make_enemy(1,template,3,Vector2.ZERO,"demo")
+			var applied: Dictionary = EncounterCompiler.apply_to_enemy(before,compiled.profile)
+			assert(applied.ok)
+			definition.examples[template] = {"before":before,"after":applied.enemy}
+		result[id] = definition
+	return result
 
 ## Enumerate each zero-, one-, and two-slot candidate exactly once. Available
 ## support count can grow independently of the two-slot equipment limit.

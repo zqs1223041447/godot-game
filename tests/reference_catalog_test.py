@@ -10,7 +10,7 @@ ROOT=Path(__file__).resolve().parents[1]
 REF=ROOT/'docs/reference'
 class Inspector(HTMLParser):
     def __init__(self):
-        super().__init__(); self.ids=[]; self.links=[]; self.assets=[]; self.viewbox=None; self.node_ids=[]; self.trace_values={}; self.weapon_values={}; self.pierce_hits={}; self.craft_values={}; self.telegraph_values={}
+        super().__init__(); self.ids=[]; self.links=[]; self.assets=[]; self.viewbox=None; self.node_ids=[]; self.trace_values={}; self.weapon_values={}; self.pierce_hits={}; self.craft_values={}; self.telegraph_values={}; self.encounter_values={}
     def handle_starttag(self,tag,attrs):
         a=dict(attrs)
         if 'id' in a:self.ids.append(a['id'])
@@ -21,6 +21,7 @@ class Inspector(HTMLParser):
         if tag=='svg' and a.get('id')=='passive-map':self.viewbox=list(map(float,a['viewbox'].split()))
         if 'data-node' in a:self.node_ids.append(a['data-node'])
         if 'data-pierce-hits' in a:self.pierce_hits[a['data-pierce-hits']]=int(a['data-value'])
+        if 'data-encounter-value' in a:self.encounter_values[a['data-encounter-value']]=float(a['data-value'])
         if 'data-telegraph-value' in a:self.telegraph_values[a['data-telegraph-value']]=float(a['data-value'])
         if 'data-craft-value' in a:self.craft_values[a['data-craft-value']]=int(a['data-value'])
         if 'data-weapon-trace' in a:self.weapon_values[a['data-weapon-trace']]=float(a['data-value'])
@@ -30,6 +31,12 @@ def main():
     source=(REF/'index.html').read_text()
     inspector=Inspector(); inspector.feed(source)
     data=json.loads((REF/'catalog.json').read_text())
+    expected_encounters={}
+    for key,definition in data['encounters'].items():
+        for template,sample in definition['examples'].items():
+            expected_encounters[key+'-'+template+'-常规']=sample['before'][definition['field']]
+            expected_encounters[key+'-'+template+'-挑战']=sample['after'][definition['field']]
+    assert inspector.encounter_values==expected_encounters, 'Challenge chart differs from the production compiler'
     attack=data['monster_attacks']['locked_circle']; example=attack['example']; cases=example['cases']; p=attack['profile']
     assert inspector.telegraph_values=={'radius':p['radius'],'warning':p['windup_seconds'],'recovery':p['recovery_seconds'],'standing':cases['standing']['settlement']['damage_total'],'armored':cases['armored']['settlement']['damage_total'],'moving':0.0}, 'Telegraph diagram diverges from real event and settlement'
     assert not cases['moving']['inside'] and not cases['moving']['settlement'], 'Dodge example must have no synthetic damage settlement'
@@ -49,7 +56,7 @@ def main():
         if href and not href.startswith(('#','https://','http://')):
             assert (REF/href.split('#',1)[0]).is_file(), 'Missing local evidence link '+href
     for asset in inspector.assets:assert (REF/asset).is_file(), 'Missing asset '+asset
-    for cat in ['skills','supports','equipment','affixes','fixed_items','jewels','jewel_affixes','passives','mechanisms','weapon_stages','defenses','crafting','monsters','monster_attacks']:
+    for cat in ['skills','supports','equipment','affixes','fixed_items','jewels','jewel_affixes','passives','mechanisms','weapon_stages','defenses','crafting','monsters','monster_attacks','encounters']:
         for key in data[cat]:assert f'{cat}-{key}' in inspector.ids, 'Unbrowsable entry '+key
     trace=data['defenses']['fire_resistance']['worked_example']['trace']
     expected={'input_total':sum(trace['raw_components'].values()), **{k:trace[k] for k in ['damage_total','shield_spent','health_lost']}}

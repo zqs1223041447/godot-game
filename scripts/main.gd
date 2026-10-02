@@ -18,6 +18,9 @@ const Projectiles = preload("res://scripts/combat/projectile_runtime.gd")
 const Monsters = preload("res://scripts/monsters/monster_catalog.gd")
 const MonsterLifecycle = preload("res://scripts/monsters/monster_runtime.gd")
 const TelegraphRuntime = preload("res://scripts/combat/telegraphed_area_runtime.gd")
+const EncounterCompiler = preload("res://scripts/encounters/encounter_compiler.gd")
+const EncounterCatalog = preload("res://scripts/encounters/encounter_catalog.gd")
+const EncounterAdmission = preload("res://scripts/encounters/encounter_admission.gd")
 const ARENA := View.WORLD_ARENA
 const PLAYER_RADIUS := 15.0
 const MAX_ENEMIES := 100
@@ -30,6 +33,10 @@ var visual_settings = Presentation.new()
 var monster_runtime = MonsterLifecycle.new()
 var telegraphs = TelegraphRuntime.new()
 var telegraph_trace: Array[Dictionary] = []
+var _encounter_profile: Dictionary = EncounterCompiler.compile([]).profile
+var _encounter_ids: Array[String] = []
+var _encounter_error: String = ""
+var run_revision: int = 0
 var reward_kills: int = 0
 var ordinary_admissions: int = 0
 var demo_mode: bool = false
@@ -229,6 +236,7 @@ func _quit_game() -> void:
 
 
 func restart_run() -> void:
+	run_revision += 1
 	_stats = state.get_stats()
 	health = float(_stats.max_health)
 	mana = float(_stats.max_mana)
@@ -392,6 +400,8 @@ func _clamp_to_arena(pos: Vector2, margin: float) -> Vector2:
 
 
 func _update_spawning(delta: float) -> void:
+	if not _encounter_ready():
+		return
 	_flush_monster_spawns()
 	if demo_mode or not monster_runtime.queue.is_empty():
 		return
@@ -410,6 +420,8 @@ func _update_spawning(delta: float) -> void:
 
 
 func _spawn_enemy(forced_position: Vector2 = Vector2.ZERO, forced_kind: int = -1) -> Dictionary:
+	if not _encounter_ready():
+		return {}
 	if enemies.size() >= MAX_ENEMIES:
 		return {}
 	if forced_kind >= 0:
@@ -417,6 +429,7 @@ func _spawn_enemy(forced_position: Vector2 = Vector2.ZERO, forced_kind: int = -1
 			return {}
 		return _spawn_monster(["crawler", "skitter", "brute"][forced_kind], forced_position)
 	var natural: bool = forced_position == Vector2.ZERO and not demo_mode
+	var random_before: int = rng.state
 	var encounter: String = Monsters.encounter_for_admission(wave, ordinary_admissions + 1) if natural else ""
 	var enemy: Dictionary
 	if not encounter.is_empty():
@@ -426,13 +439,18 @@ func _spawn_enemy(forced_position: Vector2 = Vector2.ZERO, forced_kind: int = -1
 		enemy = _spawn_monster(roll.template, forced_position, "ordinary", roll.rarity, roll.mechanisms)
 	if natural and not enemy.is_empty():
 		ordinary_admissions += 1
+	if enemy.is_empty() and not _encounter_ids.is_empty():
+		rng.state = random_before
 	return enemy
 
 
 func _spawn_monster(template_id: String, forced_position: Vector2 = Vector2.ZERO, context: String = "ordinary",
 		rarity: String = "", mechanisms: Array = [], rewards: bool = true) -> Dictionary:
+	if not _encounter_ready():
+		return {}
 	if enemies.size() >= MAX_ENEMIES:
 		return {}
+	var random_before: int = rng.state
 	var pos: Vector2 = forced_position
 	if pos == Vector2.ZERO:
 		var side: int = rng.randi_range(0, 3)
@@ -443,7 +461,17 @@ func _spawn_monster(template_id: String, forced_position: Vector2 = Vector2.ZERO
 			3: pos = Vector2(rng.randf_range(ARENA.position.x + 43.0, ARENA.end.x - 43.0), ARENA.end.y - 22)
 		if pos.distance_to(player_pos) < 230.0:
 			pos = ARENA.get_center() * 2.0 - pos
-	var enemy: Dictionary = monster_runtime.create_root(template_id, wave, pos, context, rarity, mechanisms, rewards and not demo_mode)
+	var enemy: Dictionary
+	if _encounter_ids.is_empty():
+		enemy = monster_runtime.create_root(template_id, wave, pos, context, rarity, mechanisms, rewards and not demo_mode)
+	else:
+		var admitted: Dictionary = EncounterAdmission.create_root(monster_runtime,_encounter_profile,
+			template_id,wave,pos,context,rarity,mechanisms,rewards and not demo_mode)
+		if not admitted.ok:
+			rng.state = random_before
+			_encounter_failed(str(admitted.error))
+			return {}
+		enemy = admitted.enemy
 	if enemy.is_empty():
 		return {}
 	enemy.pos = _clamp_to_arena(enemy.pos, float(enemy.radius))
@@ -453,10 +481,20 @@ func _spawn_monster(template_id: String, forced_position: Vector2 = Vector2.ZERO
 
 
 func _flush_monster_spawns() -> void:
+	if not _encounter_ready():
+		return
 	enemies = enemies.filter(func(enemy: Dictionary) -> bool: return float(enemy.health) > 0.0)
 	if not alive:
 		return
-	var children: Array[Dictionary] = monster_runtime.drain(MAX_ENEMIES - enemies.size(), ARENA)
+	var children: Array[Dictionary]
+	if _encounter_ids.is_empty():
+		children = monster_runtime.drain(MAX_ENEMIES - enemies.size(), ARENA)
+	else:
+		var admitted: Dictionary = EncounterAdmission.drain(monster_runtime,_encounter_profile,MAX_ENEMIES - enemies.size(),ARENA)
+		if not admitted.ok:
+			_encounter_failed(str(admitted.error))
+			return
+		children.assign(admitted.enemies)
 	for child: Dictionary in children:
 		enemies.append(child)
 		_add_ring(child.pos, 26.0, Monsters.RARITIES[child.rarity].color, 0.45)
@@ -464,6 +502,7 @@ func _flush_monster_spawns() -> void:
 
 
 func start_monster_demo() -> void:
+	_clear_encounter()
 	restart_run()
 	enemies.clear()
 	monster_runtime.reset()
@@ -487,6 +526,7 @@ func start_monster_demo() -> void:
 
 func start_density_demo() -> void:
 	# Real catalog monsters, AI, collision and damage. Only progression rewards are disabled.
+	_clear_encounter()
 	restart_run()
 	enemies.clear()
 	monster_runtime.reset()
@@ -538,9 +578,60 @@ func trigger_demo_split() -> void:
 
 
 func restore_standard_run() -> void:
+	_clear_encounter()
 	restart_run()
 	auto_fire = true
 	hud.notify("已恢复常规挑战：白蓝金普通池，每五波出现橙色首领")
+
+
+func encounter_selection() -> Array[String]:
+	return _encounter_ids.duplicate()
+
+
+func encounter_summary() -> String:
+	var names: PackedStringArray = []
+	for id: String in _encounter_ids:
+		names.append(str(EncounterCatalog.get_definition(id).name))
+	return "、".join(names) if not names.is_empty() else "常规（无挑战）"
+
+
+func start_encounter(ids: Variant, expected_revision: Variant) -> bool:
+	# UI holds a run revision while its confirmation is open. A newer run or
+	# another confirmation cannot accidentally be restarted by a stale request.
+	if not expected_revision is int or expected_revision != run_revision:
+		return false
+	var compiled: Dictionary = EncounterCompiler.compile(ids)
+	if not compiled.ok:
+		return false
+	_encounter_profile = compiled.profile
+	_encounter_ids.assign(compiled.profile.modifier_ids)
+	_encounter_error = ""
+	restart_run()
+	return true
+
+
+func _clear_encounter() -> void:
+	_encounter_profile = EncounterCompiler.compile([]).profile
+	_encounter_ids.clear()
+	_encounter_error = ""
+
+
+func _encounter_ready() -> bool:
+	var reason: String = EncounterCompiler.profile_error(_encounter_profile)
+	if reason.is_empty() and _encounter_profile.modifier_ids != _encounter_ids:
+		reason = "本轮选择与挑战配置不匹配"
+	if reason.is_empty():
+		return true
+	_encounter_failed(reason)
+	return false
+
+
+func _encounter_failed(reason: String) -> void:
+	if _encounter_error == reason:
+		return
+	_encounter_error = reason
+	if is_instance_valid(hud):
+		hud.notify("挑战入场失败：" + reason)
 
 
 func _update_enemies(delta: float) -> void:

@@ -39,6 +39,14 @@ func _initialize() -> void:
 			_expect(sample.quote.cost.calibration_shard == 8 and sample.balance_after == 0 and Equipment.validate_instance(sample.after_instance), "Independent calibration economics and legal replacement")
 			_expect(sample.after_instance.id == sample.source.id and sample.after_instance.affixes[0].tier == 3 and sample.after_definition == Exporter.clean(Equipment.definition(sample.after_instance)), "Calibrated definition derives from exact planned result without copying a damage formula")
 	_expect(current.monster_attacks.size() == 1 and current.monster_attacks.has("locked_circle"), "Exactly one implemented monster action is browsable")
+	_expect(current.encounters.size()==2,"Exactly two finite optional encounter modifiers are browsable")
+	for id: String in current.encounters:
+		var definition: Dictionary=current.encounters[id]
+		_expect(definition.status=="implemented" and not definition.profile.reward_budget.enabled and not definition.profile.reward_budget.grants_rewards,"Reference does not turn reward metadata into actual loot")
+		for sample: Dictionary in definition.examples.values():
+			_expect(is_equal_approx(float(sample.after[definition.field]),float(sample.before[definition.field])*float(definition.multiplier)),"Challenge chart records exact single compiled transform")
+			for field: String in ["damage","attack_speed","contact_weights","resistances","shield","max_shield","xp_reward"]:
+				_expect(sample.after[field]==sample.before[field],"Challenge example preserves "+field)
 	var attack: Dictionary = current.monster_attacks.locked_circle
 	var heavy_example: Dictionary = attack.example
 	_expect(attack.status == "implemented" and attack.integrated_templates == ["ember_guard"], "Reference distinguishes real guard integration from generic runtime capacity")

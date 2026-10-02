@@ -6,6 +6,7 @@ const TypedPreview = preload("res://scripts/combat/damage_preview.gd")
 const PassivePanel = preload("res://scripts/passive_panel.gd")
 const InventoryPanelView = preload("res://scripts/inventory_panel.gd")
 const SkillSupportPanelView = preload("res://scripts/skill_support_panel.gd")
+const EncounterChoices = preload("res://scripts/ui/encounter_controls.gd")
 const Passives = preload("res://scripts/passive_data.gd")
 const PresentationTheme = preload("res://scripts/visuals/visual_theme.gd")
 const Emblem = preload("res://scripts/visuals/skill_emblem.gd")
@@ -66,6 +67,10 @@ var _selected_support_skill_id: String = ""
 var _refresh_clock: float = 0.0
 var _skill_emblems: Array[Control] = []
 var _preferences: VisualSettings
+var _encounter_dialog: ConfirmationDialog
+var _encounter_request_pending: bool = false
+var _encounter_request_ids: Array[String] = []
+var _encounter_request_revision: int = -1
 
 
 func setup(arena: Node) -> void:
@@ -87,6 +92,7 @@ func setup(arena: Node) -> void:
 	_build_hint()
 	_build_toast()
 	_build_modal()
+	_build_encounter_confirmation()
 	_style_dark_hud()
 	get_viewport().size_changed.connect(_apply_presentation)
 	_apply_presentation()
@@ -117,6 +123,7 @@ func open_panel(panel_name: String) -> void:
 		return
 	if panel_name not in ["inventory", "talents", "skills", "combat", "monsters", "settings", "pause", "death"]:
 		panel_name = "pause"
+	_cancel_encounter_request()
 	_active_panel = panel_name
 	_modal.show()
 	_rebuild_panel()
@@ -125,6 +132,7 @@ func open_panel(panel_name: String) -> void:
 func close_panel() -> void:
 	if _active_panel == "death" and not bool(_arena.get("alive")):
 		return
+	_cancel_encounter_request()
 	_active_panel = ""
 	if _modal != null:
 		_modal.hide()
@@ -457,6 +465,10 @@ func _update_live() -> void:
 	var seconds: int = int(float(_arena.get("elapsed")))
 	_wave_label.text = "第 %d 波 · 击败 %d · 场上 %d" % [int(_arena.get("wave")), int(_arena.get("kills")), _arena.enemies.size()]
 	_run_label.text = "%02d:%02d   /   %s" % [seconds / 60, seconds % 60, "试验场 · 无奖励" if bool(_arena.get("demo_mode")) else ("战斗已暂停" if is_blocking() else "战斗进行中")]
+	if not bool(_arena.get("demo_mode")) and not _arena.encounter_selection().is_empty():
+		_run_label.text = "%02d:%02d   /   %s" % [seconds / 60, seconds % 60,"挑战已暂停" if is_blocking() else "挑战进行中"]
+	_run_label.tooltip_text = "本轮：%s\n无额外奖励；不随构筑存档保存" % _arena.encounter_summary()
+	_run_label.mouse_filter = Control.MOUSE_FILTER_PASS
 	_level_label.text = "Lv.%d  ·  经验 %d  ·  天赋点 %d" % [_state.level, _state.xp, _state.talent_points]
 	_set_vital("health", float(_arena.get("health")), float(stats.get("max_health", 100.0)))
 	_set_vital("mana", float(_arena.get("mana")), float(stats.get("max_mana", 100.0)))
@@ -510,6 +522,7 @@ func _set_vital(key: String, value: float, maximum: float) -> void:
 
 
 func _rebuild_panel() -> void:
+	_cancel_encounter_request()
 	for child: Node in _panel_body.get_children():
 		if child == _passive_panel or child == _inventory_panel or child == _skill_support_panel:
 			(child as Control).hide()
@@ -837,7 +850,74 @@ func _build_pause_panel() -> void:
 	var reference_button: Button = _button("离线图鉴 F8", "ReferenceCatalogButton", _arena.open_reference_catalog, 180)
 	reference_button.tooltip_text = "在浏览器查看装备、技能、珠宝与机制；保持战斗暂停"
 	_panel_body.add_child(reference_button)
+	var choices = EncounterChoices.new()
+	choices.font_scale = _preferences.font_scale
+	choices.show_run_contract()
+	choices.set_context(_arena.encounter_selection())
+	choices.encounter_requested.connect(_request_encounter)
+	_panel_body.add_child(choices)
 	_panel_footer.text = "游戏仅保存构筑进度；重新开始会重置本轮战斗"
+
+
+func _build_encounter_confirmation() -> void:
+	_encounter_dialog = ConfirmationDialog.new()
+	_encounter_dialog.name = "EncounterConfirmation"
+	_encounter_dialog.title = "确认重开本轮"
+	_encounter_dialog.dialog_autowrap = true
+	_encounter_dialog.cancel_button_text = "取消"
+	_encounter_dialog.ok_button_text = "确认重开"
+	var dialog_theme := Theme.new()
+	dialog_theme.set_color("title_color","Window",Color("f8ecd0"))
+	for style_name: String in ["embedded_border","embedded_unfocused_border"]:
+		var frame: StyleBoxFlat = ThemeDB.get_default_theme().get_stylebox(style_name,"Window").duplicate() as StyleBoxFlat
+		if frame != null:
+			frame.bg_color = Color("60432f")
+			frame.border_color = BORDER
+			dialog_theme.set_stylebox(style_name,"Window",frame)
+	_encounter_dialog.theme = dialog_theme
+	_root.add_child(_encounter_dialog)
+	_encounter_dialog.get_ok_button().add_theme_color_override("font_focus_color",TEXT)
+	_encounter_dialog.get_cancel_button().add_theme_color_override("font_focus_color",TEXT)
+	_encounter_dialog.confirmed.connect(_confirm_encounter)
+	_encounter_dialog.canceled.connect(_cancel_encounter_request)
+
+
+func _request_encounter(ids: Array[String]) -> void:
+	if _active_panel != "pause" or _encounter_request_pending:
+		return
+	var compiled: Dictionary = _arena.EncounterCompiler.compile(ids)
+	if not compiled.ok:
+		notify(str(compiled.error))
+		return
+	_encounter_request_ids.assign(compiled.profile.modifier_ids)
+	_encounter_request_revision = int(_arena.run_revision)
+	_encounter_request_pending = true
+	var names: PackedStringArray = []
+	for entry: Dictionary in compiled.profile.definitions:
+		names.append(str(entry.name))
+	var summary: String = "、".join(names) if not names.is_empty() else "常规（无挑战）"
+	_encounter_dialog.dialog_text = "本轮选择：%s\n\n确认后结束当前战斗，重置怪物、时间和本轮击败数。\n构筑、经验、装备与材料保留。\n挑战不增加奖励，不持久保存；普通重试保留本轮选择。" % summary
+	_encounter_dialog.popup_centered(Vector2i(560,260))
+
+
+func _cancel_encounter_request() -> void:
+	_encounter_request_pending = false
+	_encounter_request_ids.clear()
+	_encounter_request_revision = -1
+	if is_instance_valid(_encounter_dialog):
+		_encounter_dialog.hide()
+
+
+func _confirm_encounter() -> void:
+	if not _encounter_request_pending:
+		return
+	var ids: Array[String] = _encounter_request_ids.duplicate()
+	var revision: int = _encounter_request_revision
+	_cancel_encounter_request()
+	if not _arena.start_encounter(ids,revision):
+		notify("本轮已变化，未重开；请重新确认选择")
+		return
+	notify("新一轮：%s · 无额外奖励" % _arena.encounter_summary())
 
 
 func _build_death_panel() -> void:

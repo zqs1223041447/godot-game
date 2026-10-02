@@ -3929,6 +3929,1294 @@
 			"priority": 20
 		}
 	},
+	"encounters": {
+		"enemy_max_health_120": {
+			"description": "怪物最大生命 ×1.20",
+			"examples": {
+				"brood_host": {
+					"after": {
+						"attack_speed": 1.1764705882352942,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"physical": 1.0
+						},
+						"damage": 23.279999999999998,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [
+							{
+								"count": 2,
+								"template": "splitter"
+							}
+						],
+						"defense_stats": {
+
+						},
+						"encounter_source": {
+							"before": {
+								"health": 323.25,
+								"max_health": 323.25,
+								"max_shield": 4.68,
+								"shield": 4.68,
+								"speed": 47.2
+							},
+							"enemy_id": 1,
+							"mechanism_policy": "poe-passive-v1",
+							"mechanism_revision": 1,
+							"mechanism_schema": 1,
+							"profile": {
+								"definitions": [
+									{
+										"description": "怪物最大生命 ×1.20",
+										"field": "max_health",
+										"id": "enemy_max_health_120",
+										"multiplier": 1.2,
+										"name": "强健",
+										"risk": {
+											"assessment": "parameter_only",
+											"field": "max_health",
+											"multiplier": 1.2,
+											"relative_increase": 0.19999999999999996
+										},
+										"source_id": "encounter:enemy_max_health_120"
+									}
+								],
+								"modifier_ids": [
+									"enemy_max_health_120"
+								],
+								"multipliers": {
+									"max_health": 1.2,
+									"speed": 1.0
+								},
+								"resource_policy": {
+									"health": "preserve_current_to_max_ratio",
+									"max_health": "multiply_canonical_once",
+									"max_shield": "unchanged",
+									"rounding": "float_no_integer_rounding",
+									"shield": "unchanged",
+									"shield_regen": "unchanged",
+									"speed": "multiply_canonical_once"
+								},
+								"reward_budget": {
+									"creates_map_items": false,
+									"enabled": false,
+									"grants_rewards": false,
+									"proposed_bonus_fraction": null,
+									"status": "metadata_only"
+								},
+								"risk_parameters": [
+									{
+										"assessment": "parameter_only",
+										"field": "max_health",
+										"multiplier": 1.2,
+										"relative_increase": 0.19999999999999996
+									}
+								],
+								"source": {
+									"balance_source": "original_game_balance",
+									"catalog": "res://scripts/encounters/encounter_catalog.gd",
+									"definition_revision": 1,
+									"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+									"monster_schema_version": 1,
+									"policy_version": 1,
+									"schema_version": 1
+								}
+							},
+							"rarity": "rare",
+							"template_id": "brood_host",
+							"wave": 3
+						},
+						"equipment_pool": "",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 387.9,
+						"id": 1,
+						"kind": 2,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 387.9,
+						"max_shield": 4.68,
+						"mechanism_ids": [
+							"grove_mastery",
+							"aegis_recovery"
+						],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+							"max_health": 9.75,
+							"max_shield": 4.68,
+							"shield_regen": 0.4225
+						},
+						"name": "孵化重壳体",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"resistances": {
+							"fire": 0.0
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 4.68,
+						"shield_regen": 0.4225,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 47.2,
+						"template_id": "brood_host",
+						"wave": 3,
+						"xp_reward": 24
+					},
+					"before": {
+						"attack_speed": 1.1764705882352942,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"physical": 1.0
+						},
+						"damage": 23.279999999999998,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [
+							{
+								"count": 2,
+								"template": "splitter"
+							}
+						],
+						"defense_stats": {
+
+						},
+						"equipment_pool": "",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 323.25,
+						"id": 1,
+						"kind": 2,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 323.25,
+						"max_shield": 4.68,
+						"mechanism_ids": [
+							"grove_mastery",
+							"aegis_recovery"
+						],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+							"max_health": 9.75,
+							"max_shield": 4.68,
+							"shield_regen": 0.4225
+						},
+						"name": "孵化重壳体",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"resistances": {
+							"fire": 0.0
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 4.68,
+						"shield_regen": 0.4225,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 47.2,
+						"template_id": "brood_host",
+						"wave": 3,
+						"xp_reward": 24
+					}
+				},
+				"crawler": {
+					"after": {
+						"attack_speed": 1.1764705882352942,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"physical": 1.0
+						},
+						"damage": 11.4,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [],
+						"defense_stats": {
+
+						},
+						"encounter_source": {
+							"before": {
+								"health": 50.160000000000004,
+								"max_health": 50.160000000000004,
+								"max_shield": 0.0,
+								"shield": 0.0,
+								"speed": 68.2
+							},
+							"enemy_id": 1,
+							"mechanism_policy": "poe-passive-v1",
+							"mechanism_revision": 1,
+							"mechanism_schema": 1,
+							"profile": {
+								"definitions": [
+									{
+										"description": "怪物最大生命 ×1.20",
+										"field": "max_health",
+										"id": "enemy_max_health_120",
+										"multiplier": 1.2,
+										"name": "强健",
+										"risk": {
+											"assessment": "parameter_only",
+											"field": "max_health",
+											"multiplier": 1.2,
+											"relative_increase": 0.19999999999999996
+										},
+										"source_id": "encounter:enemy_max_health_120"
+									}
+								],
+								"modifier_ids": [
+									"enemy_max_health_120"
+								],
+								"multipliers": {
+									"max_health": 1.2,
+									"speed": 1.0
+								},
+								"resource_policy": {
+									"health": "preserve_current_to_max_ratio",
+									"max_health": "multiply_canonical_once",
+									"max_shield": "unchanged",
+									"rounding": "float_no_integer_rounding",
+									"shield": "unchanged",
+									"shield_regen": "unchanged",
+									"speed": "multiply_canonical_once"
+								},
+								"reward_budget": {
+									"creates_map_items": false,
+									"enabled": false,
+									"grants_rewards": false,
+									"proposed_bonus_fraction": null,
+									"status": "metadata_only"
+								},
+								"risk_parameters": [
+									{
+										"assessment": "parameter_only",
+										"field": "max_health",
+										"multiplier": 1.2,
+										"relative_increase": 0.19999999999999996
+									}
+								],
+								"source": {
+									"balance_source": "original_game_balance",
+									"catalog": "res://scripts/encounters/encounter_catalog.gd",
+									"definition_revision": 1,
+									"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+									"monster_schema_version": 1,
+									"policy_version": 1,
+									"schema_version": 1
+								}
+							},
+							"rarity": "normal",
+							"template_id": "crawler",
+							"wave": 3
+						},
+						"equipment_pool": "",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 60.192,
+						"id": 1,
+						"kind": 0,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 60.192,
+						"max_shield": 0.0,
+						"mechanism_ids": [],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+
+						},
+						"name": "巡游体",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"resistances": {
+							"fire": 0.0
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 0.0,
+						"shield_regen": 0.0,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 68.2,
+						"template_id": "crawler",
+						"wave": 3,
+						"xp_reward": 3
+					},
+					"before": {
+						"attack_speed": 1.1764705882352942,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"physical": 1.0
+						},
+						"damage": 11.4,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [],
+						"defense_stats": {
+
+						},
+						"equipment_pool": "",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 50.160000000000004,
+						"id": 1,
+						"kind": 0,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 50.160000000000004,
+						"max_shield": 0.0,
+						"mechanism_ids": [],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+
+						},
+						"name": "巡游体",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"resistances": {
+							"fire": 0.0
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 0.0,
+						"shield_regen": 0.0,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 68.2,
+						"template_id": "crawler",
+						"wave": 3,
+						"xp_reward": 3
+					}
+				},
+				"ember_guard": {
+					"after": {
+						"attack_speed": 1.1764705882352942,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"fire": 0.5,
+							"physical": 0.5
+						},
+						"damage": 23.279999999999998,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [],
+						"defense_stats": {
+							"fire_resistance": 0.25
+						},
+						"encounter_source": {
+							"before": {
+								"health": 313.5,
+								"max_health": 313.5,
+								"max_shield": 0.0,
+								"shield": 0.0,
+								"speed": 47.2
+							},
+							"enemy_id": 1,
+							"mechanism_policy": "poe-passive-v1",
+							"mechanism_revision": 1,
+							"mechanism_schema": 1,
+							"profile": {
+								"definitions": [
+									{
+										"description": "怪物最大生命 ×1.20",
+										"field": "max_health",
+										"id": "enemy_max_health_120",
+										"multiplier": 1.2,
+										"name": "强健",
+										"risk": {
+											"assessment": "parameter_only",
+											"field": "max_health",
+											"multiplier": 1.2,
+											"relative_increase": 0.19999999999999996
+										},
+										"source_id": "encounter:enemy_max_health_120"
+									}
+								],
+								"modifier_ids": [
+									"enemy_max_health_120"
+								],
+								"multipliers": {
+									"max_health": 1.2,
+									"speed": 1.0
+								},
+								"resource_policy": {
+									"health": "preserve_current_to_max_ratio",
+									"max_health": "multiply_canonical_once",
+									"max_shield": "unchanged",
+									"rounding": "float_no_integer_rounding",
+									"shield": "unchanged",
+									"shield_regen": "unchanged",
+									"speed": "multiply_canonical_once"
+								},
+								"reward_budget": {
+									"creates_map_items": false,
+									"enabled": false,
+									"grants_rewards": false,
+									"proposed_bonus_fraction": null,
+									"status": "metadata_only"
+								},
+								"risk_parameters": [
+									{
+										"assessment": "parameter_only",
+										"field": "max_health",
+										"multiplier": 1.2,
+										"relative_increase": 0.19999999999999996
+									}
+								],
+								"source": {
+									"balance_source": "original_game_balance",
+									"catalog": "res://scripts/encounters/encounter_catalog.gd",
+									"definition_revision": 1,
+									"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+									"monster_schema_version": 1,
+									"policy_version": 1,
+									"schema_version": 1
+								}
+							},
+							"rarity": "rare",
+							"template_id": "ember_guard",
+							"wave": 3
+						},
+						"equipment_pool": "defense",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 376.2,
+						"id": 1,
+						"kind": 2,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 376.2,
+						"max_shield": 0.0,
+						"mechanism_ids": [],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+
+						},
+						"name": "灰烬守卫",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"resistances": {
+							"fire": 0.25
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 0.0,
+						"shield_regen": 0.0,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 47.2,
+						"template_id": "ember_guard",
+						"wave": 3,
+						"xp_reward": 24
+					},
+					"before": {
+						"attack_speed": 1.1764705882352942,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"fire": 0.5,
+							"physical": 0.5
+						},
+						"damage": 23.279999999999998,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [],
+						"defense_stats": {
+							"fire_resistance": 0.25
+						},
+						"equipment_pool": "defense",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 313.5,
+						"id": 1,
+						"kind": 2,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 313.5,
+						"max_shield": 0.0,
+						"mechanism_ids": [],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+
+						},
+						"name": "灰烬守卫",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"resistances": {
+							"fire": 0.25
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 0.0,
+						"shield_regen": 0.0,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 47.2,
+						"template_id": "ember_guard",
+						"wave": 3,
+						"xp_reward": 24
+					}
+				}
+			},
+			"field": "max_health",
+			"id": "enemy_max_health_120",
+			"multiplier": 1.2,
+			"name": "强健",
+			"profile": {
+				"definitions": [
+					{
+						"description": "怪物最大生命 ×1.20",
+						"field": "max_health",
+						"id": "enemy_max_health_120",
+						"multiplier": 1.2,
+						"name": "强健",
+						"risk": {
+							"assessment": "parameter_only",
+							"field": "max_health",
+							"multiplier": 1.2,
+							"relative_increase": 0.19999999999999996
+						},
+						"source_id": "encounter:enemy_max_health_120"
+					}
+				],
+				"modifier_ids": [
+					"enemy_max_health_120"
+				],
+				"multipliers": {
+					"max_health": 1.2,
+					"speed": 1.0
+				},
+				"resource_policy": {
+					"health": "preserve_current_to_max_ratio",
+					"max_health": "multiply_canonical_once",
+					"max_shield": "unchanged",
+					"rounding": "float_no_integer_rounding",
+					"shield": "unchanged",
+					"shield_regen": "unchanged",
+					"speed": "multiply_canonical_once"
+				},
+				"reward_budget": {
+					"creates_map_items": false,
+					"enabled": false,
+					"grants_rewards": false,
+					"proposed_bonus_fraction": null,
+					"status": "metadata_only"
+				},
+				"risk_parameters": [
+					{
+						"assessment": "parameter_only",
+						"field": "max_health",
+						"multiplier": 1.2,
+						"relative_increase": 0.19999999999999996
+					}
+				],
+				"source": {
+					"balance_source": "original_game_balance",
+					"catalog": "res://scripts/encounters/encounter_catalog.gd",
+					"definition_revision": 1,
+					"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+					"monster_schema_version": 1,
+					"policy_version": 1,
+					"schema_version": 1
+				}
+			},
+			"risk": {
+				"assessment": "parameter_only",
+				"field": "max_health",
+				"multiplier": 1.2,
+				"relative_increase": 0.19999999999999996
+			},
+			"source_id": "encounter:enemy_max_health_120",
+			"status": "implemented"
+		},
+		"enemy_move_speed_110": {
+			"description": "怪物移动速度 ×1.10",
+			"examples": {
+				"brood_host": {
+					"after": {
+						"attack_speed": 1.1764705882352942,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"physical": 1.0
+						},
+						"damage": 23.279999999999998,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [
+							{
+								"count": 2,
+								"template": "splitter"
+							}
+						],
+						"defense_stats": {
+
+						},
+						"encounter_source": {
+							"before": {
+								"health": 323.25,
+								"max_health": 323.25,
+								"max_shield": 4.68,
+								"shield": 4.68,
+								"speed": 47.2
+							},
+							"enemy_id": 1,
+							"mechanism_policy": "poe-passive-v1",
+							"mechanism_revision": 1,
+							"mechanism_schema": 1,
+							"profile": {
+								"definitions": [
+									{
+										"description": "怪物移动速度 ×1.10",
+										"field": "speed",
+										"id": "enemy_move_speed_110",
+										"multiplier": 1.1,
+										"name": "迅行",
+										"risk": {
+											"assessment": "parameter_only",
+											"field": "speed",
+											"multiplier": 1.1,
+											"relative_increase": 0.10000000000000009
+										},
+										"source_id": "encounter:enemy_move_speed_110"
+									}
+								],
+								"modifier_ids": [
+									"enemy_move_speed_110"
+								],
+								"multipliers": {
+									"max_health": 1.0,
+									"speed": 1.1
+								},
+								"resource_policy": {
+									"health": "preserve_current_to_max_ratio",
+									"max_health": "multiply_canonical_once",
+									"max_shield": "unchanged",
+									"rounding": "float_no_integer_rounding",
+									"shield": "unchanged",
+									"shield_regen": "unchanged",
+									"speed": "multiply_canonical_once"
+								},
+								"reward_budget": {
+									"creates_map_items": false,
+									"enabled": false,
+									"grants_rewards": false,
+									"proposed_bonus_fraction": null,
+									"status": "metadata_only"
+								},
+								"risk_parameters": [
+									{
+										"assessment": "parameter_only",
+										"field": "speed",
+										"multiplier": 1.1,
+										"relative_increase": 0.10000000000000009
+									}
+								],
+								"source": {
+									"balance_source": "original_game_balance",
+									"catalog": "res://scripts/encounters/encounter_catalog.gd",
+									"definition_revision": 1,
+									"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+									"monster_schema_version": 1,
+									"policy_version": 1,
+									"schema_version": 1
+								}
+							},
+							"rarity": "rare",
+							"template_id": "brood_host",
+							"wave": 3
+						},
+						"equipment_pool": "",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 323.25,
+						"id": 1,
+						"kind": 2,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 323.25,
+						"max_shield": 4.68,
+						"mechanism_ids": [
+							"grove_mastery",
+							"aegis_recovery"
+						],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+							"max_health": 9.75,
+							"max_shield": 4.68,
+							"shield_regen": 0.4225
+						},
+						"name": "孵化重壳体",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"resistances": {
+							"fire": 0.0
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 4.68,
+						"shield_regen": 0.4225,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 51.92000000000001,
+						"template_id": "brood_host",
+						"wave": 3,
+						"xp_reward": 24
+					},
+					"before": {
+						"attack_speed": 1.1764705882352942,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"physical": 1.0
+						},
+						"damage": 23.279999999999998,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [
+							{
+								"count": 2,
+								"template": "splitter"
+							}
+						],
+						"defense_stats": {
+
+						},
+						"equipment_pool": "",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 323.25,
+						"id": 1,
+						"kind": 2,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 323.25,
+						"max_shield": 4.68,
+						"mechanism_ids": [
+							"grove_mastery",
+							"aegis_recovery"
+						],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+							"max_health": 9.75,
+							"max_shield": 4.68,
+							"shield_regen": 0.4225
+						},
+						"name": "孵化重壳体",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"resistances": {
+							"fire": 0.0
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 4.68,
+						"shield_regen": 0.4225,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 47.2,
+						"template_id": "brood_host",
+						"wave": 3,
+						"xp_reward": 24
+					}
+				},
+				"crawler": {
+					"after": {
+						"attack_speed": 1.1764705882352942,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"physical": 1.0
+						},
+						"damage": 11.4,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [],
+						"defense_stats": {
+
+						},
+						"encounter_source": {
+							"before": {
+								"health": 50.160000000000004,
+								"max_health": 50.160000000000004,
+								"max_shield": 0.0,
+								"shield": 0.0,
+								"speed": 68.2
+							},
+							"enemy_id": 1,
+							"mechanism_policy": "poe-passive-v1",
+							"mechanism_revision": 1,
+							"mechanism_schema": 1,
+							"profile": {
+								"definitions": [
+									{
+										"description": "怪物移动速度 ×1.10",
+										"field": "speed",
+										"id": "enemy_move_speed_110",
+										"multiplier": 1.1,
+										"name": "迅行",
+										"risk": {
+											"assessment": "parameter_only",
+											"field": "speed",
+											"multiplier": 1.1,
+											"relative_increase": 0.10000000000000009
+										},
+										"source_id": "encounter:enemy_move_speed_110"
+									}
+								],
+								"modifier_ids": [
+									"enemy_move_speed_110"
+								],
+								"multipliers": {
+									"max_health": 1.0,
+									"speed": 1.1
+								},
+								"resource_policy": {
+									"health": "preserve_current_to_max_ratio",
+									"max_health": "multiply_canonical_once",
+									"max_shield": "unchanged",
+									"rounding": "float_no_integer_rounding",
+									"shield": "unchanged",
+									"shield_regen": "unchanged",
+									"speed": "multiply_canonical_once"
+								},
+								"reward_budget": {
+									"creates_map_items": false,
+									"enabled": false,
+									"grants_rewards": false,
+									"proposed_bonus_fraction": null,
+									"status": "metadata_only"
+								},
+								"risk_parameters": [
+									{
+										"assessment": "parameter_only",
+										"field": "speed",
+										"multiplier": 1.1,
+										"relative_increase": 0.10000000000000009
+									}
+								],
+								"source": {
+									"balance_source": "original_game_balance",
+									"catalog": "res://scripts/encounters/encounter_catalog.gd",
+									"definition_revision": 1,
+									"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+									"monster_schema_version": 1,
+									"policy_version": 1,
+									"schema_version": 1
+								}
+							},
+							"rarity": "normal",
+							"template_id": "crawler",
+							"wave": 3
+						},
+						"equipment_pool": "",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 50.160000000000004,
+						"id": 1,
+						"kind": 0,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 50.160000000000004,
+						"max_shield": 0.0,
+						"mechanism_ids": [],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+
+						},
+						"name": "巡游体",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"resistances": {
+							"fire": 0.0
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 0.0,
+						"shield_regen": 0.0,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 75.02000000000001,
+						"template_id": "crawler",
+						"wave": 3,
+						"xp_reward": 3
+					},
+					"before": {
+						"attack_speed": 1.1764705882352942,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"physical": 1.0
+						},
+						"damage": 11.4,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [],
+						"defense_stats": {
+
+						},
+						"equipment_pool": "",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 50.160000000000004,
+						"id": 1,
+						"kind": 0,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 50.160000000000004,
+						"max_shield": 0.0,
+						"mechanism_ids": [],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+
+						},
+						"name": "巡游体",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"resistances": {
+							"fire": 0.0
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 0.0,
+						"shield_regen": 0.0,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 68.2,
+						"template_id": "crawler",
+						"wave": 3,
+						"xp_reward": 3
+					}
+				},
+				"ember_guard": {
+					"after": {
+						"attack_speed": 1.1764705882352942,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"fire": 0.5,
+							"physical": 0.5
+						},
+						"damage": 23.279999999999998,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [],
+						"defense_stats": {
+							"fire_resistance": 0.25
+						},
+						"encounter_source": {
+							"before": {
+								"health": 313.5,
+								"max_health": 313.5,
+								"max_shield": 0.0,
+								"shield": 0.0,
+								"speed": 47.2
+							},
+							"enemy_id": 1,
+							"mechanism_policy": "poe-passive-v1",
+							"mechanism_revision": 1,
+							"mechanism_schema": 1,
+							"profile": {
+								"definitions": [
+									{
+										"description": "怪物移动速度 ×1.10",
+										"field": "speed",
+										"id": "enemy_move_speed_110",
+										"multiplier": 1.1,
+										"name": "迅行",
+										"risk": {
+											"assessment": "parameter_only",
+											"field": "speed",
+											"multiplier": 1.1,
+											"relative_increase": 0.10000000000000009
+										},
+										"source_id": "encounter:enemy_move_speed_110"
+									}
+								],
+								"modifier_ids": [
+									"enemy_move_speed_110"
+								],
+								"multipliers": {
+									"max_health": 1.0,
+									"speed": 1.1
+								},
+								"resource_policy": {
+									"health": "preserve_current_to_max_ratio",
+									"max_health": "multiply_canonical_once",
+									"max_shield": "unchanged",
+									"rounding": "float_no_integer_rounding",
+									"shield": "unchanged",
+									"shield_regen": "unchanged",
+									"speed": "multiply_canonical_once"
+								},
+								"reward_budget": {
+									"creates_map_items": false,
+									"enabled": false,
+									"grants_rewards": false,
+									"proposed_bonus_fraction": null,
+									"status": "metadata_only"
+								},
+								"risk_parameters": [
+									{
+										"assessment": "parameter_only",
+										"field": "speed",
+										"multiplier": 1.1,
+										"relative_increase": 0.10000000000000009
+									}
+								],
+								"source": {
+									"balance_source": "original_game_balance",
+									"catalog": "res://scripts/encounters/encounter_catalog.gd",
+									"definition_revision": 1,
+									"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+									"monster_schema_version": 1,
+									"policy_version": 1,
+									"schema_version": 1
+								}
+							},
+							"rarity": "rare",
+							"template_id": "ember_guard",
+							"wave": 3
+						},
+						"equipment_pool": "defense",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 313.5,
+						"id": 1,
+						"kind": 2,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 313.5,
+						"max_shield": 0.0,
+						"mechanism_ids": [],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+
+						},
+						"name": "灰烬守卫",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"resistances": {
+							"fire": 0.25
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 0.0,
+						"shield_regen": 0.0,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 51.92000000000001,
+						"template_id": "ember_guard",
+						"wave": 3,
+						"xp_reward": 24
+					},
+					"before": {
+						"attack_speed": 1.1764705882352942,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"fire": 0.5,
+							"physical": 0.5
+						},
+						"damage": 23.279999999999998,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [],
+						"defense_stats": {
+							"fire_resistance": 0.25
+						},
+						"equipment_pool": "defense",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 313.5,
+						"id": 1,
+						"kind": 2,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 313.5,
+						"max_shield": 0.0,
+						"mechanism_ids": [],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+
+						},
+						"name": "灰烬守卫",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"resistances": {
+							"fire": 0.25
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 0.0,
+						"shield_regen": 0.0,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 47.2,
+						"template_id": "ember_guard",
+						"wave": 3,
+						"xp_reward": 24
+					}
+				}
+			},
+			"field": "speed",
+			"id": "enemy_move_speed_110",
+			"multiplier": 1.1,
+			"name": "迅行",
+			"profile": {
+				"definitions": [
+					{
+						"description": "怪物移动速度 ×1.10",
+						"field": "speed",
+						"id": "enemy_move_speed_110",
+						"multiplier": 1.1,
+						"name": "迅行",
+						"risk": {
+							"assessment": "parameter_only",
+							"field": "speed",
+							"multiplier": 1.1,
+							"relative_increase": 0.10000000000000009
+						},
+						"source_id": "encounter:enemy_move_speed_110"
+					}
+				],
+				"modifier_ids": [
+					"enemy_move_speed_110"
+				],
+				"multipliers": {
+					"max_health": 1.0,
+					"speed": 1.1
+				},
+				"resource_policy": {
+					"health": "preserve_current_to_max_ratio",
+					"max_health": "multiply_canonical_once",
+					"max_shield": "unchanged",
+					"rounding": "float_no_integer_rounding",
+					"shield": "unchanged",
+					"shield_regen": "unchanged",
+					"speed": "multiply_canonical_once"
+				},
+				"reward_budget": {
+					"creates_map_items": false,
+					"enabled": false,
+					"grants_rewards": false,
+					"proposed_bonus_fraction": null,
+					"status": "metadata_only"
+				},
+				"risk_parameters": [
+					{
+						"assessment": "parameter_only",
+						"field": "speed",
+						"multiplier": 1.1,
+						"relative_increase": 0.10000000000000009
+					}
+				],
+				"source": {
+					"balance_source": "original_game_balance",
+					"catalog": "res://scripts/encounters/encounter_catalog.gd",
+					"definition_revision": 1,
+					"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+					"monster_schema_version": 1,
+					"policy_version": 1,
+					"schema_version": 1
+				}
+			},
+			"risk": {
+				"assessment": "parameter_only",
+				"field": "speed",
+				"multiplier": 1.1,
+				"relative_increase": 0.10000000000000009
+			},
+			"source_id": "encounter:enemy_move_speed_110",
+			"status": "implemented"
+		}
+	},
 	"equipment": {
 		"ashwood_bow": {
 			"balance_origin": "original",
@@ -4481,7 +5769,7 @@
 			}
 		}
 	},
-	"game_version": "0.16.0",
+	"game_version": "0.17.0",
 	"jewel_affixes": {
 		"barrier": {
 			"kind": "prefix",

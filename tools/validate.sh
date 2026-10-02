@@ -73,6 +73,11 @@ run_check --script res://tests/fire_defense_integration_test.gd
 run_check --script res://tests/telegraphed_area_test.gd
 run_check --script res://tests/telegraph_integration_test.gd
 run_check --script res://tests/telegraph_renderer_test.gd
+run_check --script res://tests/encounter_compiler_test.gd
+run_check --script res://tests/encounter_controls_test.gd
+run_check --script res://tests/encounter_monster_composition_test.gd
+run_check --script res://tests/encounter_integration_test.gd
+run_check --script res://tests/encounter_ui_integration_test.gd
 run_check --script res://tests/damage_base_test.gd
 run_check --script res://tests/damage_preview_test.gd
 run_check --script res://tests/typed_damage_state_test.gd

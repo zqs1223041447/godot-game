@@ -12,7 +12,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 REF = ROOT / 'docs/reference'
-CATEGORIES = [('skills','主动技能'),('supports','辅助技能'),('equipment','随机装备'),('affixes','装备词缀'),('fixed_items','固定装备'),('jewels','珠宝'),('jewel_affixes','珠宝词缀'),('passives','天赋星图'),('mechanisms','共用机制'),('weapon_stages','武器局部阶段'),('defenses','受击与防御'),('crafting','制作与回收'),('monsters','怪物图鉴'),('monster_attacks','怪物攻击'),('rules','规则与边界')]
+CATEGORIES = [('skills','主动技能'),('supports','辅助技能'),('equipment','随机装备'),('affixes','装备词缀'),('fixed_items','固定装备'),('jewels','珠宝'),('jewel_affixes','珠宝词缀'),('passives','天赋星图'),('mechanisms','共用机制'),('weapon_stages','武器局部阶段'),('defenses','受击与防御'),('crafting','制作与回收'),('monsters','怪物图鉴'),('monster_attacks','怪物攻击'),('encounters','本轮挑战'),('rules','规则与边界')]
 RULE_TITLES = {'damage':'伤害如何结算','supports':'辅助装配','projectiles':'分裂、返回与飞行结束','equipment':'装备与阶级','character_rates':'恢复、移动与普通攻击速度','basic_attack':'普通攻击与武器贡献','allocation':'天赋与珠宝规则','shared':'玩家和怪物共享机制','boundaries':'尚未实现的源游戏语义','sources':'数据来源与实现边界'}
 CAPABILITIES = {'initial_projectiles':'初始投射物数量','projectile_hit':'投射物命中','finite_projectile_pierce':'有限穿透'}
 SLOTS = {'weapon':'武器','armor':'护甲','charm':'护符'}
@@ -42,6 +42,17 @@ def piercing_diagram(examples, skills):
         before, after = pair['before'], pair['after']
         content += '<p>命中 '+str(len(before['observed_hits']))+' → '+str(len(after['observed_hits']))+'；耗魔 '+number(before['mana'])+' → '+number(after['mana'])+'；防御前单击 '+number(before['hit_damage'])+' → '+number(after['hit_damage'])+'</p>'
     return content
+
+def encounter_diagram(key, definition, monsters):
+    field=definition['field']; diagrams=''
+    for template,sample in definition['examples'].items():
+        before=sample['before'][field]; after=sample['after'][field]; maximum=max(before,after,1.0)
+        bars=''
+        for row,(label,value) in enumerate([('常规',before),('挑战',after)]):
+            y=25+row*33; bar=value/maximum*205
+            bars+=f'<text x="0" y="{y+14}" fill="#69523a" font-size="13">{label}</text><rect x="38" y="{y}" width="{bar}" height="19" fill="'+('#bca888' if row==0 else '#8f6736')+f'"/><text x="252" y="{y+14}" fill="#3b281b" font-size="13" data-encounter-value="{key}-{template}-{label}" data-value="{esc(value)}">{number(value)}</text>'
+        diagrams+='<figure><figcaption>'+esc(monsters[template]['name'])+' · '+('最大生命' if field=='max_health' else '移动速度')+f'</figcaption><svg class="mechanism-diagram" viewBox="0 0 350 90" role="img" aria-label="{esc(definition["name"])}前后参数">{bars}</svg></figure>'
+    return '<div class="encounter-diagrams">'+diagrams+'</div><p class="fine">每组为第3波标准模板，之后只应用一次当前挑战；数据来自实际编译器。条形长度仅表示本行参数，不是综合难度、伤害或每秒收益。</p>'
 
 def telegraph_diagram(attack):
     sample=attack['example']; event=sample['event']; profile=event['profile']; cases=sample['cases']
@@ -220,6 +231,9 @@ def build(data, art):
             body+=facts([('可用底材',links('equipment',c['eligible_base_ids'])),('前置条件','在背包中、未穿戴的随机魔法/稀有装备；普通无词缀、固定示例和珠宝不适用'),('保存顺序','完整候选验证 → 原子写盘 → 内存提交与刷新'),('失败保护','拒绝或写盘失败不动装备、材料和序号；回收需确认，校准明确可能降低或不变'),('保持字段','物品ID、底材、物品等级、稀有度、词缀种类/顺序/阶级保持；校准只重掷原档数值')])
             related=link('crafting','calibration_shard')+' · '+link('equipment',source['base_id'])+' · '+links('affixes',[a['id'] for a in source['affixes']])
         cards.append(add('crafting',key,c['name'],c['description'],body,'材料' if c['kind']=='material' else '制作操作',related=related))
+    for key,e in data['encounters'].items():
+        body=encounter_diagram(key,e,data['monsters'])+facts([('倍率',number(e['multiplier'])),('作用字段',esc(e['field'])),('应用顺序','物种/波次/稀有度/机制生成标准怪物后，仅在入场前乘一次；死亡子怪按自己的标准值应用'),('其余属性','攻击伤害、护盾、防御、体型、重击时序与奖励资格保持'),('风险说明','仅参数变化；实战难度未合并评分'),('奖励','无额外经验、掉落、制作材料或地图物品'),('生命周期','暂停面板选择并确认重开后生效；普通重试保留，恢复常规/试验场清空；不随构筑保存')])
+        cards.append(add('encounters',key,e['name'],e['description'],body,'本轮可选 · 原创规则',related=links('monsters',e['examples'].keys())+' · '+link('rules','encounters')))
     for key,a in data['monster_attacks'].items():
         p=a['profile']; policy=a['policy']
         body=telegraph_diagram(a)+facts([('来源',links('monsters',a['integrated_templates'])),('发动距离',number(policy['trigger_distance'])+' 世界单位'),('原始伤害',component_text(a['example']['event']['packet']['base'])),('倍率',number(p['damage_multiplier'])+' × 来源接触基底'),('攻速作用','只缩放恢复期；预警时间固定；开始后本次时序和伤害冻结'),('期间行动','暂停主动追击；击退仍有效；同一守卫不再叠加贴身接触攻击'),('取消与保护','来源死亡/出生保护/移除、玩家死亡或重开取消；暂停冻结时钟；多次同时命中沿用玩家无敌帧'),('规则版本',esc(a['balance_version']))])
@@ -245,6 +259,7 @@ def build(data, art):
     historical_pools=''.join('<p>'+esc(version)+'：'+' / '.join(esc(TYPES[row['pool_id']])+' '+number(row['weight']) for row in rows)+'</p>' for version,rows in data['loot_profiles'].items() if version!=data['current_loot_profile_id'])
     basic_rows=''.join(f'<tr><th scope="row">{esc(data["configurations"][config]["name"])}</th><td>{esc(component_text(sample["hits"]["basic"]["packet"]["base"]))}</td><td>{number(sample["hits"]["basic"]["resolved"]["total"])}</td><td>{number(sample["hits"]["basic"]["known_target_resolved"]["total"])}</td></tr>' for config in ['local_normal','local_max'] for sample in [data['weapon_stages']['weapon_local']['examples'][config]])
     rule_defs=[
+        ('encounters','本轮挑战与重开','有限可选挑战已实装；不是完整终局地图系统。', '<p>'+links('encounters',data['encounters'].keys())+'</p><p>可选零、一或两项；确认会结束当前战斗并重置怪物、时间与本轮击败数，构筑/经验/物品/材料保留。普通重试沿用本轮选择；恢复常规与试验场清空，重新加载游戏为常规。</p><p>没有额外奖励，不消耗地图物品，不写入构筑存档。根怪和整批子怪在入场前应用同一冻结配置，失败回滚RNG/未发布身份与队列，不回退成普通怪。详细规则见随包 ENCOUNTER_INTEGRATION 文档。</p>', 'implemented'),
         ('damage','伤害如何结算','每次施放先冻结构筑快照，再由技能编译器组装命中。条目分别标注防御前与已知目标抗性后的逐次命中，不是总伤害或每秒伤害。',configs+'<p>'+link('defenses','fire_resistance','查看一次命中的抗性与护盾流程')+'</p><p>原有固有分量、支持攻击命中的局部武器物理与匹配攻击/法术标签的外部附加点伤先分路组装；适用的提高同组相加，总增/总降分别相乘。独立爆炸具有自己的标签与附加效用。</p>','implemented'),
         ('supports','辅助装配','只有拥有所需能力的主动技能可装配辅助。同一技能不能重复装配同一辅助。',f'<p>每技能最多 {data["limits"]["max_supports"]} 个辅助；初始投射物上限 {data["limits"]["initial_projectiles"]}。兼容性来自 SupportRegistry 及各规则模块；数值来自 SkillCompiler。</p><p>'+links('supports',data['supports'])+'</p>','implemented'),
         ('projectiles','分裂、返回与飞行结束','龙卷母箭优先分裂；返回在抵达射程时朝当时角色中心取向，且每个载体至多一次。','<p>自然飞行结束可触发装备授予的爆炸。分裂、碰撞消耗和取消不会触发该爆炸；返回不刷新寿命。投射物增伤与投射物辅助不作用于独立爆炸。</p><p>'+links('fixed_items',['prism_bow','return_mantle','detonation_charm'])+'</p>','implemented'),
