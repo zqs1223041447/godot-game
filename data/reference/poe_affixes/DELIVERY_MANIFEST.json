@@ -1,0 +1,108 @@
+{
+  "status": "frozen",
+  "source_version": "3.29.3.3",
+  "source_commit": "a77305840b4cc8555eeeea144eac3eeddeff134b",
+  "checked_at_utc": "2026-10-02T06:09:00Z",
+  "selected_mod_rows": 1200,
+  "selected_base_rows": 852,
+  "files": [
+    {
+      "path": ".gdignore",
+      "bytes": 41,
+      "sha256": "18379e325f9f7ff46160c052ec622a3e34ac8c23c219fc653a8a619e62e4e1a3"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 33,
+      "sha256": "363042cba46776633f184bc0825fdf79f31676c1273fcfee992201c482514f95"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1885,
+      "sha256": "fd066c5b437eee27832472865ddd50eb562eabb20e8db9a4093878d6c75ffc41"
+    },
+    {
+      "path": "design/godot_mapping.json",
+      "bytes": 20430,
+      "sha256": "cee72f41560afc7f3bfda8b4baee8051acb9672f87a531cfdba3d90062552391"
+    },
+    {
+      "path": "docs/COVERAGE.zh-CN.md",
+      "bytes": 1614,
+      "sha256": "d14e1eca9390a892642833c297d31604f546b8c537b9dd39805bb0be07eb95e0"
+    },
+    {
+      "path": "docs/POE_AFFIX_REFERENCE.zh-CN.md",
+      "bytes": 11694,
+      "sha256": "ba0884bc143e892d955a8780fb7f9b0561082c47aa7603bfc2d1390346b7c7ed"
+    },
+    {
+      "path": "filter_spec.json",
+      "bytes": 1536,
+      "sha256": "09a6d5bfbba978d01a141f66336933347aaaa1ae312201fc8ecfd548f5d9f0b8"
+    },
+    {
+      "path": "normalized/bases.json",
+      "bytes": 264388,
+      "sha256": "be85dd836d97f1170d801758e28ae492381a93761aaee4f1b1f8bb3c0d562422"
+    },
+    {
+      "path": "normalized/coverage.json",
+      "bytes": 4953,
+      "sha256": "23240be687eba9d2235076d403532602b00dfe27c1b54d3bbeb90c8516d976d2"
+    },
+    {
+      "path": "normalized/families.json",
+      "bytes": 93510,
+      "sha256": "a253759c146a4ec7ea7b7d9624d8246c55f745cde93d1cf52771fa590042ed0b"
+    },
+    {
+      "path": "normalized/mods.json",
+      "bytes": 1098230,
+      "sha256": "082a8e859c1c704bb2f99e754d9836b10eac5788e538eaf2b0614972741ce877"
+    },
+    {
+      "path": "normalized/profiles.json",
+      "bytes": 4467201,
+      "sha256": "292c68ff76208de38b7aa5780d99b3dba0810448dee335d83b6742f56d5c4877"
+    },
+    {
+      "path": "normalized/stats.json",
+      "bytes": 28863,
+      "sha256": "571462d27c97ce93849937a039446c26c40c03265e82631ff31e4fd7741514d9"
+    },
+    {
+      "path": "source_manifest.json",
+      "bytes": 2707,
+      "sha256": "41ed989fdb99ca77a8ae874d8c146c2532b0dd90b37721edcfe566a4d6b790c5"
+    },
+    {
+      "path": "tools/affix_reference.py",
+      "bytes": 14450,
+      "sha256": "d32aface492f17a627cc339eb5efaf1f8c39861b5c670db25e13a513fc9f3777"
+    },
+    {
+      "path": "tools/build_design_mapping.py",
+      "bytes": 7661,
+      "sha256": "73cf3c77a1d4dcf1705852d716cde7d81bf820779002550ff44d1810956849dc"
+    },
+    {
+      "path": "validation.json",
+      "bytes": 678,
+      "sha256": "a0b7cd6d1a2b3423b56b62b7b4be7180f10096da61f1f58d30c862ec113ff5fd"
+    }
+  ],
+  "exclusions": [
+    "raw/",
+    "sources/",
+    "**/__pycache__/",
+    "*.log"
+  ],
+  "checks": [
+    "source hash verification",
+    "12 validation categories passed",
+    "Python bytecode compilation passed",
+    "deterministic build output passed"
+  ],
+  "runtime_status": "Research reference only; no Godot game combat code changed; exclude from released game pack"
+}

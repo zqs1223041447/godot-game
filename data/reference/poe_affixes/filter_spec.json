@@ -1,0 +1,60 @@
+{
+  "equipment_classes": [
+    "Amulet",
+    "Belt",
+    "Body Armour",
+    "Boots",
+    "Bow",
+    "Claw",
+    "Dagger",
+    "Gloves",
+    "Helmet",
+    "One Hand Axe",
+    "One Hand Mace",
+    "One Hand Sword",
+    "Quiver",
+    "Ring",
+    "Rune Dagger",
+    "Sceptre",
+    "Shield",
+    "Staff",
+    "Thrusting One Hand Sword",
+    "Two Hand Axe",
+    "Two Hand Mace",
+    "Two Hand Sword",
+    "Wand",
+    "Warstaff"
+  ],
+  "base_predicates": {
+    "domain": "item",
+    "release_state": "released",
+    "excluded_tags": [
+      "demigods",
+      "experimental_base",
+      "talisman",
+      "trade_market_legacy_item"
+    ],
+    "excluded_id_fragments": [
+      "Royale",
+      "Descent",
+      "MirrorRing",
+      "Ethereal",
+      "/Talismans/",
+      "StormBlade"
+    ]
+  },
+  "mod_predicates": {
+    "domain": "item",
+    "generation_types": [
+      "prefix",
+      "suffix"
+    ],
+    "is_essence_only": false,
+    "excluded_id_fragments": [
+      "Royale"
+    ],
+    "effective_weight": "first matching spawn_weight * first matching generation_weight / 100; missing spawn=0, missing generation=100",
+    "eligible_if": "effective_weight > 0 for at least one retained non-influenced base profile"
+  },
+  "tier_derivation": "Within exact base profile, affix generation, ordered groups, type, ordered stat IDs: descending distinct required_level rank. Ties remain multiple IDs and are explicitly flagged; NOT official displayed tiers. Derive before applying requested item level so ranks do not renumber on low-level items."
+}
