@@ -1740,6 +1740,510 @@
 			}
 		}
 	},
+	"crafting": {
+		"calibration_shard": {
+			"description": "回收背包中的随机魔法、稀有装备获得。用于重掷已有词缀数值；没有额外击杀掉落或升级赠送。",
+			"kind": "material",
+			"max_revision": 1000000000,
+			"maximum": 1000000000,
+			"name": "校准碎片",
+			"rules": {
+				"affix_ids": [
+					"rootwell",
+					"deepwell",
+					"lanternveil",
+					"runesong",
+					"prismedge",
+					"farweave",
+					"coalglow",
+					"rimeecho",
+					"sparkthread",
+					"wellturn",
+					"trailstep",
+					"beatlink",
+					"attack_added_physical",
+					"attack_added_fire",
+					"spell_added_cold",
+					"spell_added_lightning",
+					"emberward",
+					"whetstone_edge",
+					"tempered_edge"
+				],
+				"balance": {
+					"recalibrate_cost_multiplier": 2,
+					"salvage_rarity_units": {
+						"magic": 1,
+						"rare": 3
+					},
+					"salvage_units_per_tier": 1
+				},
+				"base_ids": [
+					"cinder_reed",
+					"gale_spindle",
+					"woven_bastion",
+					"tidebound_coat",
+					"wayglass_token",
+					"pulse_seed",
+					"runewood_focus",
+					"emberhide_vest",
+					"ashwood_bow"
+				],
+				"catalog_source": "res://scripts/items/equipment_catalog.gd",
+				"catalog_vocabulary": 9,
+				"eligible_families_by_base": {
+					"ashwood_bow": [
+						"deepwell",
+						"runesong",
+						"prismedge",
+						"farweave",
+						"coalglow",
+						"rimeecho",
+						"sparkthread",
+						"wellturn",
+						"beatlink",
+						"whetstone_edge",
+						"tempered_edge"
+					],
+					"cinder_reed": [
+						"deepwell",
+						"runesong",
+						"prismedge",
+						"farweave",
+						"coalglow",
+						"rimeecho",
+						"sparkthread",
+						"wellturn",
+						"beatlink"
+					],
+					"emberhide_vest": [
+						"rootwell",
+						"deepwell",
+						"lanternveil",
+						"coalglow",
+						"rimeecho",
+						"sparkthread",
+						"wellturn",
+						"trailstep",
+						"emberward"
+					],
+					"gale_spindle": [
+						"deepwell",
+						"runesong",
+						"prismedge",
+						"farweave",
+						"coalglow",
+						"rimeecho",
+						"sparkthread",
+						"wellturn",
+						"beatlink"
+					],
+					"pulse_seed": [
+						"rootwell",
+						"deepwell",
+						"lanternveil",
+						"runesong",
+						"prismedge",
+						"farweave",
+						"coalglow",
+						"rimeecho",
+						"sparkthread",
+						"wellturn",
+						"trailstep",
+						"beatlink"
+					],
+					"runewood_focus": [
+						"deepwell",
+						"runesong",
+						"prismedge",
+						"farweave",
+						"coalglow",
+						"rimeecho",
+						"sparkthread",
+						"wellturn",
+						"beatlink",
+						"attack_added_physical",
+						"attack_added_fire",
+						"spell_added_cold",
+						"spell_added_lightning"
+					],
+					"tidebound_coat": [
+						"rootwell",
+						"deepwell",
+						"lanternveil",
+						"coalglow",
+						"rimeecho",
+						"sparkthread",
+						"wellturn",
+						"trailstep"
+					],
+					"wayglass_token": [
+						"rootwell",
+						"deepwell",
+						"lanternveil",
+						"runesong",
+						"prismedge",
+						"farweave",
+						"coalglow",
+						"rimeecho",
+						"sparkthread",
+						"wellturn",
+						"trailstep",
+						"beatlink"
+					],
+					"woven_bastion": [
+						"rootwell",
+						"deepwell",
+						"lanternveil",
+						"coalglow",
+						"rimeecho",
+						"sparkthread",
+						"wellturn",
+						"trailstep"
+					]
+				},
+				"id": "crafting_rules",
+				"integration_status": "implemented",
+				"materials": {
+					"calibration_shard": {
+						"name": "校准碎片",
+						"unit": "枚"
+					}
+				},
+				"mutates_state": false,
+				"name": "回收与数值校准",
+				"operations": {
+					"recalibrate": {
+						"can_roll_same_values": true,
+						"consumes_item": false,
+						"cost_formula": "salvage_yield * recalibrate_cost_multiplier",
+						"name": "数值校准",
+						"preserves": [
+							"id",
+							"base_id",
+							"rarity",
+							"item_level",
+							"affix_order",
+							"affix_id",
+							"tier"
+						],
+						"roll": "inclusive_integer_ticks_in_existing_tier"
+					},
+					"salvage": {
+						"consumes_item": true,
+						"cost": {
+
+						},
+						"name": "回收",
+						"yield_formula": "rarity_units + sum(tier) * salvage_units_per_tier"
+					}
+				},
+				"origin": "original",
+				"persistence_owner": "main_integration",
+				"rarities": [
+					"magic",
+					"rare"
+				],
+				"rules_version": "original-crafting-prototype-v1",
+				"schema_version": 1,
+				"status": "prototype"
+			},
+			"save_version": 11
+		},
+		"recalibrate": {
+			"description": "消耗校准碎片，重掷现有词缀的整数数值；结果可能降低或不变。",
+			"eligible_base_ids": [
+				"cinder_reed",
+				"gale_spindle",
+				"woven_bastion",
+				"tidebound_coat",
+				"wayglass_token",
+				"pulse_seed",
+				"runewood_focus",
+				"emberhide_vest",
+				"ashwood_bow"
+			],
+			"example": {
+				"after_definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"前缀 · 砥刃 T3：本武器附加物理伤害 +5"
+					],
+					"base_id": "ashwood_bow",
+					"base_name": "白蜡长弓",
+					"description": "本武器物理单独结算，仅增强普攻和龙卷箭体。详情列出基底、本地点数与本地提高。\n前缀 · 砥刃 T3：本武器附加物理伤害 +5",
+					"effects": [],
+					"id": "gear_000001",
+					"item_level": 16,
+					"name": "魔法 · 白蜡长弓",
+					"rarity": "magic",
+					"size": [
+						2,
+						3
+					],
+					"slot": "weapon",
+					"stats": {
+
+					},
+					"weapon_damage": {
+						"physical": 9.0
+					},
+					"weapon_damage_summary": "本武器物理：(4.0 + 5.0) × (1 + 0.0%) = 9.0；仅普攻与龙卷箭体",
+					"weapon_profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "ashwood_bow",
+						"flat": {
+							"physical": 5.0
+						},
+						"increased": {
+							"physical": 0.0
+						},
+						"item_id": "gear_000001",
+						"sources": [
+							{
+								"affix_id": "whetstone_edge",
+								"stat": "weapon_added_physical",
+								"value": 5.0
+							}
+						],
+						"stage": "weapon_local"
+					}
+				},
+				"after_instance": {
+					"affixes": [
+						{
+							"id": "whetstone_edge",
+							"tier": 3,
+							"value": 5
+						}
+					],
+					"base_id": "ashwood_bow",
+					"id": "gear_000001",
+					"item_level": 16,
+					"rarity": "magic"
+				},
+				"balance_after": 0,
+				"balance_before": 8,
+				"before_definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"前缀 · 砥刃 T3：本武器附加物理伤害 +6"
+					],
+					"base_id": "ashwood_bow",
+					"base_name": "白蜡长弓",
+					"description": "本武器物理单独结算，仅增强普攻和龙卷箭体。详情列出基底、本地点数与本地提高。\n前缀 · 砥刃 T3：本武器附加物理伤害 +6",
+					"effects": [],
+					"id": "gear_000001",
+					"item_level": 16,
+					"name": "魔法 · 白蜡长弓",
+					"rarity": "magic",
+					"size": [
+						2,
+						3
+					],
+					"slot": "weapon",
+					"stats": {
+
+					},
+					"weapon_damage": {
+						"physical": 10.0
+					},
+					"weapon_damage_summary": "本武器物理：(4.0 + 6.0) × (1 + 0.0%) = 10.0；仅普攻与龙卷箭体",
+					"weapon_profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "ashwood_bow",
+						"flat": {
+							"physical": 6.0
+						},
+						"increased": {
+							"physical": 0.0
+						},
+						"item_id": "gear_000001",
+						"sources": [
+							{
+								"affix_id": "whetstone_edge",
+								"stat": "weapon_added_physical",
+								"value": 6.0
+							}
+						],
+						"stage": "weapon_local"
+					}
+				},
+				"example_seed": 20261002,
+				"full_candidate_valid": true,
+				"quote": {
+					"code": "",
+					"consumes_item": false,
+					"cost": {
+						"calibration_shard": 8
+					},
+					"item_id": "gear_000001",
+					"materials": {
+
+					},
+					"ok": true,
+					"operation": "recalibrate",
+					"reason": "",
+					"revision": 0,
+					"rules_version": "original-crafting-prototype-v1",
+					"source_instance": {
+						"affixes": [
+							{
+								"id": "whetstone_edge",
+								"tier": 3,
+								"value": 6
+							}
+						],
+						"base_id": "ashwood_bow",
+						"id": "gear_000001",
+						"item_level": 16,
+						"rarity": "magic"
+					}
+				},
+				"revision_after": 1,
+				"revision_before": 0,
+				"source": {
+					"affixes": [
+						{
+							"id": "whetstone_edge",
+							"tier": 3,
+							"value": 6
+						}
+					],
+					"base_id": "ashwood_bow",
+					"id": "gear_000001",
+					"item_level": 16,
+					"rarity": "magic"
+				}
+			},
+			"kind": "operation",
+			"name": "数值校准",
+			"rules_version": "original-crafting-prototype-v1"
+		},
+		"salvage": {
+			"description": "消耗此装备，获得校准碎片。",
+			"eligible_base_ids": [
+				"cinder_reed",
+				"gale_spindle",
+				"woven_bastion",
+				"tidebound_coat",
+				"wayglass_token",
+				"pulse_seed",
+				"runewood_focus",
+				"emberhide_vest",
+				"ashwood_bow"
+			],
+			"example": {
+				"after_definition": {
+
+				},
+				"after_instance": {
+
+				},
+				"balance_after": 12,
+				"balance_before": 8,
+				"before_definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"前缀 · 砥刃 T3：本武器附加物理伤害 +6"
+					],
+					"base_id": "ashwood_bow",
+					"base_name": "白蜡长弓",
+					"description": "本武器物理单独结算，仅增强普攻和龙卷箭体。详情列出基底、本地点数与本地提高。\n前缀 · 砥刃 T3：本武器附加物理伤害 +6",
+					"effects": [],
+					"id": "gear_000001",
+					"item_level": 16,
+					"name": "魔法 · 白蜡长弓",
+					"rarity": "magic",
+					"size": [
+						2,
+						3
+					],
+					"slot": "weapon",
+					"stats": {
+
+					},
+					"weapon_damage": {
+						"physical": 10.0
+					},
+					"weapon_damage_summary": "本武器物理：(4.0 + 6.0) × (1 + 0.0%) = 10.0；仅普攻与龙卷箭体",
+					"weapon_profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "ashwood_bow",
+						"flat": {
+							"physical": 6.0
+						},
+						"increased": {
+							"physical": 0.0
+						},
+						"item_id": "gear_000001",
+						"sources": [
+							{
+								"affix_id": "whetstone_edge",
+								"stat": "weapon_added_physical",
+								"value": 6.0
+							}
+						],
+						"stage": "weapon_local"
+					}
+				},
+				"example_seed": 20261002,
+				"full_candidate_valid": true,
+				"quote": {
+					"code": "",
+					"consumes_item": true,
+					"cost": {
+
+					},
+					"item_id": "gear_000001",
+					"materials": {
+						"calibration_shard": 4
+					},
+					"ok": true,
+					"operation": "salvage",
+					"reason": "",
+					"revision": 0,
+					"rules_version": "original-crafting-prototype-v1",
+					"source_instance": {
+						"affixes": [
+							{
+								"id": "whetstone_edge",
+								"tier": 3,
+								"value": 6
+							}
+						],
+						"base_id": "ashwood_bow",
+						"id": "gear_000001",
+						"item_level": 16,
+						"rarity": "magic"
+					}
+				},
+				"revision_after": 1,
+				"revision_before": 0,
+				"source": {
+					"affixes": [
+						{
+							"id": "whetstone_edge",
+							"tier": 3,
+							"value": 6
+						}
+					],
+					"base_id": "ashwood_bow",
+					"id": "gear_000001",
+					"item_level": 16,
+					"rarity": "magic"
+				}
+			},
+			"kind": "operation",
+			"name": "回收",
+			"rules_version": "original-crafting-prototype-v1"
+		}
+	},
 	"current_loot_profile": [
 		{
 			"pool_id": "legacy",
@@ -3977,7 +4481,7 @@
 			}
 		}
 	},
-	"game_version": "0.14.0",
+	"game_version": "0.15.0",
 	"jewel_affixes": {
 		"barrier": {
 			"kind": "prefix",
@@ -10162,7 +10666,7 @@
 		"source": "SkillCompiler + ProjectileRuntime.advance + DamageResolver",
 		"target_count": 6
 	},
-	"save_version": 10,
+	"save_version": 11,
 	"schema_version": 3,
 	"sectors": [
 		{

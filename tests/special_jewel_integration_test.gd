@@ -72,6 +72,7 @@ func _test_v6_scene_migration() -> void:
 	arena.free()
 	var legacy: Dictionary = Model.new()._snapshot()
 	legacy.version = 6
+	legacy.erase("crafting")
 	var text: String = JSON.stringify(legacy, "\t").replace("\n", "\r\n") + "\r\n"
 	var original: PackedByteArray = PackedByteArray([0xef, 0xbb, 0xbf])
 	original.append_array(text.to_utf8_buffer())

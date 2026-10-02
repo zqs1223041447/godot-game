@@ -320,7 +320,7 @@ func _schema_roundtrip_and_legacy() -> void:
 	state.set_skill_supports("tornado", ["volley", "focus"])
 	var before: Dictionary = state._snapshot()
 	var path: String = "user://special_jewel_v7.json"
-	_expect(Model.SAVE_VERSION == 10 and before.size() == 16 and state.save_build(path) == OK, "Current schema retains the 16-field save shape")
+	_expect(Model.SAVE_VERSION == 11 and before.size() == 17 and state.save_build(path) == OK, "Current schema retains the 17-field save shape")
 	for iteration: int in range(3):
 		var restored := Model.new()
 		restored.changed.connect(_changed)
@@ -342,6 +342,7 @@ func _schema_roundtrip_and_legacy() -> void:
 	_expect(loaded.load_build(path) and loaded.migrated_from_v6 and changes == 1, "Literal v6 typed build with BOM/CRLF migrates once")
 	var expected: Dictionary = legacy.duplicate(true)
 	expected.version = Model.SAVE_VERSION
+	expected.crafting = {"materials":{"calibration_shard":0},"revision":0}
 	_expect(loaded._snapshot() == expected and loaded.jewels.size() == 1 and loaded.next_jewel_id == 12, "Migration changes version only, preserving gear/supports/points/locations and granting no special")
 	_expect(FileAccess.get_file_as_bytes(path) == bytes and not FileAccess.file_exists(backup), "Read-only migration preserves exact bytes without premature backup")
 	var copy: String = "user://special_jewel_save_as.json"
@@ -387,6 +388,7 @@ func _schema_rejections() -> void:
 	for version: int in [2,3,4,5,6]:
 		candidate = valid.duplicate(true)
 		candidate.version = version
+		candidate.erase("crafting")
 		if version < 5: candidate.erase("skill_supports")
 		if version < 4:
 			candidate.erase("equipment_instances")
@@ -421,6 +423,7 @@ func _schema_rejections() -> void:
 	_reject_snapshot(state, candidate, "Special ownership duplicated between socket and inventory")
 	candidate = _legacy_six()
 	candidate.version = 5
+	candidate.erase("crafting")
 	_reject_snapshot(state, candidate, "Schema5 still refuses schema6 typed gear")
 	candidate = _legacy_six()
 	candidate.allocated_nodes.append("ember_3_2")

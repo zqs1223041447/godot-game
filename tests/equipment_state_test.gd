@@ -247,6 +247,7 @@ func _test_snapshot_rejection() -> void:
 	attacks.append({"label": "unexpected record payload", "value": bad})
 	bad = valid.duplicate(true)
 	bad.version = 3
+	bad.erase("crafting")
 	attacks.append({"label": "legacy schema carrying v4 instances", "value": bad})
 	state.changed.connect(_changed)
 	changes = 0
@@ -269,6 +270,7 @@ func _test_migration_and_roundtrip() -> void:
 	original.move_in_backpack("item:swift_blade", Vector2i(10, 5))
 	var legacy: Dictionary = original._snapshot()
 	legacy.version = 3
+	legacy.erase("crafting")
 	legacy.erase("equipment_instances")
 	legacy.erase("next_equipment_id")
 	legacy.erase("skill_supports")

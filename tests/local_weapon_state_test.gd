@@ -74,6 +74,7 @@ func _migration() -> void:
 	_expect(state.load_build(path) and state.migrated_from_v8 and changes == 1, "Literal v8 with defenses and remote special allocation migrates atomically once")
 	var expected: Dictionary = legacy.duplicate(true)
 	expected.version = Model.SAVE_VERSION
+	expected.crafting = {"materials":{"calibration_shard":0},"revision":0}
 	_expect(state._snapshot() == expected and state.migration_message.contains("白蜡长弓"), "Only save version changes; ownership, identities, rolls, supports, nodes and locations are preserved")
 	_expect(not state.get_combat_snapshot().has("weapon_profile") and state.equipment_instances.size() == 3 and is_equal_approx(state.get_stats().fire_resistance,0.4), "Migration grants no bow or local stats and retains old resistance")
 	_expect(FileAccess.get_file_as_bytes(path) == bytes and not FileAccess.file_exists(backup), "Read-only migration preserves original BOM and CRLF bytes")
@@ -156,7 +157,7 @@ func _roundtrip_and_awards() -> void:
 	_expect(id == "gear_000001" and state.equipment_instances[id] == expected and rng.state == mirror.state and changes == 1, "Explicit local award creates one canonical item with exact pool RNG and one signal")
 	_expect(state.next_equipment_id == 2 and state.equipped.weapon == "ember_wand" and state.equip(id), "Award consumes one serial without auto-equipping")
 	var snapshot: Dictionary = state._snapshot()
-	_expect(Model.SAVE_VERSION == 10 and snapshot.size() == 16 and snapshot.equipment_instances[id].size() == 5, "Current schema preserves exact sixteen-field save and five-field item encoding")
+	_expect(Model.SAVE_VERSION == 11 and snapshot.size() == 17 and snapshot.equipment_instances[id].size() == 5, "Current schema preserves exact seventeen-field save and five-field item encoding")
 	var path: String = "user://local_v9.json"
 	_expect(state.save_build(path) == OK, "New local weapon saves")
 	var restored := Model.new()
@@ -185,6 +186,7 @@ func _tamper() -> void:
 	for version: int in range(1,9):
 		var bad: Dictionary = valid.duplicate(true)
 		bad.version = version
+		bad.erase("crafting")
 		_reject(state,bad,"New local base forged into version%d" % version)
 	for base_id: String in ["cinder_reed","gale_spindle","runewood_focus","emberhide_vest"]:
 		var bad: Dictionary = valid.duplicate(true)
@@ -193,6 +195,7 @@ func _tamper() -> void:
 		bad.equipment_instances[id].affixes = [{"id":"whetstone_edge","tier":1,"value":Catalog.LOCAL_WEAPON_AFFIXES.whetstone_edge.tiers[0].min}]
 		for version: int in [8,9]:
 			bad.version = version
+			bad.erase("crafting")
 			_reject(state,bad,"Local prefix on old base in version%d" % version)
 	var bad: Dictionary = valid.duplicate(true)
 	bad.version = Model.SAVE_VERSION + 1

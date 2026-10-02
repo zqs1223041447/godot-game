@@ -11,7 +11,7 @@ const TYPES: Dictionary = {
 	"spell_added_cold": ["spell", "cold"], "spell_added_lightning": ["spell", "lightning"],
 }
 const ZERO_ADDED: Dictionary = {"attack": {"physical": 0.0, "fire": 0.0}, "spell": {"cold": 0.0, "lightning": 0.0}}
-const SAVE_FIELDS: Array[String] = ["version", "inventory", "equipped", "equipment_instances", "next_equipment_id", "skill_slots", "skill_supports", "level", "xp", "talent_points", "allocated_nodes", "jewels", "jewel_inventory", "socketed_jewels", "next_jewel_id", "backpack_positions"]
+const SAVE_FIELDS: Array[String] = ["version", "inventory", "equipped", "equipment_instances", "next_equipment_id", "skill_slots", "skill_supports", "level", "xp", "talent_points", "allocated_nodes", "jewels", "jewel_inventory", "socketed_jewels", "next_jewel_id", "backpack_positions", "crafting"]
 
 var checks: int = 0
 var failures: int = 0
@@ -207,7 +207,7 @@ func _test_detached_views() -> void:
 func _test_current_schema_roundtrip() -> void:
 	var state = _rich_state()
 	var before: Dictionary = state._snapshot()
-	_expect(before.version == Model.SAVE_VERSION and before.size() == SAVE_FIELDS.size() and before.has_all(SAVE_FIELDS), "Current schema has exactly the same persisted field allowlist as v5")
+	_expect(before.version == Model.SAVE_VERSION and before.size() == SAVE_FIELDS.size() and before.has_all(SAVE_FIELDS), "Current schema retains the original field allowlist plus the explicit crafting record")
 	var cast_before: Dictionary = state.get_skill_cast("tornado")
 	_expect(state._snapshot() == before, "Compiling typed sources and packets does not add persistent caches")
 	var path: String = "user://typed_state_v6.json"
@@ -259,7 +259,7 @@ func _literal_v5() -> Dictionary:
 
 func _test_true_v5_migration() -> void:
 	var legacy: Dictionary = _literal_v5()
-	_expect(legacy.size() == SAVE_FIELDS.size() and Catalog.validate_instance(legacy.equipment_instances.gear_000042, false), "Literal fixture has exactly legacy schema and legacy-only equipment vocabulary")
+	_expect(legacy.size() == 16 and not legacy.has("crafting") and Catalog.validate_instance(legacy.equipment_instances.gear_000042, false), "Literal fixture has exactly historical sixteen-field schema and legacy-only equipment vocabulary")
 	var bytes: String = "\n  " + JSON.stringify(legacy, "  ", false, true) + "\n\n"
 	var path: String = "user://typed_state_legacy_v5.json"
 	var backup: String = path + ".v5-backup.json"
@@ -270,6 +270,7 @@ func _test_true_v5_migration() -> void:
 	_expect(loaded.load_build(path) and loaded.migrated_from_v5 and changes == 1, "Real v5 file migrates with one successful change signal")
 	var expected: Dictionary = legacy.duplicate(true)
 	expected.version = Model.SAVE_VERSION
+	expected.crafting = {"materials":{"calibration_shard":0},"revision":0}
 	_expect(loaded._snapshot() == expected, "Migration changes only version: no auto-equip, grants, rerolls, changed supports, positions or counters")
 	_expect(loaded.get_combat_snapshot().added_damage == ZERO_ADDED and loaded.get_combat_snapshot().added_damage_sources.is_empty(), "Legacy damage stays scalar with zero typed additions")
 	_expect(FileAccess.get_file_as_string(path) == bytes and not FileAccess.file_exists(backup), "Read-only migration preserves original bytes without premature backup")
@@ -325,6 +326,7 @@ func _test_schema_rejection() -> void:
 	for version: int in [4, 5]:
 		var legacy: Dictionary = _literal_v5()
 		legacy.version = version
+		legacy.erase("crafting")
 		if version == 4:
 			legacy.erase("skill_supports")
 		_expect(not state._validate_snapshot(legacy).is_empty(), "Control legacy schema is valid before vocabulary injection: v%d" % version)

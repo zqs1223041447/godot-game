@@ -13,7 +13,8 @@ fi
 
 VALIDATION_DIR="$(mktemp -d "${TMPDIR:-/tmp}/godot-game-validation.XXXXXX")"
 PIERCE_VALIDATION_DIR="$(mktemp -d /tmp/godot-pierce-acceptance-XXXXXX)"
-trap 'rm -rf -- "$VALIDATION_DIR" "$PIERCE_VALIDATION_DIR"' EXIT
+CRAFT_VALIDATION_DIR="$(mktemp -d /tmp/godot-crafting-qa-XXXXXX)"
+trap 'rm -rf -- "$VALIDATION_DIR" "$PIERCE_VALIDATION_DIR" "$CRAFT_VALIDATION_DIR"' EXIT
 
 # Isolate test settings and saves, including in restricted cloud workspaces.
 if [[ "$(uname -s)" == "Linux" ]]; then
@@ -28,10 +29,16 @@ run_check() {
 	CHECK_INDEX=$((CHECK_INDEX + 1))
 	if [[ "$(uname -s)" == "Linux" ]]; then
 		export XDG_DATA_HOME="$VALIDATION_DIR/data/check-$CHECK_INDEX"
+		unset GODOT_CRAFTING_TEST_ROOT
 		case "${2:-}" in
 			res://tests/pierce_integration_test.gd|res://tests/pierce_ui_test.gd)
 				export XDG_DATA_HOME="$PIERCE_VALIDATION_DIR/check-$CHECK_INDEX"
 				export PIERCE_QA_ROOT="$XDG_DATA_HOME"
+				;;
+			res://tests/crafting_state_test.gd|res://tests/crafting_integration_test.gd|res://tests/crafting_ui_integration_test.gd|res://tests/crafting_controls_test.gd)
+				export XDG_DATA_HOME="$CRAFT_VALIDATION_DIR/check-$CHECK_INDEX/data"
+				export GODOT_CRAFTING_TEST_ROOT="$CRAFT_VALIDATION_DIR/check-$CHECK_INDEX"
+				unset PIERCE_QA_ROOT
 				;;
 			*) unset PIERCE_QA_ROOT ;;
 		esac
@@ -78,6 +85,12 @@ run_check --script res://tests/skill_support_ui_test.gd
 run_check --script res://tests/projectile_support_rules_test.gd
 run_check --script res://tests/pierce_integration_test.gd
 run_check --script res://tests/pierce_ui_test.gd
+run_check --script res://tests/crafting_rules_test.gd
+run_check --script res://tests/crafting_transaction_planner_test.gd
+run_check --script res://tests/crafting_controls_test.gd
+run_check --script res://tests/crafting_state_test.gd
+run_check --script res://tests/crafting_integration_test.gd
+run_check --script res://tests/crafting_ui_integration_test.gd
 run_check --script res://tests/equipment_soak_test.gd
 run_check --script res://tests/passive_jewel_test.gd
 run_check --script res://tests/special_jewel_test.gd

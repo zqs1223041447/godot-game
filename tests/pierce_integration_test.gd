@@ -385,7 +385,7 @@ func _literal_migration() -> void:
 	changes = 0
 	_expect(state.load_build(path) and state.migrated_from_v9 and changes == 1, "Literal v9 load migrates in memory with one committed change")
 	var expected: Dictionary = _expected_literal_v10(legacy)
-	_expect(Model.SAVE_VERSION == 10 and state._snapshot() == expected, "Only schema version changes; identities, gaps, rolls, nodes, special jewel, positions and legacy links persist")
+	_expect(Model.SAVE_VERSION == 11 and state._snapshot() == expected, "Empty crafting state is added; historical identities, gaps, rolls, nodes, special jewel, positions and legacy links persist")
 	_expect(state.get_combat_snapshot().has("weapon_profile") and state.get_skill_supports("bolt") == ["focus", "volley"], "Schema10 explicitly accepts equipped schema9 local weapon and legacy supports")
 	_expect(state.migration_message.contains("贯穿") and FileAccess.get_file_as_bytes(path) == bytes and not FileAccess.file_exists(backup), "Load preserves original literal bytes and defers backup until overwrite")
 	_expect(state.save_build("user://pierce_save_as.json") == OK and FileAccess.get_file_as_bytes(path) == bytes and not FileAccess.file_exists(backup), "Save-as does not consume pending source-byte protection")
@@ -413,7 +413,8 @@ func _expected_literal_v10(legacy: Dictionary) -> Dictionary:
 	# JSON parses numbers as floats; schema integer fields are canonically ints.
 	# Preserve every authored value/field/order, independent of model validation.
 	var expected: Dictionary = legacy.duplicate(true)
-	expected.version = 10
+	expected.version = Model.SAVE_VERSION
+	expected.crafting = {"materials":{"calibration_shard":0},"revision":0}
 	for key: String in ["next_equipment_id", "level", "xp", "talent_points", "next_jewel_id"]:
 		expected[key] = int(expected[key])
 	for item: Dictionary in expected.equipment_instances.values():
@@ -465,7 +466,7 @@ func _version_fences() -> void:
 		_expect(not state.save_block_reason(path).is_empty() and state.save_build(ProjectSettings.globalize_path(path)) == ERR_INVALID_DATA, "Rejected source blocks subsequent writes through absolute path alias")
 		_expect(FileAccess.get_file_as_bytes(path) == bytes and not FileAccess.file_exists(path + ".tmp") and not FileAccess.file_exists(path + ".v%d-backup.json" % version), "Rejected old save keeps exact bytes and creates no temporary replacement or migration backup")
 	var future: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(V9))
-	future.version = 11
+	future.version = Model.SAVE_VERSION + 1
 	var future_path: String = "user://pierce_future_v11.json"
 	var future_bytes: PackedByteArray = JSON.stringify(future).to_utf8_buffer()
 	_write(future_path, future_bytes)
@@ -490,7 +491,7 @@ func _scene_migration() -> void:
 	_expect(arena.state.add_skill_support("frost", "pierce"), "Actual migrated scene transaction adds eligible new support")
 	_expect(FileAccess.get_file_as_bytes("user://build_save.json.v9-backup.json") == original, "First actual scene autosave preserves byte-exact original encoding")
 	var saved: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("user://build_save.json"))
-	_expect(saved.version == 10 and FileAccess.get_file_as_bytes("user://build_save.json") == JSON.stringify(arena.state._snapshot(), "\t", true, true).to_utf8_buffer(), "Actual scene autosave writes byte-exact complete current schema including equipment vocabulary9")
+	_expect(saved.version == Model.SAVE_VERSION and FileAccess.get_file_as_bytes("user://build_save.json") == JSON.stringify(arena.state._snapshot(), "\t", true, true).to_utf8_buffer(), "Actual scene autosave writes byte-exact complete current schema including equipment vocabulary9")
 	var reload = Model.new()
 	_expect(reload.load_build() and not reload.migrated_from_v9 and reload.get_skill_supports("frost") == ["pierce", "volley"] and reload._snapshot() == arena.state._snapshot(), "Actual scene save reloads v10 without remigration or loss")
 	completed = true

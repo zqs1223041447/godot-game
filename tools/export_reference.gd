@@ -17,6 +17,8 @@ const Defense = preload("res://scripts/mechanics/defense_rules.gd")
 const Monsters = preload("res://scripts/monsters/monster_catalog.gd")
 const WeaponLocal = preload("res://scripts/items/weapon_local_rules.gd")
 const Projectiles = preload("res://scripts/combat/projectile_runtime.gd")
+const Craft = preload("res://scripts/items/crafting_rules.gd")
+const CraftPlanner = preload("res://scripts/items/crafting_transaction_planner.gd")
 
 func _initialize() -> void:
 	var target: String = "res://docs/reference/catalog.json"
@@ -50,6 +52,7 @@ static func collect() -> Dictionary:
 		"limits": {"max_supports": Supports.MAX_SUPPORTS, "initial_projectiles": Compiler.MAX_INITIAL_PROJECTILES,
 			"min_item_level": Equipment.MIN_ITEM_LEVEL, "max_item_level": Equipment.MAX_ITEM_LEVEL}}
 	result["projectile_support_examples"] = piercing_examples()
+	result["crafting"] = crafting_examples()
 	var base_ids: Array = Equipment.all_base_ids()
 	var affix_ids: Array = Equipment.all_affix_ids()
 	for id: String in base_ids:
@@ -256,6 +259,45 @@ static func collect() -> Dictionary:
 		result.special_coverage[socket_id] = {"path": path, "connected": analysis,
 			"disconnected": Rules.analyze([Passives.START_ID, socket_id], sockets, owned),
 			"remote_example": remote_example, "with_remote": Rules.analyze(remote_path, sockets, owned)}
+	return result
+
+
+## Pure example plans: no model-issued handles, userdata reads or save writes.
+## Full candidates still pass the same BuildState inventory/jewel validator.
+static func crafting_examples() -> Dictionary:
+	var instance: Dictionary = _local_instance(["whetstone_edge"], "magic")
+	var build: RefCounted = local_build(instance)
+	assert(build.unequip("weapon"))
+	var cost: int = int(Craft.recalibrate_plan(instance, 0).cost[Craft.MATERIAL_ID])
+	build.crafting.materials[Craft.MATERIAL_ID] = cost
+	var snapshot: Dictionary = build._snapshot()
+	var context: Dictionary = {"revision": 0, "materials": snapshot.crafting.materials.duplicate(true),
+		"inventory": snapshot.inventory.duplicate(true), "equipment_instances": snapshot.equipment_instances.duplicate(true),
+		"equipped": snapshot.equipped.duplicate(true), "backpack_positions": snapshot.backpack_positions.duplicate(true), "save_writable": true}
+	var metadata: Dictionary = Craft.metadata()
+	metadata["integration_status"] = "implemented"
+	var result: Dictionary = {Craft.MATERIAL_ID: {"name": "校准碎片", "kind": "material",
+		"description": "回收背包中的随机魔法、稀有装备获得。用于重掷已有词缀数值；没有额外击杀掉落或升级赠送。",
+		"maximum": Build.MAX_CRAFT_MATERIALS, "rules": metadata,
+		"max_revision": Build.MAX_CRAFT_REVISION, "save_version": Build.SAVE_VERSION}}
+	for operation: String in ["salvage", "recalibrate"]:
+		var quote: Dictionary = CraftPlanner.quote(context, operation, instance.id)
+		var planned: Dictionary = CraftPlanner.plan(context, quote, 20261002)
+		assert(quote.ok and planned.ok)
+		var candidate: Dictionary = snapshot.duplicate(true)
+		for field: String in ["inventory", "equipment_instances", "equipped", "backpack_positions"]:
+			candidate[field] = planned.candidate[field].duplicate(true)
+		candidate.crafting = {"materials": planned.candidate.materials.duplicate(true), "revision": planned.candidate.revision}
+		assert(not build._validate_snapshot(candidate).is_empty(), "Craft reference must validate the full build including jewels and layout")
+		result[operation] = {"name": "回收" if operation == "salvage" else "数值校准", "kind": "operation",
+			"description": "消耗此装备，获得校准碎片。" if operation == "salvage" else "消耗校准碎片，重掷现有词缀的整数数值；结果可能降低或不变。",
+			"rules_version": Craft.RULES_VERSION, "eligible_base_ids": metadata.base_ids,
+			"example": {"source": instance.duplicate(true), "before_definition": Equipment.definition(instance),
+				"quote": quote, "balance_before": cost, "balance_after": planned.candidate.materials[Craft.MATERIAL_ID],
+				"revision_before": 0, "revision_after": planned.candidate.revision,
+				"after_instance": planned.candidate.equipment_instances.get(instance.id, {}),
+				"after_definition": Equipment.definition(planned.candidate.equipment_instances.get(instance.id, {})),
+				"full_candidate_valid": true, "example_seed": 20261002}}
 	return result
 
 ## Hand-authored legal examples derive every roll from the live family tiers.

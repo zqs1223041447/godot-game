@@ -548,6 +548,7 @@ func _v8_scene_migration() -> void:
 	_expect(arena.hud.is_blocking() and arena.hud._active_panel == "inventory", "Startup opens migration explanation before gameplay")
 	var expected: Dictionary = legacy.duplicate(true)
 	expected.version = Model.SAVE_VERSION
+	expected.crafting = {"materials":{"calibration_shard":0},"revision":0}
 	# JSON parses numbers as floats; compare both encodings in that same domain.
 	var observed: Dictionary = JSON.parse_string(JSON.stringify(arena.state._snapshot()))
 	_expect(observed == JSON.parse_string(JSON.stringify(expected)) and not arena.state.get_combat_snapshot().has("weapon_profile"), "Startup only updates schema and preserves all legacy rolls, supports, locations and build fields")

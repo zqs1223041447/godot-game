@@ -185,6 +185,7 @@ func _test_reject_snapshots() -> void:
 		_expect(not state.load_build(path) and state._snapshot() == valid and changes == 0, "Missing schema-five support field rejects load without resetting links")
 	missing = valid.duplicate(true)
 	missing.version = 4
+	missing.erase("crafting")
 	_expect(state._validate_snapshot(missing).is_empty(), "A purported schema-four snapshot cannot smuggle the new support field")
 	if _write(path, missing):
 		_expect(not state.load_build(path) and state._snapshot() == valid and changes == 0, "Rejecting schema-smuggled links preserves the entire current build")
@@ -228,6 +229,7 @@ func _test_v4_migration() -> void:
 	var original = _rich_state()
 	var legacy: Dictionary = original._snapshot()
 	legacy.version = 4
+	legacy.erase("crafting")
 	legacy.erase("skill_supports")
 	var bytes: String = "\n  " + JSON.stringify(legacy, "  ", false, true) + "\n\n"
 	var path: String = "user://skill_support_v4.json"

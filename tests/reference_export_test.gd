@@ -26,6 +26,18 @@ func _initialize() -> void:
 	combinations[1].append("changed")
 	_expect(three_supports == ["volley", "focus", "pierce"], "Reference combinations do not alias the source list")
 	var current: Dictionary = Exporter.clean(Exporter.collect())
+	_expect(current.crafting.size() == 3 and current.crafting.has_all(["calibration_shard","salvage","recalibrate"]), "One material and exactly two implemented crafting operations are browsable")
+	_expect(current.crafting.calibration_shard.maximum == Build.MAX_CRAFT_MATERIALS and current.crafting.calibration_shard.save_version == Build.SAVE_VERSION, "Wallet limits and schema come from BuildState")
+	for operation: String in ["salvage","recalibrate"]:
+		var craft: Dictionary = current.crafting[operation]
+		var sample: Dictionary = craft.example
+		_expect(sample.quote.ok and sample.full_candidate_valid and sample.revision_before == 0 and sample.revision_after == 1, "Real planner example produces one full valid transaction: " + operation)
+		_expect(Equipment.validate_instance(sample.source) and craft.eligible_base_ids == Equipment.all_base_ids(), "Craft examples and all base links share real catalog eligibility")
+		if operation == "salvage":
+			_expect(sample.quote.materials.calibration_shard == 4 and sample.balance_before == 8 and sample.balance_after == 12 and sample.after_instance.is_empty(), "Independent one-T3 magic salvage arithmetic and consumed result")
+		else:
+			_expect(sample.quote.cost.calibration_shard == 8 and sample.balance_after == 0 and Equipment.validate_instance(sample.after_instance), "Independent calibration economics and legal replacement")
+			_expect(sample.after_instance.id == sample.source.id and sample.after_instance.affixes[0].tier == 3 and sample.after_definition == Exporter.clean(Equipment.definition(sample.after_instance)), "Calibrated definition derives from exact planned result without copying a damage formula")
 	var piercing: Dictionary = current.projectile_support_examples.skills
 	_expect(piercing.bolt.before.observed_hits == [1, 2] and piercing.bolt.after.observed_hits == [1, 2, 3, 4], "Reference bolt diagram records actual two versus four collisions")
 	_expect(piercing.frost.before.observed_hits == [1, 2, 3] and piercing.frost.after.observed_hits == [1, 2, 3, 4, 5], "Reference frost diagram records actual three versus five collisions")

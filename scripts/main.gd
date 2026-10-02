@@ -107,8 +107,8 @@ func _ready() -> void:
 	if not state.last_load_error.is_empty():
 		hud.open_panel("pause")
 		hud.notify(state.last_load_error)
-	elif state.migrated_from_v1 or state.migrated_from_v2 or state.migrated_from_v3 or state.migrated_from_v4 or state.migrated_from_v5 or state.migrated_from_v6 or state.migrated_from_v7 or state.migrated_from_v8 or state.migrated_from_v9:
-		hud.open_panel("talents" if state.migrated_from_v1 or state.migrated_from_v6 else "skills" if state.migrated_from_v4 or state.migrated_from_v5 or state.migrated_from_v9 else "inventory" if state.migrated_from_v3 or state.migrated_from_v7 or state.migrated_from_v8 else "combat")
+	elif state.migrated_from_v1 or state.migrated_from_v2 or state.migrated_from_v3 or state.migrated_from_v4 or state.migrated_from_v5 or state.migrated_from_v6 or state.migrated_from_v7 or state.migrated_from_v8 or state.migrated_from_v9 or state.migrated_from_v10:
+		hud.open_panel("talents" if state.migrated_from_v1 or state.migrated_from_v6 else "skills" if state.migrated_from_v4 or state.migrated_from_v5 or state.migrated_from_v9 else "inventory" if state.migrated_from_v3 or state.migrated_from_v7 or state.migrated_from_v8 or state.migrated_from_v10 else "combat")
 		hud.notify(state.migration_message)
 	else:
 		hud.notify("F7 怪物机制与分裂试验 · F6 龙卷组合 · T 天赋星图")
@@ -142,8 +142,11 @@ func _on_build_changed() -> void:
 	if _ready_complete:
 		_progress_revision += 1
 		_progress_hud_dirty = true
-		_progress_save_dirty = true
-		_progress_save_requested = true
+		# Crafting commits the complete validated snapshot to disk before emitting.
+		# Reentrant changes fail its exact receipt and use normal persistence.
+		var already_saved: bool = state.crafting_change_already_saved()
+		_progress_save_dirty = not already_saved
+		_progress_save_requested = not already_saved
 		if not use_progress_batching or _progress_transaction_depth == 0:
 			_flush_progress()
 

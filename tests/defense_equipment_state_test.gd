@@ -72,6 +72,7 @@ func _migration() -> void:
 	_expect(state.load_build(path) and state.migrated_from_v7 and changes == 1, "Literal v7 with special remote node migrates atomically once")
 	var expected: Dictionary = legacy.duplicate(true)
 	expected.version = Model.SAVE_VERSION
+	expected.crafting = {"materials":{"calibration_shard":0},"revision":0}
 	_expect(state._snapshot() == expected and not state.migration_message.is_empty(), "Migration changes version only; every item roll, identity, support, jewel, allocation and location survives")
 	_expect(state.get_stats().fire_resistance == 0.0 and state.equipment_instances.size() == 2, "Old save gets no free defense item or resistance")
 	_expect(FileAccess.get_file_as_bytes(path) == bytes and not FileAccess.file_exists(backup), "Load is read-only and preserves original BOM/CRLF")
@@ -108,7 +109,7 @@ func _roundtrip_and_awards() -> void:
 	_expect(state.get_stats().fire_resistance == 0.0 and state.equip(id), "Unworn armor grants no resistance; equip succeeds")
 	_expect(is_equal_approx(state.get_stats().fire_resistance, Catalog.get_stats(expected).fire_resistance), "Equipped armor reaches actual player stats")
 	var snapshot: Dictionary = state._snapshot()
-	_expect(Model.SAVE_VERSION == 10 and snapshot.size() == 16 and snapshot.equipment_instances[id].size() == 5, "Current schema retains the exact 16-field save and five-field item schemas")
+	_expect(Model.SAVE_VERSION == 11 and snapshot.size() == 17 and snapshot.equipment_instances[id].size() == 5, "Current schema retains the exact 17-field save and five-field item schemas")
 	var path: String = "user://defense_v8.json"
 	_expect(state.save_build(path) == OK, "New defense gear saves")
 	var restored := Model.new()
@@ -152,6 +153,7 @@ func _tamper() -> void:
 	for version: int in range(1, 8):
 		var bad: Dictionary = valid.duplicate(true)
 		bad.version = version
+		bad.erase("crafting")
 		_reject(state, bad, "New base injected into version %d" % version)
 	var bad: Dictionary = valid.duplicate(true)
 	bad.equipment_instances[id].base_id = "woven_bastion"
@@ -159,6 +161,7 @@ func _tamper() -> void:
 	bad.equipment_instances[id].affixes = [{"id":"emberward","tier":1,"value":10}]
 	for version: int in [4, 5, 6, 7, 8]:
 		bad.version = version
+		bad.erase("crafting")
 		_reject(state, bad, "Defense suffix on original armor in version %d" % version)
 	bad = valid.duplicate(true)
 	bad.version = Model.SAVE_VERSION + 1

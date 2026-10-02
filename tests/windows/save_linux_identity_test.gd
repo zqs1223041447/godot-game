@@ -51,6 +51,8 @@ func _write(path: String, bytes: PackedByteArray) -> bool:
 func _version_bytes(version: int) -> PackedByteArray:
 	var record: Dictionary = Fixture.record(9)
 	record.version = version
+	if version >= 11:
+		record.crafting = {"materials":{"calibration_shard":0},"revision":0}
 	return JSON.stringify(record, "\t").to_utf8_buffer()
 
 func _run() -> void:

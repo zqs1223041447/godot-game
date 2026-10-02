@@ -12,7 +12,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 REF = ROOT / 'docs/reference'
-CATEGORIES = [('skills','主动技能'),('supports','辅助技能'),('equipment','随机装备'),('affixes','装备词缀'),('fixed_items','固定装备'),('jewels','珠宝'),('jewel_affixes','珠宝词缀'),('passives','天赋星图'),('mechanisms','共用机制'),('weapon_stages','武器局部阶段'),('defenses','受击与防御'),('monsters','怪物图鉴'),('rules','规则与边界')]
+CATEGORIES = [('skills','主动技能'),('supports','辅助技能'),('equipment','随机装备'),('affixes','装备词缀'),('fixed_items','固定装备'),('jewels','珠宝'),('jewel_affixes','珠宝词缀'),('passives','天赋星图'),('mechanisms','共用机制'),('weapon_stages','武器局部阶段'),('defenses','受击与防御'),('crafting','制作与回收'),('monsters','怪物图鉴'),('rules','规则与边界')]
 RULE_TITLES = {'damage':'伤害如何结算','supports':'辅助装配','projectiles':'分裂、返回与飞行结束','equipment':'装备与阶级','character_rates':'恢复、移动与普通攻击速度','basic_attack':'普通攻击与武器贡献','allocation':'天赋与珠宝规则','shared':'玩家和怪物共享机制','boundaries':'尚未实现的源游戏语义','sources':'数据来源与实现边界'}
 CAPABILITIES = {'initial_projectiles':'初始投射物数量','projectile_hit':'投射物命中','finite_projectile_pierce':'有限穿透'}
 SLOTS = {'weapon':'武器','armor':'护甲','charm':'护符'}
@@ -191,6 +191,22 @@ def build(data, art):
         body+=details('当前支持边界','<p>仅火焰抗性是当前可获得的防御属性。支持分量先减伤、再扣护盾、再扣生命。不包含护甲、穿透、异常状态或完整 PoE 防御体系；当前不实现混沌绕盾。</p><p>火抗上限、底材/词缀数值和怪物平衡均为本游戏原创，没有对应的 PoE 源规则背书。</p>')
         related=links('equipment',[i for i,e in data['equipment'].items() if e['stats'].get(d['stat'],0)])+' · '+links('affixes',[i for i,f in data['affixes'].items() if f['stat']==d['stat']])+' · '+links('monsters',[i for i,m in data['monsters'].items() if m.get('defense_stats',{}).get(d['stat'],0)])
         cards.append(add('defenses',key,d['name'],d['description'],body,'命中防御',related=related+' · '+link('rules','damage')))
+    for key,c in data['crafting'].items():
+        if c['kind']=='material':
+            body=facts([('余额上限',number(c['maximum'])),('存档版本',number(c['save_version'])),('规则版本',esc(c['rules']['rules_version']))])
+            body+='<p>首版只有一种材料。回收收益为稀有度基数（魔法1、稀有3）加全部词缀阶级之和；数值校准成本为该装备回收收益的2倍。T1入门、T3高阶是本游戏顺序，数值为可调原创平衡。</p>'
+            related=link('crafting','salvage')+' · '+link('crafting','recalibrate')
+        else:
+            sample=c['example']; quote=sample['quote']; source=sample['source']
+            amount=quote['materials'].get('calibration_shard',0) if key=='salvage' else quote['cost']['calibration_shard']
+            action='获得' if key=='salvage' else '消耗'
+            mark='<svg viewBox="0 0 64 64" width="48" height="48" aria-hidden="true"><path d="M32 5 L51 22 L42 53 L16 42 L12 21 Z M32 5 L29 30 L42 53 M12 21 L29 30 L51 22" fill="#dfc99a" stroke="#79571f" stroke-width="2"/></svg>'
+            body='<figure class="defense-flow"><figcaption>实际规则示例 · 白蜡长弓</figcaption><ol><li><span class="flow-step">01 · 原物品</span><strong>'+esc(sample['before_definition']['base_name'])+'</strong><span>'+lines('\n'.join(sample['before_definition']['affix_lines']))+'</span></li><li><span class="flow-step">02 · '+action+'校准碎片</span>'+mark+f'<strong data-craft-value="{key}-amount" data-value="{amount}">{amount}</strong></li><li><span class="flow-step">03 · 余额与结果</span>'+f'<strong><span data-craft-value="{key}-before" data-value="{sample["balance_before"]}">{sample["balance_before"]}</span> → <span data-craft-value="{key}-after" data-value="{sample["balance_after"]}">{sample["balance_after"]}</span></strong>'
+            body+='<span>原装备被消耗，空位释放</span>' if key=='salvage' else '<span>'+lines('\n'.join(sample['after_definition']['affix_lines']))+'</span>'
+            body+='</li></ol><p class="fine">演示使用合法、未穿戴的最高档单词缀实例与固定示例种子；收益、成本、结果和完整构筑合法性来自实际规则/事务规划器。它不预告玩家下一次随机结果。</p></figure>'
+            body+=facts([('可用底材',links('equipment',c['eligible_base_ids'])),('前置条件','在背包中、未穿戴的随机魔法/稀有装备；普通无词缀、固定示例和珠宝不适用'),('保存顺序','完整候选验证 → 原子写盘 → 内存提交与刷新'),('失败保护','拒绝或写盘失败不动装备、材料和序号；回收需确认，校准明确可能降低或不变'),('保持字段','物品ID、底材、物品等级、稀有度、词缀种类/顺序/阶级保持；校准只重掷原档数值')])
+            related=link('crafting','calibration_shard')+' · '+link('equipment',source['base_id'])+' · '+links('affixes',[a['id'] for a in source['affixes']])
+        cards.append(add('crafting',key,c['name'],c['description'],body,'材料' if c['kind']=='material' else '制作操作',related=related))
     for key,m in data['monsters'].items():
         e=m['runtime_example']; tier=data['monster_rarities'][m['rarity']]['name']
         children=' · '.join(link('monsters',x['template'])+' × '+str(x['count']) for x in m['death_spawns']) or '无'
@@ -218,7 +234,7 @@ def build(data, art):
         ('character_rates','恢复、移动与普通攻击速度','速度和恢复的固定加值先相加，再应用对应提高比率。','<p>普通攻击速度改变基础自动射击间隔；不缩短主动技能冷却。魔力恢复与移动速度分别使用自身比率。</p>','implemented'),
         ('allocation','天赋与珠宝规则','从起点沿连线分配天赋；珠宝只能镶入已分配的孔。普通珠宝提供属性，寻枝晶玉额外赋予范围内远程分配资格。','<p>'+lines(data['jewels'].get('branchfinder',{}).get('description',''))+'</p><p>覆盖图中的资格与连通状态由同一个 AllocationRules 分析器导出。图中可切换源孔失联示例：失联孔不激活覆盖。远程点不能向覆盖范围外扩路，也不能远程开启珠宝孔。</p><p><a href="#tree">查看原创新图与覆盖示例</a></p><p>本游戏半径、限定节点类型、首领奖励与原子拒绝卸除，均为原创实现规则；不是 PoE 数值或完整机制复刻。研究依据：<a href="https://www.pathofexile.com/forum/view-thread/1254452/page/2">GGG 范围与禁止向外扩路说明</a> · <a href="https://www.pathofexile.com/forum/view-thread/2792025">3.10.0c 珠宝更换连通修复</a> · <a href="https://www.pathofexile.com/forum/view-thread/3406659">3.21.1 Hotfix 3 替代来源修复</a>。</p>','implemented'),
         ('shared','玩家和怪物共享机制','天赋节点与怪物模板按同一个机制 ID 请求整组属性。怪物不支持的属性会使整个机制被拒绝。',details('玩家天赋合计上限',facts([(key,number(value)) for key,value in data['passive_caps'].items()]))+'<p>天赋合计先受自身安全上限约束；装备与珠宝另行结算。怪物稀有度、物种、波次与死亡模板保持独立。</p>','implemented'),
-        ('boundaries','尚未实现的源游戏语义','本目录不表示复刻了源游戏的全部规则。未实现的研究项不能作为本游戏构筑能力使用。','<p>未实现：护甲减伤、穿透、完整源游戏抗性引擎、武器品质、局部攻速/暴击、伤害范围、完整武器攻击基础替换、伤害转换、异常状态与暴击体系、召唤物、属性需求体系、星团与永恒珠宝重写、源游戏专属条件与资源机制。已经实现有限的局部物理武器阶段；当前可获得的防御属性仅有火焰抗性；其上限、怪物接触分量、护甲数值和掉落权重均为本游戏原创规则。未来是否加入其他体系及具体语义尚未承诺。</p>','planned'),
+        ('boundaries','尚未实现的源游戏语义','本目录不表示复刻了源游戏的全部规则。未实现的研究项不能作为本游戏构筑能力使用。','<p>未实现：护甲减伤、抗性穿透、完整源游戏抗性引擎、武器品质、局部攻速/暴击、伤害范围、完整武器攻击基础替换、伤害转换、异常状态与暴击体系、召唤物、属性需求体系、星团与永恒珠宝重写、源游戏专属条件与资源机制，以及新增/替换词缀、升阶、定向制作和制作地图。当前仅实现回收与已有词缀数值校准。已经实现有限的局部物理武器阶段；当前可获得的防御属性仅有火焰抗性；其上限、怪物接触分量、护甲数值和掉落权重均为本游戏原创规则。未来是否加入其他体系及具体语义尚未承诺。</p>','planned'),
         ('sources','数据来源与实现边界','游戏目录从本地运行时导出。PoE 资料是语义和数值校准研究；本页只呈现已实现的原创内容、原创新图与必要的来源标识。',f'<p>天赋研究：PoE {esc(data["sources"]["passive"]["version"])}；固定提交 {esc(data["sources"]["passive"]["commit"])}。</p><p>词缀研究：PoE {esc(data["sources"]["affix"]["source_version"])}；RePoE 固定提交 {esc(data["sources"]["affix"]["export_commit"])}。</p><p><a href="{esc(data["sources"]["passive"]["repository"])}">天赋来源仓库</a> · <a href="{esc(data["sources"]["affix"]["export_repository"])}">词缀导出仓库</a>（可选外部链接，需要联网）</p><p>版本只证明此快照的研究依据，不表示源游戏当前全量可用性。未分发源游戏图像、布局或词条原文。</p>','research'),
     ]
     for key,name,summary,body,status in rule_defs: cards.append(add('rules',key,name,summary,body,{'implemented':'已实现规则','research':'研究来源','planned':'未实现边界'}[status],status))

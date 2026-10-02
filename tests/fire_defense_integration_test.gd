@@ -471,6 +471,7 @@ func _test_v7_scene_migration() -> void:
 	arena = null
 	var old: Dictionary = Model.new()._snapshot()
 	old.version = 7
+	old.erase("crafting")
 	var original: PackedByteArray = ("\n  " + JSON.stringify(old, "  ", false, true) + "\n\n").to_utf8_buffer()
 	_expect(BatchFixture.write_bytes("user://build_save.json", original), "Version-seven source writes only in isolated user storage")
 	_create_arena()
@@ -480,6 +481,7 @@ func _test_v7_scene_migration() -> void:
 		and not FileAccess.file_exists("user://build_save.json.v7-backup.json"), "Startup has not overwritten or prematurely backed up legacy bytes")
 	var canonical: Dictionary = arena.state._snapshot()
 	canonical.version = 7
+	canonical.erase("crafting")
 	_expect(canonical == old, "Scene load preserves every legacy owned item, roll, placement and build field")
 	_expect(arena.state.equip("swift_blade"), "First real inventory edit triggers migrated autosave")
 	_expect(FileAccess.get_file_as_bytes("user://build_save.json.v7-backup.json") == original,

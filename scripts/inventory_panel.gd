@@ -10,6 +10,7 @@ const GridView = preload("res://scripts/item_grid_view.gd")
 const Data = preload("res://scripts/game_data.gd")
 const Passives = preload("res://scripts/passive_data.gd")
 const Defense = preload("res://scripts/mechanics/defense_rules.gd")
+const CraftControls = preload("res://scripts/ui/crafting_controls.gd")
 const TEXT: Color = Color("3b281b")
 const MUTED: Color = Color("69523a")
 const CYAN: Color = Color("52623b")
@@ -36,6 +37,10 @@ var _discard_button: Button
 var _discard_dialog: ConfirmationDialog
 var _discard_target: String = ""
 var _equipment_slots: Dictionary = {}
+var _craft_controls: CraftingControls
+var _craft_dialog: ConfirmationDialog
+var _displayed_craft_quotes: Dictionary = {}
+var _pending_craft: Dictionary = {}
 
 
 class EquipmentSlot extends Control:
@@ -312,6 +317,19 @@ func _build_interface() -> void:
 	_discard_button = _button("丢弃这件装备", "DiscardEquipmentButton", _request_discard)
 	_discard_button.add_theme_color_override("font_color",Color("9a382c"))
 	detail.add_child(_discard_button)
+	_craft_controls = CraftControls.new()
+	_craft_controls.name = "InventoryCraftingControls"
+	_craft_controls.craft_requested.connect(_request_craft)
+	detail.add_child(_craft_controls)
+	_craft_dialog = ConfirmationDialog.new()
+	_craft_dialog.name = "CraftingConfirmation"
+	_craft_dialog.dialog_autowrap = true
+	_craft_dialog.cancel_button_text = "取消"
+	_craft_dialog.confirmed.connect(_confirm_craft)
+	_craft_dialog.canceled.connect(func() -> void:
+		_cancel_craft()
+		refresh())
+	add_child(_craft_dialog)
 	_discard_dialog = ConfirmationDialog.new()
 	_discard_dialog.name = "DiscardEquipmentConfirmation"
 	_discard_dialog.title = "确认丢弃装备"
@@ -328,6 +346,7 @@ func _refresh_details() -> void:
 	_unequip_button.hide()
 	_passives_button.hide()
 	_discard_button.hide()
+	_craft_controls.hide()
 	_detail_art.entry = entry
 	_detail_art.queue_redraw()
 	if entry.is_empty():
@@ -371,6 +390,69 @@ func _refresh_details() -> void:
 		_equip_button.visible = not worn
 		_unequip_button.visible = worn
 		_equip_button.text = "装备到" + str(SLOT_NAMES.get(slot, "装备槽"))
+		_refresh_crafting(str(entry.get("id", "")))
+
+
+func _refresh_crafting(item_id: String) -> void:
+	_displayed_craft_quotes.clear()
+	# Hidden inventory panels still receive model signals; never read/save files
+	# merely to refresh an off-screen crafting row during a hundred-enemy battle.
+	if not is_visible_in_tree() or not item_id.begins_with("gear_"):
+		return
+	var source: Dictionary = _state.equipment_instances.get(item_id, {})
+	for operation: String in ["salvage", "recalibrate"]:
+		_displayed_craft_quotes[operation] = _state.crafting_quote(operation, item_id)
+	_craft_controls.set_context(item_id, source, _state.crafting_balance(),
+		_displayed_craft_quotes.salvage, _displayed_craft_quotes.recalibrate)
+	_craft_controls.show()
+
+
+func _request_craft(operation: String, item_id: String, source: Dictionary) -> void:
+	if _craft_dialog.visible:
+		return
+	var quote: Dictionary = _displayed_craft_quotes.get(operation, {})
+	if not quote.get("ok", false) or quote.get("item_id", "") != item_id or not quote.has("handle"):
+		feedback.emit("选择已变化，请重新选择装备。")
+		return
+	var definition: Dictionary = _state.get_item_definition(item_id)
+	if definition.is_empty():
+		return
+	_cancel_craft()
+	_pending_craft = {"handle": quote.handle, "source": source.duplicate(true), "operation": operation,
+		"amount": int(quote.materials.get("calibration_shard", 0)) if operation == "salvage" else int(quote.cost.get("calibration_shard", 0))}
+	if operation == "salvage":
+		_craft_dialog.title = "确认回收装备"
+		_craft_dialog.ok_button_text = "确认回收"
+		_craft_dialog.dialog_text = "回收「%s」？\n获得校准碎片 %d 枚。\n这件装备将从背包与存档中删除，无法恢复。" % [str(definition.name), _pending_craft.amount]
+	else:
+		_craft_dialog.title = "确认数值校准"
+		_craft_dialog.ok_button_text = "消耗 %d 枚并校准" % _pending_craft.amount
+		_craft_dialog.dialog_text = "校准「%s」？\n消耗校准碎片 %d 枚。\n重掷已有词缀数值；词缀种类、阶级和物品等级保持。\n结果可能降低或不变。" % [str(definition.name), _pending_craft.amount]
+	_craft_dialog.popup_centered(Vector2i(500, 240))
+
+
+func _cancel_craft() -> void:
+	if not _pending_craft.is_empty():
+		_state.cancel_crafting_quote(str(_pending_craft.handle))
+	_pending_craft.clear()
+
+
+func _confirm_craft() -> void:
+	if _pending_craft.is_empty():
+		return
+	var pending: Dictionary = _pending_craft.duplicate(true)
+	_pending_craft.clear()
+	var result: Dictionary = _state.execute_crafting(pending.handle, pending.source)
+	if not result.ok:
+		feedback.emit(str(result.reason))
+		refresh()
+		return
+	if pending.operation == "salvage":
+		selected_item_key = ""
+		feedback.emit("已回收装备，获得校准碎片 %d 枚。" % pending.amount)
+	else:
+		feedback.emit("已校准装备，消耗校准碎片 %d 枚。" % pending.amount)
+	refresh()
 
 
 func _activate_item(key: String) -> void:

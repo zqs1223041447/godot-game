@@ -272,6 +272,7 @@ func _test_schema_two_migration() -> void:
 	_expect(old.move_in_backpack("item:ember_wand", Vector2i(10, 5)), "Legacy fixture includes a custom non-packed inventory position")
 	var legacy: Dictionary = old._snapshot()
 	legacy.version = 2
+	legacy.erase("crafting")
 	legacy.erase("equipment_instances")
 	legacy.erase("next_equipment_id")
 	legacy.erase("skill_supports")

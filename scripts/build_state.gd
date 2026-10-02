@@ -12,10 +12,15 @@ const Equipment = preload("res://scripts/items/equipment_catalog.gd")
 const SupportCatalog = preload("res://scripts/combat/support_registry.gd")
 const SkillCompiler = preload("res://scripts/combat/skill_compiler.gd")
 const AllocationRules = preload("res://scripts/passives/allocation_rules.gd")
-const SAVE_VERSION: int = 10
-## Schema10 only adds support vocabulary; equipment still uses schema9 words.
+const Craft = preload("res://scripts/items/crafting_rules.gd")
+const CraftPlanner = preload("res://scripts/items/crafting_transaction_planner.gd")
+const SAVE_VERSION: int = 11
+## Crafting adds a wallet/sequence; equipment still uses schema9 words.
 ## Explicit mapping must not make an unknown future save/item version acceptable.
-const EQUIPMENT_VOCABULARY_BY_SAVE_VERSION: Dictionary = {10: 9}
+const EQUIPMENT_VOCABULARY_BY_SAVE_VERSION: Dictionary = {10: 9, 11: 9}
+const MAX_CRAFT_MATERIALS: int = 1000000000
+const MAX_CRAFT_REVISION: int = 1000000000
+const MAX_CRAFT_QUOTES: int = 8
 const MAX_EQUIPMENT: int = 64
 const MAX_EQUIPMENT_ID: int = 999999999
 const MAX_LEVEL: int = 1000
@@ -56,6 +61,7 @@ var backpack_positions: Dictionary = {}
 var level: int = 1
 var xp: int = 0
 var talent_points: int = BASE_TALENT_POINTS
+var crafting: Dictionary = {"materials": {"calibration_shard": 0}, "revision": 0}
 var migrated_from_v1: bool = false
 var migrated_from_v2: bool = false
 var migrated_from_v3: bool = false
@@ -65,6 +71,7 @@ var migrated_from_v6: bool = false
 var migrated_from_v7: bool = false
 var migrated_from_v8: bool = false
 var migrated_from_v9: bool = false
+var migrated_from_v10: bool = false
 var _migration_version: int = 0
 var migration_message: String = ""
 var migration_backup_path: String = ""
@@ -72,6 +79,13 @@ var _migration_source_path: String = ""
 var _migration_source_bytes: PackedByteArray = PackedByteArray()
 var last_load_error: String = ""
 var _blocked_save_paths: Dictionary = {}
+var _craft_quotes: Dictionary = {}
+var _craft_quote_sequence: int = 0
+var _craft_busy: bool = false
+var _craft_emitting: bool = false
+var _craft_persisted_text: String = ""
+## Primary snapshot writes only; historical backup writes are separately guarded.
+var primary_save_attempt_count: int = 0
 
 
 func _init() -> void:
@@ -193,6 +207,145 @@ func discard_equipment(item_id: String) -> bool:
 	_sync_backpack()
 	changed.emit()
 	return true
+
+
+func crafting_balance() -> int:
+	var materials: Variant = crafting.get("materials", {})
+	return int(materials.get(Craft.MATERIAL_ID, 0)) if materials is Dictionary else 0
+
+
+## The UI receives an opaque, process-local handle; no seed or rolled candidate.
+## Full-build and disk bindings are held here, never accepted from a caller.
+func crafting_quote(operation: Variant, item_id: Variant, path: String = "user://build_save.json") -> Dictionary:
+	var snapshot: Dictionary = _snapshot()
+	if _validate_snapshot(snapshot).is_empty():
+		return _craft_failure("invalid_build", "构筑数据无效，无法制作。")
+	if int(crafting.revision) >= MAX_CRAFT_REVISION:
+		return _craft_failure("revision_limit", "制作次数已达上限。")
+	var quote: Dictionary = CraftPlanner.quote(_craft_context(snapshot, path), operation, item_id)
+	if not quote.ok:
+		return quote
+	var resulting_balance: int = crafting_balance() - int(quote.cost.get(Craft.MATERIAL_ID, 0)) + int(quote.materials.get(Craft.MATERIAL_ID, 0))
+	if resulting_balance > MAX_CRAFT_MATERIALS:
+		return _craft_failure("material_limit", "校准碎片已达上限。")
+	var disk: Dictionary = _craft_disk_stamp(path)
+	if not disk.ok:
+		_reject_load(path, "存档无法安全读取")
+		return _craft_failure("save_unreadable", "存档无法读取，暂时不能制作。")
+	_craft_quote_sequence += 1
+	var handle: String = "%d:%d" % [get_instance_id(), _craft_quote_sequence]
+	while _craft_quotes.size() >= MAX_CRAFT_QUOTES:
+		_craft_quotes.erase(_craft_quotes.keys()[0])
+	_craft_quotes[handle] = {"quote": quote.duplicate(true), "snapshot": snapshot.duplicate(true),
+		"path": path, "disk": disk.duplicate(true)}
+	var visible: Dictionary = quote.duplicate(true)
+	visible["handle"] = handle
+	return visible
+
+
+func cancel_crafting_quote(handle: String) -> void:
+	_craft_quotes.erase(handle)
+
+
+func execute_crafting(handle: Variant, source_instance: Variant) -> Dictionary:
+	if _craft_busy:
+		return _craft_failure("busy", "制作正在保存，请等待完成后再试。")
+	if not handle is String or not _craft_quotes.has(handle):
+		return _craft_failure("unknown_quote", "报价已失效，请重新选择装备。")
+	var issued: Dictionary = _craft_quotes[handle]
+	var quote: Dictionary = issued.quote
+	if not CraftPlanner._same_data(source_instance, quote.source_instance):
+		return _craft_failure("source_mismatch", "物品已变化，请重新选择装备。")
+	var current: Dictionary = _snapshot()
+	if not CraftPlanner._same_data(current, issued.snapshot):
+		_craft_quotes.erase(handle)
+		return _craft_failure("stale_quote", "构筑已变化，请重新获取报价。")
+	if _validate_snapshot(current).is_empty():
+		return _craft_failure("invalid_build", "构筑数据无效，无法制作。")
+	if _craft_disk_stamp(issued.path) != issued.disk:
+		_reject_load(issued.path, "存档已变化")
+		return _craft_failure("save_changed", "存档已变化，未消耗装备或碎片。")
+	var context: Dictionary = _craft_context(current, issued.path)
+	# Stable across cancellation, failed writes and reloads of the same build.
+	# No global/combat/loot RNG call and no caller-selected seed.
+	var seed_text: String = JSON.stringify({"rules": Craft.RULES_VERSION,
+		"revision": int(crafting.revision), "item": quote.source_instance}, "", true, true)
+	var seed_value: int = seed_text.sha256_text().substr(0, 15).hex_to_int()
+	var plan: Dictionary = CraftPlanner.plan(context, quote, seed_value)
+	if not plan.ok:
+		return plan
+	var candidate: Dictionary = current.duplicate(true)
+	for field: String in ["inventory", "equipment_instances", "equipped", "backpack_positions"]:
+		candidate[field] = plan.candidate[field].duplicate(true)
+	candidate.crafting = {"materials": plan.candidate.materials.duplicate(true), "revision": plan.candidate.revision}
+	var validated: Dictionary = _validate_snapshot(candidate)
+	if validated.is_empty():
+		return _craft_failure("invalid_candidate", "制作结果未通过完整构筑校验。")
+	_craft_busy = true
+	var error: Error = _persist_snapshot(validated, issued.path)
+	if error != OK:
+		_craft_busy = false
+		var failure: Dictionary = _craft_failure("save_failed", "保存失败，装备、碎片与制作次数均未变化。")
+		failure["file_error"] = error
+		return failure
+	# The candidate is durable before any in-memory inventory/wallet mutation.
+	inventory.assign(validated.inventory)
+	equipment_instances = validated.equipment_instances.duplicate(true)
+	equipped = validated.equipped.duplicate(true)
+	backpack_positions.clear()
+	for key: String in validated.backpack_positions:
+		var position: Array = validated.backpack_positions[key]
+		backpack_positions[key] = Vector2i(int(position[0]), int(position[1]))
+	crafting = validated.crafting.duplicate(true)
+	_craft_quotes.clear()
+	_craft_persisted_text = JSON.stringify(validated, "\t", true, true)
+	_craft_emitting = true
+	changed.emit()
+	_craft_emitting = false
+	_craft_persisted_text = ""
+	_craft_busy = false
+	return {"ok": true, "code": "", "reason": "", "operation": quote.operation,
+		"item_id": quote.item_id, "cost": quote.cost.duplicate(true),
+		"materials": quote.materials.duplicate(true), "revision": int(crafting.revision)}
+
+
+## A reentrant callback changing anything fails this exact-byte receipt check.
+func crafting_change_already_saved() -> bool:
+	return _craft_emitting and JSON.stringify(_snapshot(), "\t", true, true) == _craft_persisted_text
+
+
+func _craft_context(snapshot: Dictionary, path: String) -> Dictionary:
+	return {"revision": int(snapshot.crafting.revision), "materials": snapshot.crafting.materials.duplicate(true),
+		"inventory": snapshot.inventory.duplicate(true), "equipment_instances": snapshot.equipment_instances.duplicate(true),
+		"equipped": snapshot.equipped.duplicate(true), "backpack_positions": snapshot.backpack_positions.duplicate(true),
+		"save_writable": save_block_reason(path).is_empty()}
+
+
+func _craft_disk_stamp(path: String) -> Dictionary:
+	if not FileAccess.file_exists(path):
+		return {"ok": true, "exists": false}
+	var file := FileAccess.open(path, FileAccess.READ)
+	if file == null:
+		return {"ok": false}
+	if file.get_length() > MAX_SAVE_BYTES:
+		file.close()
+		return {"ok": false}
+	var bytes: PackedByteArray = file.get_buffer(file.get_length())
+	var read_error: Error = file.get_error()
+	file.seek(0)
+	var parser := JSON.new()
+	var parse_error: Error = parser.parse(file.get_as_text())
+	file.close()
+	if read_error != OK or parse_error != OK or _validate_snapshot(parser.data).is_empty():
+		return {"ok": false}
+	var digest := HashingContext.new()
+	digest.start(HashingContext.HASH_SHA256)
+	digest.update(bytes)
+	return {"ok": true, "exists": true, "sha256": digest.finish().hex_encode()}
+
+
+static func _craft_failure(code: String, reason: String) -> Dictionary:
+	return {"ok": false, "code": code, "reason": reason}
 
 
 func allocation_analysis() -> Dictionary:
@@ -532,9 +685,12 @@ func xp_required() -> int:
 
 
 func save_build(path: String = "user://build_save.json") -> Error:
+	return _persist_snapshot(_snapshot(), path)
+
+
+func _persist_snapshot(snapshot: Dictionary, path: String) -> Error:
 	if not save_block_reason(path).is_empty():
 		return ERR_INVALID_DATA
-	var snapshot: Dictionary = _snapshot()
 	if _validate_snapshot(snapshot).is_empty():
 		return ERR_INVALID_DATA
 	var serialized: String = JSON.stringify(snapshot, "\t", true, true)
@@ -546,6 +702,7 @@ func save_build(path: String = "user://build_save.json") -> Error:
 		var backup_error: Error = _backup_legacy_save(_migration_source_path)
 		if backup_error != OK:
 			return backup_error
+	primary_save_attempt_count += 1
 	var write_error: Error = _atomic_write(path, serialized)
 	if write_error == OK and _save_paths_match(path, _migration_source_path):
 		_migration_source_bytes = PackedByteArray()
@@ -553,6 +710,9 @@ func save_build(path: String = "user://build_save.json") -> Error:
 
 
 func load_build(path: String = "user://build_save.json") -> bool:
+	_craft_quotes.clear()
+	if _craft_busy:
+		return false
 	var file: FileAccess = FileAccess.open(path, FileAccess.READ)
 	if file == null:
 		if FileAccess.file_exists(path):
@@ -575,6 +735,7 @@ func load_build(path: String = "user://build_save.json") -> bool:
 		if _save_paths_match(path, blocked_path):
 			_blocked_save_paths.erase(blocked_path)
 	last_load_error = ""
+	_craft_quotes.clear()
 	# Commit only after every field, graph connection and jewel location validates.
 	inventory.assign(candidate["inventory"])
 	equipment_instances = candidate["equipment_instances"].duplicate(true)
@@ -594,6 +755,7 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	level = int(candidate["level"])
 	xp = int(candidate["xp"])
 	talent_points = int(candidate["talent_points"])
+	crafting = candidate["crafting"].duplicate(true)
 	migrated_from_v1 = int(parser.data["version"]) == 1
 	migrated_from_v2 = int(parser.data["version"]) == 2
 	migrated_from_v3 = int(parser.data["version"]) == 3
@@ -603,6 +765,7 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	migrated_from_v7 = int(parser.data["version"]) == 7
 	migrated_from_v8 = int(parser.data["version"]) == 8
 	migrated_from_v9 = int(parser.data["version"]) == 9
+	migrated_from_v10 = int(parser.data["version"]) == 10
 	_migration_version = int(parser.data["version"])
 	if migrated_from_v1 or migrated_from_v2:
 		for id: String in Data.COMBAT_STARTER_ITEMS:
@@ -625,6 +788,8 @@ func load_build(path: String = "user://build_save.json") -> bool:
 		migration_message = "构筑已升级：原装备掷值、辅助、天赋与珠宝保持不变。新增白蜡长弓进入正常掉落；本武器词缀仅作用于武器攻击命中。"
 	if migrated_from_v9:
 		migration_message = "构筑已升级：装备、天赋、珠宝与已有辅助保持不变。新增贯穿辅助可用于飞弹和冰霜；按 K 配置。"
+	if migrated_from_v10:
+		migration_message = "构筑已升级：原装备与构筑保留。背包中的随机魔法、稀有装备可回收或校准；碎片从零开始。"
 	migration_backup_path = ""
 	_migration_source_path = path if _migration_version < SAVE_VERSION else ""
 	_migration_source_bytes = source_bytes if _migration_version < SAVE_VERSION else PackedByteArray()
@@ -689,6 +854,7 @@ func _snapshot() -> Dictionary:
 		"allocated_nodes": allocated_nodes.duplicate(), "jewels": jewels.duplicate(true),
 		"jewel_inventory": jewel_inventory.duplicate(), "socketed_jewels": socketed_jewels.duplicate(),
 		"next_jewel_id": next_jewel_id, "backpack_positions": serialized_positions,
+		"crafting": crafting.duplicate(true),
 	}
 
 
@@ -705,8 +871,20 @@ func _validate_snapshot(value: Variant) -> Dictionary:
 		required.append_array(["equipment_instances", "next_equipment_id"])
 	if int(data["version"]) >= 5:
 		required.append("skill_supports")
+	if int(data["version"]) >= 11:
+		required.append("crafting")
 	if data.size() != required.size() or not data.has_all(required):
 		return {}
+	if int(data["version"]) >= 11:
+		var craft_state: Variant = data.crafting
+		if not craft_state is Dictionary or craft_state.size() != 2 or not craft_state.has_all(["materials", "revision"]):
+			return {}
+		if not _is_bounded_int(craft_state.revision, 0, MAX_CRAFT_REVISION):
+			return {}
+		if not craft_state.materials is Dictionary or craft_state.materials.size() != 1 or not craft_state.materials.has(Craft.MATERIAL_ID):
+			return {}
+		if not _is_bounded_int(craft_state.materials[Craft.MATERIAL_ID], 0, MAX_CRAFT_MATERIALS):
+			return {}
 	if int(data["version"]) >= 5:
 		if not data["skill_supports"] is Dictionary or data["skill_supports"].size() > Data.SKILLS.size():
 			return {}
@@ -762,6 +940,11 @@ func _validate_snapshot(value: Variant) -> Dictionary:
 	if not _validate_backpack(data):
 		return {}
 	var result: Dictionary = data.duplicate(true)
+	if int(data.version) < 11:
+		result.crafting = {"materials": {Craft.MATERIAL_ID: 0}, "revision": 0}
+	else:
+		result.crafting.revision = int(result.crafting.revision)
+		result.crafting.materials[Craft.MATERIAL_ID] = int(result.crafting.materials[Craft.MATERIAL_ID])
 	if int(data["version"]) < 4:
 		result["version"] = SAVE_VERSION
 		result["equipment_instances"] = {}
@@ -860,6 +1043,7 @@ func _migrate_v1(data: Dictionary) -> Dictionary:
 		"talent_points": int(data["talent_points"]) + spent_points, "allocated_nodes": [Passives.START_ID],
 		"jewels": JewelCatalog.starter_jewels(), "jewel_inventory": ["jewel_000001", "jewel_000002", "jewel_000003"],
 		"socketed_jewels": {}, "next_jewel_id": 4,
+		"crafting": {"materials": {Craft.MATERIAL_ID: 0}, "revision": 0},
 	}
 	var positions: Dictionary = _packed_layout(_backpack_keys(result["inventory"], result["equipped"], result["jewel_inventory"]))
 	result["backpack_positions"] = {}

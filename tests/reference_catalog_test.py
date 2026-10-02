@@ -10,7 +10,7 @@ ROOT=Path(__file__).resolve().parents[1]
 REF=ROOT/'docs/reference'
 class Inspector(HTMLParser):
     def __init__(self):
-        super().__init__(); self.ids=[]; self.links=[]; self.assets=[]; self.viewbox=None; self.node_ids=[]; self.trace_values={}; self.weapon_values={}; self.pierce_hits={}
+        super().__init__(); self.ids=[]; self.links=[]; self.assets=[]; self.viewbox=None; self.node_ids=[]; self.trace_values={}; self.weapon_values={}; self.pierce_hits={}; self.craft_values={}
     def handle_starttag(self,tag,attrs):
         a=dict(attrs)
         if 'id' in a:self.ids.append(a['id'])
@@ -21,6 +21,7 @@ class Inspector(HTMLParser):
         if tag=='svg' and a.get('id')=='passive-map':self.viewbox=list(map(float,a['viewbox'].split()))
         if 'data-node' in a:self.node_ids.append(a['data-node'])
         if 'data-pierce-hits' in a:self.pierce_hits[a['data-pierce-hits']]=int(a['data-value'])
+        if 'data-craft-value' in a:self.craft_values[a['data-craft-value']]=int(a['data-value'])
         if 'data-weapon-trace' in a:self.weapon_values[a['data-weapon-trace']]=float(a['data-value'])
         if 'data-trace-value' in a:self.trace_values[a['data-trace-value']]=float(a['data-value'])
 
@@ -28,6 +29,14 @@ def main():
     source=(REF/'index.html').read_text()
     inspector=Inspector(); inspector.feed(source)
     data=json.loads((REF/'catalog.json').read_text())
+    expected_craft={}
+    for operation in ['salvage','recalibrate']:
+        sample=data['crafting'][operation]['example']
+        quoted=sample['quote']
+        expected_craft[operation+'-amount']=(quoted['materials'] if operation=='salvage' else quoted['cost'])['calibration_shard']
+        expected_craft[operation+'-before']=sample['balance_before']
+        expected_craft[operation+'-after']=sample['balance_after']
+    assert inspector.craft_values==expected_craft, 'Crafting flow does not match the authoritative plans'
     assert inspector.pierce_hits == {f'{skill}-{mode}':len(sample['observed_hits']) for skill,pair in data['projectile_support_examples']['skills'].items() for mode,sample in pair.items()}, 'Pierce diagram differs from actual collision events'
     assert not [x for x,n in Counter(inspector.ids).items() if n>1], 'Duplicate document IDs'
     assert not [x for x in inspector.links if x.startswith('#') and x[1:] not in inspector.ids], 'Broken internal links'
@@ -36,7 +45,7 @@ def main():
         if href and not href.startswith(('#','https://','http://')):
             assert (REF/href.split('#',1)[0]).is_file(), 'Missing local evidence link '+href
     for asset in inspector.assets:assert (REF/asset).is_file(), 'Missing asset '+asset
-    for cat in ['skills','supports','equipment','affixes','fixed_items','jewels','jewel_affixes','passives','mechanisms','weapon_stages','defenses','monsters']:
+    for cat in ['skills','supports','equipment','affixes','fixed_items','jewels','jewel_affixes','passives','mechanisms','weapon_stages','defenses','crafting','monsters']:
         for key in data[cat]:assert f'{cat}-{key}' in inspector.ids, 'Unbrowsable entry '+key
     trace=data['defenses']['fire_resistance']['worked_example']['trace']
     expected={'input_total':sum(trace['raw_components'].values()), **{k:trace[k] for k in ['damage_total','shield_spent','health_lost']}}
