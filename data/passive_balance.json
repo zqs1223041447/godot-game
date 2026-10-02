@@ -1,0 +1,948 @@
+{
+  "schema_version": 1,
+  "balance_revision": "poe-passive-v1",
+  "source": {
+    "repository": "https://github.com/grindinggear/skilltree-export",
+    "version": "3.29.1",
+    "commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+    "commit_date": "2026-07-31T00:26:38Z",
+    "retrieved_utc": "2026-10-02",
+    "data_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+    "data_sha256": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+    "data_bytes": 6666935,
+    "license_note": "GGG game data; no explicit redistribution license found in repository. Raw source/art/layout/prose excluded from game. Runtime stores numeric facts, source IDs, independently authored Chinese names."
+  },
+  "coverage_summary": {
+    "source_records": 3390,
+    "source_mastery_effects_deduplicated": 353,
+    "unique_modifier_expressions": 2974,
+    "modifier_occurrences_including_deduplicated_masteries": 5357,
+    "unique_status": {
+      "unsupported": 2876,
+      "supported_archetype": 98
+    },
+    "occurrence_status": {
+      "unsupported": 4778,
+      "supported_archetype": 579
+    },
+    "direct_node_status": {
+      "without_direct_stats": 518,
+      "unsupported_direct_stats": 2374,
+      "fully_supported_numeric_lines": 176,
+      "partially_supported_numeric_lines": 322
+    },
+    "supported_families": 14,
+    "unsupported_reasons": {
+      "summoned_actor_not_implemented": 195,
+      "conditional_or_derived_rule_not_implemented": 954,
+      "no_verified_runtime_mapping": 753,
+      "critical_or_ailment_not_implemented": 358,
+      "resource_mechanic_not_implemented": 156,
+      "defense_layer_not_implemented": 173,
+      "composite_rule_requires_atomic_executor": 95,
+      "weapon_scope_not_implemented": 146,
+      "attribute_system_not_implemented": 46
+    }
+  },
+  "reference_base": {
+    "damage": 18,
+    "max_health": 120,
+    "max_mana": 100,
+    "max_shield": 60,
+    "attack_speed": 1.7,
+    "move_speed": 240,
+    "mana_regen": 9,
+    "shield_regen": 13
+  },
+  "definitions": {
+    "ember_power": {
+      "name": "烬火威力",
+      "stats": {
+        "damage": 0.468
+      },
+      "source_refs": [
+        {
+          "modifier_id": "poe1_c1ab4af9afd1ffdf",
+          "source_node": {
+            "kind": "node",
+            "id": "13219",
+            "stat_index": 0
+          },
+          "family": "global_damage_increased",
+          "source_value": 10.0,
+          "source_mode": "increased",
+          "target_stat": "damage",
+          "reference_base": 18,
+          "scale": 0.26,
+          "adaptation": "fixed_reference_flat_projection"
+        }
+      ],
+      "source": "GGG official passive export 3.29.1",
+      "adaptation": "numeric_calibration_for_rift_trial_not_poe_equivalence"
+    },
+    "ember_fervor": {
+      "name": "烬火热忱",
+      "stats": {
+        "damage": 0.234,
+        "attack_speed": 0.01105
+      },
+      "source_refs": [
+        {
+          "modifier_id": "poe1_c1ab4af9afd1ffdf",
+          "source_node": {
+            "kind": "node",
+            "id": "13219",
+            "stat_index": 0
+          },
+          "family": "global_damage_increased",
+          "source_value": 10.0,
+          "source_mode": "increased",
+          "target_stat": "damage",
+          "reference_base": 18,
+          "scale": 0.13,
+          "adaptation": "fixed_reference_flat_projection"
+        },
+        {
+          "modifier_id": "poe1_845facc2f0d4e890",
+          "source_node": {
+            "kind": "node",
+            "id": "17429",
+            "stat_index": 0
+          },
+          "family": "attack_speed_increased",
+          "source_value": 2.0,
+          "source_mode": "increased",
+          "target_stat": "attack_speed",
+          "reference_base": 1.7,
+          "scale": 0.325,
+          "adaptation": "fixed_reference_flat_projection"
+        }
+      ],
+      "source": "GGG official passive export 3.29.1",
+      "adaptation": "numeric_calibration_for_rift_trial_not_poe_equivalence"
+    },
+    "ember_mastery": {
+      "name": "烬火专精",
+      "stats": {
+        "damage": 1.404,
+        "attack_speed": 0.03315
+      },
+      "source_refs": [
+        {
+          "modifier_id": "poe1_38c5f8cf0304e12d",
+          "source_node": {
+            "kind": "node",
+            "id": "35894",
+            "stat_index": 0
+          },
+          "family": "global_damage_increased",
+          "source_value": 20.0,
+          "source_mode": "increased",
+          "target_stat": "damage",
+          "reference_base": 18,
+          "scale": 0.39000000000000007,
+          "adaptation": "fixed_reference_flat_projection"
+        },
+        {
+          "modifier_id": "poe1_a1f748a37fc07b7f",
+          "source_node": {
+            "kind": "node",
+            "id": "12809",
+            "stat_index": 0
+          },
+          "family": "attack_speed_increased",
+          "source_value": 6.0,
+          "source_mode": "increased",
+          "target_stat": "attack_speed",
+          "reference_base": 1.7,
+          "scale": 0.325,
+          "adaptation": "fixed_reference_flat_projection"
+        }
+      ],
+      "source": "GGG official passive export 3.29.1",
+      "adaptation": "numeric_calibration_for_rift_trial_not_poe_equivalence"
+    },
+    "grove_vitality": {
+      "name": "苍林生机",
+      "stats": {
+        "max_health": 3.9
+      },
+      "source_refs": [
+        {
+          "modifier_id": "poe1_8c5fd209fc9d841c",
+          "source_node": {
+            "kind": "node",
+            "id": "52282",
+            "stat_index": 0
+          },
+          "family": "life_increased",
+          "source_value": 5.0,
+          "source_mode": "increased",
+          "target_stat": "max_health",
+          "reference_base": 120,
+          "scale": 0.65,
+          "adaptation": "fixed_reference_flat_projection"
+        }
+      ],
+      "source": "GGG official passive export 3.29.1",
+      "adaptation": "numeric_calibration_for_rift_trial_not_poe_equivalence"
+    },
+    "grove_guard": {
+      "name": "苍林守护",
+      "stats": {
+        "max_health": 2.34,
+        "max_shield": 1.17
+      },
+      "source_refs": [
+        {
+          "modifier_id": "poe1_c1d8799891748888",
+          "source_node": {
+            "kind": "node",
+            "id": "6359",
+            "stat_index": 1
+          },
+          "family": "life_increased",
+          "source_value": 3.0,
+          "source_mode": "increased",
+          "target_stat": "max_health",
+          "reference_base": 120,
+          "scale": 0.65,
+          "adaptation": "fixed_reference_flat_projection"
+        },
+        {
+          "modifier_id": "poe1_5d8e1731ffcec19b",
+          "source_node": {
+            "kind": "node",
+            "id": "23659",
+            "stat_index": 0
+          },
+          "family": "shield_increased",
+          "source_value": 6.0,
+          "source_mode": "increased",
+          "target_stat": "max_shield",
+          "reference_base": 60,
+          "scale": 0.325,
+          "adaptation": "fixed_reference_flat_projection"
+        }
+      ],
+      "source": "GGG official passive export 3.29.1",
+      "adaptation": "numeric_calibration_for_rift_trial_not_poe_equivalence"
+    },
+    "grove_mastery": {
+      "name": "苍林专精",
+      "stats": {
+        "max_health": 9.75,
+        "max_shield": 3.12
+      },
+      "source_refs": [
+        {
+          "modifier_id": "poe1_01c8d6eafe041f15",
+          "source_node": {
+            "kind": "node",
+            "id": "36949",
+            "stat_index": 0
+          },
+          "family": "life_increased",
+          "source_value": 10.0,
+          "source_mode": "increased",
+          "target_stat": "max_health",
+          "reference_base": 120,
+          "scale": 0.8125000000000001,
+          "adaptation": "fixed_reference_flat_projection"
+        },
+        {
+          "modifier_id": "poe1_d5be919aa2bce850",
+          "source_node": {
+            "kind": "node",
+            "id": "58218",
+            "stat_index": 0
+          },
+          "family": "shield_increased",
+          "source_value": 8.0,
+          "source_mode": "increased",
+          "target_stat": "max_shield",
+          "reference_base": 60,
+          "scale": 0.65,
+          "adaptation": "fixed_reference_flat_projection"
+        }
+      ],
+      "source": "GGG official passive export 3.29.1",
+      "adaptation": "numeric_calibration_for_rift_trial_not_poe_equivalence"
+    },
+    "tide_capacity": {
+      "name": "星潮储能",
+      "stats": {
+        "max_mana": 3.64
+      },
+      "source_refs": [
+        {
+          "modifier_id": "poe1_4b763f6609b4fce0",
+          "source_node": {
+            "kind": "node",
+            "id": "29994",
+            "stat_index": 0
+          },
+          "family": "mana_increased",
+          "source_value": 8.0,
+          "source_mode": "increased",
+          "target_stat": "max_mana",
+          "reference_base": 100,
+          "scale": 0.455,
+          "adaptation": "fixed_reference_flat_projection"
+        }
+      ],
+      "source": "GGG official passive export 3.29.1",
+      "adaptation": "numeric_calibration_for_rift_trial_not_poe_equivalence"
+    },
+    "tide_flow": {
+      "name": "星潮流转",
+      "stats": {
+        "max_mana": 1.82,
+        "mana_regen": 0.2925
+      },
+      "source_refs": [
+        {
+          "modifier_id": "poe1_4b763f6609b4fce0",
+          "source_node": {
+            "kind": "node",
+            "id": "29994",
+            "stat_index": 0
+          },
+          "family": "mana_increased",
+          "source_value": 8.0,
+          "source_mode": "increased",
+          "target_stat": "max_mana",
+          "reference_base": 100,
+          "scale": 0.2275,
+          "adaptation": "fixed_reference_flat_projection"
+        },
+        {
+          "modifier_id": "poe1_3340d36ea93536fc",
+          "source_node": {
+            "kind": "node",
+            "id": "28076",
+            "stat_index": 1
+          },
+          "family": "mana_regeneration_increased",
+          "source_value": 10.0,
+          "source_mode": "increased",
+          "target_stat": "mana_regen",
+          "reference_base": 9,
+          "scale": 0.325,
+          "adaptation": "fixed_reference_flat_projection"
+        }
+      ],
+      "source": "GGG official passive export 3.29.1",
+      "adaptation": "numeric_calibration_for_rift_trial_not_poe_equivalence"
+    },
+    "tide_mastery": {
+      "name": "星潮专精",
+      "stats": {
+        "max_mana": 9.75,
+        "mana_regen": 0.8775
+      },
+      "source_refs": [
+        {
+          "modifier_id": "poe1_0394318a10ed1ad6",
+          "source_node": {
+            "kind": "node",
+            "id": "24362",
+            "stat_index": 0
+          },
+          "family": "mana_increased",
+          "source_value": 20.0,
+          "source_mode": "increased",
+          "target_stat": "max_mana",
+          "reference_base": 100,
+          "scale": 0.4875,
+          "adaptation": "fixed_reference_flat_projection"
+        },
+        {
+          "modifier_id": "poe1_cd10875c74f599f0",
+          "source_node": {
+            "kind": "node",
+            "id": "9432",
+            "stat_index": 1
+          },
+          "family": "mana_regeneration_increased",
+          "source_value": 30.0,
+          "source_mode": "increased",
+          "target_stat": "mana_regen",
+          "reference_base": 9,
+          "scale": 0.325,
+          "adaptation": "fixed_reference_flat_projection"
+        }
+      ],
+      "source": "GGG official passive export 3.29.1",
+      "adaptation": "numeric_calibration_for_rift_trial_not_poe_equivalence"
+    },
+    "gale_alacrity": {
+      "name": "流岚迅捷",
+      "stats": {
+        "attack_speed": 0.0221,
+        "move_speed": 0.78
+      },
+      "source_refs": [
+        {
+          "modifier_id": "poe1_202eac88455511f1",
+          "source_node": {
+            "kind": "node",
+            "id": "58449",
+            "stat_index": 0
+          },
+          "family": "attack_speed_increased",
+          "source_value": 4.0,
+          "source_mode": "increased",
+          "target_stat": "attack_speed",
+          "reference_base": 1.7,
+          "scale": 0.325,
+          "adaptation": "fixed_reference_flat_projection"
+        },
+        {
+          "modifier_id": "poe1_14381c0643407d0a",
+          "source_node": {
+            "kind": "node",
+            "id": "35179",
+            "stat_index": 0
+          },
+          "family": "movement_speed_increased",
+          "source_value": 3.0,
+          "source_mode": "increased",
+          "target_stat": "move_speed",
+          "reference_base": 240,
+          "scale": 0.10833333333333334,
+          "adaptation": "fixed_reference_flat_projection"
+        }
+      ],
+      "source": "GGG official passive export 3.29.1",
+      "adaptation": "numeric_calibration_for_rift_trial_not_poe_equivalence"
+    },
+    "gale_stride": {
+      "name": "流岚疾行",
+      "stats": {
+        "move_speed": 3.12
+      },
+      "source_refs": [
+        {
+          "modifier_id": "poe1_161f3ffcb2023156",
+          "source_node": {
+            "kind": "node",
+            "id": "63417",
+            "stat_index": 1
+          },
+          "family": "movement_speed_increased",
+          "source_value": 4.0,
+          "source_mode": "increased",
+          "target_stat": "move_speed",
+          "reference_base": 240,
+          "scale": 0.325,
+          "adaptation": "fixed_reference_flat_projection"
+        }
+      ],
+      "source": "GGG official passive export 3.29.1",
+      "adaptation": "numeric_calibration_for_rift_trial_not_poe_equivalence"
+    },
+    "gale_mastery": {
+      "name": "流岚专精",
+      "stats": {
+        "attack_speed": 0.0663,
+        "move_speed": 6.24
+      },
+      "source_refs": [
+        {
+          "modifier_id": "poe1_538a08a2e1e75035",
+          "source_node": {
+            "kind": "node",
+            "id": "63422",
+            "stat_index": 0
+          },
+          "family": "attack_speed_increased",
+          "source_value": 12.0,
+          "source_mode": "increased",
+          "target_stat": "attack_speed",
+          "reference_base": 1.7,
+          "scale": 0.325,
+          "adaptation": "fixed_reference_flat_projection"
+        },
+        {
+          "modifier_id": "poe1_161f3ffcb2023156",
+          "source_node": {
+            "kind": "node",
+            "id": "63417",
+            "stat_index": 1
+          },
+          "family": "movement_speed_increased",
+          "source_value": 4.0,
+          "source_mode": "increased",
+          "target_stat": "move_speed",
+          "reference_base": 240,
+          "scale": 0.65,
+          "adaptation": "fixed_reference_flat_projection"
+        }
+      ],
+      "source": "GGG official passive export 3.29.1",
+      "adaptation": "numeric_calibration_for_rift_trial_not_poe_equivalence"
+    },
+    "aegis_capacity": {
+      "name": "辉壁储盾",
+      "stats": {
+        "max_shield": 3.12
+      },
+      "source_refs": [
+        {
+          "modifier_id": "poe1_d5be919aa2bce850",
+          "source_node": {
+            "kind": "node",
+            "id": "58218",
+            "stat_index": 0
+          },
+          "family": "shield_increased",
+          "source_value": 8.0,
+          "source_mode": "increased",
+          "target_stat": "max_shield",
+          "reference_base": 60,
+          "scale": 0.65,
+          "adaptation": "fixed_reference_flat_projection"
+        }
+      ],
+      "source": "GGG official passive export 3.29.1",
+      "adaptation": "numeric_calibration_for_rift_trial_not_poe_equivalence"
+    },
+    "aegis_recovery": {
+      "name": "辉壁复苏",
+      "stats": {
+        "max_shield": 1.56,
+        "shield_regen": 0.4225
+      },
+      "source_refs": [
+        {
+          "modifier_id": "poe1_75f779b8b416cf12",
+          "source_node": {
+            "kind": "node",
+            "id": "21929",
+            "stat_index": 1
+          },
+          "family": "shield_increased",
+          "source_value": 4.0,
+          "source_mode": "increased",
+          "target_stat": "max_shield",
+          "reference_base": 60,
+          "scale": 0.65,
+          "adaptation": "fixed_reference_flat_projection"
+        },
+        {
+          "modifier_id": "poe1_46f2053ebaab6fa0",
+          "source_node": {
+            "kind": "node",
+            "id": "6949",
+            "stat_index": 1
+          },
+          "family": "shield_recharge_increased",
+          "source_value": 10.0,
+          "source_mode": "increased",
+          "target_stat": "shield_regen",
+          "reference_base": 13,
+          "scale": 0.325,
+          "adaptation": "fixed_reference_flat_projection"
+        }
+      ],
+      "source": "GGG official passive export 3.29.1",
+      "adaptation": "numeric_calibration_for_rift_trial_not_poe_equivalence"
+    },
+    "aegis_mastery": {
+      "name": "辉壁专精",
+      "stats": {
+        "max_shield": 7.8,
+        "shield_regen": 1.2675
+      },
+      "source_refs": [
+        {
+          "modifier_id": "poe1_2d9022355afbeed0",
+          "source_node": {
+            "kind": "node",
+            "id": "42795",
+            "stat_index": 0
+          },
+          "family": "shield_increased",
+          "source_value": 20.0,
+          "source_mode": "increased",
+          "target_stat": "max_shield",
+          "reference_base": 60,
+          "scale": 0.65,
+          "adaptation": "fixed_reference_flat_projection"
+        },
+        {
+          "modifier_id": "poe1_8886785e5170b1b5",
+          "source_node": {
+            "kind": "node",
+            "id": "23690",
+            "stat_index": 1
+          },
+          "family": "shield_recharge_increased",
+          "source_value": 30.0,
+          "source_mode": "increased",
+          "target_stat": "shield_regen",
+          "reference_base": 13,
+          "scale": 0.325,
+          "adaptation": "fixed_reference_flat_projection"
+        }
+      ],
+      "source": "GGG official passive export 3.29.1",
+      "adaptation": "numeric_calibration_for_rift_trial_not_poe_equivalence"
+    },
+    "prism_vigor": {
+      "name": "棱光活力",
+      "stats": {
+        "damage": 0.234,
+        "max_health": 1.95
+      },
+      "source_refs": [
+        {
+          "modifier_id": "poe1_c1ab4af9afd1ffdf",
+          "source_node": {
+            "kind": "node",
+            "id": "13219",
+            "stat_index": 0
+          },
+          "family": "global_damage_increased",
+          "source_value": 10.0,
+          "source_mode": "increased",
+          "target_stat": "damage",
+          "reference_base": 18,
+          "scale": 0.13,
+          "adaptation": "fixed_reference_flat_projection"
+        },
+        {
+          "modifier_id": "poe1_8c5fd209fc9d841c",
+          "source_node": {
+            "kind": "node",
+            "id": "52282",
+            "stat_index": 0
+          },
+          "family": "life_increased",
+          "source_value": 5.0,
+          "source_mode": "increased",
+          "target_stat": "max_health",
+          "reference_base": 120,
+          "scale": 0.325,
+          "adaptation": "fixed_reference_flat_projection"
+        }
+      ],
+      "source": "GGG official passive export 3.29.1",
+      "adaptation": "numeric_calibration_for_rift_trial_not_poe_equivalence"
+    },
+    "prism_reserve": {
+      "name": "棱光储能",
+      "stats": {
+        "max_mana": 1.82,
+        "max_shield": 1.56
+      },
+      "source_refs": [
+        {
+          "modifier_id": "poe1_4b763f6609b4fce0",
+          "source_node": {
+            "kind": "node",
+            "id": "29994",
+            "stat_index": 0
+          },
+          "family": "mana_increased",
+          "source_value": 8.0,
+          "source_mode": "increased",
+          "target_stat": "max_mana",
+          "reference_base": 100,
+          "scale": 0.2275,
+          "adaptation": "fixed_reference_flat_projection"
+        },
+        {
+          "modifier_id": "poe1_75f779b8b416cf12",
+          "source_node": {
+            "kind": "node",
+            "id": "21929",
+            "stat_index": 1
+          },
+          "family": "shield_increased",
+          "source_value": 4.0,
+          "source_mode": "increased",
+          "target_stat": "max_shield",
+          "reference_base": 60,
+          "scale": 0.65,
+          "adaptation": "fixed_reference_flat_projection"
+        }
+      ],
+      "source": "GGG official passive export 3.29.1",
+      "adaptation": "numeric_calibration_for_rift_trial_not_poe_equivalence"
+    },
+    "prism_recovery": {
+      "name": "棱光复苏",
+      "stats": {
+        "mana_regen": 0.1755,
+        "shield_regen": 0.2535
+      },
+      "source_refs": [
+        {
+          "modifier_id": "poe1_3340d36ea93536fc",
+          "source_node": {
+            "kind": "node",
+            "id": "28076",
+            "stat_index": 1
+          },
+          "family": "mana_regeneration_increased",
+          "source_value": 10.0,
+          "source_mode": "increased",
+          "target_stat": "mana_regen",
+          "reference_base": 9,
+          "scale": 0.19500000000000003,
+          "adaptation": "fixed_reference_flat_projection"
+        },
+        {
+          "modifier_id": "poe1_46f2053ebaab6fa0",
+          "source_node": {
+            "kind": "node",
+            "id": "6949",
+            "stat_index": 1
+          },
+          "family": "shield_recharge_increased",
+          "source_value": 10.0,
+          "source_mode": "increased",
+          "target_stat": "shield_regen",
+          "reference_base": 13,
+          "scale": 0.19500000000000003,
+          "adaptation": "fixed_reference_flat_projection"
+        }
+      ],
+      "source": "GGG official passive export 3.29.1",
+      "adaptation": "numeric_calibration_for_rift_trial_not_poe_equivalence"
+    },
+    "prism_mastery": {
+      "name": "棱光专精",
+      "stats": {
+        "damage": 0.702,
+        "max_health": 4.875,
+        "max_mana": 3.64,
+        "max_shield": 3.12
+      },
+      "source_refs": [
+        {
+          "modifier_id": "poe1_38c5f8cf0304e12d",
+          "source_node": {
+            "kind": "node",
+            "id": "35894",
+            "stat_index": 0
+          },
+          "family": "global_damage_increased",
+          "source_value": 20.0,
+          "source_mode": "increased",
+          "target_stat": "damage",
+          "reference_base": 18,
+          "scale": 0.19500000000000003,
+          "adaptation": "fixed_reference_flat_projection"
+        },
+        {
+          "modifier_id": "poe1_8c5fd209fc9d841c",
+          "source_node": {
+            "kind": "node",
+            "id": "52282",
+            "stat_index": 0
+          },
+          "family": "life_increased",
+          "source_value": 5.0,
+          "source_mode": "increased",
+          "target_stat": "max_health",
+          "reference_base": 120,
+          "scale": 0.8125000000000001,
+          "adaptation": "fixed_reference_flat_projection"
+        },
+        {
+          "modifier_id": "poe1_4b763f6609b4fce0",
+          "source_node": {
+            "kind": "node",
+            "id": "29994",
+            "stat_index": 0
+          },
+          "family": "mana_increased",
+          "source_value": 8.0,
+          "source_mode": "increased",
+          "target_stat": "max_mana",
+          "reference_base": 100,
+          "scale": 0.455,
+          "adaptation": "fixed_reference_flat_projection"
+        },
+        {
+          "modifier_id": "poe1_d5be919aa2bce850",
+          "source_node": {
+            "kind": "node",
+            "id": "58218",
+            "stat_index": 0
+          },
+          "family": "shield_increased",
+          "source_value": 8.0,
+          "source_mode": "increased",
+          "target_stat": "max_shield",
+          "reference_base": 60,
+          "scale": 0.65,
+          "adaptation": "fixed_reference_flat_projection"
+        }
+      ],
+      "source": "GGG official passive export 3.29.1",
+      "adaptation": "numeric_calibration_for_rift_trial_not_poe_equivalence"
+    },
+    "poe_global_damage": {
+      "name": "通用增幅",
+      "stats": {
+        "global_increased": 0.03
+      },
+      "source_refs": [
+        {
+          "modifier_id": "poe1_c1ab4af9afd1ffdf",
+          "source_node": {
+            "kind": "node",
+            "id": "13219",
+            "stat_index": 0
+          },
+          "family": "global_damage_increased",
+          "source_value": 10.0,
+          "source_mode": "increased",
+          "target_stat": "global_increased",
+          "reference_base": null,
+          "scale": 0.30000000000000004,
+          "adaptation": "native_additive_increased"
+        }
+      ],
+      "source": "GGG official passive export 3.29.1",
+      "adaptation": "numeric_calibration_for_rift_trial_not_poe_equivalence"
+    },
+    "poe_projectile_damage": {
+      "name": "箭矢增幅",
+      "stats": {
+        "projectile_increased": 0.05
+      },
+      "source_refs": [
+        {
+          "modifier_id": "poe1_7647de31110fdc6a",
+          "source_node": {
+            "kind": "node",
+            "id": "62103",
+            "stat_index": 0
+          },
+          "family": "projectile_damage_increased",
+          "source_value": 10.0,
+          "source_mode": "increased",
+          "target_stat": "projectile_increased",
+          "reference_base": null,
+          "scale": 0.5,
+          "adaptation": "native_additive_increased"
+        }
+      ],
+      "source": "GGG official passive export 3.29.1",
+      "adaptation": "numeric_calibration_for_rift_trial_not_poe_equivalence"
+    },
+    "poe_elemental_damage": {
+      "name": "元素增幅",
+      "stats": {
+        "elemental_increased": 0.05
+      },
+      "source_refs": [
+        {
+          "modifier_id": "poe1_ce715a15381f2cdf",
+          "source_node": {
+            "kind": "node",
+            "id": "43193",
+            "stat_index": 0
+          },
+          "family": "elemental_damage_increased",
+          "source_value": 10.0,
+          "source_mode": "increased",
+          "target_stat": "elemental_increased",
+          "reference_base": null,
+          "scale": 0.5,
+          "adaptation": "native_additive_increased"
+        }
+      ],
+      "source": "GGG official passive export 3.29.1",
+      "adaptation": "numeric_calibration_for_rift_trial_not_poe_equivalence"
+    },
+    "poe_area_damage": {
+      "name": "范围伤害增幅",
+      "stats": {
+        "area_increased": 0.05
+      },
+      "source_refs": [
+        {
+          "modifier_id": "poe1_55115c21ff2ea32e",
+          "source_node": {
+            "kind": "node",
+            "id": "59728",
+            "stat_index": 0
+          },
+          "family": "area_damage_increased",
+          "source_value": 10.0,
+          "source_mode": "increased",
+          "target_stat": "area_increased",
+          "reference_base": null,
+          "scale": 0.5,
+          "adaptation": "native_additive_increased"
+        }
+      ],
+      "source": "GGG official passive export 3.29.1",
+      "adaptation": "numeric_calibration_for_rift_trial_not_poe_equivalence"
+    }
+  },
+  "node_overrides": {
+    "ember_3_1": "poe_global_damage",
+    "ember_5_5": "poe_global_damage",
+    "prism_4_0": "poe_global_damage",
+    "ember_4_4": "poe_projectile_damage",
+    "ember_6_7": "poe_projectile_damage",
+    "gale_5_4": "poe_projectile_damage",
+    "ember_5_7": "poe_elemental_damage",
+    "prism_3_3": "poe_elemental_damage",
+    "tide_5_5": "poe_elemental_damage",
+    "ember_6_8": "poe_area_damage",
+    "prism_5_4": "poe_area_damage",
+    "aegis_6_3": "poe_area_damage"
+  },
+  "player_passive_caps": {
+    "damage": 14.4,
+    "max_health": 144,
+    "max_mana": 120,
+    "max_shield": 96,
+    "attack_speed": 0.85,
+    "move_speed": 72,
+    "mana_regen": 6.75,
+    "shield_regen": 9.75,
+    "global_increased": 0.24,
+    "projectile_increased": 0.36,
+    "elemental_increased": 0.36,
+    "area_increased": 0.36
+  },
+  "monster_policy": {
+    "max_bundle_instances": 2,
+    "role_coefficient": 1.0,
+    "coefficient_semantics": "all fields scaled equally; no separate monster copy",
+    "player_only_fields": [
+      "max_mana",
+      "mana_regen",
+      "global_increased",
+      "projectile_increased",
+      "elemental_increased",
+      "area_increased"
+    ],
+    "reject_entire_unsupported_bundle": true
+  },
+  "combat_constraints": {
+    "grants_extra_projectiles": false,
+    "grants_more_multipliers": false,
+    "grants_cooldown_scaling": false,
+    "grants_crit_or_ailments": false,
+    "damage_increased_adds_per_component": true,
+    "projectile_bonus_never_applies_to_explosion": true
+  },
+  "budget_policy": {
+    "point_cost_per_node": 1,
+    "node_ids_and_edges_unchanged": true,
+    "only_passive_contributions_capped": true,
+    "cap_explanation": "同类天赋贡献相加后封顶；装备和珠宝单独结算。护盾恢复仍须停伤4秒；更多、投射物数量、暴击、异常不从来源自动启用。"
+  },
+  "policy_version": "poe-passive-v1",
+  "calibration_note": "Initial 12-point path sample exceeded DPS envelope (2.197x); flat projection budget reduced to 65% of initial proposal, native global=3% and scoped=5% per selected small node. Values in source_refs are final scales."
+}
