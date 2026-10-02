@@ -1,5 +1,7 @@
 # v0.5 原创随机装备目录
 
+> 这是保留不变的 v0.5 旧词池。v0.7 新增的独立符木法器与四类固定点数语义适配见 TYPED_AFFIXES.zh-CN.md；旧 BASES / AFFIXES / generate() 仍严格保持这里的内容与行为。
+
 ## 运行时与参考数据的边界
 
 运行时唯一目录为 `scripts/items/equipment_catalog.gd`。它包含 6 个原创底材、12 个原创词缀家族、每族 3 个原创阶级；不读取 `data/reference/poe_affixes/`，不导入 PoE 词缀名称、游戏文本、数值、装备底材或掉落权重，也不授予未实现的技能或机制。
