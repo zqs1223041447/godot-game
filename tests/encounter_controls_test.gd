@@ -49,6 +49,8 @@ func _run() -> void:
 	_test_metadata(ids)
 	await _test_layout(ids)
 	await _test_real_clicks(ids)
+	await _test_keyboard(ids)
+	await _test_context_updates(ids)
 	_expect(state._snapshot() == state_before, "Selection and confirmation leave build/reward state equal")
 	_expect(FileAccess.get_file_as_bytes("user://build_save.json") == save_before, "Selection and confirmation leave save bytes equal")
 	_expect(Catalog.metadata() == catalog_before, "UI never changes the definition source")
@@ -244,6 +246,7 @@ func _test_real_clicks(ids: Array[String]) -> void:
 	_expect(panel.get_selected_ids() == [ids[0]], "Actual viewport mouse click checks the selected option")
 	var count: int = events.size()
 	await _click(_confirm())
+	_expect(events.size() == count + 1 and events.back() == [ids[0]], "First actual mouse activation emits exactly one current request")
 	await _click(_confirm())
 	_expect(events.size() == count + 2 and events.back() == [ids[0]], "Two actual mouse clicks send two exact requests")
 	panel.set_context(ids, "运行中")
@@ -252,6 +255,74 @@ func _test_real_clicks(ids: Array[String]) -> void:
 	await _click(_confirm())
 	await _click(_option(ids[0]))
 	_expect(events.size() == count and panel.get_selected_ids() == ids, "Actual disabled mouse input is ignored")
+
+
+func _test_keyboard(ids: Array[String]) -> void:
+	panel.set_context([])
+	await _settle()
+	var count: int = events.size()
+	_option(ids[0]).grab_focus()
+	await _key(KEY_SPACE, true)
+	await _key(KEY_SPACE, true, true)
+	await _key(KEY_SPACE, false)
+	_expect(panel.get_selected_ids() == [ids[0]] and events.size() == count, "Keyboard option activation changes only the draft")
+	_confirm().grab_focus()
+	for keycode: int in [KEY_SPACE, KEY_ENTER]:
+		for activation: int in range(2):
+			count = events.size()
+			await _key(keycode, true)
+			await _key(keycode, true, true)
+			await _key(keycode, true, true)
+			await _key(keycode, false)
+			_expect(events.size() == count + 1 and events.back() == [ids[0]], "Each keyboard activation emits once despite key-repeat echoes")
+	panel.set_context(ids, "运行中")
+	count = events.size()
+	await _key(KEY_SPACE, true)
+	await _key(KEY_SPACE, false)
+	await _key(KEY_ENTER, true)
+	await _key(KEY_ENTER, false)
+	_expect(events.size() == count and panel.get_selected_ids() == ids, "Disabled keyboard confirmation cannot emit or change the draft")
+
+
+func _test_context_updates(ids: Array[String]) -> void:
+	for selection: Array in [[ids[1]], []]:
+		panel.set_context([ids[0]])
+		_confirm().grab_focus()
+		var count: int = events.size()
+		await _key(KEY_SPACE, true)
+		_expect(panel.set_context(selection), "Owner can replace context during an in-flight activation")
+		_expect(events.size() == count, "Context replacement emits no request")
+		for id: String in ids:
+			_expect(_option(id).button_pressed == selection.has(id), "Replacement removes stale checkbox state: " + id)
+		await _key(KEY_SPACE, false)
+		_expect(events.size() == count + 1 and events.back() == selection, "Activation release submits the latest context, including ordinary empty selection")
+		_expect(panel.get_selected_ids() == selection, "Activation never restores a stale draft")
+	panel.set_context([ids[0]])
+	_confirm().grab_focus()
+	var count: int = events.size()
+	await _key(KEY_SPACE, true)
+	panel.set_context(ids, "上层已经开始遭遇")
+	await _key(KEY_SPACE, false)
+	_expect(events.size() == count and panel.get_selected_ids() == ids, "Owner lock during activation blocks its release")
+	panel.set_context([ids[0]])
+	_confirm().grab_focus()
+	await _key(KEY_ENTER, true)
+	panel.set_context([ids[1], "unknown"])
+	await _key(KEY_ENTER, false)
+	_expect(events.size() == count and panel.get_selected_ids().is_empty(), "Invalid replacement during activation cannot submit stale IDs")
+	panel.set_context([])
+	await _click(_confirm())
+	_expect(events.size() == count + 1 and events.back().is_empty(), "Explicit recovery submits ordinary empty selection without stale IDs")
+
+
+func _key(keycode: int, pressed: bool, echo: bool = false) -> void:
+	var event := InputEventKey.new()
+	event.keycode = keycode
+	event.physical_keycode = keycode
+	event.pressed = pressed
+	event.echo = echo
+	root.push_input(event, true)
+	await process_frame
 
 
 func _click(button: Button) -> void:
