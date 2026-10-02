@@ -2,31 +2,24 @@
   "runtime_base_commit": "59f173c533ba3d9ff79fdcee7ac665a15d80a67c",
   "crafting_commit": "c2e711bdcccaefbbfdcc7bb9e8dd41db5010287f",
   "before": {
-    "mapped_codepoints": 874,
-    "required_codepoints": 871,
-    "required_han": 769,
-    "baseline_codepoints": 874,
+    "mapped_codepoints": 890,
+    "required_codepoints": 880,
+    "required_han": 778,
+    "baseline_codepoints": 890,
     "fallback_symbols": [
       8961,
       9672
     ],
     "missing": [
-      19971,
-      20018,
-      20102,
-      20135,
-      20801,
-      21010,
-      21153,
-      21495,
-      22909,
-      24211,
-      24577,
-      24688,
-      26009,
-      30410,
-      35746,
-      35768
+      20581,
+      21442,
+      23618,
+      35780,
+      36935,
+      36973,
+      38505,
+      38590,
+      38598
     ],
     "lost_baseline": [],
     "empty_han": [],
@@ -34,10 +27,10 @@
     "ok": false
   },
   "after": {
-    "mapped_codepoints": 890,
-    "required_codepoints": 871,
-    "required_han": 769,
-    "baseline_codepoints": 874,
+    "mapped_codepoints": 899,
+    "required_codepoints": 880,
+    "required_han": 778,
+    "baseline_codepoints": 890,
     "fallback_symbols": [
       8961,
       9672
@@ -52,40 +45,40 @@
   "supplemental_string_counts": {
     "scripts/ui/crafting_controls.gd": 10,
     "scripts/items/crafting_rules.gd": 13,
-    "scripts/items/crafting_transaction_planner.gd": 28
+    "scripts/items/crafting_transaction_planner.gd": 28,
+    "scripts/ui/encounter_controls.gd": 8,
+    "scripts/encounters/encounter_catalog.gd": 8
   },
-  "added_characters": "七串了产允划务号好库态恰料益订许",
-  "font_sha256": "8c522b1e7139e8a5768e5e88ea6a74dbd64ec7dbf31f1a83ca005840cb50aeac",
+  "added_characters": "健参层评遇遭险难集",
+  "font_sha256": "a76e5fa040e426c1b0ac6d81a0b601ef5f02eb338473a399ddbd95563756e0c1",
   "regeneration_byte_identical": true,
-  "regression_tests": 21,
+  "regression_tests": 23,
   "source_license_byte_identical": true,
   "godot": {
-    "capture_height": 676,
+    "capture_height": 840,
     "display_driver": "X11",
     "engine": "4.6.3-stable (official)",
     "fallback": false,
     "font_rids": 1,
-    "han_rasters": 1538,
-    "native_mappings": 1780,
+    "han_rasters": 3112,
+    "native_mappings": 3596,
     "rendered": true,
     "rendered_rows": [
-      "修订号已达上限，不能产生下一次事务。",
-      "工艺上下文必须恰好包含约定的七个字段。",
-      "材料仅允许非负整数类型的 calibration_shard 余额。",
-      "物品标识必须为非空字符串。",
-      "当前库存未持有此物品。",
-      "工艺规则返回了无效材料数量。",
-      "工艺规则的计划与报价不一致。",
-      "背包物品位置与所有权或穿戴状态不一致。",
-      "回收收益会使材料余额溢出。"
+      "参数风险 · 难度尚未评估",
+      "遭遇挑战",
+      "未集成 · 仅提交选择请求",
+      "选择无效，请由上层重新设置。",
+      "强健"
     ],
     "sizes": [
-      16,
-      19
+      12.0,
+      15.0,
+      16.0,
+      19.0
     ],
-    "supported_chars": 890,
-    "font_sha256": "8c522b1e7139e8a5768e5e88ea6a74dbd64ec7dbf31f1a83ca005840cb50aeac",
-    "png_sha256": "28f21e4fe668d7ac3311648684c949d4079488d61bf05494f1a131884a67fd48"
+    "supported_chars": 899,
+    "font_sha256": "a76e5fa040e426c1b0ac6d81a0b601ef5f02eb338473a399ddbd95563756e0c1",
+    "png_sha256": "a29a578678b13d55923800ba22251f086b32a86c703c6a19ffb8abac4a8069f7"
   },
   "source_scope": [
     "project.godot",
@@ -100,8 +93,14 @@
     "Static strings only; arbitrary future downloaded/user-generated text requires separate coverage inputs."
   ],
   "initial_integration_commit": "e570b2b4596c908d82968117b90570a0ea515ea3",
-  "baseline_font_sha256": "64e13b9670cb12fe906d1adf736df5aa6d90019aa2b9cdab49559ac75976cea2",
-  "font_baseline_commit": "405ebf71efbe602524381baea01353b382fd4d90",
+  "baseline_font_sha256": "8c522b1e7139e8a5768e5e88ea6a74dbd64ec7dbf31f1a83ca005840cb50aeac",
+  "font_baseline_commit": "0d8d19985ac8ca265059b78110d5bc2ef88a953b",
   "planner_commit": "5d5bba0baeb680cf56e0244e7c0b53490e290757",
-  "planner_failure_reasons": 28
+  "planner_failure_reasons": 28,
+  "encounter_commit": "48b929b528b5879c779712ab82814c535993b9a1",
+  "encounter_display_sources": [
+    "scripts/ui/encounter_controls.gd",
+    "scripts/encounters/encounter_catalog.gd"
+  ],
+  "release_scope": "Future versions only; frozen v0.14 and 0d8d199 history are unchanged"
 }

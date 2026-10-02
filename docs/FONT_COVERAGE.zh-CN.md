@@ -14,9 +14,9 @@
 
 运行时文本基线为 v0.14 集成分支最终提交 `59f173c533ba3d9ff79fdcee7ac665a15d80a67c`，与初始集成提交 `e570b2b4596c908d82968117b90570a0ea515ea3` 的运行时字符串、字体字符映射、轮廓与度量一致。v0.14 原字体为 328,196 字节、860 个真实 Unicode 映射，包含 main v0.13 提交 `a4a306a6d8c14320fce383dccf6ad7ca40836757` 的全部 857 个映射字符；生成器的“请求字符数”不能代替 cmap 覆盖数。
 
-首轮修复提交 `405ebf71efbe602524381baea01353b382fd4d90` 已将覆盖扩展为 874 字符、332,756 字节。本次将这 **874 字符全部冻结为字体退化基线**，保留之前的 860 字符与首轮补入的 14 字；在原分支追加提交，不改写旧历史。
+首轮修复提交 `405ebf71efbe602524381baea01353b382fd4d90` 将覆盖扩展为 874 字符、332,756 字节；规划器补字提交 `0d8d19985ac8ca265059b78110d5bc2ef88a953b` 扩展为 890 字符、337,516 字节。本次将这 **890 字符全部冻结为字体退化基线**，在原分支追加提交，不改写旧历史。本轮遭遇控件增量仅用于后续版本，不修改已冻结的 v0.14 发布产物。
 
-制作控件输入来自只读提交 `c2e711bdcccaefbbfdcc7bb9e8dd41db5010287f` 的 `scripts/ui/crafting_controls.gd`、`scripts/items/crafting_rules.gd`，共 23 条含中文字符串。本次追加只读事务规划器提交 `5d5bba0baeb680cf56e0244e7c0b53490e290757` 的 `scripts/items/crafting_transaction_planner.gd`，共 **28 条中文失败原因**。清单保存全部 51 条字符串、行号与原 Git blob 的 SHA256；没有引入、执行或修改任何控件或规划器代码。
+制作控件输入来自只读提交 `c2e711bdcccaefbbfdcc7bb9e8dd41db5010287f` 的 `scripts/ui/crafting_controls.gd`、`scripts/items/crafting_rules.gd`，共 23 条含中文字符串；事务规划器输入来自只读提交 `5d5bba0baeb680cf56e0244e7c0b53490e290757` 的 `scripts/items/crafting_transaction_planner.gd`，共 **28 条中文失败原因**。本轮另读取 `48b929b528b5879c779712ab82814c535993b9a1` 的遭遇控件及其实际显示目录，新增 16 条含中文字符串。清单保存全部 **67 条字符串**、行号与原 Git blob 的 SHA256；没有引入、执行或修改任何控件、目录或规划器代码。
 
 这 28 条原因均传入 `_failure(code, reason)` 并返回在 `quote` / `plan` 的 `reason` 字段中；包含写保护、失效报价、所有权、上下文/材料输入及收益溢出拒绝。制作控件读取报价的 `reason`，因此这些是调用方可直接展示的文本，不是注释或测试说明。该规划器在本输入提交中尚未接入主游戏；本次不声称其全部拒绝条件已在当前 UI 实际触发。
 
@@ -47,9 +47,15 @@
 
 `串务库订产号了料划七恰好许允态益`
 
-完整并集现包含 **769 个中文字符、871 个可打印字符**。补字后 cmap 为 **890 个字符**，字体 **337,516 字节**。旧 874 字符全部保留；其轮廓、水平/垂直 advance、垂直原点和全局行高度量指纹保持一致。每个必需中文必须映射到非零、非 `.notdef`、具有绘制轮廓的字形。
+规划器补字后并集为 769 个中文字符、871 个可打印字符，cmap 为 890。当前遭遇控件的直接标签缺 `参层评遇遭险难集`，从 `EncounterCatalog` 读取的实际选项名“强健”另缺 `健`，因此本轮只新增 **9 字**：
 
-重建结果 SHA256：`8c522b1e7139e8a5768e5e88ea6a74dbd64ec7dbf31f1a83ca005840cb50aeac`。在 fontTools 4.61.1 下连续重建得到相同字节；生成器固定原有字体时间戳，避免重建时间改变产物。
+`健参层评遇遭险难集`
+
+控件的 `metadata.name`、`compiled.profile.definitions[].description` 和 `compiled.error` 分别进入选项文本、说明、状态/tooltip；`compile` 的选择错误来自 `Catalog.selection_error`。所以同时纳入该提交的 `scripts/ui/encounter_controls.gd` 与 `scripts/encounters/encounter_catalog.gd`，各 8 条含中文字符串。编译器中控件没有调用的 profile/怪物应用诊断（例如“典政策”）未纳入本轮补字，避免无关扩容。外部调用方传入的任意 `disabled_reason` 仍需提供其真实文本才能保证覆盖。
+
+完整并集现包含 **778 个中文字符、880 个可打印字符**。补字后 cmap 为 **899 个字符**，字体 **342,836 字节**。旧 890 字符全部保留；其轮廓、水平/垂直 advance、垂直原点和全局行高度量指纹保持一致。每个必需中文必须映射到非零、非 `.notdef`、具有绘制轮廓的字形。
+
+重建结果 SHA256：`a76e5fa040e426c1b0ac6d81a0b601ef5f02eb338473a399ddbd95563756e0c1`。在 fontTools 4.61.1 下连续重建得到相同字节；生成器固定原有字体时间戳，避免重建时间改变产物。
 
 ### 两个既有符号限制
 
@@ -74,6 +80,7 @@ python3 tests/test_font_coverage.py
 ```sh
 git fetch origin codex/crafting-controls-v013-desktop-fbrtnr7
 git fetch origin codex/crafting-transactions-v013
+git fetch origin codex/encounter-controls-20261002
 python3 tools/check_font_coverage.py --verify-supplemental
 python3 tools/check_font_coverage.py --strict-symbols
 ```
@@ -98,12 +105,12 @@ python3 tests/test_font_coverage.py --godot godot --render-dir /tmp/font-qa
 
 测试在临时工程中导入完全相同的字体二进制和 `.import` 设置，隔离 XDG 设置、缓存与存档。只启动字体探针，不启动游戏或制作模型。探针在自身字体实例关闭系统回退并清空 fallback 数组，逐字符验证唯一原生字体 RID 的 `font_has_char` 和非零 glyph index，并检查每个中文字符的 Godot 栅格范围和缓存纹理。
 
-已在 **Godot 4.6.3 official、Linux X11、16px 与 19px** 完成：890 × 2 = **1,780 次原生映射验证**，769 × 2 = **1,538 次中文栅格验证**。16px 为现有主题默认字号，19px 对应 120% 字体缩放的取整值；本次没有修改任何产品字号。实际 viewport 使用 `draw_string` 渲染原始规划器拒绝原因，选择的原因文本共同包含本次全部 16 个补字；不是把拒绝提示改成测试占位文案。保存并人工查看以下截图：
+本轮在 **Godot 4.6.3 official、Linux X11、12px / 15px / 16px / 19px** 验证：899 × 4 = **3,596 次原生映射验证**，778 × 4 = **3,112 次中文栅格验证**。12px 对应遭遇控件实际小标签，15px 对应选项；16px 为现有主题默认字号，19px 为 120% 字体缩放的取整值。本次没有修改任何产品字号。实际 viewport 使用 `draw_string` 渲染原始遭遇标签、无效选择提示与“强健”选项，所选文本共同包含全部 9 个补字；没有改写控件文案。既有截图路径继续保留，图中另加入 12px/15px 的小字号检查：
 
-![Godot 16px 和 19px 中文字体实际渲染，系统回退关闭](font-coverage/godot-text-16-19.png)
+![Godot 12、15、16、19px 遭遇控件文本实际渲染，系统回退关闭](font-coverage/godot-text-16-19.png)
 
 证据：[覆盖报告](font-coverage/coverage-report.json)、[Godot 结果及产物哈希](font-coverage/godot-probe.json)。API 依据：[FontFile](https://docs.godotengine.org/en/stable/classes/class_fontfile.html)、[TextServer](https://docs.godotengine.org/en/stable/classes/class_textserver.html)、[GDScript 字符串转义](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#literals)。
 
-21 项回归测试覆盖完整并集、51 条制作/规划器字符串、28 条完整规划器原因、六字之外的错误文本、旧 874 覆盖丢失、`.notdef`、空字形、字宽/行高变化、许可保留、未经验证的源拒绝、转义/JSON/CSV 和严格符号审计。`405ebf7` 的 874 字体运行新清单可复现 16 个中文缺字；补字后中文缺字/旧覆盖退化/空中文字形均为零。
+23 项回归测试覆盖完整并集、67 条冻结字符串、28 条完整规划器原因、遭遇控件实际动态选项名称、仅补 9 字、旧 890 覆盖丢失、`.notdef`、空字形、字宽/行高变化、许可保留、未经验证的源拒绝、转义/JSON/CSV 和严格符号审计。`0d8d199` 的 890 字体运行新清单可复现 9 个中文缺字；补字后中文缺字/旧覆盖退化/空中文字形均为零。
 
 Linux 原生字体探针与截图不等同于 Windows 导出包的整机验收；制作控件的 Windows 实际交互由主集成另行核验。

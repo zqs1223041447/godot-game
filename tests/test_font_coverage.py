@@ -107,9 +107,9 @@ class FontCoverageTests(unittest.TestCase):
         reasons = "".join(item["text"] for item in sources[0]["strings"])
         self.assertTrue(set("串务库订产号了料划七恰好许允态益") <= set(reasons))
         self.assertTrue(set(map(ord, reasons)) - {ord(" ")} <= set(self.locations))
-        self.assertEqual(len(set(self.manifest["baseline"]["characters"])), 874)
+        self.assertTrue(set(map(ord, "串务库订产号了料划七恰好许允态益")) <= set(self.locations))
 
-    def test_pre_planner_coverage_is_rejected(self):
+    def test_missing_planner_glyphs_are_rejected(self):
         missing = set(map(ord, "串务库订产号了料划七恰好许允态益"))
         for table in self.font["cmap"].tables:
             if table.isUnicode():
@@ -118,6 +118,29 @@ class FontCoverageTests(unittest.TestCase):
         report = self.report()
         self.assertFalse(report["ok"])
         self.assertEqual(set(report["missing"]), missing)
+        baseline = set(map(ord, self.manifest["baseline"]["characters"]))
+        self.assertEqual(set(report["lost_baseline"]), missing & baseline)
+
+    def test_encounter_ui_and_dynamic_option_names_are_covered(self):
+        paths = {"scripts/ui/encounter_controls.gd", "scripts/encounters/encounter_catalog.gd"}
+        sources = [s for s in self.manifest["supplemental_sources"] if s["path"] in paths]
+        self.assertEqual({s["path"] for s in sources}, paths)
+        self.assertTrue(all(s["commit"] == "48b929b528b5879c779712ab82814c535993b9a1" and len(s["strings"]) == 8 for s in sources))
+        texts = [item["text"] for s in sources for item in s["strings"]]
+        self.assertIn("强健", texts)
+        self.assertIn("参数风险 · 难度尚未评估", texts)
+        self.assertEqual(set(self.manifest["generation"]["added_since_baseline"]), set("参层评遇遭险难集健"))
+        self.assertEqual(len(set(self.manifest["baseline"]["characters"])), 890)
+
+    def test_pre_encounter_890_font_is_rejected(self):
+        missing = set(map(ord, "参层评遇遭险难集健"))
+        for table in self.font["cmap"].tables:
+            if table.isUnicode():
+                for cp in missing:
+                    table.cmap.pop(cp, None)
+        report = self.report()
+        self.assertEqual(set(report["missing"]), missing)
+        self.assertFalse(report["ok"])
         self.assertEqual(report["lost_baseline"], [])
 
     def test_existing_glyph_outlines_metrics_and_family(self):
@@ -204,10 +227,12 @@ extends SceneTree
 class TextCanvas extends Node2D:
     var font: FontFile
     var rows: Array
+    var sizes: Array
     func _draw() -> void:
         draw_rect(Rect2(Vector2.ZERO, get_viewport_rect().size), Color("f2e5c5"))
         var y: float = 32
-        for size: int in [16, 19]:
+        for raw_size: float in sizes:
+            var size: int = int(raw_size)
             draw_string(font, Vector2(24, y), "Arena Sans SC / %d px / fallback OFF" % size, HORIZONTAL_ALIGNMENT_LEFT, -1, size, Color("473828"))
             y += 32
             for text: String in rows:
@@ -231,7 +256,8 @@ func run() -> void:
         return
     var mappings: int = 0
     var rasters: int = 0
-    for size: int in [16, 19]:
+    for raw_size: float in input.sizes:
+        var size: int = int(raw_size)
         for raw_codepoint: float in input.codepoints:
             var codepoint: int = int(raw_codepoint)
             var glyph: int = ts.font_get_glyph_index(rids[0], size, codepoint, 0)
@@ -249,13 +275,14 @@ func run() -> void:
                 quit(1)
                 return
             rasters += 1
-    var result: Dictionary = {"engine": Engine.get_version_info().string, "native_mappings": mappings, "han_rasters": rasters, "sizes": [16, 19], "font_rids": rids.size(), "supported_chars": font.get_supported_chars().length(), "fallback": false, "display_driver": DisplayServer.get_name(), "rendered": false}
+    var result: Dictionary = {"engine": Engine.get_version_info().string, "native_mappings": mappings, "han_rasters": rasters, "sizes": input.sizes, "font_rids": rids.size(), "supported_chars": font.get_supported_chars().length(), "fallback": false, "display_driver": DisplayServer.get_name(), "rendered": false}
     if not input.render_path.is_empty():
         root.size = Vector2i(1100, int(input.capture_height))
         root.content_scale_size = root.size
         var canvas := TextCanvas.new()
         canvas.font = font
         canvas.rows = input.rows
+        canvas.sizes = input.sizes
         root.add_child(canvas)
         for index: int in range(10):
             await process_frame
@@ -291,18 +318,18 @@ def godot_probe(godot: str, render_dir: Path | None) -> dict:
         "此稀有度尚未定义工艺成本。",
         "底材或词缀资格无效。",
     ]
-    planner_sources = [source for source in manifest["supplemental_sources"] if source["path"] == "scripts/items/crafting_transaction_planner.gd"]
-    if planner_sources:
-        # Render original failure.reason strings that collectively contain every
-        # newly added Han glyph, rather than a synthetic replacement UI message.
-        texts = [item["text"] for item in planner_sources[0]["strings"]]
+    probe = manifest.get("render_probe", {"source_paths": ["scripts/items/crafting_transaction_planner.gd"], "sizes": [16, 19]})
+    render_sources = [source for source in manifest["supplemental_sources"] if source["path"] in probe["source_paths"]]
+    if render_sources:
+        # Use original display strings that collectively contain every new Han.
+        texts = [item["text"] for source in render_sources for item in source["strings"]]
         remaining = {chr(cp) for cp in locations if coverage.is_han(cp)} - set(manifest["baseline"]["characters"])
         rows = []
         while remaining:
             text = max(texts, key=lambda candidate: len(set(candidate) & remaining))
             hits = set(text) & remaining
             if not hits:
-                raise ValueError("Planner rendering corpus does not cover new Han glyphs")
+                raise ValueError("Display-string rendering corpus does not cover new Han glyphs")
             rows.append(text)
             remaining -= hits
     if render_dir:
@@ -318,7 +345,8 @@ def godot_probe(godot: str, render_dir: Path | None) -> dict:
         (project / "probe.gd").write_text(GODOT_PROBE)
         (project / "probe.json").write_text(json.dumps({
             "codepoints": sorted(codepoints), "han": sorted(cp for cp in locations if coverage.is_han(cp)),
-            "rows": rows, "capture_height": 32 + 2 * (52 + 30 * len(rows)),
+            "rows": rows, "sizes": probe["sizes"],
+            "capture_height": 32 + len(probe["sizes"]) * (52 + 30 * len(rows)),
             "render_path": str(render_dir / "godot-text-16-19.png") if render_dir else "",
         }, ensure_ascii=False))
         environment = dict(os.environ)
