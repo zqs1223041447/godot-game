@@ -54,6 +54,10 @@ run_check --script res://tests/passive_balance_test.gd
 run_check --script res://tests/monster_system_test.gd
 run_check --script res://tests/monster_integration_test.gd
 run_check --script res://tests/combat_pipeline_test.gd
+run_check --script res://tests/spatial_collision_test.gd
+run_check --script res://tests/projectile_schedule_test.gd
+run_check --script res://tests/density_integration_test.gd
+run_check --script res://tests/world_view_test.gd
 run_check --script res://tests/combat_integration_test.gd
 run_check --script res://tests/smoke_test.gd
 run_check --script res://tests/visual_settings_test.gd
@@ -63,4 +67,4 @@ run_check --script res://tests/fantasy_actor_test.gd
 run_check --script res://tests/equipment_art_test.gd
 run_check --script res://tests/material_frame_test.gd
 run_check --quit-after 300
-echo "Validation passed: import, original equipment rolls/loot, schema6 compatibility/protected saves, typed hit bases and previews, compiled supports/cast/UI, fantasy artwork/materials and bounded visual cues, build/save model, passive/jewel/balance invariants, shared mechanisms, monster lifecycle/scene, projectile/damage pipeline, combat/UI integration, and 300-frame startup."
+echo "Validation passed: import, original equipment rolls/loot, schema6 compatibility/protected saves, typed hit bases and previews, compiled supports/cast/UI, wide native camera/100 real enemies/spatial-reference equivalence, fantasy artwork/materials and bounded visual cues, build/save model, passive/jewel/balance invariants, shared mechanisms, monster lifecycle/scene, projectile/damage pipeline, combat/UI integration, and 300-frame startup."

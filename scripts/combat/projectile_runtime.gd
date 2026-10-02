@@ -4,11 +4,25 @@ extends RefCounted
 ## Each segment is clipped at a semantic boundary; hits are sorted by time of impact.
 const Recipes = preload("res://scripts/combat/combat_data.gd")
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
+const TargetIndex = preload("res://scripts/combat/spatial_target_index.gd")
 const EPS: float = 0.000001
 const MAX_GENERATION: int = 1
 var next_projectile_id: int = 1
 var next_cast_id: int = 1
 var _sequence: int = 0
+# Reference switch for differential tests/profiling; not a player-facing setting.
+var use_spatial_index: bool = true
+var use_cached_work_order: bool = true
+var last_work_sorts: int = 0
+var last_work_sort_skips: int = 0
+var last_work_order_checks: int = 0
+var last_candidate_visits: int = 0
+var last_full_scan_visits: int = 0
+var last_contact_queries: int = 0
+var last_indexed_queries: int = 0
+var _target_index = TargetIndex.new()
+var _in_advance: bool = false
+var _index_active: bool = false
 
 
 func new_cast() -> int:
@@ -63,20 +77,44 @@ func spawn_tornado(shots: Array[Dictionary], origin: Vector2, heading: Vector2,
 func advance(shots: Array[Dictionary], delta: float, targets: Array[Dictionary],
 		owner_center: Vector2, max_projectiles: int) -> Array[Dictionary]:
 	var events: Array[Dictionary] = []
+	last_work_sorts = 0
+	last_work_sort_skips = 0
+	last_work_order_checks = 0
+	last_candidate_visits = 0
+	last_full_scan_visits = 0
+	last_contact_queries = 0
+	last_indexed_queries = 0
+	_in_advance = false
+	_index_active = false
 	if delta <= 0.0 or not is_finite(delta):
 		return events
+	_in_advance = true
+	_index_active = use_spatial_index
+	if _index_active:
+		_target_index.rebuild(targets)
 	var work: Array[Dictionary] = []
 	for shot: Dictionary in shots:
 		work.append(_schedule(shot, delta, 0.0, targets))
 	var active_count: int = shots.size()
+	var work_dirty: bool = true
+	var work_order_safe: bool = false
 	while not work.is_empty():
-		# Global chronological boundaries make budget admission independent of array order.
-		work.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
-			if not is_equal_approx(float(a.at), float(b.at)):
-				return float(a.at) < float(b.at)
-			if int(a.priority) != int(b.priority):
-				return int(a.priority) < int(b.priority)
-			return int(a.shot.id) < int(b.shot.id))
+		# Keep the historical comparator and every-pop fallback. Only a proven
+		# strict order survives pops unchanged; every append invalidates the proof.
+		if not use_cached_work_order or work_dirty or not work_order_safe:
+			work.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
+				if not is_equal_approx(float(a.at), float(b.at)):
+					return float(a.at) < float(b.at)
+				if int(a.priority) != int(b.priority):
+					return int(a.priority) < int(b.priority)
+				return int(a.shot.id) < int(b.shot.id))
+			last_work_sorts += 1
+			if use_cached_work_order and work_dirty:
+				last_work_order_checks += 1
+				work_order_safe = _work_order_is_strict(work)
+		else:
+			last_work_sort_skips += 1
+		work_dirty = false
 		var job: Dictionary = work.pop_front()
 		var shot: Dictionary = job.shot
 		var travel: float = float(job.travel)
@@ -134,6 +172,7 @@ func advance(shots: Array[Dictionary], delta: float, targets: Array[Dictionary],
 						shots.append(child)
 						if remaining > EPS:
 							work.append(_schedule(child, remaining, offset, targets))
+							work_dirty = true
 						active_count += 1
 						_event(events, "spawned", child, offset)
 			elif _effect(shot, "return_on_range", "range_reached"):
@@ -150,6 +189,7 @@ func advance(shots: Array[Dictionary], delta: float, targets: Array[Dictionary],
 			active_count -= 1
 		elif remaining > EPS:
 			work.append(_schedule(shot, remaining, offset, targets))
+			work_dirty = true
 	var survivors: Array[Dictionary] = []
 	for shot: Dictionary in shots:
 		if bool(shot.active):
@@ -159,7 +199,31 @@ func advance(shots: Array[Dictionary], delta: float, targets: Array[Dictionary],
 		if not is_equal_approx(float(a.time), float(b.time)):
 			return float(a.time) < float(b.time)
 		return int(a.sequence) < int(b.sequence))
+	_in_advance = false
+	_index_active = false
 	return events
+
+
+static func _work_order_is_strict(work: Array[Dictionary]) -> bool:
+	# is_equal_approx is not transitive. Distinct near-equal times could reorder
+	# under repeated sorts, so do not cache any batch containing that ambiguity.
+	# Exact equal times are safe: priority then unique shot ID is a strict key.
+	var ids: Dictionary = {}
+	var times: Array[float] = []
+	for job: Dictionary in work:
+		var at: float = float(job.at)
+		var id: int = int(job.shot.id)
+		if not is_finite(at) or ids.has(id):
+			return false
+		ids[id] = true
+		times.append(at)
+	times.sort()
+	for index: int in range(1, times.size()):
+		var previous: float = times[index - 1]
+		var current: float = times[index]
+		if previous != current and (is_equal_approx(previous, current) or is_equal_approx(current, previous)):
+			return false
+	return true
 
 
 func _schedule(shot: Dictionary, remaining: float, offset: float, targets: Array[Dictionary]) -> Dictionary:
@@ -237,7 +301,18 @@ func _finish(shot: Dictionary, reason: String, events: Array[Dictionary], time: 
 
 func _contacts(shot: Dictionary, start: Vector2, end: Vector2, targets: Array[Dictionary]) -> Array[Dictionary]:
 	var result: Array[Dictionary] = []
-	for target: Dictionary in targets:
+	var candidates: Array[int] = []
+	if _index_active:
+		candidates = _target_index.query_sweep(start, end, float(shot.radius))
+	else:
+		candidates.assign(range(targets.size()))
+	if _in_advance:
+		last_contact_queries += 1
+		last_indexed_queries += 1 if _index_active else 0
+		last_candidate_visits += candidates.size()
+		last_full_scan_visits += targets.size()
+	for target_index: int in candidates:
+		var target: Dictionary = targets[target_index]
 		var id: int = int(target.id)
 		if float(target.get("health", 1.0)) <= 0.0 or float(target.get("spawn", 0.0)) > 0.0 or shot.hit_ledger.has("%s:%d" % [shot.state, id]):
 			continue

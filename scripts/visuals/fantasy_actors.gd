@@ -159,7 +159,7 @@ static func _draw_player_ward(arena: CanvasItem, ratio: float, invulnerable: boo
 			var filled: bool = ratio >= (i + 0.5) / 4.0
 			arena.draw_line(Vector2(-6 + i * 4, 21), Vector2(-5 + i * 4, 23), Color("cbd0b1") if filled else Color("615e49"), 1.7, true)
 
-static func draw_enemy(arena: Node2D, enemy: Dictionary, preferences: VisualSettings) -> void:
+static func draw_enemy(arena: Node2D, enemy: Dictionary, preferences: VisualSettings, draw_marks: bool = true) -> void:
 	var p: Vector2 = enemy.pos
 	var r: float = float(enemy.radius)
 	var rarity: String = str(enemy.get("rarity", "normal"))
@@ -179,7 +179,8 @@ static func draw_enemy(arena: Node2D, enemy: Dictionary, preferences: VisualSett
 		2:
 			_draw_brute(arena, r, gait, hurt, boss)
 	arena.draw_set_transform(Vector2.ZERO)
-	_draw_enemy_marks(arena, enemy, preferences, tier, r, p)
+	if draw_marks:
+		_draw_enemy_marks(arena, enemy, preferences, tier, r, p)
 
 static func _draw_scavenger(arena: CanvasItem, r: float, gait: float, hurt: bool) -> void:
 	var hide := Color("a48a58").lerp(Color("e5c59b"), 0.4 if hurt else 0.0)

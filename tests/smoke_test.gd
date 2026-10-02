@@ -56,13 +56,13 @@ func _run_checks() -> void:
 	arena.tick(0.1)
 	Input.action_release("move_right")
 	_expect(arena.player_pos.x > original.x, "Movement uses build move speed")
-	arena.player_pos = Vector2(1236, 565)
+	arena.player_pos = arena.ARENA.end - Vector2.ONE
 	Input.action_press("move_right")
 	Input.action_press("move_down")
 	arena.tick(1.0)
 	Input.action_release("move_right")
 	Input.action_release("move_down")
-	_expect(arena.player_pos.x <= 1223.0 and arena.player_pos.y <= 551.0, "Arena boundaries clamp player")
+	_expect(arena.player_pos.x <= arena.ARENA.end.x - arena.PLAYER_RADIUS and arena.player_pos.y <= arena.ARENA.end.y - arena.PLAYER_RADIUS, "Arena boundaries clamp player")
 	arena.player_pos = Vector2(640, 335)
 	var enemy: Dictionary = arena._spawn_enemy(Vector2(840, 335), 0)
 	enemy.spawn = 0.0

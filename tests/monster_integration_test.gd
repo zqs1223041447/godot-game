@@ -27,7 +27,7 @@ func _run() -> void:
 	_case(_test_aoe_deferred, "AoE queue deferral and birth protection")
 	_case(_test_explosion_deferred, "projectile explosion keeps deferred children outside target iteration")
 	_case(_test_live_defenses, "live shield absorb, regeneration and attack speed")
-	_case(_test_capacity, "55-live cap, queue priority and FIFO")
+	_case(_test_capacity, "100-live cap, queue priority and FIFO")
 	_case(_test_player_death_reset, "death cancellation and clean restart")
 	_case(_test_panel_demo, "F7 pause, no-reward demo and standard restoration")
 	print("Monster integration: %d checks, %d failures" % [checks, failures])
@@ -211,22 +211,22 @@ func _test_capacity() -> void:
 	for index: int in range(arena.MAX_ENEMIES - 1):
 		_enemy("crawler", Vector2(150 + index, 250))
 	var splitter: Dictionary = _enemy("splitter")
-	_expect(arena.enemies.size() == 55 and arena._spawn_monster("crawler").is_empty(), "Scene enforces hard 55-live admission cap")
+	_expect(arena.enemies.size() == arena.MAX_ENEMIES and arena._spawn_monster("crawler").is_empty(), "Scene enforces hard 100-live admission cap")
 	_kill(splitter)
 	_expect(arena.monster_runtime.queue.size() == 3, "Full arena still reserves whole death group")
 	arena.spawn_timer = 0.0
 	arena._update_spawning(1.0)
-	_expect(arena.enemies.size() == 55 and arena.monster_runtime.queue.size() == 2, "First vacancy admits one queued child and keeps remainder")
+	_expect(arena.enemies.size() == arena.MAX_ENEMIES and arena.monster_runtime.queue.size() == 2, "First vacancy admits one queued child and keeps remainder")
 	var first_child: Dictionary = arena.enemies.back()
 	_expect(first_child.parent_id == splitter.id and first_child.template_id == "crawler", "Pending child takes priority over ordinary spawn")
 	for expected: String in ["crawler", "skitter"]:
 		_kill(arena.enemies[0])
 		arena._update_spawning(1.0)
-		_expect(arena.enemies.size() == 55 and arena.enemies.back().template_id == expected and arena.enemies.back().parent_id == splitter.id, "Later live vacancy respects exact death FIFO order: " + expected)
+		_expect(arena.enemies.size() == arena.MAX_ENEMIES and arena.enemies.back().template_id == expected and arena.enemies.back().parent_id == splitter.id, "Later live vacancy respects exact death FIFO order: " + expected)
 	_expect(arena.monster_runtime.queue.is_empty(), "Pending group finishes as slots free without overshooting cap")
 	for index: int in range(120):
 		arena._update_spawning(100.0)
-	_expect(arena.enemies.size() == 55, "Repeated large spawning deltas cannot exceed scene cap")
+	_expect(arena.enemies.size() == arena.MAX_ENEMIES, "Repeated large spawning deltas cannot exceed scene cap")
 	_suite_finished = true
 
 

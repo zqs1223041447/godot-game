@@ -7,6 +7,8 @@ const CueRenderer = preload("res://scripts/visuals/combat_cue_renderer.gd")
 const EnvironmentArt = preload("res://scripts/visuals/fantasy_environment.gd")
 const Palette = preload("res://scripts/visuals/fantasy_palette.gd")
 const ActorArt = preload("res://scripts/visuals/fantasy_actors.gd")
+const View = preload("res://scripts/visuals/world_view.gd")
+const Markers = preload("res://scripts/visuals/world_markers.gd")
 
 static func polygon(canvas: CanvasItem, points: Array, color: Color) -> void:
 	canvas.draw_colored_polygon(PackedVector2Array(points), color)
@@ -42,11 +44,14 @@ static func draw_scene(arena: Node2D, preferences: Settings) -> void:
 	# Stable ordering makes feet/shadows read as grounded figures.
 	var ordered: Array = arena.enemies.duplicate()
 	ordered.sort_custom(func(a: Dictionary,b: Dictionary) -> bool: return a.pos.y < b.pos.y)
+	var names:Dictionary=Markers.name_ids(arena,ordered,preferences)
 	for enemy: Dictionary in ordered:
-		draw_enemy(arena,enemy,preferences)
+		ActorArt.draw_enemy(arena,enemy,preferences,false)
 	for shot: Dictionary in arena.projectiles:
 		draw_projectile(arena,shot,preferences)
 	draw_player(arena,preferences)
+	for enemy:Dictionary in ordered:
+		Markers.draw_enemy(arena,enemy,preferences,names.has(int(enemy.id)))
 	if cue_runtime != null:
 		CueRenderer.render(arena,cue_runtime.cues,preferences.effects_level,false)
 	if preferences.effects_level > 0:
@@ -65,11 +70,15 @@ static func draw_scene(arena: Node2D, preferences: Settings) -> void:
 			var color: Color = entry.color
 			color.a = minf(1,float(entry.life)*2)
 			var p: Vector2 = entry.pos
+			var zoom:float=View.zoom_for(arena)
+			arena.draw_set_transform(p,0,Vector2.ONE/zoom)
+			p=Vector2(0,-6*(1-zoom))
 			var font_size: int = roundi(17*preferences.font_scale)
 			var width: float = arena._font.get_string_size(str(entry.text),HORIZONTAL_ALIGNMENT_LEFT,-1,font_size).x
 			p.x -= width*0.5
 			arena.draw_string_outline(arena._font,p,str(entry.text),HORIZONTAL_ALIGNMENT_LEFT,-1,font_size,4,Color(0.02,0.03,0.03,color.a))
 			arena.draw_string(arena._font,p,str(entry.text),HORIZONTAL_ALIGNMENT_LEFT,-1,font_size,color)
+			arena.draw_set_transform(Vector2.ZERO)
 
 static func draw_arena(arena: Node2D) -> void:
 	EnvironmentArt.draw(arena)

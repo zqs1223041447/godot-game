@@ -448,7 +448,7 @@ func _update_live() -> void:
 		return
 	var stats: Dictionary = _arena.call("get_stats") as Dictionary
 	var seconds: int = int(float(_arena.get("elapsed")))
-	_wave_label.text = "第 %d 波   ·   击败 %d" % [int(_arena.get("wave")), int(_arena.get("kills"))]
+	_wave_label.text = "第 %d 波 · 击败 %d · 场上 %d" % [int(_arena.get("wave")), int(_arena.get("kills")), _arena.enemies.size()]
 	_run_label.text = "%02d:%02d   /   %s" % [seconds / 60, seconds % 60, "试验场 · 无奖励" if bool(_arena.get("demo_mode")) else ("战斗已暂停" if is_blocking() else "战斗进行中")]
 	_level_label.text = "Lv.%d  ·  经验 %d  ·  天赋点 %d" % [_state.level, _state.xp, _state.talent_points]
 	_set_vital("health", float(_arena.get("health")), float(stats.get("max_health", 100.0)))
@@ -752,7 +752,9 @@ func _build_monsters_panel() -> void:
 	controls.add_child(_button("进入 / 重置试验场", "StartMonsterDemo", _arena.start_monster_demo, 230))
 	controls.add_child(_button("演示 A → 2A + B", "TriggerMonsterSplit", _arena.trigger_demo_split, 230))
 	controls.add_child(_button("恢复常规挑战", "RestoreStandardRun", _arena.restore_standard_run, 200))
+	_panel_body.add_child(_button("100 怪视距试验", "StartDensityDemo", _arena.start_density_demo, 230))
 	_panel_body.add_child(_wrap_label("试验场没有经验、补给或珠宝奖励；会重开当前战斗，保留人物构筑。关闭面板后按原有方式战斗。", 14, GOLD))
+	_panel_body.add_child(_wrap_label("百怪试验生成 100 只真实怪物；常规挑战也使用 100 只上限与每批 2～5 只的渐进密度。视野面积扩大至原来的 2.37 倍，人物、怪物的真实碰撞与伤害不变。", 14))
 	_section("五类怪物", "黑色仅预留，不能生成")
 	var rarities := HBoxContainer.new()
 	_panel_body.add_child(rarities)
@@ -764,7 +766,7 @@ func _build_monsters_panel() -> void:
 	_panel_body.add_child(_wrap_label("常规刷怪只有白 / 蓝 / 金；每五波由关卡事件召唤橙色首领。蓝色 1 项、金色 2 项共享天赋机制。怪物能力在生成时锁定，后续版本改同一机制定义即可联动。", 14))
 	_section("生成规则", "队列 %d / 64 · 谱系 %d" % [runtime.queue.size(), runtime.roots.size()])
 	_panel_body.add_child(_wrap_label("裂殖巡游体 → 2 普通巡游体 + 1 掠行体；孵化重壳体 → 2 裂殖巡游体 → 6 普通小怪。子怪不继承母体机制，按显式目标模板生成；只有原始怪发奖励。", 14))
-	_panel_body.add_child(_wrap_label("模板图拒绝环；一次死亡只触发一次；每根最多 3 代 / 12 后代 / 每次 6 只。场上满 55 只时排队，队列或谱系预算不足则整组取消。", 14))
+	_panel_body.add_child(_wrap_label("模板图拒绝环；一次死亡只触发一次；每根最多 3 代 / 12 后代 / 每次 6 只。场上满 %d 只时排队，队列或谱系预算不足则整组取消。" % _arena.MAX_ENEMIES, 14))
 	_section("当前怪物机制快照", "形状表示物种，外环与名称表示稀有度")
 	var shown: int = 0
 	for enemy: Dictionary in _arena.get("enemies"):

@@ -1,7 +1,9 @@
 extends Node2D
 ## First playable slice. BuildState owns progression; this node owns a single run.
-## All combat positions use the 1280 × 720 logical canvas, independent of window size.
+## Combat uses world units; a native camera widens the view while HUD stays 1280 × 720.
 
+const View = preload("res://scripts/visuals/world_view.gd")
+const SpatialTargets = preload("res://scripts/combat/spatial_target_index.gd")
 const VisualCueRuntime = preload("res://scripts/visuals/combat_cues.gd")
 const Visuals = preload("res://scripts/visuals/arena_visuals.gd")
 const Presentation = preload("res://scripts/visuals/visual_settings.gd")
@@ -14,9 +16,9 @@ const Damage = preload("res://scripts/combat/damage_resolver.gd")
 const Projectiles = preload("res://scripts/combat/projectile_runtime.gd")
 const Monsters = preload("res://scripts/monsters/monster_catalog.gd")
 const MonsterLifecycle = preload("res://scripts/monsters/monster_runtime.gd")
-const ARENA := Rect2(42, 104, 1196, 462)
+const ARENA := View.WORLD_ARENA
 const PLAYER_RADIUS := 15.0
-const MAX_ENEMIES := 55
+const MAX_ENEMIES := 100
 const MAX_PROJECTILES := 180
 const MAX_PARTICLES := 180
 
@@ -25,6 +27,11 @@ var visual_settings = Presentation.new()
 var monster_runtime = MonsterLifecycle.new()
 var reward_kills: int = 0
 var demo_mode: bool = false
+var density_demo: bool = false
+var use_spatial_separation: bool = true
+var enemy_spatial = SpatialTargets.new()
+var separation_candidate_visits: int = 0
+var separation_full_scan_visits: int = 0
 var boss_wave_pending: int = 0
 var state = Build.new()
 var projectile_runtime = Projectiles.new()
@@ -73,6 +80,7 @@ func _ready() -> void:
 	state.load_build()
 	_stats = state.get_stats()
 	state.changed.connect(_on_build_changed)
+	View.setup_camera(self, ARENA)
 	hud = Hud.new()
 	hud.name = "GameHUD"
 	add_child(hud)
@@ -140,6 +148,7 @@ func restart_run() -> void:
 	kills = 0
 	reward_kills = 0
 	demo_mode = false
+	density_demo = false
 	boss_wave_pending = 0
 	monster_runtime.reset()
 	elapsed = 0.0
@@ -293,7 +302,7 @@ func _update_spawning(delta: float) -> void:
 	spawn_timer -= delta
 	if spawn_timer <= 0.0:
 		spawn_timer = maxf(0.42, 1.45 - wave * 0.07)
-		var count: int = mini(3, 1 + int(wave / 4))
+		var count: int = mini(5, 2 + int(wave / 4))
 		for i: int in range(count):
 			if enemies.size() < MAX_ENEMIES:
 				_spawn_enemy()
@@ -316,10 +325,10 @@ func _spawn_monster(template_id: String, forced_position: Vector2 = Vector2.ZERO
 	if pos == Vector2.ZERO:
 		var side: int = rng.randi_range(0, 3)
 		match side:
-			0: pos = Vector2(ARENA.position.x + 24, rng.randf_range(140, 526))
-			1: pos = Vector2(ARENA.end.x - 24, rng.randf_range(140, 526))
-			2: pos = Vector2(rng.randf_range(85, 1195), ARENA.position.y + 22)
-			3: pos = Vector2(rng.randf_range(85, 1195), ARENA.end.y - 22)
+			0: pos = Vector2(ARENA.position.x + 24, rng.randf_range(ARENA.position.y + 36.0, ARENA.end.y - 40.0))
+			1: pos = Vector2(ARENA.end.x - 24, rng.randf_range(ARENA.position.y + 36.0, ARENA.end.y - 40.0))
+			2: pos = Vector2(rng.randf_range(ARENA.position.x + 43.0, ARENA.end.x - 43.0), ARENA.position.y + 22)
+			3: pos = Vector2(rng.randf_range(ARENA.position.x + 43.0, ARENA.end.x - 43.0), ARENA.end.y - 22)
 		if pos.distance_to(player_pos) < 230.0:
 			pos = ARENA.get_center() * 2.0 - pos
 	var enemy: Dictionary = monster_runtime.create_root(template_id, wave, pos, context, rarity, mechanisms, rewards and not demo_mode)
@@ -349,7 +358,7 @@ func start_monster_demo() -> void:
 	demo_mode = true
 	auto_fire = false
 	spawn_timer = 99999.0
-	player_pos = Vector2(640, 420)
+	player_pos = View.from_reference(Vector2(640, 420))
 	var examples: Array[Dictionary] = [
 		{"id": "crawler", "pos": Vector2(180, 245), "rarity": "normal", "mechanisms": []},
 		{"id": "skitter", "pos": Vector2(410, 245), "rarity": "magic", "mechanisms": ["gale_stride"]},
@@ -358,14 +367,49 @@ func start_monster_demo() -> void:
 		{"id": "brood_host", "pos": Vector2(1080, 430), "rarity": "", "mechanisms": []},
 	]
 	for example: Dictionary in examples:
-		_spawn_monster(example.id, example.pos, "demo", example.rarity, example.mechanisms, false)
-	_spawn_monster("rift_warden", Vector2(190, 440), "map_boss", "", [], false)
+		_spawn_monster(example.id, View.from_reference(example.pos), "demo", example.rarity, example.mechanisms, false)
+	_spawn_monster("rift_warden", View.from_reference(Vector2(190, 440)), "map_boss", "", [], false)
 	hud.open_panel("monsters")
 	hud.notify("试验场已就绪，全部怪物无成长奖励。关闭面板可战斗；也可点击演示分裂")
 
 
+func start_density_demo() -> void:
+	# Real catalog monsters, AI, collision and damage. Only progression rewards are disabled.
+	restart_run()
+	enemies.clear()
+	monster_runtime.reset()
+	demo_mode = true
+	density_demo = true
+	auto_fire = false
+	spawn_timer = 99999.0
+	player_pos = ARENA.get_center()
+	var inner: Rect2 = ARENA.grow(-60.0)
+	for index: int in range(MAX_ENEMIES):
+		var column: int = index % 10
+		var row: int = int(index / 10)
+		var pos: Vector2 = inner.position + Vector2((column + 0.5) / 10.0, (row + 0.5) / 10.0) * inner.size
+		var template: String = ["crawler", "skitter", "brute"][index % 3]
+		var rarity: String = "normal"
+		var mechanisms: Array = []
+		if index % 20 == 0:
+			rarity = "rare"
+			mechanisms = ["ember_power", "aegis_capacity"]
+		elif index % 10 == 0:
+			rarity = "magic"
+			mechanisms = ["gale_stride"]
+		var enemy: Dictionary
+		if index == MAX_ENEMIES - 1:
+			enemy = _spawn_monster("rift_warden", pos, "map_boss", "", [], false)
+		else:
+			enemy = _spawn_monster(template, pos, "demo", rarity, mechanisms, false)
+		if not enemy.is_empty():
+			enemy.spawn = 0.0
+	hud.open_panel("monsters")
+	hud.notify("百怪试验：100 只真实怪物，关闭面板后移动、攻击与受击均正常；无成长奖励")
+
+
 func trigger_demo_split() -> void:
-	if not demo_mode:
+	if not demo_mode or density_demo:
 		start_monster_demo()
 	var target: Dictionary = {}
 	for enemy: Dictionary in enemies:
@@ -373,7 +417,7 @@ func trigger_demo_split() -> void:
 			target = enemy
 			break
 	if target.is_empty():
-		target = _spawn_monster("splitter", Vector2(910, 280), "demo", "", [], false)
+		target = _spawn_monster("splitter", View.from_reference(Vector2(910, 280)), "demo", "", [], false)
 	if not target.is_empty():
 		_damage_enemy(target, float(target.health) + float(target.shield) + 1.0, Color("6cafff"))
 		_flush_monster_spawns()
@@ -388,7 +432,12 @@ func restore_standard_run() -> void:
 
 
 func _update_enemies(delta: float) -> void:
-	for enemy: Dictionary in enemies:
+	separation_candidate_visits = 0
+	separation_full_scan_visits = 0
+	if use_spatial_separation:
+		enemy_spatial.rebuild(enemies)
+	for enemy_index: int in range(enemies.size()):
+		var enemy: Dictionary = enemies[enemy_index]
 		if float(enemy.health) <= 0.0:
 			continue
 		var shield_recovery_time: float = maxf(0.0, delta - float(enemy.get("damage_delay", 0.0)))
@@ -404,7 +453,11 @@ func _update_enemies(delta: float) -> void:
 		var direction: Vector2 = (player_pos - Vector2(enemy.pos)).normalized()
 		var speed: float = float(enemy.speed) * (0.36 if float(enemy.slow) > 0 else 1.0)
 		var separation := Vector2.ZERO
-		for other: Dictionary in enemies:
+		var candidates: Array = enemy_spatial.query_circle(enemy.pos, float(enemy.radius) + 3.0) if use_spatial_separation else range(enemies.size())
+		separation_candidate_visits += candidates.size()
+		separation_full_scan_visits += enemies.size()
+		for other_index: int in candidates:
+			var other: Dictionary = enemies[other_index]
 			if int(other.id) == int(enemy.id):
 				continue
 			var offset: Vector2 = Vector2(enemy.pos) - Vector2(other.pos)
@@ -414,6 +467,8 @@ func _update_enemies(delta: float) -> void:
 				separation += offset / distance * (separation_distance - distance) * 2.5
 		enemy.pos = Vector2(enemy.pos) + (direction * speed + separation + Vector2(enemy.knockback)) * delta
 		enemy.pos = _clamp_to_arena(Vector2(enemy.pos), float(enemy.radius))
+		if use_spatial_separation:
+			enemy_spatial.update(enemy_index)
 		enemy.knockback = Vector2(enemy.knockback).move_toward(Vector2.ZERO, 520.0 * delta)
 		if Vector2(enemy.pos).distance_to(player_pos) < PLAYER_RADIUS + float(enemy.radius) + 1.0:
 			if float(enemy.attack_timer) <= 0.0:
