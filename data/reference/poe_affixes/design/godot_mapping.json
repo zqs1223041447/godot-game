@@ -1,1 +1,561 @@
-{}
+{
+  "schema_version": 1,
+  "kind": "original_design_proposal_not_runtime_data",
+  "basis_game_version": "v0.3.0",
+  "source_reference": "../source_manifest.json",
+  "balance_status": "No source magnitude is approved as game balance. No runtime affix import or crafting system implemented.",
+  "entries": [
+    {
+      "id": "maximum_life",
+      "source_stat_ids": [
+        "base_maximum_life"
+      ],
+      "semantic_stage": "character_aggregate",
+      "proposed_target": "max_health",
+      "unit_transform": "raw points",
+      "status_against_game_v030": "direct_value_analogue",
+      "notes_zh": "可参考生命上限加值；PoE的具体数值不是本游戏平衡结论。",
+      "required_event_tags": [],
+      "damage_types": []
+    },
+    {
+      "id": "maximum_mana",
+      "source_stat_ids": [
+        "base_maximum_mana"
+      ],
+      "semantic_stage": "character_aggregate",
+      "proposed_target": "max_mana",
+      "unit_transform": "raw points",
+      "status_against_game_v030": "direct_value_analogue",
+      "notes_zh": "可参考魔力上限加值；需确认技能耗蓝和回复经济。",
+      "required_event_tags": [],
+      "damage_types": []
+    },
+    {
+      "id": "flat_global_energy_shield",
+      "source_stat_ids": [
+        "base_maximum_energy_shield"
+      ],
+      "semantic_stage": "character_aggregate",
+      "proposed_target": "max_shield",
+      "unit_transform": "raw points",
+      "status_against_game_v030": "analogue_only",
+      "notes_zh": "现有护盾有自己的恢复逻辑，不等同于完整PoE能量护盾。",
+      "required_event_tags": [],
+      "damage_types": []
+    },
+    {
+      "id": "local_weapon_physical_increased",
+      "source_stat_ids": [
+        "local_physical_damage_+%"
+      ],
+      "semantic_stage": "item_local_before_skill_base",
+      "proposed_target": "weapon_local.physical_increased",
+      "unit_transform": "raw / 100",
+      "status_against_game_v030": "not_implemented",
+      "notes_zh": "只提升这把武器的基础物理伤害；不能塞进 global_increased；纯物理和物理+命中复合词缀会在本地叠加。",
+      "required_event_tags": [],
+      "damage_types": [
+        "physical"
+      ]
+    },
+    {
+      "id": "local_weapon_flat_physical",
+      "source_stat_ids": [
+        "local_minimum_added_physical_damage",
+        "local_maximum_added_physical_damage"
+      ],
+      "semantic_stage": "item_local_before_skill_base",
+      "proposed_target": "weapon_local.added_physical",
+      "unit_transform": "raw damage endpoints; each endpoint has its own roll range",
+      "status_against_game_v030": "not_implemented",
+      "notes_zh": "先掷装备词缀的min/max端点，再由命中掷伤害；不要把两个端点误作同一个词缀roll上下限。",
+      "required_event_tags": [],
+      "damage_types": [
+        "physical"
+      ]
+    },
+    {
+      "id": "attack_flat_physical",
+      "source_stat_ids": [
+        "attack_minimum_added_physical_damage",
+        "attack_maximum_added_physical_damage"
+      ],
+      "semantic_stage": "skill_base_before_effectiveness",
+      "proposed_target": "attack_added_physical",
+      "unit_transform": "raw damage endpoints",
+      "status_against_game_v030": "not_implemented",
+      "notes_zh": "仅攻击相关基础伤害；独立secondary爆炸没有attack标签时不继承；需先定义伤害效用。",
+      "required_event_tags": [
+        "attack"
+      ],
+      "damage_types": [
+        "physical"
+      ]
+    },
+    {
+      "id": "local_weapon_flat_fire",
+      "source_stat_ids": [
+        "local_minimum_added_fire_damage",
+        "local_maximum_added_fire_damage"
+      ],
+      "semantic_stage": "item_local_before_skill_base",
+      "proposed_target": "weapon_local.added_fire",
+      "unit_transform": "raw damage endpoints; each endpoint has its own roll range",
+      "status_against_game_v030": "not_implemented",
+      "notes_zh": "先掷装备词缀的min/max端点，再由命中掷伤害；不要把两个端点误作同一个词缀roll上下限。",
+      "required_event_tags": [],
+      "damage_types": [
+        "fire"
+      ]
+    },
+    {
+      "id": "attack_flat_fire",
+      "source_stat_ids": [
+        "attack_minimum_added_fire_damage",
+        "attack_maximum_added_fire_damage"
+      ],
+      "semantic_stage": "skill_base_before_effectiveness",
+      "proposed_target": "attack_added_fire",
+      "unit_transform": "raw damage endpoints",
+      "status_against_game_v030": "not_implemented",
+      "notes_zh": "仅攻击相关基础伤害；独立secondary爆炸没有attack标签时不继承；需先定义伤害效用。",
+      "required_event_tags": [
+        "attack"
+      ],
+      "damage_types": [
+        "fire"
+      ]
+    },
+    {
+      "id": "local_weapon_flat_cold",
+      "source_stat_ids": [
+        "local_minimum_added_cold_damage",
+        "local_maximum_added_cold_damage"
+      ],
+      "semantic_stage": "item_local_before_skill_base",
+      "proposed_target": "weapon_local.added_cold",
+      "unit_transform": "raw damage endpoints; each endpoint has its own roll range",
+      "status_against_game_v030": "not_implemented",
+      "notes_zh": "先掷装备词缀的min/max端点，再由命中掷伤害；不要把两个端点误作同一个词缀roll上下限。",
+      "required_event_tags": [],
+      "damage_types": [
+        "cold"
+      ]
+    },
+    {
+      "id": "attack_flat_cold",
+      "source_stat_ids": [
+        "attack_minimum_added_cold_damage",
+        "attack_maximum_added_cold_damage"
+      ],
+      "semantic_stage": "skill_base_before_effectiveness",
+      "proposed_target": "attack_added_cold",
+      "unit_transform": "raw damage endpoints",
+      "status_against_game_v030": "not_implemented",
+      "notes_zh": "仅攻击相关基础伤害；独立secondary爆炸没有attack标签时不继承；需先定义伤害效用。",
+      "required_event_tags": [
+        "attack"
+      ],
+      "damage_types": [
+        "cold"
+      ]
+    },
+    {
+      "id": "local_weapon_flat_lightning",
+      "source_stat_ids": [
+        "local_minimum_added_lightning_damage",
+        "local_maximum_added_lightning_damage"
+      ],
+      "semantic_stage": "item_local_before_skill_base",
+      "proposed_target": "weapon_local.added_lightning",
+      "unit_transform": "raw damage endpoints; each endpoint has its own roll range",
+      "status_against_game_v030": "not_implemented",
+      "notes_zh": "先掷装备词缀的min/max端点，再由命中掷伤害；不要把两个端点误作同一个词缀roll上下限。",
+      "required_event_tags": [],
+      "damage_types": [
+        "lightning"
+      ]
+    },
+    {
+      "id": "attack_flat_lightning",
+      "source_stat_ids": [
+        "attack_minimum_added_lightning_damage",
+        "attack_maximum_added_lightning_damage"
+      ],
+      "semantic_stage": "skill_base_before_effectiveness",
+      "proposed_target": "attack_added_lightning",
+      "unit_transform": "raw damage endpoints",
+      "status_against_game_v030": "not_implemented",
+      "notes_zh": "仅攻击相关基础伤害；独立secondary爆炸没有attack标签时不继承；需先定义伤害效用。",
+      "required_event_tags": [
+        "attack"
+      ],
+      "damage_types": [
+        "lightning"
+      ]
+    },
+    {
+      "id": "local_weapon_flat_chaos",
+      "source_stat_ids": [
+        "local_minimum_added_chaos_damage",
+        "local_maximum_added_chaos_damage"
+      ],
+      "semantic_stage": "item_local_before_skill_base",
+      "proposed_target": "weapon_local.added_chaos",
+      "unit_transform": "raw damage endpoints; each endpoint has its own roll range",
+      "status_against_game_v030": "not_implemented",
+      "notes_zh": "先掷装备词缀的min/max端点，再由命中掷伤害；不要把两个端点误作同一个词缀roll上下限。",
+      "required_event_tags": [],
+      "damage_types": [
+        "chaos"
+      ]
+    },
+    {
+      "id": "attack_flat_chaos",
+      "source_stat_ids": [
+        "attack_minimum_added_chaos_damage",
+        "attack_maximum_added_chaos_damage"
+      ],
+      "semantic_stage": "skill_base_before_effectiveness",
+      "proposed_target": "attack_added_chaos",
+      "unit_transform": "raw damage endpoints",
+      "status_against_game_v030": "not_implemented",
+      "notes_zh": "仅攻击相关基础伤害；独立secondary爆炸没有attack标签时不继承；需先定义伤害效用。",
+      "required_event_tags": [
+        "attack"
+      ],
+      "damage_types": [
+        "chaos"
+      ]
+    },
+    {
+      "id": "spell_flat_fire",
+      "source_stat_ids": [
+        "spell_minimum_added_fire_damage",
+        "spell_maximum_added_fire_damage"
+      ],
+      "semantic_stage": "skill_base_before_effectiveness",
+      "proposed_target": "spell_added_fire",
+      "unit_transform": "raw damage endpoints",
+      "status_against_game_v030": "not_implemented",
+      "notes_zh": "施法伤害加值，不能因技能会发射投射物就变成所有投射物的加值。",
+      "required_event_tags": [
+        "spell"
+      ],
+      "damage_types": [
+        "fire"
+      ]
+    },
+    {
+      "id": "fire_increased",
+      "source_stat_ids": [
+        "fire_damage_+%"
+      ],
+      "semantic_stage": "damage_component_increased",
+      "proposed_target": "typed_increased.fire",
+      "unit_transform": "raw / 100",
+      "status_against_game_v030": "resolver_supports_explicit_modifier_not_snapshot_field",
+      "notes_zh": "只匹配对应伤害分量；与同一分量适用的全局/攻击/投射物increased相加。",
+      "required_event_tags": [],
+      "damage_types": [
+        "fire"
+      ]
+    },
+    {
+      "id": "spell_flat_cold",
+      "source_stat_ids": [
+        "spell_minimum_added_cold_damage",
+        "spell_maximum_added_cold_damage"
+      ],
+      "semantic_stage": "skill_base_before_effectiveness",
+      "proposed_target": "spell_added_cold",
+      "unit_transform": "raw damage endpoints",
+      "status_against_game_v030": "not_implemented",
+      "notes_zh": "施法伤害加值，不能因技能会发射投射物就变成所有投射物的加值。",
+      "required_event_tags": [
+        "spell"
+      ],
+      "damage_types": [
+        "cold"
+      ]
+    },
+    {
+      "id": "cold_increased",
+      "source_stat_ids": [
+        "cold_damage_+%"
+      ],
+      "semantic_stage": "damage_component_increased",
+      "proposed_target": "typed_increased.cold",
+      "unit_transform": "raw / 100",
+      "status_against_game_v030": "resolver_supports_explicit_modifier_not_snapshot_field",
+      "notes_zh": "只匹配对应伤害分量；与同一分量适用的全局/攻击/投射物increased相加。",
+      "required_event_tags": [],
+      "damage_types": [
+        "cold"
+      ]
+    },
+    {
+      "id": "spell_flat_lightning",
+      "source_stat_ids": [
+        "spell_minimum_added_lightning_damage",
+        "spell_maximum_added_lightning_damage"
+      ],
+      "semantic_stage": "skill_base_before_effectiveness",
+      "proposed_target": "spell_added_lightning",
+      "unit_transform": "raw damage endpoints",
+      "status_against_game_v030": "not_implemented",
+      "notes_zh": "施法伤害加值，不能因技能会发射投射物就变成所有投射物的加值。",
+      "required_event_tags": [
+        "spell"
+      ],
+      "damage_types": [
+        "lightning"
+      ]
+    },
+    {
+      "id": "lightning_increased",
+      "source_stat_ids": [
+        "lightning_damage_+%"
+      ],
+      "semantic_stage": "damage_component_increased",
+      "proposed_target": "typed_increased.lightning",
+      "unit_transform": "raw / 100",
+      "status_against_game_v030": "resolver_supports_explicit_modifier_not_snapshot_field",
+      "notes_zh": "只匹配对应伤害分量；与同一分量适用的全局/攻击/投射物increased相加。",
+      "required_event_tags": [],
+      "damage_types": [
+        "lightning"
+      ]
+    },
+    {
+      "id": "attack_elemental_increased",
+      "source_stat_ids": [
+        "elemental_damage_with_attack_skills_+%"
+      ],
+      "semantic_stage": "damage_component_increased",
+      "proposed_target": "modifier: attack + elemental",
+      "unit_transform": "raw / 100",
+      "status_against_game_v030": "resolver_supports_explicit_modifier_not_snapshot_field",
+      "notes_zh": "不得直接映射 elemental_increased：源词缀多了attack限制。当前龙卷箭体匹配，独立secondary火爆炸不匹配。",
+      "required_event_tags": [
+        "attack"
+      ],
+      "damage_types": [
+        "fire",
+        "cold",
+        "lightning"
+      ]
+    },
+    {
+      "id": "spell_increased",
+      "source_stat_ids": [
+        "spell_damage_+%"
+      ],
+      "semantic_stage": "damage_component_increased",
+      "proposed_target": "modifier: spell",
+      "unit_transform": "raw / 100",
+      "status_against_game_v030": "resolver_supports_explicit_modifier_not_snapshot_field",
+      "notes_zh": "需要本次伤害是spell，装备在法杖上不意味着它是本地武器伤害。",
+      "required_event_tags": [
+        "spell"
+      ],
+      "damage_types": []
+    },
+    {
+      "id": "bow_skill_increased",
+      "source_stat_ids": [
+        "damage_+%_with_bow_skills"
+      ],
+      "semantic_stage": "damage_component_increased",
+      "proposed_target": "modifier: bow_skill",
+      "unit_transform": "raw / 100",
+      "status_against_game_v030": "needs_skill_origin_contract",
+      "notes_zh": "源文本限定弓技能；不能泛化为projectile_increased。",
+      "required_event_tags": [],
+      "damage_types": []
+    },
+    {
+      "id": "local_attack_speed",
+      "source_stat_ids": [
+        "local_attack_speed_+%"
+      ],
+      "semantic_stage": "item_local_attack_timing",
+      "proposed_target": "weapon_local.attack_speed_increased",
+      "unit_transform": "raw / 100",
+      "status_against_game_v030": "not_implemented",
+      "notes_zh": "现有attack_speed是每秒次数加值；百分比不能直接加到这个字段。",
+      "required_event_tags": [],
+      "damage_types": []
+    },
+    {
+      "id": "global_attack_speed",
+      "source_stat_ids": [
+        "attack_speed_+%"
+      ],
+      "semantic_stage": "character_attack_timing",
+      "proposed_target": "attack_speed_increased",
+      "unit_transform": "raw / 100",
+      "status_against_game_v030": "not_implemented",
+      "notes_zh": "先定义本地武器攻速与角色攻速两个阶段，再乘基础攻击频率。",
+      "required_event_tags": [],
+      "damage_types": []
+    },
+    {
+      "id": "cast_speed",
+      "source_stat_ids": [
+        "base_cast_speed_+%"
+      ],
+      "semantic_stage": "character_spell_timing",
+      "proposed_target": "cast_speed_increased",
+      "unit_transform": "raw / 100",
+      "status_against_game_v030": "not_implemented",
+      "notes_zh": "需要施法时间与冷却时间分离；不能误作通用cooldown recovery。",
+      "required_event_tags": [],
+      "damage_types": []
+    },
+    {
+      "id": "move_speed",
+      "source_stat_ids": [
+        "base_movement_velocity_+%"
+      ],
+      "semantic_stage": "character_movement",
+      "proposed_target": "move_speed_increased",
+      "unit_transform": "raw / 100",
+      "status_against_game_v030": "not_implemented",
+      "notes_zh": "现有move_speed是单位/秒；35%不能直接变成+35单位/秒。",
+      "required_event_tags": [],
+      "damage_types": []
+    },
+    {
+      "id": "projectile_speed",
+      "source_stat_ids": [
+        "base_projectile_speed_+%"
+      ],
+      "semantic_stage": "carrier_kinematics",
+      "proposed_target": "projectile_speed_increased",
+      "unit_transform": "raw / 100",
+      "status_against_game_v030": "not_implemented",
+      "notes_zh": "这是载体速度，不是伤害；必须明确固定寿命/固定距离策略，避免隐式多次命中。",
+      "required_event_tags": [],
+      "damage_types": []
+    },
+    {
+      "id": "additional_arrows",
+      "source_stat_ids": [
+        "number_of_additional_arrows"
+      ],
+      "semantic_stage": "cast_spawn_recipe",
+      "proposed_target": "bow_additional_arrows",
+      "unit_transform": "raw integer",
+      "status_against_game_v030": "analogue_only",
+      "notes_zh": "源是弓箭数量，不是全部技能投射物数量；如选用于本游戏，应只增加龙卷母弹，子弹仍各3枚并受预算。",
+      "required_event_tags": [],
+      "damage_types": []
+    },
+    {
+      "id": "life_regen",
+      "source_stat_ids": [
+        "base_life_regeneration_rate_per_minute"
+      ],
+      "semantic_stage": "character_recovery",
+      "proposed_target": "life_regen_per_second",
+      "unit_transform": "raw / 60",
+      "status_against_game_v030": "not_implemented",
+      "notes_zh": "源为每分钟定点值；不能按raw当每秒生命。",
+      "required_event_tags": [],
+      "damage_types": []
+    },
+    {
+      "id": "mana_regen_increased",
+      "source_stat_ids": [
+        "mana_regeneration_rate_+%"
+      ],
+      "semantic_stage": "character_recovery",
+      "proposed_target": "mana_regen_increased",
+      "unit_transform": "raw / 100",
+      "status_against_game_v030": "not_implemented",
+      "notes_zh": "现有mana_regen是每秒加值，源是increased比率，两者不同量纲。",
+      "required_event_tags": [],
+      "damage_types": []
+    },
+    {
+      "id": "physical_attack_life_leech",
+      "source_stat_ids": [
+        "life_leech_from_physical_attack_damage_permyriad"
+      ],
+      "semantic_stage": "post_damage_recovery",
+      "proposed_target": "life_leech_fraction",
+      "unit_transform": "raw / 10000",
+      "status_against_game_v030": "not_implemented",
+      "notes_zh": "例如raw20–40 = 0.2%–0.4%，不是20%–40%；还需吸取实例/上限规则。",
+      "required_event_tags": [
+        "attack"
+      ],
+      "damage_types": [
+        "physical"
+      ]
+    },
+    {
+      "id": "resistances",
+      "source_stat_ids": [
+        "base_fire_damage_resistance_%",
+        "base_cold_damage_resistance_%",
+        "base_lightning_damage_resistance_%",
+        "base_chaos_damage_resistance_%"
+      ],
+      "semantic_stage": "defender_mitigation",
+      "proposed_target": "resistance_by_type",
+      "unit_transform": "raw / 100",
+      "status_against_game_v030": "requires_character_defense_adapter",
+      "notes_zh": "不可混入伤害increased；源抗性与最大抗性上限是不同字段，现有-100%到90%夹取是本游戏规则。",
+      "required_event_tags": [],
+      "damage_types": []
+    },
+    {
+      "id": "local_armour_defences",
+      "source_stat_ids": [
+        "local_base_physical_damage_reduction_rating",
+        "local_base_evasion_rating",
+        "local_energy_shield",
+        "local_ward"
+      ],
+      "semantic_stage": "item_local_defence",
+      "proposed_target": "item_defence_base",
+      "unit_transform": "raw points",
+      "status_against_game_v030": "not_implemented",
+      "notes_zh": "先在每件装备本地合成，再聚合角色；护甲/闪避/护盾/结界不可合成一个无类型防御。",
+      "required_event_tags": [],
+      "damage_types": []
+    },
+    {
+      "id": "crit_and_dot",
+      "source_stat_ids": [
+        "critical_strike_chance_+%",
+        "local_critical_strike_chance_+%",
+        "base_critical_strike_multiplier_+",
+        "dot_multiplier_+"
+      ],
+      "semantic_stage": "special_combat_system",
+      "proposed_target": "separate crit/dot systems",
+      "unit_transform": "stat-specific, see source; no blanket transform",
+      "status_against_game_v030": "not_implemented",
+      "notes_zh": "暴击率提高、暴击倍率加值、DoT multiplier与more不能都按独立乘区相乘；后续要显式实现。",
+      "required_event_tags": [],
+      "damage_types": []
+    },
+    {
+      "id": "convocation_grant",
+      "source_stat_ids": [
+        "local_display_grants_skil_convocation_level"
+      ],
+      "semantic_stage": "effect_grant",
+      "proposed_target": "effect registry entry",
+      "unit_transform": "grants_effects is authoritative",
+      "status_against_game_v030": "not_implemented",
+      "notes_zh": "该词缀除了stat还有grants_effects，不能只读取stats；当前原型不应静默授予不存在的技能。",
+      "required_event_tags": [],
+      "damage_types": []
+    }
+  ]
+}
