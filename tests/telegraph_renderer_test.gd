@@ -16,12 +16,15 @@ var checks: int = 0
 var failures: int = 0
 var draw_callbacks: int = 0
 var draw_states: Array[Dictionary] = []
+var extreme_states: Array[Dictionary] = []
+var native_radius_cases: int = 0
 
 
 class DrawProbe extends Node2D:
 	var test: SceneTree
 	func _draw() -> void:
 		var before: Array[Dictionary] = test.draw_states.duplicate(true)
+		var extreme_before: Array[Dictionary] = test.extreme_states.duplicate(true)
 		seed(824131)
 		var expected: int = randi()
 		seed(824131)
@@ -29,11 +32,20 @@ class DrawProbe extends Node2D:
 			var preferences := Settings.new()
 			preferences.effects_level = level
 			Renderer.draw(self, test.draw_states, preferences)
+			Renderer.draw(self, test.extreme_states, preferences)
 		Renderer.draw(self, [])
 		Renderer.draw(self, null)
 		test._expect(randi() == expected, "Native drawing leaves global RNG unchanged")
 		test._expect(test.draw_states == before, "Native drawing leaves copied states unchanged")
+		test._expect(test.extreme_states == extreme_before, "Native drawing leaves extreme finite states unchanged")
 		test.draw_callbacks += 1
+
+
+class RadiusProbe extends Node2D:
+	var state: Dictionary = {}
+	var preferences := Settings.new()
+	func _draw() -> void:
+		Renderer.draw(self, [state], preferences)
 
 
 class CaptureArena extends Node2D:
@@ -86,11 +98,14 @@ func _initialize() -> void:
 
 func _run() -> void:
 	_test_runtime_clock_and_radius()
+	_test_runtime_phase_boundaries()
 	_test_display_settings()
 	_test_invalid_inputs()
+	_test_extreme_finite_inputs()
 	_test_capacity_and_layering()
 	_test_copy_and_rng()
 	await _test_draw_and_camera()
+	await _test_native_radius()
 	var args: PackedStringArray = OS.get_cmdline_user_args()
 	if args.has("--capture") and failures == 0:
 		var index: int = args.find("--capture")
@@ -98,7 +113,8 @@ func _run() -> void:
 			_expect(false, "--capture requires an evidence directory")
 		else:
 			await _capture(args[index + 1])
-	print("telegraph_renderer_test: %d checks, %d failures, %d draw callbacks" % [checks, failures, draw_callbacks])
+	print("telegraph_renderer_test: %d checks, %d failures, %d draw callbacks, %d native radius cases" %
+		[checks, failures, draw_callbacks, native_radius_cases])
 	quit(1 if failures > 0 else 0)
 
 
@@ -193,6 +209,36 @@ func _test_runtime_clock_and_radius() -> void:
 	_expect(Renderer.primitives([runtime.state_for(1)]).is_empty(), "Reset is reflected without a renderer cache")
 
 
+func _test_runtime_phase_boundaries() -> void:
+	_expect(Renderer.TIME_EPSILON == Runtime.TIME_EPSILON, "Renderer uses the actual runtime's clock tolerance")
+	for profile: Dictionary in [{"windup_seconds": 0.001, "recovery_seconds": 0.001},
+			{"windup_seconds": 0.25, "recovery_seconds": 0.375},
+			{"windup_seconds": 0.7, "recovery_seconds": 1.2},
+			{"windup_seconds": 60.0, "recovery_seconds": 60.0}]:
+		for offset: float in [-2.0, -0.5, 0.0, 0.5, 2.0]:
+			var runtime := Runtime.new()
+			var enemy: Dictionary = _enemy()
+			_expect(runtime.start(enemy, Vector2.ZERO, profile).ok, "Boundary profile admitted by runtime")
+			runtime.advance(float(profile.windup_seconds) + offset * Runtime.TIME_EPSILON, [enemy])
+			var state: Dictionary = runtime.state_for(1)
+			var before: Dictionary = state.duplicate(true)
+			var values: Array[Dictionary] = Renderer.primitives([state])
+			var role: String = "danger_boundary" if state.phase == "windup" else "recovery_boundary"
+			_expect(_role(values, role).size() == 2, "Actual phase stays readable on both sides of the runtime tolerance")
+			_expect(state == before, "Boundary validation does not rewrite a runtime snapshot")
+			var inconsistent: Dictionary = state.duplicate(true)
+			inconsistent.phase = "recovery" if state.phase == "windup" else "windup"
+			_expect(Renderer.primitives([inconsistent]).is_empty(), "Phase opposite to the runtime deadline is rejected")
+			var expired: Dictionary = state.duplicate(true)
+			expired.phase = "recovery"
+			expired.elapsed = float(profile.windup_seconds) + float(profile.recovery_seconds) + offset * Runtime.TIME_EPSILON
+			var ended := Runtime.new()
+			ended.start(enemy, Vector2.ZERO, profile)
+			ended.advance(float(expired.elapsed), [enemy])
+			_expect(Renderer.primitives([expired]).is_empty() == ended.state_for(1).is_empty(),
+				"Stale recovery expiry agrees with the actual runtime tolerance")
+
+
 func _test_display_settings() -> void:
 	var state: Dictionary = _state()
 	var baseline: Array[Dictionary] = Renderer.primitives([state])
@@ -228,14 +274,15 @@ func _test_invalid_inputs() -> void:
 	var mutations: Array = [
 		["source_id", 0], ["source_id", true], ["source_id", 1.5], ["center", Vector2(INF, 0)],
 		["center", Vector2(0, NAN)], ["center", Vector3.ZERO], ["phase", "hit"], ["phase", 1],
-		["elapsed", -0.01], ["elapsed", NAN], ["elapsed", INF], ["elapsed", true],
+		["elapsed", -0.01], ["elapsed", NAN], ["elapsed", INF], ["elapsed", -INF], ["elapsed", 1e308], ["elapsed", true],
 		["elapsed", "0.3"], ["elapsed", 0.9], ["profile", null], ["profile", []]]
 	for mutation: Array in mutations:
 		var malformed: Dictionary = valid.duplicate(true)
 		malformed[mutation[0]] = mutation[1]
 		_expect(Renderer.primitives([malformed]).is_empty(), "Reject invalid state field " + str(mutation[0]))
 	for field: String in ["radius", "windup_seconds", "recovery_seconds"]:
-		for invalid: Variant in [null, true, "90", NAN, INF, -1.0, 0.0, float(Profiles.LIMITS[field].maximum) + 1.0]:
+		for invalid: Variant in [null, true, "90", NAN, INF, -INF, 1e308, -1.0, 0.0,
+				float(Profiles.LIMITS[field].minimum) * 0.5, float(Profiles.LIMITS[field].maximum) + 1.0]:
 			var malformed: Dictionary = valid.duplicate(true)
 			malformed.profile[field] = invalid
 			_expect(Renderer.primitives([malformed]).is_empty(), "Reject invalid profile scalar " + field)
@@ -250,6 +297,26 @@ func _test_invalid_inputs() -> void:
 	_expect(not Renderer.primitives([tolerated]).is_empty(), "Runtime transition epsilon remains readable")
 	var mixed: Array = [null, {}, valid, "bad"]
 	_expect(Renderer.primitives(mixed) == Renderer.primitives([valid]), "Bad rows do not obscure a valid source")
+
+
+func _test_extreme_finite_inputs() -> void:
+	for center: Vector2 in [Vector2(1e6, -1e6), Vector2(3e38, -3e38)]:
+		for radius: float in [0.001, 4096.0]:
+			var runtime := Runtime.new()
+			var enemy: Dictionary = _enemy(extreme_states.size() + 1)
+			_expect(runtime.start(enemy, center, {"radius": radius}).ok, "Runtime admits a finite extreme center")
+			runtime.advance(0.35, [enemy])
+			var state: Dictionary = runtime.state_for(enemy.id)
+			var before: Dictionary = state.duplicate(true)
+			var values: Array[Dictionary] = Renderer.primitives([state])
+			_expect(_role(values, "danger_boundary").size() == 2, "Finite center is not clipped to an invented world limit")
+			_expect(values.size() <= Renderer.MAX_PRIMITIVES_PER_SOURCE, "Extreme coordinates do not grow the primitive count")
+			_check_geometry(values, {state.source_id: state})
+			_expect(state == before, "Extreme finite geometry leaves the runtime snapshot unchanged")
+			extreme_states.append(state)
+	var huge: Array = []
+	huge.resize(1000000)
+	_expect(Renderer.primitives(huge).is_empty(), "Million-row input is rejected by size before examining elements")
 
 
 func _test_capacity_and_layering() -> void:
@@ -353,21 +420,75 @@ func _test_draw_and_camera() -> void:
 	var probe := DrawProbe.new()
 	probe.test = self
 	root.add_child(probe)
-	View.setup_camera(probe)
+	var camera: Camera2D = View.setup_camera(probe)
 	for resolution: Vector2i in [Vector2i(1280, 720), Vector2i(2560, 1440)]:
 		root.size = resolution
-		for frame: int in range(3):
-			probe.queue_redraw()
-			await process_frame
-		var state: Dictionary = draw_states[0]
-		var center: Vector2 = View.world_to_screen(probe, state.center)
-		var end: Vector2 = View.world_to_screen(probe, state.center + Vector2.RIGHT * float(state.profile.radius))
-		_expect(absf(center.distance_to(end) - float(state.profile.radius) * View.DEFAULT_ZOOM) < 0.001,
-			"World range uses existing camera zoom exactly once")
-		_expect(View.screen_to_world(probe, center).distance_to(state.center) < 0.001,
-			"Telegraph locked center survives the existing view transform")
+		for zoom: float in [0.35, View.DEFAULT_ZOOM, 1.3]:
+			camera.zoom = Vector2.ONE * zoom
+			camera.force_update_scroll()
+			for frame: int in range(3):
+				probe.queue_redraw()
+				await process_frame
+			var state: Dictionary = draw_states[0]
+			var center: Vector2 = View.world_to_screen(probe, state.center)
+			var end: Vector2 = View.world_to_screen(probe, state.center + Vector2.RIGHT * float(state.profile.radius))
+			_expect(absf(center.distance_to(end) - float(state.profile.radius) * zoom) < 0.001,
+				"World range uses the current camera zoom exactly once")
+			_expect(View.screen_to_world(probe, center).distance_to(state.center) < 0.001,
+				"Telegraph locked center survives the current view transform")
 	_expect(draw_callbacks > 0, "Engine executes actual CanvasItem draw callbacks")
 	probe.queue_free()
+	await process_frame
+
+
+func _test_native_radius() -> void:
+	if DisplayServer.get_name() == "headless" or RenderingServer.get_current_rendering_method() == "dummy":
+		return
+	# Pixel checks use the actual Renderer.draw output in an isolated transparent viewport.
+	var viewport := SubViewport.new()
+	viewport.size = Vector2i(512, 512)
+	viewport.world_2d = World2D.new()
+	viewport.transparent_bg = true
+	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	root.add_child(viewport)
+	var probe := RadiusProbe.new()
+	viewport.add_child(probe)
+	var camera := Camera2D.new()
+	probe.add_child(camera)
+	camera.make_current()
+	for radius: float in [22.0, 90.0]:
+		probe.state = _state(1, 0.35, {"radius": radius})
+		var before: Dictionary = probe.state.duplicate(true)
+		camera.position = probe.state.center
+		for zoom: float in [0.35, View.DEFAULT_ZOOM, 1.3]:
+			camera.zoom = Vector2.ONE * zoom
+			camera.force_update_scroll()
+			for level: int in [0, 2]:
+				probe.preferences.effects_level = level
+				probe.queue_redraw()
+				for frame: int in range(3):
+					await process_frame
+				await RenderingServer.frame_post_draw
+				var image: Image = viewport.get_texture().get_image()
+				_expect(image != null and not image.is_empty(), "Native range viewport contains rendered pixels")
+				if image == null or image.is_empty():
+					continue
+				var bounds: Rect2i = image.get_used_rect()
+				var outer: float = (radius + minf(3.8, radius * 0.14) * 0.5) * zoom
+				for axis: int in range(2):
+					_expect(absf(float(bounds.position[axis]) - (256.0 - outer)) <= 2.0
+						and absf(float(bounds.end[axis]) - (256.0 + outer)) <= 2.0,
+						"Rendered boundary pixels match the true radius and current zoom")
+				for direction: Vector2 in [Vector2.LEFT, Vector2.RIGHT, Vector2.UP, Vector2.DOWN]:
+					var peak_alpha: float = 0.0
+					for offset: int in range(-2, 3):
+						var at: Vector2 = Vector2(256, 256) + direction * (radius * zoom + offset)
+						peak_alpha = maxf(peak_alpha, image.get_pixel(roundi(at.x), roundi(at.y)).a)
+					_expect(peak_alpha > 0.2, "Every cardinal danger edge remains visible in low and high effects")
+				_expect(probe.state == before, "Native pixel validation leaves the runtime snapshot unchanged")
+				native_radius_cases += 1
+				print("TELEGRAPH_NATIVE_RADIUS radius=", radius, " zoom=", zoom, " effects=", level, " bounds=", bounds)
+	viewport.queue_free()
 	await process_frame
 
 

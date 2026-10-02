@@ -83,7 +83,8 @@ static func _read_state(raw: Variant) -> Dictionary:
 	var age: float = float(elapsed)
 	var windup_seconds: float = float(windup)
 	var recovery_seconds: float = float(recovery)
-	if phase == "windup" and age > windup_seconds + TIME_EPSILON:
+	# Runtime.advance enters recovery as soon as age + epsilon reaches windup.
+	if phase == "windup" and age + TIME_EPSILON >= windup_seconds:
 		return {}
 	if phase == "recovery" and age + TIME_EPSILON < windup_seconds:
 		return {}
