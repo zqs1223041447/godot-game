@@ -99,6 +99,27 @@ class FontCoverageTests(unittest.TestCase):
         self.assertTrue(set(map(ord, "价报收校片碎例工派艺证资")) <= required)
         self.assertTrue(set(map(ord, "贯穿")) <= required)
 
+    def test_all_planner_failure_reasons_are_in_the_corpus(self):
+        sources = [source for source in self.manifest["supplemental_sources"] if source["path"] == "scripts/items/crafting_transaction_planner.gd"]
+        self.assertEqual(len(sources), 1)
+        self.assertEqual(sources[0]["commit"], "5d5bba0baeb680cf56e0244e7c0b53490e290757")
+        self.assertEqual(len(sources[0]["strings"]), 28)
+        reasons = "".join(item["text"] for item in sources[0]["strings"])
+        self.assertTrue(set("串务库订产号了料划七恰好许允态益") <= set(reasons))
+        self.assertTrue(set(map(ord, reasons)) - {ord(" ")} <= set(self.locations))
+        self.assertEqual(len(set(self.manifest["baseline"]["characters"])), 874)
+
+    def test_pre_planner_coverage_is_rejected(self):
+        missing = set(map(ord, "串务库订产号了料划七恰好许允态益"))
+        for table in self.font["cmap"].tables:
+            if table.isUnicode():
+                for codepoint in missing:
+                    table.cmap.pop(codepoint, None)
+        report = self.report()
+        self.assertFalse(report["ok"])
+        self.assertEqual(set(report["missing"]), missing)
+        self.assertEqual(report["lost_baseline"], [])
+
     def test_existing_glyph_outlines_metrics_and_family(self):
         baseline = self.manifest["baseline"]
         self.assertEqual(coverage.glyph_fingerprint(self.font, set(map(ord, baseline["characters"]))), baseline["glyphs_sha256"])
@@ -184,7 +205,7 @@ class TextCanvas extends Node2D:
     var font: FontFile
     var rows: Array
     func _draw() -> void:
-        draw_rect(Rect2(0, 0, 1100, 520), Color("f2e5c5"))
+        draw_rect(Rect2(Vector2.ZERO, get_viewport_rect().size), Color("f2e5c5"))
         var y: float = 32
         for size: int in [16, 19]:
             draw_string(font, Vector2(24, y), "Arena Sans SC / %d px / fallback OFF" % size, HORIZONTAL_ALIGNMENT_LEFT, -1, size, Color("473828"))
@@ -230,8 +251,8 @@ func run() -> void:
             rasters += 1
     var result: Dictionary = {"engine": Engine.get_version_info().string, "native_mappings": mappings, "han_rasters": rasters, "sizes": [16, 19], "font_rids": rids.size(), "supported_chars": font.get_supported_chars().length(), "fallback": false, "display_driver": DisplayServer.get_name(), "rendered": false}
     if not input.render_path.is_empty():
-        root.size = Vector2i(1100, 520)
-        root.content_scale_size = Vector2i(1100, 520)
+        root.size = Vector2i(1100, int(input.capture_height))
+        root.content_scale_size = root.size
         var canvas := TextCanvas.new()
         canvas.font = font
         canvas.rows = input.rows
@@ -245,6 +266,8 @@ func run() -> void:
             quit(1)
             return
         result.rendered = true
+        result.rendered_rows = input.rows
+        result.capture_height = int(input.capture_height)
     var output: FileAccess = FileAccess.open("res://result.json", FileAccess.WRITE)
     output.store_string(JSON.stringify(result))
     output.close()
@@ -268,6 +291,20 @@ def godot_probe(godot: str, render_dir: Path | None) -> dict:
         "此稀有度尚未定义工艺成本。",
         "底材或词缀资格无效。",
     ]
+    planner_sources = [source for source in manifest["supplemental_sources"] if source["path"] == "scripts/items/crafting_transaction_planner.gd"]
+    if planner_sources:
+        # Render original failure.reason strings that collectively contain every
+        # newly added Han glyph, rather than a synthetic replacement UI message.
+        texts = [item["text"] for item in planner_sources[0]["strings"]]
+        remaining = {chr(cp) for cp in locations if coverage.is_han(cp)} - set(manifest["baseline"]["characters"])
+        rows = []
+        while remaining:
+            text = max(texts, key=lambda candidate: len(set(candidate) & remaining))
+            hits = set(text) & remaining
+            if not hits:
+                raise ValueError("Planner rendering corpus does not cover new Han glyphs")
+            rows.append(text)
+            remaining -= hits
     if render_dir:
         render_dir = render_dir.resolve()
         render_dir.mkdir(parents=True, exist_ok=True)
@@ -281,7 +318,8 @@ def godot_probe(godot: str, render_dir: Path | None) -> dict:
         (project / "probe.gd").write_text(GODOT_PROBE)
         (project / "probe.json").write_text(json.dumps({
             "codepoints": sorted(codepoints), "han": sorted(cp for cp in locations if coverage.is_han(cp)),
-            "rows": rows, "render_path": str(render_dir / "godot-text-16-19.png") if render_dir else "",
+            "rows": rows, "capture_height": 32 + 2 * (52 + 30 * len(rows)),
+            "render_path": str(render_dir / "godot-text-16-19.png") if render_dir else "",
         }, ensure_ascii=False))
         environment = dict(os.environ)
         for key, folder in (("XDG_DATA_HOME", "data"), ("XDG_CONFIG_HOME", "config"), ("XDG_CACHE_HOME", "cache")):
