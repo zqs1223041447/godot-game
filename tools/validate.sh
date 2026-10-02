@@ -27,6 +27,7 @@ run_check() {
 
 echo "Godot version: $("$GODOT_BIN" --version)"
 run_check --editor --import
+run_check --script res://tests/build_test.gd
 run_check --script res://tests/smoke_test.gd
-run_check --quit-after 5
-echo "Validation passed: import, smoke checks, and main-scene startup."
+run_check --quit-after 300
+echo "Validation passed: import, build model, combat/UI integration, and 300-frame startup."
