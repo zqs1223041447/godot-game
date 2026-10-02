@@ -141,6 +141,12 @@ func _test_profiles() -> void:
 	bad.multipliers.max_health = 100.0
 	corruptions.append(bad)
 	bad = good.duplicate(true)
+	bad.multipliers.max_health += 1e-12
+	corruptions.append(bad)
+	bad = good.duplicate(true)
+	bad.source.schema_version = 1.0
+	corruptions.append(bad)
+	bad = good.duplicate(true)
 	bad.multipliers["damage"] = 1.1
 	corruptions.append(bad)
 	bad = good.duplicate(true)
@@ -241,6 +247,26 @@ func _test_resources() -> void:
 	var empty: Dictionary = Compiler.apply_to_enemy(guard, Compiler.compile([]).profile).enemy
 	empty.erase(Compiler.SOURCE_FIELD)
 	_expect(empty == guard, "No-selection result equals canonical enemy after removing provenance")
+	var corpse: Dictionary = _base()
+	corpse.max_health = 100
+	corpse.health = 0
+	corpse.speed = 0
+	corpse.shield = 0
+	corpse.max_shield = 0
+	corpse.death_processed = true
+	var corpse_before: Dictionary = corpse.duplicate(true)
+	corpse.make_read_only()
+	for ids: Array in [[], [BOTH[0]], [BOTH[1]], BOTH]:
+		var applied: Dictionary = Compiler.apply_to_enemy(corpse, Compiler.compile(ids).profile)
+		_expect(applied.ok, "Read-only processed corpse with integer resources is a valid canonical snapshot")
+		if not applied.ok:
+			continue
+		_expect(applied.enemy.health == 0.0 and applied.enemy.speed == 0.0
+			and applied.enemy.death_processed, "Application cannot resurrect, start movement or reopen a processed death")
+		_near(applied.enemy.max_health, 120.0 if BOTH[0] in ids else 100.0, "Integer maximum health follows the selected multiplier")
+		_expect(not applied.enemy.is_read_only() and corpse.is_read_only() and corpse == corpse_before,
+			"Read-only caller remains unchanged and returned actor remains mutable")
+		_preserved(corpse_before, applied.enemy, "Processed corpse")
 	_finished = true
 
 
@@ -265,10 +291,25 @@ func _test_inputs() -> void:
 	var huge: Dictionary = _base()
 	huge.max_health = 1.7e308
 	huge.health = 1.7e308
-	_expect(not Compiler.apply_to_enemy(huge, profile).ok, "Health multiplication overflow fails atomically")
+	var before: Dictionary = huge.duplicate(true)
+	var rejected: Dictionary = Compiler.apply_to_enemy(huge, profile)
+	_expect(not rejected.ok and not rejected.has("enemy") and huge == before, "Health multiplication overflow fails atomically")
+	for ids: Array in [[], [BOTH[1]]]:
+		var applied: Dictionary = Compiler.apply_to_enemy(huge, Compiler.compile(ids).profile)
+		_expect(applied.ok, "Large finite life remains valid when the health challenge is absent")
+		if applied.ok:
+			_expect(applied.enemy.health == huge.health and applied.enemy.max_health == huge.max_health,
+				"Unselected life multiplier preserves large finite resources exactly")
 	huge = _base()
 	huge.speed = 1.7e308
-	_expect(not Compiler.apply_to_enemy(huge, profile).ok, "Speed multiplication overflow fails atomically")
+	before = huge.duplicate(true)
+	rejected = Compiler.apply_to_enemy(huge, profile)
+	_expect(not rejected.ok and not rejected.has("enemy") and huge == before, "Speed multiplication overflow fails atomically")
+	for ids: Array in [[], [BOTH[0]]]:
+		var applied: Dictionary = Compiler.apply_to_enemy(huge, Compiler.compile(ids).profile)
+		_expect(applied.ok, "Large finite speed remains valid when the movement challenge is absent")
+		if applied.ok:
+			_expect(applied.enemy.speed == huge.speed, "Unselected speed multiplier preserves large finite speed exactly")
 	_finished = true
 
 
