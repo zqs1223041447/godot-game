@@ -28,6 +28,7 @@ run_check() {
 echo "Godot version: $("$GODOT_BIN" --version)"
 run_check --editor --import
 run_check --script res://tests/build_test.gd
+run_check --script res://tests/passive_jewel_test.gd
 run_check --script res://tests/smoke_test.gd
 run_check --quit-after 300
-echo "Validation passed: import, build model, combat/UI integration, and 300-frame startup."
+echo "Validation passed: import, build model, passive/jewel invariants, combat/UI integration, and 300-frame startup."
