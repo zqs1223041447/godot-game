@@ -19,8 +19,12 @@ static func draw_player(arena: Node2D, preferences: VisualSettings) -> void:
 	var weapon_id: String = str(arena.state.equipped.get("weapon", ""))
 	var weapon: Dictionary = arena.state.get_item_definition(weapon_id)
 	var armor_id: String = str(arena.state.equipped.get("armor", ""))
+	var armor: Dictionary = arena.state.get_item_definition(armor_id)
+	var emberhide: bool = str(armor.get("base_id", armor_id)) == "emberhide_vest"
 	var cloak := Color("60754c")
-	if armor_id == "return_mantle":
+	if emberhide:
+		cloak = Color("936546")
+	elif armor_id == "return_mantle":
 		cloak = Color("926045")
 	elif armor_id == "guardian_robe":
 		cloak = Color("79768c")
@@ -64,6 +68,9 @@ static func draw_player(arena: Node2D, preferences: VisualSettings) -> void:
 	# One small weathered shoulder guard, never chrome armor.
 	_blob(arena, [Vector2(-10, -5), Vector2(-5, -8), Vector2(-3, -3), Vector2(-9, 0)], Color("a29168"), Color("514a35"))
 	arena.draw_line(Vector2(-9, -4), Vector2(-5, -6), Color("cec098"), 1.0, true)
+	if emberhide:
+		_blob(arena, [Vector2(-10,-5),Vector2(-5,-8),Vector2(-3,-3),Vector2(-9,0)],Color("858678"),INK)
+		_draw_fire_ward(arena,Vector2(1,1),2.8)
 	# Cloth sleeves lead toward the real aiming direction, ending in warm hands.
 	var hand: Vector2 = facing * 15.0 + Vector2(0, 2)
 	var arm_side: float = 1.0 if facing.x >= 0.0 else -1.0
@@ -177,10 +184,46 @@ static func draw_enemy(arena: Node2D, enemy: Dictionary, preferences: VisualSett
 		1:
 			_draw_skitter(arena, r, gait, hurt)
 		2:
-			_draw_brute(arena, r, gait, hurt, boss)
+			if str(enemy.get("template_id", "")) == "ember_guard":
+				_draw_ember_guard(arena, r, gait, hurt)
+			else:
+				_draw_brute(arena, r, gait, hurt, boss)
 	arena.draw_set_transform(Vector2.ZERO)
 	if draw_marks:
 		_draw_enemy_marks(arena, enemy, preferences, tier, r, p)
+
+static func _draw_fire_ward(arena: CanvasItem, center: Vector2, radius: float) -> void:
+	var shield: Array=[center+Vector2(-radius,-radius),center+Vector2(radius,-radius),center+Vector2(radius*0.82,radius*0.35),center+Vector2(0,radius*1.22),center+Vector2(-radius*0.82,radius*0.35)]
+	_blob(arena,shield,Color("51473a"),Color("c49a62"),0.9)
+	_poly(arena,[center+Vector2(0,-radius*0.72),center+Vector2(radius*0.35,-radius*0.08),center+Vector2(radius*0.28,radius*0.5),center+Vector2(-radius*0.38,radius*0.5),center+Vector2(-radius*0.46,-radius*0.12),center+Vector2(-radius*0.15,radius*0.05)],Color("d1a169"))
+
+static func _draw_ember_guard(arena: CanvasItem, r: float, gait: float, hurt: bool) -> void:
+	# An ash-stone plated quadruped, with a tied leather mantle and a carved ward.
+	# All parts stay inside the existing brute's footprint; nothing burns over the field.
+	var stone: Color=Color("797b6c").lerp(Color("dfcba7"),0.36 if hurt else 0.0)
+	var hide: Color=Color("9a6241").lerp(Color("dfb687"),0.35 if hurt else 0.0)
+	for x: float in [-0.55,0.45]:
+		for side: int in [-1,1]:
+			var root:=Vector2(x*r,side*r*0.40)
+			var knee:=root+Vector2(gait*side,side*r*0.32)
+			var foot:=knee+Vector2(-r*0.13,side*r*0.21)
+			_path(arena,[root,knee,foot],INK,6.0)
+			_path(arena,[root,knee,foot],hide.darkened(0.24),3.5)
+			_blob(arena,[foot+Vector2(-3,-2),foot+Vector2(3,-2),foot+Vector2(4,2),foot+Vector2(-3,3)],stone.darkened(0.12),INK,1)
+	_blob(arena,[Vector2(-r*1.0,-r*0.52),Vector2(-r*0.53,-r*0.69),Vector2(r*0.25,-r*0.46),Vector2(r*0.28,r*0.50),Vector2(-r*0.40,r*0.73),Vector2(-r*0.98,r*0.53),Vector2(-r*0.80,r*0.14),Vector2(-r*1.05,-r*0.12)],hide,INK,1.8)
+	_path(arena,[Vector2(-r*0.92,-r*0.43),Vector2(-r*0.64,-r*0.15),Vector2(-r*0.88,r*0.44)],Color("cb9e67"),1.0)
+	_blob(arena,[Vector2(-r*0.62,-r*0.48),Vector2(-r*0.30,-r*0.69),Vector2(r*0.40,-r*0.57),Vector2(r*0.59,-r*0.10),Vector2(r*0.40,r*0.55),Vector2(-r*0.30,r*0.63),Vector2(-r*0.64,r*0.32)],stone,INK,1.8)
+	for side: int in [-1,1]:
+		_blob(arena,[Vector2(-r*0.43,side*r*0.37),Vector2(-r*0.30,side*r*0.78),Vector2(r*0.12,side*r*0.92),Vector2(r*0.44,side*r*0.64),Vector2(r*0.36,side*r*0.30)],stone.lightened(0.06 if side<0 else -0.07),INK,1.5)
+		_path(arena,[Vector2(-r*0.28,side*r*0.65),Vector2(r*0.06,side*r*0.77),Vector2(r*0.31,side*r*0.59)],Color("b5b29b"),1.0)
+		arena.draw_line(Vector2(-r*0.41,side*r*0.26),Vector2(r*0.25,side*r*0.34),Color("69452e"),2.5,true)
+	_blob(arena,[Vector2(r*0.39,-r*0.32),Vector2(r*0.79,-r*0.42),Vector2(r*1.10,-r*0.18),Vector2(r*1.10,r*0.18),Vector2(r*0.78,r*0.40),Vector2(r*0.38,r*0.31)],hide.darkened(0.2),INK,1.5)
+	_blob(arena,[Vector2(r*0.45,-r*0.31),Vector2(r*0.81,-r*0.30),Vector2(r*0.90,0),Vector2(r*0.80,r*0.29),Vector2(r*0.47,r*0.28),Vector2(r*0.59,0)],stone.lightened(0.05),INK,1)
+	for side: int in [-1,1]:
+		arena.draw_line(Vector2(r*0.75,side*r*0.19),Vector2(r*0.91,side*r*0.17),Color("372a21"),3.0,true)
+		arena.draw_line(Vector2(r*0.77,side*r*0.19),Vector2(r*0.87,side*r*0.18),Color("dfab68"),1.0,true)
+		_poly(arena,[Vector2(r*0.56,side*r*0.36),Vector2(r*0.73,side*r*0.57),Vector2(r*0.84,side*r*0.40)],Color("b9a582"))
+	_draw_fire_ward(arena,Vector2(-r*0.12,0),r*0.24)
 
 static func _draw_scavenger(arena: CanvasItem, r: float, gait: float, hurt: bool) -> void:
 	var hide := Color("a48a58").lerp(Color("e5c59b"), 0.4 if hurt else 0.0)

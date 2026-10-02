@@ -16,6 +16,7 @@ const SECTORS: Array[Dictionary] = [
 	{"id": "prism", "name": "棱光 · 均衡", "color": Color("e3c578"), "angle": 210.0},
 ]
 const STAT_LABELS: Dictionary = {
+	"fire_resistance": "火焰抗性",
 	"damage": "伤害", "max_health": "最大生命", "max_mana": "最大魔力",
 	"max_shield": "最大护盾", "attack_speed": "攻击速度", "move_speed": "移动速度",
 	"mana_regen": "魔力恢复", "shield_regen": "护盾恢复",
@@ -100,7 +101,7 @@ static func describe_stats(stats: Dictionary) -> String:
 		var value: float = float(stats[stat])
 		var amount: String = str(snappedf(value, 0.00001))
 		var unit: String = " / 秒" if stat in ["attack_speed", "mana_regen", "shield_regen"] else ""
-		if stat.ends_with("_increased"):
+		if stat.ends_with("_increased") or stat == "fire_resistance":
 			amount = str(snappedf(value * 100.0, 0.01))
 			unit = "%"
 		lines.append("%s +%s%s" % [STAT_LABELS.get(stat, stat), amount, unit])

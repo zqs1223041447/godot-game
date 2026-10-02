@@ -80,7 +80,7 @@ static func draw_item(canvas: CanvasItem, entry: Dictionary, rect: Rect2) -> voi
 	if slot.is_empty():
 		if id in ["ember_wand", "cinder_reed", "prism_bow", "swift_blade", "gale_spindle", "runewood_focus"]:
 			slot = "weapon"
-		elif id in ["guardian_robe", "tidebound_coat", "return_mantle", "vitality_armor", "woven_bastion"]:
+		elif id in ["guardian_robe", "tidebound_coat", "return_mantle", "vitality_armor", "woven_bastion", "emberhide_vest"]:
 			slot = "armor"
 		elif id in ["azure_charm", "storm_charm", "detonation_charm", "wayglass_token", "pulse_seed"]:
 			slot = "charm"
@@ -102,7 +102,9 @@ static func draw_item(canvas: CanvasItem, entry: Dictionary, rect: Rect2) -> voi
 			else:
 				_draw_sword(Pen.new(canvas, rect, Vector2(54, 154), hint), id == "gale_spindle")
 		"armor":
-			if id == "return_mantle":
+			if id == "emberhide_vest":
+				_draw_emberhide(Pen.new(canvas, rect, Vector2(114,130), hint))
+			elif id == "return_mantle":
 				_draw_mantle(Pen.new(canvas, rect, Vector2(114, 146), hint))
 			elif id in ["guardian_robe", "tidebound_coat"] or str(entry.get("base_name", "")).ends_with("袍"):
 				_draw_robe(Pen.new(canvas, rect, Vector2(116, 150), hint), id == "tidebound_coat")
@@ -312,6 +314,27 @@ static func _draw_leather(p: Pen, woven: bool) -> void:
 		p.line([-12, -23, -8, -27, -8, -19], Color("ddbd82"), 1.5)
 		p.line([9, -30, 14, -28], light, 1.2)
 
+
+static func _draw_emberhide(p: Pen) -> void:
+	# Sleeveless warm hide, overlapping skirts, ash-stone shoulders and a sewn ward.
+	p.poly([-16,-58,-35,-51,-45,-31,-32,-16,-24,-21,-22,5,-30,46,-16,58,0,50,17,58,30,46,22,5,25,-21,32,-16,46,-32,34,-51,16,-58,10,-45,-10,-45],Color("995f3f"),true)
+	p.poly([-15,-43,-23,-24,-18,-2,-4,5,-3,-42],Color("c68c58"),true)
+	p.poly([4,-42,16,-43,23,-23,18,-3,5,5],Color("805036"),true)
+	p.poly([-26,14,-29,44,-16,53,-5,43,-4,17],Color("b87949"),true)
+	p.poly([4,17,7,44,16,53,29,43,24,13],Color("775039"),true)
+	p.line([-20,21,-22,42,-15,47],THREAD,1.5)
+	p.line([17,23,21,43],THREAD,1.5)
+	for side: int in [-1,1]:
+		p.poly([side*21,-51,side*34,-49,side*45,-33,side*38,-24,side*26,-29,side*18,-40],Color("7d8172"),true)
+		p.line([side*23,-43,side*29,-33,side*38,-30],Color("b4b7a0"),1.5)
+		p.line([side*20,-26,side*17,-7],Color("d1a36d"),1.3)
+	p.poly([-27,3,27,3,26,14,-27,14],Color("503827"),true)
+	p.poly([-6,3,7,3,7,14,-6,14],BRASS,true)
+	p.poly([-3,6,4,6,4,11,-3,11],INK)
+	p.poly([-11,-35,11,-35,10,-14,0,-7,-10,-14],Color("554e3d"),true,BRASS,1.8)
+	p.poly([0,-31,6,-22,5,-16,0,-12,-6,-16,-7,-23,-2,-20],Color("d5a365"),true,Color("8b5936"),1.1)
+	p.line([-14,-40,-16,-30],THREAD,1.1)
+	p.line([15,-39,18,-30],THREAD,1.1)
 
 static func _draw_charm(p: Pen, id: String) -> void:
 	# Closed leather thong is attached to a metal bail, not a floating UI ring.

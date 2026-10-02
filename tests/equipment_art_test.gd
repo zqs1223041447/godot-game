@@ -62,7 +62,7 @@ func fixture(id: String, rect: Rect2, hint: bool = false) -> Recorder:
 		design = Vector2(114, 146)
 	elif id in ["guardian_robe", "tidebound_coat"]:
 		design = Vector2(116, 150)
-	elif id in ["vitality_armor", "woven_bastion"]:
+	elif id in ["vitality_armor", "woven_bastion", "emberhide_vest"]:
 		design = Vector2(114, 130)
 	elif Jewels.BASES.has(id) or Jewels.SPECIAL_BASES.has(id):
 		design = Vector2(80, 88)
@@ -81,6 +81,8 @@ func fixture(id: String, rect: Rect2, hint: bool = false) -> Recorder:
 		Art._draw_robe(pen, id == "tidebound_coat")
 	elif id in ["vitality_armor", "woven_bastion"]:
 		Art._draw_leather(pen, id == "woven_bastion")
+	elif id == "emberhide_vest":
+		Art._draw_emberhide(pen)
 	elif Jewels.BASES.has(id) or Jewels.SPECIAL_BASES.has(id):
 		Art._draw_jewel(pen, id)
 	else:
@@ -94,7 +96,7 @@ func run() -> void:
 		entry["id"] = id
 		entries.append(entry)
 		ids.append(id)
-	for id: String in Gear.BASES.keys() + Gear.EXPANSION_BASES.keys():
+	for id: String in Gear.all_base_ids():
 		var entry: Dictionary = Gear.base_definition(id)
 		entry["id"] = "gear_000100"
 		entry["base_id"] = id
@@ -123,6 +125,7 @@ func run() -> void:
 					check(point.x - stroke >= rect.position.x and point.y - stroke >= rect.position.y and point.x + stroke <= rect.end.x and point.y + stroke <= rect.end.y, "stroke escaped supplied rect: " + id)
 	check(fixture("runewood_focus", Rect2(0, 0, 28, 91)).commands != fixture("gale_spindle", Rect2(0, 0, 28, 91)).commands, "runewood focus incorrectly uses sword geometry")
 	check(fixture("branchfinder", Rect2(0, 0, 28, 28)).commands != fixture("windweave", Rect2(0, 0, 28, 28)).commands, "special jewel must have its own branching silhouette")
+	check(fixture("emberhide_vest", Rect2(0,0,70,91)).commands != fixture("vitality_armor", Rect2(0,0,70,91)).commands,"fire ward vest must have distinct leather and stone geometry")
 	# Color/material changes survive subdued slot rendering; rendering itself is pure.
 	var hint := fixture("ember_wand", Rect2(0, 0, 51, 57), true)
 	check(hint.commands != fixture("ember_wand", Rect2(0, 0, 51, 57)).commands, "hint is not subdued")
@@ -170,7 +173,7 @@ class ContactSheet extends Node2D:
 				entry = Data.ITEMS[id].duplicate(true)
 				entry["id"] = id
 				footprint = Vector2(entry.size) * 42.0
-			elif Gear.BASES.has(id) or Gear.EXPANSION_BASES.has(id):
+			elif Gear.all_base_ids().has(id):
 				entry = Gear.base_definition(id)
 				entry["id"] = "gear_000100"
 				entry["base_id"] = id

@@ -320,7 +320,7 @@ func _schema_roundtrip_and_legacy() -> void:
 	state.set_skill_supports("tornado", ["volley", "focus"])
 	var before: Dictionary = state._snapshot()
 	var path: String = "user://special_jewel_v7.json"
-	_expect(Model.SAVE_VERSION == 7 and before.size() == 16 and state.save_build(path) == OK, "Schema7 retains the 16-field save shape")
+	_expect(Model.SAVE_VERSION == 8 and before.size() == 16 and state.save_build(path) == OK, "Schema8 retains the 16-field save shape")
 	for iteration: int in range(3):
 		var restored := Model.new()
 		restored.changed.connect(_changed)
@@ -341,7 +341,7 @@ func _schema_roundtrip_and_legacy() -> void:
 	changes = 0
 	_expect(loaded.load_build(path) and loaded.migrated_from_v6 and changes == 1, "Literal v6 typed build with BOM/CRLF migrates once")
 	var expected: Dictionary = legacy.duplicate(true)
-	expected.version = 7
+	expected.version = Model.SAVE_VERSION
 	_expect(loaded._snapshot() == expected and loaded.jewels.size() == 1 and loaded.next_jewel_id == 12, "Migration changes version only, preserving gear/supports/points/locations and granting no special")
 	_expect(FileAccess.get_file_as_bytes(path) == bytes and not FileAccess.file_exists(backup), "Read-only migration preserves exact bytes without premature backup")
 	var copy: String = "user://special_jewel_save_as.json"

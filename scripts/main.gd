@@ -13,6 +13,7 @@ const Hud = preload("res://scripts/game_hud.gd")
 const Jewels = preload("res://scripts/jewel_data.gd")
 const Combat = preload("res://scripts/combat/combat_data.gd")
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
+const Defense = preload("res://scripts/mechanics/defense_rules.gd")
 const Projectiles = preload("res://scripts/combat/projectile_runtime.gd")
 const Monsters = preload("res://scripts/monsters/monster_catalog.gd")
 const MonsterLifecycle = preload("res://scripts/monsters/monster_runtime.gd")
@@ -27,6 +28,7 @@ var visual_cues = VisualCueRuntime.new()
 var visual_settings = Presentation.new()
 var monster_runtime = MonsterLifecycle.new()
 var reward_kills: int = 0
+var ordinary_admissions: int = 0
 var demo_mode: bool = false
 var density_demo: bool = false
 var use_spatial_separation: bool = true
@@ -44,6 +46,7 @@ var state = Build.new()
 var projectile_runtime = Projectiles.new()
 var combat_trace: Array[Dictionary] = []
 var damage_trace: Array[Dictionary] = []
+var incoming_damage_trace: Array[Dictionary] = []
 var event_counts: Dictionary = {}
 var _simulation_accumulator: float = 0.0
 var hud: CanvasLayer
@@ -104,8 +107,8 @@ func _ready() -> void:
 	if not state.last_load_error.is_empty():
 		hud.open_panel("pause")
 		hud.notify(state.last_load_error)
-	elif state.migrated_from_v1 or state.migrated_from_v2 or state.migrated_from_v3 or state.migrated_from_v4 or state.migrated_from_v5 or state.migrated_from_v6:
-		hud.open_panel("talents" if state.migrated_from_v1 or state.migrated_from_v6 else "skills" if state.migrated_from_v4 or state.migrated_from_v5 else "inventory" if state.migrated_from_v3 else "combat")
+	elif state.migrated_from_v1 or state.migrated_from_v2 or state.migrated_from_v3 or state.migrated_from_v4 or state.migrated_from_v5 or state.migrated_from_v6 or state.migrated_from_v7:
+		hud.open_panel("talents" if state.migrated_from_v1 or state.migrated_from_v6 else "skills" if state.migrated_from_v4 or state.migrated_from_v5 else "inventory" if state.migrated_from_v3 or state.migrated_from_v7 else "combat")
 		hud.notify(state.migration_message)
 	else:
 		hud.notify("F7 怪物机制与分裂试验 · F6 龙卷组合 · T 天赋星图")
@@ -226,6 +229,7 @@ func restart_run() -> void:
 	shield = float(_stats.max_shield)
 	kills = 0
 	reward_kills = 0
+	ordinary_admissions = 0
 	demo_mode = false
 	density_demo = false
 	boss_wave_pending = 0
@@ -239,6 +243,7 @@ func restart_run() -> void:
 	projectile_runtime.cancel_all(projectiles)
 	combat_trace.clear()
 	damage_trace.clear()
+	incoming_damage_trace.clear()
 	event_counts.clear()
 	_simulation_accumulator = 0.0
 	particles.clear()
@@ -396,12 +401,23 @@ func _update_spawning(delta: float) -> void:
 
 
 func _spawn_enemy(forced_position: Vector2 = Vector2.ZERO, forced_kind: int = -1) -> Dictionary:
+	if enemies.size() >= MAX_ENEMIES:
+		return {}
 	if forced_kind >= 0:
 		if forced_kind >= Monsters.SPECIES.size():
 			return {}
 		return _spawn_monster(["crawler", "skitter", "brute"][forced_kind], forced_position)
-	var roll: Dictionary = Monsters.ordinary_roll(rng, wave)
-	return _spawn_monster(roll.template, forced_position, "ordinary", roll.rarity, roll.mechanisms)
+	var natural: bool = forced_position == Vector2.ZERO and not demo_mode
+	var encounter: String = Monsters.encounter_for_admission(wave, ordinary_admissions + 1) if natural else ""
+	var enemy: Dictionary
+	if not encounter.is_empty():
+		enemy = _spawn_monster(encounter)
+	else:
+		var roll: Dictionary = Monsters.ordinary_roll(rng, wave)
+		enemy = _spawn_monster(roll.template, forced_position, "ordinary", roll.rarity, roll.mechanisms)
+	if natural and not enemy.is_empty():
+		ordinary_admissions += 1
+	return enemy
 
 
 func _spawn_monster(template_id: String, forced_position: Vector2 = Vector2.ZERO, context: String = "ordinary",
@@ -560,7 +576,7 @@ func _update_enemies(delta: float) -> void:
 		if Vector2(enemy.pos).distance_to(player_pos) < PLAYER_RADIUS + float(enemy.radius) + 1.0:
 			if float(enemy.attack_timer) <= 0.0:
 				enemy.attack_timer = 1.0 / maxf(0.2, float(enemy.get("attack_speed", 1.0 / 0.85)))
-				hit_player(float(enemy.damage))
+				hit_player_components(Monsters.contact_components(enemy), int(enemy.id))
 				if not alive:
 					return
 
@@ -771,15 +787,20 @@ func _apply_damage_packet(enemy: Dictionary, packet: Dictionary, snapshot: Dicti
 	if float(enemy.health) <= 0.0 or float(enemy.get("spawn", 0.0)) > 0.0:
 		return
 	var result: Dictionary = Damage.resolve(packet, snapshot.get("modifiers", []), enemy.get("resistances", {}))
+	var settlement: Dictionary = Defense.settle_resolved(result, float(enemy.get("shield", 0.0)), float(enemy.health))
+	if not settlement.ok:
+		return
 	var record: Dictionary = {"target_id": enemy.id, "skill_id": packet.skill_id, "tags": packet.tags.duplicate(),
 		"components": result.components, "details": result.details, "total": result.total,
+		"before_defense_components": settlement.raw_components, "prevented_components": settlement.mitigated_components,
+		"shield_spent": settlement.shield_spent, "health_lost": settlement.health_lost,
 		"assembly": packet.get("assembly", {}).duplicate(true),
 		"projectile_id": provenance.get("projectile_id", 0), "cast_id": provenance.get("cast_id", 0),
 		"phase": provenance.get("phase", "direct"), "effect_id": provenance.get("effect_id", "")}
 	damage_trace.append(record)
 	if damage_trace.size() > 32:
 		damage_trace.pop_front()
-	_damage_enemy(enemy, float(result.total), color, slow)
+	_apply_enemy_settlement(enemy, settlement, color, slow)
 
 
 func equip_tornado_example() -> void:
@@ -805,10 +826,21 @@ func combat_preview() -> Dictionary:
 func _damage_enemy(enemy: Dictionary, amount: float, color: Color, slow: float = 0.0) -> void:
 	if float(enemy.health) <= 0.0 or amount <= 0.0 or not is_finite(amount):
 		return
-	var absorbed: float = minf(float(enemy.get("shield", 0.0)), amount)
-	enemy.shield = float(enemy.get("shield", 0.0)) - absorbed
+	# Compatibility helper receives damage already resolved by its caller.
+	var settlement: Dictionary = Defense.incoming_hit({"physical": amount}, {}, float(enemy.get("shield", 0.0)), float(enemy.health), "monster")
+	if settlement.ok:
+		_apply_enemy_settlement(enemy, settlement, color, slow)
+
+
+func _apply_enemy_settlement(enemy: Dictionary, settlement: Dictionary, color: Color, slow: float = 0.0) -> void:
+	var amount: float = float(settlement.damage_total)
+	if float(enemy.health) <= 0.0 or amount <= 0.0:
+		return
+	var absorbed: float = float(settlement.shield_spent)
+	enemy.shield = float(settlement.remaining_shield)
 	enemy.damage_delay = 4.0
-	enemy.health = float(enemy.health) - (amount - absorbed)
+	# Keep the historical signed corpse value; actual life loss is bounded in the trace.
+	enemy.health = float(settlement.remaining_health) - float(settlement.overkill)
 	visual_cues.emit_cue("impact", Vector2(enemy.pos), {"radius": clampf(7.0 + sqrt(amount) * 0.65, 8.0, 24.0), "color": color, "shielded": absorbed >= amount, "target_id": int(enemy.id)})
 	enemy.flash = 0.12
 	enemy.slow = maxf(float(enemy.slow), slow)
@@ -848,7 +880,8 @@ func _award_kill_equipment(enemy: Dictionary) -> void:
 	# Exactly one decision per eligible root death. Descendants/demo never enter here.
 	var rarity: String = "rare" if enemy.get("rarity", "") in ["rare", "boss"] else ""
 	var item_level: int = clampi(wave * 2 - 1, 1, 30)
-	var item_id: String = state.award_equipment(rng, item_level, rarity, "loot")
+	var pool: String = str(enemy.get("equipment_pool", ""))
+	var item_id: String = state.award_equipment(rng, item_level, rarity, "current" if pool.is_empty() else pool)
 	if item_id.is_empty():
 		hud.notify("背包保留空间不足，无法领取新装备；已有物品完整保留，可在 I 中清理随机装备")
 		return
@@ -909,9 +942,28 @@ func open_reference_catalog() -> bool:
 func hit_player(amount: float) -> void:
 	if not alive or invulnerable > 0.0 or amount <= 0.0 or not is_finite(amount):
 		return
-	var absorbed: float = minf(shield, amount)
-	shield -= absorbed
-	health = maxf(0.0, health - (amount - absorbed))
+	hit_player_components({"physical": amount})
+
+
+func player_defense_profile() -> Dictionary:
+	return Defense.defense_profile({"fire_resistance": _stats.get("fire_resistance", 0.0)}, "player")
+
+
+func hit_player_components(components: Variant, source_id: int = 0) -> bool:
+	if not alive or invulnerable > 0.0:
+		return false
+	var settlement: Dictionary = Defense.incoming_hit(components, {"fire_resistance": _stats.get("fire_resistance", 0.0)}, shield, health, "player")
+	if not settlement.ok or float(settlement.damage_total) <= 0.0:
+		return false
+	var amount: float = float(settlement.damage_total)
+	var absorbed: float = float(settlement.shield_spent)
+	shield = float(settlement.remaining_shield)
+	health = float(settlement.remaining_health)
+	var record: Dictionary = settlement.duplicate(true)
+	record["source_id"] = source_id
+	incoming_damage_trace.append(record)
+	if incoming_damage_trace.size() > 32:
+		incoming_damage_trace.pop_front()
 	visual_cues.emit_cue("hurt", player_pos, {"shielded": absorbed >= amount})
 	damage_delay = 4.0
 	invulnerable = 0.32
@@ -924,6 +976,7 @@ func hit_player(amount: float) -> void:
 		projectile_runtime.cancel_all(projectiles, "owner_death")
 		save_build()
 		hud.show_death()
+	return true
 
 
 func _update_pickups(delta: float) -> void:

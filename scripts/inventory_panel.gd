@@ -8,6 +8,7 @@ signal open_passives_requested
 const GridView = preload("res://scripts/item_grid_view.gd")
 const Data = preload("res://scripts/game_data.gd")
 const Passives = preload("res://scripts/passive_data.gd")
+const Defense = preload("res://scripts/mechanics/defense_rules.gd")
 const TEXT: Color = Color("eee2c7")
 const MUTED: Color = Color("b2aa94")
 const CYAN: Color = Color("b8c891")
@@ -160,8 +161,10 @@ func refresh() -> void:
 	_usage_label.text = "%d / 96 格  ·  %d 件物品" % [used, keys.size()]
 	_usage_label.tooltip_text = "12 列 × 8 行；背包中的珠宝 %d 颗\n已装备物品和已镶嵌珠宝不占背包空间" % jewel_count
 	var stats: Dictionary = _state.get_stats()
+	var defense: Dictionary = Defense.defense_profile({"fire_resistance": stats.get("fire_resistance", 0.0)})
 	_stats_summary.text = "生命 %d     法力 %d     护盾 %d     基伤 %.0f     攻速 %.2f     移速 %.0f" % [int(stats.get("max_health", 0)), int(stats.get("max_mana", 0)), int(stats.get("max_shield", 0)), float(stats.get("damage", 0)), float(stats.get("attack_speed", 0)), float(stats.get("move_speed", 0))]
-	_stats_summary.tooltip_text = "基伤是通用基础伤害，不含分类点伤、提高/更多与敌方抗性。K 查看实际技能命中预估，F6 查看固有/附加分量。"
+	_stats_summary.text += "   火抗 %.0f%%" % (float(defense.effective_resistances.fire) * 100.0)
+	_stats_summary.tooltip_text = "基伤是通用基础伤害，不含分类点伤、提高/更多与敌方抗性。K 查看实际技能命中预估，F6 查看固有/附加分量。\n火焰抗性：合计 %.0f%% → 有效 %.0f%%（上限 %.0f%%）。只降低火焰分量，然后先消耗护盾，再消耗生命。" % [float(defense.raw_resistances.fire) * 100.0, float(defense.effective_resistances.fire) * 100.0, Defense.FIRE_RESISTANCE_CAP * 100.0]
 	_grid.select_item(selected_item_key)
 	_grid.refresh()
 	for slot_control: EquipmentSlot in _equipment_slots.values():

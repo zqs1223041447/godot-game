@@ -1,10 +1,12 @@
 class_name EquipmentCatalog
 extends RefCounted
-## Original equipment and bounded v0.7 expansion; reference exports never enter runtime.
+## Original equipment and immutable ordered loot profiles; reference exports never enter runtime.
 ## BASES/AFFIXES and generate() remain the frozen six-base/twelve-family legacy pool.
 ## Rolls store integer points / percentage ticks; runtime percentages are ticks / 100.
 ## Base damage is the game's existing character scalar, NOT local weapon damage.
 
+const DefenseRules = preload("res://scripts/mechanics/defense_rules.gd")
+const CURRENT_VOCABULARY: int = 8
 const MIN_ITEM_LEVEL: int = 1
 const MAX_ITEM_LEVEL: int = 30
 const MAX_SERIAL: int = 999999999
@@ -84,6 +86,74 @@ const ADDED_STAT_TYPES: Dictionary = {
 const EXPANSION_LOOT_PERCENT: int = 25
 
 
+## A separate defense vocabulary never extends either historical dictionary.
+const DEFENSE_BASES: Dictionary = {
+	"emberhide_vest": {"name": "灰烬皮甲", "slot": "armor", "size": Vector2i(2, 3),
+		"description": "最大生命 +8，火焰抗性 +15%。火焰抗性作用于承受的火焰命中，有效上限 75%。", "stats": {"max_health": 8.0, "fire_resistance": 0.15},
+		"stage": "hit_mitigation", "scope": "equipped_character", "actors": ["player", "monster"]},
+}
+const DEFENSE_AFFIXES: Dictionary = {
+	"emberward": {"name": "护火", "kind": "suffix", "group": "fire_resistance", "stat": "fire_resistance", "unit": "percent", "label": "火焰抗性", "slots": ["armor"],
+		"stage": "hit_mitigation", "scope": "equipped_character", "actors": ["player", "monster"], "allowed_base_ids": ["emberhide_vest"],
+		"tiers": [{"tier": 1, "level": 1, "weight": 100, "min": 8, "max": 12}, {"tier": 2, "level": 8, "weight": 60, "min": 13, "max": 18}, {"tier": 3, "level": 16, "weight": 30, "min": 19, "max": 25}]},
+}
+## Ordering is part of the RNG contract. Do not derive these arrays from a registry
+## that later releases can extend. New content belongs in a new profile.
+const POOL_PROFILES: Dictionary = {
+	"legacy": {"base_ids": ["cinder_reed", "gale_spindle", "woven_bastion", "tidebound_coat", "wayglass_token", "pulse_seed"],
+		"affix_ids": ["rootwell", "deepwell", "lanternveil", "runesong", "prismedge", "farweave", "coalglow", "rimeecho", "sparkthread", "wellturn", "trailstep", "beatlink"], "min_save_version": 4},
+	"runewood": {"base_ids": ["runewood_focus"],
+		"affix_ids": ["rootwell", "deepwell", "lanternveil", "runesong", "prismedge", "farweave", "coalglow", "rimeecho", "sparkthread", "wellturn", "trailstep", "beatlink", "attack_added_physical", "attack_added_fire", "spell_added_cold", "spell_added_lightning"], "min_save_version": 6},
+	"defense": {"base_ids": ["emberhide_vest"],
+		"affix_ids": ["rootwell", "deepwell", "lanternveil", "coalglow", "rimeecho", "sparkthread", "wellturn", "trailstep", "emberward"], "min_save_version": 8},
+}
+const CURRENT_LOOT_PROFILE: Array[Dictionary] = [
+	{"pool_id": "legacy", "weight": 60}, {"pool_id": "runewood", "weight": 25}, {"pool_id": "defense", "weight": 15},
+]
+
+
+static func all_base_ids() -> Array[String]:
+	var result: Array[String] = []
+	for profile: Dictionary in POOL_PROFILES.values():
+		for id: String in profile.base_ids:
+			if not result.has(id):
+				result.append(id)
+	return result
+
+
+static func all_affix_ids() -> Array[String]:
+	var result: Array[String] = []
+	for profile: Dictionary in POOL_PROFILES.values():
+		for id: String in profile.affix_ids:
+			if not result.has(id):
+				result.append(id)
+	return result
+
+
+static func pool_profiles() -> Dictionary:
+	return POOL_PROFILES.duplicate(true)
+
+
+static func pool_profile(pool_id: String) -> Dictionary:
+	return POOL_PROFILES.get(pool_id, {}).duplicate(true)
+
+
+static func current_loot_profile() -> Array[Dictionary]:
+	return CURRENT_LOOT_PROFILE.duplicate(true)
+
+
+static func pool_for_base(base_id: String) -> String:
+	for id: String in POOL_PROFILES:
+		if POOL_PROFILES[id].base_ids.has(base_id):
+			return id
+	return ""
+
+
+static func family_eligible(affix_id: String, base_id: String) -> bool:
+	var family: Dictionary = _affix_record(affix_id)
+	return not family.is_empty() and _family_eligible(affix_id, family, base_id)
+
+
 ## Lookups are detached, including nested stats, tiers and eligibility arrays.
 static func base_definition(id: String) -> Dictionary:
 	return _base_record(id).duplicate(true)
@@ -94,57 +164,34 @@ static func affix_definition(id: String) -> Dictionary:
 
 
 static func _base_record(id: String) -> Dictionary:
-	return BASES.get(id, EXPANSION_BASES.get(id, {}))
+	return BASES.get(id, EXPANSION_BASES.get(id, DEFENSE_BASES.get(id, {})))
 
 
 static func _affix_record(id: String) -> Dictionary:
-	return AFFIXES.get(id, EXPANSION_AFFIXES.get(id, {}))
+	return AFFIXES.get(id, EXPANSION_AFFIXES.get(id, DEFENSE_AFFIXES.get(id, {})))
 
 
 static func generate(rng: RandomNumberGenerator, id: String, item_level: int, rarity: String = "") -> Dictionary:
-	if rng == null or serial_from_id(id) == 0 or item_level < MIN_ITEM_LEVEL or item_level > MAX_ITEM_LEVEL:
-		return {}
-	if not rarity.is_empty() and not RARITIES.has(rarity):
-		return {}
-	if rarity.is_empty():
-		rarity = _roll_rarity(rng)
-	var base_ids: Array = BASES.keys()
-	var base_id: String = base_ids[rng.randi_range(0, base_ids.size() - 1)]
-	var rules: Dictionary = RARITIES[rarity]
-	var count: int = rng.randi_range(int(rules.min_affixes), int(rules.max_affixes))
-	var prefix_count: int = rng.randi_range(maxi(0, count - int(rules.max_suffixes)), mini(count, int(rules.max_prefixes)))
-	var affixes: Array = []
-	var groups: Dictionary = {}
-	for kind: String in ["prefix", "suffix"]:
-		var pool: Array[Dictionary] = _eligible_tiers(base_id, item_level, kind)
-		var kind_count: int = prefix_count if kind == "prefix" else count - prefix_count
-		for unused: int in range(kind_count):
-			var choice: Dictionary = _weighted_choice(rng, pool)
-			if choice.is_empty():
-				return {}
-			var family: Dictionary = AFFIXES[choice.id]
-			var tier: Dictionary = family.tiers[int(choice.tier) - 1]
-			affixes.append({"id": choice.id, "tier": int(choice.tier), "value": rng.randi_range(int(tier.min), int(tier.max))})
-			groups[family.group] = true
-			# Filtering all tiers prevents rolling the same family or group twice.
-			var remaining: Array[Dictionary] = []
-			for candidate: Dictionary in pool:
-				if not groups.has(AFFIXES[candidate.id].group):
-					remaining.append(candidate)
-			pool = remaining
-	var instance: Dictionary = {"id": id, "base_id": base_id, "rarity": rarity, "item_level": item_level, "affixes": affixes}
-	return instance if validate_instance(instance) else {}
+	return generate_for_pool(rng, id, item_level, rarity, "legacy")
 
 
-## Same roll contract as generate(), but explicitly selects the expansion base only.
+## Historical runewood-only adapter; preserves its item and post-RNG stream.
 static func generate_expanded(rng: RandomNumberGenerator, id: String, item_level: int, rarity: String = "") -> Dictionary:
-	if rng == null or serial_from_id(id) == 0 or item_level < MIN_ITEM_LEVEL or item_level > MAX_ITEM_LEVEL:
-		return {}
-	if not rarity.is_empty() and not RARITIES.has(rarity):
+	return generate_for_pool(rng, id, item_level, rarity, "runewood")
+
+
+static func _valid_request(rng: RandomNumberGenerator, id: String, item_level: int, rarity: String) -> bool:
+	return rng != null and serial_from_id(id) > 0 and item_level >= MIN_ITEM_LEVEL and item_level <= MAX_ITEM_LEVEL \
+		and (rarity.is_empty() or RARITIES.has(rarity))
+
+
+static func generate_for_pool(rng: RandomNumberGenerator, id: String, item_level: int, rarity: String, pool_id: String) -> Dictionary:
+	if not POOL_PROFILES.has(pool_id) or not _valid_request(rng, id, item_level, rarity):
 		return {}
 	if rarity.is_empty():
 		rarity = _roll_rarity(rng)
-	var base_ids: Array = EXPANSION_BASES.keys()
+	var profile: Dictionary = POOL_PROFILES[pool_id]
+	var base_ids: Array = profile.base_ids
 	var base_id: String = base_ids[rng.randi_range(0, base_ids.size() - 1)]
 	var rules: Dictionary = RARITIES[rarity]
 	var count: int = rng.randi_range(int(rules.min_affixes), int(rules.max_affixes))
@@ -152,7 +199,7 @@ static func generate_expanded(rng: RandomNumberGenerator, id: String, item_level
 	var affixes: Array = []
 	var groups: Dictionary = {}
 	for kind: String in ["prefix", "suffix"]:
-		var pool: Array[Dictionary] = _expanded_eligible_tiers(base_id, item_level, kind)
+		var pool: Array[Dictionary] = _profile_eligible_tiers(base_id, item_level, kind, profile)
 		var kind_count: int = prefix_count if kind == "prefix" else count - prefix_count
 		for unused: int in range(kind_count):
 			var choice: Dictionary = _weighted_choice(rng, pool)
@@ -162,7 +209,6 @@ static func generate_expanded(rng: RandomNumberGenerator, id: String, item_level
 			var tier: Dictionary = family.tiers[int(choice.tier) - 1]
 			affixes.append({"id": choice.id, "tier": int(choice.tier), "value": rng.randi_range(int(tier.min), int(tier.max))})
 			groups[family.group] = true
-			# Filtering all tiers prevents rolling the same family or group twice.
 			var remaining: Array[Dictionary] = []
 			for candidate: Dictionary in pool:
 				if not groups.has(_affix_record(candidate.id).group):
@@ -170,6 +216,18 @@ static func generate_expanded(rng: RandomNumberGenerator, id: String, item_level
 			pool = remaining
 	var instance: Dictionary = {"id": id, "base_id": base_id, "rarity": rarity, "item_level": item_level, "affixes": affixes}
 	return instance if validate_instance(instance) else {}
+
+
+## New natural rewards use one separate 60/25/15 profile choice before item rolls.
+static func generate_current_loot(rng: RandomNumberGenerator, id: String, item_level: int, rarity: String = "") -> Dictionary:
+	if not _valid_request(rng, id, item_level, rarity):
+		return {}
+	var roll: int = rng.randi_range(1, 100)
+	for entry: Dictionary in CURRENT_LOOT_PROFILE:
+		roll -= int(entry.weight)
+		if roll <= 0:
+			return generate_for_pool(rng, id, item_level, rarity, entry.pool_id)
+	return {}
 
 
 ## Natural rewards still create one item; pool choice happens before its rarity/base roll.
@@ -184,7 +242,21 @@ static func generate_loot(rng: RandomNumberGenerator, id: String, item_level: in
 	return generate(rng, id, item_level, rarity)
 
 
-static func validate_instance(value: Variant, allow_expanded: bool = true) -> bool:
+## Omitted vocabulary means current runtime. Explicit booleans retain the old
+## false=pre-v6 / true=v6 meaning; save callers use the named version API.
+static func validate_instance(value: Variant, vocabulary: Variant = null) -> bool:
+	if vocabulary == null:
+		return validate_instance_for_version(value, CURRENT_VOCABULARY)
+	if vocabulary is bool:
+		return validate_instance_for_version(value, 6 if vocabulary else 5)
+	if not _is_bounded_int(vocabulary, 1, CURRENT_VOCABULARY):
+		return false
+	return validate_instance_for_version(value, int(vocabulary))
+
+
+static func validate_instance_for_version(value: Variant, save_version: int) -> bool:
+	if save_version < 1 or save_version > CURRENT_VOCABULARY:
+		return false
 	if not value is Dictionary:
 		return false
 	var instance: Dictionary = value
@@ -194,7 +266,10 @@ static func validate_instance(value: Variant, allow_expanded: bool = true) -> bo
 		return false
 	if not instance.base_id is String or _base_record(instance.base_id).is_empty():
 		return false
-	if not allow_expanded and not BASES.has(instance.base_id):
+	var pool_id: String = pool_for_base(instance.base_id)
+	if pool_id.is_empty() or save_version < int(POOL_PROFILES[pool_id].min_save_version):
+		return false
+	if DEFENSE_BASES.has(instance.base_id) and not _valid_defense_base(_base_record(instance.base_id)):
 		return false
 	if not instance.rarity is String or not RARITIES.has(instance.rarity):
 		return false
@@ -217,7 +292,7 @@ static func validate_instance(value: Variant, allow_expanded: bool = true) -> bo
 		if not affix.id is String or _affix_record(affix.id).is_empty() or families.has(affix.id):
 			return false
 		var family: Dictionary = _affix_record(affix.id)
-		if not allow_expanded and not AFFIXES.has(affix.id):
+		if not POOL_PROFILES[pool_id].affix_ids.has(affix.id):
 			return false
 		if groups.has(family.group) or not _family_eligible(affix.id, family, instance.base_id):
 			return false
@@ -298,6 +373,8 @@ static func _family_eligible(id: String, family: Dictionary, base_id: String) ->
 		return false
 	if EXPANSION_AFFIXES.has(id):
 		return _valid_expansion_family(family) and family.allowed_base_ids.has(base_id)
+	if DEFENSE_AFFIXES.has(id):
+		return _valid_defense_family(family) and family.allowed_base_ids.has(base_id)
 	return AFFIXES.has(id)
 
 
@@ -322,24 +399,51 @@ static func _valid_expansion_family(family: Dictionary) -> bool:
 		and family.allowed_base_ids == ["runewood_focus"]
 
 
+static func _valid_defense_metadata(record: Dictionary) -> bool:
+	if not record.get("scope") is String or not record.get("stage") is String or not record.get("actors") is Array:
+		return false
+	if record.get("scope") != "equipped_character" or record.get("stage") != "hit_mitigation" or record.get("actors") != ["player", "monster"]:
+		return false
+	for actor: String in record.actors:
+		if not DefenseRules.supports_stat("fire_resistance", actor, record.stage):
+			return false
+	return true
+
+
+static func _valid_defense_base(base: Dictionary) -> bool:
+	if not base.get("slot") is String or not base.get("stats") is Dictionary:
+		return false
+	return _valid_defense_metadata(base) and base.slot == "armor" \
+		and base.stats.has("fire_resistance") \
+		and DefenseRules.defense_profile({"fire_resistance": base.stats.fire_resistance}).ok
+
+
+static func _valid_defense_family(family: Dictionary) -> bool:
+	for field: String in ["stat", "kind", "unit"]:
+		if not family.get(field) is String:
+			return false
+	if not family.get("slots") is Array or not family.get("allowed_base_ids") is Array:
+		return false
+	return _valid_defense_metadata(family) and family.get("stat") == "fire_resistance" \
+		and family.get("kind") == "suffix" and family.get("unit") == "percent" \
+		and family.get("slots") == ["armor"] and family.get("allowed_base_ids") == ["emberhide_vest"]
+
+
 static func _expanded_eligible_tiers(base_id: String, item_level: int, kind: String) -> Array[Dictionary]:
-	var pool: Array[Dictionary] = []
-	var ids: Array = AFFIXES.keys() + EXPANSION_AFFIXES.keys()
-	for id: String in ids:
-		var family: Dictionary = _affix_record(id)
-		if family.kind != kind or not _family_eligible(id, family, base_id):
-			continue
-		for tier: Dictionary in family.tiers:
-			if item_level >= int(tier.level) and int(tier.weight) > 0:
-				pool.append({"id": id, "tier": int(tier.tier), "weight": int(tier.weight)})
-	return pool
+	return _profile_eligible_tiers(base_id, item_level, kind, POOL_PROFILES.runewood)
 
 
 static func _eligible_tiers(base_id: String, item_level: int, kind: String) -> Array[Dictionary]:
+	return _profile_eligible_tiers(base_id, item_level, kind, POOL_PROFILES.legacy)
+
+
+static func _profile_eligible_tiers(base_id: String, item_level: int, kind: String, profile: Dictionary) -> Array[Dictionary]:
 	var pool: Array[Dictionary] = []
-	for id: String in AFFIXES:
-		var family: Dictionary = AFFIXES[id]
-		if family.kind != kind or not family.slots.has(BASES[base_id].slot):
+	if not profile.base_ids.has(base_id):
+		return pool
+	for id: String in profile.affix_ids:
+		var family: Dictionary = _affix_record(id)
+		if family.kind != kind or not _family_eligible(id, family, base_id):
 			continue
 		for tier: Dictionary in family.tiers:
 			if item_level >= int(tier.level) and int(tier.weight) > 0:

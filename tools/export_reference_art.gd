@@ -137,10 +137,10 @@ func collect_rows() -> void:
 		add_row("skills", id, Data.SKILLS[id].name, "SkillEmblem._draw", "GameData.SKILLS", "active_skill")
 	for id: String in _sorted_ids(Supports.SUPPORTS):
 		add_row("supports", id, Supports.SUPPORTS[id].name, "SkillEmblem._draw", "SupportCatalog.SUPPORTS", "support")
-	var bases: Dictionary = Gear.BASES.duplicate(true)
-	bases.merge(Gear.EXPANSION_BASES)
-	for id: String in _sorted_ids(bases):
-		add_row("equipment", id, bases[id].name, "EquipmentArt.draw_item", "EquipmentCatalog.BASES + EXPANSION_BASES", "base")
+	var base_ids: Array[String] = Gear.all_base_ids()
+	base_ids.sort()
+	for id: String in base_ids:
+		add_row("equipment", id, Gear.base_definition(id).name, "EquipmentArt.draw_item", "EquipmentCatalog.all_base_ids", "base")
 	for id: String in _sorted_ids(Data.ITEMS):
 		add_row("equipment", id, Data.ITEMS[id].name, "EquipmentArt.draw_item", "GameData.ITEMS", "fixed_item")
 	var jewel_bases: Dictionary = Jewels.BASES.duplicate(true)

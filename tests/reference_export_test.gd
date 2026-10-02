@@ -8,6 +8,8 @@ const Passives = preload("res://scripts/passive_data.gd")
 const Registry = preload("res://scripts/mechanics/mechanic_registry.gd")
 const Monsters = preload("res://scripts/monsters/monster_catalog.gd")
 const Rules = preload("res://scripts/passives/allocation_rules.gd")
+const Defense = preload("res://scripts/mechanics/defense_rules.gd")
+const Damage = preload("res://scripts/combat/damage_resolver.gd")
 const Supports = preload("res://scripts/combat/support_catalog.gd")
 var failures: int = 0
 var checks: int = 0
@@ -24,14 +26,16 @@ func _initialize() -> void:
 	_expect(JSON.stringify(existing, "", true) == JSON.stringify(roundtrip, "", true), "committed JSON exactly matches live export")
 	_ids(current.skills, Data.SKILLS.keys(), "all active skills")
 	_ids(current.supports, Supports.SUPPORTS.keys(), "all support skills")
-	_ids(current.equipment, Equipment.BASES.keys() + Equipment.EXPANSION_BASES.keys(), "legacy and expansion bases")
-	_ids(current.affixes, Equipment.AFFIXES.keys() + Equipment.EXPANSION_AFFIXES.keys(), "legacy and expansion affix families")
+	_ids(current.equipment, Equipment.all_base_ids(), "legacy and expansion bases")
+	_ids(current.affixes, Equipment.all_affix_ids(), "legacy and expansion affix families")
+	_expect(current.equipment_pools == Equipment.pool_profiles(), "all detached runtime pool profiles")
+	_expect(current.current_loot_profile == Equipment.current_loot_profile(), "current natural reward weights")
 	_ids(current.jewels, Jewels.BASES.keys() + Jewels.SPECIAL_BASES.keys(), "ordinary and special jewels")
 	_ids(current.passives, Passives.get_nodes().keys(), "all original nodes")
 	_ids(current.mechanisms, Registry.get_ids(), "all shared mechanisms")
 	_ids(current.monsters, Monsters.TEMPLATES.keys(), "all monster templates")
 	_expect(current.skills.size() == 8 and current.supports.size() == 2, "bounded skill inventory")
-	_expect(current.equipment.size() == 7 and current.affixes.size() == 16, "bounded equipment inventory")
+	_expect(current.equipment.size() == 8 and current.affixes.size() == 17, "bounded equipment inventory")
 	_expect(current.passives.size() == 181 and current.special_coverage.size() == 12, "complete tree and socket coverage")
 	for skill_id: String in current.skills:
 		var skill: Dictionary = current.skills[skill_id]
@@ -53,6 +57,34 @@ func _initialize() -> void:
 		_expect(sample.with_remote.legal and sample.with_remote.remote_nodes.has(sample.remote_example), "remote example is legal " + socket_id)
 		for node_id: String in sample.connected.granted_by:
 			_expect(current.passives[node_id].type in ["small", "notable"], "coverage excludes sockets and origin")
+	_expect(current.monsters.size() == 7, "all original monster templates including fire encounter")
+	_expect(current.fire_encounter == Monsters.fire_encounter_policy(), "encounter/reward policy from production catalog")
+	var defense: Dictionary = current.defenses.fire_resistance
+	var metadata: Dictionary = Defense.metadata()
+	for key: String in metadata:
+		_expect(defense[key] == Exporter.clean(metadata[key]), "shared defense metadata " + key)
+	_expect(defense.origin == "original" and defense.source_refs.is_empty(), "new defense is original, not PoE-derived")
+	var example: Dictionary = defense.worked_example
+	var expected: Dictionary = Defense.incoming_hit(example.input_components, example.defense_stats, example.shield_before, example.health_before, "player")
+	_expect(example.trace == Exporter.clean(expected), "diagram trace comes from production incoming_hit")
+	_expect(example.trace.damage_total == 35.0 and example.trace.shield_spent == 10.0 and example.trace.health_lost == 25.0, "known forty-point input works through fire resistance then shield")
+	_expect(example.trace.raw_components.physical == 20.0 and example.trace.raw_components.fire == 20.0, "worked example input preserved")
+	for key: String in ["components", "damage_total", "shield_spent", "health_lost", "remaining_health"]:
+		_expect(example.trace[key] == example.monster_trace[key], "player/monster example parity " + key)
+	for profile: Dictionary in defense.cap_examples:
+		_expect(profile == Exporter.clean(Defense.defense_profile({"fire_resistance": profile.raw_resistances.fire})), "clamp example from shared profile")
+	_expect(current.known_target.wave == current.fire_encounter.minimum_wave, "known target uses first encounter wave")
+	_expect(current.equipment.emberhide_vest.stats_text.contains("火焰抗性 +15") and current.equipment.emberhide_vest.stats_text.contains("%"), "base defense formatter keeps percentage units")
+	_expect(current.affixes.emberward.eligible_bases == ["emberhide_vest"], "new suffix cannot leak into frozen bases")
+	for id: String in current.monsters:
+		var enemy: Dictionary = current.monsters[id].runtime_example
+		_expect(current.monsters[id].contact_components == Exporter.clean(Monsters.contact_components(enemy)), "contact components from catalog " + id)
+	for skill: Dictionary in current.skills.values():
+		for config: Array in skill.examples.values():
+			for cast: Dictionary in config:
+				for packet: Dictionary in cast.packets:
+					_expect(packet.known_target_settlement.ok, "known target settlement is valid")
+					_expect(float(packet.known_target_resolved.total) <= float(packet.resolved.total) + 0.00001, "known positive fire defense never increases preview")
 	print("Reference export: %d checks, %d failures" % [checks, failures])
 	quit(1 if failures else 0)
 

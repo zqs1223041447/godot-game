@@ -12,7 +12,7 @@ const Equipment = preload("res://scripts/items/equipment_catalog.gd")
 const SupportCatalog = preload("res://scripts/combat/support_catalog.gd")
 const SkillCompiler = preload("res://scripts/combat/skill_compiler.gd")
 const AllocationRules = preload("res://scripts/passives/allocation_rules.gd")
-const SAVE_VERSION: int = 7
+const SAVE_VERSION: int = 8
 const MAX_EQUIPMENT: int = 64
 const MAX_EQUIPMENT_ID: int = 999999999
 const MAX_LEVEL: int = 1000
@@ -35,6 +35,7 @@ const BASE_STATS: Dictionary = {
 	"attack_speed_increased": 0.0, "move_speed_increased": 0.0, "mana_regen_increased": 0.0,
 	"attack_added_physical": 0.0, "attack_added_fire": 0.0,
 	"spell_added_cold": 0.0, "spell_added_lightning": 0.0,
+	"fire_resistance": 0.0,
 }
 
 var inventory: Array[String] = ["ember_wand", "swift_blade", "guardian_robe", "vitality_armor", "azure_charm", "storm_charm", "prism_bow", "return_mantle", "detonation_charm"]
@@ -58,6 +59,7 @@ var migrated_from_v3: bool = false
 var migrated_from_v4: bool = false
 var migrated_from_v5: bool = false
 var migrated_from_v6: bool = false
+var migrated_from_v7: bool = false
 var _migration_version: int = 0
 var migration_message: String = ""
 var migration_backup_path: String = ""
@@ -140,7 +142,7 @@ static func _definition_for_id(item_id: String, instances: Dictionary) -> Dictio
 
 
 func award_equipment(rng: RandomNumberGenerator, item_level: int, rarity: String = "", pool: String = "legacy") -> String:
-	if pool not in ["legacy", "expanded", "loot"]:
+	if pool not in ["legacy", "expanded", "loot", "current", "runewood", "defense"]:
 		return ""
 	if rng == null or equipment_instances.size() >= MAX_EQUIPMENT or next_equipment_id > MAX_EQUIPMENT_ID:
 		return ""
@@ -153,6 +155,10 @@ func award_equipment(rng: RandomNumberGenerator, item_level: int, rarity: String
 			instance = Equipment.generate_expanded(rng, id, item_level, rarity)
 		"loot":
 			instance = Equipment.generate_loot(rng, id, item_level, rarity)
+		"current":
+			instance = Equipment.generate_current_loot(rng, id, item_level, rarity)
+		"runewood", "defense":
+			instance = Equipment.generate_for_pool(rng, id, item_level, rarity, pool)
 		_:
 			instance = Equipment.generate(rng, id, item_level, rarity)
 	if not Equipment.validate_instance(instance):
@@ -584,6 +590,7 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	migrated_from_v4 = int(parser.data["version"]) == 4
 	migrated_from_v5 = int(parser.data["version"]) == 5
 	migrated_from_v6 = int(parser.data["version"]) == 6
+	migrated_from_v7 = int(parser.data["version"]) == 7
 	_migration_version = int(parser.data["version"])
 	if migrated_from_v1 or migrated_from_v2:
 		for id: String in Data.COMBAT_STARTER_ITEMS:
@@ -600,6 +607,8 @@ func load_build(path: String = "user://build_save.json") -> bool:
 		migration_message = "构筑已升级：旧装备与掷值保持不变。新增符木法器进入正常掉落，可获得攻击或法术分类点伤；K 和 F6 可查看构成。"
 	if migrated_from_v6:
 		migration_message = "构筑已升级：原装备、辅助与天赋保持不变。常规首领可掉落寻枝晶玉，在半径内开放远程天赋分配。"
+	if migrated_from_v7:
+		migration_message = "构筑已升级：原装备掷值、辅助、天赋与珠宝保持不变。新增灰烬皮甲进入正常掉落，可获得火焰抗性；有效火抗上限为 75%。"
 	migration_backup_path = ""
 	_migration_source_path = ProjectSettings.globalize_path(path) if _migration_version < SAVE_VERSION else ""
 	_migration_source_bytes = source_bytes if _migration_version < SAVE_VERSION else PackedByteArray()
@@ -753,7 +762,7 @@ func _validate_common(data: Dictionary) -> bool:
 		if instances.size() > MAX_EQUIPMENT:
 			return false
 		for id: Variant in instances:
-			if not id is String or not Equipment.validate_instance(instances[id], int(data.get("version", 0)) >= 6):
+			if not id is String or not Equipment.validate_instance_for_version(instances[id], int(data.get("version", 0))):
 				return false
 			if instances[id]["id"] != id or Equipment.serial_from_id(id) >= int(data["next_equipment_id"]) or not loaded_inventory.has(id):
 				return false

@@ -88,7 +88,7 @@ func _test_v6_scene_migration() -> void:
 	_expect(arena.state.allocate_passive("ember_1_0"), "First ordinary build change goes through normal autosave signal")
 	_expect(FileAccess.get_file_as_bytes("user://build_save.json.v6-backup.json") == original, "First scene autosave preserves old BOM and CRLF bytes exactly")
 	var saved: Variant = JSON.parse_string(FileAccess.get_file_as_string("user://build_save.json"))
-	_expect(saved is Dictionary and int(saved.version) == 7 and saved.allocated_nodes.has("ember_1_0"), "Only after successful backup does scene autosave write the new allocation in v7")
+	_expect(saved is Dictionary and int(saved.version) == Model.SAVE_VERSION and saved.allocated_nodes.has("ember_1_0"), "Only after successful backup does scene autosave write the new allocation in current schema")
 	finished = true
 
 func _test_boss_rewards() -> void:

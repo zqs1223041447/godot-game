@@ -31,7 +31,7 @@ const STAT_NAMES: Dictionary = {
 	"projectile_count": "额外母箭", "pickup_radius": "拾取范围",
 	"global_increased": "全局伤害提高", "projectile_increased": "投射物伤害提高",
 	"elemental_increased": "元素伤害提高", "area_increased": "范围伤害提高",
-	"area_mult": "范围倍率", "area_multiplier": "范围倍率"
+	"area_mult": "范围倍率", "area_multiplier": "范围倍率", "fire_resistance": "火焰抗性"
 }
 
 var _arena: Node
@@ -454,6 +454,8 @@ func _update_live() -> void:
 	_set_vital("health", float(_arena.get("health")), float(stats.get("max_health", 100.0)))
 	_set_vital("mana", float(_arena.get("mana")), float(stats.get("max_mana", 100.0)))
 	_set_vital("shield", float(_arena.get("shield")), float(stats.get("max_shield", stats.get("shield", 0.0))))
+	var defense: Dictionary = _arena.call("player_defense_profile")
+	_bars.health.tooltip_text = "火抗 %.0f%%（合计 %.0f%%）\n火焰分量减伤后，先消耗护盾，再消耗生命。详细规则见离线图鉴。" % [float(defense.effective_resistances.fire) * 100.0, float(defense.raw_resistances.fire) * 100.0]
 	var cooldowns: Dictionary = _arena.get("cooldowns") as Dictionary
 	for index: int in range(_skill_buttons.size()):
 		var button: Button = _skill_buttons[index]
@@ -722,7 +724,10 @@ func _build_combat_panel() -> void:
 			var parts: PackedStringArray = []
 			for type: String in record.components:
 				parts.append("%s %.2f" % [type, float(record.components[type])])
-			_panel_body.add_child(_wrap_label("施放 #%d / 箭 #%d / 敌人 #%d · %s · %.2f（%s）" % [int(record.cast_id), int(record.projectile_id), int(record.target_id), "爆炸" if record.tags.has("explosion") else "返回命中" if record.phase == "returning" else "去程或直接命中", float(record.total), " + ".join(parts)], 14, GOLD if record.tags.has("explosion") else CYAN))
+			var damage_label: Label = _wrap_label("施放 #%d / 敌人 #%d · %s · 减伤后 %.2f（%s）" % [int(record.cast_id), int(record.target_id), "爆炸" if record.tags.has("explosion") else "返回命中" if record.phase == "returning" else "去程或直接命中", float(record.total), " + ".join(parts)], 14, GOLD if record.tags.has("explosion") else CYAN)
+			damage_label.tooltip_text = "敌方防御前：%s\n敌方防御后：%s\n护盾消耗 %.2f · 生命损失 %.2f；逐次命中，非每秒伤害。" % [TypedPreview.points(record.get("before_defense_components", {})), TypedPreview.points(record.components), float(record.get("shield_spent", 0.0)), float(record.get("health_lost", 0.0))]
+			damage_label.mouse_filter = Control.MOUSE_FILTER_PASS
+			_panel_body.add_child(damage_label)
 	var trace: Array = _arena.get("combat_trace")
 	var lines: PackedStringArray = []
 	var names: Dictionary = {"split": "分裂", "spawned": "子箭生成", "range_reached": "抵达射程", "return_started": "开始返回", "lifetime_expired": "寿命耗尽", "flight_ended": "自然飞行结束", "explosion": "爆炸", "terminated": "已终止", "hit": "碰撞命中", "spawn_rejected": "容量取消"}
@@ -763,7 +768,11 @@ func _build_monsters_panel() -> void:
 		var label: Label = _label(tier.name, 17, Color(tier.color).lightened(0.35) if id == "reserved" else tier.color)
 		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		rarities.add_child(label)
-	_panel_body.add_child(_wrap_label("常规刷怪只有白 / 蓝 / 金；每五波由关卡事件召唤橙色首领。蓝色 1 项、金色 2 项共享天赋机制。怪物能力在生成时锁定，后续版本改同一机制定义即可联动。", 14))
+	var encounter: Dictionary = catalog.fire_encounter_policy()
+	var encounter_note: Label = _wrap_label("第 %d 波起，每 %d 个自然入场名额包含一只灰烬守卫；击败原始守卫可获稀有灰烬皮甲。" % [int(encounter.minimum_wave), int(encounter.ordinary_admission_interval)], 14)
+	encounter_note.tooltip_text = "本游戏可调平衡。满场、等待中的死亡生成不占自然入场计数；第1波初始怪计入，重开重置。试验怪与子怪无奖励。接触伤害组成与当前火抗见下方快照，完整机制见离线图鉴。其他普通怪仍使用白/蓝/金随机池；每五波出现橙色首领。"
+	encounter_note.mouse_filter = Control.MOUSE_FILTER_PASS
+	_panel_body.add_child(encounter_note)
 	_section("生成规则", "队列 %d / 64 · 谱系 %d" % [runtime.queue.size(), runtime.roots.size()])
 	_panel_body.add_child(_wrap_label("裂殖巡游体 → 2 普通巡游体 + 1 掠行体；孵化重壳体 → 2 裂殖巡游体 → 6 普通小怪。子怪不继承母体机制，按显式目标模板生成；只有原始怪发奖励。", 14))
 	_panel_body.add_child(_wrap_label("模板图拒绝环；一次死亡只触发一次；每根最多 3 代 / 12 后代 / 每次 6 只。场上满 %d 只时排队，队列或谱系预算不足则整组取消。" % _arena.MAX_ENEMIES, 14))
@@ -835,7 +844,7 @@ func _stats_text(stats: Dictionary, separator: String = "  ·  ") -> String:
 		var id: String = str(key)
 		var value: float = float(stats[key])
 		var shown: String
-		if id.contains("mult") or id.ends_with("_increased") or id == "crit_chance" or id == "cooldown_reduction":
+		if id.contains("mult") or id.ends_with("_increased") or id == "crit_chance" or id == "cooldown_reduction" or id == "fire_resistance":
 			shown = String.num(value * 100.0, 2) + "%"
 		elif is_equal_approx(value, roundf(value)):
 			shown = "%d" % int(value)

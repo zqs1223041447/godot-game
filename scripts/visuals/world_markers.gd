@@ -50,7 +50,10 @@ static func name_ids(arena: Node2D, enemies: Array, preferences: VisualSettings)
 
 static func caption(enemy:Dictionary)->String:
 	var rarity:String=str(enemy.get("rarity","normal"))
-	return str(enemy.get("name","怪物"))+" · "+str(Monsters.RARITIES.get(rarity,Monsters.RARITIES.normal).name).split(" · ")[-1]
+	var text:String=str(enemy.get("name","怪物"))+" · "+str(Monsters.RARITIES.get(rarity,Monsters.RARITIES.normal).name).split(" · ")[-1]
+	var fire:float=float(enemy.get("resistances",{}).get("fire",0.0))
+	if fire>0.0: text+=" · 火抗%d%%"%roundi(fire*100.0)
+	return text
 
 static func name_origin(arena:Node2D,enemy:Dictionary,preferences:VisualSettings)->Vector2:
 	var anchor:Vector2=View.world_to_screen(arena,enemy.pos)
@@ -89,6 +92,13 @@ static func draw_enemy(arena: Node2D, enemy: Dictionary, preferences: VisualSett
 		for i:int in range(6):
 			var v:=Vector2.RIGHT.rotated(i*TAU/6)
 			arena.draw_line(center,center+v*3.3,Color("d0ded8"),1,true)
+	if float(enemy.get("resistances",{}).get("fire",0.0))>0.0:
+		var center:=Vector2(radius*1.15+5,1)
+		var ward:=PackedVector2Array([center+Vector2(-3.5,-4),center+Vector2(3.5,-4),center+Vector2(3,1),center+Vector2(0,4),center+Vector2(-3,1)])
+		arena.draw_colored_polygon(ward,Color("494034"))
+		ward.append(ward[0])
+		arena.draw_polyline(ward,Color("c79d65"),1,true)
+		arena.draw_colored_polygon(PackedVector2Array([center+Vector2(0,-2.5),center+Vector2(1.7,0),center+Vector2(1,1.8),center+Vector2(-1.5,1.5),center+Vector2(-1.8,-0.6)]),Color("d8ad74"))
 	if not enemy.get("death_spawns",[]).is_empty():
 		for i:int in range(3):
 			var at:=Vector2((i-1)*4,radius+5)

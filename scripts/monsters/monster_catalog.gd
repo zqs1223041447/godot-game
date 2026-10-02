@@ -2,7 +2,13 @@ class_name MonsterCatalog
 extends RefCounted
 ## Species, rarity, and stateful death templates are orthogonal to shared talents.
 const Registry = preload("res://scripts/mechanics/mechanic_registry.gd")
+const Defense = preload("res://scripts/mechanics/defense_rules.gd")
 const SCHEMA_VERSION: int = 1
+const FIRE_ENCOUNTER: Dictionary = {
+	"template_id": "ember_guard", "minimum_wave": 3, "ordinary_admission_interval": 8,
+	"reward_pool": "defense", "reward_rarity": "rare", "reward_count": 1,
+	"reward_rule": "eligible_original_death_once", "balance_source": "original_game_balance",
+}
 const ORDINARY_RARITIES: Array[String] = ["normal", "magic", "rare"]
 const RARITIES: Dictionary = {
 	"normal": {"name": "白 · 普通", "color": Color("e1e7ef"), "health": 1.0, "damage": 1.0, "xp": 1, "affixes": 0},
@@ -27,7 +33,27 @@ const TEMPLATES: Dictionary = {
 		"death_spawns": [{"template": "splitter", "count": 2}]},
 	"rift_warden": {"name": "裂隙守卫", "kind": 2, "rarity": "boss", "mechanisms": ["ember_mastery", "aegis_mastery"],
 		"death_spawns": [{"template": "crawler", "count": 4}]},
+	"ember_guard": {"name": "灰烬守卫", "kind": 2, "rarity": "rare", "mechanisms": [], "death_spawns": [],
+		"defense_stats": {"fire_resistance": 0.25}, "contact_weights": {"physical": 0.5, "fire": 0.5},
+		"equipment_pool": "defense"},
 }
+
+static func fire_encounter_policy() -> Dictionary:
+	return FIRE_ENCOUNTER.duplicate(true)
+
+
+static func encounter_for_admission(wave: int, admission: int) -> String:
+	if wave >= int(FIRE_ENCOUNTER.minimum_wave) and admission > 0 and admission % int(FIRE_ENCOUNTER.ordinary_admission_interval) == 0:
+		return str(FIRE_ENCOUNTER.template_id)
+	return ""
+
+
+static func contact_components(enemy: Dictionary) -> Dictionary:
+	var components: Dictionary = {}
+	var weights: Dictionary = enemy.get("contact_weights", {"physical": 1.0})
+	for type: String in weights:
+		components[type] = float(enemy.get("damage", 0.0)) * float(weights[type])
+	return components
 
 static func ordinary_roll(rng: RandomNumberGenerator, wave: int) -> Dictionary:
 	var kind: int = 0
@@ -70,6 +96,18 @@ static func validate_templates(templates: Dictionary) -> Array[String]:
 			errors.append("%s: 未知/预留稀有度" % id)
 		if not entry.get("kind") is int or int(entry.kind) < 0 or int(entry.kind) >= SPECIES.size():
 			errors.append("%s: 物种无效" % id)
+		var defense: Dictionary = Defense.defense_profile(entry.get("defense_stats", {}), "monster")
+		if not defense.ok:
+			errors.append("%s: 防御定义无效: %s" % [id, defense.reason])
+		var weights: Variant = entry.get("contact_weights", {"physical": 1.0})
+		var validated_weights: Dictionary = Defense.validate_components(weights)
+		if not validated_weights.ok:
+			errors.append("%s: 接触伤害分量无效: %s" % [id, validated_weights.reason])
+		else:
+			if not is_equal_approx(float(validated_weights.total), 1.0):
+				errors.append("%s: 接触伤害分量权重总和必须为 1" % id)
+		if entry.get("equipment_pool", "") not in ["", "defense"]:
+			errors.append("%s: 未实现的装备奖励池" % id)
 		if not entry.get("mechanisms", []) is Array:
 			errors.append("%s: 机制列表无效" % id)
 		else:
@@ -148,11 +186,15 @@ static func make_enemy(id: int, template_id: String, wave: int, position: Vector
 	var modifiers: Dictionary = resolved.stats
 	var hp: float = float(species.health) * (1.0 + (wave - 1) * 0.16) * float(tier.health) + float(modifiers.get("max_health", 0.0))
 	var maximum_shield: float = float(modifiers.get("max_shield", 0.0))
+	var defense: Dictionary = Defense.defense_profile(template.get("defense_stats", {}), "monster")
 	return {"id": id, "template_id": template_id, "name": template.get("name", template_id), "kind": kind,
 		"rarity": rarity, "mechanism_ids": resolved.mechanism_ids.duplicate(),
 		"mechanism_schema": resolved.schema_version, "mechanism_revision": resolved.definition_revision, "mechanism_policy": resolved.policy_version, "mechanism_stats": modifiers.duplicate(),
 		"pos": position, "health": hp, "max_health": hp, "shield": maximum_shield, "max_shield": maximum_shield,
 		"shield_regen": float(modifiers.get("shield_regen", 0.0)), "damage_delay": 0.0,
+		"defense_stats": template.get("defense_stats", {}).duplicate(true), "resistances": defense.effective_resistances,
+		"contact_weights": template.get("contact_weights", {"physical": 1.0}).duplicate(true),
+		"equipment_pool": template.get("equipment_pool", ""),
 		"speed": float(species.speed) + mini(wave, 15) * 1.4 + float(modifiers.get("move_speed", 0.0)),
 		"damage": (float(species.damage) + (wave - 1) * 0.7) * float(tier.damage) + float(modifiers.get("damage", 0.0)),
 		"attack_speed": 1.0 / 0.85 + float(modifiers.get("attack_speed", 0.0)),
@@ -168,4 +210,8 @@ static func mechanism_text(enemy: Dictionary) -> String:
 		labels.append(str(Registry.get_definition(id).get("name", id)))
 	if not enemy.get("death_spawns", []).is_empty():
 		labels.append("死亡分裂")
+	if float(enemy.get("resistances", {}).get("fire", 0.0)) > 0.0:
+		labels.append("火抗 %.0f%%" % (float(enemy.resistances.fire) * 100.0))
+	if float(enemy.get("contact_weights", {}).get("fire", 0.0)) > 0.0:
+		labels.append("接触含 %.0f%% 火焰" % (float(enemy.contact_weights.fire) * 100.0))
 	return " · ".join(labels) if not labels.is_empty() else "无额外机制"

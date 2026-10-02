@@ -7,13 +7,13 @@
 	"transparent_background": true,
 	"file_paths_relative_to": "manifest.json directory",
 	"status": "complete",
-	"written_images": 36,
+	"written_images": 38,
 	"counts": {
 		"skills": 8,
 		"supports": 2,
-		"equipment": 16,
+		"equipment": 17,
 		"jewels": 4,
-		"monsters": 6
+		"monsters": 7
 	},
 	"entries": [
 		{
@@ -112,7 +112,16 @@
 			"name": "烬芦杖",
 			"file": "equipment/cinder_reed.png",
 			"source_renderer": "EquipmentArt.draw_item",
-			"source_catalog": "EquipmentCatalog.BASES + EXPANSION_BASES",
+			"source_catalog": "EquipmentCatalog.all_base_ids",
+			"entry_type": "base"
+		},
+		{
+			"category": "equipment",
+			"id": "emberhide_vest",
+			"name": "灰烬皮甲",
+			"file": "equipment/emberhide_vest.png",
+			"source_renderer": "EquipmentArt.draw_item",
+			"source_catalog": "EquipmentCatalog.all_base_ids",
 			"entry_type": "base"
 		},
 		{
@@ -121,7 +130,7 @@
 			"name": "岚纺刃",
 			"file": "equipment/gale_spindle.png",
 			"source_renderer": "EquipmentArt.draw_item",
-			"source_catalog": "EquipmentCatalog.BASES + EXPANSION_BASES",
+			"source_catalog": "EquipmentCatalog.all_base_ids",
 			"entry_type": "base"
 		},
 		{
@@ -130,7 +139,7 @@
 			"name": "脉籽符",
 			"file": "equipment/pulse_seed.png",
 			"source_renderer": "EquipmentArt.draw_item",
-			"source_catalog": "EquipmentCatalog.BASES + EXPANSION_BASES",
+			"source_catalog": "EquipmentCatalog.all_base_ids",
 			"entry_type": "base"
 		},
 		{
@@ -139,7 +148,7 @@
 			"name": "符木法器",
 			"file": "equipment/runewood_focus.png",
 			"source_renderer": "EquipmentArt.draw_item",
-			"source_catalog": "EquipmentCatalog.BASES + EXPANSION_BASES",
+			"source_catalog": "EquipmentCatalog.all_base_ids",
 			"entry_type": "base"
 		},
 		{
@@ -148,7 +157,7 @@
 			"name": "潮缄袍",
 			"file": "equipment/tidebound_coat.png",
 			"source_renderer": "EquipmentArt.draw_item",
-			"source_catalog": "EquipmentCatalog.BASES + EXPANSION_BASES",
+			"source_catalog": "EquipmentCatalog.all_base_ids",
 			"entry_type": "base"
 		},
 		{
@@ -157,7 +166,7 @@
 			"name": "途镜坠",
 			"file": "equipment/wayglass_token.png",
 			"source_renderer": "EquipmentArt.draw_item",
-			"source_catalog": "EquipmentCatalog.BASES + EXPANSION_BASES",
+			"source_catalog": "EquipmentCatalog.all_base_ids",
 			"entry_type": "base"
 		},
 		{
@@ -166,7 +175,7 @@
 			"name": "绳垒衣",
 			"file": "equipment/woven_bastion.png",
 			"source_renderer": "EquipmentArt.draw_item",
-			"source_catalog": "EquipmentCatalog.BASES + EXPANSION_BASES",
+			"source_catalog": "EquipmentCatalog.all_base_ids",
 			"entry_type": "base"
 		},
 		{
@@ -309,6 +318,15 @@
 			"id": "crawler",
 			"name": "巡游体",
 			"file": "monsters/crawler.png",
+			"source_renderer": "FantasyActors.draw_enemy + _draw_enemy_marks (rarity glyph only)",
+			"source_catalog": "MonsterCatalog.TEMPLATES",
+			"entry_type": "template"
+		},
+		{
+			"category": "monsters",
+			"id": "ember_guard",
+			"name": "灰烬守卫",
+			"file": "monsters/ember_guard.png",
 			"source_renderer": "FantasyActors.draw_enemy + _draw_enemy_marks (rarity glyph only)",
 			"source_catalog": "MonsterCatalog.TEMPLATES",
 			"entry_type": "template"

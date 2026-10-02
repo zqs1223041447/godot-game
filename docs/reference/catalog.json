@@ -20,7 +20,9 @@
 			"kind": "prefix",
 			"label": "攻击命中附加火焰伤害",
 			"name": "焰刻",
-			"pool": "expansion",
+			"pools": [
+				"runewood"
+			],
 			"required_tags": [
 				"hit",
 				"attack"
@@ -76,7 +78,9 @@
 			"kind": "prefix",
 			"label": "攻击命中附加物理伤害",
 			"name": "砾刻",
-			"pool": "expansion",
+			"pools": [
+				"runewood"
+			],
 			"required_tags": [
 				"hit",
 				"attack"
@@ -130,7 +134,10 @@
 			"kind": "suffix",
 			"label": "普通攻击速度提高",
 			"name": "连拍",
-			"pool": "legacy",
+			"pools": [
+				"legacy",
+				"runewood"
+			],
 			"slots": [
 				"weapon",
 				"charm"
@@ -173,7 +180,8 @@
 				"tidebound_coat",
 				"wayglass_token",
 				"pulse_seed",
-				"runewood_focus"
+				"runewood_focus",
+				"emberhide_vest"
 			],
 			"formatted_examples": [
 				"后缀 · 藏炭 T1：火焰伤害提高 +8%",
@@ -184,7 +192,11 @@
 			"kind": "suffix",
 			"label": "火焰伤害提高",
 			"name": "藏炭",
-			"pool": "legacy",
+			"pools": [
+				"legacy",
+				"runewood",
+				"defense"
+			],
 			"slots": [
 				"weapon",
 				"armor",
@@ -225,7 +237,8 @@
 				"tidebound_coat",
 				"wayglass_token",
 				"pulse_seed",
-				"runewood_focus"
+				"runewood_focus",
+				"emberhide_vest"
 			],
 			"formatted_examples": [
 				"前缀 · 深汲 T1：最大魔力 +9",
@@ -236,7 +249,11 @@
 			"kind": "prefix",
 			"label": "最大魔力",
 			"name": "深汲",
-			"pool": "legacy",
+			"pools": [
+				"legacy",
+				"runewood",
+				"defense"
+			],
 			"slots": [
 				"weapon",
 				"armor",
@@ -268,6 +285,61 @@
 			],
 			"unit": "flat"
 		},
+		"emberward": {
+			"actors": [
+				"player",
+				"monster"
+			],
+			"affected_skills": [],
+			"allowed_base_ids": [
+				"emberhide_vest"
+			],
+			"eligible_bases": [
+				"emberhide_vest"
+			],
+			"formatted_examples": [
+				"后缀 · 护火 T1：火焰抗性 +12%",
+				"后缀 · 护火 T2：火焰抗性 +18%",
+				"后缀 · 护火 T3：火焰抗性 +25%"
+			],
+			"group": "fire_resistance",
+			"kind": "suffix",
+			"label": "火焰抗性",
+			"name": "护火",
+			"pools": [
+				"defense"
+			],
+			"scope": "equipped_character",
+			"slots": [
+				"armor"
+			],
+			"stage": "hit_mitigation",
+			"stat": "fire_resistance",
+			"tiers": [
+				{
+					"level": 1,
+					"max": 12,
+					"min": 8,
+					"tier": 1,
+					"weight": 100
+				},
+				{
+					"level": 8,
+					"max": 18,
+					"min": 13,
+					"tier": 2,
+					"weight": 60
+				},
+				{
+					"level": 16,
+					"max": 25,
+					"min": 19,
+					"tier": 3,
+					"weight": 30
+				}
+			],
+			"unit": "percent"
+		},
 		"farweave": {
 			"affected_skills": [
 				"tornado",
@@ -290,7 +362,10 @@
 			"kind": "prefix",
 			"label": "投射物伤害提高（不含独立爆炸）",
 			"name": "远织",
-			"pool": "legacy",
+			"pools": [
+				"legacy",
+				"runewood"
+			],
 			"slots": [
 				"weapon",
 				"charm"
@@ -327,7 +402,8 @@
 				"woven_bastion",
 				"tidebound_coat",
 				"wayglass_token",
-				"pulse_seed"
+				"pulse_seed",
+				"emberhide_vest"
 			],
 			"formatted_examples": [
 				"前缀 · 灯帷 T1：全局最大护盾 +9",
@@ -338,7 +414,11 @@
 			"kind": "prefix",
 			"label": "全局最大护盾",
 			"name": "灯帷",
-			"pool": "legacy",
+			"pools": [
+				"legacy",
+				"runewood",
+				"defense"
+			],
 			"slots": [
 				"armor",
 				"charm"
@@ -389,7 +469,10 @@
 			"kind": "prefix",
 			"label": "攻击元素伤害提高",
 			"name": "折辉",
-			"pool": "legacy",
+			"pools": [
+				"legacy",
+				"runewood"
+			],
 			"slots": [
 				"weapon",
 				"charm"
@@ -431,7 +514,8 @@
 				"tidebound_coat",
 				"wayglass_token",
 				"pulse_seed",
-				"runewood_focus"
+				"runewood_focus",
+				"emberhide_vest"
 			],
 			"formatted_examples": [
 				"后缀 · 霜回 T1：冰霜伤害提高 +8%",
@@ -442,7 +526,11 @@
 			"kind": "suffix",
 			"label": "冰霜伤害提高",
 			"name": "霜回",
-			"pool": "legacy",
+			"pools": [
+				"legacy",
+				"runewood",
+				"defense"
+			],
 			"slots": [
 				"weapon",
 				"armor",
@@ -480,7 +568,8 @@
 				"woven_bastion",
 				"tidebound_coat",
 				"wayglass_token",
-				"pulse_seed"
+				"pulse_seed",
+				"emberhide_vest"
 			],
 			"formatted_examples": [
 				"前缀 · 根泉 T1：最大生命 +14",
@@ -491,7 +580,11 @@
 			"kind": "prefix",
 			"label": "最大生命",
 			"name": "根泉",
-			"pool": "legacy",
+			"pools": [
+				"legacy",
+				"runewood",
+				"defense"
+			],
 			"slots": [
 				"armor",
 				"charm"
@@ -546,7 +639,10 @@
 			"kind": "prefix",
 			"label": "法术伤害提高",
 			"name": "符歌",
-			"pool": "legacy",
+			"pools": [
+				"legacy",
+				"runewood"
+			],
 			"slots": [
 				"weapon",
 				"charm"
@@ -590,7 +686,8 @@
 				"tidebound_coat",
 				"wayglass_token",
 				"pulse_seed",
-				"runewood_focus"
+				"runewood_focus",
+				"emberhide_vest"
 			],
 			"formatted_examples": [
 				"后缀 · 引霆 T1：闪电伤害提高 +8%",
@@ -601,7 +698,11 @@
 			"kind": "suffix",
 			"label": "闪电伤害提高",
 			"name": "引霆",
-			"pool": "legacy",
+			"pools": [
+				"legacy",
+				"runewood",
+				"defense"
+			],
 			"slots": [
 				"weapon",
 				"armor",
@@ -657,7 +758,9 @@
 			"kind": "prefix",
 			"label": "法术命中附加冰霜伤害",
 			"name": "霜铭",
-			"pool": "expansion",
+			"pools": [
+				"runewood"
+			],
 			"required_tags": [
 				"hit",
 				"spell"
@@ -717,7 +820,9 @@
 			"kind": "prefix",
 			"label": "法术命中附加闪电伤害",
 			"name": "雷铭",
-			"pool": "expansion",
+			"pools": [
+				"runewood"
+			],
 			"required_tags": [
 				"hit",
 				"spell"
@@ -759,7 +864,8 @@
 				"woven_bastion",
 				"tidebound_coat",
 				"wayglass_token",
-				"pulse_seed"
+				"pulse_seed",
+				"emberhide_vest"
 			],
 			"formatted_examples": [
 				"后缀 · 循迹 T1：移动速度提高 +2%",
@@ -770,7 +876,11 @@
 			"kind": "suffix",
 			"label": "移动速度提高",
 			"name": "循迹",
-			"pool": "legacy",
+			"pools": [
+				"legacy",
+				"runewood",
+				"defense"
+			],
 			"slots": [
 				"armor",
 				"charm"
@@ -810,7 +920,8 @@
 				"tidebound_coat",
 				"wayglass_token",
 				"pulse_seed",
-				"runewood_focus"
+				"runewood_focus",
+				"emberhide_vest"
 			],
 			"formatted_examples": [
 				"后缀 · 泉旋 T1：魔力恢复速度提高 +5%",
@@ -821,7 +932,11 @@
 			"kind": "suffix",
 			"label": "魔力恢复速度提高",
 			"name": "泉旋",
-			"pool": "legacy",
+			"pools": [
+				"legacy",
+				"runewood",
+				"defense"
+			],
 			"slots": [
 				"weapon",
 				"armor",
@@ -879,6 +994,7 @@
 				"damage": 26.0,
 				"elemental_increased": 0.0,
 				"fire_increased": 0.0,
+				"fire_resistance": 0.0,
 				"global_increased": 0.0,
 				"lightning_increased": 0.0,
 				"mana_regen": 12.0,
@@ -920,6 +1036,7 @@
 				"damage": 22.0,
 				"elemental_increased": 0.3,
 				"fire_increased": 0.0,
+				"fire_resistance": 0.0,
 				"global_increased": 0.2,
 				"lightning_increased": 0.0,
 				"mana_regen": 9.0,
@@ -935,6 +1052,230 @@
 				"spell_added_cold": 0.0,
 				"spell_added_lightning": 0.0,
 				"spell_increased": 0.0
+			}
+		}
+	},
+	"current_loot_profile": [
+		{
+			"pool_id": "legacy",
+			"weight": 60
+		},
+		{
+			"pool_id": "runewood",
+			"weight": 25
+		},
+		{
+			"pool_id": "defense",
+			"weight": 15
+		}
+	],
+	"defenses": {
+		"fire_resistance": {
+			"balance_version": "original-fire-defense-v1",
+			"cap_examples": [
+				{
+					"actor": "player",
+					"effective_resistances": {
+						"fire": 0.0
+					},
+					"ok": true,
+					"raw_resistances": {
+						"fire": -0.2
+					},
+					"reason": "",
+					"stage": "hit_mitigation"
+				},
+				{
+					"actor": "player",
+					"effective_resistances": {
+						"fire": 0.0
+					},
+					"ok": true,
+					"raw_resistances": {
+						"fire": 0.0
+					},
+					"reason": "",
+					"stage": "hit_mitigation"
+				},
+				{
+					"actor": "player",
+					"effective_resistances": {
+						"fire": 0.25
+					},
+					"ok": true,
+					"raw_resistances": {
+						"fire": 0.25
+					},
+					"reason": "",
+					"stage": "hit_mitigation"
+				},
+				{
+					"actor": "player",
+					"effective_resistances": {
+						"fire": 0.75
+					},
+					"ok": true,
+					"raw_resistances": {
+						"fire": 0.75
+					},
+					"reason": "",
+					"stage": "hit_mitigation"
+				},
+				{
+					"actor": "player",
+					"effective_resistances": {
+						"fire": 0.75
+					},
+					"ok": true,
+					"raw_resistances": {
+						"fire": 1.0
+					},
+					"reason": "",
+					"stage": "hit_mitigation"
+				}
+			],
+			"damage_type": "fire",
+			"description": "本项目原创火焰命中防御；原始抗性相加，有效值限制在 0%–75%，再依次消耗护盾和生命。",
+			"id": "fire_resistance",
+			"kind": "hit_defense",
+			"maximum_effective": 0.75,
+			"minimum_effective": 0.0,
+			"name": "火焰抗性",
+			"origin": "original",
+			"schema_version": 1,
+			"settlement_order": [
+				"resistance",
+				"shield",
+				"health"
+			],
+			"source_refs": [],
+			"stacking": "additive_raw_then_clamp",
+			"stage": "hit_mitigation",
+			"stat": "fire_resistance",
+			"supported_actors": [
+				"player",
+				"monster"
+			],
+			"unsupported": [
+				"armor",
+				"penetration",
+				"ailments",
+				"chaos_bypass"
+			],
+			"worked_example": {
+				"defense_stats": {
+					"fire_resistance": 0.25
+				},
+				"health_before": 100.0,
+				"input_components": {
+					"fire": 20.0,
+					"physical": 20.0
+				},
+				"monster_trace": {
+					"actor": "monster",
+					"components": {
+						"fire": 15.0,
+						"physical": 20.0
+					},
+					"damage_total": 35.0,
+					"details": [
+						{
+							"base": 20.0,
+							"before_defense": 20.0,
+							"final": 20.0,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "physical"
+						},
+						{
+							"base": 20.0,
+							"before_defense": 20.0,
+							"final": 15.0,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.25,
+							"type": "fire"
+						}
+					],
+					"effective_resistances": {
+						"fire": 0.25
+					},
+					"health_lost": 25.0,
+					"mitigated_components": {
+						"fire": 5.0,
+						"physical": 0.0
+					},
+					"ok": true,
+					"overkill": 0.0,
+					"raw_components": {
+						"fire": 20.0,
+						"physical": 20.0
+					},
+					"raw_resistances": {
+						"fire": 0.25
+					},
+					"reason": "",
+					"remaining_health": 75.0,
+					"remaining_shield": 0.0,
+					"shield_spent": 10.0,
+					"stage": "hit_mitigation"
+				},
+				"shield_before": 10.0,
+				"trace": {
+					"actor": "player",
+					"components": {
+						"fire": 15.0,
+						"physical": 20.0
+					},
+					"damage_total": 35.0,
+					"details": [
+						{
+							"base": 20.0,
+							"before_defense": 20.0,
+							"final": 20.0,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "physical"
+						},
+						{
+							"base": 20.0,
+							"before_defense": 20.0,
+							"final": 15.0,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.25,
+							"type": "fire"
+						}
+					],
+					"effective_resistances": {
+						"fire": 0.25
+					},
+					"health_lost": 25.0,
+					"mitigated_components": {
+						"fire": 5.0,
+						"physical": 0.0
+					},
+					"ok": true,
+					"overkill": 0.0,
+					"raw_components": {
+						"fire": 20.0,
+						"physical": 20.0
+					},
+					"raw_resistances": {
+						"fire": 0.25
+					},
+					"reason": "",
+					"remaining_health": 75.0,
+					"remaining_shield": 0.0,
+					"shield_spent": 10.0,
+					"stage": "hit_mitigation"
+				}
 			}
 		}
 	},
@@ -2421,6 +2762,38 @@
 			},
 			"stats_text": "伤害 +3.0\n魔力恢复 +0.25 / 秒"
 		},
+		"emberhide_vest": {
+			"actors": [
+				"player",
+				"monster"
+			],
+			"description": "最大生命 +8，火焰抗性 +15%。火焰抗性作用于承受的火焰命中，有效上限 75%。",
+			"eligible_affixes": [
+				"rootwell",
+				"deepwell",
+				"lanternveil",
+				"coalglow",
+				"rimeecho",
+				"sparkthread",
+				"wellturn",
+				"trailstep",
+				"emberward"
+			],
+			"name": "灰烬皮甲",
+			"pool": "defense",
+			"scope": "equipped_character",
+			"size": [
+				2,
+				3
+			],
+			"slot": "armor",
+			"stage": "hit_mitigation",
+			"stats": {
+				"fire_resistance": 0.15,
+				"max_health": 8.0
+			},
+			"stats_text": "最大生命 +8.0\n火焰抗性 +15.0%"
+		},
 		"gale_spindle": {
 			"description": "基础伤害 +2，攻击速度 +0.08 / 秒。基础伤害为角色通用加值。",
 			"eligible_affixes": [
@@ -2494,7 +2867,7 @@
 				"spell_added_lightning"
 			],
 			"name": "符木法器",
-			"pool": "expansion",
+			"pool": "runewood",
 			"size": [
 				1,
 				3
@@ -2586,6 +2959,74 @@
 			"stats_text": "最大生命 +12.0\n最大护盾 +5.0"
 		}
 	},
+	"equipment_pools": {
+		"defense": {
+			"affix_ids": [
+				"rootwell",
+				"deepwell",
+				"lanternveil",
+				"coalglow",
+				"rimeecho",
+				"sparkthread",
+				"wellturn",
+				"trailstep",
+				"emberward"
+			],
+			"base_ids": [
+				"emberhide_vest"
+			],
+			"min_save_version": 8
+		},
+		"legacy": {
+			"affix_ids": [
+				"rootwell",
+				"deepwell",
+				"lanternveil",
+				"runesong",
+				"prismedge",
+				"farweave",
+				"coalglow",
+				"rimeecho",
+				"sparkthread",
+				"wellturn",
+				"trailstep",
+				"beatlink"
+			],
+			"base_ids": [
+				"cinder_reed",
+				"gale_spindle",
+				"woven_bastion",
+				"tidebound_coat",
+				"wayglass_token",
+				"pulse_seed"
+			],
+			"min_save_version": 4
+		},
+		"runewood": {
+			"affix_ids": [
+				"rootwell",
+				"deepwell",
+				"lanternveil",
+				"runesong",
+				"prismedge",
+				"farweave",
+				"coalglow",
+				"rimeecho",
+				"sparkthread",
+				"wellturn",
+				"trailstep",
+				"beatlink",
+				"attack_added_physical",
+				"attack_added_fire",
+				"spell_added_cold",
+				"spell_added_lightning"
+			],
+			"base_ids": [
+				"runewood_focus"
+			],
+			"min_save_version": 6
+		}
+	},
 	"equipment_rarities": {
 		"magic": {
 			"color": "#8eb8ff",
@@ -2614,6 +3055,16 @@
 			"name": "稀有",
 			"weight": 15
 		}
+	},
+	"fire_encounter": {
+		"balance_source": "original_game_balance",
+		"minimum_wave": 3,
+		"ordinary_admission_interval": 8,
+		"reward_count": 1,
+		"reward_pool": "defense",
+		"reward_rarity": "rare",
+		"reward_rule": "eligible_original_death_once",
+		"template_id": "ember_guard"
 	},
 	"fixed_items": {
 		"azure_charm": {
@@ -2740,7 +3191,7 @@
 			}
 		}
 	},
-	"game_version": "0.10.0",
+	"game_version": "0.11.0",
 	"jewel_affixes": {
 		"barrier": {
 			"kind": "prefix",
@@ -2927,8 +3378,25 @@
 			]
 		}
 	},
+	"known_target": {
+		"defense_profile": {
+			"actor": "monster",
+			"effective_resistances": {
+				"fire": 0.25
+			},
+			"ok": true,
+			"raw_resistances": {
+				"fire": 0.25
+			},
+			"reason": "",
+			"stage": "hit_mitigation"
+		},
+		"health": 313.5,
+		"shield": 0.0,
+		"template_id": "ember_guard",
+		"wave": 3
+	},
 	"limits": {
-		"expansion_loot_percent": 25,
 		"initial_projectiles": 9,
 		"max_item_level": 30,
 		"max_supports": 2,
@@ -3781,22 +4249,42 @@
 	},
 	"monsters": {
 		"brood_host": {
+			"contact_components": {
+				"physical": 21.599999999999998
+			},
 			"death_spawns": [
 				{
 					"count": 2,
 					"template": "splitter"
 				}
 			],
+			"defense_profile": {
+				"actor": "monster",
+				"effective_resistances": {
+					"fire": 0.0
+				},
+				"ok": true,
+				"raw_resistances": {
+					"fire": 0.0
+				},
+				"reason": "",
+				"stage": "hit_mitigation"
+			},
+			"example_wave": 1,
 			"kind": 2,
+			"mechanism_text": "苍林专精 · 辉壁复苏 · 死亡分裂",
 			"mechanisms": [
 				"grove_mastery",
 				"aegis_recovery"
 			],
 			"name": "孵化重壳体",
 			"rarity": "rare",
-			"wave_one_example": {
+			"runtime_example": {
 				"attack_speed": 1.1764705882352942,
 				"attack_timer": 0.5,
+				"contact_weights": {
+					"physical": 1.0
+				},
 				"damage": 21.599999999999998,
 				"damage_delay": 0.0,
 				"death_processed": false,
@@ -3806,6 +4294,10 @@
 						"template": "splitter"
 					}
 				],
+				"defense_stats": {
+
+				},
+				"equipment_pool": "",
 				"flash": 0.0,
 				"generation": 0,
 				"health": 247.25,
@@ -3836,6 +4328,9 @@
 				],
 				"radius": 22.0,
 				"rarity": "rare",
+				"resistances": {
+					"fire": 0.0
+				},
 				"reward_eligible": true,
 				"root_id": 1,
 				"shield": 4.68,
@@ -3849,18 +4344,42 @@
 			}
 		},
 		"brute": {
+			"contact_components": {
+				"physical": 18.0
+			},
 			"death_spawns": [],
+			"defense_profile": {
+				"actor": "monster",
+				"effective_resistances": {
+					"fire": 0.0
+				},
+				"ok": true,
+				"raw_resistances": {
+					"fire": 0.0
+				},
+				"reason": "",
+				"stage": "hit_mitigation"
+			},
+			"example_wave": 1,
 			"kind": 2,
+			"mechanism_text": "无额外机制",
 			"mechanisms": [],
 			"name": "重壳体",
 			"rarity": "normal",
-			"wave_one_example": {
+			"runtime_example": {
 				"attack_speed": 1.1764705882352942,
 				"attack_timer": 0.5,
+				"contact_weights": {
+					"physical": 1.0
+				},
 				"damage": 18.0,
 				"damage_delay": 0.0,
 				"death_processed": false,
 				"death_spawns": [],
+				"defense_stats": {
+
+				},
+				"equipment_pool": "",
 				"flash": 0.0,
 				"generation": 0,
 				"health": 95.0,
@@ -3886,6 +4405,9 @@
 				],
 				"radius": 22.0,
 				"rarity": "normal",
+				"resistances": {
+					"fire": 0.0
+				},
 				"reward_eligible": true,
 				"root_id": 1,
 				"shield": 0.0,
@@ -3899,18 +4421,42 @@
 			}
 		},
 		"crawler": {
+			"contact_components": {
+				"physical": 10.0
+			},
 			"death_spawns": [],
+			"defense_profile": {
+				"actor": "monster",
+				"effective_resistances": {
+					"fire": 0.0
+				},
+				"ok": true,
+				"raw_resistances": {
+					"fire": 0.0
+				},
+				"reason": "",
+				"stage": "hit_mitigation"
+			},
+			"example_wave": 1,
 			"kind": 0,
+			"mechanism_text": "无额外机制",
 			"mechanisms": [],
 			"name": "巡游体",
 			"rarity": "normal",
-			"wave_one_example": {
+			"runtime_example": {
 				"attack_speed": 1.1764705882352942,
 				"attack_timer": 0.5,
+				"contact_weights": {
+					"physical": 1.0
+				},
 				"damage": 10.0,
 				"damage_delay": 0.0,
 				"death_processed": false,
 				"death_spawns": [],
+				"defense_stats": {
+
+				},
+				"equipment_pool": "",
 				"flash": 0.0,
 				"generation": 0,
 				"health": 38.0,
@@ -3936,6 +4482,9 @@
 				],
 				"radius": 14.0,
 				"rarity": "normal",
+				"resistances": {
+					"fire": 0.0
+				},
 				"reward_eligible": true,
 				"root_id": 1,
 				"shield": 0.0,
@@ -3948,23 +4497,130 @@
 				"xp_reward": 3
 			}
 		},
+		"ember_guard": {
+			"contact_components": {
+				"fire": 11.639999999999999,
+				"physical": 11.639999999999999
+			},
+			"contact_weights": {
+				"fire": 0.5,
+				"physical": 0.5
+			},
+			"death_spawns": [],
+			"defense_profile": {
+				"actor": "monster",
+				"effective_resistances": {
+					"fire": 0.25
+				},
+				"ok": true,
+				"raw_resistances": {
+					"fire": 0.25
+				},
+				"reason": "",
+				"stage": "hit_mitigation"
+			},
+			"defense_stats": {
+				"fire_resistance": 0.25
+			},
+			"equipment_pool": "defense",
+			"example_wave": 3,
+			"kind": 2,
+			"mechanism_text": "火抗 25% · 接触含 50% 火焰",
+			"mechanisms": [],
+			"name": "灰烬守卫",
+			"rarity": "rare",
+			"runtime_example": {
+				"attack_speed": 1.1764705882352942,
+				"attack_timer": 0.5,
+				"contact_weights": {
+					"fire": 0.5,
+					"physical": 0.5
+				},
+				"damage": 23.279999999999998,
+				"damage_delay": 0.0,
+				"death_processed": false,
+				"death_spawns": [],
+				"defense_stats": {
+					"fire_resistance": 0.25
+				},
+				"equipment_pool": "defense",
+				"flash": 0.0,
+				"generation": 0,
+				"health": 313.5,
+				"id": 1,
+				"kind": 2,
+				"knockback": [
+					0.0,
+					0.0
+				],
+				"max_health": 313.5,
+				"max_shield": 0.0,
+				"mechanism_ids": [],
+				"mechanism_policy": "poe-passive-v1",
+				"mechanism_revision": 1,
+				"mechanism_schema": 1,
+				"mechanism_stats": {
+
+				},
+				"name": "灰烬守卫",
+				"pos": [
+					0.0,
+					0.0
+				],
+				"radius": 22.0,
+				"rarity": "rare",
+				"resistances": {
+					"fire": 0.25
+				},
+				"reward_eligible": true,
+				"root_id": 1,
+				"shield": 0.0,
+				"shield_regen": 0.0,
+				"slow": 0.0,
+				"spawn": 0.6,
+				"speed": 47.2,
+				"template_id": "ember_guard",
+				"wave": 3,
+				"xp_reward": 24
+			}
+		},
 		"rift_warden": {
+			"contact_components": {
+				"physical": 26.604
+			},
 			"death_spawns": [
 				{
 					"count": 4,
 					"template": "crawler"
 				}
 			],
+			"defense_profile": {
+				"actor": "monster",
+				"effective_resistances": {
+					"fire": 0.0
+				},
+				"ok": true,
+				"raw_resistances": {
+					"fire": 0.0
+				},
+				"reason": "",
+				"stage": "hit_mitigation"
+			},
+			"example_wave": 1,
 			"kind": 2,
+			"mechanism_text": "烬火专精 · 辉壁专精 · 死亡分裂",
 			"mechanisms": [
 				"ember_mastery",
 				"aegis_mastery"
 			],
 			"name": "裂隙守卫",
 			"rarity": "boss",
-			"wave_one_example": {
+			"runtime_example": {
 				"attack_speed": 1.2096205882352942,
 				"attack_timer": 0.5,
+				"contact_weights": {
+					"physical": 1.0
+				},
 				"damage": 26.604,
 				"damage_delay": 0.0,
 				"death_processed": false,
@@ -3974,6 +4630,10 @@
 						"template": "crawler"
 					}
 				],
+				"defense_stats": {
+
+				},
+				"equipment_pool": "",
 				"flash": 0.0,
 				"generation": 0,
 				"health": 380.0,
@@ -4005,6 +4665,9 @@
 				],
 				"radius": 27.5,
 				"rarity": "boss",
+				"resistances": {
+					"fire": 0.0
+				},
 				"reward_eligible": true,
 				"root_id": 1,
 				"shield": 7.8,
@@ -4018,18 +4681,42 @@
 			}
 		},
 		"skitter": {
+			"contact_components": {
+				"physical": 8.0
+			},
 			"death_spawns": [],
+			"defense_profile": {
+				"actor": "monster",
+				"effective_resistances": {
+					"fire": 0.0
+				},
+				"ok": true,
+				"raw_resistances": {
+					"fire": 0.0
+				},
+				"reason": "",
+				"stage": "hit_mitigation"
+			},
+			"example_wave": 1,
 			"kind": 1,
+			"mechanism_text": "无额外机制",
 			"mechanisms": [],
 			"name": "掠行体",
 			"rarity": "normal",
-			"wave_one_example": {
+			"runtime_example": {
 				"attack_speed": 1.1764705882352942,
 				"attack_timer": 0.5,
+				"contact_weights": {
+					"physical": 1.0
+				},
 				"damage": 8.0,
 				"damage_delay": 0.0,
 				"death_processed": false,
 				"death_spawns": [],
+				"defense_stats": {
+
+				},
+				"equipment_pool": "",
 				"flash": 0.0,
 				"generation": 0,
 				"health": 25.0,
@@ -4055,6 +4742,9 @@
 				],
 				"radius": 10.0,
 				"rarity": "normal",
+				"resistances": {
+					"fire": 0.0
+				},
 				"reward_eligible": true,
 				"root_id": 1,
 				"shield": 0.0,
@@ -4068,6 +4758,9 @@
 			}
 		},
 		"splitter": {
+			"contact_components": {
+				"physical": 11.0
+			},
 			"death_spawns": [
 				{
 					"count": 2,
@@ -4078,15 +4771,32 @@
 					"template": "skitter"
 				}
 			],
+			"defense_profile": {
+				"actor": "monster",
+				"effective_resistances": {
+					"fire": 0.0
+				},
+				"ok": true,
+				"raw_resistances": {
+					"fire": 0.0
+				},
+				"reason": "",
+				"stage": "hit_mitigation"
+			},
+			"example_wave": 1,
 			"kind": 0,
+			"mechanism_text": "苍林生机 · 死亡分裂",
 			"mechanisms": [
 				"grove_vitality"
 			],
 			"name": "裂殖巡游体",
 			"rarity": "magic",
-			"wave_one_example": {
+			"runtime_example": {
 				"attack_speed": 1.1764705882352942,
 				"attack_timer": 0.5,
+				"contact_weights": {
+					"physical": 1.0
+				},
 				"damage": 11.0,
 				"damage_delay": 0.0,
 				"death_processed": false,
@@ -4100,6 +4810,10 @@
 						"template": "skitter"
 					}
 				],
+				"defense_stats": {
+
+				},
+				"equipment_pool": "",
 				"flash": 0.0,
 				"generation": 0,
 				"health": 62.8,
@@ -4127,6 +4841,9 @@
 				],
 				"radius": 14.0,
 				"rarity": "magic",
+				"resistances": {
+					"fire": 0.0
+				},
 				"reward_eligible": true,
 				"root_id": 1,
 				"shield": 0.0,
@@ -8564,7 +9281,7 @@
 			"type": "small"
 		}
 	},
-	"schema_version": 1,
+	"schema_version": 2,
 	"sectors": [
 		{
 			"angle": -90.0,
@@ -8626,6 +9343,55 @@
 						"packets": [
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"lightning": 41.6
+									},
+									"details": [
+										{
+											"base": 41.6,
+											"before_defense": 41.6,
+											"final": 41.6,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 41.6
+								},
+								"known_target_settlement": {
+									"components": {
+										"lightning": 41.6
+									},
+									"damage_total": 41.6,
+									"details": [
+										{
+											"base": 41.6,
+											"before_defense": 41.6,
+											"final": 41.6,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"health_lost": 41.6,
+									"mitigated_components": {
+										"lightning": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"lightning": 41.6
+									},
+									"reason": "",
+									"remaining_health": 271.9,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "每枚投射物",
 								"packet": {
 									"assembly": {
@@ -8671,6 +9437,55 @@
 							},
 							{
 								"active": false,
+								"known_target_resolved": {
+									"components": {
+										"fire": 17.55
+									},
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 17.55
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 17.55
+									},
+									"damage_total": 17.55,
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 17.55,
+									"mitigated_components": {
+										"fire": 5.850000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 23.400000000000002
+									},
+									"reason": "",
+									"remaining_health": 295.95,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "独立爆炸",
 								"packet": {
 									"assembly": {
@@ -8737,6 +9552,59 @@
 						"packets": [
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"lightning": 33.28
+									},
+									"details": [
+										{
+											"base": 41.6,
+											"before_defense": 33.28,
+											"final": 33.28,
+											"increased": 0.0,
+											"modifiers": [
+												"support:volley"
+											],
+											"more": 0.8,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 33.28
+								},
+								"known_target_settlement": {
+									"components": {
+										"lightning": 33.28
+									},
+									"damage_total": 33.28,
+									"details": [
+										{
+											"base": 41.6,
+											"before_defense": 33.28,
+											"final": 33.28,
+											"increased": 0.0,
+											"modifiers": [
+												"support:volley"
+											],
+											"more": 0.8,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"health_lost": 33.28,
+									"mitigated_components": {
+										"lightning": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"lightning": 33.28
+									},
+									"reason": "",
+									"remaining_health": 280.22,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "每枚投射物",
 								"packet": {
 									"assembly": {
@@ -8784,6 +9652,55 @@
 							},
 							{
 								"active": false,
+								"known_target_resolved": {
+									"components": {
+										"fire": 17.55
+									},
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 17.55
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 17.55
+									},
+									"damage_total": 17.55,
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 17.55,
+									"mitigated_components": {
+										"fire": 5.850000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 23.400000000000002
+									},
+									"reason": "",
+									"remaining_health": 295.95,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "独立爆炸",
 								"packet": {
 									"assembly": {
@@ -8852,6 +9769,59 @@
 						"packets": [
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"lightning": 52.0
+									},
+									"details": [
+										{
+											"base": 41.6,
+											"before_defense": 52.0,
+											"final": 52.0,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus"
+											],
+											"more": 1.25,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 52.0
+								},
+								"known_target_settlement": {
+									"components": {
+										"lightning": 52.0
+									},
+									"damage_total": 52.0,
+									"details": [
+										{
+											"base": 41.6,
+											"before_defense": 52.0,
+											"final": 52.0,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus"
+											],
+											"more": 1.25,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"health_lost": 52.0,
+									"mitigated_components": {
+										"lightning": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"lightning": 52.0
+									},
+									"reason": "",
+									"remaining_health": 261.5,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "每枚投射物",
 								"packet": {
 									"assembly": {
@@ -8899,6 +9869,55 @@
 							},
 							{
 								"active": false,
+								"known_target_resolved": {
+									"components": {
+										"fire": 17.55
+									},
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 17.55
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 17.55
+									},
+									"damage_total": 17.55,
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 17.55,
+									"mitigated_components": {
+										"fire": 5.850000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 23.400000000000002
+									},
+									"reason": "",
+									"remaining_health": 295.95,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "独立爆炸",
 								"packet": {
 									"assembly": {
@@ -8967,6 +9986,61 @@
 						"packets": [
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"lightning": 41.6
+									},
+									"details": [
+										{
+											"base": 41.6,
+											"before_defense": 41.6,
+											"final": 41.6,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus",
+												"support:volley"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 41.6
+								},
+								"known_target_settlement": {
+									"components": {
+										"lightning": 41.6
+									},
+									"damage_total": 41.6,
+									"details": [
+										{
+											"base": 41.6,
+											"before_defense": 41.6,
+											"final": 41.6,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus",
+												"support:volley"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"health_lost": 41.6,
+									"mitigated_components": {
+										"lightning": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"lightning": 41.6
+									},
+									"reason": "",
+									"remaining_health": 271.9,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "每枚投射物",
 								"packet": {
 									"assembly": {
@@ -9015,6 +10089,55 @@
 							},
 							{
 								"active": false,
+								"known_target_resolved": {
+									"components": {
+										"fire": 17.55
+									},
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 17.55
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 17.55
+									},
+									"damage_total": 17.55,
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 17.55,
+									"mitigated_components": {
+										"fire": 5.850000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 23.400000000000002
+									},
+									"reason": "",
+									"remaining_health": 295.95,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "独立爆炸",
 								"packet": {
 									"assembly": {
@@ -9086,6 +10209,63 @@
 						"packets": [
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"lightning": 66.88000000000001
+									},
+									"details": [
+										{
+											"base": 35.2,
+											"before_defense": 66.88000000000001,
+											"final": 66.88000000000001,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 66.88000000000001
+								},
+								"known_target_settlement": {
+									"components": {
+										"lightning": 66.88000000000001
+									},
+									"damage_total": 66.88000000000001,
+									"details": [
+										{
+											"base": 35.2,
+											"before_defense": 66.88000000000001,
+											"final": 66.88000000000001,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"health_lost": 66.88000000000001,
+									"mitigated_components": {
+										"lightning": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"lightning": 66.88000000000001
+									},
+									"reason": "",
+									"remaining_health": 246.62,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "每枚投射物",
 								"packet": {
 									"assembly": {
@@ -9135,6 +10315,61 @@
 							},
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 22.275000000000002
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"damage_total": 22.275000000000002,
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 22.275000000000002,
+									"mitigated_components": {
+										"fire": 7.425000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 29.700000000000003
+									},
+									"reason": "",
+									"remaining_health": 291.225,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "独立爆炸",
 								"packet": {
 									"assembly": {
@@ -9204,6 +10439,65 @@
 						"packets": [
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"lightning": 53.50400000000001
+									},
+									"details": [
+										{
+											"base": 35.2,
+											"before_defense": 53.50400000000001,
+											"final": 53.50400000000001,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:volley"
+											],
+											"more": 0.8,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 53.50400000000001
+								},
+								"known_target_settlement": {
+									"components": {
+										"lightning": 53.50400000000001
+									},
+									"damage_total": 53.50400000000001,
+									"details": [
+										{
+											"base": 35.2,
+											"before_defense": 53.50400000000001,
+											"final": 53.50400000000001,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:volley"
+											],
+											"more": 0.8,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"health_lost": 53.50400000000001,
+									"mitigated_components": {
+										"lightning": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"lightning": 53.50400000000001
+									},
+									"reason": "",
+									"remaining_health": 259.996,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "每枚投射物",
 								"packet": {
 									"assembly": {
@@ -9254,6 +10548,61 @@
 							},
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 22.275000000000002
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"damage_total": 22.275000000000002,
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 22.275000000000002,
+									"mitigated_components": {
+										"fire": 7.425000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 29.700000000000003
+									},
+									"reason": "",
+									"remaining_health": 291.225,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "独立爆炸",
 								"packet": {
 									"assembly": {
@@ -9325,6 +10674,65 @@
 						"packets": [
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"lightning": 83.60000000000001
+									},
+									"details": [
+										{
+											"base": 35.2,
+											"before_defense": 83.60000000000001,
+											"final": 83.60000000000001,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:focus"
+											],
+											"more": 1.25,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 83.60000000000001
+								},
+								"known_target_settlement": {
+									"components": {
+										"lightning": 83.60000000000001
+									},
+									"damage_total": 83.60000000000001,
+									"details": [
+										{
+											"base": 35.2,
+											"before_defense": 83.60000000000001,
+											"final": 83.60000000000001,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:focus"
+											],
+											"more": 1.25,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"health_lost": 83.60000000000001,
+									"mitigated_components": {
+										"lightning": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"lightning": 83.60000000000001
+									},
+									"reason": "",
+									"remaining_health": 229.89999999999998,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "每枚投射物",
 								"packet": {
 									"assembly": {
@@ -9375,6 +10783,61 @@
 							},
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 22.275000000000002
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"damage_total": 22.275000000000002,
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 22.275000000000002,
+									"mitigated_components": {
+										"fire": 7.425000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 29.700000000000003
+									},
+									"reason": "",
+									"remaining_health": 291.225,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "独立爆炸",
 								"packet": {
 									"assembly": {
@@ -9446,6 +10909,67 @@
 						"packets": [
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"lightning": 66.88000000000001
+									},
+									"details": [
+										{
+											"base": 35.2,
+											"before_defense": 66.88000000000001,
+											"final": 66.88000000000001,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:focus",
+												"support:volley"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 66.88000000000001
+								},
+								"known_target_settlement": {
+									"components": {
+										"lightning": 66.88000000000001
+									},
+									"damage_total": 66.88000000000001,
+									"details": [
+										{
+											"base": 35.2,
+											"before_defense": 66.88000000000001,
+											"final": 66.88000000000001,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:focus",
+												"support:volley"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"health_lost": 66.88000000000001,
+									"mitigated_components": {
+										"lightning": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"lightning": 66.88000000000001
+									},
+									"reason": "",
+									"remaining_health": 246.62,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "每枚投射物",
 								"packet": {
 									"assembly": {
@@ -9497,6 +11021,61 @@
 							},
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 22.275000000000002
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"damage_total": 22.275000000000002,
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 22.275000000000002,
+									"mitigated_components": {
+										"fire": 7.425000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 29.700000000000003
+									},
+									"reason": "",
+									"remaining_health": 291.225,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "独立爆炸",
 								"packet": {
 									"assembly": {
@@ -9596,6 +11175,55 @@
 						"packets": [
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"lightning": 57.2
+									},
+									"details": [
+										{
+											"base": 57.2,
+											"before_defense": 57.2,
+											"final": 57.2,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 57.2
+								},
+								"known_target_settlement": {
+									"components": {
+										"lightning": 57.2
+									},
+									"damage_total": 57.2,
+									"details": [
+										{
+											"base": 57.2,
+											"before_defense": 57.2,
+											"final": 57.2,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"health_lost": 57.2,
+									"mitigated_components": {
+										"lightning": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"lightning": 57.2
+									},
+									"reason": "",
+									"remaining_health": 256.3,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "连锁首跳",
 								"packet": {
 									"assembly": {
@@ -9641,6 +11269,55 @@
 							},
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"lightning": 36.400000000000006
+									},
+									"details": [
+										{
+											"base": 36.400000000000006,
+											"before_defense": 36.400000000000006,
+											"final": 36.400000000000006,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 36.400000000000006
+								},
+								"known_target_settlement": {
+									"components": {
+										"lightning": 36.400000000000006
+									},
+									"damage_total": 36.400000000000006,
+									"details": [
+										{
+											"base": 36.400000000000006,
+											"before_defense": 36.400000000000006,
+											"final": 36.400000000000006,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"health_lost": 36.400000000000006,
+									"mitigated_components": {
+										"lightning": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"lightning": 36.400000000000006
+									},
+									"reason": "",
+									"remaining_health": 277.1,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "第 5 跳",
 								"packet": {
 									"assembly": {
@@ -9701,6 +11378,61 @@
 						"packets": [
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"lightning": 72.60000000000001
+									},
+									"details": [
+										{
+											"base": 48.400000000000006,
+											"before_defense": 72.60000000000001,
+											"final": 72.60000000000001,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 72.60000000000001
+								},
+								"known_target_settlement": {
+									"components": {
+										"lightning": 72.60000000000001
+									},
+									"damage_total": 72.60000000000001,
+									"details": [
+										{
+											"base": 48.400000000000006,
+											"before_defense": 72.60000000000001,
+											"final": 72.60000000000001,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"health_lost": 72.60000000000001,
+									"mitigated_components": {
+										"lightning": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"lightning": 72.60000000000001
+									},
+									"reason": "",
+									"remaining_health": 240.89999999999998,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "连锁首跳",
 								"packet": {
 									"assembly": {
@@ -9749,6 +11481,61 @@
 							},
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"lightning": 46.2
+									},
+									"details": [
+										{
+											"base": 30.800000000000004,
+											"before_defense": 46.2,
+											"final": 46.2,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 46.2
+								},
+								"known_target_settlement": {
+									"components": {
+										"lightning": 46.2
+									},
+									"damage_total": 46.2,
+									"details": [
+										{
+											"base": 30.800000000000004,
+											"before_defense": 46.2,
+											"final": 46.2,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"health_lost": 46.2,
+									"mitigated_components": {
+										"lightning": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"lightning": 46.2
+									},
+									"reason": "",
+									"remaining_health": 267.3,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "第 5 跳",
 								"packet": {
 									"assembly": {
@@ -9882,6 +11669,55 @@
 						"packets": [
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"cold": 22.099999999999998
+									},
+									"details": [
+										{
+											"base": 22.099999999999998,
+											"before_defense": 22.099999999999998,
+											"final": 22.099999999999998,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"total": 22.099999999999998
+								},
+								"known_target_settlement": {
+									"components": {
+										"cold": 22.099999999999998
+									},
+									"damage_total": 22.099999999999998,
+									"details": [
+										{
+											"base": 22.099999999999998,
+											"before_defense": 22.099999999999998,
+											"final": 22.099999999999998,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"health_lost": 22.099999999999998,
+									"mitigated_components": {
+										"cold": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"cold": 22.099999999999998
+									},
+									"reason": "",
+									"remaining_health": 291.4,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "每枚投射物",
 								"packet": {
 									"assembly": {
@@ -9927,6 +11763,55 @@
 							},
 							{
 								"active": false,
+								"known_target_resolved": {
+									"components": {
+										"fire": 17.55
+									},
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 17.55
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 17.55
+									},
+									"damage_total": 17.55,
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 17.55,
+									"mitigated_components": {
+										"fire": 5.850000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 23.400000000000002
+									},
+									"reason": "",
+									"remaining_health": 295.95,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "独立爆炸",
 								"packet": {
 									"assembly": {
@@ -9993,6 +11878,59 @@
 						"packets": [
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"cold": 17.68
+									},
+									"details": [
+										{
+											"base": 22.099999999999998,
+											"before_defense": 17.68,
+											"final": 17.68,
+											"increased": 0.0,
+											"modifiers": [
+												"support:volley"
+											],
+											"more": 0.8,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"total": 17.68
+								},
+								"known_target_settlement": {
+									"components": {
+										"cold": 17.68
+									},
+									"damage_total": 17.68,
+									"details": [
+										{
+											"base": 22.099999999999998,
+											"before_defense": 17.68,
+											"final": 17.68,
+											"increased": 0.0,
+											"modifiers": [
+												"support:volley"
+											],
+											"more": 0.8,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"health_lost": 17.68,
+									"mitigated_components": {
+										"cold": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"cold": 17.68
+									},
+									"reason": "",
+									"remaining_health": 295.82,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "每枚投射物",
 								"packet": {
 									"assembly": {
@@ -10040,6 +11978,55 @@
 							},
 							{
 								"active": false,
+								"known_target_resolved": {
+									"components": {
+										"fire": 17.55
+									},
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 17.55
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 17.55
+									},
+									"damage_total": 17.55,
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 17.55,
+									"mitigated_components": {
+										"fire": 5.850000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 23.400000000000002
+									},
+									"reason": "",
+									"remaining_health": 295.95,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "独立爆炸",
 								"packet": {
 									"assembly": {
@@ -10108,6 +12095,59 @@
 						"packets": [
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"cold": 27.624999999999996
+									},
+									"details": [
+										{
+											"base": 22.099999999999998,
+											"before_defense": 27.624999999999996,
+											"final": 27.624999999999996,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus"
+											],
+											"more": 1.25,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"total": 27.624999999999996
+								},
+								"known_target_settlement": {
+									"components": {
+										"cold": 27.624999999999996
+									},
+									"damage_total": 27.624999999999996,
+									"details": [
+										{
+											"base": 22.099999999999998,
+											"before_defense": 27.624999999999996,
+											"final": 27.624999999999996,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus"
+											],
+											"more": 1.25,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"health_lost": 27.624999999999996,
+									"mitigated_components": {
+										"cold": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"cold": 27.624999999999996
+									},
+									"reason": "",
+									"remaining_health": 285.875,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "每枚投射物",
 								"packet": {
 									"assembly": {
@@ -10155,6 +12195,55 @@
 							},
 							{
 								"active": false,
+								"known_target_resolved": {
+									"components": {
+										"fire": 17.55
+									},
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 17.55
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 17.55
+									},
+									"damage_total": 17.55,
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 17.55,
+									"mitigated_components": {
+										"fire": 5.850000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 23.400000000000002
+									},
+									"reason": "",
+									"remaining_health": 295.95,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "独立爆炸",
 								"packet": {
 									"assembly": {
@@ -10223,6 +12312,61 @@
 						"packets": [
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"cold": 22.099999999999998
+									},
+									"details": [
+										{
+											"base": 22.099999999999998,
+											"before_defense": 22.099999999999998,
+											"final": 22.099999999999998,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus",
+												"support:volley"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"total": 22.099999999999998
+								},
+								"known_target_settlement": {
+									"components": {
+										"cold": 22.099999999999998
+									},
+									"damage_total": 22.099999999999998,
+									"details": [
+										{
+											"base": 22.099999999999998,
+											"before_defense": 22.099999999999998,
+											"final": 22.099999999999998,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus",
+												"support:volley"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"health_lost": 22.099999999999998,
+									"mitigated_components": {
+										"cold": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"cold": 22.099999999999998
+									},
+									"reason": "",
+									"remaining_health": 291.4,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "每枚投射物",
 								"packet": {
 									"assembly": {
@@ -10271,6 +12415,55 @@
 							},
 							{
 								"active": false,
+								"known_target_resolved": {
+									"components": {
+										"fire": 17.55
+									},
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 17.55
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 17.55
+									},
+									"damage_total": 17.55,
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 17.55,
+									"mitigated_components": {
+										"fire": 5.850000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 23.400000000000002
+									},
+									"reason": "",
+									"remaining_health": 295.95,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "独立爆炸",
 								"packet": {
 									"assembly": {
@@ -10342,6 +12535,63 @@
 						"packets": [
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"cold": 35.53
+									},
+									"details": [
+										{
+											"base": 18.7,
+											"before_defense": 35.53,
+											"final": 35.53,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"total": 35.53
+								},
+								"known_target_settlement": {
+									"components": {
+										"cold": 35.53
+									},
+									"damage_total": 35.53,
+									"details": [
+										{
+											"base": 18.7,
+											"before_defense": 35.53,
+											"final": 35.53,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"health_lost": 35.53,
+									"mitigated_components": {
+										"cold": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"cold": 35.53
+									},
+									"reason": "",
+									"remaining_health": 277.97,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "每枚投射物",
 								"packet": {
 									"assembly": {
@@ -10391,6 +12641,61 @@
 							},
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 22.275000000000002
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"damage_total": 22.275000000000002,
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 22.275000000000002,
+									"mitigated_components": {
+										"fire": 7.425000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 29.700000000000003
+									},
+									"reason": "",
+									"remaining_health": 291.225,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "独立爆炸",
 								"packet": {
 									"assembly": {
@@ -10460,6 +12765,65 @@
 						"packets": [
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"cold": 28.424000000000003
+									},
+									"details": [
+										{
+											"base": 18.7,
+											"before_defense": 28.424000000000003,
+											"final": 28.424000000000003,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:volley"
+											],
+											"more": 0.8,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"total": 28.424000000000003
+								},
+								"known_target_settlement": {
+									"components": {
+										"cold": 28.424000000000003
+									},
+									"damage_total": 28.424000000000003,
+									"details": [
+										{
+											"base": 18.7,
+											"before_defense": 28.424000000000003,
+											"final": 28.424000000000003,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:volley"
+											],
+											"more": 0.8,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"health_lost": 28.424000000000003,
+									"mitigated_components": {
+										"cold": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"cold": 28.424000000000003
+									},
+									"reason": "",
+									"remaining_health": 285.076,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "每枚投射物",
 								"packet": {
 									"assembly": {
@@ -10510,6 +12874,61 @@
 							},
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 22.275000000000002
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"damage_total": 22.275000000000002,
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 22.275000000000002,
+									"mitigated_components": {
+										"fire": 7.425000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 29.700000000000003
+									},
+									"reason": "",
+									"remaining_health": 291.225,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "独立爆炸",
 								"packet": {
 									"assembly": {
@@ -10581,6 +13000,65 @@
 						"packets": [
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"cold": 44.4125
+									},
+									"details": [
+										{
+											"base": 18.7,
+											"before_defense": 44.4125,
+											"final": 44.4125,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:focus"
+											],
+											"more": 1.25,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"total": 44.4125
+								},
+								"known_target_settlement": {
+									"components": {
+										"cold": 44.4125
+									},
+									"damage_total": 44.4125,
+									"details": [
+										{
+											"base": 18.7,
+											"before_defense": 44.4125,
+											"final": 44.4125,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:focus"
+											],
+											"more": 1.25,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"health_lost": 44.4125,
+									"mitigated_components": {
+										"cold": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"cold": 44.4125
+									},
+									"reason": "",
+									"remaining_health": 269.0875,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "每枚投射物",
 								"packet": {
 									"assembly": {
@@ -10631,6 +13109,61 @@
 							},
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 22.275000000000002
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"damage_total": 22.275000000000002,
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 22.275000000000002,
+									"mitigated_components": {
+										"fire": 7.425000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 29.700000000000003
+									},
+									"reason": "",
+									"remaining_health": 291.225,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "独立爆炸",
 								"packet": {
 									"assembly": {
@@ -10702,6 +13235,67 @@
 						"packets": [
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"cold": 35.53
+									},
+									"details": [
+										{
+											"base": 18.7,
+											"before_defense": 35.53,
+											"final": 35.53,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:focus",
+												"support:volley"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"total": 35.53
+								},
+								"known_target_settlement": {
+									"components": {
+										"cold": 35.53
+									},
+									"damage_total": 35.53,
+									"details": [
+										{
+											"base": 18.7,
+											"before_defense": 35.53,
+											"final": 35.53,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:focus",
+												"support:volley"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "cold"
+										}
+									],
+									"health_lost": 35.53,
+									"mitigated_components": {
+										"cold": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"cold": 35.53
+									},
+									"reason": "",
+									"remaining_health": 277.97,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "每枚投射物",
 								"packet": {
 									"assembly": {
@@ -10753,6 +13347,61 @@
 							},
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 22.275000000000002
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"damage_total": 22.275000000000002,
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 22.275000000000002,
+									"mitigated_components": {
+										"fire": 7.425000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 29.700000000000003
+									},
+									"reason": "",
+									"remaining_health": 291.225,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "独立爆炸",
 								"packet": {
 									"assembly": {
@@ -10852,6 +13501,55 @@
 						"packets": [
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 83.85
+									},
+									"details": [
+										{
+											"base": 111.8,
+											"before_defense": 111.8,
+											"final": 83.85,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 83.85
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 83.85
+									},
+									"damage_total": 83.85,
+									"details": [
+										{
+											"base": 111.8,
+											"before_defense": 111.8,
+											"final": 83.85,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 83.85,
+									"mitigated_components": {
+										"fire": 27.950000000000003
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 111.8
+									},
+									"reason": "",
+									"remaining_health": 229.65,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "每次命中",
 								"packet": {
 									"assembly": {
@@ -10912,6 +13610,61 @@
 						"packets": [
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 106.42499999999998
+									},
+									"details": [
+										{
+											"base": 94.6,
+											"before_defense": 141.89999999999998,
+											"final": 106.42499999999998,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 106.42499999999998
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 106.42499999999998
+									},
+									"damage_total": 106.42499999999998,
+									"details": [
+										{
+											"base": 94.6,
+											"before_defense": 141.89999999999998,
+											"final": 106.42499999999998,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 106.42499999999998,
+									"mitigated_components": {
+										"fire": 35.474999999999994
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 141.89999999999998
+									},
+									"reason": "",
+									"remaining_health": 207.07500000000002,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "每次命中",
 								"packet": {
 									"assembly": {
@@ -10995,6 +13748,55 @@
 						"packets": [
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"lightning": 70.2
+									},
+									"details": [
+										{
+											"base": 70.2,
+											"before_defense": 70.2,
+											"final": 70.2,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 70.2
+								},
+								"known_target_settlement": {
+									"components": {
+										"lightning": 70.2
+									},
+									"damage_total": 70.2,
+									"details": [
+										{
+											"base": 70.2,
+											"before_defense": 70.2,
+											"final": 70.2,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"health_lost": 70.2,
+									"mitigated_components": {
+										"lightning": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"lightning": 70.2
+									},
+									"reason": "",
+									"remaining_health": 243.3,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "每次命中",
 								"packet": {
 									"assembly": {
@@ -11055,6 +13857,61 @@
 						"packets": [
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"lightning": 89.10000000000001
+									},
+									"details": [
+										{
+											"base": 59.400000000000006,
+											"before_defense": 89.10000000000001,
+											"final": 89.10000000000001,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 89.10000000000001
+								},
+								"known_target_settlement": {
+									"components": {
+										"lightning": 89.10000000000001
+									},
+									"damage_total": 89.10000000000001,
+									"details": [
+										{
+											"base": 59.400000000000006,
+											"before_defense": 89.10000000000001,
+											"final": 89.10000000000001,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"health_lost": 89.10000000000001,
+									"mitigated_components": {
+										"lightning": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"lightning": 89.10000000000001
+									},
+									"reason": "",
+									"remaining_health": 224.39999999999998,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "每次命中",
 								"packet": {
 									"assembly": {
@@ -11143,6 +14000,79 @@
 						"packets": [
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 7.800000000000001,
+										"physical": 15.6
+									},
+									"details": [
+										{
+											"base": 15.6,
+											"before_defense": 15.6,
+											"final": 15.6,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 10.4,
+											"before_defense": 10.4,
+											"final": 7.800000000000001,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 23.4
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 7.800000000000001,
+										"physical": 15.6
+									},
+									"damage_total": 23.4,
+									"details": [
+										{
+											"base": 15.6,
+											"before_defense": 15.6,
+											"final": 15.6,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 10.4,
+											"before_defense": 10.4,
+											"final": 7.800000000000001,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 23.4,
+									"mitigated_components": {
+										"fire": 2.5999999999999996,
+										"physical": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 10.4,
+										"physical": 15.6
+									},
+									"reason": "",
+									"remaining_health": 290.1,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "母箭",
 								"packet": {
 									"assembly": {
@@ -11201,6 +14131,79 @@
 							},
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 5.459999999999999,
+										"physical": 10.92
+									},
+									"details": [
+										{
+											"base": 10.92,
+											"before_defense": 10.92,
+											"final": 10.92,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 7.279999999999999,
+											"before_defense": 7.279999999999999,
+											"final": 5.459999999999999,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 16.38
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 5.459999999999999,
+										"physical": 10.92
+									},
+									"damage_total": 16.38,
+									"details": [
+										{
+											"base": 10.92,
+											"before_defense": 10.92,
+											"final": 10.92,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 7.279999999999999,
+											"before_defense": 7.279999999999999,
+											"final": 5.459999999999999,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 16.38,
+									"mitigated_components": {
+										"fire": 1.8200000000000003,
+										"physical": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 7.279999999999999,
+										"physical": 10.92
+									},
+									"reason": "",
+									"remaining_health": 297.12,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "子箭",
 								"packet": {
 									"assembly": {
@@ -11259,6 +14262,55 @@
 							},
 							{
 								"active": false,
+								"known_target_resolved": {
+									"components": {
+										"fire": 17.55
+									},
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 17.55
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 17.55
+									},
+									"damage_total": 17.55,
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 17.55,
+									"mitigated_components": {
+										"fire": 5.850000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 23.400000000000002
+									},
+									"reason": "",
+									"remaining_health": 295.95,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "独立爆炸",
 								"packet": {
 									"assembly": {
@@ -11348,6 +14400,87 @@
 						"packets": [
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 6.24,
+										"physical": 12.48
+									},
+									"details": [
+										{
+											"base": 15.6,
+											"before_defense": 12.48,
+											"final": 12.48,
+											"increased": 0.0,
+											"modifiers": [
+												"support:volley"
+											],
+											"more": 0.8,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 10.4,
+											"before_defense": 8.32,
+											"final": 6.24,
+											"increased": 0.0,
+											"modifiers": [
+												"support:volley"
+											],
+											"more": 0.8,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 18.72
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 6.24,
+										"physical": 12.48
+									},
+									"damage_total": 18.72,
+									"details": [
+										{
+											"base": 15.6,
+											"before_defense": 12.48,
+											"final": 12.48,
+											"increased": 0.0,
+											"modifiers": [
+												"support:volley"
+											],
+											"more": 0.8,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 10.4,
+											"before_defense": 8.32,
+											"final": 6.24,
+											"increased": 0.0,
+											"modifiers": [
+												"support:volley"
+											],
+											"more": 0.8,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 18.72,
+									"mitigated_components": {
+										"fire": 2.08,
+										"physical": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 8.32,
+										"physical": 12.48
+									},
+									"reason": "",
+									"remaining_health": 294.78,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "母箭",
 								"packet": {
 									"assembly": {
@@ -11410,6 +14543,87 @@
 							},
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 4.368,
+										"physical": 8.736
+									},
+									"details": [
+										{
+											"base": 10.92,
+											"before_defense": 8.736,
+											"final": 8.736,
+											"increased": 0.0,
+											"modifiers": [
+												"support:volley"
+											],
+											"more": 0.8,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 7.279999999999999,
+											"before_defense": 5.824,
+											"final": 4.368,
+											"increased": 0.0,
+											"modifiers": [
+												"support:volley"
+											],
+											"more": 0.8,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 13.104000000000001
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 4.368,
+										"physical": 8.736
+									},
+									"damage_total": 13.104000000000001,
+									"details": [
+										{
+											"base": 10.92,
+											"before_defense": 8.736,
+											"final": 8.736,
+											"increased": 0.0,
+											"modifiers": [
+												"support:volley"
+											],
+											"more": 0.8,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 7.279999999999999,
+											"before_defense": 5.824,
+											"final": 4.368,
+											"increased": 0.0,
+											"modifiers": [
+												"support:volley"
+											],
+											"more": 0.8,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 13.104000000000001,
+									"mitigated_components": {
+										"fire": 1.4559999999999995,
+										"physical": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 5.824,
+										"physical": 8.736
+									},
+									"reason": "",
+									"remaining_health": 300.396,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "子箭",
 								"packet": {
 									"assembly": {
@@ -11472,6 +14686,55 @@
 							},
 							{
 								"active": false,
+								"known_target_resolved": {
+									"components": {
+										"fire": 17.55
+									},
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 17.55
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 17.55
+									},
+									"damage_total": 17.55,
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 17.55,
+									"mitigated_components": {
+										"fire": 5.850000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 23.400000000000002
+									},
+									"reason": "",
+									"remaining_health": 295.95,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "独立爆炸",
 								"packet": {
 									"assembly": {
@@ -11563,6 +14826,87 @@
 						"packets": [
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 9.75,
+										"physical": 19.5
+									},
+									"details": [
+										{
+											"base": 15.6,
+											"before_defense": 19.5,
+											"final": 19.5,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus"
+											],
+											"more": 1.25,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 10.4,
+											"before_defense": 13.0,
+											"final": 9.75,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus"
+											],
+											"more": 1.25,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 29.25
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 9.75,
+										"physical": 19.5
+									},
+									"damage_total": 29.25,
+									"details": [
+										{
+											"base": 15.6,
+											"before_defense": 19.5,
+											"final": 19.5,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus"
+											],
+											"more": 1.25,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 10.4,
+											"before_defense": 13.0,
+											"final": 9.75,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus"
+											],
+											"more": 1.25,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 29.25,
+									"mitigated_components": {
+										"fire": 3.25,
+										"physical": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 13.0,
+										"physical": 19.5
+									},
+									"reason": "",
+									"remaining_health": 284.25,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "母箭",
 								"packet": {
 									"assembly": {
@@ -11625,6 +14969,87 @@
 							},
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 6.824999999999999,
+										"physical": 13.65
+									},
+									"details": [
+										{
+											"base": 10.92,
+											"before_defense": 13.65,
+											"final": 13.65,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus"
+											],
+											"more": 1.25,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 7.279999999999999,
+											"before_defense": 9.1,
+											"final": 6.824999999999999,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus"
+											],
+											"more": 1.25,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 20.475
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 6.824999999999999,
+										"physical": 13.65
+									},
+									"damage_total": 20.475,
+									"details": [
+										{
+											"base": 10.92,
+											"before_defense": 13.65,
+											"final": 13.65,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus"
+											],
+											"more": 1.25,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 7.279999999999999,
+											"before_defense": 9.1,
+											"final": 6.824999999999999,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus"
+											],
+											"more": 1.25,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 20.475,
+									"mitigated_components": {
+										"fire": 2.2750000000000004,
+										"physical": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 9.1,
+										"physical": 13.65
+									},
+									"reason": "",
+									"remaining_health": 293.025,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "子箭",
 								"packet": {
 									"assembly": {
@@ -11687,6 +15112,55 @@
 							},
 							{
 								"active": false,
+								"known_target_resolved": {
+									"components": {
+										"fire": 17.55
+									},
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 17.55
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 17.55
+									},
+									"damage_total": 17.55,
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 17.55,
+									"mitigated_components": {
+										"fire": 5.850000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 23.400000000000002
+									},
+									"reason": "",
+									"remaining_health": 295.95,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "独立爆炸",
 								"packet": {
 									"assembly": {
@@ -11778,6 +15252,91 @@
 						"packets": [
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 7.800000000000001,
+										"physical": 15.6
+									},
+									"details": [
+										{
+											"base": 15.6,
+											"before_defense": 15.6,
+											"final": 15.6,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus",
+												"support:volley"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 10.4,
+											"before_defense": 10.4,
+											"final": 7.800000000000001,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus",
+												"support:volley"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 23.4
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 7.800000000000001,
+										"physical": 15.6
+									},
+									"damage_total": 23.4,
+									"details": [
+										{
+											"base": 15.6,
+											"before_defense": 15.6,
+											"final": 15.6,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus",
+												"support:volley"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 10.4,
+											"before_defense": 10.4,
+											"final": 7.800000000000001,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus",
+												"support:volley"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 23.4,
+									"mitigated_components": {
+										"fire": 2.5999999999999996,
+										"physical": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 10.4,
+										"physical": 15.6
+									},
+									"reason": "",
+									"remaining_health": 290.1,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "母箭",
 								"packet": {
 									"assembly": {
@@ -11842,6 +15401,91 @@
 							},
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 5.459999999999999,
+										"physical": 10.92
+									},
+									"details": [
+										{
+											"base": 10.92,
+											"before_defense": 10.92,
+											"final": 10.92,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus",
+												"support:volley"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 7.279999999999999,
+											"before_defense": 7.279999999999999,
+											"final": 5.459999999999999,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus",
+												"support:volley"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 16.38
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 5.459999999999999,
+										"physical": 10.92
+									},
+									"damage_total": 16.38,
+									"details": [
+										{
+											"base": 10.92,
+											"before_defense": 10.92,
+											"final": 10.92,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus",
+												"support:volley"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 7.279999999999999,
+											"before_defense": 7.279999999999999,
+											"final": 5.459999999999999,
+											"increased": 0.0,
+											"modifiers": [
+												"support:focus",
+												"support:volley"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 16.38,
+									"mitigated_components": {
+										"fire": 1.8200000000000003,
+										"physical": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 7.279999999999999,
+										"physical": 10.92
+									},
+									"reason": "",
+									"remaining_health": 297.12,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "子箭",
 								"packet": {
 									"assembly": {
@@ -11906,6 +15550,55 @@
 							},
 							{
 								"active": false,
+								"known_target_resolved": {
+									"components": {
+										"fire": 17.55
+									},
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 17.55
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 17.55
+									},
+									"damage_total": 17.55,
+									"details": [
+										{
+											"base": 23.400000000000002,
+											"before_defense": 23.400000000000002,
+											"final": 17.55,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 17.55,
+									"mitigated_components": {
+										"fire": 5.850000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 23.400000000000002
+									},
+									"reason": "",
+									"remaining_health": 295.95,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "独立爆炸",
 								"packet": {
 									"assembly": {
@@ -12000,6 +15693,93 @@
 						"packets": [
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 12.540000000000003,
+										"physical": 21.12
+									},
+									"details": [
+										{
+											"base": 13.2,
+											"before_defense": 21.12,
+											"final": 21.12,
+											"increased": 0.6000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 8.8,
+											"before_defense": 16.720000000000002,
+											"final": 12.540000000000003,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 33.660000000000004
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 12.540000000000003,
+										"physical": 21.12
+									},
+									"damage_total": 33.660000000000004,
+									"details": [
+										{
+											"base": 13.2,
+											"before_defense": 21.12,
+											"final": 21.12,
+											"increased": 0.6000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 8.8,
+											"before_defense": 16.720000000000002,
+											"final": 12.540000000000003,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 33.660000000000004,
+									"mitigated_components": {
+										"fire": 4.18,
+										"physical": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 16.720000000000002,
+										"physical": 21.12
+									},
+									"reason": "",
+									"remaining_health": 279.84,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "母箭",
 								"packet": {
 									"assembly": {
@@ -12065,6 +15845,93 @@
 							},
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 8.778,
+										"physical": 14.783999999999999
+									},
+									"details": [
+										{
+											"base": 9.239999999999998,
+											"before_defense": 14.783999999999999,
+											"final": 14.783999999999999,
+											"increased": 0.6000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 6.16,
+											"before_defense": 11.704,
+											"final": 8.778,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 23.561999999999998
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 8.778,
+										"physical": 14.783999999999999
+									},
+									"damage_total": 23.561999999999998,
+									"details": [
+										{
+											"base": 9.239999999999998,
+											"before_defense": 14.783999999999999,
+											"final": 14.783999999999999,
+											"increased": 0.6000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 6.16,
+											"before_defense": 11.704,
+											"final": 8.778,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 23.561999999999998,
+									"mitigated_components": {
+										"fire": 2.926,
+										"physical": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 11.704,
+										"physical": 14.783999999999999
+									},
+									"reason": "",
+									"remaining_health": 289.938,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "子箭",
 								"packet": {
 									"assembly": {
@@ -12130,6 +15997,61 @@
 							},
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 22.275000000000002
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"damage_total": 22.275000000000002,
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 22.275000000000002,
+									"mitigated_components": {
+										"fire": 7.425000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 29.700000000000003
+									},
+									"reason": "",
+									"remaining_health": 291.225,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "独立爆炸",
 								"packet": {
 									"assembly": {
@@ -12222,6 +16144,97 @@
 						"packets": [
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 10.032000000000002,
+										"physical": 16.896
+									},
+									"details": [
+										{
+											"base": 13.2,
+											"before_defense": 16.896,
+											"final": 16.896,
+											"increased": 0.6000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"support:volley"
+											],
+											"more": 0.8,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 8.8,
+											"before_defense": 13.376000000000003,
+											"final": 10.032000000000002,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:volley"
+											],
+											"more": 0.8,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 26.928000000000004
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 10.032000000000002,
+										"physical": 16.896
+									},
+									"damage_total": 26.928000000000004,
+									"details": [
+										{
+											"base": 13.2,
+											"before_defense": 16.896,
+											"final": 16.896,
+											"increased": 0.6000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"support:volley"
+											],
+											"more": 0.8,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 8.8,
+											"before_defense": 13.376000000000003,
+											"final": 10.032000000000002,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:volley"
+											],
+											"more": 0.8,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 26.928000000000004,
+									"mitigated_components": {
+										"fire": 3.344000000000001,
+										"physical": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 13.376000000000003,
+										"physical": 16.896
+									},
+									"reason": "",
+									"remaining_health": 286.572,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "母箭",
 								"packet": {
 									"assembly": {
@@ -12289,6 +16302,97 @@
 							},
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 7.022400000000001,
+										"physical": 11.8272
+									},
+									"details": [
+										{
+											"base": 9.239999999999998,
+											"before_defense": 11.8272,
+											"final": 11.8272,
+											"increased": 0.6000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"support:volley"
+											],
+											"more": 0.8,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 6.16,
+											"before_defense": 9.3632,
+											"final": 7.022400000000001,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:volley"
+											],
+											"more": 0.8,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 18.849600000000002
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 7.022400000000001,
+										"physical": 11.8272
+									},
+									"damage_total": 18.849600000000002,
+									"details": [
+										{
+											"base": 9.239999999999998,
+											"before_defense": 11.8272,
+											"final": 11.8272,
+											"increased": 0.6000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"support:volley"
+											],
+											"more": 0.8,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 6.16,
+											"before_defense": 9.3632,
+											"final": 7.022400000000001,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:volley"
+											],
+											"more": 0.8,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 18.849600000000002,
+									"mitigated_components": {
+										"fire": 2.3407999999999998,
+										"physical": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 9.3632,
+										"physical": 11.8272
+									},
+									"reason": "",
+									"remaining_health": 294.6504,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "子箭",
 								"packet": {
 									"assembly": {
@@ -12356,6 +16460,61 @@
 							},
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 22.275000000000002
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"damage_total": 22.275000000000002,
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 22.275000000000002,
+									"mitigated_components": {
+										"fire": 7.425000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 29.700000000000003
+									},
+									"reason": "",
+									"remaining_health": 291.225,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "独立爆炸",
 								"packet": {
 									"assembly": {
@@ -12450,6 +16609,97 @@
 						"packets": [
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 15.675,
+										"physical": 26.400000000000002
+									},
+									"details": [
+										{
+											"base": 13.2,
+											"before_defense": 26.400000000000002,
+											"final": 26.400000000000002,
+											"increased": 0.6000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"support:focus"
+											],
+											"more": 1.25,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 8.8,
+											"before_defense": 20.900000000000002,
+											"final": 15.675,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:focus"
+											],
+											"more": 1.25,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 42.075
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 15.675,
+										"physical": 26.400000000000002
+									},
+									"damage_total": 42.075,
+									"details": [
+										{
+											"base": 13.2,
+											"before_defense": 26.400000000000002,
+											"final": 26.400000000000002,
+											"increased": 0.6000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"support:focus"
+											],
+											"more": 1.25,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 8.8,
+											"before_defense": 20.900000000000002,
+											"final": 15.675,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:focus"
+											],
+											"more": 1.25,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 42.075,
+									"mitigated_components": {
+										"fire": 5.225000000000001,
+										"physical": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 20.900000000000002,
+										"physical": 26.400000000000002
+									},
+									"reason": "",
+									"remaining_health": 271.425,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "母箭",
 								"packet": {
 									"assembly": {
@@ -12517,6 +16767,97 @@
 							},
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 10.9725,
+										"physical": 18.479999999999997
+									},
+									"details": [
+										{
+											"base": 9.239999999999998,
+											"before_defense": 18.479999999999997,
+											"final": 18.479999999999997,
+											"increased": 0.6000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"support:focus"
+											],
+											"more": 1.25,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 6.16,
+											"before_defense": 14.63,
+											"final": 10.9725,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:focus"
+											],
+											"more": 1.25,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 29.452499999999997
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 10.9725,
+										"physical": 18.479999999999997
+									},
+									"damage_total": 29.452499999999997,
+									"details": [
+										{
+											"base": 9.239999999999998,
+											"before_defense": 18.479999999999997,
+											"final": 18.479999999999997,
+											"increased": 0.6000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"support:focus"
+											],
+											"more": 1.25,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 6.16,
+											"before_defense": 14.63,
+											"final": 10.9725,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:focus"
+											],
+											"more": 1.25,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 29.452499999999997,
+									"mitigated_components": {
+										"fire": 3.6575000000000006,
+										"physical": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 14.63,
+										"physical": 18.479999999999997
+									},
+									"reason": "",
+									"remaining_health": 284.0475,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "子箭",
 								"packet": {
 									"assembly": {
@@ -12584,6 +16925,61 @@
 							},
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 22.275000000000002
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"damage_total": 22.275000000000002,
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 22.275000000000002,
+									"mitigated_components": {
+										"fire": 7.425000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 29.700000000000003
+									},
+									"reason": "",
+									"remaining_health": 291.225,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "独立爆炸",
 								"packet": {
 									"assembly": {
@@ -12678,6 +17074,101 @@
 						"packets": [
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 12.540000000000003,
+										"physical": 21.12
+									},
+									"details": [
+										{
+											"base": 13.2,
+											"before_defense": 21.12,
+											"final": 21.12,
+											"increased": 0.6000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"support:focus",
+												"support:volley"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 8.8,
+											"before_defense": 16.720000000000002,
+											"final": 12.540000000000003,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:focus",
+												"support:volley"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 33.660000000000004
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 12.540000000000003,
+										"physical": 21.12
+									},
+									"damage_total": 33.660000000000004,
+									"details": [
+										{
+											"base": 13.2,
+											"before_defense": 21.12,
+											"final": 21.12,
+											"increased": 0.6000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"support:focus",
+												"support:volley"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 8.8,
+											"before_defense": 16.720000000000002,
+											"final": 12.540000000000003,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:focus",
+												"support:volley"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 33.660000000000004,
+									"mitigated_components": {
+										"fire": 4.18,
+										"physical": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 16.720000000000002,
+										"physical": 21.12
+									},
+									"reason": "",
+									"remaining_health": 279.84,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "母箭",
 								"packet": {
 									"assembly": {
@@ -12747,6 +17238,101 @@
 							},
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 8.778,
+										"physical": 14.783999999999999
+									},
+									"details": [
+										{
+											"base": 9.239999999999998,
+											"before_defense": 14.783999999999999,
+											"final": 14.783999999999999,
+											"increased": 0.6000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"support:focus",
+												"support:volley"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 6.16,
+											"before_defense": 11.704,
+											"final": 8.778,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:focus",
+												"support:volley"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 23.561999999999998
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 8.778,
+										"physical": 14.783999999999999
+									},
+									"damage_total": 23.561999999999998,
+									"details": [
+										{
+											"base": 9.239999999999998,
+											"before_defense": 14.783999999999999,
+											"final": 14.783999999999999,
+											"increased": 0.6000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"support:focus",
+												"support:volley"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 6.16,
+											"before_defense": 11.704,
+											"final": 8.778,
+											"increased": 0.9000000000000001,
+											"modifiers": [
+												"global_increased",
+												"projectile_increased",
+												"elemental_increased",
+												"support:focus",
+												"support:volley"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 23.561999999999998,
+									"mitigated_components": {
+										"fire": 2.926,
+										"physical": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 11.704,
+										"physical": 14.783999999999999
+									},
+									"reason": "",
+									"remaining_health": 289.938,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "子箭",
 								"packet": {
 									"assembly": {
@@ -12816,6 +17402,61 @@
 							},
 							{
 								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 22.275000000000002
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 22.275000000000002
+									},
+									"damage_total": 22.275000000000002,
+									"details": [
+										{
+											"base": 19.8,
+											"before_defense": 29.700000000000003,
+											"final": 22.275000000000002,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 22.275000000000002,
+									"mitigated_components": {
+										"fire": 7.425000000000001
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 29.700000000000003
+									},
+									"reason": "",
+									"remaining_health": 291.225,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
 								"label": "独立爆炸",
 								"packet": {
 									"assembly": {

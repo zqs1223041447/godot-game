@@ -12,6 +12,8 @@ class Gear extends RefCounted:
 			return {"base_name": "岚纺刃", "name": "岚纺刃"}
 		if id == "generated_focus":
 			return EquipmentSource.definition({"id": "gear_000001", "base_id": "runewood_focus", "rarity": "normal", "item_level": 1, "affixes": []})
+		if id == "generated_emberhide":
+			return {"base_id":"emberhide_vest","base_name":"灰烬皮甲","slot":"armor"}
 		return GameDataSource.ITEMS.get(id, {}).duplicate(true)
 class ActorCell extends Node2D:
 	const ARENA := Rect2(-300, -300, 600, 600)
@@ -67,6 +69,7 @@ func run() -> void:
 				var cell := ActorCell.new()
 				cell.player_facing = Vector2.RIGHT.rotated(direction * TAU / 8.0)
 				cell.state.equipped.weapon = weapon
+				if direction==2: cell.state.equipped.armor="generated_emberhide"
 				cell.alive = direction != 7
 				cell.hurt_flash = 0.1 if direction == 6 else 0.0
 				cell.invulnerable = 0.8 if direction == 5 else 0.0
@@ -77,10 +80,11 @@ func run() -> void:
 				cell.elapsed = direction + 0.375
 				cells.append(cell)
 				root.add_child(cell)
-	for template_id: String in ["crawler", "skitter", "brute", "rift_warden"]:
+	for template_id: String in ["crawler", "skitter", "brute", "rift_warden", "ember_guard"]:
 		for rarity: String in ["normal", "magic", "rare", "boss"]:
 			if (template_id == "rift_warden") != (rarity == "boss"):
 				continue
+			if template_id=="ember_guard" and rarity!="rare": continue
 			for preset: int in range(3):
 				var cell := ActorCell.new()
 				cell.player_pos = Vector2(200, 0)

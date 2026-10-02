@@ -1,5 +1,7 @@
 # v0.5 原创随机装备目录
 
+v0.11防御底材与火抗后缀另见[FIRE_DEFENSES](FIRE_DEFENSES.zh-CN.md)，当前完整8底材/17族由[同源图鉴](reference/index.html)生成。
+
 > 这是保留不变的 v0.5 旧词池。v0.7 新增的独立符木法器与四类固定点数语义适配见 TYPED_AFFIXES.zh-CN.md；旧 BASES / AFFIXES / generate() 仍严格保持这里的内容与行为。
 
 ## 运行时与参考数据的边界

@@ -1,5 +1,7 @@
 # v0.5 随机装备：执行契约与研究边界
 
+本页保留v0.5旧池契约。当前完整目录还包括v0.7法器与v0.11防御池，合计8底材/17词缀族，分别见[TYPED_AFFIXES](TYPED_AFFIXES.zh-CN.md)与[FIRE_DEFENSES](FIRE_DEFENSES.zh-CN.md)；自动汇总见[同源图鉴](reference/index.html)。
+
 ## 可执行范围
 
 运行目录 `scripts/items/equipment_catalog.gd` 完全由原创名称、底材、分档、数值与权重组成。不会读取或导入 `data/reference/poe_affixes`。其 6 个底材、12 个词缀族、36 个原创档位，与研究资料的 1,200 条普通装备档位不是同一集合。

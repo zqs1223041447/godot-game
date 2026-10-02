@@ -13,6 +13,7 @@ const Passives = preload("res://scripts/passive_data.gd")
 const Registry = preload("res://scripts/mechanics/mechanic_registry.gd")
 const Balance = preload("res://scripts/mechanics/passive_balance_adapter.gd")
 const Rules = preload("res://scripts/passives/allocation_rules.gd")
+const Defense = preload("res://scripts/mechanics/defense_rules.gd")
 const Monsters = preload("res://scripts/monsters/monster_catalog.gd")
 
 func _initialize() -> void:
@@ -31,7 +32,7 @@ func _initialize() -> void:
 	quit(0)
 
 static func collect() -> Dictionary:
-	var result: Dictionary = {"schema_version": 1,
+	var result: Dictionary = {"schema_version": 2,
 		"game_version": ProjectSettings.get_setting("application/config/version", "development"),
 		"sources": {"passive": Balance.source_manifest(), "affix": _affix_source()},
 		"equipment": {}, "affixes": {}, "fixed_items": Data.ITEMS.duplicate(true),
@@ -40,28 +41,31 @@ static func collect() -> Dictionary:
 		"edges": Passives.get_edges().duplicate(true), "sectors": Passives.SECTORS,
 		"mechanisms": {}, "monsters": {}, "monster_rarities": Monsters.RARITIES,
 		"equipment_rarities": Equipment.RARITIES, "jewel_rarities": Jewels.RARITIES,
+		"equipment_pools": Equipment.pool_profiles(), "fire_encounter": Monsters.fire_encounter_policy(), "current_loot_profile": Equipment.current_loot_profile(),
 		"passive_caps": Balance.player_caps(), "passive_policy": Balance.policy_version(),
 		"effects": Recipes.EFFECTS, "tornado_recipe": Recipes.TORNADO,
 		"limits": {"max_supports": Supports.MAX_SUPPORTS, "initial_projectiles": Compiler.MAX_INITIAL_PROJECTILES,
-			"min_item_level": Equipment.MIN_ITEM_LEVEL, "max_item_level": Equipment.MAX_ITEM_LEVEL,
-			"expansion_loot_percent": Equipment.EXPANSION_LOOT_PERCENT}}
-	var base_ids: Array = Equipment.BASES.keys() + Equipment.EXPANSION_BASES.keys()
-	var affix_ids: Array = Equipment.AFFIXES.keys() + Equipment.EXPANSION_AFFIXES.keys()
+			"min_item_level": Equipment.MIN_ITEM_LEVEL, "max_item_level": Equipment.MAX_ITEM_LEVEL}}
+	var base_ids: Array = Equipment.all_base_ids()
+	var affix_ids: Array = Equipment.all_affix_ids()
 	for id: String in base_ids:
 		var base: Dictionary = Equipment.base_definition(id)
-		base["pool"] = "expansion" if Equipment.EXPANSION_BASES.has(id) else "legacy"
+		base["pool"] = Equipment.pool_for_base(id)
 		base["eligible_affixes"] = []
 		for affix_id: String in affix_ids:
-			if Equipment._family_eligible(affix_id, Equipment.affix_definition(affix_id), id):
+			if Equipment.family_eligible(affix_id, id):
 				base.eligible_affixes.append(affix_id)
 		base["stats_text"] = Passives.describe_stats(base.stats)
 		result.equipment[id] = base
 	for id: String in affix_ids:
 		var family: Dictionary = Equipment.affix_definition(id)
-		family["pool"] = "expansion" if Equipment.EXPANSION_AFFIXES.has(id) else "legacy"
+		family["pools"] = []
+		for pool_id: String in result.equipment_pools:
+			if result.equipment_pools[pool_id].affix_ids.has(id):
+				family.pools.append(pool_id)
 		family["eligible_bases"] = []
 		for base_id: String in base_ids:
-			if Equipment._family_eligible(id, family, base_id):
+			if Equipment.family_eligible(id, base_id):
 				family.eligible_bases.append(base_id)
 		family["formatted_examples"] = []
 		for tier: Dictionary in family.tiers:
@@ -69,6 +73,24 @@ static func collect() -> Dictionary:
 				"item_level": tier.level, "affixes": [{"id": id, "tier": tier.tier, "value": tier.max}]}
 			family.formatted_examples.append(Equipment.definition(instance).affix_lines[0])
 		result.affixes[id] = family
+	var defense: Dictionary = Defense.metadata()
+	# These are explicitly authored demonstration inputs, not universal game damage.
+	var example_components: Dictionary = {"physical": 20.0, "fire": 20.0}
+	var example_stats: Dictionary = {"fire_resistance": 0.25}
+	defense["worked_example"] = {"input_components": example_components, "defense_stats": example_stats,
+		"shield_before": 10.0, "health_before": 100.0,
+		"trace": Defense.incoming_hit(example_components, example_stats, 10.0, 100.0, "player"),
+		"monster_trace": Defense.incoming_hit(example_components, example_stats, 10.0, 100.0, "monster")}
+	defense["cap_examples"] = []
+	for amount: float in [-0.2, 0.0, 0.25, 0.75, 1.0]:
+		defense.cap_examples.append(Defense.defense_profile({"fire_resistance": amount}, "player"))
+	result["defenses"] = {defense.id: defense}
+	var target_id: String = result.fire_encounter.template_id
+	var target_wave: int = int(result.fire_encounter.minimum_wave)
+	var target: Dictionary = Monsters.make_enemy(1, target_id, target_wave, Vector2.ZERO, "demo")
+	result["known_target"] = {"template_id": target_id, "wave": target_wave,
+		"defense_profile": Defense.defense_profile(target.defense_stats, "monster"),
+		"shield": target.shield, "health": target.health}
 	var fresh: RefCounted = Build.new()
 	var full: RefCounted = Build.new()
 	for item_id: String in Data.COMBAT_STARTER_ITEMS:
@@ -92,8 +114,10 @@ static func collect() -> Dictionary:
 				var cast: Dictionary = Compiler.compile_skill(id, build.get_combat_snapshot(), combination)
 				var packets: Array = []
 				for entry: Dictionary in Preview.entries(cast):
+					var defended: Dictionary = Damage.resolve(entry.packet, cast.snapshot.modifiers, target.resistances)
 					packets.append({"label": entry.label, "packet": entry.packet,
 						"resolved": Damage.resolve(entry.packet, cast.snapshot.modifiers),
+						"known_target_resolved": defended, "known_target_settlement": Defense.settle_resolved(defended, target.shield, target.health),
 						"active": entry.label != "独立爆炸" or cast.snapshot.effects.has("explode_on_flight_end")})
 				skill.examples[config].append({"supports": cast.support_ids, "mana": cast.mana, "cooldown": cast.cooldown,
 					"initial_count": cast.initial_count, "summary": Preview.summary(cast), "details": Preview.details(cast),
@@ -136,7 +160,12 @@ static func collect() -> Dictionary:
 	for id: String in Monsters.TEMPLATES:
 		var template: Dictionary = Monsters.TEMPLATES[id].duplicate(true)
 		var context: String = "level_boss" if template.rarity == "boss" else "demo"
-		template["wave_one_example"] = Monsters.make_enemy(1, id, 1, Vector2.ZERO, context)
+		var example_wave: int = target_wave if id == target_id else 1
+		template["example_wave"] = example_wave
+		template["runtime_example"] = Monsters.make_enemy(1, id, example_wave, Vector2.ZERO, context)
+		template["contact_components"] = Monsters.contact_components(template.runtime_example)
+		template["mechanism_text"] = Monsters.mechanism_text(template.runtime_example)
+		template["defense_profile"] = Defense.defense_profile(template.runtime_example.defense_stats, "monster")
 		result.monsters[id] = template
 	result["special_coverage"] = {}
 	for id: String in Jewels.SPECIAL_BASES:
