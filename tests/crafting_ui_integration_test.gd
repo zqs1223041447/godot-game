@@ -46,6 +46,8 @@ func _run() -> void:
 	salvage.pressed.emit()
 	await _frames()
 	_expect(dialog.visible and dialog.dialog_text.contains("无法恢复") and dialog.dialog_text.contains("校准碎片"), "Salvage opens a concrete permanent-consumption confirmation")
+	_expect(dialog.get_ok_button().get_theme_color("font_focus_color")==Color("3b281b") and dialog.get_cancel_button().get_theme_color("font_focus_color")==Color("3b281b"), "Confirmation focus keeps dark ink on its paper buttons too")
+	_expect(dialog.theme.get_color("title_color","Window")==Color("f8ecd0"), "Confirmation title remains readable over the warm embedded frame")
 	_expect(arena.state._snapshot()==before and arena.state.primary_save_attempt_count==writes, "Opening confirmation never consumes or writes")
 	var first_handle: String = panel._pending_craft.handle
 	salvage.pressed.emit()

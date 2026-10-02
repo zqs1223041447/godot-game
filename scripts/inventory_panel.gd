@@ -323,6 +323,17 @@ func _build_interface() -> void:
 	detail.add_child(_craft_controls)
 	_craft_dialog = ConfirmationDialog.new()
 	_craft_dialog.name = "CraftingConfirmation"
+	# A partial theme retains inherited UI/font scaling. Only the stock grey
+	# embedded title frame and its unreadable dark title gain warm wood/cream.
+	var dialog_theme := Theme.new()
+	dialog_theme.set_color("title_color", "Window", Color("f8ecd0"))
+	for style_name: String in ["embedded_border", "embedded_unfocused_border"]:
+		var frame: StyleBoxFlat = ThemeDB.get_default_theme().get_stylebox(style_name, "Window").duplicate() as StyleBoxFlat
+		if frame != null:
+			frame.bg_color = Color("60432f")
+			frame.border_color = BORDER
+			dialog_theme.set_stylebox(style_name, "Window", frame)
+	_craft_dialog.theme = dialog_theme
 	_craft_dialog.dialog_autowrap = true
 	_craft_dialog.cancel_button_text = "取消"
 	_craft_dialog.confirmed.connect(_confirm_craft)
@@ -330,6 +341,8 @@ func _build_interface() -> void:
 		_cancel_craft()
 		refresh())
 	add_child(_craft_dialog)
+	_craft_dialog.get_ok_button().add_theme_color_override("font_focus_color", TEXT)
+	_craft_dialog.get_cancel_button().add_theme_color_override("font_focus_color", TEXT)
 	_discard_dialog = ConfirmationDialog.new()
 	_discard_dialog.name = "DiscardEquipmentConfirmation"
 	_discard_dialog.title = "确认丢弃装备"

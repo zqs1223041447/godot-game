@@ -2,6 +2,18 @@
 
 以 **构筑与技能组合** 为核心的俯视平面竞技场。基于 **Godot 4.6.3 标准版 / GDScript**，目标平台 **Windows x86_64**。
 
+## v0.15.0：回收与数值校准（开发版，未发布）
+
+- I详情原操作区新增一种校准碎片与两种操作；只用于背包中未穿戴的随机蓝/金装
+- 回收有永久消耗确认；校准保持身份/词缀种类/阶级，只重掷现有数值，可能降低或不变
+- 完整候选原子写盘成功后才更新装备/材料/序号；失败不吞装备和材料，失败重试不换种子
+- schema11增一项制作状态，旧档原字节备份、既有构筑保留，材料从零开始
+- 制作图鉴与流程数值同源；修正焦点文字、长提示与确认框标题的可读性
+
+[完整机制与边界](docs/CRAFTING_INTEGRATION.zh-CN.md) · [制作图鉴](docs/reference/index.html#crafting-calibration_shard) · [最大字号实景](docs/ui/v015-crafting-720.png)
+
+最终串行全量2,043,631项检查与21项字体回归通过，Windows导出及同包Linux启动通过。当前仅为本地验收和Git备份，不代表已有v0.15 GitHub Release。最新已发布版本仍为v0.14；本版Windows成品与HTML浏览器交互尚未验收。
+
 ## v0.14.0：贯穿辅助与真实串列命中
 
 已完成[Windows路径保护修复](docs/qa/WINDOWS_PATH_BLOCKER.zh-CN.md)、Linux完整验证及重新导出。[Windows专项](docs/windows-qa/V014_ACCEPTANCE.zh-CN.md)功能通过，系统证书错误仍使严格日志检查失败；最终发布以GitHub Release标签为准。

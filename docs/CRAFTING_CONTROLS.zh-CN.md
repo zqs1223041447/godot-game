@@ -1,5 +1,7 @@
 # 制作操作行
 
+> v0.15已接入游戏的回收/校准与持久化，见[制作集成](CRAFTING_INTEGRATION.zh-CN.md)。下文保留独立组件交付时的接口边界；不能把纯组件说明当作完整游戏事务。
+
 [crafting_controls.gd](../scripts/ui/crafting_controls.gd) 是一个 `VBoxContainer`，内部只有一行：`校准碎片 N`、`回收`、`校准`。按钮使用现有 `VisualTheme.panel()` 的手绘纸面、棕色墨迹与焦点描边，字号基准为 13。可通过现有 `VisualTheme.apply_font_scale()` 缩放文字；刷新上下文不会重建按钮或重置字号。超长余额可省略显示，完整数值保留在 tooltip 中。
 
 基线为制作分支提交 `f23dcc4d9267a098301b07574390d5077b95867b`。本分支仅新增控件、独立测试和本文档。实际挂载位置、`InventoryPanel` 接入、制作事务与持久化由统一接入方完成。

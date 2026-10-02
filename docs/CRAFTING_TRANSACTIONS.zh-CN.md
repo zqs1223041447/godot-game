@@ -1,5 +1,7 @@
 # 工艺事务规划器：报价、权威重算与候选状态
 
+> v0.15已接入游戏的回收/校准与持久化，见[制作集成](CRAFTING_INTEGRATION.zh-CN.md)。下文保留独立组件交付时的接口边界；不能把纯组件说明当作完整游戏事务。
+
 本独立分支基于 `codex/crafting-rules-v013` 的 `f23dcc4d9267a098301b07574390d5077b95867b`，只新增 [规划器](../scripts/items/crafting_transaction_planner.gd)、[专项测试](../tests/crafting_transaction_planner_test.gd) 和本文档。**尚未接入主游戏、UI、材料存档或实际提交；未合并或发布。** 没有修改 Craft 规则、BuildState 或核心界面，也没有加载 BuildState。
 
 规则来源为 [CraftingRules](../scripts/items/crafting_rules.gd)，实例校验和底材元数据来源为 [EquipmentCatalog](../scripts/items/equipment_catalog.gd)，固定物品识别来源为 [GameData](../scripts/game_data.gd)。费用和收益只读取实际 Craft API 的结果，不复制经济参数表或重写校准/武器伤害公式。

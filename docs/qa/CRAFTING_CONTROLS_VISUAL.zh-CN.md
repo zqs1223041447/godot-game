@@ -1,6 +1,6 @@
 # 制作控件真实渲染验收
 
-**结果：不通过。** 2026-10-02 UTC，在非 headless Godot 窗口中完成 8 组渲染与 GUI 输入验收，保留 28 张原始 PNG。最终测试 **2604 项检查、16 项失败、退出码 1**；失败集中于焦点态浅色文字和长单行 tooltip 越界，两类问题各在 8 组组合中复现。没有把这些失败改成预期通过。
+**历史独立基线结果：不通过；v0.15修复后结果见文末。** 2026-10-02 UTC，在非 headless Godot 窗口中完成 8 组渲染与 GUI 输入验收，保留 28 张原始 PNG。最终测试 **2604 项检查、16 项失败、退出码 1**；失败集中于焦点态浅色文字和长单行 tooltip 越界，两类问题各在 8 组组合中复现。没有把这些失败改成预期通过。
 
 本轮后端为 **Linux / X11 / Mesa llvmpipe 软件渲染**，有实际绘制与像素读回；这份证据不能作为 Windows 硬件渲染验收。
 
@@ -51,7 +51,7 @@ QA 提交相对于组合基线只新增 [测试脚本](../../tests/crafting_cont
 
 测试以有效主题颜色和纸面基色做小字对比诊断，并结合真实纹理截图观察，阈值取 [W3C 小字对比参考 4.5:1](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html)。没有把禁用按钮纳入可用小字的对比断言。原主题没有设置 `font_focus_color`，运行时沿用 Godot 默认浅色；这是结合代码与有效主题取值作出的原因判断。
 
-证据：[720p / 220 / 120%](crafting-controls/1280x720-w220-f120-matrix.png)、[2K / 220 / 120%](crafting-controls/2560x1440-w220-f120-matrix.png)。8 张状态矩阵左上角都能观察到此问题。
+证据：[720p / 220 / 120%](https://github.com/zqs1223041447/godot-game/blob/114266b662ff3f5c1ead696b47bbd1d2fb997d0c/docs/qa/crafting-controls/1280x720-w220-f120-matrix.png)、[2K / 220 / 120%](https://github.com/zqs1223041447/godot-game/blob/114266b662ff3f5c1ead696b47bbd1d2fb997d0c/docs/qa/crafting-controls/2560x1440-w220-f120-matrix.png)。8 张状态矩阵左上角都能观察到此问题。
 
 ### CCV-02：长单行拒绝原因超出窗口，文字不可完整阅读
 
@@ -65,7 +65,7 @@ QA 提交相对于组合基线只新增 [测试脚本](../../tests/crafting_cont
 
 实际原生弹窗边界为 **`position=(0,614), size=(2880,40)`**；可见逻辑画布为 1280×720。完整文本仍保存在原生 Label 中，但弹窗没有自动换行，右侧超出画布，截图和窗口中的后半段被裁切。2K 沿用原画布比例，同样越界。每个组合均保留失败断言。
 
-证据：[720p 长单行](crafting-controls/1280x720-w220-f120-long-error.png)、[2K 长单行](crafting-controls/2560x1440-w220-f120-long-error.png)。对照：[显式三行原因](crafting-controls/1280x720-w220-f120-multiline-error.png)可完整显示，原生弹窗为 312×94，底边 708，在画布内。该对照不是对缺陷的修复。
+证据：[720p 长单行](https://github.com/zqs1223041447/godot-game/blob/114266b662ff3f5c1ead696b47bbd1d2fb997d0c/docs/qa/crafting-controls/1280x720-w220-f120-long-error.png)、[2K 长单行](https://github.com/zqs1223041447/godot-game/blob/114266b662ff3f5c1ead696b47bbd1d2fb997d0c/docs/qa/crafting-controls/2560x1440-w220-f120-long-error.png)。对照：[显式三行原因](https://github.com/zqs1223041447/godot-game/blob/114266b662ff3f5c1ead696b47bbd1d2fb997d0c/docs/qa/crafting-controls/1280x720-w220-f120-multiline-error.png)可完整显示，原生弹窗为 312×94，底边 708，在画布内。该对照不是对缺陷的修复。
 
 ## 布局、文字与鼠标结果
 
@@ -94,25 +94,25 @@ PNG 为最终运行中直接 `Viewport.get_texture().get_image().save_png()` 的
 
 | 物理分辨率 | 行宽 | 字号 | 状态矩阵 / 焦点问题 | 长单行问题 |
 | --- | --- | --- | --- | --- |
-| 1280×720 | 220 | 100% | [矩阵](crafting-controls/1280x720-w220-f100-matrix.png) | [越界](crafting-controls/1280x720-w220-f100-long-error.png) |
-| 1280×720 | 220 | 120% | [矩阵](crafting-controls/1280x720-w220-f120-matrix.png) | [越界](crafting-controls/1280x720-w220-f120-long-error.png) |
-| 1280×720 | 280 | 100% | [矩阵](crafting-controls/1280x720-w280-f100-matrix.png) | [越界](crafting-controls/1280x720-w280-f100-long-error.png) |
-| 1280×720 | 280 | 120% | [矩阵](crafting-controls/1280x720-w280-f120-matrix.png) | [越界](crafting-controls/1280x720-w280-f120-long-error.png) |
-| 2560×1440 | 220 | 100% | [矩阵](crafting-controls/2560x1440-w220-f100-matrix.png) | [越界](crafting-controls/2560x1440-w220-f100-long-error.png) |
-| 2560×1440 | 220 | 120% | [矩阵](crafting-controls/2560x1440-w220-f120-matrix.png) | [越界](crafting-controls/2560x1440-w220-f120-long-error.png) |
-| 2560×1440 | 280 | 100% | [矩阵](crafting-controls/2560x1440-w280-f100-matrix.png) | [越界](crafting-controls/2560x1440-w280-f100-long-error.png) |
-| 2560×1440 | 280 | 120% | [矩阵](crafting-controls/2560x1440-w280-f120-matrix.png) | [越界](crafting-controls/2560x1440-w280-f120-long-error.png) |
+| 1280×720 | 220 | 100% | [矩阵](https://github.com/zqs1223041447/godot-game/blob/114266b662ff3f5c1ead696b47bbd1d2fb997d0c/docs/qa/crafting-controls/1280x720-w220-f100-matrix.png) | [越界](https://github.com/zqs1223041447/godot-game/blob/114266b662ff3f5c1ead696b47bbd1d2fb997d0c/docs/qa/crafting-controls/1280x720-w220-f100-long-error.png) |
+| 1280×720 | 220 | 120% | [矩阵](https://github.com/zqs1223041447/godot-game/blob/114266b662ff3f5c1ead696b47bbd1d2fb997d0c/docs/qa/crafting-controls/1280x720-w220-f120-matrix.png) | [越界](https://github.com/zqs1223041447/godot-game/blob/114266b662ff3f5c1ead696b47bbd1d2fb997d0c/docs/qa/crafting-controls/1280x720-w220-f120-long-error.png) |
+| 1280×720 | 280 | 100% | [矩阵](https://github.com/zqs1223041447/godot-game/blob/114266b662ff3f5c1ead696b47bbd1d2fb997d0c/docs/qa/crafting-controls/1280x720-w280-f100-matrix.png) | [越界](https://github.com/zqs1223041447/godot-game/blob/114266b662ff3f5c1ead696b47bbd1d2fb997d0c/docs/qa/crafting-controls/1280x720-w280-f100-long-error.png) |
+| 1280×720 | 280 | 120% | [矩阵](https://github.com/zqs1223041447/godot-game/blob/114266b662ff3f5c1ead696b47bbd1d2fb997d0c/docs/qa/crafting-controls/1280x720-w280-f120-matrix.png) | [越界](https://github.com/zqs1223041447/godot-game/blob/114266b662ff3f5c1ead696b47bbd1d2fb997d0c/docs/qa/crafting-controls/1280x720-w280-f120-long-error.png) |
+| 2560×1440 | 220 | 100% | [矩阵](https://github.com/zqs1223041447/godot-game/blob/114266b662ff3f5c1ead696b47bbd1d2fb997d0c/docs/qa/crafting-controls/2560x1440-w220-f100-matrix.png) | [越界](https://github.com/zqs1223041447/godot-game/blob/114266b662ff3f5c1ead696b47bbd1d2fb997d0c/docs/qa/crafting-controls/2560x1440-w220-f100-long-error.png) |
+| 2560×1440 | 220 | 120% | [矩阵](https://github.com/zqs1223041447/godot-game/blob/114266b662ff3f5c1ead696b47bbd1d2fb997d0c/docs/qa/crafting-controls/2560x1440-w220-f120-matrix.png) | [越界](https://github.com/zqs1223041447/godot-game/blob/114266b662ff3f5c1ead696b47bbd1d2fb997d0c/docs/qa/crafting-controls/2560x1440-w220-f120-long-error.png) |
+| 2560×1440 | 280 | 100% | [矩阵](https://github.com/zqs1223041447/godot-game/blob/114266b662ff3f5c1ead696b47bbd1d2fb997d0c/docs/qa/crafting-controls/2560x1440-w280-f100-matrix.png) | [越界](https://github.com/zqs1223041447/godot-game/blob/114266b662ff3f5c1ead696b47bbd1d2fb997d0c/docs/qa/crafting-controls/2560x1440-w280-f100-long-error.png) |
+| 2560×1440 | 280 | 120% | [矩阵](https://github.com/zqs1223041447/godot-game/blob/114266b662ff3f5c1ead696b47bbd1d2fb997d0c/docs/qa/crafting-controls/2560x1440-w280-f120-matrix.png) | [越界](https://github.com/zqs1223041447/godot-game/blob/114266b662ff3f5c1ead696b47bbd1d2fb997d0c/docs/qa/crafting-controls/2560x1440-w280-f120-long-error.png) |
 
 以下额外截图均为行宽 220、字号 120%：
 
 | 场景 | 720p | 2K |
 | --- | --- | --- |
-| 余额不足提示 | [原图](crafting-controls/1280x720-w220-f120-insufficient.png) | [原图](crafting-controls/2560x1440-w220-f120-insufficient.png) |
-| 实际成本与风险说明 | [原图](crafting-controls/1280x720-w220-f120-enabled-warning.png) | [原图](crafting-controls/2560x1440-w220-f120-enabled-warning.png) |
-| 禁用提示 | [原图](crafting-controls/1280x720-w220-f120-disabled-equipped.png) | [原图](crafting-controls/2560x1440-w220-f120-disabled-equipped.png) |
-| 完整极长余额 | [原图](crafting-controls/1280x720-w220-f120-full-balance.png) | [原图](crafting-controls/2560x1440-w220-f120-full-balance.png) |
-| 显式多行错误对照 | [原图](crafting-controls/1280x720-w220-f120-multiline-error.png) | [原图](crafting-controls/2560x1440-w220-f120-multiline-error.png) |
-| 原按钮按下状态 | [原图](crafting-controls/1280x720-w220-f120-pressed.png) | [原图](crafting-controls/2560x1440-w220-f120-pressed.png) |
+| 余额不足提示 | [原图](https://github.com/zqs1223041447/godot-game/blob/114266b662ff3f5c1ead696b47bbd1d2fb997d0c/docs/qa/crafting-controls/1280x720-w220-f120-insufficient.png) | [原图](https://github.com/zqs1223041447/godot-game/blob/114266b662ff3f5c1ead696b47bbd1d2fb997d0c/docs/qa/crafting-controls/2560x1440-w220-f120-insufficient.png) |
+| 实际成本与风险说明 | [原图](https://github.com/zqs1223041447/godot-game/blob/114266b662ff3f5c1ead696b47bbd1d2fb997d0c/docs/qa/crafting-controls/1280x720-w220-f120-enabled-warning.png) | [原图](https://github.com/zqs1223041447/godot-game/blob/114266b662ff3f5c1ead696b47bbd1d2fb997d0c/docs/qa/crafting-controls/2560x1440-w220-f120-enabled-warning.png) |
+| 禁用提示 | [原图](https://github.com/zqs1223041447/godot-game/blob/114266b662ff3f5c1ead696b47bbd1d2fb997d0c/docs/qa/crafting-controls/1280x720-w220-f120-disabled-equipped.png) | [原图](https://github.com/zqs1223041447/godot-game/blob/114266b662ff3f5c1ead696b47bbd1d2fb997d0c/docs/qa/crafting-controls/2560x1440-w220-f120-disabled-equipped.png) |
+| 完整极长余额 | [原图](https://github.com/zqs1223041447/godot-game/blob/114266b662ff3f5c1ead696b47bbd1d2fb997d0c/docs/qa/crafting-controls/1280x720-w220-f120-full-balance.png) | [原图](https://github.com/zqs1223041447/godot-game/blob/114266b662ff3f5c1ead696b47bbd1d2fb997d0c/docs/qa/crafting-controls/2560x1440-w220-f120-full-balance.png) |
+| 显式多行错误对照 | [原图](https://github.com/zqs1223041447/godot-game/blob/114266b662ff3f5c1ead696b47bbd1d2fb997d0c/docs/qa/crafting-controls/1280x720-w220-f120-multiline-error.png) | [原图](https://github.com/zqs1223041447/godot-game/blob/114266b662ff3f5c1ead696b47bbd1d2fb997d0c/docs/qa/crafting-controls/2560x1440-w220-f120-multiline-error.png) |
+| 原按钮按下状态 | [原图](https://github.com/zqs1223041447/godot-game/blob/114266b662ff3f5c1ead696b47bbd1d2fb997d0c/docs/qa/crafting-controls/1280x720-w220-f120-pressed.png) | [原图](https://github.com/zqs1223041447/godot-game/blob/114266b662ff3f5c1ead696b47bbd1d2fb997d0c/docs/qa/crafting-controls/2560x1440-w220-f120-pressed.png) |
 
 ## 重复执行
 
@@ -146,3 +146,15 @@ LIBGL_ALWAYS_SOFTWARE=1 godot --audio-driver Dummy --path "$task_dir/project" \
 最终渲染日志只有上述 16 个验收错误，启动另有软件驱动不能切换 V-Sync 的警告。显式使用 `--audio-driver Dummy`，避免没有声卡的环境干扰视觉记录。最终日志与测量文件位于 `/tmp/crafting-visual-run/evidence-render.log` 和 `/tmp/crafting-visual-run/final-evidence/observations.json`。
 
 本次没有运行 600 秒全量、制作发布包或修改 main/release。后续仍需在允许修改相关源文件的任务中处理 CCV-01/02，然后重新执行本测试；Windows 硬件与正式主面板集成验收尚未完成。
+
+## v0.15修复与复验
+
+制作按钮局部覆盖深墨 `font_focus_color`，长提示仍保留完整原文，只用自定义原生Label限制最大宽度420逻辑单位并自动换行。没有改变操作行、报价数值或按钮信号契约。原228项控件检查继续通过。
+
+最终8组合真实渲染 **2604项、0失败、42次允许请求**。所有原断言保留；720p原OS指针路径的4组合也通过。宿主桌面为1364×1024，无法把OS指针移到2K窗口底部；独立Xvfb因执行器AF_UNIX限制启动失败，正规提权重试仍失败，没有改变安全或桌面设置。随后仅增加显式 `--virtual-pointer` 参数，让8组统一走Godot公开 `Window.push_input`；仍执行真实GUI命中、原生tooltip、完整文字、窗口/标签边界与实际像素读回。这个结果不是2K物理鼠标或Windows硬件验收。
+
+[720p焦点](crafting-controls/1280x720-w220-f120-matrix.png) · [720p长提示](crafting-controls/1280x720-w220-f120-long-error.png) · [2K焦点](crafting-controls/2560x1440-w220-f120-matrix.png) · [2K长提示](crafting-controls/2560x1440-w220-f120-long-error.png) · [完整测量](crafting-controls/observations.json)
+
+同一绘制夹具用原先的启动方式追加 `--virtual-pointer` 可在有限物理桌面重复引擎GUI检查。去掉该参数则保持原OS指针路径，需要实际显示空间足以容纳被测窗口。两种方式都不加载用户构筑。
+
+曾用于准备独立渲染环境的Xvfb来自[Debian官方包页](https://packages.debian.org/trixie/amd64/xvfb/download)，版本21.1.16-1.3+deb13u4，3,198,660字节，SHA256 `893d87bf159b6de077a929fc796a73c39f837d45310b2076e3eeebebb80552b6`；只解包到测试工具目录，未安装系统包。它没有成功运行，不能用作本轮通过证据。
