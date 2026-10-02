@@ -37,6 +37,10 @@ run_check --script res://tests/build_test.gd
 run_check --script res://tests/equipment_catalog_test.gd
 run_check --script res://tests/equipment_state_test.gd
 run_check --script res://tests/equipment_integration_test.gd
+run_check --script res://tests/skill_compiler_test.gd
+run_check --script res://tests/skill_support_state_test.gd
+run_check --script res://tests/skill_support_integration_test.gd
+run_check --script res://tests/skill_support_ui_test.gd
 run_check --script res://tests/equipment_soak_test.gd
 run_check --script res://tests/passive_jewel_test.gd
 run_check --script res://tests/mechanic_registry_test.gd
@@ -47,5 +51,7 @@ run_check --script res://tests/combat_pipeline_test.gd
 run_check --script res://tests/combat_integration_test.gd
 run_check --script res://tests/smoke_test.gd
 run_check --script res://tests/visual_settings_test.gd
+run_check --script res://tests/combat_cues_test.gd
+run_check --script res://tests/combat_cues_integration_test.gd
 run_check --quit-after 300
-echo "Validation passed: import, original equipment rolls/loot/schema4 migration, build/save model, passive/jewel/balance invariants, shared mechanisms, monster lifecycle/scene, projectile/damage pipeline, combat/UI integration, and 300-frame startup."
+echo "Validation passed: import, original equipment rolls/loot, schema5 support migration, compiled supports/cast/UI, bounded visual cues, build/save model, passive/jewel/balance invariants, shared mechanisms, monster lifecycle/scene, projectile/damage pipeline, combat/UI integration, and 300-frame startup."
