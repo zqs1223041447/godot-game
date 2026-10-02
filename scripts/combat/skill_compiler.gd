@@ -4,6 +4,7 @@ extends RefCounted
 const Data = preload("res://scripts/game_data.gd")
 const Recipes = preload("res://scripts/combat/combat_data.gd")
 const Supports = preload("res://scripts/combat/support_catalog.gd")
+const BaseCompiler = preload("res://scripts/combat/damage_base_compiler.gd")
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
 const MAX_INITIAL_PROJECTILES: int = 9
 
@@ -35,6 +36,10 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 		initial_count = int(recipe.initial_count)
 	elif skill.capabilities.has("projectile_hit"):
 		return _failure("投射物技能缺少已支持的发射配方")
+	elif skill_id in ["nova", "meteor", "chain"]:
+		error = _hit_recipe_error(skill.get("hit_recipe"), skill_id == "chain")
+		if not error.is_empty():
+			return _failure(error)
 	var canonical: Array[String] = []
 	for id: String in support_ids:
 		canonical.append(id)
@@ -64,9 +69,54 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 		compiled_snapshot.initial_count = initial_count
 	if not is_finite(mana):
 		return _failure("编译后的魔力消耗无效")
+	var packets: Dictionary = _compile_packets(skill_id, compiled_snapshot)
+	if not skill_id in ["dash", "ward"] and packets.is_empty():
+		return _failure("命中伤害组装无效")
+	compiled_snapshot.compiled_skill_id = skill_id
+	compiled_snapshot.compiled_packets = packets.duplicate(true)
 	return {"ok": true, "error": "", "skill_id": skill_id,
 		"snapshot": compiled_snapshot, "mana": mana, "cooldown": float(skill.cooldown),
-		"initial_count": initial_count, "recipe": recipe, "support_ids": canonical}
+		"initial_count": initial_count, "recipe": recipe, "support_ids": canonical, "packets": packets}
+
+
+static func _compile_packets(skill_id: String, snapshot: Dictionary) -> Dictionary:
+	var result: Dictionary = {}
+	var roles: Array[String] = []
+	match skill_id:
+		"tornado": roles.assign(["parent", "child", "secondary"])
+		"bolt", "frost": roles.assign(["projectile", "secondary"])
+		"nova", "meteor": roles.assign(["direct"])
+		"chain":
+			var bounces: Array[Dictionary] = []
+			for index: int in range(int(Data.SKILLS.chain.hit_recipe.bounce_count)):
+				var packet: Dictionary = Recipes.event_packet(snapshot, skill_id, "bounce", index)
+				if packet.is_empty():
+					return {}
+				bounces.append(packet)
+			result.bounces = bounces
+	for role: String in roles:
+		var packet: Dictionary = Recipes.event_packet(snapshot, skill_id, role)
+		if packet.is_empty():
+			return {}
+		result[role] = packet
+	return result
+
+
+static func _hit_recipe_error(recipe: Variant, chain: bool) -> String:
+	var keys: Array[String] = ["base_coefficient", "added_effectiveness", "damage_type"]
+	if chain:
+		keys.append_array(["bounce_count", "base_coefficient_loss_per_bounce", "added_effectiveness_loss_per_bounce"])
+	if not recipe is Dictionary or recipe.size() != keys.size() or not recipe.has_all(keys):
+		return "直接命中配方结构无效"
+	if not _nonnegative(recipe.base_coefficient) or not _nonnegative(recipe.added_effectiveness) or not recipe.damage_type is String or not Damage.TYPES.has(recipe.damage_type):
+		return "直接命中配方数值无效"
+	if chain:
+		if not Recipes._valid_chain_recipe(recipe):
+			return "连锁命中配方无效"
+		var last: int = int(recipe.bounce_count) - 1
+		if float(recipe.base_coefficient) - last * float(recipe.base_coefficient_loss_per_bounce) < 0.0 or float(recipe.added_effectiveness) - last * float(recipe.added_effectiveness_loss_per_bounce) < 0.0:
+			return "连锁命中倍率不可为负"
+	return ""
 
 
 static func _failure(error: String) -> Dictionary:
@@ -76,12 +126,18 @@ static func _failure(error: String) -> Dictionary:
 static func _snapshot_error(snapshot: Dictionary) -> String:
 	# initial_count is reserved for compiled projectile snapshots, including empty supports.
 	# Reject re-entry instead of applying support more factors a second time.
-	if snapshot.has("initial_count"):
+	if snapshot.has("initial_count") or snapshot.has("compiled_packets") or snapshot.has("compiled_skill_id"):
 		return "施放快照已编译；必须从基础构筑快照重新编译"
-	if not snapshot.has_all(["base_damage", "modifiers", "effects", "projectile_count", "tornado_recipe", "explosion_recipe"]):
+	if not snapshot.has_all(["base_damage", "modifiers", "effects", "projectile_count", "tornado_recipe", "explosion_recipe", "added_damage"]):
 		return "施放快照缺少必要字段"
 	if not _nonnegative(snapshot.base_damage) or not _integer(snapshot.projectile_count, -1000000, 1000000):
 		return "施放快照基础数值无效"
+	var additions_error: String = BaseCompiler.additions_error(snapshot.added_damage)
+	if not additions_error.is_empty():
+		return additions_error
+	var sources_error: String = BaseCompiler.sources_error(snapshot.get("added_damage_sources", []))
+	if not sources_error.is_empty():
+		return sources_error
 	if not snapshot.modifiers is Array or not snapshot.effects is Array:
 		return "施放快照效果或修饰器无效"
 	for effect: Variant in snapshot.effects:
@@ -90,12 +146,21 @@ static func _snapshot_error(snapshot: Dictionary) -> String:
 	for modifier: Variant in snapshot.modifiers:
 		if not modifier is Dictionary or not modifier.get("mode") in ["increased", "more"] or not _number(modifier.get("value")):
 			return "施放快照伤害修饰器无效"
+		for field: Variant in modifier:
+			if not field in ["id", "mode", "value", "all_tags", "skills", "damage_types"]:
+				return "施放快照伤害修饰器含未知字段"
 		# Also catch support-bearing snapshots whose compiled count was removed.
 		if str(modifier.get("id", "")).begins_with("support:"):
 			return "施放快照含已编译辅助；必须从基础构筑快照重新编译"
 		for key: String in ["all_tags", "skills", "damage_types"]:
 			if not Supports._string_array(modifier.get(key, [])):
 				return "施放快照伤害作用域无效"
+		for tag: String in modifier.get("all_tags", []):
+			if not BaseCompiler.TAGS.has(tag):
+				return "施放快照伤害标签无效"
+		for id: String in modifier.get("skills", []):
+			if id != "basic" and not Data.SKILLS.has(id):
+				return "施放快照伤害技能作用域无效"
 		for type: String in modifier.get("damage_types", []):
 			if not Damage.TYPES.has(type):
 				return "施放快照伤害类型无效"
@@ -103,17 +168,17 @@ static func _snapshot_error(snapshot: Dictionary) -> String:
 	if not error.is_empty():
 		return error
 	var explosion: Variant = snapshot.explosion_recipe
-	if not explosion is Dictionary or not _nonnegative(explosion.get("coefficient")) or not _nonnegative(explosion.get("radius")):
+	if not explosion is Dictionary or explosion.size() != 3 or not _nonnegative(explosion.get("coefficient")) or not _nonnegative(explosion.get("radius")) or not _nonnegative(explosion.get("added_effectiveness")) or float(explosion.added_effectiveness) != 0.0:
 		return "独立爆炸配方无效"
 	return ""
 
 
 static func _projectile_recipe_error(recipe: Variant) -> String:
-	if not recipe is Dictionary or recipe.size() != 7 or not recipe.has_all(["initial_count", "spread", "coefficient", "pierce", "slow", "speed", "damage_type"]):
+	if not recipe is Dictionary or recipe.size() != 8 or not recipe.has_all(["initial_count", "spread", "coefficient", "pierce", "slow", "speed", "damage_type", "added_effectiveness"]):
 		return "投射物配方结构无效"
 	if not _integer(recipe.initial_count, 1, MAX_INITIAL_PROJECTILES) or not _integer(recipe.pierce, -1, 100):
 		return "投射物数量或穿透无效"
-	for key: String in ["spread", "coefficient", "slow", "speed"]:
+	for key: String in ["spread", "coefficient", "added_effectiveness", "slow", "speed"]:
 		if not _nonnegative(recipe[key]):
 			return "投射物配方数值无效"
 	if float(recipe.speed) <= 0.0 or not recipe.damage_type is String or not Damage.TYPES.has(recipe.damage_type):
@@ -122,20 +187,20 @@ static func _projectile_recipe_error(recipe: Variant) -> String:
 
 
 static func _tornado_error(recipe: Variant) -> String:
-	if not recipe is Dictionary or not recipe.has_all(["parent_count", "child_count", "spread", "parent", "child", "explosion"]):
+	if not recipe is Dictionary or recipe.size() != 6 or not recipe.has_all(["parent_count", "child_count", "spread", "parent", "child", "explosion"]):
 		return "龙卷配方结构无效"
 	if not _integer(recipe.parent_count, 1, MAX_INITIAL_PROJECTILES) or not _integer(recipe.child_count, 1, MAX_INITIAL_PROJECTILES) or not _nonnegative(recipe.spread):
 		return "龙卷数量或间距无效"
 	for role: String in ["parent", "child"]:
 		var spec: Variant = recipe[role]
-		if not spec is Dictionary or not spec.has_all(["speed", "range", "lifetime", "coefficient", "pierce", "radius", "role", "split"]):
+		if not spec is Dictionary or spec.size() != 9 or not spec.has_all(["speed", "range", "lifetime", "coefficient", "pierce", "radius", "role", "split", "added_effectiveness"]):
 			return "龙卷载体配方无效"
-		for key: String in ["speed", "range", "lifetime", "coefficient", "radius"]:
+		for key: String in ["speed", "range", "lifetime", "coefficient", "added_effectiveness", "radius"]:
 			if not _nonnegative(spec[key]):
 				return "龙卷载体数值无效"
 		if float(spec.speed) <= 0.0 or not _integer(spec.pierce, -1, 100) or spec.role != role or not spec.split is bool:
 			return "龙卷载体行为无效"
-	if not recipe.explosion is Dictionary or not _nonnegative(recipe.explosion.get("coefficient")) or not _nonnegative(recipe.explosion.get("radius")):
+	if not recipe.explosion is Dictionary or recipe.explosion.size() != 3 or not _nonnegative(recipe.explosion.get("coefficient")) or not _nonnegative(recipe.explosion.get("radius")) or not _nonnegative(recipe.explosion.get("added_effectiveness")) or float(recipe.explosion.added_effectiveness) != 0.0:
 		return "龙卷爆炸配方无效"
 	return ""
 

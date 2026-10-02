@@ -48,12 +48,15 @@ func spawn_tornado(shots: Array[Dictionary], origin: Vector2, heading: Vector2,
 	# Cast admission is all-or-none so budget pressure never silently changes n.
 	if shots.size() + count > max_projectiles:
 		return 0
+	var payload: Dictionary = Recipes.event_packet(snapshot, "tornado", "parent")
+	if payload.is_empty():
+		return 0
 	var cast_id: int = new_cast()
 	for index: int in range(count):
 		var angle: float = (index - (count - 1) * 0.5) * float(recipe.spread)
 		var direction: Vector2 = heading.rotated(angle).normalized()
 		shots.append(make_projectile(origin + direction * 19.0, direction, recipe.parent,
-			Recipes.tornado_packet(snapshot, "parent"), snapshot, cast_id, Color("a6e8aa")))
+			payload, snapshot, cast_id, Color("a6e8aa")))
 	return count
 
 
@@ -116,7 +119,8 @@ func advance(shots: Array[Dictionary], delta: float, targets: Array[Dictionary],
 			_event(events, "range_reached", shot, offset)
 			if bool(shot.split):
 				var child_count: int = int(shot.recipe.child_count)
-				if int(shot.generation) >= MAX_GENERATION or active_count - 1 + child_count > max_projectiles:
+				var child_payload: Dictionary = Recipes.event_packet(shot.snapshot, str(shot.skill_id), "child")
+				if child_payload.is_empty() or int(shot.generation) >= MAX_GENERATION or active_count - 1 + child_count > max_projectiles:
 					_event(events, "spawn_rejected", shot, offset, {"reason": "budget_or_generation"})
 					_finish(shot, "budget_cancelled", events, offset)
 				else:
@@ -125,7 +129,7 @@ func advance(shots: Array[Dictionary], delta: float, targets: Array[Dictionary],
 					for index: int in range(child_count):
 						var direction: Vector2 = Vector2(shot.velocity).normalized().rotated(TAU * index / child_count)
 						var child: Dictionary = make_projectile(shot.pos, direction, shot.recipe.child,
-							Recipes.tornado_packet(shot.snapshot, "child"), shot.snapshot, int(shot.cast_id), Color("70dfed"),
+							child_payload, shot.snapshot, int(shot.cast_id), Color("70dfed"),
 							int(shot.id), int(shot.root_id), int(shot.generation) + 1)
 						shots.append(child)
 						if remaining > EPS:
@@ -188,8 +192,9 @@ func _natural_end(shot: Dictionary, reason: String, events: Array[Dictionary], t
 	_finish(shot, reason, events, time)
 	_event(events, "flight_ended", shot, time, {"reason": reason})
 	if _effect(shot, "explode_on_flight_end", "flight_ended"):
-		var payload: Dictionary = Damage.packet({"fire": float(shot.snapshot.base_damage) * float(shot.snapshot.get("explosion_recipe", Recipes.TORNADO.explosion).coefficient)},
-			["hit", "area", "secondary", "explosion"], str(shot.skill_id))
+		var payload: Dictionary = Recipes.secondary_packet(shot.snapshot, str(shot.skill_id))
+		if payload.is_empty():
+			return
 		_event(events, "explosion", shot, time, {"pos": shot.pos, "effect_id": "explosion:%d" % int(shot.id),
 			"radius": float(shot.snapshot.get("explosion_recipe", Recipes.TORNADO.explosion).radius), "payload": payload, "snapshot": shot.snapshot,
 			"color": Color("ffb576"), "reason": reason})
