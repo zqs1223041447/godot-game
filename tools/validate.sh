@@ -47,6 +47,9 @@ run_check() {
 }
 
 echo "Godot version: $("$GODOT_BIN" --version)"
+python3 "$PROJECT_DIR/tools/check_font_coverage.py"
+python3 "$PROJECT_DIR/tests/test_font_coverage.py"
+python3 "$PROJECT_DIR/tools/validate_save_paths_linux.py" --godot "$GODOT_BIN"
 run_check --editor --import
 run_check --script res://tests/build_test.gd
 run_check --script res://tests/equipment_catalog_test.gd

@@ -1,0 +1,89 @@
+{
+  "runtime_base_commit": "59f173c533ba3d9ff79fdcee7ac665a15d80a67c",
+  "crafting_commit": "c2e711bdcccaefbbfdcc7bb9e8dd41db5010287f",
+  "before": {
+    "mapped_codepoints": 860,
+    "required_codepoints": 855,
+    "required_han": 753,
+    "baseline_codepoints": 860,
+    "fallback_symbols": [
+      8961,
+      9672
+    ],
+    "missing": [
+      20179,
+      20215,
+      20363,
+      24037,
+      25253,
+      25910,
+      26657,
+      27966,
+      29255,
+      30862,
+      31454,
+      33402,
+      35777,
+      36164
+    ],
+    "lost_baseline": [],
+    "empty_han": [],
+    "errors": [],
+    "ok": false
+  },
+  "after": {
+    "mapped_codepoints": 874,
+    "required_codepoints": 855,
+    "required_han": 753,
+    "baseline_codepoints": 860,
+    "fallback_symbols": [
+      8961,
+      9672
+    ],
+    "missing": [],
+    "lost_baseline": [],
+    "empty_han": [],
+    "errors": [],
+    "ok": true
+  },
+  "runtime_files": 48,
+  "supplemental_string_counts": {
+    "scripts/ui/crafting_controls.gd": 10,
+    "scripts/items/crafting_rules.gd": 13
+  },
+  "added_characters": "仓价例工报收校派片碎竞艺证资",
+  "font_sha256": "64e13b9670cb12fe906d1adf736df5aa6d90019aa2b9cdab49559ac75976cea2",
+  "regeneration_byte_identical": true,
+  "regression_tests": 19,
+  "source_license_byte_identical": true,
+  "godot": {
+    "display_driver": "X11",
+    "engine": "4.6.3-stable (official)",
+    "fallback": false,
+    "font_rids": 1,
+    "han_rasters": 1506,
+    "native_mappings": 1748,
+    "rendered": true,
+    "sizes": [
+      16,
+      19
+    ],
+    "supported_chars": 874,
+    "font_sha256": "64e13b9670cb12fe906d1adf736df5aa6d90019aa2b9cdab49559ac75976cea2",
+    "png_sha256": "d39e8eebdca91a69705dcac34fc6a0ec006ade75c7fbcdb0e9282582bd76bc33"
+  },
+  "source_scope": [
+    "project.godot",
+    "scripts/**/*.gd",
+    "scenes/**/*.tscn",
+    "data/**/*.json (outside .gdignore)",
+    "CSV text and textual Godot resources in runtime roots"
+  ],
+  "limitations": [
+    "Same-source font has no U+2301 or U+25C8; existing system-fallback/import settings retained.",
+    "Linux Godot font probe is not Windows packaged-game acceptance.",
+    "Static strings only; arbitrary future downloaded/user-generated text requires separate coverage inputs."
+  ],
+  "initial_integration_commit": "e570b2b4596c908d82968117b90570a0ea515ea3",
+  "baseline_font_sha256": "5369d83f5d9992de05f8d1c9bb26d7495123851e56a03713287b765da87562b0"
+}
