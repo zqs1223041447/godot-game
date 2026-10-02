@@ -22,6 +22,11 @@ static func modifiers(stats: Dictionary) -> Array[Dictionary]:
 		"projectile_increased": {"all_tags": ["projectile"], "damage_types": []},
 		"elemental_increased": {"all_tags": [], "damage_types": Damage.ELEMENTS},
 		"area_increased": {"all_tags": ["area"], "damage_types": []},
+		"spell_increased": {"all_tags": ["spell"], "damage_types": []},
+		"fire_increased": {"all_tags": [], "damage_types": ["fire"]},
+		"cold_increased": {"all_tags": [], "damage_types": ["cold"]},
+		"lightning_increased": {"all_tags": [], "damage_types": ["lightning"]},
+		"attack_elemental_increased": {"all_tags": ["attack"], "damage_types": Damage.ELEMENTS},
 	}
 	for stat: String in scopes:
 		if not is_zero_approx(float(stats.get(stat, 0.0))):
