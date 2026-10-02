@@ -1,0 +1,1979 @@
+{
+	"affixes": "{\n\"barrier\": {\n\"kind\": \"prefix\",\n\"max\": 22.0,\n\"min\": 8.0,\n\"name\": \"凝光\",\n\"stat\": \"max_shield\",\n\"step\": 2.0\n},\n\"clarity\": {\n\"kind\": \"prefix\",\n\"max\": 22.0,\n\"min\": 8.0,\n\"name\": \"澄明\",\n\"stat\": \"max_mana\",\n\"step\": 2.0\n},\n\"force\": {\n\"kind\": \"prefix\",\n\"max\": 6.0,\n\"min\": 2.0,\n\"name\": \"炽烈\",\n\"stat\": \"damage\",\n\"step\": 1.0\n},\n\"recharge\": {\n\"kind\": \"suffix\",\n\"max\": 1.5,\n\"min\": 0.5,\n\"name\": \"复苏\",\n\"stat\": \"shield_regen\",\n\"step\": 0.1\n},\n\"renewal\": {\n\"kind\": \"suffix\",\n\"max\": 1.1,\n\"min\": 0.3,\n\"name\": \"回流\",\n\"stat\": \"mana_regen\",\n\"step\": 0.1\n},\n\"stride\": {\n\"kind\": \"suffix\",\n\"max\": 12.0,\n\"min\": 4.0,\n\"name\": \"疾行\",\n\"stat\": \"move_speed\",\n\"step\": 1.0\n},\n\"tempo\": {\n\"kind\": \"suffix\",\n\"max\": 0.12,\n\"min\": 0.04,\n\"name\": \"节律\",\n\"stat\": \"attack_speed\",\n\"step\": 0.01\n},\n\"vitality\": {\n\"kind\": \"prefix\",\n\"max\": 28.0,\n\"min\": 12.0,\n\"name\": \"丰茂\",\n\"stat\": \"max_health\",\n\"step\": 2.0\n}\n}",
+	"bases": "{\n\"emberheart\": {\n\"color\": Color(0.9254902, 0.59607846, 0.49803922, 1),\n\"name\": \"烬心晶玉\",\n\"prefixes\": [\"force\", \"vitality\", \"barrier\"],\n\"suffixes\": [\"tempo\", \"stride\", \"recharge\"]\n},\n\"tideglass\": {\n\"color\": Color(0.5372549, 0.7490196, 0.91764706, 1),\n\"name\": \"雾潮晶玉\",\n\"prefixes\": [\"force\", \"clarity\", \"barrier\"],\n\"suffixes\": [\"renewal\", \"recharge\", \"tempo\"]\n},\n\"windweave\": {\n\"color\": Color(0.53333336, 0.827451, 0.7254902, 1),\n\"name\": \"岚纹晶玉\",\n\"prefixes\": [\"force\", \"vitality\", \"clarity\"],\n\"suffixes\": [\"tempo\", \"stride\", \"renewal\"]\n}\n}",
+	"rarities": "{\n\"magic\": {\n\"color\": Color(0.5568628, 0.72156864, 1, 1),\n\"max_affixes\": 2,\n\"max_prefixes\": 1,\n\"max_suffixes\": 1,\n\"name\": \"魔法\"\n},\n\"rare\": {\n\"color\": Color(0.9137255, 0.80784315, 0.4862745, 1),\n\"max_affixes\": 4,\n\"max_prefixes\": 2,\n\"max_suffixes\": 2,\n\"name\": \"稀有\"\n}\n}",
+	"sequences": [
+		{
+			"samples": [
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "force",
+								"value": 6.0
+							},
+							{
+								"id": "stride",
+								"value": 9.0
+							},
+							{
+								"id": "recharge",
+								"value": 0.7
+							}
+						],
+						"base": "emberheart",
+						"id": "jewel_000004",
+						"rarity": "rare"
+					},
+					"rng_state": "6958822977713391281"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "force",
+								"value": 5.0
+							},
+							{
+								"id": "clarity",
+								"value": 12.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.04
+							},
+							{
+								"id": "recharge",
+								"value": 0.9
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000005",
+						"rarity": "rare"
+					},
+					"rng_state": "7460955217784578813"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "force",
+								"value": 2.0
+							},
+							{
+								"id": "vitality",
+								"value": 28.0
+							},
+							{
+								"id": "renewal",
+								"value": 1.1
+							},
+							{
+								"id": "tempo",
+								"value": 0.1
+							}
+						],
+						"base": "windweave",
+						"id": "jewel_000006",
+						"rarity": "rare"
+					},
+					"rng_state": "307050464161540489"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 18.0
+							},
+							{
+								"id": "renewal",
+								"value": 0.5
+							},
+							{
+								"id": "tempo",
+								"value": 0.09
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000007",
+						"rarity": "rare"
+					},
+					"rng_state": "-167827773292905013"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "force",
+								"value": 3.0
+							},
+							{
+								"id": "renewal",
+								"value": 1.1
+							}
+						],
+						"base": "windweave",
+						"id": "jewel_000008",
+						"rarity": "magic"
+					},
+					"rng_state": "-851828734104281852"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 16.0
+							},
+							{
+								"id": "force",
+								"value": 3.0
+							},
+							{
+								"id": "recharge",
+								"value": 1.3
+							},
+							{
+								"id": "tempo",
+								"value": 0.06
+							}
+						],
+						"base": "emberheart",
+						"id": "jewel_000009",
+						"rarity": "rare"
+					},
+					"rng_state": "5631709659815223264"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 12.0
+							},
+							{
+								"id": "recharge",
+								"value": 1.3
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000010",
+						"rarity": "magic"
+					},
+					"rng_state": "5916972537522533037"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 22.0
+							},
+							{
+								"id": "renewal",
+								"value": 0.6
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000011",
+						"rarity": "magic"
+					},
+					"rng_state": "2888665117105519086"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "vitality",
+								"value": 18.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.05
+							}
+						],
+						"base": "windweave",
+						"id": "jewel_000012",
+						"rarity": "magic"
+					},
+					"rng_state": "1860576859780299891"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "vitality",
+								"value": 14.0
+							},
+							{
+								"id": "clarity",
+								"value": 18.0
+							},
+							{
+								"id": "stride",
+								"value": 6.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.11
+							}
+						],
+						"base": "windweave",
+						"id": "jewel_000013",
+						"rarity": "rare"
+					},
+					"rng_state": "-7954004469532391649"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 22.0
+							},
+							{
+								"id": "force",
+								"value": 4.0
+							},
+							{
+								"id": "stride",
+								"value": 8.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.1
+							}
+						],
+						"base": "emberheart",
+						"id": "jewel_000014",
+						"rarity": "rare"
+					},
+					"rng_state": "-7050301152582398453"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "vitality",
+								"value": 22.0
+							},
+							{
+								"id": "force",
+								"value": 2.0
+							},
+							{
+								"id": "stride",
+								"value": 10.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.11
+							}
+						],
+						"base": "emberheart",
+						"id": "jewel_000015",
+						"rarity": "rare"
+					},
+					"rng_state": "8009553194292567351"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 20.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.1
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000016",
+						"rarity": "magic"
+					},
+					"rng_state": "7523664375441554720"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "clarity",
+								"value": 20.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.12
+							},
+							{
+								"id": "renewal",
+								"value": 0.4
+							}
+						],
+						"base": "windweave",
+						"id": "jewel_000017",
+						"rarity": "rare"
+					},
+					"rng_state": "2546666128896261658"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "clarity",
+								"value": 12.0
+							},
+							{
+								"id": "renewal",
+								"value": 0.6
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000018",
+						"rarity": "magic"
+					},
+					"rng_state": "-2307446332733635505"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 18.0
+							},
+							{
+								"id": "clarity",
+								"value": 20.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.08
+							},
+							{
+								"id": "renewal",
+								"value": 0.4
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000019",
+						"rarity": "rare"
+					},
+					"rng_state": "2524789806148793403"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "vitality",
+								"value": 20.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.08
+							}
+						],
+						"base": "windweave",
+						"id": "jewel_000020",
+						"rarity": "magic"
+					},
+					"rng_state": "2820537636673235252"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 14.0
+							},
+							{
+								"id": "clarity",
+								"value": 12.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.09
+							},
+							{
+								"id": "recharge",
+								"value": 0.9
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000021",
+						"rarity": "rare"
+					},
+					"rng_state": "-3352222523415485168"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "clarity",
+								"value": 8.0
+							},
+							{
+								"id": "recharge",
+								"value": 0.7
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000022",
+						"rarity": "magic"
+					},
+					"rng_state": "-1458058163058952035"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "vitality",
+								"value": 12.0
+							},
+							{
+								"id": "stride",
+								"value": 8.0
+							}
+						],
+						"base": "windweave",
+						"id": "jewel_000023",
+						"rarity": "magic"
+					},
+					"rng_state": "-6601621430933965922"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "force",
+								"value": 3.0
+							},
+							{
+								"id": "stride",
+								"value": 12.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.09
+							}
+						],
+						"base": "windweave",
+						"id": "jewel_000024",
+						"rarity": "rare"
+					},
+					"rng_state": "7350103634644830344"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "clarity",
+								"value": 12.0
+							},
+							{
+								"id": "renewal",
+								"value": 0.6
+							}
+						],
+						"base": "windweave",
+						"id": "jewel_000025",
+						"rarity": "magic"
+					},
+					"rng_state": "762129749644974069"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 12.0
+							},
+							{
+								"id": "renewal",
+								"value": 0.3
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000026",
+						"rarity": "magic"
+					},
+					"rng_state": "-2494591460278487466"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "vitality",
+								"value": 12.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.06
+							}
+						],
+						"base": "windweave",
+						"id": "jewel_000027",
+						"rarity": "magic"
+					},
+					"rng_state": "3070560882623886459"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "vitality",
+								"value": 22.0
+							},
+							{
+								"id": "stride",
+								"value": 10.0
+							}
+						],
+						"base": "emberheart",
+						"id": "jewel_000028",
+						"rarity": "magic"
+					},
+					"rng_state": "-5290144116958446988"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "force",
+								"value": 5.0
+							},
+							{
+								"id": "barrier",
+								"value": 22.0
+							},
+							{
+								"id": "recharge",
+								"value": 1.1
+							},
+							{
+								"id": "stride",
+								"value": 5.0
+							}
+						],
+						"base": "emberheart",
+						"id": "jewel_000029",
+						"rarity": "rare"
+					},
+					"rng_state": "-347477092020538800"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "clarity",
+								"value": 22.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.05
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000030",
+						"rarity": "magic"
+					},
+					"rng_state": "-1969772562019890467"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 22.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.09
+							},
+							{
+								"id": "recharge",
+								"value": 1.0
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000031",
+						"rarity": "rare"
+					},
+					"rng_state": "2202792226134747583"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 22.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.06
+							}
+						],
+						"base": "emberheart",
+						"id": "jewel_000032",
+						"rarity": "magic"
+					},
+					"rng_state": "-7441800788642181688"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "force",
+								"value": 3.0
+							},
+							{
+								"id": "recharge",
+								"value": 1.4
+							},
+							{
+								"id": "renewal",
+								"value": 0.3
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000033",
+						"rarity": "rare"
+					},
+					"rng_state": "-1538000014277618686"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "clarity",
+								"value": 14.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.05
+							}
+						],
+						"base": "windweave",
+						"id": "jewel_000034",
+						"rarity": "magic"
+					},
+					"rng_state": "5253039476560501719"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "force",
+								"value": 4.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.08
+							}
+						],
+						"base": "emberheart",
+						"id": "jewel_000035",
+						"rarity": "magic"
+					},
+					"rng_state": "4754682910428274240"
+				}
+			],
+			"seed": 1
+		},
+		{
+			"samples": [
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "vitality",
+								"value": 20.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.04
+							},
+							{
+								"id": "recharge",
+								"value": 1.3
+							}
+						],
+						"base": "emberheart",
+						"id": "jewel_000004",
+						"rarity": "rare"
+					},
+					"rng_state": "4605303032520040303"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 12.0
+							},
+							{
+								"id": "renewal",
+								"value": 1.0
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000005",
+						"rarity": "magic"
+					},
+					"rng_state": "-1931202290295658952"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "clarity",
+								"value": 20.0
+							},
+							{
+								"id": "force",
+								"value": 4.0
+							},
+							{
+								"id": "renewal",
+								"value": 0.5
+							},
+							{
+								"id": "recharge",
+								"value": 1.0
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000006",
+						"rarity": "rare"
+					},
+					"rng_state": "2230599878065702612"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "force",
+								"value": 4.0
+							},
+							{
+								"id": "recharge",
+								"value": 1.3
+							}
+						],
+						"base": "emberheart",
+						"id": "jewel_000007",
+						"rarity": "magic"
+					},
+					"rng_state": "27663731480070769"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "force",
+								"value": 5.0
+							},
+							{
+								"id": "renewal",
+								"value": 0.8
+							},
+							{
+								"id": "tempo",
+								"value": 0.08
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000008",
+						"rarity": "rare"
+					},
+					"rng_state": "-103810710117849613"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "clarity",
+								"value": 12.0
+							},
+							{
+								"id": "recharge",
+								"value": 0.7
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000009",
+						"rarity": "magic"
+					},
+					"rng_state": "5375311996887965644"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "force",
+								"value": 6.0
+							},
+							{
+								"id": "recharge",
+								"value": 1.0
+							}
+						],
+						"base": "emberheart",
+						"id": "jewel_000010",
+						"rarity": "magic"
+					},
+					"rng_state": "-278638560274967223"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 10.0
+							},
+							{
+								"id": "recharge",
+								"value": 1.0
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000011",
+						"rarity": "magic"
+					},
+					"rng_state": "-5849540337921321478"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "force",
+								"value": 3.0
+							},
+							{
+								"id": "stride",
+								"value": 7.0
+							}
+						],
+						"base": "windweave",
+						"id": "jewel_000012",
+						"rarity": "magic"
+					},
+					"rng_state": "4671575991121277871"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "force",
+								"value": 6.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.06
+							}
+						],
+						"base": "windweave",
+						"id": "jewel_000013",
+						"rarity": "magic"
+					},
+					"rng_state": "4702676536870214520"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "force",
+								"value": 6.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.08
+							}
+						],
+						"base": "emberheart",
+						"id": "jewel_000014",
+						"rarity": "magic"
+					},
+					"rng_state": "-7210110244401229147"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "clarity",
+								"value": 10.0
+							},
+							{
+								"id": "barrier",
+								"value": 8.0
+							},
+							{
+								"id": "recharge",
+								"value": 1.0
+							},
+							{
+								"id": "renewal",
+								"value": 0.7
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000015",
+						"rarity": "rare"
+					},
+					"rng_state": "2313526114027950257"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 12.0
+							},
+							{
+								"id": "recharge",
+								"value": 1.3
+							}
+						],
+						"base": "emberheart",
+						"id": "jewel_000016",
+						"rarity": "magic"
+					},
+					"rng_state": "1209789052206795010"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "force",
+								"value": 2.0
+							},
+							{
+								"id": "recharge",
+								"value": 0.7
+							}
+						],
+						"base": "emberheart",
+						"id": "jewel_000017",
+						"rarity": "magic"
+					},
+					"rng_state": "-4888220037224553257"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "clarity",
+								"value": 14.0
+							},
+							{
+								"id": "renewal",
+								"value": 0.6
+							}
+						],
+						"base": "windweave",
+						"id": "jewel_000018",
+						"rarity": "magic"
+					},
+					"rng_state": "1894160060641676096"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "force",
+								"value": 6.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.05
+							}
+						],
+						"base": "emberheart",
+						"id": "jewel_000019",
+						"rarity": "magic"
+					},
+					"rng_state": "-8065960239618792563"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "force",
+								"value": 2.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.12
+							},
+							{
+								"id": "recharge",
+								"value": 1.2
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000020",
+						"rarity": "rare"
+					},
+					"rng_state": "-4315980602240841745"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 10.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.07
+							},
+							{
+								"id": "recharge",
+								"value": 1.4
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000021",
+						"rarity": "rare"
+					},
+					"rng_state": "1177210102261526369"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "force",
+								"value": 6.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.04
+							}
+						],
+						"base": "windweave",
+						"id": "jewel_000022",
+						"rarity": "magic"
+					},
+					"rng_state": "-2376307214200803726"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "vitality",
+								"value": 22.0
+							},
+							{
+								"id": "renewal",
+								"value": 1.1
+							}
+						],
+						"base": "windweave",
+						"id": "jewel_000023",
+						"rarity": "magic"
+					},
+					"rng_state": "-3595653353501074425"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "clarity",
+								"value": 18.0
+							},
+							{
+								"id": "barrier",
+								"value": 8.0
+							},
+							{
+								"id": "renewal",
+								"value": 1.0
+							},
+							{
+								"id": "recharge",
+								"value": 1.4
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000024",
+						"rarity": "rare"
+					},
+					"rng_state": "4230138791069849203"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "clarity",
+								"value": 18.0
+							},
+							{
+								"id": "renewal",
+								"value": 0.5
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000025",
+						"rarity": "magic"
+					},
+					"rng_state": "6098731502168257100"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "force",
+								"value": 5.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.06
+							},
+							{
+								"id": "renewal",
+								"value": 0.7
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000026",
+						"rarity": "rare"
+					},
+					"rng_state": "-2939725301324899162"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 12.0
+							},
+							{
+								"id": "recharge",
+								"value": 1.4
+							}
+						],
+						"base": "emberheart",
+						"id": "jewel_000027",
+						"rarity": "magic"
+					},
+					"rng_state": "6166919980092336139"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 12.0
+							},
+							{
+								"id": "force",
+								"value": 2.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.08
+							},
+							{
+								"id": "recharge",
+								"value": 1.0
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000028",
+						"rarity": "rare"
+					},
+					"rng_state": "-7486891080260298953"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "force",
+								"value": 3.0
+							},
+							{
+								"id": "stride",
+								"value": 12.0
+							}
+						],
+						"base": "emberheart",
+						"id": "jewel_000029",
+						"rarity": "magic"
+					},
+					"rng_state": "-1116920625759068384"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 14.0
+							},
+							{
+								"id": "stride",
+								"value": 10.0
+							},
+							{
+								"id": "recharge",
+								"value": 1.1
+							}
+						],
+						"base": "emberheart",
+						"id": "jewel_000030",
+						"rarity": "rare"
+					},
+					"rng_state": "-5690720446655041510"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 18.0
+							},
+							{
+								"id": "recharge",
+								"value": 0.5
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000031",
+						"rarity": "magic"
+					},
+					"rng_state": "-4604793677440483761"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 18.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.1
+							},
+							{
+								"id": "renewal",
+								"value": 1.0
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000032",
+						"rarity": "rare"
+					},
+					"rng_state": "-7853548780943501119"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "vitality",
+								"value": 24.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.05
+							}
+						],
+						"base": "windweave",
+						"id": "jewel_000033",
+						"rarity": "magic"
+					},
+					"rng_state": "8809190828398908754"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 16.0
+							},
+							{
+								"id": "recharge",
+								"value": 0.9
+							},
+							{
+								"id": "tempo",
+								"value": 0.08
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000034",
+						"rarity": "rare"
+					},
+					"rng_state": "7031310399503939548"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "force",
+								"value": 2.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.06
+							},
+							{
+								"id": "recharge",
+								"value": 1.2
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000035",
+						"rarity": "rare"
+					},
+					"rng_state": "-8365151532519502154"
+				}
+			],
+			"seed": 71
+		},
+		{
+			"samples": [
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "clarity",
+								"value": 20.0
+							},
+							{
+								"id": "recharge",
+								"value": 0.9
+							},
+							{
+								"id": "tempo",
+								"value": 0.12
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000004",
+						"rarity": "rare"
+					},
+					"rng_state": "-2834132681820120386"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "clarity",
+								"value": 16.0
+							},
+							{
+								"id": "barrier",
+								"value": 18.0
+							},
+							{
+								"id": "recharge",
+								"value": 0.6
+							},
+							{
+								"id": "renewal",
+								"value": 1.0
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000005",
+						"rarity": "rare"
+					},
+					"rng_state": "-6086981060386086278"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 18.0
+							},
+							{
+								"id": "recharge",
+								"value": 0.9
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000006",
+						"rarity": "magic"
+					},
+					"rng_state": "1899481380572221999"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "clarity",
+								"value": 12.0
+							},
+							{
+								"id": "renewal",
+								"value": 0.5
+							},
+							{
+								"id": "stride",
+								"value": 7.0
+							}
+						],
+						"base": "windweave",
+						"id": "jewel_000007",
+						"rarity": "rare"
+					},
+					"rng_state": "9079751976317717409"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 18.0
+							},
+							{
+								"id": "recharge",
+								"value": 1.4
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000008",
+						"rarity": "magic"
+					},
+					"rng_state": "-13342664294937678"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 18.0
+							},
+							{
+								"id": "recharge",
+								"value": 0.7
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000009",
+						"rarity": "magic"
+					},
+					"rng_state": "1870354979101310535"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "force",
+								"value": 5.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.11
+							},
+							{
+								"id": "stride",
+								"value": 11.0
+							}
+						],
+						"base": "windweave",
+						"id": "jewel_000010",
+						"rarity": "rare"
+					},
+					"rng_state": "8920564288865900665"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "vitality",
+								"value": 28.0
+							},
+							{
+								"id": "renewal",
+								"value": 0.5
+							},
+							{
+								"id": "tempo",
+								"value": 0.1
+							}
+						],
+						"base": "windweave",
+						"id": "jewel_000011",
+						"rarity": "rare"
+					},
+					"rng_state": "-7152540938247183301"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "vitality",
+								"value": 16.0
+							},
+							{
+								"id": "renewal",
+								"value": 0.9
+							}
+						],
+						"base": "windweave",
+						"id": "jewel_000012",
+						"rarity": "magic"
+					},
+					"rng_state": "9074181183744612660"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "clarity",
+								"value": 22.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.1
+							}
+						],
+						"base": "windweave",
+						"id": "jewel_000013",
+						"rarity": "magic"
+					},
+					"rng_state": "8853021052671360593"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "clarity",
+								"value": 16.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.08
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000014",
+						"rarity": "magic"
+					},
+					"rng_state": "-120625903591860958"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "force",
+								"value": 3.0
+							},
+							{
+								"id": "recharge",
+								"value": 1.5
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000015",
+						"rarity": "magic"
+					},
+					"rng_state": "5332131952628246903"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 18.0
+							},
+							{
+								"id": "clarity",
+								"value": 22.0
+							},
+							{
+								"id": "recharge",
+								"value": 0.5
+							},
+							{
+								"id": "tempo",
+								"value": 0.11
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000016",
+						"rarity": "rare"
+					},
+					"rng_state": "-5588000196230309661"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 10.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.07
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000017",
+						"rarity": "magic"
+					},
+					"rng_state": "-8299242382263485828"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "force",
+								"value": 4.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.08
+							},
+							{
+								"id": "stride",
+								"value": 5.0
+							}
+						],
+						"base": "windweave",
+						"id": "jewel_000018",
+						"rarity": "rare"
+					},
+					"rng_state": "6999365775747491414"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 8.0
+							},
+							{
+								"id": "renewal",
+								"value": 0.8
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000019",
+						"rarity": "magic"
+					},
+					"rng_state": "-9170150235559598981"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "force",
+								"value": 4.0
+							},
+							{
+								"id": "barrier",
+								"value": 16.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.04
+							},
+							{
+								"id": "stride",
+								"value": 8.0
+							}
+						],
+						"base": "emberheart",
+						"id": "jewel_000020",
+						"rarity": "rare"
+					},
+					"rng_state": "5382943514324637863"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "vitality",
+								"value": 20.0
+							},
+							{
+								"id": "recharge",
+								"value": 0.9
+							}
+						],
+						"base": "emberheart",
+						"id": "jewel_000021",
+						"rarity": "magic"
+					},
+					"rng_state": "8619964690140176976"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 10.0
+							},
+							{
+								"id": "force",
+								"value": 5.0
+							},
+							{
+								"id": "renewal",
+								"value": 0.8
+							},
+							{
+								"id": "recharge",
+								"value": 0.8
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000022",
+						"rarity": "rare"
+					},
+					"rng_state": "7592728579745562476"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 22.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.05
+							},
+							{
+								"id": "stride",
+								"value": 7.0
+							}
+						],
+						"base": "emberheart",
+						"id": "jewel_000023",
+						"rarity": "rare"
+					},
+					"rng_state": "-2860091611230039354"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "force",
+								"value": 2.0
+							},
+							{
+								"id": "stride",
+								"value": 4.0
+							}
+						],
+						"base": "emberheart",
+						"id": "jewel_000024",
+						"rarity": "magic"
+					},
+					"rng_state": "-8756148192408060245"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "clarity",
+								"value": 14.0
+							},
+							{
+								"id": "stride",
+								"value": 7.0
+							}
+						],
+						"base": "windweave",
+						"id": "jewel_000025",
+						"rarity": "magic"
+					},
+					"rng_state": "-858049236351837852"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 8.0
+							},
+							{
+								"id": "recharge",
+								"value": 1.5
+							}
+						],
+						"base": "emberheart",
+						"id": "jewel_000026",
+						"rarity": "magic"
+					},
+					"rng_state": "4863096695601179457"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 22.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.12
+							}
+						],
+						"base": "emberheart",
+						"id": "jewel_000027",
+						"rarity": "magic"
+					},
+					"rng_state": "-8580223776258616878"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "clarity",
+								"value": 18.0
+							},
+							{
+								"id": "stride",
+								"value": 11.0
+							}
+						],
+						"base": "windweave",
+						"id": "jewel_000028",
+						"rarity": "magic"
+					},
+					"rng_state": "-6002045483811298073"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 14.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.11
+							}
+						],
+						"base": "emberheart",
+						"id": "jewel_000029",
+						"rarity": "magic"
+					},
+					"rng_state": "6427938155684982672"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "force",
+								"value": 2.0
+							},
+							{
+								"id": "renewal",
+								"value": 0.5
+							}
+						],
+						"base": "tideglass",
+						"id": "jewel_000030",
+						"rarity": "magic"
+					},
+					"rng_state": "9120699197944417565"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 14.0
+							},
+							{
+								"id": "force",
+								"value": 5.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.12
+							},
+							{
+								"id": "stride",
+								"value": 6.0
+							}
+						],
+						"base": "emberheart",
+						"id": "jewel_000031",
+						"rarity": "rare"
+					},
+					"rng_state": "-2304823357003507287"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "vitality",
+								"value": 14.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.08
+							}
+						],
+						"base": "windweave",
+						"id": "jewel_000032",
+						"rarity": "magic"
+					},
+					"rng_state": "7285950299244446682"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "force",
+								"value": 3.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.05
+							}
+						],
+						"base": "windweave",
+						"id": "jewel_000033",
+						"rarity": "magic"
+					},
+					"rng_state": "1378479525327900943"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "barrier",
+								"value": 18.0
+							},
+							{
+								"id": "tempo",
+								"value": 0.04
+							}
+						],
+						"base": "emberheart",
+						"id": "jewel_000034",
+						"rarity": "magic"
+					},
+					"rng_state": "8399486501166925400"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "vitality",
+								"value": 24.0
+							},
+							{
+								"id": "stride",
+								"value": 8.0
+							}
+						],
+						"base": "emberheart",
+						"id": "jewel_000035",
+						"rarity": "magic"
+					},
+					"rng_state": "-3436653813874253563"
+				}
+			],
+			"seed": 903066
+		}
+	],
+	"source": "ab35a762806a79dfd2d83f275b060047fad1ac2a:scripts/jewel_data.gd"
+}

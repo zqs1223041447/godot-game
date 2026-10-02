@@ -14,6 +14,7 @@ const LEATHER := Color("784a31")
 const THREAD := Color("bba27a")
 const JEWEL_COLORS: Dictionary = {
 	"emberheart": Color("bd654e"), "tideglass": Color("769ab8"), "windweave": Color("74a186"),
+	"branchfinder": Color("c79853"),
 }
 
 ## Mapping/stroke helpers deliberately do not use draw_set_transform or clipping
@@ -364,6 +365,8 @@ static func _draw_jewel(p: Pen, base: String) -> void:
 	var color: Color = JEWEL_COLORS.get(base, Color("927b9e"))
 	# The three catalog bases have different cuts, not only a rarity tint.
 	match base:
+		"branchfinder":
+			_draw_branchfinder(p)
 		"emberheart":
 			p.poly([-15, -33, 12, -34, 32, -13, 29, 13, 0, 40, -29, 15, -33, -11], color.darkened(0.18), true)
 			p.poly([-15, -33, 12, -34, 16, -10, -14, -10], color.lightened(0.36))
@@ -394,3 +397,37 @@ static func _draw_jewel(p: Pen, base: String) -> void:
 			p.poly([-12, -23, 12, -23, -22, 13, -22, -13], color.lightened(0.20))
 			p.line([-12, -23, 12, -23, 22, -13, 22, 13, 12, 23, -12, 23, -22, 13, -22, -13, -12, -23], color.lightened(0.41), 1.1)
 			p.line([-16, -29, 7, -29], Color("e3e7d5"), 1.6)
+
+
+static func _draw_branchfinder(p: Pen) -> void:
+	# A rooted amber prism with two green branches. Broad facets and the forked
+	# silhouette remain readable at a 28px inventory size without emitted glow.
+	p.poly([-15, 28, -22, 14, -31, 8, -36, -10, -30, -13, -26, 2, -16, 10, -8, 24, 1, 34, 15, 25, 25, 8, 32, 5, 29, 19, 20, 32, 3, 41, -8, 39], WOOD, true)
+	p.line([-31, -8, -28, 5, -18, 13, -12, 28, 1, 38, 18, 29, 28, 14], WOOD_LIGHT, 2.3)
+	p.line([-15, 21, -9, 31, 2, 37, 13, 31], Color("4d3828"), 1.6)
+	# Two unequal crystal shoots separate the special base from round-cut gems.
+	p.poly([-9, 13, -26, -2, -31, -25, -24, -35, -10, -25, -1, -4], Color("557663"), true)
+	p.poly([-31, -25, -24, -35, -22, -15, -9, 13, -26, -2], Color("a2b98a"))
+	p.poly([-24, -35, -10, -25, -9, -12, -22, -15], Color("749665"))
+	p.poly([-22, -15, -9, -12, -1, -4, -9, 13], Color("355749"))
+	p.line([-26, -27, -23, -16, -16, -5], Color("d7d7a5"), 1.4)
+	p.poly([2, 12, 6, -10, 23, -30, 33, -25, 31, -7, 20, 10], Color("75955f"), true)
+	p.poly([6, -10, 23, -30, 22, -11, 2, 12], Color("c0c591"))
+	p.poly([23, -30, 33, -25, 22, -11], Color("e0d29a"))
+	p.poly([22, -11, 33, -25, 31, -7, 20, 10, 2, 12], Color("4d714f"))
+	p.line([25, -22, 25, -11, 18, 0], Color("99b779"), 1.2)
+	# Central amber table: the warm fork visible within the stone is an inclusion.
+	p.poly([-9, -32, 0, -41, 12, -30, 17, 2, 8, 28, -2, 35, -14, 18, -15, -5], Color("b87d3d"), true)
+	p.poly([-9, -32, 0, -41, 0, -18, -7, 5, -14, 18, -15, -5], Color("e2bd75"))
+	p.poly([0, -41, 12, -30, 7, -15, 0, -18], Color("f0dba0"))
+	p.poly([12, -30, 17, 2, 8, 28, 4, 9, 7, -15], Color("88602e"))
+	p.poly([0, -18, 7, -15, 4, 9, -2, 24, -7, 5], Color("cf9e50"))
+	p.poly([-14, 18, -7, 5, -2, 24, -2, 35], Color("efc578"))
+	p.poly([4, 9, 8, 28, -2, 35, -2, 24], Color("755830"))
+	p.line([-2, 17, 0, 1, -5, -7], Color("737143"), 2.0)
+	p.line([0, 2, 5, -5], Color("737143"), 1.8)
+	p.line([-9, -25, -11, -8], Color("fff0bc"), 1.8)
+	# Bronze root clasp is physical, restrained and distinct from a rarity frame.
+	p.poly([-15, 17, -10, 13, -5, 24, 4, 28, 13, 18, 17, 21, 8, 34, -2, 38, -10, 29], BRASS, true)
+	p.line([-11, 18, -6, 27, 1, 33, 8, 30, 13, 24], GOLD_LIGHT, 1.8)
+	p.oval(0, 32, 2.4, 2.4, Color("51705b"), true)

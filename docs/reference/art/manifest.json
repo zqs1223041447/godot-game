@@ -1,0 +1,350 @@
+{
+	"version": 1,
+	"image_size": [
+		128,
+		128
+	],
+	"transparent_background": true,
+	"file_paths_relative_to": "manifest.json directory",
+	"status": "complete",
+	"written_images": 36,
+	"counts": {
+		"skills": 8,
+		"supports": 2,
+		"equipment": 16,
+		"jewels": 4,
+		"monsters": 6
+	},
+	"entries": [
+		{
+			"category": "skills",
+			"id": "bolt",
+			"name": "奥术飞弹",
+			"file": "skills/bolt.png",
+			"source_renderer": "SkillEmblem._draw",
+			"source_catalog": "GameData.SKILLS",
+			"entry_type": "active_skill"
+		},
+		{
+			"category": "skills",
+			"id": "chain",
+			"name": "连锁闪电",
+			"file": "skills/chain.png",
+			"source_renderer": "SkillEmblem._draw",
+			"source_catalog": "GameData.SKILLS",
+			"entry_type": "active_skill"
+		},
+		{
+			"category": "skills",
+			"id": "dash",
+			"name": "闪光冲刺",
+			"file": "skills/dash.png",
+			"source_renderer": "SkillEmblem._draw",
+			"source_catalog": "GameData.SKILLS",
+			"entry_type": "active_skill"
+		},
+		{
+			"category": "skills",
+			"id": "frost",
+			"name": "冰霜脉冲",
+			"file": "skills/frost.png",
+			"source_renderer": "SkillEmblem._draw",
+			"source_catalog": "GameData.SKILLS",
+			"entry_type": "active_skill"
+		},
+		{
+			"category": "skills",
+			"id": "meteor",
+			"name": "陨星坠落",
+			"file": "skills/meteor.png",
+			"source_renderer": "SkillEmblem._draw",
+			"source_catalog": "GameData.SKILLS",
+			"entry_type": "active_skill"
+		},
+		{
+			"category": "skills",
+			"id": "nova",
+			"name": "奥能新星",
+			"file": "skills/nova.png",
+			"source_renderer": "SkillEmblem._draw",
+			"source_catalog": "GameData.SKILLS",
+			"entry_type": "active_skill"
+		},
+		{
+			"category": "skills",
+			"id": "tornado",
+			"name": "龙卷射击",
+			"file": "skills/tornado.png",
+			"source_renderer": "SkillEmblem._draw",
+			"source_catalog": "GameData.SKILLS",
+			"entry_type": "active_skill"
+		},
+		{
+			"category": "skills",
+			"id": "ward",
+			"name": "守护结界",
+			"file": "skills/ward.png",
+			"source_renderer": "SkillEmblem._draw",
+			"source_catalog": "GameData.SKILLS",
+			"entry_type": "active_skill"
+		},
+		{
+			"category": "supports",
+			"id": "focus",
+			"name": "凝束辅助",
+			"file": "supports/focus.png",
+			"source_renderer": "SkillEmblem._draw",
+			"source_catalog": "SupportCatalog.SUPPORTS",
+			"entry_type": "support"
+		},
+		{
+			"category": "supports",
+			"id": "volley",
+			"name": "散束辅助",
+			"file": "supports/volley.png",
+			"source_renderer": "SkillEmblem._draw",
+			"source_catalog": "SupportCatalog.SUPPORTS",
+			"entry_type": "support"
+		},
+		{
+			"category": "equipment",
+			"id": "cinder_reed",
+			"name": "烬芦杖",
+			"file": "equipment/cinder_reed.png",
+			"source_renderer": "EquipmentArt.draw_item",
+			"source_catalog": "EquipmentCatalog.BASES + EXPANSION_BASES",
+			"entry_type": "base"
+		},
+		{
+			"category": "equipment",
+			"id": "gale_spindle",
+			"name": "岚纺刃",
+			"file": "equipment/gale_spindle.png",
+			"source_renderer": "EquipmentArt.draw_item",
+			"source_catalog": "EquipmentCatalog.BASES + EXPANSION_BASES",
+			"entry_type": "base"
+		},
+		{
+			"category": "equipment",
+			"id": "pulse_seed",
+			"name": "脉籽符",
+			"file": "equipment/pulse_seed.png",
+			"source_renderer": "EquipmentArt.draw_item",
+			"source_catalog": "EquipmentCatalog.BASES + EXPANSION_BASES",
+			"entry_type": "base"
+		},
+		{
+			"category": "equipment",
+			"id": "runewood_focus",
+			"name": "符木法器",
+			"file": "equipment/runewood_focus.png",
+			"source_renderer": "EquipmentArt.draw_item",
+			"source_catalog": "EquipmentCatalog.BASES + EXPANSION_BASES",
+			"entry_type": "base"
+		},
+		{
+			"category": "equipment",
+			"id": "tidebound_coat",
+			"name": "潮缄袍",
+			"file": "equipment/tidebound_coat.png",
+			"source_renderer": "EquipmentArt.draw_item",
+			"source_catalog": "EquipmentCatalog.BASES + EXPANSION_BASES",
+			"entry_type": "base"
+		},
+		{
+			"category": "equipment",
+			"id": "wayglass_token",
+			"name": "途镜坠",
+			"file": "equipment/wayglass_token.png",
+			"source_renderer": "EquipmentArt.draw_item",
+			"source_catalog": "EquipmentCatalog.BASES + EXPANSION_BASES",
+			"entry_type": "base"
+		},
+		{
+			"category": "equipment",
+			"id": "woven_bastion",
+			"name": "绳垒衣",
+			"file": "equipment/woven_bastion.png",
+			"source_renderer": "EquipmentArt.draw_item",
+			"source_catalog": "EquipmentCatalog.BASES + EXPANSION_BASES",
+			"entry_type": "base"
+		},
+		{
+			"category": "equipment",
+			"id": "azure_charm",
+			"name": "湛蓝护符",
+			"file": "equipment/azure_charm.png",
+			"source_renderer": "EquipmentArt.draw_item",
+			"source_catalog": "GameData.ITEMS",
+			"entry_type": "fixed_item"
+		},
+		{
+			"category": "equipment",
+			"id": "detonation_charm",
+			"name": "终焰护符",
+			"file": "equipment/detonation_charm.png",
+			"source_renderer": "EquipmentArt.draw_item",
+			"source_catalog": "GameData.ITEMS",
+			"entry_type": "fixed_item"
+		},
+		{
+			"category": "equipment",
+			"id": "ember_wand",
+			"name": "余烬法杖",
+			"file": "equipment/ember_wand.png",
+			"source_renderer": "EquipmentArt.draw_item",
+			"source_catalog": "GameData.ITEMS",
+			"entry_type": "fixed_item"
+		},
+		{
+			"category": "equipment",
+			"id": "guardian_robe",
+			"name": "守护长袍",
+			"file": "equipment/guardian_robe.png",
+			"source_renderer": "EquipmentArt.draw_item",
+			"source_catalog": "GameData.ITEMS",
+			"entry_type": "fixed_item"
+		},
+		{
+			"category": "equipment",
+			"id": "prism_bow",
+			"name": "棱光长弓",
+			"file": "equipment/prism_bow.png",
+			"source_renderer": "EquipmentArt.draw_item",
+			"source_catalog": "GameData.ITEMS",
+			"entry_type": "fixed_item"
+		},
+		{
+			"category": "equipment",
+			"id": "return_mantle",
+			"name": "归航披风",
+			"file": "equipment/return_mantle.png",
+			"source_renderer": "EquipmentArt.draw_item",
+			"source_catalog": "GameData.ITEMS",
+			"entry_type": "fixed_item"
+		},
+		{
+			"category": "equipment",
+			"id": "storm_charm",
+			"name": "风暴护符",
+			"file": "equipment/storm_charm.png",
+			"source_renderer": "EquipmentArt.draw_item",
+			"source_catalog": "GameData.ITEMS",
+			"entry_type": "fixed_item"
+		},
+		{
+			"category": "equipment",
+			"id": "swift_blade",
+			"name": "疾风短刃",
+			"file": "equipment/swift_blade.png",
+			"source_renderer": "EquipmentArt.draw_item",
+			"source_catalog": "GameData.ITEMS",
+			"entry_type": "fixed_item"
+		},
+		{
+			"category": "equipment",
+			"id": "vitality_armor",
+			"name": "生机轻甲",
+			"file": "equipment/vitality_armor.png",
+			"source_renderer": "EquipmentArt.draw_item",
+			"source_catalog": "GameData.ITEMS",
+			"entry_type": "fixed_item"
+		},
+		{
+			"category": "jewels",
+			"id": "branchfinder",
+			"name": "寻枝晶玉",
+			"file": "jewels/branchfinder.png",
+			"source_renderer": "EquipmentArt.draw_item",
+			"source_catalog": "JewelData.BASES + SPECIAL_BASES",
+			"entry_type": "special_base"
+		},
+		{
+			"category": "jewels",
+			"id": "emberheart",
+			"name": "烬心晶玉",
+			"file": "jewels/emberheart.png",
+			"source_renderer": "EquipmentArt.draw_item",
+			"source_catalog": "JewelData.BASES + SPECIAL_BASES",
+			"entry_type": "base"
+		},
+		{
+			"category": "jewels",
+			"id": "tideglass",
+			"name": "雾潮晶玉",
+			"file": "jewels/tideglass.png",
+			"source_renderer": "EquipmentArt.draw_item",
+			"source_catalog": "JewelData.BASES + SPECIAL_BASES",
+			"entry_type": "base"
+		},
+		{
+			"category": "jewels",
+			"id": "windweave",
+			"name": "岚纹晶玉",
+			"file": "jewels/windweave.png",
+			"source_renderer": "EquipmentArt.draw_item",
+			"source_catalog": "JewelData.BASES + SPECIAL_BASES",
+			"entry_type": "base"
+		},
+		{
+			"category": "monsters",
+			"id": "brood_host",
+			"name": "孵化重壳体",
+			"file": "monsters/brood_host.png",
+			"source_renderer": "FantasyActors.draw_enemy + _draw_enemy_marks (rarity glyph only)",
+			"source_catalog": "MonsterCatalog.TEMPLATES",
+			"entry_type": "template"
+		},
+		{
+			"category": "monsters",
+			"id": "brute",
+			"name": "重壳体",
+			"file": "monsters/brute.png",
+			"source_renderer": "FantasyActors.draw_enemy + _draw_enemy_marks (rarity glyph only)",
+			"source_catalog": "MonsterCatalog.TEMPLATES",
+			"entry_type": "template"
+		},
+		{
+			"category": "monsters",
+			"id": "crawler",
+			"name": "巡游体",
+			"file": "monsters/crawler.png",
+			"source_renderer": "FantasyActors.draw_enemy + _draw_enemy_marks (rarity glyph only)",
+			"source_catalog": "MonsterCatalog.TEMPLATES",
+			"entry_type": "template"
+		},
+		{
+			"category": "monsters",
+			"id": "rift_warden",
+			"name": "裂隙守卫",
+			"file": "monsters/rift_warden.png",
+			"source_renderer": "FantasyActors.draw_enemy + _draw_enemy_marks (rarity glyph only)",
+			"source_catalog": "MonsterCatalog.TEMPLATES",
+			"entry_type": "template"
+		},
+		{
+			"category": "monsters",
+			"id": "skitter",
+			"name": "掠行体",
+			"file": "monsters/skitter.png",
+			"source_renderer": "FantasyActors.draw_enemy + _draw_enemy_marks (rarity glyph only)",
+			"source_catalog": "MonsterCatalog.TEMPLATES",
+			"entry_type": "template"
+		},
+		{
+			"category": "monsters",
+			"id": "splitter",
+			"name": "裂殖巡游体",
+			"file": "monsters/splitter.png",
+			"source_renderer": "FantasyActors.draw_enemy + _draw_enemy_marks (rarity glyph only)",
+			"source_catalog": "MonsterCatalog.TEMPLATES",
+			"entry_type": "template"
+		}
+	],
+	"capture": {
+		"animation": "fixed pose; motion disabled",
+		"monster_glyph": "runtime rarity symbol only",
+		"minimum_transparent_border_px": 4,
+		"source": "Original game runtime renderers; no third-party artwork; no unrelated placeholder images"
+	}
+}

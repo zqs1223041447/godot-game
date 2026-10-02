@@ -8,6 +8,7 @@ signal viewport_changed
 
 const Passives = preload("res://scripts/passive_data.gd")
 const Jewels = preload("res://scripts/jewel_data.gd")
+const JewelArt = preload("res://scripts/visuals/equipment_art.gd")
 const MIN_ZOOM: float = 0.15
 const MAX_ZOOM: float = 1.8
 const GOLD: Color = Color("d8b577")
@@ -25,6 +26,11 @@ var _edges: Array = []
 var _allocated: Dictionary = {}
 var _reachable: Dictionary = {}
 var _matches: Dictionary = {}
+var _analysis: Dictionary = {}
+var _preview: Dictionary = {}
+var _radius_preview: Dictionary = {}
+var _preview_socket_id: String = ""
+var _preview_jewel_id: String = ""
 var _dragging: bool = false
 var _drag_button: int = MOUSE_BUTTON_NONE
 
@@ -52,10 +58,30 @@ func refresh() -> void:
 		return
 	for id: String in _state.allocated_nodes:
 		_allocated[id] = true
-	for id: String in _nodes:
-		if _state.can_allocate(id):
-			_reachable[id] = true
+	_analysis = _state.allocation_analysis()
+	if _state.talent_points > 0:
+		_reachable = _analysis.get("eligible_nodes", {}).duplicate()
+	_refresh_preview()
 	queue_redraw()
+
+
+func preview_jewel(socket_id: String, jewel_id: String) -> void:
+	_preview_socket_id = socket_id
+	_preview_jewel_id = jewel_id
+	_refresh_preview()
+	queue_redraw()
+
+
+func _refresh_preview() -> void:
+	_preview = {}
+	_radius_preview = {}
+	if _state == null or _preview_socket_id.is_empty() or _preview_jewel_id.is_empty():
+		return
+	var jewel: Dictionary = _state.jewels.get(_preview_jewel_id, {})
+	if Jewels.allocation_rule(jewel).is_empty():
+		return
+	_preview = _state.socket_preview_analysis(_preview_socket_id, _preview_jewel_id)
+	_radius_preview = _state.jewel_radius_preview(_preview_socket_id, _preview_jewel_id)
 
 
 func select_node(node_id: String) -> void:
@@ -224,6 +250,8 @@ func _get_tooltip(at_position: Vector2) -> String:
 		return "拖动空白处或按住中键平移；滚轮缩放"
 	var node: Dictionary = _nodes[id] as Dictionary
 	var status: String = "已点亮" if _allocated.has(id) else ("可分配 · 消耗 1 点" if _reachable.has(id) else "尚未连接")
+	if _analysis.get("remote_nodes", []).has(id):
+		status = "寻枝点亮 · 已消耗 1 点"
 	if id == "origin":
 		status = "星图起点 · 永久点亮"
 	var description: String = str(node.get("description", ""))
@@ -231,6 +259,12 @@ func _get_tooltip(at_position: Vector2) -> String:
 		var jewel: Dictionary = _state.get_jewel_at(id)
 		if not jewel.is_empty():
 			description = Jewels.display_name(jewel) + "\n" + Jewels.get_description(jewel)
+	var sources: Array = _analysis.get("granted_by", {}).get(id, [])
+	if not sources.is_empty():
+		var names: PackedStringArray = []
+		for source: String in sources:
+			names.append(str(_nodes.get(source, {}).get("name", source)))
+		description += "\n寻枝范围：" + "、".join(names) + "\n每个天赋仍需 1 点；不能沿远程节点向外延伸"
 	return "%s  ·  %s\n%s\n单击查看详情" % [str(node.get("name", id)), status, description]
 
 
@@ -247,15 +281,16 @@ func _draw() -> void:
 	_draw_backdrop()
 	if _state == null:
 		return
+	_draw_jewel_coverage()
 	for edge: Array in _edges:
 		var a: String = str(edge[0])
 		var b: String = str(edge[1])
 		var color: Color = Color("5a5a43")
 		var width: float = 1.2
-		if _allocated.has(a) and _allocated.has(b):
+		if _analysis.get("connected", {}).has(a) and _analysis.get("connected", {}).has(b):
 			color = GOLD.darkened(0.22)
 			width = 2.4
-		elif (_allocated.has(a) and _reachable.has(b)) or (_allocated.has(b) and _reachable.has(a)):
+		elif (_analysis.get("connected", {}).has(a) and _reachable.has(b)) or (_analysis.get("connected", {}).has(b) and _reachable.has(a)):
 			color = CYAN.darkened(0.3)
 			width = 1.7
 		draw_line(node_screen_position(a), node_screen_position(b), color, width, true)
@@ -266,6 +301,28 @@ func _draw() -> void:
 	var font: Font = get_theme_default_font()
 	draw_string(font, Vector2(15, 23), "星脉图谱", HORIZONTAL_ALIGNMENT_LEFT, -1, 14, Color("b1aa8d"))
 	draw_string(font, Vector2(15, size.y - 16), "拖动空白平移  ·  滚轮缩放  ·  双击分配", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color("a29a80"))
+
+
+func _draw_jewel_coverage() -> void:
+	var sources: Dictionary = _analysis.get("active_sources", {}).duplicate()
+	for socket_id: String in _preview.get("active_sources", {}):
+		sources[socket_id] = _preview.active_sources[socket_id]
+	if not _radius_preview.is_empty():
+		sources[_preview_socket_id] = _radius_preview
+	for socket_id: String in sources:
+		var source: Dictionary = sources[socket_id]
+		var center: Vector2 = world_to_screen(source.position)
+		var radius: float = float(source.radius) * zoom
+		var chosen: bool = socket_id == selected_node_id or socket_id == hovered_node_id or socket_id == _preview_socket_id or _analysis.get("granted_by", {}).get(selected_node_id, []).has(socket_id) or _analysis.get("granted_by", {}).get(hovered_node_id, []).has(socket_id)
+		var color := Color("c4a063")
+		if source.get("active", true) == false: color = Color("948a72")
+		color.a = 0.065 if chosen else 0.025
+		draw_circle(center, radius, color)
+		color.a = 0.62 if chosen else 0.21
+		# Quiet broken rim, drawn beneath links and nodes. It is a rule radius, not glow.
+		for part: int in range(24):
+			var angle: float = part * TAU / 24.0
+			draw_arc(center, radius, angle, angle + TAU / 36.0, 5, color, 1.0, true)
 
 
 func _draw_backdrop() -> void:
@@ -291,6 +348,9 @@ func _draw_node(id: String, node: Dictionary) -> void:
 	var reachable: bool = _reachable.has(id)
 	var type: String = str(node.get("type", "small"))
 	var color: Color = GOLD if allocated else (CYAN if reachable else MUTED)
+	var remote: bool = _analysis.get("remote_nodes", []).has(id)
+	var covered: bool = _analysis.get("granted_by", {}).has(id) or _preview.get("granted_by", {}).has(id) or _radius_preview.get("covered_nodes", []).has(id)
+	if remote: color = Color("e3b978")
 	var fill: Color = Color("2c3024")
 	if allocated:
 		fill = Color("59492d")
@@ -304,6 +364,13 @@ func _draw_node(id: String, node: Dictionary) -> void:
 		draw_arc(p, radius + 6.0, 0, TAU, 48, Color("e8d9ad"), 1.2, true)
 	elif hovered_node_id == id or _matches.has(id):
 		draw_arc(p, radius + 4.0, 0, TAU, 36, CYAN if hovered_node_id == id else GOLD, 1.2, true)
+	if covered and type in ["small", "notable"]:
+		var mark_color := Color("c4a063")
+		mark_color.a = 0.95 if remote else 0.60
+		var at: Vector2 = p + Vector2(radius + 3, -radius - 3)
+		draw_line(at + Vector2(-2, 2), at + Vector2(2, -2), mark_color, 1.4, true)
+		draw_line(at, at + Vector2(-2, -2), mark_color, 1.4, true)
+		if remote: draw_line(at, at + Vector2(2, 2), mark_color, 1.4, true)
 	if type == "socket":
 		var jewel: Dictionary = _state.get_jewel_at(id)
 		if not jewel.is_empty():
@@ -316,9 +383,7 @@ func _draw_node(id: String, node: Dictionary) -> void:
 		diamond.append(diamond[0])
 		draw_polyline(diamond, color, 1.7, true)
 		if not jewel.is_empty():
-			draw_line(p + Vector2(0, -radius * 0.6), p + Vector2(radius * 0.45, 0), color, 1.2, true)
-			draw_line(p + Vector2(radius * 0.45, 0), p + Vector2(0, radius * 0.6), color, 1.2, true)
-			draw_line(p + Vector2(-radius * 0.5, 0), p + Vector2(radius * 0.5, 0), color, 1.0, true)
+			JewelArt.draw_item(self, {"kind":"jewel", "base":jewel.base}, Rect2(p - Vector2.ONE * radius * 0.8, Vector2.ONE * radius * 1.6))
 		else:
 			draw_circle(p, 1.5, color)
 	elif type == "start":
@@ -344,8 +409,9 @@ func _draw_node(id: String, node: Dictionary) -> void:
 
 func _jewel_color(jewel: Dictionary) -> Color:
 	var base_id: String = str(jewel.get("base", ""))
-	if Jewels.BASES.has(base_id):
-		return Jewels.BASES[base_id].get("color", Color("b4a1ff")) as Color
+	var base: Dictionary = Jewels.base_definition(base_id)
+	if not base.is_empty():
+		return base.get("color", Color("b4a1ff")) as Color
 	return Color("b4a1ff")
 
 

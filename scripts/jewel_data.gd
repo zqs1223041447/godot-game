@@ -1,6 +1,6 @@
 class_name JewelData
 extends RefCounted
-## Original basic jewels only: no radius, cluster, timeless or hidden multipliers.
+## Original basic rolls remain frozen; special bases have fixed intrinsic rules.
 ## Affixes are bounded, quantized flat bonuses to actual combat statistics.
 
 const BASES: Dictionary = {
@@ -11,6 +11,13 @@ const BASES: Dictionary = {
 const RARITIES: Dictionary = {
 	"magic": {"name": "魔法", "color": Color("8eb8ff"), "max_affixes": 2, "max_prefixes": 1, "max_suffixes": 1},
 	"rare": {"name": "稀有", "color": Color("e9ce7c"), "max_affixes": 4, "max_prefixes": 2, "max_suffixes": 2},
+}
+# Separate dictionaries keep legacy iteration and random generation unchanged.
+const SPECIAL_BASES: Dictionary = {
+	"branchfinder": {"name": "寻枝晶玉", "color": Color("d7a25c"), "rarity": "special", "rule_id": "disconnected_radius", "radius": 280.0},
+}
+const SPECIAL_RARITIES: Dictionary = {
+	"special": {"name": "特殊", "color": Color("e2ae6b")},
 }
 const AFFIXES: Dictionary = {
 	"force": {"name": "炽烈", "kind": "prefix", "stat": "damage", "min": 2.0, "max": 6.0, "step": 1.0},
@@ -55,17 +62,37 @@ static func generate(rng: RandomNumberGenerator, instance_id: String) -> Diction
 	return {"id": instance_id, "base": base_id, "rarity": rarity, "affixes": affixes}
 
 
+static func base_definition(base_id: String) -> Dictionary:
+	return BASES.get(base_id, SPECIAL_BASES.get(base_id, {})).duplicate(true)
+
+
+static func generate_special(instance_id: String) -> Dictionary:
+	if serial_from_id(instance_id) <= 0:
+		return {}
+	return {"id": instance_id, "base": "branchfinder", "rarity": "special", "affixes": []}
+
+
+static func allocation_rule(jewel: Dictionary) -> Dictionary:
+	# Rules are derived from the allowlisted base, never serialized on instances.
+	if not validate_instance(jewel) or not SPECIAL_BASES.has(jewel["base"]):
+		return {}
+	var base: Dictionary = SPECIAL_BASES[jewel["base"]]
+	return {"id": base["rule_id"], "radius": base["radius"], "types": ["small", "notable"]}
+
+
 static func display_name(jewel: Dictionary) -> String:
 	if jewel.is_empty():
 		return "空珠宝孔"
-	return "%s · %s" % [RARITIES.get(jewel.get("rarity", ""), {}).get("name", "未知"), BASES.get(jewel.get("base", ""), {}).get("name", "未知晶玉")]
+	return "%s · %s" % [RARITIES.get(jewel.get("rarity", ""), SPECIAL_RARITIES.get(jewel.get("rarity", ""), {})).get("name", "未知"), base_definition(str(jewel.get("base", ""))).get("name", "未知晶玉")]
 
 
 static func get_color(jewel: Dictionary) -> Color:
-	return RARITIES.get(jewel.get("rarity", ""), {}).get("color", Color.WHITE)
+	return RARITIES.get(jewel.get("rarity", ""), SPECIAL_RARITIES.get(jewel.get("rarity", ""), {})).get("color", Color.WHITE)
 
 
 static func get_description(jewel: Dictionary) -> String:
+	if not allocation_rule(jewel).is_empty():
+		return "镶嵌在沿已点连线连通起点的珠宝孔中时：半径 280 内的小型与核心天赋可不连线分配，每个仍消耗 1 点。\n远程节点不能向范围外延伸；珠宝孔必须沿已点连线连通起点。移除或移动珠宝不得使已点天赋失去支持。\n固定规则，无随机词缀；不直接增加属性。"
 	var lines: PackedStringArray = []
 	for affix: Dictionary in jewel.get("affixes", []):
 		var definition: Dictionary = AFFIXES.get(affix.get("id", ""), {})
@@ -84,7 +111,7 @@ static func get_stats(jewel: Dictionary) -> Dictionary:
 	return result
 
 
-static func validate_instance(value: Variant) -> bool:
+static func validate_instance(value: Variant, allow_special: bool = true) -> bool:
 	if not value is Dictionary:
 		return false
 	var jewel: Dictionary = value
@@ -92,7 +119,11 @@ static func validate_instance(value: Variant) -> bool:
 		return false
 	if not jewel["id"] is String or serial_from_id(jewel["id"]) <= 0:
 		return false
-	if not jewel["base"] is String or not BASES.has(jewel["base"]):
+	if not jewel["base"] is String:
+		return false
+	if SPECIAL_BASES.has(jewel["base"]):
+		return allow_special and jewel["rarity"] is String and jewel["rarity"] == "special" and jewel["affixes"] is Array and jewel["affixes"].is_empty()
+	if not BASES.has(jewel["base"]):
 		return false
 	if not jewel["rarity"] is String or not RARITIES.has(jewel["rarity"]):
 		return false

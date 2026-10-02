@@ -617,7 +617,7 @@ func _open_passives_from_inventory() -> void:
 
 func _build_talents_panel() -> void:
 	_panel_title.text = "天赋星图 · 珠宝"
-	_panel_subtitle.text = "沿连线分配天赋  /  激活珠宝槽，让词缀融入你的构筑"
+	_panel_subtitle.text = "分配天赋 · 镶嵌珠宝 · 查看覆盖"
 	if not is_instance_valid(_passive_panel):
 		_passive_panel = PassivePanel.new()
 		_passive_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -627,7 +627,7 @@ func _build_talents_panel() -> void:
 		_passive_panel.feedback.connect(notify)
 	_passive_panel.show()
 	_passive_panel.refresh()
-	_panel_footer.text = "天赋独立预算：达到上限后不再增加该属性，装备/珠宝不占预算 · 选起点查看说明 · 每20次有效击杀获得珠宝"
+	_panel_footer.text = "每点消耗 1 天赋点 · 普通珠宝每20有效击杀 · 寻枝晶玉来自首领 · F8 离线图鉴"
 
 
 func _build_skills_panel() -> void:
@@ -796,7 +796,7 @@ func _build_pause_panel() -> void:
 	_section("操作指南")
 	var row: HBoxContainer = _card(_panel_body, "移动 · 瞄准 · 释放", "WASD / 方向键：移动   ·   按住鼠标左键：瞄准射击   ·   空格：闪避（需装配冲刺）\n1 – 5：释放技能   ·   Q：切换自动攻击\nI / B：装备背包   ·   T：天赋   ·   K：技能   ·   Esc：关闭面板 / 暂停")
 	row.name = "ControlsGuide"
-	_card(_panel_body, "你的构筑，由你决定", "装备、天赋、珠宝与五个主动技能可以随时自由组合。\n升级获得天赋点；每 20 次有效原始怪击杀获得随机珠宝。按 T 沿连线分配天赋并镶嵌珠宝；重试保留构筑。", GOLD)
+	_card(_panel_body, "你的构筑，由你决定", "装备、天赋、珠宝与五个主动技能可以随时自由组合。\n升级获得天赋点；每 20 次有效原始怪击杀获得随机珠宝。原始首领另授予寻枝晶玉；T 分配与镶嵌，F8 查看完整图鉴。重试保留构筑。", GOLD)
 	var actions: HBoxContainer = HBoxContainer.new()
 	_panel_body.add_child(actions)
 	var resume: Button = _button("继续战斗", "ResumeButton", close_panel, 180)
@@ -805,6 +805,9 @@ func _build_pause_panel() -> void:
 	actions.add_child(_button("显示设置", "VisualSettingsButton", open_panel.bind("settings"), 150))
 	actions.add_child(_button("重新开始", "RestartButton", _restart, 150))
 	actions.add_child(_button("退出（未保存）" if not _state.save_block_reason().is_empty() else "保存并退出", "ExitButton", _exit_game, 180))
+	var reference_button: Button = _button("离线图鉴 F8", "ReferenceCatalogButton", _arena.open_reference_catalog, 180)
+	reference_button.tooltip_text = "在浏览器查看装备、技能、珠宝与机制；保持战斗暂停"
+	_panel_body.add_child(reference_button)
 	_panel_footer.text = "游戏仅保存构筑进度；重新开始会重置本轮战斗"
 
 

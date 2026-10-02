@@ -4,7 +4,7 @@ extends Control
 var skill_id: String = "bolt"
 var accent := Color("d5bc83")
 var subdued: bool = false
-const COLORS: Dictionary={"tornado":Color("b6c38d"),"bolt":Color("d6c394"),"frost":Color("a9cbd0"),"nova":Color("bdacd0"),"dash":Color("d0b17a"),"ward":Color("b7c6a0"),"meteor":Color("d89358"),"chain":Color("d9c18b")}
+const COLORS: Dictionary={"tornado":Color("b6c38d"),"bolt":Color("d6c394"),"frost":Color("a9cbd0"),"nova":Color("bdacd0"),"dash":Color("d0b17a"),"ward":Color("b7c6a0"),"meteor":Color("d89358"),"chain":Color("d9c18b"),"volley":Color("aec193"),"focus":Color("d3b67c")}
 func _ready() -> void:
 	mouse_filter=Control.MOUSE_FILTER_IGNORE
 func _line(a: Vector2,b: Vector2,color: Color,width: float=1.7) -> void:
@@ -25,6 +25,21 @@ func _draw() -> void:
 	draw_polyline(outline,Color("897956").darkened(0.25 if subdued else 0),1,true)
 	draw_line(c+Vector2(-r+4,-r+2),c+Vector2(r-4,-r+2),Color("af9870"),0.7,true)
 	match skill_id:
+		"volley":
+			# Three fletched shafts spread out from a bronze binding.
+			for direction: Vector2 in [Vector2(-0.53,-0.73),Vector2(0,-0.88),Vector2(0.53,-0.73)]:
+				var tip: Vector2=c+direction*r
+				var tail: Vector2=c+Vector2(direction.x*0.16,0.61)*r
+				_line(tail,tip,color,1.4)
+				var tangent: Vector2=(tip-tail).normalized()
+				draw_colored_polygon(PackedVector2Array([tip,tip-tangent*4+tangent.orthogonal()*2,tip-tangent*4-tangent.orthogonal()*2]),color)
+			_line(c+Vector2(-r*0.20,r*0.38),c+Vector2(r*0.20,r*0.38),Color("a18050"),2.0)
+		"focus":
+			# Restrained inward brackets and a single dense central arrowhead.
+			for side: int in [-1,1]:
+				_path(PackedVector2Array([c+Vector2(side*r*0.67,-r*0.55),c+Vector2(side*r*0.40,0),c+Vector2(side*r*0.67,r*0.55)]),color.darkened(0.15),1.4)
+			_line(c+Vector2(0,r*0.65),c+Vector2(0,-r*0.42),color,2.1)
+			draw_colored_polygon(PackedVector2Array([c+Vector2(0,-r*0.77),c+Vector2(r*0.25,-r*0.29),c+Vector2(0,-r*0.40),c+Vector2(-r*0.25,-r*0.29)]),color)
 		"tornado":
 			for i: int in range(3):
 				var y:=c.y-r*0.5+i*r*0.5

@@ -64,7 +64,7 @@ func fixture(id: String, rect: Rect2, hint: bool = false) -> Recorder:
 		design = Vector2(116, 150)
 	elif id in ["vitality_armor", "woven_bastion"]:
 		design = Vector2(114, 130)
-	elif Jewels.BASES.has(id):
+	elif Jewels.BASES.has(id) or Jewels.SPECIAL_BASES.has(id):
 		design = Vector2(80, 88)
 	var pen := Recorder.new(rect, design, hint)
 	if id in ["ember_wand", "cinder_reed"]:
@@ -81,7 +81,7 @@ func fixture(id: String, rect: Rect2, hint: bool = false) -> Recorder:
 		Art._draw_robe(pen, id == "tidebound_coat")
 	elif id in ["vitality_armor", "woven_bastion"]:
 		Art._draw_leather(pen, id == "woven_bastion")
-	elif Jewels.BASES.has(id):
+	elif Jewels.BASES.has(id) or Jewels.SPECIAL_BASES.has(id):
 		Art._draw_jewel(pen, id)
 	else:
 		Art._draw_charm(pen, id)
@@ -102,7 +102,7 @@ func run() -> void:
 		# Also test raw base-only records used by previews/tools.
 		entries.append({"base_id": id})
 		ids.append(id)
-	for id: String in Jewels.BASES:
+	for id: String in Jewels.BASES.keys() + Jewels.SPECIAL_BASES.keys():
 		entries.append({"kind": "jewel", "base": id, "id": "jewel_000100"})
 		ids.append(id)
 	for slot: String in ["weapon", "armor", "charm"]:
@@ -122,6 +122,7 @@ func run() -> void:
 					check(point.is_finite(), "non-finite vertex: " + id)
 					check(point.x - stroke >= rect.position.x and point.y - stroke >= rect.position.y and point.x + stroke <= rect.end.x and point.y + stroke <= rect.end.y, "stroke escaped supplied rect: " + id)
 	check(fixture("runewood_focus", Rect2(0, 0, 28, 91)).commands != fixture("gale_spindle", Rect2(0, 0, 28, 91)).commands, "runewood focus incorrectly uses sword geometry")
+	check(fixture("branchfinder", Rect2(0, 0, 28, 28)).commands != fixture("windweave", Rect2(0, 0, 28, 28)).commands, "special jewel must have its own branching silhouette")
 	# Color/material changes survive subdued slot rendering; rendering itself is pure.
 	var hint := fixture("ember_wand", Rect2(0, 0, 51, 57), true)
 	check(hint.commands != fixture("ember_wand", Rect2(0, 0, 51, 57)).commands, "hint is not subdued")

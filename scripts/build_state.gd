@@ -11,7 +11,8 @@ const JewelCatalog = preload("res://scripts/jewel_data.gd")
 const Equipment = preload("res://scripts/items/equipment_catalog.gd")
 const SupportCatalog = preload("res://scripts/combat/support_catalog.gd")
 const SkillCompiler = preload("res://scripts/combat/skill_compiler.gd")
-const SAVE_VERSION: int = 6
+const AllocationRules = preload("res://scripts/passives/allocation_rules.gd")
+const SAVE_VERSION: int = 7
 const MAX_EQUIPMENT: int = 64
 const MAX_EQUIPMENT_ID: int = 999999999
 const MAX_LEVEL: int = 1000
@@ -56,11 +57,12 @@ var migrated_from_v2: bool = false
 var migrated_from_v3: bool = false
 var migrated_from_v4: bool = false
 var migrated_from_v5: bool = false
+var migrated_from_v6: bool = false
 var _migration_version: int = 0
 var migration_message: String = ""
 var migration_backup_path: String = ""
 var _migration_source_path: String = ""
-var _migration_source_text: String = ""
+var _migration_source_bytes: PackedByteArray = PackedByteArray()
 var last_load_error: String = ""
 var _blocked_save_paths: Dictionary = {}
 
@@ -179,6 +181,24 @@ func discard_equipment(item_id: String) -> bool:
 	return true
 
 
+func allocation_analysis() -> Dictionary:
+	# No cache: direct state edits in diagnostics/tests must never leave stale rules.
+	return AllocationRules.analyze(allocated_nodes, socketed_jewels, jewels)
+
+
+func allocation_sources(node_id: String) -> Array[String]:
+	var result: Array[String] = []
+	result.assign(allocation_analysis().granted_by.get(node_id, []))
+	return result
+
+
+func jewel_radius_preview(socket_id: String, jewel_id: String) -> Dictionary:
+	var result: Dictionary = AllocationRules.coverage_for_socket(socket_id, jewels.get(jewel_id, {}))
+	if not result.is_empty():
+		result["active"] = allocation_analysis().connected.has(socket_id)
+	return result
+
+
 func allocation_reason(node_id: String) -> String:
 	if not Passives.get_nodes().has(node_id):
 		return "未知天赋节点"
@@ -186,10 +206,14 @@ func allocation_reason(node_id: String) -> String:
 		return "此节点已激活"
 	if talent_points <= 0:
 		return "天赋点不足；升级可获得天赋点"
-	for neighbor: String in Passives.get_neighbors(node_id):
-		if allocated_nodes.has(neighbor):
-			return ""
-	return "需要先激活连线相邻的节点"
+	var candidate: Array[String] = allocated_nodes.duplicate()
+	candidate.append(node_id)
+	var analysis: Dictionary = AllocationRules.analyze(candidate, socketed_jewels, jewels)
+	if analysis.legal:
+		return ""
+	if Passives.get_nodes()[node_id]["type"] == "socket" and not analysis.connected.has(node_id):
+		return "珠宝孔必须沿已激活连线连通起点；寻枝覆盖不能激活远程珠宝孔"
+	return "需要连通起点的相邻节点，或激活寻枝晶玉的范围覆盖。" + str(analysis.reason)
 
 
 func can_allocate(node_id: String) -> bool:
@@ -213,9 +237,9 @@ func refund_reason(node_id: String) -> String:
 		return "此节点尚未激活"
 	var remaining: Array = allocated_nodes.duplicate()
 	remaining.erase(node_id)
-	if not _connected(remaining):
-		return "返还会断开其他天赋与起点的连接"
-	return ""
+	var candidate_sockets: Dictionary = socketed_jewels.duplicate()
+	candidate_sockets.erase(node_id)
+	return str(AllocationRules.analyze(remaining, candidate_sockets, jewels).reason)
 
 
 func can_refund(node_id: String) -> bool:
@@ -238,6 +262,8 @@ func refund_passive(node_id: String) -> bool:
 
 func refund_talents() -> void:
 	if allocated_nodes.size() <= 1:
+		return
+	if not AllocationRules.analyze([Passives.START_ID], {}, jewels).legal:
 		return
 	for socket_id: String in socketed_jewels:
 		jewel_inventory.append(socketed_jewels[socket_id])
@@ -267,7 +293,7 @@ func get_jewel_stats(jewel_id: String) -> Dictionary:
 	return JewelCatalog.get_stats(jewels.get(jewel_id, {}))
 
 
-func socket_reason(socket_id: String, jewel_id: String) -> String:
+func _socket_input_reason(socket_id: String, jewel_id: String) -> String:
 	var nodes: Dictionary = Passives.get_nodes()
 	if not nodes.has(socket_id) or nodes[socket_id]["type"] != "socket":
 		return "请选择珠宝孔"
@@ -280,31 +306,62 @@ func socket_reason(socket_id: String, jewel_id: String) -> String:
 	return ""
 
 
+func _socket_candidate(socket_id: String, jewel_id: String) -> Dictionary:
+	var candidate: Dictionary = socketed_jewels.duplicate()
+	var source: String = jewel_location(jewel_id)
+	var previous: String = str(candidate.get(socket_id, ""))
+	if source != "inventory":
+		if previous.is_empty():
+			candidate.erase(source)
+		else:
+			candidate[source] = previous
+	candidate[socket_id] = jewel_id
+	return candidate
+
+
+func socket_preview_analysis(socket_id: String, jewel_id: String) -> Dictionary:
+	var reason: String = _socket_input_reason(socket_id, jewel_id)
+	if not reason.is_empty():
+		var current: Dictionary = allocation_analysis()
+		current.legal = false
+		current.reason = reason
+		return current
+	return AllocationRules.analyze(allocated_nodes, _socket_candidate(socket_id, jewel_id), jewels)
+
+
+func socket_reason(socket_id: String, jewel_id: String) -> String:
+	return str(socket_preview_analysis(socket_id, jewel_id).reason)
+
+
 func socket_jewel(socket_id: String, jewel_id: String) -> bool:
 	if not socket_reason(socket_id, jewel_id).is_empty():
 		return false
 	var source: String = jewel_location(jewel_id)
 	var previous: String = str(socketed_jewels.get(socket_id, ""))
-	# Replace in inventory, swap occupied sockets, or move to an empty socket.
-	# No removal happens until both identifiers and the destination are valid.
+	var candidate_sockets: Dictionary = _socket_candidate(socket_id, jewel_id)
+	# Commit the same final layout used by the rules, never an intermediate removal.
 	if source == "inventory":
 		var index: int = jewel_inventory.find(jewel_id)
 		if previous.is_empty():
 			jewel_inventory.remove_at(index)
 		else:
 			jewel_inventory[index] = previous
-	elif previous.is_empty():
-		socketed_jewels.erase(source)
-	else:
-		socketed_jewels[source] = previous
-	socketed_jewels[socket_id] = jewel_id
+	socketed_jewels = candidate_sockets
 	_sync_backpack()
 	changed.emit()
 	return true
 
 
-func remove_jewel(socket_id: String) -> bool:
+func remove_jewel_reason(socket_id: String) -> String:
 	if not socketed_jewels.has(socket_id):
+		return "此珠宝孔为空"
+	var candidate: Dictionary = socketed_jewels.duplicate()
+	candidate.erase(socket_id)
+	return str(AllocationRules.analyze(allocated_nodes, candidate, jewels).reason)
+
+
+func remove_jewel(socket_id: String) -> bool:
+	if not remove_jewel_reason(socket_id).is_empty():
 		return false
 	jewel_inventory.append(socketed_jewels[socket_id])
 	socketed_jewels.erase(socket_id)
@@ -330,6 +387,28 @@ func award_jewel(rng: RandomNumberGenerator) -> String:
 	if jewels.has(id):
 		return ""
 	var jewel: Dictionary = JewelCatalog.generate(rng, id)
+	if not JewelCatalog.validate_instance(jewel):
+		return ""
+	var candidate_jewels: Array = jewels.keys()
+	candidate_jewels.append(id)
+	if not _owned_items_fit(inventory, candidate_jewels, equipment_instances):
+		return ""
+	jewels[id] = jewel
+	jewel_inventory.append(id)
+	next_jewel_id += 1
+	_sync_backpack()
+	changed.emit()
+	return id
+
+
+func award_special_jewel() -> String:
+	# Fixed boss reward: consumes no random draws and grants no starter/upgrade item.
+	if jewels.size() >= MAX_JEWELS or next_jewel_id < 1 or next_jewel_id > MAX_JEWEL_ID:
+		return ""
+	var id: String = "jewel_%06d" % next_jewel_id
+	if jewels.has(id):
+		return ""
+	var jewel: Dictionary = JewelCatalog.generate_special(id)
 	if not JewelCatalog.validate_instance(jewel):
 		return ""
 	var candidate_jewels: Array = jewels.keys()
@@ -449,13 +528,13 @@ func save_build(path: String = "user://build_save.json") -> Error:
 		return ERR_INVALID_DATA
 	# Keep the original legacy save before the first migration overwrite.
 	# A backup failure aborts autosave without touching the old file.
-	if path == _migration_source_path and not _migration_source_text.is_empty():
+	if ProjectSettings.globalize_path(path) == _migration_source_path and not _migration_source_bytes.is_empty():
 		var backup_error: Error = _backup_legacy_save(path)
 		if backup_error != OK:
 			return backup_error
 	var write_error: Error = _atomic_write(path, serialized)
-	if write_error == OK and path == _migration_source_path:
-		_migration_source_text = ""
+	if write_error == OK and ProjectSettings.globalize_path(path) == _migration_source_path:
+		_migration_source_bytes = PackedByteArray()
 	return write_error
 
 
@@ -468,7 +547,9 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	if file.get_length() > MAX_SAVE_BYTES:
 		file.close()
 		return _reject_load(path, "存档大小超出安全上限")
-	var text: String = file.get_as_text()
+	var source_bytes: PackedByteArray = file.get_buffer(file.get_length())
+	file.seek(0)
+	var text: String = file.get_as_text() # Keep legacy UTF-8 BOM handling; backup uses raw bytes.
 	file.close()
 	var parser := JSON.new()
 	if parser.parse(text) != OK:
@@ -502,6 +583,7 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	migrated_from_v3 = int(parser.data["version"]) == 3
 	migrated_from_v4 = int(parser.data["version"]) == 4
 	migrated_from_v5 = int(parser.data["version"]) == 5
+	migrated_from_v6 = int(parser.data["version"]) == 6
 	_migration_version = int(parser.data["version"])
 	if migrated_from_v1 or migrated_from_v2:
 		for id: String in Data.COMBAT_STARTER_ITEMS:
@@ -516,9 +598,11 @@ func load_build(path: String = "user://build_save.json") -> bool:
 		migration_message = "构筑已升级：装备词缀与原有技能保留。按 K 为龙卷、飞弹或冰霜链接辅助，组合效果与耗魔可直接预览。"
 	if migrated_from_v5:
 		migration_message = "构筑已升级：旧装备与掷值保持不变。新增符木法器进入正常掉落，可获得攻击或法术分类点伤；K 和 F6 可查看构成。"
+	if migrated_from_v6:
+		migration_message = "构筑已升级：原装备、辅助与天赋保持不变。常规首领可掉落寻枝晶玉，在半径内开放远程天赋分配。"
 	migration_backup_path = ""
-	_migration_source_path = path if _migration_version < SAVE_VERSION else ""
-	_migration_source_text = text if _migration_version < SAVE_VERSION else ""
+	_migration_source_path = ProjectSettings.globalize_path(path) if _migration_version < SAVE_VERSION else ""
+	_migration_source_bytes = source_bytes if _migration_version < SAVE_VERSION else PackedByteArray()
 	_sync_backpack()
 	changed.emit()
 	return true
@@ -585,7 +669,7 @@ func _validate_snapshot(value: Variant) -> Dictionary:
 		if not id is String or not nodes.has(id) or seen.has(id):
 			return {}
 		seen[id] = true
-	if not seen.has(Passives.START_ID) or not _connected(loaded_nodes):
+	if not seen.has(Passives.START_ID):
 		return {}
 	if loaded_nodes.size() - 1 + int(data["talent_points"]) != BASE_TALENT_POINTS + int(data["level"]) - 1:
 		return {}
@@ -599,7 +683,7 @@ func _validate_snapshot(value: Variant) -> Dictionary:
 	if not _is_bounded_int(data["next_jewel_id"], 1, MAX_JEWEL_ID + 1):
 		return {}
 	for id: Variant in loaded_jewels:
-		if not id is String or not JewelCatalog.validate_instance(loaded_jewels[id]):
+		if not id is String or not JewelCatalog.validate_instance(loaded_jewels[id], int(data["version"]) >= 7):
 			return {}
 		if loaded_jewels[id]["id"] != id or JewelCatalog.serial_from_id(id) >= int(data["next_jewel_id"]):
 			return {}
@@ -617,6 +701,9 @@ func _validate_snapshot(value: Variant) -> Dictionary:
 		seen[id] = true
 	if seen.size() != loaded_jewels.size():
 		return {}
+	# Ownership and versioned instance vocabulary validate before final graph rules.
+	if not AllocationRules.analyze(loaded_nodes, loaded_sockets, loaded_jewels).legal:
+		return {}
 	if not _validate_backpack(data):
 		return {}
 	var result: Dictionary = data.duplicate(true)
@@ -627,7 +714,7 @@ func _validate_snapshot(value: Variant) -> Dictionary:
 	if int(data["version"]) < 5:
 		result["version"] = SAVE_VERSION
 		result["skill_supports"] = {}
-	if int(data["version"]) < 6:
+	if int(data["version"]) < SAVE_VERSION:
 		result["version"] = SAVE_VERSION
 	for skill_id: String in result["skill_supports"]:
 		var canonical: Array[String] = []
@@ -727,15 +814,15 @@ func _migrate_v1(data: Dictionary) -> Dictionary:
 
 
 func _backup_legacy_save(path: String) -> Error:
-	if not FileAccess.file_exists(path) or FileAccess.get_file_as_string(path) != _migration_source_text:
+	if not FileAccess.file_exists(path) or FileAccess.get_file_as_bytes(path) != _migration_source_bytes:
 		return ERR_FILE_ALREADY_IN_USE
 	var backup_path: String = path + ".v%d-backup.json" % _migration_version
 	if FileAccess.file_exists(backup_path):
 		# Never overwrite a previously preserved legacy build with other bytes.
-		if FileAccess.get_file_as_string(backup_path) != _migration_source_text:
+		if FileAccess.get_file_as_bytes(backup_path) != _migration_source_bytes:
 			return ERR_ALREADY_EXISTS
 	else:
-		var backup_error: Error = _atomic_write(backup_path, _migration_source_text)
+		var backup_error: Error = _atomic_write_bytes(backup_path, _migration_source_bytes)
 		if backup_error != OK:
 			return backup_error
 	migration_backup_path = backup_path
@@ -743,11 +830,15 @@ func _backup_legacy_save(path: String) -> Error:
 
 
 static func _atomic_write(path: String, text: String) -> Error:
+	return _atomic_write_bytes(path, text.to_utf8_buffer())
+
+
+static func _atomic_write_bytes(path: String, bytes: PackedByteArray) -> Error:
 	var temporary_path: String = path + ".tmp"
 	var file: FileAccess = FileAccess.open(temporary_path, FileAccess.WRITE)
 	if file == null:
 		return FileAccess.get_open_error()
-	file.store_string(text)
+	file.store_buffer(bytes)
 	file.flush()
 	var write_error: Error = file.get_error()
 	file.close()
@@ -758,25 +849,6 @@ static func _atomic_write(path: String, text: String) -> Error:
 	if rename_error != OK:
 		DirAccess.remove_absolute(temporary_path)
 	return rename_error
-
-
-static func _connected(ids: Array) -> bool:
-	if not ids.has(Passives.START_ID):
-		return false
-	var allowed: Dictionary = {}
-	for id: String in ids:
-		allowed[id] = true
-	var visited: Dictionary = {Passives.START_ID: true}
-	var queue: Array[String] = [Passives.START_ID]
-	var cursor: int = 0
-	while cursor < queue.size():
-		var id: String = queue[cursor]
-		cursor += 1
-		for neighbor: String in Passives.get_neighbors(id):
-			if allowed.has(neighbor) and not visited.has(neighbor):
-				visited[neighbor] = true
-				queue.append(neighbor)
-	return visited.size() == ids.size()
 
 
 static func _is_bounded_int(value: Variant, minimum: int, maximum: int) -> bool:

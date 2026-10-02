@@ -200,7 +200,7 @@ func _check_save_schema() -> void:
 	var build := Model.new()
 	_expect(build.allocate_passive("ember_1_0"), "Save fixture uses valid allocation")
 	var snapshot: Dictionary = build._snapshot()
-	_expect(Model.SAVE_VERSION == 6 and snapshot.version == 6, "Save schema6 retains stable passive IDs")
+	_expect(snapshot.version == Model.SAVE_VERSION, "Current save schema retains stable passive IDs")
 	_expect(snapshot.allocated_nodes == ["origin", "ember_1_0"], "Saves continue storing stable graph IDs")
 	_expect(not snapshot.has("mechanism_ids") and not snapshot.has("definition_revision"), "Derived mechanism definitions are not persisted into player saves")
 	_expect(not build._validate_snapshot(snapshot).is_empty(), "Existing schema-3 validator still accepts the build")

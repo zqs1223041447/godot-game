@@ -7,6 +7,7 @@ signal feedback(message: String)
 const Passives = preload("res://scripts/passive_data.gd")
 const Jewels = preload("res://scripts/jewel_data.gd")
 const TreeCanvas = preload("res://scripts/passive_tree_view.gd")
+const JewelIcon = preload("res://scripts/visuals/jewel_emblem.gd")
 const TEXT: Color = Color("eee2c7")
 const MUTED: Color = Color("b2aa94")
 const CYAN: Color = Color("b8c891")
@@ -34,6 +35,7 @@ var _jewel_filter: OptionButton
 var _jewel_scroll: ScrollContainer
 var _jewel_list: VBoxContainer
 var _jewel_name: Label
+var _jewel_detail_icon: Control
 var _jewel_affixes: Label
 var _jewel_location: Label
 var _jewel_reason: Label
@@ -151,6 +153,10 @@ func insert_selected_jewel() -> bool:
 func remove_selected_jewel() -> bool:
 	if _state == null:
 		return false
+	var reason: String = _state.remove_jewel_reason(selected_node_id)
+	if not reason.is_empty():
+		feedback.emit(reason)
+		return false
 	var success: bool = _state.remove_jewel(selected_node_id)
 	if success:
 		feedback.emit("珠宝已取回背包 · 可再次镶嵌")
@@ -228,6 +234,7 @@ func _build_ui() -> void:
 	details.add_child(_node_title)
 	_node_description = _wrap_label("", 13, TEXT)
 	_node_description.name = "NodeDescriptionLabel"
+	_node_description.mouse_filter = Control.MOUSE_FILTER_PASS
 	details.add_child(_node_description)
 	var node_buttons: HBoxContainer = HBoxContainer.new()
 	node_buttons.add_theme_constant_override("separation", 7)
@@ -241,6 +248,7 @@ func _build_ui() -> void:
 	node_buttons.add_child(_refund_button)
 	_node_reason = _wrap_label("", 11, MUTED)
 	_node_reason.name = "NodeRestrictionLabel"
+	_node_reason.mouse_filter = Control.MOUSE_FILTER_PASS
 	details.add_child(_node_reason)
 	details.add_child(HSeparator.new())
 	var jewels_header: HBoxContainer = HBoxContainer.new()
@@ -255,6 +263,7 @@ func _build_ui() -> void:
 	_jewel_filter.add_item("背包", 1)
 	_jewel_filter.add_item("已镶嵌", 2)
 	_jewel_filter.add_item("稀有", 3)
+	_jewel_filter.add_item("特殊", 4)
 	_jewel_filter.add_theme_font_size_override("font_size", 12)
 	_jewel_filter.custom_minimum_size.x = 88
 	_jewel_filter.item_selected.connect(_on_jewel_filter_changed)
@@ -271,9 +280,16 @@ func _build_ui() -> void:
 	_jewel_scroll.add_child(_jewel_list)
 	_jewel_name = _wrap_label("", 15, CYAN)
 	_jewel_name.name = "SelectedJewelLabel"
+	_jewel_name.mouse_filter = Control.MOUSE_FILTER_PASS
 	details.add_child(_jewel_name)
+	_jewel_detail_icon = JewelIcon.new()
+	_jewel_detail_icon.name = "SelectedJewelEmblem"
+	_jewel_detail_icon.position = Vector2(0, 1)
+	_jewel_detail_icon.size = Vector2(20, 20)
+	_jewel_name.add_child(_jewel_detail_icon)
 	_jewel_affixes = _wrap_label("", 12, TEXT)
 	_jewel_affixes.name = "JewelAffixesLabel"
+	_jewel_affixes.mouse_filter = Control.MOUSE_FILTER_PASS
 	details.add_child(_jewel_affixes)
 	_jewel_location = _wrap_label("", 11, MUTED)
 	_jewel_location.name = "JewelLocationLabel"
@@ -294,6 +310,7 @@ func _build_ui() -> void:
 	details.move_child(jewel_buttons, _jewel_name.get_index() + 1)
 	_jewel_reason = _wrap_label("", 11, MUTED)
 	_jewel_reason.name = "JewelRestrictionLabel"
+	_jewel_reason.mouse_filter = Control.MOUSE_FILTER_PASS
 	details.add_child(_jewel_reason)
 	details.add_child(HSeparator.new())
 	var stats_heading: Label = _label("当前构筑合计", 11, MUTED)
@@ -309,7 +326,9 @@ func _build_ui() -> void:
 	legend.add_child(_label("○ 可分配", 11, CYAN))
 	legend.add_child(_label("● 未连接", 11, MUTED))
 	legend.add_child(_label("◈ 珠宝孔", 11, Color("b8a4e8")))
-	var tip: Label = _label("从启明之核沿连线探索六大星域", 11, MUTED)
+	var tip: Label = _label("⌁ 寻枝覆盖 / 点亮", 11, GOLD)
+	tip.mouse_filter = Control.MOUSE_FILTER_PASS
+	tip.tooltip_text = "淡金范围与枝形标记：特殊珠宝覆盖\n完整枝形：借助寻枝晶玉远程点亮；每个节点仍消耗1点\n未激活的预览范围为灰色；先沿连线点亮珠宝孔"
 	tip.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	tip.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	legend.add_child(tip)
@@ -321,13 +340,20 @@ func _refresh_node() -> void:
 	var allocated: bool = _state.allocated_nodes.has(selected_node_id)
 	var kind_names: Dictionary = {"start": "起点", "small": "基础天赋", "notable": "核心天赋", "socket": "珠宝插槽"}
 	var status: String = "已点亮" if allocated else ("可分配" if _state.can_allocate(selected_node_id) else "未连接")
+	var remote: bool = tree_view._analysis.get("remote_nodes", []).has(selected_node_id)
+	if remote: status = "寻枝点亮"
 	_node_type.text = "%s  /  %s" % [kind_names.get(kind, "天赋"), status]
 	_node_type.add_theme_color_override("font_color", GOLD if allocated else (CYAN if _state.can_allocate(selected_node_id) else MUTED))
 	_node_title.text = str(node.get("name", selected_node_id))
 	_node_title.add_theme_color_override("font_color", GOLD if allocated else TEXT)
 	_node_description.text = str(node.get("description", ""))
+	_node_description.tooltip_text = _node_description.text
 	if kind == "socket" and _state.socketed_jewels.has(selected_node_id):
 		_node_description.text = "已镶嵌：" + _jewel_title(_state.get_jewel_at(selected_node_id))
+		_node_description.tooltip_text = Jewels.get_description(_state.get_jewel_at(selected_node_id))
+	elif kind == "socket":
+		_node_description.text = "空珠宝孔 · 选择珠宝镶嵌"
+		_node_description.tooltip_text = "沿已点连线连通起点后，可镶嵌一颗珠宝"
 	_allocate_button.disabled = not _state.can_allocate(selected_node_id)
 	_allocate_button.text = "已点亮" if allocated else "分配  1 点"
 	_refund_button.disabled = not _state.can_refund(selected_node_id)
@@ -339,6 +365,13 @@ func _refresh_node() -> void:
 		_node_reason.text = _state.refund_reason(selected_node_id) if _refund_button.disabled else "可免费退还 1 点" + ("，珠宝自动回到背包" if kind == "socket" else "；不会切断其他天赋")
 	else:
 		_node_reason.text = _state.allocation_reason(selected_node_id) if _allocate_button.disabled else "沿相连的天赋分配 · 双击节点也可点亮"
+	if remote:
+		_node_reason.text = "寻枝支持 · 已消耗 1 点"
+	elif not allocated and tree_view._analysis.get("granted_by", {}).has(selected_node_id):
+		_node_reason.text = "寻枝覆盖 · 分配仍需 1 点" if not _allocate_button.disabled else _state.allocation_reason(selected_node_id)
+	_node_reason.tooltip_text = _node_reason.text + "\n" + _state.refund_reason(selected_node_id) if allocated else _node_reason.text
+	if _node_reason.text.length() > 30:
+		_node_reason.text = "操作受限 · 悬停查看原因"
 
 
 func _refresh_jewel_inventory(force: bool = false) -> void:
@@ -355,12 +388,18 @@ func _refresh_jewel_inventory(force: bool = false) -> void:
 	for id: String in _state.jewels:
 		var jewel: Dictionary = _state.jewels[id] as Dictionary
 		var location: String = _state.jewel_location(id)
-		if (_jewel_filter.selected == 1 and location != "inventory") or (_jewel_filter.selected == 2 and location == "inventory") or (_jewel_filter.selected == 3 and str(jewel.get("rarity", "")) != "rare"):
+		if (_jewel_filter.selected == 1 and location != "inventory") or (_jewel_filter.selected == 2 and location == "inventory") or (_jewel_filter.selected == 3 and str(jewel.get("rarity", "")) != "rare") or (_jewel_filter.selected == 4 and str(jewel.get("rarity", "")) != "special"):
 			continue
 		visible_count += 1
 		var button: Button = _button("", "Jewel_" + id, select_jewel.bind(id))
 		button.custom_minimum_size.y = 40
-		button.text = "%s\n%s" % [_jewel_title(jewel), "背包" if location == "inventory" else "已镶嵌 · " + _node_name(location)]
+		button.text = "　　%s\n　　%s" % [_jewel_title(jewel), "背包" if location == "inventory" else "已镶嵌 · " + _node_name(location)]
+		var icon := JewelIcon.new()
+		icon.name = "JewelEmblem"
+		icon.jewel = jewel
+		icon.position = Vector2(5, 6)
+		icon.size = Vector2(26, 28)
+		button.add_child(icon)
 		button.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		button.add_theme_font_size_override("font_size", 12)
 		button.add_theme_color_override("font_color", Jewels.get_color(jewel))
@@ -379,15 +418,29 @@ func _refresh_jewel_detail() -> void:
 	var node: Dictionary = Passives.get_nodes().get(selected_node_id, {}) as Dictionary
 	var is_socket: bool = str(node.get("type", "")) == "socket"
 	var current: String = str(_state.socketed_jewels.get(selected_node_id, ""))
-	_jewel_name.text = "选择一颗珠宝查看词缀" if jewel.is_empty() else _jewel_title(jewel)
+	_jewel_name.text = "选择一颗珠宝查看词缀" if jewel.is_empty() else "　　" + _jewel_title(jewel)
+	_jewel_detail_icon.set("jewel", jewel)
+	_jewel_detail_icon.visible = not jewel.is_empty()
 	_jewel_name.add_theme_color_override("font_color", MUTED if jewel.is_empty() else Jewels.get_color(jewel))
-	_jewel_affixes.text = "基础珠宝的全部词缀在镶嵌后生效" if jewel.is_empty() else Jewels.get_description(jewel)
+	var rule: Dictionary = Jewels.allocation_rule(jewel)
+	if jewel.is_empty():
+		_jewel_affixes.text = "选择珠宝 · 悬停查看完整效果"
+	elif not rule.is_empty():
+		_jewel_affixes.text = "寻枝范围 %d · 每个天赋仍需 1 点" % int(rule.radius)
+	else:
+		_jewel_affixes.text = "%d 条属性词缀 · 悬停查看" % jewel.get("affixes", []).size()
+	_jewel_affixes.tooltip_text = Jewels.get_description(jewel)
+	_jewel_name.tooltip_text = _jewel_title(jewel) + "\n" + Jewels.get_description(jewel) if not jewel.is_empty() else ""
+	tree_view.preview_jewel(selected_node_id if is_socket else "", selected_jewel_id)
 	var location: String = "" if jewel.is_empty() else _state.jewel_location(selected_jewel_id)
+	if not rule.is_empty() and is_socket and current != selected_jewel_id:
+		_jewel_affixes.text = "范围预览 %d · 镶嵌后生效" % int(rule.radius)
 	_jewel_location.text = "每击败 20 名敌人获得珠宝" if jewel.is_empty() else ("所在位置：背包" if location == "inventory" else "所在位置：" + _node_name(location))
 	_insert_button.disabled = jewel.is_empty() or not _state.socket_reason(selected_node_id, selected_jewel_id).is_empty()
 	_insert_button.text = "已镶嵌" if not current.is_empty() and current == selected_jewel_id else ("替换 / 交换" if not current.is_empty() else "镶嵌所选")
-	_remove_button.disabled = current.is_empty()
-	_remove_button.tooltip_text = "将所选插槽内的珠宝取回背包"
+	var remove_reason: String = _state.remove_jewel_reason(selected_node_id)
+	_remove_button.disabled = not remove_reason.is_empty()
+	_remove_button.tooltip_text = remove_reason if not remove_reason.is_empty() else "将所选插槽内的珠宝取回背包"
 	_discard_button.disabled = jewel.is_empty() or location != "inventory"
 	_discard_button.text = "确认？" if _discard_pending == selected_jewel_id and not selected_jewel_id.is_empty() else "丢弃"
 	_discard_button.tooltip_text = "仅能丢弃背包珠宝；再次点击确认后无法恢复"
@@ -405,9 +458,16 @@ func _refresh_jewel_detail() -> void:
 		elif _insert_button.disabled:
 			_jewel_reason.text = _state.socket_reason(selected_node_id, selected_jewel_id)
 		elif current.is_empty():
-			_jewel_reason.text = "全部基础珠宝通用 · 镶嵌和取回均免费"
+			_jewel_reason.text = "范围天赋仍需 1 点 · 不可向外延伸" if not rule.is_empty() else "珠宝词缀镶嵌后生效 · 操作免费"
 		else:
 			_jewel_reason.text = "替换后原珠宝回到背包；两个插槽之间可交换"
+	if not current.is_empty() and not remove_reason.is_empty():
+		_jewel_reason.text = "取回受限 · 先退还依赖天赋"
+		_jewel_reason.tooltip_text = remove_reason
+	else:
+		_jewel_reason.tooltip_text = _jewel_reason.text
+		if _jewel_reason.text.length() > 30:
+			_jewel_reason.text = "暂不可镶嵌 · 悬停查看原因" if _insert_button.disabled else "镶嵌提示 · 悬停查看"
 
 
 func _node_name(node_id: String) -> String:

@@ -26,7 +26,7 @@ func _initialize() -> void:
 func _run() -> void:
 	_case(_test_typed_stats_and_sources, "all four fixed-point affixes, tiers, scopes and equipped-only sources")
 	_case(_test_detached_views, "detached definitions, metadata, sources and snapshots")
-	_case(_test_schema_six_roundtrip, "schema-six exact records and no persisted derived caches")
+	_case(_test_current_schema_roundtrip, "current-schema exact records and no persisted derived caches")
 	_case(_test_true_v5_migration, "literal v5 fixture, safe save-as, byte-exact backups and conflicts")
 	_case(_test_schema_rejection, "old-schema vocabulary gates and atomic rejection")
 	_case(_test_failed_load_save_protection, "failed-load byte preservation and explicitly restored-save unlocking")
@@ -204,14 +204,14 @@ func _test_detached_views() -> void:
 	_finished = true
 
 
-func _test_schema_six_roundtrip() -> void:
+func _test_current_schema_roundtrip() -> void:
 	var state = _rich_state()
 	var before: Dictionary = state._snapshot()
-	_expect(before.version == 6 and before.size() == SAVE_FIELDS.size() and before.has_all(SAVE_FIELDS), "Schema-six has exactly the same persisted field allowlist as v5")
+	_expect(before.version == Model.SAVE_VERSION and before.size() == SAVE_FIELDS.size() and before.has_all(SAVE_FIELDS), "Current schema has exactly the same persisted field allowlist as v5")
 	var cast_before: Dictionary = state.get_skill_cast("tornado")
 	_expect(state._snapshot() == before, "Compiling typed sources and packets does not add persistent caches")
 	var path: String = "user://typed_state_v6.json"
-	_expect(state.save_build(path) == OK, "Schema-six typed build saves")
+	_expect(state.save_build(path) == OK, "Current schema typed build saves")
 	var raw: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
 	_expect(raw is Dictionary and raw.size() == SAVE_FIELDS.size() and raw.has_all(SAVE_FIELDS), "Disk JSON contains only the sixteen persisted build fields")
 	for id: String in raw.equipment_instances:
@@ -269,18 +269,18 @@ func _test_true_v5_migration() -> void:
 	changes = 0
 	_expect(loaded.load_build(path) and loaded.migrated_from_v5 and changes == 1, "Real v5 file migrates with one successful change signal")
 	var expected: Dictionary = legacy.duplicate(true)
-	expected.version = 6
+	expected.version = Model.SAVE_VERSION
 	_expect(loaded._snapshot() == expected, "Migration changes only version: no auto-equip, grants, rerolls, changed supports, positions or counters")
 	_expect(loaded.get_combat_snapshot().added_damage == ZERO_ADDED and loaded.get_combat_snapshot().added_damage_sources.is_empty(), "Legacy damage stays scalar with zero typed additions")
 	_expect(FileAccess.get_file_as_string(path) == bytes and not FileAccess.file_exists(backup), "Read-only migration preserves original bytes without premature backup")
 	var copy: String = "user://typed_state_legacy_copy.json"
 	_expect(loaded.save_build(copy) == OK and FileAccess.get_file_as_string(path) == bytes and not FileAccess.file_exists(backup), "Save-as writes current schema without consuming pending original-byte protection")
 	var copied = Model.new()
-	_expect(copied.load_build(copy) and copied._snapshot() == expected and not copied.migrated_from_v5, "Save-as destination is a complete valid v6 build")
+	_expect(copied.load_build(copy) and copied._snapshot() == expected and not copied.migrated_from_v5, "Save-as destination is a complete valid current-schema build")
 	var new_id: String = loaded.award_equipment(_rng(), 16, "rare", "expanded")
 	_expect(new_id == "gear_000043" and loaded.equipped == legacy.equipped, "Opt-in postmigration award uses the saved serial and never auto-equips")
 	expected = loaded._snapshot()
-	_expect(loaded.save_build(path) == OK and FileAccess.get_file_as_string(backup) == bytes and loaded.migration_backup_path == backup, "First same-path save preserves byte-exact v5 source before committing v6")
+	_expect(loaded.save_build(path) == OK and FileAccess.get_file_as_string(backup) == bytes and loaded.migration_backup_path == backup, "First same-path save preserves byte-exact v5 source before committing current schema")
 	var reread = Model.new()
 	_expect(reread.load_build(path) and reread._snapshot() == expected and not reread.migrated_from_v5, "Migrated current-schema reload preserves old rolls plus the explicitly new expanded award")
 	_expect(loaded.save_build(path) == OK and reread.save_build(path) == OK and FileAccess.get_file_as_string(backup) == bytes, "Repeated writes from migrated and reloaded state cannot replace original backup")

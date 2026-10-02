@@ -90,8 +90,8 @@ func _ready() -> void:
 	if not state.last_load_error.is_empty():
 		hud.open_panel("pause")
 		hud.notify(state.last_load_error)
-	elif state.migrated_from_v1 or state.migrated_from_v2 or state.migrated_from_v3 or state.migrated_from_v4 or state.migrated_from_v5:
-		hud.open_panel("talents" if state.migrated_from_v1 else "skills" if state.migrated_from_v4 or state.migrated_from_v5 else "inventory" if state.migrated_from_v3 else "combat")
+	elif state.migrated_from_v1 or state.migrated_from_v2 or state.migrated_from_v3 or state.migrated_from_v4 or state.migrated_from_v5 or state.migrated_from_v6:
+		hud.open_panel("talents" if state.migrated_from_v1 or state.migrated_from_v6 else "skills" if state.migrated_from_v4 or state.migrated_from_v5 else "inventory" if state.migrated_from_v3 else "combat")
 		hud.notify(state.migration_message)
 	else:
 		hud.notify("F7 怪物机制与分裂试验 · F6 龙卷组合 · T 天赋星图")
@@ -210,6 +210,8 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	elif key == KEY_F6:
 		if alive:
 			hud.open_panel("combat")
+	elif key == KEY_F8:
+		open_reference_catalog()
 	elif key == KEY_K:
 		if alive:
 			hud.open_panel("skills")
@@ -742,6 +744,8 @@ func _damage_enemy(enemy: Dictionary, amount: float, color: Color, slow: float =
 			_award_kill_equipment(enemy)
 		if eligible and reward_kills % 20 == 0:
 			_award_kill_jewel()
+		if eligible and enemy.get("rarity", "") == "boss":
+			_award_kill_special_jewel()
 		if eligible and reward_kills % 4 == 0:
 			pickups.append({"pos": Vector2(enemy.pos), "life": 22.0})
 		for i: int in range(8):
@@ -771,6 +775,43 @@ func _award_kill_jewel() -> void:
 	hud.notify("获得珠宝：%s · 按 T 查看并镶嵌" % Jewels.display_name(jewel))
 	_add_ring(player_pos, 110.0, Color("dba3f2"), 0.9)
 	_add_text(player_pos + Vector2(0, -58), "+ 珠宝", Color("dba3f2"))
+
+
+func _award_kill_special_jewel() -> void:
+	# Boss roots use the same once-only death gate; legacy random rolls are untouched.
+	var jewel_id: String = state.award_special_jewel()
+	if jewel_id.is_empty():
+		hud.notify("首领珠宝未领取：背包保留空间不足；已有物品完整保留")
+		return
+	hud.notify("获得寻枝晶玉 · 在 T 中选择已连通的珠宝孔查看覆盖")
+	_add_ring(player_pos, 100.0, Color("d8b577"), 0.8)
+	_add_text(player_pos + Vector2(0, -58), "+ 寻枝晶玉", Color("d8b577"))
+
+
+func reference_catalog_path() -> String:
+	# Documentation is outside the PCK so a standard browser can open it offline.
+	var paths: Array[String] = [
+		ProjectSettings.globalize_path("res://docs/reference/index.html"),
+		OS.get_executable_path().get_base_dir().path_join("docs/reference/index.html"),
+	]
+	for path: String in paths:
+		if path.is_absolute_path() and FileAccess.file_exists(path):
+			return path
+	return ""
+
+
+func open_reference_catalog() -> bool:
+	if not hud.is_blocking() and alive:
+		hud.open_panel("pause")
+	var path: String = reference_catalog_path()
+	if path.is_empty():
+		hud.notify("未找到离线图鉴，请保留游戏包中的 docs/reference 文件夹")
+		return false
+	var error: Error = OS.shell_open(path)
+	if error != OK:
+		hud.notify("图鉴未能打开，可手动双击 docs/reference/index.html")
+		return false
+	return true
 
 
 func hit_player(amount: float) -> void:
