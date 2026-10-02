@@ -1,6 +1,6 @@
 class_name ProjectileSupportRules
 extends RefCounted
-## Optional pure extension. Not registered in the live skill list or save schema.
+## Pure extension registered through SupportRegistry; no state or save writes.
 ## Pass a fresh legacy-compiled bolt/frost recipe and the COMPLETE link list once.
 ## Legacy links are validated here, but only extension effects are returned.
 const Data = preload("res://scripts/game_data.gd")

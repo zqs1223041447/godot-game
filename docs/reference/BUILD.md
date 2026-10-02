@@ -12,7 +12,7 @@ XDG_DATA_HOME=/tmp/reference-build/data XDG_CONFIG_HOME=/tmp/reference-build/con
 python3 tools/build_reference.py
 ```
 
-第一步直接消费 EquipmentCatalog 的 canonical all_base_ids/all_affix_ids、pool_profiles 与 current_loot_profile、GameData、SupportCatalog、JewelData、PassiveData、MechanicRegistry 和 MonsterCatalog。技能示例取自新建 BuildState 与三件龙卷机制装备配置，经 SkillCompiler、DamageResolver 和 DamagePreview 生成。关联词缀也通过实际编译结果比较建立。覆盖示例使用 AllocationRules，不在浏览器重写分配合法性。受击图、原始/有效火抗与逐次命中已知目标示例使用 DefenseRules、DamageResolver 和实际 MonsterCatalog；不会在 HTML 生成器中重新计算减伤。灰烬守卫出现/奖励条件来自生产 fire_encounter_policy。其上限、接触分量、词缀数值和当前掉落权重是本游戏原创平衡，不宣称为 PoE 源规则。
+第一步直接消费 EquipmentCatalog 的 canonical all_base_ids/all_affix_ids、pool_profiles 与 current_loot_profile、GameData、SupportRegistry、JewelData、PassiveData、MechanicRegistry 和 MonsterCatalog。技能示例取自新建 BuildState 与三件龙卷机制装备配置，经 SkillCompiler、DamageResolver 和 DamagePreview 生成。关联词缀也通过实际编译结果比较建立。覆盖示例使用 AllocationRules，不在浏览器重写分配合法性。受击图、原始/有效火抗与逐次命中已知目标示例使用 DefenseRules、DamageResolver 和实际 MonsterCatalog；不会在 HTML 生成器中重新计算减伤。灰烬守卫出现/奖励条件来自生产 fire_encounter_policy。其上限、接触分量、词缀数值和当前掉落权重是本游戏原创平衡，不宣称为 PoE 源规则。
 
 `catalog.json` 是可复现的运行时导出，不含生成时间。`reference.css` / `reference.js` 是 HTML 构建输入，运行页面时无需单独载入。PNG 和 `art/manifest.json` 由 `tools/export_reference_art.gd` 导出；此脚本的本机渲染要求和参数见其文件头。修改运行时、版本或素材清单后应重跑两步。
 

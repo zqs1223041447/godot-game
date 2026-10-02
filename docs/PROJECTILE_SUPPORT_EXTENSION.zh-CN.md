@@ -1,16 +1,8 @@
-# 贯穿辅助扩展：独立模块与接入契约
+# v0.14 贯穿辅助：运行规则与接入边界
 
-本分支提供可测试、可接入的纯数据扩展，**尚未接入游戏的 K 列表、施放入口或版本存档**。它不代表贯穿辅助已在游戏中上线；不包含合并或发布。
+贯穿已接入统一编译、K选择、实际施放、热键栏预览与v10存档。飞弹/冰霜多穿透两次，投射物命中乘0.85、耗魔乘1.20；仍共用两辅助槽。这些数值是本游戏原创可调平衡。普攻、龙卷与独立爆炸保持原行为，界面沿用批准的手绘魔法手札布局。
 
-基线为远端 `main` 的 v0.13 源码提交 `a4a306a6d8c14320fce383dccf6ad7ca40836757`，并在 v0.12 源码提交 `35df85d12aab52cd6371ad5f9f860d2181e5bbf2` 上验证独立套件兼容。v0.13 在开始实现前已到达，因此直接从该提交建立独立分支，无需事后 rebase。
-
-交付仅有三个新增文件：
-
-- `scripts/combat/projectile_support_rules.gd`：纯扩展、元数据、校验。
-- `tests/projectile_support_rules_test.gd`：独立测试及真实运行时夹具。
-- 本文：主集成接入契约、验证方式及边界。
-
-没有修改 `SupportCatalog`、`SkillCompiler`、`GameData`、`BuildState`、`main.gd`、`project.godot`、既有 UI、图鉴生成器或 `tools/validate.sh`。导入及运行测试均在临时验证副本内进行；生成的 `.uid` 不属于本次三个文件的交付。
+纯扩展来自独立分支最终提交 `5a93e90a027f430aaec410cad5cb64eae53dda01`；统一接入通过 `scripts/combat/support_registry.gd`。实际兼容性、预览与执行均消费同一规则定义，不在UI复制伤害公式。
 
 ## 同源元数据与数值
 
@@ -73,52 +65,23 @@ static func compile_extension(skill_id: Variant, recipe: Variant, support_ids: V
 
 失败不返回部分加穿透配方或部分伤害修饰器，调用方不能忽略 `error` 后继续支付或施放。空辅助也会检查配方。数字拒绝布尔、字符串、NaN、无穷、非法小数穿透等；整数值的 JSON 浮点数沿用原编译器语义。有限穿透上限为原配方协议的 `100`，应用后越界直接失败，不静默截断。基础 `pierce = -1` 的无扩展输入可按原样深复制；装配贯穿时明确拒绝无限穿透。
 
-## 后续主集成顺序
+## 统一编译与存档
 
-下面是接缝示例，**本分支没有把它写入现有编译器或施放入口**。主集成应在统一编译路径实现此组合，让预览与真实施放共用一个结果；所有编译校验先于扣魔力、启动冷却、分配 cast/projectile ID 和创建载体。
+- `SupportRegistry` 包装原 `SupportCatalog` 和本扩展，依赖保持单向；原目录不反向引用扩展，原两种辅助定义保持。
+- `SkillCompiler` 先验证完整列表和基础快照，再执行旧辅助，随后把当前配方与完整ID列表交给扩展一次。只追加扩展修饰器和耗魔倍率，原始伤害包不重复缩放。
+- 同一编译结果用于K/热键栏预览、施放扣费与实际载体，F6可核对真实伤害记录。所有校验及容量接纳都在扣魔力、冷却和创建载体前；飞行中的快照不受后续辅助变更影响。
+- `BuildState`、K和图鉴使用统一目录；原有两槽、稳定ID、技能换槽语义保持。新增贯穿原画供运行界面与图鉴复用；详情tooltip显示真实穿透数及去返共享的总命中容量。
+- 存档升至v10，v1–v9均拒绝新ID注入。合法v9首次原路径覆盖前保存逐字节 `.v9-backup.json`；旧装备、掷值、辅助、天赋、珠宝和位置保持，不自动装配贯穿。
+- v10仅扩展辅助词汇，装备词汇仍为9，用明确的 `{10:9}` 对照；未来v11不因此获得读取或写入资格。顶层16字段与装备5字段协议不变。
 
-```gdscript
-# Compiler = 原 SkillCompiler；Legacy = 原 SupportCatalog；Rules = 本扩展。
-func compile_with_projectile_extension(skill_id: String, snapshot: Dictionary,
-        all_ids: Variant) -> Dictionary:
-    if not all_ids is Array:
-        return {"ok": false, "error": "辅助列表必须是数组"}
-    if not skill_id in ["bolt", "frost"]:
-        return Compiler.compile_skill(skill_id, snapshot, all_ids)
+| 完整列表 | 穿透变化 | 命中独立倍率 | 耗魔倍率 |
+| --- | --- | --- | --- |
+| `pierce` | +2 | 0.85 | 1.20 |
+| `volley, pierce` | +2，另由散束增加2枚初始弹 | 0.80 × 0.85 = 0.68 | 1.30 × 1.20 = 1.56 |
+| `focus, pierce` | +2 | 1.25 × 0.85 = 1.0625 | 1.20 × 1.20 = 1.44 |
+| `volley, focus, pierce` | 超过两槽，整次拒绝 | 无效果 | 不扣费 |
 
-    var legacy_ids: Array = []
-    for id: Variant in all_ids:
-        if id is String and Legacy.SUPPORTS.has(id):
-            legacy_ids.append(id)
-    # 原编译器本身是纯编译，没有付费、冷却或发射副作用。
-    var base: Dictionary = Compiler.compile_skill(skill_id, snapshot, legacy_ids)
-    if not base.ok:
-        return base
-    # 保留完整列表，因此未知 ID/第三个槽位不会被上面的路由吞掉。
-    var extension: Dictionary = Rules.compile_extension(skill_id, base.recipe, all_ids)
-    if not extension.error.is_empty():
-        return {"ok": false, "error": extension.error}
-
-    base.recipe = extension.recipe
-    base.snapshot.modifiers.append_array(extension.modifiers)
-    base.mana *= float(extension.mana_multiplier)
-    base.support_ids = all_ids.duplicate()
-    base.support_ids.sort()
-    return base
-```
-
-将 `base.recipe.pierce` 传给现有 `_shoot` / `ProjectileRuntime.make_projectile`，并传入装好扩展修饰器的 `base.snapshot`。不要改 `base.packets` 的原始伤害点数，避免 `DamageResolver` 再乘一次时重复减伤。原编译器的 `compiled_packets` / `compiled_skill_id` 标记继续保护快照重入；扩展的配方标记保护独立配方重入。
-
-| 完整列表 | 穿透变化 | 初始数量变化 | 命中独立倍率 | 耗魔倍率 |
-| --- | --- | --- | --- | --- |
-| `pierce` | +2 | 无 | 0.85 | 1.20 |
-| `volley, pierce` | +2 | 由原 volley 增加 2 | 0.80 × 0.85 = 0.68 | 1.30 × 1.20 = 1.56 |
-| `focus, pierce` | +2 | 无 | 1.25 × 0.85 = 1.0625 | 1.20 × 1.20 = 1.44 |
-| `volley, focus, pierce` | 拒绝 | 拒绝 | 拒绝 | 超过两个槽位，不产生编译效果 |
-
-`requires` 中的 `finite_projectile_pierce` 是扩展资格描述，**不是**新增伤害标签。现有 `SupportCatalog.definition_error` 尚不认识这个能力或 `add_pierce`，不能直接把扩展元数据塞入原目录而声称完成集成。后续应统一资格查询和支持列表验证入口，再接 K 列表；列表保存仍使用稳定 ID `pierce`，由主集成负责存档版本、迁移与保护策略。本模块既不提升版本也不读写存档。
-
-主集成可由单向 `SupportRegistry` 包装原 `SupportCatalog` 与本扩展，再按上面的顺序先编译旧辅助、后追加扩展。`ProjectileSupportRules` 已经 preload 原目录作为 `Legacy`，因此原 `SupportCatalog` 不应反向 preload 注册表或本扩展，避免加载循环。原辅助的 mana/more 只由 `SkillCompiler` 产生，扩展返回的 mana/more 只追加一次；带 `_projectile_support_ids` 的配方及带编译标记的快照不得重新送入编译入口。
+`finite_projectile_pierce` 是资格描述，不是伤害标签。图鉴按所有合法0/1/2辅助组合导出，三种可选项不会被错误组装成三槽示例。贯穿图中的直线六靶只发单枚载体，命中点由实际 `ProjectileRuntime.advance` 事件生成：飞弹2→4，冰霜3→5；不是每次施放总命中数或DPS。
 
 ## 运行时边界
 
@@ -128,44 +91,12 @@ func compile_with_projectile_extension(skill_id: String, snapshot: Dictionary,
 - 自然射程结束或原始寿命到期可按原装备效果产生一次独立爆炸。寿命与射程同刻时寿命优先，寿命截止点上的接触不算命中；取消载体不爆炸。
 - 贯穿修饰器只匹配本技能的 `hit + projectile`。同技能独立爆炸拥有自身 `hit + area + secondary + explosion` 标签，因此伤害不变。普攻、其他技能及龙卷的无限穿透、分裂、伤害均不受影响。
 
-## 独立验证与证据
+## 验收证据与范围
 
-验证引擎：`4.6.3.stable.official.7d41c59c4`。在独立 Linux XDG 目录下运行，避免接触玩家的存档和设置。独立套件使用真实 `SkillCompiler`、`DamageResolver`、`ProjectileRuntime`，不使用替身来计数碰撞。
+Godot 4.6.3：独立扩展999、原编译319、真实场景843、K行为及布局234项通过。场景测试验证三种辅助组合、真实串列碰撞、去返共享、同相位不重复、终点与爆炸、容量拒绝前不扣费、飞行快照、v1–v9注入拒绝、v9原字节迁移和未来v11保护。完整清单见 [贯穿验收](qa/PIERCE_ACCEPTANCE.zh-CN.md)。
 
-```bash
-validation_dir="$(mktemp -d /tmp/projectile-support-test.XXXXXX)"
-export XDG_DATA_HOME="$validation_dir/data"
-export XDG_CONFIG_HOME="$validation_dir/config"
-export XDG_CACHE_HOME="$validation_dir/cache"
-mkdir -p "$XDG_DATA_HOME" "$XDG_CONFIG_HOME" "$XDG_CACHE_HOME/fontconfig"
-godot --headless --path . --script res://tests/projectile_support_rules_test.gd \
-  > "$validation_dir/test.log" 2>&1
-result=$?
-cat "$validation_dir/test.log"
-test "$result" -eq 0 && ! rg '(^|[[:space:]])(SCRIPT ERROR:|ERROR:)' "$validation_dir/test.log"
-```
+云端Linux原生鼠键：实际按K、滚动和点击添加，飞弹预览41.60→35.36、耗魔7→8.4，自动保存完整snapshot匹配；实际按1发出3枚飞弹，其中一枚连续命中4只原数值巡游体，每次35.36，实际扣魔力8.4。夹具仅固定站位、关闭自动攻击和环境刷怪、去出生暖机、在操作/截图时持住模拟；无改生命、增伤或无敌覆盖。
 
-Godot 可能输出脚本错误却返回退出码 0，因此同时检查日志。需要进行完整项目导入时，请在临时 checkout 中运行 `godot --headless --editor --import`；运行现有完整回归使用 `bash tools/validate.sh`。原 `validate.sh` 未注册新套件，主集成后应补上测试入口。
+720p/2K的UI110%与字体120%真实渲染已检查，原垂直滚动可展示完整贯穿卡和按钮。图鉴包含40张同源原生PNG及真实碰撞演示图。浏览器渲染/交互和Windows原生GUI仍未验收，不把Linux图形与静态检查等同于这些结果。
 
-前次交付已执行的独立套件结果：
-
-| 基线 | 结果 |
-| --- | --- |
-| v0.13 `a4a306a` + 本扩展 | `Projectile support extension: 998 checks, 0 failures` |
-| v0.12 `35df85d` + 同一模块/测试 | `Projectile support extension: 998 checks, 0 failures` |
-
-覆盖元数据深复制、所有字段完整校验、未知/重复/超槽位辅助、非法类型/非有限数/越界、无限穿透拒绝、配方重入、失败不产生部分效果、原辅助组合顺序无关，以及真实串列敌人命中次数。串列夹具使用实际默认速度、射程 `650`、寿命 `1.7`、半径 `5.5`，同时跑空间索引和全扫描、单帧和分帧；精确相位与终点测试使用显式固定速度和零半径来构造可核算的边界。另验证活动载体冻结快照、普攻、龙卷分裂及独立爆炸。
-
-2026-10-02 本轮独立审查从已 fetch 并核验的 `61af145e5b05601c36119731799a87eec74a48ab` 继续，未发现需要修改扩展实现的缺陷。仅补充全局 RNG 流保持不变的边界检查，覆盖整套成功、失败、组合与真实运行时夹具；在临时副本中向扩展入口注入一次 `randi()` 后，该检查按预期成为唯一失败，恢复原实现后通过。飞弹/冰霜的真实基础穿透加二、投射物命中总降 15%、独立爆炸和普攻排除、龙卷无限穿透拒绝、完整列表验证、重入及旧辅助 mana/more 不重复应用均由原有夹具复核。
-
-| 本轮针对性验证 | 结果 |
-| --- | --- |
-| 修改前扩展基线 | `998 checks, 0 failures` |
-| 补充 RNG 检查后扩展 | `999 checks, 0 failures` |
-| 原 `skill_compiler_test.gd` | `319 checks, 0 failures` |
-
-通过的套件均核验退出码和日志，无 `SCRIPT ERROR:` 或 `ERROR:`。本轮仅在临时验证副本和隔离 XDG 目录运行；日志保存在本轮云环境 `/tmp/projectile-review.L1ZE4n/baseline.log`、`/tmp/projectile-review.L1ZE4n/final-extension.log`、`/tmp/projectile-review.L1ZE4n/skill-compiler.log`，预期失败的 RNG 负对照单独保存为 `/tmp/projectile-review.L1ZE4n/rng-negative-control.log`。
-
-此前完整回归**未完成**：已通过运行到 `skill_support_ui_test.gd` 的检查（含原辅助集成 733 项、原辅助 UI 186 项），随后按停止指令在 `equipment_soak_test.gd` 运行期间终止长回归，余下检查未跑。前次完整日志保存在当时的云环境 `/tmp/projectile-full-validation.log`；独立套件日志为 `/tmp/projectile-extension-test.log` 和 `/tmp/projectile-v012-test.log`。本轮没有重跑完整导入或长回归，留待统一主集成；没有进行游戏中的贯穿 K 列表交互、存档迁移或发布验证，因为这些入口尚未接入，不应把独立运行时测试称为游戏集成已完成。
-
-本轮执行配置的**请求值**为 `model=gpt-6.1-sol`、`reasoning_effort=max`、标准速度、禁用 Fast；平台未暴露实际主执行模型、服务路由或速度遥测，不能将请求值当成后端证明。本轮未派发模型子任务，也没有执行额度购买或模型套餐变更操作。
+完整回归以本版本发布说明与冻结日志为准。使用 `bash tools/validate.sh` 执行，新增扩展/场景/UI套件已接入；写盘测试须使用独立userdata，Windows不得把XDG变量当作隔离。

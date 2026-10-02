@@ -10,7 +10,7 @@ ROOT=Path(__file__).resolve().parents[1]
 REF=ROOT/'docs/reference'
 class Inspector(HTMLParser):
     def __init__(self):
-        super().__init__(); self.ids=[]; self.links=[]; self.assets=[]; self.viewbox=None; self.node_ids=[]; self.trace_values={}; self.weapon_values={}
+        super().__init__(); self.ids=[]; self.links=[]; self.assets=[]; self.viewbox=None; self.node_ids=[]; self.trace_values={}; self.weapon_values={}; self.pierce_hits={}
     def handle_starttag(self,tag,attrs):
         a=dict(attrs)
         if 'id' in a:self.ids.append(a['id'])
@@ -20,6 +20,7 @@ class Inspector(HTMLParser):
             if url:self.assets.append(url)
         if tag=='svg' and a.get('id')=='passive-map':self.viewbox=list(map(float,a['viewbox'].split()))
         if 'data-node' in a:self.node_ids.append(a['data-node'])
+        if 'data-pierce-hits' in a:self.pierce_hits[a['data-pierce-hits']]=int(a['data-value'])
         if 'data-weapon-trace' in a:self.weapon_values[a['data-weapon-trace']]=float(a['data-value'])
         if 'data-trace-value' in a:self.trace_values[a['data-trace-value']]=float(a['data-value'])
 
@@ -27,6 +28,7 @@ def main():
     source=(REF/'index.html').read_text()
     inspector=Inspector(); inspector.feed(source)
     data=json.loads((REF/'catalog.json').read_text())
+    assert inspector.pierce_hits == {f'{skill}-{mode}':len(sample['observed_hits']) for skill,pair in data['projectile_support_examples']['skills'].items() for mode,sample in pair.items()}, 'Pierce diagram differs from actual collision events'
     assert not [x for x,n in Counter(inspector.ids).items() if n>1], 'Duplicate document IDs'
     assert not [x for x in inspector.links if x.startswith('#') and x[1:] not in inspector.ids], 'Broken internal links'
     assert not [x for x in inspector.assets if '://' in x or x.startswith('//')], 'Network-dependent resource'
@@ -72,7 +74,7 @@ def main():
     assert 'font-size:16px' in (REF/'reference.css').read_text()
     spec=importlib.util.spec_from_file_location('generator',ROOT/'tools/build_reference.py');module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
     art=json.loads((REF/'art/manifest.json').read_text())
-    assert art['status']=='complete' and art['written_images']==39 and len(art['entries'])==39
+    assert art['status']=='complete' and art['written_images']==40 and len(art['entries'])==40
     expected_art={(cat,key) for cat in ['skills','supports','equipment','fixed_items','jewels','monsters'] for key in data[cat]}
     actual_art={(('fixed_items' if row.get('entry_type')=='fixed_item' else row['category']),row['id']) for row in art['entries']}
     assert actual_art==expected_art, 'Art manifest omits or adds runtime entries'

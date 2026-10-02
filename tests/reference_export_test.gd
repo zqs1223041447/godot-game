@@ -26,6 +26,10 @@ func _initialize() -> void:
 	combinations[1].append("changed")
 	_expect(three_supports == ["volley", "focus", "pierce"], "Reference combinations do not alias the source list")
 	var current: Dictionary = Exporter.clean(Exporter.collect())
+	var piercing: Dictionary = current.projectile_support_examples.skills
+	_expect(piercing.bolt.before.observed_hits == [1, 2] and piercing.bolt.after.observed_hits == [1, 2, 3, 4], "Reference bolt diagram records actual two versus four collisions")
+	_expect(piercing.frost.before.observed_hits == [1, 2, 3] and piercing.frost.after.observed_hits == [1, 2, 3, 4, 5], "Reference frost diagram records actual three versus five collisions")
+	_expect(is_equal_approx(piercing.bolt.after.hit_damage, 35.36) and is_equal_approx(piercing.bolt.after.mana, 8.4), "Reference values match independent default-build arithmetic")
 	var existing: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://docs/reference/catalog.json"))
 	_expect(existing is Dictionary, "export parses")
 	if not existing is Dictionary:

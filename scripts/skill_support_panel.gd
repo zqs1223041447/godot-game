@@ -44,6 +44,8 @@ func setup(state: BuildState) -> void:
 	_selected_label = _label("", "SelectedSupportSkill", 20, GOLD)
 	selected_copy.add_child(_selected_label)
 	_preview_label = _label("", "SupportCastPreview", 16, CYAN)
+	# The detailed cast breakdown must receive hover while still passing scroll.
+	_preview_label.mouse_filter = Control.MOUSE_FILTER_PASS
 	selected_copy.add_child(_preview_label)
 	_slot_caption = _label("", "SupportSlotCaption", 14, MUTED)
 	selected_copy.add_child(_slot_caption)

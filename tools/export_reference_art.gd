@@ -136,7 +136,7 @@ func collect_rows() -> void:
 	for id: String in _sorted_ids(Data.SKILLS):
 		add_row("skills", id, Data.SKILLS[id].name, "SkillEmblem._draw", "GameData.SKILLS", "active_skill")
 	for id: String in _sorted_ids(Supports.SUPPORTS):
-		add_row("supports", id, Supports.SUPPORTS[id].name, "SkillEmblem._draw", "SupportCatalog.SUPPORTS", "support")
+		add_row("supports", id, Supports.SUPPORTS[id].name, "SkillEmblem._draw", "SupportRegistry.SUPPORTS", "support")
 	var base_ids: Array[String] = Gear.all_base_ids()
 	base_ids.sort()
 	for id: String in base_ids:
