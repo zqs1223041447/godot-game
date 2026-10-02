@@ -2,46 +2,61 @@ class_name GameData
 extends RefCounted
 ## Read-only catalogs shared by combat, menus, and build validation.
 
+## Capabilities gate support eligibility; they are never copied into damage-event tags.
+## Bolt/frost launch parameters live here; tornado keeps CombatData.TORNADO as authority.
+## The obsolete per-skill damage field was never a cast input and is intentionally absent.
 const SKILLS: Dictionary = {
 	"tornado": {
 		"name": "龙卷射击", "short_name": "龙卷", "icon": "VIII",
 		"description": "发射 3 枚母箭，每枚在射程终点分裂为 3 枚环形子箭。箭伤为物理 60% 与火焰 40%；子箭造成 70% 基础伤害。返回与爆炸由装备分别赋予。",
-		"mana": 18.0, "cooldown": 2.5, "damage": 18.0, "color": Color("a6e8aa"),
+		"mana": 18.0, "cooldown": 2.5, "color": Color("a6e8aa"),
+		"capabilities": ["initial_projectiles", "projectile_hit", "split_projectiles"],
 	},
 	"bolt": {
 		"name": "奥术飞弹", "short_name": "飞弹", "icon": "I",
 		"description": "发射三枚穿透飞弹，每枚造成 160% 伤害。", "mana": 7.0,
-		"cooldown": 0.8, "damage": 28.0, "color": Color("76c9ff"),
+		"cooldown": 0.8, "color": Color("76c9ff"),
+		"capabilities": ["initial_projectiles", "projectile_hit"],
+		"projectile_recipe": {"initial_count": 3, "spread": 0.16, "coefficient": 1.6,
+			"pierce": 1, "slow": 0.0, "speed": 780.0, "damage_type": "lightning"},
 	},
 	"frost": {
 		"name": "冰霜脉冲", "short_name": "冰霜", "icon": "II",
 		"description": "扇形发射五枚冰弹，造成 85% 伤害并减速 3 秒。", "mana": 16.0,
-		"cooldown": 4.0, "damage": 24.0, "color": Color("86edff"),
+		"cooldown": 4.0, "color": Color("86edff"),
+		"capabilities": ["initial_projectiles", "projectile_hit"],
+		"projectile_recipe": {"initial_count": 5, "spread": 0.14, "coefficient": 0.85,
+			"pierce": 2, "slow": 3.0, "speed": 520.0, "damage_type": "cold"},
 	},
 	"nova": {
 		"name": "奥能新星", "short_name": "新星", "icon": "III",
 		"description": "引爆周围 155 范围的奥能，造成 270% 伤害并击退。", "mana": 24.0,
-		"cooldown": 6.0, "damage": 60.0, "color": Color("c89bff"),
+		"cooldown": 6.0, "color": Color("c89bff"),
+		"capabilities": ["area_hit"],
 	},
 	"dash": {
 		"name": "闪光冲刺", "short_name": "冲刺", "icon": "IV",
 		"description": "沿移动方向冲刺 175 距离，免疫伤害 0.6 秒。", "mana": 12.0,
-		"cooldown": 3.0, "damage": 0.0, "color": Color("ffd27d"),
+		"cooldown": 3.0, "color": Color("ffd27d"),
+		"capabilities": ["movement"],
 	},
 	"ward": {
 		"name": "守护结界", "short_name": "结界", "icon": "V",
 		"description": "回复 75% 最大护盾，免疫伤害 0.8 秒。", "mana": 20.0,
-		"cooldown": 7.0, "damage": 0.0, "color": Color("77ecc5"),
+		"cooldown": 7.0, "color": Color("77ecc5"),
+		"capabilities": ["shield_recovery"],
 	},
 	"meteor": {
 		"name": "陨星坠落", "short_name": "陨星", "icon": "VI",
 		"description": "在最近敌人处引爆陨星，造成 430% 范围伤害。", "mana": 32.0,
-		"cooldown": 8.0, "damage": 100.0, "color": Color("ff9778"),
+		"cooldown": 8.0, "color": Color("ff9778"),
+		"capabilities": ["area_hit"],
 	},
 	"chain": {
 		"name": "连锁闪电", "short_name": "闪电", "icon": "VII",
 		"description": "闪电弹跳最多五个敌人，伤害从 220% 逐次递减。", "mana": 22.0,
-		"cooldown": 4.5, "damage": 42.0, "color": Color("ffeb88"),
+		"cooldown": 4.5, "color": Color("ffeb88"),
+		"capabilities": ["chain_hit"],
 	},
 }
 

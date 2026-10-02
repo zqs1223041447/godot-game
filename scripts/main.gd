@@ -2,6 +2,7 @@ extends Node2D
 ## First playable slice. BuildState owns progression; this node owns a single run.
 ## All combat positions use the 1280 × 720 logical canvas, independent of window size.
 
+const VisualCueRuntime = preload("res://scripts/visuals/combat_cues.gd")
 const Visuals = preload("res://scripts/visuals/arena_visuals.gd")
 const Presentation = preload("res://scripts/visuals/visual_settings.gd")
 const Build = preload("res://scripts/build_state.gd")
@@ -19,6 +20,7 @@ const MAX_ENEMIES := 55
 const MAX_PROJECTILES := 180
 const MAX_PARTICLES := 180
 
+var visual_cues = VisualCueRuntime.new()
 var visual_settings = Presentation.new()
 var monster_runtime = MonsterLifecycle.new()
 var reward_kills: int = 0
@@ -77,8 +79,8 @@ func _ready() -> void:
 	hud.setup(self)
 	_ready_complete = true
 	restart_run()
-	if state.migrated_from_v1 or state.migrated_from_v2 or state.migrated_from_v3:
-		hud.open_panel("talents" if state.migrated_from_v1 else "inventory" if state.migrated_from_v3 else "combat")
+	if state.migrated_from_v1 or state.migrated_from_v2 or state.migrated_from_v3 or state.migrated_from_v4:
+		hud.open_panel("talents" if state.migrated_from_v1 else "skills" if state.migrated_from_v4 else "inventory" if state.migrated_from_v3 else "combat")
 		hud.notify(state.migration_message)
 	else:
 		hud.notify("F7 怪物机制与分裂试验 · F6 龙卷组合 · T 天赋星图")
@@ -152,6 +154,7 @@ func restart_run() -> void:
 	floating_text.clear()
 	pickups.clear()
 	rings.clear()
+	visual_cues.reset()
 	cooldowns.clear()
 	for id: String in Data.SKILLS:
 		cooldowns[id] = 0.0
@@ -457,7 +460,7 @@ func _shoot(origin: Vector2, direction: Vector2, damage: float, color: Color,
 		skill_id: String = "basic", damage_type: String = "physical", context: Dictionary = {}) -> void:
 	if projectiles.size() >= MAX_PROJECTILES:
 		return
-	var snapshot: Dictionary = context.get("snapshot", state.get_combat_snapshot())
+	var snapshot: Dictionary = context["snapshot"] if context.has("snapshot") else state.get_combat_snapshot()
 	var cast_id: int = int(context.get("cast_id", 0))
 	if cast_id == 0:
 		cast_id = projectile_runtime.new_cast()
@@ -479,46 +482,53 @@ func cast_skill(index: int) -> bool:
 	if not Data.SKILLS.has(id):
 		return false
 	var skill: Dictionary = Data.SKILLS[id]
+	# Compile once before admission: preview, payment and execution share this result.
+	var compiled: Dictionary = state.get_skill_cast(id)
+	if not compiled.get("ok", false):
+		hud.notify("技能辅助配置无效：" + str(compiled.get("error", "未知配置")))
+		return false
+	var mana_cost: float = float(compiled.mana)
 	if float(cooldowns.get(id, 0.0)) > 0.0:
 		hud.notify("%s 冷却中" % skill.name)
 		return false
-	if mana < float(skill.mana):
+	if mana < mana_cost:
 		hud.notify("魔力不足 · 等待恢复或拾取补给")
 		return false
-	var volley_size: int = 3 if id == "bolt" else 5 if id == "frost" else 0
+	var volley_size: int = int(compiled.initial_count)
 	if volley_size > 0 and projectiles.size() + volley_size > MAX_PROJECTILES:
 		hud.notify("投射物空间不足以发射完整技能，本次未消耗法力或冷却")
 		return false
-	mana -= float(skill.mana)
-	cooldowns[id] = float(skill.cooldown)
+	mana -= mana_cost
+	cooldowns[id] = float(compiled.cooldown)
 	player_facing = _aim_direction()
-	var damage: float = float(_stats.damage)
+	var damage: float = float(compiled.snapshot.base_damage)
 	var color: Color = skill.color
-	var context: Dictionary = {"snapshot": state.get_combat_snapshot(), "cast_id": projectile_runtime.new_cast()}
+	var context: Dictionary = {"snapshot": compiled.snapshot, "cast_id": 0 if id == "tornado" else projectile_runtime.new_cast()}
 	match id:
 		"tornado":
-			var emitted: int = projectile_runtime.spawn_tornado(projectiles, player_pos, player_facing, context.snapshot, MAX_PROJECTILES)
+			var emitted: int = projectile_runtime.spawn_tornado(projectiles, player_pos, player_facing, context.snapshot, MAX_PROJECTILES, int(compiled.initial_count))
 			if emitted == 0:
-				mana += float(skill.mana)
+				mana += mana_cost
 				cooldowns[id] = 0.0
 				hud.notify("场上投射物已满，本次龙卷未消耗法力或冷却")
 				return false
 			total_shots += emitted
-		"bolt":
-			for angle: float in [-0.16, 0.0, 0.16]:
-				_shoot(player_pos, player_facing.rotated(angle), damage * 1.6, color, 1, 0.0, 780.0, id, "lightning", context)
-		"frost":
-			for angle: float in [-0.28, -0.14, 0.0, 0.14, 0.28]:
-				_shoot(player_pos, player_facing.rotated(angle), damage * 0.85, color, 2, 3.0, 520.0, id, "cold", context)
+		"bolt", "frost":
+			var recipe: Dictionary = compiled.recipe
+			for shot_index: int in range(int(compiled.initial_count)):
+				var angle: float = (shot_index - (int(compiled.initial_count) - 1) * 0.5) * float(recipe.spread)
+				_shoot(player_pos, player_facing.rotated(angle), damage * float(recipe.coefficient), color,
+					int(recipe.pierce), float(recipe.slow), float(recipe.speed), id, str(recipe.damage_type), context)
 		"nova":
 			_area_damage(player_pos, 155.0, damage * 2.7, color, 0.6, "nova", "lightning", context.snapshot)
-			_add_ring(player_pos, 155.0, color, 0.45)
+			visual_cues.emit_cue("nova", player_pos, {"radius": 155.0, "color": color})
 		"dash":
 			var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 			if direction.length_squared() < 0.1:
 				direction = player_facing
 			var start: Vector2 = player_pos
 			player_pos = _clamp_to_arena(player_pos + direction * 175.0, PLAYER_RADIUS)
+			visual_cues.emit_cue("dash", start, {"destination": player_pos, "color": color})
 			invulnerable = 0.6
 			for i: int in range(14):
 				_add_particle(start.lerp(player_pos, i / 14.0), Vector2.ZERO, color, 9.0 - i * 0.4, 0.38)
@@ -526,13 +536,13 @@ func cast_skill(index: int) -> bool:
 			shield = minf(float(_stats.max_shield), shield + float(_stats.max_shield) * 0.75)
 			damage_delay = 0.0
 			invulnerable = 0.8
-			_add_ring(player_pos, 60.0, color, 0.55)
+			visual_cues.emit_cue("ward", player_pos, {"radius": 60.0, "color": color})
 			_add_text(player_pos + Vector2(0, -32), "护盾充能", color)
 		"meteor":
 			var target: Dictionary = _nearest_enemy(player_pos, 700.0)
 			var target_pos: Vector2 = Vector2(target.pos) if not target.is_empty() else _clamp_to_arena(player_pos + player_facing * 220.0, 20.0)
 			_area_damage(target_pos, 110.0, damage * 4.3, color, 0.0, "meteor", "fire", context.snapshot)
-			_add_ring(target_pos, 110.0, color, 0.7)
+			visual_cues.emit_cue("meteor", target_pos, {"radius": 110.0, "color": color})
 			for i: int in range(32):
 				_add_particle(target_pos, Vector2.RIGHT.rotated(rng.randf() * TAU) * rng.randf_range(70, 270), color, rng.randf_range(3, 7), 0.6)
 			screen_shake = 4.0
@@ -545,10 +555,13 @@ func cast_skill(index: int) -> bool:
 					break
 				excluded.append(int(target.id))
 				var end: Vector2 = target.pos
+				visual_cues.emit_cue("chain", origin, {"destination": end, "target_id": int(target.id), "color": color})
 				for step: int in range(12):
 					_add_particle(origin.lerp(end, step / 12.0) + Vector2(rng.randf_range(-4, 4), rng.randf_range(-4, 4)), Vector2.ZERO, color, 3.0, 0.25)
 				_apply_damage_packet(target, Damage.packet({"lightning": damage * (2.2 - i * 0.2)}, ["hit", "spell", "chain"], id), context.snapshot, color, 0.35)
 				origin = end
+	if id in ["tornado", "bolt", "frost"]:
+		visual_cues.emit_cue("cast", player_pos, {"direction": player_facing, "skill": id, "color": color})
 	return true
 
 
@@ -585,11 +598,11 @@ func _update_projectiles(delta: float) -> void:
 				if not hit_targets.has(enemy.id) and float(enemy.health) > 0.0 and Vector2(event.pos).distance_to(enemy.pos) <= float(event.radius) + float(enemy.radius):
 					hit_targets[enemy.id] = true
 					_apply_damage_packet(enemy, event.payload, event.snapshot, event.color, 0.0, event)
-			_add_ring(event.pos, float(event.radius), event.color, 0.55)
+			visual_cues.emit_cue("explosion", event.pos, {"radius": float(event.radius), "color": event.color})
 		elif event.type == "return_started":
-			_add_ring(event.pos, 19.0, Color("bd98ff"), 0.24)
+			visual_cues.emit_cue("return", event.pos, {"radius": 19.0, "color": Color("bd98ff")})
 		elif event.type == "split":
-			_add_ring(event.pos, 26.0, Color("a6e8aa"), 0.28)
+			visual_cues.emit_cue("split", event.pos, {"radius": 26.0, "color": Color("a6e8aa")})
 		elif event.type == "spawn_rejected":
 			hud.notify("投射物容量不足，本次三子箭整组取消；未触发爆炸")
 	_flush_monster_spawns()
@@ -614,12 +627,16 @@ func equip_tornado_example() -> void:
 	state.slot_skill(0, "tornado")
 	for id: String in ["prism_bow", "return_mantle", "detonation_charm"]:
 		state.equip(id)
-	hud.notify("已装配龙卷组合：5 母箭 → 15 子箭 → 返回 → 寿命结束爆炸；关闭后按 1 释放")
+	var compiled: Dictionary = state.get_skill_cast("tornado")
+	var parents: int = int(compiled.get("initial_count", 0))
+	hud.notify("已装配龙卷组合：%d 母箭 → %d 子箭 → 返回 → 寿命结束爆炸；关闭后按 1 释放" % [parents, parents * 3])
 
 
 func combat_preview() -> Dictionary:
-	var snapshot: Dictionary = state.get_combat_snapshot()
-	var result: Dictionary = {"snapshot": snapshot, "count": clampi(3 + int(snapshot.projectile_count), 1, 9)}
+	var compiled: Dictionary = state.get_skill_cast("tornado")
+	var snapshot: Dictionary = compiled.get("snapshot", state.get_combat_snapshot())
+	var result: Dictionary = {"snapshot": snapshot, "count": int(compiled.get("initial_count", 0)),
+		"mana": float(compiled.get("mana", 0.0)), "supports": compiled.get("support_ids", [])}
 	for role: String in ["parent", "child", "explosion"]:
 		result[role] = Damage.resolve(Combat.tornado_packet(snapshot, role), snapshot.modifiers)
 	return result
@@ -632,6 +649,7 @@ func _damage_enemy(enemy: Dictionary, amount: float, color: Color, slow: float =
 	enemy.shield = float(enemy.get("shield", 0.0)) - absorbed
 	enemy.damage_delay = 4.0
 	enemy.health = float(enemy.health) - (amount - absorbed)
+	visual_cues.emit_cue("impact", Vector2(enemy.pos), {"radius": clampf(7.0 + sqrt(amount) * 0.65, 8.0, 24.0), "color": color, "shielded": absorbed >= amount, "target_id": int(enemy.id)})
 	enemy.flash = 0.12
 	enemy.slow = maxf(float(enemy.slow), slow)
 	total_damage += amount
@@ -642,6 +660,7 @@ func _damage_enemy(enemy: Dictionary, amount: float, color: Color, slow: float =
 		var death: Dictionary = monster_runtime.process_death(enemy)
 		if not death.processed:
 			return
+		visual_cues.emit_cue("death", Vector2(enemy.pos), {"radius": float(enemy.radius), "color": Monsters.RARITIES[enemy.rarity].color, "target_id": int(enemy.id)})
 		kills += 1
 		var eligible: bool = bool(death.reward) and not demo_mode
 		if eligible:
@@ -689,11 +708,12 @@ func _award_kill_jewel() -> void:
 
 
 func hit_player(amount: float) -> void:
-	if not alive or invulnerable > 0.0 or amount <= 0.0:
+	if not alive or invulnerable > 0.0 or amount <= 0.0 or not is_finite(amount):
 		return
 	var absorbed: float = minf(shield, amount)
 	shield -= absorbed
 	health = maxf(0.0, health - (amount - absorbed))
+	visual_cues.emit_cue("hurt", player_pos, {"shielded": absorbed >= amount})
 	damage_delay = 4.0
 	invulnerable = 0.32
 	hurt_flash = 0.16
@@ -738,6 +758,7 @@ func _add_ring(pos: Vector2, radius: float, color: Color, life: float) -> void:
 
 
 func _update_effects(delta: float) -> void:
+	visual_cues.advance(delta)
 	for particle: Dictionary in particles:
 		particle.pos = Vector2(particle.pos) + Vector2(particle.velocity) * delta
 		particle.life = float(particle.life) - delta

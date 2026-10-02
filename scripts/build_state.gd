@@ -9,7 +9,9 @@ const Data = preload("res://scripts/game_data.gd")
 const Passives = preload("res://scripts/passive_data.gd")
 const JewelCatalog = preload("res://scripts/jewel_data.gd")
 const Equipment = preload("res://scripts/items/equipment_catalog.gd")
-const SAVE_VERSION: int = 4
+const SupportCatalog = preload("res://scripts/combat/support_catalog.gd")
+const SkillCompiler = preload("res://scripts/combat/skill_compiler.gd")
+const SAVE_VERSION: int = 5
 const MAX_EQUIPMENT: int = 64
 const MAX_EQUIPMENT_ID: int = 999999999
 const MAX_LEVEL: int = 1000
@@ -36,6 +38,7 @@ var inventory: Array[String] = ["ember_wand", "swift_blade", "guardian_robe", "v
 var equipment_instances: Dictionary = {}
 var next_equipment_id: int = 1
 var equipped: Dictionary = {"weapon": "ember_wand", "armor": "guardian_robe", "charm": "azure_charm"}
+var skill_supports: Dictionary = {}
 var skill_slots: Array[String] = ["bolt", "frost", "nova", "dash", "ward"]
 var allocated_nodes: Array[String] = [Passives.START_ID]
 var jewels: Dictionary = JewelCatalog.starter_jewels()
@@ -49,6 +52,7 @@ var talent_points: int = BASE_TALENT_POINTS
 var migrated_from_v1: bool = false
 var migrated_from_v2: bool = false
 var migrated_from_v3: bool = false
+var migrated_from_v4: bool = false
 var _migration_version: int = 0
 var migration_message: String = ""
 var migration_backup_path: String = ""
@@ -320,6 +324,65 @@ func award_jewel(rng: RandomNumberGenerator) -> String:
 	return id
 
 
+func get_skill_supports(skill_id: String) -> Array[String]:
+	var result: Array[String] = []
+	var raw: Variant = skill_supports.get(skill_id, [])
+	if not raw is Array:
+		return result
+	for value: Variant in raw:
+		if not value is String:
+			return []
+		result.append(value)
+	return result
+
+
+func get_skill_cast(skill_id: String) -> Dictionary:
+	var raw: Variant = skill_supports.get(skill_id, [])
+	if not raw is Array:
+		return {"ok": false, "error": "辅助配置必须为列表"}
+	return SkillCompiler.compile_skill(skill_id, get_combat_snapshot(), raw)
+
+
+func support_reason(skill_id: String, support_id: String) -> String:
+	var current: Array[String] = get_skill_supports(skill_id)
+	if current.has(support_id):
+		return "此辅助已链接到该技能"
+	current.append(support_id)
+	return SupportCatalog.compatibility_reason(skill_id, current)
+
+
+func set_skill_supports(skill_id: String, support_ids: Array) -> bool:
+	if not SupportCatalog.compatibility_reason(skill_id, support_ids).is_empty():
+		return false
+	var canonical: Array[String] = []
+	canonical.assign(support_ids)
+	canonical.sort()
+	if canonical == get_skill_supports(skill_id):
+		return false
+	if canonical.is_empty():
+		skill_supports.erase(skill_id)
+	else:
+		skill_supports[skill_id] = canonical
+	changed.emit()
+	return true
+
+
+func add_skill_support(skill_id: String, support_id: String) -> bool:
+	if not support_reason(skill_id, support_id).is_empty():
+		return false
+	var selected: Array[String] = get_skill_supports(skill_id)
+	selected.append(support_id)
+	return set_skill_supports(skill_id, selected)
+
+
+func remove_skill_support(skill_id: String, support_id: String) -> bool:
+	var selected: Array[String] = get_skill_supports(skill_id)
+	if not selected.has(support_id):
+		return false
+	selected.erase(support_id)
+	return set_skill_supports(skill_id, selected)
+
+
 func slot_skill(index: int, skill_id: String) -> bool:
 	if index < 0 or index >= skill_slots.size() or not Data.SKILLS.has(skill_id):
 		return false
@@ -395,6 +458,7 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	next_equipment_id = int(candidate["next_equipment_id"])
 	equipped = candidate["equipped"].duplicate()
 	skill_slots.assign(candidate["skill_slots"])
+	skill_supports = candidate["skill_supports"].duplicate(true)
 	allocated_nodes.assign(candidate["allocated_nodes"])
 	jewels = candidate["jewels"].duplicate(true)
 	jewel_inventory.assign(candidate["jewel_inventory"])
@@ -410,6 +474,7 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	migrated_from_v1 = int(parser.data["version"]) == 1
 	migrated_from_v2 = int(parser.data["version"]) == 2
 	migrated_from_v3 = int(parser.data["version"]) == 3
+	migrated_from_v4 = int(parser.data["version"]) == 4
 	_migration_version = int(parser.data["version"])
 	if migrated_from_v1 or migrated_from_v2:
 		for id: String in Data.COMBAT_STARTER_ITEMS:
@@ -420,6 +485,8 @@ func load_build(path: String = "user://build_save.json") -> bool:
 		migration_message = "构筑已升级：原装备、天赋和珠宝保留，已补发三件机制装备。K 可查看战斗机制。"
 	if migrated_from_v3:
 		migration_message = "构筑已升级：原装备、天赋和珠宝保留。现在可获得有独立词缀的随机装备；按 I 查看。"
+	if migrated_from_v4:
+		migration_message = "构筑已升级：装备词缀与原有技能保留。按 K 为龙卷、飞弹或冰霜链接辅助，组合效果与耗魔可直接预览。"
 	migration_backup_path = ""
 	_migration_source_path = path if _migration_version < SAVE_VERSION else ""
 	_migration_source_text = text if _migration_version < SAVE_VERSION else ""
@@ -440,7 +507,7 @@ func _snapshot() -> Dictionary:
 	return {
 		"version": SAVE_VERSION, "inventory": inventory.duplicate(), "equipped": equipped.duplicate(),
 		"equipment_instances": equipment_instances.duplicate(true), "next_equipment_id": next_equipment_id,
-		"skill_slots": skill_slots.duplicate(), "level": level, "xp": xp, "talent_points": talent_points,
+		"skill_slots": skill_slots.duplicate(), "skill_supports": skill_supports.duplicate(true), "level": level, "xp": xp, "talent_points": talent_points,
 		"allocated_nodes": allocated_nodes.duplicate(), "jewels": jewels.duplicate(true),
 		"jewel_inventory": jewel_inventory.duplicate(), "socketed_jewels": socketed_jewels.duplicate(),
 		"next_jewel_id": next_jewel_id, "backpack_positions": serialized_positions,
@@ -458,8 +525,16 @@ func _validate_snapshot(value: Variant) -> Dictionary:
 	var required: Array[String] = ["version", "inventory", "equipped", "skill_slots", "level", "xp", "talent_points", "allocated_nodes", "jewels", "jewel_inventory", "socketed_jewels", "next_jewel_id", "backpack_positions"]
 	if int(data["version"]) >= 4:
 		required.append_array(["equipment_instances", "next_equipment_id"])
+	if int(data["version"]) >= 5:
+		required.append("skill_supports")
 	if data.size() != required.size() or not data.has_all(required):
 		return {}
+	if int(data["version"]) >= 5:
+		if not data["skill_supports"] is Dictionary or data["skill_supports"].size() > Data.SKILLS.size():
+			return {}
+		for skill_id: Variant in data["skill_supports"]:
+			if not skill_id is String or not SupportCatalog.compatibility_reason(skill_id, data["skill_supports"][skill_id]).is_empty():
+				return {}
 	if not data["allocated_nodes"] is Array:
 		return {}
 	var loaded_nodes: Array = data["allocated_nodes"]
@@ -510,6 +585,14 @@ func _validate_snapshot(value: Variant) -> Dictionary:
 		result["version"] = SAVE_VERSION
 		result["equipment_instances"] = {}
 		result["next_equipment_id"] = 1
+	if int(data["version"]) < 5:
+		result["version"] = SAVE_VERSION
+		result["skill_supports"] = {}
+	for skill_id: String in result["skill_supports"]:
+		var canonical: Array[String] = []
+		canonical.assign(result["skill_supports"][skill_id])
+		canonical.sort()
+		result["skill_supports"][skill_id] = canonical
 	# JSON numbers decode as floats. Normalize ONLY after exact integer/range
 	# validation so persisted rolls have the same canonical types as fresh loot.
 	for instance: Dictionary in result["equipment_instances"].values():
@@ -588,7 +671,7 @@ func _migrate_v1(data: Dictionary) -> Dictionary:
 		return {}
 	var result: Dictionary = {
 		"version": SAVE_VERSION, "inventory": data["inventory"].duplicate(), "equipped": data["equipped"].duplicate(),
-		"equipment_instances": {}, "next_equipment_id": 1,
+		"equipment_instances": {}, "next_equipment_id": 1, "skill_supports": {},
 		"skill_slots": data["skill_slots"].duplicate(), "level": int(data["level"]), "xp": int(data["xp"]),
 		"talent_points": int(data["talent_points"]) + spent_points, "allocated_nodes": [Passives.START_ID],
 		"jewels": JewelCatalog.starter_jewels(), "jewel_inventory": ["jewel_000001", "jewel_000002", "jewel_000003"],

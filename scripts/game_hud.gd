@@ -4,6 +4,7 @@ extends CanvasLayer
 
 const PassivePanel = preload("res://scripts/passive_panel.gd")
 const InventoryPanelView = preload("res://scripts/inventory_panel.gd")
+const SkillSupportPanelView = preload("res://scripts/skill_support_panel.gd")
 const Passives = preload("res://scripts/passive_data.gd")
 const PresentationTheme = preload("res://scripts/visuals/visual_theme.gd")
 const Emblem = preload("res://scripts/visuals/skill_emblem.gd")
@@ -46,6 +47,7 @@ var _toast_label: Label
 var _toast_left: float = 0.0
 var _inventory_panel: Control
 var _passive_panel: Control
+var _skill_support_panel: Control
 var _panel_margin: MarginContainer
 var _panel_scroll: ScrollContainer
 var _modal: Control
@@ -57,6 +59,8 @@ var _panel_tabs: HBoxContainer
 var _close_button: Button
 var _active_panel: String = ""
 var _selected_skill_slot: int = 0
+# Selection follows a skill identity, never the array position that used to hold it.
+var _selected_support_skill_id: String = ""
 var _refresh_clock: float = 0.0
 var _skill_emblems: Array[Control] = []
 var _preferences: VisualSettings
@@ -146,6 +150,10 @@ func refresh_build() -> void:
 		_passive_panel.refresh()
 	elif _active_panel == "inventory" and is_instance_valid(_inventory_panel):
 		_inventory_panel.refresh()
+	elif _active_panel == "skills":
+		var scroll_position: int = _panel_scroll.scroll_vertical
+		_rebuild_panel()
+		_panel_scroll.set_deferred("scroll_vertical", scroll_position)
 	elif not _active_panel.is_empty():
 		_rebuild_panel()
 
@@ -448,13 +456,20 @@ func _update_live() -> void:
 			continue
 		var id: String = _state.skill_slots[index]
 		var skill: Dictionary = GameData.SKILLS.get(id, {}) as Dictionary
-		var mana_cost: float = float(skill.get("mana", 0.0))
+		var cast: Dictionary = _state.get_skill_cast(id)
+		var valid_cast: bool = bool(cast.get("ok", false))
+		var mana_cost: float = float(cast.get("mana", 0.0))
 		var cooldown: float = float(cooldowns.get(id, 0.0))
 		var ready: String = "就绪" if cooldown <= 0.0 else "%.1fs" % cooldown
 		if cooldown <= 0.0 and float(_arena.get("mana")) < mana_cost:
 			ready = "法力不足"
 		button.text = "%s\n%s" % [str(skill.get("short_name", skill.get("name", id))), ready]
-		button.tooltip_text = "%s\n%s\n消耗 %d 法力 · 冷却 %.1f 秒" % [str(skill.get("name", id)), str(skill.get("description", "")), int(mana_cost), float(skill.get("cooldown", 0.0))]
+		button.tooltip_text = "%s\n基础技能：%s\n当前消耗 %.2f 法力 · 冷却 %.2f 秒" % [str(skill.get("name", id)), str(skill.get("description", "")), mana_cost, float(cast.get("cooldown", 0.0))]
+		if int(cast.get("initial_count", 0)) > 0:
+			button.tooltip_text += "\n当前初始投射物：%d 枚" % int(cast.initial_count)
+		if not valid_cast:
+			button.text = "%s\n配置无效" % str(skill.get("short_name", id))
+			button.tooltip_text = "%s\n无法施放：%s" % [str(skill.get("name", id)), str(cast.get("error", "技能编译失败"))]
 		var tint: Color = skill.get("color", CYAN) as Color
 		var emblem: Control = _skill_emblems[index]
 		emblem.skill_id = id
@@ -462,7 +477,7 @@ func _update_live() -> void:
 		emblem.subdued = cooldown > 0.0
 		emblem.queue_redraw()
 		button.add_theme_color_override("font_color", tint if cooldown <= 0.0 else MUTED)
-		button.disabled = not bool(_arena.get("alive")) or is_blocking()
+		button.disabled = not valid_cast or not bool(_arena.get("alive")) or is_blocking()
 	_auto_button.text = "自动攻击  %s" % ("开启  ●" if bool(_arena.get("auto_fire")) else "关闭  ○")
 	_auto_button.add_theme_color_override("font_color", CYAN if bool(_arena.get("auto_fire")) else MUTED)
 	_auto_button.disabled = is_blocking()
@@ -478,7 +493,7 @@ func _set_vital(key: String, value: float, maximum: float) -> void:
 
 func _rebuild_panel() -> void:
 	for child: Node in _panel_body.get_children():
-		if child == _passive_panel or child == _inventory_panel:
+		if child == _passive_panel or child == _inventory_panel or child == _skill_support_panel:
 			(child as Control).hide()
 			continue
 		_panel_body.remove_child(child)
@@ -601,7 +616,13 @@ func _build_talents_panel() -> void:
 
 
 func _build_skills_panel() -> void:
-	_panel_title.text = "技能组合"
+	_panel_title.text = "技能组合 · 辅助"
+	_panel_subtitle.text = "每个技能独立保存两个辅助槽 / 龙卷、飞弹、冰霜可用"
+	if _selected_support_skill_id.is_empty() and _selected_skill_slot < _state.skill_slots.size():
+		_selected_support_skill_id = _state.skill_slots[_selected_skill_slot]
+	var selected_position: int = _state.skill_slots.find(_selected_support_skill_id)
+	if selected_position >= 0:
+		_selected_skill_slot = selected_position
 	_panel_body.add_child(_button("F6 战斗机制：查看龙卷组合、分类增伤和事件记录", "OpenCombatInspector", open_panel.bind("combat")))
 	_section("先选择要替换的技能槽", "已装配的技能会互换位置，不会重复占槽")
 	var slots: HBoxContainer = HBoxContainer.new()
@@ -615,13 +636,25 @@ func _build_skills_panel() -> void:
 		if index == _selected_skill_slot:
 			_accent_button(button)
 		slots.add_child(button)
+	if not is_instance_valid(_skill_support_panel):
+		_skill_support_panel = SkillSupportPanelView.new()
+		_panel_body.add_child(_skill_support_panel)
+		_skill_support_panel.setup(_state)
+		_skill_support_panel.feedback.connect(notify)
+	_panel_body.move_child(_skill_support_panel, _panel_body.get_child_count() - 1)
+	_skill_support_panel.font_scale = _preferences.font_scale
+	_skill_support_panel.select_skill(_selected_support_skill_id)
+	_skill_support_panel.show()
 	_section("可用技能", "当前目标：技能槽 %d" % (_selected_skill_slot + 1))
 	for key: Variant in GameData.SKILLS.keys():
 		var id: String = str(key)
 		var skill: Dictionary = GameData.SKILLS[id] as Dictionary
 		var assigned: int = _state.skill_slots.find(id)
 		var status: String = "  ·  已在槽 %d" % (assigned + 1) if assigned >= 0 else ""
-		var description: String = "%d 法力  ·  %.1f 秒冷却%s\n%s" % [int(skill.get("mana", 0)), float(skill.get("cooldown", 0.0)), status, str(skill.get("description", ""))]
+		var cast: Dictionary = _state.get_skill_cast(id)
+		var description: String = "%.2f 法力  ·  %.2f 秒冷却%s\n基础技能：%s" % [float(cast.get("mana", 0.0)), float(cast.get("cooldown", 0.0)), status, str(skill.get("description", ""))]
+		if not bool(cast.get("ok", false)):
+			description = "配置无效：%s%s" % [str(cast.get("error", "技能编译失败")), status]
 		var row: HBoxContainer = _card(_panel_body, str(skill.get("name", id)), description, skill.get("color", CYAN) as Color)
 		var select: Button = _button("当前技能" if assigned == _selected_skill_slot else "装入槽 %d" % (_selected_skill_slot + 1), "SelectSkill_" + id, _slot_skill.bind(id), 130)
 		select.disabled = assigned == _selected_skill_slot
@@ -810,13 +843,21 @@ func _unequip_item(slot: String) -> void:
 
 
 func _select_skill_slot(index: int) -> void:
+	if index < 0 or index >= _state.skill_slots.size():
+		return
 	_selected_skill_slot = index
+	_selected_support_skill_id = _state.skill_slots[index]
 	_rebuild_panel()
 
 
 func _slot_skill(id: String) -> void:
+	var previous_selection: String = _selected_support_skill_id
+	# The transaction emits changed synchronously; set the intended identity first.
+	_selected_support_skill_id = id
 	if _state.slot_skill(_selected_skill_slot, id):
-		notify("技能槽 %d 已更新" % (_selected_skill_slot + 1))
+		notify("技能槽 %d 已更新；辅助跟随技能保存" % (_selected_skill_slot + 1))
+	else:
+		_selected_support_skill_id = previous_selection
 
 
 func _restart() -> void:
@@ -842,6 +883,8 @@ func _apply_presentation() -> void:
 	_root.scale = Vector2.ONE * _preferences.ui_scale
 	_root.size = get_viewport().get_visible_rect().size / _preferences.ui_scale
 	_root.theme.default_font_size = roundi(16 * _preferences.font_scale)
+	if is_instance_valid(_skill_support_panel):
+		_skill_support_panel.font_scale = _preferences.font_scale
 	PresentationTheme.apply_font_scale(_root, _preferences.font_scale)
 	var width: float = _root.size.x
 	var vitals: Control = _root.get_node("PlayerVitals")
