@@ -1,1 +1,203 @@
-{}
+{
+  "schema_version": 1,
+  "source_version": "3.29.3.3",
+  "source_commit": "a77305840b4cc8555eeeea144eac3eeddeff134b",
+  "source_mod_rows": 40355,
+  "source_base_rows": 5461,
+  "equipment_classes": 24,
+  "selected_base_rows": 852,
+  "exact_tag_profiles": 178,
+  "selected_mod_rows": 1200,
+  "prefix_rows": 732,
+  "suffix_rows": 468,
+  "exclusion_groups": 102,
+  "derived_tier_families": 182,
+  "stat_ids": 158,
+  "per_class": {
+    "Amulet": {
+      "base_count": 15,
+      "profile_count": 5,
+      "distinct_mod_rows": 263,
+      "prefix_rows": 112,
+      "suffix_rows": 151
+    },
+    "Belt": {
+      "base_count": 10,
+      "profile_count": 4,
+      "distinct_mod_rows": 141,
+      "prefix_rows": 64,
+      "suffix_rows": 77
+    },
+    "Body Armour": {
+      "base_count": 122,
+      "profile_count": 19,
+      "distinct_mod_rows": 290,
+      "prefix_rows": 199,
+      "suffix_rows": 91
+    },
+    "Boots": {
+      "base_count": 80,
+      "profile_count": 26,
+      "distinct_mod_rows": 265,
+      "prefix_rows": 170,
+      "suffix_rows": 95
+    },
+    "Bow": {
+      "base_count": 25,
+      "profile_count": 3,
+      "distinct_mod_rows": 141,
+      "prefix_rows": 65,
+      "suffix_rows": 76
+    },
+    "Claw": {
+      "base_count": 25,
+      "profile_count": 3,
+      "distinct_mod_rows": 160,
+      "prefix_rows": 77,
+      "suffix_rows": 83
+    },
+    "Dagger": {
+      "base_count": 10,
+      "profile_count": 2,
+      "distinct_mod_rows": 173,
+      "prefix_rows": 85,
+      "suffix_rows": 88
+    },
+    "Gloves": {
+      "base_count": 79,
+      "profile_count": 26,
+      "distinct_mod_rows": 301,
+      "prefix_rows": 186,
+      "suffix_rows": 115
+    },
+    "Helmet": {
+      "base_count": 94,
+      "profile_count": 23,
+      "distinct_mod_rows": 290,
+      "prefix_rows": 182,
+      "suffix_rows": 108
+    },
+    "One Hand Axe": {
+      "base_count": 25,
+      "profile_count": 3,
+      "distinct_mod_rows": 152,
+      "prefix_rows": 65,
+      "suffix_rows": 87
+    },
+    "One Hand Mace": {
+      "base_count": 25,
+      "profile_count": 3,
+      "distinct_mod_rows": 143,
+      "prefix_rows": 65,
+      "suffix_rows": 78
+    },
+    "One Hand Sword": {
+      "base_count": 26,
+      "profile_count": 4,
+      "distinct_mod_rows": 152,
+      "prefix_rows": 65,
+      "suffix_rows": 87
+    },
+    "Quiver": {
+      "base_count": 14,
+      "profile_count": 2,
+      "distinct_mod_rows": 146,
+      "prefix_rows": 53,
+      "suffix_rows": 93
+    },
+    "Ring": {
+      "base_count": 36,
+      "profile_count": 11,
+      "distinct_mod_rows": 233,
+      "prefix_rows": 89,
+      "suffix_rows": 144
+    },
+    "Rune Dagger": {
+      "base_count": 15,
+      "profile_count": 2,
+      "distinct_mod_rows": 230,
+      "prefix_rows": 124,
+      "suffix_rows": 106
+    },
+    "Sceptre": {
+      "base_count": 25,
+      "profile_count": 3,
+      "distinct_mod_rows": 262,
+      "prefix_rows": 147,
+      "suffix_rows": 115
+    },
+    "Shield": {
+      "base_count": 88,
+      "profile_count": 14,
+      "distinct_mod_rows": 398,
+      "prefix_rows": 235,
+      "suffix_rows": 163
+    },
+    "Staff": {
+      "base_count": 13,
+      "profile_count": 4,
+      "distinct_mod_rows": 296,
+      "prefix_rows": 159,
+      "suffix_rows": 137
+    },
+    "Thrusting One Hand Sword": {
+      "base_count": 25,
+      "profile_count": 3,
+      "distinct_mod_rows": 152,
+      "prefix_rows": 65,
+      "suffix_rows": 87
+    },
+    "Two Hand Axe": {
+      "base_count": 22,
+      "profile_count": 3,
+      "distinct_mod_rows": 152,
+      "prefix_rows": 65,
+      "suffix_rows": 87
+    },
+    "Two Hand Mace": {
+      "base_count": 22,
+      "profile_count": 3,
+      "distinct_mod_rows": 143,
+      "prefix_rows": 65,
+      "suffix_rows": 78
+    },
+    "Two Hand Sword": {
+      "base_count": 22,
+      "profile_count": 3,
+      "distinct_mod_rows": 152,
+      "prefix_rows": 65,
+      "suffix_rows": 87
+    },
+    "Wand": {
+      "base_count": 25,
+      "profile_count": 7,
+      "distinct_mod_rows": 299,
+      "prefix_rows": 162,
+      "suffix_rows": 137
+    },
+    "Warstaff": {
+      "base_count": 9,
+      "profile_count": 2,
+      "distinct_mod_rows": 214,
+      "prefix_rows": 85,
+      "suffix_rows": 129
+    }
+  },
+  "excluded_base_rows_first_reason": {
+    "not_released_in_source": 22,
+    "excluded_special_or_legacy_base_tag": 149,
+    "outside_24_equipment_classes": 4421,
+    "excluded_alternate_mode_or_special_base_id": 15,
+    "non_item_domain": 2
+  },
+  "excluded_mod_rows_first_reason": {
+    "non_item_domain": 15303,
+    "not_prefix_or_suffix": 20683,
+    "essence_only": 458,
+    "alternate_mode_royale": 4,
+    "no_positive_weight_on_selected_base_profiles": 2707
+  },
+  "conditional_only_mod_ids": [],
+  "ambiguous_derived_tier_entries": [],
+  "completeness": "Exact selected-snapshot/filter coverage only. Release flags and positive weights do not certify current live drop availability. Source has no official displayed tier field."
+}
