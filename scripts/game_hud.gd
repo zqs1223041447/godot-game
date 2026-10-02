@@ -100,7 +100,7 @@ func open_panel(panel_name: String) -> void:
 		return
 	if _active_panel == "death" and panel_name != "death":
 		return
-	if panel_name not in ["inventory", "talents", "skills", "combat", "pause", "death"]:
+	if panel_name not in ["inventory", "talents", "skills", "combat", "monsters", "pause", "death"]:
 		panel_name = "pause"
 	_active_panel = panel_name
 	_modal.show()
@@ -342,7 +342,7 @@ func _build_hint() -> void:
 	var move_hint: Label = _label("WASD / 方向键  移动    空格  闪避", 13, MUTED)
 	move_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	box.add_child(move_hint)
-	var aim_hint: Label = _label("按住左键瞄准  ·  Q 切换自动攻击", 13, MUTED)
+	var aim_hint: Label = _label("Q 自动攻击  ·  F6 战斗  ·  F7 怪物", 13, MUTED)
 	aim_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	box.add_child(aim_hint)
 
@@ -413,7 +413,8 @@ func _build_modal() -> void:
 	_panel_tabs.add_child(_button("装备背包", "InventoryTab", open_panel.bind("inventory"), 140))
 	_panel_tabs.add_child(_button("天赋成长", "TalentsTab", open_panel.bind("talents"), 140))
 	_panel_tabs.add_child(_button("技能组合", "SkillsTab", open_panel.bind("skills"), 140))
-	_panel_tabs.add_child(_button("战斗机制 F6", "CombatTab", open_panel.bind("combat"), 160))
+	_panel_tabs.add_child(_button("战斗机制 F6", "CombatTab", open_panel.bind("combat"), 150))
+	_panel_tabs.add_child(_button("怪物机制 F7", "MonstersTab", open_panel.bind("monsters"), 150))
 	var scroll: ScrollContainer = ScrollContainer.new()
 	_panel_scroll = scroll
 	scroll.name = "PanelScroll"
@@ -437,7 +438,7 @@ func _update_live() -> void:
 	var stats: Dictionary = _arena.call("get_stats") as Dictionary
 	var seconds: int = int(float(_arena.get("elapsed")))
 	_wave_label.text = "第 %d 波   ·   击败 %d" % [int(_arena.get("wave")), int(_arena.get("kills"))]
-	_run_label.text = "%02d:%02d   /   %s" % [seconds / 60, seconds % 60, "战斗已暂停" if is_blocking() else "战斗进行中"]
+	_run_label.text = "%02d:%02d   /   %s" % [seconds / 60, seconds % 60, "试验场 · 无奖励" if bool(_arena.get("demo_mode")) else ("战斗已暂停" if is_blocking() else "战斗进行中")]
 	_level_label.text = "Lv.%d  ·  经验 %d  ·  天赋点 %d" % [_state.level, _state.xp, _state.talent_points]
 	_set_vital("health", float(_arena.get("health")), float(stats.get("max_health", 100.0)))
 	_set_vital("mana", float(_arena.get("mana")), float(stats.get("max_mana", 100.0)))
@@ -489,11 +490,11 @@ func _rebuild_panel() -> void:
 	_panel_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED if is_tree else ScrollContainer.SCROLL_MODE_AUTO
 	_panel_scroll.scroll_vertical = 0
 	_close_button.visible = _active_panel != "death"
-	_panel_tabs.visible = _active_panel in ["inventory", "talents", "skills", "combat"]
+	_panel_tabs.visible = _active_panel in ["inventory", "talents", "skills", "combat", "monsters"]
 	_panel_subtitle.text = "战斗已暂停  /  调整构筑后随时继续"
 	_panel_footer.text = "构筑变更会自动保存  ·  关闭面板继续战斗"
 	_panel_footer.add_theme_color_override("font_color", MUTED)
-	var panel_order: Array[String] = ["inventory", "talents", "skills", "combat"]
+	var panel_order: Array[String] = ["inventory", "talents", "skills", "combat", "monsters"]
 	for index: int in range(_panel_tabs.get_child_count()):
 		var tab: Button = _panel_tabs.get_child(index) as Button
 		tab.add_theme_color_override("font_color", CYAN if panel_order[index] == _active_panel else MUTED)
@@ -506,6 +507,8 @@ func _rebuild_panel() -> void:
 			_build_skills_panel()
 		"combat":
 			_build_combat_panel()
+		"monsters":
+			_build_monsters_panel()
 		"pause":
 			_build_pause_panel()
 		"death":
@@ -590,7 +593,7 @@ func _build_talents_panel() -> void:
 		_passive_panel.feedback.connect(notify)
 	_passive_panel.show()
 	_passive_panel.refresh()
-	_panel_footer.text = "左键选中节点 · 拖动空白处平移 · 滚轮缩放 · 退点需保持连通 · 每 20 次击杀获得珠宝"
+	_panel_footer.text = "天赋独立预算：达到上限后不再增加该属性，装备/珠宝不占预算 · 选起点查看说明 · 每20次有效击杀获得珠宝"
 
 
 func _build_skills_panel() -> void:
@@ -683,13 +686,59 @@ func _toggle_combat_item(id: String) -> void:
 		_state.equip(id)
 
 
+func _build_monsters_panel() -> void:
+	_panel_title.text = "怪物 · 共享天赋与死亡分裂"
+	_panel_subtitle.text = "同一机制注册表驱动人物与怪物  /  F7 打开  /  战斗已暂停"
+	var catalog = preload("res://scripts/monsters/monster_catalog.gd")
+	var runtime = _arena.get("monster_runtime")
+	var controls := HBoxContainer.new()
+	_panel_body.add_child(controls)
+	controls.add_child(_button("进入 / 重置试验场", "StartMonsterDemo", _arena.start_monster_demo, 230))
+	controls.add_child(_button("演示 A → 2A + B", "TriggerMonsterSplit", _arena.trigger_demo_split, 230))
+	controls.add_child(_button("恢复常规挑战", "RestoreStandardRun", _arena.restore_standard_run, 200))
+	_panel_body.add_child(_wrap_label("试验场没有经验、补给或珠宝奖励；会重开当前战斗，保留人物构筑。关闭面板后按原有方式战斗。", 14, GOLD))
+	_section("五类怪物", "黑色仅预留，不能生成")
+	var rarities := HBoxContainer.new()
+	_panel_body.add_child(rarities)
+	for id: String in catalog.RARITIES:
+		var tier: Dictionary = catalog.RARITIES[id]
+		var label: Label = _label(tier.name, 17, Color(tier.color).lightened(0.35) if id == "reserved" else tier.color)
+		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		rarities.add_child(label)
+	_panel_body.add_child(_wrap_label("常规刷怪只有白 / 蓝 / 金；每五波由关卡事件召唤橙色首领。蓝色 1 项、金色 2 项共享天赋机制。怪物能力在生成时锁定，后续版本改同一机制定义即可联动。", 14))
+	_section("生成规则", "队列 %d / 64 · 谱系 %d" % [runtime.queue.size(), runtime.roots.size()])
+	_panel_body.add_child(_wrap_label("裂殖巡游体 → 2 普通巡游体 + 1 掠行体；孵化重壳体 → 2 裂殖巡游体 → 6 普通小怪。子怪不继承母体机制，按显式目标模板生成；只有原始怪发奖励。", 14))
+	_panel_body.add_child(_wrap_label("模板图拒绝环；一次死亡只触发一次；每根最多 3 代 / 12 后代 / 每次 6 只。场上满 55 只时排队，队列或谱系预算不足则整组取消。", 14))
+	_section("当前怪物机制快照", "形状表示物种，外环与名称表示稀有度")
+	var shown: int = 0
+	for enemy: Dictionary in _arena.get("enemies"):
+		if float(enemy.health) <= 0.0 or shown >= 8:
+			continue
+		shown += 1
+		var tier: Dictionary = catalog.RARITIES[enemy.get("rarity", "normal")]
+		var detail: String = "%s · %s · 第 %d 代 · %s\n生命 %.0f / %.0f · 护盾 %.0f / %.0f · 伤害 %.1f · 攻速 %.2f / 秒 · 移速 %.1f" % [enemy.name, tier.name, int(enemy.generation), catalog.mechanism_text(enemy), float(enemy.health), float(enemy.max_health), float(enemy.shield), float(enemy.max_shield), float(enemy.damage), float(enemy.attack_speed), float(enemy.speed)]
+		_panel_body.add_child(_wrap_label(detail, 14, tier.color))
+	_section("最近死亡生成记录", "重新打开面板刷新")
+	if runtime.trace.is_empty():
+		_panel_body.add_child(_wrap_label("尚无记录。进入试验场后点击演示按钮，或在战斗中击败带三点外标记的分裂怪。", 14))
+	else:
+		for event: Dictionary in runtime.trace.slice(maxi(0, runtime.trace.size() - 8)):
+			var line: String = ""
+			match str(event.type):
+				"queued": line = "死亡 #%d：第 %d 代 %d 只子怪已入队" % [event.parent_id, event.generation, event.count]
+				"spawned": line = "生成 %s · 第 %d 代 · 无额外奖励" % [event.template, event.generation]
+				"rejected": line = "整组取消：%s" % event.reason
+				"cancelled": line = "队列取消：%s" % event.reason
+			_panel_body.add_child(_wrap_label(line, 14, CYAN))
+
+
 func _build_pause_panel() -> void:
 	_panel_title.text = "暂停一下"
 	_panel_subtitle.text = "调整节奏，准备下一轮试炼"
 	_section("操作指南")
 	var row: HBoxContainer = _card(_panel_body, "移动 · 瞄准 · 释放", "WASD / 方向键：移动   ·   按住鼠标左键：瞄准射击   ·   空格：闪避（需装配冲刺）\n1 – 5：释放技能   ·   Q：切换自动攻击\nI / B：装备背包   ·   T：天赋   ·   K：技能   ·   Esc：关闭面板 / 暂停")
 	row.name = "ControlsGuide"
-	_card(_panel_body, "你的构筑，由你决定", "装备、天赋、珠宝与五个主动技能可以随时自由组合。\n升级获得天赋点；每 20 次击杀获得随机珠宝。按 T 沿连线分配天赋并镶嵌珠宝；重试保留构筑。", GOLD)
+	_card(_panel_body, "你的构筑，由你决定", "装备、天赋、珠宝与五个主动技能可以随时自由组合。\n升级获得天赋点；每 20 次有效原始怪击杀获得随机珠宝。按 T 沿连线分配天赋并镶嵌珠宝；重试保留构筑。", GOLD)
 	var actions: HBoxContainer = HBoxContainer.new()
 	_panel_body.add_child(actions)
 	var resume: Button = _button("继续战斗", "ResumeButton", close_panel, 180)

@@ -9,12 +9,18 @@ const Jewels = preload("res://scripts/jewel_data.gd")
 const Combat = preload("res://scripts/combat/combat_data.gd")
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
 const Projectiles = preload("res://scripts/combat/projectile_runtime.gd")
+const Monsters = preload("res://scripts/monsters/monster_catalog.gd")
+const MonsterLifecycle = preload("res://scripts/monsters/monster_runtime.gd")
 const ARENA := Rect2(42, 104, 1196, 462)
 const PLAYER_RADIUS := 15.0
 const MAX_ENEMIES := 55
 const MAX_PROJECTILES := 180
 const MAX_PARTICLES := 180
 
+var monster_runtime = MonsterLifecycle.new()
+var reward_kills: int = 0
+var demo_mode: bool = false
+var boss_wave_pending: int = 0
 var state = Build.new()
 var projectile_runtime = Projectiles.new()
 var combat_trace: Array[Dictionary] = []
@@ -50,7 +56,6 @@ var total_shots: int = 0
 var total_damage: float = 0.0
 var _font: Font
 var _stats: Dictionary = {}
-var _next_enemy_id: int = 0
 var _autosave_timer: float = 0.0
 var _ready_complete: bool = false
 
@@ -72,7 +77,7 @@ func _ready() -> void:
 		hud.open_panel("talents" if state.migrated_from_v1 else "combat")
 		hud.notify(state.migration_message)
 	else:
-		hud.notify("K 配置龙卷射击 · F6 查看机制与伤害 · I 装备归航披风和终焰护符")
+		hud.notify("F7 怪物机制与分裂试验 · F6 龙卷组合 · T 天赋星图")
 	print("godot-game: playable arena ready")
 
 
@@ -124,6 +129,10 @@ func restart_run() -> void:
 	mana = float(_stats.max_mana)
 	shield = float(_stats.max_shield)
 	kills = 0
+	reward_kills = 0
+	demo_mode = false
+	boss_wave_pending = 0
+	monster_runtime.reset()
 	elapsed = 0.0
 	wave = 1
 	alive = true
@@ -176,6 +185,9 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	elif key == KEY_T:
 		if alive:
 			hud.open_panel("talents")
+	elif key == KEY_F7:
+		if alive:
+			hud.open_panel("monsters")
 	elif key == KEY_F6:
 		if alive:
 			hud.open_panel("combat")
@@ -214,18 +226,21 @@ func tick(delta: float) -> void:
 	var new_wave: int = 1 + int(elapsed / 30.0)
 	if new_wave != wave:
 		wave = new_wave
+		if wave % 5 == 0 and not demo_mode:
+			boss_wave_pending = wave
 		hud.notify("第 %d 波来袭 · 敌人强度提升" % wave)
 		_add_ring(ARENA.get_center(), 250.0, Color("d5b77a"), 0.8)
 	for id: String in cooldowns:
 		cooldowns[id] = maxf(0.0, float(cooldowns[id]) - delta)
 	attack_timer = maxf(0.0, attack_timer - delta)
+	var shield_recovery_time: float = maxf(0.0, delta - damage_delay)
 	damage_delay = maxf(0.0, damage_delay - delta)
 	invulnerable = maxf(0.0, invulnerable - delta)
 	hurt_flash = maxf(0.0, hurt_flash - delta)
 	screen_shake = maxf(0.0, screen_shake - delta * 15.0)
 	mana = minf(float(_stats.max_mana), mana + float(_stats.mana_regen) * delta)
 	if damage_delay <= 0.0:
-		shield = minf(float(_stats.max_shield), shield + float(_stats.shield_regen) * delta)
+		shield = minf(float(_stats.max_shield), shield + float(_stats.shield_regen) * shield_recovery_time)
 	_move_player(delta)
 	_update_spawning(delta)
 	_update_enemies(delta)
@@ -257,6 +272,14 @@ func _clamp_to_arena(pos: Vector2, margin: float) -> Vector2:
 
 
 func _update_spawning(delta: float) -> void:
+	_flush_monster_spawns()
+	if demo_mode or not monster_runtime.queue.is_empty():
+		return
+	if boss_wave_pending > 0 and enemies.size() < MAX_ENEMIES:
+		var boss: Dictionary = _spawn_monster("rift_warden", Vector2.ZERO, "level_boss")
+		if not boss.is_empty():
+			boss_wave_pending = 0
+			hud.notify("橙色首领：裂隙守卫 · 击败后生成四只普通巡游体")
 	spawn_timer -= delta
 	if spawn_timer <= 0.0:
 		spawn_timer = maxf(0.42, 1.45 - wave * 0.07)
@@ -267,14 +290,18 @@ func _update_spawning(delta: float) -> void:
 
 
 func _spawn_enemy(forced_position: Vector2 = Vector2.ZERO, forced_kind: int = -1) -> Dictionary:
-	var kind: int = forced_kind
-	if kind < 0:
-		kind = 0
-		var roll: float = rng.randf()
-		if roll > 0.8 and wave >= 2:
-			kind = 2
-		elif roll > 0.58:
-			kind = 1
+	if forced_kind >= 0:
+		if forced_kind >= Monsters.SPECIES.size():
+			return {}
+		return _spawn_monster(["crawler", "skitter", "brute"][forced_kind], forced_position)
+	var roll: Dictionary = Monsters.ordinary_roll(rng, wave)
+	return _spawn_monster(roll.template, forced_position, "ordinary", roll.rarity, roll.mechanisms)
+
+
+func _spawn_monster(template_id: String, forced_position: Vector2 = Vector2.ZERO, context: String = "ordinary",
+		rarity: String = "", mechanisms: Array = [], rewards: bool = true) -> Dictionary:
+	if enemies.size() >= MAX_ENEMIES:
+		return {}
 	var pos: Vector2 = forced_position
 	if pos == Vector2.ZERO:
 		var side: int = rng.randi_range(0, 3)
@@ -283,27 +310,81 @@ func _spawn_enemy(forced_position: Vector2 = Vector2.ZERO, forced_kind: int = -1
 			1: pos = Vector2(ARENA.end.x - 24, rng.randf_range(140, 526))
 			2: pos = Vector2(rng.randf_range(85, 1195), ARENA.position.y + 22)
 			3: pos = Vector2(rng.randf_range(85, 1195), ARENA.end.y - 22)
-		# Spawns never appear directly on the player.
 		if pos.distance_to(player_pos) < 230.0:
 			pos = ARENA.get_center() * 2.0 - pos
-	var hp: float = [38.0, 25.0, 95.0][kind] * (1.0 + (wave - 1) * 0.16)
-	_next_enemy_id += 1
-	var enemy: Dictionary = {
-		"id": _next_enemy_id, "pos": pos, "health": hp, "max_health": hp,
-		"kind": kind, "speed": [64.0, 103.0, 43.0][kind] + mini(wave, 15) * 1.4,
-		"damage": [10.0, 8.0, 18.0][kind] + (wave - 1) * 0.7,
-		"radius": [14.0, 10.0, 22.0][kind], "attack_timer": 0.5,
-		"slow": 0.0, "flash": 0.0, "spawn": 0.6, "knockback": Vector2.ZERO
-	}
+	var enemy: Dictionary = monster_runtime.create_root(template_id, wave, pos, context, rarity, mechanisms, rewards and not demo_mode)
+	if enemy.is_empty():
+		return {}
+	enemy.pos = _clamp_to_arena(enemy.pos, float(enemy.radius))
 	enemies.append(enemy)
-	_add_ring(pos, 32.0, Color("d87d71"), 0.5)
+	_add_ring(enemy.pos, 32.0, Monsters.RARITIES[enemy.rarity].color, 0.5)
 	return enemy
+
+
+func _flush_monster_spawns() -> void:
+	enemies = enemies.filter(func(enemy: Dictionary) -> bool: return float(enemy.health) > 0.0)
+	if not alive:
+		return
+	var children: Array[Dictionary] = monster_runtime.drain(MAX_ENEMIES - enemies.size(), ARENA)
+	for child: Dictionary in children:
+		enemies.append(child)
+		_add_ring(child.pos, 26.0, Monsters.RARITIES[child.rarity].color, 0.45)
+	monster_runtime.collect_lineages(enemies)
+
+
+func start_monster_demo() -> void:
+	restart_run()
+	enemies.clear()
+	monster_runtime.reset()
+	demo_mode = true
+	auto_fire = false
+	spawn_timer = 99999.0
+	player_pos = Vector2(640, 420)
+	var examples: Array[Dictionary] = [
+		{"id": "crawler", "pos": Vector2(180, 245), "rarity": "normal", "mechanisms": []},
+		{"id": "skitter", "pos": Vector2(410, 245), "rarity": "magic", "mechanisms": ["gale_stride"]},
+		{"id": "brute", "pos": Vector2(650, 245), "rarity": "rare", "mechanisms": ["ember_power", "aegis_capacity"]},
+		{"id": "splitter", "pos": Vector2(900, 250), "rarity": "", "mechanisms": []},
+		{"id": "brood_host", "pos": Vector2(1080, 430), "rarity": "", "mechanisms": []},
+	]
+	for example: Dictionary in examples:
+		_spawn_monster(example.id, example.pos, "demo", example.rarity, example.mechanisms, false)
+	_spawn_monster("rift_warden", Vector2(190, 440), "map_boss", "", [], false)
+	hud.open_panel("monsters")
+	hud.notify("试验场已就绪，全部怪物无成长奖励。关闭面板可战斗；也可点击演示分裂")
+
+
+func trigger_demo_split() -> void:
+	if not demo_mode:
+		start_monster_demo()
+	var target: Dictionary = {}
+	for enemy: Dictionary in enemies:
+		if enemy.template_id == "splitter" and float(enemy.health) > 0.0:
+			target = enemy
+			break
+	if target.is_empty():
+		target = _spawn_monster("splitter", Vector2(910, 280), "demo", "", [], false)
+	if not target.is_empty():
+		_damage_enemy(target, float(target.health) + float(target.shield) + 1.0, Color("6cafff"))
+		_flush_monster_spawns()
+		hud.open_panel("monsters")
+		hud.notify("裂殖巡游体 → 2 普通巡游体 + 1 掠行体；子怪没有死亡生成词缀")
+
+
+func restore_standard_run() -> void:
+	restart_run()
+	auto_fire = true
+	hud.notify("已恢复常规挑战：白蓝金普通池，每五波出现橙色首领")
 
 
 func _update_enemies(delta: float) -> void:
 	for enemy: Dictionary in enemies:
 		if float(enemy.health) <= 0.0:
 			continue
+		var shield_recovery_time: float = maxf(0.0, delta - float(enemy.get("damage_delay", 0.0)))
+		enemy.damage_delay = maxf(0.0, float(enemy.get("damage_delay", 0.0)) - delta)
+		if float(enemy.damage_delay) <= 0.0:
+			enemy.shield = minf(float(enemy.get("max_shield", 0.0)), float(enemy.get("shield", 0.0)) + float(enemy.get("shield_regen", 0.0)) * shield_recovery_time)
 		enemy.attack_timer = maxf(0.0, float(enemy.attack_timer) - delta)
 		enemy.flash = maxf(0.0, float(enemy.flash) - delta)
 		enemy.slow = maxf(0.0, float(enemy.slow) - delta)
@@ -326,7 +407,7 @@ func _update_enemies(delta: float) -> void:
 		enemy.knockback = Vector2(enemy.knockback).move_toward(Vector2.ZERO, 520.0 * delta)
 		if Vector2(enemy.pos).distance_to(player_pos) < PLAYER_RADIUS + float(enemy.radius) + 1.0:
 			if float(enemy.attack_timer) <= 0.0:
-				enemy.attack_timer = 0.85
+				enemy.attack_timer = 1.0 / maxf(0.2, float(enemy.get("attack_speed", 1.0 / 0.85)))
 				hit_player(float(enemy.damage))
 				if not alive:
 					return
@@ -468,7 +549,7 @@ func _area_damage(origin: Vector2, radius: float, damage: float, color: Color, s
 	var cast_snapshot: Dictionary = state.get_combat_snapshot() if snapshot.is_empty() else snapshot
 	var packet: Dictionary = Damage.packet({type: damage}, ["hit", "spell", "area"], skill_id)
 	for enemy: Dictionary in enemies:
-		if float(enemy.health) > 0.0 and origin.distance_to(Vector2(enemy.pos)) <= radius + float(enemy.radius):
+		if float(enemy.health) > 0.0 and float(enemy.spawn) <= 0.0 and origin.distance_to(Vector2(enemy.pos)) <= radius + float(enemy.radius):
 			_apply_damage_packet(enemy, packet, cast_snapshot, color, slow)
 			var direction: Vector2 = (Vector2(enemy.pos) - origin).normalized()
 			enemy.knockback = direction * 190.0
@@ -503,12 +584,12 @@ func _update_projectiles(delta: float) -> void:
 			_add_ring(event.pos, 26.0, Color("a6e8aa"), 0.28)
 		elif event.type == "spawn_rejected":
 			hud.notify("投射物容量不足，本次三子箭整组取消；未触发爆炸")
-	enemies = enemies.filter(func(enemy: Dictionary) -> bool: return float(enemy.health) > 0.0)
+	_flush_monster_spawns()
 
 
 func _apply_damage_packet(enemy: Dictionary, packet: Dictionary, snapshot: Dictionary, color: Color,
 		slow: float = 0.0, provenance: Dictionary = {}) -> void:
-	if float(enemy.health) <= 0.0:
+	if float(enemy.health) <= 0.0 or float(enemy.get("spawn", 0.0)) > 0.0:
 		return
 	var result: Dictionary = Damage.resolve(packet, snapshot.get("modifiers", []), enemy.get("resistances", {}))
 	var record: Dictionary = {"target_id": enemy.id, "skill_id": packet.skill_id, "tags": packet.tags.duplicate(),
@@ -537,9 +618,12 @@ func combat_preview() -> Dictionary:
 
 
 func _damage_enemy(enemy: Dictionary, amount: float, color: Color, slow: float = 0.0) -> void:
-	if float(enemy.health) <= 0.0:
+	if float(enemy.health) <= 0.0 or amount <= 0.0 or not is_finite(amount):
 		return
-	enemy.health = float(enemy.health) - amount
+	var absorbed: float = minf(float(enemy.get("shield", 0.0)), amount)
+	enemy.shield = float(enemy.get("shield", 0.0)) - absorbed
+	enemy.damage_delay = 4.0
+	enemy.health = float(enemy.health) - (amount - absorbed)
 	enemy.flash = 0.12
 	enemy.slow = maxf(float(enemy.slow), slow)
 	total_damage += amount
@@ -547,17 +631,23 @@ func _damage_enemy(enemy: Dictionary, amount: float, color: Color, slow: float =
 	for i: int in range(4):
 		_add_particle(Vector2(enemy.pos), Vector2.RIGHT.rotated(rng.randf() * TAU) * rng.randf_range(40, 130), color, 2.3, 0.3)
 	if float(enemy.health) <= 0.0:
+		var death: Dictionary = monster_runtime.process_death(enemy)
+		if not death.processed:
+			return
 		kills += 1
-		var leveled: bool = state.add_xp(6 if int(enemy.kind) == 2 else 3)
+		var eligible: bool = bool(death.reward) and not demo_mode
+		if eligible:
+			reward_kills += 1
+		var leveled: bool = state.add_xp(int(enemy.get("xp_reward", 0))) if eligible else false
 		if leveled:
 			health = minf(float(_stats.max_health), health + 25.0)
 			mana = float(_stats.max_mana)
 			hud.notify("升级！获得 1 点天赋 · 按 T 分配")
 			_add_ring(player_pos, 80.0, Color("e7c98d"), 0.7)
 			_add_text(player_pos + Vector2(0, -46), "LEVEL UP", Color("e7c98d"))
-		if kills % 20 == 0:
+		if eligible and reward_kills % 20 == 0:
 			_award_kill_jewel()
-		if kills % 4 == 0:
+		if eligible and reward_kills % 4 == 0:
 			pickups.append({"pos": Vector2(enemy.pos), "life": 22.0})
 		for i: int in range(8):
 			_add_particle(Vector2(enemy.pos), Vector2.RIGHT.rotated(rng.randf() * TAU) * rng.randf_range(35, 120), Color("ce8070"), 3.0, 0.45)
@@ -587,6 +677,7 @@ func hit_player(amount: float) -> void:
 	_add_text(player_pos + Vector2(0, -30), "−%d" % int(amount), Color("94dafa") if absorbed >= amount else Color("fa8c83"))
 	if health <= 0.0:
 		alive = false
+		monster_runtime.cancel_pending("player_death")
 		projectile_runtime.cancel_all(projectiles, "owner_death")
 		save_build()
 		hud.show_death()
@@ -736,7 +827,9 @@ func _draw_enemy(enemy: Dictionary) -> void:
 	var pos: Vector2 = enemy.pos
 	var radius: float = enemy.radius
 	var kind: int = enemy.kind
-	var color: Color = [Color("c7786b"), Color("dbab66"), Color("b089c2")][kind]
+	var rarity: String = str(enemy.get("rarity", "normal"))
+	var tier_color: Color = Monsters.RARITIES[rarity].color
+	var color: Color = tier_color
 	if float(enemy.slow) > 0.0:
 		color = Color("7ac8dd")
 	if float(enemy.flash) > 0.0:
@@ -751,11 +844,24 @@ func _draw_enemy(enemy: Dictionary) -> void:
 	_draw_polygon_shape(pos, radius * 0.73, 4 if kind == 1 else 6, color, angle)
 	var eye_pos := pos + Vector2.RIGHT.rotated(angle) * radius * 0.4
 	draw_circle(eye_pos, 2.5 if kind != 2 else 4.0, Color("ffe7bb"))
+	if rarity != "normal":
+		draw_arc(pos, radius + 6, 0, TAU, 32, tier_color, 2.0, true)
+	if not enemy.get("death_spawns", []).is_empty():
+		for mark: int in range(3):
+			var tip: Vector2 = pos + Vector2.RIGHT.rotated(mark * TAU / 3.0) * (radius + 11)
+			draw_circle(tip, 2.5, tier_color)
 	if kind == 2:
 		draw_arc(pos, radius + 3, 0, TAU, 6, color, 1.0, true)
 	if float(enemy.health) < float(enemy.max_health):
 		draw_rect(Rect2(pos + Vector2(-radius, -radius - 9), Vector2(radius * 2, 3)), Color("101820"))
 		draw_rect(Rect2(pos + Vector2(-radius, -radius - 9), Vector2(radius * 2 * maxf(0, float(enemy.health) / float(enemy.max_health)), 3)), color)
+
+	if float(enemy.get("max_shield", 0.0)) > 0.0:
+		draw_arc(pos, radius + 9, -PI / 2.0, -PI / 2.0 + TAU * float(enemy.get("shield", 0.0)) / float(enemy.max_shield), 32, Color("bfa5f7"), 2.0, true)
+	if rarity != "normal" or demo_mode:
+		var label: String = str(enemy.get("name", "怪物")) + " · " + str(Monsters.RARITIES[rarity].name).split(" · ")[0]
+		var width: float = _font.get_string_size(label, HORIZONTAL_ALIGNMENT_LEFT, -1, 13).x
+		draw_string(_font, pos + Vector2(-width / 2.0, -radius - 17), label, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, tier_color)
 
 
 func _draw_polygon_shape(center: Vector2, radius: float, sides: int, color: Color, angle: float = 0.0) -> void:

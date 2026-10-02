@@ -3,6 +3,8 @@ extends RefCounted
 ## Original radial constellation. Geometry and links are deterministic and planar.
 ## Rings provide alternate routes; spoke paths branch into six distinct disciplines.
 
+const Registry = preload("res://scripts/mechanics/mechanic_registry.gd")
+const Balance = preload("res://scripts/mechanics/passive_balance_adapter.gd")
 const START_ID: String = "origin"
 const RING_COUNTS: Array[int] = [1, 2, 4, 6, 8, 9]
 const SECTORS: Array[Dictionary] = [
@@ -17,14 +19,55 @@ const STAT_LABELS: Dictionary = {
 	"damage": "伤害", "max_health": "最大生命", "max_mana": "最大魔力",
 	"max_shield": "最大护盾", "attack_speed": "攻击速度", "move_speed": "移动速度",
 	"mana_regen": "魔力恢复", "shield_regen": "护盾恢复",
+	"global_increased": "全局伤害提高", "projectile_increased": "投射物伤害提高",
+	"elemental_increased": "元素伤害提高", "area_increased": "范围伤害提高",
 }
 static var _nodes: Dictionary = {}
 static var _edges: Array = []
+static var _presentation_revision: int = -1
 
 
 static func get_nodes() -> Dictionary:
 	_ensure_graph()
+	_refresh_presentations()
 	return _nodes
+
+
+static func get_node_mechanisms(id: String) -> Array[String]:
+	_ensure_graph()
+	var result: Array[String] = []
+	if _nodes.has(id):
+		result.assign(_nodes[id]["mechanism_ids"])
+	return result
+
+
+static func get_node_stats(id: String) -> Dictionary:
+	# Gameplay reads registry definitions live, never the UI's derived stats field.
+	return Registry.resolve_grants(get_node_mechanisms(id), "player")["stats"]
+
+
+static func get_allocated_stats(ids: Array[String]) -> Dictionary:
+	var grants: Array[String] = []
+	for id: String in ids:
+		grants.append_array(get_node_mechanisms(id))
+	return Balance.cap_player_passives(Registry.resolve_grants(grants, "player")["stats"])
+
+
+static func get_node_description(id: String) -> String:
+	get_nodes()
+	return str(_nodes.get(id, {}).get("description", ""))
+
+
+static func _refresh_presentations() -> void:
+	if _presentation_revision == Registry.get_revision():
+		return
+	for id: String in _nodes:
+		var node: Dictionary = _nodes[id]
+		# Compatibility projection for existing tree widgets, not numeric authority.
+		node["stats"] = get_node_stats(id)
+		if node["type"] not in ["start", "socket"]:
+			node["description"] = describe_stats(node["stats"])
+	_presentation_revision = Registry.get_revision()
 
 
 static func get_edges() -> Array:
@@ -48,8 +91,11 @@ static func describe_stats(stats: Dictionary) -> String:
 	var lines: PackedStringArray = []
 	for stat: String in stats:
 		var value: float = float(stats[stat])
-		var amount: String = str(snappedf(value, 0.01))
+		var amount: String = str(snappedf(value, 0.00001))
 		var unit: String = " / 秒" if stat in ["attack_speed", "mana_regen", "shield_regen"] else ""
+		if stat.ends_with("_increased"):
+			amount = str(snappedf(value * 100.0, 0.01))
+			unit = "%"
 		lines.append("%s +%s%s" % [STAT_LABELS.get(stat, stat), amount, unit])
 	return "\n".join(lines)
 
@@ -59,7 +105,7 @@ static func _ensure_graph() -> void:
 		return
 	_nodes[START_ID] = {
 		"id": START_ID, "name": "启明之核", "type": "start", "position": Vector2.ZERO,
-		"stats": {}, "description": "旅程的起点，免费且永久激活。沿连线逐点分配天赋。",
+		"mechanism_ids": [], "stats": {}, "description": "旅程的起点，免费且永久激活。沿连线逐点分配天赋。\n同类天赋加成合计受安全上限约束；装备与珠宝额外结算。",
 		"sector": "origin", "color": Color("f2dab0"), "neighbors": [],
 	}
 	for sector_index: int in range(SECTORS.size()):
@@ -76,12 +122,18 @@ static func _ensure_graph() -> void:
 					kind = "socket"
 				elif (ring == 3 and index == 2) or (ring == 4 and index == 3) or (ring == 5 and index == 6) or (ring == 6 and index == 4):
 					kind = "notable"
-				var stats: Dictionary = {} if kind == "socket" else _stats_for(sector_index, ring, index, kind == "notable")
+				var mechanisms: Array[String] = []
+				var override_id: String = Balance.node_override(id)
+				if kind != "socket":
+					mechanisms.append(override_id if not override_id.is_empty() else _mechanism_for(sector_index, ring, index, kind == "notable"))
 				var display_name: String = _name_for(sector_index, ring, index, kind)
+				if not override_id.is_empty():
+					display_name = str(Registry.get_definition(override_id).get("name", display_name))
 				_nodes[id] = {
 					"id": id, "name": display_name, "type": kind,
 					"position": Vector2(cos(angle), sin(angle)) * float(ring * 170),
-					"stats": stats, "description": "激活后可镶嵌一颗基础珠宝，获得全部词缀。" if kind == "socket" else describe_stats(stats),
+					"mechanism_ids": mechanisms, "stats": {},
+					"description": "激活后可镶嵌一颗基础珠宝，获得全部词缀。" if kind == "socket" else "",
 					"sector": sector_id, "color": sector["color"], "neighbors": [],
 				}
 	# Every ring is a continuous loop, including six cross-discipline boundaries.
@@ -112,25 +164,20 @@ static func _link(first: String, second: String) -> void:
 	_edges.append([first, second])
 
 
-static func _stats_for(sector: int, ring: int, index: int, notable: bool) -> Dictionary:
+static func _mechanism_for(sector: int, ring: int, index: int, notable: bool) -> String:
 	var variant: int = (ring + index) % 3
-	var small: Array[Dictionary] = [
-		{"damage": 2.0} if variant != 1 else {"damage": 1.0, "attack_speed": 0.025},
-		{"max_health": 9.0} if variant != 1 else {"max_health": 5.0, "max_shield": 3.0},
-		{"max_mana": 7.0} if variant != 1 else {"max_mana": 3.0, "mana_regen": 0.4},
-		{"attack_speed": 0.045, "move_speed": 2.0} if variant != 1 else {"move_speed": 5.0},
-		{"max_shield": 7.0} if variant != 1 else {"max_shield": 3.0, "shield_regen": 0.55},
-		{"damage": 1.0, "max_health": 4.0} if variant == 0 else ({"max_mana": 4.0, "max_shield": 4.0} if variant == 1 else {"mana_regen": 0.3, "shield_regen": 0.4}),
+	var small: Array[String] = [
+		"ember_power" if variant != 1 else "ember_fervor",
+		"grove_vitality" if variant != 1 else "grove_guard",
+		"tide_capacity" if variant != 1 else "tide_flow",
+		"gale_alacrity" if variant != 1 else "gale_stride",
+		"aegis_capacity" if variant != 1 else "aegis_recovery",
+		"prism_vigor" if variant == 0 else ("prism_reserve" if variant == 1 else "prism_recovery"),
 	]
-	var major: Array[Dictionary] = [
-		{"damage": 7.0, "attack_speed": 0.08},
-		{"max_health": 30.0, "max_shield": 8.0},
-		{"max_mana": 22.0, "mana_regen": 1.2},
-		{"attack_speed": 0.16, "move_speed": 12.0},
-		{"max_shield": 22.0, "shield_regen": 1.7},
-		{"damage": 3.0, "max_health": 12.0, "max_mana": 8.0, "max_shield": 8.0},
+	var major: Array[String] = [
+		"ember_mastery", "grove_mastery", "tide_mastery", "gale_mastery", "aegis_mastery", "prism_mastery",
 	]
-	return (major[sector] if notable else small[sector]).duplicate()
+	return major[sector] if notable else small[sector]
 
 
 static func _name_for(sector: int, ring: int, index: int, kind: String) -> String:

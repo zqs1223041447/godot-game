@@ -58,9 +58,7 @@ func get_stats() -> Dictionary:
 		if Data.ITEMS.has(item_id):
 			_add_stats(result, Data.ITEMS[item_id]["stats"])
 	var nodes: Dictionary = Passives.get_nodes()
-	for node_id: String in allocated_nodes:
-		if nodes.has(node_id):
-			_add_stats(result, nodes[node_id]["stats"])
+	_add_stats(result, Passives.get_allocated_stats(allocated_nodes))
 	for socket_id: String in socketed_jewels:
 		if allocated_nodes.has(socket_id) and nodes.has(socket_id) and nodes[socket_id]["type"] == "socket":
 			_add_stats(result, get_jewel_stats(socketed_jewels[socket_id]))
