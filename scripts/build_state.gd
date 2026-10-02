@@ -538,12 +538,12 @@ func save_build(path: String = "user://build_save.json") -> Error:
 		return ERR_INVALID_DATA
 	# Keep the original legacy save before the first migration overwrite.
 	# A backup failure aborts autosave without touching the old file.
-	if ProjectSettings.globalize_path(path) == _migration_source_path and not _migration_source_bytes.is_empty():
-		var backup_error: Error = _backup_legacy_save(path)
+	if _save_paths_match(path, _migration_source_path) and not _migration_source_bytes.is_empty():
+		var backup_error: Error = _backup_legacy_save(_migration_source_path)
 		if backup_error != OK:
 			return backup_error
 	var write_error: Error = _atomic_write(path, serialized)
-	if write_error == OK and ProjectSettings.globalize_path(path) == _migration_source_path:
+	if write_error == OK and _save_paths_match(path, _migration_source_path):
 		_migration_source_bytes = PackedByteArray()
 	return write_error
 
@@ -567,7 +567,9 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	var candidate: Dictionary = _validate_snapshot(parser.data)
 	if candidate.is_empty():
 		return _reject_load(path, "存档数据无效或属于不兼容版本")
-	_blocked_save_paths.erase(ProjectSettings.globalize_path(path))
+	for blocked_path: String in _blocked_save_paths.keys():
+		if _save_paths_match(path, blocked_path):
+			_blocked_save_paths.erase(blocked_path)
 	last_load_error = ""
 	# Commit only after every field, graph connection and jewel location validates.
 	inventory.assign(candidate["inventory"])
@@ -617,7 +619,7 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	if migrated_from_v8:
 		migration_message = "构筑已升级：原装备掷值、辅助、天赋与珠宝保持不变。新增白蜡长弓进入正常掉落；本武器词缀仅作用于武器攻击命中。"
 	migration_backup_path = ""
-	_migration_source_path = ProjectSettings.globalize_path(path) if _migration_version < SAVE_VERSION else ""
+	_migration_source_path = path if _migration_version < SAVE_VERSION else ""
 	_migration_source_bytes = source_bytes if _migration_version < SAVE_VERSION else PackedByteArray()
 	_sync_backpack()
 	changed.emit()
@@ -625,7 +627,37 @@ func load_build(path: String = "user://build_save.json") -> bool:
 
 
 func save_block_reason(path: String = "user://build_save.json") -> String:
-	return str(_blocked_save_paths.get(ProjectSettings.globalize_path(path), ""))
+	for blocked_path: String in _blocked_save_paths:
+		if _save_paths_match(path, blocked_path):
+			return str(_blocked_save_paths[blocked_path])
+	return ""
+
+
+static func _save_paths_match(path_a: String, path_b: String) -> bool:
+	if path_a.is_empty() or path_b.is_empty():
+		return false
+	var absolute_a: String = ProjectSettings.globalize_path(path_a).replace("\\", "/")
+	var absolute_b: String = ProjectSettings.globalize_path(path_b).replace("\\", "/")
+	if absolute_a == absolute_b:
+		return true
+	var filesystem: DirAccess = DirAccess.open(".")
+	if filesystem == null:
+		return false
+	if absolute_a.is_relative_path():
+		absolute_a = filesystem.get_current_dir().path_join(absolute_a)
+	if absolute_b.is_relative_path():
+		absolute_b = filesystem.get_current_dir().path_join(absolute_b)
+	if filesystem.is_equivalent(absolute_a, absolute_b):
+		return true
+	# Keep protection when an external lock/deletion prevents querying the file.
+	# Compare directory identity before applying that directory's filename rules.
+	var parent_a: String = absolute_a.get_base_dir()
+	var parent_b: String = absolute_b.get_base_dir()
+	if not filesystem.is_equivalent(parent_a, parent_b):
+		return false
+	return absolute_a.get_file() == absolute_b.get_file() or (
+		not filesystem.is_case_sensitive(parent_a)
+		and absolute_a.get_file().nocasecmp_to(absolute_b.get_file()) == 0)
 
 
 func _reject_load(path: String, reason: String) -> bool:

@@ -44,7 +44,7 @@ pwsh -NoProfile -File .\tools\validate_windows.ps1 `
 | 目标文件锁 | PowerShell 持有允许读、禁止写/delete 的真实 Windows 句柄；rename 失败保留原文件，清除本次 `.tmp`，解锁后保存成功 |
 | 临时文件锁 | `.tmp` 由 FileShare.None 句柄持有；打开写入失败，原文件及其他进程临时文件的哨兵字节保留；解除后重试 |
 | rename 目录冲突 | 目标同名目录及内部哨兵保留，本次 `.tmp` 清除；移除本轮冲突后重试 |
-| Windows 大小写别名 | 大写绝对路径必须遵守未来版本 guard 和旧版原字节备份约束；当前 v0.13.0 的失败见下文 |
+| Windows 路径别名 | `user://`↔绝对路径、`..`/`.`、反斜线、大小写与组合别名；v1–v8 × 6 别名共 48 组迁移，未来版本、冲突、外部改写、删除后的保护、同文件恢复解锁与独立副本 |
 
 fixtures 在 Git 中保存为普通 UTF-8/LF JSON。`save_fixture.gd` 在沙箱中显式生成 BOM/CRLF 变体，避免 Git 行尾转换破坏预期原字节。比较独立 JSON 记录与模型时，会对两侧重新解析，以排除 JSON 数字 float 与模型 int 的类型差异；模型往返和原文件/备份仍分别做完整快照及原字节比较。
 
@@ -56,7 +56,7 @@ runner 同时要求进程退出码、唯一隔离 marker、唯一完成 marker�
 
 所有存档检查通过但有该系统错误时，状态为 `passed-with-system-errors`，退出 0。加 `-StrictLogs` 时，全部存档检查完成后仍因系统错误返回失败。其他状态为 `passed` 或 `failed`。本轮由于下面的生产问题返回 `failed`，不是因为证书错误。
 
-## 本机结果与最小生产复现
+## 修复前复现与修复后结果
 
 基线：main v0.13.0，`a4a306a`；Godot `4.6.3.stable.official.7d41c59c4`。2026-10-02 Windows headless 实测：基础存档及文件故障共 **1326 checks / 0 failures**；大小写别名 **14 checks / 3 failures**，共 **1340 checks / 3 failures**。正探针通过，反探针退出 78；调用者环境与源文件没有变化。
 
@@ -69,4 +69,31 @@ runner 同时要求进程退出码、唯一隔离 marker、唯一完成 marker�
 
 `BuildState` 用未经 Windows 文件身份归一化的 `ProjectSettings.globalize_path(path)` 字符串作为 guard key、迁移源比较值。实测 Windows 文件访问不区分这些路径的大小写，而这些字符串键/比较区分大小写。两种复现都保留在同一失败步骤的 `result.reproductions` 中；三个失败断言阻止 runner 把结果标为通过。
 
-本分支只增加 runner、fixtures、回归测试与本说明，未修改 `scripts/build_state.gd` 或其他生产代码。需要父任务独立修复路径身份比较后，再运行完整 runner。窗口内的存档提示、真实成品 GUI 和人工解锁不属于这次 headless 结果，也未绕过锁屏。
+后续独立修复分支 `codex/windows-save-path-identity-fix-20261002` 经授权只修改 `BuildState` 的保存路径判断与解锁：新增 `_save_paths_match`，用于保护查询、成功加载解锁和迁移保存前后比较。先使用 `DirAccess.is_equivalent` 查询文件身份；文件锁或删除使查询不可用时，先确认父目录身份，再按该目录的 `is_case_sensitive` 规则比较文件名。没有跨平台无条件转小写。迁移保留原加载路径，备份从该源读取，保留正常 `user://` 备份诊断路径及精确字节检查。[Godot DirAccess 身份与目录大小写 API](https://docs.godotengine.org/en/4.6/classes/class_diraccess.html#class-diraccess-method-is-equivalent)
+
+扩展回归在未修复代码上为 **2058 checks / 162 failures**，其中原 **1326 项基线全部通过**；只应用上述补丁后为 **2058 checks / 0 failures**（1326 基线 + 732 别名回归）。原先 14 项中的三处失败全部转绿。每次均使用新的临时工程和 userdata；正探针通过、负探针返回 78、源资源及调用者环境未变。
+
+| 2026-10-02 本机证据 | 沙箱 token | 结果 |
+|---|---|---|
+| v0.13 扩展红色回归 | `10d493f5696f459aa981e61d350f1694` | 2058 / 162；基线 1326 / 0 |
+| v0.13 最小补丁后 | `e23cb9373efd49f38039eb62d4e4220e` | 2058 / 0 |
+| v0.14 原始集成副本 | `67768d94e28244588cbfff61c400604b` | 76 / 18 |
+| v0.14 仅应用路径补丁的副本 | `b559f002f779413ea49d982871266c4e` | 76 / 0 |
+
+报告及原始 stdout/stderr 保存在各沙箱 `report.json` 与 `logs/`，未把人工失败日志或存档混入仓库。通过项仍为 `passed-with-system-errors`，证书存储错误与 `strict_log_clean=false` 保留；没有改动日志判定、系统证书或安全设置。
+
+## v0.14 集成兼容补测
+
+基线为 `codex/v014-pierce-integration` 的 `59f173c533ba3d9ff79fdcee7ac665a15d80a67c`。只读提取源码，在分别经 userdata 探针验证的新沙箱里运行 `save_v14_alias_test.gd`；没有改写或合并该分支。补丁副本只替换 `save_build`、`save_block_reason`，添加 `_save_paths_match`，以及 `load_build` 的保护清除和迁移源路径两处语句；schema10、v9→v10 迁移与 SupportRegistry 保留。主集成应应用这些局部改动，避免整份 v0.13 `BuildState` 覆盖 v0.14。
+
+76 项覆盖未来 v11 的大写别名保护、v8/v9 的大写及带 `..` 大写别名迁移、BOM/CRLF 原字节备份、schema10 roundtrip、冲突备份及外部改写拒绝。该额外脚本面向 schema10，不加入 schema9 runner 的默认入口；同样必须先复制独立最小工程、用 `save_probe.gd` 实证 userdata 并由宿主复核，才能动态加载模型。
+
+## Linux 兼容回归入口与待办
+
+`save_linux_identity_test.gd` 提供原生 Linux 定向回归：case-sensitive 文件系统上的 `Case.json` 与 `case.json` 独立保护/Save As、缺失源保护、dot/绝对别名解锁、历史版本原字节备份，以及字节相同但不同大小写的独立旧版副本。先执行 `--script res://tests/windows/save_linux_identity_test.gd -- probe`，此阶段不加载 `BuildState` 或写 fixture；宿主复核唯一 `SAVE_QA_GATE`、退出码和实际 `OS.get_user_data_dir()` 后，才能给后续子进程设置 `GODOT_SAVE_QA_PROBE_VERIFIED=<token>` 并运行不带 `probe` 的测试。
+
+必须使用全新 Linux 工程与唯一 sandbox，项目名 `Linux Save QA <token>`、`use_custom_user_dir=true`、`custom_user_dir_name="存档 沙箱 <token>"`；子进程的 XDG_DATA_HOME、XDG_CONFIG_HOME、XDG_CACHE_HOME 都位于该 sandbox。环境元数据 `GODOT_SAVE_QA_ROOT`、`GODOT_SAVE_QA_PROJECT`、`GODOT_SAVE_QA_USERDATA`、`GODOT_SAVE_QA_TOKEN` 必须与实测路径完全相符。保留 HOME，源模型及 JSON 依赖只复制进最小工程，禁用 autoload、plugin 和 editor/import。测试 userdata 应在原生大小写敏感文件系统，而非未经证实的 Windows 挂载位置；检查全部异常日志和完成标记。
+
+本机 WSL Ubuntu 未找到已安装 Linux Godot，未额外下载或安装。该脚本已用 Godot 4.6.3 编译并证实在 Windows 上返回 78、在加载模型前拒绝执行；**Linux 原生运行尚未完成**，需由主集成复用已有 Linux 运行时完成，不能把 Windows 的平台拒绝当作 Linux 通过证据。
+
+游戏内的存档提示、真实成品 GUI 验收仍需人工解锁后的人工操作；本 headless 任务没有执行也未绕过锁屏。
