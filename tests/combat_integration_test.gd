@@ -272,6 +272,8 @@ func _test_schema_two_migration() -> void:
 	_expect(old.move_in_backpack("item:ember_wand", Vector2i(10, 5)), "Legacy fixture includes a custom non-packed inventory position")
 	var legacy: Dictionary = old._snapshot()
 	legacy.version = 2
+	legacy.erase("equipment_instances")
+	legacy.erase("next_equipment_id")
 	_expect(legacy.inventory.size() == 6 and not old._validate_snapshot(legacy).is_empty(), "True schema2 original-six inventory and exact corresponding layout validate")
 	var original_text: String = "\n" + JSON.stringify(legacy, "  ", true, true) + "\n"
 	if not _write_fixture(path, original_text):
@@ -298,7 +300,7 @@ func _test_schema_two_migration() -> void:
 	_expect(FileAccess.file_exists(backup) and FileAccess.get_file_as_string(backup) == original_text, "Migration backup preserves original schema2 bytes exactly")
 	_expect(loaded.migration_backup_path == backup, "Migration records the actual backup destination")
 	var saved: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
-	_expect(saved is Dictionary and int(saved.version) == 3, "Migrated primary save writes schema3")
+	_expect(saved is Dictionary and int(saved.version) == Model.SAVE_VERSION, "Migrated primary save writes current schema")
 	_expect(migration_changes == 2, "Saving migration does not emit redundant build changes")
 	var reloaded = Model.new()
 	_expect(reloaded.load_build(path) and reloaded._snapshot() == loaded._snapshot(), "Schema3 migrated build round-trips every field")
