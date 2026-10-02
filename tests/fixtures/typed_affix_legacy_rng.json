@@ -1,0 +1,9278 @@
+{
+	"affixes": "{\n\"beatlink\": {\n\"group\": \"attack_timing\",\n\"kind\": \"suffix\",\n\"label\": \"普通攻击速度提高\",\n\"name\": \"连拍\",\n\"slots\": [\"weapon\", \"charm\"],\n\"stat\": \"attack_speed_increased\",\n\"tiers\": [{\n\"level\": 1,\n\"max\": 3,\n\"min\": 2,\n\"tier\": 1,\n\"weight\": 100\n}, {\n\"level\": 8,\n\"max\": 6,\n\"min\": 4,\n\"tier\": 2,\n\"weight\": 60\n}, {\n\"level\": 16,\n\"max\": 9,\n\"min\": 7,\n\"tier\": 3,\n\"weight\": 30\n}],\n\"unit\": \"percent\"\n},\n\"coalglow\": {\n\"group\": \"fire_amplification\",\n\"kind\": \"suffix\",\n\"label\": \"火焰伤害提高\",\n\"name\": \"藏炭\",\n\"slots\": [\"weapon\", \"armor\", \"charm\"],\n\"stat\": \"fire_increased\",\n\"tiers\": [{\n\"level\": 1,\n\"max\": 8,\n\"min\": 5,\n\"tier\": 1,\n\"weight\": 100\n}, {\n\"level\": 8,\n\"max\": 14,\n\"min\": 9,\n\"tier\": 2,\n\"weight\": 60\n}, {\n\"level\": 16,\n\"max\": 20,\n\"min\": 15,\n\"tier\": 3,\n\"weight\": 30\n}],\n\"unit\": \"percent\"\n},\n\"deepwell\": {\n\"group\": \"mana_capacity\",\n\"kind\": \"prefix\",\n\"label\": \"最大魔力\",\n\"name\": \"深汲\",\n\"slots\": [\"weapon\", \"armor\", \"charm\"],\n\"stat\": \"max_mana\",\n\"tiers\": [{\n\"level\": 1,\n\"max\": 9,\n\"min\": 5,\n\"tier\": 1,\n\"weight\": 100\n}, {\n\"level\": 8,\n\"max\": 15,\n\"min\": 10,\n\"tier\": 2,\n\"weight\": 60\n}, {\n\"level\": 16,\n\"max\": 22,\n\"min\": 16,\n\"tier\": 3,\n\"weight\": 30\n}],\n\"unit\": \"flat\"\n},\n\"farweave\": {\n\"group\": \"projectile_amplification\",\n\"kind\": \"prefix\",\n\"label\": \"投射物伤害提高（不含独立爆炸）\",\n\"name\": \"远织\",\n\"slots\": [\"weapon\", \"charm\"],\n\"stat\": \"projectile_increased\",\n\"tiers\": [{\n\"level\": 1,\n\"max\": 7,\n\"min\": 4,\n\"tier\": 1,\n\"weight\": 100\n}, {\n\"level\": 8,\n\"max\": 12,\n\"min\": 8,\n\"tier\": 2,\n\"weight\": 60\n}, {\n\"level\": 16,\n\"max\": 18,\n\"min\": 13,\n\"tier\": 3,\n\"weight\": 30\n}],\n\"unit\": \"percent\"\n},\n\"lanternveil\": {\n\"group\": \"shield_capacity\",\n\"kind\": \"prefix\",\n\"label\": \"全局最大护盾\",\n\"name\": \"灯帷\",\n\"slots\": [\"armor\", \"charm\"],\n\"stat\": \"max_shield\",\n\"tiers\": [{\n\"level\": 1,\n\"max\": 9,\n\"min\": 5,\n\"tier\": 1,\n\"weight\": 100\n}, {\n\"level\": 8,\n\"max\": 15,\n\"min\": 10,\n\"tier\": 2,\n\"weight\": 60\n}, {\n\"level\": 16,\n\"max\": 22,\n\"min\": 16,\n\"tier\": 3,\n\"weight\": 30\n}],\n\"unit\": \"flat\"\n},\n\"prismedge\": {\n\"group\": \"attack_elemental_amplification\",\n\"kind\": \"prefix\",\n\"label\": \"攻击元素伤害提高\",\n\"name\": \"折辉\",\n\"slots\": [\"weapon\", \"charm\"],\n\"stat\": \"attack_elemental_increased\",\n\"tiers\": [{\n\"level\": 1,\n\"max\": 7,\n\"min\": 4,\n\"tier\": 1,\n\"weight\": 100\n}, {\n\"level\": 8,\n\"max\": 12,\n\"min\": 8,\n\"tier\": 2,\n\"weight\": 60\n}, {\n\"level\": 16,\n\"max\": 18,\n\"min\": 13,\n\"tier\": 3,\n\"weight\": 30\n}],\n\"unit\": \"percent\"\n},\n\"rimeecho\": {\n\"group\": \"cold_amplification\",\n\"kind\": \"suffix\",\n\"label\": \"冰霜伤害提高\",\n\"name\": \"霜回\",\n\"slots\": [\"weapon\", \"armor\", \"charm\"],\n\"stat\": \"cold_increased\",\n\"tiers\": [{\n\"level\": 1,\n\"max\": 8,\n\"min\": 5,\n\"tier\": 1,\n\"weight\": 100\n}, {\n\"level\": 8,\n\"max\": 14,\n\"min\": 9,\n\"tier\": 2,\n\"weight\": 60\n}, {\n\"level\": 16,\n\"max\": 20,\n\"min\": 15,\n\"tier\": 3,\n\"weight\": 30\n}],\n\"unit\": \"percent\"\n},\n\"rootwell\": {\n\"group\": \"life_capacity\",\n\"kind\": \"prefix\",\n\"label\": \"最大生命\",\n\"name\": \"根泉\",\n\"slots\": [\"armor\", \"charm\"],\n\"stat\": \"max_health\",\n\"tiers\": [{\n\"level\": 1,\n\"max\": 14,\n\"min\": 8,\n\"tier\": 1,\n\"weight\": 100\n}, {\n\"level\": 8,\n\"max\": 22,\n\"min\": 15,\n\"tier\": 2,\n\"weight\": 60\n}, {\n\"level\": 16,\n\"max\": 32,\n\"min\": 23,\n\"tier\": 3,\n\"weight\": 30\n}],\n\"unit\": \"flat\"\n},\n\"runesong\": {\n\"group\": \"spell_amplification\",\n\"kind\": \"prefix\",\n\"label\": \"法术伤害提高\",\n\"name\": \"符歌\",\n\"slots\": [\"weapon\", \"charm\"],\n\"stat\": \"spell_increased\",\n\"tiers\": [{\n\"level\": 1,\n\"max\": 7,\n\"min\": 4,\n\"tier\": 1,\n\"weight\": 100\n}, {\n\"level\": 8,\n\"max\": 12,\n\"min\": 8,\n\"tier\": 2,\n\"weight\": 60\n}, {\n\"level\": 16,\n\"max\": 18,\n\"min\": 13,\n\"tier\": 3,\n\"weight\": 30\n}],\n\"unit\": \"percent\"\n},\n\"sparkthread\": {\n\"group\": \"lightning_amplification\",\n\"kind\": \"suffix\",\n\"label\": \"闪电伤害提高\",\n\"name\": \"引霆\",\n\"slots\": [\"weapon\", \"armor\", \"charm\"],\n\"stat\": \"lightning_increased\",\n\"tiers\": [{\n\"level\": 1,\n\"max\": 8,\n\"min\": 5,\n\"tier\": 1,\n\"weight\": 100\n}, {\n\"level\": 8,\n\"max\": 14,\n\"min\": 9,\n\"tier\": 2,\n\"weight\": 60\n}, {\n\"level\": 16,\n\"max\": 20,\n\"min\": 15,\n\"tier\": 3,\n\"weight\": 30\n}],\n\"unit\": \"percent\"\n},\n\"trailstep\": {\n\"group\": \"movement_timing\",\n\"kind\": \"suffix\",\n\"label\": \"移动速度提高\",\n\"name\": \"循迹\",\n\"slots\": [\"armor\", \"charm\"],\n\"stat\": \"move_speed_increased\",\n\"tiers\": [{\n\"level\": 1,\n\"max\": 2,\n\"min\": 1,\n\"tier\": 1,\n\"weight\": 100\n}, {\n\"level\": 8,\n\"max\": 4,\n\"min\": 3,\n\"tier\": 2,\n\"weight\": 60\n}, {\n\"level\": 16,\n\"max\": 6,\n\"min\": 5,\n\"tier\": 3,\n\"weight\": 30\n}],\n\"unit\": \"percent\"\n},\n\"wellturn\": {\n\"group\": \"mana_recovery\",\n\"kind\": \"suffix\",\n\"label\": \"魔力恢复速度提高\",\n\"name\": \"泉旋\",\n\"slots\": [\"weapon\", \"armor\", \"charm\"],\n\"stat\": \"mana_regen_increased\",\n\"tiers\": [{\n\"level\": 1,\n\"max\": 5,\n\"min\": 3,\n\"tier\": 1,\n\"weight\": 100\n}, {\n\"level\": 8,\n\"max\": 9,\n\"min\": 6,\n\"tier\": 2,\n\"weight\": 60\n}, {\n\"level\": 16,\n\"max\": 14,\n\"min\": 10,\n\"tier\": 3,\n\"weight\": 30\n}],\n\"unit\": \"percent\"\n}\n}",
+	"bases": "{\n\"cinder_reed\": {\n\"description\": \"基础伤害 +3，魔力恢复 +0.25 / 秒。基础伤害为角色通用加值。\",\n\"name\": \"烬芦杖\",\n\"size\": Vector2i(1, 3),\n\"slot\": \"weapon\",\n\"stats\": {\n\"damage\": 3.0,\n\"mana_regen\": 0.25\n}\n},\n\"gale_spindle\": {\n\"description\": \"基础伤害 +2，攻击速度 +0.08 / 秒。基础伤害为角色通用加值。\",\n\"name\": \"岚纺刃\",\n\"size\": Vector2i(1, 3),\n\"slot\": \"weapon\",\n\"stats\": {\n\"attack_speed\": 0.08,\n\"damage\": 2.0\n}\n},\n\"pulse_seed\": {\n\"description\": \"最大生命 +8，移动速度 +3。\",\n\"name\": \"脉籽符\",\n\"size\": Vector2i(1, 1),\n\"slot\": \"charm\",\n\"stats\": {\n\"max_health\": 8.0,\n\"move_speed\": 3.0\n}\n},\n\"tidebound_coat\": {\n\"description\": \"最大护盾 +10，护盾恢复 +0.6 / 秒。护盾为角色全局加值。\",\n\"name\": \"潮缄袍\",\n\"size\": Vector2i(2, 3),\n\"slot\": \"armor\",\n\"stats\": {\n\"max_shield\": 10.0,\n\"shield_regen\": 0.6\n}\n},\n\"wayglass_token\": {\n\"description\": \"最大魔力 +6，魔力恢复 +0.3 / 秒。\",\n\"name\": \"途镜坠\",\n\"size\": Vector2i(1, 1),\n\"slot\": \"charm\",\n\"stats\": {\n\"mana_regen\": 0.3,\n\"max_mana\": 6.0\n}\n},\n\"woven_bastion\": {\n\"description\": \"最大生命 +12，最大护盾 +5。护盾为角色全局加值。\",\n\"name\": \"绳垒衣\",\n\"size\": Vector2i(2, 3),\n\"slot\": \"armor\",\n\"stats\": {\n\"max_health\": 12.0,\n\"max_shield\": 5.0\n}\n}\n}",
+	"engine": "4.6.3-stable (official)",
+	"rarities": "{\n\"magic\": {\n\"color\": Color(0.5568628, 0.72156864, 1, 1),\n\"max_affixes\": 2,\n\"max_prefixes\": 1,\n\"max_suffixes\": 1,\n\"min_affixes\": 1,\n\"name\": \"魔法\",\n\"weight\": 55\n},\n\"normal\": {\n\"color\": Color(0.88235295, 0.90588236, 0.9372549, 1),\n\"max_affixes\": 0,\n\"max_prefixes\": 0,\n\"max_suffixes\": 0,\n\"min_affixes\": 0,\n\"name\": \"普通\",\n\"weight\": 30\n},\n\"rare\": {\n\"color\": Color(0.9137255, 0.80784315, 0.4862745, 1),\n\"max_affixes\": 6,\n\"max_prefixes\": 3,\n\"max_suffixes\": 3,\n\"min_affixes\": 4,\n\"name\": \"稀有\",\n\"weight\": 15\n}\n}",
+	"sequences": [
+		{
+			"samples": [
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 9
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 3
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000001",
+						"item_level": 1,
+						"rarity": "rare"
+					},
+					"requested_rarity": "",
+					"rng_state": "-5234540103586539211"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 6
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000002",
+						"item_level": 7,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "2154328060774843443"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 3
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000003",
+						"item_level": 8,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "-3299030162849315060"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "coalglow",
+								"tier": 2,
+								"value": 11
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000004",
+						"item_level": 15,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "-8335979940491811630"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 2,
+								"value": 12
+							},
+							{
+								"id": "coalglow",
+								"tier": 2,
+								"value": 14
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000005",
+						"item_level": 16,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "585670822743196647"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 3,
+								"value": 24
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 6
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000006",
+						"item_level": 30,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "3001327079389612688"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000007",
+						"item_level": 1,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-7194620166017872401"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000008",
+						"item_level": 7,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "3663827648653592226"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "pulse_seed",
+						"id": "gear_000009",
+						"item_level": 8,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "1362994203411024665"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "pulse_seed",
+						"id": "gear_000010",
+						"item_level": 15,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-851828734104281852"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000011",
+						"item_level": 16,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "92117909668517971"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "wayglass_token",
+						"id": "gear_000012",
+						"item_level": 30,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-5176502616529258954"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 2
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000013",
+						"item_level": 1,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "6720537629662884780"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000014",
+						"item_level": 7,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "2553256779041324146"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 2
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000015",
+						"item_level": 8,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-8501515925304623608"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "sparkthread",
+								"tier": 2,
+								"value": 12
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000016",
+						"item_level": 15,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "2888665117105519086"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "sparkthread",
+								"tier": 2,
+								"value": 9
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000017",
+						"item_level": 16,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-8139160738847614407"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "wellturn",
+								"tier": 2,
+								"value": 7
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000018",
+						"item_level": 30,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-2377954814305310953"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 8
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000019",
+						"item_level": 1,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-4090829238859609434"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 10
+							},
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 3
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 2
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000020",
+						"item_level": 7,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "4264811110195805764"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 12
+							},
+							{
+								"id": "deepwell",
+								"tier": 2,
+								"value": 15
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 1
+							},
+							{
+								"id": "rimeecho",
+								"tier": 2,
+								"value": 14
+							},
+							{
+								"id": "coalglow",
+								"tier": 2,
+								"value": 11
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000021",
+						"item_level": 8,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-2120302562262654657"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 2,
+								"value": 9
+							},
+							{
+								"id": "deepwell",
+								"tier": 2,
+								"value": 15
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "rimeecho",
+								"tier": 2,
+								"value": 14
+							},
+							{
+								"id": "wellturn",
+								"tier": 2,
+								"value": 7
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000022",
+						"item_level": 15,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-2830019432637516498"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "wellturn",
+								"tier": 2,
+								"value": 7
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "trailstep",
+								"tier": 3,
+								"value": 5
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000023",
+						"item_level": 16,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "617962695558980439"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 2,
+								"value": 12
+							},
+							{
+								"id": "prismedge",
+								"tier": 3,
+								"value": 14
+							},
+							{
+								"id": "beatlink",
+								"tier": 3,
+								"value": 8
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000024",
+						"item_level": 30,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "5400223920566762982"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 13
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000025",
+						"item_level": 1,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "3994129422164745803"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "gale_spindle",
+						"id": "gear_000026",
+						"item_level": 7,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "-1498308697032336683"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "prismedge",
+								"tier": 2,
+								"value": 9
+							},
+							{
+								"id": "farweave",
+								"tier": 2,
+								"value": 11
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "sparkthread",
+								"tier": 2,
+								"value": 10
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000027",
+						"item_level": 8,
+						"rarity": "rare"
+					},
+					"requested_rarity": "",
+					"rng_state": "-4607524030206088101"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 2,
+								"value": 10
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000028",
+						"item_level": 15,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "-3851406529401295575"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 8
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000029",
+						"item_level": 16,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "4314621710344387207"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "pulse_seed",
+						"id": "gear_000030",
+						"item_level": 30,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "5540074283572631921"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "woven_bastion",
+						"id": "gear_000031",
+						"item_level": 1,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-5753992670212978052"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "wayglass_token",
+						"id": "gear_000032",
+						"item_level": 7,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "433714431610674795"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "woven_bastion",
+						"id": "gear_000033",
+						"item_level": 8,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-8933994098925850514"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000034",
+						"item_level": 15,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "762129749644974069"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "wayglass_token",
+						"id": "gear_000035",
+						"item_level": 16,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "8228183580516107184"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "woven_bastion",
+						"id": "gear_000036",
+						"item_level": 30,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-2196480567196239729"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 7
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000037",
+						"item_level": 1,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-2494591460278487466"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000038",
+						"item_level": 7,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "7634396191752267009"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 8
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000039",
+						"item_level": 8,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-67881075138768993"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 7
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000040",
+						"item_level": 15,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "5460422320984670285"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "coalglow",
+								"tier": 2,
+								"value": 14
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000041",
+						"item_level": 16,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "1145349428956524316"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 2,
+								"value": 16
+							},
+							{
+								"id": "trailstep",
+								"tier": 3,
+								"value": 6
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000042",
+						"item_level": 30,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-7424639886805978014"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 11
+							},
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 6
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000043",
+						"item_level": 1,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "9103519958124925349"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 9
+							},
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 11
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 1
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 3
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000044",
+						"item_level": 7,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-1880098624269775189"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 2,
+								"value": 10
+							},
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 9
+							},
+							{
+								"id": "deepwell",
+								"tier": 2,
+								"value": 12
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 2
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 7
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000045",
+						"item_level": 8,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-413497213932760982"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "deepwell",
+								"tier": 2,
+								"value": 12
+							},
+							{
+								"id": "trailstep",
+								"tier": 2,
+								"value": 3
+							},
+							{
+								"id": "wellturn",
+								"tier": 2,
+								"value": 8
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 7
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000046",
+						"item_level": 15,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-7819429930332126579"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 2,
+								"value": 13
+							},
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 10
+							},
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "rimeecho",
+								"tier": 2,
+								"value": 10
+							},
+							{
+								"id": "coalglow",
+								"tier": 2,
+								"value": 9
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 1
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000047",
+						"item_level": 16,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "6264556959913032019"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "lanternveil",
+								"tier": 3,
+								"value": 19
+							},
+							{
+								"id": "prismedge",
+								"tier": 2,
+								"value": 10
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 2
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000048",
+						"item_level": 30,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "395506715276196210"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "gale_spindle",
+						"id": "gear_000049",
+						"item_level": 1,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "-7343561226545517484"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "woven_bastion",
+						"id": "gear_000050",
+						"item_level": 7,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "-2448592208805267962"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 2,
+								"value": 15
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000051",
+						"item_level": 8,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "3860100138526670076"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "pulse_seed",
+						"id": "gear_000052",
+						"item_level": 15,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "8877117552873924334"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "wayglass_token",
+						"id": "gear_000053",
+						"item_level": 16,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "-2802094576965263824"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 2,
+								"value": 12
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 2
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000054",
+						"item_level": 30,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "-7587431424919577027"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "pulse_seed",
+						"id": "gear_000055",
+						"item_level": 1,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-4444278472889018792"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "wayglass_token",
+						"id": "gear_000056",
+						"item_level": 7,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-3073592581986559977"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000057",
+						"item_level": 8,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-8346885467604064342"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "wayglass_token",
+						"id": "gear_000058",
+						"item_level": 15,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "1789405470129459585"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "woven_bastion",
+						"id": "gear_000059",
+						"item_level": 16,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "4744403927974745420"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "tidebound_coat",
+						"id": "gear_000060",
+						"item_level": 30,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "2862572386366682363"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000061",
+						"item_level": 1,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-3460696915433414382"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 2
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000062",
+						"item_level": 7,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-7157803429872630579"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "wellturn",
+								"tier": 2,
+								"value": 7
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000063",
+						"item_level": 8,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "9024309876129746699"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 4
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000064",
+						"item_level": 15,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-7217712736328740126"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 2,
+								"value": 8
+							},
+							{
+								"id": "trailstep",
+								"tier": 3,
+								"value": 6
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000065",
+						"item_level": 16,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-2261211646616635144"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 2,
+								"value": 13
+							},
+							{
+								"id": "wellturn",
+								"tier": 2,
+								"value": 6
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000066",
+						"item_level": 30,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "4888418446323299678"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000067",
+						"item_level": 1,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-874831750300259279"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 11
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 3
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 2
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000068",
+						"item_level": 7,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-7154479312423818344"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "rootwell",
+								"tier": 2,
+								"value": 15
+							},
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "wellturn",
+								"tier": 2,
+								"value": 9
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000069",
+						"item_level": 8,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-6092063954149553434"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "rootwell",
+								"tier": 2,
+								"value": 21
+							},
+							{
+								"id": "coalglow",
+								"tier": 2,
+								"value": 10
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000070",
+						"item_level": 15,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "4013916734574937967"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "farweave",
+								"tier": 2,
+								"value": 11
+							},
+							{
+								"id": "deepwell",
+								"tier": 2,
+								"value": 14
+							},
+							{
+								"id": "beatlink",
+								"tier": 3,
+								"value": 8
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000071",
+						"item_level": 16,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-7519406693485761748"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 1
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 8
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000072",
+						"item_level": 30,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "2974133370059046957"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000073",
+						"item_level": 1,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "3715004727930199406"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000074",
+						"item_level": 7,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "-1675732393187641168"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "tidebound_coat",
+						"id": "gear_000075",
+						"item_level": 8,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "1879673316963131842"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 2,
+								"value": 8
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000076",
+						"item_level": 15,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "-4728792003123769193"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rimeecho",
+								"tier": 2,
+								"value": 13
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000077",
+						"item_level": 16,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "2023452868417168773"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "pulse_seed",
+						"id": "gear_000078",
+						"item_level": 30,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "-9179837539646545761"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "gale_spindle",
+						"id": "gear_000079",
+						"item_level": 1,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-6042162348808740974"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "pulse_seed",
+						"id": "gear_000080",
+						"item_level": 7,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "917933953730526537"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000081",
+						"item_level": 8,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "7777349067527716724"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "pulse_seed",
+						"id": "gear_000082",
+						"item_level": 15,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-1350704681180465661"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "pulse_seed",
+						"id": "gear_000083",
+						"item_level": 16,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-9061386123539923418"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "gale_spindle",
+						"id": "gear_000084",
+						"item_level": 30,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "4572559878714181965"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 4
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000085",
+						"item_level": 1,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "989747806792242204"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 2
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000086",
+						"item_level": 7,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "3116612539108651362"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "trailstep",
+								"tier": 2,
+								"value": 4
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000087",
+						"item_level": 8,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "2798639113054921592"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 4
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000088",
+						"item_level": 15,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "4762999323668680091"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "coalglow",
+								"tier": 3,
+								"value": 19
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000089",
+						"item_level": 16,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "7047098867898098793"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 3,
+								"value": 17
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 7
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000090",
+						"item_level": 30,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "1926335128154380231"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 12
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 2
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000091",
+						"item_level": 1,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "6022511739038348541"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 6
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000092",
+						"item_level": 7,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "5759298434113306179"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 2,
+								"value": 21
+							},
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 4
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000093",
+						"item_level": 8,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "512000066827760784"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "coalglow",
+								"tier": 2,
+								"value": 13
+							},
+							{
+								"id": "trailstep",
+								"tier": 2,
+								"value": 3
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 6
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000094",
+						"item_level": 15,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "8334514355486250849"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 1
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "wellturn",
+								"tier": 3,
+								"value": 11
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000095",
+						"item_level": 16,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "3948483668651108360"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "sparkthread",
+								"tier": 2,
+								"value": 13
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000096",
+						"item_level": 30,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-7356719866964410765"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 7
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000097",
+						"item_level": 1,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "6281246295840406092"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "wayglass_token",
+						"id": "gear_000098",
+						"item_level": 7,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "1148150380745901246"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000099",
+						"item_level": 8,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "3000118066188732035"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 2,
+								"value": 13
+							},
+							{
+								"id": "runesong",
+								"tier": 2,
+								"value": 8
+							},
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000100",
+						"item_level": 15,
+						"rarity": "rare"
+					},
+					"requested_rarity": "",
+					"rng_state": "-3558780541662024871"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "rimeecho",
+								"tier": 2,
+								"value": 13
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000101",
+						"item_level": 16,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "3228258472532928586"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 2,
+								"value": 16
+							},
+							{
+								"id": "wellturn",
+								"tier": 2,
+								"value": 6
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000102",
+						"item_level": 30,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "956977962815980351"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "gale_spindle",
+						"id": "gear_000103",
+						"item_level": 1,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "7829311311545947570"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000104",
+						"item_level": 7,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "8759944363161018601"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "gale_spindle",
+						"id": "gear_000105",
+						"item_level": 8,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-5372377483093466476"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000106",
+						"item_level": 15,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-6185929800949398877"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "pulse_seed",
+						"id": "gear_000107",
+						"item_level": 16,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-332793269608262074"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "woven_bastion",
+						"id": "gear_000108",
+						"item_level": 30,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-4400702920492947731"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000109",
+						"item_level": 1,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-4608345871686799317"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000110",
+						"item_level": 7,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "3776074640553695865"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000111",
+						"item_level": 8,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-1833606975406358376"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 8
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000112",
+						"item_level": 15,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-4240427443484248517"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 8
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000113",
+						"item_level": 16,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-8658104101837382318"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "coalglow",
+								"tier": 2,
+								"value": 13
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000114",
+						"item_level": 30,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-7850140221073651736"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 11
+							},
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 2
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 3
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000115",
+						"item_level": 1,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-3363616689967884618"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000116",
+						"item_level": 7,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "7002682251138110420"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 13
+							},
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "trailstep",
+								"tier": 2,
+								"value": 3
+							},
+							{
+								"id": "rimeecho",
+								"tier": 2,
+								"value": 9
+							},
+							{
+								"id": "sparkthread",
+								"tier": 2,
+								"value": 9
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000117",
+						"item_level": 8,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-1859198859954790718"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 1
+							},
+							{
+								"id": "coalglow",
+								"tier": 2,
+								"value": 13
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000118",
+						"item_level": 15,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-7151638807467870597"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 12
+							},
+							{
+								"id": "runesong",
+								"tier": 2,
+								"value": 9
+							},
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "sparkthread",
+								"tier": 3,
+								"value": 19
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "rimeecho",
+								"tier": 2,
+								"value": 12
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000119",
+						"item_level": 16,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "8119963983877809809"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 9
+							},
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "coalglow",
+								"tier": 3,
+								"value": 16
+							},
+							{
+								"id": "rimeecho",
+								"tier": 2,
+								"value": 11
+							},
+							{
+								"id": "trailstep",
+								"tier": 2,
+								"value": 3
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000120",
+						"item_level": 30,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "3261151016466167735"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 13
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 6
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000121",
+						"item_level": 1,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "455902936847016352"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000122",
+						"item_level": 7,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "-8541742235227734842"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "wayglass_token",
+						"id": "gear_000123",
+						"item_level": 8,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "2024078815613810632"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "woven_bastion",
+						"id": "gear_000124",
+						"item_level": 15,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "6144200846258931354"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000125",
+						"item_level": 16,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "5149205284034407868"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 2,
+								"value": 14
+							},
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 2
+							},
+							{
+								"id": "rimeecho",
+								"tier": 3,
+								"value": 16
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000126",
+						"item_level": 30,
+						"rarity": "rare"
+					},
+					"requested_rarity": "",
+					"rng_state": "5377850369673153130"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "woven_bastion",
+						"id": "gear_000127",
+						"item_level": 1,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "5092913032030498113"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "wayglass_token",
+						"id": "gear_000128",
+						"item_level": 7,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-2719471974795463156"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "pulse_seed",
+						"id": "gear_000129",
+						"item_level": 8,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-8204211973408295237"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "woven_bastion",
+						"id": "gear_000130",
+						"item_level": 15,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "4792271316473423486"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "gale_spindle",
+						"id": "gear_000131",
+						"item_level": 16,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "6672021355432593605"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "woven_bastion",
+						"id": "gear_000132",
+						"item_level": 30,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-3990799874048423872"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 10
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000133",
+						"item_level": 1,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "3368501072359202627"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 1
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000134",
+						"item_level": 7,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "5791929772419943633"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 7
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000135",
+						"item_level": 8,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-3004245660665353840"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 14
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 8
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000136",
+						"item_level": 15,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-5185138572961620682"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 2,
+								"value": 11
+							},
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 2
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000137",
+						"item_level": 16,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "2556200616434967212"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 7
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000138",
+						"item_level": 30,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "2949669546451726335"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 3
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000139",
+						"item_level": 1,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-9030561179842740619"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 2
+							},
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 3
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000140",
+						"item_level": 7,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-616098605851773189"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 11
+							},
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "trailstep",
+								"tier": 2,
+								"value": 3
+							},
+							{
+								"id": "coalglow",
+								"tier": 2,
+								"value": 13
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000141",
+						"item_level": 8,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "1328068944785475962"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 2,
+								"value": 10
+							},
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 3
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000142",
+						"item_level": 15,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "1423311694369477523"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "runesong",
+								"tier": 3,
+								"value": 17
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 2
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000143",
+						"item_level": 16,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "2173004887916663474"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 9
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "wellturn",
+								"tier": 2,
+								"value": 8
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 7
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000144",
+						"item_level": 30,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-4584299562087896907"
+				}
+			],
+			"seed": 1
+		},
+		{
+			"samples": [
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 9
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000001",
+						"item_level": 1,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "-8696501431311819490"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 10
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000002",
+						"item_level": 7,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "7352850460952848212"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "wellturn",
+								"tier": 2,
+								"value": 7
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "trailstep",
+								"tier": 2,
+								"value": 4
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000003",
+						"item_level": 8,
+						"rarity": "rare"
+					},
+					"requested_rarity": "",
+					"rng_state": "8496931454312720688"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "farweave",
+								"tier": 2,
+								"value": 11
+							},
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 3
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000004",
+						"item_level": 15,
+						"rarity": "rare"
+					},
+					"requested_rarity": "",
+					"rng_state": "7763311682998988876"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 7
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000005",
+						"item_level": 16,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "4305414224522912786"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 2,
+								"value": 11
+							},
+							{
+								"id": "wellturn",
+								"tier": 3,
+								"value": 14
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000006",
+						"item_level": 30,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "6279946405456810023"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "gale_spindle",
+						"id": "gear_000007",
+						"item_level": 1,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "4359958303867187834"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000008",
+						"item_level": 7,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-3026218617006004207"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "wayglass_token",
+						"id": "gear_000009",
+						"item_level": 8,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-1957459982910538596"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "gale_spindle",
+						"id": "gear_000010",
+						"item_level": 15,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "3985951077367156235"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "tidebound_coat",
+						"id": "gear_000011",
+						"item_level": 16,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-4679208650665496690"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000012",
+						"item_level": 30,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "5020205404923596949"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 8
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000013",
+						"item_level": 1,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "1124302807716802707"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 7
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000014",
+						"item_level": 7,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-8139110382565663839"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 7
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000015",
+						"item_level": 8,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "6660960673562098976"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rimeecho",
+								"tier": 2,
+								"value": 14
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000016",
+						"item_level": 15,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "8181843819454644387"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 2,
+								"value": 13
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000017",
+						"item_level": 16,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "1930050155154281265"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 9
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 8
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000018",
+						"item_level": 30,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-7146408247283694513"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 2
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 6
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000019",
+						"item_level": 1,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "8783602183315682814"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000020",
+						"item_level": 7,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "4160919486404556252"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "rootwell",
+								"tier": 2,
+								"value": 16
+							},
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 3
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 3
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000021",
+						"item_level": 8,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-6195137571126724451"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 13
+							},
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "trailstep",
+								"tier": 2,
+								"value": 3
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000022",
+						"item_level": 15,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-716732759819679276"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 2,
+								"value": 11
+							},
+							{
+								"id": "deepwell",
+								"tier": 3,
+								"value": 20
+							},
+							{
+								"id": "wellturn",
+								"tier": 3,
+								"value": 14
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000023",
+						"item_level": 16,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-8404756078665811825"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "sparkthread",
+								"tier": 2,
+								"value": 12
+							},
+							{
+								"id": "wellturn",
+								"tier": 2,
+								"value": 7
+							},
+							{
+								"id": "beatlink",
+								"tier": 2,
+								"value": 6
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000024",
+						"item_level": 30,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "7824292833239449918"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 8
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000025",
+						"item_level": 1,
+						"rarity": "rare"
+					},
+					"requested_rarity": "",
+					"rng_state": "-6443616188804239588"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 7
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000026",
+						"item_level": 7,
+						"rarity": "rare"
+					},
+					"requested_rarity": "",
+					"rng_state": "6084689071434500129"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 6
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000027",
+						"item_level": 8,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "7713339823875582399"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 8
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000028",
+						"item_level": 15,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "-5437090223553259155"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000029",
+						"item_level": 16,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "-2968750531998849337"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 8
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000030",
+						"item_level": 30,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "2687850206297244213"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "pulse_seed",
+						"id": "gear_000031",
+						"item_level": 1,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-8643366337708003088"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "gale_spindle",
+						"id": "gear_000032",
+						"item_level": 7,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "4733455356142939343"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "tidebound_coat",
+						"id": "gear_000033",
+						"item_level": 8,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "4378953391190791170"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000034",
+						"item_level": 15,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "5558010934104147193"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "tidebound_coat",
+						"id": "gear_000035",
+						"item_level": 16,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "1722993082420242788"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "pulse_seed",
+						"id": "gear_000036",
+						"item_level": 30,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-2226707769595271885"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 8
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000037",
+						"item_level": 1,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-3522408627465847999"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 6
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000038",
+						"item_level": 7,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "2300691818728133599"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 7
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000039",
+						"item_level": 8,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-8838727049240337306"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 2
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000040",
+						"item_level": 15,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "7349100773775432401"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 12
+							},
+							{
+								"id": "trailstep",
+								"tier": 2,
+								"value": 3
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000041",
+						"item_level": 16,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-6419627164073337105"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "coalglow",
+								"tier": 3,
+								"value": 17
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000042",
+						"item_level": 30,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-4895615626522344650"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 2
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 3
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000043",
+						"item_level": 1,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-4805136576760533932"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 2
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 3
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000044",
+						"item_level": 7,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "5378748311383335183"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 2,
+								"value": 13
+							},
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 14
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000045",
+						"item_level": 8,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "5141665210231723966"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 2,
+								"value": 12
+							},
+							{
+								"id": "deepwell",
+								"tier": 2,
+								"value": 11
+							},
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 14
+							},
+							{
+								"id": "sparkthread",
+								"tier": 2,
+								"value": 11
+							},
+							{
+								"id": "rimeecho",
+								"tier": 2,
+								"value": 14
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 7
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000046",
+						"item_level": 15,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-1012563898764254820"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 2,
+								"value": 14
+							},
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "rootwell",
+								"tier": 3,
+								"value": 23
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 2
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000047",
+						"item_level": 16,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "3816021152654658378"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 14
+							},
+							{
+								"id": "runesong",
+								"tier": 3,
+								"value": 15
+							},
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 1
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 3
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000048",
+						"item_level": 30,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "4797996754268773869"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 3
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 7
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000049",
+						"item_level": 1,
+						"rarity": "rare"
+					},
+					"requested_rarity": "",
+					"rng_state": "9194142562198102393"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000050",
+						"item_level": 7,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "-4407517922710481485"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 2,
+								"value": 11
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000051",
+						"item_level": 8,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "2964655483091216321"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 2
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000052",
+						"item_level": 15,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "-2969745446632333230"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "prismedge",
+								"tier": 2,
+								"value": 8
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000053",
+						"item_level": 16,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "6714407949595931368"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "pulse_seed",
+						"id": "gear_000054",
+						"item_level": 30,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "-5842278822651447622"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "wayglass_token",
+						"id": "gear_000055",
+						"item_level": 1,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-1560236192538990767"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000056",
+						"item_level": 7,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "8340491582607481564"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "wayglass_token",
+						"id": "gear_000057",
+						"item_level": 8,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "8025904065263312715"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000058",
+						"item_level": 15,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "8949589178920449998"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "gale_spindle",
+						"id": "gear_000059",
+						"item_level": 16,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "3546737028230251477"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "tidebound_coat",
+						"id": "gear_000060",
+						"item_level": 30,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-1601869538978375152"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 3
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000061",
+						"item_level": 1,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "3575496544769649107"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000062",
+						"item_level": 7,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "9009112997152277130"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "coalglow",
+								"tier": 2,
+								"value": 10
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000063",
+						"item_level": 8,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-2136004753061671072"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 4
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000064",
+						"item_level": 15,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-3935052808480355869"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "wellturn",
+								"tier": 2,
+								"value": 6
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000065",
+						"item_level": 16,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-247133889929039247"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 3,
+								"value": 28
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 6
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000066",
+						"item_level": 30,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-3305080729237452401"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 1
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 3
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 7
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000067",
+						"item_level": 1,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "7890983527062021509"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 12
+							},
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 3
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000068",
+						"item_level": 7,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "5585030128478082076"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 9
+							},
+							{
+								"id": "rootwell",
+								"tier": 2,
+								"value": 22
+							},
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "coalglow",
+								"tier": 2,
+								"value": 9
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000069",
+						"item_level": 8,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "3571553180990126538"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "prismedge",
+								"tier": 2,
+								"value": 10
+							},
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 3
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "rimeecho",
+								"tier": 2,
+								"value": 12
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000070",
+						"item_level": 15,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "5628241604136067693"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 2,
+								"value": 15
+							},
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "lanternveil",
+								"tier": 2,
+								"value": 10
+							},
+							{
+								"id": "beatlink",
+								"tier": 3,
+								"value": 8
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000071",
+						"item_level": 16,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-6282748927407667661"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 2,
+								"value": 16
+							},
+							{
+								"id": "deepwell",
+								"tier": 3,
+								"value": 20
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "rimeecho",
+								"tier": 2,
+								"value": 9
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000072",
+						"item_level": 30,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "1042392865829065536"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "woven_bastion",
+						"id": "gear_000073",
+						"item_level": 1,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "2156763247831064274"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000074",
+						"item_level": 7,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "-4571143895345082188"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 3
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000075",
+						"item_level": 8,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "2412886317328561105"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 9
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000076",
+						"item_level": 15,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "2722315192952270831"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "beatlink",
+								"tier": 3,
+								"value": 8
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000077",
+						"item_level": 16,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "-8603503649911023432"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "woven_bastion",
+						"id": "gear_000078",
+						"item_level": 30,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "2752053507287806218"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "wayglass_token",
+						"id": "gear_000079",
+						"item_level": 1,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-1381480428513503391"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "woven_bastion",
+						"id": "gear_000080",
+						"item_level": 7,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-5987774225647632980"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "tidebound_coat",
+						"id": "gear_000081",
+						"item_level": 8,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "8557425322386091483"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000082",
+						"item_level": 15,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-5730583302163269858"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "woven_bastion",
+						"id": "gear_000083",
+						"item_level": 16,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-4990663290072247067"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "gale_spindle",
+						"id": "gear_000084",
+						"item_level": 30,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "8437015607475014112"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000085",
+						"item_level": 1,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-7245106073178006941"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 8
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000086",
+						"item_level": 7,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "4552156600546291930"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 2,
+								"value": 8
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000087",
+						"item_level": 8,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "3028065249319048565"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 6
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000088",
+						"item_level": 15,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-7722123414463451228"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 9
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000089",
+						"item_level": 16,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "8565727656314358039"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 7
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000090",
+						"item_level": 30,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-3739268056803878395"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 12
+							},
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 1
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 6
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000091",
+						"item_level": 1,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "3332758064308422300"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 7
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000092",
+						"item_level": 7,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "4418954544481531997"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "prismedge",
+								"tier": 2,
+								"value": 10
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 8
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000093",
+						"item_level": 8,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-6796433223808166478"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "farweave",
+								"tier": 2,
+								"value": 12
+							},
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 3
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000094",
+						"item_level": 15,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "5487612006565015595"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 9
+							},
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "beatlink",
+								"tier": 2,
+								"value": 5
+							},
+							{
+								"id": "rimeecho",
+								"tier": 3,
+								"value": 17
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000095",
+						"item_level": 16,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "7311258284181471425"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 2,
+								"value": 10
+							},
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 12
+							},
+							{
+								"id": "trailstep",
+								"tier": 3,
+								"value": 5
+							},
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 2
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 7
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000096",
+						"item_level": 30,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "8907577624069144167"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 7
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000097",
+						"item_level": 1,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "-5929215092944327467"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000098",
+						"item_level": 7,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "6468493684908693174"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 8
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000099",
+						"item_level": 8,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "8069869403119833132"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 8
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000100",
+						"item_level": 15,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "4159943064076989682"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "prismedge",
+								"tier": 2,
+								"value": 8
+							},
+							{
+								"id": "wellturn",
+								"tier": 3,
+								"value": 10
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000101",
+						"item_level": 16,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "-2164775455966110585"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000102",
+						"item_level": 30,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "-621409384424912015"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "tidebound_coat",
+						"id": "gear_000103",
+						"item_level": 1,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-6501969717708172164"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000104",
+						"item_level": 7,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "5177938513021853803"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000105",
+						"item_level": 8,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "4245917152166218350"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "pulse_seed",
+						"id": "gear_000106",
+						"item_level": 15,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-1725573044539069963"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "woven_bastion",
+						"id": "gear_000107",
+						"item_level": 16,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-8459759494004134480"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000108",
+						"item_level": 30,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-8956038552845395313"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 4
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000109",
+						"item_level": 1,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "3676710771663982678"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 4
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000110",
+						"item_level": 7,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "4405233813268485889"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "rimeecho",
+								"tier": 2,
+								"value": 13
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000111",
+						"item_level": 8,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "3931345717148283295"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 6
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000112",
+						"item_level": 15,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "1556701980803879501"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 7
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000113",
+						"item_level": 16,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "6028498365567383836"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 7
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000114",
+						"item_level": 30,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-2708048271124287902"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 12
+							},
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 9
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 2
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 2
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000115",
+						"item_level": 1,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-4121734873530343008"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 10
+							},
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 2
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 1
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000116",
+						"item_level": 7,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-6821000339084471887"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 11
+							},
+							{
+								"id": "lanternveil",
+								"tier": 2,
+								"value": 10
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "trailstep",
+								"tier": 2,
+								"value": 3
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000117",
+						"item_level": 8,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-5687302850162644200"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "deepwell",
+								"tier": 2,
+								"value": 15
+							},
+							{
+								"id": "rimeecho",
+								"tier": 2,
+								"value": 10
+							},
+							{
+								"id": "coalglow",
+								"tier": 2,
+								"value": 12
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000118",
+						"item_level": 15,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "9009770554560025737"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 14
+							},
+							{
+								"id": "deepwell",
+								"tier": 2,
+								"value": 15
+							},
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 9
+							},
+							{
+								"id": "rimeecho",
+								"tier": 2,
+								"value": 14
+							},
+							{
+								"id": "wellturn",
+								"tier": 2,
+								"value": 7
+							},
+							{
+								"id": "sparkthread",
+								"tier": 2,
+								"value": 10
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000119",
+						"item_level": 16,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "6688952296204763375"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "sparkthread",
+								"tier": 2,
+								"value": 11
+							},
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 2
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000120",
+						"item_level": 30,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-4853848924113650203"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 1
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000121",
+						"item_level": 1,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "-3574092762527286429"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "pulse_seed",
+						"id": "gear_000122",
+						"item_level": 7,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "-9178016658381124179"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "wayglass_token",
+						"id": "gear_000123",
+						"item_level": 8,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "-2740216058416925433"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "woven_bastion",
+						"id": "gear_000124",
+						"item_level": 15,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "-6585426487417759759"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "tidebound_coat",
+						"id": "gear_000125",
+						"item_level": 16,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "7997493932190662891"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 14
+							},
+							{
+								"id": "beatlink",
+								"tier": 2,
+								"value": 4
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000126",
+						"item_level": 30,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "7950559143401059492"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "woven_bastion",
+						"id": "gear_000127",
+						"item_level": 1,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "5202034141877493619"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "pulse_seed",
+						"id": "gear_000128",
+						"item_level": 7,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-6944576660098099498"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "pulse_seed",
+						"id": "gear_000129",
+						"item_level": 8,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-6857123549103361987"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "pulse_seed",
+						"id": "gear_000130",
+						"item_level": 15,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "5652544512065798232"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "tidebound_coat",
+						"id": "gear_000131",
+						"item_level": 16,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "8068058912704084503"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "pulse_seed",
+						"id": "gear_000132",
+						"item_level": 30,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "8188219800302002602"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000133",
+						"item_level": 1,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "1420118340309665152"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 8
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000134",
+						"item_level": 7,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-1524697992267274365"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 9
+							},
+							{
+								"id": "trailstep",
+								"tier": 2,
+								"value": 3
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000135",
+						"item_level": 8,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "7430776898642522897"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 2
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000136",
+						"item_level": 15,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-7111926843882703152"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 8
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000137",
+						"item_level": 16,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-7229686020290194541"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "trailstep",
+								"tier": 3,
+								"value": 6
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000138",
+						"item_level": 30,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "4934560777278342474"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 2
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000139",
+						"item_level": 1,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "1912500311275127368"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 12
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 3
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 4
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000140",
+						"item_level": 7,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-8671493605795022314"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 2,
+								"value": 10
+							},
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 2
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000141",
+						"item_level": 8,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "4124350083766648415"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "rootwell",
+								"tier": 2,
+								"value": 16
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 6
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000142",
+						"item_level": 15,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "1886099088805405916"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 3,
+								"value": 22
+							},
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "rootwell",
+								"tier": 2,
+								"value": 17
+							},
+							{
+								"id": "trailstep",
+								"tier": 2,
+								"value": 3
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 6
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000143",
+						"item_level": 16,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "1709218210494839946"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 3,
+								"value": 21
+							},
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "beatlink",
+								"tier": 3,
+								"value": 8
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 3
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 7
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000144",
+						"item_level": 30,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "9049519995414303277"
+				}
+			],
+			"seed": 603031
+		},
+		{
+			"samples": [
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "woven_bastion",
+						"id": "gear_000001",
+						"item_level": 1,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "1328674547793391076"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 9
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000002",
+						"item_level": 7,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "-5878301819865665302"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "wayglass_token",
+						"id": "gear_000003",
+						"item_level": 8,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "-234582896631824244"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "rimeecho",
+								"tier": 2,
+								"value": 14
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000004",
+						"item_level": 15,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "2365160073053366537"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "tidebound_coat",
+						"id": "gear_000005",
+						"item_level": 16,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "3725470625850197955"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 3,
+								"value": 19
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000006",
+						"item_level": 30,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "-4581268062394551983"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "pulse_seed",
+						"id": "gear_000007",
+						"item_level": 1,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "7918496664657861852"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "pulse_seed",
+						"id": "gear_000008",
+						"item_level": 7,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-7012029396897941173"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "gale_spindle",
+						"id": "gear_000009",
+						"item_level": 8,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "6911904200485325262"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "pulse_seed",
+						"id": "gear_000010",
+						"item_level": 15,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-4158062196176179755"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "pulse_seed",
+						"id": "gear_000011",
+						"item_level": 16,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "1737585296599202832"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "pulse_seed",
+						"id": "gear_000012",
+						"item_level": 30,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-4670734417435033233"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 6
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000013",
+						"item_level": 1,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "6441977177607138205"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 8
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000014",
+						"item_level": 7,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "6209794746172435756"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 2,
+								"value": 22
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 1
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000015",
+						"item_level": 8,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "5230275625615223282"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 2,
+								"value": 14
+							},
+							{
+								"id": "rimeecho",
+								"tier": 2,
+								"value": 11
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000016",
+						"item_level": 15,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-7498013447666745464"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 6
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000017",
+						"item_level": 16,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-8727894257327984786"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "prismedge",
+								"tier": 2,
+								"value": 12
+							},
+							{
+								"id": "sparkthread",
+								"tier": 2,
+								"value": 11
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000018",
+						"item_level": 30,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "7038246971893591844"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 11
+							},
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 9
+							},
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000019",
+						"item_level": 1,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "7998371809930891141"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 9
+							},
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 13
+							},
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 7
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000020",
+						"item_level": 7,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "8597256744098600476"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "deepwell",
+								"tier": 2,
+								"value": 13
+							},
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "sparkthread",
+								"tier": 2,
+								"value": 10
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000021",
+						"item_level": 8,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "4946624622572895709"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 2,
+								"value": 9
+							},
+							{
+								"id": "prismedge",
+								"tier": 2,
+								"value": 9
+							},
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 2
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000022",
+						"item_level": 15,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "1564592511712790834"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "farweave",
+								"tier": 2,
+								"value": 10
+							},
+							{
+								"id": "prismedge",
+								"tier": 2,
+								"value": 9
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "beatlink",
+								"tier": 2,
+								"value": 6
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 7
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000023",
+						"item_level": 16,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "4663460949737506800"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "deepwell",
+								"tier": 2,
+								"value": 10
+							},
+							{
+								"id": "sparkthread",
+								"tier": 2,
+								"value": 10
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000024",
+						"item_level": 30,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-2598192281714958783"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 3
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000025",
+						"item_level": 1,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "-8068865617309937454"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 2
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000026",
+						"item_level": 7,
+						"rarity": "rare"
+					},
+					"requested_rarity": "",
+					"rng_state": "6777848227038369424"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 2,
+								"value": 12
+							},
+							{
+								"id": "wellturn",
+								"tier": 2,
+								"value": 7
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000027",
+						"item_level": 8,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "-6876304557371633635"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "pulse_seed",
+						"id": "gear_000028",
+						"item_level": 15,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "-5617066709106795273"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "gale_spindle",
+						"id": "gear_000029",
+						"item_level": 16,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "891965393739899233"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "wayglass_token",
+						"id": "gear_000030",
+						"item_level": 30,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "8338239617879967707"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000031",
+						"item_level": 1,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-4785053335767742178"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000032",
+						"item_level": 7,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-9062727623859208475"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "tidebound_coat",
+						"id": "gear_000033",
+						"item_level": 8,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "4431411924779002848"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "pulse_seed",
+						"id": "gear_000034",
+						"item_level": 15,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "7271460829238237439"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000035",
+						"item_level": 16,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "2000361190247655538"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "tidebound_coat",
+						"id": "gear_000036",
+						"item_level": 30,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-8377109790438200151"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 4
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000037",
+						"item_level": 1,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "6556583482519993863"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 14
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000038",
+						"item_level": 7,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "7282795843582813678"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 4
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000039",
+						"item_level": 8,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-3086115696919062983"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 2,
+								"value": 12
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 4
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000040",
+						"item_level": 15,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-2065870687524469993"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 3,
+								"value": 25
+							},
+							{
+								"id": "wellturn",
+								"tier": 3,
+								"value": 11
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000041",
+						"item_level": 16,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-4952804641812151291"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 3
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000042",
+						"item_level": 30,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-2660360314845486973"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 11
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 6
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000043",
+						"item_level": 1,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-3318843874342832807"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 13
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 4
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000044",
+						"item_level": 7,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-1214809834918448034"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 2,
+								"value": 9
+							},
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 8
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000045",
+						"item_level": 8,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-9003002551984248249"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 2,
+								"value": 22
+							},
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "trailstep",
+								"tier": 2,
+								"value": 3
+							},
+							{
+								"id": "coalglow",
+								"tier": 2,
+								"value": 10
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000046",
+						"item_level": 15,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-841677360112533738"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "deepwell",
+								"tier": 2,
+								"value": 14
+							},
+							{
+								"id": "rootwell",
+								"tier": 3,
+								"value": 27
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 3
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 2
+							},
+							{
+								"id": "sparkthread",
+								"tier": 2,
+								"value": 9
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000047",
+						"item_level": 16,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "8788200622370567476"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "runesong",
+								"tier": 2,
+								"value": 10
+							},
+							{
+								"id": "wellturn",
+								"tier": 3,
+								"value": 14
+							},
+							{
+								"id": "sparkthread",
+								"tier": 2,
+								"value": 11
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 2
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000048",
+						"item_level": 30,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "5647800776708133154"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 9
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000049",
+						"item_level": 1,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "-4849040496040925896"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "tidebound_coat",
+						"id": "gear_000050",
+						"item_level": 7,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "-6322171544119144054"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "gale_spindle",
+						"id": "gear_000051",
+						"item_level": 8,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "1685660523096216108"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "wayglass_token",
+						"id": "gear_000052",
+						"item_level": 15,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "-8903334483712335970"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "pulse_seed",
+						"id": "gear_000053",
+						"item_level": 16,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "8373763530129008224"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "tidebound_coat",
+						"id": "gear_000054",
+						"item_level": 30,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "4071806269028558578"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000055",
+						"item_level": 1,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-2766995263468951255"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000056",
+						"item_level": 7,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "8672388622598215124"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "tidebound_coat",
+						"id": "gear_000057",
+						"item_level": 8,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "6928060389385700579"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "wayglass_token",
+						"id": "gear_000058",
+						"item_level": 15,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "2269469937915231110"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "gale_spindle",
+						"id": "gear_000059",
+						"item_level": 16,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-5399333862935153875"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000060",
+						"item_level": 30,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "2036843320121185416"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 14
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 8
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000061",
+						"item_level": 1,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-9016972788224910226"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 8
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000062",
+						"item_level": 7,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "8992479374451847865"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 7
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000063",
+						"item_level": 8,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "8892904319682131928"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 14
+							},
+							{
+								"id": "trailstep",
+								"tier": 2,
+								"value": 3
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000064",
+						"item_level": 15,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-2308434645118243522"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 3
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000065",
+						"item_level": 16,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-8674870929455447991"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 3,
+								"value": 18
+							},
+							{
+								"id": "rimeecho",
+								"tier": 2,
+								"value": 10
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000066",
+						"item_level": 30,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "7744765707528029351"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 3
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000067",
+						"item_level": 1,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-412451406267700234"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000068",
+						"item_level": 7,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "3256080989668885951"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 3
+							},
+							{
+								"id": "rimeecho",
+								"tier": 2,
+								"value": 9
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000069",
+						"item_level": 8,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "234018491633610684"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 2,
+								"value": 15
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 1
+							},
+							{
+								"id": "beatlink",
+								"tier": 2,
+								"value": 4
+							},
+							{
+								"id": "wellturn",
+								"tier": 2,
+								"value": 8
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000070",
+						"item_level": 15,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-4856268377350215683"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 2,
+								"value": 12
+							},
+							{
+								"id": "deepwell",
+								"tier": 2,
+								"value": 12
+							},
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "rimeecho",
+								"tier": 3,
+								"value": 18
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000071",
+						"item_level": 16,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-7115196206754935342"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "prismedge",
+								"tier": 2,
+								"value": 12
+							},
+							{
+								"id": "sparkthread",
+								"tier": 3,
+								"value": 16
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 3
+							},
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 3
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000072",
+						"item_level": 30,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "1199479069089749707"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000073",
+						"item_level": 1,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "-2823882337123925991"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 9
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000074",
+						"item_level": 7,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "1543864941607603703"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "wellturn",
+								"tier": 2,
+								"value": 6
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000075",
+						"item_level": 8,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "-7151827753106774043"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "pulse_seed",
+						"id": "gear_000076",
+						"item_level": 15,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "623048748580448767"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000077",
+						"item_level": 16,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "-4076590162153719891"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "woven_bastion",
+						"id": "gear_000078",
+						"item_level": 30,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "-2530041535625072889"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "tidebound_coat",
+						"id": "gear_000079",
+						"item_level": 1,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-7404534421057241126"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "pulse_seed",
+						"id": "gear_000080",
+						"item_level": 7,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "4060356866943558129"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000081",
+						"item_level": 8,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-2046210036796389124"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "tidebound_coat",
+						"id": "gear_000082",
+						"item_level": 15,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-7216164266985055509"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000083",
+						"item_level": 16,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "7230785704453624558"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "wayglass_token",
+						"id": "gear_000084",
+						"item_level": 30,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-2445543781846636427"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000085",
+						"item_level": 1,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-2199419996391180636"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 1
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000086",
+						"item_level": 7,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "4191947719187215383"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 2,
+								"value": 12
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 6
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000087",
+						"item_level": 8,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-3723032497541616379"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000088",
+						"item_level": 15,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "2850445531931814132"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "prismedge",
+								"tier": 2,
+								"value": 8
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 7
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000089",
+						"item_level": 16,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "264237315731913594"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000090",
+						"item_level": 30,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "4609653976760989077"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 6
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000091",
+						"item_level": 1,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "8287921863713466651"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 9
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 2
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 8
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000092",
+						"item_level": 7,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "2242125506811684913"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 10
+							},
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "trailstep",
+								"tier": 2,
+								"value": 3
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "wellturn",
+								"tier": 2,
+								"value": 6
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000093",
+						"item_level": 8,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "6998546177553870935"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 12
+							},
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "deepwell",
+								"tier": 2,
+								"value": 15
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000094",
+						"item_level": 15,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "3205620688343512806"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 2,
+								"value": 8
+							},
+							{
+								"id": "deepwell",
+								"tier": 2,
+								"value": 10
+							},
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "trailstep",
+								"tier": 2,
+								"value": 3
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000095",
+						"item_level": 16,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "8654032712947014809"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "deepwell",
+								"tier": 2,
+								"value": 10
+							},
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 2
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "rimeecho",
+								"tier": 2,
+								"value": 14
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000096",
+						"item_level": 30,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "3472253999340903264"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "tidebound_coat",
+						"id": "gear_000097",
+						"item_level": 1,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "8628166370472092658"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000098",
+						"item_level": 7,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "1285419051682072455"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 8
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000099",
+						"item_level": 8,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "-4272070602107896587"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000100",
+						"item_level": 15,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "-6248729688491530865"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 2
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000101",
+						"item_level": 16,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "-5285102424313889091"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000102",
+						"item_level": 30,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "-605613534183625577"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "tidebound_coat",
+						"id": "gear_000103",
+						"item_level": 1,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-8014114062624718294"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "woven_bastion",
+						"id": "gear_000104",
+						"item_level": 7,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "361188166921402881"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "gale_spindle",
+						"id": "gear_000105",
+						"item_level": 8,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "5735914760923722700"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "gale_spindle",
+						"id": "gear_000106",
+						"item_level": 15,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-7340314723532844677"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "gale_spindle",
+						"id": "gear_000107",
+						"item_level": 16,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-4621494891878458818"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "tidebound_coat",
+						"id": "gear_000108",
+						"item_level": 30,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "8396997616784810373"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 7
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000109",
+						"item_level": 1,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "1298056492490754932"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 8
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000110",
+						"item_level": 7,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-7566811394580575750"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "trailstep",
+								"tier": 2,
+								"value": 3
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000111",
+						"item_level": 8,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-7284142942795648176"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "prismedge",
+								"tier": 2,
+								"value": 12
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 8
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000112",
+						"item_level": 15,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-8826415566999963402"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "sparkthread",
+								"tier": 3,
+								"value": 20
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000113",
+						"item_level": 16,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "1256553695787523361"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 2,
+								"value": 13
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000114",
+						"item_level": 30,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-4690379750280866113"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 8
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000115",
+						"item_level": 1,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "5907528249016882364"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 12
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 3
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000116",
+						"item_level": 7,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "6715127414773508311"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 9
+							},
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 1
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 6
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000117",
+						"item_level": 8,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "8642038206381939892"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "beatlink",
+								"tier": 2,
+								"value": 6
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000118",
+						"item_level": 15,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-2425804819215021073"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "prismedge",
+								"tier": 2,
+								"value": 9
+							},
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "sparkthread",
+								"tier": 2,
+								"value": 14
+							},
+							{
+								"id": "wellturn",
+								"tier": 3,
+								"value": 10
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000119",
+						"item_level": 16,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "7579255970389840101"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 13
+							},
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "rimeecho",
+								"tier": 2,
+								"value": 11
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 1
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000120",
+						"item_level": 30,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-7522935428415267861"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 7
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000121",
+						"item_level": 1,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "-779254697869706332"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000122",
+						"item_level": 7,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "1624857218668836310"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "pulse_seed",
+						"id": "gear_000123",
+						"item_level": 8,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "3447132218089207640"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "tidebound_coat",
+						"id": "gear_000124",
+						"item_level": 15,
+						"rarity": "normal"
+					},
+					"requested_rarity": "",
+					"rng_state": "2357099366307328170"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000125",
+						"item_level": 16,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "-8970269754507551616"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 2
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000126",
+						"item_level": 30,
+						"rarity": "magic"
+					},
+					"requested_rarity": "",
+					"rng_state": "677102211407663270"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "gale_spindle",
+						"id": "gear_000127",
+						"item_level": 1,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "578037149371533773"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "cinder_reed",
+						"id": "gear_000128",
+						"item_level": 7,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-4541963979385246040"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "wayglass_token",
+						"id": "gear_000129",
+						"item_level": 8,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "4982135271454854695"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "gale_spindle",
+						"id": "gear_000130",
+						"item_level": 15,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-7312835184980289414"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "woven_bastion",
+						"id": "gear_000131",
+						"item_level": 16,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "-6647420918057314799"
+				},
+				{
+					"instance": {
+						"affixes": [],
+						"base_id": "tidebound_coat",
+						"id": "gear_000132",
+						"item_level": 30,
+						"rarity": "normal"
+					},
+					"requested_rarity": "normal",
+					"rng_state": "8483339510318535324"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 1
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000133",
+						"item_level": 1,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "7460267958655164463"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 9
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000134",
+						"item_level": 7,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "4564048166948369501"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 8
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000135",
+						"item_level": 8,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-2991703092014175717"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 2
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000136",
+						"item_level": 15,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-1106570546366938702"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "farweave",
+								"tier": 2,
+								"value": 12
+							}
+						],
+						"base_id": "cinder_reed",
+						"id": "gear_000137",
+						"item_level": 16,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-5592556606582529299"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 12
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 1
+							}
+						],
+						"base_id": "tidebound_coat",
+						"id": "gear_000138",
+						"item_level": 30,
+						"rarity": "magic"
+					},
+					"requested_rarity": "magic",
+					"rng_state": "-8654253853311333333"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 7
+							},
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 2
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 8
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000139",
+						"item_level": 1,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "5735751152101493912"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "deepwell",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 10
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 6
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000140",
+						"item_level": 7,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "6136586593577796582"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "rimeecho",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "coalglow",
+								"tier": 2,
+								"value": 11
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 4
+							}
+						],
+						"base_id": "pulse_seed",
+						"id": "gear_000141",
+						"item_level": 8,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-8803535912605649532"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "prismedge",
+								"tier": 1,
+								"value": 5
+							},
+							{
+								"id": "farweave",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "runesong",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "rimeecho",
+								"tier": 2,
+								"value": 11
+							},
+							{
+								"id": "beatlink",
+								"tier": 1,
+								"value": 3
+							},
+							{
+								"id": "wellturn",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "gale_spindle",
+						"id": "gear_000142",
+						"item_level": 15,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "7742885095938711794"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 3,
+								"value": 29
+							},
+							{
+								"id": "lanternveil",
+								"tier": 2,
+								"value": 11
+							},
+							{
+								"id": "deepwell",
+								"tier": 2,
+								"value": 15
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 2
+							},
+							{
+								"id": "sparkthread",
+								"tier": 2,
+								"value": 11
+							},
+							{
+								"id": "coalglow",
+								"tier": 2,
+								"value": 10
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000143",
+						"item_level": 16,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "7894534792295643568"
+				},
+				{
+					"instance": {
+						"affixes": [
+							{
+								"id": "lanternveil",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 8
+							},
+							{
+								"id": "rimeecho",
+								"tier": 2,
+								"value": 9
+							},
+							{
+								"id": "wellturn",
+								"tier": 2,
+								"value": 6
+							},
+							{
+								"id": "trailstep",
+								"tier": 2,
+								"value": 4
+							}
+						],
+						"base_id": "woven_bastion",
+						"id": "gear_000144",
+						"item_level": 30,
+						"rarity": "rare"
+					},
+					"requested_rarity": "rare",
+					"rng_state": "-1046108472462028165"
+				}
+			],
+			"seed": 9817264
+		}
+	],
+	"source": "Frozen v0.6.0 equipment_catalog.gd",
+	"source_sha256": "3f0b5aedb83ffb6543001fbc12bcaeaa3db27b9421b8e93b8d5c2f2d63dbf7c9"
+}

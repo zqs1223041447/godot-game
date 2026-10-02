@@ -77,17 +77,19 @@ func _test_baselines() -> void:
 		_expect(result.initial_count == counts.get(id, 0) and result.support_ids.is_empty(), "Unchanged count for " + id)
 		var stripped: Dictionary = result.snapshot.duplicate(true)
 		stripped.erase("initial_count")
+		stripped.erase("compiled_packets")
+		stripped.erase("compiled_skill_id")
 		_expect(stripped == snapshot, "Empty compilation preserves every snapshot value for " + id)
 		if not counts.has(id):
-			_expect(result.recipe.is_empty() and result.snapshot == snapshot, "Nonprojectile skill remains exactly unchanged: " + id)
+			_expect(result.recipe.is_empty() and stripped == snapshot, "Nonprojectile input values remain unchanged: " + id)
 		else:
 			_expect(result.recipe.initial_count == counts[id] and result.snapshot.initial_count == counts[id], "Single compiled count feeds recipe and snapshot for " + id)
 	var bolt: Dictionary = Compiler.compile_skill("bolt", snapshot, []).recipe
 	_expect(bolt == {"initial_count": 3, "spread": 0.16, "coefficient": 1.6, "pierce": 1,
-		"slow": 0.0, "speed": 780.0, "damage_type": "lightning"}, "Authoritative bolt recipe matches frozen v0.5 launch")
+		"slow": 0.0, "speed": 780.0, "damage_type": "lightning", "added_effectiveness": 1.6}, "Authoritative bolt recipe matches frozen v0.5 launch")
 	var frost: Dictionary = Compiler.compile_skill("frost", snapshot, []).recipe
 	_expect(frost == {"initial_count": 5, "spread": 0.14, "coefficient": 0.85, "pierce": 2,
-		"slow": 3.0, "speed": 520.0, "damage_type": "cold"}, "Authoritative frost recipe matches frozen v0.5 launch")
+		"slow": 3.0, "speed": 520.0, "damage_type": "cold", "added_effectiveness": 0.85}, "Authoritative frost recipe matches frozen v0.5 launch")
 	for recipe: Dictionary in [bolt, frost]:
 		var angles: Array[float] = []
 		for index: int in range(recipe.initial_count):
@@ -255,7 +257,7 @@ func _test_recompile_rejection() -> void:
 		var first: Dictionary = Compiler.compile_skill(id, _snapshot(), [])
 		var before: Dictionary = first.duplicate(true)
 		var second: Dictionary = Compiler.compile_skill(id, first.snapshot, [])
-		_expect(second.ok and second == first, "Nonprojectile empty-support baseline stays unmarked and unchanged: " + id)
+		_expect(not second.ok and second.size() == 2, "All compiled snapshots reject reentry: " + id)
 		_expect(first == before, "Repeated nonprojectile baseline compile remains pure: " + id)
 
 

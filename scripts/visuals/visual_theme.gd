@@ -1,25 +1,32 @@
 class_name VisualTheme
 extends RefCounted
-## Original rift-forge design language: charcoal stone, oxidized teal, brass.
-const TEXT := Color("eee9dd")
-const MUTED := Color("a9b5b3")
-const ACCENT := Color("78d9ce")
-const GOLD := Color("d9b779")
-const PANEL := Color("152122")
-const BORDER := Color("455754")
+## Classic magic-world materials: walnut, leather, aged bronze, muted runes.
+const Frame = preload("res://scripts/visuals/material_frame.gd")
+const TEXT := Color("eee2c7")
+const MUTED := Color("b2aa94")
+const ACCENT := Color("b8c891")
+const GOLD := Color("d8b577")
+const PANEL := Color("29291f")
+const BORDER := Color("827354")
 
-static func panel(bg: Color = PANEL, line: Color = BORDER, radius: int = 6, border: int = 1, padding: float = 12.0) -> StyleBoxFlat:
-	var style := StyleBoxFlat.new()
-	style.bg_color = bg
-	style.border_color = line
-	style.set_border_width_all(border)
-	style.set_corner_radius_all(radius)
-	style.content_margin_left = padding
-	style.content_margin_right = padding
-	style.content_margin_top = padding * 0.65
-	style.content_margin_bottom = padding * 0.65
-	style.shadow_color = Color(0.01, 0.018, 0.018, 0.24)
-	style.shadow_size = 5
+static func panel(bg: Color = PANEL, line: Color = BORDER, radius: int = 6, border: int = 1, padding: float = 12.0) -> StyleBox:
+	var style: StyleBox
+	if border == 0:
+		var flat := StyleBoxFlat.new()
+		flat.bg_color=bg
+		flat.set_corner_radius_all(mini(radius,2))
+		style=flat
+	else:
+		var material := Frame.new()
+		material.bg_color=bg
+		material.border_color=line
+		material.border_width=border
+		material.corner_cut=mini(radius,4)
+		style=material
+	style.content_margin_left=padding
+	style.content_margin_right=padding
+	style.content_margin_top=padding*0.65
+	style.content_margin_bottom=padding*0.65
 	return style
 
 static func create_theme() -> Theme:
@@ -30,24 +37,26 @@ static func create_theme() -> Theme:
 		theme.set_color("font_color", type, TEXT)
 		theme.set_color("font_hover_color", type, Color.WHITE)
 		theme.set_color("font_pressed_color", type, ACCENT)
-		theme.set_color("font_disabled_color", type, Color("7d8b88"))
+		theme.set_color("font_disabled_color", type, Color("928c77"))
 	for type: String in ["Button", "OptionButton"]:
-		theme.set_stylebox("normal", type, panel(Color("243130"), BORDER))
-		theme.set_stylebox("hover", type, panel(Color("304441"), ACCENT))
-		theme.set_stylebox("pressed", type, panel(Color("234944"), ACCENT, 6, 2))
-		theme.set_stylebox("disabled", type, panel(Color("192423"), Color("34413f")))
+		theme.set_stylebox("normal", type, panel(Color("3b382a"), BORDER))
+		theme.set_stylebox("hover", type, panel(Color("4f5238"), ACCENT))
+		theme.set_stylebox("pressed", type, panel(Color("4e5537"), ACCENT, 6, 2))
+		theme.set_stylebox("disabled", type, panel(Color("27291f"), Color("575341")))
 		theme.set_stylebox("focus", type, panel(Color(0,0,0,0), GOLD, 6, 2, 0))
 	theme.set_stylebox("panel", "PanelContainer", panel())
-	theme.set_stylebox("panel", "PopupMenu", panel(Color("162623"), GOLD))
-	theme.set_stylebox("panel", "TooltipPanel", panel(Color("101b1b"), GOLD))
+	theme.set_stylebox("panel", "AcceptDialog", panel())
+	theme.set_color("title_color", "Window", TEXT)
+	theme.set_stylebox("panel", "PopupMenu", panel(Color("302e22"), GOLD))
+	theme.set_stylebox("panel", "TooltipPanel", panel(Color("24251d"), GOLD))
 	theme.set_font_size("font_size", "TooltipLabel", 16)
-	theme.set_stylebox("normal", "LineEdit", panel(Color("101b1b"), BORDER))
-	theme.set_stylebox("focus", "LineEdit", panel(Color("172b28"), ACCENT))
-	theme.set_stylebox("background", "ProgressBar", panel(Color("0a1213"), BORDER, 3, 1, 0))
+	theme.set_stylebox("normal", "LineEdit", panel(Color("24251d"), BORDER))
+	theme.set_stylebox("focus", "LineEdit", panel(Color("3c402c"), ACCENT))
+	theme.set_stylebox("background", "ProgressBar", panel(Color("1b1b15"), BORDER, 3, 1, 0))
 	theme.set_constant("separation", "HBoxContainer", 9)
 	theme.set_constant("separation", "VBoxContainer", 9)
-	var track := panel(Color("0e1818"), Color("20312d"), 3, 0, 3)
-	var grab := panel(Color("657c71"), Color("94b8a6"), 3, 0, 3)
+	var track := panel(Color("211f18"), Color("3c392b"), 3, 0, 3)
+	var grab := panel(Color("8c8061"), Color("b9a77b"), 3, 0, 3)
 	for type: String in ["VScrollBar", "HScrollBar"]:
 		theme.set_stylebox("scroll", type, track)
 		theme.set_stylebox("grabber", type, grab)

@@ -24,6 +24,8 @@ func run() -> void:
 	arena.equip_tornado_example()
 	expect(arena.state.set_skill_supports("tornado", ["volley", "focus"]), "Stress links both supports to seven-parent tornado")
 	arena.hud.close_panel()
+	arena.state.slot_skill(2, "bolt")
+	var used_typed_gear: bool = false
 	var max_owned: int = 0
 	var max_live: int = 0
 	for frame: int in range(36000):
@@ -40,14 +42,27 @@ func run() -> void:
 					arena._damage_enemy(enemy, 10000000.0, Color.WHITE)
 			arena._flush_monster_spawns()
 		if frame % 600 == 0:
+			# Exercise naturally issued typed gear and all delivery classes over time.
+			for id: String in arena.state.equipment_instances:
+				var definition: Dictionary = arena.state.get_item_definition(id)
+				if not definition.get("added_sources", []).is_empty():
+					arena.state.equip(id)
+					used_typed_gear = true
+					break
+			arena.mana = arena.get_stats().max_mana
+			arena.cast_skill(1)
+			arena.cast_skill(2)
 			max_owned = maxi(max_owned, arena.state.equipment_instances.size())
 			max_live = maxi(max_live, arena.enemies.size())
 			expect(arena.enemies.size() <= arena.MAX_ENEMIES and arena.projectiles.size() <= arena.MAX_PROJECTILES and arena.visual_cues.cues.size() <= arena.visual_cues.MAX_CUES, "Combat and cue capacities stay bounded")
 			expect(not arena.state._validate_snapshot(arena.state._snapshot()).is_empty(), "Evolving gear, jewels and layout remain save-valid")
 			expect(Model._owned_items_fit(arena.state.inventory, arena.state.jewels.keys(), arena.state.equipment_instances), "All worn and socketed loot retains return capacity")
 			# Free two generated items periodically; monotonically new rolls can refill.
-			for id: String in arena.state.equipment_instances.keys().slice(0, 2):
-				arena.state.discard_equipment(id)
+			var discarded: int = 0
+			for id: String in arena.state.equipment_instances.keys():
+				if discarded < 2 and arena.state.discard_equipment(id):
+					discarded += 1
+	expect(used_typed_gear, "Stress naturally obtains and equips fixed-point typed additions")
 	expect(arena.elapsed >= 599.9 and arena.alive, "Ten simulated minutes reach completion")
 	expect(arena.state.next_equipment_id > 20 and arena.reward_kills > 100, "Stress exercised repeated root loot and item identity allocation")
 	var saved: Dictionary = arena.state._snapshot()

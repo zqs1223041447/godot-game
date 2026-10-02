@@ -112,7 +112,7 @@ func _test_aoe_deferred() -> void:
 	_reset()
 	var brood: Dictionary = _enemy("brood_host")
 	var original_id: int = brood.id
-	arena._area_damage(brood.pos, 120.0, 100000.0, Color.WHITE, 0.0)
+	arena._area_damage(brood.pos, 120.0, Damage.packet({"lightning": 100000.0}, ["hit", "spell", "area"], "nova"), Color.WHITE, 0.0)
 	_expect(brood.death_processed and arena.kills == 1 and arena.monster_runtime.queue.size() == 2, "One AoE kills brood and queues exactly two splitters")
 	_expect(arena.enemies.size() == 1 and arena.damage_trace.size() == 1, "One AoE cannot synchronously recurse through a multistage death chain")
 	arena._flush_monster_spawns()
@@ -121,7 +121,7 @@ func _test_aoe_deferred() -> void:
 	for child: Dictionary in arena.enemies:
 		protected[child.id] = {"health": child.health, "shield": child.shield}
 		_expect(child.root_id == original_id and child.generation == 1 and child.spawn > 0.0, "Flushed splitter starts with birth protection and lineage")
-	arena._area_damage(brood.pos, 120.0, 100000.0, Color.WHITE, 0.0)
+	arena._area_damage(brood.pos, 120.0, Damage.packet({"lightning": 100000.0}, ["hit", "spell", "area"], "nova"), Color.WHITE, 0.0)
 	var untouched: bool = true
 	for child: Dictionary in arena.enemies:
 		untouched = untouched and child.health == protected[child.id].health and child.shield == protected[child.id].shield
@@ -130,7 +130,7 @@ func _test_aoe_deferred() -> void:
 	_expect(arena.enemies[0].spawn > 0.0 and arena.enemies[1].spawn > 0.0, "Birth protection survives until the configured grace interval")
 	arena._update_enemies(0.02)
 	_expect(arena.enemies[0].spawn == 0.0 and arena.enemies[1].spawn == 0.0, "Actual monster update expires birth protection after grace interval")
-	arena._area_damage(brood.pos, 120.0, 100000.0, Color.WHITE, 0.0)
+	arena._area_damage(brood.pos, 120.0, Damage.packet({"lightning": 100000.0}, ["hit", "spell", "area"], "nova"), Color.WHITE, 0.0)
 	_expect(arena.monster_runtime.queue.size() == 6 and arena.kills == 3 and arena.reward_kills == 1, "After protection two splitters die and queue six rewardless terminal grandchildren")
 	arena._flush_monster_spawns()
 	_expect(arena.enemies.size() == 6, "Multistage scene chain drains into six terminal grandchildren")

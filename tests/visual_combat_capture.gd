@@ -58,7 +58,7 @@ func run() -> void:
 		arena.state.slot_skill(0,"chain")
 		arena.cast_skill(0)
 		arena._update_effects(0.04)
-		await capture("v06-chain-%s-2k"%("high" if level==2 else "low"))
+		await capture("v07-chain-%s-2k"%("high" if level==2 else "low"))
 		prepare()
 		arena.player_pos=Vector2(640,380)
 		arena.state.slot_skill(0,"nova")
@@ -71,7 +71,7 @@ func run() -> void:
 		arena.invulnerable=0
 		arena.shield=0
 		arena.hit_player(5)
-		await capture("v06-spells-%s-2k"%("high" if level==2 else "low"))
+		await capture("v07-spells-%s-2k"%("high" if level==2 else "low"))
 	# New skill support panel belongs to the content track; preserve its native layout.
 	prepare()
 	arena.state.equip("ember_wand")
@@ -88,14 +88,32 @@ func run() -> void:
 			arena.hud._apply_presentation()
 			arena.hud.open_panel("skills")
 			arena.hud._select_skill_slot(0)
-			await capture("v06-support-%dx%d-ui%d"%[resolution.x,resolution.y,roundi(ui_scale*100)])
+			await capture("v07-support-%dx%d-ui%d"%[resolution.x,resolution.y,roundi(ui_scale*100)])
 	arena.visual_settings.ui_scale=1.0
 	arena.visual_settings.font_scale=1.0
 	arena.hud._apply_presentation()
 	arena.equip_tornado_example()
 	arena.hud.open_panel("skills")
 	arena.hud._select_skill_slot(0)
-	await capture("v06-support-full-combination-2k")
+	await capture("v07-support-full-combination-2k")
+	var fixture_rng:=RandomNumberGenerator.new()
+	fixture_rng.seed=701
+	var focus_id: String=arena.state.award_equipment(fixture_rng,30,"rare","expanded")
+	if not focus_id.is_empty():
+		arena.state.equip(focus_id)
+		for ui_scale: float in [1.0,1.1]:
+			arena.visual_settings.ui_scale=ui_scale
+			arena.visual_settings.font_scale=1.0 if ui_scale==1.0 else 1.2
+			arena.hud._apply_presentation()
+			arena.hud.open_panel("inventory")
+			arena.hud.find_child("InventoryPanel",true,false).select_item("item:"+focus_id)
+			await capture("v07-runewood-inventory-ui%d-2k"%roundi(ui_scale*100))
+			arena.hud.open_panel("skills")
+			arena.hud._select_skill_slot(0)
+			await capture("v07-typed-support-ui%d-2k"%roundi(ui_scale*100))
+			arena.hud.open_panel("combat")
+			arena.hud._panel_scroll.scroll_vertical=285
+			await capture("v07-typed-details-ui%d-2k"%roundi(ui_scale*100))
 	arena.hud.close_panel()
 	arena.visual_settings.ui_scale=1.0
 	arena.visual_settings.font_scale=1.0

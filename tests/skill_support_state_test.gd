@@ -52,7 +52,7 @@ func _same_set(actual: Array, expected: Array) -> bool:
 
 func _test_assignments() -> void:
 	var state = Model.new()
-	_expect(state._snapshot().version == 5 and state._snapshot().skill_supports.is_empty(), "Fresh schema-five build starts with no implicit support links")
+	_expect(state._snapshot().version == Model.SAVE_VERSION and state._snapshot().skill_supports.is_empty(), "Fresh schema-five build starts with no implicit support links")
 	state.changed.connect(_changed)
 	changes = 0
 	for skill: String in ["tornado", "bolt", "frost"]:
@@ -236,7 +236,7 @@ func _test_v4_migration() -> void:
 	var loaded = Model.new()
 	_expect(loaded.load_build(path), "True schema-four equipment build migrates successfully")
 	var migrated: Dictionary = loaded._snapshot()
-	_expect(migrated.version == 5 and migrated.skill_supports.is_empty(), "Migration adds only empty links at current schema version")
+	_expect(migrated.version == Model.SAVE_VERSION and migrated.skill_supports.is_empty(), "Migration adds only empty links at current schema version")
 	for field: String in legacy:
 		if field != "version":
 			_expect(migrated[field] == legacy[field], "v4 migration preserves exact original field: " + field)

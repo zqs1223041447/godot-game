@@ -2,6 +2,7 @@ class_name CombatCueRenderer
 extends RefCounted
 ## Each spell has a silhouette, cadence, and hit language. No full-screen flashes.
 ## Low effects keeps complete beams, destinations, cast glyphs, and area boundaries.
+const Palette = preload("res://scripts/visuals/fantasy_palette.gd")
 const GROUND: Array[String] = ["nova","ward","meteor","explosion","dash","death"]
 
 static func render(canvas: CanvasItem, cues: Array[Dictionary], effects: int, ground: bool) -> void:
@@ -23,7 +24,7 @@ static func _draw_cue(canvas: CanvasItem, cue: Dictionary, effects: int) -> void
 	var p: Vector2 = cue.origin
 	var t: float = clampf(float(cue.age)/float(cue.duration),0,1)
 	var fade: float = 1-t
-	var color: Color = cue.color
+	var color: Color = Palette.effect(str(cue.kind),str(cue.skill),Color(cue.color))
 	color.a *= minf(1,fade*2)
 	var r: float = cue.radius
 	var dir: Vector2 = cue.direction
@@ -45,42 +46,50 @@ static func _draw_cue(canvas: CanvasItem, cue: Dictionary, effects: int) -> void
 			if effects > 0:
 				canvas.draw_circle(center,radius,Color(color,color.a*0.06))
 		"nova":
-			# Immediate thin boundary tells the actual damage footprint; pulse expands inside it.
-			canvas.draw_arc(p,r,0,TAU,64,Color(color,color.a*0.45),1.3,true)
-			var wave := lerpf(6,r,sqrt(t))
-			canvas.draw_arc(p,wave,0,TAU,64,color,2.5,true)
-			var spokes: int = 6 if effects == 0 else 12
-			for i: int in range(spokes):
-				var v := Vector2.RIGHT.rotated(i*TAU/spokes)
-				canvas.draw_polyline(PackedVector2Array([p+v*wave*0.7,p+v*wave+v.orthogonal()*5,p+v*(wave+8)]),Color(color,color.a*0.7),1.5,true)
-			if effects == 2:
-				canvas.draw_arc(p,maxf(2,wave-9),0,TAU,64,Color(color,color.a*0.15),5,true)
+			# Separate wind-like rune wisps convey the shock front, without a clock-face ring.
+			var wave: float=lerpf(6,r,sqrt(t))
+			var wisps: int=6 if effects==0 else 8
+			for i: int in range(wisps):
+				var angle: float=i*TAU/wisps
+				var v:=Vector2.RIGHT.rotated(angle)
+				var normal:=v.orthogonal()
+				var edge: float=wave*(0.92+0.06*sin(i*2.1))
+				var curl:=PackedVector2Array([p+v*edge*0.76-normal*7,p+v*edge-normal*4,p+v*(edge+4)+normal*4,p+v*edge*0.9+normal*8])
+				canvas.draw_polyline(curl,Color(0.27,0.24,0.31,color.a*0.45),2.8,true)
+				canvas.draw_polyline(curl,Color(color,color.a*0.7),1.7,true)
+				canvas.draw_line(p+v*(r-4),p+v*r,Color(0.37,0.29,0.42,color.a*0.24),1,true)
+				if effects==2:
+					canvas.draw_line(p+v*edge*0.55,p+v*edge*0.72,Color(color,color.a*0.2),1.2,true)
 		"ward":
-			var radius := lerpf(24,r,t*0.5)
-			var shield := _regular(p,radius,6,-PI/2)
-			canvas.draw_polyline(shield,color,2,true)
-			canvas.draw_arc(p,radius+5,0,TAU,48,Color(color,color.a*0.45),1,true)
-			for i: int in range(6):
-				var v: Vector2 = (shield[i]-p).normalized()
-				canvas.draw_line(p+v*(radius-5),p+v*(radius+4),color,2,true)
-			if effects > 0:
-				_polygon(canvas,shield,Color(color,color.a*0.06))
+			var radius: float=lerpf(22,r,t*0.35)
+			var shield:=PackedVector2Array([p+Vector2(-radius*0.65,-radius*0.6),p+Vector2(0,-radius*0.45),p+Vector2(radius*0.65,-radius*0.6),p+Vector2(radius*0.55,radius*0.25),p+Vector2(0,radius*0.75),p+Vector2(-radius*0.55,radius*0.25),p+Vector2(-radius*0.65,-radius*0.6)])
+			canvas.draw_polyline(shield,Color(0.19,0.23,0.13,color.a*0.55),3,true)
+			canvas.draw_polyline(shield,color,1.4,true)
+			canvas.draw_line(p+Vector2(0,-radius*0.2),p+Vector2(0,radius*0.4),color,1.5,true)
+			canvas.draw_line(p+Vector2(-radius*0.2,0),p+Vector2(radius*0.2,0),color,1.5,true)
 		"meteor", "explosion":
-			var meteor: bool = cue.kind == "meteor"
-			var wave: float = lerpf(8,r,sqrt(t))
-			canvas.draw_arc(p,r,0,TAU,64,Color(color,color.a*0.35),1,true)
-			canvas.draw_arc(p,wave,0,TAU,64,color,2.5 if meteor else 1.8,true)
-			var spokes: int = 10 if meteor else 6
-			for i: int in range(spokes):
-				var v := Vector2.RIGHT.rotated(i*TAU/spokes+float(cue.id%5)*0.17)
-				canvas.draw_line(p+v*wave*0.6,p+v*wave,color,2 if meteor else 1.2,true)
+			# Fire reads as a brief ragged burst, not overlapping clock-face rings.
+			var meteor: bool=cue.kind=="meteor"
+			var wave: float=lerpf(4,r*0.72,sqrt(t))
+			var boundary: Color=Color(0.30,0.24,0.14,color.a*0.25)
+			# Four discreet end marks retain the true effect extent even in low mode.
+			for i: int in range(4):
+				var v:=Vector2.RIGHT.rotated(PI/4+i*PI/2)
+				canvas.draw_line(p+v*(r-4),p+v*r,boundary,1.1,true)
+			var flames: int=4 if effects==0 else 6 if meteor else 5
+			for i: int in range(flames):
+				var angle: float=i*TAU/flames+float(cue.id%7)*0.23
+				var v:=Vector2.RIGHT.rotated(angle)
+				var normal:=v.orthogonal()
+				var center:=p+v*wave*0.56+Vector2(0,-t*6)
+				var length: float=maxf(2,r*(0.17 if meteor else 0.13)*fade)
+				var flame:=PackedVector2Array([center-v*length*0.7,center+normal*length*0.4,center+v*length*0.4+normal*length*0.23,center+v*length*1.5,center+v*length*0.45-normal*length*0.28,center-normal*length*0.43])
+				_polygon(canvas,flame,Color(color,color.a*0.55))
+				canvas.draw_line(center-v*length*0.35,center+v*length*0.9,Color(0.88,0.71,0.40,color.a*0.65),1.3,true)
 			if meteor:
-				var core: float = (1-t)*r*0.28
-				_polygon(canvas,_regular(p,core,7,-PI/2),Color("ffd69a")*Color(1,1,1,fade))
-			if effects > 0:
-				canvas.draw_circle(p,wave,Color(color,color.a*0.04))
-			if effects == 2:
-				canvas.draw_arc(p,maxf(1,wave-7),0,TAU,64,Color(color,color.a*0.2),6,true)
+				var core: float=lerpf(r*0.16,2,t)
+				_polygon(canvas,_regular(p,core,7,-PI/2),Color(0.69,0.38,0.18,color.a*0.5))
+				canvas.draw_line(p+Vector2(-core*0.45,-core*0.2),p+Vector2(core*0.35,core*0.15),Color(0.93,0.77,0.49,color.a*0.7),2,true)
 		"chain":
 			var end: Vector2 = cue.destination
 			var axis := end-p
@@ -108,7 +117,7 @@ static func _draw_cue(canvas: CanvasItem, cue: Dictionary, effects: int) -> void
 				canvas.draw_polyline(PackedVector2Array([center-axis*5+axis.orthogonal()*9,center+axis*4,center-axis*5-axis.orthogonal()*9]),color,2,true)
 		"impact":
 			if bool(cue.shielded):
-				canvas.draw_polyline(_regular(p,r*(0.6+t*0.6),6),Color(0.64,0.83,0.98,color.a),1.6,true)
+				canvas.draw_polyline(_regular(p,r*(0.6+t*0.6),6),Color(0.65,0.76,0.79,color.a),1.6,true)
 			else:
 				for i: int in range(4):
 					var v := Vector2.RIGHT.rotated(PI/4+i*PI/2)
@@ -116,7 +125,7 @@ static func _draw_cue(canvas: CanvasItem, cue: Dictionary, effects: int) -> void
 			if effects == 2:
 				canvas.draw_circle(p,r*0.7,Color(color,color.a*0.08))
 		"hurt":
-			var hurt: Color = Color("98d3ef") if bool(cue.shielded) else Color("f49b86")
+			var hurt: Color = Color("a6c2c7") if bool(cue.shielded) else Color("d58162")
 			hurt.a = color.a
 			var radius: float = 22+6*t
 			for i: int in range(4):
