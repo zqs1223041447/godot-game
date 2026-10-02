@@ -30,8 +30,8 @@ func _run_checks() -> void:
 
 
 func _check_catalogs() -> void:
-	_expect(Data.SKILLS.size() == 7, "Seven available skills")
-	_expect(Data.ITEMS.size() == 6, "Six initial equipment items")
+	_expect(Data.SKILLS.size() == 8, "Eight available skills")
+	_expect(Data.ITEMS.size() == 9, "Nine initial equipment items")
 	_expect(Passives.get_nodes().size() >= 150, "Expanded passive graph populated")
 	for skill_id: String in Data.SKILLS:
 		var skill: Dictionary = Data.SKILLS[skill_id]
@@ -50,7 +50,7 @@ func _check_equipment() -> void:
 	var build := Model.new()
 	build.changed.connect(_on_changed)
 	change_count = 0
-	_expect(build.inventory.size() == 6, "Inventory starts with all six items")
+	_expect(build.inventory.size() == 9, "Inventory starts with all nine items")
 	_expect(build.equipped.size() == 3, "One equipped item in each slot")
 	_expect(is_equal_approx(build.get_stats()["damage"], 26.0), "Default weapon adds damage")
 	_expect(is_equal_approx(build.get_stats()["max_mana"], 130.0), "Default charm adds mana")
@@ -70,7 +70,7 @@ func _check_equipment() -> void:
 	build.inventory.erase("ember_wand")
 	_expect(not build.equip("ember_wand"), "Cannot equip an item outside inventory")
 	var independent := Model.new()
-	_expect(independent.inventory.size() == 6 and independent.equipped.size() == 3, "Build instances do not share mutable collections")
+	_expect(independent.inventory.size() == 9 and independent.equipped.size() == 3, "Build instances do not share mutable collections")
 	var detached: Dictionary = independent.get_stats()
 	detached["damage"] = 999.0
 	_expect(is_equal_approx(independent.get_stats()["damage"], 26.0), "Returned stats do not mutate base stats")

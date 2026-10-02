@@ -297,7 +297,7 @@ func _check_backpack() -> void:
 	for slot: String in Model.EQUIPMENT_SLOTS:
 		if build.equipped.has(slot):
 			_expect(build.unequip(slot), "Unequip to grid: " + slot)
-	_expect(_grid_valid(build) and build.get_backpack_items().size() == 9, "All six equipment items and three jewels fit grid")
+	_expect(_grid_valid(build) and build.get_backpack_items().size() == 12, "All nine equipment items and three jewels fit grid")
 	build.auto_sort_backpack()
 	before = build._snapshot()
 	before_changes = changes
@@ -329,6 +329,10 @@ func _check_backpack() -> void:
 
 func _check_fragmentation_recovery() -> void:
 	var build := Model.new()
+	# This fixture intentionally retains the original six-item geometry.
+	for id: String in ["prism_bow", "return_mantle", "detonation_charm"]:
+		build.inventory.erase(id)
+	build._sync_backpack()
 	var rng := RandomNumberGenerator.new()
 	rng.seed = 62
 	while build.jewels.size() < Model.MAX_JEWELS:
@@ -427,7 +431,7 @@ func _check_save_safety() -> void:
 	_expect(not first.is_empty() and build.socket_jewel("ember_3_0", first), "Round-trip fixture has rolled socketed jewel")
 	_expect(build.save_build(SAVE) == OK, "Save schema v2 with jewels")
 	var saved: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(SAVE))
-	_expect(saved.version == 2 and not saved.has("talents"), "Save v2 uses graph allocation rather than rank talents")
+	_expect(saved.version == Model.SAVE_VERSION and not saved.has("talents"), "Save v2 uses graph allocation rather than rank talents")
 	var restored := Model.new()
 	restored.changed.connect(_changed)
 	changes = 0
@@ -534,7 +538,7 @@ func _check_migration() -> void:
 	_expect(build.load_build(BAD), "Valid v1 save migrates")
 	_expect(build.migrated_from_v1 and not build.migration_message.is_empty(), "Migration is explicitly reported to UI")
 	_expect(build.level == 8 and build.xp == 7, "Migration retains level and XP")
-	_expect(build.equipped == legacy.equipped and build.inventory == legacy.inventory, "Migration retains owned and equipped items")
+	_expect(build.equipped == legacy.equipped and build.inventory.slice(0, 6) == legacy.inventory and build.inventory.size() == 9, "Migration retains owned and equipped items")
 	_expect(build.skill_slots == legacy.skill_slots, "Migration retains five skill selections")
 	_expect(build.talent_points == 12 and build.allocated_nodes == [Passives.START_ID], "All legacy rank points refunded into graph budget")
 	_expect(build.socketed_jewels.is_empty() and _ownership_valid(build), "Migration creates coherent starter jewel ownership")
@@ -574,7 +578,7 @@ func _check_migration() -> void:
 	var backed_up := Model.new()
 	_expect(backed_up.load_build(LEGACY) and backed_up.save_build(LEGACY) == OK, "Same-path migration preserves legacy backup before overwrite")
 	_expect(FileAccess.get_file_as_string(LEGACY + ".v1-backup.json") == original, "Legacy backup preserves original bytes")
-	_expect(JSON.parse_string(FileAccess.get_file_as_string(LEGACY)).version == 2, "Migration atomically replaces original with schema v2")
+	_expect(JSON.parse_string(FileAccess.get_file_as_string(LEGACY)).version == Model.SAVE_VERSION, "Migration atomically replaces original with schema v2")
 	_expect(backed_up.save_build(LEGACY) == OK, "Further v2 save is not blocked by old migration state")
 	_write(LEGACY, legacy)
 	var conflict := Model.new()
