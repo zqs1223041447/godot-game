@@ -4,7 +4,7 @@ extends SceneTree
 ## Output: docs/reference/art, or --output-dir /absolute/path, or GODOT_REFERENCE_ART_DIR.
 ## Headless-safe catalog/check: add -- --manifest-only (does not capture pixels).
 const Data = preload("res://scripts/game_data.gd")
-const Supports = preload("res://scripts/combat/support_catalog.gd")
+const Supports = preload("res://scripts/combat/support_registry.gd")
 const Gear = preload("res://scripts/items/equipment_catalog.gd")
 const Jewels = preload("res://scripts/jewel_data.gd")
 const Monsters = preload("res://scripts/monsters/monster_catalog.gd")

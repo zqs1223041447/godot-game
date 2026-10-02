@@ -31,7 +31,7 @@ func run()->void:
 	expect(copied.book_cover,"Book-cover storage survives duplication")
 	for id:String in GameData.SKILLS:
 		expect(Emblem.ICONS.has(id),"Actual skill has specific painted art: "+id)
-	for id:String in ["volley","focus"]:
+	for id:String in ["volley","focus","pierce"]:
 		expect(Emblem.ICONS.has(id),"Actual support has specific jewel art: "+id)
 	for id:String in Emblem.ICONS:
 		var texture:Texture2D=Emblem.ICONS[id]

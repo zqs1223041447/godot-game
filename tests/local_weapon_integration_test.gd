@@ -547,17 +547,17 @@ func _v8_scene_migration() -> void:
 	_expect(arena.state.migrated_from_v8 and arena.state.save_block_reason().is_empty(), "Real startup migrates valid v8")
 	_expect(arena.hud.is_blocking() and arena.hud._active_panel == "inventory", "Startup opens migration explanation before gameplay")
 	var expected: Dictionary = legacy.duplicate(true)
-	expected.version = 9
+	expected.version = Model.SAVE_VERSION
 	# JSON parses numbers as floats; compare both encodings in that same domain.
 	var observed: Dictionary = JSON.parse_string(JSON.stringify(arena.state._snapshot()))
 	_expect(observed == JSON.parse_string(JSON.stringify(expected)) and not arena.state.get_combat_snapshot().has("weapon_profile"), "Startup only updates schema and preserves all legacy rolls, supports, locations and build fields")
 	_expect(FileAccess.get_file_as_bytes(path) == original and not FileAccess.file_exists(backup), "Startup and initial restart have not touched original bytes")
 	_expect(arena.state.unequip("weapon"), "First real equipment edit triggers migration autosave")
 	_expect(FileAccess.get_file_as_bytes(backup) == original, "First automatic write creates byte-exact BOM/CRLF v8 backup")
-	_expect(Batch.saved_matches(arena) and JSON.parse_string(FileAccess.get_file_as_string(path)).version == 9, "First automatic write commits exact current scene schema9")
+	_expect(Batch.saved_matches(arena) and JSON.parse_string(FileAccess.get_file_as_string(path)).version == Model.SAVE_VERSION, "First automatic write commits exact current scene schema")
 	var canonical: Dictionary = arena.state._snapshot()
 	arena.free()
 	_create()
-	_expect(not arena.state.migrated_from_v8 and arena.state._snapshot() == canonical, "Fresh scene process initialization restores committed schema9 without repeating migration")
+	_expect(not arena.state.migrated_from_v8 and arena.state._snapshot() == canonical, "Fresh scene process initialization restores committed schema without repeating migration")
 	_expect(FileAccess.get_file_as_bytes(backup) == original, "Second startup leaves original backup unchanged")
 	completed = true

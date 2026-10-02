@@ -145,6 +145,35 @@
       "sha256": "fa8bff82fb07378711d295f2e11204403e301e943fd8353d0ca72b09d8a2b882",
       "prompt_key": "ward",
       "generation_mode": "built-in image_gen"
+    },
+    {
+      "path": "assets/ui/grimoire/pierce.png",
+      "source_url": null,
+      "author": "OpenAI image generation for this project",
+      "license": "Original project-generated asset; no third-party artwork imported",
+      "license_url": null,
+      "changes": "Original generated PNG copied byte-for-byte; Godot import limits runtime texture to 512px and generates mipmaps. Approved volley/focus/bolt project art was visually inspected as style reference, not supplied as edit targets.",
+      "usage": "Skill/support illustration keyed by stable model ID: pierce",
+      "sha256": "2863de7c65de38f12d9359bd926db182b5cd2ea3c6e45ca17cd6d026f435765c",
+      "prompt_key": "pierce",
+      "generation_mode": "built-in image_gen",
+      "references": [
+        {
+          "path": "assets/ui/grimoire/volley.png",
+          "sha256": "1d27b5ea3ceb42a92a28ba851b18be859bc4009f83431d8f317516512a5648a1",
+          "role": "Approved warm brass and burgundy support-art style; distinguish from upright amethyst jewel"
+        },
+        {
+          "path": "assets/ui/grimoire/focus.png",
+          "sha256": "c1d1da80fbee5c2d67b9c593d5d17304fd340661c739d5e1d2547a9104899105",
+          "role": "Approved painterly concrete magical object and brass craft style; distinguish from upright sapphire jewel"
+        },
+        {
+          "path": "assets/ui/grimoire/bolt.png",
+          "sha256": "e28b791b05fee2fe276e4f35c6172bd38c7a48c5fb5563250030012842c82207",
+          "role": "Approved large readable forms and painted localized magic; distinguish single physical arrow from three lightning projectiles"
+        }
+      ]
     }
   ]
 }

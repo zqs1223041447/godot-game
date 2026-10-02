@@ -3,7 +3,7 @@ extends SceneTree
 const Data = preload("res://scripts/game_data.gd")
 const Build = preload("res://scripts/build_state.gd")
 const Equipment = preload("res://scripts/items/equipment_catalog.gd")
-const Supports = preload("res://scripts/combat/support_catalog.gd")
+const Supports = preload("res://scripts/combat/support_registry.gd")
 const Compiler = preload("res://scripts/combat/skill_compiler.gd")
 const Preview = preload("res://scripts/combat/damage_preview.gd")
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
@@ -119,14 +119,13 @@ static func collect() -> Dictionary:
 		skill["examples"] = {}
 		for config: String in builds:
 			var build: RefCounted = builds[config]
-			var combinations: Array = [[]]
-			if not skill.compatible_supports.is_empty():
-				for support_id: String in skill.compatible_supports:
-					combinations.append([support_id])
-				combinations.append(skill.compatible_supports.duplicate())
+			var combinations: Array = support_combinations(skill.compatible_supports)
 			skill.examples[config] = []
 			for combination: Array in combinations:
+				if not Supports.compatibility_reason(id, combination).is_empty():
+					continue
 				var cast: Dictionary = Compiler.compile_skill(id, build.get_combat_snapshot(), combination)
+				assert(cast.get("ok", false), "Reference examples require a successful production cast")
 				var packets: Array = []
 				for entry: Dictionary in Preview.entries(cast):
 					var defended: Dictionary = Damage.resolve(entry.packet, cast.snapshot.modifiers, target.resistances)
@@ -280,6 +279,19 @@ static func local_build(instance: Dictionary) -> RefCounted:
 	assert(equipped_ok, "Reference bow must equip through BuildState")
 	assert(not build._validate_snapshot(build._snapshot()).is_empty(), "Reference build must satisfy actual save schema without writing a save")
 	return build
+
+## Enumerate each zero-, one-, and two-slot candidate exactly once. Available
+## support count can grow independently of the two-slot equipment limit.
+static func support_combinations(compatible_ids: Array) -> Array:
+	assert(Supports.MAX_SUPPORTS == 2, "Reference enumeration follows the two-slot contract")
+	var result: Array = [[]]
+	for id: String in compatible_ids:
+		result.append([id])
+	for first: int in range(compatible_ids.size()):
+		for second: int in range(first + 1, compatible_ids.size()):
+			result.append([compatible_ids[first], compatible_ids[second]])
+	return result
+
 
 static func _direct_total(cast: Dictionary) -> float:
 	var total: float = 0.0
