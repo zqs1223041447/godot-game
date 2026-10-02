@@ -1,0 +1,28 @@
+# Godot-generated cache and editor state. Keep *.uid source sidecars tracked.
+.godot/
+.godot-test-data/
+.godot-test-cache/
+
+# Generated builds and logs.
+builds/
+dist/
+*.log
+
+# Export credentials, local environment variables, and signing secrets.
+export_credentials.cfg
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.keystore
+secrets/
+
+# Machine-local files.
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*~
