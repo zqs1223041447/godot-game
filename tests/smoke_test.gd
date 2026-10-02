@@ -163,6 +163,7 @@ func _run_checks() -> void:
 
 func _check_jewel_drops() -> void:
 	arena.kills = 18
+	arena.reward_kills = 18
 	var before: int = arena.state.jewels.size()
 	var target: Dictionary = arena._spawn_enemy(arena.player_pos + Vector2(40, 0), 0)
 	arena._damage_enemy(target, 9999.0, Color.WHITE)
@@ -180,6 +181,7 @@ func _check_jewel_drops() -> void:
 	var owned: Dictionary = arena.state.jewels.duplicate(true)
 	var loose: Array = arena.state.jewel_inventory.duplicate()
 	arena.kills = 39
+	arena.reward_kills = 39
 	target = arena._spawn_enemy(arena.player_pos + Vector2(40, 0), 0)
 	arena._damage_enemy(target, 9999.0, Color.WHITE)
 	_expect(arena.kills == 40 and arena.state.jewels == owned and arena.state.jewel_inventory == loose, "Full-capacity milestone preserves existing jewels without duplication")
