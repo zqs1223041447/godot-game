@@ -10,12 +10,14 @@ const PLAYER_STATS: Array[String] = [
 	"damage", "max_health", "max_mana", "max_shield", "attack_speed", "move_speed",
 	"mana_regen", "shield_regen",
 	"global_increased", "projectile_increased", "elemental_increased", "area_increased",
+	"spell_increased", "fire_increased", "cold_increased", "lightning_increased",
+	"attack_elemental_increased", "attack_speed_increased", "move_speed_increased", "mana_regen_increased",
 ]
 const MONSTER_STATS: Array[String] = [
 	"damage", "max_health", "max_shield", "attack_speed", "move_speed", "shield_regen",
 ]
 # Explicit compatibility spellings. Never infer an alias from a prefix or substring.
-# Save schema 3 still stores tree node IDs, so no save rewrite is needed.
+# Saves retain stable tree node IDs; item-instance migrations do not rewrite them.
 const ALIASES: Dictionary = {
 	"talent.ember.power": "ember_power",
 	"talent.gale.stride": "gale_stride",
