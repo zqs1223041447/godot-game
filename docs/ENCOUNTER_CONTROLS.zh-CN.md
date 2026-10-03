@@ -1,5 +1,7 @@
 # 独立遭遇选择控件
 
+> 当前状态：v0.17已接入暂停选择与真实根/子怪入场，规则和新验收见[本轮挑战接入](ENCOUNTER_INTEGRATION.zh-CN.md)。下文保留独立组件的历史交付边界；当时的“未接入”不是当前版本状态。
+
 基于 `encounter_catalog` / `encounter_compiler` 最终提交 `9f553d68277b88b1bde18e5b4fc2d3333a17bde1` 和当前 `VisualTheme`。仅新增本说明、`scripts/ui/encounter_controls.gd`、`tests/encounter_controls_test.gd`。
 
 `EncounterControls` 是可嵌入的 `PanelContainer`，可供后续挑战入口使用。**尚未放入主场景或现有 UI，也未开放可玩的挑战遭遇。** 主集成后续决定放置位置；本任务没有整页、地图、奖励或新游戏架构。

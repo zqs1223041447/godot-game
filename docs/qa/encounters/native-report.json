@@ -1,0 +1,1900 @@
+{
+	"cancel_count": 4,
+	"fixture_changes": [
+		"isolated fresh save",
+		"simulation held while real menu input is exercised",
+		"fixed next-run RNG seed",
+		"menus reopened and scrolled between phases"
+	],
+	"inputs": [
+		{
+			"button": 1,
+			"position": [
+				112.0,
+				383.0
+			]
+		},
+		{
+			"button": 1,
+			"position": [
+				112.0,
+				451.0
+			]
+		},
+		{
+			"button": 1,
+			"position": [
+				600.0,
+				622.0
+			]
+		},
+		{
+			"button": 1,
+			"position": [
+				600.0,
+				622.0
+			]
+		},
+		{
+			"button": 1,
+			"position": [
+				504.0,
+				421.0
+			]
+		},
+		{
+			"button": 1,
+			"position": [
+				110.0,
+				383.0
+			]
+		},
+		{
+			"button": 1,
+			"position": [
+				110.0,
+				451.0
+			]
+		},
+		{
+			"button": 1,
+			"position": [
+				600.0,
+				622.0
+			]
+		}
+	],
+	"records": [
+		{
+			"build_unchanged": true,
+			"font_scale": 1.0,
+			"input_mode": "physical_observed",
+			"label": "choices-0",
+			"monsters": [
+				{
+					"challenge": {
+
+					},
+					"damage": 11.0,
+					"health": 58.9,
+					"id": 1,
+					"max_health": 58.9,
+					"reward_eligible": true,
+					"speed": 65.4,
+					"template": "crawler"
+				},
+				{
+					"challenge": {
+
+					},
+					"damage": 10.0,
+					"health": 38.0,
+					"id": 2,
+					"max_health": 38.0,
+					"reward_eligible": true,
+					"speed": 65.4,
+					"template": "crawler"
+				},
+				{
+					"challenge": {
+
+					},
+					"damage": 8.8,
+					"health": 38.75,
+					"id": 3,
+					"max_health": 38.75,
+					"reward_eligible": true,
+					"speed": 104.4,
+					"template": "skitter"
+				}
+			],
+			"resolution": [
+				1280,
+				720
+			],
+			"run_revision": 1,
+			"selection": [],
+			"ui_scale": 1.0
+		},
+		{
+			"build_unchanged": true,
+			"font_scale": 1.0,
+			"input_mode": "physical_observed",
+			"label": "run-1",
+			"monsters": [
+				{
+					"challenge": {
+						"before": {
+							"health": 38.0,
+							"max_health": 38.0,
+							"max_shield": 0.0,
+							"shield": 0.0,
+							"speed": 65.4
+						},
+						"enemy_id": 4,
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"profile": {
+							"definitions": [
+								{
+									"description": "怪物最大生命 ×1.20",
+									"field": "max_health",
+									"id": "enemy_max_health_120",
+									"multiplier": 1.2,
+									"name": "强健",
+									"risk": {
+										"assessment": "parameter_only",
+										"field": "max_health",
+										"multiplier": 1.2,
+										"relative_increase": 0.19999999999999996
+									},
+									"source_id": "encounter:enemy_max_health_120"
+								},
+								{
+									"description": "怪物移动速度 ×1.10",
+									"field": "speed",
+									"id": "enemy_move_speed_110",
+									"multiplier": 1.1,
+									"name": "迅行",
+									"risk": {
+										"assessment": "parameter_only",
+										"field": "speed",
+										"multiplier": 1.1,
+										"relative_increase": 0.10000000000000009
+									},
+									"source_id": "encounter:enemy_move_speed_110"
+								}
+							],
+							"modifier_ids": [
+								"enemy_max_health_120",
+								"enemy_move_speed_110"
+							],
+							"multipliers": {
+								"max_health": 1.2,
+								"speed": 1.1
+							},
+							"resource_policy": {
+								"health": "preserve_current_to_max_ratio",
+								"max_health": "multiply_canonical_once",
+								"max_shield": "unchanged",
+								"rounding": "float_no_integer_rounding",
+								"shield": "unchanged",
+								"shield_regen": "unchanged",
+								"speed": "multiply_canonical_once"
+							},
+							"reward_budget": {
+								"creates_map_items": false,
+								"enabled": false,
+								"grants_rewards": false,
+								"proposed_bonus_fraction": null,
+								"status": "metadata_only"
+							},
+							"risk_parameters": [
+								{
+									"assessment": "parameter_only",
+									"field": "max_health",
+									"multiplier": 1.2,
+									"relative_increase": 0.19999999999999996
+								},
+								{
+									"assessment": "parameter_only",
+									"field": "speed",
+									"multiplier": 1.1,
+									"relative_increase": 0.10000000000000009
+								}
+							],
+							"source": {
+								"balance_source": "original_game_balance",
+								"catalog": "res://scripts/encounters/encounter_catalog.gd",
+								"definition_revision": 1,
+								"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+								"monster_schema_version": 1,
+								"policy_version": 1,
+								"schema_version": 1
+							}
+						},
+						"rarity": "normal",
+						"template_id": "crawler",
+						"wave": 1
+					},
+					"damage": 10.0,
+					"health": 45.6,
+					"id": 4,
+					"max_health": 45.6,
+					"reward_eligible": true,
+					"speed": 71.94000000000001,
+					"template": "crawler"
+				},
+				{
+					"challenge": {
+						"before": {
+							"health": 25.0,
+							"max_health": 25.0,
+							"max_shield": 0.0,
+							"shield": 0.0,
+							"speed": 104.4
+						},
+						"enemy_id": 5,
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"profile": {
+							"definitions": [
+								{
+									"description": "怪物最大生命 ×1.20",
+									"field": "max_health",
+									"id": "enemy_max_health_120",
+									"multiplier": 1.2,
+									"name": "强健",
+									"risk": {
+										"assessment": "parameter_only",
+										"field": "max_health",
+										"multiplier": 1.2,
+										"relative_increase": 0.19999999999999996
+									},
+									"source_id": "encounter:enemy_max_health_120"
+								},
+								{
+									"description": "怪物移动速度 ×1.10",
+									"field": "speed",
+									"id": "enemy_move_speed_110",
+									"multiplier": 1.1,
+									"name": "迅行",
+									"risk": {
+										"assessment": "parameter_only",
+										"field": "speed",
+										"multiplier": 1.1,
+										"relative_increase": 0.10000000000000009
+									},
+									"source_id": "encounter:enemy_move_speed_110"
+								}
+							],
+							"modifier_ids": [
+								"enemy_max_health_120",
+								"enemy_move_speed_110"
+							],
+							"multipliers": {
+								"max_health": 1.2,
+								"speed": 1.1
+							},
+							"resource_policy": {
+								"health": "preserve_current_to_max_ratio",
+								"max_health": "multiply_canonical_once",
+								"max_shield": "unchanged",
+								"rounding": "float_no_integer_rounding",
+								"shield": "unchanged",
+								"shield_regen": "unchanged",
+								"speed": "multiply_canonical_once"
+							},
+							"reward_budget": {
+								"creates_map_items": false,
+								"enabled": false,
+								"grants_rewards": false,
+								"proposed_bonus_fraction": null,
+								"status": "metadata_only"
+							},
+							"risk_parameters": [
+								{
+									"assessment": "parameter_only",
+									"field": "max_health",
+									"multiplier": 1.2,
+									"relative_increase": 0.19999999999999996
+								},
+								{
+									"assessment": "parameter_only",
+									"field": "speed",
+									"multiplier": 1.1,
+									"relative_increase": 0.10000000000000009
+								}
+							],
+							"source": {
+								"balance_source": "original_game_balance",
+								"catalog": "res://scripts/encounters/encounter_catalog.gd",
+								"definition_revision": 1,
+								"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+								"monster_schema_version": 1,
+								"policy_version": 1,
+								"schema_version": 1
+							}
+						},
+						"rarity": "normal",
+						"template_id": "skitter",
+						"wave": 1
+					},
+					"damage": 8.0,
+					"health": 30.0,
+					"id": 5,
+					"max_health": 30.0,
+					"reward_eligible": true,
+					"speed": 114.84000000000002,
+					"template": "skitter"
+				},
+				{
+					"challenge": {
+						"before": {
+							"health": 62.8,
+							"max_health": 62.8,
+							"max_shield": 0.0,
+							"shield": 0.0,
+							"speed": 65.4
+						},
+						"enemy_id": 6,
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"profile": {
+							"definitions": [
+								{
+									"description": "怪物最大生命 ×1.20",
+									"field": "max_health",
+									"id": "enemy_max_health_120",
+									"multiplier": 1.2,
+									"name": "强健",
+									"risk": {
+										"assessment": "parameter_only",
+										"field": "max_health",
+										"multiplier": 1.2,
+										"relative_increase": 0.19999999999999996
+									},
+									"source_id": "encounter:enemy_max_health_120"
+								},
+								{
+									"description": "怪物移动速度 ×1.10",
+									"field": "speed",
+									"id": "enemy_move_speed_110",
+									"multiplier": 1.1,
+									"name": "迅行",
+									"risk": {
+										"assessment": "parameter_only",
+										"field": "speed",
+										"multiplier": 1.1,
+										"relative_increase": 0.10000000000000009
+									},
+									"source_id": "encounter:enemy_move_speed_110"
+								}
+							],
+							"modifier_ids": [
+								"enemy_max_health_120",
+								"enemy_move_speed_110"
+							],
+							"multipliers": {
+								"max_health": 1.2,
+								"speed": 1.1
+							},
+							"resource_policy": {
+								"health": "preserve_current_to_max_ratio",
+								"max_health": "multiply_canonical_once",
+								"max_shield": "unchanged",
+								"rounding": "float_no_integer_rounding",
+								"shield": "unchanged",
+								"shield_regen": "unchanged",
+								"speed": "multiply_canonical_once"
+							},
+							"reward_budget": {
+								"creates_map_items": false,
+								"enabled": false,
+								"grants_rewards": false,
+								"proposed_bonus_fraction": null,
+								"status": "metadata_only"
+							},
+							"risk_parameters": [
+								{
+									"assessment": "parameter_only",
+									"field": "max_health",
+									"multiplier": 1.2,
+									"relative_increase": 0.19999999999999996
+								},
+								{
+									"assessment": "parameter_only",
+									"field": "speed",
+									"multiplier": 1.1,
+									"relative_increase": 0.10000000000000009
+								}
+							],
+							"source": {
+								"balance_source": "original_game_balance",
+								"catalog": "res://scripts/encounters/encounter_catalog.gd",
+								"definition_revision": 1,
+								"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+								"monster_schema_version": 1,
+								"policy_version": 1,
+								"schema_version": 1
+							}
+						},
+						"rarity": "magic",
+						"template_id": "splitter",
+						"wave": 1
+					},
+					"damage": 11.0,
+					"health": 75.36,
+					"id": 6,
+					"max_health": 75.36,
+					"reward_eligible": true,
+					"speed": 71.94000000000001,
+					"template": "splitter"
+				}
+			],
+			"resolution": [
+				1280,
+				720
+			],
+			"run_revision": 2,
+			"selection": [
+				"enemy_max_health_120",
+				"enemy_move_speed_110"
+			],
+			"ui_scale": 1.0
+		},
+		{
+			"build_unchanged": true,
+			"font_scale": 1.0,
+			"input_mode": "physical_observed",
+			"label": "retry-button",
+			"monsters": [
+				{
+					"challenge": {
+						"before": {
+							"health": 38.0,
+							"max_health": 38.0,
+							"max_shield": 0.0,
+							"shield": 0.0,
+							"speed": 65.4
+						},
+						"enemy_id": 4,
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"profile": {
+							"definitions": [
+								{
+									"description": "怪物最大生命 ×1.20",
+									"field": "max_health",
+									"id": "enemy_max_health_120",
+									"multiplier": 1.2,
+									"name": "强健",
+									"risk": {
+										"assessment": "parameter_only",
+										"field": "max_health",
+										"multiplier": 1.2,
+										"relative_increase": 0.19999999999999996
+									},
+									"source_id": "encounter:enemy_max_health_120"
+								},
+								{
+									"description": "怪物移动速度 ×1.10",
+									"field": "speed",
+									"id": "enemy_move_speed_110",
+									"multiplier": 1.1,
+									"name": "迅行",
+									"risk": {
+										"assessment": "parameter_only",
+										"field": "speed",
+										"multiplier": 1.1,
+										"relative_increase": 0.10000000000000009
+									},
+									"source_id": "encounter:enemy_move_speed_110"
+								}
+							],
+							"modifier_ids": [
+								"enemy_max_health_120",
+								"enemy_move_speed_110"
+							],
+							"multipliers": {
+								"max_health": 1.2,
+								"speed": 1.1
+							},
+							"resource_policy": {
+								"health": "preserve_current_to_max_ratio",
+								"max_health": "multiply_canonical_once",
+								"max_shield": "unchanged",
+								"rounding": "float_no_integer_rounding",
+								"shield": "unchanged",
+								"shield_regen": "unchanged",
+								"speed": "multiply_canonical_once"
+							},
+							"reward_budget": {
+								"creates_map_items": false,
+								"enabled": false,
+								"grants_rewards": false,
+								"proposed_bonus_fraction": null,
+								"status": "metadata_only"
+							},
+							"risk_parameters": [
+								{
+									"assessment": "parameter_only",
+									"field": "max_health",
+									"multiplier": 1.2,
+									"relative_increase": 0.19999999999999996
+								},
+								{
+									"assessment": "parameter_only",
+									"field": "speed",
+									"multiplier": 1.1,
+									"relative_increase": 0.10000000000000009
+								}
+							],
+							"source": {
+								"balance_source": "original_game_balance",
+								"catalog": "res://scripts/encounters/encounter_catalog.gd",
+								"definition_revision": 1,
+								"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+								"monster_schema_version": 1,
+								"policy_version": 1,
+								"schema_version": 1
+							}
+						},
+						"rarity": "normal",
+						"template_id": "crawler",
+						"wave": 1
+					},
+					"damage": 10.0,
+					"health": 45.6,
+					"id": 4,
+					"max_health": 45.6,
+					"reward_eligible": true,
+					"speed": 71.94000000000001,
+					"template": "crawler"
+				},
+				{
+					"challenge": {
+						"before": {
+							"health": 25.0,
+							"max_health": 25.0,
+							"max_shield": 0.0,
+							"shield": 0.0,
+							"speed": 104.4
+						},
+						"enemy_id": 5,
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"profile": {
+							"definitions": [
+								{
+									"description": "怪物最大生命 ×1.20",
+									"field": "max_health",
+									"id": "enemy_max_health_120",
+									"multiplier": 1.2,
+									"name": "强健",
+									"risk": {
+										"assessment": "parameter_only",
+										"field": "max_health",
+										"multiplier": 1.2,
+										"relative_increase": 0.19999999999999996
+									},
+									"source_id": "encounter:enemy_max_health_120"
+								},
+								{
+									"description": "怪物移动速度 ×1.10",
+									"field": "speed",
+									"id": "enemy_move_speed_110",
+									"multiplier": 1.1,
+									"name": "迅行",
+									"risk": {
+										"assessment": "parameter_only",
+										"field": "speed",
+										"multiplier": 1.1,
+										"relative_increase": 0.10000000000000009
+									},
+									"source_id": "encounter:enemy_move_speed_110"
+								}
+							],
+							"modifier_ids": [
+								"enemy_max_health_120",
+								"enemy_move_speed_110"
+							],
+							"multipliers": {
+								"max_health": 1.2,
+								"speed": 1.1
+							},
+							"resource_policy": {
+								"health": "preserve_current_to_max_ratio",
+								"max_health": "multiply_canonical_once",
+								"max_shield": "unchanged",
+								"rounding": "float_no_integer_rounding",
+								"shield": "unchanged",
+								"shield_regen": "unchanged",
+								"speed": "multiply_canonical_once"
+							},
+							"reward_budget": {
+								"creates_map_items": false,
+								"enabled": false,
+								"grants_rewards": false,
+								"proposed_bonus_fraction": null,
+								"status": "metadata_only"
+							},
+							"risk_parameters": [
+								{
+									"assessment": "parameter_only",
+									"field": "max_health",
+									"multiplier": 1.2,
+									"relative_increase": 0.19999999999999996
+								},
+								{
+									"assessment": "parameter_only",
+									"field": "speed",
+									"multiplier": 1.1,
+									"relative_increase": 0.10000000000000009
+								}
+							],
+							"source": {
+								"balance_source": "original_game_balance",
+								"catalog": "res://scripts/encounters/encounter_catalog.gd",
+								"definition_revision": 1,
+								"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+								"monster_schema_version": 1,
+								"policy_version": 1,
+								"schema_version": 1
+							}
+						},
+						"rarity": "normal",
+						"template_id": "skitter",
+						"wave": 1
+					},
+					"damage": 8.0,
+					"health": 30.0,
+					"id": 5,
+					"max_health": 30.0,
+					"reward_eligible": true,
+					"speed": 114.84000000000002,
+					"template": "skitter"
+				},
+				{
+					"challenge": {
+						"before": {
+							"health": 62.8,
+							"max_health": 62.8,
+							"max_shield": 0.0,
+							"shield": 0.0,
+							"speed": 65.4
+						},
+						"enemy_id": 6,
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"profile": {
+							"definitions": [
+								{
+									"description": "怪物最大生命 ×1.20",
+									"field": "max_health",
+									"id": "enemy_max_health_120",
+									"multiplier": 1.2,
+									"name": "强健",
+									"risk": {
+										"assessment": "parameter_only",
+										"field": "max_health",
+										"multiplier": 1.2,
+										"relative_increase": 0.19999999999999996
+									},
+									"source_id": "encounter:enemy_max_health_120"
+								},
+								{
+									"description": "怪物移动速度 ×1.10",
+									"field": "speed",
+									"id": "enemy_move_speed_110",
+									"multiplier": 1.1,
+									"name": "迅行",
+									"risk": {
+										"assessment": "parameter_only",
+										"field": "speed",
+										"multiplier": 1.1,
+										"relative_increase": 0.10000000000000009
+									},
+									"source_id": "encounter:enemy_move_speed_110"
+								}
+							],
+							"modifier_ids": [
+								"enemy_max_health_120",
+								"enemy_move_speed_110"
+							],
+							"multipliers": {
+								"max_health": 1.2,
+								"speed": 1.1
+							},
+							"resource_policy": {
+								"health": "preserve_current_to_max_ratio",
+								"max_health": "multiply_canonical_once",
+								"max_shield": "unchanged",
+								"rounding": "float_no_integer_rounding",
+								"shield": "unchanged",
+								"shield_regen": "unchanged",
+								"speed": "multiply_canonical_once"
+							},
+							"reward_budget": {
+								"creates_map_items": false,
+								"enabled": false,
+								"grants_rewards": false,
+								"proposed_bonus_fraction": null,
+								"status": "metadata_only"
+							},
+							"risk_parameters": [
+								{
+									"assessment": "parameter_only",
+									"field": "max_health",
+									"multiplier": 1.2,
+									"relative_increase": 0.19999999999999996
+								},
+								{
+									"assessment": "parameter_only",
+									"field": "speed",
+									"multiplier": 1.1,
+									"relative_increase": 0.10000000000000009
+								}
+							],
+							"source": {
+								"balance_source": "original_game_balance",
+								"catalog": "res://scripts/encounters/encounter_catalog.gd",
+								"definition_revision": 1,
+								"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+								"monster_schema_version": 1,
+								"policy_version": 1,
+								"schema_version": 1
+							}
+						},
+						"rarity": "magic",
+						"template_id": "splitter",
+						"wave": 1
+					},
+					"damage": 11.0,
+					"health": 75.36,
+					"id": 6,
+					"max_health": 75.36,
+					"reward_eligible": true,
+					"speed": 71.94000000000001,
+					"template": "splitter"
+				}
+			],
+			"resolution": [
+				1280,
+				720
+			],
+			"run_revision": 2,
+			"selection": [
+				"enemy_max_health_120",
+				"enemy_move_speed_110"
+			],
+			"ui_scale": 1.0
+		},
+		{
+			"build_unchanged": true,
+			"font_scale": 1.0,
+			"input_mode": "physical_observed",
+			"label": "run-2",
+			"monsters": [
+				{
+					"challenge": {
+						"before": {
+							"health": 38.0,
+							"max_health": 38.0,
+							"max_shield": 0.0,
+							"shield": 0.0,
+							"speed": 65.4
+						},
+						"enemy_id": 7,
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"profile": {
+							"definitions": [
+								{
+									"description": "怪物最大生命 ×1.20",
+									"field": "max_health",
+									"id": "enemy_max_health_120",
+									"multiplier": 1.2,
+									"name": "强健",
+									"risk": {
+										"assessment": "parameter_only",
+										"field": "max_health",
+										"multiplier": 1.2,
+										"relative_increase": 0.19999999999999996
+									},
+									"source_id": "encounter:enemy_max_health_120"
+								},
+								{
+									"description": "怪物移动速度 ×1.10",
+									"field": "speed",
+									"id": "enemy_move_speed_110",
+									"multiplier": 1.1,
+									"name": "迅行",
+									"risk": {
+										"assessment": "parameter_only",
+										"field": "speed",
+										"multiplier": 1.1,
+										"relative_increase": 0.10000000000000009
+									},
+									"source_id": "encounter:enemy_move_speed_110"
+								}
+							],
+							"modifier_ids": [
+								"enemy_max_health_120",
+								"enemy_move_speed_110"
+							],
+							"multipliers": {
+								"max_health": 1.2,
+								"speed": 1.1
+							},
+							"resource_policy": {
+								"health": "preserve_current_to_max_ratio",
+								"max_health": "multiply_canonical_once",
+								"max_shield": "unchanged",
+								"rounding": "float_no_integer_rounding",
+								"shield": "unchanged",
+								"shield_regen": "unchanged",
+								"speed": "multiply_canonical_once"
+							},
+							"reward_budget": {
+								"creates_map_items": false,
+								"enabled": false,
+								"grants_rewards": false,
+								"proposed_bonus_fraction": null,
+								"status": "metadata_only"
+							},
+							"risk_parameters": [
+								{
+									"assessment": "parameter_only",
+									"field": "max_health",
+									"multiplier": 1.2,
+									"relative_increase": 0.19999999999999996
+								},
+								{
+									"assessment": "parameter_only",
+									"field": "speed",
+									"multiplier": 1.1,
+									"relative_increase": 0.10000000000000009
+								}
+							],
+							"source": {
+								"balance_source": "original_game_balance",
+								"catalog": "res://scripts/encounters/encounter_catalog.gd",
+								"definition_revision": 1,
+								"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+								"monster_schema_version": 1,
+								"policy_version": 1,
+								"schema_version": 1
+							}
+						},
+						"rarity": "normal",
+						"template_id": "crawler",
+						"wave": 1
+					},
+					"damage": 10.0,
+					"health": 45.6,
+					"id": 7,
+					"max_health": 45.6,
+					"reward_eligible": true,
+					"speed": 71.94000000000001,
+					"template": "crawler"
+				},
+				{
+					"challenge": {
+						"before": {
+							"health": 62.8,
+							"max_health": 62.8,
+							"max_shield": 0.0,
+							"shield": 0.0,
+							"speed": 65.4
+						},
+						"enemy_id": 8,
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"profile": {
+							"definitions": [
+								{
+									"description": "怪物最大生命 ×1.20",
+									"field": "max_health",
+									"id": "enemy_max_health_120",
+									"multiplier": 1.2,
+									"name": "强健",
+									"risk": {
+										"assessment": "parameter_only",
+										"field": "max_health",
+										"multiplier": 1.2,
+										"relative_increase": 0.19999999999999996
+									},
+									"source_id": "encounter:enemy_max_health_120"
+								},
+								{
+									"description": "怪物移动速度 ×1.10",
+									"field": "speed",
+									"id": "enemy_move_speed_110",
+									"multiplier": 1.1,
+									"name": "迅行",
+									"risk": {
+										"assessment": "parameter_only",
+										"field": "speed",
+										"multiplier": 1.1,
+										"relative_increase": 0.10000000000000009
+									},
+									"source_id": "encounter:enemy_move_speed_110"
+								}
+							],
+							"modifier_ids": [
+								"enemy_max_health_120",
+								"enemy_move_speed_110"
+							],
+							"multipliers": {
+								"max_health": 1.2,
+								"speed": 1.1
+							},
+							"resource_policy": {
+								"health": "preserve_current_to_max_ratio",
+								"max_health": "multiply_canonical_once",
+								"max_shield": "unchanged",
+								"rounding": "float_no_integer_rounding",
+								"shield": "unchanged",
+								"shield_regen": "unchanged",
+								"speed": "multiply_canonical_once"
+							},
+							"reward_budget": {
+								"creates_map_items": false,
+								"enabled": false,
+								"grants_rewards": false,
+								"proposed_bonus_fraction": null,
+								"status": "metadata_only"
+							},
+							"risk_parameters": [
+								{
+									"assessment": "parameter_only",
+									"field": "max_health",
+									"multiplier": 1.2,
+									"relative_increase": 0.19999999999999996
+								},
+								{
+									"assessment": "parameter_only",
+									"field": "speed",
+									"multiplier": 1.1,
+									"relative_increase": 0.10000000000000009
+								}
+							],
+							"source": {
+								"balance_source": "original_game_balance",
+								"catalog": "res://scripts/encounters/encounter_catalog.gd",
+								"definition_revision": 1,
+								"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+								"monster_schema_version": 1,
+								"policy_version": 1,
+								"schema_version": 1
+							}
+						},
+						"rarity": "magic",
+						"template_id": "splitter",
+						"wave": 1
+					},
+					"damage": 11.0,
+					"health": 75.36,
+					"id": 8,
+					"max_health": 75.36,
+					"reward_eligible": true,
+					"speed": 71.94000000000001,
+					"template": "splitter"
+				},
+				{
+					"challenge": {
+						"before": {
+							"health": 38.0,
+							"max_health": 38.0,
+							"max_shield": 0.0,
+							"shield": 0.0,
+							"speed": 65.4
+						},
+						"enemy_id": 9,
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"profile": {
+							"definitions": [
+								{
+									"description": "怪物最大生命 ×1.20",
+									"field": "max_health",
+									"id": "enemy_max_health_120",
+									"multiplier": 1.2,
+									"name": "强健",
+									"risk": {
+										"assessment": "parameter_only",
+										"field": "max_health",
+										"multiplier": 1.2,
+										"relative_increase": 0.19999999999999996
+									},
+									"source_id": "encounter:enemy_max_health_120"
+								},
+								{
+									"description": "怪物移动速度 ×1.10",
+									"field": "speed",
+									"id": "enemy_move_speed_110",
+									"multiplier": 1.1,
+									"name": "迅行",
+									"risk": {
+										"assessment": "parameter_only",
+										"field": "speed",
+										"multiplier": 1.1,
+										"relative_increase": 0.10000000000000009
+									},
+									"source_id": "encounter:enemy_move_speed_110"
+								}
+							],
+							"modifier_ids": [
+								"enemy_max_health_120",
+								"enemy_move_speed_110"
+							],
+							"multipliers": {
+								"max_health": 1.2,
+								"speed": 1.1
+							},
+							"resource_policy": {
+								"health": "preserve_current_to_max_ratio",
+								"max_health": "multiply_canonical_once",
+								"max_shield": "unchanged",
+								"rounding": "float_no_integer_rounding",
+								"shield": "unchanged",
+								"shield_regen": "unchanged",
+								"speed": "multiply_canonical_once"
+							},
+							"reward_budget": {
+								"creates_map_items": false,
+								"enabled": false,
+								"grants_rewards": false,
+								"proposed_bonus_fraction": null,
+								"status": "metadata_only"
+							},
+							"risk_parameters": [
+								{
+									"assessment": "parameter_only",
+									"field": "max_health",
+									"multiplier": 1.2,
+									"relative_increase": 0.19999999999999996
+								},
+								{
+									"assessment": "parameter_only",
+									"field": "speed",
+									"multiplier": 1.1,
+									"relative_increase": 0.10000000000000009
+								}
+							],
+							"source": {
+								"balance_source": "original_game_balance",
+								"catalog": "res://scripts/encounters/encounter_catalog.gd",
+								"definition_revision": 1,
+								"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+								"monster_schema_version": 1,
+								"policy_version": 1,
+								"schema_version": 1
+							}
+						},
+						"rarity": "normal",
+						"template_id": "crawler",
+						"wave": 1
+					},
+					"damage": 10.0,
+					"health": 45.6,
+					"id": 9,
+					"max_health": 45.6,
+					"reward_eligible": true,
+					"speed": 71.94000000000001,
+					"template": "crawler"
+				}
+			],
+			"resolution": [
+				1280,
+				720
+			],
+			"run_revision": 3,
+			"selection": [
+				"enemy_max_health_120",
+				"enemy_move_speed_110"
+			],
+			"ui_scale": 1.0
+		},
+		{
+			"build_unchanged": true,
+			"font_scale": 1.0,
+			"input_mode": "physical_observed",
+			"label": "choices-2",
+			"monsters": [
+				{
+					"challenge": {
+						"before": {
+							"health": 38.0,
+							"max_health": 38.0,
+							"max_shield": 0.0,
+							"shield": 0.0,
+							"speed": 65.4
+						},
+						"enemy_id": 7,
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"profile": {
+							"definitions": [
+								{
+									"description": "怪物最大生命 ×1.20",
+									"field": "max_health",
+									"id": "enemy_max_health_120",
+									"multiplier": 1.2,
+									"name": "强健",
+									"risk": {
+										"assessment": "parameter_only",
+										"field": "max_health",
+										"multiplier": 1.2,
+										"relative_increase": 0.19999999999999996
+									},
+									"source_id": "encounter:enemy_max_health_120"
+								},
+								{
+									"description": "怪物移动速度 ×1.10",
+									"field": "speed",
+									"id": "enemy_move_speed_110",
+									"multiplier": 1.1,
+									"name": "迅行",
+									"risk": {
+										"assessment": "parameter_only",
+										"field": "speed",
+										"multiplier": 1.1,
+										"relative_increase": 0.10000000000000009
+									},
+									"source_id": "encounter:enemy_move_speed_110"
+								}
+							],
+							"modifier_ids": [
+								"enemy_max_health_120",
+								"enemy_move_speed_110"
+							],
+							"multipliers": {
+								"max_health": 1.2,
+								"speed": 1.1
+							},
+							"resource_policy": {
+								"health": "preserve_current_to_max_ratio",
+								"max_health": "multiply_canonical_once",
+								"max_shield": "unchanged",
+								"rounding": "float_no_integer_rounding",
+								"shield": "unchanged",
+								"shield_regen": "unchanged",
+								"speed": "multiply_canonical_once"
+							},
+							"reward_budget": {
+								"creates_map_items": false,
+								"enabled": false,
+								"grants_rewards": false,
+								"proposed_bonus_fraction": null,
+								"status": "metadata_only"
+							},
+							"risk_parameters": [
+								{
+									"assessment": "parameter_only",
+									"field": "max_health",
+									"multiplier": 1.2,
+									"relative_increase": 0.19999999999999996
+								},
+								{
+									"assessment": "parameter_only",
+									"field": "speed",
+									"multiplier": 1.1,
+									"relative_increase": 0.10000000000000009
+								}
+							],
+							"source": {
+								"balance_source": "original_game_balance",
+								"catalog": "res://scripts/encounters/encounter_catalog.gd",
+								"definition_revision": 1,
+								"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+								"monster_schema_version": 1,
+								"policy_version": 1,
+								"schema_version": 1
+							}
+						},
+						"rarity": "normal",
+						"template_id": "crawler",
+						"wave": 1
+					},
+					"damage": 10.0,
+					"health": 45.6,
+					"id": 7,
+					"max_health": 45.6,
+					"reward_eligible": true,
+					"speed": 71.94000000000001,
+					"template": "crawler"
+				},
+				{
+					"challenge": {
+						"before": {
+							"health": 62.8,
+							"max_health": 62.8,
+							"max_shield": 0.0,
+							"shield": 0.0,
+							"speed": 65.4
+						},
+						"enemy_id": 8,
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"profile": {
+							"definitions": [
+								{
+									"description": "怪物最大生命 ×1.20",
+									"field": "max_health",
+									"id": "enemy_max_health_120",
+									"multiplier": 1.2,
+									"name": "强健",
+									"risk": {
+										"assessment": "parameter_only",
+										"field": "max_health",
+										"multiplier": 1.2,
+										"relative_increase": 0.19999999999999996
+									},
+									"source_id": "encounter:enemy_max_health_120"
+								},
+								{
+									"description": "怪物移动速度 ×1.10",
+									"field": "speed",
+									"id": "enemy_move_speed_110",
+									"multiplier": 1.1,
+									"name": "迅行",
+									"risk": {
+										"assessment": "parameter_only",
+										"field": "speed",
+										"multiplier": 1.1,
+										"relative_increase": 0.10000000000000009
+									},
+									"source_id": "encounter:enemy_move_speed_110"
+								}
+							],
+							"modifier_ids": [
+								"enemy_max_health_120",
+								"enemy_move_speed_110"
+							],
+							"multipliers": {
+								"max_health": 1.2,
+								"speed": 1.1
+							},
+							"resource_policy": {
+								"health": "preserve_current_to_max_ratio",
+								"max_health": "multiply_canonical_once",
+								"max_shield": "unchanged",
+								"rounding": "float_no_integer_rounding",
+								"shield": "unchanged",
+								"shield_regen": "unchanged",
+								"speed": "multiply_canonical_once"
+							},
+							"reward_budget": {
+								"creates_map_items": false,
+								"enabled": false,
+								"grants_rewards": false,
+								"proposed_bonus_fraction": null,
+								"status": "metadata_only"
+							},
+							"risk_parameters": [
+								{
+									"assessment": "parameter_only",
+									"field": "max_health",
+									"multiplier": 1.2,
+									"relative_increase": 0.19999999999999996
+								},
+								{
+									"assessment": "parameter_only",
+									"field": "speed",
+									"multiplier": 1.1,
+									"relative_increase": 0.10000000000000009
+								}
+							],
+							"source": {
+								"balance_source": "original_game_balance",
+								"catalog": "res://scripts/encounters/encounter_catalog.gd",
+								"definition_revision": 1,
+								"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+								"monster_schema_version": 1,
+								"policy_version": 1,
+								"schema_version": 1
+							}
+						},
+						"rarity": "magic",
+						"template_id": "splitter",
+						"wave": 1
+					},
+					"damage": 11.0,
+					"health": 75.36,
+					"id": 8,
+					"max_health": 75.36,
+					"reward_eligible": true,
+					"speed": 71.94000000000001,
+					"template": "splitter"
+				},
+				{
+					"challenge": {
+						"before": {
+							"health": 38.0,
+							"max_health": 38.0,
+							"max_shield": 0.0,
+							"shield": 0.0,
+							"speed": 65.4
+						},
+						"enemy_id": 9,
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"profile": {
+							"definitions": [
+								{
+									"description": "怪物最大生命 ×1.20",
+									"field": "max_health",
+									"id": "enemy_max_health_120",
+									"multiplier": 1.2,
+									"name": "强健",
+									"risk": {
+										"assessment": "parameter_only",
+										"field": "max_health",
+										"multiplier": 1.2,
+										"relative_increase": 0.19999999999999996
+									},
+									"source_id": "encounter:enemy_max_health_120"
+								},
+								{
+									"description": "怪物移动速度 ×1.10",
+									"field": "speed",
+									"id": "enemy_move_speed_110",
+									"multiplier": 1.1,
+									"name": "迅行",
+									"risk": {
+										"assessment": "parameter_only",
+										"field": "speed",
+										"multiplier": 1.1,
+										"relative_increase": 0.10000000000000009
+									},
+									"source_id": "encounter:enemy_move_speed_110"
+								}
+							],
+							"modifier_ids": [
+								"enemy_max_health_120",
+								"enemy_move_speed_110"
+							],
+							"multipliers": {
+								"max_health": 1.2,
+								"speed": 1.1
+							},
+							"resource_policy": {
+								"health": "preserve_current_to_max_ratio",
+								"max_health": "multiply_canonical_once",
+								"max_shield": "unchanged",
+								"rounding": "float_no_integer_rounding",
+								"shield": "unchanged",
+								"shield_regen": "unchanged",
+								"speed": "multiply_canonical_once"
+							},
+							"reward_budget": {
+								"creates_map_items": false,
+								"enabled": false,
+								"grants_rewards": false,
+								"proposed_bonus_fraction": null,
+								"status": "metadata_only"
+							},
+							"risk_parameters": [
+								{
+									"assessment": "parameter_only",
+									"field": "max_health",
+									"multiplier": 1.2,
+									"relative_increase": 0.19999999999999996
+								},
+								{
+									"assessment": "parameter_only",
+									"field": "speed",
+									"multiplier": 1.1,
+									"relative_increase": 0.10000000000000009
+								}
+							],
+							"source": {
+								"balance_source": "original_game_balance",
+								"catalog": "res://scripts/encounters/encounter_catalog.gd",
+								"definition_revision": 1,
+								"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+								"monster_schema_version": 1,
+								"policy_version": 1,
+								"schema_version": 1
+							}
+						},
+						"rarity": "normal",
+						"template_id": "crawler",
+						"wave": 1
+					},
+					"damage": 10.0,
+					"health": 45.6,
+					"id": 9,
+					"max_health": 45.6,
+					"reward_eligible": true,
+					"speed": 71.94000000000001,
+					"template": "crawler"
+				}
+			],
+			"resolution": [
+				1280,
+				720
+			],
+			"run_revision": 3,
+			"selection": [
+				"enemy_max_health_120",
+				"enemy_move_speed_110"
+			],
+			"ui_scale": 1.0
+		},
+		{
+			"build_unchanged": true,
+			"font_scale": 1.0,
+			"input_mode": "physical_observed",
+			"label": "run-3",
+			"monsters": [
+				{
+					"challenge": {
+
+					},
+					"damage": 11.0,
+					"health": 58.9,
+					"id": 10,
+					"max_health": 58.9,
+					"reward_eligible": true,
+					"speed": 65.4,
+					"template": "crawler"
+				},
+				{
+					"challenge": {
+
+					},
+					"damage": 11.0,
+					"health": 62.8,
+					"id": 11,
+					"max_health": 62.8,
+					"reward_eligible": true,
+					"speed": 65.4,
+					"template": "splitter"
+				},
+				{
+					"challenge": {
+
+					},
+					"damage": 8.0,
+					"health": 25.0,
+					"id": 12,
+					"max_health": 25.0,
+					"reward_eligible": true,
+					"speed": 104.4,
+					"template": "skitter"
+				}
+			],
+			"resolution": [
+				1280,
+				720
+			],
+			"run_revision": 4,
+			"selection": [],
+			"ui_scale": 1.0
+		},
+		{
+			"build_unchanged": true,
+			"font_scale": 1.0,
+			"input_mode": "programmatic_render_capture",
+			"label": "choices-1280-font100",
+			"monsters": [
+				{
+					"challenge": {
+
+					},
+					"damage": 11.0,
+					"health": 58.9,
+					"id": 10,
+					"max_health": 58.9,
+					"reward_eligible": true,
+					"speed": 65.4,
+					"template": "crawler"
+				},
+				{
+					"challenge": {
+
+					},
+					"damage": 11.0,
+					"health": 62.8,
+					"id": 11,
+					"max_health": 62.8,
+					"reward_eligible": true,
+					"speed": 65.4,
+					"template": "splitter"
+				},
+				{
+					"challenge": {
+
+					},
+					"damage": 8.0,
+					"health": 25.0,
+					"id": 12,
+					"max_health": 25.0,
+					"reward_eligible": true,
+					"speed": 104.4,
+					"template": "skitter"
+				}
+			],
+			"resolution": [
+				1280,
+				720
+			],
+			"run_revision": 4,
+			"selection": [],
+			"ui_scale": 1.0
+		},
+		{
+			"build_unchanged": true,
+			"font_scale": 1.0,
+			"input_mode": "programmatic_render_capture",
+			"label": "confirmation-1280-font100",
+			"monsters": [
+				{
+					"challenge": {
+
+					},
+					"damage": 11.0,
+					"health": 58.9,
+					"id": 10,
+					"max_health": 58.9,
+					"reward_eligible": true,
+					"speed": 65.4,
+					"template": "crawler"
+				},
+				{
+					"challenge": {
+
+					},
+					"damage": 11.0,
+					"health": 62.8,
+					"id": 11,
+					"max_health": 62.8,
+					"reward_eligible": true,
+					"speed": 65.4,
+					"template": "splitter"
+				},
+				{
+					"challenge": {
+
+					},
+					"damage": 8.0,
+					"health": 25.0,
+					"id": 12,
+					"max_health": 25.0,
+					"reward_eligible": true,
+					"speed": 104.4,
+					"template": "skitter"
+				}
+			],
+			"resolution": [
+				1280,
+				720
+			],
+			"run_revision": 4,
+			"selection": [],
+			"ui_scale": 1.0
+		},
+		{
+			"build_unchanged": true,
+			"font_scale": 1.2,
+			"input_mode": "programmatic_render_capture",
+			"label": "choices-1280-font120",
+			"monsters": [
+				{
+					"challenge": {
+
+					},
+					"damage": 11.0,
+					"health": 58.9,
+					"id": 10,
+					"max_health": 58.9,
+					"reward_eligible": true,
+					"speed": 65.4,
+					"template": "crawler"
+				},
+				{
+					"challenge": {
+
+					},
+					"damage": 11.0,
+					"health": 62.8,
+					"id": 11,
+					"max_health": 62.8,
+					"reward_eligible": true,
+					"speed": 65.4,
+					"template": "splitter"
+				},
+				{
+					"challenge": {
+
+					},
+					"damage": 8.0,
+					"health": 25.0,
+					"id": 12,
+					"max_health": 25.0,
+					"reward_eligible": true,
+					"speed": 104.4,
+					"template": "skitter"
+				}
+			],
+			"resolution": [
+				1280,
+				720
+			],
+			"run_revision": 4,
+			"selection": [],
+			"ui_scale": 1.1
+		},
+		{
+			"build_unchanged": true,
+			"font_scale": 1.2,
+			"input_mode": "programmatic_render_capture",
+			"label": "confirmation-1280-font120",
+			"monsters": [
+				{
+					"challenge": {
+
+					},
+					"damage": 11.0,
+					"health": 58.9,
+					"id": 10,
+					"max_health": 58.9,
+					"reward_eligible": true,
+					"speed": 65.4,
+					"template": "crawler"
+				},
+				{
+					"challenge": {
+
+					},
+					"damage": 11.0,
+					"health": 62.8,
+					"id": 11,
+					"max_health": 62.8,
+					"reward_eligible": true,
+					"speed": 65.4,
+					"template": "splitter"
+				},
+				{
+					"challenge": {
+
+					},
+					"damage": 8.0,
+					"health": 25.0,
+					"id": 12,
+					"max_health": 25.0,
+					"reward_eligible": true,
+					"speed": 104.4,
+					"template": "skitter"
+				}
+			],
+			"resolution": [
+				1280,
+				720
+			],
+			"run_revision": 4,
+			"selection": [],
+			"ui_scale": 1.1
+		},
+		{
+			"build_unchanged": true,
+			"font_scale": 1.0,
+			"input_mode": "programmatic_render_capture",
+			"label": "choices-2560-font100",
+			"monsters": [
+				{
+					"challenge": {
+
+					},
+					"damage": 11.0,
+					"health": 58.9,
+					"id": 10,
+					"max_health": 58.9,
+					"reward_eligible": true,
+					"speed": 65.4,
+					"template": "crawler"
+				},
+				{
+					"challenge": {
+
+					},
+					"damage": 11.0,
+					"health": 62.8,
+					"id": 11,
+					"max_health": 62.8,
+					"reward_eligible": true,
+					"speed": 65.4,
+					"template": "splitter"
+				},
+				{
+					"challenge": {
+
+					},
+					"damage": 8.0,
+					"health": 25.0,
+					"id": 12,
+					"max_health": 25.0,
+					"reward_eligible": true,
+					"speed": 104.4,
+					"template": "skitter"
+				}
+			],
+			"resolution": [
+				2560,
+				1440
+			],
+			"run_revision": 4,
+			"selection": [],
+			"ui_scale": 1.0
+		},
+		{
+			"build_unchanged": true,
+			"font_scale": 1.0,
+			"input_mode": "programmatic_render_capture",
+			"label": "confirmation-2560-font100",
+			"monsters": [
+				{
+					"challenge": {
+
+					},
+					"damage": 11.0,
+					"health": 58.9,
+					"id": 10,
+					"max_health": 58.9,
+					"reward_eligible": true,
+					"speed": 65.4,
+					"template": "crawler"
+				},
+				{
+					"challenge": {
+
+					},
+					"damage": 11.0,
+					"health": 62.8,
+					"id": 11,
+					"max_health": 62.8,
+					"reward_eligible": true,
+					"speed": 65.4,
+					"template": "splitter"
+				},
+				{
+					"challenge": {
+
+					},
+					"damage": 8.0,
+					"health": 25.0,
+					"id": 12,
+					"max_health": 25.0,
+					"reward_eligible": true,
+					"speed": 104.4,
+					"template": "skitter"
+				}
+			],
+			"resolution": [
+				2560,
+				1440
+			],
+			"run_revision": 4,
+			"selection": [],
+			"ui_scale": 1.0
+		},
+		{
+			"build_unchanged": true,
+			"font_scale": 1.2,
+			"input_mode": "programmatic_render_capture",
+			"label": "choices-2560-font120",
+			"monsters": [
+				{
+					"challenge": {
+
+					},
+					"damage": 11.0,
+					"health": 58.9,
+					"id": 10,
+					"max_health": 58.9,
+					"reward_eligible": true,
+					"speed": 65.4,
+					"template": "crawler"
+				},
+				{
+					"challenge": {
+
+					},
+					"damage": 11.0,
+					"health": 62.8,
+					"id": 11,
+					"max_health": 62.8,
+					"reward_eligible": true,
+					"speed": 65.4,
+					"template": "splitter"
+				},
+				{
+					"challenge": {
+
+					},
+					"damage": 8.0,
+					"health": 25.0,
+					"id": 12,
+					"max_health": 25.0,
+					"reward_eligible": true,
+					"speed": 104.4,
+					"template": "skitter"
+				}
+			],
+			"resolution": [
+				2560,
+				1440
+			],
+			"run_revision": 4,
+			"selection": [],
+			"ui_scale": 1.1
+		},
+		{
+			"build_unchanged": true,
+			"font_scale": 1.2,
+			"input_mode": "programmatic_render_capture",
+			"label": "confirmation-2560-font120",
+			"monsters": [
+				{
+					"challenge": {
+
+					},
+					"damage": 11.0,
+					"health": 58.9,
+					"id": 10,
+					"max_health": 58.9,
+					"reward_eligible": true,
+					"speed": 65.4,
+					"template": "crawler"
+				},
+				{
+					"challenge": {
+
+					},
+					"damage": 11.0,
+					"health": 62.8,
+					"id": 11,
+					"max_health": 62.8,
+					"reward_eligible": true,
+					"speed": 65.4,
+					"template": "splitter"
+				},
+				{
+					"challenge": {
+
+					},
+					"damage": 8.0,
+					"health": 25.0,
+					"id": 12,
+					"max_health": 25.0,
+					"reward_eligible": true,
+					"speed": 104.4,
+					"template": "skitter"
+				}
+			],
+			"resolution": [
+				2560,
+				1440
+			],
+			"run_revision": 4,
+			"selection": [],
+			"ui_scale": 1.1
+		}
+	],
+	"stats_modified": false
+}
