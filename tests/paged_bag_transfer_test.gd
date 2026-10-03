@@ -94,6 +94,17 @@ func _run() -> void:
 		{"kind": "bag", "x": 0, "y": 1}, 5, 5)
 	_expect(not missing_page.ok and missing_page.error_code == "invalid_destination",
 		"user bag destinations must supply an explicit page")
+	var linked_metadata := {"main": _meta("skill_gem"), "support": _meta("support_gem")}
+	var linked_locations := {"main": {"kind": "bag", "page": 1, "x": 0, "y": 0},
+		"support": {"kind": "bag", "page": 1, "x": 1, "y": 0}}
+	var main_link := Transfer.move_paged(linked_metadata, linked_locations, _context(false), "main",
+		{"kind": "skill_main", "group_id": "group_1"}, 7, 7)
+	var support_link := Transfer.move_paged(linked_metadata, main_link.locations, _context(false), "support",
+		{"kind": "skill_support", "group_id": "group_1", "index": 4}, 8, 8) if main_link.ok else {}
+	_expect(main_link.ok and support_link.get("ok", false)
+		and support_link.locations.main.group_id == "group_1"
+		and support_link.locations.support.index == 4,
+		"active and support gems can move from page two into canonical skill targets")
 	var arrange_places := swap_locations.duplicate(true)
 	arrange_places.gem.page = 1
 	var arranged := Transfer.arrange_paged(swap_metadata, arrange_places, _context(false), 5, 5)

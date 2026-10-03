@@ -94,7 +94,8 @@ static func _validate(metadata_by_uid: Variant, locations: Variant, context: Var
 				var columns: int = PAGED_BAG_COLUMNS if paged else BAG_COLUMNS
 				var rows: int = PAGED_BAG_ROWS if paged else BAG_ROWS
 				if x < 0 or y < 0 or x + width > columns or y + height > rows:
-					return _failure("out_of_bounds", "%s 超出%s背包边界" % [uid, "双页 8×6" if paged else "12×8"])
+					var bounds_message: String = ("%s 超出双页 8×6 背包边界" % uid) if paged else ("%s 超出 12×8 背包边界" % uid)
+					return _failure("out_of_bounds", bounds_message)
 				for cell_y: int in range(y, y + height):
 					for cell_x: int in range(x, x + width):
 						var cell_key: String = "bag:%d:%d:%d" % [page, cell_x, cell_y] if paged else "bag:%d:%d" % [cell_x, cell_y]

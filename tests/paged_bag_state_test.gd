@@ -69,6 +69,25 @@ func _run() -> void:
 	_expect(loaded.location(bag_uid).page == 1 and loaded.item(bag_uid) == after_move.items[bag_uid],
 		"page and selected instance payload round-trip exactly")
 
+	var equip_uid := _first_bag_equipment_uid(state.snapshot())
+	var equipped_ok := not equip_uid.is_empty() and state.equip(equip_uid)
+	var equipped_slot := ""
+	for slot_id: String in state.equipped_items():
+		if state.equipped_items()[slot_id] == equip_uid:
+			equipped_slot = slot_id
+	var unequipped_ok := not equipped_slot.is_empty() and state.unequip(equipped_slot)
+	_expect(equipped_ok and unequipped_ok and state.location(equip_uid).kind == "bag"
+		and state.location(equip_uid).has_all(["kind", "page", "x", "y"])
+		and Rules.reason(state.snapshot()).is_empty(),
+		"equip and unequip return a complete location across the two pages")
+
+	var arrange_before := state.snapshot()
+	var arranged := state.arrange_items(state.revision(), path)
+	_expect((arranged.ok or arranged.error_code in ["no_change", "cannot_arrange"])
+		and state.snapshot().items == arrange_before.items and Rules.reason(state.snapshot()).is_empty()
+		and _recovery_locations(state.snapshot().locations) == _recovery_locations(arrange_before.locations),
+		"two-page arrangement preserves ownership and cannot create recovery entries")
+
 	var craft_rng := RandomNumberGenerator.new()
 	craft_rng.seed = 44182
 	for index: int in range(3):
@@ -203,6 +222,23 @@ func _first_bag_uid(locations: Dictionary) -> String:
 			ids.append(uid)
 	ids.sort()
 	return ids[0] if not ids.is_empty() else ""
+
+
+func _first_bag_equipment_uid(snapshot: Dictionary) -> String:
+	var ids: Array[String] = []
+	for uid: String in snapshot.locations:
+		if snapshot.locations[uid].kind == "bag" and snapshot.items[uid].kind == "equipment":
+			ids.append(uid)
+	ids.sort()
+	return ids[0] if not ids.is_empty() else ""
+
+
+func _recovery_locations(locations: Dictionary) -> Dictionary:
+	var result := {}
+	for uid: String in locations:
+		if locations[uid].kind == "recovery":
+			result[uid] = locations[uid].index
+	return result
 
 
 func _page_one_free_location(metadata: Dictionary, locations: Dictionary, context: Dictionary, uid: String) -> Dictionary:
