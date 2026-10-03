@@ -1,0 +1,763 @@
+{
+	"blocked_menu_freeze": {
+		"dynamic_world_draw_count_frozen": true,
+		"elapsed_frozen": true,
+		"manual_process_calls": 120,
+		"model_frozen": true,
+		"pixels_not_measured_in_headless": true,
+		"rng_frozen": true,
+		"terrain_draw_count_frozen": true
+	},
+	"combat": {
+		"cast_count": 20,
+		"cast_cpu_ms": {
+			"max": 1.58,
+			"mean": 0.4247,
+			"p50": 0.327,
+			"p95": 0.876,
+			"samples": 20
+		},
+		"cast_groups": [
+			"group_000001",
+			"group_000002",
+			"group_000003",
+			"group_000004",
+			"group_000005",
+			"group_000006",
+			"group_000007",
+			"group_000008"
+		],
+		"casts": [
+			{
+				"cast_cpu_ms": 0.485,
+				"compile_count": 8,
+				"cooldown_seconds": 0.8,
+				"group_id": "group_000001",
+				"mana_after": 133.0,
+				"mana_before": 140.0,
+				"mana_cost": 7.0,
+				"projectiles_created": 3,
+				"recipe": {
+					"added_effectiveness": 1.6,
+					"coefficient": 1.6,
+					"damage_type": "lightning",
+					"initial_count": 3,
+					"pierce": 1,
+					"slow": 0.0,
+					"speed": 780.0,
+					"spread": 0.16
+				},
+				"skill_id": "bolt",
+				"tick": 1
+			},
+			{
+				"cast_cpu_ms": 0.499,
+				"compile_count": 8,
+				"cooldown_seconds": 4.0,
+				"group_id": "group_000002",
+				"mana_after": 117.0,
+				"mana_before": 133.0,
+				"mana_cost": 16.0,
+				"projectiles_created": 5,
+				"recipe": {
+					"added_effectiveness": 0.85,
+					"coefficient": 0.85,
+					"damage_type": "cold",
+					"initial_count": 5,
+					"pierce": 2,
+					"slow": 3.0,
+					"speed": 520.0,
+					"spread": 0.14
+				},
+				"skill_id": "frost",
+				"tick": 1
+			},
+			{
+				"cast_cpu_ms": 1.58,
+				"compile_count": 8,
+				"cooldown_seconds": 6.0,
+				"group_id": "group_000003",
+				"mana_after": 93.0,
+				"mana_before": 117.0,
+				"mana_cost": 24.0,
+				"projectiles_created": 0,
+				"recipe": {
+					"radius": 155.0
+				},
+				"skill_id": "nova",
+				"tick": 1
+			},
+			{
+				"cast_cpu_ms": 0.257,
+				"compile_count": 8,
+				"cooldown_seconds": 3.0,
+				"group_id": "group_000004",
+				"mana_after": 81.0,
+				"mana_before": 93.0,
+				"mana_cost": 12.0,
+				"projectiles_created": 0,
+				"recipe": {
+
+				},
+				"skill_id": "dash",
+				"tick": 1
+			},
+			{
+				"cast_cpu_ms": 0.369,
+				"compile_count": 8,
+				"cooldown_seconds": 7.0,
+				"group_id": "group_000005",
+				"mana_after": 61.0,
+				"mana_before": 81.0,
+				"mana_cost": 20.0,
+				"projectiles_created": 0,
+				"recipe": {
+
+				},
+				"skill_id": "ward",
+				"tick": 1
+			},
+			{
+				"cast_cpu_ms": 0.876,
+				"compile_count": 8,
+				"cooldown_seconds": 4.5,
+				"group_id": "group_000006",
+				"mana_after": 39.0,
+				"mana_before": 61.0,
+				"mana_cost": 22.0,
+				"projectiles_created": 0,
+				"recipe": {
+					"first_range": 600.0,
+					"followup_range": 220.0,
+					"hit": {
+						"added_effectiveness": 2.2,
+						"added_effectiveness_loss_per_bounce": 0.2,
+						"base_coefficient": 2.2,
+						"base_coefficient_loss_per_bounce": 0.2,
+						"bounce_count": 5,
+						"damage_type": "lightning"
+					}
+				},
+				"skill_id": "chain",
+				"tick": 1
+			},
+			{
+				"cast_cpu_ms": 0.471,
+				"compile_count": 8,
+				"cooldown_seconds": 8.0,
+				"group_id": "group_000007",
+				"mana_after": 7.0,
+				"mana_before": 39.0,
+				"mana_cost": 32.0,
+				"projectiles_created": 0,
+				"recipe": {
+					"radius": 110.0
+				},
+				"skill_id": "meteor",
+				"tick": 1
+			},
+			{
+				"cast_cpu_ms": 0.403,
+				"compile_count": 8,
+				"cooldown_seconds": 0.8,
+				"group_id": "group_000001",
+				"mana_after": 9.59999999999997,
+				"mana_before": 16.6,
+				"mana_cost": 7.0,
+				"projectiles_created": 3,
+				"recipe": {
+					"added_effectiveness": 1.6,
+					"coefficient": 1.6,
+					"damage_type": "lightning",
+					"initial_count": 3,
+					"pierce": 1,
+					"slow": 0.0,
+					"speed": 780.0,
+					"spread": 0.16
+				},
+				"skill_id": "bolt",
+				"tick": 49
+			},
+			{
+				"cast_cpu_ms": 0.364,
+				"compile_count": 8,
+				"cooldown_seconds": 2.5,
+				"group_id": "group_000008",
+				"mana_after": 0.199999999999939,
+				"mana_before": 18.1999999999999,
+				"mana_cost": 18.0,
+				"projectiles_created": 3,
+				"recipe": {
+					"child": {
+						"added_effectiveness": 0.7,
+						"coefficient": 0.7,
+						"lifetime": 1.7,
+						"pierce": -1,
+						"radius": 4.5,
+						"range": 150.0,
+						"role": "child",
+						"speed": 260.0,
+						"split": false
+					},
+					"child_count": 3,
+					"explosion": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"initial_count": 3,
+					"parent": {
+						"added_effectiveness": 1.0,
+						"coefficient": 1.0,
+						"lifetime": 0.9,
+						"pierce": -1,
+						"radius": 6.0,
+						"range": 150.0,
+						"role": "parent",
+						"speed": 420.0,
+						"split": true
+					},
+					"parent_count": 3,
+					"spread": 0.16
+				},
+				"skill_id": "tornado",
+				"tick": 92
+			},
+			{
+				"cast_cpu_ms": 0.307,
+				"compile_count": 8,
+				"cooldown_seconds": 0.8,
+				"group_id": "group_000001",
+				"mana_after": 0.199999999999943,
+				"mana_before": 7.19999999999994,
+				"mana_cost": 7.0,
+				"projectiles_created": 3,
+				"recipe": {
+					"added_effectiveness": 1.6,
+					"coefficient": 1.6,
+					"damage_type": "lightning",
+					"initial_count": 3,
+					"pierce": 1,
+					"slow": 0.0,
+					"speed": 780.0,
+					"spread": 0.16
+				},
+				"skill_id": "bolt",
+				"tick": 127
+			},
+			{
+				"cast_cpu_ms": 0.322,
+				"compile_count": 8,
+				"cooldown_seconds": 0.8,
+				"group_id": "group_000001",
+				"mana_after": 2.79999999999994,
+				"mana_before": 9.79999999999994,
+				"mana_cost": 7.0,
+				"projectiles_created": 3,
+				"recipe": {
+					"added_effectiveness": 1.6,
+					"coefficient": 1.6,
+					"damage_type": "lightning",
+					"initial_count": 3,
+					"pierce": 1,
+					"slow": 0.0,
+					"speed": 780.0,
+					"spread": 0.16
+				},
+				"skill_id": "bolt",
+				"tick": 175
+			},
+			{
+				"cast_cpu_ms": 0.135,
+				"compile_count": 8,
+				"cooldown_seconds": 3.0,
+				"group_id": "group_000004",
+				"mana_after": 0.199999999999932,
+				"mana_before": 12.1999999999999,
+				"mana_cost": 12.0,
+				"projectiles_created": 0,
+				"recipe": {
+
+				},
+				"skill_id": "dash",
+				"tick": 222
+			},
+			{
+				"cast_cpu_ms": 0.35,
+				"compile_count": 8,
+				"cooldown_seconds": 0.8,
+				"group_id": "group_000001",
+				"mana_after": 0.199999999999936,
+				"mana_before": 7.19999999999994,
+				"mana_cost": 7.0,
+				"projectiles_created": 3,
+				"recipe": {
+					"added_effectiveness": 1.6,
+					"coefficient": 1.6,
+					"damage_type": "lightning",
+					"initial_count": 3,
+					"pierce": 1,
+					"slow": 0.0,
+					"speed": 780.0,
+					"spread": 0.16
+				},
+				"skill_id": "bolt",
+				"tick": 257
+			},
+			{
+				"cast_cpu_ms": 0.369,
+				"compile_count": 8,
+				"cooldown_seconds": 0.8,
+				"group_id": "group_000001",
+				"mana_after": 2.79999999999993,
+				"mana_before": 9.79999999999993,
+				"mana_cost": 7.0,
+				"projectiles_created": 3,
+				"recipe": {
+					"added_effectiveness": 1.6,
+					"coefficient": 1.6,
+					"damage_type": "lightning",
+					"initial_count": 3,
+					"pierce": 1,
+					"slow": 0.0,
+					"speed": 780.0,
+					"spread": 0.16
+				},
+				"skill_id": "bolt",
+				"tick": 305
+			},
+			{
+				"cast_cpu_ms": 0.311,
+				"compile_count": 8,
+				"cooldown_seconds": 0.8,
+				"group_id": "group_000001",
+				"mana_after": 5.39999999999992,
+				"mana_before": 12.3999999999999,
+				"mana_cost": 7.0,
+				"projectiles_created": 3,
+				"recipe": {
+					"added_effectiveness": 1.6,
+					"coefficient": 1.6,
+					"damage_type": "lightning",
+					"initial_count": 3,
+					"pierce": 1,
+					"slow": 0.0,
+					"speed": 780.0,
+					"spread": 0.16
+				},
+				"skill_id": "bolt",
+				"tick": 353
+			},
+			{
+				"cast_cpu_ms": 0.302,
+				"compile_count": 8,
+				"cooldown_seconds": 0.8,
+				"group_id": "group_000001",
+				"mana_after": 7.9999999999999,
+				"mana_before": 14.9999999999999,
+				"mana_cost": 7.0,
+				"projectiles_created": 3,
+				"recipe": {
+					"added_effectiveness": 1.6,
+					"coefficient": 1.6,
+					"damage_type": "lightning",
+					"initial_count": 3,
+					"pierce": 1,
+					"slow": 0.0,
+					"speed": 780.0,
+					"spread": 0.16
+				},
+				"skill_id": "bolt",
+				"tick": 401
+			},
+			{
+				"cast_cpu_ms": 0.138,
+				"compile_count": 8,
+				"cooldown_seconds": 3.0,
+				"group_id": "group_000004",
+				"mana_after": 0.199999999999887,
+				"mana_before": 12.1999999999999,
+				"mana_cost": 12.0,
+				"projectiles_created": 0,
+				"recipe": {
+
+				},
+				"skill_id": "dash",
+				"tick": 422
+			},
+			{
+				"cast_cpu_ms": 0.302,
+				"compile_count": 8,
+				"cooldown_seconds": 0.8,
+				"group_id": "group_000001",
+				"mana_after": 0.199999999999892,
+				"mana_before": 7.19999999999989,
+				"mana_cost": 7.0,
+				"projectiles_created": 3,
+				"recipe": {
+					"added_effectiveness": 1.6,
+					"coefficient": 1.6,
+					"damage_type": "lightning",
+					"initial_count": 3,
+					"pierce": 1,
+					"slow": 0.0,
+					"speed": 780.0,
+					"spread": 0.16
+				},
+				"skill_id": "bolt",
+				"tick": 457
+			},
+			{
+				"cast_cpu_ms": 0.327,
+				"compile_count": 8,
+				"cooldown_seconds": 0.8,
+				"group_id": "group_000001",
+				"mana_after": 2.79999999999989,
+				"mana_before": 9.79999999999989,
+				"mana_cost": 7.0,
+				"projectiles_created": 3,
+				"recipe": {
+					"added_effectiveness": 1.6,
+					"coefficient": 1.6,
+					"damage_type": "lightning",
+					"initial_count": 3,
+					"pierce": 1,
+					"slow": 0.0,
+					"speed": 780.0,
+					"spread": 0.16
+				},
+				"skill_id": "bolt",
+				"tick": 505
+			},
+			{
+				"cast_cpu_ms": 0.327,
+				"compile_count": 8,
+				"cooldown_seconds": 0.8,
+				"group_id": "group_000001",
+				"mana_after": 5.39999999999988,
+				"mana_before": 12.3999999999999,
+				"mana_cost": 7.0,
+				"projectiles_created": 3,
+				"recipe": {
+					"added_effectiveness": 1.6,
+					"coefficient": 1.6,
+					"damage_type": "lightning",
+					"initial_count": 3,
+					"pierce": 1,
+					"slow": 0.0,
+					"speed": 780.0,
+					"spread": 0.16
+				},
+				"skill_id": "bolt",
+				"tick": 553
+			}
+		],
+		"damage_records_retained": 32,
+		"enemy_count_alive_end": 59,
+		"enemy_count_start": 100,
+		"final_projectiles": 0,
+		"final_simulation_state": {
+			"build_revision": 5,
+			"elapsed": 10.0000000000001,
+			"health": 67.932,
+			"kills": 41,
+			"mana": 14.7999999999999,
+			"rng_state": -6056371484366983669,
+			"shield": 0.0,
+			"skill_compile_count": 8,
+			"xp_before_batch": 0
+		},
+		"kill_steps": [
+			{
+				"kills": 13,
+				"real_hits": 0,
+				"tick": 1,
+				"tick_and_cast_cpu_ms": 9.705,
+				"tick_cpu_ms": 3.773
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 18,
+				"tick_and_cast_cpu_ms": 3.449,
+				"tick_cpu_ms": 2.839
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 19,
+				"tick_and_cast_cpu_ms": 3.187,
+				"tick_cpu_ms": 2.575
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 29,
+				"tick_and_cast_cpu_ms": 3.467,
+				"tick_cpu_ms": 2.825
+			},
+			{
+				"kills": 1,
+				"real_hits": 2,
+				"tick": 33,
+				"tick_and_cast_cpu_ms": 3.557,
+				"tick_cpu_ms": 2.986
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 53,
+				"tick_and_cast_cpu_ms": 3.116,
+				"tick_cpu_ms": 2.564
+			},
+			{
+				"kills": 1,
+				"real_hits": 2,
+				"tick": 59,
+				"tick_and_cast_cpu_ms": 3.39,
+				"tick_cpu_ms": 2.84
+			},
+			{
+				"kills": 1,
+				"real_hits": 3,
+				"tick": 96,
+				"tick_and_cast_cpu_ms": 3.263,
+				"tick_cpu_ms": 2.738
+			},
+			{
+				"kills": 1,
+				"real_hits": 7,
+				"tick": 114,
+				"tick_and_cast_cpu_ms": 4.153,
+				"tick_cpu_ms": 3.654
+			},
+			{
+				"kills": 1,
+				"real_hits": 2,
+				"tick": 125,
+				"tick_and_cast_cpu_ms": 3.264,
+				"tick_cpu_ms": 2.745
+			},
+			{
+				"kills": 1,
+				"real_hits": 3,
+				"tick": 128,
+				"tick_and_cast_cpu_ms": 3.028,
+				"tick_cpu_ms": 2.534
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 131,
+				"tick_and_cast_cpu_ms": 3.166,
+				"tick_cpu_ms": 2.603
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 136,
+				"tick_and_cast_cpu_ms": 2.838,
+				"tick_cpu_ms": 2.362
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 139,
+				"tick_and_cast_cpu_ms": 2.855,
+				"tick_cpu_ms": 2.357
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 141,
+				"tick_and_cast_cpu_ms": 2.754,
+				"tick_cpu_ms": 2.27
+			},
+			{
+				"kills": 1,
+				"real_hits": 3,
+				"tick": 260,
+				"tick_and_cast_cpu_ms": 3.04,
+				"tick_cpu_ms": 2.5
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 262,
+				"tick_and_cast_cpu_ms": 3.102,
+				"tick_cpu_ms": 2.507
+			},
+			{
+				"kills": 3,
+				"real_hits": 6,
+				"tick": 306,
+				"tick_and_cast_cpu_ms": 3.52,
+				"tick_cpu_ms": 2.971
+			},
+			{
+				"kills": 1,
+				"real_hits": 3,
+				"tick": 354,
+				"tick_and_cast_cpu_ms": 3.486,
+				"tick_cpu_ms": 2.736
+			},
+			{
+				"kills": 2,
+				"real_hits": 6,
+				"tick": 402,
+				"tick_and_cast_cpu_ms": 3.291,
+				"tick_cpu_ms": 2.81
+			},
+			{
+				"kills": 1,
+				"real_hits": 5,
+				"tick": 458,
+				"tick_and_cast_cpu_ms": 3.817,
+				"tick_cpu_ms": 3.24
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 459,
+				"tick_and_cast_cpu_ms": 3.225,
+				"tick_cpu_ms": 2.659
+			},
+			{
+				"kills": 2,
+				"real_hits": 6,
+				"tick": 506,
+				"tick_and_cast_cpu_ms": 3.323,
+				"tick_cpu_ms": 2.825
+			},
+			{
+				"kills": 2,
+				"real_hits": 6,
+				"tick": 554,
+				"tick_and_cast_cpu_ms": 3.755,
+				"tick_cpu_ms": 3.241
+			}
+		],
+		"max_kills_in_one_step": 13,
+		"peak_projectiles": 12,
+		"real_hit_events": 80,
+		"simulation_sha256": "7765547c757cc24896d48790eb8d642633938019880c393ebc591b87fb0d3990",
+		"single_tick_peak_ms": 13.345,
+		"single_tick_peak_with_kill_ms": 9.705,
+		"tick_and_cast_step_cpu_ms": {
+			"max": 13.345,
+			"mean": 2.83553666666667,
+			"p50": 2.702,
+			"p95": 3.619,
+			"samples": 600
+		},
+		"tick_cpu_ms": {
+			"max": 12.576,
+			"mean": 2.26488833333333,
+			"p50": 2.152,
+			"p95": 2.941,
+			"samples": 600
+		}
+	},
+	"combat_only_sha256": "062727f773fd8bc600cc135bcb40c2e7dd7c7e845aa4b49d4303981eb160f007",
+	"display_server": "headless",
+	"engine": "4.6.3-stable (official)",
+	"failures": 0,
+	"fixture_group": "",
+	"fixture_supports": [],
+	"hud": {
+		"compile_count_after_updates": 5,
+		"compile_count_stable": true,
+		"measured_updates": 240,
+		"rng_unchanged": true,
+		"state_unchanged": true,
+		"warmup_compile_count": 5,
+		"warmup_updates": 10
+	},
+	"logical_processors": 9,
+	"menu_open_timings": {
+		"inventory": {
+			"cold_first_open_ms": 46.12,
+			"hot_reopen_ms": [
+				0.435,
+				0.431
+			],
+			"toggle_cycles": 3
+		},
+		"skills": {
+			"cold_first_open_ms": 118.042,
+			"hot_reopen_ms": [
+				1.093,
+				1.034
+			],
+			"toggle_cycles": 3
+		},
+		"talents": {
+			"cold_first_open_ms": 175.569,
+			"hot_reopen_ms": [
+				0.647,
+				0.581
+			],
+			"toggle_cycles": 3
+		}
+	},
+	"model_schema": 16,
+	"pixels_measured": false,
+	"platform": "Linux",
+	"processor": "AMD EPYC 9V74 80-Core Processor",
+	"rendering_measured": false,
+	"scenario": "default",
+	"schema_version": 1,
+	"sim_seconds": 10.0,
+	"tick_count": 600,
+	"windows_fps_measured": false,
+	"xp_batch": {
+		"atomic_write_calls": 1,
+		"atomic_write_ms": 0.13,
+		"awards": 5,
+		"changed_callbacks": 5,
+		"end_transaction_ms": 5.775,
+		"flush_ms": 7.083,
+		"hidden_generations_after": {
+			"_inventory_panel": {
+				"generation": 1,
+				"visible": false
+			},
+			"_passive_panel": {
+				"generation": 1,
+				"visible": false
+			},
+			"_skill_support_panel": {
+				"generation": 1,
+				"visible": false
+			}
+		},
+		"hidden_generations_before": {
+			"_inventory_panel": {
+				"generation": 1,
+				"visible": false
+			},
+			"_passive_panel": {
+				"generation": 1,
+				"visible": false
+			},
+			"_skill_support_panel": {
+				"generation": 1,
+				"visible": false
+			}
+		},
+		"individual_add_xp_usec": [
+			791,
+			174,
+			128,
+			105,
+			105
+		],
+		"save_attempt_delta": 1,
+		"save_success_delta": 1,
+		"saved_bytes_match_snapshot": true,
+		"total_transaction_ms": 7.083,
+		"verified": true,
+		"xp_after": 5,
+		"xp_before": 0
+	}
+}

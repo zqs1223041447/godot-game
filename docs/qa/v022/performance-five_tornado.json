@@ -1,0 +1,764 @@
+{
+	"blocked_menu_freeze": {
+		"dynamic_world_draw_count_frozen": true,
+		"elapsed_frozen": true,
+		"manual_process_calls": 120,
+		"model_frozen": true,
+		"pixels_not_measured_in_headless": true,
+		"rng_frozen": true,
+		"terrain_draw_count_frozen": true
+	},
+	"combat": {
+		"cast_count": 4,
+		"cast_cpu_ms": {
+			"max": 1.213,
+			"mean": 1.04775,
+			"p50": 0.954,
+			"p95": 1.115,
+			"samples": 4
+		},
+		"cast_groups": [
+			"group_000001"
+		],
+		"casts": [
+			{
+				"cast_cpu_ms": 1.213,
+				"compile_count": 29,
+				"cooldown_seconds": 2.875,
+				"group_id": "group_000001",
+				"mana_after": 80.29136,
+				"mana_before": 110.0,
+				"mana_cost": 29.70864,
+				"projectiles_created": 7,
+				"recipe": {
+					"child": {
+						"added_effectiveness": 0.7,
+						"coefficient": 0.7,
+						"lifetime": 1.7,
+						"pierce": -1,
+						"radius": 4.5,
+						"range": 150.0,
+						"role": "child",
+						"speed": 260.0,
+						"split": false
+					},
+					"child_count": 3,
+					"explosion": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"initial_count": 7,
+					"parent": {
+						"added_effectiveness": 1.0,
+						"coefficient": 1.0,
+						"lifetime": 0.9,
+						"pierce": -1,
+						"radius": 6.0,
+						"range": 150.0,
+						"role": "parent",
+						"speed": 420.0,
+						"split": true
+					},
+					"parent_count": 3,
+					"spread": 0.16
+				},
+				"skill_id": "tornado",
+				"tick": 1
+			},
+			{
+				"cast_cpu_ms": 1.115,
+				"compile_count": 29,
+				"cooldown_seconds": 2.875,
+				"group_id": "group_000001",
+				"mana_after": 76.532720000001,
+				"mana_before": 106.241360000001,
+				"mana_cost": 29.70864,
+				"projectiles_created": 7,
+				"recipe": {
+					"child": {
+						"added_effectiveness": 0.7,
+						"coefficient": 0.7,
+						"lifetime": 1.7,
+						"pierce": -1,
+						"radius": 4.5,
+						"range": 150.0,
+						"role": "child",
+						"speed": 260.0,
+						"split": false
+					},
+					"child_count": 3,
+					"explosion": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"initial_count": 7,
+					"parent": {
+						"added_effectiveness": 1.0,
+						"coefficient": 1.0,
+						"lifetime": 0.9,
+						"pierce": -1,
+						"radius": 6.0,
+						"range": 150.0,
+						"role": "parent",
+						"speed": 420.0,
+						"split": true
+					},
+					"parent_count": 3,
+					"spread": 0.16
+				},
+				"skill_id": "tornado",
+				"tick": 174
+			},
+			{
+				"cast_cpu_ms": 0.909,
+				"compile_count": 29,
+				"cooldown_seconds": 2.875,
+				"group_id": "group_000001",
+				"mana_after": 72.774080000002,
+				"mana_before": 102.482720000002,
+				"mana_cost": 29.70864,
+				"projectiles_created": 7,
+				"recipe": {
+					"child": {
+						"added_effectiveness": 0.7,
+						"coefficient": 0.7,
+						"lifetime": 1.7,
+						"pierce": -1,
+						"radius": 4.5,
+						"range": 150.0,
+						"role": "child",
+						"speed": 260.0,
+						"split": false
+					},
+					"child_count": 3,
+					"explosion": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"initial_count": 7,
+					"parent": {
+						"added_effectiveness": 1.0,
+						"coefficient": 1.0,
+						"lifetime": 0.9,
+						"pierce": -1,
+						"radius": 6.0,
+						"range": 150.0,
+						"role": "parent",
+						"speed": 420.0,
+						"split": true
+					},
+					"parent_count": 3,
+					"spread": 0.16
+				},
+				"skill_id": "tornado",
+				"tick": 347
+			},
+			{
+				"cast_cpu_ms": 0.954,
+				"compile_count": 29,
+				"cooldown_seconds": 2.875,
+				"group_id": "group_000001",
+				"mana_after": 69.015440000003,
+				"mana_before": 98.724080000003,
+				"mana_cost": 29.70864,
+				"projectiles_created": 7,
+				"recipe": {
+					"child": {
+						"added_effectiveness": 0.7,
+						"coefficient": 0.7,
+						"lifetime": 1.7,
+						"pierce": -1,
+						"radius": 4.5,
+						"range": 150.0,
+						"role": "child",
+						"speed": 260.0,
+						"split": false
+					},
+					"child_count": 3,
+					"explosion": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"initial_count": 7,
+					"parent": {
+						"added_effectiveness": 1.0,
+						"coefficient": 1.0,
+						"lifetime": 0.9,
+						"pierce": -1,
+						"radius": 6.0,
+						"range": 150.0,
+						"role": "parent",
+						"speed": 420.0,
+						"split": true
+					},
+					"parent_count": 3,
+					"spread": 0.16
+				},
+				"skill_id": "tornado",
+				"tick": 520
+			}
+		],
+		"damage_records_retained": 32,
+		"enemy_count_alive_end": 17,
+		"enemy_count_start": 100,
+		"final_projectiles": 21,
+		"final_simulation_state": {
+			"build_revision": 14,
+			"elapsed": 10.0000000000001,
+			"health": 130.0,
+			"kills": 83,
+			"mana": 81.0154400000035,
+			"rng_state": 3487352257733384793,
+			"shield": 76.5,
+			"skill_compile_count": 29,
+			"xp_before_batch": 0
+		},
+		"kill_steps": [
+			{
+				"kills": 1,
+				"real_hits": 4,
+				"tick": 8,
+				"tick_and_cast_cpu_ms": 3.42,
+				"tick_cpu_ms": 3.289
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 29,
+				"tick_and_cast_cpu_ms": 3.204,
+				"tick_cpu_ms": 3.039
+			},
+			{
+				"kills": 2,
+				"real_hits": 2,
+				"tick": 36,
+				"tick_and_cast_cpu_ms": 3.957,
+				"tick_cpu_ms": 3.781
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 37,
+				"tick_and_cast_cpu_ms": 3.292,
+				"tick_cpu_ms": 3.155
+			},
+			{
+				"kills": 2,
+				"real_hits": 3,
+				"tick": 58,
+				"tick_and_cast_cpu_ms": 5.474,
+				"tick_cpu_ms": 5.316
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 71,
+				"tick_and_cast_cpu_ms": 3.276,
+				"tick_cpu_ms": 3.144
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 75,
+				"tick_and_cast_cpu_ms": 3.106,
+				"tick_cpu_ms": 2.978
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 81,
+				"tick_and_cast_cpu_ms": 3.133,
+				"tick_cpu_ms": 2.987
+			},
+			{
+				"kills": 2,
+				"real_hits": 2,
+				"tick": 85,
+				"tick_and_cast_cpu_ms": 3.545,
+				"tick_cpu_ms": 3.378
+			},
+			{
+				"kills": 1,
+				"real_hits": 4,
+				"tick": 87,
+				"tick_and_cast_cpu_ms": 3.311,
+				"tick_cpu_ms": 3.189
+			},
+			{
+				"kills": 1,
+				"real_hits": 2,
+				"tick": 89,
+				"tick_and_cast_cpu_ms": 3.095,
+				"tick_cpu_ms": 2.959
+			},
+			{
+				"kills": 2,
+				"real_hits": 26,
+				"tick": 91,
+				"tick_and_cast_cpu_ms": 4.98,
+				"tick_cpu_ms": 4.806
+			},
+			{
+				"kills": 1,
+				"real_hits": 5,
+				"tick": 96,
+				"tick_and_cast_cpu_ms": 3.676,
+				"tick_cpu_ms": 3.54
+			},
+			{
+				"kills": 1,
+				"real_hits": 3,
+				"tick": 104,
+				"tick_and_cast_cpu_ms": 3.104,
+				"tick_cpu_ms": 2.978
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 112,
+				"tick_and_cast_cpu_ms": 2.896,
+				"tick_cpu_ms": 2.776
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 114,
+				"tick_and_cast_cpu_ms": 3.011,
+				"tick_cpu_ms": 2.882
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 122,
+				"tick_and_cast_cpu_ms": 2.834,
+				"tick_cpu_ms": 2.712
+			},
+			{
+				"kills": 9,
+				"real_hits": 1,
+				"tick": 125,
+				"tick_and_cast_cpu_ms": 8.842,
+				"tick_cpu_ms": 8.516
+			},
+			{
+				"kills": 1,
+				"real_hits": 7,
+				"tick": 175,
+				"tick_and_cast_cpu_ms": 2.803,
+				"tick_cpu_ms": 2.677
+			},
+			{
+				"kills": 1,
+				"real_hits": 2,
+				"tick": 180,
+				"tick_and_cast_cpu_ms": 2.636,
+				"tick_cpu_ms": 2.487
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 186,
+				"tick_and_cast_cpu_ms": 2.32,
+				"tick_cpu_ms": 2.195
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 188,
+				"tick_and_cast_cpu_ms": 2.386,
+				"tick_cpu_ms": 2.252
+			},
+			{
+				"kills": 1,
+				"real_hits": 2,
+				"tick": 191,
+				"tick_and_cast_cpu_ms": 2.487,
+				"tick_cpu_ms": 2.355
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 194,
+				"tick_and_cast_cpu_ms": 2.176,
+				"tick_cpu_ms": 2.052
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 195,
+				"tick_and_cast_cpu_ms": 2.441,
+				"tick_cpu_ms": 2.289
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 213,
+				"tick_and_cast_cpu_ms": 2.564,
+				"tick_cpu_ms": 2.432
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 229,
+				"tick_and_cast_cpu_ms": 4.24,
+				"tick_cpu_ms": 4.084
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 246,
+				"tick_and_cast_cpu_ms": 2.514,
+				"tick_cpu_ms": 2.356
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 260,
+				"tick_and_cast_cpu_ms": 2.916,
+				"tick_cpu_ms": 2.585
+			},
+			{
+				"kills": 2,
+				"real_hits": 20,
+				"tick": 264,
+				"tick_and_cast_cpu_ms": 9.338,
+				"tick_cpu_ms": 8.62
+			},
+			{
+				"kills": 1,
+				"real_hits": 13,
+				"tick": 267,
+				"tick_and_cast_cpu_ms": 3.744,
+				"tick_cpu_ms": 3.55
+			},
+			{
+				"kills": 2,
+				"real_hits": 2,
+				"tick": 280,
+				"tick_and_cast_cpu_ms": 2.443,
+				"tick_cpu_ms": 2.314
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 284,
+				"tick_and_cast_cpu_ms": 2.43,
+				"tick_cpu_ms": 2.264
+			},
+			{
+				"kills": 1,
+				"real_hits": 2,
+				"tick": 288,
+				"tick_and_cast_cpu_ms": 2.562,
+				"tick_cpu_ms": 2.417
+			},
+			{
+				"kills": 1,
+				"real_hits": 2,
+				"tick": 290,
+				"tick_and_cast_cpu_ms": 2.317,
+				"tick_cpu_ms": 2.184
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 291,
+				"tick_and_cast_cpu_ms": 2.319,
+				"tick_cpu_ms": 2.187
+			},
+			{
+				"kills": 1,
+				"real_hits": 2,
+				"tick": 297,
+				"tick_and_cast_cpu_ms": 2.419,
+				"tick_cpu_ms": 2.271
+			},
+			{
+				"kills": 8,
+				"real_hits": 0,
+				"tick": 298,
+				"tick_and_cast_cpu_ms": 8.065,
+				"tick_cpu_ms": 7.884
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 353,
+				"tick_and_cast_cpu_ms": 1.695,
+				"tick_cpu_ms": 1.57
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 355,
+				"tick_and_cast_cpu_ms": 1.725,
+				"tick_cpu_ms": 1.543
+			},
+			{
+				"kills": 1,
+				"real_hits": 2,
+				"tick": 360,
+				"tick_and_cast_cpu_ms": 1.696,
+				"tick_cpu_ms": 1.578
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 365,
+				"tick_and_cast_cpu_ms": 1.565,
+				"tick_cpu_ms": 1.436
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 366,
+				"tick_and_cast_cpu_ms": 1.498,
+				"tick_cpu_ms": 1.373
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 379,
+				"tick_and_cast_cpu_ms": 1.746,
+				"tick_cpu_ms": 1.612
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 381,
+				"tick_and_cast_cpu_ms": 1.719,
+				"tick_cpu_ms": 1.59
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 395,
+				"tick_and_cast_cpu_ms": 2.085,
+				"tick_cpu_ms": 1.879
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 402,
+				"tick_and_cast_cpu_ms": 1.785,
+				"tick_cpu_ms": 1.633
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 406,
+				"tick_and_cast_cpu_ms": 1.97,
+				"tick_cpu_ms": 1.648
+			},
+			{
+				"kills": 1,
+				"real_hits": 2,
+				"tick": 437,
+				"tick_and_cast_cpu_ms": 1.883,
+				"tick_cpu_ms": 1.734
+			},
+			{
+				"kills": 2,
+				"real_hits": 10,
+				"tick": 442,
+				"tick_and_cast_cpu_ms": 2.887,
+				"tick_cpu_ms": 2.748
+			},
+			{
+				"kills": 1,
+				"real_hits": 5,
+				"tick": 444,
+				"tick_and_cast_cpu_ms": 1.993,
+				"tick_cpu_ms": 1.861
+			},
+			{
+				"kills": 1,
+				"real_hits": 2,
+				"tick": 455,
+				"tick_and_cast_cpu_ms": 1.593,
+				"tick_cpu_ms": 1.464
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 461,
+				"tick_and_cast_cpu_ms": 1.417,
+				"tick_cpu_ms": 1.285
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 467,
+				"tick_and_cast_cpu_ms": 1.37,
+				"tick_cpu_ms": 1.245
+			},
+			{
+				"kills": 3,
+				"real_hits": 1,
+				"tick": 471,
+				"tick_and_cast_cpu_ms": 5.773,
+				"tick_cpu_ms": 5.631
+			},
+			{
+				"kills": 1,
+				"real_hits": 3,
+				"tick": 525,
+				"tick_and_cast_cpu_ms": 1.269,
+				"tick_cpu_ms": 1.161
+			},
+			{
+				"kills": 1,
+				"real_hits": 7,
+				"tick": 542,
+				"tick_and_cast_cpu_ms": 5.414,
+				"tick_cpu_ms": 5.281
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 549,
+				"tick_and_cast_cpu_ms": 1.248,
+				"tick_cpu_ms": 1.102
+			},
+			{
+				"kills": 1,
+				"real_hits": 1,
+				"tick": 568,
+				"tick_and_cast_cpu_ms": 1.203,
+				"tick_cpu_ms": 1.076
+			}
+		],
+		"max_kills_in_one_step": 9,
+		"peak_projectiles": 21,
+		"real_hit_events": 221,
+		"simulation_sha256": "ef12ad93b1180895d1cd615f255a59e3d8d6aa99f81dddb657f0a5a21717e38d",
+		"single_tick_peak_ms": 9.338,
+		"single_tick_peak_with_kill_ms": 9.338,
+		"tick_and_cast_step_cpu_ms": {
+			"max": 9.338,
+			"mean": 1.95913166666667,
+			"p50": 1.953,
+			"p95": 3.44,
+			"samples": 600
+		},
+		"tick_cpu_ms": {
+			"max": 8.62,
+			"mean": 1.81035666666667,
+			"p50": 1.802,
+			"p95": 3.27,
+			"samples": 600
+		}
+	},
+	"combat_only_sha256": "38f3d2db476f985f1372a3f3413aa1426c2fd5d2ac1f54a2d24f4986dd524171",
+	"display_server": "headless",
+	"engine": "4.6.3-stable (official)",
+	"failures": 0,
+	"fixture_group": "group_000001",
+	"fixture_supports": [
+		"volley",
+		"focus",
+		"physical_focus",
+		"fire_focus",
+		"efficiency"
+	],
+	"hud": {
+		"compile_count_after_updates": 26,
+		"compile_count_stable": true,
+		"measured_updates": 240,
+		"rng_unchanged": true,
+		"state_unchanged": true,
+		"warmup_compile_count": 26,
+		"warmup_updates": 10
+	},
+	"logical_processors": 9,
+	"menu_open_timings": {
+		"inventory": {
+			"cold_first_open_ms": 34.838,
+			"hot_reopen_ms": [
+				0.455,
+				0.426
+			],
+			"toggle_cycles": 3
+		},
+		"skills": {
+			"cold_first_open_ms": 88.068,
+			"hot_reopen_ms": [
+				0.929,
+				1.182
+			],
+			"toggle_cycles": 3
+		},
+		"talents": {
+			"cold_first_open_ms": 177.542,
+			"hot_reopen_ms": [
+				0.514,
+				0.522
+			],
+			"toggle_cycles": 3
+		}
+	},
+	"model_schema": 16,
+	"pixels_measured": false,
+	"platform": "Linux",
+	"processor": "AMD EPYC 9V74 80-Core Processor",
+	"rendering_measured": false,
+	"scenario": "five_tornado",
+	"schema_version": 1,
+	"sim_seconds": 10.0,
+	"tick_count": 600,
+	"windows_fps_measured": false,
+	"xp_batch": {
+		"atomic_write_calls": 1,
+		"atomic_write_ms": 0.084,
+		"awards": 5,
+		"changed_callbacks": 5,
+		"end_transaction_ms": 5.277,
+		"flush_ms": 7.462,
+		"hidden_generations_after": {
+			"_inventory_panel": {
+				"generation": 1,
+				"visible": false
+			},
+			"_passive_panel": {
+				"generation": 1,
+				"visible": false
+			},
+			"_skill_support_panel": {
+				"generation": 1,
+				"visible": false
+			}
+		},
+		"hidden_generations_before": {
+			"_inventory_panel": {
+				"generation": 1,
+				"visible": false
+			},
+			"_passive_panel": {
+				"generation": 1,
+				"visible": false
+			},
+			"_skill_support_panel": {
+				"generation": 1,
+				"visible": false
+			}
+		},
+		"individual_add_xp_usec": [
+			639,
+			416,
+			376,
+			385,
+			364
+		],
+		"save_attempt_delta": 1,
+		"save_success_delta": 1,
+		"saved_bytes_match_snapshot": true,
+		"total_transaction_ms": 7.462,
+		"verified": true,
+		"xp_after": 5,
+		"xp_before": 0
+	}
+}

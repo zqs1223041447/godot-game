@@ -1,0 +1,258 @@
+{
+	"blocked_menu_freeze": {
+		"dynamic_world_draw_count_frozen": true,
+		"elapsed_frozen": true,
+		"manual_process_calls": 120,
+		"model_frozen": true,
+		"pixels_not_measured_in_headless": true,
+		"rng_frozen": true,
+		"terrain_draw_count_frozen": true
+	},
+	"combat": {
+		"cast_count": 3,
+		"cast_cpu_ms": {
+			"max": 0.704,
+			"mean": 0.623333333333333,
+			"p50": 0.62,
+			"p95": 0.62,
+			"samples": 3
+		},
+		"cast_groups": [
+			"group_000002"
+		],
+		"casts": [
+			{
+				"cast_cpu_ms": 0.704,
+				"compile_count": 13,
+				"cooldown_seconds": 3.68,
+				"group_id": "group_000002",
+				"mana_after": 115.06432,
+				"mana_before": 140.0,
+				"mana_cost": 24.93568,
+				"projectiles_created": 5,
+				"recipe": {
+					"added_effectiveness": 0.85,
+					"coefficient": 0.85,
+					"damage_type": "cold",
+					"initial_count": 5,
+					"pierce": 2,
+					"slow": 4.5,
+					"speed": 526.5,
+					"spread": 0.14
+				},
+				"skill_id": "frost",
+				"tick": 1
+			},
+			{
+				"cast_cpu_ms": 0.546,
+				"compile_count": 13,
+				"cooldown_seconds": 3.68,
+				"group_id": "group_000002",
+				"mana_after": 115.06432,
+				"mana_before": 140.0,
+				"mana_cost": 24.93568,
+				"projectiles_created": 5,
+				"recipe": {
+					"added_effectiveness": 0.85,
+					"coefficient": 0.85,
+					"damage_type": "cold",
+					"initial_count": 5,
+					"pierce": 2,
+					"slow": 4.5,
+					"speed": 526.5,
+					"spread": 0.14
+				},
+				"skill_id": "frost",
+				"tick": 222
+			},
+			{
+				"cast_cpu_ms": 0.62,
+				"compile_count": 13,
+				"cooldown_seconds": 3.68,
+				"group_id": "group_000002",
+				"mana_after": 115.06432,
+				"mana_before": 140.0,
+				"mana_cost": 24.93568,
+				"projectiles_created": 5,
+				"recipe": {
+					"added_effectiveness": 0.85,
+					"coefficient": 0.85,
+					"damage_type": "cold",
+					"initial_count": 5,
+					"pierce": 2,
+					"slow": 4.5,
+					"speed": 526.5,
+					"spread": 0.14
+				},
+				"skill_id": "frost",
+				"tick": 443
+			}
+		],
+		"damage_records_retained": 29,
+		"enemy_count_alive_end": 91,
+		"enemy_count_start": 100,
+		"final_projectiles": 0,
+		"final_simulation_state": {
+			"build_revision": 10,
+			"elapsed": 10.0000000000001,
+			"health": 130.0,
+			"kills": 9,
+			"mana": 140.0,
+			"rng_state": 2181838954663113209,
+			"shield": 91.8,
+			"skill_compile_count": 13,
+			"xp_before_batch": 0
+		},
+		"kill_steps": [
+			{
+				"kills": 1,
+				"real_hits": 3,
+				"tick": 7,
+				"tick_and_cast_cpu_ms": 3.106,
+				"tick_cpu_ms": 2.989
+			},
+			{
+				"kills": 4,
+				"real_hits": 15,
+				"tick": 223,
+				"tick_and_cast_cpu_ms": 4.986,
+				"tick_cpu_ms": 4.866
+			},
+			{
+				"kills": 4,
+				"real_hits": 15,
+				"tick": 444,
+				"tick_and_cast_cpu_ms": 7.666,
+				"tick_cpu_ms": 7.501
+			}
+		],
+		"max_kills_in_one_step": 4,
+		"peak_projectiles": 5,
+		"real_hit_events": 44,
+		"simulation_sha256": "07199293bdbc9cea7e8e80ec5cd533d4421ea8dd53260c63c6edfacbc1fb6ec4",
+		"single_tick_peak_ms": 10.658,
+		"single_tick_peak_with_kill_ms": 7.666,
+		"tick_and_cast_step_cpu_ms": {
+			"max": 10.658,
+			"mean": 4.09185833333333,
+			"p50": 3.797,
+			"p95": 5.86,
+			"samples": 600
+		},
+		"tick_cpu_ms": {
+			"max": 10.472,
+			"mean": 3.93386166666667,
+			"p50": 3.643,
+			"p95": 5.625,
+			"samples": 600
+		}
+	},
+	"combat_only_sha256": "7fc81096f6515a94ce73975d2668cc5c97e116301eb9aa63821c8dd76a382fc0",
+	"display_server": "headless",
+	"engine": "4.6.3-stable (official)",
+	"failures": 0,
+	"fixture_group": "group_000002",
+	"fixture_supports": [
+		"swift_projectiles",
+		"heavy_projectiles",
+		"lingering_chill",
+		"efficiency",
+		"quickcast"
+	],
+	"hud": {
+		"compile_count_after_updates": 10,
+		"compile_count_stable": true,
+		"measured_updates": 240,
+		"rng_unchanged": true,
+		"state_unchanged": true,
+		"warmup_compile_count": 10,
+		"warmup_updates": 10
+	},
+	"logical_processors": 9,
+	"menu_open_timings": {
+		"inventory": {
+			"cold_first_open_ms": 36.289,
+			"hot_reopen_ms": [
+				0.377,
+				0.377
+			],
+			"toggle_cycles": 3
+		},
+		"skills": {
+			"cold_first_open_ms": 85.881,
+			"hot_reopen_ms": [
+				1.039,
+				1.174
+			],
+			"toggle_cycles": 3
+		},
+		"talents": {
+			"cold_first_open_ms": 185.131,
+			"hot_reopen_ms": [
+				0.836,
+				1.174
+			],
+			"toggle_cycles": 3
+		}
+	},
+	"model_schema": 16,
+	"pixels_measured": false,
+	"platform": "Linux",
+	"processor": "AMD EPYC 9V74 80-Core Processor",
+	"rendering_measured": false,
+	"scenario": "five_frost",
+	"schema_version": 1,
+	"sim_seconds": 10.0,
+	"tick_count": 600,
+	"windows_fps_measured": false,
+	"xp_batch": {
+		"atomic_write_calls": 1,
+		"atomic_write_ms": 0.084,
+		"awards": 5,
+		"changed_callbacks": 5,
+		"end_transaction_ms": 5.781,
+		"flush_ms": 8.263,
+		"hidden_generations_after": {
+			"_inventory_panel": {
+				"generation": 1,
+				"visible": false
+			},
+			"_passive_panel": {
+				"generation": 1,
+				"visible": false
+			},
+			"_skill_support_panel": {
+				"generation": 1,
+				"visible": false
+			}
+		},
+		"hidden_generations_before": {
+			"_inventory_panel": {
+				"generation": 1,
+				"visible": false
+			},
+			"_passive_panel": {
+				"generation": 1,
+				"visible": false
+			},
+			"_skill_support_panel": {
+				"generation": 1,
+				"visible": false
+			}
+		},
+		"individual_add_xp_usec": [
+			798,
+			516,
+			387,
+			415,
+			358
+		],
+		"save_attempt_delta": 1,
+		"save_success_delta": 1,
+		"saved_bytes_match_snapshot": true,
+		"total_transaction_ms": 8.263,
+		"verified": true,
+		"xp_after": 5,
+		"xp_before": 0
+	}
+}
