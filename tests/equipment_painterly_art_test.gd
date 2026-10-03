@@ -1,11 +1,19 @@
 extends SceneTree
-## Headless-safe renderer contract; --require-all requires the complete 22 PNGs.
+## Headless-safe renderer contract; --require-all requires the complete 27 PNGs.
 ## Native pixel/readability QA is separate from these resource and geometry checks.
 const Art = preload("res://scripts/visuals/equipment_art.gd")
 const Painterly = preload("res://scripts/visuals/equipment_painterly_art.gd")
 const Data = preload("res://scripts/game_data.gd")
 const Gear = preload("res://scripts/items/equipment_catalog.gd")
 const Jewels = preload("res://scripts/jewel_data.gd")
+## Presentation fixtures also work before these bases enter the gameplay catalog.
+const NINE_SLOT_ART: Dictionary = {
+	"nine_slot_etched_ring": Vector2(42,42),
+	"nine_slot_trail_boots": Vector2(84,84),
+	"nine_slot_folded_belt": Vector2(84,42),
+	"nine_slot_threaded_gloves": Vector2(84,84),
+	"nine_slot_slate_helmet": Vector2(84,84),
+}
 var failures: Array[String] = []
 var checks: int = 0
 var entries: Array[Dictionary] = []
@@ -23,7 +31,7 @@ class DrawingSurface extends Node2D:
 		seed(82647)
 		for entry: Dictionary in suite.entries:
 			var original: Dictionary = entry.duplicate(true)
-			for dimensions: Vector2 in [Vector2(28,91), Vector2(70,91), Vector2(28,28), Vector2(42,42), Vector2(108,108), Vector2(3,3)]:
+			for dimensions: Vector2 in [Vector2(28,91), Vector2(70,91), Vector2(28,28), Vector2(42,42), Vector2(84,42), Vector2(84,84), Vector2(108,108), Vector2(3,3)]:
 				var bounds := Rect2(Vector2(13,17), dimensions)
 				var rendered: bool = Painterly.draw_item(self, entry, bounds)
 				suite.expect(rendered == (Painterly.texture_for_entry(entry) != null), "texture dispatch: " + str(entry))
@@ -79,7 +87,7 @@ func test_identity() -> void:
 	expect(Painterly.canonical_id({"id":"prism_bow", "color":Color("516477"), "name":"棱光长弓"}) == "prism_bow", "named real item must not be an empty-slot hint")
 
 func test_fit(source_size: Vector2, label: String) -> void:
-	for dimensions: Vector2 in [Vector2(28,91),Vector2(70,91),Vector2(28,28),Vector2(42,42),Vector2(108,108),Vector2(51,59),Vector2(158,238),Vector2(3,3)]:
+	for dimensions: Vector2 in [Vector2(28,91),Vector2(70,91),Vector2(28,28),Vector2(42,42),Vector2(84,42),Vector2(84,84),Vector2(108,108),Vector2(51,59),Vector2(158,238),Vector2(3,3)]:
 		var bounds := Rect2(Vector2(-17,13),dimensions)
 		var fitted: Rect2 = Painterly.fitted_rect(bounds,source_size)
 		expect(fitted.has_area() and fitted.position.is_finite() and fitted.size.is_finite(), "finite nonempty fitted art: " + label)
@@ -106,7 +114,14 @@ func run() -> void:
 	for id: String in Jewels.BASES.keys() + Jewels.SPECIAL_BASES.keys():
 		entries.append({"id":"jewel_000123", "base":id, "kind":"jewel", "affixes":[{"id":"force", "value":4}]})
 		expected_ids.append(id)
-	expect(expected_ids.size() == 22, "catalog count changed; review painterly manifest")
+	for id: String in NINE_SLOT_ART:
+		if not expected_ids.has(id):
+			entries.append({"id":"gear_000124", "base_id":id})
+			expected_ids.append(id)
+		expect(Painterly.canonical_id({"id":id}) == id, "nine-slot raw base identity: " + id)
+		expect(Painterly.canonical_id({"id":"gear_000124", "base_id":id}) == id, "nine-slot instance identity: " + id)
+		expect(Painterly.canonical_id({"id":id, "hint":true}).is_empty(), "nine-slot empty hint fallback: " + id)
+	expect(expected_ids.size() == 27, "catalog count changed; review painterly manifest")
 	expect(Painterly.ART_PATHS.size() == expected_ids.size(), "manifest must cover exactly current gear and jewel catalogs")
 	for entry: Dictionary in entries:
 		var id: String = Painterly.canonical_id(entry)
@@ -122,11 +137,17 @@ func run() -> void:
 		expect(runtime_image.get_width() <= 512 and runtime_image.get_height() <= 512, "runtime texture exceeds import memory cap: " + id)
 		expect(texture.get_size() == Vector2(runtime_image.get_size()), "texture region must use imported pixel coordinates: " + id)
 		var source: Rect2 = Painterly.source_rect(entry)
+		if NINE_SLOT_ART.has(id):
+			expect(runtime_image.has_mipmaps(), "nine-slot texture needs mipmaps: " + id)
+			expect(runtime_image.detect_alpha() != Image.ALPHA_NONE, "nine-slot texture must retain transparency: " + id)
+			expect(source.position.x > 0 and source.position.y > 0 and source.end.x < texture.get_width() and source.end.y < texture.get_height(), "nine-slot visible silhouette needs safe transparent margin: " + id)
+			var cell := Rect2(Vector2(7,11),NINE_SLOT_ART[id])
+			expect(cell.encloses(Painterly.fitted_rect(cell,source.size)), "nine-slot footprint overflow: " + id)
 		expect(source == Painterly.source_rect(entry), "source alpha bounds not stable: " + id)
 		expect(Rect2(Vector2.ZERO,texture.get_size()).encloses(source), "alpha crop outside texture: " + id)
 		test_fit(source.size,id)
 	if OS.get_cmdline_user_args().has("--require-all"):
-		expect(available == 22, "complete art pack required; only %d/22 resources loaded" % available)
+		expect(available == 27, "complete art pack required; only %d/27 resources loaded" % available)
 	test_identity()
 	test_alpha_bounds()
 	for dimensions: Vector2 in [Vector2(1024,1536),Vector2(1536,1024),Vector2(1024,1024),Vector2(200,1450),Vector2(1,1)]:
@@ -143,7 +164,7 @@ func run() -> void:
 	expect(Data.ITEMS == frozen_data and Gear.BASES == frozen_bases and Gear.POOL_PROFILES == frozen_profiles and Jewels.BASES == frozen_jewels and Jewels.SPECIAL_BASES == frozen_special, "rendering changed gameplay catalogs")
 	surface.queue_free()
 	if failures.is_empty():
-		print("EQUIPMENT_PAINTERLY_ART_TEST_PASS: %d checks; %d/22 textures available; bounded aspect fit, identity, fallback, alpha threshold, cache, immutable inputs and RNG. Native pixels require separate QA." % [checks,available])
+		print("EQUIPMENT_PAINTERLY_ART_TEST_PASS: %d checks; %d/27 textures available; bounded aspect fit, identity, fallback, alpha threshold, cache, immutable inputs and RNG. Native pixels require separate QA." % [checks,available])
 		quit(0)
 	else:
 		for failure: String in failures:
