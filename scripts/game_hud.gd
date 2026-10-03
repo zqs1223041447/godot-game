@@ -298,6 +298,7 @@ func notify(message: String) -> void:
 		elif not str(menu_state.left).is_empty():
 			target = _dock_footers.left
 		if is_instance_valid(target):
+			target.show()
 			if _state != null and not _state.save_block_reason().is_empty():
 				target.text = "原存档已保护，本次进度未写入；请先备份并恢复有效存档"
 				target.tooltip_text = _state.save_block_reason() + "\n" + message
@@ -589,11 +590,13 @@ func _build_dock_windows() -> void:
 		margin.add_child(stack)
 		var header := HBoxContainer.new()
 		stack.add_child(header)
-		var title := _label("技能", 20, GOLD) if side == "left" else _label("行囊 · 装备", 20, GOLD)
+		var title := _label("技能", 16, GOLD) if side == "left" else _label("行囊 · 装备", 16, GOLD)
 		title.name = "LeftDockTitle" if side == "left" else "RightDockTitle"
 		title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		header.add_child(title)
 		var close := _button("关闭", "CloseLeftDock" if side == "left" else "CloseRightDock", _close_dock.bind(side), 58)
+		close.custom_minimum_size = Vector2(44,28)
+		close.add_theme_font_size_override("font_size",11)
 		header.add_child(close)
 		var subtitle := _wrap_label("技能宝石组合", 12, MUTED) if side == "left" else _wrap_label("九个装备位 · 分页共用行囊", 12, MUTED)
 		subtitle.name = "LeftDockSubtitle" if side == "left" else "RightDockSubtitle"
@@ -628,6 +631,8 @@ func _apply_dock_layout() -> void:
 	# Anchor widths stay at one third in logical canvas units at every viewport size.
 	for side: String in ["left", "right"]:
 		if not _dock_roots.has(side): continue
+		_dock_subtitles[side].visible = not _dock_subtitles[side].text.is_empty()
+		_dock_footers[side].visible = not _dock_footers[side].text.is_empty()
 		var panel: Control = _dock_roots[side].get_child(0) as Control
 		panel.offset_left = 0.0
 		panel.offset_right = 0.0
@@ -916,7 +921,7 @@ func _build_inventory_panel() -> void:
 		_inventory_panel.refresh()
 		_dock_subtitles.right.text = ""
 		_dock_titles.right.tooltip_text = "九个装备目标 · 装备、珠宝与宝石共用分页行囊"
-		_dock_footers.right.text = "拖放装备 · 悬停详情"
+		_dock_footers.right.text = ""
 	else:
 		if not is_instance_valid(_inventory_panel):
 			_inventory_panel = InventoryPanelView.new()
@@ -959,7 +964,7 @@ func _build_skills_dock() -> void:
 		_skill_support_panel.refresh()
 	_dock_subtitles.left.text = ""
 	_dock_titles.left.tooltip_text = "每行 1 主 + 5 辅；绑定按键可施放。"
-	_dock_footers.left.text = "右侧行囊拖入 · 右键取回"
+	_dock_footers.left.text = ""
 
 
 func _build_character_dock() -> void:

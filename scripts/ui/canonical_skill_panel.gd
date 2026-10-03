@@ -34,7 +34,7 @@ func _build() -> void:
 	add_theme_constant_override("separation",8)
 	_summary = Label.new()
 	_summary.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_summary.add_theme_font_size_override("font_size",14)
+	_summary.add_theme_font_size_override("font_size",11)
 	add_child(_summary)
 	_rows = Rows.new()
 	_rows.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -58,8 +58,8 @@ func refresh(force: bool = false) -> void:
 		_refresh_dirty = false
 		return
 	var capacity: int = model.active_group_capacity()
-	_summary.text = "已激活 %d 行 · 1 主 + 5 辅" % capacity
-	_summary.tooltip_text = "每一激活行均可绑定右侧按键。向右侧行囊拖入宝石，右键取回；换键或移动宝石不能重置已产生的冷却。超过容量的行仅停用，配置保留。技能行可滚动查看。预览为单次命中，不是总 DPS。"
+	_summary.text = "%d 行" % capacity
+	_summary.tooltip_text = "每一激活行均可绑定右侧按键。从右侧行囊拖入宝石，右键取回；换键或移动宝石不能重置已产生的冷却。超过容量的行仅停用，配置保留。技能行可滚动查看。预览为单次命中，不是总 DPS。"
 	var bindings := {}
 	for binding: Dictionary in snapshot.bindings: bindings[binding.group_id] = int(binding.keycode)
 	var rows: Array = []
@@ -81,6 +81,7 @@ func refresh(force: bool = false) -> void:
 		else:
 			tooltip = str(cast.get("error",""))
 		var name_value := "%d · %s" % [index+1,str(model.item_definition(content.main_uid).get("short_name","空行"))]
+		if not content.main_uid.is_empty(): name_value += "  ·  %d 级" % int(model.item(content.main_uid).payload.level)
 		rows.append({"group_id":group_id,"name":name_value,"active":index<capacity,"main":main,"supports":supports,
 			"preview":summary,"preview_tooltip":tooltip,"binding_keycode":bindings.get(group_id,0)})
 	_rows.set_rows(rows,model.revision())

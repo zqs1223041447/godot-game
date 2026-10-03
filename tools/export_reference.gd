@@ -288,6 +288,7 @@ static func collect() -> Dictionary:
 
 static func canonical_examples()->Dictionary:
 	var state:=Canonical.new()
+	var bag:Dictionary=state.bag_layout()
 	var casts:Dictionary={}
 	for group:Dictionary in state.snapshot().skill_groups:
 		var cast:Dictionary=state.get_group_cast(group.id)
@@ -295,7 +296,7 @@ static func canonical_examples()->Dictionary:
 	var slots:Dictionary={}
 	for slot:String in EquipmentSlotsData.all_slots():slots[slot]=EquipmentSlotsData.category_for_slot(slot)
 	var five:=Compiler.compile_group("frost",state.get_combat_snapshot(),["swift_projectiles","heavy_projectiles","lingering_chill","efficiency","quickcast"])
-	return {"save_version":Canonical.Rules.VERSION,"bag_columns":12,"bag_rows":8,"base_skill_groups":10,"support_slots":5,
+	return {"save_version":Canonical.Rules.VERSION,"bag_pages":bag.pages,"bag_columns":bag.columns,"bag_rows":bag.rows,"base_skill_groups":10,"support_slots":5,
 		"slots":slots,"gem_definitions":GemCatalogData.definitions(),"default_build":state.snapshot(),"default_stats":state.get_stats(),"default_casts":casts,"five_link_example":support_cast_brief(five),
 		"gem_reward":{"eligible_root_kill_interval":30,"definition_count":24,"uniform_selection":true,"level":1,"quality":0,"duplicate_definitions_have_distinct_uid":true,"failed_admission_restores_rng":true},
 		"defense_example":Defense.incoming_source_hit({"physical":100.0,"fire":100.0,"cold":100.0,"lightning":100.0},{"armour":500.0,"fire_resistance":0.5,"cold_resistance":0.25,"lightning_resistance":0.75},100.0,200.0),

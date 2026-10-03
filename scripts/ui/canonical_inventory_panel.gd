@@ -45,12 +45,11 @@ class SlotTarget extends Button:
 	var entry: Dictionary = {}
 	func _draw() -> void:
 		if not entry.is_empty():
-			var label_band: float = maxf(14.0, get_theme_font_size("font_size") + 3.0)
-			var art_height: float = maxf(8.0, size.y - label_band - 6.0)
-			EquipmentArt.draw_item(self, entry, Rect2(Vector2(4,3), Vector2(maxf(1.0, size.x - 8.0), art_height)))
+			var caption_height: float = get_theme_font_size("font_size") + 5.0
+			EquipmentArt.draw_item(self, entry, Rect2(Vector2(4,3),Vector2(size.x-8.0,maxf(8.0,size.y-caption_height-4.0))))
 		var font: Font = get_theme_default_font()
 		var font_size: int = get_theme_font_size("font_size")
-		draw_string(font,Vector2(3,size.y-5),CanonicalInventoryPanel.SLOT_NAMES[slot_id],HORIZONTAL_ALIGNMENT_CENTER,size.x-6,font_size,Color("3b281b"))
+		draw_string(font,Vector2(3,size.y-3),CanonicalInventoryPanel.SLOT_NAMES[slot_id],HORIZONTAL_ALIGNMENT_CENTER,size.x-6,font_size,Color("3b281b"))
 	func _get_drag_data(_at: Vector2) -> Variant:
 		if uid.is_empty(): return null
 		return {"type":"unified_item","uid":uid,"revision":owner_panel.model.revision(),"grab_offset":Vector2i.ZERO}
@@ -81,7 +80,7 @@ func _build() -> void:
 	_summary.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_summary.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	_summary.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
-	_summary.add_theme_font_size_override("font_size", 13)
+	_summary.add_theme_font_size_override("font_size", 11)
 	top.add_child(_summary)
 	var actions := HBoxContainer.new()
 	actions.name = "BagHeaderActions"
@@ -127,8 +126,8 @@ func _build() -> void:
 		target.text = ""
 		target.alignment = HORIZONTAL_ALIGNMENT_CENTER
 		target.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		target.custom_minimum_size = Vector2(76,36)
-		target.add_theme_font_size_override("font_size",12)
+		target.custom_minimum_size = Vector2(76,48)
+		target.add_theme_font_size_override("font_size",10)
 		target.add_theme_constant_override("outline_size",0)
 		target.add_theme_stylebox_override("normal",ThemeStyle.panel(Color("e2c997"), Color("967347"),4,1,4))
 		target.pressed.connect(_activate_equipment.bind(slot))
@@ -136,6 +135,9 @@ func _build() -> void:
 		target.mouse_exited.connect(func(): hover_left.emit())
 		_equipment_grid.add_child(target)
 		_slots[slot] = target
+	# The equipment keeps its original 3×3 icon-above-name structure. All bag
+	# operations are grouped below it with the page selector and bag itself.
+	move_child(top, get_child_count()-1)
 	var page_bar := HBoxContainer.new()
 	page_bar.name = "BagPageControls"
 	page_bar.custom_minimum_size.y = 24
@@ -221,7 +223,7 @@ func refresh() -> void:
 		target.queue_redraw()
 	var columns: int = int(_bag_layout.get("columns", 12))
 	var rows: int = int(_bag_layout.get("rows", 8))
-	_summary.text = "装备 %d/9 · 行囊 %d 格" % [model.equipped_items().size(), page_count * columns * rows]
+	_summary.text = "行囊 %d 格" % [page_count * columns * rows]
 	_summary.tooltip_text = "九个装备位 · 装备、珠宝与宝石共用分页行囊。悬停看详情，Shift 对比，右键可装备。"
 	_page_label.text = "第 %d/%d 页" % [_bag_page + 1, page_count]
 	_page_label.tooltip_text = "%d × %d 格 · 悬停看详情 · Shift 对比 · 拖放摆放" % [columns, rows]
@@ -244,6 +246,7 @@ func refresh() -> void:
 			button.pressed.connect(_return_to_bag.bind(uid))
 			list.add_child(button)
 	_refresh_crafting()
+	_craft_controls._balance_label.hide()
 	_layout_slots()
 	_refresh_dirty = false
 	refresh_generation += 1

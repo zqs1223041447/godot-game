@@ -12,17 +12,17 @@ func _initialize() -> void:
 
 func _run() -> void:
 	await _check_layout(Vector2i(1280, 720), 1.0, 1.0)
+	await _check_layout(Vector2i(1280, 720), 1.1, 1.2)
+	await _check_layout(Vector2i(2560, 1440), 1.0, 1.0)
 	await _check_layout(Vector2i(2560, 1440), 1.1, 1.2)
+	await _check_recovery_access()
 	print("Docked layout geometry: %d checks, %d failures" % [checks, failures])
 	quit(1 if failures else 0)
 
 
 func _check_layout(view_size: Vector2i, ui_scale: float, font_scale: float) -> void:
-	var viewport := SubViewport.new()
-	viewport.name = "LayoutViewport_%d" % view_size.x
+	var viewport := root
 	viewport.size = view_size
-	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
-	root.add_child(viewport)
 	var arena: Node2D = MainScene.instantiate() as Node2D
 	viewport.add_child(arena)
 	await _frames(5)
@@ -48,19 +48,19 @@ func _check_layout(view_size: Vector2i, ui_scale: float, font_scale: float) -> v
 	var bag_rect: Rect2 = bag_grid.get_global_transform_with_canvas() * bag_grid.grid_rect()
 	var right_rect: Rect2 = right_panel.get_global_rect()
 	var right_scroll_rect: Rect2 = right_scroll.get_global_rect()
-	var dock_ratio: float = equip_rect.end.y / screen_rect.size.y
-	var page_ratio: float = page_rect.end.y / screen_rect.size.y
+	var dock_ratio: float = (equip_rect.end.y-right_rect.position.y) / right_rect.size.y
+	var page_ratio: float = (page_rect.end.y-right_rect.position.y) / right_rect.size.y
 	var right_scroll_range: float = maxf(0.0, right_scroll.get_v_scroll_bar().max_value - right_scroll.get_v_scroll_bar().page)
-	check(viewport.get_visible_rect().size == Vector2(view_size), "SubViewport uses the requested %d×%d geometry" % [view_size.x, view_size.y])
-	check(right_rect.size.x <= screen_rect.size.x / 3.0 + 2.0, "Right dock stays within one-third screen width")
+	check(viewport.size == view_size, "Real root window uses the requested %d×%d output" % [view_size.x, view_size.y])
+	check(right_rect.size.x <= screen_rect.size.x / 3.0 + 0.1 and right_rect.end.x <= screen_rect.end.x+0.1, "Right dock stays within one-third screen width and actual logical screen boundary")
 	check(dock_ratio <= 0.34 and page_ratio <= 0.40, "Equipment block stays near the upper third and fixed page controls sit directly below it")
 	check(right_scroll_range <= 1.0, "Right inventory content needs no full-dock vertical scroll")
 	check(bag_grid.grid_columns() == 8 and bag_grid.grid_rows() == 6
 		and bag_grid.cell_rect(Vector2i(7, 5)).end.y <= bag_grid.size.y + 1.0,
 		"Complete 8×6 bag page fits inside its grid viewport")
-	var expected_pitch: float = maxf(0.0, minf((bag_grid.size.x - 16.0) / 8.0, (bag_grid.size.y - 16.0) / 6.0))
+	var expected_pitch: float = maxf(0.0, minf(64.0, minf((bag_grid.size.x - 16.0) / 8.0, (bag_grid.size.y - 16.0) / 6.0)))
 	check(is_equal_approx(bag_grid.grid_cell_size(), expected_pitch),
-		"Bag cells use the smaller of available width/8 and height/6 at this viewport and UI scale")
+		"Bag cells use the smaller of available width/8 and height/6 at this viewport and UI scale, capped at 64 logical pixels")
 	check(bag_rect.position.y >= right_scroll_rect.position.y - 1.0
 		and bag_rect.end.y <= right_scroll_rect.end.y + 1.0,
 		"All six bag rows are inside the visible right-dock scroll viewport")
@@ -98,13 +98,49 @@ func _check_layout(view_size: Vector2i, ui_scale: float, font_scale: float) -> v
 		% [view_size.x, view_size.y, ui_scale, font_scale, left_scroll.size.y, left_content.size.y,
 			rows.size.y, str(last_row.get_global_rect().intersects(rows.get_global_rect()))])
 	arena.queue_free()
-	viewport.queue_free()
 	await _frames(2)
 
 
 func _frames(count: int) -> void:
 	for unused: int in range(count):
 		await process_frame
+
+
+func _check_recovery_access() -> void:
+	# An isolated legal recovery fixture verifies that compact sizing does not hide
+	# overflow controls or sacrifice the model's recovery transaction.
+	var arena: Node2D = MainScene.instantiate()
+	root.add_child(arena)
+	arena.set_process(false)
+	arena.set_physics_process(false)
+	await _frames(3)
+	var candidate: Dictionary = arena.state.snapshot()
+	var pending: Array[String] = []
+	for uid: String in candidate.locations:
+		if candidate.locations[uid].kind == "bag":
+			candidate.locations[uid] = {"kind":"recovery","index":pending.size()}
+			pending.append(uid)
+	var path := "user://layout-recovery-fixture.json"
+	FileAccess.open(path,FileAccess.WRITE).store_string(JSON.stringify(candidate,"\t",true,true))
+	check(not pending.is_empty() and arena.state.load_build(path), "Recovery fixture is accepted by the complete canonical validator")
+	arena.hud.open_panel("inventory")
+	await _frames(3)
+	var panel: Control = arena.hud._inventory_panel
+	panel.save_path = path
+	var queue: VBoxContainer = panel._pending
+	check(queue.visible and queue.get_child_count() == 2, "Pending items keep their visible recovery section")
+	var list: Control = queue.get_child(1)
+	var button: Button = list.get_child(list.get_child_count()-1)
+	var scroll: ScrollContainer = arena.hud._dock_scrolls.right
+	scroll.ensure_control_visible(button)
+	await _frames(3)
+	check(button.get_global_rect().intersects(scroll.get_global_rect()), "Last recovery action remains reachable through the outer scroll fallback")
+	var before_count: int = arena.state.pending_items().size()
+	button.pressed.emit()
+	await _frames(3)
+	check(arena.state.pending_items().size() == before_count-1, "Reachable recovery button returns exactly one owned item through the model")
+	arena.queue_free()
+	await _frames(2)
 
 
 func check(ok: bool, label: String) -> void:

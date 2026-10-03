@@ -29,6 +29,9 @@ const MARK_GOLD: Color = Color("ba9148")
 		queue_redraw()
 
 var _frame_style: StyleBox
+var circular: bool = false
+var _circle_art: TextureRect
+static var _circle_shader: Shader
 
 
 func _init() -> void:
@@ -43,6 +46,25 @@ func _ready() -> void:
 	accessibility_name = accessible_label + "图标"
 	if _frame_style == null:
 		_frame_style = PresentationTheme.panel(PARCHMENT, FRAME_INK, 4, 1, 0)
+	if circular and texture != null:
+		if _circle_shader == null:
+			_circle_shader = Shader.new()
+			_circle_shader.code = "shader_type canvas_item; void fragment() { vec4 col=texture(TEXTURE,UV); col.a *= 1.0-smoothstep(0.475,0.495,length(UV-vec2(0.5))); COLOR=col; }"
+		_circle_art = TextureRect.new()
+		_circle_art.name = "RoundGemArt"
+		_circle_art.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_circle_art.texture = texture
+		_circle_art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		_circle_art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		_circle_art.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		_circle_art.offset_left = 2.0
+		_circle_art.offset_top = 2.0
+		_circle_art.offset_right = -2.0
+		_circle_art.offset_bottom = -2.0
+		var shader_material := ShaderMaterial.new()
+		shader_material.shader = _circle_shader
+		_circle_art.material = shader_material
+		add_child(_circle_art)
 	queue_redraw()
 
 
@@ -98,6 +120,10 @@ func _draw() -> void:
 	if side <= 0.0:
 		return
 	var tile: Rect2 = square_tile_rect(size)
+	if circular:
+		draw_circle(tile.get_center(),side*0.5,PARCHMENT)
+		draw_arc(tile.get_center(),maxf(0.0,side*0.5-1.0),0,TAU,48,FRAME_INK,1.0,true)
+		return
 	if _frame_style != null:
 		draw_style_box(_frame_style, tile)
 	else:
