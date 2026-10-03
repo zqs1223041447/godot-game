@@ -1596,7 +1596,8 @@ func _build_world_controls() -> void:
 	box.add_child(_world_button)
 	_town_view = TownServiceView.new()
 	_town_view.hide()
-	_place(_town_view, Rect2(20,224,430,420))
+	_place(_town_view, Rect2(20,208,430,350))
+	_town_view.z_index = 20
 	_town_view.setup(_arena)
 	_town_view.feedback.connect(notify)
 	_town_view.crafter_requested.connect(func():

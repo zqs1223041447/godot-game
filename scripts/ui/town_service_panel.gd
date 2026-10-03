@@ -1,7 +1,17 @@
 extends PanelContainer
 ## Town services use the same canonical inventory as the live build.
+const SkillArt = preload("res://scripts/visuals/skill_emblem.gd")
+const GearArt = preload("res://scripts/visuals/equipment_painterly_art.gd")
 signal feedback(message: String)
 signal crafter_requested
+class ShardIcon extends TextureRect:
+	func _draw() -> void:
+		var points := PackedVector2Array([Vector2(21,4),Vector2(32,18),Vector2(22,37),Vector2(10,23)])
+		draw_colored_polygon(points,Color("a78eb0"))
+		points.append(points[0])
+		draw_polyline(points,Color("624c70"),1.5,true)
+		draw_line(Vector2(21,5),Vector2(22,35),Color("eadcf0"),1.5,true)
+
 var arena: Node
 var _body: VBoxContainer
 var _title: Label
@@ -89,11 +99,14 @@ func _select(id: String) -> void:
 		var row := HBoxContainer.new()
 		row.add_theme_constant_override("separation", 8)
 		_content.add_child(row)
-		var icon := TextureRect.new()
+		var icon: TextureRect = ShardIcon.new() if str(offer.kind) == "currency" else TextureRect.new()
 		icon.custom_minimum_size = Vector2(42,42)
 		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		if ResourceLoader.exists(str(offer.icon_path)): icon.texture = load(str(offer.icon_path))
+		elif str(offer.kind) in ["skill_gem","support_gem"]:
+			icon.texture = SkillArt.ICONS.get(str(offer.definition_id).get_slice(":",1))
+		else: icon.texture = GearArt.texture_for_entry(offer.preview)
 		row.add_child(icon)
 		var label := Label.new()
 		label.text = str(offer.name)
