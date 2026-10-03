@@ -33,7 +33,16 @@ func _initialize()->void:
 	check(result.ok and state.item(ids[0]).is_empty(),"salvage removes one UID")
 	check(state.crafting_balance()==int(quote.materials.calibration_shard),"salvage exact material amount")
 	check(state.snapshot().crafting.keys() == ["revision"],"schema16 persists no second materials ledger")
-	check(state.snapshot().items.size()==preserve.items.size()-1,"all gems and other items retained")
+	var retained: Dictionary = state.snapshot().items
+	var created_stacks := 0
+	for uid: String in retained.keys():
+		if not preserve.items.has(uid):
+			check(retained[uid].kind == "currency" and retained[uid].payload.quantity == int(quote.materials.calibration_shard),"only the exact earned shard stack is newly owned")
+			created_stacks += 1
+			retained.erase(uid)
+	var expected_owned: Dictionary = preserve.items.duplicate(true)
+	expected_owned.erase(ids[0])
+	check(created_stacks == 1 and retained == expected_owned,"all original gems and other items retain exact payloads while one salvaged UID is removed")
 	check(not state.execute_crafting(quote.handle,source).ok,"repeated confirmation cannot consume twice")
 	for i:int in [1,2]:
 		source=state.item(ids[i]).payload

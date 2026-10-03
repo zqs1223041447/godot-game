@@ -20,6 +20,8 @@ func run()->void:
 	check(arena.state.snapshot().version==16 and arena.state.snapshot().skill_groups.size()==10,"actual saved schema and ten groups")
 	check(FileAccess.get_file_as_bytes(path+".v13-backup.json")==raw.to_utf8_buffer(),"first startup keeps exact BOM/whitespace original bytes")
 	check(arena.state.location("guardian_robe")=={"kind":"equipment","slot_id":"body_armour"} and arena.state.location("azure_charm")=={"kind":"equipment","slot_id":"amulet"},"old equipped identity preserved at new targets")
+	check(arena.hud._menu_routes.snapshot().right_inventory and arena.hud.is_blocking(),"migration opens the inventory dock and pauses combat once")
+	arena.hud.close_panel()
 	for panel:String in ["inventory","skills","talents","combat","monsters","pause","settings"]:
 		arena.hud.open_panel(panel)
 		await process_frame

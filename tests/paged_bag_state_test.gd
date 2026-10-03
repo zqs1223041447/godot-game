@@ -38,11 +38,13 @@ func _run() -> void:
 		and FileAccess.get_file_as_bytes(path) != source_bytes,
 		"original v14 bytes are preserved before a current-schema replacement")
 	_expect(state.snapshot().version == 16 and Rules.reason(state.snapshot()).is_empty(),
-		"loaded state is a valid v15 build")
+		"loaded state is a valid v16 build")
 	_expect(state.snapshot().items == source_v14.items and state.snapshot().talents == source_v14.talents
-		and state.snapshot().bindings == source_v14.bindings and state.snapshot().crafting == source_v14.crafting
+		and state.snapshot().bindings == source_v14.bindings
+		and state.snapshot().crafting == {"revision": source_v14.crafting.revision}
+		and state.crafting_balance() == source_v14.crafting.materials.calibration_shard
 		and state.snapshot().migration_ledger == source_v14.migration_ledger,
-		"v14 migration preserves item payloads, talents, bindings, materials, and ledger")
+		"zero-balance v14 migration preserves items, talents, bindings, revision, exact currency amount and ledger without a second wallet")
 	_expect(state.migrated_from_legacy and state.migration_message.contains("背包已扩容")
 		and not state.migration_message.contains("天赋点"),
 		"v14 migration message describes the backpack conversion without claiming a talent refund")
