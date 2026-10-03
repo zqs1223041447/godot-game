@@ -64,6 +64,11 @@ python3 "$PROJECT_DIR/tests/test_font_coverage.py"
 python3 "$PROJECT_DIR/tools/validate_save_paths_linux.py" --godot "$GODOT_BIN"
 run_check --editor --import
 run_check --script res://tests/build_test.gd
+run_check --script res://tests/stable_build_cache_test.gd
+run_check --script res://tests/m0_scene_cache_test.gd
+run_check --script res://tests/equipment_slots_test.gd
+run_check --script res://tests/item_location_rules_test.gd
+run_check --script res://tests/menu_route_state_test.gd
 run_check --script res://tests/equipment_catalog_test.gd
 run_check --script res://tests/typed_affix_catalog_test.gd
 run_check --script res://tests/defense_rules_test.gd
