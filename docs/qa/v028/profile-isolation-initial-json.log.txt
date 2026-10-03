@@ -1,0 +1,16 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+godot-game: playable arena ready
+ERROR: Parse JSON failed. Error at line 0: Expected key
+   at: parse_string (core/io/json.cpp:624)
+   GDScript backtrace (most recent call first):
+       [0] load_build (res://scripts/canonical_game_state.gd:530)
+       [1] enter_town_test (res://scripts/main.gd:1437)
+       [2] run (res://tests/town_profile_isolation_test.gd:20)
+ERROR: Parse JSON failed. Error at line 0: Expected key
+   at: parse_string (core/io/json.cpp:624)
+   GDScript backtrace (most recent call first):
+       [0] load_build (res://scripts/canonical_game_state.gd:530)
+       [1] leave_town_test (res://scripts/main.gd:1449)
+       [2] run (res://tests/town_profile_isolation_test.gd:44)
+Town profile isolation: 17 checks, 0 failures

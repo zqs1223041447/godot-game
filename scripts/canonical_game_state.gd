@@ -527,7 +527,9 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	if FileAccess.file_exists(path):
 		var file:=FileAccess.open(path,FileAccess.READ)
 		if file!=null and file.get_length()<=MAX_SAVE_BYTES:
-			var raw:Variant=JSON.parse_string(file.get_as_text())
+			var parser:=JSON.new()
+			var parsed:Error=parser.parse(file.get_as_text())
+			var raw:Variant=parser.data if parsed==OK else null
 			if raw is Dictionary and Items._whole(raw.get("version"), 1, Rules.MAX_SERIAL):
 				old_version=int(raw.version)
 				if raw.get("bindings") is Array:
@@ -548,6 +550,13 @@ func load_build(path: String = "user://build_save.json") -> bool:
 			migration_message="旧存档已备份，装备、珠宝和技能已保留，旧天赋点已退还。校准碎片已转为物品。待安置物品 %d 件，预算外 %d 点保留记账。"%[pending_items().size(),int(_current.migration_ledger.excess_points_recorded)]
 		if not c_groups.is_empty():migration_message+=" 原绑定C的技能行已改为未绑定："+"、".join(c_groups)
 	return loaded
+
+
+## A replaced profile remains readable for detached UI snapshots, but delayed
+## UI callbacks must not mutate the old file. Each return loads a fresh model.
+func retire_profile()->void:
+	_craft_quotes.clear()
+	_busy=true
 
 
 func crafting_balance() -> int:

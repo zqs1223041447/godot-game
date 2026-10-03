@@ -1425,6 +1425,7 @@ func _world_ok()->Dictionary:return {"ok":true,"code":"","reason":"","world":wor
 func _world_revision_ok(value:Variant)->bool:return value is int and value==_world_revision
 func _replace_build(next:RefCounted,path:String)->void:
 	if state.changed.is_connected(_on_build_changed):state.changed.disconnect(_on_build_changed)
+	state.retire_profile()
 	state=next;build_save_path=path;state.changed.connect(_on_build_changed)
 	_stats=state.get_stats();_progress_hud_dirty=false;_progress_save_dirty=false;_progress_save_requested=false
 	build_state_replaced.emit()
@@ -1439,6 +1440,7 @@ func enter_town_test(expected_revision:Variant)->Dictionary:
 		if test.save_build(TOWN_TEST_BUILD_PATH)!=OK:return _world_failure("test_save_failed",test.last_error)
 	_normal_state=state;_world_mode="town";_world_revision+=1
 	_replace_build(test,TOWN_TEST_BUILD_PATH);_map_run.clear();_clear_encounter();restart_run();world_context_changed.emit()
+	if test.migrated_from_legacy:hud.notify(test.migration_message)
 	return _world_ok()
 func leave_town_test(expected_revision:Variant)->Dictionary:
 	if not _world_revision_ok(expected_revision) or _world_mode!="town":return _world_failure("stale_world","请先返回城镇")
@@ -1447,6 +1449,7 @@ func leave_town_test(expected_revision:Variant)->Dictionary:
 	if not normal.load_build(NORMAL_BUILD_PATH):return _world_failure("normal_save_invalid",normal.last_error)
 	_world_mode="normal";_world_revision+=1;_map_run.clear();_clear_encounter()
 	_replace_build(normal,NORMAL_BUILD_PATH);_normal_state=null;restart_run();world_context_changed.emit()
+	if normal.migrated_from_legacy:hud.notify(normal.migration_message)
 	return _world_ok()
 func town_services()->Array[Dictionary]:
 	var rows:=TownCatalog.services()
