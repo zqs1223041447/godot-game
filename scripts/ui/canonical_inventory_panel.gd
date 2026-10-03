@@ -133,9 +133,11 @@ func _build() -> void:
 		target.custom_minimum_size = Vector2(76,48)
 		target.add_theme_font_size_override("font_size",10)
 		target.add_theme_constant_override("outline_size",0)
-		target.add_theme_stylebox_override("normal",DockStyle.inset_slot())
-		target.add_theme_stylebox_override("hover",DockStyle.inset_slot(true))
-		target.add_theme_stylebox_override("pressed",DockStyle.inset_slot(true))
+		# Preserve the approved painted equipment frames and icon-above-name
+		# arrangement; only the surrounding toolbars use the quieter flat style.
+		target.add_theme_stylebox_override("normal",ThemeStyle.panel(Color("e9dbc0"),Color("a88b59"),4,1,3))
+		target.add_theme_stylebox_override("hover",ThemeStyle.panel(Color("fff2d5"),Color("ba9759"),4,1,3))
+		target.add_theme_stylebox_override("pressed",ThemeStyle.panel(Color("dfcba3"),Color("987749"),4,1,3))
 		target.pressed.connect(_activate_equipment.bind(slot))
 		target.mouse_entered.connect(_hover_equipment.bind(slot))
 		target.mouse_exited.connect(func(): hover_left.emit())
