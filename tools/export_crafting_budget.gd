@@ -10,11 +10,6 @@ const MARKDOWN_PATH: String = "res://docs/qa/CRAFTING_BUDGET.zh-CN.md"
 const EXAMPLE_SEEDS: Array[int] = [20261003, 20261004]
 const RARITY_ORDER: Array[String] = ["normal", "magic", "rare"]
 const CRAFTABLE_RARITIES: Array[String] = ["magic", "rare"]
-const LEVEL_BANDS: Array[Dictionary] = [
-	{"id": "t1", "minimum": 1, "maximum": 7},
-	{"id": "t2", "minimum": 8, "maximum": 15},
-	{"id": "t3", "minimum": 16, "maximum": 30},
-]
 const SALVAGE_FORMULA: String = "rarity_units + sum(tier) * salvage_units_per_tier"
 const RECALIBRATE_FORMULA: String = "salvage_yield * recalibrate_cost_multiplier"
 
@@ -34,6 +29,13 @@ func _initialize() -> void:
 static func collect() -> Dictionary:
 	var base_ids: Array[String] = Catalog.all_base_ids()
 	var family_ids: Array[String] = Catalog.all_affix_ids()
+	var tier_unlock_levels: Array[int] = []
+	for family_id: String in family_ids:
+		var family: Dictionary = Catalog.affix_definition(family_id)
+		for tier: Dictionary in family.tiers:
+			tier_unlock_levels.append(int(tier.level))
+	var level_bands: Array[Dictionary] = _derive_level_bands_from_unlocks(
+		tier_unlock_levels, Catalog.MIN_ITEM_LEVEL, Catalog.MAX_ITEM_LEVEL)
 	var metadata: Dictionary = Craft.metadata()
 	assert(metadata.rules_version == Craft.RULES_VERSION)
 	assert(metadata.operations.salvage.yield_formula == SALVAGE_FORMULA)
@@ -59,10 +61,11 @@ static func collect() -> Dictionary:
 		var pool_id: String = Catalog.pool_for_base(base_id)
 		var pool: Dictionary = Catalog.pool_profile(pool_id)
 		for item_level: int in range(Catalog.MIN_ITEM_LEVEL, Catalog.MAX_ITEM_LEVEL + 1):
-			var band: Dictionary = _level_band(item_level)
+			var band: Dictionary = _level_band(item_level, level_bands)
+			assert(not band.is_empty(), "Every modeled item level must map to one tier-unlock band")
 			for rarity: String in RARITY_ORDER:
 				if rarity == "normal":
-					matrix.append(_normal_row(base_id, item_level))
+					matrix.append(_normal_row(base_id, item_level, band))
 					continue
 				var cache_key: String = "%s|%s|%s" % [base_id, band.id, rarity]
 				if not cache.has(cache_key):
@@ -115,7 +118,7 @@ static func collect() -> Dictionary:
 		"analysis": {
 			"exact_enumeration": true,
 			"enumeration_runs": enumeration_runs,
-			"distinct_tier_unlock_bands": LEVEL_BANDS,
+			"distinct_tier_unlock_bands": level_bands,
 			"family_subset_masks_tested_across_distinct_bands": total_subset_masks,
 			"legal_family_sets_across_distinct_bands": total_legal_family_sets,
 			"legal_tier_assignments_covered_by_analytic_endpoints": total_tier_assignments,
@@ -134,11 +137,38 @@ static func collect() -> Dictionary:
 	}
 
 
-static func _level_band(item_level: int) -> Dictionary:
-	for band: Dictionary in LEVEL_BANDS:
+static func _derive_level_bands_from_unlocks(unlock_levels: Array[int], minimum_level: int,
+		maximum_level: int) -> Array[Dictionary]:
+	assert(minimum_level <= maximum_level)
+	var starts: Dictionary = {minimum_level: true}
+	for unlock_level: int in unlock_levels:
+		if unlock_level >= minimum_level and unlock_level <= maximum_level:
+			starts[unlock_level] = true
+	var ordered_starts: Array[int] = []
+	for value: Variant in starts.keys():
+		ordered_starts.append(int(value))
+	ordered_starts.sort()
+	var result: Array[Dictionary] = []
+	for index: int in range(ordered_starts.size()):
+		var start: int = ordered_starts[index]
+		var end: int = maximum_level if index == ordered_starts.size() - 1 else ordered_starts[index + 1] - 1
+		result.append({"id": "t%d" % (index + 1), "minimum": start, "maximum": end})
+	return result
+
+
+static func _level_band(item_level: int, level_bands: Array[Dictionary]) -> Dictionary:
+	for band: Dictionary in level_bands:
 		if item_level >= int(band.minimum) and item_level <= int(band.maximum):
 			return band
 	return {}
+
+
+static func _unlocked_tiers_at_level(tiers: Array, item_level: int) -> Array[Dictionary]:
+	var result: Array[Dictionary] = []
+	for tier: Dictionary in tiers:
+		if int(tier.level) <= item_level:
+			result.append(tier)
+	return result
 
 
 static func _enumerate_band(base_id: String, representative_level: int, rarity: String,
@@ -148,10 +178,7 @@ static func _enumerate_band(base_id: String, representative_level: int, rarity: 
 		if not profile_family_ids.has(family_id) or not Catalog.family_eligible(family_id, base_id):
 			continue
 		var family: Dictionary = Catalog.affix_definition(family_id)
-		var unlocked: Array[Dictionary] = []
-		for tier: Dictionary in family.tiers:
-			if int(tier.level) <= representative_level:
-				unlocked.append(tier)
+		var unlocked: Array[Dictionary] = _unlocked_tiers_at_level(family.tiers, representative_level)
 		if not unlocked.is_empty():
 			candidates.append({"id": family_id, "kind": family.kind, "group": family.group, "tiers": unlocked})
 
@@ -305,7 +332,7 @@ static func _affix_tiers(instance: Dictionary) -> Array[Dictionary]:
 	return result
 
 
-static func _normal_row(base_id: String, item_level: int) -> Dictionary:
+static func _normal_row(base_id: String, item_level: int, band: Dictionary) -> Dictionary:
 	var item: Dictionary = {"id": "gear_000001", "base_id": base_id, "rarity": "normal",
 		"item_level": item_level, "affixes": []}
 	assert(Catalog.validate_instance(item))
@@ -317,7 +344,7 @@ static func _normal_row(base_id: String, item_level: int) -> Dictionary:
 		"base_id": base_id,
 		"item_level": item_level,
 		"rarity": "normal",
-		"tier_unlock_band": _level_band(item_level).id,
+		"tier_unlock_band": band.id,
 		"craftable": false,
 		"reason_code": salvage.code,
 		"reason": salvage.reason,
@@ -503,6 +530,14 @@ static func _rejection_summary(result: Dictionary) -> Dictionary:
 
 static func render_markdown(report: Dictionary) -> String:
 	var lines: PackedStringArray = []
+	var level_bands: Array = report.analysis.distinct_tier_unlock_bands
+	var band_ranges: Array[String] = []
+	var applicable_pair_count: int = 0
+	for band: Dictionary in level_bands:
+		band_ranges.append("%d–%d" % [band.minimum, band.maximum])
+	for pair: Dictionary in report.family_eligibility_matrix:
+		if pair.applicable:
+			applicable_pair_count += 1
 	lines.append("# 回收与数值校准预算核算")
 	lines.append("")
 	lines.append("本报告由 `tools/export_crafting_budget.gd` 从 `EquipmentCatalog` 与 `CraftingRules` 生成；规则版本：`%s`，装备目录词汇版本：`%d`，游戏版本：`%s`。这是现有原型规则的核算，不实现或定价任何新工艺。" % [report.rules_version, report.catalog_vocabulary, report.game_version])
@@ -510,8 +545,8 @@ static func render_markdown(report: Dictionary) -> String:
 	lines.append("## 覆盖范围与证明口径")
 	lines.append("")
 	lines.append("- 完整矩阵枚举 **%d 个底材 × %d 个物品等级（%d–%d）× %d 种稀有度 = %d 行**；普通、魔法、稀有各覆盖全部底材和等级。" % [report.domain.base_count, Catalog.MAX_ITEM_LEVEL - Catalog.MIN_ITEM_LEVEL + 1, Catalog.MIN_ITEM_LEVEL, Catalog.MAX_ITEM_LEVEL, RARITY_ORDER.size(), report.domain.matrix_rows])
-	lines.append("- 词族资格矩阵枚举 **%d 底材 × %d 词族 = %d 对**。记录分别给出目录槽位资格、所在生成池许可、可出现稀有度与物品等级段，以及每个 tier 的解锁等级。" % [report.domain.base_count, report.domain.family_count, report.domain.family_eligibility_rows])
-	lines.append("- 魔法/稀有预算对 1/8/16 三个 tier 解锁阶段的每种合法词族集合做完整子集枚举；枚举 %d 个集合位掩码，%d 个合法族集合及其 %d 种可用 tier 指派。合法见证逐个通过目录验证，再由 `CraftingRules.salvage_quote()` 取回收量、`recalibrate_plan()` 取校准成本。" % [report.analysis.family_subset_masks_tested_across_distinct_bands, report.analysis.legal_family_sets_across_distinct_bands, report.analysis.legal_tier_assignments_covered_by_analytic_endpoints])
+	lines.append("- 底材/词族全配对矩阵有 **%d 行**（%d × %d）；其中当前目录与生成池同时允许的实际适用组合为 **%d 对**，其余行明确标记不适用。记录还给出可出现稀有度、等级段和每个 tier 的解锁等级。" % [report.domain.family_eligibility_rows, report.domain.base_count, report.domain.family_count, applicable_pair_count])
+	lines.append("- 魔法/稀有预算按实际 tier 解锁等级派生的 %d 个等级段（%s），对每段每种合法词族集合做完整子集枚举；枚举 %d 个集合位掩码、%d 个合法族集合及其 %d 种可用 tier 指派。合法见证逐个通过目录验证，再由 `CraftingRules.salvage_quote()` 取回收量、`recalibrate_plan()` 取校准成本。" % [level_bands.size(), "、".join(band_ranges), report.analysis.family_subset_masks_tested_across_distinct_bands, report.analysis.legal_family_sets_across_distinct_bands, report.analysis.legal_tier_assignments_covered_by_analytic_endpoints])
 	lines.append("- 数值上下界对每个合法族集合按现有可用 tier 的独立加和规则解析；全部端点见证均经真实规则报价。词缀掷值不参与回收或校准数量，因此没有枚举掷值组合，也没有用随机种子证明边界。")
 	lines.append("- 两个固定种子样例只用于复现具体校准输出；不代表概率、期望收益或经济上界。普通白装在完整 270 项底材/等级矩阵中逐项验证，现有规则均以 `no_affixes` 拒绝回收和校准。")
 	lines.append("")
@@ -523,12 +558,12 @@ static func render_markdown(report: Dictionary) -> String:
 	lines.append("")
 	lines.append("## 每个底材的完整等级段预算区间")
 	lines.append("")
-	lines.append("每段对应当前装备目录的 tier 可用集合：物品等级 1–7、8–15、16–30。区间覆盖该段全部合法词族组合与各可用阶级；校准成本端点直接由相同源实例的 `recalibrate_plan()` 取得。完整 810 行与逐行见证在 [JSON 矩阵](crafting-budget.json)。")
+	lines.append("每段对应当前装备目录的 tier 可用集合：物品等级 %s。区间覆盖该段全部合法词族组合与各可用阶级；校准成本端点直接由相同源实例的 `recalibrate_plan()` 取得。完整 810 行与逐行见证在 [JSON 矩阵](crafting-budget.json)。" % "、".join(band_ranges))
 	lines.append("")
 	lines.append("| 底材 | 等级段 | 魔法回收量 | 魔法校准成本 | 稀有回收量 | 稀有校准成本 |")
 	lines.append("|---|---:|---:|---:|---:|---:|")
 	for base: Dictionary in report.budget_summary.by_base:
-		for band: Dictionary in LEVEL_BANDS:
+		for band: Dictionary in level_bands:
 			var magic: Dictionary = _range_for_band(report.economy_matrix, base.base_id, "magic", band)
 			var rare: Dictionary = _range_for_band(report.economy_matrix, base.base_id, "rare", band)
 			lines.append("| %s (`%s`) | %d–%d | %d–%d | %d–%d | %d–%d | %d–%d |" % [base.name, base.base_id,

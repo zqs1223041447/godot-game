@@ -36,6 +36,7 @@ func _run() -> void:
 	_expect(Exporter.render_markdown(report) == Exporter.render_markdown(repeated),
 		"Repeated Markdown rendering is deterministic")
 	_check_domain(report)
+	_check_unlock_band_derivation(report)
 	_check_family_matrix(report)
 	_check_economy_matrix(report)
 	_check_examples(report)
@@ -60,15 +61,62 @@ func _check_domain(report: Dictionary) -> void:
 	_expect(report.domain.matrix_rows == EXPECTED_BASES * 30 * 3 and report.economy_matrix.size() == 810,
 		"Full 9 x 30 x 3 base/level/rarity matrix is present")
 	_expect(report.family_eligibility_matrix.size() == EXPECTED_BASES * EXPECTED_FAMILIES,
-		"All 171 base/family eligibility pairs are present")
-	_expect(report.analysis.exact_enumeration and report.analysis.enumeration_runs == 54,
-		"Three unlock bands are exhaustively enumerated for both craftable rarities across nine bases")
+		"All 171 base/family combination rows are present")
+	var applicable_pairs: int = 0
+	for pair: Dictionary in report.family_eligibility_matrix:
+		if pair.applicable:
+			applicable_pairs += 1
+	_expect(applicable_pairs == 91,
+		"The 171-row matrix distinguishes its 91 actually applicable base/family pairs")
+	var band_count: int = report.analysis.distinct_tier_unlock_bands.size()
+	_expect(report.analysis.exact_enumeration and report.analysis.enumeration_runs == EXPECTED_BASES * band_count * 2,
+		"Every derived unlock band is exhaustively enumerated for both craftable rarities across all bases")
 	_expect(report.analysis.bounds_depend_on_seed == false and report.analysis.roll_value_assignments_enumerated == false,
 		"Bounds are explicitly distinguished from seed examples and value-tick combinations")
 	_expect(report.analysis.sample_examples == 2 and report.analysis.example_records == 3,
 		"Two fixed-seed success examples are distinguished from the white-item rejection fixture")
 	_expect(report.analysis.legal_tier_assignments_covered_by_analytic_endpoints > 0,
 		"Tier assignments are covered by the exact endpoint calculation")
+
+
+func _check_unlock_band_derivation(report: Dictionary) -> void:
+	var catalog_unlocks: Array[int] = []
+	for family_id: String in Catalog.all_affix_ids():
+		var family: Dictionary = Catalog.affix_definition(family_id)
+		for tier: Dictionary in family.tiers:
+			catalog_unlocks.append(int(tier.level))
+	var live_bands: Array[Dictionary] = Exporter._derive_level_bands_from_unlocks(
+		catalog_unlocks, Catalog.MIN_ITEM_LEVEL, Catalog.MAX_ITEM_LEVEL)
+	_expect(live_bands == report.analysis.distinct_tier_unlock_bands,
+		"Exported segments are derived from every live family tier unlock")
+
+	var middle_gate_fixture: Array[int] = [1, 8, 12, 16]
+	var fixture_bands: Array[Dictionary] = Exporter._derive_level_bands_from_unlocks(
+		middle_gate_fixture, Catalog.MIN_ITEM_LEVEL, Catalog.MAX_ITEM_LEVEL)
+	var expected_ranges: Array = [[1, 7], [8, 11], [12, 15], [16, 30]]
+	_expect(fixture_bands.size() == expected_ranges.size(),
+		"A controlled ilvl 12 tier gate adds its own distinct band")
+	for index: int in range(mini(fixture_bands.size(), expected_ranges.size())):
+		_expect(fixture_bands[index].minimum == expected_ranges[index][0]
+			and fixture_bands[index].maximum == expected_ranges[index][1],
+			"Intermediate unlock fixture has exact contiguous bounds at index %d" % index)
+	for item_level: int in [1, 7, 8, 11, 12, 15, 16, 30]:
+		var band: Dictionary = Exporter._level_band(item_level, fixture_bands)
+		_expect(not band.is_empty() and item_level >= band.minimum and item_level <= band.maximum,
+			"Fixture level %d maps to exactly one derived band" % item_level)
+	var fixture_tiers: Array[Dictionary] = [
+		{"tier": 1, "level": 1}, {"tier": 2, "level": 8},
+		{"tier": 3, "level": 12}, {"tier": 4, "level": 16},
+	]
+	var before_middle_gate: Array[Dictionary] = Exporter._unlocked_tiers_at_level(fixture_tiers, 11)
+	var at_middle_gate: Array[Dictionary] = Exporter._unlocked_tiers_at_level(fixture_tiers, 12)
+	_expect(before_middle_gate.size() == 2 and before_middle_gate.back().tier == 2,
+		"The fixture keeps a tier locked immediately below the intermediate gate")
+	_expect(at_middle_gate.size() == 3 and at_middle_gate.back().tier == 3,
+		"The same fixture unlocks its tier exactly at the intermediate gate")
+	_expect(Exporter._level_band(0, fixture_bands).is_empty()
+		and Exporter._level_band(31, fixture_bands).is_empty(),
+		"Levels outside the modeled domain do not map to a band")
 
 
 func _check_family_matrix(report: Dictionary) -> void:
