@@ -18,7 +18,7 @@ const COLUMNS: int = 12
 const ROWS: int = 8
 const MAX_CELL_SIZE: float = 64.0
 const EDGE_INSET: float = 8.0
-const ENTRY_KINDS: Array[String] = ["equipment", "jewel", "skill_gem", "support_gem", "currency"]
+const ENTRY_KINDS: Array[String] = ["equipment", "jewel", "skill_gem", "support_gem", "currency", "flask"]
 const ICON_ENTRY_KINDS: Array[String] = ["skill_gem", "support_gem"]
 
 const PAPER := Color("f8ecd0")
@@ -220,6 +220,9 @@ func _draw_entry(entry: Dictionary) -> void:
 	if art_box.has_area():
 		if str(entry["kind"]) == "currency":
 			_draw_currency_stack(art_box,box,int(entry["art"].get("quantity",0)))
+		elif str(entry["kind"]) == "flask":
+			if icon is Texture2D:
+				draw_texture_rect(icon,GemIconLayout.aspect_fit_rect(icon.get_size(),art_box),false)
 		elif _is_icon_entry(str(entry["kind"])):
 			if icon is Texture2D:
 				var fit: Rect2 = GemIconLayout.image_fit_rect(box.size, icon.get_size())
