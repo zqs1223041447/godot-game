@@ -10,7 +10,7 @@
 
 [源树执行边界](docs/SOURCE_TREE_RUNTIME.zh-CN.md) · [重构协议](docs/RESTRUCTURE_PROTOCOL.zh-CN.md) · [离线图鉴](docs/reference/index.html) · [全图实景](docs/qa/m3/source-tree-overview-ui110-font120.png)
 
-当前已完成定向和Linux原生画面检查；最终整批/导出验收正在收口。Windows成品鼠键、1440p硬件60FPS/P99目标和HTML浏览器交互尚未完成，不能由软件渲染成绩替代。
+本批全部111个Godot门槛已通过，计数2,378,485项，另有99项Linux存档路径、21项字体Python与8项源树导入测试通过；3748锚点、16599链接与58张图鉴图片静态核对通过。验收在修正旧夹具后从失败点续跑，保留失败原日志；不是宣称首次整条命令无失败。唯一生产修复是旧BuildState缓存纳入机制注册表修订，已定向重跑182项缓存、14项场景缓存及1365项共享机制，并继续全部后段门槛。600秒历史装备模拟只运行一次，3926有效击杀、118件装备。[最终证据说明](docs/qa/M021_PLAYABLE_VALIDATION.zh-CN.md)。Windows成品鼠键、1440p硬件60FPS/P99目标和HTML浏览器交互尚未完成，不能由软件渲染成绩替代。
 
 
 以 **构筑与技能组合** 为核心的俯视平面竞技场。基于 **Godot 4.6.3 标准版 / GDScript**，目标平台 **Windows x86_64**。
