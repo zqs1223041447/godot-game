@@ -14,7 +14,8 @@ func _initialize() -> void:
 func _run() -> void:
 	_test_shortcuts_and_toggles()
 	_test_echo_release_and_unknown()
-	_test_escape_pause_and_close()
+	_test_escape_pause_switch_and_close()
+	_test_settings_request()
 	print("Menu route state: %d checks, %d failures" % [checks, failures])
 	quit(0 if failures == 0 else 1)
 
@@ -34,6 +35,8 @@ func _state(router: RefCounted, window: String, paused: bool) -> void:
 
 func _expect_transition(result: Dictionary, action: String, window: String, paused: bool) -> void:
 	_expect(result.has_all(["action", "changed", "window", "paused"]), "Transition returns the documented fields")
+	_expect(not result.has("windows") and result.window is String,
+		"Public state reports exactly one root window ID")
 	_expect(result.action == action and result.changed == (action != MenuRouteState.ACTION_UNCHANGED),
 		"Transition action and changed flag match: " + action)
 	_expect(result.window == window and result.paused == paused,
@@ -74,18 +77,40 @@ func _test_echo_release_and_unknown() -> void:
 	_state(empty_router, MenuRouteState.WINDOW_NONE, false)
 
 
-func _test_escape_pause_and_close() -> void:
+func _test_escape_pause_switch_and_close() -> void:
 	var router: RefCounted = MenuRouteState.new()
-	_expect_transition(router.handle_key(KEY_ESCAPE), MenuRouteState.ACTION_PAUSE,
-		MenuRouteState.WINDOW_NONE, true)
-	_expect_transition(router.handle_key(KEY_F7), MenuRouteState.ACTION_OPEN,
+	_expect_transition(router.handle_key(KEY_ESCAPE), MenuRouteState.ACTION_OPEN,
+		MenuRouteState.WINDOW_PAUSE, true)
+	_expect_transition(router.handle_key(KEY_I), MenuRouteState.ACTION_SWITCH,
+		MenuRouteState.WINDOW_INVENTORY, true)
+	_expect_transition(router.handle_key(KEY_ESCAPE), MenuRouteState.ACTION_CLOSE,
+		MenuRouteState.WINDOW_NONE, false)
+	_expect_transition(router.handle_key(KEY_ESCAPE), MenuRouteState.ACTION_OPEN,
+		MenuRouteState.WINDOW_PAUSE, true)
+	_expect_transition(router.handle_key(KEY_F7), MenuRouteState.ACTION_SWITCH,
 		MenuRouteState.WINDOW_DEBUG_MONSTERS, true)
 	_expect_transition(router.handle_key(KEY_ESCAPE), MenuRouteState.ACTION_CLOSE,
-		MenuRouteState.WINDOW_NONE, true)
-	_expect_transition(router.handle_key(KEY_ESCAPE), MenuRouteState.ACTION_RESUME,
 		MenuRouteState.WINDOW_NONE, false)
 	_expect_transition(router.handle_key(KEY_T), MenuRouteState.ACTION_OPEN,
 		MenuRouteState.WINDOW_PASSIVE_TREE, true)
 	_expect_transition(router.handle_key(KEY_ESCAPE), MenuRouteState.ACTION_CLOSE,
 		MenuRouteState.WINDOW_NONE, false)
 	_state(router, MenuRouteState.WINDOW_NONE, false)
+
+
+func _test_settings_request() -> void:
+	var router: RefCounted = MenuRouteState.new()
+	_expect_transition(router.request_window(MenuRouteState.WINDOW_SETTINGS), MenuRouteState.ACTION_OPEN,
+		MenuRouteState.WINDOW_SETTINGS, true)
+	_expect_transition(router.handle_key(KEY_ESCAPE), MenuRouteState.ACTION_CLOSE,
+		MenuRouteState.WINDOW_NONE, false)
+	_expect_transition(router.request_window(MenuRouteState.WINDOW_PAUSE), MenuRouteState.ACTION_OPEN,
+		MenuRouteState.WINDOW_PAUSE, true)
+	_expect_transition(router.request_window(MenuRouteState.WINDOW_SETTINGS), MenuRouteState.ACTION_SWITCH,
+		MenuRouteState.WINDOW_SETTINGS, true)
+	_expect_transition(router.request_window(MenuRouteState.WINDOW_SETTINGS), MenuRouteState.ACTION_UNCHANGED,
+		MenuRouteState.WINDOW_SETTINGS, true)
+	_expect_transition(router.request_window(MenuRouteState.WINDOW_SETTINGS, true), MenuRouteState.ACTION_CLOSE,
+		MenuRouteState.WINDOW_NONE, false)
+	_expect_transition(router.request_window("unknown"), MenuRouteState.ACTION_UNCHANGED,
+		MenuRouteState.WINDOW_NONE, false)
