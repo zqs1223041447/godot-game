@@ -799,7 +799,7 @@ func _set_vital(key: String, value: float, maximum: float) -> void:
 	bar.max_value = maxf(1.0, maximum)
 	bar.value = value
 	var caption: Label = _bar_values[key] as Label
-	caption.text = "%d / %d" % [int(ceilf(value)), int(maximum)]
+	caption.text = "%d / %d" % [int(ceilf(value)), int(ceilf(maximum))]
 
 
 func _rebuild_panel() -> void:
