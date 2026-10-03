@@ -85,14 +85,14 @@ func _initialize() -> void:
 	_ids(current.passives, Passives.get_nodes().keys(), "all original nodes")
 	_ids(current.mechanisms, Registry.get_ids(), "all shared mechanisms")
 	_ids(current.monsters, Monsters.TEMPLATES.keys(), "all monster templates")
-	_expect(current.skills.size() == 8 and current.supports.size() == 4, "bounded skill inventory")
+	_expect(current.skills.size() == 8 and current.supports.size() == 16, "bounded skill inventory")
 	_expect(current.equipment.size() == 9 and current.affixes.size() == 19, "bounded equipment inventory")
 	_expect(current.passives.size() == 181 and current.special_coverage.size() == 12, "complete tree and socket coverage")
 	for skill_id: String in current.skills:
 		var skill: Dictionary = current.skills[skill_id]
 		_expect(skill.compatible_supports == Supports.supports_for_skill(skill_id), "runtime compatibility " + skill_id)
 		for config: String in ["fresh", "full_tornado", "local_normal", "local_max"]:
-			_expect(skill.examples[config].size() == (7 if skill_id in ["bolt", "frost"] else 4 if skill_id == "tornado" else 2 if skill_id in ["nova", "meteor"] else 1), "all support combinations " + skill_id + "/" + config)
+			_expect(skill.examples[config].size() == Exporter.support_combinations(skill.compatible_supports).size(), "all support combinations " + skill_id + "/" + config)
 	_expect(current.configurations.fresh.equipped.weapon == "ember_wand", "fresh build does not assume mechanism bow")
 	_expect(current.configurations.full_tornado.equipped.weapon == "prism_bow", "full example explicitly equips mechanism bow")
 	_expect(current.sources.passive.version == "3.29.1", "passive source preserved")

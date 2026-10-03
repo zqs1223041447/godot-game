@@ -5,6 +5,18 @@ var skill_id: String = "bolt"
 var accent := Color("ba9148")
 var subdued: bool = false
 const ICONS: Dictionary = {
+	"efficiency":preload("res://assets/ui/grimoire/efficiency.png"),
+	"quickcast":preload("res://assets/ui/grimoire/quickcast.png"),
+	"physical_focus":preload("res://assets/ui/grimoire/physical_focus.png"),
+	"fire_focus":preload("res://assets/ui/grimoire/fire_focus.png"),
+	"cold_focus":preload("res://assets/ui/grimoire/cold_focus.png"),
+	"lightning_focus":preload("res://assets/ui/grimoire/lightning_focus.png"),
+	"swift_projectiles":preload("res://assets/ui/grimoire/swift_projectiles.png"),
+	"heavy_projectiles":preload("res://assets/ui/grimoire/heavy_projectiles.png"),
+	"lingering_chill":preload("res://assets/ui/grimoire/lingering_chill.png"),
+	"chain_extension":preload("res://assets/ui/grimoire/chain_extension.png"),
+	"chain_reach":preload("res://assets/ui/grimoire/chain_reach.png"),
+
 	"tornado":preload("res://assets/ui/grimoire/tornado.png"),
 	"bolt":preload("res://assets/ui/grimoire/bolt.png"),
 	"frost":preload("res://assets/ui/grimoire/frost.png"),
@@ -15,6 +27,7 @@ const ICONS: Dictionary = {
 	"chain":preload("res://assets/ui/grimoire/chain.png"),
 	"volley":preload("res://assets/ui/grimoire/volley.png"),
 	"focus":preload("res://assets/ui/grimoire/focus.png"),
+	"concentrate":preload("res://assets/ui/grimoire/concentrate.png"),
 	"breadth":preload("res://assets/ui/grimoire/breadth.png"),
 	"pierce":preload("res://assets/ui/grimoire/pierce.png"),
 }

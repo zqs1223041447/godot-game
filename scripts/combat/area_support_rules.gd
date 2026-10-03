@@ -1,13 +1,14 @@
 class_name AreaSupportRules
 extends RefCounted
-## One bounded extension. Geometric area is multiplied; radius uses its square root.
+## Two opposed, bounded extensions. Geometric area is multiplied; radius uses its square root.
 ## No RNG, saved-state writes, projectiles, independent explosions or enemy attacks.
 const Data = preload("res://scripts/game_data.gd")
 const Legacy = preload("res://scripts/combat/support_catalog.gd")
 const RECIPE_SKILLS: Array[String] = ["nova", "meteor"]
 const OPERATIONS: Array[String] = ["area_multiplier", "area_hit_more", "mana_multiplier"]
 const MAX_RADIUS: float = 500.0
-const SAVE_VERSION: int = 12
+const SAVE_VERSIONS: Dictionary = {"breadth": 12, "concentrate": 13}
+const DIRECTIONS: Dictionary = {"breadth": 1, "concentrate": -1}
 const SUPPORTS: Dictionary = {
 	"breadth": {
 		"name": "广域辅助",
@@ -19,16 +20,26 @@ const SUPPORTS: Dictionary = {
 			{"op": "mana_multiplier", "value": 1.20},
 		],
 	},
+	"concentrate": {
+		"name": "凝域辅助",
+		"description": "新星与陨星：面积 ×0.64（半径 ×0.80），命中伤害总增 25%，魔力 ×1.20；冷却不变。",
+		"skills": ["nova", "meteor"], "requires": ["area_hit"],
+		"operations": [
+			{"op": "area_multiplier", "value": 0.64},
+			{"op": "area_hit_more", "value": 0.25},
+			{"op": "mana_multiplier", "value": 1.20},
+		],
+	},
 }
 
 static func get_definition(id: String) -> Dictionary:
-	if not SUPPORTS.has(id) or not definition_error(SUPPORTS[id]).is_empty():
+	if not SUPPORTS.has(id) or not definition_error(SUPPORTS[id], int(DIRECTIONS[id])).is_empty():
 		return {}
 	return SUPPORTS[id].duplicate(true)
 
 static func compile_area(skill_id: Variant, recipe: Variant, support_ids: Variant) -> Dictionary:
 	if not skill_id is String or not RECIPE_SKILLS.has(skill_id) or not Data.SKILLS.has(skill_id):
-		return _failure("广域仅适配新星与陨星")
+		return _failure("范围辅助仅适配新星与陨星")
 	if not recipe is Dictionary or recipe.size() != 1 or not recipe.has("radius") or not _number(recipe.radius) or float(recipe.radius) <= 0.0 or float(recipe.radius) > MAX_RADIUS:
 		return _failure("范围配方无效或已经编译")
 	if not support_ids is Array or support_ids.size() > Legacy.MAX_SUPPORTS:
@@ -40,7 +51,7 @@ static func compile_area(skill_id: Variant, recipe: Variant, support_ids: Varian
 		if seen.has(id):
 			return _failure("同一技能不能重复装配辅助")
 		seen[id] = true
-		var error: String = definition_error(SUPPORTS[id])
+		var error: String = definition_error(SUPPORTS[id], int(DIRECTIONS[id]))
 		if not error.is_empty():
 			return _failure(error)
 		if not SUPPORTS[id].skills.has(skill_id):
@@ -69,7 +80,9 @@ static func compile_area(skill_id: Variant, recipe: Variant, support_ids: Varian
 		result.area_multiplier = multiplier
 	return {"error": "", "recipe": result, "modifiers": modifiers, "mana_multiplier": mana}
 
-static func definition_error(value: Variant) -> String:
+static func definition_error(value: Variant, direction: int = 0) -> String:
+	if direction not in [-1, 0, 1]:
+		return "范围辅助方向无效"
 	if not value is Dictionary or value.size() != 5 or not value.has_all(["name", "description", "skills", "requires", "operations"]):
 		return "范围辅助元数据结构无效"
 	if not value.name is String or value.name.is_empty() or not value.description is String or value.description.is_empty():
@@ -79,6 +92,8 @@ static func definition_error(value: Variant) -> String:
 	if not value.operations is Array or value.operations.size() != OPERATIONS.size():
 		return "范围辅助操作列表无效"
 	var seen: Dictionary = {}
+	var area: float = 1.0
+	var hit: float = 0.0
 	for operation: Variant in value.operations:
 		if not operation is Dictionary or operation.size() != 2 or not operation.has_all(["op", "value"]):
 			return "范围辅助操作结构无效"
@@ -87,14 +102,18 @@ static func definition_error(value: Variant) -> String:
 		seen[operation.op] = true
 		match operation.op:
 			"area_multiplier":
-				if float(operation.value) <= 1.0 or float(operation.value) > 4.0:
+				area = float(operation.value)
+				if area < 0.25 or area > 4.0 or area == 1.0:
 					return "面积倍率无效"
 			"area_hit_more":
-				if float(operation.value) <= -1.0 or float(operation.value) >= 0.0:
+				hit = float(operation.value)
+				if hit <= -1.0 or hit > 1.0 or hit == 0.0:
 					return "范围命中代价无效"
 			"mana_multiplier":
 				if float(operation.value) < 1.0 or float(operation.value) > 10.0:
 					return "魔力倍率无效"
+	if (area - 1.0) * hit >= 0.0 or (direction != 0 and signf(area - 1.0) != float(direction)):
+		return "面积与命中必须有相反取舍"
 	return ""
 
 static func _number(value: Variant) -> bool:

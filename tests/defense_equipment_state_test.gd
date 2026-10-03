@@ -109,7 +109,7 @@ func _roundtrip_and_awards() -> void:
 	_expect(state.get_stats().fire_resistance == 0.0 and state.equip(id), "Unworn armor grants no resistance; equip succeeds")
 	_expect(is_equal_approx(state.get_stats().fire_resistance, Catalog.get_stats(expected).fire_resistance), "Equipped armor reaches actual player stats")
 	var snapshot: Dictionary = state._snapshot()
-	_expect(Model.SAVE_VERSION == 12 and snapshot.size() == 17 and snapshot.equipment_instances[id].size() == 5, "Current schema retains the exact 17-field save and five-field item schemas")
+	_expect(Model.SAVE_VERSION == 13 and snapshot.size() == 17 and snapshot.equipment_instances[id].size() == 5, "Current schema retains the exact 17-field save and five-field item schemas")
 	var path: String = "user://defense_v8.json"
 	_expect(state.save_build(path) == OK, "New defense gear saves")
 	var restored := Model.new()

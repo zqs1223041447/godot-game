@@ -10,6 +10,7 @@ const BaseCompiler = preload("res://scripts/combat/damage_base_compiler.gd")
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
 const Weapon = preload("res://scripts/items/weapon_local_rules.gd")
 const MAX_INITIAL_PROJECTILES: int = 9
+const MAX_CHAIN_TARGETS: int = 8
 
 
 static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: Array) -> Dictionary:
@@ -43,6 +44,11 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 		error = _hit_recipe_error(skill.get("hit_recipe"), skill_id == "chain")
 		if not error.is_empty():
 			return _failure(error)
+	if skill_id == "chain":
+		var targeting: Variant = skill.get("targeting_recipe")
+		if not targeting is Dictionary or targeting.size() != 2 or not _number(targeting.get("first_range")) or not _number(targeting.get("followup_range")):
+			return _failure("连锁寻敌配方无效")
+		recipe = {"hit": skill.hit_recipe.duplicate(true), "first_range": float(targeting.first_range), "followup_range": float(targeting.followup_range)}
 	var canonical: Array[String] = []
 	for id: String in support_ids:
 		canonical.append(id)
@@ -52,7 +58,7 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 	var has_extension: bool = false
 	# Compatibility validates every definition before this execution stage.
 	for id: String in canonical:
-		if Area.SUPPORTS.has(id):
+		if Area.SUPPORTS.has(id) or Supports.is_program_support(id):
 			continue
 		if Extension.SUPPORTS.has(id):
 			has_extension = true
@@ -77,32 +83,51 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 		recipe.initial_count = initial_count
 		compiled_snapshot.initial_count = initial_count
 	if has_extension:
-		var extension: Dictionary = Extension.compile_extension(skill_id, recipe, canonical)
+		var extension: Dictionary = Extension.compile_extension(skill_id, recipe, Supports.select_owned(canonical, Extension.SUPPORTS))
 		if not extension.error.is_empty():
 			return _failure(extension.error)
 		recipe = extension.recipe
 		compiled_snapshot.modifiers.append_array(extension.modifiers)
 		mana *= float(extension.mana_multiplier)
 	if skill_id in Area.RECIPE_SKILLS:
-		var area: Dictionary = Area.compile_area(skill_id, skill.get("area_recipe"), canonical)
+		var area: Dictionary = Area.compile_area(skill_id, skill.get("area_recipe"), Supports.select_owned(canonical, Area.SUPPORTS))
 		if not area.error.is_empty():
 			return _failure(area.error)
 		recipe = area.recipe
 		compiled_snapshot.modifiers.append_array(area.modifiers)
 		mana *= float(area.mana_multiplier)
+	var program: Dictionary = Supports.compile_programs(skill_id, canonical)
+	if not program.error.is_empty(): return _failure(program.error)
+	compiled_snapshot.modifiers.append_array(program.modifiers)
+	mana *= float(program.mana_multiplier)
+	var cooldown: float = float(skill.cooldown) * float(program.cooldown_multiplier)
+	var factors: Dictionary = program.recipe_factors
+	if skill_id in ["bolt", "frost"]:
+		recipe.speed *= float(factors.get("projectile_speed_multiplier", 1.0))
+		recipe.slow *= float(factors.get("slow_duration_multiplier", 1.0))
+		if not _number(recipe.speed) or float(recipe.speed) <= 0.0 or float(recipe.speed) > 3000.0 or not _number(recipe.slow) or float(recipe.slow) < 0.0 or float(recipe.slow) > 15.0:
+			return _failure("编译后的速度或减速时长无效")
+	if skill_id == "chain":
+		recipe.hit.bounce_count += int(factors.get("chain_extra_targets", 0))
+		recipe.followup_range *= float(factors.get("chain_followup_range_multiplier", 1.0))
+		error = _hit_recipe_error(recipe.hit, true)
+		if not error.is_empty(): return _failure(error)
+		if int(recipe.hit.bounce_count) > MAX_CHAIN_TARGETS or not _number(recipe.first_range) or not _number(recipe.followup_range) or float(recipe.first_range) <= 0.0 or float(recipe.first_range) > 1000.0 or float(recipe.followup_range) <= 0.0 or float(recipe.followup_range) > 1000.0:
+			return _failure("编译后的连锁目标或距离无效")
+	if not is_finite(cooldown) or cooldown <= 0.0: return _failure("编译后的冷却无效")
 	if not is_finite(mana):
 		return _failure("编译后的魔力消耗无效")
-	var packets: Dictionary = _compile_packets(skill_id, compiled_snapshot)
+	var packets: Dictionary = _compile_packets(skill_id, compiled_snapshot, recipe)
 	if not skill_id in ["dash", "ward"] and packets.is_empty():
 		return _failure("命中伤害组装无效")
 	compiled_snapshot.compiled_skill_id = skill_id
 	compiled_snapshot.compiled_packets = packets.duplicate(true)
 	return {"ok": true, "error": "", "skill_id": skill_id,
-		"snapshot": compiled_snapshot, "mana": mana, "cooldown": float(skill.cooldown),
+		"snapshot": compiled_snapshot, "mana": mana, "cooldown": cooldown,
 		"initial_count": initial_count, "recipe": recipe, "support_ids": canonical, "packets": packets}
 
 
-static func _compile_packets(skill_id: String, snapshot: Dictionary) -> Dictionary:
+static func _compile_packets(skill_id: String, snapshot: Dictionary, recipe: Dictionary) -> Dictionary:
 	var result: Dictionary = {}
 	var roles: Array[String] = []
 	match skill_id:
@@ -111,8 +136,8 @@ static func _compile_packets(skill_id: String, snapshot: Dictionary) -> Dictiona
 		"nova", "meteor": roles.assign(["direct"])
 		"chain":
 			var bounces: Array[Dictionary] = []
-			for index: int in range(int(Data.SKILLS.chain.hit_recipe.bounce_count)):
-				var packet: Dictionary = Recipes.event_packet(snapshot, skill_id, "bounce", index)
+			for index: int in range(int(recipe.hit.bounce_count)):
+				var packet: Dictionary = Recipes.chain_packet(snapshot, recipe.hit, index)
 				if packet.is_empty():
 					return {}
 				bounces.append(packet)

@@ -24,6 +24,7 @@ var _slot_caption: Label
 var _slot_row: HBoxContainer
 var _add_buttons: Dictionary = {}
 var _reasons: Dictionary = {}
+var _cards: Dictionary = {}
 
 
 func setup(state: BuildState) -> void:
@@ -57,6 +58,7 @@ func setup(state: BuildState) -> void:
 		var definition: Dictionary = Supports.get_definition(support_id)
 		var card: PanelContainer = _card()
 		card.name = "SupportOption_" + support_id
+		_cards[support_id] = card
 		add_child(card)
 		var row: HBoxContainer = HBoxContainer.new()
 		row.add_theme_constant_override("separation", 14)
@@ -80,7 +82,7 @@ func setup(state: BuildState) -> void:
 		add.pressed.connect(_add_support.bind(support_id))
 		row.add_child(add)
 		_add_buttons[support_id] = add
-	add_child(_label("辅助全部可用，同一技能不重复装配；按技能兼容范围生效。辅助随技能保存，交换快捷栏位置不改变配置或已有冷却。", "SupportRules", 13, MUTED))
+	add_child(_label("仅显示当前技能兼容辅助，同一技能不重复装配。辅助随技能保存，交换快捷栏位置不改变配置或已有冷却。", "SupportRules", 13, MUTED))
 
 
 func select_skill(skill_id: String) -> void:
@@ -105,7 +107,11 @@ func refresh() -> void:
 		var count: int = int(cast.get("initial_count", 0))
 		var geometry: String = "初始投射物 %d 枚" % count
 		if selected_skill_id in ["nova", "meteor"]:
-			geometry = "半径 %.0f · 面积 ×%.2f" % [float(cast.recipe.radius), float(cast.recipe.get("area_multiplier", 1.0))]
+			geometry = "半径 %s · 面积 ×%s" % [String.num(float(cast.recipe.radius), 4), String.num(float(cast.recipe.get("area_multiplier", 1.0)), 4)]
+		if selected_skill_id == "chain":
+			geometry = "最多 %d 个目标 · 续跳 %s" % [int(cast.recipe.hit.bounce_count), String.num(float(cast.recipe.followup_range), 4)]
+		elif selected_skill_id in ["dash", "ward"]:
+			geometry = "功能效果不变"
 		_preview_label.text = "当前施放：%.2f 法力  ·  %.2f 秒冷却  ·  %s" % [float(cast.get("mana", 0.0)), float(cast.get("cooldown", 0.0)), geometry]
 		_preview_label.text += "\n" + TypedPreview.summary(cast)
 		_preview_label.tooltip_text = TypedPreview.details(cast)
@@ -115,6 +121,7 @@ func refresh() -> void:
 		_preview_label.tooltip_text = str(cast.get("error", "技能编译失败"))
 		_preview_label.add_theme_color_override("font_color", RED)
 	for support_id: String in _add_buttons:
+		_cards[support_id].visible = Supports.compatibility_reason(selected_skill_id, [support_id]).is_empty()
 		var reason: String = _state.support_reason(selected_skill_id, support_id)
 		if not valid and reason.is_empty():
 			reason = str(cast.get("error", "技能编译失败"))

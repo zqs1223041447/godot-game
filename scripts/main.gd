@@ -118,8 +118,8 @@ func _ready() -> void:
 	if not state.last_load_error.is_empty():
 		hud.open_panel("pause")
 		hud.notify(state.last_load_error)
-	elif state.migrated_from_v1 or state.migrated_from_v2 or state.migrated_from_v3 or state.migrated_from_v4 or state.migrated_from_v5 or state.migrated_from_v6 or state.migrated_from_v7 or state.migrated_from_v8 or state.migrated_from_v9 or state.migrated_from_v10 or state.migrated_from_v11:
-		hud.open_panel("talents" if state.migrated_from_v1 or state.migrated_from_v6 else "skills" if state.migrated_from_v4 or state.migrated_from_v5 or state.migrated_from_v9 or state.migrated_from_v11 else "inventory" if state.migrated_from_v3 or state.migrated_from_v7 or state.migrated_from_v8 or state.migrated_from_v10 else "combat")
+	elif state.migrated_from_v1 or state.migrated_from_v2 or state.migrated_from_v3 or state.migrated_from_v4 or state.migrated_from_v5 or state.migrated_from_v6 or state.migrated_from_v7 or state.migrated_from_v8 or state.migrated_from_v9 or state.migrated_from_v10 or state.migrated_from_v11 or state.migrated_from_v12:
+		hud.open_panel("talents" if state.migrated_from_v1 or state.migrated_from_v6 else "skills" if state.migrated_from_v4 or state.migrated_from_v5 or state.migrated_from_v9 or state.migrated_from_v11 or state.migrated_from_v12 else "inventory" if state.migrated_from_v3 or state.migrated_from_v7 or state.migrated_from_v8 or state.migrated_from_v10 else "combat")
 		hud.notify(state.migration_message)
 	else:
 		hud.notify("F7 怪物机制与分裂试验 · F6 龙卷组合 · T 天赋星图")
@@ -876,7 +876,7 @@ func _cast_skill(index: int) -> bool:
 			var origin: Vector2 = player_pos
 			var excluded: Array[int] = []
 			for i: int in range(compiled.packets.bounces.size()):
-				var target: Dictionary = _nearest_enemy(origin, 600.0 if i == 0 else 220.0, excluded)
+				var target: Dictionary = _nearest_enemy(origin, float(compiled.recipe.first_range) if i == 0 else float(compiled.recipe.followup_range), excluded)
 				if target.is_empty():
 					break
 				excluded.append(int(target.id))

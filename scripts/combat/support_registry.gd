@@ -1,73 +1,111 @@
 class_name SupportRegistry
 extends RefCounted
-## Unified catalog adapter: legacy rules never import their optional extension.
+## One admission boundary for all providers; global slot/identity checks precede programs.
 const Legacy = preload("res://scripts/combat/support_catalog.gd")
 const Extension = preload("res://scripts/combat/projectile_support_rules.gd")
 const Area = preload("res://scripts/combat/area_support_rules.gd")
+const ResourceRules = preload("res://scripts/combat/resource_support_rules.gd")
+const ElementRules = preload("res://scripts/combat/element_support_rules.gd")
+const DeliveryRules = preload("res://scripts/combat/delivery_support_rules.gd")
+const Program = preload("res://scripts/combat/support_program.gd")
 const Data = preload("res://scripts/game_data.gd")
 const MAX_SUPPORTS: int = Legacy.MAX_SUPPORTS
 const EXTENSION_SAVE_VERSION: int = 10
+const BATCH_SAVE_VERSION: int = 13
 static var SUPPORTS: Dictionary = _definitions()
 
+static func _providers() -> Array:
+	return [Legacy, Extension, Area, ResourceRules, ElementRules, DeliveryRules]
+static func _program_providers() -> Array:
+	return [ResourceRules, ElementRules, DeliveryRules]
 static func _definitions() -> Dictionary:
-	var result: Dictionary = Legacy.SUPPORTS.duplicate(true)
-	for id: String in Extension.SUPPORTS:
-		assert(not result.has(id), "Support identity collision")
-		result[id] = Extension.get_definition(id)
-	for id: String in Area.SUPPORTS:
-		assert(not result.has(id), "Support identity collision")
-		result[id] = Area.get_definition(id)
+	var result: Dictionary = {}
+	for provider: Variant in _providers():
+		for id: String in provider.SUPPORTS:
+			assert(not result.has(id), "Support identity collision")
+			result[id] = provider.get_definition(id)
 	return result
-
 static func get_definition(id: String) -> Dictionary:
-	if Legacy.SUPPORTS.has(id):
-		return Legacy.get_definition(id)
-	if Area.SUPPORTS.has(id):
-		return Area.get_definition(id)
-	return Extension.get_definition(id)
-
+	for provider: Variant in _providers():
+		if provider.SUPPORTS.has(id): return provider.get_definition(id)
+	return {}
+static func select_owned(ids: Array, catalog: Dictionary) -> Array:
+	var result: Array = []
+	for id: Variant in ids:
+		if id is String and catalog.has(id): result.append(id)
+	result.sort()
+	return result
+static func is_program_support(id: String) -> bool:
+	for provider: Variant in _program_providers():
+		if provider.SUPPORTS.has(id): return true
+	return false
 static func supports_for_skill(skill_id: String) -> Array[String]:
 	var result: Array[String] = []
 	for id: String in SUPPORTS:
-		if compatibility_reason(skill_id, [id]).is_empty():
-			result.append(id)
+		if compatibility_reason(skill_id, [id]).is_empty(): result.append(id)
 	return result
-
 static func compatibility_reason(skill_id: String, support_ids: Variant) -> String:
-	if not support_ids is Array:
-		return Legacy.compatibility_reason(skill_id, support_ids)
+	if not Data.SKILLS.has(skill_id): return "未知技能"
+	if not support_ids is Array or support_ids.size() > MAX_SUPPORTS: return "每个技能最多装配两个辅助"
+	var seen: Dictionary = {}
 	for value: Variant in support_ids:
-		if value is String and Area.SUPPORTS.has(value):
-			return str(Area.compile_area(skill_id, Data.SKILLS.get(skill_id, {}).get("area_recipe"), support_ids).error)
-	var has_extension: bool = false
-	for value: Variant in support_ids:
-		if value is String and Extension.SUPPORTS.has(value):
-			has_extension = true
-	if not has_extension:
-		return Legacy.compatibility_reason(skill_id, support_ids)
-	var skill: Dictionary = Data.SKILLS.get(skill_id, {})
-	return str(Extension.compile_extension(skill_id, skill.get("projectile_recipe", {}), support_ids).error)
-
+		if not value is String or not SUPPORTS.has(value): return "未知辅助"
+		if seen.has(value): return "同一技能不能重复装配辅助"
+		seen[value] = true
+		if get_definition(value).is_empty(): return "辅助元数据无效"
+	var reason: String = Legacy.compatibility_reason(skill_id, select_owned(support_ids, Legacy.SUPPORTS))
+	if not reason.is_empty(): return reason
+	var skill: Dictionary = Data.SKILLS[skill_id]
+	var selected: Array = select_owned(support_ids, Extension.SUPPORTS)
+	if not selected.is_empty():
+		reason = str(Extension.compile_extension(skill_id, skill.get("projectile_recipe", {}), selected).error)
+		if not reason.is_empty(): return reason
+	selected = select_owned(support_ids, Area.SUPPORTS)
+	if not selected.is_empty():
+		reason = str(Area.compile_area(skill_id, skill.get("area_recipe"), selected).error)
+		if not reason.is_empty(): return reason
+	for provider: Variant in _program_providers():
+		selected = select_owned(support_ids, provider.SUPPORTS)
+		if selected.is_empty(): continue
+		reason = str(provider.compile_program(skill_id, selected).error)
+		if not reason.is_empty(): return reason
+	return ""
+static func compile_programs(skill_id: String, support_ids: Array) -> Dictionary:
+	var reason: String = compatibility_reason(skill_id, support_ids)
+	if not reason.is_empty(): return Program.failure(reason)
+	var result: Dictionary = Program.empty()
+	for provider: Variant in _program_providers():
+		var selected: Array = select_owned(support_ids, provider.SUPPORTS)
+		if selected.is_empty(): continue
+		var part: Dictionary = provider.compile_program(skill_id, selected)
+		if not part.error.is_empty(): return Program.failure(part.error)
+		result.modifiers.append_array(part.modifiers)
+		result.mana_multiplier *= float(part.mana_multiplier)
+		result.cooldown_multiplier *= float(part.cooldown_multiplier)
+		for key: String in part.recipe_factors:
+			if key == "chain_extra_targets": result.recipe_factors[key] = int(result.recipe_factors.get(key, 0)) + int(part.recipe_factors[key])
+			else: result.recipe_factors[key] = float(result.recipe_factors.get(key, 1.0)) * float(part.recipe_factors[key])
+	if not Program.number(result.mana_multiplier) or not Program.number(result.cooldown_multiplier): return Program.failure("辅助消耗或冷却倍率无效")
+	return result
 static func saved_links_reason(skill_id: String, support_ids: Variant, save_version: int) -> String:
 	var reason: String = compatibility_reason(skill_id, support_ids)
-	if not reason.is_empty():
-		return reason
+	if not reason.is_empty(): return reason
 	for id: String in support_ids:
-		if Area.SUPPORTS.has(id) and save_version < Area.SAVE_VERSION:
-			return "此存档版本不支持广域辅助"
-		if Extension.SUPPORTS.has(id) and save_version < EXTENSION_SAVE_VERSION:
-			return "此存档版本不支持贯穿辅助"
+		var minimum: int = 1
+		if Extension.SUPPORTS.has(id): minimum = EXTENSION_SAVE_VERSION
+		elif Area.SUPPORTS.has(id): minimum = int(Area.SAVE_VERSIONS[id])
+		elif is_program_support(id): minimum = BATCH_SAVE_VERSION
+		if save_version < minimum: return "此存档版本不支持" + str(get_definition(id).name)
 	return ""
-
 static func definition_error(value: Variant) -> String:
-	if value is Dictionary and value.get("requires") == ["area_hit"]:
-		return Area.definition_error(value)
-	if value is Dictionary and value.has("skills"):
-		return Extension.definition_error(value)
+	if value is Dictionary and value.has("family"):
+		match value.family:
+			"resource": return ResourceRules.definition_error(value)
+			"element": return ElementRules.definition_error(value)
+			"delivery", "control", "chain": return DeliveryRules.definition_error(value)
+		return "辅助类别无效"
+	if value is Dictionary and value.get("requires") == ["area_hit"]: return Area.definition_error(value)
+	if value is Dictionary and value.has("skills"): return Extension.definition_error(value)
 	return Legacy.definition_error(value)
-
-static func _string_array(value: Variant) -> bool:
-	return Legacy._string_array(value)
-
-static func _number(value: Variant) -> bool:
-	return Legacy._number(value)
+static func _string_array(value: Variant) -> bool: return Legacy._string_array(value)
+static func _number(value: Variant) -> bool: return Legacy._number(value)

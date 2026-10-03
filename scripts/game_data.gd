@@ -61,6 +61,7 @@ const SKILLS: Dictionary = {
 		"description": "闪电弹跳最多五个敌人，伤害从 220% 逐次递减。", "mana": 22.0,
 		"cooldown": 4.5, "color": Color("ffeb88"),
 		"capabilities": ["chain_hit"],
+		"targeting_recipe": {"first_range": 600.0, "followup_range": 220.0},
 		"hit_recipe": {"base_coefficient": 2.2, "base_coefficient_loss_per_bounce": 0.2,
 			"added_effectiveness": 2.2, "added_effectiveness_loss_per_bounce": 0.2,
 			"bounce_count": 5, "damage_type": "lightning"},

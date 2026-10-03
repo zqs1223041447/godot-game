@@ -171,7 +171,7 @@ func _migration() -> void:
 	var state:=Model.new()
 	expect(state.load_build(path) and state.migrated_from_v11,"Literal v11 rich build migrates")
 	var expected: Dictionary=JSON.parse_string(text)
-	expected.version=12
+	expected.version=Model.SAVE_VERSION
 	for key: String in ["next_equipment_id", "level", "xp", "talent_points", "next_jewel_id"]:
 		expected[key]=int(expected[key])
 	for item: Dictionary in expected.equipment_instances.values():
@@ -204,7 +204,7 @@ func _migration() -> void:
 	var untouched: Dictionary=again._snapshot()
 	expect(not again.load_build(rejected) and again._snapshot()==untouched,"v11 injected new ID rejects whole candidate")
 	expect(again.save_build(rejected)!=OK and FileAccess.get_file_as_bytes(rejected)==raw,"Rejected source is write protected")
-	injected.version=13
+	injected.version=Model.SAVE_VERSION+1
 	var future: String="user://area_future_v13.json"
 	raw=JSON.stringify(injected).to_utf8_buffer()
 	write_bytes(future,raw)

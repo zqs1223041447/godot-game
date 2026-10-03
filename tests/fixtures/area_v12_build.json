@@ -1,0 +1,141 @@
+{
+  "version": 12,
+  "inventory": [
+    "gear_000042",
+    "gear_000044",
+    "gear_000045"
+  ],
+  "equipped": {
+    "weapon": "gear_000042",
+    "armor": "gear_000045"
+  },
+  "equipment_instances": {
+    "gear_000042": {
+      "id": "gear_000042",
+      "base_id": "ashwood_bow",
+      "rarity": "rare",
+      "item_level": 16,
+      "affixes": [
+        {
+          "id": "whetstone_edge",
+          "tier": 3,
+          "value": 6
+        },
+        {
+          "id": "tempered_edge",
+          "tier": 3,
+          "value": 30
+        },
+        {
+          "id": "farweave",
+          "tier": 1,
+          "value": 7
+        },
+        {
+          "id": "beatlink",
+          "tier": 3,
+          "value": 9
+        }
+      ]
+    },
+    "gear_000044": {
+      "id": "gear_000044",
+      "base_id": "wayglass_token",
+      "rarity": "normal",
+      "item_level": 1,
+      "affixes": []
+    },
+    "gear_000045": {
+      "id": "gear_000045",
+      "base_id": "emberhide_vest",
+      "rarity": "magic",
+      "item_level": 16,
+      "affixes": [
+        {
+          "id": "emberward",
+          "tier": 3,
+          "value": 25
+        }
+      ]
+    }
+  },
+  "next_equipment_id": 48,
+  "skill_slots": [
+    "bolt",
+    "frost",
+    "tornado",
+    "dash",
+    "ward"
+  ],
+  "skill_supports": {
+    "bolt": [
+      "focus",
+      "volley"
+    ],
+    "frost": [
+      "pierce"
+    ],
+    "nova": [
+      "breadth"
+    ],
+    "meteor": [
+      "breadth"
+    ]
+  },
+  "level": 4,
+  "xp": 7,
+  "talent_points": 4,
+  "allocated_nodes": [
+    "origin",
+    "ember_1_0",
+    "ember_2_0",
+    "ember_3_0",
+    "ember_3_2"
+  ],
+  "jewels": {
+    "jewel_000009": {
+      "id": "jewel_000009",
+      "base": "emberheart",
+      "rarity": "magic",
+      "affixes": [
+        {
+          "id": "force",
+          "value": 4.0
+        },
+        {
+          "id": "tempo",
+          "value": 0.08
+        }
+      ]
+    },
+    "jewel_000011": {
+      "id": "jewel_000011",
+      "base": "branchfinder",
+      "rarity": "special",
+      "affixes": []
+    }
+  },
+  "jewel_inventory": [
+    "jewel_000009"
+  ],
+  "socketed_jewels": {
+    "ember_3_0": "jewel_000011"
+  },
+  "next_jewel_id": 20,
+  "backpack_positions": {
+    "item:gear_000044": [
+      10,
+      6
+    ],
+    "jewel:jewel_000009": [
+      11,
+      7
+    ]
+  },
+  "crafting": {
+    "materials": {
+      "calibration_shard": 23
+    },
+    "revision": 9
+  }
+}

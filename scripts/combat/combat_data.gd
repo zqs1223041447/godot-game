@@ -111,12 +111,20 @@ static func _event_recipe(snapshot_value: Dictionary, skill_id: String, role: St
 			return _hit_recipe(skill_id, role, {spec.damage_type: 1.0}, spec.base_coefficient, spec.added_effectiveness, ["hit", "spell", "area"]) if role == "direct" else {}
 		if not role in ["direct", "bounce"] or not spec.has_all(["bounce_count", "base_coefficient_loss_per_bounce", "added_effectiveness_loss_per_bounce"]):
 			return {}
-		if not _valid_chain_recipe(spec) or index < 0 or index >= int(spec.bounce_count):
-			return {}
-		return _hit_recipe(skill_id, "bounce", {spec.damage_type: 1.0},
-			float(spec.base_coefficient) - index * float(spec.base_coefficient_loss_per_bounce),
-			float(spec.added_effectiveness) - index * float(spec.added_effectiveness_loss_per_bounce), ["hit", "spell", "chain"])
+		return chain_hit_recipe(spec, index)
 	return {}
+
+
+static func chain_hit_recipe(spec: Dictionary, index: int) -> Dictionary:
+	if not _valid_chain_recipe(spec) or index < 0 or index >= int(spec.bounce_count): return {}
+	return _hit_recipe("chain", "bounce", {spec.damage_type: 1.0},
+		float(spec.base_coefficient) - index * float(spec.base_coefficient_loss_per_bounce),
+		float(spec.added_effectiveness) - index * float(spec.added_effectiveness_loss_per_bounce), ["hit", "spell", "chain"])
+
+
+static func chain_packet(snapshot_value: Dictionary, spec: Dictionary, index: int) -> Dictionary:
+	return BaseCompiler.assemble(snapshot_value.get("base_damage"), chain_hit_recipe(spec, index),
+		snapshot_value.get("added_damage", {}), snapshot_value.get("added_damage_sources", []), snapshot_value.get("weapon_profile", {}))
 
 
 static func _valid_chain_recipe(spec: Dictionary) -> bool:

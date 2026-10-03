@@ -25,7 +25,7 @@ func run() -> void:
 	var snapshot: Dictionary = state.get_combat_snapshot()
 	var original: Dictionary = snapshot.duplicate(true)
 	expect(Rules.definition_error(Rules.get_definition("breadth")).is_empty(), "Own executable metadata validates")
-	expect(Registry.SUPPORTS.size()==4 and Registry.MAX_SUPPORTS==2, "Four catalog choices, two per-skill slots")
+	expect(Registry.SUPPORTS.size()==16 and Registry.MAX_SUPPORTS==2, "Batched catalog choices, two per-skill slots")
 	for skill: String in Data.SKILLS:
 		var eligible: bool = skill in ["nova","meteor"]
 		expect(Registry.supports_for_skill(skill).has("breadth")==eligible,"Explicit area compatibility " + skill)

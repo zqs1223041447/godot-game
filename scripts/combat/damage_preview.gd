@@ -58,7 +58,11 @@ static func details(cast: Dictionary) -> String:
 		lines.append("每枚投射物穿透 %d 次，最多命中 %d 次；去返共享剩余次数，同相位同目标至多命中一次。" % [pierce, pierce + 1])
 	if cast.skill_id in ["nova", "meteor"] and cast.recipe.has("radius"):
 		var base_radius: float = float(cast.recipe.get("base_radius", cast.recipe.radius))
-		lines.append("圆形范围：半径 %.2f → %.2f；面积 ×%.2f，半径 ×%.2f（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。" % [base_radius, float(cast.recipe.radius), float(cast.recipe.get("area_multiplier", 1.0)), float(cast.recipe.radius) / base_radius])
+		lines.append("圆形范围：半径 %.2f → %.2f；面积 ×%.4f，半径 ×%.4f（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。" % [base_radius, float(cast.recipe.radius), float(cast.recipe.get("area_multiplier", 1.0)), float(cast.recipe.radius) / base_radius])
+	if cast.skill_id == "chain" and cast.recipe.has("hit"):
+		lines.append("连锁最多 %d 个目标（含首个）；首段 %.2f，续跳 %.2f。已命中过的目标不重复，每个目标沿原配方递减基础倍率和附加效用。" % [int(cast.recipe.hit.bounce_count), float(cast.recipe.first_range), float(cast.recipe.followup_range)])
+	if cast.skill_id in ["bolt", "frost"]:
+		lines.append("投射速度 %.2f；现有减速时长 %.2f 秒。范围、生命周期与穿透分别结算；延长减速不等于新增异常状态。" % [float(cast.recipe.speed), float(cast.recipe.slow)])
 	for entry: Dictionary in entries(cast):
 		var packet: Dictionary = entry.packet
 		var resolved: Dictionary = Damage.resolve(packet, cast.snapshot.modifiers)

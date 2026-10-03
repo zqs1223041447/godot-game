@@ -82,6 +82,8 @@ func _test_baselines() -> void:
 		_expect(stripped == snapshot, "Empty compilation preserves every snapshot value for " + id)
 		if id in ["nova", "meteor"]:
 			_expect(result.recipe == {"radius": 155.0 if id == "nova" else 110.0} and stripped == snapshot, "Area recipe preserves legacy radius and snapshot: " + id)
+		elif id == "chain":
+			_expect(result.recipe == {"hit": Data.SKILLS.chain.hit_recipe, "first_range": 600.0, "followup_range": 220.0} and stripped == snapshot, "Chain targeting is compiled without changing the original five packets")
 		elif not counts.has(id):
 			_expect(result.recipe.is_empty() and stripped == snapshot, "Nonprojectile input values remain unchanged: " + id)
 		else:
