@@ -25,6 +25,11 @@ const TelegraphProfiles = preload("res://scripts/monsters/telegraph_profiles.gd"
 const Arena = preload("res://scripts/main.gd")
 const EncounterCatalog = preload("res://scripts/encounters/encounter_catalog.gd")
 const EncounterCompiler = preload("res://scripts/encounters/encounter_compiler.gd")
+const Canonical = preload("res://scripts/canonical_game_state.gd")
+const SourceTree = preload("res://scripts/passives/source_tree_runtime.gd")
+const GemCatalogData = preload("res://scripts/items/gem_catalog.gd")
+const EquipmentSlotsData = preload("res://scripts/items/equipment_slots.gd")
+const AttackRules = preload("res://scripts/combat/attack_hit_rules.gd")
 
 func _initialize() -> void:
 	var target: String = "res://docs/reference/catalog.json"
@@ -63,6 +68,13 @@ static func collect() -> Dictionary:
 	result["crafting"] = crafting_examples()
 	result["monster_attacks"] = telegraph_examples()
 	result["encounters"] = encounter_examples()
+	result["canonical"] = canonical_examples()
+	result["source_tree"] = source_tree_reference()
+	result["save_version"] = Canonical.Rules.VERSION
+	result["current_loot_profile_id"] = Canonical.LOOT_PROFILE_ID
+	result["current_loot_profile"] = Equipment.loot_profile(Canonical.LOOT_PROFILE_ID)
+	result.crafting.calibration_shard.save_version=Canonical.Rules.VERSION
+	result.limits.max_supports = Supports.GROUP_MAX_SUPPORTS
 	var base_ids: Array = Equipment.all_base_ids()
 	var affix_ids: Array = Equipment.all_affix_ids()
 	for id: String in base_ids:
@@ -235,6 +247,7 @@ static func collect() -> Dictionary:
 		template["mechanism_text"] = Monsters.mechanism_text(template.runtime_example)
 		template["telegraph_policy"] = Monsters.telegraph_policy(template.runtime_example)
 		template["defense_profile"] = Defense.defense_profile(template.runtime_example.defense_stats, "monster")
+		template["source_ratings"] = AttackRules.monster_profile(int(template.runtime_example.kind))
 		result.monsters[id] = template
 	result["special_coverage"] = {}
 	for id: String in Jewels.SPECIAL_BASES:
@@ -271,6 +284,45 @@ static func collect() -> Dictionary:
 			"disconnected": Rules.analyze([Passives.START_ID, socket_id], sockets, owned),
 			"remote_example": remote_example, "with_remote": Rules.analyze(remote_path, sockets, owned)}
 	return result
+
+
+static func canonical_examples()->Dictionary:
+	var state:=Canonical.new()
+	var casts:Dictionary={}
+	for group:Dictionary in state.snapshot().skill_groups:
+		var cast:Dictionary=state.get_group_cast(group.id)
+		if cast.get("ok",false):casts[group.id]={"skill_id":cast.skill_id,"mana":cast.mana,"cooldown":cast.cooldown,"summary":Preview.summary(cast),"details":Preview.details(cast)}
+	var slots:Dictionary={}
+	for slot:String in EquipmentSlotsData.all_slots():slots[slot]=EquipmentSlotsData.category_for_slot(slot)
+	var five:=Compiler.compile_group("frost",state.get_combat_snapshot(),["swift_projectiles","heavy_projectiles","lingering_chill","efficiency","quickcast"])
+	return {"save_version":Canonical.Rules.VERSION,"bag_columns":12,"bag_rows":8,"base_skill_groups":10,"support_slots":5,
+		"slots":slots,"gem_definitions":GemCatalogData.definitions(),"default_build":state.snapshot(),"default_stats":state.get_stats(),"default_casts":casts,"five_link_example":support_cast_brief(five),
+		"gem_reward":{"eligible_root_kill_interval":30,"definition_count":24,"uniform_selection":true,"level":1,"quality":0,"duplicate_definitions_have_distinct_uid":true,"failed_admission_restores_rng":true},
+		"defense_example":Defense.incoming_source_hit({"physical":100.0,"fire":100.0,"cold":100.0,"lightning":100.0},{"armour":500.0,"fire_resistance":0.5,"cold_resistance":0.25,"lightning_resistance":0.75},100.0,200.0),
+		"monster_ratings":{"crawler":AttackRules.monster_profile(0),"skitter":AttackRules.monster_profile(1),"brute":AttackRules.monster_profile(2)},
+		"skitter_accuracy_example":{"base_accuracy":140,"base_chance":AttackRules.chance(140,320),"extra_ten_dex_accuracy":160,"improved_chance":AttackRules.chance(160,320)}}
+
+
+static func source_tree_reference()->Dictionary:
+	var nodes:Dictionary={}
+	var standard:Dictionary={}
+	for id:String in SourceTree.Data.standard_ids():standard[id]=true
+	var edges:Array=[]
+	for id:String in standard:
+		for adjacent:String in SourceTree.Data.adjacency(id):
+			if id<adjacent:edges.append([id,adjacent])
+	for id:String in SourceTree.Data.nodes():
+		var node:=SourceTree.Data.node(id)
+		var effect:=SourceTree.node_effect(id)
+		var choices:Array=[]
+		for choice:Dictionary in node.mastery_effects:
+			choices.append({"effect":int(choice.effect),"stats":choice.stats,"execution":SourceTree.node_effect(id,int(choice.effect))})
+		nodes[id]={"id":id,"name":node.name,"type":node.type,"stats":node.stats,"position":node.position,"has_position":node.has_position,
+			"standard_graph":standard.has(id),"source_proxy":bool(node.source.get("isProxy",false)),"blighted_only":bool(node.source.get("isBlighted",false)),
+			"execution":effect,"mastery_choices":choices,"neighbors":SourceTree.Data.adjacency(id) if standard.has(id) else [],
+			"partition":str(node.source.get("ascendancyName","expansion" if node.source.has("expansionJewel") else "standard"))}
+	return {"source_version":"3.29.1","source_commit":"8bd138b32ea2631455cac5935bfab089f826094f","source_sha256":SourceTree.Data.SOURCE_SHA256,
+		"source_url":"https://github.com/grindinggear/skilltree-export/tree/8bd138b32ea2631455cac5935bfab089f826094f","nodes":nodes,"edges":edges,"starts":SourceTree.Data.class_starts(),"points":SourceTree.Data.source_points()}
 
 
 ## Pure example plans: no model-issued handles, userdata reads or save writes.
@@ -482,6 +534,8 @@ static func clean(value: Variant) -> Variant:
 		return [value.x, value.y]
 	if value is Color:
 		return "#" + value.to_html(false)
+	if value is Resource:
+		return value.resource_path
 	return value
 
 ## Values use the same compiler, circle test and hit resolver as the actual scene.

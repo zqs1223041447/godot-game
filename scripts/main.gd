@@ -488,6 +488,7 @@ func _spawn_monster(template_id: String, forced_position: Vector2 = Vector2.ZERO
 		enemy = admitted.enemy
 	if enemy.is_empty():
 		return {}
+	_apply_source_actor_profile(enemy)
 	enemy.pos = _clamp_to_arena(enemy.pos, float(enemy.radius))
 	enemies.append(enemy)
 	_add_ring(enemy.pos, 32.0, Monsters.RARITIES[enemy.rarity].color, 0.5)
@@ -510,9 +511,16 @@ func _flush_monster_spawns() -> void:
 			return
 		children.assign(admitted.enemies)
 	for child: Dictionary in children:
+		_apply_source_actor_profile(child)
 		enemies.append(child)
 		_add_ring(child.pos, 26.0, Monsters.RARITIES[child.rarity].color, 0.45)
 	monster_runtime.collect_lineages(enemies)
+
+
+func _apply_source_actor_profile(enemy: Dictionary) -> void:
+	if not state.has_method("passive_analysis"):return
+	for stat:String in AttackHit.monster_profile(int(enemy.kind)):
+		if not enemy.has(stat):enemy[stat]=AttackHit.monster_profile(int(enemy.kind))[stat]
 
 
 func start_monster_demo() -> void:

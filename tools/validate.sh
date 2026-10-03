@@ -15,7 +15,8 @@ VALIDATION_DIR="$(mktemp -d "${TMPDIR:-/tmp}/godot-game-validation.XXXXXX")"
 PIERCE_VALIDATION_DIR="$(mktemp -d /tmp/godot-pierce-acceptance-XXXXXX)"
 CRAFT_VALIDATION_DIR="$(mktemp -d /tmp/godot-crafting-qa-XXXXXX)"
 M0_VALIDATION_DIR="$(mktemp -d /tmp/godot-m0-scene-XXXXXX)"
-trap 'rm -rf -- "$VALIDATION_DIR" "$PIERCE_VALIDATION_DIR" "$CRAFT_VALIDATION_DIR" "$M0_VALIDATION_DIR"' EXIT
+M1_VALIDATION_DIR="$(mktemp -d /tmp/godot-m1-batch.XXXXXX)"
+trap 'rm -rf -- "$VALIDATION_DIR" "$PIERCE_VALIDATION_DIR" "$CRAFT_VALIDATION_DIR" "$M0_VALIDATION_DIR" "$M1_VALIDATION_DIR"' EXIT
 
 # Isolate test settings and saves, including in restricted cloud workspaces.
 if [[ "$(uname -s)" == "Linux" ]]; then
@@ -32,6 +33,10 @@ run_check() {
 		export XDG_DATA_HOME="$VALIDATION_DIR/data/check-$CHECK_INDEX"
 		unset GODOT_CRAFTING_TEST_ROOT
 		case "${2:-}" in
+			res://tests/canonical_*|res://tests/source_*)
+				export XDG_DATA_HOME="$M1_VALIDATION_DIR/check-$CHECK_INDEX/data"
+				unset PIERCE_QA_ROOT
+				;;
 			res://tests/pierce_integration_test.gd|res://tests/pierce_ui_test.gd)
 				export XDG_DATA_HOME="$PIERCE_VALIDATION_DIR/check-$CHECK_INDEX"
 				export PIERCE_QA_ROOT="$XDG_DATA_HOME"
@@ -61,6 +66,9 @@ run_check() {
 echo "Godot version: $("$GODOT_BIN" --version)"
 python3 "$PROJECT_DIR/tools/check_font_coverage.py"
 python3 "$PROJECT_DIR/tests/test_font_coverage.py"
+python3 "$PROJECT_DIR/tools/passive_import/import_tree.py" --check
+python3 "$PROJECT_DIR/tools/passive_import/export_runtime_tree.py" --check
+python3 "$PROJECT_DIR/tests/passive_import_test.py"
 python3 "$PROJECT_DIR/tools/validate_save_paths_linux.py" --godot "$GODOT_BIN"
 run_check --editor --import
 run_check --script res://tests/build_test.gd
@@ -69,6 +77,32 @@ run_check --script res://tests/m0_scene_cache_test.gd
 run_check --script res://tests/equipment_slots_test.gd
 run_check --script res://tests/item_location_rules_test.gd
 run_check --script res://tests/menu_route_state_test.gd
+run_check --script res://tests/gem_catalog_test.gd
+run_check --script res://tests/unified_item_catalog_test.gd
+run_check --script res://tests/item_transfer_plan_test.gd
+run_check --script res://tests/canonical_build_migration_test.gd
+run_check --script res://tests/canonical_build_store_test.gd
+run_check --script res://tests/canonical_game_state_test.gd
+run_check --script res://tests/canonical_crafting_test.gd
+run_check --script res://tests/canonical_group_cast_test.gd
+run_check --script res://tests/canonical_default_startup_test.gd
+run_check --script res://tests/canonical_hud_integration_test.gd
+run_check --script res://tests/source_tree_data_test.gd
+run_check --script res://tests/source_execution_coverage_test.gd
+run_check --script res://tests/source_tree_allocation_rules_test.gd
+run_check --script res://tests/source_tree_runtime_test.gd
+run_check --script res://tests/source_stat_patterns_test.gd
+run_check --script res://tests/source_defense_integration_test.gd
+run_check --script res://tests/source_passive_tree_view_test.gd
+run_check --script res://tests/skill_group_rows_test.gd
+run_check --script res://tests/unified_bag_grid_test.gd
+run_check --script res://tests/unified_external_drag_test.gd
+run_check --script res://tests/item_hover_card_test.gd
+run_check --script res://tests/five_support_compiler_test.gd
+run_check --script res://tests/skill_cooldown_ledger_test.gd
+run_check --script res://tests/nine_slot_equipment_profile_test.gd
+run_check --script res://tests/nine_slot_catalog_integration_test.gd
+run_check --script res://tests/independent_menus_test.gd
 run_check --script res://tests/equipment_catalog_test.gd
 run_check --script res://tests/typed_affix_catalog_test.gd
 run_check --script res://tests/defense_rules_test.gd

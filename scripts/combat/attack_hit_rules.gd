@@ -3,6 +3,11 @@ extends RefCounted
 ## Accuracy/evasion affect attack admission only, before resistance/shield/life.
 ## No global RNG or permanent state: a defender-owned entropy value is advanced.
 ## Initial entropy 50 is this game's deterministic choice, not a PoE RNG claim.
+static func monster_profile(kind: int) -> Dictionary:
+	# Small authored encounter distinction, not a copy of PoE's level tables.
+	return {"accuracy":100.0,"evasion":320.0 if kind==1 else 0.0,"armour":0.0}
+
+
 static func chance(accuracy: float,evasion: float) -> float:
 	if not is_finite(accuracy) or not is_finite(evasion) or accuracy < 0.0 or evasion < 0.0: return -1.0
 	if evasion <= 0.0: return 1.0

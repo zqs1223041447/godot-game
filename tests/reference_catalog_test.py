@@ -70,10 +70,15 @@ def main():
     assert '75% 火抗未来压力目标' in source and '+25.39%' in source, 'Budget must disclose future-target exception'
     assert 'skills-basic' not in inspector.ids and '#skills-basic' not in inspector.links, 'Basic attack must not invent a ninth active skill'
     assert '#rules-basic_attack' in inspector.links and '#weapon_stages-weapon_local' in inspector.links
-    assert len(data['skills'])==8 and len(data['equipment'])==9 and len(data['affixes'])==19
+    assert len(data['skills'])==8 and len(data['equipment'])==14 and len(data['affixes'])==26
+    assert data['canonical']['support_slots']==5 and data['canonical']['base_skill_groups']==10 and len(data['canonical']['slots'])==9
+    assert len(data['source_tree']['nodes'])==3390 and len(data['source_tree']['edges'])==2697
+    for key in data['source_tree']['nodes']: assert f'source_passives-{key}' in inspector.ids, 'Unbrowsable source node '+key
+    assert '旧181节点研究' in source and '灰色锁定' in source and '未完整执行的节点不可分配' in source
     for key in ['whetstone_edge','tempered_edge']:
         assert data['affixes'][key]['affected_skills']==['tornado'] and data['affixes'][key]['other_consumers']==['basic']
-    assert data['current_loot_profile_id']=='v0.13' and [p['weight'] for p in data['current_loot_profile']]==[45,25,15,15]
+    assert data['current_loot_profile_id']=='canonical_v14' and [p['weight'] for p in data['current_loot_profile']]==[30,20,10,10,30]
+    assert [p['weight'] for p in data['loot_profiles']['v0.13']]==[45,25,15,15]
     assert [p['weight'] for p in data['loot_profiles']['v0.11']]==[60,25,15]
     assert '每次已产生的装备奖励' in source and '不新增奖励分支' in source
     assert '没有隐含的武器本地伤害阶段' not in source and '本地武器伤害/攻速阶段' not in source
@@ -94,7 +99,7 @@ def main():
     assert 'font-size:16px' in (REF/'reference.css').read_text()
     spec=importlib.util.spec_from_file_location('generator',ROOT/'tools/build_reference.py');module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
     art=json.loads((REF/'art/manifest.json').read_text())
-    assert art['status']=='complete' and art['written_images']==53 and len(art['entries'])==53
+    assert art['status']=='complete' and art['written_images']==58 and len(art['entries'])==58
     expected_art={(cat,key) for cat in ['skills','supports','equipment','fixed_items','jewels','monsters'] for key in data[cat]}
     actual_art={(('fixed_items' if row.get('entry_type')=='fixed_item' else row['category']),row['id']) for row in art['entries']}
     assert actual_art==expected_art, 'Art manifest omits or adds runtime entries'

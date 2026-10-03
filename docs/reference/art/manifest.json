@@ -7,11 +7,11 @@
 	"transparent_background": true,
 	"file_paths_relative_to": "manifest.json directory",
 	"status": "complete",
-	"written_images": 53,
+	"written_images": 58,
 	"counts": {
 		"skills": 8,
 		"supports": 16,
-		"equipment": 18,
+		"equipment": 23,
 		"jewels": 4,
 		"monsters": 7
 	},
@@ -264,6 +264,51 @@
 			"id": "gale_spindle",
 			"name": "岚纺刃",
 			"file": "equipment/gale_spindle.png",
+			"source_renderer": "EquipmentArt.draw_item",
+			"source_catalog": "EquipmentCatalog.all_base_ids",
+			"entry_type": "base"
+		},
+		{
+			"category": "equipment",
+			"id": "nine_slot_etched_ring",
+			"name": "纹刻指环",
+			"file": "equipment/nine_slot_etched_ring.png",
+			"source_renderer": "EquipmentArt.draw_item",
+			"source_catalog": "EquipmentCatalog.all_base_ids",
+			"entry_type": "base"
+		},
+		{
+			"category": "equipment",
+			"id": "nine_slot_folded_belt",
+			"name": "折纹腰带",
+			"file": "equipment/nine_slot_folded_belt.png",
+			"source_renderer": "EquipmentArt.draw_item",
+			"source_catalog": "EquipmentCatalog.all_base_ids",
+			"entry_type": "base"
+		},
+		{
+			"category": "equipment",
+			"id": "nine_slot_slate_helmet",
+			"name": "石脊头盔",
+			"file": "equipment/nine_slot_slate_helmet.png",
+			"source_renderer": "EquipmentArt.draw_item",
+			"source_catalog": "EquipmentCatalog.all_base_ids",
+			"entry_type": "base"
+		},
+		{
+			"category": "equipment",
+			"id": "nine_slot_threaded_gloves",
+			"name": "织纹手套",
+			"file": "equipment/nine_slot_threaded_gloves.png",
+			"source_renderer": "EquipmentArt.draw_item",
+			"source_catalog": "EquipmentCatalog.all_base_ids",
+			"entry_type": "base"
+		},
+		{
+			"category": "equipment",
+			"id": "nine_slot_trail_boots",
+			"name": "踏纹短靴",
+			"file": "equipment/nine_slot_trail_boots.png",
 			"source_renderer": "EquipmentArt.draw_item",
 			"source_catalog": "EquipmentCatalog.all_base_ids",
 			"entry_type": "base"

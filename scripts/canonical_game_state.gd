@@ -8,6 +8,7 @@ const Slots = preload("res://scripts/items/equipment_slots.gd")
 const Combat = preload("res://scripts/combat/combat_data.gd")
 const Compiler = preload("res://scripts/combat/skill_compiler.gd")
 const Data = preload("res://scripts/game_data.gd")
+const LOOT_PROFILE_ID := "canonical_v14"
 const SourceTree = preload("res://scripts/passives/source_tree_runtime.gd")
 var _build_signature := PackedByteArray()
 var _stats_cache: Dictionary = {}
@@ -266,7 +267,7 @@ func award_equipment(rng: RandomNumberGenerator, item_level: int, rarity: String
 	if pool != "current" and not Gear.pool_profiles().has(pool): return ""
 	var before_rng: int = rng.state
 	var uid: String = "gear_%06d" % int(_current.next_item_serial)
-	var generated: Dictionary = Gear.generate_loot_profile(rng, uid, item_level, rarity, "canonical_v14") if pool == "current" else Gear.generate_for_pool(rng, uid, item_level, rarity, pool)
+	var generated: Dictionary = Gear.generate_loot_profile(rng, uid, item_level, rarity, LOOT_PROFILE_ID) if pool == "current" else Gear.generate_for_pool(rng, uid, item_level, rarity, pool)
 	var wrapped: Dictionary = Items.wrap_equipment(generated)
 	if wrapped.is_empty() or not _admit_reward_item(wrapped):
 		rng.state = before_rng

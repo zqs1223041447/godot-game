@@ -7,12 +7,15 @@ import json
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / 'data/passive_source/normalized_tree.json'
 OUTPUT = ROOT / 'data/passives/official_tree_runtime.json'
-IMAGE_FIELDS = {'icon', 'activeIcon', 'inactiveIcon', 'activeEffectImage'}
+IMAGE_FIELDS = {'icon', 'activeIcon', 'inactiveIcon', 'activeEffectImage', 'flavourText', 'flavourTextColour', 'flavourTextRect'}
 def build(source):
     return {
         'schema_version': 1,
         'source': source['provenance'],
-        'points': source['points'], 'bounds': source['bounds'], 'classes': source['classes'],
+        'points': source['points'], 'bounds': source['bounds'],
+        'classes': [{key: entry[key] for key in ('name', 'base_str', 'base_dex', 'base_int')} |
+                    {'ascendancies': [{key: asc[key] for key in ('id', 'name')} for asc in entry['ascendancies']]}
+                    for entry in source['classes']],
         'nodes': {key: {field: value for field, value in record.items() if field not in IMAGE_FIELDS}
                   for key, record in source['node_records'].items()},
         'groups': source['groups'], 'positions': source['positions'],
@@ -32,6 +35,7 @@ def main():
         assert result['nodes'][node_id].get('stats') == record.get('stats')
         assert result['nodes'][node_id].get('masteryEffects') == record.get('masteryEffects')
     assert b'Art/2DArt' not in raw
+    assert b'flavourText' not in raw, 'Narrative/artwork layout is not a runtime rule input'
     if args.check:
         assert OUTPUT.read_bytes() == raw, 'Runtime tree drift'
     else:

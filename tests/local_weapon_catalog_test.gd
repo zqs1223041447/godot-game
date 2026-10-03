@@ -61,7 +61,7 @@ func _goldens() -> void:
 
 func _metadata() -> void:
 	_expect(Catalog.CURRENT_VOCABULARY == 9 and Catalog.CURRENT_LOOT_PROFILE_ID == "v0.13", "Current vocabulary and explicitly named dispatch advance together")
-	_expect(Catalog.all_base_ids().size() == 9 and Catalog.all_affix_ids().size() == 19, "Exactly one local base and two local families join canonical listing")
+	_expect(Catalog.all_base_ids().size() == 14 and Catalog.all_affix_ids().size() == 26, "One local base/two local families are preserved alongside the nine-slot profile")
 	_expect(Catalog.pool_profile("local_weapon").min_save_version == 9 and Catalog.pool_profile("local_weapon").balance_origin == "original", "Local vocabulary fence and original numerical origin are explicit")
 	var base: Dictionary = Catalog.base_definition("ashwood_bow")
 	_expect(base.name == "白蜡长弓" and base.slot == "weapon" and base.size == Vector2i(2, 3) and base.stats.is_empty(), "Bow has agreed footprint and no global scalar intrinsic stats")

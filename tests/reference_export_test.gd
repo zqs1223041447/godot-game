@@ -12,6 +12,7 @@ const Defense = preload("res://scripts/mechanics/defense_rules.gd")
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
 const Supports = preload("res://scripts/combat/support_registry.gd")
 const Build = preload("res://scripts/build_state.gd")
+const Canonical = preload("res://scripts/canonical_game_state.gd")
 const WeaponLocal = preload("res://scripts/items/weapon_local_rules.gd")
 const Compiler = preload("res://scripts/combat/skill_compiler.gd")
 const Recipes = preload("res://scripts/combat/combat_data.gd")
@@ -27,7 +28,7 @@ func _initialize() -> void:
 	_expect(three_supports == ["volley", "focus", "pierce"], "Reference combinations do not alias the source list")
 	var current: Dictionary = Exporter.clean(Exporter.collect())
 	_expect(current.crafting.size() == 3 and current.crafting.has_all(["calibration_shard","salvage","recalibrate"]), "One material and exactly two implemented crafting operations are browsable")
-	_expect(current.crafting.calibration_shard.maximum == Build.MAX_CRAFT_MATERIALS and current.crafting.calibration_shard.save_version == Build.SAVE_VERSION, "Wallet limits and schema come from BuildState")
+	_expect(current.crafting.calibration_shard.maximum == Build.MAX_CRAFT_MATERIALS and current.crafting.calibration_shard.save_version == Canonical.Rules.VERSION, "Preserved wallet limit and current canonical save schema")
 	for operation: String in ["salvage","recalibrate"]:
 		var craft: Dictionary = current.crafting[operation]
 		var sample: Dictionary = craft.example
@@ -80,14 +81,14 @@ func _initialize() -> void:
 	_ids(current.equipment, Equipment.all_base_ids(), "legacy and expansion bases")
 	_ids(current.affixes, Equipment.all_affix_ids(), "legacy and expansion affix families")
 	_expect(current.equipment_pools == Equipment.pool_profiles(), "all detached runtime pool profiles")
-	_expect(current.current_loot_profile == Equipment.current_loot_profile(), "current natural reward weights")
+	_expect(current.current_loot_profile == Equipment.loot_profile(Canonical.LOOT_PROFILE_ID), "current natural reward weights")
 	_ids(current.jewels, Jewels.BASES.keys() + Jewels.SPECIAL_BASES.keys(), "ordinary and special jewels")
 	_ids(current.passives, Passives.get_nodes().keys(), "all original nodes")
 	_ids(current.mechanisms, Registry.get_ids(), "all shared mechanisms")
 	_ids(current.monsters, Monsters.TEMPLATES.keys(), "all monster templates")
 	_expect(current.skills.size() == 8 and current.supports.size() == 16, "bounded skill inventory")
-	_expect(current.equipment.size() == 9 and current.affixes.size() == 19, "bounded equipment inventory")
-	_expect(current.passives.size() == 181 and current.special_coverage.size() == 12, "complete tree and socket coverage")
+	_expect(current.equipment.size() == 14 and current.affixes.size() == 26, "bounded equipment inventory")
+	_expect(current.passives.size() == 181 and current.special_coverage.size() == 12, "historical 181-node research tree and socket coverage")
 	for skill_id: String in current.skills:
 		var skill: Dictionary = current.skills[skill_id]
 		_expect(skill.compatible_supports == Supports.supports_for_skill(skill_id), "runtime compatibility " + skill_id)
@@ -136,10 +137,14 @@ func _initialize() -> void:
 				for packet: Dictionary in cast.packets:
 					_expect(packet.known_target_settlement.ok, "known target settlement is valid")
 					_expect(float(packet.known_target_resolved.total) <= float(packet.resolved.total) + 0.00001, "known positive fire defense never increases preview")
-	_expect(current.schema_version == 3 and current.save_version == Build.SAVE_VERSION, "reference and save schemas explicit")
-	_expect(current.current_loot_profile_id == Equipment.CURRENT_LOOT_PROFILE_ID, "current pool profile identity")
+	_expect(current.schema_version == 3 and current.save_version == Canonical.Rules.VERSION, "reference and current canonical save schemas explicit")
+	_expect(current.current_loot_profile_id == Canonical.LOOT_PROFILE_ID, "actual canonical reward profile identity")
 	_expect(current.loot_profiles == Equipment.loot_profiles(), "historical and current pool weights exported")
-	_expect(current.loot_profiles["v0.11"].size() == 3 and current.current_loot_profile.size() == 4, "old reward selection retained separately")
+	_expect(current.loot_profiles["v0.11"].size() == 3 and current.loot_profiles["v0.13"].size()==4 and current.current_loot_profile.size() == 5, "legacy three/four and new five-pool selections retained separately")
+	_expect(current.canonical.gem_definitions.size()==24 and current.canonical.base_skill_groups==10 and current.canonical.support_slots==5 and current.canonical.slots.size()==9,"actual canonical groups/gems/equipment targets exported")
+	_expect(current.source_tree.nodes.size()==3390 and current.source_tree.edges.size()==2697,"full source records and safe standard edges distinct from legacy181")
+	_expect(current.source_tree.nodes["2151"].execution.status=="full" and current.source_tree.nodes["22497"].execution.status=="unsupported","source consumers and blocked cast-speed exposed accurately")
+	_expect(current.canonical.five_link_example.initial_count==5 and current.canonical.five_link_example.recipe.slow==4.5,"actual five-link recipe exported")
 	var local: Dictionary = current.weapon_stages.weapon_local
 	for key: String in WeaponLocal.metadata():
 		_expect(local[key] == Exporter.clean(WeaponLocal.metadata()[key]), "weapon-local metadata " + key)

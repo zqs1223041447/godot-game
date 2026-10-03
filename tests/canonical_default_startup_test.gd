@@ -34,6 +34,24 @@ func run()->void:
 	arena.equip_tornado_example()
 	check(arena.state.skill_slots[0]=="tornado" and arena.state.equipped.weapon=="prism_bow","F6 existing example uses owned gem and gear")
 	check(arena.state.get_combat_snapshot().effects.has("return_on_range") and arena.state.get_combat_snapshot().effects.has("explode_on_flight_end"),"old return/explosion example preserved")
+	var owned_before:int=arena.state.snapshot().items.size()
+	arena.reward_kills=29
+	var root_enemy:Dictionary=arena._spawn_monster("crawler",arena.player_pos+Vector2(40,0),"ordinary","",[],true)
+	root_enemy.spawn=0.0
+	arena._begin_progress_transaction()
+	arena._damage_enemy(root_enemy,100000.0,Color.WHITE)
+	arena._end_progress_transaction()
+	check(arena.reward_kills==30 and arena.state.snapshot().items.size()==owned_before+1,"thirtieth real eligible root kill awards an actual gem instance")
+	arena._damage_enemy(root_enemy,100000.0,Color.WHITE)
+	check(arena.state.snapshot().items.size()==owned_before+1,"repeated dead-target damage cannot duplicate gem reward")
+	var newest:=""
+	for uid:String in arena.state.snapshot().items:
+		if uid.begins_with("item_"):newest=uid
+	check(not newest.is_empty() and arena.state.location(newest).kind=="bag","natural gem enters shared authoritative bag")
+	var before_discard:Dictionary=arena.state.snapshot()
+	check(not arena.state.discard_item(newest,arena.state.revision()-1,path).ok and arena.state.snapshot()==before_discard,"stale discard confirmation is atomic")
+	check(arena.state.discard_item(newest,arena.state.revision(),path).ok and arena.state.item(newest).is_empty(),"confirmed discard consumes exactly owned bag instance")
+	check(arena.state.snapshot().next_item_serial==before_discard.next_item_serial,"discard never rewinds identity counter")
 	check(arena.save_build(),"default migrated game persists authoritative changes")
 	var snapshot:Dictionary=arena.state.snapshot()
 	arena.queue_free();await process_frame

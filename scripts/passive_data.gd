@@ -16,6 +16,7 @@ const SECTORS: Array[Dictionary] = [
 	{"id": "prism", "name": "棱光 · 均衡", "color": Color("e3c578"), "angle": 210.0},
 ]
 const STAT_LABELS: Dictionary = {
+	"additional_skill_slots":"额外技能行",
 	"fire_resistance": "火焰抗性",
 	"damage": "伤害", "max_health": "最大生命", "max_mana": "最大魔力",
 	"max_shield": "最大护盾", "attack_speed": "攻击速度", "move_speed": "移动速度",
