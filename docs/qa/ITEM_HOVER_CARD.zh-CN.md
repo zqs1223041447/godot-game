@@ -67,3 +67,7 @@ ITEM_HOVER_CARD_CAPTURE_DIR=/tmp/item-hover-card-captures \
 - Godot `4.6.3`：`tests/item_hover_card_test.gd` 为 **262 项、0 失败**；覆盖 1920×1080 / 2560×1440、四角锚点、100% / 110% 父级 UI 缩放、120% 字体、三卡限宽、滚动输入和字典只读。
 - 既有 `tests/material_frame_test.gd` 为 **158 项、0 失败**，确认复用的材料样式回归通过。
 - 已尝试非 headless 运行截图；该环境没有 X11 显示，Wayland 也无法连接，未安装 Xvfb/Weston。Godot 无法创建显示服务器，headless 渲染器也没有可抓取的 viewport texture。因此本次没有真实截图或像素验收证据；262 项结果只代表控件布局/边界和输入路由检查。
+
+## 主集成原生补验（2026-10-03）
+
+云桌面真实X11/llvmpipe运行发现原测试将物理窗口尺寸当逻辑视口，开启项目stretch后卡片会被摆到屏幕外；组件契约要求父级局部坐标，现夹具使用root.get_visible_rect，并对每张卡的真实输出像素取样。4张1080p/1440p、100/110%UI、120%字体原生图完成，288检查零失败。另修正空视图不显示、dismiss后修改字号不重新出现，并复制present输入避免后续外部变动影响旧悬停。证据在docs/qa/m1，不宣称Windows硬件或真实物理鼠标验收。

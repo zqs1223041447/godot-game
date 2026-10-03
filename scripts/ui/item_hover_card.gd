@@ -35,17 +35,18 @@ func _ready() -> void:
 ## anchor and viewport_bounds must use this Control parent's local coordinates.
 func present(view: Dictionary, comparison_views: Array, anchor: Rect2,
 		viewport_bounds: Rect2, compare: bool = false) -> void:
-	_last_view = view
-	_last_comparison_views = comparison_views
+	_last_view = view.duplicate(true)
+	_last_comparison_views = comparison_views.duplicate(true)
 	_last_anchor = anchor
 	_last_viewport_bounds = viewport_bounds
 	_last_compare = compare
 	_ensure_interface()
 	_refresh_layout()
-	show()
 
 
 func dismiss() -> void:
+	_last_view.clear()
+	_last_comparison_views.clear()
 	hide()
 
 

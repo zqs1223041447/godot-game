@@ -47,9 +47,9 @@ func _run() -> void:
 		root.size = screen
 		host.position = Vector2.ZERO
 		host.scale = Vector2.ONE * ui_scale
-		host.size = Vector2(screen) / ui_scale
+		host.size = root.get_visible_rect().size / ui_scale
 		card.font_scale = 1.2
-		var bounds := Rect2(Vector2.ZERO, Vector2(screen) / ui_scale)
+		var bounds := Rect2(Vector2.ZERO, host.size)
 		for corner: String in ["top_left", "top_right", "bottom_left", "bottom_right"]:
 			var anchor := _anchor(corner, bounds, ui_scale)
 			card.present(input_view, [equipped_ring_a, equipped_ring_b, extra], anchor, bounds, true)
@@ -60,12 +60,12 @@ func _run() -> void:
 			_expect(card.find_child("EquippedItemCard1", true, false) != null, "first equipped target exists")
 			_expect(card.find_child("EquippedItemCard2", true, false) != null, "second equipped target exists for dual-ring comparison")
 			_expect(card.find_child("EquippedItemCard3", true, false) == null, "comparisons are capped at two equipped targets")
-			_expect(_inside_viewport(card.get_global_rect(), Vector2(screen)), "three-card bounds fit %dx%d ui %.1f %s: %s" % [screen.x, screen.y, ui_scale, corner, card.get_global_rect()])
+			_expect(_inside_viewport(card.get_global_rect(), root.get_visible_rect().size), "three-card bounds fit %dx%d ui %.1f %s: %s" % [screen.x, screen.y, ui_scale, corner, card.get_global_rect()])
 			var row: HBoxContainer = card.find_child("ItemHoverCards", true, false) as HBoxContainer
 			for panel: Control in row.get_children():
-				_expect(_inside_viewport(panel.get_global_rect(), Vector2(screen)), "each card frame fits %dx%d ui %.1f %s: %s" % [screen.x, screen.y, ui_scale, corner, panel.get_global_rect()])
+				_expect(_inside_viewport(panel.get_global_rect(), root.get_visible_rect().size), "each card frame fits %dx%d ui %.1f %s: %s" % [screen.x, screen.y, ui_scale, corner, panel.get_global_rect()])
 				var frame: Control = panel.get_child(0) as Control
-				_expect(frame != null and _inside_viewport(frame.get_global_rect(), Vector2(screen)), "material panel remains inside its clipped column")
+				_expect(frame != null and _inside_viewport(frame.get_global_rect(), root.get_visible_rect().size), "material panel remains inside its clipped column")
 				var details: ScrollContainer = frame.find_child("ItemDetailsScroll", true, false) as ScrollContainer
 				_expect(details != null and _rect_inside(details.get_global_rect(), frame.get_global_rect()), "scroll viewport stays inside its card frame")
 			_expect(input_view == before, "rendering leaves the source view dictionary unchanged")
@@ -98,12 +98,16 @@ func _run() -> void:
 			_expect(first_scroll.scroll_vertical > 0, "mouse wheel over a card scrolls the long item details")
 
 	card.present(input_view, [equipped_ring_a, equipped_ring_b], Rect2(40, 40, 30, 30),
-		Rect2(Vector2.ZERO, Vector2(root.size)), false)
+		Rect2(Vector2.ZERO, host.size), false)
 	await process_frame
 	_expect(card.find_child("EquippedItemCard1", true, false) == null, "compare false renders only the hovered item")
 	card.dismiss()
 	_expect(not card.visible, "dismiss hides the component")
-	card.present(input_view, [], Rect2(40, 40, 30, 30), Rect2(Vector2.ZERO, Vector2(root.size)))
+	card.font_scale = 1.1
+	_expect(not card.visible, "font change does not resurrect dismissed hover")
+	card.present({}, [], Rect2(), Rect2(Vector2.ZERO, host.size))
+	_expect(not card.visible, "empty view remains hidden")
+	card.present(input_view, [], Rect2(40, 40, 30, 30), Rect2(Vector2.ZERO, host.size))
 	await process_frame
 	_expect(card.visible, "present can reopen a dismissed component")
 	print("item_hover_card_test: %d checks, %d failures" % [checks, failures])
@@ -157,3 +161,10 @@ func _capture(stem: String) -> void:
 	var image: Image = root.get_texture().get_image()
 	if image != null and not image.is_empty():
 		image.save_png(capture_dir.path_join(stem + ".png"))
+		var pixel_scale: Vector2 = Vector2(image.get_size()) / root.get_visible_rect().size
+		for column: Control in card.get_node("ItemHoverCards").get_children():
+			var rect: Rect2 = column.get_global_rect()
+			var sample: Vector2i = Vector2i((rect.position + Vector2(20, 20)) * pixel_scale)
+			_expect(sample.x >= 0 and sample.y >= 0 and sample.x < image.get_width() and sample.y < image.get_height(), "rendered card sample inside actual pixels")
+			if sample.x >= 0 and sample.y >= 0 and sample.x < image.get_width() and sample.y < image.get_height():
+				_expect(image.get_pixelv(sample).get_luminance() > 0.25, "actual parchment pixels present in every comparison card")
