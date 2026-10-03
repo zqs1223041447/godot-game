@@ -115,11 +115,13 @@ var _progress_saving: bool = false
 
 
 func _ready() -> void:
+	var supply_config:Variant=ProjectSettings.get_setting("testing/town_supply_enabled",true)
+	test_supply_enabled=supply_config is bool and supply_config
 	visual_settings.load_settings()
 	rng.randomize()
 	_font = load("res://assets/fonts/arena_sans.otf")
 	_configure_input()
-	state.load_build()
+	state.load_build(build_save_path)
 	_stats = state.get_stats()
 	state.changed.connect(_on_build_changed)
 	static_environment = preload("res://scripts/visuals/static_arena_layer.gd").new()
@@ -231,7 +233,7 @@ func _attempt_progress_save() -> bool:
 	var revision: int = _progress_revision
 	_progress_saving = true
 	progress_save_attempt_count += 1
-	var error: Error = state.save_build()
+	var error: Error = state.save_build(build_save_path)
 	if error == OK:
 		progress_save_success_count += 1
 		_progress_save_dirty = _progress_revision != revision
@@ -279,7 +281,7 @@ func restart_run() -> void:
 	telegraphs.reset()
 	telegraph_trace.clear()
 	elapsed = 0.0
-	wave = 1
+	wave = int(_map_run.profile.wave) if _world_mode=="map" else 1
 	alive = true
 	player_pos = ARENA.get_center()
 	player_facing = Vector2.RIGHT
@@ -310,8 +312,9 @@ func restart_run() -> void:
 	total_damage = 0.0
 	if is_instance_valid(hud):
 		hud.close_panel()
-		for i: int in range(3):
-			_spawn_enemy()
+		if _world_mode in ["normal","map"]:
+			for i: int in range(3):
+				_spawn_enemy()
 	queue_redraw()
 
 
@@ -336,6 +339,7 @@ func flask_statuses() -> Array[Dictionary]:
 			row.merge(flask_runtime.status(slot.uid,health if resource=="health" else mana,float(_stats.max_health) if resource=="health" else float(_stats.max_mana)),true)
 			if not alive:row.can_use=false;row.code="dead";row.reason="角色已死亡"
 			elif is_instance_valid(hud) and hud.is_blocking():row.can_use=false;row.code="paused";row.reason="暂停时不能使用药剂"
+			elif _world_mode in ["town","map_complete"]:row.can_use=false;row.code="safe_area";row.reason="安全区域不使用药剂"
 		result.append(row)
 	return result
 
@@ -413,8 +417,12 @@ func tick(delta: float) -> void:
 
 
 func _tick(delta: float) -> void:
+	if _world_mode=="town" or _world_mode=="map_complete":
+		_move_player(delta)
+		_update_effects(delta)
+		return
 	elapsed += delta
-	var new_wave: int = 1 + int(elapsed / 30.0)
+	var new_wave: int = int(_map_run.profile.wave) if _world_mode=="map" else 1 + int(elapsed / 30.0)
 	if new_wave != wave:
 		wave = new_wave
 		if wave % 5 == 0 and not demo_mode:
@@ -447,6 +455,7 @@ func _tick(delta: float) -> void:
 	_update_effects(delta)
 	_update_pickups(delta)
 	_start_enemy_telegraphs()
+	if _world_mode=="map":_check_map_complete()
 	_autosave_timer += delta
 	if _autosave_timer >= 15.0:
 		_autosave_timer = 0.0
@@ -469,6 +478,9 @@ func _clamp_to_arena(pos: Vector2, margin: float) -> Vector2:
 
 
 func _update_spawning(delta: float) -> void:
+	if _world_mode=="map":
+		_update_map_spawning(delta)
+		return
 	if not _encounter_ready():
 		return
 	_flush_monster_spawns()
@@ -489,6 +501,7 @@ func _update_spawning(delta: float) -> void:
 
 
 func _spawn_enemy(forced_position: Vector2 = Vector2.ZERO, forced_kind: int = -1) -> Dictionary:
+	if _world_mode in ["town","map_complete"] or (_world_mode=="map" and not _map_run.can_admit()):return {}
 	if not _encounter_ready():
 		return {}
 	if enemies.size() >= MAX_ENEMIES:
@@ -506,10 +519,14 @@ func _spawn_enemy(forced_position: Vector2 = Vector2.ZERO, forced_kind: int = -1
 	else:
 		var roll: Dictionary = Monsters.ordinary_roll(rng, wave)
 		var elemental: String = Monsters.elemental_template_for_roll(wave, ordinary_admissions + 1, roll) if natural else ""
+		if natural and _world_mode=="map":
+			var special:String=MapCompiler.special_template(_map_run.profile,roll)
+			if not special.is_empty():elemental=special
 		enemy = _spawn_monster(roll.template if elemental.is_empty() else elemental, forced_position, "ordinary", roll.rarity, roll.mechanisms)
 	if natural and not enemy.is_empty():
 		ordinary_admissions += 1
-	if enemy.is_empty() and not _encounter_ids.is_empty():
+		if _world_mode=="map" and not _map_run.register_root(enemy):_encounter_failed("地图根怪登记失败")
+	if enemy.is_empty() and (not _encounter_ids.is_empty() or _world_mode=="map"):
 		rng.state = random_before
 	return enemy
 
@@ -532,6 +549,7 @@ func _spawn_monster(template_id: String, forced_position: Vector2 = Vector2.ZERO
 		if pos.distance_to(player_pos) < 230.0:
 			pos = ARENA.get_center() * 2.0 - pos
 	var enemy: Dictionary
+	var previous_monster_id:int=monster_runtime.next_id
 	if _encounter_ids.is_empty():
 		enemy = monster_runtime.create_root(template_id, wave, pos, context, rarity, mechanisms, rewards and not demo_mode)
 	else:
@@ -543,6 +561,7 @@ func _spawn_monster(template_id: String, forced_position: Vector2 = Vector2.ZERO
 			return {}
 		enemy = admitted.enemy
 	if enemy.is_empty():
+		if _world_mode=="map":monster_runtime.next_id=previous_monster_id;rng.state=random_before
 		return {}
 	_apply_source_actor_profile(enemy)
 	enemy.pos = _clamp_to_arena(enemy.pos, float(enemy.radius))
@@ -674,6 +693,7 @@ func encounter_summary() -> String:
 
 
 func start_encounter(ids: Variant, expected_revision: Variant) -> bool:
+	if _world_mode!="normal":return false
 	# UI holds a run revision while its confirmation is open. A newer run or
 	# another confirmation cannot accidentally be restarted by a stale request.
 	if not expected_revision is int or expected_revision != run_revision:
@@ -695,6 +715,9 @@ func _clear_encounter() -> void:
 
 
 func _encounter_ready() -> bool:
+	if _world_mode=="map":
+		var map_error:String=MapCompiler.profile_reason(_map_run.profile)
+		if not map_error.is_empty():_encounter_failed(map_error);return false
 	var reason: String = EncounterCompiler.profile_error(_encounter_profile)
 	if reason.is_empty() and _encounter_profile.modifier_ids != _encounter_ids:
 		reason = "本轮选择与挑战配置不匹配"
@@ -885,6 +908,7 @@ func cast_skill(index: int) -> bool:
 
 
 func cast_group(group_id: String) -> bool:
+	if _world_mode in ["town","map_complete"]:return false
 	if _group_cast_busy or not state.has_method("get_group_cast"):
 		return false
 	_group_cast_busy = true
@@ -1148,6 +1172,7 @@ func _apply_enemy_settlement(enemy: Dictionary, settlement: Dictionary, color: C
 		visual_cues.emit_cue("death", Vector2(enemy.pos), {"radius": float(enemy.radius), "color": Monsters.RARITIES[enemy.rarity].color, "target_id": int(enemy.id)})
 		kills += 1
 		var eligible: bool = bool(death.reward) and not demo_mode
+		if _world_mode=="map" and eligible and _map_run.record_death(enemy):world_context_changed.emit()
 		if eligible:
 			reward_kills += 1
 			_sync_flasks()
@@ -1347,3 +1372,124 @@ func _update_effects(delta: float) -> void:
 func _draw() -> void:
 	_world_draw_count += 1
 	Visuals.draw_scene(self, visual_settings, static_environment == null)
+
+
+# Region flow owns only runtime state. Canonical item operations persist to the
+# selected profile; entering the test profile is explicit and never overwrites normal.
+signal world_context_changed
+signal build_state_replaced
+const TownCatalog=preload("res://scripts/town/town_catalog.gd")
+const MapCatalog=preload("res://scripts/world/map_catalog.gd")
+const MapCompiler=preload("res://scripts/world/map_compiler.gd")
+const MapRun=preload("res://scripts/world/map_run_state.gd")
+const NORMAL_BUILD_PATH:="user://build_save.json"
+const TOWN_TEST_BUILD_PATH:="user://town_test_build_save.json"
+var build_save_path:String=NORMAL_BUILD_PATH
+var _world_mode:="normal"
+var _world_revision:=0
+var _map_draft_revision:=0
+var _map_draft_profile:Dictionary=MapCompiler.compile("old_garden",[],[]).profile
+var _map_run=MapRun.new()
+var _normal_state:RefCounted
+var test_supply_enabled:=true
+
+func world_context()->Dictionary:
+	var run:Dictionary=_map_run.snapshot()
+	return {"mode":_world_mode,"test_mode":_world_mode!="normal","save_path":build_save_path,"revision":_world_revision,"run_revision":run_revision,
+		"map_id":str(_map_run.profile.get("id","")),"map_name":str(_map_run.profile.get("name","")),
+		"ordinary_kills":run.ordinary_kills,"ordinary_target":run.ordinary_target,"boss_defeated":run.boss_defeated,
+		"can_return":_world_mode in ["map","map_complete"],"supply_enabled":test_supply_enabled,
+		"description":"城镇测试 · 独立测试进度，免费测试供应不进入正常存档" if _world_mode!="normal" else "正常游戏"}
+func _world_failure(code:String,reason:String)->Dictionary:return {"ok":false,"code":code,"reason":reason}
+func _world_ok()->Dictionary:return {"ok":true,"code":"","reason":"","world":world_context()}
+func _world_revision_ok(value:Variant)->bool:return value is int and value==_world_revision
+func _replace_build(next:RefCounted,path:String)->void:
+	if state.changed.is_connected(_on_build_changed):state.changed.disconnect(_on_build_changed)
+	state=next;build_save_path=path;state.changed.connect(_on_build_changed)
+	_stats=state.get_stats();_progress_hud_dirty=false;_progress_save_dirty=false;_progress_save_requested=false
+	build_state_replaced.emit()
+func enter_town_test(expected_revision:Variant)->Dictionary:
+	if not _world_revision_ok(expected_revision) or _world_mode!="normal":return _world_failure("stale_world","当前入口已变化")
+	if not save_build():return _world_failure("save_failed","正常进度未保存，暂不能进入城镇测试")
+	var test:=Build.new()
+	if FileAccess.file_exists(TOWN_TEST_BUILD_PATH):
+		if not test.load_build(TOWN_TEST_BUILD_PATH):return _world_failure("test_save_invalid",test.last_error)
+	else:
+		test._accept_memory(state.snapshot())
+		if test.save_build(TOWN_TEST_BUILD_PATH)!=OK:return _world_failure("test_save_failed",test.last_error)
+	_normal_state=state;_world_mode="town";_world_revision+=1
+	_replace_build(test,TOWN_TEST_BUILD_PATH);_map_run.clear();_clear_encounter();restart_run();world_context_changed.emit()
+	return _world_ok()
+func leave_town_test(expected_revision:Variant)->Dictionary:
+	if not _world_revision_ok(expected_revision) or _world_mode!="town":return _world_failure("stale_world","请先返回城镇")
+	if not save_build():return _world_failure("save_failed","测试进度未保存")
+	var normal:=Build.new()
+	if not normal.load_build(NORMAL_BUILD_PATH):return _world_failure("normal_save_invalid",normal.last_error)
+	_world_mode="normal";_world_revision+=1;_map_run.clear();_clear_encounter()
+	_replace_build(normal,NORMAL_BUILD_PATH);_normal_state=null;restart_run();world_context_changed.emit()
+	return _world_ok()
+func town_services()->Array[Dictionary]:
+	var rows:=TownCatalog.services()
+	for row:Dictionary in rows:row.available=_world_mode=="town";row.reason="" if row.available else "请先进入城镇测试"
+	return rows
+func town_stock(service_id:String)->Array[Dictionary]:
+	var rows:=TownCatalog.offers(service_id)
+	for row:Dictionary in rows:
+		row.available=_world_mode=="town" and test_supply_enabled
+		row.reason="" if row.available else "测试供应已关闭" if not test_supply_enabled else "请先返回城镇"
+	return rows
+func town_buy(offer_id:Variant,expected_revision:Variant)->Dictionary:
+	if _world_mode!="town" or not test_supply_enabled:return _world_failure("service_unavailable","当前不能领取测试供应")
+	var result:Dictionary=state.town_claim_offer(offer_id,expected_revision,build_save_path)
+	if result.ok:world_context_changed.emit()
+	return result
+func town_reset_passives(expected_revision:Variant)->Dictionary:
+	if _world_mode!="town":return _world_failure("service_unavailable","请先返回城镇")
+	var result:Dictionary=state.reset_all_passives(expected_revision,build_save_path)
+	if result.ok:world_context_changed.emit()
+	return result
+func map_options()->Dictionary:return MapCatalog.options()
+func map_draft()->Dictionary:
+	return {"revision":_map_draft_revision,"map_id":_map_draft_profile.id,"normal_ids":_map_draft_profile.normal_ids.duplicate(),"special_ids":_map_draft_profile.special_ids.duplicate(),
+		"valid":MapCompiler.profile_reason(_map_draft_profile).is_empty(),"reason":MapCompiler.profile_reason(_map_draft_profile),"summary":_map_draft_profile.summary,"cost_label":"测试模式免费"}
+func craft_map(map_id:Variant,normal_ids:Variant,special_ids:Variant,expected_revision:Variant)->Dictionary:
+	if _world_mode!="town":return _world_failure("not_in_town","请先返回城镇")
+	if not expected_revision is int or expected_revision!=_map_draft_revision:return _world_failure("stale_map","地图草案已变化")
+	var compiled:=MapCompiler.compile(map_id,normal_ids,special_ids)
+	if not compiled.ok:return compiled
+	_map_draft_profile=compiled.profile;_map_draft_revision+=1;world_context_changed.emit()
+	return {"ok":true,"code":"","reason":"","draft":map_draft()}
+func start_map(expected_revision:Variant)->Dictionary:
+	if _world_mode!="town" or not expected_revision is int or expected_revision!=_map_draft_revision:return _world_failure("stale_map","地图草案或所在区域已变化")
+	var reason:=MapCompiler.profile_reason(_map_draft_profile)
+	if not reason.is_empty():return _world_failure("invalid_map",reason)
+	if not save_build():return _world_failure("save_failed","测试构筑未保存，未启动地图")
+	if not _map_run.begin(_map_draft_profile):return _world_failure("invalid_map","地图配置无效")
+	_encounter_profile=_map_draft_profile.encounter_profile;_encounter_ids.assign(_map_draft_profile.normal_ids);_encounter_error=""
+	_world_mode="map";_world_revision+=1;_map_draft_revision+=1;restart_run();world_context_changed.emit()
+	return _world_ok()
+func return_to_town(expected_revision:Variant)->Dictionary:
+	if not _world_revision_ok(expected_revision) or _world_mode not in ["map","map_complete"]:return _world_failure("stale_world","本轮地图已变化")
+	if not save_build():return _world_failure("save_failed","已得进度未保存，暂不能返城")
+	_world_mode="town";_world_revision+=1;_map_run.clear();_clear_encounter();restart_run();world_context_changed.emit()
+	return _world_ok()
+func _update_map_spawning(delta:float)->void:
+	_flush_monster_spawns()
+	if _map_run.ready_for_boss() and enemies.size()<MAX_ENEMIES:
+		var boss:Dictionary=_spawn_monster(_map_run.profile.boss_id,Vector2.ZERO,"map_boss")
+		if not boss.is_empty():
+			if not _map_run.register_root(boss,true):_encounter_failed("地图首领登记失败");return
+			hud.notify("地图首领已出现：裂隙守卫");world_context_changed.emit()
+	spawn_timer-=delta
+	if spawn_timer<=0.0 and _map_run.can_admit():
+		spawn_timer=maxf(0.42,1.45-wave*0.07)
+		for unused:int in range(3):
+			if not _map_run.can_admit() or enemies.size()>=MAX_ENEMIES:break
+			_spawn_enemy()
+func _check_map_complete()->void:
+	var living:=0
+	for enemy:Dictionary in enemies:
+		if float(enemy.health)>0.0:living+=1
+	if _map_run.check_complete(living,monster_runtime.queue.size()):
+		projectile_runtime.cancel_all(projectiles);telegraphs.reset()
+		_world_mode="map_complete";_world_revision+=1;world_context_changed.emit();hud.notify("地图完成，可以返回城镇")

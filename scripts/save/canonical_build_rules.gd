@@ -14,20 +14,28 @@ const V14_VERSION := 14
 const V15_VERSION := 15
 const V16_VERSION := 16
 const V17_VERSION := 17
-const VERSION := 18
+const V18_VERSION := 18
+const VERSION := 19
 const LEGACY_MAX_ITEMS := 1024
 const V17_MAX_ITEMS := LEGACY_MAX_ITEMS + 1
 const MAX_ITEMS := V17_MAX_ITEMS + 2 # Two once-only migration bottles; bag capacity is unchanged.
 const MAX_GROUPS := 64
 const MAX_SERIAL := 1000000000
 const FIELDS := ["version", "revision", "items", "locations", "next_item_serial", "skill_groups", "bindings", "talents", "progress", "crafting", "migration_ledger"]
-const BINDABLE_KEYS := [KEY_0, KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6, KEY_7, KEY_8, KEY_9,
+const V18_BINDABLE_KEYS := [KEY_0, KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6, KEY_7, KEY_8, KEY_9,
 	KEY_F1, KEY_F2, KEY_F3, KEY_F4, KEY_F5, KEY_F9, KEY_F10, KEY_F11, KEY_F12,
 	KEY_E, KEY_F, KEY_G, KEY_H, KEY_J, KEY_L, KEY_Z, KEY_X, KEY_C, KEY_V, KEY_N, KEY_M]
+const BINDABLE_KEYS := [KEY_0, KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6, KEY_7, KEY_8, KEY_9,
+	KEY_F1, KEY_F2, KEY_F3, KEY_F4, KEY_F5, KEY_F9, KEY_F10, KEY_F11, KEY_F12,
+	KEY_E, KEY_F, KEY_G, KEY_H, KEY_J, KEY_L, KEY_Z, KEY_X, KEY_V, KEY_N, KEY_M]
 
 
 static func decode(raw: Variant) -> Dictionary:
 	return _decode(raw, true, VERSION, true)
+
+
+static func decode_v18(raw:Variant)->Dictionary:
+	return _decode(raw,true,V18_VERSION,true)
 
 
 static func decode_v17(raw:Variant)->Dictionary:
@@ -96,6 +104,10 @@ static func reason(value: Variant, validate_talents: Callable = Callable(), sock
 	return _reason(value, VERSION, true, true, MAX_ITEMS, validate_talents, socket_ids)
 
 
+static func reason_v18(value:Variant,validate_talents:Callable=Callable(),socket_ids:Array=[])->String:
+	return _reason(value,V18_VERSION,true,true,MAX_ITEMS,validate_talents,socket_ids)
+
+
 static func reason_v17(value:Variant,validate_talents:Callable=Callable(),socket_ids:Array=[])->String:
 	return _reason(value,V17_VERSION,true,true,V17_MAX_ITEMS,validate_talents,socket_ids)
 
@@ -146,7 +158,7 @@ static func _reason(value: Variant, expected_version: int, paged: bool, allow_cu
 	var bound_groups: Dictionary = {}
 	for binding: Variant in value.bindings:
 		if not Locations._exact_string_keys(binding, ["group_id", "keycode"]) or not binding.group_id is String or not group_ids.has(binding.group_id) \
-				or not binding.keycode is int or not BINDABLE_KEYS.has(binding.keycode) or keys.has(binding.keycode) or bound_groups.has(binding.group_id): return "快捷键重复或不可用"
+				or not binding.keycode is int or not (V18_BINDABLE_KEYS if expected_version<=V18_VERSION else BINDABLE_KEYS).has(binding.keycode) or keys.has(binding.keycode) or bound_groups.has(binding.group_id): return "快捷键重复或不可用"
 		keys[binding.keycode] = true
 		bound_groups[binding.group_id] = true
 	for group_id: String in group_ids:

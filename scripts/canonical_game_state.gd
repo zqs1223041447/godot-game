@@ -263,6 +263,59 @@ func cache_diagnostics() -> Dictionary:
 
 ## Combat rewards participate in main's existing bounded progress transaction.
 ## UI ownership commands above still require successful persistence first.
+## Town UI commands retain the same full-candidate save-first transaction.
+func town_claim_offer(offer_id:Variant,expected_revision:Variant,path:String)->Dictionary:
+	if _busy:return _failure("busy","当前操作尚未结束")
+	if not expected_revision is int or expected_revision!=revision():return _failure("stale_revision","库存已变化")
+	var catalog=preload("res://scripts/town/town_catalog.gd")
+	var offer:Dictionary=catalog.offer(offer_id)
+	if offer.is_empty():return _failure("unknown_offer","未知测试供应")
+	if not pending_items().is_empty():return _failure("pending_items","请先安置已有待安置物品")
+	var candidate:=snapshot()
+	var created_uid:=""
+	if offer.supply_kind=="currency":
+		var granted:=_set_bag_currency_balance(candidate,crafting_balance()+100)
+		if not granted.ok:return _failure(granted.error_code,granted.reason)
+	else:
+		if candidate.items.size()>=Rules.V17_MAX_ITEMS or candidate.next_item_serial>=Rules.MAX_SERIAL:return _failure("item_limit","物品注册表或序号已达上限")
+		var item:Dictionary=catalog.make_item(offer,int(candidate.next_item_serial))
+		if item.is_empty() or candidate.items.has(item.uid):return _failure("invalid_offer","目录实例无效或身份冲突")
+		created_uid=item.uid;candidate.items[item.uid]=item
+		var position:=Transfer.first_bag_space_paged(Items.metadata_for_items(candidate.items),candidate.locations,Migration.paged_location_context(candidate,_socket_ids),item.uid)
+		if position.is_empty():return _failure("bag_full","背包没有合适空间")
+		candidate.locations[item.uid]=position;candidate.next_item_serial+=1
+	candidate.revision+=1
+	var result:=_commit(candidate,path)
+	if result.ok:result.uid=created_uid;result.offer_id=offer_id
+	return result
+
+
+func reset_all_passives(expected_revision:Variant,path:String)->Dictionary:
+	if _busy:return _failure("busy","当前操作尚未结束")
+	if not expected_revision is int or expected_revision!=revision():return _failure("stale_revision","天赋构筑已变化")
+	var candidate:=snapshot()
+	var refunded:int=candidate.talents.allocated.size()-1
+	var returned:=0
+	var returned_uids:Array[String]=[]
+	candidate.talents.allocated=[SourceTree.Data.start_for_class(int(candidate.talents.class_id))]
+	candidate.talents.masteries.clear();candidate.talents.normal_points+=refunded
+	for uid:String in candidate.locations:
+		if candidate.locations[uid].kind!="passive_socket":continue
+		candidate.locations[uid]={"kind":"recovery","index":candidate.items.size()+returned}
+		returned_uids.append(uid)
+		returned+=1
+	candidate.locations=Transfer.compact_recovery(candidate.locations)
+	var metadata:=Items.metadata_for_items(candidate.items)
+	for uid:String in returned_uids:
+		var position:=Transfer.first_bag_space_paged(metadata,candidate.locations,Migration.paged_location_context(candidate,_socket_ids),uid)
+		if not position.is_empty():candidate.locations[uid]=position
+	candidate.locations=Transfer.compact_recovery(candidate.locations)
+	candidate.revision+=1
+	var result:=_commit(candidate,path)
+	if result.ok:result.refunded_points=refunded;result.returned_jewels=returned
+	return result
+
+
 func award_equipment(rng: RandomNumberGenerator, item_level: int, rarity: String = "", pool: String = "current") -> String:
 	if _busy or rng == null or not pending_items().is_empty() or _current.next_item_serial >= Rules.MAX_SERIAL:
 		return ""
@@ -463,15 +516,22 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	migrated_from_legacy=false
 	migration_message=""
 	var old_version:int=0
+	var c_groups:Array[String]=[]
 	if FileAccess.file_exists(path):
 		var file:=FileAccess.open(path,FileAccess.READ)
 		if file!=null and file.get_length()<=MAX_SAVE_BYTES:
 			var raw:Variant=JSON.parse_string(file.get_as_text())
-			if raw is Dictionary and Items._whole(raw.get("version"), 1, Rules.MAX_SERIAL):old_version=int(raw.version)
+			if raw is Dictionary and Items._whole(raw.get("version"), 1, Rules.MAX_SERIAL):
+				old_version=int(raw.version)
+				if raw.get("bindings") is Array:
+					for binding:Variant in raw.bindings:
+						if binding is Dictionary and binding.get("keycode")==KEY_C and binding.get("group_id") is String:c_groups.append(binding.group_id)
 	var loaded:=super.load_build(path)
 	if loaded and old_version>0 and old_version<Rules.VERSION:
 		migrated_from_legacy=true
-		if old_version >= Rules.V16_VERSION:
+		if old_version==Rules.V18_VERSION:
+			migration_message="旧存档已原字节备份，C已预留给角色属性；原物品与技能组保持。"
+		elif old_version >= Rules.V16_VERSION:
 			migration_message="旧存档已原字节备份，药剂栏已启用并放入两瓶药剂；原物品、键位与天赋预算保持不变。"
 		elif old_version == Rules.V14_VERSION:
 			migration_message="旧存档已备份，背包已扩容。原物品与构筑保持不变，校准碎片已转为物品。待安置物品：%d 件。"%pending_items().size()
@@ -479,6 +539,7 @@ func load_build(path: String = "user://build_save.json") -> bool:
 			migration_message="旧存档已备份，背包已扩容，校准碎片已转为物品。待安置物品：%d 件。"%pending_items().size()
 		else:
 			migration_message="旧存档已备份，装备、珠宝和技能已保留，旧天赋点已退还。校准碎片已转为物品。待安置物品 %d 件，预算外 %d 点保留记账。"%[pending_items().size(),int(_current.migration_ledger.excess_points_recorded)]
+		if not c_groups.is_empty():migration_message+=" 原绑定C的技能行已改为未绑定："+"、".join(c_groups)
 	return loaded
 
 

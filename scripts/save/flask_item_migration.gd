@@ -6,7 +6,7 @@ const Flasks=preload("res://scripts/items/flask_catalog.gd")
 static func migrate_v17(source:Variant,validate_talents:Callable=Callable(),socket_ids:Array=[])->Dictionary:
 	if not Rules.reason_v17(source,validate_talents,socket_ids).is_empty():return {}
 	var candidate:Dictionary=source.duplicate(true)
-	candidate.version=Rules.VERSION
+	candidate.version=Rules.V18_VERSION
 	var index:=1
 	for id:String in ["flask:life","flask:mana"]:
 		var serial:=index
@@ -15,4 +15,4 @@ static func migrate_v17(source:Variant,validate_talents:Callable=Callable(),sock
 		candidate.items[uid]=Flasks.create_instance(uid,id)
 		candidate.locations[uid]={"kind":"flask_slot","slot_id":"flask_%d"%index}
 		index+=1
-	return candidate if Rules.reason(candidate,validate_talents,socket_ids).is_empty() else {}
+	return candidate if Rules.reason_v18(candidate,validate_talents,socket_ids).is_empty() else {}
