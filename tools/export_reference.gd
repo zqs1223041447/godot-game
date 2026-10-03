@@ -276,22 +276,24 @@ static func collect() -> Dictionary:
 ## Pure example plans: no model-issued handles, userdata reads or save writes.
 ## Full candidates still pass the same BuildState inventory/jewel validator.
 static func crafting_examples() -> Dictionary:
-	var instance: Dictionary = _local_instance(["whetstone_edge"], "magic")
-	var build: RefCounted = local_build(instance)
-	assert(build.unequip("weapon"))
-	var cost: int = int(Craft.recalibrate_plan(instance, 0).cost[Craft.MATERIAL_ID])
-	build.crafting.materials[Craft.MATERIAL_ID] = cost
-	var snapshot: Dictionary = build._snapshot()
-	var context: Dictionary = {"revision": 0, "materials": snapshot.crafting.materials.duplicate(true),
-		"inventory": snapshot.inventory.duplicate(true), "equipment_instances": snapshot.equipment_instances.duplicate(true),
-		"equipped": snapshot.equipped.duplicate(true), "backpack_positions": snapshot.backpack_positions.duplicate(true), "save_writable": true}
 	var metadata: Dictionary = Craft.metadata()
 	metadata["integration_status"] = "implemented"
 	var result: Dictionary = {Craft.MATERIAL_ID: {"name": "校准碎片", "kind": "material",
-		"description": "回收背包中的随机魔法、稀有装备获得。用于重掷已有词缀数值；没有额外击杀掉落或升级赠送。",
+		"description": "回收背包中的随机魔法、稀有装备获得。用于数值校准、赋魔、升格、补缀或重铸；没有额外击杀掉落或升级赠送。",
 		"maximum": Build.MAX_CRAFT_MATERIALS, "rules": metadata,
 		"max_revision": Build.MAX_CRAFT_REVISION, "save_version": Build.SAVE_VERSION}}
-	for operation: String in ["salvage", "recalibrate"]:
+	for operation: String in Craft.operation_ids():
+		var instance: Dictionary = _local_instance([] if operation == "enchant" else ["whetstone_edge"], "normal" if operation == "enchant" else "magic")
+		var build: RefCounted = local_build(instance)
+		assert(build.unequip("weapon"))
+		var economics: Dictionary = Craft.operation_quote(instance, operation)
+		assert(economics.ok)
+		var balance: int = int(economics.cost.get(Craft.MATERIAL_ID, 8))
+		build.crafting.materials[Craft.MATERIAL_ID] = balance
+		var snapshot: Dictionary = build._snapshot()
+		var context: Dictionary = {"revision": 0, "materials": snapshot.crafting.materials.duplicate(true),
+			"inventory": snapshot.inventory.duplicate(true), "equipment_instances": snapshot.equipment_instances.duplicate(true),
+			"equipped": snapshot.equipped.duplicate(true), "backpack_positions": snapshot.backpack_positions.duplicate(true), "save_writable": true}
 		var quote: Dictionary = CraftPlanner.quote(context, operation, instance.id)
 		var planned: Dictionary = CraftPlanner.plan(context, quote, 20261002)
 		assert(quote.ok and planned.ok)
@@ -300,11 +302,14 @@ static func crafting_examples() -> Dictionary:
 			candidate[field] = planned.candidate[field].duplicate(true)
 		candidate.crafting = {"materials": planned.candidate.materials.duplicate(true), "revision": planned.candidate.revision}
 		assert(not build._validate_snapshot(candidate).is_empty(), "Craft reference must validate the full build including jewels and layout")
-		result[operation] = {"name": "回收" if operation == "salvage" else "数值校准", "kind": "operation",
-			"description": "消耗此装备，获得校准碎片。" if operation == "salvage" else "消耗校准碎片，重掷现有词缀的整数数值；结果可能降低或不变。",
+		var info: Dictionary = metadata.operations[operation]
+		var description: String = str(info.get("description", "消耗此装备，获得校准碎片。" if operation == "salvage" else "消耗校准碎片，重掷现有词缀的整数数值；结果可能降低或不变。"))
+		result[operation] = {"name": info.name, "kind": "operation", "description": description,
 			"rules_version": Craft.RULES_VERSION, "eligible_base_ids": metadata.base_ids,
+			"eligible_rarities": info.get("rarities", ["magic", "rare"]),
+			"preserves_affixes": operation in ["elevate", "augment"],
 			"example": {"source": instance.duplicate(true), "before_definition": Equipment.definition(instance),
-				"quote": quote, "balance_before": cost, "balance_after": planned.candidate.materials[Craft.MATERIAL_ID],
+				"quote": quote, "balance_before": balance, "balance_after": planned.candidate.materials[Craft.MATERIAL_ID],
 				"revision_before": 0, "revision_after": planned.candidate.revision,
 				"after_instance": planned.candidate.equipment_instances.get(instance.id, {}),
 				"after_definition": Equipment.definition(planned.candidate.equipment_instances.get(instance.id, {})),

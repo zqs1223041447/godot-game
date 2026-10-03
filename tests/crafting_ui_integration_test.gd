@@ -72,13 +72,15 @@ func _run() -> void:
 	await _frames()
 	_expect(not calibrate.disabled, "Funded eligible item can be calibrated")
 	before = arena.state._snapshot()
-	calibrate.pressed.emit()
+	controls._capture_menu()
+	controls._request_menu(controls._menu_operations.find("recalibrate"))
 	await _frames()
 	_expect(dialog.visible and dialog.dialog_text.contains("可能降低或不变") and dialog.get_ok_button().text.contains("消耗"), "Calibration confirmation displays cost and downside before any roll")
 	dialog.get_cancel_button().pressed.emit()
 	await _frames()
 	_expect(arena.state._snapshot()==before, "Calibration cancel does not advance currency, sequence or seed source")
-	calibrate.pressed.emit()
+	controls._capture_menu()
+	controls._request_menu(controls._menu_operations.find("recalibrate"))
 	await _frames()
 	var cost: int = panel._pending_craft.amount
 	writes = arena.state.primary_save_attempt_count

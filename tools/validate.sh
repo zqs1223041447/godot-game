@@ -35,7 +35,7 @@ run_check() {
 				export XDG_DATA_HOME="$PIERCE_VALIDATION_DIR/check-$CHECK_INDEX"
 				export PIERCE_QA_ROOT="$XDG_DATA_HOME"
 				;;
-			res://tests/crafting_state_test.gd|res://tests/crafting_integration_test.gd|res://tests/crafting_ui_integration_test.gd|res://tests/crafting_controls_test.gd)
+			res://tests/crafting_state_test.gd|res://tests/crafting_integration_test.gd|res://tests/crafting_ui_integration_test.gd|res://tests/crafting_controls_test.gd|res://tests/crafting_expansion_state_test.gd|res://tests/crafting_expansion_ui_test.gd)
 				export XDG_DATA_HOME="$CRAFT_VALIDATION_DIR/check-$CHECK_INDEX/data"
 				export GODOT_CRAFTING_TEST_ROOT="$CRAFT_VALIDATION_DIR/check-$CHECK_INDEX"
 				unset PIERCE_QA_ROOT
@@ -104,6 +104,9 @@ run_check --script res://tests/projectile_support_rules_test.gd
 run_check --script res://tests/pierce_integration_test.gd
 run_check --script res://tests/pierce_ui_test.gd
 run_check --script res://tests/crafting_rules_test.gd
+run_check --script res://tests/crafting_expansion_rules_test.gd
+run_check --script res://tests/crafting_expansion_state_test.gd
+run_check --script res://tests/crafting_expansion_ui_test.gd
 run_check --script res://tests/crafting_transaction_planner_test.gd
 run_check --script res://tests/crafting_controls_test.gd
 run_check --script res://tests/crafting_state_test.gd

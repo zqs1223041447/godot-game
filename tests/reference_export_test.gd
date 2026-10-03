@@ -26,7 +26,7 @@ func _initialize() -> void:
 	combinations[1].append("changed")
 	_expect(three_supports == ["volley", "focus", "pierce"], "Reference combinations do not alias the source list")
 	var current: Dictionary = Exporter.clean(Exporter.collect())
-	_expect(current.crafting.size() == 3 and current.crafting.has_all(["calibration_shard","salvage","recalibrate"]), "One material and exactly two implemented crafting operations are browsable")
+	_expect(current.crafting.size() == 7 and current.crafting.has_all(["calibration_shard","salvage","recalibrate","enchant","elevate","augment","reforge"]), "One material and all six implemented crafting operations are browsable")
 	_expect(current.crafting.calibration_shard.maximum == Build.MAX_CRAFT_MATERIALS and current.crafting.calibration_shard.save_version == Build.SAVE_VERSION, "Wallet limits and schema come from BuildState")
 	for operation: String in ["salvage","recalibrate"]:
 		var craft: Dictionary = current.crafting[operation]
@@ -38,6 +38,11 @@ func _initialize() -> void:
 		else:
 			_expect(sample.quote.cost.calibration_shard == 8 and sample.balance_after == 0 and Equipment.validate_instance(sample.after_instance), "Independent calibration economics and legal replacement")
 			_expect(sample.after_instance.id == sample.source.id and sample.after_instance.affixes[0].tier == 3 and sample.after_definition == Exporter.clean(Equipment.definition(sample.after_instance)), "Calibrated definition derives from exact planned result without copying a damage formula")
+	for operation: String in ["enchant", "elevate", "augment", "reforge"]:
+		var example: Dictionary = current.crafting[operation].example
+		_expect(example.quote.ok and example.full_candidate_valid and example.revision_after == 1, "New craft example uses authoritative full candidate")
+		_expect(Equipment.validate_instance(example.after_instance) and example.after_instance.id == example.source.id and example.after_instance.base_id == example.source.base_id and example.after_instance.item_level == example.source.item_level, "Reference result preserves identity and validates")
+		_expect(example.balance_before - example.balance_after == int(example.quote.cost.calibration_shard), "New craft exact debit")
 	_expect(current.monster_attacks.size() == 1 and current.monster_attacks.has("locked_circle"), "Exactly one implemented monster action is browsable")
 	_expect(current.encounters.size()==2,"Exactly two finite optional encounter modifiers are browsable")
 	for id: String in current.encounters:

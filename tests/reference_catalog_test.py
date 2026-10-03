@@ -41,7 +41,7 @@ def main():
     assert inspector.telegraph_values=={'radius':p['radius'],'warning':p['windup_seconds'],'recovery':p['recovery_seconds'],'standing':cases['standing']['settlement']['damage_total'],'armored':cases['armored']['settlement']['damage_total'],'moving':0.0}, 'Telegraph diagram diverges from real event and settlement'
     assert not cases['moving']['inside'] and not cases['moving']['settlement'], 'Dodge example must have no synthetic damage settlement'
     expected_craft={}
-    for operation in ['salvage','recalibrate']:
+    for operation in ['salvage','recalibrate','enchant','elevate','augment','reforge']:
         sample=data['crafting'][operation]['example']
         quoted=sample['quote']
         expected_craft[operation+'-amount']=(quoted['materials'] if operation=='salvage' else quoted['cost'])['calibration_shard']

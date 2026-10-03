@@ -247,6 +247,8 @@ func _release_request(operation: String) -> void:
 func _cancel_pending(operation: String, sequence: int) -> void:
 	if int(_pending_requests.get(operation, {}).get("sequence", -1)) == sequence:
 		_pending_requests.erase(operation)
+		if operation == "recalibrate" and not _expansion_menu.get_popup().visible:
+			_menu_requests.clear()
 
 
 func _request_craft(operation: String) -> void:

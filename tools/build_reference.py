@@ -262,7 +262,7 @@ def build(data, art):
         if c['kind']=='material':
             body=facts([('余额上限',number(c['maximum'])),('存档版本',number(c['save_version'])),('规则版本',esc(c['rules']['rules_version']))])
             body+='<p>首版只有一种材料。回收收益为稀有度基数（魔法1、稀有3）加全部词缀阶级之和；数值校准成本为该装备回收收益的2倍。T1入门、T3高阶是本游戏顺序，数值为可调原创平衡。</p>'
-            related=link('crafting','salvage')+' · '+link('crafting','recalibrate')
+            related=links('crafting',[i for i,v in data['crafting'].items() if v['kind']=='operation'])
         else:
             sample=c['example']; quote=sample['quote']; source=sample['source']
             amount=quote['materials'].get('calibration_shard',0) if key=='salvage' else quote['cost']['calibration_shard']
@@ -270,8 +270,8 @@ def build(data, art):
             mark='<svg viewBox="0 0 64 64" width="48" height="48" aria-hidden="true"><path d="M32 5 L51 22 L42 53 L16 42 L12 21 Z M32 5 L29 30 L42 53 M12 21 L29 30 L51 22" fill="#dfc99a" stroke="#79571f" stroke-width="2"/></svg>'
             body='<figure class="defense-flow"><figcaption>实际规则示例 · 白蜡长弓</figcaption><ol><li><span class="flow-step">01 · 原物品</span><strong>'+esc(sample['before_definition']['base_name'])+'</strong><span>'+lines('\n'.join(sample['before_definition']['affix_lines']))+'</span></li><li><span class="flow-step">02 · '+action+'校准碎片</span>'+mark+f'<strong data-craft-value="{key}-amount" data-value="{amount}">{amount}</strong></li><li><span class="flow-step">03 · 余额与结果</span>'+f'<strong><span data-craft-value="{key}-before" data-value="{sample["balance_before"]}">{sample["balance_before"]}</span> → <span data-craft-value="{key}-after" data-value="{sample["balance_after"]}">{sample["balance_after"]}</span></strong>'
             body+='<span>原装备被消耗，空位释放</span>' if key=='salvage' else '<span>'+lines('\n'.join(sample['after_definition']['affix_lines']))+'</span>'
-            body+='</li></ol><p class="fine">演示使用合法、未穿戴的最高档单词缀实例与固定示例种子；收益、成本、结果和完整构筑合法性来自实际规则/事务规划器。它不预告玩家下一次随机结果。</p></figure>'
-            body+=facts([('可用底材',links('equipment',c['eligible_base_ids'])),('前置条件','在背包中、未穿戴的随机魔法/稀有装备；普通无词缀、固定示例和珠宝不适用'),('保存顺序','完整候选验证 → 原子写盘 → 内存提交与刷新'),('失败保护','拒绝或写盘失败不动装备、材料和序号；回收需确认，校准明确可能降低或不变'),('保持字段','物品ID、底材、物品等级、稀有度、词缀种类/顺序/阶级保持；校准只重掷原档数值')])
+            body+='</li></ol><p class="fine">演示使用合法、未穿戴的普通或最高档单词缀实例与固定示例种子；收益、成本、结果和完整构筑合法性来自实际规则/事务规划器。它不预告玩家下一次随机结果。</p></figure>'
+            body+=facts([('可用底材',links('equipment',c['eligible_base_ids'])),('前置条件','在背包中、未穿戴；稀有度：'+ ' / '.join({'normal':'普通','magic':'魔法','rare':'稀有'}[x] for x in c['eligible_rarities'])+'；固定示例和珠宝不适用'),('保存顺序','完整候选验证 → 原子写盘 → 内存提交与刷新'),('失败保护','拒绝或写盘失败不动装备、材料和序号；所有操作均需确认；随机结果不保证改善或不同'),('结果边界','回收消耗原装备。' if key=='salvage' else ('物品ID、底材、物品等级保持；'+('原词缀全部保留，仅补充新词缀。' if c['preserves_affixes'] else ('校准保留词缀种类、顺序与阶级。' if key=='recalibrate' else c['description']))))])
             related=link('crafting','calibration_shard')+' · '+link('equipment',source['base_id'])+' · '+links('affixes',[a['id'] for a in source['affixes']])
         cards.append(add('crafting',key,c['name'],c['description'],body,'材料' if c['kind']=='material' else '制作操作',related=related))
     for key,e in data['encounters'].items():
