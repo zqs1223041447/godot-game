@@ -413,10 +413,10 @@ func _refresh_crafting(item_id: String) -> void:
 	if not is_visible_in_tree() or not item_id.begins_with("gear_"):
 		return
 	var source: Dictionary = _state.equipment_instances.get(item_id, {})
-	for operation: String in ["salvage", "recalibrate"]:
+	for operation: String in CraftControls.Craft.operation_ids():
 		_displayed_craft_quotes[operation] = _state.crafting_quote(operation, item_id)
 	_craft_controls.set_context(item_id, source, _state.crafting_balance(),
-		_displayed_craft_quotes.salvage, _displayed_craft_quotes.recalibrate)
+		_displayed_craft_quotes.salvage, _displayed_craft_quotes.recalibrate, "", _displayed_craft_quotes)
 	_craft_controls.show()
 
 
@@ -437,10 +437,18 @@ func _request_craft(operation: String, item_id: String, source: Dictionary) -> v
 		_craft_dialog.title = "确认回收装备"
 		_craft_dialog.ok_button_text = "确认回收"
 		_craft_dialog.dialog_text = "回收「%s」？\n获得校准碎片 %d 枚。\n这件装备将从背包与存档中删除，无法恢复。" % [str(definition.name), _pending_craft.amount]
-	else:
+	elif operation == "recalibrate":
 		_craft_dialog.title = "确认数值校准"
 		_craft_dialog.ok_button_text = "消耗 %d 枚并校准" % _pending_craft.amount
 		_craft_dialog.dialog_text = "校准「%s」？\n消耗校准碎片 %d 枚。\n重掷已有词缀数值；词缀种类、阶级和物品等级保持。\n结果可能降低或不变。" % [str(definition.name), _pending_craft.amount]
+	else:
+		var info: Dictionary = CraftControls.Craft.metadata().operations.get(operation, {})
+		if info.is_empty():
+			_cancel_craft()
+			return
+		_craft_dialog.title = "确认" + str(info.name)
+		_craft_dialog.ok_button_text = "消耗 %d 枚并%s" % [_pending_craft.amount, info.name]
+		_craft_dialog.dialog_text = "%s「%s」？\n消耗校准碎片 %d 枚。\n%s\n保持物品身份、底材与物品等级；结果不会提前展示。" % [info.name, str(definition.name), _pending_craft.amount, info.description]
 	_craft_dialog.popup_centered(Vector2i(500, 240))
 
 
@@ -464,7 +472,7 @@ func _confirm_craft() -> void:
 		selected_item_key = ""
 		feedback.emit("已回收装备，获得校准碎片 %d 枚。" % pending.amount)
 	else:
-		feedback.emit("已校准装备，消耗校准碎片 %d 枚。" % pending.amount)
+		feedback.emit("已完成%s，消耗校准碎片 %d 枚。" % [CraftControls.Craft.metadata().operations[pending.operation].name, pending.amount])
 	refresh()
 
 

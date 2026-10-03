@@ -16,8 +16,8 @@ const QUOTE_FIELDS: Array[String] = ["ok", "code", "reason", "operation", "item_
 ## Quote economics only; neither the seed nor a rolled replacement is exposed.
 ## Variant arguments reject coercion of bool/float/object into IDs or revisions.
 static func quote(context: Variant, operation: Variant, item_id: Variant) -> Dictionary:
-	if not operation is String or operation not in ["salvage", "recalibrate"]:
-		return _failure("invalid_operation", "工艺操作必须为 salvage 或 recalibrate。")
+	if not operation is String or not Craft.operation_ids().has(operation):
+		return _failure("invalid_operation", "未知工艺。")
 	if not item_id is String or item_id.is_empty():
 		return _failure("invalid_item_id", "物品标识必须为非空字符串。")
 	var checked: Dictionary = _check_context(context)
@@ -30,14 +30,11 @@ static func quote(context: Variant, operation: Variant, item_id: Variant) -> Dic
 	if Data.ITEMS.has(item_id):
 		return _failure("fixed_item", "固定示例或机制物品不支持工艺事务。")
 	if context.equipped.values().has(item_id):
-		return _failure("item_equipped", "请先卸下物品，再进行回收或数值校准。")
+		return _failure("item_equipped", "请先卸下物品，再进行工艺操作。")
 	if context.revision == MAX_REVISION:
 		return _failure("revision_overflow", "修订号已达上限，不能产生下一次事务。")
 	var source: Dictionary = context.equipment_instances[item_id]
-	# Craft has no separate recalibration-cost API. Its isolated seed-0 plan is
-	# used only to read economics; all rolled fields are discarded here.
-	var rule: Dictionary = Craft.salvage_quote(source) if operation == "salvage" \
-		else Craft.recalibrate_plan(source, 0)
+	var rule: Dictionary = Craft.operation_quote(source, operation)
 	if not rule.ok:
 		return _failure(rule.code, rule.reason)
 	if not _valid_amounts(rule.cost) or not _valid_amounts(rule.materials):
@@ -57,7 +54,7 @@ static func plan(context: Variant, quoted: Variant, seed_value: Variant) -> Dict
 	if not quoted is Dictionary or quoted.size() != QUOTE_FIELDS.size() or not quoted.has_all(QUOTE_FIELDS):
 		return _failure("invalid_quote", "报价结构无效，请重新获取报价。")
 	if not quoted.ok is bool or not quoted.ok or not quoted.operation is String \
-			or quoted.operation not in ["salvage", "recalibrate"] or not quoted.item_id is String \
+			or not Craft.operation_ids().has(quoted.operation) or not quoted.item_id is String \
 			or not quoted.revision is int or not quoted.rules_version is String:
 		return _failure("invalid_quote", "报价标识或类型无效，请重新获取报价。")
 	var current: Dictionary = quote(context, quoted.operation, quoted.item_id)
@@ -74,8 +71,8 @@ static func plan(context: Variant, quoted: Variant, seed_value: Variant) -> Dict
 	if not wallet.ok:
 		return wallet
 	var replacement: Dictionary = {}
-	if current.operation == "recalibrate":
-		var rule: Dictionary = Craft.recalibrate_plan(current.source_instance, seed_value)
+	if current.operation != "salvage":
+		var rule: Dictionary = Craft.operation_plan(current.source_instance, current.operation, seed_value)
 		if not rule.ok:
 			return _failure(rule.code, rule.reason)
 		if rule.rules_version != current.rules_version or not _same_data(rule.cost, current.cost) \

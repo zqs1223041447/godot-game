@@ -5,6 +5,7 @@ extends VBoxContainer
 signal craft_requested(operation: String, item_id: String, source_instance_copy: Dictionary)
 
 const PresentationTheme = preload("res://scripts/visuals/visual_theme.gd")
+const Craft = preload("res://scripts/items/crafting_rules.gd")
 const MATERIAL_ID: String = "calibration_shard"
 
 var _item_id: String = ""
@@ -16,11 +17,20 @@ var _disabled_reason: String = ""
 var _balance_label: Label
 var _salvage_button: Button
 var _recalibrate_button: Button
+var _expansion_menu: MenuButton
+var _extra_quotes: Dictionary = {}
+var _menu_requests: Dictionary = {}
+var _menu_operations: Array[String] = []
 var _pending_requests: Dictionary = {}
 var _request_sequence: int = 0
 
 
 class CraftButton extends Button:
+	func _make_custom_tooltip(text: String) -> Object:
+		return CraftingControls.wrapped_tooltip(self, text)
+
+
+class CraftMenuButton extends MenuButton:
 	func _make_custom_tooltip(text: String) -> Object:
 		return CraftingControls.wrapped_tooltip(self, text)
 
@@ -56,13 +66,15 @@ func _ready() -> void:
 
 
 func set_context(item_id: String, source_instance: Dictionary, material_balance: int,
-		salvage_quote: Dictionary, recalibrate_quote: Dictionary, disabled_reason: String = "") -> void:
+		salvage_quote: Dictionary, recalibrate_quote: Dictionary, disabled_reason: String = "",
+		extra_quotes: Dictionary = {}) -> void:
 	_item_id = item_id
 	_source_instance = source_instance.duplicate(true)
 	_material_balance = material_balance
 	_salvage_quote = salvage_quote.duplicate(true)
 	_recalibrate_quote = recalibrate_quote.duplicate(true)
 	_disabled_reason = disabled_reason
+	_extra_quotes = extra_quotes.duplicate(true)
 	_ensure_interface()
 	_refresh()
 
@@ -92,11 +104,16 @@ func _ensure_interface() -> void:
 	row.add_child(_salvage_button)
 	_recalibrate_button = _make_button("校准", "RecalibrateButton", "recalibrate")
 	row.add_child(_recalibrate_button)
+	_expansion_menu = _recalibrate_button as MenuButton
+	_expansion_menu.about_to_popup.connect(_capture_menu)
+	_expansion_menu.get_popup().id_pressed.connect(_request_menu)
+	_expansion_menu.get_popup().popup_hide.connect(_close_menu)
 
 
 func _make_button(caption: String, stable_name: String, operation: String) -> Button:
-	var button := CraftButton.new()
+	var button: Button = CraftMenuButton.new() if operation == "recalibrate" else CraftButton.new()
 	button.name = stable_name
+	button.action_mode = BaseButton.ACTION_MODE_BUTTON_RELEASE
 	button.text = caption
 	button.custom_minimum_size = Vector2(44, 28)
 	button.add_theme_font_size_override("font_size", 13)
@@ -123,6 +140,63 @@ func _refresh() -> void:
 		"回收此装备，获得校准碎片 %d 枚。\n回收会消耗所选装备。" % _shard_amount(_salvage_quote.get("materials")))
 	_recalibrate_button.tooltip_text = recalibrate_reason if _recalibrate_button.disabled else (
 		"消耗校准碎片 %d 枚，重掷现有词缀的数值。\n词缀种类与阶级保持不变，数值可能不变或降低。" % _shard_amount(_recalibrate_quote.get("cost")))
+	var popup: PopupMenu = _expansion_menu.get_popup()
+	popup.clear()
+	_menu_operations.clear()
+	var metadata: Dictionary = Craft.metadata().operations
+	var offered: Array[String] = ["recalibrate"]
+	offered.append_array(Craft.Expansion.OPERATIONS.keys())
+	for operation: String in offered:
+		var index: int = _menu_operations.size()
+		_menu_operations.append(operation)
+		var quotation: Dictionary = _recalibrate_quote if operation == "recalibrate" else _extra_quotes.get(operation, {})
+		var price: int = _shard_amount(quotation.get("cost", {}))
+		var caption: String = str(metadata[operation].name)
+		if price >= 0:
+			caption += " · %d 碎片" % price
+		popup.add_item(caption, index)
+		var reason: String = _blocked_reason(operation)
+		popup.set_item_disabled(index, not reason.is_empty())
+		popup.set_item_tooltip(index, reason if not reason.is_empty() else str(metadata[operation].get("description", "保持词缀种类与阶级，只重掷数值，可能降低或不变。")))
+	if _extra_quotes.is_empty():
+		popup.clear()
+		_menu_operations.clear()
+		_recalibrate_button.text = "校准"
+	else:
+		_recalibrate_button.text = "工艺"
+		var any_allowed: bool = false
+		for operation: String in offered:
+			any_allowed = any_allowed or _blocked_reason(operation).is_empty()
+		_recalibrate_button.disabled = not any_allowed
+		_recalibrate_button.tooltip_text = "选择数值校准、赋魔、升格、补缀或重铸。执行前会确认成本与结果范围。"
+
+
+func _capture_menu() -> void:
+	if not _menu_requests.is_empty():
+		return
+	_request_sequence += 1
+	for operation: String in _menu_operations:
+		_menu_requests[operation] = _snapshot(operation)
+
+
+func _close_menu() -> void:
+	_clear_menu.call_deferred(_request_sequence)
+
+
+func _clear_menu(sequence: int) -> void:
+	if sequence == _request_sequence:
+		_menu_requests.clear()
+
+
+func _request_menu(index: int) -> void:
+	if index < 0 or index >= _menu_operations.size():
+		return
+	var operation: String = _menu_operations[index]
+	var request: Dictionary = _menu_requests.get(operation, {})
+	_menu_requests.clear()
+	if request.is_empty() or not request.get("allowed", false) or not _blocked_reason(operation).is_empty():
+		return
+	craft_requested.emit(operation, request.item_id, request.source_instance.duplicate(true))
 
 
 func _blocked_reason(operation: String) -> String:
@@ -130,7 +204,7 @@ func _blocked_reason(operation: String) -> String:
 		return _disabled_reason
 	if _item_id.is_empty() or _source_instance.is_empty():
 		return "请先选择可制作的装备。"
-	var quote: Dictionary = _salvage_quote if operation == "salvage" else _recalibrate_quote
+	var quote: Dictionary = _salvage_quote if operation == "salvage" else (_recalibrate_quote if operation == "recalibrate" else _extra_quotes.get(operation, {}))
 	var ok: Variant = quote.get("ok", false)
 	if not ok is bool or not ok:
 		var reason: String = str(quote.get("reason", ""))
@@ -138,7 +212,7 @@ func _blocked_reason(operation: String) -> String:
 	var amount: int = _shard_amount(quote.get("materials" if operation == "salvage" else "cost"))
 	if amount < 0:
 		return "制作报价缺少有效的校准碎片数量。"
-	if operation == "recalibrate" and _material_balance < amount:
+	if operation != "salvage" and _material_balance < amount:
 		return "校准碎片不足：需要 %d 枚，现有 %d 枚。" % [amount, _material_balance]
 	return ""
 
@@ -158,6 +232,10 @@ func _snapshot(operation: String) -> Dictionary:
 func _capture_request(operation: String) -> void:
 	_request_sequence += 1
 	_pending_requests[operation] = _snapshot(operation)
+	if operation == "recalibrate" and not _extra_quotes.is_empty():
+		_menu_requests.clear()
+		for offered: String in _menu_operations:
+			_menu_requests[offered] = _snapshot(offered)
 
 
 func _release_request(operation: String) -> void:
@@ -172,6 +250,8 @@ func _cancel_pending(operation: String, sequence: int) -> void:
 
 
 func _request_craft(operation: String) -> void:
+	if operation == "recalibrate" and not _extra_quotes.is_empty():
+		return
 	var request: Dictionary = _pending_requests.get(operation, _snapshot(operation))
 	_pending_requests.erase(operation)
 	var button: Button = _salvage_button if operation == "salvage" else _recalibrate_button

@@ -3,7 +3,9 @@ extends RefCounted
 ## Pure quotes/plans only. The integration owner must validate ownership, commit
 ## inventory + materials atomically, refresh derived stats and persist once.
 const Catalog = preload("res://scripts/items/equipment_catalog.gd")
-const RULES_VERSION: String = "original-crafting-prototype-v1"
+const Expansion = preload("res://scripts/items/crafting_expansion_rules.gd")
+const LEGACY_SEED_VERSION: String = "original-crafting-prototype-v1"
+const RULES_VERSION: String = "original-crafting-prototype-v2"
 const MATERIAL_ID: String = "calibration_shard"
 ## ORIGINAL, tunable prototype economy; not a live wallet or final balance.
 const BALANCE: Dictionary = {
@@ -21,14 +23,14 @@ static func metadata() -> Dictionary:
 			if Catalog.family_eligible(affix_id, base_id):
 				families.append(affix_id)
 		eligible[base_id] = families
-	return {
-		"id": "crafting_rules", "name": "回收与数值校准", "schema_version": 1,
+	var result: Dictionary = {
+		"id": "crafting_rules", "name": "装备工艺", "schema_version": 2,
 		"rules_version": RULES_VERSION, "origin": "original", "status": "prototype",
 		"catalog_source": "res://scripts/items/equipment_catalog.gd",
 		"catalog_vocabulary": Catalog.CURRENT_VOCABULARY,
 		"base_ids": Catalog.all_base_ids(), "affix_ids": Catalog.all_affix_ids(),
 		"eligible_families_by_base": eligible,
-		"rarities": BALANCE.salvage_rarity_units.keys(),
+		"rarities": ["normal", "magic", "rare"], "salvage_rarities": BALANCE.salvage_rarity_units.keys(),
 		"materials": {MATERIAL_ID: {"name": "校准碎片", "unit": "枚"}},
 		"balance": BALANCE.duplicate(true),
 		"operations": {
@@ -41,6 +43,62 @@ static func metadata() -> Dictionary:
 		},
 		"persistence_owner": "main_integration", "mutates_state": false,
 	}
+	for operation: String in Expansion.OPERATIONS:
+		result.operations[operation] = Expansion.OPERATIONS[operation].duplicate(true)
+		result.operations[operation]["consumes_item"] = false
+	result["expansion"] = Expansion.metadata()
+	return result
+
+
+static func operation_ids() -> Array[String]:
+	return ["salvage", "recalibrate", "enchant", "elevate", "augment", "reforge"]
+
+
+static func seed_rules_version(operation: String) -> String:
+	return LEGACY_SEED_VERSION if operation in ["salvage", "recalibrate"] else RULES_VERSION + ":" + operation
+
+
+## Economics-only quote: expanded operations never roll a replacement here.
+static func operation_quote(instance: Variant, operation: Variant) -> Dictionary:
+	if not operation is String or not operation_ids().has(operation):
+		return _rejected("", "invalid_operation", "未知工艺。")
+	if operation == "salvage":
+		return salvage_quote(instance)
+	if operation == "recalibrate":
+		var checked: Dictionary = _check_item(instance)
+		if not checked.ok:
+			return _rejected(operation, checked.code, checked.reason)
+		var quoted: Dictionary = _result(operation)
+		quoted.ok = true
+		quoted.source_instance = instance.duplicate(true)
+		quoted.cost = {MATERIAL_ID: _salvage_units(instance) * int(BALANCE.recalibrate_cost_multiplier)}
+		return quoted
+	var raw: Dictionary = Expansion.quote(instance, operation)
+	if not raw.ok:
+		return _rejected(operation, raw.code, raw.reason)
+	var result: Dictionary = _result(operation)
+	result.ok = true
+	result.source_instance = instance.duplicate(true)
+	result.cost = raw.cost.duplicate(true)
+	return result
+
+
+static func operation_plan(instance: Variant, operation: Variant, seed_value: Variant) -> Dictionary:
+	var quoted: Dictionary = operation_quote(instance, operation)
+	if not quoted.ok:
+		return quoted
+	if not seed_value is int:
+		return _rejected(operation, "invalid_seed", "工艺种子必须为整数类型。")
+	if operation == "salvage":
+		return quoted
+	if operation == "recalibrate":
+		return recalibrate_plan(instance, seed_value)
+	var raw: Dictionary = Expansion.plan(instance, operation, seed_value)
+	if not raw.ok:
+		return _rejected(operation, raw.code, raw.reason)
+	quoted.instance = raw.instance.duplicate(true)
+	quoted.definition = raw.definition.duplicate(true)
+	return quoted
 
 
 static func salvage_quote(instance: Variant) -> Dictionary:
