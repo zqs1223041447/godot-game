@@ -94,15 +94,6 @@ func _build() -> void:
 	actions.add_theme_constant_override("separation", 3)
 	actions.size_flags_horizontal = Control.SIZE_SHRINK_END
 	top.add_child(actions)
-	_character=CharacterButton.new()
-	_character.name="CharacterStats"
-	_character.text="属性"
-	_character.custom_minimum_size.x = 46
-	_character.custom_minimum_size.y = 24
-	_character.add_theme_font_size_override("font_size", 12)
-	DockStyle.style_action(_character,11)
-	_character.pressed.connect(func(): character_requested.emit())
-	actions.add_child(_character)
 	var arrange := Button.new()
 	arrange.name = "ArrangeUnifiedBag"
 	arrange.text = "整理"
@@ -123,7 +114,7 @@ func _build() -> void:
 	actions.add_child(_discard)
 	_equipment_grid = Control.new()
 	_equipment_grid.name = "EquipmentSlotGrid"
-	_equipment_grid.custom_minimum_size.y = 128.0
+	_equipment_grid.custom_minimum_size.y = 154.0
 	_equipment_grid.resized.connect(_layout_slots)
 	_equipment_grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	add_child(_equipment_grid)
@@ -309,20 +300,20 @@ func _on_visibility_changed() -> void:
 
 func _layout_slots() -> void:
 	if not is_instance_valid(_equipment_grid): return
-	# Authored in a compact 280×156 coordinate frame; scaling is uniform.
+	# Authored in a spaced 320×184 coordinate frame; scaling is uniform.
 	var rects := {
-		"helmet": Rect2(111,0,58,36),
-		"weapon": Rect2(20,18,52,88),
-		"body_armour": Rect2(106,40,68,70),
-		"amulet": Rect2(181,35,35,35),
-		"ring_1": Rect2(67,74,34,34),
-		"ring_2": Rect2(181,74,34,34),
-		"gloves": Rect2(48,113,49,40),
-		"belt": Rect2(107,115,67,27),
-		"boots": Rect2(184,113,49,40),
+		"helmet": Rect2(131,0,58,36),
+		"weapon": Rect2(10,25,52,88),
+		"body_armour": Rect2(126,48,68,70),
+		"amulet": Rect2(220,40,35,35),
+		"ring_1": Rect2(78,91,34,34),
+		"ring_2": Rect2(222,91,34,34),
+		"gloves": Rect2(52,141,49,40),
+		"belt": Rect2(127,143,67,27),
+		"boots": Rect2(218,141,49,40),
 	}
-	var scale_value := minf(0.82, _equipment_grid.size.x / 280.0)
-	var offset := Vector2((_equipment_grid.size.x - 280.0*scale_value)*0.5,0)
+	var scale_value := minf(0.82, _equipment_grid.size.x / 320.0)
+	var offset := Vector2((_equipment_grid.size.x - 320.0*scale_value)*0.5,0)
 	for slot: String in _slots:
 		var bounds: Rect2 = rects[slot]
 		_slots[slot].position = offset + bounds.position*scale_value
@@ -392,7 +383,7 @@ func _refresh_crafting() -> void:
 		if quote.has("handle"): model.cancel_crafting_quote(quote.handle)
 	_craft_quotes.clear()
 	var item: Dictionary = model.item(_selected_uid)
-	_discard.disabled=item.is_empty() or item.get("kind","")=="equipment" or model.location(_selected_uid).get("kind","")!="bag"
+	_discard.disabled = item.is_empty() or not model.can_discard_item(_selected_uid)
 	var source: Dictionary = item.get("payload",{}) if item.get("kind","") == "equipment" else {}
 	if model.has_method("crafting_operations"):
 		var operations: Array = model.crafting_operations(_selected_uid,save_path)

@@ -80,11 +80,13 @@ func request(name: String) -> Dictionary:
 func handle_key(key: String, echo: bool = false) -> Dictionary:
 	var normalized: String = key.strip_edges().to_lower()
 	if echo:
-		return _result(normalized in ["i", "b", "k", "t", "f6", "f7", "escape", "esc"], false)
+		return _result(normalized in ["i", "b", "c", "k", "t", "f6", "f7", "escape", "esc"], false)
 
 	match normalized:
 		"i", "b":
 			return request("inventory")
+		"c":
+			return request("character")
 		"k":
 			return request("skills")
 		"t":

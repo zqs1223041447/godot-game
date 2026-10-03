@@ -2,6 +2,7 @@ class_name GameHUD
 extends CanvasLayer
 ## Responsive, keyboard-friendly combat HUD and live build editor.
 
+const TownServiceView = preload("res://scripts/ui/town_service_panel.gd")
 const FlaskSlotView = preload("res://scripts/ui/flask_slot.gd")
 const CanonicalInventoryView = preload("res://scripts/ui/canonical_inventory_panel.gd")
 const CanonicalSkillsView = preload("res://scripts/ui/canonical_skill_panel.gd")
@@ -45,6 +46,11 @@ const STAT_NAMES: Dictionary = {
 	"area_mult": "范围倍率", "area_multiplier": "范围倍率", "fire_resistance": "火焰抗性"
 }
 
+var _town_view: Control
+var _world_button: Button
+var _world_label: Label
+var _return_dialog: ConfirmationDialog
+var _return_revision := -1
 var _arena: Node
 var _state
 var _root: Control
@@ -118,6 +124,7 @@ func setup(arena: Node) -> void:
 	_root.theme = _make_theme()
 	_build_status()
 	_build_navigation()
+	_build_world_controls()
 	_build_vitals()
 	_build_flask_hotbar()
 	_build_hotbar()
@@ -134,6 +141,10 @@ func setup(arena: Node) -> void:
 	_apply_presentation()
 	refresh_build()
 	_update_live()
+	if not _arena.world_context_changed.is_connected(_refresh_world):
+		_arena.world_context_changed.connect(_refresh_world)
+		_arena.build_state_replaced.connect(_replace_build_profile)
+	_refresh_world()
 
 
 func _process(delta: float) -> void:
@@ -179,16 +190,20 @@ func open_panel(panel_name: String) -> void:
 
 
 func handle_menu_key(key: int, pressed: bool = true, echo: bool = false) -> bool:
-	if key not in [KEY_I, KEY_B, KEY_T, KEY_K, KEY_F6, KEY_F7, KEY_ESCAPE]:
+	if key not in [KEY_I, KEY_B, KEY_C, KEY_T, KEY_K, KEY_F6, KEY_F7, KEY_ESCAPE]:
 		return false
 	if not pressed:
 		return false
+	var focus := get_viewport().gui_get_focus_owner()
+	if key == KEY_C and (focus is LineEdit or focus is TextEdit):
+		return true
 	if _menu_routes.snapshot().death_latched and not bool(_arena.get("alive")):
 		return true
 	var key_name: String = ""
 	match key:
 		KEY_I: key_name = "i"
 		KEY_B: key_name = "b"
+		KEY_C: key_name = "c"
 		KEY_T: key_name = "t"
 		KEY_K: key_name = "k"
 		KEY_F6: key_name = "f6"
@@ -436,7 +451,7 @@ func _build_navigation() -> void:
 	nav.add_theme_constant_override("separation", 7)
 	_place(nav, Rect2(-506, 20, 486, 42), Control.PRESET_TOP_RIGHT)
 	nav.add_child(_button("I  行囊", "InventoryButton", open_panel.bind("inventory"), 112))
-	nav.add_child(_button("角色属性", "CharacterButton", open_panel.bind("character"), 86))
+	nav.add_child(_button("C  属性", "CharacterButton", open_panel.bind("character"), 86))
 	nav.add_child(_button("T  天赋", "TalentsButton", open_panel.bind("talents"), 82))
 	nav.add_child(_button("K  技能", "SkillsButton", open_panel.bind("skills"), 82))
 	nav.add_child(_button("Esc  暂停", "PauseButton", open_panel.bind("pause"), 96))
@@ -954,7 +969,7 @@ func _build_inventory_panel() -> void:
 			_inventory_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			_inventory_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
 			body.add_child(_inventory_panel)
-			_inventory_panel.setup(_state)
+			_inventory_panel.setup(_state, str(_arena.build_save_path))
 			_inventory_panel.feedback.connect(notify)
 			_inventory_panel.item_hovered.connect(_show_item_hover)
 			_inventory_panel.hover_left.connect(_leave_item_hover)
@@ -1045,7 +1060,7 @@ func _build_talents_panel() -> void:
 		_passive_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		_passive_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
 		_panel_body.add_child(_passive_panel)
-		_passive_panel.setup(_state)
+		_passive_panel.setup(_state, str(_arena.build_save_path))
 		_passive_panel.feedback.connect(notify)
 		if _passive_panel is CanonicalPassivesView:
 			_passive_panel.item_hovered.connect(_show_item_hover)
@@ -1064,7 +1079,7 @@ func _build_skills_panel() -> void:
 			_skill_support_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			_skill_support_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
 			_panel_body.add_child(_skill_support_panel)
-			_skill_support_panel.setup(_state)
+			_skill_support_panel.setup(_state, str(_arena.build_save_path))
 			_skill_support_panel.feedback.connect(notify)
 			_skill_support_panel.item_hovered.connect(_show_item_hover)
 			_skill_support_panel.hover_left.connect(_leave_item_hover)
@@ -1568,3 +1583,87 @@ func _dismiss_item_hover() -> void:
 	_hover_uid = ""
 	_hover_exit_at = 0
 	if is_instance_valid(_item_hover): _item_hover.dismiss()
+
+
+func _build_world_controls() -> void:
+	var box := VBoxContainer.new()
+	box.name = "WorldControls"
+	_place(box, Rect2(20,130,250,84))
+	_world_label = _label("", 12)
+	box.add_child(_world_label)
+	_world_button = _button("城镇测试", "TownEntry", _world_action, 130)
+	_world_button.custom_minimum_size.y = 28
+	box.add_child(_world_button)
+	_town_view = TownServiceView.new()
+	_town_view.hide()
+	_place(_town_view, Rect2(20,224,430,420))
+	_town_view.setup(_arena)
+	_town_view.feedback.connect(notify)
+	_town_view.crafter_requested.connect(func():
+		if not _menu_routes.snapshot().right_inventory: open_panel("inventory"))
+	_return_dialog = ConfirmationDialog.new()
+	_return_dialog.title = "离开地图"
+	_return_dialog.dialog_text = "保留已经获得的物品并返回城镇？未完成的地图将放弃。"
+	_return_dialog.confirmed.connect(func(): _world_result(_arena.return_to_town(_return_revision)))
+	_root.add_child(_return_dialog)
+
+
+func _refresh_world() -> void:
+	var context: Dictionary = _arena.world_context()
+	match str(context.mode):
+		"normal":
+			_world_label.text = ""
+			_world_button.text = "城镇测试"
+			_town_view.hide()
+		"town":
+			_world_label.text = "城镇 · 独立测试存档"
+			_world_button.text = "城镇服务"
+		_:
+			_world_label.text = "%s · %d / %d" % [str(context.map_name),int(context.ordinary_kills),int(context.ordinary_target)]
+			_world_button.text = "返回城镇"
+			_town_view.hide()
+
+
+func _world_action() -> void:
+	var context: Dictionary = _arena.world_context()
+	if str(context.mode) == "normal":
+		_world_result(_arena.enter_town_test(int(context.revision)))
+		if str(_arena.world_context().mode) == "town": _town_view.open_service()
+	elif str(context.mode) == "town":
+		_town_view.open_service()
+	elif str(context.mode) == "map_complete":
+		_world_result(_arena.return_to_town(int(context.revision)))
+	else:
+		_return_revision = int(context.revision)
+		_return_dialog.popup_centered(Vector2i(380,160))
+
+
+func _world_result(result: Dictionary) -> void:
+	if not bool(result.get("ok",false)): notify(str(result.get("reason","操作失败")))
+	_refresh_world()
+
+
+func _replace_build_profile() -> void:
+	# Release every old-model control and its deferred confirmations before rebinding.
+	get_viewport().gui_cancel_drag()
+	_dismiss_item_hover()
+	for panel in [_inventory_panel,_skill_support_panel,_character_panel,_passive_panel]:
+		if is_instance_valid(panel):
+			panel.get_parent().remove_child(panel)
+			panel.queue_free()
+	_inventory_panel = null
+	_skill_support_panel = null
+	_character_panel = null
+	_passive_panel = null
+	_skills_dock_built = false
+	_character_dock_built = false
+	_dock_built.right = false
+	_state = _arena.state
+	_menu_routes = DockedMenus.new()
+	_encounter_request_pending = false
+	_encounter_dialog.hide()
+	_return_dialog.hide()
+	_town_view.cancel_pending()
+	_skill_view_token = PackedByteArray()
+	_sync_menu_views()
+	refresh_build()
