@@ -1,0 +1,34 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+godot-game: playable arena ready
+ERROR: Legal normal fixture admitted
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/crafting_metadata_ui_test.gd:10)
+       [1] run (res://tests/crafting_metadata_ui_test.gd:25)
+       [2] frames (res://tests/crafting_metadata_ui_test.gd:12)
+ERROR: Legal one-affix fixture admitted
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/crafting_metadata_ui_test.gd:10)
+       [1] run (res://tests/crafting_metadata_ui_test.gd:26)
+       [2] frames (res://tests/crafting_metadata_ui_test.gd:12)
+ERROR: Normal gear enables enchant
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/crafting_metadata_ui_test.gd:10)
+       [1] run (res://tests/crafting_metadata_ui_test.gd:37)
+       [2] frames (res://tests/crafting_metadata_ui_test.gd:12)
+ERROR: Click requests exactly one authoritative quote
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/crafting_metadata_ui_test.gd:10)
+       [1] run (res://tests/crafting_metadata_ui_test.gd:41)
+       [2] request (res://tests/crafting_metadata_ui_test.gd:15)
+       [3] frames (res://tests/crafting_metadata_ui_test.gd:12)
+SCRIPT ERROR: Invalid access to property or key 'quote' on a base object of type 'Dictionary'.
+          at: run (res://tests/crafting_metadata_ui_test.gd:42)
+          GDScript backtrace (most recent call first):
+              [0] run (res://tests/crafting_metadata_ui_test.gd:42)
+              [1] request (res://tests/crafting_metadata_ui_test.gd:15)
+              [2] frames (res://tests/crafting_metadata_ui_test.gd:12)

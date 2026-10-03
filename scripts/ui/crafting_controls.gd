@@ -4,6 +4,7 @@ extends VBoxContainer
 
 signal craft_requested(operation: String, item_id: String, source_instance_copy: Dictionary)
 
+const DockStyle = preload("res://scripts/ui/dock_visual_style.gd")
 const PresentationTheme = preload("res://scripts/visuals/visual_theme.gd")
 const MATERIAL_ID: String = "calibration_shard"
 
@@ -18,6 +19,10 @@ var _salvage_button: Button
 var _recalibrate_button: Button
 var _pending_requests: Dictionary = {}
 var _request_sequence: int = 0
+var _metadata_mode := false
+var _operations: Dictionary = {}
+var _operation_buttons: Dictionary = {}
+var _button_row: HBoxContainer
 
 
 class CraftButton extends Button:
@@ -57,6 +62,7 @@ func _ready() -> void:
 
 func set_context(item_id: String, source_instance: Dictionary, material_balance: int,
 		salvage_quote: Dictionary, recalibrate_quote: Dictionary, disabled_reason: String = "") -> void:
+	_metadata_mode = false
 	_item_id = item_id
 	_source_instance = source_instance.duplicate(true)
 	_material_balance = material_balance
@@ -64,6 +70,27 @@ func set_context(item_id: String, source_instance: Dictionary, material_balance:
 	_recalibrate_quote = recalibrate_quote.duplicate(true)
 	_disabled_reason = disabled_reason
 	_ensure_interface()
+	_refresh()
+
+
+## Lightweight capabilities do not contain a live crafting quote or transaction.
+func set_operations_context(item_id: String,source_instance: Dictionary,material_balance: int,operations: Array,disabled_reason: String = "") -> void:
+	_metadata_mode = true
+	_item_id = item_id
+	_source_instance = source_instance.duplicate(true)
+	_material_balance = material_balance
+	_disabled_reason = disabled_reason
+	_operations.clear()
+	_ensure_interface()
+	for entry: Dictionary in operations:
+		var operation := str(entry.get("operation",""))
+		if operation.is_empty(): continue
+		_operations[operation] = entry.duplicate(true)
+		if not _operation_buttons.has(operation):
+			var button := _make_button(str(entry.get("label",operation)),"Craft_"+operation,operation)
+			_button_row.add_child(button)
+			_operation_buttons[operation] = button
+		DockStyle.style_action(_operation_buttons[operation],11)
 	_refresh()
 
 
@@ -75,6 +102,7 @@ func _ensure_interface() -> void:
 	size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	add_theme_constant_override("separation", 0)
 	var row := HBoxContainer.new()
+	_button_row = row
 	row.name = "CraftingRow"
 	row.add_theme_constant_override("separation", 4)
 	add_child(row)
@@ -92,6 +120,8 @@ func _ensure_interface() -> void:
 	row.add_child(_salvage_button)
 	_recalibrate_button = _make_button("校准", "RecalibrateButton", "recalibrate")
 	row.add_child(_recalibrate_button)
+	_operation_buttons["salvage"] = _salvage_button
+	_operation_buttons["recalibrate"] = _recalibrate_button
 
 
 func _make_button(caption: String, stable_name: String, operation: String) -> Button:
@@ -113,6 +143,30 @@ func _make_button(caption: String, stable_name: String, operation: String) -> Bu
 
 
 func _refresh() -> void:
+	if _metadata_mode:
+		_balance_label.hide()
+		for operation: String in _operation_buttons:
+			var button: Button = _operation_buttons[operation]
+			button.visible = _operations.has(operation)
+			if not button.visible: continue
+			var entry: Dictionary = _operations[operation]
+			button.text = str(entry.get("label",operation))
+			var reason := _blocked_reason(operation)
+			button.disabled = not reason.is_empty()
+			var detail := str(entry.get("description",""))
+			var risk := str(entry.get("risk",""))
+			if not risk.is_empty(): detail += "\n"+risk
+			var raw_cost: Variant = entry.get("cost",-1)
+			var cost: int = _shard_amount(raw_cost) if raw_cost is Dictionary else int(raw_cost)
+			if operation != "salvage" and cost >= 0: detail += "\n校准碎片 %d 枚" % cost
+			if operation == "salvage":
+				var gain := _shard_amount(entry.get("materials",{}))
+				if gain >= 0: detail += "\n获得校准碎片 %d 枚" % gain
+			if not reason.is_empty(): detail += "\n"+reason
+			button.tooltip_text = detail.strip_edges()
+		return
+	for operation: String in _operation_buttons:
+		_operation_buttons[operation].visible = operation in ["salvage","recalibrate"]
 	_balance_label.text = "校准碎片 %d" % _material_balance
 	_balance_label.tooltip_text = "校准碎片：%d 枚\n回收会消耗所选装备；校准只消耗碎片。" % _material_balance
 	var salvage_reason: String = _blocked_reason("salvage")
@@ -130,6 +184,12 @@ func _blocked_reason(operation: String) -> String:
 		return _disabled_reason
 	if _item_id.is_empty() or _source_instance.is_empty():
 		return "请先选择可制作的装备。"
+	if _metadata_mode:
+		var entry: Dictionary = _operations.get(operation,{})
+		if not entry.get("available",false):
+			var reason := str(entry.get("reason",""))
+			return reason if not reason.is_empty() else "此装备不适用这项工艺"
+		return ""
 	var quote: Dictionary = _salvage_quote if operation == "salvage" else _recalibrate_quote
 	var ok: Variant = quote.get("ok", false)
 	if not ok is bool or not ok:
@@ -174,8 +234,8 @@ func _cancel_pending(operation: String, sequence: int) -> void:
 func _request_craft(operation: String) -> void:
 	var request: Dictionary = _pending_requests.get(operation, _snapshot(operation))
 	_pending_requests.erase(operation)
-	var button: Button = _salvage_button if operation == "salvage" else _recalibrate_button
-	if button.disabled or not request.allowed:
+	var button: Button = _operation_buttons.get(operation) as Button
+	if button == null or button.disabled or not request.allowed:
 		return
 	# 按下后选择变化仍携带按下时的原快照，由事务所有者验证是否陈旧。
 	craft_requested.emit(operation, request.item_id, request.source_instance.duplicate(true))
