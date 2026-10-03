@@ -56,15 +56,15 @@ func _check_layout(view_size: Vector2i, ui_scale: float, font_scale: float) -> v
 	var bag_header: Control = inventory.find_child("BagHeader",true,false)
 	check(dock_ratio <= 0.34 and page_ratio <= 0.44 and bag_header.get_global_rect().position.y >= equip_rect.end.y-0.1, "Equipment stays in the upper third; inventory operations and page controls occupy the following bag area")
 	check(right_scroll_range <= 1.0, "Right inventory content needs no full-dock vertical scroll")
-	check(bag_grid.grid_columns() == 8 and bag_grid.grid_rows() == 6
-		and bag_grid.cell_rect(Vector2i(7, 5)).end.y <= bag_grid.size.y + 1.0,
-		"Complete 8×6 bag page fits inside its grid viewport")
-	var expected_pitch: float = maxf(0.0, minf(64.0, minf((bag_grid.size.x - 16.0) / 8.0, (bag_grid.size.y - 16.0) / 6.0)))
+	check(bag_grid.grid_columns() == 12 and bag_grid.grid_rows() == 10
+		and bag_grid.cell_rect(Vector2i(11, 9)).end.y <= bag_grid.size.y + 1.0,
+		"Complete 12×10 bag page fits inside its grid viewport")
+	var expected_pitch: float = maxf(0.0, minf(64.0, minf((bag_grid.size.x - 16.0) / 12.0, (bag_grid.size.y - 16.0) / 10.0)))
 	check(is_equal_approx(bag_grid.grid_cell_size(), expected_pitch),
-		"Bag cells use the smaller of available width/8 and height/6 at this viewport and UI scale, capped at 64 logical pixels")
+		"Bag cells use the smaller of available width/12 and height/10 at this viewport and UI scale, capped at 64 logical pixels")
 	check(bag_rect.position.y >= right_scroll_rect.position.y - 1.0
 		and bag_rect.end.y <= right_scroll_rect.end.y + 1.0,
-		"All six bag rows are inside the visible right-dock scroll viewport")
+		"All ten bag rows are inside the visible right-dock scroll viewport")
 	print("Layout %d×%d ui=%.1f font=%.1f: equipment-bottom=%.1f%% page-bottom=%.1f%% right-scroll-range=%.1f bag-board=%s"
 		% [view_size.x, view_size.y, ui_scale, font_scale, dock_ratio * 100.0, page_ratio * 100.0,
 			right_scroll_range, str(bag_rect)])

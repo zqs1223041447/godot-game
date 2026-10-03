@@ -37,8 +37,8 @@ func run() -> void:
 		"Row names stay compact rather than large explanatory headers")
 	var inventory: Control = arena.hud._inventory_panel
 	var grid: Control = inventory._grid
-	check(grid.grid_columns() == 8 and grid.grid_rows() == 6 and grid.bag_page_count() == 2,
-		"Visual redesign leaves bag capacity and paging unchanged")
+	check(grid.grid_columns() == 12 and grid.grid_rows() == 10 and grid.bag_page_count() == 2,
+		"Expanded inventory exposes 120 cells per page across two pages")
 	check(not grid._has_caption({"size":Vector2i(2,3),"short_name":"测试装备"}),
 		"Item names are not repeated inside every bag footprint")
 	check(inventory._craft_controls._balance_label.visible == false,

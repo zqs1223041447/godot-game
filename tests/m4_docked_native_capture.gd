@@ -30,6 +30,7 @@ func run() -> void:
 			arena.visual_settings.ui_scale = scale_pair.x
 			arena.visual_settings.font_scale = scale_pair.y
 			arena.hud._apply_presentation()
+			await settle()
 			arena.hud.open_panel("skills")
 			arena.hud.open_panel("inventory")
 			await settle()

@@ -92,7 +92,7 @@ func _build() -> void:
 	_character=CharacterButton.new()
 	_character.name="CharacterStats"
 	_character.text="属性"
-	_character.custom_minimum_size.x = 58
+	_character.custom_minimum_size.x = 46
 	_character.custom_minimum_size.y = 24
 	_character.add_theme_font_size_override("font_size", 12)
 	DockStyle.style_action(_character,11)
@@ -101,7 +101,7 @@ func _build() -> void:
 	var arrange := Button.new()
 	arrange.name = "ArrangeUnifiedBag"
 	arrange.text = "整理"
-	arrange.custom_minimum_size.x = 58
+	arrange.custom_minimum_size.x = 46
 	arrange.custom_minimum_size.y = 24
 	arrange.add_theme_font_size_override("font_size", 12)
 	DockStyle.style_action(arrange,11)
@@ -110,7 +110,7 @@ func _build() -> void:
 	_discard=Button.new()
 	_discard.name="DiscardUnifiedItem"
 	_discard.text="丢弃"
-	_discard.custom_minimum_size.x = 58
+	_discard.custom_minimum_size.x = 46
 	_discard.custom_minimum_size.y = 24
 	_discard.add_theme_font_size_override("font_size", 12)
 	DockStyle.style_action(_discard,11)
@@ -118,7 +118,7 @@ func _build() -> void:
 	actions.add_child(_discard)
 	_equipment_grid = Control.new()
 	_equipment_grid.name = "EquipmentSlotGrid"
-	_equipment_grid.custom_minimum_size.y = 156.0
+	_equipment_grid.custom_minimum_size.y = 128.0
 	_equipment_grid.resized.connect(_layout_slots)
 	_equipment_grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	add_child(_equipment_grid)
@@ -163,14 +163,14 @@ func _build() -> void:
 	page_bar.custom_minimum_size.y = 24
 	_page_label = Label.new()
 	_page_label.name = "BagPageLabel"
-	_page_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_page_label.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	_page_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	_page_label.add_theme_font_size_override("font_size", 12)
 	page_bar.add_child(_page_label)
 	_previous_page = Button.new()
 	_previous_page.name = "PreviousBagPage"
 	_previous_page.text = "‹"
-	_previous_page.custom_minimum_size = Vector2(32, 24)
+	_previous_page.custom_minimum_size = Vector2(22, 24)
 	_previous_page.add_theme_font_size_override("font_size", 12)
 	DockStyle.style_action(_previous_page,12)
 	_previous_page.tooltip_text = "上一页"
@@ -179,13 +179,13 @@ func _build() -> void:
 	_next_page = Button.new()
 	_next_page.name = "NextBagPage"
 	_next_page.text = "›"
-	_next_page.custom_minimum_size = Vector2(32, 24)
+	_next_page.custom_minimum_size = Vector2(22, 24)
 	_next_page.add_theme_font_size_override("font_size", 12)
 	DockStyle.style_action(_next_page,12)
 	_next_page.tooltip_text = "下一页"
 	_next_page.pressed.connect(_turn_page.bind(1))
 	page_bar.add_child(_next_page)
-	add_child(page_bar)
+	top.add_child(page_bar)
 	var grid_script: Script = load("res://scripts/ui/unified_bag_grid.gd")
 	_grid = grid_script.new()
 	_grid.name = "SharedCanonicalBagGrid"
@@ -250,7 +250,7 @@ func refresh() -> void:
 	var rows: int = int(_bag_layout.get("rows", 8))
 	_summary.text = "行囊 %d 格" % [page_count * columns * rows]
 	_summary.tooltip_text = "九个装备位 · 装备、珠宝与宝石共用分页行囊。悬停看详情，Shift 对比，右键可装备。"
-	_page_label.text = "第 %d/%d 页" % [_bag_page + 1, page_count]
+	_page_label.text = "%d/%d" % [_bag_page + 1, page_count]
 	_page_label.tooltip_text = "%d × %d 格 · 悬停看详情 · Shift 对比 · 拖放摆放" % [columns, rows]
 	_previous_page.disabled = _bag_page <= 0
 	_next_page.disabled = _bag_page >= page_count - 1
@@ -304,7 +304,7 @@ func _layout_slots() -> void:
 		"belt": Rect2(107,115,67,27),
 		"boots": Rect2(184,113,49,40),
 	}
-	var scale_value := minf(1.0, _equipment_grid.size.x / 280.0)
+	var scale_value := minf(0.82, _equipment_grid.size.x / 280.0)
 	var offset := Vector2((_equipment_grid.size.x - 280.0*scale_value)*0.5,0)
 	for slot: String in _slots:
 		var bounds: Rect2 = rects[slot]
