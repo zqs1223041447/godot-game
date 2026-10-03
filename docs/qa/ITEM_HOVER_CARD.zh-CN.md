@@ -95,3 +95,9 @@ ITEM_HOVER_CARD_CAPTURE_DIR=/tmp/item-hover-card-captures \
 - 拖放回调中的 `_drop_data(at_position)` 局部坐标在 headless 测试下与全局释放点不一致；测试使用目标当前矩形、`gui_get_hovered_control()` 和收到的 Viewport 鼠标释放坐标验证目标命中，没有将该局部回调坐标当作物理鼠标读数。
 - 同轮 `tests/gem_icon_test.gd` 为 26 项、0 失败；`tests/unified_item_presentation_test.gd` 为 78 项、0 失败。
 - 执行环境没有 `DISPLAY`、`WAYLAND_DISPLAY` 或 Xvfb，未生成本轮真实渲染图或像素验收结果。
+
+## v21 标签芯片原生复核修正（2026-10-03）
+
+- `ItemMetadata` 和 `ItemTags` 使用 `HFlowContainer`，在芯片之间换行。芯片文本宽度以现有主题字体及当前 `font_scale` 实测；面板内部用定宽单行标签，空间不足时显示省略号，完整标签保存在 tooltip 中，避免中文或长词被拆成窄列竖排。
+- `tests/item_hover_card_test.gd` 最新结果：231 项、0 失败。专项夹具在 1920×1080、UI 110%、字体 120%、360 本地单位卡宽下检查“主动宝石”“等级 1 · 品质 0”及中文短标签实际测量宽度和单行行高；长 TAG 超出行宽时在标签间换行，并验证省略 chip、完整 tooltip 和卡片/视口边界。输入 PASS 负对照、IGNORE 拖放和卡片滚轮隔离也包含在本次通过结果中。
+- 执行环境没有图形显示服务器，未生成像素截图；此修正提供布局几何和文本度量证据，仍由原生 owner 进行最终实际画面复审。

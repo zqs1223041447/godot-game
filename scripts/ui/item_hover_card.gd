@@ -293,13 +293,15 @@ func _build_card(view: Dictionary, role: String, index: int, width: float,
 	return column
 
 
-func _build_metadata(view: Dictionary, width: float) -> HBoxContainer:
-	var row := HBoxContainer.new()
+func _build_metadata(view: Dictionary, width: float) -> HFlowContainer:
+	var row := HFlowContainer.new()
 	row.name = "ItemMetadata"
 	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	row.add_theme_constant_override("separation", 4)
-	var max_badge_width: float = maxf(56.0, width * 0.48)
+	row.add_theme_constant_override("h_separation", 4)
+	row.add_theme_constant_override("v_separation", 3)
+	var content_width: float = maxf(1.0, width - CARD_PADDING * 2.0 - 8.0)
+	var max_badge_width: float = maxf(1.0, minf(content_width - 4.0, width * 0.48))
 	var kind: String = _text(view, "kind_label").strip_edges()
 	var rarity: String = _text(view, "rarity_label").strip_edges()
 	if not kind.is_empty():
@@ -316,13 +318,25 @@ func _badge(value: String, stable_name: String, color: Color, background: Color,
 	badge.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	badge.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 	badge.add_theme_stylebox_override("panel", PresentationTheme.panel(background, Color("9c7a4d"), 3, 1, 4))
+	var font: Font = get_theme_default_font()
+	var font_size: int = maxi(1, roundi(11.0 * font_scale))
+	var measured_width: float = font.get_string_size(value, HORIZONTAL_ALIGNMENT_LEFT, -1.0, font_size).x if font != null else 24.0
+	var text_width: float = minf(measured_width, maxf(1.0, max_width - 12.0))
+	var text_height: float = font.get_height(font_size) if font != null else float(font_size)
+	var text_frame := Control.new()
+	text_frame.name = stable_name + "TextFrame"
+	text_frame.clip_contents = true
+	text_frame.custom_minimum_size = Vector2(maxf(1.0, text_width), text_height)
 	var label := _label(value, 11, color)
 	label.name = stable_name + "Text"
-	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	label.custom_minimum_size.x = maxf(32.0, minf(max_width - 12.0, 36.0))
+	label.autowrap_mode = TextServer.AUTOWRAP_OFF
+	label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	label.tooltip_text = value
-	badge.add_child(label)
+	text_frame.add_child(label)
+	badge.add_child(text_frame)
+	badge.tooltip_text = value
 	return badge
 
 

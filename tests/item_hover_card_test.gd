@@ -178,13 +178,14 @@ func _run() -> void:
 	_expect(gain != null and cost != null and gain.get_theme_color("font_color") != cost.get_theme_color("font_color"), "benefit and cost use distinct semantic inks")
 	_expect(str((card.find_child("ModifierMarker0", true, false) as Label).text) == "▲", "benefit has a visible positive marker")
 	_expect(str((card.find_child("ModifierMarker1", true, false) as Label).text) == "▼", "cost has a visible negative marker")
-	var type_badge_text: Label = type_badge.get_child(0) as Label if type_badge != null else null
+	var type_badge_text: Label = card.find_child("ItemTypeBadgeText", true, false) as Label
 	_expect(structured_name != null and type_badge_text != null and structured_name.get_theme_font_size("font_size") > type_badge_text.get_theme_font_size("font_size"), "item name has stronger type hierarchy than type and quality chips")
 	var title_font: FontVariation = structured_name.get_theme_font("font") as FontVariation if structured_name != null else null
 	_expect(title_font != null and title_font.variation_embolden > 0.0, "item name uses synthetic weight from the existing Arena Sans font")
 	_expect(card.find_child("EquippedItemCard1", true, false) != null and card.find_child("EquippedItemCard2", true, false) != null, "structured view keeps the two-comparison ring layout")
 	_expect(structured_view == structured_before, "structured rendering leaves all source fields unchanged")
 	_expect(card.size.y <= ItemHoverCardScript.MAX_CARD_HEIGHT, "long unbroken name and affixes remain inside the card height cap")
+	await _test_badge_layout()
 	await _test_drag_suppression(input_view)
 	print("item_hover_card_test: %d checks, %d failures" % [checks, failures])
 	if is_instance_valid(host):
@@ -227,6 +228,74 @@ func _long_view(uid: String, name: String) -> Dictionary:
 		"affix_lines": affixes,
 		"effect_lines": ["奥术效果只作显示文本，不在卡片内执行任何计算。"],
 	}
+
+
+func _test_badge_layout() -> void:
+	root.size = Vector2i(1920, 1080)
+	host.position = Vector2.ZERO
+	host.scale = Vector2.ONE * 1.1
+	host.size = root.get_visible_rect().size / 1.1
+	card.font_scale = 1.2
+	var long_tag: String = "风暴碎片辅助效果的完整长标签".repeat(5)
+	var view := {
+		"uid":"BADGE-LAYOUT",
+		"name":"寒霜箭",
+		"kind_label":"主动宝石",
+		"rarity_label":"等级 1 · 品质 0",
+		"tags":["投射物", "法术", long_tag, "火焰"],
+		"function":"标签芯片布局专项检查。",
+		"base_stats":[{"label":"基础魔力消耗", "value":"7"}],
+	}
+	var bounds := Rect2(Vector2.ZERO, host.size)
+	card.present(view, [], Rect2(640, 420, 36, 36), bounds)
+	await process_frame
+	await process_frame
+	var main_card: Control = card.find_child("MainItemCard", true, false) as Control
+	var metadata: HFlowContainer = card.find_child("ItemMetadata", true, false) as HFlowContainer
+	var type_badge: Control = card.find_child("ItemTypeBadge", true, false) as Control
+	var rarity_badge: Control = card.find_child("ItemRarityBadge", true, false) as Control
+	var type_text: Label = card.find_child("ItemTypeBadgeText", true, false) as Label
+	var rarity_text: Label = card.find_child("ItemRarityBadgeText", true, false) as Label
+	_expect(is_equal_approx(card.font_scale, 1.2) and is_equal_approx(host.scale.x, 1.1), "badge geometry runs at 110% UI and 120% font scale")
+	_expect(is_equal_approx(card.size.x, ItemHoverCardScript.MAX_COLUMN_WIDTH), "badge geometry uses the card's measured 360-unit width")
+	_expect(type_text != null and rarity_text != null and type_badge != null and rarity_badge != null, "active-gem type and level/quality chips exist")
+	if type_text != null and rarity_text != null:
+		_expect(type_text.text == "主动宝石" and rarity_text.text == "等级 1 · 品质 0", "Chinese active-gem and level/quality labels stay complete")
+		_expect(_label_fits_one_line(type_text), "active-gem chip uses measured width and one line")
+		_expect(_label_fits_one_line(rarity_text), "level/quality chip uses measured width and one line")
+		_expect(is_equal_approx(type_badge.global_position.y, rarity_badge.global_position.y), "metadata chips stay on one row when their measured widths fit")
+	var first_tag: Control = card.find_child("ItemTag0", true, false) as Control
+	var second_tag: Control = card.find_child("ItemTag1", true, false) as Control
+	var long_tag_badge: Control = card.find_child("ItemTag2", true, false) as Control
+	var trailing_tag: Control = card.find_child("ItemTag3", true, false) as Control
+	var first_tag_text: Label = card.find_child("ItemTag0Text", true, false) as Label
+	var second_tag_text: Label = card.find_child("ItemTag1Text", true, false) as Label
+	var long_tag_text: Label = card.find_child("ItemTag2Text", true, false) as Label
+	var tag_flow: HFlowContainer = card.find_child("ItemTags", true, false) as HFlowContainer
+	_expect(first_tag != null and second_tag != null and long_tag_badge != null and trailing_tag != null, "all short and long tag chips are present")
+	if first_tag != null and second_tag != null and long_tag_badge != null and trailing_tag != null:
+		_expect(is_equal_approx(first_tag.global_position.y, second_tag.global_position.y), "short Chinese tags share the first row")
+		_expect(long_tag_badge.global_position.y > second_tag.global_position.y, "insufficient row width wraps between tags, not inside a tag")
+		_expect(_rect_inside(long_tag_badge.get_global_rect(), tag_flow.get_global_rect()), "bounded long-tag chip remains inside the tag flow")
+		_expect(_rect_inside(trailing_tag.get_global_rect(), tag_flow.get_global_rect()), "following tag remains inside the flow after wrapping")
+	if first_tag_text != null and second_tag_text != null:
+		_expect(_label_fits_one_line(first_tag_text) and _label_fits_one_line(second_tag_text), "short Chinese tags fit their measured one-line widths")
+	if long_tag_text != null:
+		_expect(long_tag_text.text == long_tag and long_tag_text.tooltip_text == long_tag, "long tag retains its full accessible tooltip text")
+		_expect(long_tag_text.autowrap_mode == TextServer.AUTOWRAP_OFF and long_tag_text.text_overrun_behavior == TextServer.OVERRUN_TRIM_ELLIPSIS, "long tag uses one-line ellipsis with full text in its tooltip")
+		_expect(long_tag_text.size.y <= long_tag_text.get_theme_default_font().get_height(long_tag_text.get_theme_font_size("font_size")) + 1.0, "long tag never becomes vertical one-character wrapping")
+	_expect(main_card != null and _rect_inside(main_card.get_global_rect(), root.get_visible_rect()), "badge layout remains inside the scaled 1080p viewport")
+	_expect(main_card != null and metadata != null and tag_flow != null \
+		and _rect_inside(metadata.get_global_rect(), main_card.get_global_rect()) \
+		and _rect_inside(tag_flow.get_global_rect(), main_card.get_global_rect()), "metadata and wrapped tag rows remain within the card frame")
+
+
+func _label_fits_one_line(label: Label) -> bool:
+	var font: Font = label.get_theme_default_font()
+	var font_size: int = label.get_theme_font_size("font_size")
+	var measured_width: float = font.get_string_size(label.text, HORIZONTAL_ALIGNMENT_LEFT, -1.0, font_size).x
+	return label.autowrap_mode == TextServer.AUTOWRAP_OFF and label.size.x + 1.0 >= measured_width \
+		and label.size.y <= font.get_height(font_size) + 1.0
 
 
 func _structured_view() -> Dictionary:
