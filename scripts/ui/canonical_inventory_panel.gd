@@ -11,6 +11,7 @@ const ThemeStyle = preload("res://scripts/visuals/visual_theme.gd")
 const EquipmentArt = preload("res://scripts/visuals/equipment_art.gd")
 const Slots = preload("res://scripts/items/equipment_slots.gd")
 const Gear = preload("res://scripts/items/equipment_catalog.gd")
+const DockStyle = preload("res://scripts/ui/dock_visual_style.gd")
 const SLOT_NAMES := {"weapon":"武器","body_armour":"护甲","amulet":"项链","ring_1":"戒指一","ring_2":"戒指二","boots":"鞋","belt":"腰带","gloves":"手套","helmet":"头盔"}
 var model: RefCounted
 var save_path := "user://build_save.json"
@@ -70,7 +71,7 @@ func setup(state: RefCounted, path: String = "user://build_save.json") -> void:
 
 func _build() -> void:
 	name = "CanonicalInventoryBody"
-	add_theme_constant_override("separation",2)
+	add_theme_constant_override("separation",5)
 	var top := HBoxContainer.new()
 	top.name = "BagHeader"
 	top.add_theme_constant_override("separation", 4)
@@ -93,6 +94,7 @@ func _build() -> void:
 	_character.custom_minimum_size.x = 58
 	_character.custom_minimum_size.y = 24
 	_character.add_theme_font_size_override("font_size", 12)
+	DockStyle.style_action(_character,11)
 	_character.pressed.connect(func(): character_requested.emit())
 	actions.add_child(_character)
 	var arrange := Button.new()
@@ -101,6 +103,7 @@ func _build() -> void:
 	arrange.custom_minimum_size.x = 58
 	arrange.custom_minimum_size.y = 24
 	arrange.add_theme_font_size_override("font_size", 12)
+	DockStyle.style_action(arrange,11)
 	arrange.pressed.connect(func(): _report(model.arrange_items(model.revision(), save_path)))
 	actions.add_child(arrange)
 	_discard=Button.new()
@@ -109,14 +112,15 @@ func _build() -> void:
 	_discard.custom_minimum_size.x = 58
 	_discard.custom_minimum_size.y = 24
 	_discard.add_theme_font_size_override("font_size", 12)
+	DockStyle.style_action(_discard,11)
 	_discard.pressed.connect(_request_discard)
 	actions.add_child(_discard)
 	_equipment_grid = GridContainer.new()
 	_equipment_grid.name = "EquipmentSlotGrid"
 	_equipment_grid.columns = 3
 	_equipment_grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_equipment_grid.add_theme_constant_override("h_separation", 5)
-	_equipment_grid.add_theme_constant_override("v_separation", 2)
+	_equipment_grid.add_theme_constant_override("h_separation", 4)
+	_equipment_grid.add_theme_constant_override("v_separation", 4)
 	add_child(_equipment_grid)
 	for slot: String in Slots.all_slots():
 		var target := SlotTarget.new()
@@ -129,7 +133,9 @@ func _build() -> void:
 		target.custom_minimum_size = Vector2(76,48)
 		target.add_theme_font_size_override("font_size",10)
 		target.add_theme_constant_override("outline_size",0)
-		target.add_theme_stylebox_override("normal",ThemeStyle.panel(Color("e2c997"), Color("967347"),4,1,4))
+		target.add_theme_stylebox_override("normal",DockStyle.inset_slot())
+		target.add_theme_stylebox_override("hover",DockStyle.inset_slot(true))
+		target.add_theme_stylebox_override("pressed",DockStyle.inset_slot(true))
 		target.pressed.connect(_activate_equipment.bind(slot))
 		target.mouse_entered.connect(_hover_equipment.bind(slot))
 		target.mouse_exited.connect(func(): hover_left.emit())
@@ -152,6 +158,7 @@ func _build() -> void:
 	_previous_page.text = "‹"
 	_previous_page.custom_minimum_size = Vector2(32, 24)
 	_previous_page.add_theme_font_size_override("font_size", 12)
+	DockStyle.style_action(_previous_page,12)
 	_previous_page.tooltip_text = "上一页"
 	_previous_page.pressed.connect(_turn_page.bind(-1))
 	page_bar.add_child(_previous_page)
@@ -160,6 +167,7 @@ func _build() -> void:
 	_next_page.text = "›"
 	_next_page.custom_minimum_size = Vector2(32, 24)
 	_next_page.add_theme_font_size_override("font_size", 12)
+	DockStyle.style_action(_next_page,12)
 	_next_page.tooltip_text = "下一页"
 	_next_page.pressed.connect(_turn_page.bind(1))
 	page_bar.add_child(_next_page)
@@ -186,6 +194,9 @@ func _build() -> void:
 	_craft_controls.name = "CanonicalCraftingControls"
 	_craft_controls.craft_requested.connect(_request_craft)
 	add_child(_craft_controls)
+	_craft_controls._ensure_interface()
+	DockStyle.style_action(_craft_controls._salvage_button,11)
+	DockStyle.style_action(_craft_controls._recalibrate_button,11)
 	_build_craft_confirmation()
 	visibility_changed.connect(func():
 		if not is_visible_in_tree(): _cancel_craft())

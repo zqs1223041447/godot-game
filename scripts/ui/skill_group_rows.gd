@@ -12,11 +12,12 @@ signal binding_requested(group_id: String, keycode: int, revision: int)
 const TooltipFactory = preload("res://scripts/ui/crafting_controls.gd")
 const PresentationTheme = preload("res://scripts/visuals/visual_theme.gd")
 const GemIconView = preload("res://scripts/ui/gem_icon.gd")
+const DockStyle = preload("res://scripts/ui/dock_visual_style.gd")
 const MAX_ROWS: int = 64
 const VISIBLE_ROWS_MIN: int = 10
-const BASE_ROW_HEIGHT: float = 62.0
-const ROW_SEPARATION: float = 4.0
-const BASE_SLOT_SIZE: float = 42.0
+const BASE_ROW_HEIGHT: float = 70.0
+const ROW_SEPARATION: float = 5.0
+const BASE_SLOT_SIZE: float = 44.0
 const ROW_FIELDS: Array[String] = [
 	"group_id", "name", "active", "main", "supports", "preview", "preview_tooltip", "binding_keycode"
 ]
@@ -50,9 +51,13 @@ class GemSlot extends Button:
 		if role != "support": return
 		var center := size * 0.5
 		var radius := minf(size.x,size.y)*0.5-2.0
-		draw_circle(center,radius,Color("c8ad78"))
-		draw_arc(center,radius,0,TAU,48,Color("896942"),1.5,true)
-		draw_arc(center,radius-3.0,0,TAU,48,Color("f7e3b5"),1.0,true)
+		draw_circle(center+Vector2(0,1),radius+1.0,Color("ab9770"))
+		draw_circle(center,radius,Color("796348"))
+		draw_circle(center,radius-2.5,Color("514331"))
+		draw_arc(center,radius-0.5,PI,TAU,48,Color("d8bb7d"),1.0,true)
+		draw_arc(center,radius-3.0,0,PI,48,Color("a1875c"),0.8,true)
+		if is_hovered():
+			draw_arc(center,radius+1,0,TAU,48,Color("cfa661"),1.5,true)
 
 
 	func _get_drag_data(_at: Vector2) -> Variant:
@@ -177,9 +182,8 @@ func _build_row(row: Dictionary, row_index: int) -> PanelContainer:
 	panel.name = "SkillGroupRow_%02d" % row_index
 	panel.set_meta("group_id", row.group_id)
 	panel.custom_minimum_size.y = BASE_ROW_HEIGHT * font_scale
-	panel.add_theme_stylebox_override("panel", PresentationTheme.panel(
-		Color("f8ecd0"), Color("8c6b42"), 4, 1, 4
-	))
+	panel.add_theme_stylebox_override("panel", DockStyle.surface(
+		DockStyle.PAPER if row_index % 2 == 0 else Color("e9dec6"),8.0))
 	if not bool(row.active):
 		# Keep controls enabled so users can still reorganize preserved inactive rows.
 		panel.modulate = Color(0.70, 0.70, 0.70, 1.0)
@@ -188,7 +192,7 @@ func _build_row(row: Dictionary, row_index: int) -> PanelContainer:
 	var contents := VBoxContainer.new()
 	contents.name = "SkillGroupContents_%02d" % row_index
 	contents.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	contents.add_theme_constant_override("separation", 1)
+	contents.add_theme_constant_override("separation", 3)
 	panel.add_child(contents)
 
 	var header := HBoxContainer.new()
@@ -204,6 +208,7 @@ func _build_row(row: Dictionary, row_index: int) -> PanelContainer:
 	title.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	title.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	title.add_theme_font_size_override("font_size", roundi(11.0 * font_scale))
+	title.add_theme_font_override("font",DockStyle.bold_font(load("res://assets/fonts/arena_sans.otf")))
 	title.add_theme_color_override("font_color", PresentationTheme.TEXT if row.active else PresentationTheme.MUTED)
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	# Keep the full compiled preview available to assistive/hover inspection;
@@ -218,7 +223,7 @@ func _build_row(row: Dictionary, row_index: int) -> PanelContainer:
 	var slot_row := HBoxContainer.new()
 	slot_row.name = "SkillGroupSlots_%02d" % row_index
 	slot_row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	slot_row.add_theme_constant_override("separation", 3)
+	slot_row.add_theme_constant_override("separation", 9)
 	contents.add_child(slot_row)
 	_add_labeled_slot(slot_row, row, row_index, "main", -1, row.main, "主")
 	for support_index: int in range(5):
@@ -263,9 +268,9 @@ func _make_slot(row: Dictionary, row_index: int, slot_role: String, support_inde
 	slot.alignment = HORIZONTAL_ALIGNMENT_CENTER
 	slot.focus_mode = Control.FOCUS_NONE
 	slot.add_theme_font_size_override("font_size", roundi(11.0 * font_scale))
-	slot.add_theme_stylebox_override("normal", PresentationTheme.panel(Color("e2c997"), Color("967347"), 4, 1, 2))
-	slot.add_theme_stylebox_override("hover", PresentationTheme.panel(Color("fff2d5"), PresentationTheme.ACCENT, 4, 1, 2))
-	slot.add_theme_stylebox_override("pressed", PresentationTheme.panel(Color("ead3a2"), PresentationTheme.ACCENT, 4, 1, 2))
+	slot.add_theme_stylebox_override("normal", DockStyle.inset_slot())
+	slot.add_theme_stylebox_override("hover", DockStyle.inset_slot(true))
+	slot.add_theme_stylebox_override("pressed", DockStyle.inset_slot(true))
 	slot.add_theme_stylebox_override("focus", PresentationTheme.panel(Color(0, 0, 0, 0), PresentationTheme.GOLD, 4, 1, 0))
 	if slot_role == "support":
 		for state_name: String in ["normal","hover","pressed","focus"]:
@@ -291,10 +296,9 @@ func _make_slot(row: Dictionary, row_index: int, slot_role: String, support_inde
 func _make_binding_picker(row: Dictionary, row_index: int) -> OptionButton:
 	var picker := OptionButton.new()
 	picker.name = "SkillBinding_%02d" % row_index
-	picker.custom_minimum_size = Vector2(62.0, 20.0)
+	picker.custom_minimum_size = Vector2(48.0, 20.0)
 	picker.add_theme_font_size_override("font_size", roundi(10.0 * font_scale))
-	for state_name: String in ["normal","hover","pressed","focus"]:
-		picker.add_theme_stylebox_override(state_name,PresentationTheme.panel(Color("ebd5a8"),PresentationTheme.BORDER,3,1,2))
+	DockStyle.style_action(picker,roundi(10.0*font_scale))
 	for index: int in range(BINDING_CODES.size()):
 		picker.add_item(BINDING_LABELS[index])
 		picker.set_item_id(index, BINDING_CODES[index])
@@ -386,8 +390,8 @@ func _update_density() -> void:
 		return
 	custom_minimum_size.y = 220.0 * font_scale
 	var available_width: float = maxf(size.x - 24.0, 1.0)
-	var binding_width: float = minf(62.0 * font_scale, available_width * 0.25)
-	var slot_width: float = minf(BASE_SLOT_SIZE * font_scale, maxf(24.0, (available_width - 15.0) / 6.0))
+	var binding_width: float = minf(48.0 * font_scale, available_width * 0.2)
+	var slot_width: float = minf(BASE_SLOT_SIZE * font_scale, maxf(24.0, (available_width - 45.0) / 5.4))
 	var row_height: float = 18.0 * font_scale + slot_width + 9.0
 	for index: int in range(_row_controls.size()):
 		var panel: PanelContainer = _row_controls[index]
@@ -403,7 +407,7 @@ func _update_density() -> void:
 		var slots: HBoxContainer = contents.get_child(1) as HBoxContainer
 		for column_index: int in range(slots.get_child_count()):
 			var column: VBoxContainer = slots.get_child(column_index) as VBoxContainer
-			var side: float = slot_width if column_index == 0 else slot_width*0.8
+			var side: float = slot_width if column_index == 0 else slot_width*0.88
 			column.custom_minimum_size.x = side
 			var slot: GemSlot = column.get_child(1) as GemSlot
 			slot.custom_minimum_size = Vector2(side, side)

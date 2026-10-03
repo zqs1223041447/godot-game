@@ -9,6 +9,7 @@ const CanonicalCharacterView = preload("res://scripts/ui/canonical_character_pan
 const ItemHoverView = preload("res://scripts/ui/item_hover_card.gd")
 const ItemPresentation = preload("res://scripts/ui/unified_item_presentation.gd")
 const DockedMenus = preload("res://scripts/ui/docked_menu_state.gd")
+const DockStyle = preload("res://scripts/ui/dock_visual_style.gd")
 const OVERLAY_PANELS: Array[String] = ["talents", "combat", "monsters", "pause", "settings", "death"]
 const TypedPreview = preload("res://scripts/combat/damage_preview.gd")
 const PassivePanel = preload("res://scripts/passive_panel.gd")
@@ -588,15 +589,21 @@ func _build_dock_windows() -> void:
 		stack.size_flags_vertical = Control.SIZE_EXPAND_FILL
 		stack.add_theme_constant_override("separation", 6)
 		margin.add_child(stack)
+		var title_band := PanelContainer.new()
+		title_band.name = "DockTitleBand"
+		title_band.add_theme_stylebox_override("panel",DockStyle.surface(DockStyle.LEATHER,8.0))
+		stack.add_child(title_band)
 		var header := HBoxContainer.new()
-		stack.add_child(header)
-		var title := _label("技能", 16, GOLD) if side == "left" else _label("行囊 · 装备", 16, GOLD)
+		title_band.add_child(header)
+		var title := _label("技能", 15, DockStyle.IVORY) if side == "left" else _label("行囊", 15, DockStyle.IVORY)
+		title.add_theme_color_override("font_color",DockStyle.IVORY)
+		title.add_theme_font_override("font",DockStyle.bold_font(load("res://assets/fonts/arena_sans.otf")))
 		title.name = "LeftDockTitle" if side == "left" else "RightDockTitle"
 		title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		header.add_child(title)
 		var close := _button("关闭", "CloseLeftDock" if side == "left" else "CloseRightDock", _close_dock.bind(side), 58)
-		close.custom_minimum_size = Vector2(44,28)
-		close.add_theme_font_size_override("font_size",11)
+		close.custom_minimum_size = Vector2(38,24)
+		DockStyle.style_action(close,10)
 		header.add_child(close)
 		var subtitle := _wrap_label("技能宝石组合", 12, MUTED) if side == "left" else _wrap_label("九个装备位 · 分页共用行囊", 12, MUTED)
 		subtitle.name = "LeftDockSubtitle" if side == "left" else "RightDockSubtitle"
@@ -905,7 +912,7 @@ func _slot_name(slot: String) -> String:
 
 func _build_inventory_panel() -> void:
 	var body: VBoxContainer = _dock_bodies.right as VBoxContainer
-	_dock_titles.right.text = "行囊 · 装备"
+	_dock_titles.right.text = "行囊"
 	if _state.has_method("equipped_items"):
 		if not is_instance_valid(_inventory_panel):
 			_inventory_panel = CanonicalInventoryView.new()
@@ -939,7 +946,7 @@ func _build_inventory_panel() -> void:
 
 
 func _build_skills_dock() -> void:
-	_dock_titles.left.text = "技能组合"
+	_dock_titles.left.text = "技能"
 	if not _skills_dock_built:
 		var previous_body: VBoxContainer = _panel_body
 		var previous_title: Label = _panel_title

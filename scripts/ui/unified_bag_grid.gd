@@ -12,6 +12,7 @@ signal move_requested(uid: String, destination: Dictionary, revision: int)
 const EquipmentArt = preload("res://scripts/visuals/equipment_art.gd")
 const PresentationTheme = preload("res://scripts/visuals/visual_theme.gd")
 const GemIconLayout = preload("res://scripts/ui/gem_icon.gd")
+const DockStyle = preload("res://scripts/ui/dock_visual_style.gd")
 
 const COLUMNS: int = 12
 const ROWS: int = 8
@@ -21,9 +22,9 @@ const ENTRY_KINDS: Array[String] = ["equipment", "jewel", "skill_gem", "support_
 const ICON_ENTRY_KINDS: Array[String] = ["skill_gem", "support_gem"]
 
 const PAPER := Color("f8ecd0")
-const CELL_LIGHT := Color("eee0c3")
-const CELL_DARK := Color("e7d6b4")
-const CELL_LINE := Color("a98a5b")
+const CELL_LIGHT := Color("ddd2b9")
+const CELL_DARK := Color("d8cbb1")
+const CELL_LINE := Color("b39b70")
 const DROP_GREEN := Color("3f8551")
 const DROP_RED := Color("a13b2d")
 
@@ -52,7 +53,7 @@ var _outer_style: StyleBox
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_STOP
-	_outer_style = PresentationTheme.panel(PAPER, PresentationTheme.BORDER, 4, 1, 0.0)
+	_outer_style = DockStyle.surface(Color("e5dbc4"),0.0)
 	resized.connect(_on_resized)
 	mouse_exited.connect(_on_mouse_exited)
 	queue_redraw()
@@ -212,10 +213,9 @@ func _draw_entry(entry: Dictionary) -> void:
 	var accent: Color = entry["accent"]
 	var is_selected: bool = uid == _selected_uid
 	var is_hovered: bool = uid == _hovered_uid
-	draw_rect(box.grow(-2.0), Color("f5e7c9") if not is_selected else Color("f1dfb5"))
-	draw_rect(Rect2(box.position + Vector2(3.0, 3.0), Vector2(minf(4.0, box.size.x - 6.0), maxf(0.0, box.size.y - 6.0))), accent.darkened(0.18))
+	draw_rect(box.grow(-2.0), Color("eee5d0") if not is_selected else Color("f7ebce"))
 	var footer_height: float = minf(15.0, box.size.y * 0.34) if _has_caption(entry) else 0.0
-	var art_box := Rect2(box.position + Vector2(7.0, 5.0), box.size - Vector2(14.0, 10.0 + footer_height))
+	var art_box := Rect2(box.position + Vector2(5.0, 5.0), box.size - Vector2(10.0, 10.0 + footer_height))
 	var icon: Variant = entry["icon"]
 	if art_box.has_area():
 		if str(entry["kind"]) == "currency":
@@ -485,8 +485,9 @@ func _entry_rect(entry: Dictionary) -> Rect2:
 
 
 func _has_caption(entry: Dictionary) -> bool:
-	var dimensions: Vector2i = entry["size"]
-	return not str(entry["short_name"]).is_empty() and (dimensions.x > 1 or dimensions.y > 1)
+	# Item art and rarity borders identify the grid at a glance; names belong
+	# in the shared hover card rather than repeating across every footprint.
+	return false
 
 
 func _entry_for_uid(uid: String) -> Dictionary:
