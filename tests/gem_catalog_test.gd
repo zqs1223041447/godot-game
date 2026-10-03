@@ -3,8 +3,8 @@ extends SceneTree
 const Catalog = preload("res://scripts/items/gem_catalog.gd")
 const Data = preload("res://scripts/game_data.gd")
 const Supports = preload("res://scripts/combat/support_registry.gd")
-const SKILL_ICON_ROOT: String = "res://docs/reference/art/skills/"
-const SUPPORT_ICON_ROOT: String = "res://docs/reference/art/supports/"
+const Emblem = preload("res://scripts/visuals/skill_emblem.gd")
+const ICON_ROOT: String = "res://assets/ui/grimoire/"
 var checks: int = 0
 var failures: int = 0
 
@@ -27,6 +27,7 @@ func _check_all_source_definitions() -> void:
 	var catalog: Dictionary = Catalog.definitions()
 	_expect(Data.SKILLS.size() == 8, "Source catalog contains exactly eight skills")
 	_expect(Supports.SUPPORTS.size() == 16, "SupportRegistry contains exactly sixteen supports")
+	_expect(Emblem.ICONS.size() == 24, "SkillEmblem contains exactly twenty-four original icon mappings")
 	_expect(catalog.size() == 24, "Gem catalog exposes exactly twenty-four definitions")
 	for skill_id: String in Data.SKILLS:
 		var id: String = "skill:" + skill_id
@@ -38,7 +39,10 @@ func _check_all_source_definitions() -> void:
 		_expect(definition.name == source.name and definition.short_name == source.short_name and definition.description == source.description, "Skill text is reused from GameData: " + id)
 		_expect(definition.capabilities == source.capabilities and definition.requires.is_empty(), "Skill capability labels are copied exactly: " + id)
 		_expect(definition.glyph == source.icon, "Skill glyph is retained from its source definition: " + id)
-		_expect(definition.icon == SKILL_ICON_ROOT + skill_id + ".png" and FileAccess.file_exists(definition.icon), "Skill points to its existing icon: " + id)
+		_expect(definition.icon == ICON_ROOT + skill_id + ".png", "Skill uses the runtime emblem path: " + id)
+		var skill_texture: Variant = ResourceLoader.load(definition.icon)
+		_expect(skill_texture is Texture2D and definition.icon_texture is Texture2D, "Skill icon loads as a Texture2D: " + id)
+		_expect(Emblem.ICONS.has(skill_id) and skill_texture == Emblem.ICONS[skill_id] and definition.icon_texture == Emblem.ICONS[skill_id], "Skill icon matches the actual SkillEmblem mapping: " + id)
 		_expect(definition.size == [1, 1], "Skill gem footprint is one by one: " + id)
 	for support_id: String in Supports.SUPPORTS:
 		var id: String = "support:" + support_id
@@ -50,7 +54,10 @@ func _check_all_source_definitions() -> void:
 		_expect(definition.name == source.name and definition.description == source.description, "Support text is reused from SupportRegistry: " + id)
 		_expect(definition.family == source.get("family", ""), "Support family label is retained exactly: " + id)
 		_expect(definition.skills == source.get("skills", []) and definition.capabilities == source.requires and definition.requires == source.requires, "Support skill and capability labels are reused exactly: " + id)
-		_expect(definition.icon == SUPPORT_ICON_ROOT + support_id + ".png" and FileAccess.file_exists(definition.icon), "Support points to its existing icon: " + id)
+		_expect(definition.icon == ICON_ROOT + support_id + ".png", "Support uses the runtime emblem path: " + id)
+		var support_texture: Variant = ResourceLoader.load(definition.icon)
+		_expect(support_texture is Texture2D and definition.icon_texture is Texture2D, "Support icon loads as a Texture2D: " + id)
+		_expect(Emblem.ICONS.has(support_id) and support_texture == Emblem.ICONS[support_id] and definition.icon_texture == Emblem.ICONS[support_id], "Support icon matches the actual SkillEmblem mapping: " + id)
 		_expect(definition.size == [1, 1], "Support gem footprint is one by one: " + id)
 	_expect(Catalog.definition("bolt").is_empty() and Catalog.definition("volley").is_empty(), "Bare source IDs are not aliases")
 	_expect(Catalog.definition("skill:unknown").is_empty() and Catalog.definition("support:unknown").is_empty(), "Unknown namespaced IDs are rejected")
@@ -77,6 +84,15 @@ func _check_rejections() -> void:
 	_expect(Catalog.create_instance("", "skill:bolt").is_empty(), "Empty UID is rejected")
 	_expect(Catalog.create_instance("  \t", "skill:bolt").is_empty(), "Whitespace-only UID is rejected")
 	_expect(Catalog.create_instance(42, "skill:bolt").is_empty(), "Non-string UID is rejected")
+	_expect(Catalog.validate_instance(Catalog.create_instance("x", "skill:bolt")), "One-character UID is accepted")
+	_expect(Catalog.validate_instance(Catalog.create_instance("x".repeat(128), "skill:bolt")), "128-character UID is accepted")
+	_expect(Catalog.create_instance("x".repeat(129), "skill:bolt").is_empty(), "UID longer than 128 characters is rejected")
+	_expect(Catalog.create_instance(" leading", "skill:bolt").is_empty(), "UID with leading trim whitespace is rejected")
+	_expect(Catalog.create_instance("trailing ", "skill:bolt").is_empty(), "UID with trailing trim whitespace is rejected")
+	_expect(Catalog.create_instance("inner\ttab", "skill:bolt").is_empty(), "UID with an embedded control byte below 32 is rejected")
+	_expect(Catalog.create_instance("line\nfeed", "skill:bolt").is_empty(), "UID with an embedded line feed is rejected")
+	_expect(Catalog.create_instance("delete" + String.chr(127), "skill:bolt").is_empty(), "UID with DEL byte 127 is rejected")
+	_expect(Catalog.validate_instance(Catalog.create_instance("gem:宝石-01", "skill:bolt")), "Trim-stable non-ASCII UID is accepted")
 	_expect(Catalog.create_instance("qa:unknown", "bolt").is_empty(), "Unknown aliased ID cannot be instantiated")
 	_expect(Catalog.create_instance("qa:unknown", "support:unknown").is_empty(), "Unknown namespaced ID cannot be instantiated")
 	_expect(not Catalog.validate_instance(null), "Null instance is rejected")
@@ -90,6 +106,9 @@ func _check_rejections() -> void:
 	var bad_uid: Dictionary = valid.duplicate(true)
 	bad_uid.uid = 7
 	_expect(not Catalog.validate_instance(bad_uid), "Wrong UID type is rejected")
+	var control_uid: Dictionary = valid.duplicate(true)
+	control_uid.uid = "bad\ruid"
+	_expect(not Catalog.validate_instance(control_uid), "Instance validation rejects embedded UID controls")
 	var bad_kind: Dictionary = valid.duplicate(true)
 	bad_kind.kind = "support_gem"
 	_expect(not Catalog.validate_instance(bad_kind), "Mismatched kind is rejected")
