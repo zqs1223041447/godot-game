@@ -969,8 +969,8 @@ func _build_skills_dock() -> void:
 
 func _build_character_dock() -> void:
 	_dock_titles.left.text = "角色属性"
-	_dock_subtitles.left.text = "当前装备、天赋与技能计算结果"
-	_dock_footers.left.text = "只读属性；经验与未用天赋点随战斗实时更新"
+	_dock_subtitles.left.text = ""
+	_dock_footers.left.text = ""
 	if not is_instance_valid(_character_panel):
 		_character_panel = CanonicalCharacterView.new()
 		_character_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL

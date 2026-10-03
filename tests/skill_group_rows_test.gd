@@ -226,9 +226,9 @@ func _test_layout_and_capacity() -> void:
 			"Main and support drop targets retain visible hit areas: " + str(slot.name))
 	var title: Label = rows_view.find_child("SkillGroupName_00", true, false) as Label
 	var binding: OptionButton = rows_view.find_child("SkillBinding_00", true, false) as OptionButton
-	_expect(title.get_theme_font_size("font_size") == roundi(13.0 * 1.2)
-		and binding.get_theme_font_size("font_size") == roundi(12.0 * 1.2),
-		"Group name and key binding typography follow the requested font scale")
+	_expect(title.get_theme_font_size("font_size") == roundi(11.0 * 1.2)
+		and binding.get_theme_font_size("font_size") == roundi(10.0 * 1.2),
+		"Compact reference typography retains the user's requested font scale")
 	var too_many: Array = []
 	for index: int in range(70):
 		too_many.append(_row("group_%02d" % index, "技能 %d" % index, true, "main_%02d" % index, 0))

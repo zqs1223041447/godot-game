@@ -17,7 +17,7 @@ const COLUMNS: int = 12
 const ROWS: int = 8
 const MAX_CELL_SIZE: float = 64.0
 const EDGE_INSET: float = 8.0
-const ENTRY_KINDS: Array[String] = ["equipment", "jewel", "skill_gem", "support_gem"]
+const ENTRY_KINDS: Array[String] = ["equipment", "jewel", "skill_gem", "support_gem", "currency"]
 const ICON_ENTRY_KINDS: Array[String] = ["skill_gem", "support_gem"]
 
 const PAPER := Color("f8ecd0")
@@ -218,7 +218,9 @@ func _draw_entry(entry: Dictionary) -> void:
 	var art_box := Rect2(box.position + Vector2(7.0, 5.0), box.size - Vector2(14.0, 10.0 + footer_height))
 	var icon: Variant = entry["icon"]
 	if art_box.has_area():
-		if _is_icon_entry(str(entry["kind"])):
+		if str(entry["kind"]) == "currency":
+			_draw_currency_stack(art_box,box,int(entry["art"].get("quantity",0)))
+		elif _is_icon_entry(str(entry["kind"])):
 			if icon is Texture2D:
 				var fit: Rect2 = GemIconLayout.image_fit_rect(box.size, icon.get_size())
 				if fit.has_area():
@@ -237,6 +239,26 @@ func _draw_entry(entry: Dictionary) -> void:
 			HORIZONTAL_ALIGNMENT_CENTER, maxf(0.0, caption_box.size.x), font_size, caption_color)
 	var outline: Color = PresentationTheme.GOLD if is_selected else PresentationTheme.ACCENT if is_hovered else accent.darkened(0.22)
 	draw_rect(box.grow(-1.5), outline, false, 2.0 if is_selected or is_hovered else 1.0)
+
+
+func _draw_currency_stack(art_box: Rect2, box: Rect2, quantity: int) -> void:
+	# Original small crystal fragments; item quantity is supplied by the owning
+	# model, never a second wallet or a local UI counter.
+	var center := art_box.get_center()
+	var unit := minf(art_box.size.x,art_box.size.y)*0.43
+	for offset: Vector2 in [Vector2(-0.35,0.12),Vector2(0.32,0.22),Vector2(0,-0.18)]:
+		var c := center+offset*unit
+		var points := PackedVector2Array([c+Vector2(0,-unit),c+Vector2(unit*0.5,-unit*0.15),c+Vector2(unit*0.25,unit*0.7),c+Vector2(-unit*0.35,unit*0.45)])
+		draw_colored_polygon(points,Color("b48757"))
+		draw_polyline(PackedVector2Array([points[0],points[1],points[2],points[3],points[0]]),Color("785533"),1.0,true)
+		draw_line(points[0],points[2],Color("ffebaf"),1.4,true)
+	var font: Font = get_theme_default_font()
+	var label := str(quantity)
+	var point_size := 12
+	while point_size > 4 and font.get_string_size(label,HORIZONTAL_ALIGNMENT_LEFT,-1,point_size).x > box.size.x-6.0: point_size -= 1
+	var baseline := Vector2(box.position.x+3.0,box.end.y-4.0)
+	draw_string_outline(font,baseline,label,HORIZONTAL_ALIGNMENT_RIGHT,box.size.x-6.0,point_size,3,Color("2c2119"))
+	draw_string(font,baseline,label,HORIZONTAL_ALIGNMENT_RIGHT,box.size.x-6.0,point_size,Color("fff2cf"))
 
 
 func _draw_missing_icon_placeholder(entry: Dictionary, rect: Rect2) -> void:

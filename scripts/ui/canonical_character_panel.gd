@@ -86,6 +86,7 @@ func _build() -> void:
 	add_child(_body)
 	_progress = Label.new()
 	_progress.name = "CharacterProgress"
+	_progress.add_theme_font_size_override("font_size",11)
 	_progress.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_progress.add_theme_color_override("font_color", ThemeStyle.GOLD)
 	_body.add_child(_progress)
@@ -100,7 +101,7 @@ func _build() -> void:
 		var card := PanelContainer.new()
 		card.name = "CharacterStat_" + str(row.id)
 		card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		card.custom_minimum_size = Vector2(0.0, 55.0)
+		card.custom_minimum_size = Vector2(0.0, 46.0)
 		card.add_theme_stylebox_override("panel", ThemeStyle.panel(Color("f8ecd0"), Color("8c6b42"), 5, 1, 6))
 		grid.add_child(card)
 		var stack := VBoxContainer.new()
@@ -108,19 +109,15 @@ func _build() -> void:
 		card.add_child(stack)
 		var label := Label.new()
 		label.text = str(row.label)
-		label.add_theme_font_size_override("font_size", 12)
+		label.add_theme_font_size_override("font_size", 11)
 		label.add_theme_color_override("font_color", ThemeStyle.MUTED)
 		stack.add_child(label)
 		var value := Label.new()
 		value.name = "Value_" + str(row.id)
-		value.add_theme_font_size_override("font_size", 18)
+		value.add_theme_font_size_override("font_size", 16)
 		value.add_theme_color_override("font_color", ThemeStyle.TEXT)
 		stack.add_child(value)
 		_values[str(row.id)] = value
-	var note := Label.new()
-	note.name = "CharacterRulesNote"
-	note.text = "攻击命中率取决于目标闪避；法术不进行闪避判定。护甲减伤随每次物理命中大小变化。元素抗性上限为 75%。"
-	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	note.add_theme_font_size_override("font_size", 13)
-	note.add_theme_color_override("font_color", ThemeStyle.MUTED)
-	_body.add_child(note)
+		if row.id in ["accuracy","evasion"]: card.tooltip_text = "攻击命中率取决于目标闪避；法术不进行闪避判定。"
+		elif row.id == "armour": card.tooltip_text = "护甲减伤随每次物理命中大小变化。"
+		elif str(row.id).ends_with("_resistance"): card.tooltip_text = "显示当前有效抗性；元素抗性上限为75%。"

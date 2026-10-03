@@ -53,7 +53,8 @@ func _check_layout(view_size: Vector2i, ui_scale: float, font_scale: float) -> v
 	var right_scroll_range: float = maxf(0.0, right_scroll.get_v_scroll_bar().max_value - right_scroll.get_v_scroll_bar().page)
 	check(viewport.size == view_size, "Real root window uses the requested %d×%d output" % [view_size.x, view_size.y])
 	check(right_rect.size.x <= screen_rect.size.x / 3.0 + 0.1 and right_rect.end.x <= screen_rect.end.x+0.1, "Right dock stays within one-third screen width and actual logical screen boundary")
-	check(dock_ratio <= 0.34 and page_ratio <= 0.40, "Equipment block stays near the upper third and fixed page controls sit directly below it")
+	var bag_header: Control = inventory.find_child("BagHeader",true,false)
+	check(dock_ratio <= 0.34 and page_ratio <= 0.44 and bag_header.get_global_rect().position.y >= equip_rect.end.y-0.1, "Equipment stays in the upper third; inventory operations and page controls occupy the following bag area")
 	check(right_scroll_range <= 1.0, "Right inventory content needs no full-dock vertical scroll")
 	check(bag_grid.grid_columns() == 8 and bag_grid.grid_rows() == 6
 		and bag_grid.cell_rect(Vector2i(7, 5)).end.y <= bag_grid.size.y + 1.0,
@@ -87,7 +88,7 @@ func _check_layout(view_size: Vector2i, ui_scale: float, font_scale: float) -> v
 		"Left dock content and skill rows fill the available pane height")
 	check(last_row.get_global_rect().intersects(rows.get_global_rect()), "Last skill row remains reachable by scrolling")
 	check(str(arena.hud._dock_subtitles.left.text).is_empty()
-		and str(arena.hud._dock_footers.left.text) == "右侧行囊拖入 · 右键取回"
+		and str(arena.hud._dock_footers.left.text).is_empty()
 		and skills.get_child_count() == 2,
 		"Repeated top and inner drag instructions are removed from the skill pane")
 	check(inventory.find_child("EquipmentSlotsTitle", true, false) == null

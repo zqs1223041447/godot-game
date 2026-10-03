@@ -243,6 +243,10 @@ func refresh() -> void:
 		for uid: String in pending:
 			var button := Button.new()
 			button.text = str(model.item_definition(uid).get("base_name", model.item_definition(uid).name))
+			if model.item(uid).kind == "currency":
+				button.text += " ×%d" % int(model.item(uid).payload.quantity)
+			button.tooltip_text = button.text
+			button.clip_text = true
 			button.pressed.connect(_return_to_bag.bind(uid))
 			list.add_child(button)
 	_refresh_crafting()
@@ -287,6 +291,7 @@ func _activate_equipment(slot: String) -> void:
 	if not uid.is_empty(): _return_to_bag(uid)
 func _activate_item(uid: String) -> void:
 	var item: Dictionary = model.item(uid)
+	if item.get("kind","") == "currency": return
 	if item.get("kind","") != "equipment":
 		feedback.emit("主动与辅助宝石在 K 技能界面装配；珠宝在 T 天赋界面镶嵌")
 		return
@@ -395,4 +400,6 @@ func _request_discard()->void:
 	_craft_dialog.title="确认丢弃物品"
 	_craft_dialog.ok_button_text="确认丢弃"
 	_craft_dialog.dialog_text="丢弃「%s」？\n仅消耗这一件实例，不影响同名物品。\n不会获得材料；保存成功后无法恢复。"%str(model.item_definition(_selected_uid).name)
+	if model.item(_selected_uid).kind == "currency":
+		_craft_dialog.dialog_text="丢弃这堆「%s」共 %d 枚？\n保存成功后无法恢复。"%[str(model.item_definition(_selected_uid).name),int(model.item(_selected_uid).payload.quantity)]
 	_craft_dialog.popup_centered(Vector2i(500,240))

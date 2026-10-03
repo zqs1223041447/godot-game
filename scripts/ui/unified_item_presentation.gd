@@ -70,6 +70,11 @@ static func view(model: RefCounted, uid: String) -> Dictionary:
 		"preview_lines":[],
 	}
 	match str(item.kind):
+		"currency":
+			result.kind_label = "制作材料"
+			result.tags = ["可堆叠"]
+			result.base_stats = [{"label":"数量","value":str(item.payload.quantity)},
+				{"label":"单堆上限","value":str(definition.get("stack_limit",1000000000))}]
 		"equipment":
 			result.kind_label = CATEGORIES.get(str(definition.get("category","")), "装备")
 			result.rarity_label = RARITIES.get(str(definition.get("rarity","")), str(definition.get("rarity","")))
