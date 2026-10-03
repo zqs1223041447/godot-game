@@ -62,6 +62,8 @@ func setup(value: Node) -> void:
 	_body.add_child(leave)
 	_reset = ConfirmationDialog.new()
 	_reset.title = "重置天赋"
+	_reset.ok_button_text = "确认"
+	_reset.cancel_button_text = "取消"
 	_reset.dialog_text = "退还已分配天赋点，珠宝退回行囊或待安置区？"
 	_reset.confirmed.connect(func(): _result(arena.town_reset_passives(_reset_revision)))
 	add_child(_reset)

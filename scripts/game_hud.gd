@@ -2,6 +2,7 @@ class_name GameHUD
 extends CanvasLayer
 ## Responsive, keyboard-friendly combat HUD and live build editor.
 
+const TownSquareView = preload("res://scripts/ui/town_square_view.gd")
 const TownServiceView = preload("res://scripts/ui/town_service_panel.gd")
 const FlaskSlotView = preload("res://scripts/ui/flask_slot.gd")
 const CanonicalInventoryView = preload("res://scripts/ui/canonical_inventory_panel.gd")
@@ -46,6 +47,7 @@ const STAT_NAMES: Dictionary = {
 	"area_mult": "范围倍率", "area_multiplier": "范围倍率", "fire_resistance": "火焰抗性"
 }
 
+var _town_square: Control
 var _town_view: Control
 var _world_button: Button
 var _world_label: Label
@@ -122,6 +124,12 @@ func setup(arena: Node) -> void:
 	_root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(_root)
 	_root.theme = _make_theme()
+	_town_square = TownSquareView.new()
+	_root.add_child(_town_square)
+	_town_square.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_town_square.setup(_arena.town_services())
+	_town_square.service_requested.connect(func(id: String): _town_view.open_service(id))
+	_town_square.hide()
 	_build_status()
 	_build_navigation()
 	_build_world_controls()
@@ -176,7 +184,7 @@ func _notification(what: int) -> void:
 
 
 func is_blocking() -> bool:
-	return bool(_menu_routes.snapshot().paused)
+	return bool(_menu_routes.snapshot().paused) or (is_instance_valid(_return_dialog) and _return_dialog.visible)
 
 
 func open_panel(panel_name: String) -> void:
@@ -1590,6 +1598,7 @@ func _build_world_controls() -> void:
 	box.name = "WorldControls"
 	_place(box, Rect2(20,130,250,84))
 	_world_label = _label("", 12)
+	_world_label.add_theme_color_override("font_color", Color("f8ecd0"))
 	box.add_child(_world_label)
 	_world_button = _button("城镇测试", "TownEntry", _world_action, 130)
 	_world_button.custom_minimum_size.y = 28
@@ -1604,6 +1613,8 @@ func _build_world_controls() -> void:
 		if not _menu_routes.snapshot().right_inventory: open_panel("inventory"))
 	_return_dialog = ConfirmationDialog.new()
 	_return_dialog.title = "离开地图"
+	_return_dialog.ok_button_text = "确认"
+	_return_dialog.cancel_button_text = "取消"
 	_return_dialog.dialog_text = "保留已经获得的物品并返回城镇？未完成的地图将放弃。"
 	_return_dialog.confirmed.connect(func(): _world_result(_arena.return_to_town(_return_revision)))
 	_root.add_child(_return_dialog)
@@ -1611,6 +1622,7 @@ func _build_world_controls() -> void:
 
 func _refresh_world() -> void:
 	var context: Dictionary = _arena.world_context()
+	_town_square.visible = str(context.mode) == "town"
 	match str(context.mode):
 		"normal":
 			_world_label.text = ""
