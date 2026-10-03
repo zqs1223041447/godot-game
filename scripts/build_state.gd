@@ -348,7 +348,7 @@ func execute_crafting(handle: Variant, source_instance: Variant) -> Dictionary:
 	var context: Dictionary = _craft_context(current, issued.path)
 	# Stable across cancellation, failed writes and reloads of the same build.
 	# No global/combat/loot RNG call and no caller-selected seed.
-	var seed_text: String = JSON.stringify({"rules": Craft.RULES_VERSION,
+	var seed_text: String = JSON.stringify({"rules": Craft.seed_rules_version(quote.operation),
 		"revision": int(crafting.revision), "item": quote.source_instance}, "", true, true)
 	var seed_value: int = seed_text.sha256_text().substr(0, 15).hex_to_int()
 	var plan: Dictionary = CraftPlanner.plan(context, quote, seed_value)
