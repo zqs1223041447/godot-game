@@ -5,11 +5,17 @@ const Migration = preload("res://scripts/save/canonical_build_migration.gd")
 const PagedMigration = preload("res://scripts/save/paged_bag_migration.gd")
 const CurrencyMigration = preload("res://scripts/save/currency_item_migration.gd")
 const Rules = preload("res://scripts/save/canonical_build_rules.gd")
+const Store = preload("res://scripts/save/canonical_build_store.gd")
 const Items = preload("res://scripts/items/unified_item_catalog.gd")
 const Gems = preload("res://scripts/items/gem_catalog.gd")
 const Locations = preload("res://scripts/items/item_location_rules.gd")
 const Transfer = preload("res://scripts/items/item_transfer_plan.gd")
 const BagLayout = preload("res://scripts/items/paged_bag_layout.gd")
+
+class FailingStore extends Store:
+	var fail_writes := false
+	func _write_bytes(path: String, bytes: PackedByteArray) -> Error:
+		return ERR_CANT_CREATE if fail_writes else super._write_bytes(path, bytes)
 
 var checks := 0
 var failures := 0
@@ -47,6 +53,7 @@ func _initialize() -> void:
 	check(_full_bag_routes_currency_to_recovery(), "full paged bag retains old balance in visible recovery")
 	check(_full_v15_registry_migrates_one_extra_item(), "1024-item v15 limit stays frozen and v16 accommodates one balance item")
 	check(_v13_representative_preserves_wallet_items_and_talents(), "representative v13 source passes old chain and retains balances/identities")
+	check(_store_migration_backup_and_failure_atomicity(), "v14/v15 file migration backs up exact bytes and preserves state on failure")
 	print("Currency migration: %d checks, %d failures" % [checks, failures])
 	quit(1 if failures else 0)
 
@@ -135,6 +142,57 @@ func _v13_representative_preserves_wallet_items_and_talents() -> bool:
 		and v16.migration_ledger.from_version == 13 and v16.progress == v14.progress \
 		and v16.talents == v14.talents and v16.skill_groups == v14.skill_groups \
 		and v16.next_item_serial == v14.next_item_serial
+
+
+func _store_migration_backup_and_failure_atomicity() -> bool:
+	var isolated: String = OS.get_environment("XDG_DATA_HOME")
+	if not isolated.begins_with("/tmp/godot-currency-dev/") \
+			or not OS.get_user_data_dir().begins_with(isolated + "/"):
+		return false
+	var ok := true
+	for version: int in [14, 15]:
+		var source: Dictionary = _v14(0 if version == 14 else 321)
+		if version == 15: source = PagedMigration.migrate_v14(source)
+		var path := "user://currency_source_v%d_%d.json" % [version, Time.get_ticks_usec()]
+		var bytes := PackedByteArray([239, 187, 191]) + JSON.stringify(source, "  ", true, true).to_utf8_buffer()
+		_write(path, bytes)
+		var state := Store.new()
+		var loaded: bool = state.load_build(path)
+		var backup_path := path + ".v%d-backup.json" % version
+		var raw: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+		var expected_balance: int = 0 if version == 14 else 321
+		ok = ok and loaded and FileAccess.get_file_as_bytes(backup_path) == bytes \
+			and raw.version == 16 and raw.crafting == {"revision": 23} \
+			and state.crafting_balance() == expected_balance and state.successful_saves == 1 \
+			and not raw.crafting.has("materials") and Rules.reason(state.snapshot()).is_empty()
+	var conflict_source: Dictionary = PagedMigration.migrate_v14(_v14(18))
+	var conflict_path := "user://currency_backup_conflict_%d.json" % Time.get_ticks_usec()
+	var conflict_bytes: PackedByteArray = JSON.stringify(conflict_source).to_utf8_buffer()
+	_write(conflict_path, conflict_bytes)
+	_write(conflict_path + ".v15-backup.json", "different backup".to_utf8_buffer())
+	var conflict := Store.new()
+	var conflict_before: Dictionary = conflict.snapshot()
+	ok = ok and not conflict.load_build(conflict_path) and conflict.snapshot() == conflict_before \
+		and FileAccess.get_file_as_bytes(conflict_path) == conflict_bytes
+	var failed_path := "user://currency_write_failure_%d.json" % Time.get_ticks_usec()
+	var failed_bytes: PackedByteArray = JSON.stringify(conflict_source).to_utf8_buffer()
+	_write(failed_path, failed_bytes)
+	var failing := FailingStore.new()
+	failing.fail_writes = true
+	var before: Dictionary = failing.snapshot()
+	var failed: bool = not failing.load_build(failed_path)
+	ok = ok and failed and failing.snapshot() == before and FileAccess.get_file_as_bytes(failed_path) == failed_bytes \
+		and FileAccess.get_file_as_bytes(failed_path + ".v15-backup.json") == failed_bytes
+	return ok
+
+
+func _write(path: String, bytes: PackedByteArray) -> void:
+	var file := FileAccess.open(path, FileAccess.WRITE)
+	if file == null:
+		check(false, "migration fixture opens inside isolated userdata")
+		return
+	file.store_buffer(bytes)
+	file.close()
 
 
 func _currency_uids(candidate: Dictionary) -> Array[String]:
