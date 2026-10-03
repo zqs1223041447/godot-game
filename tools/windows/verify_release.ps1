@@ -347,7 +347,8 @@ function Test-Executable {
         Assert-Range $data $end 12 $data.LongLength
         if ((Read-U32 $data ($data.LongLength - 4)) -ne 0x43504447) { throw '缺少内嵌 GDPC 尾标记；不猜测外置 PCK。' }
         $packBytes = Read-U64 $data $end
-        if ($packBytes -lt 40 -or $packBytes -gt $end) { throw '内嵌 PCK 长度无效。' }
+        $pckV3HeaderBytes = [long]104 # 固定字段 40 字节，加上 16 个 32 位保留字段。
+        if ($packBytes -lt $pckV3HeaderBytes -or $packBytes -gt $end) { throw '内嵌 PCK 长度无效。' }
         $packStart = $end - $packBytes
         if ((Read-U32 $data $packStart) -ne 0x43504447) { throw '缺少 GDPC 包头签名。' }
         $packVersion = Read-U32 $data ($packStart + 4)
@@ -356,7 +357,7 @@ function Test-Executable {
         if (($packFlags -band 1) -ne 0) { throw '不支持加密 PCK 目录。' }
         $dataBase = Read-U64 $data ($packStart + 24)
         $directoryOffset = Read-U64 $data ($packStart + 32)
-        if ($dataBase -gt $packBytes -or $directoryOffset -lt 40 -or $directoryOffset -gt $packBytes - 4) { throw 'PCK 数据或目录基址无效。' }
+        if ($dataBase -gt $packBytes -or $directoryOffset -lt $pckV3HeaderBytes -or $directoryOffset -gt $packBytes - 4) { throw 'PCK 数据或目录基址无效。' }
         $position = $packStart + $directoryOffset
         $fileCount = Read-U32 $data $position
         $position += 4
@@ -396,7 +397,7 @@ function Test-Executable {
         }
         finally { $md5.Dispose() }
         foreach ($resource in $packEntries.Values) {
-            if ($resource.start -lt $packStart + 40 -or
+            if ($resource.start -lt $packStart + $pckV3HeaderBytes -or
                 ($resource.start -lt $position -and $resource.start + $resource.size -gt $packStart + $directoryOffset)) {
                 throw 'PCK 资源与包头或目录表重叠。'
             }
@@ -472,7 +473,9 @@ function Get-HtmlDocument([string]$Name) {
         $tagName = $tag.Groups['tag'].Value.ToLowerInvariant()
         $attrs = @{}
         foreach ($attribute in [regex]::Matches($tag.Groups['attrs'].Value, $attributePattern)) {
-            $attrs[$attribute.Groups['key'].Value.ToLowerInvariant()] = [Net.WebUtility]::HtmlDecode($attribute.Groups['value'].Value)
+            $key = $attribute.Groups['key'].Value.ToLowerInvariant()
+            # HTML 忽略同名属性的后续出现；保留首项以与浏览器的链接解析一致。
+            if (-not $attrs.ContainsKey($key)) { $attrs[$key] = [Net.WebUtility]::HtmlDecode($attribute.Groups['value'].Value) }
         }
         if ($attrs.ContainsKey('id')) {
             if (-not $ids.Add($attrs['id'])) { Add-Failure 'HTML_DUPLICATE_ID' $Name "HTML id 重复：$($attrs['id'])" }

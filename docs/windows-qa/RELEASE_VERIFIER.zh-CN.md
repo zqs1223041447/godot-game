@@ -47,11 +47,11 @@ JSON 由 stdout 返回；上例中的报告文件由调用者写入，验证器�
 | 每文件 SHA256 | 清单行格式、重复项、缺少目标、未覆盖文件和实际摘要。清单不能替代外部提供的可信 ZIP SHA。 |
 | 文本 | `.md/.txt/.json/.html/.htm/.css/.js/.gd/.uid/.gdignore` 严格 UTF-8（可有 UTF-8 BOM），拒绝 NUL/UTF-16；JSON 还须可解析。 |
 | PE | `MZ`、`PE\0\0` 签名、AMD64 Machine `0x8664`、PE32+ `0x020b`、节表/可选头基本边界。不是完整 Windows loader 或数字签名检查。 |
-| PCK | `GDPC` 包头/尾、格式 v3、目录/资源边界、加密拒绝、资源重复/不安全路径、逐项 MD5；禁止导出标准中排除的研究/开发资源。 |
+| PCK | `GDPC` 包头/尾、格式 v3、104 字节完整包头、目录偏移至少 104、资源不与包头/目录重叠、加密拒绝、资源重复/不安全路径、逐项 MD5；禁止导出标准中排除的研究/开发资源。 |
 | 必要资源 | `project.binary`、`data/passive_balance.json` 非空；所有 `.import` 的唯一 `path` 指向包内非空编译资源，至少有字体和 PNG 纹理映射。Godot 导出的单个尾部 NUL 终止符被明确支持，内部 NUL 仍拒绝。 |
 | 两处版本 | ECFG `project.binary` 中的 `application/config/version` STRING，以及图鉴 `catalog.json` 的 `game_version`，分别与期望值比较；缺少版本直接失败。 |
 | 许可证 | 四份标准许可证/通知必须存在、非空且为 UTF-8；JSON 通知须可解析。这是文件完整性检查，不是法律内容审查。 |
-| 离线图鉴 | 扫描图鉴目录所有 HTML/CSS：`href/src/poster/srcset`、内联/外部 CSS `url()` / `@import`、相对文件及 HTML 锚点；URL 百分号编码和查询串分别处理。允许包内合法 `../` 链接，拒绝越出发布根目录。 |
+| 离线图鉴 | 扫描图鉴目录所有 HTML/CSS：`href/src/poster/srcset`、内联/外部 CSS `url()` / `@import`、相对文件及 HTML 锚点；HTML 重复属性保留首项，与 [HTML 解析规则](https://html.spec.whatwg.org/multipage/parsing.html#parse-errors)一致；URL 百分号编码和查询串分别处理。允许包内合法 `../` 链接，拒绝越出发布根目录。 |
 | 网络依赖 | HTTP(S) 超链接可作为外部研究引用计数，工具不会请求它们；图片、脚本、样式等网络资源引用失败。`file:`、`javascript:`、协议相对地址及其他未支持协议失败。 |
 | 图片 | 清单必须 `complete`，数量与 `written_images` 一致；PNG 必须存在、被 HTML/CSS 引用、纳入清单且具有有效签名、非零 IHDR 宽高和 IEND 边界。不解码像素、不验证 PNG chunk CRC 或实际渲染。 |
 
@@ -60,6 +60,8 @@ HTML/CSS 使用受限的静态扫描器，不能代替完整浏览器解析器�
 读取上限固定为：10000 个 ZIP/PCK 条目、单文件 256 MiB、ZIP 展开总量与 PCK 资源累计读取量分别 512 MiB、单文本 16 MiB、压缩比 1000、路径 1024 字符/64 层。读取过程还核对实际展开长度；超过标准直接报告，不通过安装依赖或扩大上限自动重试。
 
 ECFG 版本字段的限定字节解析参考 [Godot 4.6.3 ProjectSettings 源码](https://github.com/godotengine/godot/blob/4.6.3-stable/core/config/project_settings.cpp) 和 [Variant 序列化源码](https://github.com/godotengine/godot/blob/4.6.3-stable/core/io/marshalls.cpp)。只解码版本 STRING；其他 Variant 只跳过其已验证的长度，不实例化对象。
+
+PCK v3 包头范围参考 Godot 4.6.3-stable 的 [PCK 写入源码](https://github.com/godotengine/godot/blob/4.6.3-stable/core/io/pck_packer.cpp#L897-L945)与[读取源码](https://github.com/godotengine/godot/blob/4.6.3-stable/core/io/file_access_pack.cpp#L2087-L2123)：固定字段占 40 字节，后接 16 个 32 位保留字段，共 104 字节。验证器要求目录从包头之后开始，并拒绝资源与完整包头或目录记录重叠。
 
 ## 人工 fixture 测试
 
@@ -77,7 +79,7 @@ pwsh.exe -NoLogo -NoProfile -NonInteractive -File .\tests\windows\release_verifi
 
 每轮创建唯一 `%TEMP%\godot-release-verifier-tests-<GUID>\`，其 ZIP 目录有中文和空格。所有子进程 `APPDATA` / `LOCALAPPDATA` 指向该轮隔离目录。每例对照 ZIP SHA、验证器 SHA、目录快照、隔离存档 sentinel 和两个逃逸/脚本标记，要求验证器没有文件写入或解压副作用。没有读取真实玩家存档。
 
-测试保留 fixture 与 `test-results.json` 供复查，不自动递归清理目录。69 例覆盖合法相对/百分号链接、明确包根、版本规范化、损坏 ZIP/EXE/PCK/PNG/JSON/UTF-8、缺文件/许可证/图片、版本不一致、锚点、CSS/脚本引用、网络依赖、路径穿越/绝对路径/ADS/设备名、重复名、Unicode 规范重复、文件目录冲突、符号链接、哈希清单和先于解压的长度限制。
+测试保留 fixture 与 `test-results.json` 供复查，不自动递归清理目录。当前脚本含 71 例，覆盖合法相对/百分号链接、明确包根、版本规范化、损坏 ZIP/EXE/PCK/PNG/JSON/UTF-8、缺文件/许可证/图片、版本不一致、锚点、重复 HTML 属性首项逃逸、PCK v3 保留包头重叠、CSS/脚本引用、网络依赖、路径穿越/绝对路径/ADS/设备名、重复名、Unicode 规范重复、文件目录冲突、符号链接、哈希清单和先于解压的长度限制。
 
 测试成功退出 0，断言失败退出 1；发现引擎现有策略为 Restricted/AllSigned 时报告 `blocked` 并退出 2，不更改策略。若启动测试文件本身已被策略阻止，由 PowerShell 直接报告。
 
@@ -94,7 +96,7 @@ pwsh.exe -NoLogo -NoProfile -NonInteractive -File .\tests\windows\release_verifi
 | 内嵌资源 | PCK v3 / Godot 4.6.3；164 项 MD5、35 份导入映射通过（1 字体、34 PNG 纹理） |
 | 版本 | `project.binary` 与图鉴均为 `0.13.0` |
 | 图鉴 | 2634 次本地链接检查、7 个未请求的外部研究引用、39 张 PNG / 39 个图片清单条目通过 |
-| Fixture | Windows PowerShell 5.1：69/69；PowerShell 7.6.5：69/69 |
+| Fixture | 基线脚本在 Windows PowerShell 5.1：69/69、PowerShell 7.6.5：69/69；本修订新增 2 例，当前共 71 例，Linux 环境无 PowerShell，未运行 |
 | 原生 GUI / 浏览器交互 | **未运行、未验收**；未安装或启动 Godot，未更改发行包，未访问真实存档 |
 
 受限执行环境最初无法读到用户的 PowerShell 5.1 策略。随后只读核实实际用户已有 `CurrentUser=RemoteSigned`，在该现有策略下正常完成测试和 ZIP 验证；没有修改策略或使用 Bypass。

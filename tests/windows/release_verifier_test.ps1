@@ -127,6 +127,48 @@ function New-Exe($Resources = (New-Resources)) {
     return ,$result
 }
 
+function New-PckHeaderOverlapExe {
+    $resources = New-Resources
+    $resources.Add('header-alias.bin', [byte[]]@(0))
+    $exe = New-Exe $resources
+    $pckBytes = [BitConverter]::ToUInt64($exe, $exe.Length - 12)
+    if ($pckBytes -gt [uint64]($exe.Length - 12)) { throw '人工 PCK fixture 长度越界。' }
+    $packStart = $exe.Length - 12 - [int]$pckBytes
+    $oldDataBase = [BitConverter]::ToUInt64($exe, $packStart + 24)
+    $directoryOffset = [BitConverter]::ToUInt64($exe, $packStart + 32)
+    if ($oldDataBase -lt 104 -or $oldDataBase -gt $pckBytes -or
+        $directoryOffset -lt 104 -or $directoryOffset -gt $pckBytes - 4) { throw '人工 PCK fixture 基址无效。' }
+    $position = $packStart + [int]$directoryOffset
+    $packEnd = $exe.Length - 12
+    if ($position -gt $packEnd - 4) { throw '人工 PCK fixture 目录越界。' }
+    $fileCount = [BitConverter]::ToUInt32($exe, $position)
+    if ($fileCount -lt 1 -or $fileCount -gt 10000) { throw '人工 PCK fixture 条目数无效。' }
+    $position += 4
+    for ($index = 0; $index -lt $fileCount; $index++) {
+        if ($position -gt $packEnd - 4) { throw '人工 PCK fixture 路径长度字段越界。' }
+        $nameLength = [BitConverter]::ToUInt32($exe, $position)
+        $position += 4
+        if ($nameLength -lt 1 -or $nameLength -gt 65535 -or $nameLength -gt [uint64]($packEnd - $position)) {
+            throw '人工 PCK fixture 路径长度无效。'
+        }
+        $name = [Text.Encoding]::UTF8.GetString($exe, $position, [int]$nameLength).TrimEnd([char]0)
+        $position += [int]$nameLength
+        if ($position -gt $packEnd - 36) { throw '人工 PCK fixture 目录被截断。' }
+        $oldOffset = [BitConverter]::ToUInt64($exe, $position)
+        if ($name -ceq 'header-alias.bin') {
+            $newOffset = [uint64]0
+        } else {
+            if ($oldOffset -gt $pckBytes - $oldDataBase) { throw '人工 PCK fixture 偏移超出容器。' }
+            $newOffset = $oldDataBase + $oldOffset - 40
+        }
+        Put-Bytes $exe $position ([BitConverter]::GetBytes([uint64]$newOffset))
+        $position += 36
+    }
+    if ($position -ne $packStart + [int]$oldDataBase) { throw '人工 PCK fixture 目录长度与数据基址不一致。' }
+    Put-Bytes $exe ($packStart + 24) ([BitConverter]::GetBytes([uint64]40))
+    return ,$exe
+}
+
 function New-Fixture {
     $files = [Collections.Generic.Dictionary[string, byte[]]]::new([StringComparer]::Ordinal)
     $files.Add('GodotGame.exe', (New-Exe))
@@ -284,6 +326,8 @@ $files = New-Fixture; Put-Bytes $files['GodotGame.exe'] 516 ([BitConverter]::Get
 Case '不支持PCK版本' $files -Code 'PCK_INVALID'
 $files = New-Fixture; Put-Bytes $files['GodotGame.exe'] 532 ([BitConverter]::GetBytes([uint32]1))
 Case '加密PCK目录' $files -Code 'PCK_INVALID'
+$files = New-Fixture; $files['GodotGame.exe'] = New-PckHeaderOverlapExe
+Case 'PCK资源与v3保留包头重叠' $files -Code 'PCK_INVALID'
 $resources = New-Resources; [void]$resources.Remove('data/passive_balance.json')
 $files = New-Fixture; $files['GodotGame.exe'] = New-Exe $resources
 Case 'PCK缺平衡资源' $files -Code 'PCK_INVALID'
@@ -310,6 +354,10 @@ $files = New-Fixture; $files['docs/reference/style.css'] = Bytes '@import "missi
 Case '缺CSS导入' $files -Code 'REFERENCE_INVALID'
 $files = New-Fixture; $files['docs/reference/index.html'] = Bytes '<meta charset=utf-8><img src="art/图标 空格.png"><a href="..%2f..%2f..%2fescaped-payload.txt">穿越</a>'
 Case '百分号编码链接穿越' $files -Code 'REFERENCE_INVALID'
+$files = New-Fixture
+$indexHtml = [Text.Encoding]::UTF8.GetString($files['docs/reference/index.html'])
+$files['docs/reference/index.html'] = Bytes ($indexHtml + '<a href="../../../escaped-payload.txt" href="#top">重复href首项越界</a>')
+Case '重复href按首属性拒绝包根穿越' $files -Code 'REFERENCE_INVALID'
 $files = New-Fixture; $files['docs/reference/index.html'] = Bytes '<meta charset=utf-8><img src="art/图标 空格.png"><a href="file:///C:/outside.txt">外部文件</a>'
 Case '拒绝file协议' $files -Code 'REFERENCE_INVALID'
 $files = New-Fixture; $files['docs/reference/index.html'] = Bytes '<meta charset=utf-8><img src="art/图标 空格.png" srcset="missing.png 2x">'
