@@ -25,16 +25,21 @@ func _run() -> void:
 	var state = arena.state
 	var original_snapshot: Dictionary = state.snapshot()
 
-	# The first K opens the real canonical panel; same-state K toggles must reuse its row controls.
+	# Open the two docks together: the skill editor and bag share the model's real item instances.
 	arena.hud.handle_menu_key(KEY_K, true, false)
+	arena.hud.handle_menu_key(KEY_I, true, false)
 	await _frames(6)
 	var skills: Control = arena.hud._skill_support_panel as Control
 	var rows: Control = skills._rows as Control
+	var inventory: Control = arena.hud._inventory_panel as Control
+	var grid: Control = inventory._grid as Control
 	var first_row: Node = rows.find_child("SkillGroupRow_00", true, false)
 	var first_row_id: int = first_row.get_instance_id()
 	var first_generation: int = int(rows._generation)
 	var before_reopens: Dictionary = state.snapshot()
-	check(arena.hud._active_panel == "skills" and arena.hud.is_blocking(), "K opens the blocking canonical skills window")
+	check(arena.hud._active_panel == "skills" and arena.hud.is_blocking(), "K opens the left skills dock")
+	check(arena.hud._menu_routes.snapshot().right_inventory and inventory.is_visible_in_tree(), "I opens the shared bag beside skills")
+	check(skills.find_child("SharedBagGemTray", true, false) == null, "Skills do not build a duplicate bag tray")
 	for cycle: int in range(3):
 		arena.hud.handle_menu_key(KEY_K, true, false)
 		arena.hud.handle_menu_key(KEY_K, true, false)
@@ -43,17 +48,18 @@ func _run() -> void:
 		check(reopened_first.get_instance_id() == first_row_id, "K toggle %d retains the first row Node ID" % (cycle + 1))
 		check(int(rows._generation) == first_generation, "K toggle %d retains the row generation" % (cycle + 1))
 		check(state.snapshot() == before_reopens, "K toggle %d leaves the model snapshot unchanged" % (cycle + 1))
+		check(arena.hud.is_blocking() and inventory.is_visible_in_tree(), "K toggle %d leaves I open and the battle paused" % (cycle + 1))
 	check(before_reopens == original_snapshot, "Repeated K opens never alter canonical ownership")
 
-	# Reward one actual focus-support instance while K is open; the tray must show that UID.
+	# Reward one actual focus-support instance while both docks are open; only the shared grid shows it.
 	var support_uid: String = state.award_gem("support:focus")
 	await _frames(2)
 	check(not support_uid.is_empty(), "Actual support:focus reward allocates a new UID")
 	check(not before_reopens.items.has(support_uid), "Reward UID was not present in the earlier model snapshot")
 	check(state.item(support_uid).definition_id == "support:focus" and state.location(support_uid).kind == "bag",
 		"Awarded focus support is owned in the shared bag")
-	var awarded_button: Node = skills.find_child("BagGem_" + support_uid, true, false)
-	check(awarded_button != null and awarded_button.is_visible_in_tree(), "K tray visibly contains the newly awarded UID")
+	check(grid.item_rect(support_uid).has_area(), "Shared right-hand grid visibly contains the awarded UID")
+	check(skills.find_child("BagGem_" + support_uid, true, false) == null, "Awarded UID is not copied into a skill-side tray")
 	check(int(rows._generation) > first_generation, "Changed support snapshot advances the row generation")
 
 	# Simulate a stale binding request so _report must force-render even though the view token is unchanged.
@@ -78,10 +84,7 @@ func _run() -> void:
 	check(state.group_for_key(unused_code).is_empty(), "Rejected key remains unbound")
 	check(picker.get_item_id(picker.selected) == existing_code, "Rejected picker restores the authoritative key choice")
 
-	# A real inventory craft confirmation is cancelled after I is hidden; its item stays owned.
-	arena.hud.handle_menu_key(KEY_I, true, false)
-	await _frames(6)
-	var inventory: Control = arena.hud._inventory_panel as Control
+	# A real inventory craft confirmation remains blocking while either dock is open.
 	var gear_rng := RandomNumberGenerator.new()
 	gear_rng.seed = ProbeGearRngSeed
 	var gear_uid: String = state.award_equipment(gear_rng, 30, "rare")
@@ -94,7 +97,11 @@ func _run() -> void:
 	check(not inventory._pending_craft.is_empty() and inventory._craft_dialog.visible,
 		"Inventory opens its real salvage confirmation without consuming the item")
 	arena.hud.handle_menu_key(KEY_K, true, false)
-	await _frames(2)
+	await _frames(3)
+	check(arena.hud.is_blocking() and inventory.is_visible_in_tree(), "Closing K preserves the open I dock and pause")
+	arena.hud.handle_menu_key(KEY_I, true, false)
+	await _frames(3)
+	check(not arena.hud.is_blocking(), "Closing the last dock resumes the world")
 	inventory._craft_dialog.canceled.emit()
 	await _frames(2)
 	check(state.snapshot() == before_cancel and not state.item(gear_uid).is_empty(),
@@ -102,10 +109,7 @@ func _run() -> void:
 	check(inventory._pending_craft.is_empty() and not inventory._craft_dialog.visible,
 		"Hidden I cancellation clears pending craft state")
 
-	# Closing the menu restores actual cast admission; runtime mana/CD match its cached recipe.
-	arena.hud.handle_menu_key(KEY_K, true, false)
-	await _frames(2)
-	check(not arena.hud.is_blocking(), "Second K toggle closes the blocking window")
+	# Closing both docks restores actual cast admission; runtime mana/CD match its cached recipe.
 	var cast_group_id := "group_000002"
 	var compiled: Dictionary = state.get_group_cast(cast_group_id)
 	check(bool(compiled.get("ok", false)) and str(compiled.skill_id) == "frost", "The default second row has its real frost recipe")
@@ -133,6 +137,99 @@ func _run() -> void:
 		"Live HUD reflects changed mana and cooldown values")
 	check(int(state.cache_diagnostics().skill_compiles) == compile_count_before,
 		"Menu reopen, actual cast, and live refresh reuse the cached recipe")
+
+	# Instantiate all canonical views, close them, then deliver one batched model update while hidden.
+	var pre_level_xp: int = maxi(0, 12 + int(state.level) * 8 - 5 - int(state.xp))
+	if pre_level_xp > 0:
+		state.add_xp(pre_level_xp)
+	check(int(state.level) == 1 and int(state.xp) == 15, "Fresh fixture is seeded five XP below its first level threshold")
+	arena.hud.handle_menu_key(KEY_I, true, false)
+	await _frames(5)
+	inventory = arena.hud._inventory_panel as Control
+	grid = inventory._grid as Control
+	var inventory_generation: int = int(inventory.refresh_generation)
+	arena.hud.handle_menu_key(KEY_K, true, false)
+	await _frames(5)
+	skills = arena.hud._skill_support_panel as Control
+	rows = skills._rows as Control
+	var skill_generation: int = int(rows._generation)
+	var character_button: Button = inventory.find_child("CharacterStats", true, false) as Button
+	character_button.pressed.emit()
+	await _frames(5)
+	var character: Control = arena.hud._character_panel as Control
+	var character_generation: int = int(character.refresh_generation)
+	arena.hud.open_panel("talents")
+	await _frames(8)
+	var passive: Control = arena.hud._passive_panel as Control
+	var passive_generation: int = int(passive.refresh_generation)
+	check(passive.is_visible_in_tree() and not arena.hud._dock_roots.left.is_visible_in_tree()
+		and not arena.hud._dock_roots.right.is_visible_in_tree(), "T overlays and hides both retained docks")
+	arena.hud.handle_menu_key(KEY_T, true, false)
+	await _frames(5)
+	check(character.is_visible_in_tree() and inventory.is_visible_in_tree(), "Leaving T restores the character and bag docks")
+	arena.hud.handle_menu_key(KEY_K, true, false)
+	await _frames(3)
+	check(skills.is_visible_in_tree() and not character.is_visible_in_tree(), "K swaps the left dock back to the retained skill view")
+	arena.hud.handle_menu_key(KEY_T, true, false)
+	await _frames(5)
+	arena.hud.handle_menu_key(KEY_T, true, false)
+	await _frames(3)
+	arena.hud.handle_menu_key(KEY_K, true, false)
+	arena.hud.handle_menu_key(KEY_I, true, false)
+	await _frames(5)
+	check(not inventory.is_visible_in_tree() and not skills.is_visible_in_tree()
+		and not character.is_visible_in_tree() and not passive.is_visible_in_tree(), "I/K/T and character switching leave every view hidden")
+	check(int(inventory.refresh_generation) == inventory_generation and int(rows._generation) == skill_generation
+		and int(character.refresh_generation) == character_generation and int(passive.refresh_generation) == passive_generation,
+		"Closing docks and overlays alone does not rebuild canonical views")
+
+	var before_hidden_change: Dictionary = state.snapshot()
+	var hidden_rng := RandomNumberGenerator.new()
+	hidden_rng.seed = ProbeGearRngSeed + 1
+	arena._begin_progress_transaction()
+	var awarded_hidden_support: String = state.award_gem("support:focus")
+	var awarded_hidden_gear: String = state.award_equipment(hidden_rng, 30, "rare")
+	var level_before_hidden_xp: int = int(state.level)
+	var reached_new_level: bool = state.add_xp(5)
+	arena._end_progress_transaction()
+	await _frames(3)
+	check(not awarded_hidden_support.is_empty() and not awarded_hidden_gear.is_empty(), "Hidden update grants real support and equipment instances")
+	check(reached_new_level and int(state.level) == level_before_hidden_xp + 1 and int(state.xp) == 0,
+		"Five XP while hidden crosses the saved level threshold")
+	check(int(inventory.refresh_generation) == inventory_generation and int(rows._generation) == skill_generation
+		and int(character.refresh_generation) == character_generation and int(passive.refresh_generation) == passive_generation,
+		"Model signals mark hidden views dirty without rebuilding controls")
+	check(state.item(awarded_hidden_support).definition_id == "support:focus"
+		and state.location(awarded_hidden_support).kind == "bag" and not state.item(awarded_hidden_gear).is_empty(),
+		"Hidden updates preserve real UIDs and canonical bag locations")
+	check(before_hidden_change.revision < state.revision(), "Batched hidden rewards and XP advance model revision")
+
+	arena.hud.handle_menu_key(KEY_I, true, false)
+	await _frames(5)
+	check(int(inventory.refresh_generation) == inventory_generation + 1
+		and grid.bag_page() == int(state.location(awarded_hidden_support).page)
+		and grid.item_rect(awarded_hidden_support).has_area(), "Reopening I refreshes once and displays the new support UID")
+	var hidden_gear_page: int = int(state.location(awarded_hidden_gear).page)
+	if grid.bag_page() != hidden_gear_page:
+		inventory._turn_page(hidden_gear_page - grid.bag_page())
+	check(grid.bag_page() == hidden_gear_page and grid.item_rect(awarded_hidden_gear).has_area(),
+		"The same shared bag displays the new gear UID on its model-assigned page")
+	arena.hud.handle_menu_key(KEY_K, true, false)
+	await _frames(5)
+	check(int(rows._generation) == skill_generation + 1 and int(rows._revision) == state.revision(),
+		"Reopening K refreshes the current skill snapshot once")
+	character_button.pressed.emit()
+	await _frames(5)
+	var progress_label: Label = character.find_child("CharacterProgress", true, false) as Label
+	check(int(character.refresh_generation) == character_generation + 1
+		and progress_label.text.contains("Lv.%d" % int(state.level)),
+		"Character button reopens a current derived sheet with the new level")
+	arena.hud.open_panel("talents")
+	await _frames(8)
+	var passive_summary: Label = passive.find_child("SourceTreeSummary", true, false) as Label
+	check(int(passive.refresh_generation) == passive_generation + 1
+		and passive_summary.text.contains("可用 %d" % int(state.talent_points)),
+		"Reopening T refreshes the passive point budget once")
 
 	print("Canonical menu retention: %d checks, %d failures" % [checks, failures])
 	arena.queue_free()
