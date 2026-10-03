@@ -88,12 +88,9 @@ static func definition_for_instance(value: Variant) -> Dictionary:
 
 
 static func metadata_for_instance(value: Variant) -> Dictionary:
-	var definition: Dictionary = definition_for_instance(value)
-	if definition.is_empty():
+	if not validate_instance(value):
 		return {}
-	var size: Variant = definition.size
-	var dimensions: Array = [int(size.x), int(size.y)] if size is Vector2i else [int(size[0]), int(size[1])]
-	return {"kind": value.kind, "category": str(definition.category), "size": dimensions}
+	return _metadata_for_validated(value)
 
 
 static func metadata_for_items(items: Variant) -> Dictionary:
@@ -104,8 +101,24 @@ static func metadata_for_items(items: Variant) -> Dictionary:
 		var item: Variant = items[uid]
 		if not uid is String or not validate_instance(item) or item.uid != uid:
 			return {}
-		metadata[uid] = metadata_for_instance(item)
+		metadata[uid] = _metadata_for_validated(item)
 	return metadata
+
+
+## Internal projection after full wrapper/payload validation above. Placement
+## needs only authored footprint/category, never rolled display/combat details.
+## Every returned container is fresh; public callers cannot bypass validation.
+static func _metadata_for_validated(item: Dictionary) -> Dictionary:
+	var category := ""
+	var dimensions: Array = [1, 1]
+	if item.kind == "equipment":
+		var base: Dictionary = Data.ITEMS[item.definition_id.substr("equipment:".length())] \
+			if item.payload.is_empty() else Equipment.base_definition(item.payload.base_id)
+		var slot: String = str(base.slot)
+		category = slot if not Slots.targets_for_category(slot).is_empty() else Slots.legacy_slot(slot)
+		var size: Variant = base.size
+		dimensions = [int(size.x), int(size.y)] if size is Vector2i else [int(size[0]), int(size[1])]
+	return {"kind": item.kind, "category": category, "size": dimensions}
 
 
 ## Only explicitly declared integer fields are normalized after JSON parsing.

@@ -19,6 +19,7 @@ var _io = Legacy.new()
 var _path: String = ""
 var _disk_bytes := PackedByteArray()
 var _disk_expected_exists := false
+var _disk_revision := -1
 var _busy := false
 var _talent_validator := Callable()
 var _socket_ids: Array = []
@@ -80,6 +81,7 @@ func load_build(path: String = "user://build_save.json") -> bool:
 		_path = path
 		_disk_expected_exists = false
 		_disk_bytes.clear()
+		_disk_revision = -1
 		return false
 	if file.get_length() > MAX_SAVE_BYTES:
 		file.close()
@@ -121,6 +123,7 @@ func load_build(path: String = "user://build_save.json") -> bool:
 		candidate = Rules.decode(raw)
 	var reason: String = Rules.reason(candidate, _talent_validator, _socket_ids)
 	if not reason.is_empty(): return _reject(path, reason)
+	var loaded_revision: int = int(candidate.revision)
 	# No memory or source overwrite until the original byte backup AND the new
 	# candidate commit succeed. A conflict preserves both the old file and state.
 	if old_version < Rules.VERSION:
@@ -141,6 +144,7 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	_path = path
 	_disk_bytes = bytes
 	_disk_expected_exists = true
+	_disk_revision = loaded_revision
 	_io._migration_source_bytes.clear()
 	for blocked: String in _io._blocked_save_paths.keys():
 		if Legacy._save_paths_match(blocked, path): _io._blocked_save_paths.erase(blocked)
@@ -300,6 +304,7 @@ func _persist(candidate: Dictionary, path: String) -> Error:
 	elif FileAccess.file_exists(path):
 		last_error = "新保存目标已存在，请先读取该文件"
 		return ERR_FILE_ALREADY_IN_USE
+	var serialized_revision: int = int(candidate.revision)
 	var bytes: PackedByteArray = JSON.stringify(candidate, "\t", true, true).to_utf8_buffer()
 	if bytes.size() > MAX_SAVE_BYTES: return ERR_INVALID_DATA
 	save_attempts += 1
@@ -310,6 +315,7 @@ func _persist(candidate: Dictionary, path: String) -> Error:
 	_path = path
 	_disk_bytes = bytes
 	_disk_expected_exists = true
+	_disk_revision = serialized_revision
 	successful_saves += 1
 	last_error = ""
 	return OK

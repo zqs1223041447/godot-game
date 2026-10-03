@@ -402,7 +402,10 @@ func save_block_reason(path: String = "user://build_save.json") -> String:
 
 
 func crafting_change_already_saved() -> bool:
-	return _disk_expected_exists and JSON.stringify(_current,"\t",true,true).to_utf8_buffer() == _disk_bytes
+	# Revision inequality only proves this memory is NOT the saved bytes. Keep
+	# the exact receipt for equal revisions, including same-revision mutations.
+	return _disk_expected_exists and typeof(_current.get("revision")) == TYPE_INT and _current.revision == _disk_revision \
+		and JSON.stringify(_current,"\t",true,true).to_utf8_buffer() == _disk_bytes
 
 
 func unbind_group(group_id: Variant, expected_revision: Variant, path: String) -> Dictionary:

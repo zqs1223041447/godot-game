@@ -1,4 +1,3 @@
-class_name FantasyActors
 extends RefCounted
 ## Original, deterministic top-down storybook-fantasy actors.
 ## Presentation only: no simulation, equipment, preference, or RNG writes.
@@ -7,12 +6,6 @@ const INK := Color("29281f")
 const IVORY := Color("e7d4a3")
 const LEATHER := Color("69452e")
 const SKIN := Color("dca675")
-# Only static, local-space body shapes use this cache. Animated wings/feet bypass it.
-# Exact Vector2 bytes are the key: no radius or pose quantization. A hard bound
-# protects long sessions even if later content supplies many different radii.
-const CONTOUR_CACHE_LIMIT := 256
-static var _contour_cache: Dictionary = {}
-static var _contour_order: Array[PackedByteArray] = []
 
 static func draw_player(arena: Node2D, preferences: VisualSettings) -> void:
 	var p: Vector2 = arena.player_pos
@@ -200,7 +193,7 @@ static func draw_enemy(arena: Node2D, enemy: Dictionary, preferences: VisualSett
 
 static func _draw_fire_ward(arena: CanvasItem, center: Vector2, radius: float) -> void:
 	var shield: Array=[center+Vector2(-radius,-radius),center+Vector2(radius,-radius),center+Vector2(radius*0.82,radius*0.35),center+Vector2(0,radius*1.22),center+Vector2(-radius*0.82,radius*0.35)]
-	_cached_blob(arena,shield,Color("51473a"),Color("c49a62"),0.9)
+	_blob(arena,shield,Color("51473a"),Color("c49a62"),0.9)
 	_poly(arena,[center+Vector2(0,-radius*0.72),center+Vector2(radius*0.35,-radius*0.08),center+Vector2(radius*0.28,radius*0.5),center+Vector2(-radius*0.38,radius*0.5),center+Vector2(-radius*0.46,-radius*0.12),center+Vector2(-radius*0.15,radius*0.05)],Color("d1a169"))
 
 static func _draw_ember_guard(arena: CanvasItem, r: float, gait: float, hurt: bool) -> void:
@@ -213,19 +206,18 @@ static func _draw_ember_guard(arena: CanvasItem, r: float, gait: float, hurt: bo
 			var root:=Vector2(x*r,side*r*0.40)
 			var knee:=root+Vector2(gait*side,side*r*0.32)
 			var foot:=knee+Vector2(-r*0.13,side*r*0.21)
-			var limb := PackedVector2Array([root,knee,foot])
-			arena.draw_polyline(limb, INK, 6.0, true)
-			arena.draw_polyline(limb, hide.darkened(0.24), 3.5, true)
+			_path(arena,[root,knee,foot],INK,6.0)
+			_path(arena,[root,knee,foot],hide.darkened(0.24),3.5)
 			_blob(arena,[foot+Vector2(-3,-2),foot+Vector2(3,-2),foot+Vector2(4,2),foot+Vector2(-3,3)],stone.darkened(0.12),INK,1)
-	_cached_blob(arena,[Vector2(-r*1.0,-r*0.52),Vector2(-r*0.53,-r*0.69),Vector2(r*0.25,-r*0.46),Vector2(r*0.28,r*0.50),Vector2(-r*0.40,r*0.73),Vector2(-r*0.98,r*0.53),Vector2(-r*0.80,r*0.14),Vector2(-r*1.05,-r*0.12)],hide,INK,1.8)
+	_blob(arena,[Vector2(-r*1.0,-r*0.52),Vector2(-r*0.53,-r*0.69),Vector2(r*0.25,-r*0.46),Vector2(r*0.28,r*0.50),Vector2(-r*0.40,r*0.73),Vector2(-r*0.98,r*0.53),Vector2(-r*0.80,r*0.14),Vector2(-r*1.05,-r*0.12)],hide,INK,1.8)
 	_path(arena,[Vector2(-r*0.92,-r*0.43),Vector2(-r*0.64,-r*0.15),Vector2(-r*0.88,r*0.44)],Color("cb9e67"),1.0)
-	_cached_blob(arena,[Vector2(-r*0.62,-r*0.48),Vector2(-r*0.30,-r*0.69),Vector2(r*0.40,-r*0.57),Vector2(r*0.59,-r*0.10),Vector2(r*0.40,r*0.55),Vector2(-r*0.30,r*0.63),Vector2(-r*0.64,r*0.32)],stone,INK,1.8)
+	_blob(arena,[Vector2(-r*0.62,-r*0.48),Vector2(-r*0.30,-r*0.69),Vector2(r*0.40,-r*0.57),Vector2(r*0.59,-r*0.10),Vector2(r*0.40,r*0.55),Vector2(-r*0.30,r*0.63),Vector2(-r*0.64,r*0.32)],stone,INK,1.8)
 	for side: int in [-1,1]:
-		_cached_blob(arena,[Vector2(-r*0.43,side*r*0.37),Vector2(-r*0.30,side*r*0.78),Vector2(r*0.12,side*r*0.92),Vector2(r*0.44,side*r*0.64),Vector2(r*0.36,side*r*0.30)],stone.lightened(0.06 if side<0 else -0.07),INK,1.5)
+		_blob(arena,[Vector2(-r*0.43,side*r*0.37),Vector2(-r*0.30,side*r*0.78),Vector2(r*0.12,side*r*0.92),Vector2(r*0.44,side*r*0.64),Vector2(r*0.36,side*r*0.30)],stone.lightened(0.06 if side<0 else -0.07),INK,1.5)
 		_path(arena,[Vector2(-r*0.28,side*r*0.65),Vector2(r*0.06,side*r*0.77),Vector2(r*0.31,side*r*0.59)],Color("b5b29b"),1.0)
 		arena.draw_line(Vector2(-r*0.41,side*r*0.26),Vector2(r*0.25,side*r*0.34),Color("69452e"),2.5,true)
-	_cached_blob(arena,[Vector2(r*0.39,-r*0.32),Vector2(r*0.79,-r*0.42),Vector2(r*1.10,-r*0.18),Vector2(r*1.10,r*0.18),Vector2(r*0.78,r*0.40),Vector2(r*0.38,r*0.31)],hide.darkened(0.2),INK,1.5)
-	_cached_blob(arena,[Vector2(r*0.45,-r*0.31),Vector2(r*0.81,-r*0.30),Vector2(r*0.90,0),Vector2(r*0.80,r*0.29),Vector2(r*0.47,r*0.28),Vector2(r*0.59,0)],stone.lightened(0.05),INK,1)
+	_blob(arena,[Vector2(r*0.39,-r*0.32),Vector2(r*0.79,-r*0.42),Vector2(r*1.10,-r*0.18),Vector2(r*1.10,r*0.18),Vector2(r*0.78,r*0.40),Vector2(r*0.38,r*0.31)],hide.darkened(0.2),INK,1.5)
+	_blob(arena,[Vector2(r*0.45,-r*0.31),Vector2(r*0.81,-r*0.30),Vector2(r*0.90,0),Vector2(r*0.80,r*0.29),Vector2(r*0.47,r*0.28),Vector2(r*0.59,0)],stone.lightened(0.05),INK,1)
 	for side: int in [-1,1]:
 		arena.draw_line(Vector2(r*0.75,side*r*0.19),Vector2(r*0.91,side*r*0.17),Color("372a21"),3.0,true)
 		arena.draw_line(Vector2(r*0.77,side*r*0.19),Vector2(r*0.87,side*r*0.18),Color("dfab68"),1.0,true)
@@ -241,17 +233,16 @@ static func _draw_scavenger(arena: CanvasItem, r: float, gait: float, hurt: bool
 			var root := Vector2((i - 1) * r * 0.55, side * r * 0.30)
 			var joint := root + Vector2((i - 1) * r * 0.2 + gait * side, side * r * 0.49)
 			var toe := joint + Vector2(-r * 0.28, side * r * 0.20)
-			var limb := PackedVector2Array([root, joint, toe])
-			arena.draw_polyline(limb, INK, 3.8, true)
-			arena.draw_polyline(limb, Color("977348"), 2.1, true)
+			_path(arena, [root, joint, toe], INK, 3.8)
+			_path(arena, [root, joint, toe], Color("977348"), 2.1)
 			arena.draw_line(toe, toe + Vector2(-2, side), IVORY.darkened(0.22), 1.0, true)
-	_cached_blob(arena, [Vector2(-r * 0.98, 0), Vector2(-r * 0.79, -r * 0.56), Vector2(-r * 0.1, -r * 0.68), Vector2(r * 0.38, -r * 0.39), Vector2(r * 0.51, r * 0.31), Vector2(-r * 0.23, r * 0.66), Vector2(-r * 0.85, r * 0.44)], hide, INK, 1.6)
+	_blob(arena, [Vector2(-r * 0.98, 0), Vector2(-r * 0.79, -r * 0.56), Vector2(-r * 0.1, -r * 0.68), Vector2(r * 0.38, -r * 0.39), Vector2(r * 0.51, r * 0.31), Vector2(-r * 0.23, r * 0.66), Vector2(-r * 0.85, r * 0.44)], hide, INK, 1.6)
 	# Overlapping, curved mossy segments replace the metal polygon carapace.
 	for i: int in range(3):
 		var x: float = -r * 0.64 + i * r * 0.33
-		_cached_blob(arena, [Vector2(x - r * 0.22, -r * 0.29), Vector2(x, -r * 0.57), Vector2(x + r * 0.27, -r * 0.36), Vector2(x + r * 0.32, r * 0.31), Vector2(x, r * 0.52), Vector2(x - r * 0.19, r * 0.28)], shell.lightened(i * 0.04), Color("595d36"), 1.0)
+		_blob(arena, [Vector2(x - r * 0.22, -r * 0.29), Vector2(x, -r * 0.57), Vector2(x + r * 0.27, -r * 0.36), Vector2(x + r * 0.32, r * 0.31), Vector2(x, r * 0.52), Vector2(x - r * 0.19, r * 0.28)], shell.lightened(i * 0.04), Color("595d36"), 1.0)
 		_path(arena, [Vector2(x - r * 0.1, -r * 0.3), Vector2(x + r * 0.02, -r * 0.42), Vector2(x + r * 0.15, -r * 0.30)], Color("b3ac6b"), 1.0)
-	_cached_blob(arena, [Vector2(r * 0.23, -r * 0.37), Vector2(r * 0.67, -r * 0.38), Vector2(r * 0.94, -r * 0.15), Vector2(r * 0.92, r * 0.18), Vector2(r * 0.56, r * 0.37), Vector2(r * 0.26, r * 0.29)], Color("826344"), INK, 1.2)
+	_blob(arena, [Vector2(r * 0.23, -r * 0.37), Vector2(r * 0.67, -r * 0.38), Vector2(r * 0.94, -r * 0.15), Vector2(r * 0.92, r * 0.18), Vector2(r * 0.56, r * 0.37), Vector2(r * 0.26, r * 0.29)], Color("826344"), INK, 1.2)
 	for side: int in [-1, 1]:
 		_path(arena, [Vector2(r * 0.64, side * r * 0.2), Vector2(r * 1.06, side * r * 0.31), Vector2(r * 1.13, side * r * 0.13)], Color("d7c18a"), 2.0)
 		_path(arena, [Vector2(r * 0.64, side * r * 0.3), Vector2(r * 0.83, side * r * 0.58), Vector2(r * 1.1, side * r * 0.62)], Color("6d542f"), 1.1)
@@ -273,7 +264,7 @@ static func _draw_skitter(arena: CanvasItem, r: float, gait: float, hurt: bool) 
 		arena.draw_line(Vector2(r * 1.06, side * r * 0.55), Vector2(r * 1.14, side * r * 0.26), IVORY, 1.5, true)
 	# Curved tapering tail and a narrow, segmented abdomen.
 	_path(arena, [Vector2(-r * 0.28, 0), Vector2(-r * 0.95, r * 0.10), Vector2(-r * 1.32, -r * 0.15)], Color("5b3a2c"), 3.0)
-	_cached_blob(arena, [Vector2(-r * 0.90, 0), Vector2(-r * 0.38, -r * 0.37), Vector2(r * 0.48, -r * 0.32), Vector2(r * 0.80, 0), Vector2(r * 0.46, r * 0.31), Vector2(-r * 0.33, r * 0.37)], hide, INK, 1.3)
+	_blob(arena, [Vector2(-r * 0.90, 0), Vector2(-r * 0.38, -r * 0.37), Vector2(r * 0.48, -r * 0.32), Vector2(r * 0.80, 0), Vector2(r * 0.46, r * 0.31), Vector2(-r * 0.33, r * 0.37)], hide, INK, 1.3)
 	_path(arena, [Vector2(-r * 0.6, -r * 0.03), Vector2(-r * 0.15, -r * 0.18), Vector2(r * 0.42, -r * 0.12)], Color("c4875d"), 1.3)
 	for i: int in range(2):
 		var x: float = -r * 0.48 + i * r * 0.27
@@ -295,13 +286,12 @@ static func _draw_brute(arena: CanvasItem, r: float, gait: float, hurt: bool, bo
 			var root := Vector2((i - 1) * r * 0.52, side * r * 0.48)
 			var joint := root + Vector2((i - 1) * r * 0.20 + gait * side, side * r * 0.39)
 			var foot := joint + Vector2(r * 0.17, side * r * 0.15)
-			var limb := PackedVector2Array([root, joint, foot])
-			arena.draw_polyline(limb, INK, 6.0, true)
-			arena.draw_polyline(limb, Color("776444"), 3.9, true)
+			_path(arena, [root, joint, foot], INK, 6.0)
+			_path(arena, [root, joint, foot], Color("776444"), 3.9)
 			arena.draw_line(foot, foot + Vector2(r * 0.15, side * r * 0.04), Color("d7c394"), 1.6, true)
-	_cached_blob(arena, [Vector2(-r * 1.01, -r * 0.1), Vector2(-r * 0.81, -r * 0.72), Vector2(-r * 0.14, -r * 0.91), Vector2(r * 0.61, -r * 0.66), Vector2(r * 0.86, -r * 0.15), Vector2(r * 0.78, r * 0.52), Vector2(r * 0.04, r * 0.85), Vector2(-r * 0.75, r * 0.67)], hide.darkened(0.2), INK, 2.0)
+	_blob(arena, [Vector2(-r * 1.01, -r * 0.1), Vector2(-r * 0.81, -r * 0.72), Vector2(-r * 0.14, -r * 0.91), Vector2(r * 0.61, -r * 0.66), Vector2(r * 0.86, -r * 0.15), Vector2(r * 0.78, r * 0.52), Vector2(r * 0.04, r * 0.85), Vector2(-r * 0.75, r * 0.67)], hide.darkened(0.2), INK, 2.0)
 	for side: int in [-1, 1]:
-		_cached_blob(arena, [Vector2(-r * 0.87, side * r * 0.03), Vector2(-r * 0.61, side * r * 0.63), Vector2(-r * 0.10, side * r * 0.79), Vector2(r * 0.49, side * r * 0.55), Vector2(r * 0.6, side * r * 0.17), Vector2(r * 0.2, side * r * 0.04)], hide.lightened(0.07 if side < 0 else 0.0), Color("475237"), 1.3)
+		_blob(arena, [Vector2(-r * 0.87, side * r * 0.03), Vector2(-r * 0.61, side * r * 0.63), Vector2(-r * 0.10, side * r * 0.79), Vector2(r * 0.49, side * r * 0.55), Vector2(r * 0.6, side * r * 0.17), Vector2(r * 0.2, side * r * 0.04)], hide.lightened(0.07 if side < 0 else 0.0), Color("475237"), 1.3)
 		_path(arena, [Vector2(-r * 0.73, side * r * 0.18), Vector2(-r * 0.42, side * r * 0.58), Vector2(r * 0.04, side * r * 0.63), Vector2(r * 0.37, side * r * 0.45)], ridge.darkened(0.12), 1.5)
 		for i: int in range(3):
 			var x: float = -r * 0.45 + i * r * 0.3
@@ -310,24 +300,23 @@ static func _draw_brute(arena: CanvasItem, r: float, gait: float, hurt: bool, bo
 	for i: int in range(4):
 		var x: float = -r * 0.62 + i * r * 0.31
 		_poly(arena, [Vector2(x - r * 0.13, -r * 0.07), Vector2(x - r * 0.04, -r * 0.22), Vector2(x + r * 0.20, 0), Vector2(x - r * 0.06, r * 0.13)], ridge)
-	_cached_blob(arena, [Vector2(r * 0.42, -r * 0.42), Vector2(r * 0.89, -r * 0.4), Vector2(r * 1.03, -r * 0.11), Vector2(r * 0.99, r * 0.23), Vector2(r * 0.76, r * 0.44), Vector2(r * 0.44, r * 0.36)], Color("766349"), INK, 1.5)
+	_blob(arena, [Vector2(r * 0.42, -r * 0.42), Vector2(r * 0.89, -r * 0.4), Vector2(r * 1.03, -r * 0.11), Vector2(r * 0.99, r * 0.23), Vector2(r * 0.76, r * 0.44), Vector2(r * 0.44, r * 0.36)], Color("766349"), INK, 1.5)
 	for side: int in [-1, 1]:
-		_cached_blob(arena, [Vector2(r * 0.63, side * r * 0.29), Vector2(r * 0.87, side * r * 0.48), Vector2(r * 1.18, side * r * 0.45), Vector2(r * 1.23, side * r * 0.19), Vector2(r * 1.10, side * r * 0.31), Vector2(r * 0.91, side * r * 0.27)], Color("dbca99"), Color("82704d"), 1.0)
+		_blob(arena, [Vector2(r * 0.63, side * r * 0.29), Vector2(r * 0.87, side * r * 0.48), Vector2(r * 1.18, side * r * 0.45), Vector2(r * 1.23, side * r * 0.19), Vector2(r * 1.10, side * r * 0.31), Vector2(r * 0.91, side * r * 0.27)], Color("dbca99"), Color("82704d"), 1.0)
 		arena.draw_circle(Vector2(r * 0.81, side * r * 0.23), 2.2, Color("382b21"))
 		arena.draw_circle(Vector2(r * 0.84, side * r * 0.23), 1.0, Color("e4b678"))
 	if boss:
 		# Ancient antler-like horns and a healed scar identify the warden even in gray.
 		for side: int in [-1, 1]:
-			var horn := PackedVector2Array([Vector2(r * 0.18, side * r * 0.60), Vector2(r * 0.34, side * r * 0.95), Vector2(r * 0.66, side * r * 1.10), Vector2(r * 0.79, side * r * 0.96)])
-			arena.draw_polyline(horn, Color("564b34"), 4.8, true)
-			arena.draw_polyline(horn, Color("d6c69c"), 2.8, true)
+			var horn: Array = [Vector2(r * 0.18, side * r * 0.60), Vector2(r * 0.34, side * r * 0.95), Vector2(r * 0.66, side * r * 1.10), Vector2(r * 0.79, side * r * 0.96)]
+			_path(arena, horn, Color("564b34"), 4.8)
+			_path(arena, horn, Color("d6c69c"), 2.8)
 			arena.draw_line(Vector2(r * 0.36, side * r * 0.95), Vector2(r * 0.23, side * r * 1.19), Color("d6c69c"), 2.0, true)
 			arena.draw_line(Vector2(r * 0.55, side * r * 1.05), Vector2(r * 0.63, side * r * 1.24), Color("d6c69c"), 1.6, true)
 		_path(arena, [Vector2(-r * 0.51, -r * 0.32), Vector2(-r * 0.20, -r * 0.17), Vector2(-r * 0.05, r * 0.05), Vector2(r * 0.16, r * 0.13)], Color("b88764"), 2.2)
 		for i: int in range(3):
 			var mark := Vector2(-r * 0.37 + i * r * 0.2, -r * 0.25 + i * r * 0.14)
 			arena.draw_line(mark + Vector2(-1, 2), mark + Vector2(1, -2), Color("dcc197"), 1.0, true)
-
 
 static func _draw_enemy_marks(arena: Node2D, enemy: Dictionary, preferences: VisualSettings, tier: Color, r: float, p: Vector2) -> void:
 	var rarity: String = str(enemy.get("rarity", "normal"))
@@ -409,30 +398,6 @@ static func _blob(canvas: CanvasItem, points: Array, color: Color, outline: Colo
 	if outline.a > 0.0:
 		contour.append(contour[0])
 		canvas.draw_polyline(contour, outline, width, true)
-
-static func _cached_blob(canvas: CanvasItem, points: Array, color: Color, outline: Color = Color.TRANSPARENT, width: float = 1.0) -> void:
-	var key := PackedVector2Array(points).to_byte_array()
-	if not _contour_cache.has(key):
-		var contour := PackedVector2Array()
-		for i: int in range(points.size()):
-			var previous: Vector2 = points[(i - 1 + points.size()) % points.size()]
-			var current: Vector2 = points[i]
-			var next: Vector2 = points[(i + 1) % points.size()]
-			var start: Vector2 = (previous + current) * 0.5
-			var finish: Vector2 = (current + next) * 0.5
-			for j: int in range(4):
-				var t: float = j / 4.0
-				contour.append(start.lerp(current, t).lerp(current.lerp(finish, t), t))
-		var closed := contour.duplicate()
-		closed.append(contour[0])
-		if _contour_order.size() >= CONTOUR_CACHE_LIMIT:
-			_contour_cache.erase(_contour_order.pop_front())
-		_contour_order.append(key)
-		_contour_cache[key] = [contour, closed]
-	var cached: Array = _contour_cache[key]
-	canvas.draw_colored_polygon(cached[0], color)
-	if outline.a > 0.0:
-		canvas.draw_polyline(cached[1], outline, width, true)
 
 static func _shadow(canvas: CanvasItem, position: Vector2, size: Vector2) -> void:
 	var points := PackedVector2Array()
