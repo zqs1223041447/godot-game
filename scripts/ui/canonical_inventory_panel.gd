@@ -31,6 +31,7 @@ var _bag_page: int = 0
 var _selected_uid := ""
 var _craft_controls: Control
 var _craft_quotes: Dictionary = {}
+var _craft_metadata: Dictionary = {}
 var _craft_dialog: ConfirmationDialog
 var _pending_craft: Dictionary = {}
 var _character: Button
@@ -393,6 +394,12 @@ func _refresh_crafting() -> void:
 	var item: Dictionary = model.item(_selected_uid)
 	_discard.disabled=item.is_empty() or item.get("kind","")=="equipment" or model.location(_selected_uid).get("kind","")!="bag"
 	var source: Dictionary = item.get("payload",{}) if item.get("kind","") == "equipment" else {}
+	if model.has_method("crafting_operations"):
+		var operations: Array = model.crafting_operations(_selected_uid,save_path)
+		_craft_metadata.clear()
+		for entry: Dictionary in operations: _craft_metadata[str(entry.operation)] = entry.duplicate(true)
+		_craft_controls.set_operations_context(_selected_uid,source,model.crafting_balance(),operations)
+		return
 	var reason := "选择背包中的随机装备可回收或校准"
 	if not source.is_empty() and model.location(_selected_uid).get("kind","") == "bag":
 		reason = ""
@@ -424,18 +431,36 @@ func _build_craft_confirmation() -> void:
 
 func _request_craft(operation: String,uid: String,source: Dictionary) -> void:
 	if _craft_dialog.visible or uid != _selected_uid: return
-	var quote: Dictionary = _craft_quotes.get(operation,{})
-	if not quote.get("ok",false) or source != quote.get("source_instance",{}): return
+	var quote: Dictionary
+	if model.has_method("crafting_operations"):
+		quote = model.crafting_quote(operation,uid,save_path)
+		if not quote.get("ok",false):
+			_report(quote)
+			_refresh_crafting()
+			return
+		if source != quote.get("source_instance",{}):
+			if quote.has("handle"): model.cancel_crafting_quote(quote.handle)
+			return
+		_craft_quotes[operation] = quote.duplicate(true)
+	else:
+		quote = _craft_quotes.get(operation,{})
+		if not quote.get("ok",false) or source != quote.get("source_instance",{}): return
 	_pending_craft = {"quote":quote.duplicate(true),"source":source.duplicate(true)}
 	var name_value: String = model.item_definition(uid).name
 	if operation == "salvage":
 		_craft_dialog.title = "确认回收装备"
 		_craft_dialog.ok_button_text = "确认回收"
 		_craft_dialog.dialog_text = "回收「%s」？\n获得校准碎片 %d 枚。\n这件装备将被消耗，无法恢复。" % [name_value,int(quote.materials.get("calibration_shard",0))]
-	else:
+	elif operation == "recalibrate":
 		_craft_dialog.title = "确认数值校准"
 		_craft_dialog.ok_button_text = "确认消耗并校准"
 		_craft_dialog.dialog_text = "校准「%s」？\n消耗校准碎片 %d 枚。\n重掷已有词缀数值，结果可能降低或不变。\n种类、阶级和物品等级保持。" % [name_value,int(quote.cost.get("calibration_shard",0))]
+	else:
+		var metadata: Dictionary = _craft_metadata.get(operation,{})
+		var label: String = str(metadata.get("label",operation))
+		_craft_dialog.title = "确认"+label
+		_craft_dialog.ok_button_text = "确认消耗并"+label
+		_craft_dialog.dialog_text = "%s「%s」？\n消耗校准碎片 %d 枚。\n%s" % [label,name_value,int(quote.cost.get("calibration_shard",0)),(str(metadata.get("description",""))+"\n"+str(metadata.get("risk",""))).strip_edges()]
 	_craft_dialog.popup_centered(Vector2i(500,240))
 
 
