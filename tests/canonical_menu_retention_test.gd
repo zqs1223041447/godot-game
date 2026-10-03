@@ -230,6 +230,30 @@ func _run() -> void:
 	check(int(passive.refresh_generation) == passive_generation + 1
 		and passive_summary.text.contains("可用 %d" % int(state.talent_points)),
 		"Reopening T refreshes the passive point budget once")
+	check(arena.hud._menu_routes.snapshot().overlay == "talents"
+		and arena.hud._menu_routes.snapshot().left == "character"
+		and arena.hud._menu_routes.snapshot().right_inventory, "Talents overlays the active character and bag docks")
+	arena.hud.handle_menu_key(KEY_ESCAPE, true, false)
+	await _frames(3)
+	check(arena.hud._menu_routes.snapshot().overlay.is_empty()
+		and character.is_visible_in_tree() and inventory.is_visible_in_tree(), "Escape first closes T and restores both docks")
+	arena.hud.handle_menu_key(KEY_ESCAPE, true, false)
+	await _frames(3)
+	check(arena.hud._menu_routes.snapshot().left.is_empty()
+		and arena.hud._menu_routes.snapshot().right_inventory and not character.is_visible_in_tree()
+		and inventory.is_visible_in_tree() and arena.hud.is_blocking(), "Escape next closes the most recently opened left dock")
+	arena.hud.handle_menu_key(KEY_ESCAPE, true, false)
+	await _frames(3)
+	check(not arena.hud._menu_routes.snapshot().right_inventory and not arena.hud.is_blocking(),
+		"Escape closes the last dock and resumes the battle")
+	arena.hud.handle_menu_key(KEY_ESCAPE, true, false)
+	await _frames(3)
+	check(arena.hud._menu_routes.snapshot().overlay == "pause" and arena.hud.is_blocking(),
+		"Escape with no open dock enters pause")
+	arena.hud.handle_menu_key(KEY_ESCAPE, true, false)
+	await _frames(3)
+	check(arena.hud._menu_routes.snapshot().overlay.is_empty() and not arena.hud.is_blocking(),
+		"Escape closes pause back to the live world")
 
 	print("Canonical menu retention: %d checks, %d failures" % [checks, failures])
 	arena.queue_free()
