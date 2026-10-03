@@ -566,13 +566,14 @@ func _update_live() -> void:
 		_skill_view_token = token
 		_skill_views.clear()
 	var cooldowns: Dictionary = _arena.get("cooldowns") as Dictionary
+	var slots: Array = _state.skill_slots
 	for index: int in range(_skill_buttons.size()):
 		var button: Button = _skill_buttons[index]
-		if index >= _state.skill_slots.size() or str(_state.skill_slots[index]).is_empty():
+		if index >= slots.size() or str(slots[index]).is_empty():
 			button.text = "%d\n空技能槽" % (index + 1)
 			button.disabled = true
 			continue
-		var id: String = _state.skill_slots[index]
+		var id: String = slots[index]
 		var skill: Dictionary = GameData.SKILLS.get(id, {}) as Dictionary
 		var group_id: String = _state.group_for_key(KEY_1+index) if _state.has_method("group_for_key") else ""
 		var view: Dictionary = _skill_view(id,group_id)
@@ -650,7 +651,7 @@ func _rebuild_panel() -> void:
 		_panel_footer.add_theme_color_override("font_color", GOLD)
 	else:
 		_panel_footer.tooltip_text = ""
-	PresentationTheme.apply_font_scale(_root, _preferences.font_scale)
+	PresentationTheme.apply_font_scale(_modal, _preferences.font_scale)
 
 
 func _section(title: String, caption: String = "") -> void:

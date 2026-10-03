@@ -15,6 +15,7 @@ var font_scale := 1.0:
 var _rows: Control
 var _bag: HFlowContainer
 var _summary: Label
+var _rendered_snapshot: PackedByteArray = PackedByteArray()
 
 class BagGem extends Button:
 	var owner_panel: CanonicalSkillPanel
@@ -67,9 +68,11 @@ func _build() -> void:
 	bag_scroll.add_child(_bag)
 
 
-func refresh() -> void:
+func refresh(force: bool = false) -> void:
 	if model == null or _rows == null: return
 	var snapshot: Dictionary = model.snapshot()
+	var render_token: PackedByteArray = var_to_bytes([model.get_instance_id(), snapshot])
+	if not force and render_token == _rendered_snapshot: return
 	var capacity: int = model.active_group_capacity()
 	_summary.text = "已激活 %d 行 · 每行 1 主 + 5 辅 · 滚动查看全部行" % capacity
 	_summary.tooltip_text = "每一激活行均可绑定右侧按键。选择已有按键会转交给本行；换键或移动宝石不能重置已产生的冷却。超过容量的行仅停用，物品与配置保留。预览为单次命中，不是总DPS。"
@@ -114,6 +117,7 @@ func refresh() -> void:
 		button.mouse_entered.connect(_hover_bag_gem.bind(uid,button))
 		button.mouse_exited.connect(func(): hover_left.emit())
 		_bag.add_child(button)
+	_rendered_snapshot = render_token
 
 
 func _gem_view(uid: String) -> Dictionary:
@@ -132,7 +136,7 @@ func _bind(group_id: String,keycode: int,revision_value: int)->void:
 func _report(result: Dictionary)->void:
 	if not result.get("ok",false) and not str(result.get("reason","")).is_empty(): feedback.emit(result.reason)
 	# Rejected requests must restore control choices without retaining a request latch.
-	refresh()
+	refresh(true)
 
 func _hover_bag_gem(uid: String,button: Control)->void:
 	item_hovered.emit(uid,button.get_global_rect())

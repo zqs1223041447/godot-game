@@ -74,7 +74,9 @@ static func apply_font_scale(node: Node, multiplier: float) -> void:
 		if control.has_theme_font_size_override("font_size"):
 			if not control.has_meta("base_font_size"):
 				control.set_meta("base_font_size", control.get_theme_font_size("font_size"))
-			control.add_theme_font_size_override("font_size", roundi(float(control.get_meta("base_font_size")) * multiplier))
+			var target_size: int = roundi(float(control.get_meta("base_font_size")) * multiplier)
+			if control.get_theme_font_size("font_size") != target_size:
+				control.add_theme_font_size_override("font_size", target_size)
 	for child: Node in node.get_children():
 		apply_font_scale(child, multiplier)
 
