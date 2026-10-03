@@ -20,7 +20,7 @@ func _run() -> void:
 	_expect(not base.is_empty() and Rules.reason_v14(Rules.decode_v14(base)).is_empty(),
 		"fixture is a complete, validated v14 canonical build")
 	var migrated := PagedMigration.migrate_v14(base)
-	_expect(not migrated.is_empty() and migrated.version == 15 and Rules.reason(migrated).is_empty(),
+	_expect(not migrated.is_empty() and migrated.version == 15 and Rules.reason_v15(migrated).is_empty(),
 		"ordinary v14 source converts to a valid v15 candidate")
 	_expect(_same_except_locations_and_version(base, migrated),
 		"ordinary conversion preserves every payload, UID, talent, binding, material, and ledger field")
@@ -42,7 +42,7 @@ func _run() -> void:
 		and edge_result.locations[edge_uid].page in [0, 1]
 		and edge_result.locations[edge_uid].x + Items.metadata_for_items(edge_result.items)[edge_uid].size[0] <= 8
 		and edge_result.locations[edge_uid].y + Items.metadata_for_items(edge_result.items)[edge_uid].size[1] <= 6
-		and Rules.reason(edge_result).is_empty(),
+		and Rules.reason_v15(edge_result).is_empty(),
 		"2×3 legacy edge placement is deterministically repacked within one 8×6 page")
 	_expect(_same_except_locations_and_version(edge, edge_result)
 		and _non_bag_locations_equal(edge.locations, edge_result.locations),
@@ -61,9 +61,9 @@ func _run() -> void:
 	var full := _v14_with_full_legacy_bag(96)
 	var full_result := PagedMigration.migrate_v14(full)
 	var full_validation := Layout.validate_paged(Items.metadata_for_items(full_result.get("items", {})),
-		full_result.get("locations", {}), LegacyMigration.paged_location_context(full_result)) if not full_result.is_empty() else {}
+		full_result.get("locations", {}), LegacyMigration.v15_location_context(full_result)) if not full_result.is_empty() else {}
 	_expect(not full.is_empty() and Rules.reason_v14(full).is_empty() and not full_result.is_empty()
-		and Rules.reason(full_result).is_empty() and full_validation.ok
+		and Rules.reason_v15(full_result).is_empty() and full_validation.ok
 		and full_validation.occupied_cells.size() == 96,
 		"a full 96-cell legacy bag retains all UIDs across both 8×6 pages")
 	if not full_result.is_empty():

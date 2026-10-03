@@ -69,6 +69,7 @@ static func collect() -> Dictionary:
 	result["monster_attacks"] = telegraph_examples()
 	result["encounters"] = encounter_examples()
 	result["canonical"] = canonical_examples()
+	result["currencies"] = currency_examples()
 	result["source_tree"] = source_tree_reference()
 	result["save_version"] = Canonical.Rules.VERSION
 	result["current_loot_profile_id"] = Canonical.LOOT_PROFILE_ID
@@ -302,6 +303,19 @@ static func canonical_examples()->Dictionary:
 		"defense_example":Defense.incoming_source_hit({"physical":100.0,"fire":100.0,"cold":100.0,"lightning":100.0},{"armour":500.0,"fire_resistance":0.5,"cold_resistance":0.25,"lightning_resistance":0.75},100.0,200.0),
 		"monster_ratings":{"crawler":AttackRules.monster_profile(0),"skitter":AttackRules.monster_profile(1),"brute":AttackRules.monster_profile(2)},
 		"skitter_accuracy_example":{"base_accuracy":140,"base_chance":AttackRules.chance(140,320),"extra_ten_dex_accuracy":160,"improved_chance":AttackRules.chance(160,320)}}
+
+
+static func currency_examples()->Dictionary:
+	if Canonical.Rules.VERSION < 16: return {}
+	var instance := {"uid":"catalog_currency_example","kind":"currency",
+		"definition_id":"currency:"+Craft.MATERIAL_ID,"payload":{"quantity":1}}
+	var definition: Dictionary = Canonical.Items.definition_for_instance(instance)
+	assert(not definition.is_empty(),"Current-schema currency must resolve through the real item catalog")
+	assert(int(definition.get("stack_limit",0)) > 0,"Currency stack limit must be exported by its definition")
+	return {Craft.MATERIAL_ID:{"name":str(definition.name),"description":str(definition.get("description","")),
+		"definition_id":instance.definition_id,"size":[1,1],"stack_limit":int(definition.stack_limit),
+		"example_quantity":1,"quantity_source":"items[uid].payload.quantity","save_version":Canonical.Rules.VERSION,
+		"bag_pages":Canonical.new().bag_layout(),"example_instance":instance}}
 
 
 static func source_tree_reference()->Dictionary:

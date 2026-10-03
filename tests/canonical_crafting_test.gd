@@ -32,6 +32,7 @@ func _initialize()->void:
 	var result := state.execute_crafting(quote.handle,source)
 	check(result.ok and state.item(ids[0]).is_empty(),"salvage removes one UID")
 	check(state.crafting_balance()==int(quote.materials.calibration_shard),"salvage exact material amount")
+	check(state.snapshot().crafting.keys() == ["revision"],"schema16 persists no second materials ledger")
 	check(state.snapshot().items.size()==preserve.items.size()-1,"all gems and other items retained")
 	check(not state.execute_crafting(quote.handle,source).ok,"repeated confirmation cannot consume twice")
 	for i:int in [1,2]:
@@ -42,6 +43,7 @@ func _initialize()->void:
 	quote=state.crafting_quote("recalibrate",ids[3],path)
 	check(quote.ok,"recalibrate affordable quote")
 	var before:=state.snapshot()
+	var balance_before:=state.crafting_balance()
 	var disk:=FileAccess.get_file_as_bytes(path)
 	state.fail_save=true
 	check(not state.execute_crafting(quote.handle,source).ok,"atomic write failure surfaced")
@@ -51,7 +53,7 @@ func _initialize()->void:
 	var expected:=Craft.recalibrate_plan(source,seed_text.sha256_text().substr(0,15).hex_to_int())
 	check(state.execute_crafting(quote.handle,source).ok,"same quote retries safely")
 	check(state.item(ids[3]).payload==expected.instance,"released seed contract unchanged")
-	check(state.crafting_balance()==int(before.crafting.materials.calibration_shard)-int(quote.cost.calibration_shard),"one exact payment")
+	check(state.crafting_balance()==balance_before-int(quote.cost.calibration_shard),"one exact payment")
 	var reopened:=Model.new()
 	check(reopened.load_build(path) and reopened.snapshot()==state.snapshot(),"wallet and all item locations roundtrip")
 	quote=state.crafting_quote("salvage",ids[4],path)

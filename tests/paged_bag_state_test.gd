@@ -37,16 +37,16 @@ func _run() -> void:
 	_expect(FileAccess.get_file_as_bytes(path + ".v14-backup.json") == source_bytes
 		and FileAccess.get_file_as_bytes(path) != source_bytes,
 		"original v14 bytes are preserved before a current-schema replacement")
-	_expect(state.snapshot().version == 15 and Rules.reason(state.snapshot()).is_empty(),
+	_expect(state.snapshot().version == 16 and Rules.reason(state.snapshot()).is_empty(),
 		"loaded state is a valid v15 build")
 	_expect(state.snapshot().items == source_v14.items and state.snapshot().talents == source_v14.talents
 		and state.snapshot().bindings == source_v14.bindings and state.snapshot().crafting == source_v14.crafting
 		and state.snapshot().migration_ledger == source_v14.migration_ledger,
 		"v14 migration preserves item payloads, talents, bindings, materials, and ledger")
-	_expect(state.migrated_from_legacy and state.migration_message.contains("双页背包")
+	_expect(state.migrated_from_legacy and state.migration_message.contains("背包已扩容")
 		and not state.migration_message.contains("天赋点"),
 		"v14 migration message describes the backpack conversion without claiming a talent refund")
-	_expect(state.bag_layout() == {"pages": 2, "columns": 8, "rows": 6},
+	_expect(state.bag_layout() == {"pages": 2, "columns": 12, "rows": 10},
 		"state exposes the stable two-page layout contract")
 
 	var bag_uid := _first_bag_uid(state.snapshot().locations)
@@ -169,7 +169,7 @@ func _run() -> void:
 
 	var future_path := "user://paged_bag_future_%d.json" % Time.get_ticks_usec()
 	var future := loaded.snapshot()
-	future.version = 16
+	future.version = Rules.VERSION + 1
 	var future_bytes := JSON.stringify(future, "\t", true, true).to_utf8_buffer()
 	_write(future_path, future_bytes)
 	var future_memory := loaded.snapshot()
@@ -187,10 +187,10 @@ func _run() -> void:
 		"legal level-30 equipment reward succeeds and consumes RNG while space remains")
 	var page_zero_filled := _fill_page(full_state, 0)
 	var full_snapshot := full_state.snapshot()
-	var full_validation := Layout.validate_paged(Items.metadata_for_items(full_snapshot.items),
+	var full_validation := Layout.validate_current(Items.metadata_for_items(full_snapshot.items),
 		full_snapshot.locations, LegacyMigration.paged_location_context(full_snapshot))
 	var first_page_end_uid := full_state.award_gem("support:focus")
-	_expect(page_zero_filled and _page_cell_count(full_validation.occupied_cells, 0) == 48
+	_expect(page_zero_filled and _page_cell_count(full_validation.occupied_cells, 0) == 120
 		and not first_page_end_uid.is_empty() and full_state.location(first_page_end_uid).page == 1,
 		"reward insertion fills page one first, then selects an available slot on page two")
 	var page_one_filled := _fill_page(full_state, 1)
@@ -201,10 +201,10 @@ func _run() -> void:
 		and full_state.snapshot() == full_before,
 		"last-cell overflow rejects atomically and restores the loot RNG stream")
 
-	var full_layout := Layout.validate_paged(Items.metadata_for_items(full_before.items),
+	var full_layout := Layout.validate_current(Items.metadata_for_items(full_before.items),
 		full_before.locations, LegacyMigration.paged_location_context(full_before))
-	_expect(page_one_filled and full_layout.ok and full_layout.occupied_cells.size() == 96,
-		"both pages together expose exactly the original 96-cell capacity")
+	_expect(page_one_filled and full_layout.ok and full_layout.occupied_cells.size() == 240,
+		"both pages together expose exactly the expanded 240-cell capacity")
 
 	var current := state.snapshot()
 	var external_path := path
@@ -272,13 +272,15 @@ func _recovery_locations(locations: Dictionary) -> Dictionary:
 
 
 func _page_one_free_location(metadata: Dictionary, locations: Dictionary, context: Dictionary, uid: String) -> Dictionary:
-	var checked: Dictionary = Layout.validate_paged(metadata, locations, context)
+	var checked: Dictionary = Layout.validate_current(metadata, locations, context)
 	if not checked.ok:
 		return {}
-	for y: int in range(6):
-		for x: int in range(8):
+	for y: int in range(10):
+		for x: int in range(12):
 			var location := {"kind": "bag", "page": 1, "x": x, "y": y}
-			var placement := BagLayout.check_placement(uid, metadata[uid].size, location, checked.occupied_cells)
+			var candidate: Dictionary = locations.duplicate(true)
+			candidate[uid] = location
+			var placement := Layout.validate_current(metadata,candidate,context)
 			if placement.ok:
 				return location
 	return {}
@@ -286,7 +288,7 @@ func _page_one_free_location(metadata: Dictionary, locations: Dictionary, contex
 
 func _free_location_except(metadata: Dictionary, locations: Dictionary, context: Dictionary,
 		uid: String, excluded: Dictionary) -> Dictionary:
-	var checked: Dictionary = Layout.validate_paged(metadata, locations, context)
+	var checked: Dictionary = Layout.validate_current(metadata, locations, context)
 	if not checked.ok or not metadata.has(uid):
 		return {}
 	var occupied: Dictionary = checked.occupied_cells.duplicate(true)
@@ -294,12 +296,14 @@ func _free_location_except(metadata: Dictionary, locations: Dictionary, context:
 		if occupied[cell] == uid:
 			occupied.erase(cell)
 	for page: int in range(2):
-		for y: int in range(6):
-			for x: int in range(8):
+		for y: int in range(10):
+			for x: int in range(12):
 				var location := {"kind": "bag", "page": page, "x": x, "y": y}
 				if location == excluded:
 					continue
-				var placement: Dictionary = BagLayout.check_placement(uid, metadata[uid].size, location, occupied)
+				var candidate: Dictionary = locations.duplicate(true)
+				candidate[uid] = location
+				var placement := Layout.validate_current(metadata,candidate,context)
 				if placement.ok:
 					return location
 	return {}
@@ -329,14 +333,14 @@ func _page_cell_count(occupied: Dictionary, page: int) -> int:
 func _fill_page(state: State, page: int) -> bool:
 	var candidate := state.snapshot()
 	var metadata := Items.metadata_for_items(candidate.items)
-	var layout := Layout.validate_paged(metadata, candidate.locations,
+	var layout := Layout.validate_current(metadata, candidate.locations,
 		LegacyMigration.paged_location_context(candidate, Rules.SourceTree.Data.standard_socket_ids()))
 	if not layout.ok:
 		return false
 	var occupied: Dictionary = layout.occupied_cells.duplicate(true)
 	var serial: int = int(candidate.next_item_serial)
-	for y: int in range(6):
-		for x: int in range(8):
+	for y: int in range(10):
+		for x: int in range(12):
 			var key := "bag:%d:%d:%d" % [page, x, y]
 			if occupied.has(key):
 				continue
