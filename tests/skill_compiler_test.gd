@@ -80,7 +80,9 @@ func _test_baselines() -> void:
 		stripped.erase("compiled_packets")
 		stripped.erase("compiled_skill_id")
 		_expect(stripped == snapshot, "Empty compilation preserves every snapshot value for " + id)
-		if not counts.has(id):
+		if id in ["nova", "meteor"]:
+			_expect(result.recipe == {"radius": 155.0 if id == "nova" else 110.0} and stripped == snapshot, "Area recipe preserves legacy radius and snapshot: " + id)
+		elif not counts.has(id):
 			_expect(result.recipe.is_empty() and stripped == snapshot, "Nonprojectile input values remain unchanged: " + id)
 		else:
 			_expect(result.recipe.initial_count == counts[id] and result.snapshot.initial_count == counts[id], "Single compiled count feeds recipe and snapshot for " + id)

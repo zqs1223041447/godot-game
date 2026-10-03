@@ -15,6 +15,7 @@ const ICONS: Dictionary = {
 	"chain":preload("res://assets/ui/grimoire/chain.png"),
 	"volley":preload("res://assets/ui/grimoire/volley.png"),
 	"focus":preload("res://assets/ui/grimoire/focus.png"),
+	"breadth":preload("res://assets/ui/grimoire/breadth.png"),
 	"pierce":preload("res://assets/ui/grimoire/pierce.png"),
 }
 func _ready() -> void:

@@ -385,7 +385,7 @@ func _literal_migration() -> void:
 	changes = 0
 	_expect(state.load_build(path) and state.migrated_from_v9 and changes == 1, "Literal v9 load migrates in memory with one committed change")
 	var expected: Dictionary = _expected_literal_v10(legacy)
-	_expect(Model.SAVE_VERSION == 11 and state._snapshot() == expected, "Empty crafting state is added; historical identities, gaps, rolls, nodes, special jewel, positions and legacy links persist")
+	_expect(Model.SAVE_VERSION == 12 and state._snapshot() == expected, "Empty crafting state is added; historical identities, gaps, rolls, nodes, special jewel, positions and legacy links persist")
 	_expect(state.get_combat_snapshot().has("weapon_profile") and state.get_skill_supports("bolt") == ["focus", "volley"], "Schema10 explicitly accepts equipped schema9 local weapon and legacy supports")
 	_expect(state.migration_message.contains("贯穿") and FileAccess.get_file_as_bytes(path) == bytes and not FileAccess.file_exists(backup), "Load preserves original literal bytes and defers backup until overwrite")
 	_expect(state.save_build("user://pierce_save_as.json") == OK and FileAccess.get_file_as_bytes(path) == bytes and not FileAccess.file_exists(backup), "Save-as does not consume pending source-byte protection")

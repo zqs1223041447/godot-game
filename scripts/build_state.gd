@@ -14,10 +14,10 @@ const SkillCompiler = preload("res://scripts/combat/skill_compiler.gd")
 const AllocationRules = preload("res://scripts/passives/allocation_rules.gd")
 const Craft = preload("res://scripts/items/crafting_rules.gd")
 const CraftPlanner = preload("res://scripts/items/crafting_transaction_planner.gd")
-const SAVE_VERSION: int = 11
+const SAVE_VERSION: int = 12
 ## Crafting adds a wallet/sequence; equipment still uses schema9 words.
 ## Explicit mapping must not make an unknown future save/item version acceptable.
-const EQUIPMENT_VOCABULARY_BY_SAVE_VERSION: Dictionary = {10: 9, 11: 9}
+const EQUIPMENT_VOCABULARY_BY_SAVE_VERSION: Dictionary = {10: 9, 11: 9, 12: 9}
 const MAX_CRAFT_MATERIALS: int = 1000000000
 const MAX_CRAFT_REVISION: int = 1000000000
 const MAX_CRAFT_QUOTES: int = 8
@@ -72,6 +72,7 @@ var migrated_from_v7: bool = false
 var migrated_from_v8: bool = false
 var migrated_from_v9: bool = false
 var migrated_from_v10: bool = false
+var migrated_from_v11: bool = false
 var _migration_version: int = 0
 var migration_message: String = ""
 var migration_backup_path: String = ""
@@ -766,6 +767,7 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	migrated_from_v8 = int(parser.data["version"]) == 8
 	migrated_from_v9 = int(parser.data["version"]) == 9
 	migrated_from_v10 = int(parser.data["version"]) == 10
+	migrated_from_v11 = int(parser.data["version"]) == 11
 	_migration_version = int(parser.data["version"])
 	if migrated_from_v1 or migrated_from_v2:
 		for id: String in Data.COMBAT_STARTER_ITEMS:
@@ -790,6 +792,8 @@ func load_build(path: String = "user://build_save.json") -> bool:
 		migration_message = "构筑已升级：装备、天赋、珠宝与已有辅助保持不变。新增贯穿辅助可用于飞弹和冰霜；按 K 配置。"
 	if migrated_from_v10:
 		migration_message = "构筑已升级：原装备与构筑保留。背包中的随机魔法、稀有装备可回收或校准；碎片从零开始。"
+	if migrated_from_v11:
+		migration_message = "构筑已升级：装备、碎片、天赋与已有辅助保留。新星与陨星可添加广域辅助；按 K 查看面积、半径与命中取舍。"
 	migration_backup_path = ""
 	_migration_source_path = path if _migration_version < SAVE_VERSION else ""
 	_migration_source_bytes = source_bytes if _migration_version < SAVE_VERSION else PackedByteArray()

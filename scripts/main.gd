@@ -8,6 +8,7 @@ const VisualCueRuntime = preload("res://scripts/visuals/combat_cues.gd")
 const Visuals = preload("res://scripts/visuals/arena_visuals.gd")
 const Presentation = preload("res://scripts/visuals/visual_settings.gd")
 const Build = preload("res://scripts/build_state.gd")
+const AreaRules = preload("res://scripts/combat/area_support_rules.gd")
 const Data = preload("res://scripts/game_data.gd")
 const Hud = preload("res://scripts/game_hud.gd")
 const Jewels = preload("res://scripts/jewel_data.gd")
@@ -117,8 +118,8 @@ func _ready() -> void:
 	if not state.last_load_error.is_empty():
 		hud.open_panel("pause")
 		hud.notify(state.last_load_error)
-	elif state.migrated_from_v1 or state.migrated_from_v2 or state.migrated_from_v3 or state.migrated_from_v4 or state.migrated_from_v5 or state.migrated_from_v6 or state.migrated_from_v7 or state.migrated_from_v8 or state.migrated_from_v9 or state.migrated_from_v10:
-		hud.open_panel("talents" if state.migrated_from_v1 or state.migrated_from_v6 else "skills" if state.migrated_from_v4 or state.migrated_from_v5 or state.migrated_from_v9 else "inventory" if state.migrated_from_v3 or state.migrated_from_v7 or state.migrated_from_v8 or state.migrated_from_v10 else "combat")
+	elif state.migrated_from_v1 or state.migrated_from_v2 or state.migrated_from_v3 or state.migrated_from_v4 or state.migrated_from_v5 or state.migrated_from_v6 or state.migrated_from_v7 or state.migrated_from_v8 or state.migrated_from_v9 or state.migrated_from_v10 or state.migrated_from_v11:
+		hud.open_panel("talents" if state.migrated_from_v1 or state.migrated_from_v6 else "skills" if state.migrated_from_v4 or state.migrated_from_v5 or state.migrated_from_v9 or state.migrated_from_v11 else "inventory" if state.migrated_from_v3 or state.migrated_from_v7 or state.migrated_from_v8 or state.migrated_from_v10 else "combat")
 		hud.notify(state.migration_message)
 	else:
 		hud.notify("F7 怪物机制与分裂试验 · F6 龙卷组合 · T 天赋星图")
@@ -845,8 +846,8 @@ func _cast_skill(index: int) -> bool:
 				_shoot(player_pos, player_facing.rotated(angle), compiled.packets.projectile, color,
 					int(recipe.pierce), float(recipe.slow), float(recipe.speed), context)
 		"nova":
-			_area_damage(player_pos, 155.0, compiled.packets.direct, color, 0.6, context.snapshot)
-			visual_cues.emit_cue("nova", player_pos, {"radius": 155.0, "color": color})
+			_area_damage(player_pos, float(compiled.recipe.radius), compiled.packets.direct, color, 0.6, context.snapshot)
+			visual_cues.emit_cue("nova", player_pos, {"radius": float(compiled.recipe.radius), "color": color})
 		"dash":
 			var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 			if direction.length_squared() < 0.1:
@@ -866,8 +867,8 @@ func _cast_skill(index: int) -> bool:
 		"meteor":
 			var target: Dictionary = _nearest_enemy(player_pos, 700.0)
 			var target_pos: Vector2 = Vector2(target.pos) if not target.is_empty() else _clamp_to_arena(player_pos + player_facing * 220.0, 20.0)
-			_area_damage(target_pos, 110.0, compiled.packets.direct, color, 0.0, context.snapshot)
-			visual_cues.emit_cue("meteor", target_pos, {"radius": 110.0, "color": color})
+			_area_damage(target_pos, float(compiled.recipe.radius), compiled.packets.direct, color, 0.0, context.snapshot)
+			visual_cues.emit_cue("meteor", target_pos, {"radius": float(compiled.recipe.radius), "color": color})
 			for i: int in range(32):
 				_add_particle(target_pos, Vector2.RIGHT.rotated(rng.randf() * TAU) * rng.randf_range(70, 270), color, rng.randf_range(3, 7), 0.6)
 			screen_shake = 4.0
@@ -896,7 +897,7 @@ func _area_damage(origin: Vector2, radius: float, packet: Dictionary, color: Col
 		return
 	var cast_snapshot: Dictionary = state.get_combat_snapshot() if snapshot.is_empty() else snapshot
 	for enemy: Dictionary in enemies:
-		if float(enemy.health) > 0.0 and float(enemy.spawn) <= 0.0 and origin.distance_to(Vector2(enemy.pos)) <= radius + float(enemy.radius):
+		if float(enemy.health) > 0.0 and float(enemy.spawn) <= 0.0 and AreaRules.contains_target(origin, Vector2(enemy.pos), radius, float(enemy.radius)):
 			_apply_damage_packet(enemy, packet, cast_snapshot, color, slow)
 			var direction: Vector2 = (Vector2(enemy.pos) - origin).normalized()
 			enemy.knockback = direction * 190.0

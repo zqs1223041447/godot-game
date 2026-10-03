@@ -61,6 +61,12 @@ func _initialize() -> void:
 	_expect(piercing.bolt.before.observed_hits == [1, 2] and piercing.bolt.after.observed_hits == [1, 2, 3, 4], "Reference bolt diagram records actual two versus four collisions")
 	_expect(piercing.frost.before.observed_hits == [1, 2, 3] and piercing.frost.after.observed_hits == [1, 2, 3, 4, 5], "Reference frost diagram records actual three versus five collisions")
 	_expect(is_equal_approx(piercing.bolt.after.hit_damage, 35.36) and is_equal_approx(piercing.bolt.after.mana, 8.4), "Reference values match independent default-build arithmetic")
+	for skill_id: String in ["nova", "meteor"]:
+		var area: Dictionary = current.area_support_examples.skills[skill_id]
+		_expect(is_equal_approx(area.wide.radius / area.base.radius, 1.2) and area.wide.area_multiplier == 1.44, "Area diagram uses square-root radius conversion")
+		_expect(is_equal_approx(area.wide.hit_damage, area.base.hit_damage * 0.85), "Area diagram preserves damage tradeoff")
+		_expect(area.base.layouts.outer_band.hit_indices == [0] and area.wide.layouts.outer_band.hit_indices == [0,1,2,3,4], "Layout diagram records actual shared-circle coverage")
+		_expect(is_equal_approx(area.wide.layouts.cluster.total_before_defense, area.base.layouts.cluster.total_before_defense * 0.85), "Already-covered layout loses damage")
 	var existing: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://docs/reference/catalog.json"))
 	_expect(existing is Dictionary, "export parses")
 	if not existing is Dictionary:
@@ -79,14 +85,14 @@ func _initialize() -> void:
 	_ids(current.passives, Passives.get_nodes().keys(), "all original nodes")
 	_ids(current.mechanisms, Registry.get_ids(), "all shared mechanisms")
 	_ids(current.monsters, Monsters.TEMPLATES.keys(), "all monster templates")
-	_expect(current.skills.size() == 8 and current.supports.size() == 3, "bounded skill inventory")
+	_expect(current.skills.size() == 8 and current.supports.size() == 4, "bounded skill inventory")
 	_expect(current.equipment.size() == 9 and current.affixes.size() == 19, "bounded equipment inventory")
 	_expect(current.passives.size() == 181 and current.special_coverage.size() == 12, "complete tree and socket coverage")
 	for skill_id: String in current.skills:
 		var skill: Dictionary = current.skills[skill_id]
 		_expect(skill.compatible_supports == Supports.supports_for_skill(skill_id), "runtime compatibility " + skill_id)
 		for config: String in ["fresh", "full_tornado", "local_normal", "local_max"]:
-			_expect(skill.examples[config].size() == (7 if skill_id in ["bolt", "frost"] else 4 if skill_id == "tornado" else 1), "all support combinations " + skill_id + "/" + config)
+			_expect(skill.examples[config].size() == (7 if skill_id in ["bolt", "frost"] else 4 if skill_id == "tornado" else 2 if skill_id in ["nova", "meteor"] else 1), "all support combinations " + skill_id + "/" + config)
 	_expect(current.configurations.fresh.equipped.weapon == "ember_wand", "fresh build does not assume mechanism bow")
 	_expect(current.configurations.full_tornado.equipped.weapon == "prism_bow", "full example explicitly equips mechanism bow")
 	_expect(current.sources.passive.version == "3.29.1", "passive source preserved")

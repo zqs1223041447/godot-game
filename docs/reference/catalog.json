@@ -1436,6 +1436,354 @@
 			"unit": "flat"
 		}
 	},
+	"area_support_examples": {
+		"mechanism_reference": {
+			"date": "2017-02-26",
+			"scope": "Historical area/radius distinction only; all support values are original game balance.",
+			"title": "GGG 2.6.0 Area of Effect Changes",
+			"url": "https://www.pathofexile.com/forum/view-thread/1838713/filter-account-type/staff"
+		},
+		"skills": {
+			"meteor": {
+				"base": {
+					"area_multiplier": 1.0,
+					"cooldown": 8.0,
+					"hit_damage": 111.8,
+					"layouts": {
+						"cluster": {
+							"hit_indices": [
+								0,
+								1,
+								2,
+								3,
+								4
+							],
+							"points": [
+								[
+									0.0,
+									0.0
+								],
+								[
+									-2.6445388812135207e-06,
+									60.5
+								],
+								[
+									-60.5,
+									-5.289077762427041e-06
+								],
+								[
+									7.214552510959038e-07,
+									-60.5
+								],
+								[
+									60.5,
+									1.0578155524854083e-05
+								]
+							],
+							"total_before_defense": 559.0
+						},
+						"outer_band": {
+							"hit_indices": [
+								0
+							],
+							"points": [
+								[
+									0.0,
+									0.0
+								],
+								[
+									-6.0540273807419e-06,
+									138.5
+								],
+								[
+									-138.5,
+									-1.21080547614838e-05
+								],
+								[
+									1.6515959941898473e-06,
+									-138.5
+								],
+								[
+									138.5,
+									2.42161095229676e-05
+								]
+							],
+							"total_before_defense": 111.8
+						},
+						"single": {
+							"hit_indices": [
+								0
+							],
+							"points": [
+								[
+									0.0,
+									0.0
+								]
+							],
+							"total_before_defense": 111.8
+						}
+					},
+					"mana": 32.0,
+					"radius": 110.0
+				},
+				"wide": {
+					"area_multiplier": 1.44,
+					"cooldown": 8.0,
+					"hit_damage": 95.03,
+					"layouts": {
+						"cluster": {
+							"hit_indices": [
+								0,
+								1,
+								2,
+								3,
+								4
+							],
+							"points": [
+								[
+									0.0,
+									0.0
+								],
+								[
+									-2.6445388812135207e-06,
+									60.5
+								],
+								[
+									-60.5,
+									-5.289077762427041e-06
+								],
+								[
+									7.214552510959038e-07,
+									-60.5
+								],
+								[
+									60.5,
+									1.0578155524854083e-05
+								]
+							],
+							"total_before_defense": 475.15
+						},
+						"outer_band": {
+							"hit_indices": [
+								0,
+								1,
+								2,
+								3,
+								4
+							],
+							"points": [
+								[
+									0.0,
+									0.0
+								],
+								[
+									-6.0540273807419e-06,
+									138.5
+								],
+								[
+									-138.5,
+									-1.21080547614838e-05
+								],
+								[
+									1.6515959941898473e-06,
+									-138.5
+								],
+								[
+									138.5,
+									2.42161095229676e-05
+								]
+							],
+							"total_before_defense": 475.15
+						},
+						"single": {
+							"hit_indices": [
+								0
+							],
+							"points": [
+								[
+									0.0,
+									0.0
+								]
+							],
+							"total_before_defense": 95.03
+						}
+					},
+					"mana": 38.4,
+					"radius": 132.0
+				}
+			},
+			"nova": {
+				"base": {
+					"area_multiplier": 1.0,
+					"cooldown": 6.0,
+					"hit_damage": 70.2,
+					"layouts": {
+						"cluster": {
+							"hit_indices": [
+								0,
+								1,
+								2,
+								3,
+								4
+							],
+							"points": [
+								[
+									0.0,
+									0.0
+								],
+								[
+									-3.726395789271919e-06,
+									85.25
+								],
+								[
+									-85.25,
+									-7.452791578543838e-06
+								],
+								[
+									1.016596115732682e-06,
+									-85.25
+								],
+								[
+									85.25,
+									1.4905583157087676e-05
+								]
+							],
+							"total_before_defense": 351.0
+						},
+						"outer_band": {
+							"hit_indices": [
+								0
+							],
+							"points": [
+								[
+									0.0,
+									0.0
+								],
+								[
+									-8.316091225424316e-06,
+									190.25
+								],
+								[
+									-190.25,
+									-1.663218245084863e-05
+								],
+								[
+									2.268708612973569e-06,
+									-190.25
+								],
+								[
+									190.25,
+									3.326436490169726e-05
+								]
+							],
+							"total_before_defense": 70.2
+						},
+						"single": {
+							"hit_indices": [
+								0
+							],
+							"points": [
+								[
+									0.0,
+									0.0
+								]
+							],
+							"total_before_defense": 70.2
+						}
+					},
+					"mana": 24.0,
+					"radius": 155.0
+				},
+				"wide": {
+					"area_multiplier": 1.44,
+					"cooldown": 6.0,
+					"hit_damage": 59.67,
+					"layouts": {
+						"cluster": {
+							"hit_indices": [
+								0,
+								1,
+								2,
+								3,
+								4
+							],
+							"points": [
+								[
+									0.0,
+									0.0
+								],
+								[
+									-3.726395789271919e-06,
+									85.25
+								],
+								[
+									-85.25,
+									-7.452791578543838e-06
+								],
+								[
+									1.016596115732682e-06,
+									-85.25
+								],
+								[
+									85.25,
+									1.4905583157087676e-05
+								]
+							],
+							"total_before_defense": 298.35
+						},
+						"outer_band": {
+							"hit_indices": [
+								0,
+								1,
+								2,
+								3,
+								4
+							],
+							"points": [
+								[
+									0.0,
+									0.0
+								],
+								[
+									-8.316091225424316e-06,
+									190.25
+								],
+								[
+									-190.25,
+									-1.663218245084863e-05
+								],
+								[
+									2.268708612973569e-06,
+									-190.25
+								],
+								[
+									190.25,
+									3.326436490169726e-05
+								]
+							],
+							"total_before_defense": 298.35
+						},
+						"single": {
+							"hit_indices": [
+								0
+							],
+							"points": [
+								[
+									0.0,
+									0.0
+								]
+							],
+							"total_before_defense": 59.67
+						}
+					},
+					"mana": 28.799999999999997,
+					"radius": 186.0
+				}
+			}
+		},
+		"source": "SkillCompiler + AreaSupportRules.contains_target + DamageResolver",
+		"target_radius": 14.0
+	},
 	"configurations": {
 		"fresh": {
 			"allocated_nodes": [
@@ -1947,7 +2295,7 @@
 				"schema_version": 1,
 				"status": "prototype"
 			},
-			"save_version": 11
+			"save_version": 12
 		},
 		"recalibrate": {
 			"description": "消耗校准碎片，重掷现有词缀的整数数值；结果可能降低或不变。",
@@ -5769,7 +6117,7 @@
 			}
 		}
 	},
-	"game_version": "0.17.0",
+	"game_version": "0.18.0",
 	"jewel_affixes": {
 		"barrier": {
 			"kind": "prefix",
@@ -12409,7 +12757,7 @@
 		"source": "SkillCompiler + ProjectileRuntime.advance + DamageResolver",
 		"target_count": 6
 	},
-	"save_version": 11,
+	"save_version": 12,
 	"schema_version": 3,
 	"sectors": [
 		{
@@ -25965,18 +26313,23 @@
 			"short_name": "冰霜"
 		},
 		"meteor": {
+			"area_recipe": {
+				"radius": 110.0
+			},
 			"capabilities": [
 				"area_hit"
 			],
 			"color": "#ff9778",
-			"compatible_supports": [],
+			"compatible_supports": [
+				"breadth"
+			],
 			"cooldown": 8.0,
 			"description": "在最近敌人处引爆陨星，造成 430% 范围伤害。",
 			"examples": {
 				"fresh": [
 					{
 						"cooldown": 8.0,
-						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每次命中：火焰 111.80\n固有：火焰 111.80；附加：无；附加效用 4.30",
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 110.00 → 110.00；面积 ×1.00，半径 ×1.00（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：火焰 111.80\n固有：火焰 111.80；附加：无；附加效用 4.30",
 						"initial_count": 0,
 						"mana": 32.0,
 						"packets": [
@@ -26076,16 +26429,133 @@
 							}
 						],
 						"recipe": {
-
+							"radius": 110.0
 						},
 						"summary": "命中预估（未计敌方防御）：每次命中 111.80",
 						"supports": []
+					},
+					{
+						"cooldown": 8.0,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 110.00 → 132.00；面积 ×1.44，半径 ×1.20（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：火焰 95.03\n固有：火焰 111.80；附加：无；附加效用 4.30",
+						"initial_count": 0,
+						"mana": 38.4,
+						"packets": [
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 71.27250000000001
+									},
+									"details": [
+										{
+											"base": 111.8,
+											"before_defense": 95.03,
+											"final": 71.27250000000001,
+											"increased": 0.0,
+											"modifiers": [
+												"support:breadth"
+											],
+											"more": 0.85,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 71.27250000000001
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 71.27250000000001
+									},
+									"damage_total": 71.27250000000001,
+									"details": [
+										{
+											"base": 111.8,
+											"before_defense": 95.03,
+											"final": 71.27250000000001,
+											"increased": 0.0,
+											"modifiers": [
+												"support:breadth"
+											],
+											"more": 0.85,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 71.27250000000001,
+									"mitigated_components": {
+										"fire": 23.757499999999993
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 95.03
+									},
+									"reason": "",
+									"remaining_health": 242.2275,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "每次命中",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 4.3,
+										"base_coefficient": 4.3,
+										"intrinsic": {
+											"fire": 111.8
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 111.8
+									},
+									"role": "direct",
+									"skill_id": "meteor",
+									"tags": [
+										"hit",
+										"spell",
+										"area"
+									]
+								},
+								"resolved": {
+									"components": {
+										"fire": 95.03
+									},
+									"details": [
+										{
+											"base": 111.8,
+											"before_defense": 95.03,
+											"final": 95.03,
+											"increased": 0.0,
+											"modifiers": [
+												"support:breadth"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 95.03
+								}
+							}
+						],
+						"recipe": {
+							"area_multiplier": 1.44,
+							"base_radius": 110.0,
+							"radius": 132.0
+						},
+						"summary": "命中预估（未计敌方防御）：每次命中 95.03",
+						"supports": [
+							"breadth"
+						]
 					}
 				],
 				"full_tornado": [
 					{
 						"cooldown": 8.0,
-						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每次命中：火焰 141.90\n固有：火焰 94.60；附加：无；附加效用 4.30",
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 110.00 → 110.00；面积 ×1.00，半径 ×1.00（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：火焰 141.90\n固有：火焰 94.60；附加：无；附加效用 4.30",
 						"initial_count": 0,
 						"mana": 32.0,
 						"packets": [
@@ -26194,16 +26664,139 @@
 							}
 						],
 						"recipe": {
-
+							"radius": 110.0
 						},
 						"summary": "命中预估（未计敌方防御）：每次命中 141.90",
 						"supports": []
+					},
+					{
+						"cooldown": 8.0,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 110.00 → 132.00；面积 ×1.44，半径 ×1.20（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：火焰 120.61\n固有：火焰 94.60；附加：无；附加效用 4.30",
+						"initial_count": 0,
+						"mana": 38.4,
+						"packets": [
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 90.46124999999998
+									},
+									"details": [
+										{
+											"base": 94.6,
+											"before_defense": 120.61499999999998,
+											"final": 90.46124999999998,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased",
+												"support:breadth"
+											],
+											"more": 0.85,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 90.46124999999998
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 90.46124999999998
+									},
+									"damage_total": 90.46124999999998,
+									"details": [
+										{
+											"base": 94.6,
+											"before_defense": 120.61499999999998,
+											"final": 90.46124999999998,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased",
+												"support:breadth"
+											],
+											"more": 0.85,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 90.46124999999998,
+									"mitigated_components": {
+										"fire": 30.153750000000002
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 120.61499999999998
+									},
+									"reason": "",
+									"remaining_health": 223.03875000000002,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "每次命中",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 4.3,
+										"base_coefficient": 4.3,
+										"intrinsic": {
+											"fire": 94.6
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 94.6
+									},
+									"role": "direct",
+									"skill_id": "meteor",
+									"tags": [
+										"hit",
+										"spell",
+										"area"
+									]
+								},
+								"resolved": {
+									"components": {
+										"fire": 120.61499999999998
+									},
+									"details": [
+										{
+											"base": 94.6,
+											"before_defense": 120.61499999999998,
+											"final": 120.61499999999998,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased",
+												"support:breadth"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 120.61499999999998
+								}
+							}
+						],
+						"recipe": {
+							"area_multiplier": 1.44,
+							"base_radius": 110.0,
+							"radius": 132.0
+						},
+						"summary": "命中预估（未计敌方防御）：每次命中 120.61",
+						"supports": [
+							"breadth"
+						]
 					}
 				],
 				"local_max": [
 					{
 						"cooldown": 8.0,
-						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每次命中：火焰 77.40\n固有：火焰 77.40；附加：无；附加效用 4.30",
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 110.00 → 110.00；面积 ×1.00，半径 ×1.00（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：火焰 77.40\n固有：火焰 77.40；附加：无；附加效用 4.30",
 						"initial_count": 0,
 						"mana": 32.0,
 						"packets": [
@@ -26303,16 +26896,133 @@
 							}
 						],
 						"recipe": {
-
+							"radius": 110.0
 						},
 						"summary": "命中预估（未计敌方防御）：每次命中 77.40",
 						"supports": []
+					},
+					{
+						"cooldown": 8.0,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 110.00 → 132.00；面积 ×1.44，半径 ×1.20（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：火焰 65.79\n固有：火焰 77.40；附加：无；附加效用 4.30",
+						"initial_count": 0,
+						"mana": 38.4,
+						"packets": [
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 49.342499999999994
+									},
+									"details": [
+										{
+											"base": 77.39999999999999,
+											"before_defense": 65.78999999999999,
+											"final": 49.342499999999994,
+											"increased": 0.0,
+											"modifiers": [
+												"support:breadth"
+											],
+											"more": 0.85,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 49.342499999999994
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 49.342499999999994
+									},
+									"damage_total": 49.342499999999994,
+									"details": [
+										{
+											"base": 77.39999999999999,
+											"before_defense": 65.78999999999999,
+											"final": 49.342499999999994,
+											"increased": 0.0,
+											"modifiers": [
+												"support:breadth"
+											],
+											"more": 0.85,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 49.342499999999994,
+									"mitigated_components": {
+										"fire": 16.447499999999998
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 65.78999999999999
+									},
+									"reason": "",
+									"remaining_health": 264.1575,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "每次命中",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 4.3,
+										"base_coefficient": 4.3,
+										"intrinsic": {
+											"fire": 77.39999999999999
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 77.39999999999999
+									},
+									"role": "direct",
+									"skill_id": "meteor",
+									"tags": [
+										"hit",
+										"spell",
+										"area"
+									]
+								},
+								"resolved": {
+									"components": {
+										"fire": 65.78999999999999
+									},
+									"details": [
+										{
+											"base": 77.39999999999999,
+											"before_defense": 65.78999999999999,
+											"final": 65.78999999999999,
+											"increased": 0.0,
+											"modifiers": [
+												"support:breadth"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 65.78999999999999
+								}
+							}
+						],
+						"recipe": {
+							"area_multiplier": 1.44,
+							"base_radius": 110.0,
+							"radius": 132.0
+						},
+						"summary": "命中预估（未计敌方防御）：每次命中 65.79",
+						"supports": [
+							"breadth"
+						]
 					}
 				],
 				"local_normal": [
 					{
 						"cooldown": 8.0,
-						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每次命中：火焰 77.40\n固有：火焰 77.40；附加：无；附加效用 4.30",
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 110.00 → 110.00；面积 ×1.00，半径 ×1.00（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：火焰 77.40\n固有：火焰 77.40；附加：无；附加效用 4.30",
 						"initial_count": 0,
 						"mana": 32.0,
 						"packets": [
@@ -26412,10 +27122,127 @@
 							}
 						],
 						"recipe": {
-
+							"radius": 110.0
 						},
 						"summary": "命中预估（未计敌方防御）：每次命中 77.40",
 						"supports": []
+					},
+					{
+						"cooldown": 8.0,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 110.00 → 132.00；面积 ×1.44，半径 ×1.20（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：火焰 65.79\n固有：火焰 77.40；附加：无；附加效用 4.30",
+						"initial_count": 0,
+						"mana": 38.4,
+						"packets": [
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"fire": 49.342499999999994
+									},
+									"details": [
+										{
+											"base": 77.39999999999999,
+											"before_defense": 65.78999999999999,
+											"final": 49.342499999999994,
+											"increased": 0.0,
+											"modifiers": [
+												"support:breadth"
+											],
+											"more": 0.85,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"total": 49.342499999999994
+								},
+								"known_target_settlement": {
+									"components": {
+										"fire": 49.342499999999994
+									},
+									"damage_total": 49.342499999999994,
+									"details": [
+										{
+											"base": 77.39999999999999,
+											"before_defense": 65.78999999999999,
+											"final": 49.342499999999994,
+											"increased": 0.0,
+											"modifiers": [
+												"support:breadth"
+											],
+											"more": 0.85,
+											"resistance": 0.25,
+											"type": "fire"
+										}
+									],
+									"health_lost": 49.342499999999994,
+									"mitigated_components": {
+										"fire": 16.447499999999998
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"fire": 65.78999999999999
+									},
+									"reason": "",
+									"remaining_health": 264.1575,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "每次命中",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 4.3,
+										"base_coefficient": 4.3,
+										"intrinsic": {
+											"fire": 77.39999999999999
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 77.39999999999999
+									},
+									"role": "direct",
+									"skill_id": "meteor",
+									"tags": [
+										"hit",
+										"spell",
+										"area"
+									]
+								},
+								"resolved": {
+									"components": {
+										"fire": 65.78999999999999
+									},
+									"details": [
+										{
+											"base": 77.39999999999999,
+											"before_defense": 65.78999999999999,
+											"final": 65.78999999999999,
+											"increased": 0.0,
+											"modifiers": [
+												"support:breadth"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 65.78999999999999
+								}
+							}
+						],
+						"recipe": {
+							"area_multiplier": 1.44,
+							"base_radius": 110.0,
+							"radius": 132.0
+						},
+						"summary": "命中预估（未计敌方防御）：每次命中 65.79",
+						"supports": [
+							"breadth"
+						]
 					}
 				]
 			},
@@ -26430,18 +27257,23 @@
 			"short_name": "陨星"
 		},
 		"nova": {
+			"area_recipe": {
+				"radius": 155.0
+			},
 			"capabilities": [
 				"area_hit"
 			],
 			"color": "#c89bff",
-			"compatible_supports": [],
+			"compatible_supports": [
+				"breadth"
+			],
 			"cooldown": 6.0,
 			"description": "引爆周围 155 范围的奥能，造成 270% 伤害并击退。",
 			"examples": {
 				"fresh": [
 					{
 						"cooldown": 6.0,
-						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每次命中：闪电 70.20\n固有：闪电 70.20；附加：无；附加效用 2.70",
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 155.00 → 155.00；面积 ×1.00，半径 ×1.00（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：闪电 70.20\n固有：闪电 70.20；附加：无；附加效用 2.70",
 						"initial_count": 0,
 						"mana": 24.0,
 						"packets": [
@@ -26541,16 +27373,133 @@
 							}
 						],
 						"recipe": {
-
+							"radius": 155.0
 						},
 						"summary": "命中预估（未计敌方防御）：每次命中 70.20",
 						"supports": []
+					},
+					{
+						"cooldown": 6.0,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 155.00 → 186.00；面积 ×1.44，半径 ×1.20（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：闪电 59.67\n固有：闪电 70.20；附加：无；附加效用 2.70",
+						"initial_count": 0,
+						"mana": 28.799999999999997,
+						"packets": [
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"lightning": 59.67
+									},
+									"details": [
+										{
+											"base": 70.2,
+											"before_defense": 59.67,
+											"final": 59.67,
+											"increased": 0.0,
+											"modifiers": [
+												"support:breadth"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 59.67
+								},
+								"known_target_settlement": {
+									"components": {
+										"lightning": 59.67
+									},
+									"damage_total": 59.67,
+									"details": [
+										{
+											"base": 70.2,
+											"before_defense": 59.67,
+											"final": 59.67,
+											"increased": 0.0,
+											"modifiers": [
+												"support:breadth"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"health_lost": 59.67,
+									"mitigated_components": {
+										"lightning": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"lightning": 59.67
+									},
+									"reason": "",
+									"remaining_health": 253.82999999999998,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "每次命中",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 2.7,
+										"base_coefficient": 2.7,
+										"intrinsic": {
+											"lightning": 70.2
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"lightning": 70.2
+									},
+									"role": "direct",
+									"skill_id": "nova",
+									"tags": [
+										"hit",
+										"spell",
+										"area"
+									]
+								},
+								"resolved": {
+									"components": {
+										"lightning": 59.67
+									},
+									"details": [
+										{
+											"base": 70.2,
+											"before_defense": 59.67,
+											"final": 59.67,
+											"increased": 0.0,
+											"modifiers": [
+												"support:breadth"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 59.67
+								}
+							}
+						],
+						"recipe": {
+							"area_multiplier": 1.44,
+							"base_radius": 155.0,
+							"radius": 186.0
+						},
+						"summary": "命中预估（未计敌方防御）：每次命中 59.67",
+						"supports": [
+							"breadth"
+						]
 					}
 				],
 				"full_tornado": [
 					{
 						"cooldown": 6.0,
-						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每次命中：闪电 89.10\n固有：闪电 59.40；附加：无；附加效用 2.70",
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 155.00 → 155.00；面积 ×1.00，半径 ×1.00（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：闪电 89.10\n固有：闪电 59.40；附加：无；附加效用 2.70",
 						"initial_count": 0,
 						"mana": 24.0,
 						"packets": [
@@ -26659,16 +27608,139 @@
 							}
 						],
 						"recipe": {
-
+							"radius": 155.0
 						},
 						"summary": "命中预估（未计敌方防御）：每次命中 89.10",
 						"supports": []
+					},
+					{
+						"cooldown": 6.0,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 155.00 → 186.00；面积 ×1.44，半径 ×1.20（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：闪电 75.73\n固有：闪电 59.40；附加：无；附加效用 2.70",
+						"initial_count": 0,
+						"mana": 28.799999999999997,
+						"packets": [
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"lightning": 75.735
+									},
+									"details": [
+										{
+											"base": 59.400000000000006,
+											"before_defense": 75.735,
+											"final": 75.735,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased",
+												"support:breadth"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 75.735
+								},
+								"known_target_settlement": {
+									"components": {
+										"lightning": 75.735
+									},
+									"damage_total": 75.735,
+									"details": [
+										{
+											"base": 59.400000000000006,
+											"before_defense": 75.735,
+											"final": 75.735,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased",
+												"support:breadth"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"health_lost": 75.735,
+									"mitigated_components": {
+										"lightning": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"lightning": 75.735
+									},
+									"reason": "",
+									"remaining_health": 237.765,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "每次命中",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 2.7,
+										"base_coefficient": 2.7,
+										"intrinsic": {
+											"lightning": 59.400000000000006
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"lightning": 59.400000000000006
+									},
+									"role": "direct",
+									"skill_id": "nova",
+									"tags": [
+										"hit",
+										"spell",
+										"area"
+									]
+								},
+								"resolved": {
+									"components": {
+										"lightning": 75.735
+									},
+									"details": [
+										{
+											"base": 59.400000000000006,
+											"before_defense": 75.735,
+											"final": 75.735,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased",
+												"support:breadth"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 75.735
+								}
+							}
+						],
+						"recipe": {
+							"area_multiplier": 1.44,
+							"base_radius": 155.0,
+							"radius": 186.0
+						},
+						"summary": "命中预估（未计敌方防御）：每次命中 75.73",
+						"supports": [
+							"breadth"
+						]
 					}
 				],
 				"local_max": [
 					{
 						"cooldown": 6.0,
-						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每次命中：闪电 48.60\n固有：闪电 48.60；附加：无；附加效用 2.70",
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 155.00 → 155.00；面积 ×1.00，半径 ×1.00（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：闪电 48.60\n固有：闪电 48.60；附加：无；附加效用 2.70",
 						"initial_count": 0,
 						"mana": 24.0,
 						"packets": [
@@ -26768,16 +27840,133 @@
 							}
 						],
 						"recipe": {
-
+							"radius": 155.0
 						},
 						"summary": "命中预估（未计敌方防御）：每次命中 48.60",
 						"supports": []
+					},
+					{
+						"cooldown": 6.0,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 155.00 → 186.00；面积 ×1.44，半径 ×1.20（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：闪电 41.31\n固有：闪电 48.60；附加：无；附加效用 2.70",
+						"initial_count": 0,
+						"mana": 28.799999999999997,
+						"packets": [
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"lightning": 41.31
+									},
+									"details": [
+										{
+											"base": 48.6,
+											"before_defense": 41.31,
+											"final": 41.31,
+											"increased": 0.0,
+											"modifiers": [
+												"support:breadth"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 41.31
+								},
+								"known_target_settlement": {
+									"components": {
+										"lightning": 41.31
+									},
+									"damage_total": 41.31,
+									"details": [
+										{
+											"base": 48.6,
+											"before_defense": 41.31,
+											"final": 41.31,
+											"increased": 0.0,
+											"modifiers": [
+												"support:breadth"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"health_lost": 41.31,
+									"mitigated_components": {
+										"lightning": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"lightning": 41.31
+									},
+									"reason": "",
+									"remaining_health": 272.19,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "每次命中",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 2.7,
+										"base_coefficient": 2.7,
+										"intrinsic": {
+											"lightning": 48.6
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"lightning": 48.6
+									},
+									"role": "direct",
+									"skill_id": "nova",
+									"tags": [
+										"hit",
+										"spell",
+										"area"
+									]
+								},
+								"resolved": {
+									"components": {
+										"lightning": 41.31
+									},
+									"details": [
+										{
+											"base": 48.6,
+											"before_defense": 41.31,
+											"final": 41.31,
+											"increased": 0.0,
+											"modifiers": [
+												"support:breadth"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 41.31
+								}
+							}
+						],
+						"recipe": {
+							"area_multiplier": 1.44,
+							"base_radius": 155.0,
+							"radius": 186.0
+						},
+						"summary": "命中预估（未计敌方防御）：每次命中 41.31",
+						"supports": [
+							"breadth"
+						]
 					}
 				],
 				"local_normal": [
 					{
 						"cooldown": 6.0,
-						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n每次命中：闪电 48.60\n固有：闪电 48.60；附加：无；附加效用 2.70",
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 155.00 → 155.00；面积 ×1.00，半径 ×1.00（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：闪电 48.60\n固有：闪电 48.60；附加：无；附加效用 2.70",
 						"initial_count": 0,
 						"mana": 24.0,
 						"packets": [
@@ -26877,10 +28066,127 @@
 							}
 						],
 						"recipe": {
-
+							"radius": 155.0
 						},
 						"summary": "命中预估（未计敌方防御）：每次命中 48.60",
 						"supports": []
+					},
+					{
+						"cooldown": 6.0,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 155.00 → 186.00；面积 ×1.44，半径 ×1.20（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：闪电 41.31\n固有：闪电 48.60；附加：无；附加效用 2.70",
+						"initial_count": 0,
+						"mana": 28.799999999999997,
+						"packets": [
+							{
+								"active": true,
+								"known_target_resolved": {
+									"components": {
+										"lightning": 41.31
+									},
+									"details": [
+										{
+											"base": 48.6,
+											"before_defense": 41.31,
+											"final": 41.31,
+											"increased": 0.0,
+											"modifiers": [
+												"support:breadth"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 41.31
+								},
+								"known_target_settlement": {
+									"components": {
+										"lightning": 41.31
+									},
+									"damage_total": 41.31,
+									"details": [
+										{
+											"base": 48.6,
+											"before_defense": 41.31,
+											"final": 41.31,
+											"increased": 0.0,
+											"modifiers": [
+												"support:breadth"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"health_lost": 41.31,
+									"mitigated_components": {
+										"lightning": 0.0
+									},
+									"ok": true,
+									"overkill": 0.0,
+									"raw_components": {
+										"lightning": 41.31
+									},
+									"reason": "",
+									"remaining_health": 272.19,
+									"remaining_shield": 0.0,
+									"shield_spent": 0.0
+								},
+								"label": "每次命中",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 2.7,
+										"base_coefficient": 2.7,
+										"intrinsic": {
+											"lightning": 48.6
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"lightning": 48.6
+									},
+									"role": "direct",
+									"skill_id": "nova",
+									"tags": [
+										"hit",
+										"spell",
+										"area"
+									]
+								},
+								"resolved": {
+									"components": {
+										"lightning": 41.31
+									},
+									"details": [
+										{
+											"base": 48.6,
+											"before_defense": 41.31,
+											"final": 41.31,
+											"increased": 0.0,
+											"modifiers": [
+												"support:breadth"
+											],
+											"more": 0.85,
+											"resistance": 0.0,
+											"type": "lightning"
+										}
+									],
+									"total": 41.31
+								}
+							}
+						],
+						"recipe": {
+							"area_multiplier": 1.44,
+							"base_radius": 155.0,
+							"radius": 186.0
+						},
+						"summary": "命中预估（未计敌方防御）：每次命中 41.31",
+						"supports": [
+							"breadth"
+						]
 					}
 				]
 			},
@@ -37062,6 +38368,31 @@
 		}
 	},
 	"supports": {
+		"breadth": {
+			"description": "新星与陨星：面积 ×1.44（半径 ×1.20），命中伤害总降 15%，魔力 ×1.20；冷却不变。",
+			"name": "广域辅助",
+			"operations": [
+				{
+					"op": "area_multiplier",
+					"value": 1.44
+				},
+				{
+					"op": "area_hit_more",
+					"value": -0.15
+				},
+				{
+					"op": "mana_multiplier",
+					"value": 1.2
+				}
+			],
+			"requires": [
+				"area_hit"
+			],
+			"skills": [
+				"nova",
+				"meteor"
+			]
+		},
 		"focus": {
 			"description": "投射物命中伤害总增 25%；魔力消耗 ×1.20。不影响独立爆炸。",
 			"name": "凝束辅助",

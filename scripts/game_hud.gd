@@ -658,7 +658,7 @@ func _build_talents_panel() -> void:
 
 func _build_skills_panel() -> void:
 	_panel_title.text = "技能组合 · 辅助"
-	_panel_subtitle.text = "每个技能独立保存两个辅助槽 / 龙卷、飞弹、冰霜可用"
+	_panel_subtitle.text = "每个技能独立保存两个辅助槽 / 可用技能依辅助而定"
 	if _selected_support_skill_id.is_empty() and _selected_skill_slot < _state.skill_slots.size():
 		_selected_support_skill_id = _state.skill_slots[_selected_skill_slot]
 	var selected_position: int = _state.skill_slots.find(_selected_support_skill_id)

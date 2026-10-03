@@ -202,7 +202,7 @@ func _schema_and_capacity() -> void:
 	_expect(state.equip(id) and not state.crafting_quote("salvage",id).ok and not state.crafting_quote("recalibrate",id).ok, "Worn gear cannot be consumed or recalibrated")
 	_expect(state.unequip(state.get_item_definition(id).slot), "Return eligible item to backpack")
 	var valid: Dictionary = state._snapshot()
-	_expect(valid.size() == 17 and Model.SAVE_VERSION == 11 and not state._validate_snapshot(valid).is_empty(), "Exactly one versioned crafting field extends the save")
+	_expect(valid.size() == 17 and Model.SAVE_VERSION == 12 and not state._validate_snapshot(valid).is_empty(), "Exactly one versioned crafting field extends the save")
 	for invalid: Variant in [-1, 0.5, true, "2", Model.MAX_CRAFT_MATERIALS+1, INF, NAN]:
 		var bad: Dictionary = valid.duplicate(true)
 		bad.crafting.materials.calibration_shard = invalid

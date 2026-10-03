@@ -80,7 +80,7 @@ func setup(state: BuildState) -> void:
 		add.pressed.connect(_add_support.bind(support_id))
 		row.add_child(add)
 		_add_buttons[support_id] = add
-	add_child(_label("辅助全部可用，同一技能不重复装配；只影响投射物击中。辅助随技能保存，交换快捷栏位置不改变配置或已有冷却。", "SupportRules", 13, MUTED))
+	add_child(_label("辅助全部可用，同一技能不重复装配；按技能兼容范围生效。辅助随技能保存，交换快捷栏位置不改变配置或已有冷却。", "SupportRules", 13, MUTED))
 
 
 func select_skill(skill_id: String) -> void:
@@ -103,7 +103,10 @@ func refresh() -> void:
 	var valid: bool = bool(cast.get("ok", false))
 	if valid:
 		var count: int = int(cast.get("initial_count", 0))
-		_preview_label.text = "当前施放：%.2f 法力  ·  %.2f 秒冷却  ·  初始投射物 %d 枚" % [float(cast.get("mana", 0.0)), float(cast.get("cooldown", 0.0)), count]
+		var geometry: String = "初始投射物 %d 枚" % count
+		if selected_skill_id in ["nova", "meteor"]:
+			geometry = "半径 %.0f · 面积 ×%.2f" % [float(cast.recipe.radius), float(cast.recipe.get("area_multiplier", 1.0))]
+		_preview_label.text = "当前施放：%.2f 法力  ·  %.2f 秒冷却  ·  %s" % [float(cast.get("mana", 0.0)), float(cast.get("cooldown", 0.0)), geometry]
 		_preview_label.text += "\n" + TypedPreview.summary(cast)
 		_preview_label.tooltip_text = TypedPreview.details(cast)
 		_preview_label.add_theme_color_override("font_color", CYAN)

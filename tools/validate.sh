@@ -86,6 +86,9 @@ run_check --script res://tests/save_guard_integration_test.gd
 run_check --script res://tests/progress_batch_test.gd
 run_check --script res://tests/equipment_state_test.gd
 run_check --script res://tests/equipment_integration_test.gd
+run_check --script res://tests/area_support_test.gd
+run_check --script res://tests/area_support_integration_test.gd
+run_check --script res://tests/area_support_ui_test.gd
 run_check --script res://tests/skill_compiler_test.gd
 run_check --script res://tests/skill_support_state_test.gd
 run_check --script res://tests/skill_support_integration_test.gd
@@ -128,4 +131,4 @@ run_check --script res://tests/grimoire_ui_test.gd
 run_check --script res://tests/equipment_painterly_art_test.gd
 python3 "$PROJECT_DIR/tests/reference_catalog_test.py"
 run_check --quit-after 300
-echo "Validation passed: import, immutable equipment pools/RNG, scoped local weapon damage and independent balance replay, shared fire defense and natural encounter, transaction-bounded progress flush/exact saved-byte equivalence, schema11 durable crafting/issued quotes/failure recovery, schema10 support vocabulary/schema9 equipment compatibility/byte-exact backups/protected saves/special passive grants/offline reference data and launch wiring, typed hit bases and previews, compiled supports/cast/UI, wide native camera/100 real enemies/spatial-reference equivalence, fantasy artwork/materials and bounded visual cues, build/save model, passive/jewel/balance invariants, shared mechanisms, monster lifecycle/scene, projectile/damage pipeline, combat/UI integration, and 300-frame startup."
+echo "Validation passed: import, immutable equipment pools/RNG, scoped local weapon damage and independent balance replay, shared fire defense and natural encounter, transaction-bounded progress flush/exact saved-byte equivalence, schema12 area support vocabulary/byte-exact v11 migration, durable crafting/issued quotes/failure recovery, schema10 support vocabulary/schema9 equipment compatibility/byte-exact backups/protected saves/special passive grants/offline reference data and launch wiring, typed hit bases and previews, compiled supports/cast/UI, wide native camera/100 real enemies/spatial-reference equivalence, fantasy artwork/materials and bounded visual cues, build/save model, passive/jewel/balance invariants, shared mechanisms, monster lifecycle/scene, projectile/damage pipeline, combat/UI integration, and 300-frame startup."

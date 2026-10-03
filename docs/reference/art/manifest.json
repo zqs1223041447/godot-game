@@ -7,10 +7,10 @@
 	"transparent_background": true,
 	"file_paths_relative_to": "manifest.json directory",
 	"status": "complete",
-	"written_images": 40,
+	"written_images": 41,
 	"counts": {
 		"skills": 8,
-		"supports": 3,
+		"supports": 4,
 		"equipment": 18,
 		"jewels": 4,
 		"monsters": 7
@@ -87,6 +87,15 @@
 			"source_renderer": "SkillEmblem._draw",
 			"source_catalog": "GameData.SKILLS",
 			"entry_type": "active_skill"
+		},
+		{
+			"category": "supports",
+			"id": "breadth",
+			"name": "广域辅助",
+			"file": "supports/breadth.png",
+			"source_renderer": "SkillEmblem._draw",
+			"source_catalog": "SupportRegistry.SUPPORTS",
+			"entry_type": "support"
 		},
 		{
 			"category": "supports",

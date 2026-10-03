@@ -5,6 +5,7 @@ const Data = preload("res://scripts/game_data.gd")
 const Recipes = preload("res://scripts/combat/combat_data.gd")
 const Supports = preload("res://scripts/combat/support_registry.gd")
 const Extension = preload("res://scripts/combat/projectile_support_rules.gd")
+const Area = preload("res://scripts/combat/area_support_rules.gd")
 const BaseCompiler = preload("res://scripts/combat/damage_base_compiler.gd")
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
 const Weapon = preload("res://scripts/items/weapon_local_rules.gd")
@@ -51,6 +52,8 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 	var has_extension: bool = false
 	# Compatibility validates every definition before this execution stage.
 	for id: String in canonical:
+		if Area.SUPPORTS.has(id):
+			continue
 		if Extension.SUPPORTS.has(id):
 			has_extension = true
 			continue
@@ -69,7 +72,7 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 					mana *= float(operation.value)
 				_:
 					return _failure("辅助操作未受支持")
-	if not recipe.is_empty():
+	if skill.capabilities.has("initial_projectiles"):
 		initial_count = clampi(initial_count, 1, MAX_INITIAL_PROJECTILES)
 		recipe.initial_count = initial_count
 		compiled_snapshot.initial_count = initial_count
@@ -80,6 +83,13 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 		recipe = extension.recipe
 		compiled_snapshot.modifiers.append_array(extension.modifiers)
 		mana *= float(extension.mana_multiplier)
+	if skill_id in Area.RECIPE_SKILLS:
+		var area: Dictionary = Area.compile_area(skill_id, skill.get("area_recipe"), canonical)
+		if not area.error.is_empty():
+			return _failure(area.error)
+		recipe = area.recipe
+		compiled_snapshot.modifiers.append_array(area.modifiers)
+		mana *= float(area.mana_multiplier)
 	if not is_finite(mana):
 		return _failure("编译后的魔力消耗无效")
 	var packets: Dictionary = _compile_packets(skill_id, compiled_snapshot)

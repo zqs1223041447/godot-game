@@ -33,6 +33,7 @@ const SKILLS: Dictionary = {
 		"description": "引爆周围 155 范围的奥能，造成 270% 伤害并击退。", "mana": 24.0,
 		"cooldown": 6.0, "color": Color("c89bff"),
 		"capabilities": ["area_hit"],
+		"area_recipe": {"radius": 155.0},
 		"hit_recipe": {"base_coefficient": 2.7, "added_effectiveness": 2.7, "damage_type": "lightning"},
 	},
 	"dash": {
@@ -52,6 +53,7 @@ const SKILLS: Dictionary = {
 		"description": "在最近敌人处引爆陨星，造成 430% 范围伤害。", "mana": 32.0,
 		"cooldown": 8.0, "color": Color("ff9778"),
 		"capabilities": ["area_hit"],
+		"area_recipe": {"radius": 110.0},
 		"hit_recipe": {"base_coefficient": 4.3, "added_effectiveness": 4.3, "damage_type": "fire"},
 	},
 	"chain": {

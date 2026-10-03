@@ -3,6 +3,7 @@ extends SceneTree
 const Data = preload("res://scripts/game_data.gd")
 const Build = preload("res://scripts/build_state.gd")
 const Equipment = preload("res://scripts/items/equipment_catalog.gd")
+const AreaRules = preload("res://scripts/combat/area_support_rules.gd")
 const Supports = preload("res://scripts/combat/support_registry.gd")
 const Compiler = preload("res://scripts/combat/skill_compiler.gd")
 const Preview = preload("res://scripts/combat/damage_preview.gd")
@@ -56,6 +57,7 @@ static func collect() -> Dictionary:
 		"effects": Recipes.EFFECTS, "tornado_recipe": Recipes.TORNADO,
 		"limits": {"max_supports": Supports.MAX_SUPPORTS, "initial_projectiles": Compiler.MAX_INITIAL_PROJECTILES,
 			"min_item_level": Equipment.MIN_ITEM_LEVEL, "max_item_level": Equipment.MAX_ITEM_LEVEL}}
+	result["area_support_examples"] = area_examples()
 	result["projectile_support_examples"] = piercing_examples()
 	result["crafting"] = crafting_examples()
 	result["monster_attacks"] = telegraph_examples()
@@ -480,3 +482,36 @@ static func clean(value: Variant) -> Variant:
 	if value is Color:
 		return "#" + value.to_html(false)
 	return value
+
+## Values use the same compiler, circle test and hit resolver as the actual scene.
+## These are fixed layouts, not a claim of target density or total DPS.
+static func area_examples() -> Dictionary:
+	var build := Build.new()
+	var enemy: Dictionary = Monsters.make_enemy(1, "crawler", 1, Vector2.ZERO, "demo")
+	var result: Dictionary = {"source": "SkillCompiler + AreaSupportRules.contains_target + DamageResolver",
+		"mechanism_reference": {"title": "GGG 2.6.0 Area of Effect Changes", "date": "2017-02-26",
+			"url": "https://www.pathofexile.com/forum/view-thread/1838713/filter-account-type/staff",
+			"scope": "Historical area/radius distinction only; all support values are original game balance."},
+		"target_radius": enemy.radius, "skills": {}}
+	for skill_id: String in ["nova", "meteor"]:
+		var row: Dictionary = {}
+		var base_radius: float = Data.SKILLS[skill_id].area_recipe.radius
+		for wide: bool in [false, true]:
+			var cast: Dictionary = Compiler.compile_skill(skill_id, build.get_combat_snapshot(), ["breadth"] if wide else [])
+			assert(cast.ok)
+			var damage: Dictionary = Damage.resolve(cast.packets.direct, cast.snapshot.modifiers)
+			var layouts: Dictionary = {}
+			for layout: String in ["single", "cluster", "outer_band"]:
+				var points: Array[Vector2] = [Vector2.ZERO]
+				if layout != "single":
+					for i: int in range(1, 5):
+						var distance: float = base_radius * 0.55 if layout == "cluster" else base_radius * 1.15 + 12.0
+						points.append(Vector2.RIGHT.rotated(i * TAU / 4.0) * distance)
+				var hits: Array[int] = []
+				for i: int in points.size():
+					if AreaRules.contains_target(Vector2.ZERO, points[i], cast.recipe.radius, enemy.radius): hits.append(i)
+				layouts[layout] = {"points": points, "hit_indices": hits, "total_before_defense": damage.total * hits.size()}
+			row["wide" if wide else "base"] = {"radius": cast.recipe.radius, "area_multiplier": cast.recipe.get("area_multiplier", 1.0),
+				"mana": cast.mana, "cooldown": cast.cooldown, "hit_damage": damage.total, "layouts": layouts}
+		result.skills[skill_id] = row
+	return result

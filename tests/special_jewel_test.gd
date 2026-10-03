@@ -320,7 +320,7 @@ func _schema_roundtrip_and_legacy() -> void:
 	state.set_skill_supports("tornado", ["volley", "focus"])
 	var before: Dictionary = state._snapshot()
 	var path: String = "user://special_jewel_v7.json"
-	_expect(Model.SAVE_VERSION == 11 and before.size() == 17 and state.save_build(path) == OK, "Current schema retains the 17-field save shape")
+	_expect(Model.SAVE_VERSION == 12 and before.size() == 17 and state.save_build(path) == OK, "Current schema retains the 17-field save shape")
 	for iteration: int in range(3):
 		var restored := Model.new()
 		restored.changed.connect(_changed)

@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REF = ROOT / 'docs/reference'
 CATEGORIES = [('skills','主动技能'),('supports','辅助技能'),('equipment','随机装备'),('affixes','装备词缀'),('fixed_items','固定装备'),('jewels','珠宝'),('jewel_affixes','珠宝词缀'),('passives','天赋星图'),('mechanisms','共用机制'),('weapon_stages','武器局部阶段'),('defenses','受击与防御'),('crafting','制作与回收'),('monsters','怪物图鉴'),('monster_attacks','怪物攻击'),('encounters','本轮挑战'),('rules','规则与边界')]
 RULE_TITLES = {'damage':'伤害如何结算','supports':'辅助装配','projectiles':'分裂、返回与飞行结束','equipment':'装备与阶级','character_rates':'恢复、移动与普通攻击速度','basic_attack':'普通攻击与武器贡献','allocation':'天赋与珠宝规则','shared':'玩家和怪物共享机制','boundaries':'尚未实现的源游戏语义','sources':'数据来源与实现边界'}
-CAPABILITIES = {'initial_projectiles':'初始投射物数量','projectile_hit':'投射物命中','finite_projectile_pierce':'有限穿透'}
+CAPABILITIES = {'initial_projectiles':'初始投射物数量','projectile_hit':'投射物命中','finite_projectile_pierce':'有限穿透','area_hit':'直接范围命中'}
 SLOTS = {'weapon':'武器','armor':'护甲','charm':'护符'}
 TYPES = {'small':'小天赋','notable':'显著天赋','socket':'珠宝孔','start':'起点','prefix':'前缀','suffix':'后缀','ordinary':'普通珠宝','special':'特殊珠宝','legacy':'原始词池','expansion':'扩展词池','runewood':'符木点伤池','defense':'火抗防具池','local_weapon':'白蜡长弓池'}
 
@@ -26,6 +26,25 @@ DAMAGE_NAMES = {'physical':'物理','fire':'火焰','cold':'冰霜','lightning':
 def component_text(components):
     return ' + '.join(f'{DAMAGE_NAMES[k]} {number(v)}' for k,v in ((key,components.get(key,0)) for key in DAMAGE_NAMES) if v) or '无'
 def percent(value): return number(value*100)+'%'
+def area_diagram(examples, skills):
+    body = '<p>几何面积 ×1.44，半径取平方根后 ×1.20。数值为本游戏初版平衡；此辅助只适配新星与陨星直接命中，不改变独立爆炸、投射物或敌方攻击。</p>'
+    for skill_id, row in examples['skills'].items():
+        base, wide = row['base'], row['wide']
+        scale = 90 / wide['radius']
+        drawing = f'<circle cx="120" cy="110" r="90" fill="#dfc08d" fill-opacity="0.28" stroke="#79571f" stroke-width="2" data-area-radius="{skill_id}-wide" data-value="{wide["radius"]}"/>'
+        drawing += f'<circle cx="120" cy="110" r="{base["radius"]*scale}" fill="none" stroke="#69523a" stroke-dasharray="5 4" data-area-radius="{skill_id}-base" data-value="{base["radius"]}"/>'
+        drawing += f'<text x="235" y="88" fill="#3b281b">半径 {number(base["radius"])} → {number(wide["radius"])}</text><text x="235" y="117" fill="#3b281b">单次命中 {number(base["hit_damage"])} → {number(wide["hit_damage"])}</text><text x="235" y="146" fill="#3b281b">魔力 {number(base["mana"])} → {number(wide["mana"])}</text>'
+        body += f'<figure><svg viewBox="0 0 520 220" role="img" aria-label="{esc(skills[skill_id]["name"])}范围与代价对比">{drawing}</svg><figcaption>{esc(skills[skill_id]["name"])}：虚线为原半径，实线为广域半径；目标体型也参与命中边界。</figcaption></figure>'
+        rows = ''
+        for layout, label in [('single','单个中心目标'),('cluster','五个原范围内目标'),('outer_band','中心一只、外侧四只')]:
+            before, after = base['layouts'][layout], wide['layouts'][layout]
+            rows += f'<tr><th>{label}</th><td>{len(before["hit_indices"])} → {len(after["hit_indices"])}</td><td>{number(before["total_before_defense"])} → {number(after["total_before_defense"])}</td></tr>'
+        body += '<div class="table-scroll"><table><thead><tr><th>固定站位示例</th><th>覆盖目标数</th><th>该次命中合计 · 防御前</th></tr></thead><tbody>'+rows+'</tbody></table></div>'
+    ref=examples['mechanism_reference']
+    body += '<p>面积扩大不保证多命中敌人；原本已覆盖的目标承受更低单击，耗魔仍增加。这些固定站位只说明取舍，不是总 DPS。</p>'
+    body += '<p>机制背景：<a href="'+esc(ref['url'])+'">'+esc(ref['title'])+'</a>（'+esc(ref['date'])+'，GGG 历史版本说明）。仅参考面积与半径的区分，不宣称复刻当前 PoE 宝石数值、取整或完整范围引擎。</p>'
+    return body
+
 def piercing_diagram(examples, skills):
     content = '<p>同一直线六个固定目标，仅发射单枚载体；圆点是否点亮由真实碰撞事件导出。去返共用剩余穿透，命中上限不是保证命中数。</p>'
     for skill_id, pair in examples['skills'].items():
@@ -133,7 +152,8 @@ def build(data, art):
                 body+='<p>'+esc(cfg['weapon_definition']['weapon_damage_summary'])+'</p>'+details('实例与合法掷值',lines('\n'.join(cfg['weapon_definition']['affix_lines'])) or '<p>普通底材，无词缀。</p>')
             for example in examples:
                 body += '<div class="example"><h4>'+('无辅助' if not example['supports'] else links('supports',example['supports']))+'</h4>'
-                body += facts([('消耗',f'{number(example["mana"])} 魔力'),('冷却',f'{number(example["cooldown"])} 秒'),('初始投射物',number(example['initial_count']))])
+                geometry = [('半径',number(example['recipe']['radius'])),('面积倍率',number(example['recipe'].get('area_multiplier',1.0)))] if 'area_hit' in s['capabilities'] else [('初始投射物',number(example['initial_count']))]
+                body += facts([('消耗',f'{number(example["mana"])} 魔力'),('冷却',f'{number(example["cooldown"])} 秒')]+geometry)
                 body += '<p>'+esc(example['summary'])+'</p>'+details('分量与组装过程', '<p>'+lines(example['details'])+'</p>')
                 target=data['known_target']
                 defended_rows=''.join(f'<tr><th scope="row">{esc(p["label"])}</th><td>{number(p["resolved"]["total"])}</td><td>{number(p["known_target_resolved"]["total"])}</td><td>{number(p["known_target_settlement"]["health_lost"])}</td></tr>' for p in example['packets'] if p['active'])
@@ -152,7 +172,9 @@ def build(data, art):
         body = facts([('可装配技能',links('skills',eligible)),('能力要求',esc(' / '.join(CAPABILITIES.get(c,c) for c in s['requires']))),('规则来源','本游戏原创；运行版本 '+esc(data['game_version']))])
         if key == 'pierce':
             body += piercing_diagram(data['projectile_support_examples'],data['skills'])
-        cards.append(add('supports',key,s['name'],s['description'],body,'投射物辅助',related=link('rules','supports')))
+        if key == 'breadth':
+            body += area_diagram(data['area_support_examples'],data['skills'])
+        cards.append(add('supports',key,s['name'],s['description'],body,'范围辅助' if key == 'breadth' else '投射物辅助',related=link('rules','supports')))
     for key,e in data['equipment'].items():
         body = facts([('格数',' × '.join(map(number,e['size']))),('固有属性',lines(e['stats_text']))])+details('可出现的词缀',links('affixes',e['eligible_affixes']))
         related=link('rules','equipment')

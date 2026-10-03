@@ -157,7 +157,7 @@ func _roundtrip_and_awards() -> void:
 	_expect(id == "gear_000001" and state.equipment_instances[id] == expected and rng.state == mirror.state and changes == 1, "Explicit local award creates one canonical item with exact pool RNG and one signal")
 	_expect(state.next_equipment_id == 2 and state.equipped.weapon == "ember_wand" and state.equip(id), "Award consumes one serial without auto-equipping")
 	var snapshot: Dictionary = state._snapshot()
-	_expect(Model.SAVE_VERSION == 11 and snapshot.size() == 17 and snapshot.equipment_instances[id].size() == 5, "Current schema preserves exact seventeen-field save and five-field item encoding")
+	_expect(Model.SAVE_VERSION == 12 and snapshot.size() == 17 and snapshot.equipment_instances[id].size() == 5, "Current schema preserves exact seventeen-field save and five-field item encoding")
 	var path: String = "user://local_v9.json"
 	_expect(state.save_build(path) == OK, "New local weapon saves")
 	var restored := Model.new()

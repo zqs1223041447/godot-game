@@ -56,6 +56,9 @@ static func details(cast: Dictionary) -> String:
 	if cast.get("recipe", {}).has("_projectile_support_ids"):
 		var pierce: int = int(cast.recipe.pierce)
 		lines.append("每枚投射物穿透 %d 次，最多命中 %d 次；去返共享剩余次数，同相位同目标至多命中一次。" % [pierce, pierce + 1])
+	if cast.skill_id in ["nova", "meteor"] and cast.recipe.has("radius"):
+		var base_radius: float = float(cast.recipe.get("base_radius", cast.recipe.radius))
+		lines.append("圆形范围：半径 %.2f → %.2f；面积 ×%.2f，半径 ×%.2f（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。" % [base_radius, float(cast.recipe.radius), float(cast.recipe.get("area_multiplier", 1.0)), float(cast.recipe.radius) / base_radius])
 	for entry: Dictionary in entries(cast):
 		var packet: Dictionary = entry.packet
 		var resolved: Dictionary = Damage.resolve(packet, cast.snapshot.modifiers)
