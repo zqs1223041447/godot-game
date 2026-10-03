@@ -8,6 +8,8 @@ const OVERLAY_TALENTS: String = "talents"
 const OVERLAY_PAUSE: String = "pause"
 const OVERLAY_SETTINGS: String = "settings"
 const OVERLAY_DEATH: String = "death"
+const OVERLAY_COMBAT: String = "combat"
+const OVERLAY_MONSTERS: String = "monsters"
 
 var _left: String = ""
 var _right_inventory: bool = false
@@ -19,7 +21,8 @@ var _death_latched: bool = false
 
 
 ## Toggle a named dock or request one of the exclusive overlays.
-## Supported requests: inventory, skills, character, talents, pause, settings, death.
+## Supported requests: inventory, skills, character, talents, pause, settings,
+## death, combat, monsters.
 ## skills and character occupy the same left dock; requesting the active one closes it.
 func request(name: String) -> Dictionary:
 	var action: String = name.strip_edges().to_lower()
@@ -64,6 +67,10 @@ func request(name: String) -> Dictionary:
 			var changed: bool = _overlay != action
 			_overlay = action
 			return _result(true, changed)
+		"combat", "monsters":
+			var debug_changed: bool = _overlay != action
+			_overlay = action
+			return _result(true, debug_changed)
 		_:
 			return _result(false, false)
 
@@ -73,7 +80,7 @@ func request(name: String) -> Dictionary:
 func handle_key(key: String, echo: bool = false) -> Dictionary:
 	var normalized: String = key.strip_edges().to_lower()
 	if echo:
-		return _result(normalized in ["i", "b", "k", "t", "escape", "esc"], false)
+		return _result(normalized in ["i", "b", "k", "t", "f6", "f7", "escape", "esc"], false)
 
 	match normalized:
 		"i", "b":
@@ -82,6 +89,10 @@ func handle_key(key: String, echo: bool = false) -> Dictionary:
 			return request("skills")
 		"t":
 			return request("talents")
+		"f6":
+			return _toggle_debug_overlay(OVERLAY_COMBAT)
+		"f7":
+			return _toggle_debug_overlay(OVERLAY_MONSTERS)
 		"escape", "esc":
 			return close()
 		_:
@@ -144,6 +155,16 @@ func _close_escape() -> Dictionary:
 			_remove_dock("inventory")
 		return _result(true, true)
 	_overlay = OVERLAY_PAUSE
+	return _result(true, true)
+
+
+func _toggle_debug_overlay(name: String) -> Dictionary:
+	if _death_latched:
+		return _result(false, false)
+	if _overlay == name:
+		_overlay = ""
+	else:
+		_overlay = name
 	return _result(true, true)
 
 

@@ -9,6 +9,7 @@ var failures: int = 0
 func _initialize() -> void:
 	_test_parallel_and_exclusive_docks()
 	_test_talents_preserves_docks()
+	_test_debug_overlays()
 	_test_escape_priority()
 	_test_key_echo_unknown_and_copy_boundaries()
 	_test_death_boundary()
@@ -80,6 +81,34 @@ func _test_escape_priority() -> void:
 	_expect(recent_left.state.left.is_empty() and recent_left.state.right_inventory, "Escape order follows the most recent dock when left was opened last")
 
 
+func _test_debug_overlays() -> void:
+	var state = State.new()
+	state.request("skills")
+	state.request("inventory")
+	var before: Dictionary = state.snapshot()
+	var combat: Dictionary = state.handle_key("F6")
+	_expect(combat.accepted and combat.state.overlay == "combat", "F6 selects the combat debug overlay")
+	_expect(combat.state.left == before.left and combat.state.right_inventory == before.right_inventory, "Combat overlay retains both open docks")
+	var combat_echo: Dictionary = state.handle_key("F6", true)
+	_expect(not combat_echo.changed and combat_echo.state.overlay == "combat", "F6 key echo cannot close its active overlay")
+	var monsters: Dictionary = state.handle_key("F7")
+	_expect(monsters.accepted and monsters.state.overlay == "monsters", "F7 switches the shared overlay to the monster debug panel")
+	_expect(monsters.state.left == before.left and monsters.state.right_inventory == before.right_inventory, "F6/F7 overlay switching leaves both docks intact")
+	var requested_combat: Dictionary = state.request("combat")
+	_expect(requested_combat.state.overlay == "combat", "UI request combat selects the same shared overlay as F6")
+	var requested_monsters: Dictionary = state.request("monsters")
+	_expect(requested_monsters.state.overlay == "monsters", "UI request monsters selects the same shared overlay as F7")
+	var restored: Dictionary = state.handle_key("escape")
+	_expect(restored.state.overlay.is_empty() and restored.state.left == "skills" and restored.state.right_inventory, "Escape closes the debug overlay and restores both docks")
+	var closed_same: Dictionary = state.handle_key("F6")
+	_expect(closed_same.state.overlay == "combat", "F6 opens combat when no overlay is active")
+	var toggled_off: Dictionary = state.handle_key("F6")
+	_expect(toggled_off.state.overlay.is_empty() and toggled_off.state.left == "skills" and toggled_off.state.right_inventory, "F6 toggles its own overlay closed without losing docks")
+	state.handle_key("F7")
+	var monsters_toggled_off: Dictionary = state.handle_key("F7")
+	_expect(monsters_toggled_off.state.overlay.is_empty() and monsters_toggled_off.state.left == "skills" and monsters_toggled_off.state.right_inventory, "F7 toggles its own overlay closed without losing docks")
+
+
 func _test_key_echo_unknown_and_copy_boundaries() -> void:
 	var state = State.new()
 	var opened: Dictionary = state.handle_key("I")
@@ -107,6 +136,8 @@ func _test_death_boundary() -> void:
 	_expect(death.state.overlay == "death" and death.state.death_latched and death.state.paused, "Death request latches a paused terminal state")
 	var after_escape: Dictionary = state.handle_key("escape")
 	_expect(not after_escape.changed and after_escape.state == death.state, "Escape cannot dismiss death or restore live combat")
+	var debug_after_death: Dictionary = state.handle_key("F7")
+	_expect(not debug_after_death.changed and debug_after_death.state == death.state, "F7 cannot replace the death overlay or revive the run")
 	var generic_close: Dictionary = state.close("overlay")
 	_expect(not generic_close.accepted and generic_close.state == death.state, "Generic overlay close cannot dismiss death")
 	var explicit_close: Dictionary = state.close("death")
