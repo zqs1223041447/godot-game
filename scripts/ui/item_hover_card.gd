@@ -1,16 +1,25 @@
 class_name ItemHoverCard
 extends Control
-## Read-only item presentation. The caller owns inventory selection, comparisons,
-## hover lifetime, and the coordinate conversion for anchor/viewport bounds.
+## Read-only item presentation. The caller owns selection, comparisons, and hover lifetime.
+## Legacy text fields remain supported; structured fields are display-only.
+## base_stats: Array[Dictionary] of {label: String, value: String}.
+## modifiers: Array[Dictionary] of {label: String, value: String, polarity: String}.
+## polarity is one of MODIFIER_BENEFIT, MODIFIER_COST, or MODIFIER_NEUTRAL.
 
 const PresentationTheme = preload("res://scripts/visuals/visual_theme.gd")
 
 const OUTER_MARGIN: float = 12.0
 const COLUMN_GAP: float = 10.0
-const MAX_COLUMN_WIDTH: float = 400.0
+const MAX_COLUMN_WIDTH: float = 360.0
 const MAX_CARD_HEIGHT: float = 680.0
-const HEADER_HEIGHT: float = 46.0
+const MIN_CARD_HEIGHT: float = 160.0
+const HEADER_HEIGHT: float = 36.0
 const CARD_PADDING: float = 12.0
+const MODIFIER_BENEFIT: String = "benefit"
+const MODIFIER_COST: String = "cost"
+const MODIFIER_NEUTRAL: String = "neutral"
+const BENEFIT_INK: Color = Color("52623b")
+const COST_INK: Color = Color("7a2f29")
 
 var font_scale: float = 1.0:
 	set(value):
@@ -24,6 +33,7 @@ var _last_comparison_views: Array = []
 var _last_anchor: Rect2 = Rect2()
 var _last_viewport_bounds: Rect2 = Rect2()
 var _last_compare: bool = false
+var _drag_active: bool = false
 
 
 func _ready() -> void:
@@ -31,10 +41,13 @@ func _ready() -> void:
 	hide()
 
 
-## Show the supplied view and, when requested, at most two equipped comparisons.
-## anchor and viewport_bounds must use this Control parent's local coordinates.
+## Show a legacy or structured view and at most two equipped comparisons.
+## Anchor and bounds use the parent Control's local coordinates.
 func present(view: Dictionary, comparison_views: Array, anchor: Rect2,
 		viewport_bounds: Rect2, compare: bool = false) -> void:
+	if _drag_active:
+		dismiss()
+		return
 	_last_view = view.duplicate(true)
 	_last_comparison_views = comparison_views.duplicate(true)
 	_last_anchor = anchor
@@ -44,10 +57,44 @@ func present(view: Dictionary, comparison_views: Array, anchor: Rect2,
 	_refresh_layout()
 
 
+## Hide and forget the current presentation. A drag lock, if active, remains active.
 func dismiss() -> void:
 	_last_view.clear()
 	_last_comparison_views.clear()
 	hide()
+
+
+## Integration hook for owners that have their own drag lifecycle.
+## Releasing the lock never restores a stale card; the next hover must call present().
+func set_drag_active(active: bool) -> void:
+	if _drag_active == active:
+		return
+	_drag_active = active
+	if active:
+		dismiss()
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_DRAG_BEGIN:
+		set_drag_active(true)
+	elif what == NOTIFICATION_DRAG_END:
+		set_drag_active(false)
+
+
+## Keep the visual overlay pointer-transparent. Wheel input is routed only to the
+## detail column under the pointer, so an item behind the card can still drag/drop.
+func _input(event: InputEvent) -> void:
+	if not visible or not event is InputEventMouseButton or not event.pressed:
+		return
+	if event.button_index not in [MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN]:
+		return
+	var direction: int = -1 if event.button_index == MOUSE_BUTTON_WHEEL_UP else 1
+	var wheel_steps: int = maxi(1, roundi(event.factor))
+	for scroll: ScrollContainer in find_children("ItemDetailsScroll", "ScrollContainer", true, false):
+		if scroll.get_global_rect().has_point(event.position):
+			scroll.scroll_vertical += direction * wheel_steps * 36
+			get_viewport().set_input_as_handled()
+			return
 
 
 func _ensure_interface() -> void:
@@ -62,7 +109,7 @@ func _ensure_interface() -> void:
 	_row = HBoxContainer.new()
 	_row.name = "ItemHoverCards"
 	_row.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_row.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_row.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
 	_row.add_theme_constant_override("separation", int(COLUMN_GAP))
 	add_child(_row)
 
@@ -75,7 +122,7 @@ func _refresh_layout() -> void:
 		child.free()
 
 	var safe_bounds: Rect2 = _safe_bounds(_last_viewport_bounds)
-	if safe_bounds.size.x <= 0.0 or safe_bounds.size.y <= 0.0 or _last_view.is_empty():
+	if _drag_active or safe_bounds.size.x <= 0.0 or safe_bounds.size.y <= 0.0 or _last_view.is_empty():
 		hide()
 		return
 
@@ -92,12 +139,17 @@ func _refresh_layout() -> void:
 	var natural_height: float = 0.0
 	for item_view: Dictionary in views:
 		natural_height = maxf(natural_height, _natural_height(item_view, column_width))
-	var card_height: float = clampf(natural_height, minf(210.0, max_height), max_height)
-	var scroll_height: float = maxf(72.0, card_height - HEADER_HEIGHT)
+	var card_height: float = minf(max_height, maxf(minf(MIN_CARD_HEIGHT, max_height), natural_height))
+	var scroll_height: float = maxf(48.0, card_height - HEADER_HEIGHT)
 
 	for index: int in range(views.size()):
 		var role: String = "悬停物品" if index == 0 else "已装备目标 %d" % index
 		_row.add_child(_build_card(views[index], role, index, column_width, card_height, scroll_height))
+	_set_mouse_transparent(_row)
+	for scroll: ScrollContainer in find_children("ItemDetailsScroll", "ScrollContainer", true, false):
+		scroll.focus_mode = Control.FOCUS_NONE
+		scroll.get_v_scroll_bar().mouse_filter = Control.MOUSE_FILTER_IGNORE
+		scroll.get_h_scroll_bar().mouse_filter = Control.MOUSE_FILTER_IGNORE
 	PresentationTheme.apply_font_scale(self, font_scale)
 
 	size = Vector2(total_width, card_height)
@@ -111,13 +163,14 @@ func _safe_bounds(bounds: Rect2) -> Rect2:
 	var source: Rect2 = bounds
 	if source.size.x <= 0.0 or source.size.y <= 0.0:
 		source = get_viewport_rect()
-	var inset: Vector2 = Vector2.ONE * minf(OUTER_MARGIN, minf(source.size.x, source.size.y) * 0.25)
+	var inset_amount: float = minf(OUTER_MARGIN, minf(source.size.x, source.size.y) * 0.25)
+	var inset: Vector2 = Vector2.ONE * inset_amount
 	return Rect2(source.position + inset, Vector2(maxf(1.0, source.size.x - inset.x * 2.0),
 		maxf(1.0, source.size.y - inset.y * 2.0)))
 
 
 func _place(bounds: Rect2, anchor: Rect2, card_size: Vector2) -> Vector2:
-	var max_x: float = bounds.end.x - card_size.x
+	var max_x: float = maxf(bounds.position.x, bounds.end.x - card_size.x)
 	var right_x: float = anchor.end.x + OUTER_MARGIN
 	var left_x: float = anchor.position.x - card_size.x - OUTER_MARGIN
 	var x: float
@@ -128,7 +181,7 @@ func _place(bounds: Rect2, anchor: Rect2, card_size: Vector2) -> Vector2:
 	else:
 		x = clampf(anchor.get_center().x - card_size.x * 0.5, bounds.position.x, max_x)
 
-	var max_y: float = bounds.end.y - card_size.y
+	var max_y: float = maxf(bounds.position.y, bounds.end.y - card_size.y)
 	var below_y: float = anchor.end.y + OUTER_MARGIN
 	var above_y: float = anchor.position.y - card_size.y - OUTER_MARGIN
 	var y: float
@@ -139,6 +192,15 @@ func _place(bounds: Rect2, anchor: Rect2, card_size: Vector2) -> Vector2:
 	else:
 		y = clampf(anchor.get_center().y - card_size.y * 0.5, bounds.position.y, max_y)
 	return Vector2(x, y)
+
+
+func _set_mouse_transparent(node: Node) -> void:
+	if node is Control:
+		var control := node as Control
+		control.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		control.focus_mode = Control.FOCUS_NONE
+	for child: Node in node.get_children(true):
+		_set_mouse_transparent(child)
 
 
 func _build_card(view: Dictionary, role: String, index: int, width: float,
@@ -152,28 +214,29 @@ func _build_card(view: Dictionary, role: String, index: int, width: float,
 	column.custom_minimum_size = Vector2(width, height)
 	var card := PanelContainer.new()
 	card.name = "MainItemCard" if index == 0 else "EquippedItemCard%d" % index
-	card.mouse_filter = Control.MOUSE_FILTER_STOP
+	card.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	card.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	card.clip_contents = true
 	card.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	var border: Color = PresentationTheme.GOLD if index == 0 else PresentationTheme.ACCENT
-	card.add_theme_stylebox_override("panel", PresentationTheme.panel(Color("f8ecd0"), border, 7, 1, CARD_PADDING))
+	card.add_theme_stylebox_override("panel", PresentationTheme.panel(Color("f1deb3"), border, 7, 1, CARD_PADDING))
 	card.set_meta("item_uid", str(view.get("uid", "")))
 
 	var content := VBoxContainer.new()
 	content.name = "CardContent"
+	content.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	content.add_theme_constant_override("separation", 5)
 	content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	content.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	card.add_child(content)
-
-	var role_label := _label(role, 12, PresentationTheme.MUTED)
+	var role_label := _label(role, 11, PresentationTheme.MUTED)
+	role_label.name = "ItemCardRole"
 	content.add_child(role_label)
 
 	var scroll := ScrollContainer.new()
 	scroll.name = "ItemDetailsScroll"
-	scroll.mouse_filter = Control.MOUSE_FILTER_STOP
+	scroll.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	scroll.focus_mode = Control.FOCUS_ALL
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
@@ -184,41 +247,178 @@ func _build_card(view: Dictionary, role: String, index: int, width: float,
 
 	var body := VBoxContainer.new()
 	body.name = "ItemDetails"
+	body.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	body.add_theme_constant_override("separation", 5)
+	body.add_theme_constant_override("separation", 4)
 	scroll.add_child(body)
-	var title := _label(_text(view, "name", "未命名物品"), 18, PresentationTheme.TEXT)
+	var title := _label(_text(view, "name", "未命名物品"), 22, PresentationTheme.TEXT)
 	title.name = "ItemName"
+	var title_font := FontVariation.new()
+	title_font.base_font = get_theme_default_font()
+	title_font.variation_embolden = 0.45
+	title.add_theme_font_override("font", title_font)
 	title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	title.tooltip_text = str(view.get("uid", ""))
 	body.add_child(title)
-	var metadata: String = "%s · %s" % [_text(view, "kind_label"), _text(view, "rarity_label")]
-	var metadata_label := _label(metadata, 13, PresentationTheme.GOLD)
-	metadata_label.name = "ItemMetadata"
-	metadata_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	body.add_child(metadata_label)
-	_add_section(body, "描述", view.get("description", ""))
+	var metadata := _build_metadata(view, width)
+	if metadata.get_child_count() > 0:
+		body.add_child(metadata)
+	var tags: Array[String] = _string_array(view.get("tags", []))
+	if not tags.is_empty():
+		body.add_child(_build_tags(tags, width))
+
+	var function_text: String = _section_text(view.get("function", ""))
+	var description_text: String = _section_text(view.get("description", ""))
+	_add_section(body, "功能", function_text)
+	if description_text != function_text:
+		_add_section(body, "描述", description_text)
 	_add_section(body, "要求", view.get("requirements", []))
-	_add_section(body, "基础属性", view.get("base_lines", []))
-	_add_section(body, "词缀", view.get("affix_lines", []))
-	_add_section(body, "效果", view.get("effect_lines", []))
+	var base_stats: Array[Dictionary] = _structured_rows(view.get("base_stats", []), false)
+	if not base_stats.is_empty():
+		_add_stats(body, base_stats, width)
+	else:
+		_add_section(body, "基础属性", view.get("base_lines", []))
+	var modifiers: Array[Dictionary] = _structured_rows(view.get("modifiers", []), true)
+	if not modifiers.is_empty():
+		_add_modifiers(body, modifiers)
+	else:
+		_add_section(body, "词缀", view.get("affix_lines", []))
+	var preview_lines: Array[String] = _string_array(view.get("preview_lines", []))
+	if not preview_lines.is_empty():
+		_add_section(body, "当前组合施放预览", preview_lines, 14, PresentationTheme.GOLD)
+	else:
+		_add_section(body, "效果", view.get("effect_lines", []))
 	column.add_child(card)
 	return column
 
 
-func _add_section(parent: VBoxContainer, caption: String, value: Variant) -> void:
+func _build_metadata(view: Dictionary, width: float) -> HBoxContainer:
+	var row := HBoxContainer.new()
+	row.name = "ItemMetadata"
+	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	row.add_theme_constant_override("separation", 4)
+	var max_badge_width: float = maxf(56.0, width * 0.48)
+	var kind: String = _text(view, "kind_label").strip_edges()
+	var rarity: String = _text(view, "rarity_label").strip_edges()
+	if not kind.is_empty():
+		row.add_child(_badge(kind, "ItemTypeBadge", PresentationTheme.MUTED, Color("ead9b8"), max_badge_width))
+	if not rarity.is_empty():
+		row.add_child(_badge(rarity, "ItemRarityBadge", PresentationTheme.GOLD, Color("f4e5c3"), max_badge_width))
+	return row
+
+
+func _badge(value: String, stable_name: String, color: Color, background: Color,
+		max_width: float) -> PanelContainer:
+	var badge := PanelContainer.new()
+	badge.name = stable_name
+	badge.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	badge.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	badge.add_theme_stylebox_override("panel", PresentationTheme.panel(background, Color("9c7a4d"), 3, 1, 4))
+	var label := _label(value, 11, color)
+	label.name = stable_name + "Text"
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	label.custom_minimum_size.x = maxf(32.0, minf(max_width - 12.0, 36.0))
+	label.tooltip_text = value
+	badge.add_child(label)
+	return badge
+
+
+func _build_tags(tags: Array[String], width: float) -> HFlowContainer:
+	var flow := HFlowContainer.new()
+	flow.name = "ItemTags"
+	flow.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	flow.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	flow.add_theme_constant_override("h_separation", 4)
+	flow.add_theme_constant_override("v_separation", 3)
+	for index: int in range(tags.size()):
+		flow.add_child(_badge(tags[index], "ItemTag%d" % index, PresentationTheme.MUTED,
+			Color("e9d9b8"), maxf(72.0, width * 0.70)))
+	return flow
+
+
+func _add_section(parent: VBoxContainer, caption: String, value: Variant,
+		font_size: int = 14, body_color: Color = PresentationTheme.TEXT) -> void:
 	var text_value: String = _section_text(value)
 	if text_value.strip_edges().is_empty():
 		return
-	var heading := _label(caption, 14, PresentationTheme.GOLD)
+	var heading := _label(caption, 12, PresentationTheme.GOLD)
 	heading.name = "Section_" + caption
 	parent.add_child(heading)
-	var body := _label(text_value, 15, PresentationTheme.TEXT)
+	var body := _label(text_value, font_size, body_color)
 	body.name = "Text_" + caption
 	body.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	body.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	parent.add_child(body)
+
+
+func _add_stats(parent: VBoxContainer, entries: Array[Dictionary], width: float) -> void:
+	var heading := _label("基础属性", 12, PresentationTheme.GOLD)
+	heading.name = "Section_基础属性"
+	parent.add_child(heading)
+	var grid := GridContainer.new()
+	grid.name = "BaseStats"
+	grid.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	grid.columns = 2
+	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	grid.add_theme_constant_override("h_separation", 8)
+	grid.add_theme_constant_override("v_separation", 3)
+	var body_width: float = maxf(40.0, width - CARD_PADDING * 2.0 - 8.0)
+	var column_min: float = maxf(36.0, body_width * 0.36)
+	for index: int in range(entries.size()):
+		var entry: Dictionary = entries[index]
+		var key_label := _label(str(entry.label), 13, PresentationTheme.MUTED)
+		key_label.name = "BaseStatKey%d" % index
+		key_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		key_label.custom_minimum_size.x = column_min
+		key_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		grid.add_child(key_label)
+		var value_label := _label(str(entry.value), 13, PresentationTheme.TEXT)
+		value_label.name = "BaseStatValue%d" % index
+		value_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		value_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		value_label.custom_minimum_size.x = column_min
+		value_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		grid.add_child(value_label)
+	parent.add_child(grid)
+
+
+func _add_modifiers(parent: VBoxContainer, entries: Array[Dictionary]) -> void:
+	var heading := _label("增益 / 代价", 12, PresentationTheme.GOLD)
+	heading.name = "Section_增益与代价"
+	parent.add_child(heading)
+	var rows := VBoxContainer.new()
+	rows.name = "Modifiers"
+	rows.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	rows.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	rows.add_theme_constant_override("separation", 3)
+	for index: int in range(entries.size()):
+		var entry: Dictionary = entries[index]
+		var polarity: String = str(entry.polarity)
+		var color: Color = BENEFIT_INK if polarity == MODIFIER_BENEFIT else COST_INK if polarity == MODIFIER_COST else PresentationTheme.MUTED
+		var symbol: String = "▲" if polarity == MODIFIER_BENEFIT else "▼" if polarity == MODIFIER_COST else "·"
+		var line := HBoxContainer.new()
+		line.name = "Modifier%d" % index
+		line.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		line.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		line.add_theme_constant_override("separation", 4)
+		var marker := _label(symbol, 14, color)
+		marker.name = "ModifierMarker%d" % index
+		marker.custom_minimum_size.x = 18.0
+		marker.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		line.add_child(marker)
+		var copy: String = str(entry.label)
+		if not str(entry.value).is_empty():
+			copy = str(entry.value) if copy.is_empty() else "%s  %s" % [copy, str(entry.value)]
+		var text_label := _label(copy, 13, color)
+		text_label.name = "ModifierText%d" % index
+		text_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		text_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		line.add_child(text_label)
+		rows.add_child(line)
+	parent.add_child(rows)
 
 
 func _label(text_value: String, font_size: int, color: Color) -> Label:
@@ -232,22 +432,122 @@ func _label(text_value: String, font_size: int, color: Color) -> Label:
 
 func _natural_height(view: Dictionary, width: float) -> float:
 	var font: Font = get_theme_default_font()
+	if font == null:
+		return MIN_CARD_HEIGHT
 	var body_width: float = maxf(40.0, width - CARD_PADDING * 2.0 - 8.0)
-	var name_height: float = font.get_multiline_string_size(_text(view, "name", "未命名物品"),
-		HORIZONTAL_ALIGNMENT_LEFT, body_width, maxi(1, roundi(18.0 * font_scale))).y
-	var metadata: String = "%s · %s" % [_text(view, "kind_label"), _text(view, "rarity_label")]
-	var metadata_height: float = font.get_multiline_string_size(metadata, HORIZONTAL_ALIGNMENT_LEFT,
-		body_width, maxi(1, roundi(13.0 * font_scale))).y
-	var height: float = HEADER_HEIGHT + maxf(18.0, name_height) + maxf(16.0, metadata_height) + 10.0
-	for value: Variant in [view.get("description", ""), view.get("requirements", []),
-			view.get("base_lines", []), view.get("affix_lines", []), view.get("effect_lines", [])]:
-		var text_value: String = _section_text(value)
-		if text_value.strip_edges().is_empty():
+	var title_size: int = maxi(1, roundi(22.0 * font_scale))
+	var small_size: int = maxi(1, roundi(12.0 * font_scale))
+	var body_size: int = maxi(1, roundi(14.0 * font_scale))
+	var height: float = HEADER_HEIGHT + CARD_PADDING * 1.3 + 8.0
+	height += _measure_height(font, _text(view, "name", "未命名物品"), body_width, title_size)
+	height += 5.0 + _measure_height(font, _metadata_text(view), body_width, small_size)
+	var tags: Array[String] = _string_array(view.get("tags", []))
+	if not tags.is_empty():
+		height += 5.0 + float(_tag_row_count(tags, body_width, font, small_size)) * (float(small_size) + 8.0)
+
+	var function_text: String = _section_text(view.get("function", ""))
+	var description_text: String = _section_text(view.get("description", ""))
+	for text_value: String in [function_text, description_text if description_text != function_text else ""]:
+		if not text_value.strip_edges().is_empty():
+			height += 5.0 + float(small_size + 4) + _measure_height(font, text_value, body_width, body_size) + 3.0
+	var requirements_text: String = _section_text(view.get("requirements", []))
+	if not requirements_text.strip_edges().is_empty():
+		height += 5.0 + float(small_size + 4) + _measure_height(font, requirements_text, body_width, body_size) + 3.0
+
+	var stats: Array[Dictionary] = _structured_rows(view.get("base_stats", []), false)
+	if not stats.is_empty():
+		height += 5.0 + float(small_size + 4)
+		var cell_width: float = maxf(28.0, body_width * 0.43)
+		for entry: Dictionary in stats:
+			var key_height: float = _measure_height(font, str(entry.label), cell_width, body_size - 1)
+			var value_height: float = _measure_height(font, str(entry.value), cell_width, body_size - 1)
+			height += maxf(key_height, value_height) + 3.0
+	else:
+		height += _legacy_section_height(font, view.get("base_lines", []), body_width, small_size, body_size)
+
+	var modifiers: Array[Dictionary] = _structured_rows(view.get("modifiers", []), true)
+	if not modifiers.is_empty():
+		height += 5.0 + float(small_size + 4)
+		for entry: Dictionary in modifiers:
+			var line: String = "%s  %s" % [str(entry.label), str(entry.value)]
+			height += _measure_height(font, line, body_width, body_size - 1) + 3.0
+	else:
+		height += _legacy_section_height(font, view.get("affix_lines", []), body_width, small_size, body_size)
+
+	var preview_lines: Array[String] = _string_array(view.get("preview_lines", []))
+	var effect_value: Variant = preview_lines if not preview_lines.is_empty() else view.get("effect_lines", [])
+	var effect_text: String = _section_text(effect_value)
+	if not effect_text.strip_edges().is_empty():
+		var caption_size: int = small_size + 4
+		height += 5.0 + float(caption_size) + _measure_height(font, effect_text, body_width, body_size) + 3.0
+	return maxf(MIN_CARD_HEIGHT, height)
+
+
+func _legacy_section_height(font: Font, value: Variant, width: float,
+		title_size: int, body_size: int) -> float:
+	var text_value: String = _section_text(value)
+	if text_value.strip_edges().is_empty():
+		return 0.0
+	return 5.0 + float(title_size + 4) + _measure_height(font, text_value, width, body_size) + 3.0
+
+
+func _measure_height(font: Font, value: String, width: float, font_size: int) -> float:
+	if value.strip_edges().is_empty():
+		return 0.0
+	return maxf(float(font_size), font.get_multiline_string_size(value,
+		HORIZONTAL_ALIGNMENT_LEFT, maxf(24.0, width), font_size).y)
+
+
+func _tag_row_count(tags: Array[String], width: float, font: Font, font_size: int) -> int:
+	var rows: int = 1
+	var used_width: float = 0.0
+	for tag: String in tags:
+		var tag_width: float = minf(width * 0.70, font.get_string_size(tag,
+			HORIZONTAL_ALIGNMENT_LEFT, -1.0, font_size).x + 16.0)
+		if used_width > 0.0 and used_width + 4.0 + tag_width > width:
+			rows += 1
+			used_width = tag_width
+		else:
+			used_width += (4.0 if used_width > 0.0 else 0.0) + tag_width
+	return rows
+
+
+func _metadata_text(view: Dictionary) -> String:
+	return "%s %s" % [_text(view, "kind_label"), _text(view, "rarity_label")]
+
+
+func _string_array(value: Variant) -> Array[String]:
+	var result: Array[String] = []
+	if not value is Array:
+		return result
+	for candidate: Variant in value:
+		if candidate is String and not candidate.strip_edges().is_empty():
+			result.append(candidate)
+	return result
+
+
+func _structured_rows(value: Variant, modifier_rows: bool) -> Array[Dictionary]:
+	var result: Array[Dictionary] = []
+	if not value is Array:
+		return result
+	for candidate: Variant in value:
+		if not candidate is Dictionary:
 			continue
-		var measured: Vector2 = font.get_multiline_string_size(text_value, HORIZONTAL_ALIGNMENT_LEFT,
-			body_width, maxi(1, roundi(15.0 * font_scale)))
-		height += 23.0 + maxf(18.0, measured.y) + 7.0
-	return maxf(190.0, height)
+		var label_value: Variant = candidate.get("label", "")
+		var text_value: Variant = candidate.get("value", "")
+		if not label_value is String or not text_value is String:
+			continue
+		if label_value.strip_edges().is_empty() and text_value.strip_edges().is_empty():
+			continue
+		if not modifier_rows:
+			result.append({"label": label_value, "value": text_value})
+			continue
+		var polarity_value: Variant = candidate.get("polarity", MODIFIER_NEUTRAL)
+		if not polarity_value is String:
+			continue
+		var polarity: String = polarity_value if polarity_value in [MODIFIER_BENEFIT, MODIFIER_COST, MODIFIER_NEUTRAL] else MODIFIER_NEUTRAL
+		result.append({"label": label_value, "value": text_value, "polarity": polarity})
+	return result
 
 
 func _section_text(value: Variant) -> String:
