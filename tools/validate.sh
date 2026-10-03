@@ -36,7 +36,7 @@ run_check() {
 		export XDG_DATA_HOME="$VALIDATION_DIR/data/check-$CHECK_INDEX"
 		unset GODOT_CRAFTING_TEST_ROOT
 		case "${2:-}" in
-			res://tests/crafting_operations_test.gd|res://tests/crafting_growth_*|res://tests/canonical_*|res://tests/offense_skill_*|res://tests/elemental_encounter_*|res://tests/flask_*|res://tests/save_receipt_revision_test.gd|res://tests/source_*|res://tests/independent_menus_test.gd)
+			res://tests/town_*|res://tests/reserved_hotkey_migration_test.gd|res://tests/map_runtime_boundaries_test.gd|res://tests/crafting_operations_test.gd|res://tests/crafting_growth_*|res://tests/canonical_*|res://tests/offense_skill_*|res://tests/elemental_encounter_*|res://tests/flask_*|res://tests/save_receipt_revision_test.gd|res://tests/source_*|res://tests/independent_menus_test.gd)
 				export XDG_DATA_HOME="$M1_VALIDATION_DIR/check-$CHECK_INDEX/data"
 				unset PIERCE_QA_ROOT
 				;;
@@ -93,16 +93,15 @@ fi
 echo "Godot version: $("$GODOT_BIN" --version)"
 python3 "$PROJECT_DIR/tools/check_font_coverage.py"
 run_check --editor --import
-run_check --script res://tests/crafting_operations_test.gd
-run_check --script res://tests/crafting_expansion_economy_test.gd
-run_check --script res://tests/crafting_growth_boundaries_test.gd
-run_check --script res://tests/crafting_growth_transactions_test.gd
-run_check --script res://tests/crafting_growth_consumers_test.gd
-run_check --script res://tests/canonical_crafting_test.gd
-run_check --script res://tests/currency_transaction_test.gd
-run_check --script res://tests/crafting_metadata_ui_test.gd
-run_check --script res://tests/reference_export_test.gd
+run_check --script res://tests/reserved_hotkey_migration_test.gd
+run_check --script res://tests/town_migration_chain_test.gd
+run_check --script res://tests/town_map_stage_test.gd
+run_check --script res://tests/town_transactions_test.gd
+run_check --script res://tests/town_supply_gate_test.gd
+run_check --script res://tests/map_runtime_boundaries_test.gd
+run_check --script res://tests/town_profile_isolation_test.gd
+run_check --script res://tests/town_map_reference_test.gd
 python3 "$PROJECT_DIR/tools/check_item_transparency.py"
 python3 "$PROJECT_DIR/tests/reference_catalog_test.py"
 run_check --quit-after 300
-echo "Current-batch validation passed: four crafting operations, actual catalog economy bounds, canonical shard transactions and failure paths, crafted-item consumers, current UI input and reference, font/assets/reference, and startup."
+echo "Current-batch validation passed: reserved C raw-byte migration, isolated town transactions, finite map lifecycle/modifiers and profile failure gates, current reference, font/assets/reference, and startup."

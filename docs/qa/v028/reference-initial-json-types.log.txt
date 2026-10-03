@@ -1,0 +1,8 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ERROR: Exported town/map section exactly equals runtime catalogs
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/town_map_reference_test.gd:21)
+       [1] _initialize (res://tests/town_map_reference_test.gd:10)
+Town map reference: 11 checks, 1 failures
