@@ -25,11 +25,24 @@ static func shadow(canvas: CanvasItem, pos: Vector2, radius: float) -> void:
 	canvas.draw_circle(Vector2.ZERO, radius, Color(0.015,0.022,0.024,0.62))
 	canvas.draw_set_transform(Vector2.ZERO)
 
+# Diagnostic-only instrumentation on the isolated profiling branch. Disabled by default.
+static var diagnostic_profile_enabled := false
+static var diagnostic_frame_usec: Dictionary = {}
+
+static func _diagnostic_mark(label: String, started: int) -> int:
+	if not diagnostic_profile_enabled: return 0
+	var ended := Time.get_ticks_usec()
+	diagnostic_frame_usec[label] = ended - started
+	return ended
+
 static func draw_scene(arena: Node2D, preferences: Settings, include_environment: bool = true) -> void:
+	var stamp: int = Time.get_ticks_usec() if diagnostic_profile_enabled else 0
+	if diagnostic_profile_enabled: diagnostic_frame_usec.clear()
 	if include_environment:
 		draw_arena(arena)
 	if not arena._ready_complete:
 		return
+	stamp = _diagnostic_mark("environment",stamp)
 	for pickup: Dictionary in arena.pickups:
 		var p: Vector2 = pickup.pos
 		shadow(arena,p+Vector2(0,7),10)
@@ -38,26 +51,37 @@ static func draw_scene(arena: Node2D, preferences: Settings, include_environment
 		regular(arena,p,5,4,Color("a3e8ac"),PI/4)
 		arena.draw_line(p+Vector2(-3,0),p+Vector2(3,0),Color.WHITE,1.5,true)
 		arena.draw_line(p+Vector2(0,-3),p+Vector2(0,3),Color.WHITE,1.5,true)
+	stamp = _diagnostic_mark("pickups",stamp)
 	for ring: Dictionary in arena.rings:
 		draw_ring(arena,ring,preferences)
+	stamp = _diagnostic_mark("rings",stamp)
 	var cue_runtime: Variant = arena.get("visual_cues")
 	if cue_runtime != null:
 		CueRenderer.render(arena,cue_runtime.cues,preferences.effects_level,true)
+	stamp = _diagnostic_mark("cues_before",stamp)
 	if arena.has_method("telegraph_visual_states"):
 		TelegraphArt.draw(arena, arena.telegraph_visual_states(), preferences)
+	stamp = _diagnostic_mark("telegraphs",stamp)
 	# Stable ordering makes feet/shadows read as grounded figures.
 	var ordered: Array = arena.enemies.duplicate()
 	ordered.sort_custom(func(a: Dictionary,b: Dictionary) -> bool: return a.pos.y < b.pos.y)
+	stamp = _diagnostic_mark("sort",stamp)
 	var names:Dictionary=Markers.name_ids(arena,ordered,preferences)
+	stamp = _diagnostic_mark("name_selection",stamp)
 	for enemy: Dictionary in ordered:
 		ActorArt.draw_enemy(arena,enemy,preferences,false)
+	stamp = _diagnostic_mark("actors",stamp)
 	for shot: Dictionary in arena.projectiles:
 		draw_projectile(arena,shot,preferences)
+	stamp = _diagnostic_mark("projectiles",stamp)
 	draw_player(arena,preferences)
+	stamp = _diagnostic_mark("player",stamp)
 	for enemy:Dictionary in ordered:
 		Markers.draw_enemy(arena,enemy,preferences,names.has(int(enemy.id)))
+	stamp = _diagnostic_mark("markers",stamp)
 	if cue_runtime != null:
 		CueRenderer.render(arena,cue_runtime.cues,preferences.effects_level,false)
+	stamp = _diagnostic_mark("cues_after",stamp)
 	if preferences.effects_level > 0:
 		var index: int = 0
 		for particle: Dictionary in arena.particles:
@@ -69,6 +93,7 @@ static func draw_scene(arena: Node2D, preferences: Settings, include_environment
 			var p: Vector2 = particle.pos
 			var velocity: Vector2 = particle.velocity
 			arena.draw_line(p-velocity.normalized()*4,p,color,maxf(1,float(particle.radius)*color.a),true)
+	stamp = _diagnostic_mark("particles",stamp)
 	if arena._font and preferences.damage_numbers:
 		for entry: Dictionary in arena.floating_text:
 			var color: Color = entry.color
@@ -83,6 +108,8 @@ static func draw_scene(arena: Node2D, preferences: Settings, include_environment
 			arena.draw_string_outline(arena._font,p,str(entry.text),HORIZONTAL_ALIGNMENT_LEFT,-1,font_size,4,Color(0.02,0.03,0.03,color.a))
 			arena.draw_string(arena._font,p,str(entry.text),HORIZONTAL_ALIGNMENT_LEFT,-1,font_size,color)
 			arena.draw_set_transform(Vector2.ZERO)
+
+	_diagnostic_mark("damage_text",stamp)
 
 static func draw_arena(arena: Node2D) -> void:
 	EnvironmentArt.draw(arena)
