@@ -490,6 +490,40 @@ func crafting_balance() -> int:
 	return total
 
 
+## Lightweight menu projection: no issued handle, disk read, full snapshot or
+## rolled result. The already validated store owns instances; the selected
+## instance is checked by the real craft rules. Clicking still requires quote.
+func crafting_operations(uid: Variant, path: String = "user://build_save.json") -> Array[Dictionary]:
+	var blocked := ""
+	var source: Dictionary = {}
+	if not uid is String or not _current.items.has(uid): blocked = "请先选择背包中的随机装备"
+	elif _current.items[uid].kind != "equipment" or _current.items[uid].payload.is_empty(): blocked = "仅随机装备可进行此工艺"
+	elif _current.locations[uid].kind != "bag": blocked = "请先把装备放入背包"
+	elif int(_current.crafting.revision) >= Rules.MAX_SERIAL: blocked = "制作修订已达上限"
+	elif not save_block_reason(path).is_empty(): blocked = "当前存档受写保护"
+	else: source = _current.items[uid].payload
+	var balance := crafting_balance()
+	var total: Dictionary = ShardCatalog.total_quantity(_current.items)
+	var result: Array[Dictionary] = []
+	for operation: String in Craft.operation_ids():
+		var entry: Dictionary = Craft.operation_metadata(operation)
+		entry.merge({"cost":{}, "materials":{}, "available":false, "reason":blocked})
+		if blocked.is_empty():
+			var economics: Dictionary = Craft.operation_quote(source, operation)
+			if not economics.ok: entry.reason = economics.reason
+			else:
+				entry.cost = economics.cost.duplicate(true)
+				entry.materials = economics.materials.duplicate(true)
+				var debit := int(entry.cost.get(Craft.MATERIAL_ID, 0))
+				var credit := int(entry.materials.get(Craft.MATERIAL_ID, 0))
+				if not total.ok: entry.reason = "校准碎片库存无效"
+				elif balance < debit: entry.reason = "背包中的校准碎片不足"
+				elif credit > ShardCatalog.INVENTORY_LIMIT - (int(total.quantity) - debit): entry.reason = "全库存校准碎片总量已达上限"
+				else: entry.available = true
+		result.append(entry)
+	return result
+
+
 func crafting_quote(operation: Variant, uid: Variant, path: String = "user://build_save.json") -> Dictionary:
 	if int(_current.crafting.revision) >= Rules.MAX_SERIAL: return _craft_failure("revision_limit","制作修订已达上限")
 	if not uid is String or not _current.items.has(uid): return _craft_failure("not_owned","当前没有此物品")
@@ -535,7 +569,7 @@ func execute_crafting(handle: Variant, source_instance: Variant) -> Dictionary:
 		_reject(issued.path,"存档已被外部修改")
 		return _craft_failure("save_changed","存档已变化，物品与碎片保持原样")
 	# Preserve the existing seed contract exactly for the two released operations.
-	var seed_text := JSON.stringify({"rules":Craft.RULES_VERSION,"revision":int(_current.crafting.revision),"item":quote.source_instance},"",true,true)
+	var seed_text := JSON.stringify({"rules":Craft.seed_rules_version(quote.operation),"revision":int(_current.crafting.revision),"item":quote.source_instance},"",true,true)
 	var seed_value := seed_text.sha256_text().substr(0,15).hex_to_int()
 	var plan: Dictionary = CraftPlanner.plan(_craft_context(quote.item_id,issued.path),quote,seed_value)
 	if not plan.ok: return plan

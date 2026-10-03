@@ -58,7 +58,7 @@ func _initialize()->void:
 	check(not state.execute_crafting(quote.handle,source).ok,"atomic write failure surfaced")
 	check(before==state.snapshot() and disk==FileAccess.get_file_as_bytes(path),"failure preserves full canonical build and wallet")
 	state.fail_save=false
-	var seed_text:=JSON.stringify({"rules":Craft.RULES_VERSION,"revision":int(before.crafting.revision),"item":source},"",true,true)
+	var seed_text:=JSON.stringify({"rules":"original-crafting-prototype-v1","revision":int(before.crafting.revision),"item":source},"",true,true)
 	var expected:=Craft.recalibrate_plan(source,seed_text.sha256_text().substr(0,15).hex_to_int())
 	check(state.execute_crafting(quote.handle,source).ok,"same quote retries safely")
 	check(state.item(ids[3]).payload==expected.instance,"released seed contract unchanged")
