@@ -1,0 +1,52 @@
+{
+  "source": {
+    "game": "Path of Exile 1",
+    "repository": "https://github.com/grindinggear/skilltree-export",
+    "repository_owner": "Grinding Gear Games",
+    "version": "3.29.1",
+    "commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+    "commit_url": "https://github.com/grindinggear/skilltree-export/commit/8bd138b32ea2631455cac5935bfab089f826094f",
+    "data_file": "data.json",
+    "data_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+    "sha256": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+    "bytes": 6666935,
+    "verified_at_utc": "2026-10-03"
+  },
+  "rights_review": {
+    "result": "No explicit data license or redistribution grant was found in the pinned repository root or README.",
+    "basis": [
+      "The pinned root has no LICENSE, LICENSE.md, or LICENSE.txt file.",
+      "The pinned README describes the export format but does not state a license."
+    ],
+    "handling": "Keep this source isolated as research/import data. Do not infer public-domain status or open-source redistribution rights. Reassess permission before distributing or using outside this repository.",
+    "official_art_assets_copied": false,
+    "project_license_changed": false
+  },
+  "source_inventory": {
+    "included": [
+      {
+        "file": "data.json",
+        "purpose": "Default standard passive tree, all node records, groups, classes, mastery choices, sockets and source graph fields",
+        "sha256": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122"
+      }
+    ],
+    "not_copied": [
+      {
+        "file": "assets/",
+        "purpose": "Official binary art resources; not downloaded or copied"
+      },
+      {
+        "file": "alternate.json, ruthless.json, ruthless-alternate.json",
+        "purpose": "Separate tree exports outside the selected Default data.json source"
+      }
+    ],
+    "normalized_root_fields_omitted": ["extraImages", "sprites"]
+  },
+  "import": {
+    "normalized_file": "normalized_tree.json",
+    "tool": "../../tools/passive_import/import_tree.py",
+    "schema_version": 1,
+    "deterministic": true,
+    "runtime_or_save_integration": false
+  }
+}
