@@ -22,9 +22,11 @@ func run()->void:
 	DirAccess.remove_absolute(bad_test)
 	var source:Dictionary={"id":"gear_%06d"%int(normal.snapshot().next_item_serial),"base_id":"cinder_reed","rarity":"magic","item_level":30,"affixes":[{"id":"deepwell","tier":1,"value":5}]}
 	check(normal._admit_reward_item(normal.Items.wrap_equipment(source)) and arena.save_build(),"Actual normal source prepared")
+	var previous_draft:Dictionary=arena.map_draft()
 	var pending:Dictionary=normal.crafting_quote("salvage",source.id,"user://build_save.json")
 	check(pending.ok,"Normal quote issued before switch")
 	check(arena.enter_town_test(arena.world_context().revision).ok,"Explicit first entry succeeds")
+	check(arena.map_draft().revision>previous_draft.revision and not arena.start_map(previous_draft.revision).ok,"Profile entry invalidates previous map-launch token")
 	normal_bytes=FileAccess.get_file_as_bytes("user://build_save.json")
 	var normal_snapshot:Dictionary=normal.snapshot()
 	check(not normal.execute_crafting(pending.handle,pending.source_instance).ok,"Retired profile cancels stale craft authority")
@@ -45,4 +47,6 @@ func run()->void:
 	write("user://build_save.json",normal_bytes)
 	check(arena.leave_town_test(world.revision).ok and arena.state.snapshot()==normal_snapshot,"Original restored and test remains separate")
 	check(not test.discard_item(source.id,test.revision(),bad_test).ok,"Old test model retired after exit")
+	var prior_revision:int=arena.map_draft().revision
+	check(arena.enter_town_test(arena.world_context().revision).ok and arena.map_draft().revision>prior_revision and not arena.start_map(prior_revision).ok,"Re-entry preserves selection but cannot revive a prior launch token")
 	print("Town profile isolation: %d checks, %d failures"%[checks,failures]);arena.queue_free();await process_frame;quit(1 if failures else 0)

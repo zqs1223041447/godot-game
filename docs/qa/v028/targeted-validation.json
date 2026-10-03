@@ -1,0 +1,58 @@
+{
+  "reports": [
+    {
+      "path": "docs/qa/v028/stage-test.log.txt",
+      "sha256": "782efe2ab30b0ca09557775c5a0fa1accd06366192006dacfe18a1cf04559c0d",
+      "checks": 101
+    },
+    {
+      "path": "docs/qa/v028/key-migration.log.txt",
+      "sha256": "d5ef4f78e67b29582b250ee5441827e8fc5e46986f414bb06add26e31764d13e",
+      "checks": 32
+    },
+    {
+      "path": "docs/qa/v028/migration-chain.log.txt",
+      "sha256": "dbe5de853303ab674c69ee55cd33178f8515068c76d39a43933a7fdeaa2c0174",
+      "checks": 1077
+    },
+    {
+      "path": "docs/qa/v028/town-transactions.log.txt",
+      "sha256": "1ce2bf95633462c838390b9fe2b7eda287dabd0da00869145479d710763f4633",
+      "checks": 190
+    },
+    {
+      "path": "docs/qa/v028/supply-gates.log.txt",
+      "sha256": "5e7fd41eb850c80a99dc8033e0c8f5931b4d9c069e4261b5ecc92eb0f1577718",
+      "checks": 77
+    },
+    {
+      "path": "docs/qa/v028/map-boundaries.log.txt",
+      "sha256": "6f58d1c417ec8cfaaf88585ff451a13bb1024f499f1521fcc518ad9eeea46fc5",
+      "checks": 1121
+    },
+    {
+      "path": "docs/qa/v028/profile-isolation-final.log.txt",
+      "sha256": "0ab18ab73a666482db8009c796348ced4c918aa4609ad412b35ab1d07284dcf6",
+      "checks": 19
+    },
+    {
+      "path": "docs/qa/v028/reference-runtime.log.txt",
+      "sha256": "e37053d033602ce6220b9dac1279dc8a05d0ab044fb9e8844f7a8a76059159d1",
+      "checks": 11
+    },
+    {
+      "path": "docs/qa/v028/root-ui/town-ui-release.log.txt",
+      "sha256": "ef2f500b97a98df6322849722e387cb41a134c8ef801a659098ed8c02b152b33",
+      "checks": 17
+    }
+  ],
+  "checks": 2645,
+  "report_count": 9,
+  "production_inputs": 366,
+  "root_ui_commit": "631822a4289d58b81fe487c96ffe80e66be33f02",
+  "root_ui_tests_reused": true,
+  "historical_full_rerun": false,
+  "600_second_test_deleted": true,
+  "normal_mode_equivalence": "normal-comparison.json",
+  "final_change": "Two increments invalidate map draft launch tokens on test-profile entry/exit; profile-isolation19 directly covers it. Other unchanged scopes reuse logged evidence."
+}

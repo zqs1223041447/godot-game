@@ -1438,7 +1438,7 @@ func enter_town_test(expected_revision:Variant)->Dictionary:
 	else:
 		test._accept_memory(state.snapshot())
 		if test.save_build(TOWN_TEST_BUILD_PATH)!=OK:return _world_failure("test_save_failed",test.last_error)
-	_normal_state=state;_world_mode="town";_world_revision+=1
+	_normal_state=state;_world_mode="town";_world_revision+=1;_map_draft_revision+=1
 	_replace_build(test,TOWN_TEST_BUILD_PATH);_map_run.clear();_clear_encounter();restart_run();world_context_changed.emit()
 	if test.migrated_from_legacy:hud.notify(test.migration_message)
 	return _world_ok()
@@ -1447,7 +1447,7 @@ func leave_town_test(expected_revision:Variant)->Dictionary:
 	if not save_build():return _world_failure("save_failed","测试进度未保存")
 	var normal:=Build.new()
 	if not normal.load_build(NORMAL_BUILD_PATH):return _world_failure("normal_save_invalid",normal.last_error)
-	_world_mode="normal";_world_revision+=1;_map_run.clear();_clear_encounter()
+	_world_mode="normal";_world_revision+=1;_map_draft_revision+=1;_map_run.clear();_clear_encounter()
 	_replace_build(normal,NORMAL_BUILD_PATH);_normal_state=null;restart_run();world_context_changed.emit()
 	if normal.migrated_from_legacy:hud.notify(normal.migration_message)
 	return _world_ok()
