@@ -17,7 +17,8 @@ var model: RefCounted
 var save_path := "user://build_save.json"
 var _grid: Control
 var _slots: Dictionary = {}
-var _equipment_grid: GridContainer
+var _equipment_grid: Control
+var _flask_bar: HBoxContainer
 var _pending: VBoxContainer
 var _summary: Label
 var _page_label: Label
@@ -50,6 +51,8 @@ class SlotTarget extends Button:
 			EquipmentArt.draw_item(self, entry, Rect2(Vector2(4,3),Vector2(size.x-8.0,maxf(8.0,size.y-caption_height-4.0))))
 		var font: Font = get_theme_default_font()
 		var font_size: int = get_theme_font_size("font_size")
+		while font_size > 7 and font.get_string_size(CanonicalInventoryPanel.SLOT_NAMES[slot_id],HORIZONTAL_ALIGNMENT_LEFT,-1,font_size).x > size.x-6:
+			font_size -= 1
 		draw_string(font,Vector2(3,size.y-3),CanonicalInventoryPanel.SLOT_NAMES[slot_id],HORIZONTAL_ALIGNMENT_CENTER,size.x-6,font_size,Color("3b281b"))
 	func _get_drag_data(_at: Vector2) -> Variant:
 		if uid.is_empty(): return null
@@ -91,7 +94,7 @@ func _build() -> void:
 	_character=CharacterButton.new()
 	_character.name="CharacterStats"
 	_character.text="属性"
-	_character.custom_minimum_size.x = 58
+	_character.custom_minimum_size.x = 46
 	_character.custom_minimum_size.y = 24
 	_character.add_theme_font_size_override("font_size", 12)
 	DockStyle.style_action(_character,11)
@@ -100,7 +103,7 @@ func _build() -> void:
 	var arrange := Button.new()
 	arrange.name = "ArrangeUnifiedBag"
 	arrange.text = "整理"
-	arrange.custom_minimum_size.x = 58
+	arrange.custom_minimum_size.x = 46
 	arrange.custom_minimum_size.y = 24
 	arrange.add_theme_font_size_override("font_size", 12)
 	DockStyle.style_action(arrange,11)
@@ -109,18 +112,17 @@ func _build() -> void:
 	_discard=Button.new()
 	_discard.name="DiscardUnifiedItem"
 	_discard.text="丢弃"
-	_discard.custom_minimum_size.x = 58
+	_discard.custom_minimum_size.x = 46
 	_discard.custom_minimum_size.y = 24
 	_discard.add_theme_font_size_override("font_size", 12)
 	DockStyle.style_action(_discard,11)
 	_discard.pressed.connect(_request_discard)
 	actions.add_child(_discard)
-	_equipment_grid = GridContainer.new()
+	_equipment_grid = Control.new()
 	_equipment_grid.name = "EquipmentSlotGrid"
-	_equipment_grid.columns = 3
+	_equipment_grid.custom_minimum_size.y = 128.0
+	_equipment_grid.resized.connect(_layout_slots)
 	_equipment_grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_equipment_grid.add_theme_constant_override("h_separation", 4)
-	_equipment_grid.add_theme_constant_override("v_separation", 4)
 	add_child(_equipment_grid)
 	for slot: String in Slots.all_slots():
 		var target := SlotTarget.new()
@@ -130,7 +132,7 @@ func _build() -> void:
 		target.text = ""
 		target.alignment = HORIZONTAL_ALIGNMENT_CENTER
 		target.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		target.custom_minimum_size = Vector2(76,48)
+		target.custom_minimum_size = Vector2.ZERO
 		target.add_theme_font_size_override("font_size",10)
 		target.add_theme_constant_override("outline_size",0)
 		# Preserve the approved painted equipment frames and icon-above-name
@@ -143,22 +145,34 @@ func _build() -> void:
 		target.mouse_exited.connect(func(): hover_left.emit())
 		_equipment_grid.add_child(target)
 		_slots[slot] = target
-	# The equipment keeps its original 3×3 icon-above-name structure. All bag
-	# operations are grouped below it with the page selector and bag itself.
+	# Compact anatomical placement follows the user reference. Inventory actions
+	# remain below the equipment rather than occupying another screen panel.
+	_flask_bar = HBoxContainer.new()
+	_flask_bar.name = "FlaskBelt"
+	_flask_bar.alignment = BoxContainer.ALIGNMENT_CENTER
+	_flask_bar.add_theme_constant_override("separation",5)
+	add_child(_flask_bar)
+	for index: int in range(5):
+		var socket := PanelContainer.new()
+		socket.name = "FlaskSocket_%d" % index
+		socket.custom_minimum_size = Vector2(30,32)
+		socket.add_theme_stylebox_override("panel", DockStyle.surface(Color("dfd1b3"),2.0))
+		socket.tooltip_text = "空药剂槽"
+		_flask_bar.add_child(socket)
 	move_child(top, get_child_count()-1)
 	var page_bar := HBoxContainer.new()
 	page_bar.name = "BagPageControls"
 	page_bar.custom_minimum_size.y = 24
 	_page_label = Label.new()
 	_page_label.name = "BagPageLabel"
-	_page_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_page_label.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	_page_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	_page_label.add_theme_font_size_override("font_size", 12)
 	page_bar.add_child(_page_label)
 	_previous_page = Button.new()
 	_previous_page.name = "PreviousBagPage"
 	_previous_page.text = "‹"
-	_previous_page.custom_minimum_size = Vector2(32, 24)
+	_previous_page.custom_minimum_size = Vector2(22, 24)
 	_previous_page.add_theme_font_size_override("font_size", 12)
 	DockStyle.style_action(_previous_page,12)
 	_previous_page.tooltip_text = "上一页"
@@ -167,13 +181,13 @@ func _build() -> void:
 	_next_page = Button.new()
 	_next_page.name = "NextBagPage"
 	_next_page.text = "›"
-	_next_page.custom_minimum_size = Vector2(32, 24)
+	_next_page.custom_minimum_size = Vector2(22, 24)
 	_next_page.add_theme_font_size_override("font_size", 12)
 	DockStyle.style_action(_next_page,12)
 	_next_page.tooltip_text = "下一页"
 	_next_page.pressed.connect(_turn_page.bind(1))
 	page_bar.add_child(_next_page)
-	add_child(page_bar)
+	top.add_child(page_bar)
 	var grid_script: Script = load("res://scripts/ui/unified_bag_grid.gd")
 	_grid = grid_script.new()
 	_grid.name = "SharedCanonicalBagGrid"
@@ -238,7 +252,7 @@ func refresh() -> void:
 	var rows: int = int(_bag_layout.get("rows", 8))
 	_summary.text = "行囊 %d 格" % [page_count * columns * rows]
 	_summary.tooltip_text = "九个装备位 · 装备、珠宝与宝石共用分页行囊。悬停看详情，Shift 对比，右键可装备。"
-	_page_label.text = "第 %d/%d 页" % [_bag_page + 1, page_count]
+	_page_label.text = "%d/%d" % [_bag_page + 1, page_count]
 	_page_label.tooltip_text = "%d × %d 格 · 悬停看详情 · Shift 对比 · 拖放摆放" % [columns, rows]
 	_previous_page.disabled = _bag_page <= 0
 	_next_page.disabled = _bag_page >= page_count - 1
@@ -279,7 +293,26 @@ func _on_visibility_changed() -> void:
 
 
 func _layout_slots() -> void:
-	if is_instance_valid(_equipment_grid): _equipment_grid.queue_redraw()
+	if not is_instance_valid(_equipment_grid): return
+	# Authored in a compact 280×156 coordinate frame; scaling is uniform.
+	var rects := {
+		"helmet": Rect2(111,0,58,36),
+		"weapon": Rect2(20,18,52,88),
+		"body_armour": Rect2(106,40,68,70),
+		"amulet": Rect2(181,35,35,35),
+		"ring_1": Rect2(67,74,34,34),
+		"ring_2": Rect2(181,74,34,34),
+		"gloves": Rect2(48,113,49,40),
+		"belt": Rect2(107,115,67,27),
+		"boots": Rect2(184,113,49,40),
+	}
+	var scale_value := minf(0.82, _equipment_grid.size.x / 280.0)
+	var offset := Vector2((_equipment_grid.size.x - 280.0*scale_value)*0.5,0)
+	for slot: String in _slots:
+		var bounds: Rect2 = rects[slot]
+		_slots[slot].position = offset + bounds.position*scale_value
+		_slots[slot].size = bounds.size*scale_value
+	_equipment_grid.queue_redraw()
 
 
 func _turn_page(delta: int) -> void:
