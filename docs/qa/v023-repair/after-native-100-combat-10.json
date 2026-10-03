@@ -1,0 +1,332 @@
+{
+	"above_cap_test_only": false,
+	"buckets": [
+		{
+			"cpu_usec": {
+				"build_changed_nested": {
+					"max": 1964,
+					"mean": 289.62857142857143,
+					"n": 70,
+					"p50": 150,
+					"p95": 1277,
+					"p99": 1964
+				},
+				"cast_attempt": {
+					"max": 805,
+					"mean": 640.75,
+					"n": 4,
+					"p50": 694,
+					"p95": 805,
+					"p99": 805
+				},
+				"draw_submission": {
+					"max": 36353,
+					"mean": 23502.628333333334,
+					"n": 600,
+					"p50": 23337,
+					"p95": 26548,
+					"p99": 29480
+				},
+				"effects": {
+					"max": 1756,
+					"mean": 151.94666666666666,
+					"n": 600,
+					"p50": 128,
+					"p95": 326,
+					"p99": 396
+				},
+				"enemy_ai": {
+					"max": 5513,
+					"mean": 2661.221666666667,
+					"n": 600,
+					"p50": 2590,
+					"p95": 3167,
+					"p99": 3842
+				},
+				"hud": {
+					"max": 1296,
+					"mean": 306.01166666666666,
+					"n": 600,
+					"p50": 31,
+					"p95": 942,
+					"p99": 1106
+				},
+				"kill_step": {
+					"max": 52445,
+					"mean": 14518.671428571428,
+					"n": 70,
+					"p50": 12286,
+					"p95": 31832,
+					"p99": 52445
+				},
+				"pickups": {
+					"max": 76,
+					"mean": 10.933333333333334,
+					"n": 600,
+					"p50": 10,
+					"p95": 18,
+					"p99": 38
+				},
+				"progress_flush": {
+					"max": 10251,
+					"mean": 593.835,
+					"n": 600,
+					"p50": 3,
+					"p95": 4858,
+					"p99": 8602
+				},
+				"projectiles": {
+					"max": 40098,
+					"mean": 1464.0166666666667,
+					"n": 600,
+					"p50": 991,
+					"p95": 2874,
+					"p99": 11141
+				},
+				"refill": {
+					"max": 1919,
+					"mean": 65.395,
+					"n": 600,
+					"p50": 16,
+					"p95": 342,
+					"p99": 591
+				},
+				"save_nested": {
+					"max": 7289,
+					"mean": 3759.9,
+					"n": 70,
+					"p50": 3561,
+					"p95": 6595,
+					"p99": 7289
+				},
+				"separation_visits": {
+					"max": 471,
+					"mean": 315.84,
+					"n": 600,
+					"p50": 330,
+					"p95": 436,
+					"p99": 459
+				},
+				"spawn_cleanup": {
+					"max": 1730,
+					"mean": 299.14166666666665,
+					"n": 600,
+					"p50": 284,
+					"p95": 358,
+					"p99": 519
+				},
+				"step": {
+					"max": 52445,
+					"mean": 5961.4366666666665,
+					"n": 600,
+					"p50": 4908,
+					"p95": 12788,
+					"p99": 22104
+				},
+				"telegraph_start": {
+					"max": 759,
+					"mean": 208.18833333333333,
+					"n": 600,
+					"p50": 206,
+					"p95": 285,
+					"p99": 413
+				},
+				"tick": {
+					"max": 50731,
+					"mean": 5482.83,
+					"n": 600,
+					"p50": 4370,
+					"p95": 12123,
+					"p99": 21708
+				},
+				"wall_frame": {
+					"max": 169132,
+					"mean": 104616.88,
+					"n": 600,
+					"p50": 103829,
+					"p95": 116969,
+					"p99": 126712
+				}
+			},
+			"death_queue": 0,
+			"draw_calls": 9682.0,
+			"draw_cpu_usec": {
+				"actors": {
+					"max": 31126,
+					"mean": 18605.801666666666,
+					"n": 600,
+					"p50": 18453,
+					"p95": 20967,
+					"p99": 23572
+				},
+				"cues_after": {
+					"max": 3418,
+					"mean": 118.52166666666666,
+					"n": 600,
+					"p50": 68,
+					"p95": 387,
+					"p99": 504
+				},
+				"cues_before": {
+					"max": 2136,
+					"mean": 357.0683333333333,
+					"n": 600,
+					"p50": 184,
+					"p95": 1253,
+					"p99": 1801
+				},
+				"damage_text": {
+					"max": 968,
+					"mean": 144.105,
+					"n": 600,
+					"p50": 120,
+					"p95": 294,
+					"p99": 492
+				},
+				"environment": {
+					"max": 47,
+					"mean": 7.111666666666666,
+					"n": 600,
+					"p50": 7,
+					"p95": 9,
+					"p99": 27
+				},
+				"markers": {
+					"max": 2186,
+					"mean": 857.1933333333334,
+					"n": 600,
+					"p50": 822,
+					"p95": 1086,
+					"p99": 1400
+				},
+				"name_selection": {
+					"max": 2233,
+					"mean": 453.4316666666667,
+					"n": 600,
+					"p50": 422,
+					"p95": 679,
+					"p99": 927
+				},
+				"particles": {
+					"max": 632,
+					"mean": 111.03,
+					"n": 600,
+					"p50": 95,
+					"p95": 244,
+					"p99": 322
+				},
+				"pickups": {
+					"max": 3340,
+					"mean": 1508.7783333333334,
+					"n": 600,
+					"p50": 1504,
+					"p95": 2747,
+					"p99": 3091
+				},
+				"player": {
+					"max": 1623,
+					"mean": 532.2433333333333,
+					"n": 600,
+					"p50": 514,
+					"p95": 647,
+					"p99": 1015
+				},
+				"projectiles": {
+					"max": 650,
+					"mean": 166.35166666666666,
+					"n": 600,
+					"p50": 190,
+					"p95": 261,
+					"p99": 410
+				},
+				"rings": {
+					"max": 103,
+					"mean": 23.37,
+					"n": 600,
+					"p50": 23,
+					"p95": 42,
+					"p99": 55
+				},
+				"sort": {
+					"max": 2538,
+					"mean": 199.89666666666668,
+					"n": 600,
+					"p50": 178,
+					"p95": 266,
+					"p99": 458
+				},
+				"telegraphs": {
+					"max": 848,
+					"mean": 400.18,
+					"n": 600,
+					"p50": 346,
+					"p95": 710,
+					"p99": 797
+				}
+			},
+			"enemy_array": 100,
+			"inventory_items": 66,
+			"kills": 127,
+			"lineages": 100,
+			"live": 100,
+			"node_count": 217.0,
+			"objects": 2208.0,
+			"orphan_nodes": 0.0,
+			"particles": 32,
+			"pickups": 14,
+			"projectiles": 0,
+			"resources": 119.0,
+			"reward_kills": 127,
+			"rings": 5,
+			"save_success": 74,
+			"stage": "active",
+			"static_memory": 123351510.0,
+			"text": 68,
+			"tick": 600,
+			"visual_cues": 28
+		}
+	],
+	"complete": true,
+	"controlled_deaths": [],
+	"count": 100,
+	"display": "X11",
+	"failures": [],
+	"initial": {
+		"cpu_usec": {
+
+		},
+		"death_queue": 0,
+		"draw_calls": 1344.0,
+		"draw_cpu_usec": {
+
+		},
+		"enemy_array": 100,
+		"inventory_items": 36,
+		"kills": 0,
+		"lineages": 100,
+		"live": 100,
+		"node_count": 217.0,
+		"objects": 2190.0,
+		"orphan_nodes": 0.0,
+		"particles": 0,
+		"pickups": 0,
+		"projectiles": 0,
+		"resources": 119.0,
+		"reward_kills": 0,
+		"rings": 0,
+		"save_success": 4,
+		"stage": "initial",
+		"static_memory": 116602909.0,
+		"text": 0,
+		"tick": 0,
+		"visual_cues": 0
+	},
+	"mode": "combat",
+	"native": true,
+	"native_driver": "One fixed simulation tick per rendered frame; production catch-up-loop feedback is deliberately excluded from this isolating probe",
+	"player_invulnerable_fixture": true,
+	"shipping_cap": 100,
+	"sim_seconds": 10,
+	"timing_scope": "Microseconds; nested build/save labels overlap their enclosing tick/projectile/burst phases. Software/native results are not Windows FPS.",
+	"wall_seconds": 62.902596
+}

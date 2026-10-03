@@ -33,7 +33,7 @@ run_check() {
 		export XDG_DATA_HOME="$VALIDATION_DIR/data/check-$CHECK_INDEX"
 		unset GODOT_CRAFTING_TEST_ROOT
 		case "${2:-}" in
-			res://tests/canonical_*|res://tests/source_*|res://tests/independent_menus_test.gd)
+			res://tests/canonical_*|res://tests/save_receipt_revision_test.gd|res://tests/source_*|res://tests/independent_menus_test.gd)
 				export XDG_DATA_HOME="$M1_VALIDATION_DIR/check-$CHECK_INDEX/data"
 				unset PIERCE_QA_ROOT
 				;;
@@ -82,6 +82,8 @@ run_check --script res://tests/unified_item_catalog_test.gd
 run_check --script res://tests/item_transfer_plan_test.gd
 run_check --script res://tests/canonical_build_migration_test.gd
 run_check --script res://tests/canonical_build_store_test.gd
+run_check --script res://tests/footprint_metadata_test.gd
+run_check --script res://tests/save_receipt_revision_test.gd
 run_check --script res://tests/canonical_game_state_test.gd
 run_check --script res://tests/canonical_crafting_test.gd
 run_check --script res://tests/canonical_group_cast_test.gd

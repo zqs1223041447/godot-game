@@ -13,7 +13,8 @@ class FaultModel extends Model:
 var checks:=0
 var failures:=0
 func _initialize()->void:
-	if not OS.get_environment("XDG_DATA_HOME").begins_with("/workspace/scratch/a51485f153de/v023-profile-users/"):quit(78);return
+	var isolated:=OS.get_environment("XDG_DATA_HOME")
+	if (not isolated.begins_with("/tmp/godot-m1-") and not isolated.begins_with("/workspace/scratch/a51485f153de/v023-profile-users/")) or not OS.get_user_data_dir().begins_with(isolated+"/"):quit(78);return
 	var state:=FaultModel.new();var path:="user://receipt.json"
 	check(not state.crafting_change_already_saved() and state._disk_revision==-1,"New model has no receipt")
 	check(state.save_build(path)==OK and state.crafting_change_already_saved(),"Successful save produces an exact receipt")
