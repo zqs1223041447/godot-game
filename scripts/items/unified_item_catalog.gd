@@ -7,6 +7,7 @@ const Equipment = preload("res://scripts/items/equipment_catalog.gd")
 const Jewels = preload("res://scripts/jewel_data.gd")
 const Slots = preload("res://scripts/items/equipment_slots.gd")
 const Gems = preload("res://scripts/items/gem_catalog.gd")
+const Flasks = preload("res://scripts/items/flask_catalog.gd")
 const Currency = preload("res://scripts/items/currency_catalog.gd")
 const Locations = preload("res://scripts/items/item_location_rules.gd")
 const FIELDS: Array[String] = ["uid", "kind", "definition_id", "payload"]
@@ -49,6 +50,7 @@ static func validate_instance(value: Variant) -> bool:
 		"jewel":
 			return value.definition_id.begins_with("jewel:") and Jewels.validate_instance(value.payload) \
 				and value.payload.id == value.uid and "jewel:" + str(value.payload.base) == value.definition_id
+		"flask":return Flasks.validate_instance(value)
 		"currency":
 			return Currency.validate_instance(value)
 		"skill_gem", "support_gem":
@@ -76,6 +78,9 @@ static func definition_for_instance(value: Variant) -> Dictionary:
 				"description": Jewels.get_description(jewel), "rarity": jewel.rarity,
 				"color": Jewels.get_color(jewel), "stats": Jewels.get_stats(jewel),
 				"size": Vector2i.ONE, "category": "", "effects": []}
+		"flask":
+			result=Flasks.definition(value.definition_id)
+			result["id"]=value.uid
 		"currency":
 			result = Currency.definition(value.payload.quantity)
 		"skill_gem", "support_gem":
@@ -118,6 +123,7 @@ static func _metadata_for_validated(item: Dictionary) -> Dictionary:
 		category = slot if not Slots.targets_for_category(slot).is_empty() else Slots.legacy_slot(slot)
 		var size: Variant = base.size
 		dimensions = [int(size.x), int(size.y)] if size is Vector2i else [int(size[0]), int(size[1])]
+	if item.kind=="flask":dimensions=[1,2]
 	return {"kind": item.kind, "category": category, "size": dimensions}
 
 
@@ -160,10 +166,14 @@ static func decode_paged_location(raw: Variant) -> Dictionary:
 	return _decode_location(raw, true)
 
 static func decode_current_location(raw: Variant) -> Dictionary:
-	return _decode_location(raw,true,true)
+	return _decode_location(raw,true,true,true)
 
 
-static func _decode_location(raw: Variant, paged: bool, expanded: bool=false) -> Dictionary:
+static func decode_v17_location(raw:Variant)->Dictionary:
+	return _decode_location(raw,true,true,false)
+
+
+static func _decode_location(raw: Variant, paged: bool, expanded: bool=false,allow_flasks: bool=false) -> Dictionary:
 	if not raw is Dictionary or not raw.get("kind") is String:
 		return {}
 	var value: Dictionary = raw.duplicate(true)
@@ -180,7 +190,7 @@ static func _decode_location(raw: Variant, paged: bool, expanded: bool=false) ->
 		if not value.has(field) or not _whole(value[field], 0, maximum):
 			return {}
 		value[field] = int(value[field])
-	var shape_error: String = Locations._current_location_shape_error(value,str(value.kind)) if expanded else Locations._paged_location_shape_error(value, str(value.kind)) if paged else Locations._location_shape_error(value, str(value.kind))
+	var shape_error: String = Locations._current_location_shape_error(value,str(value.kind)) if allow_flasks else Locations._v17_location_shape_error(value,str(value.kind)) if expanded else Locations._paged_location_shape_error(value, str(value.kind)) if paged else Locations._location_shape_error(value, str(value.kind))
 	return value if shape_error.is_empty() else {}
 
 

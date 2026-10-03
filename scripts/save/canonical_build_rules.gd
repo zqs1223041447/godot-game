@@ -13,9 +13,11 @@ const SourceTree = preload("res://scripts/passives/source_tree_runtime.gd")
 const V14_VERSION := 14
 const V15_VERSION := 15
 const V16_VERSION := 16
-const VERSION := 17
+const V17_VERSION := 17
+const VERSION := 18
 const LEGACY_MAX_ITEMS := 1024
-const MAX_ITEMS := LEGACY_MAX_ITEMS + 1 # A full valid old registry may gain one migration stack.
+const V17_MAX_ITEMS := LEGACY_MAX_ITEMS + 1
+const MAX_ITEMS := V17_MAX_ITEMS + 2 # Two once-only migration bottles; bag capacity is unchanged.
 const MAX_GROUPS := 64
 const MAX_SERIAL := 1000000000
 const FIELDS := ["version", "revision", "items", "locations", "next_item_serial", "skill_groups", "bindings", "talents", "progress", "crafting", "migration_ledger"]
@@ -26,6 +28,10 @@ const BINDABLE_KEYS := [KEY_0, KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6, KEY_7, 
 
 static func decode(raw: Variant) -> Dictionary:
 	return _decode(raw, true, VERSION, true)
+
+
+static func decode_v17(raw:Variant)->Dictionary:
+	return _decode(raw,true,V17_VERSION,true)
 
 
 static func decode_v16(raw: Variant) -> Dictionary:
@@ -56,10 +62,11 @@ static func _decode(raw: Variant, paged: bool, expected_version: int, allow_curr
 		if not allow_currency and value.items[uid] is Dictionary and value.items[uid].get("kind", "") == "currency": return {}
 		var item: Dictionary = Items.decode_instance(value.items[uid])
 		if item.is_empty(): return {}
+		if item.kind=="flask" and expected_version<18:return {}
 		if item.kind in ["skill_gem","support_gem"] and Items.Gems.minimum_save_version(item.definition_id)>expected_version: return {}
 		value.items[uid] = item
 	for uid: Variant in value.locations:
-		var location: Dictionary = Items.decode_current_location(value.locations[uid]) if allow_currency else Items.decode_paged_location(value.locations[uid]) if paged else Items.decode_location(value.locations[uid])
+		var location: Dictionary = Items.decode_current_location(value.locations[uid]) if expected_version>=18 else Items.decode_v17_location(value.locations[uid]) if allow_currency else Items.decode_paged_location(value.locations[uid]) if paged else Items.decode_location(value.locations[uid])
 		if location.is_empty(): return {}
 		value.locations[uid] = location
 	for group: String in ["progress", "crafting", "talents", "migration_ledger"]:
@@ -89,8 +96,12 @@ static func reason(value: Variant, validate_talents: Callable = Callable(), sock
 	return _reason(value, VERSION, true, true, MAX_ITEMS, validate_talents, socket_ids)
 
 
+static func reason_v17(value:Variant,validate_talents:Callable=Callable(),socket_ids:Array=[])->String:
+	return _reason(value,V17_VERSION,true,true,V17_MAX_ITEMS,validate_talents,socket_ids)
+
+
 static func reason_v16(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
-	return _reason(value, V16_VERSION, true, true, MAX_ITEMS, validate_talents, socket_ids)
+	return _reason(value, V16_VERSION, true, true, V17_MAX_ITEMS, validate_talents, socket_ids)
 
 
 static func reason_v15(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
@@ -107,6 +118,9 @@ static func _reason(value: Variant, expected_version: int, paged: bool, allow_cu
 	if not value.version is int or value.version != expected_version: return "保存版本不兼容"
 	if not _integer(value.revision, 0, MAX_SERIAL) or not _integer(value.next_item_serial, 1, MAX_SERIAL): return "修订或物品序号无效"
 	if not value.items is Dictionary or value.items.size() > item_limit: return "物品注册表无效"
+	if expected_version<18:
+		for item:Variant in value.items.values():
+			if item is Dictionary and item.get("kind","")=="flask":return "旧版本不能包含药剂物品"
 	if not allow_currency:
 		for item: Variant in value.items.values():
 			if item is Dictionary and item.get("kind", "") == "currency": return "旧版本不能包含货币物品"
@@ -125,7 +139,7 @@ static func _reason(value: Variant, expected_version: int, paged: bool, allow_cu
 		group_ids[group.id] = true
 	var valid_sockets := SourceTree.Data.standard_socket_ids() if socket_ids.is_empty() else socket_ids
 	var layout_context: Dictionary = Migration.paged_location_context(value, valid_sockets) if allow_currency else Migration.v15_location_context(value, valid_sockets) if paged else Migration.location_context(value, valid_sockets)
-	var layout: Dictionary = Locations.validate_current(metadata,value.locations,layout_context) if allow_currency else Locations.validate_paged(metadata, value.locations, layout_context) if paged else Locations.validate(metadata, value.locations, layout_context)
+	var layout: Dictionary = Locations.validate_current(metadata,value.locations,layout_context) if expected_version>=18 else Locations.validate_v17(metadata,value.locations,layout_context) if allow_currency else Locations.validate_paged(metadata, value.locations, layout_context) if paged else Locations.validate(metadata, value.locations, layout_context)
 	if not layout.ok: return layout.reason
 	if not value.bindings is Array or value.bindings.size() > group_ids.size(): return "快捷键无效"
 	var keys: Dictionary = {}

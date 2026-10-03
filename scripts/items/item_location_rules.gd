@@ -13,7 +13,8 @@ const CURRENT_BAG_ROWS: int = 10
 const CURRENT_BAG_PAGES: int = 2
 const MAX_ITEM_ID_LENGTH: int = 128
 const MAX_SUPPORT_INDEX: int = 4
-const ITEM_KINDS: Array[String] = ["equipment", "jewel", "skill_gem", "support_gem", "currency"]
+const ITEM_KINDS: Array[String] = ["equipment", "jewel", "skill_gem", "support_gem", "currency", "flask"]
+const FLASK_SLOTS: Array[String] = ["flask_1","flask_2","flask_3","flask_4","flask_5"]
 const EQUIPMENT_CATEGORIES: Array[String] = [
 	"weapon", "body_armour", "amulet", "ring", "boots", "belt", "gloves", "helmet",
 ]
@@ -48,11 +49,15 @@ static func validate_paged(metadata_by_uid: Variant, locations: Variant, context
 ## v16 expands capacity without changing the page/x/y field shape. The v15
 ## wrapper above retains its original exact 8×6 context and bounds.
 static func validate_current(metadata_by_uid: Variant, locations: Variant, context: Variant) -> Dictionary:
-	return _validate(metadata_by_uid,locations,context,true,_current_context_error(context),true)
+	return _validate(metadata_by_uid,locations,context,true,_current_context_error(context),true,true)
+
+
+static func validate_v17(metadata_by_uid: Variant,locations: Variant,context: Variant)->Dictionary:
+	return _validate(metadata_by_uid,locations,context,true,_current_context_error(context),true,false)
 
 
 static func _validate(metadata_by_uid: Variant, locations: Variant, context: Variant,
-		paged: bool, context_error: String,allow_currency: bool=false) -> Dictionary:
+		paged: bool, context_error: String,allow_currency: bool=false,allow_flasks: bool=false) -> Dictionary:
 	if not context_error.is_empty():
 		return _failure("invalid_context", context_error)
 	if not metadata_by_uid is Dictionary or not locations is Dictionary:
@@ -65,6 +70,8 @@ static func _validate(metadata_by_uid: Variant, locations: Variant, context: Var
 		var item_error: String = _metadata_error(metadata_by_uid[uid])
 		if not item_error.is_empty():
 			return _failure("invalid_metadata", "%s：%s" % [uid, item_error])
+		if not allow_flasks and metadata_by_uid[uid].kind == "flask":
+			return _failure("kind_mismatch","旧版本位置协议不支持药剂物品")
 		if not allow_currency and metadata_by_uid[uid].kind == "currency":
 			return _failure("kind_mismatch","旧版本位置协议不支持货币物品")
 	for uid: Variant in locations.keys():
@@ -91,7 +98,7 @@ static func _validate(metadata_by_uid: Variant, locations: Variant, context: Var
 		if not location.has("kind") or typeof(location.kind) != TYPE_STRING:
 			return _failure("invalid_location", "%s 的位置缺少字符串 kind" % uid)
 		var kind: String = location.kind
-		var target_error: String = _paged_location_shape_error(location, kind,context.columns,context.rows,context.pages) if paged else _location_shape_error(location, kind)
+		var target_error: String = _current_location_shape_error(location,kind) if allow_flasks else _paged_location_shape_error(location, kind,context.columns,context.rows,context.pages) if paged else _location_shape_error(location, kind)
 		if not target_error.is_empty():
 			return _failure("invalid_location", "%s：%s" % [uid, target_error])
 
@@ -113,6 +120,11 @@ static func _validate(metadata_by_uid: Variant, locations: Variant, context: Var
 						if occupied_cells.has(cell_key):
 							return _failure("bag_overlap", "%s 与 %s 的背包占格重叠" % [uid, occupied_cells[cell_key]])
 						occupied_cells[cell_key] = uid
+			"flask_slot":
+				if not allow_flasks or item.kind!="flask":return _failure("kind_mismatch","只有药剂可放入药剂槽")
+				var target:String="flask_slot:"+str(location.slot_id)
+				if occupied_targets.has(target):return _failure("duplicate_target","药剂槽已有物品")
+				occupied_targets[target]=uid
 			"equipment":
 				if item.kind != "equipment":
 					return _failure("kind_mismatch", "%s 只有 equipment 可穿戴" % uid)
@@ -246,6 +258,7 @@ static func _metadata_error(value: Variant) -> String:
 		return "size 必须使用真正的整数"
 	if value.size[0] < 1 or value.size[0] > BAG_COLUMNS or value.size[1] < 1 or value.size[1] > BAG_ROWS:
 		return "size 必须在 1×1 至 12×8 范围内"
+	if value.kind=="flask" and value.size!=[1,2]:return "flask 必须占用1×2格子"
 	if value.kind == "currency" and value.size != [1, 1]:
 		return "currency 必须占用 1×1 格子"
 	return ""
@@ -303,6 +316,13 @@ static func _paged_location_shape_error(value: Dictionary, kind: String,columns:
 
 
 static func _current_location_shape_error(value: Dictionary,kind: String)->String:
+	if kind=="flask_slot":
+		if not _exact_string_keys(value,["kind","slot_id"]) or value.kind!="flask_slot" or not value.slot_id is String or value.slot_id not in FLASK_SLOTS:return "药剂槽必须为flask_1至flask_5"
+		return ""
+	return _v17_location_shape_error(value,kind)
+
+
+static func _v17_location_shape_error(value:Dictionary,kind:String)->String:
 	return _paged_location_shape_error(value,kind,CURRENT_BAG_COLUMNS,CURRENT_BAG_ROWS,CURRENT_BAG_PAGES)
 
 
