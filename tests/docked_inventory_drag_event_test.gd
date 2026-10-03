@@ -62,8 +62,8 @@ func _run() -> void:
 	check(grid != null and inventory.is_visible_in_tree(), "Right dock shows the canonical shared bag grid")
 	check(arena.hud._menu_routes.snapshot().left == "skills" and arena.hud._menu_routes.snapshot().right_inventory,
 		"Skills and the same inventory are open at once")
-	check(grid.bag_page_count() == 2 and grid.grid_columns() == 8 and grid.grid_rows() == 6,
-		"Visible bag follows the model's exact two-page 8×6 layout")
+	check(grid.bag_page_count() == 2 and grid.grid_columns() == 12 and grid.grid_rows() == 10,
+		"Visible bag follows the model's exact two-page 12×10 layout")
 	check(arena.hud.handle_menu_key(KEY_C, true, false) == false, "Character UI routing does not consume the existing C skill key")
 	var next_page: Control = inventory.find_child("NextBagPage", true, false) as Control
 	var previous_page: Control = inventory.find_child("PreviousBagPage", true, false) as Control

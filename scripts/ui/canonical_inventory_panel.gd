@@ -51,6 +51,8 @@ class SlotTarget extends Button:
 			EquipmentArt.draw_item(self, entry, Rect2(Vector2(4,3),Vector2(size.x-8.0,maxf(8.0,size.y-caption_height-4.0))))
 		var font: Font = get_theme_default_font()
 		var font_size: int = get_theme_font_size("font_size")
+		while font_size > 7 and font.get_string_size(CanonicalInventoryPanel.SLOT_NAMES[slot_id],HORIZONTAL_ALIGNMENT_LEFT,-1,font_size).x > size.x-6:
+			font_size -= 1
 		draw_string(font,Vector2(3,size.y-3),CanonicalInventoryPanel.SLOT_NAMES[slot_id],HORIZONTAL_ALIGNMENT_CENTER,size.x-6,font_size,Color("3b281b"))
 	func _get_drag_data(_at: Vector2) -> Variant:
 		if uid.is_empty(): return null
