@@ -14,7 +14,8 @@ fi
 VALIDATION_DIR="$(mktemp -d "${TMPDIR:-/tmp}/godot-game-validation.XXXXXX")"
 PIERCE_VALIDATION_DIR="$(mktemp -d /tmp/godot-pierce-acceptance-XXXXXX)"
 CRAFT_VALIDATION_DIR="$(mktemp -d /tmp/godot-crafting-qa-XXXXXX)"
-trap 'rm -rf -- "$VALIDATION_DIR" "$PIERCE_VALIDATION_DIR" "$CRAFT_VALIDATION_DIR"' EXIT
+M0_VALIDATION_DIR="$(mktemp -d /tmp/godot-m0-scene-XXXXXX)"
+trap 'rm -rf -- "$VALIDATION_DIR" "$PIERCE_VALIDATION_DIR" "$CRAFT_VALIDATION_DIR" "$M0_VALIDATION_DIR"' EXIT
 
 # Isolate test settings and saves, including in restricted cloud workspaces.
 if [[ "$(uname -s)" == "Linux" ]]; then
@@ -38,6 +39,10 @@ run_check() {
 			res://tests/crafting_state_test.gd|res://tests/crafting_integration_test.gd|res://tests/crafting_ui_integration_test.gd|res://tests/crafting_controls_test.gd)
 				export XDG_DATA_HOME="$CRAFT_VALIDATION_DIR/check-$CHECK_INDEX/data"
 				export GODOT_CRAFTING_TEST_ROOT="$CRAFT_VALIDATION_DIR/check-$CHECK_INDEX"
+				unset PIERCE_QA_ROOT
+				;;
+			res://tests/m0_scene_cache_test.gd)
+				export XDG_DATA_HOME="$M0_VALIDATION_DIR/check-$CHECK_INDEX/data"
 				unset PIERCE_QA_ROOT
 				;;
 			*) unset PIERCE_QA_ROOT ;;

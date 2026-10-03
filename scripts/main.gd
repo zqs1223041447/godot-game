@@ -87,6 +87,8 @@ var hurt_flash: float = 0.0
 var screen_shake: float = 0.0
 var total_shots: int = 0
 var total_damage: float = 0.0
+var static_environment: Node2D
+var _world_draw_count: int = 0
 var _font: Font
 var _stats: Dictionary = {}
 var _autosave_timer: float = 0.0
@@ -108,6 +110,12 @@ func _ready() -> void:
 	state.load_build()
 	_stats = state.get_stats()
 	state.changed.connect(_on_build_changed)
+	static_environment = preload("res://scripts/visuals/static_arena_layer.gd").new()
+	static_environment.name = "StaticArenaBackground"
+	static_environment.z_index = -1
+	static_environment.show_behind_parent = true
+	static_environment.configure(ARENA, _font)
+	add_child(static_environment)
 	View.setup_camera(self, ARENA)
 	hud = Hud.new()
 	hud.name = "GameHUD"
@@ -333,7 +341,6 @@ func _process(delta: float) -> void:
 	if not _ready_complete:
 		return
 	if not alive or hud.is_blocking():
-		queue_redraw()
 		return
 	# Fixed world observations keep moving-target / return aiming consistent.
 	_simulation_accumulator = minf(0.25, _simulation_accumulator + delta)
@@ -1180,4 +1187,5 @@ func _update_effects(delta: float) -> void:
 
 
 func _draw() -> void:
-	Visuals.draw_scene(self, visual_settings)
+	_world_draw_count += 1
+	Visuals.draw_scene(self, visual_settings, static_environment == null)

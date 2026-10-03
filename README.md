@@ -1,5 +1,7 @@
 # godot游戏仓 · 裂隙试炼
 
+重构开发分支：以已发布v0.19增量实现新目标。[公共协议](docs/RESTRUCTURE_PROTOCOL.zh-CN.md) · [M0观测](docs/performance/M0_BASELINE.zh-CN.md)。九装备位、10×5宝石与完整源树尚未作为游戏功能交付；v0.20工艺阶段另行保留。
+
 以 **构筑与技能组合** 为核心的俯视平面竞技场。基于 **Godot 4.6.3 标准版 / GDScript**，目标平台 **Windows x86_64**。
 
 ## v0.19.0：16种辅助集中批次

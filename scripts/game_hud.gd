@@ -44,6 +44,8 @@ var _level_label: Label
 var _bars: Dictionary = {}
 var _bar_values: Dictionary = {}
 var _skill_buttons: Array[Button] = []
+var _skill_view_token: PackedByteArray = PackedByteArray()
+var _skill_views: Dictionary = {}
 var _auto_button: Button
 var _toast: PanelContainer
 var _toast_label: Label
@@ -458,6 +460,25 @@ func _build_modal() -> void:
 	_modal.hide()
 
 
+func _skill_view(id: String) -> Dictionary:
+	if _skill_views.has(id):
+		return _skill_views[id]
+	var skill: Dictionary = GameData.SKILLS.get(id, {})
+	var cast: Dictionary = _state.get_skill_cast(id)
+	var valid: bool = bool(cast.get("ok", false))
+	var cost: float = float(cast.get("mana", 0.0))
+	var tooltip: String = "%s\n基础技能：%s\n当前消耗 %.2f 法力 · 冷却 %.2f 秒" % [str(skill.get("name", id)), str(skill.get("description", "")), cost, float(cast.get("cooldown", 0.0))]
+	if int(cast.get("initial_count", 0)) > 0:
+		tooltip += "\n当前初始投射物：%d 枚" % int(cast.initial_count)
+	if valid:
+		tooltip += "\n" + TypedPreview.summary(cast) + "\n" + TypedPreview.details(cast)
+	else:
+		tooltip = "%s\n无法施放：%s" % [str(skill.get("name", id)), str(cast.get("error", "技能编译失败"))]
+	var result: Dictionary = {"ok": valid, "mana": cost, "tooltip": tooltip}
+	_skill_views[id] = result
+	return result
+
+
 func _update_live() -> void:
 	if _state == null:
 		return
@@ -475,6 +496,10 @@ func _update_live() -> void:
 	_set_vital("shield", float(_arena.get("shield")), float(stats.get("max_shield", stats.get("shield", 0.0))))
 	var defense: Dictionary = _arena.call("player_defense_profile")
 	_bars.health.tooltip_text = "火抗 %.0f%%（合计 %.0f%%）\n火焰分量减伤后，先消耗护盾，再消耗生命。详细规则见离线图鉴。" % [float(defense.effective_resistances.fire) * 100.0, float(defense.raw_resistances.fire) * 100.0]
+	var token: PackedByteArray = _state.get_build_view_token()
+	if token != _skill_view_token:
+		_skill_view_token = token
+		_skill_views.clear()
 	var cooldowns: Dictionary = _arena.get("cooldowns") as Dictionary
 	for index: int in range(_skill_buttons.size()):
 		var button: Button = _skill_buttons[index]
@@ -484,22 +509,18 @@ func _update_live() -> void:
 			continue
 		var id: String = _state.skill_slots[index]
 		var skill: Dictionary = GameData.SKILLS.get(id, {}) as Dictionary
-		var cast: Dictionary = _state.get_skill_cast(id)
-		var valid_cast: bool = bool(cast.get("ok", false))
-		var mana_cost: float = float(cast.get("mana", 0.0))
+		var view: Dictionary = _skill_view(id)
+		var valid_cast: bool = bool(view.ok)
+		var mana_cost: float = float(view.mana)
 		var cooldown: float = float(cooldowns.get(id, 0.0))
 		var ready: String = "就绪" if cooldown <= 0.0 else "%.1fs" % cooldown
 		if cooldown <= 0.0 and float(_arena.get("mana")) < mana_cost:
 			ready = "法力不足"
 		button.text = "%s\n%s" % [str(skill.get("short_name", skill.get("name", id))), ready]
-		button.tooltip_text = "%s\n基础技能：%s\n当前消耗 %.2f 法力 · 冷却 %.2f 秒" % [str(skill.get("name", id)), str(skill.get("description", "")), mana_cost, float(cast.get("cooldown", 0.0))]
-		if int(cast.get("initial_count", 0)) > 0:
-			button.tooltip_text += "\n当前初始投射物：%d 枚" % int(cast.initial_count)
-		if valid_cast:
-			button.tooltip_text += "\n" + TypedPreview.summary(cast) + "\n" + TypedPreview.details(cast)
+		button.tooltip_text = str(view.tooltip)
 		if not valid_cast:
-			button.text = "%s\n配置无效" % str(skill.get("short_name", id))
-			button.tooltip_text = "%s\n无法施放：%s" % [str(skill.get("name", id)), str(cast.get("error", "技能编译失败"))]
+			button.text = "%s\n配置无效" % str(skill.get("name", id))
+
 		var tint: Color = Palette.skill(id,skill.get("color", CYAN) as Color)
 		var emblem: Control = _skill_emblems[index]
 		emblem.skill_id = id
@@ -1029,6 +1050,9 @@ func _apply_presentation() -> void:
 	var help: Control = _root.get_node("CombatHelp")
 	help.visible = width >= 1200
 	# At large zoom the hints move to pause; primary controls keep full hit targets.
+
+	if is_instance_valid(_arena):
+		_arena.queue_redraw()
 
 
 func _build_settings_panel() -> void:

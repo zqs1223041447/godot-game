@@ -88,13 +88,81 @@ var _craft_emitting: bool = false
 var _craft_persisted_text: String = ""
 ## Primary snapshot writes only; historical backup writes are separately guarded.
 var primary_save_attempt_count: int = 0
+## Runtime-only immutable-view cache. Save schema and public payloads are unchanged.
+var stable_cache_enabled: bool = true
+var _stable_inputs: PackedByteArray = PackedByteArray()
+var _cached_stats: Dictionary = {}
+var _cached_snapshot: Dictionary = {}
+var _cached_casts: Dictionary = {}
+var _stable_revision: int = 0
+var _stats_builds: int = 0
+var _snapshot_builds: int = 0
+var _skill_compiles: int = 0
+var _uncached_view_revision: int = 0
+
 
 
 func _init() -> void:
 	backpack_positions = _packed_layout(get_backpack_items(), equipment_instances)
 
 
+func _can_use_stable_cache() -> bool:
+	# Subclasses can override snapshot/stat semantics without declaring inputs.
+	# Keep their original evaluation behavior until they explicitly opt in here.
+	return stable_cache_enabled and get_script().get_global_name() == &"BuildState"
+
+
+func _stable_input_signature() -> PackedByteArray:
+	var gear: Dictionary = {}
+	for slot: String in EQUIPMENT_SLOTS:
+		var id: String = str(equipped.get(slot, ""))
+		gear[slot] = [id, equipment_instances.get(id, {})]
+	var selected_jewels: Dictionary = {}
+	for socket_id: String in socketed_jewels:
+		var id: String = str(socketed_jewels[socket_id])
+		selected_jewels[id] = jewels.get(id, {})
+	# Byte equality detects legacy public nested edits without hash collisions.
+	# XP, wallet and bag coordinates are deliberately absent; level is retained.
+	return var_to_bytes([gear, allocated_nodes, socketed_jewels, selected_jewels, level])
+
+
+func _ensure_stable_cache() -> void:
+	var signature: PackedByteArray = _stable_input_signature()
+	if signature == _stable_inputs:
+		return
+	_stable_inputs = signature
+	_stable_revision += 1
+	_cached_stats.clear()
+	_cached_snapshot.clear()
+	_cached_casts.clear()
+
+
+func get_build_view_token() -> PackedByteArray:
+	if not _can_use_stable_cache():
+		_uncached_view_revision += 1
+		return var_to_bytes([get_instance_id(), _uncached_view_revision])
+	# GUI-only stamp; runtime conditions are not made part of a static preview.
+	_ensure_stable_cache()
+	return var_to_bytes([get_instance_id(), _stable_revision, skill_supports])
+
+
+func cache_diagnostics() -> Dictionary:
+	return {"revision": _stable_revision, "stats_builds": _stats_builds,
+		"snapshot_builds": _snapshot_builds, "skill_compiles": _skill_compiles,
+		"cached_skills": _cached_casts.size(), "enabled": _can_use_stable_cache()}
+
+
 func get_stats() -> Dictionary:
+	if not _can_use_stable_cache():
+		return _compute_stats()
+	_ensure_stable_cache()
+	if _cached_stats.is_empty():
+		_cached_stats = _compute_stats()
+	return _cached_stats.duplicate(true)
+
+
+func _compute_stats() -> Dictionary:
+	_stats_builds += 1
 	var result: Dictionary = BASE_STATS.duplicate()
 	for slot: String in EQUIPMENT_SLOTS:
 		var item_id: String = str(equipped.get(slot, ""))
@@ -113,6 +181,16 @@ func get_stats() -> Dictionary:
 
 
 func get_combat_snapshot() -> Dictionary:
+	if not _can_use_stable_cache():
+		return _compute_combat_snapshot()
+	_ensure_stable_cache()
+	if _cached_snapshot.is_empty():
+		_cached_snapshot = _compute_combat_snapshot()
+	return _cached_snapshot.duplicate(true)
+
+
+func _compute_combat_snapshot() -> Dictionary:
+	_snapshot_builds += 1
 	var effects: Array[String] = []
 	for slot: String in EQUIPMENT_SLOTS:
 		var id: String = str(equipped.get(slot, ""))
@@ -608,7 +686,19 @@ func get_skill_cast(skill_id: String) -> Dictionary:
 	var raw: Variant = skill_supports.get(skill_id, [])
 	if not raw is Array:
 		return {"ok": false, "error": "辅助配置必须为列表"}
-	return SkillCompiler.compile_skill(skill_id, get_combat_snapshot(), raw)
+	if not _can_use_stable_cache():
+		_skill_compiles += 1
+		return SkillCompiler.compile_skill(skill_id, get_combat_snapshot(), raw)
+	_ensure_stable_cache()
+	var links: PackedByteArray = var_to_bytes(raw)
+	var cached: Dictionary = _cached_casts.get(skill_id, {})
+	if not cached.is_empty() and cached.links == links:
+		return cached.cast.duplicate(true)
+	_skill_compiles += 1
+	var cast: Dictionary = SkillCompiler.compile_skill(skill_id, get_combat_snapshot(), raw)
+	if bool(cast.get("ok", false)):
+		_cached_casts[skill_id] = {"links": links, "cast": cast.duplicate(true)}
+	return cast
 
 
 func support_reason(skill_id: String, support_id: String) -> String:

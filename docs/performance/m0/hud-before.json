@@ -1,0 +1,38 @@
+{
+	"display": "headless",
+	"engine": "4.6.3-stable (official)",
+	"five_supports_measured": false,
+	"logical_processors": 9,
+	"platform": "Linux",
+	"processor": "AMD EPYC 9V74 80-Core Processor",
+	"rendering_measured": false,
+	"rows": [
+		{
+			"build_unchanged": true,
+			"hud_hz": 20,
+			"max_ms": 2.033,
+			"mean_ms": 1.272225,
+			"p50_ms": 1.172,
+			"p95_ms": 1.733,
+			"p99_ms": 1.919,
+			"rng_unchanged": true,
+			"samples": 240,
+			"scenario": "default",
+			"skill_rows": 5
+		},
+		{
+			"build_unchanged": true,
+			"hud_hz": 20,
+			"max_ms": 5.386,
+			"mean_ms": 3.00284166666667,
+			"p50_ms": 2.858,
+			"p95_ms": 3.958,
+			"p99_ms": 4.788,
+			"rng_unchanged": true,
+			"samples": 240,
+			"scenario": "two_supports",
+			"skill_rows": 5
+		}
+	],
+	"windows_target_measured": false
+}

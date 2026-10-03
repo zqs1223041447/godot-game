@@ -1,0 +1,54 @@
+{
+	"display": "headless",
+	"engine": "4.6.3-stable (official)",
+	"five_supports_measured": false,
+	"logical_processors": 9,
+	"platform": "Linux",
+	"processor": "AMD EPYC 9V74 80-Core Processor",
+	"rendering_measured": false,
+	"rows": [
+		{
+			"build_unchanged": true,
+			"cache": {
+				"cached_skills": 5,
+				"enabled": true,
+				"revision": 1,
+				"skill_compiles": 5,
+				"snapshot_builds": 1,
+				"stats_builds": 1
+			},
+			"hud_hz": 20,
+			"max_ms": 0.997,
+			"mean_ms": 0.22015,
+			"p50_ms": 0.213,
+			"p95_ms": 0.317,
+			"p99_ms": 0.648,
+			"rng_unchanged": true,
+			"samples": 240,
+			"scenario": "default",
+			"skill_rows": 5
+		},
+		{
+			"build_unchanged": true,
+			"cache": {
+				"cached_skills": 6,
+				"enabled": true,
+				"revision": 4,
+				"skill_compiles": 26,
+				"snapshot_builds": 4,
+				"stats_builds": 4
+			},
+			"hud_hz": 20,
+			"max_ms": 0.376,
+			"mean_ms": 0.195708333333333,
+			"p50_ms": 0.173,
+			"p95_ms": 0.283,
+			"p99_ms": 0.342,
+			"rng_unchanged": true,
+			"samples": 240,
+			"scenario": "two_supports",
+			"skill_rows": 5
+		}
+	],
+	"windows_target_measured": false
+}

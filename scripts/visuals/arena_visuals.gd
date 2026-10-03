@@ -25,8 +25,9 @@ static func shadow(canvas: CanvasItem, pos: Vector2, radius: float) -> void:
 	canvas.draw_circle(Vector2.ZERO, radius, Color(0.015,0.022,0.024,0.62))
 	canvas.draw_set_transform(Vector2.ZERO)
 
-static func draw_scene(arena: Node2D, preferences: Settings) -> void:
-	draw_arena(arena)
+static func draw_scene(arena: Node2D, preferences: Settings, include_environment: bool = true) -> void:
+	if include_environment:
+		draw_arena(arena)
 	if not arena._ready_complete:
 		return
 	for pickup: Dictionary in arena.pickups:
