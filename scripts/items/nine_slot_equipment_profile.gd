@@ -5,15 +5,15 @@ extends RefCounted
 
 const _BASES: Dictionary = {
 	"nine_slot_etched_ring": {"name": "纹刻指环", "slot": "ring", "size": Vector2i(1, 1),
-		"description": "原型底材：最大生命 +4，最大魔力 +2。", "stats": {"max_health": 4.0, "max_mana": 2.0}},
+		"description": "最大生命 +4，最大魔力 +2。", "stats": {"max_health": 4.0, "max_mana": 2.0}},
 	"nine_slot_trail_boots": {"name": "踏纹短靴", "slot": "boots", "size": Vector2i(2, 2),
-		"description": "原型底材：最大生命 +3，移动速度 +1。", "stats": {"max_health": 3.0, "move_speed": 1.0}},
+		"description": "最大生命 +3，移动速度 +1。", "stats": {"max_health": 3.0, "move_speed": 1.0}},
 	"nine_slot_folded_belt": {"name": "折纹腰带", "slot": "belt", "size": Vector2i(2, 1),
-		"description": "原型底材：最大生命 +4，最大护盾 +2。", "stats": {"max_health": 4.0, "max_shield": 2.0}},
+		"description": "最大生命 +4，最大护盾 +2。", "stats": {"max_health": 4.0, "max_shield": 2.0}},
 	"nine_slot_threaded_gloves": {"name": "织纹手套", "slot": "gloves", "size": Vector2i(2, 2),
-		"description": "原型底材：最大魔力 +2，魔力恢复 +0.1 / 秒。", "stats": {"max_mana": 2.0, "mana_regen": 0.1}},
+		"description": "最大魔力 +2，魔力恢复 +0.1 / 秒。", "stats": {"max_mana": 2.0, "mana_regen": 0.1}},
 	"nine_slot_slate_helmet": {"name": "石脊头盔", "slot": "helmet", "size": Vector2i(2, 2),
-		"description": "原型底材：最大生命 +4，最大护盾 +2。", "stats": {"max_health": 4.0, "max_shield": 2.0}},
+		"description": "最大生命 +4，最大护盾 +2。", "stats": {"max_health": 4.0, "max_shield": 2.0}},
 }
 
 const _AFFIXES: Dictionary = {
@@ -29,7 +29,7 @@ const _AFFIXES: Dictionary = {
 		"tiers": [{"tier": 1, "level": 1, "weight": 100, "min": 2, "max": 3}, {"tier": 2, "level": 8, "weight": 60, "min": 4, "max": 5}, {"tier": 3, "level": 16, "weight": 30, "min": 6, "max": 8}]},
 	"nine_slot_suffix_stride": {"name": "轻步", "kind": "suffix", "group": "nine_slot_movement", "stat": "move_speed_increased", "unit": "percent", "label": "移动速度提高", "slots": ["ring", "boots", "belt", "gloves", "helmet"],
 		"tiers": [{"tier": 1, "level": 1, "weight": 100, "min": 1, "max": 2}, {"tier": 2, "level": 8, "weight": 60, "min": 3, "max": 4}, {"tier": 3, "level": 16, "weight": 30, "min": 5, "max": 6}]},
-	"nine_slot_suffix_skill_row": {"name": "引技", "kind": "suffix", "group": "nine_slot_additional_skill_slot", "stat": "additional_skill_slots", "unit": "flat", "label": "额外技能槽位", "slots": ["belt", "helmet"],
+	"nine_slot_suffix_skill_row": {"name": "引技", "kind": "suffix", "group": "nine_slot_additional_skill_slot", "stat": "additional_skill_slots", "unit": "flat", "label": "额外技能行", "slots": ["belt", "helmet"],
 		"tiers": [{"tier": 1, "level": 1, "weight": 100, "min": 1, "max": 1}, {"tier": 2, "level": 8, "weight": 60, "min": 1, "max": 1}, {"tier": 3, "level": 16, "weight": 30, "min": 1, "max": 1}]},
 }
 

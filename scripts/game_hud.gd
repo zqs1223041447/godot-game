@@ -2,6 +2,10 @@ class_name GameHUD
 extends CanvasLayer
 ## Responsive, keyboard-friendly combat HUD and live build editor.
 
+const CanonicalInventoryView = preload("res://scripts/ui/canonical_inventory_panel.gd")
+const CanonicalSkillsView = preload("res://scripts/ui/canonical_skill_panel.gd")
+const ItemHoverView = preload("res://scripts/ui/item_hover_card.gd")
+const ItemPresentation = preload("res://scripts/ui/unified_item_presentation.gd")
 const MenuRoutes = preload("res://scripts/ui/menu_route_state.gd")
 const PANEL_ROUTES: Dictionary = {"inventory":"inventory", "talents":"passive_tree", "skills":"skill_gems", "combat":"debug_build", "monsters":"debug_monsters", "pause":"pause", "settings":"settings"}
 const TypedPreview = preload("res://scripts/combat/damage_preview.gd")
@@ -38,7 +42,7 @@ const STAT_NAMES: Dictionary = {
 }
 
 var _arena: Node
-var _state: BuildState
+var _state
 var _root: Control
 var _wave_label: Label
 var _run_label: Label
@@ -76,11 +80,16 @@ var _encounter_dialog: ConfirmationDialog
 var _encounter_request_pending: bool = false
 var _encounter_request_ids: Array[String] = []
 var _encounter_request_revision: int = -1
+var _item_hover: Control
+var _hover_uid := ""
+var _hover_anchor := Rect2()
+var _hover_exit_at := 0
+var _hover_compare := false
 
 
 func setup(arena: Node) -> void:
 	_arena = arena
-	_state = arena.get("state") as BuildState
+	_state = arena.get("state")
 	_preferences = arena.get("visual_settings") as VisualSettings
 	layer = 10
 	_root = Control.new()
@@ -97,6 +106,9 @@ func setup(arena: Node) -> void:
 	_build_hint()
 	_build_toast()
 	_build_modal()
+	_item_hover = ItemHoverView.new()
+	_item_hover.name = "SharedItemHover"
+	_root.add_child(_item_hover)
 	_build_encounter_confirmation()
 	_style_dark_hud()
 	get_viewport().size_changed.connect(_apply_presentation)
@@ -108,6 +120,11 @@ func setup(arena: Node) -> void:
 func _process(delta: float) -> void:
 	if not is_instance_valid(_arena) or _root == null:
 		return
+	if is_instance_valid(_item_hover) and _item_hover.visible:
+		var compare: bool = Input.is_key_pressed(KEY_SHIFT)
+		if compare != _hover_compare: _present_item_hover()
+		if _hover_exit_at > 0 and Time.get_ticks_msec() >= _hover_exit_at and not _item_hover.get_global_rect().has_point(_root.get_global_mouse_position()):
+			_dismiss_item_hover()
 	_refresh_clock += delta
 	if _refresh_clock >= 0.05:
 		_refresh_clock = 0.0
@@ -160,6 +177,7 @@ func close_panel() -> void:
 
 
 func _hide_windows() -> void:
+	_dismiss_item_hover()
 	_cancel_encounter_request()
 	_active_panel = ""
 	for view: Dictionary in _windows.values():
@@ -208,6 +226,7 @@ func show_death() -> void:
 func refresh_build() -> void:
 	if _root == null or _state == null:
 		return
+	if not _hover_uid.is_empty(): _present_item_hover()
 	_update_live()
 	if _active_panel == "talents" and is_instance_valid(_passive_panel):
 		_passive_panel.refresh()
@@ -504,11 +523,12 @@ func _build_window(panel_name: String) -> void:
 	_modal.hide()
 
 
-func _skill_view(id: String) -> Dictionary:
-	if _skill_views.has(id):
-		return _skill_views[id]
+func _skill_view(id: String, group_id: String = "") -> Dictionary:
+	var cache_key: String = id if group_id.is_empty() else "group:"+group_id
+	if _skill_views.has(cache_key):
+		return _skill_views[cache_key]
 	var skill: Dictionary = GameData.SKILLS.get(id, {})
-	var cast: Dictionary = _state.get_skill_cast(id)
+	var cast: Dictionary = _state.get_skill_cast(id) if group_id.is_empty() else _state.get_group_cast(group_id)
 	var valid: bool = bool(cast.get("ok", false))
 	var cost: float = float(cast.get("mana", 0.0))
 	var tooltip: String = "%s\n基础技能：%s\n当前消耗 %.2f 法力 · 冷却 %.2f 秒" % [str(skill.get("name", id)), str(skill.get("description", "")), cost, float(cast.get("cooldown", 0.0))]
@@ -519,7 +539,7 @@ func _skill_view(id: String) -> Dictionary:
 	else:
 		tooltip = "%s\n无法施放：%s" % [str(skill.get("name", id)), str(cast.get("error", "技能编译失败"))]
 	var result: Dictionary = {"ok": valid, "mana": cost, "tooltip": tooltip}
-	_skill_views[id] = result
+	_skill_views[cache_key] = result
 	return result
 
 
@@ -547,16 +567,17 @@ func _update_live() -> void:
 	var cooldowns: Dictionary = _arena.get("cooldowns") as Dictionary
 	for index: int in range(_skill_buttons.size()):
 		var button: Button = _skill_buttons[index]
-		if index >= _state.skill_slots.size():
+		if index >= _state.skill_slots.size() or str(_state.skill_slots[index]).is_empty():
 			button.text = "%d\n空技能槽" % (index + 1)
 			button.disabled = true
 			continue
 		var id: String = _state.skill_slots[index]
 		var skill: Dictionary = GameData.SKILLS.get(id, {}) as Dictionary
-		var view: Dictionary = _skill_view(id)
+		var group_id: String = _state.group_for_key(KEY_1+index) if _state.has_method("group_for_key") else ""
+		var view: Dictionary = _skill_view(id,group_id)
 		var valid_cast: bool = bool(view.ok)
 		var mana_cost: float = float(view.mana)
-		var cooldown: float = float(cooldowns.get(id, 0.0))
+		var cooldown: float = float(cooldowns.get(id, 0.0)) if group_id.is_empty() else _arena.group_cooldown_remaining(group_id)
 		var ready: String = "就绪" if cooldown <= 0.0 else "%.1fs" % cooldown
 		if cooldown <= 0.0 and float(_arena.get("mana")) < mana_cost:
 			ready = "法力不足"
@@ -669,6 +690,22 @@ func _slot_name(slot: String) -> String:
 
 
 func _build_inventory_panel() -> void:
+	if _state.has_method("equipped_items"):
+		_panel_title.text = "行囊 · 装备"
+		_panel_subtitle.text = "九个装备目标 · 装备、珠宝与宝石共用行囊"
+		if not is_instance_valid(_inventory_panel):
+			_inventory_panel = CanonicalInventoryView.new()
+			_inventory_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			_inventory_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
+			_panel_body.add_child(_inventory_panel)
+			_inventory_panel.setup(_state)
+			_inventory_panel.feedback.connect(notify)
+			_inventory_panel.item_hovered.connect(_show_item_hover)
+			_inventory_panel.hover_left.connect(_leave_item_hover)
+		_inventory_panel.show()
+		_inventory_panel.refresh()
+		_panel_footer.text = "拖动装备选择目标 · 悬停详情 · Shift 与已装备物品对比"
+		return
 	_panel_title.text = "行囊 · 装备"
 	_panel_subtitle.text = "整理格子，搭配装备  /  珠宝与装备共用背包"
 	if not is_instance_valid(_inventory_panel):
@@ -713,6 +750,23 @@ func _build_talents_panel() -> void:
 
 
 func _build_skills_panel() -> void:
+	if _state.has_method("get_group_cast"):
+		_panel_title.text = "技能宝石 · 组合"
+		_panel_subtitle.text = "独立实例与五个辅助孔 · 所有激活行均可绑定施放"
+		if not is_instance_valid(_skill_support_panel):
+			_skill_support_panel = CanonicalSkillsView.new()
+			_skill_support_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			_skill_support_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
+			_panel_body.add_child(_skill_support_panel)
+			_skill_support_panel.setup(_state)
+			_skill_support_panel.feedback.connect(notify)
+			_skill_support_panel.item_hovered.connect(_show_item_hover)
+			_skill_support_panel.hover_left.connect(_leave_item_hover)
+		_skill_support_panel.font_scale = _preferences.font_scale
+		_skill_support_panel.show()
+		_skill_support_panel.refresh()
+		_panel_footer.text = "背包宝石可拖入任意合适孔位 · 右键取回 · 减少容量保留配置"
+		return
 	_panel_title.text = "技能组合 · 辅助"
 	_panel_subtitle.text = "每个技能独立保存两个辅助槽 / 可用技能依辅助而定"
 	if _selected_support_skill_id.is_empty() and _selected_skill_slot < _state.skill_slots.size():
@@ -1164,3 +1218,33 @@ func _style_dark_hud() -> void:
 				label.add_theme_color_override("font_shadow_color",Color("211b14"))
 				label.add_theme_constant_override("shadow_offset_x",1)
 				label.add_theme_constant_override("shadow_offset_y",1)
+
+
+func _show_item_hover(uid: String,anchor: Rect2) -> void:
+	if not _state.has_method("item") or _state.item(uid).is_empty(): return
+	_hover_uid = uid
+	_hover_anchor = anchor
+	_hover_exit_at = 0
+	_present_item_hover()
+
+
+func _present_item_hover() -> void:
+	if _hover_uid.is_empty() or not is_instance_valid(_item_hover): return
+	var view: Dictionary = ItemPresentation.view(_state,_hover_uid)
+	if view.is_empty():
+		_dismiss_item_hover()
+		return
+	_hover_compare = Input.is_key_pressed(KEY_SHIFT)
+	_item_hover.font_scale = _preferences.font_scale
+	var anchor: Rect2 = _root.get_global_transform().affine_inverse() * _hover_anchor
+	_item_hover.present(view,ItemPresentation.comparisons(_state,_hover_uid),anchor,Rect2(Vector2.ZERO,_root.size),_hover_compare)
+
+
+func _leave_item_hover() -> void:
+	_hover_exit_at = Time.get_ticks_msec()+180
+
+
+func _dismiss_item_hover() -> void:
+	_hover_uid = ""
+	_hover_exit_at = 0
+	if is_instance_valid(_item_hover): _item_hover.dismiss()

@@ -18,7 +18,7 @@ static func draw_player(arena: Node2D, preferences: VisualSettings) -> void:
 	var stride: float = sin(phase * 7.0) * 0.75 if preferences.motion else 0.0
 	var weapon_id: String = str(arena.state.equipped.get("weapon", ""))
 	var weapon: Dictionary = arena.state.get_item_definition(weapon_id)
-	var armor_id: String = str(arena.state.equipped.get("armor", ""))
+	var armor_id: String = str(arena.state.equipped.get("body_armour", arena.state.equipped.get("armor", "")))
 	var armor: Dictionary = arena.state.get_item_definition(armor_id)
 	var emberhide: bool = str(armor.get("base_id", armor_id)) == "emberhide_vest"
 	var cloak := Color("60754c")

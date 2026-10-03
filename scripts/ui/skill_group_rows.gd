@@ -9,6 +9,7 @@ signal item_hovered(uid: String, anchor: Rect2)
 signal hover_left
 signal binding_requested(group_id: String, keycode: int, revision: int)
 
+const TooltipFactory = preload("res://scripts/ui/crafting_controls.gd")
 const PresentationTheme = preload("res://scripts/visuals/visual_theme.gd")
 const MAX_ROWS: int = 64
 const VISIBLE_ROWS_MIN: int = 10
@@ -30,6 +31,10 @@ const BINDING_LABELS: Array[String] = [
 	"F1", "F2", "F3", "F4", "F5", "F9", "F10", "F11", "F12",
 	"E", "F", "G", "H", "J", "L", "Z", "X", "C", "V", "N", "M",
 ]
+
+class PreviewLabel extends Label:
+	func _make_custom_tooltip(text: String) -> Object:
+		return TooltipFactory.wrapped_tooltip(self,text)
 
 class GemSlot extends Button:
 	var owner_rows: SkillGroupRows
@@ -134,7 +139,7 @@ func _ensure_interface() -> void:
 	clip_contents = true
 	horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
-	custom_minimum_size.y = (BASE_ROW_HEIGHT * float(VISIBLE_ROWS_MIN) + ROW_SEPARATION * float(VISIBLE_ROWS_MIN - 1)) * font_scale
+	custom_minimum_size.y = 220.0 * font_scale
 	_rows_container = VBoxContainer.new()
 	_rows_container.name = "SkillGroupRows"
 	_rows_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -197,7 +202,7 @@ func _build_row(row: Dictionary, row_index: int) -> PanelContainer:
 		support_slot.name = "SupportGem_%02d_%d" % [row_index, support_index]
 		columns.add_child(support_slot)
 
-	var preview := Label.new()
+	var preview := PreviewLabel.new()
 	preview.name = "SkillPreview_%02d" % row_index
 	preview.text = str(row.preview)
 	preview.tooltip_text = str(row.preview_tooltip)
@@ -255,7 +260,7 @@ func _make_binding_picker(row: Dictionary, row_index: int) -> OptionButton:
 
 
 func _on_binding_selected(index: int, group_id: String, generation: int) -> void:
-	if generation != _generation or not _rows_by_id.has(group_id):
+	if generation != _generation or not _rows_by_id.has(group_id) or index < 0 or index >= BINDING_CODES.size():
 		return
 	var row: Dictionary = _rows_by_id[group_id]
 	var keycode: int = BINDING_CODES[index] if index >= 0 and index < BINDING_CODES.size() else 0
@@ -301,7 +306,8 @@ func _can_drop_to(data: Variant, destination: Dictionary, generation: int) -> bo
 	var payload: Dictionary = _validated_payload(data)
 	if payload.is_empty() or int(payload.revision) != _revision or not _drop_validator.is_valid():
 		return false
-	return bool(_drop_validator.call(str(payload.uid), destination.duplicate(true), int(payload.revision)))
+	var accepted: bool = bool(_drop_validator.call(str(payload.uid), destination.duplicate(true), int(payload.revision)))
+	return accepted and generation == _generation and int(payload.revision) == _revision and _valid_destination(destination)
 
 
 func _accept_drop(data: Variant, destination: Dictionary, generation: int) -> void:
@@ -334,7 +340,7 @@ func _validated_payload(data: Variant) -> Dictionary:
 func _update_density() -> void:
 	if _rows_container == null:
 		return
-	custom_minimum_size.y = BASE_ROW_HEIGHT * float(VISIBLE_ROWS_MIN) * font_scale
+	custom_minimum_size.y = 220.0 * font_scale
 	var available_width: float = maxf(size.x - 24.0, 1.0)
 	var title_width: float = clampf(available_width * 0.14, 40.0, 96.0)
 	var preview_width: float = clampf(available_width * 0.16, 48.0, 130.0)
@@ -367,7 +373,7 @@ func _slot_tooltip(slot_role: String, support_index: int, gem: Dictionary) -> St
 	var slot_label: String = "主动宝石" if slot_role == "main" else "辅助宝石 %d" % (support_index + 1)
 	if gem.is_empty():
 		return slot_label + " · 空槽"
-	return "%s · %s · %s" % [slot_label, str(gem.definition_id), str(gem.uid)]
+	return "" # The shared item hover card owns non-empty gem details.
 
 
 func _valid_row(value: Variant) -> bool:

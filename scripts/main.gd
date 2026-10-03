@@ -8,6 +8,7 @@ const VisualCueRuntime = preload("res://scripts/visuals/combat_cues.gd")
 const Visuals = preload("res://scripts/visuals/arena_visuals.gd")
 const Presentation = preload("res://scripts/visuals/visual_settings.gd")
 const Build = preload("res://scripts/build_state.gd")
+const GroupCooldowns = preload("res://scripts/combat/skill_cooldown_ledger.gd")
 const AreaRules = preload("res://scripts/combat/area_support_rules.gd")
 const Data = preload("res://scripts/game_data.gd")
 const Hud = preload("res://scripts/game_hud.gd")
@@ -70,6 +71,8 @@ var wave: int = 1
 var alive: bool = true
 var auto_fire: bool = true
 var cooldowns: Dictionary = {}
+var group_cooldowns = GroupCooldowns.new()
+var _group_cast_busy := false
 var player_pos := Vector2(640, 338)
 var player_facing := Vector2.RIGHT
 var enemies: Array[Dictionary] = []
@@ -277,6 +280,7 @@ func restart_run() -> void:
 	rings.clear()
 	visual_cues.reset()
 	cooldowns.clear()
+	group_cooldowns.reset()
 	for id: String in Data.SKILLS:
 		cooldowns[id] = 0.0
 	spawn_timer = 1.8
@@ -305,6 +309,12 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	if hud.handle_menu_key(key, event.pressed, event.echo):
 		get_viewport().set_input_as_handled()
 		return
+	if state.has_method("group_for_key"):
+		var group_id: String = state.group_for_key(key)
+		if not group_id.is_empty():
+			cast_group(group_id)
+			get_viewport().set_input_as_handled()
+			return
 	if key == KEY_F8:
 		open_reference_catalog()
 	elif key == KEY_R and not alive:
@@ -348,6 +358,7 @@ func _tick(delta: float) -> void:
 			boss_wave_pending = wave
 		hud.notify("第 %d 波来袭 · 敌人强度提升" % wave)
 		_add_ring(ARENA.get_center(), 250.0, Color("d5b77a"), 0.8)
+	group_cooldowns.advance(delta)
 	for id: String in cooldowns:
 		cooldowns[id] = maxf(0.0, float(cooldowns[id]) - delta)
 	attack_timer = maxf(0.0, attack_timer - delta)
@@ -792,20 +803,45 @@ func cast_skill(index: int) -> bool:
 	return accepted
 
 
+func cast_group(group_id: String) -> bool:
+	if _group_cast_busy or not state.has_method("get_group_cast"):
+		return false
+	_group_cast_busy = true
+	_begin_progress_transaction()
+	var compiled: Dictionary = state.get_group_cast(group_id)
+	var accepted: bool = _execute_compiled(compiled, group_id, str(compiled.get("main_uid", "")))
+	_end_progress_transaction()
+	_group_cast_busy = false
+	return accepted
+
+
+func group_cooldown_remaining(group_id: String) -> float:
+	if not state.has_method("skill_group"): return 0.0
+	return group_cooldowns.remaining(group_id, state.skill_group(group_id).main_uid)
+
+
 func _cast_skill(index: int) -> bool:
-	if not alive or not _ready_complete or hud.is_blocking() or index < 0 or index >= state.skill_slots.size():
-		return false
+	if index < 0 or index >= 5: return false
+	if state.has_method("group_for_key"):
+		var group_id: String = state.group_for_key(KEY_1 + index)
+		return cast_group(group_id) if not group_id.is_empty() else false
+	if index < 0 or index >= state.skill_slots.size(): return false
 	var id: String = state.skill_slots[index]
-	if not Data.SKILLS.has(id):
-		return false
-	var skill: Dictionary = Data.SKILLS[id]
-	# Compile once before admission: preview, payment and execution share this result.
-	var compiled: Dictionary = state.get_skill_cast(id)
+	if not Data.SKILLS.has(id): return false
+	return _execute_compiled(state.get_skill_cast(id))
+
+
+func _execute_compiled(compiled: Dictionary, group_id: String = "", main_uid: String = "") -> bool:
+	if not alive or not _ready_complete or hud.is_blocking(): return false
 	if not compiled.get("ok", false):
 		hud.notify("技能辅助配置无效：" + str(compiled.get("error", "未知配置")))
 		return false
+	var id: String = str(compiled.skill_id)
+	if not Data.SKILLS.has(id): return false
+	var skill: Dictionary = Data.SKILLS[id]
 	var mana_cost: float = float(compiled.mana)
-	if float(cooldowns.get(id, 0.0)) > 0.0:
+	var remaining: float = group_cooldowns.remaining(group_id, main_uid) if not group_id.is_empty() else float(cooldowns.get(id, 0.0))
+	if remaining > 0.0:
 		hud.notify("%s 冷却中" % skill.name)
 		return false
 	if mana < mana_cost:
@@ -816,7 +852,7 @@ func _cast_skill(index: int) -> bool:
 		hud.notify("投射物空间不足以发射完整技能，本次未消耗法力或冷却")
 		return false
 	mana -= mana_cost
-	cooldowns[id] = float(compiled.cooldown)
+	if group_id.is_empty(): cooldowns[id] = float(compiled.cooldown)
 	player_facing = _aim_direction()
 	var color: Color = skill.color
 	var context: Dictionary = {"snapshot": compiled.snapshot, "cast_id": 0 if id == "tornado" else projectile_runtime.new_cast()}
@@ -825,7 +861,7 @@ func _cast_skill(index: int) -> bool:
 			var emitted: int = projectile_runtime.spawn_tornado(projectiles, player_pos, player_facing, context.snapshot, MAX_PROJECTILES, int(compiled.initial_count))
 			if emitted == 0:
 				mana += mana_cost
-				cooldowns[id] = 0.0
+				if group_id.is_empty(): cooldowns[id] = 0.0
 				hud.notify("场上投射物已满，本次龙卷未消耗法力或冷却")
 				return false
 			total_shots += emitted
@@ -876,6 +912,9 @@ func _cast_skill(index: int) -> bool:
 					_add_particle(origin.lerp(end, step / 12.0) + Vector2(rng.randf_range(-4, 4), rng.randf_range(-4, 4)), Vector2.ZERO, color, 3.0, 0.25)
 				_apply_damage_packet(target, compiled.packets.bounces[i], context.snapshot, color, 0.35, {"cast_id": context.cast_id})
 				origin = end
+	if not group_id.is_empty() and alive:
+		var began: bool = group_cooldowns.begin(group_id, main_uid, float(compiled.cooldown))
+		assert(began, "Admitted group cast must own a ready cooldown")
 	if id in ["tornado", "bolt", "frost"]:
 		visual_cues.emit_cue("cast", player_pos, {"direction": player_facing, "skill": id, "color": color})
 	return true
@@ -1116,6 +1155,7 @@ func hit_player_components(components: Variant, source_id: int = 0) -> bool:
 	_add_text(player_pos + Vector2(0, -30), "−%d" % int(amount), Color("94dafa") if absorbed >= amount else Color("fa8c83"))
 	if health <= 0.0:
 		alive = false
+		group_cooldowns.reset()
 		telegraphs.reset()
 		monster_runtime.cancel_pending("player_death")
 		projectile_runtime.cancel_all(projectiles, "owner_death")

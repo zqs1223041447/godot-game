@@ -134,17 +134,15 @@ static func location_context(candidate: Dictionary, passive_socket_ids: Array = 
 
 
 static func _new_gem(candidate: Dictionary, definition_id: String) -> String:
-	var serial: int = int(candidate.next_item_serial)
-	if serial < 1 or serial > 999999999:
-		return ""
-	var uid: String = "item_%06d" % serial
-	if candidate.items.has(uid):
-		return ""
+	# Migration identities use a reserved namespace, so a valid legacy save at
+	# its exhausted gear/jewel serial boundary can still retain all implicit gems.
+	# Ordinary future drops use the one next_item_serial allocator in the owner.
+	var serial: int = 1
+	while candidate.items.has("migration_gem_%06d" % serial): serial += 1
+	var uid: String = "migration_gem_%06d" % serial
 	var item: Dictionary = Gems.create_instance(uid, definition_id)
-	if item.is_empty():
-		return ""
+	if item.is_empty(): return ""
 	candidate.items[uid] = item
-	candidate.next_item_serial = serial + 1
 	return uid
 
 

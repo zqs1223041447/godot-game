@@ -65,7 +65,7 @@ static func definition_for_instance(value: Variant) -> Dictionary:
 			result["category"] = str(result.slot) if not Slots.targets_for_category(str(result.slot)).is_empty() else Slots.legacy_slot(str(result.slot))
 		"jewel":
 			var jewel: Dictionary = value.payload
-			result = {"id": value.uid, "base_id": jewel.base, "name": Jewels.display_name(jewel),
+			result = {"id": value.uid, "base_id": jewel.base, "base": jewel.base, "name": Jewels.display_name(jewel),
 				"description": Jewels.get_description(jewel), "rarity": jewel.rarity,
 				"color": Jewels.get_color(jewel), "stats": Jewels.get_stats(jewel),
 				"size": Vector2i.ONE, "category": "", "effects": []}

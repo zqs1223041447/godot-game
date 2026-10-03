@@ -14,6 +14,12 @@ static func analyze(context: Variant, selection: Variant, socketed: Variant) -> 
 	var context_reason: String = _context_error(context)
 	if not context_reason.is_empty():
 		return _failure(context_reason)
+	return _analyze_validated_context(context,selection,socketed)
+
+
+## Internal hot path only for the owner's pinned, private context prepared once.
+## Public analyze() continues validating arbitrary caller contexts in full.
+static func _analyze_validated_context(context: Dictionary,selection: Variant,socketed: Variant)->Dictionary:
 	var selection_reason: String = _selection_shape_error(selection)
 	if not selection_reason.is_empty():
 		return _failure(selection_reason)
@@ -41,7 +47,7 @@ static func analyze(context: Variant, selection: Variant, socketed: Variant) -> 
 		var id: String = raw_id
 		var node: Dictionary = nodes[id]
 		if node["blighted"]:
-			return _failure("腐化天赋不可分配")
+			return _failure("涂油专属节点不可直接分配")
 		if node["class_id"] >= 0 and id != start_id:
 			return _failure("只能分配自己的职业起点")
 		if node["type"] == "proxy":

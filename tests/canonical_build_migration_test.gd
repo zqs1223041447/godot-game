@@ -46,6 +46,11 @@ func _initialize() -> void:
 			check(definitions.has(definition_id), "old available gem retained")
 		check(focus_uids.size() == 2 and focus_uids[0] != focus_uids[1], "shared definition becomes independent instances")
 		check(Layout.validate(Items.metadata_for_items(result.items), result.locations, Migration.location_context(result)).ok, "complete ownership location")
+	var exhausted := state._snapshot()
+	exhausted.next_equipment_id = 1000000000
+	exhausted.next_jewel_id = 1000000000
+	var exhausted_result := Migration.migrate(exhausted)
+	check(not exhausted_result.is_empty() and exhausted_result.next_item_serial == 1000000000,"valid exhausted old sequence still migrates all implicit gems")
 	var future := state._snapshot()
 	future.version = 14
 	check(Migration.migrate(future).is_empty(), "unknown version cannot enter legacy migration")

@@ -10,6 +10,7 @@ const Items = preload("res://scripts/items/unified_item_catalog.gd")
 const Transfer = preload("res://scripts/items/item_transfer_plan.gd")
 const MAX_SAVE_BYTES := 2097152
 var _current: Dictionary = {}
+var _content_epoch := 0
 var _io = Legacy.new()
 var _path: String = ""
 var _disk_bytes := PackedByteArray()
@@ -59,7 +60,7 @@ func pending_items() -> Array[String]:
 	return result
 
 
-func load_build(path: String) -> bool:
+func load_build(path: String = "user://build_save.json") -> bool:
 	if _busy: return false
 	var file := FileAccess.open(path, FileAccess.READ)
 	if file == null:
@@ -99,7 +100,7 @@ func load_build(path: String) -> bool:
 		if write_error != OK: return _reject(path, "迁移保存失败：%s" % error_string(write_error))
 		successful_saves += 1
 		bytes = serialized.to_utf8_buffer()
-	_current = candidate
+	_accept_memory(candidate)
 	_path = path
 	_disk_bytes = bytes
 	_disk_expected_exists = true
@@ -113,7 +114,7 @@ func load_build(path: String) -> bool:
 	return true
 
 
-func save_build(path: String) -> Error:
+func save_build(path: String = "user://build_save.json") -> Error:
 	if _busy: return ERR_BUSY
 	_busy = true
 	var error: Error = _persist(_current, path)
@@ -170,11 +171,16 @@ func _commit(candidate: Dictionary, path: String) -> Dictionary:
 	if error != OK:
 		_busy = false
 		return _failure("save_failed", last_error)
-	_current = candidate
+	_accept_memory(candidate)
 	# Listeners may read but cannot re-enter a second write during this signal.
 	changed.emit()
 	_busy = false
 	return {"ok": true, "error_code": "", "reason": "", "revision": int(_current.revision)}
+
+
+func _accept_memory(candidate: Dictionary) -> void:
+	_current = candidate
+	_content_epoch += 1
 
 
 func _prepare_candidate(candidate: Dictionary) -> Dictionary:
@@ -225,3 +231,25 @@ func _reject(path: String, reason: String) -> bool:
 
 static func _failure(code: String, reason: String) -> Dictionary:
 	return {"ok": false, "error_code": code, "reason": reason, "revision": -1}
+
+
+func _canonical_disk_stamp(path: String) -> Dictionary:
+	if not FileAccess.file_exists(path): return {"ok":true,"exists":false}
+	var file := FileAccess.open(path,FileAccess.READ)
+	if file == null: return {"ok":false}
+	if file.get_length() > MAX_SAVE_BYTES:
+		file.close()
+		return {"ok":false}
+	var bytes := file.get_buffer(file.get_length())
+	var read_error := file.get_error()
+	file.seek(0)
+	var parser := JSON.new()
+	var parse_error := parser.parse(file.get_as_text())
+	file.close()
+	if read_error != OK or parse_error != OK: return {"ok":false}
+	var candidate: Dictionary = Rules.decode(parser.data)
+	if not Rules.reason(candidate,_talent_validator,_socket_ids).is_empty(): return {"ok":false}
+	var digest := HashingContext.new()
+	digest.start(HashingContext.HASH_SHA256)
+	digest.update(bytes)
+	return {"ok":true,"exists":true,"sha256":digest.finish().hex_encode()}

@@ -35,6 +35,7 @@ var _last_pointer: Vector2 = Vector2.ZERO
 var _has_pointer: bool = false
 
 var _drop_validator: Callable = Callable()
+var _external_item_resolver: Callable = Callable()
 var _preview_uid: String = ""
 var _preview_destination: Vector2i = Vector2i(-1, -1)
 var _preview_valid: bool = false
@@ -79,6 +80,12 @@ func set_items(entries: Array, revision: int) -> void:
 
 func set_drop_validator(validator: Callable) -> void:
 	_drop_validator = validator
+
+
+## External equipment/gem slots use the same drag protocol without duplicating
+## them in bag entries. The parent resolves only authoritative UID and footprint.
+func set_external_item_resolver(resolver: Callable) -> void:
+	_external_item_resolver = resolver
 
 
 ## Current cell pitch in logical CanvasItem units, capped at 42.
@@ -178,9 +185,8 @@ func _draw_entry(entry: Dictionary) -> void:
 		var font: Font = get_theme_default_font()
 		var font_size: int = maxi(8, roundi(minf(11.0, footer_height * 0.8)))
 		var caption: String = str(entry["short_name"])
-		var text_width: float = font.get_string_size(caption, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x
-		draw_string(font, Vector2(caption_box.get_center().x - text_width * 0.5, caption_box.end.y - 2.0), caption,
-			HORIZONTAL_ALIGNMENT_LEFT, maxf(0.0, caption_box.size.x), font_size, caption_color)
+		draw_string(font, Vector2(caption_box.position.x, caption_box.end.y - 2.0), caption,
+			HORIZONTAL_ALIGNMENT_CENTER, maxf(0.0, caption_box.size.x), font_size, caption_color)
 	var outline: Color = PresentationTheme.GOLD if is_selected else PresentationTheme.ACCENT if is_hovered else accent.darkened(0.22)
 	draw_rect(box.grow(-1.5), outline, false, 2.0 if is_selected or is_hovered else 1.0)
 
@@ -199,7 +205,7 @@ func _draw_missing_icon_placeholder(entry: Dictionary, rect: Rect2) -> void:
 
 
 func _draw_drop_preview() -> void:
-	var entry: Dictionary = _entry_for_uid(_preview_uid)
+	var entry: Dictionary = _drag_entry_for_uid(_preview_uid)
 	if entry.is_empty():
 		return
 	var pitch: float = _cell_pitch()
@@ -292,7 +298,7 @@ func _evaluate_drop(at_position: Vector2, data: Variant) -> Dictionary:
 	var uid: String = data["uid"]
 	var source_revision: int = data["revision"]
 	var grab_offset: Vector2i = data["grab_offset"]
-	var entry: Dictionary = _entry_for_uid(uid)
+	var entry: Dictionary = _drag_entry_for_uid(uid)
 	var pointer_cell: Vector2i = cell_at_position(at_position)
 	var destination_cell: Vector2i = pointer_cell - grab_offset
 	if not entry.is_empty():
@@ -313,7 +319,7 @@ func _evaluate_drop(at_position: Vector2, data: Variant) -> Dictionary:
 			var destination := {"kind": "bag", "x": destination_cell.x, "y": destination_cell.y}
 			accepted = bool(_drop_validator.call(uid, destination, source_revision))
 			# The validator may synchronously refresh the parent snapshot.
-			accepted = accepted and source_revision == _revision and _has_uid(uid)
+			accepted = accepted and source_revision == _revision and not _drag_entry_for_uid(uid).is_empty()
 	_preview_valid = accepted
 	var result: Dictionary = {"accepted": accepted}
 	if accepted:
@@ -330,7 +336,7 @@ func _preview_invalid_candidate(at_position: Vector2, data: Variant) -> void:
 	var candidate_uid: Variant = data.get("uid", "")
 	if typeof(candidate_uid) != TYPE_STRING:
 		return
-	if _entry_for_uid(candidate_uid).is_empty():
+	if _drag_entry_for_uid(candidate_uid).is_empty():
 		return
 	var candidate_offset: Variant = data.get("grab_offset", Vector2i.ZERO)
 	var offset: Vector2i = candidate_offset if candidate_offset is Vector2i else Vector2i.ZERO
@@ -347,6 +353,8 @@ func _process(_delta: float) -> void:
 
 
 func _notification(what: int) -> void:
+	if what == NOTIFICATION_DRAG_BEGIN:
+		_drop_emitted = false
 	if what == NOTIFICATION_DRAG_END:
 		_preview_uid = ""
 		_preview_valid = false
@@ -412,6 +420,18 @@ func _entry_for_uid(uid: String) -> Dictionary:
 		if entry["uid"] == uid:
 			return entry
 	return {}
+
+
+func _drag_entry_for_uid(uid: String) -> Dictionary:
+	var local: Dictionary = _entry_for_uid(uid)
+	if not local.is_empty(): return local
+	if not _external_item_resolver.is_valid(): return {}
+	var value: Variant = _external_item_resolver.call(uid)
+	if not value is Dictionary or value.size() != 2 or value.get("uid") != uid or not value.get("size") is Vector2i:
+		return {}
+	var dimensions: Vector2i = value.size
+	if dimensions.x <= 0 or dimensions.y <= 0 or dimensions.x > COLUMNS or dimensions.y > ROWS: return {}
+	return value.duplicate(true)
 
 
 func _has_uid(uid: String) -> bool:
