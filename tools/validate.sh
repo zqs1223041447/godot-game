@@ -19,7 +19,8 @@ M1_VALIDATION_DIR="$(mktemp -d /tmp/godot-m1-batch.XXXXXX)"
 mkdir -p /tmp/godot-currency-dev
 CURRENCY_VALIDATION_DIR="$(mktemp -d /tmp/godot-currency-dev/batch.XXXXXX)"
 ROOT_CRAFT_DIR="$(mktemp -d /tmp/godot-root-craft-ui-batch.XXXXXX)"
-trap 'rm -rf -- "$VALIDATION_DIR" "$PIERCE_VALIDATION_DIR" "$CRAFT_VALIDATION_DIR" "$M0_VALIDATION_DIR" "$M1_VALIDATION_DIR" "$CURRENCY_VALIDATION_DIR" "$ROOT_CRAFT_DIR"' EXIT
+TOWN_UI_DIR="$(mktemp -d /tmp/v28root-ui-batch.XXXXXX)"
+trap 'rm -rf -- "$VALIDATION_DIR" "$PIERCE_VALIDATION_DIR" "$CRAFT_VALIDATION_DIR" "$M0_VALIDATION_DIR" "$M1_VALIDATION_DIR" "$CURRENCY_VALIDATION_DIR" "$ROOT_CRAFT_DIR" "$TOWN_UI_DIR"' EXIT
 
 # Isolate test settings and saves, including in restricted cloud workspaces.
 if [[ "$(uname -s)" == "Linux" ]]; then
@@ -36,6 +37,10 @@ run_check() {
 		export XDG_DATA_HOME="$VALIDATION_DIR/data/check-$CHECK_INDEX"
 		unset GODOT_CRAFTING_TEST_ROOT
 		case "${2:-}" in
+			res://tests/town_ui_wiring_test.gd)
+				export XDG_DATA_HOME="$TOWN_UI_DIR/check-$CHECK_INDEX/data"
+				unset PIERCE_QA_ROOT
+				;;
 			res://tests/town_*|res://tests/reserved_hotkey_migration_test.gd|res://tests/map_runtime_boundaries_test.gd|res://tests/crafting_operations_test.gd|res://tests/crafting_growth_*|res://tests/canonical_*|res://tests/offense_skill_*|res://tests/elemental_encounter_*|res://tests/flask_*|res://tests/save_receipt_revision_test.gd|res://tests/source_*|res://tests/independent_menus_test.gd)
 				export XDG_DATA_HOME="$M1_VALIDATION_DIR/check-$CHECK_INDEX/data"
 				unset PIERCE_QA_ROOT
@@ -101,6 +106,7 @@ run_check --script res://tests/town_supply_gate_test.gd
 run_check --script res://tests/map_runtime_boundaries_test.gd
 run_check --script res://tests/town_profile_isolation_test.gd
 run_check --script res://tests/town_map_reference_test.gd
+run_check --script res://tests/town_ui_wiring_test.gd
 python3 "$PROJECT_DIR/tools/check_item_transparency.py"
 python3 "$PROJECT_DIR/tests/reference_catalog_test.py"
 run_check --quit-after 300
