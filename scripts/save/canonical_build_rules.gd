@@ -9,7 +9,8 @@ const Supports = preload("res://scripts/combat/support_registry.gd")
 const Equipment = preload("res://scripts/items/equipment_catalog.gd")
 const Jewels = preload("res://scripts/jewel_data.gd")
 const SourceTree = preload("res://scripts/passives/source_tree_runtime.gd")
-const VERSION := 14
+const V14_VERSION := 14
+const VERSION := 15
 const MAX_ITEMS := 1024
 const MAX_GROUPS := 64
 const MAX_SERIAL := 1000000000
@@ -20,6 +21,16 @@ const BINDABLE_KEYS := [KEY_0, KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6, KEY_7, 
 
 
 static func decode(raw: Variant) -> Dictionary:
+	return _decode(raw, true)
+
+
+## Preserve the exact v14 decoder contract for the mandatory pre-migration
+## validation pass. v14 bag locations have no page field.
+static func decode_v14(raw: Variant) -> Dictionary:
+	return _decode(raw, false)
+
+
+static func _decode(raw: Variant, paged: bool) -> Dictionary:
 	if not Locations._exact_string_keys(raw, FIELDS): return {}
 	var value: Dictionary = raw.duplicate(true)
 	for field: String in ["version", "revision", "next_item_serial"]:
@@ -31,7 +42,7 @@ static func decode(raw: Variant) -> Dictionary:
 		if item.is_empty(): return {}
 		value.items[uid] = item
 	for uid: Variant in value.locations:
-		var location: Dictionary = Items.decode_location(value.locations[uid])
+		var location: Dictionary = Items.decode_paged_location(value.locations[uid]) if paged else Items.decode_location(value.locations[uid])
 		if location.is_empty(): return {}
 		value.locations[uid] = location
 	for group: String in ["progress", "crafting", "talents", "migration_ledger"]:
@@ -54,8 +65,17 @@ static func decode(raw: Variant) -> Dictionary:
 
 
 static func reason(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
+	return _reason(value, VERSION, true, validate_talents, socket_ids)
+
+
+static func reason_v14(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
+	return _reason(value, V14_VERSION, false, validate_talents, socket_ids)
+
+
+static func _reason(value: Variant, expected_version: int, paged: bool,
+		validate_talents: Callable, socket_ids: Array) -> String:
 	if not Locations._exact_string_keys(value, FIELDS): return "保存结构无效"
-	if not value.version is int or value.version != VERSION: return "保存版本不兼容"
+	if not value.version is int or value.version != expected_version: return "保存版本不兼容"
 	if not _integer(value.revision, 0, MAX_SERIAL) or not _integer(value.next_item_serial, 1, MAX_SERIAL): return "修订或物品序号无效"
 	if not value.items is Dictionary or value.items.size() > MAX_ITEMS: return "物品注册表无效"
 	var metadata: Dictionary = Items.metadata_for_items(value.items)
@@ -69,7 +89,8 @@ static func reason(value: Variant, validate_talents: Callable = Callable(), sock
 		if not Locations._exact_string_keys(group, ["id"]) or not Locations._stable_id(group.id) or group_ids.has(group.id): return "技能行身份无效"
 		group_ids[group.id] = true
 	var valid_sockets := SourceTree.Data.standard_socket_ids() if socket_ids.is_empty() else socket_ids
-	var layout: Dictionary = Locations.validate(metadata, value.locations, Migration.location_context(value, valid_sockets))
+	var layout_context: Dictionary = Migration.paged_location_context(value, valid_sockets) if paged else Migration.location_context(value, valid_sockets)
+	var layout: Dictionary = Locations.validate_paged(metadata, value.locations, layout_context) if paged else Locations.validate(metadata, value.locations, layout_context)
 	if not layout.ok: return layout.reason
 	if not value.bindings is Array or value.bindings.size() > group_ids.size(): return "快捷键无效"
 	var keys: Dictionary = {}

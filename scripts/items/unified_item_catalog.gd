@@ -126,19 +126,32 @@ static func decode_instance(raw: Variant) -> Dictionary:
 
 
 static func decode_location(raw: Variant) -> Dictionary:
+	return _decode_location(raw, false)
+
+
+static func decode_paged_location(raw: Variant) -> Dictionary:
+	return _decode_location(raw, true)
+
+
+static func _decode_location(raw: Variant, paged: bool) -> Dictionary:
 	if not raw is Dictionary or not raw.get("kind") is String:
 		return {}
 	var value: Dictionary = raw.duplicate(true)
 	var fields: Array[String] = []
 	match value.kind:
-		"bag": fields = ["x", "y"]
+		"bag":
+			fields = ["x", "y"]
+			if paged:
+				fields = ["page", "x", "y"]
 		"skill_support", "recovery": fields = ["index"]
 	for field: String in fields:
 		# Specific kind bounds and field shape are enforced by ItemLocationRules.
-		if not value.has(field) or not _whole(value[field], 0, 1000000000):
+		var maximum: int = 1 if paged and field == "page" else 1000000000
+		if not value.has(field) or not _whole(value[field], 0, maximum):
 			return {}
 		value[field] = int(value[field])
-	return value if Locations._location_shape_error(value, str(value.kind)).is_empty() else {}
+	var shape_error: String = Locations._paged_location_shape_error(value, str(value.kind)) if paged else Locations._location_shape_error(value, str(value.kind))
+	return value if shape_error.is_empty() else {}
 
 
 static func _whole(value: Variant, minimum: int, maximum: int) -> bool:

@@ -5,6 +5,9 @@ extends RefCounted
 
 const BAG_COLUMNS: int = 12
 const BAG_ROWS: int = 8
+const PAGED_BAG_COLUMNS: int = 8
+const PAGED_BAG_ROWS: int = 6
+const PAGED_BAG_PAGES: int = 2
 const MAX_ITEM_ID_LENGTH: int = 128
 const MAX_SUPPORT_INDEX: int = 4
 const ITEM_KINDS: Array[String] = ["equipment", "jewel", "skill_gem", "support_gem"]
@@ -29,6 +32,18 @@ const CONTEXT_FIELDS: Array[String] = [
 
 static func validate(metadata_by_uid: Variant, locations: Variant, context: Variant) -> Dictionary:
 	var context_error: String = _context_error(context)
+	return _validate(metadata_by_uid, locations, context, false, context_error)
+
+
+## v15 adds a second, explicit layout contract. The legacy validate/context
+## above remains frozen at 12×8 for v14 decoding and fixtures.
+static func validate_paged(metadata_by_uid: Variant, locations: Variant, context: Variant) -> Dictionary:
+	var context_error: String = _paged_context_error(context)
+	return _validate(metadata_by_uid, locations, context, true, context_error)
+
+
+static func _validate(metadata_by_uid: Variant, locations: Variant, context: Variant,
+		paged: bool, context_error: String) -> Dictionary:
 	if not context_error.is_empty():
 		return _failure("invalid_context", context_error)
 	if not metadata_by_uid is Dictionary or not locations is Dictionary:
@@ -65,7 +80,7 @@ static func validate(metadata_by_uid: Variant, locations: Variant, context: Vari
 		if not location.has("kind") or typeof(location.kind) != TYPE_STRING:
 			return _failure("invalid_location", "%s 的位置缺少字符串 kind" % uid)
 		var kind: String = location.kind
-		var target_error: String = _location_shape_error(location, kind)
+		var target_error: String = _paged_location_shape_error(location, kind) if paged else _location_shape_error(location, kind)
 		if not target_error.is_empty():
 			return _failure("invalid_location", "%s：%s" % [uid, target_error])
 
@@ -73,13 +88,17 @@ static func validate(metadata_by_uid: Variant, locations: Variant, context: Vari
 			"bag":
 				var x: int = location.x
 				var y: int = location.y
+				var page: int = location.page if paged else 0
 				var width: int = item.size[0]
 				var height: int = item.size[1]
-				if x < 0 or y < 0 or x + width > BAG_COLUMNS or y + height > BAG_ROWS:
-					return _failure("out_of_bounds", "%s 超出 12×8 背包边界" % uid)
+				var columns: int = PAGED_BAG_COLUMNS if paged else BAG_COLUMNS
+				var rows: int = PAGED_BAG_ROWS if paged else BAG_ROWS
+				if x < 0 or y < 0 or x + width > columns or y + height > rows:
+					var bounds_message: String = ("%s 超出双页 8×6 背包边界" % uid) if paged else ("%s 超出 12×8 背包边界" % uid)
+					return _failure("out_of_bounds", bounds_message)
 				for cell_y: int in range(y, y + height):
 					for cell_x: int in range(x, x + width):
-						var cell_key: String = "bag:%d:%d" % [cell_x, cell_y]
+						var cell_key: String = "bag:%d:%d:%d" % [page, cell_x, cell_y] if paged else "bag:%d:%d" % [cell_x, cell_y]
 						if occupied_cells.has(cell_key):
 							return _failure("bag_overlap", "%s 与 %s 的背包占格重叠" % [uid, occupied_cells[cell_key]])
 						occupied_cells[cell_key] = uid
@@ -164,6 +183,29 @@ static func _context_error(value: Variant) -> String:
 	return ""
 
 
+static func _paged_context_error(value: Variant) -> String:
+	var paged_fields: Array[String] = ["columns", "rows", "pages", "equipment_slots", "skill_group_ids", "passive_socket_ids", "allow_recovery"]
+	if not _exact_string_keys(value, paged_fields):
+		return "paged context 必须严格包含七个协议字段"
+	if typeof(value.columns) != TYPE_INT or value.columns != PAGED_BAG_COLUMNS \
+			or typeof(value.rows) != TYPE_INT or value.rows != PAGED_BAG_ROWS \
+			or typeof(value.pages) != TYPE_INT or value.pages != PAGED_BAG_PAGES:
+		return "双页背包尺寸必须是两页 8 列、6 行的整数"
+	if typeof(value.allow_recovery) != TYPE_BOOL:
+		return "allow_recovery 必须是布尔值"
+	if not _exact_dictionary_keys(value.equipment_slots, EQUIPMENT_SLOTS.keys()):
+		return "equipment_slots 必须精确包含九个装备目标"
+	for slot_id: String in EQUIPMENT_SLOTS:
+		var category: Variant = value.equipment_slots[slot_id]
+		if typeof(category) != TYPE_STRING or category != EQUIPMENT_SLOTS[slot_id]:
+			return "装备目标 %s 的类别配置无效" % slot_id
+	if not _unique_id_array(value.skill_group_ids):
+		return "skill_group_ids 必须是唯一稳定字符串数组"
+	if not _unique_id_array(value.passive_socket_ids):
+		return "passive_socket_ids 必须是唯一稳定字符串数组"
+	return ""
+
+
 static func _metadata_error(value: Variant) -> String:
 	if not _exact_string_keys(value, ["kind", "category", "size"]):
 		return "metadata 必须严格包含 kind、category、size"
@@ -217,6 +259,21 @@ static func _location_shape_error(value: Dictionary, kind: String) -> String:
 		"recovery":
 			if typeof(value.index) != TYPE_INT or value.index < 0:
 				return "recovery index 必须是非负真正整数"
+	return ""
+
+
+static func _paged_location_shape_error(value: Dictionary, kind: String) -> String:
+	if kind != "bag":
+		return _location_shape_error(value, kind)
+	if not _exact_string_keys(value, ["kind", "page", "x", "y"]):
+		return "bag 位置字段必须精确为 kind、page、x、y"
+	for field: String in ["page", "x", "y"]:
+		if typeof(value[field]) != TYPE_INT:
+			return "背包页码和坐标必须使用真正的整数"
+	if value.page < 0 or value.page >= PAGED_BAG_PAGES:
+		return "背包页码超出 0..1 范围"
+	if value.x < 0 or value.x >= PAGED_BAG_COLUMNS or value.y < 0 or value.y >= PAGED_BAG_ROWS:
+		return "背包坐标超出双页 8×6 范围"
 	return ""
 
 

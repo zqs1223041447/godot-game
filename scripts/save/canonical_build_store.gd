@@ -6,6 +6,7 @@ signal changed
 const Legacy = preload("res://scripts/build_state.gd")
 const Rules = preload("res://scripts/save/canonical_build_rules.gd")
 const Migration = preload("res://scripts/save/canonical_build_migration.gd")
+const PagedMigration = preload("res://scripts/save/paged_bag_migration.gd")
 const Items = preload("res://scripts/items/unified_item_catalog.gd")
 const Transfer = preload("res://scripts/items/item_transfer_plan.gd")
 const MAX_SAVE_BYTES := 2097152
@@ -24,9 +25,11 @@ var successful_saves := 0
 
 
 func _init() -> void:
-	_current = Migration.migrate(_io._snapshot())
-	_current.migration_ledger.from_version = 0
 	_socket_ids = Rules.SourceTree.Data.standard_socket_ids()
+	var legacy_default: Dictionary = Migration.migrate(_io._snapshot())
+	_current = PagedMigration.migrate_v14(legacy_default, _socket_ids)
+	assert(not _current.is_empty(), "The built-in v14 canonical fixture must migrate to v15")
+	_current.migration_ledger.from_version = 0
 
 
 func snapshot() -> Dictionary:
@@ -61,6 +64,10 @@ func pending_items() -> Array[String]:
 	return result
 
 
+func bag_layout() -> Dictionary:
+	return {"pages": 2, "columns": 8, "rows": 6}
+
+
 func load_build(path: String = "user://build_save.json") -> bool:
 	if _busy: return false
 	var file := FileAccess.open(path, FileAccess.READ)
@@ -80,9 +87,22 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	var parser := JSON.new()
 	if parser.parse(text) != OK: return _reject(path, "存档格式损坏")
 	var raw: Variant = parser.data
-	if not raw is Dictionary or not Items._whole(raw.get("version"), 1, Rules.VERSION): return _reject(path, "存档属于未知版本")
+	if not raw is Dictionary or not Items._whole(raw.get("version"), 1, Rules.MAX_SERIAL): return _reject(path, "存档属于未知版本")
 	var old_version := int(raw.version)
-	var candidate: Dictionary = Migration.migrate(raw) if old_version < Rules.VERSION else Rules.decode(raw)
+	if old_version > Rules.VERSION: return _reject(path, "存档属于未来版本，已保护原文件")
+	var candidate: Dictionary = {}
+	if old_version < Rules.VERSION:
+		var source_v14: Dictionary = {}
+		if old_version == Rules.V14_VERSION:
+			source_v14 = Rules.decode_v14(raw)
+		else:
+			var legacy_v14: Dictionary = Migration.migrate(raw)
+			source_v14 = Rules.decode_v14(legacy_v14)
+		var v14_reason: String = Rules.reason_v14(source_v14, _talent_validator, _socket_ids)
+		if not v14_reason.is_empty(): return _reject(path, v14_reason)
+		candidate = PagedMigration.migrate_v14(source_v14, _socket_ids)
+	else:
+		candidate = Rules.decode(raw)
 	var reason: String = Rules.reason(candidate, _talent_validator, _socket_ids)
 	if not reason.is_empty(): return _reject(path, reason)
 	# No memory or source overwrite until the original byte backup AND the new
@@ -125,8 +145,8 @@ func save_build(path: String = "user://build_save.json") -> Error:
 
 func can_move_item(uid: Variant, destination: Variant, expected_revision: Variant) -> bool:
 	if _busy: return false
-	var planned: Dictionary = Transfer.move(Items.metadata_for_items(_current.items), _current.locations,
-		Migration.location_context(_current, _socket_ids), uid, destination, _current.revision, expected_revision)
+	var planned: Dictionary = Transfer.move_paged(Items.metadata_for_items(_current.items), _current.locations,
+		Migration.paged_location_context(_current, _socket_ids), uid, destination, _current.revision, expected_revision)
 	if not planned.ok: return false
 	var candidate := snapshot()
 	candidate.locations = planned.locations
@@ -136,13 +156,14 @@ func can_move_item(uid: Variant, destination: Variant, expected_revision: Varian
 
 func first_bag_position(uid: String) -> Dictionary:
 	if not _current.items.has(uid): return {}
-	return Transfer._first_bag_space(Items.metadata_for_items(_current.items), _current.locations, uid)
+	return Transfer.first_bag_space_paged(Items.metadata_for_items(_current.items), _current.locations,
+		Migration.paged_location_context(_current, _socket_ids), uid)
 
 
 func move_item(uid: Variant, destination: Variant, expected_revision: Variant, path: String) -> Dictionary:
 	if _busy: return _failure("busy", "当前操作尚未结束")
-	var planned: Dictionary = Transfer.move(Items.metadata_for_items(_current.items), _current.locations,
-		Migration.location_context(_current, _socket_ids), uid, destination, _current.revision, expected_revision)
+	var planned: Dictionary = Transfer.move_paged(Items.metadata_for_items(_current.items), _current.locations,
+		Migration.paged_location_context(_current, _socket_ids), uid, destination, _current.revision, expected_revision)
 	if not planned.ok: return planned
 	var candidate: Dictionary = _current.duplicate(true)
 	candidate.locations = planned.locations
@@ -152,8 +173,8 @@ func move_item(uid: Variant, destination: Variant, expected_revision: Variant, p
 
 func arrange_items(expected_revision: Variant, path: String) -> Dictionary:
 	if _busy: return _failure("busy", "当前操作尚未结束")
-	var planned: Dictionary = Transfer.arrange(Items.metadata_for_items(_current.items), _current.locations,
-		Migration.location_context(_current, _socket_ids), _current.revision, expected_revision)
+	var planned: Dictionary = Transfer.arrange_paged(Items.metadata_for_items(_current.items), _current.locations,
+		Migration.paged_location_context(_current, _socket_ids), _current.revision, expected_revision)
 	if not planned.ok: return planned
 	var candidate: Dictionary = _current.duplicate(true)
 	candidate.locations = planned.locations
