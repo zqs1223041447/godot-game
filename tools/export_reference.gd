@@ -350,39 +350,45 @@ static func source_tree_reference()->Dictionary:
 ## Pure example plans: no model-issued handles, userdata reads or save writes.
 ## Full candidates still pass the same BuildState inventory/jewel validator.
 static func crafting_examples() -> Dictionary:
-	var instance: Dictionary = _local_instance(["whetstone_edge"], "magic")
-	var build: RefCounted = local_build(instance)
-	assert(build.unequip("weapon"))
-	var cost: int = int(Craft.recalibrate_plan(instance, 0).cost[Craft.MATERIAL_ID])
-	build.crafting.materials[Craft.MATERIAL_ID] = cost
-	var snapshot: Dictionary = build._snapshot()
-	var context: Dictionary = {"revision": 0, "materials": snapshot.crafting.materials.duplicate(true),
-		"inventory": snapshot.inventory.duplicate(true), "equipment_instances": snapshot.equipment_instances.duplicate(true),
-		"equipped": snapshot.equipped.duplicate(true), "backpack_positions": snapshot.backpack_positions.duplicate(true), "save_writable": true}
 	var metadata: Dictionary = Craft.metadata()
 	metadata["integration_status"] = "implemented"
 	var result: Dictionary = {Craft.MATERIAL_ID: {"name": "校准碎片", "kind": "material",
-		"description": "回收背包中的随机魔法、稀有装备获得。用于重掷已有词缀数值；没有额外击杀掉落或升级赠送。",
-		"maximum": Build.MAX_CRAFT_MATERIALS, "rules": metadata,
-		"max_revision": Build.MAX_CRAFT_REVISION, "save_version": Build.SAVE_VERSION}}
-	for operation: String in ["salvage", "recalibrate"]:
+		"description": "回收背包中的随机魔法、稀有装备获得。真实堆叠物品，用于校准、赋魔、升格、补缀与重铸；待安置碎片不能直接消费。",
+		"maximum": Canonical.ShardCatalog.INVENTORY_LIMIT, "rules": metadata,
+		"max_revision": Canonical.Rules.MAX_SERIAL, "save_version": Canonical.Rules.VERSION}}
+	for operation: String in Craft.operation_ids():
+		var instance: Dictionary = _local_instance(["whetstone_edge"], "magic")
+		instance.id = "gear_000001"
+		if operation == "enchant": instance.rarity = "normal"; instance.affixes = []
+		var model := Canonical.new()
+		assert(model._admit_reward_item(Canonical.Items.wrap_equipment(instance)))
+		var snapshot := model.snapshot()
+		assert(model._set_bag_currency_balance(snapshot, 100).ok)
+		model._accept_memory(snapshot)
+		var context := model._craft_context(instance.id, "user://reference-only-not-written.json")
 		var quote: Dictionary = CraftPlanner.quote(context, operation, instance.id)
-		var planned: Dictionary = CraftPlanner.plan(context, quote, 20261002)
+		var planned: Dictionary = CraftPlanner.plan(context, quote, 20261003)
 		assert(quote.ok and planned.ok)
 		var candidate: Dictionary = snapshot.duplicate(true)
-		for field: String in ["inventory", "equipment_instances", "equipped", "backpack_positions"]:
-			candidate[field] = planned.candidate[field].duplicate(true)
-		candidate.crafting = {"materials": planned.candidate.materials.duplicate(true), "revision": planned.candidate.revision}
-		assert(not build._validate_snapshot(candidate).is_empty(), "Craft reference must validate the full build including jewels and layout")
-		result[operation] = {"name": "回收" if operation == "salvage" else "数值校准", "kind": "operation",
-			"description": "消耗此装备，获得校准碎片。" if operation == "salvage" else "消耗校准碎片，重掷现有词缀的整数数值；结果可能降低或不变。",
-			"rules_version": Craft.RULES_VERSION, "eligible_base_ids": metadata.base_ids,
+		var released := {}
+		if operation == "salvage":
+			released = candidate.locations[instance.id].duplicate(true)
+			candidate.items.erase(instance.id); candidate.locations.erase(instance.id)
+		else: candidate.items[instance.id] = Canonical.Items.wrap_equipment(planned.candidate.equipment_instances[instance.id])
+		candidate.crafting = {"revision": planned.candidate.revision}
+		assert(model._set_bag_currency_balance(candidate, planned.candidate.materials[Craft.MATERIAL_ID], released).ok)
+		candidate.revision += 1
+		assert(Canonical.Rules.reason(candidate).is_empty(), "Craft reference must validate the full current canonical build")
+		var presentation := Craft.operation_metadata(operation)
+		result[operation] = {"name": presentation.label, "kind": "operation",
+			"description": presentation.description, "risk": presentation.risk,
+			"rule": metadata.operations[operation], "rules_version": Craft.RULES_VERSION, "eligible_base_ids": metadata.base_ids,
 			"example": {"source": instance.duplicate(true), "before_definition": Equipment.definition(instance),
-				"quote": quote, "balance_before": cost, "balance_after": planned.candidate.materials[Craft.MATERIAL_ID],
+				"quote": quote, "balance_before": 100, "balance_after": planned.candidate.materials[Craft.MATERIAL_ID],
 				"revision_before": 0, "revision_after": planned.candidate.revision,
 				"after_instance": planned.candidate.equipment_instances.get(instance.id, {}),
 				"after_definition": Equipment.definition(planned.candidate.equipment_instances.get(instance.id, {})),
-				"full_candidate_valid": true, "example_seed": 20261002}}
+				"full_candidate_valid": true, "save_version": candidate.version, "example_seed": 20261003}}
 	return result
 
 ## Hand-authored legal examples derive every roll from the live family tiers.

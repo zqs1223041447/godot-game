@@ -16,7 +16,9 @@ PIERCE_VALIDATION_DIR="$(mktemp -d /tmp/godot-pierce-acceptance-XXXXXX)"
 CRAFT_VALIDATION_DIR="$(mktemp -d /tmp/godot-crafting-qa-XXXXXX)"
 M0_VALIDATION_DIR="$(mktemp -d /tmp/godot-m0-scene-XXXXXX)"
 M1_VALIDATION_DIR="$(mktemp -d /tmp/godot-m1-batch.XXXXXX)"
-trap 'rm -rf -- "$VALIDATION_DIR" "$PIERCE_VALIDATION_DIR" "$CRAFT_VALIDATION_DIR" "$M0_VALIDATION_DIR" "$M1_VALIDATION_DIR"' EXIT
+mkdir -p /tmp/godot-currency-dev
+CURRENCY_VALIDATION_DIR="$(mktemp -d /tmp/godot-currency-dev/batch.XXXXXX)"
+trap 'rm -rf -- "$VALIDATION_DIR" "$PIERCE_VALIDATION_DIR" "$CRAFT_VALIDATION_DIR" "$M0_VALIDATION_DIR" "$M1_VALIDATION_DIR" "$CURRENCY_VALIDATION_DIR"' EXIT
 
 # Isolate test settings and saves, including in restricted cloud workspaces.
 if [[ "$(uname -s)" == "Linux" ]]; then
@@ -33,8 +35,12 @@ run_check() {
 		export XDG_DATA_HOME="$VALIDATION_DIR/data/check-$CHECK_INDEX"
 		unset GODOT_CRAFTING_TEST_ROOT
 		case "${2:-}" in
-			res://tests/canonical_*|res://tests/offense_skill_*|res://tests/elemental_encounter_*|res://tests/flask_*|res://tests/save_receipt_revision_test.gd|res://tests/source_*|res://tests/independent_menus_test.gd)
+			res://tests/crafting_operations_test.gd|res://tests/crafting_growth_*|res://tests/crafting_metadata_ui_test.gd|res://tests/canonical_*|res://tests/offense_skill_*|res://tests/elemental_encounter_*|res://tests/flask_*|res://tests/save_receipt_revision_test.gd|res://tests/source_*|res://tests/independent_menus_test.gd)
 				export XDG_DATA_HOME="$M1_VALIDATION_DIR/check-$CHECK_INDEX/data"
+				unset PIERCE_QA_ROOT
+				;;
+			res://tests/currency_transaction_test.gd)
+				export XDG_DATA_HOME="$CURRENCY_VALIDATION_DIR/check-$CHECK_INDEX/data"
 				unset PIERCE_QA_ROOT
 				;;
 			res://tests/pierce_integration_test.gd|res://tests/pierce_ui_test.gd)
@@ -82,19 +88,16 @@ fi
 echo "Godot version: $("$GODOT_BIN" --version)"
 python3 "$PROJECT_DIR/tools/check_font_coverage.py"
 run_check --editor --import
-run_check --script res://tests/flask_model_test.gd
-run_check --script res://tests/flask_migration_test.gd
-run_check --script res://tests/flask_gameplay_test.gd
-run_check --script res://tests/flask_reward_boundaries_test.gd
-run_check --script res://tests/canonical_build_store_test.gd
+run_check --script res://tests/crafting_operations_test.gd
+run_check --script res://tests/crafting_expansion_economy_test.gd
+run_check --script res://tests/crafting_growth_boundaries_test.gd
+run_check --script res://tests/crafting_growth_transactions_test.gd
+run_check --script res://tests/crafting_growth_consumers_test.gd
 run_check --script res://tests/canonical_crafting_test.gd
-run_check --script res://tests/save_receipt_revision_test.gd
-run_check --script res://tests/item_location_rules_test.gd
-run_check --script res://tests/item_transfer_plan_test.gd
-run_check --script res://tests/flask_ui_test.gd
-run_check --script res://tests/flask_tooltip_guard_test.gd
+run_check --script res://tests/currency_transaction_test.gd
+run_check --script res://tests/crafting_metadata_ui_test.gd
 run_check --script res://tests/reference_export_test.gd
 python3 "$PROJECT_DIR/tools/check_item_transparency.py"
 python3 "$PROJECT_DIR/tests/reference_catalog_test.py"
 run_check --quit-after 300
-echo "Current-batch validation passed: flask UID ownership and raw-byte migration, per-run recovery, original rewards and shared transaction gates, current UI input and reference, font/assets/reference, and startup."
+echo "Current-batch validation passed: four crafting operations, actual catalog economy bounds, canonical shard transactions and failure paths, crafted-item consumers, current UI input and reference, font/assets/reference, and startup."

@@ -4757,8 +4757,207 @@
 		}
 	},
 	"crafting": {
+		"augment": {
+			"description": "保留已有词缀，向一个合法空位添加1条随机词缀。",
+			"eligible_base_ids": [
+				"nine_slot_etched_ring",
+				"nine_slot_trail_boots",
+				"nine_slot_folded_belt",
+				"nine_slot_threaded_gloves",
+				"nine_slot_slate_helmet",
+				"cinder_reed",
+				"gale_spindle",
+				"woven_bastion",
+				"tidebound_coat",
+				"wayglass_token",
+				"pulse_seed",
+				"runewood_focus",
+				"emberhide_vest",
+				"ashwood_bow"
+			],
+			"example": {
+				"after_definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"前缀 · 砥刃 T3：本武器附加物理伤害 +6",
+						"后缀 · 泉旋 T3：魔力恢复速度提高 +10%"
+					],
+					"base_id": "ashwood_bow",
+					"base_name": "白蜡长弓",
+					"description": "本武器物理单独结算，仅增强普攻和龙卷箭体。详情列出基底、本地点数与本地提高。\n前缀 · 砥刃 T3：本武器附加物理伤害 +6\n后缀 · 泉旋 T3：魔力恢复速度提高 +10%",
+					"effects": [],
+					"id": "gear_000001",
+					"item_level": 16,
+					"name": "魔法 · 白蜡长弓",
+					"rarity": "magic",
+					"size": [
+						2,
+						3
+					],
+					"slot": "weapon",
+					"stats": {
+						"mana_regen_increased": 0.1
+					},
+					"weapon_damage": {
+						"physical": 10.0
+					},
+					"weapon_damage_summary": "本武器物理：(4.0 + 6.0) × (1 + 0.0%) = 10.0；仅普攻与龙卷箭体",
+					"weapon_profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "ashwood_bow",
+						"flat": {
+							"physical": 6.0
+						},
+						"increased": {
+							"physical": 0.0
+						},
+						"item_id": "gear_000001",
+						"sources": [
+							{
+								"affix_id": "whetstone_edge",
+								"stat": "weapon_added_physical",
+								"value": 6.0
+							}
+						],
+						"stage": "weapon_local"
+					}
+				},
+				"after_instance": {
+					"affixes": [
+						{
+							"id": "whetstone_edge",
+							"tier": 3,
+							"value": 6
+						},
+						{
+							"id": "wellturn",
+							"tier": 3,
+							"value": 10
+						}
+					],
+					"base_id": "ashwood_bow",
+					"id": "gear_000001",
+					"item_level": 16,
+					"rarity": "magic"
+				},
+				"balance_after": 94,
+				"balance_before": 100,
+				"before_definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"前缀 · 砥刃 T3：本武器附加物理伤害 +6"
+					],
+					"base_id": "ashwood_bow",
+					"base_name": "白蜡长弓",
+					"description": "本武器物理单独结算，仅增强普攻和龙卷箭体。详情列出基底、本地点数与本地提高。\n前缀 · 砥刃 T3：本武器附加物理伤害 +6",
+					"effects": [],
+					"id": "gear_000001",
+					"item_level": 16,
+					"name": "魔法 · 白蜡长弓",
+					"rarity": "magic",
+					"size": [
+						2,
+						3
+					],
+					"slot": "weapon",
+					"stats": {
+
+					},
+					"weapon_damage": {
+						"physical": 10.0
+					},
+					"weapon_damage_summary": "本武器物理：(4.0 + 6.0) × (1 + 0.0%) = 10.0；仅普攻与龙卷箭体",
+					"weapon_profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "ashwood_bow",
+						"flat": {
+							"physical": 6.0
+						},
+						"increased": {
+							"physical": 0.0
+						},
+						"item_id": "gear_000001",
+						"sources": [
+							{
+								"affix_id": "whetstone_edge",
+								"stat": "weapon_added_physical",
+								"value": 6.0
+							}
+						],
+						"stage": "weapon_local"
+					}
+				},
+				"example_seed": 20261003,
+				"full_candidate_valid": true,
+				"quote": {
+					"code": "",
+					"consumes_item": false,
+					"cost": {
+						"calibration_shard": 6
+					},
+					"item_id": "gear_000001",
+					"materials": {
+
+					},
+					"ok": true,
+					"operation": "augment",
+					"reason": "",
+					"revision": 0,
+					"rules_version": "original-crafting-prototype-v2",
+					"source_instance": {
+						"affixes": [
+							{
+								"id": "whetstone_edge",
+								"tier": 3,
+								"value": 6
+							}
+						],
+						"base_id": "ashwood_bow",
+						"id": "gear_000001",
+						"item_level": 16,
+						"rarity": "magic"
+					}
+				},
+				"revision_after": 1,
+				"revision_before": 0,
+				"save_version": 18,
+				"source": {
+					"affixes": [
+						{
+							"id": "whetstone_edge",
+							"tier": 3,
+							"value": 6
+						}
+					],
+					"base_id": "ashwood_bow",
+					"id": "gear_000001",
+					"item_level": 16,
+					"rarity": "magic"
+				}
+			},
+			"kind": "operation",
+			"name": "补缀",
+			"risk": "仅在存在合法空位时可用，新词缀随机。",
+			"rule": {
+				"consumes_item": false,
+				"cost": 6,
+				"description": "保留已有词缀，向一个合法空位添加1条随机词缀。",
+				"name": "补缀",
+				"preserves_affixes": true,
+				"rarities": [
+					"magic",
+					"rare"
+				],
+				"result_rarity": ""
+			},
+			"rules_version": "original-crafting-prototype-v2"
+		},
 		"calibration_shard": {
-			"description": "回收背包中的随机魔法、稀有装备获得。用于重掷已有词缀数值；没有额外击杀掉落或升级赠送。",
+			"description": "回收背包中的随机魔法、稀有装备获得。真实堆叠物品，用于校准、赋魔、升格、补缀与重铸；待安置碎片不能直接消费。",
 			"kind": "material",
 			"max_revision": 1000000000,
 			"maximum": 1000000000,
@@ -4971,6 +5170,67 @@
 						"trailstep"
 					]
 				},
+				"expansion": {
+					"can_roll_same_values": true,
+					"count_selection": "uniform_among_reachable_counts",
+					"economy": "Each operation costs more than the maximum possible increase in salvage value.",
+					"material_id": "calibration_shard",
+					"mutates_state": false,
+					"operations": {
+						"augment": {
+							"cost": 6,
+							"description": "保留已有词缀，向一个合法空位添加1条随机词缀。",
+							"name": "补缀",
+							"preserves_affixes": true,
+							"rarities": [
+								"magic",
+								"rare"
+							],
+							"result_rarity": ""
+						},
+						"elevate": {
+							"cost": 24,
+							"description": "保留魔法装备已有词缀，升为稀有并补至4至6条。",
+							"name": "升格",
+							"preserves_affixes": true,
+							"rarities": [
+								"magic"
+							],
+							"result_rarity": "rare"
+						},
+						"enchant": {
+							"cost": 8,
+							"description": "普通装备变为魔法，随机获得1至2条合法词缀。",
+							"name": "赋魔",
+							"preserves_affixes": false,
+							"rarities": [
+								"normal"
+							],
+							"result_rarity": "magic"
+						},
+						"reforge": {
+							"cost_by_rarity": {
+								"magic": 10,
+								"rare": 28
+							},
+							"description": "保持稀有度，重新生成全部词缀种类、阶级和数值；可能相同或更差。",
+							"name": "重铸",
+							"preserves_affixes": false,
+							"rarities": [
+								"magic",
+								"rare"
+							],
+							"result_rarity": ""
+						}
+					},
+					"origin": "original",
+					"preserves": [
+						"id",
+						"base_id",
+						"item_level"
+					],
+					"tier_selection": "catalog_positive_weighted_family_tiers"
+				},
 				"id": "crafting_rules",
 				"integration_status": "implemented",
 				"materials": {
@@ -4980,8 +5240,42 @@
 					}
 				},
 				"mutates_state": false,
-				"name": "回收与数值校准",
+				"name": "装备工艺",
 				"operations": {
+					"augment": {
+						"consumes_item": false,
+						"cost": 6,
+						"description": "保留已有词缀，向一个合法空位添加1条随机词缀。",
+						"name": "补缀",
+						"preserves_affixes": true,
+						"rarities": [
+							"magic",
+							"rare"
+						],
+						"result_rarity": ""
+					},
+					"elevate": {
+						"consumes_item": false,
+						"cost": 24,
+						"description": "保留魔法装备已有词缀，升为稀有并补至4至6条。",
+						"name": "升格",
+						"preserves_affixes": true,
+						"rarities": [
+							"magic"
+						],
+						"result_rarity": "rare"
+					},
+					"enchant": {
+						"consumes_item": false,
+						"cost": 8,
+						"description": "普通装备变为魔法，随机获得1至2条合法词缀。",
+						"name": "赋魔",
+						"preserves_affixes": false,
+						"rarities": [
+							"normal"
+						],
+						"result_rarity": "magic"
+					},
 					"recalibrate": {
 						"can_roll_same_values": true,
 						"consumes_item": false,
@@ -4998,6 +5292,21 @@
 						],
 						"roll": "inclusive_integer_ticks_in_existing_tier"
 					},
+					"reforge": {
+						"consumes_item": false,
+						"cost_by_rarity": {
+							"magic": 10,
+							"rare": 28
+						},
+						"description": "保持稀有度，重新生成全部词缀种类、阶级和数值；可能相同或更差。",
+						"name": "重铸",
+						"preserves_affixes": false,
+						"rarities": [
+							"magic",
+							"rare"
+						],
+						"result_rarity": ""
+					},
 					"salvage": {
 						"consumes_item": true,
 						"cost": {
@@ -5010,17 +5319,22 @@
 				"origin": "original",
 				"persistence_owner": "main_integration",
 				"rarities": [
+					"normal",
 					"magic",
 					"rare"
 				],
-				"rules_version": "original-crafting-prototype-v1",
-				"schema_version": 1,
+				"rules_version": "original-crafting-prototype-v2",
+				"salvage_rarities": [
+					"magic",
+					"rare"
+				],
+				"schema_version": 2,
 				"status": "prototype"
 			},
 			"save_version": 18
 		},
-		"recalibrate": {
-			"description": "消耗校准碎片，重掷现有词缀的整数数值；结果可能降低或不变。",
+		"elevate": {
+			"description": "保留魔法装备已有词缀，升为稀有并补至4至6条。",
 			"eligible_base_ids": [
 				"nine_slot_etched_ring",
 				"nine_slot_trail_boots",
@@ -5041,45 +5355,58 @@
 				"after_definition": {
 					"added_sources": [],
 					"affix_lines": [
-						"前缀 · 砥刃 T3：本武器附加物理伤害 +5"
+						"前缀 · 砥刃 T3：本武器附加物理伤害 +6",
+						"前缀 · 符歌 T1：法术伤害提高 +7%",
+						"前缀 · 淬锋 T1：本武器物理伤害提高 +14%",
+						"后缀 · 霜回 T1：冰霜伤害提高 +5%",
+						"后缀 · 藏炭 T3：火焰伤害提高 +18%",
+						"后缀 · 引霆 T1：闪电伤害提高 +6%"
 					],
 					"base_id": "ashwood_bow",
 					"base_name": "白蜡长弓",
-					"description": "本武器物理单独结算，仅增强普攻和龙卷箭体。详情列出基底、本地点数与本地提高。\n前缀 · 砥刃 T3：本武器附加物理伤害 +5",
+					"description": "本武器物理单独结算，仅增强普攻和龙卷箭体。详情列出基底、本地点数与本地提高。\n前缀 · 砥刃 T3：本武器附加物理伤害 +6\n前缀 · 符歌 T1：法术伤害提高 +7%\n前缀 · 淬锋 T1：本武器物理伤害提高 +14%\n后缀 · 霜回 T1：冰霜伤害提高 +5%\n后缀 · 藏炭 T3：火焰伤害提高 +18%\n后缀 · 引霆 T1：闪电伤害提高 +6%",
 					"effects": [],
 					"id": "gear_000001",
 					"item_level": 16,
-					"name": "魔法 · 白蜡长弓",
-					"rarity": "magic",
+					"name": "稀有 · 白蜡长弓",
+					"rarity": "rare",
 					"size": [
 						2,
 						3
 					],
 					"slot": "weapon",
 					"stats": {
-
+						"cold_increased": 0.05,
+						"fire_increased": 0.18,
+						"lightning_increased": 0.06,
+						"spell_increased": 0.07
 					},
 					"weapon_damage": {
-						"physical": 9.0
+						"physical": 11.400000000000002
 					},
-					"weapon_damage_summary": "本武器物理：(4.0 + 5.0) × (1 + 0.0%) = 9.0；仅普攻与龙卷箭体",
+					"weapon_damage_summary": "本武器物理：(4.0 + 6.0) × (1 + 14.0%) = 11.4；仅普攻与龙卷箭体",
 					"weapon_profile": {
 						"base": {
 							"physical": 4.0
 						},
 						"base_id": "ashwood_bow",
 						"flat": {
-							"physical": 5.0
+							"physical": 6.0
 						},
 						"increased": {
-							"physical": 0.0
+							"physical": 0.14
 						},
 						"item_id": "gear_000001",
 						"sources": [
 							{
 								"affix_id": "whetstone_edge",
 								"stat": "weapon_added_physical",
-								"value": 5.0
+								"value": 6.0
+							},
+							{
+								"affix_id": "tempered_edge",
+								"stat": "weapon_physical_increased",
+								"value": 0.14
 							}
 						],
 						"stage": "weapon_local"
@@ -5090,16 +5417,41 @@
 						{
 							"id": "whetstone_edge",
 							"tier": 3,
+							"value": 6
+						},
+						{
+							"id": "runesong",
+							"tier": 1,
+							"value": 7
+						},
+						{
+							"id": "tempered_edge",
+							"tier": 1,
+							"value": 14
+						},
+						{
+							"id": "rimeecho",
+							"tier": 1,
 							"value": 5
+						},
+						{
+							"id": "coalglow",
+							"tier": 3,
+							"value": 18
+						},
+						{
+							"id": "sparkthread",
+							"tier": 1,
+							"value": 6
 						}
 					],
 					"base_id": "ashwood_bow",
 					"id": "gear_000001",
 					"item_level": 16,
-					"rarity": "magic"
+					"rarity": "rare"
 				},
-				"balance_after": 0,
-				"balance_before": 8,
+				"balance_after": 76,
+				"balance_before": 100,
 				"before_definition": {
 					"added_sources": [],
 					"affix_lines": [
@@ -5147,23 +5499,23 @@
 						"stage": "weapon_local"
 					}
 				},
-				"example_seed": 20261002,
+				"example_seed": 20261003,
 				"full_candidate_valid": true,
 				"quote": {
 					"code": "",
 					"consumes_item": false,
 					"cost": {
-						"calibration_shard": 8
+						"calibration_shard": 24
 					},
 					"item_id": "gear_000001",
 					"materials": {
 
 					},
 					"ok": true,
-					"operation": "recalibrate",
+					"operation": "elevate",
 					"reason": "",
 					"revision": 0,
-					"rules_version": "original-crafting-prototype-v1",
+					"rules_version": "original-crafting-prototype-v2",
 					"source_instance": {
 						"affixes": [
 							{
@@ -5180,6 +5532,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
+				"save_version": 18,
 				"source": {
 					"affixes": [
 						{
@@ -5195,11 +5548,23 @@
 				}
 			},
 			"kind": "operation",
-			"name": "数值校准",
-			"rules_version": "original-crafting-prototype-v1"
+			"name": "升格",
+			"risk": "原有词缀保持，新词缀随机；升格后重铸费用按稀有装备计算。",
+			"rule": {
+				"consumes_item": false,
+				"cost": 24,
+				"description": "保留魔法装备已有词缀，升为稀有并补至4至6条。",
+				"name": "升格",
+				"preserves_affixes": true,
+				"rarities": [
+					"magic"
+				],
+				"result_rarity": "rare"
+			},
+			"rules_version": "original-crafting-prototype-v2"
 		},
-		"salvage": {
-			"description": "消耗此装备，获得校准碎片。",
+		"enchant": {
+			"description": "普通装备变为魔法，随机获得1至2条合法词缀。",
 			"eligible_base_ids": [
 				"nine_slot_etched_ring",
 				"nine_slot_trail_boots",
@@ -5218,13 +5583,245 @@
 			],
 			"example": {
 				"after_definition": {
-
+					"added_sources": [],
+					"affix_lines": [
+						"后缀 · 引霆 T1：闪电伤害提高 +8%",
+						"前缀 · 淬锋 T1：本武器物理伤害提高 +14%"
+					],
+					"base_id": "ashwood_bow",
+					"base_name": "白蜡长弓",
+					"description": "本武器物理单独结算，仅增强普攻和龙卷箭体。详情列出基底、本地点数与本地提高。\n后缀 · 引霆 T1：闪电伤害提高 +8%\n前缀 · 淬锋 T1：本武器物理伤害提高 +14%",
+					"effects": [],
+					"id": "gear_000001",
+					"item_level": 16,
+					"name": "魔法 · 白蜡长弓",
+					"rarity": "magic",
+					"size": [
+						2,
+						3
+					],
+					"slot": "weapon",
+					"stats": {
+						"lightning_increased": 0.08
+					},
+					"weapon_damage": {
+						"physical": 4.5600000000000005
+					},
+					"weapon_damage_summary": "本武器物理：(4.0 + 0.0) × (1 + 14.0%) = 4.56；仅普攻与龙卷箭体",
+					"weapon_profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "ashwood_bow",
+						"flat": {
+							"physical": 0.0
+						},
+						"increased": {
+							"physical": 0.14
+						},
+						"item_id": "gear_000001",
+						"sources": [
+							{
+								"affix_id": "tempered_edge",
+								"stat": "weapon_physical_increased",
+								"value": 0.14
+							}
+						],
+						"stage": "weapon_local"
+					}
 				},
 				"after_instance": {
-
+					"affixes": [
+						{
+							"id": "sparkthread",
+							"tier": 1,
+							"value": 8
+						},
+						{
+							"id": "tempered_edge",
+							"tier": 1,
+							"value": 14
+						}
+					],
+					"base_id": "ashwood_bow",
+					"id": "gear_000001",
+					"item_level": 16,
+					"rarity": "magic"
 				},
-				"balance_after": 12,
-				"balance_before": 8,
+				"balance_after": 92,
+				"balance_before": 100,
+				"before_definition": {
+					"added_sources": [],
+					"affix_lines": [],
+					"base_id": "ashwood_bow",
+					"base_name": "白蜡长弓",
+					"description": "本武器物理单独结算，仅增强普攻和龙卷箭体。详情列出基底、本地点数与本地提高。",
+					"effects": [],
+					"id": "gear_000001",
+					"item_level": 16,
+					"name": "普通 · 白蜡长弓",
+					"rarity": "normal",
+					"size": [
+						2,
+						3
+					],
+					"slot": "weapon",
+					"stats": {
+
+					},
+					"weapon_damage": {
+						"physical": 4.0
+					},
+					"weapon_damage_summary": "本武器物理：(4.0 + 0.0) × (1 + 0.0%) = 4.0；仅普攻与龙卷箭体",
+					"weapon_profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "ashwood_bow",
+						"flat": {
+							"physical": 0.0
+						},
+						"increased": {
+							"physical": 0.0
+						},
+						"item_id": "gear_000001",
+						"sources": [],
+						"stage": "weapon_local"
+					}
+				},
+				"example_seed": 20261003,
+				"full_candidate_valid": true,
+				"quote": {
+					"code": "",
+					"consumes_item": false,
+					"cost": {
+						"calibration_shard": 8
+					},
+					"item_id": "gear_000001",
+					"materials": {
+
+					},
+					"ok": true,
+					"operation": "enchant",
+					"reason": "",
+					"revision": 0,
+					"rules_version": "original-crafting-prototype-v2",
+					"source_instance": {
+						"affixes": [],
+						"base_id": "ashwood_bow",
+						"id": "gear_000001",
+						"item_level": 16,
+						"rarity": "normal"
+					}
+				},
+				"revision_after": 1,
+				"revision_before": 0,
+				"save_version": 18,
+				"source": {
+					"affixes": [],
+					"base_id": "ashwood_bow",
+					"id": "gear_000001",
+					"item_level": 16,
+					"rarity": "normal"
+				}
+			},
+			"kind": "operation",
+			"name": "赋魔",
+			"risk": "随机获得合法词缀，结果不保证适合当前构筑。",
+			"rule": {
+				"consumes_item": false,
+				"cost": 8,
+				"description": "普通装备变为魔法，随机获得1至2条合法词缀。",
+				"name": "赋魔",
+				"preserves_affixes": false,
+				"rarities": [
+					"normal"
+				],
+				"result_rarity": "magic"
+			},
+			"rules_version": "original-crafting-prototype-v2"
+		},
+		"recalibrate": {
+			"description": "保留词缀种类与阶级，在原区间内重新随机数值。",
+			"eligible_base_ids": [
+				"nine_slot_etched_ring",
+				"nine_slot_trail_boots",
+				"nine_slot_folded_belt",
+				"nine_slot_threaded_gloves",
+				"nine_slot_slate_helmet",
+				"cinder_reed",
+				"gale_spindle",
+				"woven_bastion",
+				"tidebound_coat",
+				"wayglass_token",
+				"pulse_seed",
+				"runewood_focus",
+				"emberhide_vest",
+				"ashwood_bow"
+			],
+			"example": {
+				"after_definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"前缀 · 砥刃 T3：本武器附加物理伤害 +6"
+					],
+					"base_id": "ashwood_bow",
+					"base_name": "白蜡长弓",
+					"description": "本武器物理单独结算，仅增强普攻和龙卷箭体。详情列出基底、本地点数与本地提高。\n前缀 · 砥刃 T3：本武器附加物理伤害 +6",
+					"effects": [],
+					"id": "gear_000001",
+					"item_level": 16,
+					"name": "魔法 · 白蜡长弓",
+					"rarity": "magic",
+					"size": [
+						2,
+						3
+					],
+					"slot": "weapon",
+					"stats": {
+
+					},
+					"weapon_damage": {
+						"physical": 10.0
+					},
+					"weapon_damage_summary": "本武器物理：(4.0 + 6.0) × (1 + 0.0%) = 10.0；仅普攻与龙卷箭体",
+					"weapon_profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "ashwood_bow",
+						"flat": {
+							"physical": 6.0
+						},
+						"increased": {
+							"physical": 0.0
+						},
+						"item_id": "gear_000001",
+						"sources": [
+							{
+								"affix_id": "whetstone_edge",
+								"stat": "weapon_added_physical",
+								"value": 6.0
+							}
+						],
+						"stage": "weapon_local"
+					}
+				},
+				"after_instance": {
+					"affixes": [
+						{
+							"id": "whetstone_edge",
+							"tier": 3,
+							"value": 6
+						}
+					],
+					"base_id": "ashwood_bow",
+					"id": "gear_000001",
+					"item_level": 16,
+					"rarity": "magic"
+				},
+				"balance_after": 92,
+				"balance_before": 100,
 				"before_definition": {
 					"added_sources": [],
 					"affix_lines": [
@@ -5272,23 +5869,23 @@
 						"stage": "weapon_local"
 					}
 				},
-				"example_seed": 20261002,
+				"example_seed": 20261003,
 				"full_candidate_valid": true,
 				"quote": {
 					"code": "",
-					"consumes_item": true,
+					"consumes_item": false,
 					"cost": {
-
+						"calibration_shard": 8
 					},
 					"item_id": "gear_000001",
 					"materials": {
-						"calibration_shard": 4
+
 					},
 					"ok": true,
-					"operation": "salvage",
+					"operation": "recalibrate",
 					"reason": "",
 					"revision": 0,
-					"rules_version": "original-crafting-prototype-v1",
+					"rules_version": "original-crafting-prototype-v2",
 					"source_instance": {
 						"affixes": [
 							{
@@ -5305,6 +5902,352 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
+				"save_version": 18,
+				"source": {
+					"affixes": [
+						{
+							"id": "whetstone_edge",
+							"tier": 3,
+							"value": 6
+						}
+					],
+					"base_id": "ashwood_bow",
+					"id": "gear_000001",
+					"item_level": 16,
+					"rarity": "magic"
+				}
+			},
+			"kind": "operation",
+			"name": "校准",
+			"risk": "数值可能相同或降低，碎片仍会消耗。",
+			"rule": {
+				"can_roll_same_values": true,
+				"consumes_item": false,
+				"cost_formula": "salvage_yield * recalibrate_cost_multiplier",
+				"name": "数值校准",
+				"preserves": [
+					"id",
+					"base_id",
+					"rarity",
+					"item_level",
+					"affix_order",
+					"affix_id",
+					"tier"
+				],
+				"roll": "inclusive_integer_ticks_in_existing_tier"
+			},
+			"rules_version": "original-crafting-prototype-v2"
+		},
+		"reforge": {
+			"description": "保持稀有度，重新生成全部词缀种类、阶级和数值；可能相同或更差。",
+			"eligible_base_ids": [
+				"nine_slot_etched_ring",
+				"nine_slot_trail_boots",
+				"nine_slot_folded_belt",
+				"nine_slot_threaded_gloves",
+				"nine_slot_slate_helmet",
+				"cinder_reed",
+				"gale_spindle",
+				"woven_bastion",
+				"tidebound_coat",
+				"wayglass_token",
+				"pulse_seed",
+				"runewood_focus",
+				"emberhide_vest",
+				"ashwood_bow"
+			],
+			"example": {
+				"after_definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"后缀 · 引霆 T1：闪电伤害提高 +8%",
+						"前缀 · 淬锋 T1：本武器物理伤害提高 +14%"
+					],
+					"base_id": "ashwood_bow",
+					"base_name": "白蜡长弓",
+					"description": "本武器物理单独结算，仅增强普攻和龙卷箭体。详情列出基底、本地点数与本地提高。\n后缀 · 引霆 T1：闪电伤害提高 +8%\n前缀 · 淬锋 T1：本武器物理伤害提高 +14%",
+					"effects": [],
+					"id": "gear_000001",
+					"item_level": 16,
+					"name": "魔法 · 白蜡长弓",
+					"rarity": "magic",
+					"size": [
+						2,
+						3
+					],
+					"slot": "weapon",
+					"stats": {
+						"lightning_increased": 0.08
+					},
+					"weapon_damage": {
+						"physical": 4.5600000000000005
+					},
+					"weapon_damage_summary": "本武器物理：(4.0 + 0.0) × (1 + 14.0%) = 4.56；仅普攻与龙卷箭体",
+					"weapon_profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "ashwood_bow",
+						"flat": {
+							"physical": 0.0
+						},
+						"increased": {
+							"physical": 0.14
+						},
+						"item_id": "gear_000001",
+						"sources": [
+							{
+								"affix_id": "tempered_edge",
+								"stat": "weapon_physical_increased",
+								"value": 0.14
+							}
+						],
+						"stage": "weapon_local"
+					}
+				},
+				"after_instance": {
+					"affixes": [
+						{
+							"id": "sparkthread",
+							"tier": 1,
+							"value": 8
+						},
+						{
+							"id": "tempered_edge",
+							"tier": 1,
+							"value": 14
+						}
+					],
+					"base_id": "ashwood_bow",
+					"id": "gear_000001",
+					"item_level": 16,
+					"rarity": "magic"
+				},
+				"balance_after": 90,
+				"balance_before": 100,
+				"before_definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"前缀 · 砥刃 T3：本武器附加物理伤害 +6"
+					],
+					"base_id": "ashwood_bow",
+					"base_name": "白蜡长弓",
+					"description": "本武器物理单独结算，仅增强普攻和龙卷箭体。详情列出基底、本地点数与本地提高。\n前缀 · 砥刃 T3：本武器附加物理伤害 +6",
+					"effects": [],
+					"id": "gear_000001",
+					"item_level": 16,
+					"name": "魔法 · 白蜡长弓",
+					"rarity": "magic",
+					"size": [
+						2,
+						3
+					],
+					"slot": "weapon",
+					"stats": {
+
+					},
+					"weapon_damage": {
+						"physical": 10.0
+					},
+					"weapon_damage_summary": "本武器物理：(4.0 + 6.0) × (1 + 0.0%) = 10.0；仅普攻与龙卷箭体",
+					"weapon_profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "ashwood_bow",
+						"flat": {
+							"physical": 6.0
+						},
+						"increased": {
+							"physical": 0.0
+						},
+						"item_id": "gear_000001",
+						"sources": [
+							{
+								"affix_id": "whetstone_edge",
+								"stat": "weapon_added_physical",
+								"value": 6.0
+							}
+						],
+						"stage": "weapon_local"
+					}
+				},
+				"example_seed": 20261003,
+				"full_candidate_valid": true,
+				"quote": {
+					"code": "",
+					"consumes_item": false,
+					"cost": {
+						"calibration_shard": 10
+					},
+					"item_id": "gear_000001",
+					"materials": {
+
+					},
+					"ok": true,
+					"operation": "reforge",
+					"reason": "",
+					"revision": 0,
+					"rules_version": "original-crafting-prototype-v2",
+					"source_instance": {
+						"affixes": [
+							{
+								"id": "whetstone_edge",
+								"tier": 3,
+								"value": 6
+							}
+						],
+						"base_id": "ashwood_bow",
+						"id": "gear_000001",
+						"item_level": 16,
+						"rarity": "magic"
+					}
+				},
+				"revision_after": 1,
+				"revision_before": 0,
+				"save_version": 18,
+				"source": {
+					"affixes": [
+						{
+							"id": "whetstone_edge",
+							"tier": 3,
+							"value": 6
+						}
+					],
+					"base_id": "ashwood_bow",
+					"id": "gear_000001",
+					"item_level": 16,
+					"rarity": "magic"
+				}
+			},
+			"kind": "operation",
+			"name": "重铸",
+			"risk": "全部原词缀会被替换，结果可能相同或更差，碎片仍会消耗。",
+			"rule": {
+				"consumes_item": false,
+				"cost_by_rarity": {
+					"magic": 10,
+					"rare": 28
+				},
+				"description": "保持稀有度，重新生成全部词缀种类、阶级和数值；可能相同或更差。",
+				"name": "重铸",
+				"preserves_affixes": false,
+				"rarities": [
+					"magic",
+					"rare"
+				],
+				"result_rarity": ""
+			},
+			"rules_version": "original-crafting-prototype-v2"
+		},
+		"salvage": {
+			"description": "消耗这件装备，获得由稀有度和词缀阶级决定的校准碎片。",
+			"eligible_base_ids": [
+				"nine_slot_etched_ring",
+				"nine_slot_trail_boots",
+				"nine_slot_folded_belt",
+				"nine_slot_threaded_gloves",
+				"nine_slot_slate_helmet",
+				"cinder_reed",
+				"gale_spindle",
+				"woven_bastion",
+				"tidebound_coat",
+				"wayglass_token",
+				"pulse_seed",
+				"runewood_focus",
+				"emberhide_vest",
+				"ashwood_bow"
+			],
+			"example": {
+				"after_definition": {
+
+				},
+				"after_instance": {
+
+				},
+				"balance_after": 104,
+				"balance_before": 100,
+				"before_definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"前缀 · 砥刃 T3：本武器附加物理伤害 +6"
+					],
+					"base_id": "ashwood_bow",
+					"base_name": "白蜡长弓",
+					"description": "本武器物理单独结算，仅增强普攻和龙卷箭体。详情列出基底、本地点数与本地提高。\n前缀 · 砥刃 T3：本武器附加物理伤害 +6",
+					"effects": [],
+					"id": "gear_000001",
+					"item_level": 16,
+					"name": "魔法 · 白蜡长弓",
+					"rarity": "magic",
+					"size": [
+						2,
+						3
+					],
+					"slot": "weapon",
+					"stats": {
+
+					},
+					"weapon_damage": {
+						"physical": 10.0
+					},
+					"weapon_damage_summary": "本武器物理：(4.0 + 6.0) × (1 + 0.0%) = 10.0；仅普攻与龙卷箭体",
+					"weapon_profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "ashwood_bow",
+						"flat": {
+							"physical": 6.0
+						},
+						"increased": {
+							"physical": 0.0
+						},
+						"item_id": "gear_000001",
+						"sources": [
+							{
+								"affix_id": "whetstone_edge",
+								"stat": "weapon_added_physical",
+								"value": 6.0
+							}
+						],
+						"stage": "weapon_local"
+					}
+				},
+				"example_seed": 20261003,
+				"full_candidate_valid": true,
+				"quote": {
+					"code": "",
+					"consumes_item": true,
+					"cost": {
+
+					},
+					"item_id": "gear_000001",
+					"materials": {
+						"calibration_shard": 4
+					},
+					"ok": true,
+					"operation": "salvage",
+					"reason": "",
+					"revision": 0,
+					"rules_version": "original-crafting-prototype-v2",
+					"source_instance": {
+						"affixes": [
+							{
+								"id": "whetstone_edge",
+								"tier": 3,
+								"value": 6
+							}
+						],
+						"base_id": "ashwood_bow",
+						"id": "gear_000001",
+						"item_level": 16,
+						"rarity": "magic"
+					}
+				},
+				"revision_after": 1,
+				"revision_before": 0,
+				"save_version": 18,
 				"source": {
 					"affixes": [
 						{
@@ -5321,7 +6264,16 @@
 			},
 			"kind": "operation",
 			"name": "回收",
-			"rules_version": "original-crafting-prototype-v1"
+			"risk": "装备会被消耗，无法撤销。",
+			"rule": {
+				"consumes_item": true,
+				"cost": {
+
+				},
+				"name": "回收",
+				"yield_formula": "rarity_units + sum(tier) * salvage_units_per_tier"
+			},
+			"rules_version": "original-crafting-prototype-v2"
 		}
 	},
 	"currencies": {
@@ -9245,7 +10197,7 @@
 			"status": "implemented"
 		}
 	},
-	"game_version": "0.26.0",
+	"game_version": "0.27.0",
 	"jewel_affixes": {
 		"barrier": {
 			"kind": "prefix",

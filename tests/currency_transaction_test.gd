@@ -122,7 +122,7 @@ func _crafting_moves_quantities_across_stacks_to_zero() -> bool:
 	return result.ok and state.crafting_balance() == 0 and not after.items.has("currency_pay_a") \
 		and not after.items.has("currency_pay_b") and before_total - Currency.total_quantity(after.items).quantity == cost \
 		and after.crafting == {"revision": 1} and not disk.crafting.has("materials") \
-		and disk.version == 17 and Rules.reason(Rules.decode(disk)).is_empty()
+		and disk.version == 18 and Rules.reason(Rules.decode(disk)).is_empty()
 
 
 func _salvage_merges_existing_stack() -> bool:
@@ -235,7 +235,7 @@ func _write_failure_retry_is_deterministic() -> bool:
 	if not quote.ok: return false
 	var before: Dictionary = state.snapshot()
 	var bytes: PackedByteArray = FileAccess.get_file_as_bytes(path)
-	var seed_text := JSON.stringify({"rules": Craft.RULES_VERSION, "revision": int(before.crafting.revision), "item": source}, "", true, true)
+	var seed_text := JSON.stringify({"rules": "original-crafting-prototype-v1", "revision": int(before.crafting.revision), "item": source}, "", true, true)
 	var seed_value: int = seed_text.sha256_text().substr(0, 15).hex_to_int()
 	var expected: Dictionary = Craft.recalibrate_plan(source, seed_value)
 	seed(18177)

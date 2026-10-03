@@ -57,7 +57,7 @@ func _metadata() -> void:
 	_expect(info.catalog_source == "res://scripts/items/equipment_catalog.gd", "Catalog remains the single content source")
 	_expect(info.base_ids == Catalog.all_base_ids() and info.affix_ids == Catalog.all_affix_ids(), "Metadata lists all actual content")
 	_expect(info.base_ids.size() == 14 and info.affix_ids.size() == 26, "Canonical catalog coverage includes fourteen bases and twenty-six families")
-	_expect(info.rarities == ["magic", "rare"] and info.materials.has("calibration_shard"), "Metadata declares supported rarities and material")
+	_expect(info.rarities == ["normal", "magic", "rare"] and info.salvage_rarities == ["magic", "rare"] and info.materials.has("calibration_shard"), "Metadata declares supported rarities and material")
 	_expect(info.operations.salvage.consumes_item and not info.operations.recalibrate.consumes_item,
 		"Salvage consumes an item only when the caller commits")
 	_expect(info.operations.recalibrate.can_roll_same_values and info.persistence_owner == "main_integration",

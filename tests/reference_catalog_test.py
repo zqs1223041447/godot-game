@@ -48,7 +48,7 @@ def main():
     expected_flasks={f'{key}-time-{i}':r['resource'] for key,f in data.get('flasks',{}).items() for i,r in enumerate(f['example']['rows'])}
     assert inspector.flask_values==expected_flasks, 'Flask recovery table differs from actual runtime'
     expected_craft={}
-    for operation in ['salvage','recalibrate']:
+    for operation in [key for key, entry in data['crafting'].items() if entry['kind']=='operation']:
         sample=data['crafting'][operation]['example']
         quoted=sample['quote']
         expected_craft[operation+'-amount']=(quoted['materials'] if operation=='salvage' else quoted['cost'])['calibration_shard']
