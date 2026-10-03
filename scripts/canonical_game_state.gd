@@ -8,6 +8,7 @@ const Slots = preload("res://scripts/items/equipment_slots.gd")
 const Combat = preload("res://scripts/combat/combat_data.gd")
 const Compiler = preload("res://scripts/combat/skill_compiler.gd")
 const Data = preload("res://scripts/game_data.gd")
+const ShardCatalog = preload("res://scripts/items/currency_catalog.gd")
 const LOOT_PROFILE_ID := "canonical_v14"
 const SourceTree = preload("res://scripts/passives/source_tree_runtime.gd")
 var _build_signature := PackedByteArray()
@@ -438,14 +439,20 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	if loaded and old_version>0 and old_version<Rules.VERSION:
 		migrated_from_legacy=true
 		if old_version == Rules.V14_VERSION:
-			migration_message="旧存档已原字节备份并升级为双页背包。原物品与构筑保持不变；未能安置的物品保留在待安置区（%d 件）。"%pending_items().size()
+			migration_message="旧存档已原字节备份并升级为 schema16。原物品与构筑保持不变；校准碎片已转为物品，未能安置的物品保留在待安置区（%d 件）。"%pending_items().size()
+		elif old_version == Rules.V15_VERSION:
+			migration_message="旧存档已原字节备份并升级为 schema16。校准碎片余额已转为可见物品；未能安置的物品保留在待安置区（%d 件）。"%pending_items().size()
 		else:
-			migration_message="旧存档已原字节备份，装备与珠宝身份保留，技能转为独立宝石；旧天赋点已退还。待安置物品 %d 件，预算外 %d 点保留记账。"%[pending_items().size(),int(_current.migration_ledger.excess_points_recorded)]
+			migration_message="旧存档已原字节备份并升级为 schema16，原验证迁移链已完成；校准碎片已转为可见物品。待安置物品 %d 件，预算外 %d 点保留记账。"%[pending_items().size(),int(_current.migration_ledger.excess_points_recorded)]
 	return loaded
 
 
 func crafting_balance() -> int:
-	return int(_current.crafting.materials[Craft.MATERIAL_ID])
+	var total := 0
+	for uid: String in _current.items:
+		if _current.items[uid].kind == "currency" and _current.locations[uid].kind == "bag":
+			total += int(_current.items[uid].payload.quantity)
+	return total
 
 
 func crafting_quote(operation: Variant, uid: Variant, path: String = "user://build_save.json") -> Dictionary:
@@ -457,8 +464,14 @@ func crafting_quote(operation: Variant, uid: Variant, path: String = "user://bui
 	if not Rules.reason(_current,_talent_validator,_socket_ids).is_empty(): return _craft_failure("invalid_build","构筑数据无效")
 	var quote: Dictionary = CraftPlanner.quote(_craft_context(uid,path),operation,uid)
 	if not quote.ok: return quote
-	if crafting_balance() - int(quote.cost.get(Craft.MATERIAL_ID,0)) + int(quote.materials.get(Craft.MATERIAL_ID,0)) > Rules.MAX_SERIAL:
-		return _craft_failure("material_limit","材料已达上限")
+	var all_currency: Dictionary = ShardCatalog.total_quantity(_current.items)
+	var debit: int = int(quote.cost.get(Craft.MATERIAL_ID, 0))
+	var credit: int = int(quote.materials.get(Craft.MATERIAL_ID, 0))
+	if not all_currency.ok or crafting_balance() < debit or debit > int(all_currency.quantity):
+		return _craft_failure("invalid_currency","校准碎片库存无效")
+	var after_debit: int = int(all_currency.quantity) - debit
+	if credit > ShardCatalog.INVENTORY_LIMIT - after_debit:
+		return _craft_failure("currency_limit","全库存校准碎片总量已达上限")
 	var disk: Dictionary = _canonical_disk_stamp(path)
 	if not disk.ok: return _craft_failure("save_unreadable","存档无法读取")
 	_craft_sequence += 1
@@ -492,13 +505,19 @@ func execute_crafting(handle: Variant, source_instance: Variant) -> Dictionary:
 	var plan: Dictionary = CraftPlanner.plan(_craft_context(quote.item_id,issued.path),quote,seed_value)
 	if not plan.ok: return plan
 	var candidate := snapshot()
+	var released_location: Dictionary = {}
 	if quote.operation == "salvage":
+		released_location = candidate.locations[quote.item_id].duplicate(true)
 		candidate.items.erase(quote.item_id)
 		candidate.locations.erase(quote.item_id)
 		candidate.locations = Transfer.compact_recovery(candidate.locations)
 	else:
 		candidate.items[quote.item_id] = Items.wrap_equipment(plan.candidate.equipment_instances[quote.item_id])
-	candidate.crafting = {"materials":plan.candidate.materials.duplicate(true),"revision":plan.candidate.revision}
+	candidate.crafting = {"revision":plan.candidate.revision}
+	var currency_result: Dictionary = _set_bag_currency_balance(candidate,
+		int(plan.candidate.materials.get(Craft.MATERIAL_ID, 0)), released_location)
+	if not currency_result.ok:
+		return _craft_failure(currency_result.error_code, currency_result.reason)
 	candidate.revision += 1
 	var result := _commit(candidate,issued.path)
 	if not result.ok:
@@ -517,8 +536,87 @@ func _craft_context(uid: String,path: String) -> Dictionary:
 	return {"revision":int(_current.crafting.revision),"inventory":[uid],
 		"equipment_instances":{uid:_current.items[uid].payload.duplicate(true)},"equipped":{},
 		"backpack_positions":{"item:"+uid:[int(cell.x),int(cell.y)]},
-		"materials":_current.crafting.materials.duplicate(true),"save_writable":save_block_reason(path).is_empty()}
+		"materials":{Craft.MATERIAL_ID:crafting_balance()},"save_writable":save_block_reason(path).is_empty()}
 
 
 static func _craft_failure(code: String, reason: String) -> Dictionary:
 	return {"ok":false,"code":code,"reason":reason}
+
+
+func _set_bag_currency_balance(candidate: Dictionary, target_balance: int,
+		released_location: Dictionary = {}) -> Dictionary:
+	if target_balance < 0 or target_balance > ShardCatalog.INVENTORY_LIMIT:
+		return {"ok": false, "error_code": "currency_limit", "reason": "校准碎片余额超出物品上限"}
+	var stack_uids: Array[String] = []
+	var current_balance := 0
+	for uid: String in candidate.items:
+		if candidate.items[uid].kind == "currency" and candidate.locations[uid].kind == "bag":
+			stack_uids.append(uid)
+			current_balance += int(candidate.items[uid].payload.quantity)
+	stack_uids.sort()
+	if target_balance < current_balance:
+		var remaining: int = current_balance - target_balance
+		for uid: String in stack_uids:
+			var quantity: int = int(candidate.items[uid].payload.quantity)
+			if quantity > remaining:
+				candidate.items[uid].payload.quantity = quantity - remaining
+				remaining = 0
+				break
+			candidate.items.erase(uid)
+			candidate.locations.erase(uid)
+			remaining -= quantity
+		if remaining != 0:
+			return {"ok": false, "error_code": "invalid_currency", "reason": "背包中的校准碎片数量不足"}
+	elif target_balance > current_balance:
+		var remaining: int = target_balance - current_balance
+		for uid: String in stack_uids:
+			var quantity: int = int(candidate.items[uid].payload.quantity)
+			var added: int = mini(remaining, ShardCatalog.STACK_LIMIT - quantity)
+			candidate.items[uid].payload.quantity = quantity + added
+			remaining -= added
+			if remaining == 0:
+				break
+		if remaining > 0:
+			if candidate.items.size() >= Rules.MAX_ITEMS:
+				return {"ok": false, "error_code": "item_limit", "reason": "无法增加新的校准碎片物品"}
+			var uid: String = _new_currency_uid(candidate.items)
+			var wrapped: Dictionary = Items.calibration_shard(uid, remaining)
+			if wrapped.is_empty():
+				return {"ok": false, "error_code": "invalid_currency", "reason": "新校准碎片堆无效"}
+			candidate.items[uid] = wrapped
+			var position: Dictionary = {}
+			if released_location.get("kind", "") == "bag":
+				position = released_location.duplicate(true)
+			if position.is_empty():
+				var metadata: Dictionary = Items.metadata_for_items(candidate.items)
+				position = Transfer.first_bag_space_paged(metadata, candidate.locations,
+					Migration.paged_location_context(candidate, _socket_ids), uid)
+			if position.is_empty():
+				var recovery_index: int = _next_recovery_index(candidate.locations, candidate.items.size())
+				if recovery_index < 0:
+					return {"ok": false, "error_code": "recovery_capacity", "reason": "没有可分配的可见待安置位置"}
+				position = {"kind": "recovery", "index": recovery_index}
+			candidate.locations[uid] = position
+	var total: Dictionary = ShardCatalog.total_quantity(candidate.items)
+	if not total.ok or int(total.quantity) > ShardCatalog.INVENTORY_LIMIT:
+		return {"ok": false, "error_code": "currency_limit", "reason": "全库存校准碎片总量超出上限"}
+	return {"ok": true, "error_code": "", "reason": ""}
+
+
+func _new_currency_uid(items: Dictionary) -> String:
+	for serial: int in range(1, Rules.MAX_ITEMS + 1):
+		var uid := "currency_calibration_shard_%06d" % serial
+		if not items.has(uid):
+			return uid
+	return ""
+
+
+func _next_recovery_index(locations: Dictionary, item_count: int) -> int:
+	var used: Dictionary = {}
+	for location: Variant in locations.values():
+		if location is Dictionary and location.get("kind", "") == "recovery":
+			used[int(location.index)] = true
+	for index: int in range(item_count):
+		if not used.has(index):
+			return index
+	return -1

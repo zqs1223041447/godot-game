@@ -7,7 +7,10 @@ const Legacy = preload("res://scripts/build_state.gd")
 const Rules = preload("res://scripts/save/canonical_build_rules.gd")
 const Migration = preload("res://scripts/save/canonical_build_migration.gd")
 const PagedMigration = preload("res://scripts/save/paged_bag_migration.gd")
+const CurrencyMigration = preload("res://scripts/save/currency_item_migration.gd")
 const Items = preload("res://scripts/items/unified_item_catalog.gd")
+const Currency = preload("res://scripts/items/currency_catalog.gd")
+const ItemLocationRules = preload("res://scripts/items/item_location_rules.gd")
 const Transfer = preload("res://scripts/items/item_transfer_plan.gd")
 const MAX_SAVE_BYTES := 2097152
 var _current: Dictionary = {}
@@ -27,8 +30,9 @@ var successful_saves := 0
 func _init() -> void:
 	_socket_ids = Rules.SourceTree.Data.standard_socket_ids()
 	var legacy_default: Dictionary = Migration.migrate(_io._snapshot())
-	_current = PagedMigration.migrate_v14(legacy_default, _socket_ids)
-	assert(not _current.is_empty(), "The built-in v14 canonical fixture must migrate to v15")
+	var paged_default: Dictionary = PagedMigration.migrate_v14(legacy_default, _socket_ids)
+	_current = CurrencyMigration.migrate_v15(paged_default, _socket_ids)
+	assert(not _current.is_empty() and Rules.reason(_current).is_empty(), "The built-in canonical fixture must migrate to v16")
 	_current.migration_ledger.from_version = 0
 
 
@@ -93,14 +97,26 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	var candidate: Dictionary = {}
 	if old_version < Rules.VERSION:
 		var source_v14: Dictionary = {}
+		var source_v15: Dictionary = {}
 		if old_version == Rules.V14_VERSION:
 			source_v14 = Rules.decode_v14(raw)
+		elif old_version == Rules.V15_VERSION:
+			source_v15 = Rules.decode_v15(raw)
 		else:
 			var legacy_v14: Dictionary = Migration.migrate(raw)
 			source_v14 = Rules.decode_v14(legacy_v14)
-		var v14_reason: String = Rules.reason_v14(source_v14, _talent_validator, _socket_ids)
-		if not v14_reason.is_empty(): return _reject(path, v14_reason)
-		candidate = PagedMigration.migrate_v14(source_v14, _socket_ids)
+		var valid_v15: Dictionary = {}
+		if old_version == Rules.V15_VERSION:
+			var v15_reason: String = Rules.reason_v15(source_v15, _talent_validator, _socket_ids)
+			if not v15_reason.is_empty(): return _reject(path, v15_reason)
+			valid_v15 = source_v15
+		else:
+			var v14_reason: String = Rules.reason_v14(source_v14, _talent_validator, _socket_ids)
+			if not v14_reason.is_empty(): return _reject(path, v14_reason)
+			valid_v15 = PagedMigration.migrate_v14(source_v14, _socket_ids)
+			var migrated_v15_reason: String = Rules.reason_v15(valid_v15, _talent_validator, _socket_ids)
+			if not migrated_v15_reason.is_empty(): return _reject(path, migrated_v15_reason)
+		candidate = CurrencyMigration.migrate_v15(valid_v15, _socket_ids)
 	else:
 		candidate = Rules.decode(raw)
 	var reason: String = Rules.reason(candidate, _talent_validator, _socket_ids)
@@ -145,6 +161,9 @@ func save_build(path: String = "user://build_save.json") -> Error:
 
 func can_move_item(uid: Variant, destination: Variant, expected_revision: Variant) -> bool:
 	if _busy: return false
+	var merge: Dictionary = _currency_merge_plan(uid, destination, expected_revision)
+	if merge.handled:
+		return merge.ok and Rules.reason(_prepare_candidate(merge.candidate), _talent_validator, _socket_ids).is_empty()
 	var planned: Dictionary = Transfer.move_paged(Items.metadata_for_items(_current.items), _current.locations,
 		Migration.paged_location_context(_current, _socket_ids), uid, destination, _current.revision, expected_revision)
 	if not planned.ok: return false
@@ -162,6 +181,10 @@ func first_bag_position(uid: String) -> Dictionary:
 
 func move_item(uid: Variant, destination: Variant, expected_revision: Variant, path: String) -> Dictionary:
 	if _busy: return _failure("busy", "当前操作尚未结束")
+	var merge: Dictionary = _currency_merge_plan(uid, destination, expected_revision)
+	if merge.handled:
+		if not merge.ok: return _failure(merge.error_code, merge.reason)
+		return _commit(merge.candidate, path)
 	var planned: Dictionary = Transfer.move_paged(Items.metadata_for_items(_current.items), _current.locations,
 		Migration.paged_location_context(_current, _socket_ids), uid, destination, _current.revision, expected_revision)
 	if not planned.ok: return planned
@@ -169,6 +192,57 @@ func move_item(uid: Variant, destination: Variant, expected_revision: Variant, p
 	candidate.locations = planned.locations
 	candidate.revision = planned.revision
 	return _commit(candidate, path)
+
+
+func _currency_merge_plan(uid: Variant, destination: Variant, expected_revision: Variant) -> Dictionary:
+	var result := {"handled": false, "ok": false, "error_code": "", "reason": "", "candidate": {}}
+	if not destination is Dictionary or destination.get("kind", "") != "bag" \
+			or not _current.items.has(uid) or not Currency.validate_instance(_current.items[uid]):
+		return result
+	if not ItemLocationRules._paged_location_shape_error(destination, "bag").is_empty():
+		return result
+	var source_location: Dictionary = _current.locations.get(uid, {})
+	if source_location.get("kind", "") not in ["bag", "recovery"]:
+		return result
+	var target_uid := ""
+	for other: String in _current.locations:
+		if other == uid:
+			continue
+		var location: Dictionary = _current.locations[other]
+		if location.get("kind", "") == "bag" and location.page == destination.page \
+				and location.x == destination.x and location.y == destination.y:
+			target_uid = other
+			break
+	if target_uid.is_empty() or not _current.items.has(target_uid) \
+			or not Currency.validate_instance(_current.items[target_uid]) \
+			or _current.items[target_uid].definition_id != _current.items[uid].definition_id:
+		return result
+	result.handled = true
+	if not expected_revision is int or expected_revision != _current.revision \
+			or _current.revision >= Transfer.MAX_REVISION:
+		result.error_code = "stale_revision"
+		result.reason = "物品位置已变化，请重新操作。"
+		return result
+	var source_quantity: int = _current.items[uid].payload.quantity
+	var target_quantity: int = _current.items[target_uid].payload.quantity
+	if source_quantity > Currency.STACK_LIMIT - target_quantity:
+		result.error_code = "stack_limit"
+		result.reason = "目标碎片堆空间不足，不能部分合并。"
+		return result
+	var candidate: Dictionary = snapshot()
+	candidate.items[target_uid].payload.quantity = target_quantity + source_quantity
+	candidate.items.erase(uid)
+	candidate.locations.erase(uid)
+	candidate.locations = Transfer.compact_recovery(candidate.locations)
+	candidate.revision += 1
+	var reason: String = Rules.reason(_prepare_candidate(candidate), _talent_validator, _socket_ids)
+	if not reason.is_empty():
+		result.error_code = "invalid_candidate"
+		result.reason = reason
+		return result
+	result.ok = true
+	result.candidate = candidate
+	return result
 
 
 func arrange_items(expected_revision: Variant, path: String) -> Dictionary:

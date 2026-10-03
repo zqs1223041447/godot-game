@@ -16,7 +16,8 @@ func _initialize() -> void:
 
 
 func _run() -> void:
-	_expect(Rules.VERSION == 15 and Rules.V14_VERSION == 14, "current schema advances while v14 remains explicit")
+	_expect(Rules.VERSION == 16 and Rules.V15_VERSION == 15 and Rules.V14_VERSION == 14,
+		"current schema advances while v14 and v15 remain explicit")
 	var v14_candidate := LegacyMigration.migrate(Legacy.new()._snapshot())
 	var v14_decoded := Rules.decode_v14(v14_candidate)
 	_expect(not v14_decoded.is_empty() and Rules.reason_v14(v14_decoded).is_empty(),

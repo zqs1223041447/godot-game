@@ -8,10 +8,13 @@ const Locations = preload("res://scripts/items/item_location_rules.gd")
 const Supports = preload("res://scripts/combat/support_registry.gd")
 const Equipment = preload("res://scripts/items/equipment_catalog.gd")
 const Jewels = preload("res://scripts/jewel_data.gd")
+const Currency = preload("res://scripts/items/currency_catalog.gd")
 const SourceTree = preload("res://scripts/passives/source_tree_runtime.gd")
 const V14_VERSION := 14
-const VERSION := 15
-const MAX_ITEMS := 1024
+const V15_VERSION := 15
+const VERSION := 16
+const LEGACY_MAX_ITEMS := 1024
+const MAX_ITEMS := 2048
 const MAX_GROUPS := 64
 const MAX_SERIAL := 1000000000
 const FIELDS := ["version", "revision", "items", "locations", "next_item_serial", "skill_groups", "bindings", "talents", "progress", "crafting", "migration_ledger"]
@@ -21,23 +24,31 @@ const BINDABLE_KEYS := [KEY_0, KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6, KEY_7, 
 
 
 static func decode(raw: Variant) -> Dictionary:
-	return _decode(raw, true)
+	return _decode(raw, true, VERSION, true)
+
+
+## Preserve the v15 paged-bag/wallet contract before converting the wallet to
+## item stacks. This decoder deliberately rejects v16-only currency instances.
+static func decode_v15(raw: Variant) -> Dictionary:
+	return _decode(raw, true, V15_VERSION, false)
 
 
 ## Preserve the exact v14 decoder contract for the mandatory pre-migration
 ## validation pass. v14 bag locations have no page field.
 static func decode_v14(raw: Variant) -> Dictionary:
-	return _decode(raw, false)
+	return _decode(raw, false, V14_VERSION, false)
 
 
-static func _decode(raw: Variant, paged: bool) -> Dictionary:
+static func _decode(raw: Variant, paged: bool, expected_version: int, allow_currency: bool) -> Dictionary:
 	if not Locations._exact_string_keys(raw, FIELDS): return {}
 	var value: Dictionary = raw.duplicate(true)
 	for field: String in ["version", "revision", "next_item_serial"]:
 		if not Items._whole(value[field], 0, MAX_SERIAL): return {}
 		value[field] = int(value[field])
+	if value.version != expected_version: return {}
 	if not value.items is Dictionary or not value.locations is Dictionary: return {}
 	for uid: Variant in value.items:
+		if not allow_currency and value.items[uid] is Dictionary and value.items[uid].get("kind", "") == "currency": return {}
 		var item: Dictionary = Items.decode_instance(value.items[uid])
 		if item.is_empty(): return {}
 		value.items[uid] = item
@@ -49,8 +60,12 @@ static func _decode(raw: Variant, paged: bool) -> Dictionary:
 		if not value[group] is Dictionary: return {}
 	for field: String in ["level", "xp"]:
 		if not _decode_integer(value.progress, field): return {}
-	if not _decode_integer(value.crafting, "revision") or not value.crafting.get("materials") is Dictionary: return {}
-	if not _decode_integer(value.crafting.materials, "calibration_shard"): return {}
+	if not _decode_integer(value.crafting, "revision"): return {}
+	if allow_currency:
+		if not Locations._exact_string_keys(value.crafting, ["revision"]): return {}
+	else:
+		if not value.crafting.get("materials") is Dictionary: return {}
+		if not _decode_integer(value.crafting.materials, "calibration_shard"): return {}
 	for field: String in ["class_id", "normal_points", "ascendancy_points"]:
 		if not _decode_integer(value.talents, field): return {}
 	if not value.talents.get("masteries") is Dictionary: return {}
@@ -65,21 +80,29 @@ static func _decode(raw: Variant, paged: bool) -> Dictionary:
 
 
 static func reason(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
-	return _reason(value, VERSION, true, validate_talents, socket_ids)
+	return _reason(value, VERSION, true, true, MAX_ITEMS, validate_talents, socket_ids)
+
+
+static func reason_v15(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
+	return _reason(value, V15_VERSION, true, false, LEGACY_MAX_ITEMS, validate_talents, socket_ids)
 
 
 static func reason_v14(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
-	return _reason(value, V14_VERSION, false, validate_talents, socket_ids)
+	return _reason(value, V14_VERSION, false, false, LEGACY_MAX_ITEMS, validate_talents, socket_ids)
 
 
-static func _reason(value: Variant, expected_version: int, paged: bool,
-		validate_talents: Callable, socket_ids: Array) -> String:
+static func _reason(value: Variant, expected_version: int, paged: bool, allow_currency: bool,
+		item_limit: int, validate_talents: Callable, socket_ids: Array) -> String:
 	if not Locations._exact_string_keys(value, FIELDS): return "保存结构无效"
 	if not value.version is int or value.version != expected_version: return "保存版本不兼容"
 	if not _integer(value.revision, 0, MAX_SERIAL) or not _integer(value.next_item_serial, 1, MAX_SERIAL): return "修订或物品序号无效"
-	if not value.items is Dictionary or value.items.size() > MAX_ITEMS: return "物品注册表无效"
+	if not value.items is Dictionary or value.items.size() > item_limit: return "物品注册表无效"
+	if not allow_currency:
+		for item: Variant in value.items.values():
+			if item is Dictionary and item.get("kind", "") == "currency": return "旧版本不能包含货币物品"
 	var metadata: Dictionary = Items.metadata_for_items(value.items)
 	if metadata.size() != value.items.size(): return "物品实例无效"
+	if allow_currency and not Currency.total_quantity(value.items).ok: return "校准碎片堆或全库存数量无效"
 	for uid: String in value.items:
 		var serial: int = Equipment.serial_from_id(uid) if uid.begins_with("gear_") else Jewels.serial_from_id(uid) if uid.begins_with("jewel_") else _item_serial(uid)
 		if serial >= value.next_item_serial: return "物品序号不得重用"
@@ -111,8 +134,13 @@ static func _reason(value: Variant, expected_version: int, paged: bool,
 			if not error.is_empty(): return error
 	if not Locations._exact_string_keys(value.progress, ["level", "xp"]) or not _integer(value.progress.level, 1, 1000) \
 			or not _integer(value.progress.xp, 0, 11 + int(value.progress.level) * 8) or (value.progress.level == 1000 and value.progress.xp != 0): return "成长进度无效"
-	if not Locations._exact_string_keys(value.crafting, ["materials", "revision"]) or not _integer(value.crafting.revision, 0, MAX_SERIAL) \
-			or not Locations._exact_string_keys(value.crafting.materials, ["calibration_shard"]) or not _integer(value.crafting.materials.calibration_shard, 0, MAX_SERIAL): return "制作材料或修订无效"
+	if not value.crafting is Dictionary or not _integer(value.crafting.get("revision"), 0, MAX_SERIAL): return "制作修订无效"
+	if allow_currency:
+		if not Locations._exact_string_keys(value.crafting, ["revision"]): return "schema16 制作区只能保存修订号"
+	else:
+		if not Locations._exact_string_keys(value.crafting, ["materials", "revision"]) \
+				or not Locations._exact_string_keys(value.crafting.get("materials"), ["calibration_shard"]) \
+				or not _integer(value.crafting.materials.calibration_shard, 0, MAX_SERIAL): return "旧版制作材料或修订无效"
 	var ledger_error: String = _ledger_reason(value.migration_ledger)
 	if not ledger_error.is_empty(): return ledger_error
 	return str(validate_talents.call(value)) if validate_talents.is_valid() else SourceTree.reason(value)
@@ -155,7 +183,7 @@ static func _ledger_reason(value: Variant) -> String:
 	if value.from_version > 13 or value.legacy_points_earned > 1004 or value.normal_budget_at_migration != mini(value.legacy_points_earned, 123) \
 			or value.excess_points_recorded != value.legacy_points_earned - value.normal_budget_at_migration or value.legacy_points_refunded > value.legacy_points_earned \
 			or value.default_class_id != Migration.DEFAULT_CLASS_ID or value.default_start_id != Migration.DEFAULT_START_ID \
-			or value.initial_recovery_count > MAX_ITEMS: return "迁移预算记录不一致"
+		or value.initial_recovery_count > LEGACY_MAX_ITEMS: return "迁移预算记录不一致"
 	for field: String in ["legacy_allocated_nodes", "returned_socketed_jewels"]:
 		if not value[field] is Array or value[field].size() > MAX_ITEMS: return "迁移身份记录无效"
 		var seen: Dictionary = {}

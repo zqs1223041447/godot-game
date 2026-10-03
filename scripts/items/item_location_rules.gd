@@ -10,7 +10,7 @@ const PAGED_BAG_ROWS: int = 6
 const PAGED_BAG_PAGES: int = 2
 const MAX_ITEM_ID_LENGTH: int = 128
 const MAX_SUPPORT_INDEX: int = 4
-const ITEM_KINDS: Array[String] = ["equipment", "jewel", "skill_gem", "support_gem"]
+const ITEM_KINDS: Array[String] = ["equipment", "jewel", "skill_gem", "support_gem", "currency"]
 const EQUIPMENT_CATEGORIES: Array[String] = [
 	"weapon", "body_armour", "amulet", "ring", "boots", "belt", "gloves", "helmet",
 ]
@@ -224,6 +224,8 @@ static func _metadata_error(value: Variant) -> String:
 		return "size 必须使用真正的整数"
 	if value.size[0] < 1 or value.size[0] > BAG_COLUMNS or value.size[1] < 1 or value.size[1] > BAG_ROWS:
 		return "size 必须在 1×1 至 12×8 范围内"
+	if value.kind == "currency" and value.size != [1, 1]:
+		return "currency 必须占用 1×1 格子"
 	return ""
 
 

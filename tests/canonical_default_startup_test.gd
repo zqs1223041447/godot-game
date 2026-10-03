@@ -17,7 +17,7 @@ func run()->void:
 	arena.set_process(false)
 	check(arena.state is Canonical,"actual default main owns canonical model")
 	check(arena.state.migrated_from_legacy and arena.state.last_load_error.is_empty(),"actual startup migrates legacy source")
-	check(arena.state.snapshot().version==14 and arena.state.snapshot().skill_groups.size()==10,"actual saved schema and ten groups")
+	check(arena.state.snapshot().version==16 and arena.state.snapshot().skill_groups.size()==10,"actual saved schema and ten groups")
 	check(FileAccess.get_file_as_bytes(path+".v13-backup.json")==raw.to_utf8_buffer(),"first startup keeps exact BOM/whitespace original bytes")
 	check(arena.state.location("guardian_robe")=={"kind":"equipment","slot_id":"body_armour"} and arena.state.location("azure_charm")=={"kind":"equipment","slot_id":"amulet"},"old equipped identity preserved at new targets")
 	for panel:String in ["inventory","skills","talents","combat","monsters","pause","settings"]:
@@ -59,7 +59,7 @@ func run()->void:
 	arena.set_process(false)
 	check(not arena.state.migrated_from_legacy and arena.state.snapshot()==snapshot,"second actual startup loads once-migrated state exactly")
 	arena.queue_free();await process_frame
-	var future:="{\"version\":15,\"untouched\":true}"
+	var future:="{\"version\":17,\"untouched\":true}"
 	file=FileAccess.open(path,FileAccess.WRITE);file.store_string(future);file.close()
 	arena=load("res://scenes/main.tscn").instantiate();root.add_child(arena);await process_frame
 	arena.set_process(false)
