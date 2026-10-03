@@ -450,7 +450,8 @@ func _spawn_enemy(forced_position: Vector2 = Vector2.ZERO, forced_kind: int = -1
 		enemy = _spawn_monster(encounter)
 	else:
 		var roll: Dictionary = Monsters.ordinary_roll(rng, wave)
-		enemy = _spawn_monster(roll.template, forced_position, "ordinary", roll.rarity, roll.mechanisms)
+		var elemental: String = Monsters.elemental_template_for_roll(wave, ordinary_admissions + 1, roll) if natural else ""
+		enemy = _spawn_monster(roll.template if elemental.is_empty() else elemental, forced_position, "ordinary", roll.rarity, roll.mechanisms)
 	if natural and not enemy.is_empty():
 		ordinary_admissions += 1
 	if enemy.is_empty() and not _encounter_ids.is_empty():
@@ -751,6 +752,11 @@ func telegraph_visual_states() -> Array[Dictionary]:
 	for enemy: Dictionary in enemies:
 		var copied: Dictionary = telegraphs.state_for(int(enemy.id))
 		if not copied.is_empty():
+			# Derive presentation only from the already frozen packet, never live stats.
+			var components: Dictionary = copied.get("packet", {}).get("base", {})
+			if components.size() == 1:
+				if components.has("cold"): copied["visual_element"] = "cold"
+				elif components.has("lightning"): copied["visual_element"] = "lightning"
 			snapshots.append(copied)
 	return snapshots
 

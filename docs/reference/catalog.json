@@ -6955,6 +6955,38 @@
 			"priority": 20
 		}
 	},
+	"elemental_encounters": {
+		"balance_source": "original_game_balance",
+		"extra_rewards": false,
+		"extra_rng": false,
+		"preserves": [
+			"kind",
+			"rarity",
+			"mechanisms",
+			"health",
+			"damage",
+			"speed",
+			"xp",
+			"reward_eligibility"
+		],
+		"rules": {
+			"frost_guard": {
+				"admission_modulus": 8,
+				"admission_remainder": 4,
+				"element": "cold",
+				"minimum_wave": 4,
+				"source_template": "brute"
+			},
+			"storm_skitter": {
+				"admission_modulus": 8,
+				"admission_remainder": 6,
+				"element": "lightning",
+				"minimum_wave": 5,
+				"source_template": "skitter"
+			}
+		},
+		"selection": "after_original_ordinary_roll"
+	},
 	"encounters": {
 		"enemy_max_health_120": {
 			"description": "怪物最大生命 ×1.20",
@@ -8931,7 +8963,7 @@
 			}
 		}
 	},
-	"game_version": "0.24.0",
+	"game_version": "0.25.0",
 	"jewel_affixes": {
 		"barrier": {
 			"kind": "prefix",
@@ -10421,6 +10453,1039 @@
 			],
 			"status": "implemented",
 			"target_rule": "lock_center_at_start"
+		},
+		"locked_circle_cold": {
+			"automatic_repeat": false,
+			"balance_version": "original-telegraphed-area-v1",
+			"damage_rule": "contact_components_times_multiplier",
+			"defaults": {
+				"damage_multiplier": 1.4,
+				"radius": 90.0,
+				"recovery_seconds": 1.2,
+				"windup_seconds": 0.7
+			},
+			"description": "仅替换原抽签的同物种名额，保留白蓝金与共享词缀、基础属性和奖励。锁定地面，完整预警后一次元素攻击；走开或攻击闪避可避开，不施加冻结或感电。",
+			"element": "cold",
+			"event_type": "circle_attack",
+			"example": {
+				"allocated_path": [
+					"58833",
+					"48828",
+					"33508",
+					"36881"
+				],
+				"attack_admission_note": "Displayed values are conditioned on attack admission; existing evasion may prevent the hit.",
+				"cases": {
+					"armored": {
+						"defense_stats": {
+							"accuracy": 140.0,
+							"accuracy_increased": 0.0,
+							"additional_skill_slots": 0.0,
+							"area_increased": 0.0,
+							"armour": 0.0,
+							"armour_increased": 0.0,
+							"attack_added_fire": 0.0,
+							"attack_added_physical": 0.0,
+							"attack_elemental_increased": 0.0,
+							"attack_physical_increased": 0.0,
+							"attack_speed": 1.7,
+							"attack_speed_increased": 0.0,
+							"chaos_increased": 0.0,
+							"cold_increased": 0.0,
+							"cold_resistance": 0.18,
+							"damage": 26.0,
+							"dexterity": 20.0,
+							"elemental_increased": 0.0,
+							"evasion": 15.600000000000001,
+							"evasion_increased": 0.0,
+							"fire_increased": 0.0,
+							"fire_resistance": 0.18,
+							"global_increased": 0.0,
+							"intelligence": 20.0,
+							"life_regen": 0.0,
+							"life_regen_percent": 0.0,
+							"lightning_increased": 0.0,
+							"lightning_resistance": 0.0,
+							"mana_regen": 12.0,
+							"mana_regen_increased": 0.0,
+							"max_health": 132.0,
+							"max_mana": 140.0,
+							"max_shield": 91.8,
+							"melee_physical_increased": 0.05,
+							"move_speed": 240.0,
+							"move_speed_increased": 0.0,
+							"physical_increased": 0.1,
+							"projectile_count": 0.0,
+							"projectile_increased": 0.0,
+							"shield_regen": 16.0,
+							"spell_added_cold": 0.0,
+							"spell_added_lightning": 0.0,
+							"spell_increased": 0.0,
+							"strength": 25.0
+						},
+						"inside": true,
+						"position": [
+							0.0,
+							0.0
+						],
+						"settlement": {
+							"actor": "player",
+							"armour": 0.0,
+							"components": {
+								"cold": 13.185600000000003
+							},
+							"damage_total": 13.185600000000003,
+							"details": [
+								{
+									"base": 16.080000000000002,
+									"before_defense": 16.080000000000002,
+									"final": 13.185600000000003,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.18,
+									"type": "cold"
+								}
+							],
+							"effective_resistances": {
+								"cold": 0.18,
+								"fire": 0.18,
+								"lightning": 0.0
+							},
+							"health_lost": 8.185600000000003,
+							"mitigated_components": {
+								"cold": 2.894399999999999
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"cold": 16.080000000000002
+							},
+							"raw_resistances": {
+								"cold": 0.18,
+								"fire": 0.18,
+								"lightning": 0.0
+							},
+							"reason": "",
+							"remaining_health": 91.81439999999999,
+							"remaining_shield": 0.0,
+							"shield_spent": 5.0,
+							"stage": "hit_mitigation"
+						}
+					},
+					"moving": {
+						"defense_stats": {
+							"accuracy": 140.0,
+							"accuracy_increased": 0.0,
+							"additional_skill_slots": 0.0,
+							"area_increased": 0.0,
+							"armour": 0.0,
+							"armour_increased": 0.0,
+							"attack_added_fire": 0.0,
+							"attack_added_physical": 0.0,
+							"attack_elemental_increased": 0.0,
+							"attack_physical_increased": 0.0,
+							"attack_speed": 1.7,
+							"attack_speed_increased": 0.0,
+							"chaos_increased": 0.0,
+							"cold_increased": 0.0,
+							"cold_resistance": 0.0,
+							"damage": 26.0,
+							"dexterity": 20.0,
+							"elemental_increased": 0.0,
+							"evasion": 15.600000000000001,
+							"evasion_increased": 0.0,
+							"fire_increased": 0.0,
+							"fire_resistance": 0.0,
+							"global_increased": 0.0,
+							"intelligence": 20.0,
+							"life_regen": 0.0,
+							"life_regen_percent": 0.0,
+							"lightning_increased": 0.0,
+							"lightning_resistance": 0.0,
+							"mana_regen": 12.0,
+							"mana_regen_increased": 0.0,
+							"max_health": 130.0,
+							"max_mana": 140.0,
+							"max_shield": 91.8,
+							"melee_physical_increased": 0.04,
+							"move_speed": 240.0,
+							"move_speed_increased": 0.0,
+							"physical_increased": 0.0,
+							"projectile_count": 0.0,
+							"projectile_increased": 0.0,
+							"shield_regen": 16.0,
+							"spell_added_cold": 0.0,
+							"spell_added_lightning": 0.0,
+							"spell_increased": 0.0,
+							"strength": 20.0
+						},
+						"inside": false,
+						"position": [
+							216.0,
+							0.0
+						],
+						"settlement": {
+
+						}
+					},
+					"standing": {
+						"defense_stats": {
+							"accuracy": 140.0,
+							"accuracy_increased": 0.0,
+							"additional_skill_slots": 0.0,
+							"area_increased": 0.0,
+							"armour": 0.0,
+							"armour_increased": 0.0,
+							"attack_added_fire": 0.0,
+							"attack_added_physical": 0.0,
+							"attack_elemental_increased": 0.0,
+							"attack_physical_increased": 0.0,
+							"attack_speed": 1.7,
+							"attack_speed_increased": 0.0,
+							"chaos_increased": 0.0,
+							"cold_increased": 0.0,
+							"cold_resistance": 0.0,
+							"damage": 26.0,
+							"dexterity": 20.0,
+							"elemental_increased": 0.0,
+							"evasion": 15.600000000000001,
+							"evasion_increased": 0.0,
+							"fire_increased": 0.0,
+							"fire_resistance": 0.0,
+							"global_increased": 0.0,
+							"intelligence": 20.0,
+							"life_regen": 0.0,
+							"life_regen_percent": 0.0,
+							"lightning_increased": 0.0,
+							"lightning_resistance": 0.0,
+							"mana_regen": 12.0,
+							"mana_regen_increased": 0.0,
+							"max_health": 130.0,
+							"max_mana": 140.0,
+							"max_shield": 91.8,
+							"melee_physical_increased": 0.04,
+							"move_speed": 240.0,
+							"move_speed_increased": 0.0,
+							"physical_increased": 0.0,
+							"projectile_count": 0.0,
+							"projectile_increased": 0.0,
+							"shield_regen": 16.0,
+							"spell_added_cold": 0.0,
+							"spell_added_lightning": 0.0,
+							"spell_increased": 0.0,
+							"strength": 20.0
+						},
+						"inside": true,
+						"position": [
+							0.0,
+							0.0
+						],
+						"settlement": {
+							"actor": "player",
+							"armour": 0.0,
+							"components": {
+								"cold": 16.080000000000002
+							},
+							"damage_total": 16.080000000000002,
+							"details": [
+								{
+									"base": 16.080000000000002,
+									"before_defense": 16.080000000000002,
+									"final": 16.080000000000002,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "cold"
+								}
+							],
+							"effective_resistances": {
+								"cold": 0.0,
+								"fire": 0.0,
+								"lightning": 0.0
+							},
+							"health_lost": 11.080000000000002,
+							"mitigated_components": {
+								"cold": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"cold": 16.080000000000002
+							},
+							"raw_resistances": {
+								"cold": 0.0,
+								"fire": 0.0,
+								"lightning": 0.0
+							},
+							"reason": "",
+							"remaining_health": 88.92,
+							"remaining_shield": 0.0,
+							"shield_spent": 5.0,
+							"stage": "hit_mitigation"
+						}
+					}
+				},
+				"event": {
+					"attack_age": 0.9,
+					"attack_id": 1,
+					"balance_version": "original-telegraphed-area-v1",
+					"center": [
+						0.0,
+						0.0
+					],
+					"packet": {
+						"base": {
+							"cold": 16.080000000000002
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"profile": {
+						"damage_multiplier": 0.8,
+						"radius": 90.0,
+						"recovery_seconds": 1.8,
+						"windup_seconds": 0.9
+					},
+					"profile_id": "locked_circle",
+					"radius": 90.0,
+					"schema_version": 1,
+					"shape": "circle",
+					"source_id": 1,
+					"type": "circle_attack"
+				},
+				"halfway": {
+					"attack_id": 1,
+					"center": [
+						0.0,
+						0.0
+					],
+					"elapsed": 0.45,
+					"packet": {
+						"base": {
+							"cold": 16.080000000000002
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"phase": "windup",
+					"profile": {
+						"damage_multiplier": 0.8,
+						"radius": 90.0,
+						"recovery_seconds": 1.8,
+						"windup_seconds": 0.9
+					},
+					"source_id": 1
+				},
+				"health_before": 100.0,
+				"move_speed": 240.0,
+				"movement_assumption": "straight_unobstructed_motion_from_warning_start",
+				"player_radius": 15.0,
+				"recovery": {
+					"attack_id": 1,
+					"center": [
+						0.0,
+						0.0
+					],
+					"elapsed": 0.9,
+					"packet": {
+						"base": {
+							"cold": 16.080000000000002
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"phase": "recovery",
+					"profile": {
+						"damage_multiplier": 0.8,
+						"radius": 90.0,
+						"recovery_seconds": 1.8,
+						"windup_seconds": 0.9
+					},
+					"source_id": 1
+				},
+				"shield_before": 5.0,
+				"source": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"cold": 1.0
+					},
+					"damage": 20.1,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {
+
+					},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 140.6,
+					"id": 1,
+					"kind": 2,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 140.6,
+					"max_shield": 0.0,
+					"mechanism_ids": [],
+					"mechanism_policy": "poe-passive-v1",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_stats": {
+
+					},
+					"name": "霜纹守卫",
+					"pos": [
+						100.0,
+						0.0
+					],
+					"radius": 22.0,
+					"rarity": "normal",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.0,
+					"speed": 48.6,
+					"template_id": "frost_guard",
+					"wave": 4,
+					"xp_reward": 6
+				},
+				"source_wave": 4,
+				"start": {
+					"attack_id": 1,
+					"center": [
+						0.0,
+						0.0
+					],
+					"elapsed": 0.0,
+					"packet": {
+						"base": {
+							"cold": 16.080000000000002
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"phase": "windup",
+					"profile": {
+						"damage_multiplier": 0.8,
+						"radius": 90.0,
+						"recovery_seconds": 1.8,
+						"windup_seconds": 0.9
+					},
+					"source_id": 1
+				}
+			},
+			"id": "locked_circle_cold",
+			"integrated_templates": [
+				"frost_guard"
+			],
+			"limits": {
+				"damage_multiplier": {
+					"maximum": 100.0,
+					"minimum": 0.0
+				},
+				"radius": {
+					"maximum": 4096.0,
+					"minimum": 0.001
+				},
+				"recovery_seconds": {
+					"maximum": 60.0,
+					"minimum": 0.001
+				},
+				"windup_seconds": {
+					"maximum": 60.0,
+					"minimum": 0.001
+				}
+			},
+			"max_active": 100,
+			"max_events_per_attack": 1,
+			"max_sources_per_advance": 100,
+			"name": "霜纹守卫 · 冰冷预警",
+			"natural_selection": {
+				"admission_modulus": 8,
+				"admission_remainder": 4,
+				"element": "cold",
+				"minimum_wave": 4,
+				"source_template": "brute"
+			},
+			"ok": true,
+			"origin": "original",
+			"policy": {
+				"base_attack_speed": 1.1764705882352942,
+				"hold_pursuit_during_action": true,
+				"minimum_attack_speed": 0.2,
+				"profile": {
+					"damage_multiplier": 0.8,
+					"radius": 90.0,
+					"recovery_seconds": 1.8,
+					"windup_seconds": 0.9
+				},
+				"profile_id": "locked_circle",
+				"recovery_scaling": "base_attack_speed_divided_by_current_attack_speed",
+				"replaces_contact": true,
+				"trigger_distance": 150.0
+			},
+			"profile": {
+				"damage_multiplier": 0.8,
+				"radius": 90.0,
+				"recovery_seconds": 1.8,
+				"windup_seconds": 0.9
+			},
+			"protection_label": "实际源树路径 · 18%对应抗性",
+			"reason": "",
+			"schema_version": 1,
+			"settlement": "DamageResolver/DefenseRules",
+			"shape": "circle",
+			"source_refs": [],
+			"spawn_rule": "reject_or_cancel_while_spawn_positive",
+			"states": [
+				"windup",
+				"recovery"
+			],
+			"status": "implemented",
+			"target_rule": "lock_center_at_start"
+		},
+		"locked_circle_lightning": {
+			"automatic_repeat": false,
+			"balance_version": "original-telegraphed-area-v1",
+			"damage_rule": "contact_components_times_multiplier",
+			"defaults": {
+				"damage_multiplier": 1.4,
+				"radius": 90.0,
+				"recovery_seconds": 1.2,
+				"windup_seconds": 0.7
+			},
+			"description": "仅替换原抽签的同物种名额，保留白蓝金与共享词缀、基础属性和奖励。锁定地面，完整预警后一次元素攻击；走开或攻击闪避可避开，不施加冻结或感电。",
+			"element": "lightning",
+			"event_type": "circle_attack",
+			"example": {
+				"allocated_path": [
+					"58833",
+					"48828",
+					"33508",
+					"36881",
+					"35503"
+				],
+				"attack_admission_note": "Displayed values are conditioned on attack admission; existing evasion may prevent the hit.",
+				"cases": {
+					"armored": {
+						"defense_stats": {
+							"accuracy": 140.0,
+							"accuracy_increased": 0.0,
+							"additional_skill_slots": 0.0,
+							"area_increased": 0.0,
+							"armour": 0.0,
+							"armour_increased": 0.0,
+							"attack_added_fire": 0.0,
+							"attack_added_physical": 0.0,
+							"attack_elemental_increased": 0.0,
+							"attack_physical_increased": 0.0,
+							"attack_speed": 1.7,
+							"attack_speed_increased": 0.0,
+							"chaos_increased": 0.0,
+							"cold_increased": 0.0,
+							"cold_resistance": 0.18,
+							"damage": 26.0,
+							"dexterity": 20.0,
+							"elemental_increased": 0.0,
+							"evasion": 15.600000000000001,
+							"evasion_increased": 0.0,
+							"fire_increased": 0.0,
+							"fire_resistance": 0.18,
+							"global_increased": 0.0,
+							"intelligence": 20.0,
+							"life_regen": 0.0,
+							"life_regen_percent": 0.0,
+							"lightning_increased": 0.0,
+							"lightning_resistance": 0.18,
+							"mana_regen": 12.0,
+							"mana_regen_increased": 0.0,
+							"max_health": 132.0,
+							"max_mana": 140.0,
+							"max_shield": 91.8,
+							"melee_physical_increased": 0.05,
+							"move_speed": 240.0,
+							"move_speed_increased": 0.0,
+							"physical_increased": 0.1,
+							"projectile_count": 0.0,
+							"projectile_increased": 0.0,
+							"shield_regen": 16.0,
+							"spell_added_cold": 0.0,
+							"spell_added_lightning": 0.0,
+							"spell_increased": 0.0,
+							"strength": 25.0
+						},
+						"inside": true,
+						"position": [
+							0.0,
+							0.0
+						],
+						"settlement": {
+							"actor": "player",
+							"armour": 0.0,
+							"components": {
+								"lightning": 14.169600000000003
+							},
+							"damage_total": 14.169600000000003,
+							"details": [
+								{
+									"base": 17.28,
+									"before_defense": 17.28,
+									"final": 14.169600000000003,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.18,
+									"type": "lightning"
+								}
+							],
+							"effective_resistances": {
+								"cold": 0.18,
+								"fire": 0.18,
+								"lightning": 0.18
+							},
+							"health_lost": 9.169600000000003,
+							"mitigated_components": {
+								"lightning": 3.1103999999999985
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 17.28
+							},
+							"raw_resistances": {
+								"cold": 0.18,
+								"fire": 0.18,
+								"lightning": 0.18
+							},
+							"reason": "",
+							"remaining_health": 90.8304,
+							"remaining_shield": 0.0,
+							"shield_spent": 5.0,
+							"stage": "hit_mitigation"
+						}
+					},
+					"moving": {
+						"defense_stats": {
+							"accuracy": 140.0,
+							"accuracy_increased": 0.0,
+							"additional_skill_slots": 0.0,
+							"area_increased": 0.0,
+							"armour": 0.0,
+							"armour_increased": 0.0,
+							"attack_added_fire": 0.0,
+							"attack_added_physical": 0.0,
+							"attack_elemental_increased": 0.0,
+							"attack_physical_increased": 0.0,
+							"attack_speed": 1.7,
+							"attack_speed_increased": 0.0,
+							"chaos_increased": 0.0,
+							"cold_increased": 0.0,
+							"cold_resistance": 0.0,
+							"damage": 26.0,
+							"dexterity": 20.0,
+							"elemental_increased": 0.0,
+							"evasion": 15.600000000000001,
+							"evasion_increased": 0.0,
+							"fire_increased": 0.0,
+							"fire_resistance": 0.0,
+							"global_increased": 0.0,
+							"intelligence": 20.0,
+							"life_regen": 0.0,
+							"life_regen_percent": 0.0,
+							"lightning_increased": 0.0,
+							"lightning_resistance": 0.0,
+							"mana_regen": 12.0,
+							"mana_regen_increased": 0.0,
+							"max_health": 130.0,
+							"max_mana": 140.0,
+							"max_shield": 91.8,
+							"melee_physical_increased": 0.04,
+							"move_speed": 240.0,
+							"move_speed_increased": 0.0,
+							"physical_increased": 0.0,
+							"projectile_count": 0.0,
+							"projectile_increased": 0.0,
+							"shield_regen": 16.0,
+							"spell_added_cold": 0.0,
+							"spell_added_lightning": 0.0,
+							"spell_increased": 0.0,
+							"strength": 20.0
+						},
+						"inside": false,
+						"position": [
+							168.0,
+							0.0
+						],
+						"settlement": {
+
+						}
+					},
+					"standing": {
+						"defense_stats": {
+							"accuracy": 140.0,
+							"accuracy_increased": 0.0,
+							"additional_skill_slots": 0.0,
+							"area_increased": 0.0,
+							"armour": 0.0,
+							"armour_increased": 0.0,
+							"attack_added_fire": 0.0,
+							"attack_added_physical": 0.0,
+							"attack_elemental_increased": 0.0,
+							"attack_physical_increased": 0.0,
+							"attack_speed": 1.7,
+							"attack_speed_increased": 0.0,
+							"chaos_increased": 0.0,
+							"cold_increased": 0.0,
+							"cold_resistance": 0.0,
+							"damage": 26.0,
+							"dexterity": 20.0,
+							"elemental_increased": 0.0,
+							"evasion": 15.600000000000001,
+							"evasion_increased": 0.0,
+							"fire_increased": 0.0,
+							"fire_resistance": 0.0,
+							"global_increased": 0.0,
+							"intelligence": 20.0,
+							"life_regen": 0.0,
+							"life_regen_percent": 0.0,
+							"lightning_increased": 0.0,
+							"lightning_resistance": 0.0,
+							"mana_regen": 12.0,
+							"mana_regen_increased": 0.0,
+							"max_health": 130.0,
+							"max_mana": 140.0,
+							"max_shield": 91.8,
+							"melee_physical_increased": 0.04,
+							"move_speed": 240.0,
+							"move_speed_increased": 0.0,
+							"physical_increased": 0.0,
+							"projectile_count": 0.0,
+							"projectile_increased": 0.0,
+							"shield_regen": 16.0,
+							"spell_added_cold": 0.0,
+							"spell_added_lightning": 0.0,
+							"spell_increased": 0.0,
+							"strength": 20.0
+						},
+						"inside": true,
+						"position": [
+							0.0,
+							0.0
+						],
+						"settlement": {
+							"actor": "player",
+							"armour": 0.0,
+							"components": {
+								"lightning": 17.28
+							},
+							"damage_total": 17.28,
+							"details": [
+								{
+									"base": 17.28,
+									"before_defense": 17.28,
+									"final": 17.28,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"effective_resistances": {
+								"cold": 0.0,
+								"fire": 0.0,
+								"lightning": 0.0
+							},
+							"health_lost": 12.280000000000001,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 17.28
+							},
+							"raw_resistances": {
+								"cold": 0.0,
+								"fire": 0.0,
+								"lightning": 0.0
+							},
+							"reason": "",
+							"remaining_health": 87.72,
+							"remaining_shield": 0.0,
+							"shield_spent": 5.0,
+							"stage": "hit_mitigation"
+						}
+					}
+				},
+				"event": {
+					"attack_age": 0.7,
+					"attack_id": 1,
+					"balance_version": "original-telegraphed-area-v1",
+					"center": [
+						0.0,
+						0.0
+					],
+					"packet": {
+						"base": {
+							"lightning": 17.28
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"profile": {
+						"damage_multiplier": 1.6,
+						"radius": 65.0,
+						"recovery_seconds": 1.6,
+						"windup_seconds": 0.7
+					},
+					"profile_id": "locked_circle",
+					"radius": 65.0,
+					"schema_version": 1,
+					"shape": "circle",
+					"source_id": 1,
+					"type": "circle_attack"
+				},
+				"halfway": {
+					"attack_id": 1,
+					"center": [
+						0.0,
+						0.0
+					],
+					"elapsed": 0.35,
+					"packet": {
+						"base": {
+							"lightning": 17.28
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"phase": "windup",
+					"profile": {
+						"damage_multiplier": 1.6,
+						"radius": 65.0,
+						"recovery_seconds": 1.6,
+						"windup_seconds": 0.7
+					},
+					"source_id": 1
+				},
+				"health_before": 100.0,
+				"move_speed": 240.0,
+				"movement_assumption": "straight_unobstructed_motion_from_warning_start",
+				"player_radius": 15.0,
+				"recovery": {
+					"attack_id": 1,
+					"center": [
+						0.0,
+						0.0
+					],
+					"elapsed": 0.7,
+					"packet": {
+						"base": {
+							"lightning": 17.28
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"phase": "recovery",
+					"profile": {
+						"damage_multiplier": 1.6,
+						"radius": 65.0,
+						"recovery_seconds": 1.6,
+						"windup_seconds": 0.7
+					},
+					"source_id": 1
+				},
+				"shield_before": 5.0,
+				"source": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"lightning": 1.0
+					},
+					"damage": 10.8,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {
+
+					},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 41.0,
+					"id": 1,
+					"kind": 1,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 41.0,
+					"max_shield": 0.0,
+					"mechanism_ids": [],
+					"mechanism_policy": "poe-passive-v1",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_stats": {
+
+					},
+					"name": "雷纹掠行体",
+					"pos": [
+						100.0,
+						0.0
+					],
+					"radius": 10.0,
+					"rarity": "normal",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.0,
+					"speed": 110.0,
+					"template_id": "storm_skitter",
+					"wave": 5,
+					"xp_reward": 3
+				},
+				"source_wave": 5,
+				"start": {
+					"attack_id": 1,
+					"center": [
+						0.0,
+						0.0
+					],
+					"elapsed": 0.0,
+					"packet": {
+						"base": {
+							"lightning": 17.28
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"phase": "windup",
+					"profile": {
+						"damage_multiplier": 1.6,
+						"radius": 65.0,
+						"recovery_seconds": 1.6,
+						"windup_seconds": 0.7
+					},
+					"source_id": 1
+				}
+			},
+			"id": "locked_circle_lightning",
+			"integrated_templates": [
+				"storm_skitter"
+			],
+			"limits": {
+				"damage_multiplier": {
+					"maximum": 100.0,
+					"minimum": 0.0
+				},
+				"radius": {
+					"maximum": 4096.0,
+					"minimum": 0.001
+				},
+				"recovery_seconds": {
+					"maximum": 60.0,
+					"minimum": 0.001
+				},
+				"windup_seconds": {
+					"maximum": 60.0,
+					"minimum": 0.001
+				}
+			},
+			"max_active": 100,
+			"max_events_per_attack": 1,
+			"max_sources_per_advance": 100,
+			"name": "雷纹掠行体 · 闪电预警",
+			"natural_selection": {
+				"admission_modulus": 8,
+				"admission_remainder": 6,
+				"element": "lightning",
+				"minimum_wave": 5,
+				"source_template": "skitter"
+			},
+			"ok": true,
+			"origin": "original",
+			"policy": {
+				"base_attack_speed": 1.1764705882352942,
+				"hold_pursuit_during_action": true,
+				"minimum_attack_speed": 0.2,
+				"profile": {
+					"damage_multiplier": 1.6,
+					"radius": 65.0,
+					"recovery_seconds": 1.6,
+					"windup_seconds": 0.7
+				},
+				"profile_id": "locked_circle",
+				"recovery_scaling": "base_attack_speed_divided_by_current_attack_speed",
+				"replaces_contact": true,
+				"trigger_distance": 140.0
+			},
+			"profile": {
+				"damage_multiplier": 1.6,
+				"radius": 65.0,
+				"recovery_seconds": 1.6,
+				"windup_seconds": 0.7
+			},
+			"protection_label": "实际源树路径 · 18%对应抗性",
+			"reason": "",
+			"schema_version": 1,
+			"settlement": "DamageResolver/DefenseRules",
+			"shape": "circle",
+			"source_refs": [],
+			"spawn_rule": "reject_or_cancel_while_spawn_positive",
+			"states": [
+				"windup",
+				"recovery"
+			],
+			"status": "implemented",
+			"target_rule": "lock_center_at_start"
 		}
 	},
 	"monster_rarities": {
@@ -10846,6 +11911,114 @@
 				"trigger_distance": 150.0
 			}
 		},
+		"frost_guard": {
+			"attack_reference": "locked_circle_cold",
+			"contact_components": {
+				"cold": 20.1
+			},
+			"contact_weights": {
+				"cold": 1.0
+			},
+			"death_spawns": [],
+			"defense_profile": {
+				"actor": "monster",
+				"effective_resistances": {
+					"fire": 0.0
+				},
+				"ok": true,
+				"raw_resistances": {
+					"fire": 0.0
+				},
+				"reason": "",
+				"stage": "hit_mitigation"
+			},
+			"example_wave": 4,
+			"kind": 2,
+			"mechanism_text": "锁点重击 0.9秒 · 范围 90 · 冰冷预警攻击",
+			"mechanisms": [],
+			"name": "霜纹守卫",
+			"natural_selection": {
+				"admission_modulus": 8,
+				"admission_remainder": 4,
+				"element": "cold",
+				"minimum_wave": 4,
+				"source_template": "brute"
+			},
+			"rarity": "normal",
+			"runtime_example": {
+				"attack_speed": 1.1764705882352942,
+				"attack_timer": 0.5,
+				"contact_weights": {
+					"cold": 1.0
+				},
+				"damage": 20.1,
+				"damage_delay": 0.0,
+				"death_processed": false,
+				"death_spawns": [],
+				"defense_stats": {
+
+				},
+				"equipment_pool": "",
+				"flash": 0.0,
+				"generation": 0,
+				"health": 140.6,
+				"id": 1,
+				"kind": 2,
+				"knockback": [
+					0.0,
+					0.0
+				],
+				"max_health": 140.6,
+				"max_shield": 0.0,
+				"mechanism_ids": [],
+				"mechanism_policy": "poe-passive-v1",
+				"mechanism_revision": 1,
+				"mechanism_schema": 1,
+				"mechanism_stats": {
+
+				},
+				"name": "霜纹守卫",
+				"pos": [
+					0.0,
+					0.0
+				],
+				"radius": 22.0,
+				"rarity": "normal",
+				"resistances": {
+					"fire": 0.0
+				},
+				"reward_eligible": true,
+				"root_id": 1,
+				"shield": 0.0,
+				"shield_regen": 0.0,
+				"slow": 0.0,
+				"spawn": 0.6,
+				"speed": 48.6,
+				"template_id": "frost_guard",
+				"wave": 4,
+				"xp_reward": 6
+			},
+			"source_ratings": {
+				"accuracy": 100.0,
+				"armour": 0.0,
+				"evasion": 0.0
+			},
+			"telegraph_policy": {
+				"base_attack_speed": 1.1764705882352942,
+				"hold_pursuit_during_action": true,
+				"minimum_attack_speed": 0.2,
+				"profile": {
+					"damage_multiplier": 0.8,
+					"radius": 90.0,
+					"recovery_seconds": 1.8,
+					"windup_seconds": 0.9
+				},
+				"profile_id": "locked_circle",
+				"recovery_scaling": "base_attack_speed_divided_by_current_attack_speed",
+				"replaces_contact": true,
+				"trigger_distance": 150.0
+			}
+		},
 		"rift_warden": {
 			"contact_components": {
 				"physical": 26.604
@@ -11140,6 +12313,114 @@
 			},
 			"telegraph_policy": {
 
+			}
+		},
+		"storm_skitter": {
+			"attack_reference": "locked_circle_lightning",
+			"contact_components": {
+				"lightning": 10.8
+			},
+			"contact_weights": {
+				"lightning": 1.0
+			},
+			"death_spawns": [],
+			"defense_profile": {
+				"actor": "monster",
+				"effective_resistances": {
+					"fire": 0.0
+				},
+				"ok": true,
+				"raw_resistances": {
+					"fire": 0.0
+				},
+				"reason": "",
+				"stage": "hit_mitigation"
+			},
+			"example_wave": 5,
+			"kind": 1,
+			"mechanism_text": "锁点重击 0.7秒 · 范围 65 · 闪电预警攻击",
+			"mechanisms": [],
+			"name": "雷纹掠行体",
+			"natural_selection": {
+				"admission_modulus": 8,
+				"admission_remainder": 6,
+				"element": "lightning",
+				"minimum_wave": 5,
+				"source_template": "skitter"
+			},
+			"rarity": "normal",
+			"runtime_example": {
+				"attack_speed": 1.1764705882352942,
+				"attack_timer": 0.5,
+				"contact_weights": {
+					"lightning": 1.0
+				},
+				"damage": 10.8,
+				"damage_delay": 0.0,
+				"death_processed": false,
+				"death_spawns": [],
+				"defense_stats": {
+
+				},
+				"equipment_pool": "",
+				"flash": 0.0,
+				"generation": 0,
+				"health": 41.0,
+				"id": 1,
+				"kind": 1,
+				"knockback": [
+					0.0,
+					0.0
+				],
+				"max_health": 41.0,
+				"max_shield": 0.0,
+				"mechanism_ids": [],
+				"mechanism_policy": "poe-passive-v1",
+				"mechanism_revision": 1,
+				"mechanism_schema": 1,
+				"mechanism_stats": {
+
+				},
+				"name": "雷纹掠行体",
+				"pos": [
+					0.0,
+					0.0
+				],
+				"radius": 10.0,
+				"rarity": "normal",
+				"resistances": {
+					"fire": 0.0
+				},
+				"reward_eligible": true,
+				"root_id": 1,
+				"shield": 0.0,
+				"shield_regen": 0.0,
+				"slow": 0.0,
+				"spawn": 0.6,
+				"speed": 110.0,
+				"template_id": "storm_skitter",
+				"wave": 5,
+				"xp_reward": 3
+			},
+			"source_ratings": {
+				"accuracy": 100.0,
+				"armour": 0.0,
+				"evasion": 320.0
+			},
+			"telegraph_policy": {
+				"base_attack_speed": 1.1764705882352942,
+				"hold_pursuit_during_action": true,
+				"minimum_attack_speed": 0.2,
+				"profile": {
+					"damage_multiplier": 1.6,
+					"radius": 65.0,
+					"recovery_seconds": 1.6,
+					"windup_seconds": 0.7
+				},
+				"profile_id": "locked_circle",
+				"recovery_scaling": "base_attack_speed_divided_by_current_attack_speed",
+				"replaces_contact": true,
+				"trigger_distance": 140.0
 			}
 		}
 	},

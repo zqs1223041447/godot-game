@@ -6,7 +6,15 @@ const Defense = preload("res://scripts/mechanics/defense_rules.gd")
 const TelegraphProfiles = preload("res://scripts/monsters/telegraph_profiles.gd")
 const SCHEMA_VERSION: int = 1
 const BASE_ATTACK_SPEED: float = 1.0 / 0.85
-const TELEGRAPH_TEMPLATES: Dictionary = {"ember_guard": {"trigger_distance": 150.0}}
+const TELEGRAPH_TEMPLATES: Dictionary = {
+	"ember_guard": {"trigger_distance": 150.0},
+	"frost_guard": {"trigger_distance": 150.0},
+	"storm_skitter": {"trigger_distance": 140.0},
+}
+const ELEMENTAL_ENCOUNTERS: Dictionary = {
+	"frost_guard": {"source_template": "brute", "minimum_wave": 4, "admission_modulus": 8, "admission_remainder": 4, "element": "cold"},
+	"storm_skitter": {"source_template": "skitter", "minimum_wave": 5, "admission_modulus": 8, "admission_remainder": 6, "element": "lightning"},
+}
 const FIRE_ENCOUNTER: Dictionary = {
 	"template_id": "ember_guard", "minimum_wave": 3, "ordinary_admission_interval": 8,
 	"reward_pool": "defense", "reward_rarity": "rare", "reward_count": 1,
@@ -36,6 +44,8 @@ const TEMPLATES: Dictionary = {
 		"death_spawns": [{"template": "splitter", "count": 2}]},
 	"rift_warden": {"name": "裂隙守卫", "kind": 2, "rarity": "boss", "mechanisms": ["ember_mastery", "aegis_mastery"],
 		"death_spawns": [{"template": "crawler", "count": 4}]},
+	"frost_guard": {"name": "霜纹守卫", "kind": 2, "rarity": "normal", "mechanisms": [], "death_spawns": [], "contact_weights": {"cold": 1.0}},
+	"storm_skitter": {"name": "雷纹掠行体", "kind": 1, "rarity": "normal", "mechanisms": [], "death_spawns": [], "contact_weights": {"lightning": 1.0}},
 	"ember_guard": {"name": "灰烬守卫", "kind": 2, "rarity": "rare", "mechanisms": [], "death_spawns": [],
 		"defense_stats": {"fire_resistance": 0.25}, "contact_weights": {"physical": 0.5, "fire": 0.5},
 		"equipment_pool": "defense"},
@@ -48,6 +58,22 @@ static func fire_encounter_policy() -> Dictionary:
 static func encounter_for_admission(wave: int, admission: int) -> String:
 	if wave >= int(FIRE_ENCOUNTER.minimum_wave) and admission > 0 and admission % int(FIRE_ENCOUNTER.ordinary_admission_interval) == 0:
 		return str(FIRE_ENCOUNTER.template_id)
+	return ""
+
+
+static func elemental_encounter_policy() -> Dictionary:
+	return {"rules": ELEMENTAL_ENCOUNTERS.duplicate(true), "selection": "after_original_ordinary_roll",
+		"preserves": ["kind", "rarity", "mechanisms", "health", "damage", "speed", "xp", "reward_eligibility"],
+		"extra_rewards": false, "extra_rng": false, "balance_source": "original_game_balance"}
+
+
+static func elemental_template_for_roll(wave: int, admission: int, roll: Dictionary) -> String:
+	if admission <= 0 or roll.get("rarity", "") not in ORDINARY_RARITIES:
+		return ""
+	for id: String in ELEMENTAL_ENCOUNTERS:
+		var policy: Dictionary = ELEMENTAL_ENCOUNTERS[id]
+		if wave >= int(policy.minimum_wave) and roll.get("template", "") == policy.source_template and admission % int(policy.admission_modulus) == int(policy.admission_remainder):
+			return id
 	return ""
 
 
@@ -69,9 +95,11 @@ static func telegraph_policy(enemy: Dictionary) -> Dictionary:
 	var speed: Variant = enemy.get("attack_speed", BASE_ATTACK_SPEED)
 	if typeof(speed) not in [TYPE_INT, TYPE_FLOAT] or not is_finite(float(speed)) or float(speed) <= 0.0:
 		return {}
-	var recovery: float = float(TelegraphProfiles.DEFAULTS.recovery_seconds) * BASE_ATTACK_SPEED / maxf(0.2, float(speed))
+	var base: Dictionary = TelegraphProfiles.resolve(TelegraphProfiles.ELEMENTAL.get(id, {})).profile
+	var recovery: float = float(base.recovery_seconds) * BASE_ATTACK_SPEED / maxf(0.2, float(speed))
 	recovery = clampf(recovery, float(TelegraphProfiles.LIMITS.recovery_seconds.minimum), float(TelegraphProfiles.LIMITS.recovery_seconds.maximum))
-	var checked: Dictionary = TelegraphProfiles.resolve({"recovery_seconds": recovery})
+	base.recovery_seconds = recovery
+	var checked: Dictionary = TelegraphProfiles.resolve(base)
 	if not checked.ok:
 		return {}
 	return {"profile_id": TelegraphProfiles.PROFILE_ID, "profile": checked.profile,
@@ -242,4 +270,7 @@ static func mechanism_text(enemy: Dictionary) -> String:
 		labels.append("火抗 %.0f%%" % (float(enemy.resistances.fire) * 100.0))
 	if float(enemy.get("contact_weights", {}).get("fire", 0.0)) > 0.0:
 		labels.append(("重击含 %.0f%% 火焰" if not telegraph.is_empty() else "接触含 %.0f%% 火焰") % (float(enemy.contact_weights.fire) * 100.0))
+	for element: String in ["cold", "lightning"]:
+		if float(enemy.get("contact_weights", {}).get(element, 0.0)) > 0.0:
+			labels.append("冰冷预警攻击" if element == "cold" else "闪电预警攻击")
 	return " · ".join(labels) if not labels.is_empty() else "无额外机制"

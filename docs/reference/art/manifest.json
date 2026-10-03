@@ -7,13 +7,13 @@
 	"transparent_background": true,
 	"file_paths_relative_to": "manifest.json directory",
 	"status": "complete",
-	"written_images": 60,
+	"written_images": 62,
 	"counts": {
 		"skills": 10,
 		"supports": 16,
 		"equipment": 23,
 		"jewels": 4,
-		"monsters": 7
+		"monsters": 9
 	},
 	"entries": [
 		{
@@ -531,6 +531,15 @@
 		},
 		{
 			"category": "monsters",
+			"id": "frost_guard",
+			"name": "霜纹守卫",
+			"file": "monsters/frost_guard.png",
+			"source_renderer": "FantasyActors.draw_enemy + _draw_enemy_marks (rarity glyph only)",
+			"source_catalog": "MonsterCatalog.TEMPLATES",
+			"entry_type": "template"
+		},
+		{
+			"category": "monsters",
 			"id": "rift_warden",
 			"name": "裂隙守卫",
 			"file": "monsters/rift_warden.png",
@@ -552,6 +561,15 @@
 			"id": "splitter",
 			"name": "裂殖巡游体",
 			"file": "monsters/splitter.png",
+			"source_renderer": "FantasyActors.draw_enemy + _draw_enemy_marks (rarity glyph only)",
+			"source_catalog": "MonsterCatalog.TEMPLATES",
+			"entry_type": "template"
+		},
+		{
+			"category": "monsters",
+			"id": "storm_skitter",
+			"name": "雷纹掠行体",
+			"file": "monsters/storm_skitter.png",
 			"source_renderer": "FantasyActors.draw_enemy + _draw_enemy_marks (rarity glyph only)",
 			"source_catalog": "MonsterCatalog.TEMPLATES",
 			"entry_type": "template"

@@ -1,0 +1,12 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+godot-game: playable arena ready
+ERROR: Load only isolated main save for reward transaction
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/elemental_encounter_integration_test.gd:18)
+       [1] test_rewards (res://tests/elemental_encounter_integration_test.gd:181)
+       [2] run (res://tests/elemental_encounter_integration_test.gd:31)
+       [3] test_node_and_attack (res://tests/elemental_encounter_integration_test.gd:148)
+ELEMENTAL_ENCOUNTER_RECORDS [{"actual_damage":[16.08,13.1856],"after_resistance":0.18,"before_resistance":0.0,"element":"cold","path":["58833","48828","33508","36881"],"template":"frost_guard"},{"actual_damage":[17.28,14.1696],"after_resistance":0.18,"before_resistance":0.0,"element":"lightning","path":["58833","48828","33508","36881","35503"],"template":"storm_skitter"}]
+Elemental encounters: 5203 checks, 1 failures, natural substitutions { "frost_guard": 10, "storm_skitter": 15 }

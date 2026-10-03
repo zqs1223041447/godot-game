@@ -1,0 +1,82 @@
+[
+	{
+		"input": "physical desktop key; main _process movement and warning clock",
+		"key": "D",
+		"ok": true,
+		"player_after": "(1182.0, 459.3846)",
+		"player_before": "(962.0001, 459.3846)",
+		"real_event": {
+			"applied": false,
+			"attack_age": 0.9,
+			"attack_id": 1,
+			"balance_version": "original-telegraphed-area-v1",
+			"center": "(966.0001, 459.3846)",
+			"inside": false,
+			"packet": {
+				"base": {
+					"cold": 16.08
+				},
+				"skill_id": "locked_circle",
+				"tags": [
+					"attack",
+					"area",
+					"hit"
+				]
+			},
+			"player_position": "(1182.0, 459.3846)",
+			"profile": {
+				"damage_multiplier": 0.8,
+				"radius": 90.0,
+				"recovery_seconds": 1.8,
+				"windup_seconds": 0.9
+			},
+			"profile_id": "locked_circle",
+			"radius": 90.0,
+			"schema_version": 1,
+			"shape": "circle",
+			"source_id": 4,
+			"type": "circle_attack"
+		},
+		"template": "frost_guard"
+	},
+	{
+		"input": "physical desktop key; main _process movement and warning clock",
+		"key": "D",
+		"ok": true,
+		"player_after": "(1134.0, 459.3846)",
+		"player_before": "(962.0001, 459.3846)",
+		"real_event": {
+			"applied": false,
+			"attack_age": 0.7,
+			"attack_id": 2,
+			"balance_version": "original-telegraphed-area-v1",
+			"center": "(966.0001, 459.3846)",
+			"inside": false,
+			"packet": {
+				"base": {
+					"lightning": 17.28
+				},
+				"skill_id": "locked_circle",
+				"tags": [
+					"attack",
+					"area",
+					"hit"
+				]
+			},
+			"player_position": "(1134.0, 459.3846)",
+			"profile": {
+				"damage_multiplier": 1.6,
+				"radius": 65.0,
+				"recovery_seconds": 1.6,
+				"windup_seconds": 0.7
+			},
+			"profile_id": "locked_circle",
+			"radius": 65.0,
+			"schema_version": 1,
+			"shape": "circle",
+			"source_id": 5,
+			"type": "circle_attack"
+		},
+		"template": "storm_skitter"
+	}
+]

@@ -57,7 +57,7 @@ static func collect() -> Dictionary:
 		"mechanisms": {}, "monsters": {}, "monster_rarities": Monsters.RARITIES,
 		"equipment_rarities": Equipment.RARITIES, "jewel_rarities": Jewels.RARITIES,
 		"equipment_pools": Equipment.pool_profiles(), "loot_profiles": Equipment.loot_profiles(),
-		"current_loot_profile_id": Equipment.CURRENT_LOOT_PROFILE_ID, "save_version": Build.SAVE_VERSION, "fire_encounter": Monsters.fire_encounter_policy(), "current_loot_profile": Equipment.current_loot_profile(),
+		"current_loot_profile_id": Equipment.CURRENT_LOOT_PROFILE_ID, "save_version": Build.SAVE_VERSION, "fire_encounter": Monsters.fire_encounter_policy(), "elemental_encounters": Monsters.elemental_encounter_policy(), "current_loot_profile": Equipment.current_loot_profile(),
 		"passive_caps": Balance.player_caps(), "passive_policy": Balance.policy_version(),
 		"effects": Recipes.EFFECTS, "tornado_recipe": Recipes.TORNADO,
 		"limits": {"max_supports": Supports.MAX_SUPPORTS, "initial_projectiles": Compiler.MAX_INITIAL_PROJECTILES,
@@ -242,12 +242,15 @@ static func collect() -> Dictionary:
 	for id: String in Monsters.TEMPLATES:
 		var template: Dictionary = Monsters.TEMPLATES[id].duplicate(true)
 		var context: String = "level_boss" if template.rarity == "boss" else "demo"
-		var example_wave: int = target_wave if id == target_id else 1
+		var example_wave: int = target_wave if id == target_id else int(Monsters.ELEMENTAL_ENCOUNTERS[id].minimum_wave) if Monsters.ELEMENTAL_ENCOUNTERS.has(id) else 1
 		template["example_wave"] = example_wave
 		template["runtime_example"] = Monsters.make_enemy(1, id, example_wave, Vector2.ZERO, context)
 		template["contact_components"] = Monsters.contact_components(template.runtime_example)
 		template["mechanism_text"] = Monsters.mechanism_text(template.runtime_example)
 		template["telegraph_policy"] = Monsters.telegraph_policy(template.runtime_example)
+		if Monsters.ELEMENTAL_ENCOUNTERS.has(id):
+			template["attack_reference"] = "locked_circle_"+str(Monsters.ELEMENTAL_ENCOUNTERS[id].element)
+			template["natural_selection"] = Monsters.ELEMENTAL_ENCOUNTERS[id].duplicate(true)
 		template["defense_profile"] = Defense.defense_profile(template.runtime_example.defense_stats, "monster")
 		template["source_ratings"] = AttackRules.monster_profile(int(template.runtime_example.kind))
 		result.monsters[id] = template
@@ -431,7 +434,7 @@ static func telegraph_examples() -> Dictionary:
 			"settlement": Defense.incoming_hit(event.packet.base, stats, 10.0, 100.0, "player") if inside else {}}
 		assert(not inside or cases[id].settlement.ok, "Reference heavy hit must use a supported defense profile")
 	var metadata: Dictionary = TelegraphProfiles.metadata(policy.profile)
-	metadata["integrated_templates"] = Monsters.TELEGRAPH_TEMPLATES.keys()
+	metadata["integrated_templates"] = ["ember_guard"]
 	metadata["policy"] = policy
 	metadata["description"] = "灰烬守卫以固定范围重击代替接触攻击。先锁定地面位置，再结算一次；移出范围可以躲避。"
 	metadata["example"] = {"source": enemy, "source_wave": enemy.wave, "start": admitted.attack,
@@ -439,7 +442,59 @@ static func telegraph_examples() -> Dictionary:
 		"player_radius": Arena.PLAYER_RADIUS, "move_speed": fresh.get_stats().move_speed,
 		"shield_before": 10.0, "health_before": 100.0, "armor_instance": armor,
 		"armor_definition": Equipment.definition(armor), "movement_assumption": "straight_unobstructed_motion_from_warning_start"}
-	return {TelegraphProfiles.PROFILE_ID: metadata}
+	var result: Dictionary = {TelegraphProfiles.PROFILE_ID: metadata}
+	for template_id: String in Monsters.ELEMENTAL_ENCOUNTERS:
+		var elemental: Dictionary = elemental_telegraph_example(template_id)
+		result[elemental.id] = elemental
+	return result
+
+
+static func elemental_telegraph_example(template_id: String) -> Dictionary:
+	var rule: Dictionary = Monsters.ELEMENTAL_ENCOUNTERS[template_id]
+	var element: String = rule.element
+	var source: Dictionary = Monsters.make_enemy(1,template_id,int(rule.minimum_wave),Vector2(100,0),"demo")
+	source.spawn = 0.0
+	var policy: Dictionary = Monsters.telegraph_policy(source)
+	var runtime := Telegraphs.new()
+	var admission: Dictionary = runtime.start(source,Vector2.ZERO,policy.profile)
+	assert(admission.ok)
+	assert(runtime.advance(float(policy.profile.windup_seconds)*0.5,[source]).is_empty())
+	var halfway: Dictionary = runtime.state_for(1)
+	var events: Array[Dictionary] = runtime.advance(float(policy.profile.windup_seconds)*0.5,[source])
+	assert(events.size()==1)
+	var event: Dictionary = events[0]
+	var fresh := Canonical.new()
+	var guarded := Canonical.new()
+	var path: Array[String] = ["58833","48828","33508","36881"]
+	if element=="lightning": path.append("35503")
+	var candidate: Dictionary = guarded.snapshot()
+	candidate.talents.allocated = path.duplicate()
+	candidate.talents.normal_points -= path.size()-1
+	assert(Canonical.Rules.reason(candidate).is_empty(),"Reference resistance example must be a legal fresh-level tree build")
+	guarded._accept_memory(candidate)
+	var cases: Dictionary = {}
+	var distance: float = float(fresh.get_stats().move_speed)*float(policy.profile.windup_seconds)
+	for case_id: String in ["standing","armored","moving"]:
+		var position: Vector2 = Vector2(distance,0) if case_id=="moving" else Vector2.ZERO
+		var stats: Dictionary = guarded.get_stats() if case_id=="armored" else fresh.get_stats()
+		var inside: bool = Telegraphs.overlaps(event,position,Arena.PLAYER_RADIUS)
+		cases[case_id] = {"position":position,"inside":inside,"defense_stats":stats,
+			"settlement":Defense.incoming_source_hit(event.packet.base,stats,5.0,100.0,"player") if inside else {}}
+		assert(not inside or cases[case_id].settlement.ok)
+	var metadata: Dictionary = TelegraphProfiles.metadata(policy.profile)
+	metadata.id = "locked_circle_"+element
+	metadata.name = source.name+" · 冰冷预警" if element=="cold" else source.name+" · 闪电预警"
+	metadata["element"] = element
+	metadata["integrated_templates"] = [template_id]
+	metadata["policy"] = policy
+	metadata["natural_selection"] = rule.duplicate(true)
+	metadata["description"] = "仅替换原抽签的同物种名额，保留白蓝金与共享词缀、基础属性和奖励。锁定地面，完整预警后一次元素攻击；走开或攻击闪避可避开，不施加冻结或感电。"
+	metadata["protection_label"] = "实际源树路径 · %d%%对应抗性" % int(round(float(guarded.get_stats()[element+"_resistance"])*100.0))
+	metadata["example"] = {"source":source,"source_wave":source.wave,"start":admission.attack,"halfway":halfway,
+		"event":event,"recovery":runtime.state_for(1),"cases":cases,"player_radius":Arena.PLAYER_RADIUS,
+		"move_speed":fresh.get_stats().move_speed,"shield_before":5.0,"health_before":100.0,"allocated_path":path,
+		"movement_assumption":"straight_unobstructed_motion_from_warning_start","attack_admission_note":"Displayed values are conditioned on attack admission; existing evasion may prevent the hit."}
+	return metadata
 
 
 static func encounter_examples() -> Dictionary:

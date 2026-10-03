@@ -93,7 +93,7 @@ static func _read_state(raw: Variant) -> Dictionary:
 	var progress: float = clampf(age / windup_seconds, 0.0, 1.0) if phase == "windup" else \
 		clampf((age - windup_seconds) / recovery_seconds, 0.0, 1.0)
 	return {"source_id": int(source_id), "center": center, "radius": float(radius),
-		"phase": phase, "progress": progress}
+		"phase": phase, "progress": progress, "element": raw.get("visual_element", "") if raw.get("visual_element", "") in ["cold", "lightning"] else ""}
 
 
 static func _number(value: Variant) -> bool:
@@ -112,13 +112,18 @@ static func _append_state(state: Dictionary, effects: int, fills: Array[Dictiona
 	var winding: bool = state.phase == "windup"
 	var fade: float = 1.0 if winding else (1.0 - progress) * (1.0 - progress)
 	var pigment: Color = CHALK.lerp(CHARGED, progress) if winding else ASH
+	if state.element == "cold": pigment = Color("b3c5c8").lerp(Color("77969f"), progress) if winding else ASH
+	elif state.element == "lightning": pigment = Color("d5c68e").lerp(Color("ae884e"), progress) if winding else ASH
 	var fill_alpha: float = lerpf(0.035, 0.085, progress) if winding else 0.065 * fade
 	fills.append(_circle(state, "ground_tint", Color(SOIL, fill_alpha), true, -1.0))
 	var role: String = "danger_boundary" if winding else "recovery_boundary"
 	boundaries.append(_circle(state, role, Color(INK, 0.78 * fade), false, minf(3.8, radius * 0.14)))
 	boundaries.append(_circle(state, role, Color(pigment, 0.94 * fade), false, minf(1.5, radius * 0.07)))
 	# A traced, angular stone rune conveys charge without a spinning clock-face ring.
-	var rune: PackedVector2Array = _rune(state.center, minf(13.0, radius * 0.18), -0.13)
+	# Element shape sits clear of the player standing on the locked center.
+	# It remains strictly inside the true radius and does not change collision.
+	var rune_center: Vector2 = state.center if state.element.is_empty() else state.center + Vector2(0, -radius * 0.63)
+	var rune: PackedVector2Array = _rune(rune_center, minf(13.0, radius * 0.18), -0.13, state.element)
 	marks.append(_line(state, "rune_base", rune, Color(INK, 0.6 * fade), minf(3.0, radius * 0.1)))
 	var charged: PackedVector2Array = _trace(rune, progress if winding else 1.0)
 	if charged.size() >= 2:
@@ -146,10 +151,13 @@ static func _line(state: Dictionary, role: String, points: PackedVector2Array, c
 		"points": points, "color": color, "width": width}
 
 
-static func _rune(center: Vector2, size: float, angle: float) -> PackedVector2Array:
+static func _rune(center: Vector2, size: float, angle: float, element: String = "") -> PackedVector2Array:
 	var points := PackedVector2Array()
-	for point: Vector2 in [Vector2(-0.5, 0.6), Vector2(-0.5, -0.18), Vector2(0.0, -0.65),
-			Vector2(0.5, -0.12), Vector2(0.12, 0.18), Vector2(0.5, 0.62)]:
+	var shape: Array[Vector2] = [Vector2(-0.5, 0.6), Vector2(-0.5, -0.18), Vector2(0.0, -0.65),
+		Vector2(0.5, -0.12), Vector2(0.12, 0.18), Vector2(0.5, 0.62)]
+	if element == "cold": shape = [Vector2(-0.7,0),Vector2(0.0,-0.8),Vector2(0.7,0),Vector2(0,0.8),Vector2(-0.7,0),Vector2(0.7,0)]
+	elif element == "lightning": shape = [Vector2(0.15,-0.9),Vector2(-0.5,0.0),Vector2(0.2,-0.1),Vector2(-0.1,0.9),Vector2(0.6,-0.2)]
+	for point: Vector2 in shape:
 		points.append(center + point.rotated(angle) * size)
 	return points
 

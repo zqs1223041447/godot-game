@@ -37,9 +37,13 @@ def main():
             expected_encounters[key+'-'+template+'-常规']=sample['before'][definition['field']]
             expected_encounters[key+'-'+template+'-挑战']=sample['after'][definition['field']]
     assert inspector.encounter_values==expected_encounters, 'Challenge chart differs from the production compiler'
-    attack=data['monster_attacks']['locked_circle']; example=attack['example']; cases=example['cases']; p=attack['profile']
-    assert inspector.telegraph_values=={'radius':p['radius'],'warning':p['windup_seconds'],'recovery':p['recovery_seconds'],'standing':cases['standing']['settlement']['damage_total'],'armored':cases['armored']['settlement']['damage_total'],'moving':0.0}, 'Telegraph diagram diverges from real event and settlement'
-    assert not cases['moving']['inside'] and not cases['moving']['settlement'], 'Dodge example must have no synthetic damage settlement'
+    expected_telegraphs={}
+    for key,attack in data['monster_attacks'].items():
+        example=attack['example']; cases=example['cases']; p=attack['profile']
+        values={'radius':p['radius'],'warning':p['windup_seconds'],'recovery':p['recovery_seconds'],'standing':cases['standing']['settlement']['damage_total'],'armored':cases['armored']['settlement']['damage_total'],'moving':0.0}
+        expected_telegraphs.update({key+'-'+field:value for field,value in values.items()})
+        assert not cases['moving']['inside'] and not cases['moving']['settlement'], 'Dodge example must have no synthetic damage settlement'
+    assert inspector.telegraph_values==expected_telegraphs, 'Telegraph diagram diverges from real event and settlement'
     expected_craft={}
     for operation in ['salvage','recalibrate']:
         sample=data['crafting'][operation]['example']
@@ -99,7 +103,7 @@ def main():
     assert 'font-size:16px' in (REF/'reference.css').read_text()
     spec=importlib.util.spec_from_file_location('generator',ROOT/'tools/build_reference.py');module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
     art=json.loads((REF/'art/manifest.json').read_text())
-    assert art['status']=='complete' and art['written_images']==60 and len(art['entries'])==60
+    assert art['status']=='complete' and art['written_images']==62 and len(art['entries'])==62
     expected_art={(cat,key) for cat in ['skills','supports','equipment','fixed_items','jewels','monsters'] for key in data[cat]}
     actual_art={(('fixed_items' if row.get('entry_type')=='fixed_item' else row['category']),row['id']) for row in art['entries']}
     assert actual_art==expected_art, 'Art manifest omits or adds runtime entries'

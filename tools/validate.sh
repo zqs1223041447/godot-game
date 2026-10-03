@@ -33,7 +33,7 @@ run_check() {
 		export XDG_DATA_HOME="$VALIDATION_DIR/data/check-$CHECK_INDEX"
 		unset GODOT_CRAFTING_TEST_ROOT
 		case "${2:-}" in
-			res://tests/canonical_*|res://tests/offense_skill_*|res://tests/save_receipt_revision_test.gd|res://tests/source_*|res://tests/independent_menus_test.gd)
+			res://tests/canonical_*|res://tests/offense_skill_*|res://tests/elemental_encounter_*|res://tests/save_receipt_revision_test.gd|res://tests/source_*|res://tests/independent_menus_test.gd)
 				export XDG_DATA_HOME="$M1_VALIDATION_DIR/check-$CHECK_INDEX/data"
 				unset PIERCE_QA_ROOT
 				;;
@@ -82,20 +82,14 @@ fi
 echo "Godot version: $("$GODOT_BIN" --version)"
 python3 "$PROJECT_DIR/tools/check_font_coverage.py"
 run_check --editor --import
-run_check --script res://tests/canonical_build_migration_test.gd
-run_check --script res://tests/canonical_build_store_test.gd
-run_check --script res://tests/save_receipt_revision_test.gd
-run_check --script res://tests/canonical_group_cast_test.gd
-run_check --script res://tests/five_support_compiler_test.gd
-run_check --script res://tests/offense_skill_batch_test.gd
-run_check --script res://tests/offense_skill_migration_test.gd
-run_check --script res://tests/offense_skill_gameplay_test.gd
-run_check --script res://tests/offense_skill_loot_test.gd
-run_check --script res://tests/combat_cues_test.gd
-run_check --script res://tests/combat_cues_integration_test.gd
-run_check --script res://tests/vital_caption_rounding_test.gd
+run_check --script res://tests/elemental_encounter_integration_test.gd
+run_check --script res://tests/elemental_warning_shape_test.gd
+run_check --script res://tests/telegraph_integration_test.gd
+run_check --script res://tests/telegraph_renderer_test.gd
+run_check --script res://tests/monster_system_test.gd
+run_check --script res://tests/fantasy_actor_test.gd
 run_check --script res://tests/reference_export_test.gd
 python3 "$PROJECT_DIR/tools/check_item_transparency.py"
 python3 "$PROJECT_DIR/tests/reference_catalog_test.py"
 run_check --quit-after 300
-echo "Current-batch validation passed: schema migration and atomic saves, compiled skill combinations, actual skill and reward paths, visual cues, font/assets/reference, and startup."
+echo "Current-batch validation passed: restricted natural elemental encounters, original roll and reward preservation, shared defenses and exact warning geometry, font/assets/reference, and startup."

@@ -1,0 +1,542 @@
+[
+	{
+		"actual_events": [],
+		"dodged": false,
+		"name": "frost_guard-fx0-1280",
+		"schema": 17,
+		"size": "(1280, 720)",
+		"visual_states": [
+			{
+				"attack_id": 1,
+				"center": "(962.0001, 459.3846)",
+				"elapsed": 0.585,
+				"packet": {
+					"base": {
+						"cold": 16.08
+					},
+					"skill_id": "locked_circle",
+					"tags": [
+						"attack",
+						"area",
+						"hit"
+					]
+				},
+				"phase": "windup",
+				"profile": {
+					"damage_multiplier": 0.8,
+					"radius": 90.0,
+					"recovery_seconds": 1.8,
+					"windup_seconds": 0.9
+				},
+				"source_id": 4,
+				"visual_element": "cold"
+			}
+		]
+	},
+	{
+		"actual_events": [
+			{
+				"applied": false,
+				"attack_age": 0.9,
+				"attack_id": 1,
+				"balance_version": "original-telegraphed-area-v1",
+				"center": "(962.0001, 459.3846)",
+				"inside": false,
+				"packet": {
+					"base": {
+						"cold": 16.08
+					},
+					"skill_id": "locked_circle",
+					"tags": [
+						"attack",
+						"area",
+						"hit"
+					]
+				},
+				"player_position": "(1202.0, 459.3846)",
+				"profile": {
+					"damage_multiplier": 0.8,
+					"radius": 90.0,
+					"recovery_seconds": 1.8,
+					"windup_seconds": 0.9
+				},
+				"profile_id": "locked_circle",
+				"radius": 90.0,
+				"schema_version": 1,
+				"shape": "circle",
+				"source_id": 4,
+				"type": "circle_attack"
+			}
+		],
+		"dodged": true,
+		"name": "frost_guard-dodged-1280",
+		"schema": 17,
+		"size": "(1280, 720)",
+		"visual_states": [
+			{
+				"attack_id": 1,
+				"center": "(962.0001, 459.3846)",
+				"elapsed": 0.9,
+				"packet": {
+					"base": {
+						"cold": 16.08
+					},
+					"skill_id": "locked_circle",
+					"tags": [
+						"attack",
+						"area",
+						"hit"
+					]
+				},
+				"phase": "recovery",
+				"profile": {
+					"damage_multiplier": 0.8,
+					"radius": 90.0,
+					"recovery_seconds": 1.8,
+					"windup_seconds": 0.9
+				},
+				"source_id": 4,
+				"visual_element": "cold"
+			}
+		]
+	},
+	{
+		"actual_events": [],
+		"dodged": false,
+		"name": "frost_guard-fx2-1280",
+		"schema": 17,
+		"size": "(1280, 720)",
+		"visual_states": [
+			{
+				"attack_id": 2,
+				"center": "(962.0001, 459.3846)",
+				"elapsed": 0.585,
+				"packet": {
+					"base": {
+						"cold": 16.08
+					},
+					"skill_id": "locked_circle",
+					"tags": [
+						"attack",
+						"area",
+						"hit"
+					]
+				},
+				"phase": "windup",
+				"profile": {
+					"damage_multiplier": 0.8,
+					"radius": 90.0,
+					"recovery_seconds": 1.8,
+					"windup_seconds": 0.9
+				},
+				"source_id": 5,
+				"visual_element": "cold"
+			}
+		]
+	},
+	{
+		"actual_events": [],
+		"dodged": false,
+		"name": "storm_skitter-fx0-1280",
+		"schema": 17,
+		"size": "(1280, 720)",
+		"visual_states": [
+			{
+				"attack_id": 3,
+				"center": "(962.0001, 459.3846)",
+				"elapsed": 0.455,
+				"packet": {
+					"base": {
+						"lightning": 17.28
+					},
+					"skill_id": "locked_circle",
+					"tags": [
+						"attack",
+						"area",
+						"hit"
+					]
+				},
+				"phase": "windup",
+				"profile": {
+					"damage_multiplier": 1.6,
+					"radius": 65.0,
+					"recovery_seconds": 1.6,
+					"windup_seconds": 0.7
+				},
+				"source_id": 6,
+				"visual_element": "lightning"
+			}
+		]
+	},
+	{
+		"actual_events": [
+			{
+				"applied": false,
+				"attack_age": 0.7,
+				"attack_id": 3,
+				"balance_version": "original-telegraphed-area-v1",
+				"center": "(962.0001, 459.3846)",
+				"inside": false,
+				"packet": {
+					"base": {
+						"lightning": 17.28
+					},
+					"skill_id": "locked_circle",
+					"tags": [
+						"attack",
+						"area",
+						"hit"
+					]
+				},
+				"player_position": "(1202.0, 459.3846)",
+				"profile": {
+					"damage_multiplier": 1.6,
+					"radius": 65.0,
+					"recovery_seconds": 1.6,
+					"windup_seconds": 0.7
+				},
+				"profile_id": "locked_circle",
+				"radius": 65.0,
+				"schema_version": 1,
+				"shape": "circle",
+				"source_id": 6,
+				"type": "circle_attack"
+			}
+		],
+		"dodged": true,
+		"name": "storm_skitter-dodged-1280",
+		"schema": 17,
+		"size": "(1280, 720)",
+		"visual_states": [
+			{
+				"attack_id": 3,
+				"center": "(962.0001, 459.3846)",
+				"elapsed": 0.7,
+				"packet": {
+					"base": {
+						"lightning": 17.28
+					},
+					"skill_id": "locked_circle",
+					"tags": [
+						"attack",
+						"area",
+						"hit"
+					]
+				},
+				"phase": "recovery",
+				"profile": {
+					"damage_multiplier": 1.6,
+					"radius": 65.0,
+					"recovery_seconds": 1.6,
+					"windup_seconds": 0.7
+				},
+				"source_id": 6,
+				"visual_element": "lightning"
+			}
+		]
+	},
+	{
+		"actual_events": [],
+		"dodged": false,
+		"name": "storm_skitter-fx2-1280",
+		"schema": 17,
+		"size": "(1280, 720)",
+		"visual_states": [
+			{
+				"attack_id": 4,
+				"center": "(962.0001, 459.3846)",
+				"elapsed": 0.455,
+				"packet": {
+					"base": {
+						"lightning": 17.28
+					},
+					"skill_id": "locked_circle",
+					"tags": [
+						"attack",
+						"area",
+						"hit"
+					]
+				},
+				"phase": "windup",
+				"profile": {
+					"damage_multiplier": 1.6,
+					"radius": 65.0,
+					"recovery_seconds": 1.6,
+					"windup_seconds": 0.7
+				},
+				"source_id": 7,
+				"visual_element": "lightning"
+			}
+		]
+	},
+	{
+		"actual_events": [],
+		"dodged": false,
+		"name": "frost_guard-fx0-2560",
+		"schema": 17,
+		"size": "(2560, 1440)",
+		"visual_states": [
+			{
+				"attack_id": 5,
+				"center": "(962.0001, 459.3846)",
+				"elapsed": 0.585,
+				"packet": {
+					"base": {
+						"cold": 16.08
+					},
+					"skill_id": "locked_circle",
+					"tags": [
+						"attack",
+						"area",
+						"hit"
+					]
+				},
+				"phase": "windup",
+				"profile": {
+					"damage_multiplier": 0.8,
+					"radius": 90.0,
+					"recovery_seconds": 1.8,
+					"windup_seconds": 0.9
+				},
+				"source_id": 8,
+				"visual_element": "cold"
+			}
+		]
+	},
+	{
+		"actual_events": [
+			{
+				"applied": false,
+				"attack_age": 0.9,
+				"attack_id": 5,
+				"balance_version": "original-telegraphed-area-v1",
+				"center": "(962.0001, 459.3846)",
+				"inside": false,
+				"packet": {
+					"base": {
+						"cold": 16.08
+					},
+					"skill_id": "locked_circle",
+					"tags": [
+						"attack",
+						"area",
+						"hit"
+					]
+				},
+				"player_position": "(1202.0, 459.3846)",
+				"profile": {
+					"damage_multiplier": 0.8,
+					"radius": 90.0,
+					"recovery_seconds": 1.8,
+					"windup_seconds": 0.9
+				},
+				"profile_id": "locked_circle",
+				"radius": 90.0,
+				"schema_version": 1,
+				"shape": "circle",
+				"source_id": 8,
+				"type": "circle_attack"
+			}
+		],
+		"dodged": true,
+		"name": "frost_guard-dodged-2560",
+		"schema": 17,
+		"size": "(2560, 1440)",
+		"visual_states": [
+			{
+				"attack_id": 5,
+				"center": "(962.0001, 459.3846)",
+				"elapsed": 0.9,
+				"packet": {
+					"base": {
+						"cold": 16.08
+					},
+					"skill_id": "locked_circle",
+					"tags": [
+						"attack",
+						"area",
+						"hit"
+					]
+				},
+				"phase": "recovery",
+				"profile": {
+					"damage_multiplier": 0.8,
+					"radius": 90.0,
+					"recovery_seconds": 1.8,
+					"windup_seconds": 0.9
+				},
+				"source_id": 8,
+				"visual_element": "cold"
+			}
+		]
+	},
+	{
+		"actual_events": [],
+		"dodged": false,
+		"name": "frost_guard-fx2-2560",
+		"schema": 17,
+		"size": "(2560, 1440)",
+		"visual_states": [
+			{
+				"attack_id": 6,
+				"center": "(962.0001, 459.3846)",
+				"elapsed": 0.585,
+				"packet": {
+					"base": {
+						"cold": 16.08
+					},
+					"skill_id": "locked_circle",
+					"tags": [
+						"attack",
+						"area",
+						"hit"
+					]
+				},
+				"phase": "windup",
+				"profile": {
+					"damage_multiplier": 0.8,
+					"radius": 90.0,
+					"recovery_seconds": 1.8,
+					"windup_seconds": 0.9
+				},
+				"source_id": 9,
+				"visual_element": "cold"
+			}
+		]
+	},
+	{
+		"actual_events": [],
+		"dodged": false,
+		"name": "storm_skitter-fx0-2560",
+		"schema": 17,
+		"size": "(2560, 1440)",
+		"visual_states": [
+			{
+				"attack_id": 7,
+				"center": "(962.0001, 459.3846)",
+				"elapsed": 0.455,
+				"packet": {
+					"base": {
+						"lightning": 17.28
+					},
+					"skill_id": "locked_circle",
+					"tags": [
+						"attack",
+						"area",
+						"hit"
+					]
+				},
+				"phase": "windup",
+				"profile": {
+					"damage_multiplier": 1.6,
+					"radius": 65.0,
+					"recovery_seconds": 1.6,
+					"windup_seconds": 0.7
+				},
+				"source_id": 10,
+				"visual_element": "lightning"
+			}
+		]
+	},
+	{
+		"actual_events": [
+			{
+				"applied": false,
+				"attack_age": 0.7,
+				"attack_id": 7,
+				"balance_version": "original-telegraphed-area-v1",
+				"center": "(962.0001, 459.3846)",
+				"inside": false,
+				"packet": {
+					"base": {
+						"lightning": 17.28
+					},
+					"skill_id": "locked_circle",
+					"tags": [
+						"attack",
+						"area",
+						"hit"
+					]
+				},
+				"player_position": "(1202.0, 459.3846)",
+				"profile": {
+					"damage_multiplier": 1.6,
+					"radius": 65.0,
+					"recovery_seconds": 1.6,
+					"windup_seconds": 0.7
+				},
+				"profile_id": "locked_circle",
+				"radius": 65.0,
+				"schema_version": 1,
+				"shape": "circle",
+				"source_id": 10,
+				"type": "circle_attack"
+			}
+		],
+		"dodged": true,
+		"name": "storm_skitter-dodged-2560",
+		"schema": 17,
+		"size": "(2560, 1440)",
+		"visual_states": [
+			{
+				"attack_id": 7,
+				"center": "(962.0001, 459.3846)",
+				"elapsed": 0.7,
+				"packet": {
+					"base": {
+						"lightning": 17.28
+					},
+					"skill_id": "locked_circle",
+					"tags": [
+						"attack",
+						"area",
+						"hit"
+					]
+				},
+				"phase": "recovery",
+				"profile": {
+					"damage_multiplier": 1.6,
+					"radius": 65.0,
+					"recovery_seconds": 1.6,
+					"windup_seconds": 0.7
+				},
+				"source_id": 10,
+				"visual_element": "lightning"
+			}
+		]
+	},
+	{
+		"actual_events": [],
+		"dodged": false,
+		"name": "storm_skitter-fx2-2560",
+		"schema": 17,
+		"size": "(2560, 1440)",
+		"visual_states": [
+			{
+				"attack_id": 8,
+				"center": "(962.0001, 459.3846)",
+				"elapsed": 0.455,
+				"packet": {
+					"base": {
+						"lightning": 17.28
+					},
+					"skill_id": "locked_circle",
+					"tags": [
+						"attack",
+						"area",
+						"hit"
+					]
+				},
+				"phase": "windup",
+				"profile": {
+					"damage_multiplier": 1.6,
+					"radius": 65.0,
+					"recovery_seconds": 1.6,
+					"windup_seconds": 0.7
+				},
+				"source_id": 11,
+				"visual_element": "lightning"
+			}
+		]
+	}
+]

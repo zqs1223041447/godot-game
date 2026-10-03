@@ -1,0 +1,113 @@
+{
+  "base_commit": "eadfa1f9f86cdf5ae859d090477bfd6eabc84362",
+  "checks": 21955,
+  "reports": [
+    {
+      "log": "focused-mechanics-final.log",
+      "line": 5,
+      "count": 5203,
+      "summary": "Elemental encounters: 5203 checks, 0 failures, natural substitutions { \"frost_guard\": 10, \"storm_skitter\": 15 }"
+    },
+    {
+      "log": "focused-mechanics-final.log",
+      "line": 9,
+      "count": 72,
+      "summary": "Telegraph integration: 72 checks, 0 failures"
+    },
+    {
+      "log": "focused-mechanics-final.log",
+      "line": 12,
+      "count": 12525,
+      "summary": "telegraph_renderer_test: 12525 checks, 0 failures, 18 draw callbacks, 0 native radius cases"
+    },
+    {
+      "log": "focused-mechanics-final.log",
+      "line": 15,
+      "count": 266,
+      "summary": "Monster system: 266 checks, 0 failures"
+    },
+    {
+      "log": "focused-presentation-final.log",
+      "line": 3,
+      "count": 3467,
+      "summary": "Reference export: 3467 checks, 0 failures"
+    },
+    {
+      "log": "focused-presentation-final.log",
+      "line": 6,
+      "count": 360,
+      "summary": "fantasy_actor_test: 360 checks, 0 failures; 177 fixtures, 708 draw callbacks; six weapon cases including catalog-resolved runewood focus, eight directions, three effect levels, motion on/off, alive/dead/hurt/invulnerable, species/rarity/health/shield/slow."
+    },
+    {
+      "log": "warning-shapes.log",
+      "line": 3,
+      "count": 62,
+      "summary": "Elemental warning shapes: 62 checks, 0 failures"
+    }
+  ],
+  "logs": {
+    "elemental-integration-first.log": {
+      "sha256": "acc697f2754d485a316ef8ff1edcc292f41efb5c09dea39ef5c95491e17b6be7",
+      "bytes": 617
+    },
+    "focused-mechanics.log": {
+      "sha256": "7077505710df3ae5fd62d837fa3d9128ee4fb5df33c843d3253efb769d3e89d3",
+      "bytes": 1076
+    },
+    "focused-mechanics-final.log": {
+      "sha256": "3c950bb489b26664b42df7132004971611144de426abaff23963611122edc093",
+      "bytes": 1045
+    },
+    "focused-presentation.log": {
+      "sha256": "6bdf936cf94820d5d6c3e42f8a52d55125a18e876b446003455d75ae030a49a7",
+      "bytes": 413
+    },
+    "focused-presentation-final.log": {
+      "sha256": "703f00017c7a4f321fbe2b916a6d6bf7793d165ee9d6e15230ec22b9aacadb4c",
+      "bytes": 469
+    },
+    "warning-shapes.log": {
+      "sha256": "d1ef56cc27851304e142432ff87a7fefa96999b93db3583c19ed592b9df52faf",
+      "bytes": 145
+    },
+    "reference-static-corrected.log": {
+      "sha256": "8827da267ebe05f831b7b0c9bd1e8a3fa5b90d3135754a1b697a146cc2a4a703",
+      "bytes": 118
+    },
+    "native-final.log": {
+      "sha256": "cf6bcd88396e17092718b60081775a6402d574cda2b66049e9c945a022c93e3d",
+      "bytes": 453
+    },
+    "native-keys.log": {
+      "sha256": "70d893add09fa4d9c7798fbcdaae69ad7bbee9987953ea0073473d030fd1f443",
+      "bytes": 548
+    },
+    "reference-art.log": {
+      "sha256": "1b7657c5ca0d08b49be68ee562eaded10466c4f4b77f5f063e1d7045d9854768",
+      "bytes": 559
+    },
+    "import-font.log": {
+      "sha256": "7755470100d335d26777985865740de347d7fafea27867aebce7d147943c0046",
+      "bytes": 2566
+    }
+  },
+  "production_input_count": 337,
+  "long_soak_removed": true,
+  "full_history_rerun": false,
+  "scope": "Two restricted elemental prototypes, shared defense and reward consumers, deterministic natural selection, visual geometry and same-source reference",
+  "original_failures_preserved": [
+    {
+      "log": "focused-mechanics.log",
+      "reason": "Fixture expected nonexistent initial save to load; fixed fixture to save its isolated fresh model before rewards."
+    },
+    {
+      "log": "focused-presentation.log",
+      "reason": "Historical reference test assumed exactly one action, now explicitly verifies all three and actual new resistances."
+    }
+  ],
+  "post_mechanics_change": "Only elemental rune offset moved away from player. Final62shape checks and12nativeframes+two actual desktop D holds validate final renderer; simulation code unchanged.",
+  "native_input": "Real CUA desktop key D; unmodified main movement and warning clock. 220/172 world units walked; both actual events outside. No programmatic teleport during these two attacks.",
+  "native_pixels": "12final720p/2K high/low warning/dodge screenshots; llvmpipe software renderer, no Windows performance claim",
+  "font": "993→994 one missing警; same-source generator verifies all retained glyph outlines/metrics",
+  "existing_reference_art": "All previous60PNG remain byte-identical;2newruntime thumbnails"
+}

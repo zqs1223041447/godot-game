@@ -39,7 +39,7 @@ func _initialize() -> void:
 		else:
 			_expect(sample.quote.cost.calibration_shard == 8 and sample.balance_after == 0 and Equipment.validate_instance(sample.after_instance), "Independent calibration economics and legal replacement")
 			_expect(sample.after_instance.id == sample.source.id and sample.after_instance.affixes[0].tier == 3 and sample.after_definition == Exporter.clean(Equipment.definition(sample.after_instance)), "Calibrated definition derives from exact planned result without copying a damage formula")
-	_expect(current.monster_attacks.size() == 1 and current.monster_attacks.has("locked_circle"), "Exactly one implemented monster action is browsable")
+	_expect(current.monster_attacks.size() == 3 and current.monster_attacks.has("locked_circle"), "Three implemented typed monster action examples are browsable")
 	_expect(current.encounters.size()==2,"Exactly two finite optional encounter modifiers are browsable")
 	for id: String in current.encounters:
 		var definition: Dictionary=current.encounters[id]
@@ -58,6 +58,13 @@ func _initialize() -> void:
 	_expect(heavy_example.cases.armored.settlement.components.physical == heavy_example.cases.standing.settlement.components.physical, "Armor reduces only fire in actual heavy hit example")
 	_expect(heavy_example.event.packet.base == heavy_example.start.packet.base and heavy_example.event.center == heavy_example.start.center, "Reference event preserves frozen damage and locked center")
 	_expect(attack.profile == Exporter.clean(Monsters.telegraph_policy(Monsters.make_enemy(1,"ember_guard",3,Vector2.ZERO,"demo")).profile), "Actual default guard policy defines the displayed times and geometry")
+	for element: String in ["cold","lightning"]:
+		var typed: Dictionary = current.monster_attacks["locked_circle_"+element]
+		var base: Dictionary = typed.example.event.packet.base
+		_expect(base.size()==1 and base.has(element),"Elemental example is the actual single component")
+		_expect(is_equal_approx(typed.example.cases.armored.settlement.damage_total,typed.example.cases.standing.settlement.damage_total*0.82),"Actual legal fresh source path grants18 percent matching resistance")
+		_expect(typed.example.allocated_path.size()<=6 and not typed.example.cases.moving.inside,"Fresh budget can reach example and original warning allows escape")
+		_expect(current.elemental_encounters.extra_rewards==false and current.elemental_encounters.extra_rng==false,"Natural elemental selection adds no bonus or RNG")
 	var piercing: Dictionary = current.projectile_support_examples.skills
 	_expect(piercing.bolt.before.observed_hits == [1, 2] and piercing.bolt.after.observed_hits == [1, 2, 3, 4], "Reference bolt diagram records actual two versus four collisions")
 	_expect(piercing.frost.before.observed_hits == [1, 2, 3] and piercing.frost.after.observed_hits == [1, 2, 3, 4, 5], "Reference frost diagram records actual three versus five collisions")
@@ -109,7 +116,7 @@ func _initialize() -> void:
 		_expect(sample.with_remote.legal and sample.with_remote.remote_nodes.has(sample.remote_example), "remote example is legal " + socket_id)
 		for node_id: String in sample.connected.granted_by:
 			_expect(current.passives[node_id].type in ["small", "notable"], "coverage excludes sockets and origin")
-	_expect(current.monsters.size() == 7, "all original monster templates including fire encounter")
+	_expect(current.monsters.size() == 9, "all original monster templates including fire encounter")
 	_expect(current.fire_encounter == Monsters.fire_encounter_policy(), "encounter/reward policy from production catalog")
 	var defense: Dictionary = current.defenses.fire_resistance
 	var metadata: Dictionary = Defense.metadata()

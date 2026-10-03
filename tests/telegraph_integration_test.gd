@@ -72,7 +72,7 @@ func _test_admission_and_policy() -> void:
 	arena._start_enemy_telegraphs()
 	_expect(arena.telegraphs.state_for(enemy.id) == original, "Repeated admission does not restart warning or retarget")
 	for template: String in Monsters.TEMPLATES:
-		if template == "ember_guard": continue
+		if Monsters.TELEGRAPH_TEMPLATES.has(template): continue
 		var context: String = "level_boss" if template == "rift_warden" else "demo"
 		_expect(Monsters.telegraph_policy(Monsters.make_enemy(100, template, 3, Vector2.ZERO, context)).is_empty(), "Other template retains original action: " + template)
 	enemy.attack_speed *= 2.0

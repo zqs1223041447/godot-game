@@ -194,9 +194,24 @@ static func draw_enemy(arena: Node2D, enemy: Dictionary, preferences: VisualSett
 				_draw_ember_guard(arena, r, gait, hurt)
 			else:
 				_draw_brute(arena, r, gait, hurt, boss)
+	var element: String = "cold" if str(enemy.get("template_id", "")) == "frost_guard" else "lightning" if str(enemy.get("template_id", "")) == "storm_skitter" else ""
+	if not element.is_empty(): _draw_element_ward(arena, r, element, hurt)
 	arena.draw_set_transform(Vector2.ZERO)
 	if draw_marks:
 		_draw_enemy_marks(arena, enemy, preferences, tier, r, p)
+
+static func _draw_element_ward(arena: CanvasItem, radius: float, element: String, hurt: bool) -> void:
+	# Small carved mineral or brass crest, inside the existing collision silhouette.
+	var r: float = radius * 0.45
+	var tint: Color = Color("b3c5c8") if element == "cold" else Color("c7ad70")
+	if hurt: tint = tint.lightened(0.25)
+	var shape: Array = [Vector2(-r,0),Vector2(0,-r),Vector2(r,0),Vector2(0,r)]
+	_cached_blob(arena, shape, Color("514d42"), tint, 1.2)
+	if element == "cold":
+		_path(arena,[Vector2(-r*0.65,0),Vector2(0,-r*0.65),Vector2(r*0.65,0),Vector2(0,r*0.65),Vector2(-r*0.65,0)],tint,1.3)
+		arena.draw_line(Vector2(-r*0.55,0),Vector2(r*0.55,0),tint,1.0,true)
+	else:
+		_path(arena,[Vector2(r*0.05,-r*0.8),Vector2(-r*0.5,0),Vector2(r*0.3,-r*0.05),Vector2(-r*0.05,r*0.8)],tint,1.5)
 
 static func _draw_fire_ward(arena: CanvasItem, center: Vector2, radius: float) -> void:
 	var shield: Array=[center+Vector2(-radius,-radius),center+Vector2(radius,-radius),center+Vector2(radius*0.82,radius*0.35),center+Vector2(0,radius*1.22),center+Vector2(-radius*0.82,radius*0.35)]
