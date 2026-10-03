@@ -7,7 +7,7 @@ signal node_clicked(id: String, button: int, double_click: bool)
 signal node_hovered(id: String, anchor: Rect2)
 signal hover_left
 
-const MIN_ZOOM: float = 0.025
+const MIN_ZOOM: float = 0.005
 const MAX_ZOOM: float = 2.0
 const DEFAULT_ZOOM: float = 0.22
 const WORLD_GRID_CELL: float = 1024.0
@@ -62,6 +62,9 @@ func _ready() -> void:
 	size_flags_vertical = Control.SIZE_EXPAND_FILL
 	if not mouse_exited.is_connected(_on_mouse_exited):
 		mouse_exited.connect(_on_mouse_exited)
+
+func _make_custom_tooltip(text:String)->Object:
+	return preload("res://scripts/ui/crafting_controls.gd").wrapped_tooltip(self,text)
 
 
 ## Atomically replaces the displayed graph after validating every node and edge.
@@ -295,16 +298,18 @@ func _visible_cell_range() -> Vector4i:
 
 func _node_radius(node_type: String) -> float:
 	var scale_value: float = clampf(zoom, 0.08, 1.2)
+	var overview:float=clampf(zoom/0.08,0.22,1.0)
 	match node_type:
-		"notable": return maxf(5.4, 10.0 * scale_value)
-		"keystone": return maxf(7.0, 14.0 * scale_value)
-		"mastery": return maxf(5.0, 9.0 * scale_value)
-		"socket": return maxf(5.1, 9.5 * scale_value)
-		"start": return maxf(7.0, 13.0 * scale_value)
-		_: return maxf(3.0, 5.2 * scale_value)
+		"notable": return maxf(5.4, 10.0 * scale_value)*overview
+		"keystone": return maxf(7.0, 14.0 * scale_value)*overview
+		"mastery": return maxf(5.0, 9.0 * scale_value)*overview
+		"socket": return maxf(5.1, 9.5 * scale_value)*overview
+		"start": return maxf(7.0, 13.0 * scale_value)*overview
+		_: return maxf(3.0, 5.2 * scale_value)*overview
 
 
 func _node_fill(id: String) -> Color:
+	if _nodes[id].get("status","")=="locked":return Color("c5bea9")
 	if _allocated.has(id):
 		return Color("c49b50")
 	if _remote.has(id):
@@ -550,6 +555,8 @@ func _draw_node(id: String, node_type: String, center: Vector2, radius: float) -
 			_draw_polygon(center, radius, 8, -PI / 2.0, fill, true, 0.0, 0.48)
 			_draw_polygon(center, radius, 8, -PI / 2.0, line, false, 1.65, 0.48)
 			draw_circle(center, radius * 0.22, line)
+	if _nodes[id].get("status","")=="locked":
+		draw_line(center+Vector2(-radius,radius),center+Vector2(radius,-radius),Color("776e60"),1.2,true)
 
 
 func _draw_polygon(center: Vector2, radius: float, sides: int, rotation: float, color: Color, filled: bool, width: float, inner_scale: float = 1.0) -> void:

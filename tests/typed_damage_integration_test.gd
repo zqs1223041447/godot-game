@@ -548,6 +548,7 @@ func _test_invalid_startup_protection() -> void:
 	for text: String in ["\n  { invalid original bytes \n", "\n" + JSON.stringify(future, "  ", false, true) + "\n"]:
 		_expect(_write_text("user://build_save.json", text), "Invalid-startup fixture writes within disposable root")
 		var protected_arena: Node = load("res://scenes/main.tscn").instantiate()
+		protected_arena.state = preload("res://scripts/build_state.gd").new() # Explicit legacy contract fixture.
 		root.add_child(protected_arena)
 		protected_arena.set_process(false)
 		protected_arena.hud.set_process(false)

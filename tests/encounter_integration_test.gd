@@ -33,6 +33,7 @@ func _run() -> void:
 		quit(78)
 		return
 	arena=load("res://scenes/main.tscn").instantiate()
+	arena.state = preload("res://scripts/build_state.gd").new() # Explicit legacy contract fixture.
 	root.add_child(arena)
 	arena.set_process(false)
 	arena.hud.set_process(false)
@@ -206,6 +207,7 @@ func _test_scope_and_reset() -> void:
 		for enemy: Dictionary in arena.enemies: _expect(not enemy.has("encounter_source") and not enemy.reward_eligible,"Demo source remains canonical and rewardless")
 	_expect(arena.state._snapshot()==build,"All run transitions preserve the complete build")
 	var fresh=load("res://scenes/main.tscn").instantiate()
+	fresh.state = preload("res://scripts/build_state.gd").new() # Explicit legacy contract fixture.
 	root.add_child(fresh);fresh.set_process(false)
 	_expect(fresh.encounter_selection().is_empty(),"A newly loaded scene starts with ordinary selection; challenges are not saved")
 	fresh.free()

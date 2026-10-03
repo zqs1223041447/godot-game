@@ -21,7 +21,9 @@ func run() -> void:
 	DirAccess.make_dir_recursive_absolute(output)
 	root.size=Vector2i(1280,720)
 	var fresh:=Model.new();fresh.slot_skill(0,"nova");assert(fresh.save_build()==OK)
-	arena=load("res://scenes/main.tscn").instantiate();root.add_child(arena)
+	arena=load("res://scenes/main.tscn").instantiate()
+	arena.state = preload("res://scripts/build_state.gd").new() # Explicit legacy contract fixture.
+	root.add_child(arena)
 	arena.set_process(false);arena.hud.set_process(false);arena.auto_fire=false
 	arena.enemies.clear();arena.monster_runtime.reset();arena.spawn_timer=9999
 	arena.player_pos=Vector2(700,350)

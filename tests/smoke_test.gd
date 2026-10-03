@@ -22,6 +22,7 @@ func _run_checks() -> void:
 		_finish()
 		return
 	arena = packed.instantiate()
+	arena.state = preload("res://scripts/build_state.gd").new() # Explicit legacy contract fixture.
 	root.add_child(arena)
 	arena.set_process(false)
 	arena.hud.set_process(false)

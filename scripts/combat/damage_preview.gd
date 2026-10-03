@@ -53,6 +53,8 @@ static func details(cast: Dictionary) -> String:
 	if not bool(cast.get("ok", false)):
 		return str(cast.get("error", "伤害配置无效"))
 	var lines: PackedStringArray = ["逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。"]
+	if cast.snapshot.has("accuracy"):
+		lines.append("上方是成功命中的伤害，未把命中率乘入；攻击命中值 %.0f，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。" % float(cast.snapshot.accuracy))
 	if cast.get("recipe", {}).has("_projectile_support_ids"):
 		var pierce: int = int(cast.recipe.pierce)
 		lines.append("每枚投射物穿透 %d 次，最多命中 %d 次；去返共享剩余次数，同相位同目标至多命中一次。" % [pierce, pierce + 1])

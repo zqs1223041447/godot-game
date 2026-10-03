@@ -9,6 +9,7 @@ func run() -> void:
 		quit(78)
 		return
 	arena = load("res://scenes/main.tscn").instantiate()
+	arena.state = preload("res://scripts/build_state.gd").new() # Explicit legacy contract fixture.
 	root.add_child(arena)
 	await process_frame
 	arena.set_process(false)

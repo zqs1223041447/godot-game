@@ -81,6 +81,43 @@ func run()->void:
 	hud.open_panel("skills")
 	await frames()
 	check(model.skill_group("group_000002").support_ids.size()==5,"menu reopen preserves five owned gems")
+	hud.open_panel("talents")
+	await frames()
+	check(hud._passive_panel is CanonicalPassivePanel,"T uses full pinned source canvas")
+	var passives:Node=hud._passive_panel
+	check(passives._tree._nodes.size()==2387 and passives._tree._edges.size()==2697,"real standard source topology in HUD")
+	passives._node_clicked("2151",MOUSE_BUTTON_LEFT,false)
+	check(not passives._allocate.disabled,"default Scion intelligence first step enabled")
+	var before_points:int=model.talent_points
+	passives._allocate_selected()
+	await frames()
+	check(model.talent_points==before_points-1 and model.snapshot().talents.allocated.has("2151"),"T action uses source transaction and points")
+	check(model.get_stats().intelligence==25,"allocated original stat has actual derived consumer")
+	await capture("source-tree")
+	passives._refund_selected()
+	await frames()
+	check(model.talent_points==before_points,"T refund reverses source allocation")
+	passives._node_clicked("22497",MOUSE_BUTTON_LEFT,false)
+	check(passives._allocate.disabled and passives._detail.text.contains("不可分配"),"unsupported cast-speed node clearly locked")
+	passives._change_partition(1)
+	await frames()
+	check(not passives._tree._nodes.is_empty() and passives._allocate.disabled,"separate source ascendancy browsable without free allocations")
+	await capture("source-ascendancy")
+	passives._focus_start()
+	await frames()
+	check(passives._tree._nodes.size()==2387,"return from subtree restores full standard graph")
+	passives._tree.fit_tree()
+	await frames()
+	var overview_bounds:=Rect2(Vector2.ZERO,passives._tree.size)
+	for id:String in passives._tree._nodes:
+		check(overview_bounds.has_point(passives._tree.node_screen_position(id)),"full-tree action includes original node "+id)
+	await capture("source-tree-overview")
+	passives._focus_start()
+	root.size=Vector2i(1280,720)
+	hud._apply_presentation()
+	await frames()
+	check(passives.get_global_rect().end.x<=root.get_visible_rect().size.x+1.0,"720p source panel no horizontal overflow in viewport coordinates")
+	await capture("source-tree-720p")
 	print("Canonical HUD integration: %d checks, %d failures" % [checks,failures])
 	arena.queue_free()
 	await process_frame
@@ -91,7 +128,7 @@ func capture(stem:String)->void:
 	if output.is_empty() or DisplayServer.get_name()=="headless": return
 	DirAccess.make_dir_recursive_absolute(output)
 	await RenderingServer.frame_post_draw
-	root.get_texture().get_image().save_png(output.path_join(stem+"-2k-ui110-font120.png"))
+	root.get_texture().get_image().save_png(output.path_join(stem+"-ui110-font120.png"))
 func check(ok:bool,label:String)->void:
 	checks+=1
 	if not ok:

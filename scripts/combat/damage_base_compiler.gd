@@ -7,7 +7,7 @@ const Damage = preload("res://scripts/combat/damage_resolver.gd")
 const Weapon = preload("res://scripts/items/weapon_local_rules.gd")
 const STAGE: String = "hit_base"
 const SCOPES: Array[String] = ["attack", "spell"]
-const TAGS: Array[String] = ["hit", "attack", "spell", "projectile", "area", "secondary", "explosion", "chain"]
+const TAGS: Array[String] = ["hit", "attack", "spell", "projectile", "area", "secondary", "explosion", "chain", "melee"]
 const SOURCE_STATS: Dictionary = {
 	"attack_added_physical": ["attack", "physical"], "attack_added_fire": ["attack", "fire"],
 	"spell_added_cold": ["spell", "cold"], "spell_added_lightning": ["spell", "lightning"],

@@ -33,6 +33,7 @@ func run()->void:
 	# Run only with disposable user data, as all scene QA harnesses do.
 	assert(Model.new().save_build()==OK)
 	arena=load("res://scenes/main.tscn").instantiate()
+	arena.state = preload("res://scripts/build_state.gd").new() # Explicit legacy contract fixture.
 	root.add_child(arena)
 	arena.set_process(false)
 	arena.state.refund_talents()

@@ -8,6 +8,7 @@ const Slots = preload("res://scripts/items/equipment_slots.gd")
 const Combat = preload("res://scripts/combat/combat_data.gd")
 const Compiler = preload("res://scripts/combat/skill_compiler.gd")
 const Data = preload("res://scripts/game_data.gd")
+const SourceTree = preload("res://scripts/passives/source_tree_runtime.gd")
 var _build_signature := PackedByteArray()
 var _stats_cache: Dictionary = {}
 var _snapshot_cache: Dictionary = {}
@@ -36,6 +37,16 @@ var skill_slots: Array[String]:
 			var group: String = group_for_key(KEY_1+index)
 			result.append(str(skill_group(group).skill_id) if not group.is_empty() else "")
 		return result
+var jewels: Dictionary:
+	get:
+		var result := {}
+		for uid: String in _current.items:
+			if _current.items[uid].kind=="jewel":result[uid]=_current.items[uid].payload.duplicate(true)
+		return result
+var last_load_error: String:
+	get: return last_error
+var migrated_from_legacy := false
+var migration_message := ""
 
 
 
@@ -82,6 +93,7 @@ func get_combat_snapshot() -> Dictionary:
 			if not effects.has(effect): effects.append(effect)
 		for source: Dictionary in definition.get("added_sources", []): additions.append(source.duplicate(true))
 	_snapshot_cache = Combat.snapshot(get_stats(), effects)
+	_snapshot_cache.accuracy = float(get_stats().accuracy)
 	_snapshot_cache.added_damage_sources = additions
 	var weapon: Dictionary = item_definition(str(equipment.get("weapon", "")))
 	if weapon.has("weapon_profile"): _snapshot_cache.weapon_profile = weapon.weapon_profile.duplicate(true)
@@ -161,14 +173,70 @@ func _prepare_candidate(candidate: Dictionary) -> Dictionary:
 static func _stats_for(candidate: Dictionary) -> Dictionary:
 	var stats: Dictionary = Legacy.BASE_STATS.duplicate(true)
 	stats.additional_skill_slots = 0.0
+	for stat: String in ["strength","dexterity","intelligence","physical_increased","chaos_increased","melee_physical_increased","attack_physical_increased","accuracy_increased","evasion_increased","armour","armour_increased","cold_resistance","lightning_resistance","life_regen","life_regen_percent"]:
+		stats[stat] = 0.0
+	# Authored base ratings for this arena, not a copied monster/level table.
+	stats.accuracy = 100.0
+	stats.evasion = 15.0
 	for uid: String in candidate.locations:
 		if candidate.locations[uid].kind != "equipment": continue
 		var definition: Dictionary = Items.definition_for_instance(candidate.items[uid])
 		for stat: String in definition.get("stats", {}):
 			if stats.has(stat): stats[stat] += float(definition.stats[stat])
+	stats = SourceTree.apply_stats(stats,candidate)
 	for rate: String in ["attack_speed", "move_speed", "mana_regen"]:
 		stats[rate] *= 1.0 + float(stats[rate + "_increased"])
 	return stats
+
+
+func passive_analysis() -> Dictionary:
+	return SourceTree.analyze(_current)
+
+
+func available_passives() -> Array[String]:
+	return SourceTree.available(_current)
+
+
+func allocate_passive(node_id: Variant, mastery_effect: Variant, expected_revision: Variant, path: String) -> Dictionary:
+	if _busy: return _failure("busy","当前操作尚未结束")
+	if not expected_revision is int or expected_revision != revision(): return _failure("stale_revision","天赋配置已变化")
+	if not node_id is String or not mastery_effect is int or not SourceTree.Data.standard_ids().has(node_id): return _failure("unknown_node","未知源天赋")
+	var candidate := snapshot()
+	if candidate.talents.allocated.has(node_id): return _failure("already_allocated","天赋已分配")
+	if candidate.talents.normal_points <= 0: return _failure("no_points","没有可用天赋点")
+	var node := SourceTree.Data.node(node_id)
+	if node.type == "mastery":
+		candidate.talents.masteries[node_id] = mastery_effect
+	elif mastery_effect != 0: return _failure("invalid_mastery","普通节点不能携带精通选择")
+	candidate.talents.allocated.append(node_id)
+	candidate.talents.normal_points -= 1
+	candidate.revision += 1
+	return _commit(candidate,path)
+
+
+func refund_passive(node_id: Variant, expected_revision: Variant, path: String) -> Dictionary:
+	if _busy: return _failure("busy","当前操作尚未结束")
+	if not expected_revision is int or expected_revision != revision(): return _failure("stale_revision","天赋配置已变化")
+	if not node_id is String or not _current.talents.allocated.has(node_id): return _failure("not_allocated","此天赋尚未分配")
+	var candidate := snapshot()
+	candidate.talents.allocated.erase(node_id)
+	candidate.talents.masteries.erase(node_id)
+	candidate.talents.normal_points += 1
+	candidate.revision += 1
+	return _commit(candidate,path)
+
+
+func select_class(class_id: Variant, expected_revision: Variant, path: String) -> Dictionary:
+	if _busy: return _failure("busy","当前操作尚未结束")
+	if not expected_revision is int or expected_revision != revision(): return _failure("stale_revision","天赋配置已变化")
+	if not class_id is int or SourceTree.Data.start_for_class(class_id).is_empty(): return _failure("unknown_class","未知职业起点")
+	if class_id == _current.talents.class_id: return _failure("no_change","")
+	if _current.talents.allocated.size() != 1: return _failure("allocated_nodes","先退还已分配天赋，再切换起点")
+	var candidate := snapshot()
+	candidate.talents.class_id = class_id
+	candidate.talents.allocated = [SourceTree.Data.start_for_class(class_id)]
+	candidate.revision += 1
+	return _commit(candidate,path)
 
 
 func _ensure_cache() -> void:
@@ -211,6 +279,80 @@ func award_gem(definition_id: String) -> String:
 	var uid: String = "item_%06d" % int(_current.next_item_serial)
 	var wrapped: Dictionary = Gems.create_instance(uid, definition_id)
 	return uid if not wrapped.is_empty() and _admit_reward_item(wrapped) else ""
+
+
+func award_random_gem(rng: RandomNumberGenerator) -> String:
+	if rng==null or _busy or not pending_items().is_empty():return ""
+	var before:int=rng.state
+	var ids:Array=Gems.definitions().keys()
+	ids.sort()
+	var uid:=award_gem(str(ids[rng.randi_range(0,ids.size()-1)]))
+	if uid.is_empty():rng.state=before
+	return uid
+
+
+func discard_item(uid: Variant,expected_revision: Variant,path: String) -> Dictionary:
+	if _busy:return _failure("busy","当前操作尚未结束")
+	if not expected_revision is int or expected_revision!=revision():return _failure("stale_revision","物品状态已变化，请重新确认")
+	if not uid is String or not _current.items.has(uid) or _current.locations[uid].kind!="bag":return _failure("not_in_bag","只可丢弃背包中的物品")
+	if _current.items[uid].kind=="equipment":return _failure("equipment_crafting","随机装备请使用回收，固定示例装备保留")
+	var candidate:=snapshot()
+	candidate.items.erase(uid)
+	candidate.locations.erase(uid)
+	candidate.locations=Transfer.compact_recovery(candidate.locations)
+	candidate.revision+=1
+	return _commit(candidate,path)
+
+
+func award_jewel(rng: RandomNumberGenerator) -> String:
+	if _busy or rng==null or not pending_items().is_empty() or _current.next_item_serial>=Rules.MAX_SERIAL:return ""
+	var before_rng:int=rng.state
+	var uid:="jewel_%06d"%int(_current.next_item_serial)
+	var wrapped:Dictionary=Items.wrap_jewel(Rules.Jewels.generate(rng,uid))
+	if wrapped.is_empty() or not _admit_reward_item(wrapped):rng.state=before_rng;return ""
+	return uid
+
+
+func award_special_jewel() -> String:
+	if _busy or not pending_items().is_empty() or _current.next_item_serial>=Rules.MAX_SERIAL:return ""
+	var uid:="jewel_%06d"%int(_current.next_item_serial)
+	var wrapped:Dictionary=Items.wrap_jewel(Rules.Jewels.generate_special(uid))
+	return uid if not wrapped.is_empty() and _admit_reward_item(wrapped) else ""
+
+
+func equip(uid: String) -> bool:
+	var definition:=item_definition(uid)
+	var targets:Array=Slots.targets_for_category(str(definition.get("category","")))
+	if targets.is_empty():return false
+	var target:String=targets[0]
+	for value:String in targets:
+		if not equipped_items().has(value):target=value;break
+	return bool(move_item(uid,{"kind":"equipment","slot_id":target},revision(),_command_path()).ok)
+
+
+func unequip(slot_id: String) -> bool:
+	var canonical:String=Slots.legacy_slot(slot_id)
+	var uid:String=str(equipped_items().get(canonical,""))
+	var destination:=first_bag_position(uid)
+	return not uid.is_empty() and not destination.is_empty() and bool(move_item(uid,destination,revision(),_command_path()).ok)
+
+
+func slot_skill(index: int,skill_id: String) -> bool:
+	if index<0 or index>=5 or not Data.SKILLS.has(skill_id):return false
+	var group_id:String=group_for_key(KEY_1+index)
+	if group_id.is_empty():group_id=_current.skill_groups[index].id
+	var uid:=""
+	for id:String in _current.items:
+		if _current.items[id].definition_id=="skill:"+skill_id:uid=id;break
+	if uid.is_empty():return false
+	var result:=move_item(uid,{"kind":"skill_main","group_id":group_id},revision(),_command_path())
+	if not result.ok:return false
+	if group_for_key(KEY_1+index)!=group_id:return bool(bind_group(group_id,KEY_1+index,revision(),_command_path()).ok)
+	return true
+
+
+func _command_path() -> String:
+	return _path if not _path.is_empty() else "user://build_save.json"
 
 
 func _admit_reward_item(wrapped: Dictionary) -> bool:
@@ -282,7 +424,19 @@ var _craft_sequence := 0
 
 func load_build(path: String = "user://build_save.json") -> bool:
 	_craft_quotes.clear()
-	return super.load_build(path)
+	migrated_from_legacy=false
+	migration_message=""
+	var old_version:int=0
+	if FileAccess.file_exists(path):
+		var file:=FileAccess.open(path,FileAccess.READ)
+		if file!=null and file.get_length()<=MAX_SAVE_BYTES:
+			var raw:Variant=JSON.parse_string(file.get_as_text())
+			if raw is Dictionary and raw.get("version") is float:old_version=int(raw.version)
+	var loaded:=super.load_build(path)
+	if loaded and old_version>0 and old_version<Rules.VERSION:
+		migrated_from_legacy=true
+		migration_message="旧存档已原字节备份，装备与珠宝身份保留，技能转为独立宝石；旧天赋点已退还。待安置物品 %d 件，预算外 %d 点保留记账。"%[pending_items().size(),int(_current.migration_ledger.excess_points_recorded)]
+	return loaded
 
 
 func crafting_balance() -> int:

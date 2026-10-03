@@ -184,6 +184,7 @@ static func _snapshot_error(snapshot: Dictionary) -> String:
 		return "施放快照缺少必要字段"
 	if not _nonnegative(snapshot.base_damage) or not _integer(snapshot.projectile_count, -1000000, 1000000):
 		return "施放快照基础数值无效"
+	if snapshot.has("accuracy") and not _nonnegative(snapshot.accuracy): return "施放快照命中值无效"
 	if snapshot.has("weapon_profile") and snapshot.weapon_profile is Dictionary and snapshot.weapon_profile.is_empty():
 		return "施放快照的武器局部配置不可为空"
 	var weapon_error: String = Weapon.profile_error(snapshot.get("weapon_profile", {}))

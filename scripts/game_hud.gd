@@ -4,6 +4,7 @@ extends CanvasLayer
 
 const CanonicalInventoryView = preload("res://scripts/ui/canonical_inventory_panel.gd")
 const CanonicalSkillsView = preload("res://scripts/ui/canonical_skill_panel.gd")
+const CanonicalPassivesView = preload("res://scripts/ui/canonical_passive_panel.gd")
 const ItemHoverView = preload("res://scripts/ui/item_hover_card.gd")
 const ItemPresentation = preload("res://scripts/ui/unified_item_presentation.gd")
 const MenuRoutes = preload("res://scripts/ui/menu_route_state.gd")
@@ -735,15 +736,18 @@ func _open_passives_from_inventory() -> void:
 
 
 func _build_talents_panel() -> void:
-	_panel_title.text = "天赋星图 · 珠宝"
-	_panel_subtitle.text = "分配天赋 · 镶嵌珠宝 · 查看覆盖"
+	_panel_title.text = "源天赋树 · 珠宝" if _state.has_method("passive_analysis") else "天赋星图 · 珠宝"
+	_panel_subtitle.text = "拖动平移 · 滚轮缩放 · 双击分配 / 右键退款" if _state.has_method("passive_analysis") else "分配天赋 · 镶嵌珠宝 · 查看覆盖"
 	if not is_instance_valid(_passive_panel):
-		_passive_panel = PassivePanel.new()
+		_passive_panel = CanonicalPassivesView.new() if _state.has_method("passive_analysis") else PassivePanel.new()
 		_passive_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		_passive_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
 		_panel_body.add_child(_passive_panel)
 		_passive_panel.setup(_state)
 		_passive_panel.feedback.connect(notify)
+		if _passive_panel is CanonicalPassivesView:
+			_passive_panel.item_hovered.connect(_show_item_hover)
+			_passive_panel.hover_left.connect(_leave_item_hover)
 	_passive_panel.show()
 	_passive_panel.refresh()
 	_panel_footer.text = "每点消耗 1 天赋点 · 普通珠宝每20有效击杀 · 寻枝晶玉来自首领 · F8 离线图鉴"
@@ -884,6 +888,7 @@ func _build_combat_panel() -> void:
 
 func _toggle_combat_item(id: String) -> void:
 	var slot: String = str(GameData.ITEMS[id].slot)
+	if _state.has_method("equipped_items"):slot=preload("res://scripts/items/equipment_slots.gd").legacy_slot(slot)
 	if _state.equipped.get(slot, "") == id:
 		_state.unequip(slot)
 	else:

@@ -34,6 +34,7 @@ func target(pos: Vector2) -> Dictionary:
 	return enemy
 func run() -> void:
 	arena=load("res://scenes/main.tscn").instantiate()
+	arena.state = preload("res://scripts/build_state.gd").new() # Explicit legacy contract fixture.
 	root.add_child(arena)
 	arena.set_process(false)
 	arena.hud.set_process(false)

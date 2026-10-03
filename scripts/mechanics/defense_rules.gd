@@ -80,6 +80,53 @@ static func incoming_hit(components: Variant, defense_stats: Variant, shield: Va
 	return result
 
 
+## Source-tree defense adapter. The legacy fire-only schema remains stable.
+## Both actors use this same formula; armour is hit-size dependent and never a
+## permanently cached percentage. Elemental caps precede shield, then life.
+static func source_profile(stats: Dictionary, actor: String = "player") -> Dictionary:
+	if not ACTORS.has(actor): return _failure("Unknown defense actor")
+	var raw := {}
+	var effective := {}
+	for type: String in ["fire","cold","lightning"]:
+		var amount: Variant = stats.get(type+"_resistance",0.0)
+		if not _finite_number(amount): return _failure("Non-finite source resistance")
+		raw[type] = float(amount)
+		effective[type] = clampf(float(amount),0.0,0.75)
+	if not _amount(stats.get("armour",0.0)): return _failure("Invalid armour")
+	return {"ok":true,"reason":"","actor":actor,"armour":float(stats.get("armour",0.0)),"raw_resistances":raw,"effective_resistances":effective}
+
+
+static func apply_armour(resolved: Dictionary, armour: float) -> Dictionary:
+	var result := resolved.duplicate(true)
+	if armour <= 0.0 or not is_finite(armour): return result
+	for detail: Dictionary in result.details:
+		if detail.type != "physical" or float(detail.before_defense)<=0.0: continue
+		var reduction := minf(0.9,armour/(armour+5.0*float(detail.before_defense)))
+		detail.resistance = minf(0.9,float(detail.resistance)+reduction)
+		detail.final = float(detail.before_defense)*(1.0-float(detail.resistance))
+		result.components.physical=detail.final
+	result.total=0.0
+	for amount: float in result.components.values(): result.total+=amount
+	return result
+
+
+static func incoming_source_hit(components: Variant,stats: Dictionary,shield: Variant,health: Variant,actor: String="player")->Dictionary:
+	var checked := validate_components(components)
+	if not checked.ok: return checked
+	var profile := source_profile(stats,actor)
+	if not profile.ok: return profile
+	var packet := Damage.packet(checked.components,["hit"],"incoming_hit")
+	var resolved := apply_armour(Damage.resolve(packet,[],profile.effective_resistances),profile.armour)
+	var result := settle_resolved(resolved,shield,health)
+	if result.ok:
+		result.actor=actor
+		result.stage=STAGE
+		result.raw_resistances=profile.raw_resistances
+		result.effective_resistances=profile.effective_resistances
+		result.armour=profile.armour
+	return result
+
+
 static func validate_components(components: Variant) -> Dictionary:
 	if not components is Dictionary:
 		return _failure("Hit components must be an object")

@@ -25,6 +25,7 @@ func run() -> void:
 	var state:=Model.new()
 	expect(state.save_build()==OK,"Isolated initial save")
 	arena=load("res://scenes/main.tscn").instantiate()
+	arena.state = preload("res://scripts/build_state.gd").new() # Explicit legacy contract fixture.
 	root.add_child(arena)
 	arena.set_process(false)
 	arena.hud.set_process(false)

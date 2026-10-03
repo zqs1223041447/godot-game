@@ -26,6 +26,7 @@ var successful_saves := 0
 func _init() -> void:
 	_current = Migration.migrate(_io._snapshot())
 	_current.migration_ledger.from_version = 0
+	_socket_ids = Rules.SourceTree.Data.standard_socket_ids()
 
 
 func snapshot() -> Dictionary:

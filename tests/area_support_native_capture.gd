@@ -39,6 +39,7 @@ func run() -> void:
 	fresh.slot_skill(0,"nova")
 	assert(fresh.save_build()==OK)
 	arena=load("res://scenes/main.tscn").instantiate()
+	arena.state = preload("res://scripts/build_state.gd").new() # Explicit legacy contract fixture.
 	root.add_child(arena)
 	arena.set_process(false)
 	arena.hud.set_process(false)

@@ -36,6 +36,7 @@ func _reset() -> void:
 	var model = Model.new()
 	_expect(model.save_build() == OK, "Fresh isolated profile written")
 	arena = load("res://scenes/main.tscn").instantiate()
+	arena.state = preload("res://scripts/build_state.gd").new() # Explicit legacy contract fixture.
 	root.add_child(arena)
 	arena.set_process(false)
 	arena.hud.set_process(false)
@@ -80,6 +81,7 @@ func _test_v6_scene_migration() -> void:
 	file.store_buffer(original)
 	file.close()
 	arena = load("res://scenes/main.tscn").instantiate()
+	arena.state = preload("res://scripts/build_state.gd").new() # Explicit legacy contract fixture.
 	root.add_child(arena)
 	arena.set_process(false)
 	arena.hud.set_process(false)

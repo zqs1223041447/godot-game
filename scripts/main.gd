@@ -7,7 +7,7 @@ const SpatialTargets = preload("res://scripts/combat/spatial_target_index.gd")
 const VisualCueRuntime = preload("res://scripts/visuals/combat_cues.gd")
 const Visuals = preload("res://scripts/visuals/arena_visuals.gd")
 const Presentation = preload("res://scripts/visuals/visual_settings.gd")
-const Build = preload("res://scripts/build_state.gd")
+const Build = preload("res://scripts/canonical_game_state.gd")
 const GroupCooldowns = preload("res://scripts/combat/skill_cooldown_ledger.gd")
 const AreaRules = preload("res://scripts/combat/area_support_rules.gd")
 const Data = preload("res://scripts/game_data.gd")
@@ -16,6 +16,7 @@ const Jewels = preload("res://scripts/jewel_data.gd")
 const Combat = preload("res://scripts/combat/combat_data.gd")
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
 const Defense = preload("res://scripts/mechanics/defense_rules.gd")
+const AttackHit = preload("res://scripts/combat/attack_hit_rules.gd")
 const Projectiles = preload("res://scripts/combat/projectile_runtime.gd")
 const Monsters = preload("res://scripts/monsters/monster_catalog.gd")
 const MonsterLifecycle = preload("res://scripts/monsters/monster_runtime.gd")
@@ -59,6 +60,9 @@ var projectile_runtime = Projectiles.new()
 var combat_trace: Array[Dictionary] = []
 var damage_trace: Array[Dictionary] = []
 var incoming_damage_trace: Array[Dictionary] = []
+var attack_admission_trace: Array[Dictionary] = []
+var _player_evasion_entropy := 50.0
+var _projectile_targets: Dictionary = {}
 var event_counts: Dictionary = {}
 var _simulation_accumulator: float = 0.0
 var hud: CanvasLayer
@@ -129,6 +133,11 @@ func _ready() -> void:
 	if not state.last_load_error.is_empty():
 		hud.open_panel("pause")
 		hud.notify(state.last_load_error)
+	elif state.has_method("passive_analysis"):
+		if state.migrated_from_legacy:
+			hud.open_panel("inventory")
+			hud.notify(state.migration_message)
+		else: hud.notify("I / B 行囊 · T 源天赋树 · K 技能宝石")
 	elif state.migrated_from_v1 or state.migrated_from_v2 or state.migrated_from_v3 or state.migrated_from_v4 or state.migrated_from_v5 or state.migrated_from_v6 or state.migrated_from_v7 or state.migrated_from_v8 or state.migrated_from_v9 or state.migrated_from_v10 or state.migrated_from_v11 or state.migrated_from_v12:
 		hud.open_panel("talents" if state.migrated_from_v1 or state.migrated_from_v6 else "skills" if state.migrated_from_v4 or state.migrated_from_v5 or state.migrated_from_v9 or state.migrated_from_v11 or state.migrated_from_v12 else "inventory" if state.migrated_from_v3 or state.migrated_from_v7 or state.migrated_from_v8 or state.migrated_from_v10 else "combat")
 		hud.notify(state.migration_message)
@@ -281,6 +290,8 @@ func restart_run() -> void:
 	visual_cues.reset()
 	cooldowns.clear()
 	group_cooldowns.reset()
+	_player_evasion_entropy = 50.0
+	attack_admission_trace.clear()
 	for id: String in Data.SKILLS:
 		cooldowns[id] = 0.0
 	spawn_timer = 1.8
@@ -368,6 +379,7 @@ func _tick(delta: float) -> void:
 	hurt_flash = maxf(0.0, hurt_flash - delta)
 	screen_shake = maxf(0.0, screen_shake - delta * 15.0)
 	mana = minf(float(_stats.max_mana), mana + float(_stats.mana_regen) * delta)
+	health = minf(float(_stats.max_health),health+float(_stats.get("life_regen",0.0))*delta)
 	if damage_delay <= 0.0:
 		shield = minf(float(_stats.max_shield), shield + float(_stats.shield_regen) * shield_recovery_time)
 	_move_player(delta)
@@ -685,7 +697,7 @@ func _update_enemies(delta: float) -> void:
 		if not uses_telegraph and Vector2(enemy.pos).distance_to(player_pos) < PLAYER_RADIUS + float(enemy.radius) + 1.0:
 			if float(enemy.attack_timer) <= 0.0:
 				enemy.attack_timer = 1.0 / maxf(0.2, float(enemy.get("attack_speed", 1.0 / 0.85)))
-				hit_player_components(Monsters.contact_components(enemy), int(enemy.id))
+				hit_player_components(Monsters.contact_components(enemy), int(enemy.id), ["hit","attack","melee"])
 				if not alive:
 					return
 
@@ -713,7 +725,7 @@ func _advance_enemy_telegraphs(delta: float) -> void:
 			telegraphs.reset()
 			break
 		var inside: bool = TelegraphRuntime.overlaps(event, player_pos, PLAYER_RADIUS)
-		var applied: bool = hit_player_components(event.packet.base, int(event.source_id)) if inside else false
+		var applied: bool = hit_player_components(event.packet.base, int(event.source_id),event.packet.tags) if inside else false
 		var record: Dictionary = event.duplicate(true)
 		record["player_position"] = player_pos
 		record["inside"] = inside
@@ -933,7 +945,9 @@ func _area_damage(origin: Vector2, radius: float, packet: Dictionary, color: Col
 
 
 func _update_projectiles(delta: float) -> void:
-	var events: Array[Dictionary] = projectile_runtime.advance(projectiles, delta, enemies, player_pos, MAX_PROJECTILES)
+	_projectile_targets.clear()
+	for enemy: Dictionary in enemies: _projectile_targets[int(enemy.id)] = enemy
+	var events: Array[Dictionary] = projectile_runtime.advance(projectiles, delta, enemies, player_pos, MAX_PROJECTILES, _projectile_contact_admitted)
 	for event: Dictionary in events:
 		event_counts[event.type] = int(event_counts.get(event.type, 0)) + 1
 		var brief: Dictionary = event.duplicate(true)
@@ -968,7 +982,9 @@ func _apply_damage_packet(enemy: Dictionary, packet: Dictionary, snapshot: Dicti
 		slow: float = 0.0, provenance: Dictionary = {}) -> void:
 	if float(enemy.health) <= 0.0 or float(enemy.get("spawn", 0.0)) > 0.0:
 		return
+	if not provenance.get("accuracy_checked",false) and not _attack_admitted(enemy,packet,snapshot): return
 	var result: Dictionary = Damage.resolve(packet, snapshot.get("modifiers", []), enemy.get("resistances", {}))
+	result = Defense.apply_armour(result,float(enemy.get("armour",0.0)))
 	var settlement: Dictionary = Defense.settle_resolved(result, float(enemy.get("shield", 0.0)), float(enemy.health))
 	if not settlement.ok:
 		return
@@ -983,6 +999,25 @@ func _apply_damage_packet(enemy: Dictionary, packet: Dictionary, snapshot: Dicti
 	if damage_trace.size() > 32:
 		damage_trace.pop_front()
 	_apply_enemy_settlement(enemy, settlement, color, slow)
+
+
+func _projectile_contact_admitted(shot: Dictionary,target_id: int) -> bool:
+	if not _projectile_targets.has(target_id): return false
+	return _attack_admitted(_projectile_targets[target_id],shot.payload,shot.snapshot)
+
+
+func _attack_admitted(enemy: Dictionary,packet: Dictionary,snapshot: Dictionary) -> bool:
+	if not packet.get("tags",[]).has("attack") or not snapshot.has("accuracy"): return true
+	var result := AttackHit.resolve(float(snapshot.accuracy),float(enemy.get("evasion",0.0)),float(enemy.get("evasion_entropy",50.0)))
+	if not result.ok: return false
+	enemy.evasion_entropy = result.entropy
+	_record_attack_admission("monster",int(enemy.id),result)
+	return bool(result.hit)
+
+
+func _record_attack_admission(actor: String,target_id: int,result: Dictionary) -> void:
+	attack_admission_trace.append({"actor":actor,"target_id":target_id,"hit":result.hit,"chance":result.chance})
+	if attack_admission_trace.size() > 32: attack_admission_trace.pop_front()
 
 
 func equip_tornado_example() -> void:
@@ -1051,6 +1086,9 @@ func _apply_enemy_settlement(enemy: Dictionary, settlement: Dictionary, color: C
 			_award_kill_equipment(enemy)
 		if eligible and reward_kills % 20 == 0:
 			_award_kill_jewel()
+		if eligible and reward_kills % 30 == 0 and state.has_method("award_random_gem"):
+			var gem_uid:String=state.award_random_gem(rng)
+			hud.notify("获得宝石："+str(state.item_definition(gem_uid).name)+" · 按 K 装配" if not gem_uid.is_empty() else "背包空间不足，无法领取宝石；可在 I 中整理或丢弃重复宝石")
 		if eligible and enemy.get("rarity", "") == "boss":
 			_award_kill_special_jewel()
 		if eligible and reward_kills % 4 == 0:
@@ -1129,15 +1167,27 @@ func hit_player(amount: float) -> void:
 
 
 func player_defense_profile() -> Dictionary:
+	if _stats.has("armour"): return Defense.source_profile(_stats,"player")
 	return Defense.defense_profile({"fire_resistance": _stats.get("fire_resistance", 0.0)}, "player")
 
 
-func hit_player_components(components: Variant, source_id: int = 0) -> bool:
+func hit_player_components(components: Variant, source_id: int = 0, delivery_tags: Array = []) -> bool:
 	if not alive or invulnerable > 0.0:
 		return false
-	var settlement: Dictionary = Defense.incoming_hit(components, {"fire_resistance": _stats.get("fire_resistance", 0.0)}, shield, health, "player")
+	var settlement: Dictionary = Defense.incoming_source_hit(components,_stats,shield,health,"player") if _stats.has("armour") else Defense.incoming_hit(components, {"fire_resistance": _stats.get("fire_resistance", 0.0)}, shield, health, "player")
 	if not settlement.ok or float(settlement.damage_total) <= 0.0:
 		return false
+	if delivery_tags.has("attack") and _stats.has("evasion"):
+		var accuracy := 100.0
+		for enemy: Dictionary in enemies:
+			if int(enemy.id) == source_id:
+				accuracy = float(enemy.get("accuracy",100.0))
+				break
+		var admission := AttackHit.resolve(accuracy,float(_stats.evasion),_player_evasion_entropy)
+		if not admission.ok: return false
+		_player_evasion_entropy = admission.entropy
+		_record_attack_admission("player",source_id,admission)
+		if not admission.hit: return false
 	var amount: float = float(settlement.damage_total)
 	var absorbed: float = float(settlement.shield_spent)
 	shield = float(settlement.remaining_shield)

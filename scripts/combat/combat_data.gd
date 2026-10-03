@@ -20,6 +20,10 @@ const EFFECTS: Dictionary = {
 static func modifiers(stats: Dictionary) -> Array[Dictionary]:
 	var result: Array[Dictionary] = []
 	var scopes: Dictionary = {
+		"physical_increased": {"all_tags": [], "damage_types": ["physical"]},
+		"chaos_increased": {"all_tags": [], "damage_types": ["chaos"]},
+		"melee_physical_increased": {"all_tags": ["attack","melee"], "damage_types": ["physical"]},
+		"attack_physical_increased": {"all_tags": ["attack"], "damage_types": ["physical"]},
 		"global_increased": {"all_tags": [], "damage_types": []},
 		"projectile_increased": {"all_tags": ["projectile"], "damage_types": []},
 		"elemental_increased": {"all_tags": [], "damage_types": Damage.ELEMENTS},

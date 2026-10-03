@@ -27,6 +27,7 @@ func run() -> void:
 	root.size = Vector2i(1280,720)
 	root.position = Vector2i(10,30)
 	arena = load("res://scenes/main.tscn").instantiate()
+	arena.state = preload("res://scripts/build_state.gd").new() # Explicit legacy contract fixture.
 	root.add_child(arena)
 	arena.set_process(false)
 	interactive = OS.get_cmdline_user_args().has("--interactive")

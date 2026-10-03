@@ -22,6 +22,7 @@ func run() -> void:
 	var model = Model.new()
 	expect(model.save_build() == OK, "Save isolated fresh fixture")
 	var arena := Probe.new()
+	arena.state=Model.new() # This historical launch contract intentionally uses schema13.
 	root.add_child(arena)
 	arena.set_process(false)
 	arena.hud.set_process(false)

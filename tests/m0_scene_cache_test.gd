@@ -18,6 +18,7 @@ func run() -> void:
 	var fresh := preload("res://scripts/build_state.gd").new()
 	expect(fresh.save_build() == OK, "Fresh isolated scene save")
 	arena = load("res://scenes/main.tscn").instantiate()
+	arena.state = preload("res://scripts/build_state.gd").new() # Explicit legacy contract fixture.
 	root.add_child(arena)
 	arena.auto_fire = false
 	arena.spawn_timer = 99999.0

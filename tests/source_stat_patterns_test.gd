@@ -127,7 +127,7 @@ func _check_synthetic_rejections() -> void:
 		"-8% increased Attack Speed",
 		"10% increased Damage.",
 		"10% increased Damage\n5% increased Attack Speed",
-		"10% increased Chaos Damage",
+		"10% increased Chaos Damage while Poisoned",
 		"+10% increased Damage",
 	]
 	for line: String in rejected_lines:

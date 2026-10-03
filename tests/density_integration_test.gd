@@ -44,6 +44,7 @@ func _run() -> void:
 
 func _scene() -> Node2D:
 	var result: Node2D = load("res://scenes/main.tscn").instantiate()
+	result.state = preload("res://scripts/build_state.gd").new() # Explicit legacy contract fixture.
 	root.add_child(result)
 	result.set_process(false)
 	result.hud.set_process(false)

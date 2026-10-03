@@ -83,6 +83,7 @@ func run() -> void:
 	expect(preferences.save_settings() == OK, "Stage actual isolated presentation preferences")
 	settings_bytes = FileAccess.get_file_as_bytes(Settings.PATH)
 	arena = load("res://scenes/main.tscn").instantiate()
+	arena.state = preload("res://scripts/build_state.gd").new() # Explicit legacy contract fixture.
 	root.add_child(arena)
 	arena.set_process(false)
 	arena.hud.set_process(false)

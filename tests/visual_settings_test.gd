@@ -30,6 +30,7 @@ func run() -> void:
 	expect(loaded.ui_scale == 1.0 and loaded.font_scale == 1.0 and loaded.effects_level == 2,"malformed settings sanitized")
 	root.size = Vector2i(1280,720)
 	var arena: Node = load("res://scenes/main.tscn").instantiate()
+	arena.state = preload("res://scripts/build_state.gd").new() # Explicit legacy contract fixture.
 	root.add_child(arena)
 	arena.set_process(false)
 	arena.hud.set_process(false)

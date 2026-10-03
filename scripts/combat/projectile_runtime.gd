@@ -75,7 +75,7 @@ func spawn_tornado(shots: Array[Dictionary], origin: Vector2, heading: Vector2,
 
 
 func advance(shots: Array[Dictionary], delta: float, targets: Array[Dictionary],
-		owner_center: Vector2, max_projectiles: int) -> Array[Dictionary]:
+		owner_center: Vector2, max_projectiles: int, contact_gate: Callable = Callable()) -> Array[Dictionary]:
 	var events: Array[Dictionary] = []
 	last_work_sorts = 0
 	last_work_sort_skips = 0
@@ -127,13 +127,16 @@ func advance(shots: Array[Dictionary], delta: float, targets: Array[Dictionary],
 		for contact: Dictionary in job.contacts:
 			var target_id: int = int(contact.id)
 			shot.hit_ledger["%s:%d" % [shot.state, target_id]] = true
-			shot.hit_ids.append(target_id)
 			var hit_time: float = float(contact.t) * travel
 			var hit_position: Vector2 = start.lerp(end, float(contact.t))
+			if contact_gate.is_valid() and not bool(contact_gate.call(shot,target_id)):
+				_event(events,"evaded",shot,offset+hit_time,{"target_id":target_id,"pos":hit_position})
+				continue
+			shot.hit_ids.append(target_id)
 			_event(events, "hit", shot, offset + hit_time, {"target_id": target_id,
 				"pos": hit_position, "payload": shot.payload, "snapshot": shot.snapshot, "slow": shot.slow,
 				"direction": Vector2(shot.velocity).normalized(), "color": shot.color,
-				"age": float(shot.age) + hit_time})
+				"age": float(shot.age) + hit_time,"accuracy_checked":contact_gate.is_valid()})
 			if int(shot.pierce) == 0:
 				travel = hit_time
 				end = hit_position

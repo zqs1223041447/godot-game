@@ -17,6 +17,7 @@ func run() -> void:
 	DirAccess.make_dir_recursive_absolute(output)
 	root.title = "M0 cache and retained-world native pixel QA"
 	arena = load("res://scenes/main.tscn").instantiate()
+	arena.state = preload("res://scripts/build_state.gd").new() # Explicit legacy contract fixture.
 	root.add_child(arena)
 	arena.set_process(false)
 	arena.hud.set_process(false)

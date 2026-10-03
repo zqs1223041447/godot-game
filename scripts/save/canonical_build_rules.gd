@@ -8,6 +8,7 @@ const Locations = preload("res://scripts/items/item_location_rules.gd")
 const Supports = preload("res://scripts/combat/support_registry.gd")
 const Equipment = preload("res://scripts/items/equipment_catalog.gd")
 const Jewels = preload("res://scripts/jewel_data.gd")
+const SourceTree = preload("res://scripts/passives/source_tree_runtime.gd")
 const VERSION := 14
 const MAX_ITEMS := 1024
 const MAX_GROUPS := 64
@@ -41,6 +42,9 @@ static func decode(raw: Variant) -> Dictionary:
 	if not _decode_integer(value.crafting.materials, "calibration_shard"): return {}
 	for field: String in ["class_id", "normal_points", "ascendancy_points"]:
 		if not _decode_integer(value.talents, field): return {}
+	if not value.talents.get("masteries") is Dictionary: return {}
+	for id: Variant in value.talents.masteries:
+		if not id is String or not _decode_integer(value.talents.masteries,id): return {}
 	for field: String in ["from_version", "legacy_points_earned", "legacy_points_refunded", "normal_budget_at_migration", "excess_points_recorded", "default_class_id", "initial_recovery_count"]:
 		if not _decode_integer(value.migration_ledger, field): return {}
 	if not value.bindings is Array: return {}
@@ -64,7 +68,8 @@ static func reason(value: Variant, validate_talents: Callable = Callable(), sock
 	for group: Variant in value.skill_groups:
 		if not Locations._exact_string_keys(group, ["id"]) or not Locations._stable_id(group.id) or group_ids.has(group.id): return "技能行身份无效"
 		group_ids[group.id] = true
-	var layout: Dictionary = Locations.validate(metadata, value.locations, Migration.location_context(value, socket_ids))
+	var valid_sockets := SourceTree.Data.standard_socket_ids() if socket_ids.is_empty() else socket_ids
+	var layout: Dictionary = Locations.validate(metadata, value.locations, Migration.location_context(value, valid_sockets))
 	if not layout.ok: return layout.reason
 	if not value.bindings is Array or value.bindings.size() > group_ids.size(): return "快捷键无效"
 	var keys: Dictionary = {}
@@ -89,9 +94,7 @@ static func reason(value: Variant, validate_talents: Callable = Callable(), sock
 			or not Locations._exact_string_keys(value.crafting.materials, ["calibration_shard"]) or not _integer(value.crafting.materials.calibration_shard, 0, MAX_SERIAL): return "制作材料或修订无效"
 	var ledger_error: String = _ledger_reason(value.migration_ledger)
 	if not ledger_error.is_empty(): return ledger_error
-	# M1's conservative initial-tree validator is replaced by the source runtime
-	# validator during M3 integration. Non-initial allocations cannot slip through.
-	return str(validate_talents.call(value)) if validate_talents.is_valid() else initial_talents_reason(value)
+	return str(validate_talents.call(value)) if validate_talents.is_valid() else SourceTree.reason(value)
 
 
 static func skill_contents(value: Dictionary, group_id: String) -> Dictionary:

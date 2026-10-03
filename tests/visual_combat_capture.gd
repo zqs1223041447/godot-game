@@ -47,6 +47,7 @@ func run() -> void:
 	root.position=Vector2i.ZERO
 	root.size=Vector2i(2560,1440)
 	arena=load("res://scenes/main.tscn").instantiate()
+	arena.state = preload("res://scripts/build_state.gd").new() # Explicit legacy contract fixture.
 	root.add_child(arena)
 	arena.set_process(false)
 	arena.visual_settings.ui_scale=1.0

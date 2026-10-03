@@ -23,6 +23,12 @@ var _craft_controls: Control
 var _craft_quotes: Dictionary = {}
 var _craft_dialog: ConfirmationDialog
 var _pending_craft: Dictionary = {}
+var _character: Button
+var _discard: Button
+var _pending_discard: Dictionary = {}
+
+class CharacterButton extends Button:
+	func _make_custom_tooltip(text:String)->Object:return CraftControls.wrapped_tooltip(self,text)
 
 class SlotTarget extends Button:
 	var owner_panel: CanonicalInventoryPanel
@@ -71,11 +77,20 @@ func _build() -> void:
 	_summary = Label.new()
 	_summary.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	top.add_child(_summary)
+	_character=CharacterButton.new()
+	_character.name="CharacterStats"
+	_character.text="角色属性"
+	top.add_child(_character)
 	var arrange := Button.new()
 	arrange.name = "ArrangeUnifiedBag"
 	arrange.text = "整理背包"
 	arrange.pressed.connect(func(): _report(model.arrange_items(model.revision(), save_path)))
 	top.add_child(arrange)
+	_discard=Button.new()
+	_discard.name="DiscardUnifiedItem"
+	_discard.text="丢弃宝石 / 珠宝"
+	_discard.pressed.connect(_request_discard)
+	top.add_child(_discard)
 	var row := HBoxContainer.new()
 	row.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	row.add_theme_constant_override("separation",16)
@@ -161,6 +176,8 @@ func refresh() -> void:
 		target.tooltip_text = "" # Shared hover owns details; no competing native tooltip.
 		target.queue_redraw()
 	_summary.text = "共享行囊 12 × 8"
+	var stats:Dictionary=model.get_stats()
+	_character.tooltip_text="力量 %.0f · 敏捷 %.0f · 智慧 %.0f\n生命 %.1f · 魔力 %.1f · 护盾 %.1f\n生命回复 %.2f/s · 魔力回复 %.2f/s\n攻击频率 %.2f/s · 移速 %.1f\n命中值 %.0f · 闪避值 %.1f · 护甲 %.1f\n有效火 / 冰 / 电抗性 %.0f%% / %.0f%% / %.0f%%\n攻击命中率取决于目标当前闪避；法术不进行闪避判定。护甲减伤取决于每次物理命中大小。"%[stats.strength,stats.dexterity,stats.intelligence,stats.max_health,stats.max_mana,stats.max_shield,stats.life_regen,stats.mana_regen,stats.attack_speed,stats.move_speed,stats.accuracy,stats.evasion,stats.armour,clampf(stats.fire_resistance,0,0.75)*100,clampf(stats.cold_resistance,0,0.75)*100,clampf(stats.lightning_resistance,0,0.75)*100]
 	for child: Node in _pending.get_children():
 		_pending.remove_child(child)
 		child.queue_free()
@@ -228,6 +245,7 @@ func _drag_valid(value: Variant) -> bool:
 
 
 func _select_item(uid: String) -> void:
+	if uid!=_selected_uid:_cancel_craft()
 	_selected_uid = uid
 	_refresh_crafting()
 
@@ -238,6 +256,7 @@ func _refresh_crafting() -> void:
 		if quote.has("handle"): model.cancel_crafting_quote(quote.handle)
 	_craft_quotes.clear()
 	var item: Dictionary = model.item(_selected_uid)
+	_discard.disabled=item.is_empty() or item.get("kind","")=="equipment" or model.location(_selected_uid).get("kind","")!="bag"
 	var source: Dictionary = item.get("payload",{}) if item.get("kind","") == "equipment" else {}
 	var reason := "选择背包中的随机装备可回收或校准"
 	if not source.is_empty() and model.location(_selected_uid).get("kind","") == "bag":
@@ -286,6 +305,11 @@ func _request_craft(operation: String,uid: String,source: Dictionary) -> void:
 
 
 func _confirm_craft() -> void:
+	if not _pending_discard.is_empty():
+		var request:=_pending_discard.duplicate(true)
+		_pending_discard.clear()
+		_report(model.discard_item(request.uid,request.revision,save_path))
+		return
 	if _pending_craft.is_empty(): return
 	var issued: Dictionary = _pending_craft.duplicate(true)
 	_pending_craft.clear()
@@ -296,6 +320,16 @@ func _confirm_craft() -> void:
 
 
 func _cancel_craft() -> void:
+	_pending_discard.clear()
 	if not _pending_craft.is_empty(): model.cancel_crafting_quote(_pending_craft.quote.handle)
 	_pending_craft.clear()
 	if is_instance_valid(_craft_dialog): _craft_dialog.hide()
+
+
+func _request_discard()->void:
+	if _discard.disabled or _craft_dialog.visible:return
+	_pending_discard={"uid":_selected_uid,"revision":model.revision()}
+	_craft_dialog.title="确认丢弃物品"
+	_craft_dialog.ok_button_text="确认丢弃"
+	_craft_dialog.dialog_text="丢弃「%s」？\n仅消耗这一件实例，不影响同名物品。\n不会获得材料；保存成功后无法恢复。"%str(model.item_definition(_selected_uid).name)
+	_craft_dialog.popup_centered(Vector2i(500,240))

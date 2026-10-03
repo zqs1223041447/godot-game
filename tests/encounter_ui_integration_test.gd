@@ -21,6 +21,7 @@ func run() -> void:
 		quit(78);return
 	root.size=Vector2i(1280,720)
 	arena=load("res://scenes/main.tscn").instantiate()
+	arena.state = preload("res://scripts/build_state.gd").new() # Explicit legacy contract fixture.
 	root.add_child(arena)
 	arena.set_process(false);arena.hud.set_process(false)
 	var hud: Node=arena.hud

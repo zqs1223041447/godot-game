@@ -55,3 +55,13 @@ static func special_subtrees() -> Dictionary:
 	return _data.special_subtrees.duplicate(true) if ready() else {}
 static func source_points() -> Dictionary:
 	return _data.points.duplicate(true) if ready() else {}
+static func class_definition(class_id: int) -> Dictionary:
+	return _data.classes[class_id].duplicate(true) if ready() and class_id >= 0 and class_id < _data.classes.size() else {}
+static func edges_for(ids: Array) -> Array:
+	if not ready(): return []
+	var wanted := {}
+	for id: String in ids: wanted[id]=true
+	var result: Array = []
+	for edge: Dictionary in _data.edges:
+		if wanted.has(edge.id): result.append({"a":edge.a,"b":edge.b})
+	return result
