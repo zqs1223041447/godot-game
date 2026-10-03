@@ -15,7 +15,7 @@ const DEFINITIONS:Dictionary={
 static func definition(id:Variant)->Dictionary:
 	if not id is String or not DEFINITIONS.has(id):return {}
 	var result:Dictionary=DEFINITIONS[id].duplicate(true)
-	result.merge({"definition_id":id,"kind":"flask","size":Vector2i(1,2),"max_charges":MAX_CHARGES,"cost":USE_COST,"duration":DURATION,"recovery_fraction":RECOVERY_FRACTION,"rarity":"normal","effects":[],"stats":{},"category":"","description":"3秒内恢复35%对应最大资源；消耗10充能。同资源恢复不叠加，已满或充能不足时不消耗。"})
+	result.merge({"definition_id":id,"kind":"flask","size":Vector2i(1,2),"max_charges":MAX_CHARGES,"cost":USE_COST,"duration":DURATION,"recovery_fraction":RECOVERY_FRACTION,"rarity":"normal","effects":[],"stats":{},"category":"","description":"%.0f秒内恢复%.0f%%对应最大资源；消耗%d充能。同资源恢复不叠加，已满或充能不足时不消耗。"%[DURATION,RECOVERY_FRACTION*100.0,USE_COST]})
 	return result
 static func create_instance(uid:Variant,definition_id:Variant)->Dictionary:
 	if not Locations._stable_id(uid) or definition(definition_id).is_empty():return {}
