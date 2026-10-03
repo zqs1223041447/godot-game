@@ -96,18 +96,46 @@ func _test_kind_protocol() -> void:
 	var active: Dictionary = _entry("active-skill", Vector2i(0, 0), Vector2i.ONE, "skill_gem", icon)
 	var support: Dictionary = _entry("support-skill", Vector2i(1, 0), Vector2i.ONE, "support_gem", icon)
 	var iconless_active: Dictionary = _entry("missing-active-icon", Vector2i(2, 0), Vector2i.ONE, "skill_gem")
-	grid.set_items([active, support, iconless_active], 9)
-	_expect(grid._items.size() == 2, "skill_gem and support_gem with Texture2D icons are valid; iconless gem records are rejected")
-	_expect(grid._items[0]["icon"] is Texture2D and grid._items[1]["icon"] is Texture2D, "both active and support gem snapshots retain real Texture2D resources")
-	_expect(grid._uses_texture_icon("skill_gem") and grid._uses_texture_icon("support_gem"), "active and support gem kinds take the texture draw branch")
-	_expect(not grid._uses_texture_icon("equipment") and not grid._uses_texture_icon("jewel"), "equipment and jewel kinds keep the EquipmentArt draw branch")
-	await process_frame # Runs both gem-kind entries through the CanvasItem draw callback.
+	var iconless_support: Dictionary = _entry("missing-support-icon", Vector2i(3, 0), Vector2i.ONE, "support_gem")
+	iconless_active["short_name"] = "技能"
+	iconless_support["short_name"] = "辅助"
+	grid.set_items([active, support, iconless_active, iconless_support], 9)
+	_expect(grid._items.size() == 4, "both gem kinds remain valid whether their optional icon is present or null")
+	_expect(grid._items[0]["icon"] is Texture2D and grid._items[1]["icon"] is Texture2D, "active and support gem snapshots retain supplied real Texture2D resources")
+	_expect(grid._items[2]["icon"] == null and grid._items[3]["icon"] == null, "iconless active and support gem snapshots retain their null icon")
+	_expect(grid._is_icon_entry("skill_gem") and grid._is_icon_entry("support_gem"), "active and support gem kinds use the icon-or-neutral-placeholder draw branch")
+	_expect(not grid._is_icon_entry("equipment") and not grid._is_icon_entry("jewel"), "equipment and jewel kinds keep the EquipmentArt draw branch")
+	_expect(grid.item_rect("missing-active-icon").size == Vector2(42.0, 42.0), "iconless active gem keeps its occupied grid rectangle")
+	_expect(grid.item_rect("missing-support-icon").size == Vector2(42.0, 42.0), "iconless support gem keeps its occupied grid rectangle")
+	_expect(grid.item_at_position(grid.cell_rect(Vector2i(2, 0)).get_center()) == "missing-active-icon"
+		and grid.item_at_position(grid.cell_rect(Vector2i(3, 0)).get_center()) == "missing-support-icon", "iconless gem entries remain hit-testable")
+	await process_frame # Runs both textured and iconless gem kinds through the CanvasItem draw callback.
+	var drag_payload: Variant = grid._get_drag_data(grid.cell_rect(Vector2i(2, 0)).get_center())
+	_expect(drag_payload is Dictionary and drag_payload.get("uid") == "missing-active-icon" and drag_payload.get("revision") == 9,
+		"iconless active gem can start a revision-bound drag")
+	if drag_payload is Dictionary:
+		var destination_point: Vector2 = grid.cell_rect(Vector2i(4, 0)).get_center()
+		_expect(grid._can_drop_data(destination_point, drag_payload), "iconless active gem remains eligible for a validated drop")
+		var moves_before: int = moves.size()
+		grid._drop_data(destination_point, drag_payload)
+		_expect(moves.size() == moves_before + 1 and moves.back()["uid"] == "missing-active-icon",
+			"iconless gem drop still emits its UID move request")
+	var support_drag: Variant = grid._get_drag_data(grid.cell_rect(Vector2i(3, 0)).get_center())
+	_expect(support_drag is Dictionary and support_drag.get("uid") == "missing-support-icon" and support_drag.get("revision") == 9,
+		"iconless support gem can start a revision-bound drag")
+	if support_drag is Dictionary:
+		var support_destination: Vector2 = grid.cell_rect(Vector2i(5, 0)).get_center()
+		_expect(grid._can_drop_data(support_destination, support_drag), "iconless support gem remains eligible for a validated drop")
+		var support_moves_before: int = moves.size()
+		grid._drop_data(support_destination, support_drag)
+		_expect(moves.size() == support_moves_before + 1 and moves.back()["uid"] == "missing-support-icon",
+			"iconless support gem drop still emits its UID move request")
 
 	var equipment_with_icon: Dictionary = _entry("equipment-art", Vector2i(0, 1), Vector2i.ONE, "equipment", icon)
 	var jewel_with_icon: Dictionary = _entry("jewel-art", Vector2i(1, 1), Vector2i.ONE, "jewel", icon)
 	grid.set_items([equipment_with_icon, jewel_with_icon], 10)
-	_expect(grid._items.size() == 2 and not grid._uses_texture_icon(grid._items[0]["kind"])
-		and not grid._uses_texture_icon(grid._items[1]["kind"]), "equipment and jewel draw art even if an icon field is present")
+	_expect(grid._items.size() == 2 and not grid._is_icon_entry(grid._items[0]["kind"])
+		and not grid._is_icon_entry(grid._items[1]["kind"]), "equipment and jewel draw art even if an icon field is present")
 	await process_frame
 
 	var unknown: Dictionary = _entry("unknown-kind", Vector2i.ZERO, Vector2i.ONE, "gem", icon)

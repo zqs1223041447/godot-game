@@ -165,8 +165,11 @@ func _draw_entry(entry: Dictionary) -> void:
 	var art_box := Rect2(box.position + Vector2(7.0, 5.0), box.size - Vector2(14.0, 10.0 + footer_height))
 	var icon: Variant = entry["icon"]
 	if art_box.has_area():
-		if _uses_texture_icon(str(entry["kind"])):
-			draw_texture_rect(icon, art_box, false)
+		if _is_icon_entry(str(entry["kind"])):
+			if icon is Texture2D:
+				draw_texture_rect(icon, art_box, false)
+			else:
+				_draw_missing_icon_placeholder(entry, art_box)
 		else:
 			EquipmentArt.draw_item(self, entry["art"], art_box)
 	if footer_height > 0.0:
@@ -180,6 +183,19 @@ func _draw_entry(entry: Dictionary) -> void:
 			HORIZONTAL_ALIGNMENT_LEFT, maxf(0.0, caption_box.size.x), font_size, caption_color)
 	var outline: Color = PresentationTheme.GOLD if is_selected else PresentationTheme.ACCENT if is_hovered else accent.darkened(0.22)
 	draw_rect(box.grow(-1.5), outline, false, 2.0 if is_selected or is_hovered else 1.0)
+
+
+func _draw_missing_icon_placeholder(entry: Dictionary, rect: Rect2) -> void:
+	draw_rect(rect, CELL_LIGHT)
+	if rect.size.x > 2.0 and rect.size.y > 2.0:
+		draw_rect(rect.grow(-1.0), CELL_LINE, false, 1.0)
+	var caption: String = str(entry["short_name"])
+	if caption.is_empty():
+		caption = "宝石"
+	var font: Font = get_theme_default_font()
+	var font_size: int = maxi(7, roundi(minf(11.0, rect.size.y * 0.34)))
+	draw_string(font, Vector2(rect.position.x, rect.get_center().y + font_size * 0.34), caption,
+		HORIZONTAL_ALIGNMENT_CENTER, rect.size.x, font_size, PresentationTheme.MUTED)
 
 
 func _draw_drop_preview() -> void:
@@ -406,7 +422,7 @@ func _cell_is_inside(cell: Vector2i) -> bool:
 	return cell.x >= 0 and cell.y >= 0 and cell.x < COLUMNS and cell.y < ROWS
 
 
-func _uses_texture_icon(kind: String) -> bool:
+func _is_icon_entry(kind: String) -> bool:
 	return ICON_ENTRY_KINDS.has(kind)
 
 
@@ -432,8 +448,6 @@ func _valid_entry(value: Dictionary) -> bool:
 	if not value["size"] is Vector2i or not value["cell"] is Vector2i or not value["art"] is Dictionary:
 		return false
 	if value["icon"] != null and not value["icon"] is Texture2D:
-		return false
-	if ICON_ENTRY_KINDS.has(value["kind"]) and not value["icon"] is Texture2D:
 		return false
 	if not value["accent"] is Color or typeof(value["short_name"]) != TYPE_STRING:
 		return false
