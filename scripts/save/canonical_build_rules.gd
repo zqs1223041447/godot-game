@@ -80,9 +80,9 @@ static func reason(value: Variant, validate_talents: Callable = Callable(), sock
 		for support_id: String in group.support_ids:
 			if seen.has(support_id): return "同组辅助定义不可重复"
 			seen[support_id] = true
-			if not group.skill_id.is_empty():
-				var error: String = Supports.compatibility_reason(group.skill_id, [support_id])
-				if not error.is_empty(): return error
+		if not group.skill_id.is_empty():
+			var error: String = Supports.compatibility_reason(group.skill_id, group.support_ids, Supports.GROUP_MAX_SUPPORTS)
+			if not error.is_empty(): return error
 	if not Locations._exact_string_keys(value.progress, ["level", "xp"]) or not _integer(value.progress.level, 1, 1000) \
 			or not _integer(value.progress.xp, 0, 11 + int(value.progress.level) * 8) or (value.progress.level == 1000 and value.progress.xp != 0): return "成长进度无效"
 	if not Locations._exact_string_keys(value.crafting, ["materials", "revision"]) or not _integer(value.crafting.revision, 0, MAX_SERIAL) \

@@ -23,9 +23,10 @@ static func strings(value: Variant) -> bool:
 	for entry: Variant in value:
 		if not entry is String or entry.is_empty(): return false
 	return true
-static func selection_error(skill_id: Variant, support_ids: Variant, catalog: Dictionary) -> String:
+static func selection_error(skill_id: Variant, support_ids: Variant, catalog: Dictionary, slot_limit: int = MAX_SUPPORTS) -> String:
+	if slot_limit not in [2, 5]: return "辅助槽容量无效"
 	if not skill_id is String or not Data.SKILLS.has(skill_id): return "未知技能"
-	if not support_ids is Array or support_ids.size() > MAX_SUPPORTS: return "辅助列表无效或超过两个槽位"
+	if not support_ids is Array or support_ids.size() > slot_limit: return "辅助列表无效或超过可用槽位"
 	var seen: Dictionary = {}
 	for id: Variant in support_ids:
 		if not id is String or not catalog.has(id): return "未知辅助"

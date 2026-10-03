@@ -36,10 +36,10 @@ static func get_definition(id: Variant) -> Dictionary:
 
 ## Validate the whole selection before producing any effect, then sort a copy.
 ## Failure has the same five fields as success, with neutral multipliers.
-static func compile_program(skill_id: Variant, support_ids: Variant) -> Dictionary:
+static func compile_program(skill_id: Variant, support_ids: Variant, slot_limit: int = Program.MAX_SUPPORTS) -> Dictionary:
 	if not skill_id is String or not SKILL_IDS.has(skill_id):
 		return Program.failure("资源辅助仅适配已声明的主动技能")
-	var error: String = Program.selection_error(skill_id, support_ids, SUPPORTS)
+	var error: String = Program.selection_error(skill_id, support_ids, SUPPORTS, slot_limit)
 	if not error.is_empty():
 		return Program.failure(error)
 	for id: String in support_ids:

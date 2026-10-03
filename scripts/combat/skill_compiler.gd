@@ -13,8 +13,12 @@ const MAX_INITIAL_PROJECTILES: int = 9
 const MAX_CHAIN_TARGETS: int = 8
 
 
-static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: Array) -> Dictionary:
-	var error: String = Supports.compatibility_reason(skill_id, support_ids)
+static func compile_group(skill_id: String, snapshot: Dictionary, support_ids: Array) -> Dictionary:
+	return compile_skill(skill_id, snapshot, support_ids, Supports.GROUP_MAX_SUPPORTS)
+
+
+static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: Array, slot_limit: int = Supports.MAX_SUPPORTS) -> Dictionary:
+	var error: String = Supports.compatibility_reason(skill_id, support_ids, slot_limit)
 	if not error.is_empty():
 		return _failure(error)
 	error = _snapshot_error(snapshot)
@@ -96,7 +100,7 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 		recipe = area.recipe
 		compiled_snapshot.modifiers.append_array(area.modifiers)
 		mana *= float(area.mana_multiplier)
-	var program: Dictionary = Supports.compile_programs(skill_id, canonical)
+	var program: Dictionary = Supports.compile_programs(skill_id, canonical, slot_limit)
 	if not program.error.is_empty(): return _failure(program.error)
 	compiled_snapshot.modifiers.append_array(program.modifiers)
 	mana *= float(program.mana_multiplier)

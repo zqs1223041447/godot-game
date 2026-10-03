@@ -10,6 +10,7 @@ const DeliveryRules = preload("res://scripts/combat/delivery_support_rules.gd")
 const Program = preload("res://scripts/combat/support_program.gd")
 const Data = preload("res://scripts/game_data.gd")
 const MAX_SUPPORTS: int = Legacy.MAX_SUPPORTS
+const GROUP_MAX_SUPPORTS: int = 5
 const EXTENSION_SAVE_VERSION: int = 10
 const BATCH_SAVE_VERSION: int = 13
 static var SUPPORTS: Dictionary = _definitions()
@@ -44,9 +45,10 @@ static func supports_for_skill(skill_id: String) -> Array[String]:
 	for id: String in SUPPORTS:
 		if compatibility_reason(skill_id, [id]).is_empty(): result.append(id)
 	return result
-static func compatibility_reason(skill_id: String, support_ids: Variant) -> String:
+static func compatibility_reason(skill_id: String, support_ids: Variant, slot_limit: int = MAX_SUPPORTS) -> String:
+	if slot_limit not in [MAX_SUPPORTS, GROUP_MAX_SUPPORTS]: return "辅助槽容量无效"
 	if not Data.SKILLS.has(skill_id): return "未知技能"
-	if not support_ids is Array or support_ids.size() > MAX_SUPPORTS: return "每个技能最多装配两个辅助"
+	if not support_ids is Array or support_ids.size() > slot_limit: return "辅助数量超过本版本槽位容量"
 	var seen: Dictionary = {}
 	for value: Variant in support_ids:
 		if not value is String or not SUPPORTS.has(value): return "未知辅助"
@@ -67,17 +69,17 @@ static func compatibility_reason(skill_id: String, support_ids: Variant) -> Stri
 	for provider: Variant in _program_providers():
 		selected = select_owned(support_ids, provider.SUPPORTS)
 		if selected.is_empty(): continue
-		reason = str(provider.compile_program(skill_id, selected).error)
+		reason = str(provider.compile_program(skill_id, selected, slot_limit).error)
 		if not reason.is_empty(): return reason
 	return ""
-static func compile_programs(skill_id: String, support_ids: Array) -> Dictionary:
-	var reason: String = compatibility_reason(skill_id, support_ids)
+static func compile_programs(skill_id: String, support_ids: Array, slot_limit: int = MAX_SUPPORTS) -> Dictionary:
+	var reason: String = compatibility_reason(skill_id, support_ids, slot_limit)
 	if not reason.is_empty(): return Program.failure(reason)
 	var result: Dictionary = Program.empty()
 	for provider: Variant in _program_providers():
 		var selected: Array = select_owned(support_ids, provider.SUPPORTS)
 		if selected.is_empty(): continue
-		var part: Dictionary = provider.compile_program(skill_id, selected)
+		var part: Dictionary = provider.compile_program(skill_id, selected, slot_limit)
 		if not part.error.is_empty(): return Program.failure(part.error)
 		result.modifiers.append_array(part.modifiers)
 		result.mana_multiplier *= float(part.mana_multiplier)

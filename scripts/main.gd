@@ -302,28 +302,11 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	if not event is InputEventKey or not event.pressed or event.echo:
 		return
 	var key: int = event.physical_keycode
-	if key == KEY_ESCAPE:
-		if hud.is_blocking() and alive:
-			hud.close_panel()
-		elif alive:
-			hud.open_panel("pause")
-	elif key == KEY_I or key == KEY_B:
-		if alive:
-			hud.open_panel("inventory")
-	elif key == KEY_T:
-		if alive:
-			hud.open_panel("talents")
-	elif key == KEY_F7:
-		if alive:
-			hud.open_panel("monsters")
-	elif key == KEY_F6:
-		if alive:
-			hud.open_panel("combat")
-	elif key == KEY_F8:
+	if hud.handle_menu_key(key, event.pressed, event.echo):
+		get_viewport().set_input_as_handled()
+		return
+	if key == KEY_F8:
 		open_reference_catalog()
-	elif key == KEY_K:
-		if alive:
-			hud.open_panel("skills")
 	elif key == KEY_R and not alive:
 		restart_run()
 	elif key == KEY_Q and not hud.is_blocking() and alive:

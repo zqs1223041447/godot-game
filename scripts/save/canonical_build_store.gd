@@ -107,7 +107,9 @@ func load_build(path: String) -> bool:
 	for blocked: String in _io._blocked_save_paths.keys():
 		if Legacy._save_paths_match(blocked, path): _io._blocked_save_paths.erase(blocked)
 	last_error = ""
+	_busy = true
 	changed.emit()
+	_busy = false
 	return true
 
 
@@ -117,6 +119,22 @@ func save_build(path: String) -> Error:
 	var error: Error = _persist(_current, path)
 	_busy = false
 	return error
+
+
+func can_move_item(uid: Variant, destination: Variant, expected_revision: Variant) -> bool:
+	if _busy: return false
+	var planned: Dictionary = Transfer.move(Items.metadata_for_items(_current.items), _current.locations,
+		Migration.location_context(_current, _socket_ids), uid, destination, _current.revision, expected_revision)
+	if not planned.ok: return false
+	var candidate := snapshot()
+	candidate.locations = planned.locations
+	candidate.revision = planned.revision
+	return Rules.reason(_prepare_candidate(candidate), _talent_validator, _socket_ids).is_empty()
+
+
+func first_bag_position(uid: String) -> Dictionary:
+	if not _current.items.has(uid): return {}
+	return Transfer._first_bag_space(Items.metadata_for_items(_current.items), _current.locations, uid)
 
 
 func move_item(uid: Variant, destination: Variant, expected_revision: Variant, path: String) -> Dictionary:
@@ -143,6 +161,7 @@ func arrange_items(expected_revision: Variant, path: String) -> Dictionary:
 
 func _commit(candidate: Dictionary, path: String) -> Dictionary:
 	_busy = true
+	candidate = _prepare_candidate(candidate)
 	var reason: String = Rules.reason(candidate, _talent_validator, _socket_ids)
 	if not reason.is_empty():
 		_busy = false
@@ -156,6 +175,10 @@ func _commit(candidate: Dictionary, path: String) -> Dictionary:
 	changed.emit()
 	_busy = false
 	return {"ok": true, "error_code": "", "reason": "", "revision": int(_current.revision)}
+
+
+func _prepare_candidate(candidate: Dictionary) -> Dictionary:
+	return candidate
 
 
 func _persist(candidate: Dictionary, path: String) -> Error:

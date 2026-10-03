@@ -7,7 +7,10 @@ extends RefCounted
 
 const DefenseRules = preload("res://scripts/mechanics/defense_rules.gd")
 const WeaponLocalRules = preload("res://scripts/items/weapon_local_rules.gd")
-const CURRENT_VOCABULARY: int = 9
+const NineSlotProfile = preload("res://scripts/items/nine_slot_equipment_profile.gd")
+const NINE_SLOT_BASES: Dictionary = NineSlotProfile._BASES
+const NINE_SLOT_AFFIXES: Dictionary = NineSlotProfile._AFFIXES
+const CURRENT_VOCABULARY: int = 14
 const MIN_ITEM_LEVEL: int = 1
 const MAX_ITEM_LEVEL: int = 30
 const MAX_SERIAL: int = 999999999
@@ -116,6 +119,7 @@ const LOCAL_WEAPON_AFFIXES: Dictionary = {
 ## Ordering is part of the RNG contract. Do not derive these arrays from a registry
 ## that later releases can extend. New content belongs in a new profile.
 const POOL_PROFILES: Dictionary = {
+	"nine_slot": NineSlotProfile._POOL_PROFILE,
 	"legacy": {"base_ids": ["cinder_reed", "gale_spindle", "woven_bastion", "tidebound_coat", "wayglass_token", "pulse_seed"],
 		"affix_ids": ["rootwell", "deepwell", "lanternveil", "runesong", "prismedge", "farweave", "coalglow", "rimeecho", "sparkthread", "wellturn", "trailstep", "beatlink"], "min_save_version": 4},
 	"runewood": {"base_ids": ["runewood_focus"],
@@ -126,6 +130,7 @@ const POOL_PROFILES: Dictionary = {
 		"affix_ids": ["deepwell", "runesong", "prismedge", "farweave", "coalglow", "rimeecho", "sparkthread", "wellturn", "beatlink", "whetstone_edge", "tempered_edge"], "min_save_version": 9, "balance_origin": "original"},
 }
 const LOOT_PROFILES: Dictionary = {
+	"canonical_v14": [{"pool_id":"legacy","weight":30},{"pool_id":"runewood","weight":20},{"pool_id":"defense","weight":10},{"pool_id":"local_weapon","weight":10},{"pool_id":"nine_slot","weight":30}],
 	"v0.11": [{"pool_id": "legacy", "weight": 60}, {"pool_id": "runewood", "weight": 25}, {"pool_id": "defense", "weight": 15}],
 	"v0.13": [{"pool_id": "legacy", "weight": 45}, {"pool_id": "runewood", "weight": 25}, {"pool_id": "defense", "weight": 15}, {"pool_id": "local_weapon", "weight": 15}],
 }
@@ -194,11 +199,11 @@ static func affix_definition(id: String) -> Dictionary:
 
 
 static func _base_record(id: String) -> Dictionary:
-	return BASES.get(id, EXPANSION_BASES.get(id, DEFENSE_BASES.get(id, LOCAL_WEAPON_BASES.get(id, {}))))
+	return BASES.get(id, EXPANSION_BASES.get(id, DEFENSE_BASES.get(id, LOCAL_WEAPON_BASES.get(id, NINE_SLOT_BASES.get(id, {})))))
 
 
 static func _affix_record(id: String) -> Dictionary:
-	return AFFIXES.get(id, EXPANSION_AFFIXES.get(id, DEFENSE_AFFIXES.get(id, LOCAL_WEAPON_AFFIXES.get(id, {}))))
+	return AFFIXES.get(id, EXPANSION_AFFIXES.get(id, DEFENSE_AFFIXES.get(id, LOCAL_WEAPON_AFFIXES.get(id, NINE_SLOT_AFFIXES.get(id, {})))))
 
 
 static func generate(rng: RandomNumberGenerator, id: String, item_level: int, rarity: String = "") -> Dictionary:
@@ -443,7 +448,7 @@ static func _family_eligible(id: String, family: Dictionary, base_id: String) ->
 		return _valid_defense_family(family) and family.allowed_base_ids.has(base_id)
 	if LOCAL_WEAPON_AFFIXES.has(id):
 		return _valid_local_weapon_family(family) and family.allowed_base_ids.has(base_id)
-	return AFFIXES.has(id)
+	return AFFIXES.has(id) or NINE_SLOT_AFFIXES.has(id)
 
 
 static func _valid_local_weapon_base(base: Dictionary, base_id: String) -> bool:

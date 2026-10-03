@@ -65,8 +65,8 @@ static func get_definition(id: String) -> Dictionary:
 	return SUPPORTS[id].duplicate(true)
 
 
-static func compile_program(skill_id: Variant, support_ids: Variant) -> Dictionary:
-	var error: String = Program.selection_error(skill_id, support_ids, SUPPORTS)
+static func compile_program(skill_id: Variant, support_ids: Variant, slot_limit: int = Program.MAX_SUPPORTS) -> Dictionary:
+	var error: String = Program.selection_error(skill_id, support_ids, SUPPORTS, slot_limit)
 	if not error.is_empty():
 		return Program.failure(error)
 	# Preflight every owned definition and all selected capabilities before effects.

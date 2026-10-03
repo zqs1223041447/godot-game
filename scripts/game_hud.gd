@@ -2,6 +2,8 @@ class_name GameHUD
 extends CanvasLayer
 ## Responsive, keyboard-friendly combat HUD and live build editor.
 
+const MenuRoutes = preload("res://scripts/ui/menu_route_state.gd")
+const PANEL_ROUTES: Dictionary = {"inventory":"inventory", "talents":"passive_tree", "skills":"skill_gems", "combat":"debug_build", "monsters":"debug_monsters", "pause":"pause", "settings":"settings"}
 const TypedPreview = preload("res://scripts/combat/damage_preview.gd")
 const PassivePanel = preload("res://scripts/passive_panel.gd")
 const InventoryPanelView = preload("res://scripts/inventory_panel.gd")
@@ -60,7 +62,8 @@ var _panel_title: Label
 var _panel_subtitle: Label
 var _panel_body: VBoxContainer
 var _panel_footer: Label
-var _panel_tabs: HBoxContainer
+var _menu_routes = MenuRoutes.new()
+var _windows: Dictionary = {}
 var _close_button: Button
 var _active_panel: String = ""
 var _selected_skill_slot: int = 0
@@ -115,29 +118,70 @@ func _process(delta: float) -> void:
 
 
 func is_blocking() -> bool:
-	return not _active_panel.is_empty()
+	return _active_panel == "death" or bool(_menu_routes.current_state().paused)
 
 
 func open_panel(panel_name: String) -> void:
-	if _root == null:
+	if _root == null or (_active_panel == "death" and panel_name != "death"):
 		return
-	if _active_panel == "death" and panel_name != "death":
+	if panel_name == "death":
+		_show_window("death")
 		return
-	if panel_name not in ["inventory", "talents", "skills", "combat", "monsters", "settings", "pause", "death"]:
+	if not PANEL_ROUTES.has(panel_name):
 		panel_name = "pause"
-	_cancel_encounter_request()
-	_active_panel = panel_name
-	_modal.show()
-	_rebuild_panel()
+	_menu_routes.request_window(PANEL_ROUTES[panel_name])
+	_show_window(panel_name)
+
+
+func handle_menu_key(key: int, pressed: bool = true, echo: bool = false) -> bool:
+	if key not in [KEY_I, KEY_B, KEY_T, KEY_K, KEY_F6, KEY_F7, KEY_ESCAPE]:
+		return false
+	if _active_panel == "death" or not bool(_arena.get("alive")):
+		return true
+	var transition: Dictionary = _menu_routes.handle_key(key, pressed, echo)
+	if not transition.changed:
+		return true
+	if transition.window.is_empty():
+		_hide_windows()
+	else:
+		for name: String in PANEL_ROUTES:
+			if PANEL_ROUTES[name] == transition.window:
+				_show_window(name)
+				break
+	return true
 
 
 func close_panel() -> void:
 	if _active_panel == "death" and not bool(_arena.get("alive")):
 		return
+	if not _menu_routes.current_state().window.is_empty():
+		_menu_routes.handle_key(KEY_ESCAPE)
+	_hide_windows()
+
+
+func _hide_windows() -> void:
 	_cancel_encounter_request()
 	_active_panel = ""
-	if _modal != null:
-		_modal.hide()
+	for view: Dictionary in _windows.values():
+		view.root.hide()
+
+
+func _show_window(panel_name: String) -> void:
+	if not _windows.has(panel_name):
+		return
+	_hide_windows()
+	_active_panel = panel_name
+	var view: Dictionary = _windows[panel_name]
+	_modal = view.root
+	_panel_margin = view.margin
+	_panel_scroll = view.scroll
+	_panel_title = view.title
+	_panel_subtitle = view.subtitle
+	_panel_body = view.body
+	_panel_footer = view.footer
+	_close_button = view.close_button
+	_modal.show()
+	_rebuild_panel()
 
 
 func notify(message: String) -> void:
@@ -388,8 +432,13 @@ func _build_toast() -> void:
 
 
 func _build_modal() -> void:
+	for panel_name: String in ["inventory", "talents", "skills", "combat", "monsters", "pause", "settings", "death"]:
+		_build_window(panel_name)
+
+
+func _build_window(panel_name: String) -> void:
 	_modal = Control.new()
-	_modal.name = "ModalOverlay"
+	_modal.name = str(PANEL_ROUTES.get(panel_name, "death")).to_pascal_case() + "Window"
 	_modal.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_modal.mouse_filter = Control.MOUSE_FILTER_STOP
 	_root.add_child(_modal)
@@ -435,14 +484,6 @@ func _build_modal() -> void:
 	_close_button = _button("关闭  Esc", "ClosePanelButton", close_panel, 114)
 	_close_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	header.add_child(_close_button)
-	_panel_tabs = HBoxContainer.new()
-	_panel_tabs.name = "BuildTabs"
-	layout.add_child(_panel_tabs)
-	_panel_tabs.add_child(_button("装备背包", "InventoryTab", open_panel.bind("inventory"), 140))
-	_panel_tabs.add_child(_button("天赋成长", "TalentsTab", open_panel.bind("talents"), 140))
-	_panel_tabs.add_child(_button("技能组合", "SkillsTab", open_panel.bind("skills"), 140))
-	_panel_tabs.add_child(_button("战斗机制 F6", "CombatTab", open_panel.bind("combat"), 150))
-	_panel_tabs.add_child(_button("怪物机制 F7", "MonstersTab", open_panel.bind("monsters"), 150))
 	var scroll: ScrollContainer = ScrollContainer.new()
 	_panel_scroll = scroll
 	scroll.name = "PanelScroll"
@@ -457,6 +498,9 @@ func _build_modal() -> void:
 	scroll.add_child(_panel_body)
 	_panel_footer = _wrap_label("构筑变更会自动保存  ·  关闭面板继续战斗", 13, MUTED)
 	layout.add_child(_panel_footer)
+	_windows[panel_name] = {"root":_modal, "margin":_panel_margin, "scroll":_panel_scroll,
+		"title":_panel_title, "subtitle":_panel_subtitle, "body":_panel_body,
+		"footer":_panel_footer, "close_button":_close_button}
 	_modal.hide()
 
 
@@ -558,18 +602,9 @@ func _rebuild_panel() -> void:
 	_panel_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
 	_panel_scroll.scroll_vertical = 0
 	_close_button.visible = _active_panel != "death"
-	_panel_tabs.visible = _active_panel in ["inventory", "talents", "skills", "combat", "monsters"]
 	_panel_subtitle.text = "战斗已暂停  /  调整构筑后随时继续"
 	_panel_footer.text = "构筑变更会自动保存  ·  关闭面板继续战斗"
 	_panel_footer.add_theme_color_override("font_color", MUTED)
-	var panel_order: Array[String] = ["inventory", "talents", "skills", "combat", "monsters"]
-	for index: int in range(_panel_tabs.get_child_count()):
-		var tab: Button = _panel_tabs.get_child(index) as Button
-		var selected: bool = panel_order[index] == _active_panel
-		tab.add_theme_stylebox_override("normal", PresentationTheme.bookmark(selected))
-		tab.add_theme_stylebox_override("hover", PresentationTheme.bookmark(selected))
-		tab.add_theme_color_override("font_color", Color("f8ecd0") if selected else TEXT)
-		tab.add_theme_color_override("font_hover_color", Color("f8ecd0") if selected else TEXT)
 	match _active_panel:
 		"inventory":
 			_build_inventory_panel()
@@ -1015,8 +1050,9 @@ func _slot_skill(id: String) -> void:
 
 
 func _restart() -> void:
-	_active_panel = ""
-	_modal.hide()
+	if not _menu_routes.current_state().window.is_empty():
+		_menu_routes.handle_key(KEY_ESCAPE)
+	_hide_windows()
 	_arena.call("restart_run")
 	notify("新一轮试炼开始，构筑已保留")
 
