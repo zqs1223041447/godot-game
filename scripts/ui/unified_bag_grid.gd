@@ -11,6 +11,7 @@ signal move_requested(uid: String, destination: Dictionary, revision: int)
 
 const EquipmentArt = preload("res://scripts/visuals/equipment_art.gd")
 const PresentationTheme = preload("res://scripts/visuals/visual_theme.gd")
+const GemIconLayout = preload("res://scripts/ui/gem_icon.gd")
 
 const COLUMNS: int = 12
 const ROWS: int = 8
@@ -219,7 +220,9 @@ func _draw_entry(entry: Dictionary) -> void:
 	if art_box.has_area():
 		if _is_icon_entry(str(entry["kind"])):
 			if icon is Texture2D:
-				draw_texture_rect(icon, art_box, false)
+				var fit: Rect2 = GemIconLayout.image_fit_rect(box.size, icon.get_size())
+				if fit.has_area():
+					draw_texture_rect(icon, Rect2(box.position + fit.position, fit.size), false)
 			else:
 				_draw_missing_icon_placeholder(entry, art_box)
 		else:

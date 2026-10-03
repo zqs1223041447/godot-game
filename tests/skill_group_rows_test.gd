@@ -88,6 +88,12 @@ func _test_deep_snapshot_and_identity(input_rows: Array) -> void:
 	var main: Variant = _slot(0, "main")
 	var support: Variant = _slot(0, "support", 0)
 	_expect(main.gem_uid == "active_a" and support.gem_uid == "support_group_a_0", "Nested main/support gem identity is copied into controls")
+	var main_icon: Control = main.get_node_or_null("GemIcon") as Control
+	var support_icon: Control = support.get_node_or_null("GemIcon") as Control
+	_expect(main_icon != null and main_icon.get("gem_role") == "active"
+		and support_icon != null and support_icon.get("gem_role") == "support", "Active and support slots use the shared centered GemIcon view")
+	_expect(main_icon.mouse_filter == Control.MOUSE_FILTER_IGNORE and support_icon.mouse_filter == Control.MOUSE_FILTER_IGNORE,
+		"GemIcon children leave their parent slot drag and hover input intact")
 	input_rows[0].main.uid = "mutated_after_set_rows"
 	input_rows[0].supports[0].definition_id = "support:mutated"
 	_expect(main.gem_uid == "active_a" and support.gem_definition_id == "support:focus", "Deep snapshot isolates nested Dictionary and Array mutations")

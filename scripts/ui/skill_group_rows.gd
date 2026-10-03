@@ -11,6 +11,7 @@ signal binding_requested(group_id: String, keycode: int, revision: int)
 
 const TooltipFactory = preload("res://scripts/ui/crafting_controls.gd")
 const PresentationTheme = preload("res://scripts/visuals/visual_theme.gd")
+const GemIconView = preload("res://scripts/ui/gem_icon.gd")
 const MAX_ROWS: int = 64
 const VISIBLE_ROWS_MIN: int = 10
 const BASE_ROW_HEIGHT: float = 82.0
@@ -252,13 +253,23 @@ func _make_slot(row: Dictionary, row_index: int, slot_role: String, support_inde
 	slot.tooltip_text = _slot_tooltip(slot_role, support_index, gem)
 	slot.alignment = HORIZONTAL_ALIGNMENT_CENTER
 	slot.focus_mode = Control.FOCUS_NONE
-	slot.expand_icon = true
-	slot.icon = gem.get("icon") as Texture2D
 	slot.add_theme_font_size_override("font_size", roundi(11.0 * font_scale))
 	slot.add_theme_stylebox_override("normal", PresentationTheme.panel(Color("e2c997"), Color("967347"), 4, 1, 2))
 	slot.add_theme_stylebox_override("hover", PresentationTheme.panel(Color("fff2d5"), PresentationTheme.ACCENT, 4, 1, 2))
 	slot.add_theme_stylebox_override("pressed", PresentationTheme.panel(Color("ead3a2"), PresentationTheme.ACCENT, 4, 1, 2))
 	slot.add_theme_stylebox_override("focus", PresentationTheme.panel(Color(0, 0, 0, 0), PresentationTheme.GOLD, 4, 1, 0))
+	if not gem.is_empty():
+		var gem_icon: Variant = GemIconView.new()
+		gem_icon.name = "GemIcon"
+		gem_icon.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		gem_icon.offset_left = 3.0
+		gem_icon.offset_top = 3.0
+		gem_icon.offset_right = -3.0
+		gem_icon.offset_bottom = -3.0
+		gem_icon.custom_minimum_size = Vector2.ZERO
+		gem_icon.set_gem_icon(gem.get("icon") as Texture2D, str(gem.definition_id),
+			"active" if slot_role == "main" else "support")
+		slot.add_child(gem_icon)
 	slot.mouse_entered.connect(_on_slot_entered.bind(slot))
 	slot.mouse_exited.connect(_on_slot_exited.bind(slot))
 	return slot
@@ -380,7 +391,6 @@ func _update_density() -> void:
 			column.custom_minimum_size.x = slot_width
 			var slot: GemSlot = column.get_child(1) as GemSlot
 			slot.custom_minimum_size = Vector2(slot_width, slot_width)
-			slot.add_theme_constant_override("icon_max_width", roundi(slot_width * 0.68))
 			var caption: Label = column.get_child(0) as Label
 			caption.add_theme_font_size_override("font_size", roundi(11.0 * font_scale))
 

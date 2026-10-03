@@ -33,6 +33,8 @@ func _run() -> void:
 	var rows: Control = skills._rows as Control
 	var inventory: Control = arena.hud._inventory_panel as Control
 	var grid: Control = inventory._grid as Control
+	var left_scroll: ScrollContainer = arena.hud._dock_scrolls.left as ScrollContainer
+	var left_content: VBoxContainer = arena.hud._dock_bodies.left as VBoxContainer
 	var first_row: Node = rows.find_child("SkillGroupRow_00", true, false)
 	var first_row_id: int = first_row.get_instance_id()
 	var first_generation: int = int(rows._generation)
@@ -40,6 +42,10 @@ func _run() -> void:
 	check(arena.hud._active_panel == "skills" and arena.hud.is_blocking(), "K opens the left skills dock")
 	check(arena.hud._menu_routes.snapshot().right_inventory and inventory.is_visible_in_tree(), "I opens the shared bag beside skills")
 	check(skills.find_child("SharedBagGemTray", true, false) == null, "Skills do not build a duplicate bag tray")
+	check(left_content.size.y >= left_scroll.size.y - 1.0 and rows.size.y > 500.0,
+		"Left dock VBox fills its scroll viewport and the skill list receives the remaining height")
+	print("Dock fill skills: viewport=%.1f content=%.1f panel=%.1f rows=%.1f"
+		% [left_scroll.size.y, left_content.size.y, skills.size.y, rows.size.y])
 	for cycle: int in range(3):
 		arena.hud.handle_menu_key(KEY_K, true, false)
 		arena.hud.handle_menu_key(KEY_K, true, false)
@@ -158,6 +164,18 @@ func _run() -> void:
 	await _frames(5)
 	var character: Control = arena.hud._character_panel as Control
 	var character_generation: int = int(character.refresh_generation)
+	var character_body: VBoxContainer = character.find_child("CharacterSheetBody", true, false) as VBoxContainer
+	var strength_value: Label = character.find_child("Value_strength", true, false) as Label
+	check(character.size.y >= left_scroll.size.y - 1.0 and character_body.size.y >= character.size.y,
+		"Character scroll and its content occupy the left dock's available height")
+	check(strength_value.is_visible_in_tree() and strength_value.get_global_rect().has_area() and not strength_value.text.is_empty(),
+		"Character sheet displays a real derived stat value in the viewport")
+	check(character.find_child("CharacterStat_crit_chance", true, false) == null
+		and character.find_child("CharacterStat_crit_multiplier", true, false) == null,
+		"Unimplemented critical stats are omitted instead of shown as zero")
+	print("Dock fill character: viewport=%.1f content=%.1f panel=%.1f strength_rect=%s strength=%s"
+		% [left_scroll.size.y, character_body.size.y, character.size.y,
+			str(strength_value.get_global_rect()), strength_value.text])
 	arena.hud.open_panel("talents")
 	await _frames(8)
 	var passive: Control = arena.hud._passive_panel as Control

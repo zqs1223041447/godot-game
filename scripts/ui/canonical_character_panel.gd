@@ -30,8 +30,6 @@ const STAT_ROWS: Array[Dictionary] = [
 	{"id":"accuracy","label":"命中值","format":"whole"},
 	{"id":"evasion","label":"闪避值","format":"decimal"},
 	{"id":"armour","label":"护甲","format":"decimal"},
-	{"id":"crit_chance","label":"暴击几率","format":"percent"},
-	{"id":"crit_multiplier","label":"暴击伤害","format":"multiplier"},
 	{"id":"fire_resistance","label":"火焰抗性","format":"resistance"},
 	{"id":"cold_resistance","label":"冰冷抗性","format":"resistance"},
 	{"id":"lightning_resistance","label":"闪电抗性","format":"resistance"},
@@ -77,11 +75,13 @@ func _on_visibility_changed() -> void:
 
 func _build() -> void:
 	name = "CanonicalCharacterPanel"
+	custom_minimum_size.y = 320.0
 	horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
 	_body = VBoxContainer.new()
 	_body.name = "CharacterSheetBody"
 	_body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_body.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	_body.add_theme_constant_override("separation", 9)
 	add_child(_body)
 	_progress = Label.new()

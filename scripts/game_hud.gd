@@ -574,6 +574,8 @@ func _build_dock_windows() -> void:
 			margin.add_theme_constant_override("margin_" + edge, 6 if side == "right" else 9)
 		panel.add_child(margin)
 		var stack := VBoxContainer.new()
+		stack.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		stack.size_flags_vertical = Control.SIZE_EXPAND_FILL
 		stack.add_theme_constant_override("separation", 6)
 		margin.add_child(stack)
 		var header := HBoxContainer.new()
@@ -597,6 +599,7 @@ func _build_dock_windows() -> void:
 		var content := VBoxContainer.new()
 		content.name = "LeftDockContent" if side == "left" else "RightDockContent"
 		content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		content.size_flags_vertical = Control.SIZE_EXPAND_FILL
 		content.add_theme_constant_override("separation", 7)
 		scroll.add_child(content)
 		var footer := _wrap_label("", 12, MUTED)
