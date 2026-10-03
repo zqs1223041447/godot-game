@@ -18,3 +18,5 @@
 *.otf binary
 *.glb binary
 *.blend binary
+# Migration fixtures retain exact released byte formatting for backup checks.
+tests/fixtures/v028_town/v18-*.json binary
