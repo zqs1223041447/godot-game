@@ -13,8 +13,9 @@ const TooltipFactory = preload("res://scripts/ui/crafting_controls.gd")
 const PresentationTheme = preload("res://scripts/visuals/visual_theme.gd")
 const MAX_ROWS: int = 64
 const VISIBLE_ROWS_MIN: int = 10
-const BASE_ROW_HEIGHT: float = 43.0
-const ROW_SEPARATION: float = 3.0
+const BASE_ROW_HEIGHT: float = 82.0
+const ROW_SEPARATION: float = 5.0
+const BASE_SLOT_SIZE: float = 42.0
 const ROW_FIELDS: Array[String] = [
 	"group_id", "name", "active", "main", "supports", "preview", "preview_tooltip", "binding_keycode"
 ]
@@ -176,13 +177,19 @@ func _build_row(row: Dictionary, row_index: int) -> PanelContainer:
 		panel.modulate = Color(0.70, 0.70, 0.70, 1.0)
 		panel.tooltip_text = "此技能行未激活；配置与宝石位置已保留，宝石仍可整理。"
 
-	var columns := HBoxContainer.new()
-	columns.name = "SkillGroupColumns_%02d" % row_index
-	columns.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	columns.add_theme_constant_override("separation", 4)
-	panel.add_child(columns)
+	var contents := VBoxContainer.new()
+	contents.name = "SkillGroupContents_%02d" % row_index
+	contents.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	contents.add_theme_constant_override("separation", 3)
+	panel.add_child(contents)
 
-	var title := Label.new()
+	var header := HBoxContainer.new()
+	header.name = "SkillGroupHeader_%02d" % row_index
+	header.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	header.add_theme_constant_override("separation", 6)
+	contents.add_child(header)
+
+	var title := PreviewLabel.new()
 	title.name = "SkillGroupName_%02d" % row_index
 	title.text = str(row.name) + (" · 未激活" if not bool(row.active) else "")
 	title.tooltip_text = str(row.name)
@@ -190,34 +197,45 @@ func _build_row(row: Dictionary, row_index: int) -> PanelContainer:
 	title.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	title.add_theme_font_size_override("font_size", roundi(13.0 * font_scale))
 	title.add_theme_color_override("font_color", PresentationTheme.TEXT if row.active else PresentationTheme.MUTED)
-	title.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
-	columns.add_child(title)
-
-	var main_slot := _make_slot(row, row_index, "main", -1, row.main)
-	main_slot.name = "MainGem_%02d" % row_index
-	columns.add_child(main_slot)
-	for support_index: int in range(5):
-		var supports: Array = row.supports
-		var support_slot := _make_slot(row, row_index, "support", support_index, supports[support_index])
-		support_slot.name = "SupportGem_%02d_%d" % [row_index, support_index]
-		columns.add_child(support_slot)
-
-	var preview := PreviewLabel.new()
-	preview.name = "SkillPreview_%02d" % row_index
-	preview.text = str(row.preview)
-	preview.tooltip_text = str(row.preview_tooltip)
-	preview.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
-	preview.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	preview.add_theme_font_size_override("font_size", roundi(12.0 * font_scale))
-	preview.add_theme_color_override("font_color", PresentationTheme.TEXT if row.active else PresentationTheme.MUTED)
-	preview.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	columns.add_child(preview)
-
+	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	# Keep the full compiled preview available to assistive/hover inspection;
+	# the long explanation no longer consumes a wide column beside every row.
+	title.tooltip_text = str(row.name) + "\n" + str(row.preview) + "\n" + str(row.preview_tooltip)
+	header.add_child(title)
 	var binding := _make_binding_picker(row, row_index)
 	binding.name = "SkillBinding_%02d" % row_index
-	columns.add_child(binding)
+	header.add_child(binding)
 	_binding_controls[row.group_id] = binding
+
+	var slot_row := HBoxContainer.new()
+	slot_row.name = "SkillGroupSlots_%02d" % row_index
+	slot_row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	slot_row.add_theme_constant_override("separation", 3)
+	contents.add_child(slot_row)
+	_add_labeled_slot(slot_row, row, row_index, "main", -1, row.main, "主")
+	for support_index: int in range(5):
+		var supports: Array = row.supports
+		_add_labeled_slot(slot_row, row, row_index, "support", support_index, supports[support_index], "辅%d" % (support_index + 1))
 	return panel
+
+
+func _add_labeled_slot(parent: HBoxContainer, row: Dictionary, row_index: int, role: String,
+		support_index: int, gem: Dictionary, caption: String) -> void:
+	var column := VBoxContainer.new()
+	column.name = "SkillSlotColumn_%02d_%s" % [row_index, "main" if role == "main" else str(support_index + 1)]
+	column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	column.add_theme_constant_override("separation", 1)
+	parent.add_child(column)
+	var label := Label.new()
+	label.text = caption
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.add_theme_font_size_override("font_size", roundi(11.0 * font_scale))
+	label.add_theme_color_override("font_color", PresentationTheme.MUTED)
+	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	column.add_child(label)
+	var slot := _make_slot(row, row_index, role, support_index, gem)
+	slot.name = "MainGem_%02d" % row_index if role == "main" else "SupportGem_%02d_%d" % [row_index, support_index]
+	column.add_child(slot)
 
 
 func _make_slot(row: Dictionary, row_index: int, slot_role: String, support_index: int,
@@ -342,27 +360,29 @@ func _update_density() -> void:
 		return
 	custom_minimum_size.y = 220.0 * font_scale
 	var available_width: float = maxf(size.x - 24.0, 1.0)
-	var title_width: float = clampf(available_width * 0.14, 40.0, 96.0)
-	var preview_width: float = clampf(available_width * 0.16, 48.0, 130.0)
-	var binding_width: float = 74.0 * font_scale
-	var gaps: float = 32.0
-	var slot_width: float = clampf((available_width - title_width - preview_width - binding_width - gaps) / 6.0, 24.0, 48.0)
+	var binding_width: float = minf(82.0 * font_scale, available_width * 0.30)
+	var slot_width: float = minf(BASE_SLOT_SIZE * font_scale, maxf(24.0, (available_width - 15.0) / 6.0))
+	var row_height: float = 25.0 * font_scale + slot_width + 15.0
 	for index: int in range(_row_controls.size()):
 		var panel: PanelContainer = _row_controls[index]
-		panel.custom_minimum_size.y = BASE_ROW_HEIGHT * font_scale
-		var columns: HBoxContainer = panel.get_child(0) as HBoxContainer
-		if columns == null or columns.get_child_count() != 9:
+		panel.custom_minimum_size.y = maxf(BASE_ROW_HEIGHT * font_scale, row_height)
+		var contents: VBoxContainer = panel.get_child(0) as VBoxContainer
+		if contents == null or contents.get_child_count() != 2:
 			continue
-		var title: Label = columns.get_child(0) as Label
-		title.custom_minimum_size.x = title_width
-		for slot_index: int in range(1, 7):
-			var slot: GemSlot = columns.get_child(slot_index) as GemSlot
-			slot.custom_minimum_size = Vector2(slot_width, BASE_ROW_HEIGHT * font_scale - 4.0)
-			slot.add_theme_constant_override("icon_max_width", roundi(slot_width * 0.68))
-		var preview: Label = columns.get_child(7) as Label
-		preview.custom_minimum_size.x = preview_width
-		var binding: OptionButton = columns.get_child(8) as OptionButton
+		var header: HBoxContainer = contents.get_child(0) as HBoxContainer
+		var title: Label = header.get_child(0) as Label
+		title.custom_minimum_size.x = 0.0
+		var binding: OptionButton = header.get_child(1) as OptionButton
 		binding.custom_minimum_size.x = binding_width
+		var slots: HBoxContainer = contents.get_child(1) as HBoxContainer
+		for column_index: int in range(slots.get_child_count()):
+			var column: VBoxContainer = slots.get_child(column_index) as VBoxContainer
+			column.custom_minimum_size.x = slot_width
+			var slot: GemSlot = column.get_child(1) as GemSlot
+			slot.custom_minimum_size = Vector2(slot_width, slot_width)
+			slot.add_theme_constant_override("icon_max_width", roundi(slot_width * 0.68))
+			var caption: Label = column.get_child(0) as Label
+			caption.add_theme_font_size_override("font_size", roundi(11.0 * font_scale))
 
 
 func _binding_index(keycode: int) -> int:

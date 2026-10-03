@@ -94,8 +94,11 @@ func _test_deep_snapshot_and_identity(input_rows: Array) -> void:
 	_expect(rows_view.find_child("SkillGroupRow_00", true, false) != null and rows_view.find_child("SkillGroupRow_01", true, false) != null,
 		"Two rows with the same display name retain separate stable identities")
 	_expect(_slot(0, "main").gem_uid != _slot(1, "main").gem_uid, "Same-name rows keep different item UIDs")
-	_expect(rows_view.find_child("SkillPreview_00", true, false).tooltip_text == _row("x", "x", true, "x", KEY_1).preview_tooltip,
-		"Long preview explanation is stored only in the tooltip")
+	_expect(rows_view.find_child("SkillPreview_00", true, false) == null
+		and rows_view.find_child("SkillGroupName_00", true, false).tooltip_text.contains(_row("x", "x", true, "x", KEY_1).preview_tooltip),
+		"Long preview detail stays on the named group hover without taking a wide row column")
+	_expect(rows_view.find_children("SkillSlotColumn_00_*", "VBoxContainer", true, false).size() == 6,
+		"Each skill row labels and shows its main slot plus all five support slots")
 	rows_view.set_rows([_row("group_a", "同名技能", true, "active_a", KEY_1), _row("group_b", "同名技能", false, "active_b", KEY_0)], 7)
 	await process_frame
 	_expect(rows_view.find_child("SkillGroupRows", true, false).get_child_count() == 2, "Repeated set_rows replaces controls instead of duplicating rows")
@@ -207,15 +210,19 @@ func _test_layout_and_capacity() -> void:
 	for candidate: Node in row_controls:
 		var row_control: Control = candidate as Control
 		_expect(row_control.size.x <= rows_view.size.x + 1.0, "Narrow layout keeps each row within the scroll viewport")
-	var columns: HBoxContainer = rows_view.find_child("SkillGroupColumns_00", true, false) as HBoxContainer
-	for child: Node in columns.get_children():
-		var control: Control = child as Control
-		_expect(control.position.x >= -1.0 and control.position.x + control.size.x <= columns.size.x + 1.0,
-			"Narrow-font child fits within row: " + str(child.name))
+	var slot_row: HBoxContainer = rows_view.find_child("SkillGroupSlots_00", true, false) as HBoxContainer
+	for child: Node in slot_row.get_children():
+		var column: Control = child as Control
+		_expect(column.position.x >= -1.0 and column.position.x + column.size.x <= slot_row.size.x + 1.0,
+			"Every gem slot column fits within the narrow row: " + str(child.name))
+		var slot: Control = column.get_child(1) as Control
+		_expect(slot.size.x > 0.0 and slot.size.x <= column.size.x + 1.0,
+			"Main and support drop targets retain visible hit areas: " + str(slot.name))
 	var title: Label = rows_view.find_child("SkillGroupName_00", true, false) as Label
-	var preview: Label = rows_view.find_child("SkillPreview_00", true, false) as Label
-	_expect(title.get_theme_font_size("font_size") == roundi(13.0 * 1.2) and preview.get_theme_font_size("font_size") == roundi(12.0 * 1.2),
-		"Name and preview typography follows the requested font scale")
+	var binding: OptionButton = rows_view.find_child("SkillBinding_00", true, false) as OptionButton
+	_expect(title.get_theme_font_size("font_size") == roundi(13.0 * 1.2)
+		and binding.get_theme_font_size("font_size") == roundi(12.0 * 1.2),
+		"Group name and key binding typography follow the requested font scale")
 	var too_many: Array = []
 	for index: int in range(70):
 		too_many.append(_row("group_%02d" % index, "技能 %d" % index, true, "main_%02d" % index, 0))

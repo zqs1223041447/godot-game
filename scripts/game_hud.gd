@@ -5,10 +5,11 @@ extends CanvasLayer
 const CanonicalInventoryView = preload("res://scripts/ui/canonical_inventory_panel.gd")
 const CanonicalSkillsView = preload("res://scripts/ui/canonical_skill_panel.gd")
 const CanonicalPassivesView = preload("res://scripts/ui/canonical_passive_panel.gd")
+const CanonicalCharacterView = preload("res://scripts/ui/canonical_character_panel.gd")
 const ItemHoverView = preload("res://scripts/ui/item_hover_card.gd")
 const ItemPresentation = preload("res://scripts/ui/unified_item_presentation.gd")
-const MenuRoutes = preload("res://scripts/ui/menu_route_state.gd")
-const PANEL_ROUTES: Dictionary = {"inventory":"inventory", "talents":"passive_tree", "skills":"skill_gems", "combat":"debug_build", "monsters":"debug_monsters", "pause":"pause", "settings":"settings"}
+const DockedMenus = preload("res://scripts/ui/docked_menu_state.gd")
+const OVERLAY_PANELS: Array[String] = ["talents", "combat", "monsters", "pause", "settings", "death"]
 const TypedPreview = preload("res://scripts/combat/damage_preview.gd")
 const PassivePanel = preload("res://scripts/passive_panel.gd")
 const InventoryPanelView = preload("res://scripts/inventory_panel.gd")
@@ -60,6 +61,7 @@ var _toast_left: float = 0.0
 var _inventory_panel: Control
 var _passive_panel: Control
 var _skill_support_panel: Control
+var _character_panel: Control
 var _panel_margin: MarginContainer
 var _panel_scroll: ScrollContainer
 var _modal: Control
@@ -67,8 +69,17 @@ var _panel_title: Label
 var _panel_subtitle: Label
 var _panel_body: VBoxContainer
 var _panel_footer: Label
-var _menu_routes = MenuRoutes.new()
+var _menu_routes = DockedMenus.new()
 var _windows: Dictionary = {}
+var _dock_roots: Dictionary = {}
+var _dock_bodies: Dictionary = {}
+var _dock_titles: Dictionary = {}
+var _dock_subtitles: Dictionary = {}
+var _dock_footers: Dictionary = {}
+var _dock_scrolls: Dictionary = {}
+var _dock_built: Dictionary = {}
+var _skills_dock_built: bool = false
+var _character_dock_built: bool = false
 var _close_button: Button
 var _active_panel: String = ""
 var _selected_skill_slot: int = 0
@@ -86,6 +97,7 @@ var _hover_uid := ""
 var _hover_anchor := Rect2()
 var _hover_exit_at := 0
 var _hover_compare := false
+var _drag_active: bool = false
 
 
 func setup(arena: Node) -> void:
@@ -106,6 +118,7 @@ func setup(arena: Node) -> void:
 	_build_hotbar()
 	_build_hint()
 	_build_toast()
+	_build_dock_windows()
 	_build_modal()
 	_item_hover = ItemHoverView.new()
 	_item_hover.name = "SharedItemHover"
@@ -121,6 +134,10 @@ func setup(arena: Node) -> void:
 func _process(delta: float) -> void:
 	if not is_instance_valid(_arena) or _root == null:
 		return
+	if _menu_routes.snapshot().death_latched and bool(_arena.get("alive")):
+		_menu_routes = DockedMenus.new()
+		_sync_menu_views()
+	_set_drag_active(get_viewport().gui_is_dragging())
 	if is_instance_valid(_item_hover) and _item_hover.visible:
 		var compare: bool = Input.is_key_pressed(KEY_SHIFT)
 		if compare != _hover_compare: _present_item_hover()
@@ -135,52 +152,63 @@ func _process(delta: float) -> void:
 		_toast.visible = _toast_left > 0.0
 
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_DRAG_BEGIN:
+		_set_drag_active(true)
+	elif what == NOTIFICATION_DRAG_END:
+		_set_drag_active(false)
+
+
 func is_blocking() -> bool:
-	return _active_panel == "death" or bool(_menu_routes.current_state().paused)
+	return bool(_menu_routes.snapshot().paused)
 
 
 func open_panel(panel_name: String) -> void:
-	if _root == null or (_active_panel == "death" and panel_name != "death"):
+	if _root == null:
 		return
-	if panel_name == "death":
-		_show_window("death")
-		return
-	if not PANEL_ROUTES.has(panel_name):
-		panel_name = "pause"
-	_menu_routes.request_window(PANEL_ROUTES[panel_name])
-	_show_window(panel_name)
+	var route: String = panel_name
+	if route not in ["inventory", "skills", "character", "talents", "combat", "monsters", "pause", "settings", "death"]:
+		route = "pause"
+	_menu_routes.request(route)
+	_sync_menu_views()
 
 
 func handle_menu_key(key: int, pressed: bool = true, echo: bool = false) -> bool:
 	if key not in [KEY_I, KEY_B, KEY_T, KEY_K, KEY_F6, KEY_F7, KEY_ESCAPE]:
 		return false
-	if _active_panel == "death" or not bool(_arena.get("alive")):
+	if not pressed:
+		return false
+	if _menu_routes.snapshot().death_latched and not bool(_arena.get("alive")):
 		return true
-	var transition: Dictionary = _menu_routes.handle_key(key, pressed, echo)
-	if not transition.changed:
-		return true
-	if transition.window.is_empty():
-		_hide_windows()
-	else:
-		for name: String in PANEL_ROUTES:
-			if PANEL_ROUTES[name] == transition.window:
-				_show_window(name)
-				break
+	var key_name: String = ""
+	match key:
+		KEY_I: key_name = "i"
+		KEY_B: key_name = "b"
+		KEY_T: key_name = "t"
+		KEY_K: key_name = "k"
+		KEY_F6: key_name = "f6"
+		KEY_F7: key_name = "f7"
+		KEY_ESCAPE: key_name = "escape"
+	_menu_routes.handle_key(key_name, echo)
+	_sync_menu_views()
 	return true
 
 
 func close_panel() -> void:
-	if _active_panel == "death" and not bool(_arena.get("alive")):
-		return
-	if not _menu_routes.current_state().window.is_empty():
-		_menu_routes.handle_key(KEY_ESCAPE)
-	_hide_windows()
+	var snapshot: Dictionary = _menu_routes.snapshot()
+	if snapshot.death_latched:
+		_menu_routes.close("death")
+	else:
+		_menu_routes.close("overlay")
+	_sync_menu_views()
 
 
 func _hide_windows() -> void:
 	_dismiss_item_hover()
 	_cancel_encounter_request()
 	_active_panel = ""
+	for dock: Control in _dock_roots.values():
+		dock.hide()
 	for view: Dictionary in _windows.values():
 		view.root.hide()
 
@@ -203,10 +231,77 @@ func _show_window(panel_name: String) -> void:
 	_rebuild_panel()
 
 
+func _sync_menu_views() -> void:
+	if _root == null:
+		return
+	_dismiss_item_hover()
+	var snapshot: Dictionary = _menu_routes.snapshot()
+	var nav: Control = _root.get_node_or_null("Navigation") as Control
+	if is_instance_valid(nav): nav.visible = not bool(snapshot.paused)
+	if not str(snapshot.overlay).is_empty():
+		var overlay: String = str(snapshot.overlay)
+		var overlay_panel: String = "talents" if overlay == "talents" else overlay
+		if not _windows.has(overlay_panel):
+			overlay_panel = "pause"
+		if _active_panel != overlay_panel or not bool(_windows[overlay_panel].root.visible):
+			_show_window(overlay_panel)
+		else:
+			for dock: Control in _dock_roots.values(): dock.hide()
+		return
+	_cancel_encounter_request()
+	for view: Dictionary in _windows.values(): view.root.hide()
+	var left: String = str(snapshot.left)
+	var right: bool = bool(snapshot.right_inventory)
+	for dock_name: String in ["left", "right"]:
+		var dock: Control = _dock_roots[dock_name]
+		dock.visible = (dock_name == "left" and not left.is_empty()) or (dock_name == "right" and right)
+	if not left.is_empty():
+		_active_panel = left
+		if left == "skills": _build_skills_dock()
+		elif left == "character": _build_character_dock()
+	if right:
+		if left.is_empty(): _active_panel = "inventory"
+		_build_inventory_panel()
+	if left.is_empty() and not right:
+		_active_panel = ""
+	_dismiss_item_hover()
+	_apply_dock_layout()
+
+
+func _close_dock(which: String) -> void:
+	_menu_routes.close("left" if which == "left" else "right")
+	_sync_menu_views()
+
+
+func _set_drag_active(active: bool) -> void:
+	if _drag_active == active:
+		return
+	_drag_active = active
+	if active:
+		_dismiss_item_hover()
+
+
 func notify(message: String) -> void:
 	if _toast_label == null:
 		return
 	if is_blocking():
+		var menu_state: Dictionary = _menu_routes.snapshot()
+		var target: Label = null
+		if not str(menu_state.overlay).is_empty():
+			target = _panel_footer
+		elif bool(menu_state.right_inventory):
+			target = _dock_footers.right
+		elif not str(menu_state.left).is_empty():
+			target = _dock_footers.left
+		if is_instance_valid(target):
+			if _state != null and not _state.save_block_reason().is_empty():
+				target.text = "原存档已保护，本次进度未写入；请先备份并恢复有效存档"
+				target.tooltip_text = _state.save_block_reason() + "\n" + message
+				target.add_theme_color_override("font_color", GOLD)
+				return
+			target.text = message
+			target.add_theme_color_override("font_color", CYAN)
+			return
 		if _state != null and not _state.save_block_reason().is_empty():
 			_panel_footer.text = "原存档已保护，本次进度未写入；请先备份并恢复有效存档"
 			_panel_footer.tooltip_text = _state.save_block_reason() + "\n" + message
@@ -229,16 +324,17 @@ func refresh_build() -> void:
 		return
 	if not _hover_uid.is_empty(): _present_item_hover()
 	_update_live()
-	if _active_panel == "talents" and is_instance_valid(_passive_panel):
-		_passive_panel.refresh()
-	elif _active_panel == "inventory" and is_instance_valid(_inventory_panel):
+	var menus: Dictionary = _menu_routes.snapshot()
+	if not str(menus.overlay).is_empty():
+		if menus.overlay == "talents" and is_instance_valid(_passive_panel): _passive_panel.refresh()
+		elif not str(menus.overlay) in ["combat", "monsters"]: _rebuild_panel()
+		return
+	if bool(menus.right_inventory) and is_instance_valid(_inventory_panel):
 		_inventory_panel.refresh()
-	elif _active_panel == "skills":
-		var scroll_position: int = _panel_scroll.scroll_vertical
-		_rebuild_panel()
-		_panel_scroll.set_deferred("scroll_vertical", scroll_position)
-	elif not _active_panel.is_empty():
-		_rebuild_panel()
+	if menus.left == "skills" and is_instance_valid(_skill_support_panel):
+		_skill_support_panel.refresh()
+	if menus.left == "character" and is_instance_valid(_character_panel):
+		_character_panel.refresh()
 
 
 func _make_theme() -> Theme:
@@ -324,10 +420,11 @@ func _build_navigation() -> void:
 	nav.name = "Navigation"
 	nav.add_theme_constant_override("separation", 7)
 	_place(nav, Rect2(-506, 20, 486, 42), Control.PRESET_TOP_RIGHT)
-	nav.add_child(_button("I  装备背包", "InventoryButton", open_panel.bind("inventory"), 133))
-	nav.add_child(_button("T  天赋", "TalentsButton", open_panel.bind("talents"), 104))
-	nav.add_child(_button("K  技能", "SkillsButton", open_panel.bind("skills"), 104))
-	nav.add_child(_button("Esc  暂停", "PauseButton", open_panel.bind("pause"), 112))
+	nav.add_child(_button("I  行囊", "InventoryButton", open_panel.bind("inventory"), 112))
+	nav.add_child(_button("角色属性", "CharacterButton", open_panel.bind("character"), 86))
+	nav.add_child(_button("T  天赋", "TalentsButton", open_panel.bind("talents"), 82))
+	nav.add_child(_button("K  技能", "SkillsButton", open_panel.bind("skills"), 82))
+	nav.add_child(_button("Esc  暂停", "PauseButton", open_panel.bind("pause"), 96))
 
 
 func _build_vitals() -> void:
@@ -452,13 +549,85 @@ func _build_toast() -> void:
 
 
 func _build_modal() -> void:
-	for panel_name: String in ["inventory", "talents", "skills", "combat", "monsters", "pause", "settings", "death"]:
+	for panel_name: String in OVERLAY_PANELS:
 		_build_window(panel_name)
+
+
+func _build_dock_windows() -> void:
+	for side: String in ["left", "right"]:
+		var dock_root := Control.new()
+		dock_root.name = "LeftDockRoot" if side == "left" else "RightDockRoot"
+		dock_root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		dock_root.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_root.add_child(dock_root)
+		var panel := PanelContainer.new()
+		panel.name = "SkillsCharacterDock" if side == "left" else "InventoryDock"
+		panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		panel.anchor_left = 0.0 if side == "left" else 2.0 / 3.0
+		panel.anchor_right = 1.0 / 3.0 if side == "left" else 1.0
+		panel.mouse_filter = Control.MOUSE_FILTER_STOP
+		panel.add_theme_stylebox_override("panel", PresentationTheme.panel(PANEL, BORDER.lightened(0.12), 8, 1, 6))
+		dock_root.add_child(panel)
+		var margin := MarginContainer.new()
+		margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		for edge: String in ["left", "right", "top", "bottom"]:
+			margin.add_theme_constant_override("margin_" + edge, 6 if side == "right" else 9)
+		panel.add_child(margin)
+		var stack := VBoxContainer.new()
+		stack.add_theme_constant_override("separation", 6)
+		margin.add_child(stack)
+		var header := HBoxContainer.new()
+		stack.add_child(header)
+		var title := _label("技能", 20, GOLD) if side == "left" else _label("行囊 · 装备", 20, GOLD)
+		title.name = "LeftDockTitle" if side == "left" else "RightDockTitle"
+		title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		header.add_child(title)
+		var close := _button("关闭", "CloseLeftDock" if side == "left" else "CloseRightDock", _close_dock.bind(side), 58)
+		header.add_child(close)
+		var subtitle := _wrap_label("技能宝石组合", 12, MUTED) if side == "left" else _wrap_label("九个装备位 · 分页共用行囊", 12, MUTED)
+		subtitle.name = "LeftDockSubtitle" if side == "left" else "RightDockSubtitle"
+		stack.add_child(subtitle)
+		var scroll := ScrollContainer.new()
+		scroll.name = "LeftDockScroll" if side == "left" else "RightDockScroll"
+		scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+		scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
+		stack.add_child(scroll)
+		var content := VBoxContainer.new()
+		content.name = "LeftDockContent" if side == "left" else "RightDockContent"
+		content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		content.add_theme_constant_override("separation", 7)
+		scroll.add_child(content)
+		var footer := _wrap_label("", 12, MUTED)
+		footer.name = "LeftDockFeedback" if side == "left" else "RightDockFeedback"
+		stack.add_child(footer)
+		_dock_roots[side] = dock_root
+		_dock_bodies[side] = content
+		_dock_titles[side] = title
+		_dock_subtitles[side] = subtitle
+		_dock_footers[side] = footer
+		_dock_scrolls[side] = scroll
+		_dock_built[side] = false
+		dock_root.hide()
+
+
+func _apply_dock_layout() -> void:
+	# Anchor widths stay at one third in logical canvas units at every viewport size.
+	for side: String in ["left", "right"]:
+		if not _dock_roots.has(side): continue
+		var panel: Control = _dock_roots[side].get_child(0) as Control
+		panel.offset_left = 0.0
+		panel.offset_right = 0.0
+		panel.offset_top = 0.0
+		panel.offset_bottom = 0.0
+		if _dock_roots[side].visible:
+			PresentationTheme.apply_font_scale(panel, _preferences.font_scale)
 
 
 func _build_window(panel_name: String) -> void:
 	_modal = Control.new()
-	_modal.name = str(PANEL_ROUTES.get(panel_name, "death")).to_pascal_case() + "Window"
+	_modal.name = panel_name.to_pascal_case() + "Window"
 	_modal.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_modal.mouse_filter = Control.MOUSE_FILTER_STOP
 	_root.add_child(_modal)
@@ -692,35 +861,80 @@ func _slot_name(slot: String) -> String:
 
 
 func _build_inventory_panel() -> void:
+	var body: VBoxContainer = _dock_bodies.right as VBoxContainer
+	_dock_titles.right.text = "行囊 · 装备"
 	if _state.has_method("equipped_items"):
-		_panel_title.text = "行囊 · 装备"
-		_panel_subtitle.text = "九个装备目标 · 装备、珠宝与宝石共用行囊"
 		if not is_instance_valid(_inventory_panel):
 			_inventory_panel = CanonicalInventoryView.new()
 			_inventory_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			_inventory_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
-			_panel_body.add_child(_inventory_panel)
+			body.add_child(_inventory_panel)
 			_inventory_panel.setup(_state)
 			_inventory_panel.feedback.connect(notify)
 			_inventory_panel.item_hovered.connect(_show_item_hover)
 			_inventory_panel.hover_left.connect(_leave_item_hover)
+			_inventory_panel.character_requested.connect(open_panel.bind("character"))
 		_inventory_panel.show()
 		_inventory_panel.refresh()
-		_panel_footer.text = "拖动装备选择目标 · 悬停详情 · Shift 与已装备物品对比"
-		return
-	_panel_title.text = "行囊 · 装备"
-	_panel_subtitle.text = "整理格子，搭配装备  /  珠宝与装备共用背包"
-	if not is_instance_valid(_inventory_panel):
-		_inventory_panel = InventoryPanelView.new()
-		_inventory_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		_inventory_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
-		_panel_body.add_child(_inventory_panel)
-		_inventory_panel.setup(_state)
-		_inventory_panel.feedback.connect(notify)
-		_inventory_panel.open_passives_requested.connect(_open_passives_from_inventory)
-	_inventory_panel.show()
-	_inventory_panel.refresh()
-	_panel_footer.text = "拖动摆放物品 · 装备拖入对应槽位 · 珠宝在天赋星图镶嵌 · 一键整理不改变已装备物品"
+		_dock_subtitles.right.text = "九个装备目标 · 装备、珠宝与宝石共用行囊"
+		_dock_footers.right.text = "拖动装备选择目标 · 悬停详情 · Shift 与已装备物品对比"
+	else:
+		if not is_instance_valid(_inventory_panel):
+			_inventory_panel = InventoryPanelView.new()
+			_inventory_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			_inventory_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
+			body.add_child(_inventory_panel)
+			_inventory_panel.setup(_state)
+			_inventory_panel.feedback.connect(notify)
+			_inventory_panel.open_passives_requested.connect(_open_passives_from_inventory)
+		_dock_subtitles.right.text = "整理格子，搭配装备 · 珠宝与装备共用行囊"
+		_dock_footers.right.text = "拖动摆放物品 · 装备拖入对应槽位 · 珠宝在天赋星图镶嵌"
+		_inventory_panel.show()
+		_inventory_panel.refresh()
+	_dock_built.right = true
+
+
+func _build_skills_dock() -> void:
+	_dock_titles.left.text = "技能组合"
+	if not _skills_dock_built:
+		var previous_body: VBoxContainer = _panel_body
+		var previous_title: Label = _panel_title
+		var previous_subtitle: Label = _panel_subtitle
+		var previous_footer: Label = _panel_footer
+		var previous_active: String = _active_panel
+		_panel_body = _dock_bodies.left
+		_panel_title = _dock_titles.left
+		_panel_subtitle = _dock_subtitles.left
+		_panel_footer = _dock_footers.left
+		_active_panel = "skills"
+		_build_skills_panel()
+		_panel_body = previous_body
+		_panel_title = previous_title
+		_panel_subtitle = previous_subtitle
+		_panel_footer = previous_footer
+		_active_panel = previous_active
+		_skills_dock_built = true
+	if is_instance_valid(_character_panel): _character_panel.hide()
+	if is_instance_valid(_skill_support_panel):
+		_skill_support_panel.show()
+		_skill_support_panel.refresh()
+	_dock_subtitles.left.text = "每组 1 主 + 5 辅 · 绑定施放键"
+	_dock_footers.left.text = "从右侧行囊拖入宝石；右键孔位可放回"
+
+
+func _build_character_dock() -> void:
+	_dock_titles.left.text = "角色属性"
+	_dock_subtitles.left.text = "当前装备、天赋与技能计算结果"
+	_dock_footers.left.text = "只读属性；经验与未用天赋点随战斗实时更新"
+	if not is_instance_valid(_character_panel):
+		_character_panel = CanonicalCharacterView.new()
+		_character_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		_character_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		_dock_bodies.left.add_child(_character_panel)
+		_character_panel.setup(_state)
+	if is_instance_valid(_skill_support_panel): _skill_support_panel.hide()
+	_character_panel.show()
+	_character_panel.refresh()
 
 
 func _open_passives_from_inventory() -> void:
@@ -1110,9 +1324,8 @@ func _slot_skill(id: String) -> void:
 
 
 func _restart() -> void:
-	if not _menu_routes.current_state().window.is_empty():
-		_menu_routes.handle_key(KEY_ESCAPE)
-	_hide_windows()
+	_menu_routes = DockedMenus.new()
+	_sync_menu_views()
 	_arena.call("restart_run")
 	notify("新一轮试炼开始，构筑已保留")
 
@@ -1133,9 +1346,17 @@ func _apply_presentation() -> void:
 	_root.scale = Vector2.ONE * _preferences.ui_scale
 	_root.size = get_viewport().get_visible_rect().size / _preferences.ui_scale
 	_root.theme.default_font_size = roundi(16 * _preferences.font_scale)
-	if is_instance_valid(_skill_support_panel):
+	if is_instance_valid(_skill_support_panel) and _skill_support_panel.is_visible_in_tree():
 		_skill_support_panel.font_scale = _preferences.font_scale
-	PresentationTheme.apply_font_scale(_root, _preferences.font_scale)
+	if is_instance_valid(_character_panel) and _character_panel.is_visible_in_tree():
+		_character_panel.font_scale = _preferences.font_scale
+	if is_instance_valid(_passive_panel) and _passive_panel.is_visible_in_tree():
+		_passive_panel.font_scale = _preferences.font_scale
+	for view: Dictionary in _windows.values():
+		if view.root.visible: PresentationTheme.apply_font_scale(view.root, _preferences.font_scale)
+	for dock: Control in _dock_roots.values():
+		if dock.visible: PresentationTheme.apply_font_scale(dock, _preferences.font_scale)
+	_apply_dock_layout()
 	var width: float = _root.size.x
 	var vitals: Control = _root.get_node("PlayerVitals")
 	vitals.offset_left = 16
@@ -1227,6 +1448,9 @@ func _style_dark_hud() -> void:
 
 
 func _show_item_hover(uid: String,anchor: Rect2) -> void:
+	if _drag_active or get_viewport().gui_is_dragging():
+		_set_drag_active(true)
+		return
 	if not _state.has_method("item") or _state.item(uid).is_empty(): return
 	_hover_uid = uid
 	_hover_anchor = anchor
@@ -1235,6 +1459,9 @@ func _show_item_hover(uid: String,anchor: Rect2) -> void:
 
 
 func _present_item_hover() -> void:
+	if _drag_active or get_viewport().gui_is_dragging():
+		_set_drag_active(true)
+		return
 	if _hover_uid.is_empty() or not is_instance_valid(_item_hover): return
 	var view: Dictionary = ItemPresentation.view(_state,_hover_uid)
 	if view.is_empty():
@@ -1242,7 +1469,7 @@ func _present_item_hover() -> void:
 		return
 	_hover_compare = Input.is_key_pressed(KEY_SHIFT)
 	_item_hover.font_scale = _preferences.font_scale
-	var anchor: Rect2 = _root.get_global_transform().affine_inverse() * _hover_anchor
+	var anchor: Rect2 = _root.get_global_transform_with_canvas().affine_inverse() * _hover_anchor
 	_item_hover.present(view,ItemPresentation.comparisons(_state,_hover_uid),anchor,Rect2(Vector2.ZERO,_root.size),_hover_compare)
 
 

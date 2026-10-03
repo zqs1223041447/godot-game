@@ -28,6 +28,8 @@ var _subtree := "standard"
 var _loaded_graph := ""
 var _refreshing := false
 var _socket_uid := ""
+var _refresh_dirty: bool = true
+var refresh_generation: int = 0
 
 class WrappedLabel extends Label:
 	func _make_custom_tooltip(text:String)->Object:return CraftControls.wrapped_tooltip(self,text)
@@ -48,7 +50,9 @@ func setup(state: RefCounted,path: String="user://build_save.json")->void:
 	save_path=path
 	selected_node_id=Data.start_for_class(int(model.snapshot().talents.class_id))
 	if _tree==null: _build()
-	if not model.changed.is_connected(refresh): model.changed.connect(refresh)
+	if not model.changed.is_connected(_on_model_changed): model.changed.connect(_on_model_changed)
+	if not visibility_changed.is_connected(_on_visibility_changed): visibility_changed.connect(_on_visibility_changed)
+	_refresh_dirty=true
 	refresh()
 
 
@@ -163,6 +167,7 @@ func _build()->void:
 
 func refresh()->void:
 	if model==null or _tree==null or _refreshing:return
+	if not _refresh_dirty:return
 	_refreshing=true
 	var snapshot:Dictionary=model.snapshot()
 	_class.select(int(snapshot.talents.class_id))
@@ -180,6 +185,17 @@ func refresh()->void:
 	_refresh_details()
 	_refresh_overlay()
 	_refreshing=false
+	_refresh_dirty=false
+	refresh_generation+=1
+
+
+func _on_model_changed()->void:
+	_refresh_dirty=true
+	if is_visible_in_tree():refresh()
+
+
+func _on_visibility_changed()->void:
+	if is_visible_in_tree() and _refresh_dirty:refresh()
 
 
 func _load_graph()->void:

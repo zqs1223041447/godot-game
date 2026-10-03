@@ -14,7 +14,7 @@ const PresentationTheme = preload("res://scripts/visuals/visual_theme.gd")
 
 const COLUMNS: int = 12
 const ROWS: int = 8
-const DEFAULT_CELL_SIZE: float = 42.0
+const MAX_CELL_SIZE: float = 64.0
 const EDGE_INSET: float = 8.0
 const ENTRY_KINDS: Array[String] = ["equipment", "jewel", "skill_gem", "support_gem"]
 const ICON_ENTRY_KINDS: Array[String] = ["skill_gem", "support_gem"]
@@ -28,6 +28,11 @@ const DROP_RED := Color("a13b2d")
 
 var _items: Array[Dictionary] = []
 var _revision: int = 0
+var _columns: int = COLUMNS
+var _rows: int = ROWS
+var _pages: int = 1
+var _page: int = 0
+var _uses_page_contract: bool = false
 var _selected_uid: String = ""
 var _hovered_uid: String = ""
 var _hover_anchor: Rect2 = Rect2()
@@ -78,6 +83,46 @@ func set_items(entries: Array, revision: int) -> void:
 	queue_redraw()
 
 
+## Layout and selected page are view state supplied by the owning model.
+## The grid never persists a page or derives bag capacity itself.
+func set_bag_layout(layout: Dictionary, page: int) -> void:
+	if not layout.get("columns") is int or not layout.get("rows") is int:
+		return
+	var next_columns: int = int(layout.columns)
+	var next_rows: int = int(layout.rows)
+	var next_pages: int = int(layout.get("pages", 1))
+	if next_columns <= 0 or next_rows <= 0 or next_pages <= 0:
+		return
+	var next_page: int = clampi(page, 0, next_pages - 1)
+	var changed_layout: bool = _columns != next_columns or _rows != next_rows or _pages != next_pages or _page != next_page
+	_columns = next_columns
+	_rows = next_rows
+	_pages = next_pages
+	_page = next_page
+	_uses_page_contract = layout.has("pages")
+	if changed_layout:
+		_preview_uid = ""
+		_preview_valid = false
+		if _has_pointer: _update_hover(item_at_position(_last_pointer))
+		queue_redraw()
+
+
+func bag_page() -> int:
+	return _page
+
+
+func bag_page_count() -> int:
+	return _pages
+
+
+func grid_columns() -> int:
+	return _columns
+
+
+func grid_rows() -> int:
+	return _rows
+
+
 func set_drop_validator(validator: Callable) -> void:
 	_drop_validator = validator
 
@@ -88,14 +133,14 @@ func set_external_item_resolver(resolver: Callable) -> void:
 	_external_item_resolver = resolver
 
 
-## Current cell pitch in logical CanvasItem units, capped at 42.
+## Current cell pitch in logical CanvasItem units, capped at MAX_CELL_SIZE.
 func grid_cell_size() -> float:
 	return _cell_pitch()
 
 
 ## Grid board rectangle in this Control's local logical coordinates.
 func grid_rect() -> Rect2:
-	return Rect2(_grid_origin(), Vector2(COLUMNS, ROWS) * _cell_pitch())
+	return Rect2(_grid_origin(), Vector2(_columns, _rows) * _cell_pitch())
 
 
 func cell_rect(cell: Vector2i) -> Rect2:
@@ -146,8 +191,8 @@ func _draw() -> void:
 		return
 	var board: Rect2 = grid_rect()
 	draw_rect(board, Color("d8c39a"))
-	for y: int in range(ROWS):
-		for x: int in range(COLUMNS):
+	for y: int in range(_rows):
+		for x: int in range(_columns):
 			var cell: Rect2 = cell_rect(Vector2i(x, y)).grow(-1.0)
 			draw_rect(cell, CELL_LIGHT if (x + y) % 2 == 0 else CELL_DARK)
 			draw_rect(cell, CELL_LINE, false, 1.0)
@@ -314,17 +359,23 @@ func _evaluate_drop(at_position: Vector2, data: Variant) -> Dictionary:
 		var offset_fits: bool = grab_offset.x >= 0 and grab_offset.y >= 0 \
 				and grab_offset.x < dimensions.x and grab_offset.y < dimensions.y
 		var destination_fits: bool = destination_cell.x >= 0 and destination_cell.y >= 0 \
-				and destination_cell.x + dimensions.x <= COLUMNS and destination_cell.y + dimensions.y <= ROWS
+				and destination_cell.x + dimensions.x <= _columns and destination_cell.y + dimensions.y <= _rows
 		if offset_fits and destination_fits and _drop_validator.is_valid():
 			var destination := {"kind": "bag", "x": destination_cell.x, "y": destination_cell.y}
-			accepted = bool(_drop_validator.call(uid, destination, source_revision))
+			if _uses_page_contract: destination["page"] = _page
+			var validator_result: Variant = _drop_validator.call(uid, destination, source_revision)
+			accepted = bool(validator_result)
 			# The validator may synchronously refresh the parent snapshot.
-			accepted = accepted and source_revision == _revision and not _drag_entry_for_uid(uid).is_empty()
+			var revision_still_current: bool = source_revision == _revision
+			var item_still_resolves: bool = not _drag_entry_for_uid(uid).is_empty()
+			accepted = accepted and revision_still_current and item_still_resolves
 	_preview_valid = accepted
 	var result: Dictionary = {"accepted": accepted}
 	if accepted:
 		result["uid"] = uid
-		result["destination"] = {"kind": "bag", "x": destination_cell.x, "y": destination_cell.y}
+		var result_destination := {"kind": "bag", "x": destination_cell.x, "y": destination_cell.y}
+		if _uses_page_contract: result_destination["page"] = _page
+		result["destination"] = result_destination
 		result["revision"] = source_revision
 	return result
 
@@ -394,11 +445,11 @@ func _update_hover(uid: String) -> void:
 func _cell_pitch() -> float:
 	var available_width: float = maxf(0.0, size.x - EDGE_INSET * 2.0)
 	var available_height: float = maxf(0.0, size.y - EDGE_INSET * 2.0)
-	return maxf(0.0, minf(DEFAULT_CELL_SIZE, minf(available_width / COLUMNS, available_height / ROWS)))
+	return maxf(0.0, minf(MAX_CELL_SIZE, minf(available_width / _columns, available_height / _rows)))
 
 
 func _grid_origin() -> Vector2:
-	var board_size := Vector2(COLUMNS, ROWS) * _cell_pitch()
+	var board_size := Vector2(_columns, _rows) * _cell_pitch()
 	var free_space: Vector2 = size - board_size
 	return Vector2(maxf(EDGE_INSET, free_space.x * 0.5), maxf(EDGE_INSET, free_space.y * 0.5))
 
@@ -430,7 +481,7 @@ func _drag_entry_for_uid(uid: String) -> Dictionary:
 	if not value is Dictionary or value.size() != 2 or value.get("uid") != uid or not value.get("size") is Vector2i:
 		return {}
 	var dimensions: Vector2i = value.size
-	if dimensions.x <= 0 or dimensions.y <= 0 or dimensions.x > COLUMNS or dimensions.y > ROWS: return {}
+	if dimensions.x <= 0 or dimensions.y <= 0 or dimensions.x > _columns or dimensions.y > _rows: return {}
 	return value.duplicate(true)
 
 
@@ -439,7 +490,7 @@ func _has_uid(uid: String) -> bool:
 
 
 func _cell_is_inside(cell: Vector2i) -> bool:
-	return cell.x >= 0 and cell.y >= 0 and cell.x < COLUMNS and cell.y < ROWS
+	return cell.x >= 0 and cell.y >= 0 and cell.x < _columns and cell.y < _rows
 
 
 func _is_icon_entry(kind: String) -> bool:
@@ -474,4 +525,4 @@ func _valid_entry(value: Dictionary) -> bool:
 	var dimensions: Vector2i = value["size"]
 	var cell: Vector2i = value["cell"]
 	return dimensions.x > 0 and dimensions.y > 0 and cell.x >= 0 and cell.y >= 0 \
-		and cell.x + dimensions.x <= COLUMNS and cell.y + dimensions.y <= ROWS
+		and cell.x + dimensions.x <= _columns and cell.y + dimensions.y <= _rows
