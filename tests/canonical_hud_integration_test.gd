@@ -88,7 +88,13 @@ func run()->void:
 	skills._bind("group_000002",KEY_F1,model.revision())
 	check(model.group_for_key(KEY_F1)=="group_000002","K binding controller commits same group")
 	await capture("skills-five-links")
-	hud.close_panel()
+	hud.handle_menu_key(KEY_ESCAPE, true, false)
+	check(hud.is_blocking() and hud._menu_routes.snapshot().left.is_empty()
+		and hud._menu_routes.snapshot().right_inventory,
+		"First Escape closes the most recently opened skills dock and keeps inventory paused")
+	hud.handle_menu_key(KEY_ESCAPE, true, false)
+	check(not hud.is_blocking() and not hud._menu_routes.snapshot().right_inventory,
+		"Second Escape closes the remaining inventory dock and resumes combat")
 	arena.mana=arena._stats.max_mana
 	var event:=InputEventKey.new()
 	event.physical_keycode=KEY_F1
