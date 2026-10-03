@@ -4,10 +4,10 @@ extends RefCounted
 ## Runtime skill/support behavior remains owned by GameData and SupportRegistry.
 const Data = preload("res://scripts/game_data.gd")
 const Supports = preload("res://scripts/combat/support_registry.gd")
+const UID_MAX_LENGTH: int = 128
 const SKILL_PREFIX: String = "skill:"
 const SUPPORT_PREFIX: String = "support:"
-const SKILL_ICON_ROOT: String = "res://docs/reference/art/skills/"
-const SUPPORT_ICON_ROOT: String = "res://docs/reference/art/supports/"
+const ICON_ROOT: String = "res://assets/ui/grimoire/"
 
 
 ## Return detached metadata for all currently defined 8 skills and 16 supports.
@@ -86,6 +86,10 @@ static func metadata_for_instance(value: Variant) -> Dictionary:
 static func _skill_definition(skill_id: String) -> Dictionary:
 	var source: Dictionary = Data.SKILLS[skill_id]
 	var capabilities: Array = source.get("capabilities", []).duplicate(true)
+	var icon_path: String = ICON_ROOT + skill_id + ".png"
+	var icon_texture: Texture2D = ResourceLoader.load(icon_path) as Texture2D
+	if icon_texture == null:
+		return {}
 	return {
 		"definition_id": SKILL_PREFIX + skill_id,
 		"kind": "skill_gem",
@@ -93,7 +97,8 @@ static func _skill_definition(skill_id: String) -> Dictionary:
 		"short_name": source.get("short_name", ""),
 		"description": source.get("description", ""),
 		"family": "",
-		"icon": SKILL_ICON_ROOT + skill_id + ".png",
+		"icon": icon_path,
+		"icon_texture": icon_texture,
 		"glyph": source.get("icon", ""),
 		"size": [1, 1],
 		"skill_id": skill_id,
@@ -109,6 +114,10 @@ static func _support_definition(support_id: String) -> Dictionary:
 	if source.is_empty():
 		return {}
 	var capabilities: Array = source.get("requires", []).duplicate(true)
+	var icon_path: String = ICON_ROOT + support_id + ".png"
+	var icon_texture: Texture2D = ResourceLoader.load(icon_path) as Texture2D
+	if icon_texture == null:
+		return {}
 	return {
 		"definition_id": SUPPORT_PREFIX + support_id,
 		"kind": "support_gem",
@@ -116,7 +125,8 @@ static func _support_definition(support_id: String) -> Dictionary:
 		"short_name": source.get("name", ""),
 		"description": source.get("description", ""),
 		"family": source.get("family", ""),
-		"icon": SUPPORT_ICON_ROOT + support_id + ".png",
+		"icon": icon_path,
+		"icon_texture": icon_texture,
 		"glyph": "",
 		"size": [1, 1],
 		"skill_id": "",
@@ -128,4 +138,9 @@ static func _support_definition(support_id: String) -> Dictionary:
 
 
 static func _valid_uid(value: Variant) -> bool:
-	return value is String and not value.strip_edges().is_empty()
+	if not value is String or value.is_empty() or value.length() > UID_MAX_LENGTH or value != value.strip_edges():
+		return false
+	for byte: int in value.to_utf8_buffer():
+		if byte < 32 or byte == 127:
+			return false
+	return true
