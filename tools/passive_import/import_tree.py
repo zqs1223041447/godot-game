@@ -431,6 +431,49 @@ def build_normalized(
     standard_internal, standard_boundary = partition_edges(standard_set)
     standard_positioned_ids = sorted_ids(standard_set.intersection(positions))
     standard_unpositioned_ids = sorted_ids(standard_set - set(positions))
+    # This is the only adjacency intended for a future default standard-tree
+    # allocator. It excludes the non-allocatable logical root, every edge that
+    # crosses a subtree partition, and any endpoint without a source position.
+    allocation_node_ids = sorted_ids(
+        node_id for node_id in standard_positioned_ids if node_id != "root"
+    )
+    allocation_node_set = set(allocation_node_ids)
+    allocation_edges = [
+        edge for edge in edges
+        if edge["a"] in allocation_node_set
+        and edge["b"] in allocation_node_set
+        and not edge["crosses_partition"]
+        and edge["a"] != "root"
+        and edge["b"] != "root"
+    ]
+    allocation_edge_ids = [edge["id"] for edge in allocation_edges]
+    allocation_adjacency: dict[str, list[str]] = {
+        node_id: [] for node_id in allocation_node_ids
+    }
+    for edge in allocation_edges:
+        allocation_adjacency[edge["a"]].append(edge["b"])
+        allocation_adjacency[edge["b"]].append(edge["a"])
+    allocation_adjacency = {
+        node_id: sorted_ids(neighbors)
+        for node_id, neighbors in allocation_adjacency.items()
+    }
+    allocation_start_ids = [start["node_id"] for start in class_start_nodes]
+    if any(start_id not in allocation_node_set for start_id in allocation_start_ids):
+        raise ImportErrorDetail("a class start is missing from the default allocation graph")
+    if "root" in allocation_adjacency or any(
+        "root" in neighbors for neighbors in allocation_adjacency.values()
+    ):
+        raise ImportErrorDetail("logical root leaked into the default allocation graph")
+    allocation_edge_id_set = set(allocation_edge_ids)
+    root_edge_ids = [edge["id"] for edge in edges if "root" in (edge["a"], edge["b"])]
+    cross_partition_edge_ids = [edge["id"] for edge in edges if edge["crosses_partition"]]
+    unpositioned_edge_ids = [
+        edge["id"] for edge in edges
+        if edge["a"] not in positions or edge["b"] not in positions
+    ]
+    excluded_allocation_edge_ids = [
+        edge["id"] for edge in edges if edge["id"] not in allocation_edge_id_set
+    ]
 
     special_ascendancies: dict[str, dict[str, Any]] = {}
     for name, ids in ascendancy_ids.items():
@@ -525,6 +568,12 @@ def build_normalized(
         "source_out_links_without_matching_in_entry": source_out_only,
         "source_in_links_without_matching_out_entry": source_in_only,
         "edges_crossing_partitions": boundary_edge_count,
+        "default_allocation_nodes": len(allocation_node_ids),
+        "default_allocation_edges": len(allocation_edge_ids),
+        "default_allocation_root_edges_excluded": len(root_edge_ids),
+        "default_allocation_cross_partition_edges_excluded": len(cross_partition_edge_ids),
+        "default_allocation_unpositioned_edges_excluded": len(unpositioned_edge_ids),
+        "default_allocation_source_edges_excluded": len(excluded_allocation_edge_ids),
         "classes": len(classes),
         "class_start_nodes": len(class_start_nodes),
         "alternate_ascendancies": len(alternate_ascendancies),
@@ -616,6 +665,23 @@ def build_normalized(
             ),
             "internal_edge_ids": standard_internal,
             "boundary_edge_ids": standard_boundary,
+            "default_allocation_graph": {
+                "node_ids": allocation_node_ids,
+                "class_start_ids": allocation_start_ids,
+                "edge_ids": allocation_edge_ids,
+                "adjacency": allocation_adjacency,
+                "excluded_root_edge_ids": root_edge_ids,
+                "excluded_cross_partition_edge_ids": cross_partition_edge_ids,
+                "excluded_unpositioned_edge_ids": unpositioned_edge_ids,
+                "excluded_source_edge_ids": excluded_allocation_edge_ids,
+                "edge_filter": {
+                    "partition": "standard_tree",
+                    "exclude_logical_root_id": "root",
+                    "exclude_cross_partition_edges": True,
+                    "exclude_edges_with_unpositioned_endpoints": True,
+                    "edge_model": "undirected adjacency derived from the complete source edge ledger",
+                },
+            },
         },
         "special_subtrees": {
             "ascendancies": special_ascendancies,

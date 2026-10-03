@@ -26,12 +26,15 @@
 - `positions`：2,987 条可定位节点的位置派生值。每条保留 group ID、orbit、orbitIndex、角度、半径和坐标。
 - `edges`：3,382 条去重的无向连接索引，并记录各边在上游节点 `out` / `in` 中出现的位置。原始连接数组也保留在 `node_records` 中。
 - `standard_tree`：2,790 个节点 ID，含逻辑 root；其中 2,387 个有几何位置，403 个无位置（root 与 402 个没有 group/边的游离被动定义）。
+- `standard_tree.default_allocation_graph`：单独供后续标准树分配器使用的图，含 2,387 个有位置的标准节点和 2,697 条标准内部边。邻接表不含逻辑 root，也不含任何跨分区边或无位置端点；七个职业起点分别列为可选起点，不经 root 互通。
 - `special_subtrees.ascendancies`：37 个升华树分区，共 558 个节点；各分区列出内部边、跨区边、起点和珠宝槽。
 - `special_subtrees.expansion_jewels`：42 个扩展珠宝节点，连同跨区边单独列出。
 - 顶层还保留 7 个基础职业、16 个 alternate ascendancy 元数据、全部 60 个 jewel slot ID、点数、边界、坐标常数和角度规则。
 - `coverage`：数据保留统计，不是词缀生效率或机制覆盖率。
 
-标准区包含所有没有 `ascendancyName` 且没有 `expansionJewel` 的记录。没有 group 的 402 条标准区记录没有连接和坐标，因此保留为 detached definition，不伪造布局。组与节点的源字段分别保留：30 个 group 同时含普通树节点和扩展珠宝节点；另有 48 个节点的 orbit 不出现在该 group 的 `orbits` 数组中。位置计算以节点自身的 `orbit` / `orbitIndex` 和上游 group 中心为准，不把两个源字段强行改成相同。所有 3,382 个连接均保留，127 条跨分区连接列在相应分区的 `boundary_edge_ids` 中；其中 23 条 root 出边在源 `out` 里存在、`in` 中没有反向记录，按原状保留。
+标准区包含所有没有 `ascendancyName` 且没有 `expansionJewel` 的记录。没有 group 的 402 条标准区记录没有连接和坐标，因此保留为 detached definition，不伪造布局。组与节点的源字段分别保留：30 个 group 同时含普通树节点和扩展珠宝节点；另有 48 个节点的 orbit 不出现在该 group 的 `orbits` 数组中。位置计算以节点自身的 `orbit` / `orbitIndex` 和上游 group 中心为准，不把两个源字段强行改成相同。
+
+完整的 3,382 条源连接保留在顶层 `edges` 与节点原始 `in/out` 中。127 条跨分区边仍列在相应分区的 `boundary_edge_ids` 中；23 条以 root 为端点的源边也仍保留。它们都不会进入 `standard_tree.default_allocation_graph`：该图仅收录两端均为有坐标标准节点的标准内部边，root 节点本身也不在邻接表内。七个职业起点保留为七个互斥的起点选项；调用者之后需选择一个起点，沿标准边分配才能到达其他区域。不同分区之间其余边的具体游戏语义未在这里推断或接入。
 
 ## 坐标与原文
 
@@ -57,6 +60,7 @@ Orbit 2/3 的 16 个角度按 [GGG README 3.17.0 的索引表](https://github.co
 | --- | ---: |
 | 原始节点记录 / 位置记录 | 3,390 / 2,987 |
 | 标准树记录 / 有位置节点 | 2,790 / 2,387 |
+| 默认标准分配图：节点 / 边 | 2,387 / 2,697 |
 | 升华名称 / 升华节点 | 37 / 558 |
 | 扩展珠宝节点 | 42 |
 | groups / 完整连接 | 797 / 3,382 |
