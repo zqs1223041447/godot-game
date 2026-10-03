@@ -35,6 +35,7 @@ func _run() -> void:
 	await process_frame
 
 	_test_snapshot_copy()
+	await _test_kind_protocol()
 	await process_frame
 	_test_full_grid_geometry()
 	_test_shrink_geometry()
@@ -73,7 +74,7 @@ func _test_snapshot_copy() -> void:
 	var image: Image = Image.create(4, 4, false, Image.FORMAT_RGBA8)
 	image.fill(Color("aa6644"))
 	var gem_icon: Texture2D = ImageTexture.create_from_image(image)
-	var supplied: Dictionary = _entry("bag-copy", Vector2i(2, 1), Vector2i.ONE, "gem", gem_icon)
+	var supplied: Dictionary = _entry("bag-copy", Vector2i(2, 1), Vector2i.ONE, "skill_gem", gem_icon)
 	var nested_art: Dictionary = supplied["art"]
 	grid.set_items([supplied], 7)
 	nested_art["nested"]["values"][0] = 99
@@ -86,6 +87,35 @@ func _test_snapshot_copy() -> void:
 	var missing_schema: Dictionary = {"uid": "not-a-bag-record"}
 	grid.set_items([supplied, invalid, missing_schema], 8)
 	_expect(grid._items.size() == 1 and grid._items[0]["uid"] == "bag-copy", "invalid and out-of-grid records are not presented")
+
+
+func _test_kind_protocol() -> void:
+	var image: Image = Image.create(6, 6, false, Image.FORMAT_RGBA8)
+	image.fill(Color("b46b52"))
+	var icon: Texture2D = ImageTexture.create_from_image(image)
+	var active: Dictionary = _entry("active-skill", Vector2i(0, 0), Vector2i.ONE, "skill_gem", icon)
+	var support: Dictionary = _entry("support-skill", Vector2i(1, 0), Vector2i.ONE, "support_gem", icon)
+	var iconless_active: Dictionary = _entry("missing-active-icon", Vector2i(2, 0), Vector2i.ONE, "skill_gem")
+	grid.set_items([active, support, iconless_active], 9)
+	_expect(grid._items.size() == 2, "skill_gem and support_gem with Texture2D icons are valid; iconless gem records are rejected")
+	_expect(grid._items[0]["icon"] is Texture2D and grid._items[1]["icon"] is Texture2D, "both active and support gem snapshots retain real Texture2D resources")
+	_expect(grid._uses_texture_icon("skill_gem") and grid._uses_texture_icon("support_gem"), "active and support gem kinds take the texture draw branch")
+	_expect(not grid._uses_texture_icon("equipment") and not grid._uses_texture_icon("jewel"), "equipment and jewel kinds keep the EquipmentArt draw branch")
+	await process_frame # Runs both gem-kind entries through the CanvasItem draw callback.
+
+	var equipment_with_icon: Dictionary = _entry("equipment-art", Vector2i(0, 1), Vector2i.ONE, "equipment", icon)
+	var jewel_with_icon: Dictionary = _entry("jewel-art", Vector2i(1, 1), Vector2i.ONE, "jewel", icon)
+	grid.set_items([equipment_with_icon, jewel_with_icon], 10)
+	_expect(grid._items.size() == 2 and not grid._uses_texture_icon(grid._items[0]["kind"])
+		and not grid._uses_texture_icon(grid._items[1]["kind"]), "equipment and jewel draw art even if an icon field is present")
+	await process_frame
+
+	var unknown: Dictionary = _entry("unknown-kind", Vector2i.ZERO, Vector2i.ONE, "gem", icon)
+	var old_alias: Dictionary = _entry("unknown-alias", Vector2i(1, 0), Vector2i.ONE, "gemstone", icon)
+	grid.set_items([unknown, old_alias], 11)
+	_expect(grid._items.is_empty(), "unknown kinds and uncontracted aliases are rejected instead of falling through to equipment art")
+	_expect(grid.item_at_position(grid.cell_rect(Vector2i.ZERO).get_center()).is_empty(), "rejected kind cannot be hit or presented as an item")
+	await process_frame
 
 
 func _test_full_grid_geometry() -> void:

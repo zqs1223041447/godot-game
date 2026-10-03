@@ -16,6 +16,8 @@ const COLUMNS: int = 12
 const ROWS: int = 8
 const DEFAULT_CELL_SIZE: float = 42.0
 const EDGE_INSET: float = 8.0
+const ENTRY_KINDS: Array[String] = ["equipment", "jewel", "skill_gem", "support_gem"]
+const ICON_ENTRY_KINDS: Array[String] = ["skill_gem", "support_gem"]
 
 const PAPER := Color("f8ecd0")
 const CELL_LIGHT := Color("eee0c3")
@@ -163,7 +165,7 @@ func _draw_entry(entry: Dictionary) -> void:
 	var art_box := Rect2(box.position + Vector2(7.0, 5.0), box.size - Vector2(14.0, 10.0 + footer_height))
 	var icon: Variant = entry["icon"]
 	if art_box.has_area():
-		if str(entry["kind"]) in ["gem", "gemstone"] and icon is Texture2D:
+		if _uses_texture_icon(str(entry["kind"])):
 			draw_texture_rect(icon, art_box, false)
 		else:
 			EquipmentArt.draw_item(self, entry["art"], art_box)
@@ -404,6 +406,10 @@ func _cell_is_inside(cell: Vector2i) -> bool:
 	return cell.x >= 0 and cell.y >= 0 and cell.x < COLUMNS and cell.y < ROWS
 
 
+func _uses_texture_icon(kind: String) -> bool:
+	return ICON_ENTRY_KINDS.has(kind)
+
+
 func _strict_payload(data: Variant) -> bool:
 	if not data is Dictionary or data.size() != 4:
 		return false
@@ -421,11 +427,13 @@ func _valid_entry(value: Dictionary) -> bool:
 			return false
 	if typeof(value["uid"]) != TYPE_STRING or value["uid"].is_empty():
 		return false
-	if typeof(value["kind"]) != TYPE_STRING or value["kind"].is_empty():
+	if typeof(value["kind"]) != TYPE_STRING or not ENTRY_KINDS.has(value["kind"]):
 		return false
 	if not value["size"] is Vector2i or not value["cell"] is Vector2i or not value["art"] is Dictionary:
 		return false
 	if value["icon"] != null and not value["icon"] is Texture2D:
+		return false
+	if ICON_ENTRY_KINDS.has(value["kind"]) and not value["icon"] is Texture2D:
 		return false
 	if not value["accent"] is Color or typeof(value["short_name"]) != TYPE_STRING:
 		return false
