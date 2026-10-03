@@ -32,7 +32,7 @@ func _initialize()->void:
 	state._accept_memory(saved.duplicate(true));state._current.revision=float(revision)
 	check(not state.crafting_change_already_saved(),"Wrong revision type cannot create a receipt")
 	state._accept_memory(saved.duplicate(true))
-	var future_path:="user://future.json";FileAccess.open(future_path,FileAccess.WRITE).store_string('{"version":18}')
+	var future_path:="user://future.json";FileAccess.open(future_path,FileAccess.WRITE).store_string('{"version":19}')
 	check(not state.load_build(future_path) and state._disk_revision==revision and state._disk_bytes==disk and state.crafting_change_already_saved(),"Rejected future load preserves the existing receipt")
 	var reopened:=FaultModel.new()
 	check(reopened.load_build(path) and reopened._disk_revision==revision and reopened.crafting_change_already_saved(),"Validated load restores the exact saved revision")

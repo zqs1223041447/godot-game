@@ -1,0 +1,133 @@
+{
+  "base_commit": "efb23b566fa743475fcf93ed23cb12f6bc97c4d6",
+  "backend_api_stage": "91df1ec66105543e4a8571e55322f47fe2469c95",
+  "root_ui_commit": "039cd4c21f1c8b2d41f7e50151c746fe3f7abce1",
+  "counted_checks": 5299,
+  "report_count": 12,
+  "reports": [
+    {
+      "log": "model-stage.log.txt",
+      "line": 3,
+      "count": 209,
+      "summary": "Flask model: 209 checks, 0 failures"
+    },
+    {
+      "log": "gameplay-stage.log.txt",
+      "line": 4,
+      "count": 68,
+      "summary": "Flask gameplay: 68 checks, 0 failures"
+    },
+    {
+      "log": "migration.log.txt",
+      "line": 3,
+      "count": 1117,
+      "summary": "Flask migration: 1117 checks, 0 failures"
+    },
+    {
+      "log": "reward-boundaries.log.txt",
+      "line": 4,
+      "count": 25,
+      "summary": "Flask reward boundaries: 25 checks, 0 failures"
+    },
+    {
+      "log": "direct-dependencies.log.txt",
+      "line": 3,
+      "count": 39,
+      "summary": "Canonical build store: 39 checks, 0 failures"
+    },
+    {
+      "log": "direct-dependencies.log.txt",
+      "line": 6,
+      "count": 25,
+      "summary": "Canonical crafting: 25 checks, 0 failures"
+    },
+    {
+      "log": "direct-dependencies.log.txt",
+      "line": 9,
+      "count": 15,
+      "summary": "Save receipt revision: 15 checks, 0 failures"
+    },
+    {
+      "log": "direct-dependencies.log.txt",
+      "line": 12,
+      "count": 282,
+      "summary": "Item location rules: 282 checks, 0 failures"
+    },
+    {
+      "log": "direct-dependencies.log.txt",
+      "line": 15,
+      "count": 22,
+      "summary": "Item transfer plan: 22 checks, 0 failures"
+    },
+    {
+      "log": "reference-test.log.txt",
+      "line": 3,
+      "count": 3476,
+      "summary": "Reference export: 3476 checks, 0 failures"
+    },
+    {
+      "log": "root-ui/viewport-input-19.log.txt",
+      "line": 4,
+      "count": 19,
+      "summary": "Flask UI: 19 checks, 0 failures"
+    },
+    {
+      "log": "root-ui/tooltip-guard-2.log.txt",
+      "line": 3,
+      "count": 2,
+      "summary": "Flask tooltip guard: 2 checks, 0 failures"
+    }
+  ],
+  "logs": {
+    "model-stage.log.txt": {
+      "bytes": 133,
+      "sha256": "46ff8ee0ba6abc13c9a07a7e4add3025de7d12bc15cbd9373abcaebb4043c62c"
+    },
+    "gameplay-stage.log.txt": {
+      "bytes": 168,
+      "sha256": "cfb82459a749d1bd337c2dcfd53be82d7eb3a7db1807870d6bfc7d502e8f3ce6"
+    },
+    "migration.log.txt": {
+      "bytes": 138,
+      "sha256": "3a25cfa16a49e5a57a931e8ee06bfb2e4d6dd3afe4112772b32b29854efab3f3"
+    },
+    "reward-boundaries.log.txt": {
+      "bytes": 177,
+      "sha256": "ac0b1056839ad358767772878602d1eff99c02d97973f2d95e932411793ce916"
+    },
+    "direct-dependencies.log.txt": {
+      "bytes": 607,
+      "sha256": "0474dbf693100f668f24a7b8c8cad07db0066777792e7fd8f445b6a8793795e3"
+    },
+    "reference-test.log.txt": {
+      "bytes": 139,
+      "sha256": "8998d96ff9739fe9f98b0208174b1c3869ba0e4465d8ff01483505d985aacbba"
+    },
+    "root-ui/viewport-input-19.log.txt": {
+      "bytes": 138,
+      "sha256": "fc23c1dfd0be8b8999f7d74a95530aff6183cedfac76b7c68bf41406dc4274f6"
+    },
+    "root-ui/tooltip-guard-2.log.txt": {
+      "bytes": 115,
+      "sha256": "77597273d2d9881bf241737b3c0fa8ecc5687922521e4698f97bd6cf6817eb5b"
+    }
+  },
+  "production_inputs": 350,
+  "scope": "Two flask UID definitions, schema18 strict old-file migration, per-run resources, genuine root rewards, authoritative transfer/save and root-authored UI",
+  "no_600s_or_historical_full": true,
+  "evidence_reuse": "Same runtime behavior across validated backend/UI stages. Only description formatting changed to derive the same text from constants; one font glyph瓶 added with all retained outlines/metrics checked by same-source generator. Root UI remains byte-identical to039cd4c; no repeat19-input suite after2tooltip guard checks.",
+  "native": "Root physical mouse use/unequip/drag preserves20charges; final merged actual desktopAlt1/Alt2 deduct10without bound skills or any persistent mutation. Linuxllvmpipe, notWindowshardwareFPS.",
+  "legacy_fixture": "Generated once by frozen releasedv25/schema17 engine,38and1025items; collision-likeUIDs and exhausted serial; rawfile backups and old14/15/16chain verified.",
+  "failed_attempts": "Two new test scripts initially had incorrect method/type annotations, fixed before listed successful runs. HTML art membership expected-set updated to include two real flask entries. No production failure was hidden by weakened assertions.",
+  "reference": {
+    "anchors": 3759,
+    "links": 17164,
+    "images": 64,
+    "previous62png_byte_identical": true
+  },
+  "font": {
+    "mapped": 995,
+    "added": "瓶",
+    "sha256": "85381b8d4eea7152b1a46071c825e8b5fd1df46cc60dc1e5dcc6b4c2d0a69e0c"
+  }
+}

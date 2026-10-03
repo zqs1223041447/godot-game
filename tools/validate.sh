@@ -82,14 +82,19 @@ fi
 echo "Godot version: $("$GODOT_BIN" --version)"
 python3 "$PROJECT_DIR/tools/check_font_coverage.py"
 run_check --editor --import
-run_check --script res://tests/elemental_encounter_integration_test.gd
-run_check --script res://tests/elemental_warning_shape_test.gd
-run_check --script res://tests/telegraph_integration_test.gd
-run_check --script res://tests/telegraph_renderer_test.gd
-run_check --script res://tests/monster_system_test.gd
-run_check --script res://tests/fantasy_actor_test.gd
+run_check --script res://tests/flask_model_test.gd
+run_check --script res://tests/flask_migration_test.gd
+run_check --script res://tests/flask_gameplay_test.gd
+run_check --script res://tests/flask_reward_boundaries_test.gd
+run_check --script res://tests/canonical_build_store_test.gd
+run_check --script res://tests/canonical_crafting_test.gd
+run_check --script res://tests/save_receipt_revision_test.gd
+run_check --script res://tests/item_location_rules_test.gd
+run_check --script res://tests/item_transfer_plan_test.gd
+run_check --script res://tests/flask_ui_test.gd
+run_check --script res://tests/flask_tooltip_guard_test.gd
 run_check --script res://tests/reference_export_test.gd
 python3 "$PROJECT_DIR/tools/check_item_transparency.py"
 python3 "$PROJECT_DIR/tests/reference_catalog_test.py"
 run_check --quit-after 300
-echo "Current-batch validation passed: restricted natural elemental encounters, original roll and reward preservation, shared defenses and exact warning geometry, font/assets/reference, and startup."
+echo "Current-batch validation passed: flask UID ownership and raw-byte migration, per-run recovery, original rewards and shared transaction gates, current UI input and reference, font/assets/reference, and startup."

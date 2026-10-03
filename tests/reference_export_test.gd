@@ -65,6 +65,12 @@ func _initialize() -> void:
 		_expect(is_equal_approx(typed.example.cases.armored.settlement.damage_total,typed.example.cases.standing.settlement.damage_total*0.82),"Actual legal fresh source path grants18 percent matching resistance")
 		_expect(typed.example.allocated_path.size()<=6 and not typed.example.cases.moving.inside,"Fresh budget can reach example and original warning allows escape")
 		_expect(current.elemental_encounters.extra_rewards==false and current.elemental_encounters.extra_rng==false,"Natural elemental selection adds no bonus or RNG")
+	_expect(current.flasks.size()==2 and current.canonical.flask_slots.size()==5,"Both real flask definitions and five slots exported")
+	for flask:Dictionary in current.flasks.values():
+		_expect(flask.save_version==18 and flask.size==[1,2],"Actual flask schema and footprint")
+		_expect(is_equal_approx(flask.example.restored,flask.example.maximum_at_use*flask.recovery_fraction),"Actual runtime restores catalog fraction without passive regen")
+		_expect(flask.example.rows[0].charges==flask.max_charges-flask.cost and flask.example.after_valid_root_charges==flask.example.before_kill_charges+1,"Charge example uses actual runtime")
+		_expect(flask.acquisition.eligible_root_interval==60 and not flask.acquisition.extra_rng and not flask.rules.runtime_persisted,"Actual acquisition and per-run persistence scope")
 	var piercing: Dictionary = current.projectile_support_examples.skills
 	_expect(piercing.bolt.before.observed_hits == [1, 2] and piercing.bolt.after.observed_hits == [1, 2, 3, 4], "Reference bolt diagram records actual two versus four collisions")
 	_expect(piercing.frost.before.observed_hits == [1, 2, 3] and piercing.frost.after.observed_hits == [1, 2, 3, 4, 5], "Reference frost diagram records actual three versus five collisions")

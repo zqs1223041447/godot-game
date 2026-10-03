@@ -3,6 +3,8 @@ extends SceneTree
 ## Native: godot --path . --script res://tools/export_reference_art.gd
 ## Output: docs/reference/art, or --output-dir /absolute/path, or GODOT_REFERENCE_ART_DIR.
 ## Headless-safe catalog/check: add -- --manifest-only (does not capture pixels).
+const Flasks=preload("res://scripts/items/flask_catalog.gd")
+const GemFit=preload("res://scripts/ui/gem_icon.gd")
 const Data = preload("res://scripts/game_data.gd")
 const Supports = preload("res://scripts/combat/support_registry.gd")
 const Gear = preload("res://scripts/items/equipment_catalog.gd")
@@ -23,6 +25,15 @@ class ItemSurface extends Node2D:
 	var entry: Dictionary = {}
 	func _draw() -> void:
 		Art.draw_item(self, entry, Rect2(8, 8, 112, 112))
+
+
+class FlaskSurface extends Node2D:
+	var icon:Texture2D
+	func _draw()->void:
+		if icon!=null:
+			var fitted:Rect2=GemFit.image_fit_rect(Vector2(112,112),icon.get_size())
+			fitted.position+=Vector2(8,8)
+			draw_texture_rect(icon,fitted,false)
 
 
 class MonsterSurface extends Node2D:
@@ -133,6 +144,8 @@ func run() -> void:
 
 
 func collect_rows() -> void:
+	for id:String in _sorted_ids(Flasks.DEFINITIONS):
+		add_row("flasks",id.substr("flask:".length()),Flasks.definition(id).name,"GemIcon.image_fit_rect + runtime transparent texture","FlaskCatalog.DEFINITIONS","flask")
 	for id: String in _sorted_ids(Data.SKILLS):
 		add_row("skills", id, Data.SKILLS[id].name, "SkillEmblem._draw", "GameData.SKILLS", "active_skill")
 	for id: String in _sorted_ids(Supports.SUPPORTS):
@@ -158,6 +171,11 @@ func add_row(category: String, id: String, display_name: String, renderer: Strin
 
 func make_surface(row: Dictionary) -> Node:
 	match str(row.category):
+		"flasks":
+			var flask:=FlaskSurface.new()
+			flask.icon=load(Flasks.definition("flask:"+str(row.id)).icon_path)
+			flask.texture_filter=CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+			return flask
 		"skills", "supports":
 			var emblem := Emblem.new()
 			emblem.skill_id = row.id

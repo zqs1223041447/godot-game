@@ -7,8 +7,9 @@
 	"transparent_background": true,
 	"file_paths_relative_to": "manifest.json directory",
 	"status": "complete",
-	"written_images": 62,
+	"written_images": 64,
 	"counts": {
+		"flasks": 2,
 		"skills": 10,
 		"supports": 16,
 		"equipment": 23,
@@ -16,6 +17,24 @@
 		"monsters": 9
 	},
 	"entries": [
+		{
+			"category": "flasks",
+			"id": "life",
+			"name": "生命药剂",
+			"file": "flasks/life.png",
+			"source_renderer": "GemIcon.image_fit_rect + runtime transparent texture",
+			"source_catalog": "FlaskCatalog.DEFINITIONS",
+			"entry_type": "flask"
+		},
+		{
+			"category": "flasks",
+			"id": "mana",
+			"name": "魔力药剂",
+			"file": "flasks/mana.png",
+			"source_renderer": "GemIcon.image_fit_rect + runtime transparent texture",
+			"source_catalog": "FlaskCatalog.DEFINITIONS",
+			"entry_type": "flask"
+		},
 		{
 			"category": "skills",
 			"id": "bolt",

@@ -29,6 +29,8 @@ const Canonical = preload("res://scripts/canonical_game_state.gd")
 const SourceTree = preload("res://scripts/passives/source_tree_runtime.gd")
 const GemCatalogData = preload("res://scripts/items/gem_catalog.gd")
 const EquipmentSlotsData = preload("res://scripts/items/equipment_slots.gd")
+const Flasks = preload("res://scripts/items/flask_catalog.gd")
+const FlaskRuntime = preload("res://scripts/combat/flask_runtime.gd")
 const AttackRules = preload("res://scripts/combat/attack_hit_rules.gd")
 
 func _initialize() -> void:
@@ -70,6 +72,7 @@ static func collect() -> Dictionary:
 	result["encounters"] = encounter_examples()
 	result["canonical"] = canonical_examples()
 	result["currencies"] = currency_examples()
+	result["flasks"] = flask_examples()
 	result["source_tree"] = source_tree_reference()
 	result["save_version"] = Canonical.Rules.VERSION
 	result["current_loot_profile_id"] = Canonical.LOOT_PROFILE_ID
@@ -302,7 +305,7 @@ static func canonical_examples()->Dictionary:
 	for slot:String in EquipmentSlotsData.all_slots():slots[slot]=EquipmentSlotsData.category_for_slot(slot)
 	var five:=Compiler.compile_group("frost",state.get_combat_snapshot(),["swift_projectiles","heavy_projectiles","lingering_chill","efficiency","quickcast"])
 	return {"save_version":Canonical.Rules.VERSION,"bag_pages":bag.pages,"bag_columns":bag.columns,"bag_rows":bag.rows,"base_skill_groups":10,"support_slots":5,
-		"slots":slots,"gem_definitions":GemCatalogData.definitions(),"default_build":state.snapshot(),"default_stats":state.get_stats(),"default_casts":casts,"five_link_example":support_cast_brief(five),
+		"flask_slots":state.flask_slots(),"slots":slots,"gem_definitions":GemCatalogData.definitions(),"default_build":state.snapshot(),"default_stats":state.get_stats(),"default_casts":casts,"five_link_example":support_cast_brief(five),
 		"gem_reward":{"eligible_root_kill_interval":30,"definition_count":GemCatalogData.definitions().size(),"uniform_selection":true,"level":1,"quality":0,"duplicate_definitions_have_distinct_uid":true,"failed_admission_restores_rng":true},
 		"defense_example":Defense.incoming_source_hit({"physical":100.0,"fire":100.0,"cold":100.0,"lightning":100.0},{"armour":500.0,"fire_resistance":0.5,"cold_resistance":0.25,"lightning_resistance":0.75},100.0,200.0),
 		"monster_ratings":{"crawler":AttackRules.monster_profile(0),"skitter":AttackRules.monster_profile(1),"brute":AttackRules.monster_profile(2)},
@@ -405,6 +408,34 @@ static func local_build(instance: Dictionary) -> RefCounted:
 	assert(equipped_ok, "Reference equipment must equip through BuildState")
 	assert(not build._validate_snapshot(build._snapshot()).is_empty(), "Reference build must satisfy actual save schema without writing a save")
 	return build
+
+
+static func flask_examples()->Dictionary:
+	var examples:Dictionary={}
+	var state:=Canonical.new()
+	for id:String in Flasks.DEFINITIONS:
+		var definition:Dictionary=Flasks.definition(id)
+		var maximum:float=state.get_stats().max_health if definition.resource=="health" else state.get_stats().max_mana
+		var runtime:=FlaskRuntime.new();var uid:="reference_flask"
+		assert(runtime.reset({uid:id}))
+		var current:Dictionary={"health":10.0,"mana":10.0};var maxima:Dictionary={"health":float(state.get_stats().max_health),"mana":float(state.get_stats().max_mana)}
+		var used:Dictionary=runtime.use(uid,float(current[definition.resource]),maximum)
+		assert(used.ok)
+		var rows:Array=[{"time":0.0,"resource":10.0,"charges":used.charges}]
+		for index:int in range(6):
+			var gain:Dictionary=runtime.advance(0.5,current,maxima)
+			current.health+=float(gain.health);current.mana+=float(gain.mana)
+			rows.append({"time":float(index+1)*0.5,"resource":current[definition.resource],"charges":runtime.snapshot().charges_by_uid[uid]})
+		var before_charge:int=runtime.snapshot().charges_by_uid[uid]
+		runtime.charge_rewarded_kill([uid])
+		definition["id"]=id.substr("flask:".length())
+		definition["status"]="implemented";definition["origin"]="original"
+		definition["save_version"]=Flasks.SAVE_VERSION
+		definition["example"]={"maximum_at_use":maximum,"resource_before":10.0,"rows":rows,"restored":float(current[definition.resource])-10.0,"before_kill_charges":before_charge,"after_valid_root_charges":runtime.snapshot().charges_by_uid[uid],"passive_regeneration_included":false}
+		definition["acquisition"]={"starter_each":1,"eligible_root_interval":Flasks.REWARD_INTERVAL,"sequence":[Flasks.reward_definition(Flasks.REWARD_INTERVAL),Flasks.reward_definition(Flasks.REWARD_INTERVAL*2)],"extra_rng":false}
+		definition["rules"]={"slots":Flasks.Locations.FLASK_SLOTS.duplicate(),"runtime_persisted":false,"reset":"actual_new_battle","move_refills":false,"same_resource_stacks":false,"early_end":"resource_full","shield_restore":false,"ailment_removal":false}
+		examples[definition.id]=definition
+	return examples
 
 
 static func telegraph_examples() -> Dictionary:

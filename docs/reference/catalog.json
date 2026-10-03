@@ -2905,6 +2905,22 @@
 					},
 					"uid": "jewel_000003"
 				},
+				"migration_flask_000001": {
+					"definition_id": "flask:life",
+					"kind": "flask",
+					"payload": {
+
+					},
+					"uid": "migration_flask_000001"
+				},
+				"migration_flask_000002": {
+					"definition_id": "flask:mana",
+					"kind": "flask",
+					"payload": {
+
+					},
+					"uid": "migration_flask_000002"
+				},
 				"migration_gem_000001": {
 					"definition_id": "skill:bolt",
 					"kind": "skill_gem",
@@ -3199,6 +3215,14 @@
 					"x": 7,
 					"y": 1
 				},
+				"migration_flask_000001": {
+					"kind": "flask_slot",
+					"slot_id": "flask_1"
+				},
+				"migration_flask_000002": {
+					"kind": "flask_slot",
+					"slot_id": "flask_2"
+				},
 				"migration_gem_000001": {
 					"group_id": "group_000001",
 					"kind": "skill_main"
@@ -3424,7 +3448,7 @@
 				"normal_points": 5,
 				"source_version": "3.29.1"
 			},
-			"version": 17
+			"version": 18
 		},
 		"default_casts": {
 			"group_000001": {
@@ -3630,6 +3654,68 @@
 			},
 			"summary": "命中预估（未计敌方防御）：每枚投射物 23.87"
 		},
+		"flask_slots": [
+			{
+				"definition_id": "flask:life",
+				"icon_path": "res://assets/ui/grimoire/life_flask.png",
+				"name": "生命药剂",
+				"resource": "health",
+				"size": [
+					1,
+					2
+				],
+				"slot_id": "flask_1",
+				"uid": "migration_flask_000001"
+			},
+			{
+				"definition_id": "flask:mana",
+				"icon_path": "res://assets/ui/grimoire/mana_flask.png",
+				"name": "魔力药剂",
+				"resource": "mana",
+				"size": [
+					1,
+					2
+				],
+				"slot_id": "flask_2",
+				"uid": "migration_flask_000002"
+			},
+			{
+				"definition_id": "",
+				"icon_path": "",
+				"name": "",
+				"resource": "",
+				"size": [
+					1,
+					2
+				],
+				"slot_id": "flask_3",
+				"uid": ""
+			},
+			{
+				"definition_id": "",
+				"icon_path": "",
+				"name": "",
+				"resource": "",
+				"size": [
+					1,
+					2
+				],
+				"slot_id": "flask_4",
+				"uid": ""
+			},
+			{
+				"definition_id": "",
+				"icon_path": "",
+				"name": "",
+				"resource": "",
+				"size": [
+					1,
+					2
+				],
+				"slot_id": "flask_5",
+				"uid": ""
+			}
+		],
 		"gem_definitions": {
 			"skill:bolt": {
 				"capabilities": [
@@ -4328,7 +4414,7 @@
 				"evasion": 320.0
 			}
 		},
-		"save_version": 17,
+		"save_version": 18,
 		"skitter_accuracy_example": {
 			"base_accuracy": 140,
 			"base_chance": 0.96,
@@ -4931,7 +5017,7 @@
 				"schema_version": 1,
 				"status": "prototype"
 			},
-			"save_version": 17
+			"save_version": 18
 		},
 		"recalibrate": {
 			"description": "消耗校准碎片，重掷现有词缀的整数数值；结果可能降低或不变。",
@@ -5258,7 +5344,7 @@
 			"example_quantity": 1,
 			"name": "校准碎片",
 			"quantity_source": "items[uid].payload.quantity",
-			"save_version": 17,
+			"save_version": 18,
 			"size": [
 				1,
 				1
@@ -8963,7 +9049,203 @@
 			}
 		}
 	},
-	"game_version": "0.25.0",
+	"flasks": {
+		"life": {
+			"acquisition": {
+				"eligible_root_interval": 60,
+				"extra_rng": false,
+				"sequence": [
+					"flask:life",
+					"flask:mana"
+				],
+				"starter_each": 1
+			},
+			"category": "",
+			"color": "#aa5046",
+			"cost": 10,
+			"definition_id": "flask:life",
+			"description": "3秒内恢复35%对应最大资源；消耗10充能。同资源恢复不叠加，已满或充能不足时不消耗。",
+			"duration": 3.0,
+			"effects": [],
+			"example": {
+				"after_valid_root_charges": 21,
+				"before_kill_charges": 20,
+				"maximum_at_use": 130.0,
+				"passive_regeneration_included": false,
+				"resource_before": 10.0,
+				"restored": 45.50000000000001,
+				"rows": [
+					{
+						"charges": 20,
+						"resource": 10.0,
+						"time": 0.0
+					},
+					{
+						"charges": 20,
+						"resource": 17.583333333333332,
+						"time": 0.5
+					},
+					{
+						"charges": 20,
+						"resource": 25.166666666666664,
+						"time": 1.0
+					},
+					{
+						"charges": 20,
+						"resource": 32.75,
+						"time": 1.5
+					},
+					{
+						"charges": 20,
+						"resource": 40.333333333333336,
+						"time": 2.0
+					},
+					{
+						"charges": 20,
+						"resource": 47.91666666666667,
+						"time": 2.5
+					},
+					{
+						"charges": 20,
+						"resource": 55.50000000000001,
+						"time": 3.0
+					}
+				]
+			},
+			"icon_path": "res://assets/ui/grimoire/life_flask.png",
+			"id": "life",
+			"kind": "flask",
+			"max_charges": 30,
+			"name": "生命药剂",
+			"origin": "original",
+			"rarity": "normal",
+			"recovery_fraction": 0.35,
+			"resource": "health",
+			"rules": {
+				"ailment_removal": false,
+				"early_end": "resource_full",
+				"move_refills": false,
+				"reset": "actual_new_battle",
+				"runtime_persisted": false,
+				"same_resource_stacks": false,
+				"shield_restore": false,
+				"slots": [
+					"flask_1",
+					"flask_2",
+					"flask_3",
+					"flask_4",
+					"flask_5"
+				]
+			},
+			"save_version": 18,
+			"size": [
+				1,
+				2
+			],
+			"stats": {
+
+			},
+			"status": "implemented"
+		},
+		"mana": {
+			"acquisition": {
+				"eligible_root_interval": 60,
+				"extra_rng": false,
+				"sequence": [
+					"flask:life",
+					"flask:mana"
+				],
+				"starter_each": 1
+			},
+			"category": "",
+			"color": "#587da2",
+			"cost": 10,
+			"definition_id": "flask:mana",
+			"description": "3秒内恢复35%对应最大资源；消耗10充能。同资源恢复不叠加，已满或充能不足时不消耗。",
+			"duration": 3.0,
+			"effects": [],
+			"example": {
+				"after_valid_root_charges": 21,
+				"before_kill_charges": 20,
+				"maximum_at_use": 140.0,
+				"passive_regeneration_included": false,
+				"resource_before": 10.0,
+				"restored": 48.999999999999986,
+				"rows": [
+					{
+						"charges": 20,
+						"resource": 10.0,
+						"time": 0.0
+					},
+					{
+						"charges": 20,
+						"resource": 18.166666666666664,
+						"time": 0.5
+					},
+					{
+						"charges": 20,
+						"resource": 26.33333333333333,
+						"time": 1.0
+					},
+					{
+						"charges": 20,
+						"resource": 34.49999999999999,
+						"time": 1.5
+					},
+					{
+						"charges": 20,
+						"resource": 42.66666666666666,
+						"time": 2.0
+					},
+					{
+						"charges": 20,
+						"resource": 50.83333333333332,
+						"time": 2.5
+					},
+					{
+						"charges": 20,
+						"resource": 58.999999999999986,
+						"time": 3.0
+					}
+				]
+			},
+			"icon_path": "res://assets/ui/grimoire/mana_flask.png",
+			"id": "mana",
+			"kind": "flask",
+			"max_charges": 30,
+			"name": "魔力药剂",
+			"origin": "original",
+			"rarity": "normal",
+			"recovery_fraction": 0.35,
+			"resource": "mana",
+			"rules": {
+				"ailment_removal": false,
+				"early_end": "resource_full",
+				"move_refills": false,
+				"reset": "actual_new_battle",
+				"runtime_persisted": false,
+				"same_resource_stacks": false,
+				"shield_restore": false,
+				"slots": [
+					"flask_1",
+					"flask_2",
+					"flask_3",
+					"flask_4",
+					"flask_5"
+				]
+			},
+			"save_version": 18,
+			"size": [
+				1,
+				2
+			],
+			"stats": {
+
+			},
+			"status": "implemented"
+		}
+	},
+	"game_version": "0.26.0",
 	"jewel_affixes": {
 		"barrier": {
 			"kind": "prefix",
@@ -16909,7 +17191,7 @@
 		"source": "SkillCompiler + ProjectileRuntime.advance + DamageResolver",
 		"target_count": 6
 	},
-	"save_version": 17,
+	"save_version": 18,
 	"schema_version": 3,
 	"sectors": [
 		{

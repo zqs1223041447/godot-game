@@ -10,7 +10,7 @@ ROOT=Path(__file__).resolve().parents[1]
 REF=ROOT/'docs/reference'
 class Inspector(HTMLParser):
     def __init__(self):
-        super().__init__(); self.ids=[]; self.links=[]; self.assets=[]; self.viewbox=None; self.node_ids=[]; self.trace_values={}; self.weapon_values={}; self.pierce_hits={}; self.craft_values={}; self.telegraph_values={}; self.encounter_values={}
+        super().__init__(); self.ids=[]; self.links=[]; self.assets=[]; self.viewbox=None; self.node_ids=[]; self.trace_values={}; self.weapon_values={}; self.pierce_hits={}; self.craft_values={}; self.telegraph_values={}; self.encounter_values={}; self.flask_values={}
     def handle_starttag(self,tag,attrs):
         a=dict(attrs)
         if 'id' in a:self.ids.append(a['id'])
@@ -22,6 +22,7 @@ class Inspector(HTMLParser):
         if 'data-node' in a:self.node_ids.append(a['data-node'])
         if 'data-pierce-hits' in a:self.pierce_hits[a['data-pierce-hits']]=int(a['data-value'])
         if 'data-encounter-value' in a:self.encounter_values[a['data-encounter-value']]=float(a['data-value'])
+        if 'data-flask-value' in a:self.flask_values[a['data-flask-value']]=float(a['data-value'])
         if 'data-telegraph-value' in a:self.telegraph_values[a['data-telegraph-value']]=float(a['data-value'])
         if 'data-craft-value' in a:self.craft_values[a['data-craft-value']]=int(a['data-value'])
         if 'data-weapon-trace' in a:self.weapon_values[a['data-weapon-trace']]=float(a['data-value'])
@@ -44,6 +45,8 @@ def main():
         expected_telegraphs.update({key+'-'+field:value for field,value in values.items()})
         assert not cases['moving']['inside'] and not cases['moving']['settlement'], 'Dodge example must have no synthetic damage settlement'
     assert inspector.telegraph_values==expected_telegraphs, 'Telegraph diagram diverges from real event and settlement'
+    expected_flasks={f'{key}-time-{i}':r['resource'] for key,f in data.get('flasks',{}).items() for i,r in enumerate(f['example']['rows'])}
+    assert inspector.flask_values==expected_flasks, 'Flask recovery table differs from actual runtime'
     expected_craft={}
     for operation in ['salvage','recalibrate']:
         sample=data['crafting'][operation]['example']
@@ -103,8 +106,9 @@ def main():
     assert 'font-size:16px' in (REF/'reference.css').read_text()
     spec=importlib.util.spec_from_file_location('generator',ROOT/'tools/build_reference.py');module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
     art=json.loads((REF/'art/manifest.json').read_text())
-    assert art['status']=='complete' and art['written_images']==62 and len(art['entries'])==62
+    assert art['status']=='complete' and art['written_images']==64 and len(art['entries'])==64
     expected_art={(cat,key) for cat in ['skills','supports','equipment','fixed_items','jewels','monsters'] for key in data[cat]}
+    expected_art.update(('flasks',key) for key in data.get('flasks',{}))
     actual_art={(('fixed_items' if row.get('entry_type')=='fixed_item' else row['category']),row['id']) for row in art['entries']}
     assert actual_art==expected_art, 'Art manifest omits or adds runtime entries'
     assert len(inspector.assets)==len(art['entries']), 'Runtime artwork missing from an entry'
