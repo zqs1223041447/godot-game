@@ -1,0 +1,57 @@
+{
+  "reports": [
+    {
+      "path": "docs/qa/v027/operations.log",
+      "sha256": "05f1f12299ddf2ae1bb4bd99abbbb2d1b1d7096ff2b03a8f6103c2ce86b3df45",
+      "checks": 73
+    },
+    {
+      "path": "docs/qa/v027/economy.log",
+      "sha256": "51619c4229e8db9dcc02444ffb99d5cc6474d65d856a83d2fa21eddf05722c66",
+      "checks": 160617
+    },
+    {
+      "path": "docs/qa/v027/transactions.log",
+      "sha256": "a843bea06853f052985842a667304dc2cb2018458accff9464e69a656142bf47",
+      "checks": 286
+    },
+    {
+      "path": "docs/qa/v027/boundaries.log",
+      "sha256": "a66b360f8f0360958f09d4094c3a9683bf1e906bfbb17ffcbc1311466f354e27",
+      "checks": 230
+    },
+    {
+      "path": "docs/qa/v027/consumers.log",
+      "sha256": "c31cdc01914ddcd9c7c8c03cc46499074b79868b4e530965aa34e3a2afcf8b7f",
+      "checks": 27
+    },
+    {
+      "path": "docs/qa/v027/legacy-canonical.log",
+      "sha256": "aae0f622e73f073ae03af9d8f428f57b4e8454fad15e13d7d7e2a249c34243f6",
+      "checks": 25
+    },
+    {
+      "path": "docs/qa/v027/currency-direct.log",
+      "sha256": "7e49d1ec7e903eaa6c7fe05aab862cc73f986319fda1987e9a692ea650dee5bc",
+      "checks": 44
+    },
+    {
+      "path": "docs/qa/v027/reference-runtime.log",
+      "sha256": "182ae820da02367d51c33f9391ca1c9d60c58942f5c2db3d71b1142ad0454285",
+      "checks": 3488
+    },
+    {
+      "path": "docs/qa/v027/root-ui/metadata-ui-38.log.txt",
+      "sha256": "6c7dd5ca782577efa418b61c58145712179f10cee9013192a3b3de4332d7ca3b",
+      "checks": 38
+    }
+  ],
+  "checks": 164828,
+  "report_count": 9,
+  "source_core_stage": "b5aa4f92c9f877028f74d02ec16544a3babf9809",
+  "root_ui_stage": "0ca1e5b63f8408d273d40704877a5ab87a41505b",
+  "production_inputs": 352,
+  "historical_full_rerun": false,
+  "600_second_test_deleted": true,
+  "evidence_reuse": "Eight direct backend reports use the unchanged crafting core; root UI 38 checks and native mouse use identical final UI/core. Final font adds four glyphs with retained outlines/metrics, verified separately."
+}

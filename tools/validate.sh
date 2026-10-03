@@ -18,7 +18,8 @@ M0_VALIDATION_DIR="$(mktemp -d /tmp/godot-m0-scene-XXXXXX)"
 M1_VALIDATION_DIR="$(mktemp -d /tmp/godot-m1-batch.XXXXXX)"
 mkdir -p /tmp/godot-currency-dev
 CURRENCY_VALIDATION_DIR="$(mktemp -d /tmp/godot-currency-dev/batch.XXXXXX)"
-trap 'rm -rf -- "$VALIDATION_DIR" "$PIERCE_VALIDATION_DIR" "$CRAFT_VALIDATION_DIR" "$M0_VALIDATION_DIR" "$M1_VALIDATION_DIR" "$CURRENCY_VALIDATION_DIR"' EXIT
+ROOT_CRAFT_DIR="$(mktemp -d /tmp/godot-root-craft-ui-batch.XXXXXX)"
+trap 'rm -rf -- "$VALIDATION_DIR" "$PIERCE_VALIDATION_DIR" "$CRAFT_VALIDATION_DIR" "$M0_VALIDATION_DIR" "$M1_VALIDATION_DIR" "$CURRENCY_VALIDATION_DIR" "$ROOT_CRAFT_DIR"' EXIT
 
 # Isolate test settings and saves, including in restricted cloud workspaces.
 if [[ "$(uname -s)" == "Linux" ]]; then
@@ -35,8 +36,12 @@ run_check() {
 		export XDG_DATA_HOME="$VALIDATION_DIR/data/check-$CHECK_INDEX"
 		unset GODOT_CRAFTING_TEST_ROOT
 		case "${2:-}" in
-			res://tests/crafting_operations_test.gd|res://tests/crafting_growth_*|res://tests/crafting_metadata_ui_test.gd|res://tests/canonical_*|res://tests/offense_skill_*|res://tests/elemental_encounter_*|res://tests/flask_*|res://tests/save_receipt_revision_test.gd|res://tests/source_*|res://tests/independent_menus_test.gd)
+			res://tests/crafting_operations_test.gd|res://tests/crafting_growth_*|res://tests/canonical_*|res://tests/offense_skill_*|res://tests/elemental_encounter_*|res://tests/flask_*|res://tests/save_receipt_revision_test.gd|res://tests/source_*|res://tests/independent_menus_test.gd)
 				export XDG_DATA_HOME="$M1_VALIDATION_DIR/check-$CHECK_INDEX/data"
+				unset PIERCE_QA_ROOT
+				;;
+			res://tests/crafting_metadata_ui_test.gd)
+				export XDG_DATA_HOME="$ROOT_CRAFT_DIR/check-$CHECK_INDEX/data"
 				unset PIERCE_QA_ROOT
 				;;
 			res://tests/currency_transaction_test.gd)
