@@ -197,9 +197,9 @@ func _test_layout_and_panels() -> void:
 		arena.hud.open_panel(panel)
 		for frame: int in range(5):
 			await process_frame
-		var scroll: Control = arena.hud.find_child("PanelScroll", true, false)
-		var body: Control = arena.hud.find_child("PanelBody", true, false)
-		var modal: Control = arena.hud.find_child("BuildPanel", true, false)
+		var scroll: Control = arena.hud._panel_scroll
+		var body: Control = arena.hud._panel_body
+		var modal: Control = arena.hud._modal.find_child("BuildPanel",true,false)
 		var hud_root: Control = arena.hud.get_node("HUDRoot")
 		_expect(body.size.x <= scroll.size.x + 1.0, "Maximum UI/font avoids horizontal overflow: " + panel)
 		_expect(modal.get_rect().end.y <= hud_root.size.y + 1.0, "Maximum UI/font frame remains within viewport: " + panel)

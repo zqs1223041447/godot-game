@@ -51,9 +51,9 @@ func _golden_streams() -> void:
 	_expect(golden_samples == 1296, "432 legacy, 432 runewood and 432 mixed frozen samples exercised")
 
 func _profiles() -> void:
-	_expect(Catalog.pool_profiles().keys() == ["legacy", "runewood", "defense", "local_weapon", "nine_slot"], "Ordered profiles are explicit and independent")
-	_expect(Catalog.all_base_ids() == Catalog.BASES.keys() + Catalog.EXPANSION_BASES.keys() + ["emberhide_vest", "ashwood_bow"] + Catalog.NINE_SLOT_BASES.keys(), "Canonical base listing includes every profile exactly once")
-	_expect(Catalog.all_affix_ids() == Catalog.AFFIXES.keys() + Catalog.EXPANSION_AFFIXES.keys() + ["emberward", "whetstone_edge", "tempered_edge"] + Catalog.NINE_SLOT_AFFIXES.keys(), "Canonical affix listing includes every family exactly once")
+	_expect(Catalog.pool_profiles().keys() == ["nine_slot", "legacy", "runewood", "defense", "local_weapon"], "New profile has an explicit listing position; historical roll arrays remain frozen")
+	_expect(Catalog.all_base_ids() == Catalog.NINE_SLOT_BASES.keys() + Catalog.BASES.keys() + Catalog.EXPANSION_BASES.keys() + ["emberhide_vest", "ashwood_bow"], "Canonical base listing includes every profile exactly once")
+	_expect(Catalog.all_affix_ids() == Catalog.NINE_SLOT_AFFIXES.keys() + Catalog.AFFIXES.keys() + Catalog.EXPANSION_AFFIXES.keys() + ["emberward", "whetstone_edge", "tempered_edge"], "Canonical affix listing includes every family exactly once")
 	_expect(Catalog.pool_profile("legacy").min_save_version == 4 and Catalog.pool_profile("runewood").min_save_version == 6 and Catalog.pool_profile("defense").min_save_version == 8, "Each vocabulary has an explicit minimum save version")
 	var profiles: Dictionary = Catalog.pool_profiles()
 	profiles.legacy.base_ids.clear()

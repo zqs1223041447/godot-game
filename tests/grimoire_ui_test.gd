@@ -49,7 +49,7 @@ func run()->void:
 		await process_frame
 		expect(arena.hud.is_blocking(),"UI retains modal pause: "+page)
 		expect(arena.state._snapshot()==state,"Opening style-only UI never changes build: "+page)
-		var frame:Control=arena.hud.find_child("BuildPanel",true,false)
+		var frame:Control=arena.hud._modal.find_child("BuildPanel",true,false)
 		expect(frame.get_theme_stylebox("panel").book_cover,"Same book frame across panels: "+page)
 	arena.hud.open_panel("inventory")
 	var summary:Label=arena.hud.find_child("DerivedStatsLabel",true,false)

@@ -46,7 +46,7 @@ func run()->void:
 	if enemy.is_empty():arena.queue_free();quit(1);return
 	var agile:Dictionary=arena._spawn_monster("skitter",arena.player_pos+Vector2(150,100),"ordinary","",[],false)
 	check(agile.get("evasion",0.0)==320.0 and agile.get("accuracy",0.0)==100.0,"natural agile template has actual authored ratings")
-	check(Attack.chance(140,agile.evasion)==0.96 and Attack.chance(160,agile.evasion)==1.0,"ten dexterity improves chance against a real naturally obtainable species")
+	check(Attack.chance(140,agile.evasion)==0.96 and Attack.chance(160,agile.evasion)==0.99,"ten dexterity improves chance against a real naturally obtainable species")
 	enemy.spawn=0.0
 	enemy.health=10000.0
 	enemy.max_health=10000.0

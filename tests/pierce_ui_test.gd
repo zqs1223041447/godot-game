@@ -265,9 +265,9 @@ func _maximum_font_layout() -> void:
 	for frame: int in range(6):
 		await process_frame
 	_expect(root.get_visible_rect().size == Vector2(1280, 720) and arena.visual_settings.ui_scale == 1.1 and arena.visual_settings.font_scale == 1.2, "Layout really runs at 720p and both maximum supported scales")
-	var modal: Control = arena.hud.find_child("BuildPanel", true, false)
-	var scroll: ScrollContainer = arena.hud.find_child("PanelScroll", true, false) as ScrollContainer
-	var body: Control = arena.hud.find_child("PanelBody", true, false)
+	var modal: Control = arena.hud._modal.find_child("BuildPanel",true,false)
+	var scroll: ScrollContainer = arena.hud._panel_scroll as ScrollContainer
+	var body: Control = arena.hud._panel_body
 	var viewport: Rect2 = root.get_visible_rect()
 	var bounds: Rect2 = modal.get_global_rect()
 	_expect(bounds.position.x >= -1.0 and bounds.position.y >= -1.0 and bounds.end.x <= viewport.end.x + 1.0 and bounds.end.y <= viewport.end.y + 1.0, "Maximum-size K frame remains inside actual 720p viewport")

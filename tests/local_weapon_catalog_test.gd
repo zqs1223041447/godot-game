@@ -60,7 +60,7 @@ func _goldens() -> void:
 	completed = true
 
 func _metadata() -> void:
-	_expect(Catalog.CURRENT_VOCABULARY == 9 and Catalog.CURRENT_LOOT_PROFILE_ID == "v0.13", "Current vocabulary and explicitly named dispatch advance together")
+	_expect(Catalog.CURRENT_VOCABULARY == 14 and Catalog.CURRENT_LOOT_PROFILE_ID == "v0.13" and Catalog.pool_profile("nine_slot").min_save_version==14, "New vocabulary is gated while legacy dispatch keeps its frozen v0.13 contract")
 	_expect(Catalog.all_base_ids().size() == 14 and Catalog.all_affix_ids().size() == 26, "One local base/two local families are preserved alongside the nine-slot profile")
 	_expect(Catalog.pool_profile("local_weapon").min_save_version == 9 and Catalog.pool_profile("local_weapon").balance_origin == "original", "Local vocabulary fence and original numerical origin are explicit")
 	var base: Dictionary = Catalog.base_definition("ashwood_bow")

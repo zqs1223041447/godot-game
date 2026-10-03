@@ -127,7 +127,7 @@ func _all_families() -> void:
 						_expect(Catalog.validate_instance(item), "Endpoint fixture is valid: " + base_id + "/" + id)
 						_verify_plan(item, 0 if maximum else -17)
 	_expect(seen_bases.size() == Catalog.all_base_ids().size(), "Every actual base exercised")
-	_expect(seen_families.size() == Catalog.all_affix_ids().size() and family_tiers.size() == 57, "Every actual family and tier exercised")
+	_expect(seen_families.size() == Catalog.all_affix_ids().size() and family_tiers.size() == 78, "Every actual family and tier exercised")
 	# Each authored tick, including both endpoints, is reachable; no exclusive max
 	# or forced 'different value' implementation can pass these checks.
 	for id: String in Catalog.all_affix_ids():

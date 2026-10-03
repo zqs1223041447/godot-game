@@ -57,9 +57,9 @@ func run() -> void:
 				arena.hud.open_panel(panel)
 				for i: int in range(5):
 					await process_frame
-				var scroll: Control = arena.hud.find_child("PanelScroll",true,false)
-				var body: Control = arena.hud.find_child("PanelBody",true,false)
-				var frame: Control = arena.hud.find_child("BuildPanel",true,false)
+				var scroll: Control = arena.hud._panel_scroll
+				var body: Control = arena.hud._panel_body
+				var frame: Control = arena.hud._modal.find_child("BuildPanel",true,false)
 				var hud_root: Control = arena.hud.get_node("HUDRoot")
 				expect(frame.get_rect().end.y <= hud_root.size.y+1,"frame fits height %s %.1f %.1f"%[panel,ui,font])
 				expect(body.size.x <= scroll.size.x+1,"no horizontal content clipping %s %.1f %.1f (body%.0f scroll%.0f)"%[panel,ui,font,body.size.x,scroll.size.x])

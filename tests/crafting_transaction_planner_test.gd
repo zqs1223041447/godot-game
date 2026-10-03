@@ -478,6 +478,6 @@ func _all_catalog_items() -> void:
 		for operation: String in ["salvage", "recalibrate"]:
 			_reject_quote(_context(normal), operation, ITEM_ID, "no_affixes")
 	_expect(seen_bases.size() == Catalog.all_base_ids().size(), "Every applicable real base is exercised")
-	_expect(seen_families.size() == Catalog.all_affix_ids().size() and eligible_pairs == 91,
-		"Every actual family and all 91 applicable base/family pairs are exercised")
+	_expect(seen_families.size() == Catalog.all_affix_ids().size() and eligible_pairs == 123,
+		"Every actual family and all 123 applicable base/family pairs are exercised")
 	completed = true

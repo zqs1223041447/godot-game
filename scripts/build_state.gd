@@ -123,7 +123,7 @@ func _stable_input_signature() -> PackedByteArray:
 		selected_jewels[id] = jewels.get(id, {})
 	# Byte equality detects legacy public nested edits without hash collisions.
 	# XP, wallet and bag coordinates are deliberately absent; level is retained.
-	return var_to_bytes([gear, allocated_nodes, socketed_jewels, selected_jewels, level])
+	return var_to_bytes([gear, allocated_nodes, socketed_jewels, selected_jewels, level, Passives.Registry.get_revision()])
 
 
 func _ensure_stable_cache() -> void:

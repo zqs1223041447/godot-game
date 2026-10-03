@@ -376,7 +376,7 @@ func _frozen_flights() -> void:
 func _literal_migration() -> void:
 	var bytes: PackedByteArray = FileAccess.get_file_as_bytes(V9)
 	var legacy: Dictionary = JSON.parse_string(bytes.get_string_from_utf8())
-	_expect(legacy.version == 9 and legacy.size() == 16 and Equipment.CURRENT_VOCABULARY == 9, "Independent literal fixture is historical v9, including local weapon vocabulary")
+	_expect(legacy.version == 9 and legacy.size() == 16 and Equipment.pool_profile("local_weapon").min_save_version == 9, "Independent literal fixture is historical v9, including local weapon vocabulary")
 	var path: String = "user://pierce_literal_v9.json"
 	var backup: String = path + ".v9-backup.json"
 	_write(path, bytes)
