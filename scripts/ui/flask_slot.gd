@@ -88,4 +88,5 @@ func _gui_input(event: InputEvent) -> void:
 		accept_event()
 
 func _make_custom_tooltip(text_value: String) -> Object:
+	if text_value.strip_edges().is_empty() or (editing and not str(status.get("uid","")).is_empty()): return null
 	return Tooltips.wrapped_tooltip(self,text_value)
