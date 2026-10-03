@@ -476,7 +476,7 @@ func _cell_pitch() -> float:
 func _grid_origin() -> Vector2:
 	var board_size := Vector2(_columns, _rows) * _cell_pitch()
 	var free_space: Vector2 = size - board_size
-	return Vector2(maxf(EDGE_INSET, free_space.x * 0.5), maxf(EDGE_INSET, free_space.y * 0.5))
+	return Vector2(maxf(EDGE_INSET, free_space.x * 0.5), EDGE_INSET)
 
 
 func _entry_rect(entry: Dictionary) -> Rect2:

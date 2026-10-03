@@ -17,7 +17,8 @@ var model: RefCounted
 var save_path := "user://build_save.json"
 var _grid: Control
 var _slots: Dictionary = {}
-var _equipment_grid: GridContainer
+var _equipment_grid: Control
+var _flask_bar: HBoxContainer
 var _pending: VBoxContainer
 var _summary: Label
 var _page_label: Label
@@ -115,12 +116,11 @@ func _build() -> void:
 	DockStyle.style_action(_discard,11)
 	_discard.pressed.connect(_request_discard)
 	actions.add_child(_discard)
-	_equipment_grid = GridContainer.new()
+	_equipment_grid = Control.new()
 	_equipment_grid.name = "EquipmentSlotGrid"
-	_equipment_grid.columns = 3
+	_equipment_grid.custom_minimum_size.y = 156.0
+	_equipment_grid.resized.connect(_layout_slots)
 	_equipment_grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_equipment_grid.add_theme_constant_override("h_separation", 4)
-	_equipment_grid.add_theme_constant_override("v_separation", 4)
 	add_child(_equipment_grid)
 	for slot: String in Slots.all_slots():
 		var target := SlotTarget.new()
@@ -130,7 +130,7 @@ func _build() -> void:
 		target.text = ""
 		target.alignment = HORIZONTAL_ALIGNMENT_CENTER
 		target.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		target.custom_minimum_size = Vector2(76,48)
+		target.custom_minimum_size = Vector2.ZERO
 		target.add_theme_font_size_override("font_size",10)
 		target.add_theme_constant_override("outline_size",0)
 		# Preserve the approved painted equipment frames and icon-above-name
@@ -143,8 +143,20 @@ func _build() -> void:
 		target.mouse_exited.connect(func(): hover_left.emit())
 		_equipment_grid.add_child(target)
 		_slots[slot] = target
-	# The equipment keeps its original 3×3 icon-above-name structure. All bag
-	# operations are grouped below it with the page selector and bag itself.
+	# Compact anatomical placement follows the user reference. Inventory actions
+	# remain below the equipment rather than occupying another screen panel.
+	_flask_bar = HBoxContainer.new()
+	_flask_bar.name = "FlaskBelt"
+	_flask_bar.alignment = BoxContainer.ALIGNMENT_CENTER
+	_flask_bar.add_theme_constant_override("separation",5)
+	add_child(_flask_bar)
+	for index: int in range(5):
+		var socket := PanelContainer.new()
+		socket.name = "FlaskSocket_%d" % index
+		socket.custom_minimum_size = Vector2(30,32)
+		socket.add_theme_stylebox_override("panel", DockStyle.surface(Color("dfd1b3"),2.0))
+		socket.tooltip_text = "空药剂槽"
+		_flask_bar.add_child(socket)
 	move_child(top, get_child_count()-1)
 	var page_bar := HBoxContainer.new()
 	page_bar.name = "BagPageControls"
@@ -279,7 +291,26 @@ func _on_visibility_changed() -> void:
 
 
 func _layout_slots() -> void:
-	if is_instance_valid(_equipment_grid): _equipment_grid.queue_redraw()
+	if not is_instance_valid(_equipment_grid): return
+	# Authored in a compact 280×156 coordinate frame; scaling is uniform.
+	var rects := {
+		"helmet": Rect2(111,0,58,36),
+		"weapon": Rect2(20,18,52,88),
+		"body_armour": Rect2(106,40,68,70),
+		"amulet": Rect2(181,35,35,35),
+		"ring_1": Rect2(67,74,34,34),
+		"ring_2": Rect2(181,74,34,34),
+		"gloves": Rect2(48,113,49,40),
+		"belt": Rect2(107,115,67,27),
+		"boots": Rect2(184,113,49,40),
+	}
+	var scale_value := minf(1.0, _equipment_grid.size.x / 280.0)
+	var offset := Vector2((_equipment_grid.size.x - 280.0*scale_value)*0.5,0)
+	for slot: String in _slots:
+		var bounds: Rect2 = rects[slot]
+		_slots[slot].position = offset + bounds.position*scale_value
+		_slots[slot].size = bounds.size*scale_value
+	_equipment_grid.queue_redraw()
 
 
 func _turn_page(delta: int) -> void:
