@@ -215,13 +215,35 @@ func _test_recovery() -> void:
 	locations.recovered_item.index = -1
 	_expect_rejected(fixture.metadata, locations, fixture.context, "invalid_location", "negative recovery index")
 	locations = fixture.locations.duplicate(true)
-	locations.recovered_item.index = 5
-	_expect_rejected(fixture.metadata, locations, fixture.context, "invalid_location", "recovery index above four")
+	locations.recovered_item.index = fixture.metadata.size()
+	_expect_rejected(fixture.metadata, locations, fixture.context, "invalid_location", "recovery index equal to item count")
+	locations = fixture.locations.duplicate(true)
+	locations.recovered_item.index = true
+	_expect_rejected(fixture.metadata, locations, fixture.context, "invalid_location", "recovery index rejects bool")
+	locations = fixture.locations.duplicate(true)
+	locations.recovered_item.index = 1.0
+	_expect_rejected(fixture.metadata, locations, fixture.context, "invalid_location", "recovery index rejects float")
 	locations = fixture.locations.duplicate(true)
 	locations["another_recovery"] = {"kind": "recovery", "index": 4}
 	var metadata: Dictionary = fixture.metadata.duplicate(true)
 	metadata["another_recovery"] = _item("support_gem")
 	_expect_rejected(metadata, locations, fixture.context, "duplicate_target", "duplicate recovery target")
+	for item_count: int in [6, 12]:
+		var migration_metadata: Dictionary = {}
+		var migration_locations: Dictionary = {}
+		for index: int in range(item_count):
+			var uid: String = "migration_%02d" % index
+			migration_metadata[uid] = _item("support_gem")
+			migration_locations[uid] = {"kind": "recovery", "index": index}
+		var migration_result: Dictionary = Rules.validate(migration_metadata, migration_locations, _context(true))
+		_expect(migration_result.ok and migration_result.occupied_targets.size() == item_count,
+			"Migration can preserve %d recovery items" % item_count)
+		_expect(migration_result.occupied_targets["recovery:%d" % (item_count - 1)] == "migration_%02d" % (item_count - 1),
+			"Highest in-range migration index is accepted for %d items" % item_count)
+		var out_of_range_locations: Dictionary = migration_locations.duplicate(true)
+		out_of_range_locations["migration_00"].index = item_count
+		_expect_rejected(migration_metadata, out_of_range_locations, _context(true), "invalid_location",
+			"Recovery index N is rejected for %d items" % item_count)
 	locations = fixture.locations.duplicate(true)
 	locations["recovered_item"]["uid"] = "unexpected"
 	_expect_rejected(fixture.metadata, locations, fixture.context, "invalid_location", "recovery rejects extra fields")

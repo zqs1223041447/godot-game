@@ -6,7 +6,7 @@ extends RefCounted
 const BAG_COLUMNS: int = 12
 const BAG_ROWS: int = 8
 const MAX_ITEM_ID_LENGTH: int = 128
-const MAX_LOCATION_INDEX: int = 4
+const MAX_SUPPORT_INDEX: int = 4
 const ITEM_KINDS: Array[String] = ["equipment", "jewel", "skill_gem", "support_gem"]
 const EQUIPMENT_CATEGORIES: Array[String] = [
 	"weapon", "body_armour", "amulet", "ring", "boots", "belt", "gloves", "helmet",
@@ -126,6 +126,8 @@ static func validate(metadata_by_uid: Variant, locations: Variant, context: Vari
 			"recovery":
 				if not context.allow_recovery:
 					return _failure("recovery_disabled", "普通移动不允许使用迁移暂存位置")
+				if location.index >= metadata_by_uid.size():
+					return _failure("invalid_location", "recovery index 必须小于物品总数")
 				var recovery_key: String = "recovery:%d" % location.index
 				if occupied_targets.has(recovery_key):
 					return _failure("duplicate_target", "%s 已被 %s 占用" % [recovery_key, occupied_targets[recovery_key]])
@@ -210,11 +212,11 @@ static func _location_shape_error(value: Dictionary, kind: String) -> String:
 			if not _stable_id(value.group_id): return "group_id 必须是稳定字符串"
 		"skill_support":
 			if not _stable_id(value.group_id): return "group_id 必须是稳定字符串"
-			if typeof(value.index) != TYPE_INT or value.index < 0 or value.index > MAX_LOCATION_INDEX:
+			if typeof(value.index) != TYPE_INT or value.index < 0 or value.index > MAX_SUPPORT_INDEX:
 				return "辅助 index 必须是 0..4 的真正整数"
 		"recovery":
-			if typeof(value.index) != TYPE_INT or value.index < 0 or value.index > MAX_LOCATION_INDEX:
-				return "recovery index 必须是 0..4 的真正整数"
+			if typeof(value.index) != TYPE_INT or value.index < 0:
+				return "recovery index 必须是非负真正整数"
 	return ""
 
 
