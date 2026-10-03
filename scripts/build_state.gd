@@ -797,7 +797,7 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	if migrated_from_v11:
 		migration_message = "构筑已升级：装备、碎片、天赋与已有辅助保留。新星与陨星可添加广域辅助；按 K 查看面积、半径与命中取舍。"
 	if migrated_from_v12:
-		migration_message = "构筑已升级：装备、碎片与已有辅助保留。新星与陨星新增凝域辅助，可与广域组合；按 K 比较面积、命中与耗魔。"
+		migration_message = "构筑已升级：装备、碎片与已有辅助保留。本批辅助覆盖8种技能；按 K 比较面积、命中、速度、魔力与冷却的组合取舍。"
 	migration_backup_path = ""
 	_migration_source_path = path if _migration_version < SAVE_VERSION else ""
 	_migration_source_bytes = source_bytes if _migration_version < SAVE_VERSION else PackedByteArray()

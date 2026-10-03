@@ -94,7 +94,7 @@ def main():
     assert 'font-size:16px' in (REF/'reference.css').read_text()
     spec=importlib.util.spec_from_file_location('generator',ROOT/'tools/build_reference.py');module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
     art=json.loads((REF/'art/manifest.json').read_text())
-    assert art['status']=='complete' and art['written_images']==41 and len(art['entries'])==41
+    assert art['status']=='complete' and art['written_images']==53 and len(art['entries'])==53
     expected_art={(cat,key) for cat in ['skills','supports','equipment','fixed_items','jewels','monsters'] for key in data[cat]}
     actual_art={(('fixed_items' if row.get('entry_type')=='fixed_item' else row['category']),row['id']) for row in art['entries']}
     assert actual_art==expected_art, 'Art manifest omits or adds runtime entries'

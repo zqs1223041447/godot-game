@@ -1,0 +1,380 @@
+[
+	{
+		"area_multiplier": 0.9216,
+		"cooldown": 6.0,
+		"kills": 5,
+		"mana": 95.44,
+		"radius": 148.79999999999998,
+		"save_matches": true,
+		"skill": "nova",
+		"stage": "native_mouse_key_720",
+		"supports": [
+			"breadth",
+			"concentrate"
+		]
+	},
+	{
+		"skill": "tornado",
+		"stage": "programmatic_menu_render",
+		"supports": [
+			"physical_focus",
+			"focus"
+		],
+		"visible_cards": 6,
+		"width": 1280
+	},
+	{
+		"skill": "bolt",
+		"stage": "programmatic_menu_render",
+		"supports": [
+			"swift_projectiles",
+			"lightning_focus"
+		],
+		"visible_cards": 8,
+		"width": 1280
+	},
+	{
+		"skill": "frost",
+		"stage": "programmatic_menu_render",
+		"supports": [
+			"heavy_projectiles",
+			"lingering_chill"
+		],
+		"visible_cards": 9,
+		"width": 1280
+	},
+	{
+		"skill": "nova",
+		"stage": "programmatic_menu_render",
+		"supports": [
+			"breadth",
+			"concentrate"
+		],
+		"visible_cards": 5,
+		"width": 1280
+	},
+	{
+		"skill": "meteor",
+		"stage": "programmatic_menu_render",
+		"supports": [
+			"fire_focus",
+			"concentrate"
+		],
+		"visible_cards": 5,
+		"width": 1280
+	},
+	{
+		"skill": "chain",
+		"stage": "programmatic_menu_render",
+		"supports": [
+			"chain_extension",
+			"chain_reach"
+		],
+		"visible_cards": 5,
+		"width": 1280
+	},
+	{
+		"skill": "dash",
+		"stage": "programmatic_menu_render",
+		"supports": [
+			"efficiency",
+			"quickcast"
+		],
+		"visible_cards": 2,
+		"width": 1280
+	},
+	{
+		"skill": "ward",
+		"stage": "programmatic_menu_render",
+		"supports": [
+			"efficiency",
+			"quickcast"
+		],
+		"visible_cards": 2,
+		"width": 1280
+	},
+	{
+		"skill": "tornado",
+		"stage": "programmatic_menu_render",
+		"supports": [
+			"physical_focus",
+			"focus"
+		],
+		"visible_cards": 6,
+		"width": 2560
+	},
+	{
+		"skill": "bolt",
+		"stage": "programmatic_menu_render",
+		"supports": [
+			"swift_projectiles",
+			"lightning_focus"
+		],
+		"visible_cards": 8,
+		"width": 2560
+	},
+	{
+		"skill": "frost",
+		"stage": "programmatic_menu_render",
+		"supports": [
+			"heavy_projectiles",
+			"lingering_chill"
+		],
+		"visible_cards": 9,
+		"width": 2560
+	},
+	{
+		"skill": "nova",
+		"stage": "programmatic_menu_render",
+		"supports": [
+			"breadth",
+			"concentrate"
+		],
+		"visible_cards": 5,
+		"width": 2560
+	},
+	{
+		"skill": "meteor",
+		"stage": "programmatic_menu_render",
+		"supports": [
+			"fire_focus",
+			"concentrate"
+		],
+		"visible_cards": 5,
+		"width": 2560
+	},
+	{
+		"skill": "chain",
+		"stage": "programmatic_menu_render",
+		"supports": [
+			"chain_extension",
+			"chain_reach"
+		],
+		"visible_cards": 5,
+		"width": 2560
+	},
+	{
+		"skill": "dash",
+		"stage": "programmatic_menu_render",
+		"supports": [
+			"efficiency",
+			"quickcast"
+		],
+		"visible_cards": 2,
+		"width": 2560
+	},
+	{
+		"skill": "ward",
+		"stage": "programmatic_menu_render",
+		"supports": [
+			"efficiency",
+			"quickcast"
+		],
+		"visible_cards": 2,
+		"width": 2560
+	},
+	{
+		"effects": 0,
+		"recipe": {
+			"area_multiplier": 0.9216,
+			"base_radius": 155.0,
+			"radius": 148.79999999999998
+		},
+		"skill": "nova",
+		"stage": "programmatic_actual_cast_render"
+	},
+	{
+		"effects": 0,
+		"recipe": {
+			"area_multiplier": 0.64,
+			"base_radius": 110.0,
+			"radius": 88.0
+		},
+		"skill": "meteor",
+		"stage": "programmatic_actual_cast_render"
+	},
+	{
+		"effects": 0,
+		"recipe": {
+			"added_effectiveness": 0.85,
+			"coefficient": 0.85,
+			"damage_type": "cold",
+			"initial_count": 5,
+			"pierce": 2,
+			"slow": 4.5,
+			"speed": 390.0,
+			"spread": 0.14
+		},
+		"skill": "frost",
+		"stage": "programmatic_actual_cast_render"
+	},
+	{
+		"effects": 0,
+		"recipe": {
+			"first_range": 600.0,
+			"followup_range": 286.0,
+			"hit": {
+				"added_effectiveness": 2.2,
+				"added_effectiveness_loss_per_bounce": 0.2,
+				"base_coefficient": 2.2,
+				"base_coefficient_loss_per_bounce": 0.2,
+				"bounce_count": 7,
+				"damage_type": "lightning"
+			}
+		},
+		"skill": "chain",
+		"stage": "programmatic_actual_cast_render"
+	},
+	{
+		"effects": 2,
+		"recipe": {
+			"area_multiplier": 0.9216,
+			"base_radius": 155.0,
+			"radius": 148.79999999999998
+		},
+		"skill": "nova",
+		"stage": "programmatic_actual_cast_render"
+	},
+	{
+		"effects": 2,
+		"recipe": {
+			"area_multiplier": 0.64,
+			"base_radius": 110.0,
+			"radius": 88.0
+		},
+		"skill": "meteor",
+		"stage": "programmatic_actual_cast_render"
+	},
+	{
+		"effects": 2,
+		"recipe": {
+			"added_effectiveness": 0.85,
+			"coefficient": 0.85,
+			"damage_type": "cold",
+			"initial_count": 5,
+			"pierce": 2,
+			"slow": 4.5,
+			"speed": 390.0,
+			"spread": 0.14
+		},
+		"skill": "frost",
+		"stage": "programmatic_actual_cast_render"
+	},
+	{
+		"effects": 2,
+		"recipe": {
+			"first_range": 600.0,
+			"followup_range": 286.0,
+			"hit": {
+				"added_effectiveness": 2.2,
+				"added_effectiveness_loss_per_bounce": 0.2,
+				"base_coefficient": 2.2,
+				"base_coefficient_loss_per_bounce": 0.2,
+				"bounce_count": 7,
+				"damage_type": "lightning"
+			}
+		},
+		"skill": "chain",
+		"stage": "programmatic_actual_cast_render"
+	},
+	{
+		"boundary_directions": 6,
+		"effects": 0,
+		"pass": true,
+		"radius": 124.0,
+		"skill": "nova",
+		"stage": "reduced_area_pixel_bounds",
+		"supports": [
+			"concentrate"
+		],
+		"visible_pixels": 1271
+	},
+	{
+		"boundary_directions": 8,
+		"effects": 2,
+		"pass": true,
+		"radius": 124.0,
+		"skill": "nova",
+		"stage": "reduced_area_pixel_bounds",
+		"supports": [
+			"concentrate"
+		],
+		"visible_pixels": 2090
+	},
+	{
+		"boundary_directions": 6,
+		"effects": 0,
+		"pass": true,
+		"radius": 148.79999999999998,
+		"skill": "nova",
+		"stage": "reduced_area_pixel_bounds",
+		"supports": [
+			"breadth",
+			"concentrate"
+		],
+		"visible_pixels": 1392
+	},
+	{
+		"boundary_directions": 8,
+		"effects": 2,
+		"pass": true,
+		"radius": 148.79999999999998,
+		"skill": "nova",
+		"stage": "reduced_area_pixel_bounds",
+		"supports": [
+			"breadth",
+			"concentrate"
+		],
+		"visible_pixels": 2317
+	},
+	{
+		"boundary_directions": 4,
+		"effects": 0,
+		"pass": true,
+		"radius": 88.0,
+		"skill": "meteor",
+		"stage": "reduced_area_pixel_bounds",
+		"supports": [
+			"concentrate"
+		],
+		"visible_pixels": 954
+	},
+	{
+		"boundary_directions": 4,
+		"effects": 2,
+		"pass": true,
+		"radius": 88.0,
+		"skill": "meteor",
+		"stage": "reduced_area_pixel_bounds",
+		"supports": [
+			"concentrate"
+		],
+		"visible_pixels": 1199
+	},
+	{
+		"boundary_directions": 4,
+		"effects": 0,
+		"pass": true,
+		"radius": 105.6,
+		"skill": "meteor",
+		"stage": "reduced_area_pixel_bounds",
+		"supports": [
+			"breadth",
+			"concentrate"
+		],
+		"visible_pixels": 1332
+	},
+	{
+		"boundary_directions": 4,
+		"effects": 2,
+		"pass": true,
+		"radius": 105.6,
+		"skill": "meteor",
+		"stage": "reduced_area_pixel_bounds",
+		"supports": [
+			"breadth",
+			"concentrate"
+		],
+		"visible_pixels": 1678
+	}
+]

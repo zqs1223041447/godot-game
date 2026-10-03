@@ -7,10 +7,10 @@
 	"transparent_background": true,
 	"file_paths_relative_to": "manifest.json directory",
 	"status": "complete",
-	"written_images": 41,
+	"written_images": 53,
 	"counts": {
 		"skills": 8,
-		"supports": 4,
+		"supports": 16,
 		"equipment": 18,
 		"jewels": 4,
 		"monsters": 7
@@ -99,6 +99,60 @@
 		},
 		{
 			"category": "supports",
+			"id": "chain_extension",
+			"name": "连锁延展辅助",
+			"file": "supports/chain_extension.png",
+			"source_renderer": "SkillEmblem._draw",
+			"source_catalog": "SupportRegistry.SUPPORTS",
+			"entry_type": "support"
+		},
+		{
+			"category": "supports",
+			"id": "chain_reach",
+			"name": "远链辅助",
+			"file": "supports/chain_reach.png",
+			"source_renderer": "SkillEmblem._draw",
+			"source_catalog": "SupportRegistry.SUPPORTS",
+			"entry_type": "support"
+		},
+		{
+			"category": "supports",
+			"id": "cold_focus",
+			"name": "冰霜专注辅助",
+			"file": "supports/cold_focus.png",
+			"source_renderer": "SkillEmblem._draw",
+			"source_catalog": "SupportRegistry.SUPPORTS",
+			"entry_type": "support"
+		},
+		{
+			"category": "supports",
+			"id": "concentrate",
+			"name": "凝域辅助",
+			"file": "supports/concentrate.png",
+			"source_renderer": "SkillEmblem._draw",
+			"source_catalog": "SupportRegistry.SUPPORTS",
+			"entry_type": "support"
+		},
+		{
+			"category": "supports",
+			"id": "efficiency",
+			"name": "节能辅助",
+			"file": "supports/efficiency.png",
+			"source_renderer": "SkillEmblem._draw",
+			"source_catalog": "SupportRegistry.SUPPORTS",
+			"entry_type": "support"
+		},
+		{
+			"category": "supports",
+			"id": "fire_focus",
+			"name": "火焰专注辅助",
+			"file": "supports/fire_focus.png",
+			"source_renderer": "SkillEmblem._draw",
+			"source_catalog": "SupportRegistry.SUPPORTS",
+			"entry_type": "support"
+		},
+		{
+			"category": "supports",
 			"id": "focus",
 			"name": "凝束辅助",
 			"file": "supports/focus.png",
@@ -108,9 +162,63 @@
 		},
 		{
 			"category": "supports",
+			"id": "heavy_projectiles",
+			"name": "缓速强击辅助",
+			"file": "supports/heavy_projectiles.png",
+			"source_renderer": "SkillEmblem._draw",
+			"source_catalog": "SupportRegistry.SUPPORTS",
+			"entry_type": "support"
+		},
+		{
+			"category": "supports",
+			"id": "lightning_focus",
+			"name": "闪电专注辅助",
+			"file": "supports/lightning_focus.png",
+			"source_renderer": "SkillEmblem._draw",
+			"source_catalog": "SupportRegistry.SUPPORTS",
+			"entry_type": "support"
+		},
+		{
+			"category": "supports",
+			"id": "lingering_chill",
+			"name": "寒意延长辅助",
+			"file": "supports/lingering_chill.png",
+			"source_renderer": "SkillEmblem._draw",
+			"source_catalog": "SupportRegistry.SUPPORTS",
+			"entry_type": "support"
+		},
+		{
+			"category": "supports",
+			"id": "physical_focus",
+			"name": "物理专注辅助",
+			"file": "supports/physical_focus.png",
+			"source_renderer": "SkillEmblem._draw",
+			"source_catalog": "SupportRegistry.SUPPORTS",
+			"entry_type": "support"
+		},
+		{
+			"category": "supports",
 			"id": "pierce",
 			"name": "贯穿辅助",
 			"file": "supports/pierce.png",
+			"source_renderer": "SkillEmblem._draw",
+			"source_catalog": "SupportRegistry.SUPPORTS",
+			"entry_type": "support"
+		},
+		{
+			"category": "supports",
+			"id": "quickcast",
+			"name": "疾咏辅助",
+			"file": "supports/quickcast.png",
+			"source_renderer": "SkillEmblem._draw",
+			"source_catalog": "SupportRegistry.SUPPORTS",
+			"entry_type": "support"
+		},
+		{
+			"category": "supports",
+			"id": "swift_projectiles",
+			"name": "疾速投射辅助",
+			"file": "supports/swift_projectiles.png",
 			"source_renderer": "SkillEmblem._draw",
 			"source_catalog": "SupportRegistry.SUPPORTS",
 			"entry_type": "support"

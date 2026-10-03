@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REF = ROOT / 'docs/reference'
 CATEGORIES = [('skills','主动技能'),('supports','辅助技能'),('equipment','随机装备'),('affixes','装备词缀'),('fixed_items','固定装备'),('jewels','珠宝'),('jewel_affixes','珠宝词缀'),('passives','天赋星图'),('mechanisms','共用机制'),('weapon_stages','武器局部阶段'),('defenses','受击与防御'),('crafting','制作与回收'),('monsters','怪物图鉴'),('monster_attacks','怪物攻击'),('encounters','本轮挑战'),('rules','规则与边界')]
 RULE_TITLES = {'damage':'伤害如何结算','supports':'辅助装配','projectiles':'分裂、返回与飞行结束','equipment':'装备与阶级','character_rates':'恢复、移动与普通攻击速度','basic_attack':'普通攻击与武器贡献','allocation':'天赋与珠宝规则','shared':'玩家和怪物共享机制','boundaries':'尚未实现的源游戏语义','sources':'数据来源与实现边界'}
-CAPABILITIES = {'initial_projectiles':'初始投射物数量','projectile_hit':'投射物命中','finite_projectile_pierce':'有限穿透','area_hit':'直接范围命中'}
+CAPABILITIES = {'initial_projectiles':'初始投射物数量','projectile_hit':'投射物命中','finite_projectile_pierce':'有限穿透','area_hit':'直接范围命中','chain_hit':'连锁命中'}
 SLOTS = {'weapon':'武器','armor':'护甲','charm':'护符'}
 TYPES = {'small':'小天赋','notable':'显著天赋','socket':'珠宝孔','start':'起点','prefix':'前缀','suffix':'后缀','ordinary':'普通珠宝','special':'特殊珠宝','legacy':'原始词池','expansion':'扩展词池','runewood':'符木点伤池','defense':'火抗防具池','local_weapon':'白蜡长弓池'}
 
@@ -27,22 +27,42 @@ def component_text(components):
     return ' + '.join(f'{DAMAGE_NAMES[k]} {number(v)}' for k,v in ((key,components.get(key,0)) for key in DAMAGE_NAMES) if v) or '无'
 def percent(value): return number(value*100)+'%'
 def area_diagram(examples, skills):
-    body = '<p>几何面积 ×1.44，半径取平方根后 ×1.20。数值为本游戏初版平衡；此辅助只适配新星与陨星直接命中，不改变独立爆炸、投射物或敌方攻击。</p>'
-    for skill_id, row in examples['skills'].items():
-        base, wide = row['base'], row['wide']
-        scale = 90 / wide['radius']
-        drawing = f'<circle cx="120" cy="110" r="90" fill="#dfc08d" fill-opacity="0.28" stroke="#79571f" stroke-width="2" data-area-radius="{skill_id}-wide" data-value="{wide["radius"]}"/>'
-        drawing += f'<circle cx="120" cy="110" r="{base["radius"]*scale}" fill="none" stroke="#69523a" stroke-dasharray="5 4" data-area-radius="{skill_id}-base" data-value="{base["radius"]}"/>'
-        drawing += f'<text x="235" y="88" fill="#3b281b">半径 {number(base["radius"])} → {number(wide["radius"])}</text><text x="235" y="117" fill="#3b281b">单次命中 {number(base["hit_damage"])} → {number(wide["hit_damage"])}</text><text x="235" y="146" fill="#3b281b">魔力 {number(base["mana"])} → {number(wide["mana"])}</text>'
-        body += f'<figure><svg viewBox="0 0 520 220" role="img" aria-label="{esc(skills[skill_id]["name"])}范围与代价对比">{drawing}</svg><figcaption>{esc(skills[skill_id]["name"])}：虚线为原半径，实线为广域半径；目标体型也参与命中边界。</figcaption></figure>'
-        rows = ''
-        for layout, label in [('single','单个中心目标'),('cluster','五个原范围内目标'),('outer_band','中心一只、外侧四只')]:
-            before, after = base['layouts'][layout], wide['layouts'][layout]
-            rows += f'<tr><th>{label}</th><td>{len(before["hit_indices"])} → {len(after["hit_indices"])}</td><td>{number(before["total_before_defense"])} → {number(after["total_before_defense"])}</td></tr>'
-        body += '<div class="table-scroll"><table><thead><tr><th>固定站位示例</th><th>覆盖目标数</th><th>该次命中合计 · 防御前</th></tr></thead><tbody>'+rows+'</tbody></table></div>'
+    modes=[('base','无辅助'),('wide','广域'),('concentrated','凝域'),('combined','广域＋凝域')]
+    body='<p>面积倍率先相乘，再统一开平方根得到半径倍率；双辅助面积0.9216、半径0.96。数值为本游戏初版预算，不改变投射物、独立爆炸或敌方重击。</p>'
+    for skill_id,row in examples['skills'].items():
+        scale=72/row['wide']['radius']; drawing=''
+        for index,(mode,label) in enumerate(modes):
+            x=90+index*155; sample=row[mode]
+            drawing+=f'<circle cx="{x}" cy="92" r="{sample["radius"]*scale}" fill="#dfc08d" fill-opacity="0.20" stroke="#79571f" stroke-width="1.5" data-area-radius="{skill_id}-{mode}" data-value="{sample["radius"]}"/>'
+            drawing+=f'<text x="{x}" y="185" text-anchor="middle" fill="#3b281b" font-size="13">{label} · {number(sample["radius"])}</text>'
+        body+=f'<figure><svg viewBox="0 0 640 205" role="img" aria-label="{esc(skills[skill_id]["name"])}四种范围对比">{drawing}</svg><figcaption>{esc(skills[skill_id]["name"])} · 半径，目标体型仍参与实际命中。</figcaption></figure>'
+        rows=''
+        for mode,label in modes:
+            sample=row[mode]
+            rows+=f'<tr><th>{label}</th><td>{number(sample["area_multiplier"])}</td><td>{number(sample["radius"])}</td><td>{number(sample["hit_damage"])}</td><td>{number(sample["mana"])}</td></tr>'
+        body+='<div class="table-scroll"><table><thead><tr><th>辅助</th><th>面积倍率</th><th>半径</th><th>单击 · 防御前</th><th>魔力</th></tr></thead><tbody>'+rows+'</tbody></table></div>'
+        rows=''
+        for layout,label in [('single','中心单个'),('cluster','原范围内聚集'),('near_original_edge','原边缘内侧'),('outer_band','原范围外圈')]:
+            cells=''.join(f'<td>{len(row[mode]["layouts"][layout]["hit_indices"])}个 / {number(row[mode]["layouts"][layout]["total_before_defense"])}</td>' for mode,_ in modes)
+            rows+='<tr><th>'+label+'</th>'+cells+'</tr>'
+        body+='<div class="table-scroll"><table><thead><tr><th>固定站位 · 覆盖数/一次命中合计</th>'+''.join('<th>'+label+'</th>' for _,label in modes)+'</tr></thead><tbody>'+rows+'</tbody></table></div>'
     ref=examples['mechanism_reference']
-    body += '<p>面积扩大不保证多命中敌人；原本已覆盖的目标承受更低单击，耗魔仍增加。这些固定站位只说明取舍，不是总 DPS。</p>'
-    body += '<p>机制背景：<a href="'+esc(ref['url'])+'">'+esc(ref['title'])+'</a>（'+esc(ref['date'])+'，GGG 历史版本说明）。仅参考面积与半径的区分，不宣称复刻当前 PoE 宝石数值、取整或完整范围引擎。</p>'
+    body+='<p>这些固定站位只说明取舍，不是通用DPS。范围、目标体型、抗性和魔力供给决定实际收益。</p>'
+    body+='<p>机制背景：<a href="'+esc(ref['url'])+'">'+esc(ref['title'])+'</a>（'+esc(ref['date'])+'，GGG历史说明）。只借鉴面积与半径区别，未复刻完整PoE范围引擎或整数规则。</p>'
+    return body
+
+def support_program_diagram(entry, skills, details):
+    body=''
+    for skill,pair in entry['examples'].items():
+        before,after=pair['before'],pair['after']
+        metrics=[('魔力',before['mana'],after['mana']),('冷却秒',before['cooldown'],after['cooldown'])]
+        br,ar=before['recipe'],after['recipe']
+        if 'speed' in ar: metrics += [('投射速度',br['speed'],ar['speed']),('减速秒',br['slow'],ar['slow'])]
+        if 'hit' in ar: metrics += [('总目标数',br['hit']['bounce_count'],ar['hit']['bounce_count']),('首段距离',br['first_range'],ar['first_range']),('续跳距离',br['followup_range'],ar['followup_range'])]
+        if 'radius' in ar: metrics += [('半径',br['radius'],ar['radius']),('面积倍率',br.get('area_multiplier',1),ar.get('area_multiplier',1))]
+        if after['initial_count']: metrics += [('初始投射物',before['initial_count'],after['initial_count'])]
+        rows=''.join('<tr><th>'+label+'</th><td>'+number(a)+'</td><td>'+number(b)+'</td></tr>' for label,a,b in metrics)
+        body += details(skills[skill]['name']+' · 同源前后示例','<div class="table-scroll"><table><thead><tr><th>参数</th><th>无辅助</th><th>该辅助</th></tr></thead><tbody>'+rows+'</tbody></table></div><p>'+esc(before['summary'])+'</p><p>'+esc(after['summary'])+'</p>'+details('实际分量、速度与范围规则',lines(after['details'])))
     return body
 
 def piercing_diagram(examples, skills):
@@ -152,7 +172,7 @@ def build(data, art):
                 body+='<p>'+esc(cfg['weapon_definition']['weapon_damage_summary'])+'</p>'+details('实例与合法掷值',lines('\n'.join(cfg['weapon_definition']['affix_lines'])) or '<p>普通底材，无词缀。</p>')
             for example in examples:
                 body += '<div class="example"><h4>'+('无辅助' if not example['supports'] else links('supports',example['supports']))+'</h4>'
-                geometry = [('半径',number(example['recipe']['radius'])),('面积倍率',number(example['recipe'].get('area_multiplier',1.0)))] if 'area_hit' in s['capabilities'] else [('初始投射物',number(example['initial_count']))]
+                geometry = [('半径',number(example['recipe']['radius'])),('面积倍率',number(example['recipe'].get('area_multiplier',1.0)))] if 'area_hit' in s['capabilities'] else [('最多目标数',number(example['recipe']['hit']['bounce_count'])),('续跳距离',number(example['recipe']['followup_range']))] if key=='chain' else [('初始投射物',number(example['initial_count']))] if example['initial_count'] else []
                 body += facts([('消耗',f'{number(example["mana"])} 魔力'),('冷却',f'{number(example["cooldown"])} 秒')]+geometry)
                 body += '<p>'+esc(example['summary'])+'</p>'+details('分量与组装过程', '<p>'+lines(example['details'])+'</p>')
                 target=data['known_target']
@@ -172,9 +192,10 @@ def build(data, art):
         body = facts([('可装配技能',links('skills',eligible)),('能力要求',esc(' / '.join(CAPABILITIES.get(c,c) for c in s['requires']))),('规则来源','本游戏原创；运行版本 '+esc(data['game_version']))])
         if key == 'pierce':
             body += piercing_diagram(data['projectile_support_examples'],data['skills'])
-        if key == 'breadth':
+        body += support_program_diagram(data['support_program_examples'][key],data['skills'],details)
+        if key in ['breadth','concentrate']:
             body += area_diagram(data['area_support_examples'],data['skills'])
-        cards.append(add('supports',key,s['name'],s['description'],body,'范围辅助' if key == 'breadth' else '投射物辅助',related=link('rules','supports')))
+        cards.append(add('supports',key,s['name'],s['description'],body,{'area':'范围辅助','projectile':'投射物辅助','resource':'资源辅助','element':'分量专注','delivery':'投射物辅助','control':'减速控制','chain':'连锁辅助'}[data['support_program_examples'][key]['family']],related=link('rules','supports')))
     for key,e in data['equipment'].items():
         body = facts([('格数',' × '.join(map(number,e['size']))),('固有属性',lines(e['stats_text']))])+details('可出现的词缀',links('affixes',e['eligible_affixes']))
         related=link('rules','equipment')
@@ -283,7 +304,7 @@ def build(data, art):
     rule_defs=[
         ('encounters','本轮挑战与重开','有限可选挑战已实装；不是完整终局地图系统。', '<p>'+links('encounters',data['encounters'].keys())+'</p><p>可选零、一或两项；确认会结束当前战斗并重置怪物、时间与本轮击败数，构筑/经验/物品/材料保留。普通重试沿用本轮选择；恢复常规与试验场清空，重新加载游戏为常规。</p><p>没有额外奖励，不消耗地图物品，不写入构筑存档。根怪和整批子怪在入场前应用同一冻结配置，失败回滚RNG/未发布身份与队列，不回退成普通怪。详细规则见随包 ENCOUNTER_INTEGRATION 文档。</p>', 'implemented'),
         ('damage','伤害如何结算','每次施放先冻结构筑快照，再由技能编译器组装命中。条目分别标注防御前与已知目标抗性后的逐次命中，不是总伤害或每秒伤害。',configs+'<p>'+link('defenses','fire_resistance','查看一次命中的抗性与护盾流程')+'</p><p>原有固有分量、支持攻击命中的局部武器物理与匹配攻击/法术标签的外部附加点伤先分路组装；适用的提高同组相加，总增/总降分别相乘。独立爆炸具有自己的标签与附加效用。</p>','implemented'),
-        ('supports','辅助装配','只有拥有所需能力的主动技能可装配辅助。同一技能不能重复装配同一辅助。',f'<p>每技能最多 {data["limits"]["max_supports"]} 个辅助；初始投射物上限 {data["limits"]["initial_projectiles"]}。兼容性来自 SupportRegistry 及各规则模块；数值来自 SkillCompiler。</p><p>'+links('supports',data['supports'])+'</p>','implemented'),
+        ('supports','辅助装配','只有拥有所需能力的主动技能可装配辅助。同一技能不能重复装配同一辅助。',f'<p>每技能最多 {data["limits"]["max_supports"]} 个辅助；初始投射物上限 {data["limits"]["initial_projectiles"]}。16种选择覆盖8个主动技能；可用技能由原生配方固定，装备附加分量不会改变允许槽位。K仅显示兼容卡片。兼容性来自 SupportRegistry，数值来自 SkillCompiler；节能/疾咏改变耗魔和冷却，不改变施法动作速度。</p><p>'+links('supports',data['supports'])+'</p>','implemented'),
         ('projectiles','分裂、返回与飞行结束','龙卷母箭优先分裂；返回在抵达射程时朝当时角色中心取向，且每个载体至多一次。','<p>自然飞行结束可触发装备授予的爆炸。分裂、碰撞消耗和取消不会触发该爆炸；返回不刷新寿命。投射物增伤与投射物辅助不作用于独立爆炸。</p><p>'+links('fixed_items',['prism_bow','return_mantle','detonation_charm'])+'</p>','implemented'),
         ('equipment','装备与阶级','底材与词缀按自身阶段结算；局部武器项独立于角色统计。T1 → T3 是本游戏原创成长顺序；不是 PoE 官方阶级命名。',f'<p>物品等级 {data["limits"]["min_item_level"]}–{data["limits"]["max_item_level"]}。每次已产生的普通装备奖励按下表权重选择一个词池（当前 {esc(data["current_loot_profile_id"])}，权重合计 100）；不是每只怪物死亡的掉落概率，也不新增奖励分支。同族或同组不能重复出现。</p>'+pool_table+details('稀有度规则',facts([(r['name'],f'{r["min_affixes"]}–{r["max_affixes"]} 条；至多 {r["max_prefixes"]} 前缀 / {r["max_suffixes"]} 后缀') for r in data['equipment_rarities'].values()]))+'<p>装备 damage 仍为角色通用基础加值，护盾为角色全局容量；白蜡长弓的局部物理另由 '+link('weapon_stages','weapon_local')+' 结算。火卫的合格专属奖励仍强制选防御池，沿用一次奖励。</p>'+details('历史配置与存档兼容',historical_pools+f'<p>历史配置留给重放兼容，不再表示当前自然词池选择。当前存档结构 {data["save_version"]}；v8 迁移保留装备 ID、掷值、辅助与珠宝，保存迁移备份。更新不会免费赠送新弓或新增升级奖励。</p>'),'implemented'),
         ('basic_attack','普通攻击与武器贡献','普通自动攻击是独立的攻击消费者，不计入八个主动技能条目。','<p>普通投射物接收本武器物理；法术与独立爆炸不接收。以下两种构筑仅用于说明合法普通长弓与局部双前缀实例，仍保留原有角色基础伤害。</p><div class="table-scroll"><table><thead><tr><th>装备示例</th><th>原始分量</th><th>防御前</th><th>已知目标抗性后</th></tr></thead><tbody>'+basic_rows+'</tbody></table></div><p>'+link('weapon_stages','weapon_local')+' · '+link('rules','character_rates')+'</p>','implemented'),

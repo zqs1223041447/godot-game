@@ -58,6 +58,7 @@ static func collect() -> Dictionary:
 		"limits": {"max_supports": Supports.MAX_SUPPORTS, "initial_projectiles": Compiler.MAX_INITIAL_PROJECTILES,
 			"min_item_level": Equipment.MIN_ITEM_LEVEL, "max_item_level": Equipment.MAX_ITEM_LEVEL}}
 	result["area_support_examples"] = area_examples()
+	result["support_program_examples"] = support_program_examples()
 	result["projectile_support_examples"] = piercing_examples()
 	result["crafting"] = crafting_examples()
 	result["monster_attacks"] = telegraph_examples()
@@ -496,22 +497,45 @@ static func area_examples() -> Dictionary:
 	for skill_id: String in ["nova", "meteor"]:
 		var row: Dictionary = {}
 		var base_radius: float = Data.SKILLS[skill_id].area_recipe.radius
-		for wide: bool in [false, true]:
-			var cast: Dictionary = Compiler.compile_skill(skill_id, build.get_combat_snapshot(), ["breadth"] if wide else [])
+		for mode: String in ["base", "wide", "concentrated", "combined"]:
+			var links: Array = {"base": [], "wide": ["breadth"], "concentrated": ["concentrate"], "combined": ["breadth", "concentrate"]}[mode]
+			var cast: Dictionary = Compiler.compile_skill(skill_id, build.get_combat_snapshot(), links)
 			assert(cast.ok)
 			var damage: Dictionary = Damage.resolve(cast.packets.direct, cast.snapshot.modifiers)
 			var layouts: Dictionary = {}
-			for layout: String in ["single", "cluster", "outer_band"]:
+			for layout: String in ["single", "cluster", "near_original_edge", "outer_band"]:
 				var points: Array[Vector2] = [Vector2.ZERO]
 				if layout != "single":
 					for i: int in range(1, 5):
-						var distance: float = base_radius * 0.55 if layout == "cluster" else base_radius * 1.15 + 12.0
+						var distance: float = base_radius * 0.55 if layout == "cluster" else base_radius * 0.95 + float(enemy.radius) if layout == "near_original_edge" else base_radius * 1.15 + 12.0
 						points.append(Vector2.RIGHT.rotated(i * TAU / 4.0) * distance)
 				var hits: Array[int] = []
 				for i: int in points.size():
 					if AreaRules.contains_target(Vector2.ZERO, points[i], cast.recipe.radius, enemy.radius): hits.append(i)
 				layouts[layout] = {"points": points, "hit_indices": hits, "total_before_defense": damage.total * hits.size()}
-			row["wide" if wide else "base"] = {"radius": cast.recipe.radius, "area_multiplier": cast.recipe.get("area_multiplier", 1.0),
+			row[mode] = {"radius": cast.recipe.radius, "area_multiplier": cast.recipe.get("area_multiplier", 1.0),
 				"mana": cast.mana, "cooldown": cast.cooldown, "hit_damage": damage.total, "layouts": layouts}
 		result.skills[skill_id] = row
 	return result
+
+
+static func support_program_examples() -> Dictionary:
+	var build := Build.new()
+	var snapshot: Dictionary = build.get_combat_snapshot()
+	var result: Dictionary = {}
+	for id: String in Supports.SUPPORTS:
+		var definition: Dictionary = Supports.get_definition(id)
+		var family: String = str(definition.get("family", "area" if definition.requires.has("area_hit") else "projectile"))
+		var examples: Dictionary = {}
+		for skill_id: String in Data.SKILLS:
+			if not Supports.compatibility_reason(skill_id, [id]).is_empty(): continue
+			var before: Dictionary = Compiler.compile_skill(skill_id, snapshot, [])
+			var after: Dictionary = Compiler.compile_skill(skill_id, snapshot, [id])
+			assert(before.ok and after.ok)
+			examples[skill_id] = {"before": support_cast_brief(before), "after": support_cast_brief(after)}
+		result[id] = {"family": family, "native_recipe_eligibility": true, "examples": examples}
+	return result
+
+static func support_cast_brief(cast: Dictionary) -> Dictionary:
+	return {"mana": cast.mana, "cooldown": cast.cooldown, "initial_count": cast.initial_count,
+		"recipe": cast.recipe.duplicate(true), "summary": Preview.summary(cast), "details": Preview.details(cast)}
