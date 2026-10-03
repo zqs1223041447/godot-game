@@ -361,7 +361,8 @@ func _admit_reward_item(wrapped: Dictionary) -> bool:
 	if candidate.items.has(wrapped.uid) or candidate.items.size() >= Rules.MAX_ITEMS or candidate.revision >= Rules.MAX_SERIAL: return false
 	candidate.items[wrapped.uid] = wrapped.duplicate(true)
 	var metadata: Dictionary = Items.metadata_for_items(candidate.items)
-	var position: Dictionary = Transfer._first_bag_space(metadata, candidate.locations, wrapped.uid)
+	var position: Dictionary = Transfer.first_bag_space_paged(metadata, candidate.locations,
+		Migration.paged_location_context(candidate, _socket_ids), wrapped.uid)
 	if position.is_empty(): return false
 	candidate.locations[wrapped.uid] = position
 	candidate.next_item_serial += 1
@@ -432,11 +433,14 @@ func load_build(path: String = "user://build_save.json") -> bool:
 		var file:=FileAccess.open(path,FileAccess.READ)
 		if file!=null and file.get_length()<=MAX_SAVE_BYTES:
 			var raw:Variant=JSON.parse_string(file.get_as_text())
-			if raw is Dictionary and raw.get("version") is float:old_version=int(raw.version)
+			if raw is Dictionary and Items._whole(raw.get("version"), 1, Rules.MAX_SERIAL):old_version=int(raw.version)
 	var loaded:=super.load_build(path)
 	if loaded and old_version>0 and old_version<Rules.VERSION:
 		migrated_from_legacy=true
-		migration_message="旧存档已原字节备份，装备与珠宝身份保留，技能转为独立宝石；旧天赋点已退还。待安置物品 %d 件，预算外 %d 点保留记账。"%[pending_items().size(),int(_current.migration_ledger.excess_points_recorded)]
+		if old_version == Rules.V14_VERSION:
+			migration_message="旧存档已原字节备份并升级为双页背包。原物品与构筑保持不变；未能安置的物品保留在待安置区（%d 件）。"%pending_items().size()
+		else:
+			migration_message="旧存档已原字节备份，装备与珠宝身份保留，技能转为独立宝石；旧天赋点已退还。待安置物品 %d 件，预算外 %d 点保留记账。"%[pending_items().size(),int(_current.migration_ledger.excess_points_recorded)]
 	return loaded
 
 

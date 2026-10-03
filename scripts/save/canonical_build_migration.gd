@@ -133,6 +133,17 @@ static func location_context(candidate: Dictionary, passive_socket_ids: Array = 
 		"skill_group_ids": groups, "passive_socket_ids": passive_socket_ids.duplicate(), "allow_recovery": true}
 
 
+static func paged_location_context(candidate: Dictionary, passive_socket_ids: Array = []) -> Dictionary:
+	var groups: Array[String] = []
+	for group: Dictionary in candidate.skill_groups:
+		groups.append(group.id)
+	var slots: Dictionary = {}
+	for slot: String in Slots.all_slots():
+		slots[slot] = Slots.category_for_slot(slot)
+	return {"columns": 8, "rows": 6, "pages": 2, "equipment_slots": slots,
+		"skill_group_ids": groups, "passive_socket_ids": passive_socket_ids.duplicate(), "allow_recovery": true}
+
+
 static func _new_gem(candidate: Dictionary, definition_id: String) -> String:
 	# Migration identities use a reserved namespace, so a valid legacy save at
 	# its exhausted gear/jewel serial boundary can still retain all implicit gems.
