@@ -2,6 +2,7 @@ class_name GameHUD
 extends CanvasLayer
 ## Responsive, keyboard-friendly combat HUD and live build editor.
 
+const FlaskSlotView = preload("res://scripts/ui/flask_slot.gd")
 const CanonicalInventoryView = preload("res://scripts/ui/canonical_inventory_panel.gd")
 const CanonicalSkillsView = preload("res://scripts/ui/canonical_skill_panel.gd")
 const CanonicalPassivesView = preload("res://scripts/ui/canonical_passive_panel.gd")
@@ -60,6 +61,8 @@ var _toast: PanelContainer
 var _toast_label: Label
 var _toast_left: float = 0.0
 var _inventory_panel: Control
+var _flask_hud_panel: PanelContainer
+var _flask_buttons: Dictionary = {}
 var _passive_panel: Control
 var _skill_support_panel: Control
 var _character_panel: Control
@@ -116,6 +119,7 @@ func setup(arena: Node) -> void:
 	_build_status()
 	_build_navigation()
 	_build_vitals()
+	_build_flask_hotbar()
 	_build_hotbar()
 	_build_hint()
 	_build_toast()
@@ -456,6 +460,36 @@ func _build_vitals() -> void:
 	_add_vital(box, "shield", "护盾", CYAN)
 
 
+func _build_flask_hotbar() -> void:
+	_flask_hud_panel = PanelContainer.new()
+	_flask_hud_panel.name = "FlaskHotbar"
+	_flask_hud_panel.add_theme_stylebox_override("panel",DockStyle.surface(Color("544133"),3.0))
+	_place(_flask_hud_panel,Rect2(20,-211,280,49),Control.PRESET_BOTTOM_LEFT)
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation",4)
+	row.alignment = BoxContainer.ALIGNMENT_CENTER
+	_flask_hud_panel.add_child(row)
+	for index: int in range(5):
+		var slot := FlaskSlotView.new()
+		slot.name = "CombatFlask_%d" % index
+		slot.slot_id = "flask_%d" % (index+1)
+		slot.editing = false
+		slot.use_requested.connect(func(id: String):
+			if not _arena.has_method("use_flask"): return
+			var result: Dictionary = _arena.use_flask(id)
+			if not result.get("ok",false) and not str(result.get("reason","")).is_empty(): notify(str(result.reason))
+			_update_flasks())
+		row.add_child(slot)
+		_flask_buttons[slot.slot_id] = slot
+
+func _update_flasks() -> void:
+	if not is_instance_valid(_flask_hud_panel): return
+	_flask_hud_panel.visible = _arena.has_method("flask_statuses")
+	if not _flask_hud_panel.visible: return
+	for status: Dictionary in _arena.flask_statuses():
+		if _flask_buttons.has(status.slot_id): _flask_buttons[status.slot_id].set_status(status)
+
+
 func _add_vital(parent: VBoxContainer, key: String, caption: String, color: Color) -> void:
 	var row: HBoxContainer = HBoxContainer.new()
 	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -738,6 +772,7 @@ func _skill_view(id: String, group_id: String = "") -> Dictionary:
 
 
 func _update_live() -> void:
+	_update_flasks()
 	if _state == null:
 		return
 	var stats: Dictionary = _arena.call("get_stats") as Dictionary

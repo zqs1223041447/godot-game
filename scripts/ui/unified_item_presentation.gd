@@ -70,6 +70,10 @@ static func view(model: RefCounted, uid: String) -> Dictionary:
 		"preview_lines":[],
 	}
 	match str(item.kind):
+		"flask":
+			result.kind_label = "药剂"
+			result.tags = ["回复", "生命" if definition.get("resource") == "health" else "魔力"]
+			result.base_stats = [{"label":"最大充能","value":"30"},{"label":"使用消耗","value":"10"},{"label":"持续时间","value":"3秒"}]
 		"currency":
 			result.kind_label = "制作材料"
 			result.tags = ["可堆叠"]

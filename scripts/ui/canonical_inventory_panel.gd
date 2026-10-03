@@ -6,6 +6,7 @@ signal feedback(message: String)
 signal character_requested
 signal item_hovered(uid: String, anchor: Rect2)
 signal hover_left
+const FlaskSlotView = preload("res://scripts/ui/flask_slot.gd")
 const CraftControls = preload("res://scripts/ui/crafting_controls.gd")
 const ThemeStyle = preload("res://scripts/visuals/visual_theme.gd")
 const EquipmentArt = preload("res://scripts/visuals/equipment_art.gd")
@@ -19,6 +20,7 @@ var _grid: Control
 var _slots: Dictionary = {}
 var _equipment_grid: Control
 var _flask_bar: HBoxContainer
+var _flask_targets: Dictionary = {}
 var _pending: VBoxContainer
 var _summary: Label
 var _page_label: Label
@@ -153,12 +155,17 @@ func _build() -> void:
 	_flask_bar.add_theme_constant_override("separation",5)
 	add_child(_flask_bar)
 	for index: int in range(5):
-		var socket := PanelContainer.new()
+		var socket := FlaskSlotView.new()
 		socket.name = "FlaskSocket_%d" % index
-		socket.custom_minimum_size = Vector2(30,32)
-		socket.add_theme_stylebox_override("panel", DockStyle.surface(Color("dfd1b3"),2.0))
-		socket.tooltip_text = "空药剂槽"
+		socket.slot_id = "flask_%d" % (index+1)
+		socket.model = model
+		socket.editing = true
+		socket.move_requested.connect(_move_requested)
+		socket.remove_requested.connect(_return_to_bag)
+		socket.item_hovered.connect(func(uid: String, rect: Rect2): item_hovered.emit(uid,rect))
+		socket.hover_left.connect(func(): hover_left.emit())
 		_flask_bar.add_child(socket)
+		_flask_targets[socket.slot_id] = socket
 	move_child(top, get_child_count()-1)
 	var page_bar := HBoxContainer.new()
 	page_bar.name = "BagPageControls"
@@ -237,10 +244,17 @@ func refresh() -> void:
 		var definition: Dictionary = model.item_definition(uid)
 		var raw_size: Variant = definition.size
 		var item_size: Vector2i = raw_size if raw_size is Vector2i else Vector2i(raw_size[0],raw_size[1])
+		var icon: Variant = definition.get("icon_texture")
+		if state.items[uid].kind == "flask" and icon == null:
+			var path: String = str(definition.get("icon_path",""))
+			if not path.is_empty() and ResourceLoader.exists(path): icon = load(path)
 		entries.append({"uid":uid,"kind":state.items[uid].kind,"size":item_size,"cell":Vector2i(location.x,location.y),
-			"art":definition,"icon":definition.get("icon_texture"),"accent":definition.get("color",Gear.RARITIES.get(definition.get("rarity",""),{}).get("color",Color("aa8c59"))),
+			"art":definition,"icon":icon,"accent":definition.get("color",Gear.RARITIES.get(definition.get("rarity",""),{}).get("color",Color("aa8c59"))),
 			"short_name":str(definition.get("base_name",definition.get("short_name",definition.name)))})
 	_grid.set_items(entries,model.revision())
+	if model.has_method("flask_slots"):
+		for flask: Dictionary in model.flask_slots():
+			if _flask_targets.has(flask.slot_id): _flask_targets[flask.slot_id].set_status(flask)
 	var equipped: Dictionary = model.equipped_items()
 	for slot: String in _slots:
 		var target: SlotTarget = _slots[slot]
@@ -338,6 +352,13 @@ func _activate_equipment(slot: String) -> void:
 func _activate_item(uid: String) -> void:
 	var item: Dictionary = model.item(uid)
 	if item.get("kind","") == "currency": return
+	if item.get("kind","") == "flask" and model.has_method("flask_slots"):
+		for flask: Dictionary in model.flask_slots():
+			if str(flask.get("uid","")).is_empty():
+				_move_requested(uid,{"kind":"flask_slot","slot_id":flask.slot_id},model.revision())
+				return
+		feedback.emit("药剂槽已满，可拖到指定槽位替换")
+		return
 	if item.get("kind","") != "equipment":
 		feedback.emit("主动与辅助宝石在 K 技能界面装配；珠宝在 T 天赋界面镶嵌")
 		return
