@@ -13,6 +13,7 @@ import re
 
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("executable", type=Path)
+parser.add_argument("--verify-import-cache", action="store_true", help="Match exported painting bytes to freshly imported current source files")
 args = parser.parse_args()
 data = args.executable.read_bytes()
 assert data[:2] == b"MZ", "Missing DOS executable signature"
@@ -32,6 +33,7 @@ file_count = struct.unpack_from("<I", data, position)[0]
 position += 4
 assert 0 < file_count < 10000
 entries = []
+packed_payloads = {}
 for _ in range(file_count):
     name_bytes = struct.unpack_from("<I", data, position)[0]
     position += 4
@@ -49,6 +51,7 @@ for _ in range(file_count):
     assert not flags & 1, "Encrypted entry unsupported"
     assert hashlib.md5(data[start:start + size]).digest() == digest, name
     logical_name = name.removeprefix("res://")
+    packed_payloads[logical_name] = data[start:start + size]
     assert logical_name != "data/poe_passive_registry.json", "Research-only passive source exported"
     assert not logical_name.startswith(("data/reference/", "tests/", "tools/", "builds/", "docs/")), "Development-only file exported: " + name
     entries.append({"name": name, "size": size, "md5_verified": True})
@@ -57,6 +60,9 @@ assert any(entry["name"].removeprefix("res://") == "data/passive_balance.json" f
 project_root = Path(__file__).resolve().parents[1]
 names = {entry["name"].removeprefix("res://") for entry in entries}
 painted_assets_verified = 0
+painted_cache_verified = []
+art_manifest = json.loads((project_root / "assets/ui/grimoire/asset_manifest.json").read_text())
+manifest_hashes = {row["path"]: row["sha256"] for row in art_manifest["assets"]}
 for folder in ("assets/ui/grimoire", "assets/art/equipment"):
     for source in sorted((project_root / folder).glob("*.png")):
         import_file = source.with_name(source.name + ".import")
@@ -64,11 +70,25 @@ for folder in ("assets/ui/grimoire", "assets/art/equipment"):
         assert import_name in names, "Painted asset import missing: " + import_name
         imported_paths = re.findall(r'^path="res://([^"\n]+)"', import_file.read_text(), re.MULTILINE)
         assert len(imported_paths) == 1 and imported_paths[0] in names, "Painted texture missing: " + import_name
+        if args.verify_import_cache:
+            source_name = source.relative_to(project_root).as_posix()
+            source_hash = hashlib.sha256(source.read_bytes()).hexdigest()
+            if source_name in manifest_hashes:
+                assert source_hash == manifest_hashes[source_name], "Artwork manifest source is stale: " + source_name
+            imported = project_root / imported_paths[0]
+            checksum_file = imported.with_suffix(".md5")
+            source_md5 = re.findall(r'^source_md5="([0-9a-f]{32})"', checksum_file.read_text(), re.MULTILINE)
+            assert source_md5 == [hashlib.md5(source.read_bytes()).hexdigest()], "Texture cache came from different PNG bytes: " + source_name
+            assert packed_payloads[import_name] == import_file.read_bytes(), "Packed import settings differ: " + source_name
+            assert packed_payloads[imported_paths[0]] == imported.read_bytes(), "Packed texture differs from fresh source cache: " + source_name
+            painted_cache_verified.append({"source": source_name, "source_sha256": source_hash,
+                "imported": imported_paths[0], "texture_sha256": hashlib.sha256(imported.read_bytes()).hexdigest()})
         painted_assets_verified += 1
 print(json.dumps({
     "pe": "x86_64", "embedded_pck_version": pack_version,
     "godot_version": f"{major}.{minor}.{patch}", "pck_offset": pack_start,
     "pck_bytes": pack_bytes, "file_count": file_count,
     "all_entry_md5_verified": True, "painted_assets_verified": painted_assets_verified,
+    "painting_import_cache_matches": painted_cache_verified,
     "sha256": hashlib.sha256(data).hexdigest(), "files": entries,
 }, indent=2, ensure_ascii=False))
