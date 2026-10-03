@@ -1,0 +1,1884 @@
+{
+	"above_cap_test_only": true,
+	"buckets": [
+		{
+			"cpu_usec": {
+				"effects": {
+					"max": 61,
+					"mean": 8.27,
+					"n": 600,
+					"p50": 8,
+					"p95": 11,
+					"p99": 24
+				},
+				"enemy_ai": {
+					"max": 71885,
+					"mean": 28047.678333333333,
+					"n": 600,
+					"p50": 26854,
+					"p95": 51501,
+					"p99": 55904
+				},
+				"hud": {
+					"max": 3145,
+					"mean": 329.20166666666665,
+					"n": 600,
+					"p50": 28,
+					"p95": 1018,
+					"p99": 1200
+				},
+				"pickups": {
+					"max": 54,
+					"mean": 2.7516666666666665,
+					"n": 600,
+					"p50": 3,
+					"p95": 4,
+					"p99": 4
+				},
+				"progress_flush": {
+					"max": 36,
+					"mean": 2.75,
+					"n": 600,
+					"p50": 3,
+					"p95": 4,
+					"p99": 4
+				},
+				"projectiles": {
+					"max": 6353,
+					"mean": 2003.8916666666667,
+					"n": 600,
+					"p50": 1929,
+					"p95": 2400,
+					"p99": 3683
+				},
+				"refill": {
+					"max": 264,
+					"mean": 48.12166666666667,
+					"n": 600,
+					"p50": 44,
+					"p95": 67,
+					"p99": 138
+				},
+				"separation_visits": {
+					"max": 61955,
+					"mean": 30375.81166666667,
+					"n": 600,
+					"p50": 29200,
+					"p95": 60369,
+					"p99": 61735
+				},
+				"spawn_cleanup": {
+					"max": 2158,
+					"mean": 303.83,
+					"n": 600,
+					"p50": 284,
+					"p95": 407,
+					"p99": 587
+				},
+				"step": {
+					"max": 76204,
+					"mean": 31839.386666666665,
+					"n": 600,
+					"p50": 30627,
+					"p95": 56394,
+					"p99": 61219
+				},
+				"telegraph_start": {
+					"max": 3470,
+					"mean": 1032.7833333333333,
+					"n": 600,
+					"p50": 1079,
+					"p95": 1421,
+					"p99": 1858
+				},
+				"tick": {
+					"max": 76084,
+					"mean": 31447.395,
+					"n": 600,
+					"p50": 30314,
+					"p95": 55498,
+					"p99": 61130
+				}
+			},
+			"death_queue": 0,
+			"draw_calls": 0.0,
+			"draw_cpu_usec": {
+
+			},
+			"enemy_array": 400,
+			"inventory_items": 36,
+			"kills": 0,
+			"lineages": 400,
+			"live": 400,
+			"node_count": 217.0,
+			"objects": 2228.0,
+			"orphan_nodes": 0.0,
+			"particles": 0,
+			"pickups": 0,
+			"projectiles": 0,
+			"resources": 119.0,
+			"reward_kills": 0,
+			"rings": 0,
+			"save_success": 0,
+			"stage": "active",
+			"static_memory": 148591931.0,
+			"text": 0,
+			"tick": 600,
+			"visual_cues": 0
+		},
+		{
+			"cpu_usec": {
+				"effects": {
+					"max": 420,
+					"mean": 22.498333333333335,
+					"n": 600,
+					"p50": 10,
+					"p95": 112,
+					"p99": 273
+				},
+				"enemy_ai": {
+					"max": 77182,
+					"mean": 50682.60333333333,
+					"n": 600,
+					"p50": 51532,
+					"p95": 60568,
+					"p99": 69387
+				},
+				"hud": {
+					"max": 2597,
+					"mean": 358.17833333333334,
+					"n": 600,
+					"p50": 29,
+					"p95": 1090,
+					"p99": 1826
+				},
+				"kill_step": {
+					"max": 71460,
+					"mean": 71460.0,
+					"n": 1,
+					"p50": 71460,
+					"p95": 71460,
+					"p99": 71460
+				},
+				"pickups": {
+					"max": 47,
+					"mean": 3.5183333333333335,
+					"n": 600,
+					"p50": 3,
+					"p95": 4,
+					"p99": 6
+				},
+				"progress_flush": {
+					"max": 4209,
+					"mean": 10.201666666666666,
+					"n": 600,
+					"p50": 3,
+					"p95": 4,
+					"p99": 7
+				},
+				"projectiles": {
+					"max": 5575,
+					"mean": 2109.0616666666665,
+					"n": 600,
+					"p50": 2031,
+					"p95": 2619,
+					"p99": 3496
+				},
+				"refill": {
+					"max": 10102,
+					"mean": 67.135,
+					"n": 600,
+					"p50": 44,
+					"p95": 77,
+					"p99": 233
+				},
+				"save_nested": {
+					"max": 4201,
+					"mean": 4201.0,
+					"n": 1,
+					"p50": 4201,
+					"p95": 4201,
+					"p99": 4201
+				},
+				"separation_visits": {
+					"max": 72272,
+					"mean": 60066.245,
+					"n": 600,
+					"p50": 61740,
+					"p95": 71831,
+					"p99": 72232
+				},
+				"spawn_cleanup": {
+					"max": 1565,
+					"mean": 314.165,
+					"n": 600,
+					"p50": 289,
+					"p95": 429,
+					"p99": 917
+				},
+				"step": {
+					"max": 81153,
+					"mean": 54953.058333333334,
+					"n": 600,
+					"p50": 56050,
+					"p95": 65231,
+					"p99": 74038
+				},
+				"telegraph_start": {
+					"max": 3616,
+					"mean": 1302.4516666666666,
+					"n": 600,
+					"p50": 1224,
+					"p95": 1696,
+					"p99": 3008
+				},
+				"tick": {
+					"max": 81063,
+					"mean": 54502.416666666664,
+					"n": 600,
+					"p50": 55561,
+					"p95": 64448,
+					"p99": 72961
+				}
+			},
+			"death_queue": 0,
+			"draw_calls": 0.0,
+			"draw_cpu_usec": {
+
+			},
+			"enemy_array": 400,
+			"inventory_items": 36,
+			"kills": 80,
+			"lineages": 400,
+			"live": 400,
+			"node_count": 217.0,
+			"objects": 2228.0,
+			"orphan_nodes": 0.0,
+			"particles": 0,
+			"pickups": 0,
+			"projectiles": 0,
+			"resources": 119.0,
+			"reward_kills": 0,
+			"rings": 0,
+			"save_success": 1,
+			"stage": "active",
+			"static_memory": 149045582.0,
+			"text": 0,
+			"tick": 1200,
+			"visual_cues": 0
+		},
+		{
+			"cpu_usec": {
+				"effects": {
+					"max": 420,
+					"mean": 26.226666666666667,
+					"n": 600,
+					"p50": 10,
+					"p95": 153,
+					"p99": 337
+				},
+				"enemy_ai": {
+					"max": 89474,
+					"mean": 53059.08833333333,
+					"n": 600,
+					"p50": 53764,
+					"p95": 59358,
+					"p99": 66001
+				},
+				"hud": {
+					"max": 3261,
+					"mean": 349.7916666666667,
+					"n": 600,
+					"p50": 29,
+					"p95": 1090,
+					"p99": 1246
+				},
+				"kill_step": {
+					"max": 75749,
+					"mean": 75749.0,
+					"n": 1,
+					"p50": 75749,
+					"p95": 75749,
+					"p99": 75749
+				},
+				"pickups": {
+					"max": 67,
+					"mean": 3.5116666666666667,
+					"n": 600,
+					"p50": 3,
+					"p95": 4,
+					"p99": 6
+				},
+				"progress_flush": {
+					"max": 4372,
+					"mean": 10.388333333333334,
+					"n": 600,
+					"p50": 3,
+					"p95": 4,
+					"p99": 4
+				},
+				"projectiles": {
+					"max": 4901,
+					"mean": 2176.19,
+					"n": 600,
+					"p50": 2092,
+					"p95": 2675,
+					"p99": 4103
+				},
+				"refill": {
+					"max": 9713,
+					"mean": 64.85,
+					"n": 600,
+					"p50": 45,
+					"p95": 69,
+					"p99": 115
+				},
+				"save_nested": {
+					"max": 4361,
+					"mean": 4361.0,
+					"n": 1,
+					"p50": 4361,
+					"p95": 4361,
+					"p99": 4361
+				},
+				"separation_visits": {
+					"max": 73641,
+					"mean": 63768.638333333336,
+					"n": 600,
+					"p50": 64981,
+					"p95": 72878,
+					"p99": 73376
+				},
+				"spawn_cleanup": {
+					"max": 3401,
+					"mean": 326.82,
+					"n": 600,
+					"p50": 300,
+					"p95": 419,
+					"p99": 622
+				},
+				"step": {
+					"max": 93498,
+					"mean": 57461.265,
+					"n": 600,
+					"p50": 58063,
+					"p95": 63976,
+					"p99": 70961
+				},
+				"telegraph_start": {
+					"max": 3514,
+					"mean": 1358.8866666666668,
+					"n": 600,
+					"p50": 1304,
+					"p95": 1643,
+					"p99": 2844
+				},
+				"tick": {
+					"max": 93408,
+					"mean": 57020.95333333333,
+					"n": 600,
+					"p50": 57604,
+					"p95": 63459,
+					"p99": 70335
+				}
+			},
+			"death_queue": 0,
+			"draw_calls": 0.0,
+			"draw_cpu_usec": {
+
+			},
+			"enemy_array": 400,
+			"inventory_items": 36,
+			"kills": 160,
+			"lineages": 400,
+			"live": 400,
+			"node_count": 217.0,
+			"objects": 2228.0,
+			"orphan_nodes": 0.0,
+			"particles": 0,
+			"pickups": 0,
+			"projectiles": 0,
+			"resources": 119.0,
+			"reward_kills": 0,
+			"rings": 0,
+			"save_success": 2,
+			"stage": "active",
+			"static_memory": 149070290.0,
+			"text": 0,
+			"tick": 1800,
+			"visual_cues": 0
+		},
+		{
+			"cpu_usec": {
+				"effects": {
+					"max": 474,
+					"mean": 23.706666666666667,
+					"n": 600,
+					"p50": 10,
+					"p95": 89,
+					"p99": 294
+				},
+				"enemy_ai": {
+					"max": 97847,
+					"mean": 52546.66166666667,
+					"n": 600,
+					"p50": 53987,
+					"p95": 61468,
+					"p99": 68454
+				},
+				"hud": {
+					"max": 3430,
+					"mean": 349.51666666666665,
+					"n": 600,
+					"p50": 31,
+					"p95": 1053,
+					"p99": 1303
+				},
+				"kill_step": {
+					"max": 77038,
+					"mean": 77038.0,
+					"n": 1,
+					"p50": 77038,
+					"p95": 77038,
+					"p99": 77038
+				},
+				"pickups": {
+					"max": 31,
+					"mean": 3.4166666666666665,
+					"n": 600,
+					"p50": 3,
+					"p95": 4,
+					"p99": 4
+				},
+				"progress_flush": {
+					"max": 119,
+					"mean": 3.381666666666667,
+					"n": 600,
+					"p50": 3,
+					"p95": 4,
+					"p99": 6
+				},
+				"projectiles": {
+					"max": 4874,
+					"mean": 2177.0416666666665,
+					"n": 600,
+					"p50": 2120,
+					"p95": 2570,
+					"p99": 3396
+				},
+				"refill": {
+					"max": 9212,
+					"mean": 64.77833333333334,
+					"n": 600,
+					"p50": 46,
+					"p95": 72,
+					"p99": 137
+				},
+				"separation_visits": {
+					"max": 73415,
+					"mean": 63719.53,
+					"n": 600,
+					"p50": 63962,
+					"p95": 73006,
+					"p99": 73274
+				},
+				"spawn_cleanup": {
+					"max": 890,
+					"mean": 324.245,
+					"n": 600,
+					"p50": 311,
+					"p95": 426,
+					"p99": 621
+				},
+				"step": {
+					"max": 101765,
+					"mean": 56877.20333333333,
+					"n": 600,
+					"p50": 58435,
+					"p95": 66424,
+					"p99": 74480
+				},
+				"telegraph_start": {
+					"max": 3658,
+					"mean": 1301.4733333333334,
+					"n": 600,
+					"p50": 1256,
+					"p95": 1593,
+					"p99": 2151
+				},
+				"tick": {
+					"max": 101674,
+					"mean": 56436.03,
+					"n": 600,
+					"p50": 57763,
+					"p95": 65589,
+					"p99": 72602
+				}
+			},
+			"death_queue": 0,
+			"draw_calls": 0.0,
+			"draw_cpu_usec": {
+
+			},
+			"enemy_array": 400,
+			"inventory_items": 36,
+			"kills": 240,
+			"lineages": 400,
+			"live": 400,
+			"node_count": 217.0,
+			"objects": 2228.0,
+			"orphan_nodes": 0.0,
+			"particles": 0,
+			"pickups": 0,
+			"projectiles": 0,
+			"resources": 119.0,
+			"reward_kills": 0,
+			"rings": 0,
+			"save_success": 2,
+			"stage": "active",
+			"static_memory": 149078374.0,
+			"text": 0,
+			"tick": 2400,
+			"visual_cues": 0
+		},
+		{
+			"cpu_usec": {
+				"effects": {
+					"max": 426,
+					"mean": 24.561666666666667,
+					"n": 600,
+					"p50": 10,
+					"p95": 90,
+					"p99": 317
+				},
+				"enemy_ai": {
+					"max": 103996,
+					"mean": 54674.42166666667,
+					"n": 600,
+					"p50": 53341,
+					"p95": 67080,
+					"p99": 82412
+				},
+				"hud": {
+					"max": 2965,
+					"mean": 352.3233333333333,
+					"n": 600,
+					"p50": 30,
+					"p95": 1110,
+					"p99": 1335
+				},
+				"kill_step": {
+					"max": 76817,
+					"mean": 76817.0,
+					"n": 1,
+					"p50": 76817,
+					"p95": 76817,
+					"p99": 76817
+				},
+				"pickups": {
+					"max": 64,
+					"mean": 3.533333333333333,
+					"n": 600,
+					"p50": 3,
+					"p95": 4,
+					"p99": 5
+				},
+				"progress_flush": {
+					"max": 4276,
+					"mean": 10.266666666666667,
+					"n": 600,
+					"p50": 3,
+					"p95": 4,
+					"p99": 6
+				},
+				"projectiles": {
+					"max": 5468,
+					"mean": 2218.6766666666667,
+					"n": 600,
+					"p50": 2132,
+					"p95": 2718,
+					"p99": 3286
+				},
+				"refill": {
+					"max": 9126,
+					"mean": 67.325,
+					"n": 600,
+					"p50": 47,
+					"p95": 73,
+					"p99": 127
+				},
+				"save_nested": {
+					"max": 4268,
+					"mean": 4268.0,
+					"n": 1,
+					"p50": 4268,
+					"p95": 4268,
+					"p99": 4268
+				},
+				"separation_visits": {
+					"max": 74122,
+					"mean": 65190.965,
+					"n": 600,
+					"p50": 65965,
+					"p95": 73671,
+					"p99": 73891
+				},
+				"spawn_cleanup": {
+					"max": 1434,
+					"mean": 329.675,
+					"n": 600,
+					"p50": 310,
+					"p95": 475,
+					"p99": 628
+				},
+				"step": {
+					"max": 108170,
+					"mean": 59033.37,
+					"n": 600,
+					"p50": 57477,
+					"p95": 71443,
+					"p99": 89098
+				},
+				"telegraph_start": {
+					"max": 3309,
+					"mean": 1269.21,
+					"n": 600,
+					"p50": 1216,
+					"p95": 1592,
+					"p99": 1940
+				},
+				"tick": {
+					"max": 108057,
+					"mean": 58587.206666666665,
+					"n": 600,
+					"p50": 57232,
+					"p95": 70972,
+					"p99": 89005
+				}
+			},
+			"death_queue": 0,
+			"draw_calls": 0.0,
+			"draw_cpu_usec": {
+
+			},
+			"enemy_array": 400,
+			"inventory_items": 36,
+			"kills": 320,
+			"lineages": 400,
+			"live": 400,
+			"node_count": 217.0,
+			"objects": 2228.0,
+			"orphan_nodes": 0.0,
+			"particles": 0,
+			"pickups": 0,
+			"projectiles": 0,
+			"resources": 119.0,
+			"reward_kills": 0,
+			"rings": 0,
+			"save_success": 3,
+			"stage": "active",
+			"static_memory": 149087410.0,
+			"text": 0,
+			"tick": 3000,
+			"visual_cues": 0
+		},
+		{
+			"cpu_usec": {
+				"effects": {
+					"max": 2649,
+					"mean": 32.7,
+					"n": 600,
+					"p50": 10,
+					"p95": 118,
+					"p99": 401
+				},
+				"enemy_ai": {
+					"max": 105623,
+					"mean": 54865.98333333333,
+					"n": 600,
+					"p50": 54398,
+					"p95": 69525,
+					"p99": 78333
+				},
+				"hud": {
+					"max": 3125,
+					"mean": 373.46666666666664,
+					"n": 600,
+					"p50": 30,
+					"p95": 1166,
+					"p99": 1567
+				},
+				"kill_step": {
+					"max": 82101,
+					"mean": 82101.0,
+					"n": 1,
+					"p50": 82101,
+					"p95": 82101,
+					"p99": 82101
+				},
+				"pickups": {
+					"max": 223,
+					"mean": 3.815,
+					"n": 600,
+					"p50": 3,
+					"p95": 4,
+					"p99": 7
+				},
+				"progress_flush": {
+					"max": 4744,
+					"mean": 11.475,
+					"n": 600,
+					"p50": 3,
+					"p95": 4,
+					"p99": 16
+				},
+				"projectiles": {
+					"max": 6411,
+					"mean": 2369.858333333333,
+					"n": 600,
+					"p50": 2260,
+					"p95": 3126,
+					"p99": 4330
+				},
+				"refill": {
+					"max": 10250,
+					"mean": 74.92833333333333,
+					"n": 600,
+					"p50": 50,
+					"p95": 94,
+					"p99": 251
+				},
+				"save_nested": {
+					"max": 4735,
+					"mean": 4735.0,
+					"n": 1,
+					"p50": 4735,
+					"p95": 4735,
+					"p99": 4735
+				},
+				"separation_visits": {
+					"max": 74225,
+					"mean": 62626.725,
+					"n": 600,
+					"p50": 63431,
+					"p95": 72098,
+					"p99": 72208
+				},
+				"spawn_cleanup": {
+					"max": 2313,
+					"mean": 354.8833333333333,
+					"n": 600,
+					"p50": 327,
+					"p95": 518,
+					"p99": 832
+				},
+				"step": {
+					"max": 114803,
+					"mean": 59529.706666666665,
+					"n": 600,
+					"p50": 58810,
+					"p95": 75175,
+					"p99": 83653
+				},
+				"telegraph_start": {
+					"max": 6525,
+					"mean": 1351.5083333333334,
+					"n": 600,
+					"p50": 1278,
+					"p95": 1693,
+					"p99": 2724
+				},
+				"tick": {
+					"max": 111614,
+					"mean": 59048.236666666664,
+					"n": 600,
+					"p50": 58372,
+					"p95": 74525,
+					"p99": 82725
+				}
+			},
+			"death_queue": 0,
+			"draw_calls": 0.0,
+			"draw_cpu_usec": {
+
+			},
+			"enemy_array": 400,
+			"inventory_items": 36,
+			"kills": 400,
+			"lineages": 400,
+			"live": 400,
+			"node_count": 217.0,
+			"objects": 2228.0,
+			"orphan_nodes": 0.0,
+			"particles": 0,
+			"pickups": 0,
+			"projectiles": 0,
+			"resources": 119.0,
+			"reward_kills": 0,
+			"rings": 0,
+			"save_success": 4,
+			"stage": "active",
+			"static_memory": 149107338.0,
+			"text": 0,
+			"tick": 3600,
+			"visual_cues": 0
+		},
+		{
+			"cpu_usec": {
+				"effects": {
+					"max": 383,
+					"mean": 23.981666666666666,
+					"n": 600,
+					"p50": 10,
+					"p95": 78,
+					"p99": 310
+				},
+				"enemy_ai": {
+					"max": 89058,
+					"mean": 53682.25666666667,
+					"n": 600,
+					"p50": 53774,
+					"p95": 66240,
+					"p99": 77891
+				},
+				"hud": {
+					"max": 2383,
+					"mean": 352.575,
+					"n": 600,
+					"p50": 32,
+					"p95": 1103,
+					"p99": 1513
+				},
+				"kill_step": {
+					"max": 76754,
+					"mean": 76754.0,
+					"n": 1,
+					"p50": 76754,
+					"p95": 76754,
+					"p99": 76754
+				},
+				"pickups": {
+					"max": 7,
+					"mean": 3.236666666666667,
+					"n": 600,
+					"p50": 3,
+					"p95": 4,
+					"p99": 4
+				},
+				"progress_flush": {
+					"max": 20,
+					"mean": 3.12,
+					"n": 600,
+					"p50": 3,
+					"p95": 4,
+					"p99": 7
+				},
+				"projectiles": {
+					"max": 6131,
+					"mean": 2238.9466666666667,
+					"n": 600,
+					"p50": 2160,
+					"p95": 2730,
+					"p99": 3652
+				},
+				"refill": {
+					"max": 9298,
+					"mean": 67.76833333333333,
+					"n": 600,
+					"p50": 48,
+					"p95": 77,
+					"p99": 141
+				},
+				"separation_visits": {
+					"max": 74844,
+					"mean": 63250.555,
+					"n": 600,
+					"p50": 64628,
+					"p95": 74133,
+					"p99": 74739
+				},
+				"spawn_cleanup": {
+					"max": 3742,
+					"mean": 319.3833333333333,
+					"n": 600,
+					"p50": 293,
+					"p95": 447,
+					"p99": 632
+				},
+				"step": {
+					"max": 92859,
+					"mean": 58032.763333333336,
+					"n": 600,
+					"p50": 57919,
+					"p95": 71066,
+					"p99": 82649
+				},
+				"telegraph_start": {
+					"max": 3607,
+					"mean": 1259.225,
+					"n": 600,
+					"p50": 1210,
+					"p95": 1608,
+					"p99": 2491
+				},
+				"tick": {
+					"max": 92762,
+					"mean": 57586.01666666667,
+					"n": 600,
+					"p50": 57494,
+					"p95": 70245,
+					"p99": 82016
+				}
+			},
+			"death_queue": 0,
+			"draw_calls": 0.0,
+			"draw_cpu_usec": {
+
+			},
+			"enemy_array": 400,
+			"inventory_items": 36,
+			"kills": 480,
+			"lineages": 400,
+			"live": 400,
+			"node_count": 217.0,
+			"objects": 2228.0,
+			"orphan_nodes": 0.0,
+			"particles": 0,
+			"pickups": 0,
+			"projectiles": 0,
+			"resources": 119.0,
+			"reward_kills": 0,
+			"rings": 0,
+			"save_success": 4,
+			"stage": "active",
+			"static_memory": 149126682.0,
+			"text": 0,
+			"tick": 4200,
+			"visual_cues": 0
+		},
+		{
+			"cpu_usec": {
+				"effects": {
+					"max": 337,
+					"mean": 23.45,
+					"n": 600,
+					"p50": 10,
+					"p95": 80,
+					"p99": 282
+				},
+				"enemy_ai": {
+					"max": 138110,
+					"mean": 55991.316666666666,
+					"n": 600,
+					"p50": 56663,
+					"p95": 64068,
+					"p99": 78453
+				},
+				"hud": {
+					"max": 1402,
+					"mean": 343.5683333333333,
+					"n": 600,
+					"p50": 30,
+					"p95": 1062,
+					"p99": 1264
+				},
+				"kill_step": {
+					"max": 78192,
+					"mean": 78192.0,
+					"n": 1,
+					"p50": 78192,
+					"p95": 78192,
+					"p99": 78192
+				},
+				"pickups": {
+					"max": 30,
+					"mean": 3.3866666666666667,
+					"n": 600,
+					"p50": 3,
+					"p95": 4,
+					"p99": 4
+				},
+				"progress_flush": {
+					"max": 4607,
+					"mean": 11.065,
+					"n": 600,
+					"p50": 3,
+					"p95": 4,
+					"p99": 15
+				},
+				"projectiles": {
+					"max": 5287,
+					"mean": 2287.9733333333334,
+					"n": 600,
+					"p50": 2170,
+					"p95": 2984,
+					"p99": 4307
+				},
+				"refill": {
+					"max": 9364,
+					"mean": 70.28666666666666,
+					"n": 600,
+					"p50": 48,
+					"p95": 77,
+					"p99": 190
+				},
+				"save_nested": {
+					"max": 4598,
+					"mean": 4598.0,
+					"n": 1,
+					"p50": 4598,
+					"p95": 4598,
+					"p99": 4598
+				},
+				"separation_visits": {
+					"max": 76309,
+					"mean": 66268.63166666667,
+					"n": 600,
+					"p50": 68040,
+					"p95": 75871,
+					"p99": 76107
+				},
+				"spawn_cleanup": {
+					"max": 3375,
+					"mean": 314.93833333333333,
+					"n": 600,
+					"p50": 289,
+					"p95": 421,
+					"p99": 589
+				},
+				"step": {
+					"max": 143597,
+					"mean": 60433.12,
+					"n": 600,
+					"p50": 61125,
+					"p95": 69081,
+					"p99": 84661
+				},
+				"telegraph_start": {
+					"max": 4959,
+					"mean": 1304.085,
+					"n": 600,
+					"p50": 1238,
+					"p95": 1657,
+					"p99": 3138
+				},
+				"tick": {
+					"max": 142356,
+					"mean": 59992.86,
+					"n": 600,
+					"p50": 60652,
+					"p95": 68534,
+					"p99": 84428
+				}
+			},
+			"death_queue": 0,
+			"draw_calls": 0.0,
+			"draw_cpu_usec": {
+
+			},
+			"enemy_array": 400,
+			"inventory_items": 36,
+			"kills": 560,
+			"lineages": 400,
+			"live": 400,
+			"node_count": 217.0,
+			"objects": 2228.0,
+			"orphan_nodes": 0.0,
+			"particles": 0,
+			"pickups": 0,
+			"projectiles": 0,
+			"resources": 119.0,
+			"reward_kills": 0,
+			"rings": 0,
+			"save_success": 5,
+			"stage": "active",
+			"static_memory": 149140822.0,
+			"text": 0,
+			"tick": 4800,
+			"visual_cues": 0
+		},
+		{
+			"cpu_usec": {
+				"effects": {
+					"max": 363,
+					"mean": 24.06833333333333,
+					"n": 600,
+					"p50": 10,
+					"p95": 92,
+					"p99": 307
+				},
+				"enemy_ai": {
+					"max": 87638,
+					"mean": 52868.16,
+					"n": 600,
+					"p50": 52876,
+					"p95": 60925,
+					"p99": 65373
+				},
+				"hud": {
+					"max": 1824,
+					"mean": 338.31333333333333,
+					"n": 600,
+					"p50": 29,
+					"p95": 1027,
+					"p99": 1211
+				},
+				"kill_step": {
+					"max": 76689,
+					"mean": 76689.0,
+					"n": 1,
+					"p50": 76689,
+					"p95": 76689,
+					"p99": 76689
+				},
+				"pickups": {
+					"max": 34,
+					"mean": 3.4383333333333335,
+					"n": 600,
+					"p50": 3,
+					"p95": 4,
+					"p99": 16
+				},
+				"progress_flush": {
+					"max": 4188,
+					"mean": 10.118333333333334,
+					"n": 600,
+					"p50": 3,
+					"p95": 4,
+					"p99": 5
+				},
+				"projectiles": {
+					"max": 4309,
+					"mean": 2133.568333333333,
+					"n": 600,
+					"p50": 2089,
+					"p95": 2411,
+					"p99": 3181
+				},
+				"refill": {
+					"max": 9266,
+					"mean": 66.11,
+					"n": 600,
+					"p50": 47,
+					"p95": 66,
+					"p99": 106
+				},
+				"save_nested": {
+					"max": 4180,
+					"mean": 4180.0,
+					"n": 1,
+					"p50": 4180,
+					"p95": 4180,
+					"p99": 4180
+				},
+				"separation_visits": {
+					"max": 75396,
+					"mean": 64907.78833333333,
+					"n": 600,
+					"p50": 65177,
+					"p95": 74490,
+					"p99": 74900
+				},
+				"spawn_cleanup": {
+					"max": 1727,
+					"mean": 302.28833333333336,
+					"n": 600,
+					"p50": 284,
+					"p95": 384,
+					"p99": 554
+				},
+				"step": {
+					"max": 91797,
+					"mean": 56972.765,
+					"n": 600,
+					"p50": 57037,
+					"p95": 65166,
+					"p99": 70338
+				},
+				"telegraph_start": {
+					"max": 3304,
+					"mean": 1146.14,
+					"n": 600,
+					"p50": 1108,
+					"p95": 1386,
+					"p99": 1904
+				},
+				"tick": {
+					"max": 91665,
+					"mean": 56542.835,
+					"n": 600,
+					"p50": 56566,
+					"p95": 64725,
+					"p99": 69383
+				}
+			},
+			"death_queue": 0,
+			"draw_calls": 0.0,
+			"draw_cpu_usec": {
+
+			},
+			"enemy_array": 400,
+			"inventory_items": 36,
+			"kills": 640,
+			"lineages": 400,
+			"live": 400,
+			"node_count": 217.0,
+			"objects": 2228.0,
+			"orphan_nodes": 0.0,
+			"particles": 0,
+			"pickups": 0,
+			"projectiles": 0,
+			"resources": 119.0,
+			"reward_kills": 0,
+			"rings": 0,
+			"save_success": 6,
+			"stage": "active",
+			"static_memory": 149144446.0,
+			"text": 0,
+			"tick": 5400,
+			"visual_cues": 0
+		},
+		{
+			"cpu_usec": {
+				"effects": {
+					"max": 352,
+					"mean": 23.38,
+					"n": 600,
+					"p50": 9,
+					"p95": 140,
+					"p99": 294
+				},
+				"enemy_ai": {
+					"max": 68400,
+					"mean": 54441.875,
+					"n": 600,
+					"p50": 55183,
+					"p95": 63917,
+					"p99": 66163
+				},
+				"hud": {
+					"max": 4589,
+					"mean": 349.6016666666667,
+					"n": 600,
+					"p50": 31,
+					"p95": 1056,
+					"p99": 1351
+				},
+				"kill_step": {
+					"max": 75709,
+					"mean": 75709.0,
+					"n": 1,
+					"p50": 75709,
+					"p95": 75709,
+					"p99": 75709
+				},
+				"pickups": {
+					"max": 74,
+					"mean": 3.4883333333333333,
+					"n": 600,
+					"p50": 3,
+					"p95": 4,
+					"p99": 4
+				},
+				"progress_flush": {
+					"max": 7,
+					"mean": 3.0433333333333334,
+					"n": 600,
+					"p50": 3,
+					"p95": 4,
+					"p99": 4
+				},
+				"projectiles": {
+					"max": 5413,
+					"mean": 2156.2533333333336,
+					"n": 600,
+					"p50": 2093,
+					"p95": 2485,
+					"p99": 3245
+				},
+				"refill": {
+					"max": 9325,
+					"mean": 68.03,
+					"n": 600,
+					"p50": 48,
+					"p95": 71,
+					"p99": 135
+				},
+				"separation_visits": {
+					"max": 76316,
+					"mean": 67089.47833333333,
+					"n": 600,
+					"p50": 68811,
+					"p95": 75663,
+					"p99": 76183
+				},
+				"spawn_cleanup": {
+					"max": 1009,
+					"mean": 317.79833333333335,
+					"n": 600,
+					"p50": 298,
+					"p95": 458,
+					"p99": 582
+				},
+				"step": {
+					"max": 75709,
+					"mean": 58620.348333333335,
+					"n": 600,
+					"p50": 59308,
+					"p95": 68160,
+					"p99": 71419
+				},
+				"telegraph_start": {
+					"max": 2423,
+					"mean": 1177.8633333333332,
+					"n": 600,
+					"p50": 1150,
+					"p95": 1467,
+					"p99": 1772
+				},
+				"tick": {
+					"max": 73929,
+					"mean": 58177.511666666665,
+					"n": 600,
+					"p50": 58907,
+					"p95": 67691,
+					"p99": 70693
+				}
+			},
+			"death_queue": 0,
+			"draw_calls": 0.0,
+			"draw_cpu_usec": {
+
+			},
+			"enemy_array": 400,
+			"inventory_items": 36,
+			"kills": 720,
+			"lineages": 400,
+			"live": 400,
+			"node_count": 217.0,
+			"objects": 2228.0,
+			"orphan_nodes": 0.0,
+			"particles": 0,
+			"pickups": 0,
+			"projectiles": 0,
+			"resources": 119.0,
+			"reward_kills": 0,
+			"rings": 0,
+			"save_success": 6,
+			"stage": "active",
+			"static_memory": 149163382.0,
+			"text": 0,
+			"tick": 6000,
+			"visual_cues": 0
+		},
+		{
+			"cpu_usec": {
+				"effects": {
+					"max": 324,
+					"mean": 22.668333333333333,
+					"n": 600,
+					"p50": 10,
+					"p95": 94,
+					"p99": 269
+				},
+				"enemy_ai": {
+					"max": 87042,
+					"mean": 52492.93,
+					"n": 600,
+					"p50": 52564,
+					"p95": 60837,
+					"p99": 67341
+				},
+				"hud": {
+					"max": 1993,
+					"mean": 340.59,
+					"n": 600,
+					"p50": 29,
+					"p95": 1056,
+					"p99": 1325
+				},
+				"kill_step": {
+					"max": 76706,
+					"mean": 76706.0,
+					"n": 1,
+					"p50": 76706,
+					"p95": 76706,
+					"p99": 76706
+				},
+				"pickups": {
+					"max": 57,
+					"mean": 3.515,
+					"n": 600,
+					"p50": 3,
+					"p95": 4,
+					"p99": 5
+				},
+				"progress_flush": {
+					"max": 4091,
+					"mean": 10.078333333333333,
+					"n": 600,
+					"p50": 3,
+					"p95": 4,
+					"p99": 4
+				},
+				"projectiles": {
+					"max": 7550,
+					"mean": 2185.3166666666666,
+					"n": 600,
+					"p50": 2130,
+					"p95": 2521,
+					"p99": 2844
+				},
+				"refill": {
+					"max": 9410,
+					"mean": 67.78333333333333,
+					"n": 600,
+					"p50": 49,
+					"p95": 70,
+					"p99": 140
+				},
+				"save_nested": {
+					"max": 4083,
+					"mean": 4083.0,
+					"n": 1,
+					"p50": 4083,
+					"p95": 4083,
+					"p99": 4083
+				},
+				"separation_visits": {
+					"max": 76379,
+					"mean": 64348.74333333333,
+					"n": 600,
+					"p50": 64588,
+					"p95": 74448,
+					"p99": 74763
+				},
+				"spawn_cleanup": {
+					"max": 933,
+					"mean": 321.41333333333336,
+					"n": 600,
+					"p50": 304,
+					"p95": 444,
+					"p99": 566
+				},
+				"step": {
+					"max": 97233,
+					"mean": 56679.861666666664,
+					"n": 600,
+					"p50": 56809,
+					"p95": 65302,
+					"p99": 74581
+				},
+				"telegraph_start": {
+					"max": 3765,
+					"mean": 1157.2683333333334,
+					"n": 600,
+					"p50": 1138,
+					"p95": 1379,
+					"p99": 1583
+				},
+				"tick": {
+					"max": 96296,
+					"mean": 56246.78333333333,
+					"n": 600,
+					"p50": 56231,
+					"p95": 64684,
+					"p99": 71575
+				}
+			},
+			"death_queue": 0,
+			"draw_calls": 0.0,
+			"draw_cpu_usec": {
+
+			},
+			"enemy_array": 400,
+			"inventory_items": 36,
+			"kills": 800,
+			"lineages": 400,
+			"live": 400,
+			"node_count": 217.0,
+			"objects": 2228.0,
+			"orphan_nodes": 0.0,
+			"particles": 0,
+			"pickups": 0,
+			"projectiles": 0,
+			"resources": 119.0,
+			"reward_kills": 0,
+			"rings": 0,
+			"save_success": 7,
+			"stage": "active",
+			"static_memory": 149179370.0,
+			"text": 0,
+			"tick": 6600,
+			"visual_cues": 0
+		},
+		{
+			"cpu_usec": {
+				"effects": {
+					"max": 365,
+					"mean": 23.975,
+					"n": 600,
+					"p50": 10,
+					"p95": 82,
+					"p99": 296
+				},
+				"enemy_ai": {
+					"max": 90321,
+					"mean": 53417.435,
+					"n": 600,
+					"p50": 54117,
+					"p95": 63061,
+					"p99": 66107
+				},
+				"hud": {
+					"max": 1473,
+					"mean": 337.9166666666667,
+					"n": 600,
+					"p50": 30,
+					"p95": 1051,
+					"p99": 1210
+				},
+				"kill_step": {
+					"max": 78290,
+					"mean": 78290.0,
+					"n": 1,
+					"p50": 78290,
+					"p95": 78290,
+					"p99": 78290
+				},
+				"pickups": {
+					"max": 33,
+					"mean": 3.475,
+					"n": 600,
+					"p50": 3,
+					"p95": 4,
+					"p99": 5
+				},
+				"progress_flush": {
+					"max": 4268,
+					"mean": 10.288333333333334,
+					"n": 600,
+					"p50": 3,
+					"p95": 4,
+					"p99": 7
+				},
+				"projectiles": {
+					"max": 4546,
+					"mean": 2204.096666666667,
+					"n": 600,
+					"p50": 2147,
+					"p95": 2587,
+					"p99": 3295
+				},
+				"refill": {
+					"max": 9026,
+					"mean": 69.28666666666666,
+					"n": 600,
+					"p50": 50,
+					"p95": 77,
+					"p99": 155
+				},
+				"save_nested": {
+					"max": 4258,
+					"mean": 4258.0,
+					"n": 1,
+					"p50": 4258,
+					"p95": 4258,
+					"p99": 4258
+				},
+				"separation_visits": {
+					"max": 76150,
+					"mean": 65076.89166666667,
+					"n": 600,
+					"p50": 66432,
+					"p95": 75686,
+					"p99": 75938
+				},
+				"spawn_cleanup": {
+					"max": 1268,
+					"mean": 336.915,
+					"n": 600,
+					"p50": 321,
+					"p95": 444,
+					"p99": 624
+				},
+				"step": {
+					"max": 94088,
+					"mean": 57738.526666666665,
+					"n": 600,
+					"p50": 58296,
+					"p95": 68108,
+					"p99": 71733
+				},
+				"telegraph_start": {
+					"max": 4477,
+					"mean": 1253.0216666666668,
+					"n": 600,
+					"p50": 1207,
+					"p95": 1518,
+					"p99": 1989
+				},
+				"tick": {
+					"max": 93996,
+					"mean": 57304.65,
+					"n": 600,
+					"p50": 57991,
+					"p95": 67447,
+					"p99": 70927
+				}
+			},
+			"death_queue": 0,
+			"draw_calls": 0.0,
+			"draw_cpu_usec": {
+
+			},
+			"enemy_array": 400,
+			"inventory_items": 36,
+			"kills": 880,
+			"lineages": 400,
+			"live": 400,
+			"node_count": 217.0,
+			"objects": 2228.0,
+			"orphan_nodes": 0.0,
+			"particles": 0,
+			"pickups": 0,
+			"projectiles": 0,
+			"resources": 119.0,
+			"reward_kills": 0,
+			"rings": 0,
+			"save_success": 8,
+			"stage": "active",
+			"static_memory": 149206738.0,
+			"text": 0,
+			"tick": 7200,
+			"visual_cues": 0
+		},
+		{
+			"cpu_usec": {
+
+			},
+			"death_queue": 0,
+			"draw_calls": 0.0,
+			"draw_cpu_usec": {
+
+			},
+			"enemy_array": 400,
+			"inventory_items": 36,
+			"kills": 880,
+			"lineages": 400,
+			"live": 400,
+			"node_count": 217.0,
+			"objects": 2228.0,
+			"orphan_nodes": 0.0,
+			"particles": 0,
+			"pickups": 0,
+			"projectiles": 0,
+			"resources": 119.0,
+			"reward_kills": 0,
+			"rings": 1,
+			"save_success": 10,
+			"stage": "drain_30_seconds",
+			"static_memory": 149021814.0,
+			"text": 0,
+			"tick": 9000,
+			"visual_cues": 0
+		}
+	],
+	"complete": true,
+	"controlled_deaths": [
+		{
+			"controlled_targets": 80,
+			"cpu_ms": 4.445,
+			"phases": {
+				"effects": 10,
+				"enemy_ai": 53370,
+				"pickups": 3,
+				"progress_flush": 5,
+				"projectiles": 1958,
+				"spawn_cleanup": 269,
+				"telegraph_start": 1203
+			},
+			"tick": 600
+		},
+		{
+			"controlled_targets": 80,
+			"cpu_ms": 4.532,
+			"phases": {
+				"effects": 10,
+				"enemy_ai": 57888,
+				"pickups": 3,
+				"progress_flush": 6,
+				"projectiles": 1944,
+				"spawn_cleanup": 344,
+				"telegraph_start": 1207
+			},
+			"tick": 1200
+		},
+		{
+			"controlled_targets": 80,
+			"cpu_ms": 5.075,
+			"phases": {
+				"effects": 12,
+				"enemy_ai": 58319,
+				"pickups": 3,
+				"progress_flush": 5,
+				"projectiles": 2030,
+				"spawn_cleanup": 441,
+				"telegraph_start": 1559
+			},
+			"tick": 1800
+		},
+		{
+			"controlled_targets": 80,
+			"cpu_ms": 4.686,
+			"phases": {
+				"effects": 10,
+				"enemy_ai": 59112,
+				"pickups": 3,
+				"progress_flush": 6,
+				"projectiles": 2093,
+				"spawn_cleanup": 319,
+				"telegraph_start": 1352
+			},
+			"tick": 2400
+		},
+		{
+			"controlled_targets": 80,
+			"cpu_ms": 5.09,
+			"phases": {
+				"effects": 10,
+				"enemy_ai": 62900,
+				"pickups": 4,
+				"progress_flush": 7,
+				"projectiles": 2140,
+				"spawn_cleanup": 387,
+				"telegraph_start": 1207
+			},
+			"tick": 3000
+		},
+		{
+			"controlled_targets": 80,
+			"cpu_ms": 5.082,
+			"phases": {
+				"effects": 11,
+				"enemy_ai": 58091,
+				"pickups": 3,
+				"progress_flush": 7,
+				"projectiles": 2156,
+				"spawn_cleanup": 420,
+				"telegraph_start": 1410
+			},
+			"tick": 3600
+		},
+		{
+			"controlled_targets": 80,
+			"cpu_ms": 5.032,
+			"phases": {
+				"effects": 11,
+				"enemy_ai": 59608,
+				"pickups": 3,
+				"progress_flush": 5,
+				"projectiles": 2466,
+				"spawn_cleanup": 370,
+				"telegraph_start": 1210
+			},
+			"tick": 4200
+		},
+		{
+			"controlled_targets": 80,
+			"cpu_ms": 4.877,
+			"phases": {
+				"effects": 9,
+				"enemy_ai": 58807,
+				"pickups": 4,
+				"progress_flush": 5,
+				"projectiles": 2080,
+				"spawn_cleanup": 344,
+				"telegraph_start": 1174
+			},
+			"tick": 4800
+		},
+		{
+			"controlled_targets": 80,
+			"cpu_ms": 4.897,
+			"phases": {
+				"effects": 11,
+				"enemy_ai": 57301,
+				"pickups": 3,
+				"progress_flush": 6,
+				"projectiles": 2346,
+				"spawn_cleanup": 372,
+				"telegraph_start": 1210
+			},
+			"tick": 5400
+		},
+		{
+			"controlled_targets": 80,
+			"cpu_ms": 4.475,
+			"phases": {
+				"effects": 10,
+				"enemy_ai": 59069,
+				"pickups": 4,
+				"progress_flush": 5,
+				"projectiles": 2107,
+				"spawn_cleanup": 331,
+				"telegraph_start": 1193
+			},
+			"tick": 6000
+		},
+		{
+			"controlled_targets": 80,
+			"cpu_ms": 5.095,
+			"phases": {
+				"effects": 9,
+				"enemy_ai": 59917,
+				"pickups": 3,
+				"progress_flush": 8,
+				"projectiles": 2332,
+				"spawn_cleanup": 424,
+				"telegraph_start": 1365
+			},
+			"tick": 6600
+		}
+	],
+	"count": 400,
+	"display": "headless",
+	"failures": [],
+	"initial": {
+		"cpu_usec": {
+
+		},
+		"death_queue": 0,
+		"draw_calls": 0.0,
+		"draw_cpu_usec": {
+
+		},
+		"enemy_array": 400,
+		"inventory_items": 36,
+		"kills": 0,
+		"lineages": 400,
+		"live": 400,
+		"node_count": 217.0,
+		"objects": 2228.0,
+		"orphan_nodes": 0.0,
+		"particles": 0,
+		"pickups": 0,
+		"projectiles": 0,
+		"resources": 119.0,
+		"reward_kills": 0,
+		"rings": 0,
+		"save_success": 0,
+		"stage": "initial",
+		"static_memory": 147947279.0,
+		"text": 0,
+		"tick": 0,
+		"visual_cues": 0
+	},
+	"mode": "crowd",
+	"native": false,
+	"player_invulnerable_fixture": true,
+	"shipping_cap": 100,
+	"sim_seconds": 120,
+	"timing_scope": "Microseconds; nested build/save labels overlap their enclosing tick/projectile/burst phases. Software/native results are not Windows FPS.",
+	"wall_seconds": 522.107548
+}

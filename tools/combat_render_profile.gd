@@ -122,6 +122,7 @@ func run() -> void:
 		buckets.append(sample("drain_30_seconds",total_ticks+1800))
 	if not arena.alive: failures.append("Protected diagnostic actor died unexpectedly")
 	if arena.projectiles.size()>180 or arena.particles.size()>180: failures.append("Existing bounded pool exceeded")
+	if native: root.get_texture().get_image().save_png(output.trim_suffix(".json")+".png")
 	write_progress(initial,began,true)
 	print("COMBAT_PROFILE_COMPLETE ",count," ",mode," ",seconds,"s native=",native," failures=",failures.size())
 	arena.queue_free(); await process_frame
@@ -176,6 +177,7 @@ func summaries(source: Dictionary) -> Dictionary:
 func write_progress(initial: Dictionary,began: int,complete: bool) -> void:
 	var record := {"complete":complete,"count":count,"mode":mode,"sim_seconds":seconds,"native":native,"display":DisplayServer.get_name(),
 		"shipping_cap":arena.MAX_ENEMIES,"above_cap_test_only":count>arena.MAX_ENEMIES,"player_invulnerable_fixture":true,
+		"native_driver":"One fixed simulation tick per rendered frame; production catch-up-loop feedback is deliberately excluded from this isolating probe",
 		"wall_seconds":(Time.get_ticks_usec()-began)/1000000.0,"initial":initial,"buckets":buckets,"controlled_deaths":deaths,"failures":failures,
 		"timing_scope":"Microseconds; nested build/save labels overlap their enclosing tick/projectile/burst phases. Software/native results are not Windows FPS."}
 	DirAccess.make_dir_recursive_absolute(output.get_base_dir())
