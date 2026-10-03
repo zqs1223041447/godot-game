@@ -58,7 +58,8 @@ func _initialize() -> void:
 	var migrating := Store.new()
 	check(migrating.load_build(old_path), "real legacy migration saved")
 	check(FileAccess.get_file_as_bytes(old_path + ".v13-backup.json") == old_bytes, "original BOM whitespace bytes backed up")
-	check(int(JSON.parse_string(FileAccess.get_file_as_string(old_path)).version) == 14 and migrating.successful_saves == 1, "migration committed once")
+	check(int(JSON.parse_string(FileAccess.get_file_as_string(old_path)).version) == Rules.VERSION and Rules.VERSION == 15
+		and migrating.successful_saves == 1, "migration committed once to current v15 schema")
 	var conflict_path := path + ".conflict"
 	write_bytes(conflict_path, old_bytes)
 	write_bytes(conflict_path + ".v13-backup.json", "other backup".to_utf8_buffer())

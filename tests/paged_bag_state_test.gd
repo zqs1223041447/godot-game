@@ -178,6 +178,13 @@ func _run() -> void:
 		"future schema stays protected and cannot replace current memory")
 
 	var full_state := loaded
+	var capacity_rng := RandomNumberGenerator.new()
+	capacity_rng.seed = 99174
+	var rng_before_space_award: int = capacity_rng.state
+	var space_award_uid := full_state.award_equipment(capacity_rng, 30, "rare")
+	_expect(not space_award_uid.is_empty() and capacity_rng.state != rng_before_space_award
+		and Rules.reason(full_state.snapshot()).is_empty(),
+		"legal level-30 equipment reward succeeds and consumes RNG while space remains")
 	var page_zero_filled := _fill_page(full_state, 0)
 	var full_snapshot := full_state.snapshot()
 	var full_validation := Layout.validate_paged(Items.metadata_for_items(full_snapshot.items),
@@ -188,11 +195,10 @@ func _run() -> void:
 		"reward insertion fills page one first, then selects an available slot on page two")
 	var page_one_filled := _fill_page(full_state, 1)
 	var full_before := full_state.snapshot()
-	var rng := RandomNumberGenerator.new()
-	rng.seed = 99174
-	var rng_before: int = rng.state
-	var failed_drop := full_state.award_equipment(rng, 75, "rare")
-	_expect(failed_drop.is_empty() and rng.state == rng_before and full_state.snapshot() == full_before,
+	var rng_before_full_award: int = capacity_rng.state
+	var failed_drop := full_state.award_equipment(capacity_rng, 30, "rare")
+	_expect(failed_drop.is_empty() and capacity_rng.state == rng_before_full_award
+		and full_state.snapshot() == full_before,
 		"last-cell overflow rejects atomically and restores the loot RNG stream")
 
 	var full_layout := Layout.validate_paged(Items.metadata_for_items(full_before.items),
@@ -200,16 +206,40 @@ func _run() -> void:
 	_expect(page_one_filled and full_layout.ok and full_layout.occupied_cells.size() == 96,
 		"both pages together expose exactly the original 96-cell capacity")
 
-	var current := loaded.snapshot()
+	var current := state.snapshot()
 	var external_path := path
-	var external := current.duplicate(true)
+	var external_uid := _first_bag_uid(current.locations)
+	var original_location: Dictionary = current.locations.get(external_uid, {}).duplicate(true)
+	var external_context := LegacyMigration.paged_location_context(current,
+		Rules.SourceTree.Data.standard_socket_ids())
+	var alternative_location := _free_location_except(Items.metadata_for_items(current.items),
+		current.locations, external_context, external_uid, original_location)
+	var attempts_before_external := state.save_attempts
+	var saves_before_external := state.successful_saves
+	_expect(not external_uid.is_empty() and not alternative_location.is_empty()
+		and state.can_move_item(external_uid, alternative_location, state.revision()),
+		"state owner has a real movable source and a distinct free target before external rewrite")
+	var move_away := state.move_item(external_uid, alternative_location, state.revision(), external_path)
+	var move_back := state.move_item(external_uid, original_location, state.revision(), external_path) \
+		if move_away.get("ok", false) else {"ok": false}
+	_expect(move_away.get("ok", false) and move_back.get("ok", false)
+		and state.location(external_uid) == original_location
+		and state.can_move_item(external_uid, alternative_location, state.revision()),
+		"same state fixture can move to the distinct target and return before external rewrite")
+	attempts_before_external = state.save_attempts
+	saves_before_external = state.successful_saves
+	var external := state.snapshot()
 	external.revision += 1
 	var external_bytes := JSON.stringify(external, "\t", true, true).to_utf8_buffer()
 	_write(external_path, external_bytes)
-	var guarded_memory := loaded.snapshot()
-	_expect(not loaded.move_item(bag_uid, second_page, loaded.revision(), external_path).ok
-		and loaded.snapshot() == guarded_memory and FileAccess.get_file_as_bytes(external_path) == external_bytes,
-		"external rewrite during an ordinary page transfer cannot change memory or disk")
+	var guarded_memory := state.snapshot()
+	var rejected_external_move := state.move_item(external_uid, alternative_location, state.revision(), external_path)
+	_expect(not rejected_external_move.ok and rejected_external_move.error_code == "save_failed"
+		and rejected_external_move.reason.contains("外部修改") and state.snapshot() == guarded_memory
+		and FileAccess.get_file_as_bytes(external_path) == external_bytes,
+		"external rewrite blocks a real page transfer and preserves memory and external disk bytes")
+	_expect(state.save_attempts == attempts_before_external and state.successful_saves == saves_before_external,
+		"external modification check rejects before the save attempt counter advances")
 
 	print("Paged bag state: %d checks, %d failures" % [checks, failures])
 	quit(1 if failures else 0)
@@ -251,6 +281,27 @@ func _page_one_free_location(metadata: Dictionary, locations: Dictionary, contex
 			var placement := BagLayout.check_placement(uid, metadata[uid].size, location, checked.occupied_cells)
 			if placement.ok:
 				return location
+	return {}
+
+
+func _free_location_except(metadata: Dictionary, locations: Dictionary, context: Dictionary,
+		uid: String, excluded: Dictionary) -> Dictionary:
+	var checked: Dictionary = Layout.validate_paged(metadata, locations, context)
+	if not checked.ok or not metadata.has(uid):
+		return {}
+	var occupied: Dictionary = checked.occupied_cells.duplicate(true)
+	for cell: Variant in occupied.keys():
+		if occupied[cell] == uid:
+			occupied.erase(cell)
+	for page: int in range(2):
+		for y: int in range(6):
+			for x: int in range(8):
+				var location := {"kind": "bag", "page": page, "x": x, "y": y}
+				if location == excluded:
+					continue
+				var placement: Dictionary = BagLayout.check_placement(uid, metadata[uid].size, location, occupied)
+				if placement.ok:
+					return location
 	return {}
 
 

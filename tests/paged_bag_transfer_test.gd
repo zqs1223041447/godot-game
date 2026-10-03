@@ -90,6 +90,20 @@ func _run() -> void:
 	var moved := Transfer.move_paged(swap_metadata, swap_locations, _context(false), "gem",
 		{"kind": "bag", "page": 1, "x": 0, "y": 0}, 5, 5)
 	_expect(moved.ok and moved.locations.gem.page == 1, "transfer accepts a complete destination on the second page")
+	_expect(Transfer.first_bag_space_paged(swap_metadata, swap_locations, null, "gem").is_empty(),
+		"first-space query safely rejects a null context")
+	_expect(Transfer.first_bag_space_paged(swap_metadata, swap_locations, {}, "gem").is_empty(),
+		"first-space query safely rejects an empty context")
+	var wrong_dimensions := _context(false)
+	wrong_dimensions.columns = 12
+	_expect(Transfer.first_bag_space_paged(swap_metadata, swap_locations, wrong_dimensions, "gem").is_empty(),
+		"first-space query safely rejects a context with legacy dimensions")
+	_expect(Transfer.first_bag_space_paged({}, swap_locations, _context(false), "gem").is_empty(),
+		"first-space query safely rejects missing moving metadata")
+	var invalid_moving_metadata := swap_metadata.duplicate(true)
+	invalid_moving_metadata.gem.kind = "unsupported"
+	_expect(Transfer.first_bag_space_paged(invalid_moving_metadata, swap_locations, _context(false), "gem").is_empty(),
+		"first-space query safely rejects invalid moving metadata")
 	var missing_page := Transfer.move_paged(swap_metadata, swap_locations, _context(false), "gem",
 		{"kind": "bag", "x": 0, "y": 1}, 5, 5)
 	_expect(not missing_page.ok and missing_page.error_code == "invalid_destination",

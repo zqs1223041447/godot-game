@@ -197,7 +197,9 @@ static func _first_bag_space(metadata: Dictionary, locations: Dictionary, moving
 
 static func first_bag_space_paged(metadata: Variant, locations: Variant, context: Variant,
 		moving: Variant, vacated_uid: String = "") -> Dictionary:
-	if not metadata is Dictionary or not locations is Dictionary or not moving is String or not metadata.has(moving):
+	if not metadata is Dictionary or not locations is Dictionary or not Layout._stable_id(moving) \
+			or not metadata.has(moving) or not Layout._paged_context_error(context).is_empty() \
+			or not Layout._metadata_error(metadata[moving]).is_empty():
 		return {}
 	var placed_metadata: Dictionary = {}
 	for uid: Variant in locations:
