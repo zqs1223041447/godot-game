@@ -1,0 +1,681 @@
+Godot version: 4.6.3.stable.official.7d41c59c4
+Font coverage: 868 Han / 988 printable characters in 102 runtime files + pinned crafting strings; 993 mapped; 874 baseline characters retained
+Same-source unsupported symbols (existing fallback): ⌁ U+2301 ◈ U+25C8
+PASS
+test_all_planner_failure_reasons_are_in_the_corpus (__main__.FontCoverageTests.test_all_planner_failure_reasons_are_in_the_corpus) ... ok
+test_all_runtime_and_pinned_crafting_characters (__main__.FontCoverageTests.test_all_runtime_and_pinned_crafting_characters) ... ok
+test_chinese_can_never_be_exempted (__main__.FontCoverageTests.test_chinese_can_never_be_exempted) ... ok
+test_empty_chinese_glyph_is_detected (__main__.FontCoverageTests.test_empty_chinese_glyph_is_detected) ... ok
+test_existing_glyph_outlines_metrics_and_family (__main__.FontCoverageTests.test_existing_glyph_outlines_metrics_and_family) ... ok
+test_license_and_embedded_license_preserved (__main__.FontCoverageTests.test_license_and_embedded_license_preserved) ... ok
+test_lost_baseline_glyph_is_detected (__main__.FontCoverageTests.test_lost_baseline_glyph_is_detected) ... ok
+test_metric_and_outline_regression_is_detected (__main__.FontCoverageTests.test_metric_and_outline_regression_is_detected) ... ok
+test_missing_crafting_glyph_is_detected (__main__.FontCoverageTests.test_missing_crafting_glyph_is_detected) ... ok
+test_more_than_the_six_reported_glyphs_are_protected (__main__.FontCoverageTests.test_more_than_the_six_reported_glyphs_are_protected) ... ok
+test_notdef_mapping_does_not_count_as_coverage (__main__.FontCoverageTests.test_notdef_mapping_does_not_count_as_coverage) ... ok
+test_offline_cli_and_strict_symbol_audit (__main__.FontCoverageTests.test_offline_cli_and_strict_symbol_audit) ... ok
+test_pre_planner_coverage_is_rejected (__main__.FontCoverageTests.test_pre_planner_coverage_is_rejected) ... ok
+test_unverified_source_rejected_before_writing (__main__.FontCoverageTests.test_unverified_source_rejected_before_writing) ... ok
+test_comments_do_not_request_glyphs (__main__.StringScanTests.test_comments_do_not_request_glyphs) ... ok
+test_escaped_quotes_and_continuation (__main__.StringScanTests.test_escaped_quotes_and_continuation) ... ok
+test_json_csv_resources_and_gdignore (__main__.StringScanTests.test_json_csv_resources_and_gdignore) ... ok
+test_malformed_strings_fail (__main__.StringScanTests.test_malformed_strings_fail) ... ok
+test_multiline_raw_names_and_paths (__main__.StringScanTests.test_multiline_raw_names_and_paths) ... ok
+test_non_bmp_chinese_is_required (__main__.StringScanTests.test_non_bmp_chinese_is_required) ... ok
+test_unicode_escapes_and_surrogates (__main__.StringScanTests.test_unicode_escapes_and_surrogates) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 251.627s
+
+OK
+verified: PoE1 3.29.1 commit 8bd138b32ea2631455cac5935bfab089f826094f
+source sha256: 7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122
+source_nodes: 3390
+standard_tree_node_records: 2790
+standard_tree_positioned_nodes: 2387
+standard_tree_unpositioned_nodes: 403
+detached_standard_definitions_without_group_or_edges: 402
+logical_root_nodes: 1
+ascendancy_names: 37
+ascendancy_node_records: 558
+expansion_jewel_node_records: 42
+source_groups: 797
+groups_mixing_standard_and_expansion_nodes: 30
+nodes_orbit_absent_from_group_orbits_list: 48
+nodes_with_derived_positions: 2987
+source_out_links: 3382
+source_in_links: 3359
+unique_undirected_edges: 3382
+source_out_links_without_matching_in_entry: 23
+source_in_links_without_matching_out_entry: 0
+edges_crossing_partitions: 127
+default_allocation_nodes: 2387
+default_allocation_edges: 2697
+default_allocation_root_edges_excluded: 23
+default_allocation_cross_partition_edges_excluded: 127
+default_allocation_unpositioned_edges_excluded: 23
+default_allocation_source_edges_excluded: 685
+classes: 7
+class_start_nodes: 7
+alternate_ascendancies: 16
+jewel_slots: 60
+standard_tree_jewel_slots: 15
+ascendancy_jewel_sockets: 3
+expansion_jewel_sockets: 42
+mastery_nodes: 353
+mastery_effect_options: 1837
+multiple_choice_nodes: 17
+multiple_choice_option_nodes: 62
+node_stats_lines: 4966
+node_stats_unique_texts: 2622
+mastery_effect_stats_lines: 2015
+mastery_effect_stats_unique_texts: 389
+note: imported source coverage describes retained data; it does not mean source modifiers are implemented by game mechanics.
+Runtime source facts: 3390 records, 2987 positions, 2318195 bytes; SHA256 9774a8ec1fe16199e775fe99a20853837ca8c7725c48dfcd9d6ee69646ff934f
+........
+----------------------------------------------------------------------
+Ran 8 tests in 0.753s
+
+OK
+Linux save isolation sandbox: /tmp/godot-save-linux-teww9kq6
+Linux save identity test: 99 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started Project initialization (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Scanning file structure...[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | Loading global class names...[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | Verifying GDExtensions...[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | Creating autoload scripts...[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | Initializing plugins...[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | Starting file scan...[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | Started Registering global classes... (4 steps)[39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | GameHUD[39m[0m
+[  20% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  40% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  60% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[92m[ DONE ][39m [1mupdate_scripts_classes[22m
+[0m
+[   0% ] [90m[1m_update_scan_actions[22m | Started Scanning actions... (16 steps)[39m[0m
+[   0% ] [90m[1m_update_scan_actions[22m | currency-after-calibration.png[39m[0m
+[   5% ] [90m[1m_update_scan_actions[22m | discard-stack-confirm.png[39m[0m
+[  11% ] [90m[1m_update_scan_actions[22m | final-cross-dock-gem.png[39m[0m
+[  17% ] [90m[1m_update_scan_actions[22m | stack-in-expanded-row.png[39m[0m
+[  23% ] [90m[1m_update_scan_actions[22m | cleave-fx0-1280.png[39m[0m
+[  29% ] [90m[1m_update_scan_actions[22m | cleave-fx0-2560.png[39m[0m
+[  35% ] [90m[1m_update_scan_actions[22m | cleave-fx2-1280.png[39m[0m
+[  41% ] [90m[1m_update_scan_actions[22m | cleave-fx2-2560.png[39m[0m
+[  47% ] [90m[1m_update_scan_actions[22m | shade_bolt-fx0-1280.png[39m[0m
+[  52% ] [90m[1m_update_scan_actions[22m | shade_bolt-fx0-2560.png[39m[0m
+[  58% ] [90m[1m_update_scan_actions[22m | shade_bolt-fx2-1280.png[39m[0m
+[  64% ] [90m[1m_update_scan_actions[22m | shade_bolt-fx2-2560.png[39m[0m
+[  70% ] [90m[1m_update_scan_actions[22m | skills-bag-1280.png[39m[0m
+[  76% ] [90m[1m_update_scan_actions[22m | skills-bag-2560.png[39m[0m
+[  82% ] [90m[1m_update_scan_actions[22m | cleave-physical-key.png[39m[0m
+[  88% ] [90m[1m_update_scan_actions[22m | shade_bolt-physical-key.png[39m[0m
+[92m[ DONE ][39m [1m_update_scan_actions[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started (Re)Importing Assets (12 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   7% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  15% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  23% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  30% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  38% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  46% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  53% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  61% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  69% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  76% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  84% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   0% ] [90m[1mreimport[22m | Executing pre-reimport operations...[39m[0m
+[   0% ] [90m[1mreimport[22m | cleave-fx0-1280.png[39m[0m
+[   7% ] [90m[1mreimport[22m | cleave-fx0-2560.png[39m[0m
+[  15% ] [90m[1mreimport[22m | cleave-fx2-1280.png[39m[0m
+[  23% ] [90m[1mreimport[22m | cleave-fx2-2560.png[39m[0m
+[  30% ] [90m[1mreimport[22m | shade_bolt-fx0-1280.png[39m[0m
+[  38% ] [90m[1mreimport[22m | shade_bolt-fx0-2560.png[39m[0m
+[  46% ] [90m[1mreimport[22m | shade_bolt-fx2-1280.png[39m[0m
+[  53% ] [90m[1mreimport[22m | shade_bolt-fx2-2560.png[39m[0m
+[  61% ] [90m[1mreimport[22m | skills-bag-1280.png[39m[0m
+[  69% ] [90m[1mreimport[22m | skills-bag-2560.png[39m[0m
+[  76% ] [90m[1mreimport[22m | cleave-physical-key.png[39m[0m
+[  84% ] [90m[1mreimport[22m | shade_bolt-physical-key.png[39m[0m
+[  92% ] [90m[1mreimport[22m | Finalizing Asset Import...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started (Re)Importing Assets (12 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | Executing post-reimport operations...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Loading editor (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Loading editor layout...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Loading docks...[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS: Ten available skills
+PASS: Nine initial equipment items
+PASS: Expanded passive graph populated
+PASS: Complete skill: cleave
+PASS: Valid skill costs: cleave
+PASS: Complete skill: shade_bolt
+PASS: Valid skill costs: shade_bolt
+PASS: Complete skill: tornado
+PASS: Valid skill costs: tornado
+PASS: Complete skill: bolt
+PASS: Valid skill costs: bolt
+PASS: Complete skill: frost
+PASS: Valid skill costs: frost
+PASS: Complete skill: nova
+PASS: Valid skill costs: nova
+PASS: Complete skill: dash
+PASS: Valid skill costs: dash
+PASS: Complete skill: ward
+PASS: Valid skill costs: ward
+PASS: Complete skill: meteor
+PASS: Valid skill costs: meteor
+PASS: Complete skill: chain
+PASS: Valid skill costs: chain
+PASS: Known item slot: prism_bow
+PASS: Known item stat: damage
+PASS: Known item stat: projectile_increased
+PASS: Known item stat: projectile_count
+PASS: Known item slot: return_mantle
+PASS: Known item stat: max_shield
+PASS: Known item slot: detonation_charm
+PASS: Known item stat: global_increased
+PASS: Known item stat: elemental_increased
+PASS: Known item slot: ember_wand
+PASS: Known item stat: damage
+PASS: Known item stat: mana_regen
+PASS: Known item slot: swift_blade
+PASS: Known item stat: attack_speed
+PASS: Known item stat: move_speed
+PASS: Known item slot: guardian_robe
+PASS: Known item stat: max_shield
+PASS: Known item stat: shield_regen
+PASS: Known item slot: vitality_armor
+PASS: Known item stat: max_health
+PASS: Known item stat: move_speed
+PASS: Known item slot: azure_charm
+PASS: Known item stat: max_mana
+PASS: Known item stat: mana_regen
+PASS: Known item slot: storm_charm
+PASS: Known item stat: damage
+PASS: Known item stat: attack_speed
+PASS: Known passive stat: damage
+PASS: Known passive stat: attack_speed
+PASS: Known passive stat: damage
+PASS: Known passive stat: damage
+PASS: Known passive stat: global_increased
+PASS: Known passive stat: damage
+PASS: Known passive stat: attack_speed
+PASS: Known passive stat: damage
+PASS: Known passive stat: damage
+PASS: Known passive stat: attack_speed
+PASS: Known passive stat: damage
+PASS: Known passive stat: damage
+PASS: Known passive stat: damage
+PASS: Known passive stat: attack_speed
+PASS: Known passive stat: projectile_increased
+PASS: Known passive stat: damage
+PASS: Known passive stat: damage
+PASS: Known passive stat: damage
+PASS: Known passive stat: damage
+PASS: Known passive stat: attack_speed
+PASS: Known passive stat: damage
+PASS: Known passive stat: global_increased
+PASS: Known passive stat: damage
+PASS: Known passive stat: attack_speed
+PASS: Known passive stat: elemental_increased
+PASS: Known passive stat: damage
+PASS: Known passive stat: damage
+PASS: Known passive stat: attack_speed
+PASS: Known passive stat: damage
+PASS: Known passive stat: damage
+PASS: Known passive stat: damage
+PASS: Known passive stat: attack_speed
+PASS: Known passive stat: damage
+PASS: Known passive stat: damage
+PASS: Known passive stat: projectile_increased
+PASS: Known passive stat: area_increased
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: mana_regen
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: mana_regen
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: mana_regen
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: mana_regen
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: mana_regen
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: mana_regen
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: elemental_increased
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: mana_regen
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: mana_regen
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: mana_regen
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: mana_regen
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: move_speed
+PASS: Known passive stat: attack_speed
+PASS: Known passive stat: move_speed
+PASS: Known passive stat: attack_speed
+PASS: Known passive stat: move_speed
+PASS: Known passive stat: move_speed
+PASS: Known passive stat: attack_speed
+PASS: Known passive stat: move_speed
+PASS: Known passive stat: attack_speed
+PASS: Known passive stat: move_speed
+PASS: Known passive stat: move_speed
+PASS: Known passive stat: attack_speed
+PASS: Known passive stat: move_speed
+PASS: Known passive stat: attack_speed
+PASS: Known passive stat: move_speed
+PASS: Known passive stat: attack_speed
+PASS: Known passive stat: move_speed
+PASS: Known passive stat: attack_speed
+PASS: Known passive stat: move_speed
+PASS: Known passive stat: attack_speed
+PASS: Known passive stat: move_speed
+PASS: Known passive stat: attack_speed
+PASS: Known passive stat: move_speed
+PASS: Known passive stat: attack_speed
+PASS: Known passive stat: move_speed
+PASS: Known passive stat: move_speed
+PASS: Known passive stat: projectile_increased
+PASS: Known passive stat: move_speed
+PASS: Known passive stat: attack_speed
+PASS: Known passive stat: move_speed
+PASS: Known passive stat: attack_speed
+PASS: Known passive stat: move_speed
+PASS: Known passive stat: attack_speed
+PASS: Known passive stat: move_speed
+PASS: Known passive stat: move_speed
+PASS: Known passive stat: attack_speed
+PASS: Known passive stat: move_speed
+PASS: Known passive stat: attack_speed
+PASS: Known passive stat: move_speed
+PASS: Known passive stat: attack_speed
+PASS: Known passive stat: move_speed
+PASS: Known passive stat: attack_speed
+PASS: Known passive stat: move_speed
+PASS: Known passive stat: attack_speed
+PASS: Known passive stat: move_speed
+PASS: Known passive stat: move_speed
+PASS: Known passive stat: attack_speed
+PASS: Known passive stat: move_speed
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: shield_regen
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: shield_regen
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: shield_regen
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: shield_regen
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: shield_regen
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: shield_regen
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: shield_regen
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: shield_regen
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: shield_regen
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: area_increased
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: shield_regen
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: shield_regen
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: mana_regen
+PASS: Known passive stat: shield_regen
+PASS: Known passive stat: damage
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: damage
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: elemental_increased
+PASS: Known passive stat: global_increased
+PASS: Known passive stat: mana_regen
+PASS: Known passive stat: shield_regen
+PASS: Known passive stat: damage
+PASS: Known passive stat: max_health
+PASS: Known passive stat: damage
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: mana_regen
+PASS: Known passive stat: shield_regen
+PASS: Known passive stat: damage
+PASS: Known passive stat: max_health
+PASS: Known passive stat: mana_regen
+PASS: Known passive stat: shield_regen
+PASS: Known passive stat: damage
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: area_increased
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: damage
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: damage
+PASS: Known passive stat: max_health
+PASS: Known passive stat: damage
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: mana_regen
+PASS: Known passive stat: shield_regen
+PASS: Known passive stat: damage
+PASS: Known passive stat: max_health
+PASS: Known passive stat: damage
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: mana_regen
+PASS: Known passive stat: shield_regen
+PASS: Known passive stat: damage
+PASS: Known passive stat: max_health
+PASS: Known passive stat: max_mana
+PASS: Known passive stat: max_shield
+PASS: Known passive stat: mana_regen
+PASS: Known passive stat: shield_regen
+PASS: Inventory starts with all nine items
+PASS: One equipped item in each slot
+PASS: Default weapon adds damage
+PASS: Default charm adds mana
+PASS: Invalid equipment IDs rejected
+PASS: Equipping the same item is a no-op
+PASS: No signal for invalid or unchanged equipment
+PASS: Equip replacement weapon
+PASS: Replacement occupies correct slot
+PASS: Equipping preserves inventory
+PASS: Replaced weapon stats removed
+PASS: Replacement attack speed applied
+PASS: Equipment change emits once
+PASS: Unequip weapon
+PASS: Unequip armor
+PASS: Unequip charm
+PASS: Empty equipment slot is a no-op
+PASS: Unequipped stats equal base stats
+PASS: Cannot equip an item outside inventory
+PASS: Build instances do not share mutable collections
+PASS: Returned stats do not mutate base stats
+PASS: Origin is the only initial passive
+PASS: Unknown passive rejected
+PASS: Distant passive cannot skip path
+PASS: Origin cannot be allocated twice
+PASS: Rejected passive allocation emits no signal
+PASS: Allocate adjacent passive
+PASS: Passive spends exactly one point
+PASS: Passive modifies damage
+PASS: Passive modifies attack_speed
+PASS: Allocated passive cannot spend twice
+PASS: Connected path expands
+PASS: Cannot refund bridge and disconnect path
+PASS: Leaf can be refunded
+PASS: Leaf refund returns one point
+PASS: Reset restores passive budget
+PASS: Reset removes passive stats
+PASS: Repeated reset cannot duplicate points
+PASS: Spend initial point on ember_1_0
+PASS: Spend initial point on grove_1_0
+PASS: Spend initial point on tide_1_0
+PASS: Spend initial point on gale_1_0
+PASS: Spend initial point on aegis_1_0
+PASS: Zero point budget rejects reachable passive
+PASS: Level-up point allocates newly reachable passive
+PASS: Initial five skill slots
+PASS: Out-of-range skill indices rejected
+PASS: Unknown skill rejected
+PASS: Same skill placement is a no-op
+PASS: Existing skill can move
+PASS: Existing skills swap without duplicates
+PASS: Unequipped skill replaces a slot
+PASS: Replacement skill set is correct
+PASS: Second spare skill is available
+PASS: Initial level threshold
+PASS: Non-positive XP rejected
+PASS: Partial XP does not report level-up
+PASS: Exact threshold levels once
+PASS: Level-up grants point and raises threshold
+PASS: Large XP award levels repeatedly
+PASS: XP overflow preserved across levels
+PASS: Large award safely reaches cap
+PASS: Level and XP are bounded at cap
+PASS: Capped progression does not add extra talent points
+PASS: Save valid build
+PASS: Atomically replace existing save
+PASS: Load saved build
+PASS: Save round-trip preserves all configuration
+PASS: Save round-trip preserves calculated stats
+PASS: Successful load emits one change
+PASS: No temporary file remains after save
+PASS: Unknown inventory item rejected
+PASS: Unknown inventory item preserves build without signal
+PASS: Duplicate inventory item rejected
+PASS: Duplicate inventory item preserves build without signal
+PASS: Inventory wrong type rejected
+PASS: Inventory wrong type preserves build without signal
+PASS: Wrong equipment slot rejected
+PASS: Wrong equipment slot preserves build without signal
+PASS: Equipped item absent from inventory rejected
+PASS: Equipped item absent from inventory preserves build without signal
+PASS: Unknown equipment slot rejected
+PASS: Unknown equipment slot preserves build without signal
+PASS: Unknown slotted skill rejected
+PASS: Unknown slotted skill preserves build without signal
+PASS: Duplicate slotted skill rejected
+PASS: Duplicate slotted skill preserves build without signal
+PASS: Wrong number of skill slots rejected
+PASS: Wrong number of skill slots preserves build without signal
+PASS: Unknown passive rejected
+PASS: Unknown passive preserves build without signal
+PASS: Duplicate passive rejected
+PASS: Duplicate passive preserves build without signal
+PASS: Missing origin rejected
+PASS: Missing origin preserves build without signal
+PASS: Passive collection wrong type rejected
+PASS: Passive collection wrong type preserves build without signal
+PASS: Inconsistent talent point budget rejected
+PASS: Inconsistent talent point budget preserves build without signal
+PASS: Invalid level 0 rejected
+PASS: Invalid level 0 preserves build without signal
+PASS: Invalid level -1 rejected
+PASS: Invalid level -1 preserves build without signal
+PASS: Invalid level 1001 rejected
+PASS: Invalid level 1001 preserves build without signal
+PASS: Invalid level 2.5 rejected
+PASS: Invalid level 2.5 preserves build without signal
+PASS: Invalid level 2 rejected
+PASS: Invalid level 2 preserves build without signal
+PASS: Invalid level true rejected
+PASS: Invalid level true preserves build without signal
+PASS: Invalid XP -1 rejected
+PASS: Invalid XP -1 preserves build without signal
+PASS: Invalid XP 36 rejected
+PASS: Invalid XP 36 preserves build without signal
+PASS: Invalid XP 2.5 rejected
+PASS: Invalid XP 2.5 preserves build without signal
+PASS: Invalid XP 2 rejected
+PASS: Invalid XP 2 preserves build without signal
+PASS: Unsupported save version rejected
+PASS: Unsupported save version preserves build without signal
+PASS: Missing required field rejected
+PASS: Missing required field preserves build without signal
+PASS: Top-level array rejected
+PASS: Top-level array preserves build without signal
+PASS: Top-level null rejected
+PASS: Top-level null preserves build without signal
+PASS: Malformed JSON rejected
+PASS: Oversized save rejected
+PASS: Missing save returns false
+PASS: Failed reads never partially mutate current build
+PASS: Invalid in-memory build cannot overwrite save
+PASS: Last valid save survives rejected write
+Build model: 444 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+Stable build cache: 196 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+godot-game: playable arena ready
+M0 scene cache: 14 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+Equipment slots: 83 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+Item location rules: 282 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+Menu route state: 124 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+Gem catalog: 8 skills, 16 supports; 466 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+Unified item catalog: 145 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+Item transfer plan: 22 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ERROR: old available gem retained
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/canonical_build_migration_test.gd:77)
+       [1] _initialize (res://tests/canonical_build_migration_test.gd:46)
+ERROR: old available gem retained
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/canonical_build_migration_test.gd:77)
+       [1] _initialize (res://tests/canonical_build_migration_test.gd:46)
+ERROR: old available gem retained
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/canonical_build_migration_test.gd:77)
+       [1] _initialize (res://tests/canonical_build_migration_test.gd:46)
+ERROR: old available gem retained
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/canonical_build_migration_test.gd:77)
+       [1] _initialize (res://tests/canonical_build_migration_test.gd:46)
+ERROR: old available gem retained
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/canonical_build_migration_test.gd:77)
+       [1] _initialize (res://tests/canonical_build_migration_test.gd:46)
+ERROR: old available gem retained
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/canonical_build_migration_test.gd:77)
+       [1] _initialize (res://tests/canonical_build_migration_test.gd:46)
+ERROR: old available gem retained
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/canonical_build_migration_test.gd:77)
+       [1] _initialize (res://tests/canonical_build_migration_test.gd:46)
+ERROR: old available gem retained
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/canonical_build_migration_test.gd:77)
+       [1] _initialize (res://tests/canonical_build_migration_test.gd:46)
+ERROR: old available gem retained
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/canonical_build_migration_test.gd:77)
+       [1] _initialize (res://tests/canonical_build_migration_test.gd:46)
+ERROR: old available gem retained
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/canonical_build_migration_test.gd:77)
+       [1] _initialize (res://tests/canonical_build_migration_test.gd:46)
+Canonical migration: 444 checks, 10 failures

@@ -43,7 +43,10 @@ func _initialize() -> void:
 			definitions[result.items[uid].definition_id] = true
 			if result.items[uid].definition_id == "support:focus": focus_uids.append(uid)
 		for definition_id: String in Gems.definitions():
-			check(definitions.has(definition_id), "old available gem retained")
+			if Gems.minimum_save_version(definition_id)<=Migration.VERSION:
+				check(definitions.has(definition_id), "old available gem retained")
+			else:
+				check(not definitions.has(definition_id), "Old migration never grants future active gems")
 		check(focus_uids.size() == 2 and focus_uids[0] != focus_uids[1], "shared definition becomes independent instances")
 		check(Layout.validate(Items.metadata_for_items(result.items), result.locations, Migration.location_context(result)).ok, "complete ownership location")
 	var exhausted := state._snapshot()

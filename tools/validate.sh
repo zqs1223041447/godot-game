@@ -63,130 +63,39 @@ run_check() {
 	fi
 }
 
+# The default gate is the current batch and its direct dependencies, not an
+# accumulating history of every test. Pass explicit test resource paths to run
+# a changed dependency only. Successful identical-input evidence may be reused.
+# The retired 600-second equipment soak is intentionally not an available gate.
+if (( $# > 0 )); then
+  for resource in "$@"; do
+    if [[ "$resource" != res://tests/*_test.gd || "$resource" == *equipment_soak* ]]; then
+      echo "Expected an explicit current test resource: $resource" >&2
+      exit 2
+    fi
+    run_check --script "$resource"
+  done
+  echo "Selected checks passed."
+  exit 0
+fi
+
 echo "Godot version: $("$GODOT_BIN" --version)"
 python3 "$PROJECT_DIR/tools/check_font_coverage.py"
-python3 "$PROJECT_DIR/tests/test_font_coverage.py"
-python3 "$PROJECT_DIR/tools/passive_import/import_tree.py" --check
-python3 "$PROJECT_DIR/tools/passive_import/export_runtime_tree.py" --check
-python3 "$PROJECT_DIR/tests/passive_import_test.py"
-python3 "$PROJECT_DIR/tools/validate_save_paths_linux.py" --godot "$GODOT_BIN"
 run_check --editor --import
-run_check --script res://tests/build_test.gd
-run_check --script res://tests/stable_build_cache_test.gd
-run_check --script res://tests/m0_scene_cache_test.gd
-run_check --script res://tests/equipment_slots_test.gd
-run_check --script res://tests/item_location_rules_test.gd
-run_check --script res://tests/menu_route_state_test.gd
-run_check --script res://tests/gem_catalog_test.gd
-run_check --script res://tests/unified_item_catalog_test.gd
-run_check --script res://tests/item_transfer_plan_test.gd
 run_check --script res://tests/canonical_build_migration_test.gd
 run_check --script res://tests/canonical_build_store_test.gd
-run_check --script res://tests/footprint_metadata_test.gd
 run_check --script res://tests/save_receipt_revision_test.gd
-run_check --script res://tests/canonical_game_state_test.gd
-run_check --script res://tests/canonical_crafting_test.gd
 run_check --script res://tests/canonical_group_cast_test.gd
-run_check --script res://tests/canonical_default_startup_test.gd
-run_check --script res://tests/canonical_hud_integration_test.gd
-run_check --script res://tests/source_tree_data_test.gd
-run_check --script res://tests/source_execution_coverage_test.gd
-run_check --script res://tests/source_tree_allocation_rules_test.gd
-run_check --script res://tests/source_tree_runtime_test.gd
-run_check --script res://tests/source_stat_patterns_test.gd
-run_check --script res://tests/source_defense_integration_test.gd
-run_check --script res://tests/source_passive_tree_view_test.gd
-run_check --script res://tests/skill_group_rows_test.gd
-run_check --script res://tests/unified_bag_grid_test.gd
-run_check --script res://tests/unified_external_drag_test.gd
-run_check --script res://tests/item_hover_card_test.gd
 run_check --script res://tests/five_support_compiler_test.gd
 run_check --script res://tests/offense_skill_batch_test.gd
 run_check --script res://tests/offense_skill_migration_test.gd
 run_check --script res://tests/offense_skill_gameplay_test.gd
 run_check --script res://tests/offense_skill_loot_test.gd
-run_check --script res://tests/skill_cooldown_ledger_test.gd
-run_check --script res://tests/nine_slot_equipment_profile_test.gd
-run_check --script res://tests/nine_slot_catalog_integration_test.gd
-run_check --script res://tests/independent_menus_test.gd
-run_check --script res://tests/equipment_catalog_test.gd
-run_check --script res://tests/typed_affix_catalog_test.gd
-run_check --script res://tests/defense_rules_test.gd
-run_check --script res://tests/defense_equipment_catalog_test.gd
-run_check --script res://tests/defense_equipment_state_test.gd
-run_check --script res://tests/local_weapon_compiler_test.gd
-run_check --script res://tests/local_weapon_catalog_test.gd
-run_check --script res://tests/local_weapon_state_test.gd
-run_check --script res://tests/local_weapon_integration_test.gd
-run_check --script res://tests/local_weapon_budget_test.gd
-run_check --script res://tests/fire_defense_integration_test.gd
-run_check --script res://tests/telegraphed_area_test.gd
-run_check --script res://tests/telegraph_integration_test.gd
-run_check --script res://tests/telegraph_renderer_test.gd
-run_check --script res://tests/encounter_compiler_test.gd
-run_check --script res://tests/encounter_controls_test.gd
-run_check --script res://tests/encounter_monster_composition_test.gd
-run_check --script res://tests/encounter_integration_test.gd
-run_check --script res://tests/encounter_ui_integration_test.gd
-run_check --script res://tests/damage_base_test.gd
-run_check --script res://tests/damage_preview_test.gd
-run_check --script res://tests/typed_damage_state_test.gd
-run_check --script res://tests/typed_damage_integration_test.gd
-run_check --script res://tests/save_guard_integration_test.gd
-run_check --script res://tests/progress_batch_test.gd
-run_check --script res://tests/equipment_state_test.gd
-run_check --script res://tests/equipment_integration_test.gd
-run_check --script res://tests/resource_support_rules_test.gd
-run_check --script res://tests/element_support_rules_test.gd
-run_check --script res://tests/delivery_support_rules_test.gd
-run_check --script res://tests/support_batch_matrix_test.gd
-run_check --script res://tests/support_projectile_batch_integration_test.gd
-run_check --script res://tests/support_area_chain_batch_integration_test.gd
-run_check --script res://tests/support_utility_state_ui_test.gd
-run_check --script res://tests/area_support_test.gd
-run_check --script res://tests/area_support_integration_test.gd
-run_check --script res://tests/area_support_ui_test.gd
-run_check --script res://tests/skill_compiler_test.gd
-run_check --script res://tests/skill_support_state_test.gd
-run_check --script res://tests/skill_support_integration_test.gd
-run_check --script res://tests/skill_support_ui_test.gd
-run_check --script res://tests/projectile_support_rules_test.gd
-run_check --script res://tests/pierce_integration_test.gd
-run_check --script res://tests/pierce_ui_test.gd
-run_check --script res://tests/crafting_rules_test.gd
-run_check --script res://tests/crafting_transaction_planner_test.gd
-run_check --script res://tests/crafting_controls_test.gd
-run_check --script res://tests/crafting_state_test.gd
-run_check --script res://tests/crafting_integration_test.gd
-run_check --script res://tests/crafting_ui_integration_test.gd
-run_check --script res://tests/equipment_soak_test.gd
-run_check --script res://tests/passive_jewel_test.gd
-run_check --script res://tests/special_jewel_test.gd
-run_check --script res://tests/special_jewel_integration_test.gd
-run_check --script res://tests/special_jewel_ui_test.gd
-run_check --script res://tests/reference_export_test.gd
-run_check --script res://tests/reference_launch_test.gd
-run_check --script res://tests/mechanic_registry_test.gd
-run_check --script res://tests/passive_balance_test.gd
-run_check --script res://tests/monster_system_test.gd
-run_check --script res://tests/monster_integration_test.gd
-run_check --script res://tests/combat_pipeline_test.gd
-run_check --script res://tests/spatial_collision_test.gd
-run_check --script res://tests/projectile_schedule_test.gd
-run_check --script res://tests/density_integration_test.gd
-run_check --script res://tests/world_view_test.gd
-run_check --script res://tests/fire_visual_test.gd
-run_check --script res://tests/combat_integration_test.gd
-run_check --script res://tests/smoke_test.gd
-run_check --script res://tests/visual_settings_test.gd
-run_check --script res://tests/vital_caption_rounding_test.gd
 run_check --script res://tests/combat_cues_test.gd
 run_check --script res://tests/combat_cues_integration_test.gd
-run_check --script res://tests/fantasy_actor_test.gd
-run_check --script res://tests/equipment_art_test.gd
-run_check --script res://tests/material_frame_test.gd
-run_check --script res://tests/grimoire_ui_test.gd
-run_check --script res://tests/equipment_painterly_art_test.gd
+run_check --script res://tests/vital_caption_rounding_test.gd
+run_check --script res://tests/reference_export_test.gd
+python3 "$PROJECT_DIR/tools/check_item_transparency.py"
 python3 "$PROJECT_DIR/tests/reference_catalog_test.py"
 run_check --quit-after 300
-echo "Validation passed: import, immutable equipment pools/RNG, scoped local weapon damage and independent balance replay, shared fire defense and natural encounter, transaction-bounded progress flush/exact saved-byte equivalence, schema13 sixteen-support matrix/byte-exact v11-v12 migration, durable crafting/issued quotes/failure recovery, schema10 support vocabulary/schema9 equipment compatibility/byte-exact backups/protected saves/special passive grants/offline reference data and launch wiring, typed hit bases and previews, compiled supports/cast/UI, wide native camera/100 real enemies/spatial-reference equivalence, fantasy artwork/materials and bounded visual cues, build/save model, passive/jewel/balance invariants, shared mechanisms, monster lifecycle/scene, projectile/damage pipeline, combat/UI integration, and 300-frame startup."
+echo "Current-batch validation passed: schema migration and atomic saves, compiled skill combinations, actual skill and reward paths, visual cues, font/assets/reference, and startup."

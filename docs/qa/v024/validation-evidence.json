@@ -1,0 +1,329 @@
+{
+  "validation_stage_commit": "300a144d6ff4208f7b5acc56fa1e448ce0c640fd",
+  "production_inputs_count": 336,
+  "production_inputs_unchanged": true,
+  "logs": {
+    "validation-full.log": {
+      "bytes": 30569,
+      "sha256": "90df04a4bb6b9ef5091b716981d79b608d86877af7ecc6d05f593b06d7dfc579",
+      "saved_as": "validation-full.log.txt"
+    },
+    "validation-continuation-1.log": {
+      "bytes": 6435,
+      "sha256": "39f725c5147fa0f1d13344f970cb0a03c58ad4ecbc933f6bdf02ff5be5a7c3e2",
+      "saved_as": "validation-continuation-1.log.txt"
+    },
+    "validation-final-focused.log": {
+      "bytes": 809,
+      "sha256": "927cb404e685cef8311bf3b9fdfde27f4fdea514ab8f8d74c90beaea7aa0a5fc",
+      "saved_as": "validation-final-focused.log.txt"
+    },
+    "reference-final.log": {
+      "bytes": 404,
+      "sha256": "0799c7f83eb173a7d16c785f055cbeeb8d871c00a41279a2d3857c827a74a1a9",
+      "saved_as": "reference-final.log.txt"
+    },
+    "reference-final-after-regenerate.log": {
+      "bytes": 139,
+      "sha256": "fcde80e2302836b2bdfcedaa7ae4e9f3e953aa563883286b29a7e407952016fb",
+      "saved_as": "reference-final-after-regenerate.log.txt"
+    },
+    "reference-regenerate.log": {
+      "bytes": 295,
+      "sha256": "d5c2f7a98461e9d128f803e31f9554aad04b8dabfc3fa8b59c20357c372514a4",
+      "saved_as": "reference-regenerate.log.txt"
+    },
+    "transparency-final.log": {
+      "bytes": 49,
+      "sha256": "917e5729cc79f72f7ce29431c3f6b2c0ad6a2b369f9c0a9a98676c8dcedf3c6b",
+      "saved_as": "transparency-final.log.txt"
+    },
+    "startup-final.log": {
+      "bytes": 106,
+      "sha256": "ddfc716bdf50cbf08143c1ac4501127b2e82775cf1c8288bc005d4fce4a18f50",
+      "saved_as": "startup-final.log.txt"
+    }
+  },
+  "successful_reports": [
+    {
+      "log": "validation-full.log",
+      "line": 81,
+      "checks": 99,
+      "summary": "Linux save identity test: 99 checks, 0 failures"
+    },
+    {
+      "log": "validation-full.log",
+      "line": 603,
+      "checks": 444,
+      "summary": "Build model: 444 checks, 0 failures"
+    },
+    {
+      "log": "validation-full.log",
+      "line": 606,
+      "checks": 196,
+      "summary": "Stable build cache: 196 checks, 0 failures"
+    },
+    {
+      "log": "validation-full.log",
+      "line": 610,
+      "checks": 14,
+      "summary": "M0 scene cache: 14 checks, 0 failures"
+    },
+    {
+      "log": "validation-full.log",
+      "line": 613,
+      "checks": 83,
+      "summary": "Equipment slots: 83 checks, 0 failures"
+    },
+    {
+      "log": "validation-full.log",
+      "line": 616,
+      "checks": 282,
+      "summary": "Item location rules: 282 checks, 0 failures"
+    },
+    {
+      "log": "validation-full.log",
+      "line": 619,
+      "checks": 124,
+      "summary": "Menu route state: 124 checks, 0 failures"
+    },
+    {
+      "log": "validation-full.log",
+      "line": 622,
+      "checks": 466,
+      "summary": "Gem catalog: 8 skills, 16 supports; 466 checks, 0 failures"
+    },
+    {
+      "log": "validation-full.log",
+      "line": 625,
+      "checks": 145,
+      "summary": "Unified item catalog: 145 checks, 0 failures"
+    },
+    {
+      "log": "validation-full.log",
+      "line": 628,
+      "checks": 22,
+      "summary": "Item transfer plan: 22 checks, 0 failures"
+    },
+    {
+      "log": "validation-continuation-1.log",
+      "line": 3,
+      "checks": 444,
+      "summary": "Canonical migration: 444 checks, 0 failures"
+    },
+    {
+      "log": "validation-continuation-1.log",
+      "line": 6,
+      "checks": 39,
+      "summary": "Canonical build store: 39 checks, 0 failures"
+    },
+    {
+      "log": "validation-continuation-1.log",
+      "line": 9,
+      "checks": 5245,
+      "summary": "Footprint metadata: 5245 checks, 0 failures"
+    },
+    {
+      "log": "validation-continuation-1.log",
+      "line": 12,
+      "checks": 15,
+      "summary": "Save receipt revision: 15 checks, 0 failures"
+    },
+    {
+      "log": "validation-continuation-1.log",
+      "line": 15,
+      "checks": 27,
+      "summary": "Canonical game state: 27 checks, 0 failures"
+    },
+    {
+      "log": "validation-continuation-1.log",
+      "line": 18,
+      "checks": 25,
+      "summary": "Canonical crafting: 25 checks, 0 failures"
+    },
+    {
+      "log": "validation-continuation-1.log",
+      "line": 22,
+      "checks": 27,
+      "summary": "Canonical group cast: 27 checks, 0 failures"
+    },
+    {
+      "log": "validation-continuation-1.log",
+      "line": 28,
+      "checks": 27,
+      "summary": "Canonical default startup: 27 checks, 0 failures"
+    },
+    {
+      "log": "validation-continuation-1.log",
+      "line": 32,
+      "checks": 2418,
+      "summary": "Canonical HUD integration: 2418 checks, 0 failures"
+    },
+    {
+      "log": "validation-continuation-1.log",
+      "line": 35,
+      "checks": 16955,
+      "summary": "Source tree data: 16955 checks, 0 failures"
+    },
+    {
+      "log": "validation-continuation-1.log",
+      "line": 38,
+      "checks": 156669,
+      "summary": "Source execution coverage test: 156669 checks, 0 failures"
+    },
+    {
+      "log": "validation-continuation-1.log",
+      "line": 41,
+      "checks": 80,
+      "summary": "Source tree allocation rules: 80 checks, 0 failures"
+    },
+    {
+      "log": "validation-continuation-1.log",
+      "line": 44,
+      "checks": 64,
+      "summary": "Source tree runtime: 64 checks, 0 failures; default reachable fully executed nodes 555"
+    },
+    {
+      "log": "validation-continuation-1.log",
+      "line": 47,
+      "checks": 206,
+      "summary": "Source stat patterns: 206 checks, 0 failures"
+    },
+    {
+      "log": "validation-continuation-1.log",
+      "line": 51,
+      "checks": 16036,
+      "summary": "Source defense integration: 16036 checks, 0 failures"
+    },
+    {
+      "log": "validation-continuation-1.log",
+      "line": 54,
+      "checks": 5437,
+      "summary": "source_passive_tree_view_test: 5437 checks, 0 failures"
+    },
+    {
+      "log": "validation-continuation-1.log",
+      "line": 57,
+      "checks": 55,
+      "summary": "Skill group rows: 55 checks, 0 failures"
+    },
+    {
+      "log": "validation-continuation-1.log",
+      "line": 60,
+      "checks": 268,
+      "summary": "unified_bag_grid_test: 268 checks, 0 failures; pointer paths used Input.parse_input_event and Viewport.push_input. Headless checks do not verify rendered pixels."
+    },
+    {
+      "log": "validation-continuation-1.log",
+      "line": 63,
+      "checks": 9,
+      "summary": "Unified external drag: 9 checks, 0 failures"
+    },
+    {
+      "log": "validation-continuation-1.log",
+      "line": 67,
+      "checks": 231,
+      "summary": "item_hover_card_test: 231 checks, 0 failures"
+    },
+    {
+      "log": "validation-continuation-1.log",
+      "line": 70,
+      "checks": 5322,
+      "summary": "Five support compiler: 920 subsets, 5322 checks, 0 failures"
+    },
+    {
+      "log": "validation-continuation-1.log",
+      "line": 73,
+      "checks": 1106,
+      "summary": "Offense skill batch: 1106 checks, 0 failures, 152 legal zero-to-five-support combinations"
+    },
+    {
+      "log": "validation-continuation-1.log",
+      "line": 76,
+      "checks": 24,
+      "summary": "Offense skill migration: 24 checks, 0 failures"
+    },
+    {
+      "log": "validation-continuation-1.log",
+      "line": 80,
+      "checks": 94,
+      "summary": "Offense skill gameplay: 94 checks, 0 failures"
+    },
+    {
+      "log": "validation-continuation-1.log",
+      "line": 84,
+      "checks": 15,
+      "summary": "Offense skill natural rewards: 15 checks, 0 failures"
+    },
+    {
+      "log": "validation-continuation-1.log",
+      "line": 87,
+      "checks": 168,
+      "summary": "Skill cooldown ledger: 168 checks, 0 failures"
+    },
+    {
+      "log": "validation-continuation-1.log",
+      "line": 90,
+      "checks": 1114,
+      "summary": "Nine-slot equipment profile: 1114 checks, 0 failures"
+    },
+    {
+      "log": "validation-continuation-1.log",
+      "line": 93,
+      "checks": 8244,
+      "summary": "Nine-slot catalog integration: 8244 checks, 0 failures"
+    },
+    {
+      "log": "validation-final-focused.log",
+      "line": 3,
+      "checks": 1046,
+      "summary": "combat_cues_test: 1046 checks, 0 failures"
+    },
+    {
+      "log": "validation-final-focused.log",
+      "line": 7,
+      "checks": 48,
+      "summary": "combat_cues_integration_test: 48 checks, 0 failures"
+    },
+    {
+      "log": "validation-final-focused.log",
+      "line": 10,
+      "checks": 5,
+      "summary": "Vital caption rounding: 5 checks, 0 failures"
+    },
+    {
+      "log": "reference-final-after-regenerate.log",
+      "line": 3,
+      "checks": 3457,
+      "summary": "Reference export: 3457 checks, 0 failures"
+    }
+  ],
+  "successful_report_count": 42,
+  "counted_assertions": 226795,
+  "font_python_tests_passed": 21,
+  "source_import_python_tests_passed": 8,
+  "not_a_single_uninterrupted_full_run": true,
+  "failures_preserved": [
+    {
+      "log": "validation-full.log",
+      "cause": "Historical migration test expected current 26 definitions to be gifted; corrected to frozen historical 24. Production behavior was correct.",
+      "resolution": "Canonical migration 444/0 in continuation"
+    },
+    {
+      "log": "validation-continuation-1.log",
+      "cause": "Obsolete pre-docked independent-menu test assumed unique root and old current_state API. Runner stopped under user instruction; no game change and no claim this historical test passed.",
+      "resolution": "Not a v24 changed dependency; actual current HUD 2418, rows55, bag268 and drag9 passed in same log. v22 real mouse evidence remains historical."
+    },
+    {
+      "log": "validation-final-focused.log",
+      "cause": "Reference test retained old catalog count24; corrected to26 and dynamic source count."
+    },
+    {
+      "log": "reference-final.log",
+      "cause": "Exported reference artifact was still previous count24 before regeneration.",
+      "resolution": "Regenerated; reference-final-after-regenerate3457/0 plus deterministic HTML3752anchors17145links60images."
+    }
+  ],
+  "user_revision": "At19:20UTC stopped historical aggregate and deleted600-second soak source/UID/default/release gate. Never started600s in this batch. Default now13direct dependency scripts; same-input successful evidence reused.",
+  "remaining_checks": "Only exported package/resource/runtime probes; no historical full rerun"
+}

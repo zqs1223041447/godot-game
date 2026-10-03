@@ -141,7 +141,7 @@ func _initialize() -> void:
 	_expect(current.current_loot_profile_id == Canonical.LOOT_PROFILE_ID, "actual canonical reward profile identity")
 	_expect(current.loot_profiles == Equipment.loot_profiles(), "historical and current pool weights exported")
 	_expect(current.loot_profiles["v0.11"].size() == 3 and current.loot_profiles["v0.13"].size()==4 and current.current_loot_profile.size() == 5, "legacy three/four and new five-pool selections retained separately")
-	_expect(current.canonical.gem_definitions.size()==24 and current.canonical.base_skill_groups==10 and current.canonical.support_slots==5 and current.canonical.slots.size()==9,"actual canonical groups/gems/equipment targets exported")
+	_expect(current.canonical.gem_definitions.size()==26 and current.canonical.gem_reward.definition_count==26 and current.canonical.base_skill_groups==10 and current.canonical.support_slots==5 and current.canonical.slots.size()==9,"actual canonical groups/gems/equipment targets exported")
 	_expect(current.source_tree.nodes.size()==3390 and current.source_tree.edges.size()==2697,"full source records and safe standard edges distinct from legacy181")
 	_expect(current.source_tree.nodes["2151"].execution.status=="full" and current.source_tree.nodes["22497"].execution.status=="unsupported","source consumers and blocked cast-speed exposed accurately")
 	_expect(current.canonical.five_link_example.initial_count==5 and current.canonical.five_link_example.recipe.slow==4.5,"actual five-link recipe exported")
