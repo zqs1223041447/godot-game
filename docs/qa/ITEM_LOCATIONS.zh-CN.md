@@ -21,7 +21,7 @@
 | `passive_socket` | `kind, node_id` | 仅 jewel；孔 ID 必须由 context 授权 |
 | `skill_main` | `kind, group_id` | 仅 skill_gem；技能行 ID 必须由 context 授权 |
 | `skill_support` | `kind, group_id, index` | 仅 support_gem；行 ID 有效，index 是 `0..4` 真正整数 |
-| `recovery` | `kind, index` | 迁移暂存位置；`allow_recovery` 开启时可用，index 是 `0..4` 真正整数 |
+| `recovery` | `kind, index` | 迁移暂存位置；`allow_recovery` 开启时可用，index 是真正整数且 `0 <= index < metadata_by_uid.size()` |
 
 所有输入对象均拒绝缺字段、额外字段、错误字段类型与未知 kind。每个 UID 必须且只能出现一个位置。只有 `bag` 位置参与矩形占格；已穿戴、已镶嵌和技能配置中的物品不占背包格。
 
@@ -35,7 +35,7 @@
 }
 ```
 
-两个 ID 列表必须是唯一、非空稳定字符串数组。`skill_group_ids` 应传入稳定技能行 ID 的完整配置集合；即使技能行当前未激活或不显示，也应保留其 ID，不能借此删除其主技能或辅助宝石。珠宝孔 ID 应由上层解析后传入。`allow_recovery` 必须是真正布尔值；普通移动设为 `false`。迁移时，上层可在一次明确的安置事务中打开它。满包回收卸装由上层原子拒绝，校验器不会挪动、丢弃或暂存物品。
+两个 ID 列表必须是唯一、非空稳定字符串数组。`skill_group_ids` 应传入稳定技能行 ID 的完整配置集合；即使技能行当前未激活或不显示，也应保留其 ID，不能借此删除其主技能或辅助宝石。珠宝孔 ID 应由上层解析后传入。`allow_recovery` 必须是真正布尔值；普通移动设为 `false`。迁移时，上层可在一次明确的安置事务中打开它。recovery 索引范围独立按本次候选物品总数计算，因此 6 件或 12 件待安置物品分别可以使用 `0..5` 或 `0..11`；同一索引仍只能放一件。满包回收卸装由上层原子拒绝，校验器不会挪动、丢弃或暂存物品。
 
 ## 结果与稳定占用键
 
