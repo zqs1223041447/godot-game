@@ -164,6 +164,102 @@ class PassiveImportTest(unittest.TestCase):
             self.assertTrue(set(record["internal_edge_ids"]).issubset(edge_ids))
             self.assertTrue(set(record["boundary_edge_ids"]).issubset(edge_ids))
 
+    def test_default_allocation_graph_excludes_root_and_cross_partition_edges(self) -> None:
+        standard = self.normalized["standard_tree"]
+        allocation = standard["default_allocation_graph"]
+        source_nodes = self.source["nodes"]
+        source_groups = self.source["groups"]
+        source_standard_positioned = {
+            node_id
+            for node_id, node in source_nodes.items()
+            if node_id != "root"
+            and not node.get("ascendancyName")
+            and not node.get("expansionJewel")
+            and "group" in node
+            and str(node["group"]) in source_groups
+        }
+        self.assertEqual(len(source_standard_positioned), 2387)
+        self.assertEqual(set(allocation["node_ids"]), source_standard_positioned)
+        self.assertNotIn("root", allocation["node_ids"])
+        self.assertEqual(len(allocation["node_ids"]), 2387)
+        self.assertEqual(set(allocation["adjacency"]), source_standard_positioned)
+        coverage = self.normalized["coverage"]
+        self.assertEqual(coverage["default_allocation_nodes"], 2387)
+        self.assertEqual(coverage["default_allocation_edges"], 2697)
+        self.assertEqual(coverage["default_allocation_root_edges_excluded"], 23)
+        self.assertEqual(
+            coverage["default_allocation_cross_partition_edges_excluded"], 127
+        )
+        self.assertEqual(coverage["default_allocation_unpositioned_edges_excluded"], 23)
+        self.assertEqual(coverage["default_allocation_source_edges_excluded"], 685)
+
+        all_edges = self.normalized["edges"]
+        expected_allocation_edges = {
+            edge["id"]
+            for edge in all_edges
+            if edge["a"] in source_standard_positioned
+            and edge["b"] in source_standard_positioned
+            and not edge["crosses_partition"]
+        }
+        self.assertEqual(set(allocation["edge_ids"]), expected_allocation_edges)
+        self.assertEqual(len(allocation["edge_ids"]), 2697)
+        edge_by_id = {edge["id"]: edge for edge in all_edges}
+        expected_adjacency = {node_id: set() for node_id in source_standard_positioned}
+        for edge_id in allocation["edge_ids"]:
+            edge = edge_by_id[edge_id]
+            self.assertNotEqual(edge["a"], "root")
+            self.assertNotEqual(edge["b"], "root")
+            self.assertFalse(edge["crosses_partition"])
+            self.assertIn(edge["a"], source_standard_positioned)
+            self.assertIn(edge["b"], source_standard_positioned)
+            expected_adjacency[edge["a"]].add(edge["b"])
+            expected_adjacency[edge["b"]].add(edge["a"])
+        for node_id, neighbors in allocation["adjacency"].items():
+            self.assertNotIn("root", neighbors)
+            self.assertEqual(set(neighbors), expected_adjacency[node_id])
+            for neighbor in neighbors:
+                self.assertIn(node_id, allocation["adjacency"][neighbor])
+
+        expected_root_edges = {
+            edge["id"] for edge in all_edges if "root" in (edge["a"], edge["b"])
+        }
+        expected_cross_edges = {
+            edge["id"] for edge in all_edges if edge["crosses_partition"]
+        }
+        self.assertEqual(set(allocation["excluded_root_edge_ids"]), expected_root_edges)
+        self.assertEqual(len(expected_root_edges), 23)
+        self.assertEqual(
+            set(allocation["excluded_cross_partition_edge_ids"]), expected_cross_edges
+        )
+        self.assertEqual(len(expected_cross_edges), 127)
+        self.assertTrue(expected_root_edges.isdisjoint(allocation["edge_ids"]))
+        self.assertTrue(expected_cross_edges.isdisjoint(allocation["edge_ids"]))
+        self.assertEqual(
+            set(allocation["excluded_source_edge_ids"]),
+            {edge["id"] for edge in all_edges} - expected_allocation_edges,
+        )
+        self.assertEqual(len(allocation["excluded_source_edge_ids"]), 685)
+
+        expected_start_ids = {
+            node_id for node_id, node in source_nodes.items()
+            if "classStartIndex" in node
+        }
+        self.assertEqual(set(allocation["class_start_ids"]), expected_start_ids)
+        self.assertEqual(len(expected_start_ids), 7)
+        start_to_start_edges = {
+            frozenset((edge["a"], edge["b"]))
+            for edge in all_edges
+            if edge["a"] in expected_start_ids and edge["b"] in expected_start_ids
+        }
+        self.assertEqual(start_to_start_edges, set())
+        self.assertEqual(
+            allocation["edge_filter"]["exclude_logical_root_id"], "root"
+        )
+        self.assertTrue(allocation["edge_filter"]["exclude_cross_partition_edges"])
+        self.assertTrue(
+            allocation["edge_filter"]["exclude_edges_with_unpositioned_endpoints"]
+        )
+
     def test_source_orbit_angles_and_node_positions(self) -> None:
         constants = self.normalized["constants"]
         skills_per_orbit = constants["skillsPerOrbit"]
