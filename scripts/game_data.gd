@@ -5,7 +5,26 @@ extends RefCounted
 ## Capabilities gate support eligibility; they are never copied into damage-event tags.
 ## Bolt/frost launch parameters live here; tornado keeps CombatData.TORNADO as authority.
 ## The obsolete per-skill damage field was never a cast input and is intentionally absent.
+const LEGACY_SKILL_IDS: Array[String] = ["tornado", "bolt", "frost", "nova", "dash", "ward", "meteor", "chain"]
+const NEW_SKILL_SAVE_VERSION: int = 17
+const NEW_SKILL_IDS: Array[String] = ["cleave", "shade_bolt"]
 const SKILLS: Dictionary = {
+	"cleave": {
+		"name": "裂刃斩", "short_name": "裂刃", "icon": "IX",
+		"description": "向面前半圆横扫，半径 95，造成 280% 物理攻击命中。近战与范围加成生效；不借用长弓本地伤害。",
+		"mana": 12.0, "cooldown": 1.4, "color": Color("d3c3a2"),
+		"capabilities": ["area_hit", "melee_hit"],
+		"area_recipe": {"radius": 95.0}, "half_angle": PI / 2.0,
+		"hit_recipe": {"base_coefficient": 2.8, "added_effectiveness": 2.8, "damage_type": "physical"},
+	},
+	"shade_bolt": {
+		"name": "蚀影飞弹", "short_name": "蚀影", "icon": "X",
+		"description": "发射一枚 240% 基础混沌伤害的法术飞弹，首次碰撞后结束。可由装备附加其他类型伤害；不造成毒或持续伤害。",
+		"mana": 10.0, "cooldown": 1.2, "color": Color("9c87b1"),
+		"capabilities": ["initial_projectiles", "projectile_hit"],
+		"projectile_recipe": {"initial_count": 1, "spread": 0.14, "coefficient": 2.4, "added_effectiveness": 2.4,
+			"pierce": 0, "slow": 0.0, "speed": 620.0, "damage_type": "chaos"},
+	},
 	"tornado": {
 		"name": "龙卷射击", "short_name": "龙卷", "icon": "VIII",
 		"description": "发射 3 枚母箭，每枚在射程终点分裂为 3 枚环形子箭。箭伤为物理 60% 与火焰 40%；子箭造成 70% 基础伤害。返回与爆炸由装备分别赋予。",

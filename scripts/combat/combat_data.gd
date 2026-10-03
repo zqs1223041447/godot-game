@@ -71,7 +71,7 @@ static func event_packet(snapshot_value: Dictionary, skill_id: String, role: Str
 
 
 static func secondary_packet(snapshot_value: Dictionary, skill_id: String) -> Dictionary:
-	if not skill_id in ["basic", "tornado", "bolt", "frost"]:
+	if not skill_id in ["basic", "tornado", "bolt", "frost", "shade_bolt"]:
 		return {}
 	if snapshot_value.has("compiled_packets") or snapshot_value.has("compiled_skill_id"):
 		return _frozen_packet(snapshot_value, skill_id, "secondary", 0)
@@ -102,17 +102,17 @@ static func _event_recipe(snapshot_value: Dictionary, skill_id: String, role: St
 	if not Data.SKILLS.has(skill_id):
 		return {}
 	var skill: Dictionary = Data.SKILLS[skill_id]
-	if skill_id in ["bolt", "frost"]:
+	if skill_id in ["bolt", "frost", "shade_bolt"]:
 		var spec: Variant = skill.get("projectile_recipe")
 		if role != "projectile" or not spec is Dictionary or not spec.has_all(["coefficient", "added_effectiveness", "damage_type"]):
 			return {}
 		return _hit_recipe(skill_id, role, {spec.damage_type: 1.0}, spec.coefficient, spec.added_effectiveness, ["hit", "projectile", "spell"])
-	if skill_id in ["nova", "meteor", "chain"]:
+	if skill_id in ["nova", "meteor", "chain", "cleave"]:
 		var spec: Variant = skill.get("hit_recipe")
 		if not spec is Dictionary or not spec.has_all(["base_coefficient", "added_effectiveness", "damage_type"]):
 			return {}
 		if skill_id != "chain":
-			return _hit_recipe(skill_id, role, {spec.damage_type: 1.0}, spec.base_coefficient, spec.added_effectiveness, ["hit", "spell", "area"]) if role == "direct" else {}
+			return _hit_recipe(skill_id, role, {spec.damage_type: 1.0}, spec.base_coefficient, spec.added_effectiveness, ["hit", "attack", "melee", "area"] if skill_id == "cleave" else ["hit", "spell", "area"]) if role == "direct" else {}
 		if not role in ["direct", "bounce"] or not spec.has_all(["bounce_count", "base_coefficient_loss_per_bounce", "added_effectiveness_loss_per_bounce"]):
 			return {}
 		return chain_hit_recipe(spec, index)

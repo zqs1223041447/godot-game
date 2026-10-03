@@ -12,7 +12,8 @@ const Currency = preload("res://scripts/items/currency_catalog.gd")
 const SourceTree = preload("res://scripts/passives/source_tree_runtime.gd")
 const V14_VERSION := 14
 const V15_VERSION := 15
-const VERSION := 16
+const V16_VERSION := 16
+const VERSION := 17
 const LEGACY_MAX_ITEMS := 1024
 const MAX_ITEMS := LEGACY_MAX_ITEMS + 1 # A full valid old registry may gain one migration stack.
 const MAX_GROUPS := 64
@@ -25,6 +26,10 @@ const BINDABLE_KEYS := [KEY_0, KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6, KEY_7, 
 
 static func decode(raw: Variant) -> Dictionary:
 	return _decode(raw, true, VERSION, true)
+
+
+static func decode_v16(raw: Variant) -> Dictionary:
+	return _decode(raw, true, V16_VERSION, true)
 
 
 ## Preserve the v15 paged-bag/wallet contract before converting the wallet to
@@ -51,6 +56,7 @@ static func _decode(raw: Variant, paged: bool, expected_version: int, allow_curr
 		if not allow_currency and value.items[uid] is Dictionary and value.items[uid].get("kind", "") == "currency": return {}
 		var item: Dictionary = Items.decode_instance(value.items[uid])
 		if item.is_empty(): return {}
+		if item.kind in ["skill_gem","support_gem"] and Items.Gems.minimum_save_version(item.definition_id)>expected_version: return {}
 		value.items[uid] = item
 	for uid: Variant in value.locations:
 		var location: Dictionary = Items.decode_current_location(value.locations[uid]) if allow_currency else Items.decode_paged_location(value.locations[uid]) if paged else Items.decode_location(value.locations[uid])
@@ -83,6 +89,10 @@ static func reason(value: Variant, validate_talents: Callable = Callable(), sock
 	return _reason(value, VERSION, true, true, MAX_ITEMS, validate_talents, socket_ids)
 
 
+static func reason_v16(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
+	return _reason(value, V16_VERSION, true, true, MAX_ITEMS, validate_talents, socket_ids)
+
+
 static func reason_v15(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
 	return _reason(value, V15_VERSION, true, false, LEGACY_MAX_ITEMS, validate_talents, socket_ids)
 
@@ -104,6 +114,8 @@ static func _reason(value: Variant, expected_version: int, paged: bool, allow_cu
 	if metadata.size() != value.items.size(): return "物品实例无效"
 	if allow_currency and not Currency.total_quantity(value.items).ok: return "校准碎片堆或全库存数量无效"
 	for uid: String in value.items:
+		var instance: Dictionary=value.items[uid]
+		if instance.kind in ["skill_gem","support_gem"] and Items.Gems.minimum_save_version(instance.definition_id)>expected_version: return "此存档版本不能包含新增主动宝石"
 		var serial: int = Equipment.serial_from_id(uid) if uid.begins_with("gear_") else Jewels.serial_from_id(uid) if uid.begins_with("jewel_") else _item_serial(uid)
 		if serial >= value.next_item_serial: return "物品序号不得重用"
 	if not value.skill_groups is Array or value.skill_groups.size() < 10 or value.skill_groups.size() > MAX_GROUPS: return "技能行数量无效"

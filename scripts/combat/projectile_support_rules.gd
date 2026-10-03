@@ -9,14 +9,14 @@ const Damage = preload("res://scripts/combat/damage_resolver.gd")
 const MAX_INITIAL_PROJECTILES: int = 9
 const MAX_PIERCE: int = 100
 const APPLIED_KEY: String = "_projectile_support_ids"
-const RECIPE_SKILLS: Array[String] = ["bolt", "frost"]
+const RECIPE_SKILLS: Array[String] = ["bolt", "frost", "shade_bolt"]
 const OPERATIONS: Array[String] = ["add_pierce", "projectile_hit_more", "mana_multiplier"]
 const CAPABILITIES: Array[String] = ["finite_projectile_pierce", "projectile_hit"]
 const SUPPORTS: Dictionary = {
 	"pierce": {
 		"name": "贯穿辅助",
-		"description": "飞弹与冰霜穿透 +2；投射物命中伤害总降 15%；魔力消耗 ×1.20。龙卷无限穿透不适配；普攻与独立爆炸不变。",
-		"skills": ["bolt", "frost"],
+		"description": "飞弹、冰霜与蚀影飞弹穿透 +2；投射物命中伤害总降 15%；魔力消耗 ×1.20。龙卷无限穿透不适配；普攻与独立爆炸不变。",
+		"skills": ["bolt", "frost", "shade_bolt"],
 		"requires": ["finite_projectile_pierce", "projectile_hit"],
 		"operations": [
 			{"op": "add_pierce", "value": 2},
@@ -49,7 +49,7 @@ static func compile_extension(skill_id: Variant, recipe: Variant, support_ids: V
 	if not skill_id is String or not Data.SKILLS.has(skill_id):
 		return _failure("未知技能")
 	if not RECIPE_SKILLS.has(skill_id):
-		return _failure("贯穿扩展仅接受飞弹或冰霜配方；龙卷无限穿透不适配")
+		return _failure("贯穿扩展仅接受飞弹、冰霜或蚀影飞弹配方；龙卷无限穿透不适配")
 	var error: String = _recipe_error(recipe)
 	if not error.is_empty():
 		return _failure(error)

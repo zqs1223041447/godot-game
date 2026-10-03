@@ -5,15 +5,15 @@ extends RefCounted
 const Program = preload("res://scripts/combat/support_program.gd")
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
 const NATIVE_SKILLS: Dictionary = {
-	"physical": ["tornado"], "fire": ["tornado", "meteor"],
+	"physical": ["tornado", "cleave"], "fire": ["tornado", "meteor"],
 	"cold": ["frost"], "lightning": ["bolt", "nova", "chain"],
 }
 const OPERATIONS: Array[String] = ["primary_component_more", "other_components_more", "mana_multiplier"]
 const SUPPORTS: Dictionary = {
 	"physical_focus": {
 		"name": "物理专注辅助",
-		"description": "龙卷主命中：物理伤害总增 20%，其他类型伤害总降 20%；魔力 ×1.15，冷却不变。普攻与独立爆炸不变。",
-		"skills": ["tornado"], "requires": [], "family": "element",
+		"description": "龙卷与裂刃斩主命中：物理伤害总增 20%，其他类型伤害总降 20%；魔力 ×1.15，冷却不变。普攻与独立爆炸不变。",
+		"skills": ["tornado", "cleave"], "requires": [], "family": "element",
 		"operations": [
 			{"op": "primary_component_more", "damage_type": "physical", "value": 0.20},
 			{"op": "other_components_more", "damage_type": "physical", "value": -0.20},

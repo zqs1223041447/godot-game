@@ -44,7 +44,7 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 		initial_count = int(recipe.initial_count)
 	elif skill.capabilities.has("projectile_hit"):
 		return _failure("投射物技能缺少已支持的发射配方")
-	elif skill_id in ["nova", "meteor", "chain"]:
+	elif skill_id in ["nova", "meteor", "chain", "cleave"]:
 		error = _hit_recipe_error(skill.get("hit_recipe"), skill_id == "chain")
 		if not error.is_empty():
 			return _failure(error)
@@ -98,6 +98,9 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 		if not area.error.is_empty():
 			return _failure(area.error)
 		recipe = area.recipe
+		if skill_id == "cleave":
+			if not _number(skill.get("half_angle")) or float(skill.half_angle) <= 0.0 or float(skill.half_angle) > PI: return _failure("近战扇区角度无效")
+			recipe.half_angle = float(skill.half_angle)
 		compiled_snapshot.modifiers.append_array(area.modifiers)
 		mana *= float(area.mana_multiplier)
 	var program: Dictionary = Supports.compile_programs(skill_id, canonical, slot_limit)
@@ -106,7 +109,7 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 	mana *= float(program.mana_multiplier)
 	var cooldown: float = float(skill.cooldown) * float(program.cooldown_multiplier)
 	var factors: Dictionary = program.recipe_factors
-	if skill_id in ["bolt", "frost"]:
+	if skill_id in ["bolt", "frost", "shade_bolt"]:
 		recipe.speed *= float(factors.get("projectile_speed_multiplier", 1.0))
 		recipe.slow *= float(factors.get("slow_duration_multiplier", 1.0))
 		if not _number(recipe.speed) or float(recipe.speed) <= 0.0 or float(recipe.speed) > 3000.0 or not _number(recipe.slow) or float(recipe.slow) < 0.0 or float(recipe.slow) > 15.0:
@@ -136,8 +139,8 @@ static func _compile_packets(skill_id: String, snapshot: Dictionary, recipe: Dic
 	var roles: Array[String] = []
 	match skill_id:
 		"tornado": roles.assign(["parent", "child", "secondary"])
-		"bolt", "frost": roles.assign(["projectile", "secondary"])
-		"nova", "meteor": roles.assign(["direct"])
+		"bolt", "frost", "shade_bolt": roles.assign(["projectile", "secondary"])
+		"nova", "meteor", "cleave": roles.assign(["direct"])
 		"chain":
 			var bounces: Array[Dictionary] = []
 			for index: int in range(int(recipe.hit.bounce_count)):

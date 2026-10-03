@@ -3,12 +3,12 @@ extends RefCounted
 ## Presentation-only lifetime pool. Never reads RNG, rolls, saves, or combat state.
 const MAX_CUES: int = 96
 const LIFETIMES: Dictionary = {
-	"cast":0.24,"nova":0.45,"ward":0.60,"meteor":0.65,"chain":0.28,
+	"cleave":0.28,"cast":0.24,"nova":0.45,"ward":0.60,"meteor":0.65,"chain":0.28,
 	"dash":0.32,"impact":0.20,"hurt":0.24,"death":0.40,
 	"split":0.24,"return":0.20,"explosion":0.55,
 }
 const PRIORITY: Dictionary = {
-	"cast":1,"nova":2,"ward":2,"meteor":2,"chain":2,"dash":2,
+	"cleave":2,"cast":1,"nova":2,"ward":2,"meteor":2,"chain":2,"dash":2,
 	"impact":0,"hurt":2,"death":0,"split":1,"return":1,"explosion":2,
 }
 var cues: Array[Dictionary] = []
@@ -38,6 +38,10 @@ func emit_cue(kind: String, origin: Vector2, data: Dictionary = {}) -> int:
 		"skill":str(data.get("skill","")).left(32),"shielded":data.get("shielded",false)==true,
 		"target_id":int(data.get("target_id",0)) if data.get("target_id",0) is int else 0,
 		"color":tint}
+	if kind == "cleave":
+		var angle: Variant=data.get("half_angle")
+		if not (angle is float or angle is int) or not is_finite(float(angle)) or float(angle)<=0.0 or float(angle)>PI: return 0
+		cue.half_angle=float(angle)
 	if cues.size() >= MAX_CUES:
 		var incoming: int = int(PRIORITY[kind])
 		var replacement: int = -1

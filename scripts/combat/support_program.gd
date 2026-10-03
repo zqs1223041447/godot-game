@@ -9,6 +9,8 @@ const PRIMARY_TAGS: Dictionary = {
 	"bolt": ["hit", "spell", "projectile"], "frost": ["hit", "spell", "projectile"],
 	"nova": ["hit", "spell", "area"], "meteor": ["hit", "spell", "area"],
 	"chain": ["hit", "spell", "chain"],
+	"cleave": ["hit", "attack", "melee", "area"],
+	"shade_bolt": ["hit", "spell", "projectile"],
 }
 static func empty() -> Dictionary:
 	return {"error": "", "modifiers": [], "mana_multiplier": 1.0, "cooldown_multiplier": 1.0, "recipe_factors": {}}

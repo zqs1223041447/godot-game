@@ -3,7 +3,7 @@ extends RefCounted
 ## Pure cost/cooldown programs. Effects never enter damage or carrier recipes.
 const Program = preload("res://scripts/combat/support_program.gd")
 ## Deliberately fixed: adding a future active skill requires explicit admission.
-const SKILL_IDS: Array[String] = ["tornado", "bolt", "frost", "nova", "dash", "ward", "meteor", "chain"]
+const SKILL_IDS: Array[String] = ["tornado", "bolt", "frost", "nova", "dash", "ward", "meteor", "chain", "cleave", "shade_bolt"]
 const OPERATIONS: Array[String] = ["mana_multiplier", "cooldown_multiplier"]
 const MAX_MULTIPLIER: float = 10.0
 const SUPPORTS: Dictionary = {

@@ -1103,7 +1103,7 @@ func _validate_common(data: Dictionary) -> bool:
 		seen[item_id] = true
 	seen.clear()
 	for skill_id: Variant in loaded_skills:
-		if not skill_id is String or not Data.SKILLS.has(skill_id) or seen.has(skill_id):
+		if not skill_id is String or not Data.LEGACY_SKILL_IDS.has(skill_id) or seen.has(skill_id):
 			return false
 		seen[skill_id] = true
 	var loaded_equipped: Dictionary = data["equipped"]

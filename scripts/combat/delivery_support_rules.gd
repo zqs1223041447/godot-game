@@ -9,8 +9,8 @@ const FACTORS: Array[String] = ["projectile_speed_multiplier", "slow_duration_mu
 const SUPPORTS: Dictionary = {
 	"swift_projectiles": {
 		"name": "疾速投射辅助",
-		"description": "飞弹与冰霜：投射物速度 ×1.35，魔力 ×1.10。龙卷不适配。",
-		"skills": ["bolt", "frost"], "requires": ["projectile_hit"], "family": "delivery",
+		"description": "飞弹、冰霜与蚀影飞弹：投射物速度 ×1.35，魔力 ×1.10。龙卷不适配。",
+		"skills": ["bolt", "frost", "shade_bolt"], "requires": ["projectile_hit"], "family": "delivery",
 		"operations": [
 			{"op": "projectile_speed_multiplier", "value": 1.35},
 			{"op": "mana_multiplier", "value": 1.10},
@@ -18,8 +18,8 @@ const SUPPORTS: Dictionary = {
 	},
 	"heavy_projectiles": {
 		"name": "缓速强击辅助",
-		"description": "飞弹与冰霜：投射物速度 ×0.75，主命中伤害总增 20%，魔力 ×1.15。龙卷与独立爆炸不适用。",
-		"skills": ["bolt", "frost"], "requires": ["projectile_hit"], "family": "delivery",
+		"description": "飞弹、冰霜与蚀影飞弹：投射物速度 ×0.75，主命中伤害总增 20%，魔力 ×1.15。龙卷与独立爆炸不适用。",
+		"skills": ["bolt", "frost", "shade_bolt"], "requires": ["projectile_hit"], "family": "delivery",
 		"operations": [
 			{"op": "projectile_speed_multiplier", "value": 0.75},
 			{"op": "primary_hit_more", "value": 0.20},
@@ -112,7 +112,7 @@ static func definition_error(value: Variant) -> String:
 		return "辅助类别无效"
 	if not Program.strings(value.skills) or not Program.strings(value.requires):
 		return "辅助技能或能力列表无效"
-	var skills: Array = ["chain"] if value.family == "chain" else (["frost"] if value.family == "control" else ["bolt", "frost"])
+	var skills: Array = ["chain"] if value.family == "chain" else (["frost"] if value.family == "control" else ["bolt", "frost", "shade_bolt"])
 	var requires: Array = ["chain_hit"] if value.family == "chain" else ["projectile_hit"]
 	if value.skills != skills or value.requires != requires:
 		return "辅助技能或能力与类别不匹配"

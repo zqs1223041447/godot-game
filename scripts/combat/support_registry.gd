@@ -90,6 +90,7 @@ static func compile_programs(skill_id: String, support_ids: Array, slot_limit: i
 	if not Program.number(result.mana_multiplier) or not Program.number(result.cooldown_multiplier): return Program.failure("辅助消耗或冷却倍率无效")
 	return result
 static func saved_links_reason(skill_id: String, support_ids: Variant, save_version: int) -> String:
+	if Data.NEW_SKILL_IDS.has(skill_id) and save_version < Data.NEW_SKILL_SAVE_VERSION: return "此存档版本不支持新增主动技能"
 	var reason: String = compatibility_reason(skill_id, support_ids)
 	if not reason.is_empty(): return reason
 	for id: String in support_ids:

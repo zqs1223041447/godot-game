@@ -885,12 +885,18 @@ func _execute_compiled(compiled: Dictionary, group_id: String = "", main_uid: St
 				hud.notify("场上投射物已满，本次龙卷未消耗法力或冷却")
 				return false
 			total_shots += emitted
-		"bolt", "frost":
+		"bolt", "frost", "shade_bolt":
 			var recipe: Dictionary = compiled.recipe
 			for shot_index: int in range(int(compiled.initial_count)):
 				var angle: float = (shot_index - (int(compiled.initial_count) - 1) * 0.5) * float(recipe.spread)
 				_shoot(player_pos, player_facing.rotated(angle), compiled.packets.projectile, color,
 					int(recipe.pierce), float(recipe.slow), float(recipe.speed), context)
+		"cleave":
+			# Damage admission, direction and geometry are frozen once for this cast.
+			for enemy: Dictionary in enemies:
+				if float(enemy.health)>0.0 and float(enemy.spawn)<=0.0 and AreaRules.contains_sector_target(player_pos,player_facing,Vector2(enemy.pos),float(compiled.recipe.radius),float(compiled.recipe.half_angle),float(enemy.radius)):
+					_apply_damage_packet(enemy,compiled.packets.direct,context.snapshot,color,0.0,{"cast_id":context.cast_id})
+			visual_cues.emit_cue("cleave",player_pos,{"radius":float(compiled.recipe.radius),"half_angle":float(compiled.recipe.half_angle),"direction":player_facing,"color":color})
 		"nova":
 			_area_damage(player_pos, float(compiled.recipe.radius), compiled.packets.direct, color, 0.6, context.snapshot)
 			visual_cues.emit_cue("nova", player_pos, {"radius": float(compiled.recipe.radius), "color": color})
@@ -935,7 +941,7 @@ func _execute_compiled(compiled: Dictionary, group_id: String = "", main_uid: St
 	if not group_id.is_empty() and alive:
 		var began: bool = group_cooldowns.begin(group_id, main_uid, float(compiled.cooldown))
 		assert(began, "Admitted group cast must own a ready cooldown")
-	if id in ["tornado", "bolt", "frost"]:
+	if id in ["tornado", "bolt", "frost", "shade_bolt"]:
 		visual_cues.emit_cue("cast", player_pos, {"direction": player_facing, "skill": id, "color": color})
 	return true
 

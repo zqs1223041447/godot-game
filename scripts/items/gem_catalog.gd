@@ -10,7 +10,7 @@ const SUPPORT_PREFIX: String = "support:"
 const ICON_ROOT: String = "res://assets/ui/grimoire/"
 
 
-## Return detached metadata for all currently defined 8 skills and 16 supports.
+## Return detached metadata for all currently defined active skills and 16 supports.
 static func definitions() -> Dictionary:
 	var result: Dictionary = {}
 	var skill_ids: Array = Data.SKILLS.keys()
@@ -26,6 +26,14 @@ static func definitions() -> Dictionary:
 			var support_id: String = raw_id
 			result[SUPPORT_PREFIX + support_id] = _support_definition(support_id)
 	return result
+
+
+## The old canonical schema has a closed gem vocabulary. New definitions do
+## not become valid inside a file claiming an older schema after a code update.
+static func minimum_save_version(definition_id: String) -> int:
+	if definition_id.begins_with(SKILL_PREFIX) and Data.NEW_SKILL_IDS.has(definition_id.substr(SKILL_PREFIX.length())):
+		return Data.NEW_SKILL_SAVE_VERSION
+	return 14
 
 
 ## Resolve one exact stable identifier. Bare IDs and unknown IDs are never aliases.

@@ -3,7 +3,7 @@ extends RefCounted
 ## Each spell has a silhouette, cadence, and hit language. No full-screen flashes.
 ## Low effects keeps complete beams, destinations, cast glyphs, and area boundaries.
 const Palette = preload("res://scripts/visuals/fantasy_palette.gd")
-const GROUND: Array[String] = ["nova","ward","meteor","explosion","dash","death"]
+const GROUND: Array[String] = ["nova","ward","meteor","explosion","dash","death","cleave"]
 
 static func render(canvas: CanvasItem, cues: Array[Dictionary], effects: int, ground: bool) -> void:
 	for cue: Dictionary in cues:
@@ -45,6 +45,19 @@ static func _draw_cue(canvas: CanvasItem, cue: Dictionary, effects: int) -> void
 				canvas.draw_polyline(_regular(center,radius,4,dir.angle()+PI/4),color,1.7,true)
 			if effects > 0:
 				canvas.draw_circle(center,radius,Color(color,color.a*0.06))
+		"cleave":
+			var half: float=float(cue.half_angle)
+			var bearing: float=dir.angle()
+			# The faint arc and short radial ends share the exact admitted sector.
+			# A moving blade streak supplies direction without covering the floor.
+			canvas.draw_arc(p,r,bearing-half,bearing+half,32,Color(color,color.a*0.28),1.0,true)
+			for sign_value: int in [-1,1]:
+				var edge:=dir.rotated(half*sign_value)
+				canvas.draw_line(p+edge*(r-8),p+edge*r,Color(color,color.a*0.5),1.3,true)
+			var sweep: float=lerpf(bearing-half,bearing+half,t)
+			canvas.draw_arc(p,r*0.78,maxf(bearing-half,sweep-0.6),sweep,12,color,2.4,true)
+			if effects>0:
+				canvas.draw_arc(p,r*0.65,maxf(bearing-half,sweep-0.8),sweep,12,Color(color,color.a*0.4),1.2,true)
 		"nova":
 			# Separate wind-like rune wisps convey the shock front, without a clock-face ring.
 			var wave: float=lerpf(6,r,sqrt(t))

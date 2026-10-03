@@ -43,7 +43,7 @@ static func migrate(raw: Variant) -> Dictionary:
 	for slot: String in old.equipped:
 		result.locations[old.equipped[slot]] = {"kind": "equipment", "slot_id": Slots.legacy_slot(slot)}
 	var skill_order: Array = old.skill_slots.duplicate()
-	var remaining: Array = Data.SKILLS.keys()
+	var remaining: Array = Data.LEGACY_SKILL_IDS.duplicate()
 	remaining.sort()
 	for id: String in remaining:
 		if not skill_order.has(id):

@@ -441,7 +441,9 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	var loaded:=super.load_build(path)
 	if loaded and old_version>0 and old_version<Rules.VERSION:
 		migrated_from_legacy=true
-		if old_version == Rules.V14_VERSION:
+		if old_version == Rules.V16_VERSION:
+			migration_message="旧存档已原字节备份，新增主动宝石目录已启用；物品、键位与天赋预算保持不变。"
+		elif old_version == Rules.V14_VERSION:
 			migration_message="旧存档已备份，背包已扩容。原物品与构筑保持不变，校准碎片已转为物品。待安置物品：%d 件。"%pending_items().size()
 		elif old_version == Rules.V15_VERSION:
 			migration_message="旧存档已备份，背包已扩容，校准碎片已转为物品。待安置物品：%d 件。"%pending_items().size()
