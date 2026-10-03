@@ -3448,7 +3448,7 @@
 				"normal_points": 5,
 				"source_version": "3.29.1"
 			},
-			"version": 18
+			"version": 19
 		},
 		"default_casts": {
 			"group_000001": {
@@ -4414,7 +4414,7 @@
 				"evasion": 320.0
 			}
 		},
-		"save_version": 18,
+		"save_version": 19,
 		"skitter_accuracy_example": {
 			"base_accuracy": 140,
 			"base_chance": 0.96,
@@ -4924,7 +4924,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 18,
+				"save_version": 19,
 				"source": {
 					"affixes": [
 						{
@@ -5331,7 +5331,7 @@
 				"schema_version": 2,
 				"status": "prototype"
 			},
-			"save_version": 18
+			"save_version": 19
 		},
 		"elevate": {
 			"description": "保留魔法装备已有词缀，升为稀有并补至4至6条。",
@@ -5532,7 +5532,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 18,
+				"save_version": 19,
 				"source": {
 					"affixes": [
 						{
@@ -5716,7 +5716,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 18,
+				"save_version": 19,
 				"source": {
 					"affixes": [],
 					"base_id": "ashwood_bow",
@@ -5902,7 +5902,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 18,
+				"save_version": 19,
 				"source": {
 					"affixes": [
 						{
@@ -6105,7 +6105,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 18,
+				"save_version": 19,
 				"source": {
 					"affixes": [
 						{
@@ -6247,7 +6247,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 18,
+				"save_version": 19,
 				"source": {
 					"affixes": [
 						{
@@ -6296,7 +6296,7 @@
 			"example_quantity": 1,
 			"name": "校准碎片",
 			"quantity_source": "items[uid].payload.quantity",
-			"save_version": 18,
+			"save_version": 19,
 			"size": [
 				1,
 				1
@@ -10197,7 +10197,7 @@
 			"status": "implemented"
 		}
 	},
-	"game_version": "0.27.0",
+	"game_version": "0.28.0",
 	"jewel_affixes": {
 		"barrier": {
 			"kind": "prefix",
@@ -18143,7 +18143,7 @@
 		"source": "SkillCompiler + ProjectileRuntime.advance + DamageResolver",
 		"target_count": 6
 	},
-	"save_version": 18,
+	"save_version": 19,
 	"schema_version": 3,
 	"sectors": [
 		{
@@ -349498,6 +349498,2865 @@
 		},
 		"parent_count": 3,
 		"spread": 0.16
+	},
+	"town_maps": {
+		"clone_policy": "explicit_first_entry_only",
+		"examples": {
+			"broken_ruins": {
+				"compiled": {
+					"boss_id": "rift_warden",
+					"description": "击败36个普通根怪，再击败裂隙守卫并清理其后代。",
+					"encounter_profile": {
+						"definitions": [
+							{
+								"description": "怪物最大生命 ×1.20",
+								"field": "max_health",
+								"id": "enemy_max_health_120",
+								"multiplier": 1.2,
+								"name": "强健",
+								"risk": {
+									"assessment": "parameter_only",
+									"field": "max_health",
+									"multiplier": 1.2,
+									"relative_increase": 0.19999999999999996
+								},
+								"source_id": "encounter:enemy_max_health_120"
+							},
+							{
+								"description": "怪物移动速度 ×1.10",
+								"field": "speed",
+								"id": "enemy_move_speed_110",
+								"multiplier": 1.1,
+								"name": "迅行",
+								"risk": {
+									"assessment": "parameter_only",
+									"field": "speed",
+									"multiplier": 1.1,
+									"relative_increase": 0.10000000000000009
+								},
+								"source_id": "encounter:enemy_move_speed_110"
+							}
+						],
+						"modifier_ids": [
+							"enemy_max_health_120",
+							"enemy_move_speed_110"
+						],
+						"multipliers": {
+							"max_health": 1.2,
+							"speed": 1.1
+						},
+						"resource_policy": {
+							"health": "preserve_current_to_max_ratio",
+							"max_health": "multiply_canonical_once",
+							"max_shield": "unchanged",
+							"rounding": "float_no_integer_rounding",
+							"shield": "unchanged",
+							"shield_regen": "unchanged",
+							"speed": "multiply_canonical_once"
+						},
+						"reward_budget": {
+							"creates_map_items": false,
+							"enabled": false,
+							"grants_rewards": false,
+							"proposed_bonus_fraction": null,
+							"status": "metadata_only"
+						},
+						"risk_parameters": [
+							{
+								"assessment": "parameter_only",
+								"field": "max_health",
+								"multiplier": 1.2,
+								"relative_increase": 0.19999999999999996
+							},
+							{
+								"assessment": "parameter_only",
+								"field": "speed",
+								"multiplier": 1.1,
+								"relative_increase": 0.10000000000000009
+							}
+						],
+						"source": {
+							"balance_source": "original_game_balance",
+							"catalog": "res://scripts/encounters/encounter_catalog.gd",
+							"definition_revision": 1,
+							"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+							"monster_schema_version": 1,
+							"policy_version": 1,
+							"schema_version": 1
+						}
+					},
+					"id": "broken_ruins",
+					"name": "断垣试炼",
+					"normal_ids": [
+						"enemy_max_health_120",
+						"enemy_move_speed_110"
+					],
+					"ordinary_target": 36,
+					"special_ids": [
+						"storm_patrol"
+					],
+					"summary": "断垣试炼 · 强健 · 迅行 · 雷纹巡逻",
+					"wave": 5
+				},
+				"special_replacements": {
+					"brute": "",
+					"crawler": "",
+					"skitter": "storm_skitter"
+				}
+			},
+			"old_garden": {
+				"compiled": {
+					"boss_id": "rift_warden",
+					"description": "击败24个普通根怪，再击败裂隙守卫并清理其后代。",
+					"encounter_profile": {
+						"definitions": [
+							{
+								"description": "怪物最大生命 ×1.20",
+								"field": "max_health",
+								"id": "enemy_max_health_120",
+								"multiplier": 1.2,
+								"name": "强健",
+								"risk": {
+									"assessment": "parameter_only",
+									"field": "max_health",
+									"multiplier": 1.2,
+									"relative_increase": 0.19999999999999996
+								},
+								"source_id": "encounter:enemy_max_health_120"
+							},
+							{
+								"description": "怪物移动速度 ×1.10",
+								"field": "speed",
+								"id": "enemy_move_speed_110",
+								"multiplier": 1.1,
+								"name": "迅行",
+								"risk": {
+									"assessment": "parameter_only",
+									"field": "speed",
+									"multiplier": 1.1,
+									"relative_increase": 0.10000000000000009
+								},
+								"source_id": "encounter:enemy_move_speed_110"
+							}
+						],
+						"modifier_ids": [
+							"enemy_max_health_120",
+							"enemy_move_speed_110"
+						],
+						"multipliers": {
+							"max_health": 1.2,
+							"speed": 1.1
+						},
+						"resource_policy": {
+							"health": "preserve_current_to_max_ratio",
+							"max_health": "multiply_canonical_once",
+							"max_shield": "unchanged",
+							"rounding": "float_no_integer_rounding",
+							"shield": "unchanged",
+							"shield_regen": "unchanged",
+							"speed": "multiply_canonical_once"
+						},
+						"reward_budget": {
+							"creates_map_items": false,
+							"enabled": false,
+							"grants_rewards": false,
+							"proposed_bonus_fraction": null,
+							"status": "metadata_only"
+						},
+						"risk_parameters": [
+							{
+								"assessment": "parameter_only",
+								"field": "max_health",
+								"multiplier": 1.2,
+								"relative_increase": 0.19999999999999996
+							},
+							{
+								"assessment": "parameter_only",
+								"field": "speed",
+								"multiplier": 1.1,
+								"relative_increase": 0.10000000000000009
+							}
+						],
+						"source": {
+							"balance_source": "original_game_balance",
+							"catalog": "res://scripts/encounters/encounter_catalog.gd",
+							"definition_revision": 1,
+							"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+							"monster_schema_version": 1,
+							"policy_version": 1,
+							"schema_version": 1
+						}
+					},
+					"id": "old_garden",
+					"name": "旧庭试炼",
+					"normal_ids": [
+						"enemy_max_health_120",
+						"enemy_move_speed_110"
+					],
+					"ordinary_target": 24,
+					"special_ids": [
+						"frost_patrol"
+					],
+					"summary": "旧庭试炼 · 强健 · 迅行 · 霜纹巡逻",
+					"wave": 4
+				},
+				"special_replacements": {
+					"brute": "frost_guard",
+					"crawler": "",
+					"skitter": ""
+				}
+			}
+		},
+		"legacy_C_binding": "unbound_with_notice_and_raw_byte_backup",
+		"map_reward_bonus": false,
+		"map_runtime_persistent": false,
+		"mode": "optional_town_test",
+		"normal_save": "user://build_save.json",
+		"options": {
+			"cost_policy": {
+				"affects_legacy_currency": false,
+				"cost": {
+
+				},
+				"enabled": true,
+				"id": "test_free",
+				"label": "测试模式免费制作地图"
+			},
+			"maps": [
+				{
+					"boss_id": "rift_warden",
+					"description": "击败24个普通根怪，再击败裂隙守卫并清理其后代。",
+					"id": "old_garden",
+					"name": "旧庭试炼",
+					"ordinary_target": 24,
+					"wave": 4
+				},
+				{
+					"boss_id": "rift_warden",
+					"description": "击败36个普通根怪，再击败裂隙守卫并清理其后代。",
+					"id": "broken_ruins",
+					"name": "断垣试炼",
+					"ordinary_target": 36,
+					"wave": 5
+				}
+			],
+			"max_normal": 2,
+			"max_special": 1,
+			"normal_modifiers": [
+				{
+					"description": "怪物最大生命 ×1.20",
+					"field": "max_health",
+					"id": "enemy_max_health_120",
+					"multiplier": 1.2,
+					"name": "强健",
+					"risk": {
+						"assessment": "parameter_only",
+						"field": "max_health",
+						"multiplier": 1.2,
+						"relative_increase": 0.19999999999999996
+					},
+					"source_id": "encounter:enemy_max_health_120"
+				},
+				{
+					"description": "怪物移动速度 ×1.10",
+					"field": "speed",
+					"id": "enemy_move_speed_110",
+					"multiplier": 1.1,
+					"name": "迅行",
+					"risk": {
+						"assessment": "parameter_only",
+						"field": "speed",
+						"multiplier": 1.1,
+						"relative_increase": 0.10000000000000009
+					},
+					"source_id": "encounter:enemy_move_speed_110"
+				}
+			],
+			"special_modifiers": [
+				{
+					"description": "原本生成重甲体的普通名额改为霜纹守卫，保留原稀有度与机制；灰烬名额不变。冰霜圆形预警可走开，不产生冻结。",
+					"id": "frost_patrol",
+					"minimum_wave": 4,
+					"name": "霜纹巡逻",
+					"species": "brute",
+					"template": "frost_guard"
+				},
+				{
+					"description": "原本生成掠行体的普通名额改为雷纹掠行体，保留原稀有度与机制；灰烬名额不变。雷电圆形预警可走开，不产生感电。",
+					"id": "storm_patrol",
+					"minimum_wave": 5,
+					"name": "雷纹巡逻",
+					"species": "skitter",
+					"template": "storm_skitter"
+				}
+			]
+		},
+		"reserved_character_key": "C",
+		"retired_profile_writes": false,
+		"save_version": 19,
+		"services": [
+			{
+				"description": "免费测试供应全部已实现主动与辅助宝石。",
+				"id": "skill_merchant",
+				"name": "宝石商人"
+			},
+			{
+				"description": "免费测试供应全部底材、机制装备、生命/魔力药剂和测试碎片。",
+				"id": "equipment_merchant",
+				"name": "装备商人"
+			},
+			{
+				"description": "退还已花普通天赋点，保留起点；珠宝保留，放不下进入待安置。",
+				"id": "passive_reset",
+				"name": "天赋重置师"
+			},
+			{
+				"description": "供应全部已实现珠宝底材与特殊珠宝。",
+				"id": "jewel_merchant",
+				"name": "珠宝商人"
+			},
+			{
+				"description": "使用测试档的真实碎片进行六项现有工艺。",
+				"id": "crafter",
+				"name": "制造工匠"
+			},
+			{
+				"description": "选择有限地图，免费制作普通与特殊词缀，开始战斗并返城。",
+				"id": "map_device",
+				"name": "地图装置"
+			}
+		],
+		"stock": {
+			"equipment_merchant": [
+				{
+					"available": true,
+					"catalog_id": "nine_slot_etched_ring",
+					"category": "ring",
+					"definition_id": "equipment:nine_slot_etched_ring",
+					"description": "最大生命 +4，最大魔力 +2。",
+					"icon_path": "",
+					"id": "base:nine_slot_etched_ring",
+					"kind": "equipment",
+					"name": "普通 · 纹刻指环",
+					"preview": {
+						"added_sources": [],
+						"affix_lines": [],
+						"base_id": "nine_slot_etched_ring",
+						"base_name": "纹刻指环",
+						"category": "ring",
+						"definition_id": "equipment:nine_slot_etched_ring",
+						"description": "最大生命 +4，最大魔力 +2。",
+						"effects": [],
+						"id": "gear_000001",
+						"item_level": 30,
+						"kind": "equipment",
+						"name": "普通 · 纹刻指环",
+						"rarity": "normal",
+						"size": [
+							1,
+							1
+						],
+						"slot": "ring",
+						"stats": {
+							"max_health": 4.0,
+							"max_mana": 2.0
+						},
+						"uid": "gear_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "base"
+				},
+				{
+					"available": true,
+					"catalog_id": "nine_slot_trail_boots",
+					"category": "boots",
+					"definition_id": "equipment:nine_slot_trail_boots",
+					"description": "最大生命 +3，移动速度 +1。",
+					"icon_path": "",
+					"id": "base:nine_slot_trail_boots",
+					"kind": "equipment",
+					"name": "普通 · 踏纹短靴",
+					"preview": {
+						"added_sources": [],
+						"affix_lines": [],
+						"base_id": "nine_slot_trail_boots",
+						"base_name": "踏纹短靴",
+						"category": "boots",
+						"definition_id": "equipment:nine_slot_trail_boots",
+						"description": "最大生命 +3，移动速度 +1。",
+						"effects": [],
+						"id": "gear_000001",
+						"item_level": 30,
+						"kind": "equipment",
+						"name": "普通 · 踏纹短靴",
+						"rarity": "normal",
+						"size": [
+							2,
+							2
+						],
+						"slot": "boots",
+						"stats": {
+							"max_health": 3.0,
+							"move_speed": 1.0
+						},
+						"uid": "gear_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						2,
+						2
+					],
+					"supply_kind": "base"
+				},
+				{
+					"available": true,
+					"catalog_id": "nine_slot_folded_belt",
+					"category": "belt",
+					"definition_id": "equipment:nine_slot_folded_belt",
+					"description": "最大生命 +4，最大护盾 +2。",
+					"icon_path": "",
+					"id": "base:nine_slot_folded_belt",
+					"kind": "equipment",
+					"name": "普通 · 折纹腰带",
+					"preview": {
+						"added_sources": [],
+						"affix_lines": [],
+						"base_id": "nine_slot_folded_belt",
+						"base_name": "折纹腰带",
+						"category": "belt",
+						"definition_id": "equipment:nine_slot_folded_belt",
+						"description": "最大生命 +4，最大护盾 +2。",
+						"effects": [],
+						"id": "gear_000001",
+						"item_level": 30,
+						"kind": "equipment",
+						"name": "普通 · 折纹腰带",
+						"rarity": "normal",
+						"size": [
+							2,
+							1
+						],
+						"slot": "belt",
+						"stats": {
+							"max_health": 4.0,
+							"max_shield": 2.0
+						},
+						"uid": "gear_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						2,
+						1
+					],
+					"supply_kind": "base"
+				},
+				{
+					"available": true,
+					"catalog_id": "nine_slot_threaded_gloves",
+					"category": "gloves",
+					"definition_id": "equipment:nine_slot_threaded_gloves",
+					"description": "最大魔力 +2，魔力恢复 +0.1 / 秒。",
+					"icon_path": "",
+					"id": "base:nine_slot_threaded_gloves",
+					"kind": "equipment",
+					"name": "普通 · 织纹手套",
+					"preview": {
+						"added_sources": [],
+						"affix_lines": [],
+						"base_id": "nine_slot_threaded_gloves",
+						"base_name": "织纹手套",
+						"category": "gloves",
+						"definition_id": "equipment:nine_slot_threaded_gloves",
+						"description": "最大魔力 +2，魔力恢复 +0.1 / 秒。",
+						"effects": [],
+						"id": "gear_000001",
+						"item_level": 30,
+						"kind": "equipment",
+						"name": "普通 · 织纹手套",
+						"rarity": "normal",
+						"size": [
+							2,
+							2
+						],
+						"slot": "gloves",
+						"stats": {
+							"mana_regen": 0.1,
+							"max_mana": 2.0
+						},
+						"uid": "gear_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						2,
+						2
+					],
+					"supply_kind": "base"
+				},
+				{
+					"available": true,
+					"catalog_id": "nine_slot_slate_helmet",
+					"category": "helmet",
+					"definition_id": "equipment:nine_slot_slate_helmet",
+					"description": "最大生命 +4，最大护盾 +2。",
+					"icon_path": "",
+					"id": "base:nine_slot_slate_helmet",
+					"kind": "equipment",
+					"name": "普通 · 石脊头盔",
+					"preview": {
+						"added_sources": [],
+						"affix_lines": [],
+						"base_id": "nine_slot_slate_helmet",
+						"base_name": "石脊头盔",
+						"category": "helmet",
+						"definition_id": "equipment:nine_slot_slate_helmet",
+						"description": "最大生命 +4，最大护盾 +2。",
+						"effects": [],
+						"id": "gear_000001",
+						"item_level": 30,
+						"kind": "equipment",
+						"name": "普通 · 石脊头盔",
+						"rarity": "normal",
+						"size": [
+							2,
+							2
+						],
+						"slot": "helmet",
+						"stats": {
+							"max_health": 4.0,
+							"max_shield": 2.0
+						},
+						"uid": "gear_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						2,
+						2
+					],
+					"supply_kind": "base"
+				},
+				{
+					"available": true,
+					"catalog_id": "cinder_reed",
+					"category": "weapon",
+					"definition_id": "equipment:cinder_reed",
+					"description": "基础伤害 +3，魔力恢复 +0.25 / 秒。基础伤害为角色通用加值。",
+					"icon_path": "",
+					"id": "base:cinder_reed",
+					"kind": "equipment",
+					"name": "普通 · 烬芦杖",
+					"preview": {
+						"added_sources": [],
+						"affix_lines": [],
+						"base_id": "cinder_reed",
+						"base_name": "烬芦杖",
+						"category": "weapon",
+						"definition_id": "equipment:cinder_reed",
+						"description": "基础伤害 +3，魔力恢复 +0.25 / 秒。基础伤害为角色通用加值。",
+						"effects": [],
+						"id": "gear_000001",
+						"item_level": 30,
+						"kind": "equipment",
+						"name": "普通 · 烬芦杖",
+						"rarity": "normal",
+						"size": [
+							1,
+							3
+						],
+						"slot": "weapon",
+						"stats": {
+							"damage": 3.0,
+							"mana_regen": 0.25
+						},
+						"uid": "gear_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						3
+					],
+					"supply_kind": "base"
+				},
+				{
+					"available": true,
+					"catalog_id": "gale_spindle",
+					"category": "weapon",
+					"definition_id": "equipment:gale_spindle",
+					"description": "基础伤害 +2，攻击速度 +0.08 / 秒。基础伤害为角色通用加值。",
+					"icon_path": "",
+					"id": "base:gale_spindle",
+					"kind": "equipment",
+					"name": "普通 · 岚纺刃",
+					"preview": {
+						"added_sources": [],
+						"affix_lines": [],
+						"base_id": "gale_spindle",
+						"base_name": "岚纺刃",
+						"category": "weapon",
+						"definition_id": "equipment:gale_spindle",
+						"description": "基础伤害 +2，攻击速度 +0.08 / 秒。基础伤害为角色通用加值。",
+						"effects": [],
+						"id": "gear_000001",
+						"item_level": 30,
+						"kind": "equipment",
+						"name": "普通 · 岚纺刃",
+						"rarity": "normal",
+						"size": [
+							1,
+							3
+						],
+						"slot": "weapon",
+						"stats": {
+							"attack_speed": 0.08,
+							"damage": 2.0
+						},
+						"uid": "gear_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						3
+					],
+					"supply_kind": "base"
+				},
+				{
+					"available": true,
+					"catalog_id": "woven_bastion",
+					"category": "body_armour",
+					"definition_id": "equipment:woven_bastion",
+					"description": "最大生命 +12，最大护盾 +5。护盾为角色全局加值。",
+					"icon_path": "",
+					"id": "base:woven_bastion",
+					"kind": "equipment",
+					"name": "普通 · 绳垒衣",
+					"preview": {
+						"added_sources": [],
+						"affix_lines": [],
+						"base_id": "woven_bastion",
+						"base_name": "绳垒衣",
+						"category": "body_armour",
+						"definition_id": "equipment:woven_bastion",
+						"description": "最大生命 +12，最大护盾 +5。护盾为角色全局加值。",
+						"effects": [],
+						"id": "gear_000001",
+						"item_level": 30,
+						"kind": "equipment",
+						"name": "普通 · 绳垒衣",
+						"rarity": "normal",
+						"size": [
+							2,
+							3
+						],
+						"slot": "armor",
+						"stats": {
+							"max_health": 12.0,
+							"max_shield": 5.0
+						},
+						"uid": "gear_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						2,
+						3
+					],
+					"supply_kind": "base"
+				},
+				{
+					"available": true,
+					"catalog_id": "tidebound_coat",
+					"category": "body_armour",
+					"definition_id": "equipment:tidebound_coat",
+					"description": "最大护盾 +10，护盾恢复 +0.6 / 秒。护盾为角色全局加值。",
+					"icon_path": "",
+					"id": "base:tidebound_coat",
+					"kind": "equipment",
+					"name": "普通 · 潮缄袍",
+					"preview": {
+						"added_sources": [],
+						"affix_lines": [],
+						"base_id": "tidebound_coat",
+						"base_name": "潮缄袍",
+						"category": "body_armour",
+						"definition_id": "equipment:tidebound_coat",
+						"description": "最大护盾 +10，护盾恢复 +0.6 / 秒。护盾为角色全局加值。",
+						"effects": [],
+						"id": "gear_000001",
+						"item_level": 30,
+						"kind": "equipment",
+						"name": "普通 · 潮缄袍",
+						"rarity": "normal",
+						"size": [
+							2,
+							3
+						],
+						"slot": "armor",
+						"stats": {
+							"max_shield": 10.0,
+							"shield_regen": 0.6
+						},
+						"uid": "gear_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						2,
+						3
+					],
+					"supply_kind": "base"
+				},
+				{
+					"available": true,
+					"catalog_id": "wayglass_token",
+					"category": "amulet",
+					"definition_id": "equipment:wayglass_token",
+					"description": "最大魔力 +6，魔力恢复 +0.3 / 秒。",
+					"icon_path": "",
+					"id": "base:wayglass_token",
+					"kind": "equipment",
+					"name": "普通 · 途镜坠",
+					"preview": {
+						"added_sources": [],
+						"affix_lines": [],
+						"base_id": "wayglass_token",
+						"base_name": "途镜坠",
+						"category": "amulet",
+						"definition_id": "equipment:wayglass_token",
+						"description": "最大魔力 +6，魔力恢复 +0.3 / 秒。",
+						"effects": [],
+						"id": "gear_000001",
+						"item_level": 30,
+						"kind": "equipment",
+						"name": "普通 · 途镜坠",
+						"rarity": "normal",
+						"size": [
+							1,
+							1
+						],
+						"slot": "charm",
+						"stats": {
+							"mana_regen": 0.3,
+							"max_mana": 6.0
+						},
+						"uid": "gear_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "base"
+				},
+				{
+					"available": true,
+					"catalog_id": "pulse_seed",
+					"category": "amulet",
+					"definition_id": "equipment:pulse_seed",
+					"description": "最大生命 +8，移动速度 +3。",
+					"icon_path": "",
+					"id": "base:pulse_seed",
+					"kind": "equipment",
+					"name": "普通 · 脉籽符",
+					"preview": {
+						"added_sources": [],
+						"affix_lines": [],
+						"base_id": "pulse_seed",
+						"base_name": "脉籽符",
+						"category": "amulet",
+						"definition_id": "equipment:pulse_seed",
+						"description": "最大生命 +8，移动速度 +3。",
+						"effects": [],
+						"id": "gear_000001",
+						"item_level": 30,
+						"kind": "equipment",
+						"name": "普通 · 脉籽符",
+						"rarity": "normal",
+						"size": [
+							1,
+							1
+						],
+						"slot": "charm",
+						"stats": {
+							"max_health": 8.0,
+							"move_speed": 3.0
+						},
+						"uid": "gear_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "base"
+				},
+				{
+					"available": true,
+					"catalog_id": "runewood_focus",
+					"category": "weapon",
+					"definition_id": "equipment:runewood_focus",
+					"description": "最大魔力 +8，魔力恢复 +0.25 / 秒。附加伤害仅作用于词缀指定的攻击或法术命中。",
+					"icon_path": "",
+					"id": "base:runewood_focus",
+					"kind": "equipment",
+					"name": "普通 · 符木法器",
+					"preview": {
+						"added_sources": [],
+						"affix_lines": [],
+						"base_id": "runewood_focus",
+						"base_name": "符木法器",
+						"category": "weapon",
+						"definition_id": "equipment:runewood_focus",
+						"description": "最大魔力 +8，魔力恢复 +0.25 / 秒。附加伤害仅作用于词缀指定的攻击或法术命中。",
+						"effects": [],
+						"id": "gear_000001",
+						"item_level": 30,
+						"kind": "equipment",
+						"name": "普通 · 符木法器",
+						"rarity": "normal",
+						"size": [
+							1,
+							3
+						],
+						"slot": "weapon",
+						"stats": {
+							"mana_regen": 0.25,
+							"max_mana": 8.0
+						},
+						"uid": "gear_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						3
+					],
+					"supply_kind": "base"
+				},
+				{
+					"available": true,
+					"catalog_id": "emberhide_vest",
+					"category": "body_armour",
+					"definition_id": "equipment:emberhide_vest",
+					"description": "最大生命 +8，火焰抗性 +15%。火焰抗性作用于承受的火焰命中，有效上限 75%。",
+					"icon_path": "",
+					"id": "base:emberhide_vest",
+					"kind": "equipment",
+					"name": "普通 · 灰烬皮甲",
+					"preview": {
+						"added_sources": [],
+						"affix_lines": [],
+						"base_id": "emberhide_vest",
+						"base_name": "灰烬皮甲",
+						"category": "body_armour",
+						"definition_id": "equipment:emberhide_vest",
+						"description": "最大生命 +8，火焰抗性 +15%。火焰抗性作用于承受的火焰命中，有效上限 75%。",
+						"effects": [],
+						"id": "gear_000001",
+						"item_level": 30,
+						"kind": "equipment",
+						"name": "普通 · 灰烬皮甲",
+						"rarity": "normal",
+						"size": [
+							2,
+							3
+						],
+						"slot": "armor",
+						"stats": {
+							"fire_resistance": 0.15,
+							"max_health": 8.0
+						},
+						"uid": "gear_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						2,
+						3
+					],
+					"supply_kind": "base"
+				},
+				{
+					"available": true,
+					"catalog_id": "ashwood_bow",
+					"category": "weapon",
+					"definition_id": "equipment:ashwood_bow",
+					"description": "本武器物理单独结算，仅增强普攻和龙卷箭体。详情列出基底、本地点数与本地提高。",
+					"icon_path": "",
+					"id": "base:ashwood_bow",
+					"kind": "equipment",
+					"name": "普通 · 白蜡长弓",
+					"preview": {
+						"added_sources": [],
+						"affix_lines": [],
+						"base_id": "ashwood_bow",
+						"base_name": "白蜡长弓",
+						"category": "weapon",
+						"definition_id": "equipment:ashwood_bow",
+						"description": "本武器物理单独结算，仅增强普攻和龙卷箭体。详情列出基底、本地点数与本地提高。",
+						"effects": [],
+						"id": "gear_000001",
+						"item_level": 30,
+						"kind": "equipment",
+						"name": "普通 · 白蜡长弓",
+						"rarity": "normal",
+						"size": [
+							2,
+							3
+						],
+						"slot": "weapon",
+						"stats": {
+
+						},
+						"uid": "gear_000001",
+						"weapon_damage": {
+							"physical": 4.0
+						},
+						"weapon_damage_summary": "本武器物理：(4.0 + 0.0) × (1 + 0.0%) = 4.0；仅普攻与龙卷箭体",
+						"weapon_profile": {
+							"base": {
+								"physical": 4.0
+							},
+							"base_id": "ashwood_bow",
+							"flat": {
+								"physical": 0.0
+							},
+							"increased": {
+								"physical": 0.0
+							},
+							"item_id": "gear_000001",
+							"sources": [],
+							"stage": "weapon_local"
+						}
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						2,
+						3
+					],
+					"supply_kind": "base"
+				},
+				{
+					"available": true,
+					"catalog_id": "prism_bow",
+					"category": "weapon",
+					"definition_id": "equipment:prism_bow",
+					"description": "基础伤害 +4，投射物伤害提高 40%，龙卷额外母箭 +2；其中投射物增伤不作用于爆炸。",
+					"icon_path": "",
+					"id": "fixed:prism_bow",
+					"kind": "equipment",
+					"name": "棱光长弓",
+					"preview": {
+						"affix_lines": [],
+						"base_id": "prism_bow",
+						"base_name": "棱光长弓",
+						"category": "weapon",
+						"definition_id": "equipment:prism_bow",
+						"description": "基础伤害 +4，投射物伤害提高 40%，龙卷额外母箭 +2；其中投射物增伤不作用于爆炸。",
+						"id": "item_000001",
+						"item_level": 1,
+						"kind": "equipment",
+						"name": "棱光长弓",
+						"rarity": "unique",
+						"size": [
+							1,
+							3
+						],
+						"slot": "weapon",
+						"stats": {
+							"damage": 4.0,
+							"projectile_count": 2.0,
+							"projectile_increased": 0.4
+						},
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						3
+					],
+					"supply_kind": "fixed"
+				},
+				{
+					"available": true,
+					"catalog_id": "return_mantle",
+					"category": "body_armour",
+					"definition_id": "equipment:return_mantle",
+					"description": "最大护盾 +15。投射物抵达射程后，朝此刻角色中心方向返回一次；穿过中心继续飞行，不刷新寿命。母箭优先分裂。",
+					"icon_path": "",
+					"id": "fixed:return_mantle",
+					"kind": "equipment",
+					"name": "归航披风",
+					"preview": {
+						"affix_lines": [],
+						"base_id": "return_mantle",
+						"base_name": "归航披风",
+						"category": "body_armour",
+						"definition_id": "equipment:return_mantle",
+						"description": "最大护盾 +15。投射物抵达射程后，朝此刻角色中心方向返回一次；穿过中心继续飞行，不刷新寿命。母箭优先分裂。",
+						"effects": [
+							"return_on_range"
+						],
+						"id": "item_000001",
+						"item_level": 1,
+						"kind": "equipment",
+						"name": "归航披风",
+						"rarity": "unique",
+						"size": [
+							2,
+							3
+						],
+						"slot": "armor",
+						"stats": {
+							"max_shield": 15.0
+						},
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						2,
+						3
+					],
+					"supply_kind": "fixed"
+				},
+				{
+					"available": true,
+					"catalog_id": "detonation_charm",
+					"category": "amulet",
+					"definition_id": "equipment:detonation_charm",
+					"description": "全局伤害提高 20%，元素伤害提高 30%。自然飞行结束爆炸：造成 90% 基础火焰范围伤害。返回可延后爆炸；分裂、碰撞消耗和取消不爆炸。",
+					"icon_path": "",
+					"id": "fixed:detonation_charm",
+					"kind": "equipment",
+					"name": "终焰护符",
+					"preview": {
+						"affix_lines": [],
+						"base_id": "detonation_charm",
+						"base_name": "终焰护符",
+						"category": "amulet",
+						"definition_id": "equipment:detonation_charm",
+						"description": "全局伤害提高 20%，元素伤害提高 30%。自然飞行结束爆炸：造成 90% 基础火焰范围伤害。返回可延后爆炸；分裂、碰撞消耗和取消不爆炸。",
+						"effects": [
+							"explode_on_flight_end"
+						],
+						"id": "item_000001",
+						"item_level": 1,
+						"kind": "equipment",
+						"name": "终焰护符",
+						"rarity": "unique",
+						"size": [
+							1,
+							1
+						],
+						"slot": "charm",
+						"stats": {
+							"elemental_increased": 0.3,
+							"global_increased": 0.2
+						},
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "fixed"
+				},
+				{
+					"available": true,
+					"catalog_id": "ember_wand",
+					"category": "weapon",
+					"definition_id": "equipment:ember_wand",
+					"description": "伤害 +8，魔力恢复 +1 / 秒",
+					"icon_path": "",
+					"id": "fixed:ember_wand",
+					"kind": "equipment",
+					"name": "余烬法杖",
+					"preview": {
+						"affix_lines": [],
+						"base_id": "ember_wand",
+						"base_name": "余烬法杖",
+						"category": "weapon",
+						"definition_id": "equipment:ember_wand",
+						"description": "伤害 +8，魔力恢复 +1 / 秒",
+						"id": "item_000001",
+						"item_level": 1,
+						"kind": "equipment",
+						"name": "余烬法杖",
+						"rarity": "unique",
+						"size": [
+							1,
+							3
+						],
+						"slot": "weapon",
+						"stats": {
+							"damage": 8.0,
+							"mana_regen": 1.0
+						},
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						3
+					],
+					"supply_kind": "fixed"
+				},
+				{
+					"available": true,
+					"catalog_id": "swift_blade",
+					"category": "weapon",
+					"definition_id": "equipment:swift_blade",
+					"description": "攻击速度 +0.5 / 秒，移动速度 +20",
+					"icon_path": "",
+					"id": "fixed:swift_blade",
+					"kind": "equipment",
+					"name": "疾风短刃",
+					"preview": {
+						"affix_lines": [],
+						"base_id": "swift_blade",
+						"base_name": "疾风短刃",
+						"category": "weapon",
+						"definition_id": "equipment:swift_blade",
+						"description": "攻击速度 +0.5 / 秒，移动速度 +20",
+						"id": "item_000001",
+						"item_level": 1,
+						"kind": "equipment",
+						"name": "疾风短刃",
+						"rarity": "unique",
+						"size": [
+							1,
+							3
+						],
+						"slot": "weapon",
+						"stats": {
+							"attack_speed": 0.5,
+							"move_speed": 20.0
+						},
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						3
+					],
+					"supply_kind": "fixed"
+				},
+				{
+					"available": true,
+					"catalog_id": "guardian_robe",
+					"category": "body_armour",
+					"definition_id": "equipment:guardian_robe",
+					"description": "最大护盾 +30，护盾恢复 +3 / 秒",
+					"icon_path": "",
+					"id": "fixed:guardian_robe",
+					"kind": "equipment",
+					"name": "守护长袍",
+					"preview": {
+						"affix_lines": [],
+						"base_id": "guardian_robe",
+						"base_name": "守护长袍",
+						"category": "body_armour",
+						"definition_id": "equipment:guardian_robe",
+						"description": "最大护盾 +30，护盾恢复 +3 / 秒",
+						"id": "item_000001",
+						"item_level": 1,
+						"kind": "equipment",
+						"name": "守护长袍",
+						"rarity": "unique",
+						"size": [
+							2,
+							3
+						],
+						"slot": "armor",
+						"stats": {
+							"max_shield": 30.0,
+							"shield_regen": 3.0
+						},
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						2,
+						3
+					],
+					"supply_kind": "fixed"
+				},
+				{
+					"available": true,
+					"catalog_id": "vitality_armor",
+					"category": "body_armour",
+					"definition_id": "equipment:vitality_armor",
+					"description": "最大生命 +50，移动速度 +10",
+					"icon_path": "",
+					"id": "fixed:vitality_armor",
+					"kind": "equipment",
+					"name": "生机轻甲",
+					"preview": {
+						"affix_lines": [],
+						"base_id": "vitality_armor",
+						"base_name": "生机轻甲",
+						"category": "body_armour",
+						"definition_id": "equipment:vitality_armor",
+						"description": "最大生命 +50，移动速度 +10",
+						"id": "item_000001",
+						"item_level": 1,
+						"kind": "equipment",
+						"name": "生机轻甲",
+						"rarity": "unique",
+						"size": [
+							2,
+							3
+						],
+						"slot": "armor",
+						"stats": {
+							"max_health": 50.0,
+							"move_speed": 10.0
+						},
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						2,
+						3
+					],
+					"supply_kind": "fixed"
+				},
+				{
+					"available": true,
+					"catalog_id": "azure_charm",
+					"category": "amulet",
+					"definition_id": "equipment:azure_charm",
+					"description": "最大魔力 +30，魔力恢复 +2 / 秒",
+					"icon_path": "",
+					"id": "fixed:azure_charm",
+					"kind": "equipment",
+					"name": "湛蓝护符",
+					"preview": {
+						"affix_lines": [],
+						"base_id": "azure_charm",
+						"base_name": "湛蓝护符",
+						"category": "amulet",
+						"definition_id": "equipment:azure_charm",
+						"description": "最大魔力 +30，魔力恢复 +2 / 秒",
+						"id": "item_000001",
+						"item_level": 1,
+						"kind": "equipment",
+						"name": "湛蓝护符",
+						"rarity": "unique",
+						"size": [
+							1,
+							1
+						],
+						"slot": "charm",
+						"stats": {
+							"mana_regen": 2.0,
+							"max_mana": 30.0
+						},
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "fixed"
+				},
+				{
+					"available": true,
+					"catalog_id": "storm_charm",
+					"category": "amulet",
+					"definition_id": "equipment:storm_charm",
+					"description": "伤害 +6，攻击速度 +0.2 / 秒",
+					"icon_path": "",
+					"id": "fixed:storm_charm",
+					"kind": "equipment",
+					"name": "风暴护符",
+					"preview": {
+						"affix_lines": [],
+						"base_id": "storm_charm",
+						"base_name": "风暴护符",
+						"category": "amulet",
+						"definition_id": "equipment:storm_charm",
+						"description": "伤害 +6，攻击速度 +0.2 / 秒",
+						"id": "item_000001",
+						"item_level": 1,
+						"kind": "equipment",
+						"name": "风暴护符",
+						"rarity": "unique",
+						"size": [
+							1,
+							1
+						],
+						"slot": "charm",
+						"stats": {
+							"attack_speed": 0.2,
+							"damage": 6.0
+						},
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "fixed"
+				},
+				{
+					"available": true,
+					"catalog_id": "flask:life",
+					"category": "",
+					"definition_id": "flask:life",
+					"description": "3秒内恢复35%对应最大资源；消耗10充能。同资源恢复不叠加，已满或充能不足时不消耗。",
+					"icon_path": "res://assets/ui/grimoire/life_flask.png",
+					"id": "flask:life",
+					"kind": "flask",
+					"name": "生命药剂",
+					"preview": {
+						"category": "",
+						"color": "#aa5046",
+						"cost": 10,
+						"definition_id": "flask:life",
+						"description": "3秒内恢复35%对应最大资源；消耗10充能。同资源恢复不叠加，已满或充能不足时不消耗。",
+						"duration": 3.0,
+						"effects": [],
+						"icon_path": "res://assets/ui/grimoire/life_flask.png",
+						"id": "item_000001",
+						"kind": "flask",
+						"max_charges": 30,
+						"name": "生命药剂",
+						"rarity": "normal",
+						"recovery_fraction": 0.35,
+						"resource": "health",
+						"size": [
+							1,
+							2
+						],
+						"stats": {
+
+						},
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						2
+					],
+					"supply_kind": "flask"
+				},
+				{
+					"available": true,
+					"catalog_id": "flask:mana",
+					"category": "",
+					"definition_id": "flask:mana",
+					"description": "3秒内恢复35%对应最大资源；消耗10充能。同资源恢复不叠加，已满或充能不足时不消耗。",
+					"icon_path": "res://assets/ui/grimoire/mana_flask.png",
+					"id": "flask:mana",
+					"kind": "flask",
+					"name": "魔力药剂",
+					"preview": {
+						"category": "",
+						"color": "#587da2",
+						"cost": 10,
+						"definition_id": "flask:mana",
+						"description": "3秒内恢复35%对应最大资源；消耗10充能。同资源恢复不叠加，已满或充能不足时不消耗。",
+						"duration": 3.0,
+						"effects": [],
+						"icon_path": "res://assets/ui/grimoire/mana_flask.png",
+						"id": "item_000001",
+						"kind": "flask",
+						"max_charges": 30,
+						"name": "魔力药剂",
+						"rarity": "normal",
+						"recovery_fraction": 0.35,
+						"resource": "mana",
+						"size": [
+							1,
+							2
+						],
+						"stats": {
+
+						},
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						2
+					],
+					"supply_kind": "flask"
+				},
+				{
+					"available": true,
+					"catalog_id": "calibration_shard",
+					"category": "",
+					"definition_id": "currency:calibration_shard",
+					"description": "用于数值校准的结晶碎片。仅背包中的碎片可用于工艺。",
+					"icon_path": "",
+					"id": "currency:calibration_shard",
+					"kind": "currency",
+					"name": "校准碎片 ×100",
+					"preview": {
+						"base_id": "currency:calibration_shard",
+						"category": "",
+						"color": "#8bd8df",
+						"definition_id": "currency:calibration_shard",
+						"description": "用于数值校准的结晶碎片。仅背包中的碎片可用于工艺。",
+						"id": "currency:calibration_shard",
+						"kind": "currency",
+						"name": "校准碎片",
+						"quantity": 100,
+						"size": [
+							1,
+							1
+						],
+						"stack_limit": 1000000000,
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 100,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "currency"
+				}
+			],
+			"jewel_merchant": [
+				{
+					"available": true,
+					"catalog_id": "emberheart",
+					"category": "",
+					"definition_id": "jewel:emberheart",
+					"description": "前缀 · 炽烈：伤害 +2.0\n后缀 · 节律：攻击速度 +0.04 / 秒",
+					"icon_path": "",
+					"id": "jewel:emberheart",
+					"kind": "jewel",
+					"name": "魔法 · 烬心晶玉",
+					"preview": {
+						"base": "emberheart",
+						"base_id": "emberheart",
+						"category": "",
+						"color": "#8eb8ff",
+						"definition_id": "jewel:emberheart",
+						"description": "前缀 · 炽烈：伤害 +2.0\n后缀 · 节律：攻击速度 +0.04 / 秒",
+						"effects": [],
+						"id": "jewel_000001",
+						"kind": "jewel",
+						"name": "魔法 · 烬心晶玉",
+						"rarity": "magic",
+						"size": [
+							1,
+							1
+						],
+						"stats": {
+							"attack_speed": 0.04,
+							"damage": 2.0
+						},
+						"uid": "jewel_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "jewel"
+				},
+				{
+					"available": true,
+					"catalog_id": "tideglass",
+					"category": "",
+					"definition_id": "jewel:tideglass",
+					"description": "前缀 · 炽烈：伤害 +2.0\n后缀 · 回流：魔力恢复 +0.3 / 秒",
+					"icon_path": "",
+					"id": "jewel:tideglass",
+					"kind": "jewel",
+					"name": "魔法 · 雾潮晶玉",
+					"preview": {
+						"base": "tideglass",
+						"base_id": "tideglass",
+						"category": "",
+						"color": "#8eb8ff",
+						"definition_id": "jewel:tideglass",
+						"description": "前缀 · 炽烈：伤害 +2.0\n后缀 · 回流：魔力恢复 +0.3 / 秒",
+						"effects": [],
+						"id": "jewel_000001",
+						"kind": "jewel",
+						"name": "魔法 · 雾潮晶玉",
+						"rarity": "magic",
+						"size": [
+							1,
+							1
+						],
+						"stats": {
+							"damage": 2.0,
+							"mana_regen": 0.3
+						},
+						"uid": "jewel_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "jewel"
+				},
+				{
+					"available": true,
+					"catalog_id": "windweave",
+					"category": "",
+					"definition_id": "jewel:windweave",
+					"description": "前缀 · 炽烈：伤害 +2.0\n后缀 · 节律：攻击速度 +0.04 / 秒",
+					"icon_path": "",
+					"id": "jewel:windweave",
+					"kind": "jewel",
+					"name": "魔法 · 岚纹晶玉",
+					"preview": {
+						"base": "windweave",
+						"base_id": "windweave",
+						"category": "",
+						"color": "#8eb8ff",
+						"definition_id": "jewel:windweave",
+						"description": "前缀 · 炽烈：伤害 +2.0\n后缀 · 节律：攻击速度 +0.04 / 秒",
+						"effects": [],
+						"id": "jewel_000001",
+						"kind": "jewel",
+						"name": "魔法 · 岚纹晶玉",
+						"rarity": "magic",
+						"size": [
+							1,
+							1
+						],
+						"stats": {
+							"attack_speed": 0.04,
+							"damage": 2.0
+						},
+						"uid": "jewel_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "jewel"
+				},
+				{
+					"available": true,
+					"catalog_id": "branchfinder",
+					"category": "",
+					"definition_id": "jewel:branchfinder",
+					"description": "镶嵌在沿已点连线连通起点的珠宝孔中时：半径 280 内的小型与核心天赋可不连线分配，每个仍消耗 1 点。\n远程节点不能向范围外延伸；珠宝孔必须沿已点连线连通起点。移除或移动珠宝不得使已点天赋失去支持。\n固定规则，无随机词缀；不直接增加属性。",
+					"icon_path": "",
+					"id": "jewel:branchfinder",
+					"kind": "jewel",
+					"name": "特殊 · 寻枝晶玉",
+					"preview": {
+						"base": "branchfinder",
+						"base_id": "branchfinder",
+						"category": "",
+						"color": "#e2ae6b",
+						"definition_id": "jewel:branchfinder",
+						"description": "镶嵌在沿已点连线连通起点的珠宝孔中时：半径 280 内的小型与核心天赋可不连线分配，每个仍消耗 1 点。\n远程节点不能向范围外延伸；珠宝孔必须沿已点连线连通起点。移除或移动珠宝不得使已点天赋失去支持。\n固定规则，无随机词缀；不直接增加属性。",
+						"effects": [],
+						"id": "jewel_000001",
+						"kind": "jewel",
+						"name": "特殊 · 寻枝晶玉",
+						"rarity": "special",
+						"size": [
+							1,
+							1
+						],
+						"stats": {
+
+						},
+						"uid": "jewel_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "jewel"
+				}
+			],
+			"skill_merchant": [
+				{
+					"available": true,
+					"catalog_id": "skill:bolt",
+					"category": "",
+					"definition_id": "skill:bolt",
+					"description": "发射三枚穿透飞弹，每枚造成 160% 伤害。",
+					"icon_path": "",
+					"id": "skill:bolt",
+					"kind": "skill_gem",
+					"name": "奥术飞弹",
+					"preview": {
+						"capabilities": [
+							"initial_projectiles",
+							"projectile_hit"
+						],
+						"category": "",
+						"definition_id": "skill:bolt",
+						"description": "发射三枚穿透飞弹，每枚造成 160% 伤害。",
+						"family": "",
+						"glyph": "I",
+						"icon": "res://assets/ui/grimoire/bolt.png",
+						"icon_texture": "res://assets/ui/grimoire/bolt.png",
+						"kind": "skill_gem",
+						"name": "奥术飞弹",
+						"requires": [],
+						"short_name": "飞弹",
+						"size": [
+							1,
+							1
+						],
+						"skill_id": "bolt",
+						"skills": [
+							"bolt"
+						],
+						"support_id": "",
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "gem"
+				},
+				{
+					"available": true,
+					"catalog_id": "skill:chain",
+					"category": "",
+					"definition_id": "skill:chain",
+					"description": "闪电弹跳最多五个敌人，伤害从 220% 逐次递减。",
+					"icon_path": "",
+					"id": "skill:chain",
+					"kind": "skill_gem",
+					"name": "连锁闪电",
+					"preview": {
+						"capabilities": [
+							"chain_hit"
+						],
+						"category": "",
+						"definition_id": "skill:chain",
+						"description": "闪电弹跳最多五个敌人，伤害从 220% 逐次递减。",
+						"family": "",
+						"glyph": "VII",
+						"icon": "res://assets/ui/grimoire/chain.png",
+						"icon_texture": "res://assets/ui/grimoire/chain.png",
+						"kind": "skill_gem",
+						"name": "连锁闪电",
+						"requires": [],
+						"short_name": "闪电",
+						"size": [
+							1,
+							1
+						],
+						"skill_id": "chain",
+						"skills": [
+							"chain"
+						],
+						"support_id": "",
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "gem"
+				},
+				{
+					"available": true,
+					"catalog_id": "skill:cleave",
+					"category": "",
+					"definition_id": "skill:cleave",
+					"description": "向面前半圆横扫，半径 95，造成 280% 物理攻击命中。近战与范围加成生效；不借用长弓本地伤害。",
+					"icon_path": "",
+					"id": "skill:cleave",
+					"kind": "skill_gem",
+					"name": "裂刃斩",
+					"preview": {
+						"capabilities": [
+							"area_hit",
+							"melee_hit"
+						],
+						"category": "",
+						"definition_id": "skill:cleave",
+						"description": "向面前半圆横扫，半径 95，造成 280% 物理攻击命中。近战与范围加成生效；不借用长弓本地伤害。",
+						"family": "",
+						"glyph": "IX",
+						"icon": "res://assets/ui/grimoire/cleave.png",
+						"icon_texture": "res://assets/ui/grimoire/cleave.png",
+						"kind": "skill_gem",
+						"name": "裂刃斩",
+						"requires": [],
+						"short_name": "裂刃",
+						"size": [
+							1,
+							1
+						],
+						"skill_id": "cleave",
+						"skills": [
+							"cleave"
+						],
+						"support_id": "",
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "gem"
+				},
+				{
+					"available": true,
+					"catalog_id": "skill:dash",
+					"category": "",
+					"definition_id": "skill:dash",
+					"description": "沿移动方向冲刺 175 距离，免疫伤害 0.6 秒。",
+					"icon_path": "",
+					"id": "skill:dash",
+					"kind": "skill_gem",
+					"name": "闪光冲刺",
+					"preview": {
+						"capabilities": [
+							"movement"
+						],
+						"category": "",
+						"definition_id": "skill:dash",
+						"description": "沿移动方向冲刺 175 距离，免疫伤害 0.6 秒。",
+						"family": "",
+						"glyph": "IV",
+						"icon": "res://assets/ui/grimoire/dash.png",
+						"icon_texture": "res://assets/ui/grimoire/dash.png",
+						"kind": "skill_gem",
+						"name": "闪光冲刺",
+						"requires": [],
+						"short_name": "冲刺",
+						"size": [
+							1,
+							1
+						],
+						"skill_id": "dash",
+						"skills": [
+							"dash"
+						],
+						"support_id": "",
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "gem"
+				},
+				{
+					"available": true,
+					"catalog_id": "skill:frost",
+					"category": "",
+					"definition_id": "skill:frost",
+					"description": "扇形发射五枚冰弹，造成 85% 伤害并减速 3 秒。",
+					"icon_path": "",
+					"id": "skill:frost",
+					"kind": "skill_gem",
+					"name": "冰霜脉冲",
+					"preview": {
+						"capabilities": [
+							"initial_projectiles",
+							"projectile_hit"
+						],
+						"category": "",
+						"definition_id": "skill:frost",
+						"description": "扇形发射五枚冰弹，造成 85% 伤害并减速 3 秒。",
+						"family": "",
+						"glyph": "II",
+						"icon": "res://assets/ui/grimoire/frost.png",
+						"icon_texture": "res://assets/ui/grimoire/frost.png",
+						"kind": "skill_gem",
+						"name": "冰霜脉冲",
+						"requires": [],
+						"short_name": "冰霜",
+						"size": [
+							1,
+							1
+						],
+						"skill_id": "frost",
+						"skills": [
+							"frost"
+						],
+						"support_id": "",
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "gem"
+				},
+				{
+					"available": true,
+					"catalog_id": "skill:meteor",
+					"category": "",
+					"definition_id": "skill:meteor",
+					"description": "在最近敌人处引爆陨星，造成 430% 范围伤害。",
+					"icon_path": "",
+					"id": "skill:meteor",
+					"kind": "skill_gem",
+					"name": "陨星坠落",
+					"preview": {
+						"capabilities": [
+							"area_hit"
+						],
+						"category": "",
+						"definition_id": "skill:meteor",
+						"description": "在最近敌人处引爆陨星，造成 430% 范围伤害。",
+						"family": "",
+						"glyph": "VI",
+						"icon": "res://assets/ui/grimoire/meteor.png",
+						"icon_texture": "res://assets/ui/grimoire/meteor.png",
+						"kind": "skill_gem",
+						"name": "陨星坠落",
+						"requires": [],
+						"short_name": "陨星",
+						"size": [
+							1,
+							1
+						],
+						"skill_id": "meteor",
+						"skills": [
+							"meteor"
+						],
+						"support_id": "",
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "gem"
+				},
+				{
+					"available": true,
+					"catalog_id": "skill:nova",
+					"category": "",
+					"definition_id": "skill:nova",
+					"description": "引爆周围 155 范围的奥能，造成 270% 伤害并击退。",
+					"icon_path": "",
+					"id": "skill:nova",
+					"kind": "skill_gem",
+					"name": "奥能新星",
+					"preview": {
+						"capabilities": [
+							"area_hit"
+						],
+						"category": "",
+						"definition_id": "skill:nova",
+						"description": "引爆周围 155 范围的奥能，造成 270% 伤害并击退。",
+						"family": "",
+						"glyph": "III",
+						"icon": "res://assets/ui/grimoire/nova.png",
+						"icon_texture": "res://assets/ui/grimoire/nova.png",
+						"kind": "skill_gem",
+						"name": "奥能新星",
+						"requires": [],
+						"short_name": "新星",
+						"size": [
+							1,
+							1
+						],
+						"skill_id": "nova",
+						"skills": [
+							"nova"
+						],
+						"support_id": "",
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "gem"
+				},
+				{
+					"available": true,
+					"catalog_id": "skill:shade_bolt",
+					"category": "",
+					"definition_id": "skill:shade_bolt",
+					"description": "发射一枚 240% 基础混沌伤害的法术飞弹，首次碰撞后结束。可由装备附加其他类型伤害；不造成毒或持续伤害。",
+					"icon_path": "",
+					"id": "skill:shade_bolt",
+					"kind": "skill_gem",
+					"name": "蚀影飞弹",
+					"preview": {
+						"capabilities": [
+							"initial_projectiles",
+							"projectile_hit"
+						],
+						"category": "",
+						"definition_id": "skill:shade_bolt",
+						"description": "发射一枚 240% 基础混沌伤害的法术飞弹，首次碰撞后结束。可由装备附加其他类型伤害；不造成毒或持续伤害。",
+						"family": "",
+						"glyph": "X",
+						"icon": "res://assets/ui/grimoire/shade_bolt.png",
+						"icon_texture": "res://assets/ui/grimoire/shade_bolt.png",
+						"kind": "skill_gem",
+						"name": "蚀影飞弹",
+						"requires": [],
+						"short_name": "蚀影",
+						"size": [
+							1,
+							1
+						],
+						"skill_id": "shade_bolt",
+						"skills": [
+							"shade_bolt"
+						],
+						"support_id": "",
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "gem"
+				},
+				{
+					"available": true,
+					"catalog_id": "skill:tornado",
+					"category": "",
+					"definition_id": "skill:tornado",
+					"description": "发射 3 枚母箭，每枚在射程终点分裂为 3 枚环形子箭。箭伤为物理 60% 与火焰 40%；子箭造成 70% 基础伤害。返回与爆炸由装备分别赋予。",
+					"icon_path": "",
+					"id": "skill:tornado",
+					"kind": "skill_gem",
+					"name": "龙卷射击",
+					"preview": {
+						"capabilities": [
+							"initial_projectiles",
+							"projectile_hit",
+							"split_projectiles"
+						],
+						"category": "",
+						"definition_id": "skill:tornado",
+						"description": "发射 3 枚母箭，每枚在射程终点分裂为 3 枚环形子箭。箭伤为物理 60% 与火焰 40%；子箭造成 70% 基础伤害。返回与爆炸由装备分别赋予。",
+						"family": "",
+						"glyph": "VIII",
+						"icon": "res://assets/ui/grimoire/tornado.png",
+						"icon_texture": "res://assets/ui/grimoire/tornado.png",
+						"kind": "skill_gem",
+						"name": "龙卷射击",
+						"requires": [],
+						"short_name": "龙卷",
+						"size": [
+							1,
+							1
+						],
+						"skill_id": "tornado",
+						"skills": [
+							"tornado"
+						],
+						"support_id": "",
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "gem"
+				},
+				{
+					"available": true,
+					"catalog_id": "skill:ward",
+					"category": "",
+					"definition_id": "skill:ward",
+					"description": "回复 75% 最大护盾，免疫伤害 0.8 秒。",
+					"icon_path": "",
+					"id": "skill:ward",
+					"kind": "skill_gem",
+					"name": "守护结界",
+					"preview": {
+						"capabilities": [
+							"shield_recovery"
+						],
+						"category": "",
+						"definition_id": "skill:ward",
+						"description": "回复 75% 最大护盾，免疫伤害 0.8 秒。",
+						"family": "",
+						"glyph": "V",
+						"icon": "res://assets/ui/grimoire/ward.png",
+						"icon_texture": "res://assets/ui/grimoire/ward.png",
+						"kind": "skill_gem",
+						"name": "守护结界",
+						"requires": [],
+						"short_name": "结界",
+						"size": [
+							1,
+							1
+						],
+						"skill_id": "ward",
+						"skills": [
+							"ward"
+						],
+						"support_id": "",
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "gem"
+				},
+				{
+					"available": true,
+					"catalog_id": "support:breadth",
+					"category": "",
+					"definition_id": "support:breadth",
+					"description": "新星、陨星与裂刃斩：面积 ×1.44（半径 ×1.20），命中伤害总降 15%，魔力 ×1.20；冷却不变。",
+					"icon_path": "",
+					"id": "support:breadth",
+					"kind": "support_gem",
+					"name": "广域辅助",
+					"preview": {
+						"capabilities": [
+							"area_hit"
+						],
+						"category": "",
+						"definition_id": "support:breadth",
+						"description": "新星、陨星与裂刃斩：面积 ×1.44（半径 ×1.20），命中伤害总降 15%，魔力 ×1.20；冷却不变。",
+						"family": "",
+						"glyph": "",
+						"icon": "res://assets/ui/grimoire/breadth.png",
+						"icon_texture": "res://assets/ui/grimoire/breadth.png",
+						"kind": "support_gem",
+						"name": "广域辅助",
+						"requires": [
+							"area_hit"
+						],
+						"short_name": "广域辅助",
+						"size": [
+							1,
+							1
+						],
+						"skill_id": "",
+						"skills": [
+							"nova",
+							"meteor",
+							"cleave"
+						],
+						"support_id": "breadth",
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "gem"
+				},
+				{
+					"available": true,
+					"catalog_id": "support:chain_extension",
+					"category": "",
+					"definition_id": "support:chain_extension",
+					"description": "连锁闪电：总命中目标数 +2（5 至 7），每次主命中伤害总降 20%，魔力 ×1.30；逐次系数递减不变。",
+					"icon_path": "",
+					"id": "support:chain_extension",
+					"kind": "support_gem",
+					"name": "连锁延展辅助",
+					"preview": {
+						"capabilities": [
+							"chain_hit"
+						],
+						"category": "",
+						"definition_id": "support:chain_extension",
+						"description": "连锁闪电：总命中目标数 +2（5 至 7），每次主命中伤害总降 20%，魔力 ×1.30；逐次系数递减不变。",
+						"family": "chain",
+						"glyph": "",
+						"icon": "res://assets/ui/grimoire/chain_extension.png",
+						"icon_texture": "res://assets/ui/grimoire/chain_extension.png",
+						"kind": "support_gem",
+						"name": "连锁延展辅助",
+						"requires": [
+							"chain_hit"
+						],
+						"short_name": "连锁延展辅助",
+						"size": [
+							1,
+							1
+						],
+						"skill_id": "",
+						"skills": [
+							"chain"
+						],
+						"support_id": "chain_extension",
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "gem"
+				},
+				{
+					"available": true,
+					"catalog_id": "support:chain_reach",
+					"category": "",
+					"definition_id": "support:chain_reach",
+					"description": "连锁闪电：后续寻敌距离 ×1.30（220 至 286），主命中伤害总降 10%，魔力 ×1.15；首次寻敌距离仍为 600。",
+					"icon_path": "",
+					"id": "support:chain_reach",
+					"kind": "support_gem",
+					"name": "远链辅助",
+					"preview": {
+						"capabilities": [
+							"chain_hit"
+						],
+						"category": "",
+						"definition_id": "support:chain_reach",
+						"description": "连锁闪电：后续寻敌距离 ×1.30（220 至 286），主命中伤害总降 10%，魔力 ×1.15；首次寻敌距离仍为 600。",
+						"family": "chain",
+						"glyph": "",
+						"icon": "res://assets/ui/grimoire/chain_reach.png",
+						"icon_texture": "res://assets/ui/grimoire/chain_reach.png",
+						"kind": "support_gem",
+						"name": "远链辅助",
+						"requires": [
+							"chain_hit"
+						],
+						"short_name": "远链辅助",
+						"size": [
+							1,
+							1
+						],
+						"skill_id": "",
+						"skills": [
+							"chain"
+						],
+						"support_id": "chain_reach",
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "gem"
+				},
+				{
+					"available": true,
+					"catalog_id": "support:cold_focus",
+					"category": "",
+					"definition_id": "support:cold_focus",
+					"description": "冰霜主命中：冰霜伤害总增 20%，其他类型伤害总降 20%；魔力 ×1.15，冷却不变。普攻与独立爆炸不变。",
+					"icon_path": "",
+					"id": "support:cold_focus",
+					"kind": "support_gem",
+					"name": "冰霜专注辅助",
+					"preview": {
+						"capabilities": [],
+						"category": "",
+						"definition_id": "support:cold_focus",
+						"description": "冰霜主命中：冰霜伤害总增 20%，其他类型伤害总降 20%；魔力 ×1.15，冷却不变。普攻与独立爆炸不变。",
+						"family": "element",
+						"glyph": "",
+						"icon": "res://assets/ui/grimoire/cold_focus.png",
+						"icon_texture": "res://assets/ui/grimoire/cold_focus.png",
+						"kind": "support_gem",
+						"name": "冰霜专注辅助",
+						"requires": [],
+						"short_name": "冰霜专注辅助",
+						"size": [
+							1,
+							1
+						],
+						"skill_id": "",
+						"skills": [
+							"frost"
+						],
+						"support_id": "cold_focus",
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "gem"
+				},
+				{
+					"available": true,
+					"catalog_id": "support:concentrate",
+					"category": "",
+					"definition_id": "support:concentrate",
+					"description": "新星、陨星与裂刃斩：面积 ×0.64（半径 ×0.80），命中伤害总增 25%，魔力 ×1.20；冷却不变。",
+					"icon_path": "",
+					"id": "support:concentrate",
+					"kind": "support_gem",
+					"name": "凝域辅助",
+					"preview": {
+						"capabilities": [
+							"area_hit"
+						],
+						"category": "",
+						"definition_id": "support:concentrate",
+						"description": "新星、陨星与裂刃斩：面积 ×0.64（半径 ×0.80），命中伤害总增 25%，魔力 ×1.20；冷却不变。",
+						"family": "",
+						"glyph": "",
+						"icon": "res://assets/ui/grimoire/concentrate.png",
+						"icon_texture": "res://assets/ui/grimoire/concentrate.png",
+						"kind": "support_gem",
+						"name": "凝域辅助",
+						"requires": [
+							"area_hit"
+						],
+						"short_name": "凝域辅助",
+						"size": [
+							1,
+							1
+						],
+						"skill_id": "",
+						"skills": [
+							"nova",
+							"meteor",
+							"cleave"
+						],
+						"support_id": "concentrate",
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "gem"
+				},
+				{
+					"available": true,
+					"catalog_id": "support:efficiency",
+					"category": "",
+					"definition_id": "support:efficiency",
+					"description": "魔力消耗 ×0.80，冷却时间 ×1.15；技能伤害与其他效果不变。",
+					"icon_path": "",
+					"id": "support:efficiency",
+					"kind": "support_gem",
+					"name": "节能辅助",
+					"preview": {
+						"capabilities": [],
+						"category": "",
+						"definition_id": "support:efficiency",
+						"description": "魔力消耗 ×0.80，冷却时间 ×1.15；技能伤害与其他效果不变。",
+						"family": "resource",
+						"glyph": "",
+						"icon": "res://assets/ui/grimoire/efficiency.png",
+						"icon_texture": "res://assets/ui/grimoire/efficiency.png",
+						"kind": "support_gem",
+						"name": "节能辅助",
+						"requires": [],
+						"short_name": "节能辅助",
+						"size": [
+							1,
+							1
+						],
+						"skill_id": "",
+						"skills": [
+							"tornado",
+							"bolt",
+							"frost",
+							"nova",
+							"dash",
+							"ward",
+							"meteor",
+							"chain",
+							"cleave",
+							"shade_bolt"
+						],
+						"support_id": "efficiency",
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "gem"
+				},
+				{
+					"available": true,
+					"catalog_id": "support:fire_focus",
+					"category": "",
+					"definition_id": "support:fire_focus",
+					"description": "龙卷与陨星主命中：火焰伤害总增 20%，其他类型伤害总降 20%；魔力 ×1.15，冷却不变。普攻与独立爆炸不变。",
+					"icon_path": "",
+					"id": "support:fire_focus",
+					"kind": "support_gem",
+					"name": "火焰专注辅助",
+					"preview": {
+						"capabilities": [],
+						"category": "",
+						"definition_id": "support:fire_focus",
+						"description": "龙卷与陨星主命中：火焰伤害总增 20%，其他类型伤害总降 20%；魔力 ×1.15，冷却不变。普攻与独立爆炸不变。",
+						"family": "element",
+						"glyph": "",
+						"icon": "res://assets/ui/grimoire/fire_focus.png",
+						"icon_texture": "res://assets/ui/grimoire/fire_focus.png",
+						"kind": "support_gem",
+						"name": "火焰专注辅助",
+						"requires": [],
+						"short_name": "火焰专注辅助",
+						"size": [
+							1,
+							1
+						],
+						"skill_id": "",
+						"skills": [
+							"tornado",
+							"meteor"
+						],
+						"support_id": "fire_focus",
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "gem"
+				},
+				{
+					"available": true,
+					"catalog_id": "support:focus",
+					"category": "",
+					"definition_id": "support:focus",
+					"description": "投射物命中伤害总增 25%；魔力消耗 ×1.20。不影响独立爆炸。",
+					"icon_path": "",
+					"id": "support:focus",
+					"kind": "support_gem",
+					"name": "凝束辅助",
+					"preview": {
+						"capabilities": [
+							"projectile_hit"
+						],
+						"category": "",
+						"definition_id": "support:focus",
+						"description": "投射物命中伤害总增 25%；魔力消耗 ×1.20。不影响独立爆炸。",
+						"family": "",
+						"glyph": "",
+						"icon": "res://assets/ui/grimoire/focus.png",
+						"icon_texture": "res://assets/ui/grimoire/focus.png",
+						"kind": "support_gem",
+						"name": "凝束辅助",
+						"requires": [
+							"projectile_hit"
+						],
+						"short_name": "凝束辅助",
+						"size": [
+							1,
+							1
+						],
+						"skill_id": "",
+						"skills": [],
+						"support_id": "focus",
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "gem"
+				},
+				{
+					"available": true,
+					"catalog_id": "support:heavy_projectiles",
+					"category": "",
+					"definition_id": "support:heavy_projectiles",
+					"description": "飞弹、冰霜与蚀影飞弹：投射物速度 ×0.75，主命中伤害总增 20%，魔力 ×1.15。龙卷与独立爆炸不适用。",
+					"icon_path": "",
+					"id": "support:heavy_projectiles",
+					"kind": "support_gem",
+					"name": "缓速强击辅助",
+					"preview": {
+						"capabilities": [
+							"projectile_hit"
+						],
+						"category": "",
+						"definition_id": "support:heavy_projectiles",
+						"description": "飞弹、冰霜与蚀影飞弹：投射物速度 ×0.75，主命中伤害总增 20%，魔力 ×1.15。龙卷与独立爆炸不适用。",
+						"family": "delivery",
+						"glyph": "",
+						"icon": "res://assets/ui/grimoire/heavy_projectiles.png",
+						"icon_texture": "res://assets/ui/grimoire/heavy_projectiles.png",
+						"kind": "support_gem",
+						"name": "缓速强击辅助",
+						"requires": [
+							"projectile_hit"
+						],
+						"short_name": "缓速强击辅助",
+						"size": [
+							1,
+							1
+						],
+						"skill_id": "",
+						"skills": [
+							"bolt",
+							"frost",
+							"shade_bolt"
+						],
+						"support_id": "heavy_projectiles",
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "gem"
+				},
+				{
+					"available": true,
+					"catalog_id": "support:lightning_focus",
+					"category": "",
+					"definition_id": "support:lightning_focus",
+					"description": "飞弹、新星与连锁闪电主命中：闪电伤害总增 20%，其他类型伤害总降 20%；魔力 ×1.15，冷却不变。普攻与独立爆炸不变。",
+					"icon_path": "",
+					"id": "support:lightning_focus",
+					"kind": "support_gem",
+					"name": "闪电专注辅助",
+					"preview": {
+						"capabilities": [],
+						"category": "",
+						"definition_id": "support:lightning_focus",
+						"description": "飞弹、新星与连锁闪电主命中：闪电伤害总增 20%，其他类型伤害总降 20%；魔力 ×1.15，冷却不变。普攻与独立爆炸不变。",
+						"family": "element",
+						"glyph": "",
+						"icon": "res://assets/ui/grimoire/lightning_focus.png",
+						"icon_texture": "res://assets/ui/grimoire/lightning_focus.png",
+						"kind": "support_gem",
+						"name": "闪电专注辅助",
+						"requires": [],
+						"short_name": "闪电专注辅助",
+						"size": [
+							1,
+							1
+						],
+						"skill_id": "",
+						"skills": [
+							"bolt",
+							"nova",
+							"chain"
+						],
+						"support_id": "lightning_focus",
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "gem"
+				},
+				{
+					"available": true,
+					"catalog_id": "support:lingering_chill",
+					"category": "",
+					"definition_id": "support:lingering_chill",
+					"description": "冰霜：现有减速时间 ×1.50（3 秒至 4.5 秒），主命中伤害总降 10%，魔力 ×1.10。",
+					"icon_path": "",
+					"id": "support:lingering_chill",
+					"kind": "support_gem",
+					"name": "寒意延长辅助",
+					"preview": {
+						"capabilities": [
+							"projectile_hit"
+						],
+						"category": "",
+						"definition_id": "support:lingering_chill",
+						"description": "冰霜：现有减速时间 ×1.50（3 秒至 4.5 秒），主命中伤害总降 10%，魔力 ×1.10。",
+						"family": "control",
+						"glyph": "",
+						"icon": "res://assets/ui/grimoire/lingering_chill.png",
+						"icon_texture": "res://assets/ui/grimoire/lingering_chill.png",
+						"kind": "support_gem",
+						"name": "寒意延长辅助",
+						"requires": [
+							"projectile_hit"
+						],
+						"short_name": "寒意延长辅助",
+						"size": [
+							1,
+							1
+						],
+						"skill_id": "",
+						"skills": [
+							"frost"
+						],
+						"support_id": "lingering_chill",
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "gem"
+				},
+				{
+					"available": true,
+					"catalog_id": "support:physical_focus",
+					"category": "",
+					"definition_id": "support:physical_focus",
+					"description": "龙卷与裂刃斩主命中：物理伤害总增 20%，其他类型伤害总降 20%；魔力 ×1.15，冷却不变。普攻与独立爆炸不变。",
+					"icon_path": "",
+					"id": "support:physical_focus",
+					"kind": "support_gem",
+					"name": "物理专注辅助",
+					"preview": {
+						"capabilities": [],
+						"category": "",
+						"definition_id": "support:physical_focus",
+						"description": "龙卷与裂刃斩主命中：物理伤害总增 20%，其他类型伤害总降 20%；魔力 ×1.15，冷却不变。普攻与独立爆炸不变。",
+						"family": "element",
+						"glyph": "",
+						"icon": "res://assets/ui/grimoire/physical_focus.png",
+						"icon_texture": "res://assets/ui/grimoire/physical_focus.png",
+						"kind": "support_gem",
+						"name": "物理专注辅助",
+						"requires": [],
+						"short_name": "物理专注辅助",
+						"size": [
+							1,
+							1
+						],
+						"skill_id": "",
+						"skills": [
+							"tornado",
+							"cleave"
+						],
+						"support_id": "physical_focus",
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "gem"
+				},
+				{
+					"available": true,
+					"catalog_id": "support:pierce",
+					"category": "",
+					"definition_id": "support:pierce",
+					"description": "飞弹、冰霜与蚀影飞弹穿透 +2；投射物命中伤害总降 15%；魔力消耗 ×1.20。龙卷无限穿透不适配；普攻与独立爆炸不变。",
+					"icon_path": "",
+					"id": "support:pierce",
+					"kind": "support_gem",
+					"name": "贯穿辅助",
+					"preview": {
+						"capabilities": [
+							"finite_projectile_pierce",
+							"projectile_hit"
+						],
+						"category": "",
+						"definition_id": "support:pierce",
+						"description": "飞弹、冰霜与蚀影飞弹穿透 +2；投射物命中伤害总降 15%；魔力消耗 ×1.20。龙卷无限穿透不适配；普攻与独立爆炸不变。",
+						"family": "",
+						"glyph": "",
+						"icon": "res://assets/ui/grimoire/pierce.png",
+						"icon_texture": "res://assets/ui/grimoire/pierce.png",
+						"kind": "support_gem",
+						"name": "贯穿辅助",
+						"requires": [
+							"finite_projectile_pierce",
+							"projectile_hit"
+						],
+						"short_name": "贯穿辅助",
+						"size": [
+							1,
+							1
+						],
+						"skill_id": "",
+						"skills": [
+							"bolt",
+							"frost",
+							"shade_bolt"
+						],
+						"support_id": "pierce",
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "gem"
+				},
+				{
+					"available": true,
+					"catalog_id": "support:quickcast",
+					"category": "",
+					"definition_id": "support:quickcast",
+					"description": "魔力消耗 ×1.40，冷却时间 ×0.80；技能伤害与其他效果不变。",
+					"icon_path": "",
+					"id": "support:quickcast",
+					"kind": "support_gem",
+					"name": "疾咏辅助",
+					"preview": {
+						"capabilities": [],
+						"category": "",
+						"definition_id": "support:quickcast",
+						"description": "魔力消耗 ×1.40，冷却时间 ×0.80；技能伤害与其他效果不变。",
+						"family": "resource",
+						"glyph": "",
+						"icon": "res://assets/ui/grimoire/quickcast.png",
+						"icon_texture": "res://assets/ui/grimoire/quickcast.png",
+						"kind": "support_gem",
+						"name": "疾咏辅助",
+						"requires": [],
+						"short_name": "疾咏辅助",
+						"size": [
+							1,
+							1
+						],
+						"skill_id": "",
+						"skills": [
+							"tornado",
+							"bolt",
+							"frost",
+							"nova",
+							"dash",
+							"ward",
+							"meteor",
+							"chain",
+							"cleave",
+							"shade_bolt"
+						],
+						"support_id": "quickcast",
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "gem"
+				},
+				{
+					"available": true,
+					"catalog_id": "support:swift_projectiles",
+					"category": "",
+					"definition_id": "support:swift_projectiles",
+					"description": "飞弹、冰霜与蚀影飞弹：投射物速度 ×1.35，魔力 ×1.10。龙卷不适配。",
+					"icon_path": "",
+					"id": "support:swift_projectiles",
+					"kind": "support_gem",
+					"name": "疾速投射辅助",
+					"preview": {
+						"capabilities": [
+							"projectile_hit"
+						],
+						"category": "",
+						"definition_id": "support:swift_projectiles",
+						"description": "飞弹、冰霜与蚀影飞弹：投射物速度 ×1.35，魔力 ×1.10。龙卷不适配。",
+						"family": "delivery",
+						"glyph": "",
+						"icon": "res://assets/ui/grimoire/swift_projectiles.png",
+						"icon_texture": "res://assets/ui/grimoire/swift_projectiles.png",
+						"kind": "support_gem",
+						"name": "疾速投射辅助",
+						"requires": [
+							"projectile_hit"
+						],
+						"short_name": "疾速投射辅助",
+						"size": [
+							1,
+							1
+						],
+						"skill_id": "",
+						"skills": [
+							"bolt",
+							"frost",
+							"shade_bolt"
+						],
+						"support_id": "swift_projectiles",
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "gem"
+				},
+				{
+					"available": true,
+					"catalog_id": "support:volley",
+					"category": "",
+					"definition_id": "support:volley",
+					"description": "初始投射物 +2；投射物命中伤害总降 20%；魔力消耗 ×1.30。不增加每枚母箭的子箭数，不影响独立爆炸。",
+					"icon_path": "",
+					"id": "support:volley",
+					"kind": "support_gem",
+					"name": "散束辅助",
+					"preview": {
+						"capabilities": [
+							"initial_projectiles",
+							"projectile_hit"
+						],
+						"category": "",
+						"definition_id": "support:volley",
+						"description": "初始投射物 +2；投射物命中伤害总降 20%；魔力消耗 ×1.30。不增加每枚母箭的子箭数，不影响独立爆炸。",
+						"family": "",
+						"glyph": "",
+						"icon": "res://assets/ui/grimoire/volley.png",
+						"icon_texture": "res://assets/ui/grimoire/volley.png",
+						"kind": "support_gem",
+						"name": "散束辅助",
+						"requires": [
+							"initial_projectiles",
+							"projectile_hit"
+						],
+						"short_name": "散束辅助",
+						"size": [
+							1,
+							1
+						],
+						"skill_id": "",
+						"skills": [],
+						"support_id": "volley",
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "gem"
+				}
+			]
+		},
+		"supply_setting": "testing/town_supply_enabled",
+		"test_save": "user://town_test_build_save.json"
 	},
 	"weapon_stages": {
 		"weapon_local": {

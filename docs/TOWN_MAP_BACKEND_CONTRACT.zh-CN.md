@@ -21,8 +21,8 @@ C专用于属性。schema19局部迁移先按冻结v18规则校验并原字节�
 - `enter_town_test(expected_revision:int) -> Dictionary`：normal时进入测试档城镇；先保存正常进度，失败不切换
 - `leave_town_test(expected_revision:int) -> Dictionary`：town时保存测试档并回到正常档、新正常战斗；失败不切换
 - `town_services() -> Array[Dictionary]`：固定六项 `{id,name,description,available,reason}`，ID为skill_merchant/equipment_merchant/passive_reset/jewel_merchant/crafter/map_device
-- `town_stock(service_id:String) -> Array[Dictionary]`：`{id,name,kind,definition_id,description,icon_path,size,category,available,reason,price_label}`；price_label明确测试免费。装备商人另供两药剂、真实碎片领取项。只读预览，不制造UID
-- `town_buy(offer_id:String,expected_revision:int) -> Dictionary`：revision为state.revision()，成功额外返回uid；仅town/test/supply enabled可用，统一完整候选原子入包。UID序号、满包与保存失败保护
+- `town_stock(service_id:String) -> Array[Dictionary]`：`{id,name,kind,definition_id,description,icon_path,size,category,available,reason,price_label}`；price_label明确测试免费，quantity为实际领取数量，preview提供完整展示定义。装备商人另供两药剂、真实碎片领取项。只读预览，不制造UID
+- `town_buy(offer_id:String,expected_revision:int) -> Dictionary`：revision为state.revision()，成功额外返回uid（碎片合堆时为空，固定领取100枚）；仅town/test/supply enabled可用，统一完整候选原子入包。UID序号、满包与保存失败保护。测试档背包装备可经确认丢弃，资格由state.can_discard_item(uid)提供；正常档仍保原装备回收规则
 - `town_reset_passives(expected_revision:int) -> Dictionary`：revision为state.revision()；退还已花普通点保当前起点，已镶珠宝保UID回背包，放不下可进可见待安置；一次保存。返回refunded_points、returned_jewels。UI二次确认
 - 工匠沿用state.crafting_operations/crafting_quote/execute_crafting/cancel接口，必须传arena.build_save_path；领取碎片走town_buy，不新建材料钱包
 - `map_options() -> Dictionary`：`{maps:Array,normal_modifiers:Array,special_modifiers:Array,max_normal:int,max_special:int,cost_policy:Dictionary}`。每定义至少id/name/description；地图含wave/ordinary_target/boss_id。cost_policy明确test_free，非消费旧材料

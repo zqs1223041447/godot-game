@@ -31,6 +31,9 @@ const GemCatalogData = preload("res://scripts/items/gem_catalog.gd")
 const EquipmentSlotsData = preload("res://scripts/items/equipment_slots.gd")
 const Flasks = preload("res://scripts/items/flask_catalog.gd")
 const FlaskRuntime = preload("res://scripts/combat/flask_runtime.gd")
+const Town = preload("res://scripts/town/town_catalog.gd")
+const Maps = preload("res://scripts/world/map_catalog.gd")
+const MapRules = preload("res://scripts/world/map_compiler.gd")
 const AttackRules = preload("res://scripts/combat/attack_hit_rules.gd")
 
 func _initialize() -> void:
@@ -73,6 +76,7 @@ static func collect() -> Dictionary:
 	result["canonical"] = canonical_examples()
 	result["currencies"] = currency_examples()
 	result["flasks"] = flask_examples()
+	result["town_maps"] = town_map_examples()
 	result["source_tree"] = source_tree_reference()
 	result["save_version"] = Canonical.Rules.VERSION
 	result["current_loot_profile_id"] = Canonical.LOOT_PROFILE_ID
@@ -349,6 +353,26 @@ static func source_tree_reference()->Dictionary:
 
 ## Pure example plans: no model-issued handles, userdata reads or save writes.
 ## Full candidates still pass the same BuildState inventory/jewel validator.
+static func town_map_examples()->Dictionary:
+	var stock:Dictionary={}
+	for service:String in ["skill_merchant","equipment_merchant","jewel_merchant"]:stock[service]=Town.offers(service)
+	var options:=Maps.options()
+	var examples:Dictionary={}
+	for map:Dictionary in options.maps:
+		var special:Array=["storm_patrol"] if map.id=="broken_ruins" else ["frost_patrol"]
+		var compiled:=MapRules.compile(map.id,["enemy_max_health_120","enemy_move_speed_110"],special)
+		assert(compiled.ok)
+		var replacements:Dictionary={}
+		for species:String in ["crawler","brute","skitter"]:
+			replacements[species]=MapRules.special_template(compiled.profile,{"template":species,"rarity":"normal","mechanisms":[]})
+		examples[map.id]={"compiled":compiled.profile,"special_replacements":replacements}
+	return {"services":Town.services(),"stock":stock,"options":options,"examples":examples,
+		"mode":"optional_town_test","normal_save":"user://build_save.json","test_save":"user://town_test_build_save.json",
+		"clone_policy":"explicit_first_entry_only","supply_setting":"testing/town_supply_enabled","map_reward_bonus":false,
+		"save_version":Canonical.Rules.VERSION,"retired_profile_writes":false,"map_runtime_persistent":false,
+		"reserved_character_key":"C","legacy_C_binding":"unbound_with_notice_and_raw_byte_backup"}
+
+
 static func crafting_examples() -> Dictionary:
 	var metadata: Dictionary = Craft.metadata()
 	metadata["integration_status"] = "implemented"

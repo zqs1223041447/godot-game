@@ -12,7 +12,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 REF = ROOT / 'docs/reference'
-CATEGORIES = [('skills','主动技能'),('supports','辅助技能'),('equipment','随机装备'),('affixes','装备词缀'),('fixed_items','固定装备'),('jewels','珠宝'),('jewel_affixes','珠宝词缀'),('source_passives','源天赋与精通'),('passives','旧181节点研究'),('mechanisms','共用机制'),('weapon_stages','武器局部阶段'),('defenses','受击与防御'),('flasks','生命与魔力药剂'),('currencies','堆叠材料'),('crafting','制作与回收'),('monsters','怪物图鉴'),('monster_attacks','怪物攻击'),('encounters','本轮挑战'),('rules','规则与边界')]
+CATEGORIES = [('skills','主动技能'),('supports','辅助技能'),('equipment','随机装备'),('affixes','装备词缀'),('fixed_items','固定装备'),('jewels','珠宝'),('jewel_affixes','珠宝词缀'),('source_passives','源天赋与精通'),('passives','旧181节点研究'),('mechanisms','共用机制'),('weapon_stages','武器局部阶段'),('defenses','受击与防御'),('flasks','生命与魔力药剂'),('currencies','堆叠材料'),('crafting','制作与回收'),('monsters','怪物图鉴'),('monster_attacks','怪物攻击'),('encounters','本轮挑战'),('town_services','城镇测试服务'),('maps','有限地图'),('map_specials','地图特殊词缀'),('rules','规则与边界')]
 RULE_TITLES = {'damage':'伤害如何结算','supports':'辅助装配','projectiles':'分裂、返回与飞行结束','equipment':'装备与阶级','character_rates':'恢复、移动与普通攻击速度','basic_attack':'普通攻击与武器贡献','allocation':'天赋与珠宝规则','shared':'玩家和怪物共享机制','boundaries':'尚未实现的源游戏语义','sources':'数据来源与实现边界'}
 CAPABILITIES = {'initial_projectiles':'初始投射物数量','projectile_hit':'投射物命中','finite_projectile_pierce':'有限穿透','area_hit':'直接范围命中','chain_hit':'连锁命中'}
 SLOTS = {'weapon':'武器','armor':'护甲','charm':'项链','body_armour':'护甲','amulet':'项链','ring':'戒指','ring_1':'戒指一','ring_2':'戒指二','boots':'鞋','belt':'腰带','gloves':'手套','helmet':'头盔'}
@@ -297,7 +297,7 @@ def build(data, art):
             mark='<svg viewBox="0 0 64 64" width="48" height="48" aria-hidden="true"><path d="M32 5 L51 22 L42 53 L16 42 L12 21 Z M32 5 L29 30 L42 53 M12 21 L29 30 L51 22" fill="#dfc99a" stroke="#79571f" stroke-width="2"/></svg>'
             body='<figure class="defense-flow"><figcaption>实际规则示例 · 白蜡长弓</figcaption><ol><li><span class="flow-step">01 · 原物品</span><strong>'+esc(sample['before_definition']['base_name'])+'</strong><span>'+lines('\n'.join(sample['before_definition']['affix_lines']))+'</span></li><li><span class="flow-step">02 · '+action+'校准碎片</span>'+mark+f'<strong data-craft-value="{key}-amount" data-value="{amount}">{amount}</strong></li><li><span class="flow-step">03 · 余额与结果</span>'+f'<strong><span data-craft-value="{key}-before" data-value="{sample["balance_before"]}">{sample["balance_before"]}</span> → <span data-craft-value="{key}-after" data-value="{sample["balance_after"]}">{sample["balance_after"]}</span></strong>'
             body+='<span>原装备被消耗，空位释放</span>' if key=='salvage' else '<span>'+lines('\n'.join(sample['after_definition']['affix_lines']))+'</span>'
-            body+='</li></ol><p class="fine">演示使用合法背包装备与固定示例种子；收益、成本和结果来自实际规则/规划器，真实碎片物品与完整 schema18 候选通过当前校验。它不预告玩家下一次随机结果。</p></figure>'
+            body+='</li></ol><p class="fine">演示使用合法背包装备与固定示例种子；收益、成本和结果来自实际规则/规划器，真实碎片物品与完整当前版本候选通过当前校验。它不预告玩家下一次随机结果。</p></figure>'
             preconditions={'salvage':'背包中未穿戴的随机魔法或稀有装备','recalibrate':'背包中未穿戴的随机魔法或稀有装备','enchant':'背包中未穿戴的随机普通装备','elevate':'背包中未穿戴的随机魔法装备，能达到合法稀有词缀数','augment':'背包中的随机魔法或稀有装备，必须存在合法空位','reforge':'背包中未穿戴的随机魔法或稀有装备'}
             preserves={'salvage':'消耗选中装备，其余物品保持','recalibrate':'物品ID、底材、等级、稀有度、词缀种类/顺序/阶级；只重掷数值','enchant':'物品ID、底材、物品等级和位置','elevate':'物品ID、底材、物品等级、位置及已有全部词缀','augment':'物品ID、底材、物品等级、位置及已有全部词缀','reforge':'物品ID、底材、物品等级、位置和稀有度；全部词缀重新生成'}
             body+=facts([('可用底材',links('equipment',c['eligible_base_ids'])),('前置条件',preconditions[key]),('风险',esc(c['risk'])),('保存顺序','完整候选验证 → 原子写盘 → 内存提交与刷新'),('失败保护','拒绝或写盘失败不动装备、材料和序号；取消不收费，失败重试保持种子'),('保持字段',preserves[key])])
@@ -319,6 +319,35 @@ def build(data, art):
     for key,e in data['encounters'].items():
         body=encounter_diagram(key,e,data['monsters'])+facts([('倍率',number(e['multiplier'])),('作用字段',esc(e['field'])),('应用顺序','物种/波次/稀有度/机制生成标准怪物后，仅在入场前乘一次；死亡子怪按自己的标准值应用'),('其余属性','攻击伤害、护盾、防御、体型、重击时序与奖励资格保持'),('风险说明','仅参数变化；实战难度未合并评分'),('奖励','无额外经验、掉落、制作材料或地图物品'),('生命周期','暂停面板选择并确认重开后生效；普通重试保留，恢复常规/试验场清空；不随构筑保存')])
         cards.append(add('encounters',key,e['name'],e['description'],body,'本轮可选 · 原创规则',related=links('monsters',e['examples'].keys())+' · '+link('rules','encounters')))
+    town=data.get('town_maps',{})
+    if town:
+        for service in town['services']:
+            key=service['id'];stock=town['stock'].get(key,[])
+            body=facts([('开放条件','可选城镇测试，回城后使用'),('存档隔离',esc(town['normal_save'])+' → 首次显式复制 → '+esc(town['test_save'])),('测试供应','真实UID物品，免费但受背包与注册表上限限制'),('配置开关',esc(town['supply_setting'])),('交易保护','完整候选验证，保存成功才提交；旧档实例与货币不被测试交易改写')])
+            if stock:
+                rows=[]
+                for offer in stock:
+                    kind=offer['supply_kind'];definition=offer['catalog_id']
+                    cat={'base':'equipment','fixed':'fixed_items','jewel':'jewels','flask':'flasks','currency':'currencies'}.get(kind)
+                    if kind=='gem':cat='skills' if definition.startswith('skill:') else 'supports';definition=definition.split(':',1)[1]
+                    elif kind=='flask':definition=definition.split(':',1)[1]
+                    elif kind=='currency':definition='calibration_shard'
+                    rows.append('<tr><td>'+link(cat,definition,offer['name'])+'</td><td>'+str(offer.get('quantity',1))+'</td><td>'+esc(offer['price_label'])+'</td></tr>')
+                body+='<div class="table-scroll"><table><thead><tr><th>实际供应目录</th><th>数量</th><th>价格</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
+            if key=='passive_reset':body+='<p>保留当前起点，退还实际已花普通点。已镶珠宝保留原UID，优先回背包，放不下进入可见待安置；保存失败不改变点数或物品。</p>'
+            if key=='crafter':body+='<p>继续消耗测试档里的真实碎片，不建立材料钱包。测试背包装备可确认丢弃并重新领取，正常进度保留原回收规则。</p>'+links('crafting',[op for op,c in data['crafting'].items() if c['kind']=='operation'])
+            body+='<p>重进测试档不重新复制或覆盖。退出后恢复正常档并开始正常战斗。被替换的旧model拒绝迟到写入；原确认、拖拽与面板一并关闭。</p>'
+            cards.append(add('town_services',key,service['name'],service['description'],body,'可选测试服务'))
+        for m in town['options']['maps']:
+            key=m['id'];example=town['examples'][key]
+            body='<figure class="defense-flow"><figcaption>有限地图流程</figcaption><ol><li><strong>城镇制图</strong><span>最多2普通 + 1特殊</span></li><li><strong>'+str(m['ordinary_target'])+' 个根怪</strong><span>固定第'+str(m['wave'])+'波强度</span></li><li><strong>裂隙守卫</strong><span>首领一次奖励，后代零奖励</span></li><li><strong>清理后代 → 返城</strong><span>已得进度保存到测试档</span></li></ol></figure>'
+            body+=facts([('普通目标',number(m['ordinary_target'])),('波次',number(m['wave'])),('首领',link('monsters',m['boss_id'])),('费用',esc(town['options']['cost_policy']['label'])),('普通词缀',links('encounters',[x['id'] for x in town['options']['normal_modifiers']])),('额外收益','无地图加成；现有合法根怪XP/装备/宝石/药剂奖励照常'),('中途离开','保存已有进度后放弃本图，不恢复旧怪或复领同一根怪奖励'),('重开','重新初始化有限目标与根怪身份'),('持久化','构筑与物品保存；草案和地图运行仅本会话')])
+            body+=details('同源编译示例',facts([('选择',esc(example['compiled']['summary'])),('生命倍率',number(example['compiled']['encounter_profile']['multipliers']['max_health'])),('移动倍率',number(example['compiled']['encounter_profile']['multipliers']['speed'])),('特殊替换',esc(example['special_replacements']))]))
+            body+='<p>两图初版复用现有战场空间，差异是强度、有限目标和词缀；没有宣称完成两套新地形或终局地图经济。</p>'
+            cards.append(add('maps',key,m['name'],m['description'],body,'有限测试地图',related=link('town_services','map_device')))
+        for special in town['options']['special_modifiers']:
+            body=facts([('最低波次',number(special['minimum_wave'])),('匹配原物种',link('monsters',special['species'])),('替换为',link('monsters',special['template'])),('保留','原抽签稀有度、机制、血伤速度与XP；灰烬名额优先'),('真实消费者','已有冰/电预警攻击和共享防御链；不增加冻结或感电'),('分层','独立于生命/速度普通词缀，最多1个特殊词缀')])
+            cards.append(add('map_specials',special['id'],special['name'],special['description'],body,'已实装特殊词缀',related=links('maps',[m['id'] for m in town['options']['maps'] if m['wave']>=special['minimum_wave']])))
     for key,a in data['monster_attacks'].items():
         p=a['profile']; policy=a['policy']
         body=telegraph_diagram(a)+facts([('来源',links('monsters',a['integrated_templates'])),('发动距离',number(policy['trigger_distance'])+' 世界单位'),('原始伤害',component_text(a['example']['event']['packet']['base'])),('倍率',number(p['damage_multiplier'])+' × 来源接触基底'),('攻速作用','只缩放恢复期；预警时间固定；开始后本次时序和伤害冻结'),('期间行动','暂停主动追击；击退仍有效；同一守卫不再叠加贴身接触攻击'),('取消与保护','来源死亡/出生保护/移除、玩家死亡或重开取消；暂停冻结时钟；多次同时命中沿用玩家无敌帧'),('规则版本',esc(a['balance_version']))])
