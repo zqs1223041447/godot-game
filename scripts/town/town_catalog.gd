@@ -34,15 +34,25 @@ static func offers(service_id:String)->Array[Dictionary]:
 	return result
 static func offer(id:Variant)->Dictionary:
 	if not id is String:return {}
-	for service:String in ["skill_merchant","equipment_merchant","jewel_merchant"]:
-		for row:Dictionary in offers(service):
-			if row.id==id:return row
+	if id.begins_with("skill:") or id.begins_with("support:"):
+		return _offer(id,"gem",id) if not Gems.definition(id).is_empty() else {}
+	if id.begins_with("base:"):
+		var base_id:String=id.substr(5)
+		return _offer(id,"base",base_id) if not Gear.base_definition(base_id).is_empty() else {}
+	if id.begins_with("fixed:"):
+		var fixed_id:String=id.substr(6)
+		return _offer(id,"fixed",fixed_id) if Data.ITEMS.has(fixed_id) else {}
+	if id.begins_with("jewel:"):
+		var base_id:String=id.substr(6)
+		return _offer(id,"jewel",base_id) if Jewels.BASES.has(base_id) or Jewels.SPECIAL_BASES.has(base_id) else {}
+	if id in ["flask:life","flask:mana"]:return _offer(id,"flask",id)
+	if id=="currency:calibration_shard":return _offer(id,"currency","calibration_shard")
 	return {}
 static func _offer(id:String,type:String,definition:String)->Dictionary:
 	var specification:Dictionary={"id":id,"supply_kind":type,"catalog_id":definition}
 	var sample:=make_item(specification,1)
 	var preview:=Items.definition_for_instance(sample)
-	return {"id":id,"supply_kind":type,"catalog_id":definition,"name":preview.get("name",id),
+	return {"id":id,"supply_kind":type,"catalog_id":definition,"name":str(preview.get("name",id))+(" ×100" if type=="currency" else ""),"quantity":100 if type=="currency" else 1,
 		"kind":sample.get("kind",""),"definition_id":sample.get("definition_id",""),
 		"description":preview.get("description",""),"icon_path":preview.get("icon_path",""),
 		"size":preview.get("size",Vector2i.ONE),"category":preview.get("category",""),

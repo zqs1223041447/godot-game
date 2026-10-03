@@ -265,6 +265,7 @@ func cache_diagnostics() -> Dictionary:
 ## UI ownership commands above still require successful persistence first.
 ## Town UI commands retain the same full-candidate save-first transaction.
 func town_claim_offer(offer_id:Variant,expected_revision:Variant,path:String)->Dictionary:
+	if not Legacy._save_paths_match(path,"user://town_test_build_save.json") or not Legacy._save_paths_match(_path,path):return _failure("test_profile_required","测试供应只能写入已打开的城镇测试档")
 	if _busy:return _failure("busy","当前操作尚未结束")
 	if not expected_revision is int or expected_revision!=revision():return _failure("stale_revision","库存已变化")
 	var catalog=preload("res://scripts/town/town_catalog.gd")
@@ -376,11 +377,17 @@ func award_random_gem(rng: RandomNumberGenerator) -> String:
 	return uid
 
 
+func can_discard_item(uid:Variant)->bool:
+	if not uid is String or not _current.items.has(uid) or _current.locations[uid].kind!="bag":return false
+	if _current.items[uid].kind!="equipment":return true
+	return Legacy._save_paths_match(_path,"user://town_test_build_save.json")
+
+
 func discard_item(uid: Variant,expected_revision: Variant,path: String) -> Dictionary:
 	if _busy:return _failure("busy","当前操作尚未结束")
 	if not expected_revision is int or expected_revision!=revision():return _failure("stale_revision","物品状态已变化，请重新确认")
 	if not uid is String or not _current.items.has(uid) or _current.locations[uid].kind!="bag":return _failure("not_in_bag","只可丢弃背包中的物品")
-	if _current.items[uid].kind=="equipment":return _failure("equipment_crafting","随机装备请使用回收，固定示例装备保留")
+	if not can_discard_item(uid):return _failure("equipment_crafting","正常进度的装备请使用回收，固定示例装备保留")
 	var candidate:=snapshot()
 	candidate.items.erase(uid)
 	candidate.locations.erase(uid)

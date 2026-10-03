@@ -265,6 +265,12 @@ func _quit_game() -> void:
 
 
 func restart_run() -> void:
+	if _world_mode in ["map","map_complete"]:
+		var profile:Dictionary=_map_run.profile.duplicate(true)
+		if not _map_run.begin(profile):
+			if is_instance_valid(hud):hud.notify("地图配置无效，不能重开")
+			return
+		_world_mode="map";_world_revision+=1
 	_sync_flasks(true)
 	run_revision += 1
 	_stats = state.get_stats()
@@ -316,6 +322,7 @@ func restart_run() -> void:
 			for i: int in range(3):
 				_spawn_enemy()
 	queue_redraw()
+	world_context_changed.emit()
 
 
 func _sync_flasks(reset_run: bool=false) -> void:
@@ -599,6 +606,9 @@ func _apply_source_actor_profile(enemy: Dictionary) -> void:
 
 
 func start_monster_demo() -> void:
+	if _world_mode!="normal":
+		hud.notify("旧试验入口仅在正常游戏可用；请先离开城镇测试")
+		return
 	_clear_encounter()
 	restart_run()
 	enemies.clear()
@@ -622,6 +632,9 @@ func start_monster_demo() -> void:
 
 
 func start_density_demo() -> void:
+	if _world_mode!="normal":
+		hud.notify("旧试验入口仅在正常游戏可用；请先离开城镇测试")
+		return
 	# Real catalog monsters, AI, collision and damage. Only progression rewards are disabled.
 	_clear_encounter()
 	restart_run()
@@ -658,6 +671,9 @@ func start_density_demo() -> void:
 
 
 func trigger_demo_split() -> void:
+	if _world_mode!="normal":
+		hud.notify("旧试验入口仅在正常游戏可用；请先离开城镇测试")
+		return
 	if not demo_mode or density_demo:
 		start_monster_demo()
 	var target: Dictionary = {}
@@ -675,6 +691,9 @@ func trigger_demo_split() -> void:
 
 
 func restore_standard_run() -> void:
+	if _world_mode!="normal":
+		hud.notify("旧试验入口仅在正常游戏可用；请先离开城镇测试")
+		return
 	_clear_encounter()
 	restart_run()
 	auto_fire = true
@@ -937,6 +956,7 @@ func _cast_skill(index: int) -> bool:
 
 
 func _execute_compiled(compiled: Dictionary, group_id: String = "", main_uid: String = "") -> bool:
+	if _world_mode in ["town","map_complete"]:return false
 	if not alive or not _ready_complete or hud.is_blocking(): return false
 	if not compiled.get("ok", false):
 		hud.notify("技能辅助配置无效：" + str(compiled.get("error", "未知配置")))
@@ -1441,11 +1461,13 @@ func town_stock(service_id:String)->Array[Dictionary]:
 func town_buy(offer_id:Variant,expected_revision:Variant)->Dictionary:
 	if _world_mode!="town" or not test_supply_enabled:return _world_failure("service_unavailable","当前不能领取测试供应")
 	var result:Dictionary=state.town_claim_offer(offer_id,expected_revision,build_save_path)
+	result.code=str(result.get("code",result.get("error_code","")))
 	if result.ok:world_context_changed.emit()
 	return result
 func town_reset_passives(expected_revision:Variant)->Dictionary:
 	if _world_mode!="town":return _world_failure("service_unavailable","请先返回城镇")
 	var result:Dictionary=state.reset_all_passives(expected_revision,build_save_path)
+	result.code=str(result.get("code",result.get("error_code","")))
 	if result.ok:world_context_changed.emit()
 	return result
 func map_options()->Dictionary:return MapCatalog.options()
