@@ -1,7 +1,8 @@
 extends SceneTree
 func _initialize() -> void:
 	var output := OS.get_environment("V022_PACK_QA")
-	if output.is_empty(): quit(78); return
+	var expected_font := OS.get_environment("V022_PACK_FONT_SHA256")
+	if output.is_empty() or expected_font.length()!=64: quit(78); return
 	DirAccess.make_dir_recursive_absolute(output)
 	var expected_dir := "godot-game-preview-v021"
 	var version := str(ProjectSettings.get_setting("application/config/version"))
@@ -13,7 +14,7 @@ func _initialize() -> void:
 	hash.start(HashingContext.HASH_SHA256)
 	hash.update(font.data)
 	var font_hash := hash.finish().hex_encode()
-	var ok: bool = version == "0.22.0" and save_dir == expected_dir and model.snapshot().version == 15 and model.bag_layout() == {"pages":2,"columns":8,"rows":6} and font_hash == "1492af813880765b0b3ee4c1140e1c682471e97070fb3b02df6792c053fc6b63"
+	var ok: bool = version == "0.22.0" and save_dir == expected_dir and model.snapshot().version == 16 and not model.snapshot().crafting.has("materials") and model.bag_layout() == {"pages":2,"columns":12,"rows":10} and font_hash == expected_font
 	var report := {"ok":ok,"game_version":version,"save_directory":save_dir,"actual_user_dir":OS.get_user_data_dir(),"schema":model.snapshot().version,"bag_layout":model.bag_layout(),"font_sha256":font_hash,"engine":Engine.get_version_info().string}
 	FileAccess.open(output.path_join("packed-runtime-probe.json"),FileAccess.WRITE).store_string(JSON.stringify(report,"\t",true,true))
 	FileAccess.open(output.path_join("GODOT_LICENSE.txt"),FileAccess.WRITE).store_string(Engine.get_license_text())

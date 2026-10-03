@@ -2736,9 +2736,9 @@
 		"target_radius": 14.0
 	},
 	"canonical": {
-		"bag_columns": 8,
+		"bag_columns": 12,
 		"bag_pages": 2,
-		"bag_rows": 6,
+		"bag_rows": 10,
 		"base_skill_groups": 10,
 		"default_build": {
 			"bindings": [
@@ -2776,9 +2776,6 @@
 				}
 			],
 			"crafting": {
-				"materials": {
-					"calibration_shard": 0
-				},
 				"revision": 0
 			},
 			"items": {
@@ -3401,7 +3398,7 @@
 				"normal_points": 5,
 				"source_version": "3.29.1"
 			},
-			"version": 15
+			"version": 16
 		},
 		"default_casts": {
 			"group_000001": {
@@ -4245,7 +4242,7 @@
 				"evasion": 320.0
 			}
 		},
-		"save_version": 15,
+		"save_version": 16,
 		"skitter_accuracy_example": {
 			"base_accuracy": 140,
 			"base_chance": 0.96,
@@ -4830,7 +4827,7 @@
 				"schema_version": 1,
 				"status": "prototype"
 			},
-			"save_version": 15
+			"save_version": 16
 		},
 		"recalibrate": {
 			"description": "消耗校准碎片，重掷现有词缀的整数数值；结果可能降低或不变。",
@@ -5135,6 +5132,34 @@
 			"kind": "operation",
 			"name": "回收",
 			"rules_version": "original-crafting-prototype-v1"
+		}
+	},
+	"currencies": {
+		"calibration_shard": {
+			"bag_pages": {
+				"columns": 12,
+				"pages": 2,
+				"rows": 10
+			},
+			"definition_id": "currency:calibration_shard",
+			"description": "用于数值校准的结晶碎片。仅背包中的碎片可用于工艺。",
+			"example_instance": {
+				"definition_id": "currency:calibration_shard",
+				"kind": "currency",
+				"payload": {
+					"quantity": 1
+				},
+				"uid": "catalog_currency_example"
+			},
+			"example_quantity": 1,
+			"name": "校准碎片",
+			"quantity_source": "items[uid].payload.quantity",
+			"save_version": 16,
+			"size": [
+				1,
+				1
+			],
+			"stack_limit": 1000000000
 		}
 	},
 	"current_loot_profile": [
@@ -15499,7 +15524,7 @@
 		"source": "SkillCompiler + ProjectileRuntime.advance + DamageResolver",
 		"target_count": 6
 	},
-	"save_version": 15,
+	"save_version": 16,
 	"schema_version": 3,
 	"sectors": [
 		{

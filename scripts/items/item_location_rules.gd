@@ -8,9 +8,12 @@ const BAG_ROWS: int = 8
 const PAGED_BAG_COLUMNS: int = 8
 const PAGED_BAG_ROWS: int = 6
 const PAGED_BAG_PAGES: int = 2
+const CURRENT_BAG_COLUMNS: int = 12
+const CURRENT_BAG_ROWS: int = 10
+const CURRENT_BAG_PAGES: int = 2
 const MAX_ITEM_ID_LENGTH: int = 128
 const MAX_SUPPORT_INDEX: int = 4
-const ITEM_KINDS: Array[String] = ["equipment", "jewel", "skill_gem", "support_gem"]
+const ITEM_KINDS: Array[String] = ["equipment", "jewel", "skill_gem", "support_gem", "currency"]
 const EQUIPMENT_CATEGORIES: Array[String] = [
 	"weapon", "body_armour", "amulet", "ring", "boots", "belt", "gloves", "helmet",
 ]
@@ -42,8 +45,14 @@ static func validate_paged(metadata_by_uid: Variant, locations: Variant, context
 	return _validate(metadata_by_uid, locations, context, true, context_error)
 
 
+## v16 expands capacity without changing the page/x/y field shape. The v15
+## wrapper above retains its original exact 8×6 context and bounds.
+static func validate_current(metadata_by_uid: Variant, locations: Variant, context: Variant) -> Dictionary:
+	return _validate(metadata_by_uid,locations,context,true,_current_context_error(context),true)
+
+
 static func _validate(metadata_by_uid: Variant, locations: Variant, context: Variant,
-		paged: bool, context_error: String) -> Dictionary:
+		paged: bool, context_error: String,allow_currency: bool=false) -> Dictionary:
 	if not context_error.is_empty():
 		return _failure("invalid_context", context_error)
 	if not metadata_by_uid is Dictionary or not locations is Dictionary:
@@ -56,6 +65,8 @@ static func _validate(metadata_by_uid: Variant, locations: Variant, context: Var
 		var item_error: String = _metadata_error(metadata_by_uid[uid])
 		if not item_error.is_empty():
 			return _failure("invalid_metadata", "%s：%s" % [uid, item_error])
+		if not allow_currency and metadata_by_uid[uid].kind == "currency":
+			return _failure("kind_mismatch","旧版本位置协议不支持货币物品")
 	for uid: Variant in locations.keys():
 		if not _stable_id(uid):
 			return _failure("invalid_location", "位置表 UID 必须是非空稳定字符串")
@@ -80,7 +91,7 @@ static func _validate(metadata_by_uid: Variant, locations: Variant, context: Var
 		if not location.has("kind") or typeof(location.kind) != TYPE_STRING:
 			return _failure("invalid_location", "%s 的位置缺少字符串 kind" % uid)
 		var kind: String = location.kind
-		var target_error: String = _paged_location_shape_error(location, kind) if paged else _location_shape_error(location, kind)
+		var target_error: String = _paged_location_shape_error(location, kind,context.columns,context.rows,context.pages) if paged else _location_shape_error(location, kind)
 		if not target_error.is_empty():
 			return _failure("invalid_location", "%s：%s" % [uid, target_error])
 
@@ -91,10 +102,10 @@ static func _validate(metadata_by_uid: Variant, locations: Variant, context: Var
 				var page: int = location.page if paged else 0
 				var width: int = item.size[0]
 				var height: int = item.size[1]
-				var columns: int = PAGED_BAG_COLUMNS if paged else BAG_COLUMNS
-				var rows: int = PAGED_BAG_ROWS if paged else BAG_ROWS
+				var columns: int = context.columns
+				var rows: int = context.rows
 				if x < 0 or y < 0 or x + width > columns or y + height > rows:
-					var bounds_message: String = ("%s 超出双页 8×6 背包边界" % uid) if paged else ("%s 超出 12×8 背包边界" % uid)
+					var bounds_message: String = "%s 超出 %d×%d 背包边界" % [uid,columns,rows]
 					return _failure("out_of_bounds", bounds_message)
 				for cell_y: int in range(y, y + height):
 					for cell_x: int in range(x, x + width):
@@ -206,6 +217,17 @@ static func _paged_context_error(value: Variant) -> String:
 	return ""
 
 
+static func _current_context_error(value: Variant) -> String:
+	var fields: Array[String] = ["columns","rows","pages","equipment_slots","skill_group_ids","passive_socket_ids","allow_recovery"]
+	if not _exact_string_keys(value,fields): return "分页背包协议字段无效"
+	if typeof(value.columns)!=TYPE_INT or value.columns!=CURRENT_BAG_COLUMNS or typeof(value.rows)!=TYPE_INT or value.rows!=CURRENT_BAG_ROWS or typeof(value.pages)!=TYPE_INT or value.pages!=CURRENT_BAG_PAGES:
+		return "当前背包必须为两页12列10行"
+	var old_context: Dictionary = value.duplicate(true)
+	old_context.columns=PAGED_BAG_COLUMNS
+	old_context.rows=PAGED_BAG_ROWS
+	return _paged_context_error(old_context)
+
+
 static func _metadata_error(value: Variant) -> String:
 	if not _exact_string_keys(value, ["kind", "category", "size"]):
 		return "metadata 必须严格包含 kind、category、size"
@@ -224,6 +246,8 @@ static func _metadata_error(value: Variant) -> String:
 		return "size 必须使用真正的整数"
 	if value.size[0] < 1 or value.size[0] > BAG_COLUMNS or value.size[1] < 1 or value.size[1] > BAG_ROWS:
 		return "size 必须在 1×1 至 12×8 范围内"
+	if value.kind == "currency" and value.size != [1, 1]:
+		return "currency 必须占用 1×1 格子"
 	return ""
 
 
@@ -262,7 +286,8 @@ static func _location_shape_error(value: Dictionary, kind: String) -> String:
 	return ""
 
 
-static func _paged_location_shape_error(value: Dictionary, kind: String) -> String:
+static func _paged_location_shape_error(value: Dictionary, kind: String,columns: int=PAGED_BAG_COLUMNS,rows: int=PAGED_BAG_ROWS,pages: int=PAGED_BAG_PAGES) -> String:
+	if typeof(value.get("kind"))!=TYPE_STRING or value.kind!=kind: return "位置kind必须是匹配的字符串"
 	if kind != "bag":
 		return _location_shape_error(value, kind)
 	if not _exact_string_keys(value, ["kind", "page", "x", "y"]):
@@ -270,11 +295,15 @@ static func _paged_location_shape_error(value: Dictionary, kind: String) -> Stri
 	for field: String in ["page", "x", "y"]:
 		if typeof(value[field]) != TYPE_INT:
 			return "背包页码和坐标必须使用真正的整数"
-	if value.page < 0 or value.page >= PAGED_BAG_PAGES:
+	if value.page < 0 or value.page >= pages:
 		return "背包页码超出 0..1 范围"
-	if value.x < 0 or value.x >= PAGED_BAG_COLUMNS or value.y < 0 or value.y >= PAGED_BAG_ROWS:
-		return "背包坐标超出双页 8×6 范围"
+	if value.x < 0 or value.x >= columns or value.y < 0 or value.y >= rows:
+		return "背包坐标超出 %d×%d 范围"%[columns,rows]
 	return ""
+
+
+static func _current_location_shape_error(value: Dictionary,kind: String)->String:
+	return _paged_location_shape_error(value,kind,CURRENT_BAG_COLUMNS,CURRENT_BAG_ROWS,CURRENT_BAG_PAGES)
 
 
 static func _unique_id_array(value: Variant) -> bool:

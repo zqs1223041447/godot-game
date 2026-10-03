@@ -55,8 +55,8 @@ static func move(metadata: Variant, locations: Variant, context: Variant, uid: V
 		"revision": int(revision) + 1, "moved_uid": uid, "displaced_uid": displaced}
 
 
-## v15's paged APIs are separate so existing callers and v14 fixtures keep the
-## original 12×8 destination shape and behavior.
+## Current paged transfers use the model's version-specific 240-cell contract.
+## The original unpaged APIs and v15 PagedBagLayout migration remain frozen.
 static func move_paged(metadata: Variant, locations: Variant, context: Variant, uid: Variant,
 		destination: Variant, revision: Variant, expected_revision: Variant) -> Dictionary:
 	var rejected: Dictionary = _initial_paged(metadata, locations, context, revision, expected_revision)
@@ -65,7 +65,7 @@ static func move_paged(metadata: Variant, locations: Variant, context: Variant, 
 	if not uid is String or not metadata.has(uid):
 		return _failure("unknown_item", "物品已变化。")
 	if not destination is Dictionary or not destination.get("kind") is String \
-			or not Layout._paged_location_shape_error(destination, destination.kind).is_empty():
+			or not Layout._current_location_shape_error(destination, destination.kind).is_empty():
 		return _failure("invalid_destination", "目标位置无效。")
 	if destination.kind == "recovery":
 		return _failure("recovery_destination_forbidden", "待安置位置只用于迁移，不能作为普通背包。")
@@ -91,13 +91,13 @@ static func move_paged(metadata: Variant, locations: Variant, context: Variant, 
 			candidate[displaced] = source.duplicate(true)
 	if source.kind == "recovery":
 		candidate = compact_recovery(candidate)
-	var checked: Dictionary = Layout.validate_paged(metadata, candidate, context)
+	var checked: Dictionary = Layout.validate_current(metadata, candidate, context)
 	if not checked.ok and not displaced.is_empty() and source.kind == "bag" \
 			and checked.error_code in ["bag_overlap", "out_of_bounds", "invalid_location"]:
 		var place: Dictionary = first_bag_space_paged(metadata, locations, context, displaced, uid)
 		if not place.is_empty():
 			candidate[displaced] = place
-			checked = Layout.validate_paged(metadata, candidate, context)
+			checked = Layout.validate_current(metadata, candidate, context)
 	if not checked.ok:
 		return _failure(checked.error_code, checked.reason)
 	return {"ok": true, "error_code": "", "reason": "", "locations": candidate,
@@ -139,14 +139,21 @@ static func arrange_paged(metadata: Variant, locations: Variant, context: Varian
 	var rejected: Dictionary = _initial_paged(metadata, locations, context, revision, expected_revision)
 	if not rejected.is_empty():
 		return rejected
-	var plan: Dictionary = BagLayout.arrange(metadata, locations, _legacy_layout_context(context))
-	if not plan.get("ok", false):
-		return _failure(plan.get("error_code", "cannot_arrange"), plan.get("reason", "整理失败，原位置保持。"))
-	var candidate: Dictionary = plan.locations.duplicate(true)
+	var candidate: Dictionary = locations.duplicate(true)
+	var bag_uids: Array[String] = []
 	for uid: String in locations:
-		if locations[uid].kind == "bag" and candidate[uid].kind == "recovery":
-			return _failure("cannot_arrange", "普通整理不能把物品放入待安置区，原位置保持。")
-	var checked: Dictionary = Layout.validate_paged(metadata, candidate, context)
+		if locations[uid].kind == "bag": bag_uids.append(uid)
+	bag_uids.sort_custom(func(a: String,b: String)->bool:
+		var aa: int = int(metadata[a].size[0])*int(metadata[a].size[1])
+		var ba: int = int(metadata[b].size[0])*int(metadata[b].size[1])
+		return a<b if aa==ba else aa>ba)
+	var occupied: Dictionary = {}
+	for uid: String in bag_uids:
+		var position: Dictionary = _space_in_paged_cells(metadata[uid].size,occupied,context)
+		if position.is_empty(): return _failure("cannot_arrange","当前物品无法整理，原位置保持。")
+		candidate[uid] = position
+		_occupy_paged(occupied,uid,position,metadata[uid].size)
+	var checked: Dictionary = Layout.validate_current(metadata, candidate, context)
 	if not checked.ok:
 		return _failure(checked.error_code, checked.reason)
 	if candidate == locations:
@@ -183,7 +190,7 @@ static func _initial_paged(metadata: Variant, locations: Variant, context: Varia
 	if not revision is int or revision < 0 or revision >= MAX_REVISION \
 			or not expected_revision is int or expected_revision != revision:
 		return _failure("stale_revision", "物品位置已变化，请重新操作。")
-	var checked: Dictionary = Layout.validate_paged(metadata, locations, context)
+	var checked: Dictionary = Layout.validate_current(metadata, locations, context)
 	return {} if checked.ok else _failure(checked.error_code, checked.reason)
 
 
@@ -198,7 +205,7 @@ static func _first_bag_space(metadata: Dictionary, locations: Dictionary, moving
 static func first_bag_space_paged(metadata: Variant, locations: Variant, context: Variant,
 		moving: Variant, vacated_uid: String = "") -> Dictionary:
 	if not metadata is Dictionary or not locations is Dictionary or not Layout._stable_id(moving) \
-			or not metadata.has(moving) or not Layout._paged_context_error(context).is_empty() \
+			or not metadata.has(moving) or not Layout._current_context_error(context).is_empty() \
 			or not Layout._metadata_error(metadata[moving]).is_empty():
 		return {}
 	var placed_metadata: Dictionary = {}
@@ -206,15 +213,14 @@ static func first_bag_space_paged(metadata: Variant, locations: Variant, context
 		if not uid is String or not metadata.has(uid):
 			return {}
 		placed_metadata[uid] = metadata[uid]
-	var inspected: Dictionary = BagLayout.inspect_layout(placed_metadata, locations, _legacy_layout_context(context))
+	var inspected: Dictionary = Layout.validate_current(placed_metadata,locations,context)
 	if not inspected.get("ok", false):
 		return {}
 	var occupied: Dictionary = inspected.occupied_cells.duplicate(true)
 	for cell: Variant in occupied.keys():
 		if occupied[cell] == moving or (not vacated_uid.is_empty() and occupied[cell] == vacated_uid):
 			occupied.erase(cell)
-	var result: Dictionary = BagLayout.find_space(metadata[moving].size, occupied)
-	return result.location.duplicate(true) if result.get("ok", false) else {}
+	return _space_in_paged_cells(metadata[moving].size,occupied,context)
 
 
 static func _legacy_layout_context(context: Variant) -> Dictionary:
@@ -253,3 +259,22 @@ static func _target_key(location: Dictionary) -> String:
 static func _failure(code: String, reason: String) -> Dictionary:
 	return {"ok": false, "error_code": code, "reason": reason, "locations": {},
 		"revision": -1, "moved_uid": "", "displaced_uid": ""}
+
+
+static func _space_in_paged_cells(dimensions: Array,occupied: Dictionary,context: Dictionary)->Dictionary:
+	for page: int in range(context.pages):
+		for y: int in range(int(context.rows)-int(dimensions[1])+1):
+			for x: int in range(int(context.columns)-int(dimensions[0])+1):
+				var fits := true
+				for dy: int in range(dimensions[1]):
+					for dx: int in range(dimensions[0]):
+						if occupied.has("bag:%d:%d:%d"%[page,x+dx,y+dy]): fits=false; break
+					if not fits: break
+				if fits: return {"kind":"bag","page":page,"x":x,"y":y}
+	return {}
+
+
+static func _occupy_paged(occupied: Dictionary,uid: String,location: Dictionary,dimensions: Array)->void:
+	for y: int in range(location.y,location.y+dimensions[1]):
+		for x: int in range(location.x,location.x+dimensions[0]):
+			occupied["bag:%d:%d:%d"%[location.page,x,y]]=uid

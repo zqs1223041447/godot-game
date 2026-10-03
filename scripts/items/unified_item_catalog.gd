@@ -7,6 +7,7 @@ const Equipment = preload("res://scripts/items/equipment_catalog.gd")
 const Jewels = preload("res://scripts/jewel_data.gd")
 const Slots = preload("res://scripts/items/equipment_slots.gd")
 const Gems = preload("res://scripts/items/gem_catalog.gd")
+const Currency = preload("res://scripts/items/currency_catalog.gd")
 const Locations = preload("res://scripts/items/item_location_rules.gd")
 const FIELDS: Array[String] = ["uid", "kind", "definition_id", "payload"]
 
@@ -29,6 +30,10 @@ static func wrap_jewel(instance: Variant) -> Dictionary:
 	return {"uid": instance.id, "kind": "jewel", "definition_id": "jewel:" + str(instance.base), "payload": instance.duplicate(true)}
 
 
+static func calibration_shard(uid: Variant, quantity: Variant) -> Dictionary:
+	return Currency.make_instance(uid, quantity)
+
+
 static func validate_instance(value: Variant) -> bool:
 	if not Locations._exact_string_keys(value, FIELDS) or not Locations._stable_id(value.uid) \
 			or not value.kind is String or not value.definition_id is String or not value.payload is Dictionary:
@@ -44,6 +49,8 @@ static func validate_instance(value: Variant) -> bool:
 		"jewel":
 			return value.definition_id.begins_with("jewel:") and Jewels.validate_instance(value.payload) \
 				and value.payload.id == value.uid and "jewel:" + str(value.payload.base) == value.definition_id
+		"currency":
+			return Currency.validate_instance(value)
 		"skill_gem", "support_gem":
 			return Gems.validate_instance(value)
 	return false
@@ -69,6 +76,8 @@ static func definition_for_instance(value: Variant) -> Dictionary:
 				"description": Jewels.get_description(jewel), "rarity": jewel.rarity,
 				"color": Jewels.get_color(jewel), "stats": Jewels.get_stats(jewel),
 				"size": Vector2i.ONE, "category": "", "effects": []}
+		"currency":
+			result = Currency.definition(value.payload.quantity)
 		"skill_gem", "support_gem":
 			result = Gems.metadata_for_instance(value)
 			result["category"] = ""
@@ -112,6 +121,11 @@ static func decode_instance(raw: Variant) -> Dictionary:
 			return {}
 		item.payload.level = int(item.payload.level)
 		item.payload.quality = int(item.payload.quality)
+	elif item.get("kind") == "currency":
+		if not item.payload is Dictionary or not Locations._exact_string_keys(item.payload, ["quantity"]) \
+				or not _whole(item.payload.quantity, 1, Currency.STACK_LIMIT):
+			return {}
+		item.payload.quantity = int(item.payload.quantity)
 	elif item.get("kind") == "equipment" and item.payload is Dictionary and not item.payload.is_empty():
 		if not Equipment.validate_instance(item.payload):
 			return {}
@@ -132,8 +146,11 @@ static func decode_location(raw: Variant) -> Dictionary:
 static func decode_paged_location(raw: Variant) -> Dictionary:
 	return _decode_location(raw, true)
 
+static func decode_current_location(raw: Variant) -> Dictionary:
+	return _decode_location(raw,true,true)
 
-static func _decode_location(raw: Variant, paged: bool) -> Dictionary:
+
+static func _decode_location(raw: Variant, paged: bool, expanded: bool=false) -> Dictionary:
 	if not raw is Dictionary or not raw.get("kind") is String:
 		return {}
 	var value: Dictionary = raw.duplicate(true)
@@ -150,7 +167,7 @@ static func _decode_location(raw: Variant, paged: bool) -> Dictionary:
 		if not value.has(field) or not _whole(value[field], 0, maximum):
 			return {}
 		value[field] = int(value[field])
-	var shape_error: String = Locations._paged_location_shape_error(value, str(value.kind)) if paged else Locations._location_shape_error(value, str(value.kind))
+	var shape_error: String = Locations._current_location_shape_error(value,str(value.kind)) if expanded else Locations._paged_location_shape_error(value, str(value.kind)) if paged else Locations._location_shape_error(value, str(value.kind))
 	return value if shape_error.is_empty() else {}
 
 

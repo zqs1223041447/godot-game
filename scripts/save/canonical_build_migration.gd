@@ -134,6 +134,14 @@ static func location_context(candidate: Dictionary, passive_socket_ids: Array = 
 
 
 static func paged_location_context(candidate: Dictionary, passive_socket_ids: Array = []) -> Dictionary:
+	var context := v15_location_context(candidate,passive_socket_ids)
+	context.columns = Layout.CURRENT_BAG_COLUMNS
+	context.rows = Layout.CURRENT_BAG_ROWS
+	context.pages = Layout.CURRENT_BAG_PAGES
+	return context
+
+
+static func v15_location_context(candidate: Dictionary, passive_socket_ids: Array = []) -> Dictionary:
 	var groups: Array[String] = []
 	for group: Dictionary in candidate.skill_groups:
 		groups.append(group.id)
