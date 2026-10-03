@@ -28,6 +28,11 @@ const ART_PATHS: Dictionary = {
 	"tideglass": "res://assets/art/equipment/tideglass.png",
 	"windweave": "res://assets/art/equipment/windweave.png",
 	"branchfinder": "res://assets/art/equipment/branchfinder.png",
+	"nine_slot_etched_ring": "res://assets/art/equipment/nine_slot_etched_ring.png",
+	"nine_slot_trail_boots": "res://assets/art/equipment/nine_slot_trail_boots.png",
+	"nine_slot_folded_belt": "res://assets/art/equipment/nine_slot_folded_belt.png",
+	"nine_slot_threaded_gloves": "res://assets/art/equipment/nine_slot_threaded_gloves.png",
+	"nine_slot_slate_helmet": "res://assets/art/equipment/nine_slot_slate_helmet.png",
 }
 const JEWEL_IDS: Array[String] = ["emberheart", "tideglass", "windweave", "branchfinder"]
 
