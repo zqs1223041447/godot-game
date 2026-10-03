@@ -79,7 +79,12 @@ for folder in ("assets/ui/grimoire", "assets/art/equipment"):
             checksum_file = imported.with_suffix(".md5")
             source_md5 = re.findall(r'^source_md5="([0-9a-f]{32})"', checksum_file.read_text(), re.MULTILINE)
             assert source_md5 == [hashlib.md5(source.read_bytes()).hexdigest()], "Texture cache came from different PNG bytes: " + source_name
-            assert packed_payloads[import_name] == import_file.read_bytes(), "Packed import settings differ: " + source_name
+            # Godot deliberately exports only [remap], removing editor-only
+            # [deps]/[params] and adding a trailing NUL. Compare that runtime
+            # mapping exactly rather than requiring an impossible whole-file match.
+            source_remap = import_file.read_text().split("[deps]", 1)[0].strip()
+            packed_remap = packed_payloads[import_name].decode("utf-8").rstrip("\0").strip()
+            assert packed_remap == source_remap, "Packed runtime import mapping differs: " + source_name
             assert packed_payloads[imported_paths[0]] == imported.read_bytes(), "Packed texture differs from fresh source cache: " + source_name
             painted_cache_verified.append({"source": source_name, "source_sha256": source_hash,
                 "imported": imported_paths[0], "texture_sha256": hashlib.sha256(imported.read_bytes()).hexdigest()})
