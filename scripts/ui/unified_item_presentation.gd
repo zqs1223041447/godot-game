@@ -35,7 +35,7 @@ const OPERATION_LABELS: Dictionary = {
 	"projectile_speed_multiplier":"投射物速度", "slow_duration_multiplier":"减速时长",
 	"chain_extra_targets":"额外连锁目标", "chain_followup_range_multiplier":"后续寻敌距离",
 	"add_initial_projectiles":"初始投射物", "add_pierce":"穿透",
-	"primary_component_more":"主命中伤害", "other_components_more":"其他伤害",
+	"primary_component_more":"主命中伤害", "other_components_more":"非所选类型伤害",
 }
 
 static var _base_recipe_tag_cache: Dictionary = {}
@@ -189,15 +189,29 @@ static func _cached_base_recipe_tags(skill_id: String) -> Array[String]:
 		_base_recipe_tag_compile_count += 1
 		if bool(compiled.get("ok", false)):
 			var packets: Dictionary = compiled.get("packets", {})
-			for value: Variant in packets.values():
-				if value is Array:
-					for packet: Variant in value:
-						if packet is Dictionary:
-							_append_packet_tags(tags, packet)
-				elif value is Dictionary:
-					_append_packet_tags(tags, value)
+			for packet: Dictionary in _intrinsic_recipe_packets(skill_id, packets):
+				_append_packet_tags(tags, packet)
 	_base_recipe_tag_cache[skill_id] = tags.duplicate()
 	return tags
+
+
+static func _intrinsic_recipe_packets(skill_id: String, packets: Dictionary) -> Array[Dictionary]:
+	var result: Array[Dictionary] = []
+	var roles: Array[String] = []
+	match skill_id:
+		"bolt", "frost": roles = ["projectile"]
+		"tornado": roles = ["parent", "child"]
+		"nova", "meteor": roles = ["direct"]
+		"chain": roles = ["bounces"]
+	for role: String in roles:
+		var value: Variant = packets.get(role)
+		if value is Dictionary:
+			result.append(value)
+		elif value is Array:
+			for packet: Variant in value:
+				if packet is Dictionary:
+					result.append(packet)
+	return result
 
 
 static func _append_packet_tags(target: Array[String], packet: Dictionary) -> void:
@@ -324,7 +338,7 @@ static func _operation_entry(operation: Dictionary, source_name: String) -> Dict
 		display_value = "×%.2f" % amount
 		polarity = _factor_polarity(amount, operation_id in ["mana_multiplier", "cooldown_multiplier"])
 	elif operation_id in ["projectile_hit_more", "primary_hit_more", "area_hit_more"]:
-		display_value = _signed_percent(amount)
+		display_value = _total_more_percent(amount)
 		polarity = _delta_polarity(amount)
 	elif operation_id in ["add_initial_projectiles", "add_pierce", "chain_extra_targets"]:
 		display_value = _signed_number(amount)
@@ -333,8 +347,8 @@ static func _operation_entry(operation: Dictionary, source_name: String) -> Dict
 		var damage_type: String = str(operation.get("damage_type",""))
 		if not DAMAGE_LABELS.has(damage_type):
 			return {}
-		label = ("主命中" if operation_id == "primary_component_more" else "其他") + str(DAMAGE_LABELS[damage_type]) + "伤害"
-		display_value = _signed_percent(amount)
+		label = ("主命中" + str(DAMAGE_LABELS[damage_type]) if operation_id == "primary_component_more" else "非" + str(DAMAGE_LABELS[damage_type])) + "伤害"
+		display_value = _total_more_percent(amount)
 		polarity = _delta_polarity(amount)
 	if polarity == "neutral":
 		return {}
@@ -361,8 +375,11 @@ static func _signed_number(amount: float) -> String:
 	return ("+" if amount > 0.0 else "") + str(amount)
 
 
-static func _signed_percent(amount: float) -> String:
-	return ("+" if amount > 0.0 else "") + "%s%%" % str(amount * 100.0)
+static func _total_more_percent(amount: float) -> String:
+	var direction: String = "总增" if amount > 0.0 else "总降"
+	var percent: float = absf(amount) * 100.0
+	var percent_text: String = str(roundi(percent)) if is_equal_approx(percent, roundf(percent)) else str(percent)
+	return "%s %s%%" % [direction, percent_text]
 
 
 static func _append_current_preview(model: RefCounted, location: Dictionary, result: Dictionary,

@@ -5,6 +5,7 @@ const GemCatalogScript = preload("res://scripts/items/gem_catalog.gd")
 const Combat = preload("res://scripts/combat/combat_data.gd")
 const Compiler = preload("res://scripts/combat/skill_compiler.gd")
 const Preview = preload("res://scripts/combat/damage_preview.gd")
+const ElementSupports = preload("res://scripts/combat/element_support_rules.gd")
 
 class PresentationModel extends RefCounted:
 	var items: Dictionary = {}
@@ -95,13 +96,69 @@ func _run() -> void:
 	_expect((support_view.tags as Array).has("需要投射物命中"), "support requirement tag comes from GemCatalog capabilities")
 	_expect(_modifier_polarity(support_view.modifiers, "缓速强击辅助 · 主命中伤害") == "benefit", "support modifier label/value comes from operation metadata")
 	_expect(_modifier_polarity(support_view.modifiers, "缓速强击辅助 · 魔力消耗") == "cost", "support cost is represented by typed polarity")
+	_expect(_modifier_value(support_view.modifiers, "缓速强击辅助 · 主命中伤害") == "总增 20%", "more modifier copy distinguishes a total increase from additive increased")
 	_expect(support_view.preview_lines == skill_view.preview_lines, "support displays the same current group preview separately from its base properties")
 	_expect(_stat_value(support_view.base_stats, "宝石等级") == "1" and _stat_value(support_view.base_stats, "品质") == "0", "support base properties use the fixed level/quality payload")
 	var repeated_support_view: Dictionary = Presenter.view(model, support_item.uid)
 	_expect(repeated_support_view.tags == support_view.tags and Presenter._support_applicability_scan_count == applicability_scans_before + 1, "repeated support hovers reuse cached compatibility results")
+	_test_all_catalog_gems_and_element_modifiers(model)
 
 	print("unified_item_presentation_test: %d checks, %d failures" % [checks, failures])
 	quit(1 if failures else 0)
+
+
+func _test_all_catalog_gems_and_element_modifiers(model: PresentationModel) -> void:
+	var definitions: Dictionary = GemCatalogScript.definitions()
+	_expect(definitions.size() == 24, "coverage traverses every 8 skill and 16 support gem in GemCatalog")
+	var skill_count: int = 0
+	for definition_id: String in definitions:
+		var uid: String = "coverage-" + definition_id.replace(":", "-")
+		var item: Dictionary = GemCatalogScript.create_instance(uid, definition_id)
+		var definition: Dictionary = GemCatalogScript.metadata_for_instance(item)
+		model.items[uid] = item
+		model.definitions[uid] = definition
+		var item_view: Dictionary = Presenter.view(model, uid)
+		_expect(not item_view.is_empty(), "catalog view builds for %s" % definition_id)
+		if item.kind != "skill_gem":
+			continue
+		skill_count += 1
+		var skill_id: String = str(definition.skill_id)
+		var tags: Array = item_view.get("tags", [])
+		if skill_id in ["bolt", "frost", "tornado"]:
+			_expect(not tags.has("爆炸") and not tags.has("次级") and not tags.has("范围"), "%s does not inherit the compiler's always-prepared secondary explosion tags" % skill_id)
+		if skill_id == "tornado":
+			_expect(tags.has("投射物") and tags.has("分裂"), "tornado keeps its own projectile and split capability tags")
+		if skill_id in ["nova", "meteor"]:
+			_expect(tags.has("范围"), "%s retains its intrinsic direct area tag" % skill_id)
+	_expect(skill_count == 8, "all eight active skill gems were checked")
+
+	var element_cases: Array[Dictionary] = [
+		{"id":"physical_focus", "type":"physical", "label":"物理"},
+		{"id":"fire_focus", "type":"fire", "label":"火焰"},
+		{"id":"cold_focus", "type":"cold", "label":"冰霜"},
+		{"id":"lightning_focus", "type":"lightning", "label":"闪电"},
+	]
+	for case: Dictionary in element_cases:
+		var definition: Dictionary = ElementSupports.get_definition(str(case.id))
+		var primary_operation: Dictionary = _operation_for(definition.operations, "primary_component_more")
+		var other_operation: Dictionary = _operation_for(definition.operations, "other_components_more")
+		var primary: Dictionary = Presenter._operation_entry(primary_operation, str(definition.name))
+		var other: Dictionary = Presenter._operation_entry(other_operation, str(definition.name))
+		_expect(primary.label == "%s · 主命中%s伤害" % [definition.name, case.label], "%s identifies its selected native component" % case.id)
+		_expect(other.label == "%s · 非%s伤害" % [definition.name, case.label], "%s uses the exclusion scope for all other components" % case.id)
+		_expect(primary.value == "总增 20%" and primary.polarity == "benefit", "%s presents multiplicative gains as total increase" % case.id)
+		_expect(other.value == "总降 20%" and other.polarity == "cost", "%s presents multiplicative losses as total decrease" % case.id)
+	var negative_more: Dictionary = Presenter._operation_entry({"op":"projectile_hit_more", "value":-0.2}, "测试辅助")
+	_expect(negative_more.value == "总降 20%", "negative more modifiers use total decrease wording")
+	var positive_more: Dictionary = Presenter._operation_entry({"op":"projectile_hit_more", "value":0.25}, "测试辅助")
+	_expect(positive_more.value == "总增 25%", "positive more modifiers use total increase wording")
+
+
+func _operation_for(operations: Array, operation_id: String) -> Dictionary:
+	for operation: Variant in operations:
+		if operation is Dictionary and operation.get("op", "") == operation_id:
+			return operation
+	return {}
 
 
 func _stat_value(entries: Variant, label: String) -> String:
@@ -119,4 +176,13 @@ func _modifier_polarity(entries: Variant, label: String) -> String:
 	for row: Variant in entries:
 		if row is Dictionary and row.get("label", "") == label:
 			return str(row.get("polarity", ""))
+	return ""
+
+
+func _modifier_value(entries: Variant, label: String) -> String:
+	if not entries is Array:
+		return ""
+	for row: Variant in entries:
+		if row is Dictionary and row.get("label", "") == label:
+			return str(row.get("value", ""))
 	return ""

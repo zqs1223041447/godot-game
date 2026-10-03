@@ -29,3 +29,9 @@ godot --headless --path . --script res://tests/unified_item_presentation_test.gd
 ```
 
 2026-10-03、Godot 4.6.3：27 项、0 失败。测试使用 `GemCatalog` 真正义项、真实 `SkillCompiler` cast 和仿真只读模型，验证字段来源、当前预览与基础数据隔离、支持辅助修饰符、缓存及输入快照不变。
+
+## v21 语义复核（2026-10-03）
+
+- 主动宝石的基础标签只从该技能的内在配方事件读取：bolt/frost 取 projectile，tornado 取 parent/child，nova/meteor 取 direct，chain 取 bounces。编译器会预备给装备独立爆炸等组合效果使用的 `secondary` 事件；这些预备事件不等于宝石自带标签，不计入 bolt/frost/tornado 的基础“爆炸 / 次级 / 范围”标签。tornado 保留自己的投射物/分裂，nova/meteor 保留 direct 范围标签。装备提供的独立爆炸等当前组合效果仍由父级模型的施放快照提供给 `preview_lines`，不会写回固有基础标签。
+- `other_components_more` 标签明确标记排除范围为“非物理 / 非火焰 / 非冰霜 / 非闪电伤害”，而不是笼统的“其他伤害”。乘算 `more` 值使用“总增 20%”或“总降 20%”表述，避免与加算属性的“增加”混淆。
+- 最新 `tests/unified_item_presentation_test.gd`：78 项、0 失败；遍历 `GemCatalog` 全部 24 个定义，对八种主动宝石逐一核对标签边界，并验证四种 ElementSupports 的排除标签、总增/总降语义。历史 27 项记录是前一轮测试覆盖数。

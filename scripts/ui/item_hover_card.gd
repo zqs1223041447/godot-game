@@ -93,7 +93,8 @@ func _input(event: InputEvent) -> void:
 	for scroll: ScrollContainer in find_children("ItemDetailsScroll", "ScrollContainer", true, false):
 		if scroll.get_global_rect().has_point(event.position):
 			scroll.scroll_vertical += direction * wheel_steps * 36
-			break
+			get_viewport().set_input_as_handled()
+			return
 
 
 func _ensure_interface() -> void:
@@ -108,7 +109,7 @@ func _ensure_interface() -> void:
 	_row = HBoxContainer.new()
 	_row.name = "ItemHoverCards"
 	_row.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_row.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_row.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
 	_row.add_theme_constant_override("separation", int(COLUMN_GAP))
 	add_child(_row)
 
@@ -144,6 +145,11 @@ func _refresh_layout() -> void:
 	for index: int in range(views.size()):
 		var role: String = "悬停物品" if index == 0 else "已装备目标 %d" % index
 		_row.add_child(_build_card(views[index], role, index, column_width, card_height, scroll_height))
+	_set_mouse_transparent(_row)
+	for scroll: ScrollContainer in find_children("ItemDetailsScroll", "ScrollContainer", true, false):
+		scroll.focus_mode = Control.FOCUS_NONE
+		scroll.get_v_scroll_bar().mouse_filter = Control.MOUSE_FILTER_IGNORE
+		scroll.get_h_scroll_bar().mouse_filter = Control.MOUSE_FILTER_IGNORE
 	PresentationTheme.apply_font_scale(self, font_scale)
 
 	size = Vector2(total_width, card_height)
@@ -188,6 +194,15 @@ func _place(bounds: Rect2, anchor: Rect2, card_size: Vector2) -> Vector2:
 	return Vector2(x, y)
 
 
+func _set_mouse_transparent(node: Node) -> void:
+	if node is Control:
+		var control := node as Control
+		control.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		control.focus_mode = Control.FOCUS_NONE
+	for child: Node in node.get_children(true):
+		_set_mouse_transparent(child)
+
+
 func _build_card(view: Dictionary, role: String, index: int, width: float,
 		height: float, scroll_height: float) -> Control:
 	var column := Control.new()
@@ -210,6 +225,7 @@ func _build_card(view: Dictionary, role: String, index: int, width: float,
 
 	var content := VBoxContainer.new()
 	content.name = "CardContent"
+	content.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	content.add_theme_constant_override("separation", 5)
 	content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	content.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -231,11 +247,16 @@ func _build_card(view: Dictionary, role: String, index: int, width: float,
 
 	var body := VBoxContainer.new()
 	body.name = "ItemDetails"
+	body.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	body.add_theme_constant_override("separation", 4)
 	scroll.add_child(body)
 	var title := _label(_text(view, "name", "未命名物品"), 22, PresentationTheme.TEXT)
 	title.name = "ItemName"
+	var title_font := FontVariation.new()
+	title_font.base_font = get_theme_default_font()
+	title_font.variation_embolden = 0.45
+	title.add_theme_font_override("font", title_font)
 	title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	title.tooltip_text = str(view.get("uid", ""))
@@ -339,6 +360,7 @@ func _add_stats(parent: VBoxContainer, entries: Array[Dictionary], width: float)
 	parent.add_child(heading)
 	var grid := GridContainer.new()
 	grid.name = "BaseStats"
+	grid.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	grid.columns = 2
 	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	grid.add_theme_constant_override("h_separation", 8)

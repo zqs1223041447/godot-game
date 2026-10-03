@@ -86,3 +86,12 @@ ITEM_HOVER_CARD_CAPTURE_DIR=/tmp/item-hover-card-captures \
 - `tests/gem_icon_test.gd`：26 项、0 失败；覆盖宽/高纹理 aspect-fit、空纹理占位、主动/辅助标记角色与父槽拖放。
 - `tests/unified_item_presentation_test.gd`：26 项、0 失败；覆盖 Catalog 能力、编译配方标签、SupportRegistry 家族/适用性与操作、静态基础属性和模型施放预览的分离、重复悬停缓存及只读快照。
 - 本执行环境没有 `DISPLAY`、`WAYLAND_DISPLAY` 或 Xvfb，因此未生成真实渲染图，也未进行像素验收。用户提供的两张 Library 截图在授权 materialize 流程中未返回本地文件，按流程仅重试一次后仍不可读；已检查仓库中的羊皮纸与技能/宝石参考资源，但没有将它们当成用户截图。
+
+## v21 输入路由复核（2026-10-03）
+
+- 最新 `tests/item_hover_card_test.gd`：213 项、0 失败。用真实 `Viewport.push_input` 鼠标移动/按下/拖动/释放事件，在场景树顺序上先添加可拖动来源和放置目标，再把可见卡片添加到最前层；断言实际 hovered control、`_get_drag_data` 返回 UID、拖动期间卡片隐藏、目标收到了相同 UID，并捕获最终释放点 `(352, 204)` 落在目标矩形内。
+- 测试包含负对照：把卡片 `ItemDetails` 临时改成 `MOUSE_FILTER_PASS`，实际 hover 落在其上，来源未产生 drag UID；恢复为 `MOUSE_FILTER_IGNORE` 后，同样的源点实际 hover 到下层来源，拖放成功。卡片中的容器、详情、基础属性 Grid、内部 ScrollContainer 与引擎生成的滚动条都断言为 IGNORE。此证明使用注入到 Viewport 的 GUI 事件，不代表物理鼠标验收。
+- 卡片和底层库存 ScrollContainer 同时有溢出内容；指针位于卡片详情区时，滚轮只增加卡片的 `scroll_vertical`，并确认底层仍为 0。卡片在 `_input` 中移动详情滚动量后调用 `set_input_as_handled()`，阻止同一滚轮继续滚动底层。
+- 拖放回调中的 `_drop_data(at_position)` 局部坐标在 headless 测试下与全局释放点不一致；测试使用目标当前矩形、`gui_get_hovered_control()` 和收到的 Viewport 鼠标释放坐标验证目标命中，没有将该局部回调坐标当作物理鼠标读数。
+- 同轮 `tests/gem_icon_test.gd` 为 26 项、0 失败；`tests/unified_item_presentation_test.gd` 为 78 项、0 失败。
+- 执行环境没有 `DISPLAY`、`WAYLAND_DISPLAY` 或 Xvfb，未生成本轮真实渲染图或像素验收结果。
