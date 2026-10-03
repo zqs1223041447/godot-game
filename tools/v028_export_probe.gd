@@ -39,9 +39,9 @@ func _initialize() -> void:
 	FileAccess.open(output.path_join("GODOT_LICENSE.txt"),FileAccess.WRITE).store_string(Engine.get_license_text())
 	FileAccess.open(output.path_join("GODOT_COPYRIGHT.txt"),FileAccess.WRITE).store_string(JSON.stringify(Engine.get_copyright_info(),"\t",true,true))
 	var licenses: Dictionary = Engine.get_license_info()
-	var names := licenses.keys(); names.sort()
+	var license_names := licenses.keys(); license_names.sort()
 	var text := "Godot 4.6.3 third-party license texts\n\n"
-	for name: String in names: text += name + "\n" + str(licenses[name]) + "\n\n"
+	for name: String in license_names: text += name + "\n" + str(licenses[name]) + "\n\n"
 	FileAccess.open(output.path_join("GODOT_THIRD_PARTY_LICENSES.txt"),FileAccess.WRITE).store_string(text)
 	print(JSON.stringify(report))
 	quit(0 if ok else 1)
