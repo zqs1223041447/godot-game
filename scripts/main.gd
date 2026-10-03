@@ -20,6 +20,11 @@ const AttackHit = preload("res://scripts/combat/attack_hit_rules.gd")
 const Projectiles = preload("res://scripts/combat/projectile_runtime.gd")
 const Monsters = preload("res://scripts/monsters/monster_catalog.gd")
 const MonsterLifecycle = preload("res://scripts/monsters/monster_runtime.gd")
+const FlaskRuntime = preload("res://scripts/combat/flask_runtime.gd")
+const FlaskCatalog = preload("res://scripts/items/flask_catalog.gd")
+var flask_runtime = FlaskRuntime.new()
+var _flask_owner_identity: int = -1
+var _flask_synced_revision: int = -1
 const TelegraphRuntime = preload("res://scripts/combat/telegraphed_area_runtime.gd")
 const EncounterCompiler = preload("res://scripts/encounters/encounter_compiler.gd")
 const EncounterCatalog = preload("res://scripts/encounters/encounter_catalog.gd")
@@ -166,6 +171,7 @@ func get_stats() -> Dictionary:
 
 
 func _on_build_changed() -> void:
+	_sync_flasks()
 	_stats = state.get_stats()
 	health = minf(health, float(_stats.max_health))
 	mana = minf(mana, float(_stats.max_mana))
@@ -257,6 +263,7 @@ func _quit_game() -> void:
 
 
 func restart_run() -> void:
+	_sync_flasks(true)
 	run_revision += 1
 	_stats = state.get_stats()
 	health = float(_stats.max_health)
@@ -308,6 +315,47 @@ func restart_run() -> void:
 	queue_redraw()
 
 
+func _sync_flasks(reset_run: bool=false) -> void:
+	var owner: int=state.get_instance_id()
+	var revision: int=int(state.revision()) if state.has_method("revision") else 0
+	if not reset_run and owner==_flask_owner_identity and revision==_flask_synced_revision:return
+	var owned: Dictionary=state.owned_flasks() if state.has_method("owned_flasks") else {}
+	if reset_run or owner!=_flask_owner_identity:flask_runtime.reset(owned)
+	else:flask_runtime.sync_owned(owned)
+	_flask_owner_identity=owner;_flask_synced_revision=revision
+
+func flask_statuses() -> Array[Dictionary]:
+	_sync_flasks()
+	var result: Array[Dictionary]=[]
+	if not state.has_method("flask_slots"):return result
+	for slot:Dictionary in state.flask_slots():
+		var row:Dictionary=slot.duplicate(true)
+		if slot.uid.is_empty():row.merge({"charges":0,"max_charges":FlaskCatalog.MAX_CHARGES,"cost":FlaskCatalog.USE_COST,"active":false,"resource_active":false,"remaining_seconds":0.0,"can_use":false,"code":"empty_slot","reason":"药剂槽为空"})
+		else:
+			var resource:String=slot.resource
+			row.merge(flask_runtime.status(slot.uid,health if resource=="health" else mana,float(_stats.max_health) if resource=="health" else float(_stats.max_mana)),true)
+			if not alive:row.can_use=false;row.code="dead";row.reason="角色已死亡"
+			elif is_instance_valid(hud) and hud.is_blocking():row.can_use=false;row.code="paused";row.reason="暂停时不能使用药剂"
+		result.append(row)
+	return result
+
+func use_flask(slot_id: Variant) -> Dictionary:
+	if not slot_id is String:return {"ok":false,"code":"invalid_slot","reason":"药剂槽无效"}
+	for entry:Dictionary in flask_statuses():
+		if entry.slot_id!=slot_id:continue
+		if not entry.can_use:
+			entry.ok=false
+			return entry
+		var resource:String=entry.resource
+		var result:Dictionary=flask_runtime.use(entry.uid,health if resource=="health" else mana,float(_stats.max_health) if resource=="health" else float(_stats.max_mana))
+		if result.ok:
+			var definition:Dictionary=FlaskCatalog.definition(entry.definition_id)
+			_add_ring(player_pos,30.0,definition.color,0.35)
+			_add_text(player_pos+Vector2(0,-38),"生命恢复" if resource=="health" else "魔力恢复",definition.color)
+		return result
+	return {"ok":false,"code":"invalid_slot","reason":"药剂槽无效"}
+
+
 func toggle_auto_fire() -> void:
 	auto_fire = not auto_fire
 	hud.notify("自动攻击：开启" if auto_fire else "自动攻击：关闭 · 按住鼠标左键射击")
@@ -317,6 +365,10 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	if not event is InputEventKey or not event.pressed or event.echo:
 		return
 	var key: int = event.physical_keycode
+	if event.alt_pressed and not event.ctrl_pressed and not event.meta_pressed and key>=KEY_1 and key<=KEY_5:
+		use_flask("flask_%d"%(key-KEY_1+1))
+		get_viewport().set_input_as_handled()
+		return
 	if hud.handle_menu_key(key, event.pressed, event.echo):
 		get_viewport().set_input_as_handled()
 		return
@@ -380,6 +432,9 @@ func _tick(delta: float) -> void:
 	screen_shake = maxf(0.0, screen_shake - delta * 15.0)
 	mana = minf(float(_stats.max_mana), mana + float(_stats.mana_regen) * delta)
 	health = minf(float(_stats.max_health),health+float(_stats.get("life_regen",0.0))*delta)
+	var flask_gain: Dictionary = flask_runtime.advance(delta,{"health":health,"mana":mana},{"health":float(_stats.max_health),"mana":float(_stats.max_mana)})
+	health = minf(float(_stats.max_health),health+float(flask_gain.health))
+	mana = minf(float(_stats.max_mana),mana+float(flask_gain.mana))
 	if damage_delay <= 0.0:
 		shield = minf(float(_stats.max_shield), shield + float(_stats.shield_regen) * shield_recovery_time)
 	_move_player(delta)
@@ -1095,6 +1150,12 @@ func _apply_enemy_settlement(enemy: Dictionary, settlement: Dictionary, color: C
 		var eligible: bool = bool(death.reward) and not demo_mode
 		if eligible:
 			reward_kills += 1
+			_sync_flasks()
+			var equipped_flasks: Array=[]
+			if state.has_method("flask_slots"):
+				for slot:Dictionary in state.flask_slots():
+					if not slot.uid.is_empty():equipped_flasks.append(slot.uid)
+			flask_runtime.charge_rewarded_kill(equipped_flasks)
 		var leveled: bool = state.add_xp(int(enemy.get("xp_reward", 0))) if eligible else false
 		if leveled:
 			health = minf(float(_stats.max_health), health + 25.0)
@@ -1109,6 +1170,9 @@ func _apply_enemy_settlement(enemy: Dictionary, settlement: Dictionary, color: C
 		if eligible and reward_kills % 30 == 0 and state.has_method("award_random_gem"):
 			var gem_uid:String=state.award_random_gem(rng)
 			hud.notify("获得宝石："+str(state.item_definition(gem_uid).name)+" · 按 K 装配" if not gem_uid.is_empty() else "背包空间不足，无法领取宝石；可在 I 中整理或丢弃重复宝石")
+		if eligible and reward_kills % FlaskCatalog.REWARD_INTERVAL == 0 and state.has_method("award_flask"):
+			var flask_uid: String = state.award_flask(FlaskCatalog.reward_definition(reward_kills))
+			hud.notify("获得药剂："+str(state.item_definition(flask_uid).name) if not flask_uid.is_empty() else "背包空间不足，未领取药剂；已有物品保留")
 		if eligible and enemy.get("rarity", "") == "boss":
 			_award_kill_special_jewel()
 		if eligible and reward_kills % 4 == 0:
@@ -1224,6 +1288,7 @@ func hit_player_components(components: Variant, source_id: int = 0, delivery_tag
 	screen_shake = 2.5
 	_add_text(player_pos + Vector2(0, -30), "−%d" % int(amount), Color("94dafa") if absorbed >= amount else Color("fa8c83"))
 	if health <= 0.0:
+		flask_runtime.clear_effects()
 		alive = false
 		group_cooldowns.reset()
 		telegraphs.reset()

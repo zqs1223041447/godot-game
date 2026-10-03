@@ -3,6 +3,7 @@ extends "res://scripts/save/canonical_build_store.gd"
 ## Gameplay projection over canonical ownership. No parallel mutable inventory,
 ## equipment or gem-link tables exist here.
 const Gear = preload("res://scripts/items/equipment_catalog.gd")
+const Flasks=preload("res://scripts/items/flask_catalog.gd")
 const Gems = preload("res://scripts/items/gem_catalog.gd")
 const Slots = preload("res://scripts/items/equipment_slots.gd")
 const Combat = preload("res://scripts/combat/combat_data.gd")
@@ -283,6 +284,35 @@ func award_gem(definition_id: String) -> String:
 	return uid if not wrapped.is_empty() and _admit_reward_item(wrapped) else ""
 
 
+func award_flask(definition_id:String)->String:
+	if _busy or not pending_items().is_empty() or _current.next_item_serial>=Rules.MAX_SERIAL:return ""
+	var uid:="item_%06d"%int(_current.next_item_serial)
+	var wrapped:Dictionary=Flasks.create_instance(uid,definition_id)
+	return uid if not wrapped.is_empty() and _admit_reward_item(wrapped) else ""
+
+func owned_flasks()->Dictionary:
+	var result:Dictionary={}
+	for uid:String in _current.items:
+		if _current.items[uid].kind=="flask":result[uid]=_current.items[uid].definition_id
+	return result
+
+func flask_slots()->Array[Dictionary]:
+	var slots:Array[Dictionary]=[]
+	var by_slot:Dictionary={}
+	for uid:String in _current.locations:
+		var location:Dictionary=_current.locations[uid]
+		if location.kind=="flask_slot":by_slot[location.slot_id]=uid
+	for slot_id:String in ItemLocationRules.FLASK_SLOTS:
+		var row:Dictionary={"slot_id":slot_id,"uid":"","definition_id":"","name":"","resource":"","icon_path":"","size":Vector2i(1,2)}
+		if by_slot.has(slot_id):
+			var uid:String=by_slot[slot_id]
+			var definition:Dictionary=Flasks.definition(_current.items[uid].definition_id)
+			for field:String in ["definition_id","name","resource","icon_path","size"]:row[field]=definition[field]
+			row.uid=uid
+		slots.append(row)
+	return slots
+
+
 func award_random_gem(rng: RandomNumberGenerator) -> String:
 	if rng==null or _busy or not pending_items().is_empty():return ""
 	var before:int=rng.state
@@ -359,7 +389,7 @@ func _command_path() -> String:
 
 func _admit_reward_item(wrapped: Dictionary) -> bool:
 	var candidate := snapshot()
-	if candidate.items.has(wrapped.uid) or candidate.items.size() >= Rules.MAX_ITEMS or candidate.revision >= Rules.MAX_SERIAL: return false
+	if candidate.items.has(wrapped.uid) or candidate.items.size() >= Rules.V17_MAX_ITEMS or candidate.revision >= Rules.MAX_SERIAL: return false
 	candidate.items[wrapped.uid] = wrapped.duplicate(true)
 	var metadata: Dictionary = Items.metadata_for_items(candidate.items)
 	var position: Dictionary = Transfer.first_bag_space_paged(metadata, candidate.locations,
@@ -441,8 +471,8 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	var loaded:=super.load_build(path)
 	if loaded and old_version>0 and old_version<Rules.VERSION:
 		migrated_from_legacy=true
-		if old_version == Rules.V16_VERSION:
-			migration_message="旧存档已原字节备份，新增主动宝石目录已启用；物品、键位与天赋预算保持不变。"
+		if old_version >= Rules.V16_VERSION:
+			migration_message="旧存档已原字节备份，药剂栏已启用并放入两瓶药剂；原物品、键位与天赋预算保持不变。"
 		elif old_version == Rules.V14_VERSION:
 			migration_message="旧存档已备份，背包已扩容。原物品与构筑保持不变，校准碎片已转为物品。待安置物品：%d 件。"%pending_items().size()
 		elif old_version == Rules.V15_VERSION:

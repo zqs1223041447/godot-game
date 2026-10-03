@@ -249,6 +249,7 @@ static func _occupy(occupied: Dictionary, uid: String, location: Dictionary, siz
 			occupied[Vector2i(x,y)] = uid
 static func _target_key(location: Dictionary) -> String:
 	match location.kind:
+		"flask_slot": return "flask_slot:"+str(location.slot_id)
 		"equipment": return "equipment:" + str(location.slot_id)
 		"passive_socket": return "passive_socket:" + str(location.node_id)
 		"skill_main": return "skill_main:" + str(location.group_id)
