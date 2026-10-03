@@ -37,7 +37,7 @@ func _run() -> void:
 	_expect(FileAccess.get_file_as_bytes(path + ".v14-backup.json") == source_bytes
 		and FileAccess.get_file_as_bytes(path) != source_bytes,
 		"original v14 bytes are preserved before a current-schema replacement")
-	_expect(state.snapshot().version == 16 and Rules.reason(state.snapshot()).is_empty(),
+	_expect(state.snapshot().version == 17 and Rules.reason(state.snapshot()).is_empty(),
 		"loaded state is a valid v16 build")
 	_expect(state.snapshot().items == source_v14.items and state.snapshot().talents == source_v14.talents
 		and state.snapshot().bindings == source_v14.bindings

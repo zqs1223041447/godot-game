@@ -47,7 +47,8 @@ func _initialize() -> void:
 	pool.advance(0.7)
 	expect(pool.cues.is_empty(),"stress pool drains within longest lifetime")
 	for kind: String in Runtime.LIFETIMES:
-		pool.emit_cue(kind,Vector2.ZERO)
+		var cue_id:int=pool.emit_cue(kind,Vector2.ZERO,{"half_angle":PI/2} if kind=="cleave" else {})
+		expect(cue_id>0,"declared kind admits its valid geometry "+kind)
 		expect(float(pool.cues.back().duration)>0 and float(pool.cues.back().duration)<=0.65,"bounded lifetime "+kind)
 	expect(Renderer.GROUND.has("meteor") and not Renderer.GROUND.has("chain"),"ground and target-link layers distinct")
 	pool.reset()

@@ -29,11 +29,11 @@ func _initialize() -> void:
 		check(not v15.is_empty() and Rules.reason_v15(v15).is_empty(), "v14 passes through the existing paged migration")
 		var before: PackedByteArray = var_to_bytes(v15)
 		var v16: Dictionary = CurrencyMigration.migrate_v15(v15)
-		if v16.is_empty() or not Rules.reason(v16).is_empty():
+		if v16.is_empty() or not Rules.reason_v16(v16).is_empty():
 			var metadata: Dictionary = Items.metadata_for_items(v15.items)
 			var context: Dictionary = Migration.location_context(v15)
 			var inspected: Dictionary = BagLayout.inspect_layout(metadata, v15.locations, context)
-			print("migration failure balance=", balance, " empty=", v16.is_empty(), " reason=", Rules.reason(v16),
+			print("migration failure balance=", balance, " empty=", v16.is_empty(), " reason=", Rules.reason_v16(v16),
 				" craft=", v15.crafting, " metadata=", metadata.size(), " items=", v15.items.size(), " layout=", inspected)
 			check(false, "valid v15 candidate migrates to schema16")
 			quit(1)
@@ -105,7 +105,7 @@ func _old_full_bag_expands_with_currency() -> bool:
 	candidate.crafting.materials.calibration_shard = 91
 	if not Rules.reason_v15(candidate).is_empty(): return false
 	var migrated: Dictionary = CurrencyMigration.migrate_v15(candidate)
-	if migrated.is_empty() or not Rules.reason(migrated).is_empty(): return false
+	if migrated.is_empty() or not Rules.reason_v16(migrated).is_empty(): return false
 	var uids := _currency_uids(migrated)
 	return uids.size() == 1 and migrated.items[uids[0]].payload.quantity == 91 \
 		and migrated.locations[uids[0]].kind == "bag"
@@ -125,7 +125,7 @@ func _full_v15_registry_migrates_one_extra_item() -> bool:
 	if not Rules.reason_v15(candidate).is_empty(): return false
 	var migrated: Dictionary = CurrencyMigration.migrate_v15(candidate)
 	return not migrated.is_empty() and migrated.items.size() == Rules.LEGACY_MAX_ITEMS + 1 \
-		and Rules.reason(migrated).is_empty() and _currency_uids(migrated).size() == 1
+		and Rules.reason_v16(migrated).is_empty() and _currency_uids(migrated).size() == 1
 
 
 func _v13_representative_preserves_wallet_items_and_talents() -> bool:
@@ -136,7 +136,7 @@ func _v13_representative_preserves_wallet_items_and_talents() -> bool:
 	if v14.is_empty() or not Rules.reason_v14(v14).is_empty(): return false
 	var v15: Dictionary = PagedMigration.migrate_v14(v14)
 	var v16: Dictionary = CurrencyMigration.migrate_v15(v15)
-	if v16.is_empty() or not Rules.reason(v16).is_empty(): return false
+	if v16.is_empty() or not Rules.reason_v16(v16).is_empty(): return false
 	var currency: Array[String] = _currency_uids(v16)
 	return currency.size() == 1 and v16.items[currency[0]].payload.quantity == 73 \
 		and v16.migration_ledger.from_version == 13 and v16.progress == v14.progress \
@@ -166,7 +166,7 @@ func _store_migration_backup_and_failure_atomicity() -> bool:
 			if state.snapshot().items[uid].kind == "currency" and state.snapshot().locations[uid].kind == "bag":
 				visible_balance += int(state.snapshot().items[uid].payload.quantity)
 		ok = ok and loaded and FileAccess.get_file_as_bytes(backup_path) == bytes \
-			and raw.version == 16 and Rules.decode(raw).crafting == {"revision": 23} \
+			and raw.version == Rules.VERSION and Rules.decode(raw).crafting == {"revision": 23} \
 			and visible_balance == expected_balance and state.successful_saves == 1 \
 			and not raw.crafting.has("materials") and Rules.reason(state.snapshot()).is_empty()
 	var conflict_source: Dictionary = PagedMigration.migrate_v14(_v14(18))

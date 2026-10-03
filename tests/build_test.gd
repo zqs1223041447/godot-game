@@ -30,7 +30,7 @@ func _run_checks() -> void:
 
 
 func _check_catalogs() -> void:
-	_expect(Data.SKILLS.size() == 8, "Eight available skills")
+	_expect(Data.SKILLS.size() == 10, "Ten available skills")
 	_expect(Data.ITEMS.size() == 9, "Nine initial equipment items")
 	_expect(Passives.get_nodes().size() >= 150, "Expanded passive graph populated")
 	for skill_id: String in Data.SKILLS:

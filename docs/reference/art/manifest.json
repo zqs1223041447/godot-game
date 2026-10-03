@@ -7,9 +7,9 @@
 	"transparent_background": true,
 	"file_paths_relative_to": "manifest.json directory",
 	"status": "complete",
-	"written_images": 58,
+	"written_images": 60,
 	"counts": {
-		"skills": 8,
+		"skills": 10,
 		"supports": 16,
 		"equipment": 23,
 		"jewels": 4,
@@ -30,6 +30,15 @@
 			"id": "chain",
 			"name": "连锁闪电",
 			"file": "skills/chain.png",
+			"source_renderer": "SkillEmblem._draw",
+			"source_catalog": "GameData.SKILLS",
+			"entry_type": "active_skill"
+		},
+		{
+			"category": "skills",
+			"id": "cleave",
+			"name": "裂刃斩",
+			"file": "skills/cleave.png",
 			"source_renderer": "SkillEmblem._draw",
 			"source_catalog": "GameData.SKILLS",
 			"entry_type": "active_skill"
@@ -66,6 +75,15 @@
 			"id": "nova",
 			"name": "奥能新星",
 			"file": "skills/nova.png",
+			"source_renderer": "SkillEmblem._draw",
+			"source_catalog": "GameData.SKILLS",
+			"entry_type": "active_skill"
+		},
+		{
+			"category": "skills",
+			"id": "shade_bolt",
+			"name": "蚀影飞弹",
+			"file": "skills/shade_bolt.png",
 			"source_renderer": "SkillEmblem._draw",
 			"source_catalog": "GameData.SKILLS",
 			"entry_type": "active_skill"

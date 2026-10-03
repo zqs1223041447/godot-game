@@ -86,7 +86,7 @@ func _initialize() -> void:
 	_ids(current.passives, Passives.get_nodes().keys(), "all original nodes")
 	_ids(current.mechanisms, Registry.get_ids(), "all shared mechanisms")
 	_ids(current.monsters, Monsters.TEMPLATES.keys(), "all monster templates")
-	_expect(current.skills.size() == 8 and current.supports.size() == 16, "bounded skill inventory")
+	_expect(current.skills.size() == 10 and current.supports.size() == 16, "bounded skill inventory")
 	_expect(current.equipment.size() == 14 and current.affixes.size() == 26, "bounded equipment inventory")
 	_expect(current.passives.size() == 181 and current.special_coverage.size() == 12, "historical 181-node research tree and socket coverage")
 	for skill_id: String in current.skills:

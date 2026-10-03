@@ -33,7 +33,7 @@ run_check() {
 		export XDG_DATA_HOME="$VALIDATION_DIR/data/check-$CHECK_INDEX"
 		unset GODOT_CRAFTING_TEST_ROOT
 		case "${2:-}" in
-			res://tests/canonical_*|res://tests/save_receipt_revision_test.gd|res://tests/source_*|res://tests/independent_menus_test.gd)
+			res://tests/canonical_*|res://tests/offense_skill_*|res://tests/save_receipt_revision_test.gd|res://tests/source_*|res://tests/independent_menus_test.gd)
 				export XDG_DATA_HOME="$M1_VALIDATION_DIR/check-$CHECK_INDEX/data"
 				unset PIERCE_QA_ROOT
 				;;
@@ -101,6 +101,10 @@ run_check --script res://tests/unified_bag_grid_test.gd
 run_check --script res://tests/unified_external_drag_test.gd
 run_check --script res://tests/item_hover_card_test.gd
 run_check --script res://tests/five_support_compiler_test.gd
+run_check --script res://tests/offense_skill_batch_test.gd
+run_check --script res://tests/offense_skill_migration_test.gd
+run_check --script res://tests/offense_skill_gameplay_test.gd
+run_check --script res://tests/offense_skill_loot_test.gd
 run_check --script res://tests/skill_cooldown_ledger_test.gd
 run_check --script res://tests/nine_slot_equipment_profile_test.gd
 run_check --script res://tests/nine_slot_catalog_integration_test.gd
@@ -175,6 +179,7 @@ run_check --script res://tests/fire_visual_test.gd
 run_check --script res://tests/combat_integration_test.gd
 run_check --script res://tests/smoke_test.gd
 run_check --script res://tests/visual_settings_test.gd
+run_check --script res://tests/vital_caption_rounding_test.gd
 run_check --script res://tests/combat_cues_test.gd
 run_check --script res://tests/combat_cues_integration_test.gd
 run_check --script res://tests/fantasy_actor_test.gd

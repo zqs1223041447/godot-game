@@ -20,7 +20,7 @@ const SKILLS: Dictionary = {
 	"shade_bolt": {
 		"name": "蚀影飞弹", "short_name": "蚀影", "icon": "X",
 		"description": "发射一枚 240% 基础混沌伤害的法术飞弹，首次碰撞后结束。可由装备附加其他类型伤害；不造成毒或持续伤害。",
-		"mana": 10.0, "cooldown": 1.2, "color": Color("9c87b1"),
+		"mana": 8.0, "cooldown": 1.2, "color": Color("9c87b1"),
 		"capabilities": ["initial_projectiles", "projectile_hit"],
 		"projectile_recipe": {"initial_count": 1, "spread": 0.14, "coefficient": 2.4, "added_effectiveness": 2.4,
 			"pierce": 0, "slow": 0.0, "speed": 620.0, "damage_type": "chaos"},

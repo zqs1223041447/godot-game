@@ -17,7 +17,7 @@ func run()->void:
 	arena.set_process(false)
 	check(arena.state is Canonical,"actual default main owns canonical model")
 	check(arena.state.migrated_from_legacy and arena.state.last_load_error.is_empty(),"actual startup migrates legacy source")
-	check(arena.state.snapshot().version==16 and arena.state.snapshot().skill_groups.size()==10,"actual saved schema and ten groups")
+	check(arena.state.snapshot().version==17 and arena.state.snapshot().skill_groups.size()==10,"actual saved schema and ten groups")
 	check(FileAccess.get_file_as_bytes(path+".v13-backup.json")==raw.to_utf8_buffer(),"first startup keeps exact BOM/whitespace original bytes")
 	check(arena.state.location("guardian_robe")=={"kind":"equipment","slot_id":"body_armour"} and arena.state.location("azure_charm")=={"kind":"equipment","slot_id":"amulet"},"old equipped identity preserved at new targets")
 	check(arena.hud._menu_routes.snapshot().right_inventory and arena.hud.is_blocking(),"migration opens the inventory dock and pauses combat once")

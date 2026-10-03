@@ -43,7 +43,7 @@ func run()->void:
 		injected.locations[moved_uid]={"kind":"bag","page":1,"x":point.x,"y":point.y}
 		check(Rules.decode_v15(injected).is_empty() and not Rules.reason_v15(injected).is_empty(),"v15 cannot import newly unlocked coordinates %s"%point)
 		injected.version=16;injected.crafting.erase("materials")
-		check(Rules.reason(Rules.decode(injected)).is_empty(),"The same coordinate is a valid current-schema positive control")
+		check(Rules.reason_v16(Rules.decode_v16(injected)).is_empty(),"The same coordinate is a valid current-schema positive control")
 	for point: Vector2i in [Vector2i(12,0),Vector2i(0,10),Vector2i(-1,0)]:
 		var invalid: Dictionary=state.snapshot();invalid.locations[uid]={"kind":"bag","page":1,"x":point.x,"y":point.y}
 		check(not Rules.reason(invalid).is_empty(),"Current schema still rejects coordinate %s"%point)

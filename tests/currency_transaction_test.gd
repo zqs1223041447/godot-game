@@ -122,7 +122,7 @@ func _crafting_moves_quantities_across_stacks_to_zero() -> bool:
 	return result.ok and state.crafting_balance() == 0 and not after.items.has("currency_pay_a") \
 		and not after.items.has("currency_pay_b") and before_total - Currency.total_quantity(after.items).quantity == cost \
 		and after.crafting == {"revision": 1} and not disk.crafting.has("materials") \
-		and disk.version == 16 and Rules.reason(Rules.decode(disk)).is_empty()
+		and disk.version == 17 and Rules.reason(Rules.decode(disk)).is_empty()
 
 
 func _salvage_merges_existing_stack() -> bool:

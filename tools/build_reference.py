@@ -26,6 +26,20 @@ DAMAGE_NAMES = {'physical':'物理','fire':'火焰','cold':'冰霜','lightning':
 def component_text(components):
     return ' + '.join(f'{DAMAGE_NAMES[k]} {number(v)}' for k,v in ((key,components.get(key,0)) for key in DAMAGE_NAMES) if v) or '无'
 def percent(value): return number(value*100)+'%'
+def skill_delivery_diagram(skill_id, skill):
+    if skill_id == 'cleave':
+        recipe=skill['examples']['fresh'][0]['recipe']
+        radius=recipe['radius']; half=recipe['half_angle']
+        import math
+        top=(70+64*math.cos(-half),80+64*math.sin(-half))
+        end=(70+64*math.cos(half),80+64*math.sin(half))
+        path=f'M70,80 L{top[0]:.4f},{top[1]:.4f} A64,64 0 {int(half>math.pi/2)} 1 {end[0]:.4f},{end[1]:.4f} Z'
+        return f'<figure><svg viewBox="0 0 320 170" role="img" aria-label="裂刃真实前向扇区"><path d="{path}" fill="#d2c49e" fill-opacity="0.5" stroke="#796c4b"/><circle cx="70" cy="80" r="7" fill="#50654c"/><circle cx="117" cy="80" r="6" fill="#99584b"/><circle cx="36" cy="80" r="6" fill="#928a79"/><text x="158" y="67" fill="#382c21">半径 {number(radius)}</text><text x="158" y="89" fill="#382c21">前向 {number(math.degrees(half*2))}°</text><text x="158" y="111" fill="#382c21">近战 · 物理 · 范围</text></svg><figcaption>扇区与技能配方同源；目标体型参与边缘判定，背后不自动命中。力量与源近战物理节点影响这次攻击。</figcaption></figure>'
+    if skill_id == 'shade_bolt':
+        recipe=skill['projectile_recipe']
+        return f'<figure><svg viewBox="0 0 320 150" role="img" aria-label="一次混沌飞弹命中"><circle cx="42" cy="66" r="8" fill="#50654c"/><path d="M58 66 L236 66" stroke="#9376a0" stroke-width="3"/><path d="M226 56 L246 66 L226 76 Z" fill="#775281"/><circle cx="264" cy="66" r="10" fill="#99584b"/><text x="35" y="115" fill="#382c21">速度 {number(recipe['speed'])} · 穿透 {number(recipe['pierce'])} · 固有混沌命中</text></svg><figcaption>源混沌增伤作用于该命中；装备附加分量仍按各自类型结算。没有毒、持续伤害或物理转换。</figcaption></figure>'
+    return ''
+
 def area_diagram(examples, skills):
     modes=[('base','无辅助'),('wide','广域'),('concentrated','凝域'),('combined','广域＋凝域')]
     body='<p>面积倍率先相乘，再统一开平方根得到半径倍率；双辅助面积0.9216、半径0.96。数值为本游戏初版预算，不改变投射物、独立爆炸或敌方重击。</p>'
@@ -183,7 +197,7 @@ def build(data, art):
                     body+=details('已知目标 · '+data['monsters'][target['template_id']]['name']+'受击示例',target_body)
                 body+='</div>'
             panels += details(cfg['name']+' · 编译示例',body)
-        body = facts([('原始消耗',number(s['mana'])+' 魔力'),('原始冷却',number(s['cooldown'])+' 秒'),('可装配辅助',links('supports',compatible))])+panels
+        body = skill_delivery_diagram(key,s)+facts([('原始消耗',number(s['mana'])+' 魔力'),('原始冷却',number(s['cooldown'])+' 秒'),('最低保存版本',number(s.get('minimum_save_version',14))),('可装配辅助',links('supports',compatible))])+panels
         affected = [i for i,f in data['affixes'].items() if key in f.get('affected_skills',[])]
         related = link('rules','damage')+' · '+link('rules','supports')+((' · '+links('affixes',affected)) if affected else '')
         cards.append(add('skills',key,s['name'],s['description'],body,'投射物' if 'projectile_hit' in s['capabilities'] else '其他技能',related=related))
@@ -343,8 +357,8 @@ def build(data, art):
         ownership=ownership.replace('2页×8×6',f"{c['bag_pages']}页×{c['bag_columns']}×{c['bag_rows']}")
         slot_rows=facts([(SLOTS.get(slot,slot),esc(category)) for slot,category in c['slots'].items()])
         rule_defs.extend([
-            ('ownership','统一物品与独立菜单','装备、珠宝、主动宝石和辅助宝石都以唯一UID持有，一个实例只能处于一个位置。',ownership+slot_rows+'<p>I/B行囊固定右侧，K技能与角色属性共用左侧；两侧可同时打开并拖动宝石。T源树全屏，关闭后恢复原左右栏；菜单打开时背景战斗冻结。'+bag_text+'悬停详情，Shift比较双戒指目标。容量下降保留宝石和多余技能行，仅停用超出部分。旧装备UID与掷值保持，armor→body_armour、charm→amulet；旧技能/辅助转为独立实例，原始文件先备份，失败不覆盖。v0.22沿用v0.21试玩目录，将旧schema14/15原字节备份后原子迁移为schema16；分页不删除物品，也不再次退还天赋点。</p>','implemented'),
-            ('supports','技能行与五辅助','每行1个主宝石、5个辅助；10行起步，+1技能行词缀真正增加可绑定的行。',f'<p>16辅助全部保留，按主动技能原生能力判定资格；同组不重复同一辅助定义。同名主宝石可独立装配。组与主宝石UID双冷却账阻止换孔/换键刷新。</p><p>真实五辅助冰霜示例：耗魔 {number(example["mana"])}，冷却 {number(example["cooldown"])}秒，初始 {example["initial_count"]}发。</p>'+details('同源实际配方',lines(example['summary']+'\n'+example['details']))+'<p>每30次有效根怪击杀，从当前8主动+16辅助定义中等概率得到1件等级1/品质0的宝石；同名独立UID。此节奏是本游戏原型平衡。子代、重复死亡和演示无奖励；背包满或有待安置时整笔拒绝且回滚本次抽取随机状态。I中二次确认可丢弃重复宝石，不返材料。</p>','implemented'),
+            ('ownership','统一物品与独立菜单','装备、珠宝、主动宝石和辅助宝石都以唯一UID持有，一个实例只能处于一个位置。',ownership+slot_rows+'<p>I/B行囊固定右侧，K技能与角色属性共用左侧；两侧可同时打开并拖动宝石。T源树全屏，关闭后恢复原左右栏；菜单打开时背景战斗冻结。'+bag_text+'悬停详情，Shift比较双戒指目标。容量下降保留宝石和多余技能行，仅停用超出部分。旧装备UID与掷值保持，armor→body_armour、charm→amulet；旧技能/辅助转为独立实例，原始文件先备份，失败不覆盖。v0.24沿用v0.21试玩目录，将旧schema14/15/16原字节备份后原子迁移为schema17；分页不删除物品，也不再次退还天赋点。</p>','implemented'),
+            ('supports','技能行与五辅助','每行1个主宝石、5个辅助；10行起步，+1技能行词缀真正增加可绑定的行。',f'<p>16辅助全部保留，按主动技能原生能力判定资格；同组不重复同一辅助定义。同名主宝石可独立装配。组与主宝石UID双冷却账阻止换孔/换键刷新。</p><p>真实五辅助冰霜示例：耗魔 {number(example["mana"])}，冷却 {number(example["cooldown"])}秒，初始 {example["initial_count"]}发。</p>'+details('同源实际配方',lines(example['summary']+'\n'+example['details']))+'<p>每30次有效根怪击杀，从当前10主动+16辅助定义中等概率得到1件等级1/品质0的宝石；同名独立UID。此节奏是本游戏原型平衡。子代、重复死亡和演示无奖励；背包满或有待安置时整笔拒绝且回滚本次抽取随机状态。I中二次确认可丢弃重复宝石，不返材料。</p>','implemented'),
             ('source_tree','锁定源树与执行覆盖','完整源记录与已实现效果分别报告；数据存在不等于可花点使用。',f'<p>源版本 {source["source_version"]}，原始SHA256 {source["source_sha256"]}。保留 {len(source["nodes"])} 条记录、2387个标准位置和2697条内部边；升华/扩展分区分开。42代理与30涂油节点不可直接分配。<a href="#category-source_passives">逐项查源节点及精通</a></p><p>节点所有效果必须完整执行，精通按选中效果检查。未支持节点灰色锁定，也会阻断后续路径。源数值没有旧181投影上限；旧树仅作历史与怪物机制参考。</p><p>自己的职业起点免费，预算min(level+4,123)。普通节点/精通均1点，专精需同组普通连通的显著节点，重复效果ID拒绝。未分配其他节点可切七起点；升华点数来源尚未实现，不免费授点。</p>','implemented'),
             ('allocation','源树与珠宝资格','每件珠宝只有一个统一位置；孔必须已分配并沿普通连线连接自己的起点。','<p>寻枝半径280采用当前源坐标单位，允许小型/显著节点断连分配，仍花1点。远程点不向外扩路、不激活孔；未实现节点即使在范围内也不能分配。退款、移动、替换、取回都验证最终构筑，不能遗留依赖失效的节点。原型半径规则不是PoE某颗珠宝的完整复刻。</p><p>'+link('rules','source_tree')+'；下方旧181覆盖图保留作历史机制研究。</p>','implemented'),
             ('source_defenses','属性与命中防御','原始三属性数值进入真实容量、命中、闪避和近战物理作用域。','<p>力量每2点取整+1生命、每5点取整+1%近战物理；敏捷每点+2命中、每5点取整+1%闪避；智慧每2点取整+1魔力、每10点取整+1%护盾（3.28以后规则）。法术不进行攻击闪避。护甲随物理命中大小重新求减伤，三元素抗性分别限制到75%，然后护盾、生命。</p>'+facts([('同源混合受击示例','物理/火/冰/电各100；护甲500、抗性50%/25%/75%'),('防御后分量',esc(component_text(defense['components']))),('护盾扣减',number(defense['shield_spent'])),('生命扣减',number(defense['health_lost']))])+f'<p>本游戏敏捷型怪物闪避320；默认Scion命中140，对应 {percent(c["skitter_accuracy_example"]["base_chance"])}；增加10敏捷后命中160，对应 {percent(c["skitter_accuracy_example"]["improved_chance"])}。预览展示成功命中伤害，未把命中率伪乘成DPS。</p>','implemented'),

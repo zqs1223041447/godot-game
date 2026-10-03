@@ -68,9 +68,9 @@ def main():
     assert inspector.weapon_values==expected_weapon, 'Weapon diagram diverges from actual assembly/settlement'
     assert '../benchmarks/v0.13-weapon-budget-report.md' in inspector.links and '../benchmarks/v0.13-weapon-budget-replay.json' in inspector.links
     assert '75% 火抗未来压力目标' in source and '+25.39%' in source, 'Budget must disclose future-target exception'
-    assert 'skills-basic' not in inspector.ids and '#skills-basic' not in inspector.links, 'Basic attack must not invent a ninth active skill'
+    assert 'skills-basic' not in inspector.ids and '#skills-basic' not in inspector.links, 'Basic attack must not invent an additional active skill'
     assert '#rules-basic_attack' in inspector.links and '#weapon_stages-weapon_local' in inspector.links
-    assert len(data['skills'])==8 and len(data['equipment'])==14 and len(data['affixes'])==26
+    assert len(data['skills'])==10 and len(data['equipment'])==14 and len(data['affixes'])==26
     assert data['canonical']['support_slots']==5 and data['canonical']['base_skill_groups']==10 and len(data['canonical']['slots'])==9
     assert len(data['source_tree']['nodes'])==3390 and len(data['source_tree']['edges'])==2697
     for key in data['source_tree']['nodes']: assert f'source_passives-{key}' in inspector.ids, 'Unbrowsable source node '+key
@@ -99,7 +99,7 @@ def main():
     assert 'font-size:16px' in (REF/'reference.css').read_text()
     spec=importlib.util.spec_from_file_location('generator',ROOT/'tools/build_reference.py');module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
     art=json.loads((REF/'art/manifest.json').read_text())
-    assert art['status']=='complete' and art['written_images']==58 and len(art['entries'])==58
+    assert art['status']=='complete' and art['written_images']==60 and len(art['entries'])==60
     expected_art={(cat,key) for cat in ['skills','supports','equipment','fixed_items','jewels','monsters'] for key in data[cat]}
     actual_art={(('fixed_items' if row.get('entry_type')=='fixed_item' else row['category']),row['id']) for row in art['entries']}
     assert actual_art==expected_art, 'Art manifest omits or adds runtime entries'

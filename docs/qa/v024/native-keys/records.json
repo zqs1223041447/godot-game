@@ -1,0 +1,127 @@
+[
+	{
+		"actual_damage_trace": [
+			{
+				"assembly": {
+					"added": {
+
+					},
+					"added_effectiveness": 2.8,
+					"base_coefficient": 2.8,
+					"intrinsic": {
+						"physical": 72.8
+					},
+					"stage": "hit_base"
+				},
+				"before_defense_components": {
+					"physical": 75.712
+				},
+				"cast_id": 1,
+				"components": {
+					"physical": 75.712
+				},
+				"details": [
+					{
+						"base": 72.8,
+						"before_defense": 75.712,
+						"final": 75.712,
+						"increased": 0.04,
+						"modifiers": [
+							"melee_physical_increased"
+						],
+						"more": 1.0,
+						"resistance": 0.0,
+						"type": "physical"
+					}
+				],
+				"effect_id": "",
+				"health_lost": 75.712,
+				"phase": "direct",
+				"prevented_components": {
+					"physical": 0.0
+				},
+				"projectile_id": 0,
+				"shield_spent": 0.0,
+				"skill_id": "cleave",
+				"tags": [
+					"hit",
+					"attack",
+					"melee",
+					"area"
+				],
+				"target_id": 4,
+				"total": 75.712
+			}
+		],
+		"group": "group_000009",
+		"key": 9,
+		"main_uid": "item_000004",
+		"mana_after": 128.0,
+		"mana_before": 140.0,
+		"ok": true,
+		"recipe_mana": 12.0,
+		"skill": "cleave",
+		"spawned_projectiles": 0
+	},
+	{
+		"actual_damage_trace": [
+			{
+				"assembly": {
+					"added": {
+
+					},
+					"added_effectiveness": 2.4,
+					"base_coefficient": 2.4,
+					"intrinsic": {
+						"chaos": 62.4
+					},
+					"stage": "hit_base"
+				},
+				"before_defense_components": {
+					"chaos": 62.4
+				},
+				"cast_id": 2,
+				"components": {
+					"chaos": 62.4
+				},
+				"details": [
+					{
+						"base": 62.4,
+						"before_defense": 62.4,
+						"final": 62.4,
+						"increased": 0.0,
+						"modifiers": [],
+						"more": 1.0,
+						"resistance": 0.0,
+						"type": "chaos"
+					}
+				],
+				"effect_id": "",
+				"health_lost": 62.4,
+				"phase": "outbound",
+				"prevented_components": {
+					"chaos": 0.0
+				},
+				"projectile_id": 1,
+				"shield_spent": 0.0,
+				"skill_id": "shade_bolt",
+				"tags": [
+					"hit",
+					"projectile",
+					"spell"
+				],
+				"target_id": 5,
+				"total": 62.4
+			}
+		],
+		"group": "group_000010",
+		"key": 0,
+		"main_uid": "item_000005",
+		"mana_after": 120.0,
+		"mana_before": 128.0,
+		"ok": true,
+		"recipe_mana": 8.0,
+		"skill": "shade_bolt",
+		"spawned_projectiles": 1
+	}
+]

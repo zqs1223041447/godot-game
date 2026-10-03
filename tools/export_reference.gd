@@ -125,7 +125,7 @@ static func collect() -> Dictionary:
 	result["known_target"] = {"template_id": target_id, "wave": target_wave,
 		"defense_profile": Defense.defense_profile(target.defense_stats, "monster"),
 		"shield": target.shield, "health": target.health}
-	var fresh: RefCounted = Build.new()
+	var fresh: RefCounted = Canonical.new()
 	var full: RefCounted = Build.new()
 	for item_id: String in Data.COMBAT_STARTER_ITEMS:
 		full.equip(item_id)
@@ -133,8 +133,8 @@ static func collect() -> Dictionary:
 	var rolled_bow: RefCounted = local_build(_local_instance(["whetstone_edge", "tempered_edge", "wellturn", "beatlink"], "rare"))
 	var builds: Dictionary = {"fresh": fresh, "full_tornado": full, "local_normal": normal_bow, "local_max": rolled_bow}
 	result["configurations"] = {
-		"fresh": {"name": "新建角色", "equipped": fresh.equipped.duplicate(), "allocated_nodes": fresh.allocated_nodes.duplicate(), "socketed_jewels": {}, "stats": fresh.get_stats()},
-		"full_tornado": {"name": "龙卷机制装备示例", "equipped": full.equipped.duplicate(), "allocated_nodes": full.allocated_nodes.duplicate(), "socketed_jewels": {}, "stats": full.get_stats()}}
+		"fresh": {"name": "新建角色（当前源树属性）", "equipped": fresh.equipped.duplicate(), "allocated_nodes": fresh.snapshot().talents.allocated.duplicate(), "socketed_jewels": {}, "stats": fresh.get_stats()},
+		"full_tornado": {"name": "历史龙卷装备演算（未含源树三属性）", "equipped": full.equipped.duplicate(), "allocated_nodes": full.allocated_nodes.duplicate(), "socketed_jewels": {}, "stats": full.get_stats()}}
 	for config: String in ["local_normal", "local_max"]:
 		var build: RefCounted = builds[config]
 		result.configurations[config] = {"name": "普通白蜡长弓" if config == "local_normal" else "白蜡长弓 · 双局部前缀上限示例",
@@ -144,6 +144,7 @@ static func collect() -> Dictionary:
 	for id: String in Data.SKILLS:
 		var skill: Dictionary = Data.SKILLS[id].duplicate(true)
 		skill["compatible_supports"] = Supports.supports_for_skill(id)
+		skill["minimum_save_version"] = 17 if Data.NEW_SKILL_IDS.has(id) else 14
 		skill["examples"] = {}
 		for config: String in builds:
 			var build: RefCounted = builds[config]

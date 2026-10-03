@@ -25,10 +25,10 @@ func _run() -> void:
 
 func _check_all_source_definitions() -> void:
 	var catalog: Dictionary = Catalog.definitions()
-	_expect(Data.SKILLS.size() == 8, "Source catalog contains exactly eight skills")
+	_expect(Data.SKILLS.size() == 10, "Source catalog contains exactly ten skills")
 	_expect(Supports.SUPPORTS.size() == 16, "SupportRegistry contains exactly sixteen supports")
-	_expect(Emblem.ICONS.size() == 24, "SkillEmblem contains exactly twenty-four original icon mappings")
-	_expect(catalog.size() == 24, "Gem catalog exposes exactly twenty-four definitions")
+	_expect(Emblem.ICONS.size() == 26, "SkillEmblem contains exactly twenty-six original icon mappings")
+	_expect(catalog.size() == 26, "Gem catalog exposes exactly twenty-six definitions")
 	for skill_id: String in Data.SKILLS:
 		var id: String = "skill:" + skill_id
 		var source: Dictionary = Data.SKILLS[skill_id]

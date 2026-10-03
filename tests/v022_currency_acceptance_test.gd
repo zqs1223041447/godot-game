@@ -14,7 +14,7 @@ func _initialize()->void: call_deferred("run")
 
 func run()->void:
 	var data_root := OS.get_environment("XDG_DATA_HOME")
-	if not data_root.begins_with("/tmp/godot-v022-currency-review-") or State.Rules.VERSION != 16:
+	if not data_root.begins_with("/tmp/godot-v022-currency-review-") or State.Rules.VERSION != 17:
 		quit(78); return
 	for amount: int in [0,27,1000000000]: _migration(amount)
 	_literal_v14()
@@ -47,7 +47,7 @@ func _migration(amount: int)->void:
 	var model = State.new()
 	check(model.load_build(path),"Valid v15 amount %d migrates"%amount)
 	var migrated: Dictionary = model.snapshot()
-	check(migrated.version == 16 and not migrated.crafting.has("materials"),"v16 has one persistent item authority, no wallet")
+	check(migrated.version == 17 and not migrated.crafting.has("materials"),"Current schema has one persistent item authority, no wallet")
 	check(FileAccess.get_file_as_bytes(path+".v15-backup.json")==original,"Migration preserves exact v15 bytes and spacing")
 	check(total(migrated)==amount and model.crafting_balance()==amount,"Every old shard appears in an owned bag stack")
 	for key: String in ["progress","talents","skill_groups","bindings","migration_ledger"]:
@@ -80,14 +80,14 @@ func _rejection_and_failure()->void:
 	check(not model.load_build(injected_path) and FileAccess.get_file_as_bytes(injected_path)==injected_bytes,"New currency kind cannot be injected under a v15 version tag")
 	# Prove the envelope/location is otherwise acceptable to the new schema.
 	injected.version=16;injected.crafting.erase("materials")
-	check(State.Rules.reason(State.Rules.decode(injected)).is_empty(),"Same currency envelope is a valid v16 positive control")
+	check(State.Rules.reason_v16(State.Rules.decode_v16(injected)).is_empty(),"Same currency envelope is a valid v16 positive control")
 
 func _literal_v14()->void:
 	var bytes := FileAccess.get_file_as_bytes("res://tests/fixtures/v022_currency/v14-original-bytes.json")
 	var old: Dictionary = State.Rules.decode_v14(JSON.parse_string(bytes.get_string_from_utf8()))
 	var path := "user://literal_v14.json";put(path,bytes)
 	var model = State.new()
-	check(model.load_build(path) and model.snapshot().version==16,"Published v14 fixture reaches v16 through one load")
+	check(model.load_build(path) and model.snapshot().version==17,"Published v14 fixture reaches current schema through one load")
 	check(FileAccess.get_file_as_bytes(path+".v14-backup.json")==bytes,"v14 original bytes, not an intermediate v15 rewrite, are backed up")
 	var value: Dictionary = model.snapshot()
 	for key: String in ["items","talents","progress","bindings","skill_groups","migration_ledger"]:
