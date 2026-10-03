@@ -1,0 +1,14 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+godot-game: playable arena ready
+ERROR: Crafted bow can return to bag
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/crafting_growth_consumers_test.gd:11)
+       [1] run (res://tests/crafting_growth_consumers_test.gd:54)
+ERROR: Unequip removes current W while admitted recipe stays detached
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/crafting_growth_consumers_test.gd:11)
+       [1] run (res://tests/crafting_growth_consumers_test.gd:55)
+Crafting growth consumers: 27 checks, 2 failures
