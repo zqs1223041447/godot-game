@@ -15,7 +15,6 @@ const GemIconLayout = preload("res://scripts/ui/gem_icon.gd")
 
 const COLUMNS: int = 12
 const ROWS: int = 8
-const MAX_CELL_SIZE: float = 64.0
 const EDGE_INSET: float = 8.0
 const ENTRY_KINDS: Array[String] = ["equipment", "jewel", "skill_gem", "support_gem"]
 const ICON_ENTRY_KINDS: Array[String] = ["skill_gem", "support_gem"]
@@ -134,7 +133,7 @@ func set_external_item_resolver(resolver: Callable) -> void:
 	_external_item_resolver = resolver
 
 
-## Current cell pitch in logical CanvasItem units, capped at MAX_CELL_SIZE.
+## Current cell pitch in logical CanvasItem units, fitted to the available board.
 func grid_cell_size() -> float:
 	return _cell_pitch()
 
@@ -448,7 +447,7 @@ func _update_hover(uid: String) -> void:
 func _cell_pitch() -> float:
 	var available_width: float = maxf(0.0, size.x - EDGE_INSET * 2.0)
 	var available_height: float = maxf(0.0, size.y - EDGE_INSET * 2.0)
-	return maxf(0.0, minf(MAX_CELL_SIZE, minf(available_width / _columns, available_height / _rows)))
+	return maxf(0.0, minf(available_width / _columns, available_height / _rows))
 
 
 func _grid_origin() -> Vector2:

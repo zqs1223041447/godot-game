@@ -198,8 +198,12 @@ func close_panel() -> void:
 	var snapshot: Dictionary = _menu_routes.snapshot()
 	if snapshot.death_latched:
 		_menu_routes.close("death")
-	else:
+	elif not str(snapshot.overlay).is_empty():
 		_menu_routes.close("overlay")
+	elif not str(snapshot.left).is_empty() or bool(snapshot.right_inventory):
+		_menu_routes.close()
+	else:
+		return
 	_sync_menu_views()
 
 
@@ -332,6 +336,11 @@ func refresh_build() -> void:
 	if bool(menus.right_inventory) and is_instance_valid(_inventory_panel):
 		_inventory_panel.refresh()
 	if menus.left == "skills" and is_instance_valid(_skill_support_panel):
+		if not _state.has_method("get_group_cast"):
+			var selected_position: int = _state.skill_slots.find(_selected_support_skill_id)
+			if selected_position >= 0:
+				_selected_skill_slot = selected_position
+				_skill_support_panel.select_skill(_selected_support_skill_id)
 		_skill_support_panel.refresh()
 	if menus.left == "character" and is_instance_valid(_character_panel):
 		_character_panel.refresh()
@@ -782,6 +791,24 @@ func _set_vital(key: String, value: float, maximum: float) -> void:
 
 
 func _rebuild_panel() -> void:
+	var menu_state: Dictionary = _menu_routes.snapshot()
+	var rebuild_skills_dock: bool = str(menu_state.overlay).is_empty() and str(menu_state.left) == "skills"
+	var saved_panel_fields: Dictionary = {}
+	if rebuild_skills_dock:
+		saved_panel_fields = {
+			"body": _panel_body,
+			"scroll": _panel_scroll,
+			"title": _panel_title,
+			"subtitle": _panel_subtitle,
+			"footer": _panel_footer,
+			"active": _active_panel,
+		}
+		_panel_body = _dock_bodies.left as VBoxContainer
+		_panel_scroll = _dock_scrolls.left as ScrollContainer
+		_panel_title = _dock_titles.left as Label
+		_panel_subtitle = _dock_subtitles.left as Label
+		_panel_footer = _dock_footers.left as Label
+		_active_panel = "skills"
 	_cancel_encounter_request()
 	for child: Node in _panel_body.get_children():
 		if child == _passive_panel or child == _inventory_panel or child == _skill_support_panel:
@@ -789,11 +816,12 @@ func _rebuild_panel() -> void:
 			continue
 		_panel_body.remove_child(child)
 		child.queue_free()
-	var is_tree: bool = _active_panel in ["talents", "inventory"]
-	_panel_margin.add_theme_constant_override("margin_left", 16 if is_tree else 64)
-	_panel_margin.add_theme_constant_override("margin_right", 16 if is_tree else 64)
-	_panel_margin.add_theme_constant_override("margin_top", 14 if is_tree else 36)
-	_panel_margin.add_theme_constant_override("margin_bottom", 14 if is_tree else 36)
+	if not rebuild_skills_dock:
+		var is_tree: bool = _active_panel in ["talents", "inventory"]
+		_panel_margin.add_theme_constant_override("margin_left", 16 if is_tree else 64)
+		_panel_margin.add_theme_constant_override("margin_right", 16 if is_tree else 64)
+		_panel_margin.add_theme_constant_override("margin_top", 14 if is_tree else 36)
+		_panel_margin.add_theme_constant_override("margin_bottom", 14 if is_tree else 36)
 	_panel_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
 	_panel_scroll.scroll_vertical = 0
 	_close_button.visible = _active_panel != "death"
@@ -823,7 +851,14 @@ func _rebuild_panel() -> void:
 		_panel_footer.add_theme_color_override("font_color", GOLD)
 	else:
 		_panel_footer.tooltip_text = ""
-	PresentationTheme.apply_font_scale(_modal, _preferences.font_scale)
+	PresentationTheme.apply_font_scale(_dock_roots.left if rebuild_skills_dock else _modal, _preferences.font_scale)
+	if rebuild_skills_dock:
+		_panel_body = saved_panel_fields.body as VBoxContainer
+		_panel_scroll = saved_panel_fields.scroll as ScrollContainer
+		_panel_title = saved_panel_fields.title as Label
+		_panel_subtitle = saved_panel_fields.subtitle as Label
+		_panel_footer = saved_panel_fields.footer as Label
+		_active_panel = str(saved_panel_fields.active)
 
 
 func _section(title: String, caption: String = "") -> void:
@@ -879,8 +914,9 @@ func _build_inventory_panel() -> void:
 			_inventory_panel.character_requested.connect(open_panel.bind("character"))
 		_inventory_panel.show()
 		_inventory_panel.refresh()
-		_dock_subtitles.right.text = "九个装备目标 · 装备、珠宝与宝石共用行囊"
-		_dock_footers.right.text = "拖动装备选择目标 · 悬停详情 · Shift 与已装备物品对比"
+		_dock_subtitles.right.text = ""
+		_dock_titles.right.tooltip_text = "九个装备目标 · 装备、珠宝与宝石共用分页行囊"
+		_dock_footers.right.text = "拖放装备 · 悬停详情"
 	else:
 		if not is_instance_valid(_inventory_panel):
 			_inventory_panel = InventoryPanelView.new()
@@ -921,8 +957,9 @@ func _build_skills_dock() -> void:
 	if is_instance_valid(_skill_support_panel):
 		_skill_support_panel.show()
 		_skill_support_panel.refresh()
-	_dock_subtitles.left.text = "每组 1 主 + 5 辅 · 绑定施放键"
-	_dock_footers.left.text = "从右侧行囊拖入宝石；右键孔位可放回"
+	_dock_subtitles.left.text = ""
+	_dock_titles.left.tooltip_text = "每行 1 主 + 5 辅；绑定按键可施放。"
+	_dock_footers.left.text = "右侧行囊拖入 · 右键取回"
 
 
 func _build_character_dock() -> void:

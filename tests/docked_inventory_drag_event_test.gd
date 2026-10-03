@@ -52,7 +52,8 @@ func _run() -> void:
 	check(row_scroll.get_v_scroll_bar().max_value > 0.0, "Skills rows remain scrollable beyond the visible subset")
 	row_scroll.scroll_vertical = roundi(row_scroll.get_v_scroll_bar().max_value)
 	var inventory_scroll: ScrollContainer = arena.hud._dock_scrolls.right as ScrollContainer
-	check(inventory_scroll.get_v_scroll_bar().max_value > 0.0, "Right inventory dock has a real vertical scroll range")
+	check(inventory_scroll.get_v_scroll_bar().max_value - inventory_scroll.get_v_scroll_bar().page <= 1.0
+		and grid.grid_rect().end.y <= grid.size.y + 1.0, "The whole right dock and complete 8×6 page fit without dock scrolling")
 	inventory_scroll.scroll_vertical = 0
 	await _frames(4)
 	main_slot = rows.find_child("MainGem_07", true, false) as Control

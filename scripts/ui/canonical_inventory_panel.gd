@@ -45,7 +45,9 @@ class SlotTarget extends Button:
 	var entry: Dictionary = {}
 	func _draw() -> void:
 		if not entry.is_empty():
-			EquipmentArt.draw_item(self, entry, Rect2(Vector2(6,5), size - Vector2(12,25)))
+			var label_band: float = maxf(14.0, get_theme_font_size("font_size") + 3.0)
+			var art_height: float = maxf(8.0, size.y - label_band - 6.0)
+			EquipmentArt.draw_item(self, entry, Rect2(Vector2(4,3), Vector2(maxf(1.0, size.x - 8.0), art_height)))
 		var font: Font = get_theme_default_font()
 		var font_size: int = get_theme_font_size("font_size")
 		draw_string(font,Vector2(3,size.y-5),CanonicalInventoryPanel.SLOT_NAMES[slot_id],HORIZONTAL_ALIGNMENT_CENTER,size.x-6,font_size,Color("3b281b"))
@@ -69,50 +71,53 @@ func setup(state: RefCounted, path: String = "user://build_save.json") -> void:
 
 func _build() -> void:
 	name = "CanonicalInventoryBody"
-	add_theme_constant_override("separation",10)
-	var top := VBoxContainer.new()
+	add_theme_constant_override("separation",2)
+	var top := HBoxContainer.new()
 	top.name = "BagHeader"
-	top.add_theme_constant_override("separation", 3)
+	top.add_theme_constant_override("separation", 4)
 	add_child(top)
 	_summary = Label.new()
 	_summary.name = "BagSummary"
 	_summary.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_summary.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_summary.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_summary.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	_summary.add_theme_font_size_override("font_size", 13)
 	top.add_child(_summary)
-	var actions := HFlowContainer.new()
+	var actions := HBoxContainer.new()
 	actions.name = "BagHeaderActions"
-	actions.add_theme_constant_override("h_separation", 4)
-	actions.add_theme_constant_override("v_separation", 2)
+	actions.add_theme_constant_override("separation", 3)
+	actions.size_flags_horizontal = Control.SIZE_SHRINK_END
 	top.add_child(actions)
 	_character=CharacterButton.new()
 	_character.name="CharacterStats"
 	_character.text="属性"
 	_character.custom_minimum_size.x = 58
+	_character.custom_minimum_size.y = 24
+	_character.add_theme_font_size_override("font_size", 12)
 	_character.pressed.connect(func(): character_requested.emit())
 	actions.add_child(_character)
 	var arrange := Button.new()
 	arrange.name = "ArrangeUnifiedBag"
 	arrange.text = "整理"
 	arrange.custom_minimum_size.x = 58
+	arrange.custom_minimum_size.y = 24
+	arrange.add_theme_font_size_override("font_size", 12)
 	arrange.pressed.connect(func(): _report(model.arrange_items(model.revision(), save_path)))
 	actions.add_child(arrange)
 	_discard=Button.new()
 	_discard.name="DiscardUnifiedItem"
 	_discard.text="丢弃"
 	_discard.custom_minimum_size.x = 58
+	_discard.custom_minimum_size.y = 24
+	_discard.add_theme_font_size_override("font_size", 12)
 	_discard.pressed.connect(_request_discard)
 	actions.add_child(_discard)
-	var equipment_title := Label.new()
-	equipment_title.name = "EquipmentSlotsTitle"
-	equipment_title.text = "已装备 · 九个部位"
-	equipment_title.add_theme_color_override("font_color", ThemeStyle.GOLD)
-	add_child(equipment_title)
 	_equipment_grid = GridContainer.new()
 	_equipment_grid.name = "EquipmentSlotGrid"
 	_equipment_grid.columns = 3
 	_equipment_grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_equipment_grid.add_theme_constant_override("h_separation", 5)
-	_equipment_grid.add_theme_constant_override("v_separation", 5)
+	_equipment_grid.add_theme_constant_override("v_separation", 2)
 	add_child(_equipment_grid)
 	for slot: String in Slots.all_slots():
 		var target := SlotTarget.new()
@@ -122,8 +127,8 @@ func _build() -> void:
 		target.text = ""
 		target.alignment = HORIZONTAL_ALIGNMENT_CENTER
 		target.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		target.custom_minimum_size = Vector2(76,64)
-		target.add_theme_font_size_override("font_size",13)
+		target.custom_minimum_size = Vector2(76,36)
+		target.add_theme_font_size_override("font_size",12)
 		target.add_theme_constant_override("outline_size",0)
 		target.add_theme_stylebox_override("normal",ThemeStyle.panel(Color("e2c997"), Color("967347"),4,1,4))
 		target.pressed.connect(_activate_equipment.bind(slot))
@@ -133,18 +138,27 @@ func _build() -> void:
 		_slots[slot] = target
 	var page_bar := HBoxContainer.new()
 	page_bar.name = "BagPageControls"
+	page_bar.custom_minimum_size.y = 24
 	_page_label = Label.new()
 	_page_label.name = "BagPageLabel"
 	_page_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_page_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_page_label.add_theme_font_size_override("font_size", 12)
 	page_bar.add_child(_page_label)
 	_previous_page = Button.new()
 	_previous_page.name = "PreviousBagPage"
-	_previous_page.text = "‹ 上页"
+	_previous_page.text = "‹"
+	_previous_page.custom_minimum_size = Vector2(32, 24)
+	_previous_page.add_theme_font_size_override("font_size", 12)
+	_previous_page.tooltip_text = "上一页"
 	_previous_page.pressed.connect(_turn_page.bind(-1))
 	page_bar.add_child(_previous_page)
 	_next_page = Button.new()
 	_next_page.name = "NextBagPage"
-	_next_page.text = "下页 ›"
+	_next_page.text = "›"
+	_next_page.custom_minimum_size = Vector2(32, 24)
+	_next_page.add_theme_font_size_override("font_size", 12)
+	_next_page.tooltip_text = "下一页"
 	_next_page.pressed.connect(_turn_page.bind(1))
 	page_bar.add_child(_next_page)
 	add_child(page_bar)
@@ -166,12 +180,6 @@ func _build() -> void:
 	_grid.item_activated.connect(_activate_item)
 	_grid.item_hovered.connect(func(uid: String, rect: Rect2): item_hovered.emit(uid,rect))
 	_grid.hover_left.connect(func(): hover_left.emit())
-	var hint := Label.new()
-	hint.name = "BagGridHint"
-	hint.text = "悬停查看详情 · Shift 对比 · 右键装备 · 拖动选择目标"
-	hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	hint.add_theme_font_size_override("font_size",13)
-	add_child(hint)
 	_craft_controls = CraftControls.new()
 	_craft_controls.name = "CanonicalCraftingControls"
 	_craft_controls.craft_requested.connect(_request_craft)
@@ -213,8 +221,10 @@ func refresh() -> void:
 		target.queue_redraw()
 	var columns: int = int(_bag_layout.get("columns", 12))
 	var rows: int = int(_bag_layout.get("rows", 8))
-	_summary.text = "行囊 %d 格 · 装备 %d / 9" % [page_count * columns * rows, model.equipped_items().size()]
-	_page_label.text = "背包第 %d / %d 页 · %d × %d" % [_bag_page + 1, page_count, columns, rows]
+	_summary.text = "装备 %d/9 · 行囊 %d 格" % [model.equipped_items().size(), page_count * columns * rows]
+	_summary.tooltip_text = "九个装备位 · 装备、珠宝与宝石共用分页行囊。悬停看详情，Shift 对比，右键可装备。"
+	_page_label.text = "第 %d/%d 页" % [_bag_page + 1, page_count]
+	_page_label.tooltip_text = "%d × %d 格 · 悬停看详情 · Shift 对比 · 拖放摆放" % [columns, rows]
 	_previous_page.disabled = _bag_page <= 0
 	_next_page.disabled = _bag_page >= page_count - 1
 	for child: Node in _pending.get_children():

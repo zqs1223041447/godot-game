@@ -47,11 +47,6 @@ func _build() -> void:
 	_rows.binding_requested.connect(_bind)
 	_rows.item_hovered.connect(func(uid: String,rect: Rect2): item_hovered.emit(uid,rect))
 	_rows.hover_left.connect(func(): hover_left.emit())
-	var title := Label.new()
-	title.text = "从右侧行囊拖入主槽或辅助孔 · 右键孔可放回行囊"
-	title.add_theme_font_size_override("font_size",13)
-	title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	add_child(title)
 
 
 func refresh(force: bool = false) -> void:
@@ -63,8 +58,8 @@ func refresh(force: bool = false) -> void:
 		_refresh_dirty = false
 		return
 	var capacity: int = model.active_group_capacity()
-	_summary.text = "已激活 %d 行 · 每行 1 主 + 5 辅 · 滚动查看全部行" % capacity
-	_summary.tooltip_text = "每一激活行均可绑定右侧按键。选择已有按键会转交给本行；换键或移动宝石不能重置已产生的冷却。超过容量的行仅停用，物品与配置保留。预览为单次命中，不是总DPS。"
+	_summary.text = "已激活 %d 行 · 1 主 + 5 辅" % capacity
+	_summary.tooltip_text = "每一激活行均可绑定右侧按键。向右侧行囊拖入宝石，右键取回；换键或移动宝石不能重置已产生的冷却。超过容量的行仅停用，配置保留。技能行可滚动查看。预览为单次命中，不是总 DPS。"
 	var bindings := {}
 	for binding: Dictionary in snapshot.bindings: bindings[binding.group_id] = int(binding.keycode)
 	var rows: Array = []
