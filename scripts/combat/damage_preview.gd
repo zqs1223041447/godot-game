@@ -66,7 +66,8 @@ static func details(cast: Dictionary) -> String:
 	if cast.skill_id == "chain" and cast.recipe.has("hit"):
 		lines.append("连锁最多 %d 个目标（含首个）；首段 %.2f，续跳 %.2f。已命中过的目标不重复，每个目标沿原配方递减基础倍率和附加效用。" % [int(cast.recipe.hit.bounce_count), float(cast.recipe.first_range), float(cast.recipe.followup_range)])
 	if cast.skill_id in ["bolt", "frost", "shade_bolt"]:
-		lines.append("投射速度 %.2f；现有减速时长 %.2f 秒。范围、生命周期与穿透分别结算；延长减速不等于新增异常状态。" % [float(cast.recipe.speed), float(cast.recipe.slow)])
+		lines.append("现有减速时长 %.2f 秒。距离、生命周期与穿透分别结算；延长减速不等于新增异常状态。" % float(cast.recipe.slow))
+	lines.append_array(spatial_details(cast))
 	for entry: Dictionary in entries(cast):
 		var packet: Dictionary = entry.packet
 		var resolved: Dictionary = Damage.resolve(packet, cast.snapshot.modifiers)
@@ -75,3 +76,21 @@ static func details(cast: Dictionary) -> String:
 		if entry.label == "独立爆炸":
 			lines.append("仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。")
 	return "\n".join(lines)
+
+
+static func spatial_details(cast: Dictionary) -> PackedStringArray:
+	var lines := PackedStringArray()
+	var recipe: Dictionary = cast.get("recipe", {})
+	var snapshot: Dictionary = cast.get("snapshot", {})
+	if recipe.has("parent") and recipe.has("child"):
+		lines.append("母箭速度 %.2f · 子箭速度 %.2f；返回沿用各自速度。" % [float(recipe.parent.speed), float(recipe.child.speed)])
+	elif recipe.has("speed"):
+		lines.append("实际投射速度 %.2f" % float(recipe.speed))
+	if recipe.has("speed") or recipe.has("parent"):
+		lines.append("投射速度改变飞行快慢，不增加距离上限或存续时间。")
+	var explosion: Dictionary = snapshot.get("explosion_recipe", {})
+	if snapshot.get("effects", []).has("explode_on_flight_end") and explosion.has("radius"):
+		lines.append("独立爆炸半径 %.2f · 面积 ×%.4f" % [float(explosion.radius),float(explosion.get("area_multiplier",1.0))])
+	if recipe.has("source_area_multiplier") or float(explosion.get("area_multiplier",1.0)) != 1.0:
+		lines.append("范围增幅按面积计算；半径按面积倍率的平方根变化。")
+	return lines
