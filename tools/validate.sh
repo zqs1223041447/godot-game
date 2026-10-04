@@ -103,13 +103,12 @@ fi
 echo "Godot version: $("$GODOT_BIN" --version)"
 python3 "$PROJECT_DIR/tools/check_font_coverage.py"
 run_check --editor --import
-run_check --script res://tests/source_spatial_parser_test.gd
-run_check --script res://tests/source_spatial_compile_test.gd
-run_check --script res://tests/source_spatial_migration_test.gd
-run_check --script res://tests/source_spatial_gameplay_test.gd
-run_check --script res://tests/spatial_preview_text_test.gd
-run_check --script res://tests/source_spatial_reference_test.gd
+run_check --script res://tests/source_recharge_rules_test.gd
+run_check --script res://tests/source_recharge_migration_test.gd
+run_check --script res://tests/source_recharge_gameplay_test.gd
+run_check --script res://tests/recharge_character_text_test.gd
+run_check --script res://tests/source_recharge_reference_test.gd
 python3 "$PROJECT_DIR/tools/check_item_transparency.py"
 python3 "$PROJECT_DIR/tests/reference_catalog_test.py"
 run_check --quit-after 300
-echo "Current-batch validation passed: source area/projectile-speed parsing, frozen zero-increment recipes, version20 migration, actual carriers/area hits, final-value preview, reference/font/assets, and startup."
+echo "Current-batch validation passed: shared source shield recharge, frozen monster bytes, version21 migration, actual effective-hit/wait/recovery paths, final-value character sheet, reference/font/assets, and startup."

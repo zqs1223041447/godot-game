@@ -1,0 +1,44 @@
+{
+  "reports": [
+    {
+      "path": "docs/qa/v033/source-rules.log.txt",
+      "sha256": "5e63bc044c5a5d7b05e3d4759fd047a0f40333202dfe112711180468b8233f09",
+      "checks": 213
+    },
+    {
+      "path": "docs/qa/v033/source-migration.log.txt",
+      "sha256": "220e049ea176095ea62ac2dd2077a03552ee4ec528ec3066867eb6bb7606b22d",
+      "checks": 49
+    },
+    {
+      "path": "docs/qa/v033/source-gameplay.log.txt",
+      "sha256": "f81234ec168fe1a12a751df2a1ff3ec5e10c91e1752c3f57f84d5965c68f531b",
+      "checks": 45
+    },
+    {
+      "path": "docs/qa/v033/root-ui/recharge-character.log.txt",
+      "sha256": "a6011f90aabe793429f03d9fe782417115dd0298ea707eeb040f2f0c14a63bde",
+      "checks": 6
+    },
+    {
+      "path": "docs/qa/v033/source-reference.log.txt",
+      "sha256": "09f565eb1b3e7693090557f75ab289d3fdc195fa12b05c4b82292d9b199b850b",
+      "checks": 11
+    }
+  ],
+  "checks": 324,
+  "report_count": 5,
+  "production_inputs": 378,
+  "root_ui_commit": "5d805cff6282b1010f2dcd8408aa866ca98a814f",
+  "ui_evidence_reused": true,
+  "frozen_zero_increment_enemies": 20,
+  "save_schema": 21,
+  "previous_schema": 20,
+  "default_reachable_nodes": 589,
+  "600_second_test_deleted": true,
+  "full_repeat_required": false,
+  "font_evidence_reused_by_exact_sha": true,
+  "historical_fixture_updates_not_rerun": [
+    "tests/source_spatial_migration_test.gd"
+  ]
+}

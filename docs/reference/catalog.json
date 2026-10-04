@@ -3448,7 +3448,7 @@
 				"normal_points": 5,
 				"source_version": "3.29.1"
 			},
-			"version": 20
+			"version": 21
 		},
 		"default_casts": {
 			"group_000001": {
@@ -3551,6 +3551,10 @@
 			"projectile_count": 0.0,
 			"projectile_increased": 0.0,
 			"projectile_speed_increased": 0.0,
+			"shield_recharge_delay": 4.0,
+			"shield_recharge_rate": 16.0,
+			"shield_recharge_rate_increased": 0.0,
+			"shield_recharge_start_faster": 0.0,
 			"shield_regen": 16.0,
 			"spell_added_cold": 0.0,
 			"spell_added_lightning": 0.0,
@@ -4418,7 +4422,7 @@
 				"evasion": 320.0
 			}
 		},
-		"save_version": 20,
+		"save_version": 21,
 		"skitter_accuracy_example": {
 			"base_accuracy": 140,
 			"base_chance": 0.96,
@@ -4495,6 +4499,10 @@
 				"projectile_count": 0.0,
 				"projectile_increased": 0.0,
 				"projectile_speed_increased": 0.0,
+				"shield_recharge_delay": 4.0,
+				"shield_recharge_rate": 16.0,
+				"shield_recharge_rate_increased": 0.0,
+				"shield_recharge_start_faster": 0.0,
 				"shield_regen": 16.0,
 				"spell_added_cold": 0.0,
 				"spell_added_lightning": 0.0,
@@ -4932,7 +4940,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 20,
+				"save_version": 21,
 				"source": {
 					"affixes": [
 						{
@@ -5339,7 +5347,7 @@
 				"schema_version": 2,
 				"status": "prototype"
 			},
-			"save_version": 20
+			"save_version": 21
 		},
 		"elevate": {
 			"description": "保留魔法装备已有词缀，升为稀有并补至4至6条。",
@@ -5540,7 +5548,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 20,
+				"save_version": 21,
 				"source": {
 					"affixes": [
 						{
@@ -5724,7 +5732,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 20,
+				"save_version": 21,
 				"source": {
 					"affixes": [],
 					"base_id": "ashwood_bow",
@@ -5910,7 +5918,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 20,
+				"save_version": 21,
 				"source": {
 					"affixes": [
 						{
@@ -6113,7 +6121,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 20,
+				"save_version": 21,
 				"source": {
 					"affixes": [
 						{
@@ -6255,7 +6263,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 20,
+				"save_version": 21,
 				"source": {
 					"affixes": [
 						{
@@ -6304,7 +6312,7 @@
 			"example_quantity": 1,
 			"name": "校准碎片",
 			"quantity_source": "items[uid].payload.quantity",
-			"save_version": 20,
+			"save_version": 21,
 			"size": [
 				1,
 				1
@@ -13599,7 +13607,7 @@
 			"status": "implemented"
 		}
 	},
-	"game_version": "0.32.0",
+	"game_version": "0.33.0",
 	"jewel_affixes": {
 		"barrier": {
 			"kind": "prefix",
@@ -15156,6 +15164,10 @@
 							"projectile_count": 0.0,
 							"projectile_increased": 0.0,
 							"projectile_speed_increased": 0.0,
+							"shield_recharge_delay": 4.0,
+							"shield_recharge_rate": 16.0,
+							"shield_recharge_rate_increased": 0.0,
+							"shield_recharge_start_faster": 0.0,
 							"shield_regen": 16.0,
 							"spell_added_cold": 0.0,
 							"spell_added_lightning": 0.0,
@@ -15257,6 +15269,10 @@
 							"projectile_count": 0.0,
 							"projectile_increased": 0.0,
 							"projectile_speed_increased": 0.0,
+							"shield_recharge_delay": 4.0,
+							"shield_recharge_rate": 16.0,
+							"shield_recharge_rate_increased": 0.0,
+							"shield_recharge_start_faster": 0.0,
 							"shield_regen": 16.0,
 							"spell_added_cold": 0.0,
 							"spell_added_lightning": 0.0,
@@ -15317,6 +15333,10 @@
 							"projectile_count": 0.0,
 							"projectile_increased": 0.0,
 							"projectile_speed_increased": 0.0,
+							"shield_recharge_delay": 4.0,
+							"shield_recharge_rate": 16.0,
+							"shield_recharge_rate_increased": 0.0,
+							"shield_recharge_start_faster": 0.0,
 							"shield_regen": 16.0,
 							"spell_added_cold": 0.0,
 							"spell_added_lightning": 0.0,
@@ -15685,6 +15705,10 @@
 							"projectile_count": 0.0,
 							"projectile_increased": 0.0,
 							"projectile_speed_increased": 0.0,
+							"shield_recharge_delay": 4.0,
+							"shield_recharge_rate": 16.0,
+							"shield_recharge_rate_increased": 0.0,
+							"shield_recharge_start_faster": 0.0,
 							"shield_regen": 16.0,
 							"spell_added_cold": 0.0,
 							"spell_added_lightning": 0.0,
@@ -15786,6 +15810,10 @@
 							"projectile_count": 0.0,
 							"projectile_increased": 0.0,
 							"projectile_speed_increased": 0.0,
+							"shield_recharge_delay": 4.0,
+							"shield_recharge_rate": 16.0,
+							"shield_recharge_rate_increased": 0.0,
+							"shield_recharge_start_faster": 0.0,
 							"shield_regen": 16.0,
 							"spell_added_cold": 0.0,
 							"spell_added_lightning": 0.0,
@@ -15846,6 +15874,10 @@
 							"projectile_count": 0.0,
 							"projectile_increased": 0.0,
 							"projectile_speed_increased": 0.0,
+							"shield_recharge_delay": 4.0,
+							"shield_recharge_rate": 16.0,
+							"shield_recharge_rate_increased": 0.0,
+							"shield_recharge_start_faster": 0.0,
 							"shield_regen": 16.0,
 							"spell_added_cold": 0.0,
 							"spell_added_lightning": 0.0,
@@ -21569,7 +21601,7 @@
 		"source": "SkillCompiler + ProjectileRuntime.advance + DamageResolver",
 		"target_count": 6
 	},
-	"save_version": 20,
+	"save_version": 21,
 	"schema_version": 3,
 	"sectors": [
 		{
@@ -200194,6 +200226,211 @@
 			"short_name": "结界"
 		}
 	},
+	"source_recharge": {
+		"base_delay": 4.0,
+		"changes": "换装或退款立即更新后续速率，已开始等待不改，下一次有效命中采用新等待值",
+		"delay_formula": "下一次有效损伤等待 = 本游戏4秒基底 / (1 + 更快开始充能总和)",
+		"example_scope": "以10每秒原型基底隔离展示充能两属性；不代表源节点的全部护盾上限或PoE完整基底",
+		"examples": [
+			{
+				"after": {
+					"base_rate": 10.0,
+					"delay": 4.0,
+					"ok": true,
+					"rate": 11.0,
+					"reason": ""
+				},
+				"before": {
+					"base_rate": 10.0,
+					"delay": 4.0,
+					"ok": true,
+					"rate": 10.0,
+					"reason": ""
+				},
+				"input": {
+					"shield_recharge_rate_increased": 0.1,
+					"shield_regen": 10.0
+				},
+				"monster_after": {
+					"base_rate": 10.0,
+					"delay": 4.0,
+					"ok": true,
+					"rate": 11.0,
+					"reason": ""
+				},
+				"node_id": "3452",
+				"source_effect": {
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "max_shield",
+							"value": 20.0
+						},
+						{
+							"mode": "increased",
+							"stat": "max_shield",
+							"value": 0.14
+						},
+						{
+							"mode": "increased",
+							"stat": "shield_recharge_rate_increased",
+							"value": 0.1
+						}
+					],
+					"status": "full",
+					"supported": [
+						"+20 to maximum Energy Shield",
+						"14% increased maximum Energy Shield",
+						"10% increased Energy Shield Recharge Rate"
+					],
+					"unsupported": []
+				},
+				"source_node": {
+					"group_id": "443",
+					"has_position": true,
+					"id": "3452",
+					"mastery_effects": [],
+					"name": "Foresight",
+					"position": [
+						3.434999942779541,
+						-1982.6400146484375
+					],
+					"source": {
+						"group": 443.0,
+						"in": [],
+						"isNotable": true,
+						"name": "Foresight",
+						"orbit": 3.0,
+						"orbitIndex": 0.0,
+						"out": [
+							"60090",
+							"22473",
+							"18240"
+						],
+						"recipe": [
+							"VerdantOil",
+							"OpalescentOil",
+							"GoldenOil"
+						],
+						"skill": 3452.0,
+						"stats": [
+							"+20 to maximum Energy Shield",
+							"14% increased maximum Energy Shield",
+							"10% increased Energy Shield Recharge Rate"
+						]
+					},
+					"stats": [
+						"+20 to maximum Energy Shield",
+						"14% increased maximum Energy Shield",
+						"10% increased Energy Shield Recharge Rate"
+					],
+					"type": "notable"
+				}
+			},
+			{
+				"after": {
+					"base_rate": 10.0,
+					"delay": 3.4782608695652177,
+					"ok": true,
+					"rate": 13.0,
+					"reason": ""
+				},
+				"before": {
+					"base_rate": 10.0,
+					"delay": 4.0,
+					"ok": true,
+					"rate": 10.0,
+					"reason": ""
+				},
+				"input": {
+					"shield_recharge_rate_increased": 0.3,
+					"shield_recharge_start_faster": 0.15,
+					"shield_regen": 10.0
+				},
+				"monster_after": {
+					"base_rate": 10.0,
+					"delay": 3.4782608695652177,
+					"ok": true,
+					"rate": 13.0,
+					"reason": ""
+				},
+				"node_id": "23690",
+				"source_effect": {
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "shield_recharge_start_faster",
+							"value": 0.15
+						},
+						{
+							"mode": "increased",
+							"stat": "shield_recharge_rate_increased",
+							"value": 0.3
+						}
+					],
+					"status": "full",
+					"supported": [
+						"15% faster start of Energy Shield Recharge",
+						"30% increased Energy Shield Recharge Rate"
+					],
+					"unsupported": []
+				},
+				"source_node": {
+					"group_id": "348",
+					"has_position": true,
+					"id": "23690",
+					"mastery_effects": [],
+					"name": "Essence Infusion",
+					"position": [
+						-2428.030029296875,
+						-5244.8798828125
+					],
+					"source": {
+						"group": 348.0,
+						"in": [
+							"5591"
+						],
+						"isNotable": true,
+						"name": "Essence Infusion",
+						"orbit": 2.0,
+						"orbitIndex": 0.0,
+						"out": [
+							"10729"
+						],
+						"recipe": [
+							"ClearOil",
+							"AmberOil",
+							"VerdantOil"
+						],
+						"skill": 23690.0,
+						"stats": [
+							"15% faster start of Energy Shield Recharge",
+							"30% increased Energy Shield Recharge Rate"
+						]
+					},
+					"stats": [
+						"15% faster start of Energy Shield Recharge",
+						"30% increased Energy Shield Recharge Rate"
+					],
+					"type": "notable"
+				}
+			}
+		],
+		"legacy_rule": "v20先按旧执行门槛验证并原字节备份再迁移；旧版本注入新充能节点拒绝",
+		"minimum_save_version": 21,
+		"rate_formula": "实际每秒充能 = 本游戏平面基底 × (1 + 充能速率 increased 总和)",
+		"rate_stat": "shield_recharge_rate_increased",
+		"start_stat": "shield_recharge_start_faster",
+		"timing": "有效损伤命中锁定当次等待；闪避、无敌与零伤害不重置；跨阈值只按剩余delta恢复",
+		"unsupported": [
+			"格挡触发充能",
+			"压制触发充能",
+			"护盾充能转为生命",
+			"伤害不打断充能",
+			"最大抗性与压制节点其余未实现部分"
+		],
+		"ward": "护盾技能仍独立立即恢复75%最大护盾并清等待"
+	},
 	"source_spatial": {
 		"area_damage_is_separate": true,
 		"area_formula": "最终半径 = 基础半径 × sqrt((1 + 全局面积 increased + 适用技能面积 increased) × 辅助面积 more 乘积)",
@@ -228778,15 +229015,19 @@
 							"mode": "flat",
 							"stat": "max_shield",
 							"value": 15.0
+						},
+						{
+							"mode": "increased",
+							"stat": "shield_recharge_rate_increased",
+							"value": 0.1
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
-						"+15 to maximum Energy Shield"
-					],
-					"unsupported": [
+						"+15 to maximum Energy Shield",
 						"10% increased Energy Shield Recharge Rate"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "17236",
@@ -234936,15 +235177,19 @@
 							"mode": "flat",
 							"stat": "max_shield",
 							"value": 70.0
+						},
+						{
+							"mode": "increased",
+							"stat": "shield_recharge_rate_increased",
+							"value": 0.15
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
-						"+70 to maximum Energy Shield"
-					],
-					"unsupported": [
+						"+70 to maximum Energy Shield",
 						"15% increased Energy Shield Recharge Rate"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": false,
 				"id": "20241",
@@ -242026,13 +242271,24 @@
 			"23690": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "shield_recharge_start_faster",
+							"value": 0.15
+						},
+						{
+							"mode": "increased",
+							"stat": "shield_recharge_rate_increased",
+							"value": 0.3
+						}
+					],
+					"status": "full",
+					"supported": [
 						"15% faster start of Energy Shield Recharge",
 						"30% increased Energy Shield Recharge Rate"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "23690",
@@ -255249,15 +255505,19 @@
 							"mode": "increased",
 							"stat": "max_shield",
 							"value": 0.06
+						},
+						{
+							"mode": "increased",
+							"stat": "shield_recharge_rate_increased",
+							"value": 0.15
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
-						"6% increased maximum Energy Shield"
-					],
-					"unsupported": [
+						"6% increased maximum Energy Shield",
 						"15% increased Energy Shield Recharge Rate"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "29161",
@@ -266797,12 +267057,18 @@
 			"34478": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "shield_recharge_rate_increased",
+							"value": 0.15
+						}
+					],
+					"status": "full",
+					"supported": [
 						"15% increased Energy Shield Recharge Rate"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "34478",
@@ -267097,16 +267363,20 @@
 							"mode": "increased",
 							"stat": "max_shield",
 							"value": 0.14
+						},
+						{
+							"mode": "increased",
+							"stat": "shield_recharge_rate_increased",
+							"value": 0.1
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
 						"+20 to maximum Energy Shield",
-						"14% increased maximum Energy Shield"
-					],
-					"unsupported": [
+						"14% increased maximum Energy Shield",
 						"10% increased Energy Shield Recharge Rate"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "3452",
@@ -287829,19 +288099,23 @@
 							"value": 0.2
 						},
 						{
+							"mode": "increased",
+							"stat": "shield_recharge_start_faster",
+							"value": 0.1
+						},
+						{
 							"mode": "flat",
 							"stat": "intelligence",
 							"value": 10.0
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
 						"20% increased maximum Energy Shield",
+						"10% faster start of Energy Shield Recharge",
 						"+10 to Intelligence"
 					],
-					"unsupported": [
-						"10% faster start of Energy Shield Recharge"
-					]
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "42795",
@@ -299512,15 +299786,19 @@
 							"mode": "increased",
 							"stat": "max_shield",
 							"value": 0.06
+						},
+						{
+							"mode": "increased",
+							"stat": "shield_recharge_rate_increased",
+							"value": 0.15
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
-						"6% increased maximum Energy Shield"
-					],
-					"unsupported": [
+						"6% increased maximum Energy Shield",
 						"15% increased Energy Shield Recharge Rate"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "48124",
@@ -303680,12 +303958,19 @@
 			"49515": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"+5% chance to Suppress Spell Damage",
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "shield_recharge_rate_increased",
+							"value": 0.1
+						}
+					],
+					"status": "partial",
+					"supported": [
 						"10% increased Energy Shield Recharge Rate"
+					],
+					"unsupported": [
+						"+5% chance to Suppress Spell Damage"
 					]
 				},
 				"has_position": true,
@@ -305055,14 +305340,19 @@
 							"mode": "increased",
 							"stat": "max_shield",
 							"value": 0.18
+						},
+						{
+							"mode": "increased",
+							"stat": "shield_recharge_rate_increased",
+							"value": 0.15
 						}
 					],
 					"status": "partial",
 					"supported": [
-						"18% increased maximum Energy Shield"
+						"18% increased maximum Energy Shield",
+						"15% increased Energy Shield Recharge Rate"
 					],
 					"unsupported": [
-						"15% increased Energy Shield Recharge Rate",
 						"+1% to maximum Lightning Resistance"
 					]
 				},
@@ -306746,15 +307036,19 @@
 							"mode": "increased",
 							"stat": "max_shield",
 							"value": 0.06
+						},
+						{
+							"mode": "increased",
+							"stat": "shield_recharge_rate_increased",
+							"value": 0.15
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
-						"6% increased maximum Energy Shield"
-					],
-					"unsupported": [
+						"6% increased maximum Energy Shield",
 						"15% increased Energy Shield Recharge Rate"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "50935",
@@ -307497,6 +307791,11 @@
 				"execution": {
 					"grants": [
 						{
+							"mode": "increased",
+							"stat": "shield_recharge_rate_increased",
+							"value": 0.15
+						},
+						{
 							"mode": "flat",
 							"stat": "intelligence",
 							"value": 20.0
@@ -307504,10 +307803,10 @@
 					],
 					"status": "partial",
 					"supported": [
+						"15% increased Energy Shield Recharge Rate",
 						"+20 to Intelligence"
 					],
 					"unsupported": [
-						"15% increased Energy Shield Recharge Rate",
 						"Purity of Lightning has 80% increased Mana Reservation Efficiency"
 					]
 				},
@@ -317918,12 +318217,18 @@
 			"5591": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "shield_recharge_rate_increased",
+							"value": 0.15
+						}
+					],
+					"status": "full",
+					"supported": [
 						"15% increased Energy Shield Recharge Rate"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "5591",
@@ -323733,16 +324038,20 @@
 							"mode": "increased",
 							"stat": "max_shield",
 							"value": 0.05
+						},
+						{
+							"mode": "increased",
+							"stat": "shield_recharge_rate_increased",
+							"value": 0.1
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
 						"14% increased Evasion Rating",
-						"5% increased maximum Energy Shield"
-					],
-					"unsupported": [
+						"5% increased maximum Energy Shield",
 						"10% increased Energy Shield Recharge Rate"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "58454",
@@ -333141,15 +333450,19 @@
 							"mode": "flat",
 							"stat": "max_shield",
 							"value": 30.0
+						},
+						{
+							"mode": "increased",
+							"stat": "shield_recharge_start_faster",
+							"value": 0.2
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
-						"+30 to maximum Energy Shield"
-					],
-					"unsupported": [
+						"+30 to maximum Energy Shield",
 						"20% faster start of Energy Shield Recharge"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "62577",
@@ -339058,15 +339371,19 @@
 							"mode": "increased",
 							"stat": "max_shield",
 							"value": 0.1
+						},
+						{
+							"mode": "increased",
+							"stat": "shield_recharge_start_faster",
+							"value": 0.05
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
-						"10% increased maximum Energy Shield"
-					],
-					"unsupported": [
+						"10% increased maximum Energy Shield",
 						"5% faster start of Energy Shield Recharge"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": false,
 				"id": "64782",
@@ -342160,15 +342477,19 @@
 							"mode": "increased",
 							"stat": "max_shield",
 							"value": 0.06
+						},
+						{
+							"mode": "increased",
+							"stat": "shield_recharge_rate_increased",
+							"value": 0.1
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
-						"6% increased maximum Energy Shield"
-					],
-					"unsupported": [
+						"6% increased maximum Energy Shield",
 						"10% increased Energy Shield Recharge Rate"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "6949",
@@ -343672,12 +343993,18 @@
 			"7503": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "shield_recharge_rate_increased",
+							"value": 0.15
+						}
+					],
+					"status": "full",
+					"supported": [
 						"15% increased Energy Shield Recharge Rate"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "7503",
@@ -344139,15 +344466,19 @@
 							"mode": "flat",
 							"stat": "max_shield",
 							"value": 15.0
+						},
+						{
+							"mode": "increased",
+							"stat": "shield_recharge_rate_increased",
+							"value": 0.1
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
-						"+15 to maximum Energy Shield"
-					],
-					"unsupported": [
+						"+15 to maximum Energy Shield",
 						"10% increased Energy Shield Recharge Rate"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "7641",
@@ -349198,12 +349529,19 @@
 			"9769": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"+5% chance to Suppress Spell Damage",
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "shield_recharge_rate_increased",
+							"value": 0.1
+						}
+					],
+					"status": "partial",
+					"supported": [
 						"10% increased Energy Shield Recharge Rate"
+					],
+					"unsupported": [
+						"+5% chance to Suppress Spell Damage"
 					]
 				},
 				"has_position": true,
@@ -355509,7 +355847,7 @@
 		},
 		"reserved_character_key": "C",
 		"retired_profile_writes": false,
-		"save_version": 20,
+		"save_version": 21,
 		"services": [
 			{
 				"description": "免费测试供应全部已实现主动与辅助宝石。",

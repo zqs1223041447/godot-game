@@ -434,6 +434,13 @@ def build(data, art):
         diagram='<figure><svg viewBox="0 0 600 140" role="img" aria-label="面积增加与半径平方根"><circle cx="90" cy="70" r="43" fill="#ecd59d" stroke="#987044"/><circle cx="275" cy="70" r="45.51" fill="#e8c982" stroke="#987044"/><path d="M150 70H212" stroke="#987044"/><g fill="#493523" font-size="14" text-anchor="middle"><text x="90" y="132">基础面积</text><text x="275" y="132">面积 +12%</text><text x="467" y="60">半径 × sqrt(1.12)</text><text x="467" y="86">伤害独立结算</text></g></svg></figure>'
         body=diagram+facts(rows)+'<p>'+esc(spatial['area_formula'])+'</p><p>'+esc(spatial['speed_formula'])+'</p><p>'+esc(spatial['secondary_explosion_scope'])+'。'+esc(spatial['snapshot_rule'])+'。</p><p>速度增幅不延长射程或寿命；仍由先到达的边界决定分裂、返回或结束，撞墙不触发自然到期效果。范围伤害与范围面积是两个独立属性；范围不增加珠宝覆盖、拾取距离或敌人预警。</p><p>'+esc(spatial['example_scope'])+'。</p><p>'+esc(spatial['legacy_rule'])+'。条件、武器限定、光环与召唤物等范围词句继续逐项锁定。</p>'
         rule_defs.append(('source_spatial','源天赋范围与投射速度','已有源树属性现在驱动实际命中半径、母子飞行与返回速度；按面积开方计算半径。',body,'implemented'))
+    if 'source_recharge' in data:
+        recharge=data['source_recharge'];rows=[]
+        for ex in recharge['examples']:
+            rows.append((link('source_passives',ex['node_id']),f"每秒 {number(ex['before']['rate'])} → {number(ex['after']['rate'])}；新损伤等待 {number(ex['before']['delay'])} → {number(ex['after']['delay'])}秒"))
+        diagram='<figure><svg viewBox="0 0 640 120" role="img" aria-label="有效损伤后等待再充能"><path d="M30 75H330L590 25" fill="none" stroke="#618886" stroke-width="4"/><path d="M30 15V93M330 15V93" stroke="#aa8052" stroke-dasharray="4 4"/><g fill="#493523" font-size="15"><text x="16" y="114">有效损伤</text><text x="125" y="55">完整等待</text><text x="286" y="114">等待结束</text><text x="425" y="82">剩余时间 × 当前每秒速率</text></g></svg></figure>'
+        body=diagram+facts(rows)+'<p>'+esc(recharge['rate_formula'])+'。</p><p>'+esc(recharge['delay_formula'])+'。</p><p>'+esc(recharge['timing'])+'。'+esc(recharge['changes'])+'。</p><p>'+esc(recharge['ward'])+'。</p><p>'+esc(recharge['example_scope'])+'；玩家与怪物使用同一计算器。</p><p>'+esc(recharge['legacy_rule'])+'。含未实现额外效果的节点继续整体锁定。</p>'
+        rule_defs.append(('source_recharge','源天赋护盾充能','提高每秒回复并缩短下一次受击等待；沿本游戏既有平面基底，不改变即时护盾技能。',body,'implemented'))
     for key,name,summary,body,status in rule_defs: cards.append(add('rules',key,name,summary,body,{'implemented':'已实现规则','research':'研究来源','planned':'未实现边界'}[status],status))
     category_counts={cat:sum(x['cat']==cat for x in records) for cat,_ in CATEGORIES}
     nav=''.join(f'<a href="#category-{cat}" id="category-{cat}" class="nav-link" data-category="{cat}"><span>{label}</span><span>{category_counts[cat]}</span></a>' for cat,label in CATEGORIES)

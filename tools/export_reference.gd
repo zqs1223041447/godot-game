@@ -81,6 +81,7 @@ static func collect() -> Dictionary:
 	result["town_maps"] = town_map_examples()
 	result["source_tree"] = source_tree_reference()
 	result["source_spatial"] = source_spatial_examples()
+	result["source_recharge"] = source_recharge_examples()
 	result["save_version"] = Canonical.Rules.VERSION
 	result["current_loot_profile_id"] = Canonical.LOOT_PROFILE_ID
 	result["current_loot_profile"] = Equipment.loot_profile(Canonical.LOOT_PROFILE_ID)
@@ -771,3 +772,24 @@ static func source_spatial_examples()->Dictionary:
 		"snapshot_rule":"施放时冻结；母箭、子箭和返回读取最终配方，不二次增加",
 		"example_scope":"隔离演算输入，只演示单项几何增幅；不是整个源节点的伤害预估或已分配构筑",
 		"legacy_rule":"v19先按旧执行覆盖完整验证并保存原字节备份，再迁移到v20；旧版本注入新节点拒绝"}
+
+
+static func source_recharge_examples()->Dictionary:
+	var examples:Array=[]
+	for id:String in ["3452","23690"]:
+		var effect:Dictionary=SourceTree.node_effect(id)
+		var stats:Dictionary={"shield_regen":10.0}
+		for grant:Dictionary in effect.grants:
+			if grant.stat in ["shield_recharge_rate_increased","shield_recharge_start_faster"]:stats[grant.stat]=float(stats.get(grant.stat,0.0))+float(grant.value)
+		var profile:Dictionary=Defense.recharge_profile(stats,"player")
+		assert(profile.ok and effect.status=="full")
+		examples.append({"node_id":id,"source_node":SourceTree.Data.node(id),"source_effect":effect,"input":stats,"before":Defense.recharge_profile({"shield_regen":10.0}),"after":profile,"monster_after":Defense.recharge_profile(stats,"monster")})
+	return {"minimum_save_version":21,"rate_stat":"shield_recharge_rate_increased","start_stat":"shield_recharge_start_faster","base_delay":Defense.RECHARGE_BASE_DELAY,"examples":examples,
+		"rate_formula":"实际每秒充能 = 本游戏平面基底 × (1 + 充能速率 increased 总和)",
+		"delay_formula":"下一次有效损伤等待 = 本游戏4秒基底 / (1 + 更快开始充能总和)",
+		"timing":"有效损伤命中锁定当次等待；闪避、无敌与零伤害不重置；跨阈值只按剩余delta恢复",
+		"changes":"换装或退款立即更新后续速率，已开始等待不改，下一次有效命中采用新等待值",
+		"ward":"护盾技能仍独立立即恢复75%最大护盾并清等待",
+		"example_scope":"以10每秒原型基底隔离展示充能两属性；不代表源节点的全部护盾上限或PoE完整基底",
+		"unsupported":["格挡触发充能","压制触发充能","护盾充能转为生命","伤害不打断充能","最大抗性与压制节点其余未实现部分"],
+		"legacy_rule":"v20先按旧执行门槛验证并原字节备份再迁移；旧版本注入新充能节点拒绝"}
