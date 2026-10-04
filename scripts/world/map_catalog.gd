@@ -2,8 +2,8 @@ class_name MapCatalog
 extends RefCounted
 const Encounters=preload("res://scripts/encounters/encounter_catalog.gd")
 const MAPS={
-	"old_garden":{"name":"旧庭试炼","description":"开阔庭院，无实体残墙。击败24个普通根怪，再击败裂隙守卫并清理其后代。","wave":4,"ordinary_target":24,"boss_id":"rift_warden"},
-	"broken_ruins":{"name":"断垣试炼","description":"两道错位残墙需绕行，攻击受墙体遮挡；贯穿不穿墙，碰墙不触发到期效果。击败36个普通根怪，再击败裂隙守卫并清理其后代。","wave":5,"ordinary_target":36,"boss_id":"rift_warden"}}
+	"old_garden":{"name":"旧庭试炼","description":"开阔庭院，无实体残墙。击败24个普通根怪，再击败裂隙守卫并清理后代。首领近身震地锁定起手位置，看到预警走出圆圈。","wave":4,"ordinary_target":24,"boss_id":"rift_warden","boss_attack_id":"garden_slam"},
+	"broken_ruins":{"name":"断垣试炼","description":"两道错位残墙需绕行；贯穿不穿墙，撞墙不触发到期效果。击败36个普通根怪，再击败裂隙守卫并清理后代。首领落印锁定你的起手位置，及时走开；墙体阻挡视线。","wave":5,"ordinary_target":36,"boss_id":"rift_warden","boss_attack_id":"ruins_mark"}}
 const SPECIAL={
 	"elemental_aegis":{"name":"元素庇护","description":"地图怪物三元素原始抗性各加20个百分点，有效上限75%；物理和混沌不变，无额外奖励。","kind":"defense","minimum_wave":4,"resistance_bonus":0.20,"damage_types":["fire","cold","lightning"]},
 	"frost_patrol":{"name":"霜纹巡逻","description":"原本生成重甲体的普通名额改为霜纹守卫，保留原稀有度与机制；灰烬名额不变。冰霜圆形预警可走开，不产生冻结。","minimum_wave":4,"species":"brute","template":"frost_guard"},

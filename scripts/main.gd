@@ -562,7 +562,7 @@ func _spawn_monster(template_id: String, forced_position: Vector2 = Vector2.ZERO
 			pos = ARENA.get_center() * 2.0 - pos
 	var enemy: Dictionary
 	var previous_monster_id:int=monster_runtime.next_id
-	if _world_mode=="map" and MapDefense.active(_map_run.profile):
+	if _world_mode=="map" and (MapDefense.active(_map_run.profile) or context=="map_boss"):
 		var admitted:Dictionary=MapEnemyAdmission.create_root(monster_runtime,_map_run.profile,template_id,wave,pos,context,rarity,mechanisms,rewards and not demo_mode)
 		if not admitted.ok:
 			rng.state=random_before;_encounter_failed(str(admitted.error));return {}
@@ -794,7 +794,7 @@ func _update_enemies(delta: float) -> void:
 		enemy.spawn = maxf(0.0, float(enemy.spawn) - delta)
 		if float(enemy.spawn) > 0.0:
 			continue
-		var uses_telegraph: bool = Monsters.TELEGRAPH_TEMPLATES.has(str(enemy.get("template_id", "")))
+		var uses_telegraph: bool = Monsters.uses_telegraph(enemy)
 		var performing: bool = not telegraphs.state_for(int(enemy.id)).is_empty()
 		var speed: float = float(enemy.speed) * (0.36 if float(enemy.slow) > 0 else 1.0)
 		var direction: Vector2 = Vector2.ZERO if performing else (player_pos - Vector2(enemy.pos)).normalized()
@@ -839,7 +839,8 @@ func _start_enemy_telegraphs() -> void:
 		if policy.is_empty() or Vector2(enemy.pos).distance_squared_to(player_pos) > float(policy.trigger_distance) * float(policy.trigger_distance):
 			continue
 		if not _terrain_visible(enemy.pos,player_pos): continue
-		var result: Dictionary = telegraphs.start(enemy, player_pos, policy.profile)
+		var target_center:Vector2=enemy.pos if policy.get("target_rule","")=="self_at_start" else player_pos
+		var result: Dictionary = telegraphs.start(enemy,target_center,policy.profile,policy.get("visual_pattern",""))
 		if result.ok:
 			event_counts["enemy_telegraph_started"] = int(event_counts.get("enemy_telegraph_started", 0)) + 1
 

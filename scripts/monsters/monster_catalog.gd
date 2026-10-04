@@ -4,6 +4,7 @@ extends RefCounted
 const Registry = preload("res://scripts/mechanics/mechanic_registry.gd")
 const Defense = preload("res://scripts/mechanics/defense_rules.gd")
 const TelegraphProfiles = preload("res://scripts/monsters/telegraph_profiles.gd")
+const MapBossAttacks=preload("res://scripts/monsters/map_boss_profiles.gd")
 const SCHEMA_VERSION: int = 1
 const BASE_ATTACK_SPEED: float = 1.0 / 0.85
 const TELEGRAPH_TEMPLATES: Dictionary = {
@@ -85,28 +86,38 @@ static func contact_components(enemy: Dictionary) -> Dictionary:
 	return components
 
 
+static func uses_telegraph(enemy:Dictionary)->bool:
+	# Invalid attached metadata cannot silently fall back to contact damage.
+	return TELEGRAPH_TEMPLATES.has(str(enemy.get("template_id",""))) or enemy.has("map_boss_attack_id")
+
+
 static func telegraph_policy(enemy: Dictionary) -> Dictionary:
 	# The guard replaces contact attacks with an explicit locked-ground action.
 	# Attack speed shortens recovery, never the readable warning. All defaults
 	# and legal limits still come from the reviewed runtime's profile authority.
 	var id: String = str(enemy.get("template_id", ""))
-	if not TELEGRAPH_TEMPLATES.has(id):
+	var map_rule:Dictionary=MapBossAttacks.for_enemy(enemy) if enemy.has("map_boss_attack_id") else {}
+	if enemy.has("map_boss_attack_id") and map_rule.is_empty():return {}
+	if not TELEGRAPH_TEMPLATES.has(id) and map_rule.is_empty():
 		return {}
 	var speed: Variant = enemy.get("attack_speed", BASE_ATTACK_SPEED)
 	if typeof(speed) not in [TYPE_INT, TYPE_FLOAT] or not is_finite(float(speed)) or float(speed) <= 0.0:
 		return {}
-	var base: Dictionary = TelegraphProfiles.resolve(TelegraphProfiles.ELEMENTAL.get(id, {})).profile
+	var base: Dictionary = TelegraphProfiles.resolve(map_rule.profile if not map_rule.is_empty() else TelegraphProfiles.ELEMENTAL.get(id, {})).profile
 	var recovery: float = float(base.recovery_seconds) * BASE_ATTACK_SPEED / maxf(0.2, float(speed))
 	recovery = clampf(recovery, float(TelegraphProfiles.LIMITS.recovery_seconds.minimum), float(TelegraphProfiles.LIMITS.recovery_seconds.maximum))
 	base.recovery_seconds = recovery
 	var checked: Dictionary = TelegraphProfiles.resolve(base)
 	if not checked.ok:
 		return {}
-	return {"profile_id": TelegraphProfiles.PROFILE_ID, "profile": checked.profile,
-		"trigger_distance": float(TELEGRAPH_TEMPLATES[id].trigger_distance),
+	var policy:Dictionary={"profile_id": TelegraphProfiles.PROFILE_ID, "profile": checked.profile,
+		"trigger_distance": float(map_rule.trigger_distance if not map_rule.is_empty() else TELEGRAPH_TEMPLATES[id].trigger_distance),
 		"replaces_contact": true, "hold_pursuit_during_action": true,
 		"recovery_scaling": "base_attack_speed_divided_by_current_attack_speed",
 		"minimum_attack_speed": 0.2, "base_attack_speed": BASE_ATTACK_SPEED}
+	if not map_rule.is_empty():
+		policy.target_rule=map_rule.target_rule;policy.visual_pattern=map_rule.id;policy.name=map_rule.name
+	return policy
 
 static func ordinary_roll(rng: RandomNumberGenerator, wave: int) -> Dictionary:
 	var kind: int = 0
@@ -266,7 +277,7 @@ static func mechanism_text(enemy: Dictionary) -> String:
 	var labels: PackedStringArray = []
 	var telegraph: Dictionary = telegraph_policy(enemy)
 	if not telegraph.is_empty():
-		labels.append("锁点重击 %.1f秒 · 范围 %.0f" % [telegraph.profile.windup_seconds, telegraph.profile.radius])
+		labels.append("%s %.1f秒 · 范围 %.0f" % [telegraph.get("name","锁点重击"),telegraph.profile.windup_seconds, telegraph.profile.radius])
 	for id: String in enemy.get("mechanism_ids", []):
 		labels.append(str(Registry.get_definition(id).get("name", id)))
 	if not enemy.get("death_spawns", []).is_empty():

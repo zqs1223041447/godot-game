@@ -7,6 +7,7 @@ const Profiles = preload("res://scripts/monsters/telegraph_profiles.gd")
 const Monsters = preload("res://scripts/monsters/monster_catalog.gd")
 const Defense = preload("res://scripts/mechanics/defense_rules.gd")
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
+const BossProfiles=preload("res://scripts/monsters/map_boss_profiles.gd")
 const MAX_ACTIVE: int = Profiles.MAX_ACTIVE
 const TIME_EPSILON: float = 0.000000001
 
@@ -14,9 +15,11 @@ var _states: Dictionary = {}
 var _next_attack_id: int = 1
 
 
-func start(enemy: Variant, target_center: Vector2, overrides: Variant = {}) -> Dictionary:
+func start(enemy: Variant, target_center: Vector2, overrides: Variant = {}, visual_pattern:Variant="") -> Dictionary:
 	if not enemy is Dictionary or not _valid_id(enemy.get("id")) or not _can_attack(enemy):
 		return _failure("Source must be alive and outside birth protection")
+	if not visual_pattern is String:return _failure("Visual pattern must be a known string")
+	if not visual_pattern.is_empty() and (not BossProfiles.enemy_reason(enemy,visual_pattern).is_empty() or enemy.get("map_boss_attack_id")!=visual_pattern):return _failure("Visual pattern must match the authoritative map boss")
 	var source_id: int = int(enemy.id)
 	if _states.has(source_id):
 		return _failure("Source already has an attack in progress")
@@ -47,6 +50,7 @@ func start(enemy: Variant, target_center: Vector2, overrides: Variant = {}) -> D
 		"center": target_center, "profile": checked.profile,
 		"packet": Damage.packet(validated.components, ["attack", "area", "hit"], Profiles.PROFILE_ID),
 	}
+	if not visual_pattern.is_empty():attack.visual_pattern=visual_pattern
 	_next_attack_id += 1
 	_states[source_id] = attack
 	return {"ok": true, "reason": "", "attack": attack.duplicate(true)}
@@ -87,6 +91,7 @@ func advance(delta: float, live_enemies: Variant) -> Array[Dictionary]:
 				"schema_version": Profiles.SCHEMA_VERSION, "balance_version": Profiles.BALANCE_VERSION,
 				"profile": attack.profile.duplicate(true), "packet": attack.packet.duplicate(true),
 			}})
+			if attack.has("visual_pattern"):pending.back().event.visual_pattern=attack.visual_pattern
 		if float(attack.elapsed) + TIME_EPSILON >= duration:
 			_states.erase(source_id)
 	# Stable chronological order within this call; equal deadlines use source identity.

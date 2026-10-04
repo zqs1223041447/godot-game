@@ -5,9 +5,11 @@ extends RefCounted
 const Compiler=preload("res://scripts/world/map_compiler.gd")
 const Rules=preload("res://scripts/world/map_defense_rules.gd")
 const Encounter=preload("res://scripts/encounters/encounter_admission.gd")
+const BossAttacks=preload("res://scripts/monsters/map_boss_profiles.gd")
 
 static func create_root(runtime:RefCounted,profile:Variant,template_id:String,wave:int,position:Vector2,context:String,rarity:String,mechanisms:Array,rewards:bool)->Dictionary:
 	var reason:=Compiler.profile_reason(profile)
+	if reason.is_empty() and context=="map_boss":reason=BossAttacks.profile_reason(profile)
 	if not reason.is_empty():return {"ok":false,"error":reason}
 	var before:Dictionary=Encounter._snapshot(runtime)
 	var enemy:Dictionary
@@ -19,8 +21,8 @@ static func create_root(runtime:RefCounted,profile:Variant,template_id:String,wa
 		enemy=admitted.enemy
 	if enemy.is_empty():
 		Encounter._restore(runtime,before);return {"ok":false,"error":"地图怪物生成失败"}
-	if not Rules.active(profile):return {"ok":true,"error":"","enemy":enemy}
-	var applied:=Rules.apply_to_enemy(enemy,profile)
+	var applied:Dictionary=Rules.apply_to_enemy(enemy,profile) if Rules.active(profile) else {"ok":true,"error":"","enemy":enemy}
+	if applied.ok and context=="map_boss":applied=BossAttacks.attach(applied.enemy,profile)
 	if not applied.ok:Encounter._restore(runtime,before)
 	return applied
 
