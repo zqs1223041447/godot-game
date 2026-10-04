@@ -1,0 +1,58 @@
+{
+  "base_commit": "f074c2614540f0842964ced961b3430871adce57",
+  "changed_production_file": "scripts/items/unified_item_catalog.gd",
+  "production_file_sha256": "ae499e3e68f30269fa2359d2a21a4d7226a2d4d984b41fa38f48f69f226d5fbc",
+  "baseline_and_optimized_exact_trace_sha256": "3a8022cbdc4889a0d428178fa9337b6fd260008b6918f67650420d6eb72d9dbe",
+  "exact_equal": true,
+  "cases": 32,
+  "optimized_checks": 2146,
+  "metadata_cache_limit": 2048,
+  "samples": [
+    {
+      "roots": 1,
+      "repeats_per_variant": 3,
+      "baseline": {
+        "total_us": 3544,
+        "death_reward_before_flush_us": 355,
+        "flush_us": 3180
+      },
+      "optimized": {
+        "total_us": 2983,
+        "death_reward_before_flush_us": 388,
+        "flush_us": 2594
+      },
+      "median_total_reduction_percent": 15.83
+    },
+    {
+      "roots": 8,
+      "repeats_per_variant": 3,
+      "baseline": {
+        "total_us": 14424,
+        "death_reward_before_flush_us": 9563,
+        "flush_us": 4836
+      },
+      "optimized": {
+        "total_us": 12141,
+        "death_reward_before_flush_us": 8190,
+        "flush_us": 3950
+      },
+      "median_total_reduction_percent": 15.83
+    },
+    {
+      "roots": 20,
+      "repeats_per_variant": 3,
+      "baseline": {
+        "total_us": 28479,
+        "death_reward_before_flush_us": 23406,
+        "flush_us": 5072
+      },
+      "optimized": {
+        "total_us": 24153,
+        "death_reward_before_flush_us": 19439,
+        "flush_us": 4183
+      },
+      "median_total_reduction_percent": 15.19
+    }
+  ],
+  "baseline_verified_in_detached_worktree": true
+}

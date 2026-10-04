@@ -11,6 +11,15 @@ const Flasks = preload("res://scripts/items/flask_catalog.gd")
 const Currency = preload("res://scripts/items/currency_catalog.gd")
 const Locations = preload("res://scripts/items/item_location_rules.gd")
 const FIELDS: Array[String] = ["uid", "kind", "definition_id", "payload"]
+## Positive-only, bounded memo of exact instance values. Keys are complete typed
+## bytes (not a hash, UID or revision); mutation therefore always misses. The
+## source catalogs are fixed for a loaded script; the only mutable registry
+## membership consulted by gem validation is part of the key as well.
+# More than the complete 1027-item canonical limit, so a valid large inventory
+# cannot evict itself while traversed; still bounded across states and rerolls.
+const _METADATA_CACHE_LIMIT := 2048
+static var _metadata_cache: Dictionary = {}
+static var _metadata_cache_order: Array[PackedByteArray] = []
 
 
 static func fixed_equipment(uid: Variant, fixed_id: Variant) -> Dictionary:
@@ -93,9 +102,25 @@ static func definition_for_instance(value: Variant) -> Dictionary:
 
 
 static func metadata_for_instance(value: Variant) -> Dictionary:
+	# Reject malformed outer envelopes before serialization. Payload validation
+	# remains mandatory for every previously unseen exact value.
+	if not Locations._exact_string_keys(value, FIELDS) or not Locations._stable_id(value.uid) \
+			or not value.kind is String or not value.definition_id is String or not value.payload is Dictionary:
+		return {}
+	var support_present := true
+	if value.kind == "support_gem":
+		support_present = Gems.Supports.SUPPORTS.has(value.definition_id.trim_prefix("support:"))
+	var key := var_to_bytes([value, Equipment.CURRENT_VOCABULARY, support_present])
+	if _metadata_cache.has(key):
+		return _metadata_cache[key].duplicate(true)
 	if not validate_instance(value):
 		return {}
-	return _metadata_for_validated(value)
+	var metadata := _metadata_for_validated(value)
+	if _metadata_cache.size() >= _METADATA_CACHE_LIMIT:
+		_metadata_cache.erase(_metadata_cache_order.pop_front())
+	_metadata_cache[key] = metadata.duplicate(true)
+	_metadata_cache_order.append(key)
+	return metadata
 
 
 static func metadata_for_items(items: Variant) -> Dictionary:
@@ -104,9 +129,12 @@ static func metadata_for_items(items: Variant) -> Dictionary:
 	var metadata: Dictionary = {}
 	for uid: Variant in items:
 		var item: Variant = items[uid]
-		if not uid is String or not validate_instance(item) or item.uid != uid:
+		if not uid is String or not item is Dictionary or item.get("uid") != uid:
 			return {}
-		metadata[uid] = _metadata_for_validated(item)
+		var resolved := metadata_for_instance(item)
+		if resolved.is_empty():
+			return {}
+		metadata[uid] = resolved
 	return metadata
 
 
