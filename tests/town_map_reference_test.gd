@@ -14,6 +14,8 @@ func _initialize()->void:
 	for key:String in actual.examples:
 		check(Maps.profile_reason(actual.examples[key].compiled).is_empty(),"Reference map example uses executable profile")
 		check(actual.examples[key].compiled.ordinary_target in [24,36] and actual.examples[key].compiled.boss_id=="rift_warden","Finite goal has real boss")
+		check(actual.examples[key].geometry.walls.size()==(2 if key=="broken_ruins" else 0),"Actual map wall geometry exported from same authority")
+		check(not actual.examples[key].geometry.wall_triggers_natural_end and actual.examples[key].geometry.area_line_of_sight,"Terrain collision/occlusion semantics disclosed")
 	check(actual.options.cost_policy.cost.is_empty() and not actual.options.cost_policy.affects_legacy_currency,"Map test crafting creates no wallet or debit")
 	print("Town map reference: %d checks, %d failures"%[checks,failures]);quit(1 if failures else 0)
 func check(ok:bool,why:String)->void:

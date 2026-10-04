@@ -249,7 +249,8 @@ func _schedule(shot: Dictionary, remaining: float, offset: float, targets: Array
 			travel *= clampf(float(blocker.fraction),0.0,1.0)
 	var contacts: Array[Dictionary] = _contacts(shot, start, start + Vector2(shot.velocity) * travel, targets)
 	if terrain_hit:
-		contacts = contacts.filter(func(c: Dictionary) -> bool: return float(c.t) < 1.0-EPS)
+		if travel <= EPS: contacts.clear()
+		else: contacts = contacts.filter(func(c: Dictionary) -> bool: return float(c.t) < 1.0-EPS)
 	# A contact exactly at the expiry deadline is outside this carrier's active interval.
 	if life_left <= EPS:
 		contacts.clear()

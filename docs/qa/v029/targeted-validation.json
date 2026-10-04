@@ -1,0 +1,57 @@
+{
+  "reports": [
+    {
+      "path": "docs/qa/v029/geometry.log.txt",
+      "sha256": "9a65f2afd1cc8c3aca8bb0325113e3d0f54c580014ea62751f2d91741c7a3327",
+      "checks": 918
+    },
+    {
+      "path": "docs/qa/v029/projectiles-final.log.txt",
+      "sha256": "2a9e39716cf9f95293cb23bc12414d6a23f4a5b3c51c50817deb824b8747e58a",
+      "checks": 35
+    },
+    {
+      "path": "docs/qa/v029/integration-final.log.txt",
+      "sha256": "dfe85f34240b9400153cd73e756ef32d41a2fdb9f9758f1062387411d59bdcb0",
+      "checks": 46
+    },
+    {
+      "path": "docs/qa/v029/edges.log.txt",
+      "sha256": "5d83801191c72e7e8b375be969f72aea37d4be79c464b2dff1f2011492a8d2e6",
+      "checks": 6
+    },
+    {
+      "path": "docs/qa/v029/crowd-blast.log.txt",
+      "sha256": "b3022448ef49a12b7ca7be7c8bcca3b4281e2887e134e8461fb68d9a9f5ef3c1",
+      "checks": 5
+    },
+    {
+      "path": "docs/qa/v029/combat-pipeline.log.txt",
+      "sha256": "d145420ace1c51cc73da1378b1acf1a0a842e68700edd2a5a0ee648cd78530a8",
+      "checks": 305
+    },
+    {
+      "path": "docs/qa/v029/projectile-schedule.log.txt",
+      "sha256": "7096862f65c8ef22c893cb5cfce462dd67e4c67cddae16a1c245edff6679883e",
+      "checks": 4725
+    },
+    {
+      "path": "docs/qa/v029/reference-runtime.log.txt",
+      "sha256": "f1c09442fdfe3d3d490b0c5205175f1c4b17d282a8eed3d3d975bbb55945e018",
+      "checks": 15
+    }
+  ],
+  "checks": 6055,
+  "report_count": 8,
+  "additional_ui_scenario": {
+    "path": "docs/qa/v029/root-ui/death-return.log.txt",
+    "sha256": "b8827c8b63f44a0dd684e457728f0e66694350870cdfc68cb4cd463f2530d3fb",
+    "result": "PASS"
+  },
+  "root_ui_commit": "e921f8253663b44c306aec2aa3ab470a2a7de65a",
+  "normal_mode_equivalence": "normal-comparison.json",
+  "600_second_test_deleted": true,
+  "full_repeat_required": false,
+  "scope_reuse": "Actual main46 before only t0 wall-hit and meteor fallback edge fixes, covered by terrain_projectile35 and edges6. Other unchanged sources and root visual/UI evidence reused.",
+  "production_inputs": 368
+}

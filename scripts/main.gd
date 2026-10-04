@@ -1037,7 +1037,9 @@ func _execute_compiled(compiled: Dictionary, group_id: String = "", main_uid: St
 		"meteor":
 			var target: Dictionary = _nearest_enemy(player_pos, 700.0)
 			var target_pos: Vector2 = Vector2(target.pos) if not target.is_empty() else _clamp_to_arena(player_pos + player_facing * 220.0, 20.0)
-			if _geometry.has_walls() and target.is_empty(): target_pos = _geometry.move(player_pos,target_pos,0.0)
+			if _geometry.has_walls() and target.is_empty():
+				var terrain: Dictionary = _geometry.sweep(player_pos,target_pos)
+				if terrain.hit: target_pos = Vector2(terrain.point)+Vector2(terrain.normal)*Geometry.SKIN
 			_area_damage(target_pos, float(compiled.recipe.radius), compiled.packets.direct, color, 0.0, context.snapshot)
 			visual_cues.emit_cue("meteor", target_pos, {"radius": float(compiled.recipe.radius), "color": color})
 			for i: int in range(32):

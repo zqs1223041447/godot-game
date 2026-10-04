@@ -34,6 +34,7 @@ const FlaskRuntime = preload("res://scripts/combat/flask_runtime.gd")
 const Town = preload("res://scripts/town/town_catalog.gd")
 const Maps = preload("res://scripts/world/map_catalog.gd")
 const MapRules = preload("res://scripts/world/map_compiler.gd")
+const MapGeometryData = preload("res://scripts/world/map_geometry.gd")
 const AttackRules = preload("res://scripts/combat/attack_hit_rules.gd")
 
 func _initialize() -> void:
@@ -365,7 +366,13 @@ static func town_map_examples()->Dictionary:
 		var replacements:Dictionary={}
 		for species:String in ["crawler","brute","skitter"]:
 			replacements[species]=MapRules.special_template(compiled.profile,{"template":species,"rarity":"normal","mechanisms":[]})
-		examples[map.id]={"compiled":compiled.profile,"special_replacements":replacements}
+		var geometry:=MapGeometryData.new();geometry.configure(map.id,Arena.ARENA)
+		var layout:Dictionary=geometry.snapshot();var walls:Array=[]
+		for wall:Rect2 in layout.walls:walls.append({"position":wall.position,"size":wall.size})
+		examples[map.id]={"compiled":compiled.profile,"special_replacements":replacements,
+			"geometry":{"bounds":{"position":layout.bounds.position,"size":layout.bounds.size},"walls":walls,"spawn":layout.spawn,
+				"collision":"radius_expanded_sweep_slide","navigation":"shared_radius_visibility_graph","projectile_wall_end":"terrain_collision",
+				"wall_triggers_natural_end":false,"area_line_of_sight":true}}
 	return {"services":Town.services(),"stock":stock,"options":options,"examples":examples,
 		"mode":"optional_town_test","normal_save":"user://build_save.json","test_save":"user://town_test_build_save.json",
 		"clone_policy":"explicit_first_entry_only","supply_setting":"testing/town_supply_enabled","map_reward_bonus":false,

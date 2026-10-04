@@ -10197,7 +10197,7 @@
 			"status": "implemented"
 		}
 	},
-	"game_version": "0.28.0",
+	"game_version": "0.29.0",
 	"jewel_affixes": {
 		"barrier": {
 			"kind": "prefix",
@@ -349505,7 +349505,7 @@
 			"broken_ruins": {
 				"compiled": {
 					"boss_id": "rift_warden",
-					"description": "击败36个普通根怪，再击败裂隙守卫并清理其后代。",
+					"description": "两道错位残墙需绕行，攻击受墙体遮挡；贯穿不穿墙，碰墙不触发到期效果。击败36个普通根怪，再击败裂隙守卫并清理其后代。",
 					"encounter_profile": {
 						"definitions": [
 							{
@@ -349598,6 +349598,49 @@
 					"summary": "断垣试炼 · 强健 · 迅行 · 雷纹巡逻",
 					"wave": 5
 				},
+				"geometry": {
+					"area_line_of_sight": true,
+					"bounds": {
+						"position": [
+							42.0,
+							104.0
+						],
+						"size": [
+							1840.0001220703125,
+							710.769287109375
+						]
+					},
+					"collision": "radius_expanded_sweep_slide",
+					"navigation": "shared_radius_visibility_graph",
+					"projectile_wall_end": "terrain_collision",
+					"spawn": [
+						962.0000610351563,
+						459.3846435546875
+					],
+					"wall_triggers_natural_end": false,
+					"walls": [
+						{
+							"position": [
+								622.0,
+								204.0
+							],
+							"size": [
+								56.0,
+								400.0
+							]
+						},
+						{
+							"position": [
+								1222.0,
+								314.0
+							],
+							"size": [
+								56.0,
+								400.0
+							]
+						}
+					]
+				},
 				"special_replacements": {
 					"brute": "",
 					"crawler": "",
@@ -349607,7 +349650,7 @@
 			"old_garden": {
 				"compiled": {
 					"boss_id": "rift_warden",
-					"description": "击败24个普通根怪，再击败裂隙守卫并清理其后代。",
+					"description": "开阔庭院，无实体残墙。击败24个普通根怪，再击败裂隙守卫并清理其后代。",
 					"encounter_profile": {
 						"definitions": [
 							{
@@ -349700,6 +349743,28 @@
 					"summary": "旧庭试炼 · 强健 · 迅行 · 霜纹巡逻",
 					"wave": 4
 				},
+				"geometry": {
+					"area_line_of_sight": true,
+					"bounds": {
+						"position": [
+							42.0,
+							104.0
+						],
+						"size": [
+							1840.0001220703125,
+							710.769287109375
+						]
+					},
+					"collision": "radius_expanded_sweep_slide",
+					"navigation": "shared_radius_visibility_graph",
+					"projectile_wall_end": "terrain_collision",
+					"spawn": [
+						962.0000610351563,
+						459.3846435546875
+					],
+					"wall_triggers_natural_end": false,
+					"walls": []
+				},
 				"special_replacements": {
 					"brute": "frost_guard",
 					"crawler": "",
@@ -349725,7 +349790,7 @@
 			"maps": [
 				{
 					"boss_id": "rift_warden",
-					"description": "击败24个普通根怪，再击败裂隙守卫并清理其后代。",
+					"description": "开阔庭院，无实体残墙。击败24个普通根怪，再击败裂隙守卫并清理其后代。",
 					"id": "old_garden",
 					"name": "旧庭试炼",
 					"ordinary_target": 24,
@@ -349733,7 +349798,7 @@
 				},
 				{
 					"boss_id": "rift_warden",
-					"description": "击败36个普通根怪，再击败裂隙守卫并清理其后代。",
+					"description": "两道错位残墙需绕行，攻击受墙体遮挡；贯穿不穿墙，碰墙不触发到期效果。击败36个普通根怪，再击败裂隙守卫并清理其后代。",
 					"id": "broken_ruins",
 					"name": "断垣试炼",
 					"ordinary_target": 36,

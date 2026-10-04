@@ -34,6 +34,10 @@ func _initialize()->void:
 	var returning_shots:Array[Dictionary]=[returning]
 	var returning_events:Array[Dictionary]=runtime.advance(returning_shots,2.0,[],returning.return_center,180,Callable(),geometry.sweep)
 	check(returning.end_reason=="terrain_collision" and count(returning_events,"explosion")==0,"Returning shot remains blocked even with owner beyond wall")
+	runtime=Runtime.new();var embedded:=shot(runtime,wall.get_center());var embedded_shots:Array[Dictionary]=[embedded]
+	var embedded_targets:Array[Dictionary]=[{"id":9,"pos":wall.get_center(),"radius":8.0,"health":100.0,"spawn":0.0}]
+	var embedded_events:Array[Dictionary]=runtime.advance(embedded_shots,0.1,embedded_targets,start,180,Callable(),geometry.sweep)
+	check(count(embedded_events,"hit")==0 and embedded.end_reason=="terrain_collision","Carrier originating inside wall cannot damage an overlapping target before t0 collision")
 	# A wall/range tie consumes the wall, but the historical lifetime ceiling still wins.
 	for lifespan:float in [10.0,0.5]:
 		runtime=Runtime.new();var carrier:=shot(runtime,start,{"range":100.0,"lifetime":lifespan,"split":true,"role":"parent"});var shots:Array[Dictionary]=[carrier]
