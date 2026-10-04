@@ -1,0 +1,700 @@
+{
+	"checks": 166,
+	"coverage": "Headless actual-main integration; two camp/boss/descendant map completions; no native GUI verification",
+	"evidence": [
+		{
+			"label": "Fresh real main starts in formal town with zero shards",
+			"ok": true
+		},
+		{
+			"label": "Formal stock is derived from all 26 current catalog definitions",
+			"ok": true
+		},
+		{
+			"label": "Formal stock has exact identity, preview and typed active/support price: skill:bolt",
+			"ok": true
+		},
+		{
+			"label": "Formal stock has exact identity, preview and typed active/support price: skill:chain",
+			"ok": true
+		},
+		{
+			"label": "Formal stock has exact identity, preview and typed active/support price: skill:cleave",
+			"ok": true
+		},
+		{
+			"label": "Formal stock has exact identity, preview and typed active/support price: skill:dash",
+			"ok": true
+		},
+		{
+			"label": "Formal stock has exact identity, preview and typed active/support price: skill:frost",
+			"ok": true
+		},
+		{
+			"label": "Formal stock has exact identity, preview and typed active/support price: skill:meteor",
+			"ok": true
+		},
+		{
+			"label": "Formal stock has exact identity, preview and typed active/support price: skill:nova",
+			"ok": true
+		},
+		{
+			"label": "Formal stock has exact identity, preview and typed active/support price: skill:shade_bolt",
+			"ok": true
+		},
+		{
+			"label": "Formal stock has exact identity, preview and typed active/support price: skill:tornado",
+			"ok": true
+		},
+		{
+			"label": "Formal stock has exact identity, preview and typed active/support price: skill:ward",
+			"ok": true
+		},
+		{
+			"label": "Formal stock has exact identity, preview and typed active/support price: support:breadth",
+			"ok": true
+		},
+		{
+			"label": "Formal stock has exact identity, preview and typed active/support price: support:chain_extension",
+			"ok": true
+		},
+		{
+			"label": "Formal stock has exact identity, preview and typed active/support price: support:chain_reach",
+			"ok": true
+		},
+		{
+			"label": "Formal stock has exact identity, preview and typed active/support price: support:cold_focus",
+			"ok": true
+		},
+		{
+			"label": "Formal stock has exact identity, preview and typed active/support price: support:concentrate",
+			"ok": true
+		},
+		{
+			"label": "Formal stock has exact identity, preview and typed active/support price: support:efficiency",
+			"ok": true
+		},
+		{
+			"label": "Formal stock has exact identity, preview and typed active/support price: support:fire_focus",
+			"ok": true
+		},
+		{
+			"label": "Formal stock has exact identity, preview and typed active/support price: support:focus",
+			"ok": true
+		},
+		{
+			"label": "Formal stock has exact identity, preview and typed active/support price: support:heavy_projectiles",
+			"ok": true
+		},
+		{
+			"label": "Formal stock has exact identity, preview and typed active/support price: support:lightning_focus",
+			"ok": true
+		},
+		{
+			"label": "Formal stock has exact identity, preview and typed active/support price: support:lingering_chill",
+			"ok": true
+		},
+		{
+			"label": "Formal stock has exact identity, preview and typed active/support price: support:physical_focus",
+			"ok": true
+		},
+		{
+			"label": "Formal stock has exact identity, preview and typed active/support price: support:pierce",
+			"ok": true
+		},
+		{
+			"label": "Formal stock has exact identity, preview and typed active/support price: support:quickcast",
+			"ok": true
+		},
+		{
+			"label": "Formal stock has exact identity, preview and typed active/support price: support:swift_projectiles",
+			"ok": true
+		},
+		{
+			"label": "Formal stock has exact identity, preview and typed active/support price: support:volley",
+			"ok": true
+		},
+		{
+			"label": "Zero-shard paid purchase: rejected",
+			"ok": true
+		},
+		{
+			"label": "Zero-shard paid purchase: full build/runtime/world and both disk files unchanged",
+			"ok": true
+		},
+		{
+			"label": "Free town supplier in formal profile: rejected",
+			"ok": true
+		},
+		{
+			"label": "Free town supplier in formal profile: full build/runtime/world and both disk files unchanged",
+			"ok": true
+		},
+		{
+			"label": "Explicit test profile entry remains available",
+			"ok": true
+		},
+		{
+			"label": "Existing free test stock remains free and available",
+			"ok": true
+		},
+		{
+			"label": "Test free gem is delivered without modifying normal disk",
+			"ok": true
+		},
+		{
+			"label": "Test supply reports the owned free gem UID",
+			"ok": true
+		},
+		{
+			"label": "Paid offers are disabled in test town",
+			"ok": true
+		},
+		{
+			"label": "Paid buy in test town: rejected",
+			"ok": true
+		},
+		{
+			"label": "Paid buy in test town: full build/runtime/world and both disk files unchanged",
+			"ok": true
+		},
+		{
+			"label": "Free test gem recycle in test town: rejected",
+			"ok": true
+		},
+		{
+			"label": "Free test gem recycle in test town: full build/runtime/world and both disk files unchanged",
+			"ok": true
+		},
+		{
+			"label": "Test model cannot redirect free gem recycle into normal save: rejected",
+			"ok": true
+		},
+		{
+			"label": "Test model cannot redirect free gem recycle into normal save: full build/runtime/world and both disk files unchanged",
+			"ok": true
+		},
+		{
+			"label": "Returning to formal profile has no test-owned gem",
+			"ok": true
+		},
+		{
+			"label": "Foreign test UID in formal town: rejected",
+			"ok": true
+		},
+		{
+			"label": "Foreign test UID in formal town: full build/runtime/world and both disk files unchanged",
+			"ok": true
+		},
+		{
+			"label": "Free tier-I actual map begins: 1",
+			"ok": true
+		},
+		{
+			"label": "Paid merchant disabled in actual map",
+			"ok": true
+		},
+		{
+			"label": "Paid buy while in map: rejected",
+			"ok": true
+		},
+		{
+			"label": "Paid buy while in map: full build/runtime/world and both disk files unchanged",
+			"ok": true
+		},
+		{
+			"label": "All three real old-garden camps admit 24 ordinary roots",
+			"ok": true
+		},
+		{
+			"label": "Original camp deaths unlock real boss gate",
+			"ok": true
+		},
+		{
+			"label": "Real boss is admitted through its gate",
+			"ok": true
+		},
+		{
+			"label": "Boss descendants prevent premature reward",
+			"ok": true
+		},
+		{
+			"label": "Real root/boss/descendant completion creates four-shard receipt",
+			"ok": true
+		},
+		{
+			"label": "Paid offers remain disabled on map-complete screen",
+			"ok": true
+		},
+		{
+			"label": "Paid buy before completed-map return: rejected",
+			"ok": true
+		},
+		{
+			"label": "Paid buy before completed-map return: full build/runtime/world and both disk files unchanged",
+			"ok": true
+		},
+		{
+			"label": "Actual completed map returns to formal town",
+			"ok": true
+		},
+		{
+			"label": "Actual completion claim adds exactly four physical bag shards",
+			"ok": true
+		},
+		{
+			"label": "Free tier-I actual map begins: 2",
+			"ok": true
+		},
+		{
+			"label": "Paid merchant disabled in actual map",
+			"ok": true
+		},
+		{
+			"label": "Paid buy while in map: rejected",
+			"ok": true
+		},
+		{
+			"label": "Paid buy while in map: full build/runtime/world and both disk files unchanged",
+			"ok": true
+		},
+		{
+			"label": "All three real old-garden camps admit 24 ordinary roots",
+			"ok": true
+		},
+		{
+			"label": "Original camp deaths unlock real boss gate",
+			"ok": true
+		},
+		{
+			"label": "Real boss is admitted through its gate",
+			"ok": true
+		},
+		{
+			"label": "Boss descendants prevent premature reward",
+			"ok": true
+		},
+		{
+			"label": "Real root/boss/descendant completion creates four-shard receipt",
+			"ok": true
+		},
+		{
+			"label": "Paid offers remain disabled on map-complete screen",
+			"ok": true
+		},
+		{
+			"label": "Paid buy before completed-map return: rejected",
+			"ok": true
+		},
+		{
+			"label": "Paid buy before completed-map return: full build/runtime/world and both disk files unchanged",
+			"ok": true
+		},
+		{
+			"label": "Actual completed map returns to formal town",
+			"ok": true
+		},
+		{
+			"label": "Actual completion claim adds exactly four physical bag shards",
+			"ok": true
+		},
+		{
+			"label": "Two real maps count 50 roots/bosses and exclude descendants",
+			"ok": true
+		},
+		{
+			"label": "Funded quotes captured before practice transition",
+			"ok": true
+		},
+		{
+			"label": "Paid stock disabled in practice arena",
+			"ok": true
+		},
+		{
+			"label": "Paid buy in practice arena: rejected",
+			"ok": true
+		},
+		{
+			"label": "Paid buy in practice arena: full build/runtime/world and both disk files unchanged",
+			"ok": true
+		},
+		{
+			"label": "Captured town quote after leaving for practice: rejected",
+			"ok": true
+		},
+		{
+			"label": "Captured town quote after leaving for practice: full build/runtime/world and both disk files unchanged",
+			"ok": true
+		},
+		{
+			"label": "Practice returns to formal town",
+			"ok": true
+		},
+		{
+			"label": "Unconsumed captured town quote cannot revive on return: rejected",
+			"ok": true
+		},
+		{
+			"label": "Unconsumed captured town quote cannot revive on return: full build/runtime/world and both disk files unchanged",
+			"ok": true
+		},
+		{
+			"label": "Funded quotes captured before actual profile replacement",
+			"ok": true
+		},
+		{
+			"label": "Captured quote after model replacement: rejected",
+			"ok": true
+		},
+		{
+			"label": "Captured quote after model replacement: full build/runtime/world and both disk files unchanged",
+			"ok": true
+		},
+		{
+			"label": "Retired formal model cannot use delayed quote: rejected",
+			"ok": true
+		},
+		{
+			"label": "Retired formal model cannot use delayed quote: full build/runtime/world and both disk files unchanged",
+			"ok": true
+		},
+		{
+			"label": "Rejected delayed quote leaves retired model snapshot unchanged",
+			"ok": true
+		},
+		{
+			"label": "Normal file reloads into new live model",
+			"ok": true
+		},
+		{
+			"label": "Unconsumed old-model quote cannot revive after profile round trip: rejected",
+			"ok": true
+		},
+		{
+			"label": "Unconsumed old-model quote cannot revive after profile round trip: full build/runtime/world and both disk files unchanged",
+			"ok": true
+		},
+		{
+			"label": "Map draft emits context change without changing world revision",
+			"ok": true
+		},
+		{
+			"label": "World-context signal invalidates quote even when world revision is unchanged: rejected",
+			"ok": true
+		},
+		{
+			"label": "World-context signal invalidates quote even when world revision is unchanged: full build/runtime/world and both disk files unchanged",
+			"ok": true
+		},
+		{
+			"label": "Explicit cancel starts with valid funded quote",
+			"ok": true
+		},
+		{
+			"label": "Cancel changes no build/runtime/world or disk file",
+			"ok": true
+		},
+		{
+			"label": "Cancelled quote cannot execute: rejected",
+			"ok": true
+		},
+		{
+			"label": "Cancelled quote cannot execute: full build/runtime/world and both disk files unchanged",
+			"ok": true
+		},
+		{
+			"label": "Runtime sentinel consumes owned flask: flask_1",
+			"ok": true
+		},
+		{
+			"label": "Runtime sentinel consumes owned flask: flask_2",
+			"ok": true
+		},
+		{
+			"label": "Runtime sentinel creates non-empty stable group cooldown debt",
+			"ok": true
+		},
+		{
+			"label": "Main issues buy quote",
+			"ok": true
+		},
+		{
+			"label": "Quoting buy leaves full authoritative state and both files unchanged",
+			"ok": true
+		},
+		{
+			"label": "buy applies exact shard delta -8",
+			"ok": true
+		},
+		{
+			"label": "buy publishes exactly one revision and changed signal",
+			"ok": true
+		},
+		{
+			"label": "buy persists exactly once with no main autosave duplication",
+			"ok": true
+		},
+		{
+			"label": "buy preserves loot/combat RNG, charges, active flask recovery, cooldown debts and other run state",
+			"ok": true
+		},
+		{
+			"label": "buy leaves test disk byte-identical",
+			"ok": true
+		},
+		{
+			"label": "buy reloads exact committed build",
+			"ok": true
+		},
+		{
+			"label": "buy duplicate confirmation: rejected",
+			"ok": true
+		},
+		{
+			"label": "buy duplicate confirmation: full build/runtime/world and both disk files unchanged",
+			"ok": true
+		},
+		{
+			"label": "Bought UID is a real level-1 quality-0 gem in bag",
+			"ok": true
+		},
+		{
+			"label": "Selected-UID recycle has other owned gems to preserve",
+			"ok": true
+		},
+		{
+			"label": "Bought exact UID equips into actual skill group",
+			"ok": true
+		},
+		{
+			"label": "Equipped bought gem has disabled recycle metadata",
+			"ok": true
+		},
+		{
+			"label": "Equipped bought UID cannot recycle: rejected",
+			"ok": true
+		},
+		{
+			"label": "Equipped bought UID cannot recycle: full build/runtime/world and both disk files unchanged",
+			"ok": true
+		},
+		{
+			"label": "Bought gem can enter actual practice combat",
+			"ok": true
+		},
+		{
+			"label": "Actual compiler resolves bought UID and catalog recipe",
+			"ok": true
+		},
+		{
+			"label": "Real main accepts cast from bought/equipped gem",
+			"ok": true
+		},
+		{
+			"label": "Accepted cast emits exact compiled count and pays compiled mana/cooldown",
+			"ok": true
+		},
+		{
+			"label": "Actual projectile consumes bought gem's compiled packet and recipe",
+			"ok": true
+		},
+		{
+			"label": "Actual cast returns to formal town",
+			"ok": true
+		},
+		{
+			"label": "Exact bought gem unequips back into bag",
+			"ok": true
+		},
+		{
+			"label": "Bag selected UID exposes exact one-shard recycle",
+			"ok": true
+		},
+		{
+			"label": "Main issues recycle quote",
+			"ok": true
+		},
+		{
+			"label": "Quoting recycle leaves full authoritative state and both files unchanged",
+			"ok": true
+		},
+		{
+			"label": "recycle applies exact shard delta 1",
+			"ok": true
+		},
+		{
+			"label": "recycle publishes exactly one revision and changed signal",
+			"ok": true
+		},
+		{
+			"label": "recycle persists exactly once with no main autosave duplication",
+			"ok": true
+		},
+		{
+			"label": "recycle preserves loot/combat RNG, charges, active flask recovery, cooldown debts and other run state",
+			"ok": true
+		},
+		{
+			"label": "recycle leaves test disk byte-identical",
+			"ok": true
+		},
+		{
+			"label": "recycle reloads exact committed build",
+			"ok": true
+		},
+		{
+			"label": "recycle duplicate confirmation: rejected",
+			"ok": true
+		},
+		{
+			"label": "recycle duplicate confirmation: full build/runtime/world and both disk files unchanged",
+			"ok": true
+		},
+		{
+			"label": "Recycle removes only exact selected bought UID",
+			"ok": true
+		},
+		{
+			"label": "Recycle preserves every other owned gem UID: item_000011",
+			"ok": true
+		},
+		{
+			"label": "Recycle preserves every other owned gem UID: migration_gem_000001",
+			"ok": true
+		},
+		{
+			"label": "Recycle preserves every other owned gem UID: migration_gem_000002",
+			"ok": true
+		},
+		{
+			"label": "Recycle preserves every other owned gem UID: migration_gem_000003",
+			"ok": true
+		},
+		{
+			"label": "Recycle preserves every other owned gem UID: migration_gem_000004",
+			"ok": true
+		},
+		{
+			"label": "Recycle preserves every other owned gem UID: migration_gem_000005",
+			"ok": true
+		},
+		{
+			"label": "Recycle preserves every other owned gem UID: migration_gem_000006",
+			"ok": true
+		},
+		{
+			"label": "Recycle preserves every other owned gem UID: migration_gem_000007",
+			"ok": true
+		},
+		{
+			"label": "Recycle preserves every other owned gem UID: migration_gem_000008",
+			"ok": true
+		},
+		{
+			"label": "Recycle preserves every other owned gem UID: migration_gem_000009",
+			"ok": true
+		},
+		{
+			"label": "Recycle preserves every other owned gem UID: migration_gem_000010",
+			"ok": true
+		},
+		{
+			"label": "Recycle preserves every other owned gem UID: migration_gem_000011",
+			"ok": true
+		},
+		{
+			"label": "Recycle preserves every other owned gem UID: migration_gem_000012",
+			"ok": true
+		},
+		{
+			"label": "Recycle preserves every other owned gem UID: migration_gem_000013",
+			"ok": true
+		},
+		{
+			"label": "Recycle preserves every other owned gem UID: migration_gem_000014",
+			"ok": true
+		},
+		{
+			"label": "Recycle preserves every other owned gem UID: migration_gem_000015",
+			"ok": true
+		},
+		{
+			"label": "Recycle preserves every other owned gem UID: migration_gem_000016",
+			"ok": true
+		},
+		{
+			"label": "Recycle preserves every other owned gem UID: migration_gem_000017",
+			"ok": true
+		},
+		{
+			"label": "Recycle preserves every other owned gem UID: migration_gem_000018",
+			"ok": true
+		},
+		{
+			"label": "Recycle preserves every other owned gem UID: migration_gem_000019",
+			"ok": true
+		},
+		{
+			"label": "Recycle preserves every other owned gem UID: migration_gem_000020",
+			"ok": true
+		},
+		{
+			"label": "Recycle preserves every other owned gem UID: migration_gem_000021",
+			"ok": true
+		},
+		{
+			"label": "Recycle preserves every other owned gem UID: migration_gem_000022",
+			"ok": true
+		},
+		{
+			"label": "Recycle preserves every other owned gem UID: migration_gem_000023",
+			"ok": true
+		},
+		{
+			"label": "Recycle preserves every other owned gem UID: migration_gem_000024",
+			"ok": true
+		},
+		{
+			"label": "Deleted selected UID cannot recycle twice: rejected",
+			"ok": true
+		},
+		{
+			"label": "Deleted selected UID cannot recycle twice: full build/runtime/world and both disk files unchanged",
+			"ok": true
+		},
+		{
+			"label": "All captured test/main/model/catalog/UI source hashes remained stable during run",
+			"ok": true
+		}
+	],
+	"failures": 0,
+	"normal_disk_sha256": "eef002e13257f97cdd3cc34c9eac8badd8ac72c48614ef3cef56715f0629eabc",
+	"source_sha256": {
+		"scripts/canonical_game_state.gd": "5e71baacfdae630cb5d90c8a641c2d534601f3542c671cd16e4a575c57b7122e",
+		"scripts/combat/skill_compiler.gd": "23a9bc1d79643de7e3841a3dc414be4623d7d1b117ad8b04c03bcc948778b058",
+		"scripts/game_hud.gd": "6bdde3499b4c6b64b89082ec6b49e8576abc1835a267792990fd26c756974796",
+		"scripts/items/gem_catalog.gd": "7f5b53d11918d63193e4e737eb242f7d2603ccfa6e189afb2587856ada436266",
+		"scripts/items/gem_trade_rules.gd": "f4a57e88dae94a8493977a3e50e7bfc4a35e39579a71776c4282a60c4cf18616",
+		"scripts/main.gd": "7c3c2785442108d8e6a2ffe0e922b57db243bbe431c1899484800047381ecb93",
+		"scripts/save/canonical_build_store.gd": "39d6d71eb694603ca5ff4d9c9ac1220ead3ee8a48596a6b55de2d4974a9e46be",
+		"scripts/town/town_catalog.gd": "235225d644ea65dd02ff75a398440cde198689bca0127b0c61cd3f4927fe63c0",
+		"scripts/ui/canonical_inventory_panel.gd": "703e311e60cdfa2cca9c59dcbe5c14ec672b4d401c3de1497b00306ddfad3b4f",
+		"scripts/ui/town_service_panel.gd": "2c1d8ecf44be97aae45443c40bc848e531639d1f192de02330c2190fced00cdb",
+		"tests/normal_gem_trade_gameplay_test.gd": "8d5ead798bff53754bca4a34ca6c1745ceb0e489fe6e9030979bfd6f9f1ef0b4"
+	},
+	"source_sha256_after": {
+		"scripts/canonical_game_state.gd": "5e71baacfdae630cb5d90c8a641c2d534601f3542c671cd16e4a575c57b7122e",
+		"scripts/combat/skill_compiler.gd": "23a9bc1d79643de7e3841a3dc414be4623d7d1b117ad8b04c03bcc948778b058",
+		"scripts/game_hud.gd": "6bdde3499b4c6b64b89082ec6b49e8576abc1835a267792990fd26c756974796",
+		"scripts/items/gem_catalog.gd": "7f5b53d11918d63193e4e737eb242f7d2603ccfa6e189afb2587856ada436266",
+		"scripts/items/gem_trade_rules.gd": "f4a57e88dae94a8493977a3e50e7bfc4a35e39579a71776c4282a60c4cf18616",
+		"scripts/main.gd": "7c3c2785442108d8e6a2ffe0e922b57db243bbe431c1899484800047381ecb93",
+		"scripts/save/canonical_build_store.gd": "39d6d71eb694603ca5ff4d9c9ac1220ead3ee8a48596a6b55de2d4974a9e46be",
+		"scripts/town/town_catalog.gd": "235225d644ea65dd02ff75a398440cde198689bca0127b0c61cd3f4927fe63c0",
+		"scripts/ui/canonical_inventory_panel.gd": "703e311e60cdfa2cca9c59dcbe5c14ec672b4d401c3de1497b00306ddfad3b4f",
+		"scripts/ui/town_service_panel.gd": "2c1d8ecf44be97aae45443c40bc848e531639d1f192de02330c2190fced00cdb",
+		"tests/normal_gem_trade_gameplay_test.gd": "8d5ead798bff53754bca4a34ca6c1745ceb0e489fe6e9030979bfd6f9f1ef0b4"
+	},
+	"test_disk_sha256": "42ceeeb98a942f5f18503c5110a9a07396197864e534f6896b259f32bcbfed62",
+	"user_dir": "/tmp/godot-m1-v044-gem-gameplay-02/godot-game-preview-v021"
+}
