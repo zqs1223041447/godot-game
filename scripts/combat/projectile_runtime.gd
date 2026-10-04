@@ -274,8 +274,12 @@ func _natural_end(shot: Dictionary, reason: String, events: Array[Dictionary], t
 		var payload: Dictionary = Recipes.secondary_packet(shot.snapshot, str(shot.skill_id))
 		if payload.is_empty():
 			return
+		var effect_snapshot:Dictionary=shot.snapshot
+		if effect_snapshot.has("burn_policy"):
+			effect_snapshot=effect_snapshot.duplicate(true)
+			effect_snapshot.erase("burn_policy")
 		_event(events, "explosion", shot, time, {"pos": shot.pos, "effect_id": "explosion:%d" % int(shot.id),
-			"radius": float(shot.snapshot.get("explosion_recipe", Recipes.TORNADO.explosion).radius), "payload": payload, "snapshot": shot.snapshot,
+			"radius": float(shot.snapshot.get("explosion_recipe", Recipes.TORNADO.explosion).radius), "payload": payload, "snapshot": effect_snapshot,
 			"color": Color("ffb576"), "reason": reason})
 
 

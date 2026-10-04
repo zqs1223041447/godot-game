@@ -3,6 +3,7 @@ extends RefCounted
 ## Species, rarity, and stateful death templates are orthogonal to shared talents.
 const Registry = preload("res://scripts/mechanics/mechanic_registry.gd")
 const Defense = preload("res://scripts/mechanics/defense_rules.gd")
+const Burn=preload("res://scripts/combat/burn_rules.gd")
 const TelegraphProfiles = preload("res://scripts/monsters/telegraph_profiles.gd")
 const MapBossAttacks=preload("res://scripts/monsters/map_boss_profiles.gd")
 const SCHEMA_VERSION: int = 1
@@ -115,6 +116,8 @@ static func telegraph_policy(enemy: Dictionary) -> Dictionary:
 		"replaces_contact": true, "hold_pursuit_during_action": true,
 		"recovery_scaling": "base_attack_speed_divided_by_current_attack_speed",
 		"minimum_attack_speed": 0.2, "base_attack_speed": BASE_ATTACK_SPEED}
+	if id=="ember_guard" and map_rule.is_empty():
+		policy.burn_policy=Burn.ENEMY_POLICY.duplicate(true);policy.visual_pattern="ember_burn";policy.name="余烬锁点重击"
 	if not map_rule.is_empty():
 		policy.target_rule=map_rule.target_rule;policy.visual_pattern=map_rule.id;policy.name=map_rule.name
 	return policy
@@ -278,6 +281,7 @@ static func mechanism_text(enemy: Dictionary) -> String:
 	var telegraph: Dictionary = telegraph_policy(enemy)
 	if not telegraph.is_empty():
 		labels.append("%s %.1f秒 · 范围 %.0f" % [telegraph.get("name","锁点重击"),telegraph.profile.windup_seconds, telegraph.profile.radius])
+		if telegraph.has("burn_policy"):labels.append("火焰一半立即结算，另一半分3秒燃烧；单目标不叠加")
 	for id: String in enemy.get("mechanism_ids", []):
 		labels.append(str(Registry.get_definition(id).get("name", id)))
 	if not enemy.get("death_spawns", []).is_empty():

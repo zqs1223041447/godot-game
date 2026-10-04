@@ -7,6 +7,7 @@ const Supports = preload("res://scripts/combat/support_registry.gd")
 const Extension = preload("res://scripts/combat/projectile_support_rules.gd")
 const Area = preload("res://scripts/combat/area_support_rules.gd")
 const Critical=preload("res://scripts/combat/critical_strike_rules.gd")
+const Burn=preload("res://scripts/combat/burn_rules.gd")
 const Leech=preload("res://scripts/combat/leech_rules.gd")
 const ResourceCost=preload("res://scripts/combat/source_resource_rules.gd")
 const Spatial = preload("res://scripts/combat/source_spatial_rules.gd")
@@ -152,6 +153,19 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 	if not critical.critical.is_empty():result.critical=critical.critical.duplicate(true)
 	if not leech.leech.is_empty():result.leech=leech.leech.duplicate(true)
 	if not resource.factors.is_empty():result.cost_factors=resource.factors
+	if canonical.has("ignite"):
+		# This policy belongs only to primary hits. Preview resolves the same
+		# post-support, noncritical fire amount once; ticks never resolve again.
+		compiled_snapshot.burn_policy=Burn.PLAYER_POLICY.duplicate(true)
+		var profile:Dictionary=Burn.PLAYER_POLICY.duplicate(true)
+		profile.enabled=true;profile.stacking="strongest_refresh_equal";profile.roles={}
+		for role:String in (["parent","child"] if skill_id=="tornado" else ["direct"]):
+			var resolved:Dictionary=Damage.resolve(packets[role],compiled_snapshot.modifiers)
+			var fire:float=float(resolved.components.get("fire",0.0))
+			var dps:float=fire*float(profile.rate_fraction)
+			if not is_finite(dps) or not is_finite(dps*float(profile.duration)):return _failure("点燃伤害超出有限数值范围")
+			profile.roles[role]={"fire_before_defense":fire,"dps":dps,"total":dps*float(profile.duration)}
+		result.burn_profile=profile
 	return result
 
 
@@ -232,7 +246,7 @@ static func _failure(error: String) -> Dictionary:
 static func _snapshot_error(snapshot: Dictionary) -> String:
 	# initial_count is reserved for compiled projectile snapshots, including empty supports.
 	# Reject re-entry instead of applying support more factors a second time.
-	if snapshot.has("initial_count") or snapshot.has("compiled_packets") or snapshot.has("compiled_skill_id") or snapshot.has("critical") or snapshot.has("critical_roll") or snapshot.has("leech"):
+	if snapshot.has("initial_count") or snapshot.has("compiled_packets") or snapshot.has("compiled_skill_id") or snapshot.has("critical") or snapshot.has("critical_roll") or snapshot.has("leech") or snapshot.has("burn_policy"):
 		return "施放快照已编译；必须从基础构筑快照重新编译"
 	var critical_error:String=Critical.error(snapshot)
 	if not critical_error.is_empty():return critical_error

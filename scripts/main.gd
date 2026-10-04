@@ -26,6 +26,14 @@ const Damage = preload("res://scripts/combat/damage_resolver.gd")
 const Defense = preload("res://scripts/mechanics/defense_rules.gd")
 const CriticalRuntime = preload("res://scripts/combat/critical_strike_runtime.gd")
 var critical_runtime = CriticalRuntime.new()
+const BurnRuntime=preload("res://scripts/combat/burn_runtime.gd")
+const BurnRules=preload("res://scripts/combat/burn_rules.gd")
+var burn_runtime=BurnRuntime.new()
+var burn_trace:Array[Dictionary]=[]
+var _burn_step_active:=false
+var _burn_step_start:=0.0
+var _burn_immunity_until:=0.0
+var _burn_incoming_time:float=-1.0
 const LeechRuntime = preload("res://scripts/combat/leech_runtime.gd")
 const LeechRules = preload("res://scripts/combat/leech_rules.gd")
 var leech_runtime = LeechRuntime.new()
@@ -359,6 +367,7 @@ func restart_run(camp_plan: Dictionary = {}) -> void:
 	group_cooldowns.reset()
 	_player_evasion_entropy = 50.0
 	attack_admission_trace.clear()
+	burn_runtime.reset();burn_trace.clear()
 	for id: String in Data.SKILLS:
 		cooldowns[id] = 0.0
 	spawn_timer = 1.8
@@ -491,8 +500,10 @@ func _process(delta: float) -> void:
 
 
 func tick(delta: float) -> void:
+	_burn_step_active=true;_burn_step_start=elapsed;_burn_immunity_until=elapsed+invulnerable
 	_begin_progress_transaction()
 	_tick(delta)
+	_burn_step_active=false
 	_end_progress_transaction()
 
 
@@ -534,6 +545,7 @@ func _tick(delta: float) -> void:
 		return
 	_update_auto_attack()
 	_update_projectiles(delta)
+	_advance_monster_burns(elapsed)
 	_update_effects(delta)
 	_update_pickups(delta)
 	_start_enemy_telegraphs()
@@ -847,6 +859,7 @@ func _update_enemies(delta: float) -> void:
 	# Existing actions advance against the complete source set before birth
 	# protection changes. Admission happens only at the end of the whole tick.
 	_advance_enemy_telegraphs(delta)
+	_advance_player_burn(elapsed)
 	if not alive:
 		return
 	separation_candidate_visits = 0
@@ -919,13 +932,24 @@ func _start_enemy_telegraphs() -> void:
 
 
 func _advance_enemy_telegraphs(delta: float) -> void:
-	var events: Array[Dictionary] = telegraphs.advance(delta, enemies)
+	var events: Array[Dictionary] = telegraphs.advance(delta, enemies,not burn_runtime.is_empty() or telegraphs.has_burning_actions())
 	for event: Dictionary in events:
 		if not alive:
 			telegraphs.reset()
 			break
+		var event_time:float=_burn_event_time(event.get("step_time",delta))
+		_advance_player_burn(event_time)
+		if not alive:telegraphs.reset();break
 		var inside: bool = TelegraphRuntime.overlaps(event, player_pos, PLAYER_RADIUS) and _terrain_visible(event.center,player_pos)
+		_burn_incoming_time=event_time
 		var applied: bool = hit_player_components(event.packet.base, int(event.source_id),event.packet.tags) if inside else false
+		_burn_incoming_time=-1.0
+		if applied and alive and event.has("burn_policy"):
+			var burn:Dictionary=BurnRules.from_fire_hit(float(event.packet.base.get("fire",0.0)),event.burn_policy)
+			if burn.ok:
+				var attached:Dictionary=burn_runtime.apply("player",0,int(event.source_id),burn.raw_dps,burn.duration,event_time,{"skill_id":"ember_burn","cast_id":int(event.attack_id),"phase":"telegraph"})
+				_assert_burn_result(attached)
+				_settle_burn_segments(attached.segments)
 		var record: Dictionary = event.duplicate(true)
 		record["player_position"] = player_pos
 		record["inside"] = inside
@@ -1207,6 +1231,8 @@ func _update_projectiles(delta: float) -> void:
 
 func _apply_damage_packet(enemy: Dictionary, packet: Dictionary, snapshot: Dictionary, color: Color,
 		slow: float = 0.0, provenance: Dictionary = {}) -> void:
+	var burn_at:float=_burn_event_time(float(provenance.time)) if provenance.has("time") else elapsed
+	if not burn_runtime.is_empty():_advance_monster_burn(enemy,burn_at)
 	if float(enemy.health) <= 0.0 or float(enemy.get("spawn", 0.0)) > 0.0:
 		return
 	if not provenance.get("accuracy_checked",false) and not _attack_admitted(enemy,packet,snapshot): return
@@ -1233,6 +1259,14 @@ func _apply_damage_packet(enemy: Dictionary, packet: Dictionary, snapshot: Dicti
 	if damage_trace.size() > 32:
 		damage_trace.pop_front()
 	_apply_enemy_settlement(enemy, settlement, color, slow)
+	if float(enemy.health)>0.0 and snapshot.has("burn_policy") and packet.get("role","") in ["direct","parent","child"] and packet.skill_id in ["meteor","tornado"]:
+		var fire:float=float(settlement.raw_components.get("fire",0.0))
+		if fire>0.0 and float(settlement.components.get("fire",0.0))>0.0:
+			var burn:Dictionary=BurnRules.from_fire_hit(fire,snapshot.burn_policy)
+			if burn.ok:
+				var attached:Dictionary=burn_runtime.apply("monster",int(enemy.id),0,burn.raw_dps,burn.duration,burn_at,{"skill_id":str(packet.skill_id),"cast_id":int(provenance.get("cast_id",0)),"projectile_id":int(provenance.get("projectile_id",0)),"phase":str(provenance.get("phase","direct"))})
+				_assert_burn_result(attached)
+				_settle_burn_segments(attached.segments)
 
 
 func _projectile_contact_admitted(shot: Dictionary,target_id: int) -> bool:
@@ -1285,66 +1319,76 @@ func _damage_enemy(enemy: Dictionary, amount: float, color: Color, slow: float =
 
 func _apply_enemy_settlement(enemy: Dictionary, settlement: Dictionary, color: Color, slow: float = 0.0) -> void:
 	var amount: float = float(settlement.damage_total)
-	if float(enemy.health) <= 0.0 or amount <= 0.0:
-		return
+	if not _apply_enemy_resources(enemy,settlement):return
 	var absorbed: float = float(settlement.shield_spent)
-	enemy.shield = float(settlement.remaining_shield)
-	enemy.damage_delay = float(enemy.get("shield_recharge_delay",Defense.RECHARGE_BASE_DELAY))
-	# Keep the historical signed corpse value; actual life loss is bounded in the trace.
-	enemy.health = float(settlement.remaining_health) - float(settlement.overkill)
 	visual_cues.emit_cue("impact", Vector2(enemy.pos), {"radius": clampf(7.0 + sqrt(amount) * 0.65, 8.0, 24.0), "color": color, "shielded": absorbed >= amount, "target_id": int(enemy.id)})
 	enemy.flash = 0.12
 	enemy.slow = maxf(float(enemy.slow), slow)
-	total_damage += amount
 	_add_text(Vector2(enemy.pos) + Vector2(rng.randf_range(-8, 8), -18), str(int(amount)), color)
 	for i: int in range(4):
 		_add_particle(Vector2(enemy.pos), Vector2.RIGHT.rotated(rng.randf() * TAU) * rng.randf_range(40, 130), color, 2.3, 0.3)
-	if float(enemy.health) <= 0.0:
-		telegraphs.cancel(int(enemy.id))
-		var death: Dictionary = monster_runtime.process_death(enemy)
-		if not death.processed:
-			return
-		visual_cues.emit_cue("death", Vector2(enemy.pos), {"radius": float(enemy.radius), "color": Monsters.RARITIES[enemy.rarity].color, "target_id": int(enemy.id)})
-		kills += 1
-		var eligible: bool = bool(death.reward) and not demo_mode
-		if _world_mode=="map" and eligible and _map_run.record_death(enemy):world_context_changed.emit()
-		if eligible:
-			reward_kills += 1
-			_sync_flasks()
-			var equipped_flasks: Array=[]
-			if state.has_method("flask_slots"):
-				for slot:Dictionary in state.flask_slots():
-					if not slot.uid.is_empty():equipped_flasks.append(slot.uid)
-			flask_runtime.charge_rewarded_kill(equipped_flasks,_stats)
-		var leveled: bool = false
-		if eligible:
-			leveled = state.add_xp(int(enemy.get("xp_reward", 0))) if _is_test_profile() else state.add_normal_root_xp(int(enemy.get("xp_reward", 0)))
-		if leveled:
-			health = minf(float(_stats.max_health), health + 25.0)
-			mana = float(_stats.max_mana)
-			_clear_full_leech()
-			hud.notify("升级！获得 1 点天赋 · 按 T 分配")
-			_add_ring(player_pos, 80.0, Color("e7c98d"), 0.7)
-			_add_text(player_pos + Vector2(0, -46), "LEVEL UP", Color("e7c98d"))
-		if eligible and (reward_kills % 8 == 0 or enemy.get("rarity", "") in ["rare", "boss"]):
-			_award_kill_equipment(enemy)
-		if eligible and reward_kills % 20 == 0:
-			_award_kill_jewel()
-		if eligible and _is_test_profile() and reward_kills % 30 == 0 and state.has_method("award_random_gem"):
-			var gem_uid:String=state.award_random_gem(rng)
-			hud.notify("获得宝石："+str(state.item_definition(gem_uid).name)+" · 按 K 装配" if not gem_uid.is_empty() else "背包空间不足，无法领取宝石；可在 I 中整理或丢弃重复宝石")
-		if eligible and _is_test_profile() and reward_kills % FlaskCatalog.REWARD_INTERVAL == 0 and state.has_method("award_flask"):
-			var flask_uid: String = state.award_flask(FlaskCatalog.reward_definition(reward_kills))
-			hud.notify("获得药剂："+str(state.item_definition(flask_uid).name) if not flask_uid.is_empty() else "背包空间不足，未领取药剂；已有物品保留")
-		if eligible and not _is_test_profile() and int(state.normal_journey().normal_root_kills) % 30 == 0:
-			var milestone: Dictionary = state.normal_claim_rewards(state.revision(), build_save_path, false)
-			if milestone.ok: hud.notify("正式击杀里程碑：获得宝石 %d、药剂 %d" % [milestone.claimed_gems, milestone.claimed_flasks])
-			else: hud.notify("里程碑奖励仍待领取，返回正式城镇整理后领取")
-			_world_revision += 1; world_context_changed.emit()
-		if eligible and enemy.get("rarity", "") == "boss":
-			_award_kill_special_jewel()
-		if eligible and reward_kills % 4 == 0:
-			pickups.append({"pos": Vector2(enemy.pos), "life": 22.0})
+	_finish_enemy_death(enemy)
+
+
+func _apply_enemy_resources(enemy:Dictionary,settlement:Dictionary)->bool:
+	var amount:float=float(settlement.damage_total)
+	if float(enemy.health)<=0.0 or amount<=0.0:return false
+	enemy.shield=float(settlement.remaining_shield)
+	enemy.damage_delay=float(enemy.get("shield_recharge_delay",Defense.RECHARGE_BASE_DELAY))
+	enemy.health=float(settlement.remaining_health)-float(settlement.overkill)
+	total_damage+=amount
+	return true
+
+
+func _finish_enemy_death(enemy:Dictionary,legacy_particles:bool=true)->void:
+	if float(enemy.health)>0.0:return
+	if not burn_runtime.is_empty():burn_runtime.remove("monster",int(enemy.id))
+	telegraphs.cancel(int(enemy.id))
+	var death: Dictionary = monster_runtime.process_death(enemy)
+	if not death.processed:
+		return
+	visual_cues.emit_cue("death", Vector2(enemy.pos), {"radius": float(enemy.radius), "color": Monsters.RARITIES[enemy.rarity].color, "target_id": int(enemy.id)})
+	kills += 1
+	var eligible: bool = bool(death.reward) and not demo_mode
+	if _world_mode=="map" and eligible and _map_run.record_death(enemy):world_context_changed.emit()
+	if eligible:
+		reward_kills += 1
+		_sync_flasks()
+		var equipped_flasks: Array=[]
+		if state.has_method("flask_slots"):
+			for slot:Dictionary in state.flask_slots():
+				if not slot.uid.is_empty():equipped_flasks.append(slot.uid)
+		flask_runtime.charge_rewarded_kill(equipped_flasks,_stats)
+	var leveled: bool = false
+	if eligible:
+		leveled = state.add_xp(int(enemy.get("xp_reward", 0))) if _is_test_profile() else state.add_normal_root_xp(int(enemy.get("xp_reward", 0)))
+	if leveled:
+		health = minf(float(_stats.max_health), health + 25.0)
+		mana = float(_stats.max_mana)
+		_clear_full_leech()
+		hud.notify("升级！获得 1 点天赋 · 按 T 分配")
+		_add_ring(player_pos, 80.0, Color("e7c98d"), 0.7)
+		_add_text(player_pos + Vector2(0, -46), "LEVEL UP", Color("e7c98d"))
+	if eligible and (reward_kills % 8 == 0 or enemy.get("rarity", "") in ["rare", "boss"]):
+		_award_kill_equipment(enemy)
+	if eligible and reward_kills % 20 == 0:
+		_award_kill_jewel()
+	if eligible and _is_test_profile() and reward_kills % 30 == 0 and state.has_method("award_random_gem"):
+		var gem_uid:String=state.award_random_gem(rng)
+		hud.notify("获得宝石："+str(state.item_definition(gem_uid).name)+" · 按 K 装配" if not gem_uid.is_empty() else "背包空间不足，无法领取宝石；可在 I 中整理或丢弃重复宝石")
+	if eligible and _is_test_profile() and reward_kills % FlaskCatalog.REWARD_INTERVAL == 0 and state.has_method("award_flask"):
+		var flask_uid: String = state.award_flask(FlaskCatalog.reward_definition(reward_kills))
+		hud.notify("获得药剂："+str(state.item_definition(flask_uid).name) if not flask_uid.is_empty() else "背包空间不足，未领取药剂；已有物品保留")
+	if eligible and not _is_test_profile() and int(state.normal_journey().normal_root_kills) % 30 == 0:
+		var milestone: Dictionary = state.normal_claim_rewards(state.revision(), build_save_path, false)
+		if milestone.ok: hud.notify("正式击杀里程碑：获得宝石 %d、药剂 %d" % [milestone.claimed_gems, milestone.claimed_flasks])
+		else: hud.notify("里程碑奖励仍待领取，返回正式城镇整理后领取")
+		_world_revision += 1; world_context_changed.emit()
+	if eligible and enemy.get("rarity", "") == "boss":
+		_award_kill_special_jewel()
+	if eligible and reward_kills % 4 == 0:
+		pickups.append({"pos": Vector2(enemy.pos), "life": 22.0})
+	if legacy_particles:
 		for i: int in range(8):
 			_add_particle(Vector2(enemy.pos), Vector2.RIGHT.rotated(rng.randf() * TAU) * rng.randf_range(35, 120), Color("ce8070"), 3.0, 0.45)
 
@@ -1452,20 +1496,106 @@ func hit_player_components(components: Variant, source_id: int = 0, delivery_tag
 	visual_cues.emit_cue("hurt", player_pos, {"shielded": absorbed >= amount})
 	damage_delay = float(_stats.get("shield_recharge_delay",Defense.RECHARGE_BASE_DELAY))
 	invulnerable = 0.32
+	_burn_immunity_until=(_burn_incoming_time if _burn_incoming_time>=0.0 else elapsed)+0.32
 	hurt_flash = 0.16
 	screen_shake = 2.5
 	_add_text(player_pos + Vector2(0, -30), "−%d" % int(amount), Color("94dafa") if absorbed >= amount else Color("fa8c83"))
-	if health <= 0.0:
-		flask_runtime.clear_effects()
-		leech_runtime.clear()
-		alive = false
-		group_cooldowns.reset()
-		telegraphs.reset()
-		monster_runtime.cancel_pending("player_death")
-		projectile_runtime.cancel_all(projectiles, "owner_death")
-		save_build()
-		hud.show_death()
+	_finish_player_death()
 	return true
+
+
+func _finish_player_death()->void:
+	if health>0.0:return
+	burn_runtime.reset()
+	flask_runtime.clear_effects()
+	leech_runtime.clear()
+	alive = false
+	group_cooldowns.reset()
+	telegraphs.reset()
+	monster_runtime.cancel_pending("player_death")
+	projectile_runtime.cancel_all(projectiles, "owner_death")
+	save_build()
+	hud.show_death()
+
+func _burn_event_time(offset:float)->float:
+	return clampf(_burn_step_start+offset,_burn_step_start,elapsed) if _burn_step_active else elapsed
+
+
+func _assert_burn_result(result:Dictionary)->void:
+	assert(result.ok,"Validated burning timeline: "+str(result.reason))
+
+
+func _advance_monster_burn(enemy:Dictionary,to_time:float)->void:
+	if burn_runtime.is_empty():return
+	var result:Dictionary=burn_runtime.advance_target("monster",int(enemy.id),to_time)
+	_assert_burn_result(result)
+	_settle_burn_segments(result.segments,{int(enemy.id):enemy})
+
+
+func _advance_monster_burns(to_time:float)->void:
+	if burn_runtime.is_empty():return
+	var targets:Dictionary={}
+	for enemy:Dictionary in enemies:targets[int(enemy.id)]=enemy
+	for status:Dictionary in burn_runtime.statuses():
+		if status.target_kind!="monster":continue
+		var result:Dictionary=burn_runtime.advance_target("monster",status.target_id,to_time)
+		_assert_burn_result(result);_settle_burn_segments(result.segments,targets)
+	_flush_monster_spawns()
+
+
+func _advance_player_burn(to_time:float)->void:
+	if burn_runtime.is_empty() or not alive:return
+	var result:Dictionary=burn_runtime.advance_target("player",0,to_time)
+	_assert_burn_result(result);_settle_burn_segments(result.segments)
+
+
+func _settle_burn_segments(segments:Array,targets:Dictionary={})->void:
+	for segment:Dictionary in segments:
+		var raw:float=segment.raw_amount
+		var settlement:Dictionary={}
+		if segment.target_kind=="player":
+			if not alive:continue
+			var immune_until:float=_burn_immunity_until if _burn_step_active else elapsed+invulnerable if invulnerable>0.0 else 0.0
+			raw=float(segment.raw_dps)*maxf(0.0,float(segment.to_time)-maxf(float(segment.from_time),immune_until))
+			if raw<=0.0:continue
+			settlement=Defense.incoming_burn(raw,_stats.get("fire_resistance",0.0),shield,health,"player")
+			if not settlement.ok:continue
+			shield=settlement.remaining_shield;health=settlement.remaining_health
+			if float(settlement.damage_total)>0.0:damage_delay=float(_stats.get("shield_recharge_delay",Defense.RECHARGE_BASE_DELAY))
+			_finish_player_death()
+		else:
+			var target:Dictionary=targets.get(int(segment.target_id),{})
+			if target.is_empty():
+				for enemy:Dictionary in enemies:
+					if int(enemy.id)==int(segment.target_id):target=enemy;break
+			if target.is_empty() or float(target.health)<=0.0:
+				burn_runtime.remove("monster",int(segment.target_id));continue
+			settlement=Defense.incoming_burn(raw,target.get("resistances",{}).get("fire",0.0),target.get("shield",0.0),target.health,"monster")
+			if not settlement.ok:continue
+			if _apply_enemy_resources(target,settlement):_finish_enemy_death(target,false)
+		if settlement.is_empty():continue
+		var record:Dictionary=segment.duplicate(true);record.settlement=settlement;record.effective_raw_amount=raw
+		burn_trace.append(record)
+		if burn_trace.size()>32:burn_trace.pop_front()
+
+
+func burn_statuses()->Array[Dictionary]:
+	var result:Array[Dictionary]=[]
+	if burn_runtime.is_empty():return result
+	var targets:Dictionary={}
+	for enemy:Dictionary in enemies:targets[int(enemy.id)]=enemy
+	for status:Dictionary in burn_runtime.statuses():
+		var position:Vector2=player_pos
+		var resistance:float=float(_stats.get("fire_resistance",0.0))
+		var immune:bool=invulnerable>0.0 if status.target_kind=="player" else false
+		if status.target_kind=="monster":
+			var enemy:Dictionary=targets.get(int(status.target_id),{})
+			if enemy.is_empty() or float(enemy.health)<=0.0:continue
+			position=enemy.pos;resistance=float(enemy.get("resistances",{}).get("fire",0.0))
+		elif not alive:continue
+		var profile:Dictionary=Defense.defense_profile({"fire_resistance":resistance},status.target_kind)
+		result.append({"target_kind":status.target_kind,"target_id":status.target_id,"source_id":status.source_id,"position":position,"remaining_seconds":status.remaining,"raw_dps":status.raw_dps,"effective_dps":0.0 if immune else float(status.raw_dps)*(1.0-float(profile.effective_resistances.fire)),"immune":immune})
+	return result
 
 
 func _update_pickups(delta: float) -> void:
@@ -1953,7 +2083,7 @@ func _check_map_complete()->void:
 		if float(enemy.health)>0.0:living+=1
 	if _map_run.check_complete(living,monster_runtime.queue.size()):
 		projectile_runtime.cancel_all(projectiles);telegraphs.reset()
-		_world_mode="map_complete";_world_revision+=1
+		_world_mode="map_complete";_world_revision+=1;burn_runtime.reset()
 		var message:String="地图完成，可以返回城镇" if _is_test_profile() else "地图完成，返回正式城镇领取结算"
 		if not _is_test_profile():
 			_normal_completion_pending=true

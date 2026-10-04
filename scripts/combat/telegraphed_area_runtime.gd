@@ -19,7 +19,11 @@ func start(enemy: Variant, target_center: Vector2, overrides: Variant = {}, visu
 	if not enemy is Dictionary or not _valid_id(enemy.get("id")) or not _can_attack(enemy):
 		return _failure("Source must be alive and outside birth protection")
 	if not visual_pattern is String:return _failure("Visual pattern must be a known string")
-	if not visual_pattern.is_empty() and (not BossProfiles.enemy_reason(enemy,visual_pattern).is_empty() or enemy.get("map_boss_attack_id")!=visual_pattern):return _failure("Visual pattern must match the authoritative map boss")
+	var ember_burn:bool=enemy.get("template_id","")=="ember_guard" and not enemy.has("map_boss_attack_id")
+	if ember_burn and visual_pattern.is_empty():visual_pattern="ember_burn"
+	if visual_pattern=="ember_burn":
+		if not ember_burn:return _failure("Burn pattern must match the ember guard")
+	elif not visual_pattern.is_empty() and (not BossProfiles.enemy_reason(enemy,visual_pattern).is_empty() or enemy.get("map_boss_attack_id")!=visual_pattern):return _failure("Visual pattern must match the authoritative map boss")
 	var source_id: int = int(enemy.id)
 	if _states.has(source_id):
 		return _failure("Source already has an attack in progress")
@@ -45,18 +49,21 @@ func start(enemy: Variant, target_center: Vector2, overrides: Variant = {}, visu
 	validated = Defense.validate_components(components)
 	if not validated.ok:
 		return _failure("Scaled contact damage is invalid or overflowed")
+	var burn_policy:Dictionary=Monsters.Burn.ENEMY_POLICY.duplicate(true) if ember_burn else {}
+	if not burn_policy.is_empty():validated.components.fire=float(validated.components.get("fire",0.0))*float(burn_policy.upfront_fire_multiplier)
 	var attack: Dictionary = {
 		"source_id": source_id, "attack_id": _next_attack_id, "phase": "windup", "elapsed": 0.0,
 		"center": target_center, "profile": checked.profile,
 		"packet": Damage.packet(validated.components, ["attack", "area", "hit"], Profiles.PROFILE_ID),
 	}
+	if not burn_policy.is_empty():attack.burn_policy=burn_policy
 	if not visual_pattern.is_empty():attack.visual_pattern=visual_pattern
 	_next_attack_id += 1
 	_states[source_id] = attack
 	return {"ok": true, "reason": "", "attack": attack.duplicate(true)}
 
 
-func advance(delta: float, live_enemies: Variant) -> Array[Dictionary]:
+func advance(delta: float, live_enemies: Variant, with_timing: bool = false) -> Array[Dictionary]:
 	var events: Array[Dictionary] = []
 	# Reject a partial/ambiguous source universe rather than guessing who survived.
 	if not live_enemies is Array or live_enemies.size() > MAX_ACTIVE:
@@ -91,6 +98,8 @@ func advance(delta: float, live_enemies: Variant) -> Array[Dictionary]:
 				"schema_version": Profiles.SCHEMA_VERSION, "balance_version": Profiles.BALANCE_VERSION,
 				"profile": attack.profile.duplicate(true), "packet": attack.packet.duplicate(true),
 			}})
+			if attack.has("burn_policy"):pending.back().event.burn_policy=attack.burn_policy.duplicate(true)
+			if with_timing or attack.has("burn_policy"):pending.back().event.step_time=maxf(0.0,windup-previous)
 			if attack.has("visual_pattern"):pending.back().event.visual_pattern=attack.visual_pattern
 		if float(attack.elapsed) + TIME_EPSILON >= duration:
 			_states.erase(source_id)
@@ -111,6 +120,12 @@ func cancel(source_id: int) -> bool:
 func reset() -> void:
 	_states.clear()
 	# Like MonsterRuntime identities, attack identities never restart on reset.
+
+
+func has_burning_actions()->bool:
+	for value:Dictionary in _states.values():
+		if value.has("burn_policy"):return true
+	return false
 
 
 func active_count() -> int:

@@ -44,7 +44,7 @@ static func metadata() -> Dictionary:
 		"origin": "original", "source_refs": [], "balance_version": "original-fire-defense-v1",
 		"minimum_effective": 0.0, "maximum_effective": FIRE_RESISTANCE_CAP,
 		"stacking": "additive_raw_then_clamp", "settlement_order": ["resistance", "shield", "health"],
-		"description": "本项目原创火焰命中防御；原始抗性相加，有效值限制在 0%–75%，再依次消耗护盾和生命。",
+		"description": "本项目原创火焰防御，命中与燃烧共享有效抗性；原始抗性相加，有效值限制在 0%–75%，再依次消耗护盾和生命。",
 		"unsupported": ["armor", "penetration", "ailments", "chaos_bypass"],
 	}
 
@@ -136,6 +136,19 @@ static func incoming_source_hit(components: Variant,stats: Dictionary,shield: Va
 		result.raw_resistances=profile.raw_resistances
 		result.effective_resistances=profile.effective_resistances
 		result.armour=profile.armour
+	return result
+
+
+## Already-resolved raw burning has no offensive modifiers or hit admission.
+## Reuse the same fire cap and resource settlement, without hit-size armour.
+static func incoming_burn(raw_amount:Variant,fire_resistance:Variant,shield:Variant,health:Variant,actor:String="player")->Dictionary:
+	if not _amount(raw_amount):return _failure("Burn amount must be finite and nonnegative")
+	var profile:Dictionary=defense_profile({"fire_resistance":fire_resistance},actor)
+	if not profile.ok:return profile
+	var raw:float=float(raw_amount);var resistance:float=profile.effective_resistances.fire
+	var amount:float=raw*(1.0-resistance)
+	var result:Dictionary=settle_resolved({"total":amount,"components":{"fire":amount},"details":[{"type":"fire","before_defense":raw,"resistance":resistance,"final":amount}]},shield,health)
+	if result.ok:result.actor=actor;result.stage="burning"
 	return result
 
 

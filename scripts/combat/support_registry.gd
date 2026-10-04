@@ -7,6 +7,7 @@ const Area = preload("res://scripts/combat/area_support_rules.gd")
 const ResourceRules = preload("res://scripts/combat/resource_support_rules.gd")
 const ElementRules = preload("res://scripts/combat/element_support_rules.gd")
 const DeliveryRules = preload("res://scripts/combat/delivery_support_rules.gd")
+const Ignite = preload("res://scripts/combat/ignite_support_rules.gd")
 const Program = preload("res://scripts/combat/support_program.gd")
 const Data = preload("res://scripts/game_data.gd")
 const MAX_SUPPORTS: int = Legacy.MAX_SUPPORTS
@@ -16,9 +17,9 @@ const BATCH_SAVE_VERSION: int = 13
 static var SUPPORTS: Dictionary = _definitions()
 
 static func _providers() -> Array:
-	return [Legacy, Extension, Area, ResourceRules, ElementRules, DeliveryRules]
+	return [Legacy, Extension, Area, ResourceRules, ElementRules, DeliveryRules, Ignite]
 static func _program_providers() -> Array:
-	return [ResourceRules, ElementRules, DeliveryRules]
+	return [ResourceRules, ElementRules, DeliveryRules, Ignite]
 static func _definitions() -> Dictionary:
 	var result: Dictionary = {}
 	for provider: Variant in _providers():
@@ -95,7 +96,8 @@ static func saved_links_reason(skill_id: String, support_ids: Variant, save_vers
 	if not reason.is_empty(): return reason
 	for id: String in support_ids:
 		var minimum: int = 1
-		if Extension.SUPPORTS.has(id): minimum = EXTENSION_SAVE_VERSION
+		if Ignite.SUPPORTS.has(id): minimum = Ignite.SAVE_VERSION
+		elif Extension.SUPPORTS.has(id): minimum = EXTENSION_SAVE_VERSION
 		elif Area.SUPPORTS.has(id): minimum = int(Area.SAVE_VERSIONS[id])
 		elif is_program_support(id): minimum = BATCH_SAVE_VERSION
 		if save_version < minimum: return "此存档版本不支持" + str(get_definition(id).name)
@@ -103,6 +105,7 @@ static func saved_links_reason(skill_id: String, support_ids: Variant, save_vers
 static func definition_error(value: Variant) -> String:
 	if value is Dictionary and value.has("family"):
 		match value.family:
+			"burning": return Ignite.definition_error(value)
 			"resource": return ResourceRules.definition_error(value)
 			"element": return ElementRules.definition_error(value)
 			"delivery", "control", "chain": return DeliveryRules.definition_error(value)
