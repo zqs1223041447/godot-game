@@ -1,0 +1,74 @@
+{
+  "baseline_commit": "f94f745e74d29a88839a3cf01146b03ab7102ba3",
+  "tested_stage_commit": "a441be2d069796a7d592ac893b1ef3deef1bca96",
+  "reports": [
+    {
+      "test": "res://tests/gem_trade_rules_test.gd",
+      "checks": 1766,
+      "failures": 0,
+      "path": "docs/qa/v044/gem-rules-test.log.txt",
+      "sha256": "a46c1bdb840b3ebedf0df0a8ec440ab80926a093daa8a3499aeba26f6b9ccdb9"
+    },
+    {
+      "test": "res://tests/normal_gem_trade_transactions_test.gd",
+      "checks": 282,
+      "failures": 0,
+      "path": "docs/qa/v044/gem-transactions-final.log.txt",
+      "sha256": "42f0199eda4d1edfbc8b7ca1f3b018dec6abddbc43699e0106a5ed529c6f2124"
+    },
+    {
+      "test": "res://tests/normal_gem_trade_gameplay_test.gd",
+      "checks": 166,
+      "failures": 0,
+      "path": "docs/qa/v044/gem-gameplay-attempt-02.log.txt",
+      "sha256": "eafbcb103581597ef0e6c79b636a6eae6c361c98fbeeb75fd25deab54c69c58c"
+    },
+    {
+      "test": "res://tests/gem_trade_controls_test.gd",
+      "checks": 17,
+      "failures": 0,
+      "path": "docs/qa/v044-root-ui/controls-final.log",
+      "sha256": "b87291973d549dbc802e46474dcc961c99b27719c62d617a57d86afd54c312ee"
+    }
+  ],
+  "checks": 2231,
+  "logs": {
+    "docs/qa/v044/font-final.log.txt": "6216b4fbac8e2befd12e38a55d2d593393fa610b2bd373db79a0de875257f24d",
+    "docs/qa/v044/font-initial.log.txt": "5ce418a2d0d39c809fd7f252bfa1f409ce1e6318221e1571411914cd3d4780d7",
+    "docs/qa/v044/font-regenerate.log.txt": "5d2dbb09e6812a43d6403734a4531f2e7fd96d8714777aa2d9364a19fd4f0ee5",
+    "docs/qa/v044/gem-gameplay-attempt-01.log.txt": "12441078c23151fab142203466bd62565103b34c182a292a39452fd34ffc54cf",
+    "docs/qa/v044/gem-gameplay-attempt-02.log.txt": "eafbcb103581597ef0e6c79b636a6eae6c361c98fbeeb75fd25deab54c69c58c",
+    "docs/qa/v044/gem-rules-test.log.txt": "a46c1bdb840b3ebedf0df0a8ec440ab80926a093daa8a3499aeba26f6b9ccdb9",
+    "docs/qa/v044/gem-transactions-final.log.txt": "42f0199eda4d1edfbc8b7ca1f3b018dec6abddbc43699e0106a5ed529c6f2124",
+    "docs/qa/v044/gem-transactions-first.log.txt": "6a04cf0e3bf9aea3cc34b02f40c40ab35adc6ffbc0cb6f3db51c4f108c863351",
+    "docs/qa/v044/gem-transactions-second.log.txt": "cfd184e83d382e3c2125aa17ab680a703d0cdfdac7caaeca3b4ea0f06000aa87",
+    "docs/qa/v044/import-final.log.txt": "fbdd9998aa7833fcf3b749d45cff078d0f446e88e0eae15cfafc5d428800839e",
+    "docs/qa/v044/import-initial.log.txt": "98bc1c11fbc6d4245fefefc81af3320448c528c7126f11e5689e35781a049e47",
+    "docs/qa/v044/reference-build.log.txt": "48847aa41f17a3a4dfa3d9152574424df47d66b44600a88084c9959f2f17f383",
+    "docs/qa/v044/reference-export.log.txt": "51e3b0bc619efba5c710e1863eedea0402e6700d8c973b9ecb758418906e7297",
+    "docs/qa/v044/reference-validation.log.txt": "a96bcbe334d96c614618514aeb2e9731f8ee7087bc935a0f0b7f7252df2f0484",
+    "docs/qa/v044-root-ui/controls-final.log": "b87291973d549dbc802e46474dcc961c99b27719c62d617a57d86afd54c312ee",
+    "docs/qa/v044-root-ui/controls-first.log": "d4cb59a4f620612401b65e5a26f0f6304b0dcdd52f73e7b0e5caf7b8537fff06"
+  },
+  "production_inputs": 401,
+  "post_test_ui_changes": [
+    {
+      "path": "scripts/ui/town_service_panel.gd",
+      "tested_sha256": "2c1d8ecf44be97aae45443c40bc848e531639d1f192de02330c2190fced00cdb",
+      "final_sha256": "908ab394e8da45695ad93a6decc8c4e13831e4e817c66062c2714fe738a33eb0",
+      "changes": "12 added display-style lines in 2baeed6 and one rejection-reason tooltip line in 9eefa53; root native rechecked final appearance with 1060 font"
+    }
+  ],
+  "root_final_commit": "0819049",
+  "scope": "26 existing gems, formal-town paid acquisition and bag selected-UID recycle; actual map-earned shards and cast integration; schema27 unchanged",
+  "initial_failures_retained": [
+    "Model fixture _init error invalid 0-check run",
+    "Model second236 run failed3 path assertions plus size Array conversion and Variant comparison script errors; final282 clean",
+    "Root first15 UI assertions invalid due same model size error; final17 clean",
+    "Font initial missing 买易购; same-source supplement1060 final passed"
+  ],
+  "evidence_reuse": "Final166 scene report supersedes earlier137. No combat/loot/schema/gear rules changed. Model/pure/main test inputs byte-equal; only root13 display additions after UI/gameplay verified separately. Final font includes unchanged old1057 glyph outlines and metrics. Original57 item art/64 reference art exact bytes. No historical full suite or600s.",
+  "windows_native_tested": false,
+  "full_repeat": false,
+  "soak_600s": false
+}
