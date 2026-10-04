@@ -80,6 +80,7 @@ static func collect() -> Dictionary:
 	result["flasks"] = flask_examples()
 	result["town_maps"] = town_map_examples()
 	result["source_tree"] = source_tree_reference()
+	result["source_spatial"] = source_spatial_examples()
 	result["save_version"] = Canonical.Rules.VERSION
 	result["current_loot_profile_id"] = Canonical.LOOT_PROFILE_ID
 	result["current_loot_profile"] = Equipment.loot_profile(Canonical.LOOT_PROFILE_ID)
@@ -748,3 +749,25 @@ static func support_program_examples() -> Dictionary:
 static func support_cast_brief(cast: Dictionary) -> Dictionary:
 	return {"mana": cast.mana, "cooldown": cast.cooldown, "initial_count": cast.initial_count,
 		"recipe": cast.recipe.duplicate(true), "summary": Preview.summary(cast), "details": Preview.details(cast)}
+
+static func source_spatial_examples()->Dictionary:
+	var examples:Array=[]
+	for entry:Dictionary in [
+		{"field":"area_size_increased","value":0.12,"node_id":"5560","skill":"nova"},
+		{"field":"spell_area_size_increased","value":0.1,"node_id":"51801","skill":"meteor"},
+		{"field":"melee_area_size_increased","value":0.1,"node_id":"11700","skill":"cleave"},
+		{"field":"projectile_speed_increased","value":0.1,"node_id":"44306","skill":"tornado"}]:
+		var stats:Dictionary={"damage":20.0};stats[entry.field]=entry.value
+		var base:Dictionary=Compiler.compile_skill(entry.skill,Recipes.snapshot({"damage":20.0},["return_on_range","explode_on_flight_end"]),[])
+		var current:Dictionary=Compiler.compile_skill(entry.skill,Recipes.snapshot(stats,["return_on_range","explode_on_flight_end"]),[])
+		assert(base.ok and current.ok)
+		examples.append({"input":entry,"source_node":SourceTree.Data.node(entry.node_id),"source_effect":SourceTree.node_effect(entry.node_id),"before":base,"after":current,"details":Preview.details(current)})
+	var slow:Dictionary=Compiler.compile_skill("bolt",Recipes.snapshot({"damage":20.0,"projectile_speed_increased":-0.1},[]),[])
+	return {"minimum_save_version":20,"fields":Compiler.Spatial.STATS,"examples":examples,"reduced_speed_example":slow,
+		"area_formula":"最终半径 = 基础半径 × sqrt((1 + 全局面积 increased + 适用技能面积 increased) × 辅助面积 more 乘积)",
+		"speed_formula":"最终速度 = 基础速度 × (1 + 投射速度 increased - reduced) × 辅助速度乘积",
+		"area_damage_is_separate":true,"secondary_explosion_scope":"仅全局面积；独立爆炸不带法术或近战标签",
+		"unchanged_limits":["投射物射程","寿命上限","贯穿次数","命中伤害公式","耗魔","冷却","墙体终止优先级"],
+		"snapshot_rule":"施放时冻结；母箭、子箭和返回读取最终配方，不二次增加",
+		"example_scope":"隔离演算输入，只演示单项几何增幅；不是整个源节点的伤害预估或已分配构筑",
+		"legacy_rule":"v19先按旧执行覆盖完整验证并保存原字节备份，再迁移到v20；旧版本注入新节点拒绝"}

@@ -1,0 +1,54 @@
+{
+  "reports": [
+    {
+      "path": "docs/qa/v032/source-parser.log.txt",
+      "sha256": "53d1348d546094ba6e0b49a65880147ff096659bfcaec31cc9a1550e323fd9d9",
+      "checks": 75
+    },
+    {
+      "path": "docs/qa/v032/source-compile.log.txt",
+      "sha256": "88dc858c6d6ac37ed649d2509079f003c8e33010cfd452ce4bf5d2cbb6f1bfed",
+      "checks": 457
+    },
+    {
+      "path": "docs/qa/v032/source-migration.log.txt",
+      "sha256": "58346b1a9ab4080030afdab261761b52f95b5e38b263f9c63010252d8fee120b",
+      "checks": 49
+    },
+    {
+      "path": "docs/qa/v032/source-gameplay.log.txt",
+      "sha256": "5730d2a057b2be8a4f93792dcb0212cfbb44e81848d0d3f4603034f8c4b6feb3",
+      "checks": 75
+    },
+    {
+      "path": "docs/qa/v032/root-ui/spatial-preview.log.txt",
+      "sha256": "487e80500c54320c228804ec1ea05d0e00e88070327152f0bc42dce4102cc515",
+      "checks": 8
+    },
+    {
+      "path": "docs/qa/v032/source-reference.log.txt",
+      "sha256": "f540c845afbc0a16e1477ca3fe9e51688248fab391b1a8d93916870dd2d8200a",
+      "checks": 18
+    }
+  ],
+  "checks": 682,
+  "report_count": 6,
+  "production_inputs": 376,
+  "root_ui_commit": "f3a544f725ed20072c109169095806d190f2a6ab",
+  "ui_evidence_reused": true,
+  "frozen_zero_increment_casts": 412,
+  "frozen_basic_snapshots": 2,
+  "save_schema": 20,
+  "previous_schema": 19,
+  "default_reachable_nodes": 577,
+  "600_second_test_deleted": true,
+  "full_repeat_required": false,
+  "historical_fixture_updates_not_rerun": [
+    "tests/reserved_hotkey_migration_test.gd",
+    "tests/town_map_stage_test.gd",
+    "tests/town_migration_chain_test.gd",
+    "tests/town_map_reference_test.gd",
+    "tests/reference_export_test.gd"
+  ],
+  "coverage_semantics": "Reachability excludes budget/mastery choice, not simultaneous123-point allocation; full effect entries include mastery options, no-direct-stat entries separated."
+}

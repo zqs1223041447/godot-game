@@ -10,7 +10,7 @@ func run()->void:
 	if not OS.get_environment("XDG_DATA_HOME").begins_with("/tmp/godot-m1-"):quit(78);return
 	arena=load("res://scenes/main.tscn").instantiate();root.add_child(arena);await process_frame
 	arena.set_process(false);arena.hud.set_process(false)
-	check(arena.state.snapshot().version==19,"New build initializes through frozen migration stages")
+	check(arena.state.snapshot().version==arena.state.Rules.VERSION,"New build initializes through frozen migration stages")
 	check(arena.world_context().mode=="normal","Normal game remains default")
 	var old=arena.state;var normal:Dictionary=old.snapshot()
 	var entered:Dictionary=arena.enter_town_test(arena.world_context().revision)

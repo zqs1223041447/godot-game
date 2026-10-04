@@ -494,9 +494,8 @@
 						"7938",
 						"1031",
 						"19635",
-						"11551",
-						"38176",
-						"8948",
+						"38805",
+						"38900",
 						"27929",
 						"11659"
 					],
@@ -508,32 +507,6 @@
 						"15% chance to Ignore Stuns while Casting"
 					],
 					"via_reachable_node_id": "27929"
-				},
-				{
-					"name": "Melee Area of Effect",
-					"node_id": "11700",
-					"shortest_executable_prefix": [
-						"58833",
-						"48828",
-						"33508",
-						"36881",
-						"35503",
-						"19144",
-						"28330",
-						"46578",
-						"30733",
-						"49178",
-						"43374",
-						"22703",
-						"14056",
-						"11700"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"Melee Skills have 10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "14056"
 				},
 				{
 					"name": "Endurance",
@@ -4856,6 +4829,38 @@
 					"via_reachable_node_id": "27283"
 				},
 				{
+					"name": "Adjacent Animosity",
+					"node_id": "31513",
+					"shortest_executable_prefix": [
+						"58833",
+						"48828",
+						"33508",
+						"36881",
+						"35503",
+						"19144",
+						"16167",
+						"10829",
+						"238",
+						"11497",
+						"5408",
+						"56589",
+						"23471",
+						"5237",
+						"30679",
+						"11678",
+						"52288",
+						"31513"
+					],
+					"status": "partial",
+					"supported": [
+						"10% reduced Projectile Speed"
+					],
+					"unsupported": [
+						"Projectiles deal 40% increased Damage with Hits to targets at the start\nof their movement, reducing to 0% as they travel farther"
+					],
+					"via_reachable_node_id": "52288"
+				},
+				{
 					"name": "Pain Attunement",
 					"node_id": "31703",
 					"shortest_executable_prefix": [
@@ -4993,9 +4998,8 @@
 						"7938",
 						"1031",
 						"19635",
-						"11551",
-						"38176",
-						"8948",
+						"38805",
+						"38900",
 						"27929",
 						"32024"
 					],
@@ -6702,68 +6706,6 @@
 					"via_reachable_node_id": "58449"
 				},
 				{
-					"name": "Area of Effect",
-					"node_id": "38805",
-					"shortest_executable_prefix": [
-						"58833",
-						"2151",
-						"37690",
-						"48423",
-						"6204",
-						"63976",
-						"33479",
-						"10490",
-						"47251",
-						"7388",
-						"60398",
-						"31875",
-						"4397",
-						"7938",
-						"1031",
-						"19635",
-						"38805"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "19635"
-				},
-				{
-					"name": "Area of Effect",
-					"node_id": "38900",
-					"shortest_executable_prefix": [
-						"58833",
-						"2151",
-						"37690",
-						"48423",
-						"6204",
-						"63976",
-						"33479",
-						"10490",
-						"47251",
-						"7388",
-						"60398",
-						"31875",
-						"4397",
-						"7938",
-						"1031",
-						"19635",
-						"11551",
-						"38176",
-						"8948",
-						"27929",
-						"38900"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "27929"
-				},
-				{
 					"name": "Chain Distance",
 					"node_id": "38947",
 					"shortest_executable_prefix": [
@@ -7107,36 +7049,6 @@
 					"via_reachable_node_id": "23471"
 				},
 				{
-					"name": "Fire Damage and Area of Effect",
-					"node_id": "40291",
-					"shortest_executable_prefix": [
-						"58833",
-						"2151",
-						"37690",
-						"48423",
-						"6204",
-						"63976",
-						"33479",
-						"10490",
-						"47251",
-						"7388",
-						"60398",
-						"46340",
-						"42760",
-						"40366",
-						"885",
-						"40291"
-					],
-					"status": "partial",
-					"supported": [
-						"8% increased Fire Damage"
-					],
-					"unsupported": [
-						"8% increased Area of Effect"
-					],
-					"via_reachable_node_id": "885"
-				},
-				{
 					"name": "Roiling Tempest",
 					"node_id": "40351",
 					"shortest_executable_prefix": [
@@ -7220,9 +7132,8 @@
 						"7938",
 						"1031",
 						"19635",
-						"11551",
-						"38176",
-						"8948",
+						"38805",
+						"38900",
 						"27929",
 						"40637"
 					],
@@ -7371,36 +7282,6 @@
 						"Cannot Evade enemy Attacks\nCannot be Stunned"
 					],
 					"via_reachable_node_id": "43374"
-				},
-				{
-					"name": "Area of Effect",
-					"node_id": "40927",
-					"shortest_executable_prefix": [
-						"58833",
-						"2151",
-						"37690",
-						"48423",
-						"6204",
-						"63976",
-						"16775",
-						"46910",
-						"33740",
-						"15405",
-						"50862",
-						"2913",
-						"44908",
-						"26866",
-						"61471",
-						"41472",
-						"44799",
-						"40927"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "44799"
 				},
 				{
 					"name": "Mana and Guard Skill Cooldown Recovery",
@@ -8029,6 +7910,40 @@
 					"via_reachable_node_id": "49308"
 				},
 				{
+					"name": "Bow Damage",
+					"node_id": "42964",
+					"shortest_executable_prefix": [
+						"58833",
+						"48828",
+						"33508",
+						"36881",
+						"35503",
+						"19144",
+						"16167",
+						"10829",
+						"238",
+						"11497",
+						"5408",
+						"63139",
+						"61306",
+						"60942",
+						"41866",
+						"63843",
+						"27283",
+						"5616",
+						"38662",
+						"50338",
+						"42964"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"12% increased Damage with Bows",
+						"12% increased Damage Over Time with Bow Skills"
+					],
+					"via_reachable_node_id": "50338"
+				},
+				{
 					"name": "Totem Damage and Placement Speed",
 					"node_id": "4300",
 					"shortest_executable_prefix": [
@@ -8179,37 +8094,6 @@
 						"Retaliation Skills have 15% increased Area of Effect"
 					],
 					"via_reachable_node_id": "5233"
-				},
-				{
-					"name": "Projectile Damage and Speed",
-					"node_id": "44306",
-					"shortest_executable_prefix": [
-						"58833",
-						"48828",
-						"33508",
-						"36881",
-						"35503",
-						"19144",
-						"16167",
-						"10829",
-						"238",
-						"11497",
-						"5408",
-						"56589",
-						"23471",
-						"5237",
-						"30679",
-						"11678",
-						"44306"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased Projectile Damage"
-					],
-					"unsupported": [
-						"10% increased Projectile Speed"
-					],
-					"via_reachable_node_id": "11678"
 				},
 				{
 					"name": "Divine Fury",
@@ -9056,6 +8940,41 @@
 					"via_reachable_node_id": "14056"
 				},
 				{
+					"name": "Life and Stun Avoidance",
+					"node_id": "48099",
+					"shortest_executable_prefix": [
+						"58833",
+						"48828",
+						"33508",
+						"36881",
+						"35503",
+						"19144",
+						"16167",
+						"10829",
+						"238",
+						"11497",
+						"5408",
+						"63139",
+						"61306",
+						"60942",
+						"41866",
+						"63843",
+						"27283",
+						"5616",
+						"38662",
+						"50338",
+						"48099"
+					],
+					"status": "partial",
+					"supported": [
+						"4% increased maximum Life"
+					],
+					"unsupported": [
+						"8% chance to Avoid being Stunned"
+					],
+					"via_reachable_node_id": "50338"
+				},
+				{
 					"name": "Life Regeneration per Endurance Charge",
 					"node_id": "48109",
 					"shortest_executable_prefix": [
@@ -9842,41 +9761,6 @@
 					"via_reachable_node_id": "46910"
 				},
 				{
-					"name": "Ballistics",
-					"node_id": "50338",
-					"shortest_executable_prefix": [
-						"58833",
-						"48828",
-						"33508",
-						"36881",
-						"35503",
-						"19144",
-						"16167",
-						"10829",
-						"238",
-						"11497",
-						"5408",
-						"63139",
-						"61306",
-						"60942",
-						"41866",
-						"63843",
-						"27283",
-						"5616",
-						"38662",
-						"50338"
-					],
-					"status": "partial",
-					"supported": [
-						"20% increased Projectile Damage",
-						"+20 to Dexterity"
-					],
-					"unsupported": [
-						"20% increased Projectile Speed"
-					],
-					"via_reachable_node_id": "38662"
-				},
-				{
 					"name": "Dual Wield Cast Speed",
 					"node_id": "50382",
 					"shortest_executable_prefix": [
@@ -10235,40 +10119,6 @@
 					"via_reachable_node_id": "27659"
 				},
 				{
-					"name": "Spell Area of Effect",
-					"node_id": "51801",
-					"shortest_executable_prefix": [
-						"58833",
-						"2151",
-						"37690",
-						"48423",
-						"6204",
-						"63976",
-						"33479",
-						"10490",
-						"22473",
-						"14211",
-						"42731",
-						"37078",
-						"14182",
-						"13322",
-						"60090",
-						"46092",
-						"51923",
-						"48778",
-						"37671",
-						"27415",
-						"32710",
-						"51801"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"Spell Skills have 10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "32710"
-				},
-				{
 					"name": "Brand Critical Strike Chance",
 					"node_id": "51954",
 					"shortest_executable_prefix": [
@@ -10292,37 +10142,6 @@
 						"25% increased Brand Critical Strike Chance"
 					],
 					"via_reachable_node_id": "46340"
-				},
-				{
-					"name": "Projectile Damage and Speed",
-					"node_id": "52288",
-					"shortest_executable_prefix": [
-						"58833",
-						"48828",
-						"33508",
-						"36881",
-						"35503",
-						"19144",
-						"16167",
-						"10829",
-						"238",
-						"11497",
-						"5408",
-						"56589",
-						"23471",
-						"5237",
-						"30679",
-						"11678",
-						"52288"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased Projectile Damage"
-					],
-					"unsupported": [
-						"10% reduced Projectile Speed"
-					],
-					"via_reachable_node_id": "11678"
 				},
 				{
 					"name": "Lightning Critical Strike Multiplier",
@@ -11174,21 +10993,6 @@
 					"via_reachable_node_id": "60440"
 				},
 				{
-					"name": "Area of Effect",
-					"node_id": "5560",
-					"shortest_executable_prefix": [
-						"58833",
-						"2151",
-						"5560"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"12% increased Area of Effect"
-					],
-					"via_reachable_node_id": "2151"
-				},
-				{
 					"name": "Life Recoup",
 					"node_id": "55804",
 					"shortest_executable_prefix": [
@@ -11635,6 +11439,41 @@
 						"Retaliation Skills have 12% increased Cooldown Recovery Rate"
 					],
 					"via_reachable_node_id": "24865"
+				},
+				{
+					"name": "Mana and Flask Effect",
+					"node_id": "57240",
+					"shortest_executable_prefix": [
+						"58833",
+						"48828",
+						"33508",
+						"36881",
+						"35503",
+						"19144",
+						"16167",
+						"10829",
+						"238",
+						"11497",
+						"5408",
+						"63139",
+						"61306",
+						"60942",
+						"41866",
+						"63843",
+						"27283",
+						"5616",
+						"38662",
+						"50338",
+						"57240"
+					],
+					"status": "partial",
+					"supported": [
+						"8% increased maximum Mana"
+					],
+					"unsupported": [
+						"Flasks applied to you have 5% increased Effect"
+					],
+					"via_reachable_node_id": "50338"
 				},
 				{
 					"name": "Attack and Cast Speed",
@@ -12327,39 +12166,6 @@
 					"via_reachable_node_id": "64210"
 				},
 				{
-					"name": "Fury Bolts",
-					"node_id": "60002",
-					"shortest_executable_prefix": [
-						"58833",
-						"48828",
-						"33508",
-						"36881",
-						"35503",
-						"19144",
-						"16167",
-						"10829",
-						"238",
-						"11497",
-						"5408",
-						"11651",
-						"6580",
-						"19711",
-						"17201",
-						"36222",
-						"52632",
-						"60002"
-					],
-					"status": "partial",
-					"supported": [
-						"20% increased Projectile Damage",
-						"+20 to Strength"
-					],
-					"unsupported": [
-						"20% increased Projectile Speed"
-					],
-					"via_reachable_node_id": "52632"
-				},
-				{
 					"name": "Evasion and Spell Suppression",
 					"node_id": "60204",
 					"shortest_executable_prefix": [
@@ -12730,36 +12536,6 @@
 						"5% increased Effect of your Curses"
 					],
 					"via_reachable_node_id": "27415"
-				},
-				{
-					"name": "Amplify",
-					"node_id": "61308",
-					"shortest_executable_prefix": [
-						"58833",
-						"2151",
-						"37690",
-						"48423",
-						"6204",
-						"63976",
-						"33479",
-						"10490",
-						"47251",
-						"7388",
-						"60398",
-						"13009",
-						"17735",
-						"58402",
-						"59728",
-						"61308"
-					],
-					"status": "partial",
-					"supported": [
-						"20% increased Area Damage"
-					],
-					"unsupported": [
-						"10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "59728"
 				},
 				{
 					"name": "Impale Chance with Two Handed Weapons",
@@ -13760,9 +13536,8 @@
 						"7938",
 						"1031",
 						"19635",
-						"11551",
-						"38176",
-						"8948",
+						"38805",
+						"38900",
 						"27929",
 						"55643",
 						"6949"
@@ -13917,9 +13692,8 @@
 						"7938",
 						"1031",
 						"19635",
-						"11551",
-						"38176",
-						"8948",
+						"38805",
+						"38900",
 						"27929",
 						"7503"
 					],
@@ -14177,6 +13951,38 @@
 						"6% increased Attack Speed while in Sand Stance"
 					],
 					"via_reachable_node_id": "19711"
+				},
+				{
+					"name": "Longshot",
+					"node_id": "8458",
+					"shortest_executable_prefix": [
+						"58833",
+						"48828",
+						"33508",
+						"36881",
+						"35503",
+						"19144",
+						"16167",
+						"10829",
+						"238",
+						"11497",
+						"5408",
+						"56589",
+						"23471",
+						"5237",
+						"30679",
+						"11678",
+						"44306",
+						"8458"
+					],
+					"status": "partial",
+					"supported": [
+						"30% increased Projectile Speed"
+					],
+					"unsupported": [
+						"Projectiles gain Damage as they travel farther, dealing up\nto 60% increased Damage with Hits to targets"
+					],
+					"via_reachable_node_id": "44306"
 				},
 				{
 					"name": "Two Handed Melee Damage",
@@ -14479,18 +14285,18 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 480,
+			"blocked_frontier_count": 473,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
-				"partial": 124,
-				"unsupported": 356
+				"partial": 122,
+				"unsupported": 351
 			},
 			"class_id": 0,
 			"class_name": "Scion",
 			"excluded_adjacent_counts": {
 				"blighted_only": 0,
-				"mastery_not_path": 14,
+				"mastery_not_path": 17,
 				"other_class_start": 6,
 				"position_proxy": 0
 			},
@@ -14504,6 +14310,11 @@
 					"node_id": "12382",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "12702"
+				},
+				{
+					"node_id": "14113",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "53573"
 				},
 				{
 					"node_id": "18240",
@@ -14586,9 +14397,19 @@
 					"via_reachable_node_id": "1325"
 				},
 				{
+					"node_id": "63268",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "24324"
+				},
+				{
 					"node_id": "64406",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "33287"
+				},
+				{
+					"node_id": "8556",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "20835"
 				},
 				{
 					"node_id": "857",
@@ -14596,9 +14417,9 @@
 					"via_reachable_node_id": "18769"
 				}
 			],
-			"reachable_count_excluding_start": 554,
-			"reachable_count_including_start": 555,
-			"reachable_full_direct_effect_nodes": 539,
+			"reachable_count_excluding_start": 576,
+			"reachable_count_including_start": 577,
+			"reachable_full_direct_effect_nodes": 561,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -14618,6 +14439,7 @@
 				"11651",
 				"11678",
 				"11688",
+				"11700",
 				"11859",
 				"1203",
 				"12250",
@@ -14644,6 +14466,7 @@
 				"14211",
 				"14292",
 				"1461",
+				"14745",
 				"14930",
 				"14936",
 				"15027",
@@ -14651,9 +14474,11 @@
 				"15073",
 				"15117",
 				"15144",
+				"15365",
 				"15405",
 				"15549",
 				"15631",
+				"15711",
 				"15868",
 				"1600",
 				"16167",
@@ -14689,11 +14514,13 @@
 				"20546",
 				"20551",
 				"20807",
+				"20835",
 				"20852",
 				"2094",
 				"20953",
 				"20987",
 				"21033",
+				"21075",
 				"21262",
 				"21301",
 				"21330",
@@ -14726,6 +14553,7 @@
 				"23881",
 				"24050",
 				"24083",
+				"24324",
 				"24362",
 				"24377",
 				"24496",
@@ -14866,9 +14694,12 @@
 				"38190",
 				"38344",
 				"38348",
+				"38450",
 				"38662",
 				"38701",
+				"38805",
 				"38836",
+				"38900",
 				"38906",
 				"39211",
 				"39631",
@@ -14885,6 +14716,7 @@
 				"3992",
 				"4011",
 				"40132",
+				"40291",
 				"40362",
 				"40366",
 				"40508",
@@ -14893,6 +14725,7 @@
 				"40644",
 				"40653",
 				"40867",
+				"40927",
 				"41250",
 				"41263",
 				"41472",
@@ -14917,6 +14750,7 @@
 				"4397",
 				"44184",
 				"44202",
+				"44306",
 				"444",
 				"44429",
 				"44606",
@@ -14978,18 +14812,23 @@
 				"50197",
 				"50264",
 				"50306",
+				"50338",
 				"50340",
 				"50422",
 				"50570",
 				"50862",
 				"50904",
+				"50969",
 				"51220",
+				"51291",
 				"5152",
 				"51786",
+				"51801",
 				"51856",
 				"51923",
 				"5197",
 				"52230",
+				"52288",
 				"5233",
 				"5237",
 				"52502",
@@ -15000,6 +14839,7 @@
 				"53213",
 				"53279",
 				"53456",
+				"53573",
 				"53793",
 				"5408",
 				"54127",
@@ -15012,6 +14852,7 @@
 				"55373",
 				"55392",
 				"55485",
+				"5560",
 				"55643",
 				"55647",
 				"55649",
@@ -15057,6 +14898,7 @@
 				"59728",
 				"59861",
 				"59928",
+				"60002",
 				"60090",
 				"60153",
 				"60180",
@@ -15074,6 +14916,7 @@
 				"61217",
 				"61262",
 				"61306",
+				"61308",
 				"61320",
 				"61419",
 				"61471",
@@ -15665,9 +15508,8 @@
 						"7938",
 						"1031",
 						"19635",
-						"11551",
-						"38176",
-						"8948",
+						"38805",
+						"38900",
 						"27929",
 						"11659"
 					],
@@ -15679,28 +15521,6 @@
 						"15% chance to Ignore Stuns while Casting"
 					],
 					"via_reachable_node_id": "27929"
-				},
-				{
-					"name": "Melee Area of Effect",
-					"node_id": "11700",
-					"shortest_executable_prefix": [
-						"47175",
-						"50904",
-						"6981",
-						"36543",
-						"49412",
-						"31080",
-						"43374",
-						"22703",
-						"14056",
-						"11700"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"Melee Skills have 10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "14056"
 				},
 				{
 					"name": "Endurance",
@@ -20284,6 +20104,41 @@
 					"via_reachable_node_id": "27283"
 				},
 				{
+					"name": "Adjacent Animosity",
+					"node_id": "31513",
+					"shortest_executable_prefix": [
+						"47175",
+						"50904",
+						"6981",
+						"36543",
+						"49412",
+						"31080",
+						"43374",
+						"30691",
+						"476",
+						"24865",
+						"34031",
+						"56001",
+						"17201",
+						"19711",
+						"20010",
+						"23471",
+						"5237",
+						"30679",
+						"11678",
+						"52288",
+						"31513"
+					],
+					"status": "partial",
+					"supported": [
+						"10% reduced Projectile Speed"
+					],
+					"unsupported": [
+						"Projectiles deal 40% increased Damage with Hits to targets at the start\nof their movement, reducing to 0% as they travel farther"
+					],
+					"via_reachable_node_id": "52288"
+				},
+				{
 					"name": "Pain Attunement",
 					"node_id": "31703",
 					"shortest_executable_prefix": [
@@ -20431,9 +20286,8 @@
 						"7938",
 						"1031",
 						"19635",
-						"11551",
-						"38176",
-						"8948",
+						"38805",
+						"38900",
 						"27929",
 						"32024"
 					],
@@ -22204,80 +22058,6 @@
 					"via_reachable_node_id": "58449"
 				},
 				{
-					"name": "Area of Effect",
-					"node_id": "38805",
-					"shortest_executable_prefix": [
-						"47175",
-						"31628",
-						"9511",
-						"23881",
-						"26523",
-						"44606",
-						"50862",
-						"15405",
-						"33740",
-						"46910",
-						"16775",
-						"63976",
-						"33479",
-						"10490",
-						"47251",
-						"7388",
-						"60398",
-						"31875",
-						"4397",
-						"7938",
-						"1031",
-						"19635",
-						"38805"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "19635"
-				},
-				{
-					"name": "Area of Effect",
-					"node_id": "38900",
-					"shortest_executable_prefix": [
-						"47175",
-						"31628",
-						"9511",
-						"23881",
-						"26523",
-						"44606",
-						"50862",
-						"15405",
-						"33740",
-						"46910",
-						"16775",
-						"63976",
-						"33479",
-						"10490",
-						"47251",
-						"7388",
-						"60398",
-						"31875",
-						"4397",
-						"7938",
-						"1031",
-						"19635",
-						"11551",
-						"38176",
-						"8948",
-						"27929",
-						"38900"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "27929"
-				},
-				{
 					"name": "Chain Distance",
 					"node_id": "38947",
 					"shortest_executable_prefix": [
@@ -22661,38 +22441,6 @@
 					"via_reachable_node_id": "23471"
 				},
 				{
-					"name": "Fire Damage and Area of Effect",
-					"node_id": "40291",
-					"shortest_executable_prefix": [
-						"47175",
-						"31628",
-						"9511",
-						"23881",
-						"26523",
-						"44606",
-						"50862",
-						"2913",
-						"44908",
-						"31931",
-						"15064",
-						"29199",
-						"10575",
-						"58402",
-						"6764",
-						"40366",
-						"885",
-						"40291"
-					],
-					"status": "partial",
-					"supported": [
-						"8% increased Fire Damage"
-					],
-					"unsupported": [
-						"8% increased Area of Effect"
-					],
-					"via_reachable_node_id": "885"
-				},
-				{
 					"name": "Roiling Tempest",
 					"node_id": "40351",
 					"shortest_executable_prefix": [
@@ -22790,9 +22538,8 @@
 						"7938",
 						"1031",
 						"19635",
-						"11551",
-						"38176",
-						"8948",
+						"38805",
+						"38900",
 						"27929",
 						"40637"
 					],
@@ -22925,32 +22672,6 @@
 						"Cannot Evade enemy Attacks\nCannot be Stunned"
 					],
 					"via_reachable_node_id": "43374"
-				},
-				{
-					"name": "Area of Effect",
-					"node_id": "40927",
-					"shortest_executable_prefix": [
-						"47175",
-						"31628",
-						"9511",
-						"23881",
-						"26523",
-						"44606",
-						"50862",
-						"2913",
-						"44908",
-						"26866",
-						"61471",
-						"41472",
-						"44799",
-						"40927"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "44799"
 				},
 				{
 					"name": "Mana and Guard Skill Cooldown Recovery",
@@ -23612,6 +23333,45 @@
 					"via_reachable_node_id": "63228"
 				},
 				{
+					"name": "Bow Damage",
+					"node_id": "42964",
+					"shortest_executable_prefix": [
+						"47175",
+						"50904",
+						"6981",
+						"36543",
+						"49412",
+						"31080",
+						"43374",
+						"30691",
+						"476",
+						"24865",
+						"34031",
+						"56001",
+						"17201",
+						"19711",
+						"20010",
+						"23471",
+						"3469",
+						"64709",
+						"60942",
+						"41866",
+						"63843",
+						"27283",
+						"5616",
+						"38662",
+						"50338",
+						"42964"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"12% increased Damage with Bows",
+						"12% increased Damage Over Time with Bow Skills"
+					],
+					"via_reachable_node_id": "50338"
+				},
+				{
 					"name": "Totem Damage and Placement Speed",
 					"node_id": "4300",
 					"shortest_executable_prefix": [
@@ -23753,40 +23513,6 @@
 						"Retaliation Skills have 15% increased Area of Effect"
 					],
 					"via_reachable_node_id": "5233"
-				},
-				{
-					"name": "Projectile Damage and Speed",
-					"node_id": "44306",
-					"shortest_executable_prefix": [
-						"47175",
-						"50904",
-						"6981",
-						"36543",
-						"49412",
-						"31080",
-						"43374",
-						"30691",
-						"476",
-						"24865",
-						"34031",
-						"56001",
-						"17201",
-						"19711",
-						"20010",
-						"23471",
-						"5237",
-						"30679",
-						"11678",
-						"44306"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased Projectile Damage"
-					],
-					"unsupported": [
-						"10% increased Projectile Speed"
-					],
-					"via_reachable_node_id": "11678"
 				},
 				{
 					"name": "Divine Fury",
@@ -24643,6 +24369,46 @@
 					"via_reachable_node_id": "14056"
 				},
 				{
+					"name": "Life and Stun Avoidance",
+					"node_id": "48099",
+					"shortest_executable_prefix": [
+						"47175",
+						"50904",
+						"6981",
+						"36543",
+						"49412",
+						"31080",
+						"43374",
+						"30691",
+						"476",
+						"24865",
+						"34031",
+						"56001",
+						"17201",
+						"19711",
+						"20010",
+						"23471",
+						"3469",
+						"64709",
+						"60942",
+						"41866",
+						"63843",
+						"27283",
+						"5616",
+						"38662",
+						"50338",
+						"48099"
+					],
+					"status": "partial",
+					"supported": [
+						"4% increased maximum Life"
+					],
+					"unsupported": [
+						"8% chance to Avoid being Stunned"
+					],
+					"via_reachable_node_id": "50338"
+				},
+				{
 					"name": "Life Regeneration per Endurance Charge",
 					"node_id": "48109",
 					"shortest_executable_prefix": [
@@ -25452,46 +25218,6 @@
 					"via_reachable_node_id": "46910"
 				},
 				{
-					"name": "Ballistics",
-					"node_id": "50338",
-					"shortest_executable_prefix": [
-						"47175",
-						"50904",
-						"6981",
-						"36543",
-						"49412",
-						"31080",
-						"43374",
-						"30691",
-						"476",
-						"24865",
-						"34031",
-						"56001",
-						"17201",
-						"19711",
-						"20010",
-						"23471",
-						"3469",
-						"64709",
-						"60942",
-						"41866",
-						"63843",
-						"27283",
-						"5616",
-						"38662",
-						"50338"
-					],
-					"status": "partial",
-					"supported": [
-						"20% increased Projectile Damage",
-						"+20 to Dexterity"
-					],
-					"unsupported": [
-						"20% increased Projectile Speed"
-					],
-					"via_reachable_node_id": "38662"
-				},
-				{
 					"name": "Dual Wield Cast Speed",
 					"node_id": "50382",
 					"shortest_executable_prefix": [
@@ -25865,45 +25591,6 @@
 					"via_reachable_node_id": "27659"
 				},
 				{
-					"name": "Spell Area of Effect",
-					"node_id": "51801",
-					"shortest_executable_prefix": [
-						"47175",
-						"31628",
-						"9511",
-						"23881",
-						"26523",
-						"44606",
-						"50862",
-						"50422",
-						"50570",
-						"29353",
-						"44202",
-						"23027",
-						"60472",
-						"26270",
-						"64210",
-						"7444",
-						"36678",
-						"39841",
-						"63447",
-						"44184",
-						"4367",
-						"19501",
-						"5296",
-						"33310",
-						"49605",
-						"32710",
-						"51801"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"Spell Skills have 10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "32710"
-				},
-				{
 					"name": "Brand Critical Strike Chance",
 					"node_id": "51954",
 					"shortest_executable_prefix": [
@@ -25933,40 +25620,6 @@
 						"25% increased Brand Critical Strike Chance"
 					],
 					"via_reachable_node_id": "46340"
-				},
-				{
-					"name": "Projectile Damage and Speed",
-					"node_id": "52288",
-					"shortest_executable_prefix": [
-						"47175",
-						"50904",
-						"6981",
-						"36543",
-						"49412",
-						"31080",
-						"43374",
-						"30691",
-						"476",
-						"24865",
-						"34031",
-						"56001",
-						"17201",
-						"19711",
-						"20010",
-						"23471",
-						"5237",
-						"30679",
-						"11678",
-						"52288"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased Projectile Damage"
-					],
-					"unsupported": [
-						"10% reduced Projectile Speed"
-					],
-					"via_reachable_node_id": "11678"
 				},
 				{
 					"name": "Lightning Critical Strike Multiplier",
@@ -26859,35 +26512,6 @@
 					"via_reachable_node_id": "60440"
 				},
 				{
-					"name": "Area of Effect",
-					"node_id": "5560",
-					"shortest_executable_prefix": [
-						"47175",
-						"31628",
-						"9511",
-						"23881",
-						"26523",
-						"44606",
-						"50862",
-						"15405",
-						"33740",
-						"46910",
-						"16775",
-						"63976",
-						"6204",
-						"48423",
-						"37690",
-						"2151",
-						"5560"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"12% increased Area of Effect"
-					],
-					"via_reachable_node_id": "2151"
-				},
-				{
 					"name": "Life Recoup",
 					"node_id": "55804",
 					"shortest_executable_prefix": [
@@ -27371,6 +26995,46 @@
 						"Retaliation Skills have 12% increased Cooldown Recovery Rate"
 					],
 					"via_reachable_node_id": "24865"
+				},
+				{
+					"name": "Mana and Flask Effect",
+					"node_id": "57240",
+					"shortest_executable_prefix": [
+						"47175",
+						"50904",
+						"6981",
+						"36543",
+						"49412",
+						"31080",
+						"43374",
+						"30691",
+						"476",
+						"24865",
+						"34031",
+						"56001",
+						"17201",
+						"19711",
+						"20010",
+						"23471",
+						"3469",
+						"64709",
+						"60942",
+						"41866",
+						"63843",
+						"27283",
+						"5616",
+						"38662",
+						"50338",
+						"57240"
+					],
+					"status": "partial",
+					"supported": [
+						"8% increased maximum Mana"
+					],
+					"unsupported": [
+						"Flasks applied to you have 5% increased Effect"
+					],
+					"via_reachable_node_id": "50338"
 				},
 				{
 					"name": "Attack and Cast Speed",
@@ -28106,37 +27770,6 @@
 					"via_reachable_node_id": "64210"
 				},
 				{
-					"name": "Fury Bolts",
-					"node_id": "60002",
-					"shortest_executable_prefix": [
-						"47175",
-						"50904",
-						"6981",
-						"36543",
-						"49412",
-						"31080",
-						"43374",
-						"30691",
-						"476",
-						"24865",
-						"34031",
-						"56001",
-						"17201",
-						"36222",
-						"52632",
-						"60002"
-					],
-					"status": "partial",
-					"supported": [
-						"20% increased Projectile Damage",
-						"+20 to Strength"
-					],
-					"unsupported": [
-						"20% increased Projectile Speed"
-					],
-					"via_reachable_node_id": "52632"
-				},
-				{
 					"name": "Evasion and Spell Suppression",
 					"node_id": "60204",
 					"shortest_executable_prefix": [
@@ -28558,36 +28191,6 @@
 						"5% increased Effect of your Curses"
 					],
 					"via_reachable_node_id": "27415"
-				},
-				{
-					"name": "Amplify",
-					"node_id": "61308",
-					"shortest_executable_prefix": [
-						"47175",
-						"31628",
-						"9511",
-						"23881",
-						"26523",
-						"44606",
-						"50862",
-						"2913",
-						"44908",
-						"31931",
-						"15064",
-						"29199",
-						"10575",
-						"58402",
-						"59728",
-						"61308"
-					],
-					"status": "partial",
-					"supported": [
-						"20% increased Area Damage"
-					],
-					"unsupported": [
-						"10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "59728"
 				},
 				{
 					"name": "Impale Chance with Two Handed Weapons",
@@ -29630,9 +29233,8 @@
 						"7938",
 						"1031",
 						"19635",
-						"11551",
-						"38176",
-						"8948",
+						"38805",
+						"38900",
 						"27929",
 						"55643",
 						"6949"
@@ -29783,9 +29385,8 @@
 						"7938",
 						"1031",
 						"19635",
-						"11551",
-						"38176",
-						"8948",
+						"38805",
+						"38900",
 						"27929",
 						"7503"
 					],
@@ -30066,6 +29667,41 @@
 						"6% increased Attack Speed while in Sand Stance"
 					],
 					"via_reachable_node_id": "19711"
+				},
+				{
+					"name": "Longshot",
+					"node_id": "8458",
+					"shortest_executable_prefix": [
+						"47175",
+						"50904",
+						"6981",
+						"36543",
+						"49412",
+						"31080",
+						"43374",
+						"30691",
+						"476",
+						"24865",
+						"34031",
+						"56001",
+						"17201",
+						"19711",
+						"20010",
+						"23471",
+						"5237",
+						"30679",
+						"11678",
+						"44306",
+						"8458"
+					],
+					"status": "partial",
+					"supported": [
+						"30% increased Projectile Speed"
+					],
+					"unsupported": [
+						"Projectiles gain Damage as they travel farther, dealing up\nto 60% increased Damage with Hits to targets"
+					],
+					"via_reachable_node_id": "44306"
 				},
 				{
 					"name": "Two Handed Melee Damage",
@@ -30378,18 +30014,18 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 480,
+			"blocked_frontier_count": 473,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
-				"partial": 124,
-				"unsupported": 356
+				"partial": 122,
+				"unsupported": 351
 			},
 			"class_id": 1,
 			"class_name": "Marauder",
 			"excluded_adjacent_counts": {
 				"blighted_only": 0,
-				"mastery_not_path": 14,
+				"mastery_not_path": 17,
 				"other_class_start": 6,
 				"position_proxy": 0
 			},
@@ -30403,6 +30039,11 @@
 					"node_id": "12382",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "55485"
+				},
+				{
+					"node_id": "14113",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "53573"
 				},
 				{
 					"node_id": "18240",
@@ -30485,9 +30126,19 @@
 					"via_reachable_node_id": "1325"
 				},
 				{
+					"node_id": "63268",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "24324"
+				},
+				{
 					"node_id": "64406",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "33287"
+				},
+				{
+					"node_id": "8556",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "20835"
 				},
 				{
 					"node_id": "857",
@@ -30495,9 +30146,9 @@
 					"via_reachable_node_id": "18769"
 				}
 			],
-			"reachable_count_excluding_start": 554,
-			"reachable_count_including_start": 555,
-			"reachable_full_direct_effect_nodes": 539,
+			"reachable_count_excluding_start": 576,
+			"reachable_count_including_start": 577,
+			"reachable_full_direct_effect_nodes": 561,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -30517,6 +30168,7 @@
 				"11651",
 				"11678",
 				"11688",
+				"11700",
 				"11859",
 				"1203",
 				"12250",
@@ -30543,6 +30195,7 @@
 				"14211",
 				"14292",
 				"1461",
+				"14745",
 				"14930",
 				"14936",
 				"15027",
@@ -30550,9 +30203,11 @@
 				"15073",
 				"15117",
 				"15144",
+				"15365",
 				"15405",
 				"15549",
 				"15631",
+				"15711",
 				"15868",
 				"1600",
 				"16167",
@@ -30588,11 +30243,13 @@
 				"20546",
 				"20551",
 				"20807",
+				"20835",
 				"20852",
 				"2094",
 				"20953",
 				"20987",
 				"21033",
+				"21075",
 				"21262",
 				"21301",
 				"21330",
@@ -30625,6 +30282,7 @@
 				"23881",
 				"24050",
 				"24083",
+				"24324",
 				"24362",
 				"24377",
 				"24496",
@@ -30765,9 +30423,12 @@
 				"38190",
 				"38344",
 				"38348",
+				"38450",
 				"38662",
 				"38701",
+				"38805",
 				"38836",
+				"38900",
 				"38906",
 				"39211",
 				"39631",
@@ -30784,6 +30445,7 @@
 				"3992",
 				"4011",
 				"40132",
+				"40291",
 				"40362",
 				"40366",
 				"40508",
@@ -30792,6 +30454,7 @@
 				"40644",
 				"40653",
 				"40867",
+				"40927",
 				"41250",
 				"41263",
 				"41472",
@@ -30816,6 +30479,7 @@
 				"4397",
 				"44184",
 				"44202",
+				"44306",
 				"444",
 				"44429",
 				"44606",
@@ -30878,18 +30542,23 @@
 				"50197",
 				"50264",
 				"50306",
+				"50338",
 				"50340",
 				"50422",
 				"50570",
 				"50862",
 				"50904",
+				"50969",
 				"51220",
+				"51291",
 				"5152",
 				"51786",
+				"51801",
 				"51856",
 				"51923",
 				"5197",
 				"52230",
+				"52288",
 				"5233",
 				"5237",
 				"52502",
@@ -30900,6 +30569,7 @@
 				"53213",
 				"53279",
 				"53456",
+				"53573",
 				"53793",
 				"5408",
 				"54127",
@@ -30912,6 +30582,7 @@
 				"55373",
 				"55392",
 				"55485",
+				"5560",
 				"55643",
 				"55647",
 				"55649",
@@ -30956,6 +30627,7 @@
 				"59728",
 				"59861",
 				"59928",
+				"60002",
 				"60090",
 				"60153",
 				"60180",
@@ -30973,6 +30645,7 @@
 				"61217",
 				"61262",
 				"61306",
+				"61308",
 				"61320",
 				"61419",
 				"61471",
@@ -31549,35 +31222,6 @@
 						"15% chance to Ignore Stuns while Casting"
 					],
 					"via_reachable_node_id": "27929"
-				},
-				{
-					"name": "Melee Area of Effect",
-					"node_id": "11700",
-					"shortest_executable_prefix": [
-						"50459",
-						"39821",
-						"52904",
-						"444",
-						"61306",
-						"63139",
-						"5408",
-						"11651",
-						"6580",
-						"19711",
-						"17201",
-						"56001",
-						"34031",
-						"24865",
-						"6741",
-						"14056",
-						"11700"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"Melee Skills have 10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "14056"
 				},
 				{
 					"name": "Endurance",
@@ -36023,6 +35667,32 @@
 					"via_reachable_node_id": "27283"
 				},
 				{
+					"name": "Adjacent Animosity",
+					"node_id": "31513",
+					"shortest_executable_prefix": [
+						"50459",
+						"39821",
+						"52904",
+						"444",
+						"61306",
+						"60942",
+						"32555",
+						"22266",
+						"30679",
+						"11678",
+						"52288",
+						"31513"
+					],
+					"status": "partial",
+					"supported": [
+						"10% reduced Projectile Speed"
+					],
+					"unsupported": [
+						"Projectiles deal 40% increased Damage with Hits to targets at the start\nof their movement, reducing to 0% as they travel farther"
+					],
+					"via_reachable_node_id": "52288"
+				},
+				{
 					"name": "Pain Attunement",
 					"node_id": "31703",
 					"shortest_executable_prefix": [
@@ -37940,74 +37610,6 @@
 					"via_reachable_node_id": "58449"
 				},
 				{
-					"name": "Area of Effect",
-					"node_id": "38805",
-					"shortest_executable_prefix": [
-						"50459",
-						"45035",
-						"59370",
-						"63795",
-						"38662",
-						"5616",
-						"39718",
-						"59606",
-						"59252",
-						"28012",
-						"13885",
-						"7112",
-						"58244",
-						"3656",
-						"20546",
-						"21301",
-						"37671",
-						"27659",
-						"8948",
-						"38176",
-						"11551",
-						"19635",
-						"38805"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "19635"
-				},
-				{
-					"name": "Area of Effect",
-					"node_id": "38900",
-					"shortest_executable_prefix": [
-						"50459",
-						"45035",
-						"59370",
-						"63795",
-						"38662",
-						"5616",
-						"39718",
-						"59606",
-						"59252",
-						"28012",
-						"13885",
-						"7112",
-						"58244",
-						"3656",
-						"20546",
-						"21301",
-						"37671",
-						"27659",
-						"8948",
-						"27929",
-						"38900"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "27929"
-				},
-				{
 					"name": "Chain Distance",
 					"node_id": "38947",
 					"shortest_executable_prefix": [
@@ -38297,49 +37899,6 @@
 					"via_reachable_node_id": "23471"
 				},
 				{
-					"name": "Fire Damage and Area of Effect",
-					"node_id": "40291",
-					"shortest_executable_prefix": [
-						"50459",
-						"45035",
-						"59370",
-						"63795",
-						"38662",
-						"5616",
-						"39718",
-						"59606",
-						"1461",
-						"49900",
-						"46277",
-						"56295",
-						"18182",
-						"53456",
-						"36858",
-						"60440",
-						"49605",
-						"33310",
-						"5296",
-						"19501",
-						"4367",
-						"44184",
-						"63447",
-						"39841",
-						"36678",
-						"42760",
-						"40366",
-						"885",
-						"40291"
-					],
-					"status": "partial",
-					"supported": [
-						"8% increased Fire Damage"
-					],
-					"unsupported": [
-						"8% increased Area of Effect"
-					],
-					"via_reachable_node_id": "885"
-				},
-				{
 					"name": "Roiling Tempest",
 					"node_id": "40351",
 					"shortest_executable_prefix": [
@@ -38609,46 +38168,6 @@
 						"Cannot Evade enemy Attacks\nCannot be Stunned"
 					],
 					"via_reachable_node_id": "43374"
-				},
-				{
-					"name": "Area of Effect",
-					"node_id": "40927",
-					"shortest_executable_prefix": [
-						"50459",
-						"39821",
-						"52904",
-						"444",
-						"61306",
-						"63139",
-						"5408",
-						"11497",
-						"238",
-						"10829",
-						"16167",
-						"19144",
-						"28330",
-						"46578",
-						"13714",
-						"55485",
-						"65034",
-						"46910",
-						"33740",
-						"15405",
-						"50862",
-						"2913",
-						"44908",
-						"26866",
-						"61471",
-						"41472",
-						"44799",
-						"40927"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "44799"
 				},
 				{
 					"name": "Mana and Guard Skill Cooldown Recovery",
@@ -39265,6 +38784,26 @@
 					"via_reachable_node_id": "63228"
 				},
 				{
+					"name": "Bow Damage",
+					"node_id": "42964",
+					"shortest_executable_prefix": [
+						"50459",
+						"45035",
+						"59370",
+						"63795",
+						"38662",
+						"50338",
+						"42964"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"12% increased Damage with Bows",
+						"12% increased Damage Over Time with Bow Skills"
+					],
+					"via_reachable_node_id": "50338"
+				},
+				{
 					"name": "Totem Damage and Placement Speed",
 					"node_id": "4300",
 					"shortest_executable_prefix": [
@@ -39428,31 +38967,6 @@
 						"Retaliation Skills have 15% increased Area of Effect"
 					],
 					"via_reachable_node_id": "5233"
-				},
-				{
-					"name": "Projectile Damage and Speed",
-					"node_id": "44306",
-					"shortest_executable_prefix": [
-						"50459",
-						"39821",
-						"52904",
-						"444",
-						"61306",
-						"60942",
-						"32555",
-						"22266",
-						"30679",
-						"11678",
-						"44306"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased Projectile Damage"
-					],
-					"unsupported": [
-						"10% increased Projectile Speed"
-					],
-					"via_reachable_node_id": "11678"
 				},
 				{
 					"name": "Divine Fury",
@@ -40447,6 +39961,27 @@
 					"via_reachable_node_id": "14056"
 				},
 				{
+					"name": "Life and Stun Avoidance",
+					"node_id": "48099",
+					"shortest_executable_prefix": [
+						"50459",
+						"45035",
+						"59370",
+						"63795",
+						"38662",
+						"50338",
+						"48099"
+					],
+					"status": "partial",
+					"supported": [
+						"4% increased maximum Life"
+					],
+					"unsupported": [
+						"8% chance to Avoid being Stunned"
+					],
+					"via_reachable_node_id": "50338"
+				},
+				{
 					"name": "Life Regeneration per Endurance Charge",
 					"node_id": "48109",
 					"shortest_executable_prefix": [
@@ -41239,27 +40774,6 @@
 					"via_reachable_node_id": "46910"
 				},
 				{
-					"name": "Ballistics",
-					"node_id": "50338",
-					"shortest_executable_prefix": [
-						"50459",
-						"45035",
-						"59370",
-						"63795",
-						"38662",
-						"50338"
-					],
-					"status": "partial",
-					"supported": [
-						"20% increased Projectile Damage",
-						"+20 to Dexterity"
-					],
-					"unsupported": [
-						"20% increased Projectile Speed"
-					],
-					"via_reachable_node_id": "38662"
-				},
-				{
 					"name": "Dual Wield Cast Speed",
 					"node_id": "50382",
 					"shortest_executable_prefix": [
@@ -41603,36 +41117,6 @@
 					"via_reachable_node_id": "27659"
 				},
 				{
-					"name": "Spell Area of Effect",
-					"node_id": "51801",
-					"shortest_executable_prefix": [
-						"50459",
-						"45035",
-						"59370",
-						"63795",
-						"38662",
-						"5616",
-						"39718",
-						"59606",
-						"59252",
-						"28012",
-						"13885",
-						"7112",
-						"58244",
-						"3656",
-						"33783",
-						"4502",
-						"32710",
-						"51801"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"Spell Skills have 10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "32710"
-				},
-				{
 					"name": "Brand Critical Strike Chance",
 					"node_id": "51954",
 					"shortest_executable_prefix": [
@@ -41670,31 +41154,6 @@
 						"25% increased Brand Critical Strike Chance"
 					],
 					"via_reachable_node_id": "46340"
-				},
-				{
-					"name": "Projectile Damage and Speed",
-					"node_id": "52288",
-					"shortest_executable_prefix": [
-						"50459",
-						"39821",
-						"52904",
-						"444",
-						"61306",
-						"60942",
-						"32555",
-						"22266",
-						"30679",
-						"11678",
-						"52288"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased Projectile Damage"
-					],
-					"unsupported": [
-						"10% reduced Projectile Speed"
-					],
-					"via_reachable_node_id": "11678"
 				},
 				{
 					"name": "Lightning Critical Strike Multiplier",
@@ -42543,43 +42002,6 @@
 					"via_reachable_node_id": "60440"
 				},
 				{
-					"name": "Area of Effect",
-					"node_id": "5560",
-					"shortest_executable_prefix": [
-						"50459",
-						"39821",
-						"52904",
-						"444",
-						"61306",
-						"63139",
-						"5408",
-						"11497",
-						"238",
-						"10829",
-						"16167",
-						"19144",
-						"28330",
-						"46578",
-						"13714",
-						"55485",
-						"65034",
-						"46910",
-						"16775",
-						"63976",
-						"6204",
-						"48423",
-						"37690",
-						"2151",
-						"5560"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"12% increased Area of Effect"
-					],
-					"via_reachable_node_id": "2151"
-				},
-				{
 					"name": "Life Recoup",
 					"node_id": "55804",
 					"shortest_executable_prefix": [
@@ -43014,6 +42436,27 @@
 						"Retaliation Skills have 12% increased Cooldown Recovery Rate"
 					],
 					"via_reachable_node_id": "24865"
+				},
+				{
+					"name": "Mana and Flask Effect",
+					"node_id": "57240",
+					"shortest_executable_prefix": [
+						"50459",
+						"45035",
+						"59370",
+						"63795",
+						"38662",
+						"50338",
+						"57240"
+					],
+					"status": "partial",
+					"supported": [
+						"8% increased maximum Mana"
+					],
+					"unsupported": [
+						"Flasks applied to you have 5% increased Effect"
+					],
+					"via_reachable_node_id": "50338"
 				},
 				{
 					"name": "Attack and Cast Speed",
@@ -43674,35 +43117,6 @@
 					"via_reachable_node_id": "64210"
 				},
 				{
-					"name": "Fury Bolts",
-					"node_id": "60002",
-					"shortest_executable_prefix": [
-						"50459",
-						"39821",
-						"52904",
-						"444",
-						"61306",
-						"63139",
-						"5408",
-						"11651",
-						"6580",
-						"19711",
-						"17201",
-						"36222",
-						"52632",
-						"60002"
-					],
-					"status": "partial",
-					"supported": [
-						"20% increased Projectile Damage",
-						"+20 to Strength"
-					],
-					"unsupported": [
-						"20% increased Projectile Speed"
-					],
-					"via_reachable_node_id": "52632"
-				},
-				{
 					"name": "Evasion and Spell Suppression",
 					"node_id": "60204",
 					"shortest_executable_prefix": [
@@ -44072,50 +43486,6 @@
 						"5% increased Effect of your Curses"
 					],
 					"via_reachable_node_id": "27415"
-				},
-				{
-					"name": "Amplify",
-					"node_id": "61308",
-					"shortest_executable_prefix": [
-						"50459",
-						"39821",
-						"52904",
-						"444",
-						"61306",
-						"63139",
-						"5408",
-						"11497",
-						"238",
-						"10829",
-						"16167",
-						"19144",
-						"28330",
-						"46578",
-						"13714",
-						"55485",
-						"65034",
-						"46910",
-						"16775",
-						"63976",
-						"33479",
-						"10490",
-						"47251",
-						"7388",
-						"60398",
-						"13009",
-						"17735",
-						"58402",
-						"59728",
-						"61308"
-					],
-					"status": "partial",
-					"supported": [
-						"20% increased Area Damage"
-					],
-					"unsupported": [
-						"10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "59728"
 				},
 				{
 					"name": "Impale Chance with Two Handed Weapons",
@@ -45613,6 +44983,32 @@
 					"via_reachable_node_id": "19711"
 				},
 				{
+					"name": "Longshot",
+					"node_id": "8458",
+					"shortest_executable_prefix": [
+						"50459",
+						"39821",
+						"52904",
+						"444",
+						"61306",
+						"60942",
+						"32555",
+						"22266",
+						"30679",
+						"11678",
+						"44306",
+						"8458"
+					],
+					"status": "partial",
+					"supported": [
+						"30% increased Projectile Speed"
+					],
+					"unsupported": [
+						"Projectiles gain Damage as they travel farther, dealing up\nto 60% increased Damage with Hits to targets"
+					],
+					"via_reachable_node_id": "44306"
+				},
+				{
 					"name": "Two Handed Melee Damage",
 					"node_id": "8533",
 					"shortest_executable_prefix": [
@@ -45923,18 +45319,18 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 480,
+			"blocked_frontier_count": 473,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
-				"partial": 124,
-				"unsupported": 356
+				"partial": 122,
+				"unsupported": 351
 			},
 			"class_id": 2,
 			"class_name": "Ranger",
 			"excluded_adjacent_counts": {
 				"blighted_only": 0,
-				"mastery_not_path": 14,
+				"mastery_not_path": 17,
 				"other_class_start": 6,
 				"position_proxy": 0
 			},
@@ -45948,6 +45344,11 @@
 					"node_id": "12382",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "55485"
+				},
+				{
+					"node_id": "14113",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "53573"
 				},
 				{
 					"node_id": "18240",
@@ -46030,9 +45431,19 @@
 					"via_reachable_node_id": "1325"
 				},
 				{
+					"node_id": "63268",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "24324"
+				},
+				{
 					"node_id": "64406",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "33287"
+				},
+				{
+					"node_id": "8556",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "20835"
 				},
 				{
 					"node_id": "857",
@@ -46040,9 +45451,9 @@
 					"via_reachable_node_id": "18769"
 				}
 			],
-			"reachable_count_excluding_start": 554,
-			"reachable_count_including_start": 555,
-			"reachable_full_direct_effect_nodes": 539,
+			"reachable_count_excluding_start": 576,
+			"reachable_count_including_start": 577,
+			"reachable_full_direct_effect_nodes": 561,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -46062,6 +45473,7 @@
 				"11651",
 				"11678",
 				"11688",
+				"11700",
 				"11859",
 				"1203",
 				"12250",
@@ -46088,6 +45500,7 @@
 				"14211",
 				"14292",
 				"1461",
+				"14745",
 				"14930",
 				"14936",
 				"15027",
@@ -46095,9 +45508,11 @@
 				"15073",
 				"15117",
 				"15144",
+				"15365",
 				"15405",
 				"15549",
 				"15631",
+				"15711",
 				"15868",
 				"1600",
 				"16167",
@@ -46133,11 +45548,13 @@
 				"20546",
 				"20551",
 				"20807",
+				"20835",
 				"20852",
 				"2094",
 				"20953",
 				"20987",
 				"21033",
+				"21075",
 				"21262",
 				"21301",
 				"21330",
@@ -46170,6 +45587,7 @@
 				"23881",
 				"24050",
 				"24083",
+				"24324",
 				"24362",
 				"24377",
 				"24496",
@@ -46310,9 +45728,12 @@
 				"38190",
 				"38344",
 				"38348",
+				"38450",
 				"38662",
 				"38701",
+				"38805",
 				"38836",
+				"38900",
 				"38906",
 				"39211",
 				"39631",
@@ -46329,6 +45750,7 @@
 				"3992",
 				"4011",
 				"40132",
+				"40291",
 				"40362",
 				"40366",
 				"40508",
@@ -46337,6 +45759,7 @@
 				"40644",
 				"40653",
 				"40867",
+				"40927",
 				"41250",
 				"41263",
 				"41472",
@@ -46361,6 +45784,7 @@
 				"4397",
 				"44184",
 				"44202",
+				"44306",
 				"444",
 				"44429",
 				"44606",
@@ -46422,19 +45846,24 @@
 				"50197",
 				"50264",
 				"50306",
+				"50338",
 				"50340",
 				"50422",
 				"50459",
 				"50570",
 				"50862",
 				"50904",
+				"50969",
 				"51220",
+				"51291",
 				"5152",
 				"51786",
+				"51801",
 				"51856",
 				"51923",
 				"5197",
 				"52230",
+				"52288",
 				"5233",
 				"5237",
 				"52502",
@@ -46445,6 +45874,7 @@
 				"53213",
 				"53279",
 				"53456",
+				"53573",
 				"53793",
 				"5408",
 				"54127",
@@ -46457,6 +45887,7 @@
 				"55373",
 				"55392",
 				"55485",
+				"5560",
 				"55643",
 				"55647",
 				"55649",
@@ -46501,6 +45932,7 @@
 				"59728",
 				"59861",
 				"59928",
+				"60002",
 				"60090",
 				"60153",
 				"60180",
@@ -46518,6 +45950,7 @@
 				"61217",
 				"61262",
 				"61306",
+				"61308",
 				"61320",
 				"61419",
 				"61471",
@@ -47099,42 +46532,6 @@
 						"15% chance to Ignore Stuns while Casting"
 					],
 					"via_reachable_node_id": "27929"
-				},
-				{
-					"name": "Melee Area of Effect",
-					"node_id": "11700",
-					"shortest_executable_prefix": [
-						"54447",
-						"57264",
-						"37569",
-						"36542",
-						"4397",
-						"31875",
-						"60398",
-						"7388",
-						"47251",
-						"10490",
-						"33479",
-						"63976",
-						"16775",
-						"46910",
-						"65034",
-						"55485",
-						"13714",
-						"46578",
-						"30733",
-						"49178",
-						"43374",
-						"22703",
-						"14056",
-						"11700"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"Melee Skills have 10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "14056"
 				},
 				{
 					"name": "Endurance",
@@ -51595,6 +50992,46 @@
 					"via_reachable_node_id": "27283"
 				},
 				{
+					"name": "Adjacent Animosity",
+					"node_id": "31513",
+					"shortest_executable_prefix": [
+						"54447",
+						"57226",
+						"21678",
+						"32210",
+						"8948",
+						"27659",
+						"37671",
+						"21301",
+						"20546",
+						"3656",
+						"58244",
+						"7112",
+						"13885",
+						"28012",
+						"59252",
+						"59606",
+						"1461",
+						"36287",
+						"20807",
+						"12412",
+						"32555",
+						"22266",
+						"30679",
+						"11678",
+						"52288",
+						"31513"
+					],
+					"status": "partial",
+					"supported": [
+						"10% reduced Projectile Speed"
+					],
+					"unsupported": [
+						"Projectiles deal 40% increased Damage with Hits to targets at the start\nof their movement, reducing to 0% as they travel farther"
+					],
+					"via_reachable_node_id": "52288"
+				},
+				{
 					"name": "Pain Attunement",
 					"node_id": "31703",
 					"shortest_executable_prefix": [
@@ -53480,46 +52917,6 @@
 					"via_reachable_node_id": "58449"
 				},
 				{
-					"name": "Area of Effect",
-					"node_id": "38805",
-					"shortest_executable_prefix": [
-						"54447",
-						"57226",
-						"21678",
-						"32210",
-						"8948",
-						"38176",
-						"11551",
-						"19635",
-						"38805"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "19635"
-				},
-				{
-					"name": "Area of Effect",
-					"node_id": "38900",
-					"shortest_executable_prefix": [
-						"54447",
-						"57226",
-						"21678",
-						"32210",
-						"8948",
-						"27929",
-						"38900"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "27929"
-				},
-				{
 					"name": "Chain Distance",
 					"node_id": "38947",
 					"shortest_executable_prefix": [
@@ -53855,32 +53252,6 @@
 					"via_reachable_node_id": "23471"
 				},
 				{
-					"name": "Fire Damage and Area of Effect",
-					"node_id": "40291",
-					"shortest_executable_prefix": [
-						"54447",
-						"57264",
-						"37569",
-						"36542",
-						"4397",
-						"31875",
-						"60398",
-						"46340",
-						"42760",
-						"40366",
-						"885",
-						"40291"
-					],
-					"status": "partial",
-					"supported": [
-						"8% increased Fire Damage"
-					],
-					"unsupported": [
-						"8% increased Area of Effect"
-					],
-					"via_reachable_node_id": "885"
-				},
-				{
 					"name": "Roiling Tempest",
 					"node_id": "40351",
 					"shortest_executable_prefix": [
@@ -54101,38 +53472,6 @@
 						"Cannot Evade enemy Attacks\nCannot be Stunned"
 					],
 					"via_reachable_node_id": "43374"
-				},
-				{
-					"name": "Area of Effect",
-					"node_id": "40927",
-					"shortest_executable_prefix": [
-						"54447",
-						"57264",
-						"37569",
-						"36542",
-						"4397",
-						"31875",
-						"60398",
-						"13009",
-						"17735",
-						"58402",
-						"10575",
-						"29199",
-						"15064",
-						"31931",
-						"44908",
-						"26866",
-						"61471",
-						"41472",
-						"44799",
-						"40927"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "44799"
 				},
 				{
 					"name": "Mana and Guard Skill Cooldown Recovery",
@@ -54684,6 +54023,40 @@
 					"via_reachable_node_id": "49308"
 				},
 				{
+					"name": "Bow Damage",
+					"node_id": "42964",
+					"shortest_executable_prefix": [
+						"54447",
+						"57226",
+						"21678",
+						"32210",
+						"8948",
+						"27659",
+						"37671",
+						"21301",
+						"20546",
+						"3656",
+						"58244",
+						"7112",
+						"13885",
+						"28012",
+						"4011",
+						"9355",
+						"49978",
+						"6538",
+						"38662",
+						"50338",
+						"42964"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"12% increased Damage with Bows",
+						"12% increased Damage Over Time with Bow Skills"
+					],
+					"via_reachable_node_id": "50338"
+				},
+				{
 					"name": "Totem Damage and Placement Speed",
 					"node_id": "4300",
 					"shortest_executable_prefix": [
@@ -54840,45 +54213,6 @@
 						"Retaliation Skills have 15% increased Area of Effect"
 					],
 					"via_reachable_node_id": "5233"
-				},
-				{
-					"name": "Projectile Damage and Speed",
-					"node_id": "44306",
-					"shortest_executable_prefix": [
-						"54447",
-						"57226",
-						"21678",
-						"32210",
-						"8948",
-						"27659",
-						"37671",
-						"21301",
-						"20546",
-						"3656",
-						"58244",
-						"7112",
-						"13885",
-						"28012",
-						"59252",
-						"59606",
-						"1461",
-						"36287",
-						"20807",
-						"12412",
-						"32555",
-						"22266",
-						"30679",
-						"11678",
-						"44306"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased Projectile Damage"
-					],
-					"unsupported": [
-						"10% increased Projectile Speed"
-					],
-					"via_reachable_node_id": "11678"
 				},
 				{
 					"name": "Divine Fury",
@@ -55567,13 +54901,10 @@
 						"13009",
 						"17735",
 						"58402",
-						"10575",
-						"29199",
-						"15064",
-						"31931",
-						"44908",
-						"26866",
-						"61471",
+						"59728",
+						"61308",
+						"40927",
+						"44799",
 						"41472",
 						"58453",
 						"46726"
@@ -55765,6 +55096,41 @@
 						"20% increased Valour gained"
 					],
 					"via_reachable_node_id": "14056"
+				},
+				{
+					"name": "Life and Stun Avoidance",
+					"node_id": "48099",
+					"shortest_executable_prefix": [
+						"54447",
+						"57226",
+						"21678",
+						"32210",
+						"8948",
+						"27659",
+						"37671",
+						"21301",
+						"20546",
+						"3656",
+						"58244",
+						"7112",
+						"13885",
+						"28012",
+						"4011",
+						"9355",
+						"49978",
+						"6538",
+						"38662",
+						"50338",
+						"48099"
+					],
+					"status": "partial",
+					"supported": [
+						"4% increased maximum Life"
+					],
+					"unsupported": [
+						"8% chance to Avoid being Stunned"
+					],
+					"via_reachable_node_id": "50338"
 				},
 				{
 					"name": "Life Regeneration per Endurance Charge",
@@ -56561,41 +55927,6 @@
 					"via_reachable_node_id": "46910"
 				},
 				{
-					"name": "Ballistics",
-					"node_id": "50338",
-					"shortest_executable_prefix": [
-						"54447",
-						"57226",
-						"21678",
-						"32210",
-						"8948",
-						"27659",
-						"37671",
-						"21301",
-						"20546",
-						"3656",
-						"58244",
-						"7112",
-						"13885",
-						"28012",
-						"4011",
-						"9355",
-						"49978",
-						"6538",
-						"38662",
-						"50338"
-					],
-					"status": "partial",
-					"supported": [
-						"20% increased Projectile Damage",
-						"+20 to Dexterity"
-					],
-					"unsupported": [
-						"20% increased Projectile Speed"
-					],
-					"via_reachable_node_id": "38662"
-				},
-				{
 					"name": "Dual Wield Cast Speed",
 					"node_id": "50382",
 					"shortest_executable_prefix": [
@@ -56962,28 +56293,6 @@
 					"via_reachable_node_id": "27659"
 				},
 				{
-					"name": "Spell Area of Effect",
-					"node_id": "51801",
-					"shortest_executable_prefix": [
-						"54447",
-						"57226",
-						"21678",
-						"32210",
-						"8948",
-						"27659",
-						"37671",
-						"27415",
-						"32710",
-						"51801"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"Spell Skills have 10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "32710"
-				},
-				{
 					"name": "Brand Critical Strike Chance",
 					"node_id": "51954",
 					"shortest_executable_prefix": [
@@ -57003,45 +56312,6 @@
 						"25% increased Brand Critical Strike Chance"
 					],
 					"via_reachable_node_id": "46340"
-				},
-				{
-					"name": "Projectile Damage and Speed",
-					"node_id": "52288",
-					"shortest_executable_prefix": [
-						"54447",
-						"57226",
-						"21678",
-						"32210",
-						"8948",
-						"27659",
-						"37671",
-						"21301",
-						"20546",
-						"3656",
-						"58244",
-						"7112",
-						"13885",
-						"28012",
-						"59252",
-						"59606",
-						"1461",
-						"36287",
-						"20807",
-						"12412",
-						"32555",
-						"22266",
-						"30679",
-						"11678",
-						"52288"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased Projectile Damage"
-					],
-					"unsupported": [
-						"10% reduced Projectile Speed"
-					],
-					"via_reachable_node_id": "11678"
 				},
 				{
 					"name": "Lightning Critical Strike Multiplier",
@@ -57914,35 +57184,6 @@
 					"via_reachable_node_id": "60440"
 				},
 				{
-					"name": "Area of Effect",
-					"node_id": "5560",
-					"shortest_executable_prefix": [
-						"54447",
-						"57264",
-						"37569",
-						"36542",
-						"4397",
-						"31875",
-						"60398",
-						"7388",
-						"47251",
-						"10490",
-						"33479",
-						"63976",
-						"6204",
-						"48423",
-						"37690",
-						"2151",
-						"5560"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"12% increased Area of Effect"
-					],
-					"via_reachable_node_id": "2151"
-				},
-				{
 					"name": "Life Recoup",
 					"node_id": "55804",
 					"shortest_executable_prefix": [
@@ -58400,6 +57641,41 @@
 						"Retaliation Skills have 12% increased Cooldown Recovery Rate"
 					],
 					"via_reachable_node_id": "24865"
+				},
+				{
+					"name": "Mana and Flask Effect",
+					"node_id": "57240",
+					"shortest_executable_prefix": [
+						"54447",
+						"57226",
+						"21678",
+						"32210",
+						"8948",
+						"27659",
+						"37671",
+						"21301",
+						"20546",
+						"3656",
+						"58244",
+						"7112",
+						"13885",
+						"28012",
+						"4011",
+						"9355",
+						"49978",
+						"6538",
+						"38662",
+						"50338",
+						"57240"
+					],
+					"status": "partial",
+					"supported": [
+						"8% increased maximum Mana"
+					],
+					"unsupported": [
+						"Flasks applied to you have 5% increased Effect"
+					],
+					"via_reachable_node_id": "50338"
 				},
 				{
 					"name": "Attack and Cast Speed",
@@ -59092,51 +58368,6 @@
 					"via_reachable_node_id": "64210"
 				},
 				{
-					"name": "Fury Bolts",
-					"node_id": "60002",
-					"shortest_executable_prefix": [
-						"54447",
-						"57264",
-						"37569",
-						"36542",
-						"4397",
-						"31875",
-						"60398",
-						"7388",
-						"47251",
-						"10490",
-						"33479",
-						"63976",
-						"16775",
-						"46910",
-						"65034",
-						"55485",
-						"13714",
-						"46578",
-						"30733",
-						"49178",
-						"43374",
-						"30691",
-						"476",
-						"24865",
-						"34031",
-						"56001",
-						"17201",
-						"36222",
-						"52632",
-						"60002"
-					],
-					"status": "partial",
-					"supported": [
-						"20% increased Projectile Damage",
-						"+20 to Strength"
-					],
-					"unsupported": [
-						"20% increased Projectile Speed"
-					],
-					"via_reachable_node_id": "52632"
-				},
-				{
 					"name": "Evasion and Spell Suppression",
 					"node_id": "60204",
 					"shortest_executable_prefix": [
@@ -59483,32 +58714,6 @@
 						"5% increased Effect of your Curses"
 					],
 					"via_reachable_node_id": "27415"
-				},
-				{
-					"name": "Amplify",
-					"node_id": "61308",
-					"shortest_executable_prefix": [
-						"54447",
-						"57264",
-						"37569",
-						"36542",
-						"4397",
-						"31875",
-						"60398",
-						"13009",
-						"17735",
-						"58402",
-						"59728",
-						"61308"
-					],
-					"status": "partial",
-					"supported": [
-						"20% increased Area Damage"
-					],
-					"unsupported": [
-						"10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "59728"
 				},
 				{
 					"name": "Impale Chance with Two Handed Weapons",
@@ -61019,6 +60224,46 @@
 					"via_reachable_node_id": "19711"
 				},
 				{
+					"name": "Longshot",
+					"node_id": "8458",
+					"shortest_executable_prefix": [
+						"54447",
+						"57226",
+						"21678",
+						"32210",
+						"8948",
+						"27659",
+						"37671",
+						"21301",
+						"20546",
+						"3656",
+						"58244",
+						"7112",
+						"13885",
+						"28012",
+						"59252",
+						"59606",
+						"1461",
+						"36287",
+						"20807",
+						"12412",
+						"32555",
+						"22266",
+						"30679",
+						"11678",
+						"44306",
+						"8458"
+					],
+					"status": "partial",
+					"supported": [
+						"30% increased Projectile Speed"
+					],
+					"unsupported": [
+						"Projectiles gain Damage as they travel farther, dealing up\nto 60% increased Damage with Hits to targets"
+					],
+					"via_reachable_node_id": "44306"
+				},
+				{
 					"name": "Two Handed Melee Damage",
 					"node_id": "8533",
 					"shortest_executable_prefix": [
@@ -61338,18 +60583,18 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 480,
+			"blocked_frontier_count": 473,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
-				"partial": 124,
-				"unsupported": 356
+				"partial": 122,
+				"unsupported": 351
 			},
 			"class_id": 3,
 			"class_name": "Witch",
 			"excluded_adjacent_counts": {
 				"blighted_only": 0,
-				"mastery_not_path": 14,
+				"mastery_not_path": 17,
 				"other_class_start": 6,
 				"position_proxy": 0
 			},
@@ -61363,6 +60608,11 @@
 					"node_id": "12382",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "55485"
+				},
+				{
+					"node_id": "14113",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "53573"
 				},
 				{
 					"node_id": "18240",
@@ -61445,9 +60695,19 @@
 					"via_reachable_node_id": "1325"
 				},
 				{
+					"node_id": "63268",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "24324"
+				},
+				{
 					"node_id": "64406",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "33287"
+				},
+				{
+					"node_id": "8556",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "20835"
 				},
 				{
 					"node_id": "857",
@@ -61455,9 +60715,9 @@
 					"via_reachable_node_id": "18769"
 				}
 			],
-			"reachable_count_excluding_start": 554,
-			"reachable_count_including_start": 555,
-			"reachable_full_direct_effect_nodes": 539,
+			"reachable_count_excluding_start": 576,
+			"reachable_count_including_start": 577,
+			"reachable_full_direct_effect_nodes": 561,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -61477,6 +60737,7 @@
 				"11651",
 				"11678",
 				"11688",
+				"11700",
 				"11859",
 				"1203",
 				"12250",
@@ -61503,6 +60764,7 @@
 				"14211",
 				"14292",
 				"1461",
+				"14745",
 				"14930",
 				"14936",
 				"15027",
@@ -61510,9 +60772,11 @@
 				"15073",
 				"15117",
 				"15144",
+				"15365",
 				"15405",
 				"15549",
 				"15631",
+				"15711",
 				"15868",
 				"1600",
 				"16167",
@@ -61548,11 +60812,13 @@
 				"20546",
 				"20551",
 				"20807",
+				"20835",
 				"20852",
 				"2094",
 				"20953",
 				"20987",
 				"21033",
+				"21075",
 				"21262",
 				"21301",
 				"21330",
@@ -61585,6 +60851,7 @@
 				"23881",
 				"24050",
 				"24083",
+				"24324",
 				"24362",
 				"24377",
 				"24496",
@@ -61725,9 +60992,12 @@
 				"38190",
 				"38344",
 				"38348",
+				"38450",
 				"38662",
 				"38701",
+				"38805",
 				"38836",
+				"38900",
 				"38906",
 				"39211",
 				"39631",
@@ -61744,6 +61014,7 @@
 				"3992",
 				"4011",
 				"40132",
+				"40291",
 				"40362",
 				"40366",
 				"40508",
@@ -61752,6 +61023,7 @@
 				"40644",
 				"40653",
 				"40867",
+				"40927",
 				"41250",
 				"41263",
 				"41472",
@@ -61776,6 +61048,7 @@
 				"4397",
 				"44184",
 				"44202",
+				"44306",
 				"444",
 				"44429",
 				"44606",
@@ -61837,18 +61110,23 @@
 				"50197",
 				"50264",
 				"50306",
+				"50338",
 				"50340",
 				"50422",
 				"50570",
 				"50862",
 				"50904",
+				"50969",
 				"51220",
+				"51291",
 				"5152",
 				"51786",
+				"51801",
 				"51856",
 				"51923",
 				"5197",
 				"52230",
+				"52288",
 				"5233",
 				"5237",
 				"52502",
@@ -61859,6 +61137,7 @@
 				"53213",
 				"53279",
 				"53456",
+				"53573",
 				"53793",
 				"5408",
 				"54127",
@@ -61872,6 +61151,7 @@
 				"55373",
 				"55392",
 				"55485",
+				"5560",
 				"55643",
 				"55647",
 				"55649",
@@ -61916,6 +61196,7 @@
 				"59728",
 				"59861",
 				"59928",
+				"60002",
 				"60090",
 				"60153",
 				"60180",
@@ -61933,6 +61214,7 @@
 				"61217",
 				"61262",
 				"61306",
+				"61308",
 				"61320",
 				"61419",
 				"61471",
@@ -62513,27 +61795,6 @@
 						"15% chance to Ignore Stuns while Casting"
 					],
 					"via_reachable_node_id": "27929"
-				},
-				{
-					"name": "Melee Area of Effect",
-					"node_id": "11700",
-					"shortest_executable_prefix": [
-						"50986",
-						"47389",
-						"42911",
-						"40867",
-						"476",
-						"24865",
-						"6741",
-						"14056",
-						"11700"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"Melee Skills have 10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "14056"
 				},
 				{
 					"name": "Endurance",
@@ -66949,6 +66210,33 @@
 					"via_reachable_node_id": "27283"
 				},
 				{
+					"name": "Adjacent Animosity",
+					"node_id": "31513",
+					"shortest_executable_prefix": [
+						"50986",
+						"39725",
+						"63649",
+						"49806",
+						"6580",
+						"19711",
+						"20010",
+						"23471",
+						"5237",
+						"30679",
+						"11678",
+						"52288",
+						"31513"
+					],
+					"status": "partial",
+					"supported": [
+						"10% reduced Projectile Speed"
+					],
+					"unsupported": [
+						"Projectiles deal 40% increased Damage with Hits to targets at the start\nof their movement, reducing to 0% as they travel farther"
+					],
+					"via_reachable_node_id": "52288"
+				},
+				{
 					"name": "Pain Attunement",
 					"node_id": "31703",
 					"shortest_executable_prefix": [
@@ -68834,86 +68122,6 @@
 					"via_reachable_node_id": "58449"
 				},
 				{
-					"name": "Area of Effect",
-					"node_id": "38805",
-					"shortest_executable_prefix": [
-						"50986",
-						"47389",
-						"42911",
-						"40867",
-						"476",
-						"30691",
-						"43374",
-						"49178",
-						"30733",
-						"46578",
-						"13714",
-						"55485",
-						"65034",
-						"46910",
-						"16775",
-						"63976",
-						"33479",
-						"10490",
-						"47251",
-						"7388",
-						"60398",
-						"31875",
-						"4397",
-						"7938",
-						"1031",
-						"19635",
-						"38805"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "19635"
-				},
-				{
-					"name": "Area of Effect",
-					"node_id": "38900",
-					"shortest_executable_prefix": [
-						"50986",
-						"39725",
-						"63649",
-						"49806",
-						"6580",
-						"11651",
-						"5408",
-						"63139",
-						"61306",
-						"60942",
-						"32555",
-						"12412",
-						"20807",
-						"36287",
-						"1461",
-						"59606",
-						"59252",
-						"28012",
-						"13885",
-						"7112",
-						"58244",
-						"3656",
-						"20546",
-						"21301",
-						"37671",
-						"27659",
-						"8948",
-						"27929",
-						"38900"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "27929"
-				},
-				{
 					"name": "Chain Distance",
 					"node_id": "38947",
 					"shortest_executable_prefix": [
@@ -69241,46 +68449,6 @@
 					"via_reachable_node_id": "23471"
 				},
 				{
-					"name": "Fire Damage and Area of Effect",
-					"node_id": "40291",
-					"shortest_executable_prefix": [
-						"50986",
-						"47389",
-						"42911",
-						"40867",
-						"476",
-						"30691",
-						"43374",
-						"49178",
-						"30733",
-						"46578",
-						"13714",
-						"55485",
-						"65034",
-						"46910",
-						"16775",
-						"63976",
-						"33479",
-						"10490",
-						"47251",
-						"7388",
-						"60398",
-						"46340",
-						"42760",
-						"40366",
-						"885",
-						"40291"
-					],
-					"status": "partial",
-					"supported": [
-						"8% increased Fire Damage"
-					],
-					"unsupported": [
-						"8% increased Area of Effect"
-					],
-					"via_reachable_node_id": "885"
-				},
-				{
 					"name": "Roiling Tempest",
 					"node_id": "40351",
 					"shortest_executable_prefix": [
@@ -69535,42 +68703,6 @@
 						"Cannot Evade enemy Attacks\nCannot be Stunned"
 					],
 					"via_reachable_node_id": "43374"
-				},
-				{
-					"name": "Area of Effect",
-					"node_id": "40927",
-					"shortest_executable_prefix": [
-						"50986",
-						"47389",
-						"42911",
-						"40867",
-						"476",
-						"30691",
-						"43374",
-						"31080",
-						"49412",
-						"40653",
-						"53793",
-						"22285",
-						"55649",
-						"6446",
-						"10221",
-						"50422",
-						"50862",
-						"2913",
-						"44908",
-						"26866",
-						"61471",
-						"41472",
-						"44799",
-						"40927"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "44799"
 				},
 				{
 					"name": "Mana and Guard Skill Cooldown Recovery",
@@ -70205,6 +69337,36 @@
 					"via_reachable_node_id": "63228"
 				},
 				{
+					"name": "Bow Damage",
+					"node_id": "42964",
+					"shortest_executable_prefix": [
+						"50986",
+						"39725",
+						"63649",
+						"49806",
+						"6580",
+						"11651",
+						"5408",
+						"63139",
+						"61306",
+						"60942",
+						"41866",
+						"63843",
+						"27283",
+						"5616",
+						"38662",
+						"50338",
+						"42964"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"12% increased Damage with Bows",
+						"12% increased Damage Over Time with Bow Skills"
+					],
+					"via_reachable_node_id": "50338"
+				},
+				{
 					"name": "Totem Damage and Placement Speed",
 					"node_id": "4300",
 					"shortest_executable_prefix": [
@@ -70347,32 +69509,6 @@
 						"Retaliation Skills have 15% increased Area of Effect"
 					],
 					"via_reachable_node_id": "5233"
-				},
-				{
-					"name": "Projectile Damage and Speed",
-					"node_id": "44306",
-					"shortest_executable_prefix": [
-						"50986",
-						"39725",
-						"63649",
-						"49806",
-						"6580",
-						"19711",
-						"20010",
-						"23471",
-						"5237",
-						"30679",
-						"11678",
-						"44306"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased Projectile Damage"
-					],
-					"unsupported": [
-						"10% increased Projectile Speed"
-					],
-					"via_reachable_node_id": "11678"
 				},
 				{
 					"name": "Divine Fury",
@@ -71290,6 +70426,37 @@
 					"via_reachable_node_id": "14056"
 				},
 				{
+					"name": "Life and Stun Avoidance",
+					"node_id": "48099",
+					"shortest_executable_prefix": [
+						"50986",
+						"39725",
+						"63649",
+						"49806",
+						"6580",
+						"11651",
+						"5408",
+						"63139",
+						"61306",
+						"60942",
+						"41866",
+						"63843",
+						"27283",
+						"5616",
+						"38662",
+						"50338",
+						"48099"
+					],
+					"status": "partial",
+					"supported": [
+						"4% increased maximum Life"
+					],
+					"unsupported": [
+						"8% chance to Avoid being Stunned"
+					],
+					"via_reachable_node_id": "50338"
+				},
+				{
 					"name": "Life Regeneration per Endurance Charge",
 					"node_id": "48109",
 					"shortest_executable_prefix": [
@@ -72075,37 +71242,6 @@
 					"via_reachable_node_id": "46910"
 				},
 				{
-					"name": "Ballistics",
-					"node_id": "50338",
-					"shortest_executable_prefix": [
-						"50986",
-						"39725",
-						"63649",
-						"49806",
-						"6580",
-						"11651",
-						"5408",
-						"63139",
-						"61306",
-						"60942",
-						"41866",
-						"63843",
-						"27283",
-						"5616",
-						"38662",
-						"50338"
-					],
-					"status": "partial",
-					"supported": [
-						"20% increased Projectile Damage",
-						"+20 to Dexterity"
-					],
-					"unsupported": [
-						"20% increased Projectile Speed"
-					],
-					"via_reachable_node_id": "38662"
-				},
-				{
 					"name": "Dual Wield Cast Speed",
 					"node_id": "50382",
 					"shortest_executable_prefix": [
@@ -72455,43 +71591,6 @@
 					"via_reachable_node_id": "27659"
 				},
 				{
-					"name": "Spell Area of Effect",
-					"node_id": "51801",
-					"shortest_executable_prefix": [
-						"50986",
-						"39725",
-						"63649",
-						"49806",
-						"6580",
-						"11651",
-						"5408",
-						"63139",
-						"61306",
-						"60942",
-						"32555",
-						"12412",
-						"20807",
-						"36287",
-						"1461",
-						"49900",
-						"46277",
-						"56295",
-						"18182",
-						"53456",
-						"36858",
-						"60440",
-						"49605",
-						"32710",
-						"51801"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"Spell Skills have 10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "32710"
-				},
-				{
 					"name": "Brand Critical Strike Chance",
 					"node_id": "51954",
 					"shortest_executable_prefix": [
@@ -72525,32 +71624,6 @@
 						"25% increased Brand Critical Strike Chance"
 					],
 					"via_reachable_node_id": "46340"
-				},
-				{
-					"name": "Projectile Damage and Speed",
-					"node_id": "52288",
-					"shortest_executable_prefix": [
-						"50986",
-						"39725",
-						"63649",
-						"49806",
-						"6580",
-						"19711",
-						"20010",
-						"23471",
-						"5237",
-						"30679",
-						"11678",
-						"52288"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased Projectile Damage"
-					],
-					"unsupported": [
-						"10% reduced Projectile Speed"
-					],
-					"via_reachable_node_id": "11678"
 				},
 				{
 					"name": "Lightning Critical Strike Multiplier",
@@ -73402,39 +72475,6 @@
 					"via_reachable_node_id": "60440"
 				},
 				{
-					"name": "Area of Effect",
-					"node_id": "5560",
-					"shortest_executable_prefix": [
-						"50986",
-						"47389",
-						"42911",
-						"40867",
-						"476",
-						"30691",
-						"43374",
-						"49178",
-						"30733",
-						"46578",
-						"13714",
-						"55485",
-						"65034",
-						"46910",
-						"16775",
-						"63976",
-						"6204",
-						"48423",
-						"37690",
-						"2151",
-						"5560"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"12% increased Area of Effect"
-					],
-					"via_reachable_node_id": "2151"
-				},
-				{
 					"name": "Life Recoup",
 					"node_id": "55804",
 					"shortest_executable_prefix": [
@@ -73902,6 +72942,37 @@
 						"Retaliation Skills have 12% increased Cooldown Recovery Rate"
 					],
 					"via_reachable_node_id": "24865"
+				},
+				{
+					"name": "Mana and Flask Effect",
+					"node_id": "57240",
+					"shortest_executable_prefix": [
+						"50986",
+						"39725",
+						"63649",
+						"49806",
+						"6580",
+						"11651",
+						"5408",
+						"63139",
+						"61306",
+						"60942",
+						"41866",
+						"63843",
+						"27283",
+						"5616",
+						"38662",
+						"50338",
+						"57240"
+					],
+					"status": "partial",
+					"supported": [
+						"8% increased maximum Mana"
+					],
+					"unsupported": [
+						"Flasks applied to you have 5% increased Effect"
+					],
+					"via_reachable_node_id": "50338"
 				},
 				{
 					"name": "Attack and Cast Speed",
@@ -74590,31 +73661,6 @@
 					"via_reachable_node_id": "64210"
 				},
 				{
-					"name": "Fury Bolts",
-					"node_id": "60002",
-					"shortest_executable_prefix": [
-						"50986",
-						"39725",
-						"63649",
-						"49806",
-						"6580",
-						"19711",
-						"17201",
-						"36222",
-						"52632",
-						"60002"
-					],
-					"status": "partial",
-					"supported": [
-						"20% increased Projectile Damage",
-						"+20 to Strength"
-					],
-					"unsupported": [
-						"20% increased Projectile Speed"
-					],
-					"via_reachable_node_id": "52632"
-				},
-				{
 					"name": "Evasion and Spell Suppression",
 					"node_id": "60204",
 					"shortest_executable_prefix": [
@@ -75019,45 +74065,6 @@
 						"5% increased Effect of your Curses"
 					],
 					"via_reachable_node_id": "27415"
-				},
-				{
-					"name": "Amplify",
-					"node_id": "61308",
-					"shortest_executable_prefix": [
-						"50986",
-						"47389",
-						"42911",
-						"40867",
-						"476",
-						"30691",
-						"43374",
-						"31080",
-						"49412",
-						"40653",
-						"53793",
-						"22285",
-						"55649",
-						"6446",
-						"10221",
-						"50422",
-						"44967",
-						"15631",
-						"31931",
-						"15064",
-						"29199",
-						"10575",
-						"58402",
-						"59728",
-						"61308"
-					],
-					"status": "partial",
-					"supported": [
-						"20% increased Area Damage"
-					],
-					"unsupported": [
-						"10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "59728"
 				},
 				{
 					"name": "Impale Chance with Two Handed Weapons",
@@ -76522,6 +75529,33 @@
 					"via_reachable_node_id": "19711"
 				},
 				{
+					"name": "Longshot",
+					"node_id": "8458",
+					"shortest_executable_prefix": [
+						"50986",
+						"39725",
+						"63649",
+						"49806",
+						"6580",
+						"19711",
+						"20010",
+						"23471",
+						"5237",
+						"30679",
+						"11678",
+						"44306",
+						"8458"
+					],
+					"status": "partial",
+					"supported": [
+						"30% increased Projectile Speed"
+					],
+					"unsupported": [
+						"Projectiles gain Damage as they travel farther, dealing up\nto 60% increased Damage with Hits to targets"
+					],
+					"via_reachable_node_id": "44306"
+				},
+				{
 					"name": "Two Handed Melee Damage",
 					"node_id": "8533",
 					"shortest_executable_prefix": [
@@ -76822,18 +75856,18 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 480,
+			"blocked_frontier_count": 473,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
-				"partial": 124,
-				"unsupported": 356
+				"partial": 122,
+				"unsupported": 351
 			},
 			"class_id": 4,
 			"class_name": "Duelist",
 			"excluded_adjacent_counts": {
 				"blighted_only": 0,
-				"mastery_not_path": 14,
+				"mastery_not_path": 17,
 				"other_class_start": 6,
 				"position_proxy": 0
 			},
@@ -76847,6 +75881,11 @@
 					"node_id": "12382",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "55485"
+				},
+				{
+					"node_id": "14113",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "53573"
 				},
 				{
 					"node_id": "18240",
@@ -76929,9 +75968,19 @@
 					"via_reachable_node_id": "1325"
 				},
 				{
+					"node_id": "63268",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "24324"
+				},
+				{
 					"node_id": "64406",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "33287"
+				},
+				{
+					"node_id": "8556",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "20835"
 				},
 				{
 					"node_id": "857",
@@ -76939,9 +75988,9 @@
 					"via_reachable_node_id": "18769"
 				}
 			],
-			"reachable_count_excluding_start": 554,
-			"reachable_count_including_start": 555,
-			"reachable_full_direct_effect_nodes": 539,
+			"reachable_count_excluding_start": 576,
+			"reachable_count_including_start": 577,
+			"reachable_full_direct_effect_nodes": 561,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -76961,6 +76010,7 @@
 				"11651",
 				"11678",
 				"11688",
+				"11700",
 				"11859",
 				"1203",
 				"12250",
@@ -76987,6 +76037,7 @@
 				"14211",
 				"14292",
 				"1461",
+				"14745",
 				"14930",
 				"14936",
 				"15027",
@@ -76994,9 +76045,11 @@
 				"15073",
 				"15117",
 				"15144",
+				"15365",
 				"15405",
 				"15549",
 				"15631",
+				"15711",
 				"15868",
 				"1600",
 				"16167",
@@ -77032,11 +76085,13 @@
 				"20546",
 				"20551",
 				"20807",
+				"20835",
 				"20852",
 				"2094",
 				"20953",
 				"20987",
 				"21033",
+				"21075",
 				"21262",
 				"21301",
 				"21330",
@@ -77069,6 +76124,7 @@
 				"23881",
 				"24050",
 				"24083",
+				"24324",
 				"24362",
 				"24377",
 				"24496",
@@ -77209,9 +76265,12 @@
 				"38190",
 				"38344",
 				"38348",
+				"38450",
 				"38662",
 				"38701",
+				"38805",
 				"38836",
+				"38900",
 				"38906",
 				"39211",
 				"39631",
@@ -77228,6 +76287,7 @@
 				"3992",
 				"4011",
 				"40132",
+				"40291",
 				"40362",
 				"40366",
 				"40508",
@@ -77236,6 +76296,7 @@
 				"40644",
 				"40653",
 				"40867",
+				"40927",
 				"41250",
 				"41263",
 				"41472",
@@ -77260,6 +76321,7 @@
 				"4397",
 				"44184",
 				"44202",
+				"44306",
 				"444",
 				"44429",
 				"44606",
@@ -77321,19 +76383,24 @@
 				"50197",
 				"50264",
 				"50306",
+				"50338",
 				"50340",
 				"50422",
 				"50570",
 				"50862",
 				"50904",
+				"50969",
 				"50986",
 				"51220",
+				"51291",
 				"5152",
 				"51786",
+				"51801",
 				"51856",
 				"51923",
 				"5197",
 				"52230",
+				"52288",
 				"5233",
 				"5237",
 				"52502",
@@ -77344,6 +76411,7 @@
 				"53213",
 				"53279",
 				"53456",
+				"53573",
 				"53793",
 				"5408",
 				"54127",
@@ -77356,6 +76424,7 @@
 				"55373",
 				"55392",
 				"55485",
+				"5560",
 				"55643",
 				"55647",
 				"55649",
@@ -77400,6 +76469,7 @@
 				"59728",
 				"59861",
 				"59928",
+				"60002",
 				"60090",
 				"60153",
 				"60180",
@@ -77417,6 +76487,7 @@
 				"61217",
 				"61262",
 				"61306",
+				"61308",
 				"61320",
 				"61419",
 				"61471",
@@ -78003,9 +77074,8 @@
 						"7938",
 						"1031",
 						"19635",
-						"11551",
-						"38176",
-						"8948",
+						"38805",
+						"38900",
 						"27929",
 						"11659"
 					],
@@ -78017,36 +77087,6 @@
 						"15% chance to Ignore Stuns while Casting"
 					],
 					"via_reachable_node_id": "27929"
-				},
-				{
-					"name": "Melee Area of Effect",
-					"node_id": "11700",
-					"shortest_executable_prefix": [
-						"61525",
-						"20228",
-						"39916",
-						"35556",
-						"44908",
-						"2913",
-						"50862",
-						"44606",
-						"26523",
-						"6446",
-						"55649",
-						"22285",
-						"53793",
-						"40653",
-						"42800",
-						"487",
-						"14056",
-						"11700"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"Melee Skills have 10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "14056"
 				},
 				{
 					"name": "Endurance",
@@ -82618,6 +81658,48 @@
 					"via_reachable_node_id": "27283"
 				},
 				{
+					"name": "Adjacent Animosity",
+					"node_id": "31513",
+					"shortest_executable_prefix": [
+						"61525",
+						"20228",
+						"39916",
+						"35556",
+						"44908",
+						"2913",
+						"50862",
+						"15405",
+						"33740",
+						"46910",
+						"65034",
+						"55485",
+						"13714",
+						"46578",
+						"28330",
+						"19144",
+						"16167",
+						"10829",
+						"238",
+						"11497",
+						"5408",
+						"56589",
+						"23471",
+						"5237",
+						"30679",
+						"11678",
+						"52288",
+						"31513"
+					],
+					"status": "partial",
+					"supported": [
+						"10% reduced Projectile Speed"
+					],
+					"unsupported": [
+						"Projectiles deal 40% increased Damage with Hits to targets at the start\nof their movement, reducing to 0% as they travel farther"
+					],
+					"via_reachable_node_id": "52288"
+				},
+				{
 					"name": "Pain Attunement",
 					"node_id": "31703",
 					"shortest_executable_prefix": [
@@ -82747,9 +81829,8 @@
 						"7938",
 						"1031",
 						"19635",
-						"11551",
-						"38176",
-						"8948",
+						"38805",
+						"38900",
 						"27929",
 						"32024"
 					],
@@ -84504,60 +83585,6 @@
 					"via_reachable_node_id": "58449"
 				},
 				{
-					"name": "Area of Effect",
-					"node_id": "38805",
-					"shortest_executable_prefix": [
-						"61525",
-						"63965",
-						"14151",
-						"27564",
-						"17735",
-						"13009",
-						"60398",
-						"31875",
-						"4397",
-						"7938",
-						"1031",
-						"19635",
-						"38805"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "19635"
-				},
-				{
-					"name": "Area of Effect",
-					"node_id": "38900",
-					"shortest_executable_prefix": [
-						"61525",
-						"63965",
-						"14151",
-						"27564",
-						"17735",
-						"13009",
-						"60398",
-						"31875",
-						"4397",
-						"7938",
-						"1031",
-						"19635",
-						"11551",
-						"38176",
-						"8948",
-						"27929",
-						"38900"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "27929"
-				},
-				{
 					"name": "Chain Distance",
 					"node_id": "38947",
 					"shortest_executable_prefix": [
@@ -84936,30 +83963,6 @@
 					"via_reachable_node_id": "23471"
 				},
 				{
-					"name": "Fire Damage and Area of Effect",
-					"node_id": "40291",
-					"shortest_executable_prefix": [
-						"61525",
-						"63965",
-						"14151",
-						"27564",
-						"17735",
-						"58402",
-						"6764",
-						"40366",
-						"885",
-						"40291"
-					],
-					"status": "partial",
-					"supported": [
-						"8% increased Fire Damage"
-					],
-					"unsupported": [
-						"8% increased Area of Effect"
-					],
-					"via_reachable_node_id": "885"
-				},
-				{
 					"name": "Roiling Tempest",
 					"node_id": "40351",
 					"shortest_executable_prefix": [
@@ -85031,9 +84034,8 @@
 						"7938",
 						"1031",
 						"19635",
-						"11551",
-						"38176",
-						"8948",
+						"38805",
+						"38900",
 						"27929",
 						"40637"
 					],
@@ -85177,28 +84179,6 @@
 						"Cannot Evade enemy Attacks\nCannot be Stunned"
 					],
 					"via_reachable_node_id": "43374"
-				},
-				{
-					"name": "Area of Effect",
-					"node_id": "40927",
-					"shortest_executable_prefix": [
-						"61525",
-						"20228",
-						"39916",
-						"35556",
-						"44908",
-						"26866",
-						"61471",
-						"41472",
-						"44799",
-						"40927"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "44799"
 				},
 				{
 					"name": "Mana and Guard Skill Cooldown Recovery",
@@ -85805,6 +84785,50 @@
 					"via_reachable_node_id": "49308"
 				},
 				{
+					"name": "Bow Damage",
+					"node_id": "42964",
+					"shortest_executable_prefix": [
+						"61525",
+						"20228",
+						"39916",
+						"35556",
+						"44908",
+						"2913",
+						"50862",
+						"15405",
+						"33740",
+						"46910",
+						"65034",
+						"55485",
+						"13714",
+						"46578",
+						"28330",
+						"19144",
+						"16167",
+						"10829",
+						"238",
+						"11497",
+						"5408",
+						"63139",
+						"61306",
+						"60942",
+						"41866",
+						"63843",
+						"27283",
+						"5616",
+						"38662",
+						"50338",
+						"42964"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"12% increased Damage with Bows",
+						"12% increased Damage Over Time with Bow Skills"
+					],
+					"via_reachable_node_id": "50338"
+				},
+				{
 					"name": "Totem Damage and Placement Speed",
 					"node_id": "4300",
 					"shortest_executable_prefix": [
@@ -85951,47 +84975,6 @@
 						"Retaliation Skills have 15% increased Area of Effect"
 					],
 					"via_reachable_node_id": "5233"
-				},
-				{
-					"name": "Projectile Damage and Speed",
-					"node_id": "44306",
-					"shortest_executable_prefix": [
-						"61525",
-						"20228",
-						"39916",
-						"35556",
-						"44908",
-						"2913",
-						"50862",
-						"15405",
-						"33740",
-						"46910",
-						"65034",
-						"55485",
-						"13714",
-						"46578",
-						"28330",
-						"19144",
-						"16167",
-						"10829",
-						"238",
-						"11497",
-						"5408",
-						"56589",
-						"23471",
-						"5237",
-						"30679",
-						"11678",
-						"44306"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased Projectile Damage"
-					],
-					"unsupported": [
-						"10% increased Projectile Speed"
-					],
-					"via_reachable_node_id": "11678"
 				},
 				{
 					"name": "Divine Fury",
@@ -86827,6 +85810,51 @@
 					"via_reachable_node_id": "14056"
 				},
 				{
+					"name": "Life and Stun Avoidance",
+					"node_id": "48099",
+					"shortest_executable_prefix": [
+						"61525",
+						"20228",
+						"39916",
+						"35556",
+						"44908",
+						"2913",
+						"50862",
+						"15405",
+						"33740",
+						"46910",
+						"65034",
+						"55485",
+						"13714",
+						"46578",
+						"28330",
+						"19144",
+						"16167",
+						"10829",
+						"238",
+						"11497",
+						"5408",
+						"63139",
+						"61306",
+						"60942",
+						"41866",
+						"63843",
+						"27283",
+						"5616",
+						"38662",
+						"50338",
+						"48099"
+					],
+					"status": "partial",
+					"supported": [
+						"4% increased maximum Life"
+					],
+					"unsupported": [
+						"8% chance to Avoid being Stunned"
+					],
+					"via_reachable_node_id": "50338"
+				},
+				{
 					"name": "Life Regeneration per Endurance Charge",
 					"node_id": "48109",
 					"shortest_executable_prefix": [
@@ -87626,51 +86654,6 @@
 					"via_reachable_node_id": "46910"
 				},
 				{
-					"name": "Ballistics",
-					"node_id": "50338",
-					"shortest_executable_prefix": [
-						"61525",
-						"20228",
-						"39916",
-						"35556",
-						"44908",
-						"2913",
-						"50862",
-						"15405",
-						"33740",
-						"46910",
-						"65034",
-						"55485",
-						"13714",
-						"46578",
-						"28330",
-						"19144",
-						"16167",
-						"10829",
-						"238",
-						"11497",
-						"5408",
-						"63139",
-						"61306",
-						"60942",
-						"41866",
-						"63843",
-						"27283",
-						"5616",
-						"38662",
-						"50338"
-					],
-					"status": "partial",
-					"supported": [
-						"20% increased Projectile Damage",
-						"+20 to Dexterity"
-					],
-					"unsupported": [
-						"20% increased Projectile Speed"
-					],
-					"via_reachable_node_id": "38662"
-				},
-				{
 					"name": "Dual Wield Cast Speed",
 					"node_id": "50382",
 					"shortest_executable_prefix": [
@@ -88053,36 +87036,6 @@
 					"via_reachable_node_id": "27659"
 				},
 				{
-					"name": "Spell Area of Effect",
-					"node_id": "51801",
-					"shortest_executable_prefix": [
-						"61525",
-						"63965",
-						"14151",
-						"27564",
-						"17735",
-						"13009",
-						"60398",
-						"31875",
-						"4397",
-						"7938",
-						"1031",
-						"19635",
-						"11551",
-						"38176",
-						"49651",
-						"41635",
-						"32710",
-						"51801"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"Spell Skills have 10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "32710"
-				},
-				{
 					"name": "Brand Critical Strike Chance",
 					"node_id": "51954",
 					"shortest_executable_prefix": [
@@ -88102,47 +87055,6 @@
 						"25% increased Brand Critical Strike Chance"
 					],
 					"via_reachable_node_id": "46340"
-				},
-				{
-					"name": "Projectile Damage and Speed",
-					"node_id": "52288",
-					"shortest_executable_prefix": [
-						"61525",
-						"20228",
-						"39916",
-						"35556",
-						"44908",
-						"2913",
-						"50862",
-						"15405",
-						"33740",
-						"46910",
-						"65034",
-						"55485",
-						"13714",
-						"46578",
-						"28330",
-						"19144",
-						"16167",
-						"10829",
-						"238",
-						"11497",
-						"5408",
-						"56589",
-						"23471",
-						"5237",
-						"30679",
-						"11678",
-						"52288"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased Projectile Damage"
-					],
-					"unsupported": [
-						"10% reduced Projectile Speed"
-					],
-					"via_reachable_node_id": "11678"
 				},
 				{
 					"name": "Lightning Critical Strike Multiplier",
@@ -89036,35 +87948,6 @@
 					"via_reachable_node_id": "60440"
 				},
 				{
-					"name": "Area of Effect",
-					"node_id": "5560",
-					"shortest_executable_prefix": [
-						"61525",
-						"20228",
-						"39916",
-						"35556",
-						"44908",
-						"2913",
-						"50862",
-						"15405",
-						"33740",
-						"46910",
-						"16775",
-						"63976",
-						"6204",
-						"48423",
-						"37690",
-						"2151",
-						"5560"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"12% increased Area of Effect"
-					],
-					"via_reachable_node_id": "2151"
-				},
-				{
 					"name": "Life Recoup",
 					"node_id": "55804",
 					"shortest_executable_prefix": [
@@ -89543,6 +88426,51 @@
 						"Retaliation Skills have 12% increased Cooldown Recovery Rate"
 					],
 					"via_reachable_node_id": "24865"
+				},
+				{
+					"name": "Mana and Flask Effect",
+					"node_id": "57240",
+					"shortest_executable_prefix": [
+						"61525",
+						"20228",
+						"39916",
+						"35556",
+						"44908",
+						"2913",
+						"50862",
+						"15405",
+						"33740",
+						"46910",
+						"65034",
+						"55485",
+						"13714",
+						"46578",
+						"28330",
+						"19144",
+						"16167",
+						"10829",
+						"238",
+						"11497",
+						"5408",
+						"63139",
+						"61306",
+						"60942",
+						"41866",
+						"63843",
+						"27283",
+						"5616",
+						"38662",
+						"50338",
+						"57240"
+					],
+					"status": "partial",
+					"supported": [
+						"8% increased maximum Mana"
+					],
+					"unsupported": [
+						"Flasks applied to you have 5% increased Effect"
+					],
+					"via_reachable_node_id": "50338"
 				},
 				{
 					"name": "Attack and Cast Speed",
@@ -90278,46 +89206,6 @@
 					"via_reachable_node_id": "64210"
 				},
 				{
-					"name": "Fury Bolts",
-					"node_id": "60002",
-					"shortest_executable_prefix": [
-						"61525",
-						"20228",
-						"39916",
-						"35556",
-						"44908",
-						"2913",
-						"50862",
-						"44606",
-						"26523",
-						"6446",
-						"55649",
-						"22285",
-						"53793",
-						"40653",
-						"42800",
-						"487",
-						"14056",
-						"6741",
-						"24865",
-						"34031",
-						"56001",
-						"17201",
-						"36222",
-						"52632",
-						"60002"
-					],
-					"status": "partial",
-					"supported": [
-						"20% increased Projectile Damage",
-						"+20 to Strength"
-					],
-					"unsupported": [
-						"20% increased Projectile Speed"
-					],
-					"via_reachable_node_id": "52632"
-				},
-				{
 					"name": "Evasion and Spell Suppression",
 					"node_id": "60204",
 					"shortest_executable_prefix": [
@@ -90710,28 +89598,6 @@
 						"5% increased Effect of your Curses"
 					],
 					"via_reachable_node_id": "27415"
-				},
-				{
-					"name": "Amplify",
-					"node_id": "61308",
-					"shortest_executable_prefix": [
-						"61525",
-						"63965",
-						"14151",
-						"27564",
-						"17735",
-						"58402",
-						"59728",
-						"61308"
-					],
-					"status": "partial",
-					"supported": [
-						"20% increased Area Damage"
-					],
-					"unsupported": [
-						"10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "59728"
 				},
 				{
 					"name": "Impale Chance with Two Handed Weapons",
@@ -91805,9 +90671,8 @@
 						"7938",
 						"1031",
 						"19635",
-						"11551",
-						"38176",
-						"8948",
+						"38805",
+						"38900",
 						"27929",
 						"55643",
 						"6949"
@@ -91957,9 +90822,8 @@
 						"7938",
 						"1031",
 						"19635",
-						"11551",
-						"38176",
-						"8948",
+						"38805",
+						"38900",
 						"27929",
 						"7503"
 					],
@@ -92233,6 +91097,48 @@
 						"6% increased Attack Speed while in Sand Stance"
 					],
 					"via_reachable_node_id": "19711"
+				},
+				{
+					"name": "Longshot",
+					"node_id": "8458",
+					"shortest_executable_prefix": [
+						"61525",
+						"20228",
+						"39916",
+						"35556",
+						"44908",
+						"2913",
+						"50862",
+						"15405",
+						"33740",
+						"46910",
+						"65034",
+						"55485",
+						"13714",
+						"46578",
+						"28330",
+						"19144",
+						"16167",
+						"10829",
+						"238",
+						"11497",
+						"5408",
+						"56589",
+						"23471",
+						"5237",
+						"30679",
+						"11678",
+						"44306",
+						"8458"
+					],
+					"status": "partial",
+					"supported": [
+						"30% increased Projectile Speed"
+					],
+					"unsupported": [
+						"Projectiles gain Damage as they travel farther, dealing up\nto 60% increased Damage with Hits to targets"
+					],
+					"via_reachable_node_id": "44306"
 				},
 				{
 					"name": "Two Handed Melee Damage",
@@ -92552,18 +91458,18 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 480,
+			"blocked_frontier_count": 473,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
-				"partial": 124,
-				"unsupported": 356
+				"partial": 122,
+				"unsupported": 351
 			},
 			"class_id": 5,
 			"class_name": "Templar",
 			"excluded_adjacent_counts": {
 				"blighted_only": 0,
-				"mastery_not_path": 14,
+				"mastery_not_path": 17,
 				"other_class_start": 6,
 				"position_proxy": 0
 			},
@@ -92577,6 +91483,11 @@
 					"node_id": "12382",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "55485"
+				},
+				{
+					"node_id": "14113",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "53573"
 				},
 				{
 					"node_id": "18240",
@@ -92659,9 +91570,19 @@
 					"via_reachable_node_id": "1325"
 				},
 				{
+					"node_id": "63268",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "24324"
+				},
+				{
 					"node_id": "64406",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "33287"
+				},
+				{
+					"node_id": "8556",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "20835"
 				},
 				{
 					"node_id": "857",
@@ -92669,9 +91590,9 @@
 					"via_reachable_node_id": "18769"
 				}
 			],
-			"reachable_count_excluding_start": 554,
-			"reachable_count_including_start": 555,
-			"reachable_full_direct_effect_nodes": 539,
+			"reachable_count_excluding_start": 576,
+			"reachable_count_including_start": 577,
+			"reachable_full_direct_effect_nodes": 561,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -92691,6 +91612,7 @@
 				"11651",
 				"11678",
 				"11688",
+				"11700",
 				"11859",
 				"1203",
 				"12250",
@@ -92717,6 +91639,7 @@
 				"14211",
 				"14292",
 				"1461",
+				"14745",
 				"14930",
 				"14936",
 				"15027",
@@ -92724,9 +91647,11 @@
 				"15073",
 				"15117",
 				"15144",
+				"15365",
 				"15405",
 				"15549",
 				"15631",
+				"15711",
 				"15868",
 				"1600",
 				"16167",
@@ -92762,11 +91687,13 @@
 				"20546",
 				"20551",
 				"20807",
+				"20835",
 				"20852",
 				"2094",
 				"20953",
 				"20987",
 				"21033",
+				"21075",
 				"21262",
 				"21301",
 				"21330",
@@ -92799,6 +91726,7 @@
 				"23881",
 				"24050",
 				"24083",
+				"24324",
 				"24362",
 				"24377",
 				"24496",
@@ -92939,9 +91867,12 @@
 				"38190",
 				"38344",
 				"38348",
+				"38450",
 				"38662",
 				"38701",
+				"38805",
 				"38836",
+				"38900",
 				"38906",
 				"39211",
 				"39631",
@@ -92958,6 +91889,7 @@
 				"3992",
 				"4011",
 				"40132",
+				"40291",
 				"40362",
 				"40366",
 				"40508",
@@ -92966,6 +91898,7 @@
 				"40644",
 				"40653",
 				"40867",
+				"40927",
 				"41250",
 				"41263",
 				"41472",
@@ -92990,6 +91923,7 @@
 				"4397",
 				"44184",
 				"44202",
+				"44306",
 				"444",
 				"44429",
 				"44606",
@@ -93051,18 +91985,23 @@
 				"50197",
 				"50264",
 				"50306",
+				"50338",
 				"50340",
 				"50422",
 				"50570",
 				"50862",
 				"50904",
+				"50969",
 				"51220",
+				"51291",
 				"5152",
 				"51786",
+				"51801",
 				"51856",
 				"51923",
 				"5197",
 				"52230",
+				"52288",
 				"5233",
 				"5237",
 				"52502",
@@ -93073,6 +92012,7 @@
 				"53213",
 				"53279",
 				"53456",
+				"53573",
 				"53793",
 				"5408",
 				"54127",
@@ -93085,6 +92025,7 @@
 				"55373",
 				"55392",
 				"55485",
+				"5560",
 				"55643",
 				"55647",
 				"55649",
@@ -93129,6 +92070,7 @@
 				"59728",
 				"59861",
 				"59928",
+				"60002",
 				"60090",
 				"60153",
 				"60180",
@@ -93146,6 +92088,7 @@
 				"61217",
 				"61262",
 				"61306",
+				"61308",
 				"61320",
 				"61419",
 				"61471",
@@ -93723,44 +92666,6 @@
 						"15% chance to Ignore Stuns while Casting"
 					],
 					"via_reachable_node_id": "27929"
-				},
-				{
-					"name": "Melee Area of Effect",
-					"node_id": "11700",
-					"shortest_executable_prefix": [
-						"44683",
-						"45272",
-						"8640",
-						"45838",
-						"4011",
-						"28012",
-						"59252",
-						"59606",
-						"1461",
-						"36287",
-						"20807",
-						"12412",
-						"32555",
-						"22266",
-						"30679",
-						"5237",
-						"23471",
-						"20010",
-						"19711",
-						"17201",
-						"56001",
-						"34031",
-						"24865",
-						"6741",
-						"14056",
-						"11700"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"Melee Skills have 10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "14056"
 				},
 				{
 					"name": "Endurance",
@@ -98310,6 +97215,38 @@
 					"via_reachable_node_id": "27283"
 				},
 				{
+					"name": "Adjacent Animosity",
+					"node_id": "31513",
+					"shortest_executable_prefix": [
+						"44683",
+						"45272",
+						"8640",
+						"45838",
+						"4011",
+						"28012",
+						"59252",
+						"59606",
+						"1461",
+						"36287",
+						"20807",
+						"12412",
+						"32555",
+						"22266",
+						"30679",
+						"11678",
+						"52288",
+						"31513"
+					],
+					"status": "partial",
+					"supported": [
+						"10% reduced Projectile Speed"
+					],
+					"unsupported": [
+						"Projectiles deal 40% increased Damage with Hits to targets at the start\nof their movement, reducing to 0% as they travel farther"
+					],
+					"via_reachable_node_id": "52288"
+				},
+				{
 					"name": "Pain Attunement",
 					"node_id": "31703",
 					"shortest_executable_prefix": [
@@ -100247,54 +99184,6 @@
 					"via_reachable_node_id": "58449"
 				},
 				{
-					"name": "Area of Effect",
-					"node_id": "38805",
-					"shortest_executable_prefix": [
-						"44683",
-						"38129",
-						"11334",
-						"15549",
-						"20546",
-						"21301",
-						"37671",
-						"27659",
-						"8948",
-						"38176",
-						"11551",
-						"19635",
-						"38805"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "19635"
-				},
-				{
-					"name": "Area of Effect",
-					"node_id": "38900",
-					"shortest_executable_prefix": [
-						"44683",
-						"38129",
-						"11334",
-						"15549",
-						"20546",
-						"21301",
-						"37671",
-						"27659",
-						"8948",
-						"27929",
-						"38900"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "27929"
-				},
-				{
 					"name": "Chain Distance",
 					"node_id": "38947",
 					"shortest_executable_prefix": [
@@ -100589,40 +99478,6 @@
 					"via_reachable_node_id": "23471"
 				},
 				{
-					"name": "Fire Damage and Area of Effect",
-					"node_id": "40291",
-					"shortest_executable_prefix": [
-						"44683",
-						"38129",
-						"11334",
-						"15549",
-						"20546",
-						"21301",
-						"37671",
-						"27659",
-						"8948",
-						"38176",
-						"11551",
-						"19635",
-						"1031",
-						"7938",
-						"14021",
-						"55332",
-						"42760",
-						"40366",
-						"885",
-						"40291"
-					],
-					"status": "partial",
-					"supported": [
-						"8% increased Fire Damage"
-					],
-					"unsupported": [
-						"8% increased Area of Effect"
-					],
-					"via_reachable_node_id": "885"
-				},
-				{
 					"name": "Roiling Tempest",
 					"node_id": "40351",
 					"shortest_executable_prefix": [
@@ -100880,48 +99735,6 @@
 						"Cannot Evade enemy Attacks\nCannot be Stunned"
 					],
 					"via_reachable_node_id": "43374"
-				},
-				{
-					"name": "Area of Effect",
-					"node_id": "40927",
-					"shortest_executable_prefix": [
-						"44683",
-						"38129",
-						"11334",
-						"15549",
-						"20546",
-						"21301",
-						"37671",
-						"27659",
-						"8948",
-						"38176",
-						"11551",
-						"19635",
-						"1031",
-						"7938",
-						"14021",
-						"55332",
-						"42760",
-						"40366",
-						"6764",
-						"58402",
-						"10575",
-						"29199",
-						"15064",
-						"31931",
-						"44908",
-						"26866",
-						"61471",
-						"41472",
-						"44799",
-						"40927"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "44799"
 				},
 				{
 					"name": "Mana and Guard Skill Cooldown Recovery",
@@ -101485,6 +100298,30 @@
 					"via_reachable_node_id": "49308"
 				},
 				{
+					"name": "Bow Damage",
+					"node_id": "42964",
+					"shortest_executable_prefix": [
+						"44683",
+						"45272",
+						"8640",
+						"45838",
+						"4011",
+						"9355",
+						"49978",
+						"6538",
+						"38662",
+						"50338",
+						"42964"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"12% increased Damage with Bows",
+						"12% increased Damage Over Time with Bow Skills"
+					],
+					"via_reachable_node_id": "50338"
+				},
+				{
 					"name": "Totem Damage and Placement Speed",
 					"node_id": "4300",
 					"shortest_executable_prefix": [
@@ -101654,37 +100491,6 @@
 						"Retaliation Skills have 15% increased Area of Effect"
 					],
 					"via_reachable_node_id": "5233"
-				},
-				{
-					"name": "Projectile Damage and Speed",
-					"node_id": "44306",
-					"shortest_executable_prefix": [
-						"44683",
-						"45272",
-						"8640",
-						"45838",
-						"4011",
-						"28012",
-						"59252",
-						"59606",
-						"1461",
-						"36287",
-						"20807",
-						"12412",
-						"32555",
-						"22266",
-						"30679",
-						"11678",
-						"44306"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased Projectile Damage"
-					],
-					"unsupported": [
-						"10% increased Projectile Speed"
-					],
-					"via_reachable_node_id": "11678"
 				},
 				{
 					"name": "Divine Fury",
@@ -102468,13 +101274,10 @@
 						"40366",
 						"6764",
 						"58402",
-						"10575",
-						"29199",
-						"15064",
-						"31931",
-						"44908",
-						"26866",
-						"61471",
+						"59728",
+						"61308",
+						"40927",
+						"44799",
 						"41472",
 						"58453",
 						"46726"
@@ -102677,6 +101480,31 @@
 						"20% increased Valour gained"
 					],
 					"via_reachable_node_id": "14056"
+				},
+				{
+					"name": "Life and Stun Avoidance",
+					"node_id": "48099",
+					"shortest_executable_prefix": [
+						"44683",
+						"45272",
+						"8640",
+						"45838",
+						"4011",
+						"9355",
+						"49978",
+						"6538",
+						"38662",
+						"50338",
+						"48099"
+					],
+					"status": "partial",
+					"supported": [
+						"4% increased maximum Life"
+					],
+					"unsupported": [
+						"8% chance to Avoid being Stunned"
+					],
+					"via_reachable_node_id": "50338"
 				},
 				{
 					"name": "Life Regeneration per Endurance Charge",
@@ -103478,31 +102306,6 @@
 					"via_reachable_node_id": "46910"
 				},
 				{
-					"name": "Ballistics",
-					"node_id": "50338",
-					"shortest_executable_prefix": [
-						"44683",
-						"45272",
-						"8640",
-						"45838",
-						"4011",
-						"9355",
-						"49978",
-						"6538",
-						"38662",
-						"50338"
-					],
-					"status": "partial",
-					"supported": [
-						"20% increased Projectile Damage",
-						"+20 to Dexterity"
-					],
-					"unsupported": [
-						"20% increased Projectile Speed"
-					],
-					"via_reachable_node_id": "38662"
-				},
-				{
 					"name": "Dual Wield Cast Speed",
 					"node_id": "50382",
 					"shortest_executable_prefix": [
@@ -103857,28 +102660,6 @@
 					"via_reachable_node_id": "27659"
 				},
 				{
-					"name": "Spell Area of Effect",
-					"node_id": "51801",
-					"shortest_executable_prefix": [
-						"44683",
-						"38129",
-						"11334",
-						"15549",
-						"20546",
-						"21301",
-						"37671",
-						"27415",
-						"32710",
-						"51801"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"Spell Skills have 10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "32710"
-				},
-				{
 					"name": "Brand Critical Strike Chance",
 					"node_id": "51954",
 					"shortest_executable_prefix": [
@@ -103908,37 +102689,6 @@
 						"25% increased Brand Critical Strike Chance"
 					],
 					"via_reachable_node_id": "46340"
-				},
-				{
-					"name": "Projectile Damage and Speed",
-					"node_id": "52288",
-					"shortest_executable_prefix": [
-						"44683",
-						"45272",
-						"8640",
-						"45838",
-						"4011",
-						"28012",
-						"59252",
-						"59606",
-						"1461",
-						"36287",
-						"20807",
-						"12412",
-						"32555",
-						"22266",
-						"30679",
-						"11678",
-						"52288"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased Projectile Damage"
-					],
-					"unsupported": [
-						"10% reduced Projectile Speed"
-					],
-					"via_reachable_node_id": "11678"
 				},
 				{
 					"name": "Lightning Critical Strike Multiplier",
@@ -104816,43 +103566,6 @@
 					"via_reachable_node_id": "60440"
 				},
 				{
-					"name": "Area of Effect",
-					"node_id": "5560",
-					"shortest_executable_prefix": [
-						"44683",
-						"38129",
-						"11334",
-						"15549",
-						"20546",
-						"21301",
-						"37671",
-						"48778",
-						"51923",
-						"46092",
-						"60090",
-						"13322",
-						"14182",
-						"37078",
-						"42731",
-						"14211",
-						"22473",
-						"10490",
-						"33479",
-						"63976",
-						"6204",
-						"48423",
-						"37690",
-						"2151",
-						"5560"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"12% increased Area of Effect"
-					],
-					"via_reachable_node_id": "2151"
-				},
-				{
 					"name": "Life Recoup",
 					"node_id": "55804",
 					"shortest_executable_prefix": [
@@ -105298,6 +104011,31 @@
 						"Retaliation Skills have 12% increased Cooldown Recovery Rate"
 					],
 					"via_reachable_node_id": "24865"
+				},
+				{
+					"name": "Mana and Flask Effect",
+					"node_id": "57240",
+					"shortest_executable_prefix": [
+						"44683",
+						"45272",
+						"8640",
+						"45838",
+						"4011",
+						"9355",
+						"49978",
+						"6538",
+						"38662",
+						"50338",
+						"57240"
+					],
+					"status": "partial",
+					"supported": [
+						"8% increased maximum Mana"
+					],
+					"unsupported": [
+						"Flasks applied to you have 5% increased Effect"
+					],
+					"via_reachable_node_id": "50338"
 				},
 				{
 					"name": "Attack and Cast Speed",
@@ -105933,44 +104671,6 @@
 					"via_reachable_node_id": "64210"
 				},
 				{
-					"name": "Fury Bolts",
-					"node_id": "60002",
-					"shortest_executable_prefix": [
-						"44683",
-						"45272",
-						"8640",
-						"45838",
-						"4011",
-						"28012",
-						"59252",
-						"59606",
-						"1461",
-						"36287",
-						"20807",
-						"12412",
-						"32555",
-						"22266",
-						"30679",
-						"5237",
-						"23471",
-						"20010",
-						"19711",
-						"17201",
-						"36222",
-						"52632",
-						"60002"
-					],
-					"status": "partial",
-					"supported": [
-						"20% increased Projectile Damage",
-						"+20 to Strength"
-					],
-					"unsupported": [
-						"20% increased Projectile Speed"
-					],
-					"via_reachable_node_id": "52632"
-				},
-				{
 					"name": "Evasion and Spell Suppression",
 					"node_id": "60204",
 					"shortest_executable_prefix": [
@@ -106315,42 +105015,6 @@
 						"5% increased Effect of your Curses"
 					],
 					"via_reachable_node_id": "27415"
-				},
-				{
-					"name": "Amplify",
-					"node_id": "61308",
-					"shortest_executable_prefix": [
-						"44683",
-						"38129",
-						"11334",
-						"15549",
-						"20546",
-						"21301",
-						"37671",
-						"27659",
-						"8948",
-						"38176",
-						"11551",
-						"19635",
-						"1031",
-						"7938",
-						"14021",
-						"55332",
-						"42760",
-						"40366",
-						"6764",
-						"58402",
-						"59728",
-						"61308"
-					],
-					"status": "partial",
-					"supported": [
-						"20% increased Area Damage"
-					],
-					"unsupported": [
-						"10% increased Area of Effect"
-					],
-					"via_reachable_node_id": "59728"
 				},
 				{
 					"name": "Impale Chance with Two Handed Weapons",
@@ -107917,6 +106581,38 @@
 					"via_reachable_node_id": "19711"
 				},
 				{
+					"name": "Longshot",
+					"node_id": "8458",
+					"shortest_executable_prefix": [
+						"44683",
+						"45272",
+						"8640",
+						"45838",
+						"4011",
+						"28012",
+						"59252",
+						"59606",
+						"1461",
+						"36287",
+						"20807",
+						"12412",
+						"32555",
+						"22266",
+						"30679",
+						"11678",
+						"44306",
+						"8458"
+					],
+					"status": "partial",
+					"supported": [
+						"30% increased Projectile Speed"
+					],
+					"unsupported": [
+						"Projectiles gain Damage as they travel farther, dealing up\nto 60% increased Damage with Hits to targets"
+					],
+					"via_reachable_node_id": "44306"
+				},
+				{
 					"name": "Two Handed Melee Damage",
 					"node_id": "8533",
 					"shortest_executable_prefix": [
@@ -108244,18 +106940,18 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 480,
+			"blocked_frontier_count": 473,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
-				"partial": 124,
-				"unsupported": 356
+				"partial": 122,
+				"unsupported": 351
 			},
 			"class_id": 6,
 			"class_name": "Shadow",
 			"excluded_adjacent_counts": {
 				"blighted_only": 0,
-				"mastery_not_path": 14,
+				"mastery_not_path": 17,
 				"other_class_start": 6,
 				"position_proxy": 0
 			},
@@ -108269,6 +106965,11 @@
 					"node_id": "12382",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "55485"
+				},
+				{
+					"node_id": "14113",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "53573"
 				},
 				{
 					"node_id": "18240",
@@ -108351,9 +107052,19 @@
 					"via_reachable_node_id": "1325"
 				},
 				{
+					"node_id": "63268",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "24324"
+				},
+				{
 					"node_id": "64406",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "33287"
+				},
+				{
+					"node_id": "8556",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "20835"
 				},
 				{
 					"node_id": "857",
@@ -108361,9 +107072,9 @@
 					"via_reachable_node_id": "18769"
 				}
 			],
-			"reachable_count_excluding_start": 554,
-			"reachable_count_including_start": 555,
-			"reachable_full_direct_effect_nodes": 539,
+			"reachable_count_excluding_start": 576,
+			"reachable_count_including_start": 577,
+			"reachable_full_direct_effect_nodes": 561,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -108383,6 +107094,7 @@
 				"11651",
 				"11678",
 				"11688",
+				"11700",
 				"11859",
 				"1203",
 				"12250",
@@ -108409,6 +107121,7 @@
 				"14211",
 				"14292",
 				"1461",
+				"14745",
 				"14930",
 				"14936",
 				"15027",
@@ -108416,9 +107129,11 @@
 				"15073",
 				"15117",
 				"15144",
+				"15365",
 				"15405",
 				"15549",
 				"15631",
+				"15711",
 				"15868",
 				"1600",
 				"16167",
@@ -108454,11 +107169,13 @@
 				"20546",
 				"20551",
 				"20807",
+				"20835",
 				"20852",
 				"2094",
 				"20953",
 				"20987",
 				"21033",
+				"21075",
 				"21262",
 				"21301",
 				"21330",
@@ -108491,6 +107208,7 @@
 				"23881",
 				"24050",
 				"24083",
+				"24324",
 				"24362",
 				"24377",
 				"24496",
@@ -108631,9 +107349,12 @@
 				"38190",
 				"38344",
 				"38348",
+				"38450",
 				"38662",
 				"38701",
+				"38805",
 				"38836",
+				"38900",
 				"38906",
 				"39211",
 				"39631",
@@ -108650,6 +107371,7 @@
 				"3992",
 				"4011",
 				"40132",
+				"40291",
 				"40362",
 				"40366",
 				"40508",
@@ -108658,6 +107380,7 @@
 				"40644",
 				"40653",
 				"40867",
+				"40927",
 				"41250",
 				"41263",
 				"41472",
@@ -108682,6 +107405,7 @@
 				"4397",
 				"44184",
 				"44202",
+				"44306",
 				"444",
 				"44429",
 				"44606",
@@ -108744,18 +107468,23 @@
 				"50197",
 				"50264",
 				"50306",
+				"50338",
 				"50340",
 				"50422",
 				"50570",
 				"50862",
 				"50904",
+				"50969",
 				"51220",
+				"51291",
 				"5152",
 				"51786",
+				"51801",
 				"51856",
 				"51923",
 				"5197",
 				"52230",
+				"52288",
 				"5233",
 				"5237",
 				"52502",
@@ -108766,6 +107495,7 @@
 				"53213",
 				"53279",
 				"53456",
+				"53573",
 				"53793",
 				"5408",
 				"54127",
@@ -108778,6 +107508,7 @@
 				"55373",
 				"55392",
 				"55485",
+				"5560",
 				"55643",
 				"55647",
 				"55649",
@@ -108822,6 +107553,7 @@
 				"59728",
 				"59861",
 				"59928",
+				"60002",
 				"60090",
 				"60153",
 				"60180",
@@ -108839,6 +107571,7 @@
 				"61217",
 				"61262",
 				"61306",
+				"61308",
 				"61320",
 				"61419",
 				"61471",
@@ -108928,12 +107661,12 @@
 	"effect_coverage": {
 		"all_source": {
 			"direct_effect_entries": {
-				"full": 660,
+				"full": 692,
 				"no_direct_stats": 165,
 				"other_status": 0,
-				"partial": 425,
+				"partial": 428,
 				"total_with_stats": 4709,
-				"unsupported": 3624
+				"unsupported": 3589
 			},
 			"mastery_nodes": 353,
 			"mastery_option_status_counts": {
@@ -108947,16 +107680,16 @@
 			"mastery_options_without_direct_stats": 0,
 			"node_api_status_counts": {
 				"choice": 353,
-				"full": 804,
-				"partial": 419,
+				"full": 836,
+				"partial": 422,
 				"unknown": 0,
-				"unsupported": 1814
+				"unsupported": 1779
 			},
 			"node_direct_effect_status_counts": {
-				"full": 660,
+				"full": 692,
 				"other": 0,
-				"partial": 425,
-				"unsupported": 3624
+				"partial": 428,
+				"unsupported": 3589
 			},
 			"node_records": 3390,
 			"nodes_with_direct_stats": 2872,
@@ -108965,12 +107698,12 @@
 		"counting_rule": "Only source entries with non-empty direct stats count as full, partial or unsupported effect entries. Empty-stat nodes/options are recorded as no_direct_stats even when node_effect returns full with no grants.",
 		"standard_allocation_graph": {
 			"direct_effect_entries": {
-				"full": 585,
+				"full": 606,
 				"no_direct_stats": 64,
 				"other_status": 0,
-				"partial": 238,
+				"partial": 241,
 				"total_with_stats": 3845,
-				"unsupported": 3022
+				"unsupported": 2998
 			},
 			"mastery_nodes": 315,
 			"mastery_option_status_counts": {
@@ -108984,16 +107717,16 @@
 			"mastery_options_without_direct_stats": 0,
 			"node_api_status_counts": {
 				"choice": 315,
-				"full": 628,
-				"partial": 232,
+				"full": 649,
+				"partial": 235,
 				"unknown": 0,
-				"unsupported": 1212
+				"unsupported": 1188
 			},
 			"node_direct_effect_status_counts": {
-				"full": 585,
+				"full": 606,
 				"other": 0,
-				"partial": 238,
-				"unsupported": 3022
+				"partial": 241,
+				"unsupported": 2998
 			},
 			"node_records": 2387,
 			"nodes_with_direct_stats": 2008,
@@ -114816,15 +113549,22 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.05
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
+				"supported": [
+					"5% increased Area of Effect"
+				],
 				"unsupported": [
 					"12% increased Physical Damage with Two Handed Melee Weapons",
-					"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments",
-					"5% increased Area of Effect"
+					"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments"
 				]
 			},
 			"group_id": "334",
@@ -115697,14 +114437,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "melee_area_size_increased",
+						"value": 0.1
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"Melee Skills have 10% increased Area of Effect"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "316",
 			"has_position": true,
@@ -123300,17 +122046,22 @@
 				"grants": [
 					{
 						"mode": "increased",
+						"stat": "projectile_speed_increased",
+						"value": 0.1
+					},
+					{
+						"mode": "increased",
 						"stat": "projectile_increased",
 						"value": 0.1
 					}
 				],
 				"has_direct_stats": true,
 				"supported": [
+					"10% increased Projectile Speed",
 					"10% increased Projectile Damage"
 				],
 				"unsupported": [
-					"Projectiles Pierce an additional Target",
-					"10% increased Projectile Speed"
+					"Projectiles Pierce an additional Target"
 				]
 			},
 			"group_id": "",
@@ -126396,14 +125147,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "spell_area_size_increased",
+						"value": 0.1
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"Spell Skills have 10% increased Area of Effect"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "577",
 			"has_position": true,
@@ -127753,15 +126510,22 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.08
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
+				"supported": [
+					"8% increased Area of Effect"
+				],
 				"unsupported": [
 					"14% increased Physical Damage with Maces or Sceptres",
-					"Mace or Sceptre Attacks deal 14% increased Damage with Ailments",
-					"8% increased Area of Effect"
+					"Mace or Sceptre Attacks deal 14% increased Damage with Ailments"
 				]
 			},
 			"group_id": "98",
@@ -128158,14 +126922,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.1
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"10% increased Area of Effect"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "230",
 			"has_position": true,
@@ -129703,9 +128473,14 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.1
+					},
 					{
 						"mode": "increased",
 						"stat": "area_increased",
@@ -129714,11 +128489,10 @@
 				],
 				"has_direct_stats": true,
 				"supported": [
+					"10% increased Area of Effect",
 					"20% increased Area Damage"
 				],
-				"unsupported": [
-					"10% increased Area of Effect"
-				]
+				"unsupported": []
 			},
 			"group_id": "433",
 			"has_position": true,
@@ -131319,13 +130093,20 @@
 		{
 			"default_allocation_graph": false,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.08
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
+				"supported": [
+					"8% increased Area of Effect"
+				],
 				"unsupported": [
-					"8% increased Area of Effect",
 					"5% increased Trap Throwing Speed"
 				]
 			},
@@ -141260,13 +140041,20 @@
 		{
 			"default_allocation_graph": false,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.08
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
+				"supported": [
+					"8% increased Area of Effect"
+				],
 				"unsupported": [
-					"8% increased Area of Effect",
 					"5% increased Trap Throwing Speed",
 					"5% increased Mine Throwing Speed"
 				]
@@ -145402,14 +144190,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "melee_area_size_increased",
+						"value": 0.2
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"Melee Skills have 20% increased Area of Effect"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "316",
 			"has_position": true,
@@ -145803,14 +144597,21 @@
 		{
 			"default_allocation_graph": false,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.1
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
-					"10% increased Attack Damage",
+				"supported": [
 					"10% increased Area of Effect"
+				],
+				"unsupported": [
+					"10% increased Attack Damage"
 				]
 			},
 			"group_id": "517",
@@ -145995,14 +144796,21 @@
 		{
 			"default_allocation_graph": false,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.08
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
+				"supported": [
+					"8% increased Area of Effect"
+				],
 				"unsupported": [
 					"Attacks with Two Handed Melee Weapons deal 25% increased Damage with Hits and Ailments",
-					"8% increased Area of Effect",
 					"25% chance to Intimidate nearby Enemies for 4 seconds on Melee Kill"
 				]
 			},
@@ -156589,22 +155397,26 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
 					{
 						"mode": "increased",
 						"stat": "fire_increased",
 						"value": 0.3
+					},
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.12
 					}
 				],
 				"has_direct_stats": true,
 				"supported": [
-					"30% increased Fire Damage"
-				],
-				"unsupported": [
+					"30% increased Fire Damage",
 					"12% increased Area of Effect"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "203",
 			"has_position": true,
@@ -158649,14 +157461,21 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.08
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
-					"Mace or Sceptre Attacks deal 10% increased Damage with Hits and Ailments",
+				"supported": [
 					"8% increased Area of Effect"
+				],
+				"unsupported": [
+					"Mace or Sceptre Attacks deal 10% increased Damage with Hits and Ailments"
 				]
 			},
 			"group_id": "382",
@@ -159986,13 +158805,20 @@
 		{
 			"default_allocation_graph": false,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.08
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
+				"supported": [
+					"8% increased Area of Effect"
+				],
 				"unsupported": [
-					"8% increased Area of Effect",
 					"5% increased Mine Throwing Speed"
 				]
 			},
@@ -165582,13 +164408,20 @@
 		{
 			"default_allocation_graph": false,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.08
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
+				"supported": [
+					"8% increased Area of Effect"
+				],
 				"unsupported": [
-					"8% increased Area of Effect",
 					"5% increased Trap Throwing Speed"
 				]
 			},
@@ -175477,9 +174310,14 @@
 		{
 			"default_allocation_graph": false,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
+					{
+						"mode": "increased",
+						"stat": "projectile_speed_increased",
+						"value": 0.1
+					},
 					{
 						"mode": "increased",
 						"stat": "projectile_increased",
@@ -175488,11 +174326,10 @@
 				],
 				"has_direct_stats": true,
 				"supported": [
+					"10% increased Projectile Speed",
 					"10% increased Projectile Damage"
 				],
-				"unsupported": [
-					"10% increased Projectile Speed"
-				]
+				"unsupported": []
 			},
 			"group_id": "797",
 			"has_position": true,
@@ -179976,15 +178813,22 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.08
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
+				"supported": [
+					"8% increased Area of Effect"
+				],
 				"unsupported": [
 					"14% increased Physical Damage with Maces or Sceptres",
-					"Mace or Sceptre Attacks deal 14% increased Damage with Ailments",
-					"8% increased Area of Effect"
+					"Mace or Sceptre Attacks deal 14% increased Damage with Ailments"
 				]
 			},
 			"group_id": "98",
@@ -183385,13 +182229,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "projectile_speed_increased",
+						"value": -0.1
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
+				"supported": [
+					"10% reduced Projectile Speed"
+				],
 				"unsupported": [
-					"10% reduced Projectile Speed",
 					"Projectiles deal 40% increased Damage with Hits to targets at the start\nof their movement, reducing to 0% as they travel farther"
 				]
 			},
@@ -198793,15 +197644,22 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.05
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
+				"supported": [
+					"5% increased Area of Effect"
+				],
 				"unsupported": [
 					"12% increased Physical Damage with Two Handed Melee Weapons",
-					"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments",
-					"5% increased Area of Effect"
+					"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments"
 				]
 			},
 			"group_id": "334",
@@ -202840,9 +201698,14 @@
 		{
 			"default_allocation_graph": false,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
+					{
+						"mode": "increased",
+						"stat": "projectile_speed_increased",
+						"value": 0.2
+					},
 					{
 						"mode": "increased",
 						"stat": "projectile_increased",
@@ -202851,11 +201714,10 @@
 				],
 				"has_direct_stats": true,
 				"supported": [
+					"20% increased Projectile Speed",
 					"20% increased Projectile Damage"
 				],
-				"unsupported": [
-					"20% increased Projectile Speed"
-				]
+				"unsupported": []
 			},
 			"group_id": "",
 			"has_position": false,
@@ -203395,9 +202257,14 @@
 		{
 			"default_allocation_graph": false,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.06
+					},
 					{
 						"mode": "increased",
 						"stat": "elemental_increased",
@@ -203406,11 +202273,10 @@
 				],
 				"has_direct_stats": true,
 				"supported": [
+					"6% increased Area of Effect",
 					"20% increased Elemental Damage"
 				],
-				"unsupported": [
-					"6% increased Area of Effect"
-				]
+				"unsupported": []
 			},
 			"group_id": "",
 			"has_position": false,
@@ -210100,14 +208966,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.12
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"12% increased Area of Effect"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "406",
 			"has_position": true,
@@ -212071,14 +210943,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.1
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"10% increased Area of Effect"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "433",
 			"has_position": true,
@@ -212562,14 +211440,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.1
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"10% increased Area of Effect"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "433",
 			"has_position": true,
@@ -217531,22 +216415,26 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
 					{
 						"mode": "increased",
 						"stat": "fire_increased",
 						"value": 0.08
+					},
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.08
 					}
 				],
 				"has_direct_stats": true,
 				"supported": [
-					"8% increased Fire Damage"
-				],
-				"unsupported": [
+					"8% increased Fire Damage",
 					"8% increased Area of Effect"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "203",
 			"has_position": true,
@@ -218806,15 +217694,22 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.15
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
+				"supported": [
+					"15% increased Area of Effect"
+				],
 				"unsupported": [
 					"30% increased Physical Damage with Maces or Sceptres",
-					"Mace or Sceptre Attacks deal 30% increased Damage with Ailments",
-					"15% increased Area of Effect"
+					"Mace or Sceptre Attacks deal 30% increased Damage with Ailments"
 				]
 			},
 			"group_id": "98",
@@ -219976,14 +218871,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.1
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"10% increased Area of Effect"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "230",
 			"has_position": true,
@@ -220579,22 +219480,26 @@
 		{
 			"default_allocation_graph": false,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
 					{
 						"mode": "increased",
 						"stat": "move_speed_increased",
 						"value": 0.04
+					},
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.08
 					}
 				],
 				"has_direct_stats": true,
 				"supported": [
-					"4% increased Movement Speed"
-				],
-				"unsupported": [
+					"4% increased Movement Speed",
 					"8% increased Area of Effect"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "795",
 			"has_position": true,
@@ -233046,9 +231951,14 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
+					{
+						"mode": "increased",
+						"stat": "projectile_speed_increased",
+						"value": 0.1
+					},
 					{
 						"mode": "increased",
 						"stat": "projectile_increased",
@@ -233057,11 +231967,10 @@
 				],
 				"has_direct_stats": true,
 				"supported": [
+					"10% increased Projectile Speed",
 					"10% increased Projectile Damage"
 				],
-				"unsupported": [
-					"10% increased Projectile Speed"
-				]
+				"unsupported": []
 			},
 			"group_id": "693",
 			"has_position": true,
@@ -243880,13 +242789,20 @@
 		{
 			"default_allocation_graph": false,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.08
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
+				"supported": [
+					"8% increased Area of Effect"
+				],
 				"unsupported": [
-					"8% increased Area of Effect",
 					"5% increased Mine Throwing Speed"
 				]
 			},
@@ -255705,9 +254621,14 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
+					{
+						"mode": "increased",
+						"stat": "projectile_speed_increased",
+						"value": 0.2
+					},
 					{
 						"mode": "increased",
 						"stat": "projectile_increased",
@@ -255721,12 +254642,11 @@
 				],
 				"has_direct_stats": true,
 				"supported": [
+					"20% increased Projectile Speed",
 					"20% increased Projectile Damage",
 					"+20 to Dexterity"
 				],
-				"unsupported": [
-					"20% increased Projectile Speed"
-				]
+				"unsupported": []
 			},
 			"group_id": "617",
 			"has_position": true,
@@ -257561,14 +256481,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "melee_area_size_increased",
+						"value": 0.1
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"Melee Skills have 10% increased Area of Effect"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "316",
 			"has_position": true,
@@ -258333,14 +257259,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.12
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"12% increased Area of Effect"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "406",
 			"has_position": true,
@@ -259817,14 +258749,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "spell_area_size_increased",
+						"value": 0.1
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"Spell Skills have 10% increased Area of Effect"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "577",
 			"has_position": true,
@@ -262238,9 +261176,14 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
+					{
+						"mode": "increased",
+						"stat": "projectile_speed_increased",
+						"value": -0.1
+					},
 					{
 						"mode": "increased",
 						"stat": "projectile_increased",
@@ -262249,11 +261192,10 @@
 				],
 				"has_direct_stats": true,
 				"supported": [
+					"10% reduced Projectile Speed",
 					"10% increased Projectile Damage"
 				],
-				"unsupported": [
-					"10% reduced Projectile Speed"
-				]
+				"unsupported": []
 			},
 			"group_id": "693",
 			"has_position": true,
@@ -266877,14 +265819,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "spell_area_size_increased",
+						"value": 0.2
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"Spell Skills have 20% increased Area of Effect"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "577",
 			"has_position": true,
@@ -274728,14 +273676,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.12
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"12% increased Area of Effect"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "406",
 			"has_position": true,
@@ -276227,14 +275181,21 @@
 		{
 			"default_allocation_graph": false,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.08
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
-					"25% increased Burning Damage",
+				"supported": [
 					"8% increased Area of Effect"
+				],
+				"unsupported": [
+					"25% increased Burning Damage"
 				]
 			},
 			"group_id": "",
@@ -286163,13 +285124,20 @@
 		{
 			"default_allocation_graph": false,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.3
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
+				"supported": [
+					"30% increased Area of Effect"
+				],
 				"unsupported": [
-					"30% increased Area of Effect",
 					"15% increased Cooldown Recovery Rate",
 					"Hits have 20% chance to deal 50% more Area Damage",
 					"25% chance to Blind Enemies on Hit"
@@ -288435,14 +287403,21 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.12
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
+				"supported": [
+					"12% increased Area of Effect"
+				],
 				"unsupported": [
 					"30% increased Trap Damage",
-					"12% increased Area of Effect",
 					"50% increased Trap Trigger Area of Effect"
 				]
 			},
@@ -289609,9 +288584,14 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
+					{
+						"mode": "increased",
+						"stat": "projectile_speed_increased",
+						"value": 0.2
+					},
 					{
 						"mode": "increased",
 						"stat": "projectile_increased",
@@ -289625,12 +288605,11 @@
 				],
 				"has_direct_stats": true,
 				"supported": [
+					"20% increased Projectile Speed",
 					"20% increased Projectile Damage",
 					"+20 to Strength"
 				],
-				"unsupported": [
-					"20% increased Projectile Speed"
-				]
+				"unsupported": []
 			},
 			"group_id": "470",
 			"has_position": true,
@@ -291932,13 +290911,20 @@
 		{
 			"default_allocation_graph": false,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.1
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
+				"supported": [
+					"10% increased Area of Effect"
+				],
 				"unsupported": [
-					"10% increased Area of Effect",
 					"+10% to Critical Strike Multiplier"
 				]
 			},
@@ -294389,9 +293375,14 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.1
+					},
 					{
 						"mode": "increased",
 						"stat": "area_increased",
@@ -294400,11 +293391,10 @@
 				],
 				"has_direct_stats": true,
 				"supported": [
+					"10% increased Area of Effect",
 					"20% increased Area Damage"
 				],
-				"unsupported": [
-					"10% increased Area of Effect"
-				]
+				"unsupported": []
 			},
 			"group_id": "230",
 			"has_position": true,
@@ -297592,9 +296582,14 @@
 		{
 			"default_allocation_graph": false,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.08
+					},
 					{
 						"mode": "increased",
 						"stat": "area_increased",
@@ -297603,11 +296598,10 @@
 				],
 				"has_direct_stats": true,
 				"supported": [
+					"8% increased Area of Effect",
 					"10% increased Area Damage"
 				],
-				"unsupported": [
-					"8% increased Area of Effect"
-				]
+				"unsupported": []
 			},
 			"group_id": "795",
 			"has_position": true,
@@ -301809,9 +300803,14 @@
 		{
 			"default_allocation_graph": false,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.08
+					},
 					{
 						"mode": "increased",
 						"stat": "area_increased",
@@ -301820,11 +300819,10 @@
 				],
 				"has_direct_stats": true,
 				"supported": [
+					"8% increased Area of Effect",
 					"10% increased Area Damage"
 				],
-				"unsupported": [
-					"8% increased Area of Effect"
-				]
+				"unsupported": []
 			},
 			"group_id": "795",
 			"has_position": true,
@@ -304331,22 +303329,26 @@
 		{
 			"default_allocation_graph": false,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
 					{
 						"mode": "increased",
 						"stat": "max_health",
 						"value": 0.08
+					},
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.1
 					}
 				],
 				"has_direct_stats": true,
 				"supported": [
-					"8% increased maximum Life"
-				],
-				"unsupported": [
+					"8% increased maximum Life",
 					"10% increased Area of Effect"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "",
 			"has_position": false,
@@ -306591,9 +305593,14 @@
 		{
 			"default_allocation_graph": false,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
+					{
+						"mode": "increased",
+						"stat": "projectile_speed_increased",
+						"value": 0.1
+					},
 					{
 						"mode": "increased",
 						"stat": "projectile_increased",
@@ -306602,11 +305609,10 @@
 				],
 				"has_direct_stats": true,
 				"supported": [
+					"10% increased Projectile Speed",
 					"10% increased Projectile Damage"
 				],
-				"unsupported": [
-					"10% increased Projectile Speed"
-				]
+				"unsupported": []
 			},
 			"group_id": "797",
 			"has_position": true,
@@ -306856,14 +305862,21 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "melee_area_size_increased",
+						"value": 0.12
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
-					"+0.2 metres to Melee Strike Range",
+				"supported": [
 					"Melee Skills have 12% increased Area of Effect"
+				],
+				"unsupported": [
+					"+0.2 metres to Melee Strike Range"
 				]
 			},
 			"group_id": "213",
@@ -309064,9 +308077,14 @@
 		{
 			"default_allocation_graph": false,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
+					{
+						"mode": "increased",
+						"stat": "projectile_speed_increased",
+						"value": 0.08
+					},
 					{
 						"mode": "increased",
 						"stat": "projectile_increased",
@@ -309075,11 +308093,10 @@
 				],
 				"has_direct_stats": true,
 				"supported": [
+					"8% increased Projectile Speed",
 					"10% increased Projectile Damage"
 				],
-				"unsupported": [
-					"8% increased Projectile Speed"
-				]
+				"unsupported": []
 			},
 			"group_id": "795",
 			"has_position": true,
@@ -309170,13 +308187,20 @@
 		{
 			"default_allocation_graph": false,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.08
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
+				"supported": [
+					"8% increased Area of Effect"
+				],
 				"unsupported": [
-					"8% increased Area of Effect",
 					"15% increased Blind Effect"
 				]
 			},
@@ -309821,9 +308845,14 @@
 		{
 			"default_allocation_graph": false,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
+					{
+						"mode": "increased",
+						"stat": "projectile_speed_increased",
+						"value": 0.08
+					},
 					{
 						"mode": "increased",
 						"stat": "projectile_increased",
@@ -309832,11 +308861,10 @@
 				],
 				"has_direct_stats": true,
 				"supported": [
+					"8% increased Projectile Speed",
 					"10% increased Projectile Damage"
 				],
-				"unsupported": [
-					"8% increased Projectile Speed"
-				]
+				"unsupported": []
 			},
 			"group_id": "795",
 			"has_position": true,
@@ -312746,14 +311774,21 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.08
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
-					"Mace or Sceptre Attacks deal 10% increased Damage with Hits and Ailments",
+				"supported": [
 					"8% increased Area of Effect"
+				],
+				"unsupported": [
+					"Mace or Sceptre Attacks deal 10% increased Damage with Hits and Ailments"
 				]
 			},
 			"group_id": "382",
@@ -319005,13 +318040,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "projectile_speed_increased",
+						"value": 0.3
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
+				"supported": [
+					"30% increased Projectile Speed"
+				],
 				"unsupported": [
-					"30% increased Projectile Speed",
 					"Projectiles gain Damage as they travel farther, dealing up\nto 60% increased Damage with Hits to targets"
 				]
 			},
@@ -320645,22 +319687,26 @@
 		{
 			"default_allocation_graph": false,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
 					{
 						"mode": "increased",
 						"stat": "move_speed_increased",
 						"value": 0.04
+					},
+					{
+						"mode": "increased",
+						"stat": "area_size_increased",
+						"value": 0.08
 					}
 				],
 				"has_direct_stats": true,
 				"supported": [
-					"4% increased Movement Speed"
-				],
-				"unsupported": [
+					"4% increased Movement Speed",
 					"8% increased Area of Effect"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "795",
 			"has_position": true,

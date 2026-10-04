@@ -43,7 +43,7 @@ func _initialize() -> void:
 		var craft: Dictionary = current.crafting[operation]
 		var sample: Dictionary = craft.example
 		var expected_cost: int = {"enchant":8,"elevate":24,"augment":6,"reforge":10}[operation]
-		_expect(sample.quote.ok and sample.full_candidate_valid and sample.save_version==19 and sample.balance_after==100-expected_cost, "New operation diagrams derive true fee and complete schema19 candidate")
+		_expect(sample.quote.ok and sample.full_candidate_valid and sample.save_version==Canonical.Rules.VERSION and sample.balance_after==100-expected_cost, "New operation diagrams derive true fee and complete schema19 candidate")
 		_expect(Equipment.validate_instance(sample.after_instance) and sample.after_instance.id==sample.source.id and sample.after_instance.base_id==sample.source.base_id, "Craft reference output is exact catalog gear with original identity")
 		_expect(sample.after_definition==Exporter.clean(Equipment.definition(sample.after_instance)) and not craft.risk.is_empty(), "New craft definition and risk come from implemented rules")
 	_expect(current.monster_attacks.size() == 3 and current.monster_attacks.has("locked_circle"), "Three implemented typed monster action examples are browsable")

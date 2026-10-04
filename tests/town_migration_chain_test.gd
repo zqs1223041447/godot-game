@@ -10,7 +10,7 @@ func _initialize()->void:
 		var original:Dictionary=Model.Rules.decode_v17(raw);check(Model.Rules.reason_v17(original).is_empty(),"Literal17 passes unchanged frozen source rules")
 		var path:="user://chain-"+name;var file:=FileAccess.open(path,FileAccess.WRITE);file.store_buffer(bytes);file.close()
 		var state:=Model.new();check(state.load_build(path),"17→18→19 chain actually loads")
-		var after:=state.snapshot();check(after.version==19 and after.items.size()==original.items.size()+2,"Exactly two once-only bottles and current schema")
+		var after:=state.snapshot();check(after.version==Model.Rules.VERSION and after.items.size()==original.items.size()+2,"Exactly two once-only bottles and current schema")
 		check(after.next_item_serial==original.next_item_serial and after.progress==original.progress and after.talents==original.talents and after.crafting==original.crafting,"Allocator/progress/points/material revision unchanged")
 		var retained:Dictionary=after.items.duplicate(true)
 		for uid:String in original.items:

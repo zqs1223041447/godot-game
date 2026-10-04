@@ -103,13 +103,13 @@ fi
 echo "Godot version: $("$GODOT_BIN" --version)"
 python3 "$PROJECT_DIR/tools/check_font_coverage.py"
 run_check --editor --import
-run_check --script res://tests/map_modifier_batch_rules_test.gd
-run_check --script res://tests/map_modifier_batch_gameplay_test.gd
-run_check --script res://tests/map_modifier_atomic_test.gd
-run_check --script res://tests/map_modifier_text_test.gd
-run_check --script res://tests/map_modifier_layout_test.gd
-run_check --script res://tests/map_modifier_reference_test.gd
+run_check --script res://tests/source_spatial_parser_test.gd
+run_check --script res://tests/source_spatial_compile_test.gd
+run_check --script res://tests/source_spatial_migration_test.gd
+run_check --script res://tests/source_spatial_gameplay_test.gd
+run_check --script res://tests/spatial_preview_text_test.gd
+run_check --script res://tests/source_spatial_reference_test.gd
 python3 "$PROJECT_DIR/tools/check_item_transparency.py"
 python3 "$PROJECT_DIR/tests/reference_catalog_test.py"
 run_check --quit-after 300
-echo "Current-batch validation passed: four ordinary modifiers, all154 map choices, actual contact/telegraph/shield/armour consumers, atomic admission, current UI and reference/font/assets, and startup."
+echo "Current-batch validation passed: source area/projectile-speed parsing, frozen zero-increment recipes, version20 migration, actual carriers/area hits, final-value preview, reference/font/assets, and startup."

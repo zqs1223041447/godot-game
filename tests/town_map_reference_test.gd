@@ -9,7 +9,7 @@ func _initialize()->void:
 	var actual:=Exporter.town_map_examples()
 	var saved:Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://docs/reference/catalog.json"))
 	check(JSON.parse_string(JSON.stringify(Exporter.clean(actual),"",true,true))==saved.town_maps,"Exported town/map section exactly equals runtime catalogs")
-	check(actual.save_version==19 and actual.services.size()==6 and actual.mode=="optional_town_test","Source schema and optional services disclosed")
+	check(actual.save_version==Exporter.Canonical.Rules.VERSION and actual.services.size()==6 and actual.mode=="optional_town_test","Source schema and optional services disclosed")
 	check(actual.normal_save!=actual.test_save and not actual.map_reward_bonus and not actual.map_runtime_persistent and not actual.retired_profile_writes,"Isolation and runtime-only map boundaries explicit")
 	for service:String in ["skill_merchant","equipment_merchant","jewel_merchant"]:check(actual.stock[service]==Catalog.offers(service),"Entire real supplier catalog exported")
 	for key:String in actual.examples:

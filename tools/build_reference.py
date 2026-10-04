@@ -423,6 +423,17 @@ def build(data, art):
             ('boundaries','尚未实现的机制','未执行源节点整体锁定，原文与位置保留。','<p>仍未完成：施法动作时长/施法速度、暴击、格挡、压制、抗性穿透、异常与持续伤害体系、召唤物、属性装备需求、星团/永恒珠宝、升华点数来源及复杂条件机制。源树浏览不等于以上均可用。制作仍为回收与已有词缀数值校准；未发行四工艺研究独立保留。</p>','planned'),
             ('sources','来源与实现边界','目录来自运行时导出，源树保留功能数据，所有美术由本项目创作。',f'<p><a href="{esc(source["source_url"])}">GGG源树固定提交 {source["source_commit"]}</a> · 3.29.1。保留节点身份、原始规则词句、精通和几何；未包含官方图像或叙事风味文本。上游数据再分发授权未明确，不宣称公共领域。</p><p>旧181节点与词缀校准研究仍有各自固定版本，不代表当前角色全部源效果已实现。原型怪物数值、掉落权重与熵初值由本项目定义。</p><p><a href="source-tree-coverage.json">完整执行覆盖与七职业可达前沿JSON</a>：空stats结构节点和精通本体不冒充属性效果，精通逐选项统计；可达集合不代表123点可以全部同时点出。</p>','research')
         ])
+    if 'source_spatial' in data:
+        spatial=data['source_spatial']
+        rows=[]
+        for example in spatial['examples']:
+            before,after=example['before']['recipe'],example['after']['recipe']
+            if 'radius' in after: values=f"半径 {number(before['radius'])} → {number(after['radius'])}；面积倍率 {number(after['area_multiplier'])}"
+            else: values=f"母箭速度 {number(before['parent']['speed'])} → {number(after['parent']['speed'])}；子箭速度 {number(before['child']['speed'])} → {number(after['child']['speed'])}"
+            rows.append((link('source_passives',example['input']['node_id']),esc(values)))
+        diagram='<figure><svg viewBox="0 0 600 140" role="img" aria-label="面积增加与半径平方根"><circle cx="90" cy="70" r="43" fill="#ecd59d" stroke="#987044"/><circle cx="275" cy="70" r="45.51" fill="#e8c982" stroke="#987044"/><path d="M150 70H212" stroke="#987044"/><g fill="#493523" font-size="14" text-anchor="middle"><text x="90" y="132">基础面积</text><text x="275" y="132">面积 +12%</text><text x="467" y="60">半径 × sqrt(1.12)</text><text x="467" y="86">伤害独立结算</text></g></svg></figure>'
+        body=diagram+facts(rows)+'<p>'+esc(spatial['area_formula'])+'</p><p>'+esc(spatial['speed_formula'])+'</p><p>'+esc(spatial['secondary_explosion_scope'])+'。'+esc(spatial['snapshot_rule'])+'。</p><p>速度增幅不延长射程或寿命；仍由先到达的边界决定分裂、返回或结束，撞墙不触发自然到期效果。范围伤害与范围面积是两个独立属性；范围不增加珠宝覆盖、拾取距离或敌人预警。</p><p>'+esc(spatial['example_scope'])+'。</p><p>'+esc(spatial['legacy_rule'])+'。条件、武器限定、光环与召唤物等范围词句继续逐项锁定。</p>'
+        rule_defs.append(('source_spatial','源天赋范围与投射速度','已有源树属性现在驱动实际命中半径、母子飞行与返回速度；按面积开方计算半径。',body,'implemented'))
     for key,name,summary,body,status in rule_defs: cards.append(add('rules',key,name,summary,body,{'implemented':'已实现规则','research':'研究来源','planned':'未实现边界'}[status],status))
     category_counts={cat:sum(x['cat']==cat for x in records) for cat,_ in CATEGORIES}
     nav=''.join(f'<a href="#category-{cat}" id="category-{cat}" class="nav-link" data-category="{cat}"><span>{label}</span><span>{category_counts[cat]}</span></a>' for cat,label in CATEGORIES)

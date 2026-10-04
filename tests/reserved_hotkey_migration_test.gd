@@ -18,15 +18,16 @@ func _initialize()->void:
 		expected.bindings=expected.bindings.filter(func(b:Dictionary)->bool:return b.keycode!=KEY_C)
 		check(Migration.migrate_v18(source)==expected,"Pure migration changes only version and C binding")
 		check(Rules.reason(source)!="" and not Rules.BINDABLE_KEYS.has(KEY_C),"Current contract reserves C")
+		var expected_current:=expected.duplicate(true);expected_current.version=Rules.VERSION
 		var path:="user://hotkey-"+source_file
 		write(path,bytes)
 		var state:=Model.new();var changes:=[0];state.changed.connect(func():changes[0]+=1)
-		check(state.load_build(path) and state.snapshot()==expected,"Actual store commits exact migrated build")
+		check(state.load_build(path) and state.snapshot()==expected_current,"Actual store commits exact migrated build")
 		check(FileAccess.get_file_as_bytes(path+".v18-backup.json")==bytes,"Original whitespace/CRLF bytes backed up")
 		check(changes[0]==1 and state.successful_saves==1,"One persisted migration and one notification")
 		check(state.migration_message.contains("未绑定")==source_file.contains("c-bound"),"Only affected groups receive unbound notice")
 		var disk:=FileAccess.get_file_as_bytes(path)
-		check(state.load_build(path) and not state.migrated_from_legacy and state.snapshot()==expected and FileAccess.get_file_as_bytes(path)==disk,"Current reread does not repeat migration or notice")
+		check(state.load_build(path) and not state.migrated_from_legacy and state.snapshot()==expected_current and FileAccess.get_file_as_bytes(path)==disk,"Current reread does not repeat migration or notice")
 		check(not state.bind_group("group_000001",KEY_C,state.revision(),path).ok,"New C skill binding rejected")
 		var conflict_path:="user://conflict-"+source_file;write(conflict_path,bytes);write(conflict_path+".v18-backup.json",PackedByteArray([1,2,3]))
 		var conflict:=Model.new();var initial:=conflict.snapshot()
@@ -36,12 +37,12 @@ func _initialize()->void:
 		check(not fault.load_build(fault_path) and fault.snapshot()==initial and FileAccess.get_file_as_bytes(fault_path)==bytes,"Primary write failure preserves bytes and memory")
 		check(FileAccess.get_file_as_bytes(fault_path+".v18-backup.json")==bytes,"Failed primary still retains safe source backup")
 		fault.fail_save=false
-		check(fault.load_build(fault_path) and fault.snapshot()==expected,"Safe retry after write failure succeeds once")
+		check(fault.load_build(fault_path) and fault.snapshot()==expected_current,"Safe retry after write failure succeeds once")
 		for mutation:String in ["duplicate","unknown","future"]:
 			var bad:Dictionary=raw.duplicate(true)
 			if mutation=="duplicate":bad.bindings.append(bad.bindings[0].duplicate())
 			elif mutation=="unknown":bad.items[bad.items.keys()[0]].kind="unknown"
-			else:bad.version=20
+			else:bad.version=Rules.VERSION+1
 			var bad_bytes:=JSON.stringify(bad).to_utf8_buffer();var bad_path:="user://%s-%s"%[mutation,source_file];write(bad_path,bad_bytes)
 			var rejected:=Model.new();initial=rejected.snapshot()
 			check(not rejected.load_build(bad_path) and rejected.snapshot()==initial and FileAccess.get_file_as_bytes(bad_path)==bad_bytes and not FileAccess.file_exists(bad_path+".v18-backup.json"),"Invalid/future input rejected before cleanup/backup/write: "+mutation)
