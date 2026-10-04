@@ -6,7 +6,7 @@ root完成只读点燃预览、独立宝石功能/属性/代价区分、克制�
 
 ## 原创图标
 
-使用内置image_gen新生成assets/ui/grimoire/ignite.png，未用CLI或外部素材，未更改生成像素。1254×1254 RGBA，透明像素1,239,572，半透明332,317，完全不透明627；边界为真alpha透明，不是黑底。SHA256：7be32c4ceb7e701d60362109a2336885f79cfdd77ca322eaf290c454d4a17fbf。原57张图未替换；manifest追加来源与哈希。
+使用内置image_gen新生成assets/ui/grimoire/ignite.png，未用CLI或外部素材，未更改生成像素。1254×1254 RGBA，透明像素1,239,572，半透明332,317，完全不透明627；四边最大alpha为1/255（近透明），背景有真实alpha透明，不是黑底。SHA256：7be32c4ceb7e701d60362109a2336885f79cfdd77ca322eaf290c454d4a17fbf。原57张图未替换；manifest追加来源与哈希。
 
 生成提示：Create one original square ARPG support-skill inventory icon for Ignite, on a genuinely transparent background. Classic hand-painted magical fantasy game item illustration, crisp silhouette readable at 32 pixels. A single compact cracked ember-red gemstone in a dark aged bronze clasp, with three small curling warm amber-orange flames licking upward. Bright adventurous fantasy, textured brushwork, warm brown and copper shadows, restrained fire, no surrounding smoke cloud. Centered object with generous fully transparent margins, no border, no square tile, no background fill, no text, no letters, no runic writing, no watermark, no neon/cyan/purple glow, no tech machinery, no sci-fi circles. The entire object should be fully within the image, alpha transparency around all edges. This is a new original production inventory icon, not a screenshot or mockup.
 
