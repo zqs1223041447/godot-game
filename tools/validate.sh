@@ -58,7 +58,7 @@ run_check() {
 				export XDG_DATA_HOME="$TOWN_UI_DIR/check-$CHECK_INDEX/data"
 				unset PIERCE_QA_ROOT
 				;;
-			res://tests/reward_batch_equivalence_v38_test.gd|res://tests/projectile_dense_equivalence_test.gd|res://tests/retained_actor_layer_test.gd|res://tests/item_presentation_data_v37_test.gd|res://tests/item_hover_lifecycle_v37_test.gd|res://tests/map_modifier_batch_gameplay_test.gd|res://tests/map_aegis_gameplay_test.gd|res://tests/map_geometry_integration_test.gd|res://tests/map_terrain_edge_test.gd|res://tests/terrain_crowd_and_blast_test.gd|res://tests/town_*|res://tests/reserved_hotkey_migration_test.gd|res://tests/map_runtime_boundaries_test.gd|res://tests/crafting_operations_test.gd|res://tests/crafting_growth_*|res://tests/canonical_*|res://tests/offense_skill_*|res://tests/elemental_encounter_*|res://tests/flask_*|res://tests/save_receipt_revision_test.gd|res://tests/source_*|res://tests/independent_menus_test.gd)
+			res://tests/critical_*|res://tests/reward_batch_equivalence_v38_test.gd|res://tests/projectile_dense_equivalence_test.gd|res://tests/retained_actor_layer_test.gd|res://tests/item_presentation_data_v37_test.gd|res://tests/item_hover_lifecycle_v37_test.gd|res://tests/map_modifier_batch_gameplay_test.gd|res://tests/map_aegis_gameplay_test.gd|res://tests/map_geometry_integration_test.gd|res://tests/map_terrain_edge_test.gd|res://tests/terrain_crowd_and_blast_test.gd|res://tests/town_*|res://tests/reserved_hotkey_migration_test.gd|res://tests/map_runtime_boundaries_test.gd|res://tests/crafting_operations_test.gd|res://tests/crafting_growth_*|res://tests/canonical_*|res://tests/offense_skill_*|res://tests/elemental_encounter_*|res://tests/flask_*|res://tests/save_receipt_revision_test.gd|res://tests/source_*|res://tests/independent_menus_test.gd)
 				export XDG_DATA_HOME="$M1_VALIDATION_DIR/check-$CHECK_INDEX/data"
 				unset PIERCE_QA_ROOT
 				;;
@@ -115,9 +115,15 @@ fi
 echo "Godot version: $("$GODOT_BIN" --version)"
 python3 "$PROJECT_DIR/tools/check_font_coverage.py"
 run_check --editor --import
-run_check --script res://tests/retained_actor_layer_test.gd
-run_check --script res://tests/projectile_dense_equivalence_test.gd
-run_check --script res://tests/reward_batch_equivalence_v38_test.gd
+run_check --script res://tests/critical_profile_rules_test.gd
+run_check --script res://tests/source_critical_parser_test.gd
+run_check --script res://tests/source_critical_gate_test.gd
+run_check --script res://tests/source_critical_migration_test.gd
+run_check --script res://tests/critical_compile_runtime_test.gd
+run_check --script res://tests/critical_gameplay_test.gd
+run_check --script res://tests/critical_melee_source_test.gd
+run_check --script res://tests/critical_secondary_skill_test.gd
+run_check --script res://tests/source_critical_reference_test.gd
 python3 "$PROJECT_DIR/tests/reference_catalog_test.py"
 run_check --quit-after 300
-echo "Current-batch validation passed: retained actor lifetime, exact projectile/reward contracts and short startup."
+echo "Current-batch validation passed: critical source gates, frozen casts, independent secondary results, atomic migration and short startup."

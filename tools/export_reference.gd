@@ -88,6 +88,7 @@ static func collect() -> Dictionary:
 	result["source_recharge"] = source_recharge_examples()
 	result["source_mana_cost"] = source_mana_cost_examples()
 	result["source_flasks"] = source_flask_examples()
+	result["source_critical"] = source_critical_examples()
 	result["map_bosses"] = map_boss_examples()
 	result["save_version"] = Canonical.Rules.VERSION
 	result["current_loot_profile_id"] = Canonical.LOOT_PROFILE_ID
@@ -873,3 +874,35 @@ static func map_boss_examples()->Dictionary:
 			"rules":"替代此地图首领接触攻击，动作停追击，攻速只缩恢复；开始检查来源视线，结算检查固定圆心视线；死亡/返城取消",
 			"preserves":"原普通首领、生命护盾/机制、奖励与死亡4后代保持；后代不继承新攻击；无新存档字段"}
 	return examples
+
+
+static func source_critical_examples()->Dictionary:
+	var examples:Array=[]
+	for node_ids:Array in [[],["35894"],["35894","28754"],["53493"],["38664","56460"],["14804","12794"]]:
+		var stats:Dictionary={"damage":20.0,"crit_base_chance":0.05,"crit_base_multiplier":1.5}
+		var sources:Array=[]
+		for id:String in node_ids:
+			var effect:Dictionary=SourceTree.node_effect(id);assert(effect.status=="full")
+			sources.append({"id":id,"lines":SourceTree.Data.node(id).stats,"effect":effect})
+			for grant:Dictionary in effect.grants:
+				if grant.stat in Compiler.Critical.STAT_KEYS:stats[grant.stat]=float(stats.get(grant.stat,0.0))+float(grant.value)
+		var profiles:Dictionary={}
+		for skill_id:String in ["tornado","cleave","nova","shade_bolt"]:
+			var cast:Dictionary=Compiler.compile_group(skill_id,Recipes.snapshot(stats,["explode_on_flight_end"]),[]);assert(cast.ok)
+			profiles[skill_id]=cast.critical
+		examples.append({"source_nodes":sources,"input":stats,"profiles":profiles})
+	var newly_complete:Array=[]
+	for id:String in SourceTree.Data.standard_ids():
+		if SourceTree.Data.node(id).type!="mastery" and SourceTree.node_effect(id,0,23).status!="full" and SourceTree.node_effect(id,0,24).status=="full":newly_complete.append(id)
+	newly_complete.sort()
+	return {"minimum_save_version":24,"fields":Compiler.Critical.STAT_KEYS,"base_chance":0.05,"base_multiplier":1.5,"natural_monster_base_chance":0.0,"new_complete_ordinary_nodes":newly_complete,"new_mastery_effect_ids":[],"examples":examples,
+		"chance_formula":"基础暴击几率 × (1 + 全局与匹配作用域的增加之和)，限制0%至100%",
+		"multiplier_formula":"基础150% + 全局与匹配作用域的暴击倍率百分点",
+		"cast_rule":"施放获准后冻结一次主命中结果；范围目标、连锁、母子弹与返回共用；未命中不造成暴击伤害",
+		"secondary_rule":"每次真实自然到期爆炸独立抽取，仅采用全局属性；同一爆炸内所有目标共用，碰墙/消耗/取消不触发",
+		"damage_order":"伤害增幅 → 暴击倍率 → 抗性与按本次命中大小结算的护甲 → 护盾 → 生命",
+		"randomness":"独立战斗随机流不从掉落随机流抽数；0%和100%不抽随机数，失败施放不改变随机流",
+		"legacy_rule":"严格旧23词汇验证并保留原字节备份后迁移24；物品/UID/节点/点数保持，旧版本注入新暴击节点拒绝",
+		"balance_change":"本批玩家新增5%基础暴击和150%基础倍率；这是显式平衡变化，自然怪物保持0%",
+		"example_scope":"只提取所列源节点的暴击字段展示作用域，不代替真实连通/预算要求；其余节点效果仍由原消费者结算",
+		"unsupported":["幸运","局部武器暴击","暴击触发","召唤物暴击","条件暴击","暴击异常/持续伤害"]}

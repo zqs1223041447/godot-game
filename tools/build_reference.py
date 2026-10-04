@@ -425,7 +425,7 @@ def build(data, art):
             ('allocation','源树与珠宝资格','每件珠宝只有一个统一位置；孔必须已分配并沿普通连线连接自己的起点。','<p>寻枝半径280采用当前源坐标单位，允许小型/显著节点断连分配，仍花1点。远程点不向外扩路、不激活孔；未实现节点即使在范围内也不能分配。退款、移动、替换、取回都验证最终构筑，不能遗留依赖失效的节点。原型半径规则不是PoE某颗珠宝的完整复刻。</p><p>'+link('rules','source_tree')+'；下方旧181覆盖图保留作历史机制研究。</p>','implemented'),
             ('source_defenses','属性与命中防御','原始三属性数值进入真实容量、命中、闪避和近战物理作用域。','<p>力量每2点取整+1生命、每5点取整+1%近战物理；敏捷每点+2命中、每5点取整+1%闪避；智慧每2点取整+1魔力、每10点取整+1%护盾（3.28以后规则）。法术不进行攻击闪避。护甲随物理命中大小重新求减伤，三元素抗性分别限制到75%，然后护盾、生命。</p>'+facts([('同源混合受击示例','物理/火/冰/电各100；护甲500、抗性50%/25%/75%'),('防御后分量',esc(component_text(defense['components']))),('护盾扣减',number(defense['shield_spent'])),('生命扣减',number(defense['health_lost']))])+f'<p>本游戏敏捷型怪物闪避320；默认Scion命中140，对应 {percent(c["skitter_accuracy_example"]["base_chance"])}；增加10敏捷后命中160，对应 {percent(c["skitter_accuracy_example"]["improved_chance"])}。预览展示成功命中伤害，未把命中率伪乘成DPS。</p>','implemented'),
             ('shared','共享消费者与历史注册表','人物和怪物共用伤害分量、防御、命中和结算函数。','<p>旧MechanicRegistry仍约束怪物机制包；旧181节点引用保留作研究与回归。当前人物改用原始源树逐项能力门槛，不能再套用旧投影合计上限。未支持机制继续拒绝，不借导入数据悄悄生效。</p>','implemented'),
-            ('boundaries','尚未实现的机制','未执行源节点整体锁定，原文与位置保留。','<p>仍未完成：施法动作时长/施法速度、暴击、格挡、压制、抗性穿透、异常与持续伤害体系、召唤物、属性装备需求、星团/永恒珠宝、升华点数来源及复杂条件机制。源树浏览不等于以上均可用。制作仍为回收与已有词缀数值校准；未发行四工艺研究独立保留。</p>','planned'),
+            ('boundaries','尚未实现的机制','未执行源节点整体锁定，原文与位置保留。','<p>仍未完成：施法动作时长/施法速度、条件/局部武器暴击、格挡、压制、抗性穿透、异常与持续伤害体系、召唤物、属性装备需求、星团/永恒珠宝、升华点数来源及复杂条件机制。源树浏览不等于以上均可用。制作已有回收、校准、赋魔、升格、补缀与重铸；更复杂的定向制作尚未实现。</p>','planned'),
             ('sources','来源与实现边界','目录来自运行时导出，源树保留功能数据，所有美术由本项目创作。',f'<p><a href="{esc(source["source_url"])}">GGG源树固定提交 {source["source_commit"]}</a> · 3.29.1。保留节点身份、原始规则词句、精通和几何；未包含官方图像或叙事风味文本。上游数据再分发授权未明确，不宣称公共领域。</p><p>旧181节点与词缀校准研究仍有各自固定版本，不代表当前角色全部源效果已实现。原型怪物数值、掉落权重与熵初值由本项目定义。</p><p><a href="source-tree-coverage.json">完整执行覆盖与七职业可达前沿JSON</a>：空stats结构节点和精通本体不冒充属性效果，精通逐选项统计；可达集合不代表123点可以全部同时点出。</p>','research')
         ])
     if 'source_spatial' in data:
@@ -463,6 +463,16 @@ def build(data, art):
         diagram='<figure><svg viewBox="0 0 650 110" role="img" aria-label="药剂使用冻结回复与根怪小数充能"><g fill="#eeddb5" stroke="#8e704f"><rect x="12" y="22" width="168" height="62" rx="7"/><rect x="235" y="22" width="172" height="62" rx="7"/><rect x="462" y="22" width="176" height="62" rx="7"/></g><g fill="#493523" font-size="14" text-anchor="middle"><text x="96" y="59">用瓶冻结本次总回复</text><text x="321" y="46">3秒内分次恢复</text><text x="321" y="69">受当前上限限制</text><text x="550" y="46">有效根怪充能</text><text x="550" y="69">按UID累计小数</text><text x="207" y="59">→</text></g></svg></figure>'
         body=diagram+facts(rows)+'<p>'+esc(flasks['example_scope'])+'。</p><p>'+esc(flasks['recovery_formula'])+'。'+esc(flasks['locked_recovery'])+'。</p><p>'+esc(flasks['charge_formula'])+'。'+esc(flasks['charge_lifecycle'])+'。</p><p>下面以15%充能获取、空瓶为例；余量保留到凑整点，20个有效根怪累计23点。</p><table><thead><tr><th>有效根怪数</th><th>可用整充能</th><th>保留小数</th></tr></thead><tbody>'+charge_rows+'</tbody></table><p>'+esc(flasks['reward_gate'])+'。'+esc(flasks['unchanged'])+'。</p><p>运行态充能与余量不进入存档；重开、回城和切换档案沿原战斗生命周期重置。</p><p>'+esc(flasks['legacy_rule'])+f'。本批{len(flasks["new_complete_ordinary_nodes"])}个新增完整普通节点；包含未实现附加效果的节点仍整体锁定。</p>'
         rule_defs.append(('source_flasks','源天赋药剂构筑','生命与魔力药剂回复、根怪充能获取一起生效，保留用瓶时机与满充能取舍。',body,'implemented'))
+    if 'source_critical' in data:
+        critical=data['source_critical'];rows=[]
+        for example in critical['examples']:
+            label=' + '.join(link('source_passives',n['id']) for n in example['source_nodes']) or '本游戏基底'
+            text=[]
+            for skill,profile in example['profiles'].items():
+                p=profile['primary'];text.append(f"{data['skills'][skill]['name']}：{percent(p['chance'])}几率 / {percent(p['multiplier'])}伤害")
+            rows.append((label,esc('；'.join(text))))
+        body=facts(rows)+'<p>'+esc(critical['balance_change'])+'。</p><p>'+esc(critical['chance_formula'])+'；'+esc(critical['multiplier_formula'])+'。</p><p>'+esc(critical['cast_rule'])+'。</p><p>'+esc(critical['secondary_rule'])+'。</p><p>'+esc(critical['damage_order'])+'。</p><p>'+esc(critical['randomness'])+'。</p><p>'+esc(critical['example_scope'])+'。</p><p>'+esc(critical['legacy_rule'])+f'。本批{len(critical["new_complete_ordinary_nodes"])}个新增完整普通节点，0个新增精通效果；45个新节点可从七起点经受支持路径抵达，余1个仍被未实现邻接效果隔开。可达不代表123点能同时全部分配。</p><p>玩家普通攻击和八种伤害主动共用实现；闪步与护盾不抽取暴击。K预估列出非暴击命中伤害以及最终概率/倍率，不冒称平均伤害或DPS。幸运、局部武器、条件、暴击触发和异常机制继续锁定。</p>'
+        rule_defs.append(('source_critical','暴击与构筑作用域','全局、法术、近战与投射攻击暴击进入冻结施放，独立爆炸另取全局属性。',body,'implemented'))
     for key,name,summary,body,status in rule_defs: cards.append(add('rules',key,name,summary,body,{'implemented':'已实现规则','research':'研究来源','planned':'未实现边界'}[status],status))
     category_counts={cat:sum(x['cat']==cat for x in records) for cat,_ in CATEGORIES}
     nav=''.join(f'<a href="#category-{cat}" id="category-{cat}" class="nav-link" data-category="{cat}"><span>{label}</span><span>{category_counts[cat]}</span></a>' for cat,label in CATEGORIES)

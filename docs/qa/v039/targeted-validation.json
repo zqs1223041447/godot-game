@@ -1,0 +1,112 @@
+{
+  "game_version": "0.39.0",
+  "schema": 24,
+  "reports": [
+    {
+      "path": "docs/qa/v039/critical-rules-test.log.txt",
+      "checks": 757,
+      "sha256": "bf008b9cb0e4145081fac1188a6260702d9590d2e75a5b0d94c8847a83e1ea20",
+      "scope": "Pure formula/schema boundaries; ecdf0d0 bytes retained"
+    },
+    {
+      "path": "docs/qa/v039/source-critical-parser.log.txt",
+      "checks": 325,
+      "sha256": "837965bb35558e47dbeb900d8052d8b8ea6ad879a3c9b1a97beb8bbabdc0fd8e",
+      "scope": "Nine exact source forms"
+    },
+    {
+      "path": "docs/qa/v039/source-critical-gate.log.txt",
+      "checks": 1936,
+      "sha256": "547e3136ef6284fb8e69608044411d172950d5b554f2cbd78db6dcd12f3ff39b",
+      "scope": "Old19-23 exact records and new legal paths"
+    },
+    {
+      "path": "docs/qa/v039/source-critical-migration.log.txt",
+      "checks": 103,
+      "sha256": "be4464ede231f9dd6e4d77f4cde4d851ac5c518ad722807fc640685cc74a9eb2",
+      "scope": "Literal old saves and atomic protections"
+    },
+    {
+      "path": "docs/qa/v039/critical_compile_runtime_test-second.log.txt",
+      "checks": 3263,
+      "sha256": "f1f2a348f7ef501a28a56debb30d71ff5233ae3e20cb18852d1fe67fc2335076",
+      "scope": "412 frozen recipes plus dedicated RNG/defense"
+    },
+    {
+      "path": "docs/qa/v039/critical_gameplay_test-third.log.txt",
+      "checks": 246,
+      "sha256": "a9cc8323bc0559fdc21debb5103fcde96a09eedc4f29a9e505dd70871d63cc05",
+      "scope": "Actual main cast/UID/secondary/refusal paths"
+    },
+    {
+      "path": "docs/qa/v039/critical-melee-source.log.txt",
+      "checks": 10,
+      "sha256": "ed01f855c9f138a9305bc8b8a599883c38330319632dcfb98827b7d7fa34fb3a",
+      "scope": "Actual melee source positive hit"
+    },
+    {
+      "path": "docs/qa/v039/critical-secondary-skill.log.txt",
+      "checks": 12,
+      "sha256": "a8d05d7064b173a4b4fb3c2a4aa50ccd8b80dbdddefddee4e46e1d49c5a1b27e",
+      "scope": "Added shade-bolt/cleave whitelist and real natural-end critical explosion"
+    },
+    {
+      "path": "docs/qa/v039/critical-reference.log.txt",
+      "checks": 91,
+      "sha256": "50232044ff7e47a4d207d50935716de716349cd9d6f48311aef22677eb0f8200",
+      "scope": "Final live-data reference profiles/topology"
+    },
+    {
+      "path": "docs/qa/v039-root-critical-preview/critical-preview.log",
+      "checks": 11,
+      "sha256": "a6f14224e965c69dc8797e34ed368ced410797e218b343ed40be2c23122454bf",
+      "scope": "Root pure display evidence; same display code, actual compiler-to-card additionally in gameplay246"
+    },
+    {
+      "path": "docs/qa/v039-root-critical-preview/damage-preview.log",
+      "checks": 73,
+      "sha256": "b7354353c10386dbb3076c8b30f6d6fa4e52ce2f9568bffa247dd240846b8b9e",
+      "scope": "Root pure display evidence; same display code, actual compiler-to-card additionally in gameplay246"
+    }
+  ],
+  "total_checks": 6827,
+  "report_count": 11,
+  "logs": {
+    "docs/qa/v039/critical-melee-source.log.txt": "ed01f855c9f138a9305bc8b8a599883c38330319632dcfb98827b7d7fa34fb3a",
+    "docs/qa/v039/critical-reference-first.log.txt": "a938c006a9ac723d20894c7401a913d4817910963d0ce591769a574810135f77",
+    "docs/qa/v039/critical-reference.log.txt": "50232044ff7e47a4d207d50935716de716349cd9d6f48311aef22677eb0f8200",
+    "docs/qa/v039/critical-rules-first-fixture.log.txt": "b50554a5fb4d475a3ef8857b6a13852183f0629710952d19fc2eb5d5221b2940",
+    "docs/qa/v039/critical-rules-parser.log.txt": "009ed72e980ecd07bc3a4b42e5eb23b5ee474b10069d19b1c4d2708244b401a2",
+    "docs/qa/v039/critical-rules-test.log.txt": "bf008b9cb0e4145081fac1188a6260702d9590d2e75a5b0d94c8847a83e1ea20",
+    "docs/qa/v039/critical-secondary-skill.log.txt": "a8d05d7064b173a4b4fb3c2a4aa50ccd8b80dbdddefddee4e46e1d49c5a1b27e",
+    "docs/qa/v039/critical_compile_runtime_test-first.log.txt": "87024dcbb13ba33748275ef843b97b5fa8164634d783fbaaad509172864bfc85",
+    "docs/qa/v039/critical_compile_runtime_test-second.log.txt": "f1f2a348f7ef501a28a56debb30d71ff5233ae3e20cb18852d1fe67fc2335076",
+    "docs/qa/v039/critical_gameplay_test-first.log.txt": "f0a8cde4bfe1585916416ead09898939f042b605ac3f1c27801fc85b7581cbf8",
+    "docs/qa/v039/critical_gameplay_test-second.log.txt": "46f8bc7d35c2d1de28b1c04fc331297c2fc535e7a9ea32d2ad660115bb1787c7",
+    "docs/qa/v039/critical_gameplay_test-third.log.txt": "a9cc8323bc0559fdc21debb5103fcde96a09eedc4f29a9e505dd70871d63cc05",
+    "docs/qa/v039/final-import.log.txt": "be370acd621302e2872387cba1a461b7caeb50e6729a201bfaf1edcf322fab18",
+    "docs/qa/v039/font-subset.log.txt": "ab0921b14d5ad78b8ad285fa1282919377efc0de4c9d3a70f6ca1df84c8971e6",
+    "docs/qa/v039/import.log.txt": "6a6fcac343cf5fad654f39ad6c91ed63c31bbdd4d9c3a180fd1811faa8e9cd01",
+    "docs/qa/v039/reference-export.log.txt": "51e3b0bc619efba5c710e1863eedea0402e6700d8c973b9ecb758418906e7297",
+    "docs/qa/v039/reference-html.log.txt": "e81e2f35e3e75b164fdef53fca9642801218f8ee8766e68c1b61c5c10944410a",
+    "docs/qa/v039/reference-links.log.txt": "aad80d3e4fd906f7e65666ec3f8a0c668001642bff5b528a7e60bfadee9777c5",
+    "docs/qa/v039/source-coverage-export.log.txt": "c2fb5c6450ce3759c31d58671e3e0e22d31cc209bcaf7fbad4cd736a856fea01",
+    "docs/qa/v039/source-critical-gate.log.txt": "547e3136ef6284fb8e69608044411d172950d5b554f2cbd78db6dcd12f3ff39b",
+    "docs/qa/v039/source-critical-migration.log.txt": "be4464ede231f9dd6e4d77f4cde4d851ac5c518ad722807fc640685cc74a9eb2",
+    "docs/qa/v039/source-critical-parser.log.txt": "837965bb35558e47dbeb900d8052d8b8ea6ad879a3c9b1a97beb8bbabdc0fd8e",
+    "docs/qa/v039-root-critical-preview/critical-preview.log": "a6f14224e965c69dc8797e34ed368ced410797e218b343ed40be2c23122454bf",
+    "docs/qa/v039-root-critical-preview/damage-preview.log": "b7354353c10386dbb3076c8b30f6d6fa4e52ce2f9568bffa247dd240846b8b9e",
+    "docs/qa/v039-root-critical-preview/first-launch-environment-failure.log": "aa3389950905c3105a2ca22da80aa63e5fbbd8f0d3bab59f604a6da1c2f5f379"
+  },
+  "reuse": {
+    "source": "Unchanged six source/migration production files and source logs transferred verbatim; source-critical-tested-files.json records original stdout provenance",
+    "root_ui": "Both root display files unchanged from c7aadf0; current real compiler/card tested in gameplay246",
+    "post_primary_suite_delta": "CombatData frozen packet whitelist adds only existing shade_bolt and cleave IDs; newly admitted paths checked in12 secondary skill checks, prior formulas and consumers unchanged",
+    "combat_data_primary_suite_sha256": "5805dfaac102b475384d47497669f80991560780c4e535e50685cf4ccfd1cce8",
+    "combat_data_final_sha256": "75c586805a6bef694b32598712156057e72526fed1350e7a55ae5d4a682bf725"
+  },
+  "failed_logs_preserved": true,
+  "historical_full_repeated": false,
+  "600_second_test_deleted": true,
+  "windows_hardware_tested": false
+}
