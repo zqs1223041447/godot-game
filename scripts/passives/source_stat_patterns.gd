@@ -76,6 +76,19 @@ const FLASK_PATTERNS:Array[Dictionary]=[
 	{"expression":"^([0-9]+(?:\\.[0-9]+)?)% increased Flask Charges gained$","stat":"flask_charges_gained_increased","mode":"increased","scale":0.01},
 ]
 
+# Schema24 only: scoped increased chance and additive multiplier; no base chance.
+const CRITICAL_PATTERNS:Array[Dictionary]=[
+	{"expression":"^([0-9]+(?:\\.[0-9]+)?)% increased Critical Strike Chance$","stat":"crit_chance_increased","mode":"increased","scale":0.01},
+	{"expression":"^([0-9]+(?:\\.[0-9]+)?)% increased Spell Critical Strike Chance$","stat":"spell_crit_chance_increased","mode":"increased","scale":0.01},
+	{"expression":"^([0-9]+(?:\\.[0-9]+)?)% increased Melee Critical Strike Chance$","stat":"melee_crit_chance_increased","mode":"increased","scale":0.01},
+	{"expression":"^([0-9]+(?:\\.[0-9]+)?)% increased Critical Strike Chance for Attacks$","stat":"attack_crit_chance_increased","mode":"increased","scale":0.01},
+	{"expression":"^Projectile Attack Skills have ([0-9]+(?:\\.[0-9]+)?)% increased Critical Strike Chance$","stat":"projectile_attack_crit_chance_increased","mode":"increased","scale":0.01},
+	{"expression":"^\\+([0-9]+(?:\\.[0-9]+)?)% to Critical Strike Multiplier$","stat":"crit_multiplier_add","mode":"flat","scale":0.01},
+	{"expression":"^\\+([0-9]+(?:\\.[0-9]+)?)% to Critical Strike Multiplier for Spell Damage$","stat":"spell_crit_multiplier_add","mode":"flat","scale":0.01},
+	{"expression":"^\\+([0-9]+(?:\\.[0-9]+)?)% to Melee Critical Strike Multiplier$","stat":"melee_crit_multiplier_add","mode":"flat","scale":0.01},
+	{"expression":"^Projectile Attack Skills have \\+([0-9]+(?:\\.[0-9]+)?)% to Critical Strike Multiplier$","stat":"projectile_attack_crit_multiplier_add","mode":"flat","scale":0.01},
+]
+
 const NEGATIVE_PATTERN: String = "^-([0-9]+(?:\\.[0-9]+)?)(?: to maximum (?:Life|Mana|Energy Shield)|% increased (?:Damage|Projectile Damage|Spell Damage|Fire Damage|Cold Damage|Lightning Damage|Elemental Damage|Area Damage|Attack Speed|Movement Speed|Mana Regeneration Rate|maximum Life|maximum Mana|maximum Energy Shield))$"
 const NO_EXACT_MATCH_REASON: String = "整行不匹配任何受支持的完整格式；未知 stat、附加词语、条件、武器限定、DoT、Minion 或标点变体均拒绝"
 static var _regex_cache: Dictionary = {}
@@ -89,7 +102,7 @@ static func _expression(pattern: String) -> RegEx:
 	return _regex_cache[pattern]
 
 
-static func parse_line(raw_line: Variant, allow_spatial:bool=true,allow_recharge:bool=true,allow_resource:bool=true,allow_flask:bool=true) -> Dictionary:
+static func parse_line(raw_line: Variant, allow_spatial:bool=true,allow_recharge:bool=true,allow_resource:bool=true,allow_flask:bool=true,allow_critical:bool=true) -> Dictionary:
 	if not raw_line is String:
 		return _unsupported("输入必须是单行英文字符串")
 	var line: String = raw_line
@@ -118,6 +131,7 @@ static func parse_line(raw_line: Variant, allow_spatial:bool=true,allow_recharge
 	if allow_spatial and allow_recharge:patterns=patterns+RECHARGE_PATTERNS
 	if allow_spatial and allow_recharge and allow_resource:patterns=patterns+RESOURCE_PATTERNS
 	if allow_spatial and allow_recharge and allow_resource and allow_flask:patterns=patterns+FLASK_PATTERNS
+	if allow_spatial and allow_recharge and allow_resource and allow_flask and allow_critical:patterns=patterns+CRITICAL_PATTERNS
 	for definition: Dictionary in patterns:
 		var expression := _expression(str(definition.expression))
 		if expression == null:

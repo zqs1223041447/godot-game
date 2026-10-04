@@ -1,0 +1,220 @@
+{
+	"crit_chance_increased": {
+		"class_id": 6,
+		"grants": [
+			{
+				"mode": "increased",
+				"stat": "global_increased",
+				"value": 0.2
+			},
+			{
+				"mode": "increased",
+				"stat": "crit_chance_increased",
+				"value": 0.2
+			},
+			{
+				"mode": "flat",
+				"stat": "dexterity",
+				"value": 10.0
+			},
+			{
+				"mode": "flat",
+				"stat": "intelligence",
+				"value": 10.0
+			}
+		],
+		"id": "35894",
+		"name": "Trickery",
+		"path": [
+			"44683",
+			"38129",
+			"11334",
+			"15549",
+			"20546",
+			"35894"
+		]
+	},
+	"crit_multiplier_add": {
+		"class_id": 6,
+		"grants": [
+			{
+				"mode": "flat",
+				"stat": "crit_multiplier_add",
+				"value": 0.25
+			},
+			{
+				"mode": "increased",
+				"stat": "crit_chance_increased",
+				"value": 0.25
+			}
+		],
+		"id": "28754",
+		"name": "Assassination",
+		"path": [
+			"44683",
+			"38129",
+			"11334",
+			"15549",
+			"20546",
+			"35894",
+			"35283",
+			"28754"
+		]
+	},
+	"melee_crit_chance_increased": {
+		"class_id": 4,
+		"grants": [
+			{
+				"mode": "increased",
+				"stat": "melee_crit_chance_increased",
+				"value": 0.2
+			}
+		],
+		"id": "38664",
+		"name": "Melee Critical Strike Chance",
+		"path": [
+			"50986",
+			"47389",
+			"42911",
+			"40867",
+			"476",
+			"24865",
+			"6741",
+			"14056",
+			"34400",
+			"24914",
+			"38664"
+		]
+	},
+	"melee_crit_multiplier_add": {
+		"class_id": 4,
+		"grants": [
+			{
+				"mode": "flat",
+				"stat": "melee_crit_multiplier_add",
+				"value": 0.1
+			}
+		],
+		"id": "56460",
+		"name": "Melee Critical Strike Multiplier",
+		"path": [
+			"50986",
+			"47389",
+			"42911",
+			"40867",
+			"476",
+			"24865",
+			"6741",
+			"14056",
+			"34400",
+			"24914",
+			"38664",
+			"56460"
+		]
+	},
+	"projectile_attack_crit_chance_increased": {
+		"class_id": 2,
+		"grants": [
+			{
+				"mode": "increased",
+				"stat": "projectile_attack_crit_chance_increased",
+				"value": 0.2
+			}
+		],
+		"id": "14804",
+		"name": "Projectile Attack Critical Strike Chance",
+		"path": [
+			"50459",
+			"39821",
+			"52904",
+			"444",
+			"61306",
+			"60942",
+			"32555",
+			"22266",
+			"14804"
+		]
+	},
+	"projectile_attack_crit_multiplier_add": {
+		"class_id": 2,
+		"grants": [
+			{
+				"mode": "increased",
+				"stat": "projectile_attack_crit_chance_increased",
+				"value": 0.1
+			},
+			{
+				"mode": "flat",
+				"stat": "projectile_attack_crit_multiplier_add",
+				"value": 0.1
+			}
+		],
+		"id": "12794",
+		"name": "Projectile Attack Critical Strike Chance and Multiplier",
+		"path": [
+			"50459",
+			"39821",
+			"52904",
+			"444",
+			"61306",
+			"60942",
+			"32555",
+			"22266",
+			"14804",
+			"12794"
+		]
+	},
+	"spell_crit_chance_increased": {
+		"class_id": 3,
+		"grants": [
+			{
+				"mode": "increased",
+				"stat": "spell_crit_chance_increased",
+				"value": 0.2
+			}
+		],
+		"id": "44723",
+		"name": "Spell Critical Strike Chance",
+		"path": [
+			"54447",
+			"57226",
+			"21678",
+			"32210",
+			"8948",
+			"38176",
+			"11551",
+			"19635",
+			"44723"
+		]
+	},
+	"spell_crit_multiplier_add": {
+		"class_id": 3,
+		"grants": [
+			{
+				"mode": "increased",
+				"stat": "spell_crit_chance_increased",
+				"value": 0.5
+			},
+			{
+				"mode": "flat",
+				"stat": "spell_crit_multiplier_add",
+				"value": 0.15
+			}
+		],
+		"id": "53493",
+		"name": "Annihilation",
+		"path": [
+			"54447",
+			"57226",
+			"21678",
+			"32210",
+			"8948",
+			"38176",
+			"11551",
+			"19635",
+			"44723",
+			"16790",
+			"53493"
+		]
+	}
+}
