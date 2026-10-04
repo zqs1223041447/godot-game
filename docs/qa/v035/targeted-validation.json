@@ -1,0 +1,77 @@
+{
+  "reports": [
+    {
+      "path": "docs/qa/v035/flask-rules.log.txt",
+      "checks": 113,
+      "sha256": "3e8821087ecbe5da8f05aebdc4437798d3f23efa38e450d32d0b475e239d202e",
+      "scope": "Frozen v34 byte trajectory and matching recovery/fractional charge rules"
+    },
+    {
+      "path": "docs/qa/v035/flask-migration.log.txt",
+      "checks": 49,
+      "sha256": "a9449f81e3eb1802db20e575ce8a339ae69a125ccf46e0d86d812582ce395312",
+      "scope": "Literal v22 backups and schema23 vocabulary boundary"
+    },
+    {
+      "path": "docs/qa/v035/flask-gameplay.log.txt",
+      "checks": 46,
+      "sha256": "bdb676013511cf6edc4c3512584f424055f0dab68d7781a4f68e8605c824e20c",
+      "scope": "Actual source allocation, flask use, move/refund and rewarded enemy settlement"
+    },
+    {
+      "path": "docs/qa/v035/root-ui/flask-build-text.log.txt",
+      "checks": 5,
+      "sha256": "8aa6a40539fa7a299d54c415ec1e026abfbd5b5b87da76dbc540c803fc2a0a75",
+      "scope": "Root current-value presentation, reused unchanged source"
+    },
+    {
+      "path": "docs/qa/v035/reference-test.log.txt",
+      "checks": 33,
+      "sha256": "28d500a15cd7a8acae111b44a48d4f054540a1ae2917b7028f9800afed73b0e1",
+      "scope": "Same-source flask reference profiles, twenty charge steps and coverage"
+    }
+  ],
+  "total_checks": 246,
+  "report_count": 5,
+  "production_input_count": 386,
+  "logs": {
+    "docs/qa/v035/final-import.log.txt": "39e1d76a5ca7a25547afb84c6b82a647d6f3231d234bb6a2d83baaec0aab9de4",
+    "docs/qa/v035/flask-gameplay-first-fixture-failure.log.txt": "6d64da20f01d770c98bf56bf31720f132466668a741f6813fdd2b58dfc189413",
+    "docs/qa/v035/flask-gameplay-reward-diagnostic.log.txt": "e9d06e8e2e8f3f552470f8ec717fcee2643cd11f6ece96873a60ce6d8d7403ac",
+    "docs/qa/v035/flask-gameplay-save-diagnostic.log.txt": "8ea9c128febe4edcf80c2206f6dcb6e34dfeddbc48e722a606b2560d4afdaa59",
+    "docs/qa/v035/flask-gameplay-transaction-fixture-failure.log.txt": "04b410f39a2a23842ef47ac54f16ed6749eab1f8e679d3c72d7c8fb1e3e60983",
+    "docs/qa/v035/flask-gameplay.log.txt": "bdb676013511cf6edc4c3512584f424055f0dab68d7781a4f68e8605c824e20c",
+    "docs/qa/v035/flask-migration.log.txt": "a9449f81e3eb1802db20e575ce8a339ae69a125ccf46e0d86d812582ce395312",
+    "docs/qa/v035/flask-rules.log.txt": "3e8821087ecbe5da8f05aebdc4437798d3f23efa38e450d32d0b475e239d202e",
+    "docs/qa/v035/font-build.log.txt": "11eb6d6084a800aaacafa1fc4cf006df4e4e389f33436eb79322a617baf0d1ec",
+    "docs/qa/v035/reference-export.log.txt": "51e3b0bc619efba5c710e1863eedea0402e6700d8c973b9ecb758418906e7297",
+    "docs/qa/v035/reference-html.log.txt": "63815b8f6b99679b78ca130b6d61b03a7de5a531eb4edaf9e68442836fe7b109",
+    "docs/qa/v035/reference-links.log.txt": "95a76af2b0f817ae780e477e8177c462e53a65f3abbb23405603b8023e463c65",
+    "docs/qa/v035/reference-test.log.txt": "28d500a15cd7a8acae111b44a48d4f054540a1ae2917b7028f9800afed73b0e1",
+    "docs/qa/v035/root-ui/flask-build-text.log.txt": "8aa6a40539fa7a299d54c415ec1e026abfbd5b5b87da76dbc540c803fc2a0a75",
+    "docs/qa/v035/source-coverage.log.txt": "fa73bc491f0573214d01a21102629015124ef048914c95475fd5aa68c65bf448",
+    "docs/qa/v035/v34-baseline.log.txt": "e8658bb318c4c785f419ad85f484c2af5e2526cbc9143d78bd610cdfdb438f5d"
+  },
+  "historical_failure_logs_preserved": true,
+  "schema": 23,
+  "game_version": "0.35.0",
+  "no_600s_or_full_retest": true,
+  "evidence_reuse": "113+49+46 focused implementation checks and unchanged root5 reused after version metadata/font/reference additions; final reference33 passed. No repeated gameplay batch.",
+  "font": {
+    "fonttools_version": "4.61.1",
+    "source_sha256": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
+    "font_sha256": "7a5427cca0d961ca3d1dd26ed343df3986e9a49e39a0f3ffd8901dac092504fc",
+    "font_bytes": 397732,
+    "mapped_codepoints": 1032,
+    "runtime_files": 124,
+    "required_codepoints": 1027,
+    "required_han": 907,
+    "added_since_baseline": "‹›▲▼七业严串九了二产付任何供候健允六具典凶划剂功务匠区十华协厚参反口号各咏商圆垣城堆墙声头套好寒尔层差己币师幕广序库态恰意感慢慧戒执扫把挡控描携撤政敏料斜斩智服析树样案横款残毒油测涂猛瓶登益盔石码稳突站策累纳绑绕缓耐职肤脊腰舍花英草药著蓄蚀被解警订许评诊语账货质赠走路踏输述逻遇道遭遮铁铸销镇阔阻险难集靴鞋页顺频",
+    "baseline_glyphs_unchanged": true
+  },
+  "pending": [
+    "frozen package resource validation",
+    "packed startup and new consumer probe",
+    "GitHub branch backup currently blocked by sandbox startup"
+  ]
+}

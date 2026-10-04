@@ -3448,7 +3448,7 @@
 				"normal_points": 5,
 				"source_version": "3.29.1"
 			},
-			"version": 22
+			"version": 23
 		},
 		"default_casts": {
 			"group_000001": {
@@ -3532,6 +3532,9 @@
 			"evasion_increased": 0.0,
 			"fire_increased": 0.0,
 			"fire_resistance": 0.0,
+			"flask_charges_gained_increased": 0.0,
+			"flask_life_recovery_increased": 0.0,
+			"flask_mana_recovery_increased": 0.0,
 			"global_increased": 0.0,
 			"intelligence": 20.0,
 			"life_regen": 0.0,
@@ -4424,7 +4427,7 @@
 				"evasion": 320.0
 			}
 		},
-		"save_version": 22,
+		"save_version": 23,
 		"skitter_accuracy_example": {
 			"base_accuracy": 140,
 			"base_chance": 0.96,
@@ -4482,6 +4485,9 @@
 				"evasion_increased": 0.0,
 				"fire_increased": 0.0,
 				"fire_resistance": 0.0,
+				"flask_charges_gained_increased": 0.0,
+				"flask_life_recovery_increased": 0.0,
+				"flask_mana_recovery_increased": 0.0,
 				"global_increased": 0.0,
 				"intelligence": 20.0,
 				"life_regen": 0.0,
@@ -4944,7 +4950,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 22,
+				"save_version": 23,
 				"source": {
 					"affixes": [
 						{
@@ -5351,7 +5357,7 @@
 				"schema_version": 2,
 				"status": "prototype"
 			},
-			"save_version": 22
+			"save_version": 23
 		},
 		"elevate": {
 			"description": "保留魔法装备已有词缀，升为稀有并补至4至6条。",
@@ -5552,7 +5558,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 22,
+				"save_version": 23,
 				"source": {
 					"affixes": [
 						{
@@ -5736,7 +5742,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 22,
+				"save_version": 23,
 				"source": {
 					"affixes": [],
 					"base_id": "ashwood_bow",
@@ -5922,7 +5928,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 22,
+				"save_version": 23,
 				"source": {
 					"affixes": [
 						{
@@ -6125,7 +6131,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 22,
+				"save_version": 23,
 				"source": {
 					"affixes": [
 						{
@@ -6267,7 +6273,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 22,
+				"save_version": 23,
 				"source": {
 					"affixes": [
 						{
@@ -6316,7 +6322,7 @@
 			"example_quantity": 1,
 			"name": "校准碎片",
 			"quantity_source": "items[uid].payload.quantity",
-			"save_version": 22,
+			"save_version": 23,
 			"size": [
 				1,
 				1
@@ -13611,7 +13617,7 @@
 			"status": "implemented"
 		}
 	},
-	"game_version": "0.34.0",
+	"game_version": "0.35.0",
 	"jewel_affixes": {
 		"barrier": {
 			"kind": "prefix",
@@ -15149,6 +15155,9 @@
 							"evasion_increased": 0.0,
 							"fire_increased": 0.0,
 							"fire_resistance": 0.18,
+							"flask_charges_gained_increased": 0.0,
+							"flask_life_recovery_increased": 0.0,
+							"flask_mana_recovery_increased": 0.0,
 							"global_increased": 0.0,
 							"intelligence": 20.0,
 							"life_regen": 0.0,
@@ -15256,6 +15265,9 @@
 							"evasion_increased": 0.0,
 							"fire_increased": 0.0,
 							"fire_resistance": 0.0,
+							"flask_charges_gained_increased": 0.0,
+							"flask_life_recovery_increased": 0.0,
+							"flask_mana_recovery_increased": 0.0,
 							"global_increased": 0.0,
 							"intelligence": 20.0,
 							"life_regen": 0.0,
@@ -15322,6 +15334,9 @@
 							"evasion_increased": 0.0,
 							"fire_increased": 0.0,
 							"fire_resistance": 0.0,
+							"flask_charges_gained_increased": 0.0,
+							"flask_life_recovery_increased": 0.0,
+							"flask_mana_recovery_increased": 0.0,
 							"global_increased": 0.0,
 							"intelligence": 20.0,
 							"life_regen": 0.0,
@@ -15696,6 +15711,9 @@
 							"evasion_increased": 0.0,
 							"fire_increased": 0.0,
 							"fire_resistance": 0.18,
+							"flask_charges_gained_increased": 0.0,
+							"flask_life_recovery_increased": 0.0,
+							"flask_mana_recovery_increased": 0.0,
 							"global_increased": 0.0,
 							"intelligence": 20.0,
 							"life_regen": 0.0,
@@ -15803,6 +15821,9 @@
 							"evasion_increased": 0.0,
 							"fire_increased": 0.0,
 							"fire_resistance": 0.0,
+							"flask_charges_gained_increased": 0.0,
+							"flask_life_recovery_increased": 0.0,
+							"flask_mana_recovery_increased": 0.0,
 							"global_increased": 0.0,
 							"intelligence": 20.0,
 							"life_regen": 0.0,
@@ -15869,6 +15890,9 @@
 							"evasion_increased": 0.0,
 							"fire_increased": 0.0,
 							"fire_resistance": 0.0,
+							"flask_charges_gained_increased": 0.0,
+							"flask_life_recovery_increased": 0.0,
+							"flask_mana_recovery_increased": 0.0,
 							"global_increased": 0.0,
 							"intelligence": 20.0,
 							"life_regen": 0.0,
@@ -21617,7 +21641,7 @@
 		"source": "SkillCompiler + ProjectileRuntime.advance + DamageResolver",
 		"target_count": 6
 	},
-	"save_version": 22,
+	"save_version": 23,
 	"schema_version": 3,
 	"sectors": [
 		{
@@ -200242,6 +200266,261 @@
 			"short_name": "结界"
 		}
 	},
+	"source_flasks": {
+		"charge_formula": "每个有效奖励根怪获得充能 = 1 × (1 + 充能获取增幅)",
+		"charge_lifecycle": "余量按同一药剂UID累计，换槽或移入背包不清零；只有当时装备的药剂获充能，满30在本次合法奖励时丢弃超额与余量",
+		"charge_rows": [
+			{
+				"remainder_micro": 150000,
+				"root_kills": 1,
+				"whole_charges": 1
+			},
+			{
+				"remainder_micro": 300000,
+				"root_kills": 2,
+				"whole_charges": 2
+			},
+			{
+				"remainder_micro": 450000,
+				"root_kills": 3,
+				"whole_charges": 3
+			},
+			{
+				"remainder_micro": 600000,
+				"root_kills": 4,
+				"whole_charges": 4
+			},
+			{
+				"remainder_micro": 750000,
+				"root_kills": 5,
+				"whole_charges": 5
+			},
+			{
+				"remainder_micro": 900000,
+				"root_kills": 6,
+				"whole_charges": 6
+			},
+			{
+				"remainder_micro": 50000,
+				"root_kills": 7,
+				"whole_charges": 8
+			},
+			{
+				"remainder_micro": 200000,
+				"root_kills": 8,
+				"whole_charges": 9
+			},
+			{
+				"remainder_micro": 350000,
+				"root_kills": 9,
+				"whole_charges": 10
+			},
+			{
+				"remainder_micro": 500000,
+				"root_kills": 10,
+				"whole_charges": 11
+			},
+			{
+				"remainder_micro": 650000,
+				"root_kills": 11,
+				"whole_charges": 12
+			},
+			{
+				"remainder_micro": 800000,
+				"root_kills": 12,
+				"whole_charges": 13
+			},
+			{
+				"remainder_micro": 950000,
+				"root_kills": 13,
+				"whole_charges": 14
+			},
+			{
+				"remainder_micro": 100000,
+				"root_kills": 14,
+				"whole_charges": 16
+			},
+			{
+				"remainder_micro": 250000,
+				"root_kills": 15,
+				"whole_charges": 17
+			},
+			{
+				"remainder_micro": 400000,
+				"root_kills": 16,
+				"whole_charges": 18
+			},
+			{
+				"remainder_micro": 550000,
+				"root_kills": 17,
+				"whole_charges": 19
+			},
+			{
+				"remainder_micro": 700000,
+				"root_kills": 18,
+				"whole_charges": 20
+			},
+			{
+				"remainder_micro": 850000,
+				"root_kills": 19,
+				"whole_charges": 21
+			},
+			{
+				"remainder_micro": 0,
+				"root_kills": 20,
+				"whole_charges": 23
+			}
+		],
+		"charge_unit": 1000000,
+		"example_scope": "100资源上限隔离示例，仅展示本批药剂字段，节点其他生命或魔力收益仍由原消费者结算",
+		"examples": [
+			{
+				"input": {
+					"flask_life_recovery_increased": 0.1
+				},
+				"node_id": "18402",
+				"profiles": {
+					"flask:life": {
+						"base_recovery_fraction": 0.35,
+						"charges_per_root": 1.0,
+						"cost": 10,
+						"duration": 3.0,
+						"max_charges": 30,
+						"ok": true,
+						"reason": "",
+						"recovery_fraction": 0.385,
+						"recovery_multiplier": 1.1,
+						"recovery_total": 38.5,
+						"resource": "health"
+					},
+					"flask:mana": {
+						"base_recovery_fraction": 0.35,
+						"charges_per_root": 1.0,
+						"cost": 10,
+						"duration": 3.0,
+						"max_charges": 30,
+						"ok": true,
+						"reason": "",
+						"recovery_fraction": 0.35,
+						"recovery_multiplier": 1.0,
+						"recovery_total": 35.0,
+						"resource": "mana"
+					}
+				},
+				"stats": [
+					"4% increased maximum Life",
+					"10% increased Life Recovery from Flasks"
+				]
+			},
+			{
+				"input": {
+					"flask_mana_recovery_increased": 0.15
+				},
+				"node_id": "17546",
+				"profiles": {
+					"flask:life": {
+						"base_recovery_fraction": 0.35,
+						"charges_per_root": 1.0,
+						"cost": 10,
+						"duration": 3.0,
+						"max_charges": 30,
+						"ok": true,
+						"reason": "",
+						"recovery_fraction": 0.35,
+						"recovery_multiplier": 1.0,
+						"recovery_total": 35.0,
+						"resource": "health"
+					},
+					"flask:mana": {
+						"base_recovery_fraction": 0.35,
+						"charges_per_root": 1.0,
+						"cost": 10,
+						"duration": 3.0,
+						"max_charges": 30,
+						"ok": true,
+						"reason": "",
+						"recovery_fraction": 0.40249999999999997,
+						"recovery_multiplier": 1.15,
+						"recovery_total": 40.25,
+						"resource": "mana"
+					}
+				},
+				"stats": [
+					"10% increased maximum Mana",
+					"15% increased Mana Recovery from Flasks"
+				]
+			},
+			{
+				"input": {
+					"flask_charges_gained_increased": 0.05,
+					"flask_mana_recovery_increased": 0.1
+				},
+				"node_id": "60648",
+				"profiles": {
+					"flask:life": {
+						"base_recovery_fraction": 0.35,
+						"charges_per_root": 1.05,
+						"cost": 10,
+						"duration": 3.0,
+						"max_charges": 30,
+						"ok": true,
+						"reason": "",
+						"recovery_fraction": 0.35,
+						"recovery_multiplier": 1.0,
+						"recovery_total": 35.0,
+						"resource": "health"
+					},
+					"flask:mana": {
+						"base_recovery_fraction": 0.35,
+						"charges_per_root": 1.05,
+						"cost": 10,
+						"duration": 3.0,
+						"max_charges": 30,
+						"ok": true,
+						"reason": "",
+						"recovery_fraction": 0.385,
+						"recovery_multiplier": 1.1,
+						"recovery_total": 38.5,
+						"resource": "mana"
+					}
+				},
+				"stats": [
+					"10% increased Mana Recovery from Flasks",
+					"5% increased Flask Charges gained"
+				]
+			}
+		],
+		"fields": [
+			"flask_life_recovery_increased",
+			"flask_mana_recovery_increased",
+			"flask_charges_gained_increased"
+		],
+		"legacy_rule": "严格旧22验证并原字节备份后迁移23；旧版本注入新药剂节点拒绝，不额外赠物或点数",
+		"locked_recovery": "使用时冻结本次总量与3秒速率；期间换装或退款不重算，当前资源上限仍限制实际回复",
+		"minimum_save_version": 23,
+		"new_complete_ordinary_nodes": [
+			"17421",
+			"17546",
+			"17788",
+			"17790",
+			"18402",
+			"29104",
+			"3676",
+			"42981",
+			"60648",
+			"8930"
+		],
+		"recovery_formula": "本次总回复 = 使用时对应最大资源 × 35% × (1 + 相应药剂回复增幅)",
+		"reward_gate": "后代、演示怪及重复死亡不获充能；保持原奖励RNG与物品输出",
+		"runtime_persisted": false,
+		"unchanged": "基础30充能、每次消耗10、持续3秒；同资源不叠加，满资源或回复中不扣费",
+		"unsupported": [
+			"药剂持续时间",
+			"定时或命中获得充能",
+			"压制触发充能",
+			"药剂期间持续伤害减免"
+		]
+	},
 	"source_mana_cost": {
 		"example_scope": "新星加节能/疾咏，隔离展示成本字段；节点其余魔力/恢复收益仍由对应原消费者结算",
 		"examples": [
@@ -228301,11 +228580,18 @@
 			"16602": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "flask_life_recovery_increased",
+							"value": 0.1
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"10% increased Life Recovery from Flasks"
+					],
 					"unsupported": [
-						"10% increased Life Recovery from Flasks",
 						"10% increased Flask Effect Duration"
 					]
 				},
@@ -230346,15 +230632,19 @@
 							"mode": "increased",
 							"stat": "max_mana",
 							"value": 0.08
+						},
+						{
+							"mode": "increased",
+							"stat": "flask_charges_gained_increased",
+							"value": 0.1
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
-						"8% increased maximum Mana"
-					],
-					"unsupported": [
+						"8% increased maximum Mana",
 						"10% increased Flask Charges gained"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "17421",
@@ -230481,15 +230771,19 @@
 							"mode": "increased",
 							"stat": "max_mana",
 							"value": 0.1
+						},
+						{
+							"mode": "increased",
+							"stat": "flask_mana_recovery_increased",
+							"value": 0.15
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
-						"10% increased maximum Mana"
-					],
-					"unsupported": [
+						"10% increased maximum Mana",
 						"15% increased Mana Recovery from Flasks"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "17546",
@@ -230973,12 +231267,18 @@
 			"17788": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "flask_charges_gained_increased",
+							"value": 0.1
+						}
+					],
+					"status": "full",
+					"supported": [
 						"10% increased Flask Charges gained"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "17788",
@@ -231004,12 +231304,18 @@
 			"17790": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "flask_charges_gained_increased",
+							"value": 0.1
+						}
+					],
+					"status": "full",
+					"supported": [
 						"10% increased Flask Charges gained"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "17790",
@@ -232362,15 +232668,19 @@
 							"mode": "increased",
 							"stat": "max_health",
 							"value": 0.04
+						},
+						{
+							"mode": "increased",
+							"stat": "flask_life_recovery_increased",
+							"value": 0.1
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
-						"4% increased maximum Life"
-					],
-					"unsupported": [
+						"4% increased maximum Life",
 						"10% increased Life Recovery from Flasks"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "18402",
@@ -238455,14 +238765,19 @@
 							"mode": "increased",
 							"stat": "max_mana",
 							"value": 0.15
+						},
+						{
+							"mode": "increased",
+							"stat": "flask_mana_recovery_increased",
+							"value": 0.3
 						}
 					],
 					"status": "partial",
 					"supported": [
-						"15% increased maximum Mana"
+						"15% increased maximum Mana",
+						"30% increased Mana Recovery from Flasks"
 					],
 					"unsupported": [
-						"30% increased Mana Recovery from Flasks",
 						"Mana Flasks gain 1 Charge every 3 seconds"
 					]
 				},
@@ -239646,12 +239961,19 @@
 			"22217": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"+5% chance to Suppress Spell Damage",
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "flask_life_recovery_increased",
+							"value": 0.12
+						}
+					],
+					"status": "partial",
+					"supported": [
 						"12% increased Life Recovery from Flasks"
+					],
+					"unsupported": [
+						"+5% chance to Suppress Spell Damage"
 					]
 				},
 				"has_position": true,
@@ -242326,11 +242648,18 @@
 			"23438": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "flask_life_recovery_increased",
+							"value": 0.1
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"10% increased Life Recovery from Flasks"
+					],
 					"unsupported": [
-						"10% increased Life Recovery from Flasks",
 						"10% increased Flask Effect Duration"
 					]
 				},
@@ -256060,15 +256389,19 @@
 							"mode": "increased",
 							"stat": "max_mana",
 							"value": 0.08
+						},
+						{
+							"mode": "increased",
+							"stat": "flask_charges_gained_increased",
+							"value": 0.1
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
-						"8% increased maximum Mana"
-					],
-					"unsupported": [
+						"8% increased maximum Mana",
 						"10% increased Flask Charges gained"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "29104",
@@ -263660,11 +263993,18 @@
 			"32640": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "flask_charges_gained_increased",
+							"value": 0.1
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"10% increased Flask Charges gained"
+					],
 					"unsupported": [
-						"10% increased Flask Charges gained",
 						"Flasks applied to you have 5% increased Effect"
 					]
 				},
@@ -273647,12 +273987,18 @@
 			"3676": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "flask_charges_gained_increased",
+							"value": 0.1
+						}
+					],
+					"status": "full",
+					"supported": [
 						"10% increased Flask Charges gained"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "3676",
@@ -278814,12 +279160,19 @@
 			"38683": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"+2% to maximum Cold Resistance",
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "flask_life_recovery_increased",
+							"value": 0.1
+						}
+					],
+					"status": "partial",
+					"supported": [
 						"10% increased Life Recovery from Flasks"
+					],
+					"unsupported": [
+						"+2% to maximum Cold Resistance"
 					]
 				},
 				"has_position": false,
@@ -283283,11 +283636,18 @@
 			"40631": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "flask_charges_gained_increased",
+							"value": 0.1
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"10% increased Flask Charges gained"
+					],
 					"unsupported": [
-						"10% increased Flask Charges gained",
 						"Flasks applied to you have 5% increased Effect"
 					]
 				},
@@ -284164,13 +284524,30 @@
 			"4094": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"24% increased Damage over Time",
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "flask_charges_gained_increased",
+							"value": 0.1
+						},
+						{
+							"mode": "increased",
+							"stat": "flask_life_recovery_increased",
+							"value": 0.2
+						},
+						{
+							"mode": "increased",
+							"stat": "flask_mana_recovery_increased",
+							"value": 0.2
+						}
+					],
+					"status": "partial",
+					"supported": [
 						"10% increased Flask Charges gained",
 						"20% increased Life and Mana Recovery from Flasks"
+					],
+					"unsupported": [
+						"24% increased Damage over Time"
 					]
 				},
 				"has_position": false,
@@ -284590,11 +284967,18 @@
 			"41137": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "flask_life_recovery_increased",
+							"value": 0.3
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"30% increased Life Recovery from Flasks"
+					],
 					"unsupported": [
-						"30% increased Life Recovery from Flasks",
 						"Life Flasks gain a Charge when you hit an Enemy, no more than once each second"
 					]
 				},
@@ -285779,11 +286163,18 @@
 			"41509": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "flask_life_recovery_increased",
+							"value": 0.25
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"25% increased Life Recovery from Flasks"
+					],
 					"unsupported": [
-						"25% increased Life Recovery from Flasks",
 						"Life Flasks gain 1 Charge every 3 seconds",
 						"Remove Bleeding when you use a Life Flask"
 					]
@@ -286817,14 +287208,19 @@
 							"mode": "increased",
 							"stat": "max_health",
 							"value": 0.07
+						},
+						{
+							"mode": "increased",
+							"stat": "flask_life_recovery_increased",
+							"value": 0.3
 						}
 					],
 					"status": "partial",
 					"supported": [
-						"7% increased maximum Life"
+						"7% increased maximum Life",
+						"30% increased Life Recovery from Flasks"
 					],
 					"unsupported": [
-						"30% increased Life Recovery from Flasks",
 						"Life Flasks gain 1 Charge every 3 seconds"
 					]
 				},
@@ -289143,13 +289539,24 @@
 			"42981": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "flask_mana_recovery_increased",
+							"value": 0.1
+						},
+						{
+							"mode": "increased",
+							"stat": "flask_charges_gained_increased",
+							"value": 0.05
+						}
+					],
+					"status": "full",
+					"supported": [
 						"10% increased Mana Recovery from Flasks",
 						"5% increased Flask Charges gained"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "42981",
@@ -297126,12 +297533,19 @@
 			"4656": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"+5% chance to Suppress Spell Damage",
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "flask_life_recovery_increased",
+							"value": 0.12
+						}
+					],
+					"status": "partial",
+					"supported": [
 						"12% increased Life Recovery from Flasks"
+					],
+					"unsupported": [
+						"+5% chance to Suppress Spell Damage"
 					]
 				},
 				"has_position": true,
@@ -304897,14 +305311,19 @@
 							"mode": "increased",
 							"stat": "max_mana",
 							"value": 0.15
+						},
+						{
+							"mode": "increased",
+							"stat": "flask_mana_recovery_increased",
+							"value": 0.2
 						}
 					],
 					"status": "partial",
 					"supported": [
-						"15% increased maximum Mana"
+						"15% increased maximum Mana",
+						"20% increased Mana Recovery from Flasks"
 					],
 					"unsupported": [
-						"20% increased Mana Recovery from Flasks",
 						"25% chance to gain a Power Charge when you use a Mana Flask"
 					]
 				},
@@ -307167,11 +307586,18 @@
 			"50690": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "flask_charges_gained_increased",
+							"value": 0.15
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"15% increased Flask Charges gained"
+					],
 					"unsupported": [
-						"15% increased Flask Charges gained",
 						"Life Flasks gain 2 Charges every 3 seconds",
 						"Mana Flasks gain 2 Charges every 3 seconds"
 					]
@@ -307261,11 +307687,18 @@
 			"5075": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "flask_charges_gained_increased",
+							"value": 0.2
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"20% increased Flask Charges gained"
+					],
 					"unsupported": [
-						"20% increased Flask Charges gained",
 						"10% increased Movement Speed while under no Flask Effects"
 					]
 				},
@@ -307870,13 +308303,24 @@
 			"51042": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "flask_life_recovery_increased",
+							"value": 0.1
+						},
+						{
+							"mode": "increased",
+							"stat": "flask_mana_recovery_increased",
+							"value": 0.1
+						}
+					],
+					"status": "full",
+					"supported": [
 						"10% increased Life Recovery from Flasks",
 						"10% increased Mana Recovery from Flasks"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": false,
 				"id": "51042",
@@ -314126,11 +314570,18 @@
 			"53802": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "flask_charges_gained_increased",
+							"value": 0.25
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"25% increased Flask Charges gained"
+					],
 					"unsupported": [
-						"25% increased Flask Charges gained",
 						"15% increased Mana Recovery Rate during Effect of any Mana Flask"
 					]
 				},
@@ -319976,11 +320427,18 @@
 			"56207": {
 				"blighted_only": true,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "flask_life_recovery_increased",
+							"value": 0.15
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"15% increased Life Recovery from Flasks"
+					],
 					"unsupported": [
-						"15% increased Life Recovery from Flasks",
 						"25% less Damage over Time taken during Effect of any Life Flask"
 					]
 				},
@@ -321485,12 +321943,24 @@
 			"56886": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "flask_life_recovery_increased",
+							"value": 0.25
+						},
+						{
+							"mode": "increased",
+							"stat": "flask_mana_recovery_increased",
+							"value": 0.25
+						}
+					],
+					"status": "partial",
+					"supported": [
 						"25% increased Life Recovery from Flasks",
-						"25% increased Mana Recovery from Flasks",
+						"25% increased Mana Recovery from Flasks"
+					],
+					"unsupported": [
 						"10% increased Flask Effect Duration"
 					]
 				},
@@ -325870,15 +326340,20 @@
 							"mode": "flat",
 							"stat": "cold_resistance",
 							"value": 0.2
+						},
+						{
+							"mode": "increased",
+							"stat": "flask_life_recovery_increased",
+							"value": 0.2
 						}
 					],
 					"status": "partial",
 					"supported": [
-						"+20% to Cold Resistance"
+						"+20% to Cold Resistance",
+						"20% increased Life Recovery from Flasks"
 					],
 					"unsupported": [
-						"8% increased Attack and Cast Speed",
-						"20% increased Life Recovery from Flasks"
+						"8% increased Attack and Cast Speed"
 					]
 				},
 				"has_position": false,
@@ -327424,11 +327899,18 @@
 			"59800": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "flask_charges_gained_increased",
+							"value": 0.1
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"10% increased Flask Charges gained"
+					],
 					"unsupported": [
-						"10% increased Flask Charges gained",
 						"Flasks applied to you have 5% increased Effect"
 					]
 				},
@@ -329491,13 +329973,24 @@
 			"60648": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "flask_mana_recovery_increased",
+							"value": 0.1
+						},
+						{
+							"mode": "increased",
+							"stat": "flask_charges_gained_increased",
+							"value": 0.05
+						}
+					],
+					"status": "full",
+					"supported": [
 						"10% increased Mana Recovery from Flasks",
 						"5% increased Flask Charges gained"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "60648",
@@ -337756,12 +338249,19 @@
 			"6383": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"+5% chance to Suppress Spell Damage",
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "flask_life_recovery_increased",
+							"value": 0.12
+						}
+					],
+					"status": "partial",
+					"supported": [
 						"12% increased Life Recovery from Flasks"
+					],
+					"unsupported": [
+						"+5% chance to Suppress Spell Damage"
 					]
 				},
 				"has_position": true,
@@ -347892,15 +348392,19 @@
 							"mode": "increased",
 							"stat": "max_health",
 							"value": 0.04
+						},
+						{
+							"mode": "increased",
+							"stat": "flask_life_recovery_increased",
+							"value": 0.1
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
-						"4% increased maximum Life"
-					],
-					"unsupported": [
+						"4% increased maximum Life",
 						"10% increased Life Recovery from Flasks"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "8930",
@@ -348008,15 +348512,19 @@
 							"mode": "increased",
 							"stat": "max_health",
 							"value": 0.08
+						},
+						{
+							"mode": "increased",
+							"stat": "flask_life_recovery_increased",
+							"value": 0.2
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
-						"8% increased maximum Life"
-					],
-					"unsupported": [
+						"8% increased maximum Life",
 						"20% increased Life Recovery from Flasks"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": false,
 				"id": "8949",
@@ -356582,7 +357090,7 @@
 		},
 		"reserved_character_key": "C",
 		"retired_profile_writes": false,
-		"save_version": 22,
+		"save_version": 23,
 		"services": [
 			{
 				"description": "免费测试供应全部已实现主动与辅助宝石。",
