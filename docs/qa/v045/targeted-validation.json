@@ -1,0 +1,176 @@
+{
+  "baseline_commit": "64480de39e2fb84279e58b25ec21add549dd1bdd",
+  "tested_stage_commit": "1a622520c571109b3621c7edbee01fe4c2cb3bc2",
+  "reports": [
+    {
+      "test": "res://tests/burn_rules_runtime_test.gd",
+      "checks": 776,
+      "failures": 0,
+      "path": "docs/qa/v045/burn-pure-run-02.log",
+      "sha256": "8f6c275181a8827c3e8b8414be250c3a5dd8b6dd8a72726f9d817878c7326038"
+    },
+    {
+      "test": "res://tests/ignite_gem_migration_test.gd",
+      "checks": 462,
+      "failures": 0,
+      "path": "docs/qa/v045/ignite-migration-test.log.txt",
+      "sha256": "7d1e91f504a3e7836af196fa697875275bceb090e51bd10eb71257e2eb33c9f9"
+    },
+    {
+      "test": "res://tests/ignite_compilation_test.gd",
+      "checks": 531,
+      "failures": 0,
+      "path": "docs/qa/v045/ignite-compile-focused.log.txt",
+      "sha256": "f1da7f58a30dd01b23b9ddba989d1fd235ec7f73a0125fbc3c655f6c09d23956"
+    },
+    {
+      "test": "res://tests/ignite_gameplay_test.gd",
+      "checks": 66,
+      "failures": 0,
+      "path": "docs/qa/v045/gameplay-final.log.txt",
+      "sha256": "4b690d306d25fa82a1c5bea307200f82ed2987bbe731faa72c06357a09c1f4e6"
+    },
+    {
+      "test": "res://tests/ignite_boundaries_test.gd",
+      "checks": 477,
+      "failures": 0,
+      "path": "docs/qa/v045/boundaries-final.log.txt",
+      "sha256": "0058362025a442e75819a2e27b019433ba2c0d8c30b9314d8ec417f315015fbc"
+    },
+    {
+      "test": "res://tests/ignite_acquisition_test.gd",
+      "checks": 19,
+      "failures": 0,
+      "path": "docs/qa/v045/acquisition-initial.log.txt",
+      "sha256": "facfd140315275b534da038f2ebe5f2d6c1d063f73a642fe1f4a1a73f759300e"
+    },
+    {
+      "test": "res://tests/ignite_event_tie_test.gd",
+      "checks": 7,
+      "failures": 0,
+      "path": "docs/qa/v045/event-ties-final.log.txt",
+      "sha256": "61d93ddaf3fbf23c0d37dddbb1bc613c36bdccf7c14d265eb123c686bd64ef7e"
+    },
+    {
+      "test": "res://tests/burn_presentation_test.gd",
+      "checks": 21,
+      "failures": 0,
+      "path": "docs/qa/v045-root-ui/presentation-final.log",
+      "sha256": "f5de99ddd49d0def9d8dd638a63aa7c853a2f079abb8ff28b665f7da7840b62d"
+    }
+  ],
+  "checks": 2359,
+  "logs": {
+    "docs/qa/v045/acquisition-initial.log.txt": "facfd140315275b534da038f2ebe5f2d6c1d063f73a642fe1f4a1a73f759300e",
+    "docs/qa/v045/boundaries-final.log.txt": "0058362025a442e75819a2e27b019433ba2c0d8c30b9314d8ec417f315015fbc",
+    "docs/qa/v045/boundaries-initial.log.txt": "0058362025a442e75819a2e27b019433ba2c0d8c30b9314d8ec417f315015fbc",
+    "docs/qa/v045/burn-pure-run-01.log": "7c882027ffa1904e5cd764f5787f813eb1e42fb05c4853e6be79d4f02b107e91",
+    "docs/qa/v045/burn-pure-run-02.log": "8f6c275181a8827c3e8b8414be250c3a5dd8b6dd8a72726f9d817878c7326038",
+    "docs/qa/v045/event-ties-final.log.txt": "61d93ddaf3fbf23c0d37dddbb1bc613c36bdccf7c14d265eb123c686bd64ef7e",
+    "docs/qa/v045/event-ties-initial.log.txt": "9c75e2f558e04e884dd8a68e9b88f79e39cd00fca02440edf45104ca823a31ea",
+    "docs/qa/v045/event-ties-second.log.txt": "0f774162d22fbe38e568481ba505fe1ff1cdaa47beade150cf143b95eefc6269",
+    "docs/qa/v045/font-final.log.txt": "1adf3a1754ab5b6e447c3fd8f654d4bcb3c99f2fb39e8a88c51684a85e8003d5",
+    "docs/qa/v045/font-initial.log.txt": "184c03b2211644b8bc476ee3cc462ee46377a193f158d84f0aed23f29ff58109",
+    "docs/qa/v045/font-regenerate.log.txt": "9ac19c96ace1371aaf455e74adea8ab7d21746b6e26a49d8c00b455809ef0601",
+    "docs/qa/v045/gameplay-final.log.txt": "4b690d306d25fa82a1c5bea307200f82ed2987bbe731faa72c06357a09c1f4e6",
+    "docs/qa/v045/gameplay-initial.log.txt": "ceedb3c052a770631f04ddc0234cfc8a1db18bc4a24554db13fb55fe5cda203a",
+    "docs/qa/v045/gameplay-second.log.txt": "4b690d306d25fa82a1c5bea307200f82ed2987bbe731faa72c06357a09c1f4e6",
+    "docs/qa/v045/ignite-compile-current.log.txt": "8b8895f51911b3ab368964531677c7b04cf13434b442999709586805b286629f",
+    "docs/qa/v045/ignite-compile-focused.log.txt": "f1da7f58a30dd01b23b9ddba989d1fd235ec7f73a0125fbc3c655f6c09d23956",
+    "docs/qa/v045/ignite-compile-v44.log.txt": "994858dcd2852a343755d83ab3ca16f6c0165da613913798032d46158543451a",
+    "docs/qa/v045/ignite-migration-capture.log.txt": "6afe3968f631dbdbf8100bb0e118735108c2e9e92e93bbd97384615e31ff360b",
+    "docs/qa/v045/ignite-migration-first-default-gift.log.txt": "301a9c2b524781687c9eaba34e438180d06d63a0de1b12b851c7bd9219eac17c",
+    "docs/qa/v045/ignite-migration-test.log.txt": "7d1e91f504a3e7836af196fa697875275bceb090e51bd10eb71257e2eb33c9f9",
+    "docs/qa/v045/import-final.log.txt": "1f6a773cc08c6f1392c1fcde7fc8a61dc265cada927fcef4ef76182a5616b759",
+    "docs/qa/v045/import-initial.log.txt": "8b016113a334359a29936ea2c32c10e3257f9866f671f491b711ade1bc47e89f",
+    "docs/qa/v045/import-metadata.log.txt": "5fd8523ff63709f3e5169d1f82dca2142dcda17074ddbb34d670ba692954cd29",
+    "docs/qa/v045/reference-build.log.txt": "9dc3fd6f8e1d98e75f127a2c39994ac60dc495632e9cbbf13f09544a4f25d64b",
+    "docs/qa/v045/reference-export.log.txt": "51e3b0bc619efba5c710e1863eedea0402e6700d8c973b9ecb758418906e7297",
+    "docs/qa/v045/reference-validation-initial.log.txt": "dfbb5f0a47345fd800665a2c070659b453760edc4ece4cbc5a74764e0f4a6e0a",
+    "docs/qa/v045/reference-validation-second.log.txt": "43cf71bfb10dae96711cd1f78f448fb976b89dee4fc71fcbfb3a8cffe90bd0f0",
+    "docs/qa/v045/reference-validation.log.txt": "fcf25de7fa725db392f174a214d366cd5824ade27e7a9ccf0b3b68532a8115d9",
+    "docs/qa/v045/zero-after.log.txt": "0cdfaffd8111fe0c56aab147b54593cb422bc24a365a79d4821092b8ee928bc0",
+    "docs/qa/v045/zero-before.log.txt": "0cdfaffd8111fe0c56aab147b54593cb422bc24a365a79d4821092b8ee928bc0",
+    "docs/qa/v045-root-ui/presentation-final.log": "f5de99ddd49d0def9d8dd638a63aa7c853a2f079abb8ff28b665f7da7840b62d",
+    "docs/qa/v045-root-ui/presentation-integrated.log": "567cd49a55a86f693aaadbcdbf9e79c2ff455eb24780e80516defe8bbb5c0524",
+    "docs/qa/v045-root-ui/presentation.log": "7c77e7381c5105c7211a38a7ec93299436ab37967f250652ecc69f2082f46214"
+  },
+  "production_inputs": 438,
+  "reused_source_differences": [
+    {
+      "evidence": "docs/qa/v045/burn-pure-tested-files.json",
+      "path": "scripts/combat/burn_runtime.gd",
+      "tested_sha256": "60168fa420639c005556a5274616822c063382493ad365ac3dceb33cc03f9c32",
+      "final_sha256": "ad4e305a6c95053f838954dba0169e4baec3c66981ccc51033f3a49b090fadb5",
+      "reason": "Pure runtime adds only7line read-only clock getter, original mutation/integration bytes unchanged; actual tie7 and affected main66/boundaries477 validated after integration"
+    },
+    {
+      "evidence": "docs/qa/v045/burn-pure-tested-files.json",
+      "path": "project.godot",
+      "tested_sha256": "a9b9586e5c0ac2ceb8ae74220f2721b6f651d1cbf3fc938e94a642078c540f1c",
+      "final_sha256": "ec8ee895017290641a391c607aad3ffa5cfd274b041169abc523444779e9f9dc",
+      "reason": "Release version and default scoped validation routing only"
+    },
+    {
+      "evidence": "docs/qa/v045/burn-pure-tested-files.json",
+      "path": "tools/validate.sh",
+      "tested_sha256": "45e3b37f1832dbd21103aa48672e3ee731cb4f05db2b2de3ecbac6ce3966d077",
+      "final_sha256": "7629611aced5ad8dfa78a2c63219917e0817e7095e3b90114d13b414d730b5d8",
+      "reason": "Release version and default scoped validation routing only"
+    },
+    {
+      "evidence": "docs/qa/v045/ignite-compile-source-after.json",
+      "path": "scripts/combat/burn_runtime.gd",
+      "tested_sha256": "60168fa420639c005556a5274616822c063382493ad365ac3dceb33cc03f9c32",
+      "final_sha256": "ad4e305a6c95053f838954dba0169e4baec3c66981ccc51033f3a49b090fadb5",
+      "reason": "Pure runtime adds only7line read-only clock getter, original mutation/integration bytes unchanged; actual tie7 and affected main66/boundaries477 validated after integration"
+    }
+  ],
+  "zero_path": {
+    "equal": true,
+    "before": {
+      "cast_events": 51,
+      "damage_events": 18,
+      "digest": "f33e5fd38d0e4590ba597e696719da797ee135f568b283f0c07233eaead71a6d",
+      "enemies": 2,
+      "kills": 9,
+      "ordinary_admissions": 5,
+      "projectiles": 0,
+      "random_state": 2232223067556860617,
+      "reward_kills": 9,
+      "ticks": 180
+    },
+    "after": {
+      "cast_events": 51,
+      "damage_events": 18,
+      "digest": "f33e5fd38d0e4590ba597e696719da797ee135f568b283f0c07233eaead71a6d",
+      "enemies": 2,
+      "kills": 9,
+      "ordinary_admissions": 5,
+      "projectiles": 0,
+      "random_state": 2232223067556860617,
+      "reward_kills": 9,
+      "ticks": 180
+    },
+    "baseline_commit": "64480de39e2fb84279e58b25ec21add549dd1bdd",
+    "baseline_pck_sha256": "e0611f64aca665e4b2fe37d6bde54f56a3a633f0b7124f4ba9e98f2527d0fc0f",
+    "scope": "180ticks with9kills/51carrier events/18damage events; eachframe exactvarbytes of enemies/projectiles/rootqueue/RNG/completebuild(normalizedversion0)/resources/traces/cooldowns/flasks/critical/leech; excludes deliberate newember attack"
+  },
+  "root_final_commit": "77eea56",
+  "notes": [
+    "Frozen v44 oracle compares42 complete cast outputs exactly; wrapper .bin metadata may differ, not claimed entire .bin equality",
+    "Initial gift loop injected new ignite into historical14; fixed by minimum-version filtering, no relaxed validation",
+    "Pure test mixed-type harness first failure retained; gameplay first fixture read wrong MapRun property; roots snapshots correct after fix",
+    "Actual near-equal event tie oldtime/ID order preserved; relative same-tick per-target clamping only, core backward rejection retained",
+    "Initial reference check knew only64 rendered thumbnails; final checks also require exactlyone identical originalignite PNG, all65 entries covered",
+    "Acquisition19 and zero180 reuse since final main change only affects active-burn projectile ties; that specific path has final7/66/477 coverage"
+  ],
+  "schema": 28,
+  "old_milestone_definition_count": 26,
+  "current_catalog_gems": 27,
+  "item_png": 58,
+  "reference_png": 65,
+  "full_repeat": false,
+  "soak_600s": false,
+  "windows_native_tested": false
+}
