@@ -24,7 +24,8 @@ const V23_VERSION := 23
 const V24_VERSION := 24
 const V25_VERSION := 25
 const V26_VERSION := 26
-const VERSION := 27
+const V27_VERSION := 27
+const VERSION := 28
 const LEGACY_MAX_ITEMS := 1024
 const V17_MAX_ITEMS := LEGACY_MAX_ITEMS + 1
 const MAX_ITEMS := V17_MAX_ITEMS + 2 # Two once-only migration bottles; bag capacity is unchanged.
@@ -53,6 +54,10 @@ static func decode_v25(raw:Variant)->Dictionary:
 
 static func decode_v26(raw: Variant) -> Dictionary:
 	return _decode(raw, true, V26_VERSION, true)
+
+
+static func decode_v27(raw: Variant) -> Dictionary:
+	return _decode(raw, true, V27_VERSION, true)
 
 
 static func decode_v24(raw:Variant)->Dictionary:
@@ -166,6 +171,10 @@ static func reason_v26(value: Variant, validate_talents: Callable = Callable(), 
 	return _reason(value, V26_VERSION, true, true, MAX_ITEMS, validate_talents, socket_ids)
 
 
+static func reason_v27(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
+	return _reason(value, V27_VERSION, true, true, MAX_ITEMS, validate_talents, socket_ids)
+
+
 static func reason_v24(value:Variant,validate_talents:Callable=Callable(),socket_ids:Array=[])->String:
 	return _reason(value,V24_VERSION,true,true,MAX_ITEMS,validate_talents,socket_ids)
 
@@ -230,7 +239,7 @@ static func _reason(value: Variant, expected_version: int, paged: bool, allow_cu
 	if allow_currency and not Currency.total_quantity(value.items).ok: return "校准碎片堆或全库存数量无效"
 	for uid: String in value.items:
 		var instance: Dictionary=value.items[uid]
-		if instance.kind in ["skill_gem","support_gem"] and Items.Gems.minimum_save_version(instance.definition_id)>expected_version: return "此存档版本不能包含新增主动宝石"
+		if instance.kind in ["skill_gem","support_gem"] and Items.Gems.minimum_save_version(instance.definition_id)>expected_version: return "此存档版本不能包含新增宝石"
 		var serial: int = Equipment.serial_from_id(uid) if uid.begins_with("gear_") else Jewels.serial_from_id(uid) if uid.begins_with("jewel_") else _item_serial(uid)
 		if serial >= value.next_item_serial: return "物品序号不得重用"
 	if not value.skill_groups is Array or value.skill_groups.size() < 10 or value.skill_groups.size() > MAX_GROUPS: return "技能行数量无效"

@@ -10,6 +10,7 @@ const PagedMigration = preload("res://scripts/save/paged_bag_migration.gd")
 const HotkeyMigration = preload("res://scripts/save/reserved_hotkey_migration.gd")
 const NormalJourneyMigration=preload("res://scripts/save/normal_journey_migration.gd")
 const EquipmentAffixMigration = preload("res://scripts/save/equipment_affix_migration.gd")
+const IgniteGemMigration = preload("res://scripts/save/ignite_gem_migration.gd")
 const SourceLeechMigration=preload("res://scripts/save/source_leech_migration.gd")
 const SourceCriticalMigration=preload("res://scripts/save/source_critical_migration.gd")
 const SourceFlaskMigration=preload("res://scripts/save/source_flask_migration.gd")
@@ -46,8 +47,9 @@ func _init() -> void:
 	var source_v19:Dictionary = HotkeyMigration.migrate_v18(FlaskMigration.migrate_v17(ActiveMigration.migrate_v16(CurrencyMigration.migrate_v15(paged_default, _socket_ids), _talent_validator, _socket_ids),_talent_validator,_socket_ids),_talent_validator,_socket_ids)
 	var source_v23:Dictionary=SourceFlaskMigration.migrate_v22(ResourceMigration.migrate_v21(RechargeMigration.migrate_v20(SpatialMigration.migrate_v19(source_v19,_talent_validator,_socket_ids),_talent_validator,_socket_ids),_talent_validator,_socket_ids),_talent_validator,_socket_ids)
 	var source_v25:Dictionary=SourceLeechMigration.migrate_v24(SourceCriticalMigration.migrate_v23(source_v23,_talent_validator,_socket_ids),_talent_validator,_socket_ids)
-	_current=EquipmentAffixMigration.migrate_v26(NormalJourneyMigration.migrate_v25(source_v25,_talent_validator,_socket_ids),_talent_validator,_socket_ids)
-	assert(not _current.is_empty() and Rules.reason(_current).is_empty(), "The built-in canonical fixture must migrate to v27")
+	var source_v27: Dictionary = EquipmentAffixMigration.migrate_v26(NormalJourneyMigration.migrate_v25(source_v25,_talent_validator,_socket_ids),_talent_validator,_socket_ids)
+	_current = IgniteGemMigration.migrate_v27(source_v27, _talent_validator, _socket_ids)
+	assert(not _current.is_empty() and Rules.reason(_current).is_empty(), "The built-in canonical fixture must migrate to v28")
 	_current.migration_ledger.from_version = 0
 
 
@@ -111,7 +113,9 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	var old_version := int(raw.version)
 	if old_version > Rules.VERSION: return _reject(path, "存档属于未来版本，已保护原文件")
 	var candidate: Dictionary = {}
-	if old_version < Rules.VERSION:
+	if old_version == Rules.V27_VERSION:
+		candidate = Rules.decode_v27(raw)
+	elif old_version < Rules.V27_VERSION:
 		var source_v26: Dictionary = {}
 		if old_version == Rules.V26_VERSION:
 			source_v26 = Rules.decode_v26(raw)
@@ -190,6 +194,8 @@ func load_build(path: String = "user://build_save.json") -> bool:
 		candidate = EquipmentAffixMigration.migrate_v26(source_v26, _talent_validator, _socket_ids)
 	else:
 		candidate = Rules.decode(raw)
+	if old_version < Rules.VERSION:
+		candidate = IgniteGemMigration.migrate_v27(candidate, _talent_validator, _socket_ids)
 	var reason: String = Rules.reason(candidate, _talent_validator, _socket_ids)
 	if not reason.is_empty(): return _reject(path, reason)
 	var loaded_revision: int = int(candidate.revision)

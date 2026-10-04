@@ -73,6 +73,8 @@ static func migrate(raw: Variant) -> Dictionary:
 	var support_ids: Array = Supports.SUPPORTS.keys()
 	support_ids.sort()
 	for support_id: String in support_ids:
+		# This itemization step only grants the frozen schema14 vocabulary.
+		if Gems.minimum_save_version("support:" + support_id) > VERSION: continue
 		if not represented_supports.has(support_id) and _new_gem(result, "support:" + support_id).is_empty():
 			return {}
 	var metadata: Dictionary = Items.metadata_for_items(result.items)

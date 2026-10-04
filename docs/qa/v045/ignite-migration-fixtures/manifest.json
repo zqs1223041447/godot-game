@@ -1,0 +1,40 @@
+{
+  "application_version": "0.44.0",
+  "schema": 27,
+  "source_commit": "64480de39e2fb84279e58b25ec21add549dd1bdd",
+  "capture": "External ignite-migration-capture.gd run against retained released v44 game.pck. Snapshots use released normal map, XP, reward, equipment, binding and crafting APIs. No new-source decoder or decremented current version creates old fixtures. Literal CRLF and surrounding whitespace test raw-byte backup. Oracle comes from the same released pack.",
+  "pack_file": "v044-final-release/game.pck",
+  "pack": {
+    "bytes": 20921444,
+    "sha256": "e0611f64aca665e4b2fe37d6bde54f56a3a633f0b7124f4ba9e98f2527d0fc0f"
+  },
+  "capture_script": "docs/qa/v045/ignite-migration-capture.gd",
+  "capture_script_signature": {
+    "bytes": 4944,
+    "sha256": "8553a837dddefb5087e7dff192302c6b81462f8233b3c014340700299bcd8343"
+  },
+  "isolation": "/tmp/godot-m1-v045-ignite-fixture/run2/{data,config,cache}",
+  "no_user_save_reads_or_writes": true,
+  "normal_journey_source_signature": {
+    "bytes": 10109,
+    "sha256": "10b2ba7db25764a0ad34f447ed71acb4a876a49e26bd6fa824056d1e1fee0f89"
+  },
+  "files": {
+    "v27-active.json": {
+      "bytes": 17353,
+      "sha256": "239f1b91744f9defb146dc92eabd68d3156ac25432ccc85fdbcfdecb0708f007"
+    },
+    "v27-default.json": {
+      "bytes": 14788,
+      "sha256": "c68c0cdf8b58b8ef0459810dcd7e065a2ed374a65a4c2300dda3c58713824233"
+    },
+    "v27-pending.json": {
+      "bytes": 17201,
+      "sha256": "f88b57a26fe5c6c54526db72072d1e333a732afb67e808279a80b06b4d290e54"
+    },
+    "v27-vocabulary-oracle.json": {
+      "bytes": 4627,
+      "sha256": "c9933cde600cdd302eba1b0945cb5d05b059becf4816549d6f40aad642ddcc3b"
+    }
+  }
+}

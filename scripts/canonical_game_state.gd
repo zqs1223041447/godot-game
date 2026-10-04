@@ -565,7 +565,9 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	var loaded:=super.load_build(path)
 	if loaded and old_version>0 and old_version<Rules.VERSION:
 		migrated_from_legacy=true
-		if old_version==24:
+		if old_version == Rules.V27_VERSION:
+			migration_message="旧存档已原字节备份，点燃辅助宝石已开放购买；原物品、技能组、天赋与普通旅程保持，不额外赠物。"
+		elif old_version==24:
 			migration_message="旧存档已原字节备份，生命与法力偷取已接入；原物品、节点与点数预算保持。偷取按实际扣除的敌人生命与护盾计算。"
 		elif old_version==23:
 			migration_message="旧存档已原字节备份，暴击构筑已接入；玩家基础暴击5%、暴击伤害150%。原物品、节点与点数预算保持。"
