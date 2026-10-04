@@ -1,0 +1,16 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+godot-game: playable arena ready
+ERROR: Both actors admit the same complete recharge bundle
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/source_recharge_gameplay_test.gd:14)
+       [1] enemy_scenario (res://tests/source_recharge_gameplay_test.gd:69)
+       [2] run (res://tests/source_recharge_gameplay_test.gd:21)
+ERROR: Real monster admission consumes shared complete bundle
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/source_recharge_gameplay_test.gd:14)
+       [1] enemy_scenario (res://tests/source_recharge_gameplay_test.gd:72)
+       [2] run (res://tests/source_recharge_gameplay_test.gd:21)
+Source recharge gameplay: 39 checks, 2 failures

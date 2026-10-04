@@ -6,6 +6,7 @@ const Gear = preload("res://scripts/items/equipment_catalog.gd")
 const Flasks=preload("res://scripts/items/flask_catalog.gd")
 const Gems = preload("res://scripts/items/gem_catalog.gd")
 const Slots = preload("res://scripts/items/equipment_slots.gd")
+const Defense=preload("res://scripts/mechanics/defense_rules.gd")
 const Combat = preload("res://scripts/combat/combat_data.gd")
 const Compiler = preload("res://scripts/combat/skill_compiler.gd")
 const Data = preload("res://scripts/game_data.gd")
@@ -184,7 +185,7 @@ func _prepare_candidate(candidate: Dictionary) -> Dictionary:
 static func _stats_for(candidate: Dictionary) -> Dictionary:
 	var stats: Dictionary = Legacy.BASE_STATS.duplicate(true)
 	stats.additional_skill_slots = 0.0
-	for stat: String in ["strength","dexterity","intelligence","physical_increased","chaos_increased","melee_physical_increased","attack_physical_increased","accuracy_increased","evasion_increased","armour","armour_increased","cold_resistance","lightning_resistance","life_regen","life_regen_percent","area_size_increased","spell_area_size_increased","melee_area_size_increased","projectile_speed_increased"]:
+	for stat: String in ["strength","dexterity","intelligence","physical_increased","chaos_increased","melee_physical_increased","attack_physical_increased","accuracy_increased","evasion_increased","armour","armour_increased","cold_resistance","lightning_resistance","life_regen","life_regen_percent","area_size_increased","spell_area_size_increased","melee_area_size_increased","projectile_speed_increased","shield_recharge_rate_increased","shield_recharge_start_faster"]:
 		stats[stat] = 0.0
 	# Authored base ratings for this arena, not a copied monster/level table.
 	stats.accuracy = 100.0
@@ -197,6 +198,9 @@ static func _stats_for(candidate: Dictionary) -> Dictionary:
 	stats = SourceTree.apply_stats(stats,candidate)
 	for rate: String in ["attack_speed", "move_speed", "mana_regen"]:
 		stats[rate] *= 1.0 + float(stats[rate + "_increased"])
+	var recharge:=Defense.recharge_profile(stats,"player")
+	assert(recharge.ok,"Validated source recharge stats must compile")
+	stats.shield_recharge_rate=recharge.rate;stats.shield_recharge_delay=recharge.delay
 	return stats
 
 
@@ -546,7 +550,9 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	var loaded:=super.load_build(path)
 	if loaded and old_version>0 and old_version<Rules.VERSION:
 		migrated_from_legacy=true
-		if old_version==Rules.V19_VERSION:
+		if old_version==Rules.V20_VERSION:
+			migration_message="旧存档已原字节备份，源天赋护盾充能已接入；原物品、节点与点数预算保持，不额外赠物。"
+		elif old_version==Rules.V19_VERSION:
 			migration_message="旧存档已原字节备份，源天赋范围与投射速度已接入；原物品、已分配节点和点数预算保持，不额外赠物。"
 		elif old_version==Rules.V18_VERSION:
 			migration_message="旧存档已原字节备份，C已预留给角色属性；原物品与技能组保持。"

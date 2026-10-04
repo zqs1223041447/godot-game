@@ -240,7 +240,9 @@ static func make_enemy(id: int, template_id: String, wave: int, position: Vector
 	var hp: float = float(species.health) * (1.0 + (wave - 1) * 0.16) * float(tier.health) + float(modifiers.get("max_health", 0.0))
 	var maximum_shield: float = float(modifiers.get("max_shield", 0.0))
 	var defense: Dictionary = Defense.defense_profile(template.get("defense_stats", {}), "monster")
-	return {"id": id, "template_id": template_id, "name": template.get("name", template_id), "kind": kind,
+	var recharge:=Defense.recharge_profile(modifiers,"monster")
+	if not recharge.ok:return {}
+	var result:Dictionary={"id": id, "template_id": template_id, "name": template.get("name", template_id), "kind": kind,
 		"rarity": rarity, "mechanism_ids": resolved.mechanism_ids.duplicate(),
 		"mechanism_schema": resolved.schema_version, "mechanism_revision": resolved.definition_revision, "mechanism_policy": resolved.policy_version, "mechanism_stats": modifiers.duplicate(),
 		"pos": position, "health": hp, "max_health": hp, "shield": maximum_shield, "max_shield": maximum_shield,
@@ -256,6 +258,9 @@ static func make_enemy(id: int, template_id: String, wave: int, position: Vector
 		"death_spawns": template.get("death_spawns", []).duplicate(true), "death_processed": false,
 		"root_id": id, "generation": 0, "wave": wave, "reward_eligible": true,
 		"xp_reward": (6 if kind == 2 else 3) * int(tier.xp)}
+	if float(modifiers.get("shield_recharge_rate_increased",0.0))!=0.0 or float(modifiers.get("shield_recharge_start_faster",0.0))!=0.0:
+		result.shield_recharge_rate=recharge.rate;result.shield_recharge_delay=recharge.delay
+	return result
 
 static func mechanism_text(enemy: Dictionary) -> String:
 	var labels: PackedStringArray = []

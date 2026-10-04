@@ -454,7 +454,7 @@ func _tick(delta: float) -> void:
 	health = minf(float(_stats.max_health),health+float(flask_gain.health))
 	mana = minf(float(_stats.max_mana),mana+float(flask_gain.mana))
 	if damage_delay <= 0.0:
-		shield = minf(float(_stats.max_shield), shield + float(_stats.shield_regen) * shield_recovery_time)
+		shield = minf(float(_stats.max_shield), shield + float(_stats.get("shield_recharge_rate",_stats.shield_regen)) * shield_recovery_time)
 	_move_player(delta)
 	_update_spawning(delta)
 	_update_enemies(delta)
@@ -787,7 +787,7 @@ func _update_enemies(delta: float) -> void:
 		var shield_recovery_time: float = maxf(0.0, delta - float(enemy.get("damage_delay", 0.0)))
 		enemy.damage_delay = maxf(0.0, float(enemy.get("damage_delay", 0.0)) - delta)
 		if float(enemy.damage_delay) <= 0.0:
-			enemy.shield = minf(float(enemy.get("max_shield", 0.0)), float(enemy.get("shield", 0.0)) + float(enemy.get("shield_regen", 0.0)) * shield_recovery_time)
+			enemy.shield = minf(float(enemy.get("max_shield", 0.0)), float(enemy.get("shield", 0.0)) + float(enemy.get("shield_recharge_rate",enemy.get("shield_regen",0.0))) * shield_recovery_time)
 		enemy.attack_timer = maxf(0.0, float(enemy.attack_timer) - delta)
 		enemy.flash = maxf(0.0, float(enemy.flash) - delta)
 		enemy.slow = maxf(0.0, float(enemy.slow) - delta)
@@ -1195,7 +1195,7 @@ func _apply_enemy_settlement(enemy: Dictionary, settlement: Dictionary, color: C
 		return
 	var absorbed: float = float(settlement.shield_spent)
 	enemy.shield = float(settlement.remaining_shield)
-	enemy.damage_delay = 4.0
+	enemy.damage_delay = float(enemy.get("shield_recharge_delay",Defense.RECHARGE_BASE_DELAY))
 	# Keep the historical signed corpse value; actual life loss is bounded in the trace.
 	enemy.health = float(settlement.remaining_health) - float(settlement.overkill)
 	visual_cues.emit_cue("impact", Vector2(enemy.pos), {"radius": clampf(7.0 + sqrt(amount) * 0.65, 8.0, 24.0), "color": color, "shielded": absorbed >= amount, "target_id": int(enemy.id)})
@@ -1348,7 +1348,7 @@ func hit_player_components(components: Variant, source_id: int = 0, delivery_tag
 	if incoming_damage_trace.size() > 32:
 		incoming_damage_trace.pop_front()
 	visual_cues.emit_cue("hurt", player_pos, {"shielded": absorbed >= amount})
-	damage_delay = 4.0
+	damage_delay = float(_stats.get("shield_recharge_delay",Defense.RECHARGE_BASE_DELAY))
 	invulnerable = 0.32
 	hurt_flash = 0.16
 	screen_shake = 2.5

@@ -8,14 +8,14 @@ const Balance = preload("res://scripts/mechanics/passive_balance_adapter.gd")
 const SCHEMA_VERSION: int = 1
 const PLAYER_STATS: Array[String] = [
 	"damage", "max_health", "max_mana", "max_shield", "attack_speed", "move_speed",
-	"mana_regen", "shield_regen", "fire_resistance",
+	"mana_regen", "shield_regen", "fire_resistance", "shield_recharge_rate_increased", "shield_recharge_start_faster",
 	"global_increased", "projectile_increased", "elemental_increased", "area_increased",
 	"spell_increased", "fire_increased", "cold_increased", "lightning_increased",
 	"attack_elemental_increased", "attack_speed_increased", "move_speed_increased", "mana_regen_increased",
 	"attack_added_physical", "attack_added_fire", "spell_added_cold", "spell_added_lightning",
 ]
 const MONSTER_STATS: Array[String] = [
-	"damage", "max_health", "max_shield", "attack_speed", "move_speed", "shield_regen", "fire_resistance",
+	"damage", "max_health", "max_shield", "attack_speed", "move_speed", "shield_regen", "fire_resistance", "shield_recharge_rate_increased", "shield_recharge_start_faster",
 ]
 # Explicit compatibility spellings. Never infer an alias from a prefix or substring.
 # Saves retain stable tree node IDs; item-instance migrations do not rewrite them.

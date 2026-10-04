@@ -8,6 +8,18 @@ const Damage = preload("res://scripts/combat/damage_resolver.gd")
 const STAGE: String = "hit_mitigation"
 const FIRE_RESISTANCE_CAP: float = 0.75
 const ACTORS: Array[String] = ["player", "monster"]
+const RECHARGE_BASE_DELAY:=4.0
+
+
+static func recharge_profile(stats:Dictionary,actor:String="player")->Dictionary:
+	if actor not in ACTORS:return _failure("Unknown recharge actor")
+	for field:String in ["shield_regen","shield_recharge_rate_increased","shield_recharge_start_faster"]:
+		if not _amount(stats.get(field,0.0)):return _failure("Invalid shield recharge stat: "+field)
+	var base_rate:float=float(stats.get("shield_regen",0.0))
+	var rate:float=base_rate*(1.0+float(stats.get("shield_recharge_rate_increased",0.0)))
+	var delay:float=RECHARGE_BASE_DELAY/(1.0+float(stats.get("shield_recharge_start_faster",0.0)))
+	if not is_finite(rate) or not is_finite(delay) or delay<=0.0:return _failure("Shield recharge profile overflow")
+	return {"ok":true,"reason":"","base_rate":base_rate,"rate":rate,"delay":delay}
 
 
 static func supports_stat(stat: String, actor: String, stage: String = STAGE) -> bool:
