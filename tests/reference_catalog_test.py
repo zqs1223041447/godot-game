@@ -41,7 +41,7 @@ def main():
     import re
     gem_prices={k:int(v) for k,v in re.findall(r'data-gem-trade-id="([^"]+)" data-cost="([0-9]+)"',source)}
     assert gem_prices=={o['definition_id']:o['cost'] for o in data['normal_gem_trading']['offers']}, 'Normal gem prices differ from the real catalog'
-    assert data['normal_gem_trading']['recycle_credit']==1 and len(gem_prices)==26
+    assert data['normal_gem_trading']['recycle_credit']==1 and len(gem_prices)==len(data["skills"])+len(data["supports"])
     expected_telegraphs={}
     for key,attack in data['monster_attacks'].items():
         example=attack['example']; cases=example['cases']; p=attack['profile']
@@ -82,6 +82,9 @@ def main():
     assert 'skills-basic' not in inspector.ids and '#skills-basic' not in inspector.links, 'Basic attack must not invent an additional active skill'
     assert '#rules-basic_attack' in inspector.links and '#weapon_stages-weapon_local' in inspector.links
     assert len(data['skills'])==10 and len(data['equipment'])==14 and len(data['affixes'])==30
+    assert data['burning']['player_policy']=={'duration':3.0,'rate_fraction':0.3,'hit_multiplier':0.75,'mana_multiplier':1.2}
+    assert data['burning']['enemy_budget']['total_before_defense']==28 and data['canonical']['gem_reward']['normal_frozen_definition_count']==26
+    assert (REF/data['burning']['icon_file']).read_bytes()==(ROOT/'assets/ui/grimoire/ignite.png').read_bytes()
     assert data['current_loot_profile_id']=='canonical_v27'
     assert data['affixes']['attack_life_leech']['formatted_ranges'][0]=={'min':'+0.20%','max':'+0.30%'}
     assert data['affixes']['global_critical_multiplier']['formatted_ranges'][2]=={'min':'+12个百分点','max':'+15个百分点'}
@@ -118,8 +121,12 @@ def main():
     expected_art={(cat,key) for cat in ['skills','supports','equipment','fixed_items','jewels','monsters'] for key in data[cat]}
     expected_art.update(('flasks',key) for key in data.get('flasks',{}))
     actual_art={(('fixed_items' if row.get('entry_type')=='fixed_item' else row['category']),row['id']) for row in art['entries']}
+    # The legacy64 rendered thumbnails remain byte-identical; the new support
+    # is an explicitly retained original PNG, independently byte-checked above.
+    assert expected_art-actual_art=={('supports','ignite')} and not actual_art-expected_art, 'Only the declared original PNG may supplement the rendered manifest'
+    actual_art.add(('supports','ignite'))
     assert actual_art==expected_art, 'Art manifest omits or adds runtime entries'
-    assert len(inspector.assets)==len(art['entries']), 'Runtime artwork missing from an entry'
+    assert len(inspector.assets)==len(art['entries'])+1 and inspector.assets.count(data['burning']['icon_file'])==1, 'Runtime or original artwork missing from an entry'
     assert module.build(data,art)==source, 'Generated HTML is stale'
     assert module.build(data,art)==module.build(data,art), 'Nondeterministic generator'
     print(f'Reference catalog: {len(inspector.ids)} unique anchors, {len(inspector.links)} links, {len(inspector.assets)} local images; complete geometry and deterministic HTML passed')

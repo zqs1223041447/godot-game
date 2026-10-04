@@ -166,6 +166,8 @@ def build(data, art):
         aid = anchor(cat,key)
         img = art_by_id.get((cat,key))
         image = f'<img class="emblem" src="art/{esc(img["file"])}" width="64" height="64" alt="" loading="lazy">' if img else '<span class="fallback-emblem" aria-hidden="true">✧</span>'
+        if cat=='supports' and key=='ignite':
+            image=f'<img class="emblem" src="{esc(data["burning"]["icon_file"])}" width="64" height="64" alt="" loading="lazy">'
         badges = {'implemented':'已实现','research':'研究资料','planned':'尚未实现'}
         inner = f'<div class="entry-heading">{image}<div><span class="status {status}">{badges[status]}</span><h2><a href="#{aid}">{esc(name)}</a></h2><div class="entry-id">{esc(key)}</div></div></div>'
         if meta: inner += f'<div class="metadata">{meta}</div>'
@@ -210,7 +212,7 @@ def build(data, art):
         body += support_program_diagram(data['support_program_examples'][key],data['skills'],details)
         if key in ['breadth','concentrate']:
             body += area_diagram(data['area_support_examples'],data['skills'])
-        cards.append(add('supports',key,s['name'],s['description'],body,{'area':'范围辅助','projectile':'投射物辅助','resource':'资源辅助','element':'分量专注','delivery':'投射物辅助','control':'减速控制','chain':'连锁辅助'}[data['support_program_examples'][key]['family']],related=link('rules','supports')))
+        cards.append(add('supports',key,s['name'],s['description'],body,{'area':'范围辅助','projectile':'投射物辅助','resource':'资源辅助','element':'分量专注','delivery':'投射物辅助','control':'减速控制','chain':'连锁辅助','burning':'燃烧辅助'}[data['support_program_examples'][key]['family']],related=link('rules','supports')))
     for key,e in data['equipment'].items():
         body = facts([('格数',' × '.join(map(number,e['size']))),('固有属性',lines(e['stats_text']))])+details('可出现的词缀',links('affixes',e['eligible_affixes']))
         related=link('rules','equipment')
@@ -431,12 +433,12 @@ def build(data, art):
         c=data['canonical']; source=data['source_tree']; example=c['five_link_example']; defense=c['defense_example']
         rule_defs=[row for row in rule_defs if row[0] not in ['supports','allocation','shared','boundaries','sources']]
         bag_text=f"背包{c['bag_pages']}页，每页{c['bag_columns']}×{c['bag_rows']}格，共{c['bag_pages']*c['bag_columns']*c['bag_rows']}格。"
-        ownership='<figure><svg viewBox="0 0 650 150" role="img" aria-label="一件物品只有一个位置"><g fill="#ead3a2" stroke="#8c6b42"><rect x="10" y="45" width="190" height="60" rx="8"/><rect x="330" y="5" width="300" height="40" rx="8"/><rect x="330" y="55" width="300" height="40" rx="8"/><rect x="330" y="105" width="300" height="40" rx="8"/></g><g stroke="#79571f" fill="none"><path d="M200 75H260V25H330M260 75H330M260 75V125H330"/></g><g fill="#3b281b" font-size="16" text-anchor="middle"><text x="105" y="80">唯一 UID · 独立实例</text><text x="480" y="31">2页×8×6 背包 / 九装备位</text><text x="480" y="81">10+ 行技能 · 每行1主5辅</text><text x="480" y="131">天赋珠宝孔 / 迁移待安置</text></g></svg></figure>'
+        ownership='<figure><svg viewBox="0 0 650 150" role="img" aria-label="一件物品只有一个位置"><g fill="#ead3a2" stroke="#8c6b42"><rect x="10" y="45" width="190" height="60" rx="8"/><rect x="330" y="5" width="300" height="40" rx="8"/><rect x="330" y="55" width="300" height="40" rx="8"/><rect x="330" y="105" width="300" height="40" rx="8"/></g><g stroke="#79571f" fill="none"><path d="M200 75H260V25H330M260 75H330M260 75V125H330"/></g><g fill="#3b281b" font-size="16" text-anchor="middle"><text x="105" y="80">唯一 UID · 独立实例</text><text x="480" y="31">2页×12×10 背包 / 九装备位</text><text x="480" y="81">10+ 行技能 · 每行1主5辅</text><text x="480" y="131">天赋珠宝孔 / 迁移待安置</text></g></svg></figure>'
         ownership=ownership.replace('2页×8×6',f"{c['bag_pages']}页×{c['bag_columns']}×{c['bag_rows']}")
         slot_rows=facts([(SLOTS.get(slot,slot),esc(category)) for slot,category in c['slots'].items()])
         rule_defs.extend([
             ('ownership','统一物品与独立菜单','装备、珠宝、宝石、药剂和碎片都以唯一UID持有，一个实例只能处于一个位置。',ownership+slot_rows+'<p>I/B行囊固定右侧，K技能与角色属性共用左侧；两侧可同时打开并拖动宝石。T源树全屏，关闭后恢复原左右栏；菜单打开时背景战斗冻结。'+bag_text+'悬停详情，Shift比较双戒指目标。容量下降保留宝石和多余技能行，仅停用超出部分。旧装备UID与掷值保持，armor→body_armour、charm→amulet；旧技能/辅助转为独立实例，原始文件先备份，失败不覆盖。v0.26沿用v0.21试玩目录，旧schema14至17先原字节备份后原子迁移为schema18；仅首次新增两瓶入药剂槽1/2，不删除旧物品或再次退天赋点。</p>','implemented'),
-            ('supports','技能行与五辅助','每行1个主宝石、5个辅助；10行起步，+1技能行词缀真正增加可绑定的行。',f'<p>16辅助全部保留，按主动技能原生能力判定资格；同组不重复同一辅助定义。同名主宝石可独立装配。组与主宝石UID双冷却账阻止换孔/换键刷新。</p><p>真实五辅助冰霜示例：耗魔 {number(example["mana"])}，冷却 {number(example["cooldown"])}秒，初始 {example["initial_count"]}发。</p>'+details('同源实际配方',lines(example['summary']+'\n'+example['details']))+'<p>每30次有效根怪击杀，从当前10主动+16辅助定义中等概率得到1件等级1/品质0的宝石；同名独立UID。此节奏是本游戏原型平衡。子代、重复死亡和演示无奖励；背包满或有待安置时整笔拒绝且回滚本次抽取随机状态。I中二次确认可丢弃重复宝石，不返材料。</p>','implemented'),
+            ('supports','技能行与五辅助','每行1个主宝石、5个辅助；10行起步，+1技能行词缀真正增加可绑定的行。',f'<p>原16辅助保留，新增点燃辅助仅适配陨星/龙卷；按主动技能原生能力判定资格；同组不重复同一辅助定义。同名主宝石可独立装配。组与主宝石UID双冷却账阻止换孔/换键刷新。</p><p>真实五辅助冰霜示例：耗魔 {number(example["mana"])}，冷却 {number(example["cooldown"])}秒，初始 {example["initial_count"]}发。</p>'+details('同源实际配方',lines(example['summary']+'\n'+example['details']))+'<p>正式档每30有效根怪累积一件固定26种序列的1级0品质宝石，满包保留待领；原序列不插入新石。点燃辅助通过正式商人4碎片购买或独立测试供应获得。测试随机宝石使用当前目录，失败回滚随机状态；后代/重复死亡无奖励。同名独立UID，正式城镇可回收所选背包宝石得1碎片。</p>','implemented'),
             ('source_tree','锁定源树与执行覆盖','完整源记录与已实现效果分别报告；数据存在不等于可花点使用。',f'<p>源版本 {source["source_version"]}，原始SHA256 {source["source_sha256"]}。保留 {len(source["nodes"])} 条记录、2387个标准位置和2697条内部边；升华/扩展分区分开。42代理与30涂油节点不可直接分配。<a href="#category-source_passives">逐项查源节点及精通</a></p><p>节点所有效果必须完整执行，精通按选中效果检查。未支持节点灰色锁定，也会阻断后续路径。源数值没有旧181投影上限；旧树仅作历史与怪物机制参考。</p><p>自己的职业起点免费，预算min(level+4,123)。普通节点/精通均1点，专精需同组普通连通的显著节点，重复效果ID拒绝。未分配其他节点可切七起点；升华点数来源尚未实现，不免费授点。</p>','implemented'),
             ('allocation','源树与珠宝资格','每件珠宝只有一个统一位置；孔必须已分配并沿普通连线连接自己的起点。','<p>寻枝半径280采用当前源坐标单位，允许小型/显著节点断连分配，仍花1点。远程点不向外扩路、不激活孔；未实现节点即使在范围内也不能分配。退款、移动、替换、取回都验证最终构筑，不能遗留依赖失效的节点。原型半径规则不是PoE某颗珠宝的完整复刻。</p><p>'+link('rules','source_tree')+'；下方旧181覆盖图保留作历史机制研究。</p>','implemented'),
             ('source_defenses','属性与命中防御','原始三属性数值进入真实容量、命中、闪避和近战物理作用域。','<p>力量每2点取整+1生命、每5点取整+1%近战物理；敏捷每点+2命中、每5点取整+1%闪避；智慧每2点取整+1魔力、每10点取整+1%护盾（3.28以后规则）。法术不进行攻击闪避。护甲随物理命中大小重新求减伤，三元素抗性分别限制到75%，然后护盾、生命。</p>'+facts([('同源混合受击示例','物理/火/冰/电各100；护甲500、抗性50%/25%/75%'),('防御后分量',esc(component_text(defense['components']))),('护盾扣减',number(defense['shield_spent'])),('生命扣减',number(defense['health_lost']))])+f'<p>本游戏敏捷型怪物闪避320；默认Scion命中140，对应 {percent(c["skitter_accuracy_example"]["base_chance"])}；增加10敏捷后命中160，对应 {percent(c["skitter_accuracy_example"]["improved_chance"])}。预览展示成功命中伤害，未把命中率伪乘成DPS。</p>','implemented'),
@@ -444,6 +446,13 @@ def build(data, art):
             ('boundaries','尚未实现的机制','未执行源节点整体锁定，原文与位置保留。','<p>仍未完成：施法动作时长/施法速度、条件/局部武器暴击、格挡、压制、抗性穿透、异常与持续伤害体系、召唤物、属性装备需求、星团/永恒珠宝、升华点数来源及复杂条件机制。源树浏览不等于以上均可用。制作已有回收、校准、赋魔、升格、补缀与重铸；更复杂的定向制作尚未实现。</p>','planned'),
             ('sources','来源与实现边界','目录来自运行时导出，源树保留功能数据，所有美术由本项目创作。',f'<p><a href="{esc(source["source_url"])}">GGG源树固定提交 {source["source_commit"]}</a> · 3.29.1。保留节点身份、原始规则词句、精通和几何；未包含官方图像或叙事风味文本。上游数据再分发授权未明确，不宣称公共领域。</p><p>旧181节点与词缀校准研究仍有各自固定版本，不代表当前角色全部源效果已实现。原型怪物数值、掉落权重与熵初值由本项目定义。</p><p><a href="source-tree-coverage.json">完整执行覆盖与七职业可达前沿JSON</a>：空stats结构节点和精通本体不冒充属性效果，精通逐选项统计；可达集合不代表123点可以全部同时点出。</p>','research')
         ])
+    if 'burning' in data:
+        burn=data['burning'];rows=[]
+        for skill,example in burn['examples'].items():
+            for role,value in example['profile']['roles'].items():
+                rows.append((link('skills',skill)+' · '+esc(role),f"非暴击未计火抗每秒 {number(value['dps'])}，3秒总量 {number(value['total'])}；已含直击代价"))
+        body=facts(rows)+'<p>'+esc(burn['scope'])+'。'+esc(burn['stacking'])+'。</p><p>'+esc(burn['secondary'])+'。'+esc(burn['immunity'])+'。</p><p>灰烬示例原接触标量20：保物理14、立即火7、每秒火7/3持续3秒，原始完整总量28；实际免疫/抗性会减少扣伤。预警仍0.7秒/90范围，可走开。</p><p>'+esc(burn['source_words'])+'。状态不存盘，不抽命中或表现随机数；真实死亡仍只走一次原奖励。</p>'
+        rule_defs.append(('burning','点燃与燃烧取舍','牺牲即时命中换3秒持续火伤，单目标不叠加；主命中基数只结算一次。',body,'implemented'))
     if 'source_spatial' in data:
         spatial=data['source_spatial']
         rows=[]

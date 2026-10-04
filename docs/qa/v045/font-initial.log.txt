@@ -1,0 +1,17 @@
+Font coverage: 936 Han / 1056 printable characters in 149 runtime files + pinned crafting strings; 1060 mapped; 874 baseline characters retained
+missing: '烧' U+70E7
+  scripts/mechanics/defense_rules.gd:47
+  scripts/monsters/monster_catalog.gd:284
+missing: '燃' U+71C3
+  scripts/canonical_game_state.gd:569
+  scripts/combat/damage_preview.gd:77
+  scripts/combat/damage_preview.gd:82
+  scripts/combat/ignite_support_rules.gd:17
+  scripts/combat/ignite_support_rules.gd:9
+  scripts/combat/skill_compiler.gd:166
+  scripts/mechanics/defense_rules.gd:47
+  scripts/monsters/monster_catalog.gd:284
+  scripts/ui/unified_item_presentation.gd:136
+  scripts/ui/unified_item_presentation.gd:31
+Same-source unsupported symbols (existing fallback): ⌁ U+2301 ◈ U+25C8
+FAIL

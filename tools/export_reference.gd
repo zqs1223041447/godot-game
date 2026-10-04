@@ -86,6 +86,7 @@ static func collect() -> Dictionary:
 	result["town_maps"] = town_map_examples()
 	result["map_camps"]={"old_garden":CampLayoutData.layout("old_garden",Arena.ARENA).landmarks,"broken_ruins":CampLayoutData.layout("broken_ruins",Arena.ARENA).landmarks}
 	result["normal_journey"] = normal_journey_examples()
+	result["burning"] = burning_examples()
 	result["normal_gem_trading"]={"offers":Canonical.GemTrade.offers(),"recycle_credit":Canonical.GemTrade.RECYCLE_CREDIT,"currency":Canonical.GemTrade.MATERIAL_ID,"location":"normal_town","level":1,"quality":0,"recycle_location":"bag","schema":Canonical.Rules.VERSION,"test_supply_separate":true,"pricing":"初版可调整预算；每次无词缀地图净得4碎片"}
 	result["source_tree"] = source_tree_reference()
 	result["source_spatial"] = source_spatial_examples()
@@ -329,7 +330,7 @@ static func canonical_examples()->Dictionary:
 	var five:=Compiler.compile_group("frost",state.get_combat_snapshot(),["swift_projectiles","heavy_projectiles","lingering_chill","efficiency","quickcast"])
 	return {"save_version":Canonical.Rules.VERSION,"bag_pages":bag.pages,"bag_columns":bag.columns,"bag_rows":bag.rows,"base_skill_groups":10,"support_slots":5,
 		"flask_slots":state.flask_slots(),"slots":slots,"gem_definitions":GemCatalogData.definitions(),"default_build":state.snapshot(),"default_stats":state.get_stats(),"default_casts":casts,"five_link_example":support_cast_brief(five),
-		"gem_reward":{"eligible_root_kill_interval":30,"definition_count":GemCatalogData.definitions().size(),"uniform_selection":true,"level":1,"quality":0,"duplicate_definitions_have_distinct_uid":true,"failed_admission_restores_rng":true},
+		"gem_reward":{"eligible_root_kill_interval":30,"definition_count":GemCatalogData.definitions().size(),"mode":"test","normal_frozen_definition_count":Canonical.Journey.GEM_DEFINITIONS.size(),"uniform_selection":true,"level":1,"quality":0,"duplicate_definitions_have_distinct_uid":true,"failed_admission_restores_rng":true},
 		"defense_example":Defense.incoming_source_hit({"physical":100.0,"fire":100.0,"cold":100.0,"lightning":100.0},{"armour":500.0,"fire_resistance":0.5,"cold_resistance":0.25,"lightning_resistance":0.75},100.0,200.0),
 		"monster_ratings":{"crawler":AttackRules.monster_profile(0),"skitter":AttackRules.monster_profile(1),"brute":AttackRules.monster_profile(2)},
 		"skitter_accuracy_example":{"base_accuracy":140,"base_chance":AttackRules.chance(140,320),"extra_ten_dex_accuracy":160,"improved_chance":AttackRules.chance(160,320)}}
@@ -533,7 +534,7 @@ static func telegraph_examples() -> Dictionary:
 	var metadata: Dictionary = TelegraphProfiles.metadata(policy.profile)
 	metadata["integrated_templates"] = ["ember_guard"]
 	metadata["policy"] = policy
-	metadata["description"] = "灰烬守卫以固定范围重击代替接触攻击。先锁定地面位置，再结算一次；移出范围可以躲避。"
+	metadata["description"] = "灰烬守卫以固定范围重击代替接触攻击。先锁定地面位置；火分量一半立即结算，另一半分3秒燃烧，原总预算不增加，移出范围可完全躲避。"
 	metadata["example"] = {"source": enemy, "source_wave": enemy.wave, "start": admitted.attack,
 		"halfway": halfway, "event": event, "recovery": runtime.state_for(1), "cases": cases,
 		"player_radius": Arena.PLAYER_RADIUS, "move_speed": fresh.get_stats().move_speed,
@@ -957,3 +958,19 @@ static func normal_journey_examples()->Dictionary:
 		"isolation":"测试供应与测试击杀只在独立档；正常档不能领取测试商店物品；正常竞技练习也计累计合法根怪",
 		"migration":"严格旧25验证与原字节备份后增加空旅程，不追补过去击杀；现有UID/构筑/物品/货币保持",
 		"balance":"本游戏可调整原型；未引入新正常商店经济、随机地图物品或完整终局系统"}
+
+
+static func burning_examples()->Dictionary:
+	var examples:Dictionary={}
+	for id:String in ["meteor","tornado"]:
+		var cast:Dictionary=Compiler.compile_group(id,Recipes.snapshot({"damage":100.0},[]),["ignite"])
+		assert(cast.ok and cast.has("burn_profile"))
+		examples[id]={"profile":cast.burn_profile,"mana":cast.mana,"cooldown":cast.cooldown,"details":Preview.details(cast)}
+	return {"save_version":28,"support_id":"ignite","icon_file":"originals/ignite.png","player_policy":Compiler.Burn.PLAYER_POLICY,"enemy_policy":Compiler.Burn.ENEMY_POLICY,"examples":examples,
+		"scope":"已解析主命中火分量只作为一次基数；持续扣伤不再套主命中、投射物、暴击或偷取",
+		"stacking":"单目标一条，更强覆盖，同强刷新3秒，弱条忽略",
+		"secondary":"独立装备爆炸不继承；母子和返回沿原获准主命中规则",
+		"defense_example":Defense.incoming_burn(100.0,0.25,10.0,100.0,"player"),
+		"enemy_budget":{"contact_damage":20.0,"physical_hit":14.0,"fire_hit":7.0,"fire_burn_dps":7.0/3.0,"duration":3.0,"total_before_defense":28.0},
+		"immunity":"尊重原伤害免疫；期间时长流逝、不补扣，持续伤害本身不授予受击保护",
+		"source_words":"本游戏初版，不解锁尚未实现的PoE点燃或持续伤害源节点"}

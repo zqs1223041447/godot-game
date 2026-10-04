@@ -1232,7 +1232,13 @@ func _update_projectiles(delta: float) -> void:
 func _apply_damage_packet(enemy: Dictionary, packet: Dictionary, snapshot: Dictionary, color: Color,
 		slow: float = 0.0, provenance: Dictionary = {}) -> void:
 	var burn_at:float=_burn_event_time(float(provenance.time)) if provenance.has("time") else elapsed
-	if not burn_runtime.is_empty():_advance_monster_burn(enemy,burn_at)
+	if not burn_runtime.is_empty():
+		var previous:float=burn_runtime.last_time_for("monster",int(enemy.id))
+		# The existing projectile scheduler treats near-equal relative times as
+		# one instant ordered by identity. Preserve that established hit order;
+		# only its tied burn applications share the latest processed timestamp.
+		if _burn_step_active and provenance.has("time") and previous>burn_at and previous<=elapsed and is_equal_approx(float(provenance.time),previous-_burn_step_start):burn_at=previous
+		_advance_monster_burn(enemy,burn_at)
 	if float(enemy.health) <= 0.0 or float(enemy.get("spawn", 0.0)) > 0.0:
 		return
 	if not provenance.get("accuracy_checked",false) and not _attack_admitted(enemy,packet,snapshot): return

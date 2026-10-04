@@ -92,6 +92,13 @@ func reset() -> void:
 	_states.clear()
 
 
+## Read-only clock for preserving an upstream scheduler's established tie order.
+## Negative means no active target; core advancement still rejects any reversal.
+func last_time_for(kind:Variant,id:Variant)->float:
+	if not _actor_error(kind,id).is_empty():return -1.0
+	return float(_states.get(_key(kind,id),{}).get("last_time",-1.0))
+
+
 func is_empty() -> bool:
 	return _states.is_empty()
 
