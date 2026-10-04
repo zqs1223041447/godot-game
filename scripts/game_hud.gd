@@ -1373,6 +1373,14 @@ func _build_death_panel() -> void:
 	var retry: Button = _button("重新挑战", "RetryButton", _restart, 210)
 	_accent_button(retry)
 	actions.add_child(retry)
+	if str(_arena.world_context().mode) in ["map","map_complete"]:
+		var revision: int = int(_arena.world_context().revision)
+		actions.add_child(_button("返回城镇", "DeathReturnTown", func():
+			var result: Dictionary = _arena.return_to_town(revision)
+			if bool(result.get("ok",false)):
+				_menu_routes = DockedMenus.new()
+				_sync_menu_views()
+			_world_result(result),180))
 	actions.add_child(_button("保存并退出", "ExitButton", _exit_game, 180))
 
 
