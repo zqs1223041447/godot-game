@@ -9,6 +9,7 @@ const Supports = preload("res://scripts/combat/support_registry.gd")
 const Equipment = preload("res://scripts/items/equipment_catalog.gd")
 const Jewels = preload("res://scripts/jewel_data.gd")
 const Currency = preload("res://scripts/items/currency_catalog.gd")
+const Journey = preload("res://scripts/world/normal_journey_state.gd")
 const SourceTree = preload("res://scripts/passives/source_tree_runtime.gd")
 const V14_VERSION := 14
 const V15_VERSION := 15
@@ -21,13 +22,15 @@ const V21_VERSION := 21
 const V22_VERSION := 22
 const V23_VERSION := 23
 const V24_VERSION := 24
-const VERSION := 25
+const V25_VERSION := 25
+const VERSION := 26
 const LEGACY_MAX_ITEMS := 1024
 const V17_MAX_ITEMS := LEGACY_MAX_ITEMS + 1
 const MAX_ITEMS := V17_MAX_ITEMS + 2 # Two once-only migration bottles; bag capacity is unchanged.
 const MAX_GROUPS := 64
 const MAX_SERIAL := 1000000000
-const FIELDS := ["version", "revision", "items", "locations", "next_item_serial", "skill_groups", "bindings", "talents", "progress", "crafting", "migration_ledger"]
+const LEGACY_FIELDS := ["version", "revision", "items", "locations", "next_item_serial", "skill_groups", "bindings", "talents", "progress", "crafting", "migration_ledger"]
+const FIELDS := ["version", "revision", "items", "locations", "next_item_serial", "skill_groups", "bindings", "talents", "progress", "crafting", "migration_ledger", "journey"]
 const V18_BINDABLE_KEYS := [KEY_0, KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6, KEY_7, KEY_8, KEY_9,
 	KEY_F1, KEY_F2, KEY_F3, KEY_F4, KEY_F5, KEY_F9, KEY_F10, KEY_F11, KEY_F12,
 	KEY_E, KEY_F, KEY_G, KEY_H, KEY_J, KEY_L, KEY_Z, KEY_X, KEY_C, KEY_V, KEY_N, KEY_M]
@@ -42,6 +45,10 @@ static func decode(raw: Variant) -> Dictionary:
 
 static func decode_v18(raw:Variant)->Dictionary:
 	return _decode(raw,true,V18_VERSION,true)
+
+static func decode_v25(raw:Variant)->Dictionary:
+	return _decode(raw,true,V25_VERSION,true)
+
 
 static func decode_v24(raw:Variant)->Dictionary:
 	return _decode(raw,true,V24_VERSION,true)
@@ -88,12 +95,15 @@ static func decode_v14(raw: Variant) -> Dictionary:
 
 
 static func _decode(raw: Variant, paged: bool, expected_version: int, allow_currency: bool) -> Dictionary:
-	if not Locations._exact_string_keys(raw, FIELDS): return {}
+	if not Locations._exact_string_keys(raw, FIELDS if expected_version >= 26 else LEGACY_FIELDS): return {}
 	var value: Dictionary = raw.duplicate(true)
 	for field: String in ["version", "revision", "next_item_serial"]:
 		if not Items._whole(value[field], 0, MAX_SERIAL): return {}
 		value[field] = int(value[field])
 	if value.version != expected_version: return {}
+	if expected_version >= 26:
+		value.journey = Journey.decode(value.journey)
+		if value.journey.is_empty(): return {}
 	if not value.items is Dictionary or not value.locations is Dictionary: return {}
 	for uid: Variant in value.items:
 		if not allow_currency and value.items[uid] is Dictionary and value.items[uid].get("kind", "") == "currency": return {}
@@ -139,6 +149,10 @@ static func reason_v18(value:Variant,validate_talents:Callable=Callable(),socket
 static func reason_v19(value:Variant,validate_talents:Callable=Callable(),socket_ids:Array=[])->String:
 	return _reason(value,V19_VERSION,true,true,MAX_ITEMS,validate_talents,socket_ids)
 
+static func reason_v25(value:Variant,validate_talents:Callable=Callable(),socket_ids:Array=[])->String:
+	return _reason(value,V25_VERSION,true,true,MAX_ITEMS,validate_talents,socket_ids)
+
+
 static func reason_v24(value:Variant,validate_talents:Callable=Callable(),socket_ids:Array=[])->String:
 	return _reason(value,V24_VERSION,true,true,MAX_ITEMS,validate_talents,socket_ids)
 
@@ -177,8 +191,11 @@ static func reason_v14(value: Variant, validate_talents: Callable = Callable(), 
 
 static func _reason(value: Variant, expected_version: int, paged: bool, allow_currency: bool,
 		item_limit: int, validate_talents: Callable, socket_ids: Array) -> String:
-	if not Locations._exact_string_keys(value, FIELDS): return "保存结构无效"
+	if not Locations._exact_string_keys(value, FIELDS if expected_version >= 26 else LEGACY_FIELDS): return "保存结构无效"
 	if not value.version is int or value.version != expected_version: return "保存版本不兼容"
+	if expected_version >= 26:
+		var journey_error: String = Journey.reason(value.journey)
+		if not journey_error.is_empty(): return journey_error
 	if not _integer(value.revision, 0, MAX_SERIAL) or not _integer(value.next_item_serial, 1, MAX_SERIAL): return "修订或物品序号无效"
 	if not value.items is Dictionary or value.items.size() > item_limit: return "物品注册表无效"
 	if expected_version<18:

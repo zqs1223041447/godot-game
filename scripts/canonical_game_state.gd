@@ -5,6 +5,7 @@ extends "res://scripts/save/canonical_build_store.gd"
 const Gear = preload("res://scripts/items/equipment_catalog.gd")
 const FlaskModifiers=preload("res://scripts/combat/flask_modifier_rules.gd")
 const Leech=preload("res://scripts/combat/leech_rules.gd")
+const Journey=preload("res://scripts/world/normal_journey_state.gd")
 const Flasks=preload("res://scripts/items/flask_catalog.gd")
 const Gems = preload("res://scripts/items/gem_catalog.gd")
 const Slots = preload("res://scripts/items/equipment_slots.gd")
@@ -400,7 +401,9 @@ func award_random_gem(rng: RandomNumberGenerator) -> String:
 func can_discard_item(uid:Variant)->bool:
 	if not uid is String or not _current.items.has(uid) or _current.locations[uid].kind!="bag":return false
 	if _current.items[uid].kind!="equipment":return true
-	return Legacy._save_paths_match(_path,"user://town_test_build_save.json")
+	if Legacy._save_paths_match(_path,"user://town_test_build_save.json"):return true
+	var payload:Dictionary=_current.items[uid].get("payload",{})
+	return Legacy._save_paths_match(_path,"user://build_save.json") and not payload.is_empty() and payload.get("rarity")=="normal"
 
 
 func discard_item(uid: Variant,expected_revision: Variant,path: String) -> Dictionary:
@@ -793,3 +796,137 @@ func get_flask_profile(uid:String)->Dictionary:
 
 func get_leech_profile() -> Dictionary:
 	return Leech.profile(get_stats())
+
+
+func normal_journey() -> Dictionary:
+	return _current.journey.duplicate(true)
+
+
+func normal_pending_rewards() -> Dictionary:
+	var value: Dictionary = _current.journey
+	return {"pending_map_reward": value.pending_map_reward.duplicate(true),
+		"pending_gems": int(value.normal_root_kills) / 30 - int(value.claimed_gems),
+		"pending_flasks": int(value.normal_root_kills) / 60 - int(value.claimed_flasks),
+		"normal_root_kills": int(value.normal_root_kills)}
+
+
+func _normal_journey_guard(expected_revision: Variant, path: String) -> Dictionary:
+	if _busy: return _failure("busy", "当前操作尚未结束")
+	if not Legacy._save_paths_match(path, "user://build_save.json") or not Legacy._save_paths_match(_path, path):
+		return _failure("normal_profile_required", "正式挑战只能写入已打开的正式存档")
+	if not expected_revision is int or expected_revision != revision(): return _failure("stale_revision", "正式进度或库存已变化")
+	if revision() >= Rules.MAX_SERIAL: return _failure("revision_limit", "存档修订已达上限")
+	return {"ok": true, "reason": ""}
+
+
+func normal_start_map(profile: Dictionary, expected_revision: Variant, path: String, replacing_run_id: Variant = 0) -> Dictionary:
+	var guard: Dictionary = _normal_journey_guard(expected_revision, path)
+	if not guard.ok: return guard
+	if not replacing_run_id is int or replacing_run_id < 0: return _failure("invalid_run", "挑战序号无效")
+	if not pending_items().is_empty(): return _failure("pending_items", "请先安置已有待安置物品")
+	var current: Dictionary = _current.journey
+	if replacing_run_id > 0:
+		var active: Dictionary = current.active_run
+		if active.is_empty() or active.get("run_id") != replacing_run_id or active.get("map_id") != profile.get("id") or active.get("tier") != profile.get("journey_tier") or active.get("normal_ids") != profile.get("normal_ids") or active.get("special_ids") != profile.get("special_ids"):
+			return _failure("stale_run", "重新挑战配置已变化")
+		var abandoned: Dictionary = Journey.abandon(current, replacing_run_id)
+		if not abandoned.ok: return _failure("invalid_run", abandoned.reason)
+		current = abandoned.journey
+	var planned: Dictionary = Journey.start(current, profile)
+	if not planned.ok: return _failure("invalid_run", planned.reason)
+	var cost: int = int(planned.cost)
+	if crafting_balance() < cost: return _failure("insufficient_shards", "背包内校准碎片不足，尚未扣费或开启地图")
+	var candidate: Dictionary = snapshot()
+	var currency: Dictionary = _set_bag_currency_balance(candidate, crafting_balance() - cost)
+	if not currency.ok: return _failure(currency.error_code, currency.reason)
+	candidate.journey = planned.journey
+	candidate.revision += 1
+	var result: Dictionary = _commit(candidate, path)
+	if result.ok: result.run_id = planned.run_id; result.cost = cost
+	return result
+
+
+func normal_complete_map(run_id: Variant, expected_revision: Variant, path: String) -> Dictionary:
+	var guard: Dictionary = _normal_journey_guard(expected_revision, path)
+	if not guard.ok: return guard
+	var planned: Dictionary = Journey.complete(_current.journey, run_id)
+	if not planned.ok: return _failure("stale_run", planned.reason)
+	var candidate: Dictionary = snapshot()
+	candidate.journey = planned.journey; candidate.revision += 1
+	var result: Dictionary = _commit(candidate, path)
+	if result.ok: result.reward = candidate.journey.pending_map_reward.duplicate(true)
+	return result
+
+
+func normal_abandon_map(run_id: Variant, expected_revision: Variant, path: String) -> Dictionary:
+	var guard: Dictionary = _normal_journey_guard(expected_revision, path)
+	if not guard.ok: return guard
+	var planned: Dictionary = Journey.abandon(_current.journey, run_id)
+	if not planned.ok: return _failure("stale_run", planned.reason)
+	var candidate: Dictionary = snapshot()
+	candidate.journey = planned.journey; candidate.revision += 1
+	return _commit(candidate, path)
+
+
+## Same existing in-memory reward batch as add_xp: the final snapshot is saved
+## once by main. Kill milestones share its revision, avoiding a second refresh.
+func add_normal_root_xp(amount: int) -> bool:
+	if _busy or amount < 0 or not Legacy._save_paths_match(_path, "user://build_save.json") or revision() >= Rules.MAX_SERIAL: return false
+	if int(_current.journey.normal_root_kills) >= 1000000000: return false
+	var candidate: Dictionary = snapshot()
+	candidate.journey.normal_root_kills += 1
+	var leveled: bool = false
+	if int(candidate.progress.level) < 1000:
+		candidate.progress.xp += mini(amount, 1000000000)
+		while candidate.progress.xp >= 12 + int(candidate.progress.level) * 8 and candidate.progress.level < 1000:
+			candidate.progress.xp -= 12 + int(candidate.progress.level) * 8
+			candidate.progress.level += 1; leveled = true
+			if candidate.progress.level + 4 <= Migration.NORMAL_POINT_LIMIT: candidate.talents.normal_points += 1
+		if candidate.progress.level >= 1000: candidate.progress.xp = 0
+	candidate.revision += 1
+	_accept_memory(candidate); _busy = true; changed.emit(); _busy = false
+	return leveled
+
+
+func normal_claim_rewards(expected_revision: Variant, path: String, include_map: bool = true) -> Dictionary:
+	var guard: Dictionary = _normal_journey_guard(expected_revision, path)
+	if not guard.ok: return guard
+	if not pending_items().is_empty(): return _failure("pending_items", "请先安置已有待安置物品，再领取奖励")
+	var candidate: Dictionary = snapshot()
+	var claimed_shards: int = 0; var claimed_gems: int = 0; var claimed_flasks: int = 0
+	if include_map and not candidate.journey.pending_map_reward.is_empty():
+		var quantity: int = int(candidate.journey.pending_map_reward.shards)
+		var trial: Dictionary = candidate.duplicate(true)
+		var result: Dictionary = _set_bag_currency_balance(trial, crafting_balance() + quantity)
+		if result.ok:
+			candidate = trial; claimed_shards = quantity; candidate.journey.pending_map_reward = {}
+	var gem_due: int = int(candidate.journey.normal_root_kills) / 30
+	while int(candidate.journey.claimed_gems) < gem_due:
+		var ordinal: int = int(candidate.journey.claimed_gems) + 1
+		var uid: String = "item_%06d" % int(candidate.next_item_serial)
+		if not _place_journey_reward(candidate, Gems.create_instance(uid, Journey.gem_definition(ordinal))): break
+		candidate.journey.claimed_gems = ordinal; claimed_gems += 1
+	var flask_due: int = int(candidate.journey.normal_root_kills) / 60
+	while int(candidate.journey.claimed_flasks) < flask_due:
+		var ordinal: int = int(candidate.journey.claimed_flasks) + 1
+		var uid: String = "item_%06d" % int(candidate.next_item_serial)
+		if not _place_journey_reward(candidate, Flasks.create_instance(uid, Journey.flask_definition(ordinal))): break
+		candidate.journey.claimed_flasks = ordinal; claimed_flasks += 1
+	if claimed_shards == 0 and claimed_gems == 0 and claimed_flasks == 0:
+		var pending: Dictionary = normal_pending_rewards()
+		return _failure("bag_full" if not pending.pending_map_reward.is_empty() or pending.pending_gems > 0 or pending.pending_flasks > 0 else "no_pending_reward", "背包空间或物品上限不足，奖励仍保留待领" if not pending.pending_map_reward.is_empty() or pending.pending_gems > 0 or pending.pending_flasks > 0 else "没有待领取奖励")
+	candidate.revision += 1
+	var result: Dictionary = _commit(candidate, path)
+	if result.ok:
+		result.claimed_shards = claimed_shards; result.claimed_gems = claimed_gems; result.claimed_flasks = claimed_flasks
+	return result
+
+
+func _place_journey_reward(candidate: Dictionary, wrapped: Dictionary) -> bool:
+	if wrapped.is_empty() or candidate.items.size() >= Rules.V17_MAX_ITEMS or candidate.next_item_serial >= Rules.MAX_SERIAL or candidate.items.has(wrapped.uid): return false
+	candidate.items[wrapped.uid] = wrapped
+	var metadata: Dictionary = Items.metadata_for_items(candidate.items)
+	var position: Dictionary = Transfer.first_bag_space_paged(metadata, candidate.locations, Migration.paged_location_context(candidate, _socket_ids), wrapped.uid)
+	if position.is_empty(): candidate.items.erase(wrapped.uid); return false
+	candidate.locations[wrapped.uid] = position; candidate.next_item_serial += 1
+	return true

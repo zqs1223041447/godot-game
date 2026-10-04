@@ -1,0 +1,98 @@
+{
+  "baseline_commit": "8e5f4fb3612077e31f2744450d5036972c73b9cf",
+  "schema": 26,
+  "tests": [
+    {
+      "script": "tests/normal_journey_state_test.gd",
+      "checks": 351,
+      "failures": 0
+    },
+    {
+      "script": "tests/normal_journey_migration_test.gd",
+      "checks": 132,
+      "failures": 0
+    }
+  ],
+  "files": {
+    "scripts/world/normal_journey_state.gd": {
+      "bytes": 10109,
+      "sha256": "10b2ba7db25764a0ad34f447ed71acb4a876a49e26bd6fa824056d1e1fee0f89"
+    },
+    "scripts/world/map_compiler.gd": {
+      "bytes": 4925,
+      "sha256": "c800ccaf90a9807cc753fc694c19c614e52fff8226fdcaa27f0f5fdc2fcb5851"
+    },
+    "scripts/world/normal_map_catalog.gd": {
+      "bytes": 1321,
+      "sha256": "69f179f1fc1b25c58c33c6cd7d92c1b813daa2b109dea2273660ebff7d7b765e"
+    },
+    "scripts/save/canonical_build_rules.gd": {
+      "bytes": 18183,
+      "sha256": "f1863988791b16edb25ef5e5cf7c869c1662ce69a1e421ea723c60dcef70d52d"
+    },
+    "scripts/save/canonical_build_store.gd": {
+      "bytes": 18887,
+      "sha256": "2946eff9a67bac3188fad0bbfc31203b19d7c8308acb57a7e67bf810321cdd7d"
+    },
+    "scripts/save/source_leech_migration.gd": {
+      "bytes": 634,
+      "sha256": "e562f62f6bec0a62b93a156ac73fe634c7c82f250ab450467aaca1ab9adeba9c"
+    },
+    "scripts/save/normal_journey_migration.gd": {
+      "bytes": 769,
+      "sha256": "a140602309f826f7b740ab70d7ce5dc486f8b17da4a86e55b4cc1459d8c15a16"
+    },
+    "scripts/items/gem_catalog.gd": {
+      "bytes": 5630,
+      "sha256": "7f5b53d11918d63193e4e737eb242f7d2603ccfa6e189afb2587856ada436266"
+    },
+    "scripts/items/flask_catalog.gd": {
+      "bytes": 2063,
+      "sha256": "5895bb0bdcb6765cbbb733e3ca5713fc8d541508745009845f892e44e3ad0fe5"
+    },
+    "scripts/passives/source_tree_runtime.gd": {
+      "bytes": 12055,
+      "sha256": "d59ddf805c4a52bef7b1a498a4518cea2b14e4f07fcaef973318f6405206ac18"
+    },
+    "tests/normal_journey_state_test.gd": {
+      "bytes": 8693,
+      "sha256": "28c43ba265adef7ba29cfd0ca6bfcd77ea60229bd28526593debc1b8fa20e05a"
+    },
+    "tests/normal_journey_migration_test.gd": {
+      "bytes": 11916,
+      "sha256": "dde056465201ee81bebb70e4b2be66ea51d89e35e99ddad18e8152756a05b3fb"
+    },
+    "tests/fixtures/v041_journey/export_v25_baseline.gd": {
+      "bytes": 2351,
+      "sha256": "5b46a8e76f278d4fecf102565db6f178b1311f87ee6cd19bada350ff4424dc64"
+    },
+    "tests/fixtures/v041_journey/manifest.json": {
+      "bytes": 1162,
+      "sha256": "fc36d40c702bcc69a7b22c835cdea3c00908b9272d3013966c63fb0d6dd013ba"
+    },
+    "tests/fixtures/v041_journey/.gitattributes": {
+      "bytes": 98,
+      "sha256": "afa9e470adf54238f2422fcc0bc8ac71cc0f362d9700bf18e843de6d90803e40"
+    },
+    "tests/fixtures/v041_journey/v25-default.json": {
+      "bytes": 12613,
+      "sha256": "386e02f908544fda797f0c687c96b88008c809aa264c80fb2dd42a40e9b6129c"
+    },
+    "tests/fixtures/v041_journey/v25-leech.json": {
+      "bytes": 12715,
+      "sha256": "a85879edfd11b820b562a675aea99e70127988443714bd65e81b9a621bdaa2ff"
+    },
+    "docs/qa/v041/journey-baseline-export.log.txt": {
+      "bytes": 870,
+      "sha256": "e23f1f0a070d2f86b0731e6c834a37afca4b1164e2899aca80c82bf81b58ac7a"
+    },
+    "docs/qa/v041/journey-state-test.log.txt": {
+      "bytes": 118,
+      "sha256": "ad2c94f95d39272e3bec56af047e34e4e3d9ce1bea44c08f6cba7aacb252f70b"
+    },
+    "docs/qa/v041/journey-migration-test.log.txt": {
+      "bytes": 122,
+      "sha256": "e01c33e8720c00249c69a6b314ccc73b9b50ca59764c1018fd572229443d8d05"
+    }
+  }
+}

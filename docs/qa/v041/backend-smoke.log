@@ -1,0 +1,647 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+SCRIPT ERROR: Assertion failed: The built-in canonical fixture must migrate to v26
+          at: CanonicalGameState._init (res://scripts/save/canonical_build_store.gd:49)
+          GDScript backtrace (most recent call first):
+              [0] _init (res://scripts/save/canonical_build_store.gd:49)
+              [1] @implicit_new (res://scripts/main.gd:79)
+SCRIPT ERROR: Invalid access to property or key 'journey' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.normal_journey (res://scripts/canonical_game_state.gd:800)
+          GDScript backtrace (most recent call first):
+              [0] normal_journey (res://scripts/canonical_game_state.gd:800)
+              [1] _recover_normal_active (res://scripts/main.gd:1574)
+              [2] _ready (res://scripts/main.gd:141)
+SCRIPT ERROR: Invalid access to property or key 'active_run' on a base object of type 'Dictionary'.
+          at: _recover_normal_active (res://scripts/main.gd:1574)
+          GDScript backtrace (most recent call first):
+              [0] _recover_normal_active (res://scripts/main.gd:1574)
+              [1] _ready (res://scripts/main.gd:141)
+SCRIPT ERROR: Invalid access to property or key 'locations' on a base object of type 'Dictionary'.
+          at: CanonicalGameState._ensure_cache (res://scripts/canonical_game_state.gd:270)
+          GDScript backtrace (most recent call first):
+              [0] _ensure_cache (res://scripts/canonical_game_state.gd:270)
+              [1] get_stats (res://scripts/canonical_game_state.gd:85)
+              [2] _ready (res://scripts/main.gd:142)
+SCRIPT ERROR: Invalid access to property or key 'locations' on a base object of type 'Dictionary'.
+          at: _stats_for (res://scripts/canonical_game_state.gd:202)
+          GDScript backtrace (most recent call first):
+              [0] _stats_for (res://scripts/canonical_game_state.gd:202)
+              [1] get_stats (res://scripts/canonical_game_state.gd:87)
+              [2] _ready (res://scripts/main.gd:142)
+SCRIPT ERROR: Invalid access to property or key 'journey' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.normal_pending_rewards (res://scripts/canonical_game_state.gd:804)
+          GDScript backtrace (most recent call first):
+              [0] normal_pending_rewards (res://scripts/canonical_game_state.gd:804)
+              [1] world_context (res://scripts/main.gd:1581)
+              [2] refresh_world (res://scripts/ui/town_service_panel.gd:96)
+              [3] setup (res://scripts/ui/town_service_panel.gd:92)
+              [4] _build_world_controls (res://scripts/game_hud.gd:1630)
+              [5] setup (res://scripts/game_hud.gd:135)
+              [6] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'pending_map_reward' on a base object of type 'Dictionary'.
+          at: world_context (res://scripts/main.gd:1583)
+          GDScript backtrace (most recent call first):
+              [0] world_context (res://scripts/main.gd:1583)
+              [1] refresh_world (res://scripts/ui/town_service_panel.gd:96)
+              [2] setup (res://scripts/ui/town_service_panel.gd:92)
+              [3] _build_world_controls (res://scripts/game_hud.gd:1630)
+              [4] setup (res://scripts/game_hud.gd:135)
+              [5] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'journey' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.normal_pending_rewards (res://scripts/canonical_game_state.gd:804)
+          GDScript backtrace (most recent call first):
+              [0] normal_pending_rewards (res://scripts/canonical_game_state.gd:804)
+              [1] world_context (res://scripts/main.gd:1581)
+              [2] setup (res://scripts/ui/town_service_panel.gd:93)
+              [3] _build_world_controls (res://scripts/game_hud.gd:1630)
+              [4] setup (res://scripts/game_hud.gd:135)
+              [5] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'pending_map_reward' on a base object of type 'Dictionary'.
+          at: world_context (res://scripts/main.gd:1583)
+          GDScript backtrace (most recent call first):
+              [0] world_context (res://scripts/main.gd:1583)
+              [1] setup (res://scripts/ui/town_service_panel.gd:93)
+              [2] _build_world_controls (res://scripts/game_hud.gd:1630)
+              [3] setup (res://scripts/game_hud.gd:135)
+              [4] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'journey' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.normal_pending_rewards (res://scripts/canonical_game_state.gd:804)
+          GDScript backtrace (most recent call first):
+              [0] normal_pending_rewards (res://scripts/canonical_game_state.gd:804)
+              [1] world_context (res://scripts/main.gd:1581)
+              [2] _select (res://scripts/ui/town_service_panel.gd:131)
+              [3] setup (res://scripts/ui/town_service_panel.gd:93)
+              [4] _build_world_controls (res://scripts/game_hud.gd:1630)
+              [5] setup (res://scripts/game_hud.gd:135)
+              [6] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'pending_map_reward' on a base object of type 'Dictionary'.
+          at: world_context (res://scripts/main.gd:1583)
+          GDScript backtrace (most recent call first):
+              [0] world_context (res://scripts/main.gd:1583)
+              [1] _select (res://scripts/ui/town_service_panel.gd:131)
+              [2] setup (res://scripts/ui/town_service_panel.gd:93)
+              [3] _build_world_controls (res://scripts/game_hud.gd:1630)
+              [4] setup (res://scripts/game_hud.gd:135)
+              [5] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'journey' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.normal_journey (res://scripts/canonical_game_state.gd:800)
+          GDScript backtrace (most recent call first):
+              [0] normal_journey (res://scripts/canonical_game_state.gd:800)
+              [1] map_options (res://scripts/main.gd:1673)
+              [2] _build_map (res://scripts/ui/town_service_panel.gd:176)
+              [3] _select (res://scripts/ui/town_service_panel.gd:135)
+              [4] setup (res://scripts/ui/town_service_panel.gd:93)
+              [5] _build_world_controls (res://scripts/game_hud.gd:1630)
+              [6] setup (res://scripts/game_hud.gd:135)
+              [7] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'best_tiers' on a base object of type 'Dictionary'.
+          at: map_options (res://scripts/main.gd:1673)
+          GDScript backtrace (most recent call first):
+              [0] map_options (res://scripts/main.gd:1673)
+              [1] _build_map (res://scripts/ui/town_service_panel.gd:176)
+              [2] _select (res://scripts/ui/town_service_panel.gd:135)
+              [3] setup (res://scripts/ui/town_service_panel.gd:93)
+              [4] _build_world_controls (res://scripts/game_hud.gd:1630)
+              [5] setup (res://scripts/game_hud.gd:135)
+              [6] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'journey' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.normal_journey (res://scripts/canonical_game_state.gd:800)
+          GDScript backtrace (most recent call first):
+              [0] normal_journey (res://scripts/canonical_game_state.gd:800)
+              [1] _normal_start_reason (res://scripts/main.gd:1679)
+              [2] map_draft (res://scripts/main.gd:1689)
+              [3] _build_map (res://scripts/ui/town_service_panel.gd:177)
+              [4] _select (res://scripts/ui/town_service_panel.gd:135)
+              [5] setup (res://scripts/ui/town_service_panel.gd:93)
+              [6] _build_world_controls (res://scripts/game_hud.gd:1630)
+              [7] setup (res://scripts/game_hud.gd:135)
+              [8] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'pending_map_reward' on a base object of type 'Dictionary'.
+          at: _normal_start_reason (res://scripts/main.gd:1680)
+          GDScript backtrace (most recent call first):
+              [0] _normal_start_reason (res://scripts/main.gd:1680)
+              [1] map_draft (res://scripts/main.gd:1689)
+              [2] _build_map (res://scripts/ui/town_service_panel.gd:177)
+              [3] _select (res://scripts/ui/town_service_panel.gd:135)
+              [4] setup (res://scripts/ui/town_service_panel.gd:93)
+              [5] _build_world_controls (res://scripts/game_hud.gd:1630)
+              [6] setup (res://scripts/game_hud.gd:135)
+              [7] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'maps' on a base object of type 'Dictionary'.
+          at: _build_map (res://scripts/ui/town_service_panel.gd:180)
+          GDScript backtrace (most recent call first):
+              [0] _build_map (res://scripts/ui/town_service_panel.gd:180)
+              [1] _select (res://scripts/ui/town_service_panel.gd:135)
+              [2] setup (res://scripts/ui/town_service_panel.gd:93)
+              [3] _build_world_controls (res://scripts/game_hud.gd:1630)
+              [4] setup (res://scripts/game_hud.gd:135)
+              [5] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'revision' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.revision (res://scripts/save/canonical_build_store.gd:58)
+          GDScript backtrace (most recent call first):
+              [0] revision (res://scripts/save/canonical_build_store.gd:58)
+              [1] _sync_flasks (res://scripts/main.gd:368)
+              [2] flask_statuses (res://scripts/main.gd:397)
+              [3] _update_flasks (res://scripts/game_hud.gd:512)
+              [4] _update_live (res://scripts/game_hud.gd:798)
+              [5] refresh_build (res://scripts/game_hud.gd:359)
+              [6] setup (res://scripts/game_hud.gd:150)
+              [7] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'items' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.owned_flasks (res://scripts/canonical_game_state.gd:370)
+          GDScript backtrace (most recent call first):
+              [0] owned_flasks (res://scripts/canonical_game_state.gd:370)
+              [1] _sync_flasks (res://scripts/main.gd:370)
+              [2] flask_statuses (res://scripts/main.gd:397)
+              [3] _update_flasks (res://scripts/game_hud.gd:512)
+              [4] _update_live (res://scripts/game_hud.gd:798)
+              [5] refresh_build (res://scripts/game_hud.gd:359)
+              [6] setup (res://scripts/game_hud.gd:150)
+              [7] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'locations' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.flask_slots (res://scripts/canonical_game_state.gd:377)
+          GDScript backtrace (most recent call first):
+              [0] flask_slots (res://scripts/canonical_game_state.gd:377)
+              [1] flask_statuses (res://scripts/main.gd:400)
+              [2] _update_flasks (res://scripts/game_hud.gd:512)
+              [3] _update_live (res://scripts/game_hud.gd:798)
+              [4] refresh_build (res://scripts/game_hud.gd:359)
+              [5] setup (res://scripts/game_hud.gd:150)
+              [6] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'progress' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.@level_getter (res://scripts/canonical_game_state.gd:36)
+          GDScript backtrace (most recent call first):
+              [0] @level_getter (res://scripts/canonical_game_state.gd:36)
+              [1] _update_live (res://scripts/game_hud.gd:809)
+              [2] refresh_build (res://scripts/game_hud.gd:359)
+              [3] setup (res://scripts/game_hud.gd:150)
+              [4] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'progress' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.@xp_getter (res://scripts/canonical_game_state.gd:38)
+          GDScript backtrace (most recent call first):
+              [0] @xp_getter (res://scripts/canonical_game_state.gd:38)
+              [1] _update_live (res://scripts/game_hud.gd:809)
+              [2] refresh_build (res://scripts/game_hud.gd:359)
+              [3] setup (res://scripts/game_hud.gd:150)
+              [4] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'talents' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.@talent_points_getter (res://scripts/canonical_game_state.gd:40)
+          GDScript backtrace (most recent call first):
+              [0] @talent_points_getter (res://scripts/canonical_game_state.gd:40)
+              [1] _update_live (res://scripts/game_hud.gd:809)
+              [2] refresh_build (res://scripts/game_hud.gd:359)
+              [3] setup (res://scripts/game_hud.gd:150)
+              [4] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'skill_groups' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.get_build_view_token (res://scripts/canonical_game_state.gd:69)
+          GDScript backtrace (most recent call first):
+              [0] get_build_view_token (res://scripts/canonical_game_state.gd:69)
+              [1] _update_live (res://scripts/game_hud.gd:815)
+              [2] refresh_build (res://scripts/game_hud.gd:359)
+              [3] setup (res://scripts/game_hud.gd:150)
+              [4] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'bindings' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.group_for_key (res://scripts/canonical_game_state.gd:145)
+          GDScript backtrace (most recent call first):
+              [0] group_for_key (res://scripts/canonical_game_state.gd:145)
+              [1] @skill_slots_getter (res://scripts/canonical_game_state.gd:45)
+              [2] _update_live (res://scripts/game_hud.gd:820)
+              [3] refresh_build (res://scripts/game_hud.gd:359)
+              [4] setup (res://scripts/game_hud.gd:150)
+              [5] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'bindings' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.group_for_key (res://scripts/canonical_game_state.gd:145)
+          GDScript backtrace (most recent call first):
+              [0] group_for_key (res://scripts/canonical_game_state.gd:145)
+              [1] @skill_slots_getter (res://scripts/canonical_game_state.gd:45)
+              [2] _update_live (res://scripts/game_hud.gd:820)
+              [3] refresh_build (res://scripts/game_hud.gd:359)
+              [4] setup (res://scripts/game_hud.gd:150)
+              [5] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'bindings' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.group_for_key (res://scripts/canonical_game_state.gd:145)
+          GDScript backtrace (most recent call first):
+              [0] group_for_key (res://scripts/canonical_game_state.gd:145)
+              [1] @skill_slots_getter (res://scripts/canonical_game_state.gd:45)
+              [2] _update_live (res://scripts/game_hud.gd:820)
+              [3] refresh_build (res://scripts/game_hud.gd:359)
+              [4] setup (res://scripts/game_hud.gd:150)
+              [5] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'bindings' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.group_for_key (res://scripts/canonical_game_state.gd:145)
+          GDScript backtrace (most recent call first):
+              [0] group_for_key (res://scripts/canonical_game_state.gd:145)
+              [1] @skill_slots_getter (res://scripts/canonical_game_state.gd:45)
+              [2] _update_live (res://scripts/game_hud.gd:820)
+              [3] refresh_build (res://scripts/game_hud.gd:359)
+              [4] setup (res://scripts/game_hud.gd:150)
+              [5] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'bindings' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.group_for_key (res://scripts/canonical_game_state.gd:145)
+          GDScript backtrace (most recent call first):
+              [0] group_for_key (res://scripts/canonical_game_state.gd:145)
+              [1] @skill_slots_getter (res://scripts/canonical_game_state.gd:45)
+              [2] _update_live (res://scripts/game_hud.gd:820)
+              [3] refresh_build (res://scripts/game_hud.gd:359)
+              [4] setup (res://scripts/game_hud.gd:150)
+              [5] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'revision' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.revision (res://scripts/save/canonical_build_store.gd:58)
+          GDScript backtrace (most recent call first):
+              [0] revision (res://scripts/save/canonical_build_store.gd:58)
+              [1] _sync_flasks (res://scripts/main.gd:368)
+              [2] flask_statuses (res://scripts/main.gd:397)
+              [3] _update_flasks (res://scripts/game_hud.gd:512)
+              [4] _update_live (res://scripts/game_hud.gd:798)
+              [5] setup (res://scripts/game_hud.gd:151)
+              [6] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'locations' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.flask_slots (res://scripts/canonical_game_state.gd:377)
+          GDScript backtrace (most recent call first):
+              [0] flask_slots (res://scripts/canonical_game_state.gd:377)
+              [1] flask_statuses (res://scripts/main.gd:400)
+              [2] _update_flasks (res://scripts/game_hud.gd:512)
+              [3] _update_live (res://scripts/game_hud.gd:798)
+              [4] setup (res://scripts/game_hud.gd:151)
+              [5] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'progress' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.@level_getter (res://scripts/canonical_game_state.gd:36)
+          GDScript backtrace (most recent call first):
+              [0] @level_getter (res://scripts/canonical_game_state.gd:36)
+              [1] _update_live (res://scripts/game_hud.gd:809)
+              [2] setup (res://scripts/game_hud.gd:151)
+              [3] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'progress' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.@xp_getter (res://scripts/canonical_game_state.gd:38)
+          GDScript backtrace (most recent call first):
+              [0] @xp_getter (res://scripts/canonical_game_state.gd:38)
+              [1] _update_live (res://scripts/game_hud.gd:809)
+              [2] setup (res://scripts/game_hud.gd:151)
+              [3] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'talents' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.@talent_points_getter (res://scripts/canonical_game_state.gd:40)
+          GDScript backtrace (most recent call first):
+              [0] @talent_points_getter (res://scripts/canonical_game_state.gd:40)
+              [1] _update_live (res://scripts/game_hud.gd:809)
+              [2] setup (res://scripts/game_hud.gd:151)
+              [3] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'skill_groups' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.get_build_view_token (res://scripts/canonical_game_state.gd:69)
+          GDScript backtrace (most recent call first):
+              [0] get_build_view_token (res://scripts/canonical_game_state.gd:69)
+              [1] _update_live (res://scripts/game_hud.gd:815)
+              [2] setup (res://scripts/game_hud.gd:151)
+              [3] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'bindings' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.group_for_key (res://scripts/canonical_game_state.gd:145)
+          GDScript backtrace (most recent call first):
+              [0] group_for_key (res://scripts/canonical_game_state.gd:145)
+              [1] @skill_slots_getter (res://scripts/canonical_game_state.gd:45)
+              [2] _update_live (res://scripts/game_hud.gd:820)
+              [3] setup (res://scripts/game_hud.gd:151)
+              [4] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'bindings' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.group_for_key (res://scripts/canonical_game_state.gd:145)
+          GDScript backtrace (most recent call first):
+              [0] group_for_key (res://scripts/canonical_game_state.gd:145)
+              [1] @skill_slots_getter (res://scripts/canonical_game_state.gd:45)
+              [2] _update_live (res://scripts/game_hud.gd:820)
+              [3] setup (res://scripts/game_hud.gd:151)
+              [4] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'bindings' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.group_for_key (res://scripts/canonical_game_state.gd:145)
+          GDScript backtrace (most recent call first):
+              [0] group_for_key (res://scripts/canonical_game_state.gd:145)
+              [1] @skill_slots_getter (res://scripts/canonical_game_state.gd:45)
+              [2] _update_live (res://scripts/game_hud.gd:820)
+              [3] setup (res://scripts/game_hud.gd:151)
+              [4] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'bindings' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.group_for_key (res://scripts/canonical_game_state.gd:145)
+          GDScript backtrace (most recent call first):
+              [0] group_for_key (res://scripts/canonical_game_state.gd:145)
+              [1] @skill_slots_getter (res://scripts/canonical_game_state.gd:45)
+              [2] _update_live (res://scripts/game_hud.gd:820)
+              [3] setup (res://scripts/game_hud.gd:151)
+              [4] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'bindings' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.group_for_key (res://scripts/canonical_game_state.gd:145)
+          GDScript backtrace (most recent call first):
+              [0] group_for_key (res://scripts/canonical_game_state.gd:145)
+              [1] @skill_slots_getter (res://scripts/canonical_game_state.gd:45)
+              [2] _update_live (res://scripts/game_hud.gd:820)
+              [3] setup (res://scripts/game_hud.gd:151)
+              [4] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'journey' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.normal_pending_rewards (res://scripts/canonical_game_state.gd:804)
+          GDScript backtrace (most recent call first):
+              [0] normal_pending_rewards (res://scripts/canonical_game_state.gd:804)
+              [1] world_context (res://scripts/main.gd:1581)
+              [2] _refresh_world (res://scripts/game_hud.gd:1644)
+              [3] setup (res://scripts/game_hud.gd:155)
+              [4] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'pending_map_reward' on a base object of type 'Dictionary'.
+          at: world_context (res://scripts/main.gd:1583)
+          GDScript backtrace (most recent call first):
+              [0] world_context (res://scripts/main.gd:1583)
+              [1] _refresh_world (res://scripts/game_hud.gd:1644)
+              [2] setup (res://scripts/game_hud.gd:155)
+              [3] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'mode' on a base object of type 'Dictionary'.
+          at: GameHUD._refresh_world (res://scripts/game_hud.gd:1645)
+          GDScript backtrace (most recent call first):
+              [0] _refresh_world (res://scripts/game_hud.gd:1645)
+              [1] setup (res://scripts/game_hud.gd:155)
+              [2] _ready (res://scripts/main.gd:161)
+SCRIPT ERROR: Invalid access to property or key 'revision' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.revision (res://scripts/save/canonical_build_store.gd:58)
+          GDScript backtrace (most recent call first):
+              [0] revision (res://scripts/save/canonical_build_store.gd:58)
+              [1] _sync_flasks (res://scripts/main.gd:368)
+              [2] restart_run (res://scripts/main.gd:307)
+              [3] _ready (res://scripts/main.gd:163)
+SCRIPT ERROR: Invalid access to property or key 'items' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.owned_flasks (res://scripts/canonical_game_state.gd:370)
+          GDScript backtrace (most recent call first):
+              [0] owned_flasks (res://scripts/canonical_game_state.gd:370)
+              [1] _sync_flasks (res://scripts/main.gd:370)
+              [2] restart_run (res://scripts/main.gd:307)
+              [3] _ready (res://scripts/main.gd:163)
+SCRIPT ERROR: Invalid access to property or key 'locations' on a base object of type 'Dictionary'.
+          at: _stats_for (res://scripts/canonical_game_state.gd:202)
+          GDScript backtrace (most recent call first):
+              [0] _stats_for (res://scripts/canonical_game_state.gd:202)
+              [1] get_stats (res://scripts/canonical_game_state.gd:87)
+              [2] restart_run (res://scripts/main.gd:311)
+              [3] _ready (res://scripts/main.gd:163)
+SCRIPT ERROR: Assertion failed: Validated build must provide a finite leech profile
+          at: _refresh_leech_caps (res://scripts/main.gd:378)
+          GDScript backtrace (most recent call first):
+              [0] _refresh_leech_caps (res://scripts/main.gd:378)
+              [1] restart_run (res://scripts/main.gd:312)
+              [2] _ready (res://scripts/main.gd:163)
+SCRIPT ERROR: Invalid access to property or key 'max_health' on a base object of type 'Dictionary'.
+          at: restart_run (res://scripts/main.gd:313)
+          GDScript backtrace (most recent call first):
+              [0] restart_run (res://scripts/main.gd:313)
+              [1] _ready (res://scripts/main.gd:163)
+SCRIPT ERROR: Invalid access to property or key 'ok' on a base object of type 'Dictionary'.
+          at: _ready (res://scripts/main.gd:164)
+          GDScript backtrace (most recent call first):
+              [0] _ready (res://scripts/main.gd:164)
+SCRIPT ERROR: Invalid access to property or key 'locations' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.equipped_items (res://scripts/canonical_game_state.gd:156)
+          GDScript backtrace (most recent call first):
+              [0] equipped_items (res://scripts/canonical_game_state.gd:156)
+              [1] @equipped_getter (res://scripts/canonical_game_state.gd:34)
+              [2] draw_player (res://scripts/visuals/fantasy_actors.gd:25)
+              [3] draw_player (res://scripts/visuals/arena_visuals.gd:118)
+              [4] draw_after_actors (res://scripts/visuals/arena_visuals.gd:205)
+              [5] _draw (res://scripts/visuals/foreground_arena_layer.gd:17)
+SCRIPT ERROR: Invalid access to property or key 'items' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.item_definition (res://scripts/save/canonical_build_store.gd:70)
+          GDScript backtrace (most recent call first):
+              [0] item_definition (res://scripts/save/canonical_build_store.gd:70)
+              [1] get_item_definition (res://scripts/canonical_game_state.gd:62)
+              [2] draw_player (res://scripts/visuals/fantasy_actors.gd:26)
+              [3] draw_player (res://scripts/visuals/arena_visuals.gd:118)
+              [4] draw_after_actors (res://scripts/visuals/arena_visuals.gd:205)
+              [5] _draw (res://scripts/visuals/foreground_arena_layer.gd:17)
+SCRIPT ERROR: Invalid access to property or key 'locations' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.equipped_items (res://scripts/canonical_game_state.gd:156)
+          GDScript backtrace (most recent call first):
+              [0] equipped_items (res://scripts/canonical_game_state.gd:156)
+              [1] @equipped_getter (res://scripts/canonical_game_state.gd:34)
+              [2] draw_player (res://scripts/visuals/fantasy_actors.gd:27)
+              [3] draw_player (res://scripts/visuals/arena_visuals.gd:118)
+              [4] draw_after_actors (res://scripts/visuals/arena_visuals.gd:205)
+              [5] _draw (res://scripts/visuals/foreground_arena_layer.gd:17)
+SCRIPT ERROR: Invalid access to property or key 'locations' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.equipped_items (res://scripts/canonical_game_state.gd:156)
+          GDScript backtrace (most recent call first):
+              [0] equipped_items (res://scripts/canonical_game_state.gd:156)
+              [1] @equipped_getter (res://scripts/canonical_game_state.gd:34)
+              [2] draw_player (res://scripts/visuals/fantasy_actors.gd:27)
+              [3] draw_player (res://scripts/visuals/arena_visuals.gd:118)
+              [4] draw_after_actors (res://scripts/visuals/arena_visuals.gd:205)
+              [5] _draw (res://scripts/visuals/foreground_arena_layer.gd:17)
+SCRIPT ERROR: Invalid access to property or key 'items' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.item_definition (res://scripts/save/canonical_build_store.gd:70)
+          GDScript backtrace (most recent call first):
+              [0] item_definition (res://scripts/save/canonical_build_store.gd:70)
+              [1] get_item_definition (res://scripts/canonical_game_state.gd:62)
+              [2] draw_player (res://scripts/visuals/fantasy_actors.gd:28)
+              [3] draw_player (res://scripts/visuals/arena_visuals.gd:118)
+              [4] draw_after_actors (res://scripts/visuals/arena_visuals.gd:205)
+              [5] _draw (res://scripts/visuals/foreground_arena_layer.gd:17)
+SCRIPT ERROR: Invalid access to property or key 'revision' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.revision (res://scripts/save/canonical_build_store.gd:58)
+          GDScript backtrace (most recent call first):
+              [0] revision (res://scripts/save/canonical_build_store.gd:58)
+              [1] _sync_flasks (res://scripts/main.gd:368)
+              [2] flask_statuses (res://scripts/main.gd:397)
+              [3] _update_flasks (res://scripts/game_hud.gd:512)
+              [4] _update_live (res://scripts/game_hud.gd:798)
+              [5] _process (res://scripts/game_hud.gd:173)
+SCRIPT ERROR: Invalid access to property or key 'locations' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.flask_slots (res://scripts/canonical_game_state.gd:377)
+          GDScript backtrace (most recent call first):
+              [0] flask_slots (res://scripts/canonical_game_state.gd:377)
+              [1] flask_statuses (res://scripts/main.gd:400)
+              [2] _update_flasks (res://scripts/game_hud.gd:512)
+              [3] _update_live (res://scripts/game_hud.gd:798)
+              [4] _process (res://scripts/game_hud.gd:173)
+SCRIPT ERROR: Invalid access to property or key 'progress' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.@level_getter (res://scripts/canonical_game_state.gd:36)
+          GDScript backtrace (most recent call first):
+              [0] @level_getter (res://scripts/canonical_game_state.gd:36)
+              [1] _update_live (res://scripts/game_hud.gd:809)
+              [2] _process (res://scripts/game_hud.gd:173)
+SCRIPT ERROR: Invalid access to property or key 'progress' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.@xp_getter (res://scripts/canonical_game_state.gd:38)
+          GDScript backtrace (most recent call first):
+              [0] @xp_getter (res://scripts/canonical_game_state.gd:38)
+              [1] _update_live (res://scripts/game_hud.gd:809)
+              [2] _process (res://scripts/game_hud.gd:173)
+SCRIPT ERROR: Invalid access to property or key 'talents' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.@talent_points_getter (res://scripts/canonical_game_state.gd:40)
+          GDScript backtrace (most recent call first):
+              [0] @talent_points_getter (res://scripts/canonical_game_state.gd:40)
+              [1] _update_live (res://scripts/game_hud.gd:809)
+              [2] _process (res://scripts/game_hud.gd:173)
+SCRIPT ERROR: Invalid access to property or key 'skill_groups' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.get_build_view_token (res://scripts/canonical_game_state.gd:69)
+          GDScript backtrace (most recent call first):
+              [0] get_build_view_token (res://scripts/canonical_game_state.gd:69)
+              [1] _update_live (res://scripts/game_hud.gd:815)
+              [2] _process (res://scripts/game_hud.gd:173)
+SCRIPT ERROR: Invalid access to property or key 'bindings' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.group_for_key (res://scripts/canonical_game_state.gd:145)
+          GDScript backtrace (most recent call first):
+              [0] group_for_key (res://scripts/canonical_game_state.gd:145)
+              [1] @skill_slots_getter (res://scripts/canonical_game_state.gd:45)
+              [2] _update_live (res://scripts/game_hud.gd:820)
+              [3] _process (res://scripts/game_hud.gd:173)
+SCRIPT ERROR: Invalid access to property or key 'bindings' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.group_for_key (res://scripts/canonical_game_state.gd:145)
+          GDScript backtrace (most recent call first):
+              [0] group_for_key (res://scripts/canonical_game_state.gd:145)
+              [1] @skill_slots_getter (res://scripts/canonical_game_state.gd:45)
+              [2] _update_live (res://scripts/game_hud.gd:820)
+              [3] _process (res://scripts/game_hud.gd:173)
+SCRIPT ERROR: Invalid access to property or key 'bindings' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.group_for_key (res://scripts/canonical_game_state.gd:145)
+          GDScript backtrace (most recent call first):
+              [0] group_for_key (res://scripts/canonical_game_state.gd:145)
+              [1] @skill_slots_getter (res://scripts/canonical_game_state.gd:45)
+              [2] _update_live (res://scripts/game_hud.gd:820)
+              [3] _process (res://scripts/game_hud.gd:173)
+SCRIPT ERROR: Invalid access to property or key 'bindings' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.group_for_key (res://scripts/canonical_game_state.gd:145)
+          GDScript backtrace (most recent call first):
+              [0] group_for_key (res://scripts/canonical_game_state.gd:145)
+              [1] @skill_slots_getter (res://scripts/canonical_game_state.gd:45)
+              [2] _update_live (res://scripts/game_hud.gd:820)
+              [3] _process (res://scripts/game_hud.gd:173)
+SCRIPT ERROR: Invalid access to property or key 'bindings' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.group_for_key (res://scripts/canonical_game_state.gd:145)
+          GDScript backtrace (most recent call first):
+              [0] group_for_key (res://scripts/canonical_game_state.gd:145)
+              [1] @skill_slots_getter (res://scripts/canonical_game_state.gd:45)
+              [2] _update_live (res://scripts/game_hud.gd:820)
+              [3] _process (res://scripts/game_hud.gd:173)
+SCRIPT ERROR: Invalid access to property or key 'locations' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.equipped_items (res://scripts/canonical_game_state.gd:156)
+          GDScript backtrace (most recent call first):
+              [0] equipped_items (res://scripts/canonical_game_state.gd:156)
+              [1] @equipped_getter (res://scripts/canonical_game_state.gd:34)
+              [2] draw_player (res://scripts/visuals/fantasy_actors.gd:25)
+              [3] draw_player (res://scripts/visuals/arena_visuals.gd:118)
+              [4] draw_after_actors (res://scripts/visuals/arena_visuals.gd:205)
+              [5] _draw (res://scripts/visuals/foreground_arena_layer.gd:17)
+SCRIPT ERROR: Invalid access to property or key 'items' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.item_definition (res://scripts/save/canonical_build_store.gd:70)
+          GDScript backtrace (most recent call first):
+              [0] item_definition (res://scripts/save/canonical_build_store.gd:70)
+              [1] get_item_definition (res://scripts/canonical_game_state.gd:62)
+              [2] draw_player (res://scripts/visuals/fantasy_actors.gd:26)
+              [3] draw_player (res://scripts/visuals/arena_visuals.gd:118)
+              [4] draw_after_actors (res://scripts/visuals/arena_visuals.gd:205)
+              [5] _draw (res://scripts/visuals/foreground_arena_layer.gd:17)
+SCRIPT ERROR: Invalid access to property or key 'locations' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.equipped_items (res://scripts/canonical_game_state.gd:156)
+          GDScript backtrace (most recent call first):
+              [0] equipped_items (res://scripts/canonical_game_state.gd:156)
+              [1] @equipped_getter (res://scripts/canonical_game_state.gd:34)
+              [2] draw_player (res://scripts/visuals/fantasy_actors.gd:27)
+              [3] draw_player (res://scripts/visuals/arena_visuals.gd:118)
+              [4] draw_after_actors (res://scripts/visuals/arena_visuals.gd:205)
+              [5] _draw (res://scripts/visuals/foreground_arena_layer.gd:17)
+SCRIPT ERROR: Invalid access to property or key 'locations' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.equipped_items (res://scripts/canonical_game_state.gd:156)
+          GDScript backtrace (most recent call first):
+              [0] equipped_items (res://scripts/canonical_game_state.gd:156)
+              [1] @equipped_getter (res://scripts/canonical_game_state.gd:34)
+              [2] draw_player (res://scripts/visuals/fantasy_actors.gd:27)
+              [3] draw_player (res://scripts/visuals/arena_visuals.gd:118)
+              [4] draw_after_actors (res://scripts/visuals/arena_visuals.gd:205)
+              [5] _draw (res://scripts/visuals/foreground_arena_layer.gd:17)
+SCRIPT ERROR: Invalid access to property or key 'items' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.item_definition (res://scripts/save/canonical_build_store.gd:70)
+          GDScript backtrace (most recent call first):
+              [0] item_definition (res://scripts/save/canonical_build_store.gd:70)
+              [1] get_item_definition (res://scripts/canonical_game_state.gd:62)
+              [2] draw_player (res://scripts/visuals/fantasy_actors.gd:28)
+              [3] draw_player (res://scripts/visuals/arena_visuals.gd:118)
+              [4] draw_after_actors (res://scripts/visuals/arena_visuals.gd:205)
+              [5] _draw (res://scripts/visuals/foreground_arena_layer.gd:17)
+SCRIPT ERROR: Invalid access to property or key 'locations' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.equipped_items (res://scripts/canonical_game_state.gd:156)
+          GDScript backtrace (most recent call first):
+              [0] equipped_items (res://scripts/canonical_game_state.gd:156)
+              [1] @equipped_getter (res://scripts/canonical_game_state.gd:34)
+              [2] draw_player (res://scripts/visuals/fantasy_actors.gd:25)
+              [3] draw_player (res://scripts/visuals/arena_visuals.gd:118)
+              [4] draw_after_actors (res://scripts/visuals/arena_visuals.gd:205)
+              [5] _draw (res://scripts/visuals/foreground_arena_layer.gd:17)
+SCRIPT ERROR: Invalid access to property or key 'items' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.item_definition (res://scripts/save/canonical_build_store.gd:70)
+          GDScript backtrace (most recent call first):
+              [0] item_definition (res://scripts/save/canonical_build_store.gd:70)
+              [1] get_item_definition (res://scripts/canonical_game_state.gd:62)
+              [2] draw_player (res://scripts/visuals/fantasy_actors.gd:26)
+              [3] draw_player (res://scripts/visuals/arena_visuals.gd:118)
+              [4] draw_after_actors (res://scripts/visuals/arena_visuals.gd:205)
+              [5] _draw (res://scripts/visuals/foreground_arena_layer.gd:17)
+SCRIPT ERROR: Invalid access to property or key 'locations' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.equipped_items (res://scripts/canonical_game_state.gd:156)
+          GDScript backtrace (most recent call first):
+              [0] equipped_items (res://scripts/canonical_game_state.gd:156)
+              [1] @equipped_getter (res://scripts/canonical_game_state.gd:34)
+              [2] draw_player (res://scripts/visuals/fantasy_actors.gd:27)
+              [3] draw_player (res://scripts/visuals/arena_visuals.gd:118)
+              [4] draw_after_actors (res://scripts/visuals/arena_visuals.gd:205)
+              [5] _draw (res://scripts/visuals/foreground_arena_layer.gd:17)
+SCRIPT ERROR: Invalid access to property or key 'locations' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.equipped_items (res://scripts/canonical_game_state.gd:156)
+          GDScript backtrace (most recent call first):
+              [0] equipped_items (res://scripts/canonical_game_state.gd:156)
+              [1] @equipped_getter (res://scripts/canonical_game_state.gd:34)
+              [2] draw_player (res://scripts/visuals/fantasy_actors.gd:27)
+              [3] draw_player (res://scripts/visuals/arena_visuals.gd:118)
+              [4] draw_after_actors (res://scripts/visuals/arena_visuals.gd:205)
+              [5] _draw (res://scripts/visuals/foreground_arena_layer.gd:17)
+SCRIPT ERROR: Invalid access to property or key 'items' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.item_definition (res://scripts/save/canonical_build_store.gd:70)
+          GDScript backtrace (most recent call first):
+              [0] item_definition (res://scripts/save/canonical_build_store.gd:70)
+              [1] get_item_definition (res://scripts/canonical_game_state.gd:62)
+              [2] draw_player (res://scripts/visuals/fantasy_actors.gd:28)
+              [3] draw_player (res://scripts/visuals/arena_visuals.gd:118)
+              [4] draw_after_actors (res://scripts/visuals/arena_visuals.gd:205)
+              [5] _draw (res://scripts/visuals/foreground_arena_layer.gd:17)
+SCRIPT ERROR: Invalid access to property or key 'locations' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.equipped_items (res://scripts/canonical_game_state.gd:156)
+          GDScript backtrace (most recent call first):
+              [0] equipped_items (res://scripts/canonical_game_state.gd:156)
+              [1] @equipped_getter (res://scripts/canonical_game_state.gd:34)
+              [2] draw_player (res://scripts/visuals/fantasy_actors.gd:25)
+              [3] draw_player (res://scripts/visuals/arena_visuals.gd:118)
+              [4] draw_after_actors (res://scripts/visuals/arena_visuals.gd:205)
+              [5] _draw (res://scripts/visuals/foreground_arena_layer.gd:17)
+SCRIPT ERROR: Invalid access to property or key 'items' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.item_definition (res://scripts/save/canonical_build_store.gd:70)
+          GDScript backtrace (most recent call first):
+              [0] item_definition (res://scripts/save/canonical_build_store.gd:70)
+              [1] get_item_definition (res://scripts/canonical_game_state.gd:62)
+              [2] draw_player (res://scripts/visuals/fantasy_actors.gd:26)
+              [3] draw_player (res://scripts/visuals/arena_visuals.gd:118)
+              [4] draw_after_actors (res://scripts/visuals/arena_visuals.gd:205)
+              [5] _draw (res://scripts/visuals/foreground_arena_layer.gd:17)
+SCRIPT ERROR: Invalid access to property or key 'locations' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.equipped_items (res://scripts/canonical_game_state.gd:156)
+          GDScript backtrace (most recent call first):
+              [0] equipped_items (res://scripts/canonical_game_state.gd:156)
+              [1] @equipped_getter (res://scripts/canonical_game_state.gd:34)
+              [2] draw_player (res://scripts/visuals/fantasy_actors.gd:27)
+              [3] draw_player (res://scripts/visuals/arena_visuals.gd:118)
+              [4] draw_after_actors (res://scripts/visuals/arena_visuals.gd:205)
+              [5] _draw (res://scripts/visuals/foreground_arena_layer.gd:17)
+SCRIPT ERROR: Invalid access to property or key 'locations' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.equipped_items (res://scripts/canonical_game_state.gd:156)
+          GDScript backtrace (most recent call first):
+              [0] equipped_items (res://scripts/canonical_game_state.gd:156)
+              [1] @equipped_getter (res://scripts/canonical_game_state.gd:34)
+              [2] draw_player (res://scripts/visuals/fantasy_actors.gd:27)
+              [3] draw_player (res://scripts/visuals/arena_visuals.gd:118)
+              [4] draw_after_actors (res://scripts/visuals/arena_visuals.gd:205)
+              [5] _draw (res://scripts/visuals/foreground_arena_layer.gd:17)
+SCRIPT ERROR: Invalid access to property or key 'items' on a base object of type 'Dictionary'.
+          at: CanonicalGameState.item_definition (res://scripts/save/canonical_build_store.gd:70)
+          GDScript backtrace (most recent call first):
+              [0] item_definition (res://scripts/save/canonical_build_store.gd:70)
+              [1] get_item_definition (res://scripts/canonical_game_state.gd:62)
+              [2] draw_player (res://scripts/visuals/fantasy_actors.gd:28)
+              [3] draw_player (res://scripts/visuals/arena_visuals.gd:118)
+              [4] draw_after_actors (res://scripts/visuals/arena_visuals.gd:205)
+              [5] _draw (res://scripts/visuals/foreground_arena_layer.gd:17)

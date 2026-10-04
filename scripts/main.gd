@@ -138,6 +138,7 @@ func _ready() -> void:
 	_font = load("res://assets/fonts/arena_sans.otf")
 	_configure_input()
 	state.load_build(build_save_path)
+	var recovered: Dictionary = _recover_normal_active()
 	_stats = state.get_stats()
 	state.changed.connect(_on_build_changed)
 	static_environment = preload("res://scripts/visuals/static_arena_layer.gd").new()
@@ -160,7 +161,11 @@ func _ready() -> void:
 	hud.setup(self)
 	_ready_complete = true
 	restart_run()
-	if not state.last_load_error.is_empty():
+	if not recovered.ok:
+		hud.notify(recovered.reason)
+	elif int(recovered.get("abandoned_run_id",0))>0:
+		hud.notify("上次未完成地图已按离场保存；已得进度保留，入场碎片不退还")
+	elif not state.last_load_error.is_empty():
 		hud.open_panel("pause")
 		hud.notify(state.last_load_error)
 	elif state.has_method("passive_analysis"):
@@ -290,12 +295,17 @@ func _quit_game() -> void:
 
 
 func restart_run() -> void:
+	if _world_mode in ["map", "map_complete"] and not _is_test_profile() and not _normal_reset_authorized:
+		var retried: Dictionary = retry_normal_map(_world_revision)
+		if not retried.ok and is_instance_valid(hud): hud.notify(retried.reason)
+		return
 	if _world_mode in ["map","map_complete"]:
 		var profile:Dictionary=_map_run.profile.duplicate(true)
 		if not _map_run.begin(profile):
 			if is_instance_valid(hud):hud.notify("地图配置无效，不能重开")
 			return
 		_world_mode="map";_world_revision+=1
+	_normal_reset_authorized = false
 	_sync_flasks(true)
 	run_revision += 1
 	critical_runtime.reset(rng.seed ^ run_revision)
@@ -1292,7 +1302,9 @@ func _apply_enemy_settlement(enemy: Dictionary, settlement: Dictionary, color: C
 				for slot:Dictionary in state.flask_slots():
 					if not slot.uid.is_empty():equipped_flasks.append(slot.uid)
 			flask_runtime.charge_rewarded_kill(equipped_flasks,_stats)
-		var leveled: bool = state.add_xp(int(enemy.get("xp_reward", 0))) if eligible else false
+		var leveled: bool = false
+		if eligible:
+			leveled = state.add_xp(int(enemy.get("xp_reward", 0))) if _is_test_profile() else state.add_normal_root_xp(int(enemy.get("xp_reward", 0)))
 		if leveled:
 			health = minf(float(_stats.max_health), health + 25.0)
 			mana = float(_stats.max_mana)
@@ -1304,12 +1316,17 @@ func _apply_enemy_settlement(enemy: Dictionary, settlement: Dictionary, color: C
 			_award_kill_equipment(enemy)
 		if eligible and reward_kills % 20 == 0:
 			_award_kill_jewel()
-		if eligible and reward_kills % 30 == 0 and state.has_method("award_random_gem"):
+		if eligible and _is_test_profile() and reward_kills % 30 == 0 and state.has_method("award_random_gem"):
 			var gem_uid:String=state.award_random_gem(rng)
 			hud.notify("获得宝石："+str(state.item_definition(gem_uid).name)+" · 按 K 装配" if not gem_uid.is_empty() else "背包空间不足，无法领取宝石；可在 I 中整理或丢弃重复宝石")
-		if eligible and reward_kills % FlaskCatalog.REWARD_INTERVAL == 0 and state.has_method("award_flask"):
+		if eligible and _is_test_profile() and reward_kills % FlaskCatalog.REWARD_INTERVAL == 0 and state.has_method("award_flask"):
 			var flask_uid: String = state.award_flask(FlaskCatalog.reward_definition(reward_kills))
 			hud.notify("获得药剂："+str(state.item_definition(flask_uid).name) if not flask_uid.is_empty() else "背包空间不足，未领取药剂；已有物品保留")
+		if eligible and not _is_test_profile() and int(state.normal_journey().normal_root_kills) % 30 == 0:
+			var milestone: Dictionary = state.normal_claim_rewards(state.revision(), build_save_path, false)
+			if milestone.ok: hud.notify("正式击杀里程碑：获得宝石 %d、药剂 %d" % [milestone.claimed_gems, milestone.claimed_flasks])
+			else: hud.notify("里程碑奖励仍待领取，返回正式城镇整理后领取")
+			_world_revision += 1; world_context_changed.emit()
 		if eligible and enemy.get("rarity", "") == "boss":
 			_award_kill_special_jewel()
 		if eligible and reward_kills % 4 == 0:
@@ -1519,18 +1536,24 @@ signal build_state_replaced
 const TownCatalog=preload("res://scripts/town/town_catalog.gd")
 const MapCatalog=preload("res://scripts/world/map_catalog.gd")
 const MapCompiler=preload("res://scripts/world/map_compiler.gd")
+const NormalMaps=preload("res://scripts/world/normal_map_catalog.gd")
 const MapDefense=preload("res://scripts/world/map_defense_rules.gd")
 const MapEnemyAdmission=preload("res://scripts/world/map_admission.gd")
 const MapRun=preload("res://scripts/world/map_run_state.gd")
 const NORMAL_BUILD_PATH:="user://build_save.json"
 const TOWN_TEST_BUILD_PATH:="user://town_test_build_save.json"
 var build_save_path:String=NORMAL_BUILD_PATH
-var _world_mode:="normal"
+var _world_mode:="town"
 var _world_revision:=0
 var _map_draft_revision:=0
-var _map_draft_profile:Dictionary=MapCompiler.compile("old_garden",[],[]).profile
+var _map_draft_profile:Dictionary=MapCompiler.compile_normal("old_garden",1,[],[]).profile
+var _normal_draft_profile:Dictionary=_map_draft_profile.duplicate(true)
+var _test_draft_profile:Dictionary=MapCompiler.compile("old_garden",[],[]).profile
 var _map_run=MapRun.new()
 var _normal_state:RefCounted
+var _normal_run_id:int=0
+var _normal_reset_authorized:bool=false
+var _normal_completion_pending:bool=false
 var test_supply_enabled:=true
 
 func world_geometry() -> Dictionary: return _geometry.snapshot()
@@ -1545,13 +1568,34 @@ func _terrain_visible(from: Vector2, to: Vector2) -> bool:
 	return not _geometry.has_walls() or _geometry.visible(from,to)
 
 
+func _is_test_profile() -> bool:
+	return Build.Legacy._save_paths_match(build_save_path, TOWN_TEST_BUILD_PATH)
+
+func _recover_normal_active() -> Dictionary:
+	if _is_test_profile(): return {"ok":true,"reason":""}
+	var active:Dictionary=state.normal_journey().active_run
+	if active.is_empty():return {"ok":true,"reason":""}
+	var result:Dictionary=state.normal_abandon_map(active.run_id,state.revision(),build_save_path)
+	if result.ok:result["abandoned_run_id"]=int(active.run_id)
+	return result
+
 func world_context()->Dictionary:
 	var run:Dictionary=_map_run.snapshot()
-	return {"mode":_world_mode,"test_mode":_world_mode!="normal","save_path":build_save_path,"revision":_world_revision,"run_revision":run_revision,
+	var test:bool=_is_test_profile()
+	var pending:Dictionary={"pending_map_reward":{},"pending_gems":0,"pending_flasks":0,"normal_root_kills":0} if test else state.normal_pending_rewards()
+	var normal_town:bool=_world_mode=="town" and not test
+	var has_reward:bool=not pending.pending_map_reward.is_empty() or pending.pending_gems>0 or pending.pending_flasks>0
+	var active:Dictionary={} if test else state.normal_journey().active_run
+	return {"mode":_world_mode,"test_mode":test,"save_path":build_save_path,"revision":_world_revision,"run_revision":run_revision,
 		"map_id":str(_map_run.profile.get("id","")),"map_name":str(_map_run.profile.get("name","")),
 		"ordinary_kills":run.ordinary_kills,"ordinary_target":run.ordinary_target,"boss_defeated":run.boss_defeated,
-		"can_return":_world_mode in ["map","map_complete"],"supply_enabled":test_supply_enabled,
-		"description":"城镇测试 · 独立测试进度，免费测试供应不进入正常存档" if _world_mode!="normal" else "正常游戏"}
+		"can_return":_world_mode in ["map","map_complete"],"supply_enabled":test and test_supply_enabled,
+		"normal_town":normal_town,"can_enter_normal_town":not test and _world_mode=="normal","can_leave_normal_town":normal_town,
+		"completion_save_pending":_normal_completion_pending,
+		"map_tier":int(_map_run.profile.get("journey_tier",0)),"fee_paid":int(active.get("fee_paid",0)),"retry_cost":int(_map_run.profile.get("fee",0)),
+		"pending_map_reward":pending.pending_map_reward,"pending_gems":int(pending.pending_gems),"pending_flasks":int(pending.pending_flasks),"normal_root_kills":int(pending.normal_root_kills),
+		"can_claim_normal_rewards":normal_town and has_reward,"claim_reason":"请先返回正式城镇" if not normal_town else "" if has_reward else "没有待领取奖励",
+		"description":"城镇测试 · 独立测试进度，免费测试供应不进入正常存档" if test else "正式城镇" if normal_town else "竞技练习" if _world_mode=="normal" else "正式地图挑战"}
 func _world_failure(code:String,reason:String)->Dictionary:return {"ok":false,"code":code,"reason":reason}
 func _world_ok()->Dictionary:return {"ok":true,"code":"","reason":"","world":world_context()}
 func _world_revision_ok(value:Variant)->bool:return value is int and value==_world_revision
@@ -1561,40 +1605,61 @@ func _replace_build(next:RefCounted,path:String)->void:
 	state=next;build_save_path=path;state.changed.connect(_on_build_changed)
 	_stats=state.get_stats();_progress_hud_dirty=false;_progress_save_dirty=false;_progress_save_requested=false
 	build_state_replaced.emit()
+func enter_normal_town(expected_revision:Variant)->Dictionary:
+	if not _world_revision_ok(expected_revision) or _is_test_profile() or _world_mode!="normal":return _world_failure("stale_world","正式城镇入口已变化")
+	if not save_build():return _world_failure("save_failed","正式进度未保存，暂不能进入城镇")
+	_world_mode="town";_world_revision+=1;_map_draft_revision+=1;_map_run.clear();_clear_encounter();restart_run();world_context_changed.emit()
+	return _world_ok()
+func leave_normal_town(expected_revision:Variant)->Dictionary:
+	if not _world_revision_ok(expected_revision) or _is_test_profile() or _world_mode!="town":return _world_failure("stale_world","请先返回正式城镇")
+	var recovered:Dictionary=_recover_normal_active()
+	if not recovered.ok:return _world_failure("save_failed",recovered.reason)
+	if not save_build():return _world_failure("save_failed","正式进度未保存，暂不能进入竞技练习")
+	_world_mode="normal";_world_revision+=1;_map_draft_revision+=1;_map_run.clear();_clear_encounter();restart_run();world_context_changed.emit()
+	return _world_ok()
 func enter_town_test(expected_revision:Variant)->Dictionary:
-	if not _world_revision_ok(expected_revision) or _world_mode!="normal":return _world_failure("stale_world","当前入口已变化")
+	if not _world_revision_ok(expected_revision) or _is_test_profile() or _world_mode not in ["normal","town"]:return _world_failure("stale_world","请先返回正式城镇或竞技练习")
+	var recovered:Dictionary=_recover_normal_active()
+	if not recovered.ok:return _world_failure("save_failed",recovered.reason)
 	if not save_build():return _world_failure("save_failed","正常进度未保存，暂不能进入城镇测试")
 	var test:=Build.new()
 	if FileAccess.file_exists(TOWN_TEST_BUILD_PATH):
 		if not test.load_build(TOWN_TEST_BUILD_PATH):return _world_failure("test_save_invalid",test.last_error)
 	else:
-		test._accept_memory(state.snapshot())
+		var copied:Dictionary=state.snapshot();copied.journey=Build.Journey.empty()
+		test._accept_memory(copied)
 		if test.save_build(TOWN_TEST_BUILD_PATH)!=OK:return _world_failure("test_save_failed",test.last_error)
-	_normal_state=state;_world_mode="town";_world_revision+=1;_map_draft_revision+=1
+	_normal_draft_profile=_map_draft_profile.duplicate(true);_map_draft_profile=_test_draft_profile.duplicate(true)
+	_normal_state=state;_world_mode="town";_world_revision+=1;_map_draft_revision+=1;_normal_run_id=0
 	_replace_build(test,TOWN_TEST_BUILD_PATH);_map_run.clear();_clear_encounter();restart_run();world_context_changed.emit()
 	if test.migrated_from_legacy:hud.notify(test.migration_message)
 	return _world_ok()
 func leave_town_test(expected_revision:Variant)->Dictionary:
-	if not _world_revision_ok(expected_revision) or _world_mode!="town":return _world_failure("stale_world","请先返回城镇")
+	if not _world_revision_ok(expected_revision) or not _is_test_profile() or _world_mode!="town":return _world_failure("stale_world","请先返回测试城镇")
 	if not save_build():return _world_failure("save_failed","测试进度未保存")
 	var normal:=Build.new()
 	if not normal.load_build(NORMAL_BUILD_PATH):return _world_failure("normal_save_invalid",normal.last_error)
-	_world_mode="normal";_world_revision+=1;_map_draft_revision+=1;_map_run.clear();_clear_encounter()
+	_test_draft_profile=_map_draft_profile.duplicate(true);_map_draft_profile=_normal_draft_profile.duplicate(true)
+	_world_mode="town";_world_revision+=1;_map_draft_revision+=1;_map_run.clear();_clear_encounter();_normal_run_id=0
 	_replace_build(normal,NORMAL_BUILD_PATH);_normal_state=null;restart_run();world_context_changed.emit()
 	if normal.migrated_from_legacy:hud.notify(normal.migration_message)
 	return _world_ok()
 func town_services()->Array[Dictionary]:
 	var rows:=TownCatalog.services()
-	for row:Dictionary in rows:row.available=_world_mode=="town";row.reason="" if row.available else "请先进入城镇测试"
+	for row:Dictionary in rows:
+		row.available=_world_mode=="town" and (_is_test_profile() or row.id in ["crafter","passive_reset","map_device"])
+		row.reason="" if row.available else "测试商人仅在独立测试城镇供应" if _world_mode=="town" else "请先返回城镇"
+		if not _is_test_profile() and row.id=="crafter":row.description="使用正式背包内的真实校准碎片进行六项现有工艺。"
+		elif not _is_test_profile() and row.id=="map_device":row.description="选择地图与挑战档位；成功入图才扣费，完整完成后领取结算。"
 	return rows
 func town_stock(service_id:String)->Array[Dictionary]:
 	var rows:=TownCatalog.offers(service_id)
 	for row:Dictionary in rows:
-		row.available=_world_mode=="town" and test_supply_enabled
-		row.reason="" if row.available else "测试供应已关闭" if not test_supply_enabled else "请先返回城镇"
+		row.available=_world_mode=="town" and _is_test_profile() and test_supply_enabled
+		row.reason="" if row.available else "测试供应不能领取到正式存档" if not _is_test_profile() else "测试供应已关闭" if not test_supply_enabled else "请先返回测试城镇"
 	return rows
 func town_buy(offer_id:Variant,expected_revision:Variant)->Dictionary:
-	if _world_mode!="town" or not test_supply_enabled:return _world_failure("service_unavailable","当前不能领取测试供应")
+	if _world_mode!="town" or not _is_test_profile() or not test_supply_enabled:return _world_failure("service_unavailable","当前不能领取测试供应")
 	var result:Dictionary=state.town_claim_offer(offer_id,expected_revision,build_save_path)
 	result.code=str(result.get("code",result.get("error_code","")))
 	if result.ok:world_context_changed.emit()
@@ -1605,31 +1670,95 @@ func town_reset_passives(expected_revision:Variant)->Dictionary:
 	result.code=str(result.get("code",result.get("error_code","")))
 	if result.ok:world_context_changed.emit()
 	return result
-func map_options()->Dictionary:return MapCatalog.options()
+func map_options()->Dictionary:
+	var options:Dictionary=MapCatalog.options()
+	options.test_mode=_is_test_profile()
+	if not _is_test_profile():
+		options.tiers=[]
+		var completed:Dictionary=state.normal_journey().best_tiers
+		for id:String in MapCatalog.MAPS:options.tiers.append_array(NormalMaps.tiers(id,int(completed[id])))
+		options.cost_policy={"id":"normal_shards_v1","enabled":true,"label":"入图消耗背包校准碎片","affects_legacy_currency":true}
+	return options
+func _normal_start_reason()->String:
+	if _is_test_profile():return ""
+	var journey:Dictionary=state.normal_journey()
+	if not journey.pending_map_reward.is_empty():return "尚有地图结算待领取，请整理背包后领取再开启新图"
+	# A loaded unfinished run is abandoned by start_map before charging a new one.
+	# Keep that retry reachable if the startup save was temporarily unavailable.
+	if not _map_draft_profile.get("normal_map",false):return "请先制作正式地图草案"
+	if int(_map_draft_profile.journey_tier)>mini(int(journey.best_tiers[_map_draft_profile.id])+1,3):return "此地图档位尚未解锁"
+	if state.crafting_balance()<int(_map_draft_profile.fee):return "背包内校准碎片不足"
+	if not state.pending_items().is_empty():return "请先安置已有待安置物品"
+	return ""
 func map_draft()->Dictionary:
+	var valid:bool=MapCompiler.profile_reason(_map_draft_profile).is_empty()
+	var reason:String="地图草案无效" if not valid else _normal_start_reason()
 	return {"revision":_map_draft_revision,"map_id":_map_draft_profile.id,"normal_ids":_map_draft_profile.normal_ids.duplicate(),"special_ids":_map_draft_profile.special_ids.duplicate(),
-		"valid":MapCompiler.profile_reason(_map_draft_profile).is_empty(),"reason":MapCompiler.profile_reason(_map_draft_profile),"summary":_map_draft_profile.summary,"cost_label":"测试模式免费"}
+		"tier":int(_map_draft_profile.get("journey_tier",0)),"cost":int(_map_draft_profile.get("fee",0)),"completion_reward":int(_map_draft_profile.get("completion_reward",0)),
+		"valid":valid,"reason":reason,"can_start":valid and reason.is_empty() and _world_mode=="town","summary":_map_draft_profile.summary,"cost_label":"测试模式免费" if _is_test_profile() else "入图 %d 碎片 · 完成 %d 碎片"%[_map_draft_profile.get("fee",0),_map_draft_profile.get("completion_reward",0)]}
 func craft_map(map_id:Variant,normal_ids:Variant,special_ids:Variant,expected_revision:Variant)->Dictionary:
-	if _world_mode!="town":return _world_failure("not_in_town","请先返回城镇")
+	if _world_mode!="town" or not _is_test_profile():return _world_failure("not_in_test_town","请先进入独立测试城镇")
 	if not expected_revision is int or expected_revision!=_map_draft_revision:return _world_failure("stale_map","地图草案已变化")
 	var compiled:=MapCompiler.compile(map_id,normal_ids,special_ids)
 	if not compiled.ok:return compiled
 	_map_draft_profile=compiled.profile;_map_draft_revision+=1;world_context_changed.emit()
 	return {"ok":true,"code":"","reason":"","draft":map_draft()}
+func craft_normal_map(map_id:Variant,tier:Variant,normal_ids:Variant,special_ids:Variant,expected_revision:Variant)->Dictionary:
+	if _world_mode!="town" or _is_test_profile():return _world_failure("not_in_normal_town","请先返回正式城镇")
+	if not expected_revision is int or expected_revision!=_map_draft_revision:return _world_failure("stale_map","地图草案已变化")
+	var compiled:=MapCompiler.compile_normal(map_id,tier,normal_ids,special_ids)
+	if not compiled.ok:return compiled
+	if int(tier)>mini(int(state.normal_journey().best_tiers[map_id])+1,3):return _world_failure("tier_locked","请先完成本地图前一档挑战")
+	_map_draft_profile=compiled.profile;_map_draft_revision+=1;world_context_changed.emit()
+	return {"ok":true,"code":"","reason":"","draft":map_draft()}
 func start_map(expected_revision:Variant)->Dictionary:
 	if _world_mode!="town" or not expected_revision is int or expected_revision!=_map_draft_revision:return _world_failure("stale_map","地图草案或所在区域已变化")
-	var reason:=MapCompiler.profile_reason(_map_draft_profile)
+	var reason:String=MapCompiler.profile_reason(_map_draft_profile)
 	if not reason.is_empty():return _world_failure("invalid_map",reason)
-	if not save_build():return _world_failure("save_failed","测试构筑未保存，未启动地图")
+	if not _is_test_profile():
+		var recovered:Dictionary=_recover_normal_active()
+		if not recovered.ok:return _world_failure("save_failed",recovered.reason)
+		reason=_normal_start_reason()
+		if not reason.is_empty():return _world_failure("cannot_start",reason)
+		var began:Dictionary=state.normal_start_map(_map_draft_profile,state.revision(),build_save_path)
+		if not began.ok:return _world_failure(str(began.get("error_code","save_failed")),began.reason)
+		_normal_run_id=int(began.run_id);_normal_reset_authorized=true
+	elif not save_build():return _world_failure("save_failed","测试构筑未保存，未启动地图")
 	if not _map_run.begin(_map_draft_profile):return _world_failure("invalid_map","地图配置无效")
+	_normal_completion_pending=false
 	_encounter_profile=_map_draft_profile.encounter_profile;_encounter_ids.assign(_map_draft_profile.normal_ids);_encounter_error=""
 	_world_mode="map";_world_revision+=1;_map_draft_revision+=1;restart_run();world_context_changed.emit()
 	return _world_ok()
+func retry_normal_map(expected_revision:Variant)->Dictionary:
+	if not _world_revision_ok(expected_revision) or _is_test_profile() or _world_mode!="map" or _normal_run_id<=0:return _world_failure("stale_run","当前不能重新开启正式地图，请返回城镇")
+	var began:Dictionary=state.normal_start_map(_map_run.profile,state.revision(),build_save_path,_normal_run_id)
+	if not began.ok:return _world_failure(str(began.get("error_code","save_failed")),began.reason)
+	_normal_run_id=int(began.run_id);_normal_reset_authorized=true;_normal_completion_pending=false
+	restart_run();world_context_changed.emit();return _world_ok()
+func _finish_normal_map()->Dictionary:
+	if _is_test_profile() or not _normal_completion_pending:return {"ok":true,"reason":""}
+	var result:Dictionary=state.normal_complete_map(_normal_run_id,state.revision(),build_save_path)
+	if result.ok:_normal_completion_pending=false;_world_revision+=1;world_context_changed.emit()
+	return result
 func return_to_town(expected_revision:Variant)->Dictionary:
 	if not _world_revision_ok(expected_revision) or _world_mode not in ["map","map_complete"]:return _world_failure("stale_world","本轮地图已变化")
+	if not _is_test_profile():
+		var finished:Dictionary=_finish_normal_map()
+		if not finished.ok:return _world_failure("save_failed",finished.reason)
+		if not state.normal_journey().active_run.is_empty():
+			var abandoned:Dictionary=state.normal_abandon_map(_normal_run_id,state.revision(),build_save_path)
+			if not abandoned.ok:return _world_failure("save_failed",abandoned.reason)
 	if not save_build():return _world_failure("save_failed","已得进度未保存，暂不能返城")
-	_world_mode="town";_world_revision+=1;_map_run.clear();_clear_encounter();restart_run();world_context_changed.emit()
+	_world_mode="town";_world_revision+=1;_normal_run_id=0;_map_run.clear();_clear_encounter();restart_run();world_context_changed.emit()
 	return _world_ok()
+func claim_normal_rewards(expected_revision:Variant)->Dictionary:
+	if not _world_revision_ok(expected_revision) or _is_test_profile() or _world_mode!="town":return _world_failure("stale_world","请先返回正式城镇领取")
+	var result:Dictionary=state.normal_claim_rewards(state.revision(),build_save_path,true)
+	if not result.ok:return _world_failure(str(result.get("error_code","claim_failed")),result.reason)
+	_world_revision+=1;world_context_changed.emit()
+	var response:Dictionary=_world_ok()
+	for key:String in ["claimed_shards","claimed_gems","claimed_flasks"]:response[key]=int(result[key])
+	return response
 func _update_map_spawning(delta:float)->void:
 	_flush_monster_spawns()
 	if _map_run.ready_for_boss() and enemies.size()<MAX_ENEMIES:
@@ -1649,4 +1778,10 @@ func _check_map_complete()->void:
 		if float(enemy.health)>0.0:living+=1
 	if _map_run.check_complete(living,monster_runtime.queue.size()):
 		projectile_runtime.cancel_all(projectiles);telegraphs.reset()
-		_world_mode="map_complete";_world_revision+=1;world_context_changed.emit();hud.notify("地图完成，可以返回城镇")
+		_world_mode="map_complete";_world_revision+=1
+		var message:String="地图完成，可以返回城镇" if _is_test_profile() else "地图完成，返回正式城镇领取结算"
+		if not _is_test_profile():
+			_normal_completion_pending=true
+			var completed:Dictionary=_finish_normal_map()
+			if not completed.ok:message="地图完成，但结算保存失败；返回城镇时可重试："+str(completed.reason)
+		world_context_changed.emit();hud.notify(message)
