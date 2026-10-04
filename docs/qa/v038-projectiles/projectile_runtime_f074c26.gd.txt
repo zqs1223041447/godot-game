@@ -133,8 +133,10 @@ func advance(shots: Array[Dictionary], delta: float, targets: Array[Dictionary],
 				_event(events,"evaded",shot,offset+hit_time,{"target_id":target_id,"pos":hit_position})
 				continue
 			shot.hit_ids.append(target_id)
-			_hit_event(events, shot, offset + hit_time, target_id, hit_position,
-				hit_time, contact_gate.is_valid())
+			_event(events, "hit", shot, offset + hit_time, {"target_id": target_id,
+				"pos": hit_position, "payload": shot.payload, "snapshot": shot.snapshot, "slow": shot.slow,
+				"direction": Vector2(shot.velocity).normalized(), "color": shot.color,
+				"age": float(shot.age) + hit_time,"accuracy_checked":contact_gate.is_valid()})
 			if int(shot.pierce) == 0:
 				travel = hit_time
 				end = hit_position
@@ -306,20 +308,6 @@ func _event(events: Array[Dictionary], type: String, shot: Dictionary, time: flo
 	events.append(event)
 
 
-func _hit_event(events: Array[Dictionary], shot: Dictionary, time: float, target_id: int,
-		position: Vector2, hit_time: float, accuracy_checked: bool) -> void:
-	# Match _event's insertion order and values without allocating/merging the
-	# extra hit Dictionary. Read the shot after contact_gate: it may mutate it.
-	_sequence += 1
-	events.append({"type": "hit", "time": time, "sequence": _sequence,
-		"projectile_id": shot.id, "parent_id": shot.parent_id, "root_id": shot.root_id,
-		"cast_id": shot.cast_id, "generation": shot.generation, "role": shot.role,
-		"phase": shot.state, "age": float(shot.age) + hit_time, "pos": position,
-		"target_id": target_id, "payload": shot.payload, "snapshot": shot.snapshot,
-		"slow": shot.slow, "direction": Vector2(shot.velocity).normalized(),
-		"color": shot.color, "accuracy_checked": accuracy_checked})
-
-
 func _finish(shot: Dictionary, reason: String, events: Array[Dictionary], time: float) -> void:
 	if not bool(shot.active):
 		return
@@ -340,19 +328,12 @@ func _contacts(shot: Dictionary, start: Vector2, end: Vector2, targets: Array[Di
 		last_indexed_queries += 1 if _index_active else 0
 		last_candidate_visits += candidates.size()
 		last_full_scan_visits += targets.size()
-	# These inputs are immutable only within this contact query. Do not retain
-	# them across jobs/advance calls: contact_gate can change the next query.
-	var ledger: Dictionary = shot.hit_ledger
-	var ledger_empty: bool = ledger.is_empty()
-	var radius: float = float(shot.radius)
-	var segment: Vector2 = end - start
-	var segment_length_squared: float = segment.length_squared()
 	for target_index: int in candidates:
 		var target: Dictionary = targets[target_index]
 		var id: int = int(target.id)
-		if float(target.get("health", 1.0)) <= 0.0 or float(target.get("spawn", 0.0)) > 0.0 or (not ledger_empty and ledger.has("%s:%d" % [shot.state, id])):
+		if float(target.get("health", 1.0)) <= 0.0 or float(target.get("spawn", 0.0)) > 0.0 or shot.hit_ledger.has("%s:%d" % [shot.state, id]):
 			continue
-		var t: float = _segment_circle_precomputed(start, segment, segment_length_squared, target.pos, radius + float(target.get("radius", 0.0)))
+		var t: float = _segment_circle(start, end, target.pos, float(shot.radius) + float(target.get("radius", 0.0)))
 		if t >= 0.0:
 			result.append({"id": id, "t": t})
 	result.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
@@ -363,20 +344,15 @@ func _contacts(shot: Dictionary, start: Vector2, end: Vector2, targets: Array[Di
 
 
 static func _segment_circle(start: Vector2, end: Vector2, center: Vector2, radius: float) -> float:
-	var delta: Vector2 = end - start
-	return _segment_circle_precomputed(start, delta, delta.length_squared(), center, radius)
-
-
-static func _segment_circle_precomputed(start: Vector2, delta: Vector2, a: float, center: Vector2, radius: float) -> float:
 	var offset: Vector2 = start - center
-	var offset_length_squared: float = offset.length_squared()
-	var radius_squared: float = radius * radius
-	if offset_length_squared <= radius_squared:
+	if offset.length_squared() <= radius * radius:
 		return 0.0
+	var delta: Vector2 = end - start
+	var a: float = delta.length_squared()
 	if a <= EPS:
 		return -1.0
 	var b: float = 2.0 * offset.dot(delta)
-	var c: float = offset_length_squared - radius_squared
+	var c: float = offset.length_squared() - radius * radius
 	var discriminant: float = b * b - 4.0 * a * c
 	if discriminant < 0.0:
 		return -1.0

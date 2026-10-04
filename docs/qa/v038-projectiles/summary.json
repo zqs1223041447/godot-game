@@ -1,0 +1,93 @@
+{
+  "source": "f074c2614540f0842964ced961b3430871adce57",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "os": "Linux 6.18.44 x86_64; headless, shared cloud CPU; hardware model unavailable",
+  "oracle_file_sha256": "fa5a7796fa498fafc2b2fed005d610b08e951af49ca64beef1b47ea707bc9af8",
+  "runtime_sha256": "750974315e5ef413f611ef4bd1577fccac81581eadd9b9b8bf21000eaba0e8df",
+  "spatial_index_unchanged": true,
+  "tests": {
+    "projectile_dense_equivalence_test": 3126,
+    "combat_pipeline_test": 305,
+    "projectile_schedule_test": 4725,
+    "spatial_collision_test": 5357,
+    "terrain_projectile_test": 35
+  },
+  "total_checks": 13548,
+  "failures": 0,
+  "timings": [
+    {
+      "layout": "spread",
+      "shots": 30,
+      "targets": 100,
+      "repetitions": 20,
+      "before_median_us": 1269.5,
+      "after_median_us": 1159.0,
+      "median_change_percent": -8.704214257581725,
+      "paired_median_ratio": 0.881006325048179,
+      "events": 30,
+      "candidate_visits": 126,
+      "full_scan_visits": 3000,
+      "sha256": "9bc396d20e6ff84530e023f599476f57e4edf0561105989856dbf2ef17916a6d"
+    },
+    {
+      "layout": "spread",
+      "shots": 180,
+      "targets": 100,
+      "repetitions": 20,
+      "before_median_us": 5662.0,
+      "after_median_us": 5981.5,
+      "median_change_percent": 5.642882373719534,
+      "paired_median_ratio": 1.0550880357505585,
+      "events": 180,
+      "candidate_visits": 864,
+      "full_scan_visits": 18000,
+      "sha256": "fd1f098cc98b41d21814793cdcf36e1e6b666a71757cd9eb1b677d10a2af4b18"
+    },
+    {
+      "layout": "dense",
+      "shots": 30,
+      "targets": 100,
+      "repetitions": 20,
+      "before_median_us": 4704.5,
+      "after_median_us": 3578.0,
+      "median_change_percent": -23.94515889042406,
+      "paired_median_ratio": 0.7827151244784112,
+      "events": 137,
+      "candidate_visits": 1785,
+      "full_scan_visits": 3000,
+      "sha256": "475c31db4df34644f54f0423dcace8552a21811f30b6c82e9e53de73c31663ed"
+    },
+    {
+      "layout": "dense",
+      "shots": 180,
+      "targets": 100,
+      "repetitions": 20,
+      "before_median_us": 33800.0,
+      "after_median_us": 27051.5,
+      "median_change_percent": -19.965976331360945,
+      "paired_median_ratio": 0.8431082147522088,
+      "events": 874,
+      "candidate_visits": 13770,
+      "full_scan_visits": 18000,
+      "sha256": "2c2cf5ede6147fd2f3ed600a86aaf38f8a942f65472925afdde3afadc5c7d168"
+    }
+  ],
+  "consumer_result": {
+    "event_counts": {
+      "evaded": 7,
+      "explosion": 46,
+      "flight_ended": 46,
+      "hit": 532,
+      "lifetime_expired": 46,
+      "range_reached": 54,
+      "return_started": 46,
+      "spawned": 24,
+      "split": 8,
+      "terminated": 54
+    },
+    "kills": 60,
+    "rng_state": 6826029804319341626,
+    "ticks": 16,
+    "total_damage": 7547.399999999965
+  }
+}
