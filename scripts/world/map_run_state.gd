@@ -22,6 +22,17 @@ func register_root(enemy:Dictionary,is_boss:bool=false)->bool:
 		boss_id=id;return true
 	if not can_admit() or admitted.has(id):return false
 	admitted[id]=true;return true
+## Whole camp bookkeeping commits only after every root has been validated.
+func register_group(roots: Variant) -> bool:
+	if not roots is Array or roots.is_empty() or not can_admit() or admitted.size()+roots.size()>int(profile.ordinary_target): return false
+	var ids: Dictionary = {}
+	for enemy: Variant in roots:
+		if not enemy is Dictionary or not enemy.get("id") is int: return false
+		var id: int = enemy.id
+		if id<=0 or enemy.get("root_id")!=id or enemy.get("generation")!=0 or not enemy.get("reward_eligible",false) or admitted.has(id) or ids.has(id): return false
+		ids[id]=true
+	for id: int in ids: admitted[id]=true
+	return true
 func record_death(enemy:Dictionary)->bool:
 	var id:int=int(enemy.get("id",0))
 	if id<=0 or enemy.get("root_id")!=id or int(enemy.get("generation",-1))!=0:return false

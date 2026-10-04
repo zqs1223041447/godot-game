@@ -1,0 +1,53 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+godot-game: playable arena ready
+ERROR: Explicit safe boss gate admits one real boss
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/map_camp_gameplay_test.gd:11)
+       [1] complete (res://tests/map_camp_gameplay_test.gd:23)
+       [2] run (res://tests/map_camp_gameplay_test.gd:66)
+ERROR: Standing in gate never duplicates boss
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/map_camp_gameplay_test.gd:11)
+       [1] complete (res://tests/map_camp_gameplay_test.gd:25)
+       [2] run (res://tests/map_camp_gameplay_test.gd:66)
+ERROR: Explicit safe boss gate admits one real boss
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/map_camp_gameplay_test.gd:11)
+       [1] complete (res://tests/map_camp_gameplay_test.gd:23)
+       [2] run (res://tests/map_camp_gameplay_test.gd:66)
+ERROR: Standing in gate never duplicates boss
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/map_camp_gameplay_test.gd:11)
+       [1] complete (res://tests/map_camp_gameplay_test.gd:25)
+       [2] run (res://tests/map_camp_gameplay_test.gd:66)
+ERROR: Same full camp retries after capacity/source recovery
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/map_camp_gameplay_test.gd:11)
+       [1] run (res://tests/map_camp_gameplay_test.gd:85)
+ERROR: Actual swept dash activates full group once
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/map_camp_gameplay_test.gd:11)
+       [1] run (res://tests/map_camp_gameplay_test.gd:94)
+ERROR: Dead player cannot activate another camp
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/map_camp_gameplay_test.gd:11)
+       [1] run (res://tests/map_camp_gameplay_test.gd:96)
+ERROR: Test full camp actually admits
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/map_camp_gameplay_test.gd:11)
+       [1] run (res://tests/map_camp_gameplay_test.gd:105)
+ERROR: Old practice initial3andtimer flow retained
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/map_camp_gameplay_test.gd:11)
+       [1] run (res://tests/map_camp_gameplay_test.gd:107)
+Map camp gameplay: 1697 checks, 9 failures

@@ -1,0 +1,34 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+SCRIPT ERROR: Trying to assign an array of type "Array" to a variable of type "Array[Vector2]".
+          at: layout (res://scripts/world/map_camp_layout.gd:19)
+          GDScript backtrace (most recent call first):
+              [0] layout (res://scripts/world/map_camp_layout.gd:19)
+              [1] _test_current_profiles (res://tests/map_camp_layout_test.gd:48)
+              [2] _initialize (res://tests/map_camp_layout_test.gd:33)
+SCRIPT ERROR: Invalid access to property or key 'ok' on a base object of type 'Dictionary'.
+          at: _test_current_profiles (res://tests/map_camp_layout_test.gd:49)
+          GDScript backtrace (most recent call first):
+              [0] _test_current_profiles (res://tests/map_camp_layout_test.gd:49)
+              [1] _initialize (res://tests/map_camp_layout_test.gd:33)
+SCRIPT ERROR: Trying to assign an array of type "Array" to a variable of type "Array[Vector2]".
+          at: layout (res://scripts/world/map_camp_layout.gd:19)
+          GDScript backtrace (most recent call first):
+              [0] layout (res://scripts/world/map_camp_layout.gd:19)
+              [1] _test_detachment_and_bounds (res://tests/map_camp_layout_test.gd:156)
+              [2] _initialize (res://tests/map_camp_layout_test.gd:34)
+SCRIPT ERROR: Trying to assign an array of type "Array" to a variable of type "Array[Vector2]".
+          at: layout (res://scripts/world/map_camp_layout.gd:19)
+          GDScript backtrace (most recent call first):
+              [0] layout (res://scripts/world/map_camp_layout.gd:19)
+              [1] _test_detachment_and_bounds (res://tests/map_camp_layout_test.gd:157)
+              [2] _initialize (res://tests/map_camp_layout_test.gd:34)
+SCRIPT ERROR: Invalid access to property or key 'landmarks' on a base object of type 'Dictionary'.
+          at: _test_detachment_and_bounds (res://tests/map_camp_layout_test.gd:158)
+          GDScript backtrace (most recent call first):
+              [0] _test_detachment_and_bounds (res://tests/map_camp_layout_test.gd:158)
+              [1] _initialize (res://tests/map_camp_layout_test.gd:34)
+Map camp layout: 92 checks, 0 failures; 0 actual normal profiles; 0 distinct camp arrangements; 0 navigation routes
+Proof minima: root center to full activation disk inf >= 230; boss center to full activation disk inf >= 230; simultaneous root body clearance inf >= 0
+Actual bounds: position=(42.0, 104.0) size=(1840.0, 710.7693); player radius=15; ordinary Catalog maximum=22; Catalog boss=27.5
+Validation failed: Godot reported an error.

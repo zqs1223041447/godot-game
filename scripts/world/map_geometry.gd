@@ -87,15 +87,19 @@ static func _box_contact(start: Vector2, end: Vector2, box: Rect2) -> Dictionary
 func visible(start: Vector2, end: Vector2, radius: float = 0.0) -> bool:
 	return not sweep(start,end,radius).hit
 
-func move(start: Vector2, desired: Vector2, radius: float) -> Vector2:
+func move(start: Vector2, desired: Vector2, radius: float, traversed: Variant = null) -> Vector2:
 	var position := legal_point(start,radius)
 	var destination := _clamp(position+(desired-start),radius)
 	for unused: int in range(3):
 		var hit := sweep(position,destination,radius)
-		if not hit.hit: return destination
+		if not hit.hit:
+			if traversed is Array: traversed.append([position,destination])
+			return destination
 		var remaining := (destination-position)*(1.0-float(hit.fraction))
 		var normal: Vector2 = hit.normal
-		position = Vector2(hit.point)+normal*SKIN
+		var next_position: Vector2 = Vector2(hit.point)+normal*SKIN
+		if traversed is Array: traversed.append([position,next_position])
+		position = next_position
 		remaining -= normal*minf(remaining.dot(normal),0.0)
 		destination = _clamp(position+remaining,radius)
 		if remaining.length_squared() <= EPS: break

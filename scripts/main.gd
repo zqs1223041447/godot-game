@@ -159,6 +159,7 @@ func _ready() -> void:
 	hud.name = "GameHUD"
 	add_child(hud)
 	hud.setup(self)
+	world_context_changed.connect(_sync_camp_presentation)
 	_ready_complete = true
 	restart_run()
 	if not recovered.ok:
@@ -294,17 +295,27 @@ func _quit_game() -> void:
 	get_tree().quit()
 
 
-func restart_run() -> void:
+func restart_run(camp_plan: Dictionary = {}) -> void:
 	if _world_mode in ["map", "map_complete"] and not _is_test_profile() and not _normal_reset_authorized:
 		var retried: Dictionary = retry_normal_map(_world_revision)
 		if not retried.ok and is_instance_valid(hud): hud.notify(retried.reason)
 		return
 	if _world_mode in ["map","map_complete"]:
+		if camp_plan.is_empty():camp_plan=_prepare_camp_run(_map_run.profile,run_revision+1)
+		if not camp_plan.get("ok",false):
+			if is_instance_valid(hud):hud.notify(str(camp_plan.get("reason","地图据点不可用")))
+			return
 		var profile:Dictionary=_map_run.profile.duplicate(true)
 		if not _map_run.begin(profile):
 			if is_instance_valid(hud):hud.notify("地图配置无效，不能重开")
 			return
 		_world_mode="map";_world_revision+=1
+	if _world_mode=="map":
+		_map_camps=camp_plan.state
+		_camp_landmarks=camp_plan.landmarks.duplicate(true)
+	else:
+		_map_camps.clear();_camp_landmarks.clear()
+	_camp_movement.clear();_camp_requested.clear();_camp_wait_reasons.clear();_boss_requested=false
 	_normal_reset_authorized = false
 	_sync_flasks(true)
 	run_revision += 1
@@ -328,7 +339,7 @@ func restart_run() -> void:
 	wave = int(_map_run.profile.wave) if _world_mode=="map" else 1
 	alive = true
 	_refresh_world_geometry()
-	player_pos = ARENA.get_center()
+	player_pos = Vector2(_camp_landmarks.entry) if _world_mode=="map" else ARENA.get_center()
 	player_facing = Vector2.RIGHT
 	enemies.clear()
 	if is_instance_valid(retained_actors): retained_actors.clear()
@@ -358,7 +369,7 @@ func restart_run() -> void:
 	total_damage = 0.0
 	if is_instance_valid(hud):
 		hud.close_panel()
-		if _world_mode in ["normal","map"]:
+		if _world_mode=="normal":
 			for i: int in range(3):
 				_spawn_enemy()
 	queue_redraw()
@@ -541,7 +552,8 @@ func _move_player(delta: float) -> void:
 		if rng.randf() < 0.4:
 			_add_particle(player_pos + Vector2(0, 10), -movement * 20.0, Color("547a83"), 2.0, 0.25)
 	player_pos = _clamp_to_arena(player_pos, PLAYER_RADIUS)
-	if _geometry.has_walls(): player_pos = _geometry.move(before,player_pos,PLAYER_RADIUS)
+	if _geometry.has_walls(): player_pos = _geometry.move(before,player_pos,PLAYER_RADIUS,_camp_movement if _world_mode=="map" else null)
+	elif _world_mode=="map":_camp_movement.append([before,player_pos])
 
 
 func _clamp_to_arena(pos: Vector2, margin: float) -> Vector2:
@@ -573,7 +585,7 @@ func _update_spawning(delta: float) -> void:
 
 
 func _spawn_enemy(forced_position: Vector2 = Vector2.ZERO, forced_kind: int = -1) -> Dictionary:
-	if _world_mode in ["town","map_complete"] or (_world_mode=="map" and not _map_run.can_admit()):return {}
+	if _world_mode in ["town","map","map_complete"]:return {}
 	if not _encounter_ready():
 		return {}
 	if enemies.size() >= MAX_ENEMIES:
@@ -1097,7 +1109,8 @@ func _execute_compiled(compiled: Dictionary, group_id: String = "", main_uid: St
 				direction = player_facing
 			var start: Vector2 = player_pos
 			player_pos = _clamp_to_arena(player_pos + direction * 175.0, PLAYER_RADIUS)
-			if _geometry.has_walls(): player_pos = _geometry.move(start,player_pos,PLAYER_RADIUS)
+			if _geometry.has_walls(): player_pos = _geometry.move(start,player_pos,PLAYER_RADIUS,_camp_movement if _world_mode=="map" else null)
+			elif _world_mode=="map":_camp_movement.append([start,player_pos])
 			visual_cues.emit_cue("dash", start, {"destination": player_pos, "color": color})
 			invulnerable = 0.6
 			for i: int in range(14):
@@ -1549,6 +1562,15 @@ var _map_draft_revision:=0
 var _map_draft_profile:Dictionary=MapCompiler.compile_normal("old_garden",1,[],[]).profile
 var _normal_draft_profile:Dictionary=_map_draft_profile.duplicate(true)
 var _test_draft_profile:Dictionary=MapCompiler.compile("old_garden",[],[]).profile
+const CampLayout=preload("res://scripts/world/map_camp_layout.gd")
+const CampState=preload("res://scripts/world/map_camp_state.gd")
+const CampAdmission=preload("res://scripts/world/map_camp_admission.gd")
+var _map_camps=CampState.new()
+var _camp_landmarks:Dictionary={}
+var _camp_movement:Array=[]
+var _camp_requested:Dictionary={}
+var _camp_wait_reasons:Dictionary={}
+var _boss_requested:=false
 var _map_run=MapRun.new()
 var _normal_state:RefCounted
 var _normal_run_id:int=0
@@ -1556,7 +1578,30 @@ var _normal_reset_authorized:bool=false
 var _normal_completion_pending:bool=false
 var test_supply_enabled:=true
 
-func world_geometry() -> Dictionary: return _geometry.snapshot()
+func world_geometry() -> Dictionary:
+	var result: Dictionary = _geometry.snapshot()
+	if _world_mode in ["map","map_complete"] and not _camp_landmarks.is_empty():
+		result["landmarks"]=_camp_landmarks.duplicate(true)
+		result.spawn=_camp_landmarks.entry
+	return result
+
+func _camp_states()->Array[Dictionary]:
+	var result:Array[Dictionary]=[]
+	if _world_mode not in ["map","map_complete"]:return result
+	result.assign(_map_camps.states(_map_run.defeated))
+	for entry:Dictionary in result:entry.reason=str(_camp_wait_reasons.get(entry.id,""))
+	return result
+
+func _boss_phase()->String:
+	if _world_mode not in ["map","map_complete"]:return "sealed"
+	if _map_run.boss_defeated:return "defeated"
+	if _map_run.boss_id>0:return "active"
+	return "ready" if _map_run.ready_for_boss() else "sealed"
+
+func _sync_camp_presentation()->void:
+	if is_instance_valid(static_environment) and static_environment.has_method("set_encounter_state"):
+		static_environment.set_encounter_state(_camp_states(),_boss_phase())
+
 func _refresh_world_geometry() -> void:
 	var id: String = str(_map_run.profile.get("id","old_garden")) if _world_mode in ["map","map_complete"] else _world_mode
 	var configured: bool = _geometry.configure(id,ARENA)
@@ -1588,6 +1633,7 @@ func world_context()->Dictionary:
 	var active:Dictionary={} if test else state.normal_journey().active_run
 	return {"mode":_world_mode,"test_mode":test,"save_path":build_save_path,"revision":_world_revision,"run_revision":run_revision,
 		"map_id":str(_map_run.profile.get("id","")),"map_name":str(_map_run.profile.get("name","")),
+		"camp_states":_camp_states(),"boss_phase":_boss_phase(),
 		"ordinary_kills":run.ordinary_kills,"ordinary_target":run.ordinary_target,"boss_defeated":run.boss_defeated,
 		"can_return":_world_mode in ["map","map_complete"],"supply_enabled":test and test_supply_enabled,
 		"normal_town":normal_town,"can_enter_normal_town":not test and _world_mode=="normal","can_leave_normal_town":normal_town,
@@ -1671,7 +1717,7 @@ func town_reset_passives(expected_revision:Variant)->Dictionary:
 	if result.ok:world_context_changed.emit()
 	return result
 func map_options()->Dictionary:
-	var options:Dictionary=MapCatalog.options()
+	var options:Dictionary=MapCatalog.options(_is_test_profile())
 	options.test_mode=_is_test_profile()
 	if not _is_test_profile():
 		options.tiers=[]
@@ -1715,6 +1761,8 @@ func start_map(expected_revision:Variant)->Dictionary:
 	if _world_mode!="town" or not expected_revision is int or expected_revision!=_map_draft_revision:return _world_failure("stale_map","地图草案或所在区域已变化")
 	var reason:String=MapCompiler.profile_reason(_map_draft_profile)
 	if not reason.is_empty():return _world_failure("invalid_map",reason)
+	var camp_plan:Dictionary=_prepare_camp_run(_map_draft_profile,int(state.normal_journey().next_run_id) if not _is_test_profile() else run_revision+1)
+	if not camp_plan.ok:return _world_failure("invalid_camp",camp_plan.reason)
 	if not _is_test_profile():
 		var recovered:Dictionary=_recover_normal_active()
 		if not recovered.ok:return _world_failure("save_failed",recovered.reason)
@@ -1727,14 +1775,16 @@ func start_map(expected_revision:Variant)->Dictionary:
 	if not _map_run.begin(_map_draft_profile):return _world_failure("invalid_map","地图配置无效")
 	_normal_completion_pending=false
 	_encounter_profile=_map_draft_profile.encounter_profile;_encounter_ids.assign(_map_draft_profile.normal_ids);_encounter_error=""
-	_world_mode="map";_world_revision+=1;_map_draft_revision+=1;restart_run();world_context_changed.emit()
+	_world_mode="map";_world_revision+=1;_map_draft_revision+=1;restart_run(camp_plan);world_context_changed.emit()
 	return _world_ok()
 func retry_normal_map(expected_revision:Variant)->Dictionary:
 	if not _world_revision_ok(expected_revision) or _is_test_profile() or _world_mode!="map" or _normal_run_id<=0:return _world_failure("stale_run","当前不能重新开启正式地图，请返回城镇")
+	var camp_plan:Dictionary=_prepare_camp_run(_map_run.profile,int(state.normal_journey().next_run_id))
+	if not camp_plan.ok:return _world_failure("invalid_camp",camp_plan.reason)
 	var began:Dictionary=state.normal_start_map(_map_run.profile,state.revision(),build_save_path,_normal_run_id)
 	if not began.ok:return _world_failure(str(began.get("error_code","save_failed")),began.reason)
 	_normal_run_id=int(began.run_id);_normal_reset_authorized=true;_normal_completion_pending=false
-	restart_run();world_context_changed.emit();return _world_ok()
+	restart_run(camp_plan);world_context_changed.emit();return _world_ok()
 func _finish_normal_map()->Dictionary:
 	if _is_test_profile() or not _normal_completion_pending:return {"ok":true,"reason":""}
 	var result:Dictionary=state.normal_complete_map(_normal_run_id,state.revision(),build_save_path)
@@ -1759,19 +1809,86 @@ func claim_normal_rewards(expected_revision:Variant)->Dictionary:
 	var response:Dictionary=_world_ok()
 	for key:String in ["claimed_shards","claimed_gems","claimed_flasks"]:response[key]=int(result[key])
 	return response
-func _update_map_spawning(delta:float)->void:
+func _prepare_camp_run(profile:Dictionary,sequence:int)->Dictionary:
+	var layout:Dictionary=CampLayout.layout(profile.get("id"),ARENA)
+	if not layout.ok:return {"ok":false,"reason":layout.reason}
+	var state_plan:=CampState.new()
+	var seed_text:String=JSON.stringify([rng.seed,sequence,profile.id,profile.get("journey_tier",0),"map-camps-v1"])
+	var seed_value:int=seed_text.sha256_text().substr(0,15).hex_to_int()
+	var prepared:Dictionary=state_plan.begin(profile,layout.landmarks,seed_value)
+	if not prepared.ok:return prepared
+	var geometry:=Geometry.new()
+	if not geometry.configure(profile.id,ARENA):return {"ok":false,"reason":"地图几何无效"}
+	# Prove every frozen formation before any real cost, ID, effect or scene change.
+	var fixture_runtime:=MonsterLifecycle.new()
+	for camp:Dictionary in layout.landmarks.camps:
+		var group:Dictionary=CampAdmission.plan(fixture_runtime,profile,state_plan.entries(camp.id),geometry,layout.landmarks.entry,MAX_ENEMIES)
+		if not group.ok:return {"ok":false,"reason":group.error}
+	return {"ok":true,"reason":"","state":state_plan,"landmarks":layout.landmarks}
+
+func _camp_triggered(marker:Dictionary)->bool:
+	if CampLayout.trigger_crossed(player_pos,player_pos,marker.trigger_center,float(marker.trigger_radius)):return true
+	for segment:Array in _camp_movement:
+		if CampLayout.trigger_crossed(segment[0],segment[1],marker.trigger_center,float(marker.trigger_radius)):return true
+	return false
+
+func _camp_wait(id:String,reason:String)->void:
+	if str(_camp_wait_reasons.get(id,""))==reason:return
+	if reason.is_empty():_camp_wait_reasons.erase(id)
+	else:_camp_wait_reasons[id]=reason
+	world_context_changed.emit()
+
+func _activate_camp(id:String)->Dictionary:
+	var entries:Array=_map_camps.entries(id)
+	var planned:Dictionary=CampAdmission.plan(monster_runtime,_map_run.profile,entries,_geometry,player_pos,MAX_ENEMIES-enemies.size())
+	if not planned.ok:return {"ok":false,"reason":planned.error}
+	var roots:Array=planned.enemies;var ids:Array=[]
+	for enemy:Dictionary in roots:ids.append(enemy.id)
+	var before:Dictionary=_map_run.admitted.duplicate()
+	if not _map_run.register_group(roots):return {"ok":false,"reason":"地图根怪整组登记失败"}
+	if not _map_camps.activate(id,ids):
+		_map_run.admitted=before
+		return {"ok":false,"reason":"据点已经激活或登记无效"}
+	EncounterAdmission._restore(monster_runtime,planned.runtime_checkpoint)
+	for enemy:Dictionary in roots:
+		_apply_source_actor_profile(enemy);enemies.append(enemy)
+		_add_ring(enemy.pos,32.0,Monsters.RARITIES[enemy.rarity].color,0.6)
+	ordinary_admissions+=roots.size()
+	_camp_wait_reasons.erase(id)
+	world_context_changed.emit()
+	return {"ok":true,"reason":""}
+
+func _activate_camp_boss()->Dictionary:
+	if not _map_run.ready_for_boss():return {"ok":false,"reason":"先击败全部据点根怪"}
+	var entry:Dictionary={"template_id":_map_run.profile.boss_id,"rarity":"","mechanisms":[],"position":_camp_landmarks.boss.center}
+	var planned:Dictionary=CampAdmission.plan(monster_runtime,_map_run.profile,[entry],_geometry,player_pos,MAX_ENEMIES-enemies.size(),"map_boss")
+	if not planned.ok:return {"ok":false,"reason":planned.error}
+	var boss:Dictionary=planned.enemies[0]
+	if not _map_run.register_root(boss,true):return {"ok":false,"reason":"地图首领登记失败"}
+	EncounterAdmission._restore(monster_runtime,planned.runtime_checkpoint)
+	_apply_source_actor_profile(boss);enemies.append(boss)
+	_add_ring(boss.pos,32.0,Monsters.RARITIES[boss.rarity].color,0.6)
+	hud.notify("地图首领已出现：裂隙守卫");world_context_changed.emit()
+	return {"ok":true,"reason":""}
+
+func _update_map_spawning(_delta:float)->void:
 	_flush_monster_spawns()
-	if _map_run.ready_for_boss() and enemies.size()<MAX_ENEMIES:
-		var boss:Dictionary=_spawn_monster(_map_run.profile.boss_id,Vector2.ZERO,"map_boss")
-		if not boss.is_empty():
-			if not _map_run.register_root(boss,true):_encounter_failed("地图首领登记失败");return
-			hud.notify("地图首领已出现：裂隙守卫");world_context_changed.emit()
-	spawn_timer-=delta
-	if spawn_timer<=0.0 and _map_run.can_admit():
-		spawn_timer=maxf(0.42,1.45-wave*0.07)
-		for unused:int in range(3):
-			if not _map_run.can_admit() or enemies.size()>=MAX_ENEMIES:break
-			_spawn_enemy()
+	if not alive or _camp_landmarks.is_empty():_camp_movement.clear();return
+	for camp:Dictionary in _camp_landmarks.camps:
+		var status:String=""
+		for current:Dictionary in _camp_states():
+			if current.id==camp.id:status=current.state;break
+		if status!="dormant":continue
+		if _camp_triggered(camp):_camp_requested[camp.id]=true
+		if _camp_requested.has(camp.id):
+			var result:Dictionary=_activate_camp(camp.id)
+			if not result.ok:_camp_wait(camp.id,result.reason)
+	if _map_run.ready_for_boss():
+		if _camp_triggered(_camp_landmarks.boss):_boss_requested=true
+		if _boss_requested:
+			var result:Dictionary=_activate_camp_boss()
+			if not result.ok:_camp_wait("boss",result.reason)
+	_camp_movement.clear()
 func _check_map_complete()->void:
 	var living:=0
 	for enemy:Dictionary in enemies:
