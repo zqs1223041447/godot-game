@@ -49,6 +49,7 @@ const STAT_NAMES: Dictionary = {
 
 var _town_square: Control
 var _town_view: Control
+var _world_context_cache: Dictionary = {}
 var _world_button: Button
 var _world_label: Label
 var _return_dialog: ConfirmationDialog
@@ -805,6 +806,13 @@ func _update_live() -> void:
 	if not bool(_arena.get("demo_mode")) and not _arena.encounter_selection().is_empty():
 		_run_label.text = "%02d:%02d   /   %s" % [seconds / 60, seconds % 60,"挑战已暂停" if is_blocking() else "挑战进行中"]
 	_run_label.tooltip_text = "本轮：%s\n无额外奖励；不随构筑存档保存" % _arena.encounter_summary()
+	if str(_world_context_cache.get("mode", "")) == "town":
+		_wave_label.text = "测试城镇" if bool(_world_context_cache.get("test_mode", false)) else "正式城镇"
+		_run_label.text = "战斗未开启"
+		_run_label.tooltip_text = "独立测试进度" if bool(_world_context_cache.get("test_mode", false)) else "选择地图与挑战档位"
+	elif str(_world_context_cache.get("mode", "")) in ["map", "map_complete"]:
+		_run_label.tooltip_text = "独立测试进度" if bool(_world_context_cache.get("test_mode", false)) else "完成地图后返回城镇领取结算"
+		if str(_world_context_cache.mode) == "map_complete": _run_label.text = "挑战完成 · 返回城镇"
 	_run_label.mouse_filter = Control.MOUSE_FILTER_PASS
 	_level_label.text = "Lv.%d  ·  经验 %d  ·  天赋点 %d" % [_state.level, _state.xp, _state.talent_points]
 	_set_vital("health", float(_arena.get("health")), float(stats.get("max_health", 100.0)))
@@ -1642,6 +1650,7 @@ func _build_world_controls() -> void:
 
 func _refresh_world() -> void:
 	var context: Dictionary = _arena.world_context()
+	_world_context_cache = context
 	_town_square.visible = str(context.mode) in ["town", "normal_town"]
 	_town_square.set_test_mode(bool(context.get("test_mode", false)))
 	_town_view.refresh_world()
