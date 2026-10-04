@@ -2,6 +2,7 @@ extends SceneTree
 const Exporter=preload("res://tools/export_reference.gd")
 const Catalog=preload("res://scripts/town/town_catalog.gd")
 const Maps=preload("res://scripts/world/map_compiler.gd")
+const Defense=preload("res://scripts/mechanics/defense_rules.gd")
 var checks:=0
 var failures:=0
 func _initialize()->void:
@@ -17,6 +18,10 @@ func _initialize()->void:
 		check(actual.examples[key].geometry.walls.size()==(2 if key=="broken_ruins" else 0),"Actual map wall geometry exported from same authority")
 		check(not actual.examples[key].geometry.wall_triggers_natural_end and actual.examples[key].geometry.area_line_of_sight,"Terrain collision/occlusion semantics disclosed")
 	check(actual.options.cost_policy.cost.is_empty() and not actual.options.cost_policy.affects_legacy_currency,"Map test crafting creates no wallet or debit")
+	for id:String in actual.defense_examples:
+		var example:Dictionary=actual.defense_examples[id]
+		check(example.after_components.physical==example.before_components.physical and example.after_components.chaos==example.before_components.chaos,"Defense reference retains physical and chaos amount")
+		check(is_equal_approx(example.after_components.fire,55.0 if id=="ember_guard" else 80.0) and example.after_components.cold==80.0 and example.after_components.lightning==80.0,"Reference actual typed damage matches effective resistance")
 	print("Town map reference: %d checks, %d failures"%[checks,failures]);quit(1 if failures else 0)
 func check(ok:bool,why:String)->void:
 	checks+=1

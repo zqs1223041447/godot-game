@@ -349,7 +349,14 @@ def build(data, art):
             body+='<p>旧庭为开阔庭院；断垣的两道错位残墙有真实阻挡，角色、怪物需沿端部通道绕行，击退和冲刺同样受阻。贯穿不能穿墙，返回飞行也会碰墙；碰墙终止不触发自然到期爆炸、分裂或返回。范围命中、连锁与敌预警也检查墙视线，圈只表示最大半径。地图完成保留地形，返城清除障碍；不是可破坏场景或完整终局系统。</p>'
             cards.append(add('maps',key,m['name'],m['description'],body,'有限测试地图',related=link('town_services','map_device')))
         for special in town['options']['special_modifiers']:
-            body=facts([('最低波次',number(special['minimum_wave'])),('匹配原物种',link('monsters',special['species'])),('替换为',link('monsters',special['template'])),('保留','原抽签稀有度、机制、血伤速度与XP；灰烬名额优先'),('真实消费者','已有冰/电预警攻击和共享防御链；不增加冻结或感电'),('分层','独立于生命/速度普通词缀，最多1个特殊词缀')])
+            if special.get('kind')=='defense':
+                body=facts([('最低波次',number(special['minimum_wave'])),('原始加值',number(special['resistance_bonus']*100)+' 个百分点 / '+ '、'.join(DAMAGE_NAMES[t] for t in special['damage_types'])),('有效上限','共用角色防御规则：0%–75%'),('适用','根怪、首领、死亡后代各从本身原始值加一次'),('保留','物理/混沌抗性、护甲、血盾伤速、身份、稀有度、奖励和RNG'),('分层','最多1特殊词缀，与霜纹/雷纹巡逻互斥')])
+                body+='<figure class="defense-flow"><figcaption>与角色天赋共享的结算</figcaption><ol><li><strong>原始抗性</strong><span>原怪物 + 地图20个百分点</span></li><li><strong>有效抗性</strong><span>共享0%–75%上限</span></li><li><strong>按类型减伤</strong><span>三元素各自结算</span></li><li><strong>护盾 → 生命</strong><span>物理/混沌部分保持</span></li></ol></figure>'
+                for template,example in town['defense_examples'].items():
+                    body+=details('同源100点各类型示例：'+data['monsters'][template]['name'],facts([('怪物',link('monsters',template)),('有效抗性',' / '.join(DAMAGE_NAMES[t]+percent(example['effective_resistances'][t]) for t in special['damage_types'])),('施加前单次命中',component_text(example['before_components'])),('施加后单次命中',component_text(example['after_components']))]))
+                body+='<p>这提供物理/混沌与元素构筑之间的取舍；混沌或物理技能若装备附加了元素伤害，其元素分量仍按对应抗性结算。数值是本游戏测试预算，无额外掉落倍率，不代表PoE地图经济。</p>'
+            else:
+                body=facts([('最低波次',number(special['minimum_wave'])),('匹配原物种',link('monsters',special['species'])),('替换为',link('monsters',special['template'])),('保留','原抽签稀有度、机制、血伤速度与XP；灰烬名额优先'),('真实消费者','已有冰/电预警攻击和共享防御链；不增加冻结或感电'),('分层','独立于生命/速度普通词缀，最多1个特殊词缀')])
             cards.append(add('map_specials',special['id'],special['name'],special['description'],body,'已实装特殊词缀',related=links('maps',[m['id'] for m in town['options']['maps'] if m['wave']>=special['minimum_wave']])))
     for key,a in data['monster_attacks'].items():
         p=a['profile']; policy=a['policy']

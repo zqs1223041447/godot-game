@@ -46,7 +46,7 @@ run_check() {
 				export XDG_DATA_HOME="$TOWN_UI_DIR/check-$CHECK_INDEX/data"
 				unset PIERCE_QA_ROOT
 				;;
-			res://tests/map_geometry_integration_test.gd|res://tests/map_terrain_edge_test.gd|res://tests/terrain_crowd_and_blast_test.gd|res://tests/town_*|res://tests/reserved_hotkey_migration_test.gd|res://tests/map_runtime_boundaries_test.gd|res://tests/crafting_operations_test.gd|res://tests/crafting_growth_*|res://tests/canonical_*|res://tests/offense_skill_*|res://tests/elemental_encounter_*|res://tests/flask_*|res://tests/save_receipt_revision_test.gd|res://tests/source_*|res://tests/independent_menus_test.gd)
+			res://tests/map_aegis_gameplay_test.gd|res://tests/map_geometry_integration_test.gd|res://tests/map_terrain_edge_test.gd|res://tests/terrain_crowd_and_blast_test.gd|res://tests/town_*|res://tests/reserved_hotkey_migration_test.gd|res://tests/map_runtime_boundaries_test.gd|res://tests/crafting_operations_test.gd|res://tests/crafting_growth_*|res://tests/canonical_*|res://tests/offense_skill_*|res://tests/elemental_encounter_*|res://tests/flask_*|res://tests/save_receipt_revision_test.gd|res://tests/source_*|res://tests/independent_menus_test.gd)
 				export XDG_DATA_HOME="$M1_VALIDATION_DIR/check-$CHECK_INDEX/data"
 				unset PIERCE_QA_ROOT
 				;;
@@ -103,16 +103,12 @@ fi
 echo "Godot version: $("$GODOT_BIN" --version)"
 python3 "$PROJECT_DIR/tools/check_font_coverage.py"
 run_check --editor --import
-run_check --script res://tests/map_geometry_test.gd
-run_check --script res://tests/terrain_projectile_test.gd
-run_check --script res://tests/map_geometry_integration_test.gd
-run_check --script res://tests/map_terrain_edge_test.gd
-run_check --script res://tests/terrain_crowd_and_blast_test.gd
-run_check --script res://tests/combat_pipeline_test.gd
-run_check --script res://tests/projectile_schedule_test.gd
-run_check --script res://tests/map_death_return_ui_test.gd
+run_check --script res://tests/map_defense_rules_test.gd
+run_check --script res://tests/map_aegis_admission_test.gd
+run_check --script res://tests/map_aegis_gameplay_test.gd
+run_check --script res://tests/map_resistance_text_test.gd
 run_check --script res://tests/town_map_reference_test.gd
 python3 "$PROJECT_DIR/tools/check_item_transparency.py"
 python3 "$PROJECT_DIR/tests/reference_catalog_test.py"
 run_check --quit-after 300
-echo "Current-batch validation passed: map geometry, movement/routes/births, wall collision and hit visibility, direct projectile dependencies, death return, current reference/font/assets, and startup."
+echo "Current-batch validation passed: elemental map defense, atomic root/child admission, actual typed skill delivery, effective resistance presentation, current reference/font/assets, and startup."

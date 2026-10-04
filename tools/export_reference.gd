@@ -35,6 +35,7 @@ const Town = preload("res://scripts/town/town_catalog.gd")
 const Maps = preload("res://scripts/world/map_catalog.gd")
 const MapRules = preload("res://scripts/world/map_compiler.gd")
 const MapGeometryData = preload("res://scripts/world/map_geometry.gd")
+const MapDefense = preload("res://scripts/world/map_defense_rules.gd")
 const AttackRules = preload("res://scripts/combat/attack_hit_rules.gd")
 
 func _initialize() -> void:
@@ -373,7 +374,18 @@ static func town_map_examples()->Dictionary:
 			"geometry":{"bounds":{"position":layout.bounds.position,"size":layout.bounds.size},"walls":walls,"spawn":layout.spawn,
 				"collision":"radius_expanded_sweep_slide","navigation":"shared_radius_visibility_graph","projectile_wall_end":"terrain_collision",
 				"wall_triggers_natural_end":false,"area_line_of_sight":true}}
-	return {"services":Town.services(),"stock":stock,"options":options,"examples":examples,
+	var defenses:Dictionary={}
+	var aegis:Dictionary=MapRules.compile("old_garden",[],["elemental_aegis"]).profile
+	var packet:Dictionary=Damage.packet({"physical":100.0,"fire":100.0,"cold":100.0,"lightning":100.0,"chaos":100.0},["hit"],"reference_aegis")
+	for template:String in ["crawler","ember_guard"]:
+		var source:Dictionary=Monsters.make_enemy(1,template,4,Vector2.ZERO,"ordinary")
+		var applied:Dictionary=MapDefense.apply_to_enemy(source,aegis)
+		assert(applied.ok)
+		defenses[template]={"source_stats":source.defense_stats,"raw_resistances":applied.enemy.map_defense_source.raw_resistances,
+			"effective_resistances":applied.enemy.resistances,"incoming":packet.base,
+			"before_components":Damage.resolve(packet,[],source.resistances).components,
+			"after_components":Damage.resolve(packet,[],applied.enemy.resistances).components}
+	return {"services":Town.services(),"stock":stock,"options":options,"examples":examples,"defense_examples":defenses,
 		"mode":"optional_town_test","normal_save":"user://build_save.json","test_save":"user://town_test_build_save.json",
 		"clone_policy":"explicit_first_entry_only","supply_setting":"testing/town_supply_enabled","map_reward_bonus":false,
 		"save_version":Canonical.Rules.VERSION,"retired_profile_writes":false,"map_runtime_persistent":false,

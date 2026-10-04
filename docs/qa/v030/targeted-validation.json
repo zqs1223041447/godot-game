@@ -1,0 +1,37 @@
+{
+  "reports": [
+    {
+      "path": "docs/qa/v030/rules.log.txt",
+      "sha256": "d1fc0694ae0fe6fad8a7ded5ac5ca31442cd57e820858f71442411cb81cc05b3",
+      "checks": 446
+    },
+    {
+      "path": "docs/qa/v030/admission-final.log.txt",
+      "sha256": "a146ebc24afa4d641a19705bb122490932ec2ef3f31a195fd6132b4843e6451c",
+      "checks": 56
+    },
+    {
+      "path": "docs/qa/v030/gameplay.log.txt",
+      "sha256": "5243dbcee99d73ea130e66ddf99bbb0e46068aae17773764564abac82f385773",
+      "checks": 2948
+    },
+    {
+      "path": "docs/qa/v030/root-ui/resistance-text.log.txt",
+      "sha256": "bf1c576ae829ce4631ca89ece316aa53a9e07f7e72790401d6f933c8e286645f",
+      "checks": 8
+    },
+    {
+      "path": "docs/qa/v030/reference-runtime.log.txt",
+      "sha256": "269d745e01fe2a54ecef8a6dd0455a48ff1f61ab8b9505dfe48decd75604a242",
+      "checks": 19
+    }
+  ],
+  "checks": 3477,
+  "report_count": 5,
+  "root_ui_commit": "c1bda4c6e96deee00a8434006ad93cffc034e206",
+  "600_second_test_deleted": true,
+  "full_repeat_required": false,
+  "ui_evidence_reused": true,
+  "scope": "Only new map defense rules, atomic admission, typed actual skill delivery, current label and reference paths.",
+  "production_inputs": 372
+}

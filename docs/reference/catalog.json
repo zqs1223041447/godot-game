@@ -10197,7 +10197,7 @@
 			"status": "implemented"
 		}
 	},
-	"game_version": "0.29.0",
+	"game_version": "0.30.0",
 	"jewel_affixes": {
 		"barrier": {
 			"kind": "prefix",
@@ -349501,6 +349501,80 @@
 	},
 	"town_maps": {
 		"clone_policy": "explicit_first_entry_only",
+		"defense_examples": {
+			"crawler": {
+				"after_components": {
+					"chaos": 100.0,
+					"cold": 80.0,
+					"fire": 80.0,
+					"lightning": 80.0,
+					"physical": 100.0
+				},
+				"before_components": {
+					"chaos": 100.0,
+					"cold": 100.0,
+					"fire": 100.0,
+					"lightning": 100.0,
+					"physical": 100.0
+				},
+				"effective_resistances": {
+					"cold": 0.2,
+					"fire": 0.2,
+					"lightning": 0.2
+				},
+				"incoming": {
+					"chaos": 100.0,
+					"cold": 100.0,
+					"fire": 100.0,
+					"lightning": 100.0,
+					"physical": 100.0
+				},
+				"raw_resistances": {
+					"cold": 0.2,
+					"fire": 0.2,
+					"lightning": 0.2
+				},
+				"source_stats": {
+
+				}
+			},
+			"ember_guard": {
+				"after_components": {
+					"chaos": 100.0,
+					"cold": 80.0,
+					"fire": 55.00000000000001,
+					"lightning": 80.0,
+					"physical": 100.0
+				},
+				"before_components": {
+					"chaos": 100.0,
+					"cold": 100.0,
+					"fire": 75.0,
+					"lightning": 100.0,
+					"physical": 100.0
+				},
+				"effective_resistances": {
+					"cold": 0.2,
+					"fire": 0.45,
+					"lightning": 0.2
+				},
+				"incoming": {
+					"chaos": 100.0,
+					"cold": 100.0,
+					"fire": 100.0,
+					"lightning": 100.0,
+					"physical": 100.0
+				},
+				"raw_resistances": {
+					"cold": 0.2,
+					"fire": 0.45,
+					"lightning": 0.2
+				},
+				"source_stats": {
+					"fire_resistance": 0.25
+				}
+			}
+		},
 		"examples": {
 			"broken_ruins": {
 				"compiled": {
@@ -349838,6 +349912,19 @@
 				}
 			],
 			"special_modifiers": [
+				{
+					"damage_types": [
+						"fire",
+						"cold",
+						"lightning"
+					],
+					"description": "地图怪物三元素原始抗性各加20个百分点，有效上限75%；物理和混沌不变，无额外奖励。",
+					"id": "elemental_aegis",
+					"kind": "defense",
+					"minimum_wave": 4,
+					"name": "元素庇护",
+					"resistance_bonus": 0.2
+				},
 				{
 					"description": "原本生成重甲体的普通名额改为霜纹守卫，保留原稀有度与机制；灰烬名额不变。冰霜圆形预警可走开，不产生冻结。",
 					"id": "frost_patrol",

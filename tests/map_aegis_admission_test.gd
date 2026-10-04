@@ -31,6 +31,8 @@ func _initialize()->void:
 		var queued=Runtime.new();var boss:Dictionary=queued.create_root("splitter",5,Vector2.ZERO,"ordinary");boss.health=0.0;queued.process_death(boss)
 		queued.queue[0].template="missing";before=Encounter._snapshot(queued)
 		check(not Admission.drain(queued,profile,100,View.WORLD_ARENA).ok and Encounter._snapshot(queued)==before,"Partial descendant factory failure restores complete queued batch")
+		var bad_children:=BadChildDefenseRuntime.new();boss=bad_children.create_root("splitter",5,Vector2.ZERO,"ordinary");boss.health=0.0;bad_children.process_death(boss);before=Encounter._snapshot(bad_children)
+		check(not Admission.drain(bad_children,profile,100,View.WORLD_ARENA).ok and Encounter._snapshot(bad_children)==before,"Late child defense rejection restores entire batch including prior valid child")
 	print("Map aegis admission: %d checks, %d failures"%[checks,failures]);quit(1 if failures else 0)
 
 class BadDefenseRuntime extends Runtime:
@@ -38,3 +40,9 @@ class BadDefenseRuntime extends Runtime:
 		var enemy:Dictionary=super.create_root(template_id,wave,position,context,rarity,mechanisms,rewards)
 		if not enemy.is_empty():enemy.resistances.fire=0.99
 		return enemy
+
+class BadChildDefenseRuntime extends Runtime:
+	func drain(available:int,bounds:Rect2)->Array[Dictionary]:
+		var children:Array[Dictionary]=super.drain(available,bounds)
+		if children.size()>1:children[1].resistances.fire=0.99
+		return children
