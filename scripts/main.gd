@@ -562,7 +562,12 @@ func _spawn_monster(template_id: String, forced_position: Vector2 = Vector2.ZERO
 			pos = ARENA.get_center() * 2.0 - pos
 	var enemy: Dictionary
 	var previous_monster_id:int=monster_runtime.next_id
-	if _encounter_ids.is_empty():
+	if _world_mode=="map" and MapDefense.active(_map_run.profile):
+		var admitted:Dictionary=MapEnemyAdmission.create_root(monster_runtime,_map_run.profile,template_id,wave,pos,context,rarity,mechanisms,rewards and not demo_mode)
+		if not admitted.ok:
+			rng.state=random_before;_encounter_failed(str(admitted.error));return {}
+		enemy=admitted.enemy
+	elif _encounter_ids.is_empty():
 		enemy = monster_runtime.create_root(template_id, wave, pos, context, rarity, mechanisms, rewards and not demo_mode)
 	else:
 		var admitted: Dictionary = EncounterAdmission.create_root(monster_runtime,_encounter_profile,
@@ -590,7 +595,11 @@ func _flush_monster_spawns() -> void:
 	if not alive:
 		return
 	var children: Array[Dictionary]
-	if _encounter_ids.is_empty():
+	if _world_mode=="map" and MapDefense.active(_map_run.profile):
+		var admitted:Dictionary=MapEnemyAdmission.drain(monster_runtime,_map_run.profile,MAX_ENEMIES-enemies.size(),ARENA)
+		if not admitted.ok:_encounter_failed(str(admitted.error));return
+		children.assign(admitted.enemies)
+	elif _encounter_ids.is_empty():
 		children = monster_runtime.drain(MAX_ENEMIES - enemies.size(), ARENA)
 	else:
 		var admitted: Dictionary = EncounterAdmission.drain(monster_runtime,_encounter_profile,MAX_ENEMIES - enemies.size(),ARENA)
@@ -1418,6 +1427,8 @@ signal build_state_replaced
 const TownCatalog=preload("res://scripts/town/town_catalog.gd")
 const MapCatalog=preload("res://scripts/world/map_catalog.gd")
 const MapCompiler=preload("res://scripts/world/map_compiler.gd")
+const MapDefense=preload("res://scripts/world/map_defense_rules.gd")
+const MapEnemyAdmission=preload("res://scripts/world/map_admission.gd")
 const MapRun=preload("res://scripts/world/map_run_state.gd")
 const NORMAL_BUILD_PATH:="user://build_save.json"
 const TOWN_TEST_BUILD_PATH:="user://town_test_build_save.json"

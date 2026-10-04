@@ -28,6 +28,7 @@ static func special_template(profile:Dictionary,roll:Dictionary)->String:
 	if not profile_reason(profile).is_empty():return ""
 	for id:String in profile.special_ids:
 		var definition:Dictionary=Catalog.SPECIAL[id]
+		if definition.get("kind","template")!="template":continue
 		if roll.get("template","")==definition.species:return definition.template
 	return ""
 static func _failure(reason:String)->Dictionary:return {"ok":false,"code":"invalid_map","reason":reason}
