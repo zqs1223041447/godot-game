@@ -54,6 +54,22 @@ static func critical_lines(cast: Dictionary) -> PackedStringArray:
 		lines.append("%s暴击几率 %.1f%% · 暴击伤害 %.1f%%" % [prefix, float(profile.chance) * 100.0, float(profile.multiplier) * 100.0])
 	return lines
 
+static func leech_lines(cast: Dictionary) -> PackedStringArray:
+	var lines := PackedStringArray()
+	if not bool(cast.get("ok", false)) or entries(cast).is_empty():
+		return lines
+	var profiles: Dictionary = cast.get("leech", {})
+	for resource: String in ["health", "mana"]:
+		var profile: Dictionary = profiles.get(resource, {})
+		var parts := PackedStringArray()
+		for field: String in ["attack_fraction", "physical_attack_fraction"]:
+			var fraction := float(profile.get(field, 0.0))
+			if fraction > 0.0:
+				parts.append("%s %.2f%%" % ["攻击" if field == "attack_fraction" else "物理攻击", fraction * 100.0])
+		if not parts.is_empty():
+			lines.append("%s偷取：%s" % ["生命" if resource == "health" else "法力", " · ".join(parts)])
+	return lines
+
 static func assembly_line(packet: Dictionary) -> String:
 	var trace: Dictionary = packet.get("assembly", {})
 	if trace.is_empty():
@@ -70,6 +86,7 @@ static func details(cast: Dictionary) -> String:
 		return str(cast.get("error", "伤害配置无效"))
 	var lines: PackedStringArray = ["逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。"]
 	lines.append_array(critical_lines(cast))
+	lines.append_array(leech_lines(cast))
 	if cast.snapshot.has("accuracy"):
 		lines.append("上方是成功命中的伤害，未把命中率乘入；攻击命中值 %.0f，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。" % float(cast.snapshot.accuracy))
 	if cast.get("recipe", {}).has("_projectile_support_ids"):

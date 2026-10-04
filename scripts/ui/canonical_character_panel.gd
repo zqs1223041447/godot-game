@@ -27,6 +27,10 @@ const STAT_ROWS: Array[Dictionary] = [
 	{"id":"shield_recharge_delay","label":"充能等待 / 秒","format":"decimal"},
 	{"id":"life_regen","label":"生命回复 / 秒","format":"decimal"},
 	{"id":"mana_regen","label":"法力回复 / 秒","format":"decimal"},
+	{"id":"health_leech_instance","label":"单次生命偷取 / 秒","format":"decimal"},
+	{"id":"health_leech_cap","label":"生命偷取总上限 / 秒","format":"decimal"},
+	{"id":"mana_leech_instance","label":"单次法力偷取 / 秒","format":"decimal"},
+	{"id":"mana_leech_cap","label":"法力偷取总上限 / 秒","format":"decimal"},
 	{"id":"attack_speed","label":"攻击频率 / 秒","format":"decimal"},
 	{"id":"move_speed","label":"移动速度","format":"decimal"},
 	{"id":"accuracy","label":"命中值","format":"whole"},
@@ -51,6 +55,9 @@ func refresh() -> void:
 	if model == null or _body == null or not _dirty: return
 	_progress.text = "Lv.%d   ·   经验 %d   ·   未用天赋点 %d" % [int(model.level), int(model.xp), int(model.talent_points)]
 	var stats: Dictionary = model.get_stats()
+	var leech: Dictionary = leech_stat_values(model.get_leech_profile()) if model.has_method("get_leech_profile") else {}
+	stats = stats.duplicate()
+	stats.merge(leech)
 	for row: Dictionary in STAT_ROWS:
 		var id: String = str(row.id)
 		var value: float = float(stats.get(id, 0.0))
@@ -61,9 +68,21 @@ func refresh() -> void:
 			"percent": formatted = "%.1f%%" % (value * 100.0)
 			"multiplier": formatted = "%.2f×" % value
 			"resistance": formatted = "%.0f%%" % (clampf(value, 0.0, 0.75) * 100.0)
+		if id.contains("_leech_") and not leech.has(id): formatted = "—"
 		_values[id].text = formatted
 	_dirty = false
 	refresh_generation += 1
+
+
+static func leech_stat_values(profile: Dictionary) -> Dictionary:
+	var result: Dictionary = {}
+	if not bool(profile.get("ok", false)): return result
+	for resource: String in ["health", "mana"]:
+		var values: Dictionary = profile.get(resource, {})
+		if float(values.get("attack_fraction", 0.0)) + float(values.get("physical_attack_fraction", 0.0)) <= 0.0: continue
+		result[resource + "_leech_instance"] = float(values.get("instance_rate", 0.0))
+		result[resource + "_leech_cap"] = float(values.get("total_rate_cap", 0.0))
+	return result
 
 
 func _on_model_changed() -> void:
@@ -124,4 +143,5 @@ func _build() -> void:
 		elif row.id == "shield_recharge_rate": card.tooltip_text = "等待结束后的实际每秒护盾充能；换装或退款会更新速率。即时回盾另行结算。"
 		elif row.id == "shield_recharge_delay": card.tooltip_text = "下一次有效损伤后的充能等待。闪避或零伤害不重置；已经开始的等待不随换装或退款改变。"
 		elif row.id == "armour": card.tooltip_text = "护甲减伤随每次物理命中大小变化。"
+		elif str(row.id).contains("_leech_"): card.tooltip_text = "当前构筑的单次恢复速率与全部偷取的恢复速率上限，不是正在发生的回复。没有相应偷取来源时显示横线；资源回满时清除该资源的偷取。"
 		elif str(row.id).ends_with("_resistance"): card.tooltip_text = "显示当前有效抗性；元素抗性上限为75%。"

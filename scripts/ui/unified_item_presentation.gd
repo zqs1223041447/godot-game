@@ -410,6 +410,7 @@ static func _append_current_preview(model: RefCounted, location: Dictionary, res
 		if not summary.is_empty():
 			result.preview_lines.append(summary)
 		result.preview_lines.append_array(Preview.critical_lines(cast))
+		result.preview_lines.append_array(Preview.leech_lines(cast))
 		result.effect_lines = result.preview_lines.duplicate(true)
 	else:
 		var error: String = str(cast.get("error",""))
