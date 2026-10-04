@@ -1631,14 +1631,16 @@ func _build_world_controls() -> void:
 
 func _refresh_world() -> void:
 	var context: Dictionary = _arena.world_context()
-	_town_square.visible = str(context.mode) == "town"
+	_town_square.visible = str(context.mode) in ["town", "normal_town"]
+	_town_square.set_test_mode(bool(context.get("test_mode", false)))
+	_town_view.refresh_world()
 	match str(context.mode):
 		"normal":
-			_world_label.text = ""
-			_world_button.text = "城镇测试"
+			_world_label.text = "竞技练习"
+			_world_button.text = "返回正式城镇"
 			_town_view.hide()
-		"town":
-			_world_label.text = "城镇 · 独立测试存档"
+		"town", "normal_town":
+			_world_label.text = "城镇 · 独立测试存档" if bool(context.get("test_mode", false)) else "城镇 · 正式存档"
 			_world_button.text = "城镇服务"
 		_:
 			_world_label.text = "%s · %d / %d" % [str(context.map_name),int(context.ordinary_kills),int(context.ordinary_target)]
@@ -1649,14 +1651,15 @@ func _refresh_world() -> void:
 func _world_action() -> void:
 	var context: Dictionary = _arena.world_context()
 	if str(context.mode) == "normal":
-		_world_result(_arena.enter_town_test(int(context.revision)))
-		if str(_arena.world_context().mode) == "town": _town_view.open_service()
-	elif str(context.mode) == "town":
+		_world_result(_arena.enter_normal_town(int(context.revision)))
+		if str(_arena.world_context().mode) in ["town", "normal_town"]: _town_view.open_service("map_device")
+	elif str(context.mode) in ["town", "normal_town"]:
 		_town_view.open_service()
 	elif str(context.mode) == "map_complete":
 		_world_result(_arena.return_to_town(int(context.revision)))
 	else:
 		_return_revision = int(context.revision)
+		_return_dialog.dialog_text = "保留已经获得的物品并返回城镇？未完成的地图将放弃。" if bool(context.get("test_mode", false)) else "保留已获得的物品并返回城镇？未完成地图不结算，入场费用不退还。"
 		_return_dialog.popup_centered(Vector2i(380,160))
 
 

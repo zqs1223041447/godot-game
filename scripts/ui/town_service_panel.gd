@@ -20,6 +20,11 @@ var _service := ""
 var _reset: ConfirmationDialog
 var _reset_revision := -1
 var _map_select: OptionButton
+var _tier_select: OptionButton
+var _service_buttons: Dictionary = {}
+var _leave: Button
+var _test_enter: Button
+var _claim: Button
 var _normal := {}
 var _special := {}
 
@@ -49,6 +54,7 @@ func setup(value: Node) -> void:
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		button.pressed.connect(_select.bind(str(entry.id)))
 		services.add_child(button)
+		_service_buttons[str(entry.id)] = button
 	var scroll := ScrollContainer.new()
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
@@ -56,10 +62,26 @@ func setup(value: Node) -> void:
 	_content = VBoxContainer.new()
 	_content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scroll.add_child(_content)
-	var leave := Button.new()
-	leave.text = "返回正常游戏"
-	leave.pressed.connect(func(): _result(arena.leave_town_test(int(arena.world_context().revision))))
-	_body.add_child(leave)
+	_claim = Button.new()
+	_claim.text = "领取待领奖励"
+	_claim.pressed.connect(func():
+		_result(arena.claim_normal_rewards(int(arena.world_context().revision)))
+		refresh_world()
+		if not _service.is_empty(): _select(_service))
+	_body.add_child(_claim)
+	var routes := HBoxContainer.new()
+	_body.add_child(routes)
+	_leave = Button.new()
+	_leave.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_leave.pressed.connect(func():
+		var context: Dictionary = arena.world_context()
+		_result(arena.leave_town_test(int(context.revision)) if bool(context.get("test_mode", false)) else arena.leave_normal_town(int(context.revision))))
+	routes.add_child(_leave)
+	_test_enter = Button.new()
+	_test_enter.text = "测试城镇"
+	_test_enter.tooltip_text = "独立测试存档，免费物品不会带回正式游戏。"
+	_test_enter.pressed.connect(func(): _result(arena.enter_town_test(int(arena.world_context().revision))))
+	routes.add_child(_test_enter)
 	_reset = ConfirmationDialog.new()
 	_reset.title = "重置天赋"
 	_reset.ok_button_text = "确认"
@@ -67,9 +89,35 @@ func setup(value: Node) -> void:
 	_reset.dialog_text = "退还已分配天赋点，珠宝退回行囊或待安置区？"
 	_reset.confirmed.connect(func(): _result(arena.town_reset_passives(_reset_revision)))
 	add_child(_reset)
-	_select("skill_merchant")
+	refresh_world()
+	_select("skill_merchant" if bool(arena.world_context().get("test_mode", false)) else "map_device")
+
+func refresh_world() -> void:
+	var context: Dictionary = arena.world_context()
+	var testing := bool(context.get("test_mode", false))
+	_title.text = "城镇 · 测试供应" if testing else "城镇 · 远征"
+	_leave.text = "返回正式游戏" if testing else "竞技练习"
+	_test_enter.visible = not testing
+	for id: String in _service_buttons:
+		_service_buttons[id].disabled = not testing and id not in ["map_device", "crafter", "passive_reset"]
+		if _service_buttons[id].disabled: _service_buttons[id].tooltip_text = "免费供应仅在独立测试城镇开放。"
+	_claim.visible = not testing and _has_pending_rewards(context)
+	_claim.disabled = not bool(context.get("can_claim_normal_rewards", false))
+	_claim.tooltip_text = str(context.get("claim_reason", ""))
+	if not testing and _service not in ["", "map_device", "crafter", "passive_reset"]:
+		_select("map_device")
+
+static func _has_pending_rewards(context: Dictionary) -> bool:
+	for key: String in ["pending_map_reward", "pending_gems", "pending_flasks"]:
+		var value: Variant = context.get(key, 0)
+		if value is Dictionary or value is Array:
+			if not value.is_empty(): return true
+		elif value is int or value is float:
+			if value > 0: return true
+	return false
 
 func open_service(id: String = "") -> void:
+	refresh_world()
 	show()
 	if not id.is_empty(): _select(id)
 	elif not _service.is_empty(): _select(_service)
@@ -80,6 +128,7 @@ func _clear() -> void:
 		child.queue_free()
 
 func _select(id: String) -> void:
+	if not bool(arena.world_context().get("test_mode", false)) and id not in ["map_device", "crafter", "passive_reset"]: id = "map_device"
 	_service = id
 	_clear()
 	if id == "map_device":
@@ -132,6 +181,9 @@ func _build_map() -> void:
 		_map_select.add_item(str(entry.name))
 		_map_select.set_item_metadata(_map_select.item_count-1,str(entry.id))
 		if str(entry.id) == str(draft.map_id): _map_select.select(_map_select.item_count-1)
+	_tier_select = OptionButton.new()
+	_content.add_child(_tier_select)
+	_update_tiers(options, int(draft.get("tier", 1)))
 	_normal.clear()
 	_special.clear()
 	for group: String in ["normal_modifiers","special_modifiers"]:
@@ -148,24 +200,42 @@ func _build_map() -> void:
 			else: _special[str(entry.id)] = check
 	var summary := Label.new()
 	summary.text = str(draft.summary)
+	if not bool(arena.world_context().get("test_mode", false)):
+		summary.text += "\n入场 %d 校准碎片 · 完成奖励 %d" % [int(draft.get("cost", 0)), int(draft.get("completion_reward", 0))]
+		if not str(draft.get("reason", "")).is_empty(): summary.text += "\n" + str(draft.reason)
 	summary.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_content.add_child(summary)
 	var craft := Button.new()
-	craft.text = "制作地图 · 测试免费"
+	craft.text = "制作地图 · 测试免费" if bool(arena.world_context().get("test_mode", false)) else "准备地图"
 	craft.pressed.connect(_craft_map)
 	_content.add_child(craft)
 	var launch := Button.new()
 	launch.text = "开启地图"
-	launch.disabled = not bool(draft.valid)
+	launch.disabled = not bool(draft.get("can_start", draft.valid))
 	var revision: int = int(draft.revision)
 	launch.pressed.connect(func():
 		var result: Dictionary = arena.start_map(revision)
 		_result(result)
 		if result.ok: hide())
 	_content.add_child(launch)
-	_map_select.item_selected.connect(func(_index: int): launch.disabled = true)
+	_map_select.item_selected.connect(func(_index: int):
+		_update_tiers(options, 1)
+		launch.disabled = true)
+	_tier_select.item_selected.connect(func(_index: int): launch.disabled = true)
 	for check: CheckBox in _normal.values()+_special.values():
 		check.toggled.connect(func(_value: bool): launch.disabled = true)
+
+func _update_tiers(options: Dictionary, selected: int) -> void:
+	_tier_select.clear()
+	_tier_select.visible = not bool(arena.world_context().get("test_mode", false))
+	for entry: Dictionary in options.get("tiers", []):
+		if str(entry.map_id) != str(_map_select.get_selected_metadata()): continue
+		_tier_select.add_item(str(entry.label) + (" · 未解锁" if not bool(entry.unlocked) else ""))
+		var index := _tier_select.item_count - 1
+		_tier_select.set_item_metadata(index, int(entry.tier))
+		_tier_select.set_item_disabled(index, not bool(entry.unlocked))
+		_tier_select.get_popup().set_item_tooltip(index, str(entry.get("reason", "")))
+		if int(entry.tier) == selected: _tier_select.select(index)
 
 func _craft_map() -> void:
 	var normals: Array = []
@@ -174,7 +244,12 @@ func _craft_map() -> void:
 		if _normal[id].button_pressed: normals.append(id)
 	for id: String in _special:
 		if _special[id].button_pressed: specials.append(id)
-	var result: Dictionary = arena.craft_map(str(_map_select.get_selected_metadata()),normals,specials,int(arena.map_draft().revision))
+	var result: Dictionary
+	if bool(arena.world_context().get("test_mode", false)):
+		result = arena.craft_map(str(_map_select.get_selected_metadata()),normals,specials,int(arena.map_draft().revision))
+	else:
+		if _tier_select.item_count == 0: return
+		result = arena.craft_normal_map(str(_map_select.get_selected_metadata()),int(_tier_select.get_selected_metadata()),normals,specials,int(arena.map_draft().revision))
 	_result(result)
 	if result.ok: _select("map_device")
 

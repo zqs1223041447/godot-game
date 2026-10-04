@@ -28,6 +28,10 @@ func _layout() -> void:
 		_buttons[index].position = center+Vector2(-66,37)
 		_buttons[index].size = Vector2(132,28)
 	queue_redraw()
+func set_test_mode(testing: bool) -> void:
+	for index: int in range(_buttons.size()):
+		_buttons[index].disabled = not testing and _ids[index] not in ["map_device", "crafter", "passive_reset"]
+		if _buttons[index].disabled: _buttons[index].tooltip_text = "免费供应仅在独立测试城镇开放。"
 func _draw() -> void:
 	for index: int in range(_centers.size()):
 		var center := _centers[index]
