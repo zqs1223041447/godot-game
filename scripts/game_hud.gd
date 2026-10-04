@@ -1371,6 +1371,10 @@ func _build_death_panel() -> void:
 	var actions: HBoxContainer = HBoxContainer.new()
 	_panel_body.add_child(actions)
 	var retry: Button = _button("重新挑战", "RetryButton", _restart, 210)
+	var world: Dictionary = _arena.world_context()
+	if str(world.mode) in ["map", "map_complete"] and not bool(world.get("test_mode", false)):
+		retry.text = "重新挑战 · %d 碎片" % int(world.get("retry_cost", world.get("fee_paid", 0)))
+		retry.tooltip_text = "重新挑战将再次支付入场费；不足时可以返回城镇。"
 	_accent_button(retry)
 	actions.add_child(retry)
 	if str(_arena.world_context().mode) in ["map","map_complete"]:
@@ -1442,9 +1446,16 @@ func _slot_skill(id: String) -> void:
 
 
 func _restart() -> void:
+	var context: Dictionary = _arena.world_context()
+	if str(context.mode) in ["map", "map_complete"] and not bool(context.get("test_mode", false)):
+		var result: Dictionary = _arena.retry_normal_map(int(context.revision))
+		if not bool(result.get("ok", false)):
+			notify(str(result.get("reason", "重新挑战失败")))
+			return
+	else:
+		_arena.call("restart_run")
 	_menu_routes = DockedMenus.new()
 	_sync_menu_views()
-	_arena.call("restart_run")
 	notify("新一轮试炼开始，构筑已保留")
 
 
