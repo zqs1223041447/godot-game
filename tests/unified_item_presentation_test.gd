@@ -92,13 +92,13 @@ func _run() -> void:
 	var support_view: Dictionary = Presenter.view(model, support_item.uid)
 	_expect(support_view.kind_label == "辅助宝石" and support_view.rarity_label == "等级 1 · 品质 0", "support view keeps the old category/quality labels")
 	_expect((support_view.tags as Array).has("发射辅助"), "support family tag comes from SupportRegistry")
-	_expect((support_view.tags as Array).has("适配·飞弹") and (support_view.tags as Array).has("适配·冰霜"), "support applicability tags come from SupportRegistry compatibility")
-	_expect((support_view.tags as Array).has("需要投射物命中"), "support requirement tag comes from GemCatalog capabilities")
-	_expect(_modifier_polarity(support_view.modifiers, "缓速强击辅助 · 主命中伤害") == "benefit", "support modifier label/value comes from operation metadata")
-	_expect(_modifier_polarity(support_view.modifiers, "缓速强击辅助 · 魔力消耗") == "cost", "support cost is represented by typed polarity")
-	_expect(_modifier_value(support_view.modifiers, "缓速强击辅助 · 主命中伤害") == "总增 20%", "more modifier copy distinguishes a total increase from additive increased")
+	_expect(not (support_view.tags as Array).has("适配·飞弹") and not (support_view.tags as Array).has("适配·冰霜") and str(support_view.requirements).contains(GemCatalogScript.definition("skill:bolt").name) and str(support_view.requirements).contains(GemCatalogScript.definition("skill:frost").name), "support applicability is disclosed separately from tags")
+	_expect(not (support_view.tags as Array).has("需要投射物命中"), "support tags do not contain requirement prose")
+	_expect(_modifier_polarity(support_view.modifiers, "主命中伤害") == "benefit", "support modifier label/value comes from operation metadata")
+	_expect(_modifier_polarity(support_view.modifiers, "魔力消耗") == "cost", "support cost is represented by typed polarity")
+	_expect(_modifier_value(support_view.modifiers, "主命中伤害") == "总增 20%", "more modifier copy distinguishes a total increase from additive increased")
 	_expect(support_view.preview_lines == skill_view.preview_lines, "support displays the same current group preview separately from its base properties")
-	_expect(_stat_value(support_view.base_stats, "宝石等级") == "1" and _stat_value(support_view.base_stats, "品质") == "0", "support base properties use the fixed level/quality payload")
+	_expect(support_view.base_stats.is_empty(), "support fixed level/quality remain in header without duplicate effect rows")
 	var repeated_support_view: Dictionary = Presenter.view(model, support_item.uid)
 	_expect(repeated_support_view.tags == support_view.tags and Presenter._support_applicability_scan_count == applicability_scans_before + 1, "repeated support hovers reuse cached compatibility results")
 	_test_all_catalog_gems_and_element_modifiers(model)
@@ -109,7 +109,7 @@ func _run() -> void:
 
 func _test_all_catalog_gems_and_element_modifiers(model: PresentationModel) -> void:
 	var definitions: Dictionary = GemCatalogScript.definitions()
-	_expect(definitions.size() == 24, "coverage traverses every 8 skill and 16 support gem in GemCatalog")
+	_expect(definitions.size() == 26, "coverage traverses every10 skill and16 support gem in GemCatalog")
 	var skill_count: int = 0
 	for definition_id: String in definitions:
 		var uid: String = "coverage-" + definition_id.replace(":", "-")
@@ -124,13 +124,13 @@ func _test_all_catalog_gems_and_element_modifiers(model: PresentationModel) -> v
 		skill_count += 1
 		var skill_id: String = str(definition.skill_id)
 		var tags: Array = item_view.get("tags", [])
-		if skill_id in ["bolt", "frost", "tornado"]:
+		if skill_id in ["bolt", "frost", "tornado", "shade_bolt"]:
 			_expect(not tags.has("爆炸") and not tags.has("次级") and not tags.has("范围"), "%s does not inherit the compiler's always-prepared secondary explosion tags" % skill_id)
 		if skill_id == "tornado":
 			_expect(tags.has("投射物") and tags.has("分裂"), "tornado keeps its own projectile and split capability tags")
 		if skill_id in ["nova", "meteor"]:
 			_expect(tags.has("范围"), "%s retains its intrinsic direct area tag" % skill_id)
-	_expect(skill_count == 8, "all eight active skill gems were checked")
+	_expect(skill_count == 10, "all ten active skill gems were checked")
 
 	var element_cases: Array[Dictionary] = [
 		{"id":"physical_focus", "type":"physical", "label":"物理"},

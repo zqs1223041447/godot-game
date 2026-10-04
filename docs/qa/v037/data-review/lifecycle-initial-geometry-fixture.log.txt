@@ -1,0 +1,23 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+godot-game: playable arena ready
+ERROR: Underlying other UID is physically inside the displayed transparent card
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/item_hover_lifecycle_v37_test.gd:9)
+       [1] run (res://tests/item_hover_lifecycle_v37_test.gd:32)
+       [2] motion (res://tests/item_hover_lifecycle_v37_test.gd:15)
+       [3] frames (res://tests/item_hover_lifecycle_v37_test.gd:12)
+ERROR: Transparent card prevents underlying enter from replacing its stable UID
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/item_hover_lifecycle_v37_test.gd:9)
+       [1] run (res://tests/item_hover_lifecycle_v37_test.gd:34)
+       [2] motion (res://tests/item_hover_lifecycle_v37_test.gd:15)
+       [3] frames (res://tests/item_hover_lifecycle_v37_test.gd:12)
+ERROR: Pointer staying over card survives source exit delay
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/item_hover_lifecycle_v37_test.gd:9)
+       [1] run (res://tests/item_hover_lifecycle_v37_test.gd:35)
+Item hover lifecycle v37: 16 checks, 3 failures

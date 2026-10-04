@@ -1,0 +1,35 @@
+{
+  "reports": [
+    {
+      "path": "docs/qa/v037/data-review/data-651.log.txt",
+      "checks": 651,
+      "sha256": "e73979dbdc93abba38de9cb5ccb0ed6169ab85daac7384631350dcbee815e99f"
+    },
+    {
+      "path": "docs/qa/v037/data-review/presentation-81.log.txt",
+      "checks": 81,
+      "sha256": "fb98e0cbddfb66d2952ab51717c8e3b4db3271fb033347eda314f148f5546532"
+    },
+    {
+      "path": "docs/qa/v037/data-review/lifecycle-17.log.txt",
+      "checks": 17,
+      "sha256": "62e2036b8ee053a78132024c0761af625f62709da2cc1d8790b75f5298a014c1"
+    }
+  ],
+  "total_checks": 749,
+  "root_ui_stage": "e50df62",
+  "base_commit": "195898e9ce2b594c374ac0720022ab242cb8051a",
+  "changed_runtime_files": [
+    "scripts/game_hud.gd",
+    "scripts/ui/canonical_inventory_panel.gd",
+    "scripts/ui/item_hover_card.gd",
+    "scripts/ui/item_rarity_style.gd",
+    "scripts/ui/unified_bag_grid.gd",
+    "scripts/ui/unified_item_presentation.gd"
+  ],
+  "non_ui_runtime_changes": [],
+  "font_sha256": "b81b1391853d4c92e8833f9c29356087320cf36b5c981d6c91850b9656ede8bf",
+  "new_ui_missing_glyphs": [],
+  "input_method": "Synthetic Input.parse_input_event into actual main/HUD Viewport; no native desktop input in this test",
+  "no_historical_full_tests": true
+}
