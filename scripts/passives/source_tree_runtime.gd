@@ -12,7 +12,8 @@ const TALENT_KEYS := ["source_version","class_id","allocated","masteries","ascen
 const SPATIAL_SAVE_VERSION:=20
 const RECHARGE_SAVE_VERSION:=21
 const RESOURCE_SAVE_VERSION:=22
-const CURRENT_SAVE_VERSION:=RESOURCE_SAVE_VERSION
+const FLASK_SAVE_VERSION:=23
+const CURRENT_SAVE_VERSION:=FLASK_SAVE_VERSION
 static var _contexts: Dictionary = {}
 static var _line_cache: Dictionary = {}
 static var _node_effect_cache: Dictionary = {}
@@ -23,7 +24,8 @@ static var _analysis: Dictionary = {}
 static func _execution_policy(version:int)->int:
 	if version<SPATIAL_SAVE_VERSION:return 19
 	if version<RECHARGE_SAVE_VERSION:return SPATIAL_SAVE_VERSION
-	return RECHARGE_SAVE_VERSION if version<RESOURCE_SAVE_VERSION else RESOURCE_SAVE_VERSION
+	if version<RESOURCE_SAVE_VERSION:return RECHARGE_SAVE_VERSION
+	return RESOURCE_SAVE_VERSION if version<FLASK_SAVE_VERSION else FLASK_SAVE_VERSION
 
 
 static func _context(class_id: int, budget: int) -> Dictionary:
@@ -112,7 +114,7 @@ static func lines_for(id: String, mastery_effect: int = 0) -> Array:
 static func line_effect(line: String, save_version:int=CURRENT_SAVE_VERSION) -> Dictionary:
 	var policy:int=_execution_policy(save_version)
 	var key:="%d:%s"%[policy,line]
-	if not _line_cache.has(key): _line_cache[key] = Patterns.parse_line(line,policy>=SPATIAL_SAVE_VERSION,policy>=RECHARGE_SAVE_VERSION,policy>=RESOURCE_SAVE_VERSION)
+	if not _line_cache.has(key): _line_cache[key] = Patterns.parse_line(line,policy>=SPATIAL_SAVE_VERSION,policy>=RECHARGE_SAVE_VERSION,policy>=RESOURCE_SAVE_VERSION,policy>=FLASK_SAVE_VERSION)
 	return _line_cache[key].duplicate(true)
 
 

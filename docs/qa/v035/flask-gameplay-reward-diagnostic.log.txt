@@ -1,0 +1,20 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+godot-game: playable arena ready
+GAIN_DIAGNOSTIC { "earned": { "charges_by_uid": { "migration_flask_000001": 20, "migration_flask_000002": 30 }, "active_by_resource": {  } }, "stats": 0.05, "count": 0, "enemy_health": -19962.0, "enemy_generation": 0 }
+ERROR: First legal root grants1.05 once
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/source_flask_gameplay_test.gd:13)
+       [1] run (res://tests/source_flask_gameplay_test.gd:57)
+ERROR: Repeated corpse cannot pay whole or fractional charge
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/source_flask_gameplay_test.gd:13)
+       [1] run (res://tests/source_flask_gameplay_test.gd:59)
+ERROR: Next valid root accumulates same UID fraction
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/source_flask_gameplay_test.gd:13)
+       [1] run (res://tests/source_flask_gameplay_test.gd:64)
+Source flask gameplay: 43 checks, 3 failures

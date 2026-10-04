@@ -361,7 +361,7 @@ func use_flask(slot_id: Variant) -> Dictionary:
 			entry.ok=false
 			return entry
 		var resource:String=entry.resource
-		var result:Dictionary=flask_runtime.use(entry.uid,health if resource=="health" else mana,float(_stats.max_health) if resource=="health" else float(_stats.max_mana))
+		var result:Dictionary=flask_runtime.use(entry.uid,health if resource=="health" else mana,float(_stats.max_health) if resource=="health" else float(_stats.max_mana),_stats)
 		if result.ok:
 			var definition:Dictionary=FlaskCatalog.definition(entry.definition_id)
 			_add_ring(player_pos,30.0,definition.color,0.35)
@@ -1221,7 +1221,7 @@ func _apply_enemy_settlement(enemy: Dictionary, settlement: Dictionary, color: C
 			if state.has_method("flask_slots"):
 				for slot:Dictionary in state.flask_slots():
 					if not slot.uid.is_empty():equipped_flasks.append(slot.uid)
-			flask_runtime.charge_rewarded_kill(equipped_flasks)
+			flask_runtime.charge_rewarded_kill(equipped_flasks,_stats)
 		var leveled: bool = state.add_xp(int(enemy.get("xp_reward", 0))) if eligible else false
 		if leveled:
 			health = minf(float(_stats.max_health), health + 25.0)
