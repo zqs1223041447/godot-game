@@ -1,0 +1,114 @@
+{
+  "baseline_commit": "d6c8165d01783525469e9876c9e779e64e818b03",
+  "tested_stage_commit": "51209300624ddeaafd5aad77d97f1c57453856b1",
+  "report_count": 9,
+  "reports": [
+    {
+      "test": "res://tests/leech_rules_test.gd",
+      "checks": 1213,
+      "failures": 0,
+      "sha256": "a8cdc983d268b75500fef764542ded8331ff2a4284d68289fd649a4656eff46c",
+      "path": "docs/qa/v040/leech-rules-test.log.txt"
+    },
+    {
+      "test": "res://tests/leech_runtime_test.gd",
+      "checks": 59,
+      "failures": 0,
+      "sha256": "8df909b5f0ffce97d4f69f5f83b6446357ad771a2f449d4bcce37051dead36fa",
+      "path": "docs/qa/v040/leech-runtime-second.log"
+    },
+    {
+      "test": "res://tests/source_leech_parser_test.gd",
+      "checks": 295,
+      "failures": 0,
+      "sha256": "668b39e4c0d2838f5795070faa9dc12354f6fae73b9bc3144d42098366f9e55c",
+      "path": "docs/qa/v040/source-leech-parser.log.txt"
+    },
+    {
+      "test": "res://tests/source_leech_gate_test.gd",
+      "checks": 897,
+      "failures": 0,
+      "sha256": "624d345c991dfe4706568ace698bf51a20ee5be3f02b69de0b330cfa150e22bb",
+      "path": "docs/qa/v040/source-leech-gate.log.txt"
+    },
+    {
+      "test": "res://tests/source_leech_migration_test.gd",
+      "checks": 172,
+      "failures": 0,
+      "sha256": "51f6ef50a4f9895e56c7bb6325def3d2a8c70daf022b74e40328c8bdeddeaf63",
+      "path": "docs/qa/v040/source-leech-migration.log.txt"
+    },
+    {
+      "test": "res://tests/source_leech_paths_test.gd",
+      "checks": 154,
+      "failures": 0,
+      "sha256": "fd55301f9a6bc6448b9b2ab2e9c90dca83cea011548f93f1f943669f9d194f15",
+      "path": "docs/qa/v040/source-leech-paths.log.txt"
+    },
+    {
+      "test": "res://tests/leech_compile_gameplay_test.gd",
+      "checks": 317,
+      "failures": 0,
+      "sha256": "1d50fb39f3c04822c0851f8fcb03ab9d6da001b2620edb75a934ddc51a0d2d0b",
+      "path": "docs/qa/v040/leech-gameplay-fourth.log"
+    },
+    {
+      "test": "res://tests/leech_resource_boundaries_test.gd",
+      "checks": 17,
+      "failures": 0,
+      "sha256": "151b1f3b184146dc12e5297f3450544b9701eb7e9fc9216ca7ebafa127450657",
+      "path": "docs/qa/v040/leech-boundaries-second.log"
+    },
+    {
+      "test": "res://tests/leech_preview_text_test.gd",
+      "checks": 11,
+      "failures": 0,
+      "sha256": "dd273a90e4bd84192830678ad123fc380a9b694b5923e5d012957f118adc8b6d",
+      "source_commit": "e255b635fda072c3c840e76804b106423d40734e",
+      "path": "docs/qa/v040-root-leech-preview/leech-preview.log"
+    }
+  ],
+  "logs": {
+    "docs/qa/v040/final-import.log": "8e0720a84edeb6ba730a4a70217f84c0f8053e52c457f98e272b4728d5845cc2",
+    "docs/qa/v040/font-coverage-final.log": "8d912540bb3cbc09cfec169949e4993798d5979c13e6cf11e4e4f99fd5f85055",
+    "docs/qa/v040/font-coverage-initial.log": "e6f698750289c391c39e72b3a120b266037e204c104b81e5bfee1d2938ffcab4",
+    "docs/qa/v040/font-regenerate.log": "0756e925f4db245dc9bfdc40b152aa664e1762bd92267168b6888e3d37af21ba",
+    "docs/qa/v040/integration-import.log": "4ed74e6d5e93f528a3663cd2dcb6dee086481a4b0e6eb4ad6136fda1807fc717",
+    "docs/qa/v040/leech-boundaries-first.log": "0fb0fb52b34be341f7c5eb61e9ac84574ec92fab1a9a02c499ce290992d8aa77",
+    "docs/qa/v040/leech-boundaries-second.log": "151b1f3b184146dc12e5297f3450544b9701eb7e9fc9216ca7ebafa127450657",
+    "docs/qa/v040/leech-gameplay-first.log": "f111ac7f59d9e23a151c57c3ce516be1e2c450271841428eb58ba0b9200d945c",
+    "docs/qa/v040/leech-gameplay-fourth.log": "1d50fb39f3c04822c0851f8fcb03ab9d6da001b2620edb75a934ddc51a0d2d0b",
+    "docs/qa/v040/leech-gameplay-second.log": "9a6910436d26e6546b0a69682900124c78c484ae76171dda9c999ffa4445249f",
+    "docs/qa/v040/leech-gameplay-third.log": "17a033df16b50eb81cb4cf9e2dfe173f1f8b1b30053931080e84e28d84daf5ee",
+    "docs/qa/v040/leech-rules-test.log.txt": "a8cdc983d268b75500fef764542ded8331ff2a4284d68289fd649a4656eff46c",
+    "docs/qa/v040/leech-runtime-first.log": "bc2f6eb701fbf194c0444a29ca0691744e03ff10b426fb16b23142a590b14e0f",
+    "docs/qa/v040/leech-runtime-second.log": "8df909b5f0ffce97d4f69f5f83b6446357ad771a2f449d4bcce37051dead36fa",
+    "docs/qa/v040/reference-build.log": "7b3d94a2e15ee314e2bef71494becc32d97d1532a9c37610e3b69d8db03b48ae",
+    "docs/qa/v040/reference-export.log": "51e3b0bc619efba5c710e1863eedea0402e6700d8c973b9ecb758418906e7297",
+    "docs/qa/v040/reference-validation.log": "9b95d9e7b16609e58d9c008814e2d0968dfb892e86d28d09f98d30a0ac83db6d",
+    "docs/qa/v040/source-leech-baseline-export.log.txt": "8a730327dc602736fa4407d9dc55dc9ea9ea86e4a86931cc96abb5739d90931e",
+    "docs/qa/v040/source-leech-gate.log.txt": "624d345c991dfe4706568ace698bf51a20ee5be3f02b69de0b330cfa150e22bb",
+    "docs/qa/v040/source-leech-migration.log.txt": "51f6ef50a4f9895e56c7bb6325def3d2a8c70daf022b74e40328c8bdeddeaf63",
+    "docs/qa/v040/source-leech-parser.log.txt": "668b39e4c0d2838f5795070faa9dc12354f6fae73b9bc3144d42098366f9e55c",
+    "docs/qa/v040/source-leech-paths.log.txt": "fd55301f9a6bc6448b9b2ab2e9c90dca83cea011548f93f1f943669f9d194f15",
+    "docs/qa/v040/zero-leech-capture.log": "e6b17bcf00b41e5069fb83562145407eb1775680c2f37cfefc27bdf5aeb535d8",
+    "docs/qa/v040-root-leech-preview/import.log": "292dc438f96f1c3a7e6b0ff506a70898e3f77b8debb499d2d4f1f6dcf6df3765",
+    "docs/qa/v040-root-leech-preview/leech-preview.log": "dd273a90e4bd84192830678ad123fc380a9b694b5923e5d012957f118adc8b6d",
+    "docs/qa/v040-root-leech-preview/preimport-failure.log": "7427db1967cf562e514457b1a82075e11799b6e2836c8022bf454aad53cb82c8"
+  },
+  "reuse": "Root11 is unchanged; actual compiler->K/C checked in gameplay317. Pure and source tested-files SHA independently verified. All passing source/runtime/gameplay inputs were preserved after the pause; no passing suite rerun. First fixture parse/type/path failures and pre-guard runtime failure are retained. Literal CRLF Git attributes were corrected without changing tested filesystem bytes.",
+  "game_version": "0.40.0",
+  "schema": 25,
+  "total_checks": 3135,
+  "600_second_test_deleted": true,
+  "historical_full_repeated": false,
+  "windows_hardware_tested": false,
+  "failed_logs_preserved": [
+    "leech-runtime-first.log",
+    "leech-gameplay-first.log",
+    "leech-gameplay-second.log",
+    "leech-gameplay-third.log",
+    "leech-boundaries-first.log",
+    "../v040-root-leech-preview/preimport-failure.log"
+  ]
+}

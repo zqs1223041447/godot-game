@@ -3448,7 +3448,7 @@
 				"normal_points": 5,
 				"source_version": "3.29.1"
 			},
-			"version": 24
+			"version": 25
 		},
 		"default_casts": {
 			"group_000001": {
@@ -3520,6 +3520,8 @@
 			"attack_added_physical": 0.0,
 			"attack_crit_chance_increased": 0.0,
 			"attack_elemental_increased": 0.0,
+			"attack_life_leech": 0.0,
+			"attack_mana_leech": 0.0,
 			"attack_physical_increased": 0.0,
 			"attack_speed": 1.7,
 			"attack_speed_increased": 0.0,
@@ -3542,12 +3544,16 @@
 			"flask_mana_recovery_increased": 0.0,
 			"global_increased": 0.0,
 			"intelligence": 20.0,
+			"life_leech_max_rate_increased": 0.0,
+			"life_leech_rate_increased": 0.0,
 			"life_regen": 0.0,
 			"life_regen_percent": 0.0,
 			"lightning_increased": 0.0,
 			"lightning_resistance": 0.0,
 			"mana_cost_efficiency_increased": 0.0,
 			"mana_cost_increased": 0.0,
+			"mana_leech_max_rate_increased": 0.0,
+			"mana_leech_rate_increased": 0.0,
 			"mana_regen": 12.0,
 			"mana_regen_increased": 0.0,
 			"max_health": 130.0,
@@ -3559,6 +3565,8 @@
 			"melee_physical_increased": 0.04,
 			"move_speed": 240.0,
 			"move_speed_increased": 0.0,
+			"physical_attack_life_leech": 0.0,
+			"physical_attack_mana_leech": 0.0,
 			"physical_increased": 0.0,
 			"projectile_attack_crit_chance_increased": 0.0,
 			"projectile_attack_crit_multiplier_add": 0.0,
@@ -4438,7 +4446,7 @@
 				"evasion": 320.0
 			}
 		},
-		"save_version": 24,
+		"save_version": 25,
 		"skitter_accuracy_example": {
 			"base_accuracy": 140,
 			"base_chance": 0.96,
@@ -4484,6 +4492,8 @@
 				"attack_added_physical": 0.0,
 				"attack_crit_chance_increased": 0.0,
 				"attack_elemental_increased": 0.0,
+				"attack_life_leech": 0.0,
+				"attack_mana_leech": 0.0,
 				"attack_physical_increased": 0.0,
 				"attack_speed": 1.7,
 				"attack_speed_increased": 0.0,
@@ -4506,12 +4516,16 @@
 				"flask_mana_recovery_increased": 0.0,
 				"global_increased": 0.0,
 				"intelligence": 20.0,
+				"life_leech_max_rate_increased": 0.0,
+				"life_leech_rate_increased": 0.0,
 				"life_regen": 0.0,
 				"life_regen_percent": 0.0,
 				"lightning_increased": 0.0,
 				"lightning_resistance": 0.0,
 				"mana_cost_efficiency_increased": 0.0,
 				"mana_cost_increased": 0.0,
+				"mana_leech_max_rate_increased": 0.0,
+				"mana_leech_rate_increased": 0.0,
 				"mana_regen": 12.0,
 				"mana_regen_increased": 0.0,
 				"max_health": 130.0,
@@ -4523,6 +4537,8 @@
 				"melee_physical_increased": 0.04,
 				"move_speed": 240.0,
 				"move_speed_increased": 0.0,
+				"physical_attack_life_leech": 0.0,
+				"physical_attack_mana_leech": 0.0,
 				"physical_increased": 0.0,
 				"projectile_attack_crit_chance_increased": 0.0,
 				"projectile_attack_crit_multiplier_add": 0.0,
@@ -4972,7 +4988,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 24,
+				"save_version": 25,
 				"source": {
 					"affixes": [
 						{
@@ -5379,7 +5395,7 @@
 				"schema_version": 2,
 				"status": "prototype"
 			},
-			"save_version": 24
+			"save_version": 25
 		},
 		"elevate": {
 			"description": "保留魔法装备已有词缀，升为稀有并补至4至6条。",
@@ -5580,7 +5596,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 24,
+				"save_version": 25,
 				"source": {
 					"affixes": [
 						{
@@ -5764,7 +5780,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 24,
+				"save_version": 25,
 				"source": {
 					"affixes": [],
 					"base_id": "ashwood_bow",
@@ -5950,7 +5966,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 24,
+				"save_version": 25,
 				"source": {
 					"affixes": [
 						{
@@ -6153,7 +6169,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 24,
+				"save_version": 25,
 				"source": {
 					"affixes": [
 						{
@@ -6295,7 +6311,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 24,
+				"save_version": 25,
 				"source": {
 					"affixes": [
 						{
@@ -6344,7 +6360,7 @@
 			"example_quantity": 1,
 			"name": "校准碎片",
 			"quantity_source": "items[uid].payload.quantity",
-			"save_version": 24,
+			"save_version": 25,
 			"size": [
 				1,
 				1
@@ -13639,7 +13655,7 @@
 			"status": "implemented"
 		}
 	},
-	"game_version": "0.39.0",
+	"game_version": "0.40.0",
 	"jewel_affixes": {
 		"barrier": {
 			"kind": "prefix",
@@ -15619,6 +15635,8 @@
 							"attack_added_physical": 0.0,
 							"attack_crit_chance_increased": 0.0,
 							"attack_elemental_increased": 0.0,
+							"attack_life_leech": 0.0,
+							"attack_mana_leech": 0.0,
 							"attack_physical_increased": 0.0,
 							"attack_speed": 1.7,
 							"attack_speed_increased": 0.0,
@@ -15641,12 +15659,16 @@
 							"flask_mana_recovery_increased": 0.0,
 							"global_increased": 0.0,
 							"intelligence": 20.0,
+							"life_leech_max_rate_increased": 0.0,
+							"life_leech_rate_increased": 0.0,
 							"life_regen": 0.0,
 							"life_regen_percent": 0.0,
 							"lightning_increased": 0.0,
 							"lightning_resistance": 0.0,
 							"mana_cost_efficiency_increased": 0.0,
 							"mana_cost_increased": 0.0,
+							"mana_leech_max_rate_increased": 0.0,
+							"mana_leech_rate_increased": 0.0,
 							"mana_regen": 12.0,
 							"mana_regen_increased": 0.0,
 							"max_health": 132.0,
@@ -15658,6 +15680,8 @@
 							"melee_physical_increased": 0.05,
 							"move_speed": 240.0,
 							"move_speed_increased": 0.0,
+							"physical_attack_life_leech": 0.0,
+							"physical_attack_mana_leech": 0.0,
 							"physical_increased": 0.1,
 							"projectile_attack_crit_chance_increased": 0.0,
 							"projectile_attack_crit_multiplier_add": 0.0,
@@ -15740,6 +15764,8 @@
 							"attack_added_physical": 0.0,
 							"attack_crit_chance_increased": 0.0,
 							"attack_elemental_increased": 0.0,
+							"attack_life_leech": 0.0,
+							"attack_mana_leech": 0.0,
 							"attack_physical_increased": 0.0,
 							"attack_speed": 1.7,
 							"attack_speed_increased": 0.0,
@@ -15762,12 +15788,16 @@
 							"flask_mana_recovery_increased": 0.0,
 							"global_increased": 0.0,
 							"intelligence": 20.0,
+							"life_leech_max_rate_increased": 0.0,
+							"life_leech_rate_increased": 0.0,
 							"life_regen": 0.0,
 							"life_regen_percent": 0.0,
 							"lightning_increased": 0.0,
 							"lightning_resistance": 0.0,
 							"mana_cost_efficiency_increased": 0.0,
 							"mana_cost_increased": 0.0,
+							"mana_leech_max_rate_increased": 0.0,
+							"mana_leech_rate_increased": 0.0,
 							"mana_regen": 12.0,
 							"mana_regen_increased": 0.0,
 							"max_health": 130.0,
@@ -15779,6 +15809,8 @@
 							"melee_physical_increased": 0.04,
 							"move_speed": 240.0,
 							"move_speed_increased": 0.0,
+							"physical_attack_life_leech": 0.0,
+							"physical_attack_mana_leech": 0.0,
 							"physical_increased": 0.0,
 							"projectile_attack_crit_chance_increased": 0.0,
 							"projectile_attack_crit_multiplier_add": 0.0,
@@ -15820,6 +15852,8 @@
 							"attack_added_physical": 0.0,
 							"attack_crit_chance_increased": 0.0,
 							"attack_elemental_increased": 0.0,
+							"attack_life_leech": 0.0,
+							"attack_mana_leech": 0.0,
 							"attack_physical_increased": 0.0,
 							"attack_speed": 1.7,
 							"attack_speed_increased": 0.0,
@@ -15842,12 +15876,16 @@
 							"flask_mana_recovery_increased": 0.0,
 							"global_increased": 0.0,
 							"intelligence": 20.0,
+							"life_leech_max_rate_increased": 0.0,
+							"life_leech_rate_increased": 0.0,
 							"life_regen": 0.0,
 							"life_regen_percent": 0.0,
 							"lightning_increased": 0.0,
 							"lightning_resistance": 0.0,
 							"mana_cost_efficiency_increased": 0.0,
 							"mana_cost_increased": 0.0,
+							"mana_leech_max_rate_increased": 0.0,
+							"mana_leech_rate_increased": 0.0,
 							"mana_regen": 12.0,
 							"mana_regen_increased": 0.0,
 							"max_health": 130.0,
@@ -15859,6 +15897,8 @@
 							"melee_physical_increased": 0.04,
 							"move_speed": 240.0,
 							"move_speed_increased": 0.0,
+							"physical_attack_life_leech": 0.0,
+							"physical_attack_mana_leech": 0.0,
 							"physical_increased": 0.0,
 							"projectile_attack_crit_chance_increased": 0.0,
 							"projectile_attack_crit_multiplier_add": 0.0,
@@ -16208,6 +16248,8 @@
 							"attack_added_physical": 0.0,
 							"attack_crit_chance_increased": 0.0,
 							"attack_elemental_increased": 0.0,
+							"attack_life_leech": 0.0,
+							"attack_mana_leech": 0.0,
 							"attack_physical_increased": 0.0,
 							"attack_speed": 1.7,
 							"attack_speed_increased": 0.0,
@@ -16230,12 +16272,16 @@
 							"flask_mana_recovery_increased": 0.0,
 							"global_increased": 0.0,
 							"intelligence": 20.0,
+							"life_leech_max_rate_increased": 0.0,
+							"life_leech_rate_increased": 0.0,
 							"life_regen": 0.0,
 							"life_regen_percent": 0.0,
 							"lightning_increased": 0.0,
 							"lightning_resistance": 0.18,
 							"mana_cost_efficiency_increased": 0.0,
 							"mana_cost_increased": 0.0,
+							"mana_leech_max_rate_increased": 0.0,
+							"mana_leech_rate_increased": 0.0,
 							"mana_regen": 12.0,
 							"mana_regen_increased": 0.0,
 							"max_health": 132.0,
@@ -16247,6 +16293,8 @@
 							"melee_physical_increased": 0.05,
 							"move_speed": 240.0,
 							"move_speed_increased": 0.0,
+							"physical_attack_life_leech": 0.0,
+							"physical_attack_mana_leech": 0.0,
 							"physical_increased": 0.1,
 							"projectile_attack_crit_chance_increased": 0.0,
 							"projectile_attack_crit_multiplier_add": 0.0,
@@ -16329,6 +16377,8 @@
 							"attack_added_physical": 0.0,
 							"attack_crit_chance_increased": 0.0,
 							"attack_elemental_increased": 0.0,
+							"attack_life_leech": 0.0,
+							"attack_mana_leech": 0.0,
 							"attack_physical_increased": 0.0,
 							"attack_speed": 1.7,
 							"attack_speed_increased": 0.0,
@@ -16351,12 +16401,16 @@
 							"flask_mana_recovery_increased": 0.0,
 							"global_increased": 0.0,
 							"intelligence": 20.0,
+							"life_leech_max_rate_increased": 0.0,
+							"life_leech_rate_increased": 0.0,
 							"life_regen": 0.0,
 							"life_regen_percent": 0.0,
 							"lightning_increased": 0.0,
 							"lightning_resistance": 0.0,
 							"mana_cost_efficiency_increased": 0.0,
 							"mana_cost_increased": 0.0,
+							"mana_leech_max_rate_increased": 0.0,
+							"mana_leech_rate_increased": 0.0,
 							"mana_regen": 12.0,
 							"mana_regen_increased": 0.0,
 							"max_health": 130.0,
@@ -16368,6 +16422,8 @@
 							"melee_physical_increased": 0.04,
 							"move_speed": 240.0,
 							"move_speed_increased": 0.0,
+							"physical_attack_life_leech": 0.0,
+							"physical_attack_mana_leech": 0.0,
 							"physical_increased": 0.0,
 							"projectile_attack_crit_chance_increased": 0.0,
 							"projectile_attack_crit_multiplier_add": 0.0,
@@ -16409,6 +16465,8 @@
 							"attack_added_physical": 0.0,
 							"attack_crit_chance_increased": 0.0,
 							"attack_elemental_increased": 0.0,
+							"attack_life_leech": 0.0,
+							"attack_mana_leech": 0.0,
 							"attack_physical_increased": 0.0,
 							"attack_speed": 1.7,
 							"attack_speed_increased": 0.0,
@@ -16431,12 +16489,16 @@
 							"flask_mana_recovery_increased": 0.0,
 							"global_increased": 0.0,
 							"intelligence": 20.0,
+							"life_leech_max_rate_increased": 0.0,
+							"life_leech_rate_increased": 0.0,
 							"life_regen": 0.0,
 							"life_regen_percent": 0.0,
 							"lightning_increased": 0.0,
 							"lightning_resistance": 0.0,
 							"mana_cost_efficiency_increased": 0.0,
 							"mana_cost_increased": 0.0,
+							"mana_leech_max_rate_increased": 0.0,
+							"mana_leech_rate_increased": 0.0,
 							"mana_regen": 12.0,
 							"mana_regen_increased": 0.0,
 							"max_health": 130.0,
@@ -16448,6 +16510,8 @@
 							"melee_physical_increased": 0.04,
 							"move_speed": 240.0,
 							"move_speed_increased": 0.0,
+							"physical_attack_life_leech": 0.0,
+							"physical_attack_mana_leech": 0.0,
 							"physical_increased": 0.0,
 							"projectile_attack_crit_chance_increased": 0.0,
 							"projectile_attack_crit_multiplier_add": 0.0,
@@ -22183,7 +22247,7 @@
 		"source": "SkillCompiler + ProjectileRuntime.advance + DamageResolver",
 		"target_count": 6
 	},
-	"save_version": 24,
+	"save_version": 25,
 	"schema_version": 3,
 	"sectors": [
 		{
@@ -201633,6 +201697,428 @@
 			"药剂期间持续伤害减免"
 		]
 	},
+	"source_leech": {
+		"amount_formula": "实际损伤 × 攻击偷取率 + 实际物理份额 × 物理攻击偷取率；每次最多为施放时对应资源上限的10%",
+		"cap_formula": "全体每秒最多为当前资源上限的20% × (1 + 对应总上限增加)，超过部分不积压",
+		"coverage_note": "21个新增完整普通节点，其中20个从七起点可达；1个精通效果句式完整但入口前置未实现，当前不可分配；物理攻击魔力节点另含未实现效果仍锁定",
+		"damage_basis": "防御后实际扣除的护盾与生命之和；不含过量伤害。物理份额按最终物理伤害占比分摊",
+		"examples": [
+			{
+				"allocated": [
+					"50986",
+					"39725",
+					"63649",
+					"49806",
+					"6580",
+					"19711",
+					"20010",
+					"36704"
+				],
+				"id": "attack_life_and_mana",
+				"nova": {
+
+				},
+				"points_spent": 7.0,
+				"profile": {
+					"health": {
+						"attack_fraction": 0.004,
+						"instance_amount_cap": 13.100000000000001,
+						"instance_rate": 2.62,
+						"physical_attack_fraction": 0.0,
+						"total_rate_cap": 26.200000000000003
+					},
+					"mana": {
+						"attack_fraction": 0.004,
+						"instance_amount_cap": 13.700000000000001,
+						"instance_rate": 2.74,
+						"physical_attack_fraction": 0.0,
+						"total_rate_cap": 27.400000000000002
+					},
+					"ok": true,
+					"reason": ""
+				},
+				"required_level": 3.0,
+				"tornado": {
+					"health": {
+						"attack_fraction": 0.004,
+						"instance_amount_cap": 13.100000000000001,
+						"instance_rate": 2.62,
+						"physical_attack_fraction": 0.0,
+						"total_rate_cap": 26.200000000000003
+					},
+					"mana": {
+						"attack_fraction": 0.004,
+						"instance_amount_cap": 13.700000000000001,
+						"instance_rate": 2.74,
+						"physical_attack_fraction": 0.0,
+						"total_rate_cap": 27.400000000000002
+					}
+				}
+			},
+			{
+				"allocated": [
+					"50986",
+					"39725",
+					"63649",
+					"49806",
+					"6580",
+					"19711",
+					"20010",
+					"36704",
+					"9171",
+					"39530",
+					"54872",
+					"1382"
+				],
+				"id": "dual_rates_and_caps",
+				"nova": {
+
+				},
+				"points_spent": 11.0,
+				"profile": {
+					"health": {
+						"attack_fraction": 0.014,
+						"instance_amount_cap": 13.100000000000001,
+						"instance_rate": 4.192,
+						"physical_attack_fraction": 0.0,
+						"total_rate_cap": 36.68
+					},
+					"mana": {
+						"attack_fraction": 0.014,
+						"instance_amount_cap": 13.700000000000001,
+						"instance_rate": 4.384,
+						"physical_attack_fraction": 0.0,
+						"total_rate_cap": 38.36
+					},
+					"ok": true,
+					"reason": ""
+				},
+				"required_level": 7.0,
+				"tornado": {
+					"health": {
+						"attack_fraction": 0.014,
+						"instance_amount_cap": 13.100000000000001,
+						"instance_rate": 4.192,
+						"physical_attack_fraction": 0.0,
+						"total_rate_cap": 36.68
+					},
+					"mana": {
+						"attack_fraction": 0.014,
+						"instance_amount_cap": 13.700000000000001,
+						"instance_rate": 4.384,
+						"physical_attack_fraction": 0.0,
+						"total_rate_cap": 38.36
+					}
+				}
+			},
+			{
+				"allocated": [
+					"50986",
+					"47389",
+					"42911",
+					"40867",
+					"476",
+					"24865",
+					"6741",
+					"14056",
+					"34400",
+					"24914",
+					"61262",
+					"37800",
+					"35507",
+					"22356"
+				],
+				"id": "physical_life_rate_and_cap",
+				"nova": {
+
+				},
+				"points_spent": 13.0,
+				"profile": {
+					"health": {
+						"attack_fraction": 0.0,
+						"instance_amount_cap": 19.0,
+						"instance_rate": 9.88,
+						"physical_attack_fraction": 0.006,
+						"total_rate_cap": 53.199999999999996
+					},
+					"mana": {
+						"attack_fraction": 0.0,
+						"instance_amount_cap": 13.700000000000001,
+						"instance_rate": 2.74,
+						"physical_attack_fraction": 0.0,
+						"total_rate_cap": 27.400000000000002
+					},
+					"ok": true,
+					"reason": ""
+				},
+				"required_level": 9.0,
+				"tornado": {
+					"health": {
+						"attack_fraction": 0.0,
+						"instance_amount_cap": 19.0,
+						"instance_rate": 9.88,
+						"physical_attack_fraction": 0.006,
+						"total_rate_cap": 53.199999999999996
+					},
+					"mana": {
+						"attack_fraction": 0.0,
+						"instance_amount_cap": 13.700000000000001,
+						"instance_rate": 2.74,
+						"physical_attack_fraction": 0.0,
+						"total_rate_cap": 27.400000000000002
+					}
+				}
+			},
+			{
+				"allocated": [
+					"50986",
+					"39725",
+					"63649",
+					"49806",
+					"6580",
+					"19711",
+					"20010",
+					"36704",
+					"9171",
+					"39530",
+					"54872",
+					"1382",
+					"47389",
+					"42911",
+					"40867",
+					"476",
+					"24865",
+					"6741",
+					"14056",
+					"34400",
+					"24914",
+					"61262",
+					"37800",
+					"35507",
+					"22356"
+				],
+				"id": "dual_plus_physical_rates_and_caps",
+				"nova": {
+
+				},
+				"points_spent": 24.0,
+				"profile": {
+					"health": {
+						"attack_fraction": 0.014,
+						"instance_amount_cap": 19.0,
+						"instance_rate": 12.160000000000002,
+						"physical_attack_fraction": 0.006,
+						"total_rate_cap": 68.4
+					},
+					"mana": {
+						"attack_fraction": 0.014,
+						"instance_amount_cap": 13.700000000000001,
+						"instance_rate": 4.384,
+						"physical_attack_fraction": 0.0,
+						"total_rate_cap": 38.36
+					},
+					"ok": true,
+					"reason": ""
+				},
+				"required_level": 20.0,
+				"tornado": {
+					"health": {
+						"attack_fraction": 0.014,
+						"instance_amount_cap": 19.0,
+						"instance_rate": 12.160000000000002,
+						"physical_attack_fraction": 0.006,
+						"total_rate_cap": 68.4
+					},
+					"mana": {
+						"attack_fraction": 0.014,
+						"instance_amount_cap": 13.700000000000001,
+						"instance_rate": 4.384,
+						"physical_attack_fraction": 0.0,
+						"total_rate_cap": 38.36
+					}
+				}
+			}
+		],
+		"lifecycle": "命中后下一模拟步开始；满额立即清除对应资源实例；死亡、重开、返城、档案切换清除，暂停冻结，不存档",
+		"minimum_save_version": 25,
+		"new_complete_ordinary_nodes": [
+			{
+				"id": "1382",
+				"name": "Spirit Void",
+				"stats": [
+					"1% of Attack Damage Leeched as Mana",
+					"40% increased Maximum total Mana Recovery per second from Leech"
+				]
+			},
+			{
+				"id": "22356",
+				"name": "Hematophagy",
+				"stats": [
+					"40% increased Maximum total Life Recovery per second from Leech",
+					"100% increased total Recovery per second from Life Leech"
+				]
+			},
+			{
+				"id": "28311",
+				"name": "Life Leech Speed and Attack Speed",
+				"stats": [
+					"3% increased Attack Speed",
+					"40% increased total Recovery per second from Life Leech"
+				]
+			},
+			{
+				"id": "29547",
+				"name": "Life Leech",
+				"stats": [
+					"15% increased Maximum total Life Recovery per second from Leech"
+				]
+			},
+			{
+				"id": "35507",
+				"name": "Life Leech Speed",
+				"stats": [
+					"60% increased total Recovery per second from Life Leech"
+				]
+			},
+			{
+				"id": "3634",
+				"name": "Life Leech",
+				"stats": [
+					"0.4% of Attack Damage Leeched as Life"
+				]
+			},
+			{
+				"id": "36704",
+				"name": "Life and Mana Leech",
+				"stats": [
+					"0.4% of Attack Damage Leeched as Life",
+					"0.4% of Attack Damage Leeched as Mana"
+				]
+			},
+			{
+				"id": "37800",
+				"name": "Life Leech",
+				"stats": [
+					"0.6% of Physical Attack Damage Leeched as Life"
+				]
+			},
+			{
+				"id": "39530",
+				"name": "Vitality Void",
+				"stats": [
+					"1% of Attack Damage Leeched as Life",
+					"40% increased Maximum total Life Recovery per second from Leech"
+				]
+			},
+			{
+				"id": "41819",
+				"name": "Life Leech Speed",
+				"stats": [
+					"60% increased total Recovery per second from Life Leech"
+				]
+			},
+			{
+				"id": "4378",
+				"name": "Life Leech",
+				"stats": [
+					"15% increased Maximum total Life Recovery per second from Leech"
+				]
+			},
+			{
+				"id": "50038",
+				"name": "Life Leech",
+				"stats": [
+					"0.5% of Attack Damage Leeched as Life"
+				]
+			},
+			{
+				"id": "51420",
+				"name": "Mana Leech",
+				"stats": [
+					"0.4% of Attack Damage Leeched as Mana"
+				]
+			},
+			{
+				"id": "54872",
+				"name": "Mana Leech Speed",
+				"stats": [
+					"60% increased total Recovery per second from Mana Leech"
+				]
+			},
+			{
+				"id": "61039",
+				"name": "Wild Hunger",
+				"stats": [
+					"0.8% of Attack Damage Leeched as Life",
+					"30% increased Maximum total Life Recovery per second from Leech"
+				]
+			},
+			{
+				"id": "62094",
+				"name": "Taste for Blood",
+				"stats": [
+					"1% of Attack Damage Leeched as Life",
+					"30% increased Maximum total Life Recovery per second from Leech"
+				]
+			},
+			{
+				"id": "62108",
+				"name": "Life Leech and Attack Speed",
+				"stats": [
+					"3% increased Attack Speed",
+					"0.4% of Physical Attack Damage Leeched as Life"
+				]
+			},
+			{
+				"id": "63422",
+				"name": "Lust for Carnage",
+				"stats": [
+					"12% increased Attack Speed",
+					"1.5% of Physical Attack Damage Leeched as Life"
+				]
+			},
+			{
+				"id": "65053",
+				"name": "Essence Sap",
+				"stats": [
+					"0.5% of Attack Damage Leeched as Mana",
+					"50% increased Maximum total Mana Recovery per second from Leech",
+					"100% increased total Recovery per second from Mana Leech"
+				]
+			},
+			{
+				"id": "8001",
+				"name": "Clever Thief",
+				"stats": [
+					"1% of Attack Damage Leeched as Life",
+					"1% of Attack Damage Leeched as Mana"
+				]
+			},
+			{
+				"id": "9171",
+				"name": "Life Leech Speed",
+				"stats": [
+					"60% increased total Recovery per second from Life Leech"
+				]
+			}
+		],
+		"new_full_mastery_effect_ids": [
+			15133.0
+		],
+		"new_reachable_mastery_effect_count": 0.0,
+		"new_reachable_ordinary_count": 20,
+		"physical_mana_source_locked": true,
+		"rate_formula": "每实例每秒为施放时资源上限的2% × (1 + 对应速率增加)",
+		"scope": "本游戏初版规则，玩家攻击命中有效；母箭、子箭、返回继承冻结比例，每个实际目标分别结算；不含攻击标签的独立爆炸不偷取",
+		"unsupported": [
+			"即时偷取",
+			"过量伤害偷取",
+			"满额保留",
+			"召唤物偷取",
+			"护盾偷取",
+			"条件偷取"
+		]
+	},
 	"source_mana_cost": {
 		"example_scope": "新星加节能/疾咏，隔离展示成本字段；节点其余魔力/恢复收益仍由对应原消费者结算",
 		"examples": [
@@ -224019,13 +224505,24 @@
 			"1382": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "attack_mana_leech",
+							"value": 0.01
+						},
+						{
+							"mode": "increased",
+							"stat": "mana_leech_max_rate_increased",
+							"value": 0.4
+						}
+					],
+					"status": "full",
+					"supported": [
 						"1% of Attack Damage Leeched as Mana",
 						"40% increased Maximum total Mana Recovery per second from Leech"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "1382",
@@ -225705,14 +226202,19 @@
 							"mode": "increased",
 							"stat": "attack_speed_increased",
 							"value": 0.08
+						},
+						{
+							"mode": "flat",
+							"stat": "attack_mana_leech",
+							"value": 0.004
 						}
 					],
 					"status": "partial",
 					"supported": [
-						"8% increased Attack Speed"
+						"8% increased Attack Speed",
+						"0.4% of Attack Damage Leeched as Mana"
 					],
 					"unsupported": [
-						"0.4% of Attack Damage Leeched as Mana",
 						"20% increased Damage while Leeching"
 					]
 				},
@@ -226986,14 +227488,19 @@
 							"mode": "increased",
 							"stat": "max_mana",
 							"value": 0.18
+						},
+						{
+							"mode": "flat",
+							"stat": "attack_mana_leech",
+							"value": 0.004
 						}
 					],
 					"status": "partial",
 					"supported": [
-						"18% increased maximum Mana"
+						"18% increased maximum Mana",
+						"0.4% of Attack Damage Leeched as Mana"
 					],
 					"unsupported": [
-						"0.4% of Attack Damage Leeched as Mana",
 						"25% increased Cost Efficiency of Attacks"
 					]
 				},
@@ -227678,14 +228185,19 @@
 							"mode": "increased",
 							"stat": "max_health",
 							"value": 0.08
+						},
+						{
+							"mode": "flat",
+							"stat": "attack_life_leech",
+							"value": 0.004
 						}
 					],
 					"status": "partial",
 					"supported": [
-						"8% increased maximum Life"
+						"8% increased maximum Life",
+						"0.4% of Attack Damage Leeched as Life"
 					],
 					"unsupported": [
-						"0.4% of Attack Damage Leeched as Life",
 						"Gain 10 Life per Enemy Hit with Attacks"
 					]
 				},
@@ -241532,13 +242044,24 @@
 			"22356": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "life_leech_max_rate_increased",
+							"value": 0.4
+						},
+						{
+							"mode": "increased",
+							"stat": "life_leech_rate_increased",
+							"value": 1.0
+						}
+					],
+					"status": "full",
+					"supported": [
 						"40% increased Maximum total Life Recovery per second from Leech",
 						"100% increased total Recovery per second from Life Leech"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "22356",
@@ -250950,11 +251473,18 @@
 			"26197": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "attack_life_leech",
+							"value": 0.004
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"0.4% of Attack Damage Leeched as Life"
+					],
 					"unsupported": [
-						"0.4% of Attack Damage Leeched as Life",
 						"30% increased Damage while Leeching",
 						"15% increased Attack Speed while Leeching"
 					]
@@ -252594,13 +253124,20 @@
 			"27140": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "physical_attack_life_leech",
+							"value": 0.008
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"0.8% of Physical Attack Damage Leeched as Life"
+					],
 					"unsupported": [
 						"12% increased Physical Damage with Two Handed Melee Weapons",
-						"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments",
-						"0.8% of Physical Attack Damage Leeched as Life"
+						"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments"
 					]
 				},
 				"has_position": true,
@@ -253280,13 +253817,20 @@
 			"27301": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "life_leech_rate_increased",
+							"value": 1.0
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"100% increased total Recovery per second from Life Leech"
+					],
 					"unsupported": [
 						"30% increased Physical Damage with Two Handed Melee Weapons",
 						"Attacks with Two Handed Melee Weapons deal 30% increased Damage with Ailments",
-						"100% increased total Recovery per second from Life Leech",
 						"Hits have 30% chance to ignore Enemy Physical Damage Reduction"
 					]
 				},
@@ -253699,11 +254243,18 @@
 			"27422": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "physical_attack_mana_leech",
+							"value": 0.005
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"0.5% of Physical Attack Damage Leeched as Mana"
+					],
 					"unsupported": [
-						"0.5% of Physical Attack Damage Leeched as Mana",
 						"25% increased Cost Efficiency of Attacks"
 					]
 				},
@@ -255721,15 +256272,19 @@
 							"mode": "increased",
 							"stat": "attack_speed_increased",
 							"value": 0.03
+						},
+						{
+							"mode": "increased",
+							"stat": "life_leech_rate_increased",
+							"value": 0.4
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
-						"3% increased Attack Speed"
-					],
-					"unsupported": [
+						"3% increased Attack Speed",
 						"40% increased total Recovery per second from Life Leech"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "28311",
@@ -258190,12 +258745,19 @@
 			"29359": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "physical_attack_life_leech",
+							"value": 0.004
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"0.4% of Physical Attack Damage Leeched as Life"
+					],
 					"unsupported": [
 						"12% increased Attack Damage",
-						"0.4% of Physical Attack Damage Leeched as Life",
 						"12% increased Damage with Ailments from Attack Skills"
 					]
 				},
@@ -258497,12 +259059,18 @@
 			"29547": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "life_leech_max_rate_increased",
+							"value": 0.15
+						}
+					],
+					"status": "full",
+					"supported": [
 						"15% increased Maximum total Life Recovery per second from Leech"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "29547",
@@ -268862,12 +269430,19 @@
 			"34215": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"10% increased Attack Damage",
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "attack_life_leech",
+							"value": 0.004
+						}
+					],
+					"status": "partial",
+					"supported": [
 						"0.4% of Attack Damage Leeched as Life"
+					],
+					"unsupported": [
+						"10% increased Attack Damage"
 					]
 				},
 				"has_position": true,
@@ -270996,13 +271571,20 @@
 			"34959": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "life_leech_rate_increased",
+							"value": 0.6
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"60% increased total Recovery per second from Life Leech"
+					],
 					"unsupported": [
 						"12% increased Physical Damage with Two Handed Melee Weapons",
-						"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments",
-						"60% increased total Recovery per second from Life Leech"
+						"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments"
 					]
 				},
 				"has_position": true,
@@ -271277,13 +271859,24 @@
 					{
 						"effect": 15133,
 						"execution": {
-							"grants": [],
-							"status": "unsupported",
-							"supported": [],
-							"unsupported": [
+							"grants": [
+								{
+									"mode": "flat",
+									"stat": "attack_life_leech",
+									"value": 0.005
+								},
+								{
+									"mode": "flat",
+									"stat": "attack_mana_leech",
+									"value": 0.005
+								}
+							],
+							"status": "full",
+							"supported": [
 								"0.5% of Attack Damage Leeched as Life",
 								"0.5% of Attack Damage Leeched as Mana"
-							]
+							],
+							"unsupported": []
 						},
 						"stats": [
 							"0.5% of Attack Damage Leeched as Life",
@@ -272665,12 +273258,18 @@
 			"35507": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "life_leech_rate_increased",
+							"value": 0.6
+						}
+					],
+					"status": "full",
+					"supported": [
 						"60% increased total Recovery per second from Life Leech"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "35507",
@@ -274448,12 +275047,18 @@
 			"3634": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "attack_life_leech",
+							"value": 0.004
+						}
+					],
+					"status": "full",
+					"supported": [
 						"0.4% of Attack Damage Leeched as Life"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "3634",
@@ -275234,13 +275839,24 @@
 			"36704": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "attack_life_leech",
+							"value": 0.004
+						},
+						{
+							"mode": "flat",
+							"stat": "attack_mana_leech",
+							"value": 0.004
+						}
+					],
+					"status": "full",
+					"supported": [
 						"0.4% of Attack Damage Leeched as Life",
 						"0.4% of Attack Damage Leeched as Mana"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "36704",
@@ -277888,12 +278504,18 @@
 			"37800": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "physical_attack_life_leech",
+							"value": 0.006
+						}
+					],
+					"status": "full",
+					"supported": [
 						"0.6% of Physical Attack Damage Leeched as Life"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "37800",
@@ -278018,12 +278640,19 @@
 			"37887": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "life_leech_rate_increased",
+							"value": 0.6
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"60% increased total Recovery per second from Life Leech"
+					],
 					"unsupported": [
 						"12% increased Attack Damage",
-						"60% increased total Recovery per second from Life Leech",
 						"12% increased Damage with Ailments from Attack Skills"
 					]
 				},
@@ -282194,12 +282823,19 @@
 			"39443": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"20% increased Critical Strike Chance with Daggers",
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "attack_life_leech",
+							"value": 0.008
+						}
+					],
+					"status": "partial",
+					"supported": [
 						"0.8% of Attack Damage Leeched as Life"
+					],
+					"unsupported": [
+						"20% increased Critical Strike Chance with Daggers"
 					]
 				},
 				"has_position": true,
@@ -282314,13 +282950,24 @@
 			"39530": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "attack_life_leech",
+							"value": 0.01
+						},
+						{
+							"mode": "increased",
+							"stat": "life_leech_max_rate_increased",
+							"value": 0.4
+						}
+					],
+					"status": "full",
+					"supported": [
 						"1% of Attack Damage Leeched as Life",
 						"40% increased Maximum total Life Recovery per second from Leech"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "39530",
@@ -286913,11 +287560,18 @@
 			"41284": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "attack_life_leech",
+							"value": 0.008
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"0.8% of Attack Damage Leeched as Life"
+					],
 					"unsupported": [
-						"0.8% of Attack Damage Leeched as Life",
 						"25% increased Attack Damage when on Full Life",
 						"Attacks have 10% chance to Maim on Hit"
 					]
@@ -288046,12 +288700,18 @@
 			"41819": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "life_leech_rate_increased",
+							"value": 0.6
+						}
+					],
+					"status": "full",
+					"supported": [
 						"60% increased total Recovery per second from Life Leech"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "41819",
@@ -292686,12 +293346,18 @@
 			"4378": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "life_leech_max_rate_increased",
+							"value": 0.15
+						}
+					],
+					"status": "full",
+					"supported": [
 						"15% increased Maximum total Life Recovery per second from Leech"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "4378",
@@ -297736,12 +298402,19 @@
 			"45696": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"10% increased Attack Damage",
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "attack_life_leech",
+							"value": 0.004
+						}
+					],
+					"status": "partial",
+					"supported": [
 						"0.4% of Attack Damage Leeched as Life"
+					],
+					"unsupported": [
+						"10% increased Attack Damage"
 					]
 				},
 				"has_position": true,
@@ -303379,13 +304052,24 @@
 					{
 						"effect": 15133,
 						"execution": {
-							"grants": [],
-							"status": "unsupported",
-							"supported": [],
-							"unsupported": [
+							"grants": [
+								{
+									"mode": "flat",
+									"stat": "attack_life_leech",
+									"value": 0.005
+								},
+								{
+									"mode": "flat",
+									"stat": "attack_mana_leech",
+									"value": 0.005
+								}
+							],
+							"status": "full",
+							"supported": [
 								"0.5% of Attack Damage Leeched as Life",
 								"0.5% of Attack Damage Leeched as Mana"
-							]
+							],
+							"unsupported": []
 						},
 						"stats": [
 							"0.5% of Attack Damage Leeched as Life",
@@ -305070,17 +305754,21 @@
 					"grants": [
 						{
 							"mode": "increased",
+							"stat": "life_leech_rate_increased",
+							"value": 0.3
+						},
+						{
+							"mode": "increased",
 							"stat": "physical_increased",
 							"value": 0.1
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
+						"30% increased total Recovery per second from Life Leech",
 						"10% increased Physical Damage"
 					],
-					"unsupported": [
-						"30% increased total Recovery per second from Life Leech"
-					]
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "48904",
@@ -306302,12 +306990,19 @@
 			"4942": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "life_leech_rate_increased",
+							"value": 0.2
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"20% increased total Recovery per second from Life Leech"
+					],
 					"unsupported": [
 						"2% of Attack Damage Leeched as Life against Bleeding Enemies",
-						"20% increased total Recovery per second from Life Leech",
 						"20% increased Damage with Bleeding"
 					]
 				},
@@ -307961,12 +308656,18 @@
 			"50038": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "attack_life_leech",
+							"value": 0.005
+						}
+					],
+					"status": "full",
+					"supported": [
 						"0.5% of Attack Damage Leeched as Life"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "50038",
@@ -310366,12 +311067,18 @@
 			"51420": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "attack_mana_leech",
+							"value": 0.004
+						}
+					],
+					"status": "full",
+					"supported": [
 						"0.4% of Attack Damage Leeched as Mana"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "51420",
@@ -316210,13 +316917,24 @@
 					{
 						"effect": 15133,
 						"execution": {
-							"grants": [],
-							"status": "unsupported",
-							"supported": [],
-							"unsupported": [
+							"grants": [
+								{
+									"mode": "flat",
+									"stat": "attack_life_leech",
+									"value": 0.005
+								},
+								{
+									"mode": "flat",
+									"stat": "attack_mana_leech",
+									"value": 0.005
+								}
+							],
+							"status": "full",
+							"supported": [
 								"0.5% of Attack Damage Leeched as Life",
 								"0.5% of Attack Damage Leeched as Mana"
-							]
+							],
+							"unsupported": []
 						},
 						"stats": [
 							"0.5% of Attack Damage Leeched as Life",
@@ -318281,12 +318999,18 @@
 			"54872": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "mana_leech_rate_increased",
+							"value": 0.6
+						}
+					],
+					"status": "full",
+					"supported": [
 						"60% increased total Recovery per second from Mana Leech"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "54872",
@@ -321558,13 +322282,24 @@
 					{
 						"effect": 15133,
 						"execution": {
-							"grants": [],
-							"status": "unsupported",
-							"supported": [],
-							"unsupported": [
+							"grants": [
+								{
+									"mode": "flat",
+									"stat": "attack_life_leech",
+									"value": 0.005
+								},
+								{
+									"mode": "flat",
+									"stat": "attack_mana_leech",
+									"value": 0.005
+								}
+							],
+							"status": "full",
+							"supported": [
 								"0.5% of Attack Damage Leeched as Life",
 								"0.5% of Attack Damage Leeched as Mana"
-							]
+							],
+							"unsupported": []
 						},
 						"stats": [
 							"0.5% of Attack Damage Leeched as Life",
@@ -322077,13 +322812,25 @@
 			"56276": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"+30% to Critical Strike Multiplier with Daggers",
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "attack_life_leech",
+							"value": 0.006
+						},
+						{
+							"mode": "flat",
+							"stat": "attack_mana_leech",
+							"value": 0.006
+						}
+					],
+					"status": "partial",
+					"supported": [
 						"0.6% of Attack Damage Leeched as Life",
 						"0.6% of Attack Damage Leeched as Mana"
+					],
+					"unsupported": [
+						"+30% to Critical Strike Multiplier with Daggers"
 					]
 				},
 				"has_position": true,
@@ -327951,16 +328698,21 @@
 					"grants": [
 						{
 							"mode": "flat",
+							"stat": "attack_life_leech",
+							"value": 0.004
+						},
+						{
+							"mode": "flat",
 							"stat": "life_regen_percent",
 							"value": 0.015
 						}
 					],
 					"status": "partial",
 					"supported": [
+						"0.4% of Attack Damage Leeched as Life",
 						"Regenerate 1.5% of Life per second"
 					],
 					"unsupported": [
-						"0.4% of Attack Damage Leeched as Life",
 						"+6% Chance to Block Attack Damage"
 					]
 				},
@@ -332395,13 +333147,24 @@
 			"61039": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "attack_life_leech",
+							"value": 0.008
+						},
+						{
+							"mode": "increased",
+							"stat": "life_leech_max_rate_increased",
+							"value": 0.3
+						}
+					],
+					"status": "full",
+					"supported": [
 						"0.8% of Attack Damage Leeched as Life",
 						"30% increased Maximum total Life Recovery per second from Leech"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "61039",
@@ -335089,13 +335852,24 @@
 			"62094": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "attack_life_leech",
+							"value": 0.01
+						},
+						{
+							"mode": "increased",
+							"stat": "life_leech_max_rate_increased",
+							"value": 0.3
+						}
+					],
+					"status": "full",
+					"supported": [
 						"1% of Attack Damage Leeched as Life",
 						"30% increased Maximum total Life Recovery per second from Leech"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "62094",
@@ -335170,15 +335944,19 @@
 							"mode": "increased",
 							"stat": "attack_speed_increased",
 							"value": 0.03
+						},
+						{
+							"mode": "flat",
+							"stat": "physical_attack_life_leech",
+							"value": 0.004
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
-						"3% increased Attack Speed"
-					],
-					"unsupported": [
+						"3% increased Attack Speed",
 						"0.4% of Physical Attack Damage Leeched as Life"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "62108",
@@ -338617,15 +339395,19 @@
 							"mode": "increased",
 							"stat": "attack_speed_increased",
 							"value": 0.12
+						},
+						{
+							"mode": "flat",
+							"stat": "physical_attack_life_leech",
+							"value": 0.015
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
-						"12% increased Attack Speed"
-					],
-					"unsupported": [
+						"12% increased Attack Speed",
 						"1.5% of Physical Attack Damage Leeched as Life"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "63422",
@@ -339720,12 +340502,19 @@
 			"63727": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "physical_attack_life_leech",
+							"value": 0.01
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"1% of Physical Attack Damage Leeched as Life"
+					],
 					"unsupported": [
 						"10% increased Attack Speed when on Full Life",
-						"1% of Physical Attack Damage Leeched as Life",
 						"40% increased Attack Damage while Leeching"
 					]
 				},
@@ -342277,13 +343066,20 @@
 			"64816": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "physical_attack_life_leech",
+							"value": 0.004
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"0.4% of Physical Attack Damage Leeched as Life"
+					],
 					"unsupported": [
 						"12% increased Physical Damage with Two Handed Melee Weapons",
-						"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments",
-						"0.4% of Physical Attack Damage Leeched as Life"
+						"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments"
 					]
 				},
 				"has_position": true,
@@ -342580,14 +343376,30 @@
 			"65053": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "attack_mana_leech",
+							"value": 0.005
+						},
+						{
+							"mode": "increased",
+							"stat": "mana_leech_max_rate_increased",
+							"value": 0.5
+						},
+						{
+							"mode": "increased",
+							"stat": "mana_leech_rate_increased",
+							"value": 1.0
+						}
+					],
+					"status": "full",
+					"supported": [
 						"0.5% of Attack Damage Leeched as Mana",
 						"50% increased Maximum total Mana Recovery per second from Leech",
 						"100% increased total Recovery per second from Mana Leech"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "65053",
@@ -345116,13 +345928,20 @@
 			"6884": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "life_leech_rate_increased",
+							"value": 0.6
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"60% increased total Recovery per second from Life Leech"
+					],
 					"unsupported": [
 						"12% increased Physical Damage with Two Handed Melee Weapons",
-						"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments",
-						"60% increased total Recovery per second from Life Leech"
+						"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments"
 					]
 				},
 				"has_position": true,
@@ -347799,13 +348618,24 @@
 			"8001": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "attack_life_leech",
+							"value": 0.01
+						},
+						{
+							"mode": "flat",
+							"stat": "attack_mana_leech",
+							"value": 0.01
+						}
+					],
+					"status": "full",
+					"supported": [
 						"1% of Attack Damage Leeched as Life",
 						"1% of Attack Damage Leeched as Mana"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "8001",
@@ -350669,12 +351499,18 @@
 			"9171": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "life_leech_rate_increased",
+							"value": 0.6
+						}
+					],
+					"status": "full",
+					"supported": [
 						"60% increased total Recovery per second from Life Leech"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "9171",
@@ -358743,7 +359579,7 @@
 		},
 		"reserved_character_key": "C",
 		"retired_profile_writes": false,
-		"save_version": 24,
+		"save_version": 25,
 		"services": [
 			{
 				"description": "免费测试供应全部已实现主动与辅助宝石。",

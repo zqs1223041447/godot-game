@@ -89,6 +89,7 @@ static func collect() -> Dictionary:
 	result["source_mana_cost"] = source_mana_cost_examples()
 	result["source_flasks"] = source_flask_examples()
 	result["source_critical"] = source_critical_examples()
+	result["source_leech"] = source_leech_examples()
 	result["map_bosses"] = map_boss_examples()
 	result["save_version"] = Canonical.Rules.VERSION
 	result["current_loot_profile_id"] = Canonical.LOOT_PROFILE_ID
@@ -906,3 +907,29 @@ static func source_critical_examples()->Dictionary:
 		"balance_change":"本批玩家新增5%基础暴击和150%基础倍率；这是显式平衡变化，自然怪物保持0%",
 		"example_scope":"只提取所列源节点的暴击字段展示作用域，不代替真实连通/预算要求；其余节点效果仍由原消费者结算",
 		"unsupported":["幸运","局部武器暴击","暴击触发","召唤物暴击","条件暴击","暴击异常/持续伤害"]}
+
+
+static func source_leech_examples()->Dictionary:
+	var routes:Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://docs/qa/v040/source-leech-example-paths.json"))
+	var coverage:Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://docs/qa/v040/source-leech-coverage.json"))
+	var examples:Array=[]
+	for entry:Dictionary in routes.examples:
+		var model:=Canonical.new();var candidate:Dictionary=model.snapshot()
+		candidate.progress.level=int(entry.required_level);candidate.progress.xp=0;candidate.talents.class_id=int(entry.class_id)
+		candidate.talents.allocated=entry.allocated.duplicate();candidate.talents.normal_points=int(candidate.progress.level)+4-int(entry.points_spent)
+		assert(model.Rules.reason(candidate).is_empty(),"Reference route must be a real legal build")
+		model._accept_memory(candidate)
+		examples.append({"id":entry.id,"required_level":entry.required_level,"points_spent":entry.points_spent,
+			"allocated":entry.allocated,"profile":model.get_leech_profile(),"tornado":model.get_skill_cast("tornado").get("leech",{}),
+			"nova":model.get_skill_cast("nova").get("leech",{})})
+	return {"minimum_save_version":25,"examples":examples,"new_complete_ordinary_nodes":coverage.new_full_standard_ordinary_nodes,
+		"new_full_mastery_effect_ids":coverage.new_full_mastery_distinct_effect_ids,"new_reachable_mastery_effect_count":coverage.new_reachable_mastery_effect_count,
+		"new_reachable_ordinary_count":20,"physical_mana_source_locked":true,
+		"damage_basis":"防御后实际扣除的护盾与生命之和；不含过量伤害。物理份额按最终物理伤害占比分摊",
+		"amount_formula":"实际损伤 × 攻击偷取率 + 实际物理份额 × 物理攻击偷取率；每次最多为施放时对应资源上限的10%",
+		"rate_formula":"每实例每秒为施放时资源上限的2% × (1 + 对应速率增加)",
+		"cap_formula":"全体每秒最多为当前资源上限的20% × (1 + 对应总上限增加)，超过部分不积压",
+		"lifecycle":"命中后下一模拟步开始；满额立即清除对应资源实例；死亡、重开、返城、档案切换清除，暂停冻结，不存档",
+		"scope":"本游戏初版规则，玩家攻击命中有效；母箭、子箭、返回继承冻结比例，每个实际目标分别结算；不含攻击标签的独立爆炸不偷取",
+		"coverage_note":"21个新增完整普通节点，其中20个从七起点可达；1个精通效果句式完整但入口前置未实现，当前不可分配；物理攻击魔力节点另含未实现效果仍锁定",
+		"unsupported":["即时偷取","过量伤害偷取","满额保留","召唤物偷取","护盾偷取","条件偷取"]}

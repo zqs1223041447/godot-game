@@ -463,6 +463,16 @@ def build(data, art):
         diagram='<figure><svg viewBox="0 0 650 110" role="img" aria-label="药剂使用冻结回复与根怪小数充能"><g fill="#eeddb5" stroke="#8e704f"><rect x="12" y="22" width="168" height="62" rx="7"/><rect x="235" y="22" width="172" height="62" rx="7"/><rect x="462" y="22" width="176" height="62" rx="7"/></g><g fill="#493523" font-size="14" text-anchor="middle"><text x="96" y="59">用瓶冻结本次总回复</text><text x="321" y="46">3秒内分次恢复</text><text x="321" y="69">受当前上限限制</text><text x="550" y="46">有效根怪充能</text><text x="550" y="69">按UID累计小数</text><text x="207" y="59">→</text></g></svg></figure>'
         body=diagram+facts(rows)+'<p>'+esc(flasks['example_scope'])+'。</p><p>'+esc(flasks['recovery_formula'])+'。'+esc(flasks['locked_recovery'])+'。</p><p>'+esc(flasks['charge_formula'])+'。'+esc(flasks['charge_lifecycle'])+'。</p><p>下面以15%充能获取、空瓶为例；余量保留到凑整点，20个有效根怪累计23点。</p><table><thead><tr><th>有效根怪数</th><th>可用整充能</th><th>保留小数</th></tr></thead><tbody>'+charge_rows+'</tbody></table><p>'+esc(flasks['reward_gate'])+'。'+esc(flasks['unchanged'])+'。</p><p>运行态充能与余量不进入存档；重开、回城和切换档案沿原战斗生命周期重置。</p><p>'+esc(flasks['legacy_rule'])+f'。本批{len(flasks["new_complete_ordinary_nodes"])}个新增完整普通节点；包含未实现附加效果的节点仍整体锁定。</p>'
         rule_defs.append(('source_flasks','源天赋药剂构筑','生命与魔力药剂回复、根怪充能获取一起生效，保留用瓶时机与满充能取舍。',body,'implemented'))
+    if 'source_leech' in data:
+        leech=data['source_leech']; rows=[]
+        for example in leech['examples']:
+            parts=[]
+            for resource,label in [('health','生命'),('mana','法力')]:
+                p=example['profile'][resource]
+                parts.append(f'{label}：攻击 {p["attack_fraction"]*100:.2f}% / 物理攻击 {p["physical_attack_fraction"]*100:.2f}%；单次 {p["instance_rate"]:.2f}/秒，总上限 {p["total_rate_cap"]:.2f}/秒')
+            rows.append((f'{example["required_level"]}级 / {example["points_spent"]}点', '；'.join(parts)))
+        body=facts(rows)+''.join('<p>'+esc(leech[key])+'。</p>' for key in ['damage_basis','amount_formula','rate_formula','cap_formula','lifecycle','scope','coverage_note'])
+        rule_defs.append(('source_leech','生命与法力偷取','真实攻击损伤转为受速率上限约束的持续恢复，两资源独立清账。',body,'implemented'))
     if 'source_critical' in data:
         critical=data['source_critical'];rows=[]
         for example in critical['examples']:
