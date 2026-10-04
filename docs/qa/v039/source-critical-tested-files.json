@@ -1,0 +1,100 @@
+{
+  "scope": "The six changed production GDScript files exercised by the three focused source-critical tests; unchanged transitive dependencies are outside this inventory.",
+  "base_commit": "a4b13688c9bed0911b751854172d073e83935903",
+  "verified_committed_source": "39a17f3de7aef88069a27cb04fb5bcd14b38e353",
+  "test_execution": "Tests executed against these uncommitted production edits before commit39a17f3. No production source edits occurred after the tests. Current worktree bytes were compared directly with git show39a17f3:path and matched for every listed file.",
+  "historical_limit": "Hashes were recorded after testing, not by the running test process. The last source-edit times precede test execution, and the original deterministic edit operations are independently reconstructed for byte comparison in this follow-up.",
+  "log_provenance": "Verbatim console-output text from the original exec tool result segments, materialized after the test run. The original run did not create tee files; these are not newly executed runs and contain no added log lines.",
+  "tests": [
+    {
+      "script": "res://tests/source_critical_parser_test.gd",
+      "checks": 325,
+      "failures": 0,
+      "log": "source-critical-parser.log.txt",
+      "original_output_chunks": [
+        "3ebedc"
+      ],
+      "xdg_prefix": "/tmp/godot-m1-v039-parser",
+      "log_bytes": 120,
+      "log_sha256": "837965bb35558e47dbeb900d8052d8b8ea6ad879a3c9b1a97beb8bbabdc0fd8e"
+    },
+    {
+      "script": "res://tests/source_critical_gate_test.gd",
+      "checks": 1936,
+      "failures": 0,
+      "log": "source-critical-gate.log.txt",
+      "original_output_chunks": [
+        "3ebedc",
+        "20f1f0"
+      ],
+      "xdg_prefix": "/tmp/godot-m1-v039-gate",
+      "report_env": "V039_CRITICAL_COVERAGE_REPORT=/tmp/v039-critical-coverage.json",
+      "log_bytes": 232,
+      "log_sha256": "547e3136ef6284fb8e69608044411d172950d5b554f2cbd78db6dcd12f3ff39b"
+    },
+    {
+      "script": "res://tests/source_critical_migration_test.gd",
+      "checks": 103,
+      "failures": 0,
+      "log": "source-critical-migration.log.txt",
+      "original_output_chunks": [
+        "7dce55",
+        "63d02e"
+      ],
+      "xdg_prefix": "/tmp/godot-m1-v039-migration",
+      "log_bytes": 123,
+      "log_sha256": "be4464ede231f9dd6e4d77f4cde4d851ac5c518ad722807fc640685cc74a9eb2"
+    }
+  ],
+  "production_files": [
+    {
+      "path": "scripts/passives/source_stat_patterns.gd",
+      "bytes": 13268,
+      "sha256": "1a497695569fe51cf0e6a7511096608330cce591f2c372135aa765e9c6f7d420",
+      "equals_committed_bytes": true,
+      "last_modified_utc": "2026-10-04T11:40:42.945087+00:00",
+      "equals_original_pretest_edit_reconstruction": true
+    },
+    {
+      "path": "scripts/passives/source_tree_runtime.gd",
+      "bytes": 11945,
+      "sha256": "d2e41c16b9be793b769c2a44e8c9b37a75db2455bd5612e682621bc50ca4c785",
+      "equals_committed_bytes": true,
+      "last_modified_utc": "2026-10-04T11:40:42.945255+00:00",
+      "equals_original_pretest_edit_reconstruction": true
+    },
+    {
+      "path": "scripts/save/canonical_build_rules.gd",
+      "bytes": 16964,
+      "sha256": "dfbdf249c91857abc5e894141821f2602057213ba71bf50f60e20d458cf40fea",
+      "equals_committed_bytes": true,
+      "last_modified_utc": "2026-10-04T11:40:42.945373+00:00",
+      "equals_original_pretest_edit_reconstruction": true
+    },
+    {
+      "path": "scripts/save/canonical_build_store.gd",
+      "bytes": 18020,
+      "sha256": "03f2368cd1617576ca986066bd2cd6935dbd861d023a39c47e273165d966c921",
+      "equals_committed_bytes": true,
+      "last_modified_utc": "2026-10-04T11:40:42.946019+00:00",
+      "equals_original_pretest_edit_reconstruction": true
+    },
+    {
+      "path": "scripts/save/source_flask_migration.gd",
+      "bytes": 491,
+      "sha256": "d430c047d6f2d7b9388f6fb5de69d43aff07172dc5eb76e12122b8eb7f01aaf4",
+      "equals_committed_bytes": true,
+      "last_modified_utc": "2026-10-04T11:40:42.945507+00:00",
+      "equals_original_pretest_edit_reconstruction": true
+    },
+    {
+      "path": "scripts/save/source_critical_migration.gd",
+      "bytes": 567,
+      "sha256": "2d02b2470743e9b2e4443394970ce0d18fb22658a5567bac1a602d6488364630",
+      "equals_committed_bytes": true,
+      "last_modified_utc": "2026-10-04T11:40:42.945789+00:00",
+      "equals_original_pretest_edit_reconstruction": true
+    }
+  ],
+  "pretest_edit_reconstruction": "The exact deterministic source-edit operations recorded before tests were applied in memory to the original a4b source; all six reconstructed byte strings match the committed/current files. No production files were rewritten and no tests were rerun."
+}
