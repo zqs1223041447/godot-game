@@ -13617,7 +13617,7 @@
 			"status": "implemented"
 		}
 	},
-	"game_version": "0.35.0",
+	"game_version": "0.36.0",
 	"jewel_affixes": {
 		"barrier": {
 			"kind": "prefix",
@@ -13883,6 +13883,460 @@
 				"weight": 15
 			}
 		]
+	},
+	"map_bosses": {
+		"broken_ruins": {
+			"cases": {
+				"moving": {
+					"inside": false,
+					"position": [
+						-240.0,
+						0.0
+					],
+					"settlement": {
+
+					}
+				},
+				"standing": {
+					"inside": true,
+					"position": [
+						0.0,
+						0.0
+					],
+					"settlement": {
+						"actor": "player",
+						"armour": 0.0,
+						"components": {
+							"physical": 35.102599999999995
+						},
+						"damage_total": 35.102599999999995,
+						"details": [
+							{
+								"base": 35.102599999999995,
+								"before_defense": 35.102599999999995,
+								"final": 35.102599999999995,
+								"increased": 0.0,
+								"modifiers": [],
+								"more": 1.0,
+								"resistance": 0.0,
+								"type": "physical"
+							}
+						],
+						"effective_resistances": {
+							"cold": 0.0,
+							"fire": 0.0,
+							"lightning": 0.0
+						},
+						"health_lost": 30.102599999999995,
+						"mitigated_components": {
+							"physical": 0.0
+						},
+						"ok": true,
+						"overkill": 0.0,
+						"raw_components": {
+							"physical": 35.102599999999995
+						},
+						"raw_resistances": {
+							"cold": 0.0,
+							"fire": 0.0,
+							"lightning": 0.0
+						},
+						"reason": "",
+						"remaining_health": 69.8974,
+						"remaining_shield": 0.0,
+						"shield_spent": 5.0,
+						"stage": "hit_mitigation"
+					}
+				}
+			},
+			"definition": {
+				"id": "ruins_mark",
+				"map_id": "broken_ruins",
+				"name": "断垣落印",
+				"profile": {
+					"damage_multiplier": 1.15,
+					"radius": 75.0,
+					"recovery_seconds": 1.5,
+					"windup_seconds": 1.0
+				},
+				"target_rule": "player_at_start",
+				"trigger_distance": 420.0
+			},
+			"event": {
+				"attack_age": 1.0,
+				"attack_id": 1,
+				"balance_version": "original-telegraphed-area-v1",
+				"center": [
+					0.0,
+					0.0
+				],
+				"packet": {
+					"base": {
+						"physical": 35.102599999999995
+					},
+					"skill_id": "locked_circle",
+					"tags": [
+						"attack",
+						"area",
+						"hit"
+					]
+				},
+				"profile": {
+					"damage_multiplier": 1.15,
+					"radius": 75.0,
+					"recovery_seconds": 1.4588920687332683,
+					"windup_seconds": 1.0
+				},
+				"profile_id": "locked_circle",
+				"radius": 75.0,
+				"schema_version": 1,
+				"shape": "circle",
+				"source_id": 1,
+				"type": "circle_attack",
+				"visual_pattern": "ruins_mark"
+			},
+			"player_radius": 15.0,
+			"policy": {
+				"base_attack_speed": 1.1764705882352942,
+				"hold_pursuit_during_action": true,
+				"minimum_attack_speed": 0.2,
+				"name": "断垣落印",
+				"profile": {
+					"damage_multiplier": 1.15,
+					"radius": 75.0,
+					"recovery_seconds": 1.4588920687332683,
+					"windup_seconds": 1.0
+				},
+				"profile_id": "locked_circle",
+				"recovery_scaling": "base_attack_speed_divided_by_current_attack_speed",
+				"replaces_contact": true,
+				"target_rule": "player_at_start",
+				"trigger_distance": 420.0,
+				"visual_pattern": "ruins_mark"
+			},
+			"preserves": "原普通首领、生命护盾/机制、奖励与死亡4后代保持；后代不继承新攻击；无新存档字段",
+			"rules": "替代此地图首领接触攻击，动作停追击，攻速只缩恢复；开始检查来源视线，结算检查固定圆心视线；死亡/返城取消",
+			"scope": "无词缀地图首领与默认防御构筑的相对坐标示例；直线退离、不含障碍或闪避概率",
+			"source": {
+				"attack_speed": 1.2096205882352942,
+				"attack_timer": 0.5,
+				"contact_weights": {
+					"physical": 1.0
+				},
+				"damage": 30.523999999999997,
+				"damage_delay": 0.0,
+				"death_processed": false,
+				"death_spawns": [
+					{
+						"count": 4,
+						"template": "crawler"
+					}
+				],
+				"defense_stats": {
+
+				},
+				"equipment_pool": "",
+				"flash": 0.0,
+				"generation": 0,
+				"health": 623.2,
+				"id": 1,
+				"kind": 2,
+				"knockback": [
+					0.0,
+					0.0
+				],
+				"map_boss_attack_id": "ruins_mark",
+				"max_health": 623.2,
+				"max_shield": 7.8,
+				"mechanism_ids": [
+					"ember_mastery",
+					"aegis_mastery"
+				],
+				"mechanism_policy": "poe-passive-v1",
+				"mechanism_revision": 1,
+				"mechanism_schema": 1,
+				"mechanism_stats": {
+					"attack_speed": 0.03315,
+					"damage": 1.404,
+					"max_shield": 7.8,
+					"shield_regen": 1.2675
+				},
+				"name": "裂隙守卫",
+				"pos": [
+					120.0,
+					0.0
+				],
+				"radius": 27.5,
+				"rarity": "boss",
+				"resistances": {
+					"fire": 0.0
+				},
+				"reward_eligible": true,
+				"root_id": 1,
+				"shield": 7.8,
+				"shield_regen": 1.2675,
+				"slow": 0.0,
+				"spawn": 0.0,
+				"speed": 50.0,
+				"template_id": "rift_warden",
+				"wave": 5,
+				"xp_reward": 48
+			},
+			"start": {
+				"attack_id": 1,
+				"center": [
+					0.0,
+					0.0
+				],
+				"elapsed": 0.0,
+				"packet": {
+					"base": {
+						"physical": 35.102599999999995
+					},
+					"skill_id": "locked_circle",
+					"tags": [
+						"attack",
+						"area",
+						"hit"
+					]
+				},
+				"phase": "windup",
+				"profile": {
+					"damage_multiplier": 1.15,
+					"radius": 75.0,
+					"recovery_seconds": 1.4588920687332683,
+					"windup_seconds": 1.0
+				},
+				"source_id": 1,
+				"visual_pattern": "ruins_mark"
+			}
+		},
+		"old_garden": {
+			"cases": {
+				"moving": {
+					"inside": false,
+					"position": [
+						-216.0,
+						0.0
+					],
+					"settlement": {
+
+					}
+				},
+				"standing": {
+					"inside": true,
+					"position": [
+						0.0,
+						0.0
+					],
+					"settlement": {
+						"actor": "player",
+						"armour": 0.0,
+						"components": {
+							"physical": 41.361599999999996
+						},
+						"damage_total": 41.361599999999996,
+						"details": [
+							{
+								"base": 41.361599999999996,
+								"before_defense": 41.361599999999996,
+								"final": 41.361599999999996,
+								"increased": 0.0,
+								"modifiers": [],
+								"more": 1.0,
+								"resistance": 0.0,
+								"type": "physical"
+							}
+						],
+						"effective_resistances": {
+							"cold": 0.0,
+							"fire": 0.0,
+							"lightning": 0.0
+						},
+						"health_lost": 36.361599999999996,
+						"mitigated_components": {
+							"physical": 0.0
+						},
+						"ok": true,
+						"overkill": 0.0,
+						"raw_components": {
+							"physical": 41.361599999999996
+						},
+						"raw_resistances": {
+							"cold": 0.0,
+							"fire": 0.0,
+							"lightning": 0.0
+						},
+						"reason": "",
+						"remaining_health": 63.638400000000004,
+						"remaining_shield": 0.0,
+						"shield_spent": 5.0,
+						"stage": "hit_mitigation"
+					}
+				}
+			},
+			"definition": {
+				"id": "garden_slam",
+				"map_id": "old_garden",
+				"name": "近身震地",
+				"profile": {
+					"damage_multiplier": 1.4,
+					"radius": 130.0,
+					"recovery_seconds": 1.7,
+					"windup_seconds": 0.9
+				},
+				"target_rule": "self_at_start",
+				"trigger_distance": 140.0
+			},
+			"event": {
+				"attack_age": 0.9,
+				"attack_id": 1,
+				"balance_version": "original-telegraphed-area-v1",
+				"center": [
+					120.0,
+					0.0
+				],
+				"packet": {
+					"base": {
+						"physical": 41.361599999999996
+					},
+					"skill_id": "locked_circle",
+					"tags": [
+						"attack",
+						"area",
+						"hit"
+					]
+				},
+				"profile": {
+					"damage_multiplier": 1.4,
+					"radius": 130.0,
+					"recovery_seconds": 1.6534110112310374,
+					"windup_seconds": 0.9
+				},
+				"profile_id": "locked_circle",
+				"radius": 130.0,
+				"schema_version": 1,
+				"shape": "circle",
+				"source_id": 1,
+				"type": "circle_attack",
+				"visual_pattern": "garden_slam"
+			},
+			"player_radius": 15.0,
+			"policy": {
+				"base_attack_speed": 1.1764705882352942,
+				"hold_pursuit_during_action": true,
+				"minimum_attack_speed": 0.2,
+				"name": "近身震地",
+				"profile": {
+					"damage_multiplier": 1.4,
+					"radius": 130.0,
+					"recovery_seconds": 1.6534110112310374,
+					"windup_seconds": 0.9
+				},
+				"profile_id": "locked_circle",
+				"recovery_scaling": "base_attack_speed_divided_by_current_attack_speed",
+				"replaces_contact": true,
+				"target_rule": "self_at_start",
+				"trigger_distance": 140.0,
+				"visual_pattern": "garden_slam"
+			},
+			"preserves": "原普通首领、生命护盾/机制、奖励与死亡4后代保持；后代不继承新攻击；无新存档字段",
+			"rules": "替代此地图首领接触攻击，动作停追击，攻速只缩恢复；开始检查来源视线，结算检查固定圆心视线；死亡/返城取消",
+			"scope": "无词缀地图首领与默认防御构筑的相对坐标示例；直线退离、不含障碍或闪避概率",
+			"source": {
+				"attack_speed": 1.2096205882352942,
+				"attack_timer": 0.5,
+				"contact_weights": {
+					"physical": 1.0
+				},
+				"damage": 29.544,
+				"damage_delay": 0.0,
+				"death_processed": false,
+				"death_spawns": [
+					{
+						"count": 4,
+						"template": "crawler"
+					}
+				],
+				"defense_stats": {
+
+				},
+				"equipment_pool": "",
+				"flash": 0.0,
+				"generation": 0,
+				"health": 562.4,
+				"id": 1,
+				"kind": 2,
+				"knockback": [
+					0.0,
+					0.0
+				],
+				"map_boss_attack_id": "garden_slam",
+				"max_health": 562.4,
+				"max_shield": 7.8,
+				"mechanism_ids": [
+					"ember_mastery",
+					"aegis_mastery"
+				],
+				"mechanism_policy": "poe-passive-v1",
+				"mechanism_revision": 1,
+				"mechanism_schema": 1,
+				"mechanism_stats": {
+					"attack_speed": 0.03315,
+					"damage": 1.404,
+					"max_shield": 7.8,
+					"shield_regen": 1.2675
+				},
+				"name": "裂隙守卫",
+				"pos": [
+					120.0,
+					0.0
+				],
+				"radius": 27.5,
+				"rarity": "boss",
+				"resistances": {
+					"fire": 0.0
+				},
+				"reward_eligible": true,
+				"root_id": 1,
+				"shield": 7.8,
+				"shield_regen": 1.2675,
+				"slow": 0.0,
+				"spawn": 0.0,
+				"speed": 48.6,
+				"template_id": "rift_warden",
+				"wave": 4,
+				"xp_reward": 48
+			},
+			"start": {
+				"attack_id": 1,
+				"center": [
+					120.0,
+					0.0
+				],
+				"elapsed": 0.0,
+				"packet": {
+					"base": {
+						"physical": 41.361599999999996
+					},
+					"skill_id": "locked_circle",
+					"tags": [
+						"attack",
+						"area",
+						"hit"
+					]
+				},
+				"phase": "windup",
+				"profile": {
+					"damage_multiplier": 1.4,
+					"radius": 130.0,
+					"recovery_seconds": 1.6534110112310374,
+					"windup_seconds": 0.9
+				},
+				"source_id": 1,
+				"visual_pattern": "garden_slam"
+			}
+		}
 	},
 	"mechanisms": {
 		"aegis_capacity": {
@@ -356585,8 +357039,9 @@
 		"examples": {
 			"broken_ruins": {
 				"compiled": {
+					"boss_attack_id": "ruins_mark",
 					"boss_id": "rift_warden",
-					"description": "两道错位残墙需绕行，攻击受墙体遮挡；贯穿不穿墙，碰墙不触发到期效果。击败36个普通根怪，再击败裂隙守卫并清理其后代。",
+					"description": "两道错位残墙需绕行；贯穿不穿墙，撞墙不触发到期效果。击败36个普通根怪，再击败裂隙守卫并清理后代。首领落印锁定你的起手位置，及时走开；墙体阻挡视线。",
 					"encounter_profile": {
 						"additions": {
 							"armour": 0.0,
@@ -356756,8 +357211,9 @@
 			},
 			"old_garden": {
 				"compiled": {
+					"boss_attack_id": "garden_slam",
 					"boss_id": "rift_warden",
-					"description": "开阔庭院，无实体残墙。击败24个普通根怪，再击败裂隙守卫并清理其后代。",
+					"description": "开阔庭院，无实体残墙。击败24个普通根怪，再击败裂隙守卫并清理后代。首领近身震地锁定起手位置，看到预警走出圆圈。",
 					"encounter_profile": {
 						"additions": {
 							"armour": 0.0,
@@ -356922,16 +357378,18 @@
 			},
 			"maps": [
 				{
+					"boss_attack_id": "garden_slam",
 					"boss_id": "rift_warden",
-					"description": "开阔庭院，无实体残墙。击败24个普通根怪，再击败裂隙守卫并清理其后代。",
+					"description": "开阔庭院，无实体残墙。击败24个普通根怪，再击败裂隙守卫并清理后代。首领近身震地锁定起手位置，看到预警走出圆圈。",
 					"id": "old_garden",
 					"name": "旧庭试炼",
 					"ordinary_target": 24,
 					"wave": 4
 				},
 				{
+					"boss_attack_id": "ruins_mark",
 					"boss_id": "rift_warden",
-					"description": "两道错位残墙需绕行，攻击受墙体遮挡；贯穿不穿墙，碰墙不触发到期效果。击败36个普通根怪，再击败裂隙守卫并清理其后代。",
+					"description": "两道错位残墙需绕行；贯穿不穿墙，撞墙不触发到期效果。击败36个普通根怪，再击败裂隙守卫并清理后代。首领落印锁定你的起手位置，及时走开；墙体阻挡视线。",
 					"id": "broken_ruins",
 					"name": "断垣试炼",
 					"ordinary_target": 36,

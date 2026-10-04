@@ -37,6 +37,9 @@ const Maps = preload("res://scripts/world/map_catalog.gd")
 const MapRules = preload("res://scripts/world/map_compiler.gd")
 const MapGeometryData = preload("res://scripts/world/map_geometry.gd")
 const MapDefense = preload("res://scripts/world/map_defense_rules.gd")
+const MapBosses=preload("res://scripts/monsters/map_boss_profiles.gd")
+const MapAdmission=preload("res://scripts/world/map_admission.gd")
+const MonsterRuntime=preload("res://scripts/monsters/monster_runtime.gd")
 const AttackRules = preload("res://scripts/combat/attack_hit_rules.gd")
 
 func _initialize() -> void:
@@ -85,6 +88,7 @@ static func collect() -> Dictionary:
 	result["source_recharge"] = source_recharge_examples()
 	result["source_mana_cost"] = source_mana_cost_examples()
 	result["source_flasks"] = source_flask_examples()
+	result["map_bosses"] = map_boss_examples()
 	result["save_version"] = Canonical.Rules.VERSION
 	result["current_loot_profile_id"] = Canonical.LOOT_PROFILE_ID
 	result["current_loot_profile"] = Equipment.loot_profile(Canonical.LOOT_PROFILE_ID)
@@ -846,3 +850,26 @@ static func source_flask_examples()->Dictionary:
 		"legacy_rule":"严格旧22验证并原字节备份后迁移23；旧版本注入新药剂节点拒绝，不额外赠物或点数",
 		"runtime_persisted":false,"example_scope":"100资源上限隔离示例，仅展示本批药剂字段，节点其他生命或魔力收益仍由原消费者结算",
 		"unsupported":["药剂持续时间","定时或命中获得充能","压制触发充能","药剂期间持续伤害减免"]}
+
+
+static func map_boss_examples()->Dictionary:
+	var examples:Dictionary={};var stats:Dictionary=Canonical.new().get_stats()
+	for map_id:String in Maps.MAPS:
+		var map:Dictionary=MapRules.compile(map_id,[],[]).profile;var factory:=MonsterRuntime.new()
+		var admitted:Dictionary=MapAdmission.create_root(factory,map,"rift_warden",map.wave,Vector2(120,0),"map_boss","",[],true);assert(admitted.ok)
+		var enemy:Dictionary=admitted.enemy;enemy.spawn=0.0
+		var policy:Dictionary=Monsters.telegraph_policy(enemy);var definition:=MapBosses.definition(map.boss_attack_id)
+		var center:Vector2=enemy.pos if policy.target_rule=="self_at_start" else Vector2.ZERO
+		var runtime:=Telegraphs.new();var started:Dictionary=runtime.start(enemy,center,policy.profile,policy.visual_pattern);assert(started.ok)
+		var events:Array[Dictionary]=runtime.advance(policy.profile.windup_seconds,[enemy]);assert(events.size()==1)
+		var event:Dictionary=events[0];var cases:Dictionary={}
+		for key:String in ["standing","moving"]:
+			var at:Vector2=Vector2.ZERO if key=="standing" else Vector2(-float(stats.move_speed)*float(policy.profile.windup_seconds),0)
+			var inside:bool=Telegraphs.overlaps(event,at,Arena.PLAYER_RADIUS)
+			cases[key]={"position":at,"inside":inside,"settlement":Defense.incoming_source_hit(event.packet.base,stats,5.0,100.0,"player") if inside else {}}
+		assert(cases.standing.inside and not cases.moving.inside)
+		examples[map_id]={"definition":definition,"policy":policy,"source":enemy,"event":event,"start":started.attack,"cases":cases,
+			"player_radius":Arena.PLAYER_RADIUS,"scope":"无词缀地图首领与默认防御构筑的相对坐标示例；直线退离、不含障碍或闪避概率",
+			"rules":"替代此地图首领接触攻击，动作停追击，攻速只缩恢复；开始检查来源视线，结算检查固定圆心视线；死亡/返城取消",
+			"preserves":"原普通首领、生命护盾/机制、奖励与死亡4后代保持；后代不继承新攻击；无新存档字段"}
+	return examples

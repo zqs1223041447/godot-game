@@ -103,12 +103,11 @@ fi
 echo "Godot version: $("$GODOT_BIN" --version)"
 python3 "$PROJECT_DIR/tools/check_font_coverage.py"
 run_check --editor --import
-run_check --script res://tests/source_flask_rules_test.gd
-run_check --script res://tests/source_flask_migration_test.gd
-run_check --script res://tests/source_flask_gameplay_test.gd
-run_check --script res://tests/flask_build_text_test.gd
-run_check --script res://tests/source_flask_reference_test.gd
+run_check --script res://tests/map_boss_rules_test.gd
+run_check --script res://tests/map_boss_gameplay_test.gd
+run_check --script res://tests/map_boss_visual_test.gd
+run_check --script res://tests/map_boss_reference_test.gd
 python3 "$PROJECT_DIR/tools/check_item_transparency.py"
 python3 "$PROJECT_DIR/tests/reference_catalog_test.py"
 run_check --quit-after 300
-echo "Current-batch validation passed: source flask recovery and charge modifiers, frozen baseline, version23 migration, actual use and root reward boundaries, and current-value flask display, reference/font/assets, and startup."
+echo "Current-batch validation passed: two map boss policies, frozen normal-boss and guard baseline, actual map admission/hits/terrain/return, exact visual boundaries and unchanged schema23, reference/font/assets, and startup."

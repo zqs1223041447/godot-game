@@ -1,0 +1,61 @@
+{
+  "reports": [
+    {
+      "path": "docs/qa/v036/boss-rules.log.txt",
+      "checks": 204,
+      "sha256": "211887ce2f186f1828ae2017d6f4fd4cd8059dc40dd10e4a2c31e749614ab8f1",
+      "scope": "Frozen114 normal boss/old guard records, map policy admission, once-only events and unchanged death lineage"
+    },
+    {
+      "path": "docs/qa/v036/boss-gameplay.log.txt",
+      "checks": 62,
+      "sha256": "74c3c28a489258d39eb77efbd4ae207a9d14519f6f6bef077086781139a64f43",
+      "scope": "Natural finite map bosses, actual hits/evasion/LOS/body overlap and return cancellation"
+    },
+    {
+      "path": "docs/qa/v036/root-ui/boss-visual.log.txt",
+      "checks": 137,
+      "sha256": "65000b8103c44c169f2cfa561a29f58294560b0caada5ef9beb0dc63d6ca249a",
+      "scope": "Root full/low exact boundaries, pattern distinction and readonly primitive limits"
+    },
+    {
+      "path": "docs/qa/v036/reference-test.log.txt",
+      "checks": 12,
+      "sha256": "cd2107f087cc1a37e0179a0e326672f87033bbab98645fa99f63ec6b06e8c804",
+      "scope": "Both same-source map attack examples, escape cases and fixed-point diagrams"
+    }
+  ],
+  "total_checks": 415,
+  "report_count": 4,
+  "production_input_count": 388,
+  "logs": {
+    "docs/qa/v036/baseline-v35.log.txt": "851299144482d2698abd1d5d2a618645e81ad9afd404b503ef15ff11abe34207",
+    "docs/qa/v036/boss-gameplay.log.txt": "74c3c28a489258d39eb77efbd4ae207a9d14519f6f6bef077086781139a64f43",
+    "docs/qa/v036/boss-rules-first-fixture.log.txt": "79dcabcba1521c9b15c988bca3749d91e403bbcee8485cf4fddfa7ca94fc93cb",
+    "docs/qa/v036/boss-rules.log.txt": "211887ce2f186f1828ae2017d6f4fd4cd8059dc40dd10e4a2c31e749614ab8f1",
+    "docs/qa/v036/final-import.log.txt": "66da42841522272114a3d56e2f114b4eb1ac4c20cc1f4722d04726e6e409abff",
+    "docs/qa/v036/font-build.log.txt": "85854891819f90f9dc13584165444bf03c8aefd8b529b92ba5eede6dbebcf216",
+    "docs/qa/v036/reference-export.log.txt": "51e3b0bc619efba5c710e1863eedea0402e6700d8c973b9ecb758418906e7297",
+    "docs/qa/v036/reference-html.log.txt": "f3f7770bb73bfd6d1102f60d3ae1d79b3e5f9e655482bf5fac94985daf258538",
+    "docs/qa/v036/reference-links.log.txt": "95a76af2b0f817ae780e477e8177c462e53a65f3abbb23405603b8023e463c65",
+    "docs/qa/v036/reference-test.log.txt": "cd2107f087cc1a37e0179a0e326672f87033bbab98645fa99f63ec6b06e8c804",
+    "docs/qa/v036/root-ui/boss-visual.log.txt": "65000b8103c44c169f2cfa561a29f58294560b0caada5ef9beb0dc63d6ca249a"
+  },
+  "schema": 23,
+  "game_version": "0.36.0",
+  "font": {
+    "fonttools_version": "4.61.1",
+    "source_sha256": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
+    "font_sha256": "b81b1391853d4c92e8833f9c29356087320cf36b5c981d6c91850b9656ede8bf",
+    "font_bytes": 399788,
+    "mapped_codepoints": 1035,
+    "runtime_files": 125,
+    "required_codepoints": 1029,
+    "required_han": 909,
+    "added_since_baseline": "‹›▲▼七业严串九了二产付任何供候健允六具典凶划剂功务匠区十华协印厚参反口号各咏商圆圈垣城堆墙声头套好寒尔层差己币师幕广序库态恰意感慢慧戒执扫把挡控描携撤政敏料斜斩智服析树样案横款残毒油测涂猛瓶登益盔石码稳突站策累纳绑绕缓耐职肤脊腰舍花英草药著蓄蚀被解警订许评诊语账货质赠走路踏输述逻遇道遭遮铁铸销镇阔阻险难集震靴鞋页顺频",
+    "baseline_glyphs_unchanged": true
+  },
+  "no_600s_or_full_retest": true,
+  "reuse": "204 rules and62 final gameplay plus root137 reused unchanged after version/font/reference changes.12 reference checks then passed. Source talent/store/crafting/flask implementation unchanged; no migration retest.",
+  "native_review": "docs/qa/v036/root-ui/native-visual-review.md"
+}
