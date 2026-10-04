@@ -441,6 +441,14 @@ def build(data, art):
         diagram='<figure><svg viewBox="0 0 640 120" role="img" aria-label="有效损伤后等待再充能"><path d="M30 75H330L590 25" fill="none" stroke="#618886" stroke-width="4"/><path d="M30 15V93M330 15V93" stroke="#aa8052" stroke-dasharray="4 4"/><g fill="#493523" font-size="15"><text x="16" y="114">有效损伤</text><text x="125" y="55">完整等待</text><text x="286" y="114">等待结束</text><text x="425" y="82">剩余时间 × 当前每秒速率</text></g></svg></figure>'
         body=diagram+facts(rows)+'<p>'+esc(recharge['rate_formula'])+'。</p><p>'+esc(recharge['delay_formula'])+'。</p><p>'+esc(recharge['timing'])+'。'+esc(recharge['changes'])+'。</p><p>'+esc(recharge['ward'])+'。</p><p>'+esc(recharge['example_scope'])+'；玩家与怪物使用同一计算器。</p><p>'+esc(recharge['legacy_rule'])+'。含未实现额外效果的节点继续整体锁定。</p>'
         rule_defs.append(('source_recharge','源天赋护盾充能','提高每秒回复并缩短下一次受击等待；沿本游戏既有平面基底，不改变即时护盾技能。',body,'implemented'))
+    if 'source_mana_cost' in data:
+        cost=data['source_mana_cost'];rows=[]
+        for example in cost['examples']:
+            factors=example['source_factors'];label=' + '.join(link('source_passives',n['node_id']) for n in example['source_nodes'])
+            rows.append((label,f"辅助后 {number(factors['support_mana'])} × {number(factors['numerator'])} / {number(factors['denominator'])} = {number(factors['final_mana'])} 魔力"))
+        diagram='<figure><svg viewBox="0 0 650 110" role="img" aria-label="魔力成本相乘再除效率"><g fill="#eeddb5" stroke="#8e704f"><rect x="12" y="28" width="150" height="52" rx="7"/><rect x="235" y="28" width="172" height="52" rx="7"/><rect x="486" y="28" width="150" height="52" rx="7"/></g><g fill="#493523" font-size="14" text-anchor="middle"><text x="87" y="60">辅助后魔力</text><text x="321" y="60">×成本 / 成本效率</text><text x="561" y="60">实际扣费</text><text x="198" y="59">→</text><text x="446" y="59">→</text></g></svg></figure>'
+        body=diagram+facts(rows)+f"<p>9个新增完整普通节点；另有{len(cost['mastery']['entrances'])}处入口共享同一个15%效率精通（ID {cost['mastery']['effect_id']}），只能选一次，仍需本组显著节点与1点预算。</p>"+'<p>'+esc(cost['formula'])+'。</p><p>'+esc(cost['formula_origin'])+'。100%效率让成本减半，不是免费施放；沿既有浮点成本，不改整数舍入。</p><p>'+esc(cost['example_scope'])+'。</p><p>普通自动攻击仍免费。法力不足、完整弹体空间不足或冷却中都不扣费；已产生冷却债务保持。K行摘要与宝石当前组合悬停读同一最终数值。</p><p>'+esc(cost['legacy_rule'])+'。法术/诅咒/链接限定、生命转费和保留效率不在本批。</p>'
+        rule_defs.append(('source_mana_cost','源天赋魔力成本取舍','效率与更高耗魔的魔力容量节点一起接入十个主动技能；与现有辅助同源结算。',body,'implemented'))
     for key,name,summary,body,status in rule_defs: cards.append(add('rules',key,name,summary,body,{'implemented':'已实现规则','research':'研究来源','planned':'未实现边界'}[status],status))
     category_counts={cat:sum(x['cat']==cat for x in records) for cat,_ in CATEGORIES}
     nav=''.join(f'<a href="#category-{cat}" id="category-{cat}" class="nav-link" data-category="{cat}"><span>{label}</span><span>{category_counts[cat]}</span></a>' for cat,label in CATEGORIES)

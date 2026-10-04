@@ -82,6 +82,7 @@ static func collect() -> Dictionary:
 	result["source_tree"] = source_tree_reference()
 	result["source_spatial"] = source_spatial_examples()
 	result["source_recharge"] = source_recharge_examples()
+	result["source_mana_cost"] = source_mana_cost_examples()
 	result["save_version"] = Canonical.Rules.VERSION
 	result["current_loot_profile_id"] = Canonical.LOOT_PROFILE_ID
 	result["current_loot_profile"] = Equipment.loot_profile(Canonical.LOOT_PROFILE_ID)
@@ -793,3 +794,20 @@ static func source_recharge_examples()->Dictionary:
 		"example_scope":"以10每秒原型基底隔离展示充能两属性；不代表源节点的全部护盾上限或PoE完整基底",
 		"unsupported":["格挡触发充能","压制触发充能","护盾充能转为生命","伤害不打断充能","最大抗性与压制节点其余未实现部分"],
 		"legacy_rule":"v20先按旧执行门槛验证并原字节备份再迁移；旧版本注入新充能节点拒绝"}
+
+
+static func source_mana_cost_examples()->Dictionary:
+	var examples:Array=[]
+	for node_ids:Array in [["10835"],["26960"],["10835","26960"]]:
+		var stats:Dictionary={"damage":20.0};var source_nodes:Array=[]
+		for id:String in node_ids:
+			var effect:Dictionary=SourceTree.node_effect(id);assert(effect.status=="full");source_nodes.append({"node_id":id,"stats":SourceTree.Data.node(id).stats,"effect":effect})
+			for grant:Dictionary in effect.grants:
+				if grant.stat in Compiler.ResourceCost.STATS:stats[grant.stat]=float(stats.get(grant.stat,0.0))+float(grant.value)
+		var cast:Dictionary=Compiler.compile_group("nova",Recipes.snapshot(stats,[]),["efficiency","quickcast"]);assert(cast.ok)
+		examples.append({"source_nodes":source_nodes,"input":stats,"compiled":cast,"source_factors":cast.cost_factors})
+	var mastery_entrances:Array=[]
+	for id:String in SourceTree.Data.standard_ids():
+		for option:Dictionary in SourceTree.Data.node(id).mastery_effects:
+			if int(option.effect)==12119:mastery_entrances.append(id)
+	return {"mastery":{"effect_id":12119,"entrances":mastery_entrances,"increased_efficiency":0.15,"unique_effect_rule":"相同精通效果ID最多选择一次；先达本组普通连通显著节点"},"minimum_save_version":22,"fields":Compiler.ResourceCost.STATS,"formula":"最终魔力 = 原辅助后魔力 × (1 + 成本增加总和) / (1 + 成本效率总和)","formula_origin":"本游戏明确实现规则；不把效率当线性reduced，不声称完整PoE公式","skills":Data.SKILLS.keys(),"examples":examples,"free_basic_attack":true,"float_payment":true,"unchanged":["伤害","冷却债务","技能效果","射程与范围"],"snapshot":"点击施放时读当前构筑编译结果；已产生的group/main UID冷却不会因改成本或移动宝石重置","legacy_rule":"严格旧21验证与原字节备份后迁移22，UID/点数/进度/revision保留；旧版本注入新节点拒绝","unsupported":["法术限定效率","诅咒与链接技能成本","生命转费","保留效率"],"example_scope":"新星加节能/疾咏，隔离展示成本字段；节点其余魔力/恢复收益仍由对应原消费者结算"}

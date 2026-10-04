@@ -1,0 +1,48 @@
+{
+  "reports": [
+    {
+      "path": "docs/qa/v034/source-compile.log.txt",
+      "sha256": "64a3049badaeda4beaf15583b5cbfc06ad86d12e83b9df92c4ea0350891155c5",
+      "checks": 2094
+    },
+    {
+      "path": "docs/qa/v034/source-migration.log.txt",
+      "sha256": "1d5bd1ab9d7cb20f684a9e2110c0db33bea85cfbf41cdab7a81b461c2be4693a",
+      "checks": 49
+    },
+    {
+      "path": "docs/qa/v034/source-gameplay.log.txt",
+      "sha256": "ebd75848d36aa2c7857aecd09dcec401f530b469dd8b6d6911a5e2b8e17f30b6",
+      "checks": 117
+    },
+    {
+      "path": "docs/qa/v034/source-mastery.log.txt",
+      "sha256": "0df364b4b2cc564efbf5bc62d8d86b256a27cc32495eec038661449ff976e100",
+      "checks": 13
+    },
+    {
+      "path": "docs/qa/v034/source-reference.log.txt",
+      "sha256": "ddf753c9c33597c2e9ad3cab4dfed43c5ac9f0b58c2d560f2a03104171a4afef",
+      "checks": 12
+    }
+  ],
+  "checks": 2285,
+  "report_count": 5,
+  "production_inputs": 382,
+  "ui_scripts_unchanged_since": "421b5f46713acf1f336b3df8c9c2023504e03c4f",
+  "frozen_zero_cost_casts": 412,
+  "frozen_basic_casts": 2,
+  "save_schema": 22,
+  "previous_schema": 21,
+  "default_reachable_nodes": 598,
+  "new_standard_nodes": 9,
+  "mastery_entrances": 12,
+  "new_unique_mastery_effects": 1,
+  "mastery_effect_id": 12119,
+  "600_second_test_deleted": true,
+  "full_repeat_required": false,
+  "font_evidence_reused_by_exact_sha": true,
+  "historical_fixture_updates_not_rerun": [
+    "tests/source_recharge_migration_test.gd"
+  ]
+}

@@ -3448,7 +3448,7 @@
 				"normal_points": 5,
 				"source_version": "3.29.1"
 			},
-			"version": 21
+			"version": 22
 		},
 		"default_casts": {
 			"group_000001": {
@@ -3538,6 +3538,8 @@
 			"life_regen_percent": 0.0,
 			"lightning_increased": 0.0,
 			"lightning_resistance": 0.0,
+			"mana_cost_efficiency_increased": 0.0,
+			"mana_cost_increased": 0.0,
 			"mana_regen": 12.0,
 			"mana_regen_increased": 0.0,
 			"max_health": 130.0,
@@ -4422,7 +4424,7 @@
 				"evasion": 320.0
 			}
 		},
-		"save_version": 21,
+		"save_version": 22,
 		"skitter_accuracy_example": {
 			"base_accuracy": 140,
 			"base_chance": 0.96,
@@ -4486,6 +4488,8 @@
 				"life_regen_percent": 0.0,
 				"lightning_increased": 0.0,
 				"lightning_resistance": 0.0,
+				"mana_cost_efficiency_increased": 0.0,
+				"mana_cost_increased": 0.0,
 				"mana_regen": 12.0,
 				"mana_regen_increased": 0.0,
 				"max_health": 130.0,
@@ -4940,7 +4944,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 21,
+				"save_version": 22,
 				"source": {
 					"affixes": [
 						{
@@ -5347,7 +5351,7 @@
 				"schema_version": 2,
 				"status": "prototype"
 			},
-			"save_version": 21
+			"save_version": 22
 		},
 		"elevate": {
 			"description": "保留魔法装备已有词缀，升为稀有并补至4至6条。",
@@ -5548,7 +5552,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 21,
+				"save_version": 22,
 				"source": {
 					"affixes": [
 						{
@@ -5732,7 +5736,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 21,
+				"save_version": 22,
 				"source": {
 					"affixes": [],
 					"base_id": "ashwood_bow",
@@ -5918,7 +5922,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 21,
+				"save_version": 22,
 				"source": {
 					"affixes": [
 						{
@@ -6121,7 +6125,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 21,
+				"save_version": 22,
 				"source": {
 					"affixes": [
 						{
@@ -6263,7 +6267,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 21,
+				"save_version": 22,
 				"source": {
 					"affixes": [
 						{
@@ -6312,7 +6316,7 @@
 			"example_quantity": 1,
 			"name": "校准碎片",
 			"quantity_source": "items[uid].payload.quantity",
-			"save_version": 21,
+			"save_version": 22,
 			"size": [
 				1,
 				1
@@ -13607,7 +13611,7 @@
 			"status": "implemented"
 		}
 	},
-	"game_version": "0.33.0",
+	"game_version": "0.34.0",
 	"jewel_affixes": {
 		"barrier": {
 			"kind": "prefix",
@@ -15151,6 +15155,8 @@
 							"life_regen_percent": 0.0,
 							"lightning_increased": 0.0,
 							"lightning_resistance": 0.0,
+							"mana_cost_efficiency_increased": 0.0,
+							"mana_cost_increased": 0.0,
 							"mana_regen": 12.0,
 							"mana_regen_increased": 0.0,
 							"max_health": 132.0,
@@ -15256,6 +15262,8 @@
 							"life_regen_percent": 0.0,
 							"lightning_increased": 0.0,
 							"lightning_resistance": 0.0,
+							"mana_cost_efficiency_increased": 0.0,
+							"mana_cost_increased": 0.0,
 							"mana_regen": 12.0,
 							"mana_regen_increased": 0.0,
 							"max_health": 130.0,
@@ -15320,6 +15328,8 @@
 							"life_regen_percent": 0.0,
 							"lightning_increased": 0.0,
 							"lightning_resistance": 0.0,
+							"mana_cost_efficiency_increased": 0.0,
+							"mana_cost_increased": 0.0,
 							"mana_regen": 12.0,
 							"mana_regen_increased": 0.0,
 							"max_health": 130.0,
@@ -15692,6 +15702,8 @@
 							"life_regen_percent": 0.0,
 							"lightning_increased": 0.0,
 							"lightning_resistance": 0.18,
+							"mana_cost_efficiency_increased": 0.0,
+							"mana_cost_increased": 0.0,
 							"mana_regen": 12.0,
 							"mana_regen_increased": 0.0,
 							"max_health": 132.0,
@@ -15797,6 +15809,8 @@
 							"life_regen_percent": 0.0,
 							"lightning_increased": 0.0,
 							"lightning_resistance": 0.0,
+							"mana_cost_efficiency_increased": 0.0,
+							"mana_cost_increased": 0.0,
 							"mana_regen": 12.0,
 							"mana_regen_increased": 0.0,
 							"max_health": 130.0,
@@ -15861,6 +15875,8 @@
 							"life_regen_percent": 0.0,
 							"lightning_increased": 0.0,
 							"lightning_resistance": 0.0,
+							"mana_cost_efficiency_increased": 0.0,
+							"mana_cost_increased": 0.0,
 							"mana_regen": 12.0,
 							"mana_regen_increased": 0.0,
 							"max_health": 130.0,
@@ -21601,7 +21617,7 @@
 		"source": "SkillCompiler + ProjectileRuntime.advance + DamageResolver",
 		"target_count": 6
 	},
-	"save_version": 21,
+	"save_version": 22,
 	"schema_version": 3,
 	"sectors": [
 		{
@@ -200226,6 +200242,613 @@
 			"short_name": "结界"
 		}
 	},
+	"source_mana_cost": {
+		"example_scope": "新星加节能/疾咏，隔离展示成本字段；节点其余魔力/恢复收益仍由对应原消费者结算",
+		"examples": [
+			{
+				"compiled": {
+					"cooldown": 5.52,
+					"cost_factors": {
+						"denominator": 1.15,
+						"final_mana": 23.373913043478257,
+						"increased_cost": 0.0,
+						"increased_efficiency": 0.15,
+						"numerator": 1.0,
+						"support_mana": 26.879999999999995
+					},
+					"error": "",
+					"initial_count": 0,
+					"mana": 23.373913043478257,
+					"ok": true,
+					"packets": {
+						"direct": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 54.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 54.0
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						}
+					},
+					"recipe": {
+						"radius": 155.0
+					},
+					"skill_id": "nova",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 20.0,
+						"compiled_packets": {
+							"direct": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 2.7,
+									"base_coefficient": 2.7,
+									"intrinsic": {
+										"lightning": 54.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"lightning": 54.0
+								},
+								"role": "direct",
+								"skill_id": "nova",
+								"tags": [
+									"hit",
+									"spell",
+									"area"
+								]
+							}
+						},
+						"compiled_skill_id": "nova",
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"modifiers": [],
+						"projectile_count": 0,
+						"resource_modifiers": {
+							"mana_cost_efficiency_increased": 0.15
+						},
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": [
+						"efficiency",
+						"quickcast"
+					]
+				},
+				"input": {
+					"damage": 20.0,
+					"mana_cost_efficiency_increased": 0.15
+				},
+				"source_factors": {
+					"denominator": 1.15,
+					"final_mana": 23.373913043478257,
+					"increased_cost": 0.0,
+					"increased_efficiency": 0.15,
+					"numerator": 1.0,
+					"support_mana": 26.879999999999995
+				},
+				"source_nodes": [
+					{
+						"effect": {
+							"grants": [
+								{
+									"mode": "increased",
+									"stat": "mana_regen_increased",
+									"value": 0.3
+								},
+								{
+									"mode": "increased",
+									"stat": "mana_cost_efficiency_increased",
+									"value": 0.15
+								}
+							],
+							"status": "full",
+							"supported": [
+								"30% increased Mana Regeneration Rate",
+								"15% increased Mana Cost Efficiency"
+							],
+							"unsupported": []
+						},
+						"node_id": "10835",
+						"stats": [
+							"30% increased Mana Regeneration Rate",
+							"15% increased Mana Cost Efficiency"
+						]
+					}
+				]
+			},
+			{
+				"compiled": {
+					"cooldown": 5.52,
+					"cost_factors": {
+						"denominator": 1.0,
+						"final_mana": 29.567999999999998,
+						"increased_cost": 0.1,
+						"increased_efficiency": 0.0,
+						"numerator": 1.1,
+						"support_mana": 26.879999999999995
+					},
+					"error": "",
+					"initial_count": 0,
+					"mana": 29.567999999999998,
+					"ok": true,
+					"packets": {
+						"direct": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 54.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 54.0
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						}
+					},
+					"recipe": {
+						"radius": 155.0
+					},
+					"skill_id": "nova",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 20.0,
+						"compiled_packets": {
+							"direct": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 2.7,
+									"base_coefficient": 2.7,
+									"intrinsic": {
+										"lightning": 54.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"lightning": 54.0
+								},
+								"role": "direct",
+								"skill_id": "nova",
+								"tags": [
+									"hit",
+									"spell",
+									"area"
+								]
+							}
+						},
+						"compiled_skill_id": "nova",
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"modifiers": [],
+						"projectile_count": 0,
+						"resource_modifiers": {
+							"mana_cost_increased": 0.1
+						},
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": [
+						"efficiency",
+						"quickcast"
+					]
+				},
+				"input": {
+					"damage": 20.0,
+					"mana_cost_increased": 0.1
+				},
+				"source_factors": {
+					"denominator": 1.0,
+					"final_mana": 29.567999999999998,
+					"increased_cost": 0.1,
+					"increased_efficiency": 0.0,
+					"numerator": 1.1,
+					"support_mana": 26.879999999999995
+				},
+				"source_nodes": [
+					{
+						"effect": {
+							"grants": [
+								{
+									"mode": "increased",
+									"stat": "max_mana",
+									"value": 0.3
+								},
+								{
+									"mode": "increased",
+									"stat": "mana_cost_increased",
+									"value": 0.1
+								}
+							],
+							"status": "full",
+							"supported": [
+								"30% increased maximum Mana",
+								"10% increased Mana Cost of Skills"
+							],
+							"unsupported": []
+						},
+						"node_id": "26960",
+						"stats": [
+							"30% increased maximum Mana",
+							"10% increased Mana Cost of Skills"
+						]
+					}
+				]
+			},
+			{
+				"compiled": {
+					"cooldown": 5.52,
+					"cost_factors": {
+						"denominator": 1.15,
+						"final_mana": 25.711304347826086,
+						"increased_cost": 0.1,
+						"increased_efficiency": 0.15,
+						"numerator": 1.1,
+						"support_mana": 26.879999999999995
+					},
+					"error": "",
+					"initial_count": 0,
+					"mana": 25.711304347826086,
+					"ok": true,
+					"packets": {
+						"direct": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 54.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 54.0
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						}
+					},
+					"recipe": {
+						"radius": 155.0
+					},
+					"skill_id": "nova",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 20.0,
+						"compiled_packets": {
+							"direct": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 2.7,
+									"base_coefficient": 2.7,
+									"intrinsic": {
+										"lightning": 54.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"lightning": 54.0
+								},
+								"role": "direct",
+								"skill_id": "nova",
+								"tags": [
+									"hit",
+									"spell",
+									"area"
+								]
+							}
+						},
+						"compiled_skill_id": "nova",
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"modifiers": [],
+						"projectile_count": 0,
+						"resource_modifiers": {
+							"mana_cost_efficiency_increased": 0.15,
+							"mana_cost_increased": 0.1
+						},
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": [
+						"efficiency",
+						"quickcast"
+					]
+				},
+				"input": {
+					"damage": 20.0,
+					"mana_cost_efficiency_increased": 0.15,
+					"mana_cost_increased": 0.1
+				},
+				"source_factors": {
+					"denominator": 1.15,
+					"final_mana": 25.711304347826086,
+					"increased_cost": 0.1,
+					"increased_efficiency": 0.15,
+					"numerator": 1.1,
+					"support_mana": 26.879999999999995
+				},
+				"source_nodes": [
+					{
+						"effect": {
+							"grants": [
+								{
+									"mode": "increased",
+									"stat": "mana_regen_increased",
+									"value": 0.3
+								},
+								{
+									"mode": "increased",
+									"stat": "mana_cost_efficiency_increased",
+									"value": 0.15
+								}
+							],
+							"status": "full",
+							"supported": [
+								"30% increased Mana Regeneration Rate",
+								"15% increased Mana Cost Efficiency"
+							],
+							"unsupported": []
+						},
+						"node_id": "10835",
+						"stats": [
+							"30% increased Mana Regeneration Rate",
+							"15% increased Mana Cost Efficiency"
+						]
+					},
+					{
+						"effect": {
+							"grants": [
+								{
+									"mode": "increased",
+									"stat": "max_mana",
+									"value": 0.3
+								},
+								{
+									"mode": "increased",
+									"stat": "mana_cost_increased",
+									"value": 0.1
+								}
+							],
+							"status": "full",
+							"supported": [
+								"30% increased maximum Mana",
+								"10% increased Mana Cost of Skills"
+							],
+							"unsupported": []
+						},
+						"node_id": "26960",
+						"stats": [
+							"30% increased maximum Mana",
+							"10% increased Mana Cost of Skills"
+						]
+					}
+				]
+			}
+		],
+		"fields": [
+			"mana_cost_efficiency_increased",
+			"mana_cost_increased"
+		],
+		"float_payment": true,
+		"formula": "最终魔力 = 原辅助后魔力 × (1 + 成本增加总和) / (1 + 成本效率总和)",
+		"formula_origin": "本游戏明确实现规则；不把效率当线性reduced，不声称完整PoE公式",
+		"free_basic_attack": true,
+		"legacy_rule": "严格旧21验证与原字节备份后迁移22，UID/点数/进度/revision保留；旧版本注入新节点拒绝",
+		"mastery": {
+			"effect_id": 12119,
+			"entrances": [
+				"2841",
+				"3571",
+				"8732",
+				"10495",
+				"13862",
+				"25186",
+				"44948",
+				"48007",
+				"48859",
+				"53188",
+				"63559",
+				"65395"
+			],
+			"increased_efficiency": 0.15,
+			"unique_effect_rule": "相同精通效果ID最多选择一次；先达本组普通连通显著节点"
+		},
+		"minimum_save_version": 22,
+		"skills": [
+			"cleave",
+			"shade_bolt",
+			"tornado",
+			"bolt",
+			"frost",
+			"nova",
+			"dash",
+			"ward",
+			"meteor",
+			"chain"
+		],
+		"snapshot": "点击施放时读当前构筑编译结果；已产生的group/main UID冷却不会因改成本或移动宝石重置",
+		"unchanged": [
+			"伤害",
+			"冷却债务",
+			"技能效果",
+			"射程与范围"
+		],
+		"unsupported": [
+			"法术限定效率",
+			"诅咒与链接技能成本",
+			"生命转费",
+			"保留效率"
+		]
+	},
 	"source_recharge": {
 		"base_delay": 4.0,
 		"changes": "换装或退款立即更新后续速率，已开始等待不改，下一次有效命中采用新等待值",
@@ -214332,12 +214955,18 @@
 					{
 						"effect": 12119,
 						"execution": {
-							"grants": [],
-							"status": "unsupported",
-							"supported": [],
-							"unsupported": [
+							"grants": [
+								{
+									"mode": "increased",
+									"stat": "mana_cost_efficiency_increased",
+									"value": 0.15
+								}
+							],
+							"status": "full",
+							"supported": [
 								"15% increased Mana Cost Efficiency"
-							]
+							],
+							"unsupported": []
 						},
 						"stats": [
 							"15% increased Mana Cost Efficiency"
@@ -215100,15 +215729,19 @@
 							"mode": "increased",
 							"stat": "mana_regen_increased",
 							"value": 0.3
+						},
+						{
+							"mode": "increased",
+							"stat": "mana_cost_efficiency_increased",
+							"value": 0.15
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
-						"30% increased Mana Regeneration Rate"
-					],
-					"unsupported": [
+						"30% increased Mana Regeneration Rate",
 						"15% increased Mana Cost Efficiency"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "10835",
@@ -222070,12 +222703,18 @@
 					{
 						"effect": 12119,
 						"execution": {
-							"grants": [],
-							"status": "unsupported",
-							"supported": [],
-							"unsupported": [
+							"grants": [
+								{
+									"mode": "increased",
+									"stat": "mana_cost_efficiency_increased",
+									"value": 0.15
+								}
+							],
+							"status": "full",
+							"supported": [
 								"15% increased Mana Cost Efficiency"
-							]
+							],
+							"unsupported": []
 						},
 						"stats": [
 							"15% increased Mana Cost Efficiency"
@@ -236652,16 +237291,20 @@
 							"mode": "increased",
 							"stat": "max_mana",
 							"value": 0.2
+						},
+						{
+							"mode": "increased",
+							"stat": "mana_cost_efficiency_increased",
+							"value": 0.15
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
 						"+30 to maximum Mana",
-						"20% increased maximum Mana"
-					],
-					"unsupported": [
+						"20% increased maximum Mana",
 						"15% increased Mana Cost Efficiency"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": false,
 				"id": "20968",
@@ -245870,12 +246513,18 @@
 					{
 						"effect": 12119,
 						"execution": {
-							"grants": [],
-							"status": "unsupported",
-							"supported": [],
-							"unsupported": [
+							"grants": [
+								{
+									"mode": "increased",
+									"stat": "mana_cost_efficiency_increased",
+									"value": 0.15
+								}
+							],
+							"status": "full",
+							"supported": [
 								"15% increased Mana Cost Efficiency"
-							]
+							],
+							"unsupported": []
 						},
 						"stats": [
 							"15% increased Mana Cost Efficiency"
@@ -246050,15 +246699,19 @@
 							"mode": "increased",
 							"stat": "mana_regen_increased",
 							"value": 0.1
+						},
+						{
+							"mode": "increased",
+							"stat": "mana_cost_efficiency_increased",
+							"value": 0.08
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
-						"10% increased Mana Regeneration Rate"
-					],
-					"unsupported": [
+						"10% increased Mana Regeneration Rate",
 						"8% increased Mana Cost Efficiency"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "25237",
@@ -247351,15 +248004,19 @@
 							"mode": "increased",
 							"stat": "max_mana",
 							"value": 0.1
+						},
+						{
+							"mode": "increased",
+							"stat": "mana_cost_increased",
+							"value": 0.05
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
-						"10% increased maximum Mana"
-					],
-					"unsupported": [
+						"10% increased maximum Mana",
 						"5% increased Mana Cost of Skills"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "25714",
@@ -250045,15 +250702,19 @@
 							"mode": "increased",
 							"stat": "max_mana",
 							"value": 0.3
+						},
+						{
+							"mode": "increased",
+							"stat": "mana_cost_increased",
+							"value": 0.1
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
-						"30% increased maximum Mana"
-					],
-					"unsupported": [
+						"30% increased maximum Mana",
 						"10% increased Mana Cost of Skills"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "26960",
@@ -253743,12 +254404,18 @@
 					{
 						"effect": 12119,
 						"execution": {
-							"grants": [],
-							"status": "unsupported",
-							"supported": [],
-							"unsupported": [
+							"grants": [
+								{
+									"mode": "increased",
+									"stat": "mana_cost_efficiency_increased",
+									"value": 0.15
+								}
+							],
+							"status": "full",
+							"supported": [
 								"15% increased Mana Cost Efficiency"
-							]
+							],
+							"unsupported": []
 						},
 						"stats": [
 							"15% increased Mana Cost Efficiency"
@@ -260894,15 +261561,19 @@
 							"mode": "increased",
 							"stat": "max_mana",
 							"value": 0.06
+						},
+						{
+							"mode": "increased",
+							"stat": "mana_cost_efficiency_increased",
+							"value": 0.06
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
-						"6% increased maximum Mana"
-					],
-					"unsupported": [
+						"6% increased maximum Mana",
 						"6% increased Mana Cost Efficiency"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "31819",
@@ -270705,12 +271376,18 @@
 					{
 						"effect": 12119,
 						"execution": {
-							"grants": [],
-							"status": "unsupported",
-							"supported": [],
-							"unsupported": [
+							"grants": [
+								{
+									"mode": "increased",
+									"stat": "mana_cost_efficiency_increased",
+									"value": 0.15
+								}
+							],
+							"status": "full",
+							"supported": [
 								"15% increased Mana Cost Efficiency"
-							]
+							],
+							"unsupported": []
 						},
 						"stats": [
 							"15% increased Mana Cost Efficiency"
@@ -277377,15 +278054,19 @@
 							"mode": "increased",
 							"stat": "max_mana",
 							"value": 0.22
+						},
+						{
+							"mode": "increased",
+							"stat": "mana_cost_efficiency_increased",
+							"value": 0.12
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
-						"22% increased maximum Mana"
-					],
-					"unsupported": [
+						"22% increased maximum Mana",
 						"12% increased Mana Cost Efficiency"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "38516",
@@ -293288,12 +293969,18 @@
 					{
 						"effect": 12119,
 						"execution": {
-							"grants": [],
-							"status": "unsupported",
-							"supported": [],
-							"unsupported": [
+							"grants": [
+								{
+									"mode": "increased",
+									"stat": "mana_cost_efficiency_increased",
+									"value": 0.15
+								}
+							],
+							"status": "full",
+							"supported": [
 								"15% increased Mana Cost Efficiency"
-							]
+							],
+							"unsupported": []
 						},
 						"stats": [
 							"15% increased Mana Cost Efficiency"
@@ -296852,15 +297539,19 @@
 							"mode": "increased",
 							"stat": "max_mana",
 							"value": 0.06
+						},
+						{
+							"mode": "increased",
+							"stat": "mana_cost_efficiency_increased",
+							"value": 0.06
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
-						"6% increased maximum Mana"
-					],
-					"unsupported": [
+						"6% increased maximum Mana",
 						"6% increased Mana Cost Efficiency"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "46726",
@@ -299562,12 +300253,18 @@
 					{
 						"effect": 12119,
 						"execution": {
-							"grants": [],
-							"status": "unsupported",
-							"supported": [],
-							"unsupported": [
+							"grants": [
+								{
+									"mode": "increased",
+									"stat": "mana_cost_efficiency_increased",
+									"value": 0.15
+								}
+							],
+							"status": "full",
+							"supported": [
 								"15% increased Mana Cost Efficiency"
-							]
+							],
+							"unsupported": []
 						},
 						"stats": [
 							"15% increased Mana Cost Efficiency"
@@ -300464,16 +301161,20 @@
 							"mode": "increased",
 							"stat": "max_mana",
 							"value": 0.16
+						},
+						{
+							"mode": "increased",
+							"stat": "mana_cost_efficiency_increased",
+							"value": 0.16
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
 						"10% increased maximum Energy Shield",
-						"16% increased maximum Mana"
-					],
-					"unsupported": [
+						"16% increased maximum Mana",
 						"16% increased Mana Cost Efficiency"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "48298",
@@ -302381,12 +303082,18 @@
 					{
 						"effect": 12119,
 						"execution": {
-							"grants": [],
-							"status": "unsupported",
-							"supported": [],
-							"unsupported": [
+							"grants": [
+								{
+									"mode": "increased",
+									"stat": "mana_cost_efficiency_increased",
+									"value": 0.15
+								}
+							],
+							"status": "full",
+							"supported": [
 								"15% increased Mana Cost Efficiency"
-							]
+							],
+							"unsupported": []
 						},
 						"stats": [
 							"15% increased Mana Cost Efficiency"
@@ -311775,12 +312482,18 @@
 					{
 						"effect": 12119,
 						"execution": {
-							"grants": [],
-							"status": "unsupported",
-							"supported": [],
-							"unsupported": [
+							"grants": [
+								{
+									"mode": "increased",
+									"stat": "mana_cost_efficiency_increased",
+									"value": 0.15
+								}
+							],
+							"status": "full",
+							"supported": [
 								"15% increased Mana Cost Efficiency"
-							]
+							],
+							"unsupported": []
 						},
 						"stats": [
 							"15% increased Mana Cost Efficiency"
@@ -332746,15 +333459,19 @@
 							"mode": "increased",
 							"stat": "max_mana",
 							"value": 0.08
+						},
+						{
+							"mode": "increased",
+							"stat": "mana_cost_efficiency_increased",
+							"value": 0.06
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
-						"8% increased maximum Mana"
-					],
-					"unsupported": [
+						"8% increased maximum Mana",
 						"6% increased Mana Cost Efficiency"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "62303",
@@ -336261,12 +336978,18 @@
 					{
 						"effect": 12119,
 						"execution": {
-							"grants": [],
-							"status": "unsupported",
-							"supported": [],
-							"unsupported": [
+							"grants": [
+								{
+									"mode": "increased",
+									"stat": "mana_cost_efficiency_increased",
+									"value": 0.15
+								}
+							],
+							"status": "full",
+							"supported": [
 								"15% increased Mana Cost Efficiency"
-							]
+							],
+							"unsupported": []
 						},
 						"stats": [
 							"15% increased Mana Cost Efficiency"
@@ -340829,12 +341552,18 @@
 					{
 						"effect": 12119,
 						"execution": {
-							"grants": [],
-							"status": "unsupported",
-							"supported": [],
-							"unsupported": [
+							"grants": [
+								{
+									"mode": "increased",
+									"stat": "mana_cost_efficiency_increased",
+									"value": 0.15
+								}
+							],
+							"status": "full",
+							"supported": [
 								"15% increased Mana Cost Efficiency"
-							]
+							],
+							"unsupported": []
 						},
 						"stats": [
 							"15% increased Mana Cost Efficiency"
@@ -346671,12 +347400,18 @@
 					{
 						"effect": 12119,
 						"execution": {
-							"grants": [],
-							"status": "unsupported",
-							"supported": [],
-							"unsupported": [
+							"grants": [
+								{
+									"mode": "increased",
+									"stat": "mana_cost_efficiency_increased",
+									"value": 0.15
+								}
+							],
+							"status": "full",
+							"supported": [
 								"15% increased Mana Cost Efficiency"
-							]
+							],
+							"unsupported": []
 						},
 						"stats": [
 							"15% increased Mana Cost Efficiency"
@@ -355847,7 +356582,7 @@
 		},
 		"reserved_character_key": "C",
 		"retired_profile_writes": false,
-		"save_version": 21,
+		"save_version": 22,
 		"services": [
 			{
 				"description": "免费测试供应全部已实现主动与辅助宝石。",

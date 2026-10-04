@@ -1,6 +1,6 @@
 # v0.34 全局技能魔力成本取舍
 
-仅接无条件全局“increased Mana Cost Efficiency”和“increased Mana Cost of Skills”。标准源7效率节点、2成本增加节点的其他效果已有消费者；不接法术限定、诅咒/链接/印记或生命转费，不把效率当线性reduced。完整节点所有效果仍需实现才可分配。
+仅接无条件全局“increased Mana Cost Efficiency”和“increased Mana Cost of Skills”。标准源7效率节点、2成本增加节点的其他效果已有消费者；不接法术限定、诅咒/链接/印记或生命转费，不把效率当线性reduced。完整节点所有效果仍需实现才可分配。相同全局格式也接通精通效果12119（15%效率），12入口共享1个效果ID，按既有规则最多选择一次，需对应已达显著节点并花1点；不按入口数计为12个新机制。
 
 - mana_cost_efficiency_increased：源百分数/100相加，非负有限
 - mana_cost_increased：源百分数/100相加，非负有限

@@ -3387,30 +3387,6 @@
 					"via_reachable_node_id": "10221"
 				},
 				{
-					"name": "Mana Regeneration and Mana Cost Efficiency",
-					"node_id": "25237",
-					"shortest_executable_prefix": [
-						"58833",
-						"2151",
-						"37690",
-						"48423",
-						"6204",
-						"63976",
-						"33479",
-						"10490",
-						"45680",
-						"25237"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased Mana Regeneration Rate"
-					],
-					"unsupported": [
-						"8% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "45680"
-				},
-				{
 					"name": "Attack Damage with Shield",
 					"node_id": "25324",
 					"shortest_executable_prefix": [
@@ -3536,30 +3512,6 @@
 						"Axe Attacks deal 14% increased Damage with Ailments"
 					],
 					"via_reachable_node_id": "63723"
-				},
-				{
-					"name": "Mana and Increased Mana Cost",
-					"node_id": "25714",
-					"shortest_executable_prefix": [
-						"58833",
-						"2151",
-						"37690",
-						"48423",
-						"6204",
-						"63976",
-						"33479",
-						"10490",
-						"45680",
-						"25714"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased maximum Mana"
-					],
-					"unsupported": [
-						"5% increased Mana Cost of Skills"
-					],
-					"via_reachable_node_id": "45680"
 				},
 				{
 					"name": "Totem Attack and Cast Speed",
@@ -4810,35 +4762,6 @@
 						"30% more Spell Damage when on Low Life"
 					],
 					"via_reachable_node_id": "37671"
-				},
-				{
-					"name": "Mana and Mana Cost Efficiency",
-					"node_id": "31819",
-					"shortest_executable_prefix": [
-						"58833",
-						"2151",
-						"37690",
-						"48423",
-						"6204",
-						"63976",
-						"16775",
-						"46910",
-						"33740",
-						"15405",
-						"50862",
-						"2913",
-						"44908",
-						"26866",
-						"31819"
-					],
-					"status": "partial",
-					"supported": [
-						"6% increased maximum Mana"
-					],
-					"unsupported": [
-						"6% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "26866"
 				},
 				{
 					"name": "Movement Speed and Spell Suppression",
@@ -8492,38 +8415,6 @@
 					"via_reachable_node_id": "56814"
 				},
 				{
-					"name": "Mana and Mana Cost Efficiency",
-					"node_id": "46726",
-					"shortest_executable_prefix": [
-						"58833",
-						"2151",
-						"37690",
-						"48423",
-						"6204",
-						"63976",
-						"16775",
-						"46910",
-						"33740",
-						"15405",
-						"50862",
-						"2913",
-						"44908",
-						"26866",
-						"61471",
-						"41472",
-						"58453",
-						"46726"
-					],
-					"status": "partial",
-					"supported": [
-						"6% increased maximum Mana"
-					],
-					"unsupported": [
-						"6% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "58453"
-				},
-				{
 					"name": "Stun Duration",
 					"node_id": "46756",
 					"shortest_executable_prefix": [
@@ -8825,38 +8716,6 @@
 						"15% chance to Ignore Stuns while Casting"
 					],
 					"via_reachable_node_id": "32710"
-				},
-				{
-					"name": "Insightfulness",
-					"node_id": "48298",
-					"shortest_executable_prefix": [
-						"58833",
-						"2151",
-						"37690",
-						"48423",
-						"6204",
-						"63976",
-						"33479",
-						"10490",
-						"47251",
-						"7388",
-						"60398",
-						"46340",
-						"42760",
-						"12250",
-						"38701",
-						"18767",
-						"48298"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased maximum Energy Shield",
-						"16% increased maximum Mana"
-					],
-					"unsupported": [
-						"16% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "18767"
 				},
 				{
 					"name": "Vigour",
@@ -12363,35 +12222,6 @@
 					"via_reachable_node_id": "40653"
 				},
 				{
-					"name": "Mana and Mana Cost Efficiency",
-					"node_id": "62303",
-					"shortest_executable_prefix": [
-						"58833",
-						"2151",
-						"37690",
-						"48423",
-						"6204",
-						"63976",
-						"16775",
-						"46910",
-						"33740",
-						"15405",
-						"50862",
-						"2913",
-						"44908",
-						"31931",
-						"62303"
-					],
-					"status": "partial",
-					"supported": [
-						"8% increased maximum Mana"
-					],
-					"unsupported": [
-						"6% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "31931"
-				},
-				{
 					"name": "Melee Damage",
 					"node_id": "62319",
 					"shortest_executable_prefix": [
@@ -13870,18 +13700,18 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 467,
+			"blocked_frontier_count": 461,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
-				"partial": 119,
+				"partial": 113,
 				"unsupported": 348
 			},
 			"class_id": 0,
 			"class_name": "Scion",
 			"excluded_adjacent_counts": {
 				"blighted_only": 0,
-				"mastery_not_path": 19,
+				"mastery_not_path": 21,
 				"other_class_start": 6,
 				"position_proxy": 0
 			},
@@ -13920,6 +13750,11 @@
 					"node_id": "30393",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "35958"
+				},
+				{
+					"node_id": "3471",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "48298"
 				},
 				{
 					"node_id": "42533",
@@ -13997,6 +13832,11 @@
 					"via_reachable_node_id": "62577"
 				},
 				{
+					"node_id": "63559",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "10835"
+				},
+				{
 					"node_id": "64406",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "33287"
@@ -14012,9 +13852,9 @@
 					"via_reachable_node_id": "18769"
 				}
 			],
-			"reachable_count_excluding_start": 588,
-			"reachable_count_including_start": 589,
-			"reachable_full_direct_effect_nodes": 573,
+			"reachable_count_excluding_start": 597,
+			"reachable_count_including_start": 598,
+			"reachable_full_direct_effect_nodes": 582,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -14025,6 +13865,7 @@
 				"10490",
 				"10575",
 				"10829",
+				"10835",
 				"10843",
 				"10893",
 				"11018",
@@ -14158,8 +13999,10 @@
 				"24865",
 				"24914",
 				"25067",
+				"25237",
 				"25260",
 				"25531",
+				"25714",
 				"26196",
 				"26270",
 				"26523",
@@ -14167,6 +14010,7 @@
 				"26725",
 				"26740",
 				"26866",
+				"26960",
 				"27166",
 				"27195",
 				"27203",
@@ -14212,6 +14056,7 @@
 				"3167",
 				"31683",
 				"31758",
+				"31819",
 				"31875",
 				"31928",
 				"31931",
@@ -14294,6 +14139,7 @@
 				"38344",
 				"38348",
 				"38450",
+				"38516",
 				"38662",
 				"38701",
 				"38805",
@@ -14378,6 +14224,7 @@
 				"465",
 				"46578",
 				"46636",
+				"46726",
 				"46897",
 				"46910",
 				"47030",
@@ -14388,6 +14235,7 @@
 				"476",
 				"47949",
 				"48287",
+				"48298",
 				"48362",
 				"48423",
 				"48513",
@@ -14532,6 +14380,7 @@
 				"62069",
 				"62103",
 				"6230",
+				"62303",
 				"62363",
 				"62429",
 				"62577",
@@ -18183,36 +18032,6 @@
 					"via_reachable_node_id": "10221"
 				},
 				{
-					"name": "Mana Regeneration and Mana Cost Efficiency",
-					"node_id": "25237",
-					"shortest_executable_prefix": [
-						"47175",
-						"31628",
-						"9511",
-						"23881",
-						"26523",
-						"44606",
-						"50862",
-						"15405",
-						"33740",
-						"46910",
-						"16775",
-						"63976",
-						"33479",
-						"10490",
-						"45680",
-						"25237"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased Mana Regeneration Rate"
-					],
-					"unsupported": [
-						"8% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "45680"
-				},
-				{
 					"name": "Attack Damage with Shield",
 					"node_id": "25324",
 					"shortest_executable_prefix": [
@@ -18331,36 +18150,6 @@
 						"Axe Attacks deal 14% increased Damage with Ailments"
 					],
 					"via_reachable_node_id": "63723"
-				},
-				{
-					"name": "Mana and Increased Mana Cost",
-					"node_id": "25714",
-					"shortest_executable_prefix": [
-						"47175",
-						"31628",
-						"9511",
-						"23881",
-						"26523",
-						"44606",
-						"50862",
-						"15405",
-						"33740",
-						"46910",
-						"16775",
-						"63976",
-						"33479",
-						"10490",
-						"45680",
-						"25714"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased maximum Mana"
-					],
-					"unsupported": [
-						"5% increased Mana Cost of Skills"
-					],
-					"via_reachable_node_id": "45680"
 				},
 				{
 					"name": "Totem Attack and Cast Speed",
@@ -19722,31 +19511,6 @@
 						"30% more Spell Damage when on Low Life"
 					],
 					"via_reachable_node_id": "37671"
-				},
-				{
-					"name": "Mana and Mana Cost Efficiency",
-					"node_id": "31819",
-					"shortest_executable_prefix": [
-						"47175",
-						"31628",
-						"9511",
-						"23881",
-						"26523",
-						"44606",
-						"50862",
-						"2913",
-						"44908",
-						"26866",
-						"31819"
-					],
-					"status": "partial",
-					"supported": [
-						"6% increased maximum Mana"
-					],
-					"unsupported": [
-						"6% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "26866"
 				},
 				{
 					"name": "Movement Speed and Spell Suppression",
@@ -23555,34 +23319,6 @@
 					"via_reachable_node_id": "56814"
 				},
 				{
-					"name": "Mana and Mana Cost Efficiency",
-					"node_id": "46726",
-					"shortest_executable_prefix": [
-						"47175",
-						"31628",
-						"9511",
-						"23881",
-						"26523",
-						"44606",
-						"50862",
-						"2913",
-						"44908",
-						"26866",
-						"61471",
-						"41472",
-						"58453",
-						"46726"
-					],
-					"status": "partial",
-					"supported": [
-						"6% increased maximum Mana"
-					],
-					"unsupported": [
-						"6% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "58453"
-				},
-				{
 					"name": "Stun Duration",
 					"node_id": "46756",
 					"shortest_executable_prefix": [
@@ -23891,42 +23627,6 @@
 						"15% chance to Ignore Stuns while Casting"
 					],
 					"via_reachable_node_id": "32710"
-				},
-				{
-					"name": "Insightfulness",
-					"node_id": "48298",
-					"shortest_executable_prefix": [
-						"47175",
-						"31628",
-						"9511",
-						"23881",
-						"26523",
-						"44606",
-						"50862",
-						"2913",
-						"44908",
-						"31931",
-						"15064",
-						"29199",
-						"10575",
-						"58402",
-						"6764",
-						"40366",
-						"42760",
-						"12250",
-						"38701",
-						"18767",
-						"48298"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased maximum Energy Shield",
-						"16% increased maximum Mana"
-					],
-					"unsupported": [
-						"16% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "18767"
 				},
 				{
 					"name": "Vigour",
@@ -27667,31 +27367,6 @@
 					"via_reachable_node_id": "40653"
 				},
 				{
-					"name": "Mana and Mana Cost Efficiency",
-					"node_id": "62303",
-					"shortest_executable_prefix": [
-						"47175",
-						"31628",
-						"9511",
-						"23881",
-						"26523",
-						"44606",
-						"50862",
-						"2913",
-						"44908",
-						"31931",
-						"62303"
-					],
-					"status": "partial",
-					"supported": [
-						"8% increased maximum Mana"
-					],
-					"unsupported": [
-						"6% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "31931"
-				},
-				{
 					"name": "Melee Damage",
 					"node_id": "62319",
 					"shortest_executable_prefix": [
@@ -29238,18 +28913,18 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 467,
+			"blocked_frontier_count": 461,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
-				"partial": 119,
+				"partial": 113,
 				"unsupported": 348
 			},
 			"class_id": 1,
 			"class_name": "Marauder",
 			"excluded_adjacent_counts": {
 				"blighted_only": 0,
-				"mastery_not_path": 19,
+				"mastery_not_path": 21,
 				"other_class_start": 6,
 				"position_proxy": 0
 			},
@@ -29288,6 +28963,11 @@
 					"node_id": "30393",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "35958"
+				},
+				{
+					"node_id": "3471",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "48298"
 				},
 				{
 					"node_id": "42533",
@@ -29365,6 +29045,11 @@
 					"via_reachable_node_id": "62577"
 				},
 				{
+					"node_id": "63559",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "10835"
+				},
+				{
 					"node_id": "64406",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "33287"
@@ -29380,9 +29065,9 @@
 					"via_reachable_node_id": "18769"
 				}
 			],
-			"reachable_count_excluding_start": 588,
-			"reachable_count_including_start": 589,
-			"reachable_full_direct_effect_nodes": 573,
+			"reachable_count_excluding_start": 597,
+			"reachable_count_including_start": 598,
+			"reachable_full_direct_effect_nodes": 582,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -29393,6 +29078,7 @@
 				"10490",
 				"10575",
 				"10829",
+				"10835",
 				"10843",
 				"10893",
 				"11018",
@@ -29526,8 +29212,10 @@
 				"24865",
 				"24914",
 				"25067",
+				"25237",
 				"25260",
 				"25531",
+				"25714",
 				"26196",
 				"26270",
 				"26523",
@@ -29535,6 +29223,7 @@
 				"26725",
 				"26740",
 				"26866",
+				"26960",
 				"27166",
 				"27195",
 				"27203",
@@ -29580,6 +29269,7 @@
 				"3167",
 				"31683",
 				"31758",
+				"31819",
 				"31875",
 				"31928",
 				"31931",
@@ -29662,6 +29352,7 @@
 				"38344",
 				"38348",
 				"38450",
+				"38516",
 				"38662",
 				"38701",
 				"38805",
@@ -29746,6 +29437,7 @@
 				"465",
 				"46578",
 				"46636",
+				"46726",
 				"46897",
 				"46910",
 				"47030",
@@ -29757,6 +29449,7 @@
 				"476",
 				"47949",
 				"48287",
+				"48298",
 				"48362",
 				"48423",
 				"48513",
@@ -29900,6 +29593,7 @@
 				"62069",
 				"62103",
 				"6230",
+				"62303",
 				"62363",
 				"62429",
 				"62577",
@@ -33482,44 +33176,6 @@
 					"via_reachable_node_id": "10221"
 				},
 				{
-					"name": "Mana Regeneration and Mana Cost Efficiency",
-					"node_id": "25237",
-					"shortest_executable_prefix": [
-						"50459",
-						"39821",
-						"52904",
-						"444",
-						"61306",
-						"63139",
-						"5408",
-						"11497",
-						"238",
-						"10829",
-						"16167",
-						"19144",
-						"28330",
-						"46578",
-						"13714",
-						"55485",
-						"65034",
-						"46910",
-						"16775",
-						"63976",
-						"33479",
-						"10490",
-						"45680",
-						"25237"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased Mana Regeneration Rate"
-					],
-					"unsupported": [
-						"8% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "45680"
-				},
-				{
 					"name": "Attack Damage with Shield",
 					"node_id": "25324",
 					"shortest_executable_prefix": [
@@ -33648,44 +33304,6 @@
 						"Axe Attacks deal 14% increased Damage with Ailments"
 					],
 					"via_reachable_node_id": "63723"
-				},
-				{
-					"name": "Mana and Increased Mana Cost",
-					"node_id": "25714",
-					"shortest_executable_prefix": [
-						"50459",
-						"39821",
-						"52904",
-						"444",
-						"61306",
-						"63139",
-						"5408",
-						"11497",
-						"238",
-						"10829",
-						"16167",
-						"19144",
-						"28330",
-						"46578",
-						"13714",
-						"55485",
-						"65034",
-						"46910",
-						"16775",
-						"63976",
-						"33479",
-						"10490",
-						"45680",
-						"25714"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased maximum Mana"
-					],
-					"unsupported": [
-						"5% increased Mana Cost of Skills"
-					],
-					"via_reachable_node_id": "45680"
 				},
 				{
 					"name": "Totem Attack and Cast Speed",
@@ -34966,45 +34584,6 @@
 						"30% more Spell Damage when on Low Life"
 					],
 					"via_reachable_node_id": "37671"
-				},
-				{
-					"name": "Mana and Mana Cost Efficiency",
-					"node_id": "31819",
-					"shortest_executable_prefix": [
-						"50459",
-						"39821",
-						"52904",
-						"444",
-						"61306",
-						"63139",
-						"5408",
-						"11497",
-						"238",
-						"10829",
-						"16167",
-						"19144",
-						"28330",
-						"46578",
-						"13714",
-						"55485",
-						"65034",
-						"46910",
-						"33740",
-						"15405",
-						"50862",
-						"2913",
-						"44908",
-						"26866",
-						"31819"
-					],
-					"status": "partial",
-					"supported": [
-						"6% increased maximum Mana"
-					],
-					"unsupported": [
-						"6% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "26866"
 				},
 				{
 					"name": "Movement Speed and Spell Suppression",
@@ -38855,48 +38434,6 @@
 					"via_reachable_node_id": "56814"
 				},
 				{
-					"name": "Mana and Mana Cost Efficiency",
-					"node_id": "46726",
-					"shortest_executable_prefix": [
-						"50459",
-						"39821",
-						"52904",
-						"444",
-						"61306",
-						"63139",
-						"5408",
-						"11497",
-						"238",
-						"10829",
-						"16167",
-						"19144",
-						"28330",
-						"46578",
-						"13714",
-						"55485",
-						"65034",
-						"46910",
-						"33740",
-						"15405",
-						"50862",
-						"2913",
-						"44908",
-						"26866",
-						"61471",
-						"41472",
-						"58453",
-						"46726"
-					],
-					"status": "partial",
-					"supported": [
-						"6% increased maximum Mana"
-					],
-					"unsupported": [
-						"6% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "58453"
-				},
-				{
 					"name": "Stun Duration",
 					"node_id": "46756",
 					"shortest_executable_prefix": [
@@ -39213,51 +38750,6 @@
 						"15% chance to Ignore Stuns while Casting"
 					],
 					"via_reachable_node_id": "32710"
-				},
-				{
-					"name": "Insightfulness",
-					"node_id": "48298",
-					"shortest_executable_prefix": [
-						"50459",
-						"45035",
-						"59370",
-						"63795",
-						"38662",
-						"5616",
-						"39718",
-						"59606",
-						"1461",
-						"49900",
-						"46277",
-						"56295",
-						"18182",
-						"53456",
-						"36858",
-						"60440",
-						"49605",
-						"33310",
-						"5296",
-						"19501",
-						"4367",
-						"44184",
-						"63447",
-						"39841",
-						"36678",
-						"42760",
-						"12250",
-						"38701",
-						"18767",
-						"48298"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased maximum Energy Shield",
-						"16% increased maximum Mana"
-					],
-					"unsupported": [
-						"16% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "18767"
 				},
 				{
 					"name": "Vigour",
@@ -42734,45 +42226,6 @@
 					"via_reachable_node_id": "40653"
 				},
 				{
-					"name": "Mana and Mana Cost Efficiency",
-					"node_id": "62303",
-					"shortest_executable_prefix": [
-						"50459",
-						"39821",
-						"52904",
-						"444",
-						"61306",
-						"63139",
-						"5408",
-						"11497",
-						"238",
-						"10829",
-						"16167",
-						"19144",
-						"28330",
-						"46578",
-						"13714",
-						"55485",
-						"65034",
-						"46910",
-						"33740",
-						"15405",
-						"50862",
-						"2913",
-						"44908",
-						"31931",
-						"62303"
-					],
-					"status": "partial",
-					"supported": [
-						"8% increased maximum Mana"
-					],
-					"unsupported": [
-						"6% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "31931"
-				},
-				{
 					"name": "Melee Damage",
 					"node_id": "62319",
 					"shortest_executable_prefix": [
@@ -44347,18 +43800,18 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 467,
+			"blocked_frontier_count": 461,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
-				"partial": 119,
+				"partial": 113,
 				"unsupported": 348
 			},
 			"class_id": 2,
 			"class_name": "Ranger",
 			"excluded_adjacent_counts": {
 				"blighted_only": 0,
-				"mastery_not_path": 19,
+				"mastery_not_path": 21,
 				"other_class_start": 6,
 				"position_proxy": 0
 			},
@@ -44397,6 +43850,11 @@
 					"node_id": "30393",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "35958"
+				},
+				{
+					"node_id": "3471",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "48298"
 				},
 				{
 					"node_id": "42533",
@@ -44474,6 +43932,11 @@
 					"via_reachable_node_id": "62577"
 				},
 				{
+					"node_id": "63559",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "10835"
+				},
+				{
 					"node_id": "64406",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "33287"
@@ -44489,9 +43952,9 @@
 					"via_reachable_node_id": "18769"
 				}
 			],
-			"reachable_count_excluding_start": 588,
-			"reachable_count_including_start": 589,
-			"reachable_full_direct_effect_nodes": 573,
+			"reachable_count_excluding_start": 597,
+			"reachable_count_including_start": 598,
+			"reachable_full_direct_effect_nodes": 582,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -44502,6 +43965,7 @@
 				"10490",
 				"10575",
 				"10829",
+				"10835",
 				"10843",
 				"10893",
 				"11018",
@@ -44635,8 +44099,10 @@
 				"24865",
 				"24914",
 				"25067",
+				"25237",
 				"25260",
 				"25531",
+				"25714",
 				"26196",
 				"26270",
 				"26523",
@@ -44644,6 +44110,7 @@
 				"26725",
 				"26740",
 				"26866",
+				"26960",
 				"27166",
 				"27195",
 				"27203",
@@ -44689,6 +44156,7 @@
 				"3167",
 				"31683",
 				"31758",
+				"31819",
 				"31875",
 				"31928",
 				"31931",
@@ -44771,6 +44239,7 @@
 				"38344",
 				"38348",
 				"38450",
+				"38516",
 				"38662",
 				"38701",
 				"38805",
@@ -44855,6 +44324,7 @@
 				"465",
 				"46578",
 				"46636",
+				"46726",
 				"46897",
 				"46910",
 				"47030",
@@ -44865,6 +44335,7 @@
 				"476",
 				"47949",
 				"48287",
+				"48298",
 				"48362",
 				"48423",
 				"48513",
@@ -45009,6 +44480,7 @@
 				"62069",
 				"62103",
 				"6230",
+				"62303",
 				"62363",
 				"62429",
 				"62577",
@@ -48656,32 +48128,6 @@
 					"via_reachable_node_id": "10221"
 				},
 				{
-					"name": "Mana Regeneration and Mana Cost Efficiency",
-					"node_id": "25237",
-					"shortest_executable_prefix": [
-						"54447",
-						"57264",
-						"37569",
-						"36542",
-						"4397",
-						"31875",
-						"60398",
-						"7388",
-						"47251",
-						"10490",
-						"45680",
-						"25237"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased Mana Regeneration Rate"
-					],
-					"unsupported": [
-						"8% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "45680"
-				},
-				{
 					"name": "Attack Damage with Shield",
 					"node_id": "25324",
 					"shortest_executable_prefix": [
@@ -48808,32 +48254,6 @@
 						"Axe Attacks deal 14% increased Damage with Ailments"
 					],
 					"via_reachable_node_id": "63723"
-				},
-				{
-					"name": "Mana and Increased Mana Cost",
-					"node_id": "25714",
-					"shortest_executable_prefix": [
-						"54447",
-						"57264",
-						"37569",
-						"36542",
-						"4397",
-						"31875",
-						"60398",
-						"7388",
-						"47251",
-						"10490",
-						"45680",
-						"25714"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased maximum Mana"
-					],
-					"unsupported": [
-						"5% increased Mana Cost of Skills"
-					],
-					"via_reachable_node_id": "45680"
 				},
 				{
 					"name": "Totem Attack and Cast Speed",
@@ -50099,37 +49519,6 @@
 						"30% more Spell Damage when on Low Life"
 					],
 					"via_reachable_node_id": "37671"
-				},
-				{
-					"name": "Mana and Mana Cost Efficiency",
-					"node_id": "31819",
-					"shortest_executable_prefix": [
-						"54447",
-						"57264",
-						"37569",
-						"36542",
-						"4397",
-						"31875",
-						"60398",
-						"13009",
-						"17735",
-						"58402",
-						"10575",
-						"29199",
-						"15064",
-						"31931",
-						"44908",
-						"26866",
-						"31819"
-					],
-					"status": "partial",
-					"supported": [
-						"6% increased maximum Mana"
-					],
-					"unsupported": [
-						"6% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "26866"
 				},
 				{
 					"name": "Movement Speed and Spell Suppression",
@@ -53864,37 +53253,6 @@
 					"via_reachable_node_id": "56814"
 				},
 				{
-					"name": "Mana and Mana Cost Efficiency",
-					"node_id": "46726",
-					"shortest_executable_prefix": [
-						"54447",
-						"57264",
-						"37569",
-						"36542",
-						"4397",
-						"31875",
-						"60398",
-						"13009",
-						"17735",
-						"58402",
-						"59728",
-						"61308",
-						"40927",
-						"44799",
-						"41472",
-						"58453",
-						"46726"
-					],
-					"status": "partial",
-					"supported": [
-						"6% increased maximum Mana"
-					],
-					"unsupported": [
-						"6% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "58453"
-				},
-				{
 					"name": "Stun Duration",
 					"node_id": "46756",
 					"shortest_executable_prefix": [
@@ -54183,34 +53541,6 @@
 						"15% chance to Ignore Stuns while Casting"
 					],
 					"via_reachable_node_id": "32710"
-				},
-				{
-					"name": "Insightfulness",
-					"node_id": "48298",
-					"shortest_executable_prefix": [
-						"54447",
-						"57264",
-						"37569",
-						"36542",
-						"4397",
-						"31875",
-						"60398",
-						"46340",
-						"42760",
-						"12250",
-						"38701",
-						"18767",
-						"48298"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased maximum Energy Shield",
-						"16% increased maximum Mana"
-					],
-					"unsupported": [
-						"16% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "18767"
 				},
 				{
 					"name": "Vigour",
@@ -57833,35 +57163,6 @@
 					"via_reachable_node_id": "40653"
 				},
 				{
-					"name": "Mana and Mana Cost Efficiency",
-					"node_id": "62303",
-					"shortest_executable_prefix": [
-						"54447",
-						"57264",
-						"37569",
-						"36542",
-						"4397",
-						"31875",
-						"60398",
-						"13009",
-						"17735",
-						"58402",
-						"10575",
-						"29199",
-						"15064",
-						"31931",
-						"62303"
-					],
-					"status": "partial",
-					"supported": [
-						"8% increased maximum Mana"
-					],
-					"unsupported": [
-						"6% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "31931"
-				},
-				{
 					"name": "Melee Damage",
 					"node_id": "62319",
 					"shortest_executable_prefix": [
@@ -59500,18 +58801,18 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 467,
+			"blocked_frontier_count": 461,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
-				"partial": 119,
+				"partial": 113,
 				"unsupported": 348
 			},
 			"class_id": 3,
 			"class_name": "Witch",
 			"excluded_adjacent_counts": {
 				"blighted_only": 0,
-				"mastery_not_path": 19,
+				"mastery_not_path": 21,
 				"other_class_start": 6,
 				"position_proxy": 0
 			},
@@ -59550,6 +58851,11 @@
 					"node_id": "30393",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "35958"
+				},
+				{
+					"node_id": "3471",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "48298"
 				},
 				{
 					"node_id": "42533",
@@ -59627,6 +58933,11 @@
 					"via_reachable_node_id": "62577"
 				},
 				{
+					"node_id": "63559",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "10835"
+				},
+				{
 					"node_id": "64406",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "33287"
@@ -59642,9 +58953,9 @@
 					"via_reachable_node_id": "18769"
 				}
 			],
-			"reachable_count_excluding_start": 588,
-			"reachable_count_including_start": 589,
-			"reachable_full_direct_effect_nodes": 573,
+			"reachable_count_excluding_start": 597,
+			"reachable_count_including_start": 598,
+			"reachable_full_direct_effect_nodes": 582,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -59655,6 +58966,7 @@
 				"10490",
 				"10575",
 				"10829",
+				"10835",
 				"10843",
 				"10893",
 				"11018",
@@ -59788,8 +59100,10 @@
 				"24865",
 				"24914",
 				"25067",
+				"25237",
 				"25260",
 				"25531",
+				"25714",
 				"26196",
 				"26270",
 				"26523",
@@ -59797,6 +59111,7 @@
 				"26725",
 				"26740",
 				"26866",
+				"26960",
 				"27166",
 				"27195",
 				"27203",
@@ -59842,6 +59157,7 @@
 				"3167",
 				"31683",
 				"31758",
+				"31819",
 				"31875",
 				"31928",
 				"31931",
@@ -59924,6 +59240,7 @@
 				"38344",
 				"38348",
 				"38450",
+				"38516",
 				"38662",
 				"38701",
 				"38805",
@@ -60008,6 +59325,7 @@
 				"465",
 				"46578",
 				"46636",
+				"46726",
 				"46897",
 				"46910",
 				"47030",
@@ -60018,6 +59336,7 @@
 				"476",
 				"47949",
 				"48287",
+				"48298",
 				"48362",
 				"48423",
 				"48513",
@@ -60162,6 +59481,7 @@
 				"62069",
 				"62103",
 				"6230",
+				"62303",
 				"62363",
 				"62429",
 				"62577",
@@ -63724,40 +63044,6 @@
 					"via_reachable_node_id": "10221"
 				},
 				{
-					"name": "Mana Regeneration and Mana Cost Efficiency",
-					"node_id": "25237",
-					"shortest_executable_prefix": [
-						"50986",
-						"47389",
-						"42911",
-						"40867",
-						"476",
-						"30691",
-						"43374",
-						"49178",
-						"30733",
-						"46578",
-						"13714",
-						"55485",
-						"65034",
-						"46910",
-						"16775",
-						"63976",
-						"33479",
-						"10490",
-						"45680",
-						"25237"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased Mana Regeneration Rate"
-					],
-					"unsupported": [
-						"8% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "45680"
-				},
-				{
 					"name": "Attack Damage with Shield",
 					"node_id": "25324",
 					"shortest_executable_prefix": [
@@ -63870,40 +63156,6 @@
 						"Axe Attacks deal 14% increased Damage with Ailments"
 					],
 					"via_reachable_node_id": "63723"
-				},
-				{
-					"name": "Mana and Increased Mana Cost",
-					"node_id": "25714",
-					"shortest_executable_prefix": [
-						"50986",
-						"47389",
-						"42911",
-						"40867",
-						"476",
-						"30691",
-						"43374",
-						"49178",
-						"30733",
-						"46578",
-						"13714",
-						"55485",
-						"65034",
-						"46910",
-						"16775",
-						"63976",
-						"33479",
-						"10490",
-						"45680",
-						"25714"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased maximum Mana"
-					],
-					"unsupported": [
-						"5% increased Mana Cost of Skills"
-					],
-					"via_reachable_node_id": "45680"
 				},
 				{
 					"name": "Totem Attack and Cast Speed",
@@ -65204,41 +64456,6 @@
 						"30% more Spell Damage when on Low Life"
 					],
 					"via_reachable_node_id": "37671"
-				},
-				{
-					"name": "Mana and Mana Cost Efficiency",
-					"node_id": "31819",
-					"shortest_executable_prefix": [
-						"50986",
-						"47389",
-						"42911",
-						"40867",
-						"476",
-						"30691",
-						"43374",
-						"31080",
-						"49412",
-						"40653",
-						"53793",
-						"22285",
-						"55649",
-						"6446",
-						"10221",
-						"50422",
-						"50862",
-						"2913",
-						"44908",
-						"26866",
-						"31819"
-					],
-					"status": "partial",
-					"supported": [
-						"6% increased maximum Mana"
-					],
-					"unsupported": [
-						"6% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "26866"
 				},
 				{
 					"name": "Movement Speed and Spell Suppression",
@@ -69018,44 +68235,6 @@
 					"via_reachable_node_id": "56814"
 				},
 				{
-					"name": "Mana and Mana Cost Efficiency",
-					"node_id": "46726",
-					"shortest_executable_prefix": [
-						"50986",
-						"47389",
-						"42911",
-						"40867",
-						"476",
-						"30691",
-						"43374",
-						"31080",
-						"49412",
-						"40653",
-						"53793",
-						"22285",
-						"55649",
-						"6446",
-						"10221",
-						"50422",
-						"50862",
-						"2913",
-						"44908",
-						"26866",
-						"61471",
-						"41472",
-						"58453",
-						"46726"
-					],
-					"status": "partial",
-					"supported": [
-						"6% increased maximum Mana"
-					],
-					"unsupported": [
-						"6% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "58453"
-				},
-				{
 					"name": "Stun Duration",
 					"node_id": "46756",
 					"shortest_executable_prefix": [
@@ -69367,48 +68546,6 @@
 						"15% chance to Ignore Stuns while Casting"
 					],
 					"via_reachable_node_id": "32710"
-				},
-				{
-					"name": "Insightfulness",
-					"node_id": "48298",
-					"shortest_executable_prefix": [
-						"50986",
-						"47389",
-						"42911",
-						"40867",
-						"476",
-						"30691",
-						"43374",
-						"49178",
-						"30733",
-						"46578",
-						"13714",
-						"55485",
-						"65034",
-						"46910",
-						"16775",
-						"63976",
-						"33479",
-						"10490",
-						"47251",
-						"7388",
-						"60398",
-						"46340",
-						"42760",
-						"12250",
-						"38701",
-						"18767",
-						"48298"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased maximum Energy Shield",
-						"16% increased maximum Mana"
-					],
-					"unsupported": [
-						"16% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "18767"
 				},
 				{
 					"name": "Vigour",
@@ -72980,40 +72117,6 @@
 					"via_reachable_node_id": "40653"
 				},
 				{
-					"name": "Mana and Mana Cost Efficiency",
-					"node_id": "62303",
-					"shortest_executable_prefix": [
-						"50986",
-						"47389",
-						"42911",
-						"40867",
-						"476",
-						"30691",
-						"43374",
-						"31080",
-						"49412",
-						"40653",
-						"53793",
-						"22285",
-						"55649",
-						"6446",
-						"10221",
-						"50422",
-						"44967",
-						"15631",
-						"31931",
-						"62303"
-					],
-					"status": "partial",
-					"supported": [
-						"8% increased maximum Mana"
-					],
-					"unsupported": [
-						"6% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "31931"
-				},
-				{
 					"name": "Melee Damage",
 					"node_id": "62319",
 					"shortest_executable_prefix": [
@@ -74531,18 +73634,18 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 467,
+			"blocked_frontier_count": 461,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
-				"partial": 119,
+				"partial": 113,
 				"unsupported": 348
 			},
 			"class_id": 4,
 			"class_name": "Duelist",
 			"excluded_adjacent_counts": {
 				"blighted_only": 0,
-				"mastery_not_path": 19,
+				"mastery_not_path": 21,
 				"other_class_start": 6,
 				"position_proxy": 0
 			},
@@ -74581,6 +73684,11 @@
 					"node_id": "30393",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "35958"
+				},
+				{
+					"node_id": "3471",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "48298"
 				},
 				{
 					"node_id": "42533",
@@ -74658,6 +73766,11 @@
 					"via_reachable_node_id": "62577"
 				},
 				{
+					"node_id": "63559",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "10835"
+				},
+				{
 					"node_id": "64406",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "33287"
@@ -74673,9 +73786,9 @@
 					"via_reachable_node_id": "18769"
 				}
 			],
-			"reachable_count_excluding_start": 588,
-			"reachable_count_including_start": 589,
-			"reachable_full_direct_effect_nodes": 573,
+			"reachable_count_excluding_start": 597,
+			"reachable_count_including_start": 598,
+			"reachable_full_direct_effect_nodes": 582,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -74686,6 +73799,7 @@
 				"10490",
 				"10575",
 				"10829",
+				"10835",
 				"10843",
 				"10893",
 				"11018",
@@ -74819,8 +73933,10 @@
 				"24865",
 				"24914",
 				"25067",
+				"25237",
 				"25260",
 				"25531",
+				"25714",
 				"26196",
 				"26270",
 				"26523",
@@ -74828,6 +73944,7 @@
 				"26725",
 				"26740",
 				"26866",
+				"26960",
 				"27166",
 				"27195",
 				"27203",
@@ -74873,6 +73990,7 @@
 				"3167",
 				"31683",
 				"31758",
+				"31819",
 				"31875",
 				"31928",
 				"31931",
@@ -74955,6 +74073,7 @@
 				"38344",
 				"38348",
 				"38450",
+				"38516",
 				"38662",
 				"38701",
 				"38805",
@@ -75039,6 +74158,7 @@
 				"465",
 				"46578",
 				"46636",
+				"46726",
 				"46897",
 				"46910",
 				"47030",
@@ -75049,6 +74169,7 @@
 				"476",
 				"47949",
 				"48287",
+				"48298",
 				"48362",
 				"48423",
 				"48513",
@@ -75193,6 +74314,7 @@
 				"62069",
 				"62103",
 				"6230",
+				"62303",
 				"62363",
 				"62429",
 				"62577",
@@ -78906,32 +78028,6 @@
 					"via_reachable_node_id": "10221"
 				},
 				{
-					"name": "Mana Regeneration and Mana Cost Efficiency",
-					"node_id": "25237",
-					"shortest_executable_prefix": [
-						"61525",
-						"63965",
-						"14151",
-						"27564",
-						"17735",
-						"13009",
-						"60398",
-						"7388",
-						"47251",
-						"10490",
-						"45680",
-						"25237"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased Mana Regeneration Rate"
-					],
-					"unsupported": [
-						"8% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "45680"
-				},
-				{
 					"name": "Attack Damage with Shield",
 					"node_id": "25324",
 					"shortest_executable_prefix": [
@@ -79053,32 +78149,6 @@
 						"Axe Attacks deal 14% increased Damage with Ailments"
 					],
 					"via_reachable_node_id": "63723"
-				},
-				{
-					"name": "Mana and Increased Mana Cost",
-					"node_id": "25714",
-					"shortest_executable_prefix": [
-						"61525",
-						"63965",
-						"14151",
-						"27564",
-						"17735",
-						"13009",
-						"60398",
-						"7388",
-						"47251",
-						"10490",
-						"45680",
-						"25714"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased maximum Mana"
-					],
-					"unsupported": [
-						"5% increased Mana Cost of Skills"
-					],
-					"via_reachable_node_id": "45680"
 				},
 				{
 					"name": "Totem Attack and Cast Speed",
@@ -80417,27 +79487,6 @@
 						"30% more Spell Damage when on Low Life"
 					],
 					"via_reachable_node_id": "37671"
-				},
-				{
-					"name": "Mana and Mana Cost Efficiency",
-					"node_id": "31819",
-					"shortest_executable_prefix": [
-						"61525",
-						"20228",
-						"39916",
-						"35556",
-						"44908",
-						"26866",
-						"31819"
-					],
-					"status": "partial",
-					"supported": [
-						"6% increased maximum Mana"
-					],
-					"unsupported": [
-						"6% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "26866"
 				},
 				{
 					"name": "Movement Speed and Spell Suppression",
@@ -84209,30 +83258,6 @@
 					"via_reachable_node_id": "56814"
 				},
 				{
-					"name": "Mana and Mana Cost Efficiency",
-					"node_id": "46726",
-					"shortest_executable_prefix": [
-						"61525",
-						"20228",
-						"39916",
-						"35556",
-						"44908",
-						"26866",
-						"61471",
-						"41472",
-						"58453",
-						"46726"
-					],
-					"status": "partial",
-					"supported": [
-						"6% increased maximum Mana"
-					],
-					"unsupported": [
-						"6% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "58453"
-				},
-				{
 					"name": "Stun Duration",
 					"node_id": "46756",
 					"shortest_executable_prefix": [
@@ -84534,34 +83559,6 @@
 						"15% chance to Ignore Stuns while Casting"
 					],
 					"via_reachable_node_id": "32710"
-				},
-				{
-					"name": "Insightfulness",
-					"node_id": "48298",
-					"shortest_executable_prefix": [
-						"61525",
-						"63965",
-						"14151",
-						"27564",
-						"17735",
-						"13009",
-						"60398",
-						"46340",
-						"42760",
-						"12250",
-						"38701",
-						"18767",
-						"48298"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased maximum Energy Shield",
-						"16% increased maximum Mana"
-					],
-					"unsupported": [
-						"16% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "18767"
 				},
 				{
 					"name": "Vigour",
@@ -88333,27 +87330,6 @@
 					"via_reachable_node_id": "40653"
 				},
 				{
-					"name": "Mana and Mana Cost Efficiency",
-					"node_id": "62303",
-					"shortest_executable_prefix": [
-						"61525",
-						"20228",
-						"39916",
-						"35556",
-						"44908",
-						"31931",
-						"62303"
-					],
-					"status": "partial",
-					"supported": [
-						"8% increased maximum Mana"
-					],
-					"unsupported": [
-						"6% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "31931"
-				},
-				{
 					"name": "Melee Damage",
 					"node_id": "62319",
 					"shortest_executable_prefix": [
@@ -89960,18 +88936,18 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 467,
+			"blocked_frontier_count": 461,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
-				"partial": 119,
+				"partial": 113,
 				"unsupported": 348
 			},
 			"class_id": 5,
 			"class_name": "Templar",
 			"excluded_adjacent_counts": {
 				"blighted_only": 0,
-				"mastery_not_path": 19,
+				"mastery_not_path": 21,
 				"other_class_start": 6,
 				"position_proxy": 0
 			},
@@ -90010,6 +88986,11 @@
 					"node_id": "30393",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "35958"
+				},
+				{
+					"node_id": "3471",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "48298"
 				},
 				{
 					"node_id": "42533",
@@ -90087,6 +89068,11 @@
 					"via_reachable_node_id": "62577"
 				},
 				{
+					"node_id": "63559",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "10835"
+				},
+				{
 					"node_id": "64406",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "33287"
@@ -90102,9 +89088,9 @@
 					"via_reachable_node_id": "18769"
 				}
 			],
-			"reachable_count_excluding_start": 588,
-			"reachable_count_including_start": 589,
-			"reachable_full_direct_effect_nodes": 573,
+			"reachable_count_excluding_start": 597,
+			"reachable_count_including_start": 598,
+			"reachable_full_direct_effect_nodes": 582,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -90115,6 +89101,7 @@
 				"10490",
 				"10575",
 				"10829",
+				"10835",
 				"10843",
 				"10893",
 				"11018",
@@ -90248,8 +89235,10 @@
 				"24865",
 				"24914",
 				"25067",
+				"25237",
 				"25260",
 				"25531",
+				"25714",
 				"26196",
 				"26270",
 				"26523",
@@ -90257,6 +89246,7 @@
 				"26725",
 				"26740",
 				"26866",
+				"26960",
 				"27166",
 				"27195",
 				"27203",
@@ -90302,6 +89292,7 @@
 				"3167",
 				"31683",
 				"31758",
+				"31819",
 				"31875",
 				"31928",
 				"31931",
@@ -90384,6 +89375,7 @@
 				"38344",
 				"38348",
 				"38450",
+				"38516",
 				"38662",
 				"38701",
 				"38805",
@@ -90468,6 +89460,7 @@
 				"465",
 				"46578",
 				"46636",
+				"46726",
 				"46897",
 				"46910",
 				"47030",
@@ -90478,6 +89471,7 @@
 				"476",
 				"47949",
 				"48287",
+				"48298",
 				"48362",
 				"48423",
 				"48513",
@@ -90622,6 +89616,7 @@
 				"62069",
 				"62103",
 				"6230",
+				"62303",
 				"62363",
 				"62429",
 				"62577",
@@ -94267,36 +93262,6 @@
 					"via_reachable_node_id": "10221"
 				},
 				{
-					"name": "Mana Regeneration and Mana Cost Efficiency",
-					"node_id": "25237",
-					"shortest_executable_prefix": [
-						"44683",
-						"38129",
-						"11334",
-						"15549",
-						"20546",
-						"21301",
-						"37671",
-						"48778",
-						"51923",
-						"46092",
-						"60090",
-						"3452",
-						"22473",
-						"10490",
-						"45680",
-						"25237"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased Mana Regeneration Rate"
-					],
-					"unsupported": [
-						"8% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "45680"
-				},
-				{
 					"name": "Attack Damage with Shield",
 					"node_id": "25324",
 					"shortest_executable_prefix": [
@@ -94431,36 +93396,6 @@
 						"Axe Attacks deal 14% increased Damage with Ailments"
 					],
 					"via_reachable_node_id": "63723"
-				},
-				{
-					"name": "Mana and Increased Mana Cost",
-					"node_id": "25714",
-					"shortest_executable_prefix": [
-						"44683",
-						"38129",
-						"11334",
-						"15549",
-						"20546",
-						"21301",
-						"37671",
-						"48778",
-						"51923",
-						"46092",
-						"60090",
-						"3452",
-						"22473",
-						"10490",
-						"45680",
-						"25714"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased maximum Mana"
-					],
-					"unsupported": [
-						"5% increased Mana Cost of Skills"
-					],
-					"via_reachable_node_id": "45680"
 				},
 				{
 					"name": "Totem Attack and Cast Speed",
@@ -95712,45 +94647,6 @@
 						"30% more Spell Damage when on Low Life"
 					],
 					"via_reachable_node_id": "37671"
-				},
-				{
-					"name": "Mana and Mana Cost Efficiency",
-					"node_id": "31819",
-					"shortest_executable_prefix": [
-						"44683",
-						"38129",
-						"11334",
-						"15549",
-						"20546",
-						"21301",
-						"37671",
-						"48778",
-						"51923",
-						"46092",
-						"60090",
-						"3452",
-						"22473",
-						"10490",
-						"33479",
-						"63976",
-						"16775",
-						"46910",
-						"33740",
-						"15405",
-						"50862",
-						"2913",
-						"44908",
-						"26866",
-						"31819"
-					],
-					"status": "partial",
-					"supported": [
-						"6% increased maximum Mana"
-					],
-					"unsupported": [
-						"6% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "26866"
 				},
 				{
 					"name": "Movement Speed and Spell Suppression",
@@ -99556,47 +98452,6 @@
 					"via_reachable_node_id": "56814"
 				},
 				{
-					"name": "Mana and Mana Cost Efficiency",
-					"node_id": "46726",
-					"shortest_executable_prefix": [
-						"44683",
-						"38129",
-						"11334",
-						"15549",
-						"20546",
-						"21301",
-						"37671",
-						"27659",
-						"8948",
-						"38176",
-						"11551",
-						"19635",
-						"1031",
-						"7938",
-						"14021",
-						"55332",
-						"42760",
-						"40366",
-						"6764",
-						"58402",
-						"59728",
-						"61308",
-						"40927",
-						"44799",
-						"41472",
-						"58453",
-						"46726"
-					],
-					"status": "partial",
-					"supported": [
-						"6% increased maximum Mana"
-					],
-					"unsupported": [
-						"6% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "58453"
-				},
-				{
 					"name": "Stun Duration",
 					"node_id": "46756",
 					"shortest_executable_prefix": [
@@ -99901,42 +98756,6 @@
 						"15% chance to Ignore Stuns while Casting"
 					],
 					"via_reachable_node_id": "32710"
-				},
-				{
-					"name": "Insightfulness",
-					"node_id": "48298",
-					"shortest_executable_prefix": [
-						"44683",
-						"38129",
-						"11334",
-						"15549",
-						"20546",
-						"21301",
-						"37671",
-						"27659",
-						"8948",
-						"38176",
-						"11551",
-						"19635",
-						"1031",
-						"7938",
-						"14021",
-						"55332",
-						"42760",
-						"12250",
-						"38701",
-						"18767",
-						"48298"
-					],
-					"status": "partial",
-					"supported": [
-						"10% increased maximum Energy Shield",
-						"16% increased maximum Mana"
-					],
-					"unsupported": [
-						"16% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "18767"
 				},
 				{
 					"name": "Vigour",
@@ -103429,45 +102248,6 @@
 					"via_reachable_node_id": "40653"
 				},
 				{
-					"name": "Mana and Mana Cost Efficiency",
-					"node_id": "62303",
-					"shortest_executable_prefix": [
-						"44683",
-						"38129",
-						"11334",
-						"15549",
-						"20546",
-						"21301",
-						"37671",
-						"27659",
-						"8948",
-						"38176",
-						"11551",
-						"19635",
-						"1031",
-						"7938",
-						"14021",
-						"55332",
-						"42760",
-						"40366",
-						"6764",
-						"58402",
-						"10575",
-						"29199",
-						"15064",
-						"31931",
-						"62303"
-					],
-					"status": "partial",
-					"supported": [
-						"8% increased maximum Mana"
-					],
-					"unsupported": [
-						"6% increased Mana Cost Efficiency"
-					],
-					"via_reachable_node_id": "31931"
-				},
-				{
 					"name": "Melee Damage",
 					"node_id": "62319",
 					"shortest_executable_prefix": [
@@ -105123,18 +103903,18 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 467,
+			"blocked_frontier_count": 461,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
-				"partial": 119,
+				"partial": 113,
 				"unsupported": 348
 			},
 			"class_id": 6,
 			"class_name": "Shadow",
 			"excluded_adjacent_counts": {
 				"blighted_only": 0,
-				"mastery_not_path": 19,
+				"mastery_not_path": 21,
 				"other_class_start": 6,
 				"position_proxy": 0
 			},
@@ -105173,6 +103953,11 @@
 					"node_id": "30393",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "35958"
+				},
+				{
+					"node_id": "3471",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "48298"
 				},
 				{
 					"node_id": "42533",
@@ -105250,6 +104035,11 @@
 					"via_reachable_node_id": "62577"
 				},
 				{
+					"node_id": "63559",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "10835"
+				},
+				{
 					"node_id": "64406",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "33287"
@@ -105265,9 +104055,9 @@
 					"via_reachable_node_id": "18769"
 				}
 			],
-			"reachable_count_excluding_start": 588,
-			"reachable_count_including_start": 589,
-			"reachable_full_direct_effect_nodes": 573,
+			"reachable_count_excluding_start": 597,
+			"reachable_count_including_start": 598,
+			"reachable_full_direct_effect_nodes": 582,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -105278,6 +104068,7 @@
 				"10490",
 				"10575",
 				"10829",
+				"10835",
 				"10843",
 				"10893",
 				"11018",
@@ -105411,8 +104202,10 @@
 				"24865",
 				"24914",
 				"25067",
+				"25237",
 				"25260",
 				"25531",
+				"25714",
 				"26196",
 				"26270",
 				"26523",
@@ -105420,6 +104213,7 @@
 				"26725",
 				"26740",
 				"26866",
+				"26960",
 				"27166",
 				"27195",
 				"27203",
@@ -105465,6 +104259,7 @@
 				"3167",
 				"31683",
 				"31758",
+				"31819",
 				"31875",
 				"31928",
 				"31931",
@@ -105547,6 +104342,7 @@
 				"38344",
 				"38348",
 				"38450",
+				"38516",
 				"38662",
 				"38701",
 				"38805",
@@ -105632,6 +104428,7 @@
 				"465",
 				"46578",
 				"46636",
+				"46726",
 				"46897",
 				"46910",
 				"47030",
@@ -105642,6 +104439,7 @@
 				"476",
 				"47949",
 				"48287",
+				"48298",
 				"48362",
 				"48423",
 				"48513",
@@ -105785,6 +104583,7 @@
 				"62069",
 				"62103",
 				"6230",
+				"62303",
 				"62363",
 				"62429",
 				"62577",
@@ -105866,35 +104665,35 @@
 	"effect_coverage": {
 		"all_source": {
 			"direct_effect_entries": {
-				"full": 708,
+				"full": 730,
 				"no_direct_stats": 165,
 				"other_status": 0,
-				"partial": 418,
+				"partial": 408,
 				"total_with_stats": 4709,
-				"unsupported": 3583
+				"unsupported": 3571
 			},
 			"mastery_nodes": 353,
 			"mastery_option_status_counts": {
-				"full": 21,
+				"full": 33,
 				"other": 0,
 				"partial": 6,
-				"unsupported": 1810
+				"unsupported": 1798
 			},
 			"mastery_options": 1837,
 			"mastery_options_with_direct_stats": 1837,
 			"mastery_options_without_direct_stats": 0,
 			"node_api_status_counts": {
 				"choice": 353,
-				"full": 852,
-				"partial": 412,
+				"full": 862,
+				"partial": 402,
 				"unknown": 0,
 				"unsupported": 1773
 			},
 			"node_direct_effect_status_counts": {
-				"full": 708,
+				"full": 730,
 				"other": 0,
-				"partial": 418,
-				"unsupported": 3583
+				"partial": 408,
+				"unsupported": 3571
 			},
 			"node_records": 3390,
 			"nodes_with_direct_stats": 2872,
@@ -105903,35 +104702,35 @@
 		"counting_rule": "Only source entries with non-empty direct stats count as full, partial or unsupported effect entries. Empty-stat nodes/options are recorded as no_direct_stats even when node_effect returns full with no grants.",
 		"standard_allocation_graph": {
 			"direct_effect_entries": {
-				"full": 616,
+				"full": 637,
 				"no_direct_stats": 64,
 				"other_status": 0,
-				"partial": 237,
+				"partial": 228,
 				"total_with_stats": 3845,
-				"unsupported": 2992
+				"unsupported": 2980
 			},
 			"mastery_nodes": 315,
 			"mastery_option_status_counts": {
-				"full": 21,
+				"full": 33,
 				"other": 0,
 				"partial": 6,
-				"unsupported": 1810
+				"unsupported": 1798
 			},
 			"mastery_options": 1837,
 			"mastery_options_with_direct_stats": 1837,
 			"mastery_options_without_direct_stats": 0,
 			"node_api_status_counts": {
 				"choice": 315,
-				"full": 659,
-				"partial": 231,
+				"full": 668,
+				"partial": 222,
 				"unknown": 0,
 				"unsupported": 1182
 			},
 			"node_direct_effect_status_counts": {
-				"full": 616,
+				"full": 637,
 				"other": 0,
-				"partial": 237,
-				"unsupported": 2992
+				"partial": 228,
+				"unsupported": 2980
 			},
 			"node_records": 2387,
 			"nodes_with_direct_stats": 2008,
@@ -108321,14 +107120,20 @@
 					"effect": 12119.0,
 					"effect_id": 12119,
 					"execution": {
-						"api_status": "unsupported",
-						"coverage_status": "unsupported",
-						"grants": [],
+						"api_status": "full",
+						"coverage_status": "full",
+						"grants": [
+							{
+								"mode": "increased",
+								"stat": "mana_cost_efficiency_increased",
+								"value": 0.15
+							}
+						],
 						"has_direct_stats": true,
-						"supported": [],
-						"unsupported": [
+						"supported": [
 							"15% increased Mana Cost Efficiency"
-						]
+						],
+						"unsupported": []
 					},
 					"source": {
 						"effect": 12119.0,
@@ -109582,22 +108387,26 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
 					{
 						"mode": "increased",
 						"stat": "mana_regen_increased",
 						"value": 0.3
+					},
+					{
+						"mode": "increased",
+						"stat": "mana_cost_efficiency_increased",
+						"value": 0.15
 					}
 				],
 				"has_direct_stats": true,
 				"supported": [
-					"30% increased Mana Regeneration Rate"
-				],
-				"unsupported": [
+					"30% increased Mana Regeneration Rate",
 					"15% increased Mana Cost Efficiency"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "383",
 			"has_position": true,
@@ -120441,14 +119250,20 @@
 					"effect": 12119.0,
 					"effect_id": 12119,
 					"execution": {
-						"api_status": "unsupported",
-						"coverage_status": "unsupported",
-						"grants": [],
+						"api_status": "full",
+						"coverage_status": "full",
+						"grants": [
+							{
+								"mode": "increased",
+								"stat": "mana_cost_efficiency_increased",
+								"value": 0.15
+							}
+						],
 						"has_direct_stats": true,
-						"supported": [],
-						"unsupported": [
+						"supported": [
 							"15% increased Mana Cost Efficiency"
-						]
+						],
+						"unsupported": []
 					},
 					"source": {
 						"effect": 12119.0,
@@ -142912,8 +141727,8 @@
 		{
 			"default_allocation_graph": false,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
 					{
 						"mode": "flat",
@@ -142924,16 +141739,20 @@
 						"mode": "increased",
 						"stat": "max_mana",
 						"value": 0.2
+					},
+					{
+						"mode": "increased",
+						"stat": "mana_cost_efficiency_increased",
+						"value": 0.15
 					}
 				],
 				"has_direct_stats": true,
 				"supported": [
 					"+30 to maximum Mana",
-					"20% increased maximum Mana"
-				],
-				"unsupported": [
+					"20% increased maximum Mana",
 					"15% increased Mana Cost Efficiency"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "",
 			"has_position": false,
@@ -157235,14 +156054,20 @@
 					"effect": 12119.0,
 					"effect_id": 12119,
 					"execution": {
-						"api_status": "unsupported",
-						"coverage_status": "unsupported",
-						"grants": [],
+						"api_status": "full",
+						"coverage_status": "full",
+						"grants": [
+							{
+								"mode": "increased",
+								"stat": "mana_cost_efficiency_increased",
+								"value": 0.15
+							}
+						],
 						"has_direct_stats": true,
-						"supported": [],
-						"unsupported": [
+						"supported": [
 							"15% increased Mana Cost Efficiency"
-						]
+						],
+						"unsupported": []
 					},
 					"source": {
 						"effect": 12119.0,
@@ -157594,22 +156419,26 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
 					{
 						"mode": "increased",
 						"stat": "mana_regen_increased",
 						"value": 0.1
+					},
+					{
+						"mode": "increased",
+						"stat": "mana_cost_efficiency_increased",
+						"value": 0.08
 					}
 				],
 				"has_direct_stats": true,
 				"supported": [
-					"10% increased Mana Regeneration Rate"
-				],
-				"unsupported": [
+					"10% increased Mana Regeneration Rate",
 					"8% increased Mana Cost Efficiency"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "383",
 			"has_position": true,
@@ -159776,22 +158605,26 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
 					{
 						"mode": "increased",
 						"stat": "max_mana",
 						"value": 0.1
+					},
+					{
+						"mode": "increased",
+						"stat": "mana_cost_increased",
+						"value": 0.05
 					}
 				],
 				"has_direct_stats": true,
 				"supported": [
-					"10% increased maximum Mana"
-				],
-				"unsupported": [
+					"10% increased maximum Mana",
 					"5% increased Mana Cost of Skills"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "383",
 			"has_position": true,
@@ -164172,22 +163005,26 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
 					{
 						"mode": "increased",
 						"stat": "max_mana",
 						"value": 0.3
+					},
+					{
+						"mode": "increased",
+						"stat": "mana_cost_increased",
+						"value": 0.1
 					}
 				],
 				"has_direct_stats": true,
 				"supported": [
-					"30% increased maximum Mana"
-				],
-				"unsupported": [
+					"30% increased maximum Mana",
 					"10% increased Mana Cost of Skills"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "383",
 			"has_position": true,
@@ -170237,14 +169074,20 @@
 					"effect": 12119.0,
 					"effect_id": 12119,
 					"execution": {
-						"api_status": "unsupported",
-						"coverage_status": "unsupported",
-						"grants": [],
+						"api_status": "full",
+						"coverage_status": "full",
+						"grants": [
+							{
+								"mode": "increased",
+								"stat": "mana_cost_efficiency_increased",
+								"value": 0.15
+							}
+						],
 						"has_direct_stats": true,
-						"supported": [],
-						"unsupported": [
+						"supported": [
 							"15% increased Mana Cost Efficiency"
-						]
+						],
+						"unsupported": []
 					},
 					"source": {
 						"effect": 12119.0,
@@ -181528,22 +180371,26 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
 					{
 						"mode": "increased",
 						"stat": "max_mana",
 						"value": 0.06
+					},
+					{
+						"mode": "increased",
+						"stat": "mana_cost_efficiency_increased",
+						"value": 0.06
 					}
 				],
 				"has_direct_stats": true,
 				"supported": [
-					"6% increased maximum Mana"
-				],
-				"unsupported": [
+					"6% increased maximum Mana",
 					"6% increased Mana Cost Efficiency"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "231",
 			"has_position": true,
@@ -196851,14 +195698,20 @@
 					"effect": 12119.0,
 					"effect_id": 12119,
 					"execution": {
-						"api_status": "unsupported",
-						"coverage_status": "unsupported",
-						"grants": [],
+						"api_status": "full",
+						"coverage_status": "full",
+						"grants": [
+							{
+								"mode": "increased",
+								"stat": "mana_cost_efficiency_increased",
+								"value": 0.15
+							}
+						],
 						"has_direct_stats": true,
-						"supported": [],
-						"unsupported": [
+						"supported": [
 							"15% increased Mana Cost Efficiency"
-						]
+						],
+						"unsupported": []
 					},
 					"source": {
 						"effect": 12119.0,
@@ -207334,22 +206187,26 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
 					{
 						"mode": "increased",
 						"stat": "max_mana",
 						"value": 0.22
+					},
+					{
+						"mode": "increased",
+						"stat": "mana_cost_efficiency_increased",
+						"value": 0.12
 					}
 				],
 				"has_direct_stats": true,
 				"supported": [
-					"22% increased maximum Mana"
-				],
-				"unsupported": [
+					"22% increased maximum Mana",
 					"12% increased Mana Cost Efficiency"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "231",
 			"has_position": true,
@@ -232733,14 +231590,20 @@
 					"effect": 12119.0,
 					"effect_id": 12119,
 					"execution": {
-						"api_status": "unsupported",
-						"coverage_status": "unsupported",
-						"grants": [],
+						"api_status": "full",
+						"coverage_status": "full",
+						"grants": [
+							{
+								"mode": "increased",
+								"stat": "mana_cost_efficiency_increased",
+								"value": 0.15
+							}
+						],
 						"has_direct_stats": true,
-						"supported": [],
-						"unsupported": [
+						"supported": [
 							"15% increased Mana Cost Efficiency"
-						]
+						],
+						"unsupported": []
 					},
 					"source": {
 						"effect": 12119.0,
@@ -238296,22 +237159,26 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
 					{
 						"mode": "increased",
 						"stat": "max_mana",
 						"value": 0.06
+					},
+					{
+						"mode": "increased",
+						"stat": "mana_cost_efficiency_increased",
+						"value": 0.06
 					}
 				],
 				"has_direct_stats": true,
 				"supported": [
-					"6% increased maximum Mana"
-				],
-				"unsupported": [
+					"6% increased maximum Mana",
 					"6% increased Mana Cost Efficiency"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "231",
 			"has_position": true,
@@ -242610,14 +241477,20 @@
 					"effect": 12119.0,
 					"effect_id": 12119,
 					"execution": {
-						"api_status": "unsupported",
-						"coverage_status": "unsupported",
-						"grants": [],
+						"api_status": "full",
+						"coverage_status": "full",
+						"grants": [
+							{
+								"mode": "increased",
+								"stat": "mana_cost_efficiency_increased",
+								"value": 0.15
+							}
+						],
 						"has_direct_stats": true,
-						"supported": [],
-						"unsupported": [
+						"supported": [
 							"15% increased Mana Cost Efficiency"
-						]
+						],
+						"unsupported": []
 					},
 					"source": {
 						"effect": 12119.0,
@@ -244224,8 +243097,8 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
 					{
 						"mode": "increased",
@@ -244236,16 +243109,20 @@
 						"mode": "increased",
 						"stat": "max_mana",
 						"value": 0.16
+					},
+					{
+						"mode": "increased",
+						"stat": "mana_cost_efficiency_increased",
+						"value": 0.16
 					}
 				],
 				"has_direct_stats": true,
 				"supported": [
 					"10% increased maximum Energy Shield",
-					"16% increased maximum Mana"
-				],
-				"unsupported": [
+					"16% increased maximum Mana",
 					"16% increased Mana Cost Efficiency"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "300",
 			"has_position": true,
@@ -247419,14 +246296,20 @@
 					"effect": 12119.0,
 					"effect_id": 12119,
 					"execution": {
-						"api_status": "unsupported",
-						"coverage_status": "unsupported",
-						"grants": [],
+						"api_status": "full",
+						"coverage_status": "full",
+						"grants": [
+							{
+								"mode": "increased",
+								"stat": "mana_cost_efficiency_increased",
+								"value": 0.15
+							}
+						],
 						"has_direct_stats": true,
-						"supported": [],
-						"unsupported": [
+						"supported": [
 							"15% increased Mana Cost Efficiency"
-						]
+						],
+						"unsupported": []
 					},
 					"source": {
 						"effect": 12119.0,
@@ -262292,14 +261175,20 @@
 					"effect": 12119.0,
 					"effect_id": 12119,
 					"execution": {
-						"api_status": "unsupported",
-						"coverage_status": "unsupported",
-						"grants": [],
+						"api_status": "full",
+						"coverage_status": "full",
+						"grants": [
+							{
+								"mode": "increased",
+								"stat": "mana_cost_efficiency_increased",
+								"value": 0.15
+							}
+						],
 						"has_direct_stats": true,
-						"supported": [],
-						"unsupported": [
+						"supported": [
 							"15% increased Mana Cost Efficiency"
-						]
+						],
+						"unsupported": []
 					},
 					"source": {
 						"effect": 12119.0,
@@ -295681,22 +294570,26 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
 					{
 						"mode": "increased",
 						"stat": "max_mana",
 						"value": 0.08
+					},
+					{
+						"mode": "increased",
+						"stat": "mana_cost_efficiency_increased",
+						"value": 0.06
 					}
 				],
 				"has_direct_stats": true,
 				"supported": [
-					"8% increased maximum Mana"
-				],
-				"unsupported": [
+					"8% increased maximum Mana",
 					"6% increased Mana Cost Efficiency"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "205",
 			"has_position": true,
@@ -301313,14 +300206,20 @@
 					"effect": 12119.0,
 					"effect_id": 12119,
 					"execution": {
-						"api_status": "unsupported",
-						"coverage_status": "unsupported",
-						"grants": [],
+						"api_status": "full",
+						"coverage_status": "full",
+						"grants": [
+							{
+								"mode": "increased",
+								"stat": "mana_cost_efficiency_increased",
+								"value": 0.15
+							}
+						],
 						"has_direct_stats": true,
-						"supported": [],
-						"unsupported": [
+						"supported": [
 							"15% increased Mana Cost Efficiency"
-						]
+						],
+						"unsupported": []
 					},
 					"source": {
 						"effect": 12119.0,
@@ -308507,14 +307406,20 @@
 					"effect": 12119.0,
 					"effect_id": 12119,
 					"execution": {
-						"api_status": "unsupported",
-						"coverage_status": "unsupported",
-						"grants": [],
+						"api_status": "full",
+						"coverage_status": "full",
+						"grants": [
+							{
+								"mode": "increased",
+								"stat": "mana_cost_efficiency_increased",
+								"value": 0.15
+							}
+						],
 						"has_direct_stats": true,
-						"supported": [],
-						"unsupported": [
+						"supported": [
 							"15% increased Mana Cost Efficiency"
-						]
+						],
+						"unsupported": []
 					},
 					"source": {
 						"effect": 12119.0,
@@ -318081,14 +316986,20 @@
 					"effect": 12119.0,
 					"effect_id": 12119,
 					"execution": {
-						"api_status": "unsupported",
-						"coverage_status": "unsupported",
-						"grants": [],
+						"api_status": "full",
+						"coverage_status": "full",
+						"grants": [
+							{
+								"mode": "increased",
+								"stat": "mana_cost_efficiency_increased",
+								"value": 0.15
+							}
+						],
 						"has_direct_stats": true,
-						"supported": [],
-						"unsupported": [
+						"supported": [
 							"15% increased Mana Cost Efficiency"
-						]
+						],
+						"unsupported": []
 					},
 					"source": {
 						"effect": 12119.0,
