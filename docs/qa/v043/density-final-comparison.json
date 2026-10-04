@@ -1,0 +1,35 @@
+{
+  "density-before-final": {
+    "actors_after": 36,
+    "actors_before": 36,
+    "max_cpu_ms": 3.776,
+    "mean_cpu_ms": 1.89855,
+    "median_cpu_ms": 2.22,
+    "over16_7": 0,
+    "over33_3": 0,
+    "p95_cpu_ms": 2.779,
+    "samples": 120,
+    "scope": "headless simulation CPU, same frozen36enemy input, no WindowsFPS or render claim",
+    "seconds_simulated": 2,
+    "version": "0.42.0"
+  },
+  "density-after-final": {
+    "actors_after": 36,
+    "actors_before": 36,
+    "max_cpu_ms": 3.257,
+    "mean_cpu_ms": 1.852925,
+    "median_cpu_ms": 2.244,
+    "over16_7": 0,
+    "over33_3": 0,
+    "p95_cpu_ms": 2.432,
+    "samples": 120,
+    "scope": "headless simulation CPU, same frozen36enemy input, no WindowsFPS or render claim",
+    "seconds_simulated": 2,
+    "version": "0.42.0"
+  },
+  "same_observation_bytes": true,
+  "before_sha256": "064d31c460f705287c111465d26edad2e3629ca3f56e735171618ebc609ff3ff",
+  "after_sha256": "064d31c460f705287c111465d26edad2e3629ca3f56e735171618ebc609ff3ff",
+  "fixture_sha256": "ed41f9497a9f661540a1ab62b5babaf2a92fcffac23b16dc527da21044f366f7",
+  "initial_before_run_invalid": "The initial v42 probe rejected a v43 profile because description text changed; initial timings invalid and excluded. Final initializes each version with its own compiler and asserts numeric fields equal."
+}

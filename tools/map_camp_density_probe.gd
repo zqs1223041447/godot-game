@@ -5,9 +5,13 @@ func run()->void:
 	if input.is_empty() or output.is_empty() or not OS.get_environment("XDG_DATA_HOME").begins_with("/tmp/godot-m1-"):quit(78);return
 	var fixture:Dictionary=bytes_to_var(FileAccess.get_file_as_bytes(input))
 	var arena:Node=load("res://scenes/main.tscn").instantiate();root.add_child(arena);await process_frame;arena.set_process(false);arena.hud.set_process(false)
-	arena.state._accept_memory(fixture.build);arena._stats=arena.state.get_stats();arena._world_mode="map";arena.wave=int(fixture.profile.wave);arena._map_run.begin(fixture.profile);arena._map_run.admitted=fixture.admitted.duplicate(true)
+	var compiled:Dictionary=arena.MapCompiler.compile_normal(fixture.profile.id,fixture.profile.journey_tier,fixture.profile.normal_ids,fixture.profile.special_ids);assert(compiled.ok)
+	# Rebuild version-local display text while preserving all numeric combat inputs.
+	var local_profile:Dictionary=compiled.profile
+	for key:String in ["wave","ordinary_target","fee","completion_reward","normal_ids","special_ids","encounter_profile"]:assert(local_profile[key]==fixture.profile[key])
+	arena.state._accept_memory(fixture.build);arena._stats=arena.state.get_stats();arena._world_mode="map";arena.wave=int(local_profile.wave);assert(arena._map_run.begin(local_profile));arena._map_run.admitted=fixture.admitted.duplicate(true)
 	if arena.has_method("_prepare_camp_run"):
-		var plan:Dictionary=arena._prepare_camp_run(fixture.profile,43);assert(plan.ok);arena._map_camps=plan.state;arena._camp_landmarks=plan.landmarks
+		var plan:Dictionary=arena._prepare_camp_run(local_profile,43);assert(plan.ok);arena._map_camps=plan.state;arena._camp_landmarks=plan.landmarks
 		for camp:Dictionary in fixture.camps:assert(arena._map_camps.activate(camp.id,camp.root_ids))
 	arena._refresh_world_geometry();arena.enemies.assign(fixture.enemies.duplicate(true));arena.EncounterAdmission._restore(arena.monster_runtime,fixture.runtime.duplicate(true))
 	arena.player_pos=fixture.position;arena.auto_fire=false;arena.alive=true;arena.invulnerable=999.0;arena.rng.seed=431234;arena.critical_runtime.reset(43);arena.health=arena._stats.max_health;arena.mana=arena._stats.max_mana;arena.shield=arena._stats.max_shield
@@ -15,6 +19,7 @@ func run()->void:
 	var samples:Array[int]=[]
 	for i:int in range(120):
 		var start:=Time.get_ticks_usec();arena._tick(1.0/60.0);samples.append(Time.get_ticks_usec()-start)
+	assert(is_equal_approx(arena.elapsed,2.0))
 	var observation:Dictionary={"enemies":arena.enemies,"runtime":arena.EncounterAdmission._snapshot(arena.monster_runtime),"projectiles":arena.projectiles,"particles":arena.particles,"rings":arena.rings,"pickups":arena.pickups,"player":arena.player_pos,"health":arena.health,"mana":arena.mana,"shield":arena.shield,"rng":arena.rng.state,"critical":arena.critical_runtime.checkpoint(),"elapsed":arena.elapsed,"kills":arena.kills}
 	var raw:=var_to_bytes(observation);var file:=FileAccess.open(output+".bin",FileAccess.WRITE);file.store_buffer(raw);file.close();samples.sort()
 	var sum:=0.0;var over16:=0;var over33:=0
