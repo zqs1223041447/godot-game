@@ -94,7 +94,7 @@ static func _read_state(raw: Variant) -> Dictionary:
 		clampf((age - windup_seconds) / recovery_seconds, 0.0, 1.0)
 	return {"source_id": int(source_id), "center": center, "radius": float(radius),
 		"phase": phase, "progress": progress,
-		"pattern": raw.get("visual_pattern", "") if raw.get("visual_pattern", "") in ["garden_slam", "ruins_mark"] else "",
+		"pattern": raw.get("visual_pattern", "") if raw.get("visual_pattern", "") in ["garden_slam", "ruins_mark", "ember_burn"] else "",
 		"element": raw.get("visual_element", "") if raw.get("visual_element", "") in ["cold", "lightning"] else ""}
 
 
@@ -116,6 +116,7 @@ static func _append_state(state: Dictionary, effects: int, fills: Array[Dictiona
 	var pigment: Color = CHALK.lerp(CHARGED, progress) if winding else ASH
 	if state.element == "cold": pigment = Color("b3c5c8").lerp(Color("77969f"), progress) if winding else ASH
 	elif state.element == "lightning": pigment = Color("d5c68e").lerp(Color("ae884e"), progress) if winding else ASH
+	if state.pattern == "ember_burn": pigment = Color("c8905b").lerp(Color("b7643e"), progress) if winding else ASH
 	var fill_alpha: float = lerpf(0.035, 0.085, progress) if winding else 0.065 * fade
 	fills.append(_circle(state, "ground_tint", Color(SOIL, fill_alpha), true, -1.0))
 	var role: String = "danger_boundary" if winding else "recovery_boundary"
@@ -130,6 +131,9 @@ static func _append_state(state: Dictionary, effects: int, fills: Array[Dictiona
 		rune = _boss_rune(rune_center, radius * 0.48, "garden_slam")
 	elif state.pattern == "ruins_mark":
 		rune = _boss_rune(rune_center, minf(16.0,radius * 0.21), "ruins_mark")
+	elif state.pattern == "ember_burn":
+		var p: Vector2 = state.center + Vector2(0, -radius * 0.6)
+		rune = PackedVector2Array([p + Vector2(-7, 6), p + Vector2(-2, -3), p + Vector2(0, 2), p + Vector2(5, -9), p + Vector2(8, 6)])
 	marks.append(_line(state, "rune_base", rune, Color(INK, 0.6 * fade), minf(3.0, radius * 0.1)))
 	var charged: PackedVector2Array = _trace(rune, progress if winding else 1.0)
 	if charged.size() >= 2:

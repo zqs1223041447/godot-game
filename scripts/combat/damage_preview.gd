@@ -70,6 +70,18 @@ static func leech_lines(cast: Dictionary) -> PackedStringArray:
 			lines.append("%s偷取：%s" % ["生命" if resource == "health" else "法力", " · ".join(parts)])
 	return lines
 
+static func burn_lines(cast: Dictionary) -> PackedStringArray:
+	var lines := PackedStringArray()
+	var profile: Dictionary = cast.get("burn_profile", {})
+	if not bool(cast.get("ok", false)) or not bool(profile.get("enabled", false)): return lines
+	lines.append("点燃 %.1f 秒 · 非暴击、未计火抗" % float(profile.duration))
+	for role: String in ["direct", "parent", "child"]:
+		if not profile.get("roles", {}).has(role): continue
+		var values: Dictionary = profile.roles[role]
+		lines.append("%s每秒 %.2f 火焰 · 完整持续 %.2f" % [{"direct":"", "parent":"母箭：", "child":"子箭："}[role], float(values.dps), float(values.total)])
+	lines.append("同一目标不叠加；强点燃覆盖，同强度刷新。")
+	return lines
+
 static func assembly_line(packet: Dictionary) -> String:
 	var trace: Dictionary = packet.get("assembly", {})
 	if trace.is_empty():
@@ -87,6 +99,7 @@ static func details(cast: Dictionary) -> String:
 	var lines: PackedStringArray = ["逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。"]
 	lines.append_array(critical_lines(cast))
 	lines.append_array(leech_lines(cast))
+	lines.append_array(burn_lines(cast))
 	if cast.snapshot.has("accuracy"):
 		lines.append("上方是成功命中的伤害，未把命中率乘入；攻击命中值 %.0f，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。" % float(cast.snapshot.accuracy))
 	if cast.get("recipe", {}).has("_projectile_support_ids"):

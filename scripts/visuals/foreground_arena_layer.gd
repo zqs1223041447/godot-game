@@ -11,6 +11,8 @@ func _get(property:StringName)->Variant:
 func visual_camera_zoom()->float:
 	var camera:Camera2D=source.get_node_or_null("WorldCamera") as Camera2D
 	return camera.zoom.x if camera!=null else 1.0
+func burn_statuses() -> Array:
+	return source.burn_statuses() if is_instance_valid(source) and source.has_method("burn_statuses") else []
 func _draw()->void:
 	if not is_instance_valid(source) or not source._ready_complete:return
 	var began:int=Time.get_ticks_usec() if Visuals.diagnostic_profile_enabled else 0

@@ -11,6 +11,7 @@ const Data = preload("res://scripts/game_data.gd")
 const Combat = preload("res://scripts/combat/combat_data.gd")
 const Compiler = preload("res://scripts/combat/skill_compiler.gd")
 const Supports = preload("res://scripts/combat/support_registry.gd")
+const BurnRules = preload("res://scripts/combat/burn_rules.gd")
 const CATEGORIES := {"weapon":"武器","body_armour":"护甲","amulet":"项链","ring":"戒指","boots":"鞋","belt":"腰带","gloves":"手套","helmet":"头盔"}
 const RARITIES := {"normal":"普通","magic":"魔法","rare":"稀有","unique":"机制装备","special":"特殊"}
 const CAPABILITY_LABELS: Dictionary = {
@@ -27,6 +28,7 @@ const DAMAGE_LABELS: Dictionary = {
 }
 const SUPPORT_FAMILY_LABELS: Dictionary = {
 	"resource":"资源", "element":"元素", "delivery":"发射", "control":"控制", "chain":"连锁",
+	"burning":"点燃",
 }
 const OPERATION_LABELS: Dictionary = {
 	"mana_multiplier":"魔力消耗", "cooldown_multiplier":"冷却时间",
@@ -130,6 +132,12 @@ static func view(model: RefCounted, uid: String) -> Dictionary:
 			result.requirements = ["适用技能："+"、".join(supported_names)]
 
 			result.base_stats = []
+			if support_id == "ignite":
+				result.function = "火焰主命中附加点燃；同目标取最强，同强度刷新，独立爆炸不继承。"
+				var burn_stats: Array[Dictionary] = []
+				_append_numeric_stat(burn_stats, "持续时间", BurnRules.PLAYER_POLICY.duration, " 秒")
+				_append_percent_stat(burn_stats, "每秒取防御前火伤", BurnRules.PLAYER_POLICY.rate_fraction)
+				result.base_stats = burn_stats
 			result.modifiers = _support_modifiers(support_id, false)
 			var support_location: Dictionary = model.location(uid)
 			_append_current_preview(model, support_location, result)
@@ -412,6 +420,7 @@ static func _append_current_preview(model: RefCounted, location: Dictionary, res
 			result.preview_lines.append(summary)
 		result.preview_lines.append_array(Preview.critical_lines(cast))
 		result.preview_lines.append_array(Preview.leech_lines(cast))
+		result.preview_lines.append_array(Preview.burn_lines(cast))
 		result.effect_lines = result.preview_lines.duplicate(true)
 	else:
 		var error: String = str(cast.get("error",""))

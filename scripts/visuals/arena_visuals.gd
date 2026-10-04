@@ -10,6 +10,7 @@ const ActorArt = preload("res://scripts/visuals/fantasy_actors.gd")
 const View = preload("res://scripts/visuals/world_view.gd")
 const Markers = preload("res://scripts/visuals/world_markers.gd")
 const TelegraphArt = preload("res://scripts/visuals/telegraph_renderer.gd")
+const BurnArt = preload("res://scripts/visuals/burn_status_renderer.gd")
 
 static func polygon(canvas: CanvasItem, points: Array, color: Color) -> void:
 	canvas.draw_colored_polygon(PackedVector2Array(points), color)
@@ -75,6 +76,7 @@ static func draw_scene(arena: Node2D, preferences: Settings, include_environment
 		draw_projectile(arena,shot,preferences)
 	stamp = _diagnostic_mark("projectiles",stamp)
 	draw_player(arena,preferences)
+	if arena.has_method("burn_statuses"): BurnArt.draw(arena, arena.burn_statuses(), preferences.effects_level)
 	stamp = _diagnostic_mark("player",stamp)
 	for enemy:Dictionary in ordered:
 		Markers.draw_enemy(arena,enemy,preferences,names.has(int(enemy.id)))
@@ -203,6 +205,7 @@ static func draw_after_actors(arena:Node2D,preferences:Settings)->void:
 		draw_projectile(arena,shot,preferences)
 	stamp = _diagnostic_mark("projectiles",stamp)
 	draw_player(arena,preferences)
+	if arena.has_method("burn_statuses"): BurnArt.draw(arena, arena.burn_statuses(), preferences.effects_level)
 	stamp = _diagnostic_mark("player",stamp)
 	for enemy:Dictionary in ordered:
 		Markers.draw_enemy(arena,enemy,preferences,names.has(int(enemy.id)))
