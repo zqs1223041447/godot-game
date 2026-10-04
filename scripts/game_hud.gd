@@ -1664,6 +1664,12 @@ func _refresh_world() -> void:
 			_world_button.text = "城镇服务"
 		_:
 			_world_label.text = "%s · %d / %d" % [str(context.map_name),int(context.ordinary_kills),int(context.ordinary_target)]
+			var camps: Array = context.get("camp_states", [])
+			if not camps.is_empty():
+				var cleared := 0
+				for camp: Dictionary in camps:
+					if str(camp.state) == "cleared": cleared += 1
+				_world_label.text += "\n据点 %d/%d · %s" % [cleared, camps.size(), {"sealed":"首领封印中", "ready":"首领入口已开启", "active":"首领已出现", "defeated":"首领已击败"}.get(str(context.get("boss_phase", "sealed")), "")]
 			_world_button.text = "返回城镇"
 			_town_view.hide()
 

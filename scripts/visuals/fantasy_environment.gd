@@ -1,5 +1,6 @@
 class_name FantasyEnvironment
 extends RefCounted
+const CampSigns = preload("res://scripts/visuals/map_camp_signs.gd")
 ## Sunlit, weathered flagstone garden. Deterministic marks, never gameplay RNG.
 static func draw(arena: Node2D) -> void:
 	var geometry: Dictionary = arena.world_geometry() if arena.has_method("world_geometry") else {}
@@ -74,6 +75,7 @@ static func draw(arena: Node2D) -> void:
 	if broken:
 		for wall: Rect2 in geometry.walls:
 			_draw_ruin_wall(arena,wall)
+	CampSigns.draw_ground(arena, geometry.get("landmarks", {}))
 	if arena._font:
 		arena.draw_string(arena._font,bounds.position+Vector2(38,36),"断垣试炼" if broken else "灰烬庭院",HORIZONTAL_ALIGNMENT_LEFT,-1,15,Color("4e573f"))
 		arena.draw_string(arena._font,bounds.end-Vector2(138,28),"试炼之地",HORIZONTAL_ALIGNMENT_LEFT,-1,13,Color("586044"))
