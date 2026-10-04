@@ -16,12 +16,14 @@ PIERCE_VALIDATION_DIR="$(mktemp -d /tmp/godot-pierce-acceptance-XXXXXX)"
 CRAFT_VALIDATION_DIR="$(mktemp -d /tmp/godot-crafting-qa-XXXXXX)"
 M0_VALIDATION_DIR="$(mktemp -d /tmp/godot-m0-scene-XXXXXX)"
 M1_VALIDATION_DIR="$(mktemp -d /tmp/godot-m1-batch.XXXXXX)"
+PROJECTILE_V38_DIR="$(mktemp -d /tmp/godot-m1-v038-projectile.XXXXXX)"
+REWARD_V38_DIR="$(mktemp -d /tmp/godot-m1-v038-rewards-XXXXXX)"
 mkdir -p /tmp/godot-currency-dev
 CURRENCY_VALIDATION_DIR="$(mktemp -d /tmp/godot-currency-dev/batch.XXXXXX)"
 ROOT_CRAFT_DIR="$(mktemp -d /tmp/godot-root-craft-ui-batch.XXXXXX)"
 TOWN_UI_DIR="$(mktemp -d /tmp/v28root-ui-batch.XXXXXX)"
 MAP_DEATH_UI_DIR="$(mktemp -d /tmp/v29root-death-batch.XXXXXX)"
-trap 'rm -rf -- "$VALIDATION_DIR" "$PIERCE_VALIDATION_DIR" "$CRAFT_VALIDATION_DIR" "$M0_VALIDATION_DIR" "$M1_VALIDATION_DIR" "$CURRENCY_VALIDATION_DIR" "$ROOT_CRAFT_DIR" "$TOWN_UI_DIR" "$MAP_DEATH_UI_DIR"' EXIT
+trap 'rm -rf -- "$VALIDATION_DIR" "$PIERCE_VALIDATION_DIR" "$CRAFT_VALIDATION_DIR" "$M0_VALIDATION_DIR" "$M1_VALIDATION_DIR" "$CURRENCY_VALIDATION_DIR" "$ROOT_CRAFT_DIR" "$TOWN_UI_DIR" "$MAP_DEATH_UI_DIR" "$PROJECTILE_V38_DIR" "$REWARD_V38_DIR"' EXIT
 
 # Isolate test settings and saves, including in restricted cloud workspaces.
 if [[ "$(uname -s)" == "Linux" ]]; then
@@ -38,6 +40,16 @@ run_check() {
 		export XDG_DATA_HOME="$VALIDATION_DIR/data/check-$CHECK_INDEX"
 		unset GODOT_CRAFTING_TEST_ROOT
 		case "${2:-}" in
+			res://tests/projectile_dense_equivalence_test.gd)
+				export XDG_DATA_HOME="$PROJECTILE_V38_DIR/check-$CHECK_INDEX/data"
+				export V038_PROJECTILE_REPORT="$VALIDATION_DIR/projectile-report.json"
+				unset PIERCE_QA_ROOT
+				;;
+			res://tests/reward_batch_equivalence_v38_test.gd)
+				export XDG_DATA_HOME="$REWARD_V38_DIR/check-$CHECK_INDEX/data"
+				export REWARD_V38_RECORD_OUT="$VALIDATION_DIR/reward-report.json"
+				unset REWARD_V38_BASELINE PIERCE_QA_ROOT
+				;;
 			res://tests/map_death_return_ui_test.gd)
 				export XDG_DATA_HOME="$MAP_DEATH_UI_DIR/check-$CHECK_INDEX/data"
 				unset PIERCE_QA_ROOT

@@ -47,7 +47,9 @@ func run() -> void:
 	report.checks = checks
 	report.failures = failures
 	report.scope = "Fixed 100-target spread/dense, 30/180 carriers, 20 paired one-tick repetitions; exact full events/shots/IDs/counters and seeded mutable-gate/lifecycle/wall differential. Timing is headless Linux CPU, never Windows FPS. Consumer replay uses actual main._update_projectiles and same RNG seed; no eligible rewards."
-	FileAccess.open("res://docs/qa/v038-projectiles/equivalence.json", FileAccess.WRITE).store_string(JSON.stringify(report, "\t", true, true))
+	var report_path:String=OS.get_environment("V038_PROJECTILE_REPORT")
+	if report_path.is_empty():report_path="user://projectile-equivalence.json"
+	FileAccess.open(report_path, FileAccess.WRITE).store_string(JSON.stringify(report, "\t", true, true))
 	print("Dense projectile equivalence: %d checks, %d failures" % [checks, failures])
 	quit(1 if failures else 0)
 
