@@ -36,7 +36,23 @@ static func summary(cast: Dictionary) -> String:
 			continue
 		var resolved: Dictionary = Damage.resolve(entry.packet, cast.snapshot.modifiers)
 		parts.append("%s %.2f" % [entry.label, float(resolved.total)])
-	return "此技能不直接造成命中伤害" if parts.is_empty() else "命中预估（未计敌方防御）：" + " / ".join(parts)
+	var heading := "非暴击命中预估（未计敌方防御）：" if not cast.get("critical", {}).is_empty() else "命中预估（未计敌方防御）："
+	return "此技能不直接造成命中伤害" if parts.is_empty() else heading + " / ".join(parts)
+
+static func critical_lines(cast: Dictionary) -> PackedStringArray:
+	var lines := PackedStringArray()
+	if not bool(cast.get("ok", false)) or entries(cast).is_empty():
+		return lines
+	var profiles: Dictionary = cast.get("critical", {})
+	for role: String in ["primary", "secondary"]:
+		if not profiles.has(role):
+			continue
+		if role == "secondary" and (not cast.get("packets", {}).has("secondary") or not cast.get("snapshot", {}).get("effects", []).has("explode_on_flight_end")):
+			continue
+		var profile: Dictionary = profiles[role]
+		var prefix := "独立爆炸 · " if role == "secondary" else ""
+		lines.append("%s暴击几率 %.1f%% · 暴击伤害 %.1f%%" % [prefix, float(profile.chance) * 100.0, float(profile.multiplier) * 100.0])
+	return lines
 
 static func assembly_line(packet: Dictionary) -> String:
 	var trace: Dictionary = packet.get("assembly", {})
@@ -53,6 +69,7 @@ static func details(cast: Dictionary) -> String:
 	if not bool(cast.get("ok", false)):
 		return str(cast.get("error", "伤害配置无效"))
 	var lines: PackedStringArray = ["逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。"]
+	lines.append_array(critical_lines(cast))
 	if cast.snapshot.has("accuracy"):
 		lines.append("上方是成功命中的伤害，未把命中率乘入；攻击命中值 %.0f，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。" % float(cast.snapshot.accuracy))
 	if cast.get("recipe", {}).has("_projectile_support_ids"):
