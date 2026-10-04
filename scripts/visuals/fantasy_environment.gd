@@ -2,6 +2,8 @@ class_name FantasyEnvironment
 extends RefCounted
 ## Sunlit, weathered flagstone garden. Deterministic marks, never gameplay RNG.
 static func draw(arena: Node2D) -> void:
+	var geometry: Dictionary = arena.world_geometry() if arena.has_method("world_geometry") else {}
+	var broken: bool = not geometry.get("walls",[]).is_empty()
 	var bounds: Rect2=arena.ARENA
 	arena.draw_rect(bounds.grow(600),Color("4b5940"))
 	# Irregular shrubs and grass beds beyond the playable stone edge.
@@ -33,7 +35,7 @@ static func draw(arena: Node2D) -> void:
 				continue
 			var shape:=_stone(cell,2+float((col*7+row*3)%6))
 			var shade: float=float((col*11+row*7)%9)*0.008
-			arena.draw_colored_polygon(shape,Color(0.54+shade,0.56+shade,0.47+shade))
+			arena.draw_colored_polygon(shape,Color(0.62+shade,0.56+shade,0.43+shade) if broken else Color(0.54+shade,0.56+shade,0.47+shade))
 			arena.draw_line(shape[0]+Vector2(1,1),shape[1]+Vector2(-1,1),Color(0.78,0.76,0.61,0.38),1.2,true)
 			if (col+row*3)%5==0 and cell.size.x>55:
 				var crack:=cell.position+Vector2(cell.size.x*0.65,0)
@@ -69,8 +71,11 @@ static func draw(arena: Node2D) -> void:
 		arena.draw_polyline(PackedVector2Array([corner+Vector2(-2,-8),corner+Vector2(3,-4),corner+Vector2(-1,1)]),Color("746e57"),1.3,true)
 	# Dappled daylight is a restrained tint, never an opaque object or gameplay hazard.
 	arena.draw_colored_polygon(PackedVector2Array([bounds.position+Vector2(24,12),bounds.position+Vector2(bounds.size.x*0.25,12),Vector2(bounds.position.x+bounds.size.x*0.55,bounds.end.y-11),Vector2(bounds.position.x+bounds.size.x*0.4,bounds.end.y-11)]),Color(0.96,0.89,0.63,0.035))
+	if broken:
+		for wall: Rect2 in geometry.walls:
+			_draw_ruin_wall(arena,wall)
 	if arena._font:
-		arena.draw_string(arena._font,bounds.position+Vector2(38,36),"灰烬庭院",HORIZONTAL_ALIGNMENT_LEFT,-1,15,Color("4e573f"))
+		arena.draw_string(arena._font,bounds.position+Vector2(38,36),"断垣试炼" if broken else "灰烬庭院",HORIZONTAL_ALIGNMENT_LEFT,-1,15,Color("4e573f"))
 		arena.draw_string(arena._font,bounds.end-Vector2(138,28),"试炼之地",HORIZONTAL_ALIGNMENT_LEFT,-1,13,Color("586044"))
 
 static func _stone(rect: Rect2, cut: float) -> PackedVector2Array:
@@ -89,3 +94,28 @@ static func _tuft(arena: Node2D, p: Vector2, lean: float) -> void:
 	for j: int in range(3):
 		var tip:=p+Vector2((j-1)*3+lean,-4-float(j%2)*3)
 		arena.draw_line(p,tip,Color("5b7047"),1.3,true)
+
+
+static func _draw_ruin_wall(arena: Node2D, wall: Rect2) -> void:
+	# The opaque footprint is exactly the collision rectangle. No oversized
+	# decoration suggests that the routes around either end are blocked.
+	arena.draw_rect(wall,Color("544b3b"))
+	var inner: Rect2 = wall.grow(-3)
+	arena.draw_rect(inner,Color("a69775"))
+	var y: float = inner.position.y
+	var course := 0
+	while y < inner.end.y:
+		var height: float = minf(37.0+float(course%3)*4.0,inner.end.y-y)
+		var block := Rect2(inner.position.x+2,y+1,inner.size.x-4,maxf(1,height-3))
+		var shade: float = float(course%4)*0.024
+		arena.draw_colored_polygon(_stone(block,3),Color(0.68+shade,0.62+shade,0.48+shade))
+		arena.draw_line(block.position+Vector2(3,2),Vector2(block.end.x-3,block.position.y+2),Color("e0cfaa"),2,true)
+		arena.draw_line(Vector2(block.end.x-2,block.position.y+4),block.end-Vector2(2,3),Color("827459"),2,true)
+		if course%3 == 1:
+			var crack := block.position+Vector2(block.size.x*0.58,3)
+			arena.draw_polyline(PackedVector2Array([crack,crack+Vector2(-5,11),crack+Vector2(1,19)]),Color("887959"),1.4,true)
+		if course%4 == 2:
+			arena.draw_line(block.position+Vector2(3,8),block.position+Vector2(3,20),Color("788151"),3,true)
+		y += height
+		course += 1
+	arena.draw_rect(wall,Color("544b3b"),false,1.5)
