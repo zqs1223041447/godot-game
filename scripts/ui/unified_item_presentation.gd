@@ -93,8 +93,9 @@ static func view(model: RefCounted, uid: String) -> Dictionary:
 				result.kind_label += " · 物品等级 %d" % int(item.payload.get("item_level",1))
 				base_stats=Gear.base_definition(str(item.payload.get("base_id",""))).get("stats",{}).duplicate(true)
 				for affix: Dictionary in item.payload.get("affixes",[]):
-					var family: Dictionary=Gear.affix_definition(str(affix.id))
-					result.affix_lines.append("%s +%d%s" % [str(family.get("label",family.get("name",""))),int(affix.value),"%" if family.get("unit")=="percent" else ""])
+					var display: Dictionary = Gear.affix_display(affix)
+					if bool(display.get("ok", false)):
+						result.affix_lines.append(str(display.line))
 			for stat: String in base_stats:
 				result.base_lines.append(LegacyText.describe_stats({stat:base_stats[stat]}))
 			if definition.has("weapon_profile"):
