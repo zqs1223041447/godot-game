@@ -84,6 +84,14 @@ func get_stats() -> Dictionary:
 	return _stats_cache.duplicate(true)
 
 
+func get_basic_cast() -> Dictionary:
+	_ensure_cache()
+	if _cast_cache.has("$basic"):return _cast_cache["$basic"].duplicate(true)
+	var result:Dictionary=Compiler.compile_basic(get_combat_snapshot())
+	if result.ok:_cast_cache["$basic"]=result.duplicate(true)
+	return result
+
+
 func get_combat_snapshot() -> Dictionary:
 	_ensure_cache()
 	if not _snapshot_cache.is_empty(): return _snapshot_cache.duplicate(true)
@@ -176,7 +184,7 @@ func _prepare_candidate(candidate: Dictionary) -> Dictionary:
 static func _stats_for(candidate: Dictionary) -> Dictionary:
 	var stats: Dictionary = Legacy.BASE_STATS.duplicate(true)
 	stats.additional_skill_slots = 0.0
-	for stat: String in ["strength","dexterity","intelligence","physical_increased","chaos_increased","melee_physical_increased","attack_physical_increased","accuracy_increased","evasion_increased","armour","armour_increased","cold_resistance","lightning_resistance","life_regen","life_regen_percent"]:
+	for stat: String in ["strength","dexterity","intelligence","physical_increased","chaos_increased","melee_physical_increased","attack_physical_increased","accuracy_increased","evasion_increased","armour","armour_increased","cold_resistance","lightning_resistance","life_regen","life_regen_percent","area_size_increased","spell_area_size_increased","melee_area_size_increased","projectile_speed_increased"]:
 		stats[stat] = 0.0
 	# Authored base ratings for this arena, not a copied monster/level table.
 	stats.accuracy = 100.0
@@ -538,7 +546,9 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	var loaded:=super.load_build(path)
 	if loaded and old_version>0 and old_version<Rules.VERSION:
 		migrated_from_legacy=true
-		if old_version==Rules.V18_VERSION:
+		if old_version==Rules.V19_VERSION:
+			migration_message="旧存档已原字节备份，源天赋范围与投射速度已接入；原物品、已分配节点和点数预算保持，不额外赠物。"
+		elif old_version==Rules.V18_VERSION:
 			migration_message="旧存档已原字节备份，C已预留给角色属性；原物品与技能组保持。"
 		elif old_version >= Rules.V16_VERSION:
 			migration_message="旧存档已原字节备份，药剂栏已启用并放入两瓶药剂；原物品、键位与天赋预算保持不变。"

@@ -9,6 +9,7 @@ const Patterns = preload("res://scripts/passives/source_stat_patterns.gd")
 const Jewels = preload("res://scripts/jewel_data.gd")
 const Locations = preload("res://scripts/items/item_location_rules.gd")
 const TALENT_KEYS := ["source_version","class_id","allocated","masteries","ascendancy","ascendancy_allocated","normal_points","ascendancy_points"]
+const SPATIAL_SAVE_VERSION:=20
 static var _contexts: Dictionary = {}
 static var _line_cache: Dictionary = {}
 static var _node_effect_cache: Dictionary = {}
@@ -56,7 +57,10 @@ static func analyze(candidate: Dictionary) -> Dictionary:
 	var level: Variant = candidate.get("progress",{}).get("level")
 	if not level is int or level < 1 or level > 1000: return _failure("成长等级无效")
 	var budget := mini(level+4,123)
-	var key := var_to_bytes([talents,sockets.rules,budget])
+	var version:Variant=candidate.get("version",SPATIAL_SAVE_VERSION)
+	if not version is int:return _failure("天赋保存版本无效")
+	var policy:int=19 if int(version)<SPATIAL_SAVE_VERSION else SPATIAL_SAVE_VERSION
+	var key := var_to_bytes([talents,sockets.rules,budget,policy])
 	if key == _analysis_key: return _analysis.duplicate(true)
 	var context := _context(talents.class_id,budget)
 	if context.is_empty(): return _failure("锁定源树不可用")
@@ -64,7 +68,7 @@ static func analyze(candidate: Dictionary) -> Dictionary:
 	if result.legal and result.remaining != talents.normal_points: return _failure("天赋已用与剩余点数不符合成长预算")
 	if result.legal:
 		for id: String in talents.allocated:
-			var execution := node_effect(id,int(talents.masteries.get(id,0)))
+			var execution := node_effect(id,int(talents.masteries.get(id,0)),policy)
 			if execution.status != "full": return _failure("此节点仍有未实现效果，不能分配：%s" % Data.node(id).name)
 	if result.legal:
 		_analysis_key = key
@@ -96,13 +100,16 @@ static func lines_for(id: String, mastery_effect: int = 0) -> Array:
 	return []
 
 
-static func line_effect(line: String) -> Dictionary:
-	if not _line_cache.has(line): _line_cache[line] = Patterns.parse_line(line)
-	return _line_cache[line].duplicate(true)
+static func line_effect(line: String, save_version:int=SPATIAL_SAVE_VERSION) -> Dictionary:
+	var policy:int=19 if save_version<SPATIAL_SAVE_VERSION else SPATIAL_SAVE_VERSION
+	var key:="%d:%s"%[policy,line]
+	if not _line_cache.has(key): _line_cache[key] = Patterns.parse_line(line,policy>=SPATIAL_SAVE_VERSION)
+	return _line_cache[key].duplicate(true)
 
 
-static func node_effect(id: String, mastery_effect: int = 0) -> Dictionary:
-	var key := "%s:%d" % [id,mastery_effect]
+static func node_effect(id: String, mastery_effect: int = 0, save_version:int=SPATIAL_SAVE_VERSION) -> Dictionary:
+	var policy:int=19 if save_version<SPATIAL_SAVE_VERSION else SPATIAL_SAVE_VERSION
+	var key := "%d:%s:%d" % [policy,id,mastery_effect]
 	if _node_effect_cache.has(key): return _node_effect_cache[key].duplicate(true)
 	var node := Data.node(id)
 	if node.is_empty(): return {"status":"unsupported","supported":[],"unsupported":["未知源节点"],"grants":[]}
@@ -110,7 +117,7 @@ static func node_effect(id: String, mastery_effect: int = 0) -> Dictionary:
 	var unsupported: Array = []
 	var grants: Array = []
 	for line: String in lines_for(id,mastery_effect):
-		var parsed := line_effect(line)
+		var parsed := line_effect(line,policy)
 		if parsed.supported:
 			supported.append(line)
 			grants.append_array(parsed.grants)
@@ -133,7 +140,7 @@ static func apply_stats(stats: Dictionary, candidate: Dictionary) -> Dictionary:
 	for attribute: String in ["strength","dexterity","intelligence"]:
 		result[attribute] = float(result.get(attribute,0.0)) + float(class_data.get("base_"+attribute.substr(0,3),0.0))
 	for id: String in candidate.talents.allocated:
-		var effect := node_effect(id,int(candidate.talents.masteries.get(id,0)))
+		var effect := node_effect(id,int(candidate.talents.masteries.get(id,0)),int(candidate.get("version",SPATIAL_SAVE_VERSION)))
 		for grant: Dictionary in effect.grants:
 			if grant.mode == "increased" and capacity_increased.has(grant.stat):
 				capacity_increased[grant.stat] += float(grant.value)
@@ -180,9 +187,9 @@ static func available(candidate: Dictionary) -> Array[String]:
 		if node.type == "mastery":
 			var supported_choice := false
 			for effect: int in node.mastery_effects:
-				if not candidate.talents.masteries.values().has(effect) and node_effect(id,effect).status == "full": supported_choice = true
+				if not candidate.talents.masteries.values().has(effect) and node_effect(id,effect,int(candidate.get("version",SPATIAL_SAVE_VERSION))).status == "full": supported_choice = true
 			if not supported_choice: continue
-		elif node_effect(id).status != "full": continue
+		elif node_effect(id,0,int(candidate.get("version",SPATIAL_SAVE_VERSION))).status != "full": continue
 		result.append(id)
 	result.sort()
 	return result

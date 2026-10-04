@@ -6,6 +6,7 @@ const Recipes = preload("res://scripts/combat/combat_data.gd")
 const Supports = preload("res://scripts/combat/support_registry.gd")
 const Extension = preload("res://scripts/combat/projectile_support_rules.gd")
 const Area = preload("res://scripts/combat/area_support_rules.gd")
+const Spatial = preload("res://scripts/combat/source_spatial_rules.gd")
 const BaseCompiler = preload("res://scripts/combat/damage_base_compiler.gd")
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
 const Weapon = preload("res://scripts/items/weapon_local_rules.gd")
@@ -124,6 +125,10 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 	if not is_finite(cooldown) or cooldown <= 0.0: return _failure("编译后的冷却无效")
 	if not is_finite(mana):
 		return _failure("编译后的魔力消耗无效")
+	var base_speed:float=float(skill.get("projectile_recipe",{}).get("speed",0.0))
+	var spatial:Dictionary=Spatial.apply(skill_id,recipe,compiled_snapshot,base_speed)
+	if not spatial.error.is_empty():return _failure(spatial.error)
+	recipe=spatial.recipe;compiled_snapshot=spatial.snapshot
 	var packets: Dictionary = _compile_packets(skill_id, compiled_snapshot, recipe)
 	if not skill_id in ["dash", "ward"] and packets.is_empty():
 		return _failure("命中伤害组装无效")
@@ -132,6 +137,20 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 	return {"ok": true, "error": "", "skill_id": skill_id,
 		"snapshot": compiled_snapshot, "mana": mana, "cooldown": cooldown,
 		"initial_count": initial_count, "recipe": recipe, "support_ids": canonical, "packets": packets}
+
+
+static func compile_basic(snapshot:Dictionary)->Dictionary:
+	var reason:=_snapshot_error(snapshot)
+	if not reason.is_empty():return _failure(reason)
+	var spatial:=Spatial.apply("basic",{"speed":640.0},snapshot,640.0)
+	if not spatial.error.is_empty():return _failure(spatial.error)
+	var frozen:Dictionary=spatial.snapshot
+	var packet:Dictionary=Recipes.event_packet(frozen,"basic","projectile")
+	var secondary:Dictionary=Recipes.secondary_packet(frozen,"basic")
+	if packet.is_empty() or secondary.is_empty():return _failure("普通攻击伤害组装无效")
+	frozen.compiled_skill_id="basic"
+	frozen.compiled_packets={"projectile":packet.duplicate(true),"secondary":secondary}
+	return {"ok":true,"error":"","skill_id":"basic","recipe":spatial.recipe,"snapshot":frozen,"packets":frozen.compiled_packets.duplicate(true)}
 
 
 static func _compile_packets(skill_id: String, snapshot: Dictionary, recipe: Dictionary) -> Dictionary:
@@ -183,6 +202,8 @@ static func _snapshot_error(snapshot: Dictionary) -> String:
 	# Reject re-entry instead of applying support more factors a second time.
 	if snapshot.has("initial_count") or snapshot.has("compiled_packets") or snapshot.has("compiled_skill_id"):
 		return "施放快照已编译；必须从基础构筑快照重新编译"
+	var spatial_error:=Spatial.error(snapshot)
+	if not spatial_error.is_empty():return spatial_error
 	if not snapshot.has_all(["base_damage", "modifiers", "effects", "projectile_count", "tornado_recipe", "explosion_recipe", "added_damage"]):
 		return "施放快照缺少必要字段"
 	if not _nonnegative(snapshot.base_damage) or not _integer(snapshot.projectile_count, -1000000, 1000000):

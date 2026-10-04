@@ -8,6 +8,7 @@ const Rules = preload("res://scripts/save/canonical_build_rules.gd")
 const Migration = preload("res://scripts/save/canonical_build_migration.gd")
 const PagedMigration = preload("res://scripts/save/paged_bag_migration.gd")
 const HotkeyMigration = preload("res://scripts/save/reserved_hotkey_migration.gd")
+const SpatialMigration = preload("res://scripts/save/source_spatial_migration.gd")
 const FlaskMigration = preload("res://scripts/save/flask_item_migration.gd")
 const ActiveMigration = preload("res://scripts/save/active_skill_migration.gd")
 const CurrencyMigration = preload("res://scripts/save/currency_item_migration.gd")
@@ -35,8 +36,9 @@ func _init() -> void:
 	_socket_ids = Rules.SourceTree.Data.standard_socket_ids()
 	var legacy_default: Dictionary = Migration.migrate(_io._snapshot())
 	var paged_default: Dictionary = PagedMigration.migrate_v14(legacy_default, _socket_ids)
-	_current = HotkeyMigration.migrate_v18(FlaskMigration.migrate_v17(ActiveMigration.migrate_v16(CurrencyMigration.migrate_v15(paged_default, _socket_ids), _talent_validator, _socket_ids),_talent_validator,_socket_ids),_talent_validator,_socket_ids)
-	assert(not _current.is_empty() and Rules.reason(_current).is_empty(), "The built-in canonical fixture must migrate to v19")
+	var source_v19:Dictionary = HotkeyMigration.migrate_v18(FlaskMigration.migrate_v17(ActiveMigration.migrate_v16(CurrencyMigration.migrate_v15(paged_default, _socket_ids), _talent_validator, _socket_ids),_talent_validator,_socket_ids),_talent_validator,_socket_ids)
+	_current=SpatialMigration.migrate_v19(source_v19,_talent_validator,_socket_ids)
+	assert(not _current.is_empty() and Rules.reason(_current).is_empty(), "The built-in canonical fixture must migrate to v20")
 	_current.migration_ledger.from_version = 0
 
 
@@ -101,42 +103,47 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	if old_version > Rules.VERSION: return _reject(path, "存档属于未来版本，已保护原文件")
 	var candidate: Dictionary = {}
 	if old_version < Rules.VERSION:
-		var source_v18:Dictionary={}
-		if old_version==Rules.V18_VERSION:
-			source_v18=Rules.decode_v18(raw)
+		var source_v19:Dictionary={}
+		if old_version==Rules.V19_VERSION:
+			source_v19=Rules.decode_v19(raw)
 		else:
-			var source_v17:Dictionary={}
-			if old_version==Rules.V17_VERSION:
-				source_v17=Rules.decode_v17(raw)
+			var source_v18:Dictionary={}
+			if old_version==Rules.V18_VERSION:
+				source_v18=Rules.decode_v18(raw)
 			else:
-				var source_v16: Dictionary = {}
-				if old_version == Rules.V16_VERSION:
-					source_v16 = Rules.decode_v16(raw)
+				var source_v17:Dictionary={}
+				if old_version==Rules.V17_VERSION:
+					source_v17=Rules.decode_v17(raw)
 				else:
-					var source_v14: Dictionary = {}
-					var source_v15: Dictionary = {}
-					if old_version == Rules.V14_VERSION:
-						source_v14 = Rules.decode_v14(raw)
-					elif old_version == Rules.V15_VERSION:
-						source_v15 = Rules.decode_v15(raw)
+					var source_v16: Dictionary = {}
+					if old_version == Rules.V16_VERSION:
+						source_v16 = Rules.decode_v16(raw)
 					else:
-						var legacy_v14: Dictionary = Migration.migrate(raw)
-						source_v14 = Rules.decode_v14(legacy_v14)
-					var valid_v15: Dictionary = {}
-					if old_version == Rules.V15_VERSION:
-						var v15_reason: String = Rules.reason_v15(source_v15, _talent_validator, _socket_ids)
-						if not v15_reason.is_empty(): return _reject(path, v15_reason)
-						valid_v15 = source_v15
-					else:
-						var v14_reason: String = Rules.reason_v14(source_v14, _talent_validator, _socket_ids)
-						if not v14_reason.is_empty(): return _reject(path, v14_reason)
-						valid_v15 = PagedMigration.migrate_v14(source_v14, _socket_ids)
-						var migrated_v15_reason: String = Rules.reason_v15(valid_v15, _talent_validator, _socket_ids)
-						if not migrated_v15_reason.is_empty(): return _reject(path, migrated_v15_reason)
-					source_v16 = CurrencyMigration.migrate_v15(valid_v15, _socket_ids)
-				source_v17 = ActiveMigration.migrate_v16(source_v16, _talent_validator, _socket_ids)
-			source_v18=FlaskMigration.migrate_v17(source_v17,_talent_validator,_socket_ids)
-		candidate=HotkeyMigration.migrate_v18(source_v18,_talent_validator,_socket_ids)
+						var source_v14: Dictionary = {}
+						var source_v15: Dictionary = {}
+						if old_version == Rules.V14_VERSION:
+							source_v14 = Rules.decode_v14(raw)
+						elif old_version == Rules.V15_VERSION:
+							source_v15 = Rules.decode_v15(raw)
+						else:
+							var legacy_v14: Dictionary = Migration.migrate(raw)
+							source_v14 = Rules.decode_v14(legacy_v14)
+						var valid_v15: Dictionary = {}
+						if old_version == Rules.V15_VERSION:
+							var v15_reason: String = Rules.reason_v15(source_v15, _talent_validator, _socket_ids)
+							if not v15_reason.is_empty(): return _reject(path, v15_reason)
+							valid_v15 = source_v15
+						else:
+							var v14_reason: String = Rules.reason_v14(source_v14, _talent_validator, _socket_ids)
+							if not v14_reason.is_empty(): return _reject(path, v14_reason)
+							valid_v15 = PagedMigration.migrate_v14(source_v14, _socket_ids)
+							var migrated_v15_reason: String = Rules.reason_v15(valid_v15, _talent_validator, _socket_ids)
+							if not migrated_v15_reason.is_empty(): return _reject(path, migrated_v15_reason)
+						source_v16 = CurrencyMigration.migrate_v15(valid_v15, _socket_ids)
+					source_v17 = ActiveMigration.migrate_v16(source_v16, _talent_validator, _socket_ids)
+				source_v18=FlaskMigration.migrate_v17(source_v17,_talent_validator,_socket_ids)
+			source_v19=HotkeyMigration.migrate_v18(source_v18,_talent_validator,_socket_ids)
+		candidate=SpatialMigration.migrate_v19(source_v19,_talent_validator,_socket_ids)
 	else:
 		candidate = Rules.decode(raw)
 	var reason: String = Rules.reason(candidate, _talent_validator, _socket_ids)

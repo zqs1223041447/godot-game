@@ -20,3 +20,7 @@
 *.blend binary
 # Migration fixtures retain exact released byte formatting for backup checks.
 tests/fixtures/v028_town/v18-*.json binary
+
+# Frozen v31/schema19 samples retain literal original newline bytes.
+tests/fixtures/v032_spatial/v19-*.json binary
+tests/fixtures/v032_spatial/*.bin binary

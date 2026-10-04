@@ -51,6 +51,15 @@ const COMPOUND_PATTERNS: Array[Dictionary] = [
 	{"expression":"^\\+([0-9]+) to Dexterity and Intelligence$","stats":["dexterity","intelligence"],"mode":"flat","scale":1.0},
 ]
 
+# Separate vocabulary gate: v19 and earlier use the unchanged lists above.
+const SPATIAL_PATTERNS:Array[Dictionary]=[
+	{"expression":"^([0-9]+(?:\\.[0-9]+)?)% increased Area of Effect$","stat":"area_size_increased","mode":"increased","scale":0.01},
+	{"expression":"^Spell Skills have ([0-9]+(?:\\.[0-9]+)?)% increased Area of Effect$","stat":"spell_area_size_increased","mode":"increased","scale":0.01},
+	{"expression":"^Melee Skills have ([0-9]+(?:\\.[0-9]+)?)% increased Area of Effect$","stat":"melee_area_size_increased","mode":"increased","scale":0.01},
+	{"expression":"^([0-9]+(?:\\.[0-9]+)?)% increased Projectile Speed$","stat":"projectile_speed_increased","mode":"increased","scale":0.01},
+	{"expression":"^([0-9]+(?:\\.[0-9]+)?)% reduced Projectile Speed$","stat":"projectile_speed_increased","mode":"increased","scale":-0.01},
+]
+
 const NEGATIVE_PATTERN: String = "^-([0-9]+(?:\\.[0-9]+)?)(?: to maximum (?:Life|Mana|Energy Shield)|% increased (?:Damage|Projectile Damage|Spell Damage|Fire Damage|Cold Damage|Lightning Damage|Elemental Damage|Area Damage|Attack Speed|Movement Speed|Mana Regeneration Rate|maximum Life|maximum Mana|maximum Energy Shield))$"
 const NO_EXACT_MATCH_REASON: String = "整行不匹配任何受支持的完整格式；未知 stat、附加词语、条件、武器限定、DoT、Minion 或标点变体均拒绝"
 static var _regex_cache: Dictionary = {}
@@ -64,7 +73,7 @@ static func _expression(pattern: String) -> RegEx:
 	return _regex_cache[pattern]
 
 
-static func parse_line(raw_line: Variant) -> Dictionary:
+static func parse_line(raw_line: Variant, allow_spatial:bool=true) -> Dictionary:
 	if not raw_line is String:
 		return _unsupported("输入必须是单行英文字符串")
 	var line: String = raw_line
@@ -83,7 +92,8 @@ static func parse_line(raw_line: Variant) -> Dictionary:
 		for stat: String in definition.stats: grants.append({"stat":stat,"value":value,"mode":definition.mode})
 		return {"supported":true,"grants":grants,"reason":""}
 
-	for definition: Dictionary in POSITIVE_PATTERNS:
+	var patterns:Array=POSITIVE_PATTERNS+SPATIAL_PATTERNS if allow_spatial else POSITIVE_PATTERNS
+	for definition: Dictionary in patterns:
 		var expression := _expression(str(definition.expression))
 		if expression == null:
 			return _unsupported("解析器模式配置无效")

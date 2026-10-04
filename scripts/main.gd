@@ -910,15 +910,10 @@ func _update_auto_attack() -> void:
 	if not manual and (not auto_fire or _nearest_enemy(player_pos).is_empty()):
 		return
 	player_facing = _aim_direction()
-	var snapshot: Dictionary = state.get_combat_snapshot()
-	var packet: Dictionary = Combat.event_packet(snapshot, "basic", "projectile")
-	var secondary: Dictionary = Combat.secondary_packet(snapshot, "basic")
-	if packet.is_empty() or secondary.is_empty():
+	var basic:Dictionary=state.get_basic_cast() if state.has_method("get_basic_cast") else Build.Compiler.compile_basic(state.get_combat_snapshot())
+	if not basic.ok:
 		return
-	# Basic attacks share typed assembly, while remaining outside support eligibility.
-	snapshot["compiled_skill_id"] = "basic"
-	snapshot["compiled_packets"] = {"projectile": packet.duplicate(true), "secondary": secondary}
-	if _shoot(player_pos, player_facing, packet, Color("75e5df"), 0, 0, 640.0, {"snapshot": snapshot}):
+	if _shoot(player_pos, player_facing, basic.packets.projectile, Color("75e5df"), 0, 0, float(basic.recipe.speed), {"snapshot": basic.snapshot}):
 		attack_timer = 1.0 / maxf(0.2, float(_stats.attack_speed))
 
 
