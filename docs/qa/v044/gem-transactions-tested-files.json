@@ -1,0 +1,27 @@
+{
+  "command": [
+    "godot",
+    "--headless",
+    "--path",
+    ".",
+    "--script",
+    "res://tests/normal_gem_trade_transactions_test.gd"
+  ],
+  "engine": "Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org",
+  "isolated_xdg_root": "/tmp/godot-m1-v044-gem-transactions.o3p6cna2",
+  "exit_code": 0,
+  "elapsed_seconds": 28.743,
+  "script_or_assertion_errors": false,
+  "input_files_unchanged_during_run": true,
+  "passed": true,
+  "sha256": {
+    "tests/normal_gem_trade_transactions_test.gd": "9ba17ca8d1fd8e10285a2a5f48d6ea9806b956941ef2523581752ecbfeb37be3",
+    "scripts/canonical_game_state.gd": "5e71baacfdae630cb5d90c8a641c2d534601f3542c671cd16e4a575c57b7122e",
+    "scripts/items/gem_trade_rules.gd": "f4a57e88dae94a8493977a3e50e7bfc4a35e39579a71776c4282a60c4cf18616",
+    "scripts/items/gem_catalog.gd": "7f5b53d11918d63193e4e737eb242f7d2603ccfa6e189afb2587856ada436266",
+    "scripts/items/currency_catalog.gd": "0be41da90e8bb8551f10a10371b95712c2f8a88551574a68c2fcac39c7972b74",
+    "scripts/save/canonical_build_store.gd": "39d6d71eb694603ca5ff4d9c9ac1220ead3ee8a48596a6b55de2d4974a9e46be",
+    "scripts/save/canonical_build_rules.gd": "ba49f91a9f1d552a585c68367fc14446647527b157c13d80534261d54b76430f"
+  },
+  "summary": "Normal gem trade transactions: 282 checks, 0 failures"
+}
