@@ -26,6 +26,10 @@ const Damage = preload("res://scripts/combat/damage_resolver.gd")
 const Defense = preload("res://scripts/mechanics/defense_rules.gd")
 const CriticalRuntime = preload("res://scripts/combat/critical_strike_runtime.gd")
 var critical_runtime = CriticalRuntime.new()
+const LeechRuntime = preload("res://scripts/combat/leech_runtime.gd")
+const LeechRules = preload("res://scripts/combat/leech_rules.gd")
+var leech_runtime = LeechRuntime.new()
+var _leech_caps: Dictionary = {"health": 0.0, "mana": 0.0}
 const AttackHit = preload("res://scripts/combat/attack_hit_rules.gd")
 const Projectiles = preload("res://scripts/combat/projectile_runtime.gd")
 const Monsters = preload("res://scripts/monsters/monster_catalog.gd")
@@ -197,6 +201,8 @@ func _on_build_changed() -> void:
 	health = minf(health, float(_stats.max_health))
 	mana = minf(mana, float(_stats.max_mana))
 	shield = minf(shield, float(_stats.max_shield))
+	_refresh_leech_caps()
+	_clear_full_leech()
 	if _ready_complete:
 		_progress_revision += 1
 		_progress_hud_dirty = true
@@ -293,7 +299,9 @@ func restart_run() -> void:
 	_sync_flasks(true)
 	run_revision += 1
 	critical_runtime.reset(rng.seed ^ run_revision)
+	leech_runtime.clear()
 	_stats = state.get_stats()
+	_refresh_leech_caps()
 	health = float(_stats.max_health)
 	mana = float(_stats.max_mana)
 	shield = float(_stats.max_shield)
@@ -355,6 +363,27 @@ func _sync_flasks(reset_run: bool=false) -> void:
 	if reset_run or owner!=_flask_owner_identity:flask_runtime.reset(owned)
 	else:flask_runtime.sync_owned(owned)
 	_flask_owner_identity=owner;_flask_synced_revision=revision
+
+
+func _refresh_leech_caps() -> void:
+	var profile: Dictionary = LeechRules.profile(_stats)
+	assert(profile.ok, "Validated build must provide a finite leech profile")
+	_leech_caps = {"health": float(profile.health.total_rate_cap), "mana": float(profile.mana.total_rate_cap)} if profile.ok else {"health": 0.0, "mana": 0.0}
+
+
+func _clear_full_leech() -> void:
+	if leech_runtime.is_empty(): return
+	leech_runtime.clear_full({"health": health, "mana": mana}, {"health": float(_stats.max_health), "mana": float(_stats.max_mana)})
+
+
+func _advance_leech(delta: float) -> void:
+	if leech_runtime.is_empty(): return
+	var recovered: Dictionary = leech_runtime.advance(delta, {"health": health, "mana": mana},
+		{"health": float(_stats.max_health), "mana": float(_stats.max_mana)}, _leech_caps)
+	if not recovered.ok: return
+	health = minf(float(_stats.max_health), health + float(recovered.health))
+	mana = minf(float(_stats.max_mana), mana + float(recovered.mana))
+	_clear_full_leech()
 
 func flask_statuses() -> Array[Dictionary]:
 	_sync_flasks()
@@ -472,6 +501,8 @@ func _tick(delta: float) -> void:
 	var flask_gain: Dictionary = flask_runtime.advance(delta,{"health":health,"mana":mana},{"health":float(_stats.max_health),"mana":float(_stats.max_mana)})
 	health = minf(float(_stats.max_health),health+float(flask_gain.health))
 	mana = minf(float(_stats.max_mana),mana+float(flask_gain.mana))
+	_clear_full_leech()
+	_advance_leech(delta)
 	if damage_delay <= 0.0:
 		shield = minf(float(_stats.max_shield), shield + float(_stats.get("shield_recharge_rate",_stats.shield_regen)) * shield_recovery_time)
 	_move_player(delta)
@@ -1030,6 +1061,7 @@ func _execute_compiled(compiled: Dictionary, group_id: String = "", main_uid: St
 			if emitted == 0:
 				critical_runtime.restore(critical_checkpoint)
 				mana += mana_cost
+				_clear_full_leech()
 				if group_id.is_empty(): cooldowns[id] = 0.0
 				hud.notify("场上投射物已满，本次龙卷未消耗法力或冷却")
 				return false
@@ -1168,6 +1200,11 @@ func _apply_damage_packet(enemy: Dictionary, packet: Dictionary, snapshot: Dicti
 		"projectile_id": provenance.get("projectile_id", 0), "cast_id": provenance.get("cast_id", 0),
 		"phase": provenance.get("phase", "direct"), "effect_id": provenance.get("effect_id", "")}
 	if not critical.is_empty():record.critical=critical.duplicate(true)
+	if snapshot.has("leech"):
+		var admitted: Dictionary = leech_runtime.admit(packet, snapshot, settlement,
+			{"health": health, "mana": mana}, {"health": float(_stats.max_health), "mana": float(_stats.max_mana)})
+		if admitted.ok and (float(admitted.health) > 0.0 or float(admitted.mana) > 0.0):
+			record.leech = {"health": admitted.health, "mana": admitted.mana}
 	damage_trace.append(record)
 	if damage_trace.size() > 32:
 		damage_trace.pop_front()
@@ -1259,6 +1296,7 @@ func _apply_enemy_settlement(enemy: Dictionary, settlement: Dictionary, color: C
 		if leveled:
 			health = minf(float(_stats.max_health), health + 25.0)
 			mana = float(_stats.max_mana)
+			_clear_full_leech()
 			hud.notify("升级！获得 1 点天赋 · 按 T 分配")
 			_add_ring(player_pos, 80.0, Color("e7c98d"), 0.7)
 			_add_text(player_pos + Vector2(0, -46), "LEVEL UP", Color("e7c98d"))
@@ -1388,6 +1426,7 @@ func hit_player_components(components: Variant, source_id: int = 0, delivery_tag
 	_add_text(player_pos + Vector2(0, -30), "−%d" % int(amount), Color("94dafa") if absorbed >= amount else Color("fa8c83"))
 	if health <= 0.0:
 		flask_runtime.clear_effects()
+		leech_runtime.clear()
 		alive = false
 		group_cooldowns.reset()
 		telegraphs.reset()
@@ -1407,6 +1446,7 @@ func _update_pickups(delta: float) -> void:
 		if distance < 23.0:
 			health = minf(float(_stats.max_health), health + 18.0)
 			mana = minf(float(_stats.max_mana), mana + 22.0)
+			_clear_full_leech()
 			pickup.life = -1.0
 			_add_text(player_pos + Vector2(0, -36), "+生命 / 魔力", Color("85dca5"))
 	pickups = pickups.filter(func(pickup: Dictionary) -> bool: return float(pickup.life) > 0.0)

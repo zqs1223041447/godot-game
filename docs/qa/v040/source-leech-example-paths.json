@@ -1,0 +1,194 @@
+{
+	"examples": [
+		{
+			"allocated": [
+				"50986",
+				"39725",
+				"63649",
+				"49806",
+				"6580",
+				"19711",
+				"20010",
+				"36704"
+			],
+			"class_id": 4,
+			"id": "attack_life_and_mana",
+			"masteries": {
+
+			},
+			"normal_points_at_verification_level": 116,
+			"points_spent": 7,
+			"required_level": 3,
+			"source_grants": {
+				"attack_life_leech": 0.004,
+				"attack_mana_leech": 0.004,
+				"life_leech_max_rate_increased": 0.0,
+				"life_leech_rate_increased": 0.0,
+				"mana_leech_max_rate_increased": 0.0,
+				"mana_leech_rate_increased": 0.0,
+				"physical_attack_life_leech": 0.0,
+				"physical_attack_mana_leech": 0.0
+			},
+			"source_node_targets": [
+				"36704"
+			],
+			"start_id": "50986",
+			"verification_level": 119
+		},
+		{
+			"allocated": [
+				"50986",
+				"39725",
+				"63649",
+				"49806",
+				"6580",
+				"19711",
+				"20010",
+				"36704",
+				"9171",
+				"39530",
+				"54872",
+				"1382"
+			],
+			"class_id": 4,
+			"id": "dual_rates_and_caps",
+			"masteries": {
+
+			},
+			"normal_points_at_verification_level": 112,
+			"points_spent": 11,
+			"required_level": 7,
+			"source_grants": {
+				"attack_life_leech": 0.014,
+				"attack_mana_leech": 0.014,
+				"life_leech_max_rate_increased": 0.4,
+				"life_leech_rate_increased": 0.6,
+				"mana_leech_max_rate_increased": 0.4,
+				"mana_leech_rate_increased": 0.6,
+				"physical_attack_life_leech": 0.0,
+				"physical_attack_mana_leech": 0.0
+			},
+			"source_node_targets": [
+				"39530",
+				"1382"
+			],
+			"start_id": "50986",
+			"verification_level": 119
+		},
+		{
+			"allocated": [
+				"50986",
+				"47389",
+				"42911",
+				"40867",
+				"476",
+				"24865",
+				"6741",
+				"14056",
+				"34400",
+				"24914",
+				"61262",
+				"37800",
+				"35507",
+				"22356"
+			],
+			"class_id": 4,
+			"id": "physical_life_rate_and_cap",
+			"masteries": {
+
+			},
+			"normal_points_at_verification_level": 110,
+			"points_spent": 13,
+			"required_level": 9,
+			"source_grants": {
+				"attack_life_leech": 0.0,
+				"attack_mana_leech": 0.0,
+				"life_leech_max_rate_increased": 0.4,
+				"life_leech_rate_increased": 1.6,
+				"mana_leech_max_rate_increased": 0.0,
+				"mana_leech_rate_increased": 0.0,
+				"physical_attack_life_leech": 0.006,
+				"physical_attack_mana_leech": 0.0
+			},
+			"source_node_targets": [
+				"22356"
+			],
+			"start_id": "50986",
+			"verification_level": 119
+		},
+		{
+			"allocated": [
+				"50986",
+				"39725",
+				"63649",
+				"49806",
+				"6580",
+				"19711",
+				"20010",
+				"36704",
+				"9171",
+				"39530",
+				"54872",
+				"1382",
+				"47389",
+				"42911",
+				"40867",
+				"476",
+				"24865",
+				"6741",
+				"14056",
+				"34400",
+				"24914",
+				"61262",
+				"37800",
+				"35507",
+				"22356"
+			],
+			"class_id": 4,
+			"id": "dual_plus_physical_rates_and_caps",
+			"masteries": {
+
+			},
+			"normal_points_at_verification_level": 99,
+			"points_spent": 24,
+			"required_level": 20,
+			"source_grants": {
+				"attack_life_leech": 0.014,
+				"attack_mana_leech": 0.014,
+				"life_leech_max_rate_increased": 0.8,
+				"life_leech_rate_increased": 2.2,
+				"mana_leech_max_rate_increased": 0.4,
+				"mana_leech_rate_increased": 0.6,
+				"physical_attack_life_leech": 0.006,
+				"physical_attack_mana_leech": 0.0
+			},
+			"source_node_targets": [
+				"39530",
+				"1382",
+				"22356"
+			],
+			"start_id": "50986",
+			"verification_level": 119
+		}
+	],
+	"new_mastery": {
+		"effect_id": 15133,
+		"full_entrances": [
+			"35038",
+			"48411",
+			"53828",
+			"56128"
+		],
+		"reachable_entrances": [],
+		"reason": "Each entrance requires an unsupported wand-scoped notable"
+	},
+	"physical_mana_source": {
+		"allocatable": false,
+		"blocked_by": "25% increased Cost Efficiency of Attacks",
+		"id": "27422",
+		"status": "partial"
+	},
+	"schema": 25,
+	"source_sha256": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+	"source_version": "3.29.1"
+}
