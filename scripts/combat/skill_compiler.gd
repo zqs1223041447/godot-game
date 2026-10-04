@@ -6,6 +6,7 @@ const Recipes = preload("res://scripts/combat/combat_data.gd")
 const Supports = preload("res://scripts/combat/support_registry.gd")
 const Extension = preload("res://scripts/combat/projectile_support_rules.gd")
 const Area = preload("res://scripts/combat/area_support_rules.gd")
+const ResourceCost=preload("res://scripts/combat/source_resource_rules.gd")
 const Spatial = preload("res://scripts/combat/source_spatial_rules.gd")
 const BaseCompiler = preload("res://scripts/combat/damage_base_compiler.gd")
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
@@ -125,6 +126,9 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 	if not is_finite(cooldown) or cooldown <= 0.0: return _failure("编译后的冷却无效")
 	if not is_finite(mana):
 		return _failure("编译后的魔力消耗无效")
+	var resource:Dictionary=ResourceCost.apply(mana,compiled_snapshot)
+	if not resource.ok:return _failure(resource.error)
+	mana=resource.mana
 	var base_speed:float=float(skill.get("projectile_recipe",{}).get("speed",0.0))
 	var spatial:Dictionary=Spatial.apply(skill_id,recipe,compiled_snapshot,base_speed)
 	if not spatial.error.is_empty():return _failure(spatial.error)
@@ -134,9 +138,11 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 		return _failure("命中伤害组装无效")
 	compiled_snapshot.compiled_skill_id = skill_id
 	compiled_snapshot.compiled_packets = packets.duplicate(true)
-	return {"ok": true, "error": "", "skill_id": skill_id,
+	var result:Dictionary={"ok": true, "error": "", "skill_id": skill_id,
 		"snapshot": compiled_snapshot, "mana": mana, "cooldown": cooldown,
 		"initial_count": initial_count, "recipe": recipe, "support_ids": canonical, "packets": packets}
+	if not resource.factors.is_empty():result.cost_factors=resource.factors
+	return result
 
 
 static func compile_basic(snapshot:Dictionary)->Dictionary:
@@ -204,6 +210,8 @@ static func _snapshot_error(snapshot: Dictionary) -> String:
 		return "施放快照已编译；必须从基础构筑快照重新编译"
 	var spatial_error:=Spatial.error(snapshot)
 	if not spatial_error.is_empty():return spatial_error
+	var resource_error:String=ResourceCost.error(snapshot)
+	if not resource_error.is_empty():return resource_error
 	if not snapshot.has_all(["base_damage", "modifiers", "effects", "projectile_count", "tornado_recipe", "explosion_recipe", "added_damage"]):
 		return "施放快照缺少必要字段"
 	if not _nonnegative(snapshot.base_damage) or not _integer(snapshot.projectile_count, -1000000, 1000000):

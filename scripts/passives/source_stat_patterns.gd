@@ -65,6 +65,11 @@ const RECHARGE_PATTERNS:Array[Dictionary]=[
 	{"expression":"^([0-9]+(?:\\.[0-9]+)?)% faster start of Energy Shield Recharge$","stat":"shield_recharge_start_faster","mode":"increased","scale":0.01},
 ]
 
+const RESOURCE_PATTERNS:Array[Dictionary]=[
+	{"expression":"^([0-9]+(?:\\.[0-9]+)?)% increased Mana Cost Efficiency$","stat":"mana_cost_efficiency_increased","mode":"increased","scale":0.01},
+	{"expression":"^([0-9]+(?:\\.[0-9]+)?)% increased Mana Cost of Skills$","stat":"mana_cost_increased","mode":"increased","scale":0.01},
+]
+
 const NEGATIVE_PATTERN: String = "^-([0-9]+(?:\\.[0-9]+)?)(?: to maximum (?:Life|Mana|Energy Shield)|% increased (?:Damage|Projectile Damage|Spell Damage|Fire Damage|Cold Damage|Lightning Damage|Elemental Damage|Area Damage|Attack Speed|Movement Speed|Mana Regeneration Rate|maximum Life|maximum Mana|maximum Energy Shield))$"
 const NO_EXACT_MATCH_REASON: String = "整行不匹配任何受支持的完整格式；未知 stat、附加词语、条件、武器限定、DoT、Minion 或标点变体均拒绝"
 static var _regex_cache: Dictionary = {}
@@ -78,7 +83,7 @@ static func _expression(pattern: String) -> RegEx:
 	return _regex_cache[pattern]
 
 
-static func parse_line(raw_line: Variant, allow_spatial:bool=true,allow_recharge:bool=true) -> Dictionary:
+static func parse_line(raw_line: Variant, allow_spatial:bool=true,allow_recharge:bool=true,allow_resource:bool=true) -> Dictionary:
 	if not raw_line is String:
 		return _unsupported("输入必须是单行英文字符串")
 	var line: String = raw_line
@@ -99,6 +104,7 @@ static func parse_line(raw_line: Variant, allow_spatial:bool=true,allow_recharge
 
 	var patterns:Array=POSITIVE_PATTERNS+SPATIAL_PATTERNS if allow_spatial else POSITIVE_PATTERNS
 	if allow_spatial and allow_recharge:patterns=patterns+RECHARGE_PATTERNS
+	if allow_spatial and allow_recharge and allow_resource:patterns=patterns+RESOURCE_PATTERNS
 	for definition: Dictionary in patterns:
 		var expression := _expression(str(definition.expression))
 		if expression == null:

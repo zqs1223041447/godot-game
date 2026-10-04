@@ -4,6 +4,7 @@ extends RefCounted
 const Data = preload("res://scripts/game_data.gd")
 const BaseCompiler = preload("res://scripts/combat/damage_base_compiler.gd")
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
+const ResourceCost=preload("res://scripts/combat/source_resource_rules.gd")
 const Spatial = preload("res://scripts/combat/source_spatial_rules.gd")
 const TORNADO: Dictionary = {
 	"parent_count": 3, "child_count": 3, "spread": 0.16,
@@ -53,6 +54,8 @@ static func snapshot(stats: Dictionary, effects: Array) -> Dictionary:
 		value.added_damage_sources = stats.added_damage_sources.duplicate(true) if stats.added_damage_sources is Array else stats.added_damage_sources
 	var spatial:Dictionary=Spatial.from_stats(stats)
 	if not spatial.is_empty():value.spatial_modifiers=spatial
+	var resources:Dictionary=ResourceCost.from_stats(stats)
+	if not resources.is_empty():value.resource_modifiers=resources
 	return value
 
 
