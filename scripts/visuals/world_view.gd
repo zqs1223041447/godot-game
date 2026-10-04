@@ -29,6 +29,7 @@ static func setup_camera(owner: Node2D, bounds: Rect2 = WORLD_ARENA) -> Camera2D
 	return camera
 
 static func zoom_for(arena: Node2D) -> float:
+	if arena.has_method("visual_camera_zoom"):return float(arena.visual_camera_zoom())
 	var camera: Camera2D=arena.get_node_or_null("WorldCamera") as Camera2D
 	return camera.zoom.x if camera!=null else 1.0
 

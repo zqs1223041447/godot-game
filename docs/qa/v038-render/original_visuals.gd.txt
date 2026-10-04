@@ -1,4 +1,3 @@
-class_name ArenaVisuals
 extends RefCounted
 ## Original scalable vector artwork. This layer only reads the simulation.
 const Monsters = preload("res://scripts/monsters/monster_catalog.gd")
@@ -6,7 +5,7 @@ const Settings = preload("res://scripts/visuals/visual_settings.gd")
 const CueRenderer = preload("res://scripts/visuals/combat_cue_renderer.gd")
 const EnvironmentArt = preload("res://scripts/visuals/fantasy_environment.gd")
 const Palette = preload("res://scripts/visuals/fantasy_palette.gd")
-const ActorArt = preload("res://scripts/visuals/fantasy_actors.gd")
+const ActorArt = preload("/workspace/scratch/a51485f153de/v038-render-validation/original_actors.gd")
 const View = preload("res://scripts/visuals/world_view.gd")
 const Markers = preload("res://scripts/visuals/world_markers.gd")
 const TelegraphArt = preload("res://scripts/visuals/telegraph_renderer.gd")
@@ -164,77 +163,3 @@ static func draw_ring(arena: Node2D, ring: Dictionary, preferences: Settings) ->
 		arena.draw_line(at-v*3,at+v*3,color,1.4,true)
 		if preferences.effects_level>0:
 			arena.draw_line(at,at+v.rotated(0.7)*3,color,1,true)
-
-static func draw_before_actors(arena:Node2D,preferences:Settings,include_environment:bool=true)->void:
-	var stamp: int = Time.get_ticks_usec() if diagnostic_profile_enabled else 0
-	if diagnostic_profile_enabled: diagnostic_frame_usec.clear()
-	if include_environment:
-		draw_arena(arena)
-	if not arena._ready_complete:
-		return
-	stamp = _diagnostic_mark("environment",stamp)
-	for pickup: Dictionary in arena.pickups:
-		var p: Vector2 = pickup.pos
-		shadow(arena,p+Vector2(0,7),10)
-		arena.draw_circle(p, 13, Color(0.36,0.8,0.55,0.1))
-		regular(arena,p,8,4,Color("37654e"),PI/4)
-		regular(arena,p,5,4,Color("a3e8ac"),PI/4)
-		arena.draw_line(p+Vector2(-3,0),p+Vector2(3,0),Color.WHITE,1.5,true)
-		arena.draw_line(p+Vector2(0,-3),p+Vector2(0,3),Color.WHITE,1.5,true)
-	stamp = _diagnostic_mark("pickups",stamp)
-	for ring: Dictionary in arena.rings:
-		draw_ring(arena,ring,preferences)
-	stamp = _diagnostic_mark("rings",stamp)
-	var cue_runtime: Variant = arena.get("visual_cues")
-	if cue_runtime != null:
-		CueRenderer.render(arena,cue_runtime.cues,preferences.effects_level,true)
-	stamp = _diagnostic_mark("cues_before",stamp)
-	if arena.has_method("telegraph_visual_states"):
-		TelegraphArt.draw(arena, arena.telegraph_visual_states(), preferences)
-	stamp = _diagnostic_mark("telegraphs",stamp)
-
-static func draw_after_actors(arena:Node2D,preferences:Settings)->void:
-	var stamp:int=Time.get_ticks_usec() if diagnostic_profile_enabled else 0
-	var cue_runtime:Variant=arena.get("visual_cues")
-	var ordered:Array=arena.enemies.duplicate()
-	ordered.sort_custom(func(a:Dictionary,b:Dictionary)->bool:return a.pos.y<b.pos.y)
-	var names:Dictionary=Markers.name_ids(arena,ordered,preferences)
-	for shot: Dictionary in arena.projectiles:
-		draw_projectile(arena,shot,preferences)
-	stamp = _diagnostic_mark("projectiles",stamp)
-	draw_player(arena,preferences)
-	stamp = _diagnostic_mark("player",stamp)
-	for enemy:Dictionary in ordered:
-		Markers.draw_enemy(arena,enemy,preferences,names.has(int(enemy.id)))
-	stamp = _diagnostic_mark("markers",stamp)
-	if cue_runtime != null:
-		CueRenderer.render(arena,cue_runtime.cues,preferences.effects_level,false)
-	stamp = _diagnostic_mark("cues_after",stamp)
-	if preferences.effects_level > 0:
-		var index: int = 0
-		for particle: Dictionary in arena.particles:
-			index += 1
-			if preferences.effects_level == 1 and index % 2 == 0:
-				continue
-			var color: Color = particle.color
-			color.a = float(particle.life)/float(particle.max_life)*0.8
-			var p: Vector2 = particle.pos
-			var velocity: Vector2 = particle.velocity
-			arena.draw_line(p-velocity.normalized()*4,p,color,maxf(1,float(particle.radius)*color.a),true)
-	stamp = _diagnostic_mark("particles",stamp)
-	if arena._font and preferences.damage_numbers:
-		for entry: Dictionary in arena.floating_text:
-			var color: Color = entry.color
-			color.a = minf(1,float(entry.life)*2)
-			var p: Vector2 = entry.pos
-			var zoom:float=View.zoom_for(arena)
-			arena.draw_set_transform(p,0,Vector2.ONE/zoom)
-			p=Vector2(0,-6*(1-zoom))
-			var font_size: int = roundi(17*preferences.font_scale)
-			var width: float = arena._font.get_string_size(str(entry.text),HORIZONTAL_ALIGNMENT_LEFT,-1,font_size).x
-			p.x -= width*0.5
-			arena.draw_string_outline(arena._font,p,str(entry.text),HORIZONTAL_ALIGNMENT_LEFT,-1,font_size,4,Color(0.02,0.03,0.03,color.a))
-			arena.draw_string(arena._font,p,str(entry.text),HORIZONTAL_ALIGNMENT_LEFT,-1,font_size,color)
-			arena.draw_set_transform(Vector2.ZERO)
-
-	_diagnostic_mark("damage_text",stamp)

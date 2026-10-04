@@ -1,0 +1,69 @@
+extends SceneTree
+const Original=preload("/workspace/scratch/a51485f153de/v038-render-validation/original_visuals.gd")
+const Current=preload("res://scripts/visuals/arena_visuals.gd")
+class Arena extends "res://scripts/main.gd":
+	var reference:=false
+	func _draw()->void:
+		if not reference:super._draw();return
+		var t:=Time.get_ticks_usec();_world_draw_count+=1
+		retained_actors.hide();foreground_layer.hide();Original.draw_scene(self,visual_settings,static_environment==null)
+		_render_measured_frame=Engine.get_process_frames();_render_prefix_usec=Time.get_ticks_usec()-t
+var arena:Arena
+var out:String
+func hash_value(value:Variant)->String:
+	var h:=HashingContext.new();h.start(HashingContext.HASH_SHA256);h.update(value if value is PackedByteArray else var_to_bytes(value));return h.finish().hex_encode()
+func state()->String:return hash_value([arena.enemies,arena.projectiles,arena.player_pos,arena.player_facing,arena.health,arena.shield,arena.mana,arena.elapsed,arena.state.snapshot(),arena.rng.state,arena.group_cooldowns.snapshot(),arena.monster_runtime.roots,arena.monster_runtime.queue,arena.event_counts,arena.combat_trace,arena.damage_trace,arena.flask_runtime.snapshot()])
+func _initialize()->void:call_deferred("run")
+func fresh()->void:
+	arena=Arena.new();root.add_child(arena);arena.set_process(false);arena.hud.set_process(false);arena.rng.seed=380038;arena.start_density_demo()
+	while arena.hud.is_blocking():arena.hud.close_panel()
+	arena.invulnerable=100000.0;arena.auto_fire=false
+	for i:int in range(3):await process_frame
+func render(reference:bool,frames:int)->Image:
+	arena.reference=reference;arena.use_retained_actors=not reference
+	for i:int in range(frames):arena.queue_redraw();await process_frame;await RenderingServer.frame_post_draw
+	return root.get_texture().get_image()
+func run()->void:
+	out=OS.get_environment("RENDER_BATCH_OUT")
+	if out.is_empty() or DisplayServer.get_name()=="headless" or not OS.get_environment("XDG_DATA_HOME").begins_with("/workspace/scratch/a51485f153de/v023-profile-users/v038-render-final"):quit(78);return
+	root.size=Vector2i(1280,720);root.title="All-family retained draw validation";Current.diagnostic_profile_enabled=true
+	await fresh();arena.enemies.clear();var ids:Array=arena.Monsters.TEMPLATES.keys();ids.sort()
+	for id:String in ids:
+		for rarity:String in (["boss"] if id=="rift_warden" else ["normal","rare"]):
+			var index:int=arena.enemies.size();var position:=arena.ARENA.position+Vector2(120+(index%7)*245,120+int(index/7)*180)
+			var enemy:Dictionary=arena.monster_runtime.create_root(id,5,position,"map_boss" if rarity=="boss" else "demo",rarity,[],false);enemy.spawn=0.0;arena.enemies.append(enemy)
+	var positions:Array=[];var radii:Array=[]
+	for enemy:Dictionary in arena.enemies:positions.append(enemy.pos);radii.append(enemy.radius)
+	var cases:Array=[];var state_failures:=0
+	for pose:int in range(8):
+		arena.elapsed=pose*0.137;arena.visual_settings.motion=pose!=3
+		var camera:Camera2D=arena.get_node("WorldCamera");camera.zoom=Vector2.ONE*(0.8 if pose==5 else 0.4 if pose==6 else 0.65);camera.force_update_scroll()
+		for i:int in range(arena.enemies.size()):
+			var enemy:Dictionary=arena.enemies[i];enemy.pos=Vector2(positions[i])+Vector2(pose*0.119,pose*0.071);enemy.flash=0.1 if pose%3==1 else 0.0;enemy.health=enemy.max_health*(0.6 if i%3==0 else 1.0)
+		if pose>=4:
+			for i:int in range(4):arena.enemies[i].pos=arena.player_pos+Vector2(i*6-8,i*3)
+			arena.projectiles.clear();var cast:Dictionary=arena.state.get_skill_cast("bolt")
+			for i:int in range(3):arena.projectiles.append(arena.projectile_runtime.make_projectile(arena.player_pos+Vector2(i*6,0),Vector2.RIGHT.rotated(i),cast.recipe,cast.packets.projectile,cast.snapshot,arena.projectile_runtime.new_cast(),Color.WHITE))
+		var before:=state();var old:Image=await render(true,3);var after:Image=await render(false,3);var equal_state:bool=state()==before
+		if not equal_state:state_failures+=1
+		old.save_png(out.path_join("pose-%d-original.png"%pose));after.save_png(out.path_join("pose-%d-retained.png"%pose))
+		cases.append({"pose":pose,"same_rgba":old.get_data()==after.get_data(),"same_state":equal_state,"radius_min":radii.min(),"radius_max":radii.max(),"actors":arena.enemies.size(),"original_sha":hash_value(old.get_data()),"retained_sha":hash_value(after.get_data())})
+	# Rendering owns no dead identity after the real demo death and cleanup path.
+	var dead_id:int=arena.enemies[0].id;arena._damage_enemy(arena.enemies[0],float(arena.enemies[0].health)+float(arena.enemies[0].shield)+1.0,Color.WHITE);arena._update_spawning(0.0)
+	await render(false,3);var removed:bool=not arena.retained_actors._pieces.has(dead_id)
+	arena.restart_run();var cleared:bool=arena.retained_actors.diagnostics().actors==0
+	await render(false,3);var rebuilt:bool=arena.retained_actors.diagnostics().actors==arena.enemies.size()
+	arena.queue_free();await process_frame
+	var benchmarks:Array=[];var final_hashes:Array=[]
+	for reference:bool in [true,false]:
+		await fresh();arena.reference=reference;arena.use_retained_actors=not reference
+		for i:int in range(180):arena.tick(1.0/60.0)
+		await render(reference,5);var body_before:int=arena.retained_actors.diagnostics().body_draws;var samples:Array=[]
+		for i:int in range(60):
+			var tick_t:=Time.get_ticks_usec();arena.tick(1.0/60.0);var tick_us:=Time.get_ticks_usec()-tick_t
+			arena.queue_redraw();var t:=Time.get_ticks_usec();await process_frame;await RenderingServer.frame_post_draw
+			var info:Dictionary=arena.visual_submission_diagnostics();samples.append({"tick_us":tick_us,"draw_us":info.draw_usec,"wall_us":Time.get_ticks_usec()-t,"sync_us":info.sync_usec,"body_draws":info.body_draws,"draw_calls":Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME)})
+		final_hashes.append(state());benchmarks.append({"reference":reference,"samples":samples,"body_draws_during_60_ticks":arena.retained_actors.diagnostics().body_draws-body_before,"state_sha":state()})
+		arena.queue_free();await process_frame
+	var result={"base":"f074c2614540f0842964ced961b3430871adce57","cases":cases,"state_failures":state_failures,"death_removed":removed,"restart_cleared":cleared,"restart_rebuilt":rebuilt,"moving_simulation_state_identical":final_hashes[0]==final_hashes[1],"benchmarks":benchmarks,"scope":"All actual families normal/rare and largest boss; native1280x720, zoom0.4/0.65/0.8, flash, motionoff, projectiles/player/marks overlap. Original frozen v37 art. Moving100 actors60ticks after180warm ticks. Approximate pixel equality measured separately; authoritative state requires exact hash."}
+	FileAccess.open(out.path_join("render-validation.json"),FileAccess.WRITE).store_string(JSON.stringify(result,"\t",true,true));print(JSON.stringify({"state_failures":state_failures,"moving_state_equal":result.moving_simulation_state_identical,"removed":removed,"cleared":cleared,"rebuilt":rebuilt}));quit(0 if state_failures==0 and removed and cleared and rebuilt and result.moving_simulation_state_identical else 1)

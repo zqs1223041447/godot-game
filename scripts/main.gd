@@ -6,6 +6,14 @@ const View = preload("res://scripts/visuals/world_view.gd")
 const SpatialTargets = preload("res://scripts/combat/spatial_target_index.gd")
 const VisualCueRuntime = preload("res://scripts/visuals/combat_cues.gd")
 const Visuals = preload("res://scripts/visuals/arena_visuals.gd")
+const RetainedActors = preload("res://scripts/visuals/retained_actor_layer.gd")
+const ForegroundLayer = preload("res://scripts/visuals/foreground_arena_layer.gd")
+var retained_actors: Node2D
+var foreground_layer: Node2D
+# Diagnostic reference path; runtime state and simulation do not consult it.
+var use_retained_actors: bool = true
+var _render_measured_frame := -1
+var _render_prefix_usec := 0
 const Presentation = preload("res://scripts/visuals/visual_settings.gd")
 const Build = preload("res://scripts/canonical_game_state.gd")
 const GroupCooldowns = preload("res://scripts/combat/skill_cooldown_ledger.gd")
@@ -133,6 +141,13 @@ func _ready() -> void:
 	static_environment.configure(ARENA, _font)
 	add_child(static_environment)
 	View.setup_camera(self, ARENA)
+	retained_actors = RetainedActors.new()
+	retained_actors.name = "RetainedActors"
+	add_child(retained_actors)
+	foreground_layer = ForegroundLayer.new()
+	foreground_layer.name = "ForegroundWorld"
+	foreground_layer.source = self
+	add_child(foreground_layer)
 	hud = Hud.new()
 	hud.name = "GameHUD"
 	add_child(hud)
@@ -295,6 +310,7 @@ func restart_run() -> void:
 	player_pos = ARENA.get_center()
 	player_facing = Vector2.RIGHT
 	enemies.clear()
+	if is_instance_valid(retained_actors): retained_actors.clear()
 	projectile_runtime.cancel_all(projectiles)
 	combat_trace.clear()
 	damage_trace.clear()
@@ -1412,8 +1428,32 @@ func _update_effects(delta: float) -> void:
 
 
 func _draw() -> void:
+	var began: int = Time.get_ticks_usec() if Visuals.diagnostic_profile_enabled else 0
 	_world_draw_count += 1
-	Visuals.draw_scene(self, visual_settings, static_environment == null)
+	if _ready_complete and is_instance_valid(retained_actors) and is_instance_valid(foreground_layer):
+		retained_actors.visible = use_retained_actors
+		foreground_layer.visible = use_retained_actors
+		if use_retained_actors:
+			retained_actors.sync(self)
+			foreground_layer.queue_redraw()
+			Visuals.draw_before_actors(self, visual_settings, static_environment == null)
+		else: Visuals.draw_scene(self, visual_settings, static_environment == null)
+	else: Visuals.draw_scene(self, visual_settings, static_environment == null)
+	if Visuals.diagnostic_profile_enabled:
+		_render_measured_frame = Engine.get_process_frames()
+		_render_prefix_usec = Time.get_ticks_usec() - began
+
+
+func visual_submission_diagnostics() -> Dictionary:
+	var result: Dictionary = retained_actors.diagnostics() if is_instance_valid(retained_actors) else {}
+	var frame: int = Engine.get_process_frames()
+	result["draw_usec"] = _render_prefix_usec if _render_measured_frame == frame else 0
+	if use_retained_actors:
+		result.draw_usec += int(result.get("current_draw_usec", 0))
+		if is_instance_valid(foreground_layer) and foreground_layer.measured_frame == frame:
+			result.draw_usec += int(foreground_layer.measured_usec)
+	result["retained"] = use_retained_actors
+	return result
 
 
 # Region flow owns only runtime state. Canonical item operations persist to the
