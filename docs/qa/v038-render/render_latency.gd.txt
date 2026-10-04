@@ -1,0 +1,13 @@
+extends "/workspace/scratch/a51485f153de/v038-render-validation/render_batch.gd"
+func run()->void:
+	out=OS.get_environment("RENDER_BATCH_OUT")
+	if out.is_empty() or DisplayServer.get_name()=="headless" or not OS.get_environment("XDG_DATA_HOME").begins_with("/workspace/scratch/a51485f153de/v023-profile-users/v038-render-final"):quit(78);return
+	root.size=Vector2i(1280,720);root.title="One-frame retained drawing check";await fresh()
+	var records:Array=[]
+	for pose:int in range(3):
+		arena.elapsed=0.173+pose*0.197
+		for enemy:Dictionary in arena.enemies:enemy.pos+=Vector2(0.231,0.179);enemy.flash=0.1 if pose==1 else 0.0
+		var before:String=state();var old:Image=await render(true,1);var current:Image=await render(false,1);var settled:Image=await render(false,2)
+		old.save_png(out.path_join("latency-%d-original.png"%pose));current.save_png(out.path_join("latency-%d-retained.png"%pose))
+		records.append({"pose":pose,"same_state":before==state(),"original_sha":hash_value(old.get_data()),"retained_sha":hash_value(current.get_data()),"frame_waits_per_capture":1,"one_frame_equals_three_frames":current.get_data()==settled.get_data()})
+	FileAccess.open(out.path_join("latency.json"),FileAccess.WRITE).store_string(JSON.stringify({"cases":records,"scope":"Exactly one process_frame+frame_post_draw after motion/flash and renderer toggle; no settling-frame allowance."},"\t",true,true));arena.queue_free();await process_frame;print("One-frame renderer check complete");quit()

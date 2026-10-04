@@ -1,0 +1,122 @@
+{
+  "game_version": "0.38.0",
+  "schema": 23,
+  "reports": [
+    {
+      "path": "docs/qa/v038-render/lifecycle-48.log.txt",
+      "checks": 48,
+      "sha256": "24612cb378c9b80eefb919fb64f999699b0e036b909e648b7f9704e28ab5e1ef",
+      "scope": "Retained identity, exact invalidation and readonly cleanup"
+    },
+    {
+      "path": "docs/qa/v038-projectiles/equivalence-final.log",
+      "checks": 3126,
+      "sha256": "d12bcedd2716c3cd8d6f792f139a142aeb341b332e54300b0c7d46ea3a7d0da9",
+      "scope": "Unchanged independent projectile branch test evidence"
+    },
+    {
+      "path": "docs/qa/v038-projectiles/combat_pipeline_test.log",
+      "checks": 305,
+      "sha256": "d145420ace1c51cc73da1378b1acf1a0a842e68700edd2a5a0ee648cd78530a8",
+      "scope": "Unchanged independent projectile branch test evidence"
+    },
+    {
+      "path": "docs/qa/v038-projectiles/projectile_schedule_test.log",
+      "checks": 4725,
+      "sha256": "57ac7af279eef2a65dd133e50e65005ea73378b33ea1e8c28663546efc0098a2",
+      "scope": "Unchanged independent projectile branch test evidence"
+    },
+    {
+      "path": "docs/qa/v038-projectiles/spatial_collision_test.log",
+      "checks": 5357,
+      "sha256": "7aa0347a66b0cf3208b737d142e34fe91230fdffc5ccf2fa66154a0869b0b4cc",
+      "scope": "Unchanged independent projectile branch test evidence"
+    },
+    {
+      "path": "docs/qa/v038-projectiles/terrain_projectile_test.log",
+      "checks": 35,
+      "sha256": "2a9e39716cf9f95293cb23bc12414d6a23f4a5b3c51c50817deb824b8747e58a",
+      "scope": "Unchanged independent projectile branch test evidence"
+    },
+    {
+      "path": "docs/qa/v038-rewards/equivalence-optimized.log",
+      "checks": 2146,
+      "sha256": "b1352671862c8ade7d4b145a30cce5dbdd99a54ab3f3502b16b300c1a658cd62",
+      "scope": "Unchanged independent reward branch test evidence"
+    },
+    {
+      "path": "docs/qa/v038-rewards/unified_item_catalog_test.log",
+      "checks": 145,
+      "sha256": "a22bed8dc3af06701d4d74f0f8be4950b2cdae133fad211530aa94da25e41e0a",
+      "scope": "Unchanged independent reward branch test evidence"
+    },
+    {
+      "path": "docs/qa/v038-rewards/footprint_metadata_test.log",
+      "checks": 5245,
+      "sha256": "f63448fe0fa29f9126f2aab9191cbadda2bf6c3b46d4206e016f9b4e7512afd1",
+      "scope": "Unchanged independent reward branch test evidence"
+    },
+    {
+      "path": "docs/qa/v038-rewards/canonical_game_state_test.log",
+      "checks": 27,
+      "sha256": "067006daf7fc30ed210b77b5c4ac012f14f6c084ce6c0c7e0402205b3bf3030b",
+      "scope": "Unchanged independent reward branch test evidence"
+    },
+    {
+      "path": "docs/qa/v038-rewards/flask_reward_boundaries_test.log",
+      "checks": 25,
+      "sha256": "4e2ac1a1d578679fd48ea19d43cf34687ed8a43d4cf98f71566e8e1eba34f9dd",
+      "scope": "Unchanged independent reward branch test evidence"
+    },
+    {
+      "path": "docs/qa/v038-integrated/comparison-92.log.txt",
+      "checks": 92,
+      "sha256": "0cfe7f1a332d3add63c9c94b50ecdad2ef2c9ad251d4909a000c5069fa4f8f01",
+      "scope": "Integrated90tick full state fingerprints and actual saved bytes against frozen v37"
+    }
+  ],
+  "total_checks": 21276,
+  "report_count": 12,
+  "logs": {
+    "docs/qa/v038/v038-font-check.log.txt": "a90d44e9d72c15a96b802c738894f2239403b8a88eee9a9c4bf010367ab7bc9f",
+    "docs/qa/v038/v038-reference-export.log.txt": "51e3b0bc619efba5c710e1863eedea0402e6700d8c973b9ecb758418906e7297",
+    "docs/qa/v038/v038-reference-html.log.txt": "f3f7770bb73bfd6d1102f60d3ae1d79b3e5f9e655482bf5fac94985daf258538",
+    "docs/qa/v038/v038-reference-links.log.txt": "95a76af2b0f817ae780e477e8177c462e53a65f3abbb23405603b8023e463c65",
+    "docs/qa/v038-render/latency.log.txt": "b9f30beb6b9f6b933fafeb1342c3f0c63524ac206a2be714355a11a0dd634589",
+    "docs/qa/v038-render/lifecycle-48.log.txt": "24612cb378c9b80eefb919fb64f999699b0e036b909e648b7f9704e28ab5e1ef",
+    "docs/qa/v038-render/run.log.txt": "4432c4eafba026b88d2833a422f380feee385d6300b451d042e47975b3e7dfa3",
+    "docs/qa/v038-projectiles/combat_pipeline_test.log": "d145420ace1c51cc73da1378b1acf1a0a842e68700edd2a5a0ee648cd78530a8",
+    "docs/qa/v038-projectiles/equivalence-final.log": "d12bcedd2716c3cd8d6f792f139a142aeb341b332e54300b0c7d46ea3a7d0da9",
+    "docs/qa/v038-projectiles/equivalence-first.log": "b2e3b53bbf719d6e0b30947bce9fdae7c564216f593ede9d219397f896626223",
+    "docs/qa/v038-projectiles/equivalence-second.log": "a44db4ed6db9c4f224da4dd756548a7695f7a801542187023336d5ec922a0a57",
+    "docs/qa/v038-projectiles/profile-baseline.log": "c5177e4d351d65b8e12b83693a407775ca0b291f46557e725e448dbc528bf7e9",
+    "docs/qa/v038-projectiles/profile-reproduction.log": "56f2deb54e327e13a072409074c41086d4f6621274711125b51cdac03c1a54bc",
+    "docs/qa/v038-projectiles/projectile_schedule_test.log": "57ac7af279eef2a65dd133e50e65005ea73378b33ea1e8c28663546efc0098a2",
+    "docs/qa/v038-projectiles/spatial_collision_test.log": "7aa0347a66b0cf3208b737d142e34fe91230fdffc5ccf2fa66154a0869b0b4cc",
+    "docs/qa/v038-projectiles/terrain_projectile_test.log": "2a9e39716cf9f95293cb23bc12414d6a23f4a5b3c51c50817deb824b8747e58a",
+    "docs/qa/v038-rewards/canonical_build_store_baseline.log": "13f1207b95004b47ca23d145dc7856ee300eda678bca6445209a0775823214d6",
+    "docs/qa/v038-rewards/canonical_build_store_test.log": "13f1207b95004b47ca23d145dc7856ee300eda678bca6445209a0775823214d6",
+    "docs/qa/v038-rewards/canonical_game_state_test.log": "067006daf7fc30ed210b77b5c4ac012f14f6c084ce6c0c7e0402205b3bf3030b",
+    "docs/qa/v038-rewards/equivalence-baseline.log": "8df975eabb3bea01952e2a63e7ae5f98e3b05dd8c912e739ada899ec10b25c3b",
+    "docs/qa/v038-rewards/equivalence-optimized.log": "b1352671862c8ade7d4b145a30cce5dbdd99a54ab3f3502b16b300c1a658cd62",
+    "docs/qa/v038-rewards/flask_reward_boundaries_test.log": "4e2ac1a1d578679fd48ea19d43cf34687ed8a43d4cf98f71566e8e1eba34f9dd",
+    "docs/qa/v038-rewards/footprint_metadata_test.log": "f63448fe0fa29f9126f2aab9191cbadda2bf6c3b46d4206e016f9b4e7512afd1",
+    "docs/qa/v038-rewards/unified_item_catalog_test.log": "a22bed8dc3af06701d4d74f0f8be4950b2cdae133fad211530aa94da25e41e0a",
+    "docs/qa/v038-integrated/comparison-92.log.txt": "0cfe7f1a332d3add63c9c94b50ecdad2ef2c9ad251d4909a000c5069fa4f8f01",
+    "docs/qa/v038-integrated/integrated.log.txt": "d5dddb5398f798bb29c40f3dd88ad2c38d00209e78b11382f60ba7ea28588480",
+    "docs/qa/v038-integrated/original.log.txt": "d5dddb5398f798bb29c40f3dd88ad2c38d00209e78b11382f60ba7ea28588480"
+  },
+  "font_sha256": "b81b1391853d4c92e8833f9c29356087320cf36b5c981d6c91850b9656ede8bf",
+  "mapped_codepoints": 1035,
+  "base_commit": "f074c2614540f0842964ced961b3430871adce57",
+  "no_600s_or_full_retest": true,
+  "reference_semantics_unchanged_except_version": true,
+  "reused_failed_historical_test": {
+    "path": "docs/qa/v038-rewards/canonical_build_store_test.log",
+    "not_counted_as_passed": true,
+    "reason": "Unchanged VERSION18 assertion also fails in frozen v37 while actual schema23"
+  },
+  "visual_equality": "Approximate; rare AA/non-AA point sampling differences under node transform; strict authoritative state and same first/third frame",
+  "reuse": "Source-only actor lifecycle48; root-reviewed native representative images and motion; independent projectile13548 and reward7588 input changes disjoint; integrated92 after both merged. No repeat of historical or independent tests.",
+  "production_input_count": 394
+}

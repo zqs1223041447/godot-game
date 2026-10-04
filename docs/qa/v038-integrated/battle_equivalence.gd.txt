@@ -1,0 +1,29 @@
+extends SceneTree
+func hash_value(value:Variant)->String:
+	var h:=HashingContext.new();h.start(HashingContext.HASH_SHA256);h.update(value if value is PackedByteArray else var_to_bytes(value));return h.finish().hex_encode()
+func _initialize()->void:call_deferred("run")
+func run()->void:
+	var output:=OS.get_environment("V038_BATTLE_OUT")
+	if output.is_empty() or not OS.get_environment("XDG_DATA_HOME").begins_with("/tmp/godot-m1-v038-battle"):quit(78);return
+	var arena:Node2D=load("res://scenes/main.tscn").instantiate();root.add_child(arena);arena.set_process(false);arena.hud.set_process(false)
+	arena.build_save_path="user://comparison.json";arena.rng.seed=380038;arena.equip_tornado_example()
+	while arena.hud.is_blocking():arena.hud.close_panel()
+	arena.enemies.clear();arena.monster_runtime.reset();arena.telegraphs.reset();arena.projectiles.clear();arena.auto_fire=true;arena.spawn_timer=100000.0;arena.invulnerable=100000.0;arena.demo_mode=false;arena.wave=4
+	var types:Array[String]=["crawler","skitter","brute","ember_guard","frost_guard","storm_skitter","splitter","brood_host"]
+	for i:int in range(48):
+		var point:Vector2=arena.player_pos+Vector2(70+(i%8)*18,(int(i/8)-3)*17)
+		var enemy:Dictionary=arena.monster_runtime.create_root(types[i%types.size()],4,point,"ordinary","normal",[],true);enemy.spawn=0.0;arena._apply_source_actor_profile(enemy);arena.enemies.append(enemy)
+	var before_rng:int=arena.rng.state;var traces:Array=[]
+	for tick:int in range(90):
+		arena.tick(1.0/60.0)
+		if arena.group_cooldown_remaining("group_000001")<=0.0 and arena.mana>=18.0:arena.cast_group("group_000001")
+		if tick==45:
+			arena._begin_progress_transaction();var n:=0
+			for enemy:Dictionary in arena.enemies:
+				if enemy.health>0 and n<8:arena._damage_enemy(enemy,float(enemy.health)+float(enemy.shield)+1.0,Color.WHITE);n+=1
+			arena._end_progress_transaction()
+		traces.append(hash_value([arena.enemies,arena.projectiles,arena.health,arena.shield,arena.mana,arena.rng.state,arena.kills,arena.reward_kills,arena.event_counts,arena.combat_trace,arena.damage_trace,arena.attack_admission_trace,arena.state.snapshot(),arena.flask_runtime.snapshot()]))
+	var saved:bool=arena.save_build();var disk:=FileAccess.get_file_as_bytes("user://comparison.json")
+	var observable:Array=[arena.state.snapshot(),arena.enemies,arena.projectiles,arena.monster_runtime.roots,arena.monster_runtime.queue,arena.group_cooldowns.snapshot(),arena.telegraph_trace,arena.combat_trace,arena.damage_trace,arena.incoming_damage_trace,arena.event_counts,arena.rng.state,arena.flask_runtime.snapshot(),arena.particles,arena.rings,arena.floating_text,arena.pickups,arena.visual_cues.cues,arena.kills,arena.reward_kills,arena.total_damage,arena.total_shots,arena.health,arena.shield,arena.mana]
+	var result={"saved":saved,"initial_rng":before_rng,"final_rng":arena.rng.state,"ticks":90,"tick_sha":traces,"state_sha":hash_value(observable),"disk_sha":hash_value(disk),"kills":arena.kills,"reward_kills":arena.reward_kills,"items":arena.state.snapshot().items.size(),"events":arena.event_counts,"damage":arena.total_damage,"schema":arena.state.snapshot().version,"scope":"Real90tick mixed-family projectile/death/reward/store pipeline plus controlled8-root burst. Full authoritative observables and everytick exact hashes; no timing claims."}
+	FileAccess.open(output,FileAccess.WRITE).store_string(JSON.stringify(result,"\t",true,true));arena.queue_free();await process_frame;print(JSON.stringify(result));quit(0 if saved else 1)

@@ -1,0 +1,32 @@
+{
+  "cases": [
+    {
+      "frame_waits_per_capture": 1,
+      "original_sha": "95d313c7d533b9de81cb475937d8da71db8998ed283cfe452e040d839f9bbe5e",
+      "pose": 0,
+      "retained_sha": "21dfb9af22b672e5c782a641eb018d48d25d405b98b9f6f64cec6596e5235bb1",
+      "same_state": true,
+      "changed_pixels": 223,
+      "max_channel_delta": 3
+    },
+    {
+      "frame_waits_per_capture": 1,
+      "original_sha": "20fca3e743cd8e4607bdeb7f52760d549da307b3d7a44f8e20d885e8429d356e",
+      "pose": 1,
+      "retained_sha": "80c820d628f9607fcc58247be8579ccf34950e18985aa6df3ba89b313c85bced",
+      "same_state": true,
+      "changed_pixels": 212,
+      "max_channel_delta": 108
+    },
+    {
+      "frame_waits_per_capture": 1,
+      "original_sha": "534c3f5eeb4b18639540119a19bf3d09f6083ab85c439079b4353d1cc13ac431",
+      "pose": 2,
+      "retained_sha": "cdb648b44d54d46a102feefa4e03c3a7965ef0dd743fc1f717bc4ff14b4f1ed7",
+      "same_state": true,
+      "changed_pixels": 253,
+      "max_channel_delta": 1
+    }
+  ],
+  "scope": "Exactly one process_frame+frame_post_draw after motion/flash and renderer toggle; no settling-frame allowance."
+}
