@@ -118,6 +118,9 @@ static func _has_pending_rewards(context: Dictionary) -> bool:
 
 func open_service(id: String = "") -> void:
 	refresh_world()
+	# Canvas z-order alone does not move this panel ahead of later HUD controls
+	# for pointer picking; its footer can overlap the flask strip.
+	get_parent().move_child(self, get_parent().get_child_count() - 1)
 	show()
 	if not id.is_empty(): _select(id)
 	elif not _service.is_empty(): _select(_service)

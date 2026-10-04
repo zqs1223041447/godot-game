@@ -41,6 +41,10 @@ func run() -> void:
 	var panel := TownPanel.new()
 	root.add_child(panel)
 	panel.setup(fixture)
+	var later_hud := Control.new()
+	root.add_child(later_hud)
+	panel.open_service("map_device")
+	expect(panel.get_index() == root.get_child_count() - 1, "Opened service panel receives input before later HUD siblings")
 	expect(panel._title.text == "城镇 · 远征", "Normal profile title")
 	expect(panel._service == "map_device", "Normal default opens maps")
 	expect(panel._leave.text == "竞技练习" and panel._test_enter.visible, "Explicit separate routes")
@@ -69,6 +73,7 @@ func run() -> void:
 	expect(not TownPanel._has_pending_rewards({"pending_map_reward": {}, "pending_gems": 0, "pending_flasks": 0}), "No empty claim button")
 	panel.queue_free()
 	fixture.queue_free()
+	later_hud.queue_free()
 	await process_frame
 	print("Normal town controls: %d checks, %d failures" % [checks, failures])
 	quit(0 if failures == 0 else 1)
