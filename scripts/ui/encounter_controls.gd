@@ -111,7 +111,7 @@ func _add_option(body: VBoxContainer, metadata: Dictionary) -> void:
 	var id: String = str(metadata.id)
 	var compiled: Dictionary = Compiler.compile([id])
 	var definition: Dictionary = compiled.profile.definitions[0]
-	var risk: Dictionary = compiled.profile.risk_parameters[0]
+	
 	var option := ChoiceCheckBox.new()
 	option.name = "EncounterOption_" + id
 	option.text = str(metadata.name)
@@ -121,9 +121,8 @@ func _add_option(body: VBoxContainer, metadata: Dictionary) -> void:
 	option.toggled.connect(_toggle.bind(id))
 	body.add_child(option)
 	_options[id] = option
-	# Numeric copy comes from the compiler snapshot; percentage is display formatting.
-	body.add_child(_label("%s · +%.0f%%" % [str(definition.description),
-		float(risk.relative_increase) * 100.0], "EncounterDescription_" + id, 12, Design.MUTED))
+	# Definitions already carry units. Flat armour and base-health shield must not be formatted as multipliers.
+	body.add_child(_label(str(definition.description), "EncounterDescription_" + id, 12, Design.MUTED))
 
 
 func _toggle(pressed: bool, id: String) -> void:
@@ -160,8 +159,14 @@ func _refresh() -> void:
 	var profile: Dictionary = Compiler.compile(_selected_ids).profile
 	var heading: String = "普通遭遇（无挑战）" if _selected_ids.is_empty() else \
 		"已选择 %d / %d 条" % [_selected_ids.size(), Catalog.metadata().max_modifiers]
-	_preview.text = "%s\n最大生命 ×%.2f\n移速 ×%.2f" % [heading,
-		float(profile.multipliers.max_health), float(profile.multipliers.speed)]
+	_preview.text = selection_summary(heading, profile.definitions)
+
+
+static func selection_summary(heading: String, definitions: Array) -> String:
+	var lines := PackedStringArray([heading])
+	for definition: Dictionary in definitions:
+		lines.append(str(definition.get("description", "")))
+	return "\n".join(lines)
 
 
 func _request() -> void:
