@@ -24,6 +24,8 @@ const Jewels = preload("res://scripts/jewel_data.gd")
 const Combat = preload("res://scripts/combat/combat_data.gd")
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
 const Defense = preload("res://scripts/mechanics/defense_rules.gd")
+const CriticalRuntime = preload("res://scripts/combat/critical_strike_runtime.gd")
+var critical_runtime = CriticalRuntime.new()
 const AttackHit = preload("res://scripts/combat/attack_hit_rules.gd")
 const Projectiles = preload("res://scripts/combat/projectile_runtime.gd")
 const Monsters = preload("res://scripts/monsters/monster_catalog.gd")
@@ -290,6 +292,7 @@ func restart_run() -> void:
 		_world_mode="map";_world_revision+=1
 	_sync_flasks(true)
 	run_revision += 1
+	critical_runtime.reset(rng.seed ^ run_revision)
 	_stats = state.get_stats()
 	health = float(_stats.max_health)
 	mana = float(_stats.max_mana)
@@ -939,6 +942,10 @@ func _shoot(origin: Vector2, direction: Vector2, packet: Dictionary, color: Colo
 	if projectiles.size() >= MAX_PROJECTILES or packet.is_empty():
 		return false
 	var snapshot: Dictionary = context["snapshot"] if context.has("snapshot") else state.get_combat_snapshot()
+	if not snapshot.has("critical_roll"):
+		var critical:Dictionary=critical_runtime.freeze(snapshot)
+		if not critical.ok:return false
+		snapshot=critical.snapshot
 	var cast_id: int = int(context.get("cast_id", 0))
 	if cast_id == 0:
 		cast_id = projectile_runtime.new_cast()
@@ -1009,15 +1016,19 @@ func _execute_compiled(compiled: Dictionary, group_id: String = "", main_uid: St
 	if volley_size > 0 and projectiles.size() + volley_size > MAX_PROJECTILES:
 		hud.notify("投射物空间不足以发射完整技能，本次未消耗法力或冷却")
 		return false
+	var critical_checkpoint:Dictionary=critical_runtime.checkpoint()
+	var critical:Dictionary=critical_runtime.freeze(compiled.snapshot)
+	if not critical.ok:return false
 	mana -= mana_cost
 	if group_id.is_empty(): cooldowns[id] = float(compiled.cooldown)
 	player_facing = _aim_direction()
 	var color: Color = skill.color
-	var context: Dictionary = {"snapshot": compiled.snapshot, "cast_id": 0 if id == "tornado" else projectile_runtime.new_cast()}
+	var context: Dictionary = {"snapshot": critical.snapshot, "cast_id": 0 if id == "tornado" else projectile_runtime.new_cast()}
 	match id:
 		"tornado":
 			var emitted: int = projectile_runtime.spawn_tornado(projectiles, player_pos, player_facing, context.snapshot, MAX_PROJECTILES, int(compiled.initial_count))
 			if emitted == 0:
+				critical_runtime.restore(critical_checkpoint)
 				mana += mana_cost
 				if group_id.is_empty(): cooldowns[id] = 0.0
 				hud.notify("场上投射物已满，本次龙卷未消耗法力或冷却")
@@ -1120,11 +1131,14 @@ func _update_projectiles(delta: float) -> void:
 					enemy.knockback = Vector2(event.direction) * 45.0
 					break
 		elif event.type == "explosion":
+			# One independent roll per actual secondary event, shared by its AoE.
+			var secondary:Dictionary=critical_runtime.freeze(event.snapshot,"secondary")
+			if not secondary.ok:continue
 			var hit_targets: Dictionary = {}
 			for enemy: Dictionary in enemies:
 				if not hit_targets.has(enemy.id) and float(enemy.health) > 0.0 and Vector2(event.pos).distance_to(enemy.pos) <= float(event.radius) + float(enemy.radius) and _terrain_visible(event.pos,enemy.pos):
 					hit_targets[enemy.id] = true
-					_apply_damage_packet(enemy, event.payload, event.snapshot, event.color, 0.0, event)
+					_apply_damage_packet(enemy, event.payload, secondary.snapshot, event.color, 0.0, event)
 			visual_cues.emit_cue("explosion", event.pos, {"radius": float(event.radius), "color": event.color})
 		elif event.type == "return_started":
 			visual_cues.emit_cue("return", event.pos, {"radius": 19.0, "color": Color("bd98ff")})
@@ -1140,7 +1154,8 @@ func _apply_damage_packet(enemy: Dictionary, packet: Dictionary, snapshot: Dicti
 	if float(enemy.health) <= 0.0 or float(enemy.get("spawn", 0.0)) > 0.0:
 		return
 	if not provenance.get("accuracy_checked",false) and not _attack_admitted(enemy,packet,snapshot): return
-	var result: Dictionary = Damage.resolve(packet, snapshot.get("modifiers", []), enemy.get("resistances", {}))
+	var critical:Dictionary=snapshot.get("critical_roll",{})
+	var result: Dictionary = Damage.resolve(packet, snapshot.get("modifiers", []), enemy.get("resistances", {}),float(critical.get("multiplier",1.0)))
 	result = Defense.apply_armour(result,float(enemy.get("armour",0.0)))
 	var settlement: Dictionary = Defense.settle_resolved(result, float(enemy.get("shield", 0.0)), float(enemy.health))
 	if not settlement.ok:
@@ -1152,6 +1167,7 @@ func _apply_damage_packet(enemy: Dictionary, packet: Dictionary, snapshot: Dicti
 		"assembly": packet.get("assembly", {}).duplicate(true),
 		"projectile_id": provenance.get("projectile_id", 0), "cast_id": provenance.get("cast_id", 0),
 		"phase": provenance.get("phase", "direct"), "effect_id": provenance.get("effect_id", "")}
+	if not critical.is_empty():record.critical=critical.duplicate(true)
 	damage_trace.append(record)
 	if damage_trace.size() > 32:
 		damage_trace.pop_front()

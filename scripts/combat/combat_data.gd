@@ -4,6 +4,7 @@ extends RefCounted
 const Data = preload("res://scripts/game_data.gd")
 const BaseCompiler = preload("res://scripts/combat/damage_base_compiler.gd")
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
+const Critical=preload("res://scripts/combat/critical_strike_rules.gd")
 const ResourceCost=preload("res://scripts/combat/source_resource_rules.gd")
 const Spatial = preload("res://scripts/combat/source_spatial_rules.gd")
 const TORNADO: Dictionary = {
@@ -56,6 +57,8 @@ static func snapshot(stats: Dictionary, effects: Array) -> Dictionary:
 	if not spatial.is_empty():value.spatial_modifiers=spatial
 	var resources:Dictionary=ResourceCost.from_stats(stats)
 	if not resources.is_empty():value.resource_modifiers=resources
+	var critical:Dictionary=Critical.from_stats(stats)
+	if not critical.is_empty():value.critical_modifiers=critical
 	return value
 
 
@@ -154,7 +157,7 @@ static func _frozen_packet(snapshot_value: Dictionary, skill_id: String, role: S
 	if snapshot_value.get("compiled_skill_id") != skill_id or not snapshot_value.get("compiled_packets") is Dictionary:
 		return {}
 	var allowed: Dictionary = {"basic": ["projectile", "secondary"], "tornado": ["parent", "child", "secondary"], "bolt": ["projectile", "secondary"],
-		"frost": ["projectile", "secondary"], "nova": ["direct"], "meteor": ["direct"], "chain": ["direct", "bounce"]}
+		"frost": ["projectile", "secondary"], "shade_bolt": ["projectile", "secondary"], "cleave": ["direct"], "nova": ["direct"], "meteor": ["direct"], "chain": ["direct", "bounce"]}
 	if not allowed.has(skill_id) or not allowed[skill_id].has(role):
 		return {}
 	var packets: Dictionary = snapshot_value.compiled_packets

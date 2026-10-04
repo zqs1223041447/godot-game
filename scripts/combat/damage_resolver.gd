@@ -6,7 +6,9 @@ extends RefCounted
 const TYPES: Array[String] = ["physical", "fire", "cold", "lightning", "chaos"]
 const ELEMENTS: Array[String] = ["fire", "cold", "lightning"]
 
-static func resolve(packet: Dictionary, modifiers: Array, mitigation: Dictionary = {}) -> Dictionary:
+static func resolve(packet: Dictionary, modifiers: Array, mitigation: Dictionary = {}, critical_multiplier: float = 1.0) -> Dictionary:
+	if not is_finite(critical_multiplier) or critical_multiplier < 1.0 or critical_multiplier > 1000000.0:
+		return {"total":0.0,"components":{},"details":[],"error":"Invalid critical multiplier"}
 	var components: Dictionary = {}
 	var details: Array[Dictionary] = []
 	var total: float = 0.0
@@ -31,6 +33,9 @@ static func resolve(packet: Dictionary, modifiers: Array, mitigation: Dictionary
 				continue
 			applied.append(str(modifier.get("id", "anonymous")))
 		var before_defense: float = base * maxf(0.0, 1.0 + increased) * more
+		# Apply to the completed hit before resistance and hit-size-dependent armour.
+		# Keep the old arithmetic path exactly when no critical is active.
+		if critical_multiplier != 1.0: before_defense *= critical_multiplier
 		var resistance: float = clampf(float(mitigation.get(type, 0.0)), -1.0, 0.9)
 		var amount: float = before_defense * (1.0 - resistance)
 		components[type] = amount

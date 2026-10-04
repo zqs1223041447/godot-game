@@ -6,6 +6,7 @@ const Recipes = preload("res://scripts/combat/combat_data.gd")
 const Supports = preload("res://scripts/combat/support_registry.gd")
 const Extension = preload("res://scripts/combat/projectile_support_rules.gd")
 const Area = preload("res://scripts/combat/area_support_rules.gd")
+const Critical=preload("res://scripts/combat/critical_strike_rules.gd")
 const ResourceCost=preload("res://scripts/combat/source_resource_rules.gd")
 const Spatial = preload("res://scripts/combat/source_spatial_rules.gd")
 const BaseCompiler = preload("res://scripts/combat/damage_base_compiler.gd")
@@ -136,11 +137,15 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 	var packets: Dictionary = _compile_packets(skill_id, compiled_snapshot, recipe)
 	if not skill_id in ["dash", "ward"] and packets.is_empty():
 		return _failure("命中伤害组装无效")
+	var critical:Dictionary=Critical.compile(compiled_snapshot,_primary_tags(packets),packets.has("secondary"))
+	if not critical.ok:return _failure(critical.error)
+	if not critical.critical.is_empty():compiled_snapshot.critical=critical.critical.duplicate(true)
 	compiled_snapshot.compiled_skill_id = skill_id
 	compiled_snapshot.compiled_packets = packets.duplicate(true)
 	var result:Dictionary={"ok": true, "error": "", "skill_id": skill_id,
 		"snapshot": compiled_snapshot, "mana": mana, "cooldown": cooldown,
 		"initial_count": initial_count, "recipe": recipe, "support_ids": canonical, "packets": packets}
+	if not critical.critical.is_empty():result.critical=critical.critical.duplicate(true)
 	if not resource.factors.is_empty():result.cost_factors=resource.factors
 	return result
 
@@ -154,9 +159,21 @@ static func compile_basic(snapshot:Dictionary)->Dictionary:
 	var packet:Dictionary=Recipes.event_packet(frozen,"basic","projectile")
 	var secondary:Dictionary=Recipes.secondary_packet(frozen,"basic")
 	if packet.is_empty() or secondary.is_empty():return _failure("普通攻击伤害组装无效")
+	var critical:Dictionary=Critical.compile(frozen,packet.tags,true)
+	if not critical.ok:return _failure(critical.error)
+	if not critical.critical.is_empty():frozen.critical=critical.critical.duplicate(true)
 	frozen.compiled_skill_id="basic"
 	frozen.compiled_packets={"projectile":packet.duplicate(true),"secondary":secondary}
-	return {"ok":true,"error":"","skill_id":"basic","recipe":spatial.recipe,"snapshot":frozen,"packets":frozen.compiled_packets.duplicate(true)}
+	var result:Dictionary={"ok":true,"error":"","skill_id":"basic","recipe":spatial.recipe,"snapshot":frozen,"packets":frozen.compiled_packets.duplicate(true)}
+	if not critical.critical.is_empty():result.critical=critical.critical.duplicate(true)
+	return result
+
+
+static func _primary_tags(packets:Dictionary)->Array:
+	for role:String in ["parent","projectile","direct"]:
+		if packets.has(role):return packets[role].tags
+	if not packets.get("bounces",[]).is_empty():return packets.bounces[0].tags
+	return []
 
 
 static func _compile_packets(skill_id: String, snapshot: Dictionary, recipe: Dictionary) -> Dictionary:
@@ -206,8 +223,10 @@ static func _failure(error: String) -> Dictionary:
 static func _snapshot_error(snapshot: Dictionary) -> String:
 	# initial_count is reserved for compiled projectile snapshots, including empty supports.
 	# Reject re-entry instead of applying support more factors a second time.
-	if snapshot.has("initial_count") or snapshot.has("compiled_packets") or snapshot.has("compiled_skill_id"):
+	if snapshot.has("initial_count") or snapshot.has("compiled_packets") or snapshot.has("compiled_skill_id") or snapshot.has("critical") or snapshot.has("critical_roll"):
 		return "施放快照已编译；必须从基础构筑快照重新编译"
+	var critical_error:String=Critical.error(snapshot)
+	if not critical_error.is_empty():return critical_error
 	var spatial_error:=Spatial.error(snapshot)
 	if not spatial_error.is_empty():return spatial_error
 	var resource_error:String=ResourceCost.error(snapshot)

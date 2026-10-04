@@ -8,6 +8,7 @@ const Flasks=preload("res://scripts/items/flask_catalog.gd")
 const Gems = preload("res://scripts/items/gem_catalog.gd")
 const Slots = preload("res://scripts/items/equipment_slots.gd")
 const Defense=preload("res://scripts/mechanics/defense_rules.gd")
+const Critical = preload("res://scripts/combat/critical_strike_rules.gd")
 const Combat = preload("res://scripts/combat/combat_data.gd")
 const Compiler = preload("res://scripts/combat/skill_compiler.gd")
 const Data = preload("res://scripts/game_data.gd")
@@ -186,6 +187,10 @@ func _prepare_candidate(candidate: Dictionary) -> Dictionary:
 static func _stats_for(candidate: Dictionary) -> Dictionary:
 	var stats: Dictionary = Legacy.BASE_STATS.duplicate(true)
 	stats.additional_skill_slots = 0.0
+	# Explicit v39 player balance: natural monsters retain their zero base.
+	stats.crit_base_chance = 0.05
+	stats.crit_base_multiplier = 1.5
+	for stat: String in Critical.STAT_KEYS: stats[stat] = 0.0
 	for stat: String in ["strength","dexterity","intelligence","physical_increased","chaos_increased","melee_physical_increased","attack_physical_increased","accuracy_increased","evasion_increased","armour","armour_increased","cold_resistance","lightning_resistance","life_regen","life_regen_percent","area_size_increased","spell_area_size_increased","melee_area_size_increased","projectile_speed_increased","shield_recharge_rate_increased","shield_recharge_start_faster","mana_cost_efficiency_increased","mana_cost_increased","flask_life_recovery_increased","flask_mana_recovery_increased","flask_charges_gained_increased"]:
 		stats[stat] = 0.0
 	# Authored base ratings for this arena, not a copied monster/level table.
@@ -551,7 +556,9 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	var loaded:=super.load_build(path)
 	if loaded and old_version>0 and old_version<Rules.VERSION:
 		migrated_from_legacy=true
-		if old_version==Rules.V22_VERSION:
+		if old_version==23:
+			migration_message="旧存档已原字节备份，暴击构筑已接入；玩家基础暴击5%、暴击伤害150%。原物品、节点与点数预算保持。"
+		elif old_version==Rules.V22_VERSION:
 			migration_message="旧存档已原字节备份，源天赋药剂回复与充能增幅已接入；原物品、节点与点数预算保持，不额外赠物。"
 		elif old_version==Rules.V21_VERSION:
 			migration_message="旧存档已原字节备份，源天赋魔力成本效率与成本增加已接入；原物品、节点与点数预算保持，不额外赠物。"
