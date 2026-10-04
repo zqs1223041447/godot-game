@@ -121,6 +121,7 @@ run_check --script res://tests/build_affix_economy_test.gd
 run_check --script res://tests/equipment_affix_migration_test.gd
 run_check --script res://tests/build_affix_transactions_test.gd
 run_check --script res://tests/build_affix_gameplay_test.gd
+run_check --script res://tests/equipment_affix_display_v42_test.gd
 python3 "$PROJECT_DIR/tests/reference_catalog_test.py"
 run_check --quit-after 300
 echo "Current-batch validation passed: versioned equipment affixes, strict schema27 migration, old-pool equivalence, crafting economics/transactions and actual build consumers."
