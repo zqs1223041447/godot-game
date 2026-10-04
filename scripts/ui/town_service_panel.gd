@@ -225,6 +225,7 @@ func _select(id: String) -> void:
 		var buy := Button.new()
 		buy.text = "%d 碎片" % int(offer.get("cost", 0)) if bool(offer.get("paid", false)) else "领取"
 		buy.tooltip_text = str(offer.price_label)
+		if not str(offer.get("reason", "")).is_empty(): buy.tooltip_text += "\n" + str(offer.reason)
 		buy.disabled = not bool(offer.available)
 		if bool(offer.get("paid", false)):
 			buy.pressed.connect(_request_gem_purchase.bind(str(offer.definition_id)))
