@@ -1,0 +1,58 @@
+{
+  "game_version": "0.37.0",
+  "schema": 23,
+  "reports": [
+    {
+      "path": "docs/qa/v037/data-review/data-653.log.txt",
+      "checks": 653,
+      "scope": "Final real catalog and readonly model/store/compiled outputs; two fixed mechanism qualifiers",
+      "sha256": "df2badf28a097fd39e226216d8d9a6a7aaf5bb37d5b80819dcabf6c9add517b5"
+    },
+    {
+      "path": "docs/qa/v037/data-review/presentation-81.log.txt",
+      "checks": 81,
+      "scope": "Reused structured adapter numeric and semantic tags; fixed effect literals not exercised",
+      "sha256": "fb98e0cbddfb66d2952ab51717c8e3b4db3271fb033347eda314f148f5546532"
+    },
+    {
+      "path": "docs/qa/v037/data-review/lifecycle-17.log.txt",
+      "checks": 17,
+      "scope": "Reused actual main/HUD synthetic mouse lifecycle; same scripts except unused equipment literal change",
+      "sha256": "62e2036b8ee053a78132024c0761af625f62709da2cc1d8790b75f5298a014c1"
+    },
+    {
+      "path": "docs/qa/v037/root-ui/scroll-final.log.txt",
+      "checks": 10,
+      "scope": "Unchanged root card scroll routing and fixed header",
+      "sha256": "db383b21f9f4a37c9b48d97d056e5164d6fe34d24943b466b508441d8bb4efce"
+    }
+  ],
+  "total_checks": 761,
+  "report_count": 4,
+  "production_input_count": 390,
+  "logs": {
+    "docs/qa/v037/data-review/data-651.log.txt": "e73979dbdc93abba38de9cb5ccb0ed6169ab85daac7384631350dcbee815e99f",
+    "docs/qa/v037/data-review/data-653.log.txt": "df2badf28a097fd39e226216d8d9a6a7aaf5bb37d5b80819dcabf6c9add517b5",
+    "docs/qa/v037/data-review/data-initial-parse-error.log.txt": "3fa2dd05e41a6cafc1af8f4c9395178d9d916c0baaab85ec616c04db2f7666cd",
+    "docs/qa/v037/data-review/data-text-fixture-first.log.txt": "fdaaa242b1dd6f875aa8ad7115aff70e67d780223079652a86b2f552698af83d",
+    "docs/qa/v037/data-review/lifecycle-17.log.txt": "62e2036b8ee053a78132024c0761af625f62709da2cc1d8790b75f5298a014c1",
+    "docs/qa/v037/data-review/lifecycle-initial-geometry-fixture.log.txt": "d09f66b9ad154dd8973579b535aa35e9b58b3e733599c79b7da388530129902e",
+    "docs/qa/v037/data-review/presentation-81.log.txt": "fb98e0cbddfb66d2952ab51717c8e3b4db3271fb033347eda314f148f5546532",
+    "docs/qa/v037/data-review/presentation-initial-fixture-name.log.txt": "5b5404b4cd4a5abe821549025f046b9a20a1b931a353a9a100f6b2cea2876fbd",
+    "docs/qa/v037/final-import.log.txt": "2ff2d2ad5ca9520f0d723c041c60151db83946620252c45b1deed404913389f2",
+    "docs/qa/v037/font-check.log.txt": "362e1e7329b686027b721ea440cce95b39273623e15ca04d4cbc6110c5d1e15a",
+    "docs/qa/v037/reference-export.log.txt": "51e3b0bc619efba5c710e1863eedea0402e6700d8c973b9ecb758418906e7297",
+    "docs/qa/v037/reference-html.log.txt": "f3f7770bb73bfd6d1102f60d3ae1d79b3e5f9e655482bf5fac94985daf258538",
+    "docs/qa/v037/reference-links.log.txt": "95a76af2b0f817ae780e477e8177c462e53a65f3abbb23405603b8023e463c65",
+    "docs/qa/v037/root-ui/scroll-final.log.txt": "db383b21f9f4a37c9b48d97d056e5164d6fe34d24943b466b508441d8bb4efce",
+    "docs/qa/v037/root-ui/scroll-initial.log.txt": "0801312d36c994325d49175a0c8f7707d04b7b66cae1c1cf077f24b104e93ac4"
+  },
+  "font_sha256": "b81b1391853d4c92e8833f9c29356087320cf36b5c981d6c91850b9656ede8bf",
+  "mapped_codepoints": 1035,
+  "art_unchanged_count": 57,
+  "reference_semantics_unchanged_except_version": true,
+  "base_commit": "195898e9ce2b594c374ac0720022ab242cb8051a",
+  "root_final_ui": "755dfaa",
+  "no_600s_or_full_retest": true,
+  "reuse": "653 rerun after final effect text.81 adapter/17 HUD/10 scroll source behavior unchanged. Root native wheel review retained. No model/combat/save changes."
+}

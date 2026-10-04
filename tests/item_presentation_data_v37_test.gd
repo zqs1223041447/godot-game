@@ -89,6 +89,9 @@ func _initialize()->void:
 		check(model.item(fixed_uid).payload.is_empty() and view.rarity=="unique","Fixed item uses canonical unique rarity without invented rolls")
 		check(view.base_lines==expected_base_lines(Data.ITEMS[id].stats) and view.affix_lines.is_empty(),"Fixed item original stats remain intrinsic, not random affixes")
 		check(view.effect_lines.size()==Data.ITEMS[id].get("effects",[]).size(),"Fixed return/explosion mechanics remain disclosed")
+		for effect:String in Data.ITEMS[id].get("effects",[]):
+			if effect=="return_on_range":check(view.effect_lines.has("投射物抵达射程后返回一次，不刷新寿命"),"Return text retains once-only and unchanged lifetime limitations")
+			if effect=="explode_on_flight_end":check(view.effect_lines.has("投射物自然结束时爆炸；分裂、碰撞消耗或取消不触发"),"Explosion text retains natural-end requirement and all excluded termination causes")
 	check(fixed_count==9,"Nine fixed item definitions checked")
 	var support_count:=0;var active_count:=0
 	for definition_id:String in Gems.definitions():
