@@ -10,4 +10,4 @@ static func migrate_v25(source: Variant, validate_talents: Callable = Callable()
 	var candidate: Dictionary = source.duplicate(true)
 	candidate.version = 26
 	candidate["journey"] = Journey.empty()
-	return candidate if Rules.reason(candidate, validate_talents, socket_ids).is_empty() else {}
+	return candidate if Rules.reason_v26(candidate, validate_talents, socket_ids).is_empty() else {}

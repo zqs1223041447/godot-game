@@ -24,10 +24,10 @@ static func metadata() -> Dictionary:
 		"economy": "Each operation costs more than the maximum possible increase in salvage value."}
 
 
-static func quote(instance: Variant, operation: Variant) -> Dictionary:
+static func quote(instance: Variant, operation: Variant, vocabulary: int = Catalog.CURRENT_VOCABULARY) -> Dictionary:
 	if not operation is String or not OPERATIONS.has(operation):
 		return _failure("invalid_operation", "未知工艺。")
-	if not Catalog.validate_instance(instance):
+	if not Catalog.validate_instance_for_version(instance, vocabulary):
 		return _failure("invalid_instance", "装备实例未通过当前目录验证。")
 	var rule: Dictionary = OPERATIONS[operation]
 	if not rule.rarities.has(instance.rarity):
@@ -36,7 +36,7 @@ static func quote(instance: Variant, operation: Variant) -> Dictionary:
 	var kept: Array = instance.affixes.duplicate(true) if rule.preserves_affixes else []
 	var limits: Dictionary = Catalog.RARITIES[rarity]
 	var counts: Dictionary = _counts(kept)
-	var pool: Array[Dictionary] = _pool(instance.base_id, int(instance.item_level), kept)
+	var pool: Array[Dictionary] = _pool(instance.base_id, int(instance.item_level), kept, vocabulary)
 	var reachable: Array[int] = []
 	var first: int = kept.size() + 1 if operation == "augment" else int(limits.min_affixes)
 	var last: int = first if operation == "augment" else int(limits.max_affixes)
@@ -51,8 +51,8 @@ static func quote(instance: Variant, operation: Variant) -> Dictionary:
 		"result_rarity": rarity, "kept": kept, "reachable_counts": reachable}
 
 
-static func plan(instance: Variant, operation: Variant, seed_value: Variant) -> Dictionary:
-	var quoted: Dictionary = quote(instance, operation)
+static func plan(instance: Variant, operation: Variant, seed_value: Variant, vocabulary: int = Catalog.CURRENT_VOCABULARY) -> Dictionary:
+	var quoted: Dictionary = quote(instance, operation, vocabulary)
 	if not quoted.ok:
 		return quoted
 	if not seed_value is int:
@@ -66,7 +66,7 @@ static func plan(instance: Variant, operation: Variant, seed_value: Variant) -> 
 	var target: int = int(targets[rng.randi_range(0, targets.size() - 1)])
 	var limits: Dictionary = Catalog.RARITIES[output.rarity]
 	while output.affixes.size() < target:
-		var pool: Array[Dictionary] = _pool(output.base_id, int(output.item_level), output.affixes)
+		var pool: Array[Dictionary] = _pool(output.base_id, int(output.item_level), output.affixes, vocabulary)
 		var counts: Dictionary = _counts(output.affixes)
 		var viable_groups: Dictionary = {}
 		for entry: Dictionary in pool:
@@ -97,7 +97,7 @@ static func plan(instance: Variant, operation: Variant, seed_value: Variant) -> 
 				break
 		output.affixes.append({"id": chosen.id, "tier": int(chosen.tier),
 			"value": rng.randi_range(int(chosen.min), int(chosen.max))})
-	if not Catalog.validate_instance(output):
+	if not Catalog.validate_instance_for_version(output, vocabulary):
 		return _failure("invalid_result", "工艺结果未通过装备目录验证。")
 	var definition: Dictionary = Catalog.definition(output)
 	if definition.is_empty():
@@ -106,12 +106,12 @@ static func plan(instance: Variant, operation: Variant, seed_value: Variant) -> 
 		"definition": definition, "cost": quoted.cost.duplicate(true)}
 
 
-static func _pool(base_id: String, item_level: int, kept: Array) -> Array[Dictionary]:
+static func _pool(base_id: String, item_level: int, kept: Array, vocabulary: int = Catalog.CURRENT_VOCABULARY) -> Array[Dictionary]:
 	var blocked: Dictionary = {}
 	for entry: Dictionary in kept:
 		blocked[Catalog.affix_definition(entry.id).group] = true
 	var result: Array[Dictionary] = []
-	var profile: Dictionary = Catalog.pool_profile(Catalog.pool_for_base(base_id))
+	var profile: Dictionary = Catalog.pool_profile(Catalog.pool_for_base_version(base_id, vocabulary))
 	for id: String in profile.affix_ids:
 		var family: Dictionary = Catalog.affix_definition(id)
 		if blocked.has(family.group) or not Catalog.family_eligible(id, base_id):

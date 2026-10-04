@@ -1,0 +1,15 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ERROR: Real released binding change is preserved: v26-active.json
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/equipment_affix_migration_test.gd:42)
+       [1] test_literal (res://tests/equipment_affix_migration_test.gd:99)
+       [2] _initialize (res://tests/equipment_affix_migration_test.gd:225)
+ERROR: Real released binding change is preserved: v26-pending.json
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/equipment_affix_migration_test.gd:42)
+       [1] test_literal (res://tests/equipment_affix_migration_test.gd:99)
+       [2] _initialize (res://tests/equipment_affix_migration_test.gd:225)
+Equipment affix migration: 312 checks, 2 failures

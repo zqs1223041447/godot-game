@@ -10,7 +10,9 @@ const WeaponLocalRules = preload("res://scripts/items/weapon_local_rules.gd")
 const NineSlotProfile = preload("res://scripts/items/nine_slot_equipment_profile.gd")
 const NINE_SLOT_BASES: Dictionary = NineSlotProfile._BASES
 const NINE_SLOT_AFFIXES: Dictionary = NineSlotProfile._AFFIXES
-const CURRENT_VOCABULARY: int = 14
+const BuildAffixes = preload("res://scripts/items/build_affix_profile.gd")
+const CURRENT_VOCABULARY: int = 27
+const CANONICAL_LOOT_PROFILE_ID: String = "canonical_v27"
 const MIN_ITEM_LEVEL: int = 1
 const MAX_ITEM_LEVEL: int = 30
 const MAX_SERIAL: int = 999999999
@@ -128,8 +130,13 @@ const POOL_PROFILES: Dictionary = {
 		"affix_ids": ["rootwell", "deepwell", "lanternveil", "coalglow", "rimeecho", "sparkthread", "wellturn", "trailstep", "emberward"], "min_save_version": 8},
 	"local_weapon": {"base_ids": ["ashwood_bow"],
 		"affix_ids": ["deepwell", "runesong", "prismedge", "farweave", "coalglow", "rimeecho", "sparkthread", "wellturn", "beatlink", "whetstone_edge", "tempered_edge"], "min_save_version": 9, "balance_origin": "original"},
+	"build_legacy_v27": {"base_ids": ["cinder_reed", "gale_spindle", "woven_bastion", "tidebound_coat", "wayglass_token", "pulse_seed"],
+		"affix_ids": ["rootwell", "deepwell", "lanternveil", "runesong", "prismedge", "farweave", "coalglow", "rimeecho", "sparkthread", "wellturn", "trailstep", "beatlink", "attack_life_leech", "attack_mana_leech", "global_critical_chance", "global_critical_multiplier"], "min_save_version": 27},
+	"build_nine_slot_v27": {"base_ids": ["nine_slot_etched_ring", "nine_slot_trail_boots", "nine_slot_folded_belt", "nine_slot_threaded_gloves", "nine_slot_slate_helmet"],
+		"affix_ids": ["nine_slot_prefix_vitality", "nine_slot_prefix_clarity", "nine_slot_prefix_aegis", "nine_slot_suffix_endurance", "nine_slot_suffix_mana_flow", "nine_slot_suffix_stride", "nine_slot_suffix_skill_row", "attack_life_leech", "attack_mana_leech", "global_critical_chance", "global_critical_multiplier"], "min_save_version": 27},
 }
 const LOOT_PROFILES: Dictionary = {
+	"canonical_v27": [{"pool_id":"build_legacy_v27","weight":30},{"pool_id":"runewood","weight":20},{"pool_id":"defense","weight":10},{"pool_id":"local_weapon","weight":10},{"pool_id":"build_nine_slot_v27","weight":30}],
 	"canonical_v14": [{"pool_id":"legacy","weight":30},{"pool_id":"runewood","weight":20},{"pool_id":"defense","weight":10},{"pool_id":"local_weapon","weight":10},{"pool_id":"nine_slot","weight":30}],
 	"v0.11": [{"pool_id": "legacy", "weight": 60}, {"pool_id": "runewood", "weight": 25}, {"pool_id": "defense", "weight": 15}],
 	"v0.13": [{"pool_id": "legacy", "weight": 45}, {"pool_id": "runewood", "weight": 25}, {"pool_id": "defense", "weight": 15}, {"pool_id": "local_weapon", "weight": 15}],
@@ -184,6 +191,19 @@ static func pool_for_base(base_id: String) -> String:
 	return ""
 
 
+## Base availability is historical; rolling/validation vocabulary is explicit.
+static func pool_for_base_version(base_id: String, vocabulary: int) -> String:
+	var original := pool_for_base(base_id)
+	if vocabulary >= 27:
+		if original == "legacy": return "build_legacy_v27"
+		if original == "nine_slot": return "build_nine_slot_v27"
+	return original
+
+
+static func current_pool_for_base(base_id: String) -> String:
+	return pool_for_base_version(base_id, CURRENT_VOCABULARY)
+
+
 static func family_eligible(affix_id: String, base_id: String) -> bool:
 	var family: Dictionary = _affix_record(affix_id)
 	return not family.is_empty() and _family_eligible(affix_id, family, base_id)
@@ -198,12 +218,33 @@ static func affix_definition(id: String) -> Dictionary:
 	return _affix_record(id).duplicate(true)
 
 
+## One pure formatter for inventory cards, long definitions and reference output.
+## Integer payload ticks remain authoritative; presentation never recalculates stats.
+static func affix_display(affix: Variant) -> Dictionary:
+	var empty := {"ok":false,"label":"","value_text":"","line":""}
+	if not affix is Dictionary or affix.size()!=3 or not affix.has_all(["id","tier","value"]) or not affix.id is String: return empty
+	var family: Dictionary = _affix_record(affix.id)
+	if family.is_empty() or not _is_bounded_int(affix.tier,1,family.tiers.size()): return empty
+	var tier: Dictionary = family.tiers[int(affix.tier)-1]
+	if not _is_bounded_int(affix.value,int(tier.min),int(tier.max)): return empty
+	var amount: String
+	if family.unit == "basis_points": amount = "+%.2f%%" % (float(affix.value)/100.0)
+	elif family.get("display_unit","") == "percentage_points": amount = "+%d个百分点" % int(affix.value)
+	else: amount = "+%d%s" % [int(affix.value), "%" if family.unit == "percent" else ""]
+	var label: String = str(family.label)
+	return {"ok":true,"label":label,"value_text":amount,"line":label+" "+amount}
+
+
+static func affix_stat_value(family: Dictionary, ticks: Variant) -> float:
+	return float(ticks) / (10000.0 if family.unit == "basis_points" else 100.0 if family.unit == "percent" else 1.0)
+
+
 static func _base_record(id: String) -> Dictionary:
 	return BASES.get(id, EXPANSION_BASES.get(id, DEFENSE_BASES.get(id, LOCAL_WEAPON_BASES.get(id, NINE_SLOT_BASES.get(id, {})))))
 
 
 static func _affix_record(id: String) -> Dictionary:
-	return AFFIXES.get(id, EXPANSION_AFFIXES.get(id, DEFENSE_AFFIXES.get(id, LOCAL_WEAPON_AFFIXES.get(id, NINE_SLOT_AFFIXES.get(id, {})))))
+	return BuildAffixes.AFFIXES.get(id, AFFIXES.get(id, EXPANSION_AFFIXES.get(id, DEFENSE_AFFIXES.get(id, LOCAL_WEAPON_AFFIXES.get(id, NINE_SLOT_AFFIXES.get(id, {}))))))
 
 
 static func generate(rng: RandomNumberGenerator, id: String, item_level: int, rarity: String = "") -> Dictionary:
@@ -334,7 +375,8 @@ static func validate_instance_for_version(value: Variant, save_version: int) -> 
 		if not affix.id is String or _affix_record(affix.id).is_empty() or families.has(affix.id):
 			return false
 		var family: Dictionary = _affix_record(affix.id)
-		if not POOL_PROFILES[pool_id].affix_ids.has(affix.id):
+		var vocabulary_pool: String = pool_for_base_version(instance.base_id, save_version)
+		if not POOL_PROFILES[vocabulary_pool].affix_ids.has(affix.id):
 			return false
 		if groups.has(family.group) or not _family_eligible(affix.id, family, instance.base_id):
 			return false
@@ -367,7 +409,7 @@ static func definition(instance: Dictionary) -> Dictionary:
 	for affix: Dictionary in instance.affixes:
 		var family: Dictionary = _affix_record(affix.id)
 		var kind: String = "前缀" if family.kind == "prefix" else "后缀"
-		var amount: String = "+%d%s" % [int(affix.value), "%" if family.unit == "percent" else ""]
+		var amount: String = str(affix_display(affix).value_text)
 		lines.append("%s · %s T%d：%s %s" % [kind, family.name, int(affix.tier), family.label, amount])
 	var description: String = base.description
 	if not lines.is_empty():
@@ -398,7 +440,7 @@ static func weapon_profile(instance: Dictionary) -> Dictionary:
 		if not LOCAL_WEAPON_AFFIXES.has(affix.id):
 			continue
 		var family: Dictionary = LOCAL_WEAPON_AFFIXES[affix.id]
-		var amount: float = float(affix.value) / (100.0 if family.unit == "percent" else 1.0)
+		var amount: float = affix_stat_value(family, affix.value)
 		profile["flat" if family.unit == "flat" else "increased"].physical += amount
 		profile.sources.append({"affix_id": affix.id, "stat": family.stat, "value": amount})
 	return profile
@@ -422,7 +464,7 @@ static func _validated_stats(instance: Dictionary) -> Dictionary:
 		var family: Dictionary = _affix_record(affix.id)
 		if LOCAL_WEAPON_AFFIXES.has(affix.id):
 			continue # Local weapon terms never become character/global modifiers.
-		var amount: float = float(affix.value) / (100.0 if family.unit == "percent" else 1.0)
+		var amount: float = affix_stat_value(family, affix.value)
 		result[family.stat] = float(result.get(family.stat, 0.0)) + amount
 	return result
 
@@ -448,6 +490,7 @@ static func _family_eligible(id: String, family: Dictionary, base_id: String) ->
 		return _valid_defense_family(family) and family.allowed_base_ids.has(base_id)
 	if LOCAL_WEAPON_AFFIXES.has(id):
 		return _valid_local_weapon_family(family) and family.allowed_base_ids.has(base_id)
+	if BuildAffixes.AFFIXES.has(id): return family.allowed_base_ids.has(base_id)
 	return AFFIXES.has(id) or NINE_SLOT_AFFIXES.has(id)
 
 

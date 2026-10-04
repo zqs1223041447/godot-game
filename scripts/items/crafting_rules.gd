@@ -6,6 +6,7 @@ const Catalog = preload("res://scripts/items/equipment_catalog.gd")
 const Expansion = preload("res://scripts/items/crafting_expansion_rules.gd")
 const LEGACY_SEED_VERSION: String = "original-crafting-prototype-v1"
 const RULES_VERSION: String = "original-crafting-prototype-v2"
+const CURRENT_RULES_VERSION: String = "original-crafting-prototype-v3-affix27"
 const MATERIAL_ID: String = "calibration_shard"
 ## ORIGINAL, tunable prototype economy; not a live wallet or final balance.
 const BALANCE: Dictionary = {
@@ -25,7 +26,7 @@ static func metadata() -> Dictionary:
 		eligible[base_id] = families
 	var result: Dictionary = {
 		"id": "crafting_rules", "name": "装备工艺", "schema_version": 2,
-		"rules_version": RULES_VERSION, "origin": "original", "status": "prototype",
+		"rules_version": CURRENT_RULES_VERSION, "origin": "original", "status": "prototype",
 		"catalog_source": "res://scripts/items/equipment_catalog.gd",
 		"catalog_vocabulary": Catalog.CURRENT_VOCABULARY,
 		"base_ids": Catalog.all_base_ids(), "affix_ids": Catalog.all_affix_ids(),
@@ -74,14 +75,22 @@ static func operation_metadata(operation: String) -> Dictionary:
 		"risk":risks[operation]}
 
 
-static func seed_rules_version(operation: String) -> String:
-	return LEGACY_SEED_VERSION if operation in ["salvage", "recalibrate"] else RULES_VERSION + ":" + operation
+static func seed_rules_version(operation: String, vocabulary: int = Catalog.CURRENT_VOCABULARY) -> String:
+	return LEGACY_SEED_VERSION if operation in ["salvage", "recalibrate"] else (CURRENT_RULES_VERSION if vocabulary >= 27 else RULES_VERSION) + ":" + operation
 
 
 ## Economics-only quote: expanded operations never roll a replacement here.
-static func operation_quote(instance: Variant, operation: Variant) -> Dictionary:
+static func operation_quote(instance: Variant, operation: Variant, vocabulary: int = Catalog.CURRENT_VOCABULARY) -> Dictionary:
+	var result := _operation_quote_core(instance, operation, vocabulary)
+	result.rules_version = CURRENT_RULES_VERSION if vocabulary >= 27 else RULES_VERSION
+	return result
+
+
+static func _operation_quote_core(instance: Variant, operation: Variant, vocabulary: int) -> Dictionary:
 	if not operation is String or not operation_ids().has(operation):
 		return _rejected("", "invalid_operation", "未知工艺。")
+	if not Catalog.validate_instance_for_version(instance, vocabulary):
+		return _rejected(operation, "invalid_instance", "装备实例未通过所选词汇验证。")
 	if operation == "salvage":
 		return salvage_quote(instance)
 	if operation == "recalibrate":
@@ -93,7 +102,7 @@ static func operation_quote(instance: Variant, operation: Variant) -> Dictionary
 		quoted.source_instance = instance.duplicate(true)
 		quoted.cost = {MATERIAL_ID: _salvage_units(instance) * int(BALANCE.recalibrate_cost_multiplier)}
 		return quoted
-	var raw: Dictionary = Expansion.quote(instance, operation)
+	var raw: Dictionary = Expansion.quote(instance, operation, vocabulary)
 	if not raw.ok:
 		return _rejected(operation, raw.code, raw.reason)
 	var result: Dictionary = _result(operation)
@@ -103,8 +112,14 @@ static func operation_quote(instance: Variant, operation: Variant) -> Dictionary
 	return result
 
 
-static func operation_plan(instance: Variant, operation: Variant, seed_value: Variant) -> Dictionary:
-	var quoted: Dictionary = operation_quote(instance, operation)
+static func operation_plan(instance: Variant, operation: Variant, seed_value: Variant, vocabulary: int = Catalog.CURRENT_VOCABULARY) -> Dictionary:
+	var result := _operation_plan_core(instance, operation, seed_value, vocabulary)
+	result.rules_version = CURRENT_RULES_VERSION if vocabulary >= 27 else RULES_VERSION
+	return result
+
+
+static func _operation_plan_core(instance: Variant, operation: Variant, seed_value: Variant, vocabulary: int) -> Dictionary:
+	var quoted: Dictionary = operation_quote(instance, operation, vocabulary)
 	if not quoted.ok:
 		return quoted
 	if not seed_value is int:
@@ -113,7 +128,7 @@ static func operation_plan(instance: Variant, operation: Variant, seed_value: Va
 		return quoted
 	if operation == "recalibrate":
 		return recalibrate_plan(instance, seed_value)
-	var raw: Dictionary = Expansion.plan(instance, operation, seed_value)
+	var raw: Dictionary = Expansion.plan(instance, operation, seed_value, vocabulary)
 	if not raw.ok:
 		return _rejected(operation, raw.code, raw.reason)
 	quoted.instance = raw.instance.duplicate(true)

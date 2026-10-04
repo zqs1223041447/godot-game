@@ -1,0 +1,135 @@
+{
+  "test": "res://tests/equipment_affix_migration_test.gd",
+  "arguments": [
+    "--vocabulary-only"
+  ],
+  "scope": "Pure schema25/26 historical gates, warmed current metadata, schema27 acceptance and strict payload decoding. No backup/write/rollback tests repeated.",
+  "files": {
+    "scripts/build_state.gd": {
+      "bytes": 55241,
+      "sha256": "574fe676565b3a68ccf589f2abee6fedec65c4d66009a5c4d56067a449002e79"
+    },
+    "scripts/items/build_affix_profile.gd": {
+      "bytes": 3096,
+      "sha256": "325c970baa227ad7ad1a1f815c63a60825d087918310cfb12b7435a655d4b7be"
+    },
+    "scripts/items/currency_catalog.gd": {
+      "bytes": 2436,
+      "sha256": "e46f9acef634d1a40474997fe83140f2154ef4d3d2e48de1bcab5f5f73e4787b"
+    },
+    "scripts/items/equipment_catalog.gd": {
+      "bytes": 37740,
+      "sha256": "c787ab2a9d5f80601390cf47266585476b244d81bfed651c591c4a6f92331008"
+    },
+    "scripts/items/item_location_rules.gd": {
+      "bytes": 17672,
+      "sha256": "7b215b19093b693216f47a1b0f2c35b3a1aced96acab8a27a3eb5f2a7e8a867a"
+    },
+    "scripts/items/unified_item_catalog.gd": {
+      "bytes": 10443,
+      "sha256": "ae499e3e68f30269fa2359d2a21a4d7226a2d4d984b41fa38f48f69f226d5fbc"
+    },
+    "scripts/passives/source_tree_runtime.gd": {
+      "bytes": 12055,
+      "sha256": "d59ddf805c4a52bef7b1a498a4518cea2b14e4f07fcaef973318f6405206ac18"
+    },
+    "scripts/save/active_skill_migration.gd": {
+      "bytes": 581,
+      "sha256": "b47562ffd79f0240673d50876212fe766615e7752f8435e3dd73b79ddba95492"
+    },
+    "scripts/save/canonical_build_migration.gd": {
+      "bytes": 8422,
+      "sha256": "450dcad00dfdda2d77b604647f6f0e259629f8ae1277a433b556d0a9a255f44a"
+    },
+    "scripts/save/canonical_build_rules.gd": {
+      "bytes": 19485,
+      "sha256": "ba49f91a9f1d552a585c68367fc14446647527b157c13d80534261d54b76430f"
+    },
+    "scripts/save/canonical_build_store.gd": {
+      "bytes": 19330,
+      "sha256": "39d6d71eb694603ca5ff4d9c9ac1220ead3ee8a48596a6b55de2d4974a9e46be"
+    },
+    "scripts/save/currency_item_migration.gd": {
+      "bytes": 3485,
+      "sha256": "4f7c31f07ec7e12faa503ffc773b7177d70d11769a45bf8a05a3bdb13e0ffcb5"
+    },
+    "scripts/save/equipment_affix_migration.gd": {
+      "bytes": 664,
+      "sha256": "1de445e7d10120315feccf78e902d334811e383c551302a72706549b5b1b253c"
+    },
+    "scripts/save/flask_item_migration.gd": {
+      "bytes": 975,
+      "sha256": "ef8fb7108ccd9f2d22728b0e209fd5a1b30f62b06427693b3742bf871a1f61db"
+    },
+    "scripts/save/normal_journey_migration.gd": {
+      "bytes": 773,
+      "sha256": "92cd1992827422e7950d2be112c35d97abb5ac08d7419d84ae74ea8462cfffd0"
+    },
+    "scripts/save/paged_bag_migration.gd": {
+      "bytes": 2953,
+      "sha256": "051afead9dd6e9c1428fb61fc07584ef9564764dacd555ca43e3300c21c1aea6"
+    },
+    "scripts/save/reserved_hotkey_migration.gd": {
+      "bytes": 608,
+      "sha256": "919f4a3b44a69c2950f4c3f5fa65ffc2d59ed06166ae4a22e8dee5f4b7b0e10b"
+    },
+    "scripts/save/source_critical_migration.gd": {
+      "bytes": 560,
+      "sha256": "a5f0ab3f0028490050dbe0a5dffbe7bee313eda4ab1b5e504be639251b280d6f"
+    },
+    "scripts/save/source_flask_migration.gd": {
+      "bytes": 491,
+      "sha256": "d430c047d6f2d7b9388f6fb5de69d43aff07172dc5eb76e12122b8eb7f01aaf4"
+    },
+    "scripts/save/source_leech_migration.gd": {
+      "bytes": 634,
+      "sha256": "e562f62f6bec0a62b93a156ac73fe634c7c82f250ab450467aaca1ab9adeba9c"
+    },
+    "scripts/save/source_recharge_migration.gd": {
+      "bytes": 495,
+      "sha256": "552808d6087ef405943b3ff04d9795972aa8c84f70a97da3c6d4af54d011bb0a"
+    },
+    "scripts/save/source_resource_migration.gd": {
+      "bytes": 494,
+      "sha256": "7178122e08f7e887731e6369a0117d578216ba4af3331ee0726f7f14c317d4ca"
+    },
+    "scripts/save/source_spatial_migration.gd": {
+      "bytes": 494,
+      "sha256": "63e0c3b00e87b24f7deb575a74dedd9c021b90a4a60990f0076be942b34f6548"
+    },
+    "scripts/world/normal_journey_state.gd": {
+      "bytes": 10109,
+      "sha256": "10b2ba7db25764a0ad34f447ed71acb4a876a49e26bd6fa824056d1e1fee0f89"
+    },
+    "tests/equipment_affix_migration_test.gd": {
+      "bytes": 16706,
+      "sha256": "ad4713d507a6e2c1ea54a9f6148998e7cd559d87a5b6b8796637e08bd515c234"
+    },
+    "tests/fixtures/v042_affixes/manifest.json": {
+      "bytes": 1250,
+      "sha256": "2fe27b1a1820c4b98be909e73b5780a8594180f74856414984be887aa595f104"
+    },
+    "tests/fixtures/v042_affixes/v26-active.json": {
+      "bytes": 17104,
+      "sha256": "82e55ffe060adab56968361b57dc9775fc66f19e13e7141afe4b2a4a79a88dfe"
+    },
+    "tests/fixtures/v042_affixes/v26-default.json": {
+      "bytes": 14788,
+      "sha256": "7df9eea425405e67e8da4ad6f506b542889a0c14d4a6483b947c1e8dce764b55"
+    },
+    "tests/fixtures/v042_affixes/v26-pending.json": {
+      "bytes": 16952,
+      "sha256": "4479027d818078b1ad8cd80c7ec4776c90bce6b8f3efc0063e4672ea9e4de866"
+    }
+  },
+  "engine": "Godot4.6.3.stable.official.7d41c59c4",
+  "exit_code": 0,
+  "checks": 128,
+  "failures": 0,
+  "raw_log": "docs/qa/v042/schema27-vocabulary.log",
+  "raw_log_sha256": "595c4c64b10cb9763a03db4874f4d51f7acf62fd990164e78cd53ac987172832",
+  "isolation": "/tmp/godot-m1-v042-migration/vocabulary/{data,config,cache}",
+  "post_run_hashes_match": true,
+  "json_save_files_created": 0,
+  "prior_unchanged_persistence_evidence": "docs/qa/v042/schema27-tested-files.json"
+}

@@ -1,0 +1,27 @@
+{
+  "application_version": "0.41.0",
+  "schema": 26,
+  "source_commit": "15bf503113105538984c4e8dc267b336fb237674",
+  "capture": "External schema26-fixture-capture.gd run only against the released v41 game.pck. Snapshots use released normal-map, reward, binding, equipment and crafting APIs, never a decremented new-code version. CRLF and surrounding whitespace are literal backup evidence.",
+  "pack_file": "v041-final-release/game.pck",
+  "pack_bytes": 20872164,
+  "pack_sha256": "f6c00b1e27a6e8c890d5c28cac7e89b19df46d8f14e18a00266118344119f0fa",
+  "capture_script": "docs/qa/v042/schema26-fixture-capture.gd",
+  "capture_script_sha256": "46f80018b3d7150afe67d2f9a90271df75325151e362a75662b38943459c9dc5",
+  "isolation": "/tmp/godot-m1-v042-fixture/run3/{data,config,cache}",
+  "no_user_save_reads_or_writes": true,
+  "files": {
+    "v26-active.json": {
+      "bytes": 17104,
+      "sha256": "82e55ffe060adab56968361b57dc9775fc66f19e13e7141afe4b2a4a79a88dfe"
+    },
+    "v26-default.json": {
+      "bytes": 14788,
+      "sha256": "7df9eea425405e67e8da4ad6f506b542889a0c14d4a6483b947c1e8dce764b55"
+    },
+    "v26-pending.json": {
+      "bytes": 16952,
+      "sha256": "4479027d818078b1ad8cd80c7ec4776c90bce6b8f3efc0063e4672ea9e4de866"
+    }
+  }
+}

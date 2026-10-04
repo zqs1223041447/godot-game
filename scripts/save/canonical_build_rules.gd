@@ -23,7 +23,8 @@ const V22_VERSION := 22
 const V23_VERSION := 23
 const V24_VERSION := 24
 const V25_VERSION := 25
-const VERSION := 26
+const V26_VERSION := 26
+const VERSION := 27
 const LEGACY_MAX_ITEMS := 1024
 const V17_MAX_ITEMS := LEGACY_MAX_ITEMS + 1
 const MAX_ITEMS := V17_MAX_ITEMS + 2 # Two once-only migration bottles; bag capacity is unchanged.
@@ -48,6 +49,10 @@ static func decode_v18(raw:Variant)->Dictionary:
 
 static func decode_v25(raw:Variant)->Dictionary:
 	return _decode(raw,true,V25_VERSION,true)
+
+
+static func decode_v26(raw: Variant) -> Dictionary:
+	return _decode(raw, true, V26_VERSION, true)
 
 
 static func decode_v24(raw:Variant)->Dictionary:
@@ -109,6 +114,10 @@ static func _decode(raw: Variant, paged: bool, expected_version: int, allow_curr
 		if not allow_currency and value.items[uid] is Dictionary and value.items[uid].get("kind", "") == "currency": return {}
 		var item: Dictionary = Items.decode_instance(value.items[uid])
 		if item.is_empty(): return {}
+		# A current item decoder may know later affixes. Opening an old envelope
+		# must still prove its payload belongs to that envelope's vocabulary.
+		if expected_version < Equipment.CURRENT_VOCABULARY and item.kind == "equipment" and not item.payload.is_empty() \
+				and not Equipment.validate_instance_for_version(item.payload, mini(expected_version, Equipment.CURRENT_VOCABULARY)): return {}
 		if item.kind=="flask" and expected_version<18:return {}
 		if item.kind in ["skill_gem","support_gem"] and Items.Gems.minimum_save_version(item.definition_id)>expected_version: return {}
 		value.items[uid] = item
@@ -151,6 +160,10 @@ static func reason_v19(value:Variant,validate_talents:Callable=Callable(),socket
 
 static func reason_v25(value:Variant,validate_talents:Callable=Callable(),socket_ids:Array=[])->String:
 	return _reason(value,V25_VERSION,true,true,MAX_ITEMS,validate_talents,socket_ids)
+
+
+static func reason_v26(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
+	return _reason(value, V26_VERSION, true, true, MAX_ITEMS, validate_talents, socket_ids)
 
 
 static func reason_v24(value:Variant,validate_talents:Callable=Callable(),socket_ids:Array=[])->String:
@@ -204,6 +217,14 @@ static func _reason(value: Variant, expected_version: int, paged: bool, allow_cu
 	if not allow_currency:
 		for item: Variant in value.items.values():
 			if item is Dictionary and item.get("kind", "") == "currency": return "旧版本不能包含货币物品"
+	# Older envelopes need a frozen vocabulary check before current metadata can
+	# accept them. Current saves retain the complete typed positive-cache path.
+	if expected_version < Equipment.CURRENT_VOCABULARY:
+		for item: Variant in value.items.values():
+			if item is Dictionary and item.get("kind", "") == "equipment" \
+					and item.get("payload") is Dictionary and not item.payload.is_empty() \
+					and not Equipment.validate_instance_for_version(item.payload, mini(expected_version, Equipment.CURRENT_VOCABULARY)):
+				return "此存档版本不能包含新增装备词缀"
 	var metadata: Dictionary = Items.metadata_for_items(value.items)
 	if metadata.size() != value.items.size(): return "物品实例无效"
 	if allow_currency and not Currency.total_quantity(value.items).ok: return "校准碎片堆或全库存数量无效"
