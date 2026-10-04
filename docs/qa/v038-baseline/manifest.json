@@ -2,17 +2,21 @@
   "source_commit": "f074c2614540f0842964ced961b3430871adce57",
   "production_changed": false,
   "files": {
-    "native-combat.log": {
-      "bytes": 1390,
-      "sha256": "82a2a1689c104d84ceed815e1b006c6e8c510b6aead5d1c73b7ec404cda810bc"
+    "frame_paths_probe.gd.txt": {
+      "bytes": 4680,
+      "sha256": "5dd80e1e7ee137240e73d4792b48112e0fcc6557d3fd6921e08d67521a8c63bf"
     },
-    "render_pixels_probe.gd": {
-      "bytes": 2482,
-      "sha256": "89117defad421a2d451940a6176924d070be2cf3de4fa90044dd33936d08b1b3"
+    "projectile-paths.log.txt": {
+      "bytes": 104,
+      "sha256": "c5177e4d351d65b8e12b83693a407775ca0b291f46557e725e448dbc528bf7e9"
     },
-    "actor-primitives-initial.log": {
-      "bytes": 1377,
-      "sha256": "eac10e7ca546b94834e78d91bfa65e3ecb0ea98e46de00a1bb19bd2fa80c854a"
+    "profiled_markers.gd.txt": {
+      "bytes": 7403,
+      "sha256": "dd3ba550bb1628d885e122c3971b88feac40399a357f92d459c04d89d18a2dc9"
+    },
+    "render_paths_probe.gd.txt": {
+      "bytes": 10543,
+      "sha256": "f828b73efb4d529b2d34fbbaefc47aa4df6ec3016076b91100de053c3c8ebc6e"
     },
     "run-native.sh": {
       "bytes": 799,
@@ -22,53 +26,45 @@
       "bytes": 9852,
       "sha256": "0cfa8d1c199906c35f2d7d1f34de61cf1df1456189cf22b9ca480e2286297323"
     },
-    "profiled_markers.gd": {
-      "bytes": 7403,
-      "sha256": "dd3ba550bb1628d885e122c3971b88feac40399a357f92d459c04d89d18a2dc9"
+    "profiled_visuals.gd.txt": {
+      "bytes": 8099,
+      "sha256": "13189ad3e423d740355ee276a7fb655d4671f934d7bd8d6ddf7dcf4c50804414"
     },
-    "render-pixels.log": {
+    "render-pixels.log.txt": {
       "bytes": 1358,
       "sha256": "5da7fd2221f59302f57faf5b79354c312c0021874776ecec7942a320c8feb3fb"
     },
-    "projectile-paths.log": {
-      "bytes": 104,
-      "sha256": "c5177e4d351d65b8e12b83693a407775ca0b291f46557e725e448dbc528bf7e9"
+    "actor-primitives.log.txt": {
+      "bytes": 1377,
+      "sha256": "ae7008c3d71f35c47b85871b0e94be01f3a1c143affbb07fd3dea6575346bb7a"
+    },
+    "render_pixels_probe.gd.txt": {
+      "bytes": 2482,
+      "sha256": "89117defad421a2d451940a6176924d070be2cf3de4fa90044dd33936d08b1b3"
     },
     "actor-primitives-initial.json": {
       "bytes": 26116,
       "sha256": "b6d15f7dfbb3fe2ab453fda099bab7cd32be38f02a92c24b070df6ddf2bbceb4"
     },
     "README.md": {
-      "bytes": 7943,
-      "sha256": "323968a867f6a403bcf430552004aa06ce183b9b9cf11755011ce06888536876"
+      "bytes": 8184,
+      "sha256": "b91dace7ef62c53fdc2e0a4a7a66bc191c0d3176689150e11ac2cb80540319ed"
     },
     "native-crowd.png": {
       "bytes": 463482,
       "sha256": "008682a5dba4f783fb543d4addc172cb9cdd54ca84f5601e20f4ea8c4e8702b0"
     },
-    "projectile_paths_probe.gd": {
-      "bytes": 3017,
-      "sha256": "3a619981b9fabb0a898317a0ebc5fa4fa4f2040819c2788809884116b7fed543"
-    },
     "frame-paths.json": {
       "bytes": 2779,
       "sha256": "6c0f7cb32f1547ad724d372a912524d10decc703438d061a040a6682ecbe303c"
     },
-    "death-paths.log": {
-      "bytes": 8075,
-      "sha256": "04f4e7875f4518c4c9c680e2f513b93f264e2e335597164b1f604e796bfd4f7f"
+    "native-combat.log.txt": {
+      "bytes": 1390,
+      "sha256": "82a2a1689c104d84ceed815e1b006c6e8c510b6aead5d1c73b7ec404cda810bc"
     },
     "run-pixels-native.sh": {
       "bytes": 553,
       "sha256": "fe7658a61e62b6e18a8d4715bd13d560b26884a6e61f2823e57b0a4c0fff0e80"
-    },
-    "frame_paths_probe.gd": {
-      "bytes": 4680,
-      "sha256": "5dd80e1e7ee137240e73d4792b48112e0fcc6557d3fd6921e08d67521a8c63bf"
-    },
-    "profiled_actors.gd": {
-      "bytes": 33947,
-      "sha256": "d96fb847cc1bc723119697fbd06e89b139c098e89bea8c4972d3f4eae8ce4d08"
     },
     "actor-primitives-baseline.png": {
       "bytes": 444306,
@@ -82,25 +78,33 @@
       "bytes": 4178,
       "sha256": "746d145d0afd0fb1b18387324d8d6ca9bc246b53e669e38975b0bcee4b2f2949"
     },
-    "actor-primitives.log": {
-      "bytes": 1377,
-      "sha256": "ae7008c3d71f35c47b85871b0e94be01f3a1c143affbb07fd3dea6575346bb7a"
+    "death_paths_probe.gd.txt": {
+      "bytes": 4305,
+      "sha256": "712e2ac2f0e4e6ca1ee700c1c96ef771e28e24ff062881b187cf1dfcb057942f"
     },
-    "actor_primitives_probe.gd": {
-      "bytes": 3425,
-      "sha256": "ae0db12cfc0609f40b47c8bc0b12e123634f31eafc1c223aea062ac790ff22ca"
+    "projectile_paths_probe.gd.txt": {
+      "bytes": 3017,
+      "sha256": "3a619981b9fabb0a898317a0ebc5fa4fa4f2040819c2788809884116b7fed543"
     },
-    "profiled_visuals.gd": {
-      "bytes": 8099,
-      "sha256": "13189ad3e423d740355ee276a7fb655d4671f934d7bd8d6ddf7dcf4c50804414"
+    "profiled_actors.gd.txt": {
+      "bytes": 33947,
+      "sha256": "d96fb847cc1bc723119697fbd06e89b139c098e89bea8c4972d3f4eae8ce4d08"
     },
     "native-combat.json": {
       "bytes": 6137,
       "sha256": "39c0ab636a52b9b3ca51f185a6b804688dac1465fe3e8ca4ea991078d9ff717f"
     },
+    "frame-paths.log.txt": {
+      "bytes": 2366,
+      "sha256": "319dc114c5e2dc8a0a08f1227257b287b44e88cbaa0bcba8d0fcb4cfb61c83e6"
+    },
     "projectile-paths.json": {
       "bytes": 19722,
       "sha256": "df52f41b1b92fcdef34808fb84368548085e9f7eeba059dbc8ffa89d145bd7f6"
+    },
+    "actor-primitives-initial.log.txt": {
+      "bytes": 1377,
+      "sha256": "eac10e7ca546b94834e78d91bfa65e3ecb0ea98e46de00a1bb19bd2fa80c854a"
     },
     "native-combat.png": {
       "bytes": 517602,
@@ -110,10 +114,6 @@
       "bytes": 562,
       "sha256": "dfe704243cba7e07873485d209c77120d987a66acde4f1a8bebb04ac0516b53e"
     },
-    "death_paths_probe.gd": {
-      "bytes": 4305,
-      "sha256": "712e2ac2f0e4e6ca1ee700c1c96ef771e28e24ff062881b187cf1dfcb057942f"
-    },
     "actor-primitives-instrumented.png": {
       "bytes": 444306,
       "sha256": "80f0b85377f2a9712e0b7edb116fa597631865ed493f207fd957593e7368898a"
@@ -122,21 +122,21 @@
       "bytes": 4332,
       "sha256": "ac213e14bf90efd8a7520f1a60438ec60e3848c8f70d4fe15ed21231804370d7"
     },
-    "native-crowd.log": {
+    "death-paths.log.txt": {
+      "bytes": 8075,
+      "sha256": "04f4e7875f4518c4c9c680e2f513b93f264e2e335597164b1f604e796bfd4f7f"
+    },
+    "native-crowd.log.txt": {
       "bytes": 1388,
       "sha256": "464af16295b51f0fc8d06b31ba76e411bbaff42fe087963b8108ac7f263ce370"
     },
-    "frame-paths.log": {
-      "bytes": 2366,
-      "sha256": "319dc114c5e2dc8a0a08f1227257b287b44e88cbaa0bcba8d0fcb4cfb61c83e6"
+    "actor_primitives_probe.gd.txt": {
+      "bytes": 3425,
+      "sha256": "ae0db12cfc0609f40b47c8bc0b12e123634f31eafc1c223aea062ac790ff22ca"
     },
     "native-crowd.json": {
       "bytes": 5536,
       "sha256": "4228a0b866216aa01d030768d7663fa920ca1025aa3a9c3eda44381402406d44"
-    },
-    "render_paths_probe.gd": {
-      "bytes": 10543,
-      "sha256": "f828b73efb4d529b2d34fbbaefc47aa4df6ec3016076b91100de053c3c8ebc6e"
     }
   }
 }

@@ -46,3 +46,5 @@ JSON为原始计时，summary.json统一中位/p95/max与阈值次数。native-c
 - https://docs.godotengine.org/en/stable/tutorials/performance/gpu_optimization.html
 
 这些引擎事实支持候选方向，不代替本项目原型前后测量。
+
+仓库归档将诊断脚本存为.gd.txt、日志存为.log.txt，避免Godot把含本次绝对scratch路径的仪器当作运行资源扫描。复现需还原原扩展名并重建README所述scratch目录；证据JSON不依赖此操作。
