@@ -1,4 +1,5 @@
 extends SceneTree
+const Same=preload("res://scripts/items/crafting_transaction_planner.gd")
 func _initialize()->void:call_deferred("run")
 func run()->void:
 	var output:=OS.get_environment("V044_PACK_QA");var expected_font:=OS.get_environment("V044_PACK_FONT_SHA256")
@@ -26,11 +27,11 @@ func run()->void:
 	var owned:Dictionary=model.item(active_uid);ok=ok and owned.get("definition_id")=="skill:shade_bolt" and owned.get("payload")=={"level":1,"quality":0}
 	quote=arena.normal_gem_trade_quote("recycle",support_uid,model.revision());ok=ok and quote.ok
 	var recycled:Dictionary=arena.execute_normal_gem_trade(quote.get("handle",""),support_uid);ok=ok and recycled.ok and model.crafting_balance()==1 and model.item(support_uid).is_empty() and not model.item(active_uid).is_empty()
-	var before:PackedByteArray=var_to_bytes(model.snapshot());var disk:PackedByteArray=FileAccess.get_file_as_bytes(arena.NORMAL_BUILD_PATH)
+	var before_data:Dictionary=model.snapshot();var before:PackedByteArray=var_to_bytes(before_data);var disk:PackedByteArray=FileAccess.get_file_as_bytes(arena.NORMAL_BUILD_PATH)
 	ok=ok and not arena.execute_normal_gem_trade(quote.get("handle",""),support_uid).ok and before==var_to_bytes(model.snapshot())
 	ok=ok and arena.enter_town_test(arena.world_context().revision).ok
 	var denied:Dictionary=arena.normal_gem_trade_quote("buy","support:efficiency",arena.state.revision());ok=ok and not denied.ok and FileAccess.get_file_as_bytes(arena.NORMAL_BUILD_PATH)==disk
-	ok=ok and arena.leave_town_test(arena.world_context().revision).ok and var_to_bytes(arena.state.snapshot())==before
-	var result:Dictionary={"ok":ok,"version":version,"schema":arena.state.snapshot().version,"save_directory":directory,"user_dir":OS.get_user_data_dir(),"bag_layout":arena.state.bag_layout(),"font_sha256":font_hash,"font_characters":font.get_supported_chars().length(),"offer_counts":counts,"active_buy":buy,"support_buy":support_buy,"recycled":recycled,"currency":arena.state.crafting_balance(),"test_paid_rejection":denied,"normal_snapshot_restored":var_to_bytes(arena.state.snapshot())==before}
+	ok=ok and arena.leave_town_test(arena.world_context().revision).ok and Same._same_data(before_data,arena.state.snapshot()) and FileAccess.get_file_as_bytes(arena.NORMAL_BUILD_PATH)==disk
+	var result:Dictionary={"ok":ok,"version":version,"schema":arena.state.snapshot().version,"save_directory":directory,"user_dir":OS.get_user_data_dir(),"bag_layout":arena.state.bag_layout(),"font_sha256":font_hash,"font_characters":font.get_supported_chars().length(),"offer_counts":counts,"active_buy":buy,"support_buy":support_buy,"recycled":recycled,"currency":arena.state.crafting_balance(),"test_paid_rejection":denied,"normal_snapshot_restored":Same._same_data(before_data,arena.state.snapshot()),"normal_disk_preserved":FileAccess.get_file_as_bytes(arena.NORMAL_BUILD_PATH)==disk,"variant_bytes_same_order":var_to_bytes(arena.state.snapshot())==before,"before_key_order":before_data.keys(),"after_key_order":arena.state.snapshot().keys()}
 	var file:=FileAccess.open(output.path_join("packed-runtime-probe.json"),FileAccess.WRITE);file.store_string(JSON.stringify(result,"\t"));file.close()
 	print("Packed v44 gem trade probe: ","PASS" if ok else "FAIL");arena.queue_free();await process_frame;quit(0 if ok else 1)
