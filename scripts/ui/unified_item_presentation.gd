@@ -74,6 +74,9 @@ static func view(model: RefCounted, uid: String) -> Dictionary:
 			result.kind_label = "药剂"
 			result.tags = ["回复", "生命" if definition.get("resource") == "health" else "魔力"]
 			result.base_stats = [{"label":"最大充能","value":str(definition.max_charges)},{"label":"使用消耗","value":str(definition.cost)},{"label":"持续时间","value":"%.1f秒" % float(definition.duration)},{"label":"回复比例","value":"%.0f%%" % (100.0*float(definition.recovery_fraction))}]
+			if model.has_method("get_flask_profile"):
+				result.preview_lines = flask_preview_lines(model.call("get_flask_profile",uid))
+				result.effect_lines = result.preview_lines.duplicate(true)
 		"currency":
 			result.kind_label = "制作材料"
 			result.tags = ["可堆叠"]
@@ -410,3 +413,9 @@ static func _append_current_preview(model: RefCounted, location: Dictionary, res
 		if not error.is_empty():
 			result.preview_lines.append("当前组合暂不可施放：" + error)
 			result.effect_lines = result.preview_lines.duplicate(true)
+
+
+static func flask_preview_lines(profile: Dictionary) -> Array[String]:
+	if not profile.get("ok",false): return []
+	return ["当前构筑：%.2f 秒内回复 %.2f %s" % [float(profile.duration),float(profile.recovery_total),"生命" if profile.resource=="health" else "魔力"],
+		"每只有效原生怪获得 %.2f 充能（小数累计）" % float(profile.charges_per_root)]
