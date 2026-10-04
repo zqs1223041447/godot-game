@@ -23,6 +23,8 @@ const STAT_ROWS: Array[Dictionary] = [
 	{"id":"max_health","label":"生命上限","format":"whole"},
 	{"id":"max_mana","label":"法力上限","format":"whole"},
 	{"id":"max_shield","label":"护盾上限","format":"whole"},
+	{"id":"shield_recharge_rate","label":"护盾充能 / 秒","format":"decimal"},
+	{"id":"shield_recharge_delay","label":"充能等待 / 秒","format":"decimal"},
 	{"id":"life_regen","label":"生命回复 / 秒","format":"decimal"},
 	{"id":"mana_regen","label":"法力回复 / 秒","format":"decimal"},
 	{"id":"attack_speed","label":"攻击频率 / 秒","format":"decimal"},
@@ -119,5 +121,7 @@ func _build() -> void:
 		stack.add_child(value)
 		_values[str(row.id)] = value
 		if row.id in ["accuracy","evasion"]: card.tooltip_text = "攻击命中率取决于目标闪避；法术不进行闪避判定。"
+		elif row.id == "shield_recharge_rate": card.tooltip_text = "等待结束后的实际每秒护盾充能；换装或退款会更新速率。即时回盾另行结算。"
+		elif row.id == "shield_recharge_delay": card.tooltip_text = "下一次有效损伤后的充能等待。闪避或零伤害不重置；已经开始的等待不随换装或退款改变。"
 		elif row.id == "armour": card.tooltip_text = "护甲减伤随每次物理命中大小变化。"
 		elif str(row.id).ends_with("_resistance"): card.tooltip_text = "显示当前有效抗性；元素抗性上限为75%。"
