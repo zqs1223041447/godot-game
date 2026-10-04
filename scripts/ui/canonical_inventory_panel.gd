@@ -9,6 +9,7 @@ signal hover_left
 const FlaskSlotView = preload("res://scripts/ui/flask_slot.gd")
 const CraftControls = preload("res://scripts/ui/crafting_controls.gd")
 const ThemeStyle = preload("res://scripts/visuals/visual_theme.gd")
+const RarityStyle=preload("res://scripts/ui/item_rarity_style.gd")
 const EquipmentArt = preload("res://scripts/visuals/equipment_art.gd")
 const Slots = preload("res://scripts/items/equipment_slots.gd")
 const Gear = preload("res://scripts/items/equipment_catalog.gd")
@@ -252,6 +253,11 @@ func refresh() -> void:
 		var target: SlotTarget = _slots[slot]
 		target.uid = equipped.get(slot,"")
 		target.entry = model.item_definition(target.uid)
+		var rarity: String=str(target.entry.get("rarity","normal"))
+		if not target.uid.is_empty():
+			target.add_theme_stylebox_override("normal",ThemeStyle.panel(RarityStyle.background(rarity),RarityStyle.border(rarity),4,2,3))
+		else:
+			target.add_theme_stylebox_override("normal",ThemeStyle.panel(Color("e9dbc0"),Color("a88b59"),4,1,3))
 		target.tooltip_text = "" # Shared hover owns details; no competing native tooltip.
 		target.queue_redraw()
 	var columns: int = int(_bag_layout.get("columns", 12))

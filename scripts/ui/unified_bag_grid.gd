@@ -1,5 +1,6 @@
 class_name UnifiedBagGrid
 extends Control
+const RarityStyle=preload("res://scripts/ui/item_rarity_style.gd")
 ## Read-only presentation of parent-owned bag entries. All placement decisions
 ## and persistence remain with the caller through move_requested.
 
@@ -213,7 +214,9 @@ func _draw_entry(entry: Dictionary) -> void:
 	var accent: Color = entry["accent"]
 	var is_selected: bool = uid == _selected_uid
 	var is_hovered: bool = uid == _hovered_uid
-	draw_rect(box.grow(-2.0), Color("eee5d0") if not is_selected else Color("f7ebce"))
+	var rarity: String=str(entry.get("art",{}).get("rarity","normal"))
+	accent=RarityStyle.border(rarity)
+	draw_rect(box.grow(-2.0), RarityStyle.background(rarity).lightened(0.10) if is_selected else RarityStyle.background(rarity))
 	var footer_height: float = minf(15.0, box.size.y * 0.34) if _has_caption(entry) else 0.0
 	var art_box := Rect2(box.position + Vector2(5.0, 5.0), box.size - Vector2(10.0, 10.0 + footer_height))
 	var icon: Variant = entry["icon"]
@@ -240,7 +243,7 @@ func _draw_entry(entry: Dictionary) -> void:
 		var caption: String = str(entry["short_name"])
 		draw_string(font, Vector2(caption_box.position.x, caption_box.end.y - 2.0), caption,
 			HORIZONTAL_ALIGNMENT_CENTER, maxf(0.0, caption_box.size.x), font_size, caption_color)
-	var outline: Color = PresentationTheme.GOLD if is_selected else PresentationTheme.ACCENT if is_hovered else accent.darkened(0.22)
+	var outline: Color = PresentationTheme.GOLD if is_selected else PresentationTheme.ACCENT if is_hovered else accent
 	draw_rect(box.grow(-1.5), outline, false, 2.0 if is_selected or is_hovered else 1.0)
 
 

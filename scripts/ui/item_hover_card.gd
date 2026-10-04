@@ -6,6 +6,7 @@ extends Control
 ## modifiers: Array[Dictionary] of {label: String, value: String, polarity: String}.
 ## polarity is one of MODIFIER_BENEFIT, MODIFIER_COST, or MODIFIER_NEUTRAL.
 
+const RarityStyle = preload("res://scripts/ui/item_rarity_style.gd")
 const PresentationTheme = preload("res://scripts/visuals/visual_theme.gd")
 
 const OUTER_MARGIN: float = 12.0
@@ -84,17 +85,31 @@ func _notification(what: int) -> void:
 ## Keep the visual overlay pointer-transparent. Wheel input is routed only to the
 ## detail column under the pointer, so an item behind the card can still drag/drop.
 func _input(event: InputEvent) -> void:
-	if not visible or not event is InputEventMouseButton or not event.pressed:
-		return
-	if event.button_index not in [MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN]:
-		return
-	var direction: int = -1 if event.button_index == MOUSE_BUTTON_WHEEL_UP else 1
-	var wheel_steps: int = maxi(1, roundi(event.factor))
-	for scroll: ScrollContainer in find_children("ItemDetailsScroll", "ScrollContainer", true, false):
-		if scroll.get_global_rect().has_point(event.position):
-			scroll.scroll_vertical += direction * wheel_steps * 36
-			get_viewport().set_input_as_handled()
-			return
+	if not visible or not event is InputEventMouseButton or not event.pressed: return
+	if event.button_index not in [MOUSE_BUTTON_WHEEL_UP,MOUSE_BUTTON_WHEEL_DOWN]: return
+	if scroll_at(event.position, -1 if event.button_index==MOUSE_BUTTON_WHEEL_UP else 1,maxi(1,roundi(event.factor))):
+		get_viewport().set_input_as_handled()
+
+
+func contains_viewport_point(point: Vector2) -> bool:
+	return visible and Rect2(Vector2.ZERO,size).has_point(get_global_transform_with_canvas().affine_inverse()*point)
+
+
+func scroll_at(point: Vector2, direction: int, steps: int=1) -> bool:
+	if not visible or _drag_active: return false
+	var scrolls: Array[Node] = find_children("ItemDetailsScroll","ScrollContainer",true,false)
+	for node: Node in scrolls:
+		var scroll := node as ScrollContainer
+		var local: Vector2=scroll.get_global_transform_with_canvas().affine_inverse()*point
+		if Rect2(Vector2.ZERO,scroll.size).has_point(local):
+			scroll.scroll_vertical += direction*maxi(1,steps)*42
+			return true
+	# The pointer may remain on the source item; no focus transfer is needed.
+	var parent_control := get_parent() as Control
+	if parent_control != null and _last_anchor.has_point(parent_control.get_global_transform_with_canvas().affine_inverse()*point) and not scrolls.is_empty():
+		(scrolls[0] as ScrollContainer).scroll_vertical += direction*maxi(1,steps)*42
+		return true
+	return false
 
 
 func _ensure_interface() -> void:
@@ -219,7 +234,7 @@ func _build_card(view: Dictionary, role: String, index: int, width: float,
 	card.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	card.clip_contents = true
 	card.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	var border: Color = PresentationTheme.GOLD if index == 0 else PresentationTheme.ACCENT
+	var border: Color = RarityStyle.border(str(view.get("rarity","normal")))
 	card.add_theme_stylebox_override("panel", PresentationTheme.panel(Color("f1deb3"), border, 7, 1, CARD_PADDING))
 	card.set_meta("item_uid", str(view.get("uid", "")))
 
@@ -232,7 +247,8 @@ func _build_card(view: Dictionary, role: String, index: int, width: float,
 	card.add_child(content)
 	var role_label := _label(role, 11, PresentationTheme.MUTED)
 	role_label.name = "ItemCardRole"
-	content.add_child(role_label)
+	if index > 0: content.add_child(role_label)
+	else: role_label.free()
 
 	var scroll := ScrollContainer.new()
 	scroll.name = "ItemDetailsScroll"
@@ -242,16 +258,16 @@ func _build_card(view: Dictionary, role: String, index: int, width: float,
 	scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
 	scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	scroll.custom_minimum_size.y = scroll_height
+	scroll.custom_minimum_size.y = 48.0
 	content.add_child(scroll)
 
 	var body := VBoxContainer.new()
 	body.name = "ItemDetails"
 	body.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	body.add_theme_constant_override("separation", 4)
+	body.add_theme_constant_override("separation", 7)
 	scroll.add_child(body)
-	var title := _label(_text(view, "name", "未命名物品"), 22, PresentationTheme.TEXT)
+	var title := _label(_text(view, "name", "未命名物品"), 18, border)
 	title.name = "ItemName"
 	var title_font := FontVariation.new()
 	title_font.base_font = get_theme_default_font()
@@ -260,14 +276,17 @@ func _build_card(view: Dictionary, role: String, index: int, width: float,
 	title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	title.tooltip_text = str(view.get("uid", ""))
-	body.add_child(title)
+	content.add_child(title)
 	var metadata := _build_metadata(view, width)
 	if metadata.get_child_count() > 0:
-		body.add_child(metadata)
+		content.add_child(metadata)
+	else:
+		metadata.free()
 	var tags: Array[String] = _string_array(view.get("tags", []))
 	if not tags.is_empty():
-		body.add_child(_build_tags(tags, width))
+		content.add_child(_build_tags(tags, width))
 
+	content.move_child(scroll,content.get_child_count()-1)
 	var function_text: String = _section_text(view.get("function", ""))
 	var description_text: String = _section_text(view.get("description", ""))
 	_add_section(body, "功能", function_text)
@@ -283,10 +302,10 @@ func _build_card(view: Dictionary, role: String, index: int, width: float,
 	if not modifiers.is_empty():
 		_add_modifiers(body, modifiers)
 	else:
-		_add_section(body, "词缀", view.get("affix_lines", []))
+		_add_section(body, "额外词缀", view.get("affix_lines", []),13,Color("475c87"))
 	var preview_lines: Array[String] = _string_array(view.get("preview_lines", []))
 	if not preview_lines.is_empty():
-		_add_section(body, "当前组合施放预览", preview_lines, 14, PresentationTheme.GOLD)
+		_add_section(body, "当前组合", preview_lines, 12, PresentationTheme.MUTED)
 	else:
 		_add_section(body, "效果", view.get("effect_lines", []))
 	column.add_child(card)
@@ -345,20 +364,23 @@ func _build_tags(tags: Array[String], width: float) -> HFlowContainer:
 	flow.name = "ItemTags"
 	flow.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	flow.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	flow.add_theme_constant_override("h_separation", 4)
+	flow.add_theme_constant_override("h_separation", 10)
 	flow.add_theme_constant_override("v_separation", 3)
 	for index: int in range(tags.size()):
-		flow.add_child(_badge(tags[index], "ItemTag%d" % index, PresentationTheme.MUTED,
-			Color("e9d9b8"), maxf(72.0, width * 0.70)))
+		var tag:=_label(tags[index],11,PresentationTheme.MUTED)
+		tag.name="ItemTag%d"%index
+		flow.add_child(tag)
+
 	return flow
 
 
 func _add_section(parent: VBoxContainer, caption: String, value: Variant,
-		font_size: int = 14, body_color: Color = PresentationTheme.TEXT) -> void:
+		font_size: int = 13, body_color: Color = PresentationTheme.TEXT) -> void:
 	var text_value: String = _section_text(value)
 	if text_value.strip_edges().is_empty():
 		return
-	var heading := _label(caption, 12, PresentationTheme.GOLD)
+	_section_break(parent)
+	var heading := _label(caption, 11, PresentationTheme.GOLD)
 	heading.name = "Section_" + caption
 	parent.add_child(heading)
 	var body := _label(text_value, font_size, body_color)
@@ -369,7 +391,8 @@ func _add_section(parent: VBoxContainer, caption: String, value: Variant,
 
 
 func _add_stats(parent: VBoxContainer, entries: Array[Dictionary], width: float) -> void:
-	var heading := _label("基础属性", 12, PresentationTheme.GOLD)
+	_section_break(parent)
+	var heading := _label("基础属性", 11, PresentationTheme.GOLD)
 	heading.name = "Section_基础属性"
 	parent.add_child(heading)
 	var grid := GridContainer.new()
@@ -400,14 +423,15 @@ func _add_stats(parent: VBoxContainer, entries: Array[Dictionary], width: float)
 
 
 func _add_modifiers(parent: VBoxContainer, entries: Array[Dictionary]) -> void:
-	var heading := _label("增益 / 代价", 12, PresentationTheme.GOLD)
+	_section_break(parent)
+	var heading := _label("辅助效果", 11, PresentationTheme.GOLD)
 	heading.name = "Section_增益与代价"
 	parent.add_child(heading)
 	var rows := VBoxContainer.new()
 	rows.name = "Modifiers"
 	rows.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	rows.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	rows.add_theme_constant_override("separation", 3)
+	rows.add_theme_constant_override("separation", 8)
 	for index: int in range(entries.size()):
 		var entry: Dictionary = entries[index]
 		var polarity: String = str(entry.polarity)
@@ -449,7 +473,7 @@ func _natural_height(view: Dictionary, width: float) -> float:
 	if font == null:
 		return MIN_CARD_HEIGHT
 	var body_width: float = maxf(40.0, width - CARD_PADDING * 2.0 - 8.0)
-	var title_size: int = maxi(1, roundi(22.0 * font_scale))
+	var title_size: int = maxi(1, roundi(18.0 * font_scale))
 	var small_size: int = maxi(1, roundi(12.0 * font_scale))
 	var body_size: int = maxi(1, roundi(14.0 * font_scale))
 	var height: float = HEADER_HEIGHT + CARD_PADDING * 1.3 + 8.0
@@ -494,7 +518,7 @@ func _natural_height(view: Dictionary, width: float) -> float:
 	if not effect_text.strip_edges().is_empty():
 		var caption_size: int = small_size + 4
 		height += 5.0 + float(caption_size) + _measure_height(font, effect_text, body_width, body_size) + 3.0
-	return maxf(MIN_CARD_HEIGHT, height)
+	return maxf(MIN_CARD_HEIGHT, height + 64.0)
 
 
 func _legacy_section_height(font: Font, value: Variant, width: float,
@@ -578,3 +602,11 @@ func _section_text(value: Variant) -> String:
 func _text(view: Dictionary, key: String, fallback: String = "") -> String:
 	var value: Variant = view.get(key, fallback)
 	return str(value) if value != null else fallback
+
+
+func _section_break(parent: VBoxContainer) -> void:
+	var separator:=HSeparator.new()
+	separator.custom_minimum_size.y=8
+	separator.mouse_filter=Control.MOUSE_FILTER_IGNORE
+	separator.modulate=Color(0.55,0.43,0.28,0.55)
+	parent.add_child(separator)

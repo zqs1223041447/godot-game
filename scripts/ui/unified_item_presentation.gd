@@ -55,6 +55,7 @@ static func view(model: RefCounted, uid: String) -> Dictionary:
 		return {}
 	var result := {
 		"uid":uid,
+		"rarity":str(definition.get("rarity","normal")),
 		"name":str(definition.get("name","")),
 		"kind_label":"",
 		"rarity_label":"",
@@ -85,22 +86,22 @@ static func view(model: RefCounted, uid: String) -> Dictionary:
 		"equipment":
 			result.kind_label = CATEGORIES.get(str(definition.get("category","")), "装备")
 			result.rarity_label = RARITIES.get(str(definition.get("rarity","")), str(definition.get("rarity","")))
+			result.function = ""
+			result.description = ""
+			var base_stats: Dictionary=definition.get("stats",{}).duplicate(true)
 			if not item.payload.is_empty():
-				result.kind_label += " · 物品等级 %d" % int(item.payload.get("item_level", 1))
-				result.description = Gear.base_definition(str(item.payload.get("base_id",""))).get(
-					"description", result.description)
-				result.function = result.description
-			result.affix_lines = definition.get("affix_lines", []).duplicate(true)
-			var stats: Dictionary = definition.get("stats", {}).duplicate(true)
-			if stats.has("additional_skill_slots"):
-				result.effect_lines.append("额外技能行 +%d；卸下仅停用超出行，保留宝石与配置" % int(stats.additional_skill_slots))
-				stats.erase("additional_skill_slots")
-			if not stats.is_empty():
-				result.base_lines.append("装备合计：" + LegacyText.describe_stats(stats))
-			if definition.has("weapon_damage_summary"):
-				result.base_lines.append(str(definition.weapon_damage_summary))
-			for effect: String in definition.get("effects", []):
-				result.effect_lines.append("投射物抵达射程后返回" if effect == "return_on_range" else "飞行结束触发独立爆炸" if effect == "explode_on_flight_end" else effect)
+				result.kind_label += " · 物品等级 %d" % int(item.payload.get("item_level",1))
+				base_stats=Gear.base_definition(str(item.payload.get("base_id",""))).get("stats",{}).duplicate(true)
+				for affix: Dictionary in item.payload.get("affixes",[]):
+					var family: Dictionary=Gear.affix_definition(str(affix.id))
+					result.affix_lines.append("%s +%d%s" % [str(family.get("label",family.get("name",""))),int(affix.value),"%" if family.get("unit")=="percent" else ""])
+			for stat: String in base_stats:
+				result.base_lines.append(LegacyText.describe_stats({stat:base_stats[stat]}))
+			if definition.has("weapon_profile"):
+				result.base_lines.append("本武器基础物理伤害 %.2f" % float(definition.weapon_profile.base.physical))
+			for effect: String in definition.get("effects",[]):
+				result.effect_lines.append("投射物抵达射程后返回" if effect=="return_on_range" else "飞行结束触发独立爆炸" if effect=="explode_on_flight_end" else effect)
+
 		"jewel":
 			result.kind_label = "天赋珠宝"
 			result.rarity_label = RARITIES.get(str(definition.get("rarity","")), str(definition.get("rarity","")))
@@ -120,11 +121,15 @@ static func view(model: RefCounted, uid: String) -> Dictionary:
 				str(item.payload.get("level", 1)), str(item.payload.get("quality", 0))]
 			var support_id: String = str(definition.get("support_id",""))
 			result.tags = _support_tags(definition, support_id)
-			result.base_stats = [
-				{"label":"宝石等级", "value":str(item.payload.get("level", 1))},
-				{"label":"品质", "value":str(item.payload.get("quality", 0))},
-			]
-			result.modifiers = _support_modifiers(support_id)
+			result.function = "改变相连主动技能的效果，不能单独施放。"
+			result.description = ""
+			var supported_names: PackedStringArray=[]
+			for skill_id: String in _applicable_skill_ids(support_id):
+				supported_names.append(str(Data.SKILLS[skill_id].get("name",skill_id)))
+			result.requirements = ["适用技能："+"、".join(supported_names)]
+
+			result.base_stats = []
+			result.modifiers = _support_modifiers(support_id, false)
 			var support_location: Dictionary = model.location(uid)
 			_append_current_preview(model, support_location, result)
 	return result
@@ -156,15 +161,12 @@ static func _skill_tags(definition: Dictionary, skill_id: String) -> Array[Strin
 static func _support_tags(definition: Dictionary, support_id: String) -> Array[String]:
 	var tags: Array[String] = ["辅助"]
 	# GemCatalog exposes the support's actual requirements as its capabilities field.
-	_append_capability_tags(tags, definition.get("capabilities", []), true)
+
 	var support: Dictionary = Supports.get_definition(support_id)
 	var family: String = str(support.get("family",""))
 	if SUPPORT_FAMILY_LABELS.has(family):
 		_append_tag(tags, str(SUPPORT_FAMILY_LABELS[family]) + "辅助")
-	for skill_id: String in _applicable_skill_ids(support_id):
-		var skill: Dictionary = Data.SKILLS.get(skill_id, {})
-		if not skill.is_empty():
-			_append_tag(tags, "适配·" + str(skill.get("short_name", skill.get("name", skill_id))))
+
 	return tags
 
 
@@ -309,7 +311,7 @@ static func _append_type_stat(target: Array[Dictionary], value: Variant) -> void
 		target.append({"label":"基础伤害类型", "value":str(DAMAGE_LABELS[value])})
 
 
-static func _support_modifiers(support_id: String) -> Array[Dictionary]:
+static func _support_modifiers(support_id: String, include_source: bool = true) -> Array[Dictionary]:
 	var result: Array[Dictionary] = []
 	var definition: Dictionary = Supports.get_definition(support_id)
 	var operations: Variant = definition.get("operations", [])
@@ -318,7 +320,7 @@ static func _support_modifiers(support_id: String) -> Array[Dictionary]:
 	for value: Variant in operations:
 		if not value is Dictionary:
 			continue
-		var entry: Dictionary = _operation_entry(value, str(definition.get("name","")))
+		var entry: Dictionary = _operation_entry(value, str(definition.get("name","")) if include_source else "")
 		if not entry.is_empty():
 			result.append(entry)
 	return result

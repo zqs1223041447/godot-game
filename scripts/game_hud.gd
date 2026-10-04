@@ -1570,6 +1570,7 @@ func _show_item_hover(uid: String,anchor: Rect2) -> void:
 		_set_drag_active(true)
 		return
 	if not _state.has_method("item") or _state.item(uid).is_empty(): return
+	if is_instance_valid(_item_hover) and _item_hover.contains_viewport_point(get_viewport().get_mouse_position()) and not _hover_uid.is_empty(): return
 	_hover_uid = uid
 	_hover_anchor = anchor
 	_hover_exit_at = 0
