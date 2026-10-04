@@ -75,7 +75,7 @@ func spawn_tornado(shots: Array[Dictionary], origin: Vector2, heading: Vector2,
 
 
 func advance(shots: Array[Dictionary], delta: float, targets: Array[Dictionary],
-		owner_center: Vector2, max_projectiles: int, contact_gate: Callable = Callable()) -> Array[Dictionary]:
+		owner_center: Vector2, max_projectiles: int, contact_gate: Callable = Callable(), terrain_query: Callable = Callable()) -> Array[Dictionary]:
 	var events: Array[Dictionary] = []
 	last_work_sorts = 0
 	last_work_sort_skips = 0
@@ -94,7 +94,7 @@ func advance(shots: Array[Dictionary], delta: float, targets: Array[Dictionary],
 		_target_index.rebuild(targets)
 	var work: Array[Dictionary] = []
 	for shot: Dictionary in shots:
-		work.append(_schedule(shot, delta, 0.0, targets))
+		work.append(_schedule(shot, delta, 0.0, targets, terrain_query))
 	var active_count: int = shots.size()
 	var work_dirty: bool = true
 	var work_order_safe: bool = false
@@ -156,6 +156,11 @@ func advance(shots: Array[Dictionary], delta: float, targets: Array[Dictionary],
 			# The immutable lifetime ceiling wins a range/split/return tie.
 			_event(events, "lifetime_expired", shot, offset)
 			_natural_end(shot, "lifetime_expired", events, offset)
+		elif bool(job.terrain_hit):
+			# Collision is not natural flight completion. It cannot dispatch the
+			# range/split/return or flight-ended/explosion effects.
+			_event(events, "terrain_hit", shot, offset)
+			_finish(shot, "terrain_collision", events, offset)
 		elif shot.state == "outbound" and float(shot.distance) >= float(shot.range) - EPS:
 			_event(events, "range_reached", shot, offset)
 			if bool(shot.split):
@@ -174,7 +179,7 @@ func advance(shots: Array[Dictionary], delta: float, targets: Array[Dictionary],
 							int(shot.id), int(shot.root_id), int(shot.generation) + 1)
 						shots.append(child)
 						if remaining > EPS:
-							work.append(_schedule(child, remaining, offset, targets))
+							work.append(_schedule(child, remaining, offset, targets, terrain_query))
 							work_dirty = true
 						active_count += 1
 						_event(events, "spawned", child, offset)
@@ -191,7 +196,7 @@ func advance(shots: Array[Dictionary], delta: float, targets: Array[Dictionary],
 		if not bool(shot.active):
 			active_count -= 1
 		elif remaining > EPS:
-			work.append(_schedule(shot, remaining, offset, targets))
+			work.append(_schedule(shot, remaining, offset, targets, terrain_query))
 			work_dirty = true
 	var survivors: Array[Dictionary] = []
 	for shot: Dictionary in shots:
@@ -229,27 +234,35 @@ static func _work_order_is_strict(work: Array[Dictionary]) -> bool:
 	return true
 
 
-func _schedule(shot: Dictionary, remaining: float, offset: float, targets: Array[Dictionary]) -> Dictionary:
+func _schedule(shot: Dictionary, remaining: float, offset: float, targets: Array[Dictionary], terrain_query: Callable = Callable()) -> Dictionary:
 	var life_left: float = maxf(0.0, float(shot.lifetime) - float(shot.age))
 	var range_left: float = INF
 	if shot.state == "outbound":
 		range_left = maxf(0.0, float(shot.range) - float(shot.distance)) / maxf(EPS, float(shot.speed))
 	var travel: float = minf(remaining, minf(life_left, range_left))
 	var start: Vector2 = shot.pos
+	var terrain_hit := false
+	if terrain_query.is_valid():
+		var blocker: Dictionary = terrain_query.call(start,start+Vector2(shot.velocity)*travel,float(shot.radius))
+		if blocker.hit:
+			terrain_hit = true
+			travel *= clampf(float(blocker.fraction),0.0,1.0)
 	var contacts: Array[Dictionary] = _contacts(shot, start, start + Vector2(shot.velocity) * travel, targets)
+	if terrain_hit:
+		contacts = contacts.filter(func(c: Dictionary) -> bool: return float(c.t) < 1.0-EPS)
 	# A contact exactly at the expiry deadline is outside this carrier's active interval.
 	if life_left <= EPS:
 		contacts.clear()
 	elif life_left <= travel + EPS:
 		contacts = contacts.filter(func(c: Dictionary) -> bool: return float(c.t) < 1.0 - EPS)
-	var priority: int = 0 if life_left <= travel + EPS else (2 if range_left <= travel + EPS else 3)
+	var priority: int = 0 if life_left <= travel + EPS else (1 if terrain_hit else (2 if range_left <= travel + EPS else 3))
 	var at: float = offset + travel
 	var pierce: int = int(shot.pierce)
 	if pierce >= 0 and contacts.size() > pierce:
 		at = offset + float(contacts[pierce].t) * travel
 		priority = 1
 	return {"shot": shot, "remaining": remaining, "offset": offset, "travel": travel,
-		"contacts": contacts, "at": at, "priority": priority}
+		"contacts": contacts, "at": at, "priority": priority,"terrain_hit":terrain_hit}
 
 
 func _natural_end(shot: Dictionary, reason: String, events: Array[Dictionary], time: float) -> void:
