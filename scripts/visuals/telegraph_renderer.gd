@@ -93,7 +93,9 @@ static func _read_state(raw: Variant) -> Dictionary:
 	var progress: float = clampf(age / windup_seconds, 0.0, 1.0) if phase == "windup" else \
 		clampf((age - windup_seconds) / recovery_seconds, 0.0, 1.0)
 	return {"source_id": int(source_id), "center": center, "radius": float(radius),
-		"phase": phase, "progress": progress, "element": raw.get("visual_element", "") if raw.get("visual_element", "") in ["cold", "lightning"] else ""}
+		"phase": phase, "progress": progress,
+		"pattern": raw.get("visual_pattern", "") if raw.get("visual_pattern", "") in ["garden_slam", "ruins_mark"] else "",
+		"element": raw.get("visual_element", "") if raw.get("visual_element", "") in ["cold", "lightning"] else ""}
 
 
 static func _number(value: Variant) -> bool:
@@ -122,8 +124,12 @@ static func _append_state(state: Dictionary, effects: int, fills: Array[Dictiona
 	# A traced, angular stone rune conveys charge without a spinning clock-face ring.
 	# Element shape sits clear of the player standing on the locked center.
 	# It remains strictly inside the true radius and does not change collision.
-	var rune_center: Vector2 = state.center if state.element.is_empty() else state.center + Vector2(0, -radius * 0.63)
+	var rune_center: Vector2 = state.center if state.element.is_empty() and state.pattern != "ruins_mark" else state.center + Vector2(0, -radius * 0.63)
 	var rune: PackedVector2Array = _rune(rune_center, minf(13.0, radius * 0.18), -0.13, state.element)
+	if state.pattern == "garden_slam":
+		rune = _boss_rune(rune_center, radius * 0.48, "garden_slam")
+	elif state.pattern == "ruins_mark":
+		rune = _boss_rune(rune_center, minf(16.0,radius * 0.21), "ruins_mark")
 	marks.append(_line(state, "rune_base", rune, Color(INK, 0.6 * fade), minf(3.0, radius * 0.1)))
 	var charged: PackedVector2Array = _trace(rune, progress if winding else 1.0)
 	if charged.size() >= 2:
@@ -179,3 +185,13 @@ static func _trace(points: PackedVector2Array, fraction: float) -> PackedVector2
 		traced.append(points[index])
 		remaining -= segment
 	return traced
+
+
+static func _boss_rune(center: Vector2, size: float, pattern: String) -> PackedVector2Array:
+	# Angular stone cracks and a small offset seal; never extend past the true danger circle.
+	var shape: Array[Vector2] = [Vector2(-0.9,0.35),Vector2(-0.4,0.1),Vector2(-0.15,0.3),Vector2(0.1,-0.15),Vector2(0.45,-0.05),Vector2(0.8,-0.4)]
+	if pattern == "ruins_mark":
+		shape = [Vector2(-0.7,-0.65),Vector2(0.7,-0.65),Vector2(0.7,0.35),Vector2(0,0.8),Vector2(-0.7,0.35),Vector2(-0.7,-0.65)]
+	var result := PackedVector2Array()
+	for point: Vector2 in shape: result.append(center+point*size)
+	return result
