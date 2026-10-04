@@ -100,7 +100,7 @@ static func view(model: RefCounted, uid: String) -> Dictionary:
 			if definition.has("weapon_profile"):
 				result.base_lines.append("本武器基础物理伤害 %.2f" % float(definition.weapon_profile.base.physical))
 			for effect: String in definition.get("effects",[]):
-				result.effect_lines.append("投射物抵达射程后返回" if effect=="return_on_range" else "飞行结束触发独立爆炸" if effect=="explode_on_flight_end" else effect)
+				result.effect_lines.append("投射物抵达射程后返回一次，不刷新寿命" if effect=="return_on_range" else "投射物自然结束时爆炸；分裂、碰撞消耗或取消不触发" if effect=="explode_on_flight_end" else effect)
 
 		"jewel":
 			result.kind_label = "天赋珠宝"
