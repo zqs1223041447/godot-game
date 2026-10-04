@@ -16,6 +16,7 @@ const Gear = preload("res://scripts/items/equipment_catalog.gd")
 const DockStyle = preload("res://scripts/ui/dock_visual_style.gd")
 const SLOT_NAMES := {"weapon":"武器","body_armour":"护甲","amulet":"项链","ring_1":"戒指一","ring_2":"戒指二","boots":"鞋","belt":"腰带","gloves":"手套","helmet":"头盔"}
 var model: RefCounted
+var _trade_arena: Node
 var save_path := "user://build_save.json"
 var _grid: Control
 var _slots: Dictionary = {}
@@ -66,8 +67,11 @@ class SlotTarget extends Button:
 	func _drop_data(_at: Vector2, data: Variant) -> void:
 		if _can_drop_data(_at, data): owner_panel._move_requested(data.uid, {"kind":"equipment","slot_id":slot_id}, data.revision)
 
-func setup(state: RefCounted, path: String = "user://build_save.json") -> void:
+func setup(state: RefCounted, path: String = "user://build_save.json", trade_arena: Node = null) -> void:
 	model = state
+	_trade_arena = trade_arena
+	if _trade_arena != null and not _trade_arena.world_context_changed.is_connected(_on_trade_world_changed):
+		_trade_arena.world_context_changed.connect(_on_trade_world_changed)
 	save_path = path
 	if _grid == null: _build()
 	if not model.changed.is_connected(_on_model_changed): model.changed.connect(_on_model_changed)
@@ -296,12 +300,17 @@ func refresh() -> void:
 
 
 func _on_model_changed() -> void:
+	if bool(_pending_craft.get("gem", false)): _cancel_craft()
 	_refresh_dirty = true
 	if is_visible_in_tree(): refresh()
 
 
 func _on_visibility_changed() -> void:
 	if is_visible_in_tree() and _refresh_dirty: refresh()
+
+func _on_trade_world_changed() -> void:
+	if bool(_pending_craft.get("gem", false)): _cancel_craft()
+	_refresh_crafting()
 
 
 func _layout_slots() -> void:
@@ -391,6 +400,11 @@ func _refresh_crafting() -> void:
 	var item: Dictionary = model.item(_selected_uid)
 	_discard.disabled = item.is_empty() or not model.can_discard_item(_selected_uid)
 	var source: Dictionary = item.get("payload",{}) if item.get("kind","") == "equipment" else {}
+	if item.get("kind", "") in ["skill_gem", "support_gem"] and model.has_method("gem_recycle_info"):
+		var info: Dictionary = _trade_arena.normal_gem_recycle_info(_selected_uid) if _trade_arena != null else {"available":false,"reason":"请先返回正式城镇","credit":1}
+		_craft_metadata.clear()
+		_craft_controls.set_operations_context(_selected_uid, item.payload, model.crafting_balance(), [{"operation":"salvage","label":"回收","available":bool(info.available),"reason":str(info.get("reason","")),"description":"回收所选宝石","risk":"仅消耗这一颗，其他同名宝石不变。","materials":{"calibration_shard":int(info.credit)}}])
+		return
 	if model.has_method("crafting_operations"):
 		var operations: Array = model.crafting_operations(_selected_uid,save_path)
 		_craft_metadata.clear()
@@ -428,6 +442,9 @@ func _build_craft_confirmation() -> void:
 
 func _request_craft(operation: String,uid: String,source: Dictionary) -> void:
 	if _craft_dialog.visible or uid != _selected_uid: return
+	if operation == "salvage" and model.item(uid).get("kind", "") in ["skill_gem", "support_gem"]:
+		_request_gem_recycle(uid, source)
+		return
 	var quote: Dictionary
 	if model.has_method("crafting_operations"):
 		quote = model.crafting_quote(operation,uid,save_path)
@@ -460,6 +477,19 @@ func _request_craft(operation: String,uid: String,source: Dictionary) -> void:
 		_craft_dialog.dialog_text = "%s「%s」？\n消耗校准碎片 %d 枚。\n%s" % [label,name_value,int(quote.cost.get("calibration_shard",0)),(str(metadata.get("description",""))+"\n"+str(metadata.get("risk",""))).strip_edges()]
 	_craft_dialog.popup_centered(Vector2i(500,240))
 
+func _request_gem_recycle(uid: String, source: Dictionary) -> void:
+	if _trade_arena == null or source != model.item(uid).get("payload", {}): return
+	var quote: Dictionary = _trade_arena.normal_gem_trade_quote("recycle", uid, model.revision())
+	if not bool(quote.get("ok", false)):
+		_report(quote)
+		_refresh_crafting()
+		return
+	_pending_craft = {"gem":true,"quote":quote.duplicate(true),"target":uid}
+	_craft_dialog.title = "确认回收宝石"
+	_craft_dialog.ok_button_text = "确认回收"
+	_craft_dialog.dialog_text = "回收「%s」？\n获得校准碎片 %d 枚。\n仅消耗所选这一颗宝石，其他同名宝石不变。" % [str(quote.name), int(quote.materials.calibration_shard)]
+	_craft_dialog.popup_centered(Vector2i(500,220))
+
 
 func _confirm_craft() -> void:
 	if not _pending_discard.is_empty():
@@ -470,6 +500,11 @@ func _confirm_craft() -> void:
 	if _pending_craft.is_empty(): return
 	var issued: Dictionary = _pending_craft.duplicate(true)
 	_pending_craft.clear()
+	if bool(issued.get("gem", false)):
+		var gem_result: Dictionary = _trade_arena.execute_normal_gem_trade(issued.quote.handle, _selected_uid)
+		feedback.emit("宝石已回收" if bool(gem_result.get("ok", false)) else str(gem_result.get("reason", "操作未完成")))
+		refresh()
+		return
 	var result: Dictionary = model.execute_crafting(issued.quote.handle,issued.source)
 	if result.ok: feedback.emit("装备工艺已保存")
 	else: feedback.emit(str(result.get("reason","操作未完成")))
@@ -478,7 +513,11 @@ func _confirm_craft() -> void:
 
 func _cancel_craft() -> void:
 	_pending_discard.clear()
-	if not _pending_craft.is_empty(): model.cancel_crafting_quote(_pending_craft.quote.handle)
+	if not _pending_craft.is_empty():
+		if bool(_pending_craft.get("gem", false)):
+			if _trade_arena != null and _trade_arena.state == model: _trade_arena.cancel_normal_gem_trade_quote(_pending_craft.quote.handle)
+			else: model.cancel_gem_trade_quote(_pending_craft.quote.handle)
+		else: model.cancel_crafting_quote(_pending_craft.quote.handle)
 	_pending_craft.clear()
 	if is_instance_valid(_craft_dialog): _craft_dialog.hide()
 

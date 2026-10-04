@@ -985,7 +985,7 @@ func _build_inventory_panel() -> void:
 			_inventory_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			_inventory_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
 			body.add_child(_inventory_panel)
-			_inventory_panel.setup(_state, str(_arena.build_save_path))
+			_inventory_panel.setup(_state, str(_arena.build_save_path), _arena)
 			_inventory_panel.feedback.connect(notify)
 			_inventory_panel.item_hovered.connect(_show_item_hover)
 			_inventory_panel.hover_left.connect(_leave_item_hover)
