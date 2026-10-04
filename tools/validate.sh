@@ -103,12 +103,12 @@ fi
 echo "Godot version: $("$GODOT_BIN" --version)"
 python3 "$PROJECT_DIR/tools/check_font_coverage.py"
 run_check --editor --import
-run_check --script res://tests/source_resource_compile_test.gd
-run_check --script res://tests/source_resource_migration_test.gd
-run_check --script res://tests/source_resource_gameplay_test.gd
-run_check --script res://tests/source_resource_mastery_test.gd
-run_check --script res://tests/source_resource_reference_test.gd
+run_check --script res://tests/source_flask_rules_test.gd
+run_check --script res://tests/source_flask_migration_test.gd
+run_check --script res://tests/source_flask_gameplay_test.gd
+run_check --script res://tests/flask_build_text_test.gd
+run_check --script res://tests/source_flask_reference_test.gd
 python3 "$PROJECT_DIR/tools/check_item_transparency.py"
 python3 "$PROJECT_DIR/tests/reference_catalog_test.py"
 run_check --quit-after 300
-echo "Current-batch validation passed: source mana cost formulas, frozen casts, version22 migration, ten actual cast payment boundaries, unique mastery and existing final-value skill display, reference/font/assets, and startup."
+echo "Current-batch validation passed: source flask recovery and charge modifiers, frozen baseline, version23 migration, actual use and root reward boundaries, and current-value flask display, reference/font/assets, and startup."

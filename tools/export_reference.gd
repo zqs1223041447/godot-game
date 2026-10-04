@@ -31,6 +31,7 @@ const GemCatalogData = preload("res://scripts/items/gem_catalog.gd")
 const EquipmentSlotsData = preload("res://scripts/items/equipment_slots.gd")
 const Flasks = preload("res://scripts/items/flask_catalog.gd")
 const FlaskRuntime = preload("res://scripts/combat/flask_runtime.gd")
+const FlaskModifiers = preload("res://scripts/combat/flask_modifier_rules.gd")
 const Town = preload("res://scripts/town/town_catalog.gd")
 const Maps = preload("res://scripts/world/map_catalog.gd")
 const MapRules = preload("res://scripts/world/map_compiler.gd")
@@ -83,6 +84,7 @@ static func collect() -> Dictionary:
 	result["source_spatial"] = source_spatial_examples()
 	result["source_recharge"] = source_recharge_examples()
 	result["source_mana_cost"] = source_mana_cost_examples()
+	result["source_flasks"] = source_flask_examples()
 	result["save_version"] = Canonical.Rules.VERSION
 	result["current_loot_profile_id"] = Canonical.LOOT_PROFILE_ID
 	result["current_loot_profile"] = Equipment.loot_profile(Canonical.LOOT_PROFILE_ID)
@@ -811,3 +813,36 @@ static func source_mana_cost_examples()->Dictionary:
 		for option:Dictionary in SourceTree.Data.node(id).mastery_effects:
 			if int(option.effect)==12119:mastery_entrances.append(id)
 	return {"mastery":{"effect_id":12119,"entrances":mastery_entrances,"increased_efficiency":0.15,"unique_effect_rule":"相同精通效果ID最多选择一次；先达本组普通连通显著节点"},"minimum_save_version":22,"fields":Compiler.ResourceCost.STATS,"formula":"最终魔力 = 原辅助后魔力 × (1 + 成本增加总和) / (1 + 成本效率总和)","formula_origin":"本游戏明确实现规则；不把效率当线性reduced，不声称完整PoE公式","skills":Data.SKILLS.keys(),"examples":examples,"free_basic_attack":true,"float_payment":true,"unchanged":["伤害","冷却债务","技能效果","射程与范围"],"snapshot":"点击施放时读当前构筑编译结果；已产生的group/main UID冷却不会因改成本或移动宝石重置","legacy_rule":"严格旧21验证与原字节备份后迁移22，UID/点数/进度/revision保留；旧版本注入新节点拒绝","unsupported":["法术限定效率","诅咒与链接技能成本","生命转费","保留效率"],"example_scope":"新星加节能/疾咏，隔离展示成本字段；节点其余魔力/恢复收益仍由对应原消费者结算"}
+
+
+static func source_flask_examples()->Dictionary:
+	var examples:Array=[]
+	for id:String in ["18402","17546","60648"]:
+		var effect:Dictionary=SourceTree.node_effect(id);assert(effect.status=="full")
+		var stats:Dictionary={}
+		for grant:Dictionary in effect.grants:
+			if grant.stat in FlaskModifiers.STATS:stats[grant.stat]=float(stats.get(grant.stat,0.0))+float(grant.value)
+		var profiles:Dictionary={}
+		for definition_id:String in Flasks.DEFINITIONS:profiles[definition_id]=FlaskModifiers.profile(definition_id,stats,100.0)
+		examples.append({"node_id":id,"stats":SourceTree.Data.node(id).stats,"input":stats,"profiles":profiles})
+	var runtime:=FlaskRuntime.new();var uid:="reference_charge";assert(runtime.reset({uid:"flask:life"}))
+	for i:int in range(3):assert(runtime.use(uid,0.0,100.0).ok);runtime.clear_effects()
+	var charge_rows:Array=[]
+	for i:int in range(20):
+		runtime.charge_rewarded_kill([uid],{"flask_charges_gained_increased":0.15})
+		var state:Dictionary=runtime.snapshot()
+		charge_rows.append({"root_kills":i+1,"whole_charges":state.charges_by_uid[uid],"remainder_micro":state.get("charge_remainders_micro",{}).get(uid,0)})
+	var newly_complete:Array=[]
+	for id:String in SourceTree.Data.standard_ids():
+		if SourceTree.node_effect(id,0,22).status!="full" and SourceTree.node_effect(id,0,23).status=="full":newly_complete.append(id)
+	newly_complete.sort()
+	return {"minimum_save_version":23,"fields":FlaskModifiers.STATS,"new_complete_ordinary_nodes":newly_complete,"examples":examples,"charge_rows":charge_rows,"charge_unit":FlaskModifiers.CHARGE_UNIT,
+		"recovery_formula":"本次总回复 = 使用时对应最大资源 × 35% × (1 + 相应药剂回复增幅)",
+		"charge_formula":"每个有效奖励根怪获得充能 = 1 × (1 + 充能获取增幅)",
+		"locked_recovery":"使用时冻结本次总量与3秒速率；期间换装或退款不重算，当前资源上限仍限制实际回复",
+		"charge_lifecycle":"余量按同一药剂UID累计，换槽或移入背包不清零；只有当时装备的药剂获充能，满30在本次合法奖励时丢弃超额与余量",
+		"reward_gate":"后代、演示怪及重复死亡不获充能；保持原奖励RNG与物品输出",
+		"unchanged":"基础30充能、每次消耗10、持续3秒；同资源不叠加，满资源或回复中不扣费",
+		"legacy_rule":"严格旧22验证并原字节备份后迁移23；旧版本注入新药剂节点拒绝，不额外赠物或点数",
+		"runtime_persisted":false,"example_scope":"100资源上限隔离示例，仅展示本批药剂字段，节点其他生命或魔力收益仍由原消费者结算",
+		"unsupported":["药剂持续时间","定时或命中获得充能","压制触发充能","药剂期间持续伤害减免"]}
