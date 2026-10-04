@@ -1,0 +1,22 @@
+{
+  "scope": "Pure original-prototype burn policies and runtime; no gameplay, UI, saves, or export claim",
+  "command": "bash tools/validate.sh res://tests/burn_rules_runtime_test.gd",
+  "engine": "Godot 4.6.3.stable.official.7d41c59c4",
+  "result": {
+    "checks": 776,
+    "failures": 0,
+    "exit_code": 0,
+    "script_errors": 0
+  },
+  "passed_log": "docs/qa/v045/burn-pure-run-02.log",
+  "retained_failed_log": "docs/qa/v045/burn-pure-run-01.log",
+  "failed_attempt_resolution": "Test-harness heterogeneous key comparison replaced by a strict typeof comparison; runtime behavior unchanged",
+  "hash_capture": "Captured immediately after the successful focused run; these five inputs were not changed after that run",
+  "sha256": {
+    "scripts/combat/burn_rules.gd": "adf1bb84b7bd91e4b24b2aeeaa0b38daca30798c0da42303bb2235caf0a1aa75",
+    "scripts/combat/burn_runtime.gd": "60168fa420639c005556a5274616822c063382493ad365ac3dceb33cc03f9c32",
+    "tests/burn_rules_runtime_test.gd": "4f88217889f83a76ec0a0a21e692274e3a821710d7e269159e9ef8f3a1db93f4",
+    "project.godot": "a9b9586e5c0ac2ceb8ae74220f2721b6f651d1cbf3fc938e94a642078c540f1c",
+    "tools/validate.sh": "45e3b37f1832dbd21103aa48672e3ee731cb4f05db2b2de3ecbac6ce3966d077"
+  }
+}
