@@ -1,0 +1,217 @@
+{
+  "projectile": [
+    {
+      "layout": "spread",
+      "shots": 30,
+      "advance_us": {
+        "n": 20,
+        "mean": 1239.9,
+        "median": 1238.5,
+        "p95": 1422,
+        "max": 1422,
+        "gt16_7ms": 0,
+        "gt33_3ms": 0
+      },
+      "spawn_us": {
+        "n": 20,
+        "mean": 811.75,
+        "median": 806.5,
+        "p95": 977,
+        "max": 977,
+        "gt16_7ms": 0,
+        "gt33_3ms": 0
+      },
+      "candidates": 126,
+      "full_scan": 3000,
+      "events": 30
+    },
+    {
+      "layout": "spread",
+      "shots": 180,
+      "advance_us": {
+        "n": 20,
+        "mean": 6856.65,
+        "median": 6491.5,
+        "p95": 10349,
+        "max": 10349,
+        "gt16_7ms": 0,
+        "gt33_3ms": 0
+      },
+      "spawn_us": {
+        "n": 20,
+        "mean": 4813.2,
+        "median": 4595.5,
+        "p95": 8412,
+        "max": 8412,
+        "gt16_7ms": 0,
+        "gt33_3ms": 0
+      },
+      "candidates": 864,
+      "full_scan": 18000,
+      "events": 180
+    },
+    {
+      "layout": "dense",
+      "shots": 30,
+      "advance_us": {
+        "n": 20,
+        "mean": 4691.05,
+        "median": 4596.0,
+        "p95": 6121,
+        "max": 6121,
+        "gt16_7ms": 0,
+        "gt33_3ms": 0
+      },
+      "spawn_us": {
+        "n": 20,
+        "mean": 830.45,
+        "median": 806.5,
+        "p95": 1128,
+        "max": 1128,
+        "gt16_7ms": 0,
+        "gt33_3ms": 0
+      },
+      "candidates": 1785,
+      "full_scan": 3000,
+      "events": 137
+    },
+    {
+      "layout": "dense",
+      "shots": 180,
+      "advance_us": {
+        "n": 20,
+        "mean": 35504.75,
+        "median": 35344.5,
+        "p95": 38619,
+        "max": 38619,
+        "gt16_7ms": 20,
+        "gt33_3ms": 19
+      },
+      "spawn_us": {
+        "n": 20,
+        "mean": 5581.05,
+        "median": 5524.5,
+        "p95": 6613,
+        "max": 6613,
+        "gt16_7ms": 0,
+        "gt33_3ms": 0
+      },
+      "candidates": 13770,
+      "full_scan": 18000,
+      "events": 874
+    }
+  ],
+  "death": [
+    {
+      "batch": 1,
+      "total_us": {
+        "n": 3,
+        "mean": 5334.33,
+        "median": 3804,
+        "p95": 8583,
+        "max": 8583,
+        "gt16_7ms": 0,
+        "gt33_3ms": 0
+      },
+      "flush_us": {
+        "n": 3,
+        "mean": 4941,
+        "median": 3394,
+        "p95": 8227,
+        "max": 8227,
+        "gt16_7ms": 0,
+        "gt33_3ms": 0
+      }
+    },
+    {
+      "batch": 8,
+      "total_us": {
+        "n": 3,
+        "mean": 13863.33,
+        "median": 13672,
+        "p95": 14407,
+        "max": 14407,
+        "gt16_7ms": 0,
+        "gt33_3ms": 0
+      },
+      "flush_us": {
+        "n": 3,
+        "mean": 4531.33,
+        "median": 4488,
+        "p95": 4681,
+        "max": 4681,
+        "gt16_7ms": 0,
+        "gt33_3ms": 0
+      }
+    },
+    {
+      "batch": 20,
+      "total_us": {
+        "n": 3,
+        "mean": 26934.67,
+        "median": 26921,
+        "p95": 28121,
+        "max": 28121,
+        "gt16_7ms": 3,
+        "gt33_3ms": 0
+      },
+      "flush_us": {
+        "n": 3,
+        "mean": 4835,
+        "median": 4831,
+        "p95": 5026,
+        "max": 5026,
+        "gt16_7ms": 0,
+        "gt33_3ms": 0
+      }
+    }
+  ],
+  "actor": {
+    "same_rgba": true,
+    "same_state": true,
+    "draw_cpu_us": {
+      "n": 20,
+      "mean": 24828.55,
+      "median": 24386.0,
+      "p95": 27751,
+      "max": 27751,
+      "gt16_7ms": 20,
+      "gt33_3ms": 0
+    },
+    "counts": {
+      "blob_inclusive": 81,
+      "cached_blob_inclusive": 402,
+      "native_polygon": 722,
+      "native_polyline": 1866,
+      "path_native_inclusive": 582,
+      "shadow_inclusive": 101
+    },
+    "native_polyline_us": {
+      "n": 20,
+      "mean": 11058.75,
+      "median": 11031.0,
+      "p95": 11997,
+      "max": 11997,
+      "gt16_7ms": 0,
+      "gt33_3ms": 0
+    },
+    "native_polygon_us": {
+      "n": 20,
+      "mean": 3521.7,
+      "median": 3493.0,
+      "p95": 4101,
+      "max": 4101,
+      "gt16_7ms": 0,
+      "gt33_3ms": 0
+    },
+    "width_us": {
+      "n": 20,
+      "mean": 28.3,
+      "median": 26.0,
+      "p95": 76,
+      "max": 76,
+      "gt16_7ms": 0,
+      "gt33_3ms": 0
+    }
+  }
+}

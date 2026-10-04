@@ -1,0 +1,117 @@
+{
+	"runtime_unchanged": true,
+	"samples": [
+		{
+			"active_end": 0,
+			"alive": true,
+			"enemies": 100,
+			"enemy_ai_mean_us": 2466.561111111111,
+			"fixture": "normal",
+			"geometry_call_counts": {
+
+			},
+			"geometry_nested_total_us": {
+
+			},
+			"hud": {
+				"max_us": 2922,
+				"mean_us": 361.0888888888889,
+				"p95_us": 1297
+			},
+			"separation_visits": 85497,
+			"state_copy_mean_us": 77.64444444444445,
+			"state_nonempty_deep_copies": 0,
+			"state_reads": 34207,
+			"telegraph_advance_mean_us": 222.94444444444446,
+			"telegraph_start_mean_us": 169.85555555555555,
+			"telegraph_visual_snapshot": {
+				"max_us": 5,
+				"mean_us": 1.6333333333333333,
+				"p95_us": 3
+			},
+			"tick": {
+				"max_us": 16231,
+				"mean_us": 3466.0555555555557,
+				"p95_us": 4875
+			},
+			"ticks": 180
+		},
+		{
+			"active_end": 10,
+			"alive": true,
+			"enemies": 100,
+			"enemy_ai_mean_us": 2315.7555555555555,
+			"fixture": "normal_10_guards",
+			"geometry_call_counts": {
+
+			},
+			"geometry_nested_total_us": {
+
+			},
+			"hud": {
+				"max_us": 1173,
+				"mean_us": 292.26666666666665,
+				"p95_us": 953
+			},
+			"separation_visits": 118944,
+			"state_copy_mean_us": 152.77777777777777,
+			"state_nonempty_deep_copies": 5134,
+			"state_reads": 52480,
+			"telegraph_advance_mean_us": 197.32777777777778,
+			"telegraph_start_mean_us": 181.46666666666667,
+			"telegraph_visual_snapshot": {
+				"max_us": 286,
+				"mean_us": 97.48333333333333,
+				"p95_us": 143
+			},
+			"tick": {
+				"max_us": 4038,
+				"mean_us": 3115.0944444444444,
+				"p95_us": 3601
+			},
+			"ticks": 180
+		},
+		{
+			"active_end": 10,
+			"alive": true,
+			"enemies": 100,
+			"enemy_ai_mean_us": 4917.044444444445,
+			"fixture": "ruins_10_guards",
+			"geometry_call_counts": {
+				"direction": 16280,
+				"move": 18180,
+				"visible": 59976
+			},
+			"geometry_nested_total_us": {
+				"direction": 314466,
+				"move": 108445,
+				"visible": 257778
+			},
+			"hud": {
+				"max_us": 2177,
+				"mean_us": 313.98333333333335,
+				"p95_us": 987
+			},
+			"separation_visits": 121451,
+			"state_copy_mean_us": 155.85,
+			"state_nonempty_deep_copies": 5180,
+			"state_reads": 52466,
+			"telegraph_advance_mean_us": 199.81666666666666,
+			"telegraph_start_mean_us": 183.10555555555555,
+			"telegraph_visual_snapshot": {
+				"max_us": 328,
+				"mean_us": 98.76666666666667,
+				"p95_us": 146
+			},
+			"tick": {
+				"max_us": 10447,
+				"mean_us": 5759.988888888889,
+				"p95_us": 6323
+			},
+			"ticks": 180
+		}
+	],
+	"scope": "100 real catalog enemies, no shooting/rewards;10 guards and wall geometry deliberately isolated fixtures. Timings include instrumentation overhead; nested totals overlap. Headless CPU only, not Windows FPS or rendering.",
+	"source": "f074c2614540f0842964ced961b3430871adce57",
+	"ticks_per_sample": 180
+}
