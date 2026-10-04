@@ -3178,6 +3178,22 @@
 					"uid": "vitality_armor"
 				}
 			},
+			"journey": {
+				"active_run": {
+
+				},
+				"best_tiers": {
+					"broken_ruins": 0,
+					"old_garden": 0
+				},
+				"claimed_flasks": 0,
+				"claimed_gems": 0,
+				"next_run_id": 1,
+				"normal_root_kills": 0,
+				"pending_map_reward": {
+
+				}
+			},
 			"locations": {
 				"azure_charm": {
 					"kind": "equipment",
@@ -3448,7 +3464,7 @@
 				"normal_points": 5,
 				"source_version": "3.29.1"
 			},
-			"version": 25
+			"version": 26
 		},
 		"default_casts": {
 			"group_000001": {
@@ -4446,7 +4462,7 @@
 				"evasion": 320.0
 			}
 		},
-		"save_version": 25,
+		"save_version": 26,
 		"skitter_accuracy_example": {
 			"base_accuracy": 140,
 			"base_chance": 0.96,
@@ -4988,7 +5004,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 25,
+				"save_version": 26,
 				"source": {
 					"affixes": [
 						{
@@ -5395,7 +5411,7 @@
 				"schema_version": 2,
 				"status": "prototype"
 			},
-			"save_version": 25
+			"save_version": 26
 		},
 		"elevate": {
 			"description": "保留魔法装备已有词缀，升为稀有并补至4至6条。",
@@ -5596,7 +5612,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 25,
+				"save_version": 26,
 				"source": {
 					"affixes": [
 						{
@@ -5780,7 +5796,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 25,
+				"save_version": 26,
 				"source": {
 					"affixes": [],
 					"base_id": "ashwood_bow",
@@ -5966,7 +5982,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 25,
+				"save_version": 26,
 				"source": {
 					"affixes": [
 						{
@@ -6169,7 +6185,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 25,
+				"save_version": 26,
 				"source": {
 					"affixes": [
 						{
@@ -6311,7 +6327,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 25,
+				"save_version": 26,
 				"source": {
 					"affixes": [
 						{
@@ -6360,7 +6376,7 @@
 			"example_quantity": 1,
 			"name": "校准碎片",
 			"quantity_source": "items[uid].payload.quantity",
-			"save_version": 25,
+			"save_version": 26,
 			"size": [
 				1,
 				1
@@ -13655,7 +13671,7 @@
 			"status": "implemented"
 		}
 	},
-	"game_version": "0.40.0",
+	"game_version": "0.41.0",
 	"jewel_affixes": {
 		"barrier": {
 			"kind": "prefix",
@@ -17761,6 +17777,433 @@
 				"trigger_distance": 140.0
 			}
 		}
+	},
+	"normal_journey": {
+		"balance": "本游戏可调整原型；未引入新正常商店经济、随机地图物品或完整终局系统",
+		"claims": "地图碎片待领阻止新正式图，宝石药剂待领不阻止；领取只提交实际可入包部分，失败原子保留",
+		"default_scene": "normal_town",
+		"flask_interval": 60,
+		"free_test_stock_isolated": true,
+		"gem_interval": 30,
+		"gem_vocabulary": [
+			"skill:bolt",
+			"skill:chain",
+			"skill:cleave",
+			"skill:dash",
+			"skill:frost",
+			"skill:meteor",
+			"skill:nova",
+			"skill:shade_bolt",
+			"skill:tornado",
+			"skill:ward",
+			"support:breadth",
+			"support:chain_extension",
+			"support:chain_reach",
+			"support:cold_focus",
+			"support:concentrate",
+			"support:efficiency",
+			"support:fire_focus",
+			"support:focus",
+			"support:heavy_projectiles",
+			"support:lightning_focus",
+			"support:lingering_chill",
+			"support:physical_focus",
+			"support:pierce",
+			"support:quickcast",
+			"support:swift_projectiles",
+			"support:volley"
+		],
+		"initial_journey": {
+			"active_run": {
+
+			},
+			"best_tiers": {
+				"broken_ruins": 0,
+				"old_garden": 0
+			},
+			"claimed_flasks": 0,
+			"claimed_gems": 0,
+			"next_run_id": 1,
+			"normal_root_kills": 0,
+			"pending_map_reward": {
+
+			}
+		},
+		"isolation": "测试供应与测试击杀只在独立档；正常档不能领取测试商店物品；正常竞技练习也计累计合法根怪",
+		"lifecycle": "入图先保存费用与唯一run_id；完成一次保存解锁与待领。死亡重试再次付费；放弃不退；重新载入未完地图回正式城镇",
+		"maximum_bonus": 4,
+		"migration": "严格旧25验证与原字节备份后增加空旅程，不追补过去击杀；现有UID/构筑/物品/货币保持",
+		"minimum_save_version": 26,
+		"normal_bonus": 1,
+		"special_bonus": 2,
+		"tiers": [
+			{
+				"base_completion_reward": 4,
+				"boss_attack_id": "garden_slam",
+				"boss_id": "rift_warden",
+				"completion_reward": 4,
+				"description": "开阔庭院，无实体残墙。击败24个普通根怪，再击败裂隙守卫并清理后代。首领近身震地锁定起手位置，看到预警走出圆圈。",
+				"encounter_profile": {
+					"additions": {
+						"armour": 0.0,
+						"shield_from_base_health": 0.0
+					},
+					"definitions": [],
+					"modifier_ids": [],
+					"multipliers": {
+						"attack_speed": 1.0,
+						"damage": 1.0,
+						"max_health": 1.0,
+						"speed": 1.0
+					},
+					"resource_policy": {
+						"armour": "add_flat_then_existing_hit_size_formula",
+						"attack_speed": "multiply_contact_rate_and_recovery_only",
+						"damage": "multiply_canonical_once",
+						"health": "preserve_current_to_max_ratio",
+						"max_health": "multiply_canonical_once",
+						"max_shield": "add_fraction_of_unmodified_canonical_max_health",
+						"rounding": "float_no_integer_rounding",
+						"shield": "add_same_bonus_preserve_missing_amount",
+						"shield_regen": "unchanged",
+						"speed": "multiply_canonical_once",
+						"telegraph_windup": "unchanged"
+					},
+					"reward_budget": {
+						"creates_map_items": false,
+						"enabled": false,
+						"grants_rewards": false,
+						"proposed_bonus_fraction": null,
+						"status": "metadata_only"
+					},
+					"risk_parameters": [],
+					"source": {
+						"balance_source": "original_game_balance",
+						"catalog": "res://scripts/encounters/encounter_catalog.gd",
+						"definition_revision": 2,
+						"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+						"monster_schema_version": 1,
+						"policy_version": 2,
+						"schema_version": 1
+					}
+				},
+				"fee": 0,
+				"id": "old_garden",
+				"journey_tier": 1,
+				"name": "旧庭试炼 · I",
+				"normal_ids": [],
+				"normal_map": true,
+				"ordinary_target": 24,
+				"special_ids": [],
+				"summary": "旧庭试炼 · I",
+				"wave": 1
+			},
+			{
+				"base_completion_reward": 8,
+				"boss_attack_id": "garden_slam",
+				"boss_id": "rift_warden",
+				"completion_reward": 8,
+				"description": "开阔庭院，无实体残墙。击败24个普通根怪，再击败裂隙守卫并清理后代。首领近身震地锁定起手位置，看到预警走出圆圈。",
+				"encounter_profile": {
+					"additions": {
+						"armour": 0.0,
+						"shield_from_base_health": 0.0
+					},
+					"definitions": [],
+					"modifier_ids": [],
+					"multipliers": {
+						"attack_speed": 1.0,
+						"damage": 1.0,
+						"max_health": 1.0,
+						"speed": 1.0
+					},
+					"resource_policy": {
+						"armour": "add_flat_then_existing_hit_size_formula",
+						"attack_speed": "multiply_contact_rate_and_recovery_only",
+						"damage": "multiply_canonical_once",
+						"health": "preserve_current_to_max_ratio",
+						"max_health": "multiply_canonical_once",
+						"max_shield": "add_fraction_of_unmodified_canonical_max_health",
+						"rounding": "float_no_integer_rounding",
+						"shield": "add_same_bonus_preserve_missing_amount",
+						"shield_regen": "unchanged",
+						"speed": "multiply_canonical_once",
+						"telegraph_windup": "unchanged"
+					},
+					"reward_budget": {
+						"creates_map_items": false,
+						"enabled": false,
+						"grants_rewards": false,
+						"proposed_bonus_fraction": null,
+						"status": "metadata_only"
+					},
+					"risk_parameters": [],
+					"source": {
+						"balance_source": "original_game_balance",
+						"catalog": "res://scripts/encounters/encounter_catalog.gd",
+						"definition_revision": 2,
+						"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+						"monster_schema_version": 1,
+						"policy_version": 2,
+						"schema_version": 1
+					}
+				},
+				"fee": 4,
+				"id": "old_garden",
+				"journey_tier": 2,
+				"name": "旧庭试炼 · II",
+				"normal_ids": [],
+				"normal_map": true,
+				"ordinary_target": 24,
+				"special_ids": [],
+				"summary": "旧庭试炼 · II",
+				"wave": 4
+			},
+			{
+				"base_completion_reward": 12,
+				"boss_attack_id": "garden_slam",
+				"boss_id": "rift_warden",
+				"completion_reward": 12,
+				"description": "开阔庭院，无实体残墙。击败24个普通根怪，再击败裂隙守卫并清理后代。首领近身震地锁定起手位置，看到预警走出圆圈。",
+				"encounter_profile": {
+					"additions": {
+						"armour": 0.0,
+						"shield_from_base_health": 0.0
+					},
+					"definitions": [],
+					"modifier_ids": [],
+					"multipliers": {
+						"attack_speed": 1.0,
+						"damage": 1.0,
+						"max_health": 1.0,
+						"speed": 1.0
+					},
+					"resource_policy": {
+						"armour": "add_flat_then_existing_hit_size_formula",
+						"attack_speed": "multiply_contact_rate_and_recovery_only",
+						"damage": "multiply_canonical_once",
+						"health": "preserve_current_to_max_ratio",
+						"max_health": "multiply_canonical_once",
+						"max_shield": "add_fraction_of_unmodified_canonical_max_health",
+						"rounding": "float_no_integer_rounding",
+						"shield": "add_same_bonus_preserve_missing_amount",
+						"shield_regen": "unchanged",
+						"speed": "multiply_canonical_once",
+						"telegraph_windup": "unchanged"
+					},
+					"reward_budget": {
+						"creates_map_items": false,
+						"enabled": false,
+						"grants_rewards": false,
+						"proposed_bonus_fraction": null,
+						"status": "metadata_only"
+					},
+					"risk_parameters": [],
+					"source": {
+						"balance_source": "original_game_balance",
+						"catalog": "res://scripts/encounters/encounter_catalog.gd",
+						"definition_revision": 2,
+						"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+						"monster_schema_version": 1,
+						"policy_version": 2,
+						"schema_version": 1
+					}
+				},
+				"fee": 8,
+				"id": "old_garden",
+				"journey_tier": 3,
+				"name": "旧庭试炼 · III",
+				"normal_ids": [],
+				"normal_map": true,
+				"ordinary_target": 24,
+				"special_ids": [],
+				"summary": "旧庭试炼 · III",
+				"wave": 8
+			},
+			{
+				"base_completion_reward": 4,
+				"boss_attack_id": "ruins_mark",
+				"boss_id": "rift_warden",
+				"completion_reward": 4,
+				"description": "两道错位残墙需绕行；贯穿不穿墙，撞墙不触发到期效果。击败36个普通根怪，再击败裂隙守卫并清理后代。首领落印锁定你的起手位置，及时走开；墙体阻挡视线。",
+				"encounter_profile": {
+					"additions": {
+						"armour": 0.0,
+						"shield_from_base_health": 0.0
+					},
+					"definitions": [],
+					"modifier_ids": [],
+					"multipliers": {
+						"attack_speed": 1.0,
+						"damage": 1.0,
+						"max_health": 1.0,
+						"speed": 1.0
+					},
+					"resource_policy": {
+						"armour": "add_flat_then_existing_hit_size_formula",
+						"attack_speed": "multiply_contact_rate_and_recovery_only",
+						"damage": "multiply_canonical_once",
+						"health": "preserve_current_to_max_ratio",
+						"max_health": "multiply_canonical_once",
+						"max_shield": "add_fraction_of_unmodified_canonical_max_health",
+						"rounding": "float_no_integer_rounding",
+						"shield": "add_same_bonus_preserve_missing_amount",
+						"shield_regen": "unchanged",
+						"speed": "multiply_canonical_once",
+						"telegraph_windup": "unchanged"
+					},
+					"reward_budget": {
+						"creates_map_items": false,
+						"enabled": false,
+						"grants_rewards": false,
+						"proposed_bonus_fraction": null,
+						"status": "metadata_only"
+					},
+					"risk_parameters": [],
+					"source": {
+						"balance_source": "original_game_balance",
+						"catalog": "res://scripts/encounters/encounter_catalog.gd",
+						"definition_revision": 2,
+						"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+						"monster_schema_version": 1,
+						"policy_version": 2,
+						"schema_version": 1
+					}
+				},
+				"fee": 0,
+				"id": "broken_ruins",
+				"journey_tier": 1,
+				"name": "断垣试炼 · I",
+				"normal_ids": [],
+				"normal_map": true,
+				"ordinary_target": 36,
+				"special_ids": [],
+				"summary": "断垣试炼 · I",
+				"wave": 2
+			},
+			{
+				"base_completion_reward": 8,
+				"boss_attack_id": "ruins_mark",
+				"boss_id": "rift_warden",
+				"completion_reward": 8,
+				"description": "两道错位残墙需绕行；贯穿不穿墙，撞墙不触发到期效果。击败36个普通根怪，再击败裂隙守卫并清理后代。首领落印锁定你的起手位置，及时走开；墙体阻挡视线。",
+				"encounter_profile": {
+					"additions": {
+						"armour": 0.0,
+						"shield_from_base_health": 0.0
+					},
+					"definitions": [],
+					"modifier_ids": [],
+					"multipliers": {
+						"attack_speed": 1.0,
+						"damage": 1.0,
+						"max_health": 1.0,
+						"speed": 1.0
+					},
+					"resource_policy": {
+						"armour": "add_flat_then_existing_hit_size_formula",
+						"attack_speed": "multiply_contact_rate_and_recovery_only",
+						"damage": "multiply_canonical_once",
+						"health": "preserve_current_to_max_ratio",
+						"max_health": "multiply_canonical_once",
+						"max_shield": "add_fraction_of_unmodified_canonical_max_health",
+						"rounding": "float_no_integer_rounding",
+						"shield": "add_same_bonus_preserve_missing_amount",
+						"shield_regen": "unchanged",
+						"speed": "multiply_canonical_once",
+						"telegraph_windup": "unchanged"
+					},
+					"reward_budget": {
+						"creates_map_items": false,
+						"enabled": false,
+						"grants_rewards": false,
+						"proposed_bonus_fraction": null,
+						"status": "metadata_only"
+					},
+					"risk_parameters": [],
+					"source": {
+						"balance_source": "original_game_balance",
+						"catalog": "res://scripts/encounters/encounter_catalog.gd",
+						"definition_revision": 2,
+						"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+						"monster_schema_version": 1,
+						"policy_version": 2,
+						"schema_version": 1
+					}
+				},
+				"fee": 4,
+				"id": "broken_ruins",
+				"journey_tier": 2,
+				"name": "断垣试炼 · II",
+				"normal_ids": [],
+				"normal_map": true,
+				"ordinary_target": 36,
+				"special_ids": [],
+				"summary": "断垣试炼 · II",
+				"wave": 5
+			},
+			{
+				"base_completion_reward": 12,
+				"boss_attack_id": "ruins_mark",
+				"boss_id": "rift_warden",
+				"completion_reward": 12,
+				"description": "两道错位残墙需绕行；贯穿不穿墙，撞墙不触发到期效果。击败36个普通根怪，再击败裂隙守卫并清理后代。首领落印锁定你的起手位置，及时走开；墙体阻挡视线。",
+				"encounter_profile": {
+					"additions": {
+						"armour": 0.0,
+						"shield_from_base_health": 0.0
+					},
+					"definitions": [],
+					"modifier_ids": [],
+					"multipliers": {
+						"attack_speed": 1.0,
+						"damage": 1.0,
+						"max_health": 1.0,
+						"speed": 1.0
+					},
+					"resource_policy": {
+						"armour": "add_flat_then_existing_hit_size_formula",
+						"attack_speed": "multiply_contact_rate_and_recovery_only",
+						"damage": "multiply_canonical_once",
+						"health": "preserve_current_to_max_ratio",
+						"max_health": "multiply_canonical_once",
+						"max_shield": "add_fraction_of_unmodified_canonical_max_health",
+						"rounding": "float_no_integer_rounding",
+						"shield": "add_same_bonus_preserve_missing_amount",
+						"shield_regen": "unchanged",
+						"speed": "multiply_canonical_once",
+						"telegraph_windup": "unchanged"
+					},
+					"reward_budget": {
+						"creates_map_items": false,
+						"enabled": false,
+						"grants_rewards": false,
+						"proposed_bonus_fraction": null,
+						"status": "metadata_only"
+					},
+					"risk_parameters": [],
+					"source": {
+						"balance_source": "original_game_balance",
+						"catalog": "res://scripts/encounters/encounter_catalog.gd",
+						"definition_revision": 2,
+						"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+						"monster_schema_version": 1,
+						"policy_version": 2,
+						"schema_version": 1
+					}
+				},
+				"fee": 8,
+				"id": "broken_ruins",
+				"journey_tier": 3,
+				"name": "断垣试炼 · III",
+				"normal_ids": [],
+				"normal_map": true,
+				"ordinary_target": 36,
+				"special_ids": [],
+				"summary": "断垣试炼 · III",
+				"wave": 9
+			}
+		]
 	},
 	"passive_caps": {
 		"area_increased": 0.36,
@@ -22247,7 +22690,7 @@
 		"source": "SkillCompiler + ProjectileRuntime.advance + DamageResolver",
 		"target_count": 6
 	},
-	"save_version": 25,
+	"save_version": 26,
 	"schema_version": 3,
 	"sectors": [
 		{
@@ -359579,7 +360022,7 @@
 		},
 		"reserved_character_key": "C",
 		"retired_profile_writes": false,
-		"save_version": 25,
+		"save_version": 26,
 		"services": [
 			{
 				"description": "免费测试供应全部已实现主动与辅助宝石。",

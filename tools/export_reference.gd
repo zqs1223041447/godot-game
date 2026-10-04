@@ -83,6 +83,7 @@ static func collect() -> Dictionary:
 	result["currencies"] = currency_examples()
 	result["flasks"] = flask_examples()
 	result["town_maps"] = town_map_examples()
+	result["normal_journey"] = normal_journey_examples()
 	result["source_tree"] = source_tree_reference()
 	result["source_spatial"] = source_spatial_examples()
 	result["source_recharge"] = source_recharge_examples()
@@ -933,3 +934,21 @@ static func source_leech_examples()->Dictionary:
 		"scope":"本游戏初版规则，玩家攻击命中有效；母箭、子箭、返回继承冻结比例，每个实际目标分别结算；不含攻击标签的独立爆炸不偷取",
 		"coverage_note":"21个新增完整普通节点，其中20个从七起点可达；1个精通效果句式完整但入口前置未实现，当前不可分配；物理攻击魔力节点另含未实现效果仍锁定",
 		"unsupported":["即时偷取","过量伤害偷取","满额保留","召唤物偷取","护盾偷取","条件偷取"]}
+
+
+static func normal_journey_examples()->Dictionary:
+	var tiers:Array=[]
+	for map_id:String in Canonical.Journey.MAP_IDS:
+		for tier:int in range(1,4):
+			var result:Dictionary=MapRules.compile_normal(map_id,tier,[],[])
+			assert(result.ok)
+			tiers.append(result.profile)
+	return {"minimum_save_version":26,"default_scene":"normal_town","tiers":tiers,
+		"normal_bonus":1,"special_bonus":2,"maximum_bonus":4,"free_test_stock_isolated":true,
+		"gem_interval":Canonical.Journey.GEM_INTERVAL,"flask_interval":Canonical.Journey.FLASK_INTERVAL,
+		"gem_vocabulary":Canonical.Journey.GEM_DEFINITIONS,"initial_journey":Canonical.Journey.empty(),
+		"lifecycle":"入图先保存费用与唯一run_id；完成一次保存解锁与待领。死亡重试再次付费；放弃不退；重新载入未完地图回正式城镇",
+		"claims":"地图碎片待领阻止新正式图，宝石药剂待领不阻止；领取只提交实际可入包部分，失败原子保留",
+		"isolation":"测试供应与测试击杀只在独立档；正常档不能领取测试商店物品；正常竞技练习也计累计合法根怪",
+		"migration":"严格旧25验证与原字节备份后增加空旅程，不追补过去击杀；现有UID/构筑/物品/货币保持",
+		"balance":"本游戏可调整原型；未引入新正常商店经济、随机地图物品或完整终局系统"}

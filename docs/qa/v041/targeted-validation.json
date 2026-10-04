@@ -1,0 +1,104 @@
+{
+  "baseline_commit": "8e5f4fb3612077e31f2744450d5036972c73b9cf",
+  "tested_stage_commit": "614cd00b209a55227692a6cb3e41242b996252e1",
+  "report_count": 8,
+  "total_checks": 7889,
+  "reports": [
+    {
+      "test": "res://tests/normal_map_tiers_test.gd",
+      "checks": 7251,
+      "failures": 0,
+      "path": "docs/qa/v041/map-tiers-test.log.txt",
+      "sha256": "22f1e1c79488a354b9a174b803908255358ae600a4caeb0f7b84031ebae24505"
+    },
+    {
+      "test": "res://tests/normal_journey_state_test.gd",
+      "checks": 351,
+      "failures": 0,
+      "path": "docs/qa/v041/journey-state-test.log.txt",
+      "sha256": "ad2c94f95d39272e3bec56af047e34e4e3d9ce1bea44c08f6cba7aacb252f70b"
+    },
+    {
+      "test": "res://tests/normal_journey_migration_test.gd",
+      "checks": 132,
+      "failures": 0,
+      "path": "docs/qa/v041/journey-migration-test.log.txt",
+      "sha256": "e01c33e8720c00249c69a6b314ccc73b9b50ca59764c1018fd572229443d8d05"
+    },
+    {
+      "test": "res://tests/normal_journey_transactions_test.gd",
+      "checks": 40,
+      "failures": 0,
+      "path": "docs/qa/v041/transactions-second.log",
+      "sha256": "16c5951bb10946693d5649a9e0fa126b493db927e6b57070d9bf26b498f6f9bd"
+    },
+    {
+      "test": "res://tests/normal_map_gameplay_test.gd",
+      "checks": 45,
+      "failures": 0,
+      "path": "docs/qa/v041/gameplay-second.log",
+      "sha256": "70b06bccb32aa73aa07211ebb4a9c30a48fd241192380b2fab507de05a6c29c1"
+    },
+    {
+      "test": "res://tests/normal_white_bag_exit_test.gd",
+      "checks": 17,
+      "failures": 0,
+      "path": "docs/qa/v041/white-bag-first.log",
+      "sha256": "b63b3f9215d1722ae6a79c6b77dfe5224f33e3c12288beb7c836abf7f269ccec"
+    },
+    {
+      "test": "res://tests/normal_map_failure_boundaries_test.gd",
+      "checks": 36,
+      "failures": 0,
+      "path": "docs/qa/v041/failure-boundaries-first.log",
+      "sha256": "5aa3398f06159e3d5912e05b611958d73c2c2716f1ca3ef2694ebad23f6eb234"
+    },
+    {
+      "test": "res://tests/normal_town_controls_test.gd",
+      "checks": 17,
+      "failures": 0,
+      "path": "docs/qa/v041-root-ui/controls-front-order.log",
+      "sha256": "55c1880e83abdaedbaface17986f6052cfe75d9fd47abb66805876c963a6f6fe"
+    }
+  ],
+  "logs": {
+    "docs/qa/v041/backend-parse.log": "cfa9ee393b771dd13fdf81d102b546597918e5966b0742e10cdf34baea997696",
+    "docs/qa/v041/backend-smoke-second.log": "ddfc716bdf50cbf08143c1ac4501127b2e82775cf1c8288bc005d4fce4a18f50",
+    "docs/qa/v041/backend-smoke.log": "73d03dae012b42c020ad2d9235d7abb9ecb221bbec4edb9a81a089e3e389394d",
+    "docs/qa/v041/failure-boundaries-first.log": "5aa3398f06159e3d5912e05b611958d73c2c2716f1ca3ef2694ebad23f6eb234",
+    "docs/qa/v041/final-import.log": "4148c1b5423993bbc7fb89c9b5285056d8eb0737abec326e9876c046c96fb601",
+    "docs/qa/v041/font-coverage-final.log": "64f038a88c0c04740285d2acb7e02294def99a0710497049995bc5553eb9ea15",
+    "docs/qa/v041/font-coverage-initial.log": "e34519e8bdf8f77f77a8cba7a5a19da04402261004a80a2c1a291469931858ab",
+    "docs/qa/v041/font-regenerate.log": "2a9b2519d07403d4dada3ffee8db4b95118edab51c7eeedebb948b47da2483ca",
+    "docs/qa/v041/gameplay-first.log": "e60944a222a4a8f8292e03b855c1515b294ccd519d6d65928297222cb1a39f53",
+    "docs/qa/v041/gameplay-second.log": "70b06bccb32aa73aa07211ebb4a9c30a48fd241192380b2fab507de05a6c29c1",
+    "docs/qa/v041/initial-import.log": "a4d640df33afe6c6eb335643a6419e890e21fea602f4a3e463caa0e077459cef",
+    "docs/qa/v041/journey-baseline-export.log.txt": "e23f1f0a070d2f86b0731e6c834a37afca4b1164e2899aca80c82bf81b58ac7a",
+    "docs/qa/v041/journey-migration-test.log.txt": "e01c33e8720c00249c69a6b314ccc73b9b50ca59764c1018fd572229443d8d05",
+    "docs/qa/v041/journey-state-test.log.txt": "ad2c94f95d39272e3bec56af047e34e4e3d9ce1bea44c08f6cba7aacb252f70b",
+    "docs/qa/v041/map-tiers-test.log.txt": "22f1e1c79488a354b9a174b803908255358ae600a4caeb0f7b84031ebae24505",
+    "docs/qa/v041/reference-build.log": "e7b7711a48733a40c85ab9cfe27eabf971a959a265d0bae56345ea1942ee91a0",
+    "docs/qa/v041/reference-export.log": "51e3b0bc619efba5c710e1863eedea0402e6700d8c973b9ecb758418906e7297",
+    "docs/qa/v041/reference-validation.log": "9b95d9e7b16609e58d9c008814e2d0968dfb892e86d28d09f98d30a0ac83db6d",
+    "docs/qa/v041/transactions-first.log": "abafea6f2ac4f59c4d26574ff8a1258908498527290f48d8644bdb4216f75777",
+    "docs/qa/v041/transactions-second.log": "16c5951bb10946693d5649a9e0fa126b493db927e6b57070d9bf26b498f6f9bd",
+    "docs/qa/v041/white-bag-first.log": "b63b3f9215d1722ae6a79c6b77dfe5224f33e3c12288beb7c836abf7f269ccec",
+    "docs/qa/v041-root-ui/controls-first-parse-failure.log": "e5b48352ea2cb2bdf520d535167d8ed04b5a424413cb5c62fb35571353137487",
+    "docs/qa/v041-root-ui/controls-front-order.log": "55c1880e83abdaedbaface17986f6052cfe75d9fd47abb66805876c963a6f6fe",
+    "docs/qa/v041-root-ui/controls.log": "93b460ff83d6f10d79b00a0a3965d75cbbfeb89edb8ae202016b0a53ee5a24d1"
+  },
+  "root_ui_commit": "663e241",
+  "reuse_scope": "All tested source scripts unchanged after stage except main.world_context fee_paid fallback from 0 to frozen profile.fee after completion clears active receipt. This display-only paid completion case is checked in final exported PCK. Version/font/reference changes separately checked. Root native footer mouse fix is covered by controls17 and recorded physical clicks, not replaced by gameplay signal checks.",
+  "initial_failures_retained": [
+    "source worker FIELDS const and StringName journey key fixed before final pure/migration evidence",
+    "backend initial smoke encountered that invalid default chain; second smoke clean",
+    "transaction fixture type inference corrected",
+    "gameplay first compared dictionary iteration encoding across JSON; second proves full values and unchanged original disk bytes",
+    "root Panel test symbol conflict corrected; real footer input ordering separately fixed",
+    "font initial six missing characters added from same pinned source"
+  ],
+  "map_tiers_stdout_provenance": "Original captured worker stdout materialized without rerun; see map-tiers-log-provenance.json",
+  "windows_native_tested": false,
+  "full_repeat": false,
+  "soak_600s": false
+}

@@ -1592,7 +1592,7 @@ func world_context()->Dictionary:
 		"can_return":_world_mode in ["map","map_complete"],"supply_enabled":test and test_supply_enabled,
 		"normal_town":normal_town,"can_enter_normal_town":not test and _world_mode=="normal","can_leave_normal_town":normal_town,
 		"completion_save_pending":_normal_completion_pending,
-		"map_tier":int(_map_run.profile.get("journey_tier",0)),"fee_paid":int(active.get("fee_paid",0)),"retry_cost":int(_map_run.profile.get("fee",0)),
+		"map_tier":int(_map_run.profile.get("journey_tier",0)),"fee_paid":int(active.get("fee_paid",_map_run.profile.get("fee",0))),"retry_cost":int(_map_run.profile.get("fee",0)),
 		"pending_map_reward":pending.pending_map_reward,"pending_gems":int(pending.pending_gems),"pending_flasks":int(pending.pending_flasks),"normal_root_kills":int(pending.normal_root_kills),
 		"can_claim_normal_rewards":normal_town and has_reward,"claim_reason":"请先返回正式城镇" if not normal_town else "" if has_reward else "没有待领取奖励",
 		"description":"城镇测试 · 独立测试进度，免费测试供应不进入正常存档" if test else "正式城镇" if normal_town else "竞技练习" if _world_mode=="normal" else "正式地图挑战"}

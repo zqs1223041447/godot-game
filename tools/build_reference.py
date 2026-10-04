@@ -12,7 +12,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 REF = ROOT / 'docs/reference'
-CATEGORIES = [('skills','主动技能'),('supports','辅助技能'),('equipment','随机装备'),('affixes','装备词缀'),('fixed_items','固定装备'),('jewels','珠宝'),('jewel_affixes','珠宝词缀'),('source_passives','源天赋与精通'),('passives','旧181节点研究'),('mechanisms','共用机制'),('weapon_stages','武器局部阶段'),('defenses','受击与防御'),('flasks','生命与魔力药剂'),('currencies','堆叠材料'),('crafting','制作与回收'),('monsters','怪物图鉴'),('monster_attacks','怪物攻击'),('encounters','本轮挑战'),('town_services','城镇测试服务'),('maps','有限地图'),('map_specials','地图特殊词缀'),('rules','规则与边界')]
+CATEGORIES = [('skills','主动技能'),('supports','辅助技能'),('equipment','随机装备'),('affixes','装备词缀'),('fixed_items','固定装备'),('jewels','珠宝'),('jewel_affixes','珠宝词缀'),('source_passives','源天赋与精通'),('passives','旧181节点研究'),('mechanisms','共用机制'),('weapon_stages','武器局部阶段'),('defenses','受击与防御'),('flasks','生命与魔力药剂'),('currencies','堆叠材料'),('crafting','制作与回收'),('monsters','怪物图鉴'),('monster_attacks','怪物攻击'),('encounters','本轮挑战'),('town_services','城镇服务'),('maps','有限地图'),('map_specials','地图特殊词缀'),('rules','规则与边界')]
 RULE_TITLES = {'damage':'伤害如何结算','supports':'辅助装配','projectiles':'分裂、返回与飞行结束','equipment':'装备与阶级','character_rates':'恢复、移动与普通攻击速度','basic_attack':'普通攻击与武器贡献','allocation':'天赋与珠宝规则','shared':'玩家和怪物共享机制','boundaries':'尚未实现的源游戏语义','sources':'数据来源与实现边界'}
 CAPABILITIES = {'initial_projectiles':'初始投射物数量','projectile_hit':'投射物命中','finite_projectile_pierce':'有限穿透','area_hit':'直接范围命中','chain_hit':'连锁命中'}
 SLOTS = {'weapon':'武器','armor':'护甲','charm':'项链','body_armour':'护甲','amulet':'项链','ring':'戒指','ring_1':'戒指一','ring_2':'戒指二','boots':'鞋','belt':'腰带','gloves':'手套','helmet':'头盔'}
@@ -329,7 +329,7 @@ def build(data, art):
     if town:
         for service in town['services']:
             key=service['id'];stock=town['stock'].get(key,[])
-            body=facts([('开放条件','可选城镇测试，回城后使用'),('存档隔离',esc(town['normal_save'])+' → 首次显式复制 → '+esc(town['test_save'])),('测试供应','真实UID物品，免费但受背包与注册表上限限制'),('配置开关',esc(town['supply_setting'])),('交易保护','完整候选验证，保存成功才提交；旧档实例与货币不被测试交易改写')])
+            body=facts([('开放条件','测试档全服务；正式城镇仅工匠、天赋重置和地图装置'),('存档隔离',esc(town['normal_save'])+' → 首次显式复制 → '+esc(town['test_save'])),('测试供应','真实UID物品，免费但受背包与注册表上限限制'),('配置开关',esc(town['supply_setting'])),('交易保护','完整候选验证，保存成功才提交；旧档实例与货币不被测试交易改写')])
             if stock:
                 rows=[]
                 for offer in stock:
@@ -342,13 +342,17 @@ def build(data, art):
                 body+='<div class="table-scroll"><table><thead><tr><th>实际供应目录</th><th>数量</th><th>价格</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
             if key=='passive_reset':body+='<p>保留当前起点，退还实际已花普通点。已镶珠宝保留原UID，优先回背包，放不下进入可见待安置；保存失败不改变点数或物品。</p>'
             if key=='crafter':body+='<p>继续消耗测试档里的真实碎片，不建立材料钱包。测试背包装备可确认丢弃并重新领取，正常进度保留原回收规则。</p>'+links('crafting',[op for op,c in data['crafting'].items() if c['kind']=='operation'])
-            body+='<p>重进测试档不重新复制或覆盖。退出后恢复正常档并开始正常战斗。被替换的旧model拒绝迟到写入；原确认、拖拽与面板一并关闭。</p>'
+            body+='<p>重进测试档不重新复制或覆盖。退出后恢复正常档并进入正式城镇。被替换的旧model拒绝迟到写入；原确认、拖拽与面板一并关闭。</p>'
             cards.append(add('town_services',key,service['name'],service['description'],body,'可选测试服务'))
         for m in town['options']['maps']:
             key=m['id'];example=town['examples'][key]
             body='<figure class="defense-flow"><figcaption>有限地图流程</figcaption><ol><li><strong>城镇制图</strong><span>最多2普通 + 1特殊</span></li><li><strong>'+str(m['ordinary_target'])+' 个根怪</strong><span>固定第'+str(m['wave'])+'波强度</span></li><li><strong>裂隙守卫</strong><span>首领一次奖励，后代零奖励</span></li><li><strong>清理后代 → 返城</strong><span>已得进度保存到测试档</span></li></ol></figure>'
             body+=facts([('普通目标',number(m['ordinary_target'])),('波次',number(m['wave'])),('首领',link('monsters',m['boss_id'])),('费用',esc(town['options']['cost_policy']['label'])),('普通词缀',links('encounters',[x['id'] for x in town['options']['normal_modifiers']])),('额外收益','无地图加成；现有合法根怪XP/装备/宝石/药剂奖励照常'),('中途离开','保存已有进度后放弃本图，不恢复旧怪或复领同一根怪奖励'),('重开','重新初始化有限目标与根怪身份'),('持久化','构筑与物品保存；草案和地图运行仅本会话')])
             body+=details('同源编译示例',facts([('选择',esc(example['compiled']['summary'])),('生命倍率',number(example['compiled']['encounter_profile']['multipliers']['max_health'])),('移动倍率',number(example['compiled']['encounter_profile']['multipliers']['speed'])),('特殊替换',esc(example['special_replacements']))]))
+            normal=data.get('normal_journey',{})
+            if normal:
+                rows=[r for r in normal['tiers'] if r['id']==key]
+                body='<h4>正式地图成长</h4>'+facts([('I / II / III 波次',' / '.join(str(r['wave']) for r in rows)),('对应入场碎片',' / '.join(str(r['fee']) for r in rows)),('基础完成碎片',' / '.join(str(r['completion_reward']) for r in rows)),('词缀奖励','普通每项+1、特殊每项+2，最多+4'),('解锁','各地图独立，完成本图解锁下一档'),('结算与重开',normal['lifecycle']),('满包待领',normal['claims']),('累计获取','每30合法根怪宝石，每60药剂；后代无收益'),('存档',normal['migration'])])+'<h4>独立测试地图与共用战斗</h4>'+body
             boss=data.get('map_bosses',{}).get(key)
             if boss:
                 d=boss['definition'];p=boss['policy']['profile'];event=boss['event'];cx,cy=event['center'];sx,sy=boss['source']['pos'];mx,my=boss['cases']['moving']['position'];radius=event['radius'];left=min(cx-radius,mx)-45;right=max(cx+radius,sx+boss['source']['radius'])+45
@@ -358,7 +362,7 @@ def build(data, art):
             walls=''.join(f'<rect x="{number(w["position"][0]-ox)}" y="{number(w["position"][1]-oy)}" width="{number(w["size"][0])}" height="{number(w["size"][1])}" fill="#a89472" stroke="#594d38" stroke-width="4"/>' for w in geometry['walls'])
             body+=f'<figure><figcaption>实际同源地形平面图：{esc(m["name"])}</figcaption><svg viewBox="0 0 {number(width)} {number(height)}" role="img" aria-label="真实墙体足印与绕行通道"><rect width="{number(width)}" height="{number(height)}" fill="#ddd7b8"/>{walls}<circle cx="{number(geometry["spawn"][0]-ox)}" cy="{number(geometry["spawn"][1]-oy)}" r="16" fill="#527553"/></svg></figure>'
             body+='<p>旧庭为开阔庭院；断垣的两道错位残墙有真实阻挡，角色、怪物需沿端部通道绕行，击退和冲刺同样受阻。贯穿不能穿墙，返回飞行也会碰墙；碰墙终止不触发自然到期爆炸、分裂或返回。范围命中、连锁与敌预警也检查墙视线，圈只表示最大半径。地图完成保留地形，返城清除障碍；不是可破坏场景或完整终局系统。</p>'
-            cards.append(add('maps',key,m['name'],m['description'],body,'有限测试地图',related=link('town_services','map_device')))
+            cards.append(add('maps',key,m['name'],m['description'],body,'正式三档 / 独立测试',related=link('town_services','map_device')))
         for special in town['options']['special_modifiers']:
             if special.get('kind')=='defense':
                 body=facts([('最低波次',number(special['minimum_wave'])),('原始加值',number(special['resistance_bonus']*100)+' 个百分点 / '+ '、'.join(DAMAGE_NAMES[t] for t in special['damage_types'])),('有效上限','共用角色防御规则：0%–75%'),('适用','根怪、首领、死亡后代各从本身原始值加一次'),('保留','物理/混沌抗性、护甲、血盾伤速、身份、稀有度、奖励和RNG'),('分层','最多1特殊词缀，与霜纹/雷纹巡逻互斥')])
