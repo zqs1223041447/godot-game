@@ -266,11 +266,24 @@ static func mechanism_text(enemy: Dictionary) -> String:
 		labels.append(str(Registry.get_definition(id).get("name", id)))
 	if not enemy.get("death_spawns", []).is_empty():
 		labels.append("死亡分裂")
-	if float(enemy.get("resistances", {}).get("fire", 0.0)) > 0.0:
-		labels.append("火抗 %.0f%%" % (float(enemy.resistances.fire) * 100.0))
+	var resistance_label := resistance_text(enemy)
+	if not resistance_label.is_empty(): labels.append(resistance_label)
 	if float(enemy.get("contact_weights", {}).get("fire", 0.0)) > 0.0:
 		labels.append(("重击含 %.0f%% 火焰" if not telegraph.is_empty() else "接触含 %.0f%% 火焰") % (float(enemy.contact_weights.fire) * 100.0))
 	for element: String in ["cold", "lightning"]:
 		if float(enemy.get("contact_weights", {}).get(element, 0.0)) > 0.0:
 			labels.append("冰冷预警攻击" if element == "cold" else "闪电预警攻击")
 	return " · ".join(labels) if not labels.is_empty() else "无额外机制"
+
+
+static func resistance_text(enemy: Dictionary, compact: bool = false) -> String:
+	# Runtime resistances are already effective/capped by the defense resolver.
+	# Never display the raw map bonus as if it were the final resistance.
+	var values: Dictionary = enemy.get("resistances",{})
+	var names := {"fire":"火抗","cold":"冰抗","lightning":"电抗"}
+	var labels := PackedStringArray()
+	for element: String in ["fire","cold","lightning"]:
+		var value: float = float(values.get(element,0.0))
+		if not is_zero_approx(value):
+			labels.append("%s%s%d%%" % [names[element],"" if compact else " ",roundi(value*100.0)])
+	return " · ".join(labels)

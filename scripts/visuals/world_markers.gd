@@ -51,8 +51,8 @@ static func name_ids(arena: Node2D, enemies: Array, preferences: VisualSettings)
 static func caption(enemy:Dictionary)->String:
 	var rarity:String=str(enemy.get("rarity","normal"))
 	var text:String=str(enemy.get("name","怪物"))+" · "+str(Monsters.RARITIES.get(rarity,Monsters.RARITIES.normal).name).split(" · ")[-1]
-	var fire:float=float(enemy.get("resistances",{}).get("fire",0.0))
-	if fire>0.0: text+=" · 火抗%d%%"%roundi(fire*100.0)
+	var resistances: String = Monsters.resistance_text(enemy,true)
+	if not resistances.is_empty(): text += " · " + resistances
 	return text
 
 static func name_origin(arena:Node2D,enemy:Dictionary,preferences:VisualSettings)->Vector2:
