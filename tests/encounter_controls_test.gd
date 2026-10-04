@@ -30,7 +30,7 @@ func _run() -> void:
 	var next_random: int = randi()
 	seed(93715)
 	panel = Controls.new()
-	var ids: Array[String] = Catalog.get_ids()
+	var ids: Array[String] = ["enemy_max_health_120","enemy_move_speed_110"]
 	_expect(panel.set_context([ids[0]]), "Context can be supplied before embedding")
 	host = VBoxContainer.new()
 	host.position = Vector2(24, 24)
@@ -193,7 +193,7 @@ func _test_metadata(ids: Array[String]) -> void:
 	_expect(panel.find_children("EncounterOption_*", "CheckBox", true, false).size() == metadata.definitions.size(), "Exactly the actual catalog options are generated")
 	for definition: Dictionary in metadata.definitions:
 		var profile: Dictionary = Compiler.compile([definition.id]).profile
-		var expected: String = "%s · +%.0f%%" % [str(profile.definitions[0].description), float(profile.risk_parameters[0].relative_increase) * 100.0]
+		var expected: String = str(profile.definitions[0].description)
 		_expect(_option(str(definition.id)).text == definition.name, "Option name uses catalog metadata")
 		_expect(_label("EncounterDescription_" + str(definition.id)).text == expected, "Description and risk use the compiler's same-source snapshot")
 	_expect(_label("EncounterRisk").text.contains("尚未评估"), "Parameter-only risk never implies a balanced difficulty score")

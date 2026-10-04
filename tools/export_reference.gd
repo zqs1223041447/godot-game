@@ -588,9 +588,13 @@ static func encounter_examples() -> Dictionary:
 		definition["examples"] = {}
 		for template: String in ["crawler","ember_guard","brood_host"]:
 			var before: Dictionary = Monsters.make_enemy(1,template,3,Vector2.ZERO,"demo")
+			# This shared actor default is also installed by main; expose it for
+			# the new armour comparison without inventing a UI-only base value.
+			before.armour=AttackRules.monster_profile(int(before.kind)).armour
 			var applied: Dictionary = EncounterCompiler.apply_to_enemy(before,compiled.profile)
 			assert(applied.ok)
-			definition.examples[template] = {"before":before,"after":applied.enemy}
+			definition.examples[template] = {"before":before,"after":applied.enemy,
+				"before_telegraph":Monsters.telegraph_policy(before),"after_telegraph":Monsters.telegraph_policy(applied.enemy)}
 		result[id] = definition
 	return result
 

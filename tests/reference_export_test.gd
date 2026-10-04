@@ -47,14 +47,18 @@ func _initialize() -> void:
 		_expect(Equipment.validate_instance(sample.after_instance) and sample.after_instance.id==sample.source.id and sample.after_instance.base_id==sample.source.base_id, "Craft reference output is exact catalog gear with original identity")
 		_expect(sample.after_definition==Exporter.clean(Equipment.definition(sample.after_instance)) and not craft.risk.is_empty(), "New craft definition and risk come from implemented rules")
 	_expect(current.monster_attacks.size() == 3 and current.monster_attacks.has("locked_circle"), "Three implemented typed monster action examples are browsable")
-	_expect(current.encounters.size()==2,"Exactly two finite optional encounter modifiers are browsable")
+	_expect(current.encounters.size()==6,"All six current optional encounter modifiers are browsable")
 	for id: String in current.encounters:
 		var definition: Dictionary=current.encounters[id]
 		_expect(definition.status=="implemented" and not definition.profile.reward_budget.enabled and not definition.profile.reward_budget.grants_rewards,"Reference does not turn reward metadata into actual loot")
 		for sample: Dictionary in definition.examples.values():
-			_expect(is_equal_approx(float(sample.after[definition.field]),float(sample.before[definition.field])*float(definition.multiplier)),"Challenge chart records exact single compiled transform")
+			var expected:float=float(sample.before[definition.field])*float(definition.value) if definition.operation=="multiply" else float(sample.before[definition.field])+float(definition.value) if definition.operation=="add_flat" else float(sample.before[definition.field])+float(sample.before.max_health)*float(definition.value)
+			_expect(is_equal_approx(float(sample.after[definition.field]),expected),"Challenge chart records exact authored operation")
 			for field: String in ["damage","attack_speed","contact_weights","resistances","shield","max_shield","xp_reward"]:
-				_expect(sample.after[field]==sample.before[field],"Challenge example preserves "+field)
+				if field==definition.field:continue
+				if field=="shield" and definition.operation=="add_base_health_fraction":
+					_expect(is_equal_approx(sample.after.shield-sample.before.shield,float(sample.before.max_health)*float(definition.value)),"Shield chart preserves fixed original-health grant")
+				else:_expect(sample.after[field]==sample.before[field],"Challenge example preserves "+field)
 	var attack: Dictionary = current.monster_attacks.locked_circle
 	var heavy_example: Dictionary = attack.example
 	_expect(attack.status == "implemented" and attack.integrated_templates == ["ember_guard"], "Reference distinguishes real guard integration from generic runtime capacity")

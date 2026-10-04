@@ -104,7 +104,8 @@ def encounter_diagram(key, definition, monsters):
         for row,(label,value) in enumerate([('常规',before),('挑战',after)]):
             y=25+row*33; bar=value/maximum*205
             bars+=f'<text x="0" y="{y+14}" fill="#69523a" font-size="13">{label}</text><rect x="38" y="{y}" width="{bar}" height="19" fill="'+('#bca888' if row==0 else '#8f6736')+f'"/><text x="252" y="{y+14}" fill="#3b281b" font-size="13" data-encounter-value="{key}-{template}-{label}" data-value="{esc(value)}">{number(value)}</text>'
-        diagrams+='<figure><figcaption>'+esc(monsters[template]['name'])+' · '+('最大生命' if field=='max_health' else '移动速度')+f'</figcaption><svg class="mechanism-diagram" viewBox="0 0 350 90" role="img" aria-label="{esc(definition["name"])}前后参数">{bars}</svg></figure>'
+        label={'max_health':'最大生命','speed':'移动速度','damage':'原始攻击基底','attack_speed':'攻击速度','max_shield':'最大护盾','armour':'护甲'}[field]
+        diagrams+='<figure><figcaption>'+esc(monsters[template]['name'])+' · '+label+f'</figcaption><svg class="mechanism-diagram" viewBox="0 0 350 90" role="img" aria-label="{esc(definition["name"])}前后参数">{bars}</svg></figure>'
     return '<div class="encounter-diagrams">'+diagrams+'</div><p class="fine">每组为第3波标准模板，之后只应用一次当前挑战；数据来自实际编译器。条形长度仅表示本行参数，不是综合难度、伤害或每秒收益。</p>'
 
 def telegraph_diagram(attack):
@@ -317,7 +318,12 @@ def build(data, art):
         body+='<p>该上限沿用本游戏原型的旧材料边界，不是PoE原版堆叠规则。实例数量随游戏过程变化，本页定义中的1枚仅为合法格式示例。</p>'
         cards.append(add('currencies',key,c['name'],c['description'],body,'物品化制作材料',related=' · '.join(link('crafting',op) for op,entry in data['crafting'].items() if entry['kind']=='operation')))
     for key,e in data['encounters'].items():
-        body=encounter_diagram(key,e,data['monsters'])+facts([('倍率',number(e['multiplier'])),('作用字段',esc(e['field'])),('应用顺序','物种/波次/稀有度/机制生成标准怪物后，仅在入场前乘一次；死亡子怪按自己的标准值应用'),('其余属性','攻击伤害、护盾、防御、体型、重击时序与奖励资格保持'),('风险说明','仅参数变化；实战难度未合并评分'),('奖励','无额外经验、掉落、制作材料或地图物品'),('生命周期','暂停面板选择并确认重开后生效；普通重试保留，恢复常规/试验场清空；不随构筑保存')])
+        body=encounter_diagram(key,e,data['monsters'])+facts([('操作',esc(e['operation'])),('实际规则',esc(e['description'])),('作用字段',esc(e['field'])),('固定来源','物种/波次/稀有度/机制生成标准怪物后，始终读取未加本轮普通词缀的基准；死亡子怪各按自己的标准值应用一次'),('保持','体型、身份、稀有度、原机制、RNG与奖励资格不变'),('风险说明','初版可调预算；实战难度未合并评分'),('奖励','无额外经验、掉落、制作材料或地图物品'),('生命周期','最多2普通；F7确认重开或城镇制图后生效，不随构筑保存')])
+        if e['field']=='attack_speed':
+            example=e['examples']['ember_guard']
+            body+=facts([('预警秒数',number(example['before_telegraph']['profile']['windup_seconds'])+' → '+number(example['after_telegraph']['profile']['windup_seconds'])),('预警后恢复秒数',number(example['before_telegraph']['profile']['recovery_seconds'])+' → '+number(example['after_telegraph']['profile']['recovery_seconds']))])
+        if e['field']=='max_shield':body+='<p>护幕额外盾为原始最大生命的20%，不含强健的1.20倍率；先选强健或先选护幕结果相同。最大盾和当前盾增加相同量，原缺失盾量保持，不是持续回血或每帧补盾。当前混沌命中仍先扣盾。</p>'
+        if e['field']=='armour':body+='<p>护甲使用既有物理命中大小相关公式：同样+80护甲，对较小单次物理命中的减伤比例更高；元素和混沌部分不受护甲影响。可以与元素庇护同图，但两者各处理自己的伤害分量。</p>'
         cards.append(add('encounters',key,e['name'],e['description'],body,'本轮可选 · 原创规则',related=links('monsters',e['examples'].keys())+' · '+link('rules','encounters')))
     town=data.get('town_maps',{})
     if town:

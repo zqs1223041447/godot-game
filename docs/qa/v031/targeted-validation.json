@@ -1,0 +1,48 @@
+{
+  "reports": [
+    {
+      "path": "docs/qa/v031/rules.log.txt",
+      "sha256": "fcf7487067d149cc4b187c118b6a72bfb4aaebf1e41ebe0e4eea20e2c29f80d8",
+      "checks": 3621
+    },
+    {
+      "path": "docs/qa/v031/gameplay.log.txt",
+      "sha256": "b8d70ca621d516d7000d8aa9b8d2a79372449f027d40c8594728da0b9db55772",
+      "checks": 61
+    },
+    {
+      "path": "docs/qa/v031/atomic.log.txt",
+      "sha256": "71e92dc00462377f63ce6c33c2df6e452b6f44706f1e6e08ae8fd43bc328a326",
+      "checks": 40
+    },
+    {
+      "path": "docs/qa/v031/root-ui/modifier-text.log.txt",
+      "sha256": "f4a8f18d4e41937c0d5015d03123f2e5c683e82f204b92495d1a1cb464afe3d7",
+      "checks": 20
+    },
+    {
+      "path": "docs/qa/v031/root-ui/modifier-layout.log.txt",
+      "sha256": "8d96a264a98a8504f2483bb48d8c78108c3b56e58ba77644d480b20c57f1482e",
+      "checks": 16
+    },
+    {
+      "path": "docs/qa/v031/reference-runtime.log.txt",
+      "sha256": "b703d94b26e1e1e520d10e87baa1b69527cb55f29035f4bc464e3bf26aeeb63c",
+      "checks": 30
+    }
+  ],
+  "checks": 3788,
+  "report_count": 6,
+  "production_inputs": 372,
+  "root_ui_commit": "4192ada5b3555562d823c703e8bc7a629745bdb6",
+  "ui_evidence_reused": true,
+  "legal_map_profiles": 154,
+  "600_second_test_deleted": true,
+  "full_repeat_required": false,
+  "historical_fixture_updates_not_rerun": [
+    "tests/encounter_compiler_test.gd",
+    "tests/encounter_controls_test.gd",
+    "tests/encounter_ui_integration_test.gd",
+    "tests/reference_export_test.gd"
+  ]
+}

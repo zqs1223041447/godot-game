@@ -8026,11 +8026,12 @@
 		"selection": "after_original_ordinary_roll"
 	},
 	"encounters": {
-		"enemy_max_health_120": {
-			"description": "怪物最大生命 ×1.20",
+		"enemy_armour_80": {
+			"description": "怪物护甲 +80；按单次物理命中大小减伤，元素与混沌不变",
 			"examples": {
 				"brood_host": {
 					"after": {
+						"armour": 80.0,
 						"attack_speed": 1.1764705882352942,
 						"attack_timer": 0.5,
 						"contact_weights": {
@@ -8050,6 +8051,9 @@
 						},
 						"encounter_source": {
 							"before": {
+								"armour": 0.0,
+								"attack_speed": 1.1764705882352942,
+								"damage": 23.279999999999998,
 								"health": 323.25,
 								"max_health": 323.25,
 								"max_shield": 4.68,
@@ -8061,37 +8065,52 @@
 							"mechanism_revision": 1,
 							"mechanism_schema": 1,
 							"profile": {
+								"additions": {
+									"armour": 80.0,
+									"shield_from_base_health": 0.0
+								},
 								"definitions": [
 									{
-										"description": "怪物最大生命 ×1.20",
-										"field": "max_health",
-										"id": "enemy_max_health_120",
-										"multiplier": 1.2,
-										"name": "强健",
+										"description": "怪物护甲 +80；按单次物理命中大小减伤，元素与混沌不变",
+										"field": "armour",
+										"id": "enemy_armour_80",
+										"multiplier": 1.0,
+										"name": "铁肤",
+										"operation": "add_flat",
 										"risk": {
-											"assessment": "parameter_only",
-											"field": "max_health",
-											"multiplier": 1.2,
-											"relative_increase": 0.19999999999999996
+											"assessment": "prototype_budget_not_balance_proof",
+											"field": "armour",
+											"label": "怪物护甲 +80；按单次物理命中大小减伤，元素与混沌不变",
+											"multiplier": 1.0,
+											"operation": "add_flat",
+											"relative_increase": 0.0,
+											"value": 80.0
 										},
-										"source_id": "encounter:enemy_max_health_120"
+										"source_id": "encounter:enemy_armour_80",
+										"value": 80.0
 									}
 								],
 								"modifier_ids": [
-									"enemy_max_health_120"
+									"enemy_armour_80"
 								],
 								"multipliers": {
-									"max_health": 1.2,
+									"attack_speed": 1.0,
+									"damage": 1.0,
+									"max_health": 1.0,
 									"speed": 1.0
 								},
 								"resource_policy": {
+									"armour": "add_flat_then_existing_hit_size_formula",
+									"attack_speed": "multiply_contact_rate_and_recovery_only",
+									"damage": "multiply_canonical_once",
 									"health": "preserve_current_to_max_ratio",
 									"max_health": "multiply_canonical_once",
-									"max_shield": "unchanged",
+									"max_shield": "add_fraction_of_unmodified_canonical_max_health",
 									"rounding": "float_no_integer_rounding",
-									"shield": "unchanged",
+									"shield": "add_same_bonus_preserve_missing_amount",
 									"shield_regen": "unchanged",
-									"speed": "multiply_canonical_once"
+									"speed": "multiply_canonical_once",
+									"telegraph_windup": "unchanged"
 								},
 								"reward_budget": {
 									"creates_map_items": false,
@@ -8102,23 +8121,2367 @@
 								},
 								"risk_parameters": [
 									{
-										"assessment": "parameter_only",
-										"field": "max_health",
-										"multiplier": 1.2,
-										"relative_increase": 0.19999999999999996
+										"assessment": "prototype_budget_not_balance_proof",
+										"field": "armour",
+										"label": "怪物护甲 +80；按单次物理命中大小减伤，元素与混沌不变",
+										"multiplier": 1.0,
+										"operation": "add_flat",
+										"relative_increase": 0.0,
+										"value": 80.0
 									}
 								],
 								"source": {
 									"balance_source": "original_game_balance",
 									"catalog": "res://scripts/encounters/encounter_catalog.gd",
-									"definition_revision": 1,
+									"definition_revision": 2,
 									"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
 									"monster_schema_version": 1,
-									"policy_version": 1,
+									"policy_version": 2,
 									"schema_version": 1
 								}
 							},
 							"rarity": "rare",
+							"shield_bonus": 0.0,
+							"template_id": "brood_host",
+							"wave": 3
+						},
+						"equipment_pool": "",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 323.25,
+						"id": 1,
+						"kind": 2,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 323.25,
+						"max_shield": 4.68,
+						"mechanism_ids": [
+							"grove_mastery",
+							"aegis_recovery"
+						],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+							"max_health": 9.75,
+							"max_shield": 4.68,
+							"shield_regen": 0.4225
+						},
+						"name": "孵化重壳体",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"resistances": {
+							"fire": 0.0
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 4.68,
+						"shield_regen": 0.4225,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 47.2,
+						"template_id": "brood_host",
+						"wave": 3,
+						"xp_reward": 24
+					},
+					"after_telegraph": {
+
+					},
+					"before": {
+						"armour": 0.0,
+						"attack_speed": 1.1764705882352942,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"physical": 1.0
+						},
+						"damage": 23.279999999999998,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [
+							{
+								"count": 2,
+								"template": "splitter"
+							}
+						],
+						"defense_stats": {
+
+						},
+						"equipment_pool": "",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 323.25,
+						"id": 1,
+						"kind": 2,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 323.25,
+						"max_shield": 4.68,
+						"mechanism_ids": [
+							"grove_mastery",
+							"aegis_recovery"
+						],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+							"max_health": 9.75,
+							"max_shield": 4.68,
+							"shield_regen": 0.4225
+						},
+						"name": "孵化重壳体",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"resistances": {
+							"fire": 0.0
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 4.68,
+						"shield_regen": 0.4225,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 47.2,
+						"template_id": "brood_host",
+						"wave": 3,
+						"xp_reward": 24
+					},
+					"before_telegraph": {
+
+					}
+				},
+				"crawler": {
+					"after": {
+						"armour": 80.0,
+						"attack_speed": 1.1764705882352942,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"physical": 1.0
+						},
+						"damage": 11.4,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [],
+						"defense_stats": {
+
+						},
+						"encounter_source": {
+							"before": {
+								"armour": 0.0,
+								"attack_speed": 1.1764705882352942,
+								"damage": 11.4,
+								"health": 50.160000000000004,
+								"max_health": 50.160000000000004,
+								"max_shield": 0.0,
+								"shield": 0.0,
+								"speed": 68.2
+							},
+							"enemy_id": 1,
+							"mechanism_policy": "poe-passive-v1",
+							"mechanism_revision": 1,
+							"mechanism_schema": 1,
+							"profile": {
+								"additions": {
+									"armour": 80.0,
+									"shield_from_base_health": 0.0
+								},
+								"definitions": [
+									{
+										"description": "怪物护甲 +80；按单次物理命中大小减伤，元素与混沌不变",
+										"field": "armour",
+										"id": "enemy_armour_80",
+										"multiplier": 1.0,
+										"name": "铁肤",
+										"operation": "add_flat",
+										"risk": {
+											"assessment": "prototype_budget_not_balance_proof",
+											"field": "armour",
+											"label": "怪物护甲 +80；按单次物理命中大小减伤，元素与混沌不变",
+											"multiplier": 1.0,
+											"operation": "add_flat",
+											"relative_increase": 0.0,
+											"value": 80.0
+										},
+										"source_id": "encounter:enemy_armour_80",
+										"value": 80.0
+									}
+								],
+								"modifier_ids": [
+									"enemy_armour_80"
+								],
+								"multipliers": {
+									"attack_speed": 1.0,
+									"damage": 1.0,
+									"max_health": 1.0,
+									"speed": 1.0
+								},
+								"resource_policy": {
+									"armour": "add_flat_then_existing_hit_size_formula",
+									"attack_speed": "multiply_contact_rate_and_recovery_only",
+									"damage": "multiply_canonical_once",
+									"health": "preserve_current_to_max_ratio",
+									"max_health": "multiply_canonical_once",
+									"max_shield": "add_fraction_of_unmodified_canonical_max_health",
+									"rounding": "float_no_integer_rounding",
+									"shield": "add_same_bonus_preserve_missing_amount",
+									"shield_regen": "unchanged",
+									"speed": "multiply_canonical_once",
+									"telegraph_windup": "unchanged"
+								},
+								"reward_budget": {
+									"creates_map_items": false,
+									"enabled": false,
+									"grants_rewards": false,
+									"proposed_bonus_fraction": null,
+									"status": "metadata_only"
+								},
+								"risk_parameters": [
+									{
+										"assessment": "prototype_budget_not_balance_proof",
+										"field": "armour",
+										"label": "怪物护甲 +80；按单次物理命中大小减伤，元素与混沌不变",
+										"multiplier": 1.0,
+										"operation": "add_flat",
+										"relative_increase": 0.0,
+										"value": 80.0
+									}
+								],
+								"source": {
+									"balance_source": "original_game_balance",
+									"catalog": "res://scripts/encounters/encounter_catalog.gd",
+									"definition_revision": 2,
+									"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+									"monster_schema_version": 1,
+									"policy_version": 2,
+									"schema_version": 1
+								}
+							},
+							"rarity": "normal",
+							"shield_bonus": 0.0,
+							"template_id": "crawler",
+							"wave": 3
+						},
+						"equipment_pool": "",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 50.160000000000004,
+						"id": 1,
+						"kind": 0,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 50.160000000000004,
+						"max_shield": 0.0,
+						"mechanism_ids": [],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+
+						},
+						"name": "巡游体",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"resistances": {
+							"fire": 0.0
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 0.0,
+						"shield_regen": 0.0,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 68.2,
+						"template_id": "crawler",
+						"wave": 3,
+						"xp_reward": 3
+					},
+					"after_telegraph": {
+
+					},
+					"before": {
+						"armour": 0.0,
+						"attack_speed": 1.1764705882352942,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"physical": 1.0
+						},
+						"damage": 11.4,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [],
+						"defense_stats": {
+
+						},
+						"equipment_pool": "",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 50.160000000000004,
+						"id": 1,
+						"kind": 0,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 50.160000000000004,
+						"max_shield": 0.0,
+						"mechanism_ids": [],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+
+						},
+						"name": "巡游体",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"resistances": {
+							"fire": 0.0
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 0.0,
+						"shield_regen": 0.0,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 68.2,
+						"template_id": "crawler",
+						"wave": 3,
+						"xp_reward": 3
+					},
+					"before_telegraph": {
+
+					}
+				},
+				"ember_guard": {
+					"after": {
+						"armour": 80.0,
+						"attack_speed": 1.1764705882352942,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"fire": 0.5,
+							"physical": 0.5
+						},
+						"damage": 23.279999999999998,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [],
+						"defense_stats": {
+							"fire_resistance": 0.25
+						},
+						"encounter_source": {
+							"before": {
+								"armour": 0.0,
+								"attack_speed": 1.1764705882352942,
+								"damage": 23.279999999999998,
+								"health": 313.5,
+								"max_health": 313.5,
+								"max_shield": 0.0,
+								"shield": 0.0,
+								"speed": 47.2
+							},
+							"enemy_id": 1,
+							"mechanism_policy": "poe-passive-v1",
+							"mechanism_revision": 1,
+							"mechanism_schema": 1,
+							"profile": {
+								"additions": {
+									"armour": 80.0,
+									"shield_from_base_health": 0.0
+								},
+								"definitions": [
+									{
+										"description": "怪物护甲 +80；按单次物理命中大小减伤，元素与混沌不变",
+										"field": "armour",
+										"id": "enemy_armour_80",
+										"multiplier": 1.0,
+										"name": "铁肤",
+										"operation": "add_flat",
+										"risk": {
+											"assessment": "prototype_budget_not_balance_proof",
+											"field": "armour",
+											"label": "怪物护甲 +80；按单次物理命中大小减伤，元素与混沌不变",
+											"multiplier": 1.0,
+											"operation": "add_flat",
+											"relative_increase": 0.0,
+											"value": 80.0
+										},
+										"source_id": "encounter:enemy_armour_80",
+										"value": 80.0
+									}
+								],
+								"modifier_ids": [
+									"enemy_armour_80"
+								],
+								"multipliers": {
+									"attack_speed": 1.0,
+									"damage": 1.0,
+									"max_health": 1.0,
+									"speed": 1.0
+								},
+								"resource_policy": {
+									"armour": "add_flat_then_existing_hit_size_formula",
+									"attack_speed": "multiply_contact_rate_and_recovery_only",
+									"damage": "multiply_canonical_once",
+									"health": "preserve_current_to_max_ratio",
+									"max_health": "multiply_canonical_once",
+									"max_shield": "add_fraction_of_unmodified_canonical_max_health",
+									"rounding": "float_no_integer_rounding",
+									"shield": "add_same_bonus_preserve_missing_amount",
+									"shield_regen": "unchanged",
+									"speed": "multiply_canonical_once",
+									"telegraph_windup": "unchanged"
+								},
+								"reward_budget": {
+									"creates_map_items": false,
+									"enabled": false,
+									"grants_rewards": false,
+									"proposed_bonus_fraction": null,
+									"status": "metadata_only"
+								},
+								"risk_parameters": [
+									{
+										"assessment": "prototype_budget_not_balance_proof",
+										"field": "armour",
+										"label": "怪物护甲 +80；按单次物理命中大小减伤，元素与混沌不变",
+										"multiplier": 1.0,
+										"operation": "add_flat",
+										"relative_increase": 0.0,
+										"value": 80.0
+									}
+								],
+								"source": {
+									"balance_source": "original_game_balance",
+									"catalog": "res://scripts/encounters/encounter_catalog.gd",
+									"definition_revision": 2,
+									"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+									"monster_schema_version": 1,
+									"policy_version": 2,
+									"schema_version": 1
+								}
+							},
+							"rarity": "rare",
+							"shield_bonus": 0.0,
+							"template_id": "ember_guard",
+							"wave": 3
+						},
+						"equipment_pool": "defense",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 313.5,
+						"id": 1,
+						"kind": 2,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 313.5,
+						"max_shield": 0.0,
+						"mechanism_ids": [],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+
+						},
+						"name": "灰烬守卫",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"resistances": {
+							"fire": 0.25
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 0.0,
+						"shield_regen": 0.0,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 47.2,
+						"template_id": "ember_guard",
+						"wave": 3,
+						"xp_reward": 24
+					},
+					"after_telegraph": {
+						"base_attack_speed": 1.1764705882352942,
+						"hold_pursuit_during_action": true,
+						"minimum_attack_speed": 0.2,
+						"profile": {
+							"damage_multiplier": 1.4,
+							"radius": 90.0,
+							"recovery_seconds": 1.2,
+							"windup_seconds": 0.7
+						},
+						"profile_id": "locked_circle",
+						"recovery_scaling": "base_attack_speed_divided_by_current_attack_speed",
+						"replaces_contact": true,
+						"trigger_distance": 150.0
+					},
+					"before": {
+						"armour": 0.0,
+						"attack_speed": 1.1764705882352942,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"fire": 0.5,
+							"physical": 0.5
+						},
+						"damage": 23.279999999999998,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [],
+						"defense_stats": {
+							"fire_resistance": 0.25
+						},
+						"equipment_pool": "defense",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 313.5,
+						"id": 1,
+						"kind": 2,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 313.5,
+						"max_shield": 0.0,
+						"mechanism_ids": [],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+
+						},
+						"name": "灰烬守卫",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"resistances": {
+							"fire": 0.25
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 0.0,
+						"shield_regen": 0.0,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 47.2,
+						"template_id": "ember_guard",
+						"wave": 3,
+						"xp_reward": 24
+					},
+					"before_telegraph": {
+						"base_attack_speed": 1.1764705882352942,
+						"hold_pursuit_during_action": true,
+						"minimum_attack_speed": 0.2,
+						"profile": {
+							"damage_multiplier": 1.4,
+							"radius": 90.0,
+							"recovery_seconds": 1.2,
+							"windup_seconds": 0.7
+						},
+						"profile_id": "locked_circle",
+						"recovery_scaling": "base_attack_speed_divided_by_current_attack_speed",
+						"replaces_contact": true,
+						"trigger_distance": 150.0
+					}
+				}
+			},
+			"field": "armour",
+			"id": "enemy_armour_80",
+			"multiplier": 1.0,
+			"name": "铁肤",
+			"operation": "add_flat",
+			"profile": {
+				"additions": {
+					"armour": 80.0,
+					"shield_from_base_health": 0.0
+				},
+				"definitions": [
+					{
+						"description": "怪物护甲 +80；按单次物理命中大小减伤，元素与混沌不变",
+						"field": "armour",
+						"id": "enemy_armour_80",
+						"multiplier": 1.0,
+						"name": "铁肤",
+						"operation": "add_flat",
+						"risk": {
+							"assessment": "prototype_budget_not_balance_proof",
+							"field": "armour",
+							"label": "怪物护甲 +80；按单次物理命中大小减伤，元素与混沌不变",
+							"multiplier": 1.0,
+							"operation": "add_flat",
+							"relative_increase": 0.0,
+							"value": 80.0
+						},
+						"source_id": "encounter:enemy_armour_80",
+						"value": 80.0
+					}
+				],
+				"modifier_ids": [
+					"enemy_armour_80"
+				],
+				"multipliers": {
+					"attack_speed": 1.0,
+					"damage": 1.0,
+					"max_health": 1.0,
+					"speed": 1.0
+				},
+				"resource_policy": {
+					"armour": "add_flat_then_existing_hit_size_formula",
+					"attack_speed": "multiply_contact_rate_and_recovery_only",
+					"damage": "multiply_canonical_once",
+					"health": "preserve_current_to_max_ratio",
+					"max_health": "multiply_canonical_once",
+					"max_shield": "add_fraction_of_unmodified_canonical_max_health",
+					"rounding": "float_no_integer_rounding",
+					"shield": "add_same_bonus_preserve_missing_amount",
+					"shield_regen": "unchanged",
+					"speed": "multiply_canonical_once",
+					"telegraph_windup": "unchanged"
+				},
+				"reward_budget": {
+					"creates_map_items": false,
+					"enabled": false,
+					"grants_rewards": false,
+					"proposed_bonus_fraction": null,
+					"status": "metadata_only"
+				},
+				"risk_parameters": [
+					{
+						"assessment": "prototype_budget_not_balance_proof",
+						"field": "armour",
+						"label": "怪物护甲 +80；按单次物理命中大小减伤，元素与混沌不变",
+						"multiplier": 1.0,
+						"operation": "add_flat",
+						"relative_increase": 0.0,
+						"value": 80.0
+					}
+				],
+				"source": {
+					"balance_source": "original_game_balance",
+					"catalog": "res://scripts/encounters/encounter_catalog.gd",
+					"definition_revision": 2,
+					"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+					"monster_schema_version": 1,
+					"policy_version": 2,
+					"schema_version": 1
+				}
+			},
+			"risk": {
+				"assessment": "prototype_budget_not_balance_proof",
+				"field": "armour",
+				"label": "怪物护甲 +80；按单次物理命中大小减伤，元素与混沌不变",
+				"multiplier": 1.0,
+				"operation": "add_flat",
+				"relative_increase": 0.0,
+				"value": 80.0
+			},
+			"source_id": "encounter:enemy_armour_80",
+			"status": "implemented",
+			"value": 80.0
+		},
+		"enemy_attack_speed_110": {
+			"description": "怪物攻击速度 ×1.10；预警时长保持，仅加快接触与预警后恢复",
+			"examples": {
+				"brood_host": {
+					"after": {
+						"armour": 0.0,
+						"attack_speed": 1.2941176470588236,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"physical": 1.0
+						},
+						"damage": 23.279999999999998,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [
+							{
+								"count": 2,
+								"template": "splitter"
+							}
+						],
+						"defense_stats": {
+
+						},
+						"encounter_source": {
+							"before": {
+								"armour": 0.0,
+								"attack_speed": 1.1764705882352942,
+								"damage": 23.279999999999998,
+								"health": 323.25,
+								"max_health": 323.25,
+								"max_shield": 4.68,
+								"shield": 4.68,
+								"speed": 47.2
+							},
+							"enemy_id": 1,
+							"mechanism_policy": "poe-passive-v1",
+							"mechanism_revision": 1,
+							"mechanism_schema": 1,
+							"profile": {
+								"additions": {
+									"armour": 0.0,
+									"shield_from_base_health": 0.0
+								},
+								"definitions": [
+									{
+										"description": "怪物攻击速度 ×1.10；预警时长保持，仅加快接触与预警后恢复",
+										"field": "attack_speed",
+										"id": "enemy_attack_speed_110",
+										"multiplier": 1.1,
+										"name": "疾攻",
+										"operation": "multiply",
+										"risk": {
+											"assessment": "prototype_budget_not_balance_proof",
+											"field": "attack_speed",
+											"label": "怪物攻击速度 ×1.10；预警时长保持，仅加快接触与预警后恢复",
+											"multiplier": 1.1,
+											"operation": "multiply",
+											"relative_increase": 0.10000000000000009,
+											"value": 1.1
+										},
+										"source_id": "encounter:enemy_attack_speed_110",
+										"value": 1.1
+									}
+								],
+								"modifier_ids": [
+									"enemy_attack_speed_110"
+								],
+								"multipliers": {
+									"attack_speed": 1.1,
+									"damage": 1.0,
+									"max_health": 1.0,
+									"speed": 1.0
+								},
+								"resource_policy": {
+									"armour": "add_flat_then_existing_hit_size_formula",
+									"attack_speed": "multiply_contact_rate_and_recovery_only",
+									"damage": "multiply_canonical_once",
+									"health": "preserve_current_to_max_ratio",
+									"max_health": "multiply_canonical_once",
+									"max_shield": "add_fraction_of_unmodified_canonical_max_health",
+									"rounding": "float_no_integer_rounding",
+									"shield": "add_same_bonus_preserve_missing_amount",
+									"shield_regen": "unchanged",
+									"speed": "multiply_canonical_once",
+									"telegraph_windup": "unchanged"
+								},
+								"reward_budget": {
+									"creates_map_items": false,
+									"enabled": false,
+									"grants_rewards": false,
+									"proposed_bonus_fraction": null,
+									"status": "metadata_only"
+								},
+								"risk_parameters": [
+									{
+										"assessment": "prototype_budget_not_balance_proof",
+										"field": "attack_speed",
+										"label": "怪物攻击速度 ×1.10；预警时长保持，仅加快接触与预警后恢复",
+										"multiplier": 1.1,
+										"operation": "multiply",
+										"relative_increase": 0.10000000000000009,
+										"value": 1.1
+									}
+								],
+								"source": {
+									"balance_source": "original_game_balance",
+									"catalog": "res://scripts/encounters/encounter_catalog.gd",
+									"definition_revision": 2,
+									"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+									"monster_schema_version": 1,
+									"policy_version": 2,
+									"schema_version": 1
+								}
+							},
+							"rarity": "rare",
+							"shield_bonus": 0.0,
+							"template_id": "brood_host",
+							"wave": 3
+						},
+						"equipment_pool": "",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 323.25,
+						"id": 1,
+						"kind": 2,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 323.25,
+						"max_shield": 4.68,
+						"mechanism_ids": [
+							"grove_mastery",
+							"aegis_recovery"
+						],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+							"max_health": 9.75,
+							"max_shield": 4.68,
+							"shield_regen": 0.4225
+						},
+						"name": "孵化重壳体",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"resistances": {
+							"fire": 0.0
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 4.68,
+						"shield_regen": 0.4225,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 47.2,
+						"template_id": "brood_host",
+						"wave": 3,
+						"xp_reward": 24
+					},
+					"after_telegraph": {
+
+					},
+					"before": {
+						"armour": 0.0,
+						"attack_speed": 1.1764705882352942,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"physical": 1.0
+						},
+						"damage": 23.279999999999998,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [
+							{
+								"count": 2,
+								"template": "splitter"
+							}
+						],
+						"defense_stats": {
+
+						},
+						"equipment_pool": "",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 323.25,
+						"id": 1,
+						"kind": 2,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 323.25,
+						"max_shield": 4.68,
+						"mechanism_ids": [
+							"grove_mastery",
+							"aegis_recovery"
+						],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+							"max_health": 9.75,
+							"max_shield": 4.68,
+							"shield_regen": 0.4225
+						},
+						"name": "孵化重壳体",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"resistances": {
+							"fire": 0.0
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 4.68,
+						"shield_regen": 0.4225,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 47.2,
+						"template_id": "brood_host",
+						"wave": 3,
+						"xp_reward": 24
+					},
+					"before_telegraph": {
+
+					}
+				},
+				"crawler": {
+					"after": {
+						"armour": 0.0,
+						"attack_speed": 1.2941176470588236,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"physical": 1.0
+						},
+						"damage": 11.4,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [],
+						"defense_stats": {
+
+						},
+						"encounter_source": {
+							"before": {
+								"armour": 0.0,
+								"attack_speed": 1.1764705882352942,
+								"damage": 11.4,
+								"health": 50.160000000000004,
+								"max_health": 50.160000000000004,
+								"max_shield": 0.0,
+								"shield": 0.0,
+								"speed": 68.2
+							},
+							"enemy_id": 1,
+							"mechanism_policy": "poe-passive-v1",
+							"mechanism_revision": 1,
+							"mechanism_schema": 1,
+							"profile": {
+								"additions": {
+									"armour": 0.0,
+									"shield_from_base_health": 0.0
+								},
+								"definitions": [
+									{
+										"description": "怪物攻击速度 ×1.10；预警时长保持，仅加快接触与预警后恢复",
+										"field": "attack_speed",
+										"id": "enemy_attack_speed_110",
+										"multiplier": 1.1,
+										"name": "疾攻",
+										"operation": "multiply",
+										"risk": {
+											"assessment": "prototype_budget_not_balance_proof",
+											"field": "attack_speed",
+											"label": "怪物攻击速度 ×1.10；预警时长保持，仅加快接触与预警后恢复",
+											"multiplier": 1.1,
+											"operation": "multiply",
+											"relative_increase": 0.10000000000000009,
+											"value": 1.1
+										},
+										"source_id": "encounter:enemy_attack_speed_110",
+										"value": 1.1
+									}
+								],
+								"modifier_ids": [
+									"enemy_attack_speed_110"
+								],
+								"multipliers": {
+									"attack_speed": 1.1,
+									"damage": 1.0,
+									"max_health": 1.0,
+									"speed": 1.0
+								},
+								"resource_policy": {
+									"armour": "add_flat_then_existing_hit_size_formula",
+									"attack_speed": "multiply_contact_rate_and_recovery_only",
+									"damage": "multiply_canonical_once",
+									"health": "preserve_current_to_max_ratio",
+									"max_health": "multiply_canonical_once",
+									"max_shield": "add_fraction_of_unmodified_canonical_max_health",
+									"rounding": "float_no_integer_rounding",
+									"shield": "add_same_bonus_preserve_missing_amount",
+									"shield_regen": "unchanged",
+									"speed": "multiply_canonical_once",
+									"telegraph_windup": "unchanged"
+								},
+								"reward_budget": {
+									"creates_map_items": false,
+									"enabled": false,
+									"grants_rewards": false,
+									"proposed_bonus_fraction": null,
+									"status": "metadata_only"
+								},
+								"risk_parameters": [
+									{
+										"assessment": "prototype_budget_not_balance_proof",
+										"field": "attack_speed",
+										"label": "怪物攻击速度 ×1.10；预警时长保持，仅加快接触与预警后恢复",
+										"multiplier": 1.1,
+										"operation": "multiply",
+										"relative_increase": 0.10000000000000009,
+										"value": 1.1
+									}
+								],
+								"source": {
+									"balance_source": "original_game_balance",
+									"catalog": "res://scripts/encounters/encounter_catalog.gd",
+									"definition_revision": 2,
+									"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+									"monster_schema_version": 1,
+									"policy_version": 2,
+									"schema_version": 1
+								}
+							},
+							"rarity": "normal",
+							"shield_bonus": 0.0,
+							"template_id": "crawler",
+							"wave": 3
+						},
+						"equipment_pool": "",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 50.160000000000004,
+						"id": 1,
+						"kind": 0,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 50.160000000000004,
+						"max_shield": 0.0,
+						"mechanism_ids": [],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+
+						},
+						"name": "巡游体",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"resistances": {
+							"fire": 0.0
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 0.0,
+						"shield_regen": 0.0,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 68.2,
+						"template_id": "crawler",
+						"wave": 3,
+						"xp_reward": 3
+					},
+					"after_telegraph": {
+
+					},
+					"before": {
+						"armour": 0.0,
+						"attack_speed": 1.1764705882352942,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"physical": 1.0
+						},
+						"damage": 11.4,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [],
+						"defense_stats": {
+
+						},
+						"equipment_pool": "",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 50.160000000000004,
+						"id": 1,
+						"kind": 0,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 50.160000000000004,
+						"max_shield": 0.0,
+						"mechanism_ids": [],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+
+						},
+						"name": "巡游体",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"resistances": {
+							"fire": 0.0
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 0.0,
+						"shield_regen": 0.0,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 68.2,
+						"template_id": "crawler",
+						"wave": 3,
+						"xp_reward": 3
+					},
+					"before_telegraph": {
+
+					}
+				},
+				"ember_guard": {
+					"after": {
+						"armour": 0.0,
+						"attack_speed": 1.2941176470588236,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"fire": 0.5,
+							"physical": 0.5
+						},
+						"damage": 23.279999999999998,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [],
+						"defense_stats": {
+							"fire_resistance": 0.25
+						},
+						"encounter_source": {
+							"before": {
+								"armour": 0.0,
+								"attack_speed": 1.1764705882352942,
+								"damage": 23.279999999999998,
+								"health": 313.5,
+								"max_health": 313.5,
+								"max_shield": 0.0,
+								"shield": 0.0,
+								"speed": 47.2
+							},
+							"enemy_id": 1,
+							"mechanism_policy": "poe-passive-v1",
+							"mechanism_revision": 1,
+							"mechanism_schema": 1,
+							"profile": {
+								"additions": {
+									"armour": 0.0,
+									"shield_from_base_health": 0.0
+								},
+								"definitions": [
+									{
+										"description": "怪物攻击速度 ×1.10；预警时长保持，仅加快接触与预警后恢复",
+										"field": "attack_speed",
+										"id": "enemy_attack_speed_110",
+										"multiplier": 1.1,
+										"name": "疾攻",
+										"operation": "multiply",
+										"risk": {
+											"assessment": "prototype_budget_not_balance_proof",
+											"field": "attack_speed",
+											"label": "怪物攻击速度 ×1.10；预警时长保持，仅加快接触与预警后恢复",
+											"multiplier": 1.1,
+											"operation": "multiply",
+											"relative_increase": 0.10000000000000009,
+											"value": 1.1
+										},
+										"source_id": "encounter:enemy_attack_speed_110",
+										"value": 1.1
+									}
+								],
+								"modifier_ids": [
+									"enemy_attack_speed_110"
+								],
+								"multipliers": {
+									"attack_speed": 1.1,
+									"damage": 1.0,
+									"max_health": 1.0,
+									"speed": 1.0
+								},
+								"resource_policy": {
+									"armour": "add_flat_then_existing_hit_size_formula",
+									"attack_speed": "multiply_contact_rate_and_recovery_only",
+									"damage": "multiply_canonical_once",
+									"health": "preserve_current_to_max_ratio",
+									"max_health": "multiply_canonical_once",
+									"max_shield": "add_fraction_of_unmodified_canonical_max_health",
+									"rounding": "float_no_integer_rounding",
+									"shield": "add_same_bonus_preserve_missing_amount",
+									"shield_regen": "unchanged",
+									"speed": "multiply_canonical_once",
+									"telegraph_windup": "unchanged"
+								},
+								"reward_budget": {
+									"creates_map_items": false,
+									"enabled": false,
+									"grants_rewards": false,
+									"proposed_bonus_fraction": null,
+									"status": "metadata_only"
+								},
+								"risk_parameters": [
+									{
+										"assessment": "prototype_budget_not_balance_proof",
+										"field": "attack_speed",
+										"label": "怪物攻击速度 ×1.10；预警时长保持，仅加快接触与预警后恢复",
+										"multiplier": 1.1,
+										"operation": "multiply",
+										"relative_increase": 0.10000000000000009,
+										"value": 1.1
+									}
+								],
+								"source": {
+									"balance_source": "original_game_balance",
+									"catalog": "res://scripts/encounters/encounter_catalog.gd",
+									"definition_revision": 2,
+									"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+									"monster_schema_version": 1,
+									"policy_version": 2,
+									"schema_version": 1
+								}
+							},
+							"rarity": "rare",
+							"shield_bonus": 0.0,
+							"template_id": "ember_guard",
+							"wave": 3
+						},
+						"equipment_pool": "defense",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 313.5,
+						"id": 1,
+						"kind": 2,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 313.5,
+						"max_shield": 0.0,
+						"mechanism_ids": [],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+
+						},
+						"name": "灰烬守卫",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"resistances": {
+							"fire": 0.25
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 0.0,
+						"shield_regen": 0.0,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 47.2,
+						"template_id": "ember_guard",
+						"wave": 3,
+						"xp_reward": 24
+					},
+					"after_telegraph": {
+						"base_attack_speed": 1.1764705882352942,
+						"hold_pursuit_during_action": true,
+						"minimum_attack_speed": 0.2,
+						"profile": {
+							"damage_multiplier": 1.4,
+							"radius": 90.0,
+							"recovery_seconds": 1.0909090909090908,
+							"windup_seconds": 0.7
+						},
+						"profile_id": "locked_circle",
+						"recovery_scaling": "base_attack_speed_divided_by_current_attack_speed",
+						"replaces_contact": true,
+						"trigger_distance": 150.0
+					},
+					"before": {
+						"armour": 0.0,
+						"attack_speed": 1.1764705882352942,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"fire": 0.5,
+							"physical": 0.5
+						},
+						"damage": 23.279999999999998,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [],
+						"defense_stats": {
+							"fire_resistance": 0.25
+						},
+						"equipment_pool": "defense",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 313.5,
+						"id": 1,
+						"kind": 2,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 313.5,
+						"max_shield": 0.0,
+						"mechanism_ids": [],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+
+						},
+						"name": "灰烬守卫",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"resistances": {
+							"fire": 0.25
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 0.0,
+						"shield_regen": 0.0,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 47.2,
+						"template_id": "ember_guard",
+						"wave": 3,
+						"xp_reward": 24
+					},
+					"before_telegraph": {
+						"base_attack_speed": 1.1764705882352942,
+						"hold_pursuit_during_action": true,
+						"minimum_attack_speed": 0.2,
+						"profile": {
+							"damage_multiplier": 1.4,
+							"radius": 90.0,
+							"recovery_seconds": 1.2,
+							"windup_seconds": 0.7
+						},
+						"profile_id": "locked_circle",
+						"recovery_scaling": "base_attack_speed_divided_by_current_attack_speed",
+						"replaces_contact": true,
+						"trigger_distance": 150.0
+					}
+				}
+			},
+			"field": "attack_speed",
+			"id": "enemy_attack_speed_110",
+			"multiplier": 1.1,
+			"name": "疾攻",
+			"operation": "multiply",
+			"profile": {
+				"additions": {
+					"armour": 0.0,
+					"shield_from_base_health": 0.0
+				},
+				"definitions": [
+					{
+						"description": "怪物攻击速度 ×1.10；预警时长保持，仅加快接触与预警后恢复",
+						"field": "attack_speed",
+						"id": "enemy_attack_speed_110",
+						"multiplier": 1.1,
+						"name": "疾攻",
+						"operation": "multiply",
+						"risk": {
+							"assessment": "prototype_budget_not_balance_proof",
+							"field": "attack_speed",
+							"label": "怪物攻击速度 ×1.10；预警时长保持，仅加快接触与预警后恢复",
+							"multiplier": 1.1,
+							"operation": "multiply",
+							"relative_increase": 0.10000000000000009,
+							"value": 1.1
+						},
+						"source_id": "encounter:enemy_attack_speed_110",
+						"value": 1.1
+					}
+				],
+				"modifier_ids": [
+					"enemy_attack_speed_110"
+				],
+				"multipliers": {
+					"attack_speed": 1.1,
+					"damage": 1.0,
+					"max_health": 1.0,
+					"speed": 1.0
+				},
+				"resource_policy": {
+					"armour": "add_flat_then_existing_hit_size_formula",
+					"attack_speed": "multiply_contact_rate_and_recovery_only",
+					"damage": "multiply_canonical_once",
+					"health": "preserve_current_to_max_ratio",
+					"max_health": "multiply_canonical_once",
+					"max_shield": "add_fraction_of_unmodified_canonical_max_health",
+					"rounding": "float_no_integer_rounding",
+					"shield": "add_same_bonus_preserve_missing_amount",
+					"shield_regen": "unchanged",
+					"speed": "multiply_canonical_once",
+					"telegraph_windup": "unchanged"
+				},
+				"reward_budget": {
+					"creates_map_items": false,
+					"enabled": false,
+					"grants_rewards": false,
+					"proposed_bonus_fraction": null,
+					"status": "metadata_only"
+				},
+				"risk_parameters": [
+					{
+						"assessment": "prototype_budget_not_balance_proof",
+						"field": "attack_speed",
+						"label": "怪物攻击速度 ×1.10；预警时长保持，仅加快接触与预警后恢复",
+						"multiplier": 1.1,
+						"operation": "multiply",
+						"relative_increase": 0.10000000000000009,
+						"value": 1.1
+					}
+				],
+				"source": {
+					"balance_source": "original_game_balance",
+					"catalog": "res://scripts/encounters/encounter_catalog.gd",
+					"definition_revision": 2,
+					"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+					"monster_schema_version": 1,
+					"policy_version": 2,
+					"schema_version": 1
+				}
+			},
+			"risk": {
+				"assessment": "prototype_budget_not_balance_proof",
+				"field": "attack_speed",
+				"label": "怪物攻击速度 ×1.10；预警时长保持，仅加快接触与预警后恢复",
+				"multiplier": 1.1,
+				"operation": "multiply",
+				"relative_increase": 0.10000000000000009,
+				"value": 1.1
+			},
+			"source_id": "encounter:enemy_attack_speed_110",
+			"status": "implemented",
+			"value": 1.1
+		},
+		"enemy_damage_115": {
+			"description": "接触与预警伤害基底 ×1.15",
+			"examples": {
+				"brood_host": {
+					"after": {
+						"armour": 0.0,
+						"attack_speed": 1.1764705882352942,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"physical": 1.0
+						},
+						"damage": 26.771999999999995,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [
+							{
+								"count": 2,
+								"template": "splitter"
+							}
+						],
+						"defense_stats": {
+
+						},
+						"encounter_source": {
+							"before": {
+								"armour": 0.0,
+								"attack_speed": 1.1764705882352942,
+								"damage": 23.279999999999998,
+								"health": 323.25,
+								"max_health": 323.25,
+								"max_shield": 4.68,
+								"shield": 4.68,
+								"speed": 47.2
+							},
+							"enemy_id": 1,
+							"mechanism_policy": "poe-passive-v1",
+							"mechanism_revision": 1,
+							"mechanism_schema": 1,
+							"profile": {
+								"additions": {
+									"armour": 0.0,
+									"shield_from_base_health": 0.0
+								},
+								"definitions": [
+									{
+										"description": "接触与预警伤害基底 ×1.15",
+										"field": "damage",
+										"id": "enemy_damage_115",
+										"multiplier": 1.15,
+										"name": "凶猛",
+										"operation": "multiply",
+										"risk": {
+											"assessment": "prototype_budget_not_balance_proof",
+											"field": "damage",
+											"label": "接触与预警伤害基底 ×1.15",
+											"multiplier": 1.15,
+											"operation": "multiply",
+											"relative_increase": 0.1499999999999999,
+											"value": 1.15
+										},
+										"source_id": "encounter:enemy_damage_115",
+										"value": 1.15
+									}
+								],
+								"modifier_ids": [
+									"enemy_damage_115"
+								],
+								"multipliers": {
+									"attack_speed": 1.0,
+									"damage": 1.15,
+									"max_health": 1.0,
+									"speed": 1.0
+								},
+								"resource_policy": {
+									"armour": "add_flat_then_existing_hit_size_formula",
+									"attack_speed": "multiply_contact_rate_and_recovery_only",
+									"damage": "multiply_canonical_once",
+									"health": "preserve_current_to_max_ratio",
+									"max_health": "multiply_canonical_once",
+									"max_shield": "add_fraction_of_unmodified_canonical_max_health",
+									"rounding": "float_no_integer_rounding",
+									"shield": "add_same_bonus_preserve_missing_amount",
+									"shield_regen": "unchanged",
+									"speed": "multiply_canonical_once",
+									"telegraph_windup": "unchanged"
+								},
+								"reward_budget": {
+									"creates_map_items": false,
+									"enabled": false,
+									"grants_rewards": false,
+									"proposed_bonus_fraction": null,
+									"status": "metadata_only"
+								},
+								"risk_parameters": [
+									{
+										"assessment": "prototype_budget_not_balance_proof",
+										"field": "damage",
+										"label": "接触与预警伤害基底 ×1.15",
+										"multiplier": 1.15,
+										"operation": "multiply",
+										"relative_increase": 0.1499999999999999,
+										"value": 1.15
+									}
+								],
+								"source": {
+									"balance_source": "original_game_balance",
+									"catalog": "res://scripts/encounters/encounter_catalog.gd",
+									"definition_revision": 2,
+									"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+									"monster_schema_version": 1,
+									"policy_version": 2,
+									"schema_version": 1
+								}
+							},
+							"rarity": "rare",
+							"shield_bonus": 0.0,
+							"template_id": "brood_host",
+							"wave": 3
+						},
+						"equipment_pool": "",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 323.25,
+						"id": 1,
+						"kind": 2,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 323.25,
+						"max_shield": 4.68,
+						"mechanism_ids": [
+							"grove_mastery",
+							"aegis_recovery"
+						],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+							"max_health": 9.75,
+							"max_shield": 4.68,
+							"shield_regen": 0.4225
+						},
+						"name": "孵化重壳体",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"resistances": {
+							"fire": 0.0
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 4.68,
+						"shield_regen": 0.4225,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 47.2,
+						"template_id": "brood_host",
+						"wave": 3,
+						"xp_reward": 24
+					},
+					"after_telegraph": {
+
+					},
+					"before": {
+						"armour": 0.0,
+						"attack_speed": 1.1764705882352942,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"physical": 1.0
+						},
+						"damage": 23.279999999999998,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [
+							{
+								"count": 2,
+								"template": "splitter"
+							}
+						],
+						"defense_stats": {
+
+						},
+						"equipment_pool": "",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 323.25,
+						"id": 1,
+						"kind": 2,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 323.25,
+						"max_shield": 4.68,
+						"mechanism_ids": [
+							"grove_mastery",
+							"aegis_recovery"
+						],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+							"max_health": 9.75,
+							"max_shield": 4.68,
+							"shield_regen": 0.4225
+						},
+						"name": "孵化重壳体",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"resistances": {
+							"fire": 0.0
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 4.68,
+						"shield_regen": 0.4225,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 47.2,
+						"template_id": "brood_host",
+						"wave": 3,
+						"xp_reward": 24
+					},
+					"before_telegraph": {
+
+					}
+				},
+				"crawler": {
+					"after": {
+						"armour": 0.0,
+						"attack_speed": 1.1764705882352942,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"physical": 1.0
+						},
+						"damage": 13.11,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [],
+						"defense_stats": {
+
+						},
+						"encounter_source": {
+							"before": {
+								"armour": 0.0,
+								"attack_speed": 1.1764705882352942,
+								"damage": 11.4,
+								"health": 50.160000000000004,
+								"max_health": 50.160000000000004,
+								"max_shield": 0.0,
+								"shield": 0.0,
+								"speed": 68.2
+							},
+							"enemy_id": 1,
+							"mechanism_policy": "poe-passive-v1",
+							"mechanism_revision": 1,
+							"mechanism_schema": 1,
+							"profile": {
+								"additions": {
+									"armour": 0.0,
+									"shield_from_base_health": 0.0
+								},
+								"definitions": [
+									{
+										"description": "接触与预警伤害基底 ×1.15",
+										"field": "damage",
+										"id": "enemy_damage_115",
+										"multiplier": 1.15,
+										"name": "凶猛",
+										"operation": "multiply",
+										"risk": {
+											"assessment": "prototype_budget_not_balance_proof",
+											"field": "damage",
+											"label": "接触与预警伤害基底 ×1.15",
+											"multiplier": 1.15,
+											"operation": "multiply",
+											"relative_increase": 0.1499999999999999,
+											"value": 1.15
+										},
+										"source_id": "encounter:enemy_damage_115",
+										"value": 1.15
+									}
+								],
+								"modifier_ids": [
+									"enemy_damage_115"
+								],
+								"multipliers": {
+									"attack_speed": 1.0,
+									"damage": 1.15,
+									"max_health": 1.0,
+									"speed": 1.0
+								},
+								"resource_policy": {
+									"armour": "add_flat_then_existing_hit_size_formula",
+									"attack_speed": "multiply_contact_rate_and_recovery_only",
+									"damage": "multiply_canonical_once",
+									"health": "preserve_current_to_max_ratio",
+									"max_health": "multiply_canonical_once",
+									"max_shield": "add_fraction_of_unmodified_canonical_max_health",
+									"rounding": "float_no_integer_rounding",
+									"shield": "add_same_bonus_preserve_missing_amount",
+									"shield_regen": "unchanged",
+									"speed": "multiply_canonical_once",
+									"telegraph_windup": "unchanged"
+								},
+								"reward_budget": {
+									"creates_map_items": false,
+									"enabled": false,
+									"grants_rewards": false,
+									"proposed_bonus_fraction": null,
+									"status": "metadata_only"
+								},
+								"risk_parameters": [
+									{
+										"assessment": "prototype_budget_not_balance_proof",
+										"field": "damage",
+										"label": "接触与预警伤害基底 ×1.15",
+										"multiplier": 1.15,
+										"operation": "multiply",
+										"relative_increase": 0.1499999999999999,
+										"value": 1.15
+									}
+								],
+								"source": {
+									"balance_source": "original_game_balance",
+									"catalog": "res://scripts/encounters/encounter_catalog.gd",
+									"definition_revision": 2,
+									"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+									"monster_schema_version": 1,
+									"policy_version": 2,
+									"schema_version": 1
+								}
+							},
+							"rarity": "normal",
+							"shield_bonus": 0.0,
+							"template_id": "crawler",
+							"wave": 3
+						},
+						"equipment_pool": "",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 50.160000000000004,
+						"id": 1,
+						"kind": 0,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 50.160000000000004,
+						"max_shield": 0.0,
+						"mechanism_ids": [],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+
+						},
+						"name": "巡游体",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"resistances": {
+							"fire": 0.0
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 0.0,
+						"shield_regen": 0.0,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 68.2,
+						"template_id": "crawler",
+						"wave": 3,
+						"xp_reward": 3
+					},
+					"after_telegraph": {
+
+					},
+					"before": {
+						"armour": 0.0,
+						"attack_speed": 1.1764705882352942,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"physical": 1.0
+						},
+						"damage": 11.4,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [],
+						"defense_stats": {
+
+						},
+						"equipment_pool": "",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 50.160000000000004,
+						"id": 1,
+						"kind": 0,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 50.160000000000004,
+						"max_shield": 0.0,
+						"mechanism_ids": [],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+
+						},
+						"name": "巡游体",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"resistances": {
+							"fire": 0.0
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 0.0,
+						"shield_regen": 0.0,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 68.2,
+						"template_id": "crawler",
+						"wave": 3,
+						"xp_reward": 3
+					},
+					"before_telegraph": {
+
+					}
+				},
+				"ember_guard": {
+					"after": {
+						"armour": 0.0,
+						"attack_speed": 1.1764705882352942,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"fire": 0.5,
+							"physical": 0.5
+						},
+						"damage": 26.771999999999995,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [],
+						"defense_stats": {
+							"fire_resistance": 0.25
+						},
+						"encounter_source": {
+							"before": {
+								"armour": 0.0,
+								"attack_speed": 1.1764705882352942,
+								"damage": 23.279999999999998,
+								"health": 313.5,
+								"max_health": 313.5,
+								"max_shield": 0.0,
+								"shield": 0.0,
+								"speed": 47.2
+							},
+							"enemy_id": 1,
+							"mechanism_policy": "poe-passive-v1",
+							"mechanism_revision": 1,
+							"mechanism_schema": 1,
+							"profile": {
+								"additions": {
+									"armour": 0.0,
+									"shield_from_base_health": 0.0
+								},
+								"definitions": [
+									{
+										"description": "接触与预警伤害基底 ×1.15",
+										"field": "damage",
+										"id": "enemy_damage_115",
+										"multiplier": 1.15,
+										"name": "凶猛",
+										"operation": "multiply",
+										"risk": {
+											"assessment": "prototype_budget_not_balance_proof",
+											"field": "damage",
+											"label": "接触与预警伤害基底 ×1.15",
+											"multiplier": 1.15,
+											"operation": "multiply",
+											"relative_increase": 0.1499999999999999,
+											"value": 1.15
+										},
+										"source_id": "encounter:enemy_damage_115",
+										"value": 1.15
+									}
+								],
+								"modifier_ids": [
+									"enemy_damage_115"
+								],
+								"multipliers": {
+									"attack_speed": 1.0,
+									"damage": 1.15,
+									"max_health": 1.0,
+									"speed": 1.0
+								},
+								"resource_policy": {
+									"armour": "add_flat_then_existing_hit_size_formula",
+									"attack_speed": "multiply_contact_rate_and_recovery_only",
+									"damage": "multiply_canonical_once",
+									"health": "preserve_current_to_max_ratio",
+									"max_health": "multiply_canonical_once",
+									"max_shield": "add_fraction_of_unmodified_canonical_max_health",
+									"rounding": "float_no_integer_rounding",
+									"shield": "add_same_bonus_preserve_missing_amount",
+									"shield_regen": "unchanged",
+									"speed": "multiply_canonical_once",
+									"telegraph_windup": "unchanged"
+								},
+								"reward_budget": {
+									"creates_map_items": false,
+									"enabled": false,
+									"grants_rewards": false,
+									"proposed_bonus_fraction": null,
+									"status": "metadata_only"
+								},
+								"risk_parameters": [
+									{
+										"assessment": "prototype_budget_not_balance_proof",
+										"field": "damage",
+										"label": "接触与预警伤害基底 ×1.15",
+										"multiplier": 1.15,
+										"operation": "multiply",
+										"relative_increase": 0.1499999999999999,
+										"value": 1.15
+									}
+								],
+								"source": {
+									"balance_source": "original_game_balance",
+									"catalog": "res://scripts/encounters/encounter_catalog.gd",
+									"definition_revision": 2,
+									"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+									"monster_schema_version": 1,
+									"policy_version": 2,
+									"schema_version": 1
+								}
+							},
+							"rarity": "rare",
+							"shield_bonus": 0.0,
+							"template_id": "ember_guard",
+							"wave": 3
+						},
+						"equipment_pool": "defense",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 313.5,
+						"id": 1,
+						"kind": 2,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 313.5,
+						"max_shield": 0.0,
+						"mechanism_ids": [],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+
+						},
+						"name": "灰烬守卫",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"resistances": {
+							"fire": 0.25
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 0.0,
+						"shield_regen": 0.0,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 47.2,
+						"template_id": "ember_guard",
+						"wave": 3,
+						"xp_reward": 24
+					},
+					"after_telegraph": {
+						"base_attack_speed": 1.1764705882352942,
+						"hold_pursuit_during_action": true,
+						"minimum_attack_speed": 0.2,
+						"profile": {
+							"damage_multiplier": 1.4,
+							"radius": 90.0,
+							"recovery_seconds": 1.2,
+							"windup_seconds": 0.7
+						},
+						"profile_id": "locked_circle",
+						"recovery_scaling": "base_attack_speed_divided_by_current_attack_speed",
+						"replaces_contact": true,
+						"trigger_distance": 150.0
+					},
+					"before": {
+						"armour": 0.0,
+						"attack_speed": 1.1764705882352942,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"fire": 0.5,
+							"physical": 0.5
+						},
+						"damage": 23.279999999999998,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [],
+						"defense_stats": {
+							"fire_resistance": 0.25
+						},
+						"equipment_pool": "defense",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 313.5,
+						"id": 1,
+						"kind": 2,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 313.5,
+						"max_shield": 0.0,
+						"mechanism_ids": [],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+
+						},
+						"name": "灰烬守卫",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"resistances": {
+							"fire": 0.25
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 0.0,
+						"shield_regen": 0.0,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 47.2,
+						"template_id": "ember_guard",
+						"wave": 3,
+						"xp_reward": 24
+					},
+					"before_telegraph": {
+						"base_attack_speed": 1.1764705882352942,
+						"hold_pursuit_during_action": true,
+						"minimum_attack_speed": 0.2,
+						"profile": {
+							"damage_multiplier": 1.4,
+							"radius": 90.0,
+							"recovery_seconds": 1.2,
+							"windup_seconds": 0.7
+						},
+						"profile_id": "locked_circle",
+						"recovery_scaling": "base_attack_speed_divided_by_current_attack_speed",
+						"replaces_contact": true,
+						"trigger_distance": 150.0
+					}
+				}
+			},
+			"field": "damage",
+			"id": "enemy_damage_115",
+			"multiplier": 1.15,
+			"name": "凶猛",
+			"operation": "multiply",
+			"profile": {
+				"additions": {
+					"armour": 0.0,
+					"shield_from_base_health": 0.0
+				},
+				"definitions": [
+					{
+						"description": "接触与预警伤害基底 ×1.15",
+						"field": "damage",
+						"id": "enemy_damage_115",
+						"multiplier": 1.15,
+						"name": "凶猛",
+						"operation": "multiply",
+						"risk": {
+							"assessment": "prototype_budget_not_balance_proof",
+							"field": "damage",
+							"label": "接触与预警伤害基底 ×1.15",
+							"multiplier": 1.15,
+							"operation": "multiply",
+							"relative_increase": 0.1499999999999999,
+							"value": 1.15
+						},
+						"source_id": "encounter:enemy_damage_115",
+						"value": 1.15
+					}
+				],
+				"modifier_ids": [
+					"enemy_damage_115"
+				],
+				"multipliers": {
+					"attack_speed": 1.0,
+					"damage": 1.15,
+					"max_health": 1.0,
+					"speed": 1.0
+				},
+				"resource_policy": {
+					"armour": "add_flat_then_existing_hit_size_formula",
+					"attack_speed": "multiply_contact_rate_and_recovery_only",
+					"damage": "multiply_canonical_once",
+					"health": "preserve_current_to_max_ratio",
+					"max_health": "multiply_canonical_once",
+					"max_shield": "add_fraction_of_unmodified_canonical_max_health",
+					"rounding": "float_no_integer_rounding",
+					"shield": "add_same_bonus_preserve_missing_amount",
+					"shield_regen": "unchanged",
+					"speed": "multiply_canonical_once",
+					"telegraph_windup": "unchanged"
+				},
+				"reward_budget": {
+					"creates_map_items": false,
+					"enabled": false,
+					"grants_rewards": false,
+					"proposed_bonus_fraction": null,
+					"status": "metadata_only"
+				},
+				"risk_parameters": [
+					{
+						"assessment": "prototype_budget_not_balance_proof",
+						"field": "damage",
+						"label": "接触与预警伤害基底 ×1.15",
+						"multiplier": 1.15,
+						"operation": "multiply",
+						"relative_increase": 0.1499999999999999,
+						"value": 1.15
+					}
+				],
+				"source": {
+					"balance_source": "original_game_balance",
+					"catalog": "res://scripts/encounters/encounter_catalog.gd",
+					"definition_revision": 2,
+					"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+					"monster_schema_version": 1,
+					"policy_version": 2,
+					"schema_version": 1
+				}
+			},
+			"risk": {
+				"assessment": "prototype_budget_not_balance_proof",
+				"field": "damage",
+				"label": "接触与预警伤害基底 ×1.15",
+				"multiplier": 1.15,
+				"operation": "multiply",
+				"relative_increase": 0.1499999999999999,
+				"value": 1.15
+			},
+			"source_id": "encounter:enemy_damage_115",
+			"status": "implemented",
+			"value": 1.15
+		},
+		"enemy_max_health_120": {
+			"description": "怪物最大生命 ×1.20",
+			"examples": {
+				"brood_host": {
+					"after": {
+						"armour": 0.0,
+						"attack_speed": 1.1764705882352942,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"physical": 1.0
+						},
+						"damage": 23.279999999999998,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [
+							{
+								"count": 2,
+								"template": "splitter"
+							}
+						],
+						"defense_stats": {
+
+						},
+						"encounter_source": {
+							"before": {
+								"armour": 0.0,
+								"attack_speed": 1.1764705882352942,
+								"damage": 23.279999999999998,
+								"health": 323.25,
+								"max_health": 323.25,
+								"max_shield": 4.68,
+								"shield": 4.68,
+								"speed": 47.2
+							},
+							"enemy_id": 1,
+							"mechanism_policy": "poe-passive-v1",
+							"mechanism_revision": 1,
+							"mechanism_schema": 1,
+							"profile": {
+								"additions": {
+									"armour": 0.0,
+									"shield_from_base_health": 0.0
+								},
+								"definitions": [
+									{
+										"description": "怪物最大生命 ×1.20",
+										"field": "max_health",
+										"id": "enemy_max_health_120",
+										"multiplier": 1.2,
+										"name": "强健",
+										"operation": "multiply",
+										"risk": {
+											"assessment": "prototype_budget_not_balance_proof",
+											"field": "max_health",
+											"label": "怪物最大生命 ×1.20",
+											"multiplier": 1.2,
+											"operation": "multiply",
+											"relative_increase": 0.19999999999999996,
+											"value": 1.2
+										},
+										"source_id": "encounter:enemy_max_health_120",
+										"value": 1.2
+									}
+								],
+								"modifier_ids": [
+									"enemy_max_health_120"
+								],
+								"multipliers": {
+									"attack_speed": 1.0,
+									"damage": 1.0,
+									"max_health": 1.2,
+									"speed": 1.0
+								},
+								"resource_policy": {
+									"armour": "add_flat_then_existing_hit_size_formula",
+									"attack_speed": "multiply_contact_rate_and_recovery_only",
+									"damage": "multiply_canonical_once",
+									"health": "preserve_current_to_max_ratio",
+									"max_health": "multiply_canonical_once",
+									"max_shield": "add_fraction_of_unmodified_canonical_max_health",
+									"rounding": "float_no_integer_rounding",
+									"shield": "add_same_bonus_preserve_missing_amount",
+									"shield_regen": "unchanged",
+									"speed": "multiply_canonical_once",
+									"telegraph_windup": "unchanged"
+								},
+								"reward_budget": {
+									"creates_map_items": false,
+									"enabled": false,
+									"grants_rewards": false,
+									"proposed_bonus_fraction": null,
+									"status": "metadata_only"
+								},
+								"risk_parameters": [
+									{
+										"assessment": "prototype_budget_not_balance_proof",
+										"field": "max_health",
+										"label": "怪物最大生命 ×1.20",
+										"multiplier": 1.2,
+										"operation": "multiply",
+										"relative_increase": 0.19999999999999996,
+										"value": 1.2
+									}
+								],
+								"source": {
+									"balance_source": "original_game_balance",
+									"catalog": "res://scripts/encounters/encounter_catalog.gd",
+									"definition_revision": 2,
+									"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+									"monster_schema_version": 1,
+									"policy_version": 2,
+									"schema_version": 1
+								}
+							},
+							"rarity": "rare",
+							"shield_bonus": 0.0,
 							"template_id": "brood_host",
 							"wave": 3
 						},
@@ -8167,7 +10530,11 @@
 						"wave": 3,
 						"xp_reward": 24
 					},
+					"after_telegraph": {
+
+					},
 					"before": {
+						"armour": 0.0,
 						"attack_speed": 1.1764705882352942,
 						"attack_timer": 0.5,
 						"contact_weights": {
@@ -8229,10 +10596,14 @@
 						"template_id": "brood_host",
 						"wave": 3,
 						"xp_reward": 24
+					},
+					"before_telegraph": {
+
 					}
 				},
 				"crawler": {
 					"after": {
+						"armour": 0.0,
 						"attack_speed": 1.1764705882352942,
 						"attack_timer": 0.5,
 						"contact_weights": {
@@ -8247,6 +10618,9 @@
 						},
 						"encounter_source": {
 							"before": {
+								"armour": 0.0,
+								"attack_speed": 1.1764705882352942,
+								"damage": 11.4,
 								"health": 50.160000000000004,
 								"max_health": 50.160000000000004,
 								"max_shield": 0.0,
@@ -8258,6 +10632,10 @@
 							"mechanism_revision": 1,
 							"mechanism_schema": 1,
 							"profile": {
+								"additions": {
+									"armour": 0.0,
+									"shield_from_base_health": 0.0
+								},
 								"definitions": [
 									{
 										"description": "怪物最大生命 ×1.20",
@@ -8265,30 +10643,41 @@
 										"id": "enemy_max_health_120",
 										"multiplier": 1.2,
 										"name": "强健",
+										"operation": "multiply",
 										"risk": {
-											"assessment": "parameter_only",
+											"assessment": "prototype_budget_not_balance_proof",
 											"field": "max_health",
+											"label": "怪物最大生命 ×1.20",
 											"multiplier": 1.2,
-											"relative_increase": 0.19999999999999996
+											"operation": "multiply",
+											"relative_increase": 0.19999999999999996,
+											"value": 1.2
 										},
-										"source_id": "encounter:enemy_max_health_120"
+										"source_id": "encounter:enemy_max_health_120",
+										"value": 1.2
 									}
 								],
 								"modifier_ids": [
 									"enemy_max_health_120"
 								],
 								"multipliers": {
+									"attack_speed": 1.0,
+									"damage": 1.0,
 									"max_health": 1.2,
 									"speed": 1.0
 								},
 								"resource_policy": {
+									"armour": "add_flat_then_existing_hit_size_formula",
+									"attack_speed": "multiply_contact_rate_and_recovery_only",
+									"damage": "multiply_canonical_once",
 									"health": "preserve_current_to_max_ratio",
 									"max_health": "multiply_canonical_once",
-									"max_shield": "unchanged",
+									"max_shield": "add_fraction_of_unmodified_canonical_max_health",
 									"rounding": "float_no_integer_rounding",
-									"shield": "unchanged",
+									"shield": "add_same_bonus_preserve_missing_amount",
 									"shield_regen": "unchanged",
-									"speed": "multiply_canonical_once"
+									"speed": "multiply_canonical_once",
+									"telegraph_windup": "unchanged"
 								},
 								"reward_budget": {
 									"creates_map_items": false,
@@ -8299,23 +10688,27 @@
 								},
 								"risk_parameters": [
 									{
-										"assessment": "parameter_only",
+										"assessment": "prototype_budget_not_balance_proof",
 										"field": "max_health",
+										"label": "怪物最大生命 ×1.20",
 										"multiplier": 1.2,
-										"relative_increase": 0.19999999999999996
+										"operation": "multiply",
+										"relative_increase": 0.19999999999999996,
+										"value": 1.2
 									}
 								],
 								"source": {
 									"balance_source": "original_game_balance",
 									"catalog": "res://scripts/encounters/encounter_catalog.gd",
-									"definition_revision": 1,
+									"definition_revision": 2,
 									"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
 									"monster_schema_version": 1,
-									"policy_version": 1,
+									"policy_version": 2,
 									"schema_version": 1
 								}
 							},
 							"rarity": "normal",
+							"shield_bonus": 0.0,
 							"template_id": "crawler",
 							"wave": 3
 						},
@@ -8359,7 +10752,11 @@
 						"wave": 3,
 						"xp_reward": 3
 					},
+					"after_telegraph": {
+
+					},
 					"before": {
+						"armour": 0.0,
 						"attack_speed": 1.1764705882352942,
 						"attack_timer": 0.5,
 						"contact_weights": {
@@ -8411,10 +10808,14 @@
 						"template_id": "crawler",
 						"wave": 3,
 						"xp_reward": 3
+					},
+					"before_telegraph": {
+
 					}
 				},
 				"ember_guard": {
 					"after": {
+						"armour": 0.0,
 						"attack_speed": 1.1764705882352942,
 						"attack_timer": 0.5,
 						"contact_weights": {
@@ -8430,6 +10831,9 @@
 						},
 						"encounter_source": {
 							"before": {
+								"armour": 0.0,
+								"attack_speed": 1.1764705882352942,
+								"damage": 23.279999999999998,
 								"health": 313.5,
 								"max_health": 313.5,
 								"max_shield": 0.0,
@@ -8441,6 +10845,10 @@
 							"mechanism_revision": 1,
 							"mechanism_schema": 1,
 							"profile": {
+								"additions": {
+									"armour": 0.0,
+									"shield_from_base_health": 0.0
+								},
 								"definitions": [
 									{
 										"description": "怪物最大生命 ×1.20",
@@ -8448,30 +10856,41 @@
 										"id": "enemy_max_health_120",
 										"multiplier": 1.2,
 										"name": "强健",
+										"operation": "multiply",
 										"risk": {
-											"assessment": "parameter_only",
+											"assessment": "prototype_budget_not_balance_proof",
 											"field": "max_health",
+											"label": "怪物最大生命 ×1.20",
 											"multiplier": 1.2,
-											"relative_increase": 0.19999999999999996
+											"operation": "multiply",
+											"relative_increase": 0.19999999999999996,
+											"value": 1.2
 										},
-										"source_id": "encounter:enemy_max_health_120"
+										"source_id": "encounter:enemy_max_health_120",
+										"value": 1.2
 									}
 								],
 								"modifier_ids": [
 									"enemy_max_health_120"
 								],
 								"multipliers": {
+									"attack_speed": 1.0,
+									"damage": 1.0,
 									"max_health": 1.2,
 									"speed": 1.0
 								},
 								"resource_policy": {
+									"armour": "add_flat_then_existing_hit_size_formula",
+									"attack_speed": "multiply_contact_rate_and_recovery_only",
+									"damage": "multiply_canonical_once",
 									"health": "preserve_current_to_max_ratio",
 									"max_health": "multiply_canonical_once",
-									"max_shield": "unchanged",
+									"max_shield": "add_fraction_of_unmodified_canonical_max_health",
 									"rounding": "float_no_integer_rounding",
-									"shield": "unchanged",
+									"shield": "add_same_bonus_preserve_missing_amount",
 									"shield_regen": "unchanged",
-									"speed": "multiply_canonical_once"
+									"speed": "multiply_canonical_once",
+									"telegraph_windup": "unchanged"
 								},
 								"reward_budget": {
 									"creates_map_items": false,
@@ -8482,23 +10901,27 @@
 								},
 								"risk_parameters": [
 									{
-										"assessment": "parameter_only",
+										"assessment": "prototype_budget_not_balance_proof",
 										"field": "max_health",
+										"label": "怪物最大生命 ×1.20",
 										"multiplier": 1.2,
-										"relative_increase": 0.19999999999999996
+										"operation": "multiply",
+										"relative_increase": 0.19999999999999996,
+										"value": 1.2
 									}
 								],
 								"source": {
 									"balance_source": "original_game_balance",
 									"catalog": "res://scripts/encounters/encounter_catalog.gd",
-									"definition_revision": 1,
+									"definition_revision": 2,
 									"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
 									"monster_schema_version": 1,
-									"policy_version": 1,
+									"policy_version": 2,
 									"schema_version": 1
 								}
 							},
 							"rarity": "rare",
+							"shield_bonus": 0.0,
 							"template_id": "ember_guard",
 							"wave": 3
 						},
@@ -8542,7 +10965,23 @@
 						"wave": 3,
 						"xp_reward": 24
 					},
+					"after_telegraph": {
+						"base_attack_speed": 1.1764705882352942,
+						"hold_pursuit_during_action": true,
+						"minimum_attack_speed": 0.2,
+						"profile": {
+							"damage_multiplier": 1.4,
+							"radius": 90.0,
+							"recovery_seconds": 1.2,
+							"windup_seconds": 0.7
+						},
+						"profile_id": "locked_circle",
+						"recovery_scaling": "base_attack_speed_divided_by_current_attack_speed",
+						"replaces_contact": true,
+						"trigger_distance": 150.0
+					},
 					"before": {
+						"armour": 0.0,
 						"attack_speed": 1.1764705882352942,
 						"attack_timer": 0.5,
 						"contact_weights": {
@@ -8595,6 +11034,21 @@
 						"template_id": "ember_guard",
 						"wave": 3,
 						"xp_reward": 24
+					},
+					"before_telegraph": {
+						"base_attack_speed": 1.1764705882352942,
+						"hold_pursuit_during_action": true,
+						"minimum_attack_speed": 0.2,
+						"profile": {
+							"damage_multiplier": 1.4,
+							"radius": 90.0,
+							"recovery_seconds": 1.2,
+							"windup_seconds": 0.7
+						},
+						"profile_id": "locked_circle",
+						"recovery_scaling": "base_attack_speed_divided_by_current_attack_speed",
+						"replaces_contact": true,
+						"trigger_distance": 150.0
 					}
 				}
 			},
@@ -8602,7 +11056,12 @@
 			"id": "enemy_max_health_120",
 			"multiplier": 1.2,
 			"name": "强健",
+			"operation": "multiply",
 			"profile": {
+				"additions": {
+					"armour": 0.0,
+					"shield_from_base_health": 0.0
+				},
 				"definitions": [
 					{
 						"description": "怪物最大生命 ×1.20",
@@ -8610,30 +11069,41 @@
 						"id": "enemy_max_health_120",
 						"multiplier": 1.2,
 						"name": "强健",
+						"operation": "multiply",
 						"risk": {
-							"assessment": "parameter_only",
+							"assessment": "prototype_budget_not_balance_proof",
 							"field": "max_health",
+							"label": "怪物最大生命 ×1.20",
 							"multiplier": 1.2,
-							"relative_increase": 0.19999999999999996
+							"operation": "multiply",
+							"relative_increase": 0.19999999999999996,
+							"value": 1.2
 						},
-						"source_id": "encounter:enemy_max_health_120"
+						"source_id": "encounter:enemy_max_health_120",
+						"value": 1.2
 					}
 				],
 				"modifier_ids": [
 					"enemy_max_health_120"
 				],
 				"multipliers": {
+					"attack_speed": 1.0,
+					"damage": 1.0,
 					"max_health": 1.2,
 					"speed": 1.0
 				},
 				"resource_policy": {
+					"armour": "add_flat_then_existing_hit_size_formula",
+					"attack_speed": "multiply_contact_rate_and_recovery_only",
+					"damage": "multiply_canonical_once",
 					"health": "preserve_current_to_max_ratio",
 					"max_health": "multiply_canonical_once",
-					"max_shield": "unchanged",
+					"max_shield": "add_fraction_of_unmodified_canonical_max_health",
 					"rounding": "float_no_integer_rounding",
-					"shield": "unchanged",
+					"shield": "add_same_bonus_preserve_missing_amount",
 					"shield_regen": "unchanged",
-					"speed": "multiply_canonical_once"
+					"speed": "multiply_canonical_once",
+					"telegraph_windup": "unchanged"
 				},
 				"reward_budget": {
 					"creates_map_items": false,
@@ -8644,36 +11114,44 @@
 				},
 				"risk_parameters": [
 					{
-						"assessment": "parameter_only",
+						"assessment": "prototype_budget_not_balance_proof",
 						"field": "max_health",
+						"label": "怪物最大生命 ×1.20",
 						"multiplier": 1.2,
-						"relative_increase": 0.19999999999999996
+						"operation": "multiply",
+						"relative_increase": 0.19999999999999996,
+						"value": 1.2
 					}
 				],
 				"source": {
 					"balance_source": "original_game_balance",
 					"catalog": "res://scripts/encounters/encounter_catalog.gd",
-					"definition_revision": 1,
+					"definition_revision": 2,
 					"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
 					"monster_schema_version": 1,
-					"policy_version": 1,
+					"policy_version": 2,
 					"schema_version": 1
 				}
 			},
 			"risk": {
-				"assessment": "parameter_only",
+				"assessment": "prototype_budget_not_balance_proof",
 				"field": "max_health",
+				"label": "怪物最大生命 ×1.20",
 				"multiplier": 1.2,
-				"relative_increase": 0.19999999999999996
+				"operation": "multiply",
+				"relative_increase": 0.19999999999999996,
+				"value": 1.2
 			},
 			"source_id": "encounter:enemy_max_health_120",
-			"status": "implemented"
+			"status": "implemented",
+			"value": 1.2
 		},
 		"enemy_move_speed_110": {
 			"description": "怪物移动速度 ×1.10",
 			"examples": {
 				"brood_host": {
 					"after": {
+						"armour": 0.0,
 						"attack_speed": 1.1764705882352942,
 						"attack_timer": 0.5,
 						"contact_weights": {
@@ -8693,6 +11171,9 @@
 						},
 						"encounter_source": {
 							"before": {
+								"armour": 0.0,
+								"attack_speed": 1.1764705882352942,
+								"damage": 23.279999999999998,
 								"health": 323.25,
 								"max_health": 323.25,
 								"max_shield": 4.68,
@@ -8704,6 +11185,10 @@
 							"mechanism_revision": 1,
 							"mechanism_schema": 1,
 							"profile": {
+								"additions": {
+									"armour": 0.0,
+									"shield_from_base_health": 0.0
+								},
 								"definitions": [
 									{
 										"description": "怪物移动速度 ×1.10",
@@ -8711,30 +11196,41 @@
 										"id": "enemy_move_speed_110",
 										"multiplier": 1.1,
 										"name": "迅行",
+										"operation": "multiply",
 										"risk": {
-											"assessment": "parameter_only",
+											"assessment": "prototype_budget_not_balance_proof",
 											"field": "speed",
+											"label": "怪物移动速度 ×1.10",
 											"multiplier": 1.1,
-											"relative_increase": 0.10000000000000009
+											"operation": "multiply",
+											"relative_increase": 0.10000000000000009,
+											"value": 1.1
 										},
-										"source_id": "encounter:enemy_move_speed_110"
+										"source_id": "encounter:enemy_move_speed_110",
+										"value": 1.1
 									}
 								],
 								"modifier_ids": [
 									"enemy_move_speed_110"
 								],
 								"multipliers": {
+									"attack_speed": 1.0,
+									"damage": 1.0,
 									"max_health": 1.0,
 									"speed": 1.1
 								},
 								"resource_policy": {
+									"armour": "add_flat_then_existing_hit_size_formula",
+									"attack_speed": "multiply_contact_rate_and_recovery_only",
+									"damage": "multiply_canonical_once",
 									"health": "preserve_current_to_max_ratio",
 									"max_health": "multiply_canonical_once",
-									"max_shield": "unchanged",
+									"max_shield": "add_fraction_of_unmodified_canonical_max_health",
 									"rounding": "float_no_integer_rounding",
-									"shield": "unchanged",
+									"shield": "add_same_bonus_preserve_missing_amount",
 									"shield_regen": "unchanged",
-									"speed": "multiply_canonical_once"
+									"speed": "multiply_canonical_once",
+									"telegraph_windup": "unchanged"
 								},
 								"reward_budget": {
 									"creates_map_items": false,
@@ -8745,23 +11241,27 @@
 								},
 								"risk_parameters": [
 									{
-										"assessment": "parameter_only",
+										"assessment": "prototype_budget_not_balance_proof",
 										"field": "speed",
+										"label": "怪物移动速度 ×1.10",
 										"multiplier": 1.1,
-										"relative_increase": 0.10000000000000009
+										"operation": "multiply",
+										"relative_increase": 0.10000000000000009,
+										"value": 1.1
 									}
 								],
 								"source": {
 									"balance_source": "original_game_balance",
 									"catalog": "res://scripts/encounters/encounter_catalog.gd",
-									"definition_revision": 1,
+									"definition_revision": 2,
 									"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
 									"monster_schema_version": 1,
-									"policy_version": 1,
+									"policy_version": 2,
 									"schema_version": 1
 								}
 							},
 							"rarity": "rare",
+							"shield_bonus": 0.0,
 							"template_id": "brood_host",
 							"wave": 3
 						},
@@ -8810,7 +11310,11 @@
 						"wave": 3,
 						"xp_reward": 24
 					},
+					"after_telegraph": {
+
+					},
 					"before": {
+						"armour": 0.0,
 						"attack_speed": 1.1764705882352942,
 						"attack_timer": 0.5,
 						"contact_weights": {
@@ -8872,10 +11376,14 @@
 						"template_id": "brood_host",
 						"wave": 3,
 						"xp_reward": 24
+					},
+					"before_telegraph": {
+
 					}
 				},
 				"crawler": {
 					"after": {
+						"armour": 0.0,
 						"attack_speed": 1.1764705882352942,
 						"attack_timer": 0.5,
 						"contact_weights": {
@@ -8890,6 +11398,9 @@
 						},
 						"encounter_source": {
 							"before": {
+								"armour": 0.0,
+								"attack_speed": 1.1764705882352942,
+								"damage": 11.4,
 								"health": 50.160000000000004,
 								"max_health": 50.160000000000004,
 								"max_shield": 0.0,
@@ -8901,6 +11412,10 @@
 							"mechanism_revision": 1,
 							"mechanism_schema": 1,
 							"profile": {
+								"additions": {
+									"armour": 0.0,
+									"shield_from_base_health": 0.0
+								},
 								"definitions": [
 									{
 										"description": "怪物移动速度 ×1.10",
@@ -8908,30 +11423,41 @@
 										"id": "enemy_move_speed_110",
 										"multiplier": 1.1,
 										"name": "迅行",
+										"operation": "multiply",
 										"risk": {
-											"assessment": "parameter_only",
+											"assessment": "prototype_budget_not_balance_proof",
 											"field": "speed",
+											"label": "怪物移动速度 ×1.10",
 											"multiplier": 1.1,
-											"relative_increase": 0.10000000000000009
+											"operation": "multiply",
+											"relative_increase": 0.10000000000000009,
+											"value": 1.1
 										},
-										"source_id": "encounter:enemy_move_speed_110"
+										"source_id": "encounter:enemy_move_speed_110",
+										"value": 1.1
 									}
 								],
 								"modifier_ids": [
 									"enemy_move_speed_110"
 								],
 								"multipliers": {
+									"attack_speed": 1.0,
+									"damage": 1.0,
 									"max_health": 1.0,
 									"speed": 1.1
 								},
 								"resource_policy": {
+									"armour": "add_flat_then_existing_hit_size_formula",
+									"attack_speed": "multiply_contact_rate_and_recovery_only",
+									"damage": "multiply_canonical_once",
 									"health": "preserve_current_to_max_ratio",
 									"max_health": "multiply_canonical_once",
-									"max_shield": "unchanged",
+									"max_shield": "add_fraction_of_unmodified_canonical_max_health",
 									"rounding": "float_no_integer_rounding",
-									"shield": "unchanged",
+									"shield": "add_same_bonus_preserve_missing_amount",
 									"shield_regen": "unchanged",
-									"speed": "multiply_canonical_once"
+									"speed": "multiply_canonical_once",
+									"telegraph_windup": "unchanged"
 								},
 								"reward_budget": {
 									"creates_map_items": false,
@@ -8942,23 +11468,27 @@
 								},
 								"risk_parameters": [
 									{
-										"assessment": "parameter_only",
+										"assessment": "prototype_budget_not_balance_proof",
 										"field": "speed",
+										"label": "怪物移动速度 ×1.10",
 										"multiplier": 1.1,
-										"relative_increase": 0.10000000000000009
+										"operation": "multiply",
+										"relative_increase": 0.10000000000000009,
+										"value": 1.1
 									}
 								],
 								"source": {
 									"balance_source": "original_game_balance",
 									"catalog": "res://scripts/encounters/encounter_catalog.gd",
-									"definition_revision": 1,
+									"definition_revision": 2,
 									"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
 									"monster_schema_version": 1,
-									"policy_version": 1,
+									"policy_version": 2,
 									"schema_version": 1
 								}
 							},
 							"rarity": "normal",
+							"shield_bonus": 0.0,
 							"template_id": "crawler",
 							"wave": 3
 						},
@@ -9002,7 +11532,11 @@
 						"wave": 3,
 						"xp_reward": 3
 					},
+					"after_telegraph": {
+
+					},
 					"before": {
+						"armour": 0.0,
 						"attack_speed": 1.1764705882352942,
 						"attack_timer": 0.5,
 						"contact_weights": {
@@ -9054,10 +11588,14 @@
 						"template_id": "crawler",
 						"wave": 3,
 						"xp_reward": 3
+					},
+					"before_telegraph": {
+
 					}
 				},
 				"ember_guard": {
 					"after": {
+						"armour": 0.0,
 						"attack_speed": 1.1764705882352942,
 						"attack_timer": 0.5,
 						"contact_weights": {
@@ -9073,6 +11611,9 @@
 						},
 						"encounter_source": {
 							"before": {
+								"armour": 0.0,
+								"attack_speed": 1.1764705882352942,
+								"damage": 23.279999999999998,
 								"health": 313.5,
 								"max_health": 313.5,
 								"max_shield": 0.0,
@@ -9084,6 +11625,10 @@
 							"mechanism_revision": 1,
 							"mechanism_schema": 1,
 							"profile": {
+								"additions": {
+									"armour": 0.0,
+									"shield_from_base_health": 0.0
+								},
 								"definitions": [
 									{
 										"description": "怪物移动速度 ×1.10",
@@ -9091,30 +11636,41 @@
 										"id": "enemy_move_speed_110",
 										"multiplier": 1.1,
 										"name": "迅行",
+										"operation": "multiply",
 										"risk": {
-											"assessment": "parameter_only",
+											"assessment": "prototype_budget_not_balance_proof",
 											"field": "speed",
+											"label": "怪物移动速度 ×1.10",
 											"multiplier": 1.1,
-											"relative_increase": 0.10000000000000009
+											"operation": "multiply",
+											"relative_increase": 0.10000000000000009,
+											"value": 1.1
 										},
-										"source_id": "encounter:enemy_move_speed_110"
+										"source_id": "encounter:enemy_move_speed_110",
+										"value": 1.1
 									}
 								],
 								"modifier_ids": [
 									"enemy_move_speed_110"
 								],
 								"multipliers": {
+									"attack_speed": 1.0,
+									"damage": 1.0,
 									"max_health": 1.0,
 									"speed": 1.1
 								},
 								"resource_policy": {
+									"armour": "add_flat_then_existing_hit_size_formula",
+									"attack_speed": "multiply_contact_rate_and_recovery_only",
+									"damage": "multiply_canonical_once",
 									"health": "preserve_current_to_max_ratio",
 									"max_health": "multiply_canonical_once",
-									"max_shield": "unchanged",
+									"max_shield": "add_fraction_of_unmodified_canonical_max_health",
 									"rounding": "float_no_integer_rounding",
-									"shield": "unchanged",
+									"shield": "add_same_bonus_preserve_missing_amount",
 									"shield_regen": "unchanged",
-									"speed": "multiply_canonical_once"
+									"speed": "multiply_canonical_once",
+									"telegraph_windup": "unchanged"
 								},
 								"reward_budget": {
 									"creates_map_items": false,
@@ -9125,23 +11681,27 @@
 								},
 								"risk_parameters": [
 									{
-										"assessment": "parameter_only",
+										"assessment": "prototype_budget_not_balance_proof",
 										"field": "speed",
+										"label": "怪物移动速度 ×1.10",
 										"multiplier": 1.1,
-										"relative_increase": 0.10000000000000009
+										"operation": "multiply",
+										"relative_increase": 0.10000000000000009,
+										"value": 1.1
 									}
 								],
 								"source": {
 									"balance_source": "original_game_balance",
 									"catalog": "res://scripts/encounters/encounter_catalog.gd",
-									"definition_revision": 1,
+									"definition_revision": 2,
 									"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
 									"monster_schema_version": 1,
-									"policy_version": 1,
+									"policy_version": 2,
 									"schema_version": 1
 								}
 							},
 							"rarity": "rare",
+							"shield_bonus": 0.0,
 							"template_id": "ember_guard",
 							"wave": 3
 						},
@@ -9185,7 +11745,23 @@
 						"wave": 3,
 						"xp_reward": 24
 					},
+					"after_telegraph": {
+						"base_attack_speed": 1.1764705882352942,
+						"hold_pursuit_during_action": true,
+						"minimum_attack_speed": 0.2,
+						"profile": {
+							"damage_multiplier": 1.4,
+							"radius": 90.0,
+							"recovery_seconds": 1.2,
+							"windup_seconds": 0.7
+						},
+						"profile_id": "locked_circle",
+						"recovery_scaling": "base_attack_speed_divided_by_current_attack_speed",
+						"replaces_contact": true,
+						"trigger_distance": 150.0
+					},
 					"before": {
+						"armour": 0.0,
 						"attack_speed": 1.1764705882352942,
 						"attack_timer": 0.5,
 						"contact_weights": {
@@ -9238,6 +11814,21 @@
 						"template_id": "ember_guard",
 						"wave": 3,
 						"xp_reward": 24
+					},
+					"before_telegraph": {
+						"base_attack_speed": 1.1764705882352942,
+						"hold_pursuit_during_action": true,
+						"minimum_attack_speed": 0.2,
+						"profile": {
+							"damage_multiplier": 1.4,
+							"radius": 90.0,
+							"recovery_seconds": 1.2,
+							"windup_seconds": 0.7
+						},
+						"profile_id": "locked_circle",
+						"recovery_scaling": "base_attack_speed_divided_by_current_attack_speed",
+						"replaces_contact": true,
+						"trigger_distance": 150.0
 					}
 				}
 			},
@@ -9245,7 +11836,12 @@
 			"id": "enemy_move_speed_110",
 			"multiplier": 1.1,
 			"name": "迅行",
+			"operation": "multiply",
 			"profile": {
+				"additions": {
+					"armour": 0.0,
+					"shield_from_base_health": 0.0
+				},
 				"definitions": [
 					{
 						"description": "怪物移动速度 ×1.10",
@@ -9253,30 +11849,41 @@
 						"id": "enemy_move_speed_110",
 						"multiplier": 1.1,
 						"name": "迅行",
+						"operation": "multiply",
 						"risk": {
-							"assessment": "parameter_only",
+							"assessment": "prototype_budget_not_balance_proof",
 							"field": "speed",
+							"label": "怪物移动速度 ×1.10",
 							"multiplier": 1.1,
-							"relative_increase": 0.10000000000000009
+							"operation": "multiply",
+							"relative_increase": 0.10000000000000009,
+							"value": 1.1
 						},
-						"source_id": "encounter:enemy_move_speed_110"
+						"source_id": "encounter:enemy_move_speed_110",
+						"value": 1.1
 					}
 				],
 				"modifier_ids": [
 					"enemy_move_speed_110"
 				],
 				"multipliers": {
+					"attack_speed": 1.0,
+					"damage": 1.0,
 					"max_health": 1.0,
 					"speed": 1.1
 				},
 				"resource_policy": {
+					"armour": "add_flat_then_existing_hit_size_formula",
+					"attack_speed": "multiply_contact_rate_and_recovery_only",
+					"damage": "multiply_canonical_once",
 					"health": "preserve_current_to_max_ratio",
 					"max_health": "multiply_canonical_once",
-					"max_shield": "unchanged",
+					"max_shield": "add_fraction_of_unmodified_canonical_max_health",
 					"rounding": "float_no_integer_rounding",
-					"shield": "unchanged",
+					"shield": "add_same_bonus_preserve_missing_amount",
 					"shield_regen": "unchanged",
-					"speed": "multiply_canonical_once"
+					"speed": "multiply_canonical_once",
+					"telegraph_windup": "unchanged"
 				},
 				"reward_budget": {
 					"creates_map_items": false,
@@ -9287,30 +11894,817 @@
 				},
 				"risk_parameters": [
 					{
-						"assessment": "parameter_only",
+						"assessment": "prototype_budget_not_balance_proof",
 						"field": "speed",
+						"label": "怪物移动速度 ×1.10",
 						"multiplier": 1.1,
-						"relative_increase": 0.10000000000000009
+						"operation": "multiply",
+						"relative_increase": 0.10000000000000009,
+						"value": 1.1
 					}
 				],
 				"source": {
 					"balance_source": "original_game_balance",
 					"catalog": "res://scripts/encounters/encounter_catalog.gd",
-					"definition_revision": 1,
+					"definition_revision": 2,
 					"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
 					"monster_schema_version": 1,
-					"policy_version": 1,
+					"policy_version": 2,
 					"schema_version": 1
 				}
 			},
 			"risk": {
-				"assessment": "parameter_only",
+				"assessment": "prototype_budget_not_balance_proof",
 				"field": "speed",
+				"label": "怪物移动速度 ×1.10",
 				"multiplier": 1.1,
-				"relative_increase": 0.10000000000000009
+				"operation": "multiply",
+				"relative_increase": 0.10000000000000009,
+				"value": 1.1
 			},
 			"source_id": "encounter:enemy_move_speed_110",
-			"status": "implemented"
+			"status": "implemented",
+			"value": 1.1
+		},
+		"enemy_shield_from_health_20": {
+			"description": "额外出生护盾 = 未附本轮普通词缀前最大生命的20%；与强健顺序无关",
+			"examples": {
+				"brood_host": {
+					"after": {
+						"armour": 0.0,
+						"attack_speed": 1.1764705882352942,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"physical": 1.0
+						},
+						"damage": 23.279999999999998,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [
+							{
+								"count": 2,
+								"template": "splitter"
+							}
+						],
+						"defense_stats": {
+
+						},
+						"encounter_source": {
+							"before": {
+								"armour": 0.0,
+								"attack_speed": 1.1764705882352942,
+								"damage": 23.279999999999998,
+								"health": 323.25,
+								"max_health": 323.25,
+								"max_shield": 4.68,
+								"shield": 4.68,
+								"speed": 47.2
+							},
+							"enemy_id": 1,
+							"mechanism_policy": "poe-passive-v1",
+							"mechanism_revision": 1,
+							"mechanism_schema": 1,
+							"profile": {
+								"additions": {
+									"armour": 0.0,
+									"shield_from_base_health": 0.2
+								},
+								"definitions": [
+									{
+										"description": "额外出生护盾 = 未附本轮普通词缀前最大生命的20%；与强健顺序无关",
+										"field": "max_shield",
+										"id": "enemy_shield_from_health_20",
+										"multiplier": 1.0,
+										"name": "护幕",
+										"operation": "add_base_health_fraction",
+										"risk": {
+											"assessment": "prototype_budget_not_balance_proof",
+											"field": "max_shield",
+											"label": "额外出生护盾 = 未附本轮普通词缀前最大生命的20%；与强健顺序无关",
+											"multiplier": 1.0,
+											"operation": "add_base_health_fraction",
+											"relative_increase": 0.0,
+											"value": 0.2
+										},
+										"source_id": "encounter:enemy_shield_from_health_20",
+										"value": 0.2
+									}
+								],
+								"modifier_ids": [
+									"enemy_shield_from_health_20"
+								],
+								"multipliers": {
+									"attack_speed": 1.0,
+									"damage": 1.0,
+									"max_health": 1.0,
+									"speed": 1.0
+								},
+								"resource_policy": {
+									"armour": "add_flat_then_existing_hit_size_formula",
+									"attack_speed": "multiply_contact_rate_and_recovery_only",
+									"damage": "multiply_canonical_once",
+									"health": "preserve_current_to_max_ratio",
+									"max_health": "multiply_canonical_once",
+									"max_shield": "add_fraction_of_unmodified_canonical_max_health",
+									"rounding": "float_no_integer_rounding",
+									"shield": "add_same_bonus_preserve_missing_amount",
+									"shield_regen": "unchanged",
+									"speed": "multiply_canonical_once",
+									"telegraph_windup": "unchanged"
+								},
+								"reward_budget": {
+									"creates_map_items": false,
+									"enabled": false,
+									"grants_rewards": false,
+									"proposed_bonus_fraction": null,
+									"status": "metadata_only"
+								},
+								"risk_parameters": [
+									{
+										"assessment": "prototype_budget_not_balance_proof",
+										"field": "max_shield",
+										"label": "额外出生护盾 = 未附本轮普通词缀前最大生命的20%；与强健顺序无关",
+										"multiplier": 1.0,
+										"operation": "add_base_health_fraction",
+										"relative_increase": 0.0,
+										"value": 0.2
+									}
+								],
+								"source": {
+									"balance_source": "original_game_balance",
+									"catalog": "res://scripts/encounters/encounter_catalog.gd",
+									"definition_revision": 2,
+									"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+									"monster_schema_version": 1,
+									"policy_version": 2,
+									"schema_version": 1
+								}
+							},
+							"rarity": "rare",
+							"shield_bonus": 64.65,
+							"template_id": "brood_host",
+							"wave": 3
+						},
+						"equipment_pool": "",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 323.25,
+						"id": 1,
+						"kind": 2,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 323.25,
+						"max_shield": 69.33000000000001,
+						"mechanism_ids": [
+							"grove_mastery",
+							"aegis_recovery"
+						],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+							"max_health": 9.75,
+							"max_shield": 4.68,
+							"shield_regen": 0.4225
+						},
+						"name": "孵化重壳体",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"resistances": {
+							"fire": 0.0
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 69.33000000000001,
+						"shield_regen": 0.4225,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 47.2,
+						"template_id": "brood_host",
+						"wave": 3,
+						"xp_reward": 24
+					},
+					"after_telegraph": {
+
+					},
+					"before": {
+						"armour": 0.0,
+						"attack_speed": 1.1764705882352942,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"physical": 1.0
+						},
+						"damage": 23.279999999999998,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [
+							{
+								"count": 2,
+								"template": "splitter"
+							}
+						],
+						"defense_stats": {
+
+						},
+						"equipment_pool": "",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 323.25,
+						"id": 1,
+						"kind": 2,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 323.25,
+						"max_shield": 4.68,
+						"mechanism_ids": [
+							"grove_mastery",
+							"aegis_recovery"
+						],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+							"max_health": 9.75,
+							"max_shield": 4.68,
+							"shield_regen": 0.4225
+						},
+						"name": "孵化重壳体",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"resistances": {
+							"fire": 0.0
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 4.68,
+						"shield_regen": 0.4225,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 47.2,
+						"template_id": "brood_host",
+						"wave": 3,
+						"xp_reward": 24
+					},
+					"before_telegraph": {
+
+					}
+				},
+				"crawler": {
+					"after": {
+						"armour": 0.0,
+						"attack_speed": 1.1764705882352942,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"physical": 1.0
+						},
+						"damage": 11.4,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [],
+						"defense_stats": {
+
+						},
+						"encounter_source": {
+							"before": {
+								"armour": 0.0,
+								"attack_speed": 1.1764705882352942,
+								"damage": 11.4,
+								"health": 50.160000000000004,
+								"max_health": 50.160000000000004,
+								"max_shield": 0.0,
+								"shield": 0.0,
+								"speed": 68.2
+							},
+							"enemy_id": 1,
+							"mechanism_policy": "poe-passive-v1",
+							"mechanism_revision": 1,
+							"mechanism_schema": 1,
+							"profile": {
+								"additions": {
+									"armour": 0.0,
+									"shield_from_base_health": 0.2
+								},
+								"definitions": [
+									{
+										"description": "额外出生护盾 = 未附本轮普通词缀前最大生命的20%；与强健顺序无关",
+										"field": "max_shield",
+										"id": "enemy_shield_from_health_20",
+										"multiplier": 1.0,
+										"name": "护幕",
+										"operation": "add_base_health_fraction",
+										"risk": {
+											"assessment": "prototype_budget_not_balance_proof",
+											"field": "max_shield",
+											"label": "额外出生护盾 = 未附本轮普通词缀前最大生命的20%；与强健顺序无关",
+											"multiplier": 1.0,
+											"operation": "add_base_health_fraction",
+											"relative_increase": 0.0,
+											"value": 0.2
+										},
+										"source_id": "encounter:enemy_shield_from_health_20",
+										"value": 0.2
+									}
+								],
+								"modifier_ids": [
+									"enemy_shield_from_health_20"
+								],
+								"multipliers": {
+									"attack_speed": 1.0,
+									"damage": 1.0,
+									"max_health": 1.0,
+									"speed": 1.0
+								},
+								"resource_policy": {
+									"armour": "add_flat_then_existing_hit_size_formula",
+									"attack_speed": "multiply_contact_rate_and_recovery_only",
+									"damage": "multiply_canonical_once",
+									"health": "preserve_current_to_max_ratio",
+									"max_health": "multiply_canonical_once",
+									"max_shield": "add_fraction_of_unmodified_canonical_max_health",
+									"rounding": "float_no_integer_rounding",
+									"shield": "add_same_bonus_preserve_missing_amount",
+									"shield_regen": "unchanged",
+									"speed": "multiply_canonical_once",
+									"telegraph_windup": "unchanged"
+								},
+								"reward_budget": {
+									"creates_map_items": false,
+									"enabled": false,
+									"grants_rewards": false,
+									"proposed_bonus_fraction": null,
+									"status": "metadata_only"
+								},
+								"risk_parameters": [
+									{
+										"assessment": "prototype_budget_not_balance_proof",
+										"field": "max_shield",
+										"label": "额外出生护盾 = 未附本轮普通词缀前最大生命的20%；与强健顺序无关",
+										"multiplier": 1.0,
+										"operation": "add_base_health_fraction",
+										"relative_increase": 0.0,
+										"value": 0.2
+									}
+								],
+								"source": {
+									"balance_source": "original_game_balance",
+									"catalog": "res://scripts/encounters/encounter_catalog.gd",
+									"definition_revision": 2,
+									"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+									"monster_schema_version": 1,
+									"policy_version": 2,
+									"schema_version": 1
+								}
+							},
+							"rarity": "normal",
+							"shield_bonus": 10.032000000000002,
+							"template_id": "crawler",
+							"wave": 3
+						},
+						"equipment_pool": "",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 50.160000000000004,
+						"id": 1,
+						"kind": 0,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 50.160000000000004,
+						"max_shield": 10.032000000000002,
+						"mechanism_ids": [],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+
+						},
+						"name": "巡游体",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"resistances": {
+							"fire": 0.0
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 10.032000000000002,
+						"shield_regen": 0.0,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 68.2,
+						"template_id": "crawler",
+						"wave": 3,
+						"xp_reward": 3
+					},
+					"after_telegraph": {
+
+					},
+					"before": {
+						"armour": 0.0,
+						"attack_speed": 1.1764705882352942,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"physical": 1.0
+						},
+						"damage": 11.4,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [],
+						"defense_stats": {
+
+						},
+						"equipment_pool": "",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 50.160000000000004,
+						"id": 1,
+						"kind": 0,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 50.160000000000004,
+						"max_shield": 0.0,
+						"mechanism_ids": [],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+
+						},
+						"name": "巡游体",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"resistances": {
+							"fire": 0.0
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 0.0,
+						"shield_regen": 0.0,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 68.2,
+						"template_id": "crawler",
+						"wave": 3,
+						"xp_reward": 3
+					},
+					"before_telegraph": {
+
+					}
+				},
+				"ember_guard": {
+					"after": {
+						"armour": 0.0,
+						"attack_speed": 1.1764705882352942,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"fire": 0.5,
+							"physical": 0.5
+						},
+						"damage": 23.279999999999998,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [],
+						"defense_stats": {
+							"fire_resistance": 0.25
+						},
+						"encounter_source": {
+							"before": {
+								"armour": 0.0,
+								"attack_speed": 1.1764705882352942,
+								"damage": 23.279999999999998,
+								"health": 313.5,
+								"max_health": 313.5,
+								"max_shield": 0.0,
+								"shield": 0.0,
+								"speed": 47.2
+							},
+							"enemy_id": 1,
+							"mechanism_policy": "poe-passive-v1",
+							"mechanism_revision": 1,
+							"mechanism_schema": 1,
+							"profile": {
+								"additions": {
+									"armour": 0.0,
+									"shield_from_base_health": 0.2
+								},
+								"definitions": [
+									{
+										"description": "额外出生护盾 = 未附本轮普通词缀前最大生命的20%；与强健顺序无关",
+										"field": "max_shield",
+										"id": "enemy_shield_from_health_20",
+										"multiplier": 1.0,
+										"name": "护幕",
+										"operation": "add_base_health_fraction",
+										"risk": {
+											"assessment": "prototype_budget_not_balance_proof",
+											"field": "max_shield",
+											"label": "额外出生护盾 = 未附本轮普通词缀前最大生命的20%；与强健顺序无关",
+											"multiplier": 1.0,
+											"operation": "add_base_health_fraction",
+											"relative_increase": 0.0,
+											"value": 0.2
+										},
+										"source_id": "encounter:enemy_shield_from_health_20",
+										"value": 0.2
+									}
+								],
+								"modifier_ids": [
+									"enemy_shield_from_health_20"
+								],
+								"multipliers": {
+									"attack_speed": 1.0,
+									"damage": 1.0,
+									"max_health": 1.0,
+									"speed": 1.0
+								},
+								"resource_policy": {
+									"armour": "add_flat_then_existing_hit_size_formula",
+									"attack_speed": "multiply_contact_rate_and_recovery_only",
+									"damage": "multiply_canonical_once",
+									"health": "preserve_current_to_max_ratio",
+									"max_health": "multiply_canonical_once",
+									"max_shield": "add_fraction_of_unmodified_canonical_max_health",
+									"rounding": "float_no_integer_rounding",
+									"shield": "add_same_bonus_preserve_missing_amount",
+									"shield_regen": "unchanged",
+									"speed": "multiply_canonical_once",
+									"telegraph_windup": "unchanged"
+								},
+								"reward_budget": {
+									"creates_map_items": false,
+									"enabled": false,
+									"grants_rewards": false,
+									"proposed_bonus_fraction": null,
+									"status": "metadata_only"
+								},
+								"risk_parameters": [
+									{
+										"assessment": "prototype_budget_not_balance_proof",
+										"field": "max_shield",
+										"label": "额外出生护盾 = 未附本轮普通词缀前最大生命的20%；与强健顺序无关",
+										"multiplier": 1.0,
+										"operation": "add_base_health_fraction",
+										"relative_increase": 0.0,
+										"value": 0.2
+									}
+								],
+								"source": {
+									"balance_source": "original_game_balance",
+									"catalog": "res://scripts/encounters/encounter_catalog.gd",
+									"definition_revision": 2,
+									"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+									"monster_schema_version": 1,
+									"policy_version": 2,
+									"schema_version": 1
+								}
+							},
+							"rarity": "rare",
+							"shield_bonus": 62.7,
+							"template_id": "ember_guard",
+							"wave": 3
+						},
+						"equipment_pool": "defense",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 313.5,
+						"id": 1,
+						"kind": 2,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 313.5,
+						"max_shield": 62.7,
+						"mechanism_ids": [],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+
+						},
+						"name": "灰烬守卫",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"resistances": {
+							"fire": 0.25
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 62.7,
+						"shield_regen": 0.0,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 47.2,
+						"template_id": "ember_guard",
+						"wave": 3,
+						"xp_reward": 24
+					},
+					"after_telegraph": {
+						"base_attack_speed": 1.1764705882352942,
+						"hold_pursuit_during_action": true,
+						"minimum_attack_speed": 0.2,
+						"profile": {
+							"damage_multiplier": 1.4,
+							"radius": 90.0,
+							"recovery_seconds": 1.2,
+							"windup_seconds": 0.7
+						},
+						"profile_id": "locked_circle",
+						"recovery_scaling": "base_attack_speed_divided_by_current_attack_speed",
+						"replaces_contact": true,
+						"trigger_distance": 150.0
+					},
+					"before": {
+						"armour": 0.0,
+						"attack_speed": 1.1764705882352942,
+						"attack_timer": 0.5,
+						"contact_weights": {
+							"fire": 0.5,
+							"physical": 0.5
+						},
+						"damage": 23.279999999999998,
+						"damage_delay": 0.0,
+						"death_processed": false,
+						"death_spawns": [],
+						"defense_stats": {
+							"fire_resistance": 0.25
+						},
+						"equipment_pool": "defense",
+						"flash": 0.0,
+						"generation": 0,
+						"health": 313.5,
+						"id": 1,
+						"kind": 2,
+						"knockback": [
+							0.0,
+							0.0
+						],
+						"max_health": 313.5,
+						"max_shield": 0.0,
+						"mechanism_ids": [],
+						"mechanism_policy": "poe-passive-v1",
+						"mechanism_revision": 1,
+						"mechanism_schema": 1,
+						"mechanism_stats": {
+
+						},
+						"name": "灰烬守卫",
+						"pos": [
+							0.0,
+							0.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"resistances": {
+							"fire": 0.25
+						},
+						"reward_eligible": true,
+						"root_id": 1,
+						"shield": 0.0,
+						"shield_regen": 0.0,
+						"slow": 0.0,
+						"spawn": 0.6,
+						"speed": 47.2,
+						"template_id": "ember_guard",
+						"wave": 3,
+						"xp_reward": 24
+					},
+					"before_telegraph": {
+						"base_attack_speed": 1.1764705882352942,
+						"hold_pursuit_during_action": true,
+						"minimum_attack_speed": 0.2,
+						"profile": {
+							"damage_multiplier": 1.4,
+							"radius": 90.0,
+							"recovery_seconds": 1.2,
+							"windup_seconds": 0.7
+						},
+						"profile_id": "locked_circle",
+						"recovery_scaling": "base_attack_speed_divided_by_current_attack_speed",
+						"replaces_contact": true,
+						"trigger_distance": 150.0
+					}
+				}
+			},
+			"field": "max_shield",
+			"id": "enemy_shield_from_health_20",
+			"multiplier": 1.0,
+			"name": "护幕",
+			"operation": "add_base_health_fraction",
+			"profile": {
+				"additions": {
+					"armour": 0.0,
+					"shield_from_base_health": 0.2
+				},
+				"definitions": [
+					{
+						"description": "额外出生护盾 = 未附本轮普通词缀前最大生命的20%；与强健顺序无关",
+						"field": "max_shield",
+						"id": "enemy_shield_from_health_20",
+						"multiplier": 1.0,
+						"name": "护幕",
+						"operation": "add_base_health_fraction",
+						"risk": {
+							"assessment": "prototype_budget_not_balance_proof",
+							"field": "max_shield",
+							"label": "额外出生护盾 = 未附本轮普通词缀前最大生命的20%；与强健顺序无关",
+							"multiplier": 1.0,
+							"operation": "add_base_health_fraction",
+							"relative_increase": 0.0,
+							"value": 0.2
+						},
+						"source_id": "encounter:enemy_shield_from_health_20",
+						"value": 0.2
+					}
+				],
+				"modifier_ids": [
+					"enemy_shield_from_health_20"
+				],
+				"multipliers": {
+					"attack_speed": 1.0,
+					"damage": 1.0,
+					"max_health": 1.0,
+					"speed": 1.0
+				},
+				"resource_policy": {
+					"armour": "add_flat_then_existing_hit_size_formula",
+					"attack_speed": "multiply_contact_rate_and_recovery_only",
+					"damage": "multiply_canonical_once",
+					"health": "preserve_current_to_max_ratio",
+					"max_health": "multiply_canonical_once",
+					"max_shield": "add_fraction_of_unmodified_canonical_max_health",
+					"rounding": "float_no_integer_rounding",
+					"shield": "add_same_bonus_preserve_missing_amount",
+					"shield_regen": "unchanged",
+					"speed": "multiply_canonical_once",
+					"telegraph_windup": "unchanged"
+				},
+				"reward_budget": {
+					"creates_map_items": false,
+					"enabled": false,
+					"grants_rewards": false,
+					"proposed_bonus_fraction": null,
+					"status": "metadata_only"
+				},
+				"risk_parameters": [
+					{
+						"assessment": "prototype_budget_not_balance_proof",
+						"field": "max_shield",
+						"label": "额外出生护盾 = 未附本轮普通词缀前最大生命的20%；与强健顺序无关",
+						"multiplier": 1.0,
+						"operation": "add_base_health_fraction",
+						"relative_increase": 0.0,
+						"value": 0.2
+					}
+				],
+				"source": {
+					"balance_source": "original_game_balance",
+					"catalog": "res://scripts/encounters/encounter_catalog.gd",
+					"definition_revision": 2,
+					"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+					"monster_schema_version": 1,
+					"policy_version": 2,
+					"schema_version": 1
+				}
+			},
+			"risk": {
+				"assessment": "prototype_budget_not_balance_proof",
+				"field": "max_shield",
+				"label": "额外出生护盾 = 未附本轮普通词缀前最大生命的20%；与强健顺序无关",
+				"multiplier": 1.0,
+				"operation": "add_base_health_fraction",
+				"relative_increase": 0.0,
+				"value": 0.2
+			},
+			"source_id": "encounter:enemy_shield_from_health_20",
+			"status": "implemented",
+			"value": 0.2
 		}
 	},
 	"equipment": {
@@ -10197,7 +13591,7 @@
 			"status": "implemented"
 		}
 	},
-	"game_version": "0.30.0",
+	"game_version": "0.31.0",
 	"jewel_affixes": {
 		"barrier": {
 			"kind": "prefix",
@@ -349581,6 +352975,10 @@
 					"boss_id": "rift_warden",
 					"description": "两道错位残墙需绕行，攻击受墙体遮挡；贯穿不穿墙，碰墙不触发到期效果。击败36个普通根怪，再击败裂隙守卫并清理其后代。",
 					"encounter_profile": {
+						"additions": {
+							"armour": 0.0,
+							"shield_from_base_health": 0.0
+						},
 						"definitions": [
 							{
 								"description": "怪物最大生命 ×1.20",
@@ -349588,13 +352986,18 @@
 								"id": "enemy_max_health_120",
 								"multiplier": 1.2,
 								"name": "强健",
+								"operation": "multiply",
 								"risk": {
-									"assessment": "parameter_only",
+									"assessment": "prototype_budget_not_balance_proof",
 									"field": "max_health",
+									"label": "怪物最大生命 ×1.20",
 									"multiplier": 1.2,
-									"relative_increase": 0.19999999999999996
+									"operation": "multiply",
+									"relative_increase": 0.19999999999999996,
+									"value": 1.2
 								},
-								"source_id": "encounter:enemy_max_health_120"
+								"source_id": "encounter:enemy_max_health_120",
+								"value": 1.2
 							},
 							{
 								"description": "怪物移动速度 ×1.10",
@@ -349602,13 +353005,18 @@
 								"id": "enemy_move_speed_110",
 								"multiplier": 1.1,
 								"name": "迅行",
+								"operation": "multiply",
 								"risk": {
-									"assessment": "parameter_only",
+									"assessment": "prototype_budget_not_balance_proof",
 									"field": "speed",
+									"label": "怪物移动速度 ×1.10",
 									"multiplier": 1.1,
-									"relative_increase": 0.10000000000000009
+									"operation": "multiply",
+									"relative_increase": 0.10000000000000009,
+									"value": 1.1
 								},
-								"source_id": "encounter:enemy_move_speed_110"
+								"source_id": "encounter:enemy_move_speed_110",
+								"value": 1.1
 							}
 						],
 						"modifier_ids": [
@@ -349616,17 +353024,23 @@
 							"enemy_move_speed_110"
 						],
 						"multipliers": {
+							"attack_speed": 1.0,
+							"damage": 1.0,
 							"max_health": 1.2,
 							"speed": 1.1
 						},
 						"resource_policy": {
+							"armour": "add_flat_then_existing_hit_size_formula",
+							"attack_speed": "multiply_contact_rate_and_recovery_only",
+							"damage": "multiply_canonical_once",
 							"health": "preserve_current_to_max_ratio",
 							"max_health": "multiply_canonical_once",
-							"max_shield": "unchanged",
+							"max_shield": "add_fraction_of_unmodified_canonical_max_health",
 							"rounding": "float_no_integer_rounding",
-							"shield": "unchanged",
+							"shield": "add_same_bonus_preserve_missing_amount",
 							"shield_regen": "unchanged",
-							"speed": "multiply_canonical_once"
+							"speed": "multiply_canonical_once",
+							"telegraph_windup": "unchanged"
 						},
 						"reward_budget": {
 							"creates_map_items": false,
@@ -349637,25 +353051,31 @@
 						},
 						"risk_parameters": [
 							{
-								"assessment": "parameter_only",
+								"assessment": "prototype_budget_not_balance_proof",
 								"field": "max_health",
+								"label": "怪物最大生命 ×1.20",
 								"multiplier": 1.2,
-								"relative_increase": 0.19999999999999996
+								"operation": "multiply",
+								"relative_increase": 0.19999999999999996,
+								"value": 1.2
 							},
 							{
-								"assessment": "parameter_only",
+								"assessment": "prototype_budget_not_balance_proof",
 								"field": "speed",
+								"label": "怪物移动速度 ×1.10",
 								"multiplier": 1.1,
-								"relative_increase": 0.10000000000000009
+								"operation": "multiply",
+								"relative_increase": 0.10000000000000009,
+								"value": 1.1
 							}
 						],
 						"source": {
 							"balance_source": "original_game_balance",
 							"catalog": "res://scripts/encounters/encounter_catalog.gd",
-							"definition_revision": 1,
+							"definition_revision": 2,
 							"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
 							"monster_schema_version": 1,
-							"policy_version": 1,
+							"policy_version": 2,
 							"schema_version": 1
 						}
 					},
@@ -349726,6 +353146,10 @@
 					"boss_id": "rift_warden",
 					"description": "开阔庭院，无实体残墙。击败24个普通根怪，再击败裂隙守卫并清理其后代。",
 					"encounter_profile": {
+						"additions": {
+							"armour": 0.0,
+							"shield_from_base_health": 0.0
+						},
 						"definitions": [
 							{
 								"description": "怪物最大生命 ×1.20",
@@ -349733,13 +353157,18 @@
 								"id": "enemy_max_health_120",
 								"multiplier": 1.2,
 								"name": "强健",
+								"operation": "multiply",
 								"risk": {
-									"assessment": "parameter_only",
+									"assessment": "prototype_budget_not_balance_proof",
 									"field": "max_health",
+									"label": "怪物最大生命 ×1.20",
 									"multiplier": 1.2,
-									"relative_increase": 0.19999999999999996
+									"operation": "multiply",
+									"relative_increase": 0.19999999999999996,
+									"value": 1.2
 								},
-								"source_id": "encounter:enemy_max_health_120"
+								"source_id": "encounter:enemy_max_health_120",
+								"value": 1.2
 							},
 							{
 								"description": "怪物移动速度 ×1.10",
@@ -349747,13 +353176,18 @@
 								"id": "enemy_move_speed_110",
 								"multiplier": 1.1,
 								"name": "迅行",
+								"operation": "multiply",
 								"risk": {
-									"assessment": "parameter_only",
+									"assessment": "prototype_budget_not_balance_proof",
 									"field": "speed",
+									"label": "怪物移动速度 ×1.10",
 									"multiplier": 1.1,
-									"relative_increase": 0.10000000000000009
+									"operation": "multiply",
+									"relative_increase": 0.10000000000000009,
+									"value": 1.1
 								},
-								"source_id": "encounter:enemy_move_speed_110"
+								"source_id": "encounter:enemy_move_speed_110",
+								"value": 1.1
 							}
 						],
 						"modifier_ids": [
@@ -349761,17 +353195,23 @@
 							"enemy_move_speed_110"
 						],
 						"multipliers": {
+							"attack_speed": 1.0,
+							"damage": 1.0,
 							"max_health": 1.2,
 							"speed": 1.1
 						},
 						"resource_policy": {
+							"armour": "add_flat_then_existing_hit_size_formula",
+							"attack_speed": "multiply_contact_rate_and_recovery_only",
+							"damage": "multiply_canonical_once",
 							"health": "preserve_current_to_max_ratio",
 							"max_health": "multiply_canonical_once",
-							"max_shield": "unchanged",
+							"max_shield": "add_fraction_of_unmodified_canonical_max_health",
 							"rounding": "float_no_integer_rounding",
-							"shield": "unchanged",
+							"shield": "add_same_bonus_preserve_missing_amount",
 							"shield_regen": "unchanged",
-							"speed": "multiply_canonical_once"
+							"speed": "multiply_canonical_once",
+							"telegraph_windup": "unchanged"
 						},
 						"reward_budget": {
 							"creates_map_items": false,
@@ -349782,25 +353222,31 @@
 						},
 						"risk_parameters": [
 							{
-								"assessment": "parameter_only",
+								"assessment": "prototype_budget_not_balance_proof",
 								"field": "max_health",
+								"label": "怪物最大生命 ×1.20",
 								"multiplier": 1.2,
-								"relative_increase": 0.19999999999999996
+								"operation": "multiply",
+								"relative_increase": 0.19999999999999996,
+								"value": 1.2
 							},
 							{
-								"assessment": "parameter_only",
+								"assessment": "prototype_budget_not_balance_proof",
 								"field": "speed",
+								"label": "怪物移动速度 ×1.10",
 								"multiplier": 1.1,
-								"relative_increase": 0.10000000000000009
+								"operation": "multiply",
+								"relative_increase": 0.10000000000000009,
+								"value": 1.1
 							}
 						],
 						"source": {
 							"balance_source": "original_game_balance",
 							"catalog": "res://scripts/encounters/encounter_catalog.gd",
-							"definition_revision": 1,
+							"definition_revision": 2,
 							"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
 							"monster_schema_version": 1,
-							"policy_version": 1,
+							"policy_version": 2,
 							"schema_version": 1
 						}
 					},
@@ -349883,18 +353329,80 @@
 			"max_special": 1,
 			"normal_modifiers": [
 				{
+					"description": "怪物护甲 +80；按单次物理命中大小减伤，元素与混沌不变",
+					"field": "armour",
+					"id": "enemy_armour_80",
+					"multiplier": 1.0,
+					"name": "铁肤",
+					"operation": "add_flat",
+					"risk": {
+						"assessment": "prototype_budget_not_balance_proof",
+						"field": "armour",
+						"label": "怪物护甲 +80；按单次物理命中大小减伤，元素与混沌不变",
+						"multiplier": 1.0,
+						"operation": "add_flat",
+						"relative_increase": 0.0,
+						"value": 80.0
+					},
+					"source_id": "encounter:enemy_armour_80",
+					"value": 80.0
+				},
+				{
+					"description": "怪物攻击速度 ×1.10；预警时长保持，仅加快接触与预警后恢复",
+					"field": "attack_speed",
+					"id": "enemy_attack_speed_110",
+					"multiplier": 1.1,
+					"name": "疾攻",
+					"operation": "multiply",
+					"risk": {
+						"assessment": "prototype_budget_not_balance_proof",
+						"field": "attack_speed",
+						"label": "怪物攻击速度 ×1.10；预警时长保持，仅加快接触与预警后恢复",
+						"multiplier": 1.1,
+						"operation": "multiply",
+						"relative_increase": 0.10000000000000009,
+						"value": 1.1
+					},
+					"source_id": "encounter:enemy_attack_speed_110",
+					"value": 1.1
+				},
+				{
+					"description": "接触与预警伤害基底 ×1.15",
+					"field": "damage",
+					"id": "enemy_damage_115",
+					"multiplier": 1.15,
+					"name": "凶猛",
+					"operation": "multiply",
+					"risk": {
+						"assessment": "prototype_budget_not_balance_proof",
+						"field": "damage",
+						"label": "接触与预警伤害基底 ×1.15",
+						"multiplier": 1.15,
+						"operation": "multiply",
+						"relative_increase": 0.1499999999999999,
+						"value": 1.15
+					},
+					"source_id": "encounter:enemy_damage_115",
+					"value": 1.15
+				},
+				{
 					"description": "怪物最大生命 ×1.20",
 					"field": "max_health",
 					"id": "enemy_max_health_120",
 					"multiplier": 1.2,
 					"name": "强健",
+					"operation": "multiply",
 					"risk": {
-						"assessment": "parameter_only",
+						"assessment": "prototype_budget_not_balance_proof",
 						"field": "max_health",
+						"label": "怪物最大生命 ×1.20",
 						"multiplier": 1.2,
-						"relative_increase": 0.19999999999999996
+						"operation": "multiply",
+						"relative_increase": 0.19999999999999996,
+						"value": 1.2
 					},
-					"source_id": "encounter:enemy_max_health_120"
+					"source_id": "encounter:enemy_max_health_120",
+					"value": 1.2
 				},
 				{
 					"description": "怪物移动速度 ×1.10",
@@ -349902,13 +353410,37 @@
 					"id": "enemy_move_speed_110",
 					"multiplier": 1.1,
 					"name": "迅行",
+					"operation": "multiply",
 					"risk": {
-						"assessment": "parameter_only",
+						"assessment": "prototype_budget_not_balance_proof",
 						"field": "speed",
+						"label": "怪物移动速度 ×1.10",
 						"multiplier": 1.1,
-						"relative_increase": 0.10000000000000009
+						"operation": "multiply",
+						"relative_increase": 0.10000000000000009,
+						"value": 1.1
 					},
-					"source_id": "encounter:enemy_move_speed_110"
+					"source_id": "encounter:enemy_move_speed_110",
+					"value": 1.1
+				},
+				{
+					"description": "额外出生护盾 = 未附本轮普通词缀前最大生命的20%；与强健顺序无关",
+					"field": "max_shield",
+					"id": "enemy_shield_from_health_20",
+					"multiplier": 1.0,
+					"name": "护幕",
+					"operation": "add_base_health_fraction",
+					"risk": {
+						"assessment": "prototype_budget_not_balance_proof",
+						"field": "max_shield",
+						"label": "额外出生护盾 = 未附本轮普通词缀前最大生命的20%；与强健顺序无关",
+						"multiplier": 1.0,
+						"operation": "add_base_health_fraction",
+						"relative_increase": 0.0,
+						"value": 0.2
+					},
+					"source_id": "encounter:enemy_shield_from_health_20",
+					"value": 0.2
 				}
 			],
 			"special_modifiers": [

@@ -37,7 +37,7 @@ func run() -> void:
 		expect(hint.text.contains(required),"Visible contract includes "+required)
 	var revision: int=arena.run_revision
 	var rng_before: int=arena.rng.state
-	for id: String in Catalog.get_ids():control._options[id].button_pressed=true
+	for id: String in ["enemy_max_health_120","enemy_move_speed_110"]:control._options[id].button_pressed=true
 	expect(arena.encounter_selection().is_empty() and arena.run_revision==revision and arena.rng.state==rng_before,"Checkboxes only change the local draft")
 	control._confirm.pressed.emit()
 	await settle()
@@ -52,14 +52,14 @@ func run() -> void:
 	expect(arena.state._snapshot()==build,"Cancelled selection leaves every build field untouched")
 	control._confirm.pressed.emit()
 	dialog.confirmed.emit()
-	expect(arena.run_revision==revision+1 and arena.encounter_selection()==Catalog.get_ids(),"Confirm starts exactly one selected run")
+	expect(arena.run_revision==revision+1 and arena.encounter_selection()==["enemy_max_health_120","enemy_move_speed_110"],"Confirm starts exactly one selected run")
 	var committed: int=arena.run_revision
 	dialog.confirmed.emit();hud._confirm_encounter()
 	expect(arena.run_revision==committed,"Duplicate confirmation cannot restart again")
 	expect(arena.state._snapshot()==build,"Confirmed restart preserves build and crafting state")
 	hud.open_panel("pause");await settle()
 	control=choices()
-	expect(control.get_selected_ids()==Catalog.get_ids(),"Reopened menu reflects active run IDs")
+	expect(control.get_selected_ids()==["enemy_max_health_120","enemy_move_speed_110"],"Reopened menu reflects active run IDs")
 	control._confirm.pressed.emit()
 	hud.open_panel("inventory")
 	expect(not dialog.visible and not hud._encounter_request_pending,"Navigating away cancels the pending request")
@@ -72,7 +72,7 @@ func run() -> void:
 	await settle()
 	control=choices();control._confirm.pressed.emit()
 	arena.restart_run()
-	expect(arena.encounter_selection()==Catalog.get_ids(),"Ordinary retry keeps active run selection")
+	expect(arena.encounter_selection()==["enemy_max_health_120","enemy_move_speed_110"],"Ordinary retry keeps active run selection")
 	committed=arena.run_revision
 	dialog.confirmed.emit()
 	expect(arena.run_revision==committed,"Confirmation from an earlier run cannot act after retry")
@@ -86,7 +86,7 @@ func run() -> void:
 			control=choices()
 			hud._panel_scroll.ensure_control_visible(control._confirm)
 			await settle()
-			for widget: Control in [control._confirm,control._options[Catalog.get_ids()[0]],control._options[Catalog.get_ids()[1]]]:
+			for widget: Control in [control._confirm,control._options[["enemy_max_health_120","enemy_move_speed_110"][0]],control._options[["enemy_max_health_120","enemy_move_speed_110"][1]]]:
 				expect(widget.get_theme_color("font_focus_color")==Design.TEXT,"Focus retains dark ink for every choice control")
 				expect(widget.get_global_rect().position.x>=control.get_global_rect().position.x-0.1 and widget.get_global_rect().end.x<=control.get_global_rect().end.x+0.1,"Choice controls stay within original scroll width")
 			var long_text: String="长原因需要完整换行并保持内容。".repeat(20)

@@ -82,7 +82,7 @@ func _preserved(before: Dictionary, after: Dictionary, label: String) -> void:
 
 
 func _test_metadata() -> void:
-	_expect(Catalog.get_ids() == BOTH and Catalog.MAX_MODIFIERS == 2, "Exactly two supported challenges")
+	_expect(Catalog.get_ids().size() == 6 and Catalog.MAX_MODIFIERS == 2, "Six catalog choices still have exactly two slots")
 	var metadata: Dictionary = Catalog.metadata()
 	var metadata_before: Dictionary = metadata.duplicate(true)
 	_expect(metadata.source.monster_schema_version == Monsters.SCHEMA_VERSION, "Monster schema uses the live catalog constant")
@@ -90,15 +90,15 @@ func _test_metadata() -> void:
 	_expect(Catalog.get_definition("unknown").is_empty(), "Unknown metadata lookup has no fallback")
 	var result: Dictionary = Compiler.compile(BOTH)
 	_expect(result.ok and _frozen(result.profile), "Entire compiled configuration is recursively read-only")
-	_expect(result.profile.source == metadata.source and result.profile.definitions == metadata.definitions, "Preview and execution consume the same definitions")
+	_expect(result.profile.source == metadata.source and result.profile.definitions == [Catalog.get_definition(BOTH[0]),Catalog.get_definition(BOTH[1])], "Preview and execution consume the same definitions")
 	_expect(result.profile.resource_policy == metadata.resource_policy and result.profile.reward_budget == metadata.reward_budget, "Policy and budget have one source")
 	_expect(not metadata.reward_budget.enabled and metadata.reward_budget.proposed_bonus_fraction == null
 		and not metadata.reward_budget.grants_rewards and not metadata.reward_budget.creates_map_items, "Optional reward budget is unproposed and has no execution")
 	for definition: Dictionary in metadata.definitions:
-		_expect(definition.description.ends_with("×%.2f" % float(definition.multiplier)), "Description derives from numeric multiplier")
+		_expect(definition.description == definition.risk.label, "Description derives from the same authored operation")
 		_expect(definition.source_id == "encounter:" + str(definition.id), "Definition has stable source identity")
 		_near(definition.risk.relative_increase, float(definition.multiplier) - 1.0, "Risk parameter derives from operation")
-		_expect(result.profile.multipliers[definition.field] == definition.multiplier, "Compiled operation agrees with metadata")
+		_expect(Compiler.compile([definition.id]).profile.definitions[0] == definition, "Each compiled operation agrees with metadata")
 	_near(result.profile.multipliers.max_health, 1.20, "Health challenge has the requested exact factor")
 	_near(result.profile.multipliers.speed, 1.10, "Movement challenge has the requested exact factor")
 	metadata.definitions[0].multiplier = 500.0
@@ -117,7 +117,7 @@ func _test_selection() -> void:
 		_expect(Compiler.profile_error(result.profile).is_empty(), "Compiler output validates")
 	_expect(Compiler.compile(BOTH).profile == Compiler.compile([BOTH[1], BOTH[0]]).profile, "Input order cannot alter canonical frozen profile")
 	var empty: Dictionary = Compiler.compile([]).profile
-	_expect(empty.multipliers == {"max_health": 1.0, "speed": 1.0} and empty.risk_parameters.is_empty(), "Empty selection is identity with no risk parameters")
+	_expect(empty.multipliers == {"max_health":1.0,"speed":1.0,"damage":1.0,"attack_speed":1.0} and empty.additions=={"shield_from_base_health":0.0,"armour":0.0} and empty.risk_parameters.is_empty(), "Empty selection is identity with no risk parameters")
 	for ids: Variant in [null, {}, "enemy_max_health_120", 2, PackedStringArray(BOTH),
 		[BOTH[0], BOTH[0]], [BOTH[1], BOTH[1]], [BOTH[0], BOTH[1], "other"],
 		["other"], [BOTH[0], "other"], [1], [true], [null], [[]], [""], ["enemy_damage_110"]]:
