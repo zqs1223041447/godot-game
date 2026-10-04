@@ -31,6 +31,8 @@ const EncounterCatalog = preload("res://scripts/encounters/encounter_catalog.gd"
 const EncounterAdmission = preload("res://scripts/encounters/encounter_admission.gd")
 const ARENA := View.WORLD_ARENA
 const PLAYER_RADIUS := 15.0
+const Geometry = preload("res://scripts/world/map_geometry.gd")
+var _geometry = Geometry.new()
 const MAX_ENEMIES := 100
 const MAX_PROJECTILES := 180
 const MAX_PARTICLES := 180
@@ -289,6 +291,7 @@ func restart_run() -> void:
 	elapsed = 0.0
 	wave = int(_map_run.profile.wave) if _world_mode=="map" else 1
 	alive = true
+	_refresh_world_geometry()
 	player_pos = ARENA.get_center()
 	player_facing = Vector2.RIGHT
 	enemies.clear()
@@ -470,6 +473,7 @@ func _tick(delta: float) -> void:
 
 
 func _move_player(delta: float) -> void:
+	var before := player_pos
 	var movement := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if movement.length_squared() > 0.01:
 		player_pos += movement * float(_stats.move_speed) * delta
@@ -477,6 +481,7 @@ func _move_player(delta: float) -> void:
 		if rng.randf() < 0.4:
 			_add_particle(player_pos + Vector2(0, 10), -movement * 20.0, Color("547a83"), 2.0, 0.25)
 	player_pos = _clamp_to_arena(player_pos, PLAYER_RADIUS)
+	if _geometry.has_walls(): player_pos = _geometry.move(before,player_pos,PLAYER_RADIUS)
 
 
 func _clamp_to_arena(pos: Vector2, margin: float) -> Vector2:
@@ -572,6 +577,7 @@ func _spawn_monster(template_id: String, forced_position: Vector2 = Vector2.ZERO
 		return {}
 	_apply_source_actor_profile(enemy)
 	enemy.pos = _clamp_to_arena(enemy.pos, float(enemy.radius))
+	if _geometry.has_walls(): enemy.pos = _geometry.legal_point(enemy.pos,float(enemy.radius))
 	enemies.append(enemy)
 	_add_ring(enemy.pos, 32.0, Monsters.RARITIES[enemy.rarity].color, 0.5)
 	return enemy
@@ -594,6 +600,7 @@ func _flush_monster_spawns() -> void:
 		children.assign(admitted.enemies)
 	for child: Dictionary in children:
 		_apply_source_actor_profile(child)
+		if _geometry.has_walls(): child.pos = _geometry.legal_point(child.pos,float(child.radius))
 		enemies.append(child)
 		_add_ring(child.pos, 26.0, Monsters.RARITIES[child.rarity].color, 0.45)
 	monster_runtime.collect_lineages(enemies)
@@ -780,8 +787,9 @@ func _update_enemies(delta: float) -> void:
 			continue
 		var uses_telegraph: bool = Monsters.TELEGRAPH_TEMPLATES.has(str(enemy.get("template_id", "")))
 		var performing: bool = not telegraphs.state_for(int(enemy.id)).is_empty()
-		var direction: Vector2 = Vector2.ZERO if performing else (player_pos - Vector2(enemy.pos)).normalized()
 		var speed: float = float(enemy.speed) * (0.36 if float(enemy.slow) > 0 else 1.0)
+		var direction: Vector2 = Vector2.ZERO if performing else (player_pos - Vector2(enemy.pos)).normalized()
+		if not performing and _geometry.has_walls(): direction = _geometry.direction(enemy.pos,player_pos,float(enemy.radius),speed*delta)
 		var separation := Vector2.ZERO
 		var candidates: Array = enemy_spatial.query_circle(enemy.pos, float(enemy.radius) + 3.0) if use_spatial_separation else range(enemies.size())
 		separation_candidate_visits += candidates.size()
@@ -795,12 +803,14 @@ func _update_enemies(delta: float) -> void:
 			var separation_distance: float = float(enemy.radius) + float(other.radius) + 3.0
 			if distance > 0.1 and distance < separation_distance:
 				separation += offset / distance * (separation_distance - distance) * 2.5
+		var previous: Vector2 = enemy.pos
 		enemy.pos = Vector2(enemy.pos) + (direction * speed + separation + Vector2(enemy.knockback)) * delta
 		enemy.pos = _clamp_to_arena(Vector2(enemy.pos), float(enemy.radius))
+		if _geometry.has_walls(): enemy.pos = _geometry.move(previous,enemy.pos,float(enemy.radius))
 		if use_spatial_separation:
 			enemy_spatial.update(enemy_index)
 		enemy.knockback = Vector2(enemy.knockback).move_toward(Vector2.ZERO, 520.0 * delta)
-		if not uses_telegraph and Vector2(enemy.pos).distance_to(player_pos) < PLAYER_RADIUS + float(enemy.radius) + 1.0:
+		if not uses_telegraph and Vector2(enemy.pos).distance_to(player_pos) < PLAYER_RADIUS + float(enemy.radius) + 1.0 and _terrain_visible(enemy.pos,player_pos):
 			if float(enemy.attack_timer) <= 0.0:
 				enemy.attack_timer = 1.0 / maxf(0.2, float(enemy.get("attack_speed", 1.0 / 0.85)))
 				hit_player_components(Monsters.contact_components(enemy), int(enemy.id), ["hit","attack","melee"])
@@ -819,6 +829,7 @@ func _start_enemy_telegraphs() -> void:
 		var policy: Dictionary = Monsters.telegraph_policy(enemy)
 		if policy.is_empty() or Vector2(enemy.pos).distance_squared_to(player_pos) > float(policy.trigger_distance) * float(policy.trigger_distance):
 			continue
+		if not _terrain_visible(enemy.pos,player_pos): continue
 		var result: Dictionary = telegraphs.start(enemy, player_pos, policy.profile)
 		if result.ok:
 			event_counts["enemy_telegraph_started"] = int(event_counts.get("enemy_telegraph_started", 0)) + 1
@@ -830,7 +841,7 @@ func _advance_enemy_telegraphs(delta: float) -> void:
 		if not alive:
 			telegraphs.reset()
 			break
-		var inside: bool = TelegraphRuntime.overlaps(event, player_pos, PLAYER_RADIUS)
+		var inside: bool = TelegraphRuntime.overlaps(event, player_pos, PLAYER_RADIUS) and _terrain_visible(event.center,player_pos)
 		var applied: bool = hit_player_components(event.packet.base, int(event.source_id),event.packet.tags) if inside else false
 		var record: Dictionary = event.duplicate(true)
 		record["player_position"] = player_pos
@@ -864,6 +875,7 @@ func _nearest_enemy(from: Vector2, max_distance: float = 800.0, excluded: Array[
 	for enemy: Dictionary in enemies:
 		if float(enemy.health) <= 0.0 or excluded.has(int(enemy.id)) or float(enemy.spawn) > 0.0:
 			continue
+		if not _terrain_visible(from,enemy.pos): continue
 		var candidate: float = from.distance_squared_to(Vector2(enemy.pos))
 		if candidate < distance_sq:
 			distance_sq = candidate
@@ -999,7 +1011,7 @@ func _execute_compiled(compiled: Dictionary, group_id: String = "", main_uid: St
 		"cleave":
 			# Damage admission, direction and geometry are frozen once for this cast.
 			for enemy: Dictionary in enemies:
-				if float(enemy.health)>0.0 and float(enemy.spawn)<=0.0 and AreaRules.contains_sector_target(player_pos,player_facing,Vector2(enemy.pos),float(compiled.recipe.radius),float(compiled.recipe.half_angle),float(enemy.radius)):
+				if float(enemy.health)>0.0 and float(enemy.spawn)<=0.0 and AreaRules.contains_sector_target(player_pos,player_facing,Vector2(enemy.pos),float(compiled.recipe.radius),float(compiled.recipe.half_angle),float(enemy.radius)) and _terrain_visible(player_pos,enemy.pos):
 					_apply_damage_packet(enemy,compiled.packets.direct,context.snapshot,color,0.0,{"cast_id":context.cast_id})
 			visual_cues.emit_cue("cleave",player_pos,{"radius":float(compiled.recipe.radius),"half_angle":float(compiled.recipe.half_angle),"direction":player_facing,"color":color})
 		"nova":
@@ -1011,6 +1023,7 @@ func _execute_compiled(compiled: Dictionary, group_id: String = "", main_uid: St
 				direction = player_facing
 			var start: Vector2 = player_pos
 			player_pos = _clamp_to_arena(player_pos + direction * 175.0, PLAYER_RADIUS)
+			if _geometry.has_walls(): player_pos = _geometry.move(start,player_pos,PLAYER_RADIUS)
 			visual_cues.emit_cue("dash", start, {"destination": player_pos, "color": color})
 			invulnerable = 0.6
 			for i: int in range(14):
@@ -1024,6 +1037,7 @@ func _execute_compiled(compiled: Dictionary, group_id: String = "", main_uid: St
 		"meteor":
 			var target: Dictionary = _nearest_enemy(player_pos, 700.0)
 			var target_pos: Vector2 = Vector2(target.pos) if not target.is_empty() else _clamp_to_arena(player_pos + player_facing * 220.0, 20.0)
+			if _geometry.has_walls() and target.is_empty(): target_pos = _geometry.move(player_pos,target_pos,0.0)
 			_area_damage(target_pos, float(compiled.recipe.radius), compiled.packets.direct, color, 0.0, context.snapshot)
 			visual_cues.emit_cue("meteor", target_pos, {"radius": float(compiled.recipe.radius), "color": color})
 			for i: int in range(32):
@@ -1057,7 +1071,7 @@ func _area_damage(origin: Vector2, radius: float, packet: Dictionary, color: Col
 		return
 	var cast_snapshot: Dictionary = state.get_combat_snapshot() if snapshot.is_empty() else snapshot
 	for enemy: Dictionary in enemies:
-		if float(enemy.health) > 0.0 and float(enemy.spawn) <= 0.0 and AreaRules.contains_target(origin, Vector2(enemy.pos), radius, float(enemy.radius)):
+		if float(enemy.health) > 0.0 and float(enemy.spawn) <= 0.0 and AreaRules.contains_target(origin, Vector2(enemy.pos), radius, float(enemy.radius)) and _terrain_visible(origin,enemy.pos):
 			_apply_damage_packet(enemy, packet, cast_snapshot, color, slow)
 			var direction: Vector2 = (Vector2(enemy.pos) - origin).normalized()
 			enemy.knockback = direction * 190.0
@@ -1066,7 +1080,8 @@ func _area_damage(origin: Vector2, radius: float, packet: Dictionary, color: Col
 func _update_projectiles(delta: float) -> void:
 	_projectile_targets.clear()
 	for enemy: Dictionary in enemies: _projectile_targets[int(enemy.id)] = enemy
-	var events: Array[Dictionary] = projectile_runtime.advance(projectiles, delta, enemies, player_pos, MAX_PROJECTILES, _projectile_contact_admitted)
+	var terrain_query: Callable = _geometry.sweep if _geometry.has_walls() else Callable()
+	var events: Array[Dictionary] = projectile_runtime.advance(projectiles, delta, enemies, player_pos, MAX_PROJECTILES, _projectile_contact_admitted, terrain_query)
 	for event: Dictionary in events:
 		event_counts[event.type] = int(event_counts.get(event.type, 0)) + 1
 		var brief: Dictionary = event.duplicate(true)
@@ -1084,7 +1099,7 @@ func _update_projectiles(delta: float) -> void:
 		elif event.type == "explosion":
 			var hit_targets: Dictionary = {}
 			for enemy: Dictionary in enemies:
-				if not hit_targets.has(enemy.id) and float(enemy.health) > 0.0 and Vector2(event.pos).distance_to(enemy.pos) <= float(event.radius) + float(enemy.radius):
+				if not hit_targets.has(enemy.id) and float(enemy.health) > 0.0 and Vector2(event.pos).distance_to(enemy.pos) <= float(event.radius) + float(enemy.radius) and _terrain_visible(event.pos,enemy.pos):
 					hit_targets[enemy.id] = true
 					_apply_damage_packet(enemy, event.payload, event.snapshot, event.color, 0.0, event)
 			visual_cues.emit_cue("explosion", event.pos, {"radius": float(event.radius), "color": event.color})
@@ -1412,6 +1427,18 @@ var _map_draft_profile:Dictionary=MapCompiler.compile("old_garden",[],[]).profil
 var _map_run=MapRun.new()
 var _normal_state:RefCounted
 var test_supply_enabled:=true
+
+func world_geometry() -> Dictionary: return _geometry.snapshot()
+func _refresh_world_geometry() -> void:
+	var id: String = str(_map_run.profile.get("id","old_garden")) if _world_mode in ["map","map_complete"] else _world_mode
+	var configured: bool = _geometry.configure(id,ARENA)
+	assert(configured,"Current map must have an authoritative geometry definition")
+	if not configured: return
+	if is_instance_valid(static_environment) and static_environment.has_method("set_geometry"):
+		static_environment.set_geometry(world_geometry())
+func _terrain_visible(from: Vector2, to: Vector2) -> bool:
+	return not _geometry.has_walls() or _geometry.visible(from,to)
+
 
 func world_context()->Dictionary:
 	var run:Dictionary=_map_run.snapshot()
