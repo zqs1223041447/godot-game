@@ -2,6 +2,7 @@ extends PanelContainer
 ## Town services use the same canonical inventory as the live build.
 const SkillArt = preload("res://scripts/visuals/skill_emblem.gd")
 const GearArt = preload("res://scripts/visuals/equipment_painterly_art.gd")
+const ThemeStyle = preload("res://scripts/visuals/visual_theme.gd")
 signal feedback(message: String)
 signal crafter_requested
 class ShardIcon extends TextureRect:
@@ -99,9 +100,20 @@ func setup(value: Node) -> void:
 	_gem_dialog.ok_button_text = "确认购买"
 	_gem_dialog.cancel_button_text = "取消"
 	_gem_dialog.dialog_autowrap = true
+	var confirmation_theme := Theme.new()
+	confirmation_theme.set_color("title_color", "Window", Color("f8ecd0"))
+	for style_name: String in ["embedded_border", "embedded_unfocused_border"]:
+		var frame := ThemeDB.get_default_theme().get_stylebox(style_name, "Window").duplicate() as StyleBoxFlat
+		if frame != null:
+			frame.bg_color = Color("60432f")
+			frame.border_color = ThemeStyle.BORDER
+			confirmation_theme.set_stylebox(style_name, "Window", frame)
+	_gem_dialog.theme = confirmation_theme
 	_gem_dialog.confirmed.connect(_confirm_gem_purchase)
 	_gem_dialog.canceled.connect(_cancel_gem_purchase)
 	add_child(_gem_dialog)
+	_gem_dialog.get_ok_button().add_theme_color_override("font_focus_color", ThemeStyle.TEXT)
+	_gem_dialog.get_cancel_button().add_theme_color_override("font_focus_color", ThemeStyle.TEXT)
 	visibility_changed.connect(func():
 		if not is_visible_in_tree(): _cancel_gem_purchase())
 	refresh_world()
