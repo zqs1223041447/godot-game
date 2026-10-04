@@ -36,7 +36,7 @@ static func definition(quantity: Variant) -> Dictionary:
 		"id": CALIBRATION_SHARD_ID,
 		"base_id": CALIBRATION_SHARD_ID,
 		"name": CALIBRATION_SHARD_NAME,
-		"description": "用于数值校准的结晶碎片。仅背包中的碎片可用于工艺。",
+		"description": "用于装备制作、正式地图和宝石交易的结晶碎片。仅消耗背包中的碎片。",
 		"quantity": quantity,
 		"stack_limit": STACK_LIMIT,
 		"color": Color("#8bd8df"),

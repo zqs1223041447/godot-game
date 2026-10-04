@@ -8,6 +8,7 @@ const Leech=preload("res://scripts/combat/leech_rules.gd")
 const Journey=preload("res://scripts/world/normal_journey_state.gd")
 const Flasks=preload("res://scripts/items/flask_catalog.gd")
 const Gems = preload("res://scripts/items/gem_catalog.gd")
+const GemTrade = preload("res://scripts/items/gem_trade_rules.gd")
 const Slots = preload("res://scripts/items/equipment_slots.gd")
 const Defense=preload("res://scripts/mechanics/defense_rules.gd")
 const Critical = preload("res://scripts/combat/critical_strike_rules.gd")
@@ -539,10 +540,13 @@ const Craft = preload("res://scripts/items/crafting_rules.gd")
 const CraftPlanner = preload("res://scripts/items/crafting_transaction_planner.gd")
 var _craft_quotes: Dictionary = {}
 var _craft_sequence := 0
+var _gem_trade_quotes: Dictionary = {}
+var _gem_trade_sequence := 0
 
 
 func load_build(path: String = "user://build_save.json") -> bool:
 	_craft_quotes.clear()
+	_gem_trade_quotes.clear()
 	migrated_from_legacy=false
 	migration_message=""
 	var old_version:int=0
@@ -591,6 +595,7 @@ func load_build(path: String = "user://build_save.json") -> bool:
 ## UI callbacks must not mutate the old file. Each return loads a fresh model.
 func retire_profile()->void:
 	_craft_quotes.clear()
+	_gem_trade_quotes.clear()
 	_busy=true
 
 
@@ -784,6 +789,149 @@ func _set_bag_currency_balance(candidate: Dictionary, target_balance: int,
 	if not total.ok or int(total.quantity) > ShardCatalog.INVENTORY_LIMIT:
 		return {"ok": false, "error_code": "currency_limit", "reason": "全库存校准碎片总量超出上限"}
 	return {"ok": true, "error_code": "", "reason": ""}
+
+
+## Paid gem trades have no persistent side ledger. Metadata does not allocate
+## handles, roll random results, copy the build or read the save file.
+func normal_gem_offers(path: String = "user://build_save.json") -> Array[Dictionary]:
+	var result: Array[Dictionary] = GemTrade.offers()
+	var guard: Dictionary = _gem_trade_guard(revision(),path)
+	var balance: int = crafting_balance()
+	var reasons: Dictionary = {}
+	for row: Dictionary in result:
+		var cost: int = row.cost
+		if not reasons.has(cost):
+			reasons[cost] = str(guard.reason) if not guard.ok else "背包内校准碎片不足" if balance < cost else _gem_buy_space_reason(cost)
+		row.reason = reasons[cost]
+		row.available = row.reason.is_empty()
+	return result
+
+
+func gem_recycle_info(uid: Variant, path: String = "user://build_save.json") -> Dictionary:
+	var result: Dictionary = {"available":false,"reason":"请选择背包中的主动或辅助宝石","credit":GemTrade.RECYCLE_CREDIT,"name":"","uid":uid if uid is String else ""}
+	var guard: Dictionary = _gem_trade_guard(revision(),path)
+	if not guard.ok: result.reason=guard.reason; return result
+	if not uid is String or not _current.items.has(uid): return result
+	var quote: Dictionary = GemTrade.quote("recycle",uid,_current.items[uid])
+	if not quote.ok: return result
+	result.name = quote.name
+	if _current.locations[uid].kind != "bag": result.reason="请先把宝石放入背包"; return result
+	var total: Dictionary = ShardCatalog.total_quantity(_current.items)
+	if not total.ok or total.quantity >= ShardCatalog.INVENTORY_LIMIT: result.reason="全库存校准碎片总量已达上限"; return result
+	if _gem_credit_requires_stack() and _current.next_item_serial >= Rules.MAX_SERIAL: result.reason="物品序号已达上限"; return result
+	result.available=true; result.reason=""
+	return result
+
+
+func _gem_trade_guard(expected_revision: Variant,path: String) -> Dictionary:
+	if path != "user://build_save.json" or _path != "user://build_save.json": return _craft_failure("normal_profile_required","宝石交易只能使用已打开的正式存档")
+	var guard: Dictionary = _normal_journey_guard(expected_revision,path)
+	if not guard.ok:
+		return _craft_failure(str(guard.error_code),"宝石交易只能使用已打开的正式存档" if guard.error_code=="normal_profile_required" else str(guard.reason))
+	if not save_block_reason(path).is_empty(): return _craft_failure("save_blocked","当前存档受写保护")
+	return {"ok":true,"code":"","reason":""}
+
+
+func _gem_buy_space_reason(cost: int) -> String:
+	if _current.next_item_serial >= Rules.MAX_SERIAL: return "物品序号已达上限"
+	var used_cells: int = 0
+	var stacks: Array[String] = []
+	for uid: String in _current.items:
+		if _current.locations[uid].kind != "bag": continue
+		var metadata: Dictionary = Items.metadata_for_instance(_current.items[uid])
+		if metadata.is_empty(): return "物品数据无效"
+		var raw_size: Variant = metadata.size
+		var size: Vector2i = Vector2i(int(raw_size[0]),int(raw_size[1])) if raw_size is Array else raw_size
+		used_cells += size.x*size.y
+		if _current.items[uid].kind == "currency": stacks.append(uid)
+	stacks.sort()
+	var freed: int = 0
+	var remaining: int = cost
+	for uid: String in stacks:
+		if remaining <= 0: break
+		var quantity: int = _current.items[uid].payload.quantity
+		if quantity <= remaining: freed+=1
+		remaining -= mini(remaining,quantity)
+	if remaining > 0: return "背包内校准碎片不足"
+	if _current.items.size()-freed >= Rules.V17_MAX_ITEMS: return "物品注册表已达上限"
+	if used_cells-freed >= ItemLocationRules.CURRENT_BAG_PAGES*ItemLocationRules.CURRENT_BAG_COLUMNS*ItemLocationRules.CURRENT_BAG_ROWS: return "背包没有宝石的可用格子"
+	return ""
+
+
+func _gem_credit_requires_stack() -> bool:
+	for uid: String in _current.items:
+		if _current.items[uid].kind=="currency" and _current.locations[uid].kind=="bag" and _current.items[uid].payload.quantity < ShardCatalog.STACK_LIMIT: return false
+	return true
+
+
+func gem_trade_quote(operation: Variant,target: Variant,expected_revision: Variant,path: String = "user://build_save.json") -> Dictionary:
+	var guard: Dictionary = _gem_trade_guard(expected_revision,path)
+	if not guard.ok: return guard
+	if not Rules.reason(_current,_talent_validator,_socket_ids).is_empty(): return _craft_failure("invalid_build","构筑数据无效")
+	var owned: Dictionary = _current.items.get(target,{}) if typeof(operation)==TYPE_STRING and operation=="recycle" and target is String else {}
+	var quote: Dictionary = GemTrade.quote(operation,target,owned)
+	if not quote.ok: return quote
+	if operation=="recycle" and _current.locations[target].kind!="bag": return _craft_failure("item_equipped","请先把宝石放入背包")
+	var debit: int = int(quote.cost.get(GemTrade.MATERIAL_ID,0))
+	var credit: int = int(quote.materials.get(GemTrade.MATERIAL_ID,0))
+	var balance: int = crafting_balance()
+	if balance < debit: return _craft_failure("insufficient_shards","背包内校准碎片不足")
+	var candidate: Dictionary = snapshot()
+	var created_uid: String = ""
+	var released: Dictionary = {}
+	if operation=="recycle":
+		released=candidate.locations[target].duplicate(true)
+		candidate.items.erase(target); candidate.locations.erase(target)
+	var currency: Dictionary = _set_bag_currency_balance(candidate,balance-debit+credit,released)
+	if not currency.ok: return _craft_failure(currency.error_code,currency.reason)
+	if operation=="buy":
+		if candidate.items.size()>=Rules.V17_MAX_ITEMS or candidate.next_item_serial>=Rules.MAX_SERIAL: return _craft_failure("item_limit","物品注册表或序号已达上限")
+		created_uid="item_%06d"%int(candidate.next_item_serial)
+		if not _place_journey_reward(candidate,Gems.create_instance(created_uid,quote.definition_id)): return _craft_failure("bag_full","背包没有宝石的可用格子")
+	candidate.revision+=1
+	var reason: String = Rules.reason(candidate,_talent_validator,_socket_ids)
+	if not reason.is_empty(): return _craft_failure("invalid_candidate",reason)
+	var disk: Dictionary = _gem_trade_disk_receipt(path)
+	if not disk.ok: return _craft_failure("save_changed","存档已变化或无法读取，请重新读取后操作")
+	_gem_trade_sequence+=1
+	var handle: String = "gem:%d:%d"%[get_instance_id(),_gem_trade_sequence]
+	while _gem_trade_quotes.size()>=8: _gem_trade_quotes.erase(_gem_trade_quotes.keys()[0])
+	_gem_trade_quotes[handle]={"quote":quote.duplicate(true),"snapshot":snapshot(),"candidate":candidate,"path":path,"disk":disk,"uid":created_uid}
+	var visible: Dictionary = quote.duplicate(true)
+	visible.handle=handle
+	return visible
+
+
+func _gem_trade_disk_receipt(path: String) -> Dictionary:
+	var receipt: Dictionary = _canonical_disk_stamp(path)
+	if not receipt.ok or receipt.get("exists",false)!=_disk_expected_exists: return {"ok":false}
+	if _disk_expected_exists and FileAccess.get_file_as_bytes(path)!=_disk_bytes: return {"ok":false}
+	return receipt
+
+
+func cancel_gem_trade_quote(handle: String) -> void:
+	_gem_trade_quotes.erase(handle)
+
+
+func invalidate_gem_trade_quotes() -> void:
+	_gem_trade_quotes.clear()
+
+
+func execute_gem_trade(handle: Variant,current_target: Variant) -> Dictionary:
+	if _busy: return _craft_failure("busy","当前操作尚未结束")
+	if not handle is String or not _gem_trade_quotes.has(handle): return _craft_failure("unknown_quote","宝石报价已失效")
+	var issued: Dictionary = _gem_trade_quotes[handle]
+	_gem_trade_quotes.erase(handle)
+	if not current_target is String or current_target!=issued.quote.target: return _craft_failure("target_mismatch","所选宝石已变化")
+	var guard: Dictionary = _gem_trade_guard(issued.snapshot.revision,issued.path)
+	if not guard.ok: return guard
+	if not CraftPlanner._same_data(_current,issued.snapshot): return _craft_failure("stale_quote","构筑已变化，请重新获取报价")
+	if _gem_trade_disk_receipt(issued.path)!=issued.disk: return _craft_failure("save_changed","存档已变化，物品与碎片保持原样")
+	var result: Dictionary = _commit(issued.candidate.duplicate(true),issued.path)
+	if not result.ok: return _craft_failure(result.error_code,result.reason)
+	_gem_trade_quotes.clear()
+	return {"ok":true,"code":"","reason":"","operation":issued.quote.operation,"target":current_target,"uid":issued.uid,"definition_id":issued.quote.definition_id,
+		"cost":issued.quote.cost.duplicate(true),"materials":issued.quote.materials.duplicate(true),"revision":revision()}
 
 
 func get_flask_profile(uid:String)->Dictionary:

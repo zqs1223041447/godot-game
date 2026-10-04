@@ -160,6 +160,7 @@ func _ready() -> void:
 	add_child(hud)
 	hud.setup(self)
 	world_context_changed.connect(_sync_camp_presentation)
+	world_context_changed.connect(_invalidate_normal_gem_quotes)
 	_ready_complete = true
 	restart_run()
 	if not recovered.ok:
@@ -1577,6 +1578,7 @@ var _normal_run_id:int=0
 var _normal_reset_authorized:bool=false
 var _normal_completion_pending:bool=false
 var test_supply_enabled:=true
+var _normal_gem_receipts: Dictionary = {}
 
 func world_geometry() -> Dictionary:
 	var result: Dictionary = _geometry.snapshot()
@@ -1693,17 +1695,73 @@ func leave_town_test(expected_revision:Variant)->Dictionary:
 func town_services()->Array[Dictionary]:
 	var rows:=TownCatalog.services()
 	for row:Dictionary in rows:
-		row.available=_world_mode=="town" and (_is_test_profile() or row.id in ["crafter","passive_reset","map_device"])
+		row.available=_world_mode=="town" and (_is_test_profile() or row.id in ["skill_merchant","crafter","passive_reset","map_device"])
 		row.reason="" if row.available else "测试商人仅在独立测试城镇供应" if _world_mode=="town" else "请先返回城镇"
-		if not _is_test_profile() and row.id=="crafter":row.description="使用正式背包内的真实校准碎片进行六项现有工艺。"
+		if not _is_test_profile() and row.id=="skill_merchant":row.description="用校准碎片购买已实现主动与辅助宝石；背包中的宝石可回收。"
+		elif not _is_test_profile() and row.id=="crafter":row.description="使用正式背包内的真实校准碎片进行六项现有工艺。"
 		elif not _is_test_profile() and row.id=="map_device":row.description="选择地图与挑战档位；成功入图才扣费，完整完成后领取结算。"
 	return rows
 func town_stock(service_id:String)->Array[Dictionary]:
 	var rows:=TownCatalog.offers(service_id)
+	if service_id=="skill_merchant" and not _is_test_profile():
+		var prices:Dictionary={}
+		for offer:Dictionary in normal_gem_offers():prices[offer.definition_id]=offer
+		for row:Dictionary in rows:
+			var offer:Dictionary=prices.get(row.definition_id,{})
+			row.cost=int(offer.get("cost",0));row.paid=true
+			row.price_label="%d 校准碎片"%row.cost
+			row.available=bool(offer.get("available",false));row.reason=str(offer.get("reason","未知宝石"))
+		return rows
 	for row:Dictionary in rows:
 		row.available=_world_mode=="town" and _is_test_profile() and test_supply_enabled
 		row.reason="" if row.available else "测试供应不能领取到正式存档" if not _is_test_profile() else "测试供应已关闭" if not test_supply_enabled else "请先返回测试城镇"
 	return rows
+func _normal_gem_service_reason() -> String:
+	return "" if _world_mode=="town" and not _is_test_profile() else "请返回正式城镇进行宝石交易"
+
+func normal_gem_offers() -> Array[Dictionary]:
+	var result: Array[Dictionary] = state.normal_gem_offers(build_save_path)
+	var reason: String = _normal_gem_service_reason()
+	if not reason.is_empty():
+		for row: Dictionary in result: row.available=false; row.reason=reason
+	return result
+
+func normal_gem_recycle_info(uid: Variant) -> Dictionary:
+	var result: Dictionary = state.gem_recycle_info(uid,build_save_path)
+	var reason: String = _normal_gem_service_reason()
+	if not reason.is_empty(): result.available=false; result.reason=reason
+	return result
+
+func normal_gem_trade_quote(operation: Variant,target: Variant,expected_revision: Variant) -> Dictionary:
+	var reason: String = _normal_gem_service_reason()
+	if not reason.is_empty(): return _world_failure("service_unavailable",reason)
+	var result: Dictionary = state.gem_trade_quote(operation,target,expected_revision,build_save_path)
+	if result.ok:
+		while _normal_gem_receipts.size()>=8:
+			cancel_normal_gem_trade_quote(_normal_gem_receipts.keys()[0])
+		_normal_gem_receipts[result.handle]={"model":state.get_instance_id(),"world_revision":_world_revision}
+	return result
+
+func cancel_normal_gem_trade_quote(handle: String) -> void:
+	_normal_gem_receipts.erase(handle)
+	state.cancel_gem_trade_quote(handle)
+
+func _invalidate_normal_gem_quotes() -> void:
+	_normal_gem_receipts.clear()
+	state.invalidate_gem_trade_quotes()
+
+func execute_normal_gem_trade(handle: Variant,current_target: Variant) -> Dictionary:
+	if not handle is String or not _normal_gem_receipts.has(handle): return _world_failure("unknown_quote","宝石报价已失效")
+	var receipt: Dictionary = _normal_gem_receipts[handle]
+	_normal_gem_receipts.erase(handle)
+	var reason: String = _normal_gem_service_reason()
+	if not reason.is_empty() or receipt.model!=state.get_instance_id() or receipt.world_revision!=_world_revision:
+		state.cancel_gem_trade_quote(handle)
+		return _world_failure("stale_world","城镇或存档已切换，请重新获取报价")
+	var result: Dictionary = state.execute_gem_trade(handle,current_target)
+	if result.ok: world_context_changed.emit()
+	return result
+
 func town_buy(offer_id:Variant,expected_revision:Variant)->Dictionary:
 	if _world_mode!="town" or not _is_test_profile() or not test_supply_enabled:return _world_failure("service_unavailable","当前不能领取测试供应")
 	var result:Dictionary=state.town_claim_offer(offer_id,expected_revision,build_save_path)
