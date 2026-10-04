@@ -7084,7 +7084,7 @@
 				"rows": 10
 			},
 			"definition_id": "currency:calibration_shard",
-			"description": "用于数值校准的结晶碎片。仅背包中的碎片可用于工艺。",
+			"description": "用于装备制作、正式地图和宝石交易的结晶碎片。仅消耗背包中的碎片。",
 			"example_instance": {
 				"definition_id": "currency:calibration_shard",
 				"kind": "currency",
@@ -14459,7 +14459,7 @@
 			"status": "implemented"
 		}
 	},
-	"game_version": "0.43.0",
+	"game_version": "0.44.0",
 	"jewel_affixes": {
 		"barrier": {
 			"kind": "prefix",
@@ -18967,6 +18967,175 @@
 				"trigger_distance": 140.0
 			}
 		}
+	},
+	"normal_gem_trading": {
+		"currency": "calibration_shard",
+		"level": 1,
+		"location": "normal_town",
+		"offers": [
+			{
+				"cost": 8,
+				"definition_id": "skill:bolt",
+				"kind": "skill_gem",
+				"name": "奥术飞弹"
+			},
+			{
+				"cost": 8,
+				"definition_id": "skill:chain",
+				"kind": "skill_gem",
+				"name": "连锁闪电"
+			},
+			{
+				"cost": 8,
+				"definition_id": "skill:cleave",
+				"kind": "skill_gem",
+				"name": "裂刃斩"
+			},
+			{
+				"cost": 8,
+				"definition_id": "skill:dash",
+				"kind": "skill_gem",
+				"name": "闪光冲刺"
+			},
+			{
+				"cost": 8,
+				"definition_id": "skill:frost",
+				"kind": "skill_gem",
+				"name": "冰霜脉冲"
+			},
+			{
+				"cost": 8,
+				"definition_id": "skill:meteor",
+				"kind": "skill_gem",
+				"name": "陨星坠落"
+			},
+			{
+				"cost": 8,
+				"definition_id": "skill:nova",
+				"kind": "skill_gem",
+				"name": "奥能新星"
+			},
+			{
+				"cost": 8,
+				"definition_id": "skill:shade_bolt",
+				"kind": "skill_gem",
+				"name": "蚀影飞弹"
+			},
+			{
+				"cost": 8,
+				"definition_id": "skill:tornado",
+				"kind": "skill_gem",
+				"name": "龙卷射击"
+			},
+			{
+				"cost": 8,
+				"definition_id": "skill:ward",
+				"kind": "skill_gem",
+				"name": "守护结界"
+			},
+			{
+				"cost": 4,
+				"definition_id": "support:breadth",
+				"kind": "support_gem",
+				"name": "广域辅助"
+			},
+			{
+				"cost": 4,
+				"definition_id": "support:chain_extension",
+				"kind": "support_gem",
+				"name": "连锁延展辅助"
+			},
+			{
+				"cost": 4,
+				"definition_id": "support:chain_reach",
+				"kind": "support_gem",
+				"name": "远链辅助"
+			},
+			{
+				"cost": 4,
+				"definition_id": "support:cold_focus",
+				"kind": "support_gem",
+				"name": "冰霜专注辅助"
+			},
+			{
+				"cost": 4,
+				"definition_id": "support:concentrate",
+				"kind": "support_gem",
+				"name": "凝域辅助"
+			},
+			{
+				"cost": 4,
+				"definition_id": "support:efficiency",
+				"kind": "support_gem",
+				"name": "节能辅助"
+			},
+			{
+				"cost": 4,
+				"definition_id": "support:fire_focus",
+				"kind": "support_gem",
+				"name": "火焰专注辅助"
+			},
+			{
+				"cost": 4,
+				"definition_id": "support:focus",
+				"kind": "support_gem",
+				"name": "凝束辅助"
+			},
+			{
+				"cost": 4,
+				"definition_id": "support:heavy_projectiles",
+				"kind": "support_gem",
+				"name": "缓速强击辅助"
+			},
+			{
+				"cost": 4,
+				"definition_id": "support:lightning_focus",
+				"kind": "support_gem",
+				"name": "闪电专注辅助"
+			},
+			{
+				"cost": 4,
+				"definition_id": "support:lingering_chill",
+				"kind": "support_gem",
+				"name": "寒意延长辅助"
+			},
+			{
+				"cost": 4,
+				"definition_id": "support:physical_focus",
+				"kind": "support_gem",
+				"name": "物理专注辅助"
+			},
+			{
+				"cost": 4,
+				"definition_id": "support:pierce",
+				"kind": "support_gem",
+				"name": "贯穿辅助"
+			},
+			{
+				"cost": 4,
+				"definition_id": "support:quickcast",
+				"kind": "support_gem",
+				"name": "疾咏辅助"
+			},
+			{
+				"cost": 4,
+				"definition_id": "support:swift_projectiles",
+				"kind": "support_gem",
+				"name": "疾速投射辅助"
+			},
+			{
+				"cost": 4,
+				"definition_id": "support:volley",
+				"kind": "support_gem",
+				"name": "散束辅助"
+			}
+		],
+		"pricing": "初版可调整预算；每次无词缀地图净得4碎片",
+		"quality": 0,
+		"recycle_credit": 1,
+		"recycle_location": "bag",
+		"schema": 27,
+		"test_supply_separate": true
 	},
 	"normal_journey": {
 		"balance": "本游戏可调整原型；未引入新正常商店经济、随机地图物品或完整终局系统",
@@ -362365,7 +362534,7 @@
 					"catalog_id": "calibration_shard",
 					"category": "",
 					"definition_id": "currency:calibration_shard",
-					"description": "用于数值校准的结晶碎片。仅背包中的碎片可用于工艺。",
+					"description": "用于装备制作、正式地图和宝石交易的结晶碎片。仅消耗背包中的碎片。",
 					"icon_path": "",
 					"id": "currency:calibration_shard",
 					"kind": "currency",
@@ -362375,7 +362544,7 @@
 						"category": "",
 						"color": "#8bd8df",
 						"definition_id": "currency:calibration_shard",
-						"description": "用于数值校准的结晶碎片。仅背包中的碎片可用于工艺。",
+						"description": "用于装备制作、正式地图和宝石交易的结晶碎片。仅消耗背包中的碎片。",
 						"id": "currency:calibration_shard",
 						"kind": "currency",
 						"name": "校准碎片",

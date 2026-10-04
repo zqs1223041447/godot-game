@@ -86,6 +86,7 @@ static func collect() -> Dictionary:
 	result["town_maps"] = town_map_examples()
 	result["map_camps"]={"old_garden":CampLayoutData.layout("old_garden",Arena.ARENA).landmarks,"broken_ruins":CampLayoutData.layout("broken_ruins",Arena.ARENA).landmarks}
 	result["normal_journey"] = normal_journey_examples()
+	result["normal_gem_trading"]={"offers":Canonical.GemTrade.offers(),"recycle_credit":Canonical.GemTrade.RECYCLE_CREDIT,"currency":Canonical.GemTrade.MATERIAL_ID,"location":"normal_town","level":1,"quality":0,"recycle_location":"bag","schema":Canonical.Rules.VERSION,"test_supply_separate":true,"pricing":"初版可调整预算；每次无词缀地图净得4碎片"}
 	result["source_tree"] = source_tree_reference()
 	result["source_spatial"] = source_spatial_examples()
 	result["source_recharge"] = source_recharge_examples()

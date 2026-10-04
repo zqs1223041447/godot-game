@@ -334,7 +334,11 @@ def build(data, art):
     if town:
         for service in town['services']:
             key=service['id'];stock=town['stock'].get(key,[])
-            body=facts([('开放条件','测试档全服务；正式城镇仅工匠、天赋重置和地图装置'),('存档隔离',esc(town['normal_save'])+' → 首次显式复制 → '+esc(town['test_save'])),('测试供应','真实UID物品，免费但受背包与注册表上限限制'),('配置开关',esc(town['supply_setting'])),('交易保护','完整候选验证，保存成功才提交；旧档实例与货币不被测试交易改写')])
+            body=facts([('开放条件','测试档全服务；正式城镇开放宝石商人、工匠、天赋重置和地图装置'),('存档隔离',esc(town['normal_save'])+' → 首次显式复制 → '+esc(town['test_save'])),('测试供应','真实UID物品，免费但受背包与注册表上限限制'),('配置开关',esc(town['supply_setting'])),('交易保护','完整候选验证，保存成功才提交；旧档实例与货币不被测试交易改写')])
+            if key=='skill_merchant':
+                trade=data['normal_gem_trading']
+                body+='<p>正式购买：主动8、辅助4校准碎片，背包所选宝石回收1。均为1级0品质，已装配或待安置不能回收。无词缀地图净得4碎片；买卖净损失3或7，不可套利。仅确认时原子保存；免费测试供应始终隔离。</p>'
+                body+='<div class="table-scroll"><table><thead><tr><th>正式商品</th><th>购买碎片</th><th>回收碎片</th></tr></thead><tbody>'+''.join('<tr><td>'+esc(o['name'])+'</td><td data-gem-trade-id="'+esc(o['definition_id'])+'" data-cost="'+str(o['cost'])+'">'+str(o['cost'])+'</td><td>'+str(trade['recycle_credit'])+'</td></tr>' for o in trade['offers'])+'</tbody></table></div>'
             if stock:
                 rows=[]
                 for offer in stock:
@@ -348,7 +352,7 @@ def build(data, art):
             if key=='passive_reset':body+='<p>保留当前起点，退还实际已花普通点。已镶珠宝保留原UID，优先回背包，放不下进入可见待安置；保存失败不改变点数或物品。</p>'
             if key=='crafter':body+='<p>继续消耗测试档里的真实碎片，不建立材料钱包。测试背包装备可确认丢弃并重新领取，正常进度保留原回收规则。</p>'+links('crafting',[op for op,c in data['crafting'].items() if c['kind']=='operation'])
             body+='<p>重进测试档不重新复制或覆盖。退出后恢复正常档并进入正式城镇。被替换的旧model拒绝迟到写入；原确认、拖拽与面板一并关闭。</p>'
-            cards.append(add('town_services',key,service['name'],service['description'],body,'可选测试服务'))
+            cards.append(add('town_services',key,service['name'],'正式付费购买与独立测试供应' if key=='skill_merchant' else service['description'],body,'正式购买 · 测试供应' if key=='skill_merchant' else '可选测试服务'))
         for m in town['options']['maps']:
             key=m['id'];example=town['examples'][key]
             body='<figure class="defense-flow"><figcaption>有限地图流程</figcaption><ol><li><strong>城镇制图</strong><span>最多2普通 + 1特殊</span></li><li><strong>'+str(m['ordinary_target'])+' 个根怪</strong><span>固定第'+str(m['wave'])+'波强度</span></li><li><strong>裂隙守卫</strong><span>首领一次奖励，后代零奖励</span></li><li><strong>清理后代 → 返城</strong><span>已得进度保存到测试档</span></li></ol></figure>'

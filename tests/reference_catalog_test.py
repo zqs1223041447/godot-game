@@ -38,6 +38,10 @@ def main():
             expected_encounters[key+'-'+template+'-常规']=sample['before'][definition['field']]
             expected_encounters[key+'-'+template+'-挑战']=sample['after'][definition['field']]
     assert inspector.encounter_values==expected_encounters, 'Challenge chart differs from the production compiler'
+    import re
+    gem_prices={k:int(v) for k,v in re.findall(r'data-gem-trade-id="([^"]+)" data-cost="([0-9]+)"',source)}
+    assert gem_prices=={o['definition_id']:o['cost'] for o in data['normal_gem_trading']['offers']}, 'Normal gem prices differ from the real catalog'
+    assert data['normal_gem_trading']['recycle_credit']==1 and len(gem_prices)==26
     expected_telegraphs={}
     for key,attack in data['monster_attacks'].items():
         example=attack['example']; cases=example['cases']; p=attack['profile']
