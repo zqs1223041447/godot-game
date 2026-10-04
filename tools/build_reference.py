@@ -16,7 +16,7 @@ CATEGORIES = [('skills','主动技能'),('supports','辅助技能'),('equipment'
 RULE_TITLES = {'damage':'伤害如何结算','supports':'辅助装配','projectiles':'分裂、返回与飞行结束','equipment':'装备与阶级','character_rates':'恢复、移动与普通攻击速度','basic_attack':'普通攻击与武器贡献','allocation':'天赋与珠宝规则','shared':'玩家和怪物共享机制','boundaries':'尚未实现的源游戏语义','sources':'数据来源与实现边界'}
 CAPABILITIES = {'initial_projectiles':'初始投射物数量','projectile_hit':'投射物命中','finite_projectile_pierce':'有限穿透','area_hit':'直接范围命中','chain_hit':'连锁命中'}
 SLOTS = {'weapon':'武器','armor':'护甲','charm':'项链','body_armour':'护甲','amulet':'项链','ring':'戒指','ring_1':'戒指一','ring_2':'戒指二','boots':'鞋','belt':'腰带','gloves':'手套','helmet':'头盔'}
-TYPES = {'small':'小天赋','notable':'显著天赋','socket':'珠宝孔','start':'起点','keystone':'基石','mastery':'精通','prefix':'前缀','suffix':'后缀','ordinary':'普通珠宝','special':'特殊珠宝','legacy':'原始词池','expansion':'扩展词池','runewood':'符木点伤池','defense':'火抗防具池','local_weapon':'白蜡长弓池','nine_slot':'九槽装备池'}
+TYPES = {'small':'小天赋','notable':'显著天赋','socket':'珠宝孔','start':'起点','keystone':'基石','mastery':'精通','prefix':'前缀','suffix':'后缀','ordinary':'普通珠宝','special':'特殊珠宝','legacy':'原始词池','expansion':'扩展词池','runewood':'符木点伤池','defense':'火抗防具池','local_weapon':'白蜡长弓池','nine_slot':'九槽装备池','build_legacy_v27':'构筑原底材池','build_nine_slot_v27':'构筑九槽池'}
 
 def esc(value): return html.escape(str(value), quote=True)
 def lines(value): return '<br>'.join(esc(value).split('\n'))
@@ -220,11 +220,16 @@ def build(data, art):
         if e['stats'].get('fire_resistance',0): related+=' · '+link('defenses','fire_resistance','火焰抗性与受击结算')
         cards.append(add('equipment',key,e['name'],e['description'],body,SLOTS[e['slot']],meta=tags([SLOTS[e['slot']],TYPES[e['pool']]]),related=related))
     for key,f in data['affixes'].items():
-        unit = '%' if f['unit']=='percent' else ' 点'
-        rows = ''.join(f'<tr><th scope="row">T{int(t["tier"])}</th><td>{int(t["level"])}</td><td>{int(t["min"])}–{int(t["max"])}{unit}</td><td>{int(t["weight"])}</td></tr>' for t in f['tiers'])
+        rows = ''.join(f'<tr><th scope="row">T{int(t["tier"])}</th><td>{int(t["level"])}</td><td>{esc(f["formatted_ranges"][i]["min"])} ～ {esc(f["formatted_ranges"][i]["max"])}</td><td>{int(t["weight"])}</td></tr>' for i,t in enumerate(f['tiers']))
         body = '<div class="table-scroll"><table><caption>原创阶级，端点包含在内</caption><thead><tr><th>阶级</th><th>物品等级</th><th>掷值</th><th>权重</th></tr></thead><tbody>'+rows+'</tbody></table></div>'
         body += details('资格、作用域与游戏内文本', facts([('可用底材',links('equipment',f['eligible_bases'])),('互斥组',esc(f['group'])),('运行时属性',esc(f['stat']))])+('<p>命中条件：'+esc(' + '.join(f.get('required_tags',[])))+'；阶段：'+esc(f.get('stage',''))+'</p>' if f.get('stage')=='skill_added_damage' else '')+'<p>'+lines('\n'.join(f['formatted_examples']))+'</p>')
         related = link('defenses','fire_resistance','火焰抗性与受击结算') if f['stat']=='fire_resistance' else (links('skills',f.get('affected_skills',[])) if f.get('affected_skills') else link('rules','character_rates'))
+        if f['stat'] in ['attack_life_leech','attack_mana_leech']:
+            body+='<p>按防御后实际扣除敌人护盾与生命计算，仅攻击命中；不含过量伤害或即时回复。与天赋同比例相加，仍受既有单次与总恢复上限。保存整数基点，100基点为1%，每一刻度为0.01个百分点。</p>'
+            related=link('rules','source_leech')+' · '+links('skills',f['affected_skills'])
+        elif f['stat'] in ['crit_chance_increased','crit_multiplier_add']:
+            body+='<p>全局属性作用于攻击和法术命中；几率提高乘基础几率，倍率增加按百分点加算。独立爆炸读取自己的全局profile，同次施放快照保持。没有局部武器或暴击触发扩展。</p>'
+            related=link('rules','source_critical')+' · '+links('skills',f['affected_skills'])
         if f.get('stage')=='weapon_local':
             body+='<p>阶段：本武器局部物理；只读取当前装备的白蜡长弓。不会进入角色统计，不增益法术或独立爆炸。图鉴的技能关联以普通长弓对照带此单词缀的合法魔法长弓，经实际编译器比较。</p>'
             related=link('weapon_stages','weapon_local')+' · '+links('skills',f['affected_skills'])+' · '+link('rules','basic_attack')

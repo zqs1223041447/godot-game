@@ -1,0 +1,115 @@
+{
+  "baseline_commit": "15bf503113105538984c4e8dc267b336fb237674",
+  "tested_stage_commit": "b1d62803a7593669ef78d9827a82d49d7067fcf9",
+  "total_checks": 307498,
+  "report_count": 8,
+  "reports": [
+    {
+      "test": "res://tests/build_affix_profile_test.gd",
+      "checks": 180,
+      "failures": 0,
+      "path": "docs/qa/v042/profile-test.log.txt",
+      "sha256": "b0718866efcd4229ce6870accdf6f1c1c6a0c645a266797725884e96187e722a",
+      "arguments": []
+    },
+    {
+      "test": "res://tests/build_affix_catalog_test.gd",
+      "checks": 3830,
+      "failures": 0,
+      "path": "docs/qa/v042/catalog-first.log",
+      "sha256": "f199a54e0701856ed824a98321088193a33f46aeae0dddac883cda0de49c7397",
+      "arguments": []
+    },
+    {
+      "test": "res://tests/build_affix_transactions_test.gd",
+      "checks": 332,
+      "failures": 0,
+      "path": "docs/qa/v042/transactions-first.log",
+      "sha256": "24d347fb94ded4e843ea69d53df508c68e6e090a1d0b0fcab18db9b7d9a32808",
+      "arguments": []
+    },
+    {
+      "test": "res://tests/build_affix_gameplay_test.gd",
+      "checks": 60,
+      "failures": 0,
+      "path": "docs/qa/v042/gameplay-fourth.log",
+      "sha256": "576d31005292c8eb5f902338e6a7a1edd649c4b581a8a9821ea2530abfad1ded",
+      "arguments": []
+    },
+    {
+      "test": "res://tests/build_affix_economy_test.gd",
+      "checks": 302609,
+      "failures": 0,
+      "path": "docs/qa/v042/economy-run-final.log",
+      "sha256": "0c747a974a6aa8c964049bb107c660677a06b96a072cae6b37ed316b64ec5d67",
+      "arguments": []
+    },
+    {
+      "test": "res://tests/equipment_affix_migration_test.gd",
+      "checks": 334,
+      "failures": 0,
+      "path": "docs/qa/v042/schema27-migration.log",
+      "sha256": "d951b44d974b04eb48e2ecdea2cee1bd3a356073b128b9a21db9759390a97c89",
+      "arguments": []
+    },
+    {
+      "test": "res://tests/equipment_affix_migration_test.gd",
+      "checks": 128,
+      "failures": 0,
+      "path": "docs/qa/v042/schema27-vocabulary.log",
+      "sha256": "595c4c64b10cb9763a03db4874f4d51f7acf62fd990164e78cd53ac987172832",
+      "arguments": [
+        "--vocabulary-only"
+      ]
+    },
+    {
+      "test": "res://tests/equipment_affix_display_v42_test.gd",
+      "checks": 25,
+      "failures": 0,
+      "path": "docs/qa/v042-root-ui/affix-display.log",
+      "sha256": "7d9995aa71d431d5af44b87607c52d2f453a613510d4dc5ecf9c81d34872a10d",
+      "arguments": []
+    }
+  ],
+  "logs": {
+    "docs/qa/v042/baseline-capture.log": "d89d5fe28f869cf53ee79b2d217cd9b10cec31a389587a284f734f024a98ad12",
+    "docs/qa/v042/catalog-first.log": "f199a54e0701856ed824a98321088193a33f46aeae0dddac883cda0de49c7397",
+    "docs/qa/v042/economy-run-01.log": "af1dd006b3582058b9bcd7a5c34e05e1df8124a1ab84162f049b3d447786105c",
+    "docs/qa/v042/economy-run-final.log": "0c747a974a6aa8c964049bb107c660677a06b96a072cae6b37ed316b64ec5d67",
+    "docs/qa/v042/final-import.log": "309f5566b83643f4a7ab2af666b5388d4e4a020036a5d24483b76def20173fac",
+    "docs/qa/v042/font-coverage-final.log": "fc34385b7c3a34f5e24cb5d2b6b14414fbe57bc078c27752664a965f8e985589",
+    "docs/qa/v042/font-coverage-initial.log": "5d5d92580c1f01e06ba613ba0179cec9d0dd3512058d56238e20ed29f5b1318e",
+    "docs/qa/v042/font-regenerate.log": "27f3b6d874a89be076dde377088cf3b91e28f0ac0b8a7c2d0cb63ba5f9d0112f",
+    "docs/qa/v042/gameplay-first.log": "9c981d78258483a49f3decf646c40d8465a2e994b151976f4b6d355f5c1f1a10",
+    "docs/qa/v042/gameplay-fourth.log": "576d31005292c8eb5f902338e6a7a1edd649c4b581a8a9821ea2530abfad1ded",
+    "docs/qa/v042/gameplay-second.log": "f7ba46c19e8557debe39aa43cc2488a4df3cc2f003565daae536399ef109f544",
+    "docs/qa/v042/gameplay-third.log": "79366e087b61e6425067de26bfe79a0de15788f3d275e2a760685155ba7a5aad",
+    "docs/qa/v042/initial-import.log": "f6c579828bd7087ad5ab9be30e1ce12bb205c39f313f6e3ab0bbfff17d60b9f0",
+    "docs/qa/v042/profile-test.log.txt": "b0718866efcd4229ce6870accdf6f1c1c6a0c645a266797725884e96187e722a",
+    "docs/qa/v042/reference-build.log": "494419fe9ded6804464855385d017ce84f1d0fae054d0beb9cdc735e3ea7253e",
+    "docs/qa/v042/reference-export.log": "51e3b0bc619efba5c710e1863eedea0402e6700d8c973b9ecb758418906e7297",
+    "docs/qa/v042/reference-validation-final.log": "a96bcbe334d96c614618514aeb2e9731f8ee7087bc935a0f0b7f7252df2f0484",
+    "docs/qa/v042/reference-validation-second.log": "2e2dd4456ffdf1e907706a0ddad5486bcf21af9ace4628a6532a46c157c75f6a",
+    "docs/qa/v042/reference-validation.log": "9155877b4cc9f83d222fe982466eff363c19d1157bc89d5e3bd0df9eaca5b918",
+    "docs/qa/v042/schema27-migration-run1.log": "a0e8a98de1e82d5d9fc18b6537345a5431b0941cad680d5ee9b672d15def722d",
+    "docs/qa/v042/schema27-migration.log": "d951b44d974b04eb48e2ecdea2cee1bd3a356073b128b9a21db9759390a97c89",
+    "docs/qa/v042/schema27-vocabulary.log": "595c4c64b10cb9763a03db4874f4d51f7acf62fd990164e78cd53ac987172832",
+    "docs/qa/v042/transactions-first.log": "24d347fb94ded4e843ea69d53df508c68e6e090a1d0b0fcab18db9b7d9a32808",
+    "docs/qa/v042-root-ui/affix-display.log": "7d9995aa71d431d5af44b87607c52d2f453a613510d4dc5ecf9c81d34872a10d"
+  },
+  "prior_schema_full_run_changed_files": [
+    "scripts/save/canonical_build_rules.gd",
+    "tests/equipment_affix_migration_test.gd"
+  ],
+  "reuse_scope": "Schema334 ran before the old-version-only guard avoided redundant current27 validation. Only version/warm-cache cases128 reran afterward; store/backup/rollback and source fixtures unchanged. Final source hash map preserved separately. UI25 source identical to root73a3c21. Other production rules unchanged after tests; font/version/reference separate.",
+  "initial_failures_retained": [
+    "migration fixture assumed F1 array index, corrected by binding identity",
+    "gameplay fixture parse/type and nonexistent maximum field corrected",
+    "gameplay expected instant budget recovery and no RNG calls on any cast; actual rate-limited recovery and paired enabled/disabled cast verify existing visual RNG equivalence; no production change",
+    "reference exact old family count26 and poolcanonical_v14 updated to actual30/v27",
+    "initial3fontcharacters added from same pinned source"
+  ],
+  "windows_native_tested": false,
+  "full_repeat": false,
+  "soak_600s": false
+}

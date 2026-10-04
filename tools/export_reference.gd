@@ -68,7 +68,7 @@ static func collect() -> Dictionary:
 		"mechanisms": {}, "monsters": {}, "monster_rarities": Monsters.RARITIES,
 		"equipment_rarities": Equipment.RARITIES, "jewel_rarities": Jewels.RARITIES,
 		"equipment_pools": Equipment.pool_profiles(), "loot_profiles": Equipment.loot_profiles(),
-		"current_loot_profile_id": Equipment.CURRENT_LOOT_PROFILE_ID, "save_version": Build.SAVE_VERSION, "fire_encounter": Monsters.fire_encounter_policy(), "elemental_encounters": Monsters.elemental_encounter_policy(), "current_loot_profile": Equipment.current_loot_profile(),
+		"current_loot_profile_id": Canonical.LOOT_PROFILE_ID, "save_version": Build.SAVE_VERSION, "fire_encounter": Monsters.fire_encounter_policy(), "elemental_encounters": Monsters.elemental_encounter_policy(), "current_loot_profile": Equipment.loot_profile(Canonical.LOOT_PROFILE_ID),
 		"passive_caps": Balance.player_caps(), "passive_policy": Balance.policy_version(),
 		"effects": Recipes.EFFECTS, "tornado_recipe": Recipes.TORNADO,
 		"limits": {"max_supports": Supports.MAX_SUPPORTS, "initial_projectiles": Compiler.MAX_INITIAL_PROJECTILES,
@@ -123,10 +123,12 @@ static func collect() -> Dictionary:
 			if Equipment.family_eligible(id, base_id):
 				family.eligible_bases.append(base_id)
 		family["formatted_examples"] = []
+		family["formatted_ranges"] = []
 		for tier: Dictionary in family.tiers:
 			var instance: Dictionary = {"id": "gear_000001", "base_id": family.eligible_bases[0], "rarity": "magic",
 				"item_level": tier.level, "affixes": [{"id": id, "tier": tier.tier, "value": tier.max}]}
 			family.formatted_examples.append(Equipment.definition(instance).affix_lines[0])
+			family.formatted_ranges.append({"min":Equipment.affix_display({"id":id,"tier":tier.tier,"value":tier.min}).value_text,"max":Equipment.affix_display({"id":id,"tier":tier.tier,"value":tier.max}).value_text})
 		result.affixes[id] = family
 	var defense: Dictionary = Defense.metadata()
 	# These are explicitly authored demonstration inputs, not universal game damage.
@@ -208,7 +210,7 @@ static func collect() -> Dictionary:
 		for skill_id: String in Data.SKILLS:
 			var before: Dictionary = Compiler.compile_skill(skill_id, before_snapshot, [])
 			var after: Dictionary = Compiler.compile_skill(skill_id, after_snapshot, [])
-			if not is_equal_approx(_direct_total(before), _direct_total(after)):
+			if not is_equal_approx(_direct_total(before), _direct_total(after)) or (Equipment.BuildAffixes.AFFIX_IDS.has(affix_id) and (before.get("critical",{})!=after.get("critical",{}) or before.get("leech",{})!=after.get("leech",{}))):
 				family.affected_skills.append(skill_id)
 			if family.has("scope_evidence"):
 				family.scope_evidence.skills[skill_id] = {"before": _direct_total(before), "after": _direct_total(after),
@@ -437,7 +439,7 @@ static func crafting_examples() -> Dictionary:
 		var presentation := Craft.operation_metadata(operation)
 		result[operation] = {"name": presentation.label, "kind": "operation",
 			"description": presentation.description, "risk": presentation.risk,
-			"rule": metadata.operations[operation], "rules_version": Craft.RULES_VERSION, "eligible_base_ids": metadata.base_ids,
+			"rule": metadata.operations[operation], "rules_version": Craft.CURRENT_RULES_VERSION, "eligible_base_ids": metadata.base_ids,
 			"example": {"source": instance.duplicate(true), "before_definition": Equipment.definition(instance),
 				"quote": quote, "balance_before": 100, "balance_after": planned.candidate.materials[Craft.MATERIAL_ID],
 				"revision_before": 0, "revision_after": planned.candidate.revision,

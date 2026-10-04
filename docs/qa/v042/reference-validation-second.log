@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/a51485f153de/v042-equipment-build-affixes/tests/reference_catalog_test.py", line 122, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/scratch/a51485f153de/v042-equipment-build-affixes/tests/reference_catalog_test.py", line 91, in main
+    assert data['current_loot_profile_id']=='canonical_v14' and [p['weight'] for p in data['current_loot_profile']]==[30,20,10,10,30]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

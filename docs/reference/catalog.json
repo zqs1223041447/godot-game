@@ -17,6 +17,20 @@
 				"前缀 · 焰刻 T2：攻击命中附加火焰伤害 +4",
 				"前缀 · 焰刻 T3：攻击命中附加火焰伤害 +6"
 			],
+			"formatted_ranges": [
+				{
+					"max": "+2",
+					"min": "+1"
+				},
+				{
+					"max": "+4",
+					"min": "+3"
+				},
+				{
+					"max": "+6",
+					"min": "+5"
+				}
+			],
 			"group": "attack_added_fire",
 			"kind": "prefix",
 			"label": "攻击命中附加火焰伤害",
@@ -77,6 +91,20 @@
 				"前缀 · 砾刻 T2：攻击命中附加物理伤害 +4",
 				"前缀 · 砾刻 T3：攻击命中附加物理伤害 +6"
 			],
+			"formatted_ranges": [
+				{
+					"max": "+2",
+					"min": "+1"
+				},
+				{
+					"max": "+4",
+					"min": "+3"
+				},
+				{
+					"max": "+6",
+					"min": "+5"
+				}
+			],
 			"group": "attack_added_physical",
 			"kind": "prefix",
 			"label": "攻击命中附加物理伤害",
@@ -120,6 +148,158 @@
 			],
 			"unit": "flat"
 		},
+		"attack_life_leech": {
+			"affected_skills": [
+				"cleave",
+				"tornado"
+			],
+			"allowed_base_ids": [
+				"wayglass_token",
+				"pulse_seed",
+				"nine_slot_etched_ring",
+				"nine_slot_threaded_gloves"
+			],
+			"eligible_bases": [
+				"nine_slot_etched_ring",
+				"nine_slot_threaded_gloves",
+				"wayglass_token",
+				"pulse_seed"
+			],
+			"formatted_examples": [
+				"前缀 · 血汲 T1：攻击伤害偷取为生命 +0.30%",
+				"前缀 · 血汲 T2：攻击伤害偷取为生命 +0.45%",
+				"前缀 · 血汲 T3：攻击伤害偷取为生命 +0.60%"
+			],
+			"formatted_ranges": [
+				{
+					"max": "+0.30%",
+					"min": "+0.20%"
+				},
+				{
+					"max": "+0.45%",
+					"min": "+0.31%"
+				},
+				{
+					"max": "+0.60%",
+					"min": "+0.46%"
+				}
+			],
+			"group": "attack_life_leech",
+			"kind": "prefix",
+			"label": "攻击伤害偷取为生命",
+			"name": "血汲",
+			"other_consumers": [],
+			"pools": [
+				"build_legacy_v27",
+				"build_nine_slot_v27"
+			],
+			"slots": [
+				"charm",
+				"ring",
+				"gloves"
+			],
+			"stat": "attack_life_leech",
+			"tiers": [
+				{
+					"level": 1,
+					"max": 30,
+					"min": 20,
+					"tier": 1,
+					"weight": 100
+				},
+				{
+					"level": 8,
+					"max": 45,
+					"min": 31,
+					"tier": 2,
+					"weight": 60
+				},
+				{
+					"level": 16,
+					"max": 60,
+					"min": 46,
+					"tier": 3,
+					"weight": 30
+				}
+			],
+			"unit": "basis_points"
+		},
+		"attack_mana_leech": {
+			"affected_skills": [
+				"cleave",
+				"tornado"
+			],
+			"allowed_base_ids": [
+				"wayglass_token",
+				"pulse_seed",
+				"nine_slot_etched_ring",
+				"nine_slot_threaded_gloves"
+			],
+			"eligible_bases": [
+				"nine_slot_etched_ring",
+				"nine_slot_threaded_gloves",
+				"wayglass_token",
+				"pulse_seed"
+			],
+			"formatted_examples": [
+				"前缀 · 灵汲 T1：攻击伤害偷取为魔力 +0.15%",
+				"前缀 · 灵汲 T2：攻击伤害偷取为魔力 +0.25%",
+				"前缀 · 灵汲 T3：攻击伤害偷取为魔力 +0.35%"
+			],
+			"formatted_ranges": [
+				{
+					"max": "+0.15%",
+					"min": "+0.10%"
+				},
+				{
+					"max": "+0.25%",
+					"min": "+0.16%"
+				},
+				{
+					"max": "+0.35%",
+					"min": "+0.26%"
+				}
+			],
+			"group": "attack_mana_leech",
+			"kind": "prefix",
+			"label": "攻击伤害偷取为魔力",
+			"name": "灵汲",
+			"other_consumers": [],
+			"pools": [
+				"build_legacy_v27",
+				"build_nine_slot_v27"
+			],
+			"slots": [
+				"charm",
+				"ring",
+				"gloves"
+			],
+			"stat": "attack_mana_leech",
+			"tiers": [
+				{
+					"level": 1,
+					"max": 15,
+					"min": 10,
+					"tier": 1,
+					"weight": 100
+				},
+				{
+					"level": 8,
+					"max": 25,
+					"min": 16,
+					"tier": 2,
+					"weight": 60
+				},
+				{
+					"level": 16,
+					"max": 35,
+					"min": 26,
+					"tier": 3,
+					"weight": 30
+				}
+			],
+			"unit": "basis_points"
+		},
 		"beatlink": {
 			"affected_skills": [],
 			"eligible_bases": [
@@ -135,6 +315,20 @@
 				"后缀 · 连拍 T2：普通攻击速度提高 +6%",
 				"后缀 · 连拍 T3：普通攻击速度提高 +9%"
 			],
+			"formatted_ranges": [
+				{
+					"max": "+3%",
+					"min": "+2%"
+				},
+				{
+					"max": "+6%",
+					"min": "+4%"
+				},
+				{
+					"max": "+9%",
+					"min": "+7%"
+				}
+			],
 			"group": "attack_timing",
 			"kind": "suffix",
 			"label": "普通攻击速度提高",
@@ -143,7 +337,8 @@
 			"pools": [
 				"legacy",
 				"runewood",
-				"local_weapon"
+				"local_weapon",
+				"build_legacy_v27"
 			],
 			"slots": [
 				"weapon",
@@ -196,6 +391,20 @@
 				"后缀 · 藏炭 T2：火焰伤害提高 +14%",
 				"后缀 · 藏炭 T3：火焰伤害提高 +20%"
 			],
+			"formatted_ranges": [
+				{
+					"max": "+8%",
+					"min": "+5%"
+				},
+				{
+					"max": "+14%",
+					"min": "+9%"
+				},
+				{
+					"max": "+20%",
+					"min": "+15%"
+				}
+			],
 			"group": "fire_amplification",
 			"kind": "suffix",
 			"label": "火焰伤害提高",
@@ -205,7 +414,8 @@
 				"legacy",
 				"runewood",
 				"defense",
-				"local_weapon"
+				"local_weapon",
+				"build_legacy_v27"
 			],
 			"slots": [
 				"weapon",
@@ -256,6 +466,20 @@
 				"前缀 · 深汲 T2：最大魔力 +15",
 				"前缀 · 深汲 T3：最大魔力 +22"
 			],
+			"formatted_ranges": [
+				{
+					"max": "+9",
+					"min": "+5"
+				},
+				{
+					"max": "+15",
+					"min": "+10"
+				},
+				{
+					"max": "+22",
+					"min": "+16"
+				}
+			],
 			"group": "mana_capacity",
 			"kind": "prefix",
 			"label": "最大魔力",
@@ -265,7 +489,8 @@
 				"legacy",
 				"runewood",
 				"defense",
-				"local_weapon"
+				"local_weapon",
+				"build_legacy_v27"
 			],
 			"slots": [
 				"weapon",
@@ -314,6 +539,20 @@
 				"后缀 · 护火 T1：火焰抗性 +12%",
 				"后缀 · 护火 T2：火焰抗性 +18%",
 				"后缀 · 护火 T3：火焰抗性 +25%"
+			],
+			"formatted_ranges": [
+				{
+					"max": "+12%",
+					"min": "+8%"
+				},
+				{
+					"max": "+18%",
+					"min": "+13%"
+				},
+				{
+					"max": "+25%",
+					"min": "+19%"
+				}
 			],
 			"group": "fire_resistance",
 			"kind": "suffix",
@@ -374,6 +613,20 @@
 				"前缀 · 远织 T2：投射物伤害提高（不含独立爆炸） +12%",
 				"前缀 · 远织 T3：投射物伤害提高（不含独立爆炸） +18%"
 			],
+			"formatted_ranges": [
+				{
+					"max": "+7%",
+					"min": "+4%"
+				},
+				{
+					"max": "+12%",
+					"min": "+8%"
+				},
+				{
+					"max": "+18%",
+					"min": "+13%"
+				}
+			],
 			"group": "projectile_amplification",
 			"kind": "prefix",
 			"label": "投射物伤害提高（不含独立爆炸）",
@@ -382,7 +635,8 @@
 			"pools": [
 				"legacy",
 				"runewood",
-				"local_weapon"
+				"local_weapon",
+				"build_legacy_v27"
 			],
 			"slots": [
 				"weapon",
@@ -414,6 +668,171 @@
 			],
 			"unit": "percent"
 		},
+		"global_critical_chance": {
+			"affected_skills": [
+				"cleave",
+				"shade_bolt",
+				"tornado",
+				"bolt",
+				"frost",
+				"nova",
+				"meteor",
+				"chain"
+			],
+			"allowed_base_ids": [
+				"wayglass_token",
+				"pulse_seed",
+				"nine_slot_etched_ring",
+				"nine_slot_threaded_gloves"
+			],
+			"eligible_bases": [
+				"nine_slot_etched_ring",
+				"nine_slot_threaded_gloves",
+				"wayglass_token",
+				"pulse_seed"
+			],
+			"formatted_examples": [
+				"后缀 · 锐察 T1：全局暴击几率提高 +20%",
+				"后缀 · 锐察 T2：全局暴击几率提高 +30%",
+				"后缀 · 锐察 T3：全局暴击几率提高 +40%"
+			],
+			"formatted_ranges": [
+				{
+					"max": "+20%",
+					"min": "+15%"
+				},
+				{
+					"max": "+30%",
+					"min": "+21%"
+				},
+				{
+					"max": "+40%",
+					"min": "+31%"
+				}
+			],
+			"group": "global_critical_chance",
+			"kind": "suffix",
+			"label": "全局暴击几率提高",
+			"name": "锐察",
+			"other_consumers": [],
+			"pools": [
+				"build_legacy_v27",
+				"build_nine_slot_v27"
+			],
+			"slots": [
+				"charm",
+				"ring",
+				"gloves"
+			],
+			"stat": "crit_chance_increased",
+			"tiers": [
+				{
+					"level": 1,
+					"max": 20,
+					"min": 15,
+					"tier": 1,
+					"weight": 100
+				},
+				{
+					"level": 8,
+					"max": 30,
+					"min": 21,
+					"tier": 2,
+					"weight": 60
+				},
+				{
+					"level": 16,
+					"max": 40,
+					"min": 31,
+					"tier": 3,
+					"weight": 30
+				}
+			],
+			"unit": "percent"
+		},
+		"global_critical_multiplier": {
+			"affected_skills": [
+				"cleave",
+				"shade_bolt",
+				"tornado",
+				"bolt",
+				"frost",
+				"nova",
+				"meteor",
+				"chain"
+			],
+			"allowed_base_ids": [
+				"wayglass_token",
+				"pulse_seed",
+				"nine_slot_etched_ring",
+				"nine_slot_threaded_gloves"
+			],
+			"display_unit": "percentage_points",
+			"eligible_bases": [
+				"nine_slot_etched_ring",
+				"nine_slot_threaded_gloves",
+				"wayglass_token",
+				"pulse_seed"
+			],
+			"formatted_examples": [
+				"后缀 · 重创 T1：全局暴击伤害倍率 +7个百分点",
+				"后缀 · 重创 T2：全局暴击伤害倍率 +11个百分点",
+				"后缀 · 重创 T3：全局暴击伤害倍率 +15个百分点"
+			],
+			"formatted_ranges": [
+				{
+					"max": "+7个百分点",
+					"min": "+5个百分点"
+				},
+				{
+					"max": "+11个百分点",
+					"min": "+8个百分点"
+				},
+				{
+					"max": "+15个百分点",
+					"min": "+12个百分点"
+				}
+			],
+			"group": "global_critical_multiplier",
+			"kind": "suffix",
+			"label": "全局暴击伤害倍率",
+			"name": "重创",
+			"other_consumers": [],
+			"pools": [
+				"build_legacy_v27",
+				"build_nine_slot_v27"
+			],
+			"slots": [
+				"charm",
+				"ring",
+				"gloves"
+			],
+			"stat": "crit_multiplier_add",
+			"tiers": [
+				{
+					"level": 1,
+					"max": 7,
+					"min": 5,
+					"tier": 1,
+					"weight": 100
+				},
+				{
+					"level": 8,
+					"max": 11,
+					"min": 8,
+					"tier": 2,
+					"weight": 60
+				},
+				{
+					"level": 16,
+					"max": 15,
+					"min": 12,
+					"tier": 3,
+					"weight": 30
+				}
+			],
+			"unit": "percent"
+		},
 		"lanternveil": {
 			"affected_skills": [],
 			"eligible_bases": [
@@ -428,6 +847,20 @@
 				"前缀 · 灯帷 T2：全局最大护盾 +15",
 				"前缀 · 灯帷 T3：全局最大护盾 +22"
 			],
+			"formatted_ranges": [
+				{
+					"max": "+9",
+					"min": "+5"
+				},
+				{
+					"max": "+15",
+					"min": "+10"
+				},
+				{
+					"max": "+22",
+					"min": "+16"
+				}
+			],
 			"group": "shield_capacity",
 			"kind": "prefix",
 			"label": "全局最大护盾",
@@ -436,7 +869,8 @@
 			"pools": [
 				"legacy",
 				"runewood",
-				"defense"
+				"defense",
+				"build_legacy_v27"
 			],
 			"slots": [
 				"armor",
@@ -482,13 +916,28 @@
 				"前缀 · 厚障 T2：最大护盾 +6",
 				"前缀 · 厚障 T3：最大护盾 +9"
 			],
+			"formatted_ranges": [
+				{
+					"max": "+3",
+					"min": "+2"
+				},
+				{
+					"max": "+6",
+					"min": "+4"
+				},
+				{
+					"max": "+9",
+					"min": "+7"
+				}
+			],
 			"group": "nine_slot_shield_capacity",
 			"kind": "prefix",
 			"label": "最大护盾",
 			"name": "厚障",
 			"other_consumers": [],
 			"pools": [
-				"nine_slot"
+				"nine_slot",
+				"build_nine_slot_v27"
 			],
 			"slots": [
 				"ring",
@@ -537,13 +986,28 @@
 				"前缀 · 澄意 T2：最大魔力 +7",
 				"前缀 · 澄意 T3：最大魔力 +10"
 			],
+			"formatted_ranges": [
+				{
+					"max": "+4",
+					"min": "+3"
+				},
+				{
+					"max": "+7",
+					"min": "+5"
+				},
+				{
+					"max": "+10",
+					"min": "+8"
+				}
+			],
 			"group": "nine_slot_mana_capacity",
 			"kind": "prefix",
 			"label": "最大魔力",
 			"name": "澄意",
 			"other_consumers": [],
 			"pools": [
-				"nine_slot"
+				"nine_slot",
+				"build_nine_slot_v27"
 			],
 			"slots": [
 				"ring",
@@ -592,13 +1056,28 @@
 				"前缀 · 坚生 T2：最大生命 +9",
 				"前缀 · 坚生 T3：最大生命 +12"
 			],
+			"formatted_ranges": [
+				{
+					"max": "+6",
+					"min": "+4"
+				},
+				{
+					"max": "+9",
+					"min": "+7"
+				},
+				{
+					"max": "+12",
+					"min": "+10"
+				}
+			],
 			"group": "nine_slot_life_capacity",
 			"kind": "prefix",
 			"label": "最大生命",
 			"name": "坚生",
 			"other_consumers": [],
 			"pools": [
-				"nine_slot"
+				"nine_slot",
+				"build_nine_slot_v27"
 			],
 			"slots": [
 				"ring",
@@ -647,13 +1126,28 @@
 				"后缀 · 耐守 T2：最大生命 +5",
 				"后缀 · 耐守 T3：最大生命 +7"
 			],
+			"formatted_ranges": [
+				{
+					"max": "+3",
+					"min": "+2"
+				},
+				{
+					"max": "+5",
+					"min": "+4"
+				},
+				{
+					"max": "+7",
+					"min": "+6"
+				}
+			],
 			"group": "nine_slot_endurance",
 			"kind": "suffix",
 			"label": "最大生命",
 			"name": "耐守",
 			"other_consumers": [],
 			"pools": [
-				"nine_slot"
+				"nine_slot",
+				"build_nine_slot_v27"
 			],
 			"slots": [
 				"ring",
@@ -702,13 +1196,28 @@
 				"后缀 · 泉行 T2：魔力恢复速度提高 +5%",
 				"后缀 · 泉行 T3：魔力恢复速度提高 +8%"
 			],
+			"formatted_ranges": [
+				{
+					"max": "+3%",
+					"min": "+2%"
+				},
+				{
+					"max": "+5%",
+					"min": "+4%"
+				},
+				{
+					"max": "+8%",
+					"min": "+6%"
+				}
+			],
 			"group": "nine_slot_mana_recovery",
 			"kind": "suffix",
 			"label": "魔力恢复速度提高",
 			"name": "泉行",
 			"other_consumers": [],
 			"pools": [
-				"nine_slot"
+				"nine_slot",
+				"build_nine_slot_v27"
 			],
 			"slots": [
 				"ring",
@@ -754,13 +1263,28 @@
 				"后缀 · 引技 T2：额外技能行 +1",
 				"后缀 · 引技 T3：额外技能行 +1"
 			],
+			"formatted_ranges": [
+				{
+					"max": "+1",
+					"min": "+1"
+				},
+				{
+					"max": "+1",
+					"min": "+1"
+				},
+				{
+					"max": "+1",
+					"min": "+1"
+				}
+			],
 			"group": "nine_slot_additional_skill_slot",
 			"kind": "suffix",
 			"label": "额外技能行",
 			"name": "引技",
 			"other_consumers": [],
 			"pools": [
-				"nine_slot"
+				"nine_slot",
+				"build_nine_slot_v27"
 			],
 			"slots": [
 				"belt",
@@ -806,13 +1330,28 @@
 				"后缀 · 轻步 T2：移动速度提高 +4%",
 				"后缀 · 轻步 T3：移动速度提高 +6%"
 			],
+			"formatted_ranges": [
+				{
+					"max": "+2%",
+					"min": "+1%"
+				},
+				{
+					"max": "+4%",
+					"min": "+3%"
+				},
+				{
+					"max": "+6%",
+					"min": "+5%"
+				}
+			],
 			"group": "nine_slot_movement",
 			"kind": "suffix",
 			"label": "移动速度提高",
 			"name": "轻步",
 			"other_consumers": [],
 			"pools": [
-				"nine_slot"
+				"nine_slot",
+				"build_nine_slot_v27"
 			],
 			"slots": [
 				"ring",
@@ -864,6 +1403,20 @@
 				"前缀 · 折辉 T2：攻击元素伤害提高 +12%",
 				"前缀 · 折辉 T3：攻击元素伤害提高 +18%"
 			],
+			"formatted_ranges": [
+				{
+					"max": "+7%",
+					"min": "+4%"
+				},
+				{
+					"max": "+12%",
+					"min": "+8%"
+				},
+				{
+					"max": "+18%",
+					"min": "+13%"
+				}
+			],
 			"group": "attack_elemental_amplification",
 			"kind": "prefix",
 			"label": "攻击元素伤害提高",
@@ -872,7 +1425,8 @@
 			"pools": [
 				"legacy",
 				"runewood",
-				"local_weapon"
+				"local_weapon",
+				"build_legacy_v27"
 			],
 			"slots": [
 				"weapon",
@@ -924,6 +1478,20 @@
 				"后缀 · 霜回 T2：冰霜伤害提高 +14%",
 				"后缀 · 霜回 T3：冰霜伤害提高 +20%"
 			],
+			"formatted_ranges": [
+				{
+					"max": "+8%",
+					"min": "+5%"
+				},
+				{
+					"max": "+14%",
+					"min": "+9%"
+				},
+				{
+					"max": "+20%",
+					"min": "+15%"
+				}
+			],
 			"group": "cold_amplification",
 			"kind": "suffix",
 			"label": "冰霜伤害提高",
@@ -933,7 +1501,8 @@
 				"legacy",
 				"runewood",
 				"defense",
-				"local_weapon"
+				"local_weapon",
+				"build_legacy_v27"
 			],
 			"slots": [
 				"weapon",
@@ -980,6 +1549,20 @@
 				"前缀 · 根泉 T2：最大生命 +22",
 				"前缀 · 根泉 T3：最大生命 +32"
 			],
+			"formatted_ranges": [
+				{
+					"max": "+14",
+					"min": "+8"
+				},
+				{
+					"max": "+22",
+					"min": "+15"
+				},
+				{
+					"max": "+32",
+					"min": "+23"
+				}
+			],
 			"group": "life_capacity",
 			"kind": "prefix",
 			"label": "最大生命",
@@ -988,7 +1571,8 @@
 			"pools": [
 				"legacy",
 				"runewood",
-				"defense"
+				"defense",
+				"build_legacy_v27"
 			],
 			"slots": [
 				"armor",
@@ -1042,6 +1626,20 @@
 				"前缀 · 符歌 T2：法术伤害提高 +12%",
 				"前缀 · 符歌 T3：法术伤害提高 +18%"
 			],
+			"formatted_ranges": [
+				{
+					"max": "+7%",
+					"min": "+4%"
+				},
+				{
+					"max": "+12%",
+					"min": "+8%"
+				},
+				{
+					"max": "+18%",
+					"min": "+13%"
+				}
+			],
 			"group": "spell_amplification",
 			"kind": "prefix",
 			"label": "法术伤害提高",
@@ -1050,7 +1648,8 @@
 			"pools": [
 				"legacy",
 				"runewood",
-				"local_weapon"
+				"local_weapon",
+				"build_legacy_v27"
 			],
 			"slots": [
 				"weapon",
@@ -1104,6 +1703,20 @@
 				"后缀 · 引霆 T2：闪电伤害提高 +14%",
 				"后缀 · 引霆 T3：闪电伤害提高 +20%"
 			],
+			"formatted_ranges": [
+				{
+					"max": "+8%",
+					"min": "+5%"
+				},
+				{
+					"max": "+14%",
+					"min": "+9%"
+				},
+				{
+					"max": "+20%",
+					"min": "+15%"
+				}
+			],
 			"group": "lightning_amplification",
 			"kind": "suffix",
 			"label": "闪电伤害提高",
@@ -1113,7 +1726,8 @@
 				"legacy",
 				"runewood",
 				"defense",
-				"local_weapon"
+				"local_weapon",
+				"build_legacy_v27"
 			],
 			"slots": [
 				"weapon",
@@ -1166,6 +1780,20 @@
 				"前缀 · 霜铭 T1：法术命中附加冰霜伤害 +2",
 				"前缀 · 霜铭 T2：法术命中附加冰霜伤害 +4",
 				"前缀 · 霜铭 T3：法术命中附加冰霜伤害 +6"
+			],
+			"formatted_ranges": [
+				{
+					"max": "+2",
+					"min": "+1"
+				},
+				{
+					"max": "+4",
+					"min": "+3"
+				},
+				{
+					"max": "+6",
+					"min": "+5"
+				}
 			],
 			"group": "spell_added_cold",
 			"kind": "prefix",
@@ -1231,6 +1859,20 @@
 				"前缀 · 雷铭 T2：法术命中附加闪电伤害 +4",
 				"前缀 · 雷铭 T3：法术命中附加闪电伤害 +6"
 			],
+			"formatted_ranges": [
+				{
+					"max": "+2",
+					"min": "+1"
+				},
+				{
+					"max": "+4",
+					"min": "+3"
+				},
+				{
+					"max": "+6",
+					"min": "+5"
+				}
+			],
 			"group": "spell_added_lightning",
 			"kind": "prefix",
 			"label": "法术命中附加闪电伤害",
@@ -1290,6 +1932,20 @@
 				"前缀 · 淬锋 T1：本武器物理伤害提高 +15%",
 				"前缀 · 淬锋 T2：本武器物理伤害提高 +22%",
 				"前缀 · 淬锋 T3：本武器物理伤害提高 +30%"
+			],
+			"formatted_ranges": [
+				{
+					"max": "+15%",
+					"min": "+10%"
+				},
+				{
+					"max": "+22%",
+					"min": "+16%"
+				},
+				{
+					"max": "+30%",
+					"min": "+23%"
+				}
 			],
 			"group": "weapon_physical_increased",
 			"kind": "prefix",
@@ -1514,6 +2170,20 @@
 				"后缀 · 循迹 T2：移动速度提高 +4%",
 				"后缀 · 循迹 T3：移动速度提高 +6%"
 			],
+			"formatted_ranges": [
+				{
+					"max": "+2%",
+					"min": "+1%"
+				},
+				{
+					"max": "+4%",
+					"min": "+3%"
+				},
+				{
+					"max": "+6%",
+					"min": "+5%"
+				}
+			],
 			"group": "movement_timing",
 			"kind": "suffix",
 			"label": "移动速度提高",
@@ -1522,7 +2192,8 @@
 			"pools": [
 				"legacy",
 				"runewood",
-				"defense"
+				"defense",
+				"build_legacy_v27"
 			],
 			"slots": [
 				"armor",
@@ -1572,6 +2243,20 @@
 				"后缀 · 泉旋 T2：魔力恢复速度提高 +9%",
 				"后缀 · 泉旋 T3：魔力恢复速度提高 +14%"
 			],
+			"formatted_ranges": [
+				{
+					"max": "+5%",
+					"min": "+3%"
+				},
+				{
+					"max": "+9%",
+					"min": "+6%"
+				},
+				{
+					"max": "+14%",
+					"min": "+10%"
+				}
+			],
 			"group": "mana_recovery",
 			"kind": "suffix",
 			"label": "魔力恢复速度提高",
@@ -1581,7 +2266,8 @@
 				"legacy",
 				"runewood",
 				"defense",
-				"local_weapon"
+				"local_weapon",
+				"build_legacy_v27"
 			],
 			"slots": [
 				"weapon",
@@ -1630,6 +2316,20 @@
 				"前缀 · 砥刃 T1：本武器附加物理伤害 +2",
 				"前缀 · 砥刃 T2：本武器附加物理伤害 +4",
 				"前缀 · 砥刃 T3：本武器附加物理伤害 +6"
+			],
+			"formatted_ranges": [
+				{
+					"max": "+2",
+					"min": "+1"
+				},
+				{
+					"max": "+4",
+					"min": "+3"
+				},
+				{
+					"max": "+6",
+					"min": "+5"
+				}
 			],
 			"group": "weapon_added_physical",
 			"kind": "prefix",
@@ -3464,7 +4164,7 @@
 				"normal_points": 5,
 				"source_version": "3.29.1"
 			},
-			"version": 26
+			"version": 27
 		},
 		"default_casts": {
 			"group_000001": {
@@ -4462,7 +5162,7 @@
 				"evasion": 320.0
 			}
 		},
-		"save_version": 26,
+		"save_version": 27,
 		"skitter_accuracy_example": {
 			"base_accuracy": 140,
 			"base_chance": 0.96,
@@ -4987,7 +5687,7 @@
 					"operation": "augment",
 					"reason": "",
 					"revision": 0,
-					"rules_version": "original-crafting-prototype-v2",
+					"rules_version": "original-crafting-prototype-v3-affix27",
 					"source_instance": {
 						"affixes": [
 							{
@@ -5004,7 +5704,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 26,
+				"save_version": 27,
 				"source": {
 					"affixes": [
 						{
@@ -5034,7 +5734,7 @@
 				],
 				"result_rarity": ""
 			},
-			"rules_version": "original-crafting-prototype-v2"
+			"rules_version": "original-crafting-prototype-v3-affix27"
 		},
 		"calibration_shard": {
 			"description": "回收背包中的随机魔法、稀有装备获得。真实堆叠物品，用于校准、赋魔、升格、补缀与重铸；待安置碎片不能直接消费。",
@@ -5069,7 +5769,11 @@
 					"spell_added_lightning",
 					"emberward",
 					"whetstone_edge",
-					"tempered_edge"
+					"tempered_edge",
+					"attack_life_leech",
+					"attack_mana_leech",
+					"global_critical_chance",
+					"global_critical_multiplier"
 				],
 				"balance": {
 					"recalibrate_cost_multiplier": 2,
@@ -5096,7 +5800,7 @@
 					"ashwood_bow"
 				],
 				"catalog_source": "res://scripts/items/equipment_catalog.gd",
-				"catalog_vocabulary": 14,
+				"catalog_vocabulary": 27,
 				"eligible_families_by_base": {
 					"ashwood_bow": [
 						"deepwell",
@@ -5150,7 +5854,11 @@
 						"nine_slot_prefix_aegis",
 						"nine_slot_suffix_endurance",
 						"nine_slot_suffix_mana_flow",
-						"nine_slot_suffix_stride"
+						"nine_slot_suffix_stride",
+						"attack_life_leech",
+						"attack_mana_leech",
+						"global_critical_chance",
+						"global_critical_multiplier"
 					],
 					"nine_slot_folded_belt": [
 						"nine_slot_prefix_vitality",
@@ -5176,7 +5884,11 @@
 						"nine_slot_prefix_aegis",
 						"nine_slot_suffix_endurance",
 						"nine_slot_suffix_mana_flow",
-						"nine_slot_suffix_stride"
+						"nine_slot_suffix_stride",
+						"attack_life_leech",
+						"attack_mana_leech",
+						"global_critical_chance",
+						"global_critical_multiplier"
 					],
 					"nine_slot_trail_boots": [
 						"nine_slot_prefix_vitality",
@@ -5198,7 +5910,11 @@
 						"sparkthread",
 						"wellturn",
 						"trailstep",
-						"beatlink"
+						"beatlink",
+						"attack_life_leech",
+						"attack_mana_leech",
+						"global_critical_chance",
+						"global_critical_multiplier"
 					],
 					"runewood_focus": [
 						"deepwell",
@@ -5237,7 +5953,11 @@
 						"sparkthread",
 						"wellturn",
 						"trailstep",
-						"beatlink"
+						"beatlink",
+						"attack_life_leech",
+						"attack_mana_leech",
+						"global_critical_chance",
+						"global_critical_multiplier"
 					],
 					"woven_bastion": [
 						"rootwell",
@@ -5403,7 +6123,7 @@
 					"magic",
 					"rare"
 				],
-				"rules_version": "original-crafting-prototype-v2",
+				"rules_version": "original-crafting-prototype-v3-affix27",
 				"salvage_rarities": [
 					"magic",
 					"rare"
@@ -5411,7 +6131,7 @@
 				"schema_version": 2,
 				"status": "prototype"
 			},
-			"save_version": 26
+			"save_version": 27
 		},
 		"elevate": {
 			"description": "保留魔法装备已有词缀，升为稀有并补至4至6条。",
@@ -5595,7 +6315,7 @@
 					"operation": "elevate",
 					"reason": "",
 					"revision": 0,
-					"rules_version": "original-crafting-prototype-v2",
+					"rules_version": "original-crafting-prototype-v3-affix27",
 					"source_instance": {
 						"affixes": [
 							{
@@ -5612,7 +6332,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 26,
+				"save_version": 27,
 				"source": {
 					"affixes": [
 						{
@@ -5641,7 +6361,7 @@
 				],
 				"result_rarity": "rare"
 			},
-			"rules_version": "original-crafting-prototype-v2"
+			"rules_version": "original-crafting-prototype-v3-affix27"
 		},
 		"enchant": {
 			"description": "普通装备变为魔法，随机获得1至2条合法词缀。",
@@ -5785,7 +6505,7 @@
 					"operation": "enchant",
 					"reason": "",
 					"revision": 0,
-					"rules_version": "original-crafting-prototype-v2",
+					"rules_version": "original-crafting-prototype-v3-affix27",
 					"source_instance": {
 						"affixes": [],
 						"base_id": "ashwood_bow",
@@ -5796,7 +6516,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 26,
+				"save_version": 27,
 				"source": {
 					"affixes": [],
 					"base_id": "ashwood_bow",
@@ -5819,7 +6539,7 @@
 				],
 				"result_rarity": "magic"
 			},
-			"rules_version": "original-crafting-prototype-v2"
+			"rules_version": "original-crafting-prototype-v3-affix27"
 		},
 		"recalibrate": {
 			"description": "保留词缀种类与阶级，在原区间内重新随机数值。",
@@ -5965,7 +6685,7 @@
 					"operation": "recalibrate",
 					"reason": "",
 					"revision": 0,
-					"rules_version": "original-crafting-prototype-v2",
+					"rules_version": "original-crafting-prototype-v3-affix27",
 					"source_instance": {
 						"affixes": [
 							{
@@ -5982,7 +6702,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 26,
+				"save_version": 27,
 				"source": {
 					"affixes": [
 						{
@@ -6016,7 +6736,7 @@
 				],
 				"roll": "inclusive_integer_ticks_in_existing_tier"
 			},
-			"rules_version": "original-crafting-prototype-v2"
+			"rules_version": "original-crafting-prototype-v3-affix27"
 		},
 		"reforge": {
 			"description": "保持稀有度，重新生成全部词缀种类、阶级和数值；可能相同或更差。",
@@ -6168,7 +6888,7 @@
 					"operation": "reforge",
 					"reason": "",
 					"revision": 0,
-					"rules_version": "original-crafting-prototype-v2",
+					"rules_version": "original-crafting-prototype-v3-affix27",
 					"source_instance": {
 						"affixes": [
 							{
@@ -6185,7 +6905,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 26,
+				"save_version": 27,
 				"source": {
 					"affixes": [
 						{
@@ -6218,7 +6938,7 @@
 				],
 				"result_rarity": ""
 			},
-			"rules_version": "original-crafting-prototype-v2"
+			"rules_version": "original-crafting-prototype-v3-affix27"
 		},
 		"salvage": {
 			"description": "消耗这件装备，获得由稀有度和词缀阶级决定的校准碎片。",
@@ -6310,7 +7030,7 @@
 					"operation": "salvage",
 					"reason": "",
 					"revision": 0,
-					"rules_version": "original-crafting-prototype-v2",
+					"rules_version": "original-crafting-prototype-v3-affix27",
 					"source_instance": {
 						"affixes": [
 							{
@@ -6327,7 +7047,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 26,
+				"save_version": 27,
 				"source": {
 					"affixes": [
 						{
@@ -6353,7 +7073,7 @@
 				"name": "回收",
 				"yield_formula": "rarity_units + sum(tier) * salvage_units_per_tier"
 			},
-			"rules_version": "original-crafting-prototype-v2"
+			"rules_version": "original-crafting-prototype-v3-affix27"
 		}
 	},
 	"currencies": {
@@ -6376,7 +7096,7 @@
 			"example_quantity": 1,
 			"name": "校准碎片",
 			"quantity_source": "items[uid].payload.quantity",
-			"save_version": 26,
+			"save_version": 27,
 			"size": [
 				1,
 				1
@@ -6386,7 +7106,7 @@
 	},
 	"current_loot_profile": [
 		{
-			"pool_id": "legacy",
+			"pool_id": "build_legacy_v27",
 			"weight": 30
 		},
 		{
@@ -6402,11 +7122,11 @@
 			"weight": 10
 		},
 		{
-			"pool_id": "nine_slot",
+			"pool_id": "build_nine_slot_v27",
 			"weight": 30
 		}
 	],
-	"current_loot_profile_id": "canonical_v14",
+	"current_loot_profile_id": "canonical_v27",
 	"defenses": {
 		"fire_resistance": {
 			"balance_version": "original-fire-defense-v1",
@@ -12956,7 +13676,11 @@
 				"nine_slot_prefix_aegis",
 				"nine_slot_suffix_endurance",
 				"nine_slot_suffix_mana_flow",
-				"nine_slot_suffix_stride"
+				"nine_slot_suffix_stride",
+				"attack_life_leech",
+				"attack_mana_leech",
+				"global_critical_chance",
+				"global_critical_multiplier"
 			],
 			"name": "纹刻指环",
 			"pool": "nine_slot",
@@ -13027,7 +13751,11 @@
 				"nine_slot_prefix_aegis",
 				"nine_slot_suffix_endurance",
 				"nine_slot_suffix_mana_flow",
-				"nine_slot_suffix_stride"
+				"nine_slot_suffix_stride",
+				"attack_life_leech",
+				"attack_mana_leech",
+				"global_critical_chance",
+				"global_critical_multiplier"
 			],
 			"name": "织纹手套",
 			"pool": "nine_slot",
@@ -13079,7 +13807,11 @@
 				"sparkthread",
 				"wellturn",
 				"trailstep",
-				"beatlink"
+				"beatlink",
+				"attack_life_leech",
+				"attack_mana_leech",
+				"global_critical_chance",
+				"global_critical_multiplier"
 			],
 			"name": "脉籽符",
 			"pool": "legacy",
@@ -13163,7 +13895,11 @@
 				"sparkthread",
 				"wellturn",
 				"trailstep",
-				"beatlink"
+				"beatlink",
+				"attack_life_leech",
+				"attack_mana_leech",
+				"global_critical_chance",
+				"global_critical_multiplier"
 			],
 			"name": "途镜坠",
 			"pool": "legacy",
@@ -13205,6 +13941,58 @@
 		}
 	},
 	"equipment_pools": {
+		"build_legacy_v27": {
+			"affix_ids": [
+				"rootwell",
+				"deepwell",
+				"lanternveil",
+				"runesong",
+				"prismedge",
+				"farweave",
+				"coalglow",
+				"rimeecho",
+				"sparkthread",
+				"wellturn",
+				"trailstep",
+				"beatlink",
+				"attack_life_leech",
+				"attack_mana_leech",
+				"global_critical_chance",
+				"global_critical_multiplier"
+			],
+			"base_ids": [
+				"cinder_reed",
+				"gale_spindle",
+				"woven_bastion",
+				"tidebound_coat",
+				"wayglass_token",
+				"pulse_seed"
+			],
+			"min_save_version": 27
+		},
+		"build_nine_slot_v27": {
+			"affix_ids": [
+				"nine_slot_prefix_vitality",
+				"nine_slot_prefix_clarity",
+				"nine_slot_prefix_aegis",
+				"nine_slot_suffix_endurance",
+				"nine_slot_suffix_mana_flow",
+				"nine_slot_suffix_stride",
+				"nine_slot_suffix_skill_row",
+				"attack_life_leech",
+				"attack_mana_leech",
+				"global_critical_chance",
+				"global_critical_multiplier"
+			],
+			"base_ids": [
+				"nine_slot_etched_ring",
+				"nine_slot_trail_boots",
+				"nine_slot_folded_belt",
+				"nine_slot_threaded_gloves",
+				"nine_slot_slate_helmet"
+			],
+			"min_save_version": 27
+		},
 		"defense": {
 			"affix_ids": [
 				"rootwell",
@@ -13671,7 +14459,7 @@
 			"status": "implemented"
 		}
 	},
-	"game_version": "0.41.0",
+	"game_version": "0.42.0",
 	"jewel_affixes": {
 		"barrier": {
 			"kind": "prefix",
@@ -13902,6 +14690,28 @@
 			},
 			{
 				"pool_id": "nine_slot",
+				"weight": 30
+			}
+		],
+		"canonical_v27": [
+			{
+				"pool_id": "build_legacy_v27",
+				"weight": 30
+			},
+			{
+				"pool_id": "runewood",
+				"weight": 20
+			},
+			{
+				"pool_id": "defense",
+				"weight": 10
+			},
+			{
+				"pool_id": "local_weapon",
+				"weight": 10
+			},
+			{
+				"pool_id": "build_nine_slot_v27",
 				"weight": 30
 			}
 		],
@@ -22690,7 +23500,7 @@
 		"source": "SkillCompiler + ProjectileRuntime.advance + DamageResolver",
 		"target_count": 6
 	},
-	"save_version": 26,
+	"save_version": 27,
 	"schema_version": 3,
 	"sectors": [
 		{
@@ -360022,7 +360832,7 @@
 		},
 		"reserved_character_key": "C",
 		"retired_profile_writes": false,
-		"save_version": 26,
+		"save_version": 27,
 		"services": [
 			{
 				"description": "免费测试供应全部已实现主动与辅助宝石。",
