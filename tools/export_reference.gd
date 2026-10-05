@@ -121,6 +121,7 @@ static func collect() -> Dictionary:
 	result["source_fire_dot"] = source_fire_dot_examples()
 	result["source_faster_burn"] = source_faster_burn_examples()
 	result["mana_guard"] = mana_guard_examples()
+	result["elemental_resistance_caps"] = elemental_resistance_cap_examples()
 	result["forgeblade"] = forgeblade_examples()
 	result["melee_basic"] = melee_basic_examples(result.forgeblade)
 	result["normal_gem_trading"]={"offers":Canonical.GemTrade.offers(),"recycle_credit":Canonical.GemTrade.RECYCLE_CREDIT,"currency":Canonical.GemTrade.MATERIAL_ID,"location":"normal_town","level":1,"quality":0,"recycle_location":"bag","schema":Canonical.Rules.VERSION,"test_supply_separate":true,"pricing":"初版可调整预算；每次无词缀地图净得4碎片"}
@@ -1743,6 +1744,93 @@ static func source_faster_burn_examples() -> Dictionary:
 
 ## v58 resource examples execute production rules; Python only formats these values.
 ## Route candidates are validated whole builds, not interactive allocation evidence.
+## Short, read-only v59 examples use the production profile and existing source witness.
+## No duplicate parser, inferred support labels, persistence or gameplay replay.
+static func elemental_resistance_cap_examples() -> Dictionary:
+	var expected: Array = ["15522", "24133", "25989", "34917", "42009", "45341", "48929", "50029", "5065", "53118", "60031", "6043"]
+	var opened: Array = []
+	var nodes: Dictionary = {}
+	for id: String in SourceTree.Data.standard_ids():
+		if SourceTree.node_effect(id, 0, 35).status != "full" and SourceTree.node_effect(id).status == "full": opened.append(id)
+	opened.sort()
+	assert(SourceTree.CURRENT_SAVE_VERSION == 36 and opened == expected)
+	var boundaries: Dictionary = {}
+	for id: String in expected + ["11820", "20832", "40743", "38683", "42313", "44203", "48803", "54766"]:
+		var raw: Dictionary = SourceTree.Data.node(id)
+		var choices: Array = []
+		for choice: Dictionary in raw.mastery_effects:
+			choices.append({"effect":int(choice.effect), "source_lines":choice.stats, "execution":SourceTree.node_effect(id, int(choice.effect))})
+		var entry: Dictionary = {"name":raw.name, "source_lines":raw.stats, "execution":SourceTree.node_effect(id),
+			"legacy_execution":SourceTree.node_effect(id, 0, 35), "standard_graph":SourceTree.Data.standard_ids().has(id), "mastery_choices":choices}
+		if expected.has(id): nodes[id] = entry
+		else: boundaries[id] = entry
+	var mastery_boundaries: Dictionary = {}
+	for id: String in SourceTree.Data.nodes():
+		for choice: Dictionary in SourceTree.Data.node(id).mastery_effects:
+			if int(choice.effect) not in [34383, 7137, 61283, 1727]: continue
+			var key: String = str(int(choice.effect))
+			if not mastery_boundaries.has(key):
+				mastery_boundaries[key] = {"effect":int(choice.effect), "source_lines":choice.stats,
+					"execution":SourceTree.node_effect(id, int(choice.effect)), "host_nodes":[]}
+			mastery_boundaries[key].host_nodes.append(id)
+	assert(mastery_boundaries.size() == 4)
+	var cases: Dictionary = {}
+	for spec: Dictionary in [{"id":"default_75", "raw":1.0, "bonus":0.0}, {"id":"raw_40_cap_83", "raw":0.4, "bonus":0.08},
+		{"id":"raw_75_cap_83", "raw":0.75, "bonus":0.08}, {"id":"raw_83_cap_83", "raw":0.83, "bonus":0.08},
+		{"id":"raw_100_cap_83", "raw":1.0, "bonus":0.08}, {"id":"safety_ceiling", "raw":1.0, "bonus":0.25}]:
+		var stats: Dictionary = {}
+		for element: String in Defense.ELEMENTS:
+			stats[element + "_resistance"] = spec.raw
+			stats["maximum_" + element + "_resistance_add"] = spec.bonus
+		var profile: Dictionary = Defense.resistance_profile(stats)
+		var hits: Dictionary = {}
+		for element: String in Defense.ELEMENTS:
+			hits[element] = Defense.incoming_source_hit({element:100.0}, stats, 0.0, 200.0)
+			assert(hits[element].ok)
+		var burn: Dictionary = Defense.incoming_burn(100.0, spec.raw, 0.0, 200.0, "player", 0.0, 0.0, spec.bonus)
+		assert(profile.ok and burn.ok and is_equal_approx(burn.damage_total, hits.fire.damage_total))
+		cases[spec.id] = {"stats":stats, "profile":profile, "hits":hits, "fire_burn":burn}
+	var witness_path: String = "res://docs/qa/v059-source/allocation-witness.json"
+	var witness: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(witness_path))
+	var candidate: Dictionary = Canonical.new().snapshot()
+	candidate.progress = {"level":int(witness.level), "xp":0}
+	candidate.talents.class_id = int(witness.class_id)
+	candidate.talents.allocated = witness.allocated.duplicate()
+	candidate.talents.masteries = {}
+	candidate.talents.normal_points = int(witness.level) + 4 - int(witness.spent)
+	assert(Canonical.Rules.reason(candidate).is_empty() and SourceTree.reason(candidate).is_empty())
+	var model := Canonical.new()
+	model._accept_memory(candidate)
+	var live: Dictionary = model.get_resistance_profile()
+	assert(live.ok and model.save_attempts == 0)
+	for element: String in Defense.ELEMENTS:
+		assert(is_equal_approx(live.raw_resistances[element], float(witness.expected_raw[element])))
+		assert(is_equal_approx(live.maximum_resistances[element], 0.83) and is_equal_approx(live.effective_resistances[element], 0.83))
+	var base: Dictionary = Equipment.base_definition("emberhide_vest")
+	var affix: Dictionary = Equipment.affix_definition("emberward")
+	var equipment: Dictionary = {"base_id":"emberhide_vest", "affix_id":"emberward", "base_raw_fire":base.stats.fire_resistance,
+		"affix_max_raw_fire":float(affix.tiers[-1].max) / 100.0, "equipment_cold_sources":[], "equipment_lightning_sources":[]}
+	equipment.maximum_raw_fire = equipment.base_raw_fire + equipment.affix_max_raw_fire
+	for id: String in Equipment.all_base_ids():
+		var stats: Dictionary = Equipment.base_definition(id).stats
+		assert(not stats.has("cold_resistance") and not stats.has("lightning_resistance"))
+	for id: String in Equipment.all_affix_ids():
+		assert(Equipment.affix_definition(id).stat not in ["cold_resistance", "lightning_resistance"])
+	return {"minimum_save_version":36, "source_policy":SourceTree.CURRENT_SAVE_VERSION, "source_version":"3.29.1", "source_sha256":SourceTree.Data.SOURCE_SHA256,
+		"base_cap":Defense.FIRE_RESISTANCE_CAP, "safety_cap":Defense.ELEMENTAL_RESISTANCE_SAFETY_CAP,
+		"nodes":nodes, "new_complete_ordinary_nodes":opened, "boundaries":boundaries, "mastery_boundaries":mastery_boundaries, "examples":cases,
+		"default_profile":Canonical.new().get_resistance_profile(), "equipment":equipment,
+		"reachable_build":{"class_id":int(witness.class_id), "level":int(witness.level), "points_spent":int(witness.spent), "allocated":witness.allocated,
+			"stats":model.get_stats(), "profile":live, "whole_build_valid":true, "save_attempts":model.save_attempts, "witness_path":witness_path},
+		"new_images":[], "producer":"SourceTree.current36 → CanonicalGameState.get_resistance_profile → Defense.resistance_profile / incoming_source_hit / incoming_burn",
+		"formula":"当前上限 = min(83%, 75% + 对应最大抗性加成)；有效抗性 = clamp(原始抗性, 0%, 当前上限)",
+		"source_reminder":"源资料90%提醒原样保留；本游戏安全上限为83%，不采用90%预算",
+		"timing":"最大抗性是结算时的当前防御；换装、分配和退款只影响后续命中与燃烧，不冻结到攻击者施放快照，不改已算伤害或燃烧原始每秒伤害",
+		"scope":"只接入无条件最大火、冰、电抗性；全元素句展开三字段，每ID一次。寻枝珠宝只影响连接准入，不重复授予属性",
+		"route_scope":"野蛮人69级73点的普通连通可行见证，保留沿途全部属性，无写档；不是全局最省点或完整配装最优结论",
+		"migration":"schema36先严格校验旧35，原文件逐字节备份后只迁版本；不赠点、不赠物，旧35注入新完整节点仍拒绝"}
+
+
 static func mana_guard_examples() -> Dictionary:
 	var node: Dictionary = SourceTree.Data.node("34098")
 	var effect: Dictionary = SourceTree.node_effect("34098", 0, 35)

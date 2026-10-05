@@ -1,0 +1,5 @@
+# Elemental resistance cap display
+
+Primary developer, 2026-10-05. The character sheet retains its three existing elemental-resistance rows and reads authoritative effective values from `get_resistance_profile()`. Tooltips separately show raw resistance and the current cap, explicitly noting that a raised cap does not grant raw resistance. No gameplay calculation or allocation occurs in presentation. The prior fallback exists only for older display-model interfaces without the new method.
+
+After the shared import, one focused headless run passed 9 checks, 0 failures, exit 0 and no ERROR output (Godot 4.6.3, `presentation.log`). A display-only mock verifies 83% effective is not reclamped to 75%, raw40/raw75 gain nothing from an83 cap, raw91/cap83 are distinct, refund changes both value and tooltip, and profile input/three-row layout remain unchanged. Real source allocation and Defense calculations are covered by the main integration batch, not claimed from the mock. No new artwork, font-size change or extra native screenshot gate.

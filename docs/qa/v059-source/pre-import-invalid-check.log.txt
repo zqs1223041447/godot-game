@@ -1,0 +1,12 @@
+Pre-import environment check: invalid; diagnostic excerpt from terminal tool output.
+This is an excerpt, not the complete stdout/stderr stream.
+Command:
+XDG_DATA_HOME=/tmp/godot-m1-v059-source-compile GODOT_SILENCE_ROOT_WARNING=1 godot --headless --path . --script docs/qa/v059-source/compile-check.gd
+Godot Engine v4.6.3.stable.official.7d41c59c4
+ERROR: Unable to open file: res://.godot/imported/bolt.png-24dacc8b9900c4eafc86cd5b88b5175f.ctex.
+ERROR: Failed loading resource: res://assets/ui/grimoire/bolt.png.
+SCRIPT ERROR: Assertion failed: The built-in canonical fixture must migrate to v36
+SCRIPT ERROR: Invalid access to property or key 'version' on a base object of type 'Dictionary'.
+The .godot directory did not exist yet. Missing imported icon causes GemCatalog to return an empty definition before any migration can succeed.
+Stopped with Ctrl-C (exit 130). No product conclusion or successful test claim comes from this run.
+Parent completed the shared first resource import before the focused 3413-check run.

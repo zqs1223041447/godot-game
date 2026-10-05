@@ -1,0 +1,3216 @@
+{
+  "passed": true,
+  "baseline_commit": "71f4863fda4b02d1afd17db4cfa958c85139491f",
+  "numeric_decode": "Both catalog JSON documents decoded with parse_int=float and parse_float=float; object keys canonicalized for hash",
+  "old_catalog_semantic_sha256": "17c041f8271c5199c42c53dd2f28c404f0992f87f6c2ae2b3f9b5d008d88918e",
+  "current_catalog_semantic_sha256": "936eb70603b572bff57c8ab99a110cde42ecf2ed752b1973d210ceccbaeea1bb",
+  "projected_catalog_semantic_sha256": "17c041f8271c5199c42c53dd2f28c404f0992f87f6c2ae2b3f9b5d008d88918e",
+  "old_asset_pngs_unchanged": 61,
+  "old_reference_pngs_unchanged": 68,
+  "changed_source_nodes": [
+    "11820",
+    "15522",
+    "1581",
+    "20832",
+    "24133",
+    "25989",
+    "33676",
+    "34917",
+    "38683",
+    "40743",
+    "42009",
+    "42313",
+    "44203",
+    "45341",
+    "48803",
+    "48929",
+    "50029",
+    "5065",
+    "53118",
+    "54766",
+    "54798",
+    "60031",
+    "6043"
+  ],
+  "new_complete_standard_nodes": [
+    "15522",
+    "24133",
+    "25989",
+    "34917",
+    "42009",
+    "45341",
+    "48929",
+    "50029",
+    "5065",
+    "53118",
+    "60031",
+    "6043"
+  ],
+  "rendered_authoritative_values_checked": 59,
+  "all_html_anchor_and_local_asset_links_valid": true,
+  "approved_changes": [
+    {
+      "kind": "changed",
+      "path": [
+        "canonical",
+        "default_build",
+        "version"
+      ],
+      "category": "version",
+      "before": 35.0,
+      "after_sha256": "f85f0b0b202527348d18a78706e3ff04eddb2022895655cb63039afb9b99a3cd"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "canonical",
+        "default_stats",
+        "maximum_cold_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "canonical",
+        "default_stats",
+        "maximum_fire_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "canonical",
+        "default_stats",
+        "maximum_lightning_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "canonical",
+        "save_version"
+      ],
+      "category": "version",
+      "before": 35.0,
+      "after_sha256": "f85f0b0b202527348d18a78706e3ff04eddb2022895655cb63039afb9b99a3cd"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "configurations",
+        "fresh",
+        "stats",
+        "maximum_cold_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "configurations",
+        "fresh",
+        "stats",
+        "maximum_fire_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "configurations",
+        "fresh",
+        "stats",
+        "maximum_lightning_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "augment",
+        "example",
+        "save_version"
+      ],
+      "category": "version",
+      "before": 35.0,
+      "after_sha256": "f85f0b0b202527348d18a78706e3ff04eddb2022895655cb63039afb9b99a3cd"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "calibration_shard",
+        "save_version"
+      ],
+      "category": "version",
+      "before": 35.0,
+      "after_sha256": "f85f0b0b202527348d18a78706e3ff04eddb2022895655cb63039afb9b99a3cd"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "elevate",
+        "example",
+        "save_version"
+      ],
+      "category": "version",
+      "before": 35.0,
+      "after_sha256": "f85f0b0b202527348d18a78706e3ff04eddb2022895655cb63039afb9b99a3cd"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "enchant",
+        "example",
+        "save_version"
+      ],
+      "category": "version",
+      "before": 35.0,
+      "after_sha256": "f85f0b0b202527348d18a78706e3ff04eddb2022895655cb63039afb9b99a3cd"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "recalibrate",
+        "example",
+        "save_version"
+      ],
+      "category": "version",
+      "before": 35.0,
+      "after_sha256": "f85f0b0b202527348d18a78706e3ff04eddb2022895655cb63039afb9b99a3cd"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "reforge",
+        "example",
+        "save_version"
+      ],
+      "category": "version",
+      "before": 35.0,
+      "after_sha256": "f85f0b0b202527348d18a78706e3ff04eddb2022895655cb63039afb9b99a3cd"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "salvage",
+        "example",
+        "save_version"
+      ],
+      "category": "version",
+      "before": 35.0,
+      "after_sha256": "f85f0b0b202527348d18a78706e3ff04eddb2022895655cb63039afb9b99a3cd"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "targeted_reforge_critical",
+        "example",
+        "save_version"
+      ],
+      "category": "version",
+      "before": 35.0,
+      "after_sha256": "f85f0b0b202527348d18a78706e3ff04eddb2022895655cb63039afb9b99a3cd"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "targeted_reforge_damage",
+        "example",
+        "save_version"
+      ],
+      "category": "version",
+      "before": 35.0,
+      "after_sha256": "f85f0b0b202527348d18a78706e3ff04eddb2022895655cb63039afb9b99a3cd"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "targeted_reforge_life_leech",
+        "example",
+        "save_version"
+      ],
+      "category": "version",
+      "before": 35.0,
+      "after_sha256": "f85f0b0b202527348d18a78706e3ff04eddb2022895655cb63039afb9b99a3cd"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "targeted_reforge_mana_leech",
+        "example",
+        "save_version"
+      ],
+      "category": "version",
+      "before": 35.0,
+      "after_sha256": "f85f0b0b202527348d18a78706e3ff04eddb2022895655cb63039afb9b99a3cd"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "currencies",
+        "calibration_shard",
+        "save_version"
+      ],
+      "category": "version",
+      "before": 35.0,
+      "after_sha256": "f85f0b0b202527348d18a78706e3ff04eddb2022895655cb63039afb9b99a3cd"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "defenses",
+        "fire_resistance",
+        "description"
+      ],
+      "category": "cap_display_text",
+      "before": "本项目原创火焰防御，命中与燃烧共享有效抗性；原始抗性相加，有效值限制在 0%–75%，再依次消耗护盾和生命。",
+      "after_sha256": "8d25736490edf4fb67b0f756a3a770e38b86b2b5c56bd22f5041342cabfee115"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "elemental_resistance_caps"
+      ],
+      "category": "new_cap_examples",
+      "before": null,
+      "after_sha256": "1b7b6712ad8d7be368cf647db4d5e3434d5fd6acb1ca3161d8520e4cfc59cf5d"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "equipment",
+        "emberhide_vest",
+        "description"
+      ],
+      "category": "cap_display_text",
+      "before": "最大生命 +8，火焰抗性 +15%。火焰抗性作用于承受的火焰命中，有效上限 75%。",
+      "after_sha256": "ceed113923907c9aa5009ed7700255203577f294c6ff2cf3f243cef752c755fa"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "game_version"
+      ],
+      "category": "version",
+      "before": "0.58.0",
+      "after_sha256": "ef8ebf9d0ee7bea33082d33bd89c02feaf8206d2dfb1c3ce0b4faf746436b400"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "mana_guard",
+        "class_paths",
+        0,
+        "stats",
+        "maximum_cold_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "mana_guard",
+        "class_paths",
+        0,
+        "stats",
+        "maximum_fire_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "mana_guard",
+        "class_paths",
+        0,
+        "stats",
+        "maximum_lightning_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "mana_guard",
+        "class_paths",
+        1,
+        "stats",
+        "maximum_cold_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "mana_guard",
+        "class_paths",
+        1,
+        "stats",
+        "maximum_fire_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "mana_guard",
+        "class_paths",
+        1,
+        "stats",
+        "maximum_lightning_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "mana_guard",
+        "class_paths",
+        2,
+        "stats",
+        "maximum_cold_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "mana_guard",
+        "class_paths",
+        2,
+        "stats",
+        "maximum_fire_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "mana_guard",
+        "class_paths",
+        2,
+        "stats",
+        "maximum_lightning_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "mana_guard",
+        "class_paths",
+        3,
+        "stats",
+        "maximum_cold_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "mana_guard",
+        "class_paths",
+        3,
+        "stats",
+        "maximum_fire_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "mana_guard",
+        "class_paths",
+        3,
+        "stats",
+        "maximum_lightning_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "mana_guard",
+        "class_paths",
+        4,
+        "stats",
+        "maximum_cold_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "mana_guard",
+        "class_paths",
+        4,
+        "stats",
+        "maximum_fire_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "mana_guard",
+        "class_paths",
+        4,
+        "stats",
+        "maximum_lightning_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "mana_guard",
+        "class_paths",
+        5,
+        "stats",
+        "maximum_cold_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "mana_guard",
+        "class_paths",
+        5,
+        "stats",
+        "maximum_fire_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "mana_guard",
+        "class_paths",
+        5,
+        "stats",
+        "maximum_lightning_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "mana_guard",
+        "class_paths",
+        6,
+        "stats",
+        "maximum_cold_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "mana_guard",
+        "class_paths",
+        6,
+        "stats",
+        "maximum_fire_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "mana_guard",
+        "class_paths",
+        6,
+        "stats",
+        "maximum_lightning_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "melee_basic",
+        "equipped_examples",
+        "normal",
+        "stats",
+        "maximum_cold_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "melee_basic",
+        "equipped_examples",
+        "normal",
+        "stats",
+        "maximum_fire_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "melee_basic",
+        "equipped_examples",
+        "normal",
+        "stats",
+        "maximum_lightning_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "melee_basic",
+        "equipped_examples",
+        "six_t3_max",
+        "stats",
+        "maximum_cold_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "melee_basic",
+        "equipped_examples",
+        "six_t3_max",
+        "stats",
+        "maximum_fire_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "melee_basic",
+        "equipped_examples",
+        "six_t3_max",
+        "stats",
+        "maximum_lightning_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "melee_basic",
+        "save_version"
+      ],
+      "category": "version",
+      "before": 35.0,
+      "after_sha256": "f85f0b0b202527348d18a78706e3ff04eddb2022895655cb63039afb9b99a3cd"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "monster_attacks",
+        "locked_circle",
+        "example",
+        "armor_definition",
+        "description"
+      ],
+      "category": "cap_display_text",
+      "before": "最大生命 +8，火焰抗性 +15%。火焰抗性作用于承受的火焰命中，有效上限 75%。",
+      "after_sha256": "ceed113923907c9aa5009ed7700255203577f294c6ff2cf3f243cef752c755fa"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "monster_attacks",
+        "locked_circle_cold",
+        "example",
+        "cases",
+        "armored",
+        "defense_stats",
+        "maximum_cold_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "monster_attacks",
+        "locked_circle_cold",
+        "example",
+        "cases",
+        "armored",
+        "defense_stats",
+        "maximum_fire_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "monster_attacks",
+        "locked_circle_cold",
+        "example",
+        "cases",
+        "armored",
+        "defense_stats",
+        "maximum_lightning_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "monster_attacks",
+        "locked_circle_cold",
+        "example",
+        "cases",
+        "moving",
+        "defense_stats",
+        "maximum_cold_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "monster_attacks",
+        "locked_circle_cold",
+        "example",
+        "cases",
+        "moving",
+        "defense_stats",
+        "maximum_fire_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "monster_attacks",
+        "locked_circle_cold",
+        "example",
+        "cases",
+        "moving",
+        "defense_stats",
+        "maximum_lightning_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "monster_attacks",
+        "locked_circle_cold",
+        "example",
+        "cases",
+        "standing",
+        "defense_stats",
+        "maximum_cold_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "monster_attacks",
+        "locked_circle_cold",
+        "example",
+        "cases",
+        "standing",
+        "defense_stats",
+        "maximum_fire_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "monster_attacks",
+        "locked_circle_cold",
+        "example",
+        "cases",
+        "standing",
+        "defense_stats",
+        "maximum_lightning_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "monster_attacks",
+        "locked_circle_lightning",
+        "example",
+        "cases",
+        "armored",
+        "defense_stats",
+        "maximum_cold_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "monster_attacks",
+        "locked_circle_lightning",
+        "example",
+        "cases",
+        "armored",
+        "defense_stats",
+        "maximum_fire_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "monster_attacks",
+        "locked_circle_lightning",
+        "example",
+        "cases",
+        "armored",
+        "defense_stats",
+        "maximum_lightning_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "monster_attacks",
+        "locked_circle_lightning",
+        "example",
+        "cases",
+        "moving",
+        "defense_stats",
+        "maximum_cold_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "monster_attacks",
+        "locked_circle_lightning",
+        "example",
+        "cases",
+        "moving",
+        "defense_stats",
+        "maximum_fire_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "monster_attacks",
+        "locked_circle_lightning",
+        "example",
+        "cases",
+        "moving",
+        "defense_stats",
+        "maximum_lightning_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "monster_attacks",
+        "locked_circle_lightning",
+        "example",
+        "cases",
+        "standing",
+        "defense_stats",
+        "maximum_cold_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "monster_attacks",
+        "locked_circle_lightning",
+        "example",
+        "cases",
+        "standing",
+        "defense_stats",
+        "maximum_fire_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "monster_attacks",
+        "locked_circle_lightning",
+        "example",
+        "cases",
+        "standing",
+        "defense_stats",
+        "maximum_lightning_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "normal_gem_trading",
+        "schema"
+      ],
+      "category": "version",
+      "before": 35.0,
+      "after_sha256": "f85f0b0b202527348d18a78706e3ff04eddb2022895655cb63039afb9b99a3cd"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "save_version"
+      ],
+      "category": "version",
+      "before": 35.0,
+      "after_sha256": "f85f0b0b202527348d18a78706e3ff04eddb2022895655cb63039afb9b99a3cd"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "source_faster_burn",
+        "legal_build_examples",
+        0,
+        "stats",
+        "maximum_cold_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "source_faster_burn",
+        "legal_build_examples",
+        0,
+        "stats",
+        "maximum_fire_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "source_faster_burn",
+        "legal_build_examples",
+        0,
+        "stats",
+        "maximum_lightning_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "source_fire_dot",
+        "legal_build_examples",
+        0,
+        "stats",
+        "maximum_cold_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "source_fire_dot",
+        "legal_build_examples",
+        0,
+        "stats",
+        "maximum_fire_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "source_fire_dot",
+        "legal_build_examples",
+        0,
+        "stats",
+        "maximum_lightning_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "source_fire_dot",
+        "legal_build_examples",
+        1,
+        "stats",
+        "maximum_cold_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "source_fire_dot",
+        "legal_build_examples",
+        1,
+        "stats",
+        "maximum_fire_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "source_fire_dot",
+        "legal_build_examples",
+        1,
+        "stats",
+        "maximum_lightning_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "source_fire_dot",
+        "legal_build_examples",
+        2,
+        "stats",
+        "maximum_cold_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "source_fire_dot",
+        "legal_build_examples",
+        2,
+        "stats",
+        "maximum_fire_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "source_fire_dot",
+        "legal_build_examples",
+        2,
+        "stats",
+        "maximum_lightning_resistance_add"
+      ],
+      "category": "new_zero_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "11820",
+        "execution",
+        "grants"
+      ],
+      "category": "source_execution",
+      "before": [],
+      "after_sha256": "a2b086c2d173d5d068745c11f8e66561dc8938c7936049a95c0a78a2525a1ae6"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "11820",
+        "execution",
+        "status"
+      ],
+      "category": "source_execution",
+      "before": "unsupported",
+      "after_sha256": "8ac24611cfe47c129e37108bc6adc6843c4fe8fb9c37c27fac8a1835ba660307"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "11820",
+        "execution",
+        "supported"
+      ],
+      "category": "source_execution",
+      "before": [],
+      "after_sha256": "5995497f0e2a175d5fe1b18b1ead6bce387f90a34b71268597e07e366d6fcfff"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "11820",
+        "execution",
+        "unsupported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "+1% to all maximum Elemental Resistances",
+        "20% reduced Elemental Ailment Duration on you",
+        "20% reduced Effect of Chill and Shock on you"
+      ],
+      "after_sha256": "422be1776655871dd334182eb9fd99e3a6b0e3c7b9d6fd3f72b2834f357a9e19"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "15522",
+        "execution",
+        "grants"
+      ],
+      "category": "source_execution",
+      "before": [],
+      "after_sha256": "135b918c3d2da5d4980e617d801947174bef3e3c0897209994a56d0063dbb2f9"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "15522",
+        "execution",
+        "status"
+      ],
+      "category": "source_execution",
+      "before": "unsupported",
+      "after_sha256": "1e5941238a72b1f89a5d4cfad9164d5d37f08fab209161841ebf39bf057083d4"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "15522",
+        "execution",
+        "supported"
+      ],
+      "category": "source_execution",
+      "before": [],
+      "after_sha256": "c1c8876147a5199bbb21351ce5d2e15ac52e5c51d3ecb248071e4f3cf0bc1978"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "15522",
+        "execution",
+        "unsupported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "+1% to maximum Lightning Resistance"
+      ],
+      "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "1581",
+        "execution",
+        "grants"
+      ],
+      "category": "source_execution",
+      "before": [
+        {
+          "mode": "flat",
+          "stat": "fire_resistance",
+          "value": 0.2
+        }
+      ],
+      "after_sha256": "117396154b46b183213b66094c5622ea5f35bd5342e96a0fc04d3e70f7fae430"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "1581",
+        "execution",
+        "supported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "+20% to Fire Resistance"
+      ],
+      "after_sha256": "346cad4fb624f375f82eec6c7de2d946f1033460860bbc3ffb92322014f6994b"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "1581",
+        "execution",
+        "unsupported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "+1% to maximum Fire Resistance",
+        "30% chance to Avoid being Ignited"
+      ],
+      "after_sha256": "028cee5439bb5527e8b71fbe7e616ce6cbb8063b8cd999e4f5799dee62e3fc19"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "20832",
+        "execution",
+        "grants"
+      ],
+      "category": "source_execution",
+      "before": [],
+      "after_sha256": "a2b086c2d173d5d068745c11f8e66561dc8938c7936049a95c0a78a2525a1ae6"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "20832",
+        "execution",
+        "status"
+      ],
+      "category": "source_execution",
+      "before": "unsupported",
+      "after_sha256": "8ac24611cfe47c129e37108bc6adc6843c4fe8fb9c37c27fac8a1835ba660307"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "20832",
+        "execution",
+        "supported"
+      ],
+      "category": "source_execution",
+      "before": [],
+      "after_sha256": "5995497f0e2a175d5fe1b18b1ead6bce387f90a34b71268597e07e366d6fcfff"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "20832",
+        "execution",
+        "unsupported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "+4% Chance to Block Attack Damage while holding a Shield",
+        "+4% Chance to Block Spell Damage while holding a Shield",
+        "+1% to all maximum Elemental Resistances"
+      ],
+      "after_sha256": "24935cb47e395a1e12a77ba7e39d35d5793b63468c2ccb3f6702b3e7828db225"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "24133",
+        "execution",
+        "grants"
+      ],
+      "category": "source_execution",
+      "before": [
+        {
+          "mode": "increased",
+          "stat": "evasion_increased",
+          "value": 0.24
+        },
+        {
+          "mode": "flat",
+          "stat": "fire_resistance",
+          "value": 0.08
+        },
+        {
+          "mode": "flat",
+          "stat": "cold_resistance",
+          "value": 0.08
+        },
+        {
+          "mode": "flat",
+          "stat": "lightning_resistance",
+          "value": 0.08
+        }
+      ],
+      "after_sha256": "83b7fceaa25319d6770b493d6f6cccb0245296d10487bb98c434b82695028bea"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "24133",
+        "execution",
+        "status"
+      ],
+      "category": "source_execution",
+      "before": "partial",
+      "after_sha256": "1e5941238a72b1f89a5d4cfad9164d5d37f08fab209161841ebf39bf057083d4"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "24133",
+        "execution",
+        "supported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "24% increased Evasion Rating",
+        "+8% to all Elemental Resistances"
+      ],
+      "after_sha256": "94ee876e096f2fc9814015adfcc7c4aa00ea094e060f80486f86f9673049bd50"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "24133",
+        "execution",
+        "unsupported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "+1% to maximum Cold Resistance"
+      ],
+      "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "25989",
+        "execution",
+        "grants"
+      ],
+      "category": "source_execution",
+      "before": [],
+      "after_sha256": "f1417daa6b1439bc45adbccc64ded5ae4b16c6a0ce568c72aa15b7da7e5d10e9"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "25989",
+        "execution",
+        "status"
+      ],
+      "category": "source_execution",
+      "before": "unsupported",
+      "after_sha256": "1e5941238a72b1f89a5d4cfad9164d5d37f08fab209161841ebf39bf057083d4"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "25989",
+        "execution",
+        "supported"
+      ],
+      "category": "source_execution",
+      "before": [],
+      "after_sha256": "d0e6d51c43354fced3ff087cc21ba566461fd50006a95af50793e807d90632ae"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "25989",
+        "execution",
+        "unsupported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "+2% to all maximum Elemental Resistances"
+      ],
+      "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "33676",
+        "execution",
+        "grants"
+      ],
+      "category": "source_execution",
+      "before": [
+        {
+          "mode": "flat",
+          "stat": "cold_resistance",
+          "value": 0.2
+        }
+      ],
+      "after_sha256": "c264d5b5f2e84826a3d8e514b45319a9eb8e56064a11ba2f7e74ac1911c6355a"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "33676",
+        "execution",
+        "supported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "+20% to Cold Resistance"
+      ],
+      "after_sha256": "8f73c0fbf50e756080b931e1bf63b2111e0871593e6adf247813bcb4579a1fd1"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "33676",
+        "execution",
+        "unsupported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "+1% to maximum Cold Resistance",
+        "30% chance to Avoid being Frozen"
+      ],
+      "after_sha256": "3335499c500ac9c6751f3d91cd273963403c2633bff621a2e4ef24c0150712be"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "34917",
+        "execution",
+        "grants"
+      ],
+      "category": "source_execution",
+      "before": [],
+      "after_sha256": "e3645cd9acde86ea098a8f72c32c6676b76ec5e0a33aab9ec13c2a5b79d55b77"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "34917",
+        "execution",
+        "status"
+      ],
+      "category": "source_execution",
+      "before": "unsupported",
+      "after_sha256": "1e5941238a72b1f89a5d4cfad9164d5d37f08fab209161841ebf39bf057083d4"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "34917",
+        "execution",
+        "supported"
+      ],
+      "category": "source_execution",
+      "before": [],
+      "after_sha256": "13804bb23d588ae6d43094d20930d76634153ff675a3c5c5c4d1b9f1ebba2616"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "34917",
+        "execution",
+        "unsupported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "+1% to maximum Cold Resistance"
+      ],
+      "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "38683",
+        "execution",
+        "grants"
+      ],
+      "category": "source_execution",
+      "before": [
+        {
+          "mode": "increased",
+          "stat": "flask_life_recovery_increased",
+          "value": 0.1
+        }
+      ],
+      "after_sha256": "ed7d3f1fe022d752c82d18ead062c1e243bde37f600c0d6bb406849c77d5f9b4"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "38683",
+        "execution",
+        "status"
+      ],
+      "category": "source_execution",
+      "before": "partial",
+      "after_sha256": "1e5941238a72b1f89a5d4cfad9164d5d37f08fab209161841ebf39bf057083d4"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "38683",
+        "execution",
+        "supported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "10% increased Life Recovery from Flasks"
+      ],
+      "after_sha256": "e72a73dc9f4dc5302bed7929f6073518e5f93eeb159363c3804223fa9d7113f2"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "38683",
+        "execution",
+        "unsupported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "+2% to maximum Cold Resistance"
+      ],
+      "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "40743",
+        "execution",
+        "grants"
+      ],
+      "category": "source_execution",
+      "before": [],
+      "after_sha256": "a2b086c2d173d5d068745c11f8e66561dc8938c7936049a95c0a78a2525a1ae6"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "40743",
+        "execution",
+        "status"
+      ],
+      "category": "source_execution",
+      "before": "unsupported",
+      "after_sha256": "8ac24611cfe47c129e37108bc6adc6843c4fe8fb9c37c27fac8a1835ba660307"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "40743",
+        "execution",
+        "supported"
+      ],
+      "category": "source_execution",
+      "before": [],
+      "after_sha256": "5995497f0e2a175d5fe1b18b1ead6bce387f90a34b71268597e07e366d6fcfff"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "40743",
+        "execution",
+        "unsupported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "+1% to all maximum Elemental Resistances",
+        "20% chance to Avoid Elemental Ailments"
+      ],
+      "after_sha256": "57a032957a3c3fe4f2bbcc2b08fa9049786e85d0ea28878315b60f74085c0947"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "42009",
+        "execution",
+        "grants"
+      ],
+      "category": "source_execution",
+      "before": [
+        {
+          "mode": "flat",
+          "stat": "armour",
+          "value": 150.0
+        },
+        {
+          "mode": "increased",
+          "stat": "armour_increased",
+          "value": 0.3
+        }
+      ],
+      "after_sha256": "309d946c0b1938c744642b2fee9b7b88f4f7f3363d06923428d6cb627257d4b1"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "42009",
+        "execution",
+        "status"
+      ],
+      "category": "source_execution",
+      "before": "partial",
+      "after_sha256": "1e5941238a72b1f89a5d4cfad9164d5d37f08fab209161841ebf39bf057083d4"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "42009",
+        "execution",
+        "supported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "+150 to Armour",
+        "30% increased Armour"
+      ],
+      "after_sha256": "f88c8f37586a5bec4cf5e3b6fd154173c9f3aaf33e51fe0dbdffd5f4429f59fc"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "42009",
+        "execution",
+        "unsupported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "+1% to all maximum Elemental Resistances"
+      ],
+      "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "42313",
+        "execution",
+        "grants"
+      ],
+      "category": "source_execution",
+      "before": [
+        {
+          "mode": "increased",
+          "stat": "evasion_increased",
+          "value": 0.3
+        }
+      ],
+      "after_sha256": "ef12db0e7021322886f670163ca11ee3d3d384a77dd2e2e2841b68106f4f2377"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "42313",
+        "execution",
+        "status"
+      ],
+      "category": "source_execution",
+      "before": "partial",
+      "after_sha256": "1e5941238a72b1f89a5d4cfad9164d5d37f08fab209161841ebf39bf057083d4"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "42313",
+        "execution",
+        "supported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "30% increased Evasion Rating"
+      ],
+      "after_sha256": "098cec3903cd649e1fe2c98df56e7c63c0d462f55511183a5aed722e2265d009"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "42313",
+        "execution",
+        "unsupported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "+1% to all maximum Elemental Resistances"
+      ],
+      "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "44203",
+        "execution",
+        "grants"
+      ],
+      "category": "source_execution",
+      "before": [
+        {
+          "mode": "increased",
+          "stat": "max_mana",
+          "value": 0.08
+        }
+      ],
+      "after_sha256": "0f77da60d20af717bbe9b36d1e7dfee31c3616f16a7bcda335ee1d8ea99a3920"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "44203",
+        "execution",
+        "status"
+      ],
+      "category": "source_execution",
+      "before": "partial",
+      "after_sha256": "1e5941238a72b1f89a5d4cfad9164d5d37f08fab209161841ebf39bf057083d4"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "44203",
+        "execution",
+        "supported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "8% increased maximum Mana"
+      ],
+      "after_sha256": "1c7b510f151f38772f02a822143556eeeeaa870636b7f9002ce5b51fd5e5d64c"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "44203",
+        "execution",
+        "unsupported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "+2% to maximum Lightning Resistance"
+      ],
+      "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "45341",
+        "execution",
+        "grants"
+      ],
+      "category": "source_execution",
+      "before": [],
+      "after_sha256": "e3645cd9acde86ea098a8f72c32c6676b76ec5e0a33aab9ec13c2a5b79d55b77"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "45341",
+        "execution",
+        "status"
+      ],
+      "category": "source_execution",
+      "before": "unsupported",
+      "after_sha256": "1e5941238a72b1f89a5d4cfad9164d5d37f08fab209161841ebf39bf057083d4"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "45341",
+        "execution",
+        "supported"
+      ],
+      "category": "source_execution",
+      "before": [],
+      "after_sha256": "13804bb23d588ae6d43094d20930d76634153ff675a3c5c5c4d1b9f1ebba2616"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "45341",
+        "execution",
+        "unsupported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "+1% to maximum Cold Resistance"
+      ],
+      "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "48803",
+        "execution",
+        "grants"
+      ],
+      "category": "source_execution",
+      "before": [
+        {
+          "mode": "flat",
+          "stat": "life_regen_percent",
+          "value": 0.01
+        }
+      ],
+      "after_sha256": "b6bbecf151249b3ad6d2db5985dee98ce255c8b44970557e08eb84ded1c913aa"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "48803",
+        "execution",
+        "status"
+      ],
+      "category": "source_execution",
+      "before": "partial",
+      "after_sha256": "1e5941238a72b1f89a5d4cfad9164d5d37f08fab209161841ebf39bf057083d4"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "48803",
+        "execution",
+        "supported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "Regenerate 1% of Life per second"
+      ],
+      "after_sha256": "d4427e8cca2d7466a8b97a64b3306ef36c33aff51f4dbf5829a5c0100a87907d"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "48803",
+        "execution",
+        "unsupported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "+2% to maximum Fire Resistance"
+      ],
+      "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "48929",
+        "execution",
+        "grants"
+      ],
+      "category": "source_execution",
+      "before": [],
+      "after_sha256": "c9a2b364530b5e3ac7fb9ba4144b546434a7a10d1645dc8f9bedecbdc68736d2"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "48929",
+        "execution",
+        "status"
+      ],
+      "category": "source_execution",
+      "before": "unsupported",
+      "after_sha256": "1e5941238a72b1f89a5d4cfad9164d5d37f08fab209161841ebf39bf057083d4"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "48929",
+        "execution",
+        "supported"
+      ],
+      "category": "source_execution",
+      "before": [],
+      "after_sha256": "be575ca372d40f46f730ec17849b483a48246d2880873316b5acc4aa1725b069"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "48929",
+        "execution",
+        "unsupported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "+1% to maximum Fire Resistance"
+      ],
+      "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "50029",
+        "execution",
+        "grants"
+      ],
+      "category": "source_execution",
+      "before": [
+        {
+          "mode": "increased",
+          "stat": "max_shield",
+          "value": 0.18
+        },
+        {
+          "mode": "increased",
+          "stat": "shield_recharge_rate_increased",
+          "value": 0.15
+        }
+      ],
+      "after_sha256": "f5eee416d10e6f6df3535630009dbd8d9768cb09826ce05617bc866d80189f4b"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "50029",
+        "execution",
+        "status"
+      ],
+      "category": "source_execution",
+      "before": "partial",
+      "after_sha256": "1e5941238a72b1f89a5d4cfad9164d5d37f08fab209161841ebf39bf057083d4"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "50029",
+        "execution",
+        "supported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "18% increased maximum Energy Shield",
+        "15% increased Energy Shield Recharge Rate"
+      ],
+      "after_sha256": "a168b4d8dd856e524b171d83b284a4f6223cefefbacc63aab3f51a136d83c703"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "50029",
+        "execution",
+        "unsupported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "+1% to maximum Lightning Resistance"
+      ],
+      "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "5065",
+        "execution",
+        "grants"
+      ],
+      "category": "source_execution",
+      "before": [],
+      "after_sha256": "135b918c3d2da5d4980e617d801947174bef3e3c0897209994a56d0063dbb2f9"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "5065",
+        "execution",
+        "status"
+      ],
+      "category": "source_execution",
+      "before": "unsupported",
+      "after_sha256": "1e5941238a72b1f89a5d4cfad9164d5d37f08fab209161841ebf39bf057083d4"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "5065",
+        "execution",
+        "supported"
+      ],
+      "category": "source_execution",
+      "before": [],
+      "after_sha256": "c1c8876147a5199bbb21351ce5d2e15ac52e5c51d3ecb248071e4f3cf0bc1978"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "5065",
+        "execution",
+        "unsupported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "+1% to maximum Lightning Resistance"
+      ],
+      "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "53118",
+        "execution",
+        "grants"
+      ],
+      "category": "source_execution",
+      "before": [
+        {
+          "mode": "increased",
+          "stat": "max_health",
+          "value": 0.08
+        },
+        {
+          "mode": "flat",
+          "stat": "fire_resistance",
+          "value": 0.08
+        }
+      ],
+      "after_sha256": "7a790b3532922813a5ae610f3ee8db89639a0b7bb075c4d1da350bd2a48f9e89"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "53118",
+        "execution",
+        "status"
+      ],
+      "category": "source_execution",
+      "before": "partial",
+      "after_sha256": "1e5941238a72b1f89a5d4cfad9164d5d37f08fab209161841ebf39bf057083d4"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "53118",
+        "execution",
+        "supported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "8% increased maximum Life",
+        "+8% to Fire Resistance"
+      ],
+      "after_sha256": "352fc283062cf55b371298aaf04b77b6df297bd941b02bc8b23377dbb3fd5aa9"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "53118",
+        "execution",
+        "unsupported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "+1% to maximum Fire Resistance"
+      ],
+      "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "54766",
+        "execution",
+        "grants"
+      ],
+      "category": "source_execution",
+      "before": [
+        {
+          "mode": "increased",
+          "stat": "armour_increased",
+          "value": 0.3
+        }
+      ],
+      "after_sha256": "bffb4ef3d52fcb48ecf7a5085eb8c4c1a7b05a2fac97fd416864331e88c70db1"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "54766",
+        "execution",
+        "status"
+      ],
+      "category": "source_execution",
+      "before": "partial",
+      "after_sha256": "1e5941238a72b1f89a5d4cfad9164d5d37f08fab209161841ebf39bf057083d4"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "54766",
+        "execution",
+        "supported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "30% increased Armour"
+      ],
+      "after_sha256": "206cdecf77697c1853f598afc9e714262ecdeac808e5cf412a8166bb5208184b"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "54766",
+        "execution",
+        "unsupported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "+1% to all maximum Elemental Resistances"
+      ],
+      "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "54798",
+        "execution",
+        "grants"
+      ],
+      "category": "source_execution",
+      "before": [
+        {
+          "mode": "flat",
+          "stat": "lightning_resistance",
+          "value": 0.2
+        }
+      ],
+      "after_sha256": "83e7b72f0c38e1e10123a01eaa51edcc3257f39ce5256141a8ae03763ba9e320"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "54798",
+        "execution",
+        "supported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "+20% to Lightning Resistance"
+      ],
+      "after_sha256": "ca76c4464da3e7df03ce1be8619e0344ead833c8e0b1469b81af46e5db946046"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "54798",
+        "execution",
+        "unsupported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "+1% to maximum Lightning Resistance",
+        "30% chance to Avoid being Shocked"
+      ],
+      "after_sha256": "0764e9aae60a801a34005f01572074d9e3cb8a76a79813be1f448dfdb7d62c92"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "60031",
+        "execution",
+        "grants"
+      ],
+      "category": "source_execution",
+      "before": [],
+      "after_sha256": "f1417daa6b1439bc45adbccc64ded5ae4b16c6a0ce568c72aa15b7da7e5d10e9"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "60031",
+        "execution",
+        "status"
+      ],
+      "category": "source_execution",
+      "before": "unsupported",
+      "after_sha256": "1e5941238a72b1f89a5d4cfad9164d5d37f08fab209161841ebf39bf057083d4"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "60031",
+        "execution",
+        "supported"
+      ],
+      "category": "source_execution",
+      "before": [],
+      "after_sha256": "d0e6d51c43354fced3ff087cc21ba566461fd50006a95af50793e807d90632ae"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "60031",
+        "execution",
+        "unsupported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "+2% to all maximum Elemental Resistances"
+      ],
+      "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "6043",
+        "execution",
+        "grants"
+      ],
+      "category": "source_execution",
+      "before": [],
+      "after_sha256": "c9a2b364530b5e3ac7fb9ba4144b546434a7a10d1645dc8f9bedecbdc68736d2"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "6043",
+        "execution",
+        "status"
+      ],
+      "category": "source_execution",
+      "before": "unsupported",
+      "after_sha256": "1e5941238a72b1f89a5d4cfad9164d5d37f08fab209161841ebf39bf057083d4"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "6043",
+        "execution",
+        "supported"
+      ],
+      "category": "source_execution",
+      "before": [],
+      "after_sha256": "be575ca372d40f46f730ec17849b483a48246d2880873316b5acc4aa1725b069"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "6043",
+        "execution",
+        "unsupported"
+      ],
+      "category": "source_execution",
+      "before": [
+        "+1% to maximum Fire Resistance"
+      ],
+      "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "+1% to all maximum Elemental Resistances",
+        "status",
+        "grants"
+      ],
+      "category": "dynamic_localization",
+      "before": [],
+      "after_sha256": "a2b086c2d173d5d068745c11f8e66561dc8938c7936049a95c0a78a2525a1ae6"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "+1% to all maximum Elemental Resistances",
+        "status",
+        "implemented"
+      ],
+      "category": "dynamic_localization",
+      "before": false,
+      "after_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "+1% to all maximum Elemental Resistances",
+        "status",
+        "parser_supported"
+      ],
+      "category": "dynamic_localization",
+      "before": false,
+      "after_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "+1% to all maximum Elemental Resistances",
+        "text"
+      ],
+      "category": "dynamic_localization",
+      "before": "所有最大元素抗性+1%（暂未实装）",
+      "after_sha256": "a161f247977b04d0aeb1da45605caccff3c1ccdfce6c1e1cf7c92dbcfb0c9b65"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "+1% to maximum Cold Resistance",
+        "status",
+        "grants"
+      ],
+      "category": "dynamic_localization",
+      "before": [],
+      "after_sha256": "e3645cd9acde86ea098a8f72c32c6676b76ec5e0a33aab9ec13c2a5b79d55b77"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "+1% to maximum Cold Resistance",
+        "status",
+        "implemented"
+      ],
+      "category": "dynamic_localization",
+      "before": false,
+      "after_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "+1% to maximum Cold Resistance",
+        "status",
+        "parser_supported"
+      ],
+      "category": "dynamic_localization",
+      "before": false,
+      "after_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "+1% to maximum Cold Resistance",
+        "text"
+      ],
+      "category": "dynamic_localization",
+      "before": "最大冰霜抗性+1%（暂未实装）",
+      "after_sha256": "b64e7fd386bec1cf0c4b2761c15b4dc3cf002eab92b1c6989b27909c89a0dc65"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "+1% to maximum Fire Resistance",
+        "status",
+        "grants"
+      ],
+      "category": "dynamic_localization",
+      "before": [],
+      "after_sha256": "c9a2b364530b5e3ac7fb9ba4144b546434a7a10d1645dc8f9bedecbdc68736d2"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "+1% to maximum Fire Resistance",
+        "status",
+        "implemented"
+      ],
+      "category": "dynamic_localization",
+      "before": false,
+      "after_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "+1% to maximum Fire Resistance",
+        "status",
+        "parser_supported"
+      ],
+      "category": "dynamic_localization",
+      "before": false,
+      "after_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "+1% to maximum Fire Resistance",
+        "text"
+      ],
+      "category": "dynamic_localization",
+      "before": "最大火焰抗性+1%（暂未实装）",
+      "after_sha256": "9baa32198f589fb92e65322c743655df14f64fd0f72ebd453e4bce66611c5540"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "+1% to maximum Lightning Resistance",
+        "status",
+        "grants"
+      ],
+      "category": "dynamic_localization",
+      "before": [],
+      "after_sha256": "135b918c3d2da5d4980e617d801947174bef3e3c0897209994a56d0063dbb2f9"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "+1% to maximum Lightning Resistance",
+        "status",
+        "implemented"
+      ],
+      "category": "dynamic_localization",
+      "before": false,
+      "after_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "+1% to maximum Lightning Resistance",
+        "status",
+        "parser_supported"
+      ],
+      "category": "dynamic_localization",
+      "before": false,
+      "after_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "+1% to maximum Lightning Resistance",
+        "text"
+      ],
+      "category": "dynamic_localization",
+      "before": "最大闪电抗性+1%（暂未实装）",
+      "after_sha256": "c3d7694e0a9aff69dc8b2f2bb7e7b239e199b832ba03d18d4171a50aa33559c3"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "+2% to all maximum Elemental Resistances",
+        "status",
+        "grants"
+      ],
+      "category": "dynamic_localization",
+      "before": [],
+      "after_sha256": "f1417daa6b1439bc45adbccc64ded5ae4b16c6a0ce568c72aa15b7da7e5d10e9"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "+2% to all maximum Elemental Resistances",
+        "status",
+        "implemented"
+      ],
+      "category": "dynamic_localization",
+      "before": false,
+      "after_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "+2% to all maximum Elemental Resistances",
+        "status",
+        "parser_supported"
+      ],
+      "category": "dynamic_localization",
+      "before": false,
+      "after_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "+2% to all maximum Elemental Resistances",
+        "text"
+      ],
+      "category": "dynamic_localization",
+      "before": "所有最大元素抗性+2%（暂未实装）",
+      "after_sha256": "5fec9dfb997ce5bab9dd6af3d555355d3bc0628fad6de96ec39416e16ba35d00"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "+2% to maximum Cold Resistance",
+        "status",
+        "grants"
+      ],
+      "category": "dynamic_localization",
+      "before": [],
+      "after_sha256": "5509daf45d7adbf8e35525b5eef903084a2fce816d6dd7c1baf4bc14da0155a3"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "+2% to maximum Cold Resistance",
+        "status",
+        "implemented"
+      ],
+      "category": "dynamic_localization",
+      "before": false,
+      "after_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "+2% to maximum Cold Resistance",
+        "status",
+        "parser_supported"
+      ],
+      "category": "dynamic_localization",
+      "before": false,
+      "after_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "+2% to maximum Cold Resistance",
+        "text"
+      ],
+      "category": "dynamic_localization",
+      "before": "最大冰霜抗性+2%（暂未实装）",
+      "after_sha256": "3c558d6f47e373f24466b4286f5ab8fc7ba4d47f22277485a3cc5791e687a1a7"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "+2% to maximum Fire Resistance",
+        "status",
+        "grants"
+      ],
+      "category": "dynamic_localization",
+      "before": [],
+      "after_sha256": "196afc55d79ebb22981e38549a534b0bb33f5ebe7193742330d903e4d77fb04b"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "+2% to maximum Fire Resistance",
+        "status",
+        "implemented"
+      ],
+      "category": "dynamic_localization",
+      "before": false,
+      "after_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "+2% to maximum Fire Resistance",
+        "status",
+        "parser_supported"
+      ],
+      "category": "dynamic_localization",
+      "before": false,
+      "after_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "+2% to maximum Fire Resistance",
+        "text"
+      ],
+      "category": "dynamic_localization",
+      "before": "最大火焰抗性+2%（暂未实装）",
+      "after_sha256": "ba91f1b89c504edf0a9f419439f33379da8ba9aefda307350eb5ea57ea67d5b3"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "+2% to maximum Lightning Resistance",
+        "status",
+        "grants"
+      ],
+      "category": "dynamic_localization",
+      "before": [],
+      "after_sha256": "2c6de06f76fbe78f5302d20a5bbd84b94bb2536226fd60021a7a9a44543a7e20"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "+2% to maximum Lightning Resistance",
+        "status",
+        "implemented"
+      ],
+      "category": "dynamic_localization",
+      "before": false,
+      "after_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "+2% to maximum Lightning Resistance",
+        "status",
+        "parser_supported"
+      ],
+      "category": "dynamic_localization",
+      "before": false,
+      "after_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "+2% to maximum Lightning Resistance",
+        "text"
+      ],
+      "category": "dynamic_localization",
+      "before": "最大闪电抗性+2%（暂未实装）",
+      "after_sha256": "c182c71140b6a19a74f7f000906723bfae1be8ff81aee04e72413f1a9ce12833"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "nodes",
+        "11820",
+        "stats"
+      ],
+      "category": "dynamic_localization",
+      "before": "所有最大元素抗性+1%（暂未实装）\n元素异常状态持续时间降低20%（在你身上）（暂未实装）\n效果冰缓与感电降低20%（在你身上）（暂未实装）",
+      "after_sha256": "8a3961490f21b39179f884bf60a8440418e541228c8794a524df2f5ddc472265"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "nodes",
+        "15522",
+        "stats"
+      ],
+      "category": "dynamic_localization",
+      "before": "最大闪电抗性+1%（暂未实装）",
+      "after_sha256": "c3d7694e0a9aff69dc8b2f2bb7e7b239e199b832ba03d18d4171a50aa33559c3"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "nodes",
+        "1581",
+        "stats"
+      ],
+      "category": "dynamic_localization",
+      "before": "最大火焰抗性+1%（暂未实装）\n火焰抗性+20%\n有30%几率避免点燃（暂未实装）",
+      "after_sha256": "aca6a742535b09aa554f7fcb56720f4aef5323a391af8e37d5f485bcb611ad1a"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "nodes",
+        "20832",
+        "stats"
+      ],
+      "category": "dynamic_localization",
+      "before": "格挡攻击伤害几率+4%（持有护盾时）（暂未实装）\n格挡法术伤害几率+4%（持有护盾时）（暂未实装）\n所有最大元素抗性+1%（暂未实装）",
+      "after_sha256": "3a37475dd68c85243c974d8c505e6a109857da5cc2113b092b6fa7f6fce10cf3"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "nodes",
+        "24133",
+        "stats"
+      ],
+      "category": "dynamic_localization",
+      "before": "闪避值提高24%\n所有元素抗性+8%\n最大冰霜抗性+1%（暂未实装）",
+      "after_sha256": "5bc567e9611c9ab0908050aa2024c4da29d96d80e2084ed30ab8e4789f4ce06a"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "nodes",
+        "25989",
+        "stats"
+      ],
+      "category": "dynamic_localization",
+      "before": "所有最大元素抗性+2%（暂未实装）",
+      "after_sha256": "5fec9dfb997ce5bab9dd6af3d555355d3bc0628fad6de96ec39416e16ba35d00"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "nodes",
+        "33676",
+        "stats"
+      ],
+      "category": "dynamic_localization",
+      "before": "最大冰霜抗性+1%（暂未实装）\n冰霜抗性+20%\n有30%几率避免冻结（暂未实装）",
+      "after_sha256": "1dcf9c4b63ee428407daf819c9b25e7a4d04c9497336deb9675890a2741694ae"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "nodes",
+        "34917",
+        "stats"
+      ],
+      "category": "dynamic_localization",
+      "before": "最大冰霜抗性+1%（暂未实装）",
+      "after_sha256": "b64e7fd386bec1cf0c4b2761c15b4dc3cf002eab92b1c6989b27909c89a0dc65"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "nodes",
+        "38683",
+        "stats"
+      ],
+      "category": "dynamic_localization",
+      "before": "最大冰霜抗性+2%（暂未实装）\n生命回复提高10%（来自药剂）",
+      "after_sha256": "23dea2b09511e7b81838a39d9047ed1f98e101a7ff16ff12ed793e30b982b597"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "nodes",
+        "40743",
+        "stats"
+      ],
+      "category": "dynamic_localization",
+      "before": "所有最大元素抗性+1%（暂未实装）\n有20%几率避免元素异常状态（暂未实装）",
+      "after_sha256": "ad8e3092927e1744521a6832fe6b6660c511f01ac4f3975eec05433114d15414"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "nodes",
+        "42009",
+        "stats"
+      ],
+      "category": "dynamic_localization",
+      "before": "护甲+150\n护甲提高30%\n所有最大元素抗性+1%（暂未实装）",
+      "after_sha256": "aaa3ff772748d409a4649cfad3d280888462eea38de627400b530b8b4ca31334"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "nodes",
+        "42313",
+        "stats"
+      ],
+      "category": "dynamic_localization",
+      "before": "闪避值提高30%\n所有最大元素抗性+1%（暂未实装）",
+      "after_sha256": "fe233a2d44c649c36c4e78cb98186a080179ff8bfd5ebbded633729aea5eefeb"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "nodes",
+        "44203",
+        "stats"
+      ],
+      "category": "dynamic_localization",
+      "before": "最大魔力提高8%\n最大闪电抗性+2%（暂未实装）",
+      "after_sha256": "2be6d3a12638d91b9849192ee2900d500c71ef57552f0cb05fd19f21749fee0c"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "nodes",
+        "45341",
+        "stats"
+      ],
+      "category": "dynamic_localization",
+      "before": "最大冰霜抗性+1%（暂未实装）",
+      "after_sha256": "b64e7fd386bec1cf0c4b2761c15b4dc3cf002eab92b1c6989b27909c89a0dc65"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "nodes",
+        "48803",
+        "stats"
+      ],
+      "category": "dynamic_localization",
+      "before": "最大火焰抗性+2%（暂未实装）\n每秒回复相当于最大生命1%的生命",
+      "after_sha256": "5867e8958618805a80f522c23372da9e8c0208c0b7b81c706ca5b04e3cf1d23b"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "nodes",
+        "48929",
+        "stats"
+      ],
+      "category": "dynamic_localization",
+      "before": "最大火焰抗性+1%（暂未实装）",
+      "after_sha256": "9baa32198f589fb92e65322c743655df14f64fd0f72ebd453e4bce66611c5540"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "nodes",
+        "50029",
+        "stats"
+      ],
+      "category": "dynamic_localization",
+      "before": "最大能量护盾提高18%\n能量护盾充能速度提高15%\n最大闪电抗性+1%（暂未实装）",
+      "after_sha256": "45d4de0bfea5f4477a5120d14e0f8bd39985dfe53938fcd9ee9f5c6b6bc9f68d"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "nodes",
+        "5065",
+        "stats"
+      ],
+      "category": "dynamic_localization",
+      "before": "最大闪电抗性+1%（暂未实装）",
+      "after_sha256": "c3d7694e0a9aff69dc8b2f2bb7e7b239e199b832ba03d18d4171a50aa33559c3"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "nodes",
+        "53118",
+        "stats"
+      ],
+      "category": "dynamic_localization",
+      "before": "最大生命提高8%\n最大火焰抗性+1%（暂未实装）\n火焰抗性+8%",
+      "after_sha256": "0f160a8c21b55988c09f10da3bb4f8eb7164763a24f12f265243f29c839bca46"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "nodes",
+        "54766",
+        "stats"
+      ],
+      "category": "dynamic_localization",
+      "before": "护甲提高30%\n所有最大元素抗性+1%（暂未实装）",
+      "after_sha256": "3e43e87bcfe165f945dc171de5c345beab241675f5a48bdf63a73b3fb77df4b3"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "nodes",
+        "54798",
+        "stats"
+      ],
+      "category": "dynamic_localization",
+      "before": "最大闪电抗性+1%（暂未实装）\n闪电抗性+20%\n有30%几率避免感电（暂未实装）",
+      "after_sha256": "a4b11d3b061bd3c2b2adf32184118939d2d1d9591d45c76580eaa1ba098d86f2"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "nodes",
+        "60031",
+        "stats"
+      ],
+      "category": "dynamic_localization",
+      "before": "所有最大元素抗性+2%（暂未实装）",
+      "after_sha256": "5fec9dfb997ce5bab9dd6af3d555355d3bc0628fad6de96ec39416e16ba35d00"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "nodes",
+        "6043",
+        "stats"
+      ],
+      "category": "dynamic_localization",
+      "before": "最大火焰抗性+1%（暂未实装）",
+      "after_sha256": "9baa32198f589fb92e65322c743655df14f64fd0f72ebd453e4bce66611c5540"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "sunwell_terrace",
+        "save_version"
+      ],
+      "category": "version",
+      "before": 35.0,
+      "after_sha256": "f85f0b0b202527348d18a78706e3ff04eddb2022895655cb63039afb9b99a3cd"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "town_maps",
+        "save_version"
+      ],
+      "category": "version",
+      "before": 35.0,
+      "after_sha256": "f85f0b0b202527348d18a78706e3ff04eddb2022895655cb63039afb9b99a3cd"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "town_maps",
+        "stock",
+        "equipment_merchant",
+        12,
+        "description"
+      ],
+      "category": "cap_display_text",
+      "before": "最大生命 +8，火焰抗性 +15%。火焰抗性作用于承受的火焰命中，有效上限 75%。",
+      "after_sha256": "ceed113923907c9aa5009ed7700255203577f294c6ff2cf3f243cef752c755fa"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "town_maps",
+        "stock",
+        "equipment_merchant",
+        12,
+        "preview",
+        "description"
+      ],
+      "category": "cap_display_text",
+      "before": "最大生命 +8，火焰抗性 +15%。火焰抗性作用于承受的火焰命中，有效上限 75%。",
+      "after_sha256": "ceed113923907c9aa5009ed7700255203577f294c6ff2cf3f243cef752c755fa"
+    }
+  ]
+}

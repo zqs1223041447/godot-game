@@ -20,6 +20,7 @@ TYPES = {'small':'小天赋','notable':'显著天赋','socket':'珠宝孔','star
 RULE_TITLES['forgeblade'] = '锻纹短刃与裂刃局部物理'
 RULE_TITLES['melee_basic'] = '短刃近战普攻与裂刃衔接'
 RULE_TITLES['mana_guard'] = '心灵升华与魔力先承伤'
+RULE_TITLES['elemental_resistance_caps'] = '三元素最大抗性与有效抗性'
 
 def esc(value): return html.escape(str(value), quote=True)
 def lines(value): return '<br>'.join(esc(value).split('\n'))
@@ -242,6 +243,42 @@ def melee_basic_rule(data, link, facts, details):
     return body
 
 
+def elemental_resistance_cap_rule(data, link, facts, details):
+    caps=data['elemental_resistance_caps']; local=data['source_tree_localization']['nodes']
+    def value(key, amount, ratio=False):
+        return f'<strong data-resistance-cap-value="{esc(key)}" data-value="{esc(amount)}">{percent(amount) if ratio else number(amount)}</strong>'
+    body=facts([('默认上限',value('base-cap',caps['base_cap'],True)),('本游戏安全上限',value('safety-cap',caps['safety_cap'],True)),('最低存档版本',value('save-version',caps['minimum_save_version']))])
+    body+=''.join('<p>'+esc(caps[key])+'。</p>' for key in ['formula','source_reminder','scope'])
+    labels={'default_75':'默认上限','raw_40_cap_83':'原始不足40%','raw_75_cap_83':'原始仍为75%','raw_83_cap_83':'原始足够83%','raw_100_cap_83':'原始溢出100%','safety_ceiling':'超过安全预算的边界输入'}
+    rows=[]
+    for key,ex in caps['examples'].items():
+        p=ex['profile']
+        cells=[value(key+'-raw',p['raw_resistances']['fire'],True),value(key+'-maximum',p['maximum_resistances']['fire'],True),value(key+'-effective',p['effective_resistances']['fire'],True)]
+        cells += [value(key+'-'+element+'-hit',ex['hits'][element]['damage_total']) for element in ['fire','cold','lightning']]
+        cells += [value(key+'-burn',ex['fire_burn']['damage_total'])]
+        rows.append('<tr><th>'+esc(labels[key])+'</th>'+''.join('<td>'+cell+'</td>' for cell in cells)+'</tr>')
+    body+='<h3>原始抗性、当前上限、有效抗性是三个数</h3><p>每行给三种元素相同原始值与上限加成。每列独立输入100点伤害、无护盾与魔力分担，燃烧列为100点原始火焰持续损伤。结果直接来自权威规则，不是实战DPS；最后一行只验证安全边界，不代表当前可取得25个百分点上限加成。</p><div class="table-scroll"><table><thead><tr><th>独立输入</th><th>原始抗性</th><th>当前上限</th><th>有效抗性</th><th>火命中</th><th>冰命中</th><th>电命中</th><th>火燃烧</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
+    body+='<p>原始抗性足够时，100点伤害由25降至17，较75%上限少承受32%；只提高上限不会补足原始抗性。C页三行显示有效值，提示同时给出原始值与当前上限，读取同一角色防御profile。</p>'
+    body+='<h3>12个完整标准节点</h3>'
+    for node_id in caps['new_complete_ordinary_nodes']:
+        body+='<p>'+link('source_passives',node_id,local[node_id]['name']+' · '+node_id)+'：'+lines(local[node_id]['stats'])+'</p>'
+    body+='<p>三种最大抗性各能累计8个百分点；表中节点保留所有其他已实现词句。含未实现效果的混合节点仍整体锁定；完整文本也不授予图外节点标准图资格。</p>'
+    body+='<h3>混合、精通与图外边界</h3>'
+    for node_id,node in caps['boundaries'].items():
+        state='图外，仅浏览' if not node['standard_graph'] else ('精通效果逐项检查' if node['mastery_choices'] else '完整效果未接入，不可分配')
+        body+=details(local[node_id]['name']+' · '+node_id+' · '+state,'<p>'+link('source_passives',node_id)+' · '+lines(local[node_id]['stats'])+'</p><p>执行判定：'+esc(node['execution']['status'])+'；来源为当前Godot源执行器。条件精通、召唤物与混沌最大抗性不在本批支持范围。</p>')
+    for effect,entry in caps['mastery_boundaries'].items():
+        host=entry['host_nodes'][0]
+        body+=details('未接入精通效果 '+effect,'<p>'+lines(local[host]['mastery_choices'][effect])+'</p><p>执行判定：'+esc(entry['execution']['status'])+'；所在节点：'+'、'.join(link('source_passives',node_id,node_id) for node_id in entry['host_nodes'])+'。这是精通效果ID，不是标准节点ID。</p>')
+    route=caps['reachable_build']; p=route['profile']
+    body+='<h3>73点可达构筑与装备供给</h3><p>'+esc(caps['route_scope'])+'。</p>'+facts([('等级',value('route-level',route['level'])),('已用点数',value('route-points',route['points_spent']))]+[(DAMAGE_NAMES[element]+' 原始 / 当前上限 / 有效',value('route-'+element+'-raw',p['raw_resistances'][element],True)+' / '+value('route-'+element+'-maximum',p['maximum_resistances'][element],True)+' / '+value('route-'+element+'-effective',p['effective_resistances'][element],True)) for element in ['fire','cold','lightning']])
+    body+=details('普通连接路线与全部节点','<p>'+' → '.join(link('source_passives',node_id,node_id) for node_id in route['allocated'])+'</p><p>列表为逐点可连接顺序，分支之间不表示每两个连续ID都有直接边；完整候选已通过生产构筑验证。</p>')
+    equipment=caps['equipment']
+    body+='<p>现装备只有 '+link('equipment',equipment['base_id'])+' 提供原始火抗：底材 '+value('equipment-base-fire',equipment['base_raw_fire'],True)+' 加 '+link('affixes',equipment['affix_id'])+' 最高 '+value('equipment-affix-fire',equipment['affix_max_raw_fire'],True)+'，单件最多 '+value('equipment-total-fire',equipment['maximum_raw_fire'],True)+'。现装备和珠宝不供给原始冰、电抗；普通源天赋能补足三抗。本批不新增装备池、奖励、货币或赠物。</p>'
+    body+='<h3>结算时间与旧存档</h3><p>'+esc(caps['timing'])+'。命中沿既有护甲、抗性、感电，再结算护盾、魔力分担、生命；燃烧不加入护甲或感电命中乘区。自然怪及现地图元素庇护未获得最大抗性加成，继续使用默认75%上限。</p><p>'+esc(caps['migration'])+'。缺字段或显式零保留既有结算与返回结构；新36文件不声称与旧35字节相同。</p><p><a href="../ELEMENTAL_RESISTANCE_CAPS.zh-CN.md">最大抗性说明</a> · '+link('rules','source_tree')+' · '+link('rules','mana_guard')+' · <a href="source-tree-coverage.json">同源执行覆盖JSON</a></p>'
+    return body
+
+
 def build(data, art):
     records = []
     by_id = {}
@@ -380,7 +417,7 @@ def build(data, art):
             body+=details(f'精通 {choice["effect"]} · {label}','<p>'+lines(localized['mastery_choices'][str(choice['effect'])])+'</p>')
         if p['neighbors']:body+=details('原始标准邻接',links('source_passives',p['neighbors']))
         aliases=' '.join([p['name'],p['partition'],*p['stats'],*(line for choice in p['mastery_choices'] for line in choice['stats'])])
-        cards.append(add('source_passives',key,localized['name'],localized['stats'] or state,body,TYPES[p['type']],status='implemented' if selectable else 'research',related=link('rules','source_tree')+(' · '+link('rules','source_fire_dot') if key in data.get('source_fire_dot',{}).get('nodes',{}) else '')+(' · '+link('rules','source_faster_burn') if key in data.get('source_faster_burn',{}).get('nodes',{}) or key in data.get('source_faster_burn',{}).get('blocked_matching_nodes',{}) else '')+(' · '+link('rules','mana_guard') if key == data.get('mana_guard',{}).get('node',{}).get('id') or key in data.get('mana_guard',{}).get('blocked_matching_nodes',{}) else ''),search_aliases=aliases))
+        cards.append(add('source_passives',key,localized['name'],localized['stats'] or state,body,TYPES[p['type']],status='implemented' if selectable else 'research',related=link('rules','source_tree')+(' · '+link('rules','source_fire_dot') if key in data.get('source_fire_dot',{}).get('nodes',{}) else '')+(' · '+link('rules','source_faster_burn') if key in data.get('source_faster_burn',{}).get('nodes',{}) or key in data.get('source_faster_burn',{}).get('blocked_matching_nodes',{}) else '')+(' · '+link('rules','mana_guard') if key == data.get('mana_guard',{}).get('node',{}).get('id') or key in data.get('mana_guard',{}).get('blocked_matching_nodes',{}) else '')+(' · '+link('rules','elemental_resistance_caps') if key in data.get('elemental_resistance_caps',{}).get('nodes',{}) or key in data.get('elemental_resistance_caps',{}).get('boundaries',{}) else ''),search_aliases=aliases))
     for key,m in data['mechanisms'].items():
         player_nodes=[k for k,v in data['passives'].items() if key in v['mechanism_ids']]
         monsters=[k for k,v in data['monsters'].items() if key in v['mechanisms']]
@@ -401,11 +438,11 @@ def build(data, art):
         cards.append(add('weapon_stages',key,w['name'],w['description'],body,'局部物理',related=links('equipment',w['base_ids'])+' · '+links('affixes',[i for i,f in data['affixes'].items() if f.get('stage')==key])+' · '+link('rules','damage')))
     for key,d in data['defenses'].items():
         example=d['worked_example']
-        body=facts([('支持对象','、'.join({'player':'玩家','monster':'怪物'}[a] for a in d['supported_actors'])),('有效下限',percent(d['minimum_effective'])),('有效上限',percent(d['maximum_effective'])),('规则版本',esc(d['balance_version']))])
+        body=facts([('支持对象','、'.join({'player':'玩家','monster':'怪物'}[a] for a in d['supported_actors'])),('有效下限',percent(d['minimum_effective'])),('默认有效上限',percent(d['maximum_effective'])),('规则版本',esc(d['balance_version']))])
         body+=defense_diagram(example)
         cap_rows=''.join(f'<tr><td>{percent(p["raw_resistances"]["fire"])}</td><td>{percent(p["effective_resistances"]["fire"])}</td></tr>' for p in d['cap_examples'])
         body+=details('原始值与有效值', '<p>原始抗性先相加，再按原创上下限约束；下面包含边界演算输入，不代表当前装备可以达到每一个原始值。</p><div class="table-scroll"><table><thead><tr><th>原始火抗</th><th>有效火抗</th></tr></thead><tbody>'+cap_rows+'</tbody></table></div>')
-        body+=details('当前支持边界','<p>仅火焰抗性是当前可获得的防御属性。支持分量先减伤、再扣护盾、再扣生命。不包含护甲、穿透、异常状态或完整 PoE 防御体系；当前不实现混沌绕盾。</p><p>火抗上限、底材/词缀数值和怪物平衡均为本游戏原创，没有对应的 PoE 源规则背书。</p>')
+        body+=details('当前支持边界','<p>此条保留早期火抗与护盾的指定输入演算，未含最大抗性加成或魔力分担。当前源天赋可提供原始三抗及三种最大抗性；默认75%，本游戏安全上限83%，详见 '+link('rules','elemental_resistance_caps')+'。命中还可结算护甲与感电，魔力先承伤见 '+link('rules','mana_guard')+'；当前不实现混沌绕盾或完整PoE防御体系。</p><p>本游戏上限、底材/词缀数值和怪物平衡不是PoE源规则背书。</p>')
         related=links('equipment',[i for i,e in data['equipment'].items() if e['stats'].get(d['stat'],0)])+' · '+links('affixes',[i for i,f in data['affixes'].items() if f['stat']==d['stat']])+' · '+links('monsters',[i for i,m in data['monsters'].items() if m.get('defense_stats',{}).get(d['stat'],0)])
         cards.append(add('defenses',key,d['name'],d['description'],body,'命中防御',related=related+' · '+link('rules','damage')))
     for key,c in data['crafting'].items():
@@ -524,8 +561,8 @@ def build(data, art):
             cards.append(add('maps',key,m['name'],m['description'],body,'正式三档 / 独立测试',related=link('town_services','map_device')))
         for special in town['options']['special_modifiers']:
             if special.get('kind')=='defense':
-                body=facts([('最低波次',number(special['minimum_wave'])),('原始加值',number(special['resistance_bonus']*100)+' 个百分点 / '+ '、'.join(DAMAGE_NAMES[t] for t in special['damage_types'])),('有效上限','共用角色防御规则：0%–75%'),('适用','根怪、首领、死亡后代各从本身原始值加一次'),('保留','物理/混沌抗性、护甲、血盾伤速、身份、稀有度、奖励和RNG'),('分层','最多1特殊词缀，与霜纹/雷纹巡逻互斥')])
-                body+='<figure class="defense-flow"><figcaption>与角色天赋共享的结算</figcaption><ol><li><strong>原始抗性</strong><span>原怪物 + 地图20个百分点</span></li><li><strong>有效抗性</strong><span>共享0%–75%上限</span></li><li><strong>按类型减伤</strong><span>三元素各自结算</span></li><li><strong>护盾 → 生命</strong><span>物理/混沌部分保持</span></li></ol></figure>'
+                body=facts([('最低波次',number(special['minimum_wave'])),('原始加值',number(special['resistance_bonus']*100)+' 个百分点 / '+ '、'.join(DAMAGE_NAMES[t] for t in special['damage_types'])),('有效上限','未授予最大抗性加成，默认0%–75%'),('适用','根怪、首领、死亡后代各从本身原始值加一次'),('保留','物理/混沌抗性、护甲、血盾伤速、身份、稀有度、奖励和RNG'),('分层','最多1特殊词缀，与霜纹/雷纹巡逻互斥')])
+                body+='<figure class="defense-flow"><figcaption>与角色天赋共享的结算</figcaption><ol><li><strong>原始抗性</strong><span>原怪物 + 地图20个百分点</span></li><li><strong>有效抗性</strong><span>未加最大抗性，默认0%–75%</span></li><li><strong>按类型减伤</strong><span>三元素各自结算</span></li><li><strong>护盾 → 生命</strong><span>物理/混沌部分保持</span></li></ol></figure>'
                 for template,example in town['defense_examples'].items():
                     body+=details('同源100点各类型示例：'+data['monsters'][template]['name'],facts([('怪物',link('monsters',template)),('有效抗性',' / '.join(DAMAGE_NAMES[t]+percent(example['effective_resistances'][t]) for t in special['damage_types'])),('施加前单次命中',component_text(example['before_components'])),('施加后单次命中',component_text(example['after_components']))]))
                 body+='<p>这提供物理/混沌与元素构筑之间的取舍；混沌或物理技能若装备附加了元素伤害，其元素分量仍按对应抗性结算。数值是本游戏测试预算，无额外掉落倍率，不代表PoE地图经济。</p>'
@@ -587,7 +624,7 @@ def build(data, art):
             ('supports','技能行与五辅助','每行1个主宝石、5个辅助；10行起步，+1技能行词缀真正增加可绑定的行。',f'<p>原16辅助保留，新增点燃辅助仅适配陨星/龙卷；按主动技能原生能力判定资格；同组不重复同一辅助定义。同名主宝石可独立装配。组与主宝石UID双冷却账阻止换孔/换键刷新。</p><p>真实五辅助冰霜示例：耗魔 {number(example["mana"])}，冷却 {number(example["cooldown"])}秒，初始 {example["initial_count"]}发。</p>'+details('同源实际配方',lines(example['summary']+'\n'+example['details']))+'<p>正式档每30有效根怪累积一件固定26种序列的1级0品质宝石，满包保留待领；原序列不插入新石。点燃辅助通过正式商人4碎片购买或独立测试供应获得。测试随机宝石使用当前目录，失败回滚随机状态；后代/重复死亡无奖励。同名独立UID，正式城镇可回收所选背包宝石得1碎片。</p>','implemented'),
             ('source_tree','锁定源树与执行覆盖','完整源记录与已实现效果分别报告；数据存在不等于可花点使用。',f'<p>源版本 {source["source_version"]}，原始SHA256 {source["source_sha256"]}。保留 {len(source["nodes"])} 条记录、2387个标准位置和2697条内部边；升华/扩展分区分开。42代理与30涂油节点不可直接分配。<a href="#category-source_passives">逐项查源节点及精通</a></p><p>节点所有效果必须完整执行，精通按选中效果检查。未支持节点灰色锁定，也会阻断后续路径。源数值没有旧181投影上限；旧树仅作历史与怪物机制参考。</p><p>自己的职业起点免费，预算min(level+4,123)。普通节点/精通均1点，专精需同组普通连通的显著节点，重复效果ID拒绝。未分配其他节点可切七起点；升华点数来源尚未实现，不免费授点。</p>','implemented'),
             ('allocation','源树与珠宝资格','每件珠宝只有一个统一位置；孔必须已分配并沿普通连线连接自己的起点。','<p>寻枝半径280采用当前源坐标单位，允许小型/显著节点断连分配，仍花1点。远程点不向外扩路、不激活孔；未实现节点即使在范围内也不能分配。退款、移动、替换、取回都验证最终构筑，不能遗留依赖失效的节点。原型半径规则不是PoE某颗珠宝的完整复刻。</p><p>'+link('rules','source_tree')+'；下方旧181覆盖图保留作历史机制研究。</p>','implemented'),
-            ('source_defenses','属性与命中防御','原始三属性数值进入真实容量、命中、闪避和近战物理作用域。','<p>力量每2点取整+1生命、每5点取整+1%近战物理；敏捷每点+2命中、每5点取整+1%闪避；智慧每2点取整+1魔力、每10点取整+1%护盾（3.28以后规则）。法术不进行攻击闪避。护甲随物理命中大小重新求减伤，三元素抗性分别限制到75%，然后护盾、生命。分配心灵升华后，护盾剩余损伤先按比例交由当前魔力承担，详见 '+link('rules','mana_guard')+'。本段混合受击示例未分配该节点。</p>'+facts([('同源混合受击示例','物理/火/冰/电各100；护甲500、抗性50%/25%/75%'),('防御后分量',esc(component_text(defense['components']))),('护盾扣减',number(defense['shield_spent'])),('生命扣减',number(defense['health_lost']))])+f'<p>本游戏敏捷型怪物闪避320；默认Scion命中140，对应 {percent(c["skitter_accuracy_example"]["base_chance"])}；增加10敏捷后命中160，对应 {percent(c["skitter_accuracy_example"]["improved_chance"])}。预览展示成功命中伤害，未把命中率伪乘成DPS。</p>','implemented'),
+            ('source_defenses','属性与命中防御','原始三属性数值进入真实容量、命中、闪避和近战物理作用域。','<p>力量每2点取整+1生命、每5点取整+1%近战物理；敏捷每点+2命中、每5点取整+1%闪避；智慧每2点取整+1魔力、每10点取整+1%护盾（3.28以后规则）。法术不进行攻击闪避。护甲随物理命中大小重新求减伤，三元素分别使用当前抗性上限（默认75%，最大抗性天赋可提高到本游戏安全上限83%），原始与有效值详见 '+link('rules','elemental_resistance_caps')+'，然后护盾、生命。分配心灵升华后，护盾剩余损伤先按比例交由当前魔力承担，详见 '+link('rules','mana_guard')+'。本段混合受击示例未分配该节点。</p>'+facts([('同源混合受击示例','物理/火/冰/电各100；护甲500、抗性50%/25%/75%'),('防御后分量',esc(component_text(defense['components']))),('护盾扣减',number(defense['shield_spent'])),('生命扣减',number(defense['health_lost']))])+f'<p>本游戏敏捷型怪物闪避320；默认Scion命中140，对应 {percent(c["skitter_accuracy_example"]["base_chance"])}；增加10敏捷后命中160，对应 {percent(c["skitter_accuracy_example"]["improved_chance"])}。预览展示成功命中伤害，未把命中率伪乘成DPS。</p>','implemented'),
             ('shared','共享消费者与历史注册表','人物和怪物共用伤害分量、防御、命中和结算函数。','<p>旧MechanicRegistry仍约束怪物机制包；旧181节点引用保留作研究与回归。当前人物改用原始源树逐项能力门槛，不能再套用旧投影合计上限。未支持机制继续拒绝，不借导入数据悄悄生效。</p>','implemented'),
             ('boundaries','尚未实现的机制','未执行源节点整体锁定，原文与位置保留。','<p>仍未完成：施法动作时长/施法速度、条件/局部武器暴击、格挡、压制、抗性穿透、完整异常与持续伤害体系（无条件火焰持续伤害加成与三节点更快燃烧已接入；流血和中毒仍未实现）、召唤物、属性装备需求、星团/永恒珠宝、升华点数来源及复杂条件机制。源树浏览不等于以上均可用。制作已有回收、校准、赋魔、升格、补缀与重铸；更复杂的定向制作尚未实现。</p>','planned'),
             ('sources','来源与实现边界','目录来自运行时导出，源树保留功能数据，所有美术由本项目创作。',f'<p><a href="{esc(source["source_url"])}">GGG源树固定提交 {source["source_commit"]}</a> · 3.29.1。保留节点身份、原始规则词句、精通和几何；未包含官方图像或叙事风味文本。上游数据再分发授权未明确，不宣称公共领域。</p><p>旧181节点与词缀校准研究仍有各自固定版本，不代表当前角色全部源效果已实现。原型怪物数值、掉落权重与熵初值由本项目定义。</p><p><a href="source-tree-coverage.json">完整执行覆盖与七职业可达前沿JSON</a>：空stats结构节点和精通本体不冒充属性效果，精通逐选项统计；可达集合不代表123点可以全部同时点出。</p>','research')
@@ -752,6 +789,8 @@ def build(data, art):
         rule_defs.append(('forgeblade',RULE_TITLES['forgeblade'],'本地物理4、六族合法词池；W增强普通近战与裂刃direct，全局暴击与资源仍保持原范围。',forgeblade_rule(data,link,facts,details),'implemented'))
     if 'melee_basic' in data:
         rule_defs.append(('melee_basic',RULE_TITLES['melee_basic'],'短刃普攻使用独立近战派送，保留原攻击间隔；与裂刃几何、资源及逐次伤害分开展示。',melee_basic_rule(data,link,facts,details),'implemented'))
+    if 'elemental_resistance_caps' in data:
+        rule_defs.append(('elemental_resistance_caps',RULE_TITLES['elemental_resistance_caps'],'原始抗性仍需另行获得；默认上限75%，三元素最大抗性可分别提高到本游戏安全上限83%。',elemental_resistance_cap_rule(data,link,facts,details),'implemented'))
     if 'mana_guard' in data:
         guard=data['mana_guard']
         def guard_value(key,value,as_percent=False):

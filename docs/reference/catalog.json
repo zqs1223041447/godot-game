@@ -4288,7 +4288,7 @@
 				"normal_points": 5,
 				"source_version": "3.29.1"
 			},
-			"version": 35
+			"version": 36
 		},
 		"default_casts": {
 			"group_000001": {
@@ -4402,6 +4402,9 @@
 			"max_health": 130.0,
 			"max_mana": 140.0,
 			"max_shield": 91.8,
+			"maximum_cold_resistance_add": 0.0,
+			"maximum_fire_resistance_add": 0.0,
+			"maximum_lightning_resistance_add": 0.0,
 			"melee_area_size_increased": 0.0,
 			"melee_crit_chance_increased": 0.0,
 			"melee_crit_multiplier_add": 0.0,
@@ -5361,7 +5364,7 @@
 				"evasion": 320.0
 			}
 		},
-		"save_version": 35,
+		"save_version": 36,
 		"skitter_accuracy_example": {
 			"base_accuracy": 140,
 			"base_chance": 0.96,
@@ -5449,6 +5452,9 @@
 				"max_health": 130.0,
 				"max_mana": 140.0,
 				"max_shield": 91.8,
+				"maximum_cold_resistance_add": 0.0,
+				"maximum_fire_resistance_add": 0.0,
+				"maximum_lightning_resistance_add": 0.0,
 				"melee_area_size_increased": 0.0,
 				"melee_crit_chance_increased": 0.0,
 				"melee_crit_multiplier_add": 0.0,
@@ -5907,7 +5913,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 35,
+				"save_version": 36,
 				"source": {
 					"affixes": [
 						{
@@ -6403,7 +6409,7 @@
 				"schema_version": 2,
 				"status": "prototype"
 			},
-			"save_version": 35
+			"save_version": 36
 		},
 		"elevate": {
 			"description": "保留魔法装备已有词缀，升为稀有并补至4至6条。",
@@ -6605,7 +6611,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 35,
+				"save_version": 36,
 				"source": {
 					"affixes": [
 						{
@@ -6790,7 +6796,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 35,
+				"save_version": 36,
 				"source": {
 					"affixes": [],
 					"base_id": "ashwood_bow",
@@ -6977,7 +6983,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 35,
+				"save_version": 36,
 				"source": {
 					"affixes": [
 						{
@@ -7181,7 +7187,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 35,
+				"save_version": 36,
 				"source": {
 					"affixes": [
 						{
@@ -7324,7 +7330,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 35,
+				"save_version": 36,
 				"source": {
 					"affixes": [
 						{
@@ -7808,7 +7814,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 35,
+				"save_version": 36,
 				"source": {
 					"affixes": [
 						{
@@ -9612,7 +9618,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 35,
+				"save_version": 36,
 				"source": {
 					"affixes": [
 						{
@@ -9942,7 +9948,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 35,
+				"save_version": 36,
 				"source": {
 					"affixes": [
 						{
@@ -10261,7 +10267,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 35,
+				"save_version": 36,
 				"source": {
 					"affixes": [
 						{
@@ -10324,7 +10330,7 @@
 			"example_quantity": 1,
 			"name": "校准碎片",
 			"quantity_source": "items[uid].payload.quantity",
-			"save_version": 35,
+			"save_version": 36,
 			"size": [
 				1,
 				1
@@ -10425,7 +10431,7 @@
 				}
 			],
 			"damage_type": "fire",
-			"description": "本项目原创火焰防御，命中与燃烧共享有效抗性；原始抗性相加，有效值限制在 0%–75%，再依次消耗护盾和生命。",
+			"description": "本项目原创火焰防御，命中与燃烧共享有效抗性；默认有效值为 0%–75%，最大抗性加成可提高上限，本游戏安全上限为 83%；原始抗性仍需另行获得，再依次消耗护盾和生命。",
 			"id": "fire_resistance",
 			"kind": "hit_defense",
 			"maximum_effective": 0.75,
@@ -12056,6 +12062,2417 @@
 			}
 		},
 		"selection": "after_original_ordinary_roll"
+	},
+	"elemental_resistance_caps": {
+		"base_cap": 0.75,
+		"boundaries": {
+			"11820": {
+				"execution": {
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "maximum_fire_resistance_add",
+							"value": 0.01
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_cold_resistance_add",
+							"value": 0.01
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_lightning_resistance_add",
+							"value": 0.01
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"+1% to all maximum Elemental Resistances"
+					],
+					"unsupported": [
+						"20% reduced Elemental Ailment Duration on you",
+						"20% reduced Effect of Chill and Shock on you"
+					]
+				},
+				"legacy_execution": {
+					"grants": [],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"+1% to all maximum Elemental Resistances",
+						"20% reduced Elemental Ailment Duration on you",
+						"20% reduced Effect of Chill and Shock on you"
+					]
+				},
+				"mastery_choices": [],
+				"name": "Anointed Flesh",
+				"source_lines": [
+					"+1% to all maximum Elemental Resistances",
+					"20% reduced Elemental Ailment Duration on you",
+					"20% reduced Effect of Chill and Shock on you"
+				],
+				"standard_graph": true
+			},
+			"20832": {
+				"execution": {
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "maximum_fire_resistance_add",
+							"value": 0.01
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_cold_resistance_add",
+							"value": 0.01
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_lightning_resistance_add",
+							"value": 0.01
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"+1% to all maximum Elemental Resistances"
+					],
+					"unsupported": [
+						"+4% Chance to Block Attack Damage while holding a Shield",
+						"+4% Chance to Block Spell Damage while holding a Shield"
+					]
+				},
+				"legacy_execution": {
+					"grants": [],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"+4% Chance to Block Attack Damage while holding a Shield",
+						"+4% Chance to Block Spell Damage while holding a Shield",
+						"+1% to all maximum Elemental Resistances"
+					]
+				},
+				"mastery_choices": [],
+				"name": "Sanctuary",
+				"source_lines": [
+					"+4% Chance to Block Attack Damage while holding a Shield",
+					"+4% Chance to Block Spell Damage while holding a Shield",
+					"+1% to all maximum Elemental Resistances"
+				],
+				"standard_graph": true
+			},
+			"38683": {
+				"execution": {
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "maximum_cold_resistance_add",
+							"value": 0.02
+						},
+						{
+							"mode": "increased",
+							"stat": "flask_life_recovery_increased",
+							"value": 0.1
+						}
+					],
+					"status": "full",
+					"supported": [
+						"+2% to maximum Cold Resistance",
+						"10% increased Life Recovery from Flasks"
+					],
+					"unsupported": []
+				},
+				"legacy_execution": {
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "flask_life_recovery_increased",
+							"value": 0.1
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"10% increased Life Recovery from Flasks"
+					],
+					"unsupported": [
+						"+2% to maximum Cold Resistance"
+					]
+				},
+				"mastery_choices": [],
+				"name": "Winter Prowler",
+				"source_lines": [
+					"+2% to maximum Cold Resistance",
+					"10% increased Life Recovery from Flasks"
+				],
+				"standard_graph": false
+			},
+			"40743": {
+				"execution": {
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "maximum_fire_resistance_add",
+							"value": 0.01
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_cold_resistance_add",
+							"value": 0.01
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_lightning_resistance_add",
+							"value": 0.01
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"+1% to all maximum Elemental Resistances"
+					],
+					"unsupported": [
+						"20% chance to Avoid Elemental Ailments"
+					]
+				},
+				"legacy_execution": {
+					"grants": [],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"+1% to all maximum Elemental Resistances",
+						"20% chance to Avoid Elemental Ailments"
+					]
+				},
+				"mastery_choices": [],
+				"name": "Crystal Skin",
+				"source_lines": [
+					"+1% to all maximum Elemental Resistances",
+					"20% chance to Avoid Elemental Ailments"
+				],
+				"standard_graph": true
+			},
+			"42313": {
+				"execution": {
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "evasion_increased",
+							"value": 0.3
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_fire_resistance_add",
+							"value": 0.01
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_cold_resistance_add",
+							"value": 0.01
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_lightning_resistance_add",
+							"value": 0.01
+						}
+					],
+					"status": "full",
+					"supported": [
+						"30% increased Evasion Rating",
+						"+1% to all maximum Elemental Resistances"
+					],
+					"unsupported": []
+				},
+				"legacy_execution": {
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "evasion_increased",
+							"value": 0.3
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"30% increased Evasion Rating"
+					],
+					"unsupported": [
+						"+1% to all maximum Elemental Resistances"
+					]
+				},
+				"mastery_choices": [],
+				"name": "Prismatic Dance",
+				"source_lines": [
+					"30% increased Evasion Rating",
+					"+1% to all maximum Elemental Resistances"
+				],
+				"standard_graph": false
+			},
+			"44203": {
+				"execution": {
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "max_mana",
+							"value": 0.08
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_lightning_resistance_add",
+							"value": 0.02
+						}
+					],
+					"status": "full",
+					"supported": [
+						"8% increased maximum Mana",
+						"+2% to maximum Lightning Resistance"
+					],
+					"unsupported": []
+				},
+				"legacy_execution": {
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "max_mana",
+							"value": 0.08
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"8% increased maximum Mana"
+					],
+					"unsupported": [
+						"+2% to maximum Lightning Resistance"
+					]
+				},
+				"mastery_choices": [],
+				"name": "Wizardry",
+				"source_lines": [
+					"8% increased maximum Mana",
+					"+2% to maximum Lightning Resistance"
+				],
+				"standard_graph": false
+			},
+			"48803": {
+				"execution": {
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "maximum_fire_resistance_add",
+							"value": 0.02
+						},
+						{
+							"mode": "flat",
+							"stat": "life_regen_percent",
+							"value": 0.01
+						}
+					],
+					"status": "full",
+					"supported": [
+						"+2% to maximum Fire Resistance",
+						"Regenerate 1% of Life per second"
+					],
+					"unsupported": []
+				},
+				"legacy_execution": {
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "life_regen_percent",
+							"value": 0.01
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"Regenerate 1% of Life per second"
+					],
+					"unsupported": [
+						"+2% to maximum Fire Resistance"
+					]
+				},
+				"mastery_choices": [],
+				"name": "Molten One's Mark",
+				"source_lines": [
+					"+2% to maximum Fire Resistance",
+					"Regenerate 1% of Life per second"
+				],
+				"standard_graph": false
+			},
+			"54766": {
+				"execution": {
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "armour_increased",
+							"value": 0.3
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_fire_resistance_add",
+							"value": 0.01
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_cold_resistance_add",
+							"value": 0.01
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_lightning_resistance_add",
+							"value": 0.01
+						}
+					],
+					"status": "full",
+					"supported": [
+						"30% increased Armour",
+						"+1% to all maximum Elemental Resistances"
+					],
+					"unsupported": []
+				},
+				"legacy_execution": {
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "armour_increased",
+							"value": 0.3
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"30% increased Armour"
+					],
+					"unsupported": [
+						"+1% to all maximum Elemental Resistances"
+					]
+				},
+				"mastery_choices": [],
+				"name": "Prismatic Carapace",
+				"source_lines": [
+					"30% increased Armour",
+					"+1% to all maximum Elemental Resistances"
+				],
+				"standard_graph": false
+			}
+		},
+		"default_profile": {
+			"base_cap": 0.75,
+			"effective_resistances": {
+				"cold": 0.0,
+				"fire": 0.0,
+				"lightning": 0.0
+			},
+			"maximum_resistances": {
+				"cold": 0.75,
+				"fire": 0.75,
+				"lightning": 0.75
+			},
+			"ok": true,
+			"raw_resistances": {
+				"cold": 0.0,
+				"fire": 0.0,
+				"lightning": 0.0
+			},
+			"reason": "",
+			"safety_cap": 0.83
+		},
+		"equipment": {
+			"affix_id": "emberward",
+			"affix_max_raw_fire": 0.25,
+			"base_id": "emberhide_vest",
+			"base_raw_fire": 0.15,
+			"equipment_cold_sources": [],
+			"equipment_lightning_sources": [],
+			"maximum_raw_fire": 0.4
+		},
+		"examples": {
+			"default_75": {
+				"fire_burn": {
+					"actor": "player",
+					"components": {
+						"fire": 25.0
+					},
+					"damage_total": 25.0,
+					"details": [
+						{
+							"before_defense": 100.0,
+							"final": 25.0,
+							"resistance": 0.75,
+							"type": "fire"
+						}
+					],
+					"health_lost": 25.0,
+					"mitigated_components": {
+						"fire": 75.0
+					},
+					"ok": true,
+					"overkill": 0.0,
+					"raw_components": {
+						"fire": 100.0
+					},
+					"reason": "",
+					"remaining_health": 175.0,
+					"remaining_shield": 0.0,
+					"shield_spent": 0.0,
+					"stage": "burning"
+				},
+				"hits": {
+					"cold": {
+						"actor": "player",
+						"armour": 0.0,
+						"components": {
+							"cold": 25.0
+						},
+						"damage_total": 25.0,
+						"details": [
+							{
+								"base": 100.0,
+								"before_defense": 100.0,
+								"final": 25.0,
+								"increased": 0.0,
+								"modifiers": [],
+								"more": 1.0,
+								"resistance": 0.75,
+								"type": "cold"
+							}
+						],
+						"effective_resistances": {
+							"cold": 0.75,
+							"fire": 0.75,
+							"lightning": 0.75
+						},
+						"health_lost": 25.0,
+						"mitigated_components": {
+							"cold": 75.0
+						},
+						"ok": true,
+						"overkill": 0.0,
+						"raw_components": {
+							"cold": 100.0
+						},
+						"raw_resistances": {
+							"cold": 1.0,
+							"fire": 1.0,
+							"lightning": 1.0
+						},
+						"reason": "",
+						"remaining_health": 175.0,
+						"remaining_shield": 0.0,
+						"shield_spent": 0.0,
+						"stage": "hit_mitigation"
+					},
+					"fire": {
+						"actor": "player",
+						"armour": 0.0,
+						"components": {
+							"fire": 25.0
+						},
+						"damage_total": 25.0,
+						"details": [
+							{
+								"base": 100.0,
+								"before_defense": 100.0,
+								"final": 25.0,
+								"increased": 0.0,
+								"modifiers": [],
+								"more": 1.0,
+								"resistance": 0.75,
+								"type": "fire"
+							}
+						],
+						"effective_resistances": {
+							"cold": 0.75,
+							"fire": 0.75,
+							"lightning": 0.75
+						},
+						"health_lost": 25.0,
+						"mitigated_components": {
+							"fire": 75.0
+						},
+						"ok": true,
+						"overkill": 0.0,
+						"raw_components": {
+							"fire": 100.0
+						},
+						"raw_resistances": {
+							"cold": 1.0,
+							"fire": 1.0,
+							"lightning": 1.0
+						},
+						"reason": "",
+						"remaining_health": 175.0,
+						"remaining_shield": 0.0,
+						"shield_spent": 0.0,
+						"stage": "hit_mitigation"
+					},
+					"lightning": {
+						"actor": "player",
+						"armour": 0.0,
+						"components": {
+							"lightning": 25.0
+						},
+						"damage_total": 25.0,
+						"details": [
+							{
+								"base": 100.0,
+								"before_defense": 100.0,
+								"final": 25.0,
+								"increased": 0.0,
+								"modifiers": [],
+								"more": 1.0,
+								"resistance": 0.75,
+								"type": "lightning"
+							}
+						],
+						"effective_resistances": {
+							"cold": 0.75,
+							"fire": 0.75,
+							"lightning": 0.75
+						},
+						"health_lost": 25.0,
+						"mitigated_components": {
+							"lightning": 75.0
+						},
+						"ok": true,
+						"overkill": 0.0,
+						"raw_components": {
+							"lightning": 100.0
+						},
+						"raw_resistances": {
+							"cold": 1.0,
+							"fire": 1.0,
+							"lightning": 1.0
+						},
+						"reason": "",
+						"remaining_health": 175.0,
+						"remaining_shield": 0.0,
+						"shield_spent": 0.0,
+						"stage": "hit_mitigation"
+					}
+				},
+				"profile": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.75,
+						"fire": 0.75,
+						"lightning": 0.75
+					},
+					"maximum_resistances": {
+						"cold": 0.75,
+						"fire": 0.75,
+						"lightning": 0.75
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 1.0,
+						"fire": 1.0,
+						"lightning": 1.0
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"stats": {
+					"cold_resistance": 1.0,
+					"fire_resistance": 1.0,
+					"lightning_resistance": 1.0,
+					"maximum_cold_resistance_add": 0.0,
+					"maximum_fire_resistance_add": 0.0,
+					"maximum_lightning_resistance_add": 0.0
+				}
+			},
+			"raw_100_cap_83": {
+				"fire_burn": {
+					"actor": "player",
+					"components": {
+						"fire": 17.000000000000004
+					},
+					"damage_total": 17.000000000000004,
+					"details": [
+						{
+							"before_defense": 100.0,
+							"final": 17.000000000000004,
+							"resistance": 0.83,
+							"type": "fire"
+						}
+					],
+					"health_lost": 17.000000000000004,
+					"mitigated_components": {
+						"fire": 83.0
+					},
+					"ok": true,
+					"overkill": 0.0,
+					"raw_components": {
+						"fire": 100.0
+					},
+					"reason": "",
+					"remaining_health": 183.0,
+					"remaining_shield": 0.0,
+					"shield_spent": 0.0,
+					"stage": "burning"
+				},
+				"hits": {
+					"cold": {
+						"actor": "player",
+						"armour": 0.0,
+						"components": {
+							"cold": 17.000000000000004
+						},
+						"damage_total": 17.000000000000004,
+						"details": [
+							{
+								"base": 100.0,
+								"before_defense": 100.0,
+								"final": 17.000000000000004,
+								"increased": 0.0,
+								"modifiers": [],
+								"more": 1.0,
+								"resistance": 0.83,
+								"type": "cold"
+							}
+						],
+						"effective_resistances": {
+							"cold": 0.83,
+							"fire": 0.83,
+							"lightning": 0.83
+						},
+						"health_lost": 17.000000000000004,
+						"mitigated_components": {
+							"cold": 83.0
+						},
+						"ok": true,
+						"overkill": 0.0,
+						"raw_components": {
+							"cold": 100.0
+						},
+						"raw_resistances": {
+							"cold": 1.0,
+							"fire": 1.0,
+							"lightning": 1.0
+						},
+						"reason": "",
+						"remaining_health": 183.0,
+						"remaining_shield": 0.0,
+						"shield_spent": 0.0,
+						"stage": "hit_mitigation"
+					},
+					"fire": {
+						"actor": "player",
+						"armour": 0.0,
+						"components": {
+							"fire": 17.000000000000004
+						},
+						"damage_total": 17.000000000000004,
+						"details": [
+							{
+								"base": 100.0,
+								"before_defense": 100.0,
+								"final": 17.000000000000004,
+								"increased": 0.0,
+								"modifiers": [],
+								"more": 1.0,
+								"resistance": 0.83,
+								"type": "fire"
+							}
+						],
+						"effective_resistances": {
+							"cold": 0.83,
+							"fire": 0.83,
+							"lightning": 0.83
+						},
+						"health_lost": 17.000000000000004,
+						"mitigated_components": {
+							"fire": 83.0
+						},
+						"ok": true,
+						"overkill": 0.0,
+						"raw_components": {
+							"fire": 100.0
+						},
+						"raw_resistances": {
+							"cold": 1.0,
+							"fire": 1.0,
+							"lightning": 1.0
+						},
+						"reason": "",
+						"remaining_health": 183.0,
+						"remaining_shield": 0.0,
+						"shield_spent": 0.0,
+						"stage": "hit_mitigation"
+					},
+					"lightning": {
+						"actor": "player",
+						"armour": 0.0,
+						"components": {
+							"lightning": 17.000000000000004
+						},
+						"damage_total": 17.000000000000004,
+						"details": [
+							{
+								"base": 100.0,
+								"before_defense": 100.0,
+								"final": 17.000000000000004,
+								"increased": 0.0,
+								"modifiers": [],
+								"more": 1.0,
+								"resistance": 0.83,
+								"type": "lightning"
+							}
+						],
+						"effective_resistances": {
+							"cold": 0.83,
+							"fire": 0.83,
+							"lightning": 0.83
+						},
+						"health_lost": 17.000000000000004,
+						"mitigated_components": {
+							"lightning": 83.0
+						},
+						"ok": true,
+						"overkill": 0.0,
+						"raw_components": {
+							"lightning": 100.0
+						},
+						"raw_resistances": {
+							"cold": 1.0,
+							"fire": 1.0,
+							"lightning": 1.0
+						},
+						"reason": "",
+						"remaining_health": 183.0,
+						"remaining_shield": 0.0,
+						"shield_spent": 0.0,
+						"stage": "hit_mitigation"
+					}
+				},
+				"profile": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.83,
+						"fire": 0.83,
+						"lightning": 0.83
+					},
+					"maximum_resistances": {
+						"cold": 0.83,
+						"fire": 0.83,
+						"lightning": 0.83
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 1.0,
+						"fire": 1.0,
+						"lightning": 1.0
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"stats": {
+					"cold_resistance": 1.0,
+					"fire_resistance": 1.0,
+					"lightning_resistance": 1.0,
+					"maximum_cold_resistance_add": 0.08,
+					"maximum_fire_resistance_add": 0.08,
+					"maximum_lightning_resistance_add": 0.08
+				}
+			},
+			"raw_40_cap_83": {
+				"fire_burn": {
+					"actor": "player",
+					"components": {
+						"fire": 60.0
+					},
+					"damage_total": 60.0,
+					"details": [
+						{
+							"before_defense": 100.0,
+							"final": 60.0,
+							"resistance": 0.4,
+							"type": "fire"
+						}
+					],
+					"health_lost": 60.0,
+					"mitigated_components": {
+						"fire": 40.0
+					},
+					"ok": true,
+					"overkill": 0.0,
+					"raw_components": {
+						"fire": 100.0
+					},
+					"reason": "",
+					"remaining_health": 140.0,
+					"remaining_shield": 0.0,
+					"shield_spent": 0.0,
+					"stage": "burning"
+				},
+				"hits": {
+					"cold": {
+						"actor": "player",
+						"armour": 0.0,
+						"components": {
+							"cold": 60.0
+						},
+						"damage_total": 60.0,
+						"details": [
+							{
+								"base": 100.0,
+								"before_defense": 100.0,
+								"final": 60.0,
+								"increased": 0.0,
+								"modifiers": [],
+								"more": 1.0,
+								"resistance": 0.4,
+								"type": "cold"
+							}
+						],
+						"effective_resistances": {
+							"cold": 0.4,
+							"fire": 0.4,
+							"lightning": 0.4
+						},
+						"health_lost": 60.0,
+						"mitigated_components": {
+							"cold": 40.0
+						},
+						"ok": true,
+						"overkill": 0.0,
+						"raw_components": {
+							"cold": 100.0
+						},
+						"raw_resistances": {
+							"cold": 0.4,
+							"fire": 0.4,
+							"lightning": 0.4
+						},
+						"reason": "",
+						"remaining_health": 140.0,
+						"remaining_shield": 0.0,
+						"shield_spent": 0.0,
+						"stage": "hit_mitigation"
+					},
+					"fire": {
+						"actor": "player",
+						"armour": 0.0,
+						"components": {
+							"fire": 60.0
+						},
+						"damage_total": 60.0,
+						"details": [
+							{
+								"base": 100.0,
+								"before_defense": 100.0,
+								"final": 60.0,
+								"increased": 0.0,
+								"modifiers": [],
+								"more": 1.0,
+								"resistance": 0.4,
+								"type": "fire"
+							}
+						],
+						"effective_resistances": {
+							"cold": 0.4,
+							"fire": 0.4,
+							"lightning": 0.4
+						},
+						"health_lost": 60.0,
+						"mitigated_components": {
+							"fire": 40.0
+						},
+						"ok": true,
+						"overkill": 0.0,
+						"raw_components": {
+							"fire": 100.0
+						},
+						"raw_resistances": {
+							"cold": 0.4,
+							"fire": 0.4,
+							"lightning": 0.4
+						},
+						"reason": "",
+						"remaining_health": 140.0,
+						"remaining_shield": 0.0,
+						"shield_spent": 0.0,
+						"stage": "hit_mitigation"
+					},
+					"lightning": {
+						"actor": "player",
+						"armour": 0.0,
+						"components": {
+							"lightning": 60.0
+						},
+						"damage_total": 60.0,
+						"details": [
+							{
+								"base": 100.0,
+								"before_defense": 100.0,
+								"final": 60.0,
+								"increased": 0.0,
+								"modifiers": [],
+								"more": 1.0,
+								"resistance": 0.4,
+								"type": "lightning"
+							}
+						],
+						"effective_resistances": {
+							"cold": 0.4,
+							"fire": 0.4,
+							"lightning": 0.4
+						},
+						"health_lost": 60.0,
+						"mitigated_components": {
+							"lightning": 40.0
+						},
+						"ok": true,
+						"overkill": 0.0,
+						"raw_components": {
+							"lightning": 100.0
+						},
+						"raw_resistances": {
+							"cold": 0.4,
+							"fire": 0.4,
+							"lightning": 0.4
+						},
+						"reason": "",
+						"remaining_health": 140.0,
+						"remaining_shield": 0.0,
+						"shield_spent": 0.0,
+						"stage": "hit_mitigation"
+					}
+				},
+				"profile": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.4,
+						"fire": 0.4,
+						"lightning": 0.4
+					},
+					"maximum_resistances": {
+						"cold": 0.83,
+						"fire": 0.83,
+						"lightning": 0.83
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 0.4,
+						"fire": 0.4,
+						"lightning": 0.4
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"stats": {
+					"cold_resistance": 0.4,
+					"fire_resistance": 0.4,
+					"lightning_resistance": 0.4,
+					"maximum_cold_resistance_add": 0.08,
+					"maximum_fire_resistance_add": 0.08,
+					"maximum_lightning_resistance_add": 0.08
+				}
+			},
+			"raw_75_cap_83": {
+				"fire_burn": {
+					"actor": "player",
+					"components": {
+						"fire": 25.0
+					},
+					"damage_total": 25.0,
+					"details": [
+						{
+							"before_defense": 100.0,
+							"final": 25.0,
+							"resistance": 0.75,
+							"type": "fire"
+						}
+					],
+					"health_lost": 25.0,
+					"mitigated_components": {
+						"fire": 75.0
+					},
+					"ok": true,
+					"overkill": 0.0,
+					"raw_components": {
+						"fire": 100.0
+					},
+					"reason": "",
+					"remaining_health": 175.0,
+					"remaining_shield": 0.0,
+					"shield_spent": 0.0,
+					"stage": "burning"
+				},
+				"hits": {
+					"cold": {
+						"actor": "player",
+						"armour": 0.0,
+						"components": {
+							"cold": 25.0
+						},
+						"damage_total": 25.0,
+						"details": [
+							{
+								"base": 100.0,
+								"before_defense": 100.0,
+								"final": 25.0,
+								"increased": 0.0,
+								"modifiers": [],
+								"more": 1.0,
+								"resistance": 0.75,
+								"type": "cold"
+							}
+						],
+						"effective_resistances": {
+							"cold": 0.75,
+							"fire": 0.75,
+							"lightning": 0.75
+						},
+						"health_lost": 25.0,
+						"mitigated_components": {
+							"cold": 75.0
+						},
+						"ok": true,
+						"overkill": 0.0,
+						"raw_components": {
+							"cold": 100.0
+						},
+						"raw_resistances": {
+							"cold": 0.75,
+							"fire": 0.75,
+							"lightning": 0.75
+						},
+						"reason": "",
+						"remaining_health": 175.0,
+						"remaining_shield": 0.0,
+						"shield_spent": 0.0,
+						"stage": "hit_mitigation"
+					},
+					"fire": {
+						"actor": "player",
+						"armour": 0.0,
+						"components": {
+							"fire": 25.0
+						},
+						"damage_total": 25.0,
+						"details": [
+							{
+								"base": 100.0,
+								"before_defense": 100.0,
+								"final": 25.0,
+								"increased": 0.0,
+								"modifiers": [],
+								"more": 1.0,
+								"resistance": 0.75,
+								"type": "fire"
+							}
+						],
+						"effective_resistances": {
+							"cold": 0.75,
+							"fire": 0.75,
+							"lightning": 0.75
+						},
+						"health_lost": 25.0,
+						"mitigated_components": {
+							"fire": 75.0
+						},
+						"ok": true,
+						"overkill": 0.0,
+						"raw_components": {
+							"fire": 100.0
+						},
+						"raw_resistances": {
+							"cold": 0.75,
+							"fire": 0.75,
+							"lightning": 0.75
+						},
+						"reason": "",
+						"remaining_health": 175.0,
+						"remaining_shield": 0.0,
+						"shield_spent": 0.0,
+						"stage": "hit_mitigation"
+					},
+					"lightning": {
+						"actor": "player",
+						"armour": 0.0,
+						"components": {
+							"lightning": 25.0
+						},
+						"damage_total": 25.0,
+						"details": [
+							{
+								"base": 100.0,
+								"before_defense": 100.0,
+								"final": 25.0,
+								"increased": 0.0,
+								"modifiers": [],
+								"more": 1.0,
+								"resistance": 0.75,
+								"type": "lightning"
+							}
+						],
+						"effective_resistances": {
+							"cold": 0.75,
+							"fire": 0.75,
+							"lightning": 0.75
+						},
+						"health_lost": 25.0,
+						"mitigated_components": {
+							"lightning": 75.0
+						},
+						"ok": true,
+						"overkill": 0.0,
+						"raw_components": {
+							"lightning": 100.0
+						},
+						"raw_resistances": {
+							"cold": 0.75,
+							"fire": 0.75,
+							"lightning": 0.75
+						},
+						"reason": "",
+						"remaining_health": 175.0,
+						"remaining_shield": 0.0,
+						"shield_spent": 0.0,
+						"stage": "hit_mitigation"
+					}
+				},
+				"profile": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.75,
+						"fire": 0.75,
+						"lightning": 0.75
+					},
+					"maximum_resistances": {
+						"cold": 0.83,
+						"fire": 0.83,
+						"lightning": 0.83
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 0.75,
+						"fire": 0.75,
+						"lightning": 0.75
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"stats": {
+					"cold_resistance": 0.75,
+					"fire_resistance": 0.75,
+					"lightning_resistance": 0.75,
+					"maximum_cold_resistance_add": 0.08,
+					"maximum_fire_resistance_add": 0.08,
+					"maximum_lightning_resistance_add": 0.08
+				}
+			},
+			"raw_83_cap_83": {
+				"fire_burn": {
+					"actor": "player",
+					"components": {
+						"fire": 17.000000000000004
+					},
+					"damage_total": 17.000000000000004,
+					"details": [
+						{
+							"before_defense": 100.0,
+							"final": 17.000000000000004,
+							"resistance": 0.83,
+							"type": "fire"
+						}
+					],
+					"health_lost": 17.000000000000004,
+					"mitigated_components": {
+						"fire": 83.0
+					},
+					"ok": true,
+					"overkill": 0.0,
+					"raw_components": {
+						"fire": 100.0
+					},
+					"reason": "",
+					"remaining_health": 183.0,
+					"remaining_shield": 0.0,
+					"shield_spent": 0.0,
+					"stage": "burning"
+				},
+				"hits": {
+					"cold": {
+						"actor": "player",
+						"armour": 0.0,
+						"components": {
+							"cold": 17.000000000000004
+						},
+						"damage_total": 17.000000000000004,
+						"details": [
+							{
+								"base": 100.0,
+								"before_defense": 100.0,
+								"final": 17.000000000000004,
+								"increased": 0.0,
+								"modifiers": [],
+								"more": 1.0,
+								"resistance": 0.83,
+								"type": "cold"
+							}
+						],
+						"effective_resistances": {
+							"cold": 0.83,
+							"fire": 0.83,
+							"lightning": 0.83
+						},
+						"health_lost": 17.000000000000004,
+						"mitigated_components": {
+							"cold": 83.0
+						},
+						"ok": true,
+						"overkill": 0.0,
+						"raw_components": {
+							"cold": 100.0
+						},
+						"raw_resistances": {
+							"cold": 0.83,
+							"fire": 0.83,
+							"lightning": 0.83
+						},
+						"reason": "",
+						"remaining_health": 183.0,
+						"remaining_shield": 0.0,
+						"shield_spent": 0.0,
+						"stage": "hit_mitigation"
+					},
+					"fire": {
+						"actor": "player",
+						"armour": 0.0,
+						"components": {
+							"fire": 17.000000000000004
+						},
+						"damage_total": 17.000000000000004,
+						"details": [
+							{
+								"base": 100.0,
+								"before_defense": 100.0,
+								"final": 17.000000000000004,
+								"increased": 0.0,
+								"modifiers": [],
+								"more": 1.0,
+								"resistance": 0.83,
+								"type": "fire"
+							}
+						],
+						"effective_resistances": {
+							"cold": 0.83,
+							"fire": 0.83,
+							"lightning": 0.83
+						},
+						"health_lost": 17.000000000000004,
+						"mitigated_components": {
+							"fire": 83.0
+						},
+						"ok": true,
+						"overkill": 0.0,
+						"raw_components": {
+							"fire": 100.0
+						},
+						"raw_resistances": {
+							"cold": 0.83,
+							"fire": 0.83,
+							"lightning": 0.83
+						},
+						"reason": "",
+						"remaining_health": 183.0,
+						"remaining_shield": 0.0,
+						"shield_spent": 0.0,
+						"stage": "hit_mitigation"
+					},
+					"lightning": {
+						"actor": "player",
+						"armour": 0.0,
+						"components": {
+							"lightning": 17.000000000000004
+						},
+						"damage_total": 17.000000000000004,
+						"details": [
+							{
+								"base": 100.0,
+								"before_defense": 100.0,
+								"final": 17.000000000000004,
+								"increased": 0.0,
+								"modifiers": [],
+								"more": 1.0,
+								"resistance": 0.83,
+								"type": "lightning"
+							}
+						],
+						"effective_resistances": {
+							"cold": 0.83,
+							"fire": 0.83,
+							"lightning": 0.83
+						},
+						"health_lost": 17.000000000000004,
+						"mitigated_components": {
+							"lightning": 83.0
+						},
+						"ok": true,
+						"overkill": 0.0,
+						"raw_components": {
+							"lightning": 100.0
+						},
+						"raw_resistances": {
+							"cold": 0.83,
+							"fire": 0.83,
+							"lightning": 0.83
+						},
+						"reason": "",
+						"remaining_health": 183.0,
+						"remaining_shield": 0.0,
+						"shield_spent": 0.0,
+						"stage": "hit_mitigation"
+					}
+				},
+				"profile": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.83,
+						"fire": 0.83,
+						"lightning": 0.83
+					},
+					"maximum_resistances": {
+						"cold": 0.83,
+						"fire": 0.83,
+						"lightning": 0.83
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 0.83,
+						"fire": 0.83,
+						"lightning": 0.83
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"stats": {
+					"cold_resistance": 0.83,
+					"fire_resistance": 0.83,
+					"lightning_resistance": 0.83,
+					"maximum_cold_resistance_add": 0.08,
+					"maximum_fire_resistance_add": 0.08,
+					"maximum_lightning_resistance_add": 0.08
+				}
+			},
+			"safety_ceiling": {
+				"fire_burn": {
+					"actor": "player",
+					"components": {
+						"fire": 17.000000000000004
+					},
+					"damage_total": 17.000000000000004,
+					"details": [
+						{
+							"before_defense": 100.0,
+							"final": 17.000000000000004,
+							"resistance": 0.83,
+							"type": "fire"
+						}
+					],
+					"health_lost": 17.000000000000004,
+					"mitigated_components": {
+						"fire": 83.0
+					},
+					"ok": true,
+					"overkill": 0.0,
+					"raw_components": {
+						"fire": 100.0
+					},
+					"reason": "",
+					"remaining_health": 183.0,
+					"remaining_shield": 0.0,
+					"shield_spent": 0.0,
+					"stage": "burning"
+				},
+				"hits": {
+					"cold": {
+						"actor": "player",
+						"armour": 0.0,
+						"components": {
+							"cold": 17.000000000000004
+						},
+						"damage_total": 17.000000000000004,
+						"details": [
+							{
+								"base": 100.0,
+								"before_defense": 100.0,
+								"final": 17.000000000000004,
+								"increased": 0.0,
+								"modifiers": [],
+								"more": 1.0,
+								"resistance": 0.83,
+								"type": "cold"
+							}
+						],
+						"effective_resistances": {
+							"cold": 0.83,
+							"fire": 0.83,
+							"lightning": 0.83
+						},
+						"health_lost": 17.000000000000004,
+						"mitigated_components": {
+							"cold": 83.0
+						},
+						"ok": true,
+						"overkill": 0.0,
+						"raw_components": {
+							"cold": 100.0
+						},
+						"raw_resistances": {
+							"cold": 1.0,
+							"fire": 1.0,
+							"lightning": 1.0
+						},
+						"reason": "",
+						"remaining_health": 183.0,
+						"remaining_shield": 0.0,
+						"shield_spent": 0.0,
+						"stage": "hit_mitigation"
+					},
+					"fire": {
+						"actor": "player",
+						"armour": 0.0,
+						"components": {
+							"fire": 17.000000000000004
+						},
+						"damage_total": 17.000000000000004,
+						"details": [
+							{
+								"base": 100.0,
+								"before_defense": 100.0,
+								"final": 17.000000000000004,
+								"increased": 0.0,
+								"modifiers": [],
+								"more": 1.0,
+								"resistance": 0.83,
+								"type": "fire"
+							}
+						],
+						"effective_resistances": {
+							"cold": 0.83,
+							"fire": 0.83,
+							"lightning": 0.83
+						},
+						"health_lost": 17.000000000000004,
+						"mitigated_components": {
+							"fire": 83.0
+						},
+						"ok": true,
+						"overkill": 0.0,
+						"raw_components": {
+							"fire": 100.0
+						},
+						"raw_resistances": {
+							"cold": 1.0,
+							"fire": 1.0,
+							"lightning": 1.0
+						},
+						"reason": "",
+						"remaining_health": 183.0,
+						"remaining_shield": 0.0,
+						"shield_spent": 0.0,
+						"stage": "hit_mitigation"
+					},
+					"lightning": {
+						"actor": "player",
+						"armour": 0.0,
+						"components": {
+							"lightning": 17.000000000000004
+						},
+						"damage_total": 17.000000000000004,
+						"details": [
+							{
+								"base": 100.0,
+								"before_defense": 100.0,
+								"final": 17.000000000000004,
+								"increased": 0.0,
+								"modifiers": [],
+								"more": 1.0,
+								"resistance": 0.83,
+								"type": "lightning"
+							}
+						],
+						"effective_resistances": {
+							"cold": 0.83,
+							"fire": 0.83,
+							"lightning": 0.83
+						},
+						"health_lost": 17.000000000000004,
+						"mitigated_components": {
+							"lightning": 83.0
+						},
+						"ok": true,
+						"overkill": 0.0,
+						"raw_components": {
+							"lightning": 100.0
+						},
+						"raw_resistances": {
+							"cold": 1.0,
+							"fire": 1.0,
+							"lightning": 1.0
+						},
+						"reason": "",
+						"remaining_health": 183.0,
+						"remaining_shield": 0.0,
+						"shield_spent": 0.0,
+						"stage": "hit_mitigation"
+					}
+				},
+				"profile": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.83,
+						"fire": 0.83,
+						"lightning": 0.83
+					},
+					"maximum_resistances": {
+						"cold": 0.83,
+						"fire": 0.83,
+						"lightning": 0.83
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 1.0,
+						"fire": 1.0,
+						"lightning": 1.0
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"stats": {
+					"cold_resistance": 1.0,
+					"fire_resistance": 1.0,
+					"lightning_resistance": 1.0,
+					"maximum_cold_resistance_add": 0.25,
+					"maximum_fire_resistance_add": 0.25,
+					"maximum_lightning_resistance_add": 0.25
+				}
+			}
+		},
+		"formula": "当前上限 = min(83%, 75% + 对应最大抗性加成)；有效抗性 = clamp(原始抗性, 0%, 当前上限)",
+		"mastery_boundaries": {
+			"1727": {
+				"effect": 1727,
+				"execution": {
+					"grants": [],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"+1% to maximum Chaos Resistance"
+					]
+				},
+				"host_nodes": [
+					"21801",
+					"23547",
+					"42361"
+				],
+				"source_lines": [
+					"+1% to maximum Chaos Resistance"
+				]
+			},
+			"34383": {
+				"effect": 34383,
+				"execution": {
+					"grants": [],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"+1% to all maximum Elemental Resistances if you have Reserved Life and Mana"
+					]
+				},
+				"host_nodes": [
+					"13712",
+					"39836",
+					"46495",
+					"47197",
+					"53615",
+					"55491",
+					"64128",
+					"6507"
+				],
+				"source_lines": [
+					"+1% to all maximum Elemental Resistances if you have Reserved Life and Mana"
+				]
+			},
+			"61283": {
+				"effect": 61283,
+				"execution": {
+					"grants": [],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"Minions have +8% to all maximum Elemental Resistances"
+					]
+				},
+				"host_nodes": [
+					"22970",
+					"26393",
+					"41225",
+					"48290",
+					"9083"
+				],
+				"source_lines": [
+					"Minions have +8% to all maximum Elemental Resistances"
+				]
+			},
+			"7137": {
+				"effect": 7137,
+				"execution": {
+					"grants": [],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"+1% to all maximum Elemental Resistances if Equipped Helmet, Body Armour, Gloves, and Boots all have Armour"
+					]
+				},
+				"host_nodes": [
+					"45358",
+					"48717",
+					"52462",
+					"54340",
+					"64406"
+				],
+				"source_lines": [
+					"+1% to all maximum Elemental Resistances if Equipped Helmet, Body Armour, Gloves, and Boots all have Armour"
+				]
+			}
+		},
+		"migration": "schema36先严格校验旧35，原文件逐字节备份后只迁版本；不赠点、不赠物，旧35注入新完整节点仍拒绝",
+		"minimum_save_version": 36,
+		"new_complete_ordinary_nodes": [
+			"15522",
+			"24133",
+			"25989",
+			"34917",
+			"42009",
+			"45341",
+			"48929",
+			"50029",
+			"5065",
+			"53118",
+			"60031",
+			"6043"
+		],
+		"new_images": [],
+		"nodes": {
+			"15522": {
+				"execution": {
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "maximum_lightning_resistance_add",
+							"value": 0.01
+						}
+					],
+					"status": "full",
+					"supported": [
+						"+1% to maximum Lightning Resistance"
+					],
+					"unsupported": []
+				},
+				"legacy_execution": {
+					"grants": [],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"+1% to maximum Lightning Resistance"
+					]
+				},
+				"mastery_choices": [],
+				"name": "Maximum Lightning Resistance",
+				"source_lines": [
+					"+1% to maximum Lightning Resistance"
+				],
+				"standard_graph": true
+			},
+			"24133": {
+				"execution": {
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "evasion_increased",
+							"value": 0.24
+						},
+						{
+							"mode": "flat",
+							"stat": "fire_resistance",
+							"value": 0.08
+						},
+						{
+							"mode": "flat",
+							"stat": "cold_resistance",
+							"value": 0.08
+						},
+						{
+							"mode": "flat",
+							"stat": "lightning_resistance",
+							"value": 0.08
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_cold_resistance_add",
+							"value": 0.01
+						}
+					],
+					"status": "full",
+					"supported": [
+						"24% increased Evasion Rating",
+						"+8% to all Elemental Resistances",
+						"+1% to maximum Cold Resistance"
+					],
+					"unsupported": []
+				},
+				"legacy_execution": {
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "evasion_increased",
+							"value": 0.24
+						},
+						{
+							"mode": "flat",
+							"stat": "fire_resistance",
+							"value": 0.08
+						},
+						{
+							"mode": "flat",
+							"stat": "cold_resistance",
+							"value": 0.08
+						},
+						{
+							"mode": "flat",
+							"stat": "lightning_resistance",
+							"value": 0.08
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"24% increased Evasion Rating",
+						"+8% to all Elemental Resistances"
+					],
+					"unsupported": [
+						"+1% to maximum Cold Resistance"
+					]
+				},
+				"mastery_choices": [],
+				"name": "Survivalist",
+				"source_lines": [
+					"24% increased Evasion Rating",
+					"+8% to all Elemental Resistances",
+					"+1% to maximum Cold Resistance"
+				],
+				"standard_graph": true
+			},
+			"25989": {
+				"execution": {
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "maximum_fire_resistance_add",
+							"value": 0.02
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_cold_resistance_add",
+							"value": 0.02
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_lightning_resistance_add",
+							"value": 0.02
+						}
+					],
+					"status": "full",
+					"supported": [
+						"+2% to all maximum Elemental Resistances"
+					],
+					"unsupported": []
+				},
+				"legacy_execution": {
+					"grants": [],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"+2% to all maximum Elemental Resistances"
+					]
+				},
+				"mastery_choices": [],
+				"name": "Nomadic Teachings",
+				"source_lines": [
+					"+2% to all maximum Elemental Resistances"
+				],
+				"standard_graph": true
+			},
+			"34917": {
+				"execution": {
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "maximum_cold_resistance_add",
+							"value": 0.01
+						}
+					],
+					"status": "full",
+					"supported": [
+						"+1% to maximum Cold Resistance"
+					],
+					"unsupported": []
+				},
+				"legacy_execution": {
+					"grants": [],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"+1% to maximum Cold Resistance"
+					]
+				},
+				"mastery_choices": [],
+				"name": "Maximum Cold Resistance",
+				"source_lines": [
+					"+1% to maximum Cold Resistance"
+				],
+				"standard_graph": true
+			},
+			"42009": {
+				"execution": {
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "armour",
+							"value": 150.0
+						},
+						{
+							"mode": "increased",
+							"stat": "armour_increased",
+							"value": 0.3
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_fire_resistance_add",
+							"value": 0.01
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_cold_resistance_add",
+							"value": 0.01
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_lightning_resistance_add",
+							"value": 0.01
+						}
+					],
+					"status": "full",
+					"supported": [
+						"+150 to Armour",
+						"30% increased Armour",
+						"+1% to all maximum Elemental Resistances"
+					],
+					"unsupported": []
+				},
+				"legacy_execution": {
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "armour",
+							"value": 150.0
+						},
+						{
+							"mode": "increased",
+							"stat": "armour_increased",
+							"value": 0.3
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"+150 to Armour",
+						"30% increased Armour"
+					],
+					"unsupported": [
+						"+1% to all maximum Elemental Resistances"
+					]
+				},
+				"mastery_choices": [],
+				"name": "Soul of Steel",
+				"source_lines": [
+					"+150 to Armour",
+					"30% increased Armour",
+					"+1% to all maximum Elemental Resistances"
+				],
+				"standard_graph": true
+			},
+			"45341": {
+				"execution": {
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "maximum_cold_resistance_add",
+							"value": 0.01
+						}
+					],
+					"status": "full",
+					"supported": [
+						"+1% to maximum Cold Resistance"
+					],
+					"unsupported": []
+				},
+				"legacy_execution": {
+					"grants": [],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"+1% to maximum Cold Resistance"
+					]
+				},
+				"mastery_choices": [],
+				"name": "Maximum Cold Resistance",
+				"source_lines": [
+					"+1% to maximum Cold Resistance"
+				],
+				"standard_graph": true
+			},
+			"48929": {
+				"execution": {
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "maximum_fire_resistance_add",
+							"value": 0.01
+						}
+					],
+					"status": "full",
+					"supported": [
+						"+1% to maximum Fire Resistance"
+					],
+					"unsupported": []
+				},
+				"legacy_execution": {
+					"grants": [],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"+1% to maximum Fire Resistance"
+					]
+				},
+				"mastery_choices": [],
+				"name": "Maximum Fire Resistance",
+				"source_lines": [
+					"+1% to maximum Fire Resistance"
+				],
+				"standard_graph": true
+			},
+			"50029": {
+				"execution": {
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "max_shield",
+							"value": 0.18
+						},
+						{
+							"mode": "increased",
+							"stat": "shield_recharge_rate_increased",
+							"value": 0.15
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_lightning_resistance_add",
+							"value": 0.01
+						}
+					],
+					"status": "full",
+					"supported": [
+						"18% increased maximum Energy Shield",
+						"15% increased Energy Shield Recharge Rate",
+						"+1% to maximum Lightning Resistance"
+					],
+					"unsupported": []
+				},
+				"legacy_execution": {
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "max_shield",
+							"value": 0.18
+						},
+						{
+							"mode": "increased",
+							"stat": "shield_recharge_rate_increased",
+							"value": 0.15
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"18% increased maximum Energy Shield",
+						"15% increased Energy Shield Recharge Rate"
+					],
+					"unsupported": [
+						"+1% to maximum Lightning Resistance"
+					]
+				},
+				"mastery_choices": [],
+				"name": "Unnatural Calm",
+				"source_lines": [
+					"18% increased maximum Energy Shield",
+					"15% increased Energy Shield Recharge Rate",
+					"+1% to maximum Lightning Resistance"
+				],
+				"standard_graph": true
+			},
+			"5065": {
+				"execution": {
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "maximum_lightning_resistance_add",
+							"value": 0.01
+						}
+					],
+					"status": "full",
+					"supported": [
+						"+1% to maximum Lightning Resistance"
+					],
+					"unsupported": []
+				},
+				"legacy_execution": {
+					"grants": [],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"+1% to maximum Lightning Resistance"
+					]
+				},
+				"mastery_choices": [],
+				"name": "Maximum Lightning Resistance",
+				"source_lines": [
+					"+1% to maximum Lightning Resistance"
+				],
+				"standard_graph": true
+			},
+			"53118": {
+				"execution": {
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "max_health",
+							"value": 0.08
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_fire_resistance_add",
+							"value": 0.01
+						},
+						{
+							"mode": "flat",
+							"stat": "fire_resistance",
+							"value": 0.08
+						}
+					],
+					"status": "full",
+					"supported": [
+						"8% increased maximum Life",
+						"+1% to maximum Fire Resistance",
+						"+8% to Fire Resistance"
+					],
+					"unsupported": []
+				},
+				"legacy_execution": {
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "max_health",
+							"value": 0.08
+						},
+						{
+							"mode": "flat",
+							"stat": "fire_resistance",
+							"value": 0.08
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"8% increased maximum Life",
+						"+8% to Fire Resistance"
+					],
+					"unsupported": [
+						"+1% to maximum Fire Resistance"
+					]
+				},
+				"mastery_choices": [],
+				"name": "Barbarism",
+				"source_lines": [
+					"8% increased maximum Life",
+					"+1% to maximum Fire Resistance",
+					"+8% to Fire Resistance"
+				],
+				"standard_graph": true
+			},
+			"60031": {
+				"execution": {
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "maximum_fire_resistance_add",
+							"value": 0.02
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_cold_resistance_add",
+							"value": 0.02
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_lightning_resistance_add",
+							"value": 0.02
+						}
+					],
+					"status": "full",
+					"supported": [
+						"+2% to all maximum Elemental Resistances"
+					],
+					"unsupported": []
+				},
+				"legacy_execution": {
+					"grants": [],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"+2% to all maximum Elemental Resistances"
+					]
+				},
+				"mastery_choices": [],
+				"name": "Prismatic Skin",
+				"source_lines": [
+					"+2% to all maximum Elemental Resistances"
+				],
+				"standard_graph": true
+			},
+			"6043": {
+				"execution": {
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "maximum_fire_resistance_add",
+							"value": 0.01
+						}
+					],
+					"status": "full",
+					"supported": [
+						"+1% to maximum Fire Resistance"
+					],
+					"unsupported": []
+				},
+				"legacy_execution": {
+					"grants": [],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"+1% to maximum Fire Resistance"
+					]
+				},
+				"mastery_choices": [],
+				"name": "Maximum Fire Resistance",
+				"source_lines": [
+					"+1% to maximum Fire Resistance"
+				],
+				"standard_graph": true
+			}
+		},
+		"producer": "SourceTree.current36 → CanonicalGameState.get_resistance_profile → Defense.resistance_profile / incoming_source_hit / incoming_burn",
+		"reachable_build": {
+			"allocated": [
+				"47175",
+				"31628",
+				"9511",
+				"23881",
+				"26523",
+				"6446",
+				"10221",
+				"50422",
+				"27195",
+				"34917",
+				"50570",
+				"7399",
+				"29353",
+				"44202",
+				"23027",
+				"60472",
+				"26270",
+				"64210",
+				"7444",
+				"36678",
+				"39841",
+				"63447",
+				"33864",
+				"23659",
+				"50029",
+				"27166",
+				"48929",
+				"25989",
+				"15522",
+				"55649",
+				"44429",
+				"53118",
+				"50904",
+				"6981",
+				"36543",
+				"49412",
+				"31080",
+				"43374",
+				"30691",
+				"476",
+				"24865",
+				"34031",
+				"49109",
+				"21435",
+				"56001",
+				"17201",
+				"19711",
+				"20010",
+				"23471",
+				"3469",
+				"64709",
+				"60942",
+				"41866",
+				"63843",
+				"27283",
+				"37619",
+				"24133",
+				"64235",
+				"50340",
+				"5065",
+				"60031",
+				"6043",
+				"45341",
+				"40653",
+				"42800",
+				"487",
+				"7162",
+				"9695",
+				"42009",
+				"53793",
+				"37884",
+				"31928",
+				"65308",
+				"6718"
+			],
+			"class_id": 1,
+			"level": 69,
+			"points_spent": 73,
+			"profile": {
+				"base_cap": 0.75,
+				"effective_resistances": {
+					"cold": 0.83,
+					"fire": 0.83,
+					"lightning": 0.83
+				},
+				"maximum_resistances": {
+					"cold": 0.83,
+					"fire": 0.83,
+					"lightning": 0.83
+				},
+				"ok": true,
+				"raw_resistances": {
+					"cold": 0.8300000000000002,
+					"fire": 0.9100000000000003,
+					"lightning": 0.8300000000000002
+				},
+				"reason": "",
+				"safety_cap": 0.83
+			},
+			"save_attempts": 0,
+			"stats": {
+				"accuracy": 348.0,
+				"accuracy_increased": 0.0,
+				"additional_skill_slots": 0.0,
+				"area_increased": 0.0,
+				"area_size_increased": 0.0,
+				"armour": 340.0,
+				"armour_increased": 0.9999999999999999,
+				"attack_added_fire": 0.0,
+				"attack_added_physical": 0.0,
+				"attack_crit_chance_increased": 0.0,
+				"attack_elemental_increased": 0.0,
+				"attack_life_leech": 0.0,
+				"attack_mana_leech": 0.0,
+				"attack_physical_increased": 0.0,
+				"attack_speed": 1.7,
+				"attack_speed_increased": 0.0,
+				"chaos_increased": 0.0,
+				"cold_increased": 0.0,
+				"cold_resistance": 0.8300000000000002,
+				"crit_base_chance": 0.05,
+				"crit_base_multiplier": 1.5,
+				"crit_chance_increased": 0.0,
+				"crit_multiplier_add": 0.0,
+				"damage": 26.0,
+				"damage_taken_from_mana_before_life": 0.0,
+				"damaging_ailments_faster": 0.0,
+				"dexterity": 124.0,
+				"elemental_increased": 0.0,
+				"evasion": 31.200000000000003,
+				"evasion_increased": 0.84,
+				"fire_dot_multiplier_add": 0.0,
+				"fire_increased": 0.0,
+				"fire_resistance": 0.9100000000000003,
+				"flask_charges_gained_increased": 0.0,
+				"flask_life_recovery_increased": 0.0,
+				"flask_mana_recovery_increased": 0.0,
+				"global_increased": 0.0,
+				"intelligence": 84.0,
+				"life_leech_max_rate_increased": 0.0,
+				"life_leech_rate_increased": 0.0,
+				"life_regen": 0.0,
+				"life_regen_percent": 0.0,
+				"lightning_increased": 0.0,
+				"lightning_resistance": 0.8300000000000002,
+				"mana_cost_efficiency_increased": 0.0,
+				"mana_cost_increased": 0.0,
+				"mana_leech_max_rate_increased": 0.0,
+				"mana_leech_rate_increased": 0.0,
+				"mana_regen": 12.0,
+				"mana_regen_increased": 0.0,
+				"max_health": 322.56000000000006,
+				"max_mana": 172.0,
+				"max_shield": 124.19999999999999,
+				"maximum_cold_resistance_add": 0.07999999999999999,
+				"maximum_fire_resistance_add": 0.07999999999999999,
+				"maximum_lightning_resistance_add": 0.08,
+				"melee_area_size_increased": 0.0,
+				"melee_crit_chance_increased": 0.0,
+				"melee_crit_multiplier_add": 0.0,
+				"melee_physical_increased": 0.7000000000000001,
+				"move_speed": 240.0,
+				"move_speed_increased": 0.0,
+				"physical_attack_life_leech": 0.0,
+				"physical_attack_mana_leech": 0.0,
+				"physical_increased": 0.0,
+				"projectile_attack_crit_chance_increased": 0.0,
+				"projectile_attack_crit_multiplier_add": 0.0,
+				"projectile_count": 0.0,
+				"projectile_increased": 0.0,
+				"projectile_speed_increased": 0.0,
+				"shield_recharge_delay": 4.0,
+				"shield_recharge_rate": 18.4,
+				"shield_recharge_rate_increased": 0.15,
+				"shield_recharge_start_faster": 0.0,
+				"shield_regen": 16.0,
+				"spell_added_cold": 0.0,
+				"spell_added_lightning": 0.0,
+				"spell_area_size_increased": 0.0,
+				"spell_crit_chance_increased": 0.0,
+				"spell_crit_multiplier_add": 0.0,
+				"spell_increased": 0.0,
+				"strength": 272.0
+			},
+			"whole_build_valid": true,
+			"witness_path": "res://docs/qa/v059-source/allocation-witness.json"
+		},
+		"route_scope": "野蛮人69级73点的普通连通可行见证，保留沿途全部属性，无写档；不是全局最省点或完整配装最优结论",
+		"safety_cap": 0.83,
+		"scope": "只接入无条件最大火、冰、电抗性；全元素句展开三字段，每ID一次。寻枝珠宝只影响连接准入，不重复授予属性",
+		"source_policy": 36,
+		"source_reminder": "源资料90%提醒原样保留；本游戏安全上限为83%，不采用90%预算",
+		"source_sha256": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+		"source_version": "3.29.1",
+		"timing": "最大抗性是结算时的当前防御；换装、分配和退款只影响后续命中与燃烧，不冻结到攻击者施放快照，不改已算伤害或燃烧原始每秒伤害"
 	},
 	"ember_proliferation": {
 		"examples": {
@@ -17291,7 +19708,7 @@
 				"player",
 				"monster"
 			],
-			"description": "最大生命 +8，火焰抗性 +15%。火焰抗性作用于承受的火焰命中，有效上限 75%。",
+			"description": "最大生命 +8，火焰抗性 +15%。火焰抗性降低火焰命中与燃烧伤害；默认上限75%，最大抗性天赋可提高至本游戏安全上限83%，仍需另外取得足够原始抗性。",
 			"eligible_affixes": [
 				"rootwell",
 				"deepwell",
@@ -28253,7 +30670,7 @@
 		"pool_id": "forgeblade_v34",
 		"save_version": 34
 	},
-	"game_version": "0.58.0",
+	"game_version": "0.59.0",
 	"jewel_affixes": {
 		"barrier": {
 			"kind": "prefix",
@@ -28755,6 +31172,9 @@
 					"max_health": 130.0,
 					"max_mana": 207.08,
 					"max_shield": 96.30000000000001,
+					"maximum_cold_resistance_add": 0.0,
+					"maximum_fire_resistance_add": 0.0,
+					"maximum_lightning_resistance_add": 0.0,
 					"melee_area_size_increased": 0.0,
 					"melee_crit_chance_increased": 0.0,
 					"melee_crit_multiplier_add": 0.0,
@@ -28871,6 +31291,9 @@
 					"max_health": 192.0,
 					"max_mana": 167.0,
 					"max_shield": 96.30000000000001,
+					"maximum_cold_resistance_add": 0.0,
+					"maximum_fire_resistance_add": 0.0,
+					"maximum_lightning_resistance_add": 0.0,
 					"melee_area_size_increased": 0.0,
 					"melee_crit_chance_increased": 0.0,
 					"melee_crit_multiplier_add": 0.0,
@@ -28995,6 +31418,9 @@
 					"max_health": 223.2,
 					"max_mana": 162.0,
 					"max_shield": 95.4,
+					"maximum_cold_resistance_add": 0.0,
+					"maximum_fire_resistance_add": 0.0,
+					"maximum_lightning_resistance_add": 0.0,
 					"melee_area_size_increased": 0.0,
 					"melee_crit_chance_increased": 0.0,
 					"melee_crit_multiplier_add": 0.0,
@@ -29101,6 +31527,9 @@
 					"max_health": 132.0,
 					"max_mana": 182.0,
 					"max_shield": 96.30000000000001,
+					"maximum_cold_resistance_add": 0.0,
+					"maximum_fire_resistance_add": 0.0,
+					"maximum_lightning_resistance_add": 0.0,
 					"melee_area_size_increased": 0.0,
 					"melee_crit_chance_increased": 0.0,
 					"melee_crit_multiplier_add": 0.0,
@@ -29221,6 +31650,9 @@
 					"max_health": 252.0,
 					"max_mana": 167.0,
 					"max_shield": 96.30000000000001,
+					"maximum_cold_resistance_add": 0.0,
+					"maximum_fire_resistance_add": 0.0,
+					"maximum_lightning_resistance_add": 0.0,
 					"melee_area_size_increased": 0.0,
 					"melee_crit_chance_increased": 0.0,
 					"melee_crit_multiplier_add": 0.0,
@@ -29327,6 +31759,9 @@
 					"max_health": 131.0,
 					"max_mana": 175.0,
 					"max_shield": 95.4,
+					"maximum_cold_resistance_add": 0.0,
+					"maximum_fire_resistance_add": 0.0,
+					"maximum_lightning_resistance_add": 0.0,
 					"melee_area_size_increased": 0.0,
 					"melee_crit_chance_increased": 0.0,
 					"melee_crit_multiplier_add": 0.0,
@@ -29443,6 +31878,9 @@
 					"max_health": 137.0,
 					"max_mana": 201.0,
 					"max_shield": 116.28000000000002,
+					"maximum_cold_resistance_add": 0.0,
+					"maximum_fire_resistance_add": 0.0,
+					"maximum_lightning_resistance_add": 0.0,
 					"melee_area_size_increased": 0.0,
 					"melee_crit_chance_increased": 0.0,
 					"melee_crit_multiplier_add": 0.0,
@@ -33173,6 +35611,9 @@
 					"max_health": 130.0,
 					"max_mana": 110.0,
 					"max_shield": 61.2,
+					"maximum_cold_resistance_add": 0.0,
+					"maximum_fire_resistance_add": 0.0,
+					"maximum_lightning_resistance_add": 0.0,
 					"melee_area_size_increased": 0.0,
 					"melee_crit_chance_increased": 0.0,
 					"melee_crit_multiplier_add": 0.0,
@@ -33622,6 +36063,9 @@
 					"max_health": 130.0,
 					"max_mana": 132.0,
 					"max_shield": 61.2,
+					"maximum_cold_resistance_add": 0.0,
+					"maximum_fire_resistance_add": 0.0,
+					"maximum_lightning_resistance_add": 0.0,
 					"melee_area_size_increased": 0.0,
 					"melee_crit_chance_increased": 0.0,
 					"melee_crit_multiplier_add": 0.0,
@@ -34299,7 +36743,7 @@
 			"max_targets": 1,
 			"radius": 60.0
 		},
-		"save_version": 35,
+		"save_version": 36,
 		"scope": "hit + attack + melee；不含area，不受范围或投射物速度提高，也不占投射物容量，无返回或飞行结束爆炸。",
 		"timing": "沿用attack_timer与当前attack_speed；没有独立技能冷却或魔力支付。"
 	},
@@ -34322,7 +36766,7 @@
 					"affix_lines": [],
 					"base_id": "emberhide_vest",
 					"base_name": "灰烬皮甲",
-					"description": "最大生命 +8，火焰抗性 +15%。火焰抗性作用于承受的火焰命中，有效上限 75%。",
+					"description": "最大生命 +8，火焰抗性 +15%。火焰抗性降低火焰命中与燃烧伤害；默认上限75%，最大抗性天赋可提高至本游戏安全上限83%，仍需另外取得足够原始抗性。",
 					"effects": [],
 					"id": "gear_000001",
 					"item_level": 5,
@@ -34833,6 +37277,9 @@
 							"max_health": 132.0,
 							"max_mana": 140.0,
 							"max_shield": 91.8,
+							"maximum_cold_resistance_add": 0.0,
+							"maximum_fire_resistance_add": 0.0,
+							"maximum_lightning_resistance_add": 0.0,
 							"melee_area_size_increased": 0.0,
 							"melee_crit_chance_increased": 0.0,
 							"melee_crit_multiplier_add": 0.0,
@@ -34965,6 +37412,9 @@
 							"max_health": 130.0,
 							"max_mana": 140.0,
 							"max_shield": 91.8,
+							"maximum_cold_resistance_add": 0.0,
+							"maximum_fire_resistance_add": 0.0,
+							"maximum_lightning_resistance_add": 0.0,
 							"melee_area_size_increased": 0.0,
 							"melee_crit_chance_increased": 0.0,
 							"melee_crit_multiplier_add": 0.0,
@@ -35056,6 +37506,9 @@
 							"max_health": 130.0,
 							"max_mana": 140.0,
 							"max_shield": 91.8,
+							"maximum_cold_resistance_add": 0.0,
+							"maximum_fire_resistance_add": 0.0,
+							"maximum_lightning_resistance_add": 0.0,
 							"melee_area_size_increased": 0.0,
 							"melee_crit_chance_increased": 0.0,
 							"melee_crit_multiplier_add": 0.0,
@@ -35455,6 +37908,9 @@
 							"max_health": 132.0,
 							"max_mana": 140.0,
 							"max_shield": 91.8,
+							"maximum_cold_resistance_add": 0.0,
+							"maximum_fire_resistance_add": 0.0,
+							"maximum_lightning_resistance_add": 0.0,
 							"melee_area_size_increased": 0.0,
 							"melee_crit_chance_increased": 0.0,
 							"melee_crit_multiplier_add": 0.0,
@@ -35587,6 +38043,9 @@
 							"max_health": 130.0,
 							"max_mana": 140.0,
 							"max_shield": 91.8,
+							"maximum_cold_resistance_add": 0.0,
+							"maximum_fire_resistance_add": 0.0,
+							"maximum_lightning_resistance_add": 0.0,
 							"melee_area_size_increased": 0.0,
 							"melee_crit_chance_increased": 0.0,
 							"melee_crit_multiplier_add": 0.0,
@@ -35678,6 +38137,9 @@
 							"max_health": 130.0,
 							"max_mana": 140.0,
 							"max_shield": 91.8,
+							"maximum_cold_resistance_add": 0.0,
+							"maximum_fire_resistance_add": 0.0,
+							"maximum_lightning_resistance_add": 0.0,
 							"melee_area_size_increased": 0.0,
 							"melee_crit_chance_increased": 0.0,
 							"melee_crit_multiplier_add": 0.0,
@@ -37160,7 +39622,7 @@
 		"quality": 0,
 		"recycle_credit": 1,
 		"recycle_location": "bag",
-		"schema": 35,
+		"schema": 36,
 		"test_supply_separate": true
 	},
 	"normal_journey": {
@@ -42259,7 +44721,7 @@
 		"source": "SkillCompiler + ProjectileRuntime.advance + DamageResolver",
 		"target_count": 6
 	},
-	"save_version": 35,
+	"save_version": 36,
 	"schema_version": 3,
 	"sectors": [
 		{
@@ -277196,6 +279658,9 @@
 					"max_health": 131.0,
 					"max_mana": 137.0,
 					"max_shield": 90.9,
+					"maximum_cold_resistance_add": 0.0,
+					"maximum_fire_resistance_add": 0.0,
+					"maximum_lightning_resistance_add": 0.0,
 					"melee_area_size_increased": 0.0,
 					"melee_crit_chance_increased": 0.0,
 					"melee_crit_multiplier_add": 0.0,
@@ -284989,6 +287454,9 @@
 					"max_health": 177.0,
 					"max_mana": 137.0,
 					"max_shield": 90.9,
+					"maximum_cold_resistance_add": 0.0,
+					"maximum_fire_resistance_add": 0.0,
+					"maximum_lightning_resistance_add": 0.0,
 					"melee_area_size_increased": 0.0,
 					"melee_crit_chance_increased": 0.0,
 					"melee_crit_multiplier_add": 0.0,
@@ -285286,6 +287754,9 @@
 					"max_health": 127.0,
 					"max_mana": 207.0,
 					"max_shield": 116.48000000000002,
+					"maximum_cold_resistance_add": 0.0,
+					"maximum_fire_resistance_add": 0.0,
+					"maximum_lightning_resistance_add": 0.0,
 					"melee_area_size_increased": 0.0,
 					"melee_crit_chance_increased": 0.0,
 					"melee_crit_multiplier_add": 0.0,
@@ -285580,6 +288051,9 @@
 					"max_health": 131.0,
 					"max_mana": 195.0,
 					"max_shield": 99.00000000000001,
+					"maximum_cold_resistance_add": 0.0,
+					"maximum_fire_resistance_add": 0.0,
+					"maximum_lightning_resistance_add": 0.0,
 					"melee_area_size_increased": 0.0,
 					"melee_crit_chance_increased": 0.0,
 					"melee_crit_multiplier_add": 0.0,
@@ -304837,11 +307311,28 @@
 			"11820": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "maximum_fire_resistance_add",
+							"value": 0.01
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_cold_resistance_add",
+							"value": 0.01
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_lightning_resistance_add",
+							"value": 0.01
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"+1% to all maximum Elemental Resistances"
+					],
 					"unsupported": [
-						"+1% to all maximum Elemental Resistances",
 						"20% reduced Elemental Ailment Duration on you",
 						"20% reduced Effect of Chill and Shock on you"
 					]
@@ -313138,12 +315629,18 @@
 			"15522": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "maximum_lightning_resistance_add",
+							"value": 0.01
+						}
+					],
+					"status": "full",
+					"supported": [
 						"+1% to maximum Lightning Resistance"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "15522",
@@ -313893,16 +316390,21 @@
 					"grants": [
 						{
 							"mode": "flat",
+							"stat": "maximum_fire_resistance_add",
+							"value": 0.01
+						},
+						{
+							"mode": "flat",
 							"stat": "fire_resistance",
 							"value": 0.2
 						}
 					],
 					"status": "partial",
 					"supported": [
+						"+1% to maximum Fire Resistance",
 						"+20% to Fire Resistance"
 					],
 					"unsupported": [
-						"+1% to maximum Fire Resistance",
 						"30% chance to Avoid being Ignited"
 					]
 				},
@@ -323883,13 +326385,30 @@
 			"20832": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "maximum_fire_resistance_add",
+							"value": 0.01
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_cold_resistance_add",
+							"value": 0.01
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_lightning_resistance_add",
+							"value": 0.01
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"+1% to all maximum Elemental Resistances"
+					],
 					"unsupported": [
 						"+4% Chance to Block Attack Damage while holding a Shield",
-						"+4% Chance to Block Spell Damage while holding a Shield",
-						"+1% to all maximum Elemental Resistances"
+						"+4% Chance to Block Spell Damage while holding a Shield"
 					]
 				},
 				"has_position": true,
@@ -330992,16 +333511,20 @@
 							"mode": "flat",
 							"stat": "lightning_resistance",
 							"value": 0.08
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_cold_resistance_add",
+							"value": 0.01
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
 						"24% increased Evasion Rating",
-						"+8% to all Elemental Resistances"
-					],
-					"unsupported": [
+						"+8% to all Elemental Resistances",
 						"+1% to maximum Cold Resistance"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "24133",
@@ -335822,12 +338345,28 @@
 			"25989": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "maximum_fire_resistance_add",
+							"value": 0.02
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_cold_resistance_add",
+							"value": 0.02
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_lightning_resistance_add",
+							"value": 0.02
+						}
+					],
+					"status": "full",
+					"supported": [
 						"+2% to all maximum Elemental Resistances"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "25989",
@@ -352984,16 +355523,21 @@
 					"grants": [
 						{
 							"mode": "flat",
+							"stat": "maximum_cold_resistance_add",
+							"value": 0.01
+						},
+						{
+							"mode": "flat",
 							"stat": "cold_resistance",
 							"value": 0.2
 						}
 					],
 					"status": "partial",
 					"supported": [
+						"+1% to maximum Cold Resistance",
 						"+20% to Cold Resistance"
 					],
 					"unsupported": [
-						"+1% to maximum Cold Resistance",
 						"30% chance to Avoid being Frozen"
 					]
 				},
@@ -356421,12 +358965,18 @@
 			"34917": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "maximum_cold_resistance_add",
+							"value": 0.01
+						}
+					],
+					"status": "full",
+					"supported": [
 						"+1% to maximum Cold Resistance"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "34917",
@@ -366196,18 +368746,22 @@
 				"execution": {
 					"grants": [
 						{
+							"mode": "flat",
+							"stat": "maximum_cold_resistance_add",
+							"value": 0.02
+						},
+						{
 							"mode": "increased",
 							"stat": "flask_life_recovery_increased",
 							"value": 0.1
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
+						"+2% to maximum Cold Resistance",
 						"10% increased Life Recovery from Flasks"
 					],
-					"unsupported": [
-						"+2% to maximum Cold Resistance"
-					]
+					"unsupported": []
 				},
 				"has_position": false,
 				"id": "38683",
@@ -371047,11 +373601,28 @@
 			"40743": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "maximum_fire_resistance_add",
+							"value": 0.01
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_cold_resistance_add",
+							"value": 0.01
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_lightning_resistance_add",
+							"value": 0.01
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"+1% to all maximum Elemental Resistances"
+					],
 					"unsupported": [
-						"+1% to all maximum Elemental Resistances",
 						"20% chance to Avoid Elemental Ailments"
 					]
 				},
@@ -374230,16 +376801,30 @@
 							"mode": "increased",
 							"stat": "armour_increased",
 							"value": 0.3
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_fire_resistance_add",
+							"value": 0.01
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_cold_resistance_add",
+							"value": 0.01
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_lightning_resistance_add",
+							"value": 0.01
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
 						"+150 to Armour",
-						"30% increased Armour"
-					],
-					"unsupported": [
+						"30% increased Armour",
 						"+1% to all maximum Elemental Resistances"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "42009",
@@ -374939,15 +377524,29 @@
 							"mode": "increased",
 							"stat": "evasion_increased",
 							"value": 0.3
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_fire_resistance_add",
+							"value": 0.01
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_cold_resistance_add",
+							"value": 0.01
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_lightning_resistance_add",
+							"value": 0.01
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
-						"30% increased Evasion Rating"
-					],
-					"unsupported": [
+						"30% increased Evasion Rating",
 						"+1% to all maximum Elemental Resistances"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": false,
 				"id": "42313",
@@ -379362,15 +381961,19 @@
 							"mode": "increased",
 							"stat": "max_mana",
 							"value": 0.08
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_lightning_resistance_add",
+							"value": 0.02
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
-						"8% increased maximum Mana"
-					],
-					"unsupported": [
+						"8% increased maximum Mana",
 						"+2% to maximum Lightning Resistance"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": false,
 				"id": "44203",
@@ -382455,12 +385058,18 @@
 			"45341": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "maximum_cold_resistance_add",
+							"value": 0.01
+						}
+					],
+					"status": "full",
+					"supported": [
 						"+1% to maximum Cold Resistance"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "45341",
@@ -390350,17 +392959,21 @@
 					"grants": [
 						{
 							"mode": "flat",
+							"stat": "maximum_fire_resistance_add",
+							"value": 0.02
+						},
+						{
+							"mode": "flat",
 							"stat": "life_regen_percent",
 							"value": 0.01
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
+						"+2% to maximum Fire Resistance",
 						"Regenerate 1% of Life per second"
 					],
-					"unsupported": [
-						"+2% to maximum Fire Resistance"
-					]
+					"unsupported": []
 				},
 				"has_position": false,
 				"id": "48803",
@@ -390901,12 +393514,18 @@
 			"48929": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "maximum_fire_resistance_add",
+							"value": 0.01
+						}
+					],
+					"status": "full",
+					"supported": [
 						"+1% to maximum Fire Resistance"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "48929",
@@ -393700,16 +396319,20 @@
 							"mode": "increased",
 							"stat": "shield_recharge_rate_increased",
 							"value": 0.15
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_lightning_resistance_add",
+							"value": 0.01
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
 						"18% increased maximum Energy Shield",
-						"15% increased Energy Shield Recharge Rate"
-					],
-					"unsupported": [
+						"15% increased Energy Shield Recharge Rate",
 						"+1% to maximum Lightning Resistance"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "50029",
@@ -394730,12 +397353,18 @@
 			"5065": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "maximum_lightning_resistance_add",
+							"value": 0.01
+						}
+					],
+					"status": "full",
+					"supported": [
 						"+1% to maximum Lightning Resistance"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "5065",
@@ -400055,18 +402684,22 @@
 						},
 						{
 							"mode": "flat",
+							"stat": "maximum_fire_resistance_add",
+							"value": 0.01
+						},
+						{
+							"mode": "flat",
 							"stat": "fire_resistance",
 							"value": 0.08
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
 						"8% increased maximum Life",
+						"+1% to maximum Fire Resistance",
 						"+8% to Fire Resistance"
 					],
-					"unsupported": [
-						"+1% to maximum Fire Resistance"
-					]
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "53118",
@@ -403762,15 +406395,29 @@
 							"mode": "increased",
 							"stat": "armour_increased",
 							"value": 0.3
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_fire_resistance_add",
+							"value": 0.01
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_cold_resistance_add",
+							"value": 0.01
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_lightning_resistance_add",
+							"value": 0.01
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
-						"30% increased Armour"
-					],
-					"unsupported": [
+						"30% increased Armour",
 						"+1% to all maximum Elemental Resistances"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": false,
 				"id": "54766",
@@ -403880,16 +406527,21 @@
 					"grants": [
 						{
 							"mode": "flat",
+							"stat": "maximum_lightning_resistance_add",
+							"value": 0.01
+						},
+						{
+							"mode": "flat",
 							"stat": "lightning_resistance",
 							"value": 0.2
 						}
 					],
 					"status": "partial",
 					"supported": [
+						"+1% to maximum Lightning Resistance",
 						"+20% to Lightning Resistance"
 					],
 					"unsupported": [
-						"+1% to maximum Lightning Resistance",
 						"30% chance to Avoid being Shocked"
 					]
 				},
@@ -415797,12 +418449,28 @@
 			"60031": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "maximum_fire_resistance_add",
+							"value": 0.02
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_cold_resistance_add",
+							"value": 0.02
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_lightning_resistance_add",
+							"value": 0.02
+						}
+					],
+					"status": "full",
+					"supported": [
 						"+2% to all maximum Elemental Resistances"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "60031",
@@ -416640,12 +419308,18 @@
 			"6043": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "maximum_fire_resistance_add",
+							"value": 0.01
+						}
+					],
+					"status": "full",
+					"supported": [
 						"+1% to maximum Fire Resistance"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "6043",
@@ -439236,12 +441910,28 @@
 			},
 			"+1% to all maximum Elemental Resistances": {
 				"status": {
-					"grants": [],
-					"implemented": false,
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "maximum_fire_resistance_add",
+							"value": 0.01
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_cold_resistance_add",
+							"value": 0.01
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_lightning_resistance_add",
+							"value": 0.01
+						}
+					],
+					"implemented": true,
 					"missing_consumers": [],
-					"parser_supported": false
+					"parser_supported": true
 				},
-				"text": "所有最大元素抗性+1%（暂未实装）"
+				"text": "所有最大元素抗性+1%"
 			},
 			"+1% to all maximum Elemental Resistances if Equipped Helmet, Body Armour, Gloves, and Boots all have Armour": {
 				"status": {
@@ -439281,30 +441971,48 @@
 			},
 			"+1% to maximum Cold Resistance": {
 				"status": {
-					"grants": [],
-					"implemented": false,
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "maximum_cold_resistance_add",
+							"value": 0.01
+						}
+					],
+					"implemented": true,
 					"missing_consumers": [],
-					"parser_supported": false
+					"parser_supported": true
 				},
-				"text": "最大冰霜抗性+1%（暂未实装）"
+				"text": "最大冰霜抗性+1%"
 			},
 			"+1% to maximum Fire Resistance": {
 				"status": {
-					"grants": [],
-					"implemented": false,
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "maximum_fire_resistance_add",
+							"value": 0.01
+						}
+					],
+					"implemented": true,
 					"missing_consumers": [],
-					"parser_supported": false
+					"parser_supported": true
 				},
-				"text": "最大火焰抗性+1%（暂未实装）"
+				"text": "最大火焰抗性+1%"
 			},
 			"+1% to maximum Lightning Resistance": {
 				"status": {
-					"grants": [],
-					"implemented": false,
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "maximum_lightning_resistance_add",
+							"value": 0.01
+						}
+					],
+					"implemented": true,
 					"missing_consumers": [],
-					"parser_supported": false
+					"parser_supported": true
 				},
-				"text": "最大闪电抗性+1%（暂未实装）"
+				"text": "最大闪电抗性+1%"
 			},
 			"+10 to Dexterity": {
 				"status": {
@@ -440892,12 +443600,28 @@
 			},
 			"+2% to all maximum Elemental Resistances": {
 				"status": {
-					"grants": [],
-					"implemented": false,
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "maximum_fire_resistance_add",
+							"value": 0.02
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_cold_resistance_add",
+							"value": 0.02
+						},
+						{
+							"mode": "flat",
+							"stat": "maximum_lightning_resistance_add",
+							"value": 0.02
+						}
+					],
+					"implemented": true,
 					"missing_consumers": [],
-					"parser_supported": false
+					"parser_supported": true
 				},
-				"text": "所有最大元素抗性+2%（暂未实装）"
+				"text": "所有最大元素抗性+2%"
 			},
 			"+2% to maximum Chance to Block Attack Damage": {
 				"status": {
@@ -440919,30 +443643,48 @@
 			},
 			"+2% to maximum Cold Resistance": {
 				"status": {
-					"grants": [],
-					"implemented": false,
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "maximum_cold_resistance_add",
+							"value": 0.02
+						}
+					],
+					"implemented": true,
 					"missing_consumers": [],
-					"parser_supported": false
+					"parser_supported": true
 				},
-				"text": "最大冰霜抗性+2%（暂未实装）"
+				"text": "最大冰霜抗性+2%"
 			},
 			"+2% to maximum Fire Resistance": {
 				"status": {
-					"grants": [],
-					"implemented": false,
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "maximum_fire_resistance_add",
+							"value": 0.02
+						}
+					],
+					"implemented": true,
 					"missing_consumers": [],
-					"parser_supported": false
+					"parser_supported": true
 				},
-				"text": "最大火焰抗性+2%（暂未实装）"
+				"text": "最大火焰抗性+2%"
 			},
 			"+2% to maximum Lightning Resistance": {
 				"status": {
-					"grants": [],
-					"implemented": false,
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "maximum_lightning_resistance_add",
+							"value": 0.02
+						}
+					],
+					"implemented": true,
 					"missing_consumers": [],
-					"parser_supported": false
+					"parser_supported": true
 				},
-				"text": "最大闪电抗性+2%（暂未实装）"
+				"text": "最大闪电抗性+2%"
 			},
 			"+20 to Accuracy Rating": {
 				"status": {
@@ -469108,7 +471850,7 @@
 				},
 				"name": "涂油血肉",
 				"partition": "标准主树",
-				"stats": "所有最大元素抗性+1%（暂未实装）\n元素异常状态持续时间降低20%（在你身上）（暂未实装）\n效果冰缓与感电降低20%（在你身上）（暂未实装）"
+				"stats": "所有最大元素抗性+1%\n元素异常状态持续时间降低20%（在你身上）（暂未实装）\n效果冰缓与感电降低20%（在你身上）（暂未实装）"
 			},
 			"11850": {
 				"mastery_choices": {
@@ -470830,7 +473572,7 @@
 				},
 				"name": "最大闪电抗性",
 				"partition": "标准主树",
-				"stats": "最大闪电抗性+1%（暂未实装）"
+				"stats": "最大闪电抗性+1%"
 			},
 			"15538": {
 				"mastery_choices": {
@@ -471002,7 +473744,7 @@
 				},
 				"name": "非-易燃",
 				"partition": "标准主树",
-				"stats": "最大火焰抗性+1%（暂未实装）\n火焰抗性+20%\n有30%几率避免点燃（暂未实装）"
+				"stats": "最大火焰抗性+1%\n火焰抗性+20%\n有30%几率避免点燃（暂未实装）"
 			},
 			"15837": {
 				"mastery_choices": {
@@ -473157,7 +475899,7 @@
 				},
 				"name": "圣所",
 				"partition": "标准主树",
-				"stats": "格挡攻击伤害几率+4%（持有护盾时）（暂未实装）\n格挡法术伤害几率+4%（持有护盾时）（暂未实装）\n所有最大元素抗性+1%（暂未实装）"
+				"stats": "格挡攻击伤害几率+4%（持有护盾时）（暂未实装）\n格挡法术伤害几率+4%（持有护盾时）（暂未实装）\n所有最大元素抗性+1%"
 			},
 			"20834": {
 				"mastery_choices": {
@@ -474686,7 +477428,7 @@
 				},
 				"name": "求生者",
 				"partition": "标准主树",
-				"stats": "闪避值提高24%\n所有元素抗性+8%\n最大冰霜抗性+1%（暂未实装）"
+				"stats": "闪避值提高24%\n所有元素抗性+8%\n最大冰霜抗性+1%"
 			},
 			"24155": {
 				"mastery_choices": {
@@ -475687,7 +478429,7 @@
 				},
 				"name": "游牧教诲",
 				"partition": "标准主树",
-				"stats": "所有最大元素抗性+2%（暂未实装）"
+				"stats": "所有最大元素抗性+2%"
 			},
 			"2599": {
 				"mastery_choices": {
@@ -479246,7 +481988,7 @@
 				},
 				"name": "防冻",
 				"partition": "标准主树",
-				"stats": "最大冰霜抗性+1%（暂未实装）\n冰霜抗性+20%\n有30%几率避免冻结（暂未实装）"
+				"stats": "最大冰霜抗性+1%\n冰霜抗性+20%\n有30%几率避免冻结（暂未实装）"
 			},
 			"33678": {
 				"mastery_choices": {
@@ -479977,7 +482719,7 @@
 				},
 				"name": "最大冰霜抗性",
 				"partition": "标准主树",
-				"stats": "最大冰霜抗性+1%（暂未实装）"
+				"stats": "最大冰霜抗性+1%"
 			},
 			"34927": {
 				"mastery_choices": {
@@ -481925,7 +484667,7 @@
 				},
 				"name": "冬季潜行者",
 				"partition": "标准主树",
-				"stats": "最大冰霜抗性+2%（暂未实装）\n生命回复提高10%（来自药剂）"
+				"stats": "最大冰霜抗性+2%\n生命回复提高10%（来自药剂）"
 			},
 			"38689": {
 				"mastery_choices": {
@@ -482927,7 +485669,7 @@
 				},
 				"name": "水晶皮肤",
 				"partition": "标准主树",
-				"stats": "所有最大元素抗性+1%（暂未实装）\n有20%几率避免元素异常状态（暂未实装）"
+				"stats": "所有最大元素抗性+1%\n有20%几率避免元素异常状态（暂未实装）"
 			},
 			"40751": {
 				"mastery_choices": {
@@ -483594,7 +486336,7 @@
 				},
 				"name": "灵魂的钢铁",
 				"partition": "标准主树",
-				"stats": "护甲+150\n护甲提高30%\n所有最大元素抗性+1%（暂未实装）"
+				"stats": "护甲+150\n护甲提高30%\n所有最大元素抗性+1%"
 			},
 			"42024": {
 				"mastery_choices": {
@@ -483754,7 +486496,7 @@
 				},
 				"name": "棱彩舞步",
 				"partition": "标准主树",
-				"stats": "闪避值提高30%\n所有最大元素抗性+1%（暂未实装）"
+				"stats": "闪避值提高30%\n所有最大元素抗性+1%"
 			},
 			"42328": {
 				"mastery_choices": {
@@ -484681,7 +487423,7 @@
 				},
 				"name": "巫术",
 				"partition": "标准主树",
-				"stats": "最大魔力提高8%\n最大闪电抗性+2%（暂未实装）"
+				"stats": "最大魔力提高8%\n最大闪电抗性+2%"
 			},
 			"44206": {
 				"mastery_choices": {
@@ -485299,7 +488041,7 @@
 				},
 				"name": "最大冰霜抗性",
 				"partition": "标准主树",
-				"stats": "最大冰霜抗性+1%（暂未实装）"
+				"stats": "最大冰霜抗性+1%"
 			},
 			"45350": {
 				"mastery_choices": {
@@ -486844,7 +489586,7 @@
 				},
 				"name": "熔火自身的印记",
 				"partition": "标准主树",
-				"stats": "最大火焰抗性+2%（暂未实装）\n每秒回复相当于最大生命1%的生命"
+				"stats": "最大火焰抗性+2%\n每秒回复相当于最大生命1%的生命"
 			},
 			"48807": {
 				"mastery_choices": {
@@ -486953,7 +489695,7 @@
 				},
 				"name": "最大火焰抗性",
 				"partition": "标准主树",
-				"stats": "最大火焰抗性+1%（暂未实装）"
+				"stats": "最大火焰抗性+1%"
 			},
 			"48971": {
 				"mastery_choices": {
@@ -487549,7 +490291,7 @@
 				},
 				"name": "非自然沉静",
 				"partition": "标准主树",
-				"stats": "最大能量护盾提高18%\n能量护盾充能速度提高15%\n最大闪电抗性+1%（暂未实装）"
+				"stats": "最大能量护盾提高18%\n能量护盾充能速度提高15%\n最大闪电抗性+1%"
 			},
 			"50038": {
 				"mastery_choices": {
@@ -487759,7 +490501,7 @@
 				},
 				"name": "最大闪电抗性",
 				"partition": "标准主树",
-				"stats": "最大闪电抗性+1%（暂未实装）"
+				"stats": "最大闪电抗性+1%"
 			},
 			"50679": {
 				"mastery_choices": {
@@ -488870,7 +491612,7 @@
 				},
 				"name": "野蛮",
 				"partition": "标准主树",
-				"stats": "最大生命提高8%\n最大火焰抗性+1%（暂未实装）\n火焰抗性+8%"
+				"stats": "最大生命提高8%\n最大火焰抗性+1%\n火焰抗性+8%"
 			},
 			"53123": {
 				"mastery_choices": {
@@ -489611,7 +492353,7 @@
 				},
 				"name": "棱彩甲壳",
 				"partition": "标准主树",
-				"stats": "护甲提高30%\n所有最大元素抗性+1%（暂未实装）"
+				"stats": "护甲提高30%\n所有最大元素抗性+1%"
 			},
 			"54776": {
 				"mastery_choices": {
@@ -489635,7 +492377,7 @@
 				},
 				"name": "绝缘",
 				"partition": "标准主树",
-				"stats": "最大闪电抗性+1%（暂未实装）\n闪电抗性+20%\n有30%几率避免感电（暂未实装）"
+				"stats": "最大闪电抗性+1%\n闪电抗性+20%\n有30%几率避免感电（暂未实装）"
 			},
 			"54849": {
 				"mastery_choices": {
@@ -492159,7 +494901,7 @@
 				},
 				"name": "棱彩皮肤",
 				"partition": "标准主树",
-				"stats": "所有最大元素抗性+2%（暂未实装）"
+				"stats": "所有最大元素抗性+2%"
 			},
 			"60069": {
 				"mastery_choices": {
@@ -492329,7 +495071,7 @@
 				},
 				"name": "最大火焰抗性",
 				"partition": "标准主树",
-				"stats": "最大火焰抗性+1%（暂未实装）"
+				"stats": "最大火焰抗性+1%"
 			},
 			"60440": {
 				"mastery_choices": {
@@ -499736,7 +502478,7 @@
 			}
 		},
 		"roster_scope": "只展示原抽签为基础物种的按位替换；灰烬保留名额，分裂体与母巢保留原抽签且占用序号；稀有度、机制与奖励不变；所选巡逻词缀最后按编排物种替换",
-		"save_version": 35,
+		"save_version": 36,
 		"spawn_seconds": 0.6,
 		"tiers": [
 			{
@@ -504046,7 +506788,7 @@
 		},
 		"reserved_character_key": "C",
 		"retired_profile_writes": false,
-		"save_version": 35,
+		"save_version": 36,
 		"services": [
 			{
 				"description": "免费测试供应全部已实现主动与辅助宝石。",
@@ -504614,7 +507356,7 @@
 					"catalog_id": "emberhide_vest",
 					"category": "body_armour",
 					"definition_id": "equipment:emberhide_vest",
-					"description": "最大生命 +8，火焰抗性 +15%。火焰抗性作用于承受的火焰命中，有效上限 75%。",
+					"description": "最大生命 +8，火焰抗性 +15%。火焰抗性降低火焰命中与燃烧伤害；默认上限75%，最大抗性天赋可提高至本游戏安全上限83%，仍需另外取得足够原始抗性。",
 					"icon_path": "",
 					"id": "base:emberhide_vest",
 					"kind": "equipment",
@@ -504626,7 +507368,7 @@
 						"base_name": "灰烬皮甲",
 						"category": "body_armour",
 						"definition_id": "equipment:emberhide_vest",
-						"description": "最大生命 +8，火焰抗性 +15%。火焰抗性作用于承受的火焰命中，有效上限 75%。",
+						"description": "最大生命 +8，火焰抗性 +15%。火焰抗性降低火焰命中与燃烧伤害；默认上限75%，最大抗性天赋可提高至本游戏安全上限83%，仍需另外取得足够原始抗性。",
 						"effects": [],
 						"id": "gear_000001",
 						"item_level": 30,

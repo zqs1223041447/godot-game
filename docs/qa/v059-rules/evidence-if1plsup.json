@@ -1,0 +1,36 @@
+{
+  "scope": "v059 pure elemental maximum resistance rules and independent v58 typed-byte baseline",
+  "command": [
+    "/usr/local/bin/godot",
+    "--headless",
+    "--path",
+    "/workspace/scratch/a51485f153de/v059-elemental-resistance-caps",
+    "--script",
+    "res://tests/elemental_resistance_cap_rules_test.gd"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 0.689,
+  "timed_out": false,
+  "script_errors": false,
+  "passed": true,
+  "summary": {
+    "baseline_commit": "71f4863fda4b02d1afd17db4cfa958c85139491f",
+    "baseline_sha256": "7c84a7fedef8c7d978056d232889715d598264e447b05e0c9ce9d2705aee5476",
+    "checks": 17893,
+    "failures": 0,
+    "legacy_typed_byte_cases": 7224
+  },
+  "log": "rules-if1plsup.log.txt",
+  "log_sha256": "c46f4670f7a7e24a967c08fe75997a0e6503e0e2fefd2d756a48501b74b81a3a",
+  "isolated_userdata": "/tmp/godot-m1-v059-rules-if1plsup/data",
+  "source_sha256": {
+    "tests/elemental_resistance_cap_rules_test.gd": "bc9f49cd852e7b31f6b068fa5aaba14ed25ed785270a237f11c770430df13cab",
+    "docs/qa/v059-rules/run-focused.py": "1ca9059f3cc426c46baeaeb02ee50b9961a10745483628a13912b56d6557398c",
+    "scripts/mechanics/defense_rules.gd": "69ebfa9dc8a383591327953f4d6ab973a0059274c088db50df8fd11c7b2a398f",
+    "scripts/combat/damage_resolver.gd": "37429d9754708d3bbbe9638f92bb8a038284326a4b9c422a70b7c2c4cfe3a1d5",
+    "docs/qa/v059-rules/v058-defense-rules.txt": "7c84a7fedef8c7d978056d232889715d598264e447b05e0c9ce9d2705aee5476",
+    "project.godot": "3368dcdb6b1746560b6fa2db721a9b6f513ca1422ab76ac2b8447bc4988d356e"
+  },
+  "changed_inputs": [],
+  "import_performed": false
+}

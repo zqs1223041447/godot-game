@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/a51485f153de/v059-elemental-resistance-caps/docs/qa/v059-reference/check-reference.py", line 154, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/scratch/a51485f153de/v059-elemental-resistance-caps/docs/qa/v059-reference/check-reference.py", line 121, in main
+    for asset in page.assets: assert asset and not asset.startswith(('http:','https:')) and (REF/asset).exists(),asset
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
