@@ -1,0 +1,18 @@
+COMMAND ["godot", "--headless", "--path", "/workspace/scratch/a51485f153de/v048-sunwell-terrace", "--script", "res://tests/sunwell_echo_runtime_test.gd"]
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ERROR: Before .8 plus recovery display endpoint phase/index
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tests/sunwell_echo_runtime_test.gd:20)
+       [1] _state (res://tests/sunwell_echo_runtime_test.gd:98)
+       [2] _test_exact_phases (res://tests/sunwell_echo_runtime_test.gd:134)
+       [3] _initialize (res://tests/sunwell_echo_runtime_test.gd:49)
+SCRIPT ERROR: Invalid access to property or key 'elapsed' on a base object of type 'Dictionary'.
+          at: _state (res://tests/sunwell_echo_runtime_test.gd:99)
+          GDScript backtrace (most recent call first):
+              [0] _state (res://tests/sunwell_echo_runtime_test.gd:99)
+              [1] _test_exact_phases (res://tests/sunwell_echo_runtime_test.gd:134)
+              [2] _initialize (res://tests/sunwell_echo_runtime_test.gd:49)
+
+STATUS {"command": ["godot", "--headless", "--path", "/workspace/scratch/a51485f153de/v048-sunwell-terrace", "--script", "res://tests/sunwell_echo_runtime_test.gd"], "cwd": "/workspace/scratch/a51485f153de/v048-sunwell-terrace", "isolation": "/tmp/godot-m1-v048-echo/focused", "stopped_on_error": true, "exit_code": -15, "elapsed_seconds": 0.505}

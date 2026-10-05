@@ -1,0 +1,53 @@
+{
+  "scope": "Pure Echo scheduler and six unfiltered legacy telegraph trajectories; no GUI, renderer or main damage settlement",
+  "pack": {
+    "path": "/workspace/scratch/a51485f153de/v047-final-release/game.pck",
+    "sha256": "bd2a6506e7818b136f951d71e5bbc4a7f09385da70af198c8ef82aadfa8fbb9c"
+  },
+  "files_before": {
+    "scripts/combat/telegraphed_area_runtime.gd": "97de058a93210cf411208e8e5145e207c18958ca07579c073699515f2ac0aaf0",
+    "scripts/monsters/map_boss_profiles.gd": "e499f0c06c4442a2026c0c2205fc15a86df85f08b85a26c931ff6ec360629924",
+    "scripts/monsters/monster_catalog.gd": "d8a0c76384a3208a7ba0202367983332bae07a90c95108ad6a101b4154206ee1",
+    "scripts/monsters/telegraph_profiles.gd": "71529898098c86cb7320eff304607bac785b2f44b4d25b1f1d335c67c77b44bd",
+    "scripts/world/map_admission.gd": "39c4d7dc34993587a081759f423192c1db2b6e8267c91854ef729f36ae4368c2",
+    "scripts/world/map_compiler.gd": "c800ccaf90a9807cc753fc694c19c614e52fff8226fdcaa27f0f5fdc2fcb5851",
+    "tests/sunwell_echo_runtime_test.gd": "f8a0a14520f445b712796d38fdde429d965fa629a6740cf6f4e80ebfdca08977",
+    "docs/qa/v048-echo/capture_legacy.gd": "77cec4579e902f1e2a6bcd2ed61fbdcc11171c4a73c9247b602feabd8e0a9c46"
+  },
+  "runs": [
+    {
+      "command": [
+        "godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/v048-sunwell-terrace",
+        "--script",
+        "res://tests/sunwell_echo_runtime_test.gd"
+      ],
+      "cwd": "/workspace/scratch/a51485f153de/v048-sunwell-terrace",
+      "isolation": "/tmp/godot-m1-v048-echo/focused",
+      "log": "focused-run2.log.txt",
+      "exit_code": 0,
+      "elapsed_seconds": 0.458
+    }
+  ],
+  "files_after": {
+    "scripts/combat/telegraphed_area_runtime.gd": "97de058a93210cf411208e8e5145e207c18958ca07579c073699515f2ac0aaf0",
+    "scripts/monsters/map_boss_profiles.gd": "e499f0c06c4442a2026c0c2205fc15a86df85f08b85a26c931ff6ec360629924",
+    "scripts/monsters/monster_catalog.gd": "d8a0c76384a3208a7ba0202367983332bae07a90c95108ad6a101b4154206ee1",
+    "scripts/monsters/telegraph_profiles.gd": "71529898098c86cb7320eff304607bac785b2f44b4d25b1f1d335c67c77b44bd",
+    "scripts/world/map_admission.gd": "39c4d7dc34993587a081759f423192c1db2b6e8267c91854ef729f36ae4368c2",
+    "scripts/world/map_compiler.gd": "c800ccaf90a9807cc753fc694c19c614e52fff8226fdcaa27f0f5fdc2fcb5851",
+    "tests/sunwell_echo_runtime_test.gd": "f8a0a14520f445b712796d38fdde429d965fa629a6740cf6f4e80ebfdca08977",
+    "docs/qa/v048-echo/capture_legacy.gd": "77cec4579e902f1e2a6bcd2ed61fbdcc11171c4a73c9247b602feabd8e0a9c46"
+  },
+  "legacy-v047.bin": {
+    "size": 32420,
+    "sha256": "d7557f47b5e2580daf3a6efd0162411f7d155aef7fe6b540a6babfe9eb4fd3db"
+  },
+  "legacy-v048.bin": {
+    "size": 32420,
+    "sha256": "d7557f47b5e2580daf3a6efd0162411f7d155aef7fe6b540a6babfe9eb4fd3db"
+  },
+  "legacy_bytes_equal": true
+}

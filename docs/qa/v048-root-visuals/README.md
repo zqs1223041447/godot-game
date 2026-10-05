@@ -19,3 +19,20 @@ Primary-developer changes, 2026-10-05.
   renderer changes were needed. The failed launch is not counted as a pass.
 - This is a focused data/render-command test, not a Windows hardware performance
   or completed native visual inspection.
+
+## One native map review
+
+At 2026-10-05 09:29–09:31 UTC the primary developer opened the real main scene
+in an isolated test profile, entered sunwell_terrace through the actual map
+commands and paused simulation for layout review. At 1180×812 the four stone
+basins, cross passage, exterior paths, camp markers and lower entrance were
+visible with no oversized prop covering the routes. This did not exercise combat,
+mouse interactions or Windows frame rate; no persistent PNG is claimed.
+The Linux desktop lacked an audio device and fell back to the dummy driver;
+this environment warning did not prevent the map rendering. The game was then
+closed and absence of the window was confirmed.
+
+The review exposed a pre-existing fixed HUD subtitle showing the old garden
+name. It now reads the current map/town caption on world-context refresh.
+A separate focused caption check passed 5 checks, 0 failures, exit 0. The
+static map review was not repeated merely for this text-only fix.

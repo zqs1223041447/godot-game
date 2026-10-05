@@ -1,0 +1,74 @@
+{
+  "engine": "Godot 4.6.3.stable.official.7d41c59c4",
+  "scope": "Focused schema30 migration + third-map transactions; no GUI/600-second or historical full-suite reruns",
+  "commands": [
+    {
+      "script": "tests/third_map_migration_test.gd",
+      "command": "XDG_DATA_HOME=/tmp/godot-m1-v048-migration-check2 XDG_CONFIG_HOME=/tmp/godot-m1-v048-migration-config2 XDG_CACHE_HOME=/tmp/godot-m1-v048-migration-cache2 godot --headless --path . --script tests/third_map_migration_test.gd",
+      "exit_code": 0,
+      "checks": 331,
+      "failures": 0,
+      "log": "docs/qa/v048-migration/third-map-migration-test.log.txt",
+      "log_sha256": "241516422542203fee967c912793dfc44c2355c4e9020e2a2db541ceb1c45d8e"
+    },
+    {
+      "script": "tests/third_map_transactions_test.gd",
+      "command": "XDG_DATA_HOME=/tmp/godot-m1-v048-transactions-check XDG_CONFIG_HOME=/tmp/godot-m1-v048-transactions-config XDG_CACHE_HOME=/tmp/godot-m1-v048-transactions-cache godot --headless --path . --script tests/third_map_transactions_test.gd",
+      "exit_code": 0,
+      "checks": 29,
+      "failures": 0,
+      "log": "docs/qa/v048-migration/third-map-transactions-test.log.txt",
+      "log_sha256": "44f147f8b87cbf501044cac4c4c13c500f29fef519b8e50a31997549487d5931"
+    }
+  ],
+  "files": {
+    "scripts/world/normal_journey_state.gd": {
+      "bytes": 10745,
+      "sha256": "d4be554dffbf912fc0aa144b9817cabe9bc412327b11258be375f45b8d3e61b9"
+    },
+    "scripts/save/canonical_build_rules.gd": {
+      "bytes": 20623,
+      "sha256": "43a1a177f10983135248d56d40e46e4965aee98c1215277d5e39981ee1def58e"
+    },
+    "scripts/save/canonical_build_store.gd": {
+      "bytes": 20485,
+      "sha256": "bc610b6c752ca1911af9d0aa931b98c90447179bdfffa4db29ef89147af08bce"
+    },
+    "scripts/save/normal_journey_migration.gd": {
+      "bytes": 780,
+      "sha256": "24575eddd16c77833ea01deadad32794dfc41cf137f378f1da64164e2803229c"
+    },
+    "scripts/save/ember_gem_migration.gd": {
+      "bytes": 653,
+      "sha256": "c68d558d0b24a61571bc17a142692a8124bdd225239624739f787ec78deed373"
+    },
+    "scripts/save/third_map_migration.gd": {
+      "bytes": 706,
+      "sha256": "83ad2eda8f5b6ce843bc217bd304ed0a2338f5ef7dba9380d5919ddc68a62438"
+    },
+    "scripts/canonical_game_state.gd": {
+      "bytes": 57917,
+      "sha256": "c4310a8e465b0dea66d6a65fca6f25d01b23774d9ebfecc5839e43619f07cc20"
+    },
+    "scripts/world/map_compiler.gd": {
+      "bytes": 4925,
+      "sha256": "c800ccaf90a9807cc753fc694c19c614e52fff8226fdcaa27f0f5fdc2fcb5851"
+    },
+    "scripts/world/map_catalog.gd": {
+      "bytes": 3291,
+      "sha256": "ae7bd3742077b96f58a32aad454896c586c31f5c1dace87e67ae3271cdf8bdf0"
+    },
+    "scripts/world/normal_map_catalog.gd": {
+      "bytes": 1352,
+      "sha256": "7916feb807b79cb9b578642f56b5016d77b96c0d4a34b2d1c760741339349ca1"
+    },
+    "tests/third_map_migration_test.gd": {
+      "bytes": 17239,
+      "sha256": "b44ea4c696565158aef2099cdfc5b47a24660c3802703b16a3fb8c5d700a7f39"
+    },
+    "tests/third_map_transactions_test.gd": {
+      "bytes": 7852,
+      "sha256": "e25e99977c0a0c21bb5c8ba6f3c55586220d73e902ed2c51fd799074beb22ea6"
+    }
+  }
+}

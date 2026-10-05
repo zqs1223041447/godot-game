@@ -40,3 +40,6 @@ tests/fixtures/v040_leech/*.bin binary
 
 # Preserve the four literal released schema28 backup fixtures, including CRLF.
 docs/qa/v047-migration/fixtures/v28-*.json binary
+
+# Literal released schema29 files preserve original backup bytes.
+docs/qa/v048-migration/fixtures/v29-*.json binary

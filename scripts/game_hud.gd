@@ -52,6 +52,7 @@ var _town_view: Control
 var _world_context_cache: Dictionary = {}
 var _world_button: Button
 var _world_label: Label
+var _edition_label: Label
 var _return_dialog: ConfirmationDialog
 var _return_revision := -1
 var _arena: Node
@@ -441,11 +442,11 @@ func _build_status() -> void:
 	brand.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	box.add_child(brand)
 	brand.add_child(_label("◈  裂隙试炼", 23, CYAN))
-	var edition: Label = _label("灰烬庭院", 12, MUTED)
-	edition.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	edition.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	edition.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	brand.add_child(edition)
+	_edition_label = _label("灰烬庭院", 12, MUTED)
+	_edition_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_edition_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	_edition_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	brand.add_child(_edition_label)
 	_wave_label = _label("第 1 波  ·  击败 0", 16, TEXT)
 	_wave_label.name = "WaveLabel"
 	box.add_child(_wave_label)
@@ -1651,6 +1652,7 @@ func _build_world_controls() -> void:
 func _refresh_world() -> void:
 	var context: Dictionary = _arena.world_context()
 	_world_context_cache = context
+	if is_instance_valid(_edition_label): _edition_label.text = world_caption(context)
 	_town_square.visible = str(context.mode) in ["town", "normal_town"]
 	_town_square.set_test_mode(bool(context.get("test_mode", false)))
 	_town_view.refresh_world()
@@ -1718,3 +1720,11 @@ func _replace_build_profile() -> void:
 	_skill_view_token = PackedByteArray()
 	_sync_menu_views()
 	refresh_build()
+
+
+static func world_caption(context: Dictionary) -> String:
+	if str(context.get("mode", "")) in ["map", "map_complete"]:
+		return str(context.get("map_name", "地图"))
+	if str(context.get("mode", "")) in ["town", "normal_town"]:
+		return "测试城镇" if bool(context.get("test_mode", false)) else "正式城镇"
+	return "灰烬庭院"
