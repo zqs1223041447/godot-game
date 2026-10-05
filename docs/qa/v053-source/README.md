@@ -1,0 +1,19 @@
+# v053 source Fire DoT vocabulary and schema32
+
+The exact, unconditional `+X% to Fire Damage over Time Multiplier` line grants the additive fraction `fire_dot_multiplier_add`. Canonical stats start at `0.0`; source grants sum normally. Policy25 remains frozen for all schema25–31 callers, and the new policy32 has separate line, node and analysis cache keys.
+
+Exactly eight standard nodes become fully executable, with original identities and numbers: 4713 (+4%), 5916 (+6%), 13559 (+5%), 31462 (+5%), 54396 (+4%), Arsonist2550 (+10% and existing1.2% Life regeneration), Breath of Flames11924 (+10% and existing30% Fire Damage), Holy Fire29049 (+12% and existing24% Fire Resistance). Attack-scoped variants remain unsupported. Fire mastery36313 becomes partial because its Ignite-duration line is unsupported, so it remains unallocatable.
+
+The exhaustive released31 source oracle proves no previously full node or mastery gains effects. All seven classes can reach the eight new nodes through supported routes. Ordinary reachable nodes increase from the established schema25 count676 to685: the eight newly full nodes also open a path to previously supported1550 (12% Fire Damage and0.4% Life regeneration). That node's effects do not change. The complete paths are in `source-coverage.json`.
+
+Schema32 changes only `version` during31→32 migration. All other canonical fields, item/location insertion order, identities, revisions, budgets, bindings, journey state and rewards remain intact. Frozen `reason_v31` and strict `decode_v31` validate the old vocabulary before migration; the earlier Shock migration still returns31. The existing loader commits once after preserving raw original-version bytes, using the same atomic write and receipt protections.
+
+## Verified evidence
+
+- Genuine fixtures were captured once from published v052 source (published base0abadf05, project0.52.0, schema31) using only released scripts, a fresh `/tmp/godot-m1-v053-fixture.*` user directory and ordinary Game APIs. The default fixture and active journey with existing allocations/Shock item have literal leading whitespace/CRLF bytes. `fixtures/manifest.json` records source and fixture SHA256 values; `capture-released31.log` records the successful capture
+- `source_fire_dot_rules-avqgdl91.log`: 6,882 checks, zero failures, Godot exit0. Exact parser/negative/type tests, all31-and-earlier policy keys, all ordinary/mastery source effects against the released oracle, all-class reachability, three real persisted branches, allocation/refund and reopen
+- `source_fire_dot_migration-vln10ohh.log`: 393 checks, zero failures, Godot exit0. Both released31 fixtures, identity preservation, every released14–31 source-envelope injection, invalid types/unknown/NaN dictionaries, prior25/29/30 chains, raw backup collision/failure, external modification, real temporary-file write failure, safe retry, and actual32 allocation/refund write failure with complete memory/disk/receipt preservation
+- `evidence-avqgdl91.json` and `evidence-vln10ohh.json` contain exact commands, true subprocess return codes, isolated data directories, elapsed time and tested script hashes. The first rules-test attempt only found a local test-variable type inference error; its original log/evidence are retained as `source_fire_dot_rules-uh9t21o6.log` and `evidence-uh9t21o6.json`
+- The pinned runtime tree JSON is byte-identical to released v052: 2,318,195 bytes, SHA256 `9774a8ec1fe16199e775fe99a20853837ca8c7725c48dfcd9d6ee69646ff934f`
+
+The source/schema implementation was unchanged after the shared clean first import. These are focused model checks, not Windows or visual gameplay validation. Run `python docs/qa/v053-source/run-focused.py` after import, or pass one of the two test stems to run only that changed test. The runner writes fresh isolated data and preserves each run's logs rather than replacing prior evidence.

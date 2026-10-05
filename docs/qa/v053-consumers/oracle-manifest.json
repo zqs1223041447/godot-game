@@ -1,0 +1,46 @@
+{
+  "published_v052_commit": "0abadf05c94545fb7585f5a7565cd7a8930c26cd",
+  "policy": "Fixed source from git show. Main is byte-exact published v052; pure compiler fixture only removes global class names and rewrites two dependency paths. Main comparison holds current shared dependencies/schema constant to isolate zero-passive consumer changes.",
+  "files": [
+    {
+      "source": "scripts/combat/burn_rules.gd",
+      "source_sha256": "adf1bb84b7bd91e4b24b2aeeaa0b38daca30798c0da42303bb2235caf0a1aa75",
+      "oracle": "docs/qa/v053-consumers/v052_burn_rules.gd",
+      "oracle_sha256": "b0c2f4dfd5ce1f51187ba23c9d6499c693cab49a4096db15e597aab6212cb205",
+      "changes": {
+        "removed_first_line": "class_name BurnRules",
+        "preload_replacements": {}
+      }
+    },
+    {
+      "source": "scripts/combat/combat_data.gd",
+      "source_sha256": "7ebc6234afe5c1d6af6d3ede8a5a8b1bf72415915dc99d97e0a588d1204c270e",
+      "oracle": "docs/qa/v053-consumers/v052_combat_data.gd",
+      "oracle_sha256": "ba57ccd24a58cb75d3195cbbc68fe4b46f80dfb7da2e053abb3d5216b954ff9d",
+      "changes": {
+        "removed_first_line": "class_name CombatData",
+        "preload_replacements": {}
+      }
+    },
+    {
+      "source": "scripts/combat/skill_compiler.gd",
+      "source_sha256": "477a89fa81d10d604937f43cc7b1b19b34a9366d0fcae0758974fdc8f8963a86",
+      "oracle": "docs/qa/v053-consumers/v052_skill_compiler.gd",
+      "oracle_sha256": "ddebdf0ee7c2ad761b9d150822a4401bd4cff62e206399e28a147dce51604815",
+      "changes": {
+        "removed_first_line": "class_name SkillCompiler",
+        "preload_replacements": {
+          "res://scripts/combat/combat_data.gd": "res://docs/qa/v053-consumers/v052_combat_data.gd",
+          "res://scripts/combat/burn_rules.gd": "res://docs/qa/v053-consumers/v052_burn_rules.gd"
+        }
+      }
+    },
+    {
+      "source": "scripts/main.gd",
+      "source_sha256": "46caab0bf99c917a6a22dee21fb4af5601dce0d772f704ac061b19f4bab84b7d",
+      "oracle": "docs/qa/v053-consumers/v052_main.gd",
+      "oracle_sha256": "46caab0bf99c917a6a22dee21fb4af5601dce0d772f704ac061b19f4bab84b7d",
+      "changes": {}
+    }
+  ]
+}
