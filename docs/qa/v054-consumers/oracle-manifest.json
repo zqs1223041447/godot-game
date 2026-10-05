@@ -1,0 +1,47 @@
+{
+  "published_v053_commit": "e3a5f7559ecbcb2cb56a9c192d75899fdcf43b3a",
+  "policy": "Fixed published git-show sources. Main is byte exact; pure source fixtures remove global class_name, Combat redirects Burn, and Compiler redirects Combat/Burn to frozen v053 copies. Main comparison holds current shared dependencies and schema constant.",
+  "files": [
+    {
+      "source": "scripts/combat/burn_rules.gd",
+      "source_sha256": "f08a16b4fa540032ef43ca6dd0f825859f0c95d00732003ccf87fe8dda4be04d",
+      "oracle": "docs/qa/v054-consumers/v053_burn_rules.gd",
+      "oracle_sha256": "3b140866f7f0d0aaab6a0544254b4d5f9b85a15f1c5ad0981a717e1438ed129e",
+      "changes": {
+        "removed_first_line": "class_name BurnRules"
+      }
+    },
+    {
+      "source": "scripts/combat/combat_data.gd",
+      "source_sha256": "3d85f825caa4166ba0208b77d13f056e576dca8e93f3603aad391de31544747c",
+      "oracle": "docs/qa/v054-consumers/v053_combat_data.gd",
+      "oracle_sha256": "292c485b3e2cda793879bdfe72c5c2d1ff6e603f6255ea1858022a49292b94ab",
+      "changes": {
+        "removed_first_line": "class_name CombatData",
+        "preload_replacements": {
+          "res://scripts/combat/burn_rules.gd": "res://docs/qa/v054-consumers/v053_burn_rules.gd"
+        }
+      }
+    },
+    {
+      "source": "scripts/combat/skill_compiler.gd",
+      "source_sha256": "7510aebe8eed2c3962e2a612851601251b7aaccdb60a1481fd867a0fe0606577",
+      "oracle": "docs/qa/v054-consumers/v053_skill_compiler.gd",
+      "oracle_sha256": "41e4c3fbf859be3d5fd872968ba14db14d1a0430af9c4a021f2561a5330972da",
+      "changes": {
+        "removed_first_line": "class_name SkillCompiler",
+        "preload_replacements": {
+          "res://scripts/combat/combat_data.gd": "res://docs/qa/v054-consumers/v053_combat_data.gd",
+          "res://scripts/combat/burn_rules.gd": "res://docs/qa/v054-consumers/v053_burn_rules.gd"
+        }
+      }
+    },
+    {
+      "source": "scripts/main.gd",
+      "source_sha256": "7883c8cd5d8f7c0f68afec756e09df9ae09483919e3a7a3936ee76493856e451",
+      "oracle": "docs/qa/v054-consumers/v053_main.gd",
+      "oracle_sha256": "7883c8cd5d8f7c0f68afec756e09df9ae09483919e3a7a3936ee76493856e451",
+      "changes": {}
+    }
+  ]
+}

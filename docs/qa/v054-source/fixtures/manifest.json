@@ -1,0 +1,43 @@
+{
+  "published_commit": "e3a5f7559ecbcb2cb56a9c192d75899fdcf43b3a",
+  "project": "/workspace/scratch/a51485f153de/v053-final-source-snapshot",
+  "command": [
+    "/usr/local/bin/godot",
+    "--headless",
+    "--path",
+    "/workspace/scratch/a51485f153de/v053-final-source-snapshot",
+    "--script",
+    "/workspace/scratch/a51485f153de/v054-faster-burning/docs/qa/v054-source/capture_released_v53.gd",
+    "--",
+    "/workspace/scratch/a51485f153de/v054-faster-burning/docs/qa/v054-source/fixtures"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 2.072,
+  "xdg_data": "/tmp/godot-m1-v054-fixture.jhkt_t_g/data",
+  "capture_sha256": "2793d298d9cb9491609fc2c5af40a4ef64ffdfd9d6efd01753a677e1cd160c40",
+  "files": {
+    "v32-active-allocated.json": {
+      "bytes": 17935,
+      "sha256": "c51ab7738ef52ba187f5d7f0c4f1a87e55d1d12ee60ad0973b5d7482883856a5"
+    },
+    "v32-vocabulary-oracle.json": {
+      "bytes": 120660,
+      "sha256": "54f3af3783d63b32651639dc86d73929bc031ad38105996a8e386c4046564bd3"
+    },
+    "v32-default.json": {
+      "bytes": 14817,
+      "sha256": "202a9ba24384c4f7402c5da1946414b08a4b1597dbfa0d899a68fac72f3f90f0"
+    }
+  },
+  "released_source_sha256": {
+    "project.godot": "49f942face76cf68fc0c289edd40c93d9facad008546332d04f32c5c5b1ad6f6",
+    "scripts/passives/source_stat_patterns.gd": "c0232a659496c51bd9b1f5f5dfeb0dfe69be4e0dc6b57fec68731f259e5a9e44",
+    "scripts/passives/source_tree_runtime.gd": "435400c447ffdfb78b1f19675139f10f37711e1461dd8c89afa7d6509190e991",
+    "scripts/passives/source_tree_data.gd": "9ce28c773f4ca8b8174cca73008cd1c9002237681378d58f5108def2f761bbee",
+    "scripts/save/canonical_build_rules.gd": "74537704e6ef9c019190c8eb69413fcd4f9799ade5f898c1876538ecb33b594f",
+    "scripts/save/canonical_build_store.gd": "41af9d07a2a0f42d1411e51747cdf8e526215e97146dbf8f406a6bc4109754eb",
+    "scripts/save/fire_dot_migration.gd": "91a29204d0428cfcaf069a494fc258b0a2bda49e82164514f2d6a5e69651f10d",
+    "scripts/canonical_game_state.gd": "c0f3e4c3c4b96767923dfa3a8fc546d9462f3ade574fdbafb5de9d688f6588a9",
+    "data/passives/official_tree_runtime.json": "9774a8ec1fe16199e775fe99a20853837ca8c7725c48dfcd9d6ee69646ff934f"
+  }
+}

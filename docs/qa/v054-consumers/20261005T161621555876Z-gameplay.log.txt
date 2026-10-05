@@ -1,0 +1,18 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+godot-game: playable arena ready
+ERROR: Actual model-to-burn-lines preview explains allocated five percent
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/faster_burn_gameplay_test.gd:29)
+       [1] allocate_frozen (res://tests/faster_burn_gameplay_test.gd:275)
+       [2] allocation_and_frozen_projectiles (res://tests/faster_burn_gameplay_test.gd:246)
+       [3] run (res://tests/faster_burn_gameplay_test.gd:108)
+ERROR: Actual model-to-burn-lines preview explains allocated five percent
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/faster_burn_gameplay_test.gd:29)
+       [1] allocate_frozen (res://tests/faster_burn_gameplay_test.gd:275)
+       [2] allocation_and_frozen_projectiles (res://tests/faster_burn_gameplay_test.gd:246)
+       [3] run (res://tests/faster_burn_gameplay_test.gd:108)
+Faster burn actual gameplay: 292 checks, 2 failures; sections {"compressed_death_and_expiry":26,"direct_hit_and_health":92,"dps_not_total_ownership":11,"enemy_burn_and_shock":12,"mixed_ownership":11,"proliferation_once":9,"real_allocation_and_frozen_carriers":74,"simultaneous_selection_and_los":56}

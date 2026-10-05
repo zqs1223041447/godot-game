@@ -1,0 +1,17 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ERROR: FAIL: Huge finite faster factor remains legal when every result is representable
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tests/faster_burn_rules_test.gd:44)
+       [1] _test_invalid_and_extreme (res://tests/faster_burn_rules_test.gd:176)
+       [2] _case (res://tests/faster_burn_rules_test.gd:35)
+       [3] _run (res://tests/faster_burn_rules_test.gd:24)
+ERROR: FAIL: Tiny accepted lifetime remains positive and finite
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tests/faster_burn_rules_test.gd:44)
+       [1] _test_invalid_and_extreme (res://tests/faster_burn_rules_test.gd:177)
+       [2] _case (res://tests/faster_burn_rules_test.gd:35)
+       [3] _run (res://tests/faster_burn_rules_test.gd:24)
+Faster burn rules: 22859 checks, 2 failures; frozen v053 e3a5f7559ecbcb2cb56a9c192d75899fdcf43b3a; sections {"faster_arithmetic":2169,"frozen_v053_zero_bytes":20386,"input_isolation":6,"invalid_and_extreme_arithmetic":64,"runtime_consumer":58,"source_and_snapshot_validation":175}

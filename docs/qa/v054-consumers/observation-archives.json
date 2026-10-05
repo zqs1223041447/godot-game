@@ -1,0 +1,23 @@
+{
+  "policy": "Observation streams losslessly gzip-compressed after exact comparison; decompression byte equality verified.",
+  "archives": [
+    {
+      "original_file": "20261005T161655427331Z-legacy-new.bin",
+      "archive": "20261005T161655427331Z-legacy-new.bin.gz",
+      "raw_bytes": 18954404,
+      "archive_bytes": 1111868,
+      "raw_sha256": "48f2809b81f475c392b53ba6b782b1b666626e775a71ae0b0c2358f2de7b5d9f",
+      "archive_sha256": "5d027195528a19b0707263d51f54ce6c2aa407d7ca06672aa119797ea1bee088",
+      "decompression_byte_exact": true
+    },
+    {
+      "original_file": "20261005T161655427331Z-legacy-old.bin",
+      "archive": "20261005T161655427331Z-legacy-old.bin.gz",
+      "raw_bytes": 18954404,
+      "archive_bytes": 1111868,
+      "raw_sha256": "48f2809b81f475c392b53ba6b782b1b666626e775a71ae0b0c2358f2de7b5d9f",
+      "archive_sha256": "5d027195528a19b0707263d51f54ce6c2aa407d7ca06672aa119797ea1bee088",
+      "decompression_byte_exact": true
+    }
+  ]
+}

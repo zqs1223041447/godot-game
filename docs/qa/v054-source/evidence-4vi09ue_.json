@@ -1,0 +1,58 @@
+[
+  {
+    "test": "source_faster_burn_rules",
+    "command": [
+      "/usr/local/bin/godot",
+      "--headless",
+      "--path",
+      "/workspace/scratch/a51485f153de/v054-faster-burning",
+      "--script",
+      "res://tests/source_faster_burn_rules_test.gd"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 3.17,
+    "log": "source_faster_burn_rules-4vi09ue_.log",
+    "xdg_data": "/tmp/godot-m1-v054-source.4vi09ue_/source_faster_burn_rules/data",
+    "script_errors": false,
+    "source_sha256": {
+      "tests/source_faster_burn_rules_test.gd": "415609230911957b872efdaa65313a75fc948516c43fe83cec44897b11a3f0db",
+      "scripts/passives/source_stat_patterns.gd": "bfbd44e8e672fc51a795a946108f474f0a337ec14d92a9e0ac3ae7dae8488707",
+      "scripts/passives/source_tree_runtime.gd": "b2de134d237bad3dd30485791634f5fbf5c1c8c6dd0b58eb4311e96b66f080b9",
+      "scripts/passives/source_tree_data.gd": "9ce28c773f4ca8b8174cca73008cd1c9002237681378d58f5108def2f761bbee",
+      "scripts/save/canonical_build_rules.gd": "1e593104bd384de5c5586422b40a7d5417dafe31a770c4e6f2311bed5f8b8696",
+      "scripts/save/canonical_build_store.gd": "1da0d6e2092355813e96398d77ada9bb24a19ce670fac7157bbafd4044c74fca",
+      "scripts/save/fire_dot_migration.gd": "86fd4711901ad99bf11c7d8c8e564ae1f37c522c21b8a009fbb91f9fbb80b647",
+      "scripts/save/faster_burn_migration.gd": "c5847514765da962258178004bebf15e8606c662d1253baa9efc3ab93d410c26",
+      "scripts/canonical_game_state.gd": "abc5f7f921678d4e6ca50636cd3269250c9a9309f218ccd17530deb26cf996d6",
+      "data/passives/official_tree_runtime.json": "9774a8ec1fe16199e775fe99a20853837ca8c7725c48dfcd9d6ee69646ff934f"
+    }
+  },
+  {
+    "test": "source_faster_burn_migration",
+    "command": [
+      "/usr/local/bin/godot",
+      "--headless",
+      "--path",
+      "/workspace/scratch/a51485f153de/v054-faster-burning",
+      "--script",
+      "res://tests/source_faster_burn_migration_test.gd"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 16.381,
+    "log": "source_faster_burn_migration-4vi09ue_.log",
+    "xdg_data": "/tmp/godot-m1-v054-source.4vi09ue_/source_faster_burn_migration/data",
+    "script_errors": false,
+    "source_sha256": {
+      "tests/source_faster_burn_migration_test.gd": "5114b32e00172ad301f942b543415d799188056ead389dc1fcaa3920c3713471",
+      "scripts/passives/source_stat_patterns.gd": "bfbd44e8e672fc51a795a946108f474f0a337ec14d92a9e0ac3ae7dae8488707",
+      "scripts/passives/source_tree_runtime.gd": "b2de134d237bad3dd30485791634f5fbf5c1c8c6dd0b58eb4311e96b66f080b9",
+      "scripts/passives/source_tree_data.gd": "9ce28c773f4ca8b8174cca73008cd1c9002237681378d58f5108def2f761bbee",
+      "scripts/save/canonical_build_rules.gd": "1e593104bd384de5c5586422b40a7d5417dafe31a770c4e6f2311bed5f8b8696",
+      "scripts/save/canonical_build_store.gd": "1da0d6e2092355813e96398d77ada9bb24a19ce670fac7157bbafd4044c74fca",
+      "scripts/save/fire_dot_migration.gd": "86fd4711901ad99bf11c7d8c8e564ae1f37c522c21b8a009fbb91f9fbb80b647",
+      "scripts/save/faster_burn_migration.gd": "c5847514765da962258178004bebf15e8606c662d1253baa9efc3ab93d410c26",
+      "scripts/canonical_game_state.gd": "abc5f7f921678d4e6ca50636cd3269250c9a9309f218ccd17530deb26cf996d6",
+      "data/passives/official_tree_runtime.json": "9774a8ec1fe16199e775fe99a20853837ca8c7725c48dfcd9d6ee69646ff934f"
+    }
+  }
+]
