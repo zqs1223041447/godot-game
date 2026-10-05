@@ -1,0 +1,9 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+godot-game: playable arena ready
+Packed v55 forgeblade probe: 25 checks, 1 failures
+ERROR: Blade local W does not leak to basic projectile or spell
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (/workspace/scratch/a51485f153de/v055-final-source-snapshot/tools/v055_export_probe.gd:17)
+       [1] run (/workspace/scratch/a51485f153de/v055-final-source-snapshot/tools/v055_export_probe.gd:77)

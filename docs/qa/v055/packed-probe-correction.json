@@ -1,0 +1,14 @@
+{
+  "export_input_commit": "e1d881db3a57083f7ee80a13d7501f51d9ad67c9",
+  "first_probe_checks": 25,
+  "first_probe_failures": 1,
+  "classification": "Test supplied already compiled cleave snapshot to raw build compiler; correct existing anti-reentry guard rejects it",
+  "production_rule": "SkillCompiler._snapshot_error rejects initial_count/compiled_packets/compiled_skill_id/critical/leech fields before recompiling",
+  "fix": "Probe uses model.get_combat_snapshot and a detached copy without weapon_profile for non-cleave comparison",
+  "production_inputs_unchanged": 480,
+  "reexport_required": false,
+  "old_probe_sha256": "87687249222000cc72786b8a44e6fca459e667d51f810dc1b102c82377763303",
+  "corrected_probe_sha256": "3740dfcb9b9bd8ca5f0465eb081cc8583f79f4f0fe16e3ebacca453bda47cd7f",
+  "exe_sha256": "a7d9435b34f50ececbbdf33dd2eb4d568c030f9d3c2eed605148f3d66fa3cbd9",
+  "pck_sha256": "e57baee7d3130486ed8182756a3833d83172a8423128f6f00f4e35a566d81212"
+}

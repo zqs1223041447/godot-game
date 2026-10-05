@@ -71,9 +71,10 @@ func run() -> void:
 	var cast: Dictionary=model.get_group_cast(group); var profile: Dictionary=model.item_definition(uid).weapon_profile
 	var w: float=(float(profile.base.physical)+float(profile.flat.physical))*(1.0+float(profile.increased.physical))
 	check(cast.ok and near(cast.packets.direct.assembly.weapon.contribution.physical,w*2.8) and cast.snapshot.weapon_profile.item_id==uid, "Real compiler includes calculated W once in direct cleave")
-	var raw: Dictionary=cast.snapshot.duplicate(true); raw.erase("weapon_profile")
-	var basic_a: Dictionary=Compiler.compile_basic(cast.snapshot); var basic_b: Dictionary=Compiler.compile_basic(raw)
-	var bolt_a: Dictionary=Compiler.compile_group("bolt",cast.snapshot,[]); var bolt_b: Dictionary=Compiler.compile_group("bolt",raw,[])
+	var base_snapshot: Dictionary=model.get_combat_snapshot()
+	var raw: Dictionary=base_snapshot.duplicate(true); raw.erase("weapon_profile")
+	var basic_a: Dictionary=Compiler.compile_basic(base_snapshot); var basic_b: Dictionary=Compiler.compile_basic(raw)
+	var bolt_a: Dictionary=Compiler.compile_group("bolt",base_snapshot,[]); var bolt_b: Dictionary=Compiler.compile_group("bolt",raw,[])
 	check(basic_a.ok and basic_b.ok and bolt_a.ok and bolt_b.ok and var_to_bytes(basic_a.packets)==var_to_bytes(basic_b.packets) and var_to_bytes(bolt_a.packets)==var_to_bytes(bolt_b.packets), "Blade local W does not leak to basic projectile or spell")
 	check(Preview.details(cast).contains("锻纹短刃") and Preview.assembly_line(cast.packets.direct).contains("武器"), "Packed presentation reads real weapon assembly")
 	var reopened:=Model.new()

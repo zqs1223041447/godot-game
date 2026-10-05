@@ -1,0 +1,201 @@
+{
+	"actual_hit": {
+		"assembly": {
+			"added": {
+
+			},
+			"added_effectiveness": 2.8,
+			"base_coefficient": 2.8,
+			"intrinsic": {
+				"physical": 50.4
+			},
+			"stage": "hit_base",
+			"weapon": {
+				"coefficient": 2.8,
+				"components": {
+					"physical": 4.5600000000000005
+				},
+				"contribution": {
+					"physical": 12.768
+				},
+				"profile": {
+					"base": {
+						"physical": 4.0
+					},
+					"base_id": "forgeblade",
+					"flat": {
+						"physical": 0.0
+					},
+					"increased": {
+						"physical": 0.14
+					},
+					"item_id": "gear_000004",
+					"sources": [
+						{
+							"affix_id": "tempered_edge",
+							"stat": "weapon_physical_increased",
+							"value": 0.14
+						}
+					],
+					"stage": "weapon_local"
+				}
+			}
+		},
+		"before_defense_components": {
+			"physical": 65.69472
+		},
+		"cast_id": 1,
+		"components": {
+			"physical": 52.82833744798195
+		},
+		"critical": {
+			"chance": 0.05,
+			"critical": false,
+			"multiplier": 1.0
+		},
+		"details": [
+			{
+				"base": 63.168,
+				"before_defense": 65.69472,
+				"final": 52.82833744798195,
+				"increased": 0.04,
+				"modifiers": [
+					"melee_physical_increased"
+				],
+				"more": 1.0,
+				"resistance": 0.1958510904988719,
+				"type": "physical"
+			}
+		],
+		"effect_id": "",
+		"health_lost": 47.82833744798195,
+		"phase": "direct",
+		"prevented_components": {
+			"physical": 12.866382552018052
+		},
+		"projectile_id": 0,
+		"shield_spent": 5.0,
+		"skill_id": "cleave",
+		"tags": [
+			"hit",
+			"attack",
+			"melee",
+			"area"
+		],
+		"target_id": 4,
+		"total": 52.82833744798195
+	},
+	"checks": 25,
+	"failures": 1,
+	"font_sha256": "a0b6896d6b1f76e5bcbc53106b9d7cca3067457078e6583df90347acff8c5c82",
+	"local_physical": 4.5600000000000005,
+	"ok": false,
+	"pck_sha256": "e57baee7d3130486ed8182756a3833d83172a8423128f6f00f4e35a566d81212",
+	"remaining_shards": 68,
+	"results": [
+		{
+			"label": "Actual packed version",
+			"ok": true
+		},
+		{
+			"label": "Existing directory and240slots",
+			"ok": true
+		},
+		{
+			"label": "Real33 migration preserves exact original bytes",
+			"ok": true
+		},
+		{
+			"label": "Migration changes only version without grants",
+			"ok": true
+		},
+		{
+			"label": "Raw packed font matches frozen source",
+			"ok": true
+		},
+		{
+			"label": "New short-blade text uses actual bundled glyphs",
+			"ok": true
+		},
+		{
+			"label": "Imported original artwork obeys512limit and alpha bounds",
+			"ok": true
+		},
+		{
+			"label": "Dynamic test catalog contains actual1x3blade",
+			"ok": true
+		},
+		{
+			"label": "Real reward admission stores owned normal blade UID",
+			"ok": true
+		},
+		{
+			"label": "Isolated100shard fixture follows real save transaction",
+			"ok": true
+		},
+		{
+			"label": "Actual enchant keeps UID and spends8",
+			"ok": true
+		},
+		{
+			"label": "Cancelled target preserves all money items and raw save",
+			"ok": true
+		},
+		{
+			"label": "Paid16damage reforge guarantees legal local family",
+			"ok": true
+		},
+		{
+			"label": "Existing formal merchant sells actual cleave UID for8",
+			"ok": true
+		},
+		{
+			"label": "Actual blade and skill UIDs equip through model",
+			"ok": true
+		},
+		{
+			"label": "Real compiler includes calculated W once in direct cleave",
+			"ok": true
+		},
+		{
+			"label": "Blade local W does not leak to basic projectile or spell",
+			"ok": false
+		},
+		{
+			"label": "Packed presentation reads real weapon assembly",
+			"ok": true
+		},
+		{
+			"label": "Current weapon rolls UID and cast survive raw save reload",
+			"ok": true
+		},
+		{
+			"label": "Real formal practice entry",
+			"ok": true
+		},
+		{
+			"label": "Real melee cast charges compiled mana and shared cooldown",
+			"ok": true
+		},
+		{
+			"label": "Local weapon hit passes actual critical armour shield then health settlement",
+			"ok": true
+		},
+		{
+			"label": "Original front-sector geometry still excludes rear target",
+			"ok": true
+		},
+		{
+			"label": "Rejected repeat charges no extra mana or damage",
+			"ok": true
+		},
+		{
+			"label": "Unequip affects only future cast and preserves crafted item",
+			"ok": true
+		}
+	],
+	"schema": 34,
+	"scope": "Linux same-PCK new-content acceptance; no Windows hardware FPS claim",
+	"source_commit": "e1d881db3a57083f7ee80a13d7501f51d9ad67c9",
+	"weapon_uid": "gear_000004"
+}
