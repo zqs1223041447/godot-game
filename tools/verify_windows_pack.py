@@ -53,12 +53,17 @@ for _ in range(file_count):
     logical_name = name.removeprefix("res://")
     packed_payloads[logical_name] = data[start:start + size]
     assert logical_name != "data/poe_passive_registry.json", "Research-only passive source exported"
+    assert not logical_name.startswith("data/passive_source/") or logical_name == "data/passive_source/localization_zh_CN.json", "Research-only passive source exported: " + name
     assert not logical_name.startswith(("data/reference/", "tests/", "tools/", "builds/", "docs/")), "Development-only file exported: " + name
     entries.append({"name": name, "size": size, "md5_verified": True})
 assert any(entry["name"].removeprefix("res://") == "data/passive_balance.json" for entry in entries), "Shared balance authority omitted from export"
 # All original paintings must have both their import map and compiled texture.
 project_root = Path(__file__).resolve().parents[1]
 names = {entry["name"].removeprefix("res://") for entry in entries}
+localization_path = "data/passive_source/localization_zh_CN.json"
+if (project_root / localization_path).is_file():
+    assert localization_path in names, "Passive-tree display mapping omitted from export"
+    assert packed_payloads[localization_path] == (project_root / localization_path).read_bytes(), "Packed passive-tree mapping differs from frozen source"
 painted_assets_verified = 0
 painted_cache_verified = []
 art_manifest = json.loads((project_root / "assets/ui/grimoire/asset_manifest.json").read_text())
