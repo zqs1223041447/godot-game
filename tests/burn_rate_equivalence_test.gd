@@ -1,4 +1,6 @@
 extends SceneTree
+## Archived candidate test: production was restored after the performance experiment.
+## Run only at46dc450 or6f93733, where the evaluated burn_rate API exists.
 const Old=preload("res://tests/fixtures/v052/defense_rules_before.gd")
 const New=preload("res://scripts/mechanics/defense_rules.gd")
 var checks:=0

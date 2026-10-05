@@ -141,28 +141,12 @@ static func incoming_source_hit(components: Variant,stats: Dictionary,shield: Va
 
 ## Already-resolved raw burning has no offensive modifiers or hit admission.
 ## Reuse the same fire cap and resource settlement, without hit-size armour.
-## Pure effective rate used by causal death planning. Reuse the fresh profile
-## container; no fictitious shield/health settlement or persistent cache.
-static func burn_rate(raw_amount:Variant,fire_resistance:Variant,actor:String="player")->Dictionary:
-	if not _amount(raw_amount):return _failure("Burn amount must be finite and nonnegative")
-	var profile:Dictionary=defense_profile({"fire_resistance":fire_resistance},actor)
-	if not profile.ok:return profile
-	# The original generic component total accumulates from positive zero.
-	profile.damage_total=0.0+_burn_amount(float(raw_amount),float(profile.effective_resistances.fire))
-	return profile
-
-
-## One exact component expression; both callers have validated their inputs.
-static func _burn_amount(raw:float,resistance:float)->float:
-	return raw*(1.0-resistance)
-
-
 static func incoming_burn(raw_amount:Variant,fire_resistance:Variant,shield:Variant,health:Variant,actor:String="player")->Dictionary:
 	if not _amount(raw_amount):return _failure("Burn amount must be finite and nonnegative")
 	var profile:Dictionary=defense_profile({"fire_resistance":fire_resistance},actor)
 	if not profile.ok:return profile
 	var raw:float=float(raw_amount);var resistance:float=profile.effective_resistances.fire
-	var amount:float=_burn_amount(raw,resistance)
+	var amount:float=raw*(1.0-resistance)
 	var result:Dictionary=settle_resolved({"total":amount,"components":{"fire":amount},"details":[{"type":"fire","before_defense":raw,"resistance":resistance,"final":amount}]},shield,health)
 	if result.ok:result.actor=actor;result.stage="burning"
 	return result

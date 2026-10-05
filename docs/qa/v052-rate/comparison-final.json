@@ -1,0 +1,97 @@
+{
+  "baseline": "d6684d27517e4661abd832d586fcdbb72185929e",
+  "candidate": "6f937332997ca968cbdd7468177c6074aa7856c2",
+  "pure_checks": 783,
+  "cases": [
+    {
+      "mode": "ignite",
+      "before": {
+        "max_us": 113788,
+        "mean_us": 100298.375,
+        "n": 24,
+        "over_16_7_ms": 24,
+        "over_33_3_ms": 24,
+        "p50_us": 98083,
+        "p95_us": 111216
+      },
+      "second_candidate": {
+        "max_us": 131094,
+        "mean_us": 106605.0,
+        "n": 24,
+        "over_16_7_ms": 24,
+        "over_33_3_ms": 24,
+        "p50_us": 106406,
+        "p95_us": 130363
+      },
+      "mean_change_percent": 6.287863587022224,
+      "p95_change_percent": 17.216048050640186,
+      "max_change_percent": 15.208985130242203,
+      "observation_bytes": 1261236,
+      "observation_sha256": "a01a1fc2e4fdf1e11d8a9c87ffb5dafead8036253e7d30460d88c9e178ee4366",
+      "disk_bytes": 12177,
+      "disk_sha256": "e5513bec27040478f5586161ba375795275908dd491cbe824044e92da3d56fd1",
+      "all_bytes_equal": true
+    },
+    {
+      "mode": "ember_deaths",
+      "before": {
+        "max_us": 682945,
+        "mean_us": 41535.45333333333,
+        "n": 150,
+        "over_16_7_ms": 62,
+        "over_33_3_ms": 53,
+        "p50_us": 10144,
+        "p95_us": 144461
+      },
+      "second_candidate": {
+        "max_us": 559899,
+        "mean_us": 37539.46,
+        "n": 150,
+        "over_16_7_ms": 60,
+        "over_33_3_ms": 51,
+        "p50_us": 9425,
+        "p95_us": 121139
+      },
+      "mean_change_percent": -9.6206806779365,
+      "p95_change_percent": -16.14414963208063,
+      "max_change_percent": -18.016970619888863,
+      "observation_bytes": 250036,
+      "observation_sha256": "a45eabb7d2d448ddcb16a3679119d0265f3e325f35017a2109763784b6ac10ce",
+      "disk_bytes": 14156,
+      "disk_sha256": "ecc65365d093daab5721cf21beeac3f54e0e80ece72d5115aff261a0de7973e8",
+      "all_bytes_equal": true
+    },
+    {
+      "mode": "ember_proliferation",
+      "before": {
+        "max_us": 730957,
+        "mean_us": 680462.5416666666,
+        "n": 24,
+        "over_16_7_ms": 24,
+        "over_33_3_ms": 24,
+        "p50_us": 678099,
+        "p95_us": 718447
+      },
+      "second_candidate": {
+        "max_us": 621999,
+        "mean_us": 579895.125,
+        "n": 24,
+        "over_16_7_ms": 24,
+        "over_33_3_ms": 24,
+        "p50_us": 580804,
+        "p95_us": 607704
+      },
+      "mean_change_percent": -14.779272995739845,
+      "p95_change_percent": -15.414219838067389,
+      "max_change_percent": -14.906211993318353,
+      "observation_bytes": 1302852,
+      "observation_sha256": "efad18733c7d2a41d2138c5a7044d3929af55725b5d359715e1e5092d8e397d3",
+      "disk_bytes": 12177,
+      "disk_sha256": "e5513bec27040478f5586161ba375795275908dd491cbe824044e92da3d56fd1",
+      "all_bytes_equal": true
+    }
+  ],
+  "decision": "Withdraw both production changes; no third variant and no release",
+  "reason": "Both tested variants showed worse ordinary ignite short-control timings; focused dense gains do not establish a safe overall improvement",
+  "limits": "Small serial samples, not randomized trials or causal proof. Do not claim all platforms regress. No WindowsFPS or natural-map measurements."
+}
