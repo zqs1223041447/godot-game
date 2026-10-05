@@ -314,12 +314,14 @@ func _change_partition(index:int)->void:
 	_partition.select(index)
 	_subtree=str(_partition.get_item_metadata(index))
 	_loaded_graph=""
+	_refresh_dirty=true
 	refresh()
 func _focus_start()->void:
 	_subtree="standard"
 	_partition.select(0)
 	_loaded_graph=""
 	selected_node_id=Data.start_for_class(int(model.snapshot().talents.class_id))
+	_refresh_dirty=true
 	refresh()
 	_tree.pan=-Data.node(selected_node_id).position*_tree.zoom
 	_tree.queue_redraw()
@@ -338,7 +340,7 @@ func _find_node(query:String)->void:
 	if not record.is_empty():
 		selected_node_id=str(record.id)
 		_refresh_details();_refresh_overlay();return
-	feedback.emit("当前子树未找到此源名称或ID")
+	feedback.emit("当前子树未找到此名称或编号")
 func _socket_selected()->void:
 	if not _socket.disabled:_move(str(_jewel.get_item_metadata(_jewel.selected)),{"kind":"passive_socket","node_id":selected_node_id},model.revision())
 func _return_jewel()->void:
