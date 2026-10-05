@@ -1,0 +1,80 @@
+--- a/scripts/items/gem_catalog.gd
++++ b/scripts/items/gem_catalog.gd
+@@ -74,26 +74,34 @@
+ 
+ ## Validate the exact four-field wrapper and exact integer payload. No coercion or defaults.
+ static func validate_instance(value: Variant) -> bool:
+-	if not value is Dictionary or value.size() != 4 or not value.has_all(["uid", "kind", "definition_id", "payload"]):
+-		return false
+-	if not _valid_uid(value.uid) or not value.kind is String or not value.definition_id is String:
+-		return false
+-	var resolved: Dictionary = definition(value.definition_id)
+-	if resolved.is_empty() or value.kind != resolved.kind:
+-		return false
+-	var payload: Variant = value.payload
+-	if not payload is Dictionary or payload.size() != 2 or not payload.has_all(["level", "quality"]):
+-		return false
+-	return payload.level is int and payload.level == 1 and payload.quality is int and payload.quality == 0
++	return not _validated_definition(value).is_empty()
+ 
+ 
+ ## Return detached source metadata for a valid instance; malformed instances return {}.
+ static func metadata_for_instance(value: Variant) -> Dictionary:
+-	if not validate_instance(value):
++	var result: Dictionary = _validated_definition(value)
++	if result.is_empty():
+ 		return {}
+-	var result: Dictionary = definition(value.definition_id)
+ 	result["uid"] = value.uid
+ 	return result
++
++
++## Resolve once within this call while retaining every public validation check.
++## No caller can supply a trusted definition or bypass current catalog membership.
++static func _validated_definition(value: Variant) -> Dictionary:
++	if not value is Dictionary or value.size() != 4 or not value.has_all(["uid", "kind", "definition_id", "payload"]):
++		return {}
++	if not _valid_uid(value.uid) or not value.kind is String or not value.definition_id is String:
++		return {}
++	var resolved: Dictionary = definition(value.definition_id)
++	if resolved.is_empty() or value.kind != resolved.kind:
++		return {}
++	var payload: Variant = value.payload
++	if not payload is Dictionary or payload.size() != 2 or not payload.has_all(["level", "quality"]):
++		return {}
++	if not payload.level is int or payload.level != 1 or not payload.quality is int or payload.quality != 0:
++		return {}
++	return resolved
+ 
+ 
+ static func _skill_definition(skill_id: String) -> Dictionary:
+--- a/scripts/items/unified_item_catalog.gd
++++ b/scripts/items/unified_item_catalog.gd
+@@ -68,6 +68,17 @@
+ 
+ 
+ static func definition_for_instance(value: Variant) -> Dictionary:
++	if value is Dictionary and value.get("kind") in ["skill_gem", "support_gem"]:
++		# Gem metadata validates its own complete instance; retain this adapter's
++		# stricter outer String-key contract before using that public boundary.
++		if not Locations._exact_string_keys(value, FIELDS) or not Locations._stable_id(value.uid) \
++				or not value.kind is String or not value.definition_id is String or not value.payload is Dictionary:
++			return {}
++		var gem: Dictionary = Gems.metadata_for_instance(value)
++		if gem.is_empty():
++			return {}
++		gem["category"] = ""
++		return gem
+ 	if not validate_instance(value):
+ 		return {}
+ 	var result: Dictionary = {}
+@@ -92,9 +103,6 @@
+ 			result["id"]=value.uid
+ 		"currency":
+ 			result = Currency.definition(value.payload.quantity)
+-		"skill_gem", "support_gem":
+-			result = Gems.metadata_for_instance(value)
+-			result["category"] = ""
+ 	result["uid"] = value.uid
+ 	result["kind"] = value.kind
+ 	result["definition_id"] = value.definition_id

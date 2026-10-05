@@ -1,0 +1,30 @@
+{
+  "production_gem_changes_reverted": true,
+  "reason": "Real first-I total did not show clear improvement; semantic equivalence alone is not a performance benefit",
+  "samples": [
+    {
+      "repeat": 0,
+      "before_first_I_us": 42781,
+      "candidate_first_I_us": 46442,
+      "typed_observation_equal": true,
+      "bytes": 108176,
+      "sha256": "d506f31b7c5a774ddbf85c106a289e19bce6d07e48e3186adf855b96a43ad2d0"
+    },
+    {
+      "repeat": 1,
+      "before_first_I_us": 43587,
+      "candidate_first_I_us": 42059,
+      "typed_observation_equal": true,
+      "bytes": 108176,
+      "sha256": "d506f31b7c5a774ddbf85c106a289e19bce6d07e48e3186adf855b96a43ad2d0"
+    },
+    {
+      "repeat": 2,
+      "before_first_I_us": 43465,
+      "candidate_first_I_us": 42606,
+      "typed_observation_equal": true,
+      "bytes": 108176,
+      "sha256": "d506f31b7c5a774ddbf85c106a289e19bce6d07e48e3186adf855b96a43ad2d0"
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "final_production_changed": [
+    "scripts/passives/source_tree_allocation_rules.gd"
+  ],
+  "pure_rule_checks": 447,
+  "pure_rule_cases": 28,
+  "pure_exit_code": 0,
+  "real_reward_cases": 5,
+  "real_reward_checks": 153,
+  "real_reward_exact_bytes_all": true,
+  "guard_only_production_tests_reused": true,
+  "source_checks": 600,
+  "diagnostic_not_shipped_gem_candidate_checks": 1643,
+  "rejected_candidate_reason": "Real first-I timing did not establish clear benefit; catalogs restored exactly to v50",
+  "final_source_changed_after_guard_tests": [
+    "project.godot version0.51; no gameplay change"
+  ],
+  "logs": {
+    "docs/qa/v051-allocation/run.log": {
+      "bytes": 235,
+      "sha256": "bdef32558d400c5da47bb9258126f6e26f9ff677f179286e88d5ec2262dc3575"
+    },
+    "docs/qa/v051-gems/test.log": {
+      "bytes": 420,
+      "sha256": "02d58bfc0e721b0ec89c29f3b35da72464c2e05398670166f13f1509f8a5cf3d"
+    },
+    "docs/qa/v051/import.log": {
+      "bytes": 65559,
+      "sha256": "a3fd6aa34ee95f5516da7fc96a23507c47ecba3e372b3540fbbfc0761c38d432"
+    },
+    "docs/qa/v051/reference-build.log": {
+      "bytes": 50,
+      "sha256": "5f82f1b4028223cb5182a6dc09d060ab620af0d7c8995d9eff1509969032b5aa"
+    },
+    "docs/qa/v051/reference-determinism.log": {
+      "bytes": 52,
+      "sha256": "65d47533eaf556129a1f3a295db12ab1bc36a8df0770c71cb9378490d54d03ba"
+    },
+    "docs/qa/v051/probe-parse.log": {
+      "bytes": 73,
+      "sha256": "a9912b85473f126d3f4f63ec824170c828df3473a292f866dde86cafda5b66da"
+    },
+    "docs/qa/v051/reference-export.log": {
+      "bytes": 127,
+      "sha256": "51e3b0bc619efba5c710e1863eedea0402e6700d8c973b9ecb758418906e7297"
+    },
+    "docs/qa/v051-inventory/actual-before-1.log": {
+      "bytes": 243,
+      "sha256": "49e4eed27324674b215a03c7ece026d6338b530f7c8c18f30789e8ba105aa7c5"
+    },
+    "docs/qa/v051-inventory/actual-after-2.log": {
+      "bytes": 242,
+      "sha256": "9f1651fad594eca3f8d4f77eb85a2cc9268b154b9fd2af1ac12f23b39020e339"
+    },
+    "docs/qa/v051-inventory/breakdown.log": {
+      "bytes": 276,
+      "sha256": "409f173e1bab319bbecc91335769b4975d2c807e9ac270e11c9ebbd82c84876c"
+    },
+    "docs/qa/v051-inventory/actual-before-2.log": {
+      "bytes": 243,
+      "sha256": "f40e9562e3d2d6e70c2310302d24e12c31a3ea7c2c2074788f6166750dd0a325"
+    },
+    "docs/qa/v051-inventory/actual-before-0.log": {
+      "bytes": 243,
+      "sha256": "bb34e0e329ecfdf0d8b074d48bd8e0803ceffa0ada51ba47b45f31a0bd69bad9"
+    },
+    "docs/qa/v051-inventory/actual-after-0.log": {
+      "bytes": 242,
+      "sha256": "b7c3abcf76f15d23b0e2e7f46bed9f62db8d592d8cbb3b80544c578c5ea745d9"
+    },
+    "docs/qa/v051-inventory/actual-after-1.log": {
+      "bytes": 242,
+      "sha256": "4b374c396f3cb191bc35998c85809a3a173e102410e09c9d25b799a5f83b9646"
+    },
+    "docs/qa/v051-rewards/after-guard-failed_save-0.log": {
+      "bytes": 627,
+      "sha256": "a0bc6dbe0f3d74f32a36c3c456328774f23e16cd86ac4a7776862d2a540e8eee"
+    },
+    "docs/qa/v051-rewards/after-guard-plain-1.log": {
+      "bytes": 620,
+      "sha256": "60c32f33a943a55311b257ca7a16059ffb1be72532953cf1d759c95be498737c"
+    },
+    "docs/qa/v051-rewards/before-plain-0.log": {
+      "bytes": 606,
+      "sha256": "075e6f5b8ebe2ee143adbfca5045d682f696964f6c6fd3dcbfbd4c79ca4ed1b2"
+    },
+    "docs/qa/v051-rewards/after-final-failed_save-0.log": {
+      "bytes": 627,
+      "sha256": "94c88b8d1102807a3c230a4001bc5d32fddede76951fa90dc5b55ec5b3f98282"
+    },
+    "docs/qa/v051-rewards/before-plain-1.log": {
+      "bytes": 606,
+      "sha256": "69da8f9aa7c4cbdfb85ad38c5cafc477ab6283c9adcb0248925e51592d9db410"
+    },
+    "docs/qa/v051-rewards/after-guard-plain-0.log": {
+      "bytes": 620,
+      "sha256": "8ab972851fa1e801032e75939659de792351b67a88aa01287fa443da70c50aca"
+    },
+    "docs/qa/v051-rewards/after-guard-full_bag-0.log": {
+      "bytes": 626,
+      "sha256": "2039d7abeff9929adebc2f2e58498598a96cbb0deb332b2109ffd38cab8c920a"
+    },
+    "docs/qa/v051-rewards/after-final-full_bag-0.log": {
+      "bytes": 626,
+      "sha256": "dc87b1b2aef93f8c4a448aa47d1cbcfc663b81f839c00cc11ffb56422179ee4c"
+    },
+    "docs/qa/v051-rewards/before-instrumented.log": {
+      "bytes": 617,
+      "sha256": "803cc16518b3be881b9244d7662ef00ad072029bc4f81adb899aaca0476c61c9"
+    },
+    "docs/qa/v051-rewards/after-guard-plain-2.log": {
+      "bytes": 620,
+      "sha256": "289ff05a26feadc6b0685dde0eceb0b7af01d5022bca7f716e6cd9850abcda68"
+    },
+    "docs/qa/v051-rewards/before-full_bag-0.log": {
+      "bytes": 612,
+      "sha256": "06b1d5b275adb78711ae00e1f3541a878054d28b1351dc5c35e24b08b2a6ce98"
+    },
+    "docs/qa/v051-rewards/after-final-plain-2.log": {
+      "bytes": 620,
+      "sha256": "f46153cebc04f3920616f53d64d99097fd269b9c1f71352d5e88c8b3fcee768b"
+    },
+    "docs/qa/v051-rewards/after-final-plain-0.log": {
+      "bytes": 620,
+      "sha256": "1c2fe6866dd3299ec6bd89de32b88de46c123818775a35e83fb8b30d00f49d3f"
+    },
+    "docs/qa/v051-rewards/before-failed_save-0.log": {
+      "bytes": 613,
+      "sha256": "0bfbed7de135e24ec1d026f03b2038fa18496ec6a88c3544dd9c7ce2013cf835"
+    },
+    "docs/qa/v051-rewards/before-plain-2.log": {
+      "bytes": 606,
+      "sha256": "742b5c92039d7de75ecfd3713aef083111491765506b19441f35dbf9c67c148c"
+    },
+    "docs/qa/v051-rewards/attempt-inferred-weakref.log": {
+      "bytes": 458,
+      "sha256": "cea0ff401a3456fbf4e1ce9661453b8f2a9ee2908de139d4d261daf1c0531b12"
+    },
+    "docs/qa/v051-rewards/after-final-plain-1.log": {
+      "bytes": 620,
+      "sha256": "2cfecbd37295be9a3c82a4626e713f68ab44fd2795cddcc7704fbce34441d6df"
+    }
+  },
+  "limits": [
+    "Small same-host CPU samples, not WindowsFPS",
+    "First afterguard sample slower; report all3 samples",
+    "FirstI remains about43ms; no verified improvement",
+    "No UI/preload change",
+    "No historical full suite or600second test"
+  ]
+}

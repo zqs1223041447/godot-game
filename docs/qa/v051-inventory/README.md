@@ -57,3 +57,7 @@ printf '%s\n' "$probe_exit" > docs/qa/v051-inventory/exit-code.txt
 ```
 
 Actual isolated user directory: `/tmp/godot-m1-v051-inventory-breakdown-LR7t0c/data/godot-game-preview-v021`. The probe verified unchanged canonical state and no build save written. File checksums are recorded in `source-sha256.txt`.
+
+## Candidate disposition
+
+Gem local definition reuse passed1643 semantic checks, but real-main first-I times42.781/43.587/43.465ms before versus46.442/42.059/42.606ms candidate do not establish a total improvement. Three whole UI/build/transaction/RNG observation byte streams matched. Both production catalog changes were restored byte-for-byte to published v50; the patch/tests/fixture and measured evidence remain solely as a rejected candidate record. It is not shipped or counted as final v51 validation. No UI/theme/preload changes are included.

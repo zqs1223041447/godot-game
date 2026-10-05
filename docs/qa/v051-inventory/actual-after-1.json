@@ -1,0 +1,714 @@
+{
+	"display_server": "headless",
+	"dropdown_count_method": "Only the real inventory panel invokes crafting_operations during measured phases. Each such call feeds set_operations_context -> _refresh -> _refresh_targeted, which clears/repopulates the real OptionButton. The count is inferred from this source path, not an independently instrumented dropdown.",
+	"engine": "4.6.3-stable (official)",
+	"fixture": {
+		"base_id": "cinder_reed",
+		"initial_shards": 100,
+		"item_level": 30,
+		"rarity": "magic",
+		"seed": 500037,
+		"selected_uid": "gear_000004"
+	},
+	"normal_profile": true,
+	"paused_process_unchanged": true,
+	"persisted_snapshot_verified": true,
+	"phases": [
+		{
+			"after": {
+				"changed": 23,
+				"crafting_revision": 0,
+				"hud_blocking": false,
+				"items": 43,
+				"kills": 20,
+				"normal_root_kills": 20,
+				"panel_exists": false,
+				"panel_visible": false,
+				"progress_hud_refreshes": 1,
+				"progress_save_attempts": 2,
+				"refresh_generation": 0,
+				"reward_kills": 20,
+				"shards": 100,
+				"successful_saves": 3
+			},
+			"arena_calls": {
+				"changed_callback": 23,
+				"progress_flush_HUD_save": 1,
+				"sync_flasks": 44
+			},
+			"arena_nested_nonadditive_us": {
+				"changed_callback": 4278,
+				"progress_flush_HUD_save": 5294,
+				"sync_flasks": 1991
+			},
+			"before": {
+				"changed": 0,
+				"crafting_revision": 0,
+				"hud_blocking": false,
+				"items": 40,
+				"kills": 0,
+				"normal_root_kills": 0,
+				"panel_exists": false,
+				"panel_visible": false,
+				"progress_hud_refreshes": 0,
+				"progress_save_attempts": 1,
+				"refresh_generation": 0,
+				"reward_kills": 0,
+				"shards": 100,
+				"successful_saves": 2
+			},
+			"changed_signals": 23,
+			"death_reward_before_flush_us": 23195,
+			"dropdown_rebuilds_inferred_from_UI_metadata_calls": 0,
+			"final_flush_us": 5297,
+			"panel_refreshes": 0,
+			"phase": "twenty_normal_root_deaths_bag_closed",
+			"state_calls": {
+				"atomic_write_including_close": 1,
+				"cache_checks_inclusive": 51,
+				"equipment_reward_including_changed": 2,
+				"jewel_reward_including_changed": 1,
+				"normal_root_xp_including_changed": 20,
+				"save_validation_serialize_write": 1
+			},
+			"state_nested_nonadditive_us": {
+				"atomic_write_including_close": 76,
+				"cache_checks_inclusive": 1089,
+				"equipment_reward_including_changed": 7861,
+				"jewel_reward_including_changed": 2901,
+				"normal_root_xp_including_changed": 6012,
+				"save_validation_serialize_write": 2157
+			},
+			"synchronous_us": 28565
+		},
+		{
+			"after": {
+				"changed": 23,
+				"crafting_revision": 0,
+				"hud_blocking": true,
+				"items": 43,
+				"kills": 20,
+				"normal_root_kills": 20,
+				"panel_exists": true,
+				"panel_visible": true,
+				"progress_hud_refreshes": 1,
+				"progress_save_attempts": 2,
+				"refresh_generation": 1,
+				"reward_kills": 20,
+				"shards": 100,
+				"successful_saves": 3
+			},
+			"arena_calls": {
+
+			},
+			"arena_nested_nonadditive_us": {
+
+			},
+			"before": {
+				"changed": 23,
+				"crafting_revision": 0,
+				"hud_blocking": false,
+				"items": 43,
+				"kills": 20,
+				"normal_root_kills": 20,
+				"panel_exists": false,
+				"panel_visible": false,
+				"progress_hud_refreshes": 1,
+				"progress_save_attempts": 2,
+				"refresh_generation": 0,
+				"reward_kills": 20,
+				"shards": 100,
+				"successful_saves": 3
+			},
+			"changed_signals": 0,
+			"dropdown_rebuilds_inferred_from_UI_metadata_calls": 1,
+			"panel_refreshes": 1,
+			"phase": "first_I_open",
+			"state_calls": {
+				"crafting_operations_metadata": 1
+			},
+			"state_nested_nonadditive_us": {
+				"crafting_operations_metadata": 129
+			},
+			"synchronous_us": 42059
+		},
+		{
+			"after": {
+				"changed": 23,
+				"crafting_revision": 0,
+				"hud_blocking": true,
+				"items": 43,
+				"kills": 20,
+				"normal_root_kills": 20,
+				"panel_exists": true,
+				"panel_visible": true,
+				"progress_hud_refreshes": 1,
+				"progress_save_attempts": 2,
+				"refresh_generation": 1,
+				"reward_kills": 20,
+				"shards": 100,
+				"successful_saves": 3
+			},
+			"arena_calls": {
+
+			},
+			"arena_nested_nonadditive_us": {
+
+			},
+			"before": {
+				"changed": 23,
+				"crafting_revision": 0,
+				"hud_blocking": true,
+				"items": 43,
+				"kills": 20,
+				"normal_root_kills": 20,
+				"panel_exists": true,
+				"panel_visible": true,
+				"progress_hud_refreshes": 1,
+				"progress_save_attempts": 2,
+				"refresh_generation": 1,
+				"reward_kills": 20,
+				"shards": 100,
+				"successful_saves": 3
+			},
+			"changed_signals": 0,
+			"dropdown_rebuilds_inferred_from_UI_metadata_calls": 0,
+			"panel_refreshes": 0,
+			"phase": "paused_main_process_no_simulation",
+			"state_calls": {
+
+			},
+			"state_nested_nonadditive_us": {
+
+			},
+			"synchronous_us": 8
+		},
+		{
+			"after": {
+				"changed": 23,
+				"crafting_revision": 0,
+				"hud_blocking": true,
+				"items": 43,
+				"kills": 20,
+				"normal_root_kills": 20,
+				"panel_exists": true,
+				"panel_visible": true,
+				"progress_hud_refreshes": 1,
+				"progress_save_attempts": 2,
+				"refresh_generation": 1,
+				"reward_kills": 20,
+				"shards": 100,
+				"successful_saves": 3
+			},
+			"arena_calls": {
+
+			},
+			"arena_nested_nonadditive_us": {
+
+			},
+			"before": {
+				"changed": 23,
+				"crafting_revision": 0,
+				"hud_blocking": true,
+				"items": 43,
+				"kills": 20,
+				"normal_root_kills": 20,
+				"panel_exists": true,
+				"panel_visible": true,
+				"progress_hud_refreshes": 1,
+				"progress_save_attempts": 2,
+				"refresh_generation": 1,
+				"reward_kills": 20,
+				"shards": 100,
+				"successful_saves": 3
+			},
+			"changed_signals": 0,
+			"dropdown_rebuilds_inferred_from_UI_metadata_calls": 1,
+			"panel_refreshes": 0,
+			"phase": "select_legal_magic_item",
+			"state_calls": {
+				"crafting_operations_metadata": 1
+			},
+			"state_nested_nonadditive_us": {
+				"crafting_operations_metadata": 2331
+			},
+			"synchronous_us": 3740
+		},
+		{
+			"after": {
+				"changed": 23,
+				"crafting_revision": 0,
+				"hud_blocking": false,
+				"items": 43,
+				"kills": 20,
+				"normal_root_kills": 20,
+				"panel_exists": true,
+				"panel_visible": false,
+				"progress_hud_refreshes": 1,
+				"progress_save_attempts": 2,
+				"refresh_generation": 1,
+				"reward_kills": 20,
+				"shards": 100,
+				"successful_saves": 3
+			},
+			"arena_calls": {
+
+			},
+			"arena_nested_nonadditive_us": {
+
+			},
+			"before": {
+				"changed": 23,
+				"crafting_revision": 0,
+				"hud_blocking": true,
+				"items": 43,
+				"kills": 20,
+				"normal_root_kills": 20,
+				"panel_exists": true,
+				"panel_visible": true,
+				"progress_hud_refreshes": 1,
+				"progress_save_attempts": 2,
+				"refresh_generation": 1,
+				"reward_kills": 20,
+				"shards": 100,
+				"successful_saves": 3
+			},
+			"changed_signals": 0,
+			"dropdown_rebuilds_inferred_from_UI_metadata_calls": 0,
+			"panel_refreshes": 0,
+			"phase": "warm_close_1",
+			"state_calls": {
+
+			},
+			"state_nested_nonadditive_us": {
+
+			},
+			"synchronous_us": 245
+		},
+		{
+			"after": {
+				"changed": 23,
+				"crafting_revision": 0,
+				"hud_blocking": true,
+				"items": 43,
+				"kills": 20,
+				"normal_root_kills": 20,
+				"panel_exists": true,
+				"panel_visible": true,
+				"progress_hud_refreshes": 1,
+				"progress_save_attempts": 2,
+				"refresh_generation": 1,
+				"reward_kills": 20,
+				"shards": 100,
+				"successful_saves": 3
+			},
+			"arena_calls": {
+
+			},
+			"arena_nested_nonadditive_us": {
+
+			},
+			"before": {
+				"changed": 23,
+				"crafting_revision": 0,
+				"hud_blocking": false,
+				"items": 43,
+				"kills": 20,
+				"normal_root_kills": 20,
+				"panel_exists": true,
+				"panel_visible": false,
+				"progress_hud_refreshes": 1,
+				"progress_save_attempts": 2,
+				"refresh_generation": 1,
+				"reward_kills": 20,
+				"shards": 100,
+				"successful_saves": 3
+			},
+			"changed_signals": 0,
+			"dropdown_rebuilds_inferred_from_UI_metadata_calls": 0,
+			"panel_refreshes": 0,
+			"phase": "warm_reopen_1",
+			"state_calls": {
+
+			},
+			"state_nested_nonadditive_us": {
+
+			},
+			"synchronous_us": 330
+		},
+		{
+			"after": {
+				"changed": 23,
+				"crafting_revision": 0,
+				"hud_blocking": false,
+				"items": 43,
+				"kills": 20,
+				"normal_root_kills": 20,
+				"panel_exists": true,
+				"panel_visible": false,
+				"progress_hud_refreshes": 1,
+				"progress_save_attempts": 2,
+				"refresh_generation": 1,
+				"reward_kills": 20,
+				"shards": 100,
+				"successful_saves": 3
+			},
+			"arena_calls": {
+
+			},
+			"arena_nested_nonadditive_us": {
+
+			},
+			"before": {
+				"changed": 23,
+				"crafting_revision": 0,
+				"hud_blocking": true,
+				"items": 43,
+				"kills": 20,
+				"normal_root_kills": 20,
+				"panel_exists": true,
+				"panel_visible": true,
+				"progress_hud_refreshes": 1,
+				"progress_save_attempts": 2,
+				"refresh_generation": 1,
+				"reward_kills": 20,
+				"shards": 100,
+				"successful_saves": 3
+			},
+			"changed_signals": 0,
+			"dropdown_rebuilds_inferred_from_UI_metadata_calls": 0,
+			"panel_refreshes": 0,
+			"phase": "warm_close_2",
+			"state_calls": {
+
+			},
+			"state_nested_nonadditive_us": {
+
+			},
+			"synchronous_us": 190
+		},
+		{
+			"after": {
+				"changed": 23,
+				"crafting_revision": 0,
+				"hud_blocking": true,
+				"items": 43,
+				"kills": 20,
+				"normal_root_kills": 20,
+				"panel_exists": true,
+				"panel_visible": true,
+				"progress_hud_refreshes": 1,
+				"progress_save_attempts": 2,
+				"refresh_generation": 1,
+				"reward_kills": 20,
+				"shards": 100,
+				"successful_saves": 3
+			},
+			"arena_calls": {
+
+			},
+			"arena_nested_nonadditive_us": {
+
+			},
+			"before": {
+				"changed": 23,
+				"crafting_revision": 0,
+				"hud_blocking": false,
+				"items": 43,
+				"kills": 20,
+				"normal_root_kills": 20,
+				"panel_exists": true,
+				"panel_visible": false,
+				"progress_hud_refreshes": 1,
+				"progress_save_attempts": 2,
+				"refresh_generation": 1,
+				"reward_kills": 20,
+				"shards": 100,
+				"successful_saves": 3
+			},
+			"changed_signals": 0,
+			"dropdown_rebuilds_inferred_from_UI_metadata_calls": 0,
+			"panel_refreshes": 0,
+			"phase": "warm_reopen_2",
+			"state_calls": {
+
+			},
+			"state_nested_nonadditive_us": {
+
+			},
+			"synchronous_us": 300
+		},
+		{
+			"after": {
+				"changed": 23,
+				"crafting_revision": 0,
+				"hud_blocking": false,
+				"items": 43,
+				"kills": 20,
+				"normal_root_kills": 20,
+				"panel_exists": true,
+				"panel_visible": false,
+				"progress_hud_refreshes": 1,
+				"progress_save_attempts": 2,
+				"refresh_generation": 1,
+				"reward_kills": 20,
+				"shards": 100,
+				"successful_saves": 3
+			},
+			"arena_calls": {
+
+			},
+			"arena_nested_nonadditive_us": {
+
+			},
+			"before": {
+				"changed": 23,
+				"crafting_revision": 0,
+				"hud_blocking": true,
+				"items": 43,
+				"kills": 20,
+				"normal_root_kills": 20,
+				"panel_exists": true,
+				"panel_visible": true,
+				"progress_hud_refreshes": 1,
+				"progress_save_attempts": 2,
+				"refresh_generation": 1,
+				"reward_kills": 20,
+				"shards": 100,
+				"successful_saves": 3
+			},
+			"changed_signals": 0,
+			"dropdown_rebuilds_inferred_from_UI_metadata_calls": 0,
+			"panel_refreshes": 0,
+			"phase": "warm_close_3",
+			"state_calls": {
+
+			},
+			"state_nested_nonadditive_us": {
+
+			},
+			"synchronous_us": 139
+		},
+		{
+			"after": {
+				"changed": 23,
+				"crafting_revision": 0,
+				"hud_blocking": true,
+				"items": 43,
+				"kills": 20,
+				"normal_root_kills": 20,
+				"panel_exists": true,
+				"panel_visible": true,
+				"progress_hud_refreshes": 1,
+				"progress_save_attempts": 2,
+				"refresh_generation": 1,
+				"reward_kills": 20,
+				"shards": 100,
+				"successful_saves": 3
+			},
+			"arena_calls": {
+
+			},
+			"arena_nested_nonadditive_us": {
+
+			},
+			"before": {
+				"changed": 23,
+				"crafting_revision": 0,
+				"hud_blocking": false,
+				"items": 43,
+				"kills": 20,
+				"normal_root_kills": 20,
+				"panel_exists": true,
+				"panel_visible": false,
+				"progress_hud_refreshes": 1,
+				"progress_save_attempts": 2,
+				"refresh_generation": 1,
+				"reward_kills": 20,
+				"shards": 100,
+				"successful_saves": 3
+			},
+			"changed_signals": 0,
+			"dropdown_rebuilds_inferred_from_UI_metadata_calls": 0,
+			"panel_refreshes": 0,
+			"phase": "warm_reopen_3",
+			"state_calls": {
+
+			},
+			"state_nested_nonadditive_us": {
+
+			},
+			"synchronous_us": 362
+		},
+		{
+			"after": {
+				"changed": 23,
+				"crafting_revision": 0,
+				"hud_blocking": true,
+				"items": 43,
+				"kills": 20,
+				"normal_root_kills": 20,
+				"panel_exists": true,
+				"panel_visible": true,
+				"progress_hud_refreshes": 1,
+				"progress_save_attempts": 2,
+				"refresh_generation": 1,
+				"reward_kills": 20,
+				"shards": 100,
+				"successful_saves": 3
+			},
+			"arena_calls": {
+
+			},
+			"arena_nested_nonadditive_us": {
+
+			},
+			"before": {
+				"changed": 23,
+				"crafting_revision": 0,
+				"hud_blocking": true,
+				"items": 43,
+				"kills": 20,
+				"normal_root_kills": 20,
+				"panel_exists": true,
+				"panel_visible": true,
+				"progress_hud_refreshes": 1,
+				"progress_save_attempts": 2,
+				"refresh_generation": 1,
+				"reward_kills": 20,
+				"shards": 100,
+				"successful_saves": 3
+			},
+			"changed_signals": 0,
+			"dropdown_rebuilds_inferred_from_UI_metadata_calls": 0,
+			"panel_refreshes": 0,
+			"phase": "select_damage_target",
+			"state_calls": {
+
+			},
+			"state_nested_nonadditive_us": {
+
+			},
+			"synchronous_us": 55
+		},
+		{
+			"after": {
+				"changed": 23,
+				"crafting_revision": 0,
+				"hud_blocking": true,
+				"items": 43,
+				"kills": 20,
+				"normal_root_kills": 20,
+				"panel_exists": true,
+				"panel_visible": true,
+				"progress_hud_refreshes": 1,
+				"progress_save_attempts": 2,
+				"refresh_generation": 1,
+				"reward_kills": 20,
+				"shards": 100,
+				"successful_saves": 3
+			},
+			"arena_calls": {
+
+			},
+			"arena_nested_nonadditive_us": {
+
+			},
+			"before": {
+				"changed": 23,
+				"crafting_revision": 0,
+				"hud_blocking": true,
+				"items": 43,
+				"kills": 20,
+				"normal_root_kills": 20,
+				"panel_exists": true,
+				"panel_visible": true,
+				"progress_hud_refreshes": 1,
+				"progress_save_attempts": 2,
+				"refresh_generation": 1,
+				"reward_kills": 20,
+				"shards": 100,
+				"successful_saves": 3
+			},
+			"changed_signals": 0,
+			"dropdown_rebuilds_inferred_from_UI_metadata_calls": 0,
+			"panel_refreshes": 0,
+			"phase": "request_one_targeted_quote",
+			"state_calls": {
+				"crafting_quote": 1
+			},
+			"state_nested_nonadditive_us": {
+				"crafting_quote": 6656
+			},
+			"synchronous_us": 8284
+		},
+		{
+			"after": {
+				"changed": 24,
+				"crafting_revision": 1,
+				"hud_blocking": true,
+				"items": 43,
+				"kills": 20,
+				"normal_root_kills": 20,
+				"panel_exists": true,
+				"panel_visible": true,
+				"progress_hud_refreshes": 2,
+				"progress_save_attempts": 2,
+				"refresh_generation": 2,
+				"reward_kills": 20,
+				"shards": 84,
+				"successful_saves": 4
+			},
+			"arena_calls": {
+				"changed_callback": 1,
+				"progress_flush_HUD_save": 1,
+				"sync_flasks": 2
+			},
+			"arena_nested_nonadditive_us": {
+				"changed_callback": 1597,
+				"progress_flush_HUD_save": 1034,
+				"sync_flasks": 111
+			},
+			"before": {
+				"changed": 23,
+				"crafting_revision": 0,
+				"hud_blocking": true,
+				"items": 43,
+				"kills": 20,
+				"normal_root_kills": 20,
+				"panel_exists": true,
+				"panel_visible": true,
+				"progress_hud_refreshes": 1,
+				"progress_save_attempts": 2,
+				"refresh_generation": 1,
+				"reward_kills": 20,
+				"shards": 100,
+				"successful_saves": 3
+			},
+			"changed_signals": 1,
+			"dropdown_rebuilds_inferred_from_UI_metadata_calls": 1,
+			"panel_refreshes": 1,
+			"phase": "confirm_one_visible_targeted_craft",
+			"state_calls": {
+				"atomic_write_including_close": 1,
+				"cache_checks_inclusive": 12,
+				"commit_including_persist_changed": 1,
+				"crafting_operations_metadata": 1,
+				"execute_crafting_including_commit_changed": 1
+			},
+			"state_nested_nonadditive_us": {
+				"atomic_write_including_close": 88,
+				"cache_checks_inclusive": 61,
+				"commit_including_persist_changed": 11421,
+				"crafting_operations_metadata": 2028,
+				"execute_crafting_including_commit_changed": 20465
+			},
+			"synchronous_us": 21142
+		}
+	],
+	"scope": "One starter-size current-schema fixture; synchronous production root/HUD/model CPU callbacks. Inclusive nested timings are nonadditive; no rendered frame, GPU, Windows FPS, threshold or large-inventory claim.",
+	"source_revision": "v051-projection-reuse",
+	"targeted_debit": 16,
+	"targeted_operation": "targeted_reforge_damage",
+	"user_data_dir": "/tmp/godot-m1-v051-actual-after-1-9j5w5z6_/data/godot-game-preview-v021"
+}
