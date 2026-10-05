@@ -7,7 +7,8 @@ const MAX_KILLS := 1000000000
 const MAX_SERIAL := 1000000000
 const GEM_INTERVAL := 30
 const FLASK_INTERVAL := 60
-const MAP_IDS := ["old_garden", "broken_ruins"]
+const LEGACY_MAP_IDS := ["old_garden", "broken_ruins"] # Frozen schema26..29 vocabulary.
+const MAP_IDS := ["old_garden", "broken_ruins", "sunwell_terrace"]
 const FIELDS := ["normal_root_kills", "best_tiers", "next_run_id", "active_run", "pending_map_reward", "claimed_gems", "claimed_flasks"]
 const ACTIVE_FIELDS := ["run_id", "map_id", "tier", "normal_ids", "special_ids", "fee_paid"]
 const PENDING_FIELDS := ["run_id", "map_id", "tier", "shards"]
@@ -23,6 +24,12 @@ const GEM_DEFINITIONS := [
 
 
 static func empty() -> Dictionary:
+	var value := empty_legacy()
+	value.best_tiers["sunwell_terrace"] = 0
+	return value
+
+
+static func empty_legacy() -> Dictionary:
 	return {"normal_root_kills": 0, "best_tiers": {"old_garden": 0, "broken_ruins": 0},
 		"next_run_id": 1, "active_run": {}, "pending_map_reward": {}, "claimed_gems": 0, "claimed_flasks": 0}
 
@@ -30,13 +37,21 @@ static func empty() -> Dictionary:
 ## JSON permits floating point numbers; accept only finite integral values within their domain.
 ## Pure planners and reason() still require real integers, never coercing their callers.
 static func decode(raw: Variant) -> Dictionary:
+	return _decode(raw, MAP_IDS)
+
+
+static func decode_legacy(raw: Variant) -> Dictionary:
+	return _decode(raw, LEGACY_MAP_IDS)
+
+
+static func _decode(raw: Variant, map_ids: Array) -> Dictionary:
 	if not _keys(raw, FIELDS): return {}
 	var value: Dictionary = raw.duplicate(true)
 	for field: String in ["normal_root_kills", "claimed_gems", "claimed_flasks"]:
 		if not _decode_integer(value, field, 0, MAX_KILLS): return {}
 	if not _decode_integer(value, "next_run_id", 1, MAX_SERIAL): return {}
-	if not _keys(value.best_tiers, MAP_IDS): return {}
-	for id: String in MAP_IDS:
+	if not _keys(value.best_tiers, map_ids): return {}
+	for id: String in map_ids:
 		if not _decode_integer(value.best_tiers, id, 0, 3): return {}
 	if not value.active_run is Dictionary or not value.pending_map_reward is Dictionary: return {}
 	if not value.active_run.is_empty():
@@ -49,14 +64,22 @@ static func decode(raw: Variant) -> Dictionary:
 		if not _decode_integer(value.pending_map_reward, "run_id", 1, MAX_SERIAL): return {}
 		if not _decode_integer(value.pending_map_reward, "tier", 1, 3): return {}
 		if not _decode_integer(value.pending_map_reward, "shards", 4, 16): return {}
-	return value if reason(value).is_empty() else {}
+	return value if _reason(value, map_ids).is_empty() else {}
 
 
 static func reason(journey: Variant) -> String:
+	return _reason(journey, MAP_IDS)
+
+
+static func reason_legacy(journey: Variant) -> String:
+	return _reason(journey, LEGACY_MAP_IDS)
+
+
+static func _reason(journey: Variant, map_ids: Array) -> String:
 	if not _keys(journey, FIELDS): return "普通旅程结构无效"
 	if not _integer(journey.normal_root_kills, 0, MAX_KILLS): return "普通根怪计数无效"
-	if not _keys(journey.best_tiers, MAP_IDS): return "地图层级记录无效"
-	for id: String in MAP_IDS:
+	if not _keys(journey.best_tiers, map_ids): return "地图层级记录无效"
+	for id: String in map_ids:
 		if not _integer(journey.best_tiers[id], 0, 3): return "地图层级记录无效"
 	if not _integer(journey.next_run_id, 1, MAX_SERIAL): return "地图行程序号无效"
 	if not _integer(journey.claimed_gems, 0, journey.normal_root_kills / GEM_INTERVAL): return "已领宝石序号无效"
@@ -67,7 +90,7 @@ static func reason(journey: Variant) -> String:
 		var active: Dictionary = journey.active_run
 		if not _keys(active, ACTIVE_FIELDS): return "进行中地图结构无效"
 		if not _integer(active.run_id, 1, journey.next_run_id - 1): return "进行中地图序号无效"
-		if not active.map_id is String or not MAP_IDS.has(active.map_id): return "进行中地图身份无效"
+		if not active.map_id is String or not map_ids.has(active.map_id): return "进行中地图身份无效"
 		if not _integer(active.tier, 1, mini(journey.best_tiers[active.map_id] + 1, 3)): return "进行中地图尚未解锁"
 		if not _strings(active.normal_ids) or not _strings(active.special_ids): return "地图词缀身份无效"
 		var compiled: Dictionary = Maps.compile_normal(active.map_id, active.tier, active.normal_ids, active.special_ids)
@@ -78,7 +101,7 @@ static func reason(journey: Variant) -> String:
 		var pending: Dictionary = journey.pending_map_reward
 		if not _keys(pending, PENDING_FIELDS): return "待领地图奖励结构无效"
 		if not _integer(pending.run_id, 1, journey.next_run_id - 1): return "待领地图奖励序号无效"
-		if not pending.map_id is String or not MAP_IDS.has(pending.map_id): return "待领地图奖励身份无效"
+		if not pending.map_id is String or not map_ids.has(pending.map_id): return "待领地图奖励身份无效"
 		if not _integer(pending.tier, 1, journey.best_tiers[pending.map_id]): return "待领地图奖励层级无效"
 		var compiled: Dictionary = Maps.compile_normal(pending.map_id, pending.tier, [], [])
 		if not compiled.ok: return str(compiled.reason)

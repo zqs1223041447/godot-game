@@ -34,6 +34,10 @@ func start(enemy: Variant, target_center: Vector2, overrides: Variant = {}, visu
 	var checked: Dictionary = Profiles.resolve(overrides)
 	if not checked.ok:
 		return checked
+	if visual_pattern=="sunwell_echo":
+		var authored:Dictionary=BossProfiles.definition(visual_pattern).profile
+		for field:String in ["radius","windup_seconds","damage_multiplier"]:
+			if float(checked.profile[field])!=float(authored[field]):return _failure("Echo geometry, warning and per-pulse budget must match the map authority")
 	if not _nonnegative_number(enemy.get("damage")):
 		return _failure("Contact damage must be finite and nonnegative")
 	var weights: Variant = enemy.get("contact_weights", {"physical": 1.0})
@@ -58,9 +62,12 @@ func start(enemy: Variant, target_center: Vector2, overrides: Variant = {}, visu
 	}
 	if not burn_policy.is_empty():attack.burn_policy=burn_policy
 	if not visual_pattern.is_empty():attack.visual_pattern=visual_pattern
+	if visual_pattern=="sunwell_echo":
+		var echo:Dictionary=BossProfiles.definition(visual_pattern)
+		attack.pulse_count=int(echo.pulse_count);attack.pulse_interval=float(echo.pulse_interval);attack.pulses_emitted=0
 	_next_attack_id += 1
 	_states[source_id] = attack
-	return {"ok": true, "reason": "", "attack": attack.duplicate(true)}
+	return {"ok": true, "reason": "", "attack": state_for(source_id)}
 
 
 func advance(delta: float, live_enemies: Variant, with_timing: bool = false) -> Array[Dictionary]:
@@ -84,6 +91,9 @@ func advance(delta: float, live_enemies: Variant, with_timing: bool = false) -> 
 		if not is_finite(delta) or delta <= 0.0:
 			continue
 		var attack: Dictionary = _states[source_id]
+		if attack.get("visual_pattern","")=="sunwell_echo":
+			_advance_echo(attack,delta,pending)
+			continue
 		var windup: float = float(attack.profile.windup_seconds)
 		var duration: float = windup + float(attack.profile.recovery_seconds)
 		var previous: float = float(attack.elapsed)
@@ -128,12 +138,48 @@ func has_burning_actions()->bool:
 	return false
 
 
+func has_timed_sequence_actions()->bool:
+	for value:Dictionary in _states.values():
+		if value.get("visual_pattern","")=="sunwell_echo":return true
+	return false
+
+
 func active_count() -> int:
 	return _states.size()
 
 
 func state_for(source_id: int) -> Dictionary:
-	return _states.get(source_id, {}).duplicate(true)
+	var result:Dictionary=_states.get(source_id, {}).duplicate(true)
+	if result.get("visual_pattern","")=="sunwell_echo":
+		# Presentation sees the current full windup, or recovery after that
+		# windup. The internal total clock and frozen center never restart.
+		var index:int=mini(int(result.pulses_emitted),int(result.pulse_count)-1)
+		result.pulse_index=index
+		result.elapsed=maxf(0.0,float(result.elapsed)-index*float(result.pulse_interval))
+	return result
+
+
+func _advance_echo(attack:Dictionary,delta:float,pending:Array[Dictionary])->void:
+	var windup:float=attack.profile.windup_seconds
+	var interval:float=attack.pulse_interval
+	var count:int=attack.pulse_count
+	var duration:float=windup+(count-1)*interval+float(attack.profile.recovery_seconds)
+	var previous:float=attack.elapsed
+	attack.elapsed=minf(duration,previous+minf(delta,duration))
+	while int(attack.pulses_emitted)<count:
+		var index:int=attack.pulses_emitted
+		var deadline:float=windup+index*interval
+		if float(attack.elapsed)+TIME_EPSILON<deadline:break
+		pending.append({"at":maxf(0.0,deadline-previous),"event":{
+			"type":"circle_attack","shape":"circle","source_id":attack.source_id,
+			"attack_id":attack.attack_id,"center":attack.center,"radius":attack.profile.radius,
+			"attack_age":deadline,"profile_id":Profiles.PROFILE_ID,"schema_version":Profiles.SCHEMA_VERSION,
+			"balance_version":Profiles.BALANCE_VERSION,"profile":attack.profile.duplicate(true),
+			"packet":attack.packet.duplicate(true),"visual_pattern":"sunwell_echo",
+			"pulse_index":index,"pulse_count":count,"step_time":maxf(0.0,deadline-previous)}})
+		attack.pulses_emitted=index+1
+	attack.phase="recovery" if int(attack.pulses_emitted)==count else "windup"
+	if float(attack.elapsed)+TIME_EPSILON>=duration:_states.erase(int(attack.source_id))
 
 
 static func overlaps(event: Dictionary, position: Vector2, target_radius: float) -> bool:

@@ -94,7 +94,8 @@ static func _read_state(raw: Variant) -> Dictionary:
 		clampf((age - windup_seconds) / recovery_seconds, 0.0, 1.0)
 	return {"source_id": int(source_id), "center": center, "radius": float(radius),
 		"phase": phase, "progress": progress,
-		"pattern": raw.get("visual_pattern", "") if raw.get("visual_pattern", "") in ["garden_slam", "ruins_mark", "ember_burn"] else "",
+		"pattern": raw.get("visual_pattern", "") if raw.get("visual_pattern", "") in ["garden_slam", "ruins_mark", "ember_burn", "sunwell_echo"] else "",
+		"pulse_index": clampi(int(raw.get("pulse_index",0)),0,1) if typeof(raw.get("pulse_index",0)) == TYPE_INT else 0,
 		"element": raw.get("visual_element", "") if raw.get("visual_element", "") in ["cold", "lightning"] else ""}
 
 
@@ -117,6 +118,7 @@ static func _append_state(state: Dictionary, effects: int, fills: Array[Dictiona
 	if state.element == "cold": pigment = Color("b3c5c8").lerp(Color("77969f"), progress) if winding else ASH
 	elif state.element == "lightning": pigment = Color("d5c68e").lerp(Color("ae884e"), progress) if winding else ASH
 	if state.pattern == "ember_burn": pigment = Color("c8905b").lerp(Color("b7643e"), progress) if winding else ASH
+	if state.pattern == "sunwell_echo": pigment = Color("dfc685").lerp(Color("bf8052"), progress) if winding else ASH
 	var fill_alpha: float = lerpf(0.035, 0.085, progress) if winding else 0.065 * fade
 	fills.append(_circle(state, "ground_tint", Color(SOIL, fill_alpha), true, -1.0))
 	var role: String = "danger_boundary" if winding else "recovery_boundary"
@@ -134,12 +136,23 @@ static func _append_state(state: Dictionary, effects: int, fills: Array[Dictiona
 	elif state.pattern == "ember_burn":
 		var p: Vector2 = state.center + Vector2(0, -radius * 0.6)
 		rune = PackedVector2Array([p + Vector2(-7, 6), p + Vector2(-2, -3), p + Vector2(0, 2), p + Vector2(5, -9), p + Vector2(8, 6)])
+	elif state.pattern == "sunwell_echo":
+		var p: Vector2 = state.center + Vector2(0, -radius * 0.55)
+		rune = PackedVector2Array([p+Vector2(-15,3),p+Vector2(-8,-4),p+Vector2(0,3),p+Vector2(8,-4),p+Vector2(15,3)])
 	marks.append(_line(state, "rune_base", rune, Color(INK, 0.6 * fade), minf(3.0, radius * 0.1)))
 	var charged: PackedVector2Array = _trace(rune, progress if winding else 1.0)
 	if charged.size() >= 2:
 		marks.append(_line(state, "rune_charge", charged, Color(pigment, 0.92 * fade), minf(1.6, radius * 0.06)))
 	# Sparse, uneven earth cuts stay inside the circle and do not animate or emit RNG.
 	var count: int = 0 if effects == 0 else 1 if effects == 1 else 3
+	if state.pattern == "sunwell_echo":
+		count = mini(count,2)
+		if winding:
+			var p: Vector2 = state.center + Vector2(0, radius * 0.55)
+			var pulse_mark := PackedVector2Array([p+Vector2(0,-5),p+Vector2(0,5)])
+			if state.pulse_index == 1:
+				pulse_mark = PackedVector2Array([p+Vector2(-5,-5),p+Vector2(-5,5),p+Vector2(5,5),p+Vector2(5,-5)])
+			marks.append(_line(state,"pulse_marker",pulse_mark,Color(pigment,0.94),2.0))
 	var angles: Array[float] = [-0.72, 1.44, 3.6]
 	for index: int in range(count):
 		var direction: Vector2 = Vector2.RIGHT.rotated(angles[index])

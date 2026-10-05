@@ -12,6 +12,7 @@ const NormalJourneyMigration=preload("res://scripts/save/normal_journey_migratio
 const EquipmentAffixMigration = preload("res://scripts/save/equipment_affix_migration.gd")
 const IgniteGemMigration = preload("res://scripts/save/ignite_gem_migration.gd")
 const EmberGemMigration = preload("res://scripts/save/ember_gem_migration.gd")
+const ThirdMapMigration = preload("res://scripts/save/third_map_migration.gd")
 const SourceLeechMigration=preload("res://scripts/save/source_leech_migration.gd")
 const SourceCriticalMigration=preload("res://scripts/save/source_critical_migration.gd")
 const SourceFlaskMigration=preload("res://scripts/save/source_flask_migration.gd")
@@ -50,8 +51,9 @@ func _init() -> void:
 	var source_v25:Dictionary=SourceLeechMigration.migrate_v24(SourceCriticalMigration.migrate_v23(source_v23,_talent_validator,_socket_ids),_talent_validator,_socket_ids)
 	var source_v27: Dictionary = EquipmentAffixMigration.migrate_v26(NormalJourneyMigration.migrate_v25(source_v25,_talent_validator,_socket_ids),_talent_validator,_socket_ids)
 	var source_v28: Dictionary = IgniteGemMigration.migrate_v27(source_v27, _talent_validator, _socket_ids)
-	_current = EmberGemMigration.migrate_v28(source_v28, _talent_validator, _socket_ids)
-	assert(not _current.is_empty() and Rules.reason(_current).is_empty(), "The built-in canonical fixture must migrate to v29")
+	var source_v29: Dictionary = EmberGemMigration.migrate_v28(source_v28, _talent_validator, _socket_ids)
+	_current = ThirdMapMigration.migrate_v29(source_v29, _talent_validator, _socket_ids)
+	assert(not _current.is_empty() and Rules.reason(_current).is_empty(), "The built-in canonical fixture must migrate to v30")
 	_current.migration_ledger.from_version = 0
 
 
@@ -115,7 +117,9 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	var old_version := int(raw.version)
 	if old_version > Rules.VERSION: return _reject(path, "存档属于未来版本，已保护原文件")
 	var candidate: Dictionary = {}
-	if old_version == Rules.V28_VERSION:
+	if old_version == Rules.V29_VERSION:
+		candidate = Rules.decode_v29(raw)
+	elif old_version == Rules.V28_VERSION:
 		candidate = Rules.decode_v28(raw)
 	elif old_version == Rules.V27_VERSION:
 		candidate = Rules.decode_v27(raw)
@@ -200,8 +204,10 @@ func load_build(path: String = "user://build_save.json") -> bool:
 		candidate = Rules.decode(raw)
 	if old_version < Rules.V28_VERSION:
 		candidate = IgniteGemMigration.migrate_v27(candidate, _talent_validator, _socket_ids)
-	if old_version < Rules.VERSION:
+	if old_version < Rules.V29_VERSION:
 		candidate = EmberGemMigration.migrate_v28(candidate, _talent_validator, _socket_ids)
+	if old_version < Rules.VERSION:
+		candidate = ThirdMapMigration.migrate_v29(candidate, _talent_validator, _socket_ids)
 	var reason: String = Rules.reason(candidate, _talent_validator, _socket_ids)
 	if not reason.is_empty(): return _reject(path, reason)
 	var loaded_revision: int = int(candidate.revision)

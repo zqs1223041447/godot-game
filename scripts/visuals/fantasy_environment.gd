@@ -5,8 +5,9 @@ const CampSigns = preload("res://scripts/visuals/map_camp_signs.gd")
 static func draw(arena: Node2D) -> void:
 	var geometry: Dictionary = arena.world_geometry() if arena.has_method("world_geometry") else {}
 	var broken: bool = not geometry.get("walls",[]).is_empty()
+	var spring: bool = geometry.get("obstacle_style", "") == "spring_basin"
 	var bounds: Rect2=arena.ARENA
-	arena.draw_rect(bounds.grow(600),Color("4b5940"))
+	arena.draw_rect(bounds.grow(600),Color("68704d") if spring else Color("4b5940"))
 	# Irregular shrubs and grass beds beyond the playable stone edge.
 	for i: int in range(ceili(bounds.size.x/127)+1):
 		var p:=Vector2(bounds.position.x-18+i*127+sin(i*2.1)*18,bounds.position.y-26+sin(i*2.4)*8)
@@ -36,7 +37,7 @@ static func draw(arena: Node2D) -> void:
 				continue
 			var shape:=_stone(cell,2+float((col*7+row*3)%6))
 			var shade: float=float((col*11+row*7)%9)*0.008
-			arena.draw_colored_polygon(shape,Color(0.62+shade,0.56+shade,0.43+shade) if broken else Color(0.54+shade,0.56+shade,0.47+shade))
+			arena.draw_colored_polygon(shape,Color(0.70+shade,0.64+shade,0.49+shade) if spring else Color(0.62+shade,0.56+shade,0.43+shade) if broken else Color(0.54+shade,0.56+shade,0.47+shade))
 			arena.draw_line(shape[0]+Vector2(1,1),shape[1]+Vector2(-1,1),Color(0.78,0.76,0.61,0.38),1.2,true)
 			if (col+row*3)%5==0 and cell.size.x>55:
 				var crack:=cell.position+Vector2(cell.size.x*0.65,0)
@@ -74,10 +75,11 @@ static func draw(arena: Node2D) -> void:
 	arena.draw_colored_polygon(PackedVector2Array([bounds.position+Vector2(24,12),bounds.position+Vector2(bounds.size.x*0.25,12),Vector2(bounds.position.x+bounds.size.x*0.55,bounds.end.y-11),Vector2(bounds.position.x+bounds.size.x*0.4,bounds.end.y-11)]),Color(0.96,0.89,0.63,0.035))
 	if broken:
 		for wall: Rect2 in geometry.walls:
-			_draw_ruin_wall(arena,wall)
+			if spring: _draw_spring_basin(arena, wall)
+			else: _draw_ruin_wall(arena,wall)
 	CampSigns.draw_ground(arena, geometry.get("landmarks", {}))
 	if arena._font:
-		arena.draw_string(arena._font,bounds.position+Vector2(38,36),"断垣试炼" if broken else "灰烬庭院",HORIZONTAL_ALIGNMENT_LEFT,-1,15,Color("4e573f"))
+		arena.draw_string(arena._font,bounds.position+Vector2(38,36),"晴泉台地" if spring else "断垣试炼" if broken else "灰烬庭院",HORIZONTAL_ALIGNMENT_LEFT,-1,15,Color("4e573f"))
 		arena.draw_string(arena._font,bounds.end-Vector2(138,28),"试炼之地",HORIZONTAL_ALIGNMENT_LEFT,-1,13,Color("586044"))
 
 static func _stone(rect: Rect2, cut: float) -> PackedVector2Array:
@@ -121,3 +123,35 @@ static func _draw_ruin_wall(arena: Node2D, wall: Rect2) -> void:
 		y += height
 		course += 1
 	arena.draw_rect(wall,Color("544b3b"),false,1.5)
+
+
+static func basin_geometry(wall: Rect2) -> Dictionary:
+	# Every opaque piece stays within the actual blocked footprint.
+	if wall.size.x < 48.0 or wall.size.y < 48.0: return {}
+	return {"footprint":wall, "rim":wall.grow(-4), "water":wall.grow(-18)}
+
+
+static func _draw_spring_basin(arena: Node2D, wall: Rect2) -> void:
+	var parts := basin_geometry(wall)
+	if parts.is_empty():
+		_draw_ruin_wall(arena, wall)
+		return
+	var rim: Rect2 = parts.rim
+	var water: Rect2 = parts.water
+	arena.draw_rect(wall, Color("62563f"))
+	arena.draw_colored_polygon(_stone(rim, 7.0), Color("c4b38a"))
+	arena.draw_line(rim.position + Vector2(8,3), Vector2(rim.end.x-8,rim.position.y+3), Color("e3d5ae"), 3.0, true)
+	arena.draw_line(Vector2(rim.position.x+5,rim.end.y-4), rim.end-Vector2(5,4), Color("96855e"), 4.0, true)
+	arena.draw_rect(water.grow(3), Color("756e51"))
+	arena.draw_rect(water, Color("668575"))
+	# Still water, small sunlit strokes; no clock-face rings or pulsing bloom.
+	for i: int in range(4):
+		var y := water.position.y + water.size.y * (float(i)+1.0) / 5.0
+		var x := water.position.x + 13.0 + float(i%2)*17.0
+		var right := minf(water.end.x-10.0, x+water.size.x*0.57)
+		arena.draw_polyline(PackedVector2Array([Vector2(x,y),Vector2(lerpf(x,right,0.3),y-2),Vector2(lerpf(x,right,0.7),y+1),Vector2(right,y-1)]),Color(0.84,0.87,0.69,0.27),1.4,true)
+	for i: int in range(1,4):
+		var x := wall.position.x + wall.size.x * float(i) / 4.0
+		arena.draw_line(Vector2(x,wall.position.y+5),Vector2(x,water.position.y-4),Color("958560"),1.3,true)
+		arena.draw_line(Vector2(x,water.end.y+4),Vector2(x,wall.end.y-5),Color("958560"),1.3,true)
+	arena.draw_rect(wall.grow(-0.8), Color("655b43"), false, 1.6)

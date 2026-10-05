@@ -943,7 +943,8 @@ func _start_enemy_telegraphs() -> void:
 
 
 func _advance_enemy_telegraphs(delta: float) -> void:
-	var events: Array[Dictionary] = telegraphs.advance(delta, enemies,not burn_runtime.is_empty() or telegraphs.has_burning_actions())
+	var sequence_batch:bool=telegraphs.has_timed_sequence_actions()
+	var events: Array[Dictionary] = telegraphs.advance(delta, enemies,sequence_batch or not burn_runtime.is_empty() or telegraphs.has_burning_actions())
 	for event: Dictionary in events:
 		if not alive:
 			telegraphs.reset()
@@ -952,9 +953,11 @@ func _advance_enemy_telegraphs(delta: float) -> void:
 		_advance_player_burn(event_time)
 		if not alive:telegraphs.reset();break
 		var inside: bool = TelegraphRuntime.overlaps(event, player_pos, PLAYER_RADIUS) and _terrain_visible(event.center,player_pos)
+		if sequence_batch:invulnerable=maxf(0.0,_burn_immunity_until-event_time)
 		_burn_incoming_time=event_time
 		var applied: bool = hit_player_components(event.packet.base, int(event.source_id),event.packet.tags) if inside else false
 		_burn_incoming_time=-1.0
+		if sequence_batch:invulnerable=maxf(0.0,_burn_immunity_until-elapsed)
 		if applied and alive and event.has("burn_policy"):
 			var burn:Dictionary=BurnRules.from_fire_hit(float(event.packet.base.get("fire",0.0)),event.burn_policy)
 			if burn.ok:

@@ -4,6 +4,7 @@ extends RefCounted
 ## registered only after the caller successfully admits a complete camp.
 const Maps = preload("res://scripts/world/map_compiler.gd")
 const Monsters = preload("res://scripts/monsters/monster_catalog.gd")
+const Sunwell = preload("res://scripts/world/sunwell_roster_rules.gd")
 const CAMP_IDS: Array[String] = ["camp_west", "camp_north", "camp_east"]
 var _state: Dictionary = {}
 
@@ -26,8 +27,10 @@ func begin(profile: Variant, landmarks: Variant, seed_value: Variant) -> Diction
 	for camp_id: String in CAMP_IDS:
 		var landmark: Dictionary = _landmark(landmarks.camps, camp_id)
 		var roster: Array[Dictionary] = []
+		var ordinal := 0
 		for position: Vector2 in landmark.positions:
 			admission_index += 1
+			ordinal += 1
 			var template_id := Monsters.encounter_for_admission(profile.wave, admission_index)
 			var rarity := ""
 			var mechanisms: Array = []
@@ -36,10 +39,15 @@ func begin(profile: Variant, landmarks: Variant, seed_value: Variant) -> Diction
 				template_id = roll.template
 				rarity = roll.rarity
 				mechanisms = roll.mechanisms.duplicate(true)
-				var elemental := Monsters.elemental_template_for_roll(profile.wave, admission_index, roll)
-				if not elemental.is_empty():
-					template_id = elemental
-				var special := Maps.special_template(profile, roll)
+				var special_roll: Dictionary = roll
+				if profile.id == "sunwell_terrace":
+					template_id = Sunwell.template_for_roll(profile.wave, camp_id, ordinal, roll)
+					special_roll = Sunwell.species_roll(roll, template_id)
+				else:
+					var elemental := Monsters.elemental_template_for_roll(profile.wave, admission_index, roll)
+					if not elemental.is_empty():
+						template_id = elemental
+				var special := Maps.special_template(profile, special_roll)
 				if not special.is_empty():
 					template_id = special
 			roster.append({"admission_index": admission_index, "template_id": template_id,

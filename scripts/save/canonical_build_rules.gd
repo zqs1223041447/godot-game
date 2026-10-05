@@ -26,7 +26,8 @@ const V25_VERSION := 25
 const V26_VERSION := 26
 const V27_VERSION := 27
 const V28_VERSION := 28
-const VERSION := 29
+const V29_VERSION := 29
+const VERSION := 30
 const LEGACY_MAX_ITEMS := 1024
 const V17_MAX_ITEMS := LEGACY_MAX_ITEMS + 1
 const MAX_ITEMS := V17_MAX_ITEMS + 2 # Two once-only migration bottles; bag capacity is unchanged.
@@ -63,6 +64,10 @@ static func decode_v27(raw: Variant) -> Dictionary:
 
 static func decode_v28(raw: Variant) -> Dictionary:
 	return _decode(raw, true, V28_VERSION, true)
+
+
+static func decode_v29(raw: Variant) -> Dictionary:
+	return _decode(raw, true, V29_VERSION, true)
 
 
 static func decode_v24(raw:Variant)->Dictionary:
@@ -117,7 +122,7 @@ static func _decode(raw: Variant, paged: bool, expected_version: int, allow_curr
 		value[field] = int(value[field])
 	if value.version != expected_version: return {}
 	if expected_version >= 26:
-		value.journey = Journey.decode(value.journey)
+		value.journey = Journey.decode_legacy(value.journey) if expected_version <= V29_VERSION else Journey.decode(value.journey)
 		if value.journey.is_empty(): return {}
 	if not value.items is Dictionary or not value.locations is Dictionary: return {}
 	for uid: Variant in value.items:
@@ -184,6 +189,10 @@ static func reason_v28(value: Variant, validate_talents: Callable = Callable(), 
 	return _reason(value, V28_VERSION, true, true, MAX_ITEMS, validate_talents, socket_ids)
 
 
+static func reason_v29(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
+	return _reason(value, V29_VERSION, true, true, MAX_ITEMS, validate_talents, socket_ids)
+
+
 static func reason_v24(value:Variant,validate_talents:Callable=Callable(),socket_ids:Array=[])->String:
 	return _reason(value,V24_VERSION,true,true,MAX_ITEMS,validate_talents,socket_ids)
 
@@ -225,7 +234,7 @@ static func _reason(value: Variant, expected_version: int, paged: bool, allow_cu
 	if not Locations._exact_string_keys(value, FIELDS if expected_version >= 26 else LEGACY_FIELDS): return "保存结构无效"
 	if not value.version is int or value.version != expected_version: return "保存版本不兼容"
 	if expected_version >= 26:
-		var journey_error: String = Journey.reason(value.journey)
+		var journey_error: String = Journey.reason_legacy(value.journey) if expected_version <= V29_VERSION else Journey.reason(value.journey)
 		if not journey_error.is_empty(): return journey_error
 	if not _integer(value.revision, 0, MAX_SERIAL) or not _integer(value.next_item_serial, 1, MAX_SERIAL): return "修订或物品序号无效"
 	if not value.items is Dictionary or value.items.size() > item_limit: return "物品注册表无效"

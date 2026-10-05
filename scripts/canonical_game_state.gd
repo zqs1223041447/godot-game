@@ -565,7 +565,9 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	var loaded:=super.load_build(path)
 	if loaded and old_version>0 and old_version<Rules.VERSION:
 		migrated_from_legacy=true
-		if old_version == Rules.V28_VERSION:
+		if old_version == Rules.V29_VERSION:
+			migration_message="旧存档已原字节备份，晴泉台地 I 已开放；旧两图进度、进行中地图与待领奖励保持，不额外赠送碎片或物品。"
+		elif old_version == Rules.V28_VERSION:
 			migration_message="旧存档已原字节备份，余烬扩散辅助宝石已开放购买；原物品、技能组、天赋与普通旅程保持，不额外赠物。"
 		elif old_version == Rules.V27_VERSION:
 			migration_message="旧存档已原字节备份，点燃辅助宝石已开放购买；原物品、技能组、天赋与普通旅程保持，不额外赠物。"

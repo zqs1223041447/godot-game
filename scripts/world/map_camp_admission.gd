@@ -7,7 +7,7 @@ const Encounter = preload("res://scripts/encounters/encounter_admission.gd")
 const Admission = preload("res://scripts/world/map_admission.gd")
 const Compiler = preload("res://scripts/world/map_compiler.gd")
 const Geometry = preload("res://scripts/world/map_geometry.gd")
-const GROUP_COUNTS: Dictionary = {"old_garden": 8, "broken_ruins": 12}
+const GROUP_COUNTS: Dictionary = {"old_garden": 8, "broken_ruins": 12, "sunwell_terrace": 12}
 const PLAYER_CLEARANCE: float = 230.0
 const LIVE_CAP: int = 100
 

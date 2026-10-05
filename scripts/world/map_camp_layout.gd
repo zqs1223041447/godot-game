@@ -9,7 +9,7 @@ const CAMP_NAMES: Array[String] = ["西侧据点", "北侧据点", "东侧据点
 
 
 static func layout(map_id: Variant, bounds: Rect2) -> Dictionary:
-	if not map_id is String or map_id not in ["old_garden", "broken_ruins"]:
+	if not map_id is String or map_id not in ["old_garden", "broken_ruins", "sunwell_terrace"]:
 		return _rejected("未知据点地图")
 	if not bounds.position.is_finite() or not bounds.size.is_finite() or not bounds.end.is_finite():
 		return _rejected("据点地图边界必须有限")
@@ -20,6 +20,11 @@ static func layout(map_id: Variant, bounds: Rect2) -> Dictionary:
 	centers.assign([Vector2(290, 170), Vector2(920, 130), Vector2(1550, 170)] if garden else [Vector2(270, 150), Vector2(920, 150), Vector2(1570, 150)])
 	var triggers: Array[Vector2] = []
 	triggers.assign([Vector2(290, 590), Vector2(920, 550), Vector2(1550, 590)] if garden else [Vector2(270, 570), Vector2(920, 570), Vector2(1570, 570)])
+	var names: Array[String] = CAMP_NAMES
+	if map_id == "sunwell_terrace":
+		centers.assign([Vector2(290, 160), Vector2(920, 130), Vector2(1550, 540)])
+		triggers.assign([Vector2(290, 590), Vector2(920, 550), Vector2(1550, 120)])
+		names = ["西泉据点", "北门据点", "东阶据点"]
 	var rows: Array[float] = []
 	rows.assign([-28.0, 28.0] if garden else [-56.0, 0.0, 56.0])
 	var origin := bounds.position
@@ -33,11 +38,14 @@ static func layout(map_id: Variant, bounds: Rect2) -> Dictionary:
 				positions.append(origin + offset)
 				relative_points.append(offset)
 		relative_points.append_array([centers[index], triggers[index]])
-		camps.append({"id": CAMP_IDS[index], "name": CAMP_NAMES[index],
+		camps.append({"id": CAMP_IDS[index], "name": names[index],
 			"center": origin + centers[index], "trigger_center": origin + triggers[index],
 			"trigger_radius": TRIGGER_RADIUS, "root_count": positions.size(), "positions": positions})
 	var boss_center := Vector2(920, 355) if garden else Vector2(1530, 320)
 	var boss_trigger := Vector2(920, 670) if garden else Vector2(1530, 650)
+	if map_id == "sunwell_terrace":
+		boss_center = Vector2(920, 355)
+		boss_trigger = Vector2(920, 670)
 	relative_points.append_array([boss_center, boss_trigger])
 	# A finite but enormous origin can erase formation offsets in Vector2's
 	# float precision. Reject that input instead of returning overlapping roots.

@@ -3,7 +3,8 @@ extends RefCounted
 const Encounters=preload("res://scripts/encounters/encounter_catalog.gd")
 const MAPS={
 	"old_garden":{"name":"旧庭试炼","description":"开阔庭院，无实体残墙。靠近任意据点木牌激活整组8个根怪，可同时挑战多组。三个据点共24根怪，全部击败后前往首领入口，再清理首领和后代。首领近身震地锁定起手位置，看到预警走出圆圈。","wave":4,"ordinary_target":24,"boss_id":"rift_warden","boss_attack_id":"garden_slam"},
-	"broken_ruins":{"name":"断垣试炼","description":"两道错位残墙需绕行；贯穿不穿墙，撞墙不触发到期效果。三个据点可自由选择推进顺序，每组12根怪可同时出场。全部36根怪击败后前往首领入口，再清理首领和后代。首领落印锁定你的起手位置，及时走开；墙体阻挡视线。","wave":5,"ordinary_target":36,"boss_id":"rift_warden","boss_attack_id":"ruins_mark"}}
+	"broken_ruins":{"name":"断垣试炼","description":"两道错位残墙需绕行；贯穿不穿墙，撞墙不触发到期效果。三个据点可自由选择推进顺序，每组12根怪可同时出场。全部36根怪击败后前往首领入口，再清理首领和后代。首领落印锁定你的起手位置，及时走开；墙体阻挡视线。","wave":5,"ordinary_target":36,"boss_id":"rift_warden","boss_attack_id":"ruins_mark"},
+	"sunwell_terrace":{"name":"晴泉台地","description":"四座实体泉池阻挡移动、弹体和视线，沿池间通道绕行。西泉据点偏重壳与霜纹，北门据点混合编排，东阶据点偏掠行与雷纹；霜纹、雷纹分别从第4、5波出现。三个据点自由顺序，每组12根怪可同场挑战，共36根怪。清理后在南侧入口激活首领；两次回响均锁定起手位置，持续离开预警范围。","wave":6,"ordinary_target":36,"boss_id":"rift_warden","boss_attack_id":"sunwell_echo"}}
 const SPECIAL={
 	"elemental_aegis":{"name":"元素庇护","description":"地图怪物三元素原始抗性各加20个百分点，有效上限75%；物理和混沌不变。","kind":"defense","minimum_wave":4,"resistance_bonus":0.20,"damage_types":["fire","cold","lightning"]},
 	"frost_patrol":{"name":"霜纹巡逻","description":"原本生成重甲体的普通名额改为霜纹守卫，保留原稀有度与机制；灰烬名额不变。冰霜圆形预警可走开，不产生冻结。","minimum_wave":4,"species":"brute","template":"frost_guard"},
