@@ -1,0 +1,37 @@
+{
+  "date_utc": "2026-10-05",
+  "attempts": 1,
+  "process_exit": 0,
+  "engine": "4.6.3-stable (official)",
+  "display_server": "headless",
+  "checks": 447,
+  "failures": 0,
+  "cases": 28,
+  "source_tree": "v051-reward-inventory-cost",
+  "xdg_root": "/tmp/godot-m1-v051-allocation-maPDrc",
+  "xdg_children": [
+    "data",
+    "config",
+    "cache"
+  ],
+  "timing_enabled": true,
+  "command": [
+    "/usr/local/bin/godot",
+    "--headless",
+    "--path",
+    ".",
+    "--script",
+    "tests/empty_radius_allocation_test.gd"
+  ],
+  "sha256": {
+    "tests/empty_radius_allocation_test.gd": "bfd9115f47cd6486b1b5ae5eb93786277e34b17959448014505a663bea68ed5e",
+    "tests/fixtures/v051/source_tree_allocation_before.gd": "fadba5f6cf2104e7fef26ddd21a83db230abbad19310778529844b9d8969da8e",
+    "scripts/passives/source_tree_allocation_rules.gd": "631792b2ecf06481c6cc43165cd9f97688d578f6cd5cf394905b0c9beb814ef3",
+    "scripts/passives/source_tree_runtime.gd": "d59ddf805c4a52bef7b1a498a4518cea2b14e4f07fcaef973318f6405206ac18",
+    "data/passives/official_tree_runtime.json": "9774a8ec1fe16199e775fe99a20853837ca8c7725c48dfcd9d6ee69646ff934f",
+    "docs/qa/v051-allocation/result.json": "8b60795222bd995e8296c89ab01ff2182cae058ae8cb130d9316e77256ce77fe",
+    "docs/qa/v051-allocation/run.log": "bdef32558d400c5da47bb9258126f6e26f9ff677f179286e88d5ec2262dc3575",
+    "docs/qa/v051-allocation/baseline-provenance.json": "c893269ee39f24ca429b0d85d841e6f1c368a1ad010a9912bd79880d5c3abd15"
+  },
+  "limitations": "One local Linux headless run. Pure rule equivalence and private analysis CPU only; no full historical suite, gameplay/save/rollback, rendered frame or Windows performance validation."
+}

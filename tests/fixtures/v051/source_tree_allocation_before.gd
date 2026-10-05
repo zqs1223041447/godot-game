@@ -1,4 +1,4 @@
-class_name SourceTreeAllocationRules
+class_name FrozenV051Allocation
 extends RefCounted
 ## Pure final-state legality for the imported source passive tree.
 ## The caller owns payload authenticity, item state, point budgets, and persistence.
@@ -119,23 +119,20 @@ static func _analyze_validated_context(context: Dictionary,selection: Variant,so
 			special_sockets.append({"id": socket_id, "position": nodes[socket_id]["position"], "radius": jewel_rule["radius"]})
 
 	var remote_sources: Dictionary = {}
-	# Without a radius-granting jewel this projection is necessarily empty.
-	# Keep all input/connectivity checks above and disconnected rejection below.
-	if not special_sockets.is_empty():
-		for id: String in _sorted_keys(nodes):
-			if normal_connected_map.has(id):
-				continue
-			var node: Dictionary = nodes[id]
-			if node["type"] != "small" and node["type"] != "notable":
-				continue
-			var sources: Array[String] = []
-			for source: Dictionary in special_sockets:
-				var radius: float = source["radius"]
-				var center: Vector2 = source["position"]
-				if node["position"].distance_squared_to(center) <= radius * radius:
-					sources.append(source["id"])
-			if not sources.is_empty():
-				remote_sources[id] = sources
+	for id: String in _sorted_keys(nodes):
+		if normal_connected_map.has(id):
+			continue
+		var node: Dictionary = nodes[id]
+		if node["type"] != "small" and node["type"] != "notable":
+			continue
+		var sources: Array[String] = []
+		for source: Dictionary in special_sockets:
+			var radius: float = source["radius"]
+			var center: Vector2 = source["position"]
+			if node["position"].distance_squared_to(center) <= radius * radius:
+				sources.append(source["id"])
+		if not sources.is_empty():
+			remote_sources[id] = sources
 
 	for raw_id: Variant in allocated.keys():
 		var id: String = raw_id
