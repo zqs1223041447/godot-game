@@ -22,7 +22,7 @@ static func assemble(base_damage: Variant, recipe: Variant, added_damage: Varian
 	if not weapon.ok:
 		return {}
 	var weapon_trace: Dictionary = {}
-	if not weapon.profile.is_empty() and _weapon_consumer(recipe.skill_id, recipe.role, recipe.tags):
+	if not weapon.profile.is_empty() and Weapon.consumes_hit(weapon.profile.base_id, recipe.skill_id, recipe.role, recipe.tags):
 		var contribution: float = float(weapon.components.physical) * float(recipe.base_coefficient)
 		if not is_finite(contribution):
 			return {}
@@ -149,14 +149,14 @@ static func packet_error(packet: Variant) -> String:
 	return _event_error(packet.tags, packet.role, float(trace.added_effectiveness))
 
 
-static func _weapon_consumer(skill_id: String, role: String, tags: Variant) -> bool:
-	return tags is Array and tags.has("hit") and tags.has("attack") and tags.has("projectile") \
-		and not tags.has("spell") and not tags.has("secondary") and not tags.has("explosion") \
-		and ((skill_id == "basic" and role == "projectile") or (skill_id == "tornado" and role in ["parent", "child"]))
-
-
 static func _weapon_trace_error(trace: Variant, packet: Dictionary, coefficient: float) -> String:
-	if not _weapon_consumer(packet.skill_id, packet.role, packet.tags):
+	# Preserve the historical event-before-structure rejection order. Only an
+	# explicit new base selects the new event gate; profile validation still
+	# follows and rejects malformed/unknown provenance before using any points.
+	var base_id: String = Weapon.BASE_ID
+	if trace is Dictionary and trace.get("profile") is Dictionary and trace.profile.get("base_id") == "forgeblade":
+		base_id = "forgeblade"
+	if not Weapon.consumes_hit(base_id, packet.skill_id, packet.role, packet.tags):
 		return "此命中不可使用武器局部伤害"
 	if not trace is Dictionary or trace.size() != 4 or not trace.has_all(["profile", "components", "coefficient", "contribution"]):
 		return "冻结武器局部阶段结构无效"

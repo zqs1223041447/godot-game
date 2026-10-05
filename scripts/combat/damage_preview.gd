@@ -128,7 +128,7 @@ static func details(cast: Dictionary) -> String:
 		var base_radius: float = float(cast.recipe.get("base_radius", cast.recipe.radius))
 		lines.append("%s范围：半径 %.2f → %.2f；面积 ×%.4f，半径 ×%.4f（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。" % ["扇形" if cast.skill_id == "cleave" else "圆形", base_radius, float(cast.recipe.radius), float(cast.recipe.get("area_multiplier", 1.0)), float(cast.recipe.radius) / base_radius])
 	if cast.skill_id == "cleave":
-		lines.append("近身扇区 %.0f 度；近战、攻击与范围标签生效。没有命中时也正常支付，不借用白蜡长弓本地伤害。" % rad_to_deg(float(cast.recipe.half_angle)*2.0))
+		lines.append("近身扇区 %.0f 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。" % rad_to_deg(float(cast.recipe.half_angle)*2.0))
 	if cast.skill_id == "chain" and cast.recipe.has("hit"):
 		lines.append("连锁最多 %d 个目标（含首个）；首段 %.2f，续跳 %.2f。已命中过的目标不重复，每个目标沿原配方递减基础倍率和附加效用。" % [int(cast.recipe.hit.bounce_count), float(cast.recipe.first_range), float(cast.recipe.followup_range)])
 	if cast.skill_id in ["bolt", "frost", "shade_bolt"]:

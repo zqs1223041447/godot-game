@@ -6,6 +6,7 @@ extends RefCounted
 const ALPHA_LAYOUT_THRESHOLD: int = 20
 const INSET: float = 1.0
 const ART_PATHS: Dictionary = {
+	"forgeblade": "res://assets/art/equipment/forgeblade.png",
 	"cinder_reed": "res://assets/art/equipment/cinder_reed.png",
 	"gale_spindle": "res://assets/art/equipment/gale_spindle.png",
 	"woven_bastion": "res://assets/art/equipment/woven_bastion.png",

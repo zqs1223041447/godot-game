@@ -566,7 +566,9 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	var loaded:=super.load_build(path)
 	if loaded and old_version>0 and old_version<Rules.VERSION:
 		migrated_from_legacy=true
-		if old_version == Rules.V32_VERSION:
+		if old_version == Rules.V33_VERSION:
+			migration_message="旧存档已原字节备份，锻纹短刃已加入装备掉落与制作；原物品、技能组、天赋、点数与旅程保持，不额外赠物。"
+		elif old_version == Rules.V32_VERSION:
 			migration_message="旧存档已原字节备份，伤害型异常加速源天赋已开放；原物品、技能组、已分配天赋、点数与普通旅程保持，不额外赠物。"
 		elif old_version == Rules.V31_VERSION:
 			migration_message="旧存档已原字节备份，火焰持续伤害加成源天赋已开放；原物品、技能组、已分配天赋、点数与普通旅程保持，不额外赠物。"

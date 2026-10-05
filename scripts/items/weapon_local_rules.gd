@@ -4,7 +4,7 @@ extends RefCounted
 ## this contract owns the only raw profile admitted by the hit compiler. No RNG.
 const STAGE: String = "weapon_local"
 const BASE_ID: String = "ashwood_bow"
-const BASE_PHYSICAL_BY_ID: Dictionary = {"ashwood_bow": 4.0}
+const BASE_PHYSICAL_BY_ID: Dictionary = {"ashwood_bow": 4.0, "forgeblade": 4.0}
 const SOURCE_STATS: Dictionary = {
 	"whetstone_edge": "weapon_added_physical", "tempered_edge": "weapon_physical_increased",
 }
@@ -22,16 +22,31 @@ static func support_reason(stat: String, stage: String = STAGE) -> String:
 	return ""
 
 
+## Both assembly and frozen-packet admission use this base-specific boundary.
+## Keep the bow's original tag semantics; the blade admits only the authored
+## direct cleave event, never a projectile, spell or independent secondary.
+static func consumes_hit(base_id: String, skill_id: String, role: String, tags: Variant) -> bool:
+	if base_id == BASE_ID:
+		return tags is Array and tags.has("hit") and tags.has("attack") and tags.has("projectile") \
+			and not tags.has("spell") and not tags.has("secondary") and not tags.has("explosion") \
+			and ((skill_id == "basic" and role == "projectile") or (skill_id == "tornado" and role in ["parent", "child"]))
+	if base_id == "forgeblade":
+		return skill_id == "cleave" and role == "direct" and tags is Array and tags.size() == 4 \
+			and tags.has("hit") and tags.has("attack") and tags.has("melee") and tags.has("area")
+	return false
+
+
 static func metadata() -> Dictionary:
 	return {"id": STAGE, "name": "武器局部物理伤害", "stage": STAGE,
 		"scope": "equipped_weapon", "damage_type": "physical", "schema_version": 1,
-		"base_ids": [BASE_ID], "stats": SOURCE_STATS.values(), "origin": "adapted",
+		"base_ids": BASE_PHYSICAL_BY_ID.keys(), "stats": SOURCE_STATS.values(), "origin": "adapted",
 		"source_refs": ["https://www.pathofexile.com/forum/view-thread/1676002/filter-account-type/staff",
 			"https://www.pathofexile.com/forum/view-thread/3165009"],
 		"balance_version": "original-local-weapon-v1", "formula": "(base + flat) * (1 + increased)",
 		"hit_formula": "B * original_distribution * base_coefficient + W * base_coefficient + external_added * added_effectiveness",
-		"consumers": {"basic": ["projectile"], "tornado": ["parent", "child"]},
-		"description": "局部点伤与局部物理提高先结算本武器；结果仅按技能基础倍率加入普通攻击和龙卷箭的物理命中。保留原有角色基伤，不是完整武器基伤替换。",
+		"consumers": {"basic": ["projectile"], "tornado": ["parent", "child"], "cleave": ["direct"]},
+		"consumers_by_base": {"ashwood_bow": {"basic": ["projectile"], "tornado": ["parent", "child"]}, "forgeblade": {"cleave": ["direct"]}},
+		"description": "局部点伤与局部物理提高先结算本武器；长弓仅加入普通攻击与龙卷箭体，锻纹短刃仅加入裂刃斩直接命中，均按技能基础倍率加入物理点数。保留原有角色基伤，不是完整武器基伤替换。",
 		"unsupported": ["conversion", "quality", "local_attack_speed", "local_critical_strike", "damage_ranges", "spell", "secondary"]}
 
 
@@ -52,7 +67,7 @@ static func profile_error(value: Variant) -> String:
 		return ""
 	if not _exact_keys(value, ["stage", "item_id", "base_id", "base", "flat", "increased", "sources"]):
 		return "武器局部配置结构无效"
-	if not value.stage is String or value.stage != STAGE or not value.base_id is String or value.base_id != BASE_ID or not _item_id(value.item_id):
+	if not value.stage is String or value.stage != STAGE or not value.base_id is String or not BASE_PHYSICAL_BY_ID.has(value.base_id) or not _item_id(value.item_id):
 		return "武器局部阶段或来源无效"
 	for key: String in ["base", "flat", "increased"]:
 		if not physical_map(value[key]):

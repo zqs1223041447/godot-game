@@ -11,8 +11,9 @@ const NineSlotProfile = preload("res://scripts/items/nine_slot_equipment_profile
 const NINE_SLOT_BASES: Dictionary = NineSlotProfile._BASES
 const NINE_SLOT_AFFIXES: Dictionary = NineSlotProfile._AFFIXES
 const BuildAffixes = preload("res://scripts/items/build_affix_profile.gd")
-const CURRENT_VOCABULARY: int = 27
-const CANONICAL_LOOT_PROFILE_ID: String = "canonical_v27"
+const ForgebladeProfile = preload("res://scripts/items/forgeblade_profile.gd")
+const CURRENT_VOCABULARY: int = 34
+const CANONICAL_LOOT_PROFILE_ID: String = "canonical_v34"
 const MIN_ITEM_LEVEL: int = 1
 const MAX_ITEM_LEVEL: int = 30
 const MAX_SERIAL: int = 999999999
@@ -118,6 +119,9 @@ const LOCAL_WEAPON_AFFIXES: Dictionary = {
 		"stage": "weapon_local", "scope": "equipped_weapon", "damage_type": "physical", "allowed_base_ids": ["ashwood_bow"], "balance_origin": "original",
 		"tiers": [{"tier": 1, "level": 1, "weight": 100, "min": 10, "max": 15}, {"tier": 2, "level": 8, "weight": 60, "min": 16, "max": 22}, {"tier": 3, "level": 16, "weight": 30, "min": 23, "max": 30}]},
 }
+## Derive only the new eligibility from frozen authored budgets.
+static var _current_extended_affixes: Dictionary = ForgebladeProfile.extend_affixes(LOCAL_WEAPON_AFFIXES, BuildAffixes.AFFIXES)
+
 ## Ordering is part of the RNG contract. Do not derive these arrays from a registry
 ## that later releases can extend. New content belongs in a new profile.
 const POOL_PROFILES: Dictionary = {
@@ -134,14 +138,16 @@ const POOL_PROFILES: Dictionary = {
 		"affix_ids": ["rootwell", "deepwell", "lanternveil", "runesong", "prismedge", "farweave", "coalglow", "rimeecho", "sparkthread", "wellturn", "trailstep", "beatlink", "attack_life_leech", "attack_mana_leech", "global_critical_chance", "global_critical_multiplier"], "min_save_version": 27},
 	"build_nine_slot_v27": {"base_ids": ["nine_slot_etched_ring", "nine_slot_trail_boots", "nine_slot_folded_belt", "nine_slot_threaded_gloves", "nine_slot_slate_helmet"],
 		"affix_ids": ["nine_slot_prefix_vitality", "nine_slot_prefix_clarity", "nine_slot_prefix_aegis", "nine_slot_suffix_endurance", "nine_slot_suffix_mana_flow", "nine_slot_suffix_stride", "nine_slot_suffix_skill_row", "attack_life_leech", "attack_mana_leech", "global_critical_chance", "global_critical_multiplier"], "min_save_version": 27},
+	"forgeblade_v34": ForgebladeProfile.POOL_PROFILE,
 }
 const LOOT_PROFILES: Dictionary = {
 	"canonical_v27": [{"pool_id":"build_legacy_v27","weight":30},{"pool_id":"runewood","weight":20},{"pool_id":"defense","weight":10},{"pool_id":"local_weapon","weight":10},{"pool_id":"build_nine_slot_v27","weight":30}],
 	"canonical_v14": [{"pool_id":"legacy","weight":30},{"pool_id":"runewood","weight":20},{"pool_id":"defense","weight":10},{"pool_id":"local_weapon","weight":10},{"pool_id":"nine_slot","weight":30}],
 	"v0.11": [{"pool_id": "legacy", "weight": 60}, {"pool_id": "runewood", "weight": 25}, {"pool_id": "defense", "weight": 15}],
 	"v0.13": [{"pool_id": "legacy", "weight": 45}, {"pool_id": "runewood", "weight": 25}, {"pool_id": "defense", "weight": 15}, {"pool_id": "local_weapon", "weight": 15}],
+	"canonical_v34": [{"pool_id":"build_legacy_v27","weight":25},{"pool_id":"runewood","weight":20},{"pool_id":"defense","weight":10},{"pool_id":"local_weapon","weight":10},{"pool_id":"build_nine_slot_v27","weight":30},{"pool_id":"forgeblade_v34","weight":5}],
 }
-const CURRENT_LOOT_PROFILE_ID: String = "v0.13"
+const CURRENT_LOOT_PROFILE_ID: String = "canonical_v34"
 
 
 static func all_base_ids() -> Array[String]:
@@ -240,11 +246,11 @@ static func affix_stat_value(family: Dictionary, ticks: Variant) -> float:
 
 
 static func _base_record(id: String) -> Dictionary:
-	return BASES.get(id, EXPANSION_BASES.get(id, DEFENSE_BASES.get(id, LOCAL_WEAPON_BASES.get(id, NINE_SLOT_BASES.get(id, {})))))
+	return BASES.get(id, EXPANSION_BASES.get(id, DEFENSE_BASES.get(id, LOCAL_WEAPON_BASES.get(id, NINE_SLOT_BASES.get(id, ForgebladeProfile.BASES.get(id, {}))))))
 
 
 static func _affix_record(id: String) -> Dictionary:
-	return BuildAffixes.AFFIXES.get(id, AFFIXES.get(id, EXPANSION_AFFIXES.get(id, DEFENSE_AFFIXES.get(id, LOCAL_WEAPON_AFFIXES.get(id, NINE_SLOT_AFFIXES.get(id, {}))))))
+	return _current_extended_affixes.get(id, BuildAffixes.AFFIXES.get(id, AFFIXES.get(id, EXPANSION_AFFIXES.get(id, DEFENSE_AFFIXES.get(id, LOCAL_WEAPON_AFFIXES.get(id, NINE_SLOT_AFFIXES.get(id, {})))))))
 
 
 static func generate(rng: RandomNumberGenerator, id: String, item_level: int, rarity: String = "") -> Dictionary:
@@ -352,7 +358,7 @@ static func validate_instance_for_version(value: Variant, save_version: int) -> 
 		return false
 	if DEFENSE_BASES.has(instance.base_id) and not _valid_defense_base(_base_record(instance.base_id)):
 		return false
-	if LOCAL_WEAPON_BASES.has(instance.base_id) and not _valid_local_weapon_base(_base_record(instance.base_id), instance.base_id):
+	if _is_local_weapon_base(instance.base_id) and not _valid_local_weapon_base(_base_record(instance.base_id), instance.base_id):
 		return false
 	if not instance.rarity is String or not RARITIES.has(instance.rarity):
 		return false
@@ -417,21 +423,22 @@ static func definition(instance: Dictionary) -> Dictionary:
 	var result: Dictionary = {"id": instance.id, "base_id": instance.base_id, "name": "%s · %s" % [RARITIES[instance.rarity].name, base.name],
 		"slot": base.slot, "size": base.size, "description": description, "stats": _validated_stats(instance),
 		"effects": [], "added_sources": _added_sources(instance), "rarity": instance.rarity, "item_level": instance.item_level, "affix_lines": lines, "base_name": base.name}
-	if LOCAL_WEAPON_BASES.has(instance.base_id):
+	if _is_local_weapon_base(instance.base_id):
 		var profile: Dictionary = weapon_profile(instance)
 		var resolved: Dictionary = WeaponLocalRules.resolve(profile)
 		if not resolved.ok:
 			return {}
 		result["weapon_profile"] = profile
 		result["weapon_damage"] = resolved.components.duplicate(true)
-		result["weapon_damage_summary"] = "本武器物理：(%s + %s) × (1 + %s%%) = %s；仅普攻与龙卷箭体" % [str(profile.base.physical), str(profile.flat.physical), str(snappedf(float(profile.increased.physical) * 100.0, 0.01)), str(snappedf(float(resolved.components.physical), 0.01))]
+		var consumer_summary: String = "仅裂刃斩直接命中" if ForgebladeProfile.BASES.has(instance.base_id) else "仅普攻与龙卷箭体"
+		result["weapon_damage_summary"] = "本武器物理：(%s + %s) × (1 + %s%%) = %s；%s" % [str(profile.base.physical), str(profile.flat.physical), str(snappedf(float(profile.increased.physical) * 100.0, 0.01)), str(snappedf(float(resolved.components.physical), 0.01)), consumer_summary]
 	return result
 
 
 ## Persist only the five canonical item fields. Derive this detached profile
 ## from authored metadata and validated rolls whenever an item is inspected.
 static func weapon_profile(instance: Dictionary) -> Dictionary:
-	if not validate_instance(instance) or not LOCAL_WEAPON_BASES.has(instance.base_id):
+	if not validate_instance(instance) or not _is_local_weapon_base(instance.base_id):
 		return {}
 	var profile: Dictionary = {"stage": "weapon_local", "item_id": instance.id, "base_id": instance.base_id,
 		"base": {"physical": float(WeaponLocalRules.BASE_PHYSICAL_BY_ID[instance.base_id])},
@@ -481,6 +488,8 @@ static func _added_sources(instance: Dictionary) -> Array[Dictionary]:
 
 
 static func _family_eligible(id: String, family: Dictionary, base_id: String) -> bool:
+	if ForgebladeProfile.BASES.has(base_id) and not ForgebladeProfile.POOL_PROFILE.affix_ids.has(id):
+		return false
 	var base: Dictionary = _base_record(base_id)
 	if base.is_empty() or not family.slots.has(base.slot):
 		return false
@@ -492,6 +501,10 @@ static func _family_eligible(id: String, family: Dictionary, base_id: String) ->
 		return _valid_local_weapon_family(family) and family.allowed_base_ids.has(base_id)
 	if BuildAffixes.AFFIXES.has(id): return family.allowed_base_ids.has(base_id)
 	return AFFIXES.has(id) or NINE_SLOT_AFFIXES.has(id)
+
+
+static func _is_local_weapon_base(base_id: String) -> bool:
+	return LOCAL_WEAPON_BASES.has(base_id) or ForgebladeProfile.BASES.has(base_id)
 
 
 static func _valid_local_weapon_base(base: Dictionary, base_id: String) -> bool:
@@ -512,7 +525,7 @@ static func _valid_local_weapon_family(family: Dictionary) -> bool:
 	if not family.slots is Array or not family.allowed_base_ids is Array:
 		return false
 	if family.stage != "weapon_local" or family.scope != "equipped_weapon" or family.kind != "prefix" \
-		or family.slots != ["weapon"] or family.allowed_base_ids != ["ashwood_bow"] or family.damage_type != "physical":
+		or family.slots != ["weapon"] or not ForgebladeProfile.valid_local_base_ids(family.allowed_base_ids) or family.damage_type != "physical":
 		return false
 	return (family.stat == "weapon_added_physical" and family.unit == "flat") \
 		or (family.stat == "weapon_physical_increased" and family.unit == "percent")
