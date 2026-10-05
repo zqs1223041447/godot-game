@@ -46,7 +46,15 @@
   "restored_log_producer": "not recoverable from persisted log metadata; no attribution claimed",
   "restored_log_exit_metadata": "not persisted; completion lines and absence of ERROR observed, not substituted with inferred exit0",
   "startup": "playable arena ready observed; original quit-after count and exit metadata not persisted",
-  "new_export_probe": "pending, separate artifact verification with captured exit result",
+  "new_export_probe": {
+    "checks": 16,
+    "failures": 0,
+    "exit_code": 0,
+    "pck_sha256": "3fe35502889fec4954f986413a346339175174a2a67cac21f46c19a04fd1b5fd",
+    "report": "packed-runtime-probe.json",
+    "startup_frames": 300,
+    "startup_exit_code": 0
+  },
   "historical_old_environment_v46_results_reused": false,
   "source_tests_rerun_after_log_recovery": false
 }

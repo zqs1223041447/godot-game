@@ -102,7 +102,7 @@ run_check() {
 # The retired 600-second equipment soak is intentionally not an available gate.
 if (( $# > 0 )); then
   for resource in "$@"; do
-    if [[ "$resource" != res://tests/*_test.gd || "$resource" == *equipment_soak* ]]; then
+    if [[ ( "$resource" != res://tests/*_test.gd && "$resource" != res://tests/test_combat_feedback_runtime.gd ) || "$resource" == *equipment_soak* ]]; then
       echo "Expected an explicit current test resource: $resource" >&2
       exit 2
     fi

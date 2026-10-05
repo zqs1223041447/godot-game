@@ -1,0 +1,1463 @@
+{
+	"bag": {
+		"columns": 12,
+		"pages": 2,
+		"rows": 10
+	},
+	"checks": 16,
+	"command_line": [
+		"--script",
+		"/workspace/scratch/a51485f153de/v046-final-release/v046_export_probe.gd"
+	],
+	"engine": "4.6.3-stable (official)",
+	"expected_checks": 16,
+	"failures": 0,
+	"font_sha256": "66a519ab293dc27f67f02a80678556b65ef74ca3d2c04b85cde10fad61cfb307",
+	"ok": true,
+	"platform": "Linux",
+	"probe": "v046_export_probe",
+	"probe_resource": "/workspace/scratch/a51485f153de/v046-final-release/v046_export_probe.gd",
+	"results": [
+		{
+			"evidence": {
+				"bag": {
+					"columns": 12,
+					"pages": 2,
+					"rows": 10
+				},
+				"save_dir": "godot-game-preview-v021",
+				"schema": 28,
+				"version": "0.46.0"
+			},
+			"label": "Packed version, save identity, schema, and bag dimensions",
+			"ok": true
+		},
+		{
+			"evidence": {
+				"actual_sha256": "66a519ab293dc27f67f02a80678556b65ef74ca3d2c04b85cde10fad61cfb307",
+				"expected_sha256": "66a519ab293dc27f67f02a80678556b65ef74ca3d2c04b85cde10fad61cfb307",
+				"missing": "",
+				"required": "燃暴击!-.<0123456789 "
+			},
+			"label": "Bundled raw font hash and feedback glyphs",
+			"ok": true
+		},
+		{
+			"evidence": {
+				"entry": {
+					"code": "",
+					"ok": true,
+					"reason": "",
+					"world": {
+						"boss_defeated": false,
+						"boss_phase": "sealed",
+						"camp_states": [],
+						"can_claim_normal_rewards": false,
+						"can_enter_normal_town": true,
+						"can_leave_normal_town": false,
+						"can_return": false,
+						"claim_reason": "请先返回正式城镇",
+						"completion_save_pending": false,
+						"description": "竞技练习",
+						"fee_paid": 0,
+						"map_id": "",
+						"map_name": "",
+						"map_tier": 0,
+						"mode": "normal",
+						"normal_root_kills": 0,
+						"normal_town": false,
+						"ordinary_kills": 0,
+						"ordinary_target": 0,
+						"pending_flasks": 0,
+						"pending_gems": 0,
+						"pending_map_reward": {
+
+						},
+						"retry_cost": 0,
+						"revision": 1,
+						"run_revision": 2,
+						"save_path": "user://build_save.json",
+						"supply_enabled": false,
+						"test_mode": false
+					}
+				},
+				"save_bytes": 12152,
+				"world": {
+					"boss_defeated": false,
+					"boss_phase": "sealed",
+					"camp_states": [],
+					"can_claim_normal_rewards": false,
+					"can_enter_normal_town": true,
+					"can_leave_normal_town": false,
+					"can_return": false,
+					"claim_reason": "请先返回正式城镇",
+					"completion_save_pending": false,
+					"description": "竞技练习",
+					"fee_paid": 0,
+					"map_id": "",
+					"map_name": "",
+					"map_tier": 0,
+					"mode": "normal",
+					"normal_root_kills": 0,
+					"normal_town": false,
+					"ordinary_kills": 0,
+					"ordinary_target": 0,
+					"pending_flasks": 0,
+					"pending_gems": 0,
+					"pending_map_reward": {
+
+					},
+					"retry_cost": 0,
+					"revision": 1,
+					"run_revision": 2,
+					"save_path": "user://build_save.json",
+					"supply_enabled": false,
+					"test_mode": false
+				}
+			},
+			"label": "Pristine live model saved and normal practice entered through actual transition",
+			"ok": true
+		},
+		{
+			"evidence": {
+				"critical": {
+					"cooldown": 8.0,
+					"critical": {
+						"primary": {
+							"chance": 1.0,
+							"multiplier": 2.0
+						}
+					},
+					"error": "",
+					"initial_count": 0,
+					"mana": 32.0,
+					"ok": true,
+					"packets": {
+						"direct": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 4.3,
+								"base_coefficient": 4.3,
+								"intrinsic": {
+									"fire": 43.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 43.0
+							},
+							"role": "direct",
+							"skill_id": "meteor",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						}
+					},
+					"recipe": {
+						"radius": 110.0
+					},
+					"skill_id": "meteor",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 10.0,
+						"compiled_packets": {
+							"direct": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 4.3,
+									"base_coefficient": 4.3,
+									"intrinsic": {
+										"fire": 43.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 43.0
+								},
+								"role": "direct",
+								"skill_id": "meteor",
+								"tags": [
+									"hit",
+									"spell",
+									"area"
+								]
+							}
+						},
+						"compiled_skill_id": "meteor",
+						"critical": {
+							"primary": {
+								"chance": 1.0,
+								"multiplier": 2.0
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 1.0,
+							"base_multiplier": 2.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"modifiers": [],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": []
+				},
+				"critical_ignite": {
+					"burn_profile": {
+						"duration": 3.0,
+						"enabled": true,
+						"hit_multiplier": 0.75,
+						"mana_multiplier": 1.2,
+						"rate_fraction": 0.3,
+						"roles": {
+							"direct": {
+								"dps": 9.675,
+								"fire_before_defense": 32.25,
+								"total": 29.025
+							}
+						},
+						"stacking": "strongest_refresh_equal"
+					},
+					"cooldown": 8.0,
+					"critical": {
+						"primary": {
+							"chance": 1.0,
+							"multiplier": 2.0
+						}
+					},
+					"error": "",
+					"initial_count": 0,
+					"mana": 38.4,
+					"ok": true,
+					"packets": {
+						"direct": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 4.3,
+								"base_coefficient": 4.3,
+								"intrinsic": {
+									"fire": 43.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 43.0
+							},
+							"role": "direct",
+							"skill_id": "meteor",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						}
+					},
+					"recipe": {
+						"radius": 110.0
+					},
+					"skill_id": "meteor",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 10.0,
+						"burn_policy": {
+							"duration": 3.0,
+							"hit_multiplier": 0.75,
+							"mana_multiplier": 1.2,
+							"rate_fraction": 0.3
+						},
+						"compiled_packets": {
+							"direct": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 4.3,
+									"base_coefficient": 4.3,
+									"intrinsic": {
+										"fire": 43.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 43.0
+								},
+								"role": "direct",
+								"skill_id": "meteor",
+								"tags": [
+									"hit",
+									"spell",
+									"area"
+								]
+							}
+						},
+						"compiled_skill_id": "meteor",
+						"critical": {
+							"primary": {
+								"chance": 1.0,
+								"multiplier": 2.0
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 1.0,
+							"base_multiplier": 2.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"modifiers": [
+							{
+								"all_tags": [
+									"hit",
+									"spell",
+									"area"
+								],
+								"damage_types": [],
+								"id": "support:ignite",
+								"mode": "more",
+								"skills": [
+									"meteor"
+								],
+								"value": -0.25
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": [
+						"ignite"
+					]
+				},
+				"lethal_basic": {
+					"critical": {
+						"primary": {
+							"chance": 0.0,
+							"multiplier": 1.5
+						},
+						"secondary": {
+							"chance": 0.0,
+							"multiplier": 1.5
+						}
+					},
+					"error": "",
+					"ok": true,
+					"packets": {
+						"projectile": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 1.0,
+								"base_coefficient": 1.0,
+								"intrinsic": {
+									"physical": 1000.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 1000.0
+							},
+							"role": "projectile",
+							"skill_id": "basic",
+							"tags": [
+								"hit",
+								"projectile",
+								"attack"
+							]
+						},
+						"secondary": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.0,
+								"base_coefficient": 0.9,
+								"intrinsic": {
+									"fire": 900.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 900.0
+							},
+							"role": "secondary",
+							"skill_id": "basic",
+							"tags": [
+								"hit",
+								"area",
+								"secondary",
+								"explosion"
+							]
+						}
+					},
+					"recipe": {
+						"speed": 640.0
+					},
+					"skill_id": "basic",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 1000.0,
+						"compiled_packets": {
+							"projectile": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 1.0,
+									"base_coefficient": 1.0,
+									"intrinsic": {
+										"physical": 1000.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"physical": 1000.0
+								},
+								"role": "projectile",
+								"skill_id": "basic",
+								"tags": [
+									"hit",
+									"projectile",
+									"attack"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 900.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 900.0
+								},
+								"role": "secondary",
+								"skill_id": "basic",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "basic",
+						"critical": {
+							"primary": {
+								"chance": 0.0,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.0,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.0,
+							"base_multiplier": 1.5
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"modifiers": [],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					}
+				},
+				"ordinary": {
+					"cooldown": 8.0,
+					"critical": {
+						"primary": {
+							"chance": 0.0,
+							"multiplier": 2.0
+						}
+					},
+					"error": "",
+					"initial_count": 0,
+					"mana": 32.0,
+					"ok": true,
+					"packets": {
+						"direct": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 4.3,
+								"base_coefficient": 4.3,
+								"intrinsic": {
+									"fire": 43.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 43.0
+							},
+							"role": "direct",
+							"skill_id": "meteor",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						}
+					},
+					"recipe": {
+						"radius": 110.0
+					},
+					"skill_id": "meteor",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 10.0,
+						"compiled_packets": {
+							"direct": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 4.3,
+									"base_coefficient": 4.3,
+									"intrinsic": {
+										"fire": 43.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 43.0
+								},
+								"role": "direct",
+								"skill_id": "meteor",
+								"tags": [
+									"hit",
+									"spell",
+									"area"
+								]
+							}
+						},
+						"compiled_skill_id": "meteor",
+						"critical": {
+							"primary": {
+								"chance": 0.0,
+								"multiplier": 2.0
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.0,
+							"base_multiplier": 2.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"modifiers": [],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": []
+				}
+			},
+			"label": "Real compiler accepts four documented fixtures",
+			"ok": true
+		},
+		{
+			"evidence": {
+				"settlements": [
+					{
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 4.3,
+							"base_coefficient": 4.3,
+							"intrinsic": {
+								"fire": 43.0
+							},
+							"stage": "hit_base"
+						},
+						"before_defense_components": {
+							"fire": 43.0
+						},
+						"cast_id": 0,
+						"components": {
+							"fire": 43.0
+						},
+						"details": [
+							{
+								"base": 43.0,
+								"before_defense": 43.0,
+								"final": 43.0,
+								"increased": 0.0,
+								"modifiers": [],
+								"more": 1.0,
+								"resistance": 0.0,
+								"type": "fire"
+							}
+						],
+						"effect_id": "",
+						"health_lost": 40.0,
+						"phase": "direct",
+						"prevented_components": {
+							"fire": 0.0
+						},
+						"projectile_id": 0,
+						"shield_spent": 3.0,
+						"skill_id": "meteor",
+						"tags": [
+							"hit",
+							"spell",
+							"area"
+						],
+						"target_id": 4,
+						"total": 43.0
+					},
+					{
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 4.3,
+							"base_coefficient": 4.3,
+							"intrinsic": {
+								"fire": 43.0
+							},
+							"stage": "hit_base"
+						},
+						"before_defense_components": {
+							"fire": 86.0
+						},
+						"cast_id": 0,
+						"components": {
+							"fire": 86.0
+						},
+						"critical": {
+							"chance": 1.0,
+							"critical": true,
+							"multiplier": 2.0
+						},
+						"details": [
+							{
+								"base": 43.0,
+								"before_defense": 86.0,
+								"final": 86.0,
+								"increased": 0.0,
+								"modifiers": [],
+								"more": 1.0,
+								"resistance": 0.0,
+								"type": "fire"
+							}
+						],
+						"effect_id": "",
+						"health_lost": 86.0,
+						"phase": "direct",
+						"prevented_components": {
+							"fire": 0.0
+						},
+						"projectile_id": 0,
+						"shield_spent": 0.0,
+						"skill_id": "meteor",
+						"tags": [
+							"hit",
+							"spell",
+							"area"
+						],
+						"target_id": 4,
+						"total": 86.0
+					},
+					{
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 4.3,
+							"base_coefficient": 4.3,
+							"intrinsic": {
+								"fire": 43.0
+							},
+							"stage": "hit_base"
+						},
+						"before_defense_components": {
+							"fire": 43.0
+						},
+						"cast_id": 0,
+						"components": {
+							"fire": 43.0
+						},
+						"details": [
+							{
+								"base": 43.0,
+								"before_defense": 43.0,
+								"final": 43.0,
+								"increased": 0.0,
+								"modifiers": [],
+								"more": 1.0,
+								"resistance": 0.0,
+								"type": "fire"
+							}
+						],
+						"effect_id": "",
+						"health_lost": 43.0,
+						"phase": "direct",
+						"prevented_components": {
+							"fire": 0.0
+						},
+						"projectile_id": 0,
+						"shield_spent": 0.0,
+						"skill_id": "meteor",
+						"tags": [
+							"hit",
+							"spell",
+							"area"
+						],
+						"target_id": 4,
+						"total": 43.0
+					}
+				],
+				"visible": []
+			},
+			"label": "Three actual settlements remain pending before the aggregation window",
+			"ok": true
+		},
+		{
+			"evidence": {
+				"rows": [
+					{
+						"age": 0.0,
+						"amount": 86.0,
+						"health_lost": 83.0,
+						"hit_count": 2,
+						"id": 1,
+						"kind": "hit",
+						"lifetime": 0.75,
+						"position": "(1062.0, 459.3846)",
+						"shield_spent": 3.0,
+						"target_id": 4,
+						"target_kind": "monster"
+					},
+					{
+						"age": 0.0,
+						"amount": 86.0,
+						"health_lost": 86.0,
+						"hit_count": 1,
+						"id": 2,
+						"kind": "critical",
+						"lifetime": 0.75,
+						"position": "(1062.0, 459.3846)",
+						"shield_spent": 0.0,
+						"target_id": 4,
+						"target_kind": "monster"
+					}
+				]
+			},
+			"label": "At 0.2 seconds ordinary and critical kinds have independent visible receipts",
+			"ok": true
+		},
+		{
+			"evidence": {
+				"row": {
+					"age": 0.0,
+					"amount": 86.0,
+					"health_lost": 83.0,
+					"hit_count": 2,
+					"id": 1,
+					"kind": "hit",
+					"lifetime": 0.75,
+					"position": "(1062.0, 459.3846)",
+					"shield_spent": 3.0,
+					"target_id": 4,
+					"target_kind": "monster"
+				},
+				"settlements": [
+					{
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 4.3,
+							"base_coefficient": 4.3,
+							"intrinsic": {
+								"fire": 43.0
+							},
+							"stage": "hit_base"
+						},
+						"before_defense_components": {
+							"fire": 43.0
+						},
+						"cast_id": 0,
+						"components": {
+							"fire": 43.0
+						},
+						"details": [
+							{
+								"base": 43.0,
+								"before_defense": 43.0,
+								"final": 43.0,
+								"increased": 0.0,
+								"modifiers": [],
+								"more": 1.0,
+								"resistance": 0.0,
+								"type": "fire"
+							}
+						],
+						"effect_id": "",
+						"health_lost": 40.0,
+						"phase": "direct",
+						"prevented_components": {
+							"fire": 0.0
+						},
+						"projectile_id": 0,
+						"shield_spent": 3.0,
+						"skill_id": "meteor",
+						"tags": [
+							"hit",
+							"spell",
+							"area"
+						],
+						"target_id": 4,
+						"total": 43.0
+					},
+					{
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 4.3,
+							"base_coefficient": 4.3,
+							"intrinsic": {
+								"fire": 43.0
+							},
+							"stage": "hit_base"
+						},
+						"before_defense_components": {
+							"fire": 43.0
+						},
+						"cast_id": 0,
+						"components": {
+							"fire": 43.0
+						},
+						"details": [
+							{
+								"base": 43.0,
+								"before_defense": 43.0,
+								"final": 43.0,
+								"increased": 0.0,
+								"modifiers": [],
+								"more": 1.0,
+								"resistance": 0.0,
+								"type": "fire"
+							}
+						],
+						"effect_id": "",
+						"health_lost": 43.0,
+						"phase": "direct",
+						"prevented_components": {
+							"fire": 0.0
+						},
+						"projectile_id": 0,
+						"shield_spent": 0.0,
+						"skill_id": "meteor",
+						"tags": [
+							"hit",
+							"spell",
+							"area"
+						],
+						"target_id": 4,
+						"total": 43.0
+					}
+				]
+			},
+			"label": "Ordinary receipt aggregates actual shield and life loss and two hits",
+			"ok": true
+		},
+		{
+			"evidence": {
+				"presentation": {
+					"color": "(0.8863, 0.6902, 0.3725, 1.0)",
+					"font_size": 19,
+					"offset": "(0.0, -37.0)",
+					"text": "86!"
+				},
+				"row": {
+					"age": 0.0,
+					"amount": 86.0,
+					"health_lost": 86.0,
+					"hit_count": 1,
+					"id": 2,
+					"kind": "critical",
+					"lifetime": 0.75,
+					"position": "(1062.0, 459.3846)",
+					"shield_spent": 0.0,
+					"target_id": 4,
+					"target_kind": "monster"
+				},
+				"settlement": {
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 4.3,
+						"base_coefficient": 4.3,
+						"intrinsic": {
+							"fire": 43.0
+						},
+						"stage": "hit_base"
+					},
+					"before_defense_components": {
+						"fire": 86.0
+					},
+					"cast_id": 0,
+					"components": {
+						"fire": 86.0
+					},
+					"critical": {
+						"chance": 1.0,
+						"critical": true,
+						"multiplier": 2.0
+					},
+					"details": [
+						{
+							"base": 43.0,
+							"before_defense": 86.0,
+							"final": 86.0,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "fire"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 86.0,
+					"phase": "direct",
+					"prevented_components": {
+						"fire": 0.0
+					},
+					"projectile_id": 0,
+					"shield_spent": 0.0,
+					"skill_id": "meteor",
+					"tags": [
+						"hit",
+						"spell",
+						"area"
+					],
+					"target_id": 4,
+					"total": 86.0
+				}
+			},
+			"label": "Guaranteed critical receipt contains only actual critical spend and its marker",
+			"ok": true
+		},
+		{
+			"evidence": {
+
+			},
+			"label": "Main feedback accessor returns detached rows and array",
+			"ok": true
+		},
+		{
+			"evidence": {
+
+			},
+			"label": "Visible receipts expire at the 0.75-second lifetime",
+			"ok": true
+		},
+		{
+			"evidence": {
+				"accepted": true,
+				"settlement": {
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 4.3,
+						"base_coefficient": 4.3,
+						"intrinsic": {
+							"fire": 43.0
+						},
+						"stage": "hit_base"
+					},
+					"before_defense_components": {
+						"fire": 64.5
+					},
+					"cast_id": 0,
+					"components": {
+						"fire": 64.5
+					},
+					"critical": {
+						"chance": 1.0,
+						"critical": true,
+						"multiplier": 2.0
+					},
+					"details": [
+						{
+							"base": 43.0,
+							"before_defense": 64.5,
+							"final": 64.5,
+							"increased": 0.0,
+							"modifiers": [
+								"support:ignite"
+							],
+							"more": 0.75,
+							"resistance": 0.0,
+							"type": "fire"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 64.5,
+					"phase": "direct",
+					"prevented_components": {
+						"fire": 0.0
+					},
+					"projectile_id": 0,
+					"shield_spent": 0.0,
+					"skill_id": "meteor",
+					"tags": [
+						"hit",
+						"spell",
+						"area"
+					],
+					"target_id": 4,
+					"total": 64.5
+				},
+				"statuses": [
+					{
+						"effective_dps": 19.35,
+						"immune": false,
+						"position": "(1062.0, 459.3846)",
+						"raw_dps": 19.35,
+						"remaining_seconds": 3.0,
+						"source_id": 0,
+						"target_id": 4,
+						"target_kind": "monster"
+					}
+				]
+			},
+			"label": "Actual compiled critical-ignite cast attaches real burning",
+			"ok": true
+		},
+		{
+			"evidence": {
+				"actual_resource_loss": 9.67499999999927,
+				"burn_text": "燃 9.7",
+				"record": {
+					"effective_raw_amount": 9.675,
+					"from_time": 0.0,
+					"provenance": {
+						"cast_id": 0,
+						"phase": "direct",
+						"projectile_id": 0,
+						"skill_id": "meteor"
+					},
+					"raw_amount": 9.675,
+					"raw_dps": 19.35,
+					"settlement": {
+						"actor": "monster",
+						"components": {
+							"fire": 9.675
+						},
+						"damage_total": 9.675,
+						"details": [
+							{
+								"before_defense": 9.675,
+								"final": 9.675,
+								"resistance": 0.0,
+								"type": "fire"
+							}
+						],
+						"health_lost": 9.675,
+						"mitigated_components": {
+							"fire": 0.0
+						},
+						"ok": true,
+						"overkill": 0.0,
+						"raw_components": {
+							"fire": 9.675
+						},
+						"reason": "",
+						"remaining_health": 9756.825,
+						"remaining_shield": 0.0,
+						"shield_spent": 0.0,
+						"stage": "burning"
+					},
+					"source_id": 0,
+					"target_id": 4,
+					"target_kind": "monster",
+					"to_time": 0.5
+				},
+				"rows": [
+					{
+						"age": 0.2,
+						"amount": 64.5,
+						"health_lost": 64.5,
+						"hit_count": 1,
+						"id": 3,
+						"kind": "critical",
+						"lifetime": 0.75,
+						"position": "(1062.0, 459.3846)",
+						"shield_spent": 0.0,
+						"target_id": 4,
+						"target_kind": "monster"
+					},
+					{
+						"age": 0.0,
+						"amount": 9.675,
+						"health_lost": 9.675,
+						"hit_count": 0,
+						"id": 4,
+						"kind": "burn",
+						"lifetime": 0.75,
+						"position": "(1062.0, 459.3846)",
+						"shield_spent": 0.0,
+						"target_id": 4,
+						"target_kind": "monster"
+					}
+				]
+			},
+			"label": "Real burn settlement is separate actual spend with zero hit count and no critical marker",
+			"ok": true
+		},
+		{
+			"evidence": {
+				"critical_after": {
+					"draws": 0,
+					"events": 2,
+					"state": -3330801752225015557
+				},
+				"critical_before": {
+					"draws": 0,
+					"events": 2,
+					"state": -3330801752225015557
+				},
+				"gameplay_after": "-4994663759543188644",
+				"gameplay_before": "-4994663759543188644"
+			},
+			"label": "Burn and feedback-only advance consume neither gameplay nor critical RNG",
+			"ok": true
+		},
+		{
+			"evidence": {
+				"remaining_health": -995.0,
+				"row": {
+					"age": 0.0,
+					"amount": 5.0,
+					"health_lost": 3.0,
+					"hit_count": 1,
+					"id": 5,
+					"kind": "hit",
+					"lifetime": 0.75,
+					"position": "(862.0001, 459.3846)",
+					"shield_spent": 2.0,
+					"target_id": 5,
+					"target_kind": "monster"
+				},
+				"settlement": {
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 1.0,
+						"base_coefficient": 1.0,
+						"intrinsic": {
+							"physical": 1000.0
+						},
+						"stage": "hit_base"
+					},
+					"before_defense_components": {
+						"physical": 1000.0
+					},
+					"cast_id": 0,
+					"components": {
+						"physical": 1000.0
+					},
+					"details": [
+						{
+							"base": 1000.0,
+							"before_defense": 1000.0,
+							"final": 1000.0,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "physical"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 3.0,
+					"phase": "direct",
+					"prevented_components": {
+						"physical": 0.0
+					},
+					"projectile_id": 0,
+					"shield_spent": 2.0,
+					"skill_id": "basic",
+					"tags": [
+						"hit",
+						"projectile",
+						"attack"
+					],
+					"target_id": 5,
+					"total": 1000.0
+				}
+			},
+			"label": "Lethal 1000 damage flushes immediately as 2 shield plus 3 life, excluding overkill",
+			"ok": true
+		},
+		{
+			"evidence": {
+				"after": [],
+				"pending_settlement": {
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 4.3,
+						"base_coefficient": 4.3,
+						"intrinsic": {
+							"fire": 43.0
+						},
+						"stage": "hit_base"
+					},
+					"before_defense_components": {
+						"fire": 43.0
+					},
+					"cast_id": 0,
+					"components": {
+						"fire": 43.0
+					},
+					"details": [
+						{
+							"base": 43.0,
+							"before_defense": 43.0,
+							"final": 43.0,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "fire"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 43.0,
+					"phase": "direct",
+					"prevented_components": {
+						"fire": 0.0
+					},
+					"projectile_id": 0,
+					"shield_spent": 0.0,
+					"skill_id": "meteor",
+					"tags": [
+						"hit",
+						"spell",
+						"area"
+					],
+					"target_id": 4,
+					"total": 43.0
+				},
+				"visible_before_restart": 3
+			},
+			"label": "Actual restart clears both visible and pending feedback",
+			"ok": true
+		},
+		{
+			"evidence": {
+				"canonical_same": true,
+				"disk_bytes_same": true,
+				"disk_sha256_after": "df756865390a993a2affbc74c6247ae9085483bc7f55c90f373d35ed9c93837f",
+				"disk_sha256_before": "df756865390a993a2affbc74c6247ae9085483bc7f55c90f373d35ed9c93837f",
+				"snapshot_bytes_same": true,
+				"successful_saves_after": 2,
+				"successful_saves_before": 2
+			},
+			"label": "Canonical model, exact save bytes, and save count remain unchanged by feedback scenarios",
+			"ok": true
+		}
+	],
+	"save_dir": "godot-game-preview-v021",
+	"schema": 28,
+	"scope": "Same-PCK headless runtime; not Windows-native or visual review",
+	"status": "complete",
+	"user_dir": "/tmp/godot-m1-v046-packed/data/godot-game-preview-v021",
+	"version": "0.46.0"
+}

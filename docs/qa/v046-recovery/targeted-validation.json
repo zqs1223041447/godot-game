@@ -1,0 +1,56 @@
+{
+  "baseline_commit": "1b4f9343819d1e0e84336deb94c0728ef41858b8",
+  "implementation_commit": "65d9885e01c21a21d8a97a9830c4ad25b2c22cfb",
+  "source_checks": 743,
+  "reports": [
+    {
+      "path": "docs/qa/v046-recovery/pure-initial.log.txt",
+      "checks": 680,
+      "failures": 0,
+      "exit_code": 0
+    },
+    {
+      "path": "docs/qa/v046-recovery/main-restored.log.txt",
+      "checks": 51,
+      "failures": 0,
+      "exit_code": null,
+      "limitation": "Original process metadata not persisted; complete marker and noERROR observed"
+    },
+    {
+      "path": "docs/qa/v046-recovery/display-restored.log.txt",
+      "checks": 12,
+      "failures": 0,
+      "exit_code": null,
+      "limitation": "Original process metadata not persisted; complete marker and noERROR observed"
+    }
+  ],
+  "packed_checks": 16,
+  "packed_exit_code": 0,
+  "packed_startup_frames": 300,
+  "packed_startup_exit_code": 0,
+  "logs": {
+    "docs/qa/v046-recovery/display-restored.log.txt": "68e6d9408ad6ce392d5347e1b74c7de5df4c32a06bee217d89f1e237bd3f9722",
+    "docs/qa/v046-recovery/import-restored.log.txt": "17718827da76928b74aed91d5243fbda2be7c25a9c5601407cea6ee291fbc2d7",
+    "docs/qa/v046-recovery/packed-probe.log.txt": "6536f5d7876aaf318f0d93e2ad697b787b691986edc6de6535445b9150871a43",
+    "docs/qa/v046-recovery/main-restored.log.txt": "21ab9c9a9c0abb3f5a45334db4ef9ede3b21e9cd1602075cb4a4b41a8881f34b",
+    "docs/qa/v046-recovery/font-coverage.log.txt": "18bfcda1f0b36d009b72081304d9f9f3d85321b006e438c54511711fe18a0f8a",
+    "docs/qa/v046-recovery/packed-startup-300.log.txt": "ddfc716bdf50cbf08143c1ac4501127b2e82775cf1c8288bc005d4fce4a18f50",
+    "docs/qa/v046-recovery/startup-restored.log.txt": "ddfc716bdf50cbf08143c1ac4501127b2e82775cf1c8288bc005d4fce4a18f50",
+    "docs/qa/v046-recovery/pure-initial.log.txt": "86c001616c26d3cf48e1f5f9a6131a495b840e1e6a0ae1076bf37e7f4248085a",
+    "docs/qa/v046-recovery/reference-validation.log.txt": "975dc39ac967f381600f43d84889d1f023d811c25246993888a6c8b53569c581",
+    "docs/qa/v046-recovery/reference-export.log.txt": "51e3b0bc619efba5c710e1863eedea0402e6700d8c973b9ecb758418906e7297",
+    "docs/qa/v046-recovery/reference-build.log.txt": "d1d04452e30c8c7172eede7079a7d5a507921dbf38ebb2a3b3e7cf5618744fec"
+  },
+  "production_inputs": 442,
+  "font_characters": 1062,
+  "reference": {
+    "anchors": 3794,
+    "links": 17617,
+    "images": 65
+  },
+  "raw_assets_unchanged": true,
+  "windows_native_tested": false,
+  "standalone_visual_gate": false,
+  "historical_old_v46_results_reused": false,
+  "no_600_second_gate": true
+}
