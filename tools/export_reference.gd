@@ -47,6 +47,8 @@ const MonsterRuntime=preload("res://scripts/monsters/monster_runtime.gd")
 const AttackRules = preload("res://scripts/combat/attack_hit_rules.gd")
 const BurnRuntime = preload("res://scripts/combat/burn_runtime.gd")
 const EmberMigration = preload("res://scripts/save/ember_gem_migration.gd")
+const ShockRuntimeData = preload("res://scripts/combat/shock_runtime.gd")
+const ShockMigration = preload("res://scripts/save/shock_gem_migration.gd")
 
 func _initialize() -> void:
 	var target: String = "res://docs/reference/catalog.json"
@@ -98,6 +100,7 @@ static func collect() -> Dictionary:
 	result["sunwell_terrace"] = sunwell_examples()
 	result["burning"] = burning_examples()
 	result["ember_proliferation"] = ember_proliferation_examples()
+	result["shock"] = shock_examples()
 	result["normal_gem_trading"]={"offers":Canonical.GemTrade.offers(),"recycle_credit":Canonical.GemTrade.RECYCLE_CREDIT,"currency":Canonical.GemTrade.MATERIAL_ID,"location":"normal_town","level":1,"quality":0,"recycle_location":"bag","schema":Canonical.Rules.VERSION,"test_supply_separate":true,"pricing":"初版可调整预算；每次无词缀地图净得4碎片"}
 	result["source_tree"] = source_tree_reference()
 	result["source_spatial"] = source_spatial_examples()
@@ -662,6 +665,8 @@ static func elemental_telegraph_example(template_id: String) -> Dictionary:
 	metadata["policy"] = policy
 	metadata["natural_selection"] = rule.duplicate(true)
 	metadata["description"] = "仅替换原抽签的同物种名额，保留白蓝金与共享词缀、基础属性和奖励。锁定地面，完整预警后一次元素攻击；走开或攻击闪避可避开，不施加冻结或感电。"
+	if policy.has("shock_policy"):
+		metadata["description"] = "仅替换原抽签的同物种名额，保留白蓝金与共享词缀、基础属性和奖励。锁定地面，完整预警后一次闪电攻击；走开或攻击闪避可避开。实际正值闪电损伤结算后施加1秒感电，后续命中受伤提高15%；本次施加不自增伤，持续伤害不受影响。"
 	metadata["protection_label"] = "实际源树路径 · %d%%对应抗性" % int(round(float(guarded.get_stats()[element+"_resistance"])*100.0))
 	metadata["example"] = {"source":source,"source_wave":source.wave,"start":admission.attack,"halfway":halfway,
 		"event":event,"recovery":runtime.state_for(1),"cases":cases,"player_radius":Arena.PLAYER_RADIUS,
@@ -1117,6 +1122,75 @@ static func burning_examples()->Dictionary:
 		"enemy_budget":{"contact_damage":20.0,"physical_hit":14.0,"fire_hit":7.0,"fire_burn_dps":7.0/3.0,"duration":3.0,"total_before_defense":28.0},
 		"immunity":"尊重原伤害免疫；期间时长流逝、不补扣，持续伤害本身不授予受击保护",
 		"source_words":"本游戏初版，不解锁尚未实现的PoE点燃或持续伤害源节点"}
+
+
+static func shock_examples()->Dictionary:
+	var examples:Dictionary={}
+	var incompatible:Dictionary={}
+	for id:String in Data.SKILLS:
+		var reason:String=Supports.compatibility_reason(id,["shock"])
+		if not reason.is_empty():
+			incompatible[id]=reason
+			continue
+		var snapshot:Dictionary=Recipes.snapshot({"damage":100.0},[])
+		var before:Dictionary=Compiler.compile_group(id,snapshot,[])
+		var after:Dictionary=Compiler.compile_group(id,snapshot,["shock"])
+		assert(before.ok and after.ok and after.has("shock_profile"))
+		examples[id]={"profile":after.shock_profile,"before_hit":_direct_total(before),
+			"supported_hit":_direct_total(after),"before_mana":before.mana,"mana":after.mana,
+			"details":Preview.details(after),"unsupported_cast_has_policy":before.snapshot.has("shock_policy")}
+	# Read existing status, settle the applying hit, and only then attach it.
+	# A deliberately simple 100-lightning input makes the ordering inspectable.
+	var runtime:=ShockRuntimeData.new()
+	var started_at:float=10.0
+	var first_status:Dictionary=runtime.status_at("monster",1,started_at)
+	var first_hit:Dictionary=Defense.incoming_hit({"lightning":100.0},{},0.0,1000.0,"monster",first_status.hit_damage_taken_increased)
+	var admission:Dictionary=Compiler.Shock.from_lightning_hit(first_hit.health_lost,Compiler.Shock.PLAYER_POLICY)
+	assert(first_hit.ok and admission.ok)
+	var applied:Dictionary=runtime.apply("monster",1,0,started_at,Compiler.Shock.PLAYER_POLICY,{"skill_id":"bolt"})
+	assert(applied.ok and applied.applied)
+	var later_at:float=10.5
+	var later_status:Dictionary=runtime.status_at("monster",1,later_at)
+	var later_hit:Dictionary=Defense.incoming_hit({"lightning":100.0},{},0.0,1000.0,"monster",later_status.hit_damage_taken_increased)
+	var refreshed:Dictionary=runtime.apply("monster",1,0,later_at,Compiler.Shock.PLAYER_POLICY,{"skill_id":"nova"})
+	assert(refreshed.ok and refreshed.refreshed)
+	var refresh_status:Dictionary=runtime.status_at("monster",1,later_at)
+	var expired:Dictionary=runtime.status_at("monster",1,later_at+float(Compiler.Shock.PLAYER_POLICY.duration))
+	var enemy:Dictionary=Monsters.make_enemy(1,"storm_skitter",int(Monsters.ELEMENTAL_ENCOUNTERS.storm_skitter.minimum_wave),Vector2.ZERO,"demo")
+	var enemy_attack:Dictionary=Monsters.telegraph_policy(enemy)
+	var old:Dictionary=Canonical.new().snapshot()
+	old.version=Canonical.Rules.V30_VERSION
+	var migrated:Dictionary=ShockMigration.migrate_v30(old)
+	assert(not migrated.is_empty())
+	var changed_fields:Array=[]
+	for field:String in old:
+		if old[field]!=migrated[field]:changed_fields.append(field)
+	assert(changed_fields==["version"])
+	var quote:Dictionary=Canonical.GemTrade.quote("buy","support:shock")
+	var test_offer:Dictionary=Town.offer("support:shock")
+	assert(quote.ok and test_offer.available)
+	var reward_ordinals:Array=[]
+	for ordinal:int in range(1,Canonical.Journey.GEM_DEFINITIONS.size()+2):
+		reward_ordinals.append({"ordinal":ordinal,"definition_id":Canonical.Journey.gem_definition(ordinal)})
+	return {"save_version":Supports.Shock.SAVE_VERSION,"support_id":"shock",
+		"icon_file":"originals/shock.png","icon_source":GemCatalogData.definition("support:shock").icon,
+		"player_policy":Compiler.Shock.PLAYER_POLICY,"enemy_policy":Compiler.Shock.ENEMY_POLICY,
+		"examples":examples,"incompatible_skills":incompatible,"enemy_template":"storm_skitter","enemy_attack":enemy_attack,
+		"settlement_example":{"input_components":{"lightning":100.0},"started_at":started_at,"later_at":later_at,
+			"first_status":first_status,"first_hit":first_hit,"admission":admission,"applied":applied,
+			"later_status":later_status,"later_hit":later_hit,"refreshed":refreshed,"refresh_status":refresh_status,
+			"expired":expired,"burn_while_shocked":Defense.incoming_burn(100.0,0.0,0.0,1000.0,"monster")},
+		"merchant_quote":quote,"test_offer":test_offer,
+		"migration_example":{"from_version":old.version,"to_version":migrated.version,"changed_fields":changed_fields,
+			"items_before":old.items.size(),"items_after":migrated.items.size(),"granted_items":0},
+		"normal_reward_pool_includes_support":Canonical.Journey.GEM_DEFINITIONS.has("support:shock"),"reward_ordinals":reward_ordinals,
+		"scope":"仅显式装配感电辅助的奥术飞弹、奥能新星与连锁闪电主命中可施加；敌方仅雷纹锁点预警附加，接触攻击与其他闪电伤害不会自动感电，独立装备爆炸不继承",
+		"settlement":"先读取已有感电并结算命中，再按实际正值闪电损伤对存活目标施加；施加这条感电的命中不享受自己的增伤，后续命中才受益",
+		"damage_scope":"所有后续命中类型共用受击增伤；持续伤害不受影响，感电本身不造成伤害",
+		"stacking":"单目标一条，同强刷新完整时长，不叠加；截止时间本身已失效",
+		"lifecycle":"暂停冻结，目标死亡移除，返城与重开清空；状态不存盘，不新增随机抽样、暴击、偷取或奖励路径",
+		"migration":"严格验证旧schema30后迁移schema31，仅版本字段变化，不赠物、不退款、不改既有UID或旧奖励序号",
+		"source_words":"本游戏固定原型，仅显式支持；不解锁尚未实现的源树感电或异常词条"}
 
 
 static func ember_proliferation_examples()->Dictionary:

@@ -13,7 +13,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 REF = ROOT / 'docs/reference'
 CATEGORIES = [('skills','主动技能'),('supports','辅助技能'),('equipment','随机装备'),('affixes','装备词缀'),('fixed_items','固定装备'),('jewels','珠宝'),('jewel_affixes','珠宝词缀'),('source_passives','源天赋与精通'),('passives','旧181节点研究'),('mechanisms','共用机制'),('weapon_stages','武器局部阶段'),('defenses','受击与防御'),('flasks','生命与魔力药剂'),('currencies','堆叠材料'),('crafting','制作与回收'),('monsters','怪物图鉴'),('monster_attacks','怪物攻击'),('encounters','本轮挑战'),('town_services','城镇服务'),('maps','有限地图'),('map_specials','地图特殊词缀'),('rules','规则与边界')]
-RULE_TITLES = {'damage':'伤害如何结算','supports':'辅助装配','projectiles':'分裂、返回与飞行结束','equipment':'装备与阶级','character_rates':'恢复、移动与普通攻击速度','basic_attack':'普通攻击与武器贡献','allocation':'天赋与珠宝规则','shared':'玩家和怪物共享机制','boundaries':'尚未实现的源游戏语义','sources':'数据来源与实现边界','ember_proliferation':'余烬扩散与剩余时长'}
+RULE_TITLES = {'damage':'伤害如何结算','supports':'辅助装配','projectiles':'分裂、返回与飞行结束','equipment':'装备与阶级','character_rates':'恢复、移动与普通攻击速度','basic_attack':'普通攻击与武器贡献','allocation':'天赋与珠宝规则','shared':'玩家和怪物共享机制','boundaries':'尚未实现的源游戏语义','sources':'数据来源与实现边界','ember_proliferation':'余烬扩散与剩余时长','shock':'感电与后续命中'}
 CAPABILITIES = {'initial_projectiles':'初始投射物数量','projectile_hit':'投射物命中','finite_projectile_pierce':'有限穿透','area_hit':'直接范围命中','chain_hit':'连锁命中'}
 SLOTS = {'weapon':'武器','armor':'护甲','charm':'项链','body_armour':'护甲','amulet':'项链','ring':'戒指','ring_1':'戒指一','ring_2':'戒指二','boots':'鞋','belt':'腰带','gloves':'手套','helmet':'头盔'}
 TYPES = {'small':'小天赋','notable':'显著天赋','socket':'珠宝孔','start':'起点','keystone':'基石','mastery':'精通','prefix':'前缀','suffix':'后缀','ordinary':'普通珠宝','special':'特殊珠宝','legacy':'原始词池','expansion':'扩展词池','runewood':'符木点伤池','defense':'火抗防具池','local_weapon':'白蜡长弓池','nine_slot':'九槽装备池','build_legacy_v27':'构筑原底材池','build_nine_slot_v27':'构筑九槽池'}
@@ -184,6 +184,8 @@ def build(data, art):
             image=f'<img class="emblem" src="{esc(data["burning"]["icon_file"])}" width="64" height="64" alt="" loading="lazy">'
         elif cat=='supports' and key=='ember_proliferation':
             image=f'<img class="emblem" src="{esc(data["ember_proliferation"]["icon_file"])}" width="64" height="64" alt="" loading="lazy">'
+        elif cat=='supports' and key=='shock':
+            image=f'<img class="emblem" src="{esc(data["shock"]["icon_file"])}" width="64" height="64" alt="" loading="lazy">'
         badges = {'implemented':'已实现','research':'研究资料','planned':'尚未实现'}
         inner = f'<div class="entry-heading">{image}<div><span class="status {status}">{badges[status]}</span><h2><a href="#{aid}">{esc(name)}</a></h2><div class="entry-id">{esc(key)}</div></div></div>'
         if meta: inner += f'<div class="metadata">{meta}</div>'
@@ -232,7 +234,10 @@ def build(data, art):
         if key=='ember_proliferation':
             body+=facts([('互斥辅助',links('supports',data['ember_proliferation']['mutually_exclusive_with'])),('最低保存版本',number(data['ember_proliferation']['save_version']))])
             related+=' · '+link('rules','ember_proliferation')+' · '+link('town_services','skill_merchant','宝石商人')
-        cards.append(add('supports',key,s['name'],s['description'],body,{'area':'范围辅助','projectile':'投射物辅助','resource':'资源辅助','element':'分量专注','delivery':'投射物辅助','control':'减速控制','chain':'连锁辅助','burning':'燃烧辅助'}[data['support_program_examples'][key]['family']],related=related))
+        if key=='shock':
+            body+=facts([('最低保存版本',number(data['shock']['save_version']))])
+            related+=' · '+link('rules','shock')+' · '+link('town_services','skill_merchant','宝石商人')
+        cards.append(add('supports',key,s['name'],s['description'],body,{'area':'范围辅助','projectile':'投射物辅助','resource':'资源辅助','element':'分量专注','delivery':'投射物辅助','control':'减速控制','chain':'连锁辅助','burning':'燃烧辅助','shock':'感电辅助'}[data['support_program_examples'][key]['family']],related=related))
     for key,e in data['equipment'].items():
         body = facts([('格数',' × '.join(map(number,e['size']))),('固有属性',lines(e['stats_text']))])+details('可出现的词缀',links('affixes',e['eligible_affixes']))
         related=link('rules','equipment')
@@ -435,7 +440,8 @@ def build(data, art):
                     body+=details('同源100点各类型示例：'+data['monsters'][template]['name'],facts([('怪物',link('monsters',template)),('有效抗性',' / '.join(DAMAGE_NAMES[t]+percent(example['effective_resistances'][t]) for t in special['damage_types'])),('施加前单次命中',component_text(example['before_components'])),('施加后单次命中',component_text(example['after_components']))]))
                 body+='<p>这提供物理/混沌与元素构筑之间的取舍；混沌或物理技能若装备附加了元素伤害，其元素分量仍按对应抗性结算。数值是本游戏测试预算，无额外掉落倍率，不代表PoE地图经济。</p>'
             else:
-                body=facts([('最低波次',number(special['minimum_wave'])),('匹配原物种',link('monsters',special['species'])),('替换为',link('monsters',special['template'])),('保留','原抽签稀有度、机制、血伤速度与XP；灰烬名额优先'),('真实消费者','已有冰/电预警攻击和共享防御链；不增加冻结或感电'),('分层','独立于生命/速度普通词缀，最多1个特殊词缀')])
+                consumer='已有元素预警攻击和共享防御链；雷纹锁点震击按显式规则施加感电' if data['monsters'][special['template']]['telegraph_policy'].get('shock_policy') else '已有冰冷预警攻击和共享防御链；不增加冻结或感电'
+                body=facts([('最低波次',number(special['minimum_wave'])),('匹配原物种',link('monsters',special['species'])),('替换为',link('monsters',special['template'])),('保留','原抽签稀有度、机制、血伤速度与XP；灰烬名额优先'),('真实消费者',consumer),('分层','独立于生命/速度普通词缀，最多1个特殊词缀')])
             cards.append(add('map_specials',special['id'],special['name'],special['description'],body,'已实装特殊词缀',related=links('maps',[m['id'] for m in town['options']['maps'] if m['wave']>=special['minimum_wave']])))
     for key,a in data['monster_attacks'].items():
         p=a['profile']; policy=a['policy']
@@ -541,6 +547,46 @@ def build(data, art):
         body+='<p>'+esc(ember['scope'])+'。</p><p>'+esc(ember['transfer_rule'])+'。</p><p>'+esc(ember['instant_kill_rule'])+'。</p><p>'+esc(ember['stacking'])+'。</p><p>'+esc(ember['lifecycle'])+'。</p><p>'+esc(ember['migration'])+f'。同源迁移示例物品数量 {migration["items_before"]} → {migration["items_after"]}；仅变化字段 {esc("、".join(migration["changed_fields"]))}。正式击杀宝石奖励词表保持冻结，未加入此新辅助。</p>'
         body+='<p>'+link('supports','ember_proliferation')+' · '+link('supports','ignite')+' · '+link('rules','burning','原点燃与燃烧规则')+'</p>'
         rule_defs.append(('ember_proliferation','余烬扩散与剩余时长','以更低燃烧比例和更高魔力消耗换取死亡传播；接收者保留原每秒伤害与截止时间。',body,'implemented'))
+    if 'shock' in data:
+        shock=data['shock'];policy=shock['player_policy'];enemy=shock['enemy_policy'];attack=shock['enemy_attack']['profile']
+        def shock_value(key, value, text=None):
+            return f'<strong data-shock-value="{esc(key)}" data-value="{esc(value)}">{esc(number(value) if text is None else text)}</strong>'
+        body=facts([
+            ('主命中倍率',shock_value('hit_multiplier',policy['hit_multiplier'])),
+            ('魔力倍率',shock_value('mana_multiplier',policy['mana_multiplier'])),
+            ('玩家施加秒数',shock_value('duration',policy['duration'])),
+            ('后续命中受伤提高',shock_value('hit_damage_taken_increased',policy['hit_damage_taken_increased'],percent(policy['hit_damage_taken_increased']))),
+            ('可装配技能',links('skills',shock['examples']))])
+        rows=[]
+        for skill,example in shock['examples'].items():
+            label=link('skills',skill)+(' · 首跳＋末跳预览合计' if skill=='chain' else ' · 每枚投射物' if skill=='bolt' else ' · 每次范围命中')
+            cells=[label]+[shock_value(skill+'-'+field,example[field]) for field in ['before_hit','supported_hit','before_mana','mana']]
+            rows.append('<tr>'+''.join('<td>'+cell+'</td>' for cell in cells)+'</tr>')
+        body+='<div class="table-scroll"><table><caption>伤害标量100、无其他辅助；生产编译器的非暴击预览条目与魔力。连锁列为首跳与末跳两条预览相加，不是单次命中或整次施放总伤害；未计目标防御和既有感电</caption><thead><tr><th>主动技能与统计范围</th><th>原预览值</th><th>辅助后预览值</th><th>原魔力</th><th>辅助后魔力</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
+        sample=shock['settlement_example']
+        body+=details('先命中、后施加 · 同源结算示例',facts([
+            ('施加感电的命中',shock_value('first_hit',sample['first_hit']['health_lost'])),
+            ('后续同输入命中',shock_value('later_hit',sample['later_hit']['health_lost'])),
+            ('感电期间相同数值燃烧',shock_value('burn_while_shocked',sample['burn_while_shocked']['health_lost'])),
+            ('刷新时刻',shock_value('refreshed_at',sample['refresh_status']['status']['refreshed_at'])),
+            ('刷新后截止时刻',shock_value('expires_at',sample['refresh_status']['status']['expires_at']))])+'<p>示例为100闪电命中或100火焰持续损伤，无抗性与护盾、1000生命；先结算再施加。10秒施加，10.5秒再次施加后刷新至12.5秒；正好到期时已不生效。此例不代表技能实际固定伤害或DPS。</p>')
+        body+=details('敌方感电 · '+data['monsters'][shock['enemy_template']]['name'],facts([
+            ('施加来源',link('monsters',shock['enemy_template'])+' · '+link('monster_attacks','locked_circle_lightning')),
+            ('敌方施加秒数',shock_value('enemy_duration',enemy['duration'])),
+            ('后续命中受伤提高',shock_value('enemy_increased',enemy['hit_damage_taken_increased'],percent(enemy['hit_damage_taken_increased']))),
+            ('前摇预警秒数',shock_value('windup_seconds',attack['windup_seconds'])),
+            ('预警半径',shock_value('radius',attack['radius'])),
+            ('基准恢复秒数',shock_value('recovery_seconds',attack['recovery_seconds'])),
+            ('即时命中倍率',shock_value('enemy_hit_multiplier',attack['damage_multiplier']))])+'<p>雷纹锁点震击实际造成正值闪电损伤后才施加1秒感电；即时倍率由原1.6调整为1.4，0.7秒预警、65半径与基准1.6秒恢复保持。可移出锁定范围躲避，攻速只缩放恢复时间。</p>')
+        migration=shock['migration_example'];quote=shock['merchant_quote']
+        body+=facts([
+            ('正式获取',link('town_services','skill_merchant','宝石商人')+' · '+shock_value('merchant_cost',quote['cost']['calibration_shard'])+' 校准碎片'),
+            ('测试供应',esc(shock['test_offer']['price_label'])+' · 独立测试档'),
+            ('保存版本',shock_value('save_version',shock['save_version'])),
+            ('迁移赠物',shock_value('granted_items',migration['granted_items']))])
+        body+=''.join('<p>'+esc(shock[key])+'。</p>' for key in ['scope','settlement','damage_scope','stacking','lifecycle','migration','source_words'])
+        body+=f'<p>同源迁移示例物品数量 {migration["items_before"]} → {migration["items_after"]}；仅变化字段 {esc("、".join(migration["changed_fields"]))}。正式击杀宝石奖励词表与旧奖励序号保持冻结，未加入此新辅助。</p><p>'+link('supports','shock')+' · '+link('rules','burning','持续伤害规则')+'</p>'
+        rule_defs.append(('shock','感电与后续命中','以主命中和魔力代价换取短时后续命中增伤；玩家与怪物共用受击边界。',body,'implemented'))
     if 'source_spatial' in data:
         spatial=data['source_spatial']
         rows=[]

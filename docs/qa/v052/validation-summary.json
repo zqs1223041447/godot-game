@@ -1,0 +1,148 @@
+{
+  "source_base": "d6684d27517e4661abd832d586fcdbb72185929e",
+  "functional_counts": {
+    "pure_rules_runtime": 910,
+    "compiler_catalog_model": 556,
+    "schema_migration": 313,
+    "actual_main": 161,
+    "settlement_boundaries": 47,
+    "root_profile_presentation": 19,
+    "root_status_render_commands": 18
+  },
+  "functional_total": 2024,
+  "all_final_subsets_exit_zero": true,
+  "all_final_subsets_no_engine_errors": true,
+  "old_behavior": {
+    "ticks": 180,
+    "kills": 12,
+    "casts": 3,
+    "observation_bytes": 17765572,
+    "typed_bytes_equal": true,
+    "save_bytes": 12716,
+    "save_bytes_equal": true,
+    "defense_cases": 20,
+    "comparison": "docs/qa/v052-shock-main/legacy-comparison-01.json"
+  },
+  "logs": {
+    "docs/qa/v052-root-ui/presentation.log": {
+      "bytes": 115,
+      "sha256": "7b30653f720f3e459eda36fbb212dda3688961c55f55a5ff72b2eee08011ee91"
+    },
+    "docs/qa/v052-root-ui/status-renderer.log": {
+      "bytes": 118,
+      "sha256": "4f754342567c7ac668c0e661c5606a33198c0d468f10444778639189ff8b2e2e"
+    },
+    "docs/qa/v052-shock-integration/capture-released-v51.log": {
+      "bytes": 1574,
+      "sha256": "f9ee460db1e9e501de00ad2cad9355aae33c5cae5ba07c169df6b75df8517402"
+    },
+    "docs/qa/v052-shock-integration/shock_support_compiler.log": {
+      "bytes": 158,
+      "sha256": "2756eec70afff780c01bd597a9e50070d183702a5d97538b726c952cb0b9e538"
+    },
+    "docs/qa/v052-shock-integration/shock_support_compiler-attempt2.log": {
+      "bytes": 9578,
+      "sha256": "8d5b9071bac5ffdaf74fa17205a84982cb57549a2ba96e2aca2ed14208585ca7"
+    },
+    "docs/qa/v052-shock-integration/shock_gem_migration.log": {
+      "bytes": 117,
+      "sha256": "e3b614a51e98c46a7bd9003a2823998af321ccc174cbb4e8c1437daf2b94e6a6"
+    },
+    "docs/qa/v052-shock-integration/shock_support_compiler-attempt1.log": {
+      "bytes": 941,
+      "sha256": "25e7b3135a42429176b1b8b28e3c5bcfa903e6b9de91a3b7e0f3c612b41a7565"
+    },
+    "docs/qa/v052-shock-reference/check_reference.log": {
+      "bytes": 52,
+      "sha256": "65d47533eaf556129a1f3a295db12ab1bc36a8df0770c71cb9378490d54d03ba"
+    },
+    "docs/qa/v052-shock-reference/shock_reference-caption.log": {
+      "bytes": 235,
+      "sha256": "102c301ca75a74bd7f3e7a9513392c5359b8bdc60374b3939d97e308a77663ce"
+    },
+    "docs/qa/v052-shock-reference/export_reference.log": {
+      "bytes": 127,
+      "sha256": "51e3b0bc619efba5c710e1863eedea0402e6700d8c973b9ecb758418906e7297"
+    },
+    "docs/qa/v052-shock-reference/check_reference-caption.log": {
+      "bytes": 52,
+      "sha256": "65d47533eaf556129a1f3a295db12ab1bc36a8df0770c71cb9378490d54d03ba"
+    },
+    "docs/qa/v052-shock-reference/build_reference-caption.log": {
+      "bytes": 50,
+      "sha256": "94e0f0328f90c4ac34c010913445642ac1cedb452281a1a768c5e7da7792c863"
+    },
+    "docs/qa/v052-shock-reference/build_reference.log": {
+      "bytes": 50,
+      "sha256": "d18a73f960a27bd5a844188bd1b20b6a42cb0f7d4db50d19d616c3ee58e01cd0"
+    },
+    "docs/qa/v052-shock-reference/shock_reference.log": {
+      "bytes": 235,
+      "sha256": "102c301ca75a74bd7f3e7a9513392c5359b8bdc60374b3939d97e308a77663ce"
+    },
+    "docs/qa/v052-shock-rules/pure-run-03.log": {
+      "bytes": 141,
+      "sha256": "a3f3e8283eb241ba5f337329acde0bdef268fa6841f459e2faa19aad637a94fa"
+    },
+    "docs/qa/v052-shock-rules/pure-run-01.log": {
+      "bytes": 4593,
+      "sha256": "156c2f2600c848eb758f3a9cdeeaf4aede533aeaa511724acaa898361af75bb6"
+    },
+    "docs/qa/v052-shock-rules/pure-run-02.log": {
+      "bytes": 141,
+      "sha256": "c12f9b043fbc343ba6741061bc0a796563f882c8a9d686db180c36ef8f401536"
+    },
+    "docs/qa/v052-shock-main/import.log": {
+      "bytes": 67178,
+      "sha256": "807506f7e2989bf3132af12d1e5adea642d524a091f88db17e0cb225784c08c6"
+    },
+    "docs/qa/v052-shock-main/boundaries-02.log": {
+      "bytes": 157,
+      "sha256": "490ad6cb9accbaaf8d16606a74d6943fade6a1630f1f1728a67a8b882b414bbb"
+    },
+    "docs/qa/v052-shock-main/gameplay-final.log": {
+      "bytes": 3773,
+      "sha256": "01ba1b4370e4788c7cef8f696ebcbc3df879b3c70b7d641ffdb81740ab7c0b0e"
+    },
+    "docs/qa/v052-shock-main/boundaries-01.log": {
+      "bytes": 875,
+      "sha256": "5d6989a8df1f42e5cba2ff83f8082e724d0fe69036b9d20f67046efdd9c371e1"
+    },
+    "docs/qa/v052-shock-main/gameplay-attempt1.log": {
+      "bytes": 5248,
+      "sha256": "9ec6bdb95aaa0f82431460d95cef8fb5ec91bb70919d20ca8b841d5bdacc9e00"
+    },
+    "docs/qa/v052-shock-main/import-final.log": {
+      "bytes": 2106,
+      "sha256": "ab49a699fd1c38a76341c593ae6f9f194d2927d77e334bd1a5e4085ead67d9a6"
+    },
+    "docs/qa/v052-shock-main/packed-probe-parse.log": {
+      "bytes": 73,
+      "sha256": "a9912b85473f126d3f4f63ec824170c828df3473a292f866dde86cafda5b66da"
+    },
+    "docs/qa/v052-shock-main/legacy-original-run-01.log": {
+      "bytes": 460,
+      "sha256": "aab40c6eebf4ab5030858705e0a849cb096ca16222a3ab8c97762d45ea10711a"
+    },
+    "docs/qa/v052-shock-main/font-import.log": {
+      "bytes": 3266,
+      "sha256": "eda12175848adc12ef088fa49ed05c00f28d9bf60ceaf6d14b1313e454235630"
+    },
+    "docs/qa/v052-shock-main/legacy-integrated-run-01.log": {
+      "bytes": 460,
+      "sha256": "aab40c6eebf4ab5030858705e0a849cb096ca16222a3ab8c97762d45ea10711a"
+    }
+  },
+  "reuse_boundaries": [
+    "Root profile19 and compiler556 were before the optional original_delta runtime-preflight parameter; profiles/constants/compiler/output text are unchanged. Final policy/runtime910 and actual-main161/47 cover the final helper.",
+    "Runtime marker18 is a later readonly draw-command addition; gameplay code unchanged. No repeated whole combat test for the renderer.",
+    "Font adds only two source-identical glyphs and version/reference metadata changes after functional tests; same-PCK probe checks final assets.",
+    "Initial invalid runs are retained and never counted."
+  ],
+  "not_performed": [
+    "600-second checks",
+    "historical full suite",
+    "new native screenshot gate",
+    "Windows hardware FPS"
+  ]
+}
