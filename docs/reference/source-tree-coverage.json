@@ -313,36 +313,6 @@
 					"via_reachable_node_id": "39718"
 				},
 				{
-					"name": "Faster Ailments",
-					"node_id": "11364",
-					"shortest_executable_prefix": [
-						"58833",
-						"48828",
-						"33508",
-						"36881",
-						"35503",
-						"19144",
-						"16167",
-						"10829",
-						"238",
-						"11497",
-						"5408",
-						"56589",
-						"23471",
-						"5237",
-						"6363",
-						"29937",
-						"8544",
-						"11364"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"Damaging Ailments deal damage 5% faster"
-					],
-					"via_reachable_node_id": "8544"
-				},
-				{
 					"name": "Arcanist's Dominion",
 					"node_id": "11420",
 					"shortest_executable_prefix": [
@@ -13357,18 +13327,18 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 448,
+			"blocked_frontier_count": 447,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
 				"partial": 118,
-				"unsupported": 330
+				"unsupported": 329
 			},
 			"class_id": 0,
 			"class_name": "Scion",
 			"excluded_adjacent_counts": {
 				"blighted_only": 0,
-				"mastery_not_path": 39,
+				"mastery_not_path": 40,
 				"other_class_start": 6,
 				"position_proxy": 0
 			},
@@ -13539,6 +13509,11 @@
 					"via_reachable_node_id": "57264"
 				},
 				{
+					"node_id": "57949",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "59766"
+				},
+				{
 					"node_id": "58302",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "49621"
@@ -13599,9 +13574,9 @@
 					"via_reachable_node_id": "47306"
 				}
 			],
-			"reachable_count_excluding_start": 685,
-			"reachable_count_including_start": 686,
-			"reachable_full_direct_effect_nodes": 670,
+			"reachable_count_excluding_start": 688,
+			"reachable_count_including_start": 689,
+			"reachable_full_direct_effect_nodes": 673,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -13618,6 +13593,7 @@
 				"10893",
 				"11018",
 				"11334",
+				"11364",
 				"11497",
 				"11551",
 				"11651",
@@ -13993,6 +13969,7 @@
 				"43374",
 				"43608",
 				"4367",
+				"43684",
 				"4378",
 				"43787",
 				"4397",
@@ -14166,6 +14143,7 @@
 				"59718",
 				"5972",
 				"59728",
+				"59766",
 				"59861",
 				"59928",
 				"60002",
@@ -14603,34 +14581,6 @@
 						"20% less Attack Damage taken if you haven't been Hit by an Attack Recently\n10% more chance to Evade Attacks if you have been Hit by an Attack Recently\n20% more Attack Damage taken if you have been Hit by an Attack Recently"
 					],
 					"via_reachable_node_id": "39718"
-				},
-				{
-					"name": "Faster Ailments",
-					"node_id": "11364",
-					"shortest_executable_prefix": [
-						"47175",
-						"50904",
-						"6981",
-						"36543",
-						"49412",
-						"31080",
-						"43374",
-						"22703",
-						"14056",
-						"34400",
-						"24914",
-						"61262",
-						"24083",
-						"16544",
-						"8544",
-						"11364"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"Damaging Ailments deal damage 5% faster"
-					],
-					"via_reachable_node_id": "8544"
 				},
 				{
 					"name": "Arcanist's Dominion",
@@ -28386,18 +28336,18 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 448,
+			"blocked_frontier_count": 447,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
 				"partial": 118,
-				"unsupported": 330
+				"unsupported": 329
 			},
 			"class_id": 1,
 			"class_name": "Marauder",
 			"excluded_adjacent_counts": {
 				"blighted_only": 0,
-				"mastery_not_path": 39,
+				"mastery_not_path": 40,
 				"other_class_start": 6,
 				"position_proxy": 0
 			},
@@ -28563,6 +28513,11 @@
 					"via_reachable_node_id": "57264"
 				},
 				{
+					"node_id": "57949",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "59766"
+				},
+				{
 					"node_id": "58302",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "49621"
@@ -28628,9 +28583,9 @@
 					"via_reachable_node_id": "47306"
 				}
 			],
-			"reachable_count_excluding_start": 685,
-			"reachable_count_including_start": 686,
-			"reachable_full_direct_effect_nodes": 670,
+			"reachable_count_excluding_start": 688,
+			"reachable_count_including_start": 689,
+			"reachable_full_direct_effect_nodes": 673,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -28647,6 +28602,7 @@
 				"10893",
 				"11018",
 				"11334",
+				"11364",
 				"11497",
 				"11551",
 				"11651",
@@ -29022,6 +28978,7 @@
 				"43374",
 				"43608",
 				"4367",
+				"43684",
 				"4378",
 				"43787",
 				"4397",
@@ -29195,6 +29152,7 @@
 				"59718",
 				"5972",
 				"59728",
+				"59766",
 				"59861",
 				"59928",
 				"60002",
@@ -29618,32 +29576,6 @@
 						"20% less Attack Damage taken if you haven't been Hit by an Attack Recently\n10% more chance to Evade Attacks if you have been Hit by an Attack Recently\n20% more Attack Damage taken if you have been Hit by an Attack Recently"
 					],
 					"via_reachable_node_id": "39718"
-				},
-				{
-					"name": "Faster Ailments",
-					"node_id": "11364",
-					"shortest_executable_prefix": [
-						"50459",
-						"39821",
-						"52904",
-						"444",
-						"61306",
-						"60942",
-						"32555",
-						"22266",
-						"30679",
-						"5237",
-						"6363",
-						"29937",
-						"8544",
-						"11364"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"Damaging Ailments deal damage 5% faster"
-					],
-					"via_reachable_node_id": "8544"
 				},
 				{
 					"name": "Arcanist's Dominion",
@@ -43134,18 +43066,18 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 448,
+			"blocked_frontier_count": 447,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
 				"partial": 118,
-				"unsupported": 330
+				"unsupported": 329
 			},
 			"class_id": 2,
 			"class_name": "Ranger",
 			"excluded_adjacent_counts": {
 				"blighted_only": 0,
-				"mastery_not_path": 39,
+				"mastery_not_path": 40,
 				"other_class_start": 6,
 				"position_proxy": 0
 			},
@@ -43311,6 +43243,11 @@
 					"via_reachable_node_id": "57226"
 				},
 				{
+					"node_id": "57949",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "59766"
+				},
+				{
 					"node_id": "58302",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "49621"
@@ -43376,9 +43313,9 @@
 					"via_reachable_node_id": "47306"
 				}
 			],
-			"reachable_count_excluding_start": 685,
-			"reachable_count_including_start": 686,
-			"reachable_full_direct_effect_nodes": 670,
+			"reachable_count_excluding_start": 688,
+			"reachable_count_including_start": 689,
+			"reachable_full_direct_effect_nodes": 673,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -43395,6 +43332,7 @@
 				"10893",
 				"11018",
 				"11334",
+				"11364",
 				"11497",
 				"11551",
 				"11651",
@@ -43770,6 +43708,7 @@
 				"43374",
 				"43608",
 				"4367",
+				"43684",
 				"4378",
 				"43787",
 				"4397",
@@ -43943,6 +43882,7 @@
 				"59718",
 				"5972",
 				"59728",
+				"59766",
 				"59861",
 				"59928",
 				"60002",
@@ -44405,46 +44345,6 @@
 						"20% less Attack Damage taken if you haven't been Hit by an Attack Recently\n10% more chance to Evade Attacks if you have been Hit by an Attack Recently\n20% more Attack Damage taken if you have been Hit by an Attack Recently"
 					],
 					"via_reachable_node_id": "39718"
-				},
-				{
-					"name": "Faster Ailments",
-					"node_id": "11364",
-					"shortest_executable_prefix": [
-						"54447",
-						"57226",
-						"21678",
-						"32210",
-						"8948",
-						"27659",
-						"37671",
-						"21301",
-						"20546",
-						"3656",
-						"58244",
-						"7112",
-						"13885",
-						"28012",
-						"59252",
-						"59606",
-						"1461",
-						"36287",
-						"20807",
-						"12412",
-						"32555",
-						"22266",
-						"30679",
-						"5237",
-						"6363",
-						"29937",
-						"8544",
-						"11364"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"Damaging Ailments deal damage 5% faster"
-					],
-					"via_reachable_node_id": "8544"
 				},
 				{
 					"name": "Arcanist's Dominion",
@@ -57923,18 +57823,18 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 448,
+			"blocked_frontier_count": 447,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
 				"partial": 118,
-				"unsupported": 330
+				"unsupported": 329
 			},
 			"class_id": 3,
 			"class_name": "Witch",
 			"excluded_adjacent_counts": {
 				"blighted_only": 0,
-				"mastery_not_path": 39,
+				"mastery_not_path": 40,
 				"other_class_start": 6,
 				"position_proxy": 0
 			},
@@ -58100,6 +58000,11 @@
 					"via_reachable_node_id": "24362"
 				},
 				{
+					"node_id": "57949",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "59766"
+				},
+				{
 					"node_id": "58302",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "49621"
@@ -58165,9 +58070,9 @@
 					"via_reachable_node_id": "47306"
 				}
 			],
-			"reachable_count_excluding_start": 685,
-			"reachable_count_including_start": 686,
-			"reachable_full_direct_effect_nodes": 670,
+			"reachable_count_excluding_start": 688,
+			"reachable_count_including_start": 689,
+			"reachable_full_direct_effect_nodes": 673,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -58184,6 +58089,7 @@
 				"10893",
 				"11018",
 				"11334",
+				"11364",
 				"11497",
 				"11551",
 				"11651",
@@ -58559,6 +58465,7 @@
 				"43374",
 				"43608",
 				"4367",
+				"43684",
 				"4378",
 				"43787",
 				"4397",
@@ -58732,6 +58639,7 @@
 				"59718",
 				"5972",
 				"59728",
+				"59766",
 				"59861",
 				"59928",
 				"60002",
@@ -59146,31 +59054,6 @@
 						"20% less Attack Damage taken if you haven't been Hit by an Attack Recently\n10% more chance to Evade Attacks if you have been Hit by an Attack Recently\n20% more Attack Damage taken if you have been Hit by an Attack Recently"
 					],
 					"via_reachable_node_id": "39718"
-				},
-				{
-					"name": "Faster Ailments",
-					"node_id": "11364",
-					"shortest_executable_prefix": [
-						"50986",
-						"39725",
-						"63649",
-						"49806",
-						"6580",
-						"19711",
-						"20010",
-						"23471",
-						"5237",
-						"6363",
-						"29937",
-						"8544",
-						"11364"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"Damaging Ailments deal damage 5% faster"
-					],
-					"via_reachable_node_id": "8544"
 				},
 				{
 					"name": "Arcanist's Dominion",
@@ -72624,18 +72507,18 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 448,
+			"blocked_frontier_count": 447,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
 				"partial": 118,
-				"unsupported": 330
+				"unsupported": 329
 			},
 			"class_id": 4,
 			"class_name": "Duelist",
 			"excluded_adjacent_counts": {
 				"blighted_only": 0,
-				"mastery_not_path": 39,
+				"mastery_not_path": 40,
 				"other_class_start": 6,
 				"position_proxy": 0
 			},
@@ -72801,6 +72684,11 @@
 					"via_reachable_node_id": "57264"
 				},
 				{
+					"node_id": "57949",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "59766"
+				},
+				{
 					"node_id": "58302",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "49621"
@@ -72866,9 +72754,9 @@
 					"via_reachable_node_id": "47306"
 				}
 			],
-			"reachable_count_excluding_start": 685,
-			"reachable_count_including_start": 686,
-			"reachable_full_direct_effect_nodes": 670,
+			"reachable_count_excluding_start": 688,
+			"reachable_count_including_start": 689,
+			"reachable_full_direct_effect_nodes": 673,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -72885,6 +72773,7 @@
 				"10893",
 				"11018",
 				"11334",
+				"11364",
 				"11497",
 				"11551",
 				"11651",
@@ -73260,6 +73149,7 @@
 				"43374",
 				"43608",
 				"4367",
+				"43684",
 				"4378",
 				"43787",
 				"4397",
@@ -73433,6 +73323,7 @@
 				"59718",
 				"5972",
 				"59728",
+				"59766",
 				"59861",
 				"59928",
 				"60002",
@@ -73894,41 +73785,6 @@
 						"20% less Attack Damage taken if you haven't been Hit by an Attack Recently\n10% more chance to Evade Attacks if you have been Hit by an Attack Recently\n20% more Attack Damage taken if you have been Hit by an Attack Recently"
 					],
 					"via_reachable_node_id": "39718"
-				},
-				{
-					"name": "Faster Ailments",
-					"node_id": "11364",
-					"shortest_executable_prefix": [
-						"61525",
-						"20228",
-						"39916",
-						"35556",
-						"44908",
-						"2913",
-						"50862",
-						"50422",
-						"50570",
-						"29353",
-						"63282",
-						"59928",
-						"63723",
-						"5233",
-						"3644",
-						"14930",
-						"34400",
-						"24914",
-						"61262",
-						"24083",
-						"16544",
-						"8544",
-						"11364"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"Damaging Ailments deal damage 5% faster"
-					],
-					"via_reachable_node_id": "8544"
 				},
 				{
 					"name": "Arcanist's Dominion",
@@ -87707,18 +87563,18 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 448,
+			"blocked_frontier_count": 447,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
 				"partial": 118,
-				"unsupported": 330
+				"unsupported": 329
 			},
 			"class_id": 5,
 			"class_name": "Templar",
 			"excluded_adjacent_counts": {
 				"blighted_only": 0,
-				"mastery_not_path": 39,
+				"mastery_not_path": 40,
 				"other_class_start": 6,
 				"position_proxy": 0
 			},
@@ -87889,6 +87745,11 @@
 					"via_reachable_node_id": "57264"
 				},
 				{
+					"node_id": "57949",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "59766"
+				},
+				{
 					"node_id": "58302",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "49621"
@@ -87949,9 +87810,9 @@
 					"via_reachable_node_id": "47306"
 				}
 			],
-			"reachable_count_excluding_start": 685,
-			"reachable_count_including_start": 686,
-			"reachable_full_direct_effect_nodes": 670,
+			"reachable_count_excluding_start": 688,
+			"reachable_count_including_start": 689,
+			"reachable_full_direct_effect_nodes": 673,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -87968,6 +87829,7 @@
 				"10893",
 				"11018",
 				"11334",
+				"11364",
 				"11497",
 				"11551",
 				"11651",
@@ -88343,6 +88205,7 @@
 				"43374",
 				"43608",
 				"4367",
+				"43684",
 				"4378",
 				"43787",
 				"4397",
@@ -88515,6 +88378,7 @@
 				"59718",
 				"5972",
 				"59728",
+				"59766",
 				"59861",
 				"59928",
 				"60002",
@@ -88963,38 +88827,6 @@
 						"20% less Attack Damage taken if you haven't been Hit by an Attack Recently\n10% more chance to Evade Attacks if you have been Hit by an Attack Recently\n20% more Attack Damage taken if you have been Hit by an Attack Recently"
 					],
 					"via_reachable_node_id": "39718"
-				},
-				{
-					"name": "Faster Ailments",
-					"node_id": "11364",
-					"shortest_executable_prefix": [
-						"44683",
-						"45272",
-						"8640",
-						"45838",
-						"4011",
-						"28012",
-						"59252",
-						"59606",
-						"1461",
-						"36287",
-						"20807",
-						"12412",
-						"32555",
-						"22266",
-						"30679",
-						"5237",
-						"6363",
-						"29937",
-						"8544",
-						"11364"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"Damaging Ailments deal damage 5% faster"
-					],
-					"via_reachable_node_id": "8544"
 				},
 				{
 					"name": "Arcanist's Dominion",
@@ -102485,18 +102317,18 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 448,
+			"blocked_frontier_count": 447,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
 				"partial": 118,
-				"unsupported": 330
+				"unsupported": 329
 			},
 			"class_id": 6,
 			"class_name": "Shadow",
 			"excluded_adjacent_counts": {
 				"blighted_only": 0,
-				"mastery_not_path": 39,
+				"mastery_not_path": 40,
 				"other_class_start": 6,
 				"position_proxy": 0
 			},
@@ -102662,6 +102494,11 @@
 					"via_reachable_node_id": "57226"
 				},
 				{
+					"node_id": "57949",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "59766"
+				},
+				{
 					"node_id": "58302",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "49621"
@@ -102727,9 +102564,9 @@
 					"via_reachable_node_id": "47306"
 				}
 			],
-			"reachable_count_excluding_start": 685,
-			"reachable_count_including_start": 686,
-			"reachable_full_direct_effect_nodes": 670,
+			"reachable_count_excluding_start": 688,
+			"reachable_count_including_start": 689,
+			"reachable_full_direct_effect_nodes": 673,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -102746,6 +102583,7 @@
 				"10893",
 				"11018",
 				"11334",
+				"11364",
 				"11497",
 				"11551",
 				"11651",
@@ -103121,6 +102959,7 @@
 				"43374",
 				"43608",
 				"4367",
+				"43684",
 				"4378",
 				"43787",
 				"4397",
@@ -103294,6 +103133,7 @@
 				"59718",
 				"5972",
 				"59728",
+				"59766",
 				"59861",
 				"59928",
 				"60002",
@@ -103425,12 +103265,12 @@
 	"effect_coverage": {
 		"all_source": {
 			"direct_effect_entries": {
-				"full": 832,
+				"full": 835,
 				"no_direct_stats": 165,
 				"other_status": 0,
-				"partial": 441,
+				"partial": 443,
 				"total_with_stats": 4709,
-				"unsupported": 3436
+				"unsupported": 3431
 			},
 			"mastery_nodes": 353,
 			"mastery_option_status_counts": {
@@ -103444,16 +103284,16 @@
 			"mastery_options_without_direct_stats": 0,
 			"node_api_status_counts": {
 				"choice": 353,
-				"full": 960,
-				"partial": 427,
+				"full": 963,
+				"partial": 429,
 				"unknown": 0,
-				"unsupported": 1650
+				"unsupported": 1645
 			},
 			"node_direct_effect_status_counts": {
-				"full": 832,
+				"full": 835,
 				"other": 0,
-				"partial": 441,
-				"unsupported": 3436
+				"partial": 443,
+				"unsupported": 3431
 			},
 			"node_records": 3390,
 			"nodes_with_direct_stats": 2872,
@@ -103462,12 +103302,12 @@
 		"counting_rule": "Only source entries with non-empty direct stats count as full, partial or unsupported effect entries. Empty-stat nodes/options are recorded as no_direct_stats even when node_effect returns full with no grants.",
 		"standard_allocation_graph": {
 			"direct_effect_entries": {
-				"full": 726,
+				"full": 729,
 				"no_direct_stats": 64,
 				"other_status": 0,
-				"partial": 244,
+				"partial": 245,
 				"total_with_stats": 3845,
-				"unsupported": 2875
+				"unsupported": 2871
 			},
 			"mastery_nodes": 315,
 			"mastery_option_status_counts": {
@@ -103481,16 +103321,16 @@
 			"mastery_options_without_direct_stats": 0,
 			"node_api_status_counts": {
 				"choice": 315,
-				"full": 753,
-				"partial": 230,
+				"full": 756,
+				"partial": 231,
 				"unknown": 0,
-				"unsupported": 1089
+				"unsupported": 1085
 			},
 			"node_direct_effect_status_counts": {
-				"full": 726,
+				"full": 729,
 				"other": 0,
-				"partial": 244,
-				"unsupported": 2875
+				"partial": 245,
+				"unsupported": 2871
 			},
 			"node_records": 2387,
 			"nodes_with_direct_stats": 2008,
@@ -108613,14 +108453,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "damaging_ailments_faster",
+						"value": 0.05
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"Damaging Ailments deal damage 5% faster"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "455",
 			"has_position": true,
@@ -136442,14 +136288,21 @@
 		{
 			"default_allocation_graph": false,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "damaging_ailments_faster",
+						"value": 0.05
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
-					"20% increased Damage with Ailments",
+				"supported": [
 					"Damaging Ailments deal damage 5% faster"
+				],
+				"unsupported": [
+					"20% increased Damage with Ailments"
 				]
 			},
 			"group_id": "",
@@ -225902,14 +225755,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "damaging_ailments_faster",
+						"value": 0.05
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"Damaging Ailments deal damage 5% faster"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "455",
 			"has_position": true,
@@ -245605,14 +245464,21 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "damaging_ailments_faster",
+						"value": 0.1
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
-					"30% increased Damage Over Time with Bow Skills",
+				"supported": [
 					"Damaging Ailments deal damage 10% faster"
+				],
+				"unsupported": [
+					"30% increased Damage Over Time with Bow Skills"
 				]
 			},
 			"group_id": "501",
@@ -284723,14 +284589,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "damaging_ailments_faster",
+						"value": 0.15
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"Damaging Ailments deal damage 15% faster"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "455",
 			"has_position": true,

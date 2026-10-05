@@ -1,0 +1,40 @@
+{
+  "python-build": {
+    "command": [
+      "python3",
+      "tools/build_reference.py"
+    ],
+    "exit_code": 0,
+    "seconds": 0.416,
+    "error_lines": []
+  },
+  "python-check": {
+    "command": [
+      "python3",
+      "tools/build_reference.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 0.417,
+    "error_lines": []
+  },
+  "focused-reference": {
+    "command": [
+      "python3",
+      "tests/faster_burn_reference_test.py"
+    ],
+    "exit_code": 0,
+    "seconds": 1.94,
+    "error_lines": []
+  },
+  "javascript-syntax": {
+    "command": [
+      "node",
+      "--check",
+      "docs/reference/reference.js"
+    ],
+    "exit_code": 0,
+    "seconds": 0.065,
+    "error_lines": []
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "result": "PASS",
+  "game_version": "0.54.0",
+  "schema": 33,
+  "base_commit": "e3a5f7559ecbcb2cb56a9c192d75899fdcf43b3a",
+  "source_version": "3.29.1",
+  "source_sha256": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+  "godot_exports": 1,
+  "godot_exit": 0,
+  "godot_seconds": 11.854,
+  "godot_error_lines": [],
+  "first_attempt_failures": [],
+  "final_export_source_changes": [],
+  "new_full_nodes": {
+    "11364": 0.05,
+    "43684": 0.05,
+    "59766": 0.15
+  },
+  "legal_class_paths": 21,
+  "class_ordinary_reachability": [
+    685,
+    688
+  ],
+  "newly_reachable_existing_nodes": [],
+  "new_mastery_effects": [],
+  "blocked_matching_nodes": [
+    "48823",
+    "19686"
+  ],
+  "compiler_comparisons": 8,
+  "rendered_numeric_values": 123,
+  "unchanged_old_catalog_sections": 58,
+  "intentional_zero_derived_stat_fields": 11,
+  "unchanged_image_count": 67,
+  "legal_complete_branch": {
+    "class_id": 4,
+    "points": 14,
+    "minimum_level": 10
+  },
+  "burn_faster_example": {
+    "M": 0.1,
+    "F": 0.25,
+    "duration": 2.4,
+    "total_tolerance": "max(1e-9,1e-12*abs(old_total))"
+  },
+  "ember_transfer": {
+    "started_at": 10,
+    "transferred_at": 11.75,
+    "absolute_expiry": 12.4,
+    "remaining_approximately": 0.65,
+    "raw_dps": 88.6875
+  },
+  "checks": {
+    "python-build": {
+      "command": [
+        "python3",
+        "tools/build_reference.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.416,
+      "error_lines": []
+    },
+    "python-check": {
+      "command": [
+        "python3",
+        "tools/build_reference.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.417,
+      "error_lines": []
+    },
+    "focused-reference": {
+      "command": [
+        "python3",
+        "tests/faster_burn_reference_test.py"
+      ],
+      "exit_code": 0,
+      "seconds": 1.94,
+      "error_lines": []
+    },
+    "javascript-syntax": {
+      "command": [
+        "node",
+        "--check",
+        "docs/reference/reference.js"
+      ],
+      "exit_code": 0,
+      "seconds": 0.065,
+      "error_lines": []
+    }
+  },
+  "not_run": [
+    "historical full suite",
+    "Godot import",
+    "screenshots",
+    "browser visual acceptance"
+  ],
+  "no_production_edits": true,
+  "no_original_source_or_translation_edits": true,
+  "no_image_or_font_changes": true,
+  "no_git_or_network_operations": true
+}

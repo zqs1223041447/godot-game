@@ -1,6 +1,6 @@
 # Faster burning specialization
 
-Base: published v0.53 `e3a5f7559ecbcb2cb56a9c192d75899fdcf43b3a`. This checkpoint contains the parsed implementation; focused acceptance and packaging are pending. The independent Chinese-tree translation branch is not edited here.
+Base: published v0.53 `e3a5f7559ecbcb2cb56a9c192d75899fdcf43b3a`. The implementation and focused rules/source/migration/actual-main/UI checks are complete; packaging is validated separately. The independent Chinese-tree translation branch is not edited here.
 
 The exact source line is `Damaging Ailments deal damage X% faster`. Three standard nodes become complete:11364(5%),43684(5%),59766(15%). Same-family contributions add to `stats.damaging_ailments_faster`; all three giveF=0.25. Deadly Draw48823 still has unsupported bow DoT and remains partial. Wasting Affliction19686 is nonstandard and also remains partial. No mastery contains this line. Existing English source strings, IDs, source version3.29.1, topology and artwork remain intact. Source-execution/schema33 preserves all prior policy gates, validates and backs up original32 bytes, and changes only the version during migration.
 

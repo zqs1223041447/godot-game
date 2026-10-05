@@ -26,7 +26,7 @@ node --check docs/reference/reference.js
 python3 tools/build_reference.py --check
 ```
 
-检查覆盖完整目录 ID、编译示例配置、所有辅助组合、所有孔的共享分析器覆盖结果、来源版本、全部条目与内部链接、清单中全部本地素材、SVG 几何边界及确定性重建。没有把源游戏的原始数据、名称、文本、图像或布局引入玩家手册。研究来源为 PoE 天赋树 3.29.1 和词缀研究 3.29.3.3 / RePoE 固定提交 a77305840b4cc8555eeeea144eac3eeddeff134b。
+检查覆盖完整目录 ID、编译示例配置、所有辅助组合、所有孔的共享分析器覆盖结果、来源版本、全部条目与内部链接、清单中全部本地素材、SVG 几何边界及确定性重建。源树条目保留固定版本的英文名称、原始词句和图结构，用于明确执行边界；不引入官方图像。研究来源为 PoE 天赋树 3.29.1 和词缀研究 3.29.3.3 / RePoE 固定提交 a77305840b4cc8555eeeea144eac3eeddeff134b。
 
 ## 渲染验证状态
 
@@ -48,3 +48,21 @@ node --check docs/reference/reference.js
 ```
 
 检查包括8节点、56条职业路径、8组真实编译器前后比较、3条完整合法路线、93个渲染数值、全部内部链接、无来源/零值编译结构、余烬继承与67张旧图像的字节指纹。原始源词句与几何保持；新增字段为明确的schema32执行证据。本批没有新增图像、装备词缀池或宝石，没有运行历史完整套件、导入工程、性能长跑或截图验收。详细命令、退出码和日志见 `../qa/v053-reference/`。
+
+## v0.54.0 源天赋加速燃烧
+
+入口为 `index.html#rules-source_faster_burn`。`catalog.json.source_faster_burn` 导出实际源节点解析、SkillCompiler、BurnRuntime、余烬传播和schema32→33迁移结果。三个完整标准节点11364/43684各5%、59766为15%，合计F=0.25。既有火焰持续伤害加成M结算后，每秒伤害乘1.25，基础3秒压缩至2.4秒；原始完整时长总量理论不变，按 `max(1e-9,1e-12*abs(old_total))` 检查浮点误差。
+
+页面直接读取已生效的roles.dps、roles.total和最终duration，不再乘算。初始施放冻结burn_faster；余烬继承已计算DPS和压缩后的绝对截止时间，不重新取得完整时长。当前只由玩家燃烧消费，不代表流血、中毒或完整异常体系已实现。
+
+七职业各685→688，21条真实合法路径及一条包含全部三节点的完整分支均有同源证据。Deadly Draw 48823仍因弓技能持续伤害而partial；非标准Wasting Affliction 19686仍因异常伤害提高而partial，没有新增精通或其他新可达节点。英文源名称、词句、几何和67张原有PNG保持。
+
+本批实际聚焦检查：
+
+```sh
+python3 tools/build_reference.py --check
+python3 tests/faster_burn_reference_test.py
+node --check docs/reference/reference.js
+```
+
+一次Godot无头导出同时更新catalog与source-tree-coverage；以上检查首次均通过。8组真实编译器示例包含M=0.10/F=0.25，123个页面数值与导出对应，58类旧目录结构保持；11处旧派生属性字典新增零值字段是明确的结构扩展，零F技能编译字节保持。没有运行历史完整套件、工程导入或截图。详细命令、退出码、来源指纹和日志见 `../qa/v054-reference/`。

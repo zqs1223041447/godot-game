@@ -1,0 +1,172 @@
+{
+  "base_commit": "e3a5f7559ecbcb2cb56a9c192d75899fdcf43b3a",
+  "counts": {
+    "source_rules_and_graph": 6723,
+    "migration_transactions": 269,
+    "pure_rules_and_old_byte_boundaries": 22860,
+    "compiler_consumers": 1050,
+    "actual_main": 292,
+    "readonly_preview": 9
+  },
+  "total_checks": 31203,
+  "all_final_subsets_exit_zero": true,
+  "all_final_subsets_no_engine_errors": true,
+  "reference_validation_separate": "docs/qa/v054-reference/summary.json",
+  "new_full_standard_nodes": [
+    "11364",
+    "43684",
+    "59766"
+  ],
+  "still_partial": [
+    "48823",
+    "19686"
+  ],
+  "new_masteries": 0,
+  "standard_reachable_per_class": {
+    "before": 685,
+    "after": 688
+  },
+  "source_version": "3.29.1",
+  "old_behavior": {
+    "ticks": 120,
+    "casts": 3,
+    "kills": 3,
+    "hits": 28,
+    "positive_burn_segments": 1226,
+    "settled_burn_health_loss": 452.79,
+    "observation_bytes": 18954404,
+    "save_bytes": 12178,
+    "exact_equal": true,
+    "comparison": "docs/qa/v054-consumers/20261005T161655427331Z-legacy-comparison.json"
+  },
+  "total_budget_tolerance": {
+    "absolute": 1e-09,
+    "relative": 1e-12,
+    "rule": "max(absolute,relative*abs(original_total))"
+  },
+  "logs": {
+    "docs/qa/v054/import-initial.log": {
+      "bytes": 68829,
+      "sha256": "e95a7d455a9269447b43b7405bf5fdd0f46136ea15fe04eba3ac734dec880b0a"
+    },
+    "docs/qa/v054/final-import.log": {
+      "bytes": 2184,
+      "sha256": "ad763eac9583f365ec1385cb5e1c3ea9a165bfd5d7f5f5909e6f82d737b0bb0f"
+    },
+    "docs/qa/v054/packed-probe-parse.log": {
+      "bytes": 73,
+      "sha256": "a9912b85473f126d3f4f63ec824170c828df3473a292f866dde86cafda5b66da"
+    },
+    "docs/qa/v054-source/capture-released-v53.log": {
+      "bytes": 166,
+      "sha256": "38992af2843f04f1598f4dd2cf7b093a5004b1eeac39bc79e2b8795fd39cc8e2"
+    },
+    "docs/qa/v054-source/source_faster_burn_migration-4vi09ue_.log": {
+      "bytes": 139,
+      "sha256": "1d4a68799e1b67d84681c43693ada0ac176aa6878f477aaf50b05932fbff6577"
+    },
+    "docs/qa/v054-source/source_faster_burn_rules-4vi09ue_.log": {
+      "bytes": 136,
+      "sha256": "167ca7e86ae804200f2075433425f16f954581c56c6da314f387f75de8c025e5"
+    },
+    "docs/qa/v054-reference/javascript-syntax.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v054-reference/godot-export.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v054-reference/javascript-syntax.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v054-reference/godot-export.stdout.log": {
+      "bytes": 205,
+      "sha256": "881c3c8a76e46d3e862aafeb146330317ff3f9b9ded3708c83c5c5e40bdf8c0b"
+    },
+    "docs/qa/v054-reference/focused-reference.stdout.log": {
+      "bytes": 1529,
+      "sha256": "840ed653c9a480ca08c82a11260d869e19dfeb9d67d41980623ff8bba6cc0660"
+    },
+    "docs/qa/v054-reference/python-check.stdout.log": {
+      "bytes": 52,
+      "sha256": "65d47533eaf556129a1f3a295db12ab1bc36a8df0770c71cb9378490d54d03ba"
+    },
+    "docs/qa/v054-reference/focused-reference.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v054-reference/python-build.stdout.log": {
+      "bytes": 51,
+      "sha256": "b5880292c858fa0ab64b7a8533d38b9aebccebef99d7b9472c0b28849ad9034d"
+    },
+    "docs/qa/v054-reference/python-build.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v054-reference/python-check.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v054-rules/extreme-probe.log.txt": {
+      "bytes": 994,
+      "sha256": "93fe57ed25907dea257723301bdad58b41e9aaeab6745e6da2e84e7844c2ba5f"
+    },
+    "docs/qa/v054-rules/20261005T161718733866Z-rules.log.txt": {
+      "bytes": 354,
+      "sha256": "b714a3d443f553e4104851e76b680f8eae62dc6f3bc4dd1d80e7a2e78a31f25e"
+    },
+    "docs/qa/v054-rules/20261005T161634353346Z-rules.log.txt": {
+      "bytes": 354,
+      "sha256": "802da109c5166950da6cf4b1b99459f93d4d0f19eba2d57be94a0bad19885763"
+    },
+    "docs/qa/v054-rules/20261005T161521895448Z-rules.log.txt": {
+      "bytes": 1242,
+      "sha256": "2564e932d74246e44f355ceced98d4a99a23fbf759443b1494232917fda39372"
+    },
+    "docs/qa/v054-consumers/20261005T161621555876Z-gameplay.log.txt": {
+      "bytes": 1348,
+      "sha256": "cc233288d0531dcc46024579c616d143e287e3d7226c7b1f93ecc1fc7405a27e"
+    },
+    "docs/qa/v054-consumers/20261005T161655427331Z-legacy-old.log.txt": {
+      "bytes": 663,
+      "sha256": "90986d3151bc82e0da2dfd5cd7edc3ee9d02aab044aa8b11104fbd9536d8b540"
+    },
+    "docs/qa/v054-consumers/20261005T161652870732Z-gameplay.log.txt": {
+      "bytes": 406,
+      "sha256": "9cace9fb513bedaa9158ca31c679a7fb9a4914cf80c9d90d52d5e959d5711422"
+    },
+    "docs/qa/v054-consumers/20261005T161621555876Z-consumer.log.txt": {
+      "bytes": 281,
+      "sha256": "1d10b2167122879f5f16b925119e87ea7e4674c403eee78deb6239159d09bfd3"
+    },
+    "docs/qa/v054-consumers/20261005T161554685509Z-consumer.log.txt": {
+      "bytes": 1418,
+      "sha256": "c4aefffa242d205f239db2533db8fa7df0e484f8c2e41be9708a951fc4e0739d"
+    },
+    "docs/qa/v054-consumers/20261005T161655427331Z-legacy-new.log.txt": {
+      "bytes": 663,
+      "sha256": "90986d3151bc82e0da2dfd5cd7edc3ee9d02aab044aa8b11104fbd9536d8b540"
+    },
+    "docs/qa/v054-root-ui/preview.log": {
+      "bytes": 115,
+      "sha256": "8fce39a15d73e71ae7b276ad0bfaf494388f825ec11822e628ef082ccd5da8c3"
+    }
+  },
+  "boundaries": [
+    "Faster factor applies only to current burning, not unimplemented bleed/poison or Shock.",
+    "The new stat is zero in character aggregation; no-source snapshots/profiles omit it and retain previous byte shape.",
+    "Initial extreme test used1e-308 which this engine rejected as nonpositive input; production operation order was not changed.",
+    "Initial actual-preview expectation incorrectly included a leading plus; only test text corrected.",
+    "Source/common combat production files stayed unchanged after shared first import; version/reference-only edits followed.",
+    "All60paintings/67referenceimages and1071glyph font unchanged; current runtime text missing0.",
+    "No changes to parallel LUNA localization files or CanonicalPassivePanel."
+  ],
+  "not_performed": [
+    "historical full suite",
+    "600second endurance",
+    "per-version native screenshot",
+    "Windows hardware FPS"
+  ]
+}

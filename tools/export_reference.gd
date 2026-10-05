@@ -50,6 +50,7 @@ const EmberMigration = preload("res://scripts/save/ember_gem_migration.gd")
 const ShockRuntimeData = preload("res://scripts/combat/shock_runtime.gd")
 const ShockMigration = preload("res://scripts/save/shock_gem_migration.gd")
 const FireDotMigration = preload("res://scripts/save/fire_dot_migration.gd")
+const FasterBurnMigrationData = preload("res://scripts/save/faster_burn_migration.gd")
 const SourceCoverage = preload("res://tools/export_source_execution_coverage.gd")
 
 func _initialize() -> void:
@@ -115,6 +116,7 @@ static func collect() -> Dictionary:
 	result["ember_proliferation"] = ember_proliferation_examples()
 	result["shock"] = shock_examples()
 	result["source_fire_dot"] = source_fire_dot_examples()
+	result["source_faster_burn"] = source_faster_burn_examples()
 	result["normal_gem_trading"]={"offers":Canonical.GemTrade.offers(),"recycle_credit":Canonical.GemTrade.RECYCLE_CREDIT,"currency":Canonical.GemTrade.MATERIAL_ID,"location":"normal_town","level":1,"quality":0,"recycle_location":"bag","schema":Canonical.Rules.VERSION,"test_supply_separate":true,"pricing":"初版可调整预算；每次无词缀地图净得4碎片"}
 	result["source_tree"] = source_tree_reference()
 	result["source_spatial"] = source_spatial_examples()
@@ -1130,12 +1132,12 @@ static func burning_examples()->Dictionary:
 		examples[id]={"profile":cast.burn_profile,"mana":cast.mana,"cooldown":cast.cooldown,"details":Preview.details(cast)}
 	return {"save_version":28,"support_id":"ignite","icon_file":"originals/ignite.png","player_policy":Compiler.Burn.PLAYER_POLICY,"enemy_policy":Compiler.Burn.ENEMY_POLICY,"examples":examples,
 		"scope":"已解析主命中火分量只作为一次基数；持续扣伤不再套主命中、投射物、暴击或偷取",
-		"stacking":"单目标一条，更强覆盖，同强刷新3秒，弱条忽略",
+		"stacking":"单目标一条，更强覆盖，同强采用新条时长刷新；基础3秒，加速后使用压缩时长，弱条忽略",
 		"secondary":"独立装备爆炸不继承；母子和返回沿原获准主命中规则",
 		"defense_example":Defense.incoming_burn(100.0,0.25,10.0,100.0,"player"),
 		"enemy_budget":{"contact_damage":20.0,"physical_hit":14.0,"fire_hit":7.0,"fire_burn_dps":7.0/3.0,"duration":3.0,"total_before_defense":28.0},
 		"immunity":"尊重原伤害免疫；期间时长流逝、不补扣，持续伤害本身不授予受击保护",
-		"source_words":"本游戏燃烧原型；schema32仅接入无条件火焰持续伤害加成的8个完整源节点，其余未实现的点燃、持续伤害与更快异常词句仍锁定"}
+		"source_words":"本游戏燃烧原型；schema32接入8个完整火焰持续伤害节点，schema33接入3个完整更快伤害异常节点；当前仅由玩家燃烧消费，不代表流血、中毒或完整异常体系已实现"}
 
 
 static func shock_examples()->Dictionary:
@@ -1282,7 +1284,7 @@ static func ember_proliferation_examples()->Dictionary:
 		"scope":"仅陨星直接命中与龙卷母子获准主命中；主命中防御前火焰分量只取一次基数，独立装备爆炸不继承",
 		"transfer_rule":"已有余烬燃烧的目标死亡才扩散；继承同一原始每秒伤害与原绝对截止时间，按距离再按ID选最多8个存活可见目标，不穿墙、不选出生保护目标",
 		"instant_kill_rule":"瞬杀且未形成燃烧状态不传；已有有效余烬燃烧的目标可在后续命中或燃烧致死时扩散",
-		"stacking":"与点燃共用单目标最强燃烧：更强覆盖，同强替换并采用新条自己的截止时间，弱条忽略；扩散不叠加也不重置3秒",
+		"stacking":"与点燃共用单目标最强燃烧：更强覆盖，同强替换并采用新条自己的截止时间，弱条忽略；扩散不叠加也不重置基础或压缩后的完整时长",
 		"lifecycle":"不新增命中、暴击、偷取、随机抽样或奖励路径；暂停冻结，返城与重开清空，燃烧状态不存盘",
 		"migration":"严格验证旧schema28与原字节备份后迁移schema29，仅版本字段变化，不赠物、不退款、不改旅程或既有UID"}
 
@@ -1291,7 +1293,7 @@ static func ember_proliferation_examples()->Dictionary:
 ## Full legal routes below are validated separately and retain every other grant.
 static func source_fire_dot_examples() -> Dictionary:
 	var coverage: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://docs/qa/v053-source/source-coverage.json"))
-	assert(coverage.new_schema == Canonical.Rules.VERSION and coverage.source_sha256 == SourceTree.Data.SOURCE_SHA256)
+	assert(coverage.new_schema == 32 and coverage.source_sha256 == SourceTree.Data.SOURCE_SHA256)
 	var nodes: Dictionary = {}
 	for id: String in coverage.new_full_nodes:
 		var node: Dictionary = SourceTree.Data.node(id)
@@ -1376,7 +1378,7 @@ static func source_fire_dot_examples() -> Dictionary:
 		"complete_gate":"仍逐节点执行全部源效果；包含未实现附加效果、武器或条件限定的节点整体锁定，0个新增精通效果",
 		"legacy_rule":"schema31及更早版本使用冻结旧执行词汇，合法旧档不可能含这8个节点；严格旧档验证后迁移schema32，仅改变版本，不赠物、不退款、不改UID与旧节点效果",
 		"example_scope":"前后表只隔离所列节点的火焰持续伤害字段，其余输入固定；七职业路径另经真实构筑校验，三条完整合法路线示例保留沿途全部属性，可达集合不代表123点能全部同时分配",
-		"unsupported":["更快异常伤害","通用持续伤害加成","攻击限定持续伤害","条件持续伤害","新的装备词缀池","新宝石"],"new_images":[]}
+		"unsupported":["通用持续伤害加成","攻击限定持续伤害","条件持续伤害","新的装备词缀池","新宝石"],"new_images":[]}
 
 
 static func _fire_dot_route_candidate(class_id: int, path: Array) -> Dictionary:
@@ -1387,3 +1389,118 @@ static func _fire_dot_route_candidate(class_id: int, path: Array) -> Dictionary:
 	candidate.talents.allocated = path.duplicate()
 	candidate.talents.normal_points = 123 - (path.size() - 1)
 	return candidate
+
+
+## v54 evidence comes from the real compiler and current whole-build validator.
+## Export effective DPS/duration/total; the HTML never reapplies either fraction.
+static func source_faster_burn_examples() -> Dictionary:
+	var coverage: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://docs/qa/v054-source/source-coverage.json"))
+	assert(coverage.new_schema == Canonical.Rules.VERSION and coverage.source_sha256 == SourceTree.Data.SOURCE_SHA256)
+	var nodes: Dictionary = {}
+	var source_ids: Array = ["11364", "43684", "59766"]
+	var faster: float = 0.0
+	for id: String in source_ids:
+		var node: Dictionary = SourceTree.Data.node(id)
+		var current: Dictionary = SourceTree.node_effect(id, 0, 33)
+		var old: Dictionary = SourceTree.node_effect(id, 0, 32)
+		assert(current.status == "full" and old.status != "full")
+		var fraction: float = 0.0
+		for grant: Dictionary in current.grants:
+			if grant.stat == "damaging_ailments_faster": fraction += float(grant.value)
+		faster += fraction
+		nodes[id] = {"name":node.name,"source_lines":node.stats,"fraction":fraction,"execution":current,"legacy_execution":old}
+	assert(is_equal_approx(faster,0.25))
+	var examples: Array = []
+	for multiplier: float in [0.0,0.10]:
+		for skill: String in ["meteor","tornado"]:
+			for support: String in ["ignite","ember_proliferation"]:
+				var base_stats: Dictionary = {"damage":100.0,"fire_dot_multiplier_add":multiplier}
+				var zero_stats: Dictionary = base_stats.duplicate(true)
+				zero_stats.damaging_ailments_faster = 0.0
+				var after_stats: Dictionary = base_stats.duplicate(true)
+				after_stats.damaging_ailments_faster = faster
+				var base: Dictionary = Compiler.compile_group(skill,Recipes.snapshot(base_stats,[]),[support])
+				var zero: Dictionary = Compiler.compile_group(skill,Recipes.snapshot(zero_stats,[]),[support])
+				var after: Dictionary = Compiler.compile_group(skill,Recipes.snapshot(after_stats,[]),[support])
+				assert(base.ok and zero.ok and after.ok and var_to_bytes(base) == var_to_bytes(zero))
+				for role: String in after.burn_profile.roles:
+					var prior: Dictionary = base.burn_profile.roles[role]
+					var effective: Dictionary = after.burn_profile.roles[role]
+					assert(absf(float(effective.total)-float(prior.total)) <= maxf(1.0e-9,1.0e-12*absf(float(prior.total))))
+				examples.append({"source_nodes":source_ids,"fire_dot_multiplier":multiplier,"faster_fraction":faster,
+					"skill_id":skill,"support_id":support,"base":base,"explicit_zero":zero,"faster":after,
+					"zero_bytes_equal":var_to_bytes(base)==var_to_bytes(zero),"details":Preview.details(after)})
+	var class_paths: Array = coverage.classes.duplicate(true)
+	for entry: Dictionary in class_paths:
+		for id: String in entry.paths_to_new_nodes:
+			var candidate: Dictionary = _fire_dot_route_candidate(int(entry.class_id),entry.paths_to_new_nodes[id])
+			assert(Canonical.Rules.reason(candidate).is_empty() and SourceTree.reason(candidate).is_empty())
+			var old: Dictionary = candidate.duplicate(true)
+			old.version = 32
+			assert(not SourceTree.reason(old).is_empty())
+		entry.legal_current_routes = true
+		entry.legacy_routes_rejected = true
+	var route: Array = class_paths[4].paths_to_new_nodes["59766"]
+	for id: String in source_ids: assert(route.has(id))
+	var candidate: Dictionary = _fire_dot_route_candidate(4,route)
+	var model := Canonical.new()
+	model._accept_memory(candidate)
+	var stats: Dictionary = model.get_stats()
+	assert(is_equal_approx(float(stats.damaging_ailments_faster),faster))
+	var legal_cast: Dictionary = Compiler.compile_group("meteor",Recipes.snapshot(stats,[]),["ignite"])
+	assert(legal_cast.ok)
+	var scaled: Dictionary = Compiler.compile_group("meteor",Recipes.snapshot({"damage":100.0,"fire_dot_multiplier_add":0.10,"damaging_ailments_faster":faster},[]),["ember_proliferation"])
+	var started_at: float = 10.0
+	var transferred_at: float = 11.75
+	var expiry: float = started_at + float(scaled.burn_profile.duration)
+	var runtime := BurnRuntime.new()
+	var applied: Dictionary = runtime.apply("monster",90,0,scaled.burn_profile.roles.direct.dps,scaled.burn_profile.duration,started_at,
+		{"skill_id":"meteor","ember_generation":0,"ember_expiry":expiry})
+	assert(applied.ok and applied.applied)
+	var source: Dictionary = runtime.status_for("monster",90)
+	var transfer: Dictionary = Compiler.Proliferation.transfer(source,transferred_at)
+	assert(transfer.ok and not transfer.burn.is_empty())
+	var received: Dictionary = runtime.apply("monster",1,90,transfer.burn.raw_dps,transfer.burn.duration,transferred_at,transfer.burn.provenance)
+	assert(received.ok and received.applied)
+	var after_expiry: Dictionary = Compiler.Proliferation.transfer(source,expiry)
+	assert(after_expiry.ok and after_expiry.burn.is_empty())
+	var shock_base: Dictionary = Compiler.compile_group("bolt",Recipes.snapshot({"damage":100.0,"fire_dot_multiplier_add":0.10},[]),["shock"])
+	var shock_faster: Dictionary = Compiler.compile_group("bolt",Recipes.snapshot({"damage":100.0,"fire_dot_multiplier_add":0.10,"damaging_ailments_faster":faster},[]),["shock"])
+	assert(shock_base.ok and shock_faster.ok and shock_base.shock_profile == shock_faster.shock_profile)
+	var old_save: Dictionary = Canonical.new().snapshot()
+	old_save.version = 32
+	var migrated: Dictionary = FasterBurnMigrationData.migrate_v32(old_save,SourceTree.reason)
+	assert(not migrated.is_empty())
+	var changed_fields: Array = []
+	for key: String in old_save:
+		if old_save[key] != migrated[key]: changed_fields.append(key)
+	assert(changed_fields == ["version"])
+	var blocked: Dictionary = {}
+	for id: String in ["48823","19686"]:
+		var node: Dictionary = SourceTree.Data.node(id)
+		blocked[id] = {"name":node.name,"source_lines":node.stats,"standard_graph":SourceTree.Data.standard_ids().has(id),
+			"execution":SourceTree.node_effect(id,0,33),"legacy_execution":SourceTree.node_effect(id,0,32)}
+	return {"minimum_save_version":33,"stat":"damaging_ailments_faster","snapshot_field":"burn_faster",
+		"source_version":"3.29.1","source_sha256":SourceTree.Data.SOURCE_SHA256,"nodes":nodes,"class_paths":class_paths,
+		"examples":examples,"legal_build_examples":[{"class_id":4,"target":"59766","allocated":route,"points_spent":route.size()-1,
+			"required_level":maxi(1,route.size()-5),"stats":stats,"cast":legal_cast}],
+		"new_complete_ordinary_nodes":source_ids,"newly_reachable_existing_nodes":[],"new_mastery_effect_ids":[],"mastery_occurrences":0,
+		"blocked_matching_nodes":blocked,"older_legal_allocations_gaining_effects":coverage.older_legal_allocations_gaining_effects,
+		"transfer_example":{"fire_dot_multiplier":0.10,"faster_fraction":faster,"started_at":started_at,"transferred_at":transferred_at,
+			"profile":scaled.burn_profile,"source":source,"transfer":transfer,"recipient":runtime.status_for("monster",1),"at_expiry":after_expiry},
+		"unchanged_consumers":{"shock_before":shock_base,"shock_after":shock_faster,"enemy_burn":Compiler.Burn.from_fire_hit(7.0,Compiler.Burn.ENEMY_POLICY)},
+		"migration_example":{"from_version":old_save.version,"to_version":migrated.version,"changed_fields":changed_fields,
+			"items_before":old_save.items.size(),"items_after":migrated.items.size(),"talents_preserved":old_save.talents==migrated.talents},
+		"formula":"先按既有火焰持续伤害加成M结算燃烧每秒伤害，再乘(1 + 更快伤害异常之和F)；最终时长 = 基础3秒 / (1 + F)",
+		"units":"5% + 5% + 15%相加为F=0.25，最终每秒因子为1.25；M=0.10仍独立使用1.10因子，F不作逐节点连乘",
+		"total_rule":"更快只压缩交付时间，原始完整时长总量理论不变；不代表实际战斗DPS或击杀伤害必然增加。总量允许浮点误差max(1e-9,1e-12×旧总量绝对值)",
+		"snapshot_rule":"初始获准施放冻结snapshot.burn_faster；退款或换装不重算飞行中、延迟中与已经存在的燃烧",
+		"preview_rule":"燃烧profile.burn_faster保存F，非零时base_duration保存基础3秒，duration保存压缩时长；roles的dps与total已经生效，显示层不得再次乘算",
+		"zero_rule":"无来源与显式F=0均省略新增快照和预览键；即使已有非零火焰持续伤害加成，旧编译字节结构仍保持",
+		"scope":"当前仅玩家点燃与余烬扩散燃烧消费该源属性；直接命中、魔力、冷却、感电和敌方燃烧保持；尚未实现流血、中毒或完整伤害异常体系",
+		"transfer_rule":"余烬直接继承已计算的每秒伤害与压缩后的原绝对截止时间；不重读天赋、不再次乘F、不重置基础或完整压缩时长",
+		"coverage_note":"仅3个新增完整标准普通节点，七职业各自非起点普通节点可达数685→688；没有其他新增可达节点或精通",
+		"complete_gate":"48823 Deadly Draw仍含未实现的弓技能持续伤害；非标准19686 Wasting Affliction仍含未实现的异常伤害提高，两者保持partial、不可分配",
+		"legacy_rule":"schema32及更早版本保持冻结词汇；严格验证旧32后迁移33，仅版本字段改变，不赠物、不退款、不改旧节点或UID",
+		"example_scope":"八组比较隔离F，M分别取0与0.10，使用真实编译器的陨星直接角色与龙卷母子角色；完整三节点支路另保留沿途全部属性，21条职业路线均经实际完整构筑验证",
+		"unsupported":["流血","中毒","通用异常伤害提高","弓技能限定持续伤害","新装备词缀池","新宝石"],"new_images":[]}
