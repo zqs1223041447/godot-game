@@ -54,16 +54,20 @@ static func positive_number(value: Variant) -> bool:
 ## Reuse the established adjacent raw-offset tie policy without reordering or
 ## rewriting events. Absolute elapsed time never supplies approximate equality.
 static func projectile_batch_error(events: Variant, step_start: Variant,
-		step_end: Variant, read_floor: Variant) -> String:
+		step_end: Variant, read_floor: Variant, original_delta: Variant = null) -> String:
 	for value: Variant in [step_start, step_end, read_floor]:
 		if not _nonnegative_number(value): return "Shock batch window times must be finite and nonnegative"
+	if typeof(original_delta) != TYPE_NIL and not _nonnegative_number(original_delta):
+		return "Shock original step delta must be finite and nonnegative"
 	var start: float = float(step_start)
 	var end: float = float(step_end)
 	var floor_time: float = float(read_floor)
 	if end < start: return "Shock batch window cannot end before it starts"
 	var prepared: Dictionary = EmberClock.offsets(events)
 	if not prepared.ok: return str(prepared.reason)
-	var width: float = end - start
+	# Preserve the original simulation width when supplied. Subtracting two
+	# accumulated timestamps can round below delta and reject a legal end hit.
+	var width: float = end - start if typeof(original_delta) == TYPE_NIL else float(original_delta)
 	for i: int in range(events.size()):
 		var raw: float = float(events[i].time)
 		if raw > width: return "Shock event offset exceeds its original step window"

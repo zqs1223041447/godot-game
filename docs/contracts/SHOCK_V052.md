@@ -1,6 +1,6 @@
 # Shock prototype (v0.52 content branch)
 
-This branch starts at published v0.51 (`d6684d27517e4661abd832d586fcdbb72185929e`). It does not include the withdrawn burn-rate experiment. First implementation checkpoint: resource import and script parsing passed; focused gameplay and migration acceptance is still pending.
+This branch starts at published v0.51 (`d6684d27517e4661abd832d586fcdbb72185929e`). It does not include the withdrawn burn-rate experiment. Focused implementation checkpoint: resource import, policy/runtime, compiler/catalog, strict migration and actual-main gameplay checks pass. Packaging acceptance is pending.
 
 - `shock` / `support:shock` is an explicit support for bolt, nova, chain only. Primary hit damage ×0.80 and mana ×1.20 are prototype balance values. Only a surviving target taking positive actual shield/life loss from a hit with positive mitigated lightning receives shock after settlement.
 - Player support grants 2 seconds, 15% increased hit damage taken. Existing shock multiplies each post-resistance/armour hit component once before shield/life settlement. It does not increase damage over time, retroactively amplify the applying hit, stack, propagate, or attach from an independent explosion. Existing shock can amplify that explosion as a subsequent hit.

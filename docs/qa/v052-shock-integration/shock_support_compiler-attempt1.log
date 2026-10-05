@@ -1,0 +1,14 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ERROR: FAIL: Added-lightning and guaranteed-critical fixture valid: cleave
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/shock_support_compiler_test.gd:38)
+       [1] _test_admission (res://tests/shock_support_compiler_test.gd:71)
+       [2] _initialize (res://tests/shock_support_compiler_test.gd:26)
+SCRIPT ERROR: Invalid access to property or key 'snapshot' on a base object of type 'Dictionary'.
+          at: _test_admission (res://tests/shock_support_compiler_test.gd:72)
+          GDScript backtrace (most recent call first):
+              [0] _test_admission (res://tests/shock_support_compiler_test.gd:72)
+              [1] _initialize (res://tests/shock_support_compiler_test.gd:26)
+Shock support/compiler/catalog: 486 checks, 1 failures; 18 compatible existing pairs

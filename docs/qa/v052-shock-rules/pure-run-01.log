@@ -1,0 +1,71 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ERROR: FAIL: Numerically exact integer duration remains valid
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tests/shock_rules_runtime_test.gd:46)
+       [1] _test_rules (res://tests/shock_rules_runtime_test.gd:97)
+       [2] _case (res://tests/shock_rules_runtime_test.gd:38)
+       [3] _run (res://tests/shock_rules_runtime_test.gd:19)
+ERROR: FAIL: Expiry-crossing fixtures are strict adjacent floating-point timestamps
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tests/shock_rules_runtime_test.gd:46)
+       [1] _test_expiry_crossing_window (res://tests/shock_rules_runtime_test.gd:278)
+       [2] _case (res://tests/shock_rules_runtime_test.gd:38)
+       [3] _run (res://tests/shock_rules_runtime_test.gd:25)
+ERROR: FAIL: Later-processed hit just before expiry retains the complete old interval
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tests/shock_rules_runtime_test.gd:46)
+       [1] _test_expiry_crossing_window (res://tests/shock_rules_runtime_test.gd:284)
+       [2] _case (res://tests/shock_rules_runtime_test.gd:38)
+       [3] _run (res://tests/shock_rules_runtime_test.gd:25)
+SCRIPT ERROR: Invalid access to property or key 'source_id' on a base object of type 'Dictionary'.
+          at: _test_expiry_crossing_window (res://tests/shock_rules_runtime_test.gd:285)
+          GDScript backtrace (most recent call first):
+              [0] _test_expiry_crossing_window (res://tests/shock_rules_runtime_test.gd:285)
+              [1] _case (res://tests/shock_rules_runtime_test.gd:38)
+              [2] _run (res://tests/shock_rules_runtime_test.gd:25)
+ERROR: FAIL: Case completes without script exceptions: ULP expiry-crossing ties and retained prior interval
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tests/shock_rules_runtime_test.gd:46)
+       [1] _case (res://tests/shock_rules_runtime_test.gd:39)
+       [2] _run (res://tests/shock_rules_runtime_test.gd:25)
+ERROR: FAIL: Discarded historical read fails explicitly rather than silently appearing inactive
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tests/shock_rules_runtime_test.gd:46)
+       [1] _test_history_floor (res://tests/shock_rules_runtime_test.gd:328)
+       [2] _case (res://tests/shock_rules_runtime_test.gd:38)
+       [3] _run (res://tests/shock_rules_runtime_test.gd:26)
+ERROR: FAIL: Application before retained window is rejected
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tests/shock_rules_runtime_test.gd:46)
+       [1] _test_history_floor (res://tests/shock_rules_runtime_test.gd:330)
+       [2] _case (res://tests/shock_rules_runtime_test.gd:38)
+       [3] _run (res://tests/shock_rules_runtime_test.gd:26)
+ERROR: FAIL: History floor also validates absent targets before mutation
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tests/shock_rules_runtime_test.gd:46)
+       [1] _test_history_floor (res://tests/shock_rules_runtime_test.gd:331)
+       [2] _case (res://tests/shock_rules_runtime_test.gd:38)
+       [3] _run (res://tests/shock_rules_runtime_test.gd:26)
+ERROR: FAIL: Backward cleanup fails and presentation exposes no discarded history
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tests/shock_rules_runtime_test.gd:46)
+       [1] _test_history_floor (res://tests/shock_rules_runtime_test.gd:332)
+       [2] _case (res://tests/shock_rules_runtime_test.gd:38)
+       [3] _run (res://tests/shock_rules_runtime_test.gd:26)
+ERROR: FAIL: Out-of-window errors are atomic for current state, previous state, and floor
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tests/shock_rules_runtime_test.gd:46)
+       [1] _test_history_floor (res://tests/shock_rules_runtime_test.gd:333)
+       [2] _case (res://tests/shock_rules_runtime_test.gd:38)
+       [3] _run (res://tests/shock_rules_runtime_test.gd:26)
+Shock rules/runtime: 877 checks, 9 failures

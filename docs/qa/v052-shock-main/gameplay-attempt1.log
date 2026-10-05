@@ -1,0 +1,30 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+SHOCK_GAMEPLAY_SOURCES {"scripts/combat/burn_runtime.gd":"2ff6b2974b82bf65637702a2f9aa3e7e4e04521cf2280a55be4700e10337b5e3","scripts/combat/combat_data.gd":"7ebc6234afe5c1d6af6d3ede8a5a8b1bf72415915dc99d97e0a588d1204c270e","scripts/combat/critical_strike_runtime.gd":"d5678da1780b90c5015b3fa70a2fe0cb447b440606b017dd24b73fc5348bc0ae","scripts/combat/damage_resolver.gd":"37429d9754708d3bbbe9638f92bb8a038284326a4b9c422a70b7c2c4cfe3a1d5","scripts/combat/leech_runtime.gd":"fa2b94cc94ffea671124de3986ecd80f0f1ac8feb4ad1e6f2fba554ae1ef8696","scripts/combat/projectile_runtime.gd":"380186b8097db9ee9855fb552699b19c6689460896d6a08f8549d4a00d0fea5c","scripts/combat/shock_rules.gd":"15d4d44793995c1e5f98a0ece88c7d32bee7e694e411a0f8b768057e1cdb23df","scripts/combat/shock_runtime.gd":"0f7c3b8d0b1993643d1dbc489bdbde106c995faef56680bbbaaec19707a4ecf4","scripts/combat/shock_support_rules.gd":"65bc199e49adc8a1a7d7fec01e38b9070887be3a977dbe738d3a28c2aebd10df","scripts/combat/skill_compiler.gd":"477a89fa81d10d604937f43cc7b1b19b34a9366d0fcae0758974fdc8f8963a86","scripts/combat/telegraphed_area_runtime.gd":"f89ef26902dbf28b1db465393e33a37ef6f2dd60e24bee5828cc51be75d941b4","scripts/main.gd":"46caab0bf99c917a6a22dee21fb4af5601dce0d772f704ac061b19f4bab84b7d","scripts/mechanics/defense_rules.gd":"2c9640795202f607be9dbae6da6eed5911d5b8409a64fba44e8c6835567c8141","scripts/monsters/monster_catalog.gd":"bfa4359c185e9da37285a6a2c0afa453ec362c0633be9b9bc058ebf08f63b3c2","scripts/monsters/telegraph_profiles.gd":"fb258eb68317a3b3e2b39e93f64af0797413a3cb99a889ebac2de495f00a2c33","tests/shock_gameplay_test.gd":"62ad30eef6df432bd9bb3832c796ee8ba9c62ad60370751f3c735dd5ae0c95e7"}
+godot-game: playable arena ready
+ERROR: String formatting error: unsupported format character.
+   at: validated_evaluate (core/variant/variant_op.h:770)
+   GDScript backtrace (most recent call first):
+       [0] actual_group_casts (res://tests/shock_gameplay_test.gd:139)
+       [1] run (res://tests/shock_gameplay_test.gd:415)
+ERROR: String formatting error: unsupported format character.
+   at: validated_evaluate (core/variant/variant_op.h:770)
+   GDScript backtrace (most recent call first):
+       [0] actual_group_casts (res://tests/shock_gameplay_test.gd:139)
+       [1] run (res://tests/shock_gameplay_test.gd:415)
+ERROR: String formatting error: unsupported format character.
+   at: validated_evaluate (core/variant/variant_op.h:770)
+   GDScript backtrace (most recent call first):
+       [0] actual_group_casts (res://tests/shock_gameplay_test.gd:139)
+       [1] run (res://tests/shock_gameplay_test.gd:415)
+ERROR: String formatting error: unsupported format character.
+   at: validated_evaluate (core/variant/variant_op.h:770)
+   GDScript backtrace (most recent call first):
+       [0] actual_group_casts (res://tests/shock_gameplay_test.gd:139)
+       [1] run (res://tests/shock_gameplay_test.gd:415)
+ERROR: String formatting error: unsupported format character.
+   at: validated_evaluate (core/variant/variant_op.h:770)
+   GDScript backtrace (most recent call first):
+       [0] actual_group_casts (res://tests/shock_gameplay_test.gd:139)
+       [1] run (res://tests/shock_gameplay_test.gd:415)
+SHOCK_GAMEPLAY_COMPLETE {"checks":161,"exit":0,"failures":0,"sections":{"actual_group_casts":57,"attachment_gates":10,"enemy_telegraph_and_dodge":26,"independent_explosion":8,"mitigation_critical_leech_and_dot":24,"ordering_and_boundaries":11,"pure_status_and_lifecycle":24},"source_hashes":{"scripts/combat/burn_runtime.gd":"2ff6b2974b82bf65637702a2f9aa3e7e4e04521cf2280a55be4700e10337b5e3","scripts/combat/combat_data.gd":"7ebc6234afe5c1d6af6d3ede8a5a8b1bf72415915dc99d97e0a588d1204c270e","scripts/combat/critical_strike_runtime.gd":"d5678da1780b90c5015b3fa70a2fe0cb447b440606b017dd24b73fc5348bc0ae","scripts/combat/damage_resolver.gd":"37429d9754708d3bbbe9638f92bb8a038284326a4b9c422a70b7c2c4cfe3a1d5","scripts/combat/leech_runtime.gd":"fa2b94cc94ffea671124de3986ecd80f0f1ac8feb4ad1e6f2fba554ae1ef8696","scripts/combat/projectile_runtime.gd":"380186b8097db9ee9855fb552699b19c6689460896d6a08f8549d4a00d0fea5c","scripts/combat/shock_rules.gd":"15d4d44793995c1e5f98a0ece88c7d32bee7e694e411a0f8b768057e1cdb23df","scripts/combat/shock_runtime.gd":"0f7c3b8d0b1993643d1dbc489bdbde106c995faef56680bbbaaec19707a4ecf4","scripts/combat/shock_support_rules.gd":"65bc199e49adc8a1a7d7fec01e38b9070887be3a977dbe738d3a28c2aebd10df","scripts/combat/skill_compiler.gd":"477a89fa81d10d604937f43cc7b1b19b34a9366d0fcae0758974fdc8f8963a86","scripts/combat/telegraphed_area_runtime.gd":"f89ef26902dbf28b1db465393e33a37ef6f2dd60e24bee5828cc51be75d941b4","scripts/main.gd":"46caab0bf99c917a6a22dee21fb4af5601dce0d772f704ac061b19f4bab84b7d","scripts/mechanics/defense_rules.gd":"2c9640795202f607be9dbae6da6eed5911d5b8409a64fba44e8c6835567c8141","scripts/monsters/monster_catalog.gd":"bfa4359c185e9da37285a6a2c0afa453ec362c0633be9b9bc058ebf08f63b3c2","scripts/monsters/telegraph_profiles.gd":"fb258eb68317a3b3e2b39e93f64af0797413a3cb99a889ebac2de495f00a2c33","tests/shock_gameplay_test.gd":"62ad30eef6df432bd9bb3832c796ee8ba9c62ad60370751f3c735dd5ae0c95e7"},"xdg_data_home":"/tmp/godot-m1-v052-shock-gameplay-g_mgxfwl/data"}

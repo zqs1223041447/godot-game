@@ -1,0 +1,28 @@
+{
+  "command": [
+    "bash",
+    "tools/validate.sh",
+    "res://tests/shock_rules_runtime_test.gd"
+  ],
+  "started_utc": "2026-10-05T13:59:15.919495+00:00",
+  "exit_code": 0,
+  "log": "docs/qa/v052-shock-rules/pure-run-02.log",
+  "sha256_before": {
+    "scripts/combat/shock_rules.gd": "ebe4072b255f1ae974ba40d175030690e494a7825b798b51ae3c0bc211070516",
+    "scripts/combat/shock_runtime.gd": "0f7c3b8d0b1993643d1dbc489bdbde106c995faef56680bbbaaec19707a4ecf4",
+    "scripts/combat/ember_event_clock.gd": "53e3d1ab85311b433a18ca307db06eef82178553a3eff73389c01f01808b9ae6",
+    "tests/shock_rules_runtime_test.gd": "e0ed0709857686cc0d88948bfd553b4ce7f342737362b2f38e6ebd5c2fc1d6a6",
+    "tools/validate.sh": "878649b5af1f11f65e39d662fe87c4621829269cc31097d0554c340e95b567a4",
+    "project.godot": "bbc93ced24094bb287f4af6d783f661312b9fb7cf7729a6c5cbc071b82ce75b3"
+  },
+  "sha256_after": {
+    "scripts/combat/shock_rules.gd": "ebe4072b255f1ae974ba40d175030690e494a7825b798b51ae3c0bc211070516",
+    "scripts/combat/shock_runtime.gd": "0f7c3b8d0b1993643d1dbc489bdbde106c995faef56680bbbaaec19707a4ecf4",
+    "scripts/combat/ember_event_clock.gd": "53e3d1ab85311b433a18ca307db06eef82178553a3eff73389c01f01808b9ae6",
+    "tests/shock_rules_runtime_test.gd": "e0ed0709857686cc0d88948bfd553b4ce7f342737362b2f38e6ebd5c2fc1d6a6",
+    "tools/validate.sh": "878649b5af1f11f65e39d662fe87c4621829269cc31097d0554c340e95b567a4",
+    "project.godot": "bbc93ced24094bb287f4af6d783f661312b9fb7cf7729a6c5cbc071b82ce75b3"
+  },
+  "inputs_unchanged": true,
+  "scope": "Pure ShockRules, ShockRuntime, and reused EmberEventClock only; no main scene or integration execution"
+}
