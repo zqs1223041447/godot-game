@@ -587,7 +587,9 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	var loaded:=super.load_build(path)
 	if loaded and old_version>0 and old_version<Rules.VERSION:
 		migrated_from_legacy=true
-		if old_version == Rules.V35_VERSION:
+		if old_version == Rules.V36_VERSION:
+			migration_message="旧存档已原字节备份，灰烬皮甲新增冰霜抗性与闪电抗性后缀；旧装备保持原值，新掉落或主动制作才使用新词池，不额外赠物或赠点。"
+		elif old_version == Rules.V35_VERSION:
 			migration_message="旧存档已原字节备份，三元素最大抗性天赋已开放；基础上限75%，本游戏安全上限83%。原始抗性需另行获得，原物品、点数与旅程保持，不额外赠物或赠点。"
 		elif old_version == Rules.V34_VERSION:
 			migration_message="旧存档已原字节备份，心灵升华的魔力先承伤已开放；原物品、技能组、天赋、点数与旅程保持，不额外赠物或赠点。"

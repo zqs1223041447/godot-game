@@ -12,8 +12,10 @@ const NINE_SLOT_BASES: Dictionary = NineSlotProfile._BASES
 const NINE_SLOT_AFFIXES: Dictionary = NineSlotProfile._AFFIXES
 const BuildAffixes = preload("res://scripts/items/build_affix_profile.gd")
 const ForgebladeProfile = preload("res://scripts/items/forgeblade_profile.gd")
-const CURRENT_VOCABULARY: int = 34
-const CANONICAL_LOOT_PROFILE_ID: String = "canonical_v34"
+const ElementalDefense = preload("res://scripts/items/elemental_defense_affix_profile.gd")
+const CURRENT_VOCABULARY: int = 37
+const CANONICAL_LOOT_PROFILE_ID: String = "canonical_v37"
+const CURRENT_DEFENSE_POOL_ID: String = "defense_v37"
 const MIN_ITEM_LEVEL: int = 1
 const MAX_ITEM_LEVEL: int = 30
 const MAX_SERIAL: int = 999999999
@@ -139,6 +141,7 @@ const POOL_PROFILES: Dictionary = {
 	"build_nine_slot_v27": {"base_ids": ["nine_slot_etched_ring", "nine_slot_trail_boots", "nine_slot_folded_belt", "nine_slot_threaded_gloves", "nine_slot_slate_helmet"],
 		"affix_ids": ["nine_slot_prefix_vitality", "nine_slot_prefix_clarity", "nine_slot_prefix_aegis", "nine_slot_suffix_endurance", "nine_slot_suffix_mana_flow", "nine_slot_suffix_stride", "nine_slot_suffix_skill_row", "attack_life_leech", "attack_mana_leech", "global_critical_chance", "global_critical_multiplier"], "min_save_version": 27},
 	"forgeblade_v34": ForgebladeProfile.POOL_PROFILE,
+	"defense_v37": ElementalDefense.POOL_PROFILE,
 }
 const LOOT_PROFILES: Dictionary = {
 	"canonical_v27": [{"pool_id":"build_legacy_v27","weight":30},{"pool_id":"runewood","weight":20},{"pool_id":"defense","weight":10},{"pool_id":"local_weapon","weight":10},{"pool_id":"build_nine_slot_v27","weight":30}],
@@ -146,8 +149,9 @@ const LOOT_PROFILES: Dictionary = {
 	"v0.11": [{"pool_id": "legacy", "weight": 60}, {"pool_id": "runewood", "weight": 25}, {"pool_id": "defense", "weight": 15}],
 	"v0.13": [{"pool_id": "legacy", "weight": 45}, {"pool_id": "runewood", "weight": 25}, {"pool_id": "defense", "weight": 15}, {"pool_id": "local_weapon", "weight": 15}],
 	"canonical_v34": [{"pool_id":"build_legacy_v27","weight":25},{"pool_id":"runewood","weight":20},{"pool_id":"defense","weight":10},{"pool_id":"local_weapon","weight":10},{"pool_id":"build_nine_slot_v27","weight":30},{"pool_id":"forgeblade_v34","weight":5}],
+	"canonical_v37": [{"pool_id":"build_legacy_v27","weight":25},{"pool_id":"runewood","weight":20},{"pool_id":"defense_v37","weight":10},{"pool_id":"local_weapon","weight":10},{"pool_id":"build_nine_slot_v27","weight":30},{"pool_id":"forgeblade_v34","weight":5}],
 }
-const CURRENT_LOOT_PROFILE_ID: String = "canonical_v34"
+const CURRENT_LOOT_PROFILE_ID: String = "canonical_v37"
 
 
 static func all_base_ids() -> Array[String]:
@@ -200,6 +204,8 @@ static func pool_for_base(base_id: String) -> String:
 ## Base availability is historical; rolling/validation vocabulary is explicit.
 static func pool_for_base_version(base_id: String, vocabulary: int) -> String:
 	var original := pool_for_base(base_id)
+	if vocabulary == ElementalDefense.MIN_SAVE_VERSION and original == "defense":
+		return CURRENT_DEFENSE_POOL_ID
 	if vocabulary >= 27:
 		if original == "legacy": return "build_legacy_v27"
 		if original == "nine_slot": return "build_nine_slot_v27"
@@ -250,6 +256,8 @@ static func _base_record(id: String) -> Dictionary:
 
 
 static func _affix_record(id: String) -> Dictionary:
+	if ElementalDefense.AFFIXES.has(id):
+		return ElementalDefense.AFFIXES[id]
 	return _current_extended_affixes.get(id, BuildAffixes.AFFIXES.get(id, AFFIXES.get(id, EXPANSION_AFFIXES.get(id, DEFENSE_AFFIXES.get(id, LOCAL_WEAPON_AFFIXES.get(id, NINE_SLOT_AFFIXES.get(id, {})))))))
 
 
@@ -342,7 +350,9 @@ static func validate_instance(value: Variant, vocabulary: Variant = null) -> boo
 
 
 static func validate_instance_for_version(value: Variant, save_version: int) -> bool:
-	if save_version < 1 or save_version > CURRENT_VOCABULARY:
+	# Source-only schemas35/36 never opened an equipment vocabulary. Their
+	# save adapters map to34; explicit equipment/Craft requests remain rejected.
+	if save_version < 1 or (save_version > 34 and save_version != ElementalDefense.MIN_SAVE_VERSION):
 		return false
 	if not value is Dictionary:
 		return false
@@ -497,6 +507,8 @@ static func _family_eligible(id: String, family: Dictionary, base_id: String) ->
 		return _valid_expansion_family(family) and family.allowed_base_ids.has(base_id)
 	if DEFENSE_AFFIXES.has(id):
 		return _valid_defense_family(family) and family.allowed_base_ids.has(base_id)
+	if ElementalDefense.AFFIXES.has(id):
+		return ElementalDefense.valid_family(family) and family.allowed_base_ids.has(base_id)
 	if LOCAL_WEAPON_AFFIXES.has(id):
 		return _valid_local_weapon_family(family) and family.allowed_base_ids.has(base_id)
 	if BuildAffixes.AFFIXES.has(id): return family.allowed_base_ids.has(base_id)

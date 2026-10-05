@@ -16,6 +16,7 @@ var _render_measured_frame := -1
 var _render_prefix_usec := 0
 const Presentation = preload("res://scripts/visuals/visual_settings.gd")
 const Build = preload("res://scripts/canonical_game_state.gd")
+const Gear = preload("res://scripts/items/equipment_catalog.gd")
 const GroupCooldowns = preload("res://scripts/combat/skill_cooldown_ledger.gd")
 const AreaRules = preload("res://scripts/combat/area_support_rules.gd")
 const Data = preload("res://scripts/game_data.gd")
@@ -1537,6 +1538,9 @@ func _award_kill_equipment(enemy: Dictionary) -> void:
 	var rarity: String = "rare" if enemy.get("rarity", "") in ["rare", "boss"] else ""
 	var item_level: int = clampi(wave * 2 - 1, 1, 30)
 	var pool: String = str(enemy.get("equipment_pool", ""))
+	# A live encounter requests today's defense supply. Explicit historical
+	# catalog/model pool calls retain the immutable original defense sequence.
+	if pool == "defense": pool = Gear.CURRENT_DEFENSE_POOL_ID
 	var item_id: String = state.award_equipment(rng, item_level, rarity, "current" if pool.is_empty() else pool)
 	if item_id.is_empty():
 		hud.notify("背包保留空间不足，无法领取新装备；已有物品完整保留，可在 I 中清理随机装备")

@@ -33,7 +33,8 @@ const V32_VERSION := 32
 const V33_VERSION := 33
 const V34_VERSION := 34
 const V35_VERSION := 35
-const VERSION := 36
+const V36_VERSION := 36
+const VERSION := 37
 const LEGACY_MAX_ITEMS := 1024
 const V17_MAX_ITEMS := LEGACY_MAX_ITEMS + 1
 const MAX_ITEMS := V17_MAX_ITEMS + 2 # Two once-only migration bottles; bag capacity is unchanged.
@@ -74,6 +75,12 @@ static func decode_v28(raw: Variant) -> Dictionary:
 
 static func decode_v29(raw: Variant) -> Dictionary:
 	return _decode(raw, true, V29_VERSION, true)
+
+
+## Schema36 opens maximum resistance source nodes, but keeps equipment vocabulary34.
+static func decode_v36(raw: Variant) -> Dictionary:
+	var decoded := _decode(raw, true, V36_VERSION, true)
+	return decoded if reason_v36(decoded).is_empty() else {}
 
 
 ## Freeze the entire schema35 envelope before opening maximum resistance nodes.
@@ -170,7 +177,7 @@ static func _decode(raw: Variant, paged: bool, expected_version: int, allow_curr
 		# A current item decoder may know later affixes. Opening an old envelope
 		# must still prove its payload belongs to that envelope's vocabulary.
 		if expected_version < Equipment.CURRENT_VOCABULARY and item.kind == "equipment" and not item.payload.is_empty() \
-				and not Equipment.validate_instance_for_version(item.payload, mini(expected_version, Equipment.CURRENT_VOCABULARY)): return {}
+				and not Equipment.validate_instance_for_version(item.payload, equipment_vocabulary_for_save_version(expected_version)): return {}
 		if item.kind=="flask" and expected_version<18:return {}
 		if item.kind in ["skill_gem","support_gem"] and Items.Gems.minimum_save_version(item.definition_id)>expected_version: return {}
 		value.items[uid] = item
@@ -231,6 +238,13 @@ static func reason_v28(value: Variant, validate_talents: Callable = Callable(), 
 
 static func reason_v29(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
 	return _reason(value, V29_VERSION, true, true, MAX_ITEMS, validate_talents, socket_ids)
+
+
+static func reason_v36(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
+	# Neither equipment nor native source legality may be relaxed by a callback.
+	var native_reason := _reason(value, V36_VERSION, true, true, MAX_ITEMS, Callable(), socket_ids)
+	if not native_reason.is_empty(): return native_reason
+	return str(validate_talents.call(value)) if validate_talents.is_valid() else ""
 
 
 static func reason_v35(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
@@ -323,7 +337,7 @@ static func _reason(value: Variant, expected_version: int, paged: bool, allow_cu
 		for item: Variant in value.items.values():
 			if item is Dictionary and item.get("kind", "") == "equipment" \
 					and item.get("payload") is Dictionary and not item.payload.is_empty() \
-					and not Equipment.validate_instance_for_version(item.payload, mini(expected_version, Equipment.CURRENT_VOCABULARY)):
+					and not Equipment.validate_instance_for_version(item.payload, equipment_vocabulary_for_save_version(expected_version)):
 				return "此存档版本不能包含新增装备词缀"
 	var metadata: Dictionary = Items.metadata_for_items(value.items)
 	if metadata.size() != value.items.size(): return "物品实例无效"
@@ -371,6 +385,13 @@ static func _reason(value: Variant, expected_version: int, paged: bool, allow_cu
 	var ledger_error: String = _ledger_reason(value.migration_ledger)
 	if not ledger_error.is_empty(): return ledger_error
 	return str(validate_talents.call(value)) if validate_talents.is_valid() else SourceTree.reason(value)
+
+
+## Save schemas35/36 changed source policy only; they never defined equipment
+## vocabularies35/36. Keep the explicit Catalog version API historically strict.
+static func equipment_vocabulary_for_save_version(save_version: int) -> int:
+	if save_version >= 37: return 37
+	return 34 if save_version >= V34_VERSION else save_version
 
 
 static func skill_contents(value: Dictionary, group_id: String) -> Dictionary:
