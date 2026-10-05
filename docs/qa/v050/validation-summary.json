@@ -1,0 +1,319 @@
+{
+  "source_checks": 861,
+  "suites": {
+    "clock_final": {
+      "checks": 45,
+      "failures": 0,
+      "exit_code": 0
+    },
+    "burn_runtime_byte_equivalence": {
+      "checks": 797,
+      "failures": 0,
+      "exit_code": 0
+    },
+    "same_time_cleanup": {
+      "checks": 19,
+      "failures": 0,
+      "exit_code": 0
+    }
+  },
+  "comparison": {
+    "baseline_commit": "d5ef658b7fce7e36a0b1ee22f5991d5ee2463118",
+    "production_without_wrappers": true,
+    "source_sha256": {
+      "scripts/main.gd": "01a262a18aaa602c5f385c9723d2d925e2fc36151d65aba5025f15daf4335c1b",
+      "scripts/combat/burn_runtime.gd": "2ff6b2974b82bf65637702a2f9aa3e7e4e04521cf2280a55be4700e10337b5e3",
+      "scripts/combat/ember_event_clock.gd": "53e3d1ab85311b433a18ca307db06eef82178553a3eff73389c01f01808b9ae6",
+      "tools/diagnostics/latest_density_profile.gd": "9e9e1067ef4c78c0ec44aa475294e5b13fa6b3c03174b941e7f45b739ae38c0e",
+      "tools/diagnostics/clock_fixed_density_baseline.gd": "cc3b73d13efdcfee9f294f7599dd80313160aeee0cacfd44d729273467c62ba1"
+    },
+    "scenarios": {
+      "ember_proliferation": {
+        "before": {
+          "max_us": 1327166,
+          "mean_us": 1245968.375,
+          "n": 24,
+          "over_16_7_ms": 24,
+          "over_33_3_ms": 24,
+          "p50_us": 1253809,
+          "p95_us": 1323623
+        },
+        "after": {
+          "max_us": 819185,
+          "mean_us": 687399.9583333334,
+          "n": 24,
+          "over_16_7_ms": 24,
+          "over_33_3_ms": 24,
+          "p50_us": 684843,
+          "p95_us": 745391
+        },
+        "mean_reduction_percent": 44.8300637379072,
+        "p95_reduction_percent": 43.68555094615309,
+        "max_reduction_percent": 38.27561887510681,
+        "exact_observation_bytes": 1302852,
+        "observation_sha256": "efad18733c7d2a41d2138c5a7044d3929af55725b5d359715e1e5092d8e397d3",
+        "save_bytes": 12177,
+        "save_sha256": "e5513bec27040478f5586161ba375795275908dd491cbe824044e92da3d56fd1",
+        "kills": 0,
+        "reward_kills": 0,
+        "hit_events": 8359
+      },
+      "ember_deaths": {
+        "before": {
+          "max_us": 1008308,
+          "mean_us": 54052.17333333333,
+          "n": 150,
+          "over_16_7_ms": 62,
+          "over_33_3_ms": 54,
+          "p50_us": 11391,
+          "p95_us": 199800
+        },
+        "after": {
+          "max_us": 735607,
+          "mean_us": 42437.54,
+          "n": 150,
+          "over_16_7_ms": 61,
+          "over_33_3_ms": 52,
+          "p50_us": 9047,
+          "p95_us": 145049
+        },
+        "mean_reduction_percent": 21.487819299526155,
+        "p95_reduction_percent": 27.402902902902902,
+        "max_reduction_percent": 27.045406760632662,
+        "exact_observation_bytes": 250036,
+        "observation_sha256": "a45eabb7d2d448ddcb16a3679119d0265f3e325f35017a2109763784b6ac10ce",
+        "save_bytes": 14156,
+        "save_sha256": "ecc65365d093daab5721cf21beeac3f54e0e80ece72d5115aff261a0de7973e8",
+        "kills": 27,
+        "reward_kills": 27,
+        "hit_events": 1469
+      }
+    }
+  },
+  "legacy_equivalence": [
+    {
+      "label": "legacy-no_burn",
+      "exit_code": 0,
+      "seconds": 4.127022068998485,
+      "errors": [],
+      "exact_bytes_equal": true,
+      "bytes": 1122432,
+      "sha256": "e670cf90128b3e986ef9f433fcf0e07b119b6fec5140e828898996228c1d12ee"
+    },
+    {
+      "label": "legacy-ignite",
+      "exit_code": 0,
+      "seconds": 5.180613440999878,
+      "errors": [],
+      "exact_bytes_equal": true,
+      "bytes": 1261236,
+      "sha256": "a01a1fc2e4fdf1e11d8a9c87ffb5dafead8036253e7d30460d88c9e178ee4366"
+    },
+    {
+      "label": "plain-ember",
+      "exit_code": 0,
+      "seconds": 33.06498126000224,
+      "errors": [],
+      "exact_bytes_equal": true,
+      "bytes": 1302852,
+      "sha256": "efad18733c7d2a41d2138c5a7044d3929af55725b5d359715e1e5092d8e397d3"
+    }
+  ],
+  "reference": {
+    "steps": [
+      {
+        "phase": "export",
+        "exit_code": 0,
+        "seconds": 6.294277566994424
+      },
+      {
+        "phase": "build",
+        "exit_code": 0,
+        "seconds": 0.4336016839952208
+      },
+      {
+        "phase": "determinism",
+        "exit_code": 0,
+        "seconds": 0.4048051579957246
+      }
+    ],
+    "changed_catalog_keys": [
+      "game_version"
+    ],
+    "old_version": "0.49.0",
+    "new_version": "0.50.0",
+    "all_other_catalog_values_unchanged": true,
+    "catalog_sha256": "b02d5ed2dfa57892f980445fb52409b7c1327b86220b2843d244bcc3ca214ad1",
+    "html_sha256": "045b09879c51b1d213ab91db08d74ba62c998453b0b900b3e2a0172db760b9a3"
+  },
+  "font": {
+    "mapped_codepoints": 1069,
+    "required_codepoints": 1064,
+    "required_han": 943,
+    "baseline_codepoints": 874,
+    "fallback_symbols": [
+      8961,
+      9672
+    ],
+    "missing": [],
+    "lost_baseline": [],
+    "empty_han": [],
+    "errors": [],
+    "ok": true,
+    "runtime_files": 158,
+    "missing_locations": {}
+  },
+  "logs": {
+    "docs/qa/v050-density/allocation-ember_proliferation.log": {
+      "bytes": 569,
+      "sha256": "298f4593d9d5d1ad7c54a7580ae02b76a8900e6e20b946913f2b75984baabb74"
+    },
+    "docs/qa/v050-density/first-inversion-events.log": {
+      "bytes": 649,
+      "sha256": "2d5222723f31dc2c6b52b5308ad03c59164acc49946366f3ac635829545e8870"
+    },
+    "docs/qa/v050-density/final-plain-before-ember_proliferation.log": {
+      "bytes": 298,
+      "sha256": "dad9b7dffa6f0a116216951b0ba1d359019f67cc9cccf33f046e719073702b33"
+    },
+    "docs/qa/v050-density/attempt-density-shrink.log": {
+      "bytes": 387,
+      "sha256": "326a10129e180d0e3ba4bba4f885753965d4d1865842ea1b4fb53884411d4ff3"
+    },
+    "docs/qa/v050-density/legacy-no_burn.log": {
+      "bytes": 405,
+      "sha256": "fcd14c4516e9725c52aa250f3f8e57e3a088263daaacf95a908e345179e8751d"
+    },
+    "docs/qa/v050-density/final-plain-before-ember_deaths.log": {
+      "bytes": 294,
+      "sha256": "21d344f5997a1abb41bc67b4d880a5a9801aa468a939c56c4de5773083203d6e"
+    },
+    "docs/qa/v050-density/clock-fixed-ember_deaths.log": {
+      "bytes": 696,
+      "sha256": "fd5fd0e4a8d6c6e354847f2fb33245df09534f7b92f41e1864f3c59ed79c0eed"
+    },
+    "docs/qa/v050-density/clock-fixed-ignite.log": {
+      "bytes": 484,
+      "sha256": "9f4e1ce0f2328852b0fcc7bb6b07840f7f735c9965b4b468e082b521dd3e7fa1"
+    },
+    "docs/qa/v050-density/minimize.log": {
+      "bytes": 581,
+      "sha256": "a80db1c68c27ccd8b930466dd7165b6ee3a23790be85643b6d9eb747d028702f"
+    },
+    "docs/qa/v050-density/same-time-ember_deaths.log": {
+      "bytes": 693,
+      "sha256": "fc14e3c3c103fd6ab97d7770b7b812e9192cd867af1f7d418396fb7e11e93721"
+    },
+    "docs/qa/v050-density/allocation-ignite.log": {
+      "bytes": 484,
+      "sha256": "ed0827e58d6d9d70f5ab31dba7904f254a024fd1bb7cde96020f2264ea5f2a1b"
+    },
+    "docs/qa/v050-density/final-plain-after-ember_deaths.log": {
+      "bytes": 284,
+      "sha256": "662530c2ba4954d93059a0708052083c76d796f1e966109b8397d95d750a66ed"
+    },
+    "docs/qa/v050-density/clock-fixed-no_burn.log": {
+      "bytes": 405,
+      "sha256": "fa419bfa36760b0a15e5356e1a641ba8cd5c64d73308040a282b7479c25229ad"
+    },
+    "docs/qa/v050-density/allocation-ember_deaths.log": {
+      "bytes": 694,
+      "sha256": "de372706b6b2009263d90e7c45478ed395c16d070587a7e308c84c5cbdf8867f"
+    },
+    "docs/qa/v050-density/parse.log": {
+      "bytes": 73,
+      "sha256": "a9912b85473f126d3f4f63ec824170c828df3473a292f866dde86cafda5b66da"
+    },
+    "docs/qa/v050-density/instrumented.log": {
+      "bytes": 14232,
+      "sha256": "15e906c59ec1802ad9879f7a5e06ff64de9e2916bae6dfe7c194813c000f1f98"
+    },
+    "docs/qa/v050-density/legacy-ignite.log": {
+      "bytes": 484,
+      "sha256": "2e4984e41a294034b1505196ec720ca4a908672db280c2fcee66efea89aeea13"
+    },
+    "docs/qa/v050-density/clock-fixed-ember_proliferation.log": {
+      "bytes": 572,
+      "sha256": "1bb66ef3a5c00f45a1bc11860c1c069b71871bd771721e47fb0d536ec94cbdf9"
+    },
+    "docs/qa/v050-density/capture.log": {
+      "bytes": 4546,
+      "sha256": "673d1310703cee445f39900f508c689ed63af7193edeadef7e7b5df0b1fda49a"
+    },
+    "docs/qa/v050-density/same-time-ember_proliferation.log": {
+      "bytes": 573,
+      "sha256": "78d9a07c421ac1c6cd2237561fa2f7f58086b8212cde0fec07d7b4bcfb1cf92f"
+    },
+    "docs/qa/v050-density/allocation-no_burn.log": {
+      "bytes": 398,
+      "sha256": "778ebc2fdf8d645dae15a9c3030c07487bd9783b421541bbfd982ca0ecc30075"
+    },
+    "docs/qa/v050-density/final-plain-after-ember_proliferation.log": {
+      "bytes": 300,
+      "sha256": "953509af5e1af3ed60e49697370702f5014c77c1380566329704509595e2952a"
+    },
+    "docs/qa/v050-density/plain-ember.log": {
+      "bytes": 297,
+      "sha256": "eedf8d46d1189c47a66f9a3cc1d65c31ba18a22bcc9f7d8110a663354e6b9884"
+    },
+    "docs/qa/v050-density/attempt-plain-parse.log": {
+      "bytes": 442,
+      "sha256": "22b180d7d916a807fe3fcf3df39eaa0126e1493f1529256a54ab036e0ee0b7ba"
+    },
+    "docs/qa/v050-inventory/profile.log": {
+      "bytes": 234,
+      "sha256": "2f926a69749d9f4724bded525c502ca299f27fad29676dfb1cf663c4ccf50637"
+    },
+    "docs/qa/v050/reference-build.log": {
+      "bytes": 50,
+      "sha256": "5f82f1b4028223cb5182a6dc09d060ab620af0d7c8995d9eff1509969032b5aa"
+    },
+    "docs/qa/v050/reference-determinism.log": {
+      "bytes": 52,
+      "sha256": "65d47533eaf556129a1f3a295db12ab1bc36a8df0770c71cb9378490d54d03ba"
+    },
+    "docs/qa/v050/probe-parse.log": {
+      "bytes": 73,
+      "sha256": "a9912b85473f126d3f4f63ec824170c828df3473a292f866dde86cafda5b66da"
+    },
+    "docs/qa/v050/reference-export.log": {
+      "bytes": 127,
+      "sha256": "51e3b0bc619efba5c710e1863eedea0402e6700d8c973b9ecb758418906e7297"
+    },
+    "docs/qa/v050-allocation/equivalence.log": {
+      "bytes": 125,
+      "sha256": "fb1fb84997a1791c7e5c27ff5b1a93fa9d16ca1a33d77ae97e680302d1d4494d"
+    },
+    "docs/qa/v050-allocation/zero-cleanup.log": {
+      "bytes": 152,
+      "sha256": "11296a5587965389da365f83ca491a6e637ef4d898cc2069b05d3a356996cbab"
+    },
+    "docs/qa/v050-allocation/final-import.log": {
+      "bytes": 51780,
+      "sha256": "6d0202f1444fa351ac82bf75cc65c2f3f7c4bf11b26200ecbf8e5b60ade68256"
+    },
+    "docs/qa/v050-clock/clock-test.log": {
+      "bytes": 702,
+      "sha256": "c3542712729eab1c42b65a2c0c63205d9ba1794de185f1b788cee8c9dd0846f7"
+    },
+    "docs/qa/v050-clock/clock-final.log": {
+      "bytes": 702,
+      "sha256": "c3542712729eab1c42b65a2c0c63205d9ba1794de185f1b788cee8c9dd0846f7"
+    },
+    "docs/qa/v050-clock/parse.log": {
+      "bytes": 73,
+      "sha256": "a9912b85473f126d3f4f63ec824170c828df3473a292f866dde86cafda5b66da"
+    },
+    "docs/qa/v050-clock/attempt-clock-fixture.log": {
+      "bytes": 3322,
+      "sha256": "edee94ffc6f731617a84460f6701d1213366d65de10316e76b09944e3b980d30"
+    }
+  },
+  "limits": [
+    "Cloud debug CPU, not WindowsFPS",
+    "Stress fixtures are controlled carrier/burn setup, not natural map footage",
+    "Peak latency remains high; not all stalls are solved",
+    "Original ERROR timings explicitly excluded from improvement baseline",
+    "No new visual or600second gate"
+  ]
+}
