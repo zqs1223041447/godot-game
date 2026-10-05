@@ -1866,7 +1866,10 @@ func _settle_burn_segments(segments:Array,targets:Dictionary={},death_states:Dic
 			raw=float(segment.raw_dps)*maxf(0.0,float(segment.to_time)-maxf(float(segment.from_time),immune_until))
 			if raw<=0.0:continue
 			var mana_ratio:Variant=_stats.get("damage_taken_from_mana_before_life",0.0)
-			if typeof(mana_ratio) not in [TYPE_INT,TYPE_FLOAT] or float(mana_ratio)!=0.0:
+			var maximum_fire_bonus:Variant=_stats.get("maximum_fire_resistance_add",0.0)
+			if typeof(maximum_fire_bonus) not in [TYPE_INT,TYPE_FLOAT] or float(maximum_fire_bonus)!=0.0:
+				settlement=Defense.incoming_burn(raw,_stats.get("fire_resistance",0.0),shield,health,"player",mana,mana_ratio,maximum_fire_bonus)
+			elif typeof(mana_ratio) not in [TYPE_INT,TYPE_FLOAT] or float(mana_ratio)!=0.0:
 				settlement=Defense.incoming_burn(raw,_stats.get("fire_resistance",0.0),shield,health,"player",mana,mana_ratio)
 			else:
 				settlement=Defense.incoming_burn(raw,_stats.get("fire_resistance",0.0),shield,health,"player")
@@ -1928,7 +1931,13 @@ func burn_statuses()->Array[Dictionary]:
 			if enemy.is_empty() or float(enemy.health)<=0.0:continue
 			position=enemy.pos;resistance=float(enemy.get("resistances",{}).get("fire",0.0))
 		elif not alive:continue
-		var profile:Dictionary=Defense.defense_profile({"fire_resistance":resistance},status.target_kind)
+		var maximum_fire_bonus:Variant=_stats.get("maximum_fire_resistance_add",0.0) if status.target_kind=="player" else 0.0
+		var profile:Dictionary
+		if typeof(maximum_fire_bonus) not in [TYPE_INT,TYPE_FLOAT] or float(maximum_fire_bonus)!=0.0:
+			profile=Defense.resistance_profile({"fire_resistance":resistance,"maximum_fire_resistance_add":maximum_fire_bonus},status.target_kind)
+		else:
+			profile=Defense.defense_profile({"fire_resistance":resistance},status.target_kind)
+		if not profile.ok:continue
 		result.append({"target_kind":status.target_kind,"target_id":status.target_id,"source_id":status.source_id,"position":position,"remaining_seconds":status.remaining,"raw_dps":status.raw_dps,"effective_dps":0.0 if immune else float(status.raw_dps)*(1.0-float(profile.effective_resistances.fire)),"immune":immune})
 	return result
 

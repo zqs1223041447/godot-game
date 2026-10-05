@@ -18,6 +18,7 @@ const FireDotMigration = preload("res://scripts/save/fire_dot_migration.gd")
 const FasterBurnMigration = preload("res://scripts/save/faster_burn_migration.gd")
 const ForgebladeMigration = preload("res://scripts/save/forgeblade_migration.gd")
 const ManaGuardMigration = preload("res://scripts/save/mana_guard_migration.gd")
+const ElementalResistanceCapMigration = preload("res://scripts/save/elemental_resistance_cap_migration.gd")
 const SourceLeechMigration=preload("res://scripts/save/source_leech_migration.gd")
 const SourceCriticalMigration=preload("res://scripts/save/source_critical_migration.gd")
 const SourceFlaskMigration=preload("res://scripts/save/source_flask_migration.gd")
@@ -62,8 +63,9 @@ func _init() -> void:
 	var source_v32: Dictionary = FireDotMigration.migrate_v31(source_v31, _talent_validator, _socket_ids)
 	var source_v33: Dictionary = FasterBurnMigration.migrate_v32(source_v32, _talent_validator, _socket_ids)
 	var source_v34: Dictionary = ForgebladeMigration.migrate_v33(source_v33, _talent_validator, _socket_ids)
-	_current = ManaGuardMigration.migrate_v34(source_v34, _talent_validator, _socket_ids)
-	assert(not _current.is_empty() and Rules.reason(_current).is_empty(), "The built-in canonical fixture must migrate to v35")
+	var source_v35: Dictionary = ManaGuardMigration.migrate_v34(source_v34, _talent_validator, _socket_ids)
+	_current = ElementalResistanceCapMigration.migrate_v35(source_v35, _talent_validator, _socket_ids)
+	assert(not _current.is_empty() and Rules.reason(_current).is_empty(), "The built-in canonical fixture must migrate to v36")
 	_current.migration_ledger.from_version = 0
 
 
@@ -127,7 +129,9 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	var old_version := int(raw.version)
 	if old_version > Rules.VERSION: return _reject(path, "存档属于未来版本，已保护原文件")
 	var candidate: Dictionary = {}
-	if old_version == Rules.V34_VERSION:
+	if old_version == Rules.V35_VERSION:
+		candidate = Rules.decode_v35(raw)
+	elif old_version == Rules.V34_VERSION:
 		candidate = Rules.decode_v34(raw)
 	elif old_version == Rules.V33_VERSION:
 		candidate = Rules.decode_v33(raw)
@@ -236,8 +240,10 @@ func load_build(path: String = "user://build_save.json") -> bool:
 		candidate = FasterBurnMigration.migrate_v32(candidate, _talent_validator, _socket_ids)
 	if old_version < Rules.V34_VERSION:
 		candidate = ForgebladeMigration.migrate_v33(candidate, _talent_validator, _socket_ids)
-	if old_version < Rules.VERSION:
+	if old_version < Rules.V35_VERSION:
 		candidate = ManaGuardMigration.migrate_v34(candidate, _talent_validator, _socket_ids)
+	if old_version < Rules.VERSION:
+		candidate = ElementalResistanceCapMigration.migrate_v35(candidate, _talent_validator, _socket_ids)
 	var reason: String = Rules.reason(candidate, _talent_validator, _socket_ids)
 	if not reason.is_empty(): return _reject(path, reason)
 	var loaded_revision: int = int(candidate.revision)

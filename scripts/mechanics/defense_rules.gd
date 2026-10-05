@@ -8,6 +8,8 @@ extends RefCounted
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
 const STAGE: String = "hit_mitigation"
 const FIRE_RESISTANCE_CAP: float = 0.75
+const ELEMENTAL_RESISTANCE_SAFETY_CAP: float = 0.83
+const ELEMENTS: Array[String] = ["fire", "cold", "lightning"]
 const ACTORS: Array[String] = ["player", "monster"]
 const RECHARGE_BASE_DELAY:=4.0
 const MANA_GUARD_STAT: String = "damage_taken_from_mana_before_life"
@@ -54,7 +56,7 @@ static func metadata() -> Dictionary:
 		"origin": "original", "source_refs": [], "balance_version": "original-fire-defense-v1",
 		"minimum_effective": 0.0, "maximum_effective": FIRE_RESISTANCE_CAP,
 		"stacking": "additive_raw_then_clamp", "settlement_order": ["resistance", "shield", "health"],
-		"description": "本项目原创火焰防御，命中与燃烧共享有效抗性；原始抗性相加，有效值限制在 0%–75%，再依次消耗护盾和生命。",
+		"description": "本项目原创火焰防御，命中与燃烧共享有效抗性；默认有效值为 0%–75%，最大抗性加成可提高上限，本游戏安全上限为 83%；原始抗性仍需另行获得，再依次消耗护盾和生命。",
 		"unsupported": ["armor", "penetration", "ailments", "chaos_bypass"],
 	}
 
@@ -77,6 +79,36 @@ static func defense_profile(stats: Variant, actor: String = "player", stage: Str
 	return {"ok": true, "reason": "", "actor": actor, "stage": stage,
 		"raw_resistances": {"fire": raw},
 		"effective_resistances": {"fire": clampf(raw, 0.0, FIRE_RESISTANCE_CAP)}}
+
+
+## Read-only elemental rule shared by source hits, burning and presentation.
+## Maximum bonuses add percentage points to the cap, never to raw resistance.
+static func resistance_profile(stats: Dictionary, actor: String = "player") -> Dictionary:
+	if not ACTORS.has(actor): return _failure("Unknown defense actor")
+	var raw := {}
+	var maximum := {}
+	var effective := {}
+	for type: String in ELEMENTS:
+		var amount: Variant = stats.get(type + "_resistance", 0.0)
+		if not _finite_number(amount): return _failure("Non-finite source resistance")
+		raw[type] = float(amount)
+	for type: String in ELEMENTS:
+		var field: String = "maximum_" + type + "_resistance_add"
+		var bonus: Variant = stats.get(field, 0.0)
+		if not _amount(bonus): return _failure("Maximum resistance bonus must be finite and nonnegative: " + field)
+		maximum[type] = _maximum_elemental_resistance(float(bonus))
+		effective[type] = _effective_elemental_resistance(raw[type], float(bonus))
+	return {"ok": true, "reason": "", "base_cap": FIRE_RESISTANCE_CAP,
+		"safety_cap": ELEMENTAL_RESISTANCE_SAFETY_CAP, "raw_resistances": raw,
+		"maximum_resistances": maximum, "effective_resistances": effective}
+
+
+static func _maximum_elemental_resistance(bonus: float) -> float:
+	return minf(ELEMENTAL_RESISTANCE_SAFETY_CAP, FIRE_RESISTANCE_CAP + bonus)
+
+
+static func _effective_elemental_resistance(raw: float, bonus: float) -> float:
+	return clampf(raw, 0.0, _maximum_elemental_resistance(bonus))
 
 
 static func incoming_hit(components: Variant, defense_stats: Variant, shield: Variant,
@@ -111,12 +143,21 @@ static func source_profile(stats: Dictionary, actor: String = "player") -> Dicti
 	if not ACTORS.has(actor): return _failure("Unknown defense actor")
 	var raw := {}
 	var effective := {}
-	for type: String in ["fire","cold","lightning"]:
+	for type: String in ELEMENTS:
 		var amount: Variant = stats.get(type+"_resistance",0.0)
 		if not _finite_number(amount): return _failure("Non-finite source resistance")
 		raw[type] = float(amount)
 		effective[type] = clampf(float(amount),0.0,0.75)
 	if not _amount(stats.get("armour",0.0)): return _failure("Invalid armour")
+	# Existing actors retain the small original loop and output without allocating
+	# a full display profile. Invalid bonuses must enter validation, never this path.
+	for type: String in ELEMENTS:
+		var bonus: Variant = stats.get("maximum_"+type+"_resistance_add",0.0)
+		if not _finite_number(bonus) or float(bonus)!=0.0:
+			var resistance: Dictionary = resistance_profile(stats, actor)
+			if not resistance.ok: return resistance
+			effective = resistance.effective_resistances
+			break
 	return {"ok":true,"reason":"","actor":actor,"armour":float(stats.get("armour",0.0)),"raw_resistances":raw,"effective_resistances":effective}
 
 
@@ -180,7 +221,7 @@ static func apply_hit_damage_taken(resolved: Dictionary, increased: Variant) -> 
 
 ## Already-resolved raw burning has no offensive modifiers or hit admission.
 ## Reuse the same fire cap and resource settlement, without hit-size armour.
-static func incoming_burn(raw_amount:Variant,fire_resistance:Variant,shield:Variant,health:Variant,actor:String="player",mana:Variant=0.0,ratio:Variant=0.0)->Dictionary:
+static func incoming_burn(raw_amount:Variant,fire_resistance:Variant,shield:Variant,health:Variant,actor:String="player",mana:Variant=0.0,ratio:Variant=0.0,max_fire_bonus:Variant=0.0)->Dictionary:
 	if not _amount(raw_amount):return _failure("Burn amount must be finite and nonnegative")
 	var profile:Dictionary=defense_profile({"fire_resistance":fire_resistance},actor)
 	if not profile.ok:return profile
@@ -188,6 +229,16 @@ static func incoming_burn(raw_amount:Variant,fire_resistance:Variant,shield:Vari
 	var amount:float=raw*(1.0-resistance)
 	var resolved:Dictionary={"total":amount,"components":{"fire":amount},"details":[{"type":"fire","before_defense":raw,"resistance":resistance,"final":amount}]}
 	var result:Dictionary=settle_with_mana(resolved,shield,health,mana,ratio) if not _finite_number(ratio) or float(ratio)!=0.0 else settle_resolved(resolved,shield,health)
+	# All original parameter errors retain precedence over the appended bonus.
+	# Numeric zero keeps the original calculation, return fields and typed bytes.
+	if not result.ok:return result
+	if not _finite_number(max_fire_bonus) or float(max_fire_bonus)!=0.0:
+		profile=resistance_profile({"fire_resistance":fire_resistance,"maximum_fire_resistance_add":max_fire_bonus},actor)
+		if not profile.ok:return profile
+		resistance=profile.effective_resistances.fire
+		amount=raw*(1.0-resistance)
+		resolved={"total":amount,"components":{"fire":amount},"details":[{"type":"fire","before_defense":raw,"resistance":resistance,"final":amount}]}
+		result=settle_with_mana(resolved,shield,health,mana,ratio) if float(ratio)!=0.0 else settle_resolved(resolved,shield,health)
 	if result.ok:result.actor=actor;result.stage="burning"
 	return result
 

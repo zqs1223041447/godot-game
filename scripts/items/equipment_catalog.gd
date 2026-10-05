@@ -96,7 +96,7 @@ const EXPANSION_LOOT_PERCENT: int = 25
 ## A separate defense vocabulary never extends either historical dictionary.
 const DEFENSE_BASES: Dictionary = {
 	"emberhide_vest": {"name": "灰烬皮甲", "slot": "armor", "size": Vector2i(2, 3),
-		"description": "最大生命 +8，火焰抗性 +15%。火焰抗性作用于承受的火焰命中，有效上限 75%。", "stats": {"max_health": 8.0, "fire_resistance": 0.15},
+		"description": "最大生命 +8，火焰抗性 +15%。火焰抗性降低火焰命中与燃烧伤害；默认上限75%，最大抗性天赋可提高至本游戏安全上限83%，仍需另外取得足够原始抗性。", "stats": {"max_health": 8.0, "fire_resistance": 0.15},
 		"stage": "hit_mitigation", "scope": "equipped_character", "actors": ["player", "monster"]},
 }
 const DEFENSE_AFFIXES: Dictionary = {

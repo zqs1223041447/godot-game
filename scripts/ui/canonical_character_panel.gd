@@ -15,6 +15,7 @@ var _dirty: bool = true
 var _body: VBoxContainer
 var _progress: Label
 var _values: Dictionary = {}
+var _resistance_cards: Dictionary = {}
 
 const STAT_ROWS: Array[Dictionary] = [
 	{"id":"strength","label":"力量","format":"whole"},
@@ -56,6 +57,7 @@ func refresh() -> void:
 	if model == null or _body == null or not _dirty: return
 	_progress.text = "Lv.%d   ·   经验 %d   ·   未用天赋点 %d" % [int(model.level), int(model.xp), int(model.talent_points)]
 	var stats: Dictionary = model.get_stats()
+	var resistance_profile: Dictionary = model.get_resistance_profile() if model.has_method("get_resistance_profile") else {}
 	var leech: Dictionary = leech_stat_values(model.get_leech_profile()) if model.has_method("get_leech_profile") else {}
 	stats = stats.duplicate()
 	stats.merge(leech)
@@ -71,7 +73,13 @@ func refresh() -> void:
 			"decimal": formatted = "%.2f" % value
 			"percent": formatted = "%.1f%%" % (value * 100.0)
 			"multiplier": formatted = "%.2f×" % value
-			"resistance": formatted = "%.0f%%" % (clampf(value, 0.0, 0.75) * 100.0)
+			"resistance":
+				var element: String = id.trim_suffix("_resistance")
+				if bool(resistance_profile.get("ok", false)):
+					formatted = "%.0f%%" % (float(resistance_profile.effective_resistances[element]) * 100.0)
+					_resistance_cards[id].tooltip_text = "原始抗性 %.1f%% · 当前上限 %.0f%%\n显示的是有效抗性；提高上限不会直接增加原始抗性。" % [float(resistance_profile.raw_resistances[element]) * 100.0, float(resistance_profile.maximum_resistances[element]) * 100.0]
+				else:
+					formatted = "%.0f%%" % (clampf(value, 0.0, 0.75) * 100.0)
 		if id.contains("_leech_") and not leech.has(id): formatted = "—"
 		_values[id].text = formatted
 	_dirty = false
@@ -149,4 +157,6 @@ func _build() -> void:
 		elif row.id == "armour": card.tooltip_text = "护甲减伤随每次物理命中大小变化。"
 		elif row.id == "damage_taken_from_mana_before_life": card.tooltip_text = "护盾吸收后，剩余命中或燃烧伤害按此比例先消耗魔力；魔力不足的部分由生命承担。施法仍消耗同一份魔力。"
 		elif str(row.id).contains("_leech_"): card.tooltip_text = "当前构筑的单次恢复速率与全部偷取的恢复速率上限，不是正在发生的回复。没有相应偷取来源时显示横线；资源回满时清除该资源的偷取。"
-		elif str(row.id).ends_with("_resistance"): card.tooltip_text = "显示当前有效抗性；元素抗性上限为75%。"
+		elif str(row.id).ends_with("_resistance"):
+			_resistance_cards[str(row.id)] = card
+			card.tooltip_text = "显示当前有效抗性；基础上限为75%，天赋可提高当前上限。"

@@ -21,6 +21,18 @@ const STAT_CONSUMER_GROUPS := {
 		],
 		"stats": ["strength", "dexterity", "intelligence", "max_health", "max_mana", "max_shield", "life_regen", "life_regen_percent", "accuracy", "accuracy_increased", "evasion", "evasion_increased", "armour", "armour_increased", "fire_resistance", "cold_resistance", "lightning_resistance"]
 	},
+	"elemental_resistance_caps": {
+		"evidence": "source_tree_runtime.gd::apply_stats -> canonical_game_state.gd::_stats_for -> defense_rules.gd::resistance_profile/source_profile/incoming_burn -> main.gd incoming hit and burn settlement",
+		"code_checks": [
+			{"path": "scripts/canonical_game_state.gd", "contains": "maximum_fire_resistance_add"},
+			{"path": "scripts/mechanics/defense_rules.gd", "contains": "static func resistance_profile"},
+			{"path": "scripts/mechanics/defense_rules.gd", "contains": "static func source_profile"},
+			{"path": "scripts/mechanics/defense_rules.gd", "contains": "static func incoming_burn"},
+			{"path": "scripts/main.gd", "contains": "Defense.incoming_source_hit(components,_stats"},
+			{"path": "scripts/main.gd", "contains": "Defense.incoming_burn("},
+		],
+		"stats": ["maximum_fire_resistance_add", "maximum_cold_resistance_add", "maximum_lightning_resistance_add"]
+	},
 	"damage_and_rates": {
 		"evidence": "combat_data.gd::modifiers -> damage_resolver.gd; canonical_game_state.gd::_stats_for -> main.gd combat/movement/resource tick",
 		"code_checks": [

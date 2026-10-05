@@ -32,7 +32,8 @@ const V31_VERSION := 31
 const V32_VERSION := 32
 const V33_VERSION := 33
 const V34_VERSION := 34
-const VERSION := 35
+const V35_VERSION := 35
+const VERSION := 36
 const LEGACY_MAX_ITEMS := 1024
 const V17_MAX_ITEMS := LEGACY_MAX_ITEMS + 1
 const MAX_ITEMS := V17_MAX_ITEMS + 2 # Two once-only migration bottles; bag capacity is unchanged.
@@ -73,6 +74,12 @@ static func decode_v28(raw: Variant) -> Dictionary:
 
 static func decode_v29(raw: Variant) -> Dictionary:
 	return _decode(raw, true, V29_VERSION, true)
+
+
+## Freeze the entire schema35 envelope before opening maximum resistance nodes.
+static func decode_v35(raw: Variant) -> Dictionary:
+	var decoded := _decode(raw, true, V35_VERSION, true)
+	return decoded if reason_v35(decoded).is_empty() else {}
 
 
 ## Schema34 keeps the schema33 source vocabulary and the existing equipment pools.
@@ -224,6 +231,13 @@ static func reason_v28(value: Variant, validate_talents: Callable = Callable(), 
 
 static func reason_v29(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
 	return _reason(value, V29_VERSION, true, true, MAX_ITEMS, validate_talents, socket_ids)
+
+
+static func reason_v35(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
+	# A callback may add restrictions, never bypass frozen source legality.
+	var native_reason := _reason(value, V35_VERSION, true, true, MAX_ITEMS, Callable(), socket_ids)
+	if not native_reason.is_empty(): return native_reason
+	return str(validate_talents.call(value)) if validate_talents.is_valid() else ""
 
 
 static func reason_v34(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
