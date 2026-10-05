@@ -141,6 +141,21 @@ func latest_monster_time() -> float:
 	return latest
 
 
+## Fresh identities only when every active monster has exactly this clock.
+## Not a cached finished-time claim: replacements and new targets are inspected
+## each time. The caller still owns live/missing-target cleanup and death flush.
+func monster_ids_at_time(to_time: Variant) -> Array[int]:
+	var result: Array[int] = []
+	if not _time_valid(to_time): return result
+	_ensure_status_order()
+	for key: String in _status_keys:
+		var state: Dictionary = _states[key]
+		if state.target_kind != "monster": continue
+		if float(state.last_time) != float(to_time) or float(state.remaining) <= 0.0: return []
+		result.append(int(state.target_id))
+	return result
+
+
 func _ensure_status_order() -> void:
 	if not _status_order_dirty: return
 	_status_keys.assign(_states.keys())

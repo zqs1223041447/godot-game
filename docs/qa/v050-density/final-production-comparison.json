@@ -1,0 +1,73 @@
+{
+  "baseline_commit": "d5ef658b7fce7e36a0b1ee22f5991d5ee2463118",
+  "production_without_wrappers": true,
+  "source_sha256": {
+    "scripts/main.gd": "01a262a18aaa602c5f385c9723d2d925e2fc36151d65aba5025f15daf4335c1b",
+    "scripts/combat/burn_runtime.gd": "2ff6b2974b82bf65637702a2f9aa3e7e4e04521cf2280a55be4700e10337b5e3",
+    "scripts/combat/ember_event_clock.gd": "53e3d1ab85311b433a18ca307db06eef82178553a3eff73389c01f01808b9ae6",
+    "tools/diagnostics/latest_density_profile.gd": "9e9e1067ef4c78c0ec44aa475294e5b13fa6b3c03174b941e7f45b739ae38c0e",
+    "tools/diagnostics/clock_fixed_density_baseline.gd": "cc3b73d13efdcfee9f294f7599dd80313160aeee0cacfd44d729273467c62ba1"
+  },
+  "scenarios": {
+    "ember_proliferation": {
+      "before": {
+        "max_us": 1327166,
+        "mean_us": 1245968.375,
+        "n": 24,
+        "over_16_7_ms": 24,
+        "over_33_3_ms": 24,
+        "p50_us": 1253809,
+        "p95_us": 1323623
+      },
+      "after": {
+        "max_us": 819185,
+        "mean_us": 687399.9583333334,
+        "n": 24,
+        "over_16_7_ms": 24,
+        "over_33_3_ms": 24,
+        "p50_us": 684843,
+        "p95_us": 745391
+      },
+      "mean_reduction_percent": 44.8300637379072,
+      "p95_reduction_percent": 43.68555094615309,
+      "max_reduction_percent": 38.27561887510681,
+      "exact_observation_bytes": 1302852,
+      "observation_sha256": "efad18733c7d2a41d2138c5a7044d3929af55725b5d359715e1e5092d8e397d3",
+      "save_bytes": 12177,
+      "save_sha256": "e5513bec27040478f5586161ba375795275908dd491cbe824044e92da3d56fd1",
+      "kills": 0,
+      "reward_kills": 0,
+      "hit_events": 8359
+    },
+    "ember_deaths": {
+      "before": {
+        "max_us": 1008308,
+        "mean_us": 54052.17333333333,
+        "n": 150,
+        "over_16_7_ms": 62,
+        "over_33_3_ms": 54,
+        "p50_us": 11391,
+        "p95_us": 199800
+      },
+      "after": {
+        "max_us": 735607,
+        "mean_us": 42437.54,
+        "n": 150,
+        "over_16_7_ms": 61,
+        "over_33_3_ms": 52,
+        "p50_us": 9047,
+        "p95_us": 145049
+      },
+      "mean_reduction_percent": 21.487819299526155,
+      "p95_reduction_percent": 27.402902902902902,
+      "max_reduction_percent": 27.045406760632662,
+      "exact_observation_bytes": 250036,
+      "observation_sha256": "a45eabb7d2d448ddcb16a3679119d0265f3e325f35017a2109763784b6ac10ce",
+      "save_bytes": 14156,
+      "save_sha256": "ecc65365d093daab5721cf21beeac3f54e0e80ece72d5115aff261a0de7973e8",
+      "kills": 27,
+      "reward_kills": 27,
+      "hit_events": 1469
+    }
+  }
+}

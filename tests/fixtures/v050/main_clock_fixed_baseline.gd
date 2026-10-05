@@ -28,7 +28,7 @@ const CriticalRuntime = preload("res://scripts/combat/critical_strike_runtime.gd
 var critical_runtime = CriticalRuntime.new()
 const FeedbackRuntime = preload("res://scripts/combat/combat_feedback_runtime.gd")
 var feedback_runtime = FeedbackRuntime.new()
-const BurnRuntime=preload("res://scripts/combat/burn_runtime.gd")
+const BurnRuntime=preload("res://tests/fixtures/v050/burn_runtime_before_allocation.gd")
 const BurnRules=preload("res://scripts/combat/burn_rules.gd")
 const EmberRules=preload("res://scripts/combat/ember_proliferation_rules.gd")
 const EmberClock=preload("res://scripts/combat/ember_event_clock.gd")
@@ -1586,7 +1586,9 @@ func _ember_event_time(at:float,event:Dictionary)->float:
 	# offsets; the event dictionary and ordering remain untouched for RNG/trace.
 	if not _ember_projectile_clock.is_empty() and event.get("sequence",-1)==_ember_projectile_clock.sequence and event.get("time",-1.0)==_ember_projectile_clock.raw:
 		at=_burn_event_time(float(_ember_projectile_clock.offset))
-	var latest:float=maxf(at,burn_runtime.latest_monster_time())
+	var latest:float=at
+	for status:Dictionary in burn_runtime.statuses():
+		if status.target_kind=="monster":latest=maxf(latest,float(status.last_time))
 	if latest>at:
 		# Same tie contract as the projectile scheduler, relative to this tick.
 		assert(_burn_step_active and event.has("time") and latest<=elapsed and is_equal_approx(float(event.time),latest-_burn_step_start),"Ember events cannot reverse time outside an existing projectile tie")
@@ -1605,22 +1607,6 @@ func _advance_proliferating_burns(to_time:float)->void:
 		assert(iterations<=BurnRuntime.MAX_TARGETS+1,"One burn-death boundary per living target")
 		var targets:Dictionary={}
 		for enemy:Dictionary in enemies:targets[int(enemy.id)]=enemy
-		# A complete current-clock proof avoids copying/sorting every status for
-		# repeated contacts at the same instant. Still remove stale bodies and
-		# retain the original empty-settlement/deferred-death flush sequence.
-		var current_ids:Array[int]=burn_runtime.monster_ids_at_time(to_time)
-		if not current_ids.is_empty():
-			var living:bool=false
-			for id:int in current_ids:
-				var body:Dictionary=targets.get(id,{})
-				if body.is_empty() or float(body.health)<=0.0:burn_runtime.remove("monster",id)
-				else:living=true
-			if living:
-				_ember_defer_deaths=true
-				_settle_burn_segments([],targets)
-				_ember_defer_deaths=false
-				_flush_ember_deaths()
-			break
 		var states:Array[Dictionary]=[]
 		var death_times:Dictionary={}
 		var cut:float=to_time
@@ -1656,7 +1642,6 @@ func _advance_proliferating_burns(to_time:float)->void:
 			if float(status.last_time)>cut:continue
 			var advanced:Dictionary=burn_runtime.advance_target("monster",int(status.target_id),cut)
 			_assert_burn_result(advanced)
-			if advanced.segments.is_empty():continue
 			segments.append_array(advanced.segments)
 			sources[int(status.target_id)]=status
 			if death_times.get(int(status.target_id),-1.0)==cut:exact[int(status.target_id)]=true

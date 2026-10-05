@@ -4,9 +4,9 @@ extends SceneTree
 const Compiler=preload("res://scripts/combat/skill_compiler.gd")
 const Combat=preload("res://scripts/combat/combat_data.gd")
 const STEP:=1.0/60.0
-const ProductionMain=preload("res://scripts/main.gd")
+const ProductionMain=preload("res://tests/fixtures/v050/main_clock_fixed_baseline.gd")
 const ProductionModel=preload("res://scripts/canonical_game_state.gd")
-const ProductionBurn=preload("res://scripts/combat/burn_runtime.gd")
+const ProductionBurn=preload("res://tests/fixtures/v050/burn_runtime_before_allocation.gd")
 class Meter extends RefCounted:
 	var enabled:=true
 	var stack:Array=[]
@@ -26,7 +26,7 @@ class Meter extends RefCounted:
 	func extra(key:String,value:int=1)->void:
 		if enabled:extras[key]=int(extras.get(key,0))+value
 	func clear()->void:totals.clear();counts.clear();extras.clear();assert(stack.is_empty())
-class TimedBurn extends "res://scripts/combat/burn_runtime.gd":
+class TimedBurn extends "res://tests/fixtures/v050/burn_runtime_before_allocation.gd":
 	var meter:Meter
 	func statuses()->Array[Dictionary]:
 		meter.begin("burn_status_copies");var value:=super.statuses();meter.extra("copied_status_rows",value.size());meter.end();return value
@@ -46,7 +46,7 @@ class TimedState extends "res://scripts/canonical_game_state.gd":
 	func _write_bytes(path:String,bytes:PackedByteArray)->Error:
 		if meter==null:return super._write_bytes(path,bytes)
 		meter.begin("atomic_write_close");var value:=super._write_bytes(path,bytes);meter.end();return value
-class TimedArena extends "res://scripts/main.gd":
+class TimedArena extends "res://tests/fixtures/v050/main_clock_fixed_baseline.gd":
 	var meter:Meter
 	var capture_inversion:=false
 	var captured:=false
