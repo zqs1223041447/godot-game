@@ -165,9 +165,10 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 		for role:String in (["parent","child"] if skill_id=="tornado" else ["direct"]):
 			var resolved:Dictionary=Damage.resolve(packets[role],compiled_snapshot.modifiers)
 			var fire:float=float(resolved.components.get("fire",0.0))
-			var dps:float=fire*float(profile.rate_fraction)
+			var dps:float=Burn.raw_fire_dps(fire,float(profile.rate_fraction),float(compiled_snapshot.get("fire_dot_multiplier",0.0)))
 			if not is_finite(dps) or not is_finite(dps*float(profile.duration)):return _failure("点燃伤害超出有限数值范围")
 			profile.roles[role]={"fire_before_defense":fire,"dps":dps,"total":dps*float(profile.duration)}
+		if compiled_snapshot.has("fire_dot_multiplier"):profile.fire_dot_multiplier=compiled_snapshot.fire_dot_multiplier
 		result.burn_profile=profile
 	elif canonical.has("ember_proliferation"):
 		compiled_snapshot.burn_policy=Ember.POLICY.duplicate(true)
@@ -177,10 +178,11 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 		for role:String in (["parent","child"] if skill_id=="tornado" else ["direct"]):
 			var resolved:Dictionary=Damage.resolve(packets[role],compiled_snapshot.modifiers)
 			var fire:float=float(resolved.components.get("fire",0.0))
-			var dps:float=fire*float(profile.rate_fraction)
+			var dps:float=Burn.raw_fire_dps(fire,float(profile.rate_fraction),float(compiled_snapshot.get("fire_dot_multiplier",0.0)))
 			if not is_finite(dps) or not is_finite(dps*float(profile.duration)):return _failure("余烬扩散伤害超出有限数值范围")
 			profile.roles[role]={"fire_before_defense":fire,"dps":dps,"total":dps*float(profile.duration)}
 		profile.proliferation=Proliferation.POLICY.duplicate(true)
+		if compiled_snapshot.has("fire_dot_multiplier"):profile.fire_dot_multiplier=compiled_snapshot.fire_dot_multiplier
 		result.burn_profile=profile
 	if canonical.has("shock"):
 		compiled_snapshot.shock_policy = Shock.PLAYER_POLICY.duplicate(true)
@@ -275,6 +277,8 @@ static func _snapshot_error(snapshot: Dictionary) -> String:
 	# Reject re-entry instead of applying support more factors a second time.
 	if snapshot.has("initial_count") or snapshot.has("compiled_packets") or snapshot.has("compiled_skill_id") or snapshot.has("critical") or snapshot.has("critical_roll") or snapshot.has("leech") or snapshot.has("burn_policy") or snapshot.has("burn_proliferation") or snapshot.has("shock_policy"):
 		return "施放快照已编译；必须从基础构筑快照重新编译"
+	var dot_error:String=Burn.snapshot_multiplier_error(snapshot)
+	if not dot_error.is_empty():return dot_error
 	var critical_error:String=Critical.error(snapshot)
 	if not critical_error.is_empty():return critical_error
 	var leech_error:String=Leech.error(snapshot)

@@ -1,6 +1,7 @@
 class_name CombatData
 extends RefCounted
 ## Small declarative recipes: movement, payload and effect grants are separate data.
+const Burn=preload("res://scripts/combat/burn_rules.gd")
 const Data = preload("res://scripts/game_data.gd")
 const BaseCompiler = preload("res://scripts/combat/damage_base_compiler.gd")
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
@@ -60,6 +61,7 @@ static func snapshot(stats: Dictionary, effects: Array) -> Dictionary:
 	if not resources.is_empty():value.resource_modifiers=resources
 	var critical:Dictionary=Critical.from_stats(stats)
 	if not critical.is_empty():value.critical_modifiers=critical
+	value.merge(Burn.multiplier_from_stats(stats))
 	var leech:Dictionary=Leech.from_stats(stats)
 	if not leech.is_empty():value.leech_modifiers=leech
 	return value

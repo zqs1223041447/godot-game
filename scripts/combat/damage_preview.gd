@@ -79,6 +79,9 @@ static func burn_lines(cast: Dictionary) -> PackedStringArray:
 		if not profile.get("roles", {}).has(role): continue
 		var values: Dictionary = profile.roles[role]
 		lines.append("%s每秒 %.2f 火焰 · 完整持续 %.2f" % [{"direct":"", "parent":"母箭：", "child":"子箭："}[role], float(values.dps), float(values.total)])
+	var fire_dot_multiplier: float = float(profile.get("fire_dot_multiplier", 0.0))
+	if fire_dot_multiplier != 0.0:
+		lines.append("火焰持续伤害加成 %+.0f%%（已计入上方数值）" % (fire_dot_multiplier * 100.0))
 	lines.append("同一目标不叠加；强点燃覆盖，同强度刷新。")
 	var proliferation: Dictionary = profile.get("proliferation", {})
 	if bool(proliferation.get("enabled", false)):

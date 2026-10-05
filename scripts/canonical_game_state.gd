@@ -195,7 +195,7 @@ static func _stats_for(candidate: Dictionary) -> Dictionary:
 	stats.crit_base_multiplier = 1.5
 	for stat: String in Critical.STAT_KEYS: stats[stat] = 0.0
 	for stat: String in Leech.STAT_KEYS: stats[stat] = 0.0
-	for stat: String in ["strength","dexterity","intelligence","physical_increased","chaos_increased","melee_physical_increased","attack_physical_increased","accuracy_increased","evasion_increased","armour","armour_increased","cold_resistance","lightning_resistance","life_regen","life_regen_percent","area_size_increased","spell_area_size_increased","melee_area_size_increased","projectile_speed_increased","shield_recharge_rate_increased","shield_recharge_start_faster","mana_cost_efficiency_increased","mana_cost_increased","flask_life_recovery_increased","flask_mana_recovery_increased","flask_charges_gained_increased"]:
+	for stat: String in ["strength","dexterity","intelligence","physical_increased","chaos_increased","melee_physical_increased","attack_physical_increased","accuracy_increased","evasion_increased","armour","armour_increased","cold_resistance","lightning_resistance","life_regen","life_regen_percent","area_size_increased","spell_area_size_increased","melee_area_size_increased","projectile_speed_increased","shield_recharge_rate_increased","shield_recharge_start_faster","mana_cost_efficiency_increased","mana_cost_increased","flask_life_recovery_increased","flask_mana_recovery_increased","flask_charges_gained_increased","fire_dot_multiplier_add"]:
 		stats[stat] = 0.0
 	# Authored base ratings for this arena, not a copied monster/level table.
 	stats.accuracy = 100.0
@@ -565,7 +565,9 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	var loaded:=super.load_build(path)
 	if loaded and old_version>0 and old_version<Rules.VERSION:
 		migrated_from_legacy=true
-		if old_version == Rules.V30_VERSION:
+		if old_version == Rules.V31_VERSION:
+			migration_message="旧存档已原字节备份，火焰持续伤害加成源天赋已开放；原物品、技能组、已分配天赋、点数与普通旅程保持，不额外赠物。"
+		elif old_version == Rules.V30_VERSION:
 			migration_message="旧存档已原字节备份，感电辅助宝石已开放购买；原物品、技能组、天赋与普通旅程保持，不额外赠物。"
 		elif old_version == Rules.V29_VERSION:
 			migration_message="旧存档已原字节备份，晴泉台地 I 已开放；旧两图进度、进行中地图与待领奖励保持，不额外赠送碎片或物品。"
