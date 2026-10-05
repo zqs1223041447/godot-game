@@ -469,6 +469,12 @@ func _request_craft(operation: String,uid: String,source: Dictionary) -> void:
 		_craft_dialog.title = "确认数值校准"
 		_craft_dialog.ok_button_text = "确认消耗并校准"
 		_craft_dialog.dialog_text = "校准「%s」？\n消耗校准碎片 %d 枚。\n重掷已有词缀数值，结果可能降低或不变。\n种类、阶级和物品等级保持。" % [name_value,int(quote.cost.get("calibration_shard",0))]
+	elif bool(_craft_metadata.get(operation,{}).get("targeted",false)):
+		var metadata: Dictionary = _craft_metadata[operation]
+		var target_label := str(metadata.get("target_label","所选方向"))
+		_craft_dialog.title = "定向重铸 · " + target_label
+		_craft_dialog.ok_button_text = "确认消耗并重铸"
+		_craft_dialog.dialog_text = "重铸「%s」？\n消耗校准碎片 %d 枚。\n保证至少一个「%s」方向的合法词缀。\n全部原词缀将被替换，其他词缀随机，不保证高阶或更高数值。" % [name_value,int(quote.cost.get("calibration_shard",0)),target_label]
 	else:
 		var metadata: Dictionary = _craft_metadata.get(operation,{})
 		var label: String = str(metadata.get("label",operation))

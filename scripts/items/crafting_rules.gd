@@ -4,6 +4,8 @@ extends RefCounted
 ## inventory + materials atomically, refresh derived stats and persist once.
 const Catalog = preload("res://scripts/items/equipment_catalog.gd")
 const Expansion = preload("res://scripts/items/crafting_expansion_rules.gd")
+const Targeted = preload("res://scripts/items/targeted_reforge_rules.gd")
+const TARGETED_RULES_VERSION: String = "original-targeted-reforge-v1-affix27"
 const LEGACY_SEED_VERSION: String = "original-crafting-prototype-v1"
 const RULES_VERSION: String = "original-crafting-prototype-v2"
 const CURRENT_RULES_VERSION: String = "original-crafting-prototype-v3-affix27"
@@ -48,15 +50,24 @@ static func metadata() -> Dictionary:
 		result.operations[operation] = Expansion.OPERATIONS[operation].duplicate(true)
 		result.operations[operation]["consumes_item"] = false
 	result["expansion"] = Expansion.metadata()
+	for operation: String in Targeted.operation_ids():
+		result.operations[operation] = Targeted.metadata(operation)
+		result.operations[operation]["consumes_item"] = false
+		result.operations[operation]["cost"] = Targeted.COSTS.duplicate()
+		result.operations[operation]["rules_version"] = TARGETED_RULES_VERSION
 	return result
 
 
 static func operation_ids() -> Array[String]:
-	return ["salvage", "recalibrate", "enchant", "elevate", "augment", "reforge"]
+	var result: Array[String] = ["salvage", "recalibrate", "enchant", "elevate", "augment", "reforge"]
+	result.append_array(Targeted.operation_ids())
+	return result
 
 
 ## Detached display metadata. Prices and eligibility come from operation_quote.
 static func operation_metadata(operation: String) -> Dictionary:
+	if Targeted.operation_ids().has(operation):
+		return Targeted.metadata(operation)
 	var labels := {"salvage":"回收", "recalibrate":"校准"}
 	var descriptions := {
 		"salvage":"消耗这件装备，获得由稀有度和词缀阶级决定的校准碎片。",
@@ -76,13 +87,15 @@ static func operation_metadata(operation: String) -> Dictionary:
 
 
 static func seed_rules_version(operation: String, vocabulary: int = Catalog.CURRENT_VOCABULARY) -> String:
+	if Targeted.operation_ids().has(operation):
+		return TARGETED_RULES_VERSION + ":" + operation
 	return LEGACY_SEED_VERSION if operation in ["salvage", "recalibrate"] else (CURRENT_RULES_VERSION if vocabulary >= 27 else RULES_VERSION) + ":" + operation
 
 
 ## Economics-only quote: expanded operations never roll a replacement here.
 static func operation_quote(instance: Variant, operation: Variant, vocabulary: int = Catalog.CURRENT_VOCABULARY) -> Dictionary:
 	var result := _operation_quote_core(instance, operation, vocabulary)
-	result.rules_version = CURRENT_RULES_VERSION if vocabulary >= 27 else RULES_VERSION
+	result.rules_version = TARGETED_RULES_VERSION if operation is String and Targeted.operation_ids().has(operation) else (CURRENT_RULES_VERSION if vocabulary >= 27 else RULES_VERSION)
 	return result
 
 
@@ -102,7 +115,7 @@ static func _operation_quote_core(instance: Variant, operation: Variant, vocabul
 		quoted.source_instance = instance.duplicate(true)
 		quoted.cost = {MATERIAL_ID: _salvage_units(instance) * int(BALANCE.recalibrate_cost_multiplier)}
 		return quoted
-	var raw: Dictionary = Expansion.quote(instance, operation, vocabulary)
+	var raw: Dictionary = Targeted.quote(instance, operation, vocabulary) if Targeted.operation_ids().has(operation) else Expansion.quote(instance, operation, vocabulary)
 	if not raw.ok:
 		return _rejected(operation, raw.code, raw.reason)
 	var result: Dictionary = _result(operation)
@@ -114,7 +127,7 @@ static func _operation_quote_core(instance: Variant, operation: Variant, vocabul
 
 static func operation_plan(instance: Variant, operation: Variant, seed_value: Variant, vocabulary: int = Catalog.CURRENT_VOCABULARY) -> Dictionary:
 	var result := _operation_plan_core(instance, operation, seed_value, vocabulary)
-	result.rules_version = CURRENT_RULES_VERSION if vocabulary >= 27 else RULES_VERSION
+	result.rules_version = TARGETED_RULES_VERSION if operation is String and Targeted.operation_ids().has(operation) else (CURRENT_RULES_VERSION if vocabulary >= 27 else RULES_VERSION)
 	return result
 
 
@@ -128,7 +141,7 @@ static func _operation_plan_core(instance: Variant, operation: Variant, seed_val
 		return quoted
 	if operation == "recalibrate":
 		return recalibrate_plan(instance, seed_value)
-	var raw: Dictionary = Expansion.plan(instance, operation, seed_value, vocabulary)
+	var raw: Dictionary = Targeted.plan(instance, operation, seed_value, vocabulary) if Targeted.operation_ids().has(operation) else Expansion.plan(instance, operation, seed_value, vocabulary)
 	if not raw.ok:
 		return _rejected(operation, raw.code, raw.reason)
 	quoted.instance = raw.instance.duplicate(true)

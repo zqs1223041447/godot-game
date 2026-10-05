@@ -23,6 +23,11 @@ var _metadata_mode := false
 var _operations: Dictionary = {}
 var _operation_buttons: Dictionary = {}
 var _button_row: HBoxContainer
+var _target_row: HBoxContainer
+var _target_select: OptionButton
+var _target_button: Button
+var _target_operation := ""
+var _target_pressed_operation := ""
 
 
 class CraftButton extends Button:
@@ -86,6 +91,7 @@ func set_operations_context(item_id: String,source_instance: Dictionary,material
 		var operation := str(entry.get("operation",""))
 		if operation.is_empty(): continue
 		_operations[operation] = entry.duplicate(true)
+		if bool(entry.get("targeted", false)): continue
 		if not _operation_buttons.has(operation):
 			var button := _make_button(str(entry.get("label",operation)),"Craft_"+operation,operation)
 			_button_row.add_child(button)
@@ -122,6 +128,26 @@ func _ensure_interface() -> void:
 	row.add_child(_recalibrate_button)
 	_operation_buttons["salvage"] = _salvage_button
 	_operation_buttons["recalibrate"] = _recalibrate_button
+	_target_row = HBoxContainer.new()
+	_target_row.name = "TargetedCraftingRow"
+	_target_row.add_theme_constant_override("separation", 4)
+	add_child(_target_row)
+	_target_select = OptionButton.new()
+	_target_select.name = "TargetedCraftFamily"
+	_target_select.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_target_select.custom_minimum_size = Vector2(110,28)
+	DockStyle.style_action(_target_select,11)
+	_target_select.item_selected.connect(_select_target)
+	_target_row.add_child(_target_select)
+	_target_button = CraftButton.new()
+	_target_button.name = "TargetedReforgeButton"
+	_target_button.custom_minimum_size = Vector2(126,28)
+	DockStyle.style_action(_target_button,11)
+	_target_button.button_down.connect(_capture_targeted)
+	_target_button.button_up.connect(_release_targeted)
+	_target_button.pressed.connect(_request_targeted)
+	_target_row.add_child(_target_button)
+	_target_row.hide()
 
 
 func _make_button(caption: String, stable_name: String, operation: String) -> Button:
@@ -164,7 +190,9 @@ func _refresh() -> void:
 				if gain >= 0: detail += "\n获得校准碎片 %d 枚" % gain
 			if not reason.is_empty(): detail += "\n"+reason
 			button.tooltip_text = detail.strip_edges()
+		_refresh_targeted()
 		return
+	_target_row.hide()
 	for operation: String in _operation_buttons:
 		_operation_buttons[operation].visible = operation in ["salvage","recalibrate"]
 	_balance_label.text = "校准碎片 %d" % _material_balance
@@ -239,3 +267,69 @@ func _request_craft(operation: String) -> void:
 		return
 	# 按下后选择变化仍携带按下时的原快照，由事务所有者验证是否陈旧。
 	craft_requested.emit(operation, request.item_id, request.source_instance.duplicate(true))
+
+
+func _refresh_targeted() -> void:
+	_target_select.clear()
+	var selected := -1
+	var first_available := -1
+	for operation: String in _operations:
+		var entry: Dictionary = _operations[operation]
+		if not bool(entry.get("targeted",false)): continue
+		_target_select.add_item(str(entry.get("target_label",entry.get("target_id",operation))))
+		var index := _target_select.item_count - 1
+		_target_select.set_item_metadata(index,operation)
+		var reason := _blocked_reason(operation)
+		_target_select.set_item_disabled(index,not reason.is_empty())
+		_target_select.get_popup().set_item_tooltip(index,reason if not reason.is_empty() else str(entry.get("description","")))
+		if first_available < 0 and reason.is_empty(): first_available = index
+		if operation == _target_operation: selected = index
+	_target_row.visible = _target_select.item_count > 0
+	if not _target_row.visible:
+		_target_operation = ""
+		_target_button.disabled = true
+		return
+	if selected < 0: selected = first_available if first_available >= 0 else 0
+	_target_select.select(selected)
+	_select_target(selected)
+
+
+func _select_target(index: int) -> void:
+	if index < 0 or index >= _target_select.item_count: return
+	_target_operation = str(_target_select.get_item_metadata(index))
+	var entry: Dictionary = _operations.get(_target_operation,{})
+	var cost := _shard_amount(entry.get("cost",{}))
+	_target_button.text = "定向重铸" + (" · %d" % cost if cost >= 0 else "")
+	var reason := _blocked_reason(_target_operation)
+	_target_button.disabled = not reason.is_empty()
+	var detail := str(entry.get("description","")) + "\n" + str(entry.get("risk",""))
+	if cost >= 0: detail += "\n消耗校准碎片 %d 枚" % cost
+	if not reason.is_empty(): detail += "\n" + reason
+	_target_button.tooltip_text = detail.strip_edges()
+	_target_select.tooltip_text = str(entry.get("target_label","")) + ("：" + reason if not reason.is_empty() else "")
+
+
+func _capture_targeted() -> void:
+	_target_pressed_operation = _target_operation
+	_capture_request(_target_pressed_operation)
+
+
+func _release_targeted() -> void:
+	var operation := _target_pressed_operation
+	var sequence: int = int(_pending_requests.get(operation,{}).get("sequence",-1))
+	_cancel_targeted.call_deferred(operation,sequence)
+
+
+func _cancel_targeted(operation: String, sequence: int) -> void:
+	if int(_pending_requests.get(operation,{}).get("sequence",-1)) != sequence: return
+	_cancel_pending(operation,sequence)
+	if _target_pressed_operation == operation: _target_pressed_operation = ""
+
+
+func _request_targeted() -> void:
+	var operation := _target_pressed_operation if not _target_pressed_operation.is_empty() else _target_operation
+	_target_pressed_operation = ""
+	var request: Dictionary = _pending_requests.get(operation,_snapshot(operation))
+	_pending_requests.erase(operation)
+	if not _metadata_mode or operation != _target_operation or not _target_row.visible or _target_button.disabled or not request.allowed: return
+	craft_requested.emit(operation,request.item_id,request.source_instance.duplicate(true))

@@ -43,7 +43,7 @@ static func quote(context: Variant, operation: Variant, item_id: Variant) -> Dic
 	if not wallet.ok:
 		return wallet
 	return {"ok": true, "code": "", "reason": "", "operation": operation,
-		"item_id": item_id, "revision": context.revision, "rules_version": Craft.CURRENT_RULES_VERSION,
+		"item_id": item_id, "revision": context.revision, "rules_version": rule.rules_version,
 		"source_instance": source.duplicate(true), "cost": rule.cost.duplicate(true),
 		"materials": rule.materials.duplicate(true), "consumes_item": rule.consumes_item}
 
