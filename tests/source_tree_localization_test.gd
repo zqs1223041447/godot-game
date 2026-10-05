@@ -40,6 +40,7 @@ func run() -> void:
 	check(localized.coverage.classes == 7 and localized.coverage.ascendancy_partitions == 37, "All class and ascendancy picker labels are covered")
 	check(localized.coverage.reminder_text_records_not_displayed_by_canonical_panel == 802 and localized.coverage.reminder_text_entries_not_displayed_by_canonical_panel == 1015, "Hidden source reminder text is counted separately from displayed labels")
 	check(localized.coverage.untranslated_names == 0 and localized.coverage.untranslated_effect_lines == 0, "Builder reports no untranslated names or effects")
+	audit_consumer_manifest()
 
 	var all_raw_lines: Dictionary = {}
 	var source_occurrences := 0
@@ -105,13 +106,59 @@ func run() -> void:
 		check(multiplier_zh.contains("倍率") and multiplier_zh.contains("+12%") and not multiplier_zh.contains("提高"), "Multiplier plus remains additive percentage points, not MORE")
 	var faster_ailment := Localization.source_effect_line("Damaging Ailments deal damage 5% faster")
 	check(faster_ailment == "伤害型异常状态的伤害结算加快5%", "Faster damaging ailments stay general, not narrowed to fire")
-	check(not Localization.line_status("Damaging Ailments deal damage 5% faster").implemented, "Current schema does not claim the future faster-ailment consumer is implemented")
+	var faster_status := Localization.line_status("Damaging Ailments deal damage 5% faster")
+	if Runtime.CURRENT_SAVE_VERSION >= 33:
+		check(faster_status.parser_supported and faster_status.implemented, "Schema 33 recognizes faster damaging-ailment stats and has a code-path consumer")
+		check(not Localization.display_line("Damaging Ailments deal damage 5% faster").ends_with(Localization.NOT_IMPLEMENTED), "Implemented faster-ailment row has no false unsupported label")
+	else:
+		check(not faster_status.parser_supported and not faster_status.implemented, "Schema 32 does not claim the future faster-ailment consumer is implemented")
+		check(Localization.display_line("Damaging Ailments deal damage 5% faster").ends_with(Localization.NOT_IMPLEMENTED), "Unrecognized faster-ailment row carries its unsupported label")
 	var comparator_line := "Tinctures deactivate when you have 12 or more Mana Burn"
 	check(Localization.source_effect_line(comparator_line) == "当你身上有12层或以上魔力燃烧时，灵药会停用", "‘or more’ stays a threshold comparison, not a MORE modifier")
 	check(Localization.source_effect_line("10% more Damage if you've Killed Recently") == "伤害额外提高10%（若你近期击杀过敌人）", "Numeric MORE remains an independent multiplicative modifier")
 	var ward_comparator := "Damage taken bypasses Unbroken Ward if the Hit deals less Damage than 15% of Ward"
 	check(Localization.source_effect_line(ward_comparator) == "若该次击中造成的伤害低于灵护值的15%，所受伤害会绕过未破损灵护", "‘less than’ stays a comparison and Ward uses the localized game term")
 	check(Localization.source_effect_line("1% increased Flask Charges gained per Mana Burn on you") == "你身上每层魔力燃烧，获得的药剂充能提高1%", "Flask charges use ‘充能’, with the per-stack scope intact")
+	check(Localization.source_effect_line("Skills fire an additional Projectile") == "技能额外发射一个投射物", "‘fire’ in projectile effects is translated as ‘发射’")
+	check(Localization.source_effect_line("Bow Attacks fire an additional Arrow") == "弓类攻击额外发射一支箭矢", "Bow projectiles keep the firing verb and arrow type")
+	check(Localization.source_effect_line("Projectiles are fired in random directions") == "投射物会向随机方向发射", "Passive voice for projectile firing keeps the firing meaning")
+	check(Localization.source_effect_line("Flasks gain 3 Charges every 3 seconds") == "每3秒，药剂获得3点药剂充能", "Periodic flask charge gains keep amount, interval, and charge wording")
+	check(Localization.source_effect_line("50% chance for Flasks you use to not consume Charges") == "你使用药剂时，有50%几率不消耗药剂充能", "Flask charges used retain the flask-charge term")
+	check(Localization.source_effect_line("1% of Damage Dealt by your Minions is Leeched to you as Life") == "召唤物造成的伤害中，有1%作为生命偷取转移给你", "Minion damage leeched to the player names the correct beneficiary")
+	check(Localization.source_effect_line("Gain 25% increased Armour per 5 Power for 8 seconds when you Warcry, up to a maximum of 100%") == "使用战吼时，每5点战吼威力使护甲提高25%，持续8秒，最多提高100%", "Warcry Power stays distinct from Strength and retains per-5 scaling and duration")
+	check(Localization.source_effect_line("10% faster start of Energy Shield Recharge") == "能量护盾充能启动加快10%", "Faster recharge start describes startup speed, preserving the percentage")
+	check(Localization.source_effect_line("10% chance to Poison on Hit") == "击中敌人时，有10%几率使敌人中毒", "Poison-on-hit text identifies the enemy as the target")
+	check(Localization.source_effect_line("10% chance to Ignite") == "有10%几率点燃敌人", "Ignite chance names the affected enemy")
+	check(Localization.source_effect_line("10% chance to Shock") == "有10%几率使敌人感电", "Shock chance names the affected enemy")
+	check(Localization.source_effect_line("10% chance to Freeze") == "有10%几率冻结敌人", "Freeze chance names the affected enemy")
+	check(Localization.source_effect_line("10% Chance to Inflict Cold Exposure on Hit with Cold Damage") == "以冰霜伤害击中敌人时，有10%几率对其施加冰霜曝露", "Exposure chance names the hit enemy as the affected target")
+	check(Localization.source_effect_line("Warcries have 5% Chance to grant an Endurance, Frenzy or Power Charge per Power") == "战吼威力每有一点，战吼就有5%几率获得一个耐力球、狂怒球或暴击球", "Warcry Power and Power Charges use distinct Chinese terms")
+	check(Localization.source_effect_line("25% chance to Steal Power, Frenzy, and Endurance Charges on Hit with Claws") == "使用爪类武器击中敌人时，有25%几率窃取暴击球、狂怒球与耐力球", "Stealing charge types keeps the enemy hit and charge names clear")
+	for raw_line: String in all_raw_lines:
+		var lower_line := raw_line.to_lower()
+		var rendered := Localization.source_effect_line(raw_line)
+		if lower_line.contains("flask") and lower_line.contains("charge") and (lower_line.find("flask") < lower_line.find("charge") or lower_line.contains("charges from a flask")):
+			check(rendered.contains("充能") and not rendered.contains("药剂球"), "Flask Charge wording is consistent across the full source inventory: " + raw_line.left(60).replace("\n", " / "))
+		if lower_line.contains("power"):
+			if lower_line.contains("warcry") or lower_line.contains("enemy power"):
+				check(rendered.contains("威力"), "Warcry or enemy Power is distinguished from Strength and Power Charges: " + raw_line.left(65).replace("\n", " / "))
+			if lower_line.contains("power charge") or lower_line.contains("power, frenzy") or lower_line.contains("frenzy and power"):
+				check(rendered.contains("暴击球"), "Power Charge maps to 暴击球 throughout the source inventory: " + raw_line.left(65).replace("\n", " / "))
+		var is_projectile_firing := false
+		for prefix: String in ["attack skills fire", "attacks fire", "bow attacks fire", "wand attacks fire", "skills fire", "first and final shots of barrage"]:
+			if lower_line.begins_with(prefix):
+				is_projectile_firing = true
+				break
+		if is_projectile_firing:
+			check(rendered.contains("发射") and not rendered.contains("火焰"), "Projectile firing is translated as a verb: " + raw_line.left(65))
+		var has_status := false
+		for token: String in ["poison", "ignite", "shock", "freeze", "chill", "bleed", "maim", "taunt", "hinder", "exposure", "withered"]:
+			if lower_line.contains(token):
+				has_status = true
+				break
+		if lower_line.contains("chance") and has_status and not lower_line.contains("avoid") and not lower_line.contains("chance to deal") and not lower_line.contains("critical strike chance"):
+			var status_zh := Localization.source_effect_line(raw_line)
+			check(status_zh.contains("敌人") or status_zh.contains("目标") or status_zh.contains("其"), "Chance-to-ailment row identifies the affected target: " + raw_line.left(70).replace("\n", " / "))
 	check(Localization.source_effect_line("+1% to Critical Strike Multiplier per 10 Maximum Energy Shield on Shield") == "盾牌上的最大能量护盾每有10点，暴击伤害倍率+1%", "Multiplier points keep their additive sign and per-10 scaling")
 	check(Localization.source_effect_line("Life Recoup Effects instead occur over 3 seconds") == "生命延迟回复效果改为在3秒内完成", "Recoup duration is rendered as a recovery interval")
 	check(Localization.source_effect_line("Recover 10% of Mana over 1 second when you use a Guard Skill") == "在1秒内回复相当于最大魔力10%的魔力（使用防护技能时）", "Recovery spread over seconds is not translated as exceeding a threshold")
@@ -141,11 +188,22 @@ func run() -> void:
 		check(Localization.line_status(first).implemented and not Localization.display_line(first).ends_with(Localization.NOT_IMPLEMENTED), "Fire DoT multiplier row is implemented: " + node_id)
 		check(not Localization.line_status(second).implemented and Localization.display_line(second).ends_with(Localization.NOT_IMPLEMENTED), "Unsupported Ignite Duration row gets its own marker: " + node_id)
 		check(Runtime.node_effect(node_id, 36313).status == "partial", "Supported and unsupported mastery rows remain partial: " + node_id)
+	for node_id: String in ["11364", "43684", "59766"]:
+		var node := Data.node(node_id)
+		var amount := "15" if node_id == "59766" else "5"
+		var expected := "Damaging Ailments deal damage %s%% faster" % amount
+		check(node.stats.has(expected), "Faster-ailment node retains source effect and stable ID: " + node_id)
+		var node_status := Localization.line_status(expected)
+		check(node_status.implemented == (Runtime.CURRENT_SAVE_VERSION >= 33), "Faster-ailment implementation status follows the active schema: " + node_id)
+		check(Localization.display_line(expected).ends_with(Localization.NOT_IMPLEMENTED) == (Runtime.CURRENT_SAVE_VERSION < 33), "Faster-ailment display marker follows the active schema: " + node_id)
 	var deadly_draw := Data.node("48823")
 	check(deadly_draw.stats.size() == 2, "Deadly Draw retains its two independent source effects")
 	for raw_line: String in deadly_draw.stats:
-		check(not Localization.line_status(str(raw_line)).implemented, "Deadly Draw marks each unimplemented row independently: " + str(raw_line))
-		check(Localization.display_line(str(raw_line)).ends_with(Localization.NOT_IMPLEMENTED), "Deadly Draw appends the unsupported marker to each row")
+		var row_implemented := str(raw_line) == "Damaging Ailments deal damage 10% faster" and Runtime.CURRENT_SAVE_VERSION >= 33
+		check(Localization.line_status(str(raw_line)).implemented == row_implemented, "Deadly Draw classifies each source row independently: " + str(raw_line))
+		check(Localization.display_line(str(raw_line)).ends_with(Localization.NOT_IMPLEMENTED) == (not row_implemented), "Deadly Draw appends a marker only to unsupported rows")
+	if Runtime.CURRENT_SAVE_VERSION >= 33:
+		check(Runtime.node_effect("48823").status == "partial", "Deadly Draw remains partial because its Bow DoT row is unsupported")
 
 	var wind_dancer := Data.node("11239")
 	var wind_line: String = str(wind_dancer.stats[0])
@@ -163,6 +221,30 @@ func run() -> void:
 
 	await audit_panel(game)
 	finish()
+
+
+func audit_consumer_manifest() -> void:
+	var seen_stats: Dictionary = {}
+	for group_name: String in Localization.STAT_CONSUMER_GROUPS:
+		var group: Dictionary = Localization.STAT_CONSUMER_GROUPS[group_name]
+		check(not str(group.get("evidence", "")).is_empty(), "Consumer group has a named runtime path: " + group_name)
+		check(group.get("stats", []).size() > 0, "Consumer group names the stats it consumes: " + group_name)
+		var code_checks: Array = group.get("code_checks", [])
+		check(not code_checks.is_empty(), "Consumer group has source-code checks: " + group_name)
+		for stat: String in group.get("stats", []):
+			check(not seen_stats.has(stat), "Every supported stat maps to one consumer group: " + stat)
+			seen_stats[stat] = group_name
+		for code_check: Dictionary in code_checks:
+			var relative_path := str(code_check.get("path", ""))
+			var source_path := "res://" + relative_path
+			check(not relative_path.is_empty() and FileAccess.file_exists(source_path), "Consumer manifest source file exists: " + relative_path)
+			if not FileAccess.file_exists(source_path):
+				continue
+			var must_match := group_name != "damaging_ailment_timing" or Runtime.CURRENT_SAVE_VERSION >= 33
+			if must_match:
+				var source_text := FileAccess.get_file_as_string(source_path)
+				check(source_text.contains(str(code_check.get("contains", ""))), "Consumer manifest marker matches executable source: " + relative_path + " :: " + str(code_check.get("contains", "")))
+	check(seen_stats.has("damaging_ailments_faster"), "Schema 33 timing stat has a consumer-group entry before the latest runtime is integrated")
 
 
 func audit_line(raw_line: String) -> void:

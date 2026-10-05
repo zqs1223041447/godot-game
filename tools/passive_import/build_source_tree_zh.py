@@ -94,7 +94,13 @@ PHRASES = {
     "Passive Skill Point": "被动天赋点",
     "Passive Skill Points": "被动天赋点",
     "Jewel Socket": "珠宝插槽",
+    "Flask Charges used": "药剂充能消耗",
+    "Flask Charges": "药剂充能",
+    "Flask Charge": "药剂充能",
     "Flask Charges gained": "获得的药剂充能",
+    "Warcry Power": "战吼威力",
+    "Power counted by Warcries": "战吼计入的威力",
+    "Enemy Power": "敌方威力",
     "Skill Gems": "技能宝石",
     "Skill Gem": "技能宝石",
     "Skill Effect Duration": "技能效果持续时间",
@@ -121,6 +127,17 @@ PHRASES = {
     "Frenzy Charges": "狂怒球",
     "Power Charge": "暴击球",
     "Power Charges": "暴击球",
+    "per Power Charge": "每个暴击球",
+    "per Frenzy Charge": "每个狂怒球",
+    "per Endurance Charge": "每个耐力球",
+    "Power, Frenzy or Endurance Charge": "暴击球、狂怒球或耐力球",
+    "Power, Frenzy or Endurance Charges": "暴击球、狂怒球或耐力球",
+    "Endurance, Frenzy or Power Charge": "耐力球、狂怒球或暴击球",
+    "Endurance, Frenzy or Power Charges": "耐力球、狂怒球或暴击球",
+    "Endurance, Frenzy and Power Charges": "耐力球、狂怒球与暴击球",
+    "Endurance, Frenzy and Power Charge Duration": "耐力球、狂怒球与暴击球的持续时间",
+    "Power, Frenzy, and Endurance Charges": "暴击球、狂怒球与耐力球",
+    "per Endurance, Frenzy or Power Charge": "每个耐力球、狂怒球或暴击球",
     "Energy Shield Leech": "能量护盾偷取",
     "Life Leech": "生命偷取",
     "Mana Leech": "魔力偷取",
@@ -215,7 +232,7 @@ WORDS = {
     "targets": "目标", "monster": "怪物", "monsters": "怪物", "minion": "召唤物", "minions": "召唤物",
     "allies": "友军", "ally": "友军", "party": "队伍", "member": "成员", "members": "成员",
     "life": "生命", "flask": "药剂", "flasks": "药剂", "tincture": "灵药", "tinctures": "灵药",
-    "charge": "球", "charges": "球", "endurance": "耐力", "frenzy": "狂怒", "power": "暴击",
+    "charge": "球", "charges": "球", "endurance": "耐力", "frenzy": "狂怒", "power": "威力",
     "critical": "暴击", "strike": "攻击", "mastery": "专精", "passive": "被动", "point": "点",
     "points": "点", "jewel": "珠宝", "socket": "插槽", "skill": "技能", "gem": "宝石", "gems": "宝石",
     "ailment": "异常状态", "ailments": "异常状态", "bleed": "流血", "bleeding": "流血",
@@ -291,7 +308,7 @@ WORDS = {
     "monsters": "怪物", "ally": "友军", "allies": "友军", "party": "队伍", "member": "成员",
     "members": "成员", "nearby": "附近", "close": "近距离", "low": "低", "full": "满",
     "maximum": "最大", "minimum": "最小", "base": "基础", "life": "生命", "mana": "魔力",
-    "charges": "球", "charge": "球", "endurance": "耐力", "frenzy": "狂怒", "power": "暴击",
+    "charges": "球", "charge": "球", "endurance": "耐力", "frenzy": "狂怒", "power": "威力",
     "mastery": "专精", "passive": "被动", "point": "点", "points": "点", "jewel": "珠宝",
     "socket": "插槽", "gem": "宝石", "gems": "宝石", "level": "等级", "levels": "等级",
     "weapon": "武器", "weapons": "武器", "sword": "剑", "swords": "剑", "axe": "斧", "axes": "斧",
@@ -350,7 +367,7 @@ WORDS = {
     "wood": "木", "grove": "林地", "tide": "潮汐", "wind": "风", "winter": "冬季", "sun": "太阳",
     "moon": "月亮", "star": "星辰", "stars": "星辰", "light": "光", "darkness": "黑暗", "shadow": "暗影",
     "flame": "烈焰", "flames": "烈焰", "ash": "灰烬", "fire": "火焰", "fury": "怒火", "might": "力量",
-    "power": "力量", "strength": "力量", "agility": "敏捷", "wisdom": "智慧", "knowledge": "知识",
+    "power": "威力", "strength": "力量", "agility": "敏捷", "wisdom": "智慧", "knowledge": "知识",
     "precision": "精准", "accuracy": "命中", "speed": "速度", "damage": "伤害", "life": "生命",
     "mana": "魔力", "armour": "护甲", "evasion": "闪避", "shield": "护盾", "resistance": "抗性",
     "resistances": "抗性", "recovery": "回复", "regeneration": "回复", "leech": "偷取", "duration": "持续时间",
@@ -955,8 +972,8 @@ MULTILINE_OVERRIDES = {
     "Every 10 seconds, gain 30% of Physical Damage\nas Extra Fire Damage for 4 seconds": "每10秒，获得相当于物理伤害30%的额外火焰伤害，持续4秒",
     "Every 10 seconds:\nTake 50% less Damage from Hits for 5 seconds\nTake 50% less Damage over Time for 5 seconds": "每10秒：\n受到的击中伤害额外降低50%，持续5秒\n受到的持续伤害额外降低50%，持续5秒",
     "Every second, Consume a nearby Corpse to Recover 5% of Life and Mana\n10% more Damage taken if you haven't Consumed a Corpse Recently": "每秒消耗附近一具尸体，回复相当于最大生命和魔力各5%的数值\n若近期未消耗尸体，所受伤害额外提高10%",
-    "Flasks adjacent to active Tinctures gain 2 charges when you Hit an\nEnemy with a Melee Weapon, no more than once every second": "你用近战武器击中敌人时，与已激活灵药相邻的药剂获得2份充能\n每秒最多触发一次",
-    "Flasks adjacent to active Tinctures gain 3 charges when you Hit an\nEnemy with a Melee Weapon, no more than once every second": "你用近战武器击中敌人时，与已激活灵药相邻的药剂获得3份充能\n每秒最多触发一次",
+    "Flasks adjacent to active Tinctures gain 2 charges when you Hit an\nEnemy with a Melee Weapon, no more than once every second": "你用近战武器击中敌人时，与已激活灵药相邻的药剂获得2点药剂充能\n每秒最多触发一次",
+    "Flasks adjacent to active Tinctures gain 3 charges when you Hit an\nEnemy with a Melee Weapon, no more than once every second": "你用近战武器击中敌人时，与已激活灵药相邻的药剂获得3点药剂充能\n每秒最多触发一次",
     "Flasks adjacent to applied Tincture have 10% increased Effect when\nused if you've Hit an enemy with a Weapon Recently": "若你近期用武器击中过敌人，使用与已施加灵药相邻的药剂时，药剂效果提高10%",
     "Flasks adjacent to applied Tincture have 30% increased Effect when\nused if you've Hit an enemy with a Weapon Recently": "若你近期用武器击中过敌人，使用与已施加灵药相邻的药剂时，药剂效果提高30%",
     "For each nearby corpse, you and nearby Allies Regenerate 5 Mana\nper second, up to 50 per second": "每有一具附近尸体，你和附近友军每秒回复5魔力\n最多每秒回复50魔力",
@@ -967,7 +984,7 @@ MULTILINE_OVERRIDES = {
     "Gain 20% of Physical Damage as Extra Fire Damage if you've\nused a Ruby Flask Recently": "若你近期使用过红玉药剂，物理伤害的20%作为额外火焰伤害",
     "Gain 20% of Physical Damage as Extra Lightning Damage if you've\nused a Topaz Flask Recently": "若你近期使用过黄玉药剂，物理伤害的20%作为额外闪电伤害",
     "Gain Defiance for 10 seconds on losing Life to an Enemy Hit, no\nmore than once every 0.3 seconds": "因敌人击中而失去生命时，获得抗争10秒\n每0.3秒最多触发一次",
-    "Grant bonuses to Non-Channelling Skills you use by consuming 3 Charges from a Flask of\neach of the following types, if possible:": "消耗以下每种类型药剂中的3份充能，为你使用的非引导技能施加加成（若可行）：",
+    "Grant bonuses to Non-Channelling Skills you use by consuming 3 Charges from a Flask of\neach of the following types, if possible:": "消耗以下每种类型药剂中的3点药剂充能，为你使用的非引导技能施加加成（若可行）：",
     "Grants maximum Energy Shield equal to 10% of your Reserved Mana to\nyou and nearby Allies": "为你和附近友军提供相当于你保留魔力10%的最大能量护盾",
     "Hits that deal Elemental Damage remove Exposure to those Elements and inflict Exposure to other Elements\nExposure inflicted this way applies -25% to Resistances": "造成元素伤害的击中会移除对应元素的曝露，并对其他元素施加曝露\n以此方式施加的曝露使抗性-25%",
     "If you've Impaled an Enemy Recently, you\nand nearby Allies have +1000 to Armour": "若你近期对敌人施加过穿刺，你和附近友军获得护甲+1000",
@@ -1005,7 +1022,7 @@ MULTILINE_OVERRIDES = {
     "You count as Dual Wielding while you are Unencumbered\n40% more Attack Speed with Melee Skills while you are Unencumbered\nAdds 14 to 20 Attack Physical Damage to Melee Skills per 10 Dexterity while you are Unencumbered": "未装备武器时，你视为双持\n未装备武器时，近战技能的攻击速度额外提高40%\n未装备武器时，每10点敏捷使近战技能附加14至20点攻击物理伤害",
     "Your Hexes have infinite Duration\n20% less Effect of your Curses": "你的诅咒持续时间无限\n你的诅咒效果额外降低20%",
     "Your Mercenary and their Minions deal 8% more Damage for\neach Unique item they have equipped": "你的佣兵及其召唤物每装备一件传奇物品，伤害额外提高8%",
-    "Your Warcries do not grant Buffs or Charges to You\n100% more Warcry Duration": "你的战吼不会对你施加增益效果或提供球\n战吼持续时间额外提高100%",
+    "Your Warcries do not grant Buffs or Charges to You\n100% more Warcry Duration": "你的战吼不会对你施加增益效果或为你提供各类充能球\n战吼持续时间额外提高100%",
     "Your hits can't be Evaded\nNever deal Critical Strikes": "你的击中无法被闪避\n不会造成暴击",
 }
 
@@ -1060,10 +1077,35 @@ SINGLE_LINE_OVERRIDES = {
     "25% chance to gain an Endurance Charge each second while Channelling": "引导期间，每秒有25%几率获得一个耐力球",
     "Gain a Frenzy Charge each second while Moving": "移动期间，每秒获得一个狂怒球",
     "Gain a Power Charge each second while Channelling a Spell": "引导法术期间，每秒获得一个暴击球",
-    "Life Flasks gain a Charge when you hit an Enemy, no more than once each second": "击中敌人时，生命药剂获得一份充能；每秒最多触发一次",
+    "Gain a Power Charge after Spending a total of 200 Mana": "消耗魔力总计达到200点后，获得一个暴击球",
+    "Linked targets share Endurance, Frenzy and Power Charges with you": "连接的目标与你共享耐力球、狂怒球与暴击球",
+    "Share Endurance, Frenzy and Power Charges with nearby party members": "与你附近的队伍成员共享耐力球、狂怒球与暴击球",
+    "Life Flasks gain a Charge when you hit an Enemy, no more than once each second": "击中敌人时，生命药剂获得一份药剂充能；每秒最多触发一次",
     "20% increased Armour per second you've been stationary, up to a maximum of 100%": "你每静止一秒，护甲提高20%，最多提高100%",
     "Tinctures deactivate when you have 12 or more Mana Burn": "当你身上有12层或以上魔力燃烧时，灵药会停用",
     "1% increased Flask Charges gained per Mana Burn on you": "你身上每层魔力燃烧，获得的药剂充能提高1%",
+    "Gain a Flask Charge when you deal a Critical Strike": "造成暴击时，获得一份药剂充能",
+    "25% chance to gain a Flask Charge when you deal a Critical Strike": "造成暴击时，有25%几率获得一份药剂充能",
+    "25% chance for Flasks you use to not consume Charges": "你使用药剂时，有25%几率不消耗药剂充能",
+    "50% chance for Flasks you use to not consume Charges": "你使用药剂时，有50%几率不消耗药剂充能",
+    "If Bismuth Flask Charges are consumed, Penetrate 25% Elemental Resistances": "消耗铋药剂充能时，穿透25%元素抗性",
+    "If Diamond Flask Charges are consumed, 250% increased Critical Strike Chance": "消耗钻石药剂充能时，暴击几率提高250%",
+    "Life Flasks gain 3 Charges when you Suppress Spell Damage": "你压制法术伤害时，生命药剂获得3点药剂充能",
+    "Marked Enemy grants 20% increased Flask Charges to you": "被标记的敌人使你获得的药剂充能提高20%",
+    "Phantasms from Penance Mark grant 50% increased Flask Charges": "忏悔印记生成的幻灵使你获得的药剂充能提高50%",
+    "Enemies you Kill that are affected by Elemental Ailments\ngrant 100% increased Flask Charges": "你击杀的受元素异常状态影响的敌人会使你获得的药剂充能提高100%",
+    "1% of Damage Dealt by your Minions is Leeched to you as Life": "召唤物造成的伤害中，有1%作为生命偷取转移给你",
+    "Gain 25% increased Armour per 5 Power for 8 seconds when you Warcry, up to a maximum of 100%": "使用战吼时，每5点战吼威力使护甲提高25%，持续8秒，最多提高100%",
+    "20% increased total Power counted by Warcries": "战吼计入的总威力提高20%",
+    "25% increased total Power counted by Warcries": "战吼计入的总威力提高25%",
+    "Warcries grant 1 Rage per 5 Enemy Power, up to 5": "敌方威力每有5点，战吼提供1点怒火，最多5点",
+    "Warcries have 5% Chance to grant an Endurance, Frenzy or Power Charge per Power": "战吼威力每有一点，战吼就有5%几率获得一个耐力球、狂怒球或暴击球",
+    "Warcries have a minimum of 10 Power": "战吼威力至少为10点",
+    "Warcries have infinite Power": "战吼威力无限",
+    "+20% chance to Ignite, Freeze, Shock, and Poison Cursed Enemies": "对被诅咒敌人施加点燃、冻结、感电或中毒的几率+20%",
+    "20% chance to Maim Enemies with Main Hand Hits": "主手击中时，有20%几率使敌人瘫痪",
+    "30% chance to Freeze Enemies which are Chilled": "对处于冰缓状态的敌人，有30%几率施加冻结",
+    "First and Final shots of Barrage sequences fire Projectiles that Return to you": "弹幕序列中的首发与最后一发会发射返回你的投射物",
     "+1% to Critical Strike Multiplier per 10 Maximum Energy Shield on Shield": "盾牌上的最大能量护盾每有10点，暴击伤害倍率+1%",
     "Life Recoup Effects instead occur over 3 seconds": "生命延迟回复效果改为在3秒内完成",
     "Hits have 20% chance to deal 50% more Area Damage": "击中有20%几率使范围伤害额外提高50%",
@@ -1144,7 +1186,7 @@ REVIEWED_LONG_LINE_OVERRIDES = {
     "5% chance to deal Double Damage if you've dealt a Critical Strike with a Two Handed Melee Weapon Recently": "若你近期使用双手近战武器造成过暴击，有5%几率造成双倍伤害",
     "Minions Explode when reduced to Low Life, dealing 33% of their Life as Fire Damage to surrounding Enemies": "召唤物降至低血状态时爆炸，对周围敌人造成相当于其生命值33%的火焰伤害",
     "10% increased Melee Damage for each second you've been affected by a Warcry Buff, up to a maximum of 60%": "你每受到战吼增益效果影响一秒，近战伤害提高10%，最多提高60%",
-    "50% chance to inflict Withered for two seconds on Hit if there are 5 or fewer Withered Debuffs on Enemy": "击中时有50%几率施加枯萎，持续两秒；若敌人身上的枯萎减益不超过5层",
+    "50% chance to inflict Withered for two seconds on Hit if there are 5 or fewer Withered Debuffs on Enemy": "击中敌人时，有50%几率对其施加枯萎，持续两秒；若敌人身上的枯萎减益不超过5层",
     "Enemies you Kill have a 10% chance to Explode, dealing a quarter of their maximum Life as Chaos Damage": "被你击杀的敌人有10%几率爆炸，造成相当于其最大生命四分之一的混沌伤害",
     "25% chance that if you would gain Endurance Charges, you instead gain up to maximum Endurance Charges": "你获得耐力球时有25%几率改为直接获得至耐力球上限所需的数量",
     "Enemies Taunted by your Warcries Explode on death, dealing 8% of their maximum Life as Chaos Damage": "被你的战吼嘲讽的敌人死亡时会爆炸，造成相当于其最大生命8%的混沌伤害",
@@ -1167,7 +1209,7 @@ REVIEWED_LONG_LINE_OVERRIDES = {
     "If you've Cast a Spell Recently, you and nearby Allies have +25% Chance to Block Spell Damage": "若你近期施放过法术，你和附近友军的法术伤害格挡几率+25%",
     "Your Hits ignore Enemy Monster Lightning Resistances if all Equipped Rings are Synaptic Rings": "若你装备的戒指均为突触戒指，你的击中无视敌方怪物的闪电抗性",
     "20% increased Armour for each different Retaliation Skill you've used in the past 10 seconds": "你在过去10秒内每使用一种不同的反击技能，护甲提高20%",
-    "Gain 25% increased Armour per 5 Power for 8 seconds when you Warcry, up to a maximum of 100%": "你使用战吼时，接下来8秒内每有5点力量，护甲提高25%，最多提高100%",
+    "Gain 25% increased Armour per 5 Power for 8 seconds when you Warcry, up to a maximum of 100%": "使用战吼时，每5点战吼威力使护甲提高25%，持续8秒，最多提高100%",
     "If you've Consumed a corpse Recently, you and your Minions have 30% increased Area of Effect": "若你近期消耗过尸体，你和你的召唤物的效果范围提高30%",
     "If your Mercenary's Life is lower than your own, 40% of Damage they take is Recouped as Life": "若佣兵的生命低于你，佣兵承受伤害的40%会延迟回复为生命",
     "Projectiles deal 20% increased Damage with Hits and Ailments for each time they have Chained": "投射物每连锁一次，击中与异常状态伤害提高20%",
@@ -1282,6 +1324,72 @@ def _translate_terms(text: str, unknown: set[str]) -> str:
         return value
 
     return _compact_zh(WORD_PATTERN.sub(replace_word, text))
+
+
+STATUS_ZH = {
+    "poison": "中毒", "poisoned": "中毒", "ignite": "点燃", "ignited": "点燃",
+    "shock": "感电", "shocked": "感电", "freeze": "冻结", "frozen": "冻结",
+    "chill": "冰缓", "chilled": "冰缓", "bleed": "流血", "bleeding": "流血",
+}
+
+STATUS_ACTION_ZH = {
+    "poison": "使敌人中毒", "poisoned": "使敌人中毒",
+    "ignite": "点燃敌人", "ignited": "点燃敌人",
+    "shock": "使敌人感电", "shocked": "使敌人感电",
+    "freeze": "冻结敌人", "frozen": "冻结敌人",
+    "chill": "使敌人冰缓", "chilled": "使敌人冰缓",
+    "bleed": "使敌人流血", "bleeding": "使敌人流血",
+}
+
+CHARGE_TYPE_ZH = {
+    "power": "暴击球", "frenzy": "狂怒球", "endurance": "耐力球",
+}
+
+CHARGE_GAIN_TRIGGERS_ZH = {
+    "on critical strike": "造成暴击时",
+    "on critical strike with wands": "使用魔杖造成暴击时",
+    "on kill": "击杀敌人时",
+    "on kill while holding a shield": "持盾击杀敌人时",
+    "on non-critical strike with a claw or dagger": "使用爪或匕首造成非暴击击中时",
+    "on non-critical strike": "造成非暴击击中时",
+    "when you shock a chilled enemy": "使冰缓敌人感电时",
+    "when you stun with melee damage": "以近战伤害造成眩晕时",
+    "when your mine is detonated targeting an enemy": "地雷以敌人为目标引爆时",
+    "when you hit your marked enemy": "击中你标记的敌人时",
+    "on melee critical strike": "造成近战暴击时",
+    "when your trap is triggered by an enemy": "陷阱被敌人触发时",
+    "when you block attack damage": "格挡攻击伤害时",
+    "when you block": "格挡时",
+    "when you stun an enemy with a melee hit": "以近战击中使敌人眩晕时",
+    "when you block spell damage": "格挡法术伤害时",
+    "when you use a mana flask": "使用魔力药剂时",
+    "each second while channelling": "引导期间每秒",
+    "when you are hit": "被击中时",
+    "on kill while dual wielding": "双持时击杀敌人",
+    "when you hit a unique enemy": "击中传奇敌人时",
+}
+
+
+def _status_list_zh(source: str) -> str:
+    parts = re.split(r"(?i)\s*,\s*|\s+and\s+|\s+or\s+", source.strip())
+    normalized = [part.strip().lower() for part in parts if part.strip()]
+    if not normalized or any(part not in STATUS_ZH for part in normalized):
+        return ""
+    return "、".join(STATUS_ZH[part] for part in normalized)
+
+
+def _charge_choices_zh(source: str) -> str:
+    source = re.sub(r"(?i),\s*(and|or)\s+", r" \1 ", source.strip())
+    parts = re.split(r"(?i)\s*,\s*|\s+and\s+|\s+or\s+", source)
+    normalized = [part.strip().lower() for part in parts if part.strip()]
+    if not normalized or any(part not in CHARGE_TYPE_ZH for part in normalized):
+        return ""
+    translated = [CHARGE_TYPE_ZH[part] for part in normalized]
+    if re.search(r"(?i)\s+or\s+", source):
+        return "、".join(translated[:-1]) + "或" + translated[-1]
+    if re.search(r"(?i)\s+and\s+", source):
+        return "、".join(translated[:-1]) + "与" + translated[-1]
+    return "、".join(translated)
 
 
 def _compact_zh(text: str) -> str:
@@ -1471,6 +1579,9 @@ def _translate_condition(condition: str, unknown: set[str]) -> str:
     match = re.match(r"(?i)^against enemies affected by (.+)$", value)
     if match:
         return "对受到" + _translate_terms(match.group(1), unknown) + "影响的敌人"
+    match = re.match(r"(?i)^against enemies with (.+)$", value)
+    if match:
+        return "对受到" + _translate_terms(match.group(1), unknown) + "影响的敌人"
     match = re.match(r"(?i)^against enemies that are (not )?on low life$", value)
     if match:
         return "对" + ("不处于" if match.group(1) else "处于") + "低血状态的敌人"
@@ -1490,6 +1601,17 @@ def _translate_condition(condition: str, unknown: set[str]) -> str:
     if match:
         charge = {"frenzy": "狂怒球", "endurance": "耐力球", "power": "暴击球"}[match.group(1).lower()]
         return "每个" + charge
+    match = re.match(r"(?i)^per (Frenzy|Endurance|Power) Charge, up to a maximum of ([0-9]+(?:\.[0-9]+)?)%$", value)
+    if match:
+        charge = {"frenzy": "狂怒球", "endurance": "耐力球", "power": "暴击球"}[match.group(1).lower()]
+        return f"每个{charge}，最多达到{match.group(2)}%"
+    match = re.match(r"(?i)^per maximum (Frenzy|Endurance|Power) Charge$", value)
+    if match:
+        charge = {"frenzy": "狂怒球", "endurance": "耐力球", "power": "暴击球"}[match.group(1).lower()]
+        return "每增加一个" + charge + "上限"
+    match = re.match(r"(?i)^per (Endurance, Frenzy or Power|Power, Frenzy or Endurance) Charge$", value)
+    if match:
+        return "每个" + _charge_choices_zh(match.group(1))
     match = re.match(r"(?i)^per Summoned Totem$", value)
     if match:
         return "每个召唤图腾"
@@ -1627,6 +1749,197 @@ def translate_effect(source: str, unknown: set[str]) -> str:
             if condition:
                 result += "（" + _translate_condition(condition, unknown) + "）"
         return result
+
+    fired_projectiles = re.match(
+        r"(?i)^(Attack Skills|Attacks|Bow Attacks|Wand Attacks|Skills) fire (an?|[0-9]+) additional (Projectile|Projectiles|Arrow|Arrows)(.*)$",
+        source,
+    )
+    if fired_projectiles:
+        owner, count, projectile, suffix = fired_projectiles.groups()
+        owner_zh = {
+            "attack skills": "攻击技能", "attacks": "攻击", "bow attacks": "弓类攻击",
+            "wand attacks": "魔杖攻击", "skills": "技能",
+        }[owner.lower()]
+        count_zh = "一" if count.lower() in ["a", "an"] else count
+        unit = "支" if projectile.lower().startswith("arrow") else "个"
+        noun = "箭矢" if projectile.lower().startswith("arrow") else "投射物"
+        result = f"{owner_zh}额外发射{count_zh}{unit}{noun}"
+        if suffix.strip():
+            _, condition = _split_condition(suffix)
+            if condition:
+                result = _translate_condition(condition, unknown) + "，" + result
+        return result
+    if re.match(r"(?i)^Projectiles are fired in random directions$", source):
+        return "投射物会向随机方向发射"
+
+    flask_charge_gain = re.match(
+        r"(?i)^((?:Life|Mana) )?Flasks gain ([0-9]+) Charges? every ([0-9]+) seconds?$",
+        source,
+    )
+    if flask_charge_gain:
+        flask_kind, amount, interval = flask_charge_gain.groups()
+        flask_zh = {"life ": "生命", "mana ": "魔力", None: ""}[flask_kind.lower() if flask_kind else None]
+        return f"每{interval}秒，{flask_zh}药剂获得{amount}点药剂充能"
+
+    chance_gain_charge = re.match(
+        r"(?i)^([+-]?[0-9]+(?:\.[0-9]+)?)% chance to gain (?:a[n]? )?"
+        r"((?:Power|Frenzy|Endurance)(?:(?:,\s*(?:and|or)\s+|,\s+|\s+(?:and|or)\s+)(?:Power|Frenzy|Endurance)){0,2}) Charge "
+        r"(?:on (.+)|when (.+)|each second while (.+))$",
+        source,
+    )
+    if chance_gain_charge:
+        amount, choices, on_trigger, when_trigger, cadence_trigger = chance_gain_charge.groups()
+        charges_zh = _charge_choices_zh(choices)
+        if on_trigger:
+            trigger = "on " + on_trigger
+        elif when_trigger:
+            trigger = "when " + when_trigger
+        elif cadence_trigger:
+            trigger = "each second while " + cadence_trigger
+        else:
+            trigger = ""
+        trigger_zh = CHARGE_GAIN_TRIGGERS_ZH.get((trigger or "").strip().lower())
+        if charges_zh and trigger_zh:
+            return f"{trigger_zh}，有{amount}%几率获得一个{charges_zh}"
+    steal_charge = re.match(
+        r"(?i)^([+-]?[0-9]+(?:\.[0-9]+)?)% chance to Steal "
+        r"((?:Power|Frenzy|Endurance)(?:(?:,\s*(?:and|or)\s+|,\s+|\s+(?:and|or)\s+)(?:Power|Frenzy|Endurance)){0,2}) Charges on Hit with (.+)$",
+        source,
+    )
+    if steal_charge:
+        amount, choices, attack_type = steal_charge.groups()
+        choices_zh = _charge_choices_zh(choices)
+        attack_zh = "爪类武器" if attack_type.lower() == "claws" else _translate_terms(attack_type, unknown)
+        if choices_zh:
+            return f"使用{attack_zh}击中敌人时，有{amount}%几率窃取{choices_zh}"
+
+    # Chance-to-ailment wording describes effects applied to enemies. Keeping
+    # the target explicit prevents a fluent but reversed “you become poisoned”
+    # fallback. The attack/damage scope remains attached to the hit condition.
+    chance_hit = re.match(
+        r"(?i)^([+-]?[0-9]+(?:\.[0-9]+)?)% chance to (Poison|Ignite|Shock|Freeze|Chill|Bleed|Bleeding) on Hit(?: with (Attacks|Spell Damage))?$",
+        source,
+    )
+    if chance_hit:
+        amount, status, scope = chance_hit.groups()
+        prefix = "击中敌人时" if not scope else ("使用攻击击中敌人时" if scope.lower() == "attacks" else "以法术伤害击中敌人时")
+        return f"{prefix}，有{amount}%几率{STATUS_ACTION_ZH[status.lower()]}"
+
+    exposure_chance = re.match(
+        r"(?i)^([+-]?[0-9]+(?:\.[0-9]+)?)% chance to inflict (Fire|Cold|Lightning) Exposure on Hit with (.+)$",
+        source,
+    )
+    if exposure_chance:
+        amount, element, damage = exposure_chance.groups()
+        element_zh = {"fire": "火焰", "cold": "冰霜", "lightning": "闪电"}[element.lower()]
+        damage_zh = _translate_terms(damage, unknown)
+        return f"以{damage_zh}击中敌人时，有{amount}%几率对其施加{element_zh}曝露"
+    exposure_actor = re.match(r"(?i)^(.+?) have(?: a)? ([0-9]+(?:\.[0-9]+)?)% chance to apply (Fire|Cold|Lightning) Exposure on Hit$", source)
+    if exposure_actor:
+        actor, amount, element = exposure_actor.groups()
+        actor_zh = _translate_terms(actor, unknown)
+        element_zh = {"fire": "火焰", "cold": "冰霜", "lightning": "闪电"}[element.lower()]
+        return f"{actor_zh}击中敌人时，有{amount}%几率对其施加{element_zh}曝露"
+
+    exposure_inflict = re.match(r"(?i)^([+-]?[0-9]+(?:\.[0-9]+)?)% chance to Inflict (Fire|Cold|Lightning) Exposure on Hit with (.+)$", source)
+    if exposure_inflict:
+        amount, element, damage = exposure_inflict.groups()
+        element_zh = {"fire": "火焰", "cold": "冰霜", "lightning": "闪电"}[element.lower()]
+        return f"以{_translate_terms(damage, unknown)}击中敌人时，有{amount}%几率对其施加{element_zh}曝露"
+
+    taunt_chance = re.match(r"(?i)^([+-]?[0-9]+(?:\.[0-9]+)?)% chance to Taunt Enemies on Projectile Hit$", source)
+    if taunt_chance:
+        return f"投射物击中敌人时，有{taunt_chance.group(1)}%几率嘲讽敌人"
+    hinder_chance = re.match(r"(?i)^([+-]?[0-9]+(?:\.[0-9]+)?)% chance to Hinder Enemies on Hit with Spells$", source)
+    if hinder_chance:
+        return f"法术击中敌人时，有{hinder_chance.group(1)}%几率阻碍敌人"
+    withered_chance = re.match(
+        r"(?i)^([0-9]+(?:\.[0-9]+)?)% chance to inflict Withered for ([0-9]+|two) seconds on Hit$",
+        source,
+    )
+    if withered_chance:
+        amount, duration = withered_chance.groups()
+        duration_zh = {"two": "两"}.get(duration.lower(), duration)
+        return f"击中敌人时，有{amount}%几率对其施加枯萎，持续{duration_zh}秒"
+    withered_more_stacks = re.match(
+        r"(?i)^([0-9]+(?:\.[0-9]+)?)% chance when you inflict Withered to inflict up to ([0-9]+) Withered Debuffs instead$",
+        source,
+    )
+    if withered_more_stacks:
+        amount, stacks = withered_more_stacks.groups()
+        return f"你对敌人施加枯萎时，有{amount}%几率改为对其施加最多{stacks}层枯萎减益效果"
+
+    aggravate_bleeding = re.match(
+        r"(?i)^([0-9]+(?:\.[0-9]+)?)% chance to Aggravate Bleeding on targets you "
+        r"(Hit|Critically Strike|Stun)(?: with (Attacks(?: Hits)?|Exerted Attacks))$",
+        source,
+    )
+    if aggravate_bleeding:
+        amount, action, attack_type = aggravate_bleeding.groups()
+        attack_zh = "竭尽攻击" if attack_type.lower() == "exerted attacks" else "攻击"
+        action_zh = {
+            "hit": f"用{attack_zh}击中目标",
+            "critically strike": f"用{attack_zh}暴击击中目标",
+            "stun": f"用{attack_zh}击晕目标",
+        }[action.lower()]
+        return f"你{action_zh}时，有{amount}%几率使其流血加剧"
+    blind_bleeding = re.match(
+        r"(?i)^([0-9]+(?:\.[0-9]+)?)% chance to Blind with Hits against Bleeding Enemies$",
+        source,
+    )
+    if blind_bleeding:
+        return f"击中流血敌人时，有{blind_bleeding.group(1)}%几率使其致盲"
+    freeze_chilled = re.match(r"(?i)^([0-9]+(?:\.[0-9]+)?)% chance to Freeze Enemies which are Chilled$", source)
+    if freeze_chilled:
+        return f"对冰缓敌人有{freeze_chilled.group(1)}%几率施加冻结"
+    periodic_freeze = re.match(
+        r"(?i)^Every ([0-9]+(?:\.[0-9]+)?) seconds?, ([0-9]+(?:\.[0-9]+)?)% chance to Freeze nearby Non-Frozen Enemies for ([0-9]+(?:\.[0-9]+)?) seconds?$",
+        source,
+    )
+    if periodic_freeze:
+        interval, amount, duration = periodic_freeze.groups()
+        return f"每{interval}秒，有{amount}%几率冻结附近未被冻结的敌人，持续{duration}秒"
+    chance_status_list = re.match(r"(?i)^([+-]?[0-9]+(?:\.[0-9]+)?)% chance to (.+?)(?: while affected by (?:a )?Herald)?$", source)
+    if chance_status_list:
+        amount, status_text = chance_status_list.groups()
+        suffix = ""
+        affected = re.search(r"(?i) while affected by (?:a )?Herald$", source)
+        if affected:
+            suffix = "（受到捷光影响时）"
+        labels = _status_list_zh(status_text)
+        if labels:
+            parts = re.split(r"(?i)\s*,\s*|\s+and\s+|\s+or\s+", status_text.strip())
+            if len(parts) == 1 and parts[0].strip().lower() in STATUS_ACTION_ZH:
+                effect = STATUS_ACTION_ZH[parts[0].strip().lower()]
+                return f"有{amount}%几率{effect}{suffix}"
+            return f"有{amount}%几率对敌人施加{labels}{suffix}"
+
+    chance_actor = re.match(
+        r"(?i)^(.+?) have(?: a)? ([0-9]+(?:\.[0-9]+)?)% chance to (Ignite|Shock|Freeze|Chill|Poison|Maim|Taunt|Hinder|cause Bleeding)(?: on Hit| Enemies on Hit(?: with (?:Spells|Projectile))?| Enemies with Main Hand Hits| cause Bleeding)?$",
+        source,
+    )
+    if chance_actor:
+        actor, amount, action = chance_actor.groups()
+        actor_zh = {
+            "attacks": "攻击", "minions": "召唤物", "raised zombies": "召唤的僵尸",
+            "chaos spells": "混沌法术", "fire skills": "火焰技能", "cold skills": "冰霜技能",
+            "lightning skills": "闪电技能",
+        }.get(actor.lower())
+        if actor_zh:
+            action_zh = "流血" if action.lower() == "cause bleeding" else STATUS_ZH.get(action.lower(), {"maim": "瘫痪", "taunt": "嘲讽", "hinder": "阻碍"}.get(action.lower(), action))
+            if action.lower() == "taunt":
+                outcome = "嘲讽敌人"
+            elif action.lower() == "hinder":
+                outcome = "阻碍敌人"
+            elif action.lower() == "cause bleeding":
+                outcome = "使敌人流血"
+            elif action.lower() == "maim":
+                outcome = "瘫痪敌人"
+            elif action.lower() in STATUS_ACTION_ZH:
+                outcome = STATUS_ACTION_ZH[action.lower()]
+            else:
+                outcome = "使敌人" + action_zh
+            return f"{actor_zh}击中敌人时，有{amount}%几率{outcome}"
 
     faster_ailment = re.match(r"(?i)^Damaging Ailments deal damage ([0-9]+(?:\.[0-9]+)?)% faster$", source)
     if faster_ailment:
@@ -1837,7 +2150,7 @@ def translate_effect(source: str, unknown: set[str]) -> str:
         return _compact_zh(result)
 
     # "faster start" is a time reduction, not the more/less damage operator.
-    text = re.sub(r"(?i)(\d+(?:\.\d+)?)% faster start of Energy Shield Recharge", r"能量护盾开始充能时间缩短\1%", source)
+    text = re.sub(r"(?i)(\d+(?:\.\d+)?)% faster start of Energy Shield Recharge", r"能量护盾充能启动加快\1%", source)
     subject, condition = _split_condition(text)
     translated = _translate_terms(subject, unknown)
     if condition:
