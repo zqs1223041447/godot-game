@@ -1,0 +1,174 @@
+{
+  "base_commit": "3718d74691f3a7f9e2280fc26419c093b26ee4ac",
+  "counts": {
+    "pure_rules_and_old_typed_variants": 82070,
+    "source_migration_reused_passes": 7213,
+    "migration_message_targeted_recheck": 23,
+    "actual_main": 187,
+    "root_presentation": 9
+  },
+  "total_successful_assertions_in_retained_evidence": 89502,
+  "source_migration_first_run": {
+    "checks": 7214,
+    "failures": 1,
+    "fixed_product_issue": "missing schema34 migration message only; corresponding23 checks passed afterward"
+  },
+  "legacy_typed_byte_cases": 74025,
+  "no_node_main_ticks_per_version": 90,
+  "no_node_observation_bytes": 11251260,
+  "no_node_observation_sha256": "ce46b7579e4696f089bbb297e6fdccfff887bb20389affa4e9dd745151935504",
+  "raw_save_bytes_claimed_equal": false,
+  "explicit_legacy_projections": [
+    "Saved/model schema34 to35",
+    "Added derived float-zero damage_taken_from_mana_before_life"
+  ],
+  "reference_validation_separate": "docs/qa/v058-reference/README.md",
+  "font_reused": "docs/qa/v058/font-byte-reuse.json",
+  "logs": {
+    "docs/qa/v058/import-initial.log": {
+      "bytes": 70905,
+      "sha256": "6d2005707a53fd0c161cba7cf4f7458382fb7c0ae9fd0140080671aa12618f79"
+    },
+    "docs/qa/v058/packed-probe-parse.log": {
+      "bytes": 73,
+      "sha256": "a9912b85473f126d3f4f63ec824170c828df3473a292f866dde86cafda5b66da"
+    },
+    "docs/qa/v058/font-coverage.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v058-rules/rules-n0ujds7y.log.txt": {
+      "bytes": 4654,
+      "sha256": "ea119c929d69126ceda058ec781945d72d0984f81aa19580bbb78b0c8b04e05a"
+    },
+    "docs/qa/v058-rules/rules-3p51fc2t.log.txt": {
+      "bytes": 298,
+      "sha256": "6c08adeb05f16dbe0aae68c179e04d16adec6355f936985c456883a2db01795d"
+    },
+    "docs/qa/v058-migration/mana-guard-message-recheck.log.txt": {
+      "bytes": 147,
+      "sha256": "d7d00d42d6138e556af0717e4a3ebefd5075ed3fb957cc1cc95550d6561c3f27"
+    },
+    "docs/qa/v058-migration/mana-guard-first.log.txt": {
+      "bytes": 541,
+      "sha256": "c2b95515e051c8d56688b3a166d07ec1f006025759a40d323bf81acd717e2fd9"
+    },
+    "docs/qa/v058-consumers/20261005T191855132996Z-gameplay.log.txt": {
+      "bytes": 477,
+      "sha256": "179fa34d62ca2d92ef5af0d5007e20f0f2db0bc325bc50697305cddbc5670aaf"
+    },
+    "docs/qa/v058-consumers/20261005T191505783054Z-legacy-new.log.txt": {
+      "bytes": 503,
+      "sha256": "680b00347178d6ffd3b5d3e0e91ccb4a9e3e11d91c64d509f6a0073fd9515b4f"
+    },
+    "docs/qa/v058-consumers/20261005T191505783054Z-gameplay.log.txt": {
+      "bytes": 1465,
+      "sha256": "d5f3cced42ac5ea3d5af715488db5145f168a1a14ad9a9fb94ca30b1cc37326f"
+    },
+    "docs/qa/v058-consumers/20261005T191505783054Z-burn-deduplicated.log.txt": {
+      "bytes": 1864,
+      "sha256": "b76229d859026cc38273d7db8af9a2f1c27e715046445ed5b89a220c4042e90c"
+    },
+    "docs/qa/v058-consumers/20261005T191628613335Z-gameplay.log.txt": {
+      "bytes": 449,
+      "sha256": "500af686a04377cbeffc46e2a2c0442200ad788f5239ca8c4608615f49cadf06"
+    },
+    "docs/qa/v058-consumers/20261005T191505783054Z-legacy-old.log.txt": {
+      "bytes": 503,
+      "sha256": "347d153dc54a84f9c157604d883f354eafb2959fc665b406a627f4a579b3ca6e"
+    },
+    "docs/qa/v058-root-ui/presentation-first-alias.log": {
+      "bytes": 372,
+      "sha256": "a8c2f7cb2ab46a4a49609254c19192021fb1c09647d34de48c46095fa462f0cc"
+    },
+    "docs/qa/v058-root-ui/presentation.log": {
+      "bytes": 119,
+      "sha256": "f9734e5ddc15f0213678ae30c78af907738a1554398d62edcc992dbcb8dfbd3e"
+    },
+    "docs/qa/v058-reference/final-python-build.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v058-reference/python-build.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v058-reference/focused-reference.stdout.log.txt": {
+      "bytes": 226,
+      "sha256": "10e413aeee06ccbd8dc0f95120b2bd6bb4ef82ddea1dba7d77b25989bc59820b"
+    },
+    "docs/qa/v058-reference/godot-export.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v058-reference/godot-export.stdout.log.txt": {
+      "bytes": 205,
+      "sha256": "881c3c8a76e46d3e862aafeb146330317ff3f9b9ded3708c83c5c5e40bdf8c0b"
+    },
+    "docs/qa/v058-reference/final-python-check.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v058-reference/final-javascript-syntax.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v058-reference/python-build.stdout.log.txt": {
+      "bytes": 51,
+      "sha256": "8dde484855a98284933aaf4fb17c586848a8e75fb2f501c3c107f24aac6e68e7"
+    },
+    "docs/qa/v058-reference/final-javascript-syntax.stdout.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v058-reference/python-check.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v058-reference/javascript-syntax.stdout.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v058-reference/final-python-build.stdout.log.txt": {
+      "bytes": 51,
+      "sha256": "ff6b851a23ecd698f09709eecaf67a8fe3da3022428b30ce8ad1f3b56aedfad1"
+    },
+    "docs/qa/v058-reference/focused-reference.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v058-reference/final-focused-reference.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v058-reference/python-check.stdout.log.txt": {
+      "bytes": 52,
+      "sha256": "65d47533eaf556129a1f3a295db12ab1bc36a8df0770c71cb9378490d54d03ba"
+    },
+    "docs/qa/v058-reference/final-python-check.stdout.log.txt": {
+      "bytes": 52,
+      "sha256": "65d47533eaf556129a1f3a295db12ab1bc36a8df0770c71cb9378490d54d03ba"
+    },
+    "docs/qa/v058-reference/javascript-syntax.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v058-reference/final-focused-reference.stdout.log.txt": {
+      "bytes": 226,
+      "sha256": "10e413aeee06ccbd8dc0f95120b2bd6bb4ef82ddea1dba7d77b25989bc59820b"
+    },
+    "docs/qa/v058/final-import.log": {
+      "bytes": 2215,
+      "sha256": "a20559ac2851af412ae203e20eb2cc8a7ba5a58b9bd0b68cc379f056e48c7e46"
+    }
+  },
+  "known_limits": [
+    "Pure first fixture used5e-324 parsed aszero; corrected test bits, unchanged Defense.",
+    "Main first fixture assumed unsupported chaos resistance and disabled HUD death cleanup; failed/timeout logs retained, production unchanged.",
+    "Extra equipment requested subset accidentally reran187 gameplay assertions due runner dispatch; dispatch corrected after, no further simulation, never reran90tick oracle.",
+    "The only source product correction after first stage is schema34 migration text; gameplay/rule inputs otherwise match respective passed evidence.",
+    "No historical battle full suite,600-second test,new images,or extra native screenshot gate. Windows hardware FPS remains unverified."
+  ],
+  "total_checks": 89502,
+  "count_scope": "Sum of retained successful assertion evidence; message recheck can overlap earlier successful migration assertions, not a count of unique gameplay scenarios"
+}

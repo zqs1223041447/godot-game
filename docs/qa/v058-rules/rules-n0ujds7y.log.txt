@@ -1,0 +1,71 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+MANA_GUARD_RULES {"baseline_commit":"3718d74691f3a7f9e2280fc26419c093b26ee4ac","baseline_sha256":"2c9640795202f607be9dbae6da6eed5911d5b8409a64fba44e8c6835567c8141","checks":82067,"failures":9,"legacy_typed_byte_cases":74025}
+ERROR: Invalid authored fraction 0.0 atomic failure without resource fields
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/mana_guard_rules_test.gd:22)
+       [1] rejected (res://tests/mana_guard_rules_test.gd:76)
+       [2] test_profile (res://tests/mana_guard_rules_test.gd:88)
+       [3] run (res://tests/mana_guard_rules_test.gd:279)
+ERROR: Invalid mana 0.0 atomic failure without resource fields
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/mana_guard_rules_test.gd:22)
+       [1] rejected (res://tests/mana_guard_rules_test.gd:76)
+       [2] test_validation_and_isolation (res://tests/mana_guard_rules_test.gd:196)
+       [3] run (res://tests/mana_guard_rules_test.gd:282)
+ERROR: Public hit rejects invalid mana atomic failure without resource fields
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/mana_guard_rules_test.gd:22)
+       [1] rejected (res://tests/mana_guard_rules_test.gd:76)
+       [2] test_validation_and_isolation (res://tests/mana_guard_rules_test.gd:198)
+       [3] run (res://tests/mana_guard_rules_test.gd:282)
+ERROR: Public hit rejects invalid mana atomic failure without resource fields
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/mana_guard_rules_test.gd:22)
+       [1] rejected (res://tests/mana_guard_rules_test.gd:76)
+       [2] test_validation_and_isolation (res://tests/mana_guard_rules_test.gd:198)
+       [3] run (res://tests/mana_guard_rules_test.gd:282)
+ERROR: Burn rejects invalid mana atomic failure without resource fields
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/mana_guard_rules_test.gd:22)
+       [1] rejected (res://tests/mana_guard_rules_test.gd:76)
+       [2] test_validation_and_isolation (res://tests/mana_guard_rules_test.gd:199)
+       [3] run (res://tests/mana_guard_rules_test.gd:282)
+ERROR: Invalid ratio 0.0 atomic failure without resource fields
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/mana_guard_rules_test.gd:22)
+       [1] rejected (res://tests/mana_guard_rules_test.gd:76)
+       [2] test_validation_and_isolation (res://tests/mana_guard_rules_test.gd:201)
+       [3] run (res://tests/mana_guard_rules_test.gd:282)
+ERROR: Public hit rejects invalid fraction atomic failure without resource fields
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/mana_guard_rules_test.gd:22)
+       [1] rejected (res://tests/mana_guard_rules_test.gd:76)
+       [2] test_validation_and_isolation (res://tests/mana_guard_rules_test.gd:203)
+       [3] run (res://tests/mana_guard_rules_test.gd:282)
+ERROR: Public hit rejects invalid fraction atomic failure without resource fields
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/mana_guard_rules_test.gd:22)
+       [1] rejected (res://tests/mana_guard_rules_test.gd:76)
+       [2] test_validation_and_isolation (res://tests/mana_guard_rules_test.gd:203)
+       [3] run (res://tests/mana_guard_rules_test.gd:282)
+ERROR: Burn rejects invalid fraction atomic failure without resource fields
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/mana_guard_rules_test.gd:22)
+       [1] rejected (res://tests/mana_guard_rules_test.gd:76)
+       [2] test_validation_and_isolation (res://tests/mana_guard_rules_test.gd:204)
+       [3] run (res://tests/mana_guard_rules_test.gd:282)
+SCRIPT ERROR: Invalid access to property or key 'mana_spent' on a base object of type 'Dictionary'.
+          at: test_float_boundaries (res://tests/mana_guard_rules_test.gd:255)
+          GDScript backtrace (most recent call first):
+              [0] test_float_boundaries (res://tests/mana_guard_rules_test.gd:255)
+              [1] run (res://tests/mana_guard_rules_test.gd:283)

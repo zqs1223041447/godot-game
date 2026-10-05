@@ -1,0 +1,36 @@
+{
+  "scope": "v058 pure mana-before-life Defense rules and independent v57 typed-byte baseline",
+  "command": [
+    "/usr/local/bin/godot",
+    "--headless",
+    "--path",
+    "/workspace/scratch/a51485f153de/v058-mana-before-life",
+    "--script",
+    "res://tests/mana_guard_rules_test.gd"
+  ],
+  "exit_code": 1,
+  "elapsed_seconds": 1.118,
+  "timed_out": false,
+  "script_errors": true,
+  "passed": false,
+  "summary": {
+    "baseline_commit": "3718d74691f3a7f9e2280fc26419c093b26ee4ac",
+    "baseline_sha256": "2c9640795202f607be9dbae6da6eed5911d5b8409a64fba44e8c6835567c8141",
+    "checks": 82067,
+    "failures": 9,
+    "legacy_typed_byte_cases": 74025
+  },
+  "log": "rules-n0ujds7y.log.txt",
+  "log_sha256": "ea119c929d69126ceda058ec781945d72d0984f81aa19580bbb78b0c8b04e05a",
+  "isolated_userdata": "/tmp/godot-m1-v058-rules-n0ujds7y/data",
+  "source_sha256": {
+    "tests/mana_guard_rules_test.gd": "9fe605660f28f1f5e4f1bf900504af7d94c007ee94fbaf1b52c6f51bb3754439",
+    "docs/qa/v058-rules/run-focused.py": "75696f0237c19600905ae9cd0ecddd431c6d98513cafd495f4a0488235a392c1",
+    "scripts/mechanics/defense_rules.gd": "7c84a7fedef8c7d978056d232889715d598264e447b05e0c9ce9d2705aee5476",
+    "scripts/combat/damage_resolver.gd": "37429d9754708d3bbbe9638f92bb8a038284326a4b9c422a70b7c2c4cfe3a1d5",
+    "docs/qa/v058-rules/v057-defense-rules.txt": "2c9640795202f607be9dbae6da6eed5911d5b8409a64fba44e8c6835567c8141",
+    "project.godot": "3368dcdb6b1746560b6fa2db721a9b6f513ca1422ab76ac2b8447bc4988d356e"
+  },
+  "changed_inputs": [],
+  "import_performed": false
+}

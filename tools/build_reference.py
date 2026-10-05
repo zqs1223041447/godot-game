@@ -19,6 +19,7 @@ SLOTS = {'weapon':'武器','armor':'护甲','charm':'项链','body_armour':'护�
 TYPES = {'small':'小天赋','notable':'显著天赋','socket':'珠宝孔','start':'起点','keystone':'基石','mastery':'精通','prefix':'前缀','suffix':'后缀','ordinary':'普通珠宝','special':'特殊珠宝','legacy':'原始词池','expansion':'扩展词池','runewood':'符木点伤池','defense':'火抗防具池','local_weapon':'白蜡长弓池','nine_slot':'九槽装备池','build_legacy_v27':'构筑原底材池','build_nine_slot_v27':'构筑九槽池','forgeblade_v34':'锻纹短刃池'}
 RULE_TITLES['forgeblade'] = '锻纹短刃与裂刃局部物理'
 RULE_TITLES['melee_basic'] = '短刃近战普攻与裂刃衔接'
+RULE_TITLES['mana_guard'] = '心灵升华与魔力先承伤'
 
 def esc(value): return html.escape(str(value), quote=True)
 def lines(value): return '<br>'.join(esc(value).split('\n'))
@@ -379,7 +380,7 @@ def build(data, art):
             body+=details(f'精通 {choice["effect"]} · {label}','<p>'+lines(localized['mastery_choices'][str(choice['effect'])])+'</p>')
         if p['neighbors']:body+=details('原始标准邻接',links('source_passives',p['neighbors']))
         aliases=' '.join([p['name'],p['partition'],*p['stats'],*(line for choice in p['mastery_choices'] for line in choice['stats'])])
-        cards.append(add('source_passives',key,localized['name'],localized['stats'] or state,body,TYPES[p['type']],status='implemented' if selectable else 'research',related=link('rules','source_tree')+(' · '+link('rules','source_fire_dot') if key in data.get('source_fire_dot',{}).get('nodes',{}) else '')+(' · '+link('rules','source_faster_burn') if key in data.get('source_faster_burn',{}).get('nodes',{}) or key in data.get('source_faster_burn',{}).get('blocked_matching_nodes',{}) else ''),search_aliases=aliases))
+        cards.append(add('source_passives',key,localized['name'],localized['stats'] or state,body,TYPES[p['type']],status='implemented' if selectable else 'research',related=link('rules','source_tree')+(' · '+link('rules','source_fire_dot') if key in data.get('source_fire_dot',{}).get('nodes',{}) else '')+(' · '+link('rules','source_faster_burn') if key in data.get('source_faster_burn',{}).get('nodes',{}) or key in data.get('source_faster_burn',{}).get('blocked_matching_nodes',{}) else '')+(' · '+link('rules','mana_guard') if key == data.get('mana_guard',{}).get('node',{}).get('id') or key in data.get('mana_guard',{}).get('blocked_matching_nodes',{}) else ''),search_aliases=aliases))
     for key,m in data['mechanisms'].items():
         player_nodes=[k for k,v in data['passives'].items() if key in v['mechanism_ids']]
         monsters=[k for k,v in data['monsters'].items() if key in v['mechanisms']]
@@ -586,12 +587,12 @@ def build(data, art):
             ('supports','技能行与五辅助','每行1个主宝石、5个辅助；10行起步，+1技能行词缀真正增加可绑定的行。',f'<p>原16辅助保留，新增点燃辅助仅适配陨星/龙卷；按主动技能原生能力判定资格；同组不重复同一辅助定义。同名主宝石可独立装配。组与主宝石UID双冷却账阻止换孔/换键刷新。</p><p>真实五辅助冰霜示例：耗魔 {number(example["mana"])}，冷却 {number(example["cooldown"])}秒，初始 {example["initial_count"]}发。</p>'+details('同源实际配方',lines(example['summary']+'\n'+example['details']))+'<p>正式档每30有效根怪累积一件固定26种序列的1级0品质宝石，满包保留待领；原序列不插入新石。点燃辅助通过正式商人4碎片购买或独立测试供应获得。测试随机宝石使用当前目录，失败回滚随机状态；后代/重复死亡无奖励。同名独立UID，正式城镇可回收所选背包宝石得1碎片。</p>','implemented'),
             ('source_tree','锁定源树与执行覆盖','完整源记录与已实现效果分别报告；数据存在不等于可花点使用。',f'<p>源版本 {source["source_version"]}，原始SHA256 {source["source_sha256"]}。保留 {len(source["nodes"])} 条记录、2387个标准位置和2697条内部边；升华/扩展分区分开。42代理与30涂油节点不可直接分配。<a href="#category-source_passives">逐项查源节点及精通</a></p><p>节点所有效果必须完整执行，精通按选中效果检查。未支持节点灰色锁定，也会阻断后续路径。源数值没有旧181投影上限；旧树仅作历史与怪物机制参考。</p><p>自己的职业起点免费，预算min(level+4,123)。普通节点/精通均1点，专精需同组普通连通的显著节点，重复效果ID拒绝。未分配其他节点可切七起点；升华点数来源尚未实现，不免费授点。</p>','implemented'),
             ('allocation','源树与珠宝资格','每件珠宝只有一个统一位置；孔必须已分配并沿普通连线连接自己的起点。','<p>寻枝半径280采用当前源坐标单位，允许小型/显著节点断连分配，仍花1点。远程点不向外扩路、不激活孔；未实现节点即使在范围内也不能分配。退款、移动、替换、取回都验证最终构筑，不能遗留依赖失效的节点。原型半径规则不是PoE某颗珠宝的完整复刻。</p><p>'+link('rules','source_tree')+'；下方旧181覆盖图保留作历史机制研究。</p>','implemented'),
-            ('source_defenses','属性与命中防御','原始三属性数值进入真实容量、命中、闪避和近战物理作用域。','<p>力量每2点取整+1生命、每5点取整+1%近战物理；敏捷每点+2命中、每5点取整+1%闪避；智慧每2点取整+1魔力、每10点取整+1%护盾（3.28以后规则）。法术不进行攻击闪避。护甲随物理命中大小重新求减伤，三元素抗性分别限制到75%，然后护盾、生命。</p>'+facts([('同源混合受击示例','物理/火/冰/电各100；护甲500、抗性50%/25%/75%'),('防御后分量',esc(component_text(defense['components']))),('护盾扣减',number(defense['shield_spent'])),('生命扣减',number(defense['health_lost']))])+f'<p>本游戏敏捷型怪物闪避320；默认Scion命中140，对应 {percent(c["skitter_accuracy_example"]["base_chance"])}；增加10敏捷后命中160，对应 {percent(c["skitter_accuracy_example"]["improved_chance"])}。预览展示成功命中伤害，未把命中率伪乘成DPS。</p>','implemented'),
+            ('source_defenses','属性与命中防御','原始三属性数值进入真实容量、命中、闪避和近战物理作用域。','<p>力量每2点取整+1生命、每5点取整+1%近战物理；敏捷每点+2命中、每5点取整+1%闪避；智慧每2点取整+1魔力、每10点取整+1%护盾（3.28以后规则）。法术不进行攻击闪避。护甲随物理命中大小重新求减伤，三元素抗性分别限制到75%，然后护盾、生命。分配心灵升华后，护盾剩余损伤先按比例交由当前魔力承担，详见 '+link('rules','mana_guard')+'。本段混合受击示例未分配该节点。</p>'+facts([('同源混合受击示例','物理/火/冰/电各100；护甲500、抗性50%/25%/75%'),('防御后分量',esc(component_text(defense['components']))),('护盾扣减',number(defense['shield_spent'])),('生命扣减',number(defense['health_lost']))])+f'<p>本游戏敏捷型怪物闪避320；默认Scion命中140，对应 {percent(c["skitter_accuracy_example"]["base_chance"])}；增加10敏捷后命中160，对应 {percent(c["skitter_accuracy_example"]["improved_chance"])}。预览展示成功命中伤害，未把命中率伪乘成DPS。</p>','implemented'),
             ('shared','共享消费者与历史注册表','人物和怪物共用伤害分量、防御、命中和结算函数。','<p>旧MechanicRegistry仍约束怪物机制包；旧181节点引用保留作研究与回归。当前人物改用原始源树逐项能力门槛，不能再套用旧投影合计上限。未支持机制继续拒绝，不借导入数据悄悄生效。</p>','implemented'),
             ('boundaries','尚未实现的机制','未执行源节点整体锁定，原文与位置保留。','<p>仍未完成：施法动作时长/施法速度、条件/局部武器暴击、格挡、压制、抗性穿透、完整异常与持续伤害体系（无条件火焰持续伤害加成与三节点更快燃烧已接入；流血和中毒仍未实现）、召唤物、属性装备需求、星团/永恒珠宝、升华点数来源及复杂条件机制。源树浏览不等于以上均可用。制作已有回收、校准、赋魔、升格、补缀与重铸；更复杂的定向制作尚未实现。</p>','planned'),
             ('sources','来源与实现边界','目录来自运行时导出，源树保留功能数据，所有美术由本项目创作。',f'<p><a href="{esc(source["source_url"])}">GGG源树固定提交 {source["source_commit"]}</a> · 3.29.1。保留节点身份、原始规则词句、精通和几何；未包含官方图像或叙事风味文本。上游数据再分发授权未明确，不宣称公共领域。</p><p>旧181节点与词缀校准研究仍有各自固定版本，不代表当前角色全部源效果已实现。原型怪物数值、掉落权重与熵初值由本项目定义。</p><p><a href="source-tree-coverage.json">完整执行覆盖与七职业可达前沿JSON</a>：空stats结构节点和精通本体不冒充属性效果，精通逐选项统计；可达集合不代表123点可以全部同时点出。</p>','research')
         ])
-    rule_defs.append(('combat_feedback','实际战斗反馈','普通命中、暴击命中与燃烧按目标分别汇总，显示真正减少的护盾与生命。','<p>固定0.20秒聚合窗口，单条显示0.75秒，最多48条可见数值。普通命中和暴击不混桶；暴击带感叹号，燃烧带“燃”，玩家受伤为红色负号。死亡时立即完成末击，暂停冻结，返城或重开清空。</p><p>过量伤害、免疫、闪避和零损伤不计入数值。燃烧不显示命中次数；不同技能同类可合计，因此不标单一技能名。此处是已结算损伤显示，不是DPS或平均伤害估算。</p><p>原伤害数字开关、字体缩放与相机缩放保持，不新增常驻统计面板。原命中位置和粒子随机抽样时序不变，反馈本身不取随机或保存进度。</p>','implemented'))
+    rule_defs.append(('combat_feedback','实际战斗反馈','普通命中、暴击命中与燃烧按目标分别汇总，显示真正减少的护盾与生命。','<p>固定0.20秒聚合窗口，单条显示0.75秒，最多48条可见数值。普通命中和暴击不混桶；暴击带感叹号，燃烧带“燃”，玩家受伤为红色负号。死亡时立即完成末击，暂停冻结，返城或重开清空。</p><p>过量伤害、免疫、闪避和零损伤不计入数值。心灵升华支出的魔力独立记账，不混入护盾或生命浮字。燃烧不显示命中次数；不同技能同类可合计，因此不标单一技能名。此处是已结算损伤显示，不是DPS或平均伤害估算。</p><p>原伤害数字开关、字体缩放与相机缩放保持，不新增常驻统计面板。原命中位置和粒子随机抽样时序不变，反馈本身不取随机或保存进度。</p>','implemented'))
     if 'burning' in data:
         burn=data['burning'];rows=[]
         for skill,example in burn['examples'].items():
@@ -751,6 +752,37 @@ def build(data, art):
         rule_defs.append(('forgeblade',RULE_TITLES['forgeblade'],'本地物理4、六族合法词池；W增强普通近战与裂刃direct，全局暴击与资源仍保持原范围。',forgeblade_rule(data,link,facts,details),'implemented'))
     if 'melee_basic' in data:
         rule_defs.append(('melee_basic',RULE_TITLES['melee_basic'],'短刃普攻使用独立近战派送，保留原攻击间隔；与裂刃几何、资源及逐次伤害分开展示。',melee_basic_rule(data,link,facts,details),'implemented'))
+    if 'mana_guard' in data:
+        guard=data['mana_guard']
+        def guard_value(key,value,as_percent=False):
+            label=percent(value) if as_percent else number(value)
+            return f'<span data-mana-guard-value="{esc(key)}" data-value="{esc(value)}">{label}</span>'
+        body=facts([('关键天赋',link('source_passives',guard['node']['id'])),('魔力先承伤比例',guard_value('fraction',guard['profile']['fraction'],True)),('最低存档版本',guard_value('save-version',guard['minimum_save_version'])),('未分配时',guard_value('disabled-fraction',guard['disabled_profile']['fraction'],True))])
+        body+=''.join('<p>'+esc(guard[key])+'。</p>' for key in ['order','resource_rule','damage_basis'])
+        body+='<h3>相同100损伤：命中与燃烧共享资源顺序</h3><p>'+esc(guard['example_scope'])+'。</p>'
+        labels={'full_mana':'无盾、足魔','low_mana':'无盾、仅10魔力','partial_shield':'30护盾、足魔','full_shield':'护盾完全吸收','empty_mana':'魔力耗尽','lethal':'资源不足、致死'}
+        fields=['damage_total','shield_spent','mana_spent','health_lost','overkill','remaining_shield','remaining_mana','remaining_health']
+        rows=[]
+        for key,example in guard['examples'].items():
+            initial=example['input']
+            for kind,label in [('hit','命中'),('burn','燃烧')]:
+                rows.append('<tr><th>'+esc(labels[key])+' · '+label+'<br>起始盾/魔/血 '+number(initial['shield'])+'/'+number(initial['mana'])+'/'+number(initial['health'])+'</th>'+''.join('<td>'+guard_value(key+'-'+kind+'-'+field,example[kind][field])+'</td>' for field in fields)+'</tr>')
+        body+='<div class="table-scroll"><table><thead><tr><th>独立示例</th><th>防御后损伤</th><th>盾支出</th><th>魔力支出</th><th>生命扣减</th><th>过量</th><th>剩余盾</th><th>剩余魔力</th><th>剩余生命</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
+        mixed=guard['mixed_mitigation_example']
+        body+=details('混合伤害、护甲抗性与感电顺序','<p>物理/火/冰/电各100、混沌25，护甲500，火抗25%、冰抗50%、闪电原始抗性500%被限制到75%；15%感电只增强命中。初始护盾50、魔力100、生命200。</p>'+facts([('防御与感电后',guard_value('mixed-damage',mixed['damage_total'])),('盾支出',guard_value('mixed-shield',mixed['shield_spent'])),('魔力支出',guard_value('mixed-mana',mixed['mana_spent'])),('生命扣减',guard_value('mixed-health',mixed['health_lost']))]))
+        body+='<p>'+esc(guard['zero_rule'])+'。三个入口的省略参数与显式0示例均由Godot比较完整Variant字节；冻结v57的完整规则回归见随版本交付的集中测试记录。</p>'
+        body+='<h3>源词句和完整效果门槛</h3><p>'+lines(source_lines(guard['node']['source_lines']))+'。</p><p>'+esc(guard['complete_gate'])+'。</p>'
+        for node_id,node in guard['blocked_matching_nodes'].items():
+            body+='<p>'+link('source_passives',node_id,localized_nodes[node_id]['name']+' · '+node_id)+'：未实现词句 '+lines(source_lines(node['execution']['unsupported']))+'。</p>'
+        body+='<p>'+esc(guard['route_scope'])+'。</p>'
+        class_names={0:'贵族',1:'野蛮人',2:'游侠',3:'女巫',4:'决斗者',5:'圣堂武僧',6:'暗影刺客'}
+        for route in guard['class_paths']:
+            key=str(route['class_id'])
+            body+=details(class_names[route['class_id']]+' · '+str(route['points_spent'])+'点受支持路线','<p>'+' → '.join(link('source_passives',node_id,node_id) for node_id in route['allocated'])+'</p>'+facts([('所需天赋点',guard_value('route-'+key+'-points',route['points_spent'])),('最低等级预算',guard_value('route-'+key+'-level',route['required_level'])),('完整构筑权威比例',guard_value('route-'+key+'-fraction',route['profile']['fraction'],True))])+'<p>候选通过当前完整构筑验证；旧schema34拒绝该新节点。保留沿途全部属性，无写档。</p>')
+        migration=guard['migration_example']
+        body+='<p>'+esc(guard['legacy_rule'])+'。同源内存迁移示例 '+str(migration['from_version'])+' → '+str(migration['to_version'])+'，变化字段仅 '+esc('、'.join(migration['changed_fields']))+'；新35文件不宣称与旧34文件字节相同。</p><p>尚未接入：'+esc('、'.join(guard['unsupported']))+'。本批没有新增图像。</p>'
+        body+='<p>'+link('rules','source_tree','源树与分配规则')+' · '+link('rules','source_defenses','命中防御')+' · '+link('rules','burning','点燃与燃烧')+' · '+link('rules','source_mana_cost','魔力成本')+' · '+link('rules','source_leech','偷取')+' · <a href="source-tree-coverage.json">同源执行覆盖JSON</a></p>'
+        rule_defs.append(('mana_guard',RULE_TITLES['mana_guard'],'护盾先吸收，再以当前魔力承担剩余损伤的40%；魔力不足部分由生命承担。',body,'implemented'))
     if 'source_spatial' in data:
         spatial=data['source_spatial']
         rows=[]

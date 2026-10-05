@@ -1,0 +1,26 @@
+{
+  "baseline_project": "/workspace/scratch/a51485f153de/v057-final-source-snapshot",
+  "published_v057_commit": "3718d746",
+  "passed_gameplay_attempts": [
+    {
+      "result_file": "20261005T191628613335Z-results.json",
+      "exit_code": 0,
+      "seconds": 2.634,
+      "test_sha256": "d8e8b9d574c0b2f5dbd92888e15763b6a87299df8ee36dd7459c4d1d7a329d38"
+    },
+    {
+      "result_file": "20261005T191855132996Z-results.json",
+      "exit_code": 0,
+      "seconds": 2.628,
+      "test_sha256": "33596f23dca8c42fa3deadc6bc5bf1a7d2059f051e36eada6e6308a4e8085fa1"
+    }
+  ],
+  "production_differences_from_passing_v58_legacy_oracle": {
+    "20261005T191505783054Z-results.json": [],
+    "20261005T191628613335Z-results.json": [],
+    "20261005T191855132996Z-results.json": []
+  },
+  "current_test_sha256": "33596f23dca8c42fa3deadc6bc5bf1a7d2059f051e36eada6e6308a4e8085fa1",
+  "current_runner_sha256": "9fb527f3992b3a8c53903619d158881786f5a5bb19e9b982e78c5e611d0b44db",
+  "evidence_reuse": "No 90-tick simulation was repeated; after unchanged production source checks, initial independently passing old/new oracle is reused. Final gameplay harness passed 187 checks. Runner dispatch-only correction follows final gameplay run."
+}

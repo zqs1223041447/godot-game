@@ -1,0 +1,25 @@
+{
+  "schema": 35,
+  "initial_run": {
+    "checks": 7214,
+    "passed": 7213,
+    "failures": 1,
+    "duration_seconds": 11.003,
+    "failure": "Missing schema34-specific migration message; data/source/atomicity assertions passed",
+    "attempt": "mana-guard-first.attempt.json",
+    "report": "results-first.json"
+  },
+  "correction": "Parent added old_version34 migration message in canonical_game_state.gd",
+  "targeted_recheck": {
+    "scope": "raw_migration",
+    "checks": 23,
+    "failures": 0,
+    "duration_seconds": 2.52,
+    "exit_code": 0,
+    "input_unchanged_during_run": true,
+    "attempt": "mana-guard-message-recheck.attempt.json",
+    "report": "results-message-recheck.json"
+  },
+  "unresolved_failures": [],
+  "limits": "Focused source and migration set only; no historical suite or long stress run"
+}

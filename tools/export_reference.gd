@@ -53,6 +53,7 @@ const ShockMigration = preload("res://scripts/save/shock_gem_migration.gd")
 const FireDotMigration = preload("res://scripts/save/fire_dot_migration.gd")
 const FasterBurnMigrationData = preload("res://scripts/save/faster_burn_migration.gd")
 const ForgebladeMigrationData = preload("res://scripts/save/forgeblade_migration.gd")
+const ManaGuardMigrationData = preload("res://scripts/save/mana_guard_migration.gd")
 const SourceCoverage = preload("res://tools/export_source_execution_coverage.gd")
 
 func _initialize() -> void:
@@ -119,6 +120,7 @@ static func collect() -> Dictionary:
 	result["shock"] = shock_examples()
 	result["source_fire_dot"] = source_fire_dot_examples()
 	result["source_faster_burn"] = source_faster_burn_examples()
+	result["mana_guard"] = mana_guard_examples()
 	result["forgeblade"] = forgeblade_examples()
 	result["melee_basic"] = melee_basic_examples(result.forgeblade)
 	result["normal_gem_trading"]={"offers":Canonical.GemTrade.offers(),"recycle_credit":Canonical.GemTrade.RECYCLE_CREDIT,"currency":Canonical.GemTrade.MATERIAL_ID,"location":"normal_town","level":1,"quality":0,"recycle_location":"bag","schema":Canonical.Rules.VERSION,"test_supply_separate":true,"pricing":"初版可调整预算；每次无词缀地图净得4碎片"}
@@ -1737,3 +1739,122 @@ static func source_faster_burn_examples() -> Dictionary:
 		"legacy_rule":"schema32及更早版本保持冻结词汇；严格验证旧32后迁移33，仅版本字段改变，不赠物、不退款、不改旧节点或UID",
 		"example_scope":"八组比较隔离F，M分别取0与0.10，使用真实编译器的陨星直接角色与龙卷母子角色；完整三节点支路另保留沿途全部属性，21条职业路线均经实际完整构筑验证",
 		"unsupported":["流血","中毒","通用异常伤害提高","弓技能限定持续伤害","新装备词缀池","新宝石"],"new_images":[]}
+
+
+## v58 resource examples execute production rules; Python only formats these values.
+## Route candidates are validated whole builds, not interactive allocation evidence.
+static func mana_guard_examples() -> Dictionary:
+	var node: Dictionary = SourceTree.Data.node("34098")
+	var effect: Dictionary = SourceTree.node_effect("34098", 0, 35)
+	var previous: Dictionary = SourceTree.node_effect("34098", 0, 34)
+	assert(effect.status == "full" and previous.status == "unsupported")
+	var derived: Dictionary = {}
+	for grant: Dictionary in effect.grants:
+		if grant.stat == Defense.MANA_GUARD_STAT:
+			derived[grant.stat] = float(derived.get(grant.stat, 0.0)) + float(grant.value)
+	var profile: Dictionary = Defense.mana_guard_profile(derived)
+	assert(profile.ok and profile.enabled and is_equal_approx(profile.fraction, 0.4))
+	var examples: Dictionary = {}
+	for spec: Dictionary in [
+		{"id":"full_mana", "shield":0.0, "mana":100.0, "health":200.0},
+		{"id":"low_mana", "shield":0.0, "mana":10.0, "health":200.0},
+		{"id":"partial_shield", "shield":30.0, "mana":100.0, "health":200.0},
+		{"id":"full_shield", "shield":100.0, "mana":100.0, "health":200.0},
+		{"id":"empty_mana", "shield":0.0, "mana":0.0, "health":200.0},
+		{"id":"lethal", "shield":0.0, "mana":10.0, "health":20.0}]:
+		var hit: Dictionary = Defense.incoming_source_hit({"fire":100.0}, {}, spec.shield, spec.health, "player", 0.0, spec.mana, profile.fraction)
+		var burn: Dictionary = Defense.incoming_burn(100.0, 0.0, spec.shield, spec.health, "player", spec.mana, profile.fraction)
+		assert(hit.ok and burn.ok)
+		for field: String in ["damage_total", "shield_spent", "mana_spent", "health_lost", "overkill", "remaining_shield", "remaining_mana", "remaining_health"]:
+			assert(var_to_bytes(hit[field]) == var_to_bytes(burn[field]))
+		examples[spec.id] = {"input":spec, "hit":hit, "burn":burn}
+	var zero_cases: Dictionary = {}
+	for kind: String in ["legacy_hit", "source_hit", "burn"]:
+		var old: Dictionary
+		var zero: Dictionary
+		if kind == "legacy_hit":
+			old = Defense.incoming_hit({"fire":100.0}, {}, 30.0, 200.0)
+			zero = Defense.incoming_hit({"fire":100.0}, {}, 30.0, 200.0, "player", 0.0, 100.0, 0.0)
+		elif kind == "source_hit":
+			old = Defense.incoming_source_hit({"fire":100.0}, {}, 30.0, 200.0)
+			zero = Defense.incoming_source_hit({"fire":100.0}, {}, 30.0, 200.0, "player", 0.0, 100.0, 0.0)
+		else:
+			old = Defense.incoming_burn(100.0, 0.0, 30.0, 200.0)
+			zero = Defense.incoming_burn(100.0, 0.0, 30.0, 200.0, "player", 100.0, 0.0)
+		assert(var_to_bytes(old) == var_to_bytes(zero) and not zero.has("mana_spent") and not zero.has("remaining_mana"))
+		zero_cases[kind] = {"omitted":old, "explicit_zero":zero, "variant_bytes_equal":var_to_bytes(old) == var_to_bytes(zero)}
+	var mixed: Dictionary = Defense.incoming_source_hit({"physical":100.0,"fire":100.0,"cold":100.0,"lightning":100.0,"chaos":25.0},
+		{"armour":500.0,"fire_resistance":0.25,"cold_resistance":0.5,"lightning_resistance":5.0}, 50.0, 200.0, "player", 0.15, 100.0, profile.fraction)
+	assert(mixed.ok)
+	var blocked: Dictionary = {}
+	for id: String in ["42144", "922"]:
+		var raw: Dictionary = SourceTree.Data.node(id)
+		blocked[id] = {"name":raw.name, "source_lines":raw.stats, "standard_graph":SourceTree.Data.standard_ids().has(id),
+			"execution":SourceTree.node_effect(id, 0, 35), "legacy_execution":SourceTree.node_effect(id, 0, 34)}
+		assert(blocked[id].execution.status == "partial" and not blocked[id].standard_graph)
+	var newly_complete: Array = []
+	for id: String in SourceTree.Data.standard_ids():
+		if SourceTree.Data.node(id).type != "mastery" and SourceTree.node_effect(id, 0, 34).status != "full" and SourceTree.node_effect(id, 0, 35).status == "full":
+			newly_complete.append(id)
+	newly_complete.sort()
+	assert(newly_complete == ["34098"])
+	var routes: Array = []
+	for start: Dictionary in SourceTree.Data.class_starts():
+		var path: Array = _mana_guard_supported_path(str(start.node_id))
+		if path.is_empty(): continue
+		var candidate: Dictionary = _fire_dot_route_candidate(int(start.class_index), path)
+		assert(Canonical.Rules.reason(candidate).is_empty() and SourceTree.reason(candidate).is_empty())
+		var old_candidate: Dictionary = candidate.duplicate(true)
+		old_candidate.version = 34
+		assert(not SourceTree.reason(old_candidate).is_empty())
+		var model := Canonical.new()
+		model._accept_memory(candidate)
+		var live_profile: Dictionary = model.get_mana_guard_profile()
+		assert(live_profile == profile)
+		routes.append({"class_id":int(start.class_index), "class_name":start.class_name, "allocated":path,
+			"points_spent":path.size()-1, "required_level":maxi(1,path.size()-5), "stats":model.get_stats(),
+			"profile":live_profile, "whole_build_valid":true, "legacy34_rejected":true, "save_attempts":model.save_attempts})
+	var old_save: Dictionary = Canonical.new().snapshot()
+	old_save.version = 34
+	var migrated: Dictionary = ManaGuardMigrationData.migrate_v34(old_save, SourceTree.reason)
+	assert(not migrated.is_empty())
+	var changed_fields: Array = []
+	for key: String in old_save:
+		if old_save[key] != migrated[key]: changed_fields.append(key)
+	assert(changed_fields == ["version"])
+	return {"minimum_save_version":35, "stat":Defense.MANA_GUARD_STAT, "source_version":"3.29.1", "source_sha256":SourceTree.Data.SOURCE_SHA256,
+		"node":{"id":"34098", "name":node.name, "source_lines":node.stats, "execution":effect, "legacy_execution":previous},
+		"profile":profile, "disabled_profile":Canonical.new().get_mana_guard_profile(), "new_complete_ordinary_nodes":newly_complete,
+		"blocked_matching_nodes":blocked, "new_mastery_effect_ids":[], "new_images":[], "examples":examples, "zero_cases":zero_cases,
+		"mixed_mitigation_example":mixed, "class_paths":routes,
+		"migration_example":{"from_version":34,"to_version":migrated.version,"changed_fields":changed_fields,"granted_items":0,"granted_points":0},
+		"producer":"SourceTree.node_effect → CanonicalGameState.get_mana_guard_profile → Defense.incoming_source_hit / incoming_burn / settle_with_mana",
+		"order":"命中先沿既有护甲、抗性与感电结算；燃烧先结算火抗；然后护盾 → 对剩余伤害按比例支出当前魔力 → 生命，魔力不足由生命承担",
+		"resource_rule":"与施法、药剂、再生和偷取共用当前魔力池；这是伤害分摊，不是魔力返还，也不提供免费施法",
+		"damage_basis":"mana_spent独立于health_lost和shield_spent；浮字、偷取与命中归属沿原定义，过量伤害单列",
+		"zero_rule":"缺省比例与显式0完全保留旧返回字段和Variant字节，不添加mana_spent或remaining_mana",
+		"complete_gate":"本批仅34098完整接入；外图42144的8%与922的10%同族句可执行，其余未实现效果仍使混合节点整体锁定，升华分区不开放",
+		"route_scope":"以下为生产源执行器上的受支持最短路径与完整构筑候选验证；未宣称通过交互逐点分配，且不代表123点能同时分配所有路线",
+		"example_scope":"固定防御后100损伤、各行独立初始资源；hit与burn均直接调用生产防御规则，静态资源预算不是实战DPS",
+		"legacy_rule":"schema35先严格按旧34词汇验证并保留原始文件逐字节备份；只显式迁移版本，不赠物、不赠点，旧无节点构筑机制保持",
+		"unsupported":["生命或魔力Recoup","条件分摊","召唤物分摊","新增怪物魔力池","未完整实现的混合节点"]}
+
+
+static func _mana_guard_supported_path(start_id: String) -> Array:
+	var parents: Dictionary = {start_id:""}
+	var queue: Array[String] = [start_id]
+	var cursor: int = 0
+	while cursor < queue.size():
+		var id: String = queue[cursor]
+		cursor += 1
+		if id == "34098": return SourceCoverage._path_to(parents, start_id, id)
+		var adjacent: Array = SourceTree.Data.adjacency(id).duplicate()
+		adjacent.sort()
+		for next: String in adjacent:
+			if parents.has(next): continue
+			var node: Dictionary = SourceTree.Data.node(next)
+			if not SourceCoverage._path_exclusion(next, node, start_id).is_empty(): continue
+			if SourceTree.node_effect(next, 0, 35).status != "full": continue
+			parents[next] = id
+			queue.append(next)
+	return []

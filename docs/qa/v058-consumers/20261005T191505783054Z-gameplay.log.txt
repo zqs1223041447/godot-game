@@ -1,0 +1,24 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+godot-game: playable arena ready
+ERROR: Armour, five resistances and Shock applied once got=325.833333333333 expected=314.333333333333
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/mana_guard_gameplay_test.gd:23)
+       [1] near (res://tests/mana_guard_gameplay_test.gd:26)
+       [2] actual_hits (res://tests/mana_guard_gameplay_test.gd:140)
+       [3] run (res://tests/mana_guard_gameplay_test.gd:354)
+ERROR: Mixed result diverted once after all defenses and shield got=122.333333333333 expected=117.733333333333
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/mana_guard_gameplay_test.gd:23)
+       [1] near (res://tests/mana_guard_gameplay_test.gd:26)
+       [2] actual_hits (res://tests/mana_guard_gameplay_test.gd:141)
+       [3] run (res://tests/mana_guard_gameplay_test.gd:354)
+ERROR: Mixed residual life is sixty percent got=183.5 expected=176.6
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/mana_guard_gameplay_test.gd:23)
+       [1] near (res://tests/mana_guard_gameplay_test.gd:26)
+       [2] actual_hits (res://tests/mana_guard_gameplay_test.gd:142)
+       [3] run (res://tests/mana_guard_gameplay_test.gd:354)

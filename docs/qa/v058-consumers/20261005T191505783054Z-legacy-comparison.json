@@ -1,0 +1,56 @@
+{
+  "published_v057_commit": "3718d746",
+  "independent_project": "/workspace/scratch/a51485f153de/v057-final-source-snapshot",
+  "passed": true,
+  "projections": [
+    "model/saved JSON top-level version: require 34 versus 35, then omit",
+    "derived stats damage_taken_from_mana_before_life: require float zero, then omit"
+  ],
+  "raw_save_versions": {
+    "old": 34,
+    "new": 35
+  },
+  "raw_saves_claimed_equal": false,
+  "save_contents_equal_after_version_only": true,
+  "comparisons": {
+    "bin": {
+      "equal": true,
+      "old_bytes": 11251260,
+      "new_bytes": 11251260,
+      "old_sha256": "ce46b7579e4696f089bbb297e6fdccfff887bb20389affa4e9dd745151935504",
+      "new_sha256": "ce46b7579e4696f089bbb297e6fdccfff887bb20389affa4e9dd745151935504"
+    },
+    "projected-save.json": {
+      "equal": true,
+      "old_bytes": 12162,
+      "new_bytes": 12162,
+      "old_sha256": "06b1135dfcb57c7337e50e0c6060ea597ea4641f9cc053abeb17b3a64cf3f26a",
+      "new_sha256": "06b1135dfcb57c7337e50e0c6060ea597ea4641f9cc053abeb17b3a64cf3f26a"
+    },
+    "save": {
+      "equal": false,
+      "old_bytes": 12178,
+      "new_bytes": 12178,
+      "old_sha256": "0254e592da5d35d283a42eae5897b29c5126c12d8db9a0406962c5269f6a0112",
+      "new_sha256": "2749eac514da3e1d7dccd63ccf8e3d3d807db3f1c28d8db16b746347d4e72700"
+    }
+  },
+  "observation_archives": [
+    {
+      "path": "20261005T191505783054Z-legacy-old.bin.gz",
+      "raw_bytes": 11251260,
+      "raw_sha256": "ce46b7579e4696f089bbb297e6fdccfff887bb20389affa4e9dd745151935504",
+      "archive_bytes": 822124,
+      "archive_sha256": "d11f5d96b221c7c479814e05af985c3a02186f9da9df4c300620c1495c86cfdb",
+      "round_trip_exact": true
+    },
+    {
+      "path": "20261005T191505783054Z-legacy-new.bin.gz",
+      "raw_bytes": 11251260,
+      "raw_sha256": "ce46b7579e4696f089bbb297e6fdccfff887bb20389affa4e9dd745151935504",
+      "archive_bytes": 822124,
+      "archive_sha256": "d11f5d96b221c7c479814e05af985c3a02186f9da9df4c300620c1495c86cfdb",
+      "round_trip_exact": true
+    }
+  ]
+}

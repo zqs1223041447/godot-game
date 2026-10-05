@@ -1,0 +1,30 @@
+{
+  "command": [
+    "godot",
+    "--headless",
+    "--path",
+    "/workspace/scratch/a51485f153de/v058-mana-before-life",
+    "--script",
+    "res://tests/mana_guard_migration_test.gd"
+  ],
+  "scope": "raw_migration",
+  "exit_code": 0,
+  "duration_seconds": 2.52,
+  "started_utc": "2026-10-05T19:15:34.980208+00:00",
+  "xdg_data_home": "/tmp/godot-m1-v058-migration-followup-066386nd",
+  "xdg_cache_home": "/tmp/godot-m1-v058-cache-erzj7_td",
+  "log": "docs/qa/v058-migration/mana-guard-message-recheck.log.txt",
+  "input_sha256": {
+    "scripts/canonical_game_state.gd": "0d56ac6b4544d9f1666d603cbb885cbc127e1599afcefe568a5f6a1275d8e044",
+    "scripts/save/canonical_build_store.gd": "d060ebc0efc6d3b542a254fe4b1466668a497287e5845f0de034f2ad92b04020",
+    "scripts/save/canonical_build_rules.gd": "371f5d7f28bb6b2af508783c63ca55986e6d4955e4b030264c73771149be8a87",
+    "scripts/save/mana_guard_migration.gd": "8533785ede09f1ef976edb8511af9f5c166f4fcedc7dc8e1b21fbe0975f550ef",
+    "scripts/save/forgeblade_migration.gd": "d78eea2028b49f5fe3a4abb88c7ef61096ecc3b01c5fde1f183d161e52239de8",
+    "scripts/passives/source_stat_patterns.gd": "db3ac0c5cde0f61dd729b2669d3a07dce5702318b57c1fedec091a53a3e443e2",
+    "scripts/passives/source_tree_runtime.gd": "8dcd23ebff2cef641445eda3f5156a82f68a8755ff04141f09569f89c8063be2",
+    "scripts/passives/source_tree_localization.gd": "1074ad08627070d73c0476bb54619ee1dd4561358afd1272b2ce9167e442f9df",
+    "tests/mana_guard_migration_test.gd": "7f13e2b52a6e09d62951b04fcbfef574acbc6b0645c7adbcfda0098c5559616a",
+    "docs/qa/v056/fixtures/v34-default.json": "3ccecca2129115a7d1ba6cf48568691a5097170515e124a63cd0941ffdc75c6c"
+  },
+  "input_unchanged_during_run": true
+}

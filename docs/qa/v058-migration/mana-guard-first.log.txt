@@ -1,0 +1,9 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ERROR: Migration message describes mana-before-life without claiming grants
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/mana_guard_migration_test.gd:39)
+       [1] test_raw_migration (res://tests/mana_guard_migration_test.gd:208)
+       [2] _initialize (res://tests/mana_guard_migration_test.gd:325)
+Mana guard schema35 migration and source admission: 7214 checks, 1 failures
