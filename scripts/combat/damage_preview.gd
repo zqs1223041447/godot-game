@@ -157,7 +157,10 @@ static func spatial_details(cast: Dictionary) -> PackedStringArray:
 	if recipe.has("speed") or recipe.has("parent"):
 		lines.append("投射速度改变飞行快慢，不增加距离上限或存续时间。")
 	var explosion: Dictionary = snapshot.get("explosion_recipe", {})
-	if snapshot.get("effects", []).has("explode_on_flight_end") and explosion.has("radius"):
+	var melee_basic: bool = cast.get("skill_id", "") == "basic" and recipe.get("delivery", "") == "melee"
+	if melee_basic:
+		explosion = {}
+	if not melee_basic and snapshot.get("effects", []).has("explode_on_flight_end") and explosion.has("radius"):
 		lines.append("独立爆炸半径 %.2f · 面积 ×%.4f" % [float(explosion.radius),float(explosion.get("area_multiplier",1.0))])
 	if recipe.has("source_area_multiplier") or float(explosion.get("area_multiplier",1.0)) != 1.0:
 		lines.append("范围增幅按面积计算；半径按面积倍率的平方根变化。")

@@ -1,0 +1,186 @@
+{
+  "base_commit": "63d84b2db67feb51595caf786e0c311736f08a74",
+  "counts": {
+    "rules_and_frozen_packets": 4623,
+    "actual_model_and_main": 193,
+    "root_preview": 7,
+    "root_melee_explosion_preview": 3
+  },
+  "total_checks": 4826,
+  "all_final_subsets_exit_zero": true,
+  "reference_validation_separate": "docs/qa/v056-reference/summary.json",
+  "old_complete_variants": 4431,
+  "old_flight_snapshots": 24,
+  "old_variant_file_bytes": 7559500,
+  "old_variant_file_sha256": "2629f9d04739b40fdf7bfa48d805c8c4abc246d155a62b64d4ef5e505ae0adc2",
+  "non_forgeblade_main_frames": 96,
+  "non_forgeblade_observation_bytes": 3486968,
+  "non_forgeblade_observation_sha256": "bac4f54f0b003146034ed7b84abc9fcdb5b8f6ced4f16055e02277f18fd2eb53",
+  "source_reuse": {
+    "pure_rule_inputs": {
+      "count": 60,
+      "post_test_differences": {
+        "project.godot": {
+          "tested": "3612608ea0fdef27a4f0e113b3ddb72f5c0d9a0ccaf776a416d693e84b47d684",
+          "final": "d4eb279793dc37839a86105a93ca97c824db44b263193307adcded5b63739c4c"
+        },
+        "scripts/combat/damage_preview.gd": {
+          "tested": "d63bcf6a7a6ec8a9d94289e53c486f7e4ebf0ecd10d3c94542b065627c80fa09",
+          "final": "d511ca6a392cb3d6ab9651da49bd99b7d8b1f91019c224e9fa6a47b15183f1b6"
+        }
+      }
+    },
+    "actual_main_inputs": {
+      "count": 6,
+      "post_test_differences": {}
+    }
+  },
+  "font_generation": {
+    "fonttools_version": "4.61.1",
+    "source_sha256": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
+    "font_sha256": "85c687ac10e8fb25a507478690a8cf8109a87ef190dd68161c396642a7847d50",
+    "font_bytes": 417460,
+    "mapped_codepoints": 1073,
+    "runtime_files": 167,
+    "required_codepoints": 1068,
+    "required_han": 947,
+    "added_since_baseline": "‹›▲▼七业东严串九习买了二产付任但何供候偏健偷允六具典凶划剂功务北匠区十千华协印厚参反口台号各员咏商圆圈垣城堆墙声头套好家寒察尔层差己币师幕广序库座张征态恰意感慢慧戒扣执扫把挡挥控推描携撤播政敏料斜斥斩易晴智服析树样案横款残毒油测涂溯烧燃牌猛玩瓶登益盔石码碑稳突站策累纳练绑绕缓耐职肤脊腰舍花英草药营著蓄蚀血被西解警订许评诊语账货质购赠走路踏输述追送逻遇道遭遮铁铸销锐锻镇阔阻险难集震靠靴鞋页顺频",
+    "baseline_glyphs_unchanged": true
+  },
+  "logs": {
+    "docs/qa/v056-rules/20261005T175946636611Z-basic-rules.log.txt": {
+      "bytes": 736,
+      "sha256": "ce8345ad181709fb70d9e29f81a4b60e86accd58ba2e496be3ff8da29a068e1f"
+    },
+    "docs/qa/v056-rules/20261005T180040597719Z-basic-rules.log.txt": {
+      "bytes": 309,
+      "sha256": "d308c5d4eb4fe2da065dcd56a6c8450cd0b433166998388c92b2a4df549bc3e0"
+    },
+    "docs/qa/v056-rules/20261005T175946636611Z-frozen-v055.log.txt": {
+      "bytes": 157,
+      "sha256": "69c9011d8c9e5759dd1e05974bf6ee51c1d008ec4cb89ea2207d070a3b113c46"
+    },
+    "docs/qa/v056/import-initial.log": {
+      "bytes": 70227,
+      "sha256": "f4c0ca1b6b8cf86f772a5d3259e4a77f0626d366193089daf78172e2d86b3c38"
+    },
+    "docs/qa/v056/final-import.log": {
+      "bytes": 2869,
+      "sha256": "e59befd692c4b1dd49ebe4afb89339d9ea320e3882ba06ecd7e1cbf8b4948040"
+    },
+    "docs/qa/v056/packed-probe-parse.log": {
+      "bytes": 73,
+      "sha256": "a9912b85473f126d3f4f63ec824170c828df3473a292f866dde86cafda5b66da"
+    },
+    "docs/qa/v056/font-subset.log": {
+      "bytes": 1003,
+      "sha256": "e900a273adb54c74bef8697ab4a29bad28676b082624caf186be5a139c03e7c2"
+    },
+    "docs/qa/v056-consumers/20261005T180109566012Z-baseline.log.txt": {
+      "bytes": 1956,
+      "sha256": "70ac22904e5779cca0571da23655fd4b3c44e73072af3c27be2a65b337b28ebf"
+    },
+    "docs/qa/v056-consumers/20261005T180319697466Z-gameplay.log.txt": {
+      "bytes": 339,
+      "sha256": "b35c497101db3b282ceb8c87dd9e0b89421c69850245166b4ffa63e51edf04e7"
+    },
+    "docs/qa/v056-consumers/20261005T180205498605Z-baseline.log.txt": {
+      "bytes": 182,
+      "sha256": "fed4466307d4d849734f9e6cc1c945b109f0ebb70e7cd6588d9ba6a48c889bab"
+    },
+    "docs/qa/v056-consumers/20261005T180426362554Z-gameplay.log.txt": {
+      "bytes": 340,
+      "sha256": "533566b32b008f9301efa41f4558f2a2e83b79719dcc79ce0aaeb1010529ffd6"
+    },
+    "docs/qa/v056-consumers/20261005T180253894098Z-gameplay.log.txt": {
+      "bytes": 8190,
+      "sha256": "48b209930aab1c2fb9c6bc988f1534cc402590b855001324764d99fb721174cb"
+    },
+    "docs/qa/v056-consumers/20261005T180133761594Z-baseline.log.txt": {
+      "bytes": 3218,
+      "sha256": "75d93daa2d7b84942422bfdfd90ddd4ceeeb35461be4ec9598b5007afa6f6670"
+    },
+    "docs/qa/v056-consumers/20261005T180218540309Z-gameplay.log.txt": {
+      "bytes": 7741,
+      "sha256": "a01d2e4a9d99efcef5e032738f91f41590934638efb77f4cc9a62ec6dd8f878c"
+    },
+    "docs/qa/v056-root-ui/presentation-first-invalid-id.log": {
+      "bytes": 385,
+      "sha256": "a5262ba2393564ee9b734560fbcd82d55d5c2bfc0651444b04b5a722cbb8ec77"
+    },
+    "docs/qa/v056-root-ui/explosion-preview.log": {
+      "bytes": 119,
+      "sha256": "03fcd5d8dd08293d5228dca8099649a7811b1bfcd500ad28ec65442fb66379f8"
+    },
+    "docs/qa/v056-root-ui/presentation.log": {
+      "bytes": 120,
+      "sha256": "baf576f4db5a8d3ebe66097afe610d956bf520261850e3ed3201745d099bd194"
+    },
+    "docs/qa/v056-reference/javascript-syntax.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v056-reference/godot-export.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v056-reference/javascript-syntax.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v056-reference/godot-export.stdout.log": {
+      "bytes": 205,
+      "sha256": "881c3c8a76e46d3e862aafeb146330317ff3f9b9ded3708c83c5c5e40bdf8c0b"
+    },
+    "docs/qa/v056-reference/focused-reference.stdout.log": {
+      "bytes": 307,
+      "sha256": "31ed41d5147f89fb97d61da8fcacd64772398d3d19d3b3f94c7e475120f88f42"
+    },
+    "docs/qa/v056-reference/baseline-capture-corrected.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v056-reference/baseline-capture.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v056-reference/python-check.stdout.log": {
+      "bytes": 52,
+      "sha256": "65d47533eaf556129a1f3a295db12ab1bc36a8df0770c71cb9378490d54d03ba"
+    },
+    "docs/qa/v056-reference/baseline-capture.stderr.log": {
+      "bytes": 1099,
+      "sha256": "55d242cbf7a6ba04d5ddedf581eb3c0490642407e963fc6d0bd4468952d75f65"
+    },
+    "docs/qa/v056-reference/focused-reference.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v056-reference/python-build.stdout.log": {
+      "bytes": 51,
+      "sha256": "596d57de184553f7b92a7b15a4f502dd5aa4f53b6ad4523739aa3010b171e545"
+    },
+    "docs/qa/v056-reference/python-build.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v056-reference/baseline-capture-corrected.stdout.log": {
+      "bytes": 184,
+      "sha256": "8aff41770a1cea35c194a89f479065f488547a55bb62ee092037fbb784e301a4"
+    },
+    "docs/qa/v056-reference/python-check.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "known_boundaries": [
+    "Only new forgeblade basic behavior changes, not an equivalence or performance optimization for forgeblade combat",
+    "Old non-forgeblade source/observations and old in-flight arrows preserve bytes; melee existing snapshot/gem/formal save schema34 remains",
+    "New manual inputs verified through actual headless Input events with physical pixel stretch conversion; not physical mouse or Windows rendering proof",
+    "First rules fixture changed StringName into String by loose comparison; corrected typed fixture, no product change",
+    "Early main fixture parse/input-transform/fixed-effect cleanup errors retained; no product patch caused by them",
+    "Root preview7 had illegal fixture UID first, corrected; later melee-only explosion wording guard verified by3 separate checks, not a rerun of7",
+    "Later metadata version/font/docs changes listed by hashes; glyph挥 added with existing outlines/metrics preserved",
+    "No600-second, historical full suite, new visual acceptance gate, or LUNA passive localization edits"
+  ]
+}

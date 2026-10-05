@@ -17318,7 +17318,7 @@
 		},
 		"forgeblade": {
 			"balance_origin": "original",
-			"description": "本武器物理单独结算，仅增强裂刃斩直接命中。详情列出基底、本地点数与本地提高。",
+			"description": "装备后普通攻击变为单目标近战挥击；本武器物理增强普通近战攻击与裂刃斩。",
 			"eligible_affixes": [
 				"deepwell",
 				"wellturn",
@@ -17333,7 +17333,7 @@
 				"affix_lines": [],
 				"base_id": "forgeblade",
 				"base_name": "锻纹短刃",
-				"description": "本武器物理单独结算，仅增强裂刃斩直接命中。详情列出基底、本地点数与本地提高。",
+				"description": "装备后普通攻击变为单目标近战挥击；本武器物理增强普通近战攻击与裂刃斩。",
 				"effects": [],
 				"id": "gear_000001",
 				"item_level": 1,
@@ -17350,7 +17350,7 @@
 				"weapon_damage": {
 					"physical": 4.0
 				},
-				"weapon_damage_summary": "本武器物理：(4.0 + 0.0) × (1 + 0.0%) = 4.0；仅裂刃斩直接命中",
+				"weapon_damage_summary": "本武器物理：(4.0 + 0.0) × (1 + 0.0%) = 4.0；普通近战攻击与裂刃斩",
 				"weapon_profile": {
 					"base": {
 						"physical": 4.0
@@ -18222,7 +18222,7 @@
 	"forgeblade": {
 		"base": {
 			"balance_origin": "original",
-			"description": "本武器物理单独结算，仅增强裂刃斩直接命中。详情列出基底、本地点数与本地提高。",
+			"description": "装备后普通攻击变为单目标近战挥击；本武器物理增强普通近战攻击与裂刃斩。",
 			"name": "锻纹短刃",
 			"scope": "equipped_weapon",
 			"size": [
@@ -18993,20 +18993,16 @@
 							"primary": {
 								"chance": 0.05,
 								"multiplier": 1.5
-							},
-							"secondary": {
-								"chance": 0.05,
-								"multiplier": 1.5
 							}
 						},
 						"hits": {
-							"projectile": {
+							"direct": {
 								"critical": {
 									"chance": 0.05,
 									"multiplier": 1.5
 								},
-								"expected_zero_defense": 18.45,
-								"local_contribution": 0.0,
+								"expected_zero_defense": 25.522499999999997,
+								"local_contribution": 6.8999999999999995,
 								"no_local_packet": {
 									"assembly": {
 										"added": {
@@ -19022,12 +19018,12 @@
 									"base": {
 										"physical": 18.0
 									},
-									"role": "projectile",
+									"role": "direct",
 									"skill_id": "basic",
 									"tags": [
 										"hit",
-										"projectile",
-										"attack"
+										"attack",
+										"melee"
 									]
 								},
 								"packet": {
@@ -19040,28 +19036,63 @@
 										"intrinsic": {
 											"physical": 18.0
 										},
-										"stage": "hit_base"
+										"stage": "hit_base",
+										"weapon": {
+											"coefficient": 1.0,
+											"components": {
+												"physical": 6.8999999999999995
+											},
+											"contribution": {
+												"physical": 6.8999999999999995
+											},
+											"profile": {
+												"base": {
+													"physical": 4.0
+												},
+												"base_id": "forgeblade",
+												"flat": {
+													"physical": 2.0
+												},
+												"increased": {
+													"physical": 0.15
+												},
+												"item_id": "gear_000001",
+												"sources": [
+													{
+														"affix_id": "whetstone_edge",
+														"stat": "weapon_added_physical",
+														"value": 2.0
+													},
+													{
+														"affix_id": "tempered_edge",
+														"stat": "weapon_physical_increased",
+														"value": 0.15
+													}
+												],
+												"stage": "weapon_local"
+											}
+										}
 									},
 									"base": {
-										"physical": 18.0
+										"physical": 24.9
 									},
-									"role": "projectile",
+									"role": "direct",
 									"skill_id": "basic",
 									"tags": [
 										"hit",
-										"projectile",
-										"attack"
+										"attack",
+										"melee"
 									]
 								},
 								"resolved": {
 									"components": {
-										"physical": 18.0
+										"physical": 24.9
 									},
 									"details": [
 										{
-											"base": 18.0,
-											"before_defense": 18.0,
-											"final": 18.0,
+											"base": 24.9,
+											"before_defense": 24.9,
+											"final": 24.9,
 											"increased": 0.0,
 											"modifiers": [],
 											"more": 1.0,
@@ -19069,81 +19100,7 @@
 											"type": "physical"
 										}
 									],
-									"total": 18.0
-								}
-							},
-							"secondary": {
-								"critical": {
-									"chance": 0.05,
-									"multiplier": 1.5
-								},
-								"expected_zero_defense": 16.604999999999997,
-								"local_contribution": 0.0,
-								"no_local_packet": {
-									"assembly": {
-										"added": {
-
-										},
-										"added_effectiveness": 0.0,
-										"base_coefficient": 0.9,
-										"intrinsic": {
-											"fire": 16.2
-										},
-										"stage": "hit_base"
-									},
-									"base": {
-										"fire": 16.2
-									},
-									"role": "secondary",
-									"skill_id": "basic",
-									"tags": [
-										"hit",
-										"area",
-										"secondary",
-										"explosion"
-									]
-								},
-								"packet": {
-									"assembly": {
-										"added": {
-
-										},
-										"added_effectiveness": 0.0,
-										"base_coefficient": 0.9,
-										"intrinsic": {
-											"fire": 16.2
-										},
-										"stage": "hit_base"
-									},
-									"base": {
-										"fire": 16.2
-									},
-									"role": "secondary",
-									"skill_id": "basic",
-									"tags": [
-										"hit",
-										"area",
-										"secondary",
-										"explosion"
-									]
-								},
-								"resolved": {
-									"components": {
-										"fire": 16.2
-									},
-									"details": [
-										{
-											"base": 16.2,
-											"before_defense": 16.2,
-											"final": 16.2,
-											"increased": 0.0,
-											"modifiers": [],
-											"more": 1.0,
-											"resistance": 0.0,
-											"type": "fire"
-										}
-									],
-									"total": 16.2
+									"total": 24.9
 								}
 							}
 						},
@@ -20591,7 +20548,7 @@
 					],
 					"base_id": "forgeblade",
 					"base_name": "锻纹短刃",
-					"description": "本武器物理单独结算，仅增强裂刃斩直接命中。详情列出基底、本地点数与本地提高。\n前缀 · 砥刃 T1：本武器附加物理伤害 +2\n前缀 · 淬锋 T1：本武器物理伤害提高 +15%\n前缀 · 深汲 T1：最大魔力 +9\n后缀 · 泉旋 T1：魔力恢复速度提高 +5%",
+					"description": "装备后普通攻击变为单目标近战挥击；本武器物理增强普通近战攻击与裂刃斩。\n前缀 · 砥刃 T1：本武器附加物理伤害 +2\n前缀 · 淬锋 T1：本武器物理伤害提高 +15%\n前缀 · 深汲 T1：最大魔力 +9\n后缀 · 泉旋 T1：魔力恢复速度提高 +5%",
 					"effects": [],
 					"id": "gear_000001",
 					"item_level": 1,
@@ -20609,7 +20566,7 @@
 					"weapon_damage": {
 						"physical": 6.8999999999999995
 					},
-					"weapon_damage_summary": "本武器物理：(4.0 + 2.0) × (1 + 15.0%) = 6.9；仅裂刃斩直接命中",
+					"weapon_damage_summary": "本武器物理：(4.0 + 2.0) × (1 + 15.0%) = 6.9；普通近战攻击与裂刃斩",
 					"weapon_profile": {
 						"base": {
 							"physical": 4.0
@@ -20800,20 +20757,16 @@
 							"primary": {
 								"chance": 0.05,
 								"multiplier": 1.5
-							},
-							"secondary": {
-								"chance": 0.05,
-								"multiplier": 1.5
 							}
 						},
 						"hits": {
-							"projectile": {
+							"direct": {
 								"critical": {
 									"chance": 0.05,
 									"multiplier": 1.5
 								},
-								"expected_zero_defense": 18.45,
-								"local_contribution": 0.0,
+								"expected_zero_defense": 24.0875,
+								"local_contribution": 5.5,
 								"no_local_packet": {
 									"assembly": {
 										"added": {
@@ -20829,12 +20782,12 @@
 									"base": {
 										"physical": 18.0
 									},
-									"role": "projectile",
+									"role": "direct",
 									"skill_id": "basic",
 									"tags": [
 										"hit",
-										"projectile",
-										"attack"
+										"attack",
+										"melee"
 									]
 								},
 								"packet": {
@@ -20847,28 +20800,63 @@
 										"intrinsic": {
 											"physical": 18.0
 										},
-										"stage": "hit_base"
+										"stage": "hit_base",
+										"weapon": {
+											"coefficient": 1.0,
+											"components": {
+												"physical": 5.5
+											},
+											"contribution": {
+												"physical": 5.5
+											},
+											"profile": {
+												"base": {
+													"physical": 4.0
+												},
+												"base_id": "forgeblade",
+												"flat": {
+													"physical": 1.0
+												},
+												"increased": {
+													"physical": 0.1
+												},
+												"item_id": "gear_000001",
+												"sources": [
+													{
+														"affix_id": "whetstone_edge",
+														"stat": "weapon_added_physical",
+														"value": 1.0
+													},
+													{
+														"affix_id": "tempered_edge",
+														"stat": "weapon_physical_increased",
+														"value": 0.1
+													}
+												],
+												"stage": "weapon_local"
+											}
+										}
 									},
 									"base": {
-										"physical": 18.0
+										"physical": 23.5
 									},
-									"role": "projectile",
+									"role": "direct",
 									"skill_id": "basic",
 									"tags": [
 										"hit",
-										"projectile",
-										"attack"
+										"attack",
+										"melee"
 									]
 								},
 								"resolved": {
 									"components": {
-										"physical": 18.0
+										"physical": 23.5
 									},
 									"details": [
 										{
-											"base": 18.0,
-											"before_defense": 18.0,
-											"final": 18.0,
+											"base": 23.5,
+											"before_defense": 23.5,
+											"final": 23.5,
 											"increased": 0.0,
 											"modifiers": [],
 											"more": 1.0,
@@ -20876,81 +20864,7 @@
 											"type": "physical"
 										}
 									],
-									"total": 18.0
-								}
-							},
-							"secondary": {
-								"critical": {
-									"chance": 0.05,
-									"multiplier": 1.5
-								},
-								"expected_zero_defense": 16.604999999999997,
-								"local_contribution": 0.0,
-								"no_local_packet": {
-									"assembly": {
-										"added": {
-
-										},
-										"added_effectiveness": 0.0,
-										"base_coefficient": 0.9,
-										"intrinsic": {
-											"fire": 16.2
-										},
-										"stage": "hit_base"
-									},
-									"base": {
-										"fire": 16.2
-									},
-									"role": "secondary",
-									"skill_id": "basic",
-									"tags": [
-										"hit",
-										"area",
-										"secondary",
-										"explosion"
-									]
-								},
-								"packet": {
-									"assembly": {
-										"added": {
-
-										},
-										"added_effectiveness": 0.0,
-										"base_coefficient": 0.9,
-										"intrinsic": {
-											"fire": 16.2
-										},
-										"stage": "hit_base"
-									},
-									"base": {
-										"fire": 16.2
-									},
-									"role": "secondary",
-									"skill_id": "basic",
-									"tags": [
-										"hit",
-										"area",
-										"secondary",
-										"explosion"
-									]
-								},
-								"resolved": {
-									"components": {
-										"fire": 16.2
-									},
-									"details": [
-										{
-											"base": 16.2,
-											"before_defense": 16.2,
-											"final": 16.2,
-											"increased": 0.0,
-											"modifiers": [],
-											"more": 1.0,
-											"resistance": 0.0,
-											"type": "fire"
-										}
-									],
-									"total": 16.2
+									"total": 23.5
 								}
 							}
 						},
@@ -22398,7 +22312,7 @@
 					],
 					"base_id": "forgeblade",
 					"base_name": "锻纹短刃",
-					"description": "本武器物理单独结算，仅增强裂刃斩直接命中。详情列出基底、本地点数与本地提高。\n前缀 · 砥刃 T1：本武器附加物理伤害 +1\n前缀 · 淬锋 T1：本武器物理伤害提高 +10%\n前缀 · 深汲 T1：最大魔力 +5\n后缀 · 泉旋 T1：魔力恢复速度提高 +3%",
+					"description": "装备后普通攻击变为单目标近战挥击；本武器物理增强普通近战攻击与裂刃斩。\n前缀 · 砥刃 T1：本武器附加物理伤害 +1\n前缀 · 淬锋 T1：本武器物理伤害提高 +10%\n前缀 · 深汲 T1：最大魔力 +5\n后缀 · 泉旋 T1：魔力恢复速度提高 +3%",
 					"effects": [],
 					"id": "gear_000001",
 					"item_level": 1,
@@ -22416,7 +22330,7 @@
 					"weapon_damage": {
 						"physical": 5.5
 					},
-					"weapon_damage_summary": "本武器物理：(4.0 + 1.0) × (1 + 10.0%) = 5.5；仅裂刃斩直接命中",
+					"weapon_damage_summary": "本武器物理：(4.0 + 1.0) × (1 + 10.0%) = 5.5；普通近战攻击与裂刃斩",
 					"weapon_profile": {
 						"base": {
 							"physical": 4.0
@@ -22607,20 +22521,16 @@
 							"primary": {
 								"chance": 0.05,
 								"multiplier": 1.5
-							},
-							"secondary": {
-								"chance": 0.05,
-								"multiplier": 1.5
 							}
 						},
 						"hits": {
-							"projectile": {
+							"direct": {
 								"critical": {
 									"chance": 0.05,
 									"multiplier": 1.5
 								},
-								"expected_zero_defense": 18.45,
-								"local_contribution": 0.0,
+								"expected_zero_defense": 22.549999999999997,
+								"local_contribution": 4.0,
 								"no_local_packet": {
 									"assembly": {
 										"added": {
@@ -22636,12 +22546,12 @@
 									"base": {
 										"physical": 18.0
 									},
-									"role": "projectile",
+									"role": "direct",
 									"skill_id": "basic",
 									"tags": [
 										"hit",
-										"projectile",
-										"attack"
+										"attack",
+										"melee"
 									]
 								},
 								"packet": {
@@ -22654,28 +22564,52 @@
 										"intrinsic": {
 											"physical": 18.0
 										},
-										"stage": "hit_base"
+										"stage": "hit_base",
+										"weapon": {
+											"coefficient": 1.0,
+											"components": {
+												"physical": 4.0
+											},
+											"contribution": {
+												"physical": 4.0
+											},
+											"profile": {
+												"base": {
+													"physical": 4.0
+												},
+												"base_id": "forgeblade",
+												"flat": {
+													"physical": 0.0
+												},
+												"increased": {
+													"physical": 0.0
+												},
+												"item_id": "gear_000001",
+												"sources": [],
+												"stage": "weapon_local"
+											}
+										}
 									},
 									"base": {
-										"physical": 18.0
+										"physical": 22.0
 									},
-									"role": "projectile",
+									"role": "direct",
 									"skill_id": "basic",
 									"tags": [
 										"hit",
-										"projectile",
-										"attack"
+										"attack",
+										"melee"
 									]
 								},
 								"resolved": {
 									"components": {
-										"physical": 18.0
+										"physical": 22.0
 									},
 									"details": [
 										{
-											"base": 18.0,
-											"before_defense": 18.0,
-											"final": 18.0,
+											"base": 22.0,
+											"before_defense": 22.0,
+											"final": 22.0,
 											"increased": 0.0,
 											"modifiers": [],
 											"more": 1.0,
@@ -22683,81 +22617,7 @@
 											"type": "physical"
 										}
 									],
-									"total": 18.0
-								}
-							},
-							"secondary": {
-								"critical": {
-									"chance": 0.05,
-									"multiplier": 1.5
-								},
-								"expected_zero_defense": 16.604999999999997,
-								"local_contribution": 0.0,
-								"no_local_packet": {
-									"assembly": {
-										"added": {
-
-										},
-										"added_effectiveness": 0.0,
-										"base_coefficient": 0.9,
-										"intrinsic": {
-											"fire": 16.2
-										},
-										"stage": "hit_base"
-									},
-									"base": {
-										"fire": 16.2
-									},
-									"role": "secondary",
-									"skill_id": "basic",
-									"tags": [
-										"hit",
-										"area",
-										"secondary",
-										"explosion"
-									]
-								},
-								"packet": {
-									"assembly": {
-										"added": {
-
-										},
-										"added_effectiveness": 0.0,
-										"base_coefficient": 0.9,
-										"intrinsic": {
-											"fire": 16.2
-										},
-										"stage": "hit_base"
-									},
-									"base": {
-										"fire": 16.2
-									},
-									"role": "secondary",
-									"skill_id": "basic",
-									"tags": [
-										"hit",
-										"area",
-										"secondary",
-										"explosion"
-									]
-								},
-								"resolved": {
-									"components": {
-										"fire": 16.2
-									},
-									"details": [
-										{
-											"base": 16.2,
-											"before_defense": 16.2,
-											"final": 16.2,
-											"increased": 0.0,
-											"modifiers": [],
-											"more": 1.0,
-											"resistance": 0.0,
-											"type": "fire"
-										}
-									],
-									"total": 16.2
+									"total": 22.0
 								}
 							}
 						},
@@ -24189,7 +24049,7 @@
 					"affix_lines": [],
 					"base_id": "forgeblade",
 					"base_name": "锻纹短刃",
-					"description": "本武器物理单独结算，仅增强裂刃斩直接命中。详情列出基底、本地点数与本地提高。",
+					"description": "装备后普通攻击变为单目标近战挥击；本武器物理增强普通近战攻击与裂刃斩。",
 					"effects": [],
 					"id": "gear_000001",
 					"item_level": 1,
@@ -24206,7 +24066,7 @@
 					"weapon_damage": {
 						"physical": 4.0
 					},
-					"weapon_damage_summary": "本武器物理：(4.0 + 0.0) × (1 + 0.0%) = 4.0；仅裂刃斩直接命中",
+					"weapon_damage_summary": "本武器物理：(4.0 + 0.0) × (1 + 0.0%) = 4.0；普通近战攻击与裂刃斩",
 					"weapon_profile": {
 						"base": {
 							"physical": 4.0
@@ -24341,20 +24201,16 @@
 							"primary": {
 								"chance": 0.06,
 								"multiplier": 1.57
-							},
-							"secondary": {
-								"chance": 0.06,
-								"multiplier": 1.57
 							}
 						},
 						"hits": {
-							"projectile": {
+							"direct": {
 								"critical": {
 									"chance": 0.06,
 									"multiplier": 1.57
 								},
-								"expected_zero_defense": 18.6156,
-								"local_contribution": 0.0,
+								"expected_zero_defense": 25.751579999999997,
+								"local_contribution": 6.8999999999999995,
 								"no_local_packet": {
 									"assembly": {
 										"added": {
@@ -24370,12 +24226,12 @@
 									"base": {
 										"physical": 18.0
 									},
-									"role": "projectile",
+									"role": "direct",
 									"skill_id": "basic",
 									"tags": [
 										"hit",
-										"projectile",
-										"attack"
+										"attack",
+										"melee"
 									]
 								},
 								"packet": {
@@ -24388,28 +24244,63 @@
 										"intrinsic": {
 											"physical": 18.0
 										},
-										"stage": "hit_base"
+										"stage": "hit_base",
+										"weapon": {
+											"coefficient": 1.0,
+											"components": {
+												"physical": 6.8999999999999995
+											},
+											"contribution": {
+												"physical": 6.8999999999999995
+											},
+											"profile": {
+												"base": {
+													"physical": 4.0
+												},
+												"base_id": "forgeblade",
+												"flat": {
+													"physical": 2.0
+												},
+												"increased": {
+													"physical": 0.15
+												},
+												"item_id": "gear_000001",
+												"sources": [
+													{
+														"affix_id": "whetstone_edge",
+														"stat": "weapon_added_physical",
+														"value": 2.0
+													},
+													{
+														"affix_id": "tempered_edge",
+														"stat": "weapon_physical_increased",
+														"value": 0.15
+													}
+												],
+												"stage": "weapon_local"
+											}
+										}
 									},
 									"base": {
-										"physical": 18.0
+										"physical": 24.9
 									},
-									"role": "projectile",
+									"role": "direct",
 									"skill_id": "basic",
 									"tags": [
 										"hit",
-										"projectile",
-										"attack"
+										"attack",
+										"melee"
 									]
 								},
 								"resolved": {
 									"components": {
-										"physical": 18.0
+										"physical": 24.9
 									},
 									"details": [
 										{
-											"base": 18.0,
-											"before_defense": 18.0,
-											"final": 18.0,
+											"base": 24.9,
+											"before_defense": 24.9,
+											"final": 24.9,
 											"increased": 0.0,
 											"modifiers": [],
 											"more": 1.0,
@@ -24417,81 +24308,7 @@
 											"type": "physical"
 										}
 									],
-									"total": 18.0
-								}
-							},
-							"secondary": {
-								"critical": {
-									"chance": 0.06,
-									"multiplier": 1.57
-								},
-								"expected_zero_defense": 16.75404,
-								"local_contribution": 0.0,
-								"no_local_packet": {
-									"assembly": {
-										"added": {
-
-										},
-										"added_effectiveness": 0.0,
-										"base_coefficient": 0.9,
-										"intrinsic": {
-											"fire": 16.2
-										},
-										"stage": "hit_base"
-									},
-									"base": {
-										"fire": 16.2
-									},
-									"role": "secondary",
-									"skill_id": "basic",
-									"tags": [
-										"hit",
-										"area",
-										"secondary",
-										"explosion"
-									]
-								},
-								"packet": {
-									"assembly": {
-										"added": {
-
-										},
-										"added_effectiveness": 0.0,
-										"base_coefficient": 0.9,
-										"intrinsic": {
-											"fire": 16.2
-										},
-										"stage": "hit_base"
-									},
-									"base": {
-										"fire": 16.2
-									},
-									"role": "secondary",
-									"skill_id": "basic",
-									"tags": [
-										"hit",
-										"area",
-										"secondary",
-										"explosion"
-									]
-								},
-								"resolved": {
-									"components": {
-										"fire": 16.2
-									},
-									"details": [
-										{
-											"base": 16.2,
-											"before_defense": 16.2,
-											"final": 16.2,
-											"increased": 0.0,
-											"modifiers": [],
-											"more": 1.0,
-											"resistance": 0.0,
-											"type": "fire"
-										}
-									],
-									"total": 16.2
+									"total": 24.9
 								}
 							}
 						},
@@ -25941,7 +25758,7 @@
 					],
 					"base_id": "forgeblade",
 					"base_name": "锻纹短刃",
-					"description": "本武器物理单独结算，仅增强裂刃斩直接命中。详情列出基底、本地点数与本地提高。\n前缀 · 砥刃 T1：本武器附加物理伤害 +2\n前缀 · 淬锋 T1：本武器物理伤害提高 +15%\n前缀 · 深汲 T1：最大魔力 +9\n后缀 · 泉旋 T1：魔力恢复速度提高 +5%\n后缀 · 锐察 T1：全局暴击几率提高 +20%\n后缀 · 重创 T1：全局暴击伤害倍率 +7个百分点",
+					"description": "装备后普通攻击变为单目标近战挥击；本武器物理增强普通近战攻击与裂刃斩。\n前缀 · 砥刃 T1：本武器附加物理伤害 +2\n前缀 · 淬锋 T1：本武器物理伤害提高 +15%\n前缀 · 深汲 T1：最大魔力 +9\n后缀 · 泉旋 T1：魔力恢复速度提高 +5%\n后缀 · 锐察 T1：全局暴击几率提高 +20%\n后缀 · 重创 T1：全局暴击伤害倍率 +7个百分点",
 					"effects": [],
 					"id": "gear_000001",
 					"item_level": 1,
@@ -25961,7 +25778,7 @@
 					"weapon_damage": {
 						"physical": 6.8999999999999995
 					},
-					"weapon_damage_summary": "本武器物理：(4.0 + 2.0) × (1 + 15.0%) = 6.9；仅裂刃斩直接命中",
+					"weapon_damage_summary": "本武器物理：(4.0 + 2.0) × (1 + 15.0%) = 6.9；普通近战攻击与裂刃斩",
 					"weapon_profile": {
 						"base": {
 							"physical": 4.0
@@ -26166,20 +25983,16 @@
 							"primary": {
 								"chance": 0.06999999999999999,
 								"multiplier": 1.65
-							},
-							"secondary": {
-								"chance": 0.06999999999999999,
-								"multiplier": 1.65
 							}
 						},
 						"hits": {
-							"projectile": {
+							"direct": {
 								"critical": {
 									"chance": 0.06999999999999999,
 									"multiplier": 1.65
 								},
-								"expected_zero_defense": 18.819000000000003,
-								"local_contribution": 0.0,
+								"expected_zero_defense": 32.410500000000006,
+								"local_contribution": 13.0,
 								"no_local_packet": {
 									"assembly": {
 										"added": {
@@ -26195,12 +26008,12 @@
 									"base": {
 										"physical": 18.0
 									},
-									"role": "projectile",
+									"role": "direct",
 									"skill_id": "basic",
 									"tags": [
 										"hit",
-										"projectile",
-										"attack"
+										"attack",
+										"melee"
 									]
 								},
 								"packet": {
@@ -26213,28 +26026,63 @@
 										"intrinsic": {
 											"physical": 18.0
 										},
-										"stage": "hit_base"
+										"stage": "hit_base",
+										"weapon": {
+											"coefficient": 1.0,
+											"components": {
+												"physical": 13.0
+											},
+											"contribution": {
+												"physical": 13.0
+											},
+											"profile": {
+												"base": {
+													"physical": 4.0
+												},
+												"base_id": "forgeblade",
+												"flat": {
+													"physical": 6.0
+												},
+												"increased": {
+													"physical": 0.3
+												},
+												"item_id": "gear_000001",
+												"sources": [
+													{
+														"affix_id": "whetstone_edge",
+														"stat": "weapon_added_physical",
+														"value": 6.0
+													},
+													{
+														"affix_id": "tempered_edge",
+														"stat": "weapon_physical_increased",
+														"value": 0.3
+													}
+												],
+												"stage": "weapon_local"
+											}
+										}
 									},
 									"base": {
-										"physical": 18.0
+										"physical": 31.0
 									},
-									"role": "projectile",
+									"role": "direct",
 									"skill_id": "basic",
 									"tags": [
 										"hit",
-										"projectile",
-										"attack"
+										"attack",
+										"melee"
 									]
 								},
 								"resolved": {
 									"components": {
-										"physical": 18.0
+										"physical": 31.0
 									},
 									"details": [
 										{
-											"base": 18.0,
-											"before_defense": 18.0,
-											"final": 18.0,
+											"base": 31.0,
+											"before_defense": 31.0,
+											"final": 31.0,
 											"increased": 0.0,
 											"modifiers": [],
 											"more": 1.0,
@@ -26242,81 +26090,7 @@
 											"type": "physical"
 										}
 									],
-									"total": 18.0
-								}
-							},
-							"secondary": {
-								"critical": {
-									"chance": 0.06999999999999999,
-									"multiplier": 1.65
-								},
-								"expected_zero_defense": 16.9371,
-								"local_contribution": 0.0,
-								"no_local_packet": {
-									"assembly": {
-										"added": {
-
-										},
-										"added_effectiveness": 0.0,
-										"base_coefficient": 0.9,
-										"intrinsic": {
-											"fire": 16.2
-										},
-										"stage": "hit_base"
-									},
-									"base": {
-										"fire": 16.2
-									},
-									"role": "secondary",
-									"skill_id": "basic",
-									"tags": [
-										"hit",
-										"area",
-										"secondary",
-										"explosion"
-									]
-								},
-								"packet": {
-									"assembly": {
-										"added": {
-
-										},
-										"added_effectiveness": 0.0,
-										"base_coefficient": 0.9,
-										"intrinsic": {
-											"fire": 16.2
-										},
-										"stage": "hit_base"
-									},
-									"base": {
-										"fire": 16.2
-									},
-									"role": "secondary",
-									"skill_id": "basic",
-									"tags": [
-										"hit",
-										"area",
-										"secondary",
-										"explosion"
-									]
-								},
-								"resolved": {
-									"components": {
-										"fire": 16.2
-									},
-									"details": [
-										{
-											"base": 16.2,
-											"before_defense": 16.2,
-											"final": 16.2,
-											"increased": 0.0,
-											"modifiers": [],
-											"more": 1.0,
-											"resistance": 0.0,
-											"type": "fire"
-										}
-									],
-									"total": 16.2
+									"total": 31.0
 								}
 							}
 						},
@@ -27766,7 +27540,7 @@
 					],
 					"base_id": "forgeblade",
 					"base_name": "锻纹短刃",
-					"description": "本武器物理单独结算，仅增强裂刃斩直接命中。详情列出基底、本地点数与本地提高。\n前缀 · 砥刃 T3：本武器附加物理伤害 +6\n前缀 · 淬锋 T3：本武器物理伤害提高 +30%\n前缀 · 深汲 T3：最大魔力 +22\n后缀 · 泉旋 T3：魔力恢复速度提高 +14%\n后缀 · 锐察 T3：全局暴击几率提高 +40%\n后缀 · 重创 T3：全局暴击伤害倍率 +15个百分点",
+					"description": "装备后普通攻击变为单目标近战挥击；本武器物理增强普通近战攻击与裂刃斩。\n前缀 · 砥刃 T3：本武器附加物理伤害 +6\n前缀 · 淬锋 T3：本武器物理伤害提高 +30%\n前缀 · 深汲 T3：最大魔力 +22\n后缀 · 泉旋 T3：魔力恢复速度提高 +14%\n后缀 · 锐察 T3：全局暴击几率提高 +40%\n后缀 · 重创 T3：全局暴击伤害倍率 +15个百分点",
 					"effects": [],
 					"id": "gear_000001",
 					"item_level": 16,
@@ -27786,7 +27560,7 @@
 					"weapon_damage": {
 						"physical": 13.0
 					},
-					"weapon_damage_summary": "本武器物理：(4.0 + 6.0) × (1 + 30.0%) = 13.0；仅裂刃斩直接命中",
+					"weapon_damage_summary": "本武器物理：(4.0 + 6.0) × (1 + 30.0%) = 13.0；普通近战攻击与裂刃斩",
 					"weapon_profile": {
 						"base": {
 							"physical": 4.0
@@ -28232,7 +28006,7 @@
 			}
 		},
 		"formula": "W=(4+本武器附加物理)×(1+本武器物理提高)",
-		"global_scope": "本地W仅裂刃direct；全局暴击仍作用于攻击、法术及独立secondary，最大魔力与魔力恢复仍是角色全局资源。",
+		"global_scope": "本地W仅短刃普通近战basic/direct与裂刃cleave/direct；全局暴击仍作用于攻击、法术及独立secondary，最大魔力与魔力恢复仍是角色全局资源。",
 		"icon_file": "originals/forgeblade.png",
 		"icon_source": "res://assets/art/equipment/forgeblade.png",
 		"legal_family_sets": {
@@ -28439,6 +28213,9 @@
 			]
 		},
 		"local_consumers": {
+			"basic": [
+				"direct"
+			],
 			"cleave": [
 				"direct"
 			]
@@ -28474,7 +28251,7 @@
 		"pool_id": "forgeblade_v34",
 		"save_version": 34
 	},
-	"game_version": "0.55.0",
+	"game_version": "0.56.0",
 	"jewel_affixes": {
 		"barrier": {
 			"kind": "prefix",
@@ -31134,6 +30911,1567 @@
 				"player"
 			]
 		}
+	},
+	"melee_basic": {
+		"admission": "自动攻击只在近战距离内选取敌人，圈外不空挥；手动允许空挥并消耗原攻击间隔。",
+		"balance": "贴身普攻与裂刃组合输出提高是v0.56新行为，不是旧同seed战斗结果等价；以下是逐次成功命中，不是实战DPS。",
+		"base_id": "forgeblade",
+		"cleave": {
+			"cooldown": 1.4,
+			"critical": {
+				"primary": {
+					"chance": 0.05,
+					"multiplier": 1.5
+				}
+			},
+			"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n扇形范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n独立爆炸半径 76.00 · 面积 ×1.0000\n每次命中：物理 61.60\n固有：物理 50.40；附加：无；附加效用 2.80；武器：物理 11.20〔(4.00 + 0.00) × (1 + 0.00) × 技能倍率 2.80〕",
+			"full_angle_degrees": 180.0,
+			"has_cooldown_field": true,
+			"has_mana_field": true,
+			"mana": 12.0,
+			"packets": {
+				"direct": {
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 2.8,
+						"base_coefficient": 2.8,
+						"intrinsic": {
+							"physical": 50.4
+						},
+						"stage": "hit_base",
+						"weapon": {
+							"coefficient": 2.8,
+							"components": {
+								"physical": 4.0
+							},
+							"contribution": {
+								"physical": 11.2
+							},
+							"profile": {
+								"base": {
+									"physical": 4.0
+								},
+								"base_id": "forgeblade",
+								"flat": {
+									"physical": 0.0
+								},
+								"increased": {
+									"physical": 0.0
+								},
+								"item_id": "gear_000001",
+								"sources": [],
+								"stage": "weapon_local"
+							}
+						}
+					},
+					"base": {
+						"physical": 61.599999999999994
+					},
+					"role": "direct",
+					"skill_id": "cleave",
+					"tags": [
+						"hit",
+						"attack",
+						"melee",
+						"area"
+					]
+				}
+			},
+			"recipe": {
+				"half_angle": 1.5707963267948966,
+				"radius": 95.0
+			},
+			"resolved": {
+				"components": {
+					"physical": 61.599999999999994
+				},
+				"details": [
+					{
+						"base": 61.599999999999994,
+						"before_defense": 61.599999999999994,
+						"final": 61.599999999999994,
+						"increased": 0.0,
+						"modifiers": [],
+						"more": 1.0,
+						"resistance": 0.0,
+						"type": "physical"
+					}
+				],
+				"total": 61.599999999999994
+			},
+			"summary": "非暴击命中预估（未计敌方防御）：每次命中 61.60"
+		},
+		"equipped_examples": {
+			"normal": {
+				"basic": {
+					"cooldown": 0.0,
+					"critical": {
+						"primary": {
+							"chance": 0.05,
+							"multiplier": 1.5
+						}
+					},
+					"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n普通近战攻击：距离 60 · 最多 1 个目标；不发射投射物。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n每次命中：物理 22.88\n固有：物理 18.00；附加：无；附加效用 1.00；武器：物理 4.00〔(4.00 + 0.00) × (1 + 0.00) × 技能倍率 1.00〕",
+					"full_angle_degrees": 90.0,
+					"has_cooldown_field": false,
+					"has_mana_field": false,
+					"mana": 0.0,
+					"packets": {
+						"direct": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 1.0,
+								"base_coefficient": 1.0,
+								"intrinsic": {
+									"physical": 18.0
+								},
+								"stage": "hit_base",
+								"weapon": {
+									"coefficient": 1.0,
+									"components": {
+										"physical": 4.0
+									},
+									"contribution": {
+										"physical": 4.0
+									},
+									"profile": {
+										"base": {
+											"physical": 4.0
+										},
+										"base_id": "forgeblade",
+										"flat": {
+											"physical": 0.0
+										},
+										"increased": {
+											"physical": 0.0
+										},
+										"item_id": "gear_000004",
+										"sources": [],
+										"stage": "weapon_local"
+									}
+								}
+							},
+							"base": {
+								"physical": 22.0
+							},
+							"role": "direct",
+							"skill_id": "basic",
+							"tags": [
+								"hit",
+								"attack",
+								"melee"
+							]
+						}
+					},
+					"recipe": {
+						"delivery": "melee",
+						"half_angle": 0.7853981633974483,
+						"max_targets": 1,
+						"radius": 60.0
+					},
+					"resolved": {
+						"components": {
+							"physical": 22.880000000000003
+						},
+						"details": [
+							{
+								"base": 22.0,
+								"before_defense": 22.880000000000003,
+								"final": 22.880000000000003,
+								"increased": 0.04,
+								"modifiers": [
+									"melee_physical_increased"
+								],
+								"more": 1.0,
+								"resistance": 0.0,
+								"type": "physical"
+							}
+						],
+						"total": 22.880000000000003
+					},
+					"summary": "非暴击命中预估（未计敌方防御）：每次命中 22.88"
+				},
+				"cleave": {
+					"cooldown": 1.4,
+					"critical": {
+						"primary": {
+							"chance": 0.05,
+							"multiplier": 1.5
+						}
+					},
+					"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n扇形范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 64.06\n固有：物理 50.40；附加：无；附加效用 2.80；武器：物理 11.20〔(4.00 + 0.00) × (1 + 0.00) × 技能倍率 2.80〕",
+					"full_angle_degrees": 180.0,
+					"has_cooldown_field": true,
+					"has_mana_field": true,
+					"mana": 12.0,
+					"packets": {
+						"direct": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 50.4
+								},
+								"stage": "hit_base",
+								"weapon": {
+									"coefficient": 2.8,
+									"components": {
+										"physical": 4.0
+									},
+									"contribution": {
+										"physical": 11.2
+									},
+									"profile": {
+										"base": {
+											"physical": 4.0
+										},
+										"base_id": "forgeblade",
+										"flat": {
+											"physical": 0.0
+										},
+										"increased": {
+											"physical": 0.0
+										},
+										"item_id": "gear_000004",
+										"sources": [],
+										"stage": "weapon_local"
+									}
+								}
+							},
+							"base": {
+								"physical": 61.599999999999994
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						}
+					},
+					"recipe": {
+						"half_angle": 1.5707963267948966,
+						"radius": 95.0
+					},
+					"resolved": {
+						"components": {
+							"physical": 64.064
+						},
+						"details": [
+							{
+								"base": 61.599999999999994,
+								"before_defense": 64.064,
+								"final": 64.064,
+								"increased": 0.04,
+								"modifiers": [
+									"melee_physical_increased"
+								],
+								"more": 1.0,
+								"resistance": 0.0,
+								"type": "physical"
+							}
+						],
+						"total": 64.064
+					},
+					"summary": "非暴击命中预估（未计敌方防御）：每次命中 64.06"
+				},
+				"equipped": {
+					"weapon": "gear_000004"
+				},
+				"instance": {
+					"definition_id": "equipment:forgeblade",
+					"kind": "equipment",
+					"payload": {
+						"affixes": [],
+						"base_id": "forgeblade",
+						"id": "gear_000004",
+						"item_level": 1,
+						"rarity": "normal"
+					},
+					"uid": "gear_000004"
+				},
+				"location": {
+					"kind": "equipment",
+					"slot_id": "weapon"
+				},
+				"save_attempts": 0,
+				"snapshot": {
+					"accuracy": 140.0,
+					"added_damage": {
+						"attack": {
+							"fire": 0.0,
+							"physical": 0.0
+						},
+						"spell": {
+							"cold": 0.0,
+							"lightning": 0.0
+						}
+					},
+					"added_damage_sources": [],
+					"base_damage": 18.0,
+					"critical_modifiers": {
+						"base_chance": 0.05,
+						"base_multiplier": 1.5
+					},
+					"effects": [],
+					"explosion_recipe": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"modifiers": [
+						{
+							"all_tags": [
+								"attack",
+								"melee"
+							],
+							"damage_types": [
+								"physical"
+							],
+							"id": "melee_physical_increased",
+							"mode": "increased",
+							"value": 0.04
+						}
+					],
+					"projectile_count": 0,
+					"tornado_recipe": {
+						"child": {
+							"added_effectiveness": 0.7,
+							"coefficient": 0.7,
+							"lifetime": 1.7,
+							"pierce": -1,
+							"radius": 4.5,
+							"range": 150.0,
+							"role": "child",
+							"speed": 260.0,
+							"split": false
+						},
+						"child_count": 3,
+						"explosion": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"parent": {
+							"added_effectiveness": 1.0,
+							"coefficient": 1.0,
+							"lifetime": 0.9,
+							"pierce": -1,
+							"radius": 6.0,
+							"range": 150.0,
+							"role": "parent",
+							"speed": 420.0,
+							"split": true
+						},
+						"parent_count": 3,
+						"spread": 0.16
+					},
+					"weapon_profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "forgeblade",
+						"flat": {
+							"physical": 0.0
+						},
+						"increased": {
+							"physical": 0.0
+						},
+						"item_id": "gear_000004",
+						"sources": [],
+						"stage": "weapon_local"
+					}
+				},
+				"stats": {
+					"accuracy": 140.0,
+					"accuracy_increased": 0.0,
+					"additional_skill_slots": 0.0,
+					"area_increased": 0.0,
+					"area_size_increased": 0.0,
+					"armour": 0.0,
+					"armour_increased": 0.0,
+					"attack_added_fire": 0.0,
+					"attack_added_physical": 0.0,
+					"attack_crit_chance_increased": 0.0,
+					"attack_elemental_increased": 0.0,
+					"attack_life_leech": 0.0,
+					"attack_mana_leech": 0.0,
+					"attack_physical_increased": 0.0,
+					"attack_speed": 1.7,
+					"attack_speed_increased": 0.0,
+					"chaos_increased": 0.0,
+					"cold_increased": 0.0,
+					"cold_resistance": 0.0,
+					"crit_base_chance": 0.05,
+					"crit_base_multiplier": 1.5,
+					"crit_chance_increased": 0.0,
+					"crit_multiplier_add": 0.0,
+					"damage": 18.0,
+					"damaging_ailments_faster": 0.0,
+					"dexterity": 20.0,
+					"elemental_increased": 0.0,
+					"evasion": 15.600000000000001,
+					"evasion_increased": 0.0,
+					"fire_dot_multiplier_add": 0.0,
+					"fire_increased": 0.0,
+					"fire_resistance": 0.0,
+					"flask_charges_gained_increased": 0.0,
+					"flask_life_recovery_increased": 0.0,
+					"flask_mana_recovery_increased": 0.0,
+					"global_increased": 0.0,
+					"intelligence": 20.0,
+					"life_leech_max_rate_increased": 0.0,
+					"life_leech_rate_increased": 0.0,
+					"life_regen": 0.0,
+					"life_regen_percent": 0.0,
+					"lightning_increased": 0.0,
+					"lightning_resistance": 0.0,
+					"mana_cost_efficiency_increased": 0.0,
+					"mana_cost_increased": 0.0,
+					"mana_leech_max_rate_increased": 0.0,
+					"mana_leech_rate_increased": 0.0,
+					"mana_regen": 9.0,
+					"mana_regen_increased": 0.0,
+					"max_health": 130.0,
+					"max_mana": 110.0,
+					"max_shield": 61.2,
+					"melee_area_size_increased": 0.0,
+					"melee_crit_chance_increased": 0.0,
+					"melee_crit_multiplier_add": 0.0,
+					"melee_physical_increased": 0.04,
+					"move_speed": 240.0,
+					"move_speed_increased": 0.0,
+					"physical_attack_life_leech": 0.0,
+					"physical_attack_mana_leech": 0.0,
+					"physical_increased": 0.0,
+					"projectile_attack_crit_chance_increased": 0.0,
+					"projectile_attack_crit_multiplier_add": 0.0,
+					"projectile_count": 0.0,
+					"projectile_increased": 0.0,
+					"projectile_speed_increased": 0.0,
+					"shield_recharge_delay": 4.0,
+					"shield_recharge_rate": 13.0,
+					"shield_recharge_rate_increased": 0.0,
+					"shield_recharge_start_faster": 0.0,
+					"shield_regen": 13.0,
+					"spell_added_cold": 0.0,
+					"spell_added_lightning": 0.0,
+					"spell_area_size_increased": 0.0,
+					"spell_crit_chance_increased": 0.0,
+					"spell_crit_multiplier_add": 0.0,
+					"spell_increased": 0.0,
+					"strength": 20.0
+				},
+				"talents": {
+					"allocated": [
+						"58833"
+					],
+					"ascendancy": "",
+					"ascendancy_allocated": [],
+					"ascendancy_points": 0,
+					"class_id": 0,
+					"masteries": {
+
+					},
+					"normal_points": 5,
+					"source_version": "3.29.1"
+				}
+			},
+			"six_t3_max": {
+				"basic": {
+					"cooldown": 0.0,
+					"critical": {
+						"primary": {
+							"chance": 0.06999999999999999,
+							"multiplier": 1.65
+						}
+					},
+					"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 7.0% · 暴击伤害 165.0%\n普通近战攻击：距离 60 · 最多 1 个目标；不发射投射物。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n每次命中：物理 32.24\n固有：物理 18.00；附加：无；附加效用 1.00；武器：物理 13.00〔(4.00 + 6.00) × (1 + 0.30) × 技能倍率 1.00〕",
+					"full_angle_degrees": 90.0,
+					"has_cooldown_field": false,
+					"has_mana_field": false,
+					"mana": 0.0,
+					"packets": {
+						"direct": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 1.0,
+								"base_coefficient": 1.0,
+								"intrinsic": {
+									"physical": 18.0
+								},
+								"stage": "hit_base",
+								"weapon": {
+									"coefficient": 1.0,
+									"components": {
+										"physical": 13.0
+									},
+									"contribution": {
+										"physical": 13.0
+									},
+									"profile": {
+										"base": {
+											"physical": 4.0
+										},
+										"base_id": "forgeblade",
+										"flat": {
+											"physical": 6.0
+										},
+										"increased": {
+											"physical": 0.3
+										},
+										"item_id": "gear_000004",
+										"sources": [
+											{
+												"affix_id": "whetstone_edge",
+												"stat": "weapon_added_physical",
+												"value": 6.0
+											},
+											{
+												"affix_id": "tempered_edge",
+												"stat": "weapon_physical_increased",
+												"value": 0.3
+											}
+										],
+										"stage": "weapon_local"
+									}
+								}
+							},
+							"base": {
+								"physical": 31.0
+							},
+							"role": "direct",
+							"skill_id": "basic",
+							"tags": [
+								"hit",
+								"attack",
+								"melee"
+							]
+						}
+					},
+					"recipe": {
+						"delivery": "melee",
+						"half_angle": 0.7853981633974483,
+						"max_targets": 1,
+						"radius": 60.0
+					},
+					"resolved": {
+						"components": {
+							"physical": 32.24
+						},
+						"details": [
+							{
+								"base": 31.0,
+								"before_defense": 32.24,
+								"final": 32.24,
+								"increased": 0.04,
+								"modifiers": [
+									"melee_physical_increased"
+								],
+								"more": 1.0,
+								"resistance": 0.0,
+								"type": "physical"
+							}
+						],
+						"total": 32.24
+					},
+					"summary": "非暴击命中预估（未计敌方防御）：每次命中 32.24"
+				},
+				"cleave": {
+					"cooldown": 1.4,
+					"critical": {
+						"primary": {
+							"chance": 0.06999999999999999,
+							"multiplier": 1.65
+						}
+					},
+					"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 7.0% · 暴击伤害 165.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n扇形范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 90.27\n固有：物理 50.40；附加：无；附加效用 2.80；武器：物理 36.40〔(4.00 + 6.00) × (1 + 0.30) × 技能倍率 2.80〕",
+					"full_angle_degrees": 180.0,
+					"has_cooldown_field": true,
+					"has_mana_field": true,
+					"mana": 12.0,
+					"packets": {
+						"direct": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 50.4
+								},
+								"stage": "hit_base",
+								"weapon": {
+									"coefficient": 2.8,
+									"components": {
+										"physical": 13.0
+									},
+									"contribution": {
+										"physical": 36.4
+									},
+									"profile": {
+										"base": {
+											"physical": 4.0
+										},
+										"base_id": "forgeblade",
+										"flat": {
+											"physical": 6.0
+										},
+										"increased": {
+											"physical": 0.3
+										},
+										"item_id": "gear_000004",
+										"sources": [
+											{
+												"affix_id": "whetstone_edge",
+												"stat": "weapon_added_physical",
+												"value": 6.0
+											},
+											{
+												"affix_id": "tempered_edge",
+												"stat": "weapon_physical_increased",
+												"value": 0.3
+											}
+										],
+										"stage": "weapon_local"
+									}
+								}
+							},
+							"base": {
+								"physical": 86.8
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						}
+					},
+					"recipe": {
+						"half_angle": 1.5707963267948966,
+						"radius": 95.0
+					},
+					"resolved": {
+						"components": {
+							"physical": 90.272
+						},
+						"details": [
+							{
+								"base": 86.8,
+								"before_defense": 90.272,
+								"final": 90.272,
+								"increased": 0.04,
+								"modifiers": [
+									"melee_physical_increased"
+								],
+								"more": 1.0,
+								"resistance": 0.0,
+								"type": "physical"
+							}
+						],
+						"total": 90.272
+					},
+					"summary": "非暴击命中预估（未计敌方防御）：每次命中 90.27"
+				},
+				"equipped": {
+					"weapon": "gear_000004"
+				},
+				"instance": {
+					"definition_id": "equipment:forgeblade",
+					"kind": "equipment",
+					"payload": {
+						"affixes": [
+							{
+								"id": "whetstone_edge",
+								"tier": 3,
+								"value": 6
+							},
+							{
+								"id": "tempered_edge",
+								"tier": 3,
+								"value": 30
+							},
+							{
+								"id": "deepwell",
+								"tier": 3,
+								"value": 22
+							},
+							{
+								"id": "wellturn",
+								"tier": 3,
+								"value": 14
+							},
+							{
+								"id": "global_critical_chance",
+								"tier": 3,
+								"value": 40
+							},
+							{
+								"id": "global_critical_multiplier",
+								"tier": 3,
+								"value": 15
+							}
+						],
+						"base_id": "forgeblade",
+						"id": "gear_000004",
+						"item_level": 16,
+						"rarity": "rare"
+					},
+					"uid": "gear_000004"
+				},
+				"location": {
+					"kind": "equipment",
+					"slot_id": "weapon"
+				},
+				"save_attempts": 0,
+				"snapshot": {
+					"accuracy": 140.0,
+					"added_damage": {
+						"attack": {
+							"fire": 0.0,
+							"physical": 0.0
+						},
+						"spell": {
+							"cold": 0.0,
+							"lightning": 0.0
+						}
+					},
+					"added_damage_sources": [],
+					"base_damage": 18.0,
+					"critical_modifiers": {
+						"base_chance": 0.05,
+						"base_multiplier": 1.5,
+						"crit_chance_increased": 0.4,
+						"crit_multiplier_add": 0.15
+					},
+					"effects": [],
+					"explosion_recipe": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"modifiers": [
+						{
+							"all_tags": [
+								"attack",
+								"melee"
+							],
+							"damage_types": [
+								"physical"
+							],
+							"id": "melee_physical_increased",
+							"mode": "increased",
+							"value": 0.04
+						}
+					],
+					"projectile_count": 0,
+					"tornado_recipe": {
+						"child": {
+							"added_effectiveness": 0.7,
+							"coefficient": 0.7,
+							"lifetime": 1.7,
+							"pierce": -1,
+							"radius": 4.5,
+							"range": 150.0,
+							"role": "child",
+							"speed": 260.0,
+							"split": false
+						},
+						"child_count": 3,
+						"explosion": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"parent": {
+							"added_effectiveness": 1.0,
+							"coefficient": 1.0,
+							"lifetime": 0.9,
+							"pierce": -1,
+							"radius": 6.0,
+							"range": 150.0,
+							"role": "parent",
+							"speed": 420.0,
+							"split": true
+						},
+						"parent_count": 3,
+						"spread": 0.16
+					},
+					"weapon_profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "forgeblade",
+						"flat": {
+							"physical": 6.0
+						},
+						"increased": {
+							"physical": 0.3
+						},
+						"item_id": "gear_000004",
+						"sources": [
+							{
+								"affix_id": "whetstone_edge",
+								"stat": "weapon_added_physical",
+								"value": 6.0
+							},
+							{
+								"affix_id": "tempered_edge",
+								"stat": "weapon_physical_increased",
+								"value": 0.3
+							}
+						],
+						"stage": "weapon_local"
+					}
+				},
+				"stats": {
+					"accuracy": 140.0,
+					"accuracy_increased": 0.0,
+					"additional_skill_slots": 0.0,
+					"area_increased": 0.0,
+					"area_size_increased": 0.0,
+					"armour": 0.0,
+					"armour_increased": 0.0,
+					"attack_added_fire": 0.0,
+					"attack_added_physical": 0.0,
+					"attack_crit_chance_increased": 0.0,
+					"attack_elemental_increased": 0.0,
+					"attack_life_leech": 0.0,
+					"attack_mana_leech": 0.0,
+					"attack_physical_increased": 0.0,
+					"attack_speed": 1.7,
+					"attack_speed_increased": 0.0,
+					"chaos_increased": 0.0,
+					"cold_increased": 0.0,
+					"cold_resistance": 0.0,
+					"crit_base_chance": 0.05,
+					"crit_base_multiplier": 1.5,
+					"crit_chance_increased": 0.4,
+					"crit_multiplier_add": 0.15,
+					"damage": 18.0,
+					"damaging_ailments_faster": 0.0,
+					"dexterity": 20.0,
+					"elemental_increased": 0.0,
+					"evasion": 15.600000000000001,
+					"evasion_increased": 0.0,
+					"fire_dot_multiplier_add": 0.0,
+					"fire_increased": 0.0,
+					"fire_resistance": 0.0,
+					"flask_charges_gained_increased": 0.0,
+					"flask_life_recovery_increased": 0.0,
+					"flask_mana_recovery_increased": 0.0,
+					"global_increased": 0.0,
+					"intelligence": 20.0,
+					"life_leech_max_rate_increased": 0.0,
+					"life_leech_rate_increased": 0.0,
+					"life_regen": 0.0,
+					"life_regen_percent": 0.0,
+					"lightning_increased": 0.0,
+					"lightning_resistance": 0.0,
+					"mana_cost_efficiency_increased": 0.0,
+					"mana_cost_increased": 0.0,
+					"mana_leech_max_rate_increased": 0.0,
+					"mana_leech_rate_increased": 0.0,
+					"mana_regen": 10.260000000000002,
+					"mana_regen_increased": 0.14,
+					"max_health": 130.0,
+					"max_mana": 132.0,
+					"max_shield": 61.2,
+					"melee_area_size_increased": 0.0,
+					"melee_crit_chance_increased": 0.0,
+					"melee_crit_multiplier_add": 0.0,
+					"melee_physical_increased": 0.04,
+					"move_speed": 240.0,
+					"move_speed_increased": 0.0,
+					"physical_attack_life_leech": 0.0,
+					"physical_attack_mana_leech": 0.0,
+					"physical_increased": 0.0,
+					"projectile_attack_crit_chance_increased": 0.0,
+					"projectile_attack_crit_multiplier_add": 0.0,
+					"projectile_count": 0.0,
+					"projectile_increased": 0.0,
+					"projectile_speed_increased": 0.0,
+					"shield_recharge_delay": 4.0,
+					"shield_recharge_rate": 13.0,
+					"shield_recharge_rate_increased": 0.0,
+					"shield_recharge_start_faster": 0.0,
+					"shield_regen": 13.0,
+					"spell_added_cold": 0.0,
+					"spell_added_lightning": 0.0,
+					"spell_area_size_increased": 0.0,
+					"spell_crit_chance_increased": 0.0,
+					"spell_crit_multiplier_add": 0.0,
+					"spell_increased": 0.0,
+					"strength": 20.0
+				},
+				"talents": {
+					"allocated": [
+						"58833"
+					],
+					"ascendancy": "",
+					"ascendancy_allocated": [],
+					"ascendancy_points": 0,
+					"class_id": 0,
+					"masteries": {
+
+					},
+					"normal_points": 5,
+					"source_version": "3.29.1"
+				}
+			}
+		},
+		"examples": {
+			"dual_t1_max": {
+				"cooldown": 0.0,
+				"critical": {
+					"primary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					}
+				},
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n普通近战攻击：距离 60 · 最多 1 个目标；不发射投射物。\n每次命中：物理 24.90\n固有：物理 18.00；附加：无；附加效用 1.00；武器：物理 6.90〔(4.00 + 2.00) × (1 + 0.15) × 技能倍率 1.00〕",
+				"full_angle_degrees": 90.0,
+				"has_cooldown_field": false,
+				"has_mana_field": false,
+				"mana": 0.0,
+				"packets": {
+					"direct": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 1.0,
+							"base_coefficient": 1.0,
+							"intrinsic": {
+								"physical": 18.0
+							},
+							"stage": "hit_base",
+							"weapon": {
+								"coefficient": 1.0,
+								"components": {
+									"physical": 6.8999999999999995
+								},
+								"contribution": {
+									"physical": 6.8999999999999995
+								},
+								"profile": {
+									"base": {
+										"physical": 4.0
+									},
+									"base_id": "forgeblade",
+									"flat": {
+										"physical": 2.0
+									},
+									"increased": {
+										"physical": 0.15
+									},
+									"item_id": "gear_000001",
+									"sources": [
+										{
+											"affix_id": "whetstone_edge",
+											"stat": "weapon_added_physical",
+											"value": 2.0
+										},
+										{
+											"affix_id": "tempered_edge",
+											"stat": "weapon_physical_increased",
+											"value": 0.15
+										}
+									],
+									"stage": "weapon_local"
+								}
+							}
+						},
+						"base": {
+							"physical": 24.9
+						},
+						"role": "direct",
+						"skill_id": "basic",
+						"tags": [
+							"hit",
+							"attack",
+							"melee"
+						]
+					}
+				},
+				"recipe": {
+					"delivery": "melee",
+					"half_angle": 0.7853981633974483,
+					"max_targets": 1,
+					"radius": 60.0
+				},
+				"resolved": {
+					"components": {
+						"physical": 24.9
+					},
+					"details": [
+						{
+							"base": 24.9,
+							"before_defense": 24.9,
+							"final": 24.9,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "physical"
+						}
+					],
+					"total": 24.9
+				},
+				"summary": "非暴击命中预估（未计敌方防御）：每次命中 24.90"
+			},
+			"dual_t1_min": {
+				"cooldown": 0.0,
+				"critical": {
+					"primary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					}
+				},
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n普通近战攻击：距离 60 · 最多 1 个目标；不发射投射物。\n每次命中：物理 23.50\n固有：物理 18.00；附加：无；附加效用 1.00；武器：物理 5.50〔(4.00 + 1.00) × (1 + 0.10) × 技能倍率 1.00〕",
+				"full_angle_degrees": 90.0,
+				"has_cooldown_field": false,
+				"has_mana_field": false,
+				"mana": 0.0,
+				"packets": {
+					"direct": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 1.0,
+							"base_coefficient": 1.0,
+							"intrinsic": {
+								"physical": 18.0
+							},
+							"stage": "hit_base",
+							"weapon": {
+								"coefficient": 1.0,
+								"components": {
+									"physical": 5.5
+								},
+								"contribution": {
+									"physical": 5.5
+								},
+								"profile": {
+									"base": {
+										"physical": 4.0
+									},
+									"base_id": "forgeblade",
+									"flat": {
+										"physical": 1.0
+									},
+									"increased": {
+										"physical": 0.1
+									},
+									"item_id": "gear_000001",
+									"sources": [
+										{
+											"affix_id": "whetstone_edge",
+											"stat": "weapon_added_physical",
+											"value": 1.0
+										},
+										{
+											"affix_id": "tempered_edge",
+											"stat": "weapon_physical_increased",
+											"value": 0.1
+										}
+									],
+									"stage": "weapon_local"
+								}
+							}
+						},
+						"base": {
+							"physical": 23.5
+						},
+						"role": "direct",
+						"skill_id": "basic",
+						"tags": [
+							"hit",
+							"attack",
+							"melee"
+						]
+					}
+				},
+				"recipe": {
+					"delivery": "melee",
+					"half_angle": 0.7853981633974483,
+					"max_targets": 1,
+					"radius": 60.0
+				},
+				"resolved": {
+					"components": {
+						"physical": 23.5
+					},
+					"details": [
+						{
+							"base": 23.5,
+							"before_defense": 23.5,
+							"final": 23.5,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "physical"
+						}
+					],
+					"total": 23.5
+				},
+				"summary": "非暴击命中预估（未计敌方防御）：每次命中 23.50"
+			},
+			"normal": {
+				"cooldown": 0.0,
+				"critical": {
+					"primary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					}
+				},
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n普通近战攻击：距离 60 · 最多 1 个目标；不发射投射物。\n每次命中：物理 22.00\n固有：物理 18.00；附加：无；附加效用 1.00；武器：物理 4.00〔(4.00 + 0.00) × (1 + 0.00) × 技能倍率 1.00〕",
+				"full_angle_degrees": 90.0,
+				"has_cooldown_field": false,
+				"has_mana_field": false,
+				"mana": 0.0,
+				"packets": {
+					"direct": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 1.0,
+							"base_coefficient": 1.0,
+							"intrinsic": {
+								"physical": 18.0
+							},
+							"stage": "hit_base",
+							"weapon": {
+								"coefficient": 1.0,
+								"components": {
+									"physical": 4.0
+								},
+								"contribution": {
+									"physical": 4.0
+								},
+								"profile": {
+									"base": {
+										"physical": 4.0
+									},
+									"base_id": "forgeblade",
+									"flat": {
+										"physical": 0.0
+									},
+									"increased": {
+										"physical": 0.0
+									},
+									"item_id": "gear_000001",
+									"sources": [],
+									"stage": "weapon_local"
+								}
+							}
+						},
+						"base": {
+							"physical": 22.0
+						},
+						"role": "direct",
+						"skill_id": "basic",
+						"tags": [
+							"hit",
+							"attack",
+							"melee"
+						]
+					}
+				},
+				"recipe": {
+					"delivery": "melee",
+					"half_angle": 0.7853981633974483,
+					"max_targets": 1,
+					"radius": 60.0
+				},
+				"resolved": {
+					"components": {
+						"physical": 22.0
+					},
+					"details": [
+						{
+							"base": 22.0,
+							"before_defense": 22.0,
+							"final": 22.0,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "physical"
+						}
+					],
+					"total": 22.0
+				},
+				"summary": "非暴击命中预估（未计敌方防御）：每次命中 22.00"
+			},
+			"six_t1_max": {
+				"cooldown": 0.0,
+				"critical": {
+					"primary": {
+						"chance": 0.06,
+						"multiplier": 1.57
+					}
+				},
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 6.0% · 暴击伤害 157.0%\n普通近战攻击：距离 60 · 最多 1 个目标；不发射投射物。\n每次命中：物理 24.90\n固有：物理 18.00；附加：无；附加效用 1.00；武器：物理 6.90〔(4.00 + 2.00) × (1 + 0.15) × 技能倍率 1.00〕",
+				"full_angle_degrees": 90.0,
+				"has_cooldown_field": false,
+				"has_mana_field": false,
+				"mana": 0.0,
+				"packets": {
+					"direct": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 1.0,
+							"base_coefficient": 1.0,
+							"intrinsic": {
+								"physical": 18.0
+							},
+							"stage": "hit_base",
+							"weapon": {
+								"coefficient": 1.0,
+								"components": {
+									"physical": 6.8999999999999995
+								},
+								"contribution": {
+									"physical": 6.8999999999999995
+								},
+								"profile": {
+									"base": {
+										"physical": 4.0
+									},
+									"base_id": "forgeblade",
+									"flat": {
+										"physical": 2.0
+									},
+									"increased": {
+										"physical": 0.15
+									},
+									"item_id": "gear_000001",
+									"sources": [
+										{
+											"affix_id": "whetstone_edge",
+											"stat": "weapon_added_physical",
+											"value": 2.0
+										},
+										{
+											"affix_id": "tempered_edge",
+											"stat": "weapon_physical_increased",
+											"value": 0.15
+										}
+									],
+									"stage": "weapon_local"
+								}
+							}
+						},
+						"base": {
+							"physical": 24.9
+						},
+						"role": "direct",
+						"skill_id": "basic",
+						"tags": [
+							"hit",
+							"attack",
+							"melee"
+						]
+					}
+				},
+				"recipe": {
+					"delivery": "melee",
+					"half_angle": 0.7853981633974483,
+					"max_targets": 1,
+					"radius": 60.0
+				},
+				"resolved": {
+					"components": {
+						"physical": 24.9
+					},
+					"details": [
+						{
+							"base": 24.9,
+							"before_defense": 24.9,
+							"final": 24.9,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "physical"
+						}
+					],
+					"total": 24.9
+				},
+				"summary": "非暴击命中预估（未计敌方防御）：每次命中 24.90"
+			},
+			"six_t3_max": {
+				"cooldown": 0.0,
+				"critical": {
+					"primary": {
+						"chance": 0.06999999999999999,
+						"multiplier": 1.65
+					}
+				},
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 7.0% · 暴击伤害 165.0%\n普通近战攻击：距离 60 · 最多 1 个目标；不发射投射物。\n每次命中：物理 31.00\n固有：物理 18.00；附加：无；附加效用 1.00；武器：物理 13.00〔(4.00 + 6.00) × (1 + 0.30) × 技能倍率 1.00〕",
+				"full_angle_degrees": 90.0,
+				"has_cooldown_field": false,
+				"has_mana_field": false,
+				"mana": 0.0,
+				"packets": {
+					"direct": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 1.0,
+							"base_coefficient": 1.0,
+							"intrinsic": {
+								"physical": 18.0
+							},
+							"stage": "hit_base",
+							"weapon": {
+								"coefficient": 1.0,
+								"components": {
+									"physical": 13.0
+								},
+								"contribution": {
+									"physical": 13.0
+								},
+								"profile": {
+									"base": {
+										"physical": 4.0
+									},
+									"base_id": "forgeblade",
+									"flat": {
+										"physical": 6.0
+									},
+									"increased": {
+										"physical": 0.3
+									},
+									"item_id": "gear_000001",
+									"sources": [
+										{
+											"affix_id": "whetstone_edge",
+											"stat": "weapon_added_physical",
+											"value": 6.0
+										},
+										{
+											"affix_id": "tempered_edge",
+											"stat": "weapon_physical_increased",
+											"value": 0.3
+										}
+									],
+									"stage": "weapon_local"
+								}
+							}
+						},
+						"base": {
+							"physical": 31.0
+						},
+						"role": "direct",
+						"skill_id": "basic",
+						"tags": [
+							"hit",
+							"attack",
+							"melee"
+						]
+					}
+				},
+				"recipe": {
+					"delivery": "melee",
+					"half_angle": 0.7853981633974483,
+					"max_targets": 1,
+					"radius": 60.0
+				},
+				"resolved": {
+					"components": {
+						"physical": 31.0
+					},
+					"details": [
+						{
+							"base": 31.0,
+							"before_defense": 31.0,
+							"final": 31.0,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "physical"
+						}
+					],
+					"total": 31.0
+				},
+				"summary": "非暴击命中预估（未计敌方防御）：每次命中 31.00"
+			}
+		},
+		"legacy_inflight": {
+			"normal": {
+				"projectile": {
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 1.0,
+						"base_coefficient": 1.0,
+						"intrinsic": {
+							"physical": 18.0
+						},
+						"stage": "hit_base"
+					},
+					"base": {
+						"physical": 18.0
+					},
+					"role": "projectile",
+					"skill_id": "basic",
+					"tags": [
+						"hit",
+						"projectile",
+						"attack"
+					]
+				},
+				"resolved": {
+					"components": {
+						"physical": 18.0
+					},
+					"details": [
+						{
+							"base": 18.0,
+							"before_defense": 18.0,
+							"final": 18.0,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "physical"
+						}
+					],
+					"total": 18.0
+				},
+				"retains_frozen_packets": true,
+				"secondary": {
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 0.0,
+						"base_coefficient": 0.9,
+						"intrinsic": {
+							"fire": 16.2
+						},
+						"stage": "hit_base"
+					},
+					"base": {
+						"fire": 16.2
+					},
+					"role": "secondary",
+					"skill_id": "basic",
+					"tags": [
+						"hit",
+						"area",
+						"secondary",
+						"explosion"
+					]
+				},
+				"source_commit": "63d84b2",
+				"source_path": "docs/reference/catalog.json.forgeblade.examples.normal"
+			},
+			"six_t3_max": {
+				"projectile": {
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 1.0,
+						"base_coefficient": 1.0,
+						"intrinsic": {
+							"physical": 18.0
+						},
+						"stage": "hit_base"
+					},
+					"base": {
+						"physical": 18.0
+					},
+					"role": "projectile",
+					"skill_id": "basic",
+					"tags": [
+						"hit",
+						"projectile",
+						"attack"
+					]
+				},
+				"resolved": {
+					"components": {
+						"physical": 18.0
+					},
+					"details": [
+						{
+							"base": 18.0,
+							"before_defense": 18.0,
+							"final": 18.0,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "physical"
+						}
+					],
+					"total": 18.0
+				},
+				"retains_frozen_packets": true,
+				"secondary": {
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 0.0,
+						"base_coefficient": 0.9,
+						"intrinsic": {
+							"fire": 16.2
+						},
+						"stage": "hit_base"
+					},
+					"base": {
+						"fire": 16.2
+					},
+					"role": "secondary",
+					"skill_id": "basic",
+					"tags": [
+						"hit",
+						"area",
+						"secondary",
+						"explosion"
+					]
+				},
+				"source_commit": "63d84b2",
+				"source_path": "docs/reference/catalog.json.forgeblade.examples.six_t3_max"
+			}
+		},
+		"recipe": {
+			"delivery": "melee",
+			"half_angle": 0.7853981633974483,
+			"max_targets": 1,
+			"radius": 60.0
+		},
+		"save_version": 34,
+		"scope": "hit + attack + melee；不含area，不受范围或投射物速度提高，也不占投射物容量，无返回或飞行结束爆炸。",
+		"timing": "沿用attack_timer与当前attack_speed；没有独立技能冷却或魔力支付。"
 	},
 	"monster_attacks": {
 		"locked_circle": {
@@ -443547,7 +444885,7 @@
 					"catalog_id": "forgeblade",
 					"category": "weapon",
 					"definition_id": "equipment:forgeblade",
-					"description": "本武器物理单独结算，仅增强裂刃斩直接命中。详情列出基底、本地点数与本地提高。",
+					"description": "装备后普通攻击变为单目标近战挥击；本武器物理增强普通近战攻击与裂刃斩。",
 					"icon_path": "",
 					"id": "base:forgeblade",
 					"kind": "equipment",
@@ -443559,7 +444897,7 @@
 						"base_name": "锻纹短刃",
 						"category": "weapon",
 						"definition_id": "equipment:forgeblade",
-						"description": "本武器物理单独结算，仅增强裂刃斩直接命中。详情列出基底、本地点数与本地提高。",
+						"description": "装备后普通攻击变为单目标近战挥击；本武器物理增强普通近战攻击与裂刃斩。",
 						"effects": [],
 						"id": "gear_000001",
 						"item_level": 30,
@@ -443578,7 +444916,7 @@
 						"weapon_damage": {
 							"physical": 4.0
 						},
-						"weapon_damage_summary": "本武器物理：(4.0 + 0.0) × (1 + 0.0%) = 4.0；仅裂刃斩直接命中",
+						"weapon_damage_summary": "本武器物理：(4.0 + 0.0) × (1 + 0.0%) = 4.0；普通近战攻击与裂刃斩",
 						"weapon_profile": {
 							"base": {
 								"physical": 4.0
@@ -445642,7 +446980,8 @@
 			],
 			"consumers": {
 				"basic": [
-					"projectile"
+					"projectile",
+					"direct"
 				],
 				"cleave": [
 					"direct"
@@ -445663,13 +447002,16 @@
 					]
 				},
 				"forgeblade": {
+					"basic": [
+						"direct"
+					],
 					"cleave": [
 						"direct"
 					]
 				}
 			},
 			"damage_type": "physical",
-			"description": "局部点伤与局部物理提高先结算本武器；长弓仅加入普通攻击与龙卷箭体，锻纹短刃仅加入裂刃斩直接命中，均按技能基础倍率加入物理点数。保留原有角色基伤，不是完整武器基伤替换。",
+			"description": "局部点伤与局部物理提高先结算本武器；长弓仅加入普通攻击与龙卷箭体，锻纹短刃仅加入普通近战攻击与裂刃斩直接命中，均按技能基础倍率加入物理点数。保留原有角色基伤，不是完整武器基伤替换。",
 			"examples": {
 				"local_max": {
 					"configuration": "local_max",

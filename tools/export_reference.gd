@@ -119,6 +119,7 @@ static func collect() -> Dictionary:
 	result["source_fire_dot"] = source_fire_dot_examples()
 	result["source_faster_burn"] = source_faster_burn_examples()
 	result["forgeblade"] = forgeblade_examples()
+	result["melee_basic"] = melee_basic_examples(result.forgeblade)
 	result["normal_gem_trading"]={"offers":Canonical.GemTrade.offers(),"recycle_credit":Canonical.GemTrade.RECYCLE_CREDIT,"currency":Canonical.GemTrade.MATERIAL_ID,"location":"normal_town","level":1,"quality":0,"recycle_location":"bag","schema":Canonical.Rules.VERSION,"test_supply_separate":true,"pricing":"初版可调整预算；每次无词缀地图净得4碎片"}
 	result["source_tree"] = source_tree_reference()
 	result["source_spatial"] = source_spatial_examples()
@@ -574,7 +575,7 @@ static func forgeblade_examples() -> Dictionary:
 		"local_consumers":WeaponLocal.metadata().consumers_by_base.forgeblade,
 		"example_scope":"真实合法装备实例→目录派生属性与武器profile→实际编译器；隔离B18、基础暴击5%/150%，无职业三属性、天赋、其他装备或辅助。不是默认角色伤害或实战DPS。",
 		"formula":"W=(4+本武器附加物理)×(1+本武器物理提高)", "examples":{}, "crafting":{},
-		"global_scope":"本地W仅裂刃direct；全局暴击仍作用于攻击、法术及独立secondary，最大魔力与魔力恢复仍是角色全局资源。"}
+		"global_scope":"本地W仅短刃普通近战basic/direct与裂刃cleave/direct；全局暴击仍作用于攻击、法术及独立secondary，最大魔力与魔力恢复仍是角色全局资源。"}
 	result["legal_family_sets"] = {}
 	for rarity: String in Equipment.RARITIES:
 		var accepted: Array = []
@@ -615,12 +616,18 @@ static func forgeblade_examples() -> Dictionary:
 			var hits: Dictionary = {}
 			var packets: Dictionary = _forgeblade_packets(cast.packets)
 			var baseline_packets: Dictionary = _forgeblade_packets(before.packets)
+			if skill == "basic":
+				# Keep the actual melee event recipe while isolating just W.
+				# Removing the profile before dispatch would select an old projectile.
+				baseline_packets = {"direct": Recipes.BaseCompiler.assemble(no_local.base_damage,
+					Recipes._event_recipe(snapshot, "basic", "direct", 0), no_local.added_damage,
+					no_local.get("added_damage_sources", []))}
 			for role: String in packets:
 				var packet: Dictionary = packets[role]
 				var resolved: Dictionary = Damage.resolve(packet,cast.snapshot.modifiers)
 				var local: Dictionary = packet.get("assembly",{}).get("weapon",{})
 				var contribution: float = float(local.get("contribution",{}).get("physical",0.0))
-				if skill != "cleave" or role != "direct":
+				if skill not in ["basic", "cleave"] or role != "direct":
 					assert(is_zero_approx(contribution) and packet == baseline_packets[role])
 				var critical: Dictionary = cast.get("critical",{}).get("secondary" if role == "secondary" else "primary",{})
 				var expected: float = float(resolved.total) * (1.0+float(critical.get("chance",0.0))*(float(critical.get("multiplier",1.0))-1.0))
@@ -663,6 +670,76 @@ static func forgeblade_examples() -> Dictionary:
 	for wrapped: Dictionary in old.items.values():
 		assert(wrapped.definition_id != "equipment:forgeblade")
 	return result
+
+
+## The same real compiler records both the authored event and class modifiers.
+## Canonical candidates use the production transfer planner and validation in
+## memory; the offline exporter never calls equip/save or a user save path.
+static func melee_basic_examples(blade: Dictionary) -> Dictionary:
+	var result: Dictionary = {"base_id":"forgeblade", "save_version":Canonical.Rules.VERSION,
+		"recipe":Recipes.BASIC_MELEE.duplicate(true), "examples":{}, "equipped_examples":{},
+		"legacy_inflight":{}, "timing":"沿用attack_timer与当前attack_speed；没有独立技能冷却或魔力支付。",
+		"admission":"自动攻击只在近战距离内选取敌人，圈外不空挥；手动允许空挥并消耗原攻击间隔。",
+		"scope":"hit + attack + melee；不含area，不受范围或投射物速度提高，也不占投射物容量，无返回或飞行结束爆炸。",
+		"balance":"贴身普攻与裂刃组合输出提高是v0.56新行为，不是旧同seed战斗结果等价；以下是逐次成功命中，不是实战DPS。"}
+	for key: String in blade.examples:
+		var example: Dictionary = blade.examples[key]
+		var cast: Dictionary = Compiler.compile_basic(example.snapshot)
+		assert(cast.ok and cast.packets.keys() == ["direct"] and cast.recipe == Recipes.BASIC_MELEE)
+		result.examples[key] = _melee_reference_cast(cast)
+	var cleave: Dictionary = Compiler.compile_skill("cleave", blade.examples.normal.snapshot, [])
+	result["cleave"] = _melee_reference_cast(cleave)
+	for key: String in ["normal", "six_t3_max"]:
+		var model: RefCounted = Canonical.new()
+		for uid: String in model.equipped_items().values():
+			_reference_move(model, uid, model.first_bag_position(uid))
+		var instance: Dictionary = blade.examples[key].instance.duplicate(true)
+		instance.id = "gear_%06d" % int(model.snapshot().next_item_serial)
+		assert(Equipment.validate_instance(instance))
+		assert(model._admit_reward_item(Canonical.Items.wrap_equipment(instance)))
+		_reference_move(model, instance.id, {"kind":"equipment", "slot_id":"weapon"})
+		assert(model.equipped_items() == {"weapon":instance.id})
+		var cast: Dictionary = model.get_basic_cast()
+		assert(cast.ok and cast.recipe == Recipes.BASIC_MELEE)
+		result.equipped_examples[key] = {"instance":model.item(instance.id), "location":model.location(instance.id),
+			"equipped":model.equipped_items(), "stats":model.get_stats(), "talents":model.snapshot().talents,
+			"snapshot":model.get_combat_snapshot(), "basic":_melee_reference_cast(cast),
+			"cleave":_melee_reference_cast(Compiler.compile_skill("cleave", model.get_combat_snapshot(), [])),
+			"save_attempts":model.save_attempts}
+		assert(model.save_attempts == 0)
+	var frozen: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://docs/qa/v056-reference/v055-basic-snapshots.json"))
+	for key: String in frozen:
+		var snapshot: Dictionary = frozen[key].snapshot
+		var packet: Dictionary = Recipes.event_packet(snapshot, "basic", "projectile")
+		var secondary: Dictionary = Recipes.secondary_packet(snapshot, "basic")
+		assert(packet == snapshot.compiled_packets.projectile and secondary == snapshot.compiled_packets.secondary)
+		assert(Recipes.event_packet(snapshot, "basic", "direct").is_empty())
+		result.legacy_inflight[key] = {"source_commit":frozen[key].source_commit, "source_path":frozen[key].source_path,
+			"projectile":packet, "secondary":secondary, "resolved":Damage.resolve(packet, snapshot.modifiers),
+			"retains_frozen_packets":true}
+	return result
+
+
+static func _melee_reference_cast(cast: Dictionary) -> Dictionary:
+	assert(cast.ok)
+	var packet: Dictionary = cast.packets.direct
+	return {"recipe":cast.recipe.duplicate(true), "full_angle_degrees":rad_to_deg(float(cast.recipe.half_angle) * 2.0),
+		"packets":cast.packets.duplicate(true), "resolved":Damage.resolve(packet, cast.snapshot.modifiers),
+		"critical":cast.get("critical", {}).duplicate(true), "mana":cast.get("mana", 0.0),
+		"cooldown":cast.get("cooldown", 0.0), "has_mana_field":cast.has("mana"),
+		"has_cooldown_field":cast.has("cooldown"), "summary":Preview.summary(cast), "details":Preview.details(cast)}
+
+
+static func _reference_move(model: RefCounted, uid: String, destination: Dictionary) -> void:
+	var candidate: Dictionary = model.snapshot()
+	var planned: Dictionary = Canonical.Transfer.move_paged(Canonical.Items.metadata_for_items(candidate.items),
+		candidate.locations, Canonical.Migration.paged_location_context(candidate, model._socket_ids), uid,
+		destination, candidate.revision, candidate.revision)
+	assert(planned.ok)
+	candidate.locations = planned.locations
+	candidate.revision = planned.revision
+	assert(Canonical.Rules.reason(candidate, model._talent_validator, model._socket_ids).is_empty())
+	model._accept_memory(candidate)
 
 
 static func _forgeblade_packets(packets: Dictionary) -> Dictionary:

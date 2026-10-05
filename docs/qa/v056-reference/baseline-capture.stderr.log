@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/a51485f153de/v056-forgeblade-basic/docs/qa/v056-reference/capture-v055-baseline.py", line 111, in <module>
+    main()
+  File "/workspace/scratch/a51485f153de/v056-forgeblade-basic/docs/qa/v056-reference/capture-v055-baseline.py", line 83, in main
+    assert category, row
+           ^^^^^^^^
+AssertionError: {'path': ['forgeblade', 'examples', 'dual_t1_max', 'definition', 'description'], 'before': '本武器物理单独结算，仅增强裂刃斩直接命中。详情列出基底、本地点数与本地提高。\n前缀 · 砥刃 T1：本武器附加物理伤害 +2\n前缀 · 淬锋 T1：本武器物理伤害提高 +15%\n前缀 · 深汲 T1：最大魔力 +9\n后缀 · 泉旋 T1：魔力恢复速度提高 +5%', 'after': '装备后普通攻击变为单目标近战挥击；本武器物理增强普通近战攻击与裂刃斩。\n前缀 · 砥刃 T1：本武器附加物理伤害 +2\n前缀 · 淬锋 T1：本武器物理伤害提高 +15%\n前缀 · 深汲 T1：最大魔力 +9\n后缀 · 泉旋 T1：魔力恢复速度提高 +5%'}

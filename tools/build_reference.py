@@ -18,6 +18,7 @@ CAPABILITIES = {'initial_projectiles':'初始投射物数量','projectile_hit':'
 SLOTS = {'weapon':'武器','armor':'护甲','charm':'项链','body_armour':'护甲','amulet':'项链','ring':'戒指','ring_1':'戒指一','ring_2':'戒指二','boots':'鞋','belt':'腰带','gloves':'手套','helmet':'头盔'}
 TYPES = {'small':'小天赋','notable':'显著天赋','socket':'珠宝孔','start':'起点','keystone':'基石','mastery':'精通','prefix':'前缀','suffix':'后缀','ordinary':'普通珠宝','special':'特殊珠宝','legacy':'原始词池','expansion':'扩展词池','runewood':'符木点伤池','defense':'火抗防具池','local_weapon':'白蜡长弓池','nine_slot':'九槽装备池','build_legacy_v27':'构筑原底材池','build_nine_slot_v27':'构筑九槽池','forgeblade_v34':'锻纹短刃池'}
 RULE_TITLES['forgeblade'] = '锻纹短刃与裂刃局部物理'
+RULE_TITLES['melee_basic'] = '短刃近战普攻与裂刃衔接'
 
 def esc(value): return html.escape(str(value), quote=True)
 def lines(value): return '<br>'.join(esc(value).split('\n'))
@@ -167,8 +168,8 @@ def forgeblade_rule(data, link, facts, details):
     blade=data['forgeblade']
     def value(key, amount):
         return f'<strong data-forgeblade-value="{esc(key)}" data-value="{esc(amount)}">{number(amount)}</strong>'
-    body='<p>'+esc(blade['example_scope'])+'</p><p>'+esc(blade['formula'])+'。W按原技能基础系数2.8加入物理，不作用于原B或外部附加点伤；现有攻击、近战、物理、范围提高、暴击与防御仍走后续阶段。</p>'
-    body+=facts([('底材',link('equipment','forgeblade')),('格数',' × '.join(map(number,blade['base']['size']))),('唯一局部消费者',link('skills','cleave')+' / direct · hit + attack + melee + area'),('词池',esc(blade['pool_id'])),('保存版本',value('save-version',blade['save_version']))])
+    body='<p>'+esc(blade['example_scope'])+'</p><p>'+esc(blade['formula'])+'。W按各自实际命中基础系数加入物理，不作用于原B或外部附加点伤；现有攻击、近战、物理、暴击与防御仍走后续阶段。范围提高只适用于含area标签的裂刃。'+link('rules','melee_basic')+'说明v0.56新增普攻消费者。</p>'
+    body+=facts([('底材',link('equipment','forgeblade')),('格数',' × '.join(map(number,blade['base']['size']))),('局部消费者',link('rules','melee_basic')+' / basic/direct · hit + attack + melee；'+link('skills','cleave')+' / direct · hit + attack + melee + area'),('词池',esc(blade['pool_id'])),('保存版本',value('save-version',blade['save_version']))])
     body+='<h3>六族与合法物品</h3><p>两本地族都是前缀，不能同时出现在魔法装备；六族沿既有等级1/8/16与权重100/60/30，T1到T3为本游戏成长顺序。以下范围直接来自实际目录。</p>'
     rows=[]
     for key,family in blade['families'].items():
@@ -193,7 +194,7 @@ def forgeblade_rule(data, link, facts, details):
     for skill,cast in sample['casts'].items():
         for role,hit in cast['hits'].items():
             rows.append('<tr><th>'+('普通攻击' if skill=='basic' else link('skills',skill))+' / '+esc(role)+'</th><td>'+value('scope-'+skill+'-'+role,hit['local_contribution'])+'</td><td>'+percent(hit['critical']['chance'])+' / '+percent(hit['critical']['multiplier'])+'</td></tr>')
-    body+=details('全部命中role的真实局部贡献与全局暴击','<table><thead><tr><th>命中</th><th>短刃W贡献</th><th>全局暴击几率 / 倍率</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table><p>非裂刃包逐字段等于同一全局属性、仅移除武器profile的对照。dash与ward没有命中包；爆炸效果仅在该隔离例子中显式开启，以展示secondary规则。</p>')
+    body+=details('全部命中role的真实局部贡献与全局暴击','<table><thead><tr><th>命中</th><th>短刃W贡献</th><th>全局暴击几率 / 倍率</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table><p>除basic/direct与cleave/direct外，命中包逐字段等于同一全局属性、仅移除武器profile的对照。basic对照保留实际近战事件recipe再仅移除W，避免误换成投射物。dash与ward没有命中包；爆炸效果仅在隔离例子中显式开启，以展示其他技能的secondary规则，近战普攻不产生secondary。</p>')
     body+='<p>'+esc(blade['global_scope'])+'。施放时冻结W与暴击，换装不重解释已存在的命中包。伤害偷取继续依据防御后敌人的实际护盾与生命损失，不计过量伤害。</p>'
     resources=sample['definition']['stats']
     body+=facts([('T3深汲全局最大魔力增加',value('global-max-mana',resources['max_mana'])),('T3泉旋全局魔力恢复提高',value('global-mana-regen',resources['mana_regen_increased']))])
@@ -210,6 +211,33 @@ def forgeblade_rule(data, link, facts, details):
     migration=blade['migration']
     body+='<h3>schema33 → 34与预算边界</h3><p>'+esc(migration['backup_contract'])+' 旧schema注入forgeblade整份拒绝，旧升级链仍逐版本冻结校验；源天赋执行政策保持33。</p><p>同源纯迁移示例只改变 '+esc('、'.join(migration['changed_fields']))+'；'+esc(migration['evidence_scope'])+'</p>'
     body+='<p>T3六族零防御单次暴击期望90.7494；历史符木合法四缀顶值对应普通90.384、基础暴击期望92.6436。护甲与火抗分别结算会改变比较，不能由此宣称完整配装最优或平衡通过。</p><p><a href="../qa/v055-budget/README.md">实现前静态可达预算与限制</a> · <a href="../FORGEBLADE.zh-CN.md">锻纹短刃规则说明</a></p>'
+    return body
+
+
+def melee_basic_rule(data, link, facts, details):
+    melee=data['melee_basic']; blade=data['forgeblade']
+    def value(key, amount):
+        return f'<strong data-melee-basic-value="{esc(key)}" data-value="{esc(amount)}">{number(amount)}</strong>'
+    body='<p>装备'+link('equipment','forgeblade')+'后，普通攻击使用近战direct派送；仍是既有普通攻击，不新增主动宝石或技能槽。白蜡长弓与其他旧武器保留原投射物路径。</p>'
+    rows=[]
+    for key,title,cast in [('basic','短刃普通攻击',melee['examples']['normal']),('cleave','裂刃斩',melee['cleave'])]:
+        recipe=cast['recipe']; packet=cast['packets']['direct']; assembly=packet['assembly']
+        cells=[esc(recipe.get('delivery','扇形技能')),value(key+'-radius',recipe['radius']),value(key+'-angle',cast['full_angle_degrees']),value(key+'-targets',recipe['max_targets']) if 'max_targets' in recipe else '范围内多个目标',value(key+'-coefficient',assembly['base_coefficient']),value(key+'-effectiveness',assembly['added_effectiveness']),value(key+'-mana',cast['mana']),value(key+'-cooldown',cast['cooldown']) if cast['has_cooldown_field'] else '原attack_timer间隔']
+        rows.append('<tr><th>'+title+'</th>'+''.join('<td>'+cell+'</td>' for cell in cells)+'</tr>')
+    body+='<div class="table-scroll"><table><thead><tr><th>攻击</th><th>派送</th><th>半径</th><th>全角度</th><th>最多目标</th><th>基础系数</th><th>附加效用</th><th>魔力</th><th>冷却/间隔</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
+    body+='<p>'+esc(melee['timing'])+' '+esc(melee['admission'])+'</p><p>'+esc(melee['scope'])+'</p>'
+    body+='<h3>同一装备：隔离原始包与默认职业分开</h3><p>全部值直接读取实际compiler命中包及DamageResolver。隔离B18样本没有职业提高；默认职业示例使用真实Canonical装备UID、生产位置规划器及完整schema校验，仅在内存装备短刃，无其他装备或额外天赋。力量的近战物理提高在原始包之后结算。</p>'
+    rows=[]
+    for key,example in melee['equipped_examples'].items():
+        basic=example['basic']; packet=basic['packets']['direct']; stats=example['stats']
+        cells=[value(key+'-raw',sum(packet['base'].values())),value(key+'-isolated',melee['examples'][key]['resolved']['total']),value(key+'-strength',stats['strength']),value(key+'-melee-increased',stats['melee_physical_increased']),value(key+'-resolved',basic['resolved']['total']),value(key+'-cleave-resolved',example['cleave']['resolved']['total'])]
+        rows.append('<tr><th>'+esc(blade['examples'][key]['name'])+'</th>'+''.join('<td>'+cell+'</td>' for cell in cells)+'</tr>')
+        body+=details(blade['examples'][key]['name']+' · 实际装备与派送',facts([('UID',esc(example['instance']['uid'])),('装备位置',esc(example['location']['slot_id'])),('普攻标签',' + '.join(map(esc,packet['tags']))),('命中roles',' / '.join(map(esc,basic['packets']))),('实际编译预览',esc(basic['summary']))])+'<p>'+lines(basic['details'])+'</p>')
+    body+='<div class="table-scroll"><table><thead><tr><th>合法短刃</th><th>普攻原始包</th><th>无职业提高普攻</th><th>默认力量</th><th>力量近战提高</th><th>默认职业普攻</th><th>默认职业裂刃</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
+    body+='<p>这些是零目标防御、非暴击的单次成功命中；全局暴击与资源仍按原全局范围计算。'+esc(melee['balance'])+'</p>'
+    frozen=melee['legacy_inflight']['normal']['projectile']
+    body+='<h3>旧飞箭与新近战分开冻结</h3><p>v0.55已飞出的短刃普通projectile保留原B：'+value('legacy-projectile-raw',sum(frozen['base'].values()))+'。这是独立v0.55导出包经过当前冻结读取器的结果；没有短刃W，不会因换装或本次派送变化重算为新近战。旧secondary同样保留原快照；新近战只有direct，不能借用旧返回或飞行结束爆炸。</p>'
+    body+='<p>schema仍为'+value('save-version',melee['save_version'])+'，无新gem、词族、装备或图片。'+link('rules','forgeblade')+'保留词缀、制作与迁移资料。<a href="../MELEE_BASIC.zh-CN.md">近战普攻规则</a> · <a href="../qa/v056-reference/README.md">本批图鉴验证</a></p>'
     return body
 
 
@@ -355,7 +383,7 @@ def build(data, art):
         normal=w['examples']['local_normal']; rolled=w['examples']['local_max']
         body=facts([('作用对象','当前装备的白蜡长弓'),('生效命中',link('rules','basic_attack')+' · '+link('skills','tornado')+'（母箭 / 子箭）'),('局部规则版本',esc(w['balance_version']))])
         body+=weapon_diagram(rolled)
-        body+='<p>上述图例保持白蜡长弓历史样本；新增锻纹短刃的W仅由裂刃direct消费，见 '+link('rules','forgeblade')+'。下列v0.13预算结论只描述历史长弓矩阵。</p>'
+        body+='<p>上述图例保持白蜡长弓历史样本；锻纹短刃的W由普通近战basic/direct与裂刃cleave/direct消费，见 '+link('rules','melee_basic')+' 与 '+link('rules','forgeblade')+'。下列v0.13预算结论只描述历史长弓矩阵。</p>'
         rows=''.join(f'<tr><th scope="row">{esc(data["configurations"][config]["name"])}</th><td>{number(sample["resolved_weapon"]["profile"]["base"]["physical"])}</td><td>{number(sample["resolved_weapon"]["profile"]["flat"]["physical"])}</td><td>{percent(sample["resolved_weapon"]["profile"]["increased"]["physical"])}</td><td>{number(sample["resolved_weapon"]["components"]["physical"])}</td></tr>' for config in ['local_normal','local_max'] for sample in [w['examples'][config]])
         body+='<div class="table-scroll"><table><caption>由合法实例推导的武器面板</caption><thead><tr><th>装备</th><th>P 固有</th><th>F 点伤</th><th>L 提高</th><th>W 物理</th></tr></thead><tbody>'+rows+'</tbody></table></div>'
         body+=details('最高局部掷值示例的完整实例',f'<p>稀有、物品等级 {rolled["instance"]["item_level"]}。两条局部前缀与两条合法后缀共同满足四词缀最低要求；所有示例掷值均取实际目录对应阶级上限。</p><p>'+lines('\n'.join(rolled['definition']['affix_lines']))+'</p><p>这一示例只表示局部物理项上限，未声称在伤害、法术、速度、生存等目标上普遍更优。</p>')
@@ -532,7 +560,7 @@ def build(data, art):
         ('supports','辅助装配','只有拥有所需能力的主动技能可装配辅助。同一技能不能重复装配同一辅助。',f'<p>每技能最多 {data["limits"]["max_supports"]} 个辅助；初始投射物上限 {data["limits"]["initial_projectiles"]}。{len(data["supports"])}种选择覆盖{len(data["skills"])}个主动技能；可用技能由原生配方固定，装备附加分量不会改变允许槽位。K仅显示兼容卡片。兼容性来自 SupportRegistry，数值来自 SkillCompiler；节能/疾咏改变耗魔和冷却，不改变施法动作速度。</p><p>'+links('supports',data['supports'])+'</p>','implemented'),
         ('projectiles','分裂、返回与飞行结束','龙卷母箭优先分裂；返回在抵达射程时朝当时角色中心取向，且每个载体至多一次。','<p>自然飞行结束可触发装备授予的爆炸。分裂、碰撞消耗和取消不会触发该爆炸；返回不刷新寿命。投射物增伤与投射物辅助不作用于独立爆炸。</p><p>'+links('fixed_items',['prism_bow','return_mantle','detonation_charm'])+'</p>','implemented'),
         ('equipment','装备与阶级','底材与词缀按自身阶段结算；局部武器项独立于角色统计。T1 → T3 是本游戏原创成长顺序；不是 PoE 官方阶级命名。',f'<p>物品等级 {data["limits"]["min_item_level"]}–{data["limits"]["max_item_level"]}。每次已产生的普通装备奖励按下表权重选择一个词池（当前 {esc(data["current_loot_profile_id"])}，权重合计 100）；不是每只怪物死亡的掉落概率，也不新增奖励分支。同族或同组不能重复出现。</p>'+pool_table+details('稀有度规则',facts([(r['name'],f'{r["min_affixes"]}–{r["max_affixes"]} 条；至多 {r["max_prefixes"]} 前缀 / {r["max_suffixes"]} 后缀') for r in data['equipment_rarities'].values()]))+'<p>装备 damage 仍为角色通用基础加值，护盾为角色全局容量；白蜡长弓的局部物理另由 '+link('weapon_stages','weapon_local')+' 结算。火卫的合格专属奖励仍强制选防御池，沿用一次奖励。</p>'+details('历史配置与存档兼容',historical_pools+f'<p>历史配置留给重放兼容，不再表示当前自然词池选择。当前存档结构 {data["save_version"]}；v8 迁移保留装备 ID、掷值、辅助与珠宝，保存迁移备份。更新不会免费赠送新弓或新增升级奖励。</p>'),'implemented'),
-        ('basic_attack','普通攻击与武器贡献','普通自动攻击是独立的攻击消费者，不计入八个主动技能条目。','<p>普通投射物接收本武器物理；法术与独立爆炸不接收。以下两种构筑仅用于说明合法普通长弓与局部双前缀实例，仍保留原有角色基础伤害。</p><div class="table-scroll"><table><thead><tr><th>装备示例</th><th>原始分量</th><th>防御前</th><th>已知目标抗性后</th></tr></thead><tbody>'+basic_rows+'</tbody></table></div><p>'+link('weapon_stages','weapon_local')+' · '+link('rules','character_rates')+'</p>','implemented'),
+        ('basic_attack','普通攻击与武器贡献','普通自动攻击是独立的攻击消费者，不计入八个主动技能条目。','<p>长弓普通投射物接收长弓本地物理；锻纹短刃改为近战direct并接收短刃W，详见 '+link('rules','melee_basic')+'。法术与独立爆炸不接收W。以下两种构筑仅用于说明合法普通长弓与局部双前缀实例，仍保留原有角色基础伤害。</p><div class="table-scroll"><table><thead><tr><th>装备示例</th><th>原始分量</th><th>防御前</th><th>已知目标抗性后</th></tr></thead><tbody>'+basic_rows+'</tbody></table></div><p>'+link('weapon_stages','weapon_local')+' · '+link('rules','character_rates')+'</p>','implemented'),
         ('character_rates','恢复、移动与普通攻击速度','速度和恢复的固定加值先相加，再应用对应提高比率。','<p>普通攻击速度改变基础自动射击间隔；不缩短主动技能冷却。魔力恢复与移动速度分别使用自身比率。</p>','implemented'),
         ('allocation','天赋与珠宝规则','从起点沿连线分配天赋；珠宝只能镶入已分配的孔。普通珠宝提供属性，寻枝晶玉额外赋予范围内远程分配资格。','<p>'+lines(data['jewels'].get('branchfinder',{}).get('description',''))+'</p><p>覆盖图中的资格与连通状态由同一个 AllocationRules 分析器导出。图中可切换源孔失联示例：失联孔不激活覆盖。远程点不能向覆盖范围外扩路，也不能远程开启珠宝孔。</p><p><a href="#tree">查看原创新图与覆盖示例</a></p><p>本游戏半径、限定节点类型、首领奖励与原子拒绝卸除，均为原创实现规则；不是 PoE 数值或完整机制复刻。研究依据：<a href="https://www.pathofexile.com/forum/view-thread/1254452/page/2">GGG 范围与禁止向外扩路说明</a> · <a href="https://www.pathofexile.com/forum/view-thread/2792025">3.10.0c 珠宝更换连通修复</a> · <a href="https://www.pathofexile.com/forum/view-thread/3406659">3.21.1 Hotfix 3 替代来源修复</a>。</p>','implemented'),
         ('shared','玩家和怪物共享机制','天赋节点与怪物模板按同一个机制 ID 请求整组属性。怪物不支持的属性会使整个机制被拒绝。',details('玩家天赋合计上限',facts([(key,number(value)) for key,value in data['passive_caps'].items()]))+'<p>天赋合计先受自身安全上限约束；装备与珠宝另行结算。怪物稀有度、物种、波次与死亡模板保持独立。</p>','implemented'),
@@ -710,7 +738,9 @@ def build(data, art):
         body+='<p>'+link('rules','source_fire_dot')+' · '+link('rules','burning','点燃与燃烧')+' · '+link('rules','ember_proliferation')+' · '+link('rules','shock')+' · '+link('rules','source_tree','完整源树与分配规则')+' · <a href="source-tree-coverage.json">同源执行覆盖JSON</a></p>'
         rule_defs.append(('source_faster_burn','源天赋加速燃烧','三节点合计25%更快：每秒伤害乘1.25，基础3秒压缩至2.4秒，理论完整总量保持。',body,'implemented'))
     if 'forgeblade' in data:
-        rule_defs.append(('forgeblade',RULE_TITLES['forgeblade'],'本地物理4、六族合法词池；W只增强裂刃direct，全局暴击与资源仍保持原范围。',forgeblade_rule(data,link,facts,details),'implemented'))
+        rule_defs.append(('forgeblade',RULE_TITLES['forgeblade'],'本地物理4、六族合法词池；W增强普通近战与裂刃direct，全局暴击与资源仍保持原范围。',forgeblade_rule(data,link,facts,details),'implemented'))
+    if 'melee_basic' in data:
+        rule_defs.append(('melee_basic',RULE_TITLES['melee_basic'],'短刃普攻使用独立近战派送，保留原攻击间隔；与裂刃几何、资源及逐次伤害分开展示。',melee_basic_rule(data,link,facts,details),'implemented'))
     if 'source_spatial' in data:
         spatial=data['source_spatial']
         rows=[]

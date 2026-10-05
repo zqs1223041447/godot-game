@@ -1,0 +1,112 @@
+{
+	"checks": 190,
+	"default_attributes": "20 strength and 20 intelligence; physical melee increase 4%",
+	"failures": 0,
+	"input_scope": "Headless Godot Input injection, actual main paths; not physical mouse or Windows visual acceptance",
+	"legacy_frames": 96,
+	"real_source_hit": {
+		"assembly": {
+			"added": {
+
+			},
+			"added_effectiveness": 1.0,
+			"base_coefficient": 1.0,
+			"intrinsic": {
+				"physical": 18.0
+			},
+			"stage": "hit_base",
+			"weapon": {
+				"coefficient": 1.0,
+				"components": {
+					"physical": 13.0
+				},
+				"contribution": {
+					"physical": 13.0
+				},
+				"profile": {
+					"base": {
+						"physical": 4.0
+					},
+					"base_id": "forgeblade",
+					"flat": {
+						"physical": 6.0
+					},
+					"increased": {
+						"physical": 0.3
+					},
+					"item_id": "gear_000008",
+					"sources": [
+						{
+							"affix_id": "whetstone_edge",
+							"stat": "weapon_added_physical",
+							"value": 6.0
+						},
+						{
+							"affix_id": "tempered_edge",
+							"stat": "weapon_physical_increased",
+							"value": 0.3
+						}
+					],
+					"stage": "weapon_local"
+				}
+			}
+		},
+		"before_defense_components": {
+			"physical": 63.425999999999995
+		},
+		"cast_id": 1,
+		"components": {
+			"physical": 50.64912592853725
+		},
+		"critical": {
+			"chance": 0.06999999999999999,
+			"critical": true,
+			"multiplier": 1.65
+		},
+		"details": [
+			{
+				"base": 31.0,
+				"before_defense": 63.425999999999995,
+				"final": 50.64912592853725,
+				"increased": 0.24000000000000002,
+				"modifiers": [
+					"melee_physical_increased",
+					"global_increased"
+				],
+				"more": 1.0,
+				"resistance": 0.20144537053357842,
+				"type": "physical"
+			}
+		],
+		"effect_id": "",
+		"health_lost": 45.64912592853725,
+		"leech": {
+			"health": 0.202596503714149,
+			"mana": 0.202596503714149
+		},
+		"phase": "direct",
+		"prevented_components": {
+			"physical": 12.776874071462743
+		},
+		"projectile_id": 0,
+		"shield_spent": 5.0,
+		"skill_id": "basic",
+		"tags": [
+			"hit",
+			"attack",
+			"melee"
+		],
+		"target_id": 1,
+		"total": 50.64912592853725
+	},
+	"sections": {
+		"admission_and_capacity": 9,
+		"auto_geometry": 35,
+		"legacy_sequence": 15,
+		"lifecycle_and_reload": 11,
+		"manual_input": 36,
+		"prepare_blade": 23,
+		"real_sources": 36,
+		"simultaneous_and_switch": 19
+	}
+}

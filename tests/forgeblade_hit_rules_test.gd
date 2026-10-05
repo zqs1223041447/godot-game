@@ -119,7 +119,7 @@ func _profiles() -> void:
 	var huge: Dictionary = _profile(1e308, 0.0)
 	_expect(Weapon.resolve(huge).ok and Base.assemble(0.0, _recipe(), {}, [], huge).is_empty(), "Finite W still rejects coefficient overflow")
 	var metadata: Dictionary = Weapon.metadata()
-	_expect(metadata.base_ids == ["ashwood_bow", "forgeblade"] and metadata.consumers_by_base.forgeblade == {"cleave": ["direct"]}, "Metadata maps each base to its actual consumer")
+	_expect(metadata.base_ids == ["ashwood_bow", "forgeblade"] and metadata.consumers_by_base.forgeblade == {"basic": ["direct"], "cleave": ["direct"]}, "Metadata maps each base to its actual consumer")
 	metadata.consumers_by_base.forgeblade.cleave.clear()
 	_expect(Weapon.metadata().consumers_by_base.forgeblade.cleave == ["direct"], "Per-base consumer metadata is detached")
 	completed = true
@@ -140,7 +140,7 @@ func _consumer_matrix() -> void:
 							and not tags.has("spell") and not tags.has("secondary") and not tags.has("explosion") \
 							and ((skill == "basic" and role == "projectile") or (skill == "tornado" and role in ["parent", "child"]))
 					elif base_id == "forgeblade":
-						expected = skill == "cleave" and role == "direct" and tags is Array and (tags == ["hit", "attack", "melee", "area"] or tags == ["area", "melee", "attack", "hit"])
+						expected = role == "direct" and tags is Array and ((skill == "cleave" and (tags == ["hit", "attack", "melee", "area"] or tags == ["area", "melee", "attack", "hit"])) or (skill == "basic" and tags == ["hit", "attack", "melee"]))
 					_expect(Weapon.consumes_hit(base_id, skill, role, tags) == expected, "Exact consumer matrix " + base_id + ":" + skill + ":" + role + ":" + str(tags))
 	completed = true
 
@@ -186,7 +186,7 @@ func _compiled_consumers() -> void:
 	hit.assembly.weapon.profile.sources[0].value = 999.0
 	_expect(var_to_bytes(Combat.event_packet(cast.snapshot, "cleave", "direct")) == frozen, "Frozen getter returns detached nested trace")
 	for skill: String in Probe.SKILLS:
-		if skill == "cleave":
+		if skill in ["cleave", "basic"]:
 			continue
 		var old: Dictionary = Probe.compile(skill, _snapshot())
 		var current: Dictionary = Probe.compile(skill, _snapshot(_profile(6.0, 0.3)))

@@ -69,6 +69,8 @@ node --check docs/reference/reference.js
 
 ## v0.55.0 锻纹短刃
 
+本节记录v0.55历史验收；其普通攻击零W结论已由下方v0.56普通近战规则替代。v0.55已经飞出的旧投射物快照仍冻结原规则。
+
 新增入口为 `index.html#rules-forgeblade` 与随机装备条目 `equipment-forgeblade`。`catalog.json.forgeblade` 来自实际底材/词缀目录、合法物品、SkillCompiler、CraftingRules和schema33→34纯迁移函数。5个合法隔离样本导出95个命中包，73个HTML数值逐一核对；全部其他role的本地贡献为零，同时验证全局暴击与资源仍是全局。
 
 样本明确固定B18、基础暴击5%/150%，没有职业三属性、天赋、其他装备与辅助。原始命中包、后modifier普通命中和零防御单次期望分别展示；不把隔离输入当默认角色，也不称为实战DPS。双本地T1由合法四缀金装承载。
@@ -84,3 +86,17 @@ node --check docs/reference/reference.js
 ```
 
 导出只调用一次Godot，12.875秒、exit0、无错误行。旧catalog通过明确新增内容、资格/版本元数据与裂刃消费者解释投影后，与独立v54基线语义hash完全相同；不是忽略旧实例或只比部分数值。源树全部execution与覆盖JSON逐字节保持，旧67张PNG保持，新短刃PNG直接复制原字节。聚焦检查与确定性构建均通过；不运行历史全量、600秒或新增每版截图验收。完整命令、退出码、失败调试记录和指纹见 `../qa/v055-reference/`。
+
+## v0.56.0 短刃近战普攻
+
+新增入口`index.html#rules-melee_basic`，同源数据为`catalog.json.melee_basic`。装备短刃时普通攻击使用半径60、全角90°、最多1目标的近战direct；基础系数与附加效用各1.0，hit/attack/melee、不含area。保留原attack_timer与0魔力，裂刃95/180°、2.8系数、12魔力/1.4秒保持。
+
+实际Canonical装备UID给出白装原包22、默认20力量后22.88，合法六族T3原包31、默认力量后32.24；隔离编译器样本与真实默认属性分开。纯位置计划在新建内存状态通过完整schema校验，未读写玩家存档。旧v55飞箭原B18经过当前冻结读取器仍保持原包。新近战没有secondary、返回或飞行结束爆炸，不占弹体容量。
+
+```sh
+python3 tools/build_reference.py --check
+python3 tests/melee_basic_reference_test.py
+node --check docs/reference/reference.js
+```
+
+唯一Godot导出12.606秒、exit0、无错误行；构建及以上聚焦检查均通过。26个近战卡+72个短刃卡数值逐项对应，90个真实命中包，2个实际装备示例、2个旧飞箭冻结示例。旧catalog完整投影仅放行明确批准的新短刃basic行为、精确描述、消费者元数据和版本，所有其他旧内容与源树执行保持，68图字节保持。组合输出提高是新行为，不声称短刃同seed战斗等价或实战DPS；无新schema、gem、词族或图片。完整结果与首次基线捕获器的文本匹配调试记录见`../qa/v056-reference/`。

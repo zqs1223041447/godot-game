@@ -1,0 +1,283 @@
+{
+  "normal": {
+    "source_commit": "63d84b2",
+    "source_path": "docs/reference/catalog.json.forgeblade.examples.normal",
+    "snapshot": {
+      "added_damage": {
+        "attack": {
+          "fire": 0.0,
+          "physical": 0.0
+        },
+        "spell": {
+          "cold": 0.0,
+          "lightning": 0.0
+        }
+      },
+      "base_damage": 18.0,
+      "critical_modifiers": {
+        "base_chance": 0.05,
+        "base_multiplier": 1.5
+      },
+      "effects": [
+        "explode_on_flight_end"
+      ],
+      "explosion_recipe": {
+        "added_effectiveness": 0.0,
+        "coefficient": 0.9,
+        "radius": 76.0
+      },
+      "modifiers": [],
+      "projectile_count": 0,
+      "tornado_recipe": {
+        "child": {
+          "added_effectiveness": 0.7,
+          "coefficient": 0.7,
+          "lifetime": 1.7,
+          "pierce": -1,
+          "radius": 4.5,
+          "range": 150.0,
+          "role": "child",
+          "speed": 260.0,
+          "split": false
+        },
+        "child_count": 3,
+        "explosion": {
+          "added_effectiveness": 0.0,
+          "coefficient": 0.9,
+          "radius": 76.0
+        },
+        "parent": {
+          "added_effectiveness": 1.0,
+          "coefficient": 1.0,
+          "lifetime": 0.9,
+          "pierce": -1,
+          "radius": 6.0,
+          "range": 150.0,
+          "role": "parent",
+          "speed": 420.0,
+          "split": true
+        },
+        "parent_count": 3,
+        "spread": 0.16
+      },
+      "weapon_profile": {
+        "base": {
+          "physical": 4.0
+        },
+        "base_id": "forgeblade",
+        "flat": {
+          "physical": 0.0
+        },
+        "increased": {
+          "physical": 0.0
+        },
+        "item_id": "gear_000001",
+        "sources": [],
+        "stage": "weapon_local"
+      },
+      "compiled_skill_id": "basic",
+      "compiled_packets": {
+        "projectile": {
+          "assembly": {
+            "added": {},
+            "added_effectiveness": 1.0,
+            "base_coefficient": 1.0,
+            "intrinsic": {
+              "physical": 18.0
+            },
+            "stage": "hit_base"
+          },
+          "base": {
+            "physical": 18.0
+          },
+          "role": "projectile",
+          "skill_id": "basic",
+          "tags": [
+            "hit",
+            "projectile",
+            "attack"
+          ]
+        },
+        "secondary": {
+          "assembly": {
+            "added": {},
+            "added_effectiveness": 0.0,
+            "base_coefficient": 0.9,
+            "intrinsic": {
+              "fire": 16.2
+            },
+            "stage": "hit_base"
+          },
+          "base": {
+            "fire": 16.2
+          },
+          "role": "secondary",
+          "skill_id": "basic",
+          "tags": [
+            "hit",
+            "area",
+            "secondary",
+            "explosion"
+          ]
+        }
+      },
+      "critical": {
+        "primary": {
+          "chance": 0.05,
+          "multiplier": 1.5
+        },
+        "secondary": {
+          "chance": 0.05,
+          "multiplier": 1.5
+        }
+      }
+    }
+  },
+  "six_t3_max": {
+    "source_commit": "63d84b2",
+    "source_path": "docs/reference/catalog.json.forgeblade.examples.six_t3_max",
+    "snapshot": {
+      "added_damage": {
+        "attack": {
+          "fire": 0.0,
+          "physical": 0.0
+        },
+        "spell": {
+          "cold": 0.0,
+          "lightning": 0.0
+        }
+      },
+      "base_damage": 18.0,
+      "critical_modifiers": {
+        "base_chance": 0.05,
+        "base_multiplier": 1.5,
+        "crit_chance_increased": 0.4,
+        "crit_multiplier_add": 0.15
+      },
+      "effects": [
+        "explode_on_flight_end"
+      ],
+      "explosion_recipe": {
+        "added_effectiveness": 0.0,
+        "coefficient": 0.9,
+        "radius": 76.0
+      },
+      "modifiers": [],
+      "projectile_count": 0,
+      "tornado_recipe": {
+        "child": {
+          "added_effectiveness": 0.7,
+          "coefficient": 0.7,
+          "lifetime": 1.7,
+          "pierce": -1,
+          "radius": 4.5,
+          "range": 150.0,
+          "role": "child",
+          "speed": 260.0,
+          "split": false
+        },
+        "child_count": 3,
+        "explosion": {
+          "added_effectiveness": 0.0,
+          "coefficient": 0.9,
+          "radius": 76.0
+        },
+        "parent": {
+          "added_effectiveness": 1.0,
+          "coefficient": 1.0,
+          "lifetime": 0.9,
+          "pierce": -1,
+          "radius": 6.0,
+          "range": 150.0,
+          "role": "parent",
+          "speed": 420.0,
+          "split": true
+        },
+        "parent_count": 3,
+        "spread": 0.16
+      },
+      "weapon_profile": {
+        "base": {
+          "physical": 4.0
+        },
+        "base_id": "forgeblade",
+        "flat": {
+          "physical": 6.0
+        },
+        "increased": {
+          "physical": 0.3
+        },
+        "item_id": "gear_000001",
+        "sources": [
+          {
+            "affix_id": "whetstone_edge",
+            "stat": "weapon_added_physical",
+            "value": 6.0
+          },
+          {
+            "affix_id": "tempered_edge",
+            "stat": "weapon_physical_increased",
+            "value": 0.3
+          }
+        ],
+        "stage": "weapon_local"
+      },
+      "compiled_skill_id": "basic",
+      "compiled_packets": {
+        "projectile": {
+          "assembly": {
+            "added": {},
+            "added_effectiveness": 1.0,
+            "base_coefficient": 1.0,
+            "intrinsic": {
+              "physical": 18.0
+            },
+            "stage": "hit_base"
+          },
+          "base": {
+            "physical": 18.0
+          },
+          "role": "projectile",
+          "skill_id": "basic",
+          "tags": [
+            "hit",
+            "projectile",
+            "attack"
+          ]
+        },
+        "secondary": {
+          "assembly": {
+            "added": {},
+            "added_effectiveness": 0.0,
+            "base_coefficient": 0.9,
+            "intrinsic": {
+              "fire": 16.2
+            },
+            "stage": "hit_base"
+          },
+          "base": {
+            "fire": 16.2
+          },
+          "role": "secondary",
+          "skill_id": "basic",
+          "tags": [
+            "hit",
+            "area",
+            "secondary",
+            "explosion"
+          ]
+        }
+      },
+      "critical": {
+        "primary": {
+          "chance": 0.06999999999999999,
+          "multiplier": 1.65
+        },
+        "secondary": {
+          "chance": 0.06999999999999999,
+          "multiplier": 1.65
+        }
+      }
+    }
+  }
+}

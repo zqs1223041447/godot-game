@@ -1,0 +1,10 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ERROR: FAIL: Malformed blade source remains rejected
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tests/forgeblade_basic_rules_test.gd:45)
+       [1] _validation (res://tests/forgeblade_basic_rules_test.gd:143)
+       [2] _case (res://tests/forgeblade_basic_rules_test.gd:36)
+       [3] _run (res://tests/forgeblade_basic_rules_test.gd:26)
+Forgeblade basic rules: 4623 checks, 1 failures; sections {"complete_v055_bytes_and_inflight":4461,"frozen_provenance_and_detachment":24,"invalid_inputs_still_reject":65,"new_delivery_and_local_stage":59,"scopes_critical_and_leech":13}
