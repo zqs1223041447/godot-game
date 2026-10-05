@@ -1,0 +1,13 @@
+# Faster burning specialization
+
+Base: published v0.53 `e3a5f7559ecbcb2cb56a9c192d75899fdcf43b3a`. This checkpoint contains the parsed implementation; focused acceptance and packaging are pending. The independent Chinese-tree translation branch is not edited here.
+
+The exact source line is `Damaging Ailments deal damage X% faster`. Three standard nodes become complete:11364(5%),43684(5%),59766(15%). Same-family contributions add to `stats.damaging_ailments_faster`; all three giveF=0.25. Deadly Draw48823 still has unsupported bow DoT and remains partial. Wasting Affliction19686 is nonstandard and also remains partial. No mastery contains this line. Existing English source strings, IDs, source version3.29.1, topology and artwork remain intact. Source-execution/schema33 preserves all prior policy gates, validates and backs up original32 bytes, and changes only the version during migration.
+
+At initial cast, nonzeroF is frozen in `snapshot.burn_faster`. Existing v53 fire DoT contributions first add within their family asM. The authoritative operation order is `(resolved_pre_defense_fire * policy.rate_fraction) * (1 + M)`, skipping the zeroM multiply, then `* (1 + F)`, skipping the zeroF multiply. Duration is `policy.duration / (1 + F)` with exact old duration returned for zeroF. Policy dictionaries remain unchanged; neither support hit damage nor mana changes.
+
+`burn_profile.burn_faster` is the additive fraction (0.25, not1.25). Nonzero profiles expose `base_duration`; their existing `duration`, per-roleDPS and total are final values. Preview uses the same shared helpers as actual status creation. Existing FireDoT and new faster effects each apply only once. Only this game's current burning consumes the new source stat; no bleed/poison capability or shock change is implied.
+
+BurnRuntime retains its existing actual-DPS stronger/equal replacement rules. A shorter stronger burn replaces a weaker longer one; discarded weaker states do not resume. The origin stores the already-compressed absolute expiry. One-hop Ember inherits finalDPS and the remaining portion of that exact deadline, without recalculating faster, resetting duration or reapplying either family. Death, reward and event scheduling code is unchanged.
+
+For finite valid values, theoretical single-burn total is invariant under faster alone. Floating-point validation uses `abs(new_total-old_total) <= max(1e-9, 1e-12*abs(old_total))`; partitioned actual loss is tested at the same stated tolerance. ZeroF requires exact existing serialized results and RNG order. Invalid types, negative/nonfinite input, arithmetic overflow/underflow and unrepresentable duration are rejected through the shared rules/compiler/status admission contracts.

@@ -162,10 +162,14 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 		compiled_snapshot.burn_policy=Burn.PLAYER_POLICY.duplicate(true)
 		var profile:Dictionary=Burn.PLAYER_POLICY.duplicate(true)
 		profile.enabled=true;profile.stacking="strongest_refresh_equal";profile.roles={}
+		if compiled_snapshot.has("burn_faster"):
+			profile.burn_faster=compiled_snapshot.burn_faster;profile.base_duration=profile.duration
+			profile.duration=Burn.burn_duration(float(profile.base_duration),float(profile.burn_faster))
+			if not is_finite(profile.duration) or float(profile.duration)<=0.0:return _failure("加速燃烧时长超出有限范围")
 		for role:String in (["parent","child"] if skill_id=="tornado" else ["direct"]):
 			var resolved:Dictionary=Damage.resolve(packets[role],compiled_snapshot.modifiers)
 			var fire:float=float(resolved.components.get("fire",0.0))
-			var dps:float=Burn.raw_fire_dps(fire,float(profile.rate_fraction),float(compiled_snapshot.get("fire_dot_multiplier",0.0)))
+			var dps:float=Burn.raw_fire_dps(fire,float(profile.rate_fraction),float(compiled_snapshot.get("fire_dot_multiplier",0.0)),float(compiled_snapshot.get("burn_faster",0.0)))
 			if not is_finite(dps) or not is_finite(dps*float(profile.duration)):return _failure("点燃伤害超出有限数值范围")
 			profile.roles[role]={"fire_before_defense":fire,"dps":dps,"total":dps*float(profile.duration)}
 		if compiled_snapshot.has("fire_dot_multiplier"):profile.fire_dot_multiplier=compiled_snapshot.fire_dot_multiplier
@@ -175,10 +179,14 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 		compiled_snapshot.burn_proliferation=Proliferation.POLICY.duplicate(true)
 		var profile:Dictionary=Ember.POLICY.duplicate(true)
 		profile.enabled=true;profile.stacking="strongest_refresh_equal";profile.roles={}
+		if compiled_snapshot.has("burn_faster"):
+			profile.burn_faster=compiled_snapshot.burn_faster;profile.base_duration=profile.duration
+			profile.duration=Burn.burn_duration(float(profile.base_duration),float(profile.burn_faster))
+			if not is_finite(profile.duration) or float(profile.duration)<=0.0:return _failure("加速燃烧时长超出有限范围")
 		for role:String in (["parent","child"] if skill_id=="tornado" else ["direct"]):
 			var resolved:Dictionary=Damage.resolve(packets[role],compiled_snapshot.modifiers)
 			var fire:float=float(resolved.components.get("fire",0.0))
-			var dps:float=Burn.raw_fire_dps(fire,float(profile.rate_fraction),float(compiled_snapshot.get("fire_dot_multiplier",0.0)))
+			var dps:float=Burn.raw_fire_dps(fire,float(profile.rate_fraction),float(compiled_snapshot.get("fire_dot_multiplier",0.0)),float(compiled_snapshot.get("burn_faster",0.0)))
 			if not is_finite(dps) or not is_finite(dps*float(profile.duration)):return _failure("余烬扩散伤害超出有限数值范围")
 			profile.roles[role]={"fire_before_defense":fire,"dps":dps,"total":dps*float(profile.duration)}
 		profile.proliferation=Proliferation.POLICY.duplicate(true)

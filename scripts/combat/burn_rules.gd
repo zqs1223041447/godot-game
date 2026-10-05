@@ -16,7 +16,7 @@ const POLICY_KEYS: Array[String] = [
 ]
 
 
-static func from_fire_hit(fire_before_defense: Variant, policy: Variant, fire_dot_multiplier: Variant = 0.0) -> Dictionary:
+static func from_fire_hit(fire_before_defense: Variant, policy: Variant, fire_dot_multiplier: Variant = 0.0, faster: Variant = 0.0) -> Dictionary:
 	var reason: String = policy_error(policy)
 	if not reason.is_empty():
 		return _result(0.0, 0.0, reason)
@@ -24,10 +24,12 @@ static func from_fire_hit(fire_before_defense: Variant, policy: Variant, fire_do
 		return _result(0.0, 0.0, "Fire before defense must be a finite positive number")
 	if not _nonnegative_number(fire_dot_multiplier):
 		return _result(0.0, 0.0, "Fire DoT multiplier must be finite and nonnegative")
+	if not _nonnegative_number(faster):
+		return _result(0.0, 0.0, "Damaging ailments faster must be finite and nonnegative")
 	# Optional policy multipliers describe the upstream hit/cost only. Applying
 	# any of them here would charge the same hit modifier a second time.
-	var raw_dps: float = raw_fire_dps(float(fire_before_defense), float(policy.rate_fraction), float(fire_dot_multiplier))
-	var duration: float = float(policy.duration)
+	var raw_dps: float = raw_fire_dps(float(fire_before_defense), float(policy.rate_fraction), float(fire_dot_multiplier), float(faster))
+	var duration: float = burn_duration(float(policy.duration), float(faster))
 	reason = rate_duration_error(raw_dps, duration)
 	return _result(raw_dps, duration) if reason.is_empty() else _result(0.0, 0.0, reason)
 
@@ -68,21 +70,36 @@ static func _result(raw_dps: float, duration: float, reason: String = "") -> Dic
 ## hit/critical factors are already present in fire_before_defense. The runtime
 ## and compiler preview share this exact expression; zero skips multiplication
 ## so previously compiled values retain their original floating-point bytes.
-static func raw_fire_dps(fire_before_defense: float, rate_fraction: float, multiplier: float = 0.0) -> float:
+static func raw_fire_dps(fire_before_defense: float, rate_fraction: float, multiplier: float = 0.0, faster: float = 0.0) -> float:
 	var result: float = fire_before_defense * rate_fraction
-	return result if multiplier == 0.0 else result * (1.0 + multiplier)
+	if multiplier != 0.0: result *= 1.0 + multiplier
+	return result if faster == 0.0 else result * (1.0 + faster)
+
+
+## Faster damage compresses time while preserving the theoretical lifetime
+## amount. The absent/zero path retains the original duration's exact bytes.
+static func burn_duration(base_duration: float, faster: float = 0.0) -> float:
+	return base_duration if faster == 0.0 else base_duration / (1.0 + faster)
 
 
 static func multiplier_from_stats(stats: Dictionary) -> Dictionary:
+	var result: Dictionary = {}
 	var amount: Variant = stats.get("fire_dot_multiplier_add", 0.0)
-	if _nonnegative_number(amount) and float(amount) == 0.0: return {}
 	# Preserve invalid input for the compiler's rejection; do not coerce or hide it.
-	return {"fire_dot_multiplier": amount}
+	if not (_nonnegative_number(amount) and float(amount) == 0.0):
+		result["fire_dot_multiplier"] = amount
+	var faster: Variant = stats.get("damaging_ailments_faster", 0.0)
+	if not (_nonnegative_number(faster) and float(faster) == 0.0):
+		result["burn_faster"] = faster
+	return result
 
 
 static func snapshot_multiplier_error(snapshot: Dictionary) -> String:
-	if not snapshot.has("fire_dot_multiplier"): return ""
-	return "" if positive_number(snapshot.fire_dot_multiplier) else "Fire DoT snapshot multiplier must be finite and positive"
+	if snapshot.has("fire_dot_multiplier") and not positive_number(snapshot.fire_dot_multiplier):
+		return "Fire DoT snapshot multiplier must be finite and positive"
+	if snapshot.has("burn_faster") and not positive_number(snapshot.burn_faster):
+		return "Burn faster snapshot value must be finite and positive"
+	return ""
 
 
 static func _nonnegative_number(value: Variant) -> bool:

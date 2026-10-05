@@ -106,6 +106,11 @@ const FIRE_DOT_PATTERNS: Array[Dictionary] = [
 	{"expression":"^\\+([0-9]+(?:\\.[0-9]+)?)% to Fire Damage over Time Multiplier$","stat":"fire_dot_multiplier_add","mode":"flat","scale":0.01},
 ]
 
+# Schema33 only: unconditional damaging ailments faster; summed as a fraction.
+const FASTER_BURN_PATTERNS: Array[Dictionary] = [
+	{"expression":"^Damaging Ailments deal damage ([0-9]+(?:\\.[0-9]+)?)% faster$","stat":"damaging_ailments_faster","mode":"flat","scale":0.01},
+]
+
 const NEGATIVE_PATTERN: String = "^-([0-9]+(?:\\.[0-9]+)?)(?: to maximum (?:Life|Mana|Energy Shield)|% increased (?:Damage|Projectile Damage|Spell Damage|Fire Damage|Cold Damage|Lightning Damage|Elemental Damage|Area Damage|Attack Speed|Movement Speed|Mana Regeneration Rate|maximum Life|maximum Mana|maximum Energy Shield))$"
 const NO_EXACT_MATCH_REASON: String = "整行不匹配任何受支持的完整格式；未知 stat、附加词语、条件、武器限定、DoT、Minion 或标点变体均拒绝"
 static var _regex_cache: Dictionary = {}
@@ -119,7 +124,7 @@ static func _expression(pattern: String) -> RegEx:
 	return _regex_cache[pattern]
 
 
-static func parse_line(raw_line: Variant, allow_spatial:bool=true,allow_recharge:bool=true,allow_resource:bool=true,allow_flask:bool=true,allow_critical:bool=true,allow_leech:bool=true,allow_fire_dot:bool=true) -> Dictionary:
+static func parse_line(raw_line: Variant, allow_spatial:bool=true,allow_recharge:bool=true,allow_resource:bool=true,allow_flask:bool=true,allow_critical:bool=true,allow_leech:bool=true,allow_fire_dot:bool=true,allow_faster_burn:bool=true) -> Dictionary:
 	if not raw_line is String:
 		return _unsupported("输入必须是单行英文字符串")
 	var line: String = raw_line
@@ -151,6 +156,7 @@ static func parse_line(raw_line: Variant, allow_spatial:bool=true,allow_recharge
 	if allow_spatial and allow_recharge and allow_resource and allow_flask and allow_critical:patterns=patterns+CRITICAL_PATTERNS
 	if allow_spatial and allow_recharge and allow_resource and allow_flask and allow_critical and allow_leech:patterns=patterns+LEECH_PATTERNS
 	if allow_spatial and allow_recharge and allow_resource and allow_flask and allow_critical and allow_leech and allow_fire_dot:patterns=patterns+FIRE_DOT_PATTERNS
+	if allow_spatial and allow_recharge and allow_resource and allow_flask and allow_critical and allow_leech and allow_fire_dot and allow_faster_burn:patterns=patterns+FASTER_BURN_PATTERNS
 	for definition: Dictionary in patterns:
 		var expression := _expression(str(definition.expression))
 		if expression == null:

@@ -1336,7 +1336,7 @@ func _apply_damage_packet(enemy: Dictionary, packet: Dictionary, snapshot: Dicti
 	if float(enemy.health)>0.0 and snapshot.has("burn_policy") and packet.get("role","") in ["direct","parent","child"] and packet.skill_id in ["meteor","tornado"]:
 		var fire:float=float(settlement.raw_components.get("fire",0.0))
 		if fire>0.0 and float(settlement.components.get("fire",0.0))>0.0:
-			var burn:Dictionary=BurnRules.from_fire_hit(fire,snapshot.burn_policy,snapshot.get("fire_dot_multiplier",0.0))
+			var burn:Dictionary=BurnRules.from_fire_hit(fire,snapshot.burn_policy,snapshot.get("fire_dot_multiplier",0.0),snapshot.get("burn_faster",0.0))
 			if burn.ok:
 				var burn_origin:Dictionary={"skill_id":str(packet.skill_id),"cast_id":int(provenance.get("cast_id",0)),"projectile_id":int(provenance.get("projectile_id",0)),"phase":str(provenance.get("phase","direct"))}
 				if snapshot.has("burn_proliferation"):

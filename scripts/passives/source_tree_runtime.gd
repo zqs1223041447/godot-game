@@ -16,7 +16,8 @@ const FLASK_SAVE_VERSION:=23
 const CRITICAL_SAVE_VERSION:=24
 const LEECH_SAVE_VERSION:=25
 const FIRE_DOT_SAVE_VERSION:=32
-const CURRENT_SAVE_VERSION:=FIRE_DOT_SAVE_VERSION
+const FASTER_BURN_SAVE_VERSION:=33
+const CURRENT_SAVE_VERSION:=FASTER_BURN_SAVE_VERSION
 static var _contexts: Dictionary = {}
 static var _line_cache: Dictionary = {}
 static var _node_effect_cache: Dictionary = {}
@@ -31,7 +32,8 @@ static func _execution_policy(version:int)->int:
 	if version<FLASK_SAVE_VERSION:return RESOURCE_SAVE_VERSION
 	if version<CRITICAL_SAVE_VERSION:return FLASK_SAVE_VERSION
 	if version<LEECH_SAVE_VERSION:return CRITICAL_SAVE_VERSION
-	return LEECH_SAVE_VERSION if version<FIRE_DOT_SAVE_VERSION else FIRE_DOT_SAVE_VERSION
+	if version<FIRE_DOT_SAVE_VERSION:return LEECH_SAVE_VERSION
+	return FIRE_DOT_SAVE_VERSION if version<FASTER_BURN_SAVE_VERSION else FASTER_BURN_SAVE_VERSION
 
 
 static func _context(class_id: int, budget: int) -> Dictionary:
@@ -120,7 +122,7 @@ static func lines_for(id: String, mastery_effect: int = 0) -> Array:
 static func line_effect(line: String, save_version:int=CURRENT_SAVE_VERSION) -> Dictionary:
 	var policy:int=_execution_policy(save_version)
 	var key:="%d:%s"%[policy,line]
-	if not _line_cache.has(key): _line_cache[key] = Patterns.parse_line(line,policy>=SPATIAL_SAVE_VERSION,policy>=RECHARGE_SAVE_VERSION,policy>=RESOURCE_SAVE_VERSION,policy>=FLASK_SAVE_VERSION,policy>=CRITICAL_SAVE_VERSION,policy>=LEECH_SAVE_VERSION,policy>=FIRE_DOT_SAVE_VERSION)
+	if not _line_cache.has(key): _line_cache[key] = Patterns.parse_line(line,policy>=SPATIAL_SAVE_VERSION,policy>=RECHARGE_SAVE_VERSION,policy>=RESOURCE_SAVE_VERSION,policy>=FLASK_SAVE_VERSION,policy>=CRITICAL_SAVE_VERSION,policy>=LEECH_SAVE_VERSION,policy>=FIRE_DOT_SAVE_VERSION,policy>=FASTER_BURN_SAVE_VERSION)
 	return _line_cache[key].duplicate(true)
 
 
