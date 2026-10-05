@@ -26,6 +26,8 @@ const Damage = preload("res://scripts/combat/damage_resolver.gd")
 const Defense = preload("res://scripts/mechanics/defense_rules.gd")
 const CriticalRuntime = preload("res://scripts/combat/critical_strike_runtime.gd")
 var critical_runtime = CriticalRuntime.new()
+const FeedbackRuntime = preload("res://scripts/combat/combat_feedback_runtime.gd")
+var feedback_runtime = FeedbackRuntime.new()
 const BurnRuntime=preload("res://scripts/combat/burn_runtime.gd")
 const BurnRules=preload("res://scripts/combat/burn_rules.gd")
 var burn_runtime=BurnRuntime.new()
@@ -360,6 +362,7 @@ func restart_run(camp_plan: Dictionary = {}) -> void:
 	_simulation_accumulator = 0.0
 	particles.clear()
 	floating_text.clear()
+	feedback_runtime.reset()
 	pickups.clear()
 	rings.clear()
 	visual_cues.reset()
@@ -500,6 +503,9 @@ func _process(delta: float) -> void:
 
 
 func tick(delta: float) -> void:
+	# Display time continues after map completion; menus pause the tick entry.
+	var feedback_step: Dictionary = feedback_runtime.advance(delta)
+	assert(feedback_step.ok, "Validated feedback clock: " + str(feedback_step.reason))
 	_burn_step_active=true;_burn_step_start=elapsed;_burn_immunity_until=elapsed+invulnerable
 	_begin_progress_transaction()
 	_tick(delta)
@@ -1264,7 +1270,7 @@ func _apply_damage_packet(enemy: Dictionary, packet: Dictionary, snapshot: Dicti
 	damage_trace.append(record)
 	if damage_trace.size() > 32:
 		damage_trace.pop_front()
-	_apply_enemy_settlement(enemy, settlement, color, slow)
+	_apply_enemy_settlement(enemy, settlement, color, slow, bool(critical.get("critical", false)))
 	if float(enemy.health)>0.0 and snapshot.has("burn_policy") and packet.get("role","") in ["direct","parent","child"] and packet.skill_id in ["meteor","tornado"]:
 		var fire:float=float(settlement.raw_components.get("fire",0.0))
 		if fire>0.0 and float(settlement.components.get("fire",0.0))>0.0:
@@ -1323,14 +1329,17 @@ func _damage_enemy(enemy: Dictionary, amount: float, color: Color, slow: float =
 		_apply_enemy_settlement(enemy, settlement, color, slow)
 
 
-func _apply_enemy_settlement(enemy: Dictionary, settlement: Dictionary, color: Color, slow: float = 0.0) -> void:
+func _apply_enemy_settlement(enemy: Dictionary, settlement: Dictionary, color: Color, slow: float = 0.0, critical: bool = false) -> void:
 	var amount: float = float(settlement.damage_total)
 	if not _apply_enemy_resources(enemy,settlement):return
 	var absorbed: float = float(settlement.shield_spent)
 	visual_cues.emit_cue("impact", Vector2(enemy.pos), {"radius": clampf(7.0 + sqrt(amount) * 0.65, 8.0, 24.0), "color": color, "shielded": absorbed >= amount, "target_id": int(enemy.id)})
 	enemy.flash = 0.12
 	enemy.slow = maxf(float(enemy.slow), slow)
-	_add_text(Vector2(enemy.pos) + Vector2(rng.randf_range(-8, 8), -18), str(int(amount)), color)
+	# Preserve the original draw at exactly its old event position, even when
+	# number display is disabled or a presentation queue is full.
+	var _legacy_text_position := Vector2(enemy.pos) + Vector2(rng.randf_range(-8, 8), -18)
+	_record_damage_feedback("monster", int(enemy.id), "critical" if critical else "hit", settlement, Vector2(enemy.pos))
 	for i: int in range(4):
 		_add_particle(Vector2(enemy.pos), Vector2.RIGHT.rotated(rng.randf() * TAU) * rng.randf_range(40, 130), color, 2.3, 0.3)
 	_finish_enemy_death(enemy)
@@ -1348,6 +1357,7 @@ func _apply_enemy_resources(enemy:Dictionary,settlement:Dictionary)->bool:
 
 func _finish_enemy_death(enemy:Dictionary,legacy_particles:bool=true)->void:
 	if float(enemy.health)>0.0:return
+	feedback_runtime.flush_target("monster", int(enemy.id))
 	if not burn_runtime.is_empty():burn_runtime.remove("monster",int(enemy.id))
 	telegraphs.cancel(int(enemy.id))
 	var death: Dictionary = monster_runtime.process_death(enemy)
@@ -1505,13 +1515,14 @@ func hit_player_components(components: Variant, source_id: int = 0, delivery_tag
 	_burn_immunity_until=(_burn_incoming_time if _burn_incoming_time>=0.0 else elapsed)+0.32
 	hurt_flash = 0.16
 	screen_shake = 2.5
-	_add_text(player_pos + Vector2(0, -30), "−%d" % int(amount), Color("94dafa") if absorbed >= amount else Color("fa8c83"))
+	_record_damage_feedback("player", 0, "hit", settlement, player_pos)
 	_finish_player_death()
 	return true
 
 
 func _finish_player_death()->void:
 	if health>0.0:return
+	feedback_runtime.flush_target("player", 0)
 	burn_runtime.reset()
 	flask_runtime.clear_effects()
 	leech_runtime.clear()
@@ -1568,6 +1579,7 @@ func _settle_burn_segments(segments:Array,targets:Dictionary={})->void:
 			if not settlement.ok:continue
 			shield=settlement.remaining_shield;health=settlement.remaining_health
 			if float(settlement.damage_total)>0.0:damage_delay=float(_stats.get("shield_recharge_delay",Defense.RECHARGE_BASE_DELAY))
+			_record_damage_feedback("player", 0, "burn", settlement, player_pos)
 			_finish_player_death()
 		else:
 			var target:Dictionary=targets.get(int(segment.target_id),{})
@@ -1578,11 +1590,23 @@ func _settle_burn_segments(segments:Array,targets:Dictionary={})->void:
 				burn_runtime.remove("monster",int(segment.target_id));continue
 			settlement=Defense.incoming_burn(raw,target.get("resistances",{}).get("fire",0.0),target.get("shield",0.0),target.health,"monster")
 			if not settlement.ok:continue
-			if _apply_enemy_resources(target,settlement):_finish_enemy_death(target,false)
+			if _apply_enemy_resources(target,settlement):
+				_record_damage_feedback("monster", int(target.id), "burn", settlement, Vector2(target.pos))
+				_finish_enemy_death(target,false)
 		if settlement.is_empty():continue
 		var record:Dictionary=segment.duplicate(true);record.settlement=settlement;record.effective_raw_amount=raw
 		burn_trace.append(record)
 		if burn_trace.size()>32:burn_trace.pop_front()
+
+
+func _record_damage_feedback(target_kind: String, target_id: int, kind: String, settlement: Dictionary, position: Vector2) -> void:
+	var result: Dictionary = feedback_runtime.record({"target_kind":target_kind, "target_id":target_id, "kind":kind,
+		"shield_spent":float(settlement.shield_spent), "health_lost":float(settlement.health_lost), "position":position})
+	assert(result.ok, "Validated settled damage feedback: " + str(result.reason))
+
+
+func damage_feedback() -> Array[Dictionary]:
+	return feedback_runtime.entries()
 
 
 func burn_statuses()->Array[Dictionary]:
