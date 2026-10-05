@@ -103,9 +103,12 @@ func run() -> void:
 			output = user_args[index + 1]
 	var command: PackedStringArray = OS.get_cmdline_args()
 	var pack_index: int = command.find("--main-pack")
+	# Godot consumes --main-pack before exposing OS.get_cmdline_args(). The
+	# runner supplies its exact pack path; an empty res root confirms pack mode.
+	var pack_path: String = command[pack_index + 1] if pack_index >= 0 and pack_index + 1 < command.size() else OS.get_environment("V047_MAIN_PACK")
 	var isolated: String = OS.get_environment("XDG_DATA_HOME").simplify_path()
-	if output.is_empty() or pack_index < 0 or pack_index + 1 >= command.size() or not isolated.begins_with("/tmp/godot-m1-"):
-		push_error("Packed v47 probe requires --main-pack, V047_PROBE_OUTPUT (or -- --output-dir PATH), and isolated /tmp/godot-m1-* XDG_DATA_HOME")
+	if output.is_empty() or pack_path.is_empty() or not FileAccess.file_exists(pack_path) or not ProjectSettings.globalize_path("res://").is_empty() or not isolated.begins_with("/tmp/godot-m1-"):
+		push_error("Packed v47 probe requires a loaded --main-pack, V047_MAIN_PACK path, V047_PROBE_OUTPUT, and isolated /tmp/godot-m1-* XDG_DATA_HOME")
 		quit(78); return
 	if DirAccess.make_dir_recursive_absolute(output) != OK:
 		push_error("Packed v47 probe cannot create output directory")
@@ -114,7 +117,8 @@ func run() -> void:
 	# The runner must also reject ERROR lines and a nonzero process exit.
 	if not write_report(): quit(1); return
 	report.command_line = Array(command)
-	report.main_pack = command[pack_index + 1]
+	report.main_pack = pack_path
+	report.main_pack_sha256 = sha256(FileAccess.get_file_as_bytes(pack_path))
 	report.engine = Engine.get_version_info().string
 	report.platform = OS.get_name()
 	report.probe_resource = get_script().resource_path
