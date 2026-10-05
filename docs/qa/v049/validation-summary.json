@@ -119,6 +119,10 @@
     "docs/qa/v049-reference/export.log": {
       "bytes": 127,
       "sha256": "51e3b0bc619efba5c710e1863eedea0402e6700d8c973b9ecb758418906e7297"
+    },
+    "docs/qa/v049/probe-parse.log": {
+      "bytes": 73,
+      "sha256": "a9912b85473f126d3f4f63ec824170c828df3473a292f866dde86cafda5b66da"
     }
   },
   "limits": [
@@ -126,5 +130,11 @@
     "No Windows hardware FPS claim",
     "No 600-second or historical full-suite run"
   ],
-  "initial_failure": "Four transaction test expectations corrected to distinguish insufficient funds from stale revision; no production change"
+  "initial_failure": "Four transaction test expectations corrected to distinguish insufficient funds from stale revision; no production change",
+  "packed_probe_preflight": {
+    "script": "tools/v049_export_probe.gd",
+    "parse_exit_code": 0,
+    "errors": 0,
+    "runtime_not_yet_run": true
+  }
 }
