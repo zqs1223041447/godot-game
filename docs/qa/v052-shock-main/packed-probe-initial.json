@@ -1,0 +1,99 @@
+{
+	"checks": 21,
+	"failures": 1,
+	"first_total": 56.160000000000004,
+	"font_sha256": "754355101c307b98f7e1bf5af09110dbd6c664e80149cce2c353bd99013842e9",
+	"ok": false,
+	"pck_sha256": "4a024ceea94b1b8231feb4eeb50b0410cf3ec888452988c0ceb6e0d30be55897",
+	"remaining_shards": 0,
+	"results": [
+		{
+			"label": "Packed version is v0.52.0",
+			"ok": true
+		},
+		{
+			"label": "Existing user directory and 240 slots remain",
+			"ok": true
+		},
+		{
+			"label": "Actual old30 load migrates with original raw-byte backup",
+			"ok": true
+		},
+		{
+			"label": "Migration changes only schema version",
+			"ok": true
+		},
+		{
+			"label": "Packed font is the verified frozen subset",
+			"ok": true
+		},
+		{
+			"label": "Shock text has raw-font glyph coverage without system fallback",
+			"ok": true
+		},
+		{
+			"label": "New original transparent icon imports in the PCK",
+			"ok": false
+		},
+		{
+			"label": "Formal merchant dynamically offers Shock at four shards",
+			"ok": true
+		},
+		{
+			"label": "Isolated fixture uses real physical shard transaction",
+			"ok": true
+		},
+		{
+			"label": "Authoritative purchase quote",
+			"ok": true
+		},
+		{
+			"label": "Actual purchase deducts four and creates UID",
+			"ok": true
+		},
+		{
+			"label": "Purchase receipt cannot be replayed",
+			"ok": true
+		},
+		{
+			"label": "Bought same UID equips into actual nova group",
+			"ok": true
+		},
+		{
+			"label": "Actual compiler freezes the player policy",
+			"ok": true
+		},
+		{
+			"label": "Packed skill preview reads final shock profile",
+			"ok": true
+		},
+		{
+			"label": "Actual arena practice entry starts combat",
+			"ok": true
+		},
+		{
+			"label": "Actual equipped cast pays compiled mana once",
+			"ok": true
+		},
+		{
+			"label": "Applying hit is ordinary; survivor then receives two-second shock",
+			"ok": true
+		},
+		{
+			"label": "Subsequent same-instant hit uses exact 15 percent increase",
+			"ok": true
+		},
+		{
+			"label": "Expiry is transient and changes no save, UID, inventory or RNG",
+			"ok": true
+		},
+		{
+			"label": "Equipped schema31 reload preserves exact compiled consumer",
+			"ok": true
+		}
+	],
+	"runtime": "same-PCK Linux headless; not Windows hardware acceptance",
+	"schema": 31,
+	"second_total": 64.584,
+	"source_commit": "74e075986e66dbf74a82e6d5e18367e9421c2f7e"
+}

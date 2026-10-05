@@ -32,7 +32,7 @@ func run()->void:
 	for i:int in "感电追溯命中持续伤害刷新".length():glyphs=glyphs and font.has_char("感电追溯命中持续伤害刷新".unicode_at(i))
 	check(glyphs,"Shock text has raw-font glyph coverage without system fallback")
 	var texture:=load("res://assets/ui/grimoire/shock.png") as Texture2D
-	check(texture!=null and texture.get_width()==512,"New original transparent icon imports in the PCK")
+	check(texture!=null and texture.get_width()==1254 and texture.get_height()==1254,"New original transparent icon imports in the PCK")
 	var offer:Dictionary={}
 	for row:Dictionary in arena.normal_gem_offers():
 		if row.definition_id=="support:shock":offer=row
