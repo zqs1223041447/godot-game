@@ -1,0 +1,43 @@
+{
+  "python-build": {
+    "command": [
+      "python3",
+      "tools/build_reference.py"
+    ],
+    "exit_code": 0,
+    "seconds": 0.537,
+    "error_lines": []
+  },
+  "python-check": {
+    "command": [
+      "python3",
+      "tools/build_reference.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 0.548,
+    "error_lines": []
+  },
+  "focused-reference": {
+    "command": [
+      "python3",
+      "tests/passive_localization_reference_test.py"
+    ],
+    "exit_code": 1,
+    "seconds": 1.471,
+    "error_lines": [
+      "Traceback (most recent call last):",
+      "AssertionError: Unrelated visible card changed: supports-breadth"
+    ]
+  },
+  "javascript-syntax": {
+    "command": [
+      "node",
+      "--check",
+      "docs/reference/reference.js"
+    ],
+    "exit_code": 0,
+    "seconds": 0.056,
+    "error_lines": []
+  }
+}

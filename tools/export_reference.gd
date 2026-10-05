@@ -27,6 +27,7 @@ const EncounterCatalog = preload("res://scripts/encounters/encounter_catalog.gd"
 const EncounterCompiler = preload("res://scripts/encounters/encounter_compiler.gd")
 const Canonical = preload("res://scripts/canonical_game_state.gd")
 const SourceTree = preload("res://scripts/passives/source_tree_runtime.gd")
+const SourceLocalization = preload("res://scripts/passives/source_tree_localization.gd")
 const GemCatalogData = preload("res://scripts/items/gem_catalog.gd")
 const EquipmentSlotsData = preload("res://scripts/items/equipment_slots.gd")
 const Flasks = preload("res://scripts/items/flask_catalog.gd")
@@ -122,6 +123,7 @@ static func collect() -> Dictionary:
 	result["melee_basic"] = melee_basic_examples(result.forgeblade)
 	result["normal_gem_trading"]={"offers":Canonical.GemTrade.offers(),"recycle_credit":Canonical.GemTrade.RECYCLE_CREDIT,"currency":Canonical.GemTrade.MATERIAL_ID,"location":"normal_town","level":1,"quality":0,"recycle_location":"bag","schema":Canonical.Rules.VERSION,"test_supply_separate":true,"pricing":"初版可调整预算；每次无词缀地图净得4碎片"}
 	result["source_tree"] = source_tree_reference()
+	result["source_tree_localization"] = source_tree_localization_reference(result.source_tree)
 	result["source_spatial"] = source_spatial_examples()
 	result["source_recharge"] = source_recharge_examples()
 	result["source_mana_cost"] = source_mana_cost_examples()
@@ -402,6 +404,34 @@ static func source_tree_reference()->Dictionary:
 			"partition":str(node.source.get("ascendancyName","expansion" if node.source.has("expansionJewel") else "standard"))}
 	return {"source_version":"3.29.1","source_commit":"8bd138b32ea2631455cac5935bfab089f826094f","source_sha256":SourceTree.Data.SOURCE_SHA256,
 		"source_url":"https://github.com/grindinggear/skilltree-export/tree/8bd138b32ea2631455cac5935bfab089f826094f","nodes":nodes,"edges":edges,"starts":SourceTree.Data.class_starts(),"points":SourceTree.Data.source_points()}
+
+
+## Display-only export. English source records and execution stay authoritative above.
+## The shared Godot localization adapter owns translations and per-line support status.
+static func source_tree_localization_reference(source: Dictionary) -> Dictionary:
+	assert(SourceLocalization.ready(), "Reference requires the pinned Chinese passive mapping")
+	var nodes: Dictionary = {}
+	var source_lines: Dictionary = {}
+	var partitions: Dictionary = {}
+	for id: String in source.nodes:
+		var node: Dictionary = source.nodes[id]
+		var choices: Dictionary = {}
+		var raw_lines: Array = node.stats.duplicate()
+		for choice: Dictionary in node.mastery_choices:
+			choices[str(int(choice.effect))] = SourceLocalization.display_lines(choice.stats)
+			raw_lines.append_array(choice.stats)
+		for raw_line: String in raw_lines:
+			if not source_lines.has(raw_line):
+				source_lines[raw_line] = {"text": SourceLocalization.display_lines([raw_line]),
+					"status": SourceLocalization.line_status(raw_line)}
+		var partition_label: String = "标准主树" if node.partition == "standard" else "扩展珠宝分区 · 仅浏览" if node.partition == "expansion" else SourceLocalization.partition_label(node.partition)
+		partitions[node.partition] = partition_label
+		nodes[id] = {"name": SourceLocalization.node_name(id),
+			"stats": SourceLocalization.display_lines(node.stats),
+			"partition": partition_label, "mastery_choices": choices}
+	return {"locale": "zh-CN", "source_sha256": SourceTree.Data.SOURCE_SHA256,
+		"nodes": nodes, "lines": source_lines, "partitions": partitions,
+		"not_implemented_suffix": SourceLocalization.NOT_IMPLEMENTED}
 
 
 ## Pure example plans: no model-issued handles, userdata reads or save writes.

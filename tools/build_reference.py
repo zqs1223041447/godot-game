@@ -244,9 +244,13 @@ def melee_basic_rule(data, link, facts, details):
 def build(data, art):
     records = []
     by_id = {}
+    localization = data['source_tree_localization']
+    localized_nodes = localization['nodes']
+    def source_lines(raw_lines):
+        return '\n'.join(localization['lines'][line]['text'] for line in raw_lines)
     art_by_id = {(('fixed_items' if x.get('entry_type') == 'fixed_item' else x['category']),x['id']): x for x in art.get('entries',[])}
     def link(cat,key,label=None):
-        label = label or (RULE_TITLES.get(key,key) if cat == 'rules' else data.get('source_tree',{}).get('nodes',{}).get(key,{}).get('name',key) if cat=='source_passives' else data.get(cat,{}).get(key,{}).get('name',key))
+        label = label or (RULE_TITLES.get(key,key) if cat == 'rules' else localized_nodes[key]['name'] if cat=='source_passives' else data.get(cat,{}).get(key,{}).get('name',key))
         return f'<a href="#{anchor(cat,key)}">{esc(label)}</a>'
     def equipped_links(cfg):
         instances=cfg.get('equipment_instances',{})
@@ -255,7 +259,7 @@ def build(data, art):
     def details(title,body): return f'<details><summary>{esc(title)}</summary><div class="detail-body">{body}</div></details>'
     def facts(items): return '<dl class="facts">'+''.join(f'<div><dt>{esc(k)}</dt><dd>{v}</dd></div>' for k,v in items)+'</dl>'
     def tags(values): return '<div class="tags">'+''.join(f'<span>{esc(x)}</span>' for x in values)+'</div>'
-    def add(cat,key,name,summary,body='',facet='',status='implemented',meta='',related=''):
+    def add(cat,key,name,summary,body='',facet='',status='implemented',meta='',related='',search_aliases=''):
         aid = anchor(cat,key)
         img = art_by_id.get((cat,key))
         image = f'<img class="emblem" src="art/{esc(img["file"])}" width="64" height="64" alt="" loading="lazy">' if img else '<span class="fallback-emblem" aria-hidden="true">✧</span>'
@@ -273,6 +277,7 @@ def build(data, art):
         inner += f'<p class="summary">{lines(summary)}</p>{body}'
         if related: inner += f'<div class="related"><span>关联条目</span> {related}</div>'
         searchable = ' '.join([name,key,summary,html.unescape(__import__('re').sub('<[^>]+>',' ',body)),facet])
+        if search_aliases: searchable += ' ' + search_aliases
         record = {'id':aid,'cat':cat,'facet':facet,'status':status,'search':searchable.casefold()}
         records.append(record); by_id[aid] = record
         return f'<article class="entry{" defense-entry" if cat in ["defenses", "weapon_stages"] else ""}" id="{aid}" data-category="{cat}" tabindex="-1">{inner}</article>'
@@ -361,18 +366,20 @@ def build(data, art):
         body=details('连接与机制',facts([('相邻节点',links('passives',p['neighbors'])),('共用机制',links('mechanisms',p['mechanism_ids'])),('星图坐标',esc(', '.join(number(x) for x in p['position'])))]))
         cards.append(add('passives',key,p['name'],'历史181节点研究与怪物机制参考，已退出当前角色分配。\n'+p['description'],body,TYPES[p['type']],status='research',meta=tags([TYPES[p['type']],sector]),related=f'<a href="#tree" data-tree-node="{esc(key)}">旧图定位</a> · '+link('rules','allocation')))
     for key,p in data.get('source_tree',{}).get('nodes',{}).items():
+        localized=localized_nodes[key]
         effect=p['execution']; allowed=p['standard_graph'] and not p['source_proxy'] and not p['blighted_only']
         selectable=allowed and effect['status']=='full' and p['type']!='mastery'
         state='完整效果已接入；仍需合法连接、点数和位置资格' if selectable else '保留源数据；未完整执行的节点不可分配'
         if p['type']=='mastery': state='精通按所选效果单独验证；同组普通连通显著天赋及1点必需'
         if p['type'] in ['start','socket'] and selectable: state='结构节点规则已接入，不算属性效果覆盖'
-        body=facts([('源版本','3.29.1'),('分区',esc(p['partition'])),('状态',esc(state)),('源坐标',esc(', '.join(number(x) for x in p['position'])) if p['has_position'] else '源记录没有坐标，不虚构布局')])
-        if effect['unsupported']:body+=details('未实现的源效果 · 整节点锁定','<p>'+lines('\n'.join(effect['unsupported']))+'</p>')
+        body=facts([('源版本','3.29.1'),('分区',esc(localized['partition'])),('状态',esc(state)),('源坐标',esc(', '.join(number(x) for x in p['position'])) if p['has_position'] else '源记录没有坐标，不虚构布局')])
+        if effect['unsupported']:body+=details('未实现的源效果 · 整节点锁定','<p>'+lines(source_lines(effect['unsupported']))+'</p>')
         for choice in p['mastery_choices']:
             label='已执行' if allowed and choice['execution']['status']=='full' else '未完整执行 · 不可选择'
-            body+=details(f'精通 {choice["effect"]} · {label}','<p>'+lines('\n'.join(choice['stats']))+'</p>')
+            body+=details(f'精通 {choice["effect"]} · {label}','<p>'+lines(localized['mastery_choices'][str(choice['effect'])])+'</p>')
         if p['neighbors']:body+=details('原始标准邻接',links('source_passives',p['neighbors']))
-        cards.append(add('source_passives',key,p['name'],'\n'.join(p['stats']) or state,body,TYPES[p['type']],status='implemented' if selectable else 'research',related=link('rules','source_tree')+(' · '+link('rules','source_fire_dot') if key in data.get('source_fire_dot',{}).get('nodes',{}) else '')+(' · '+link('rules','source_faster_burn') if key in data.get('source_faster_burn',{}).get('nodes',{}) or key in data.get('source_faster_burn',{}).get('blocked_matching_nodes',{}) else '')))
+        aliases=' '.join([p['name'],p['partition'],*p['stats'],*(line for choice in p['mastery_choices'] for line in choice['stats'])])
+        cards.append(add('source_passives',key,localized['name'],localized['stats'] or state,body,TYPES[p['type']],status='implemented' if selectable else 'research',related=link('rules','source_tree')+(' · '+link('rules','source_fire_dot') if key in data.get('source_fire_dot',{}).get('nodes',{}) else '')+(' · '+link('rules','source_faster_burn') if key in data.get('source_faster_burn',{}).get('nodes',{}) or key in data.get('source_faster_burn',{}).get('blocked_matching_nodes',{}) else ''),search_aliases=aliases))
     for key,m in data['mechanisms'].items():
         player_nodes=[k for k,v in data['passives'].items() if key in v['mechanism_ids']]
         monsters=[k for k,v in data['monsters'].items() if key in v['mechanisms']]
@@ -677,7 +684,7 @@ def build(data, art):
         body='<p>以下为schema32引入的火焰持续伤害加成及历史覆盖证据；schema33新增的压缩时长规则见'+link('rules','source_faster_burn')+'。</p>'+''.join('<p>'+esc(fire[key])+'。</p>' for key in ['formula','units','snapshot_rule','preview_rule','scope','transfer_rule'])
         node_rows=[]
         for node_id,node in fire['nodes'].items():
-            node_rows.append('<tr><th>'+link('source_passives',node_id,node['name']+' · '+node_id)+'</th><td>'+fire_value('node-'+node_id,node['fraction'],True)+'</td><td>'+lines('\n'.join(node['source_lines']))+'</td><td>全部效果已执行；schema31锁定</td></tr>')
+            node_rows.append('<tr><th>'+link('source_passives',node_id,localized_nodes[node_id]['name']+' · '+node_id)+'</th><td>'+fire_value('node-'+node_id,node['fraction'],True)+'</td><td>'+lines(source_lines(node['source_lines']))+'</td><td>全部效果已执行；schema31锁定</td></tr>')
         body+='<h3>8个完整源节点</h3><div class="table-scroll"><table><thead><tr><th>源节点</th><th>火焰持续伤害加成</th><th>完整源词句</th><th>执行门槛</th></tr></thead><tbody>'+''.join(node_rows)+'</tbody></table></div>'
         example_rows=[]
         for index,example in enumerate(fire['examples']):
@@ -697,7 +704,7 @@ def build(data, art):
             rows=''.join('<tr><th>'+link('source_passives',node_id)+'</th><td>'+str(len(path)-1)+'</td><td>'+ ' → '.join(link('source_passives',n,n) for n in path)+'</td></tr>' for node_id,path in entry['paths_to_new_nodes'].items())
             paths+=details('职业'+str(entry['class_id'])+' · 八节点完整可分配路径','<p>非起点普通节点可达数 '+str(entry['old_reachable_count'])+' → '+str(entry['new_reachable_count'])+'；每条路线均通过当前完整构筑验证，旧schema31拒绝。</p><div class="table-scroll"><table><thead><tr><th>目标</th><th>点数</th><th>路径ID（含免费起点）</th></tr></thead><tbody>'+rows+'</tbody></table></div>')
         body+='<p>'+esc(fire['coverage_note'])+'。'+esc(fire['complete_gate'])+'。</p>'+paths
-        body+='<p>边界核对：'+link('source_passives','12738','Elementalist升华记录12738')+'的词句可完整解析，但不在标准可分配图，升华点数来源仍未接入。火焰精通36313的加成词句可解析，但其“50% increased Ignite Duration on you”未实现，全部8处入口仍按完整效果门槛锁定；这两类记录均未新增可分配机制。</p>'
+        body+='<p>边界核对：'+link('source_passives','12738',localization['partitions']['Elementalist']+'升华记录12738')+'的词句可完整解析，但不在标准可分配图，升华点数来源仍未接入。火焰精通36313的加成词句可解析，但其“'+esc(source_lines(['50% increased Ignite Duration on you']))+'”未实现，全部8处入口仍按完整效果门槛锁定；这两类记录均未新增可分配机制。</p>'
         transfer=fire['transfer_example'];source=transfer['source'];recipient=transfer['recipient']
         body+='<h3>余烬只继承一次</h3>'+facts([('施放加成',fire_value('transfer-fraction',transfer['fraction'],True)),('已增强的来源每秒火伤',fire_value('transfer-source-dps',source['raw_dps'])),('接收者每秒火伤',fire_value('transfer-recipient-dps',recipient['raw_dps'])),('开始 / 传播时刻',fire_value('transfer-started-at',transfer['started_at'])+' / '+fire_value('transfer-at',transfer['transferred_at'])),('共同绝对截止时间',fire_value('transfer-expiry',source['provenance']['ember_expiry'])),('接收者剩余秒数',fire_value('transfer-duration',transfer['transfer']['burn']['duration']))])
         migration=fire['migration_example']
@@ -712,8 +719,8 @@ def build(data, art):
         body=''.join('<p>'+esc(faster[key])+'。</p>' for key in ['formula','units','total_rule','snapshot_rule','preview_rule','zero_rule','scope','transfer_rule'])
         node_rows=[]
         for node_id,node in faster['nodes'].items():
-            node_rows.append('<tr><th>'+link('source_passives',node_id,node['name']+' · '+node_id)+'</th><td>'+faster_value('node-'+node_id,node['fraction'],True)+'</td><td>'+lines('\n'.join(node['source_lines']))+'</td><td>全部效果已执行；schema32锁定</td></tr>')
-        body+='<h3>3个完整源节点</h3><div class="table-scroll"><table><thead><tr><th>源节点</th><th>更快伤害异常</th><th>完整英文源词句</th><th>执行门槛</th></tr></thead><tbody>'+''.join(node_rows)+'</tbody></table></div>'
+            node_rows.append('<tr><th>'+link('source_passives',node_id,localized_nodes[node_id]['name']+' · '+node_id)+'</th><td>'+faster_value('node-'+node_id,node['fraction'],True)+'</td><td>'+lines(source_lines(node['source_lines']))+'</td><td>全部效果已执行；schema32锁定</td></tr>')
+        body+='<h3>3个完整源节点</h3><div class="table-scroll"><table><thead><tr><th>源节点</th><th>更快伤害异常</th><th>完整源词句</th><th>执行门槛</th></tr></thead><tbody>'+''.join(node_rows)+'</tbody></table></div>'
         rows=[]
         for index,example in enumerate(faster['examples']):
             base=example['base']['burn_profile'];after=example['faster']['burn_profile']
@@ -728,9 +735,12 @@ def build(data, art):
         for entry in faster['class_paths']:
             rows=''.join('<tr><th>'+link('source_passives',node_id)+'</th><td>'+str(len(path)-1)+'</td><td>'+' → '.join(link('source_passives',n,n) for n in path)+'</td></tr>' for node_id,path in entry['paths_to_new_nodes'].items())
             body+=details('职业'+str(entry['class_id'])+' · 三节点完整可分配路径','<p>非起点普通节点可达数 '+str(entry['old_reachable_count'])+' → '+str(entry['new_reachable_count'])+'；实际完整构筑通过，旧schema32拒绝。这是分别可达的路线，不代表123点能全部同时分配。</p><div class="table-scroll"><table><thead><tr><th>目标</th><th>点数</th><th>路径ID（含免费起点）</th></tr></thead><tbody>'+rows+'</tbody></table></div>')
-        body+='<p>'+esc(faster['complete_gate'])+'。</p>'
+        gate=faster['complete_gate'].replace('partial','部分执行')
         for node_id,node in faster['blocked_matching_nodes'].items():
-            body+='<p>'+link('source_passives',node_id,node['name']+' · '+node_id)+'：'+esc('；'.join(node['execution']['unsupported']))+'；仍锁定，不计入新增完整节点。</p>'
+            gate=gate.replace(node['name'],localized_nodes[node_id]['name'])
+        body+='<p>'+esc(gate)+'。</p>'
+        for node_id,node in faster['blocked_matching_nodes'].items():
+            body+='<p>'+link('source_passives',node_id,localized_nodes[node_id]['name']+' · '+node_id)+'：'+lines(source_lines(node['execution']['unsupported']))+'；仍锁定，不计入新增完整节点。</p>'
         transfer=faster['transfer_example'];origin=transfer['source'];recipient=transfer['recipient']
         body+='<h3>余烬继承压缩后的截止时间</h3>'+facts([('M / F',faster_value('transfer-m',transfer['fire_dot_multiplier'],True)+' / '+faster_value('transfer-f',transfer['faster_fraction'],True)),('来源每秒火伤',faster_value('transfer-source-dps',origin['raw_dps'])),('接收者每秒火伤',faster_value('transfer-recipient-dps',recipient['raw_dps'])),('开始 / 传播时刻',faster_value('transfer-started-at',transfer['started_at'])+' / '+faster_value('transfer-at',transfer['transferred_at'])),('共同绝对截止时间',faster_value('transfer-expiry',origin['provenance']['ember_expiry'])),('接收者剩余秒数',faster_value('transfer-duration',transfer['transfer']['burn']['duration']))])+'<p>到压缩后的截止时间不再传播；接收者没有再获得基础3秒或完整2.4秒。</p>'
         migration=faster['migration_example']

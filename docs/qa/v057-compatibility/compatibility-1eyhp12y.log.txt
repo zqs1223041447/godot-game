@@ -1,0 +1,40 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+godot-game: playable arena ready
+Passive localization compatibility: 427 checks, 4 failures; 18 read-only phases
+ERROR: Partial Deadly Draw has a reachable neighboring fixture
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/passive_localization_compatibility_test.gd:367)
+       [1] test_partial_node_gates (res://tests/passive_localization_compatibility_test.gd:214)
+       [2] run (res://tests/passive_localization_compatibility_test.gd:101)
+       [3] browse_masteries (res://tests/passive_localization_compatibility_test.gd:173)
+       [4] frames (res://tests/passive_localization_compatibility_test.gd:360)
+ERROR: Partial fire mastery remains visible for inspection
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/passive_localization_compatibility_test.gd:367)
+       [1] check_partial (res://tests/passive_localization_compatibility_test.gd:234)
+       [2] test_partial_node_gates (res://tests/passive_localization_compatibility_test.gd:221)
+       [3] run (res://tests/passive_localization_compatibility_test.gd:101)
+       [4] browse_masteries (res://tests/passive_localization_compatibility_test.gd:173)
+       [5] frames (res://tests/passive_localization_compatibility_test.gd:360)
+ERROR: Only the unsupported original row carries a marker 11505
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/passive_localization_compatibility_test.gd:367)
+       [1] check_partial (res://tests/passive_localization_compatibility_test.gd:238)
+       [2] test_partial_node_gates (res://tests/passive_localization_compatibility_test.gd:221)
+       [3] run (res://tests/passive_localization_compatibility_test.gd:101)
+       [4] browse_masteries (res://tests/passive_localization_compatibility_test.gd:173)
+       [5] frames (res://tests/passive_localization_compatibility_test.gd:360)
+ERROR: Details preserve one display entry per complete source row 11505
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/passive_localization_compatibility_test.gd:367)
+       [1] check_display_rows (res://tests/passive_localization_compatibility_test.gd:248)
+       [2] check_partial (res://tests/passive_localization_compatibility_test.gd:239)
+       [3] test_partial_node_gates (res://tests/passive_localization_compatibility_test.gd:221)
+       [4] run (res://tests/passive_localization_compatibility_test.gd:101)
+       [5] browse_masteries (res://tests/passive_localization_compatibility_test.gd:173)
+       [6] frames (res://tests/passive_localization_compatibility_test.gd:360)

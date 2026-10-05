@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/a51485f153de/v057-passive-tree-localization/tests/passive_localization_reference_test.py", line 177, in <module>
+    main()
+  File "/workspace/scratch/a51485f153de/v057-passive-tree-localization/tests/passive_localization_reference_test.py", line 104, in main
+    assert sha(cards[key].encode()) == expected, 'Unrelated visible card changed: '+key
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Unrelated visible card changed: supports-breadth
