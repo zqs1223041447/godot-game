@@ -16,7 +16,8 @@ CATEGORIES = [('skills','主动技能'),('supports','辅助技能'),('equipment'
 RULE_TITLES = {'damage':'伤害如何结算','supports':'辅助装配','projectiles':'分裂、返回与飞行结束','equipment':'装备与阶级','character_rates':'恢复、移动与普通攻击速度','basic_attack':'普通攻击与武器贡献','allocation':'天赋与珠宝规则','shared':'玩家和怪物共享机制','boundaries':'尚未实现的源游戏语义','sources':'数据来源与实现边界','ember_proliferation':'余烬扩散与剩余时长','shock':'感电与后续命中','source_fire_dot':'源天赋火焰持续伤害加成','source_faster_burn':'源天赋加速燃烧'}
 CAPABILITIES = {'initial_projectiles':'初始投射物数量','projectile_hit':'投射物命中','finite_projectile_pierce':'有限穿透','area_hit':'直接范围命中','chain_hit':'连锁命中'}
 SLOTS = {'weapon':'武器','armor':'护甲','charm':'项链','body_armour':'护甲','amulet':'项链','ring':'戒指','ring_1':'戒指一','ring_2':'戒指二','boots':'鞋','belt':'腰带','gloves':'手套','helmet':'头盔'}
-TYPES = {'small':'小天赋','notable':'显著天赋','socket':'珠宝孔','start':'起点','keystone':'基石','mastery':'精通','prefix':'前缀','suffix':'后缀','ordinary':'普通珠宝','special':'特殊珠宝','legacy':'原始词池','expansion':'扩展词池','runewood':'符木点伤池','defense':'火抗防具池','local_weapon':'白蜡长弓池','nine_slot':'九槽装备池','build_legacy_v27':'构筑原底材池','build_nine_slot_v27':'构筑九槽池'}
+TYPES = {'small':'小天赋','notable':'显著天赋','socket':'珠宝孔','start':'起点','keystone':'基石','mastery':'精通','prefix':'前缀','suffix':'后缀','ordinary':'普通珠宝','special':'特殊珠宝','legacy':'原始词池','expansion':'扩展词池','runewood':'符木点伤池','defense':'火抗防具池','local_weapon':'白蜡长弓池','nine_slot':'九槽装备池','build_legacy_v27':'构筑原底材池','build_nine_slot_v27':'构筑九槽池','forgeblade_v34':'锻纹短刃池'}
+RULE_TITLES['forgeblade'] = '锻纹短刃与裂刃局部物理'
 
 def esc(value): return html.escape(str(value), quote=True)
 def lines(value): return '<br>'.join(esc(value).split('\n'))
@@ -162,6 +163,56 @@ def weapon_diagram(example):
     return f'<figure class="weapon-flow" aria-labelledby="weapon-flow-title"><figcaption id="weapon-flow-title">白蜡长弓 → 龙卷母箭 · 同一命中的组装记录</figcaption><p>{esc(example["definition"]["weapon_damage_summary"])}</p><div class="weapon-local-inputs">{local}</div><ol>{branches_html}</ol><div class="weapon-result"><span class="flow-step">三路合入原始命中</span>{components("raw",packet["base"])}</div><div class="weapon-result"><span class="flow-step">再经角色增伤与目标防御</span>{settled}</div><p class="fine">图中取局部双前缀最高合法掷值、无辅助的母箭；是逐次命中，非全流派最优、总伤害或每秒伤害。数值由实际编译器、伤害解析器与受击规则导出。</p></figure>'
 
 
+def forgeblade_rule(data, link, facts, details):
+    blade=data['forgeblade']
+    def value(key, amount):
+        return f'<strong data-forgeblade-value="{esc(key)}" data-value="{esc(amount)}">{number(amount)}</strong>'
+    body='<p>'+esc(blade['example_scope'])+'</p><p>'+esc(blade['formula'])+'。W按原技能基础系数2.8加入物理，不作用于原B或外部附加点伤；现有攻击、近战、物理、范围提高、暴击与防御仍走后续阶段。</p>'
+    body+=facts([('底材',link('equipment','forgeblade')),('格数',' × '.join(map(number,blade['base']['size']))),('唯一局部消费者',link('skills','cleave')+' / direct · hit + attack + melee + area'),('词池',esc(blade['pool_id'])),('保存版本',value('save-version',blade['save_version']))])
+    body+='<h3>六族与合法物品</h3><p>两本地族都是前缀，不能同时出现在魔法装备；六族沿既有等级1/8/16与权重100/60/30，T1到T3为本游戏成长顺序。以下范围直接来自实际目录。</p>'
+    rows=[]
+    for key,family in blade['families'].items():
+        ranges=data['affixes'][key]['formatted_ranges']
+        rows.append('<tr><th>'+link('affixes',key)+'</th><td>'+TYPES[family['kind']]+'</td>'+''.join('<td>'+esc(r['min'])+' ～ '+esc(r['max'])+'</td>' for r in ranges)+'</tr>')
+    body+='<div class="table-scroll"><table><thead><tr><th>族</th><th>类型</th><th>T1</th><th>T2</th><th>T3</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
+    combinations=[]
+    for rarity,sets in blade['legal_family_sets'].items():
+        for count in sorted(set(map(len,sets))):
+            total=sum(len(ids)==count for ids in sets)
+            combinations.append('<li>'+esc(data['equipment_rarities'][rarity]['name'])+' '+str(count)+'缀：'+value('family-sets-'+rarity+'-'+str(count),total)+'种族集合</li>')
+    body+='<ul>'+''.join(combinations)+'</ul><p>在ilvl1用真实目录逐一验证全部族子集；档位与整数掷值另计，不是随机频率采样。</p><h3>合法实例 → 裂刃逐次命中</h3>'
+    rows=[]
+    for key,example in blade['examples'].items():
+        hit=example['casts']['cleave']['hits']['direct'];critical=hit['critical']
+        cells=[value(key+'-w',example['weapon']['components']['physical']),value(key+'-contribution',hit['local_contribution']),value(key+'-raw',sum(hit['packet']['base'].values())),value(key+'-resolved',hit['resolved']['total']),value(key+'-chance',critical['chance']),value(key+'-multiplier',critical['multiplier']),value(key+'-expected',hit['expected_zero_defense'])]
+        rows.append('<tr><th>'+esc(example['name'])+'</th>'+''.join('<td>'+c+'</td>' for c in cells)+'</tr>')
+        body+=details(example['name']+' · 合法实例',facts([('稀有度',esc(example['instance']['rarity'])),('物品等级',number(example['instance']['item_level']))])+'<p>'+lines('\n'.join(example['definition']['affix_lines']))+'</p>')
+    body+='<div class="table-scroll"><table><thead><tr><th>物品</th><th>W</th><th>W×2.8</th><th>原始包</th><th>提高后普通命中</th><th>暴击几率</th><th>暴击倍率</th><th>0防御单次期望</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
+    body+='<p>小数0.07为7%几率，1.65为165%倍率。这里没有角色提高，原始包与提高后命中相同；真实默认角色有职业三属性，例如20力量的4%近战物理会在原始包之后结算。裸B18的裂刃原始包50.4；白短刃61.6，双T1金装65.8～69.72，T3局部顶86.8。不是默认角色面板或实战DPS。</p>'
+    sample=blade['examples']['six_t3_max'];rows=[]
+    for skill,cast in sample['casts'].items():
+        for role,hit in cast['hits'].items():
+            rows.append('<tr><th>'+('普通攻击' if skill=='basic' else link('skills',skill))+' / '+esc(role)+'</th><td>'+value('scope-'+skill+'-'+role,hit['local_contribution'])+'</td><td>'+percent(hit['critical']['chance'])+' / '+percent(hit['critical']['multiplier'])+'</td></tr>')
+    body+=details('全部命中role的真实局部贡献与全局暴击','<table><thead><tr><th>命中</th><th>短刃W贡献</th><th>全局暴击几率 / 倍率</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table><p>非裂刃包逐字段等于同一全局属性、仅移除武器profile的对照。dash与ward没有命中包；爆炸效果仅在该隔离例子中显式开启，以展示secondary规则。</p>')
+    body+='<p>'+esc(blade['global_scope'])+'。施放时冻结W与暴击，换装不重解释已存在的命中包。伤害偷取继续依据防御后敌人的实际护盾与生命损失，不计过量伤害。</p>'
+    resources=sample['definition']['stats']
+    body+=facts([('T3深汲全局最大魔力增加',value('global-max-mana',resources['max_mana'])),('T3泉旋全局魔力恢复提高',value('global-mana-regen',resources['mana_regen_increased']))])
+    body+='<h3>获取与制作</h3><p>测试城镇免费底材供应读取真实目录；正式游戏当前 '+esc(blade['current_loot_profile_id'])+'：'+' / '.join(esc(TYPES[row['pool_id']])+' '+value('loot-'+row['pool_id'],row['weight'])+'%' for row in blade['current_loot_profile'])+'。这是已产生普通装备奖励后的词池分布，旧profile保持；不增加根怪奖励资格或掉落次数，灰烬专属池不变。</p>'
+    body+='<p>现有回收、校准、赋魔、升格、补缀、重铸六工艺复用，费用与回收公式不变。定向重铸保持稀有度并替换全部词缀，保证候选如下：</p><ul>'
+    for operation,row in blade['crafting'].items():
+        if not row['presentation'].get('targeted'): continue
+        text=esc(row['presentation']['target_label'])+'：'
+        if row['quote']['ok']:
+            text+='魔法 '+value(operation+'-magic-cost',row['quote']['cost']['calibration_shard'])+'、稀有 '+value(operation+'-rare-cost',row['rare_quote']['cost']['calibration_shard'])+' 枚；候选 '+'、'.join(link('affixes',key) for key in row['eligible_families'])
+        else: text+='禁用；'+esc(row['quote']['reason'])+' 不消耗随机数'
+        body+='<li>'+text+'</li>'
+    body+='</ul><p>报价仍绑定完整快照、UID、revision与可撤销句柄；先落盘后提交。取消、旧报价、外改、满包或保存失败不改变钱物与盘上状态。</p>'
+    migration=blade['migration']
+    body+='<h3>schema33 → 34与预算边界</h3><p>'+esc(migration['backup_contract'])+' 旧schema注入forgeblade整份拒绝，旧升级链仍逐版本冻结校验；源天赋执行政策保持33。</p><p>同源纯迁移示例只改变 '+esc('、'.join(migration['changed_fields']))+'；'+esc(migration['evidence_scope'])+'</p>'
+    body+='<p>T3六族零防御单次暴击期望90.7494；历史符木合法四缀顶值对应普通90.384、基础暴击期望92.6436。护甲与火抗分别结算会改变比较，不能由此宣称完整配装最优或平衡通过。</p><p><a href="../qa/v055-budget/README.md">实现前静态可达预算与限制</a> · <a href="../FORGEBLADE.zh-CN.md">锻纹短刃规则说明</a></p>'
+    return body
+
+
 def build(data, art):
     records = []
     by_id = {}
@@ -186,6 +237,8 @@ def build(data, art):
             image=f'<img class="emblem" src="{esc(data["ember_proliferation"]["icon_file"])}" width="64" height="64" alt="" loading="lazy">'
         elif cat=='supports' and key=='shock':
             image=f'<img class="emblem" src="{esc(data["shock"]["icon_file"])}" width="64" height="64" alt="" loading="lazy">'
+        elif cat=='equipment' and key=='forgeblade':
+            image=f'<img class="emblem" src="{esc(data["forgeblade"]["icon_file"])}" width="64" height="64" alt="" loading="lazy">'
         badges = {'implemented':'已实现','research':'研究资料','planned':'尚未实现'}
         inner = f'<div class="entry-heading">{image}<div><span class="status {status}">{badges[status]}</span><h2><a href="#{aid}">{esc(name)}</a></h2><div class="entry-id">{esc(key)}</div></div></div>'
         if meta: inner += f'<div class="metadata">{meta}</div>'
@@ -243,7 +296,7 @@ def build(data, art):
         related=link('rules','equipment')
         if e.get('stage')=='weapon_local':
             body+='<p>'+esc(e['normal_definition']['weapon_damage_summary'])+'</p><p>局部词缀与原有武器前缀共享稀有装备的三个前缀名额；两条局部前缀不能一起出现在仅允许一个前缀的魔法装备上。</p>'
-            related+=' · '+link('weapon_stages','weapon_local')+' · '+link('rules','basic_attack')+' · '+link('skills','tornado')
+            related+=' · '+link('weapon_stages','weapon_local')+' · '+(link('rules','forgeblade')+' · '+link('skills','cleave') if key=='forgeblade' else link('rules','basic_attack')+' · '+link('skills','tornado'))
         if e['stats'].get('fire_resistance',0): related+=' · '+link('defenses','fire_resistance','火焰抗性与受击结算')
         cards.append(add('equipment',key,e['name'],e['description'],body,SLOTS[e['slot']],meta=tags([SLOTS[e['slot']],TYPES[e['pool']]]),related=related))
     for key,f in data['affixes'].items():
@@ -258,8 +311,8 @@ def build(data, art):
             body+='<p>全局属性作用于攻击和法术命中；几率提高乘基础几率，倍率增加按百分点加算。独立爆炸读取自己的全局profile，同次施放快照保持。没有局部武器或暴击触发扩展。</p>'
             related=link('rules','source_critical')+' · '+links('skills',f['affected_skills'])
         if f.get('stage')=='weapon_local':
-            body+='<p>阶段：本武器局部物理；只读取当前装备的白蜡长弓。不会进入角色统计，不增益法术或独立爆炸。图鉴的技能关联以普通长弓对照带此单词缀的合法魔法长弓，经实际编译器比较。</p>'
-            related=link('weapon_stages','weapon_local')+' · '+links('skills',f['affected_skills'])+' · '+link('rules','basic_attack')
+            body+='<p>阶段：本武器局部物理；只读取当前装备的合资格武器。白蜡长弓仅增强普攻与龙卷箭体，锻纹短刃仅增强裂刃direct；本地数值不进入角色统计，不增益法术或独立爆炸。原技能关联保留普通长弓对照单词缀合法魔法长弓的实际编译结果；短刃的独立实例与消费者矩阵见锻纹短刃规则卡。</p>'
+            related=link('weapon_stages','weapon_local')+' · '+links('skills',f['affected_skills'])+' · '+link('rules','basic_attack')+' · '+link('rules','forgeblade')
         cards.append(add('affixes',key,f['name'],f['label'],body,TYPES[f['kind']],meta=tags([TYPES[f['kind']]]+[TYPES[p] for p in f['pools']]),related=related+' · '+link('rules','equipment')))
     for key,e in data['fixed_items'].items():
         cards.append(add('fixed_items',key,e['name'],e['description'],facts([('槽位',SLOTS[e['slot']]),('格数',' × '.join(map(number,e['size'])))]),SLOTS[e['slot']],related=link('rules','projectiles') if e.get('effects') else link('rules','damage')))
@@ -302,6 +355,7 @@ def build(data, art):
         normal=w['examples']['local_normal']; rolled=w['examples']['local_max']
         body=facts([('作用对象','当前装备的白蜡长弓'),('生效命中',link('rules','basic_attack')+' · '+link('skills','tornado')+'（母箭 / 子箭）'),('局部规则版本',esc(w['balance_version']))])
         body+=weapon_diagram(rolled)
+        body+='<p>上述图例保持白蜡长弓历史样本；新增锻纹短刃的W仅由裂刃direct消费，见 '+link('rules','forgeblade')+'。下列v0.13预算结论只描述历史长弓矩阵。</p>'
         rows=''.join(f'<tr><th scope="row">{esc(data["configurations"][config]["name"])}</th><td>{number(sample["resolved_weapon"]["profile"]["base"]["physical"])}</td><td>{number(sample["resolved_weapon"]["profile"]["flat"]["physical"])}</td><td>{percent(sample["resolved_weapon"]["profile"]["increased"]["physical"])}</td><td>{number(sample["resolved_weapon"]["components"]["physical"])}</td></tr>' for config in ['local_normal','local_max'] for sample in [w['examples'][config]])
         body+='<div class="table-scroll"><table><caption>由合法实例推导的武器面板</caption><thead><tr><th>装备</th><th>P 固有</th><th>F 点伤</th><th>L 提高</th><th>W 物理</th></tr></thead><tbody>'+rows+'</tbody></table></div>'
         body+=details('最高局部掷值示例的完整实例',f'<p>稀有、物品等级 {rolled["instance"]["item_level"]}。两条局部前缀与两条合法后缀共同满足四词缀最低要求；所有示例掷值均取实际目录对应阶级上限。</p><p>'+lines('\n'.join(rolled['definition']['affix_lines']))+'</p><p>这一示例只表示局部物理项上限，未声称在伤害、法术、速度、生存等目标上普遍更优。</p>')
@@ -655,6 +709,8 @@ def build(data, art):
         body+='<p>'+esc(faster['legacy_rule'])+'。同源迁移示例 '+str(migration['from_version'])+' → '+str(migration['to_version'])+'，变化字段仅 '+esc('、'.join(migration['changed_fields']))+'。</p><p>尚未接入：'+esc('、'.join(faster['unsupported']))+'；本批没有新增图像。</p>'
         body+='<p>'+link('rules','source_fire_dot')+' · '+link('rules','burning','点燃与燃烧')+' · '+link('rules','ember_proliferation')+' · '+link('rules','shock')+' · '+link('rules','source_tree','完整源树与分配规则')+' · <a href="source-tree-coverage.json">同源执行覆盖JSON</a></p>'
         rule_defs.append(('source_faster_burn','源天赋加速燃烧','三节点合计25%更快：每秒伤害乘1.25，基础3秒压缩至2.4秒，理论完整总量保持。',body,'implemented'))
+    if 'forgeblade' in data:
+        rule_defs.append(('forgeblade',RULE_TITLES['forgeblade'],'本地物理4、六族合法词池；W只增强裂刃direct，全局暴击与资源仍保持原范围。',forgeblade_rule(data,link,facts,details),'implemented'))
     if 'source_spatial' in data:
         spatial=data['source_spatial']
         rows=[]
@@ -732,6 +788,15 @@ def build(data, art):
 def main():
     parser=argparse.ArgumentParser(description=__doc__); parser.add_argument('--check',action='store_true'); args=parser.parse_args()
     data=json.loads((REF/'catalog.json').read_text())
+    if 'forgeblade' in data:
+        source=ROOT/data['forgeblade']['icon_source'].removeprefix('res://')
+        target=REF/data['forgeblade']['icon_file']
+        if args.check:
+            if not target.exists() or target.read_bytes()!=source.read_bytes():
+                raise SystemExit('Forgeblade reference image differs from original asset bytes')
+        else:
+            target.parent.mkdir(parents=True,exist_ok=True)
+            target.write_bytes(source.read_bytes())
     manifest=REF/'art/manifest.json'
     art=json.loads(manifest.read_text()) if manifest.exists() else {}
     output=build(data,art)

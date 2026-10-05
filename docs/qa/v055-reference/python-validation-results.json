@@ -1,0 +1,40 @@
+{
+  "python-build": {
+    "command": [
+      "python3",
+      "tools/build_reference.py"
+    ],
+    "exit_code": 0,
+    "seconds": 0.448,
+    "error_lines": []
+  },
+  "python-check": {
+    "command": [
+      "python3",
+      "tools/build_reference.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 0.443,
+    "error_lines": []
+  },
+  "focused-reference": {
+    "command": [
+      "python3",
+      "tests/forgeblade_reference_test.py"
+    ],
+    "exit_code": 0,
+    "seconds": 1.804,
+    "error_lines": []
+  },
+  "javascript-syntax": {
+    "command": [
+      "node",
+      "--check",
+      "docs/reference/reference.js"
+    ],
+    "exit_code": 0,
+    "seconds": 0.06,
+    "error_lines": []
+  }
+}

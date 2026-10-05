@@ -51,6 +51,7 @@ const ShockRuntimeData = preload("res://scripts/combat/shock_runtime.gd")
 const ShockMigration = preload("res://scripts/save/shock_gem_migration.gd")
 const FireDotMigration = preload("res://scripts/save/fire_dot_migration.gd")
 const FasterBurnMigrationData = preload("res://scripts/save/faster_burn_migration.gd")
+const ForgebladeMigrationData = preload("res://scripts/save/forgeblade_migration.gd")
 const SourceCoverage = preload("res://tools/export_source_execution_coverage.gd")
 
 func _initialize() -> void:
@@ -117,6 +118,7 @@ static func collect() -> Dictionary:
 	result["shock"] = shock_examples()
 	result["source_fire_dot"] = source_fire_dot_examples()
 	result["source_faster_burn"] = source_faster_burn_examples()
+	result["forgeblade"] = forgeblade_examples()
 	result["normal_gem_trading"]={"offers":Canonical.GemTrade.offers(),"recycle_credit":Canonical.GemTrade.RECYCLE_CREDIT,"currency":Canonical.GemTrade.MATERIAL_ID,"location":"normal_town","level":1,"quality":0,"recycle_location":"bag","schema":Canonical.Rules.VERSION,"test_supply_separate":true,"pricing":"初版可调整预算；每次无词缀地图净得4碎片"}
 	result["source_tree"] = source_tree_reference()
 	result["source_spatial"] = source_spatial_examples()
@@ -142,7 +144,7 @@ static func collect() -> Dictionary:
 				base.eligible_affixes.append(affix_id)
 		base["stats_text"] = Passives.describe_stats(base.stats)
 		if base.get("stage") == WeaponLocal.STAGE:
-			var normal: Dictionary = _local_instance()
+			var normal: Dictionary = _local_instance([], "normal", id)
 			base["normal_instance"] = normal
 			base["normal_definition"] = Equipment.definition(normal)
 		result.equipment[id] = base
@@ -557,6 +559,130 @@ static func _local_instance(affix_ids: Array = [], rarity: String = "normal", ba
 		level = maxi(level, int(tier.level))
 		affixes.append({"id": id, "tier": tier.tier, "value": tier.max})
 	return {"id": "gear_000001", "base_id": base_id, "rarity": rarity, "item_level": level, "affixes": affixes}
+
+## Isolated item/profile examples use B18 and explicit 5% / 150% critical bases.
+## They intentionally omit class attributes, passives and all other equipment;
+## Canonical's starting class can add modifiers after the same raw packet.
+static func forgeblade_examples() -> Dictionary:
+	var pool: Dictionary = Equipment.pool_profiles().forgeblade_v34
+	var families: Dictionary = {}
+	for id: String in pool.affix_ids: families[id] = Equipment.affix_definition(id)
+	var result: Dictionary = {"base_id":"forgeblade", "pool_id":"forgeblade_v34", "save_version":34,
+		"icon_source":"res://assets/art/equipment/forgeblade.png", "icon_file":"originals/forgeblade.png",
+		"base":Equipment.base_definition("forgeblade"), "pool":pool, "families":families,
+		"current_loot_profile_id":Canonical.LOOT_PROFILE_ID, "current_loot_profile":Equipment.loot_profile(Canonical.LOOT_PROFILE_ID),
+		"local_consumers":WeaponLocal.metadata().consumers_by_base.forgeblade,
+		"example_scope":"真实合法装备实例→目录派生属性与武器profile→实际编译器；隔离B18、基础暴击5%/150%，无职业三属性、天赋、其他装备或辅助。不是默认角色伤害或实战DPS。",
+		"formula":"W=(4+本武器附加物理)×(1+本武器物理提高)", "examples":{}, "crafting":{},
+		"global_scope":"本地W仅裂刃direct；全局暴击仍作用于攻击、法术及独立secondary，最大魔力与魔力恢复仍是角色全局资源。"}
+	result["legal_family_sets"] = {}
+	for rarity: String in Equipment.RARITIES:
+		var accepted: Array = []
+		for mask: int in range(1 << pool.affix_ids.size()):
+			var candidate: Dictionary = {"id":"gear_000001","base_id":"forgeblade","rarity":rarity,"item_level":1,"affixes":[]}
+			var ids: Array = []
+			for index: int in range(pool.affix_ids.size()):
+				if mask & (1 << index):
+					var id: String = pool.affix_ids[index]
+					ids.append(id)
+					var tier: Dictionary = families[id].tiers[0]
+					candidate.affixes.append({"id":id,"tier":1,"value":tier.min})
+			if Equipment.validate_instance(candidate):accepted.append(ids)
+		result.legal_family_sets[rarity] = accepted
+	var configurations: Array = [
+		["normal", "普通无词缀", [], "normal", 1, false],
+		["dual_t1_min", "合法金装 · 双本地T1最低", ["whetstone_edge","tempered_edge","deepwell","wellturn"], "rare", 1, false],
+		["dual_t1_max", "合法金装 · 双本地T1最高", ["whetstone_edge","tempered_edge","deepwell","wellturn"], "rare", 1, true],
+		["six_t1_max", "合法六族T1最高", pool.affix_ids, "rare", 1, true],
+		["six_t3_max", "合法六族T3最高", pool.affix_ids, "rare", 3, true]]
+	for config: Array in configurations:
+		var instance: Dictionary = _forgeblade_instance(config[2],config[3],config[4],config[5])
+		var definition: Dictionary = Equipment.definition(instance)
+		assert(Equipment.validate_instance(instance) and not definition.is_empty())
+		var stats: Dictionary = {"damage":18.0,"crit_base_chance":0.05,"crit_base_multiplier":1.5}
+		stats.merge(definition.stats)
+		var snapshot: Dictionary = Recipes.snapshot(stats,["explode_on_flight_end"])
+		snapshot.weapon_profile = definition.weapon_profile.duplicate(true)
+		var no_local: Dictionary = snapshot.duplicate(true)
+		no_local.erase("weapon_profile")
+		var casts: Dictionary = {}
+		var ids: Array = Data.SKILLS.keys()
+		ids.append("basic")
+		for skill: String in ids:
+			var cast: Dictionary = Compiler.compile_basic(snapshot) if skill == "basic" else Compiler.compile_skill(skill,snapshot,[])
+			var before: Dictionary = Compiler.compile_basic(no_local) if skill == "basic" else Compiler.compile_skill(skill,no_local,[])
+			assert(cast.ok and before.ok)
+			var hits: Dictionary = {}
+			var packets: Dictionary = _forgeblade_packets(cast.packets)
+			var baseline_packets: Dictionary = _forgeblade_packets(before.packets)
+			for role: String in packets:
+				var packet: Dictionary = packets[role]
+				var resolved: Dictionary = Damage.resolve(packet,cast.snapshot.modifiers)
+				var local: Dictionary = packet.get("assembly",{}).get("weapon",{})
+				var contribution: float = float(local.get("contribution",{}).get("physical",0.0))
+				if skill != "cleave" or role != "direct":
+					assert(is_zero_approx(contribution) and packet == baseline_packets[role])
+				var critical: Dictionary = cast.get("critical",{}).get("secondary" if role == "secondary" else "primary",{})
+				var expected: float = float(resolved.total) * (1.0+float(critical.get("chance",0.0))*(float(critical.get("multiplier",1.0))-1.0))
+				hits[role] = {"packet":packet,"resolved":resolved,"local_contribution":contribution,
+					"no_local_packet":baseline_packets[role],"critical":critical,"expected_zero_defense":expected}
+			casts[skill] = {"hits":hits,"critical":cast.get("critical",{}),"mana":cast.get("mana",0.0),"cooldown":cast.get("cooldown",0.0)}
+		result.examples[config[0]] = {"name":config[1],"instance":instance,"definition":definition,
+			"stats":stats,"snapshot":snapshot,"weapon":WeaponLocal.resolve(snapshot.weapon_profile),"casts":casts}
+	var magic: Dictionary = _forgeblade_instance(["whetstone_edge"],"magic",1,true)
+	var rare: Dictionary = result.examples.six_t3_max.instance
+	for operation: String in Craft.operation_ids():
+		var instance: Dictionary = result.examples.normal.instance if operation == "enchant" else magic
+		var quote: Dictionary = Craft.operation_quote(instance,operation)
+		var row: Dictionary = {"presentation":Craft.operation_metadata(operation),"instance":instance,"quote":quote}
+		if Craft.Targeted.operation_ids().has(operation):
+			row["rare_quote"] = Craft.operation_quote(rare,operation)
+			row["eligible_families"] = []
+			for id: String in pool.affix_ids:
+				if Craft.Targeted.TARGETS[operation].families.has(id):row.eligible_families.append(id)
+			if quote.ok:
+				var planned: Dictionary = Craft.Targeted.plan(instance,operation,550055)
+				assert(planned.ok and Equipment.validate_instance(planned.instance))
+				row["planned_instance"] = planned.instance
+			else:
+				assert(quote.code == "no_legal_target")
+		result.crafting[operation] = row
+	var old: Dictionary = Canonical.new().snapshot()
+	old.version = 33
+	var migrated: Dictionary = ForgebladeMigrationData.migrate_v33(old,SourceTree.reason)
+	assert(not migrated.is_empty())
+	var changed: Array = []
+	for key: String in old:
+		if old[key] != migrated[key]:changed.append(key)
+	assert(changed == ["version"])
+	result["migration"] = {"from_version":old.version,"to_version":migrated.version,"changed_fields":changed,
+		"items_preserved":old.items == migrated.items,"talents_preserved":old.talents == migrated.talents,
+		"fresh_has_forgeblade":false,"old_vocabulary_rejects_forgeblade":not Equipment.validate_instance_for_version(result.examples.normal.instance,33),
+		"backup_contract":"完整冻结schema33校验后原字节备份，再仅升级version；失败不改原文件，不赠装备、碎片或点数。",
+		"evidence_scope":"本卡纯迁移函数示例不读写存档；原字节备份与失败事务由forgeblade_migration_test独立验证。"}
+	for wrapped: Dictionary in old.items.values():
+		assert(wrapped.definition_id != "equipment:forgeblade")
+	return result
+
+
+static func _forgeblade_packets(packets: Dictionary) -> Dictionary:
+	var result: Dictionary = {}
+	for role: String in packets:
+		if role == "bounces":
+			for index: int in range(packets[role].size()):result["bounce_"+str(index)] = packets[role][index]
+		else:result[role] = packets[role]
+	return result
+
+
+static func _forgeblade_instance(ids: Array, rarity: String, tier_number: int, maximum: bool) -> Dictionary:
+	var instance: Dictionary = {"id":"gear_000001","base_id":"forgeblade","rarity":rarity,"item_level":1,"affixes":[]}
+	for id: String in ids:
+		var tier: Dictionary = Equipment.affix_definition(id).tiers[tier_number-1]
+		instance.item_level = maxi(instance.item_level,int(tier.level))
+		instance.affixes.append({"id":id,"tier":tier_number,"value":tier.max if maximum else tier.min})
+	assert(Equipment.validate_instance(instance))
+	return instance
+
 
 static func local_build(instance: Dictionary) -> RefCounted:
 	assert(Equipment.validate_instance(instance), "Reference equipment must be a legal real instance")
@@ -1395,7 +1521,7 @@ static func _fire_dot_route_candidate(class_id: int, path: Array) -> Dictionary:
 ## Export effective DPS/duration/total; the HTML never reapplies either fraction.
 static func source_faster_burn_examples() -> Dictionary:
 	var coverage: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://docs/qa/v054-source/source-coverage.json"))
-	assert(coverage.new_schema == Canonical.Rules.VERSION and coverage.source_sha256 == SourceTree.Data.SOURCE_SHA256)
+	assert(coverage.new_schema == 33 and coverage.source_sha256 == SourceTree.Data.SOURCE_SHA256)
 	var nodes: Dictionary = {}
 	var source_ids: Array = ["11364", "43684", "59766"]
 	var faster: float = 0.0

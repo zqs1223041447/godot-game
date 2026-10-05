@@ -1,0 +1,171 @@
+{
+  "base_commit": "5e442d98e82b248efc3a553fdf9bf95733929096",
+  "counts": {
+    "catalog_and_crafting": 26540,
+    "schema_migration": 155,
+    "local_weapon_rules_and_compiler": 3351,
+    "unchanged_local_weapon_compiler": 524,
+    "actual_model_and_main": 374,
+    "root_presentation": 10
+  },
+  "total_checks": 30954,
+  "all_final_subsets_exit_zero": true,
+  "static_budget_comparisons_separate": 162,
+  "source_reuse": {
+    "docs/qa/v055-catalog/catalog-crafting-result.json": {
+      "input_count": 7,
+      "post_test_differences": {}
+    },
+    "docs/qa/v055-migration/evidence-og4jvepj.json": {
+      "input_count": 10,
+      "post_test_differences": {}
+    },
+    "docs/qa/v055-weapon-rules/20261005T170555784252Z-results.json": {
+      "input_count": 164,
+      "post_test_differences": {
+        "project.godot": {
+          "tested": "2068db6e4a7ce94efce3ab8a63616586f1e6cbf629bbe9a83f362a1b6cf20a1a",
+          "final": "3612608ea0fdef27a4f0e113b3ddb72f5c0d9a0ccaf776a416d693e84b47d684"
+        }
+      }
+    },
+    "docs/qa/v055-consumers/gameplay-source-02.json": {
+      "input_count": 162,
+      "post_test_differences": {}
+    }
+  },
+  "frozen_old_variant_rows": 1244,
+  "frozen_old_variant_bytes": 1399880,
+  "frozen_old_variant_sha256": "fe8a4d716943c5da8c799c230c8d791f0abf6968319cc5940e1f38bec26da3d8",
+  "old_catalog_item_definition_rng_samples": 1680,
+  "old_crafting_plan_samples": 2520,
+  "known_boundaries": [
+    "First rejected-input suite exposed new invalid base type comparison; explicit String guard corrected before final3351 and actual374 checks",
+    "First actual model fixture omitted innate20Strength/20Intelligence; only fixture corrected, with both raw-contract and actual-class budgets verified",
+    "Existing font binary gains only required glyph锻; same-source regenerate validates retained outlines/metrics; asset unchanged except new originalforgeblade PNG",
+    "Static budget is isolated B18 without class attributes. Actual default class adds4% melee physical; no real-DPS or WindowsFPS claim",
+    "No changed input suite rerun solely for project0.55version string; package probe validates actual final version later",
+    "No600-second, historical full suite, LUNA translation, new passives or UI layout changes",
+    "Reference baseline walker initially assumed new shop row was appended; fixed projection to remove inserted new row by identity, preserved failure log; no product change"
+  ],
+  "font_generation": {
+    "fonttools_version": "4.61.1",
+    "source_sha256": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
+    "font_sha256": "a0b6896d6b1f76e5bcbc53106b9d7cca3067457078e6583df90347acff8c5c82",
+    "font_bytes": 417156,
+    "mapped_codepoints": 1072,
+    "runtime_files": 167,
+    "required_codepoints": 1067,
+    "required_han": 946,
+    "added_since_baseline": "‹›▲▼七业东严串九习买了二产付任但何供候偏健偷允六具典凶划剂功务北匠区十千华协印厚参反口台号各员咏商圆圈垣城堆墙声头套好家寒察尔层差己币师幕广序库座张征态恰意感慢慧戒扣执扫把挡控推描携撤播政敏料斜斥斩易晴智服析树样案横款残毒油测涂溯烧燃牌猛玩瓶登益盔石码碑稳突站策累纳练绑绕缓耐职肤脊腰舍花英草药营著蓄蚀血被西解警订许评诊语账货质购赠走路踏输述追送逻遇道遭遮铁铸销锐锻镇阔阻险难集震靠靴鞋页顺频",
+    "baseline_glyphs_unchanged": true
+  },
+  "status": "Source scoped validation and reference complete; final build probe separate",
+  "reference_validation_separate": "docs/qa/v055-reference/summary.json",
+  "logs": {
+    "docs/qa/v055-root-ui/presentation.log": {
+      "bytes": 120,
+      "sha256": "d5605a509f417d2f97ec47058f092ee9e2362ec64be40f01d7984e690af0982d"
+    },
+    "docs/qa/v055-reference/baseline-capture-first-failure.stderr.log": {
+      "bytes": 2838,
+      "sha256": "911d86a36c2e57ec8175ab6041532b86368a11c722c09cce539538ef994de837"
+    },
+    "docs/qa/v055-reference/baseline-capture-first-failure.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v055-reference/focused-reference.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v055-reference/focused-reference.stdout.log": {
+      "bytes": 166,
+      "sha256": "17e9eb4a30e569f1a69b674437ae755e3f52f5dcfe417f29d521512b6e68ecba"
+    },
+    "docs/qa/v055-reference/godot-export.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v055-reference/godot-export.stdout.log": {
+      "bytes": 205,
+      "sha256": "881c3c8a76e46d3e862aafeb146330317ff3f9b9ded3708c83c5c5e40bdf8c0b"
+    },
+    "docs/qa/v055-reference/javascript-syntax.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v055-reference/javascript-syntax.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v055-reference/python-build.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v055-reference/python-build.stdout.log": {
+      "bytes": 51,
+      "sha256": "a307fe85e62dc5b68f23ece3a6d1d8887b38b8b1e14ebf2c96681a4e1cd2a581"
+    },
+    "docs/qa/v055-reference/python-check.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v055-reference/python-check.stdout.log": {
+      "bytes": 52,
+      "sha256": "65d47533eaf556129a1f3a295db12ab1bc36a8df0770c71cb9378490d54d03ba"
+    },
+    "docs/qa/v055-consumers/gameplay-01.console.txt": {
+      "bytes": 8121,
+      "sha256": "f2f99fbe114a3d98fd5c4ce6d87195ff5eba6cedc784296d047d4964329b17b3"
+    },
+    "docs/qa/v055-consumers/gameplay-01.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "docs/qa/v055-consumers/gameplay-01.log": {
+      "bytes": 8121,
+      "sha256": "f2f99fbe114a3d98fd5c4ce6d87195ff5eba6cedc784296d047d4964329b17b3"
+    },
+    "docs/qa/v055-consumers/gameplay-02.console.txt": {
+      "bytes": 272,
+      "sha256": "03f8937a751a76a411639860e87fb3152cb282e99ee4cb0ecf9fc021a06430a6"
+    },
+    "docs/qa/v055-consumers/gameplay-02.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "docs/qa/v055-consumers/gameplay-02.log": {
+      "bytes": 272,
+      "sha256": "03f8937a751a76a411639860e87fb3152cb282e99ee4cb0ecf9fc021a06430a6"
+    },
+    "docs/qa/v055-catalog/catalog-crafting.log": {
+      "bytes": 1625,
+      "sha256": "24143dcc2053ca5471d4f3cb7b7ccd3e4ebe4bf227a7ad521b6bfaba92fe3fe1"
+    },
+    "docs/qa/v055-migration/capture-46cz6d_f.log": {
+      "bytes": 189,
+      "sha256": "345090411a36649a0d71ec916a5fb9a5ba10a4dde5161208223649380c508fad"
+    },
+    "docs/qa/v055-migration/forgeblade-migration-og4jvepj.log": {
+      "bytes": 125,
+      "sha256": "33b1dc044244d564b74f3bcfeccfdff7223b31ac816681bb30fa2629dbbc8355"
+    },
+    "docs/qa/v055/final-import.log": {
+      "bytes": 2700,
+      "sha256": "88cf5c92299c5900b1c3a657a9c4d6f7a7e7c400c74adee05eb0d81ce3b07ddd"
+    },
+    "docs/qa/v055/font-subset.log": {
+      "bytes": 1000,
+      "sha256": "1d23d79030833e34f9e3f134048f16487e23d1a1763ee3e0693b3a559938092e"
+    },
+    "docs/qa/v055/import-initial.log": {
+      "bytes": 69995,
+      "sha256": "9aebbc1f3593f0da9e847156660acbd687f5da9fc0808b83a338654abc26e1a1"
+    },
+    "docs/qa/v055/packed-probe-parse.log": {
+      "bytes": 73,
+      "sha256": "a9912b85473f126d3f4f63ec824170c828df3473a292f866dde86cafda5b66da"
+    }
+  }
+}

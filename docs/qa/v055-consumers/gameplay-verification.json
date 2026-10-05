@@ -1,0 +1,36 @@
+{
+  "engine": "Godot 4.6.3.stable.official.7d41c59c4",
+  "base": "5e442d98e82b248efc3a553fdf9bf95733929096",
+  "isolated_xdg": "/tmp/godot-m1-v055-consumers-gameplay-02",
+  "test": "tests/forgeblade_gameplay_test.gd",
+  "attempts": [
+    {
+      "attempt": "01",
+      "exit_code": 1,
+      "source_tree_sha256": "c49884c37dec402dfef976894f8569cd96d09edd54adb0d92e6bd795c8b1523c",
+      "checks": 364,
+      "failures": 11,
+      "error_lines": 11,
+      "script_error_lines": 0,
+      "fontconfig_cache_messages": 60,
+      "log": "gameplay-01.console.txt",
+      "source_manifest": "gameplay-source-01.json",
+      "result": "gameplay-result-01.json"
+    },
+    {
+      "attempt": "02",
+      "exit_code": 0,
+      "source_tree_sha256": "067317c0f74ead693075a3286fe9cc80eab6ef814d6e6085cfa655592cf48959",
+      "checks": 374,
+      "failures": 0,
+      "error_lines": 0,
+      "script_error_lines": 0,
+      "fontconfig_cache_messages": 0,
+      "log": "gameplay-02.console.txt",
+      "source_manifest": "gameplay-source-02.json",
+      "result": "gameplay-result-02.json"
+    }
+  ],
+  "source_changed_after_passing_run": [],
+  "scope": "targeted actual model + main gameplay; no import, full history replay, UI, performance or Windows hardware claim"
+}

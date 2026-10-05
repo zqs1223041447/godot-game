@@ -1,0 +1,96 @@
+{
+  "result": "PASS",
+  "game_version": "0.55.0",
+  "save_schema": 34,
+  "passive_policy": 33,
+  "godot_exports": 1,
+  "godot_export": {
+    "command": [
+      "godot",
+      "--headless",
+      "--path",
+      "/workspace/scratch/a51485f153de/v055-forgeblade",
+      "--script",
+      "res://tools/export_reference.gd"
+    ],
+    "exit_code": 0,
+    "seconds": 12.875,
+    "error_lines": [],
+    "source_changed_during_export": [],
+    "isolated_xdg_root": "/tmp/godot-m1-v055-reference-xhve4fe5"
+  },
+  "checks": {
+    "python-build": {
+      "command": [
+        "python3",
+        "tools/build_reference.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.448,
+      "error_lines": []
+    },
+    "python-check": {
+      "command": [
+        "python3",
+        "tools/build_reference.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.443,
+      "error_lines": []
+    },
+    "focused-reference": {
+      "command": [
+        "python3",
+        "tests/forgeblade_reference_test.py"
+      ],
+      "exit_code": 0,
+      "seconds": 1.804,
+      "error_lines": []
+    },
+    "javascript-syntax": {
+      "command": [
+        "node",
+        "--check",
+        "docs/reference/reference.js"
+      ],
+      "exit_code": 0,
+      "seconds": 0.06,
+      "error_lines": []
+    }
+  },
+  "fixtures": 5,
+  "real_packets": 95,
+  "rendered_values": 73,
+  "unchanged_old_pngs": 67,
+  "new_original_pngs": 1,
+  "all_source_execution_unchanged": true,
+  "source_coverage_bytes_unchanged": true,
+  "complete_legacy_catalog_projection_sha256": "905a0ca7439397bc5fb13eb4d901672f70bfab575dc8b759c74579c312b5677b",
+  "approved_delta_categories": {
+    "new_content_or_consumer_metadata": 7,
+    "appended_eligibility_metadata": 30,
+    "current_schema_metadata": 18,
+    "current_vocabulary_metadata": 5,
+    "new_current_loot_profile": 3,
+    "current_version_metadata": 1,
+    "new_consumer_explanation_only": 76,
+    "new_town_stock": 1
+  },
+  "source_drift_since_export": [],
+  "debugging_failure": {
+    "stage": "independent baseline capture helper",
+    "cause": "New merchant entry inserted before old fixed items; helper initially compared arrays by index",
+    "record": "baseline-capture-first-failure.stderr.log",
+    "production_failure": false,
+    "resolution": "Project out only forgeblade row and require every remaining row to equal independent v54 stock"
+  },
+  "not_run": [
+    "600-second suite",
+    "historical full suite",
+    "new per-version screenshot gate",
+    "browser interaction acceptance",
+    "Windows hardware FPS"
+  ],
+  "budget_scope": "Pure real-instance/profile compiler examples; B18 without class attributes; zero-defense one-hit expectation, not DPS"
+}

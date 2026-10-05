@@ -1,0 +1,192 @@
+{
+	"actual_main": {
+		"critical": {
+			"primary": {
+				"chance": 0.05,
+				"multiplier": 1.57
+			}
+		},
+		"critical_seed": 55024,
+		"first_hit": {
+			"assembly": {
+				"added": {
+
+				},
+				"added_effectiveness": 2.8,
+				"base_coefficient": 2.8,
+				"intrinsic": {
+					"physical": 50.4
+				},
+				"stage": "hit_base",
+				"weapon": {
+					"coefficient": 2.8,
+					"components": {
+						"physical": 9.84
+					},
+					"contribution": {
+						"physical": 27.552
+					},
+					"profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "forgeblade",
+						"flat": {
+							"physical": 4.0
+						},
+						"increased": {
+							"physical": 0.23
+						},
+						"item_id": "gear_000004",
+						"sources": [
+							{
+								"affix_id": "tempered_edge",
+								"stat": "weapon_physical_increased",
+								"value": 0.23
+							},
+							{
+								"affix_id": "whetstone_edge",
+								"stat": "weapon_added_physical",
+								"value": 4.0
+							}
+						],
+						"stage": "weapon_local"
+					}
+				}
+			},
+			"before_defense_components": {
+				"physical": 127.28002560000002
+			},
+			"cast_id": 555,
+			"components": {
+				"physical": 113.06673661521636
+			},
+			"critical": {
+				"chance": 0.05,
+				"critical": true,
+				"multiplier": 1.57
+			},
+			"details": [
+				{
+					"base": 77.952,
+					"before_defense": 127.28002560000002,
+					"final": 113.06673661521636,
+					"increased": 0.04,
+					"modifiers": [
+						"melee_physical_increased"
+					],
+					"more": 1.0,
+					"resistance": 0.11166943845102159,
+					"type": "physical"
+				}
+			],
+			"effect_id": "",
+			"health_lost": 3.0,
+			"leech": {
+				"health": 0.04,
+				"mana": 0.04
+			},
+			"phase": "direct",
+			"prevented_components": {
+				"physical": 14.21328898478366
+			},
+			"projectile_id": 0,
+			"shield_spent": 7.0,
+			"skill_id": "cleave",
+			"tags": [
+				"hit",
+				"attack",
+				"melee",
+				"area"
+			],
+			"target_id": 4,
+			"total": 113.06673661521636
+		},
+		"item": {
+			"affixes": [
+				{
+					"id": "tempered_edge",
+					"tier": 3,
+					"value": 23
+				},
+				{
+					"id": "global_critical_multiplier",
+					"tier": 1,
+					"value": 7
+				},
+				{
+					"id": "deepwell",
+					"tier": 2,
+					"value": 11
+				},
+				{
+					"id": "whetstone_edge",
+					"tier": 2,
+					"value": 4
+				}
+			],
+			"base_id": "forgeblade",
+			"id": "gear_000004",
+			"item_level": 30,
+			"rarity": "rare"
+		},
+		"leech": {
+			"health": {
+				"attack_fraction": 0.004,
+				"instance_amount_cap": 13.100000000000001,
+				"instance_rate": 2.62,
+				"physical_attack_fraction": 0.0,
+				"total_rate_cap": 26.200000000000003
+			},
+			"mana": {
+				"attack_fraction": 0.004,
+				"instance_amount_cap": 11.8,
+				"instance_rate": 2.36,
+				"physical_attack_fraction": 0.0,
+				"total_rate_cap": 23.6
+			}
+		},
+		"noncritical": 81.07008,
+		"schema": 34,
+		"uid": "gear_000004"
+	},
+	"budget": [
+		{
+			"chance": 0.05,
+			"expectation_zero_defense": 65.66559999999998,
+			"multiplier": 1.5,
+			"noncritical": 64.064,
+			"sample": "white"
+		},
+		{
+			"chance": 0.05,
+			"expectation_zero_defense": 70.1428,
+			"multiplier": 1.5,
+			"noncritical": 68.432,
+			"sample": "T1_low"
+		},
+		{
+			"chance": 0.05,
+			"expectation_zero_defense": 74.32152,
+			"multiplier": 1.5,
+			"noncritical": 72.50880000000001,
+			"sample": "T1_high"
+		},
+		{
+			"chance": 0.06999999999999999,
+			"expectation_zero_defense": 94.37937600000001,
+			"multiplier": 1.65,
+			"noncritical": 90.272,
+			"sample": "T3_full"
+		}
+	],
+	"checks": 364,
+	"failures": 11,
+	"sections": {
+		"actual_main": 62,
+		"failures_atomic": 47,
+		"full_bag": 13,
+		"real_compiler_budget": 53,
+		"transactions": 187
+	}
+}

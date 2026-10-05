@@ -66,3 +66,21 @@ node --check docs/reference/reference.js
 ```
 
 一次Godot无头导出同时更新catalog与source-tree-coverage；以上检查首次均通过。8组真实编译器示例包含M=0.10/F=0.25，123个页面数值与导出对应，58类旧目录结构保持；11处旧派生属性字典新增零值字段是明确的结构扩展，零F技能编译字节保持。没有运行历史完整套件、工程导入或截图。详细命令、退出码、来源指纹和日志见 `../qa/v054-reference/`。
+
+## v0.55.0 锻纹短刃
+
+新增入口为 `index.html#rules-forgeblade` 与随机装备条目 `equipment-forgeblade`。`catalog.json.forgeblade` 来自实际底材/词缀目录、合法物品、SkillCompiler、CraftingRules和schema33→34纯迁移函数。5个合法隔离样本导出95个命中包，73个HTML数值逐一核对；全部其他role的本地贡献为零，同时验证全局暴击与资源仍是全局。
+
+样本明确固定B18、基础暴击5%/150%，没有职业三属性、天赋、其他装备与辅助。原始命中包、后modifier普通命中和零防御单次期望分别展示；不把隔离输入当默认角色，也不称为实战DPS。双本地T1由合法四缀金装承载。
+
+`canonical_v34`采用25/20/10/10/30/5分布，旧所有命名池和profile保留。现有六工艺与伤害/暴击定向重铸复用；短刃生命/魔力偷取定向禁用。schema34只扩展装备词汇，源天赋执行政策33保持；历史迁移示例继续导出各自固定版本。
+
+本批聚焦命令：
+
+```sh
+python3 tools/build_reference.py --check
+python3 tests/forgeblade_reference_test.py
+node --check docs/reference/reference.js
+```
+
+导出只调用一次Godot，12.875秒、exit0、无错误行。旧catalog通过明确新增内容、资格/版本元数据与裂刃消费者解释投影后，与独立v54基线语义hash完全相同；不是忽略旧实例或只比部分数值。源树全部execution与覆盖JSON逐字节保持，旧67张PNG保持，新短刃PNG直接复制原字节。聚焦检查与确定性构建均通过；不运行历史全量、600秒或新增每版截图验收。完整命令、退出码、失败调试记录和指纹见 `../qa/v055-reference/`。

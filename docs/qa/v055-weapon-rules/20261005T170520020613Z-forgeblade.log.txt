@@ -1,0 +1,30 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+SCRIPT ERROR: Invalid operands 'String' and 'Array' in operator '=='.
+          at: _consumer_matrix (res://tests/forgeblade_hit_rules_test.gd:143)
+          GDScript backtrace (most recent call first):
+              [0] _consumer_matrix (res://tests/forgeblade_hit_rules_test.gd:143)
+              [1] _case (res://tests/forgeblade_hit_rules_test.gd:39)
+              [2] _run (res://tests/forgeblade_hit_rules_test.gd:27)
+ERROR: FAIL: Case completes without script errors: base_specific_consumer_matrix
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tests/forgeblade_hit_rules_test.gd:48)
+       [1] _case (res://tests/forgeblade_hit_rules_test.gd:40)
+       [2] _run (res://tests/forgeblade_hit_rules_test.gd:27)
+SCRIPT ERROR: Invalid operands 'int' and 'String' in operator '=='.
+          at: _weapon_trace_error (res://scripts/combat/damage_base_compiler.gd:157)
+          GDScript backtrace (most recent call first):
+              [0] _weapon_trace_error (res://scripts/combat/damage_base_compiler.gd:157)
+              [1] packet_error (res://scripts/combat/damage_base_compiler.gd:137)
+              [2] _trace_rejections (res://tests/forgeblade_hit_rules_test.gd:238)
+              [3] _case (res://tests/forgeblade_hit_rules_test.gd:39)
+              [4] _run (res://tests/forgeblade_hit_rules_test.gd:30)
+ERROR: FAIL: Forged base fails even when numeric stages still sum
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (res://tests/forgeblade_hit_rules_test.gd:48)
+       [1] _trace_rejections (res://tests/forgeblade_hit_rules_test.gd:238)
+       [2] _case (res://tests/forgeblade_hit_rules_test.gd:39)
+       [3] _run (res://tests/forgeblade_hit_rules_test.gd:30)
+Forgeblade hit rules: 2314 checks, 2 failures; sections {"base_specific_consumer_matrix":644,"complete_v054_bytes_and_error_precedence":1249,"forgeblade_profiles":297,"forged_traces":39,"independent_local_stage":25,"real_compiler_and_frozen_consumers":59}

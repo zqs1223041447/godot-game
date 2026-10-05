@@ -1,0 +1,26 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/a51485f153de/v055-forgeblade/docs/qa/v055-reference/capture-v054-baseline.py", line 23, in <module>
+    rows=walk(a,b)
+         ^^^^^^^^^
+  File "/workspace/scratch/a51485f153de/v055-forgeblade/docs/qa/v055-reference/capture-v054-baseline.py", line 17, in walk
+    return [{'path':list(p+(k,)),'added':b[k]} for k in sorted(b.keys()-a.keys())]+[row for k in sorted(a) for row in walk(a[k],b[k],p+(k,))]
+                                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/a51485f153de/v055-forgeblade/docs/qa/v055-reference/capture-v054-baseline.py", line 17, in walk
+    return [{'path':list(p+(k,)),'added':b[k]} for k in sorted(b.keys()-a.keys())]+[row for k in sorted(a) for row in walk(a[k],b[k],p+(k,))]
+                                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/a51485f153de/v055-forgeblade/docs/qa/v055-reference/capture-v054-baseline.py", line 17, in walk
+    return [{'path':list(p+(k,)),'added':b[k]} for k in sorted(b.keys()-a.keys())]+[row for k in sorted(a) for row in walk(a[k],b[k],p+(k,))]
+                                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/a51485f153de/v055-forgeblade/docs/qa/v055-reference/capture-v054-baseline.py", line 20, in walk
+    return [row for k in range(len(a)) for row in walk(a[k],b[k],p+(k,))]+[{'path':list(p+(k,)),'added':b[k]} for k in range(len(a),len(b))]
+                                                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/a51485f153de/v055-forgeblade/docs/qa/v055-reference/capture-v054-baseline.py", line 17, in walk
+    return [{'path':list(p+(k,)),'added':b[k]} for k in sorted(b.keys()-a.keys())]+[row for k in sorted(a) for row in walk(a[k],b[k],p+(k,))]
+                                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/a51485f153de/v055-forgeblade/docs/qa/v055-reference/capture-v054-baseline.py", line 17, in walk
+    return [{'path':list(p+(k,)),'added':b[k]} for k in sorted(b.keys()-a.keys())]+[row for k in sorted(a) for row in walk(a[k],b[k],p+(k,))]
+                                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/a51485f153de/v055-forgeblade/docs/qa/v055-reference/capture-v054-baseline.py", line 16, in walk
+    assert a.keys()<=b.keys(), p
+           ^^^^^^^^^^^^^^^^^^
+AssertionError: ('town_maps', 'stock', 'equipment_merchant', 14, 'preview', 'stats')

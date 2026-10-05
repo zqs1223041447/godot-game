@@ -154,7 +154,7 @@ static func _weapon_trace_error(trace: Variant, packet: Dictionary, coefficient:
 	# explicit new base selects the new event gate; profile validation still
 	# follows and rejects malformed/unknown provenance before using any points.
 	var base_id: String = Weapon.BASE_ID
-	if trace is Dictionary and trace.get("profile") is Dictionary and trace.profile.get("base_id") == "forgeblade":
+	if trace is Dictionary and trace.get("profile") is Dictionary and trace.profile.get("base_id") is String and trace.profile.base_id == "forgeblade":
 		base_id = "forgeblade"
 	if not Weapon.consumes_hit(base_id, packet.skill_id, packet.role, packet.tags):
 		return "此命中不可使用武器局部伤害"

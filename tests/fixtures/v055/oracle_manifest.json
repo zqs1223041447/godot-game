@@ -1,0 +1,36 @@
+{
+  "baseline_commit": "5e442d98e82b248efc3a553fdf9bf95733929096",
+  "purpose": "Frozen v0.54 catalog and pure crafting oracle. Only class names and the five internal preload paths are rewritten to keep an independent loadable oracle.",
+  "files": [
+    {
+      "source": "scripts/items/equipment_catalog.gd",
+      "source_sha256": "c787ab2a9d5f80601390cf47266585476b244d81bfed651c591c4a6f92331008",
+      "fixture": "tests/fixtures/v055/equipment_catalog_v054.gd",
+      "fixture_sha256": "2350baa88eec5a0ea733e768c739ea80db2320961315978635c8938e8d4a83fe"
+    },
+    {
+      "source": "scripts/items/crafting_rules.gd",
+      "source_sha256": "553ac091068d50cbb2fcf0f74e779dd0078ec00abcbc7c5c76e5bc8128576249",
+      "fixture": "tests/fixtures/v055/crafting_rules_v054.gd",
+      "fixture_sha256": "c64f9490b24eafd9155a332d9ffae3e7cd4000b9f74f2eeddb3b760e6e077c73"
+    },
+    {
+      "source": "scripts/items/crafting_expansion_rules.gd",
+      "source_sha256": "b690c538a2274b2451f2caa195d30ce0f670284a6b718959c677f0ed30ad2eff",
+      "fixture": "tests/fixtures/v055/crafting_expansion_rules_v054.gd",
+      "fixture_sha256": "b00ebbc9cef55bbc0235b1ecd4cba43571b4118335d064ef1cc888cd3b800cd0"
+    },
+    {
+      "source": "scripts/items/targeted_reforge_rules.gd",
+      "source_sha256": "c0aab3ecf3bc7f006ac8d10865e373c402a1abda21f1a52fdc3166f572f1c7ad",
+      "fixture": "tests/fixtures/v055/targeted_reforge_rules_v054.gd",
+      "fixture_sha256": "54a20ee5b146517ed843b9bbeae31daece9604ea2d30147c5429f2bf05a6ebf0"
+    },
+    {
+      "source": "scripts/items/weapon_local_rules.gd",
+      "source_sha256": "4bb31e82ade95ff91341e4b1720869ed930cfcbbe18c12a099304c177c3de307",
+      "fixture": "tests/fixtures/v055/weapon_local_rules_v054.gd",
+      "fixture_sha256": "70e567056c23bdbc0f9874ea3a9ab118ab38aafc82acfb802932dda82c98174a"
+    }
+  ]
+}
