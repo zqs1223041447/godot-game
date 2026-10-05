@@ -1,4 +1,4 @@
-class_name BurnRuntime
+class_name FrozenV050BurnRuntime
 extends RefCounted
 ## Bounded, pure status storage and raw-time integration. Each target owns its
 ## active clock. Expiry/removal discards that clock; the caller owns live-target
@@ -10,9 +10,6 @@ const MAX_TARGETS: int = 101
 const MAX_PROVENANCE_TEXT: int = 128
 const PROVENANCE_KEYS: Array[String] = ["skill_id", "cast_id", "projectile_id", "phase", "ember_generation", "ember_expiry"]
 var _states: Dictionary = {}
-# Identity order only; never cache or expose mutable state dictionaries.
-var _status_keys: Array[String] = []
-var _status_order_dirty: bool = true
 
 
 func apply(kind: Variant, id: Variant, source_id: Variant, raw_dps: Variant,
@@ -55,7 +52,6 @@ func apply(kind: Variant, id: Variant, source_id: Variant, raw_dps: Variant,
 	else:
 		reason = "weaker"
 	# Plan every validation/integration step before committing the target state.
-	if not _states.has(key): _status_order_dirty = true
 	if applied:
 		_states[key] = {"target_kind": kind, "target_id": id, "source_id": source_id,
 			"raw_dps": float(raw_dps), "remaining": lifetime, "last_time": start,
@@ -71,11 +67,6 @@ func advance_target(kind: Variant, id: Variant, to_time: Variant) -> Dictionary:
 	if not reason.is_empty(): return _failure(reason)
 	var key: String = _key(kind, id)
 	if not _states.has(key): return _success([])
-	# The original zero-width plan retains remaining/last_time exactly. Inputs
-	# are validated above; the fresh empty result exposes no internal alias.
-	if float(to_time) == float(_states[key].last_time) and float(_states[key].remaining) > 0.0:
-		var empty: Array[Dictionary] = []
-		return _success(empty)
 	var planned: Dictionary = _plan_advance(_states[key], float(to_time))
 	if not planned.ok: return _failure(planned.reason)
 	_commit(key, planned.status)
@@ -100,15 +91,11 @@ func advance_all(to_time: Variant) -> Dictionary:
 func remove(kind: Variant, id: Variant) -> Dictionary:
 	var reason: String = _actor_error(kind, id)
 	if not reason.is_empty(): return {"ok": false, "reason": reason, "removed": false}
-	var removed: bool = _states.erase(_key(kind, id))
-	if removed: _status_order_dirty = true
-	return {"ok": true, "reason": "", "removed": removed}
+	return {"ok": true, "reason": "", "removed": _states.erase(_key(kind, id))}
 
 
 func reset() -> void:
 	_states.clear()
-	_status_keys.clear()
-	_status_order_dirty = false
 
 
 ## Read-only clock for preserving an upstream scheduler's established tie order.
@@ -133,38 +120,19 @@ func has_ember_states() -> bool:
 	return false
 
 
-func latest_monster_time() -> float:
-	var latest: float = -1.0
-	for key: String in _states:
-		var state: Dictionary = _states[key]
-		if state.target_kind == "monster": latest = maxf(latest, float(state.last_time))
-	return latest
-
-
-func _ensure_status_order() -> void:
-	if not _status_order_dirty: return
-	_status_keys.assign(_states.keys())
-	_status_keys.sort_custom(func(left_key: String, right_key: String) -> bool:
-		var left: Dictionary = _states[left_key]
-		var right: Dictionary = _states[right_key]
+func statuses() -> Array[Dictionary]:
+	var result: Array[Dictionary] = []
+	for state: Dictionary in _states.values(): result.append(state.duplicate(true))
+	result.sort_custom(func(left: Dictionary, right: Dictionary) -> bool:
 		if left.target_kind != right.target_kind: return left.target_kind < right.target_kind
 		return int(left.target_id) < int(right.target_id))
-	_status_order_dirty = false
-
-
-func statuses() -> Array[Dictionary]:
-	_ensure_status_order()
-	var result: Array[Dictionary] = []
-	for key: String in _status_keys: result.append(_states[key].duplicate(true))
 	return result
 
 
 func _commit(key: String, state: Dictionary) -> void:
-	if state.is_empty():
-		if _states.erase(key): _status_order_dirty = true
-	else:
-		if not _states.has(key): _status_order_dirty = true
-		_states[key] = state
+	if state.is_empty(): _states.erase(key)
+	else: _states[key] = state
+
 
 static func _plan_advance(state: Dictionary, to_time: float) -> Dictionary:
 	var last: float = float(state.last_time)

@@ -1586,9 +1586,7 @@ func _ember_event_time(at:float,event:Dictionary)->float:
 	# offsets; the event dictionary and ordering remain untouched for RNG/trace.
 	if not _ember_projectile_clock.is_empty() and event.get("sequence",-1)==_ember_projectile_clock.sequence and event.get("time",-1.0)==_ember_projectile_clock.raw:
 		at=_burn_event_time(float(_ember_projectile_clock.offset))
-	var latest:float=at
-	for status:Dictionary in burn_runtime.statuses():
-		if status.target_kind=="monster":latest=maxf(latest,float(status.last_time))
+	var latest:float=maxf(at,burn_runtime.latest_monster_time())
 	if latest>at:
 		# Same tie contract as the projectile scheduler, relative to this tick.
 		assert(_burn_step_active and event.has("time") and latest<=elapsed and is_equal_approx(float(event.time),latest-_burn_step_start),"Ember events cannot reverse time outside an existing projectile tie")
@@ -1642,6 +1640,7 @@ func _advance_proliferating_burns(to_time:float)->void:
 			if float(status.last_time)>cut:continue
 			var advanced:Dictionary=burn_runtime.advance_target("monster",int(status.target_id),cut)
 			_assert_burn_result(advanced)
+			if advanced.segments.is_empty():continue
 			segments.append_array(advanced.segments)
 			sources[int(status.target_id)]=status
 			if death_times.get(int(status.target_id),-1.0)==cut:exact[int(status.target_id)]=true

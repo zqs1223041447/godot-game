@@ -1,0 +1,519 @@
+{
+	"base_commit": "a9a402d3d1f590e20c8917d177f1869ad9274751",
+	"cpu": "AMD EPYC 9V74 80-Core Processor",
+	"engine": "4.6.3-stable (official)",
+	"instrumented": true,
+	"rows": [
+		{
+			"calls": {
+				"burn_advance_target": 10781,
+				"burn_settlement": 19140,
+				"burn_status_copies": 24,
+				"death_and_rewards": 13162,
+				"effects": 24,
+				"enemy_ai": 24,
+				"pickups": 24,
+				"progress_flush": 24,
+				"projectiles": 24,
+				"spawn_cleanup": 24
+			},
+			"extra_counts": {
+				"advance_empty_segments": 5978,
+				"advance_nonempty_segments": 4803,
+				"copied_status_rows": 2400,
+				"settled_burn_segments": 4803
+			},
+			"final_inventory": 38,
+			"frames": 24,
+			"initial_enemies": 100,
+			"initial_inventory": 38,
+			"kills": 0,
+			"mode": "ignite",
+			"observation_bytes": 1261236,
+			"observation_sha256": "a01a1fc2e4fdf1e11d8a9c87ffb5dafead8036253e7d30460d88c9e178ee4366",
+			"phases": {
+				"burn_advance_target_inclusive_us": {
+					"max_us": 4526,
+					"mean_us": 4043.7083333333335,
+					"n": 24,
+					"over_16_7_ms": 0,
+					"over_33_3_ms": 0,
+					"p50_us": 4058,
+					"p95_us": 4521
+				},
+				"burn_advance_target_self_us": {
+					"max_us": 4526,
+					"mean_us": 4043.7083333333335,
+					"n": 24,
+					"over_16_7_ms": 0,
+					"over_33_3_ms": 0,
+					"p50_us": 4058,
+					"p95_us": 4521
+				},
+				"burn_settlement_inclusive_us": {
+					"max_us": 11371,
+					"mean_us": 9065.75,
+					"n": 24,
+					"over_16_7_ms": 0,
+					"over_33_3_ms": 0,
+					"p50_us": 9004,
+					"p95_us": 10086
+				},
+				"burn_settlement_self_us": {
+					"max_us": 11023,
+					"mean_us": 8829.958333333334,
+					"n": 24,
+					"over_16_7_ms": 0,
+					"over_33_3_ms": 0,
+					"p50_us": 8787,
+					"p95_us": 9854
+				},
+				"burn_status_copies_inclusive_us": {
+					"max_us": 833,
+					"mean_us": 588.5,
+					"n": 24,
+					"over_16_7_ms": 0,
+					"over_33_3_ms": 0,
+					"p50_us": 570,
+					"p95_us": 691
+				},
+				"burn_status_copies_self_us": {
+					"max_us": 833,
+					"mean_us": 588.5,
+					"n": 24,
+					"over_16_7_ms": 0,
+					"over_33_3_ms": 0,
+					"p50_us": 570,
+					"p95_us": 691
+				},
+				"death_and_rewards_inclusive_us": {
+					"max_us": 883,
+					"mean_us": 720.0833333333334,
+					"n": 24,
+					"over_16_7_ms": 0,
+					"over_33_3_ms": 0,
+					"p50_us": 696,
+					"p95_us": 867
+				},
+				"death_and_rewards_self_us": {
+					"max_us": 883,
+					"mean_us": 720.0833333333334,
+					"n": 24,
+					"over_16_7_ms": 0,
+					"over_33_3_ms": 0,
+					"p50_us": 696,
+					"p95_us": 867
+				},
+				"effects_inclusive_us": {
+					"max_us": 328,
+					"mean_us": 256.875,
+					"n": 24,
+					"over_16_7_ms": 0,
+					"over_33_3_ms": 0,
+					"p50_us": 257,
+					"p95_us": 324
+				},
+				"effects_self_us": {
+					"max_us": 328,
+					"mean_us": 256.875,
+					"n": 24,
+					"over_16_7_ms": 0,
+					"over_33_3_ms": 0,
+					"p50_us": 257,
+					"p95_us": 324
+				},
+				"enemy_ai_inclusive_us": {
+					"max_us": 4346,
+					"mean_us": 2947.6666666666665,
+					"n": 24,
+					"over_16_7_ms": 0,
+					"over_33_3_ms": 0,
+					"p50_us": 2774,
+					"p95_us": 4006
+				},
+				"enemy_ai_self_us": {
+					"max_us": 4327,
+					"mean_us": 2928.5,
+					"n": 24,
+					"over_16_7_ms": 0,
+					"over_33_3_ms": 0,
+					"p50_us": 2754,
+					"p95_us": 3962
+				},
+				"pickups_inclusive_us": {
+					"max_us": 5,
+					"mean_us": 4.208333333333333,
+					"n": 24,
+					"over_16_7_ms": 0,
+					"over_33_3_ms": 0,
+					"p50_us": 4,
+					"p95_us": 5
+				},
+				"pickups_self_us": {
+					"max_us": 5,
+					"mean_us": 4.208333333333333,
+					"n": 24,
+					"over_16_7_ms": 0,
+					"over_33_3_ms": 0,
+					"p50_us": 4,
+					"p95_us": 5
+				},
+				"progress_flush_inclusive_us": {
+					"max_us": 4,
+					"mean_us": 3.4166666666666665,
+					"n": 24,
+					"over_16_7_ms": 0,
+					"over_33_3_ms": 0,
+					"p50_us": 3,
+					"p95_us": 4
+				},
+				"progress_flush_self_us": {
+					"max_us": 4,
+					"mean_us": 3.4166666666666665,
+					"n": 24,
+					"over_16_7_ms": 0,
+					"over_33_3_ms": 0,
+					"p50_us": 3,
+					"p95_us": 4
+				},
+				"projectiles_inclusive_us": {
+					"max_us": 111550,
+					"mean_us": 90644.125,
+					"n": 24,
+					"over_16_7_ms": 24,
+					"over_33_3_ms": 24,
+					"p50_us": 89588,
+					"p95_us": 101778
+				},
+				"projectiles_self_us": {
+					"max_us": 101146,
+					"mean_us": 81427.95833333333,
+					"n": 24,
+					"over_16_7_ms": 24,
+					"over_33_3_ms": 24,
+					"p50_us": 80566,
+					"p95_us": 91413
+				},
+				"spawn_cleanup_inclusive_us": {
+					"max_us": 312,
+					"mean_us": 199.58333333333334,
+					"n": 24,
+					"over_16_7_ms": 0,
+					"over_33_3_ms": 0,
+					"p50_us": 200,
+					"p95_us": 283
+				},
+				"spawn_cleanup_self_us": {
+					"max_us": 312,
+					"mean_us": 199.58333333333334,
+					"n": 24,
+					"over_16_7_ms": 0,
+					"over_33_3_ms": 0,
+					"p50_us": 200,
+					"p95_us": 283
+				}
+			},
+			"reward_kills": 0,
+			"samples": [
+				{
+					"burns": 100,
+					"cpu_us": 99463,
+					"enemies": 100,
+					"feedback": 0,
+					"frame": 0,
+					"hits": 342,
+					"kills": 0,
+					"particles": 180,
+					"pickups": 0,
+					"projectiles": 180
+				},
+				{
+					"burns": 100,
+					"cpu_us": 95891,
+					"enemies": 100,
+					"feedback": 0,
+					"frame": 1,
+					"hits": 342,
+					"kills": 0,
+					"particles": 180,
+					"pickups": 0,
+					"projectiles": 180
+				},
+				{
+					"burns": 100,
+					"cpu_us": 105592,
+					"enemies": 100,
+					"feedback": 0,
+					"frame": 2,
+					"hits": 342,
+					"kills": 0,
+					"particles": 180,
+					"pickups": 0,
+					"projectiles": 180
+				},
+				{
+					"burns": 100,
+					"cpu_us": 102508,
+					"enemies": 100,
+					"feedback": 0,
+					"frame": 3,
+					"hits": 342,
+					"kills": 0,
+					"particles": 180,
+					"pickups": 0,
+					"projectiles": 180
+				},
+				{
+					"burns": 100,
+					"cpu_us": 102314,
+					"enemies": 100,
+					"feedback": 0,
+					"frame": 4,
+					"hits": 342,
+					"kills": 0,
+					"particles": 180,
+					"pickups": 0,
+					"projectiles": 180
+				},
+				{
+					"burns": 100,
+					"cpu_us": 93286,
+					"enemies": 100,
+					"feedback": 0,
+					"frame": 5,
+					"hits": 342,
+					"kills": 0,
+					"particles": 180,
+					"pickups": 0,
+					"projectiles": 180
+				},
+				{
+					"burns": 100,
+					"cpu_us": 97602,
+					"enemies": 100,
+					"feedback": 0,
+					"frame": 6,
+					"hits": 342,
+					"kills": 0,
+					"particles": 180,
+					"pickups": 0,
+					"projectiles": 180
+				},
+				{
+					"burns": 100,
+					"cpu_us": 94026,
+					"enemies": 100,
+					"feedback": 0,
+					"frame": 7,
+					"hits": 342,
+					"kills": 0,
+					"particles": 180,
+					"pickups": 0,
+					"projectiles": 180
+				},
+				{
+					"burns": 100,
+					"cpu_us": 100742,
+					"enemies": 100,
+					"feedback": 0,
+					"frame": 8,
+					"hits": 342,
+					"kills": 0,
+					"particles": 180,
+					"pickups": 0,
+					"projectiles": 180
+				},
+				{
+					"burns": 100,
+					"cpu_us": 94121,
+					"enemies": 100,
+					"feedback": 0,
+					"frame": 9,
+					"hits": 342,
+					"kills": 0,
+					"particles": 180,
+					"pickups": 0,
+					"projectiles": 180
+				},
+				{
+					"burns": 100,
+					"cpu_us": 99569,
+					"enemies": 100,
+					"feedback": 0,
+					"frame": 10,
+					"hits": 341,
+					"kills": 0,
+					"particles": 180,
+					"pickups": 0,
+					"projectiles": 180
+				},
+				{
+					"burns": 100,
+					"cpu_us": 96457,
+					"enemies": 100,
+					"feedback": 0,
+					"frame": 11,
+					"hits": 339,
+					"kills": 0,
+					"particles": 180,
+					"pickups": 0,
+					"projectiles": 180
+				},
+				{
+					"burns": 100,
+					"cpu_us": 100709,
+					"enemies": 100,
+					"feedback": 0,
+					"frame": 12,
+					"hits": 349,
+					"kills": 0,
+					"particles": 180,
+					"pickups": 0,
+					"projectiles": 180
+				},
+				{
+					"burns": 100,
+					"cpu_us": 100709,
+					"enemies": 100,
+					"feedback": 48,
+					"frame": 13,
+					"hits": 348,
+					"kills": 0,
+					"particles": 180,
+					"pickups": 0,
+					"projectiles": 180
+				},
+				{
+					"burns": 100,
+					"cpu_us": 92717,
+					"enemies": 100,
+					"feedback": 48,
+					"frame": 14,
+					"hits": 348,
+					"kills": 0,
+					"particles": 180,
+					"pickups": 0,
+					"projectiles": 180
+				},
+				{
+					"burns": 100,
+					"cpu_us": 94978,
+					"enemies": 100,
+					"feedback": 48,
+					"frame": 15,
+					"hits": 342,
+					"kills": 0,
+					"particles": 180,
+					"pickups": 0,
+					"projectiles": 180
+				},
+				{
+					"burns": 100,
+					"cpu_us": 98077,
+					"enemies": 100,
+					"feedback": 48,
+					"frame": 16,
+					"hits": 342,
+					"kills": 0,
+					"particles": 180,
+					"pickups": 0,
+					"projectiles": 180
+				},
+				{
+					"burns": 100,
+					"cpu_us": 100553,
+					"enemies": 100,
+					"feedback": 48,
+					"frame": 17,
+					"hits": 340,
+					"kills": 0,
+					"particles": 180,
+					"pickups": 0,
+					"projectiles": 180
+				},
+				{
+					"burns": 100,
+					"cpu_us": 94205,
+					"enemies": 100,
+					"feedback": 48,
+					"frame": 18,
+					"hits": 342,
+					"kills": 0,
+					"particles": 0,
+					"pickups": 0,
+					"projectiles": 180
+				},
+				{
+					"burns": 100,
+					"cpu_us": 101318,
+					"enemies": 100,
+					"feedback": 48,
+					"frame": 19,
+					"hits": 357,
+					"kills": 0,
+					"particles": 180,
+					"pickups": 0,
+					"projectiles": 180
+				},
+				{
+					"burns": 100,
+					"cpu_us": 105995,
+					"enemies": 100,
+					"feedback": 48,
+					"frame": 20,
+					"hits": 365,
+					"kills": 0,
+					"particles": 180,
+					"pickups": 0,
+					"projectiles": 180
+				},
+				{
+					"burns": 100,
+					"cpu_us": 111703,
+					"enemies": 100,
+					"feedback": 48,
+					"frame": 21,
+					"hits": 370,
+					"kills": 0,
+					"particles": 180,
+					"pickups": 0,
+					"projectiles": 180
+				},
+				{
+					"burns": 100,
+					"cpu_us": 121339,
+					"enemies": 100,
+					"feedback": 48,
+					"frame": 22,
+					"hits": 380,
+					"kills": 0,
+					"particles": 180,
+					"pickups": 0,
+					"projectiles": 180
+				},
+				{
+					"burns": 100,
+					"cpu_us": 110837,
+					"enemies": 100,
+					"feedback": 48,
+					"frame": 23,
+					"hits": 376,
+					"kills": 0,
+					"particles": 180,
+					"pickups": 0,
+					"projectiles": 180
+				}
+			],
+			"tick": {
+				"max_us": 121339,
+				"mean_us": 100612.95833333333,
+				"n": 24,
+				"over_16_7_ms": 24,
+				"over_33_3_ms": 24,
+				"p50_us": 100553,
+				"p95_us": 111703
+			}
+		}
+	],
+	"scope": "Headless script CPU; nested inclusive phases are not additive. Stress volleys are controlled carriers, not a claim one player naturally emits180 every tick. Catalog monsters retain AI and attack scheduling; player protected for the benchmark. No rendering/WindowsFPS measurement."
+}

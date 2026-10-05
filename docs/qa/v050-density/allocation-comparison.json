@@ -1,0 +1,108 @@
+{
+  "baseline": "d5ef658b7fce7e36a0b1ee22f5991d5ee2463118",
+  "source_sha256": {
+    "scripts/main.gd": "493dd4a38805c2e2ba81086ed5ddd6630e73eb87511526df9b74d44831a43f78",
+    "scripts/combat/burn_runtime.gd": "e683621248891bb8c369c3a87be55f58c7055216b4257602e3e9ea1cacc38856",
+    "scripts/combat/ember_event_clock.gd": "53e3d1ab85311b433a18ca307db06eef82178553a3eff73389c01f01808b9ae6",
+    "tools/diagnostics/latest_density_profile.gd": "443c32cb9dcbfa9ee75bba92ff3a77a27f1ccb9404cdb2b689a72c9db58db220"
+  },
+  "rows": {
+    "no_burn": {
+      "before": {
+        "max_us": 66135,
+        "mean_us": 55934.208333333336,
+        "n": 24,
+        "over_16_7_ms": 24,
+        "over_33_3_ms": 24,
+        "p50_us": 55494,
+        "p95_us": 61590
+      },
+      "after": {
+        "max_us": 75149,
+        "mean_us": 52360.875,
+        "n": 24,
+        "over_16_7_ms": 24,
+        "over_33_3_ms": 24,
+        "p50_us": 50041,
+        "p95_us": 64064
+      },
+      "exact_observation_sha256": "e670cf90128b3e986ef9f433fcf0e07b119b6fec5140e828898996228c1d12ee",
+      "bytes": 1122432,
+      "kills": 0,
+      "reward_kills": 0
+    },
+    "ignite": {
+      "before": {
+        "max_us": 110816,
+        "mean_us": 102595.08333333333,
+        "n": 24,
+        "over_16_7_ms": 24,
+        "over_33_3_ms": 24,
+        "p50_us": 103941,
+        "p95_us": 108303
+      },
+      "after": {
+        "max_us": 117769,
+        "mean_us": 102007.58333333333,
+        "n": 24,
+        "over_16_7_ms": 24,
+        "over_33_3_ms": 24,
+        "p50_us": 102999,
+        "p95_us": 113994
+      },
+      "exact_observation_sha256": "a01a1fc2e4fdf1e11d8a9c87ffb5dafead8036253e7d30460d88c9e178ee4366",
+      "bytes": 1261236,
+      "kills": 0,
+      "reward_kills": 0
+    },
+    "ember_proliferation": {
+      "before": {
+        "max_us": 1672525,
+        "mean_us": 1402520.125,
+        "n": 24,
+        "over_16_7_ms": 24,
+        "over_33_3_ms": 24,
+        "p50_us": 1409920,
+        "p95_us": 1549333
+      },
+      "after": {
+        "max_us": 1066661,
+        "mean_us": 958486.375,
+        "n": 24,
+        "over_16_7_ms": 24,
+        "over_33_3_ms": 24,
+        "p50_us": 956867,
+        "p95_us": 1034251
+      },
+      "exact_observation_sha256": "efad18733c7d2a41d2138c5a7044d3929af55725b5d359715e1e5092d8e397d3",
+      "bytes": 1302852,
+      "kills": 0,
+      "reward_kills": 0
+    },
+    "ember_deaths": {
+      "before": {
+        "max_us": 1127734,
+        "mean_us": 53494.153333333335,
+        "n": 150,
+        "over_16_7_ms": 62,
+        "over_33_3_ms": 53,
+        "p50_us": 10482,
+        "p95_us": 184834
+      },
+      "after": {
+        "max_us": 830725,
+        "mean_us": 45559.62666666666,
+        "n": 150,
+        "over_16_7_ms": 62,
+        "over_33_3_ms": 53,
+        "p50_us": 9777,
+        "p95_us": 159102
+      },
+      "exact_observation_sha256": "a45eabb7d2d448ddcb16a3679119d0265f3e325f35017a2109763784b6ac10ce",
+      "bytes": 250036,
+      "kills": 27,
+      "reward_kills": 27
+    }
+  },
+  "scope": "Error-free same-source headless CPU samples; nested labels nonadditive; controlled180-carrier volleys not natural player emission rate or WindowsFPS"
+}
