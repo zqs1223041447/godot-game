@@ -31,6 +31,8 @@ var feedback_runtime = FeedbackRuntime.new()
 const BurnRuntime=preload("res://scripts/combat/burn_runtime.gd")
 const BurnRules=preload("res://scripts/combat/burn_rules.gd")
 const EmberRules=preload("res://scripts/combat/ember_proliferation_rules.gd")
+const EmberClock=preload("res://scripts/combat/ember_event_clock.gd")
+var _ember_projectile_clock:Dictionary={}
 var burn_runtime=BurnRuntime.new()
 var burn_trace:Array[Dictionary]=[]
 var _ember_advancing:=false
@@ -1206,11 +1208,26 @@ func _area_damage(origin: Vector2, radius: float, packet: Dictionary, color: Col
 
 
 func _update_projectiles(delta: float) -> void:
+	_ember_projectile_clock.clear()
 	_projectile_targets.clear()
 	for enemy: Dictionary in enemies: _projectile_targets[int(enemy.id)] = enemy
 	var terrain_query: Callable = _geometry.sweep if _geometry.has_walls() else Callable()
 	var events: Array[Dictionary] = projectile_runtime.advance(projectiles, delta, enemies, player_pos, MAX_PROJECTILES, _projectile_contact_admitted, terrain_query)
+	var ember_batch:bool=burn_runtime.has_ember_states()
+	if not ember_batch:
+		for event:Dictionary in events:
+			if event.get("snapshot",{}).has("burn_proliferation"):
+				ember_batch=true;break
+	var offsets:Array=[]
+	if ember_batch:
+		var prepared:Dictionary=EmberClock.offsets(events)
+		assert(prepared.ok,"Validated original projectile event tie chains: "+str(prepared.reason))
+		if not prepared.ok:return
+		offsets=prepared.offsets
+	var event_index:int=0
 	for event: Dictionary in events:
+		if ember_batch:_ember_projectile_clock={"sequence":event.sequence,"raw":float(event.time),"offset":float(offsets[event_index])}
+		event_index+=1
 		event_counts[event.type] = int(event_counts.get(event.type, 0)) + 1
 		var brief: Dictionary = event.duplicate(true)
 		brief.erase("snapshot")
@@ -1240,6 +1257,7 @@ func _update_projectiles(delta: float) -> void:
 			visual_cues.emit_cue("split", event.pos, {"radius": 26.0, "color": Color("a6e8aa")})
 		elif event.type == "spawn_rejected":
 			hud.notify("投射物容量不足，本次三子箭整组取消；未触发爆炸")
+	_ember_projectile_clock.clear()
 	_flush_monster_spawns()
 
 
@@ -1564,6 +1582,10 @@ func _assert_burn_result(result:Dictionary)->void:
 
 
 func _ember_event_time(at:float,event:Dictionary)->float:
+	# The current batch's clock is derived only from adjacent original raw
+	# offsets; the event dictionary and ordering remain untouched for RNG/trace.
+	if not _ember_projectile_clock.is_empty() and event.get("sequence",-1)==_ember_projectile_clock.sequence and event.get("time",-1.0)==_ember_projectile_clock.raw:
+		at=_burn_event_time(float(_ember_projectile_clock.offset))
 	var latest:float=at
 	for status:Dictionary in burn_runtime.statuses():
 		if status.target_kind=="monster":latest=maxf(latest,float(status.last_time))

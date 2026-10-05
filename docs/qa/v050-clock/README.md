@@ -1,0 +1,11 @@
+# Adjacent projectile tie-chain repair
+
+Diagnostic baseline: released v49 a9a402d3d1f590e20c8917d177f1869ad9274751. Production runtime generated three consecutive hit offsets of approximately 8.4987105748, 8.4954429782, and 8.4858866308 milliseconds. Each adjacent pair satisfies the original approximate comparator; the endpoints do not. The old global burn clock normalized to the first point and rejected the third.
+
+The captured live collision batch was reduced through actual ProjectileRuntime.advance to four legal carriers and three targets. One zero-offset hit preserves the original sorting anchor. The compact binary fixture and original event offsets are retained. This is generated production collision input, not a hand-forged out-of-order event list.
+
+The repair adds a stateless EmberEventClock for one original event batch. It only accepts a reverse offset when the immediately preceding original raw offset is an approximate tie. It leaves the original events and RNG order untouched, supplies a separate monotone burn offset, clears current-batch context after dispatch, and does not compare cumulative elapsed time for tolerance. Genuine backward jumps still reject with no partial plan. Only ember batches use the adapter.
+
+45 scoped checks pass with exit0: malformed/reversed input, adjacent nontransitive chain, fresh batch reset, actual current starter build compiling ember tornado, real runtime four-contact dispatch onto three living actors, exact original event traces, and zero/one-million-second absolute clocks. The initial test fixture omitted the real admission callback flag in its reference trace and used a rounded decimal literal as an exact binary float expectation. Those expectations were corrected to the real callback and actual runtime offset; no production change was needed for that test correction. Initial failure log remains.
+
+The first density attempt allowed its low-damage repeated hits to shrink the population, invalidating fixed index100; it was stopped. The second diagnostic completed but triggered the production clock assertion. Its timings are explicitly rejected, and the custom save name also missed the normal-XP guard. Only later error-free samples may support performance conclusions. No completed-v49 artifacts are changed.

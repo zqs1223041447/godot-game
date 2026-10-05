@@ -1,0 +1,61 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+godot-game: playable arena ready
+FIRST_CLOCK_INVERSION {"at":0.0751525532974494,"elapsed":0.0833333333333333,"event_offset":0.00848588663078278,"event_sequence":1436,"event_type":"hit","frame":4,"latest":0.0751653772414382,"latest_offset":0.00849871057477151,"previous_offset":0.00849544297821095,"previous_pair_tie":true,"relative_tie":false,"reverse_seconds":0.0000128239439887434,"step_start":0.0666666666666667}
+SCRIPT ERROR: Assertion failed: Ember events cannot reverse time outside an existing projectile tie
+          at: TimedArena._ember_event_time (res://scripts/main.gd:1572)
+          GDScript backtrace (most recent call first):
+              [0] _ember_event_time (res://scripts/main.gd:1572)
+              [1] _ember_event_time (res://tools/diagnostics/latest_density_profile.gd:76)
+              [2] _apply_damage_packet (res://scripts/main.gd:1251)
+              [3] _update_projectiles (res://scripts/main.gd:1224)
+              [4] _update_projectiles (res://tools/diagnostics/latest_density_profile.gd:57)
+              [5] _tick (res://scripts/main.gd:558)
+              [6] tick (res://scripts/main.gd:516)
+              [7] run (res://tools/diagnostics/latest_density_profile.gd:148)
+SCRIPT ERROR: Assertion failed: Monster burn timeline cannot move backwards
+          at: TimedArena._advance_proliferating_burns (res://scripts/main.gd:1596)
+          GDScript backtrace (most recent call first):
+              [0] _advance_proliferating_burns (res://scripts/main.gd:1596)
+              [1] _advance_proliferating_burns (res://tools/diagnostics/latest_density_profile.gd:78)
+              [2] _apply_damage_packet (res://scripts/main.gd:1258)
+              [3] _update_projectiles (res://scripts/main.gd:1224)
+              [4] _update_projectiles (res://tools/diagnostics/latest_density_profile.gd:57)
+              [5] _tick (res://scripts/main.gd:558)
+              [6] tick (res://scripts/main.gd:516)
+              [7] run (res://tools/diagnostics/latest_density_profile.gd:148)
+SCRIPT ERROR: Assertion failed: Validated burning timeline: Burn time cannot move backwards for an active target
+          at: TimedArena._assert_burn_result (res://scripts/main.gd:1563)
+          GDScript backtrace (most recent call first):
+              [0] _assert_burn_result (res://scripts/main.gd:1563)
+              [1] _apply_damage_packet (res://scripts/main.gd:1295)
+              [2] _update_projectiles (res://scripts/main.gd:1224)
+              [3] _update_projectiles (res://tools/diagnostics/latest_density_profile.gd:57)
+              [4] _tick (res://scripts/main.gd:558)
+              [5] tick (res://scripts/main.gd:516)
+              [6] run (res://tools/diagnostics/latest_density_profile.gd:148)
+SCRIPT ERROR: Assertion failed: Ember events cannot reverse time outside an existing projectile tie
+          at: TimedArena._ember_event_time (res://scripts/main.gd:1572)
+          GDScript backtrace (most recent call first):
+              [0] _ember_event_time (res://scripts/main.gd:1572)
+              [1] _ember_event_time (res://tools/diagnostics/latest_density_profile.gd:76)
+              [2] _apply_damage_packet (res://scripts/main.gd:1251)
+              [3] _update_projectiles (res://scripts/main.gd:1224)
+              [4] _update_projectiles (res://tools/diagnostics/latest_density_profile.gd:57)
+              [5] _tick (res://scripts/main.gd:558)
+              [6] tick (res://scripts/main.gd:516)
+              [7] run (res://tools/diagnostics/latest_density_profile.gd:148)
+SCRIPT ERROR: Assertion failed: Validated burning timeline: Burn time cannot move backwards for an active target
+          at: TimedArena._assert_burn_result (res://scripts/main.gd:1563)
+          GDScript backtrace (most recent call first):
+              [0] _assert_burn_result (res://scripts/main.gd:1563)
+              [1] _apply_damage_packet (res://scripts/main.gd:1295)
+              [2] _update_projectiles (res://scripts/main.gd:1224)
+              [3] _update_projectiles (res://tools/diagnostics/latest_density_profile.gd:57)
+              [4] _tick (res://scripts/main.gd:558)
+              [5] tick (res://scripts/main.gd:516)
+              [6] run (res://tools/diagnostics/latest_density_profile.gd:148)
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+   at: cleanup (core/object/object.cpp:2663)
+ERROR: 4 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:810)
