@@ -1,0 +1,233 @@
+{
+  "commands": [
+    {
+      "phase": "export",
+      "command": [
+        "godot",
+        "--headless",
+        "--path",
+        ".",
+        "--script",
+        "res://tools/export_reference.gd"
+      ],
+      "exit_code": 0,
+      "seconds": 5.618
+    },
+    {
+      "phase": "build",
+      "command": [
+        "python3",
+        "tools/build_reference.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.406
+    },
+    {
+      "phase": "test",
+      "command": [
+        "python3",
+        "tests/reference_catalog_test.py"
+      ],
+      "exit_code": 0,
+      "seconds": 2.148
+    }
+  ],
+  "isolated_xdg_root": "/tmp/godot-m1-v048-reference",
+  "before": {
+    "project.godot": {
+      "sha256": "3c4737b54573ba53538ca80fefff9d5dabbe233a5c1d270b4cb0fb52f44f64e0",
+      "bytes": 872
+    },
+    "tools/export_reference.gd": {
+      "sha256": "dc6be2c4ca7790ca26219d416d91a34980f67172685b9173ce1ea778beddab7b",
+      "bytes": 79371
+    },
+    "tools/build_reference.py": {
+      "sha256": "5123c8e198dbae01e6276ce4a4599599cf2f481ab97b15e3c959bd76f8f71bbd",
+      "bytes": 114475
+    },
+    "tests/reference_catalog_test.py": {
+      "sha256": "d347a0d8318ab33b49c4460a5fa720e1ac5091650872fa2e470dc68d82629769",
+      "bytes": 25490
+    },
+    "docs/qa/v048-reference/reference-baseline.json": {
+      "sha256": "48f4138731458acf75136fad5c19f616e5476c76ef259d69fbcacaa1008c5f6e",
+      "bytes": 12390
+    },
+    "scripts/world/map_catalog.gd": {
+      "sha256": "ae7bd3742077b96f58a32aad454896c586c31f5c1dace87e67ae3271cdf8bdf0",
+      "bytes": 3291
+    },
+    "scripts/world/normal_map_catalog.gd": {
+      "sha256": "7916feb807b79cb9b578642f56b5016d77b96c0d4a34b2d1c760741339349ca1",
+      "bytes": 1352
+    },
+    "scripts/world/map_geometry.gd": {
+      "sha256": "182959f178e95ae48fdc6b1866bc0a9f87281e5813d4dbb76160d002e3f2db4a",
+      "bytes": 8063
+    },
+    "scripts/world/map_camp_layout.gd": {
+      "sha256": "c3903c7eb964743c329f27d38ded79d42e5814d8cf59c976598697e29d073f39",
+      "bytes": 4469
+    },
+    "scripts/world/map_camp_admission.gd": {
+      "sha256": "90fc4a6174ea37a1bdca677a6d0195fd585f32b43e793e29f09f10e391bc43c1",
+      "bytes": 4602
+    },
+    "scripts/world/map_camp_state.gd": {
+      "sha256": "6abe4a2320425bbcffb421d0b993573242a4fb877434f51d37b99ef2ffc5e11d",
+      "bytes": 6444
+    },
+    "scripts/world/sunwell_roster_rules.gd": {
+      "sha256": "8cc8b064b938e41b0ea61b786a60afedaa5640846d061897864f56433abef3eb",
+      "bytes": 1808
+    },
+    "scripts/world/normal_journey_state.gd": {
+      "sha256": "d4be554dffbf912fc0aa144b9817cabe9bc412327b11258be375f45b8d3e61b9",
+      "bytes": 10745
+    },
+    "scripts/world/map_compiler.gd": {
+      "sha256": "c800ccaf90a9807cc753fc694c19c614e52fff8226fdcaa27f0f5fdc2fcb5851",
+      "bytes": 4925
+    },
+    "scripts/world/map_admission.gd": {
+      "sha256": "39c4d7dc34993587a081759f423192c1db2b6e8267c91854ef729f36ae4368c2",
+      "bytes": 2803
+    },
+    "scripts/monsters/map_boss_profiles.gd": {
+      "sha256": "e499f0c06c4442a2026c0c2205fc15a86df85f08b85a26c931ff6ec360629924",
+      "bytes": 2666
+    },
+    "scripts/monsters/monster_catalog.gd": {
+      "sha256": "d8a0c76384a3208a7ba0202367983332bae07a90c95108ad6a101b4154206ee1",
+      "bytes": 17478
+    },
+    "scripts/monsters/monster_runtime.gd": {
+      "sha256": "6280cbf52cdf373af0fe8d564b77b2ad1f1e934b207d37988f69bbdd404751a3",
+      "bytes": 5666
+    },
+    "scripts/monsters/telegraph_profiles.gd": {
+      "sha256": "71529898098c86cb7320eff304607bac785b2f44b4d25b1f1d335c67c77b44bd",
+      "bytes": 2814
+    },
+    "scripts/combat/telegraphed_area_runtime.gd": {
+      "sha256": "97de058a93210cf411208e8e5145e207c18958ca07579c073699515f2ac0aaf0",
+      "bytes": 10557
+    },
+    "scripts/mechanics/defense_rules.gd": {
+      "sha256": "7ec6b3d49568d0af09dd637639e9b198a738fa8a13b91f27ecfb47029c0ed25f",
+      "bytes": 11835
+    },
+    "scripts/save/canonical_build_rules.gd": {
+      "sha256": "43a1a177f10983135248d56d40e46e4965aee98c1215277d5e39981ee1def58e",
+      "bytes": 20623
+    },
+    "scripts/save/third_map_migration.gd": {
+      "sha256": "83ad2eda8f5b6ce843bc217bd304ed0a2338f5ef7dba9380d5919ddc68a62438",
+      "bytes": 706
+    },
+    "scripts/save/ember_gem_migration.gd": {
+      "sha256": "c68d558d0b24a61571bc17a142692a8124bdd225239624739f787ec78deed373",
+      "bytes": 653
+    }
+  },
+  "after": {
+    "project.godot": {
+      "sha256": "3c4737b54573ba53538ca80fefff9d5dabbe233a5c1d270b4cb0fb52f44f64e0",
+      "bytes": 872
+    },
+    "tools/export_reference.gd": {
+      "sha256": "dc6be2c4ca7790ca26219d416d91a34980f67172685b9173ce1ea778beddab7b",
+      "bytes": 79371
+    },
+    "tools/build_reference.py": {
+      "sha256": "5123c8e198dbae01e6276ce4a4599599cf2f481ab97b15e3c959bd76f8f71bbd",
+      "bytes": 114475
+    },
+    "tests/reference_catalog_test.py": {
+      "sha256": "d347a0d8318ab33b49c4460a5fa720e1ac5091650872fa2e470dc68d82629769",
+      "bytes": 25490
+    },
+    "docs/qa/v048-reference/reference-baseline.json": {
+      "sha256": "48f4138731458acf75136fad5c19f616e5476c76ef259d69fbcacaa1008c5f6e",
+      "bytes": 12390
+    },
+    "scripts/world/map_catalog.gd": {
+      "sha256": "ae7bd3742077b96f58a32aad454896c586c31f5c1dace87e67ae3271cdf8bdf0",
+      "bytes": 3291
+    },
+    "scripts/world/normal_map_catalog.gd": {
+      "sha256": "7916feb807b79cb9b578642f56b5016d77b96c0d4a34b2d1c760741339349ca1",
+      "bytes": 1352
+    },
+    "scripts/world/map_geometry.gd": {
+      "sha256": "182959f178e95ae48fdc6b1866bc0a9f87281e5813d4dbb76160d002e3f2db4a",
+      "bytes": 8063
+    },
+    "scripts/world/map_camp_layout.gd": {
+      "sha256": "c3903c7eb964743c329f27d38ded79d42e5814d8cf59c976598697e29d073f39",
+      "bytes": 4469
+    },
+    "scripts/world/map_camp_admission.gd": {
+      "sha256": "90fc4a6174ea37a1bdca677a6d0195fd585f32b43e793e29f09f10e391bc43c1",
+      "bytes": 4602
+    },
+    "scripts/world/map_camp_state.gd": {
+      "sha256": "6abe4a2320425bbcffb421d0b993573242a4fb877434f51d37b99ef2ffc5e11d",
+      "bytes": 6444
+    },
+    "scripts/world/sunwell_roster_rules.gd": {
+      "sha256": "8cc8b064b938e41b0ea61b786a60afedaa5640846d061897864f56433abef3eb",
+      "bytes": 1808
+    },
+    "scripts/world/normal_journey_state.gd": {
+      "sha256": "d4be554dffbf912fc0aa144b9817cabe9bc412327b11258be375f45b8d3e61b9",
+      "bytes": 10745
+    },
+    "scripts/world/map_compiler.gd": {
+      "sha256": "c800ccaf90a9807cc753fc694c19c614e52fff8226fdcaa27f0f5fdc2fcb5851",
+      "bytes": 4925
+    },
+    "scripts/world/map_admission.gd": {
+      "sha256": "39c4d7dc34993587a081759f423192c1db2b6e8267c91854ef729f36ae4368c2",
+      "bytes": 2803
+    },
+    "scripts/monsters/map_boss_profiles.gd": {
+      "sha256": "e499f0c06c4442a2026c0c2205fc15a86df85f08b85a26c931ff6ec360629924",
+      "bytes": 2666
+    },
+    "scripts/monsters/monster_catalog.gd": {
+      "sha256": "d8a0c76384a3208a7ba0202367983332bae07a90c95108ad6a101b4154206ee1",
+      "bytes": 17478
+    },
+    "scripts/monsters/monster_runtime.gd": {
+      "sha256": "6280cbf52cdf373af0fe8d564b77b2ad1f1e934b207d37988f69bbdd404751a3",
+      "bytes": 5666
+    },
+    "scripts/monsters/telegraph_profiles.gd": {
+      "sha256": "71529898098c86cb7320eff304607bac785b2f44b4d25b1f1d335c67c77b44bd",
+      "bytes": 2814
+    },
+    "scripts/combat/telegraphed_area_runtime.gd": {
+      "sha256": "97de058a93210cf411208e8e5145e207c18958ca07579c073699515f2ac0aaf0",
+      "bytes": 10557
+    },
+    "scripts/mechanics/defense_rules.gd": {
+      "sha256": "7ec6b3d49568d0af09dd637639e9b198a738fa8a13b91f27ecfb47029c0ed25f",
+      "bytes": 11835
+    },
+    "scripts/save/canonical_build_rules.gd": {
+      "sha256": "43a1a177f10983135248d56d40e46e4965aee98c1215277d5e39981ee1def58e",
+      "bytes": 20623
+    },
+    "scripts/save/third_map_migration.gd": {
+      "sha256": "83ad2eda8f5b6ce843bc217bd304ed0a2338f5ef7dba9380d5919ddc68a62438",
+      "bytes": 706
+    },
+    "scripts/save/ember_gem_migration.gd": {
+      "sha256": "c68d558d0b24a61571bc17a142692a8124bdd225239624739f787ec78deed373",
+      "bytes": 653
+    }
+  },
+  "stable": true
+}

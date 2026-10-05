@@ -1,0 +1,89 @@
+{
+  "checks": {
+    "single_export_build_test_all_passed": true,
+    "all_tested_sources_stable": true,
+    "version_is_0.48.0": true,
+    "save_schema_is_30": true,
+    "old_two_map_articles_byte_identical": true,
+    "old_two_map_structures_identical": true,
+    "shared_default_telegraphs_unchanged": true,
+    "old_64_rendered_pngs_plus_manifest_byte_identical": true,
+    "two_supplementary_original_pngs_byte_identical": true,
+    "no_png_added_or_regenerated": true
+  },
+  "outputs": {
+    "docs/reference/catalog.json": {
+      "bytes": 9859399,
+      "sha256": "be36d2c7c63d96db146d45afb336da443bff96d0d51bcd132f3cb9b2f9da4783"
+    },
+    "docs/reference/index.html": {
+      "bytes": 9666608,
+      "sha256": "c08104054ca2c42f7de3f048547b753896e4c18ffa81e9bccaa0f77da8f3a216"
+    },
+    "tools/export_reference.gd": {
+      "bytes": 79371,
+      "sha256": "dc6be2c4ca7790ca26219d416d91a34980f67172685b9173ce1ea778beddab7b"
+    },
+    "tools/build_reference.py": {
+      "bytes": 114475,
+      "sha256": "5123c8e198dbae01e6276ce4a4599599cf2f481ab97b15e3c959bd76f8f71bbd"
+    },
+    "tests/reference_catalog_test.py": {
+      "bytes": 25490,
+      "sha256": "d347a0d8318ab33b49c4460a5fa720e1ac5091650872fa2e470dc68d82629769"
+    },
+    "docs/qa/v048-reference/reference-baseline.json": {
+      "bytes": 12390,
+      "sha256": "48f4138731458acf75136fad5c19f616e5476c76ef259d69fbcacaa1008c5f6e"
+    },
+    "docs/qa/v048-reference/reference-tested-files.json": {
+      "bytes": 8110,
+      "sha256": "f7aa30b6d05ee0164d02587dc672dbeab4f85072bb794beb741273bdf8a225c0"
+    },
+    "docs/qa/v048-reference/export.log": {
+      "bytes": 127,
+      "sha256": "51e3b0bc619efba5c710e1863eedea0402e6700d8c973b9ecb758418906e7297"
+    },
+    "docs/qa/v048-reference/build.log": {
+      "bytes": 50,
+      "sha256": "2fe7ec5d807bd5a98a3834eee43aecd36b508e0a03088a79201e5a38b566ed16"
+    },
+    "docs/qa/v048-reference/test.log": {
+      "bytes": 229,
+      "sha256": "ec63c910f1ca58ab04745e07d1a0cb7af5414ff4d7f1cdddfe6e4fa45569e6a6"
+    }
+  },
+  "counts": {
+    "maps": 3,
+    "normal_tiers": 9,
+    "solid_spring_basins": 4,
+    "camps": 3,
+    "camp_roots": [
+      12,
+      12,
+      12
+    ],
+    "local_images": 66,
+    "anchors": 3797,
+    "links": 17912
+  },
+  "echo": {
+    "normalized_deadlines": [
+      0.8,
+      1.6
+    ],
+    "locked_center": [
+      0.0,
+      0.0
+    ],
+    "attack_radius": 85.0,
+    "player_radius": 15.0,
+    "per_pulse_multiplier": 0.65,
+    "total_contact_multiplier": 1.3,
+    "base_recovery_seconds": 1.9,
+    "actual_recovery_seconds": 1.8479299537288065,
+    "source_attack_speed": 1.2096205882352942,
+    "default_profile_max_events": 1
+  },
+  "scope": "One runtime catalog export, one HTML build, one reference_catalog_test.py execution; no game or UI changes, no art regeneration, no GUI/browser claim, no historical full-suite or 600-second test."
+}

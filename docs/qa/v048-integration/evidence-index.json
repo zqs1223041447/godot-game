@@ -1,0 +1,42 @@
+{
+  "production_inputs": 454,
+  "matched_scoped_manifests": [
+    {
+      "manifest": "docs/qa/v048-layout/tested-files.json",
+      "matched_files": 19
+    },
+    {
+      "manifest": "docs/qa/v048-migration/third-map-tested-files.json",
+      "matched_files": 12
+    },
+    {
+      "manifest": "docs/qa/v048-echo/tested-files-focused-run2.json",
+      "matched_files": 8
+    }
+  ],
+  "log_sha256": {
+    "docs/qa/v048-layout/legacy-v047.log.txt": "7f0284beabfebcff1f10523706a04c60fa38d3201bc003b4e62b72cb1e87ebfc",
+    "docs/qa/v048-layout/legacy-v048.log.txt": "7f0284beabfebcff1f10523706a04c60fa38d3201bc003b4e62b72cb1e87ebfc",
+    "docs/qa/v048-layout/layout-test.log.txt": "f84d5038c888282624d17450260a3a1a55dfd022097eba55da8c747f169b0d68",
+    "docs/qa/v048-migration/third-map-transactions-test.log.txt": "44f147f8b87cbf501044cac4c4c13c500f29fef519b8e50a31997549487d5931",
+    "docs/qa/v048-migration/third-map-capture.log.txt": "e5c96d3b4fc8e9640b3336c145af5b83ed3581fbfca463a95ffc130f381845a6",
+    "docs/qa/v048-migration/third-map-migration-test.log.txt": "241516422542203fee967c912793dfc44c2355c4e9020e2a2db541ceb1c45d8e",
+    "docs/qa/v048-echo/legacy-v047.log.txt": "0489428e5c181e77317ac4e4e8136232c400c73d39a8d91620a9f6f618b91d73",
+    "docs/qa/v048-echo/legacy-v048.log.txt": "5b58fcc547bc738d6fc0abc7d9daf76216c56ea95eda0a7f75fde5b44877dbbe",
+    "docs/qa/v048-echo/focused.log.txt": "c779f39c0720b091e53f0d7b43ad01d482401565bf7b8aad9b38b357dc8f4dc6",
+    "docs/qa/v048-echo/focused-attempt1.log.txt": "d26aa44840e02019398d58a04a5f82d12dba61a373ffcd6784cdb1dfd293529b",
+    "docs/qa/v048-echo/focused-run2.log.txt": "445799f17e7edfa3f7d0549f6cb4a2608720611a66d6aa59df7a798f0593a4d6",
+    "docs/qa/v048-integration/font-subset.log.txt": "aac98346ae332f829d05f13b564d74e24ead1e2ac762991b586985a4a3472c26",
+    "docs/qa/v048-integration/import-font.log.txt": "35c479ca6580fb0a8dd6f61a0228bc7f5debaa0f3612e5e435e03fd630fb7bfc",
+    "docs/qa/v048-integration/gameplay-first.log.txt": "a76f90b538f27eb0321f974a8589883f16902b89eef3ed7aa7b76b392d08e60d",
+    "docs/qa/v048-integration/import.log.txt": "7f5970f51e87e7f98e7eafda7b993d160172518b2667ebd0955a93561e6277e2",
+    "docs/qa/v048-integration/start-probe.log.txt": "bf55d8aa418449566b31ff1434751caf84e9fa47b9ec320cfba6c284debabcea",
+    "docs/qa/v048-root-visuals/native-layout.log": "c655104650e0c9b9d97cea1a76166163d4b85e9287b698521099cbc4bb6bf29d",
+    "docs/qa/v048-root-visuals/presentation.log": "6e03857f4fa5c7720b453bc860255207862ed627463ba1bb2f3d51c39cf2fab6",
+    "docs/qa/v048-root-visuals/world-caption.log": "361815f78e6c0d92976572c5be3bce2b8a21537d959319a94a1770f40025d3fd",
+    "docs/qa/v048-reference/test.log": "ec63c910f1ca58ab04745e07d1a0cb7af5414ff4d7f1cdddfe6e4fa45569e6a6",
+    "docs/qa/v048-reference/build.log": "2fe7ec5d807bd5a98a3834eee43aecd36b508e0a03088a79201e5a38b566ed16",
+    "docs/qa/v048-reference/export.log": "51e3b0bc619efba5c710e1863eedea0402e6700d8c973b9ecb758418906e7297"
+  },
+  "native_audio_error_scope": "Only ALSA device missing / dummy fallback in the native layout observation; no headless gameplay script errors."
+}

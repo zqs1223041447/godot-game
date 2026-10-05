@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Offline deliverable checks: exhaustive links/assets, geometry, no network dependencies."""
 import importlib.util
+import hashlib
 import json
+import re
 from collections import Counter
 from html.parser import HTMLParser
 from pathlib import Path
@@ -10,7 +12,7 @@ ROOT=Path(__file__).resolve().parents[1]
 REF=ROOT/'docs/reference'
 class Inspector(HTMLParser):
     def __init__(self):
-        super().__init__(); self.ids=[]; self.links=[]; self.assets=[]; self.viewbox=None; self.node_ids=[]; self.trace_values={}; self.weapon_values={}; self.pierce_hits={}; self.craft_values={}; self.telegraph_values={}; self.encounter_values={}; self.flask_values={}; self.ember_values={}; self.entry_id=None; self.entry_images=[]
+        super().__init__(); self.ids=[]; self.links=[]; self.assets=[]; self.viewbox=None; self.node_ids=[]; self.trace_values={}; self.weapon_values={}; self.pierce_hits={}; self.craft_values={}; self.telegraph_values={}; self.encounter_values={}; self.flask_values={}; self.ember_values={}; self.sunwell_values={}; self.sunwell_obstacles={}; self.entry_id=None; self.entry_images=[]
     def handle_starttag(self,tag,attrs):
         a=dict(attrs)
         if tag=='article':self.entry_id=a.get('id')
@@ -30,14 +32,107 @@ class Inspector(HTMLParser):
         if 'data-weapon-trace' in a:self.weapon_values[a['data-weapon-trace']]=float(a['data-value'])
         if 'data-trace-value' in a:self.trace_values[a['data-trace-value']]=float(a['data-value'])
         if 'data-ember-value' in a:self.ember_values[a['data-ember-value']]=float(a['data-value'])
+        if 'data-sunwell-value' in a:
+            assert a['data-sunwell-value'] not in self.sunwell_values, 'Duplicate Sunwell numeric evidence'
+            self.sunwell_values[a['data-sunwell-value']]=float(a['data-value'])
+        if 'data-sunwell-obstacle' in a:
+            assert self.entry_id=='maps-sunwell_terrace' and tag=='rect'
+            self.sunwell_obstacles[int(a['data-sunwell-obstacle'])]={k:float(a[k]) for k in ['x','y','width','height']}
 
     def handle_endtag(self,tag):
         if tag=='article':self.entry_id=None
+
+def canonical_hash(value):
+    return hashlib.sha256(json.dumps(value,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+
+def check_sunwell(data,source,inspector):
+    baseline=json.loads((ROOT/'docs/qa/v048-reference/reference-baseline.json').read_text())
+    assert data['game_version']=='0.48.0' and data['save_version']==30
+    map_ids={m['id'] for m in data['town_maps']['options']['maps']}
+    assert map_ids=={'old_garden','broken_ruins','sunwell_terrace'}
+    assert set(data['map_camps'])==set(data['map_bosses'])==map_ids
+    assert len(data['normal_journey']['tiers'])==9 and set(data['normal_journey']['initial_journey']['best_tiers'])==map_ids
+    for key,saved in baseline['legacy_maps'].items():
+        parts={'catalog_map':next(m for m in data['town_maps']['options']['maps'] if m['id']==key),
+            'town_example':data['town_maps']['examples'][key], 'camps':data['map_camps'][key],
+            'boss':data['map_bosses'][key], 'normal_tiers':[m for m in data['normal_journey']['tiers'] if m['id']==key]}
+        for name,value in parts.items():assert canonical_hash(value)==saved[name], 'Legacy map structure changed: '+key+'/'+name
+        article=re.search(r'<article\b[^>]*\bid="maps-'+key+r'"[^>]*>.*?</article>',source,re.S).group()
+        assert hashlib.sha256(article.encode()).hexdigest()==saved['article_sha256'], 'Legacy map article changed: '+key
+    pngs={p.relative_to(ROOT).as_posix() for p in REF.rglob('*.png')}
+    assert pngs=={p for p in baseline['preserved_files'] if p.endswith('.png')}, 'Reference PNG inventory changed'
+    for name,saved in baseline['preserved_files'].items():
+        content=(ROOT/name).read_bytes()
+        assert len(content)==saved['bytes'] and hashlib.sha256(content).hexdigest()==saved['sha256'], 'Reference artwork changed: '+name
+    assert canonical_hash(data['monster_attacks'])==baseline['monster_attacks'], 'Default telegraphs must not inherit the new sequence'
+    assert all(attack['max_events_per_attack']==1 for attack in data['monster_attacks'].values())
+    key='sunwell_terrace';sunwell=data[key];boss=data['map_bosses'][key];sequence=boss['sequence'];d=boss['definition']
+    assert sunwell['save_version']==30 and 'maps-'+key in inspector.ids
+    assert d['id']=='sunwell_echo' and d['target_rule']=='player_at_start'
+    assert sequence['pulse_count']==2 and sequence['normalized_deadlines']==[0.8,1.6]
+    assert sequence['pulse_interval']==0.8 and d['profile']['radius']==85 and d['profile']['damage_multiplier']==0.65
+    assert sequence['base_recovery_seconds']==1.9 and abs(sequence['total_contact_multiplier']-1.3)<1e-9
+    assert sequence['default_profile_max_events']==1 and sequence['complete_after_recovery']
+    assert sequence['recovery_state']['phase']=='recovery' and sequence['recovery_state']['pulses_emitted']==2
+    policy=boss['policy'];limits=data['monster_attacks']['locked_circle']['limits']['recovery_seconds']
+    expected_recovery=min(limits['maximum'],max(limits['minimum'],sequence['base_recovery_seconds']*policy['base_attack_speed']/max(policy['minimum_attack_speed'],sequence['source_attack_speed'])))
+    assert abs(sequence['actual_recovery_seconds']-expected_recovery)<1e-9
+    expected={'warning':d['profile']['windup_seconds'],'pulse-count':sequence['pulse_count'],
+        'pulse-interval':sequence['pulse_interval'],'per-pulse-multiplier':d['profile']['damage_multiplier'],
+        'total-multiplier':sequence['total_contact_multiplier'],'attack-radius':d['profile']['radius'],
+        'player-radius':boss['player_radius'],'clear-center-distance':d['profile']['radius']+boss['player_radius'],
+        'base-recovery':sequence['base_recovery_seconds'],'attack-speed':sequence['source_attack_speed'],
+        'actual-recovery':sequence['actual_recovery_seconds']}
+    assert sequence['pulses'][0]['event']==boss['event'] and len(sequence['pulses'])==2
+    clock=0
+    for index,pulse in enumerate(sequence['pulses']):
+        event=pulse['event'];clock+=event['step_time']
+        assert event['pulse_index']==index and event['pulse_count']==sequence['pulse_count']
+        assert event['attack_id']==boss['start']['attack_id'] and event['center']==sequence['locked_center']==boss['start']['center']
+        assert abs(clock-pulse['normalized_deadline'])<1e-9 and abs(event['attack_age']-clock)<1e-9
+        assert event['radius']==d['profile']['radius'] and event['visual_pattern']=='sunwell_echo'
+        for damage_type,contact in sequence['contact_components'].items():
+            assert abs(event['packet']['base'][damage_type]-contact*d['profile']['damage_multiplier'])<1e-9
+        assert pulse['cases']['standing']['inside'] and not pulse['cases']['moving']['inside'] and pulse['cases']['moving']['settlement']=={}
+        assert abs(pulse['cases']['moving']['position'][0]+sequence['move_speed']*clock)<1e-4
+        expected['deadline-'+str(index)]=pulse['normalized_deadline'];expected['radius-'+str(index)]=event['radius']
+    camps=data['map_camps'][key]['camps'];geometry=data['town_maps']['examples'][key]['geometry'];origin=geometry['bounds']['position']
+    assert [c['name'] for c in camps]==['西泉据点','北门据点','东阶据点'] and [c['root_count'] for c in camps]==[12,12,12]
+    assert geometry['obstacle_style']=='spring_basin' and len(geometry['walls'])==4
+    for index,wall in enumerate(geometry['walls']):
+        assert inspector.sunwell_obstacles[index]=={'x':wall['position'][0]-origin[0],'y':wall['position'][1]-origin[1],'width':wall['size'][0],'height':wall['size'][1]}
+    assert len(inspector.sunwell_obstacles)==len(geometry['walls'])
+    expected.update({'camp-count':len(camps),'camp-roots':camps[0]['root_count'],'total-roots':sum(c['root_count'] for c in camps),
+        'trigger-radius':camps[0]['trigger_radius'],'spawn-seconds':sunwell['spawn_seconds'],'player-clearance':sunwell['player_clearance'],
+        'save-version':sunwell['save_version'],'frost-min-wave':sunwell['elemental_gates']['frost_guard']['minimum_wave'],
+        'storm-min-wave':sunwell['elemental_gates']['storm_skitter']['minimum_wave'],'obstacle-count':len(geometry['walls'])})
+    assert [r['base']['wave'] for r in sunwell['tiers']]==[3,6,10]
+    assert [r['base']['fee'] for r in sunwell['tiers']]==[0,4,8] and [r['base']['completion_reward'] for r in sunwell['tiers']]==[4,8,12]
+    for row in sunwell['tiers']:
+        base=row['base'];maximum=row['maximum_bonus_example'];tier=base['journey_tier']
+        assert base in data['normal_journey']['tiers'] and base['ordinary_target']==36
+        expected_bonus=len(maximum['normal_ids'])+2*len(maximum['special_ids'])
+        assert maximum['completion_reward']-base['completion_reward']==expected_bonus
+        expected.update({f'tier-{tier}-wave':base['wave'],f'tier-{tier}-fee':base['fee'],f'tier-{tier}-reward':base['completion_reward'],f'tier-{tier}-max-bonus':expected_bonus})
+        for camp in camps:
+            pattern=sunwell['patterns'][camp['id']];actual=sunwell['roster_examples_by_wave'][str(base['wave'])][camp['id']]
+            expected_templates=[]
+            for ordinal in range(camp['root_count']):
+                template=pattern[ordinal%len(pattern)];gate=sunwell['elemental_gates'].get(template)
+                expected_templates.append(gate['source_template'] if gate and base['wave']<gate['minimum_wave'] else template)
+            assert actual==expected_templates
+    migration=sunwell['migration_example']
+    assert migration['from_version']==29 and migration['to_version']==30 and migration['items_preserved'] and migration['currencies_preserved']
+    assert migration['after_best_tiers']=={**migration['before_best_tiers'],'sunwell_terrace':0}
+    assert inspector.sunwell_values==expected, 'Sunwell HTML diverges from production geometry, sequence, roster or economy'
+    assert '第二响不会追踪新位置' in source and '持续离开锁点可以躲开两响' in source and '中央十字与外侧留有通路' in source
+    print('Sunwell reference: 3 maps / 9 tiers, 4 solid basins, 2 locked pulses, unchanged legacy maps and 66 PNGs passed')
 
 def main():
     source=(REF/'index.html').read_text()
     inspector=Inspector(); inspector.feed(source)
     data=json.loads((REF/'catalog.json').read_text())
+    check_sunwell(data,source,inspector)
     expected_encounters={}
     for key,definition in data['encounters'].items():
         for template,sample in definition['examples'].items():
@@ -95,7 +190,7 @@ def main():
     assert len(data['supports'])==18 and len(data['support_program_examples'])==18
     assert policy=={'duration':3.0,'rate_fraction':0.2,'hit_multiplier':0.75,'mana_multiplier':1.3}
     assert spread=={'enabled':True,'radius':120.0,'max_targets':8,'max_hops':1,'preserves_expiry':True}
-    assert ember['save_version']==29 and data['save_version']==29 and ember['mutually_exclusive_with']==['ignite']
+    assert ember['save_version']==29 and data['save_version']==30 and ember['mutually_exclusive_with']==['ignite']
     assert set(ember['examples'])=={'meteor','tornado'} and set(ember['incompatible_skills'])==set(data['skills'])-{'meteor','tornado'}
     assert [sample['selection'] for sample in ember['exclusive_examples']]==[['ignite','ember_proliferation'],['ember_proliferation','ignite']]
     assert all(sample['error'] for sample in ember['exclusive_examples'])

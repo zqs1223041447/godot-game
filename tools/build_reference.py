@@ -26,6 +26,20 @@ DAMAGE_NAMES = {'physical':'物理','fire':'火焰','cold':'冰霜','lightning':
 def component_text(components):
     return ' + '.join(f'{DAMAGE_NAMES[k]} {number(v)}' for k,v in ((key,components.get(key,0)) for key in DAMAGE_NAMES) if v) or '无'
 def percent(value): return number(value*100)+'%'
+def sunwell_value(key,value):
+    return f'<strong data-sunwell-value="{esc(key)}" data-value="{esc(value)}">{number(value)}</strong>'
+
+def sunwell_sequence(boss):
+    sequence=boss['sequence'];definition=boss['definition'];rows=[]
+    for pulse in sequence['pulses']:
+        event=pulse['event'];index=event['pulse_index'];moving=pulse['cases']['moving']
+        rows.append('<tr><th scope="row">第 '+str(index+1)+' 响</th><td>'+sunwell_value('deadline-'+str(index),pulse['normalized_deadline'])+' 秒</td><td>'+esc(' / '.join(number(v) for v in event['center']))+'</td><td>'+sunwell_value('radius-'+str(index),event['radius'])+'</td><td>'+component_text(event['packet']['base'])+'</td><td>原地：'+('范围内' if pulse['cases']['standing']['inside'] else '范围外')+'；持续退离：'+('范围内' if moving['inside'] else '范围外')+'</td></tr>')
+    body='<h4>泉脉双响 · 同一锁点的两次结算</h4><div class="table-scroll"><table><caption>真实运行事件，时间统一从本次动作起手计</caption><thead><tr><th>回响</th><th>起手后时刻</th><th>锁定圆心 x / y</th><th>攻击半径</th><th>单响防御前分量</th><th>位置示例</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
+    body+='<p>每次预警 '+sunwell_value('warning',definition['profile']['windup_seconds'])+' 秒，共 '+sunwell_value('pulse-count',sequence['pulse_count'])+' 响，间隔 '+sunwell_value('pulse-interval',sequence['pulse_interval'])+' 秒；两响始终锁定玩家起手位置，第二响不会追踪新位置。单响接触分量倍率 '+sunwell_value('per-pulse-multiplier',definition['profile']['damage_multiplier'])+'，两响全部命中的防御前预算合计 '+sunwell_value('total-multiplier',sequence['total_contact_multiplier'])+' 倍。</p>'
+    body+='<p>攻击圆半径 '+sunwell_value('attack-radius',definition['profile']['radius'])+'；本示例角色半径 '+sunwell_value('player-radius',boss['player_radius'])+'，角色中心距锁点须大于 '+sunwell_value('clear-center-distance',definition['profile']['radius']+boss['player_radius'])+' 才完全脱离圆形相交。持续离开锁点可以躲开两响；看到第一响结束也不要立即返回原圈。</p>'
+    body+='<p>最后一响后进入恢复，基础 '+sunwell_value('base-recovery',sequence['base_recovery_seconds'])+' 秒；当前首领攻速 '+sunwell_value('attack-speed',sequence['source_attack_speed'])+'，真实策略恢复 '+sunwell_value('actual-recovery',sequence['actual_recovery_seconds'])+' 秒。攻速只影响恢复，两段完整预警不缩短。'+esc(sequence['settlement_scope'])+'。</p>'
+    return body
+
 def skill_delivery_diagram(skill_id, skill):
     if skill_id == 'cleave':
         recipe=skill['examples']['fresh'][0]['recipe']
@@ -376,12 +390,34 @@ def build(data, art):
                 body+=facts([('首领动作',esc(d['name'])),('锁定点','首领起手位置' if d['target_rule']=='self_at_start' else '玩家起手位置；结算不追踪'),('完整预警',number(p['windup_seconds'])+' 秒'),('半径 / 启动距离',number(p['radius'])+' / '+number(d['trigger_distance'])),('恢复时间',number(p['recovery_seconds'])+' 秒，攻速只影响此项'),('单次伤害',component_text(event['packet']['base'])+'，同图当前接触分量 × '+number(p['damage_multiplier']))])
                 body+=f'<figure><figcaption>{esc(d["name"])} · 起手锁点与退离示意</figcaption><svg viewBox="{number(left)} -175 {number(right-left)} 350" role="img" aria-label="同源首领预警圆心与半径"><circle cx="{number(cx)}" cy="{number(cy)}" r="{number(radius)}" fill="#d9b677" fill-opacity=".25" stroke="#775537" stroke-width="3"/><circle cx="{number(sx)}" cy="{number(sy)}" r="{number(boss["source"]["radius"])}" fill="#ac7856"/><path d="M0 0L{number(mx)} {number(my)}" stroke="#427365" stroke-width="3" stroke-dasharray="6 5"/><circle cx="0" cy="0" r="{number(boss["player_radius"])}" fill="#68968a"/><circle cx="{number(mx)}" cy="{number(my)}" r="{number(boss["player_radius"])}" fill="#b9d0b8" stroke="#427365"/><g fill="#493523" font-size="14"><text x="{number(sx-30)}" y="-42">首领</text><text x="-35" y="36">玩家起手</text><text x="{number(mx-28)}" y="36">已退离</text></g></svg></figure><p>{esc(boss["scope"])}。</p><p>{esc(boss["rules"])}。{esc(boss["preserves"])}。</p><p>预算为本游戏可调原型，不是平衡结论；圆周为最大危险边界，墙体视线仍可阻挡实际命中。</p>'
             camp_layout=data.get('map_camps',{}).get(key)
+            if boss and 'sequence' in boss:
+                body=body.replace('圆周为最大危险边界，墙体视线仍可阻挡实际命中。','圆周为攻击区域边缘，角色身体须完全移出；泉池视线仍可阻挡实际命中。')
+                body+=sunwell_sequence(boss)
             if camp_layout:
-                body='<h4>据点自由推进</h4>'+facts([('每组普通根怪',str(camp_layout['camps'][0]['root_count'])),('推进顺序','三个据点任意顺序，可同时激活多组'),('整组出现','靠近木牌64范围，完整8或12只同次入场，保留0.6秒出生提示'),('安全边界','全部位置离玩家至少230，真实半径不越界或压墙；容量不足整组等待'),('首领入口','全部普通根怪死亡后开启独立入口；首领及所有后代死亡才完成'),('原经济','费用、总根怪、原稀有度/机制和完成奖励保持；后代不增加奖励')])+body
+                if key=='sunwell_terrace':
+                    sunwell=data[key];camps=camp_layout['camps'];migration=sunwell['migration_example']
+                    intro=facts([('据点',esc(' / '.join(c['name'] for c in camps))),('密度',sunwell_value('camp-count',len(camps))+' 组 × '+sunwell_value('camp-roots',camps[0]['root_count'])+' 根怪，共 '+sunwell_value('total-roots',sum(c['root_count'] for c in camps))),('推进顺序','任意顺序，可同时激活多组；不必清完一组才触发下一组'),('整组出现','进入木牌 '+sunwell_value('trigger-radius',camps[0]['trigger_radius'])+' 范围，同组完整出现；出生提示 '+sunwell_value('spawn-seconds',sunwell['spawn_seconds'])+' 秒'),('安全边界','全部位置离玩家至少 '+sunwell_value('player-clearance',sunwell['player_clearance'])+'，真实半径不越界或压池；容量不足整组等待'),('首领入口','全部普通根怪死亡后开启南侧入口；首领及所有后代死亡才完成'),('经济','保留既有分档费用和完成奖励，后代不增加奖励'),('存档','schema '+sunwell_value('save-version',sunwell['save_version'])+'；旧 '+str(migration['from_version'])+' 验证后备份原字节，只升级版本并增加晴泉进度起点，物品和货币保持')])
+                    tier_rows=[]
+                    for row in sunwell['tiers']:
+                        base=row['base'];maximum=row['maximum_bonus_example'];tier=base['journey_tier']
+                        tier_rows.append('<tr><th scope="row">'+esc(base['name'])+'</th><td>'+sunwell_value('tier-'+str(tier)+'-wave',base['wave'])+'</td><td>'+sunwell_value('tier-'+str(tier)+'-fee',base['fee'])+'</td><td>'+sunwell_value('tier-'+str(tier)+'-reward',base['completion_reward'])+'</td><td>'+sunwell_value('tier-'+str(tier)+'-max-bonus',maximum['completion_reward']-base['completion_reward'])+'</td><td>'+links('map_specials',row['eligible_special_ids'])+'</td></tr>')
+                    intro+='<div class="table-scroll"><table><caption>正式三档的真实费用与奖励；特殊词缀仍受波次门槛限制</caption><thead><tr><th>阶级</th><th>波次</th><th>入场碎片</th><th>基础完成碎片</th><th>可选词缀最大加奖</th><th>可选特殊词缀</th></tr></thead><tbody>'+''.join(tier_rows)+'</tbody></table></div>'
+                    intro+='<h4>同源据点编排</h4><p>'+esc(sunwell['roster_scope'])+'。霜纹从第 '+sunwell_value('frost-min-wave',sunwell['elemental_gates']['frost_guard']['minimum_wave'])+' 波出现，雷纹从第 '+sunwell_value('storm-min-wave',sunwell['elemental_gates']['storm_skitter']['minimum_wave'])+' 波出现；低于门槛回退为相应基础物种。下表是基础物种抽签的按位示例，不代表每次实际整组抽签结果。</p>'
+                    for wave,rosters in sunwell['roster_examples_by_wave'].items():
+                        intro+=details('第 '+wave+' 波 · 据点内序号编排',facts([(c['name'],' → '.join(link('monsters',template) for template in rosters[c['id']])) for c in camps]))
+                    body='<h4>据点自由推进</h4>'+intro+body
+                else:
+                    body='<h4>据点自由推进</h4>'+facts([('每组普通根怪',str(camp_layout['camps'][0]['root_count'])),('推进顺序','三个据点任意顺序，可同时激活多组'),('整组出现','靠近木牌64范围，完整8或12只同次入场，保留0.6秒出生提示'),('安全边界','全部位置离玩家至少230，真实半径不越界或压墙；容量不足整组等待'),('首领入口','全部普通根怪死亡后开启独立入口；首领及所有后代死亡才完成'),('原经济','费用、总根怪、原稀有度/机制和完成奖励保持；后代不增加奖励')])+body
             geometry=example['geometry'];bounds=geometry['bounds'];width,height=bounds['size'];ox,oy=bounds['position']
             walls=''.join(f'<rect x="{number(w["position"][0]-ox)}" y="{number(w["position"][1]-oy)}" width="{number(w["size"][0])}" height="{number(w["size"][1])}" fill="#a89472" stroke="#594d38" stroke-width="4"/>' for w in geometry['walls'])
+            if geometry.get('obstacle_style')=='spring_basin':
+                walls=''.join(f'<rect data-sunwell-obstacle="{i}" x="{number(w["position"][0]-ox)}" y="{number(w["position"][1]-oy)}" width="{number(w["size"][0])}" height="{number(w["size"][1])}" fill="#b7d7d4" stroke="#657d75" stroke-width="4"/>' for i,w in enumerate(geometry['walls']))
+                geometry={**geometry,'spawn':geometry['entry']}
             body+=f'<figure><figcaption>实际同源地形平面图：{esc(m["name"])}</figcaption><svg viewBox="0 0 {number(width)} {number(height)}" role="img" aria-label="真实墙体足印与绕行通道"><rect width="{number(width)}" height="{number(height)}" fill="#ddd7b8"/>{walls}<circle cx="{number(geometry["spawn"][0]-ox)}" cy="{number(geometry["spawn"][1]-oy)}" r="16" fill="#527553"/></svg></figure>'
-            body+='<p>旧庭为开阔庭院；断垣的两道错位残墙有真实阻挡，角色、怪物需沿端部通道绕行，击退和冲刺同样受阻。贯穿不能穿墙，返回飞行也会碰墙；碰墙终止不触发自然到期爆炸、分裂或返回。范围命中、连锁与敌预警也检查墙视线，圈只表示最大半径。地图完成保留地形，返城清除障碍；不是可破坏场景或完整终局系统。</p>'
+            if key=='sunwell_terrace':
+                body+='<p>浅色矩形为 '+sunwell_value('obstacle-count',len(geometry['walls']))+' 座实体泉池，阻挡移动、弹体与视线；中央十字与外侧留有通路，需沿池间或外侧绕行。击退与冲刺也受阻，贯穿和返回弹体不能穿池；碰池终止不触发自然到期爆炸、分裂或返回。范围命中、连锁与敌预警仍检查墙视线。地图完成保留地形，返城清除障碍。</p>'
+            else:
+                body+='<p>旧庭为开阔庭院；断垣的两道错位残墙有真实阻挡，角色、怪物需沿端部通道绕行，击退和冲刺同样受阻。贯穿不能穿墙，返回飞行也会碰墙；碰墙终止不触发自然到期爆炸、分裂或返回。范围命中、连锁与敌预警也检查墙视线，圈只表示最大半径。地图完成保留地形，返城清除障碍；不是可破坏场景或完整终局系统。</p>'
             cards.append(add('maps',key,m['name'],m['description'],body,'正式三档 / 独立测试',related=link('town_services','map_device')))
         for special in town['options']['special_modifiers']:
             if special.get('kind')=='defense':

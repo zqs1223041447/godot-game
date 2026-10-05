@@ -36,6 +36,9 @@ const Town = preload("res://scripts/town/town_catalog.gd")
 const Maps = preload("res://scripts/world/map_catalog.gd")
 const MapRules = preload("res://scripts/world/map_compiler.gd")
 const CampLayoutData=preload("res://scripts/world/map_camp_layout.gd")
+const CampAdmissionData=preload("res://scripts/world/map_camp_admission.gd")
+const SunwellRoster=preload("res://scripts/world/sunwell_roster_rules.gd")
+const ThirdMapMigrationData=preload("res://scripts/save/third_map_migration.gd")
 const MapGeometryData = preload("res://scripts/world/map_geometry.gd")
 const MapDefense = preload("res://scripts/world/map_defense_rules.gd")
 const MapBosses=preload("res://scripts/monsters/map_boss_profiles.gd")
@@ -86,8 +89,13 @@ static func collect() -> Dictionary:
 	result["currencies"] = currency_examples()
 	result["flasks"] = flask_examples()
 	result["town_maps"] = town_map_examples()
-	result["map_camps"]={"old_garden":CampLayoutData.layout("old_garden",Arena.ARENA).landmarks,"broken_ruins":CampLayoutData.layout("broken_ruins",Arena.ARENA).landmarks}
+	result["map_camps"]={}
+	for map_id:String in Maps.MAPS:
+		var camp_layout:Dictionary=CampLayoutData.layout(map_id,Arena.ARENA)
+		assert(camp_layout.ok)
+		result.map_camps[map_id]=camp_layout.landmarks
 	result["normal_journey"] = normal_journey_examples()
+	result["sunwell_terrace"] = sunwell_examples()
 	result["burning"] = burning_examples()
 	result["ember_proliferation"] = ember_proliferation_examples()
 	result["normal_gem_trading"]={"offers":Canonical.GemTrade.offers(),"recycle_credit":Canonical.GemTrade.RECYCLE_CREDIT,"currency":Canonical.GemTrade.MATERIAL_ID,"location":"normal_town","level":1,"quality":0,"recycle_location":"bag","schema":Canonical.Rules.VERSION,"test_supply_separate":true,"pricing":"初版可调整预算；每次无词缀地图净得4碎片"}
@@ -395,6 +403,9 @@ static func town_map_examples()->Dictionary:
 			"geometry":{"bounds":{"position":layout.bounds.position,"size":layout.bounds.size},"walls":walls,"spawn":layout.spawn,
 				"collision":"radius_expanded_sweep_slide","navigation":"shared_radius_visibility_graph","projectile_wall_end":"terrain_collision",
 				"wall_triggers_natural_end":false,"area_line_of_sight":true}}
+		if layout.has("obstacle_style"):
+			examples[map.id].geometry.obstacle_style=layout.obstacle_style
+			examples[map.id].geometry.entry=CampLayoutData.layout(map.id,Arena.ARENA).landmarks.entry
 	var defenses:Dictionary={}
 	var aegis:Dictionary=MapRules.compile("old_garden",[],["elemental_aegis"]).profile
 	var packet:Dictionary=Damage.packet({"physical":100.0,"fire":100.0,"cold":100.0,"lightning":100.0,"chaos":100.0},["hit"],"reference_aegis")
@@ -884,7 +895,75 @@ static func map_boss_examples()->Dictionary:
 			"player_radius":Arena.PLAYER_RADIUS,"scope":"无词缀地图首领与默认防御构筑的相对坐标示例；直线退离、不含障碍或闪避概率",
 			"rules":"替代此地图首领接触攻击，动作停追击，攻速只缩恢复；开始检查来源视线，结算检查固定圆心视线；死亡/返城取消",
 			"preserves":"原普通首领、生命护盾/机制、奖励与死亡4后代保持；后代不继承新攻击；无新存档字段"}
+		if policy.visual_pattern=="sunwell_echo":
+			examples[map_id].preserves="原普通首领、生命护盾/机制、奖励与死亡后代保持；后代不继承新攻击；本次动作状态不存档"
+			# Keep the shared single-event profile metadata unchanged. Only this
+			# authored map pattern receives a sequence, with real runtime events.
+			var next_events:Array[Dictionary]=runtime.advance(float(definition.pulse_interval),[enemy],true)
+			assert(next_events.size()==int(definition.pulse_count)-1)
+			events.append_array(next_events)
+			var pulses:Array=[];var deadlines:Array=[];var normalized_clock:float=0.0
+			for pulse:Dictionary in events:
+				normalized_clock+=float(pulse.step_time)
+				assert(is_equal_approx(normalized_clock,float(pulse.attack_age)) and pulse.center==started.attack.center)
+				var pulse_cases:Dictionary={}
+				for key:String in ["standing","moving"]:
+					var at:Vector2=Vector2.ZERO if key=="standing" else Vector2(-float(stats.move_speed)*normalized_clock,0)
+					var inside:bool=Telegraphs.overlaps(pulse,at,Arena.PLAYER_RADIUS)
+					pulse_cases[key]={"position":at,"inside":inside,
+						"settlement":Defense.incoming_source_hit(pulse.packet.base,stats,5.0,100.0,"player") if inside else {}}
+				assert(pulse_cases.standing.inside and not pulse_cases.moving.inside)
+				deadlines.append(normalized_clock)
+				pulses.append({"event":pulse,"normalized_deadline":normalized_clock,"cases":pulse_cases})
+			var recovery_state:Dictionary=runtime.state_for(enemy.id)
+			var final_events:Array[Dictionary]=runtime.advance(float(policy.profile.recovery_seconds),[enemy],true)
+			assert(recovery_state.phase=="recovery" and final_events.is_empty() and runtime.active_count()==0)
+			examples[map_id]["sequence"]={"pulse_count":int(definition.pulse_count),"pulse_interval":definition.pulse_interval,
+				"locked_center":started.attack.center,"normalized_deadlines":deadlines,"pulses":pulses,
+				"contact_components":Monsters.contact_components(enemy),"total_contact_multiplier":float(policy.profile.damage_multiplier)*events.size(),
+				"base_recovery_seconds":definition.profile.recovery_seconds,"actual_recovery_seconds":policy.profile.recovery_seconds,
+				"source_attack_speed":enemy.attack_speed,"recovery_state":recovery_state,"complete_after_recovery":runtime.active_count()==0,
+				"move_speed":stats.move_speed,"default_profile_max_events":TelegraphProfiles.metadata().max_events_per_attack,
+				"settlement_scope":"两次均为独立命中示例，各从护盾5、生命100开始；实际仍逐次检查位置、墙视线、闪避与受击保护，不将示例生命扣减相加"}
 	return examples
+
+
+static func sunwell_examples()->Dictionary:
+	var map_id:String="sunwell_terrace"
+	var layout:Dictionary=CampLayoutData.layout(map_id,Arena.ARENA).landmarks
+	var tiers:Array=[];var roster:Dictionary={}
+	var ordinary_ids:Array=[]
+	for entry:Dictionary in Maps.options(false).normal_modifiers:
+		if ordinary_ids.size()<int(Maps.options(false).max_normal):ordinary_ids.append(entry.id)
+	for tier:int in range(1,MapRules.NormalCatalog.LABELS.size()+1):
+		var base:Dictionary=MapRules.compile_normal(map_id,tier,[],[]).profile
+		var special_ids:Array=[]
+		for special_id:String in Maps.SPECIAL:
+			if int(base.wave)>=int(Maps.SPECIAL[special_id].minimum_wave):special_ids.append(special_id)
+		var selected_special:Array=[] if special_ids.is_empty() else [special_ids[0]]
+		var bonus:Dictionary=MapRules.compile_normal(map_id,tier,ordinary_ids,selected_special).profile
+		tiers.append({"base":base,"eligible_special_ids":special_ids,"maximum_bonus_example":bonus})
+		var camps:Dictionary={}
+		for camp:Dictionary in layout.camps:
+			var examples:Array=[]
+			for ordinal:int in range(1,int(camp.root_count)+1):
+				var roll:Dictionary={"template":SunwellRoster.BASE_TEMPLATES[0],"rarity":"normal","mechanisms":[]}
+				examples.append(SunwellRoster.template_for_roll(int(base.wave),str(camp.id),ordinal,roll))
+			camps[camp.id]=examples
+		roster[str(base.wave)]=camps
+	var old:Dictionary=Canonical.new().snapshot()
+	old.version=Canonical.Rules.V29_VERSION;old.journey=Canonical.Journey.empty_legacy()
+	var migrated:Dictionary=ThirdMapMigrationData.migrate_v29(old)
+	assert(not migrated.is_empty())
+	var prototype:Dictionary=Monsters.make_enemy(1,"crawler",int(Maps.MAPS[map_id].wave),Vector2.ZERO,"ordinary")
+	return {"map_id":map_id,"save_version":Canonical.Rules.VERSION,"tiers":tiers,
+		"patterns":SunwellRoster.PATTERNS,"roster_examples_by_wave":roster,
+		"roster_scope":"只展示原抽签为基础物种的按位替换；灰烬保留名额，分裂体与母巢保留原抽签且占用序号；稀有度、机制与奖励不变；所选巡逻词缀最后按编排物种替换",
+		"elemental_gates":Monsters.ELEMENTAL_ENCOUNTERS,
+		"player_clearance":CampAdmissionData.PLAYER_CLEARANCE,"spawn_seconds":prototype.spawn,
+		"migration_example":{"from_version":old.version,"to_version":migrated.version,
+			"before_best_tiers":old.journey.best_tiers,"after_best_tiers":migrated.journey.best_tiers,
+			"items_preserved":old.items==migrated.items,"currencies_preserved":old.items==migrated.items and old.crafting==migrated.crafting}}
 
 
 static func source_critical_examples()->Dictionary:
@@ -1030,6 +1109,7 @@ static func ember_proliferation_examples()->Dictionary:
 	assert(selected.ok and selected.target_ids==[1,2,3,4,5,6,7,8])
 	var old:Dictionary=Canonical.new().snapshot()
 	old.version=Canonical.Rules.V28_VERSION
+	old.journey=Canonical.Journey.empty_legacy()
 	var migrated:Dictionary=EmberMigration.migrate_v28(old)
 	assert(not migrated.is_empty())
 	var changed_fields:Array=[]
