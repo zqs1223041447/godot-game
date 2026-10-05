@@ -7,6 +7,16 @@ Scope: all localized source node names, exact effect translations, class and par
 - Characters present in the checked font: 728
 - Missing glyphs for this UI scope: 584
 
+## Characters added by this branch
+
+Compared with the `ce58bac` checkpoint’s source map and passive panel, this display adds 29 unique Han characters:
+
+```text
+且产仍付件份何便副右各均将左座戏扣把段渐牌百竭累缠迟逐都颗
+```
+
+The existing font already contains 24 of them. These five new characters are missing and should be included if the parent work adds glyph coverage: `便副竭缠迟` (`U+4FBF U+526F U+7AED U+7F20 U+8FDF`). The full missing-glyph inventory below covers the whole localized UI scope.
+
 The sequence below is sorted by Unicode code point. The code-point list is authoritative if a renderer cannot show a missing character.
 
 ## Missing characters
