@@ -11,6 +11,7 @@ const View = preload("res://scripts/visuals/world_view.gd")
 const Markers = preload("res://scripts/visuals/world_markers.gd")
 const TelegraphArt = preload("res://scripts/visuals/telegraph_renderer.gd")
 const BurnArt = preload("res://scripts/visuals/burn_status_renderer.gd")
+const FeedbackArt = preload("res://scripts/visuals/combat_feedback_renderer.gd")
 
 static func polygon(canvas: CanvasItem, points: Array, color: Color) -> void:
 	canvas.draw_colored_polygon(PackedVector2Array(points), color)
@@ -96,6 +97,7 @@ static func draw_scene(arena: Node2D, preferences: Settings, include_environment
 			var velocity: Vector2 = particle.velocity
 			arena.draw_line(p-velocity.normalized()*4,p,color,maxf(1,float(particle.radius)*color.a),true)
 	stamp = _diagnostic_mark("particles",stamp)
+	if arena.has_method("damage_feedback"): FeedbackArt.draw(arena, arena.damage_feedback(), preferences)
 	if arena._font and preferences.damage_numbers:
 		for entry: Dictionary in arena.floating_text:
 			var color: Color = entry.color
@@ -225,6 +227,7 @@ static func draw_after_actors(arena:Node2D,preferences:Settings)->void:
 			var velocity: Vector2 = particle.velocity
 			arena.draw_line(p-velocity.normalized()*4,p,color,maxf(1,float(particle.radius)*color.a),true)
 	stamp = _diagnostic_mark("particles",stamp)
+	if arena.has_method("damage_feedback"): FeedbackArt.draw(arena, arena.damage_feedback(), preferences)
 	if arena._font and preferences.damage_numbers:
 		for entry: Dictionary in arena.floating_text:
 			var color: Color = entry.color

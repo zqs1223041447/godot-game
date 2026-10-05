@@ -13,6 +13,8 @@ func visual_camera_zoom()->float:
 	return camera.zoom.x if camera!=null else 1.0
 func burn_statuses() -> Array:
 	return source.burn_statuses() if is_instance_valid(source) and source.has_method("burn_statuses") else []
+func damage_feedback() -> Array:
+	return source.damage_feedback() if is_instance_valid(source) and source.has_method("damage_feedback") else []
 func _draw()->void:
 	if not is_instance_valid(source) or not source._ready_complete:return
 	var began:int=Time.get_ticks_usec() if Visuals.diagnostic_profile_enabled else 0
