@@ -1,4 +1,4 @@
-class_name DefenseRules
+class_name FrozenV052Defense
 extends RefCounted
 ## Original, bounded hit-defense rules shared by the player and monsters.
 ## DamageResolver owns the per-component formula; this module validates authored
@@ -141,26 +141,12 @@ static func incoming_source_hit(components: Variant,stats: Dictionary,shield: Va
 
 ## Already-resolved raw burning has no offensive modifiers or hit admission.
 ## Reuse the same fire cap and resource settlement, without hit-size armour.
-## Pure effective rate used by causal death planning. Reuse the fresh profile
-## container; no fictitious shield/health settlement or persistent cache.
-static func burn_rate(raw_amount:Variant,fire_resistance:Variant,actor:String="player")->Dictionary:
+static func incoming_burn(raw_amount:Variant,fire_resistance:Variant,shield:Variant,health:Variant,actor:String="player")->Dictionary:
 	if not _amount(raw_amount):return _failure("Burn amount must be finite and nonnegative")
 	var profile:Dictionary=defense_profile({"fire_resistance":fire_resistance},actor)
 	if not profile.ok:return profile
 	var raw:float=float(raw_amount);var resistance:float=profile.effective_resistances.fire
 	var amount:float=raw*(1.0-resistance)
-	profile.raw_amount=raw;profile.resistance=resistance;profile.component_amount=amount
-	# settle_resolved accumulates its single component from positive zero.
-	# Retain that operation, including negative-zero behavior, for exact rates.
-	profile.damage_total=0.0+amount
-	return profile
-
-
-static func incoming_burn(raw_amount:Variant,fire_resistance:Variant,shield:Variant,health:Variant,actor:String="player")->Dictionary:
-	var profile:Dictionary=burn_rate(raw_amount,fire_resistance,actor)
-	if not profile.ok:return profile
-	var raw:float=profile.raw_amount;var resistance:float=profile.resistance
-	var amount:float=profile.component_amount
 	var result:Dictionary=settle_resolved({"total":amount,"components":{"fire":amount},"details":[{"type":"fire","before_defense":raw,"resistance":resistance,"final":amount}]},shield,health)
 	if result.ok:result.actor=actor;result.stage="burning"
 	return result
