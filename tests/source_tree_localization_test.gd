@@ -132,6 +132,27 @@ func run() -> void:
 	check(Localization.source_effect_line("10% chance to Shock") == "有10%几率使敌人感电", "Shock chance names the affected enemy")
 	check(Localization.source_effect_line("10% chance to Freeze") == "有10%几率冻结敌人", "Freeze chance names the affected enemy")
 	check(Localization.source_effect_line("10% Chance to Inflict Cold Exposure on Hit with Cold Damage") == "以冰霜伤害击中敌人时，有10%几率对其施加冰霜曝露", "Exposure chance names the hit enemy as the affected target")
+	var active_enemy_conditions := {
+		"+8% Chance to Block Attack Damage if you've Stunned an Enemy Recently": "若你近期曾击晕敌人，攻击伤害格挡几率+8%",
+		"15% increased Area of Effect if you have Stunned an Enemy Recently": "若你近期曾击晕敌人，效果范围提高15%",
+		"15% increased Elemental Damage if you've Chilled an Enemy Recently": "若你近期曾使敌人冰缓，元素伤害提高15%",
+		"20% increased Elemental Damage if you've Ignited an Enemy Recently": "若你近期曾点燃敌人，元素伤害提高20%",
+		"25% increased Elemental Damage if you've Shocked an Enemy Recently": "若你近期曾使敌人感电，元素伤害提高25%",
+		"30% increased Damage if you have Shocked an Enemy Recently": "若你近期曾使敌人感电，伤害提高30%",
+		"30% increased Damage if you've Shattered an Enemy Recently": "若你近期曾粉碎敌人，伤害提高30%",
+		"30% increased Mana Regeneration Rate if you have Frozen an Enemy Recently": "若你近期曾冻结敌人，魔力回复速度提高30%",
+		"30% increased Mana Regeneration Rate if you have Shocked an Enemy Recently": "若你近期曾使敌人感电，魔力回复速度提高30%",
+		"Regenerate 1% of Energy Shield per second if you've Cursed an Enemy Recently": "若你近期曾诅咒敌人，每秒回复相当于最大能量护盾1%的能量护盾",
+		"Regenerate 1% of Life per second if you have Stunned an Enemy Recently": "若你近期曾击晕敌人，每秒回复相当于最大生命1%的生命",
+	}
+	for source_line: String in active_enemy_conditions:
+		check(localized.lines.has(source_line), "Active enemy action remains an exact source key: " + source_line)
+		check(Localization.source_effect_line(source_line) == active_enemy_conditions[source_line], "Recent active actions name the enemy as target: " + source_line)
+	check(Localization.source_effect_line("You cannot be Ignited if you've been Ignited Recently") == "近期被点燃后，你不会再次被点燃", "A self-applied ailment condition remains distinct from igniting an enemy")
+	check(Localization.source_effect_line("Damaging Ailments Cannot Be inflicted on you while you already have one") == "当你已受到一种伤害型异常状态时，无法再被施加伤害型异常状态", "Damaging ailment prevention does not narrow to ‘other’ ailments")
+	check(Localization.source_effect_line("Non-Damaging Ailments Cannot Be inflicted on you while you already have one") == "当你已受到一种非伤害性异常状态时，无法再被施加非伤害性异常状态", "Non-damaging ailment prevention does not narrow to ‘other’ ailments")
+	check(Localization.source_effect_line("Prevent +3% of Suppressed Spell Damage per Bark below maximum") == "树皮层数每比上限少一层，额外防止+3%被压制的法术伤害", "Suppression prevention states the Bark deficit and preserves the percentage points")
+	check(Localization.source_effect_line("10% chance to Avoid non-Damaging Ailments on you per Bark below maximum") == "树皮层数每比上限少一层，避免自身受到非伤害性异常状态的几率增加10%", "Ailment avoidance states the Bark deficit and retains the chance")
 	check(Localization.source_effect_line("Warcries have 5% Chance to grant an Endurance, Frenzy or Power Charge per Power") == "战吼威力每有一点，战吼就有5%几率获得一个耐力球、狂怒球或暴击球", "Warcry Power and Power Charges use distinct Chinese terms")
 	check(Localization.source_effect_line("25% chance to Steal Power, Frenzy, and Endurance Charges on Hit with Claws") == "使用爪类武器击中敌人时，有25%几率窃取暴击球、狂怒球与耐力球", "Stealing charge types keeps the enemy hit and charge names clear")
 	for raw_line: String in all_raw_lines:
