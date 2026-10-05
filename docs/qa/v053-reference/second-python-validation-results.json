@@ -1,0 +1,30 @@
+[
+  {
+    "name": "python-build",
+    "command": [
+      "python3",
+      "tools/build_reference.py"
+    ],
+    "exit_code": 0,
+    "seconds": 0.457
+  },
+  {
+    "name": "python-check",
+    "command": [
+      "python3",
+      "tools/build_reference.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 0.46
+  },
+  {
+    "name": "focused-reference",
+    "command": [
+      "python3",
+      "tests/fire_dot_reference_test.py"
+    ],
+    "exit_code": 1,
+    "seconds": 1.462
+  }
+]

@@ -3562,7 +3562,7 @@
 		"save_version": 28,
 		"scope": "已解析主命中火分量只作为一次基数；持续扣伤不再套主命中、投射物、暴击或偷取",
 		"secondary": "独立装备爆炸不继承；母子和返回沿原获准主命中规则",
-		"source_words": "本游戏初版，不解锁尚未实现的PoE点燃或持续伤害源节点",
+		"source_words": "本游戏燃烧原型；schema32仅接入无条件火焰持续伤害加成的8个完整源节点，其余未实现的点燃、持续伤害与更快异常词句仍锁定",
 		"stacking": "单目标一条，更强覆盖，同强刷新3秒，弱条忽略",
 		"support_id": "ignite"
 	},
@@ -4270,7 +4270,7 @@
 				"normal_points": 5,
 				"source_version": "3.29.1"
 			},
-			"version": 31
+			"version": 32
 		},
 		"default_casts": {
 			"group_000001": {
@@ -4359,6 +4359,7 @@
 			"elemental_increased": 0.0,
 			"evasion": 15.600000000000001,
 			"evasion_increased": 0.0,
+			"fire_dot_multiplier_add": 0.0,
 			"fire_increased": 0.0,
 			"fire_resistance": 0.0,
 			"flask_charges_gained_increased": 0.0,
@@ -5340,7 +5341,7 @@
 				"evasion": 320.0
 			}
 		},
-		"save_version": 31,
+		"save_version": 32,
 		"skitter_accuracy_example": {
 			"base_accuracy": 140,
 			"base_chance": 0.96,
@@ -5403,6 +5404,7 @@
 				"elemental_increased": 0.0,
 				"evasion": 15.600000000000001,
 				"evasion_increased": 0.0,
+				"fire_dot_multiplier_add": 0.0,
 				"fire_increased": 0.0,
 				"fire_resistance": 0.0,
 				"flask_charges_gained_increased": 0.0,
@@ -5882,7 +5884,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 31,
+				"save_version": 32,
 				"source": {
 					"affixes": [
 						{
@@ -6369,7 +6371,7 @@
 				"schema_version": 2,
 				"status": "prototype"
 			},
-			"save_version": 31
+			"save_version": 32
 		},
 		"elevate": {
 			"description": "保留魔法装备已有词缀，升为稀有并补至4至6条。",
@@ -6570,7 +6572,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 31,
+				"save_version": 32,
 				"source": {
 					"affixes": [
 						{
@@ -6754,7 +6756,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 31,
+				"save_version": 32,
 				"source": {
 					"affixes": [],
 					"base_id": "ashwood_bow",
@@ -6940,7 +6942,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 31,
+				"save_version": 32,
 				"source": {
 					"affixes": [
 						{
@@ -7143,7 +7145,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 31,
+				"save_version": 32,
 				"source": {
 					"affixes": [
 						{
@@ -7285,7 +7287,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 31,
+				"save_version": 32,
 				"source": {
 					"affixes": [
 						{
@@ -7701,7 +7703,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 31,
+				"save_version": 32,
 				"source": {
 					"affixes": [
 						{
@@ -9437,7 +9439,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 31,
+				"save_version": 32,
 				"source": {
 					"affixes": [
 						{
@@ -9767,7 +9769,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 31,
+				"save_version": 32,
 				"source": {
 					"affixes": [
 						{
@@ -10086,7 +10088,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 31,
+				"save_version": 32,
 				"source": {
 					"affixes": [
 						{
@@ -10149,7 +10151,7 @@
 			"example_quantity": 1,
 			"name": "校准碎片",
 			"quantity_source": "items[uid].payload.quantity",
-			"save_version": 31,
+			"save_version": 32,
 			"size": [
 				1,
 				1
@@ -17956,7 +17958,7 @@
 			"status": "implemented"
 		}
 	},
-	"game_version": "0.52.0",
+	"game_version": "0.53.0",
 	"jewel_affixes": {
 		"barrier": {
 			"kind": "prefix",
@@ -21096,6 +21098,7 @@
 							"elemental_increased": 0.0,
 							"evasion": 15.600000000000001,
 							"evasion_increased": 0.0,
+							"fire_dot_multiplier_add": 0.0,
 							"fire_increased": 0.0,
 							"fire_resistance": 0.18,
 							"flask_charges_gained_increased": 0.0,
@@ -21225,6 +21228,7 @@
 							"elemental_increased": 0.0,
 							"evasion": 15.600000000000001,
 							"evasion_increased": 0.0,
+							"fire_dot_multiplier_add": 0.0,
 							"fire_increased": 0.0,
 							"fire_resistance": 0.0,
 							"flask_charges_gained_increased": 0.0,
@@ -21313,6 +21317,7 @@
 							"elemental_increased": 0.0,
 							"evasion": 15.600000000000001,
 							"evasion_increased": 0.0,
+							"fire_dot_multiplier_add": 0.0,
 							"fire_increased": 0.0,
 							"fire_resistance": 0.0,
 							"flask_charges_gained_increased": 0.0,
@@ -21709,6 +21714,7 @@
 							"elemental_increased": 0.0,
 							"evasion": 15.600000000000001,
 							"evasion_increased": 0.0,
+							"fire_dot_multiplier_add": 0.0,
 							"fire_increased": 0.0,
 							"fire_resistance": 0.18,
 							"flask_charges_gained_increased": 0.0,
@@ -21838,6 +21844,7 @@
 							"elemental_increased": 0.0,
 							"evasion": 15.600000000000001,
 							"evasion_increased": 0.0,
+							"fire_dot_multiplier_add": 0.0,
 							"fire_increased": 0.0,
 							"fire_resistance": 0.0,
 							"flask_charges_gained_increased": 0.0,
@@ -21926,6 +21933,7 @@
 							"elemental_increased": 0.0,
 							"evasion": 15.600000000000001,
 							"evasion_increased": 0.0,
+							"fire_dot_multiplier_add": 0.0,
 							"fire_increased": 0.0,
 							"fire_resistance": 0.0,
 							"flask_charges_gained_increased": 0.0,
@@ -23430,7 +23438,7 @@
 		"quality": 0,
 		"recycle_credit": 1,
 		"recycle_location": "bag",
-		"schema": 31,
+		"schema": 32,
 		"test_supply_separate": true
 	},
 	"normal_journey": {
@@ -28529,7 +28537,7 @@
 		"source": "SkillCompiler + ProjectileRuntime.advance + DamageResolver",
 		"target_count": 6
 	},
-	"save_version": 31,
+	"save_version": 32,
 	"schema_version": 3,
 	"sectors": [
 		{
@@ -256933,6 +256941,8540 @@
 			"暴击异常/持续伤害"
 		]
 	},
+	"source_fire_dot": {
+		"class_paths": [
+			{
+				"class_id": 0.0,
+				"legacy_routes_rejected": true,
+				"legal_current_routes": true,
+				"new_reachable_count": 685.0,
+				"old_reachable_count": 676.0,
+				"paths_to_new_nodes": {
+					"11924": [
+						"58833",
+						"2151",
+						"37690",
+						"48423",
+						"6204",
+						"63976",
+						"33479",
+						"10490",
+						"47251",
+						"7388",
+						"60398",
+						"46340",
+						"42760",
+						"36678",
+						"39841",
+						"63447",
+						"44184",
+						"61804",
+						"13559",
+						"31462",
+						"11924"
+					],
+					"13559": [
+						"58833",
+						"2151",
+						"37690",
+						"48423",
+						"6204",
+						"63976",
+						"33479",
+						"10490",
+						"47251",
+						"7388",
+						"60398",
+						"46340",
+						"42760",
+						"36678",
+						"39841",
+						"63447",
+						"44184",
+						"61804",
+						"13559"
+					],
+					"2550": [
+						"58833",
+						"2151",
+						"37690",
+						"48423",
+						"6204",
+						"63976",
+						"16775",
+						"46910",
+						"33740",
+						"15405",
+						"50862",
+						"50422",
+						"10221",
+						"54396",
+						"2550"
+					],
+					"29049": [
+						"58833",
+						"2151",
+						"37690",
+						"48423",
+						"6204",
+						"63976",
+						"33479",
+						"10490",
+						"47251",
+						"7388",
+						"60398",
+						"46340",
+						"42760",
+						"36678",
+						"7444",
+						"4713",
+						"5916",
+						"29049"
+					],
+					"31462": [
+						"58833",
+						"2151",
+						"37690",
+						"48423",
+						"6204",
+						"63976",
+						"33479",
+						"10490",
+						"47251",
+						"7388",
+						"60398",
+						"46340",
+						"42760",
+						"36678",
+						"39841",
+						"63447",
+						"44184",
+						"61804",
+						"13559",
+						"31462"
+					],
+					"4713": [
+						"58833",
+						"2151",
+						"37690",
+						"48423",
+						"6204",
+						"63976",
+						"33479",
+						"10490",
+						"47251",
+						"7388",
+						"60398",
+						"46340",
+						"42760",
+						"36678",
+						"7444",
+						"4713"
+					],
+					"54396": [
+						"58833",
+						"2151",
+						"37690",
+						"48423",
+						"6204",
+						"63976",
+						"16775",
+						"46910",
+						"33740",
+						"15405",
+						"50862",
+						"50422",
+						"10221",
+						"54396"
+					],
+					"5916": [
+						"58833",
+						"2151",
+						"37690",
+						"48423",
+						"6204",
+						"63976",
+						"33479",
+						"10490",
+						"47251",
+						"7388",
+						"60398",
+						"46340",
+						"42760",
+						"36678",
+						"7444",
+						"4713",
+						"5916"
+					]
+				}
+			},
+			{
+				"class_id": 1.0,
+				"legacy_routes_rejected": true,
+				"legal_current_routes": true,
+				"new_reachable_count": 685.0,
+				"old_reachable_count": 676.0,
+				"paths_to_new_nodes": {
+					"11924": [
+						"47175",
+						"31628",
+						"9511",
+						"23881",
+						"26523",
+						"6446",
+						"10221",
+						"50422",
+						"50570",
+						"29353",
+						"44202",
+						"23027",
+						"60472",
+						"26270",
+						"64210",
+						"7444",
+						"36678",
+						"39841",
+						"63447",
+						"44184",
+						"61804",
+						"13559",
+						"31462",
+						"11924"
+					],
+					"13559": [
+						"47175",
+						"31628",
+						"9511",
+						"23881",
+						"26523",
+						"6446",
+						"10221",
+						"50422",
+						"50570",
+						"29353",
+						"44202",
+						"23027",
+						"60472",
+						"26270",
+						"64210",
+						"7444",
+						"36678",
+						"39841",
+						"63447",
+						"44184",
+						"61804",
+						"13559"
+					],
+					"2550": [
+						"47175",
+						"31628",
+						"9511",
+						"23881",
+						"26523",
+						"6446",
+						"10221",
+						"54396",
+						"2550"
+					],
+					"29049": [
+						"47175",
+						"31628",
+						"9511",
+						"23881",
+						"26523",
+						"6446",
+						"10221",
+						"50422",
+						"50570",
+						"29353",
+						"44202",
+						"23027",
+						"60472",
+						"26270",
+						"64210",
+						"7444",
+						"4713",
+						"5916",
+						"29049"
+					],
+					"31462": [
+						"47175",
+						"31628",
+						"9511",
+						"23881",
+						"26523",
+						"6446",
+						"10221",
+						"50422",
+						"50570",
+						"29353",
+						"44202",
+						"23027",
+						"60472",
+						"26270",
+						"64210",
+						"7444",
+						"36678",
+						"39841",
+						"63447",
+						"44184",
+						"61804",
+						"13559",
+						"31462"
+					],
+					"4713": [
+						"47175",
+						"31628",
+						"9511",
+						"23881",
+						"26523",
+						"6446",
+						"10221",
+						"50422",
+						"50570",
+						"29353",
+						"44202",
+						"23027",
+						"60472",
+						"26270",
+						"64210",
+						"7444",
+						"4713"
+					],
+					"54396": [
+						"47175",
+						"31628",
+						"9511",
+						"23881",
+						"26523",
+						"6446",
+						"10221",
+						"54396"
+					],
+					"5916": [
+						"47175",
+						"31628",
+						"9511",
+						"23881",
+						"26523",
+						"6446",
+						"10221",
+						"50422",
+						"50570",
+						"29353",
+						"44202",
+						"23027",
+						"60472",
+						"26270",
+						"64210",
+						"7444",
+						"4713",
+						"5916"
+					]
+				}
+			},
+			{
+				"class_id": 2.0,
+				"legacy_routes_rejected": true,
+				"legal_current_routes": true,
+				"new_reachable_count": 685.0,
+				"old_reachable_count": 676.0,
+				"paths_to_new_nodes": {
+					"11924": [
+						"50459",
+						"45035",
+						"59370",
+						"63795",
+						"38662",
+						"5616",
+						"39718",
+						"59606",
+						"1461",
+						"49900",
+						"46277",
+						"56295",
+						"18182",
+						"53456",
+						"36858",
+						"60440",
+						"49605",
+						"33310",
+						"5296",
+						"19501",
+						"4367",
+						"44184",
+						"61804",
+						"13559",
+						"31462",
+						"11924"
+					],
+					"13559": [
+						"50459",
+						"45035",
+						"59370",
+						"63795",
+						"38662",
+						"5616",
+						"39718",
+						"59606",
+						"1461",
+						"49900",
+						"46277",
+						"56295",
+						"18182",
+						"53456",
+						"36858",
+						"60440",
+						"49605",
+						"33310",
+						"5296",
+						"19501",
+						"4367",
+						"44184",
+						"61804",
+						"13559"
+					],
+					"2550": [
+						"50459",
+						"39821",
+						"52904",
+						"444",
+						"61306",
+						"63139",
+						"5408",
+						"11497",
+						"238",
+						"10829",
+						"16167",
+						"19144",
+						"28330",
+						"46578",
+						"13714",
+						"55485",
+						"65034",
+						"46910",
+						"33740",
+						"15405",
+						"50862",
+						"50422",
+						"10221",
+						"54396",
+						"2550"
+					],
+					"29049": [
+						"50459",
+						"45035",
+						"59370",
+						"63795",
+						"38662",
+						"5616",
+						"39718",
+						"59606",
+						"1461",
+						"49900",
+						"46277",
+						"56295",
+						"18182",
+						"53456",
+						"36858",
+						"60440",
+						"49605",
+						"33310",
+						"5296",
+						"19501",
+						"4367",
+						"44184",
+						"63447",
+						"39841",
+						"36678",
+						"7444",
+						"4713",
+						"5916",
+						"29049"
+					],
+					"31462": [
+						"50459",
+						"45035",
+						"59370",
+						"63795",
+						"38662",
+						"5616",
+						"39718",
+						"59606",
+						"1461",
+						"49900",
+						"46277",
+						"56295",
+						"18182",
+						"53456",
+						"36858",
+						"60440",
+						"49605",
+						"33310",
+						"5296",
+						"19501",
+						"4367",
+						"44184",
+						"61804",
+						"13559",
+						"31462"
+					],
+					"4713": [
+						"50459",
+						"45035",
+						"59370",
+						"63795",
+						"38662",
+						"5616",
+						"39718",
+						"59606",
+						"1461",
+						"49900",
+						"46277",
+						"56295",
+						"18182",
+						"53456",
+						"36858",
+						"60440",
+						"49605",
+						"33310",
+						"5296",
+						"19501",
+						"4367",
+						"44184",
+						"63447",
+						"39841",
+						"36678",
+						"7444",
+						"4713"
+					],
+					"54396": [
+						"50459",
+						"39821",
+						"52904",
+						"444",
+						"61306",
+						"63139",
+						"5408",
+						"11497",
+						"238",
+						"10829",
+						"16167",
+						"19144",
+						"28330",
+						"46578",
+						"13714",
+						"55485",
+						"65034",
+						"46910",
+						"33740",
+						"15405",
+						"50862",
+						"50422",
+						"10221",
+						"54396"
+					],
+					"5916": [
+						"50459",
+						"45035",
+						"59370",
+						"63795",
+						"38662",
+						"5616",
+						"39718",
+						"59606",
+						"1461",
+						"49900",
+						"46277",
+						"56295",
+						"18182",
+						"53456",
+						"36858",
+						"60440",
+						"49605",
+						"33310",
+						"5296",
+						"19501",
+						"4367",
+						"44184",
+						"63447",
+						"39841",
+						"36678",
+						"7444",
+						"4713",
+						"5916"
+					]
+				}
+			},
+			{
+				"class_id": 3.0,
+				"legacy_routes_rejected": true,
+				"legal_current_routes": true,
+				"new_reachable_count": 685.0,
+				"old_reachable_count": 676.0,
+				"paths_to_new_nodes": {
+					"11924": [
+						"54447",
+						"57226",
+						"21678",
+						"32210",
+						"8948",
+						"38176",
+						"49651",
+						"5296",
+						"19501",
+						"4367",
+						"44184",
+						"61804",
+						"13559",
+						"31462",
+						"11924"
+					],
+					"13559": [
+						"54447",
+						"57226",
+						"21678",
+						"32210",
+						"8948",
+						"38176",
+						"49651",
+						"5296",
+						"19501",
+						"4367",
+						"44184",
+						"61804",
+						"13559"
+					],
+					"2550": [
+						"54447",
+						"57264",
+						"37569",
+						"36542",
+						"4397",
+						"31875",
+						"60398",
+						"13009",
+						"17735",
+						"58402",
+						"10575",
+						"29199",
+						"15064",
+						"31931",
+						"15631",
+						"44967",
+						"50422",
+						"10221",
+						"54396",
+						"2550"
+					],
+					"29049": [
+						"54447",
+						"57264",
+						"37569",
+						"36542",
+						"4397",
+						"7938",
+						"14021",
+						"55332",
+						"42760",
+						"36678",
+						"7444",
+						"4713",
+						"5916",
+						"29049"
+					],
+					"31462": [
+						"54447",
+						"57226",
+						"21678",
+						"32210",
+						"8948",
+						"38176",
+						"49651",
+						"5296",
+						"19501",
+						"4367",
+						"44184",
+						"61804",
+						"13559",
+						"31462"
+					],
+					"4713": [
+						"54447",
+						"57264",
+						"37569",
+						"36542",
+						"4397",
+						"7938",
+						"14021",
+						"55332",
+						"42760",
+						"36678",
+						"7444",
+						"4713"
+					],
+					"54396": [
+						"54447",
+						"57264",
+						"37569",
+						"36542",
+						"4397",
+						"31875",
+						"60398",
+						"13009",
+						"17735",
+						"58402",
+						"10575",
+						"29199",
+						"15064",
+						"31931",
+						"15631",
+						"44967",
+						"50422",
+						"10221",
+						"54396"
+					],
+					"5916": [
+						"54447",
+						"57264",
+						"37569",
+						"36542",
+						"4397",
+						"7938",
+						"14021",
+						"55332",
+						"42760",
+						"36678",
+						"7444",
+						"4713",
+						"5916"
+					]
+				}
+			},
+			{
+				"class_id": 4.0,
+				"legacy_routes_rejected": true,
+				"legal_current_routes": true,
+				"new_reachable_count": 685.0,
+				"old_reachable_count": 676.0,
+				"paths_to_new_nodes": {
+					"11924": [
+						"50986",
+						"47389",
+						"42911",
+						"40867",
+						"476",
+						"24865",
+						"6741",
+						"14056",
+						"34400",
+						"14930",
+						"3644",
+						"5233",
+						"63723",
+						"59928",
+						"63282",
+						"29353",
+						"44202",
+						"23027",
+						"60472",
+						"26270",
+						"64210",
+						"7444",
+						"36678",
+						"39841",
+						"63447",
+						"44184",
+						"61804",
+						"13559",
+						"31462",
+						"11924"
+					],
+					"13559": [
+						"50986",
+						"47389",
+						"42911",
+						"40867",
+						"476",
+						"24865",
+						"6741",
+						"14056",
+						"34400",
+						"14930",
+						"3644",
+						"5233",
+						"63723",
+						"59928",
+						"63282",
+						"29353",
+						"44202",
+						"23027",
+						"60472",
+						"26270",
+						"64210",
+						"7444",
+						"36678",
+						"39841",
+						"63447",
+						"44184",
+						"61804",
+						"13559"
+					],
+					"2550": [
+						"50986",
+						"47389",
+						"42911",
+						"40867",
+						"476",
+						"30691",
+						"43374",
+						"31080",
+						"49412",
+						"40653",
+						"53793",
+						"22285",
+						"55649",
+						"6446",
+						"10221",
+						"54396",
+						"2550"
+					],
+					"29049": [
+						"50986",
+						"47389",
+						"42911",
+						"40867",
+						"476",
+						"24865",
+						"6741",
+						"14056",
+						"34400",
+						"14930",
+						"3644",
+						"5233",
+						"63723",
+						"59928",
+						"63282",
+						"29353",
+						"44202",
+						"23027",
+						"60472",
+						"26270",
+						"64210",
+						"7444",
+						"4713",
+						"5916",
+						"29049"
+					],
+					"31462": [
+						"50986",
+						"47389",
+						"42911",
+						"40867",
+						"476",
+						"24865",
+						"6741",
+						"14056",
+						"34400",
+						"14930",
+						"3644",
+						"5233",
+						"63723",
+						"59928",
+						"63282",
+						"29353",
+						"44202",
+						"23027",
+						"60472",
+						"26270",
+						"64210",
+						"7444",
+						"36678",
+						"39841",
+						"63447",
+						"44184",
+						"61804",
+						"13559",
+						"31462"
+					],
+					"4713": [
+						"50986",
+						"47389",
+						"42911",
+						"40867",
+						"476",
+						"24865",
+						"6741",
+						"14056",
+						"34400",
+						"14930",
+						"3644",
+						"5233",
+						"63723",
+						"59928",
+						"63282",
+						"29353",
+						"44202",
+						"23027",
+						"60472",
+						"26270",
+						"64210",
+						"7444",
+						"4713"
+					],
+					"54396": [
+						"50986",
+						"47389",
+						"42911",
+						"40867",
+						"476",
+						"30691",
+						"43374",
+						"31080",
+						"49412",
+						"40653",
+						"53793",
+						"22285",
+						"55649",
+						"6446",
+						"10221",
+						"54396"
+					],
+					"5916": [
+						"50986",
+						"47389",
+						"42911",
+						"40867",
+						"476",
+						"24865",
+						"6741",
+						"14056",
+						"34400",
+						"14930",
+						"3644",
+						"5233",
+						"63723",
+						"59928",
+						"63282",
+						"29353",
+						"44202",
+						"23027",
+						"60472",
+						"26270",
+						"64210",
+						"7444",
+						"4713",
+						"5916"
+					]
+				}
+			},
+			{
+				"class_id": 5.0,
+				"legacy_routes_rejected": true,
+				"legal_current_routes": true,
+				"new_reachable_count": 685.0,
+				"old_reachable_count": 676.0,
+				"paths_to_new_nodes": {
+					"11924": [
+						"61525",
+						"63965",
+						"14151",
+						"27564",
+						"17735",
+						"13009",
+						"60398",
+						"46340",
+						"42760",
+						"36678",
+						"39841",
+						"63447",
+						"44184",
+						"61804",
+						"13559",
+						"31462",
+						"11924"
+					],
+					"13559": [
+						"61525",
+						"63965",
+						"14151",
+						"27564",
+						"17735",
+						"13009",
+						"60398",
+						"46340",
+						"42760",
+						"36678",
+						"39841",
+						"63447",
+						"44184",
+						"61804",
+						"13559"
+					],
+					"2550": [
+						"61525",
+						"20228",
+						"39916",
+						"35556",
+						"44908",
+						"2913",
+						"50862",
+						"50422",
+						"10221",
+						"54396",
+						"2550"
+					],
+					"29049": [
+						"61525",
+						"63965",
+						"14151",
+						"27564",
+						"17735",
+						"13009",
+						"60398",
+						"46340",
+						"42760",
+						"36678",
+						"7444",
+						"4713",
+						"5916",
+						"29049"
+					],
+					"31462": [
+						"61525",
+						"63965",
+						"14151",
+						"27564",
+						"17735",
+						"13009",
+						"60398",
+						"46340",
+						"42760",
+						"36678",
+						"39841",
+						"63447",
+						"44184",
+						"61804",
+						"13559",
+						"31462"
+					],
+					"4713": [
+						"61525",
+						"63965",
+						"14151",
+						"27564",
+						"17735",
+						"13009",
+						"60398",
+						"46340",
+						"42760",
+						"36678",
+						"7444",
+						"4713"
+					],
+					"54396": [
+						"61525",
+						"20228",
+						"39916",
+						"35556",
+						"44908",
+						"2913",
+						"50862",
+						"50422",
+						"10221",
+						"54396"
+					],
+					"5916": [
+						"61525",
+						"63965",
+						"14151",
+						"27564",
+						"17735",
+						"13009",
+						"60398",
+						"46340",
+						"42760",
+						"36678",
+						"7444",
+						"4713",
+						"5916"
+					]
+				}
+			},
+			{
+				"class_id": 6.0,
+				"legacy_routes_rejected": true,
+				"legal_current_routes": true,
+				"new_reachable_count": 685.0,
+				"old_reachable_count": 676.0,
+				"paths_to_new_nodes": {
+					"11924": [
+						"44683",
+						"38129",
+						"11334",
+						"15549",
+						"20546",
+						"3656",
+						"33783",
+						"4502",
+						"32710",
+						"41635",
+						"49651",
+						"5296",
+						"19501",
+						"4367",
+						"44184",
+						"61804",
+						"13559",
+						"31462",
+						"11924"
+					],
+					"13559": [
+						"44683",
+						"38129",
+						"11334",
+						"15549",
+						"20546",
+						"3656",
+						"33783",
+						"4502",
+						"32710",
+						"41635",
+						"49651",
+						"5296",
+						"19501",
+						"4367",
+						"44184",
+						"61804",
+						"13559"
+					],
+					"2550": [
+						"44683",
+						"38129",
+						"11334",
+						"15549",
+						"20546",
+						"21301",
+						"37671",
+						"48778",
+						"51923",
+						"46092",
+						"60090",
+						"3452",
+						"22473",
+						"10490",
+						"33479",
+						"63976",
+						"16775",
+						"46910",
+						"33740",
+						"15405",
+						"50862",
+						"50422",
+						"10221",
+						"54396",
+						"2550"
+					],
+					"29049": [
+						"44683",
+						"38129",
+						"11334",
+						"15549",
+						"20546",
+						"3656",
+						"33783",
+						"4502",
+						"32710",
+						"41635",
+						"49651",
+						"5296",
+						"19501",
+						"4367",
+						"44184",
+						"63447",
+						"39841",
+						"36678",
+						"7444",
+						"4713",
+						"5916",
+						"29049"
+					],
+					"31462": [
+						"44683",
+						"38129",
+						"11334",
+						"15549",
+						"20546",
+						"3656",
+						"33783",
+						"4502",
+						"32710",
+						"41635",
+						"49651",
+						"5296",
+						"19501",
+						"4367",
+						"44184",
+						"61804",
+						"13559",
+						"31462"
+					],
+					"4713": [
+						"44683",
+						"38129",
+						"11334",
+						"15549",
+						"20546",
+						"3656",
+						"33783",
+						"4502",
+						"32710",
+						"41635",
+						"49651",
+						"5296",
+						"19501",
+						"4367",
+						"44184",
+						"63447",
+						"39841",
+						"36678",
+						"7444",
+						"4713"
+					],
+					"54396": [
+						"44683",
+						"38129",
+						"11334",
+						"15549",
+						"20546",
+						"21301",
+						"37671",
+						"48778",
+						"51923",
+						"46092",
+						"60090",
+						"3452",
+						"22473",
+						"10490",
+						"33479",
+						"63976",
+						"16775",
+						"46910",
+						"33740",
+						"15405",
+						"50862",
+						"50422",
+						"10221",
+						"54396"
+					],
+					"5916": [
+						"44683",
+						"38129",
+						"11334",
+						"15549",
+						"20546",
+						"3656",
+						"33783",
+						"4502",
+						"32710",
+						"41635",
+						"49651",
+						"5296",
+						"19501",
+						"4367",
+						"44184",
+						"63447",
+						"39841",
+						"36678",
+						"7444",
+						"4713",
+						"5916"
+					]
+				}
+			}
+		],
+		"complete_gate": "仍逐节点执行全部源效果；包含未实现附加效果、武器或条件限定的节点整体锁定，0个新增精通效果",
+		"coverage_note": "8个新增完整普通节点；七职业各自可达的非起点普通节点由676变685，其中额外1个是原本已完整的1550变得可达，不是第9个新机制",
+		"example_scope": "前后表只隔离所列节点的火焰持续伤害字段，其余输入固定；七职业路径另经真实构筑校验，三条完整合法路线示例保留沿途全部属性，可达集合不代表123点能全部同时分配",
+		"examples": [
+			{
+				"base": {
+					"burn_profile": {
+						"duration": 3.0,
+						"enabled": true,
+						"hit_multiplier": 0.75,
+						"mana_multiplier": 1.2,
+						"rate_fraction": 0.3,
+						"roles": {
+							"direct": {
+								"dps": 96.75,
+								"fire_before_defense": 322.5,
+								"total": 290.25
+							}
+						},
+						"stacking": "strongest_refresh_equal"
+					},
+					"cooldown": 8.0,
+					"error": "",
+					"initial_count": 0,
+					"mana": 38.4,
+					"ok": true,
+					"packets": {
+						"direct": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 4.3,
+								"base_coefficient": 4.3,
+								"intrinsic": {
+									"fire": 430.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 430.0
+							},
+							"role": "direct",
+							"skill_id": "meteor",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						}
+					},
+					"recipe": {
+						"radius": 110.0
+					},
+					"skill_id": "meteor",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 100.0,
+						"burn_policy": {
+							"duration": 3.0,
+							"hit_multiplier": 0.75,
+							"mana_multiplier": 1.2,
+							"rate_fraction": 0.3
+						},
+						"compiled_packets": {
+							"direct": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 4.3,
+									"base_coefficient": 4.3,
+									"intrinsic": {
+										"fire": 430.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 430.0
+								},
+								"role": "direct",
+								"skill_id": "meteor",
+								"tags": [
+									"hit",
+									"spell",
+									"area"
+								]
+							}
+						},
+						"compiled_skill_id": "meteor",
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"modifiers": [
+							{
+								"all_tags": [
+									"hit",
+									"spell",
+									"area"
+								],
+								"damage_types": [],
+								"id": "support:ignite",
+								"mode": "more",
+								"skills": [
+									"meteor"
+								],
+								"value": -0.25
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": [
+						"ignite"
+					]
+				},
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n点燃 3.0 秒 · 非暴击、未计火抗\n每秒 100.62 火焰 · 完整持续 301.86\n火焰持续伤害加成 +4%（已计入上方数值）\n同一目标不叠加；强点燃覆盖，同强度刷新。\n圆形范围：半径 110.00 → 110.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：火焰 322.50\n固有：火焰 430.00；附加：无；附加效用 4.30",
+				"explicit_zero": {
+					"burn_profile": {
+						"duration": 3.0,
+						"enabled": true,
+						"hit_multiplier": 0.75,
+						"mana_multiplier": 1.2,
+						"rate_fraction": 0.3,
+						"roles": {
+							"direct": {
+								"dps": 96.75,
+								"fire_before_defense": 322.5,
+								"total": 290.25
+							}
+						},
+						"stacking": "strongest_refresh_equal"
+					},
+					"cooldown": 8.0,
+					"error": "",
+					"initial_count": 0,
+					"mana": 38.4,
+					"ok": true,
+					"packets": {
+						"direct": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 4.3,
+								"base_coefficient": 4.3,
+								"intrinsic": {
+									"fire": 430.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 430.0
+							},
+							"role": "direct",
+							"skill_id": "meteor",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						}
+					},
+					"recipe": {
+						"radius": 110.0
+					},
+					"skill_id": "meteor",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 100.0,
+						"burn_policy": {
+							"duration": 3.0,
+							"hit_multiplier": 0.75,
+							"mana_multiplier": 1.2,
+							"rate_fraction": 0.3
+						},
+						"compiled_packets": {
+							"direct": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 4.3,
+									"base_coefficient": 4.3,
+									"intrinsic": {
+										"fire": 430.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 430.0
+								},
+								"role": "direct",
+								"skill_id": "meteor",
+								"tags": [
+									"hit",
+									"spell",
+									"area"
+								]
+							}
+						},
+						"compiled_skill_id": "meteor",
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"modifiers": [
+							{
+								"all_tags": [
+									"hit",
+									"spell",
+									"area"
+								],
+								"damage_types": [],
+								"id": "support:ignite",
+								"mode": "more",
+								"skills": [
+									"meteor"
+								],
+								"value": -0.25
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": [
+						"ignite"
+					]
+				},
+				"fraction": 0.04,
+				"increased": {
+					"burn_profile": {
+						"duration": 3.0,
+						"enabled": true,
+						"fire_dot_multiplier": 0.04,
+						"hit_multiplier": 0.75,
+						"mana_multiplier": 1.2,
+						"rate_fraction": 0.3,
+						"roles": {
+							"direct": {
+								"dps": 100.62,
+								"fire_before_defense": 322.5,
+								"total": 301.86
+							}
+						},
+						"stacking": "strongest_refresh_equal"
+					},
+					"cooldown": 8.0,
+					"error": "",
+					"initial_count": 0,
+					"mana": 38.4,
+					"ok": true,
+					"packets": {
+						"direct": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 4.3,
+								"base_coefficient": 4.3,
+								"intrinsic": {
+									"fire": 430.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 430.0
+							},
+							"role": "direct",
+							"skill_id": "meteor",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						}
+					},
+					"recipe": {
+						"radius": 110.0
+					},
+					"skill_id": "meteor",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 100.0,
+						"burn_policy": {
+							"duration": 3.0,
+							"hit_multiplier": 0.75,
+							"mana_multiplier": 1.2,
+							"rate_fraction": 0.3
+						},
+						"compiled_packets": {
+							"direct": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 4.3,
+									"base_coefficient": 4.3,
+									"intrinsic": {
+										"fire": 430.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 430.0
+								},
+								"role": "direct",
+								"skill_id": "meteor",
+								"tags": [
+									"hit",
+									"spell",
+									"area"
+								]
+							}
+						},
+						"compiled_skill_id": "meteor",
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"fire_dot_multiplier": 0.04,
+						"modifiers": [
+							{
+								"all_tags": [
+									"hit",
+									"spell",
+									"area"
+								],
+								"damage_types": [],
+								"id": "support:ignite",
+								"mode": "more",
+								"skills": [
+									"meteor"
+								],
+								"value": -0.25
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": [
+						"ignite"
+					]
+				},
+				"skill_id": "meteor",
+				"source_nodes": [
+					"4713"
+				],
+				"support_id": "ignite"
+			},
+			{
+				"base": {
+					"burn_profile": {
+						"duration": 3.0,
+						"enabled": true,
+						"hit_multiplier": 0.75,
+						"mana_multiplier": 1.3,
+						"proliferation": {
+							"enabled": true,
+							"max_hops": 1,
+							"max_targets": 8,
+							"preserves_expiry": true,
+							"radius": 120.0
+						},
+						"rate_fraction": 0.2,
+						"roles": {
+							"direct": {
+								"dps": 64.5,
+								"fire_before_defense": 322.5,
+								"total": 193.5
+							}
+						},
+						"stacking": "strongest_refresh_equal"
+					},
+					"cooldown": 8.0,
+					"error": "",
+					"initial_count": 0,
+					"mana": 41.6,
+					"ok": true,
+					"packets": {
+						"direct": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 4.3,
+								"base_coefficient": 4.3,
+								"intrinsic": {
+									"fire": 430.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 430.0
+							},
+							"role": "direct",
+							"skill_id": "meteor",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						}
+					},
+					"recipe": {
+						"radius": 110.0
+					},
+					"skill_id": "meteor",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 100.0,
+						"burn_policy": {
+							"duration": 3.0,
+							"hit_multiplier": 0.75,
+							"mana_multiplier": 1.3,
+							"rate_fraction": 0.2
+						},
+						"burn_proliferation": {
+							"enabled": true,
+							"max_hops": 1,
+							"max_targets": 8,
+							"preserves_expiry": true,
+							"radius": 120.0
+						},
+						"compiled_packets": {
+							"direct": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 4.3,
+									"base_coefficient": 4.3,
+									"intrinsic": {
+										"fire": 430.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 430.0
+								},
+								"role": "direct",
+								"skill_id": "meteor",
+								"tags": [
+									"hit",
+									"spell",
+									"area"
+								]
+							}
+						},
+						"compiled_skill_id": "meteor",
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"modifiers": [
+							{
+								"all_tags": [
+									"hit",
+									"spell",
+									"area"
+								],
+								"damage_types": [],
+								"id": "support:ember_proliferation",
+								"mode": "more",
+								"skills": [
+									"meteor"
+								],
+								"value": -0.25
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": [
+						"ember_proliferation"
+					]
+				},
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n点燃 3.0 秒 · 非暴击、未计火抗\n每秒 67.08 火焰 · 完整持续 201.24\n火焰持续伤害加成 +4%（已计入上方数值）\n同一目标不叠加；强点燃覆盖，同强度刷新。\n死亡扩散：半径 120 · 最多 8 个目标 · 受墙体阻挡\n保留原燃烧强度和剩余时间；扩散所得燃烧不再传播。\n圆形范围：半径 110.00 → 110.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：火焰 322.50\n固有：火焰 430.00；附加：无；附加效用 4.30",
+				"explicit_zero": {
+					"burn_profile": {
+						"duration": 3.0,
+						"enabled": true,
+						"hit_multiplier": 0.75,
+						"mana_multiplier": 1.3,
+						"proliferation": {
+							"enabled": true,
+							"max_hops": 1,
+							"max_targets": 8,
+							"preserves_expiry": true,
+							"radius": 120.0
+						},
+						"rate_fraction": 0.2,
+						"roles": {
+							"direct": {
+								"dps": 64.5,
+								"fire_before_defense": 322.5,
+								"total": 193.5
+							}
+						},
+						"stacking": "strongest_refresh_equal"
+					},
+					"cooldown": 8.0,
+					"error": "",
+					"initial_count": 0,
+					"mana": 41.6,
+					"ok": true,
+					"packets": {
+						"direct": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 4.3,
+								"base_coefficient": 4.3,
+								"intrinsic": {
+									"fire": 430.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 430.0
+							},
+							"role": "direct",
+							"skill_id": "meteor",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						}
+					},
+					"recipe": {
+						"radius": 110.0
+					},
+					"skill_id": "meteor",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 100.0,
+						"burn_policy": {
+							"duration": 3.0,
+							"hit_multiplier": 0.75,
+							"mana_multiplier": 1.3,
+							"rate_fraction": 0.2
+						},
+						"burn_proliferation": {
+							"enabled": true,
+							"max_hops": 1,
+							"max_targets": 8,
+							"preserves_expiry": true,
+							"radius": 120.0
+						},
+						"compiled_packets": {
+							"direct": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 4.3,
+									"base_coefficient": 4.3,
+									"intrinsic": {
+										"fire": 430.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 430.0
+								},
+								"role": "direct",
+								"skill_id": "meteor",
+								"tags": [
+									"hit",
+									"spell",
+									"area"
+								]
+							}
+						},
+						"compiled_skill_id": "meteor",
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"modifiers": [
+							{
+								"all_tags": [
+									"hit",
+									"spell",
+									"area"
+								],
+								"damage_types": [],
+								"id": "support:ember_proliferation",
+								"mode": "more",
+								"skills": [
+									"meteor"
+								],
+								"value": -0.25
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": [
+						"ember_proliferation"
+					]
+				},
+				"fraction": 0.04,
+				"increased": {
+					"burn_profile": {
+						"duration": 3.0,
+						"enabled": true,
+						"fire_dot_multiplier": 0.04,
+						"hit_multiplier": 0.75,
+						"mana_multiplier": 1.3,
+						"proliferation": {
+							"enabled": true,
+							"max_hops": 1,
+							"max_targets": 8,
+							"preserves_expiry": true,
+							"radius": 120.0
+						},
+						"rate_fraction": 0.2,
+						"roles": {
+							"direct": {
+								"dps": 67.08,
+								"fire_before_defense": 322.5,
+								"total": 201.24
+							}
+						},
+						"stacking": "strongest_refresh_equal"
+					},
+					"cooldown": 8.0,
+					"error": "",
+					"initial_count": 0,
+					"mana": 41.6,
+					"ok": true,
+					"packets": {
+						"direct": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 4.3,
+								"base_coefficient": 4.3,
+								"intrinsic": {
+									"fire": 430.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 430.0
+							},
+							"role": "direct",
+							"skill_id": "meteor",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						}
+					},
+					"recipe": {
+						"radius": 110.0
+					},
+					"skill_id": "meteor",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 100.0,
+						"burn_policy": {
+							"duration": 3.0,
+							"hit_multiplier": 0.75,
+							"mana_multiplier": 1.3,
+							"rate_fraction": 0.2
+						},
+						"burn_proliferation": {
+							"enabled": true,
+							"max_hops": 1,
+							"max_targets": 8,
+							"preserves_expiry": true,
+							"radius": 120.0
+						},
+						"compiled_packets": {
+							"direct": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 4.3,
+									"base_coefficient": 4.3,
+									"intrinsic": {
+										"fire": 430.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 430.0
+								},
+								"role": "direct",
+								"skill_id": "meteor",
+								"tags": [
+									"hit",
+									"spell",
+									"area"
+								]
+							}
+						},
+						"compiled_skill_id": "meteor",
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"fire_dot_multiplier": 0.04,
+						"modifiers": [
+							{
+								"all_tags": [
+									"hit",
+									"spell",
+									"area"
+								],
+								"damage_types": [],
+								"id": "support:ember_proliferation",
+								"mode": "more",
+								"skills": [
+									"meteor"
+								],
+								"value": -0.25
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": [
+						"ember_proliferation"
+					]
+				},
+				"skill_id": "meteor",
+				"source_nodes": [
+					"4713"
+				],
+				"support_id": "ember_proliferation"
+			},
+			{
+				"base": {
+					"burn_profile": {
+						"duration": 3.0,
+						"enabled": true,
+						"hit_multiplier": 0.75,
+						"mana_multiplier": 1.2,
+						"rate_fraction": 0.3,
+						"roles": {
+							"child": {
+								"dps": 6.3,
+								"fire_before_defense": 21.0,
+								"total": 18.9
+							},
+							"parent": {
+								"dps": 9.0,
+								"fire_before_defense": 30.0,
+								"total": 27.0
+							}
+						},
+						"stacking": "strongest_refresh_equal"
+					},
+					"cooldown": 2.5,
+					"error": "",
+					"initial_count": 3,
+					"mana": 21.599999999999998,
+					"ok": true,
+					"packets": {
+						"child": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.7,
+								"base_coefficient": 0.7,
+								"intrinsic": {
+									"fire": 28.0,
+									"physical": 42.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 28.0,
+								"physical": 42.0
+							},
+							"role": "child",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"attack",
+								"projectile"
+							]
+						},
+						"parent": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 1.0,
+								"base_coefficient": 1.0,
+								"intrinsic": {
+									"fire": 40.0,
+									"physical": 60.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 40.0,
+								"physical": 60.0
+							},
+							"role": "parent",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"attack",
+								"projectile"
+							]
+						},
+						"secondary": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.0,
+								"base_coefficient": 0.9,
+								"intrinsic": {
+									"fire": 90.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 90.0
+							},
+							"role": "secondary",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"area",
+								"secondary",
+								"explosion"
+							]
+						}
+					},
+					"recipe": {
+						"child": {
+							"added_effectiveness": 0.7,
+							"coefficient": 0.7,
+							"lifetime": 1.7,
+							"pierce": -1,
+							"radius": 4.5,
+							"range": 150.0,
+							"role": "child",
+							"speed": 260.0,
+							"split": false
+						},
+						"child_count": 3,
+						"explosion": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"parent": {
+							"added_effectiveness": 1.0,
+							"coefficient": 1.0,
+							"lifetime": 0.9,
+							"pierce": -1,
+							"radius": 6.0,
+							"range": 150.0,
+							"role": "parent",
+							"speed": 420.0,
+							"split": true
+						},
+						"parent_count": 3,
+						"spread": 0.16
+					},
+					"skill_id": "tornado",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 100.0,
+						"burn_policy": {
+							"duration": 3.0,
+							"hit_multiplier": 0.75,
+							"mana_multiplier": 1.2,
+							"rate_fraction": 0.3
+						},
+						"compiled_packets": {
+							"child": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.7,
+									"base_coefficient": 0.7,
+									"intrinsic": {
+										"fire": 28.0,
+										"physical": 42.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 28.0,
+									"physical": 42.0
+								},
+								"role": "child",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"parent": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 1.0,
+									"base_coefficient": 1.0,
+									"intrinsic": {
+										"fire": 40.0,
+										"physical": 60.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 40.0,
+									"physical": 60.0
+								},
+								"role": "parent",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 90.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 90.0
+								},
+								"role": "secondary",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "tornado",
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"modifiers": [
+							{
+								"all_tags": [
+									"hit",
+									"attack",
+									"projectile"
+								],
+								"damage_types": [],
+								"id": "support:ignite",
+								"mode": "more",
+								"skills": [
+									"tornado"
+								],
+								"value": -0.25
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": [
+						"ignite"
+					]
+				},
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n点燃 3.0 秒 · 非暴击、未计火抗\n母箭：每秒 9.36 火焰 · 完整持续 28.08\n子箭：每秒 6.55 火焰 · 完整持续 19.66\n火焰持续伤害加成 +4%（已计入上方数值）\n同一目标不叠加；强点燃覆盖，同强度刷新。\n母箭速度 420.00 · 子箭速度 260.00；返回沿用各自速度。\n投射速度改变飞行快慢，不增加距离上限或存续时间。\n母箭：物理 45.00 + 火焰 30.00\n固有：物理 60.00 + 火焰 40.00；附加：无；附加效用 1.00\n子箭：物理 31.50 + 火焰 21.00\n固有：物理 42.00 + 火焰 28.00；附加：无；附加效用 0.70\n独立爆炸：火焰 90.00\n固有：火焰 90.00；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+				"explicit_zero": {
+					"burn_profile": {
+						"duration": 3.0,
+						"enabled": true,
+						"hit_multiplier": 0.75,
+						"mana_multiplier": 1.2,
+						"rate_fraction": 0.3,
+						"roles": {
+							"child": {
+								"dps": 6.3,
+								"fire_before_defense": 21.0,
+								"total": 18.9
+							},
+							"parent": {
+								"dps": 9.0,
+								"fire_before_defense": 30.0,
+								"total": 27.0
+							}
+						},
+						"stacking": "strongest_refresh_equal"
+					},
+					"cooldown": 2.5,
+					"error": "",
+					"initial_count": 3,
+					"mana": 21.599999999999998,
+					"ok": true,
+					"packets": {
+						"child": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.7,
+								"base_coefficient": 0.7,
+								"intrinsic": {
+									"fire": 28.0,
+									"physical": 42.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 28.0,
+								"physical": 42.0
+							},
+							"role": "child",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"attack",
+								"projectile"
+							]
+						},
+						"parent": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 1.0,
+								"base_coefficient": 1.0,
+								"intrinsic": {
+									"fire": 40.0,
+									"physical": 60.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 40.0,
+								"physical": 60.0
+							},
+							"role": "parent",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"attack",
+								"projectile"
+							]
+						},
+						"secondary": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.0,
+								"base_coefficient": 0.9,
+								"intrinsic": {
+									"fire": 90.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 90.0
+							},
+							"role": "secondary",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"area",
+								"secondary",
+								"explosion"
+							]
+						}
+					},
+					"recipe": {
+						"child": {
+							"added_effectiveness": 0.7,
+							"coefficient": 0.7,
+							"lifetime": 1.7,
+							"pierce": -1,
+							"radius": 4.5,
+							"range": 150.0,
+							"role": "child",
+							"speed": 260.0,
+							"split": false
+						},
+						"child_count": 3,
+						"explosion": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"parent": {
+							"added_effectiveness": 1.0,
+							"coefficient": 1.0,
+							"lifetime": 0.9,
+							"pierce": -1,
+							"radius": 6.0,
+							"range": 150.0,
+							"role": "parent",
+							"speed": 420.0,
+							"split": true
+						},
+						"parent_count": 3,
+						"spread": 0.16
+					},
+					"skill_id": "tornado",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 100.0,
+						"burn_policy": {
+							"duration": 3.0,
+							"hit_multiplier": 0.75,
+							"mana_multiplier": 1.2,
+							"rate_fraction": 0.3
+						},
+						"compiled_packets": {
+							"child": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.7,
+									"base_coefficient": 0.7,
+									"intrinsic": {
+										"fire": 28.0,
+										"physical": 42.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 28.0,
+									"physical": 42.0
+								},
+								"role": "child",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"parent": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 1.0,
+									"base_coefficient": 1.0,
+									"intrinsic": {
+										"fire": 40.0,
+										"physical": 60.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 40.0,
+									"physical": 60.0
+								},
+								"role": "parent",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 90.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 90.0
+								},
+								"role": "secondary",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "tornado",
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"modifiers": [
+							{
+								"all_tags": [
+									"hit",
+									"attack",
+									"projectile"
+								],
+								"damage_types": [],
+								"id": "support:ignite",
+								"mode": "more",
+								"skills": [
+									"tornado"
+								],
+								"value": -0.25
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": [
+						"ignite"
+					]
+				},
+				"fraction": 0.04,
+				"increased": {
+					"burn_profile": {
+						"duration": 3.0,
+						"enabled": true,
+						"fire_dot_multiplier": 0.04,
+						"hit_multiplier": 0.75,
+						"mana_multiplier": 1.2,
+						"rate_fraction": 0.3,
+						"roles": {
+							"child": {
+								"dps": 6.552,
+								"fire_before_defense": 21.0,
+								"total": 19.656
+							},
+							"parent": {
+								"dps": 9.36,
+								"fire_before_defense": 30.0,
+								"total": 28.08
+							}
+						},
+						"stacking": "strongest_refresh_equal"
+					},
+					"cooldown": 2.5,
+					"error": "",
+					"initial_count": 3,
+					"mana": 21.599999999999998,
+					"ok": true,
+					"packets": {
+						"child": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.7,
+								"base_coefficient": 0.7,
+								"intrinsic": {
+									"fire": 28.0,
+									"physical": 42.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 28.0,
+								"physical": 42.0
+							},
+							"role": "child",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"attack",
+								"projectile"
+							]
+						},
+						"parent": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 1.0,
+								"base_coefficient": 1.0,
+								"intrinsic": {
+									"fire": 40.0,
+									"physical": 60.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 40.0,
+								"physical": 60.0
+							},
+							"role": "parent",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"attack",
+								"projectile"
+							]
+						},
+						"secondary": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.0,
+								"base_coefficient": 0.9,
+								"intrinsic": {
+									"fire": 90.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 90.0
+							},
+							"role": "secondary",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"area",
+								"secondary",
+								"explosion"
+							]
+						}
+					},
+					"recipe": {
+						"child": {
+							"added_effectiveness": 0.7,
+							"coefficient": 0.7,
+							"lifetime": 1.7,
+							"pierce": -1,
+							"radius": 4.5,
+							"range": 150.0,
+							"role": "child",
+							"speed": 260.0,
+							"split": false
+						},
+						"child_count": 3,
+						"explosion": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"parent": {
+							"added_effectiveness": 1.0,
+							"coefficient": 1.0,
+							"lifetime": 0.9,
+							"pierce": -1,
+							"radius": 6.0,
+							"range": 150.0,
+							"role": "parent",
+							"speed": 420.0,
+							"split": true
+						},
+						"parent_count": 3,
+						"spread": 0.16
+					},
+					"skill_id": "tornado",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 100.0,
+						"burn_policy": {
+							"duration": 3.0,
+							"hit_multiplier": 0.75,
+							"mana_multiplier": 1.2,
+							"rate_fraction": 0.3
+						},
+						"compiled_packets": {
+							"child": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.7,
+									"base_coefficient": 0.7,
+									"intrinsic": {
+										"fire": 28.0,
+										"physical": 42.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 28.0,
+									"physical": 42.0
+								},
+								"role": "child",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"parent": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 1.0,
+									"base_coefficient": 1.0,
+									"intrinsic": {
+										"fire": 40.0,
+										"physical": 60.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 40.0,
+									"physical": 60.0
+								},
+								"role": "parent",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 90.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 90.0
+								},
+								"role": "secondary",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "tornado",
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"fire_dot_multiplier": 0.04,
+						"initial_count": 3,
+						"modifiers": [
+							{
+								"all_tags": [
+									"hit",
+									"attack",
+									"projectile"
+								],
+								"damage_types": [],
+								"id": "support:ignite",
+								"mode": "more",
+								"skills": [
+									"tornado"
+								],
+								"value": -0.25
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": [
+						"ignite"
+					]
+				},
+				"skill_id": "tornado",
+				"source_nodes": [
+					"4713"
+				],
+				"support_id": "ignite"
+			},
+			{
+				"base": {
+					"burn_profile": {
+						"duration": 3.0,
+						"enabled": true,
+						"hit_multiplier": 0.75,
+						"mana_multiplier": 1.3,
+						"proliferation": {
+							"enabled": true,
+							"max_hops": 1,
+							"max_targets": 8,
+							"preserves_expiry": true,
+							"radius": 120.0
+						},
+						"rate_fraction": 0.2,
+						"roles": {
+							"child": {
+								"dps": 4.2,
+								"fire_before_defense": 21.0,
+								"total": 12.600000000000001
+							},
+							"parent": {
+								"dps": 6.0,
+								"fire_before_defense": 30.0,
+								"total": 18.0
+							}
+						},
+						"stacking": "strongest_refresh_equal"
+					},
+					"cooldown": 2.5,
+					"error": "",
+					"initial_count": 3,
+					"mana": 23.400000000000002,
+					"ok": true,
+					"packets": {
+						"child": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.7,
+								"base_coefficient": 0.7,
+								"intrinsic": {
+									"fire": 28.0,
+									"physical": 42.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 28.0,
+								"physical": 42.0
+							},
+							"role": "child",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"attack",
+								"projectile"
+							]
+						},
+						"parent": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 1.0,
+								"base_coefficient": 1.0,
+								"intrinsic": {
+									"fire": 40.0,
+									"physical": 60.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 40.0,
+								"physical": 60.0
+							},
+							"role": "parent",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"attack",
+								"projectile"
+							]
+						},
+						"secondary": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.0,
+								"base_coefficient": 0.9,
+								"intrinsic": {
+									"fire": 90.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 90.0
+							},
+							"role": "secondary",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"area",
+								"secondary",
+								"explosion"
+							]
+						}
+					},
+					"recipe": {
+						"child": {
+							"added_effectiveness": 0.7,
+							"coefficient": 0.7,
+							"lifetime": 1.7,
+							"pierce": -1,
+							"radius": 4.5,
+							"range": 150.0,
+							"role": "child",
+							"speed": 260.0,
+							"split": false
+						},
+						"child_count": 3,
+						"explosion": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"parent": {
+							"added_effectiveness": 1.0,
+							"coefficient": 1.0,
+							"lifetime": 0.9,
+							"pierce": -1,
+							"radius": 6.0,
+							"range": 150.0,
+							"role": "parent",
+							"speed": 420.0,
+							"split": true
+						},
+						"parent_count": 3,
+						"spread": 0.16
+					},
+					"skill_id": "tornado",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 100.0,
+						"burn_policy": {
+							"duration": 3.0,
+							"hit_multiplier": 0.75,
+							"mana_multiplier": 1.3,
+							"rate_fraction": 0.2
+						},
+						"burn_proliferation": {
+							"enabled": true,
+							"max_hops": 1,
+							"max_targets": 8,
+							"preserves_expiry": true,
+							"radius": 120.0
+						},
+						"compiled_packets": {
+							"child": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.7,
+									"base_coefficient": 0.7,
+									"intrinsic": {
+										"fire": 28.0,
+										"physical": 42.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 28.0,
+									"physical": 42.0
+								},
+								"role": "child",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"parent": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 1.0,
+									"base_coefficient": 1.0,
+									"intrinsic": {
+										"fire": 40.0,
+										"physical": 60.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 40.0,
+									"physical": 60.0
+								},
+								"role": "parent",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 90.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 90.0
+								},
+								"role": "secondary",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "tornado",
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"modifiers": [
+							{
+								"all_tags": [
+									"hit",
+									"attack",
+									"projectile"
+								],
+								"damage_types": [],
+								"id": "support:ember_proliferation",
+								"mode": "more",
+								"skills": [
+									"tornado"
+								],
+								"value": -0.25
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": [
+						"ember_proliferation"
+					]
+				},
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n点燃 3.0 秒 · 非暴击、未计火抗\n母箭：每秒 6.24 火焰 · 完整持续 18.72\n子箭：每秒 4.37 火焰 · 完整持续 13.10\n火焰持续伤害加成 +4%（已计入上方数值）\n同一目标不叠加；强点燃覆盖，同强度刷新。\n死亡扩散：半径 120 · 最多 8 个目标 · 受墙体阻挡\n保留原燃烧强度和剩余时间；扩散所得燃烧不再传播。\n母箭速度 420.00 · 子箭速度 260.00；返回沿用各自速度。\n投射速度改变飞行快慢，不增加距离上限或存续时间。\n母箭：物理 45.00 + 火焰 30.00\n固有：物理 60.00 + 火焰 40.00；附加：无；附加效用 1.00\n子箭：物理 31.50 + 火焰 21.00\n固有：物理 42.00 + 火焰 28.00；附加：无；附加效用 0.70\n独立爆炸：火焰 90.00\n固有：火焰 90.00；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+				"explicit_zero": {
+					"burn_profile": {
+						"duration": 3.0,
+						"enabled": true,
+						"hit_multiplier": 0.75,
+						"mana_multiplier": 1.3,
+						"proliferation": {
+							"enabled": true,
+							"max_hops": 1,
+							"max_targets": 8,
+							"preserves_expiry": true,
+							"radius": 120.0
+						},
+						"rate_fraction": 0.2,
+						"roles": {
+							"child": {
+								"dps": 4.2,
+								"fire_before_defense": 21.0,
+								"total": 12.600000000000001
+							},
+							"parent": {
+								"dps": 6.0,
+								"fire_before_defense": 30.0,
+								"total": 18.0
+							}
+						},
+						"stacking": "strongest_refresh_equal"
+					},
+					"cooldown": 2.5,
+					"error": "",
+					"initial_count": 3,
+					"mana": 23.400000000000002,
+					"ok": true,
+					"packets": {
+						"child": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.7,
+								"base_coefficient": 0.7,
+								"intrinsic": {
+									"fire": 28.0,
+									"physical": 42.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 28.0,
+								"physical": 42.0
+							},
+							"role": "child",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"attack",
+								"projectile"
+							]
+						},
+						"parent": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 1.0,
+								"base_coefficient": 1.0,
+								"intrinsic": {
+									"fire": 40.0,
+									"physical": 60.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 40.0,
+								"physical": 60.0
+							},
+							"role": "parent",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"attack",
+								"projectile"
+							]
+						},
+						"secondary": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.0,
+								"base_coefficient": 0.9,
+								"intrinsic": {
+									"fire": 90.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 90.0
+							},
+							"role": "secondary",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"area",
+								"secondary",
+								"explosion"
+							]
+						}
+					},
+					"recipe": {
+						"child": {
+							"added_effectiveness": 0.7,
+							"coefficient": 0.7,
+							"lifetime": 1.7,
+							"pierce": -1,
+							"radius": 4.5,
+							"range": 150.0,
+							"role": "child",
+							"speed": 260.0,
+							"split": false
+						},
+						"child_count": 3,
+						"explosion": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"parent": {
+							"added_effectiveness": 1.0,
+							"coefficient": 1.0,
+							"lifetime": 0.9,
+							"pierce": -1,
+							"radius": 6.0,
+							"range": 150.0,
+							"role": "parent",
+							"speed": 420.0,
+							"split": true
+						},
+						"parent_count": 3,
+						"spread": 0.16
+					},
+					"skill_id": "tornado",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 100.0,
+						"burn_policy": {
+							"duration": 3.0,
+							"hit_multiplier": 0.75,
+							"mana_multiplier": 1.3,
+							"rate_fraction": 0.2
+						},
+						"burn_proliferation": {
+							"enabled": true,
+							"max_hops": 1,
+							"max_targets": 8,
+							"preserves_expiry": true,
+							"radius": 120.0
+						},
+						"compiled_packets": {
+							"child": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.7,
+									"base_coefficient": 0.7,
+									"intrinsic": {
+										"fire": 28.0,
+										"physical": 42.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 28.0,
+									"physical": 42.0
+								},
+								"role": "child",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"parent": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 1.0,
+									"base_coefficient": 1.0,
+									"intrinsic": {
+										"fire": 40.0,
+										"physical": 60.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 40.0,
+									"physical": 60.0
+								},
+								"role": "parent",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 90.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 90.0
+								},
+								"role": "secondary",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "tornado",
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"modifiers": [
+							{
+								"all_tags": [
+									"hit",
+									"attack",
+									"projectile"
+								],
+								"damage_types": [],
+								"id": "support:ember_proliferation",
+								"mode": "more",
+								"skills": [
+									"tornado"
+								],
+								"value": -0.25
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": [
+						"ember_proliferation"
+					]
+				},
+				"fraction": 0.04,
+				"increased": {
+					"burn_profile": {
+						"duration": 3.0,
+						"enabled": true,
+						"fire_dot_multiplier": 0.04,
+						"hit_multiplier": 0.75,
+						"mana_multiplier": 1.3,
+						"proliferation": {
+							"enabled": true,
+							"max_hops": 1,
+							"max_targets": 8,
+							"preserves_expiry": true,
+							"radius": 120.0
+						},
+						"rate_fraction": 0.2,
+						"roles": {
+							"child": {
+								"dps": 4.368,
+								"fire_before_defense": 21.0,
+								"total": 13.104000000000001
+							},
+							"parent": {
+								"dps": 6.24,
+								"fire_before_defense": 30.0,
+								"total": 18.72
+							}
+						},
+						"stacking": "strongest_refresh_equal"
+					},
+					"cooldown": 2.5,
+					"error": "",
+					"initial_count": 3,
+					"mana": 23.400000000000002,
+					"ok": true,
+					"packets": {
+						"child": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.7,
+								"base_coefficient": 0.7,
+								"intrinsic": {
+									"fire": 28.0,
+									"physical": 42.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 28.0,
+								"physical": 42.0
+							},
+							"role": "child",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"attack",
+								"projectile"
+							]
+						},
+						"parent": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 1.0,
+								"base_coefficient": 1.0,
+								"intrinsic": {
+									"fire": 40.0,
+									"physical": 60.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 40.0,
+								"physical": 60.0
+							},
+							"role": "parent",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"attack",
+								"projectile"
+							]
+						},
+						"secondary": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.0,
+								"base_coefficient": 0.9,
+								"intrinsic": {
+									"fire": 90.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 90.0
+							},
+							"role": "secondary",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"area",
+								"secondary",
+								"explosion"
+							]
+						}
+					},
+					"recipe": {
+						"child": {
+							"added_effectiveness": 0.7,
+							"coefficient": 0.7,
+							"lifetime": 1.7,
+							"pierce": -1,
+							"radius": 4.5,
+							"range": 150.0,
+							"role": "child",
+							"speed": 260.0,
+							"split": false
+						},
+						"child_count": 3,
+						"explosion": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"parent": {
+							"added_effectiveness": 1.0,
+							"coefficient": 1.0,
+							"lifetime": 0.9,
+							"pierce": -1,
+							"radius": 6.0,
+							"range": 150.0,
+							"role": "parent",
+							"speed": 420.0,
+							"split": true
+						},
+						"parent_count": 3,
+						"spread": 0.16
+					},
+					"skill_id": "tornado",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 100.0,
+						"burn_policy": {
+							"duration": 3.0,
+							"hit_multiplier": 0.75,
+							"mana_multiplier": 1.3,
+							"rate_fraction": 0.2
+						},
+						"burn_proliferation": {
+							"enabled": true,
+							"max_hops": 1,
+							"max_targets": 8,
+							"preserves_expiry": true,
+							"radius": 120.0
+						},
+						"compiled_packets": {
+							"child": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.7,
+									"base_coefficient": 0.7,
+									"intrinsic": {
+										"fire": 28.0,
+										"physical": 42.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 28.0,
+									"physical": 42.0
+								},
+								"role": "child",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"parent": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 1.0,
+									"base_coefficient": 1.0,
+									"intrinsic": {
+										"fire": 40.0,
+										"physical": 60.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 40.0,
+									"physical": 60.0
+								},
+								"role": "parent",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 90.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 90.0
+								},
+								"role": "secondary",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "tornado",
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"fire_dot_multiplier": 0.04,
+						"initial_count": 3,
+						"modifiers": [
+							{
+								"all_tags": [
+									"hit",
+									"attack",
+									"projectile"
+								],
+								"damage_types": [],
+								"id": "support:ember_proliferation",
+								"mode": "more",
+								"skills": [
+									"tornado"
+								],
+								"value": -0.25
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": [
+						"ember_proliferation"
+					]
+				},
+				"skill_id": "tornado",
+				"source_nodes": [
+					"4713"
+				],
+				"support_id": "ember_proliferation"
+			},
+			{
+				"base": {
+					"burn_profile": {
+						"duration": 3.0,
+						"enabled": true,
+						"hit_multiplier": 0.75,
+						"mana_multiplier": 1.2,
+						"rate_fraction": 0.3,
+						"roles": {
+							"direct": {
+								"dps": 96.75,
+								"fire_before_defense": 322.5,
+								"total": 290.25
+							}
+						},
+						"stacking": "strongest_refresh_equal"
+					},
+					"cooldown": 8.0,
+					"error": "",
+					"initial_count": 0,
+					"mana": 38.4,
+					"ok": true,
+					"packets": {
+						"direct": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 4.3,
+								"base_coefficient": 4.3,
+								"intrinsic": {
+									"fire": 430.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 430.0
+							},
+							"role": "direct",
+							"skill_id": "meteor",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						}
+					},
+					"recipe": {
+						"radius": 110.0
+					},
+					"skill_id": "meteor",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 100.0,
+						"burn_policy": {
+							"duration": 3.0,
+							"hit_multiplier": 0.75,
+							"mana_multiplier": 1.2,
+							"rate_fraction": 0.3
+						},
+						"compiled_packets": {
+							"direct": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 4.3,
+									"base_coefficient": 4.3,
+									"intrinsic": {
+										"fire": 430.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 430.0
+								},
+								"role": "direct",
+								"skill_id": "meteor",
+								"tags": [
+									"hit",
+									"spell",
+									"area"
+								]
+							}
+						},
+						"compiled_skill_id": "meteor",
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"modifiers": [
+							{
+								"all_tags": [
+									"hit",
+									"spell",
+									"area"
+								],
+								"damage_types": [],
+								"id": "support:ignite",
+								"mode": "more",
+								"skills": [
+									"meteor"
+								],
+								"value": -0.25
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": [
+						"ignite"
+					]
+				},
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n点燃 3.0 秒 · 非暴击、未计火抗\n每秒 106.43 火焰 · 完整持续 319.28\n火焰持续伤害加成 +10%（已计入上方数值）\n同一目标不叠加；强点燃覆盖，同强度刷新。\n圆形范围：半径 110.00 → 110.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：火焰 322.50\n固有：火焰 430.00；附加：无；附加效用 4.30",
+				"explicit_zero": {
+					"burn_profile": {
+						"duration": 3.0,
+						"enabled": true,
+						"hit_multiplier": 0.75,
+						"mana_multiplier": 1.2,
+						"rate_fraction": 0.3,
+						"roles": {
+							"direct": {
+								"dps": 96.75,
+								"fire_before_defense": 322.5,
+								"total": 290.25
+							}
+						},
+						"stacking": "strongest_refresh_equal"
+					},
+					"cooldown": 8.0,
+					"error": "",
+					"initial_count": 0,
+					"mana": 38.4,
+					"ok": true,
+					"packets": {
+						"direct": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 4.3,
+								"base_coefficient": 4.3,
+								"intrinsic": {
+									"fire": 430.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 430.0
+							},
+							"role": "direct",
+							"skill_id": "meteor",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						}
+					},
+					"recipe": {
+						"radius": 110.0
+					},
+					"skill_id": "meteor",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 100.0,
+						"burn_policy": {
+							"duration": 3.0,
+							"hit_multiplier": 0.75,
+							"mana_multiplier": 1.2,
+							"rate_fraction": 0.3
+						},
+						"compiled_packets": {
+							"direct": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 4.3,
+									"base_coefficient": 4.3,
+									"intrinsic": {
+										"fire": 430.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 430.0
+								},
+								"role": "direct",
+								"skill_id": "meteor",
+								"tags": [
+									"hit",
+									"spell",
+									"area"
+								]
+							}
+						},
+						"compiled_skill_id": "meteor",
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"modifiers": [
+							{
+								"all_tags": [
+									"hit",
+									"spell",
+									"area"
+								],
+								"damage_types": [],
+								"id": "support:ignite",
+								"mode": "more",
+								"skills": [
+									"meteor"
+								],
+								"value": -0.25
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": [
+						"ignite"
+					]
+				},
+				"fraction": 0.1,
+				"increased": {
+					"burn_profile": {
+						"duration": 3.0,
+						"enabled": true,
+						"fire_dot_multiplier": 0.1,
+						"hit_multiplier": 0.75,
+						"mana_multiplier": 1.2,
+						"rate_fraction": 0.3,
+						"roles": {
+							"direct": {
+								"dps": 106.42500000000001,
+								"fire_before_defense": 322.5,
+								"total": 319.27500000000003
+							}
+						},
+						"stacking": "strongest_refresh_equal"
+					},
+					"cooldown": 8.0,
+					"error": "",
+					"initial_count": 0,
+					"mana": 38.4,
+					"ok": true,
+					"packets": {
+						"direct": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 4.3,
+								"base_coefficient": 4.3,
+								"intrinsic": {
+									"fire": 430.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 430.0
+							},
+							"role": "direct",
+							"skill_id": "meteor",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						}
+					},
+					"recipe": {
+						"radius": 110.0
+					},
+					"skill_id": "meteor",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 100.0,
+						"burn_policy": {
+							"duration": 3.0,
+							"hit_multiplier": 0.75,
+							"mana_multiplier": 1.2,
+							"rate_fraction": 0.3
+						},
+						"compiled_packets": {
+							"direct": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 4.3,
+									"base_coefficient": 4.3,
+									"intrinsic": {
+										"fire": 430.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 430.0
+								},
+								"role": "direct",
+								"skill_id": "meteor",
+								"tags": [
+									"hit",
+									"spell",
+									"area"
+								]
+							}
+						},
+						"compiled_skill_id": "meteor",
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"fire_dot_multiplier": 0.1,
+						"modifiers": [
+							{
+								"all_tags": [
+									"hit",
+									"spell",
+									"area"
+								],
+								"damage_types": [],
+								"id": "support:ignite",
+								"mode": "more",
+								"skills": [
+									"meteor"
+								],
+								"value": -0.25
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": [
+						"ignite"
+					]
+				},
+				"skill_id": "meteor",
+				"source_nodes": [
+					"4713",
+					"5916"
+				],
+				"support_id": "ignite"
+			},
+			{
+				"base": {
+					"burn_profile": {
+						"duration": 3.0,
+						"enabled": true,
+						"hit_multiplier": 0.75,
+						"mana_multiplier": 1.3,
+						"proliferation": {
+							"enabled": true,
+							"max_hops": 1,
+							"max_targets": 8,
+							"preserves_expiry": true,
+							"radius": 120.0
+						},
+						"rate_fraction": 0.2,
+						"roles": {
+							"direct": {
+								"dps": 64.5,
+								"fire_before_defense": 322.5,
+								"total": 193.5
+							}
+						},
+						"stacking": "strongest_refresh_equal"
+					},
+					"cooldown": 8.0,
+					"error": "",
+					"initial_count": 0,
+					"mana": 41.6,
+					"ok": true,
+					"packets": {
+						"direct": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 4.3,
+								"base_coefficient": 4.3,
+								"intrinsic": {
+									"fire": 430.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 430.0
+							},
+							"role": "direct",
+							"skill_id": "meteor",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						}
+					},
+					"recipe": {
+						"radius": 110.0
+					},
+					"skill_id": "meteor",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 100.0,
+						"burn_policy": {
+							"duration": 3.0,
+							"hit_multiplier": 0.75,
+							"mana_multiplier": 1.3,
+							"rate_fraction": 0.2
+						},
+						"burn_proliferation": {
+							"enabled": true,
+							"max_hops": 1,
+							"max_targets": 8,
+							"preserves_expiry": true,
+							"radius": 120.0
+						},
+						"compiled_packets": {
+							"direct": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 4.3,
+									"base_coefficient": 4.3,
+									"intrinsic": {
+										"fire": 430.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 430.0
+								},
+								"role": "direct",
+								"skill_id": "meteor",
+								"tags": [
+									"hit",
+									"spell",
+									"area"
+								]
+							}
+						},
+						"compiled_skill_id": "meteor",
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"modifiers": [
+							{
+								"all_tags": [
+									"hit",
+									"spell",
+									"area"
+								],
+								"damage_types": [],
+								"id": "support:ember_proliferation",
+								"mode": "more",
+								"skills": [
+									"meteor"
+								],
+								"value": -0.25
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": [
+						"ember_proliferation"
+					]
+				},
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n点燃 3.0 秒 · 非暴击、未计火抗\n每秒 70.95 火焰 · 完整持续 212.85\n火焰持续伤害加成 +10%（已计入上方数值）\n同一目标不叠加；强点燃覆盖，同强度刷新。\n死亡扩散：半径 120 · 最多 8 个目标 · 受墙体阻挡\n保留原燃烧强度和剩余时间；扩散所得燃烧不再传播。\n圆形范围：半径 110.00 → 110.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：火焰 322.50\n固有：火焰 430.00；附加：无；附加效用 4.30",
+				"explicit_zero": {
+					"burn_profile": {
+						"duration": 3.0,
+						"enabled": true,
+						"hit_multiplier": 0.75,
+						"mana_multiplier": 1.3,
+						"proliferation": {
+							"enabled": true,
+							"max_hops": 1,
+							"max_targets": 8,
+							"preserves_expiry": true,
+							"radius": 120.0
+						},
+						"rate_fraction": 0.2,
+						"roles": {
+							"direct": {
+								"dps": 64.5,
+								"fire_before_defense": 322.5,
+								"total": 193.5
+							}
+						},
+						"stacking": "strongest_refresh_equal"
+					},
+					"cooldown": 8.0,
+					"error": "",
+					"initial_count": 0,
+					"mana": 41.6,
+					"ok": true,
+					"packets": {
+						"direct": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 4.3,
+								"base_coefficient": 4.3,
+								"intrinsic": {
+									"fire": 430.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 430.0
+							},
+							"role": "direct",
+							"skill_id": "meteor",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						}
+					},
+					"recipe": {
+						"radius": 110.0
+					},
+					"skill_id": "meteor",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 100.0,
+						"burn_policy": {
+							"duration": 3.0,
+							"hit_multiplier": 0.75,
+							"mana_multiplier": 1.3,
+							"rate_fraction": 0.2
+						},
+						"burn_proliferation": {
+							"enabled": true,
+							"max_hops": 1,
+							"max_targets": 8,
+							"preserves_expiry": true,
+							"radius": 120.0
+						},
+						"compiled_packets": {
+							"direct": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 4.3,
+									"base_coefficient": 4.3,
+									"intrinsic": {
+										"fire": 430.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 430.0
+								},
+								"role": "direct",
+								"skill_id": "meteor",
+								"tags": [
+									"hit",
+									"spell",
+									"area"
+								]
+							}
+						},
+						"compiled_skill_id": "meteor",
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"modifiers": [
+							{
+								"all_tags": [
+									"hit",
+									"spell",
+									"area"
+								],
+								"damage_types": [],
+								"id": "support:ember_proliferation",
+								"mode": "more",
+								"skills": [
+									"meteor"
+								],
+								"value": -0.25
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": [
+						"ember_proliferation"
+					]
+				},
+				"fraction": 0.1,
+				"increased": {
+					"burn_profile": {
+						"duration": 3.0,
+						"enabled": true,
+						"fire_dot_multiplier": 0.1,
+						"hit_multiplier": 0.75,
+						"mana_multiplier": 1.3,
+						"proliferation": {
+							"enabled": true,
+							"max_hops": 1,
+							"max_targets": 8,
+							"preserves_expiry": true,
+							"radius": 120.0
+						},
+						"rate_fraction": 0.2,
+						"roles": {
+							"direct": {
+								"dps": 70.95,
+								"fire_before_defense": 322.5,
+								"total": 212.85000000000002
+							}
+						},
+						"stacking": "strongest_refresh_equal"
+					},
+					"cooldown": 8.0,
+					"error": "",
+					"initial_count": 0,
+					"mana": 41.6,
+					"ok": true,
+					"packets": {
+						"direct": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 4.3,
+								"base_coefficient": 4.3,
+								"intrinsic": {
+									"fire": 430.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 430.0
+							},
+							"role": "direct",
+							"skill_id": "meteor",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						}
+					},
+					"recipe": {
+						"radius": 110.0
+					},
+					"skill_id": "meteor",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 100.0,
+						"burn_policy": {
+							"duration": 3.0,
+							"hit_multiplier": 0.75,
+							"mana_multiplier": 1.3,
+							"rate_fraction": 0.2
+						},
+						"burn_proliferation": {
+							"enabled": true,
+							"max_hops": 1,
+							"max_targets": 8,
+							"preserves_expiry": true,
+							"radius": 120.0
+						},
+						"compiled_packets": {
+							"direct": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 4.3,
+									"base_coefficient": 4.3,
+									"intrinsic": {
+										"fire": 430.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 430.0
+								},
+								"role": "direct",
+								"skill_id": "meteor",
+								"tags": [
+									"hit",
+									"spell",
+									"area"
+								]
+							}
+						},
+						"compiled_skill_id": "meteor",
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"fire_dot_multiplier": 0.1,
+						"modifiers": [
+							{
+								"all_tags": [
+									"hit",
+									"spell",
+									"area"
+								],
+								"damage_types": [],
+								"id": "support:ember_proliferation",
+								"mode": "more",
+								"skills": [
+									"meteor"
+								],
+								"value": -0.25
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": [
+						"ember_proliferation"
+					]
+				},
+				"skill_id": "meteor",
+				"source_nodes": [
+					"4713",
+					"5916"
+				],
+				"support_id": "ember_proliferation"
+			},
+			{
+				"base": {
+					"burn_profile": {
+						"duration": 3.0,
+						"enabled": true,
+						"hit_multiplier": 0.75,
+						"mana_multiplier": 1.2,
+						"rate_fraction": 0.3,
+						"roles": {
+							"child": {
+								"dps": 6.3,
+								"fire_before_defense": 21.0,
+								"total": 18.9
+							},
+							"parent": {
+								"dps": 9.0,
+								"fire_before_defense": 30.0,
+								"total": 27.0
+							}
+						},
+						"stacking": "strongest_refresh_equal"
+					},
+					"cooldown": 2.5,
+					"error": "",
+					"initial_count": 3,
+					"mana": 21.599999999999998,
+					"ok": true,
+					"packets": {
+						"child": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.7,
+								"base_coefficient": 0.7,
+								"intrinsic": {
+									"fire": 28.0,
+									"physical": 42.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 28.0,
+								"physical": 42.0
+							},
+							"role": "child",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"attack",
+								"projectile"
+							]
+						},
+						"parent": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 1.0,
+								"base_coefficient": 1.0,
+								"intrinsic": {
+									"fire": 40.0,
+									"physical": 60.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 40.0,
+								"physical": 60.0
+							},
+							"role": "parent",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"attack",
+								"projectile"
+							]
+						},
+						"secondary": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.0,
+								"base_coefficient": 0.9,
+								"intrinsic": {
+									"fire": 90.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 90.0
+							},
+							"role": "secondary",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"area",
+								"secondary",
+								"explosion"
+							]
+						}
+					},
+					"recipe": {
+						"child": {
+							"added_effectiveness": 0.7,
+							"coefficient": 0.7,
+							"lifetime": 1.7,
+							"pierce": -1,
+							"radius": 4.5,
+							"range": 150.0,
+							"role": "child",
+							"speed": 260.0,
+							"split": false
+						},
+						"child_count": 3,
+						"explosion": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"parent": {
+							"added_effectiveness": 1.0,
+							"coefficient": 1.0,
+							"lifetime": 0.9,
+							"pierce": -1,
+							"radius": 6.0,
+							"range": 150.0,
+							"role": "parent",
+							"speed": 420.0,
+							"split": true
+						},
+						"parent_count": 3,
+						"spread": 0.16
+					},
+					"skill_id": "tornado",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 100.0,
+						"burn_policy": {
+							"duration": 3.0,
+							"hit_multiplier": 0.75,
+							"mana_multiplier": 1.2,
+							"rate_fraction": 0.3
+						},
+						"compiled_packets": {
+							"child": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.7,
+									"base_coefficient": 0.7,
+									"intrinsic": {
+										"fire": 28.0,
+										"physical": 42.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 28.0,
+									"physical": 42.0
+								},
+								"role": "child",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"parent": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 1.0,
+									"base_coefficient": 1.0,
+									"intrinsic": {
+										"fire": 40.0,
+										"physical": 60.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 40.0,
+									"physical": 60.0
+								},
+								"role": "parent",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 90.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 90.0
+								},
+								"role": "secondary",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "tornado",
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"modifiers": [
+							{
+								"all_tags": [
+									"hit",
+									"attack",
+									"projectile"
+								],
+								"damage_types": [],
+								"id": "support:ignite",
+								"mode": "more",
+								"skills": [
+									"tornado"
+								],
+								"value": -0.25
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": [
+						"ignite"
+					]
+				},
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n点燃 3.0 秒 · 非暴击、未计火抗\n母箭：每秒 9.90 火焰 · 完整持续 29.70\n子箭：每秒 6.93 火焰 · 完整持续 20.79\n火焰持续伤害加成 +10%（已计入上方数值）\n同一目标不叠加；强点燃覆盖，同强度刷新。\n母箭速度 420.00 · 子箭速度 260.00；返回沿用各自速度。\n投射速度改变飞行快慢，不增加距离上限或存续时间。\n母箭：物理 45.00 + 火焰 30.00\n固有：物理 60.00 + 火焰 40.00；附加：无；附加效用 1.00\n子箭：物理 31.50 + 火焰 21.00\n固有：物理 42.00 + 火焰 28.00；附加：无；附加效用 0.70\n独立爆炸：火焰 90.00\n固有：火焰 90.00；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+				"explicit_zero": {
+					"burn_profile": {
+						"duration": 3.0,
+						"enabled": true,
+						"hit_multiplier": 0.75,
+						"mana_multiplier": 1.2,
+						"rate_fraction": 0.3,
+						"roles": {
+							"child": {
+								"dps": 6.3,
+								"fire_before_defense": 21.0,
+								"total": 18.9
+							},
+							"parent": {
+								"dps": 9.0,
+								"fire_before_defense": 30.0,
+								"total": 27.0
+							}
+						},
+						"stacking": "strongest_refresh_equal"
+					},
+					"cooldown": 2.5,
+					"error": "",
+					"initial_count": 3,
+					"mana": 21.599999999999998,
+					"ok": true,
+					"packets": {
+						"child": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.7,
+								"base_coefficient": 0.7,
+								"intrinsic": {
+									"fire": 28.0,
+									"physical": 42.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 28.0,
+								"physical": 42.0
+							},
+							"role": "child",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"attack",
+								"projectile"
+							]
+						},
+						"parent": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 1.0,
+								"base_coefficient": 1.0,
+								"intrinsic": {
+									"fire": 40.0,
+									"physical": 60.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 40.0,
+								"physical": 60.0
+							},
+							"role": "parent",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"attack",
+								"projectile"
+							]
+						},
+						"secondary": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.0,
+								"base_coefficient": 0.9,
+								"intrinsic": {
+									"fire": 90.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 90.0
+							},
+							"role": "secondary",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"area",
+								"secondary",
+								"explosion"
+							]
+						}
+					},
+					"recipe": {
+						"child": {
+							"added_effectiveness": 0.7,
+							"coefficient": 0.7,
+							"lifetime": 1.7,
+							"pierce": -1,
+							"radius": 4.5,
+							"range": 150.0,
+							"role": "child",
+							"speed": 260.0,
+							"split": false
+						},
+						"child_count": 3,
+						"explosion": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"parent": {
+							"added_effectiveness": 1.0,
+							"coefficient": 1.0,
+							"lifetime": 0.9,
+							"pierce": -1,
+							"radius": 6.0,
+							"range": 150.0,
+							"role": "parent",
+							"speed": 420.0,
+							"split": true
+						},
+						"parent_count": 3,
+						"spread": 0.16
+					},
+					"skill_id": "tornado",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 100.0,
+						"burn_policy": {
+							"duration": 3.0,
+							"hit_multiplier": 0.75,
+							"mana_multiplier": 1.2,
+							"rate_fraction": 0.3
+						},
+						"compiled_packets": {
+							"child": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.7,
+									"base_coefficient": 0.7,
+									"intrinsic": {
+										"fire": 28.0,
+										"physical": 42.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 28.0,
+									"physical": 42.0
+								},
+								"role": "child",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"parent": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 1.0,
+									"base_coefficient": 1.0,
+									"intrinsic": {
+										"fire": 40.0,
+										"physical": 60.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 40.0,
+									"physical": 60.0
+								},
+								"role": "parent",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 90.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 90.0
+								},
+								"role": "secondary",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "tornado",
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"modifiers": [
+							{
+								"all_tags": [
+									"hit",
+									"attack",
+									"projectile"
+								],
+								"damage_types": [],
+								"id": "support:ignite",
+								"mode": "more",
+								"skills": [
+									"tornado"
+								],
+								"value": -0.25
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": [
+						"ignite"
+					]
+				},
+				"fraction": 0.1,
+				"increased": {
+					"burn_profile": {
+						"duration": 3.0,
+						"enabled": true,
+						"fire_dot_multiplier": 0.1,
+						"hit_multiplier": 0.75,
+						"mana_multiplier": 1.2,
+						"rate_fraction": 0.3,
+						"roles": {
+							"child": {
+								"dps": 6.930000000000001,
+								"fire_before_defense": 21.0,
+								"total": 20.790000000000003
+							},
+							"parent": {
+								"dps": 9.9,
+								"fire_before_defense": 30.0,
+								"total": 29.700000000000003
+							}
+						},
+						"stacking": "strongest_refresh_equal"
+					},
+					"cooldown": 2.5,
+					"error": "",
+					"initial_count": 3,
+					"mana": 21.599999999999998,
+					"ok": true,
+					"packets": {
+						"child": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.7,
+								"base_coefficient": 0.7,
+								"intrinsic": {
+									"fire": 28.0,
+									"physical": 42.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 28.0,
+								"physical": 42.0
+							},
+							"role": "child",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"attack",
+								"projectile"
+							]
+						},
+						"parent": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 1.0,
+								"base_coefficient": 1.0,
+								"intrinsic": {
+									"fire": 40.0,
+									"physical": 60.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 40.0,
+								"physical": 60.0
+							},
+							"role": "parent",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"attack",
+								"projectile"
+							]
+						},
+						"secondary": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.0,
+								"base_coefficient": 0.9,
+								"intrinsic": {
+									"fire": 90.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 90.0
+							},
+							"role": "secondary",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"area",
+								"secondary",
+								"explosion"
+							]
+						}
+					},
+					"recipe": {
+						"child": {
+							"added_effectiveness": 0.7,
+							"coefficient": 0.7,
+							"lifetime": 1.7,
+							"pierce": -1,
+							"radius": 4.5,
+							"range": 150.0,
+							"role": "child",
+							"speed": 260.0,
+							"split": false
+						},
+						"child_count": 3,
+						"explosion": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"parent": {
+							"added_effectiveness": 1.0,
+							"coefficient": 1.0,
+							"lifetime": 0.9,
+							"pierce": -1,
+							"radius": 6.0,
+							"range": 150.0,
+							"role": "parent",
+							"speed": 420.0,
+							"split": true
+						},
+						"parent_count": 3,
+						"spread": 0.16
+					},
+					"skill_id": "tornado",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 100.0,
+						"burn_policy": {
+							"duration": 3.0,
+							"hit_multiplier": 0.75,
+							"mana_multiplier": 1.2,
+							"rate_fraction": 0.3
+						},
+						"compiled_packets": {
+							"child": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.7,
+									"base_coefficient": 0.7,
+									"intrinsic": {
+										"fire": 28.0,
+										"physical": 42.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 28.0,
+									"physical": 42.0
+								},
+								"role": "child",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"parent": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 1.0,
+									"base_coefficient": 1.0,
+									"intrinsic": {
+										"fire": 40.0,
+										"physical": 60.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 40.0,
+									"physical": 60.0
+								},
+								"role": "parent",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 90.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 90.0
+								},
+								"role": "secondary",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "tornado",
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"fire_dot_multiplier": 0.1,
+						"initial_count": 3,
+						"modifiers": [
+							{
+								"all_tags": [
+									"hit",
+									"attack",
+									"projectile"
+								],
+								"damage_types": [],
+								"id": "support:ignite",
+								"mode": "more",
+								"skills": [
+									"tornado"
+								],
+								"value": -0.25
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": [
+						"ignite"
+					]
+				},
+				"skill_id": "tornado",
+				"source_nodes": [
+					"4713",
+					"5916"
+				],
+				"support_id": "ignite"
+			},
+			{
+				"base": {
+					"burn_profile": {
+						"duration": 3.0,
+						"enabled": true,
+						"hit_multiplier": 0.75,
+						"mana_multiplier": 1.3,
+						"proliferation": {
+							"enabled": true,
+							"max_hops": 1,
+							"max_targets": 8,
+							"preserves_expiry": true,
+							"radius": 120.0
+						},
+						"rate_fraction": 0.2,
+						"roles": {
+							"child": {
+								"dps": 4.2,
+								"fire_before_defense": 21.0,
+								"total": 12.600000000000001
+							},
+							"parent": {
+								"dps": 6.0,
+								"fire_before_defense": 30.0,
+								"total": 18.0
+							}
+						},
+						"stacking": "strongest_refresh_equal"
+					},
+					"cooldown": 2.5,
+					"error": "",
+					"initial_count": 3,
+					"mana": 23.400000000000002,
+					"ok": true,
+					"packets": {
+						"child": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.7,
+								"base_coefficient": 0.7,
+								"intrinsic": {
+									"fire": 28.0,
+									"physical": 42.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 28.0,
+								"physical": 42.0
+							},
+							"role": "child",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"attack",
+								"projectile"
+							]
+						},
+						"parent": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 1.0,
+								"base_coefficient": 1.0,
+								"intrinsic": {
+									"fire": 40.0,
+									"physical": 60.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 40.0,
+								"physical": 60.0
+							},
+							"role": "parent",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"attack",
+								"projectile"
+							]
+						},
+						"secondary": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.0,
+								"base_coefficient": 0.9,
+								"intrinsic": {
+									"fire": 90.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 90.0
+							},
+							"role": "secondary",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"area",
+								"secondary",
+								"explosion"
+							]
+						}
+					},
+					"recipe": {
+						"child": {
+							"added_effectiveness": 0.7,
+							"coefficient": 0.7,
+							"lifetime": 1.7,
+							"pierce": -1,
+							"radius": 4.5,
+							"range": 150.0,
+							"role": "child",
+							"speed": 260.0,
+							"split": false
+						},
+						"child_count": 3,
+						"explosion": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"parent": {
+							"added_effectiveness": 1.0,
+							"coefficient": 1.0,
+							"lifetime": 0.9,
+							"pierce": -1,
+							"radius": 6.0,
+							"range": 150.0,
+							"role": "parent",
+							"speed": 420.0,
+							"split": true
+						},
+						"parent_count": 3,
+						"spread": 0.16
+					},
+					"skill_id": "tornado",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 100.0,
+						"burn_policy": {
+							"duration": 3.0,
+							"hit_multiplier": 0.75,
+							"mana_multiplier": 1.3,
+							"rate_fraction": 0.2
+						},
+						"burn_proliferation": {
+							"enabled": true,
+							"max_hops": 1,
+							"max_targets": 8,
+							"preserves_expiry": true,
+							"radius": 120.0
+						},
+						"compiled_packets": {
+							"child": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.7,
+									"base_coefficient": 0.7,
+									"intrinsic": {
+										"fire": 28.0,
+										"physical": 42.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 28.0,
+									"physical": 42.0
+								},
+								"role": "child",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"parent": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 1.0,
+									"base_coefficient": 1.0,
+									"intrinsic": {
+										"fire": 40.0,
+										"physical": 60.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 40.0,
+									"physical": 60.0
+								},
+								"role": "parent",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 90.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 90.0
+								},
+								"role": "secondary",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "tornado",
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"modifiers": [
+							{
+								"all_tags": [
+									"hit",
+									"attack",
+									"projectile"
+								],
+								"damage_types": [],
+								"id": "support:ember_proliferation",
+								"mode": "more",
+								"skills": [
+									"tornado"
+								],
+								"value": -0.25
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": [
+						"ember_proliferation"
+					]
+				},
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n点燃 3.0 秒 · 非暴击、未计火抗\n母箭：每秒 6.60 火焰 · 完整持续 19.80\n子箭：每秒 4.62 火焰 · 完整持续 13.86\n火焰持续伤害加成 +10%（已计入上方数值）\n同一目标不叠加；强点燃覆盖，同强度刷新。\n死亡扩散：半径 120 · 最多 8 个目标 · 受墙体阻挡\n保留原燃烧强度和剩余时间；扩散所得燃烧不再传播。\n母箭速度 420.00 · 子箭速度 260.00；返回沿用各自速度。\n投射速度改变飞行快慢，不增加距离上限或存续时间。\n母箭：物理 45.00 + 火焰 30.00\n固有：物理 60.00 + 火焰 40.00；附加：无；附加效用 1.00\n子箭：物理 31.50 + 火焰 21.00\n固有：物理 42.00 + 火焰 28.00；附加：无；附加效用 0.70\n独立爆炸：火焰 90.00\n固有：火焰 90.00；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+				"explicit_zero": {
+					"burn_profile": {
+						"duration": 3.0,
+						"enabled": true,
+						"hit_multiplier": 0.75,
+						"mana_multiplier": 1.3,
+						"proliferation": {
+							"enabled": true,
+							"max_hops": 1,
+							"max_targets": 8,
+							"preserves_expiry": true,
+							"radius": 120.0
+						},
+						"rate_fraction": 0.2,
+						"roles": {
+							"child": {
+								"dps": 4.2,
+								"fire_before_defense": 21.0,
+								"total": 12.600000000000001
+							},
+							"parent": {
+								"dps": 6.0,
+								"fire_before_defense": 30.0,
+								"total": 18.0
+							}
+						},
+						"stacking": "strongest_refresh_equal"
+					},
+					"cooldown": 2.5,
+					"error": "",
+					"initial_count": 3,
+					"mana": 23.400000000000002,
+					"ok": true,
+					"packets": {
+						"child": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.7,
+								"base_coefficient": 0.7,
+								"intrinsic": {
+									"fire": 28.0,
+									"physical": 42.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 28.0,
+								"physical": 42.0
+							},
+							"role": "child",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"attack",
+								"projectile"
+							]
+						},
+						"parent": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 1.0,
+								"base_coefficient": 1.0,
+								"intrinsic": {
+									"fire": 40.0,
+									"physical": 60.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 40.0,
+								"physical": 60.0
+							},
+							"role": "parent",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"attack",
+								"projectile"
+							]
+						},
+						"secondary": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.0,
+								"base_coefficient": 0.9,
+								"intrinsic": {
+									"fire": 90.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 90.0
+							},
+							"role": "secondary",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"area",
+								"secondary",
+								"explosion"
+							]
+						}
+					},
+					"recipe": {
+						"child": {
+							"added_effectiveness": 0.7,
+							"coefficient": 0.7,
+							"lifetime": 1.7,
+							"pierce": -1,
+							"radius": 4.5,
+							"range": 150.0,
+							"role": "child",
+							"speed": 260.0,
+							"split": false
+						},
+						"child_count": 3,
+						"explosion": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"parent": {
+							"added_effectiveness": 1.0,
+							"coefficient": 1.0,
+							"lifetime": 0.9,
+							"pierce": -1,
+							"radius": 6.0,
+							"range": 150.0,
+							"role": "parent",
+							"speed": 420.0,
+							"split": true
+						},
+						"parent_count": 3,
+						"spread": 0.16
+					},
+					"skill_id": "tornado",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 100.0,
+						"burn_policy": {
+							"duration": 3.0,
+							"hit_multiplier": 0.75,
+							"mana_multiplier": 1.3,
+							"rate_fraction": 0.2
+						},
+						"burn_proliferation": {
+							"enabled": true,
+							"max_hops": 1,
+							"max_targets": 8,
+							"preserves_expiry": true,
+							"radius": 120.0
+						},
+						"compiled_packets": {
+							"child": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.7,
+									"base_coefficient": 0.7,
+									"intrinsic": {
+										"fire": 28.0,
+										"physical": 42.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 28.0,
+									"physical": 42.0
+								},
+								"role": "child",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"parent": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 1.0,
+									"base_coefficient": 1.0,
+									"intrinsic": {
+										"fire": 40.0,
+										"physical": 60.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 40.0,
+									"physical": 60.0
+								},
+								"role": "parent",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 90.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 90.0
+								},
+								"role": "secondary",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "tornado",
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"modifiers": [
+							{
+								"all_tags": [
+									"hit",
+									"attack",
+									"projectile"
+								],
+								"damage_types": [],
+								"id": "support:ember_proliferation",
+								"mode": "more",
+								"skills": [
+									"tornado"
+								],
+								"value": -0.25
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": [
+						"ember_proliferation"
+					]
+				},
+				"fraction": 0.1,
+				"increased": {
+					"burn_profile": {
+						"duration": 3.0,
+						"enabled": true,
+						"fire_dot_multiplier": 0.1,
+						"hit_multiplier": 0.75,
+						"mana_multiplier": 1.3,
+						"proliferation": {
+							"enabled": true,
+							"max_hops": 1,
+							"max_targets": 8,
+							"preserves_expiry": true,
+							"radius": 120.0
+						},
+						"rate_fraction": 0.2,
+						"roles": {
+							"child": {
+								"dps": 4.620000000000001,
+								"fire_before_defense": 21.0,
+								"total": 13.860000000000003
+							},
+							"parent": {
+								"dps": 6.6000000000000005,
+								"fire_before_defense": 30.0,
+								"total": 19.8
+							}
+						},
+						"stacking": "strongest_refresh_equal"
+					},
+					"cooldown": 2.5,
+					"error": "",
+					"initial_count": 3,
+					"mana": 23.400000000000002,
+					"ok": true,
+					"packets": {
+						"child": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.7,
+								"base_coefficient": 0.7,
+								"intrinsic": {
+									"fire": 28.0,
+									"physical": 42.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 28.0,
+								"physical": 42.0
+							},
+							"role": "child",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"attack",
+								"projectile"
+							]
+						},
+						"parent": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 1.0,
+								"base_coefficient": 1.0,
+								"intrinsic": {
+									"fire": 40.0,
+									"physical": 60.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 40.0,
+								"physical": 60.0
+							},
+							"role": "parent",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"attack",
+								"projectile"
+							]
+						},
+						"secondary": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.0,
+								"base_coefficient": 0.9,
+								"intrinsic": {
+									"fire": 90.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 90.0
+							},
+							"role": "secondary",
+							"skill_id": "tornado",
+							"tags": [
+								"hit",
+								"area",
+								"secondary",
+								"explosion"
+							]
+						}
+					},
+					"recipe": {
+						"child": {
+							"added_effectiveness": 0.7,
+							"coefficient": 0.7,
+							"lifetime": 1.7,
+							"pierce": -1,
+							"radius": 4.5,
+							"range": 150.0,
+							"role": "child",
+							"speed": 260.0,
+							"split": false
+						},
+						"child_count": 3,
+						"explosion": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"parent": {
+							"added_effectiveness": 1.0,
+							"coefficient": 1.0,
+							"lifetime": 0.9,
+							"pierce": -1,
+							"radius": 6.0,
+							"range": 150.0,
+							"role": "parent",
+							"speed": 420.0,
+							"split": true
+						},
+						"parent_count": 3,
+						"spread": 0.16
+					},
+					"skill_id": "tornado",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 100.0,
+						"burn_policy": {
+							"duration": 3.0,
+							"hit_multiplier": 0.75,
+							"mana_multiplier": 1.3,
+							"rate_fraction": 0.2
+						},
+						"burn_proliferation": {
+							"enabled": true,
+							"max_hops": 1,
+							"max_targets": 8,
+							"preserves_expiry": true,
+							"radius": 120.0
+						},
+						"compiled_packets": {
+							"child": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.7,
+									"base_coefficient": 0.7,
+									"intrinsic": {
+										"fire": 28.0,
+										"physical": 42.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 28.0,
+									"physical": 42.0
+								},
+								"role": "child",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"parent": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 1.0,
+									"base_coefficient": 1.0,
+									"intrinsic": {
+										"fire": 40.0,
+										"physical": 60.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 40.0,
+									"physical": 60.0
+								},
+								"role": "parent",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 90.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 90.0
+								},
+								"role": "secondary",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "tornado",
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"fire_dot_multiplier": 0.1,
+						"initial_count": 3,
+						"modifiers": [
+							{
+								"all_tags": [
+									"hit",
+									"attack",
+									"projectile"
+								],
+								"damage_types": [],
+								"id": "support:ember_proliferation",
+								"mode": "more",
+								"skills": [
+									"tornado"
+								],
+								"value": -0.25
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": [
+						"ember_proliferation"
+					]
+				},
+				"skill_id": "tornado",
+				"source_nodes": [
+					"4713",
+					"5916"
+				],
+				"support_id": "ember_proliferation"
+			}
+		],
+		"formula": "燃烧每秒原始火伤 = 已结算的防御前主命中火分量 × 燃烧比例 × (1 + 火焰持续伤害加成之和)",
+		"legacy_rule": "schema31及更早版本使用冻结旧执行词汇，合法旧档不可能含这8个节点；严格旧档验证后迁移schema32，仅改变版本，不赠物、不退款、不改UID与旧节点效果",
+		"legal_build_examples": [
+			{
+				"allocated": [
+					"47175",
+					"31628",
+					"9511",
+					"23881",
+					"26523",
+					"6446",
+					"10221",
+					"54396",
+					"2550"
+				],
+				"cast": {
+					"burn_profile": {
+						"duration": 3.0,
+						"enabled": true,
+						"fire_dot_multiplier": 0.14,
+						"hit_multiplier": 0.75,
+						"mana_multiplier": 1.2,
+						"rate_fraction": 0.3,
+						"roles": {
+							"direct": {
+								"dps": 28.6767,
+								"fire_before_defense": 83.85,
+								"total": 86.0301
+							}
+						},
+						"stacking": "strongest_refresh_equal"
+					},
+					"cooldown": 8.0,
+					"critical": {
+						"primary": {
+							"chance": 0.05,
+							"multiplier": 1.5
+						}
+					},
+					"error": "",
+					"initial_count": 0,
+					"mana": 38.4,
+					"ok": true,
+					"packets": {
+						"direct": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 4.3,
+								"base_coefficient": 4.3,
+								"intrinsic": {
+									"fire": 111.8
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 111.8
+							},
+							"role": "direct",
+							"skill_id": "meteor",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						}
+					},
+					"recipe": {
+						"radius": 110.0
+					},
+					"skill_id": "meteor",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 26.0,
+						"burn_policy": {
+							"duration": 3.0,
+							"hit_multiplier": 0.75,
+							"mana_multiplier": 1.2,
+							"rate_fraction": 0.3
+						},
+						"compiled_packets": {
+							"direct": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 4.3,
+									"base_coefficient": 4.3,
+									"intrinsic": {
+										"fire": 111.8
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 111.8
+								},
+								"role": "direct",
+								"skill_id": "meteor",
+								"tags": [
+									"hit",
+									"spell",
+									"area"
+								]
+							}
+						},
+						"compiled_skill_id": "meteor",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"fire_dot_multiplier": 0.14,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.32
+							},
+							{
+								"all_tags": [
+									"hit",
+									"spell",
+									"area"
+								],
+								"damage_types": [],
+								"id": "support:ignite",
+								"mode": "more",
+								"skills": [
+									"meteor"
+								],
+								"value": -0.25
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": [
+						"ignite"
+					]
+				},
+				"class_id": 1,
+				"points_spent": 8,
+				"required_level": 4,
+				"stats": {
+					"accuracy": 128.0,
+					"accuracy_increased": 0.0,
+					"additional_skill_slots": 0.0,
+					"area_increased": 0.0,
+					"area_size_increased": 0.0,
+					"armour": 0.0,
+					"armour_increased": 0.0,
+					"attack_added_fire": 0.0,
+					"attack_added_physical": 0.0,
+					"attack_crit_chance_increased": 0.0,
+					"attack_elemental_increased": 0.0,
+					"attack_life_leech": 0.0,
+					"attack_mana_leech": 0.0,
+					"attack_physical_increased": 0.0,
+					"attack_speed": 1.7,
+					"attack_speed_increased": 0.0,
+					"chaos_increased": 0.0,
+					"cold_increased": 0.0,
+					"cold_resistance": 0.0,
+					"crit_base_chance": 0.05,
+					"crit_base_multiplier": 1.5,
+					"crit_chance_increased": 0.0,
+					"crit_multiplier_add": 0.0,
+					"damage": 26.0,
+					"dexterity": 14.0,
+					"elemental_increased": 0.0,
+					"evasion": 15.3,
+					"evasion_increased": 0.0,
+					"fire_dot_multiplier_add": 0.14,
+					"fire_increased": 0.0,
+					"fire_resistance": 0.0,
+					"flask_charges_gained_increased": 0.0,
+					"flask_life_recovery_increased": 0.0,
+					"flask_mana_recovery_increased": 0.0,
+					"global_increased": 0.0,
+					"intelligence": 14.0,
+					"life_leech_max_rate_increased": 0.0,
+					"life_leech_rate_increased": 0.0,
+					"life_regen": 2.124,
+					"life_regen_percent": 0.012,
+					"lightning_increased": 0.0,
+					"lightning_resistance": 0.0,
+					"mana_cost_efficiency_increased": 0.0,
+					"mana_cost_increased": 0.0,
+					"mana_leech_max_rate_increased": 0.0,
+					"mana_leech_rate_increased": 0.0,
+					"mana_regen": 12.0,
+					"mana_regen_increased": 0.0,
+					"max_health": 177.0,
+					"max_mana": 137.0,
+					"max_shield": 90.9,
+					"melee_area_size_increased": 0.0,
+					"melee_crit_chance_increased": 0.0,
+					"melee_crit_multiplier_add": 0.0,
+					"melee_physical_increased": 0.32,
+					"move_speed": 240.0,
+					"move_speed_increased": 0.0,
+					"physical_attack_life_leech": 0.0,
+					"physical_attack_mana_leech": 0.0,
+					"physical_increased": 0.0,
+					"projectile_attack_crit_chance_increased": 0.0,
+					"projectile_attack_crit_multiplier_add": 0.0,
+					"projectile_count": 0.0,
+					"projectile_increased": 0.0,
+					"projectile_speed_increased": 0.0,
+					"shield_recharge_delay": 4.0,
+					"shield_recharge_rate": 16.0,
+					"shield_recharge_rate_increased": 0.0,
+					"shield_recharge_start_faster": 0.0,
+					"shield_regen": 16.0,
+					"spell_added_cold": 0.0,
+					"spell_added_lightning": 0.0,
+					"spell_area_size_increased": 0.0,
+					"spell_crit_chance_increased": 0.0,
+					"spell_crit_multiplier_add": 0.0,
+					"spell_increased": 0.0,
+					"strength": 82.0
+				},
+				"target": "2550"
+			},
+			{
+				"allocated": [
+					"54447",
+					"57226",
+					"21678",
+					"32210",
+					"8948",
+					"38176",
+					"49651",
+					"5296",
+					"19501",
+					"4367",
+					"44184",
+					"61804",
+					"13559",
+					"31462",
+					"11924"
+				],
+				"cast": {
+					"burn_profile": {
+						"duration": 3.0,
+						"enabled": true,
+						"fire_dot_multiplier": 0.2,
+						"hit_multiplier": 0.75,
+						"mana_multiplier": 1.2,
+						"rate_fraction": 0.3,
+						"roles": {
+							"direct": {
+								"dps": 42.86412,
+								"fire_before_defense": 119.06700000000001,
+								"total": 128.59235999999999
+							}
+						},
+						"stacking": "strongest_refresh_equal"
+					},
+					"cooldown": 8.0,
+					"critical": {
+						"primary": {
+							"chance": 0.05,
+							"multiplier": 1.5
+						}
+					},
+					"error": "",
+					"initial_count": 0,
+					"mana": 38.4,
+					"ok": true,
+					"packets": {
+						"direct": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 4.3,
+								"base_coefficient": 4.3,
+								"intrinsic": {
+									"fire": 111.8
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 111.8
+							},
+							"role": "direct",
+							"skill_id": "meteor",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						}
+					},
+					"recipe": {
+						"radius": 110.0
+					},
+					"skill_id": "meteor",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 26.0,
+						"burn_policy": {
+							"duration": 3.0,
+							"hit_multiplier": 0.75,
+							"mana_multiplier": 1.2,
+							"rate_fraction": 0.3
+						},
+						"compiled_packets": {
+							"direct": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 4.3,
+									"base_coefficient": 4.3,
+									"intrinsic": {
+										"fire": 111.8
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 111.8
+								},
+								"role": "direct",
+								"skill_id": "meteor",
+								"tags": [
+									"hit",
+									"spell",
+									"area"
+								]
+							}
+						},
+						"compiled_skill_id": "meteor",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"fire_dot_multiplier": 0.2,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.02
+							},
+							{
+								"all_tags": [],
+								"damage_types": [
+									"fire"
+								],
+								"id": "fire_increased",
+								"mode": "increased",
+								"value": 0.42
+							},
+							{
+								"all_tags": [
+									"hit",
+									"spell",
+									"area"
+								],
+								"damage_types": [],
+								"id": "support:ignite",
+								"mode": "more",
+								"skills": [
+									"meteor"
+								],
+								"value": -0.25
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": [
+						"ignite"
+					]
+				},
+				"class_id": 3,
+				"points_spent": 14,
+				"required_level": 10,
+				"stats": {
+					"accuracy": 128.0,
+					"accuracy_increased": 0.0,
+					"additional_skill_slots": 0.0,
+					"area_increased": 0.0,
+					"area_size_increased": 0.0,
+					"armour": 0.0,
+					"armour_increased": 0.0,
+					"attack_added_fire": 0.0,
+					"attack_added_physical": 0.0,
+					"attack_crit_chance_increased": 0.0,
+					"attack_elemental_increased": 0.0,
+					"attack_life_leech": 0.0,
+					"attack_mana_leech": 0.0,
+					"attack_physical_increased": 0.0,
+					"attack_speed": 1.7,
+					"attack_speed_increased": 0.0,
+					"chaos_increased": 0.0,
+					"cold_increased": 0.0,
+					"cold_resistance": 0.0,
+					"crit_base_chance": 0.05,
+					"crit_base_multiplier": 1.5,
+					"crit_chance_increased": 0.0,
+					"crit_multiplier_add": 0.0,
+					"damage": 26.0,
+					"dexterity": 14.0,
+					"elemental_increased": 0.0,
+					"evasion": 15.3,
+					"evasion_increased": 0.0,
+					"fire_dot_multiplier_add": 0.2,
+					"fire_increased": 0.42,
+					"fire_resistance": 0.0,
+					"flask_charges_gained_increased": 0.0,
+					"flask_life_recovery_increased": 0.0,
+					"flask_mana_recovery_increased": 0.0,
+					"global_increased": 0.0,
+					"intelligence": 122.0,
+					"life_leech_max_rate_increased": 0.0,
+					"life_leech_rate_increased": 0.0,
+					"life_regen": 0.0,
+					"life_regen_percent": 0.0,
+					"lightning_increased": 0.0,
+					"lightning_resistance": 0.0,
+					"mana_cost_efficiency_increased": 0.0,
+					"mana_cost_increased": 0.0,
+					"mana_leech_max_rate_increased": 0.0,
+					"mana_leech_rate_increased": 0.0,
+					"mana_regen": 12.0,
+					"mana_regen_increased": 0.0,
+					"max_health": 127.0,
+					"max_mana": 207.0,
+					"max_shield": 116.48000000000002,
+					"melee_area_size_increased": 0.0,
+					"melee_crit_chance_increased": 0.0,
+					"melee_crit_multiplier_add": 0.0,
+					"melee_physical_increased": 0.02,
+					"move_speed": 240.0,
+					"move_speed_increased": 0.0,
+					"physical_attack_life_leech": 0.0,
+					"physical_attack_mana_leech": 0.0,
+					"physical_increased": 0.0,
+					"projectile_attack_crit_chance_increased": 0.0,
+					"projectile_attack_crit_multiplier_add": 0.0,
+					"projectile_count": 0.0,
+					"projectile_increased": 0.0,
+					"projectile_speed_increased": 0.0,
+					"shield_recharge_delay": 4.0,
+					"shield_recharge_rate": 16.0,
+					"shield_recharge_rate_increased": 0.0,
+					"shield_recharge_start_faster": 0.0,
+					"shield_regen": 16.0,
+					"spell_added_cold": 0.0,
+					"spell_added_lightning": 0.0,
+					"spell_area_size_increased": 0.0,
+					"spell_crit_chance_increased": 0.0,
+					"spell_crit_multiplier_add": 0.0,
+					"spell_increased": 0.0,
+					"strength": 14.0
+				},
+				"target": "11924"
+			},
+			{
+				"allocated": [
+					"61525",
+					"63965",
+					"14151",
+					"27564",
+					"17735",
+					"13009",
+					"60398",
+					"46340",
+					"42760",
+					"36678",
+					"7444",
+					"4713",
+					"5916",
+					"29049"
+				],
+				"cast": {
+					"burn_profile": {
+						"duration": 3.0,
+						"enabled": true,
+						"fire_dot_multiplier": 0.22,
+						"hit_multiplier": 0.75,
+						"mana_multiplier": 1.2,
+						"rate_fraction": 0.3,
+						"roles": {
+							"direct": {
+								"dps": 34.98557400000001,
+								"fire_before_defense": 95.58900000000001,
+								"total": 104.95672200000001
+							}
+						},
+						"stacking": "strongest_refresh_equal"
+					},
+					"cooldown": 8.0,
+					"critical": {
+						"primary": {
+							"chance": 0.05,
+							"multiplier": 1.5
+						}
+					},
+					"error": "",
+					"initial_count": 0,
+					"mana": 38.4,
+					"ok": true,
+					"packets": {
+						"direct": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 4.3,
+								"base_coefficient": 4.3,
+								"intrinsic": {
+									"fire": 111.8
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 111.8
+							},
+							"role": "direct",
+							"skill_id": "meteor",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						}
+					},
+					"recipe": {
+						"radius": 110.0
+					},
+					"skill_id": "meteor",
+					"snapshot": {
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"base_damage": 26.0,
+						"burn_policy": {
+							"duration": 3.0,
+							"hit_multiplier": 0.75,
+							"mana_multiplier": 1.2,
+							"rate_fraction": 0.3
+						},
+						"compiled_packets": {
+							"direct": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 4.3,
+									"base_coefficient": 4.3,
+									"intrinsic": {
+										"fire": 111.8
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 111.8
+								},
+								"role": "direct",
+								"skill_id": "meteor",
+								"tags": [
+									"hit",
+									"spell",
+									"area"
+								]
+							}
+						},
+						"compiled_skill_id": "meteor",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"fire_dot_multiplier": 0.22,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							},
+							{
+								"all_tags": [],
+								"damage_types": [],
+								"id": "global_increased",
+								"mode": "increased",
+								"value": 0.14
+							},
+							{
+								"all_tags": [
+									"hit",
+									"spell",
+									"area"
+								],
+								"damage_types": [],
+								"id": "support:ignite",
+								"mode": "more",
+								"skills": [
+									"meteor"
+								],
+								"value": -0.25
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": [
+						"ignite"
+					]
+				},
+				"class_id": 5,
+				"points_spent": 13,
+				"required_level": 9,
+				"stats": {
+					"accuracy": 148.0,
+					"accuracy_increased": 0.0,
+					"additional_skill_slots": 0.0,
+					"area_increased": 0.0,
+					"area_size_increased": 0.0,
+					"armour": 0.0,
+					"armour_increased": 0.0,
+					"attack_added_fire": 0.0,
+					"attack_added_physical": 0.0,
+					"attack_crit_chance_increased": 0.0,
+					"attack_elemental_increased": 0.0,
+					"attack_life_leech": 0.0,
+					"attack_mana_leech": 0.0,
+					"attack_physical_increased": 0.0,
+					"attack_speed": 1.7,
+					"attack_speed_increased": 0.0,
+					"chaos_increased": 0.0,
+					"cold_increased": 0.0,
+					"cold_resistance": 0.0,
+					"crit_base_chance": 0.05,
+					"crit_base_multiplier": 1.5,
+					"crit_chance_increased": 0.0,
+					"crit_multiplier_add": 0.0,
+					"damage": 26.0,
+					"dexterity": 24.0,
+					"elemental_increased": 0.0,
+					"evasion": 15.600000000000001,
+					"evasion_increased": 0.0,
+					"fire_dot_multiplier_add": 0.22,
+					"fire_increased": 0.0,
+					"fire_resistance": 0.24,
+					"flask_charges_gained_increased": 0.0,
+					"flask_life_recovery_increased": 0.0,
+					"flask_mana_recovery_increased": 0.0,
+					"global_increased": 0.14,
+					"intelligence": 103.0,
+					"life_leech_max_rate_increased": 0.0,
+					"life_leech_rate_increased": 0.0,
+					"life_regen": 0.0,
+					"life_regen_percent": 0.0,
+					"lightning_increased": 0.0,
+					"lightning_resistance": 0.0,
+					"mana_cost_efficiency_increased": 0.0,
+					"mana_cost_increased": 0.0,
+					"mana_leech_max_rate_increased": 0.0,
+					"mana_leech_rate_increased": 0.0,
+					"mana_regen": 12.0,
+					"mana_regen_increased": 0.0,
+					"max_health": 131.0,
+					"max_mana": 195.0,
+					"max_shield": 99.00000000000001,
+					"melee_area_size_increased": 0.0,
+					"melee_crit_chance_increased": 0.0,
+					"melee_crit_multiplier_add": 0.0,
+					"melee_physical_increased": 0.04,
+					"move_speed": 240.0,
+					"move_speed_increased": 0.0,
+					"physical_attack_life_leech": 0.0,
+					"physical_attack_mana_leech": 0.0,
+					"physical_increased": 0.0,
+					"projectile_attack_crit_chance_increased": 0.0,
+					"projectile_attack_crit_multiplier_add": 0.0,
+					"projectile_count": 0.0,
+					"projectile_increased": 0.0,
+					"projectile_speed_increased": 0.0,
+					"shield_recharge_delay": 4.0,
+					"shield_recharge_rate": 16.0,
+					"shield_recharge_rate_increased": 0.0,
+					"shield_recharge_start_faster": 0.0,
+					"shield_regen": 16.0,
+					"spell_added_cold": 0.0,
+					"spell_added_lightning": 0.0,
+					"spell_area_size_increased": 0.0,
+					"spell_crit_chance_increased": 0.0,
+					"spell_crit_multiplier_add": 0.0,
+					"spell_increased": 0.0,
+					"strength": 23.0
+				},
+				"target": "29049"
+			}
+		],
+		"migration_example": {
+			"changed_fields": [
+				"version"
+			],
+			"from_version": 31,
+			"items_after": 38,
+			"items_before": 38,
+			"talents_preserved": true,
+			"to_version": 32
+		},
+		"minimum_save_version": 32,
+		"new_complete_ordinary_nodes": [
+			"11924",
+			"13559",
+			"2550",
+			"29049",
+			"31462",
+			"4713",
+			"54396",
+			"5916"
+		],
+		"new_images": [],
+		"new_mastery_effect_ids": [],
+		"newly_reachable_existing_node": "1550",
+		"nodes": {
+			"11924": {
+				"execution": {
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "fire_dot_multiplier_add",
+							"value": 0.1
+						},
+						{
+							"mode": "increased",
+							"stat": "fire_increased",
+							"value": 0.3
+						}
+					],
+					"status": "full",
+					"supported": [
+						"+10% to Fire Damage over Time Multiplier",
+						"30% increased Fire Damage"
+					],
+					"unsupported": []
+				},
+				"fraction": 0.1,
+				"legacy_execution": {
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "fire_increased",
+							"value": 0.3
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"30% increased Fire Damage"
+					],
+					"unsupported": [
+						"+10% to Fire Damage over Time Multiplier"
+					]
+				},
+				"name": "Breath of Flames",
+				"source_lines": [
+					"+10% to Fire Damage over Time Multiplier",
+					"30% increased Fire Damage"
+				]
+			},
+			"13559": {
+				"execution": {
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "fire_dot_multiplier_add",
+							"value": 0.05
+						}
+					],
+					"status": "full",
+					"supported": [
+						"+5% to Fire Damage over Time Multiplier"
+					],
+					"unsupported": []
+				},
+				"fraction": 0.05,
+				"legacy_execution": {
+					"grants": [],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"+5% to Fire Damage over Time Multiplier"
+					]
+				},
+				"name": "Burning Damage Multiplier",
+				"source_lines": [
+					"+5% to Fire Damage over Time Multiplier"
+				]
+			},
+			"2550": {
+				"execution": {
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "fire_dot_multiplier_add",
+							"value": 0.1
+						},
+						{
+							"mode": "flat",
+							"stat": "life_regen_percent",
+							"value": 0.012
+						}
+					],
+					"status": "full",
+					"supported": [
+						"+10% to Fire Damage over Time Multiplier",
+						"Regenerate 1.2% of Life per second"
+					],
+					"unsupported": []
+				},
+				"fraction": 0.1,
+				"legacy_execution": {
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "life_regen_percent",
+							"value": 0.012
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"Regenerate 1.2% of Life per second"
+					],
+					"unsupported": [
+						"+10% to Fire Damage over Time Multiplier"
+					]
+				},
+				"name": "Arsonist",
+				"source_lines": [
+					"+10% to Fire Damage over Time Multiplier",
+					"Regenerate 1.2% of Life per second"
+				]
+			},
+			"29049": {
+				"execution": {
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "fire_dot_multiplier_add",
+							"value": 0.12
+						},
+						{
+							"mode": "flat",
+							"stat": "fire_resistance",
+							"value": 0.24
+						}
+					],
+					"status": "full",
+					"supported": [
+						"+12% to Fire Damage over Time Multiplier",
+						"+24% to Fire Resistance"
+					],
+					"unsupported": []
+				},
+				"fraction": 0.12,
+				"legacy_execution": {
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "fire_resistance",
+							"value": 0.24
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"+24% to Fire Resistance"
+					],
+					"unsupported": [
+						"+12% to Fire Damage over Time Multiplier"
+					]
+				},
+				"name": "Holy Fire",
+				"source_lines": [
+					"+12% to Fire Damage over Time Multiplier",
+					"+24% to Fire Resistance"
+				]
+			},
+			"31462": {
+				"execution": {
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "fire_dot_multiplier_add",
+							"value": 0.05
+						}
+					],
+					"status": "full",
+					"supported": [
+						"+5% to Fire Damage over Time Multiplier"
+					],
+					"unsupported": []
+				},
+				"fraction": 0.05,
+				"legacy_execution": {
+					"grants": [],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"+5% to Fire Damage over Time Multiplier"
+					]
+				},
+				"name": "Burning Damage Multiplier",
+				"source_lines": [
+					"+5% to Fire Damage over Time Multiplier"
+				]
+			},
+			"4713": {
+				"execution": {
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "fire_dot_multiplier_add",
+							"value": 0.04
+						}
+					],
+					"status": "full",
+					"supported": [
+						"+4% to Fire Damage over Time Multiplier"
+					],
+					"unsupported": []
+				},
+				"fraction": 0.04,
+				"legacy_execution": {
+					"grants": [],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"+4% to Fire Damage over Time Multiplier"
+					]
+				},
+				"name": "Burning Damage Multiplier",
+				"source_lines": [
+					"+4% to Fire Damage over Time Multiplier"
+				]
+			},
+			"54396": {
+				"execution": {
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "fire_dot_multiplier_add",
+							"value": 0.04
+						}
+					],
+					"status": "full",
+					"supported": [
+						"+4% to Fire Damage over Time Multiplier"
+					],
+					"unsupported": []
+				},
+				"fraction": 0.04,
+				"legacy_execution": {
+					"grants": [],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"+4% to Fire Damage over Time Multiplier"
+					]
+				},
+				"name": "Burning Damage Multiplier",
+				"source_lines": [
+					"+4% to Fire Damage over Time Multiplier"
+				]
+			},
+			"5916": {
+				"execution": {
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "fire_dot_multiplier_add",
+							"value": 0.06
+						}
+					],
+					"status": "full",
+					"supported": [
+						"+6% to Fire Damage over Time Multiplier"
+					],
+					"unsupported": []
+				},
+				"fraction": 0.06,
+				"legacy_execution": {
+					"grants": [],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"+6% to Fire Damage over Time Multiplier"
+					]
+				},
+				"name": "Burning Damage Multiplier",
+				"source_lines": [
+					"+6% to Fire Damage over Time Multiplier"
+				]
+			}
+		},
+		"older_legal_allocations_gaining_effects": [],
+		"preview_rule": "燃烧预览各命中角色的每秒伤害与完整时长总量已经应用一次加成，显示层不得再次乘算",
+		"scope": "只增强玩家点燃与余烬扩散的燃烧；直接命中、持续时长、魔力、冷却、感电与敌方燃烧不变；独立装备爆炸不继承",
+		"snapshot_field": "fire_dot_multiplier",
+		"snapshot_rule": "获准施放冻结一次加成；没有来源或显式零值时省略可选字段，保持旧编译数据结构与数值",
+		"source_sha256": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+		"stat": "fire_dot_multiplier_add",
+		"transfer_example": {
+			"fraction": 0.1,
+			"recipient": {
+				"last_time": 11.75,
+				"provenance": {
+					"ember_expiry": 13.0,
+					"ember_generation": 1,
+					"skill_id": "meteor"
+				},
+				"raw_dps": 70.95,
+				"remaining": 1.25,
+				"source_id": 90,
+				"target_id": 1,
+				"target_kind": "monster"
+			},
+			"source": {
+				"last_time": 10.0,
+				"provenance": {
+					"ember_expiry": 13.0,
+					"ember_generation": 0,
+					"skill_id": "meteor"
+				},
+				"raw_dps": 70.95,
+				"remaining": 3.0,
+				"source_id": 0,
+				"target_id": 90,
+				"target_kind": "monster"
+			},
+			"started_at": 10.0,
+			"transfer": {
+				"burn": {
+					"duration": 1.25,
+					"provenance": {
+						"ember_expiry": 13.0,
+						"ember_generation": 1,
+						"skill_id": "meteor"
+					},
+					"raw_dps": 70.95
+				},
+				"ok": true,
+				"reason": ""
+			},
+			"transferred_at": 11.75
+		},
+		"transfer_rule": "余烬接收者直接继承已经增强的每秒伤害及原绝对截止时间，不重新读取来源或再次乘算",
+		"unchanged_consumers": {
+			"enemy_burn": {
+				"duration": 3.0,
+				"ok": true,
+				"raw_dps": 2.333333333333333,
+				"reason": ""
+			},
+			"shock_after": {
+				"cooldown": 0.8,
+				"error": "",
+				"initial_count": 3,
+				"mana": 8.4,
+				"ok": true,
+				"packets": {
+					"projectile": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 1.6,
+							"base_coefficient": 1.6,
+							"intrinsic": {
+								"lightning": 160.0
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"lightning": 160.0
+						},
+						"role": "projectile",
+						"skill_id": "bolt",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"secondary": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.0,
+							"base_coefficient": 0.9,
+							"intrinsic": {
+								"fire": 90.0
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"fire": 90.0
+						},
+						"role": "secondary",
+						"skill_id": "bolt",
+						"tags": [
+							"hit",
+							"area",
+							"secondary",
+							"explosion"
+						]
+					}
+				},
+				"recipe": {
+					"added_effectiveness": 1.6,
+					"coefficient": 1.6,
+					"damage_type": "lightning",
+					"initial_count": 3,
+					"pierce": 1,
+					"slow": 0.0,
+					"speed": 780.0,
+					"spread": 0.16
+				},
+				"shock_profile": {
+					"affects_dot": false,
+					"affects_hits_only": true,
+					"applies_after_current_hit": true,
+					"duration": 2.0,
+					"enabled": true,
+					"hit_damage_taken_increased": 0.15,
+					"hit_multiplier": 0.8,
+					"mana_multiplier": 1.2,
+					"roles": [
+						"projectile"
+					],
+					"stacking": "refresh_equal",
+					"trigger": "positive_lightning_hit_after_settlement"
+				},
+				"skill_id": "bolt",
+				"snapshot": {
+					"added_damage": {
+						"attack": {
+							"fire": 0.0,
+							"physical": 0.0
+						},
+						"spell": {
+							"cold": 0.0,
+							"lightning": 0.0
+						}
+					},
+					"base_damage": 100.0,
+					"compiled_packets": {
+						"projectile": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 1.6,
+								"base_coefficient": 1.6,
+								"intrinsic": {
+									"lightning": 160.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 160.0
+							},
+							"role": "projectile",
+							"skill_id": "bolt",
+							"tags": [
+								"hit",
+								"projectile",
+								"spell"
+							]
+						},
+						"secondary": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.0,
+								"base_coefficient": 0.9,
+								"intrinsic": {
+									"fire": 90.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 90.0
+							},
+							"role": "secondary",
+							"skill_id": "bolt",
+							"tags": [
+								"hit",
+								"area",
+								"secondary",
+								"explosion"
+							]
+						}
+					},
+					"compiled_skill_id": "bolt",
+					"effects": [],
+					"explosion_recipe": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"fire_dot_multiplier": 0.1,
+					"initial_count": 3,
+					"modifiers": [
+						{
+							"all_tags": [
+								"hit",
+								"spell",
+								"projectile"
+							],
+							"damage_types": [],
+							"id": "support:shock",
+							"mode": "more",
+							"skills": [
+								"bolt"
+							],
+							"value": -0.19999999999999996
+						}
+					],
+					"projectile_count": 0,
+					"shock_policy": {
+						"duration": 2.0,
+						"hit_damage_taken_increased": 0.15,
+						"hit_multiplier": 0.8,
+						"mana_multiplier": 1.2
+					},
+					"tornado_recipe": {
+						"child": {
+							"added_effectiveness": 0.7,
+							"coefficient": 0.7,
+							"lifetime": 1.7,
+							"pierce": -1,
+							"radius": 4.5,
+							"range": 150.0,
+							"role": "child",
+							"speed": 260.0,
+							"split": false
+						},
+						"child_count": 3,
+						"explosion": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"parent": {
+							"added_effectiveness": 1.0,
+							"coefficient": 1.0,
+							"lifetime": 0.9,
+							"pierce": -1,
+							"radius": 6.0,
+							"range": 150.0,
+							"role": "parent",
+							"speed": 420.0,
+							"split": true
+						},
+						"parent_count": 3,
+						"spread": 0.16
+					}
+				},
+				"support_ids": [
+					"shock"
+				]
+			},
+			"shock_before": {
+				"cooldown": 0.8,
+				"error": "",
+				"initial_count": 3,
+				"mana": 8.4,
+				"ok": true,
+				"packets": {
+					"projectile": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 1.6,
+							"base_coefficient": 1.6,
+							"intrinsic": {
+								"lightning": 160.0
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"lightning": 160.0
+						},
+						"role": "projectile",
+						"skill_id": "bolt",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"secondary": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.0,
+							"base_coefficient": 0.9,
+							"intrinsic": {
+								"fire": 90.0
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"fire": 90.0
+						},
+						"role": "secondary",
+						"skill_id": "bolt",
+						"tags": [
+							"hit",
+							"area",
+							"secondary",
+							"explosion"
+						]
+					}
+				},
+				"recipe": {
+					"added_effectiveness": 1.6,
+					"coefficient": 1.6,
+					"damage_type": "lightning",
+					"initial_count": 3,
+					"pierce": 1,
+					"slow": 0.0,
+					"speed": 780.0,
+					"spread": 0.16
+				},
+				"shock_profile": {
+					"affects_dot": false,
+					"affects_hits_only": true,
+					"applies_after_current_hit": true,
+					"duration": 2.0,
+					"enabled": true,
+					"hit_damage_taken_increased": 0.15,
+					"hit_multiplier": 0.8,
+					"mana_multiplier": 1.2,
+					"roles": [
+						"projectile"
+					],
+					"stacking": "refresh_equal",
+					"trigger": "positive_lightning_hit_after_settlement"
+				},
+				"skill_id": "bolt",
+				"snapshot": {
+					"added_damage": {
+						"attack": {
+							"fire": 0.0,
+							"physical": 0.0
+						},
+						"spell": {
+							"cold": 0.0,
+							"lightning": 0.0
+						}
+					},
+					"base_damage": 100.0,
+					"compiled_packets": {
+						"projectile": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 1.6,
+								"base_coefficient": 1.6,
+								"intrinsic": {
+									"lightning": 160.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 160.0
+							},
+							"role": "projectile",
+							"skill_id": "bolt",
+							"tags": [
+								"hit",
+								"projectile",
+								"spell"
+							]
+						},
+						"secondary": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.0,
+								"base_coefficient": 0.9,
+								"intrinsic": {
+									"fire": 90.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 90.0
+							},
+							"role": "secondary",
+							"skill_id": "bolt",
+							"tags": [
+								"hit",
+								"area",
+								"secondary",
+								"explosion"
+							]
+						}
+					},
+					"compiled_skill_id": "bolt",
+					"effects": [],
+					"explosion_recipe": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"initial_count": 3,
+					"modifiers": [
+						{
+							"all_tags": [
+								"hit",
+								"spell",
+								"projectile"
+							],
+							"damage_types": [],
+							"id": "support:shock",
+							"mode": "more",
+							"skills": [
+								"bolt"
+							],
+							"value": -0.19999999999999996
+						}
+					],
+					"projectile_count": 0,
+					"shock_policy": {
+						"duration": 2.0,
+						"hit_damage_taken_increased": 0.15,
+						"hit_multiplier": 0.8,
+						"mana_multiplier": 1.2
+					},
+					"tornado_recipe": {
+						"child": {
+							"added_effectiveness": 0.7,
+							"coefficient": 0.7,
+							"lifetime": 1.7,
+							"pierce": -1,
+							"radius": 4.5,
+							"range": 150.0,
+							"role": "child",
+							"speed": 260.0,
+							"split": false
+						},
+						"child_count": 3,
+						"explosion": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"parent": {
+							"added_effectiveness": 1.0,
+							"coefficient": 1.0,
+							"lifetime": 0.9,
+							"pierce": -1,
+							"radius": 6.0,
+							"range": 150.0,
+							"role": "parent",
+							"speed": 420.0,
+							"split": true
+						},
+						"parent_count": 3,
+						"spread": 0.16
+					}
+				},
+				"support_ids": [
+					"shock"
+				]
+			}
+		},
+		"units": "源词句+4%与+6%相加为0.10；属性、施放快照与燃烧预览中的加成字段都保存0.10，最终伤害因子才是1.10",
+		"unsupported": [
+			"更快异常伤害",
+			"通用持续伤害加成",
+			"攻击限定持续伤害",
+			"条件持续伤害",
+			"新的装备词缀池",
+			"新宝石"
+		]
+	},
 	"source_flasks": {
 		"charge_formula": "每个有效奖励根怪获得充能 = 1 × (1 + 充能获取增幅)",
 		"charge_lifecycle": "余量按同一药剂UID累计，换槽或移入背包不清零；只有当时装备的药剂获充能，满30在本次合法奖励时丢弃超额与余量",
@@ -274458,11 +283000,18 @@
 					{
 						"effect": 36313,
 						"execution": {
-							"grants": [],
-							"status": "unsupported",
-							"supported": [],
+							"grants": [
+								{
+									"mode": "flat",
+									"stat": "fire_dot_multiplier_add",
+									"value": 0.12
+								}
+							],
+							"status": "partial",
+							"supported": [
+								"+12% to Fire Damage over Time Multiplier"
+							],
 							"unsupported": [
-								"+12% to Fire Damage over Time Multiplier",
 								"50% increased Ignite Duration on you"
 							]
 						},
@@ -275460,18 +284009,22 @@
 				"execution": {
 					"grants": [
 						{
+							"mode": "flat",
+							"stat": "fire_dot_multiplier_add",
+							"value": 0.1
+						},
+						{
 							"mode": "increased",
 							"stat": "fire_increased",
 							"value": 0.3
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
+						"+10% to Fire Damage over Time Multiplier",
 						"30% increased Fire Damage"
 					],
-					"unsupported": [
-						"+10% to Fire Damage over Time Multiplier"
-					]
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "11924",
@@ -277760,18 +286313,22 @@
 				"execution": {
 					"grants": [
 						{
+							"mode": "flat",
+							"stat": "fire_dot_multiplier_add",
+							"value": 0.04
+						},
+						{
 							"mode": "increased",
 							"stat": "elemental_increased",
 							"value": 0.1
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
+						"+4% to Fire Damage over Time Multiplier",
 						"10% increased Elemental Damage"
 					],
-					"unsupported": [
-						"+4% to Fire Damage over Time Multiplier"
-					]
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "12738",
@@ -279478,12 +288035,18 @@
 			"13559": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "fire_dot_multiplier_add",
+							"value": 0.05
+						}
+					],
+					"status": "full",
+					"supported": [
 						"+5% to Fire Damage over Time Multiplier"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "13559",
@@ -292504,11 +301067,18 @@
 					{
 						"effect": 36313,
 						"execution": {
-							"grants": [],
-							"status": "unsupported",
-							"supported": [],
+							"grants": [
+								{
+									"mode": "flat",
+									"stat": "fire_dot_multiplier_add",
+									"value": 0.12
+								}
+							],
+							"status": "partial",
+							"supported": [
+								"+12% to Fire Damage over Time Multiplier"
+							],
 							"unsupported": [
-								"+12% to Fire Damage over Time Multiplier",
 								"50% increased Ignite Duration on you"
 							]
 						},
@@ -305226,17 +313796,21 @@
 					"grants": [
 						{
 							"mode": "flat",
+							"stat": "fire_dot_multiplier_add",
+							"value": 0.1
+						},
+						{
+							"mode": "flat",
 							"stat": "life_regen_percent",
 							"value": 0.012
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
+						"+10% to Fire Damage over Time Multiplier",
 						"Regenerate 1.2% of Life per second"
 					],
-					"unsupported": [
-						"+10% to Fire Damage over Time Multiplier"
-					]
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "2550",
@@ -313523,17 +322097,21 @@
 					"grants": [
 						{
 							"mode": "flat",
+							"stat": "fire_dot_multiplier_add",
+							"value": 0.12
+						},
+						{
+							"mode": "flat",
 							"stat": "fire_resistance",
 							"value": 0.24
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
+						"+12% to Fire Damage over Time Multiplier",
 						"+24% to Fire Resistance"
 					],
-					"unsupported": [
-						"+12% to Fire Damage over Time Multiplier"
-					]
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "29049",
@@ -318320,12 +326898,18 @@
 			"31462": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "fire_dot_multiplier_add",
+							"value": 0.05
+						}
+					],
+					"status": "full",
+					"supported": [
 						"+5% to Fire Damage over Time Multiplier"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "31462",
@@ -326973,11 +335557,18 @@
 					{
 						"effect": 36313,
 						"execution": {
-							"grants": [],
-							"status": "unsupported",
-							"supported": [],
+							"grants": [
+								{
+									"mode": "flat",
+									"stat": "fire_dot_multiplier_add",
+									"value": 0.12
+								}
+							],
+							"status": "partial",
+							"supported": [
+								"+12% to Fire Damage over Time Multiplier"
+							],
 							"unsupported": [
-								"+12% to Fire Damage over Time Multiplier",
 								"50% increased Ignite Duration on you"
 							]
 						},
@@ -334278,11 +342869,18 @@
 					{
 						"effect": 36313,
 						"execution": {
-							"grants": [],
-							"status": "unsupported",
-							"supported": [],
+							"grants": [
+								{
+									"mode": "flat",
+									"stat": "fire_dot_multiplier_add",
+									"value": 0.12
+								}
+							],
+							"status": "partial",
+							"supported": [
+								"+12% to Fire Damage over Time Multiplier"
+							],
 							"unsupported": [
-								"+12% to Fire Damage over Time Multiplier",
 								"50% increased Ignite Duration on you"
 							]
 						},
@@ -335290,11 +343888,18 @@
 					{
 						"effect": 36313,
 						"execution": {
-							"grants": [],
-							"status": "unsupported",
-							"supported": [],
+							"grants": [
+								{
+									"mode": "flat",
+									"stat": "fire_dot_multiplier_add",
+									"value": 0.12
+								}
+							],
+							"status": "partial",
+							"supported": [
+								"+12% to Fire Damage over Time Multiplier"
+							],
 							"unsupported": [
-								"+12% to Fire Damage over Time Multiplier",
 								"50% increased Ignite Duration on you"
 							]
 						},
@@ -340317,11 +348922,18 @@
 					{
 						"effect": 36313,
 						"execution": {
-							"grants": [],
-							"status": "unsupported",
-							"supported": [],
+							"grants": [
+								{
+									"mode": "flat",
+									"stat": "fire_dot_multiplier_add",
+									"value": 0.12
+								}
+							],
+							"status": "partial",
+							"supported": [
+								"+12% to Fire Damage over Time Multiplier"
+							],
 							"unsupported": [
-								"+12% to Fire Damage over Time Multiplier",
 								"50% increased Ignite Duration on you"
 							]
 						},
@@ -356486,12 +365098,18 @@
 			"4713": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "fire_dot_multiplier_add",
+							"value": 0.04
+						}
+					],
+					"status": "full",
+					"supported": [
 						"+4% to Fire Damage over Time Multiplier"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "4713",
@@ -358873,11 +367491,18 @@
 					{
 						"effect": 36313,
 						"execution": {
-							"grants": [],
-							"status": "unsupported",
-							"supported": [],
+							"grants": [
+								{
+									"mode": "flat",
+									"stat": "fire_dot_multiplier_add",
+									"value": 0.12
+								}
+							],
+							"status": "partial",
+							"supported": [
+								"+12% to Fire Damage over Time Multiplier"
+							],
 							"unsupported": [
-								"+12% to Fire Damage over Time Multiplier",
 								"50% increased Ignite Duration on you"
 							]
 						},
@@ -373441,12 +382066,18 @@
 			"54396": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "fire_dot_multiplier_add",
+							"value": 0.04
+						}
+					],
+					"status": "full",
+					"supported": [
 						"+4% to Fire Damage over Time Multiplier"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "54396",
@@ -384664,12 +393295,18 @@
 			"5916": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "fire_dot_multiplier_add",
+							"value": 0.06
+						}
+					],
+					"status": "full",
+					"supported": [
 						"+6% to Fire Damage over Time Multiplier"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "5916",
@@ -394437,11 +403074,18 @@
 					{
 						"effect": 36313,
 						"execution": {
-							"grants": [],
-							"status": "unsupported",
-							"supported": [],
+							"grants": [
+								{
+									"mode": "flat",
+									"stat": "fire_dot_multiplier_add",
+									"value": 0.12
+								}
+							],
+							"status": "partial",
+							"supported": [
+								"+12% to Fire Damage over Time Multiplier"
+							],
 							"unsupported": [
-								"+12% to Fire Damage over Time Multiplier",
 								"50% increased Ignite Duration on you"
 							]
 						},
@@ -412137,7 +420781,7 @@
 			}
 		},
 		"roster_scope": "只展示原抽签为基础物种的按位替换；灰烬保留名额，分裂体与母巢保留原抽签且占用序号；稀有度、机制与奖励不变；所选巡逻词缀最后按编排物种替换",
-		"save_version": 31,
+		"save_version": 32,
 		"spawn_seconds": 0.6,
 		"tiers": [
 			{
@@ -416447,7 +425091,7 @@
 		},
 		"reserved_character_key": "C",
 		"retired_profile_writes": false,
-		"save_version": 31,
+		"save_version": 32,
 		"services": [
 			{
 				"description": "免费测试供应全部已实现主动与辅助宝石。",

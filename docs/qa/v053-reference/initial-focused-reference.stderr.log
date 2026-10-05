@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/a51485f153de/v053-fire-dot-passives/tests/fire_dot_reference_test.py", line 206, in <module>
+    main()
+  File "/workspace/scratch/a51485f153de/v053-fire-dot-passives/tests/fire_dot_reference_test.py", line 180, in main
+    assert digest(value) == expected_hash, 'Unchanged catalog structure drifted: ' + key
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Unchanged catalog structure drifted: monster_attacks

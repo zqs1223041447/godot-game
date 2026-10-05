@@ -1,0 +1,65 @@
+{
+  "game_version": "0.53.0",
+  "save_version": 32,
+  "status": "PASS",
+  "godot_exports": 1,
+  "godot_exit_code": 0,
+  "godot_seconds": 10.649,
+  "godot_error_lines": [],
+  "production_changed_since_export": [],
+  "python_validation": [
+    {
+      "name": "python-build",
+      "command": [
+        "python3",
+        "tools/build_reference.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.445
+    },
+    {
+      "name": "python-check",
+      "command": [
+        "python3",
+        "tools/build_reference.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.463
+    },
+    {
+      "name": "focused-reference",
+      "command": [
+        "python3",
+        "tests/fire_dot_reference_test.py"
+      ],
+      "exit_code": 0,
+      "seconds": 1.846
+    },
+    {
+      "name": "javascript-syntax",
+      "command": [
+        "node",
+        "--check",
+        "docs/reference/reference.js"
+      ],
+      "exit_code": 0,
+      "seconds": 0.142
+    }
+  ],
+  "new_allocatable_standard_nodes": 8,
+  "class_paths": 56,
+  "compiled_comparisons": 8,
+  "full_legal_route_builds": 3,
+  "rendered_numeric_values": 93,
+  "unchanged_images": 67,
+  "new_images": 0,
+  "each_class_ordinary_reachable_before": 676,
+  "each_class_ordinary_reachable_after": 685,
+  "additional_reachable_existing_node": "1550",
+  "locked_partial_mastery_effect": 36313,
+  "excluded_ascendancy_record": "12738",
+  "visual_validation_performed": false,
+  "historical_full_suite_run": false,
+  "import_run": false
+}

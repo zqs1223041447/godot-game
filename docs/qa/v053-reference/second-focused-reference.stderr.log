@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/a51485f153de/v053-fire-dot-passives/tests/fire_dot_reference_test.py", line 211, in <module>
+    main()
+  File "/workspace/scratch/a51485f153de/v053-fire-dot-passives/tests/fire_dot_reference_test.py", line 187, in main
+    assert digest({k: {f: v for f, v in n.items() if f != 'execution'} for k, n in tree['nodes'].items()}) == baseline['source_node_shape']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

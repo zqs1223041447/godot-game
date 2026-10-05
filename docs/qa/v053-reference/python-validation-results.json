@@ -1,0 +1,40 @@
+[
+  {
+    "name": "python-build",
+    "command": [
+      "python3",
+      "tools/build_reference.py"
+    ],
+    "exit_code": 0,
+    "seconds": 0.445
+  },
+  {
+    "name": "python-check",
+    "command": [
+      "python3",
+      "tools/build_reference.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 0.463
+  },
+  {
+    "name": "focused-reference",
+    "command": [
+      "python3",
+      "tests/fire_dot_reference_test.py"
+    ],
+    "exit_code": 0,
+    "seconds": 1.846
+  },
+  {
+    "name": "javascript-syntax",
+    "command": [
+      "node",
+      "--check",
+      "docs/reference/reference.js"
+    ],
+    "exit_code": 0,
+    "seconds": 0.142
+  }
+]

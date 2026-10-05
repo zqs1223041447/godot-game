@@ -49,6 +49,8 @@ const BurnRuntime = preload("res://scripts/combat/burn_runtime.gd")
 const EmberMigration = preload("res://scripts/save/ember_gem_migration.gd")
 const ShockRuntimeData = preload("res://scripts/combat/shock_runtime.gd")
 const ShockMigration = preload("res://scripts/save/shock_gem_migration.gd")
+const FireDotMigration = preload("res://scripts/save/fire_dot_migration.gd")
+const SourceCoverage = preload("res://tools/export_source_execution_coverage.gd")
 
 func _initialize() -> void:
 	var target: String = "res://docs/reference/catalog.json"
@@ -63,6 +65,17 @@ func _initialize() -> void:
 	file.store_string(JSON.stringify(clean(content), "\t", true, true) + "\n")
 	file.close()
 	print("Reference exported: " + target)
+	if target == "res://docs/reference/catalog.json":
+		var coverage: Dictionary = SourceCoverage.build_report()
+		assert(not coverage.is_empty() and coverage.integrity.ok)
+		var coverage_file: FileAccess = FileAccess.open(SourceCoverage.OUTPUT_PATH, FileAccess.WRITE)
+		if coverage_file == null:
+			push_error("Cannot write source tree coverage report")
+			quit(1)
+			return
+		coverage_file.store_string(SourceCoverage.serialize_report(coverage))
+		coverage_file.close()
+		print("Source tree coverage exported: " + SourceCoverage.OUTPUT_PATH)
 	quit(0)
 
 static func collect() -> Dictionary:
@@ -101,6 +114,7 @@ static func collect() -> Dictionary:
 	result["burning"] = burning_examples()
 	result["ember_proliferation"] = ember_proliferation_examples()
 	result["shock"] = shock_examples()
+	result["source_fire_dot"] = source_fire_dot_examples()
 	result["normal_gem_trading"]={"offers":Canonical.GemTrade.offers(),"recycle_credit":Canonical.GemTrade.RECYCLE_CREDIT,"currency":Canonical.GemTrade.MATERIAL_ID,"location":"normal_town","level":1,"quality":0,"recycle_location":"bag","schema":Canonical.Rules.VERSION,"test_supply_separate":true,"pricing":"初版可调整预算；每次无词缀地图净得4碎片"}
 	result["source_tree"] = source_tree_reference()
 	result["source_spatial"] = source_spatial_examples()
@@ -1121,7 +1135,7 @@ static func burning_examples()->Dictionary:
 		"defense_example":Defense.incoming_burn(100.0,0.25,10.0,100.0,"player"),
 		"enemy_budget":{"contact_damage":20.0,"physical_hit":14.0,"fire_hit":7.0,"fire_burn_dps":7.0/3.0,"duration":3.0,"total_before_defense":28.0},
 		"immunity":"尊重原伤害免疫；期间时长流逝、不补扣，持续伤害本身不授予受击保护",
-		"source_words":"本游戏初版，不解锁尚未实现的PoE点燃或持续伤害源节点"}
+		"source_words":"本游戏燃烧原型；schema32仅接入无条件火焰持续伤害加成的8个完整源节点，其余未实现的点燃、持续伤害与更快异常词句仍锁定"}
 
 
 static func shock_examples()->Dictionary:
@@ -1271,3 +1285,105 @@ static func ember_proliferation_examples()->Dictionary:
 		"stacking":"与点燃共用单目标最强燃烧：更强覆盖，同强替换并采用新条自己的截止时间，弱条忽略；扩散不叠加也不重置3秒",
 		"lifecycle":"不新增命中、暴击、偷取、随机抽样或奖励路径；暂停冻结，返城与重开清空，燃烧状态不存盘",
 		"migration":"严格验证旧schema28与原字节备份后迁移schema29，仅版本字段变化，不赠物、不退款、不改旅程或既有UID"}
+
+
+## Controlled source-stat examples use the production snapshot and compiler.
+## Full legal routes below are validated separately and retain every other grant.
+static func source_fire_dot_examples() -> Dictionary:
+	var coverage: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://docs/qa/v053-source/source-coverage.json"))
+	assert(coverage.new_schema == Canonical.Rules.VERSION and coverage.source_sha256 == SourceTree.Data.SOURCE_SHA256)
+	var nodes: Dictionary = {}
+	for id: String in coverage.new_full_nodes:
+		var node: Dictionary = SourceTree.Data.node(id)
+		var current: Dictionary = SourceTree.node_effect(id, 0, 32)
+		var old: Dictionary = SourceTree.node_effect(id, 0, 31)
+		assert(current.status == "full" and old.status != "full")
+		nodes[id] = {"name": node.name, "source_lines": node.stats, "fraction": coverage.new_full_nodes[id],
+			"execution": current, "legacy_execution": old}
+	var examples: Array = []
+	for source_ids: Array in [["4713"], ["4713", "5916"]]:
+		var fraction: float = 0.0
+		for id: String in source_ids:
+			for grant: Dictionary in nodes[id].execution.grants:
+				if grant.stat == "fire_dot_multiplier_add": fraction += float(grant.value)
+		for skill: String in ["meteor", "tornado"]:
+			for support: String in ["ignite", "ember_proliferation"]:
+				var base: Dictionary = Compiler.compile_group(skill, Recipes.snapshot({"damage":100.0}, []), [support])
+				var zero: Dictionary = Compiler.compile_group(skill, Recipes.snapshot({"damage":100.0,"fire_dot_multiplier_add":0.0}, []), [support])
+				var increased: Dictionary = Compiler.compile_group(skill, Recipes.snapshot({"damage":100.0,"fire_dot_multiplier_add":fraction}, []), [support])
+				assert(base.ok and zero.ok and increased.ok and base == zero)
+				examples.append({"source_nodes":source_ids,"fraction":fraction,"skill_id":skill,"support_id":support,
+					"base":base,"explicit_zero":zero,"increased":increased,"details":Preview.details(increased)})
+	var class_paths: Array = coverage.classes.duplicate(true)
+	for entry: Dictionary in class_paths:
+		for id: String in entry.paths_to_new_nodes:
+			var path: Array = entry.paths_to_new_nodes[id]
+			var candidate: Dictionary = _fire_dot_route_candidate(int(entry.class_id), path)
+			assert(Canonical.Rules.reason(candidate).is_empty() and SourceTree.reason(candidate).is_empty())
+			var old: Dictionary = candidate.duplicate(true)
+			old.version = 31
+			assert(not SourceTree.reason(old).is_empty())
+		entry.legal_current_routes = true
+		entry.legacy_routes_rejected = true
+	var legal_examples: Array = []
+	for choice: Dictionary in [{"class_id":1,"target":"2550"},{"class_id":3,"target":"11924"},{"class_id":5,"target":"29049"}]:
+		var path: Array = class_paths[int(choice.class_id)].paths_to_new_nodes[choice.target]
+		var candidate: Dictionary = _fire_dot_route_candidate(int(choice.class_id), path)
+		var model := Canonical.new()
+		model._accept_memory(candidate)
+		var stats: Dictionary = model.get_stats()
+		var compiled: Dictionary = Compiler.compile_group("meteor", Recipes.snapshot(stats, []), ["ignite"])
+		assert(compiled.ok)
+		legal_examples.append({"class_id":choice.class_id,"target":choice.target,"allocated":path,
+			"points_spent":path.size()-1,"required_level":maxi(1,path.size()-5),"stats":stats,"cast":compiled})
+	var scaled: Dictionary = Compiler.compile_group("meteor", Recipes.snapshot({"damage":100.0,"fire_dot_multiplier_add":0.10}, []), ["ember_proliferation"])
+	var runtime := BurnRuntime.new()
+	var applied: Dictionary = runtime.apply("monster",90,0,scaled.burn_profile.roles.direct.dps,scaled.burn_profile.duration,10.0,
+		{"skill_id":"meteor","ember_generation":0,"ember_expiry":13.0})
+	assert(applied.ok and applied.applied)
+	var source: Dictionary = runtime.status_for("monster",90)
+	var transfer: Dictionary = Compiler.Proliferation.transfer(source,11.75)
+	assert(transfer.ok and not transfer.burn.is_empty())
+	var received: Dictionary = runtime.apply("monster",1,90,transfer.burn.raw_dps,transfer.burn.duration,11.75,transfer.burn.provenance)
+	assert(received.ok and received.applied)
+	var shock_base: Dictionary = Compiler.compile_group("bolt",Recipes.snapshot({"damage":100.0},[]),["shock"])
+	var shock_bonus: Dictionary = Compiler.compile_group("bolt",Recipes.snapshot({"damage":100.0,"fire_dot_multiplier_add":0.10},[]),["shock"])
+	assert(shock_base.ok and shock_bonus.ok and shock_base.shock_profile == shock_bonus.shock_profile)
+	var old_save: Dictionary = Canonical.new().snapshot()
+	old_save.version = 31
+	var migrated: Dictionary = FireDotMigration.migrate_v31(old_save,SourceTree.reason)
+	assert(not migrated.is_empty())
+	var changed_fields: Array = []
+	for key: String in old_save:
+		if old_save[key] != migrated[key]: changed_fields.append(key)
+	assert(changed_fields == ["version"])
+	return {"minimum_save_version":32,"stat":"fire_dot_multiplier_add","snapshot_field":"fire_dot_multiplier",
+		"source_sha256":SourceTree.Data.SOURCE_SHA256,"nodes":nodes,"class_paths":class_paths,
+		"examples":examples,"legal_build_examples":legal_examples,
+		"new_complete_ordinary_nodes":coverage.new_full_nodes.keys(),"new_mastery_effect_ids":[],
+		"newly_reachable_existing_node":"1550","older_legal_allocations_gaining_effects":coverage.older_legal_allocations_gaining_effects,
+		"transfer_example":{"fraction":0.10,"started_at":10.0,"transferred_at":11.75,"source":source,"transfer":transfer,"recipient":runtime.status_for("monster",1)},
+		"unchanged_consumers":{"shock_before":shock_base,"shock_after":shock_bonus,"enemy_burn":Compiler.Burn.from_fire_hit(7.0,Compiler.Burn.ENEMY_POLICY)},
+		"migration_example":{"from_version":old_save.version,"to_version":migrated.version,"changed_fields":changed_fields,
+			"items_before":old_save.items.size(),"items_after":migrated.items.size(),"talents_preserved":old_save.talents==migrated.talents},
+		"formula":"燃烧每秒原始火伤 = 已结算的防御前主命中火分量 × 燃烧比例 × (1 + 火焰持续伤害加成之和)",
+		"units":"源词句+4%与+6%相加为0.10；属性、施放快照与燃烧预览中的加成字段都保存0.10，最终伤害因子才是1.10",
+		"snapshot_rule":"获准施放冻结一次加成；没有来源或显式零值时省略可选字段，保持旧编译数据结构与数值",
+		"preview_rule":"燃烧预览各命中角色的每秒伤害与完整时长总量已经应用一次加成，显示层不得再次乘算",
+		"scope":"只增强玩家点燃与余烬扩散的燃烧；直接命中、持续时长、魔力、冷却、感电与敌方燃烧不变；独立装备爆炸不继承",
+		"transfer_rule":"余烬接收者直接继承已经增强的每秒伤害及原绝对截止时间，不重新读取来源或再次乘算",
+		"coverage_note":"8个新增完整普通节点；七职业各自可达的非起点普通节点由676变685，其中额外1个是原本已完整的1550变得可达，不是第9个新机制",
+		"complete_gate":"仍逐节点执行全部源效果；包含未实现附加效果、武器或条件限定的节点整体锁定，0个新增精通效果",
+		"legacy_rule":"schema31及更早版本使用冻结旧执行词汇，合法旧档不可能含这8个节点；严格旧档验证后迁移schema32，仅改变版本，不赠物、不退款、不改UID与旧节点效果",
+		"example_scope":"前后表只隔离所列节点的火焰持续伤害字段，其余输入固定；七职业路径另经真实构筑校验，三条完整合法路线示例保留沿途全部属性，可达集合不代表123点能全部同时分配",
+		"unsupported":["更快异常伤害","通用持续伤害加成","攻击限定持续伤害","条件持续伤害","新的装备词缀池","新宝石"],"new_images":[]}
+
+
+static func _fire_dot_route_candidate(class_id: int, path: Array) -> Dictionary:
+	var candidate: Dictionary = Canonical.new().snapshot()
+	candidate.progress.level = 119
+	candidate.progress.xp = 0
+	candidate.talents.class_id = class_id
+	candidate.talents.allocated = path.duplicate()
+	candidate.talents.normal_points = 123 - (path.size() - 1)
+	return candidate

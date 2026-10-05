@@ -13,7 +13,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 REF = ROOT / 'docs/reference'
 CATEGORIES = [('skills','主动技能'),('supports','辅助技能'),('equipment','随机装备'),('affixes','装备词缀'),('fixed_items','固定装备'),('jewels','珠宝'),('jewel_affixes','珠宝词缀'),('source_passives','源天赋与精通'),('passives','旧181节点研究'),('mechanisms','共用机制'),('weapon_stages','武器局部阶段'),('defenses','受击与防御'),('flasks','生命与魔力药剂'),('currencies','堆叠材料'),('crafting','制作与回收'),('monsters','怪物图鉴'),('monster_attacks','怪物攻击'),('encounters','本轮挑战'),('town_services','城镇服务'),('maps','有限地图'),('map_specials','地图特殊词缀'),('rules','规则与边界')]
-RULE_TITLES = {'damage':'伤害如何结算','supports':'辅助装配','projectiles':'分裂、返回与飞行结束','equipment':'装备与阶级','character_rates':'恢复、移动与普通攻击速度','basic_attack':'普通攻击与武器贡献','allocation':'天赋与珠宝规则','shared':'玩家和怪物共享机制','boundaries':'尚未实现的源游戏语义','sources':'数据来源与实现边界','ember_proliferation':'余烬扩散与剩余时长','shock':'感电与后续命中'}
+RULE_TITLES = {'damage':'伤害如何结算','supports':'辅助装配','projectiles':'分裂、返回与飞行结束','equipment':'装备与阶级','character_rates':'恢复、移动与普通攻击速度','basic_attack':'普通攻击与武器贡献','allocation':'天赋与珠宝规则','shared':'玩家和怪物共享机制','boundaries':'尚未实现的源游戏语义','sources':'数据来源与实现边界','ember_proliferation':'余烬扩散与剩余时长','shock':'感电与后续命中','source_fire_dot':'源天赋火焰持续伤害加成'}
 CAPABILITIES = {'initial_projectiles':'初始投射物数量','projectile_hit':'投射物命中','finite_projectile_pierce':'有限穿透','area_hit':'直接范围命中','chain_hit':'连锁命中'}
 SLOTS = {'weapon':'武器','armor':'护甲','charm':'项链','body_armour':'护甲','amulet':'项链','ring':'戒指','ring_1':'戒指一','ring_2':'戒指二','boots':'鞋','belt':'腰带','gloves':'手套','helmet':'头盔'}
 TYPES = {'small':'小天赋','notable':'显著天赋','socket':'珠宝孔','start':'起点','keystone':'基石','mastery':'精通','prefix':'前缀','suffix':'后缀','ordinary':'普通珠宝','special':'特殊珠宝','legacy':'原始词池','expansion':'扩展词池','runewood':'符木点伤池','defense':'火抗防具池','local_weapon':'白蜡长弓池','nine_slot':'九槽装备池','build_legacy_v27':'构筑原底材池','build_nine_slot_v27':'构筑九槽池'}
@@ -291,7 +291,7 @@ def build(data, art):
             label='已执行' if allowed and choice['execution']['status']=='full' else '未完整执行 · 不可选择'
             body+=details(f'精通 {choice["effect"]} · {label}','<p>'+lines('\n'.join(choice['stats']))+'</p>')
         if p['neighbors']:body+=details('原始标准邻接',links('source_passives',p['neighbors']))
-        cards.append(add('source_passives',key,p['name'],'\n'.join(p['stats']) or state,body,TYPES[p['type']],status='implemented' if selectable else 'research',related=link('rules','source_tree')))
+        cards.append(add('source_passives',key,p['name'],'\n'.join(p['stats']) or state,body,TYPES[p['type']],status='implemented' if selectable else 'research',related=link('rules','source_tree')+(' · '+link('rules','source_fire_dot') if key in data.get('source_fire_dot',{}).get('nodes',{}) else '')))
     for key,m in data['mechanisms'].items():
         player_nodes=[k for k,v in data['passives'].items() if key in v['mechanism_ids']]
         monsters=[k for k,v in data['monsters'].items() if key in v['mechanisms']]
@@ -499,7 +499,7 @@ def build(data, art):
             ('allocation','源树与珠宝资格','每件珠宝只有一个统一位置；孔必须已分配并沿普通连线连接自己的起点。','<p>寻枝半径280采用当前源坐标单位，允许小型/显著节点断连分配，仍花1点。远程点不向外扩路、不激活孔；未实现节点即使在范围内也不能分配。退款、移动、替换、取回都验证最终构筑，不能遗留依赖失效的节点。原型半径规则不是PoE某颗珠宝的完整复刻。</p><p>'+link('rules','source_tree')+'；下方旧181覆盖图保留作历史机制研究。</p>','implemented'),
             ('source_defenses','属性与命中防御','原始三属性数值进入真实容量、命中、闪避和近战物理作用域。','<p>力量每2点取整+1生命、每5点取整+1%近战物理；敏捷每点+2命中、每5点取整+1%闪避；智慧每2点取整+1魔力、每10点取整+1%护盾（3.28以后规则）。法术不进行攻击闪避。护甲随物理命中大小重新求减伤，三元素抗性分别限制到75%，然后护盾、生命。</p>'+facts([('同源混合受击示例','物理/火/冰/电各100；护甲500、抗性50%/25%/75%'),('防御后分量',esc(component_text(defense['components']))),('护盾扣减',number(defense['shield_spent'])),('生命扣减',number(defense['health_lost']))])+f'<p>本游戏敏捷型怪物闪避320；默认Scion命中140，对应 {percent(c["skitter_accuracy_example"]["base_chance"])}；增加10敏捷后命中160，对应 {percent(c["skitter_accuracy_example"]["improved_chance"])}。预览展示成功命中伤害，未把命中率伪乘成DPS。</p>','implemented'),
             ('shared','共享消费者与历史注册表','人物和怪物共用伤害分量、防御、命中和结算函数。','<p>旧MechanicRegistry仍约束怪物机制包；旧181节点引用保留作研究与回归。当前人物改用原始源树逐项能力门槛，不能再套用旧投影合计上限。未支持机制继续拒绝，不借导入数据悄悄生效。</p>','implemented'),
-            ('boundaries','尚未实现的机制','未执行源节点整体锁定，原文与位置保留。','<p>仍未完成：施法动作时长/施法速度、条件/局部武器暴击、格挡、压制、抗性穿透、异常与持续伤害体系、召唤物、属性装备需求、星团/永恒珠宝、升华点数来源及复杂条件机制。源树浏览不等于以上均可用。制作已有回收、校准、赋魔、升格、补缀与重铸；更复杂的定向制作尚未实现。</p>','planned'),
+            ('boundaries','尚未实现的机制','未执行源节点整体锁定，原文与位置保留。','<p>仍未完成：施法动作时长/施法速度、条件/局部武器暴击、格挡、压制、抗性穿透、完整异常与持续伤害体系（无条件火焰持续伤害加成已接入；更快异常仍未实现）、召唤物、属性装备需求、星团/永恒珠宝、升华点数来源及复杂条件机制。源树浏览不等于以上均可用。制作已有回收、校准、赋魔、升格、补缀与重铸；更复杂的定向制作尚未实现。</p>','planned'),
             ('sources','来源与实现边界','目录来自运行时导出，源树保留功能数据，所有美术由本项目创作。',f'<p><a href="{esc(source["source_url"])}">GGG源树固定提交 {source["source_commit"]}</a> · 3.29.1。保留节点身份、原始规则词句、精通和几何；未包含官方图像或叙事风味文本。上游数据再分发授权未明确，不宣称公共领域。</p><p>旧181节点与词缀校准研究仍有各自固定版本，不代表当前角色全部源效果已实现。原型怪物数值、掉落权重与熵初值由本项目定义。</p><p><a href="source-tree-coverage.json">完整执行覆盖与七职业可达前沿JSON</a>：空stats结构节点和精通本体不冒充属性效果，精通逐选项统计；可达集合不代表123点可以全部同时点出。</p>','research')
         ])
     rule_defs.append(('combat_feedback','实际战斗反馈','普通命中、暴击命中与燃烧按目标分别汇总，显示真正减少的护盾与生命。','<p>固定0.20秒聚合窗口，单条显示0.75秒，最多48条可见数值。普通命中和暴击不混桶；暴击带感叹号，燃烧带“燃”，玩家受伤为红色负号。死亡时立即完成末击，暂停冻结，返城或重开清空。</p><p>过量伤害、免疫、闪避和零损伤不计入数值。燃烧不显示命中次数；不同技能同类可合计，因此不标单一技能名。此处是已结算损伤显示，不是DPS或平均伤害估算。</p><p>原伤害数字开关、字体缩放与相机缩放保持，不新增常驻统计面板。原命中位置和粒子随机抽样时序不变，反馈本身不取随机或保存进度。</p>','implemented'))
@@ -587,6 +587,41 @@ def build(data, art):
         body+=''.join('<p>'+esc(shock[key])+'。</p>' for key in ['scope','settlement','damage_scope','stacking','lifecycle','migration','source_words'])
         body+=f'<p>同源迁移示例物品数量 {migration["items_before"]} → {migration["items_after"]}；仅变化字段 {esc("、".join(migration["changed_fields"]))}。正式击杀宝石奖励词表与旧奖励序号保持冻结，未加入此新辅助。</p><p>'+link('supports','shock')+' · '+link('rules','burning','持续伤害规则')+'</p>'
         rule_defs.append(('shock','感电与后续命中','以主命中和魔力代价换取短时后续命中增伤；玩家与怪物共用受击边界。',body,'implemented'))
+    if 'source_fire_dot' in data:
+        fire=data['source_fire_dot']
+        def fire_value(key,value,as_percent=False):
+            label=percent(value) if as_percent else number(value)
+            return f'<span data-fire-dot-value="{esc(key)}" data-value="{esc(value)}">{label}</span>'
+        body=''.join('<p>'+esc(fire[key])+'。</p>' for key in ['formula','units','snapshot_rule','preview_rule','scope','transfer_rule'])
+        node_rows=[]
+        for node_id,node in fire['nodes'].items():
+            node_rows.append('<tr><th>'+link('source_passives',node_id,node['name']+' · '+node_id)+'</th><td>'+fire_value('node-'+node_id,node['fraction'],True)+'</td><td>'+lines('\n'.join(node['source_lines']))+'</td><td>全部效果已执行；schema31锁定</td></tr>')
+        body+='<h3>8个完整源节点</h3><div class="table-scroll"><table><thead><tr><th>源节点</th><th>火焰持续伤害加成</th><th>完整源词句</th><th>执行门槛</th></tr></thead><tbody>'+''.join(node_rows)+'</tbody></table></div>'
+        example_rows=[]
+        for index,example in enumerate(fire['examples']):
+            base=example['base'];after=example['increased']
+            for role,part in after['burn_profile']['roles'].items():
+                prefix=f'example-{index}-{role}-'
+                before=base['burn_profile']['roles'][role]
+                example_rows.append('<tr><th>'+links('source_passives',example['source_nodes'])+'<br>'+link('skills',example['skill_id'])+' · '+link('supports',example['support_id'])+' · '+esc(role)+'</th><td>'+fire_value(prefix+'fraction',example['fraction'],True)+'</td><td>'+fire_value(prefix+'fire',part['fire_before_defense'])+'</td><td>'+fire_value(prefix+'before-dps',before['dps'])+' → '+fire_value(prefix+'after-dps',part['dps'])+'</td><td>'+fire_value(prefix+'total',part['total'])+'</td><td>'+fire_value(prefix+'duration',after['burn_profile']['duration'])+'秒</td></tr>')
+        body+='<h3>真实编译器前后示例</h3><p>'+esc(fire['example_scope'])+'。</p><p>全部数值为非暴击、防御前示例；同一行比较同一命中角色，不把龙卷母箭、子箭或多目标数值相加为实战DPS。显式零值与无来源的完整编译结构一致。</p><div class="table-scroll"><table><thead><tr><th>输入与命中角色</th><th>加成之和</th><th>原始主命中火分量</th><th>燃烧每秒：无来源 → 有来源</th><th>完整时长燃烧总量</th><th>时长</th></tr></thead><tbody>'+''.join(example_rows)+'</tbody></table></div>'
+        legal_rows=[]
+        for index,example in enumerate(fire['legal_build_examples']):
+            profile=example['cast']['burn_profile']
+            legal_rows.append('<tr><th>职业'+str(example['class_id'])+' → '+link('source_passives',example['target'])+'</th><td>'+str(example['points_spent'])+'点 / 最低'+str(example['required_level'])+'级</td><td>'+fire_value(f'legal-{index}-fraction',example['stats']['fire_dot_multiplier_add'],True)+'</td><td>'+fire_value(f'legal-{index}-dps',profile['roles']['direct']['dps'])+'</td></tr>')
+        body+=details('完整合法路线 · 保留沿途全部属性','<div class="table-scroll"><table><thead><tr><th>真实路线</th><th>预算</th><th>合计火焰持续伤害加成</th><th>点燃陨星每秒火伤</th></tr></thead><tbody>'+''.join(legal_rows)+'</tbody></table></div>')
+        paths=''
+        for entry in fire['class_paths']:
+            rows=''.join('<tr><th>'+link('source_passives',node_id)+'</th><td>'+str(len(path)-1)+'</td><td>'+ ' → '.join(link('source_passives',n,n) for n in path)+'</td></tr>' for node_id,path in entry['paths_to_new_nodes'].items())
+            paths+=details('职业'+str(entry['class_id'])+' · 八节点完整可分配路径','<p>非起点普通节点可达数 '+str(entry['old_reachable_count'])+' → '+str(entry['new_reachable_count'])+'；每条路线均通过当前完整构筑验证，旧schema31拒绝。</p><div class="table-scroll"><table><thead><tr><th>目标</th><th>点数</th><th>路径ID（含免费起点）</th></tr></thead><tbody>'+rows+'</tbody></table></div>')
+        body+='<p>'+esc(fire['coverage_note'])+'。'+esc(fire['complete_gate'])+'。</p>'+paths
+        body+='<p>边界核对：'+link('source_passives','12738','Elementalist升华记录12738')+'的词句可完整解析，但不在标准可分配图，升华点数来源仍未接入。火焰精通36313的加成词句可解析，但其“50% increased Ignite Duration on you”未实现，全部8处入口仍按完整效果门槛锁定；这两类记录均未新增可分配机制。</p>'
+        transfer=fire['transfer_example'];source=transfer['source'];recipient=transfer['recipient']
+        body+='<h3>余烬只继承一次</h3>'+facts([('施放加成',fire_value('transfer-fraction',transfer['fraction'],True)),('已增强的来源每秒火伤',fire_value('transfer-source-dps',source['raw_dps'])),('接收者每秒火伤',fire_value('transfer-recipient-dps',recipient['raw_dps'])),('开始 / 传播时刻',fire_value('transfer-started-at',transfer['started_at'])+' / '+fire_value('transfer-at',transfer['transferred_at'])),('共同绝对截止时间',fire_value('transfer-expiry',source['provenance']['ember_expiry'])),('接收者剩余秒数',fire_value('transfer-duration',transfer['transfer']['burn']['duration']))])
+        migration=fire['migration_example']
+        body+='<p>'+esc(fire['legacy_rule'])+'。同源迁移示例 '+str(migration['from_version'])+' → '+str(migration['to_version'])+'，变化字段仅 '+esc('、'.join(migration['changed_fields']))+'。</p><p>未接入：'+esc('、'.join(fire['unsupported']))+'；本批没有新增图像。</p>'
+        body+='<p>'+link('rules','burning','点燃与燃烧')+' · '+link('rules','ember_proliferation')+' · '+link('rules','shock')+' · '+link('rules','source_tree','完整源树与分配规则')+' · <a href="source-tree-coverage.json">同源执行覆盖JSON</a></p>'
+        rule_defs.append(('source_fire_dot','源天赋火焰持续伤害加成','合计源节点的无条件火焰持续伤害加成，在获准施放时冻结，只乘入一次燃烧每秒伤害。',body,'implemented'))
     if 'source_spatial' in data:
         spatial=data['source_spatial']
         rows=[]

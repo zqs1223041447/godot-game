@@ -1,6 +1,6 @@
 # Fire damage-over-time passive specialization
 
-Base: published v0.52 commit `0abadf05c94545fb7585f5a7565cd7a8930c26cd`. This checkpoint contains implementation and successful first import; focused acceptance is pending.
+Base: published v0.52 commit `0abadf05c94545fb7585f5a7565cd7a8930c26cd`. Implementation, focused source/schema/consumer/UI acceptance and genuine zero-source burn equivalence are complete; final packaging remains a separate step.
 
 Only the exact source line `+X% to Fire Damage over Time Multiplier` is added. Its additive stat is `fire_dot_multiplier_add`; a ten-percentage-point source contributes0.10. The eight ordinary nodes are4713(4%),5916(6%),13559(5%),31462(5%),54396(4%),2550(10%),11924(10%),29049(12%). All other lines on these nodes already execute. Node identities, class starts and graph edges remain unchanged; an unsupported additional line still prevents allocating the whole node.
 

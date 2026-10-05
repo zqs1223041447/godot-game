@@ -31,3 +31,20 @@ python3 tools/build_reference.py --check
 ## 渲染验证状态
 
 当前环境的云浏览器拒绝 file:// 协议，并阻止 localhost 预览。没有绕过限制。因此本次未验证浏览器的实际渲染、200% 缩放、窄视口、搜索/筛选点击、历史返回或树图点击。静态检查和运行时一致性检查已经执行；不能把这些检查当作完整浏览器验收。
+
+
+## v0.53.0 火焰持续伤害加成
+
+新增规则入口为 `index.html#rules-source_fire_dot`。`catalog.json.source_fire_dot` 直接导出实际 SourceTreeRuntime、CombatData、SkillCompiler、BurnRuntime、EmberProliferationRules 与 schema31→32 迁移结果；HTML 只展示已算好的燃烧每秒伤害与总量，不再次乘加成。默认导出命令还通过原 `export_source_execution_coverage.gd.build_report()` 同时刷新 `source-tree-coverage.json`，无需另一次 Godot 启动。
+
+本批新增8个可分配的完整标准普通节点。七职业各自非起点普通节点可达数676→685，额外的第9个可达节点1550原本已完整。火焰精通36313仍因未支持的自身点燃时长词句而锁定；Elementalist记录12738虽可解析完整词句，但仍不在标准可分配图，未接入升华点数来源。
+
+当前批次聚焦检查：
+
+```sh
+python3 tools/build_reference.py --check
+python3 tests/fire_dot_reference_test.py
+node --check docs/reference/reference.js
+```
+
+检查包括8节点、56条职业路径、8组真实编译器前后比较、3条完整合法路线、93个渲染数值、全部内部链接、无来源/零值编译结构、余烬继承与67张旧图像的字节指纹。原始源词句与几何保持；新增字段为明确的schema32执行证据。本批没有新增图像、装备词缀池或宝石，没有运行历史完整套件、导入工程、性能长跑或截图验收。详细命令、退出码和日志见 `../qa/v053-reference/`。

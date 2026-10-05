@@ -1,0 +1,177 @@
+{
+  "base_commit": "0abadf05c94545fb7585f5a7565cd7a8930c26cd",
+  "counts": {
+    "source_rules_and_graph": 6882,
+    "migration_and_transactions": 393,
+    "pure_consumers": 836,
+    "actual_main": 152,
+    "readonly_preview": 9
+  },
+  "total_checks": 8272,
+  "reference_validation_separate": "docs/qa/v053-reference/summary.json",
+  "all_final_subsets_exit_zero": true,
+  "all_final_subsets_no_engine_errors": true,
+  "new_full_standard_nodes": [
+    "4713",
+    "5916",
+    "13559",
+    "31462",
+    "54396",
+    "2550",
+    "11924",
+    "29049"
+  ],
+  "newly_reachable_existing_node": "1550",
+  "locked_mastery": 36313,
+  "nonstandard_nonallocatable_node": "12738",
+  "old_behavior": {
+    "ticks": 120,
+    "kills": 3,
+    "hits": 28,
+    "positive_burn_segments": 1226,
+    "observation_bytes": 19017000,
+    "save_bytes": 12178,
+    "exact_equal": true,
+    "comparison": "docs/qa/v053-consumers/20261005T150510561375Z-legacy-comparison.json"
+  },
+  "reuse_boundaries": [
+    "First source/rules fixture lacked a local type annotation; original failure retained.",
+    "First actual-main A/B reused monotonic identity counters; only fixture initialization corrected, production unchanged.",
+    "Initial zero-source encounter had no positive burn segments; retained as weaker evidence, final paired fixture actually burns on all120frames.",
+    "Production gameplay files remain byte-identical since first import; version/reference-only updates occur after focused tests.",
+    "Derived character stats add zero Fire DoT for the aggregator; no-source cast/profile omit field and preserve original bytes.",
+    "All60originalpaintings/67referencePNGs and1071glyph font remain same bytes; current string coverage missing0."
+  ],
+  "logs": {
+    "docs/qa/v053/import-initial.log": {
+      "bytes": 67766,
+      "sha256": "c5f5010564d1f056bb179cf2505328aa91d70b362869ab8f3cadda6446dbc6e2"
+    },
+    "docs/qa/v053/final-import.log": {
+      "bytes": 2117,
+      "sha256": "f2e27d9203bf375f3642f8e4bf9a6b1b7f5d2898dc2d3603d0a945b066f28c8e"
+    },
+    "docs/qa/v053/packed-probe-parse.log": {
+      "bytes": 73,
+      "sha256": "a9912b85473f126d3f4f63ec824170c828df3473a292f866dde86cafda5b66da"
+    },
+    "docs/qa/v053-source/source_fire_dot_migration-avqgdl91.log": {
+      "bytes": 596,
+      "sha256": "6b386b71e8441d9c761ff550c08adabaf98a45d4f9808a3177bdd5e97cc536b5"
+    },
+    "docs/qa/v053-source/source_fire_dot_rules-uh9t21o6.log": {
+      "bytes": 411,
+      "sha256": "9a914f60364bba57e9fffbcf51fb1f7cf9537be73ffddf9350a9b02a6bc9128e"
+    },
+    "docs/qa/v053-source/source_fire_dot_migration-vln10ohh.log": {
+      "bytes": 123,
+      "sha256": "aa51526acc32632a1ee87031cfc6769c5f39eabe5d5d5e07649905a2a2f1e3ce"
+    },
+    "docs/qa/v053-source/source_fire_dot_rules-avqgdl91.log": {
+      "bytes": 120,
+      "sha256": "3de1e80efa39e5e2d8f78ed9698a49eeeaa12ede0cc4c43882ffb69cc35de0c8"
+    },
+    "docs/qa/v053-source/capture-released31.log": {
+      "bytes": 166,
+      "sha256": "f7cdb6d9bd0ccce883a72a4f4fc2db66d47c6e8ce8f0d3fbc5a253a0fc842a5a"
+    },
+    "docs/qa/v053-reference/javascript-syntax.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v053-reference/second-focused-reference.stderr.log": {
+      "bytes": 577,
+      "sha256": "a8241f7c7300f88bd1f3f883fa885f1db73bc0415d699109a3bd95db5d210bc1"
+    },
+    "docs/qa/v053-reference/godot-export.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v053-reference/javascript-syntax.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v053-reference/godot-export.stdout.log": {
+      "bytes": 205,
+      "sha256": "881c3c8a76e46d3e862aafeb146330317ff3f9b9ded3708c83c5c5e40bdf8c0b"
+    },
+    "docs/qa/v053-reference/focused-reference.stdout.log": {
+      "bytes": 343,
+      "sha256": "36b66c69f54e8b96721e0ff5dc0dfd1ed4d7df59f2c063280aace62c41aae102"
+    },
+    "docs/qa/v053-reference/initial-focused-reference.stderr.log": {
+      "bytes": 482,
+      "sha256": "ed0a7d911a02d49ecfc26fcdd85d94e1129164cc3d5a41c2dfd87c05fac392ff"
+    },
+    "docs/qa/v053-reference/python-check.stdout.log": {
+      "bytes": 52,
+      "sha256": "65d47533eaf556129a1f3a295db12ab1bc36a8df0770c71cb9378490d54d03ba"
+    },
+    "docs/qa/v053-reference/focused-reference.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v053-reference/python-build.stdout.log": {
+      "bytes": 51,
+      "sha256": "7a653ff2b1c77b0a982b7d77441414b03a6a17bb1859caa8eb5aa6c99e5d9915"
+    },
+    "docs/qa/v053-reference/python-build.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v053-reference/initial-focused-reference.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v053-reference/python-check.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v053-reference/second-focused-reference.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v053-root-ui/preview.log": {
+      "bytes": 112,
+      "sha256": "4fff8dd6d6d51ef221325a71151bcc064f90d6d769b66c613ec9c27455a4c4ba"
+    },
+    "docs/qa/v053-consumers/20261005T150047074891Z-gameplay.log.txt": {
+      "bytes": 2490,
+      "sha256": "1c8439f604540313373b9a2f597530c39455db9188f4d57ae09bcac0c7646b75"
+    },
+    "docs/qa/v053-consumers/legacy-observation-inspection.log.txt": {
+      "bytes": 2713,
+      "sha256": "6c482d6a02145097a2d4d29994245b46e02d62ffcaf1761fd67e3e570f9703ac"
+    },
+    "docs/qa/v053-consumers/20261005T150321367880Z-legacy-old.log.txt": {
+      "bytes": 509,
+      "sha256": "f16e1215a998688d019c715adbe08c066cdbc4ced10edfcc148b1402127884cc"
+    },
+    "docs/qa/v053-consumers/20261005T150510561375Z-legacy-old.log.txt": {
+      "bytes": 574,
+      "sha256": "89c24889077d9b860d5e075313d1177661418d35695333254cf2ac49212c9376"
+    },
+    "docs/qa/v053-consumers/20261005T150321367880Z-legacy-new.log.txt": {
+      "bytes": 509,
+      "sha256": "f16e1215a998688d019c715adbe08c066cdbc4ced10edfcc148b1402127884cc"
+    },
+    "docs/qa/v053-consumers/20261005T145710829605Z-consumer.log.txt": {
+      "bytes": 282,
+      "sha256": "6a86f22bea2bedb92d4f472e82fd7c69c3f21149aa4b98c4d60f8c1532971a16"
+    },
+    "docs/qa/v053-consumers/20261005T150309992354Z-gameplay.log.txt": {
+      "bytes": 305,
+      "sha256": "c6b11b453cef1f7e2825236df58323e079d11cc5cbd73ccd1c0eb129940c4dca"
+    },
+    "docs/qa/v053-consumers/20261005T150510561375Z-legacy-new.log.txt": {
+      "bytes": 574,
+      "sha256": "89c24889077d9b860d5e075313d1177661418d35695333254cf2ac49212c9376"
+    }
+  },
+  "not_performed": [
+    "historical full suite",
+    "600-second endurance",
+    "per-version screenshots",
+    "Windows hardware FPS"
+  ]
+}

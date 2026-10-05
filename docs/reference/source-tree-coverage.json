@@ -989,37 +989,6 @@
 					"via_reachable_node_id": "487"
 				},
 				{
-					"name": "Burning Damage Multiplier",
-					"node_id": "13559",
-					"shortest_executable_prefix": [
-						"58833",
-						"2151",
-						"37690",
-						"48423",
-						"6204",
-						"63976",
-						"33479",
-						"10490",
-						"47251",
-						"7388",
-						"60398",
-						"46340",
-						"42760",
-						"36678",
-						"39841",
-						"63447",
-						"44184",
-						"61804",
-						"13559"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"+5% to Fire Damage over Time Multiplier"
-					],
-					"via_reachable_node_id": "61804"
-				},
-				{
 					"name": "Reduced Skill Duration",
 					"node_id": "14090",
 					"shortest_executable_prefix": [
@@ -3510,6 +3479,36 @@
 					"via_reachable_node_id": "3656"
 				},
 				{
+					"name": "Life Gain on Hit",
+					"node_id": "26820",
+					"shortest_executable_prefix": [
+						"58833",
+						"48828",
+						"33508",
+						"36881",
+						"35503",
+						"19144",
+						"16167",
+						"10829",
+						"238",
+						"11497",
+						"5408",
+						"56589",
+						"23471",
+						"5237",
+						"30679",
+						"22266",
+						"50038",
+						"26820"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"Gain 6 Life per Enemy Hit with Attacks"
+					],
+					"via_reachable_node_id": "50038"
+				},
+				{
 					"name": "Mace Damage",
 					"node_id": "27134",
 					"shortest_executable_prefix": [
@@ -4016,11 +4015,12 @@
 						"5408",
 						"29359"
 					],
-					"status": "unsupported",
-					"supported": [],
+					"status": "partial",
+					"supported": [
+						"0.4% of Physical Attack Damage Leeched as Life"
+					],
 					"unsupported": [
 						"12% increased Attack Damage",
-						"0.4% of Physical Attack Damage Leeched as Life",
 						"12% increased Damage with Ailments from Attack Skills"
 					],
 					"via_reachable_node_id": "5408"
@@ -5742,34 +5742,6 @@
 					"via_reachable_node_id": "5972"
 				},
 				{
-					"name": "Life and Mana Leech",
-					"node_id": "36704",
-					"shortest_executable_prefix": [
-						"58833",
-						"48828",
-						"33508",
-						"36881",
-						"35503",
-						"19144",
-						"16167",
-						"10829",
-						"238",
-						"11497",
-						"5408",
-						"56589",
-						"23471",
-						"20010",
-						"36704"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"0.4% of Attack Damage Leeched as Life",
-						"0.4% of Attack Damage Leeched as Mana"
-					],
-					"via_reachable_node_id": "20010"
-				},
-				{
 					"name": "Trap Damage",
 					"node_id": "36877",
 					"shortest_executable_prefix": [
@@ -6019,35 +5991,6 @@
 					"via_reachable_node_id": "56460"
 				},
 				{
-					"name": "Life Leech",
-					"node_id": "37800",
-					"shortest_executable_prefix": [
-						"58833",
-						"48828",
-						"33508",
-						"36881",
-						"35503",
-						"19144",
-						"28330",
-						"46578",
-						"30733",
-						"49178",
-						"43374",
-						"22703",
-						"14056",
-						"34400",
-						"24914",
-						"61262",
-						"37800"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"0.6% of Physical Attack Damage Leeched as Life"
-					],
-					"via_reachable_node_id": "61262"
-				},
-				{
 					"name": "Bow Damage",
 					"node_id": "38149",
 					"shortest_executable_prefix": [
@@ -6195,6 +6138,41 @@
 						"Attacks with Melee Weapons deal 12% increased Damage with Ailments"
 					],
 					"via_reachable_node_id": "58449"
+				},
+				{
+					"name": "Ignite Chance and Duration",
+					"node_id": "38789",
+					"shortest_executable_prefix": [
+						"58833",
+						"2151",
+						"37690",
+						"48423",
+						"6204",
+						"63976",
+						"33479",
+						"10490",
+						"47251",
+						"7388",
+						"60398",
+						"46340",
+						"42760",
+						"36678",
+						"39841",
+						"63447",
+						"44184",
+						"61804",
+						"13559",
+						"31462",
+						"11924",
+						"38789"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"15% increased Ignite Duration on Enemies",
+						"15% chance to Ignite"
+					],
+					"via_reachable_node_id": "11924"
 				},
 				{
 					"name": "Chain Distance",
@@ -6810,40 +6788,6 @@
 						"+2% Chance to Block Attack Damage while wielding a Staff"
 					],
 					"via_reachable_node_id": "15631"
-				},
-				{
-					"name": "Life Leech Speed",
-					"node_id": "41819",
-					"shortest_executable_prefix": [
-						"58833",
-						"48828",
-						"33508",
-						"36881",
-						"35503",
-						"19144",
-						"16167",
-						"10829",
-						"238",
-						"11497",
-						"5408",
-						"63139",
-						"61306",
-						"60942",
-						"41866",
-						"63843",
-						"27283",
-						"5616",
-						"38662",
-						"6538",
-						"49978",
-						"41819"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"60% increased total Recovery per second from Life Leech"
-					],
-					"via_reachable_node_id": "49978"
 				},
 				{
 					"name": "Ancestral Bond",
@@ -8160,34 +8104,6 @@
 					"via_reachable_node_id": "33783"
 				},
 				{
-					"name": "Burning Damage Multiplier",
-					"node_id": "4713",
-					"shortest_executable_prefix": [
-						"58833",
-						"2151",
-						"37690",
-						"48423",
-						"6204",
-						"63976",
-						"33479",
-						"10490",
-						"47251",
-						"7388",
-						"60398",
-						"46340",
-						"42760",
-						"36678",
-						"7444",
-						"4713"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"+4% to Fire Damage over Time Multiplier"
-					],
-					"via_reachable_node_id": "7444"
-				},
-				{
 					"name": "Life and Energy Shield on Kill",
 					"node_id": "47362",
 					"shortest_executable_prefix": [
@@ -8651,6 +8567,35 @@
 					"via_reachable_node_id": "24083"
 				},
 				{
+					"name": "Mana on Hit",
+					"node_id": "49481",
+					"shortest_executable_prefix": [
+						"58833",
+						"48828",
+						"33508",
+						"36881",
+						"35503",
+						"19144",
+						"16167",
+						"10829",
+						"238",
+						"11497",
+						"5408",
+						"63139",
+						"61306",
+						"60942",
+						"32555",
+						"51420",
+						"49481"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"Gain 3 Mana per Enemy Hit with Attacks"
+					],
+					"via_reachable_node_id": "51420"
+				},
+				{
 					"name": "Spell Suppression and Energy Shield Recharge Rate",
 					"node_id": "49515",
 					"shortest_executable_prefix": [
@@ -8908,35 +8853,6 @@
 						"+1% to maximum Lightning Resistance"
 					],
 					"via_reachable_node_id": "35706"
-				},
-				{
-					"name": "Life Leech",
-					"node_id": "50038",
-					"shortest_executable_prefix": [
-						"58833",
-						"48828",
-						"33508",
-						"36881",
-						"35503",
-						"19144",
-						"16167",
-						"10829",
-						"238",
-						"11497",
-						"5408",
-						"56589",
-						"23471",
-						"5237",
-						"30679",
-						"22266",
-						"50038"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"0.5% of Attack Damage Leeched as Life"
-					],
-					"via_reachable_node_id": "22266"
 				},
 				{
 					"name": "Physical Bow Damage",
@@ -9342,34 +9258,6 @@
 						"12% increased Cold Damage with Attack Skills"
 					],
 					"via_reachable_node_id": "5237"
-				},
-				{
-					"name": "Mana Leech",
-					"node_id": "51420",
-					"shortest_executable_prefix": [
-						"58833",
-						"48828",
-						"33508",
-						"36881",
-						"35503",
-						"19144",
-						"16167",
-						"10829",
-						"238",
-						"11497",
-						"5408",
-						"63139",
-						"61306",
-						"60942",
-						"32555",
-						"51420"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"0.4% of Attack Damage Leeched as Mana"
-					],
-					"via_reachable_node_id": "32555"
 				},
 				{
 					"name": "Druidic Rite",
@@ -9900,6 +9788,35 @@
 					"via_reachable_node_id": "2913"
 				},
 				{
+					"name": "Magmatic Strikes",
+					"node_id": "5430",
+					"shortest_executable_prefix": [
+						"58833",
+						"2151",
+						"37690",
+						"48423",
+						"6204",
+						"63976",
+						"16775",
+						"46910",
+						"33740",
+						"15405",
+						"50862",
+						"50422",
+						"10221",
+						"54396",
+						"2550",
+						"1550",
+						"5430"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"Every 10 seconds, gain 30% of Physical Damage\nas Extra Fire Damage for 4 seconds"
+					],
+					"via_reachable_node_id": "1550"
+				},
+				{
 					"name": "Acrobatics",
 					"node_id": "54307",
 					"shortest_executable_prefix": [
@@ -9958,32 +9875,6 @@
 						"Sword Attacks deal 12% increased Damage with Hits and Ailments"
 					],
 					"via_reachable_node_id": "12412"
-				},
-				{
-					"name": "Burning Damage Multiplier",
-					"node_id": "54396",
-					"shortest_executable_prefix": [
-						"58833",
-						"2151",
-						"37690",
-						"48423",
-						"6204",
-						"63976",
-						"16775",
-						"46910",
-						"33740",
-						"15405",
-						"50862",
-						"50422",
-						"10221",
-						"54396"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"+4% to Fire Damage over Time Multiplier"
-					],
-					"via_reachable_node_id": "10221"
 				},
 				{
 					"name": "Staff Area of Effect",
@@ -11919,35 +11810,6 @@
 					"via_reachable_node_id": "28574"
 				},
 				{
-					"name": "Life Leech and Attack Speed",
-					"node_id": "62108",
-					"shortest_executable_prefix": [
-						"58833",
-						"48828",
-						"33508",
-						"36881",
-						"35503",
-						"19144",
-						"28330",
-						"46578",
-						"30733",
-						"49178",
-						"43374",
-						"31080",
-						"49412",
-						"40653",
-						"62108"
-					],
-					"status": "partial",
-					"supported": [
-						"3% increased Attack Speed"
-					],
-					"unsupported": [
-						"0.4% of Physical Attack Damage Leeched as Life"
-					],
-					"via_reachable_node_id": "40653"
-				},
-				{
 					"name": "Melee Damage",
 					"node_id": "62319",
 					"shortest_executable_prefix": [
@@ -11975,6 +11837,35 @@
 						"Attacks with Melee Weapons deal 4% increased Damage with Ailments"
 					],
 					"via_reachable_node_id": "34400"
+				},
+				{
+					"name": "Chance to Ignite",
+					"node_id": "6245",
+					"shortest_executable_prefix": [
+						"58833",
+						"2151",
+						"37690",
+						"48423",
+						"6204",
+						"63976",
+						"33479",
+						"10490",
+						"47251",
+						"7388",
+						"60398",
+						"46340",
+						"42760",
+						"36678",
+						"7444",
+						"4713",
+						"6245"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"20% chance to Ignite"
+					],
+					"via_reachable_node_id": "4713"
 				},
 				{
 					"name": "Shock Chance",
@@ -12581,12 +12472,13 @@
 						"43374",
 						"64816"
 					],
-					"status": "unsupported",
-					"supported": [],
+					"status": "partial",
+					"supported": [
+						"0.4% of Physical Attack Damage Leeched as Life"
+					],
 					"unsupported": [
 						"12% increased Physical Damage with Two Handed Melee Weapons",
-						"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments",
-						"0.4% of Physical Attack Damage Leeched as Life"
+						"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments"
 					],
 					"via_reachable_node_id": "43374"
 				},
@@ -13163,6 +13055,39 @@
 					"via_reachable_node_id": "24914"
 				},
 				{
+					"name": "Ignite Chance and Duration",
+					"node_id": "8624",
+					"shortest_executable_prefix": [
+						"58833",
+						"2151",
+						"37690",
+						"48423",
+						"6204",
+						"63976",
+						"33479",
+						"10490",
+						"47251",
+						"7388",
+						"60398",
+						"46340",
+						"42760",
+						"36678",
+						"39841",
+						"63447",
+						"44184",
+						"61804",
+						"13559",
+						"8624"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"15% increased Ignite Duration on Enemies",
+						"15% chance to Ignite"
+					],
+					"via_reachable_node_id": "13559"
+				},
+				{
 					"name": "Cast Speed",
 					"node_id": "8643",
 					"shortest_executable_prefix": [
@@ -13432,18 +13357,18 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 451,
+			"blocked_frontier_count": 448,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
-				"partial": 117,
-				"unsupported": 334
+				"partial": 118,
+				"unsupported": 330
 			},
 			"class_id": 0,
 			"class_name": "Scion",
 			"excluded_adjacent_counts": {
 				"blighted_only": 0,
-				"mastery_not_path": 30,
+				"mastery_not_path": 39,
 				"other_class_start": 6,
 				"position_proxy": 0
 			},
@@ -13452,6 +13377,11 @@
 					"node_id": "10729",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "23690"
+				},
+				{
+					"node_id": "11505",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "29049"
 				},
 				{
 					"node_id": "12125",
@@ -13484,9 +13414,19 @@
 					"via_reachable_node_id": "21435"
 				},
 				{
+					"node_id": "25446",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "1382"
+				},
+				{
 					"node_id": "26148",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "47484"
+				},
+				{
+					"node_id": "28862",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "63422"
 				},
 				{
 					"node_id": "30393",
@@ -13509,6 +13449,11 @@
 					"via_reachable_node_id": "48298"
 				},
 				{
+					"node_id": "34927",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "11924"
+				},
+				{
 					"node_id": "35085",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "30471"
@@ -13519,9 +13464,24 @@
 					"via_reachable_node_id": "2225"
 				},
 				{
+					"node_id": "35859",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "22356"
+				},
+				{
+					"node_id": "40383",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "61039"
+				},
+				{
 					"node_id": "42533",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "52230"
+				},
+				{
+					"node_id": "43495",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "62094"
 				},
 				{
 					"node_id": "43818",
@@ -13542,6 +13502,11 @@
 					"node_id": "47212",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "41119"
+				},
+				{
+					"node_id": "48267",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "2550"
 				},
 				{
 					"node_id": "50459",
@@ -13604,6 +13569,11 @@
 					"via_reachable_node_id": "10835"
 				},
 				{
+					"node_id": "6384",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "65053"
+				},
+				{
 					"node_id": "63861",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "61981"
@@ -13629,9 +13599,9 @@
 					"via_reachable_node_id": "47306"
 				}
 			],
-			"reachable_count_excluding_start": 656,
-			"reachable_count_including_start": 657,
-			"reachable_full_direct_effect_nodes": 641,
+			"reachable_count_excluding_start": 685,
+			"reachable_count_including_start": 686,
+			"reachable_full_direct_effect_nodes": 670,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -13655,6 +13625,7 @@
 				"11688",
 				"11700",
 				"11859",
+				"11924",
 				"1203",
 				"12250",
 				"12412",
@@ -13669,9 +13640,11 @@
 				"1325",
 				"13322",
 				"1346",
+				"13559",
 				"13714",
 				"13753",
 				"13782",
+				"1382",
 				"13885",
 				"14021",
 				"14040",
@@ -13694,6 +13667,7 @@
 				"15228",
 				"15365",
 				"15405",
+				"1550",
 				"15549",
 				"15631",
 				"15678",
@@ -13768,6 +13742,7 @@
 				"22266",
 				"22285",
 				"22315",
+				"22356",
 				"22473",
 				"22618",
 				"22627",
@@ -13795,6 +13770,7 @@
 				"25067",
 				"25237",
 				"25260",
+				"2550",
 				"25531",
 				"25714",
 				"25757",
@@ -13820,12 +13796,14 @@
 				"27929",
 				"28012",
 				"28221",
+				"28311",
 				"28330",
 				"28475",
 				"28574",
 				"28658",
 				"28754",
 				"29005",
+				"29049",
 				"29061",
 				"29104",
 				"2913",
@@ -13833,6 +13811,7 @@
 				"29292",
 				"29353",
 				"29379",
+				"29547",
 				"29629",
 				"29781",
 				"29933",
@@ -13851,6 +13830,7 @@
 				"31080",
 				"31153",
 				"31315",
+				"31462",
 				"31471",
 				"31583",
 				"31628",
@@ -13904,6 +13884,7 @@
 				"35283",
 				"35288",
 				"35503",
+				"35507",
 				"35556",
 				"35568",
 				"35706",
@@ -13916,6 +13897,7 @@
 				"36221",
 				"36222",
 				"36287",
+				"3634",
 				"36412",
 				"3644",
 				"36452",
@@ -13926,6 +13908,7 @@
 				"36634",
 				"36678",
 				"367",
+				"36704",
 				"3676",
 				"36774",
 				"36858",
@@ -13938,6 +13921,7 @@
 				"37619",
 				"37671",
 				"37690",
+				"37800",
 				"37884",
 				"37999",
 				"38048",
@@ -13958,6 +13942,7 @@
 				"38906",
 				"39023",
 				"39211",
+				"39530",
 				"39631",
 				"39648",
 				"39678",
@@ -13991,6 +13976,7 @@
 				"41536",
 				"41635",
 				"41689",
+				"41819",
 				"41866",
 				"41967",
 				"42104",
@@ -14007,6 +13993,7 @@
 				"43374",
 				"43608",
 				"4367",
+				"4378",
 				"43787",
 				"4397",
 				"44184",
@@ -14046,6 +14033,7 @@
 				"46910",
 				"47030",
 				"47062",
+				"4713",
 				"47251",
 				"47306",
 				"47312",
@@ -14079,6 +14067,7 @@
 				"49900",
 				"49929",
 				"49978",
+				"50038",
 				"50197",
 				"50264",
 				"50306",
@@ -14091,6 +14080,7 @@
 				"50969",
 				"51220",
 				"51291",
+				"51420",
 				"5152",
 				"51786",
 				"51801",
@@ -14116,7 +14106,9 @@
 				"54127",
 				"54142",
 				"54338",
+				"54396",
 				"5456",
+				"54872",
 				"55085",
 				"55247",
 				"55332",
@@ -14163,6 +14155,7 @@
 				"58833",
 				"58854",
 				"59005",
+				"5916",
 				"59220",
 				"59252",
 				"59306",
@@ -14192,6 +14185,7 @@
 				"60803",
 				"60942",
 				"61007",
+				"61039",
 				"61198",
 				"61217",
 				"61262",
@@ -14210,7 +14204,9 @@
 				"62021",
 				"6204",
 				"62069",
+				"62094",
 				"62103",
+				"62108",
 				"6230",
 				"62303",
 				"62363",
@@ -14226,6 +14222,7 @@
 				"63228",
 				"63282",
 				"63398",
+				"63422",
 				"63439",
 				"63447",
 				"6359",
@@ -14248,6 +14245,7 @@
 				"64709",
 				"65033",
 				"65034",
+				"65053",
 				"65167",
 				"65203",
 				"65308",
@@ -14282,6 +14280,7 @@
 				"8938",
 				"8948",
 				"9009",
+				"9171",
 				"918",
 				"9206",
 				"9355",
@@ -15325,40 +15324,6 @@
 						"Gain 1 Rage on Melee Hit"
 					],
 					"via_reachable_node_id": "487"
-				},
-				{
-					"name": "Burning Damage Multiplier",
-					"node_id": "13559",
-					"shortest_executable_prefix": [
-						"47175",
-						"31628",
-						"9511",
-						"23881",
-						"26523",
-						"44606",
-						"50862",
-						"50422",
-						"50570",
-						"29353",
-						"44202",
-						"23027",
-						"60472",
-						"26270",
-						"64210",
-						"7444",
-						"36678",
-						"39841",
-						"63447",
-						"44184",
-						"61804",
-						"13559"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"+5% to Fire Damage over Time Multiplier"
-					],
-					"via_reachable_node_id": "61804"
 				},
 				{
 					"name": "Reduced Skill Duration",
@@ -17980,6 +17945,39 @@
 					"via_reachable_node_id": "3656"
 				},
 				{
+					"name": "Life Gain on Hit",
+					"node_id": "26820",
+					"shortest_executable_prefix": [
+						"47175",
+						"50904",
+						"6981",
+						"36543",
+						"49412",
+						"31080",
+						"43374",
+						"30691",
+						"476",
+						"24865",
+						"34031",
+						"56001",
+						"17201",
+						"19711",
+						"20010",
+						"23471",
+						"5237",
+						"30679",
+						"22266",
+						"50038",
+						"26820"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"Gain 6 Life per Enemy Hit with Attacks"
+					],
+					"via_reachable_node_id": "50038"
+				},
+				{
 					"name": "Mace Damage",
 					"node_id": "27134",
 					"shortest_executable_prefix": [
@@ -18527,11 +18525,12 @@
 						"5408",
 						"29359"
 					],
-					"status": "unsupported",
-					"supported": [],
+					"status": "partial",
+					"supported": [
+						"0.4% of Physical Attack Damage Leeched as Life"
+					],
 					"unsupported": [
 						"12% increased Attack Damage",
-						"0.4% of Physical Attack Damage Leeched as Life",
 						"12% increased Damage with Ailments from Attack Skills"
 					],
 					"via_reachable_node_id": "5408"
@@ -20375,35 +20374,6 @@
 					"via_reachable_node_id": "5972"
 				},
 				{
-					"name": "Life and Mana Leech",
-					"node_id": "36704",
-					"shortest_executable_prefix": [
-						"47175",
-						"50904",
-						"6981",
-						"36543",
-						"49412",
-						"31080",
-						"43374",
-						"30691",
-						"476",
-						"24865",
-						"34031",
-						"56001",
-						"17201",
-						"19711",
-						"20010",
-						"36704"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"0.4% of Attack Damage Leeched as Life",
-						"0.4% of Attack Damage Leeched as Mana"
-					],
-					"via_reachable_node_id": "20010"
-				},
-				{
 					"name": "Trap Damage",
 					"node_id": "36877",
 					"shortest_executable_prefix": [
@@ -20655,31 +20625,6 @@
 					"via_reachable_node_id": "56460"
 				},
 				{
-					"name": "Life Leech",
-					"node_id": "37800",
-					"shortest_executable_prefix": [
-						"47175",
-						"50904",
-						"6981",
-						"36543",
-						"49412",
-						"31080",
-						"43374",
-						"22703",
-						"14056",
-						"34400",
-						"24914",
-						"61262",
-						"37800"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"0.6% of Physical Attack Damage Leeched as Life"
-					],
-					"via_reachable_node_id": "61262"
-				},
-				{
 					"name": "Bow Damage",
 					"node_id": "38149",
 					"shortest_executable_prefix": [
@@ -20810,6 +20755,44 @@
 						"Attacks with Melee Weapons deal 12% increased Damage with Ailments"
 					],
 					"via_reachable_node_id": "58449"
+				},
+				{
+					"name": "Ignite Chance and Duration",
+					"node_id": "38789",
+					"shortest_executable_prefix": [
+						"47175",
+						"31628",
+						"9511",
+						"23881",
+						"26523",
+						"44606",
+						"50862",
+						"50422",
+						"50570",
+						"29353",
+						"44202",
+						"23027",
+						"60472",
+						"26270",
+						"64210",
+						"7444",
+						"36678",
+						"39841",
+						"63447",
+						"44184",
+						"61804",
+						"13559",
+						"31462",
+						"11924",
+						"38789"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"15% increased Ignite Duration on Enemies",
+						"15% chance to Ignite"
+					],
+					"via_reachable_node_id": "11924"
 				},
 				{
 					"name": "Chain Distance",
@@ -21449,45 +21432,6 @@
 						"+2% Chance to Block Attack Damage while wielding a Staff"
 					],
 					"via_reachable_node_id": "15631"
-				},
-				{
-					"name": "Life Leech Speed",
-					"node_id": "41819",
-					"shortest_executable_prefix": [
-						"47175",
-						"50904",
-						"6981",
-						"36543",
-						"49412",
-						"31080",
-						"43374",
-						"30691",
-						"476",
-						"24865",
-						"34031",
-						"56001",
-						"17201",
-						"19711",
-						"20010",
-						"23471",
-						"3469",
-						"64709",
-						"60942",
-						"41866",
-						"63843",
-						"27283",
-						"5616",
-						"38662",
-						"6538",
-						"49978",
-						"41819"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"60% increased total Recovery per second from Life Leech"
-					],
-					"via_reachable_node_id": "49978"
 				},
 				{
 					"name": "Ancestral Bond",
@@ -22860,35 +22804,6 @@
 					"via_reachable_node_id": "33783"
 				},
 				{
-					"name": "Burning Damage Multiplier",
-					"node_id": "4713",
-					"shortest_executable_prefix": [
-						"47175",
-						"31628",
-						"9511",
-						"23881",
-						"26523",
-						"44606",
-						"50862",
-						"50422",
-						"50570",
-						"29353",
-						"44202",
-						"23027",
-						"60472",
-						"26270",
-						"64210",
-						"7444",
-						"4713"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"+4% to Fire Damage over Time Multiplier"
-					],
-					"via_reachable_node_id": "7444"
-				},
-				{
 					"name": "Life and Energy Shield on Kill",
 					"node_id": "47362",
 					"shortest_executable_prefix": [
@@ -23355,6 +23270,40 @@
 					"via_reachable_node_id": "24083"
 				},
 				{
+					"name": "Mana on Hit",
+					"node_id": "49481",
+					"shortest_executable_prefix": [
+						"47175",
+						"50904",
+						"6981",
+						"36543",
+						"49412",
+						"31080",
+						"43374",
+						"30691",
+						"476",
+						"24865",
+						"34031",
+						"56001",
+						"17201",
+						"19711",
+						"20010",
+						"23471",
+						"3469",
+						"64709",
+						"60942",
+						"32555",
+						"51420",
+						"49481"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"Gain 3 Mana per Enemy Hit with Attacks"
+					],
+					"via_reachable_node_id": "51420"
+				},
+				{
 					"name": "Spell Suppression and Energy Shield Recharge Rate",
 					"node_id": "49515",
 					"shortest_executable_prefix": [
@@ -23621,38 +23570,6 @@
 						"+1% to maximum Lightning Resistance"
 					],
 					"via_reachable_node_id": "35706"
-				},
-				{
-					"name": "Life Leech",
-					"node_id": "50038",
-					"shortest_executable_prefix": [
-						"47175",
-						"50904",
-						"6981",
-						"36543",
-						"49412",
-						"31080",
-						"43374",
-						"30691",
-						"476",
-						"24865",
-						"34031",
-						"56001",
-						"17201",
-						"19711",
-						"20010",
-						"23471",
-						"5237",
-						"30679",
-						"22266",
-						"50038"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"0.5% of Attack Damage Leeched as Life"
-					],
-					"via_reachable_node_id": "22266"
 				},
 				{
 					"name": "Physical Bow Damage",
@@ -24081,39 +23998,6 @@
 						"12% increased Cold Damage with Attack Skills"
 					],
 					"via_reachable_node_id": "5237"
-				},
-				{
-					"name": "Mana Leech",
-					"node_id": "51420",
-					"shortest_executable_prefix": [
-						"47175",
-						"50904",
-						"6981",
-						"36543",
-						"49412",
-						"31080",
-						"43374",
-						"30691",
-						"476",
-						"24865",
-						"34031",
-						"56001",
-						"17201",
-						"19711",
-						"20010",
-						"23471",
-						"3469",
-						"64709",
-						"60942",
-						"32555",
-						"51420"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"0.4% of Attack Damage Leeched as Mana"
-					],
-					"via_reachable_node_id": "32555"
 				},
 				{
 					"name": "Druidic Rite",
@@ -24698,6 +24582,29 @@
 					"via_reachable_node_id": "2913"
 				},
 				{
+					"name": "Magmatic Strikes",
+					"node_id": "5430",
+					"shortest_executable_prefix": [
+						"47175",
+						"31628",
+						"9511",
+						"23881",
+						"26523",
+						"6446",
+						"10221",
+						"54396",
+						"2550",
+						"1550",
+						"5430"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"Every 10 seconds, gain 30% of Physical Damage\nas Extra Fire Damage for 4 seconds"
+					],
+					"via_reachable_node_id": "1550"
+				},
+				{
 					"name": "Acrobatics",
 					"node_id": "54307",
 					"shortest_executable_prefix": [
@@ -24766,26 +24673,6 @@
 						"Sword Attacks deal 12% increased Damage with Hits and Ailments"
 					],
 					"via_reachable_node_id": "12412"
-				},
-				{
-					"name": "Burning Damage Multiplier",
-					"node_id": "54396",
-					"shortest_executable_prefix": [
-						"47175",
-						"31628",
-						"9511",
-						"23881",
-						"26523",
-						"6446",
-						"10221",
-						"54396"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"+4% to Fire Damage over Time Multiplier"
-					],
-					"via_reachable_node_id": "10221"
 				},
 				{
 					"name": "Staff Area of Effect",
@@ -26875,27 +26762,6 @@
 					"via_reachable_node_id": "28574"
 				},
 				{
-					"name": "Life Leech and Attack Speed",
-					"node_id": "62108",
-					"shortest_executable_prefix": [
-						"47175",
-						"50904",
-						"6981",
-						"36543",
-						"49412",
-						"40653",
-						"62108"
-					],
-					"status": "partial",
-					"supported": [
-						"3% increased Attack Speed"
-					],
-					"unsupported": [
-						"0.4% of Physical Attack Damage Leeched as Life"
-					],
-					"via_reachable_node_id": "40653"
-				},
-				{
 					"name": "Melee Damage",
 					"node_id": "62319",
 					"shortest_executable_prefix": [
@@ -26919,6 +26785,36 @@
 						"Attacks with Melee Weapons deal 4% increased Damage with Ailments"
 					],
 					"via_reachable_node_id": "34400"
+				},
+				{
+					"name": "Chance to Ignite",
+					"node_id": "6245",
+					"shortest_executable_prefix": [
+						"47175",
+						"31628",
+						"9511",
+						"23881",
+						"26523",
+						"44606",
+						"50862",
+						"50422",
+						"50570",
+						"29353",
+						"44202",
+						"23027",
+						"60472",
+						"26270",
+						"64210",
+						"7444",
+						"4713",
+						"6245"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"20% chance to Ignite"
+					],
+					"via_reachable_node_id": "4713"
 				},
 				{
 					"name": "Shock Chance",
@@ -27577,12 +27473,13 @@
 						"43374",
 						"64816"
 					],
-					"status": "unsupported",
-					"supported": [],
+					"status": "partial",
+					"supported": [
+						"0.4% of Physical Attack Damage Leeched as Life"
+					],
 					"unsupported": [
 						"12% increased Physical Damage with Two Handed Melee Weapons",
-						"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments",
-						"0.4% of Physical Attack Damage Leeched as Life"
+						"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments"
 					],
 					"via_reachable_node_id": "43374"
 				},
@@ -28170,6 +28067,42 @@
 					"via_reachable_node_id": "24914"
 				},
 				{
+					"name": "Ignite Chance and Duration",
+					"node_id": "8624",
+					"shortest_executable_prefix": [
+						"47175",
+						"31628",
+						"9511",
+						"23881",
+						"26523",
+						"44606",
+						"50862",
+						"50422",
+						"50570",
+						"29353",
+						"44202",
+						"23027",
+						"60472",
+						"26270",
+						"64210",
+						"7444",
+						"36678",
+						"39841",
+						"63447",
+						"44184",
+						"61804",
+						"13559",
+						"8624"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"15% increased Ignite Duration on Enemies",
+						"15% chance to Ignite"
+					],
+					"via_reachable_node_id": "13559"
+				},
+				{
 					"name": "Cast Speed",
 					"node_id": "8643",
 					"shortest_executable_prefix": [
@@ -28453,18 +28386,18 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 451,
+			"blocked_frontier_count": 448,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
-				"partial": 117,
-				"unsupported": 334
+				"partial": 118,
+				"unsupported": 330
 			},
 			"class_id": 1,
 			"class_name": "Marauder",
 			"excluded_adjacent_counts": {
 				"blighted_only": 0,
-				"mastery_not_path": 30,
+				"mastery_not_path": 39,
 				"other_class_start": 6,
 				"position_proxy": 0
 			},
@@ -28473,6 +28406,11 @@
 					"node_id": "10729",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "23690"
+				},
+				{
+					"node_id": "11505",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "29049"
 				},
 				{
 					"node_id": "12125",
@@ -28505,9 +28443,19 @@
 					"via_reachable_node_id": "21435"
 				},
 				{
+					"node_id": "25446",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "1382"
+				},
+				{
 					"node_id": "26148",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "47484"
+				},
+				{
+					"node_id": "28862",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "63422"
 				},
 				{
 					"node_id": "30393",
@@ -28530,6 +28478,11 @@
 					"via_reachable_node_id": "48298"
 				},
 				{
+					"node_id": "34927",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "11924"
+				},
+				{
 					"node_id": "35085",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "30471"
@@ -28540,9 +28493,24 @@
 					"via_reachable_node_id": "2225"
 				},
 				{
+					"node_id": "35859",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "22356"
+				},
+				{
+					"node_id": "40383",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "61039"
+				},
+				{
 					"node_id": "42533",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "52230"
+				},
+				{
+					"node_id": "43495",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "62094"
 				},
 				{
 					"node_id": "43818",
@@ -28558,6 +28526,11 @@
 					"node_id": "47212",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "41119"
+				},
+				{
+					"node_id": "48267",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "2550"
 				},
 				{
 					"node_id": "50459",
@@ -28625,6 +28598,11 @@
 					"via_reachable_node_id": "10835"
 				},
 				{
+					"node_id": "6384",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "65053"
+				},
+				{
 					"node_id": "63861",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "61981"
@@ -28650,9 +28628,9 @@
 					"via_reachable_node_id": "47306"
 				}
 			],
-			"reachable_count_excluding_start": 656,
-			"reachable_count_including_start": 657,
-			"reachable_full_direct_effect_nodes": 641,
+			"reachable_count_excluding_start": 685,
+			"reachable_count_including_start": 686,
+			"reachable_full_direct_effect_nodes": 670,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -28676,6 +28654,7 @@
 				"11688",
 				"11700",
 				"11859",
+				"11924",
 				"1203",
 				"12250",
 				"12412",
@@ -28690,9 +28669,11 @@
 				"1325",
 				"13322",
 				"1346",
+				"13559",
 				"13714",
 				"13753",
 				"13782",
+				"1382",
 				"13885",
 				"14021",
 				"14040",
@@ -28715,6 +28696,7 @@
 				"15228",
 				"15365",
 				"15405",
+				"1550",
 				"15549",
 				"15631",
 				"15678",
@@ -28789,6 +28771,7 @@
 				"22266",
 				"22285",
 				"22315",
+				"22356",
 				"22473",
 				"22618",
 				"22627",
@@ -28816,6 +28799,7 @@
 				"25067",
 				"25237",
 				"25260",
+				"2550",
 				"25531",
 				"25714",
 				"25757",
@@ -28841,12 +28825,14 @@
 				"27929",
 				"28012",
 				"28221",
+				"28311",
 				"28330",
 				"28475",
 				"28574",
 				"28658",
 				"28754",
 				"29005",
+				"29049",
 				"29061",
 				"29104",
 				"2913",
@@ -28854,6 +28840,7 @@
 				"29292",
 				"29353",
 				"29379",
+				"29547",
 				"29629",
 				"29781",
 				"29933",
@@ -28872,6 +28859,7 @@
 				"31080",
 				"31153",
 				"31315",
+				"31462",
 				"31471",
 				"31583",
 				"31628",
@@ -28925,6 +28913,7 @@
 				"35283",
 				"35288",
 				"35503",
+				"35507",
 				"35556",
 				"35568",
 				"35706",
@@ -28937,6 +28926,7 @@
 				"36221",
 				"36222",
 				"36287",
+				"3634",
 				"36412",
 				"3644",
 				"36452",
@@ -28947,6 +28937,7 @@
 				"36634",
 				"36678",
 				"367",
+				"36704",
 				"3676",
 				"36774",
 				"36858",
@@ -28959,6 +28950,7 @@
 				"37619",
 				"37671",
 				"37690",
+				"37800",
 				"37884",
 				"37999",
 				"38048",
@@ -28979,6 +28971,7 @@
 				"38906",
 				"39023",
 				"39211",
+				"39530",
 				"39631",
 				"39648",
 				"39678",
@@ -29012,6 +29005,7 @@
 				"41536",
 				"41635",
 				"41689",
+				"41819",
 				"41866",
 				"41967",
 				"42104",
@@ -29028,6 +29022,7 @@
 				"43374",
 				"43608",
 				"4367",
+				"4378",
 				"43787",
 				"4397",
 				"44184",
@@ -29067,6 +29062,7 @@
 				"46910",
 				"47030",
 				"47062",
+				"4713",
 				"47175",
 				"47251",
 				"47306",
@@ -29101,6 +29097,7 @@
 				"49900",
 				"49929",
 				"49978",
+				"50038",
 				"50197",
 				"50264",
 				"50306",
@@ -29113,6 +29110,7 @@
 				"50969",
 				"51220",
 				"51291",
+				"51420",
 				"5152",
 				"51786",
 				"51801",
@@ -29138,7 +29136,9 @@
 				"54127",
 				"54142",
 				"54338",
+				"54396",
 				"5456",
+				"54872",
 				"55085",
 				"55247",
 				"55332",
@@ -29184,6 +29184,7 @@
 				"58831",
 				"58854",
 				"59005",
+				"5916",
 				"59220",
 				"59252",
 				"59306",
@@ -29213,6 +29214,7 @@
 				"60803",
 				"60942",
 				"61007",
+				"61039",
 				"61198",
 				"61217",
 				"61262",
@@ -29231,7 +29233,9 @@
 				"62021",
 				"6204",
 				"62069",
+				"62094",
 				"62103",
+				"62108",
 				"6230",
 				"62303",
 				"62363",
@@ -29247,6 +29251,7 @@
 				"63228",
 				"63282",
 				"63398",
+				"63422",
 				"63439",
 				"63447",
 				"6359",
@@ -29269,6 +29274,7 @@
 				"64709",
 				"65033",
 				"65034",
+				"65053",
 				"65167",
 				"65203",
 				"65308",
@@ -29303,6 +29309,7 @@
 				"8938",
 				"8948",
 				"9009",
+				"9171",
 				"918",
 				"9206",
 				"9355",
@@ -30335,42 +30342,6 @@
 						"Gain 1 Rage on Melee Hit"
 					],
 					"via_reachable_node_id": "487"
-				},
-				{
-					"name": "Burning Damage Multiplier",
-					"node_id": "13559",
-					"shortest_executable_prefix": [
-						"50459",
-						"45035",
-						"59370",
-						"63795",
-						"38662",
-						"5616",
-						"39718",
-						"59606",
-						"1461",
-						"49900",
-						"46277",
-						"56295",
-						"18182",
-						"53456",
-						"36858",
-						"60440",
-						"49605",
-						"33310",
-						"5296",
-						"19501",
-						"4367",
-						"44184",
-						"61804",
-						"13559"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"+5% to Fire Damage over Time Multiplier"
-					],
-					"via_reachable_node_id": "61804"
 				},
 				{
 					"name": "Reduced Skill Duration",
@@ -32998,6 +32969,28 @@
 					"via_reachable_node_id": "3656"
 				},
 				{
+					"name": "Life Gain on Hit",
+					"node_id": "26820",
+					"shortest_executable_prefix": [
+						"50459",
+						"39821",
+						"52904",
+						"444",
+						"61306",
+						"60942",
+						"32555",
+						"22266",
+						"50038",
+						"26820"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"Gain 6 Life per Enemy Hit with Attacks"
+					],
+					"via_reachable_node_id": "50038"
+				},
+				{
 					"name": "Mace Damage",
 					"node_id": "27134",
 					"shortest_executable_prefix": [
@@ -33546,11 +33539,12 @@
 						"5408",
 						"29359"
 					],
-					"status": "unsupported",
-					"supported": [],
+					"status": "partial",
+					"supported": [
+						"0.4% of Physical Attack Damage Leeched as Life"
+					],
 					"unsupported": [
 						"12% increased Attack Damage",
-						"0.4% of Physical Attack Damage Leeched as Life",
 						"12% increased Damage with Ailments from Attack Skills"
 					],
 					"via_reachable_node_id": "5408"
@@ -35292,30 +35286,6 @@
 					"via_reachable_node_id": "5972"
 				},
 				{
-					"name": "Life and Mana Leech",
-					"node_id": "36704",
-					"shortest_executable_prefix": [
-						"50459",
-						"39821",
-						"52904",
-						"444",
-						"61306",
-						"60942",
-						"64709",
-						"3469",
-						"23471",
-						"20010",
-						"36704"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"0.4% of Attack Damage Leeched as Life",
-						"0.4% of Attack Damage Leeched as Mana"
-					],
-					"via_reachable_node_id": "20010"
-				},
-				{
 					"name": "Trap Damage",
 					"node_id": "36877",
 					"shortest_executable_prefix": [
@@ -35569,35 +35539,6 @@
 					"via_reachable_node_id": "56460"
 				},
 				{
-					"name": "Life Leech",
-					"node_id": "37800",
-					"shortest_executable_prefix": [
-						"50459",
-						"39821",
-						"52904",
-						"444",
-						"61306",
-						"60942",
-						"32555",
-						"22266",
-						"30679",
-						"5237",
-						"6363",
-						"29937",
-						"8544",
-						"16544",
-						"24083",
-						"61262",
-						"37800"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"0.6% of Physical Attack Damage Leeched as Life"
-					],
-					"via_reachable_node_id": "61262"
-				},
-				{
 					"name": "Bow Damage",
 					"node_id": "38149",
 					"shortest_executable_prefix": [
@@ -35758,6 +35699,46 @@
 						"Attacks with Melee Weapons deal 12% increased Damage with Ailments"
 					],
 					"via_reachable_node_id": "58449"
+				},
+				{
+					"name": "Ignite Chance and Duration",
+					"node_id": "38789",
+					"shortest_executable_prefix": [
+						"50459",
+						"45035",
+						"59370",
+						"63795",
+						"38662",
+						"5616",
+						"39718",
+						"59606",
+						"1461",
+						"49900",
+						"46277",
+						"56295",
+						"18182",
+						"53456",
+						"36858",
+						"60440",
+						"49605",
+						"33310",
+						"5296",
+						"19501",
+						"4367",
+						"44184",
+						"61804",
+						"13559",
+						"31462",
+						"11924",
+						"38789"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"15% increased Ignite Duration on Enemies",
+						"15% chance to Ignite"
+					],
+					"via_reachable_node_id": "11924"
 				},
 				{
 					"name": "Chain Distance",
@@ -36419,26 +36400,6 @@
 						"+2% Chance to Block Attack Damage while wielding a Staff"
 					],
 					"via_reachable_node_id": "15631"
-				},
-				{
-					"name": "Life Leech Speed",
-					"node_id": "41819",
-					"shortest_executable_prefix": [
-						"50459",
-						"45035",
-						"59370",
-						"63795",
-						"38662",
-						"6538",
-						"49978",
-						"41819"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"60% increased total Recovery per second from Life Leech"
-					],
-					"via_reachable_node_id": "49978"
 				},
 				{
 					"name": "Ancestral Bond",
@@ -37856,45 +37817,6 @@
 					"via_reachable_node_id": "33783"
 				},
 				{
-					"name": "Burning Damage Multiplier",
-					"node_id": "4713",
-					"shortest_executable_prefix": [
-						"50459",
-						"45035",
-						"59370",
-						"63795",
-						"38662",
-						"5616",
-						"39718",
-						"59606",
-						"1461",
-						"49900",
-						"46277",
-						"56295",
-						"18182",
-						"53456",
-						"36858",
-						"60440",
-						"49605",
-						"33310",
-						"5296",
-						"19501",
-						"4367",
-						"44184",
-						"63447",
-						"39841",
-						"36678",
-						"7444",
-						"4713"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"+4% to Fire Damage over Time Multiplier"
-					],
-					"via_reachable_node_id": "7444"
-				},
-				{
 					"name": "Life and Energy Shield on Kill",
 					"node_id": "47362",
 					"shortest_executable_prefix": [
@@ -38381,6 +38303,27 @@
 					"via_reachable_node_id": "24083"
 				},
 				{
+					"name": "Mana on Hit",
+					"node_id": "49481",
+					"shortest_executable_prefix": [
+						"50459",
+						"39821",
+						"52904",
+						"444",
+						"61306",
+						"60942",
+						"32555",
+						"51420",
+						"49481"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"Gain 3 Mana per Enemy Hit with Attacks"
+					],
+					"via_reachable_node_id": "51420"
+				},
+				{
 					"name": "Spell Suppression and Energy Shield Recharge Rate",
 					"node_id": "49515",
 					"shortest_executable_prefix": [
@@ -38624,27 +38567,6 @@
 						"+1% to maximum Lightning Resistance"
 					],
 					"via_reachable_node_id": "23659"
-				},
-				{
-					"name": "Life Leech",
-					"node_id": "50038",
-					"shortest_executable_prefix": [
-						"50459",
-						"39821",
-						"52904",
-						"444",
-						"61306",
-						"60942",
-						"32555",
-						"22266",
-						"50038"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"0.5% of Attack Damage Leeched as Life"
-					],
-					"via_reachable_node_id": "22266"
 				},
 				{
 					"name": "Physical Bow Damage",
@@ -39047,26 +38969,6 @@
 						"12% increased Cold Damage with Attack Skills"
 					],
 					"via_reachable_node_id": "5237"
-				},
-				{
-					"name": "Mana Leech",
-					"node_id": "51420",
-					"shortest_executable_prefix": [
-						"50459",
-						"39821",
-						"52904",
-						"444",
-						"61306",
-						"60942",
-						"32555",
-						"51420"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"0.4% of Attack Damage Leeched as Mana"
-					],
-					"via_reachable_node_id": "32555"
 				},
 				{
 					"name": "Druidic Rite",
@@ -39621,6 +39523,45 @@
 					"via_reachable_node_id": "2913"
 				},
 				{
+					"name": "Magmatic Strikes",
+					"node_id": "5430",
+					"shortest_executable_prefix": [
+						"50459",
+						"39821",
+						"52904",
+						"444",
+						"61306",
+						"63139",
+						"5408",
+						"11497",
+						"238",
+						"10829",
+						"16167",
+						"19144",
+						"28330",
+						"46578",
+						"13714",
+						"55485",
+						"65034",
+						"46910",
+						"33740",
+						"15405",
+						"50862",
+						"50422",
+						"10221",
+						"54396",
+						"2550",
+						"1550",
+						"5430"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"Every 10 seconds, gain 30% of Physical Damage\nas Extra Fire Damage for 4 seconds"
+					],
+					"via_reachable_node_id": "1550"
+				},
+				{
 					"name": "Acrobatics",
 					"node_id": "54307",
 					"shortest_executable_prefix": [
@@ -39663,42 +39604,6 @@
 						"Sword Attacks deal 12% increased Damage with Hits and Ailments"
 					],
 					"via_reachable_node_id": "12412"
-				},
-				{
-					"name": "Burning Damage Multiplier",
-					"node_id": "54396",
-					"shortest_executable_prefix": [
-						"50459",
-						"39821",
-						"52904",
-						"444",
-						"61306",
-						"63139",
-						"5408",
-						"11497",
-						"238",
-						"10829",
-						"16167",
-						"19144",
-						"28330",
-						"46578",
-						"13714",
-						"55485",
-						"65034",
-						"46910",
-						"33740",
-						"15405",
-						"50862",
-						"50422",
-						"10221",
-						"54396"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"+4% to Fire Damage over Time Multiplier"
-					],
-					"via_reachable_node_id": "10221"
 				},
 				{
 					"name": "Staff Area of Effect",
@@ -41583,40 +41488,6 @@
 					"via_reachable_node_id": "28574"
 				},
 				{
-					"name": "Life Leech and Attack Speed",
-					"node_id": "62108",
-					"shortest_executable_prefix": [
-						"50459",
-						"39821",
-						"52904",
-						"444",
-						"61306",
-						"63139",
-						"5408",
-						"11651",
-						"6580",
-						"19711",
-						"17201",
-						"56001",
-						"34031",
-						"24865",
-						"6741",
-						"14056",
-						"487",
-						"42800",
-						"40653",
-						"62108"
-					],
-					"status": "partial",
-					"supported": [
-						"3% increased Attack Speed"
-					],
-					"unsupported": [
-						"0.4% of Physical Attack Damage Leeched as Life"
-					],
-					"via_reachable_node_id": "40653"
-				},
-				{
 					"name": "Melee Damage",
 					"node_id": "62319",
 					"shortest_executable_prefix": [
@@ -41647,6 +41518,46 @@
 						"Attacks with Melee Weapons deal 4% increased Damage with Ailments"
 					],
 					"via_reachable_node_id": "34400"
+				},
+				{
+					"name": "Chance to Ignite",
+					"node_id": "6245",
+					"shortest_executable_prefix": [
+						"50459",
+						"45035",
+						"59370",
+						"63795",
+						"38662",
+						"5616",
+						"39718",
+						"59606",
+						"1461",
+						"49900",
+						"46277",
+						"56295",
+						"18182",
+						"53456",
+						"36858",
+						"60440",
+						"49605",
+						"33310",
+						"5296",
+						"19501",
+						"4367",
+						"44184",
+						"63447",
+						"39841",
+						"36678",
+						"7444",
+						"4713",
+						"6245"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"20% chance to Ignite"
+					],
+					"via_reachable_node_id": "4713"
 				},
 				{
 					"name": "Shock Chance",
@@ -42265,12 +42176,13 @@
 						"43374",
 						"64816"
 					],
-					"status": "unsupported",
-					"supported": [],
+					"status": "partial",
+					"supported": [
+						"0.4% of Physical Attack Damage Leeched as Life"
+					],
 					"unsupported": [
 						"12% increased Physical Damage with Two Handed Melee Weapons",
-						"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments",
-						"0.4% of Physical Attack Damage Leeched as Life"
+						"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments"
 					],
 					"via_reachable_node_id": "43374"
 				},
@@ -42905,6 +42817,44 @@
 					"via_reachable_node_id": "24914"
 				},
 				{
+					"name": "Ignite Chance and Duration",
+					"node_id": "8624",
+					"shortest_executable_prefix": [
+						"50459",
+						"45035",
+						"59370",
+						"63795",
+						"38662",
+						"5616",
+						"39718",
+						"59606",
+						"1461",
+						"49900",
+						"46277",
+						"56295",
+						"18182",
+						"53456",
+						"36858",
+						"60440",
+						"49605",
+						"33310",
+						"5296",
+						"19501",
+						"4367",
+						"44184",
+						"61804",
+						"13559",
+						"8624"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"15% increased Ignite Duration on Enemies",
+						"15% chance to Ignite"
+					],
+					"via_reachable_node_id": "13559"
+				},
+				{
 					"name": "Cast Speed",
 					"node_id": "8643",
 					"shortest_executable_prefix": [
@@ -43184,18 +43134,18 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 451,
+			"blocked_frontier_count": 448,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
-				"partial": 117,
-				"unsupported": 334
+				"partial": 118,
+				"unsupported": 330
 			},
 			"class_id": 2,
 			"class_name": "Ranger",
 			"excluded_adjacent_counts": {
 				"blighted_only": 0,
-				"mastery_not_path": 30,
+				"mastery_not_path": 39,
 				"other_class_start": 6,
 				"position_proxy": 0
 			},
@@ -43204,6 +43154,11 @@
 					"node_id": "10729",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "23690"
+				},
+				{
+					"node_id": "11505",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "29049"
 				},
 				{
 					"node_id": "12125",
@@ -43236,9 +43191,19 @@
 					"via_reachable_node_id": "21435"
 				},
 				{
+					"node_id": "25446",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "1382"
+				},
+				{
 					"node_id": "26148",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "47484"
+				},
+				{
+					"node_id": "28862",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "63422"
 				},
 				{
 					"node_id": "30393",
@@ -43261,6 +43226,11 @@
 					"via_reachable_node_id": "48298"
 				},
 				{
+					"node_id": "34927",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "11924"
+				},
+				{
 					"node_id": "35085",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "30471"
@@ -43271,9 +43241,24 @@
 					"via_reachable_node_id": "2225"
 				},
 				{
+					"node_id": "35859",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "22356"
+				},
+				{
+					"node_id": "40383",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "61039"
+				},
+				{
 					"node_id": "42533",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "52230"
+				},
+				{
+					"node_id": "43495",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "62094"
 				},
 				{
 					"node_id": "43818",
@@ -43294,6 +43279,11 @@
 					"node_id": "47212",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "41119"
+				},
+				{
+					"node_id": "48267",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "2550"
 				},
 				{
 					"node_id": "50757",
@@ -43356,6 +43346,11 @@
 					"via_reachable_node_id": "10835"
 				},
 				{
+					"node_id": "6384",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "65053"
+				},
+				{
 					"node_id": "63861",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "61981"
@@ -43381,9 +43376,9 @@
 					"via_reachable_node_id": "47306"
 				}
 			],
-			"reachable_count_excluding_start": 656,
-			"reachable_count_including_start": 657,
-			"reachable_full_direct_effect_nodes": 641,
+			"reachable_count_excluding_start": 685,
+			"reachable_count_including_start": 686,
+			"reachable_full_direct_effect_nodes": 670,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -43407,6 +43402,7 @@
 				"11688",
 				"11700",
 				"11859",
+				"11924",
 				"1203",
 				"12250",
 				"12412",
@@ -43421,9 +43417,11 @@
 				"1325",
 				"13322",
 				"1346",
+				"13559",
 				"13714",
 				"13753",
 				"13782",
+				"1382",
 				"13885",
 				"14021",
 				"14040",
@@ -43446,6 +43444,7 @@
 				"15228",
 				"15365",
 				"15405",
+				"1550",
 				"15549",
 				"15631",
 				"15678",
@@ -43520,6 +43519,7 @@
 				"22266",
 				"22285",
 				"22315",
+				"22356",
 				"22473",
 				"22618",
 				"22627",
@@ -43547,6 +43547,7 @@
 				"25067",
 				"25237",
 				"25260",
+				"2550",
 				"25531",
 				"25714",
 				"25757",
@@ -43572,12 +43573,14 @@
 				"27929",
 				"28012",
 				"28221",
+				"28311",
 				"28330",
 				"28475",
 				"28574",
 				"28658",
 				"28754",
 				"29005",
+				"29049",
 				"29061",
 				"29104",
 				"2913",
@@ -43585,6 +43588,7 @@
 				"29292",
 				"29353",
 				"29379",
+				"29547",
 				"29629",
 				"29781",
 				"29933",
@@ -43603,6 +43607,7 @@
 				"31080",
 				"31153",
 				"31315",
+				"31462",
 				"31471",
 				"31583",
 				"31628",
@@ -43656,6 +43661,7 @@
 				"35283",
 				"35288",
 				"35503",
+				"35507",
 				"35556",
 				"35568",
 				"35706",
@@ -43668,6 +43674,7 @@
 				"36221",
 				"36222",
 				"36287",
+				"3634",
 				"36412",
 				"3644",
 				"36452",
@@ -43678,6 +43685,7 @@
 				"36634",
 				"36678",
 				"367",
+				"36704",
 				"3676",
 				"36774",
 				"36858",
@@ -43690,6 +43698,7 @@
 				"37619",
 				"37671",
 				"37690",
+				"37800",
 				"37884",
 				"37999",
 				"38048",
@@ -43710,6 +43719,7 @@
 				"38906",
 				"39023",
 				"39211",
+				"39530",
 				"39631",
 				"39648",
 				"39678",
@@ -43743,6 +43753,7 @@
 				"41536",
 				"41635",
 				"41689",
+				"41819",
 				"41866",
 				"41967",
 				"42104",
@@ -43759,6 +43770,7 @@
 				"43374",
 				"43608",
 				"4367",
+				"4378",
 				"43787",
 				"4397",
 				"44184",
@@ -43798,6 +43810,7 @@
 				"46910",
 				"47030",
 				"47062",
+				"4713",
 				"47251",
 				"47306",
 				"47312",
@@ -43831,6 +43844,7 @@
 				"49900",
 				"49929",
 				"49978",
+				"50038",
 				"50197",
 				"50264",
 				"50306",
@@ -43844,6 +43858,7 @@
 				"50969",
 				"51220",
 				"51291",
+				"51420",
 				"5152",
 				"51786",
 				"51801",
@@ -43869,7 +43884,9 @@
 				"54127",
 				"54142",
 				"54338",
+				"54396",
 				"5456",
+				"54872",
 				"55085",
 				"55247",
 				"55332",
@@ -43915,6 +43932,7 @@
 				"58831",
 				"58854",
 				"59005",
+				"5916",
 				"59220",
 				"59252",
 				"59306",
@@ -43944,6 +43962,7 @@
 				"60803",
 				"60942",
 				"61007",
+				"61039",
 				"61198",
 				"61217",
 				"61262",
@@ -43962,7 +43981,9 @@
 				"62021",
 				"6204",
 				"62069",
+				"62094",
 				"62103",
+				"62108",
 				"6230",
 				"62303",
 				"62363",
@@ -43978,6 +43999,7 @@
 				"63228",
 				"63282",
 				"63398",
+				"63422",
 				"63439",
 				"63447",
 				"6359",
@@ -44000,6 +44022,7 @@
 				"64709",
 				"65033",
 				"65034",
+				"65053",
 				"65167",
 				"65203",
 				"65308",
@@ -44034,6 +44057,7 @@
 				"8938",
 				"8948",
 				"9009",
+				"9171",
 				"918",
 				"9206",
 				"9355",
@@ -45039,31 +45063,6 @@
 						"Gain 1 Rage on Melee Hit"
 					],
 					"via_reachable_node_id": "487"
-				},
-				{
-					"name": "Burning Damage Multiplier",
-					"node_id": "13559",
-					"shortest_executable_prefix": [
-						"54447",
-						"57226",
-						"21678",
-						"32210",
-						"8948",
-						"38176",
-						"49651",
-						"5296",
-						"19501",
-						"4367",
-						"44184",
-						"61804",
-						"13559"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"+5% to Fire Damage over Time Multiplier"
-					],
-					"via_reachable_node_id": "61804"
 				},
 				{
 					"name": "Reduced Skill Duration",
@@ -47710,6 +47709,42 @@
 					"via_reachable_node_id": "3656"
 				},
 				{
+					"name": "Life Gain on Hit",
+					"node_id": "26820",
+					"shortest_executable_prefix": [
+						"54447",
+						"57226",
+						"21678",
+						"32210",
+						"8948",
+						"27659",
+						"37671",
+						"21301",
+						"20546",
+						"3656",
+						"58244",
+						"7112",
+						"13885",
+						"28012",
+						"59252",
+						"59606",
+						"1461",
+						"36287",
+						"20807",
+						"12412",
+						"32555",
+						"22266",
+						"50038",
+						"26820"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"Gain 6 Life per Enemy Hit with Attacks"
+					],
+					"via_reachable_node_id": "50038"
+				},
+				{
 					"name": "Mace Damage",
 					"node_id": "27134",
 					"shortest_executable_prefix": [
@@ -48191,11 +48226,12 @@
 						"5408",
 						"29359"
 					],
-					"status": "unsupported",
-					"supported": [],
+					"status": "partial",
+					"supported": [
+						"0.4% of Physical Attack Damage Leeched as Life"
+					],
 					"unsupported": [
 						"12% increased Attack Damage",
-						"0.4% of Physical Attack Damage Leeched as Life",
 						"12% increased Damage with Ailments from Attack Skills"
 					],
 					"via_reachable_node_id": "5408"
@@ -49946,46 +49982,6 @@
 					"via_reachable_node_id": "5972"
 				},
 				{
-					"name": "Life and Mana Leech",
-					"node_id": "36704",
-					"shortest_executable_prefix": [
-						"54447",
-						"57226",
-						"21678",
-						"32210",
-						"8948",
-						"27659",
-						"37671",
-						"21301",
-						"20546",
-						"3656",
-						"58244",
-						"7112",
-						"13885",
-						"28012",
-						"59252",
-						"59606",
-						"1461",
-						"36287",
-						"20807",
-						"12412",
-						"32555",
-						"22266",
-						"30679",
-						"5237",
-						"23471",
-						"20010",
-						"36704"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"0.4% of Attack Damage Leeched as Life",
-						"0.4% of Attack Damage Leeched as Mana"
-					],
-					"via_reachable_node_id": "20010"
-				},
-				{
 					"name": "Trap Damage",
 					"node_id": "36877",
 					"shortest_executable_prefix": [
@@ -50253,45 +50249,6 @@
 					"via_reachable_node_id": "56460"
 				},
 				{
-					"name": "Life Leech",
-					"node_id": "37800",
-					"shortest_executable_prefix": [
-						"54447",
-						"57264",
-						"37569",
-						"36542",
-						"4397",
-						"31875",
-						"60398",
-						"46340",
-						"42760",
-						"36678",
-						"7444",
-						"64210",
-						"26270",
-						"60472",
-						"23027",
-						"44202",
-						"29353",
-						"63282",
-						"59928",
-						"63723",
-						"5233",
-						"3644",
-						"14930",
-						"34400",
-						"24914",
-						"61262",
-						"37800"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"0.6% of Physical Attack Damage Leeched as Life"
-					],
-					"via_reachable_node_id": "61262"
-				},
-				{
 					"name": "Bow Damage",
 					"node_id": "38149",
 					"shortest_executable_prefix": [
@@ -50467,6 +50424,35 @@
 						"Attacks with Melee Weapons deal 12% increased Damage with Ailments"
 					],
 					"via_reachable_node_id": "58449"
+				},
+				{
+					"name": "Ignite Chance and Duration",
+					"node_id": "38789",
+					"shortest_executable_prefix": [
+						"54447",
+						"57226",
+						"21678",
+						"32210",
+						"8948",
+						"38176",
+						"49651",
+						"5296",
+						"19501",
+						"4367",
+						"44184",
+						"61804",
+						"13559",
+						"31462",
+						"11924",
+						"38789"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"15% increased Ignite Duration on Enemies",
+						"15% chance to Ignite"
+					],
+					"via_reachable_node_id": "11924"
 				},
 				{
 					"name": "Chain Distance",
@@ -51084,36 +51070,6 @@
 						"+2% Chance to Block Attack Damage while wielding a Staff"
 					],
 					"via_reachable_node_id": "15631"
-				},
-				{
-					"name": "Life Leech Speed",
-					"node_id": "41819",
-					"shortest_executable_prefix": [
-						"54447",
-						"57226",
-						"21678",
-						"32210",
-						"8948",
-						"27659",
-						"37671",
-						"21301",
-						"20546",
-						"3656",
-						"58244",
-						"7112",
-						"13885",
-						"28012",
-						"4011",
-						"9355",
-						"49978",
-						"41819"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"60% increased total Recovery per second from Life Leech"
-					],
-					"via_reachable_node_id": "49978"
 				},
 				{
 					"name": "Ancestral Bond",
@@ -52474,30 +52430,6 @@
 					"via_reachable_node_id": "33783"
 				},
 				{
-					"name": "Burning Damage Multiplier",
-					"node_id": "4713",
-					"shortest_executable_prefix": [
-						"54447",
-						"57264",
-						"37569",
-						"36542",
-						"4397",
-						"31875",
-						"60398",
-						"46340",
-						"42760",
-						"36678",
-						"7444",
-						"4713"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"+4% to Fire Damage over Time Multiplier"
-					],
-					"via_reachable_node_id": "7444"
-				},
-				{
 					"name": "Life and Energy Shield on Kill",
 					"node_id": "47362",
 					"shortest_executable_prefix": [
@@ -52970,6 +52902,41 @@
 					"via_reachable_node_id": "24083"
 				},
 				{
+					"name": "Mana on Hit",
+					"node_id": "49481",
+					"shortest_executable_prefix": [
+						"54447",
+						"57226",
+						"21678",
+						"32210",
+						"8948",
+						"27659",
+						"37671",
+						"21301",
+						"20546",
+						"3656",
+						"58244",
+						"7112",
+						"13885",
+						"28012",
+						"59252",
+						"59606",
+						"1461",
+						"36287",
+						"20807",
+						"12412",
+						"32555",
+						"51420",
+						"49481"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"Gain 3 Mana per Enemy Hit with Attacks"
+					],
+					"via_reachable_node_id": "51420"
+				},
+				{
 					"name": "Spell Suppression and Energy Shield Recharge Rate",
 					"node_id": "49515",
 					"shortest_executable_prefix": [
@@ -53237,41 +53204,6 @@
 						"+1% to maximum Lightning Resistance"
 					],
 					"via_reachable_node_id": "35706"
-				},
-				{
-					"name": "Life Leech",
-					"node_id": "50038",
-					"shortest_executable_prefix": [
-						"54447",
-						"57226",
-						"21678",
-						"32210",
-						"8948",
-						"27659",
-						"37671",
-						"21301",
-						"20546",
-						"3656",
-						"58244",
-						"7112",
-						"13885",
-						"28012",
-						"59252",
-						"59606",
-						"1461",
-						"36287",
-						"20807",
-						"12412",
-						"32555",
-						"22266",
-						"50038"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"0.5% of Attack Damage Leeched as Life"
-					],
-					"via_reachable_node_id": "22266"
 				},
 				{
 					"name": "Physical Bow Damage",
@@ -53702,40 +53634,6 @@
 						"12% increased Cold Damage with Attack Skills"
 					],
 					"via_reachable_node_id": "5237"
-				},
-				{
-					"name": "Mana Leech",
-					"node_id": "51420",
-					"shortest_executable_prefix": [
-						"54447",
-						"57226",
-						"21678",
-						"32210",
-						"8948",
-						"27659",
-						"37671",
-						"21301",
-						"20546",
-						"3656",
-						"58244",
-						"7112",
-						"13885",
-						"28012",
-						"59252",
-						"59606",
-						"1461",
-						"36287",
-						"20807",
-						"12412",
-						"32555",
-						"51420"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"0.4% of Attack Damage Leeched as Mana"
-					],
-					"via_reachable_node_id": "32555"
 				},
 				{
 					"name": "Druidic Rite",
@@ -54286,6 +54184,40 @@
 					"via_reachable_node_id": "2913"
 				},
 				{
+					"name": "Magmatic Strikes",
+					"node_id": "5430",
+					"shortest_executable_prefix": [
+						"54447",
+						"57264",
+						"37569",
+						"36542",
+						"4397",
+						"31875",
+						"60398",
+						"13009",
+						"17735",
+						"58402",
+						"10575",
+						"29199",
+						"15064",
+						"31931",
+						"15631",
+						"44967",
+						"50422",
+						"10221",
+						"54396",
+						"2550",
+						"1550",
+						"5430"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"Every 10 seconds, gain 30% of Physical Damage\nas Extra Fire Damage for 4 seconds"
+					],
+					"via_reachable_node_id": "1550"
+				},
+				{
 					"name": "Acrobatics",
 					"node_id": "54307",
 					"shortest_executable_prefix": [
@@ -54348,37 +54280,6 @@
 						"Sword Attacks deal 12% increased Damage with Hits and Ailments"
 					],
 					"via_reachable_node_id": "12412"
-				},
-				{
-					"name": "Burning Damage Multiplier",
-					"node_id": "54396",
-					"shortest_executable_prefix": [
-						"54447",
-						"57264",
-						"37569",
-						"36542",
-						"4397",
-						"31875",
-						"60398",
-						"13009",
-						"17735",
-						"58402",
-						"10575",
-						"29199",
-						"15064",
-						"31931",
-						"15631",
-						"44967",
-						"50422",
-						"10221",
-						"54396"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"+4% to Fire Damage over Time Multiplier"
-					],
-					"via_reachable_node_id": "10221"
 				},
 				{
 					"name": "Staff Area of Effect",
@@ -56329,44 +56230,6 @@
 					"via_reachable_node_id": "28574"
 				},
 				{
-					"name": "Life Leech and Attack Speed",
-					"node_id": "62108",
-					"shortest_executable_prefix": [
-						"54447",
-						"57264",
-						"37569",
-						"36542",
-						"4397",
-						"31875",
-						"60398",
-						"13009",
-						"17735",
-						"58402",
-						"10575",
-						"29199",
-						"15064",
-						"31931",
-						"15631",
-						"44967",
-						"50422",
-						"10221",
-						"6446",
-						"55649",
-						"22285",
-						"53793",
-						"40653",
-						"62108"
-					],
-					"status": "partial",
-					"supported": [
-						"3% increased Attack Speed"
-					],
-					"unsupported": [
-						"0.4% of Physical Attack Damage Leeched as Life"
-					],
-					"via_reachable_node_id": "40653"
-				},
-				{
 					"name": "Melee Damage",
 					"node_id": "62319",
 					"shortest_executable_prefix": [
@@ -56404,6 +56267,31 @@
 						"Attacks with Melee Weapons deal 4% increased Damage with Ailments"
 					],
 					"via_reachable_node_id": "34400"
+				},
+				{
+					"name": "Chance to Ignite",
+					"node_id": "6245",
+					"shortest_executable_prefix": [
+						"54447",
+						"57264",
+						"37569",
+						"36542",
+						"4397",
+						"31875",
+						"60398",
+						"46340",
+						"42760",
+						"36678",
+						"7444",
+						"4713",
+						"6245"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"20% chance to Ignite"
+					],
+					"via_reachable_node_id": "4713"
 				},
 				{
 					"name": "Shock Chance",
@@ -57057,12 +56945,13 @@
 						"43374",
 						"64816"
 					],
-					"status": "unsupported",
-					"supported": [],
+					"status": "partial",
+					"supported": [
+						"0.4% of Physical Attack Damage Leeched as Life"
+					],
 					"unsupported": [
 						"12% increased Physical Damage with Two Handed Melee Weapons",
-						"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments",
-						"0.4% of Physical Attack Damage Leeched as Life"
+						"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments"
 					],
 					"via_reachable_node_id": "43374"
 				},
@@ -57727,6 +57616,33 @@
 					"via_reachable_node_id": "24914"
 				},
 				{
+					"name": "Ignite Chance and Duration",
+					"node_id": "8624",
+					"shortest_executable_prefix": [
+						"54447",
+						"57226",
+						"21678",
+						"32210",
+						"8948",
+						"38176",
+						"49651",
+						"5296",
+						"19501",
+						"4367",
+						"44184",
+						"61804",
+						"13559",
+						"8624"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"15% increased Ignite Duration on Enemies",
+						"15% chance to Ignite"
+					],
+					"via_reachable_node_id": "13559"
+				},
+				{
 					"name": "Cast Speed",
 					"node_id": "8643",
 					"shortest_executable_prefix": [
@@ -58007,18 +57923,18 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 451,
+			"blocked_frontier_count": 448,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
-				"partial": 117,
-				"unsupported": 334
+				"partial": 118,
+				"unsupported": 330
 			},
 			"class_id": 3,
 			"class_name": "Witch",
 			"excluded_adjacent_counts": {
 				"blighted_only": 0,
-				"mastery_not_path": 30,
+				"mastery_not_path": 39,
 				"other_class_start": 6,
 				"position_proxy": 0
 			},
@@ -58027,6 +57943,11 @@
 					"node_id": "10729",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "23690"
+				},
+				{
+					"node_id": "11505",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "29049"
 				},
 				{
 					"node_id": "12125",
@@ -58059,9 +57980,19 @@
 					"via_reachable_node_id": "21435"
 				},
 				{
+					"node_id": "25446",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "1382"
+				},
+				{
 					"node_id": "26148",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "47484"
+				},
+				{
+					"node_id": "28862",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "63422"
 				},
 				{
 					"node_id": "30393",
@@ -58084,6 +58015,11 @@
 					"via_reachable_node_id": "48298"
 				},
 				{
+					"node_id": "34927",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "11924"
+				},
+				{
 					"node_id": "35085",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "30471"
@@ -58094,9 +58030,24 @@
 					"via_reachable_node_id": "2225"
 				},
 				{
+					"node_id": "35859",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "22356"
+				},
+				{
+					"node_id": "40383",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "61039"
+				},
+				{
 					"node_id": "42533",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "52230"
+				},
+				{
+					"node_id": "43495",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "62094"
 				},
 				{
 					"node_id": "43818",
@@ -58117,6 +58068,11 @@
 					"node_id": "47212",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "41119"
+				},
+				{
+					"node_id": "48267",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "2550"
 				},
 				{
 					"node_id": "50459",
@@ -58179,6 +58135,11 @@
 					"via_reachable_node_id": "10835"
 				},
 				{
+					"node_id": "6384",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "65053"
+				},
+				{
 					"node_id": "63861",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "61981"
@@ -58204,9 +58165,9 @@
 					"via_reachable_node_id": "47306"
 				}
 			],
-			"reachable_count_excluding_start": 656,
-			"reachable_count_including_start": 657,
-			"reachable_full_direct_effect_nodes": 641,
+			"reachable_count_excluding_start": 685,
+			"reachable_count_including_start": 686,
+			"reachable_full_direct_effect_nodes": 670,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -58230,6 +58191,7 @@
 				"11688",
 				"11700",
 				"11859",
+				"11924",
 				"1203",
 				"12250",
 				"12412",
@@ -58244,9 +58206,11 @@
 				"1325",
 				"13322",
 				"1346",
+				"13559",
 				"13714",
 				"13753",
 				"13782",
+				"1382",
 				"13885",
 				"14021",
 				"14040",
@@ -58269,6 +58233,7 @@
 				"15228",
 				"15365",
 				"15405",
+				"1550",
 				"15549",
 				"15631",
 				"15678",
@@ -58343,6 +58308,7 @@
 				"22266",
 				"22285",
 				"22315",
+				"22356",
 				"22473",
 				"22618",
 				"22627",
@@ -58370,6 +58336,7 @@
 				"25067",
 				"25237",
 				"25260",
+				"2550",
 				"25531",
 				"25714",
 				"25757",
@@ -58395,12 +58362,14 @@
 				"27929",
 				"28012",
 				"28221",
+				"28311",
 				"28330",
 				"28475",
 				"28574",
 				"28658",
 				"28754",
 				"29005",
+				"29049",
 				"29061",
 				"29104",
 				"2913",
@@ -58408,6 +58377,7 @@
 				"29292",
 				"29353",
 				"29379",
+				"29547",
 				"29629",
 				"29781",
 				"29933",
@@ -58426,6 +58396,7 @@
 				"31080",
 				"31153",
 				"31315",
+				"31462",
 				"31471",
 				"31583",
 				"31628",
@@ -58479,6 +58450,7 @@
 				"35283",
 				"35288",
 				"35503",
+				"35507",
 				"35556",
 				"35568",
 				"35706",
@@ -58491,6 +58463,7 @@
 				"36221",
 				"36222",
 				"36287",
+				"3634",
 				"36412",
 				"3644",
 				"36452",
@@ -58501,6 +58474,7 @@
 				"36634",
 				"36678",
 				"367",
+				"36704",
 				"3676",
 				"36774",
 				"36858",
@@ -58513,6 +58487,7 @@
 				"37619",
 				"37671",
 				"37690",
+				"37800",
 				"37884",
 				"37999",
 				"38048",
@@ -58533,6 +58508,7 @@
 				"38906",
 				"39023",
 				"39211",
+				"39530",
 				"39631",
 				"39648",
 				"39678",
@@ -58566,6 +58542,7 @@
 				"41536",
 				"41635",
 				"41689",
+				"41819",
 				"41866",
 				"41967",
 				"42104",
@@ -58582,6 +58559,7 @@
 				"43374",
 				"43608",
 				"4367",
+				"4378",
 				"43787",
 				"4397",
 				"44184",
@@ -58621,6 +58599,7 @@
 				"46910",
 				"47030",
 				"47062",
+				"4713",
 				"47251",
 				"47306",
 				"47312",
@@ -58654,6 +58633,7 @@
 				"49900",
 				"49929",
 				"49978",
+				"50038",
 				"50197",
 				"50264",
 				"50306",
@@ -58666,6 +58646,7 @@
 				"50969",
 				"51220",
 				"51291",
+				"51420",
 				"5152",
 				"51786",
 				"51801",
@@ -58691,8 +58672,10 @@
 				"54127",
 				"54142",
 				"54338",
+				"54396",
 				"54447",
 				"5456",
+				"54872",
 				"55085",
 				"55247",
 				"55332",
@@ -58738,6 +58721,7 @@
 				"58831",
 				"58854",
 				"59005",
+				"5916",
 				"59220",
 				"59252",
 				"59306",
@@ -58767,6 +58751,7 @@
 				"60803",
 				"60942",
 				"61007",
+				"61039",
 				"61198",
 				"61217",
 				"61262",
@@ -58785,7 +58770,9 @@
 				"62021",
 				"6204",
 				"62069",
+				"62094",
 				"62103",
+				"62108",
 				"6230",
 				"62303",
 				"62363",
@@ -58801,6 +58788,7 @@
 				"63228",
 				"63282",
 				"63398",
+				"63422",
 				"63439",
 				"63447",
 				"6359",
@@ -58823,6 +58811,7 @@
 				"64709",
 				"65033",
 				"65034",
+				"65053",
 				"65167",
 				"65203",
 				"65308",
@@ -58857,6 +58846,7 @@
 				"8938",
 				"8948",
 				"9009",
+				"9171",
 				"918",
 				"9206",
 				"9355",
@@ -59895,46 +59885,6 @@
 						"Gain 1 Rage on Melee Hit"
 					],
 					"via_reachable_node_id": "487"
-				},
-				{
-					"name": "Burning Damage Multiplier",
-					"node_id": "13559",
-					"shortest_executable_prefix": [
-						"50986",
-						"47389",
-						"42911",
-						"40867",
-						"476",
-						"24865",
-						"6741",
-						"14056",
-						"34400",
-						"14930",
-						"3644",
-						"5233",
-						"63723",
-						"59928",
-						"63282",
-						"29353",
-						"44202",
-						"23027",
-						"60472",
-						"26270",
-						"64210",
-						"7444",
-						"36678",
-						"39841",
-						"63447",
-						"44184",
-						"61804",
-						"13559"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"+5% to Fire Damage over Time Multiplier"
-					],
-					"via_reachable_node_id": "61804"
 				},
 				{
 					"name": "Reduced Skill Duration",
@@ -62499,6 +62449,31 @@
 					"via_reachable_node_id": "3656"
 				},
 				{
+					"name": "Life Gain on Hit",
+					"node_id": "26820",
+					"shortest_executable_prefix": [
+						"50986",
+						"39725",
+						"63649",
+						"49806",
+						"6580",
+						"19711",
+						"20010",
+						"23471",
+						"5237",
+						"30679",
+						"22266",
+						"50038",
+						"26820"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"Gain 6 Life per Enemy Hit with Attacks"
+					],
+					"via_reachable_node_id": "50038"
+				},
+				{
 					"name": "Mace Damage",
 					"node_id": "27134",
 					"shortest_executable_prefix": [
@@ -63047,11 +63022,12 @@
 						"5408",
 						"29359"
 					],
-					"status": "unsupported",
-					"supported": [],
+					"status": "partial",
+					"supported": [
+						"0.4% of Physical Attack Damage Leeched as Life"
+					],
 					"unsupported": [
 						"12% increased Attack Damage",
-						"0.4% of Physical Attack Damage Leeched as Life",
 						"12% increased Damage with Ailments from Attack Skills"
 					],
 					"via_reachable_node_id": "5408"
@@ -64817,27 +64793,6 @@
 					"via_reachable_node_id": "5972"
 				},
 				{
-					"name": "Life and Mana Leech",
-					"node_id": "36704",
-					"shortest_executable_prefix": [
-						"50986",
-						"39725",
-						"63649",
-						"49806",
-						"6580",
-						"19711",
-						"20010",
-						"36704"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"0.4% of Attack Damage Leeched as Life",
-						"0.4% of Attack Damage Leeched as Mana"
-					],
-					"via_reachable_node_id": "20010"
-				},
-				{
 					"name": "Trap Damage",
 					"node_id": "36877",
 					"shortest_executable_prefix": [
@@ -65083,30 +65038,6 @@
 					"via_reachable_node_id": "56460"
 				},
 				{
-					"name": "Life Leech",
-					"node_id": "37800",
-					"shortest_executable_prefix": [
-						"50986",
-						"47389",
-						"42911",
-						"40867",
-						"476",
-						"24865",
-						"6741",
-						"14056",
-						"34400",
-						"24914",
-						"61262",
-						"37800"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"0.6% of Physical Attack Damage Leeched as Life"
-					],
-					"via_reachable_node_id": "61262"
-				},
-				{
 					"name": "Bow Damage",
 					"node_id": "38149",
 					"shortest_executable_prefix": [
@@ -65247,6 +65178,50 @@
 						"Attacks with Melee Weapons deal 12% increased Damage with Ailments"
 					],
 					"via_reachable_node_id": "58449"
+				},
+				{
+					"name": "Ignite Chance and Duration",
+					"node_id": "38789",
+					"shortest_executable_prefix": [
+						"50986",
+						"47389",
+						"42911",
+						"40867",
+						"476",
+						"24865",
+						"6741",
+						"14056",
+						"34400",
+						"14930",
+						"3644",
+						"5233",
+						"63723",
+						"59928",
+						"63282",
+						"29353",
+						"44202",
+						"23027",
+						"60472",
+						"26270",
+						"64210",
+						"7444",
+						"36678",
+						"39841",
+						"63447",
+						"44184",
+						"61804",
+						"13559",
+						"31462",
+						"11924",
+						"38789"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"15% increased Ignite Duration on Enemies",
+						"15% chance to Ignite"
+					],
+					"via_reachable_node_id": "11924"
 				},
 				{
 					"name": "Chain Distance",
@@ -65888,36 +65863,6 @@
 						"+2% Chance to Block Attack Damage while wielding a Staff"
 					],
 					"via_reachable_node_id": "15631"
-				},
-				{
-					"name": "Life Leech Speed",
-					"node_id": "41819",
-					"shortest_executable_prefix": [
-						"50986",
-						"39725",
-						"63649",
-						"49806",
-						"6580",
-						"11651",
-						"5408",
-						"63139",
-						"61306",
-						"60942",
-						"41866",
-						"63843",
-						"27283",
-						"5616",
-						"38662",
-						"6538",
-						"49978",
-						"41819"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"60% increased total Recovery per second from Life Leech"
-					],
-					"via_reachable_node_id": "49978"
 				},
 				{
 					"name": "Ancestral Bond",
@@ -67293,41 +67238,6 @@
 					"via_reachable_node_id": "33783"
 				},
 				{
-					"name": "Burning Damage Multiplier",
-					"node_id": "4713",
-					"shortest_executable_prefix": [
-						"50986",
-						"47389",
-						"42911",
-						"40867",
-						"476",
-						"24865",
-						"6741",
-						"14056",
-						"34400",
-						"14930",
-						"3644",
-						"5233",
-						"63723",
-						"59928",
-						"63282",
-						"29353",
-						"44202",
-						"23027",
-						"60472",
-						"26270",
-						"64210",
-						"7444",
-						"4713"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"+4% to Fire Damage over Time Multiplier"
-					],
-					"via_reachable_node_id": "7444"
-				},
-				{
 					"name": "Life and Energy Shield on Kill",
 					"node_id": "47362",
 					"shortest_executable_prefix": [
@@ -67795,6 +67705,31 @@
 					"via_reachable_node_id": "24083"
 				},
 				{
+					"name": "Mana on Hit",
+					"node_id": "49481",
+					"shortest_executable_prefix": [
+						"50986",
+						"39725",
+						"63649",
+						"49806",
+						"6580",
+						"11651",
+						"5408",
+						"63139",
+						"61306",
+						"60942",
+						"32555",
+						"51420",
+						"49481"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"Gain 3 Mana per Enemy Hit with Attacks"
+					],
+					"via_reachable_node_id": "51420"
+				},
+				{
 					"name": "Spell Suppression and Energy Shield Recharge Rate",
 					"node_id": "49515",
 					"shortest_executable_prefix": [
@@ -68048,30 +67983,6 @@
 						"+1% to maximum Lightning Resistance"
 					],
 					"via_reachable_node_id": "23659"
-				},
-				{
-					"name": "Life Leech",
-					"node_id": "50038",
-					"shortest_executable_prefix": [
-						"50986",
-						"39725",
-						"63649",
-						"49806",
-						"6580",
-						"19711",
-						"20010",
-						"23471",
-						"5237",
-						"30679",
-						"22266",
-						"50038"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"0.5% of Attack Damage Leeched as Life"
-					],
-					"via_reachable_node_id": "22266"
 				},
 				{
 					"name": "Physical Bow Damage",
@@ -68472,30 +68383,6 @@
 						"12% increased Cold Damage with Attack Skills"
 					],
 					"via_reachable_node_id": "5237"
-				},
-				{
-					"name": "Mana Leech",
-					"node_id": "51420",
-					"shortest_executable_prefix": [
-						"50986",
-						"39725",
-						"63649",
-						"49806",
-						"6580",
-						"11651",
-						"5408",
-						"63139",
-						"61306",
-						"60942",
-						"32555",
-						"51420"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"0.4% of Attack Damage Leeched as Mana"
-					],
-					"via_reachable_node_id": "32555"
 				},
 				{
 					"name": "Druidic Rite",
@@ -69065,6 +68952,37 @@
 					"via_reachable_node_id": "2913"
 				},
 				{
+					"name": "Magmatic Strikes",
+					"node_id": "5430",
+					"shortest_executable_prefix": [
+						"50986",
+						"47389",
+						"42911",
+						"40867",
+						"476",
+						"30691",
+						"43374",
+						"31080",
+						"49412",
+						"40653",
+						"53793",
+						"22285",
+						"55649",
+						"6446",
+						"10221",
+						"54396",
+						"2550",
+						"1550",
+						"5430"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"Every 10 seconds, gain 30% of Physical Damage\nas Extra Fire Damage for 4 seconds"
+					],
+					"via_reachable_node_id": "1550"
+				},
+				{
 					"name": "Acrobatics",
 					"node_id": "54307",
 					"shortest_executable_prefix": [
@@ -69115,34 +69033,6 @@
 						"Sword Attacks deal 12% increased Damage with Hits and Ailments"
 					],
 					"via_reachable_node_id": "12412"
-				},
-				{
-					"name": "Burning Damage Multiplier",
-					"node_id": "54396",
-					"shortest_executable_prefix": [
-						"50986",
-						"47389",
-						"42911",
-						"40867",
-						"476",
-						"30691",
-						"43374",
-						"31080",
-						"49412",
-						"40653",
-						"53793",
-						"22285",
-						"55649",
-						"6446",
-						"10221",
-						"54396"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"+4% to Fire Damage over Time Multiplier"
-					],
-					"via_reachable_node_id": "10221"
 				},
 				{
 					"name": "Staff Area of Effect",
@@ -71133,31 +71023,6 @@
 					"via_reachable_node_id": "28574"
 				},
 				{
-					"name": "Life Leech and Attack Speed",
-					"node_id": "62108",
-					"shortest_executable_prefix": [
-						"50986",
-						"47389",
-						"42911",
-						"40867",
-						"476",
-						"30691",
-						"43374",
-						"31080",
-						"49412",
-						"40653",
-						"62108"
-					],
-					"status": "partial",
-					"supported": [
-						"3% increased Attack Speed"
-					],
-					"unsupported": [
-						"0.4% of Physical Attack Damage Leeched as Life"
-					],
-					"via_reachable_node_id": "40653"
-				},
-				{
 					"name": "Melee Damage",
 					"node_id": "62319",
 					"shortest_executable_prefix": [
@@ -71180,6 +71045,42 @@
 						"Attacks with Melee Weapons deal 4% increased Damage with Ailments"
 					],
 					"via_reachable_node_id": "34400"
+				},
+				{
+					"name": "Chance to Ignite",
+					"node_id": "6245",
+					"shortest_executable_prefix": [
+						"50986",
+						"47389",
+						"42911",
+						"40867",
+						"476",
+						"24865",
+						"6741",
+						"14056",
+						"34400",
+						"14930",
+						"3644",
+						"5233",
+						"63723",
+						"59928",
+						"63282",
+						"29353",
+						"44202",
+						"23027",
+						"60472",
+						"26270",
+						"64210",
+						"7444",
+						"4713",
+						"6245"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"20% chance to Ignite"
+					],
+					"via_reachable_node_id": "4713"
 				},
 				{
 					"name": "Shock Chance",
@@ -71807,12 +71708,13 @@
 						"43374",
 						"64816"
 					],
-					"status": "unsupported",
-					"supported": [],
+					"status": "partial",
+					"supported": [
+						"0.4% of Physical Attack Damage Leeched as Life"
+					],
 					"unsupported": [
 						"12% increased Physical Damage with Two Handed Melee Weapons",
-						"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments",
-						"0.4% of Physical Attack Damage Leeched as Life"
+						"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments"
 					],
 					"via_reachable_node_id": "43374"
 				},
@@ -72404,6 +72306,48 @@
 					"via_reachable_node_id": "24914"
 				},
 				{
+					"name": "Ignite Chance and Duration",
+					"node_id": "8624",
+					"shortest_executable_prefix": [
+						"50986",
+						"47389",
+						"42911",
+						"40867",
+						"476",
+						"24865",
+						"6741",
+						"14056",
+						"34400",
+						"14930",
+						"3644",
+						"5233",
+						"63723",
+						"59928",
+						"63282",
+						"29353",
+						"44202",
+						"23027",
+						"60472",
+						"26270",
+						"64210",
+						"7444",
+						"36678",
+						"39841",
+						"63447",
+						"44184",
+						"61804",
+						"13559",
+						"8624"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"15% increased Ignite Duration on Enemies",
+						"15% chance to Ignite"
+					],
+					"via_reachable_node_id": "13559"
+				},
+				{
 					"name": "Cast Speed",
 					"node_id": "8643",
 					"shortest_executable_prefix": [
@@ -72680,18 +72624,18 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 451,
+			"blocked_frontier_count": 448,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
-				"partial": 117,
-				"unsupported": 334
+				"partial": 118,
+				"unsupported": 330
 			},
 			"class_id": 4,
 			"class_name": "Duelist",
 			"excluded_adjacent_counts": {
 				"blighted_only": 0,
-				"mastery_not_path": 30,
+				"mastery_not_path": 39,
 				"other_class_start": 6,
 				"position_proxy": 0
 			},
@@ -72700,6 +72644,11 @@
 					"node_id": "10729",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "23690"
+				},
+				{
+					"node_id": "11505",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "29049"
 				},
 				{
 					"node_id": "12125",
@@ -72732,9 +72681,19 @@
 					"via_reachable_node_id": "21435"
 				},
 				{
+					"node_id": "25446",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "1382"
+				},
+				{
 					"node_id": "26148",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "47484"
+				},
+				{
+					"node_id": "28862",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "63422"
 				},
 				{
 					"node_id": "30393",
@@ -72757,6 +72716,11 @@
 					"via_reachable_node_id": "48298"
 				},
 				{
+					"node_id": "34927",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "11924"
+				},
+				{
 					"node_id": "35085",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "30471"
@@ -72767,9 +72731,24 @@
 					"via_reachable_node_id": "2225"
 				},
 				{
+					"node_id": "35859",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "22356"
+				},
+				{
+					"node_id": "40383",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "61039"
+				},
+				{
 					"node_id": "42533",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "52230"
+				},
+				{
+					"node_id": "43495",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "62094"
 				},
 				{
 					"node_id": "43818",
@@ -72790,6 +72769,11 @@
 					"node_id": "47212",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "41119"
+				},
+				{
+					"node_id": "48267",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "2550"
 				},
 				{
 					"node_id": "50459",
@@ -72852,6 +72836,11 @@
 					"via_reachable_node_id": "10835"
 				},
 				{
+					"node_id": "6384",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "65053"
+				},
+				{
 					"node_id": "63861",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "61981"
@@ -72877,9 +72866,9 @@
 					"via_reachable_node_id": "47306"
 				}
 			],
-			"reachable_count_excluding_start": 656,
-			"reachable_count_including_start": 657,
-			"reachable_full_direct_effect_nodes": 641,
+			"reachable_count_excluding_start": 685,
+			"reachable_count_including_start": 686,
+			"reachable_full_direct_effect_nodes": 670,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -72903,6 +72892,7 @@
 				"11688",
 				"11700",
 				"11859",
+				"11924",
 				"1203",
 				"12250",
 				"12412",
@@ -72917,9 +72907,11 @@
 				"1325",
 				"13322",
 				"1346",
+				"13559",
 				"13714",
 				"13753",
 				"13782",
+				"1382",
 				"13885",
 				"14021",
 				"14040",
@@ -72942,6 +72934,7 @@
 				"15228",
 				"15365",
 				"15405",
+				"1550",
 				"15549",
 				"15631",
 				"15678",
@@ -73016,6 +73009,7 @@
 				"22266",
 				"22285",
 				"22315",
+				"22356",
 				"22473",
 				"22618",
 				"22627",
@@ -73043,6 +73037,7 @@
 				"25067",
 				"25237",
 				"25260",
+				"2550",
 				"25531",
 				"25714",
 				"25757",
@@ -73068,12 +73063,14 @@
 				"27929",
 				"28012",
 				"28221",
+				"28311",
 				"28330",
 				"28475",
 				"28574",
 				"28658",
 				"28754",
 				"29005",
+				"29049",
 				"29061",
 				"29104",
 				"2913",
@@ -73081,6 +73078,7 @@
 				"29292",
 				"29353",
 				"29379",
+				"29547",
 				"29629",
 				"29781",
 				"29933",
@@ -73099,6 +73097,7 @@
 				"31080",
 				"31153",
 				"31315",
+				"31462",
 				"31471",
 				"31583",
 				"31628",
@@ -73152,6 +73151,7 @@
 				"35283",
 				"35288",
 				"35503",
+				"35507",
 				"35556",
 				"35568",
 				"35706",
@@ -73164,6 +73164,7 @@
 				"36221",
 				"36222",
 				"36287",
+				"3634",
 				"36412",
 				"3644",
 				"36452",
@@ -73174,6 +73175,7 @@
 				"36634",
 				"36678",
 				"367",
+				"36704",
 				"3676",
 				"36774",
 				"36858",
@@ -73186,6 +73188,7 @@
 				"37619",
 				"37671",
 				"37690",
+				"37800",
 				"37884",
 				"37999",
 				"38048",
@@ -73206,6 +73209,7 @@
 				"38906",
 				"39023",
 				"39211",
+				"39530",
 				"39631",
 				"39648",
 				"39678",
@@ -73239,6 +73243,7 @@
 				"41536",
 				"41635",
 				"41689",
+				"41819",
 				"41866",
 				"41967",
 				"42104",
@@ -73255,6 +73260,7 @@
 				"43374",
 				"43608",
 				"4367",
+				"4378",
 				"43787",
 				"4397",
 				"44184",
@@ -73294,6 +73300,7 @@
 				"46910",
 				"47030",
 				"47062",
+				"4713",
 				"47251",
 				"47306",
 				"47312",
@@ -73327,6 +73334,7 @@
 				"49900",
 				"49929",
 				"49978",
+				"50038",
 				"50197",
 				"50264",
 				"50306",
@@ -73340,6 +73348,7 @@
 				"50986",
 				"51220",
 				"51291",
+				"51420",
 				"5152",
 				"51786",
 				"51801",
@@ -73365,7 +73374,9 @@
 				"54127",
 				"54142",
 				"54338",
+				"54396",
 				"5456",
+				"54872",
 				"55085",
 				"55247",
 				"55332",
@@ -73411,6 +73422,7 @@
 				"58831",
 				"58854",
 				"59005",
+				"5916",
 				"59220",
 				"59252",
 				"59306",
@@ -73440,6 +73452,7 @@
 				"60803",
 				"60942",
 				"61007",
+				"61039",
 				"61198",
 				"61217",
 				"61262",
@@ -73458,7 +73471,9 @@
 				"62021",
 				"6204",
 				"62069",
+				"62094",
 				"62103",
+				"62108",
 				"6230",
 				"62303",
 				"62363",
@@ -73474,6 +73489,7 @@
 				"63228",
 				"63282",
 				"63398",
+				"63422",
 				"63439",
 				"63447",
 				"6359",
@@ -73496,6 +73512,7 @@
 				"64709",
 				"65033",
 				"65034",
+				"65053",
 				"65167",
 				"65203",
 				"65308",
@@ -73530,6 +73547,7 @@
 				"8938",
 				"8948",
 				"9009",
+				"9171",
 				"918",
 				"9206",
 				"9355",
@@ -74570,33 +74588,6 @@
 						"Gain 1 Rage on Melee Hit"
 					],
 					"via_reachable_node_id": "487"
-				},
-				{
-					"name": "Burning Damage Multiplier",
-					"node_id": "13559",
-					"shortest_executable_prefix": [
-						"61525",
-						"63965",
-						"14151",
-						"27564",
-						"17735",
-						"13009",
-						"60398",
-						"46340",
-						"42760",
-						"36678",
-						"39841",
-						"63447",
-						"44184",
-						"61804",
-						"13559"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"+5% to Fire Damage over Time Multiplier"
-					],
-					"via_reachable_node_id": "61804"
 				},
 				{
 					"name": "Reduced Skill Duration",
@@ -77255,6 +77246,46 @@
 					"via_reachable_node_id": "3656"
 				},
 				{
+					"name": "Life Gain on Hit",
+					"node_id": "26820",
+					"shortest_executable_prefix": [
+						"61525",
+						"20228",
+						"39916",
+						"35556",
+						"44908",
+						"2913",
+						"50862",
+						"15405",
+						"33740",
+						"46910",
+						"65034",
+						"55485",
+						"13714",
+						"46578",
+						"28330",
+						"19144",
+						"16167",
+						"10829",
+						"238",
+						"11497",
+						"5408",
+						"56589",
+						"23471",
+						"5237",
+						"30679",
+						"22266",
+						"50038",
+						"26820"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"Gain 6 Life per Enemy Hit with Attacks"
+					],
+					"via_reachable_node_id": "50038"
+				},
+				{
 					"name": "Mace Damage",
 					"node_id": "27134",
 					"shortest_executable_prefix": [
@@ -77766,11 +77797,12 @@
 						"5408",
 						"29359"
 					],
-					"status": "unsupported",
-					"supported": [],
+					"status": "partial",
+					"supported": [
+						"0.4% of Physical Attack Damage Leeched as Life"
+					],
 					"unsupported": [
 						"12% increased Attack Damage",
-						"0.4% of Physical Attack Damage Leeched as Life",
 						"12% increased Damage with Ailments from Attack Skills"
 					],
 					"via_reachable_node_id": "5408"
@@ -79593,44 +79625,6 @@
 					"via_reachable_node_id": "5972"
 				},
 				{
-					"name": "Life and Mana Leech",
-					"node_id": "36704",
-					"shortest_executable_prefix": [
-						"61525",
-						"20228",
-						"39916",
-						"35556",
-						"44908",
-						"2913",
-						"50862",
-						"15405",
-						"33740",
-						"46910",
-						"65034",
-						"55485",
-						"13714",
-						"46578",
-						"28330",
-						"19144",
-						"16167",
-						"10829",
-						"238",
-						"11497",
-						"5408",
-						"56589",
-						"23471",
-						"20010",
-						"36704"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"0.4% of Attack Damage Leeched as Life",
-						"0.4% of Attack Damage Leeched as Mana"
-					],
-					"via_reachable_node_id": "20010"
-				},
-				{
 					"name": "Trap Damage",
 					"node_id": "36877",
 					"shortest_executable_prefix": [
@@ -79894,38 +79888,6 @@
 					"via_reachable_node_id": "56460"
 				},
 				{
-					"name": "Life Leech",
-					"node_id": "37800",
-					"shortest_executable_prefix": [
-						"61525",
-						"20228",
-						"39916",
-						"35556",
-						"44908",
-						"2913",
-						"50862",
-						"50422",
-						"50570",
-						"29353",
-						"63282",
-						"59928",
-						"63723",
-						"5233",
-						"3644",
-						"14930",
-						"34400",
-						"24914",
-						"61262",
-						"37800"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"0.6% of Physical Attack Damage Leeched as Life"
-					],
-					"via_reachable_node_id": "61262"
-				},
-				{
 					"name": "Bow Damage",
 					"node_id": "38149",
 					"shortest_executable_prefix": [
@@ -80076,6 +80038,37 @@
 						"Attacks with Melee Weapons deal 12% increased Damage with Ailments"
 					],
 					"via_reachable_node_id": "58449"
+				},
+				{
+					"name": "Ignite Chance and Duration",
+					"node_id": "38789",
+					"shortest_executable_prefix": [
+						"61525",
+						"63965",
+						"14151",
+						"27564",
+						"17735",
+						"13009",
+						"60398",
+						"46340",
+						"42760",
+						"36678",
+						"39841",
+						"63447",
+						"44184",
+						"61804",
+						"13559",
+						"31462",
+						"11924",
+						"38789"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"15% increased Ignite Duration on Enemies",
+						"15% chance to Ignite"
+					],
+					"via_reachable_node_id": "11924"
 				},
 				{
 					"name": "Chain Distance",
@@ -80698,46 +80691,6 @@
 						"+2% Chance to Block Attack Damage while wielding a Staff"
 					],
 					"via_reachable_node_id": "15631"
-				},
-				{
-					"name": "Life Leech Speed",
-					"node_id": "41819",
-					"shortest_executable_prefix": [
-						"61525",
-						"63965",
-						"14151",
-						"27564",
-						"17735",
-						"13009",
-						"60398",
-						"31875",
-						"4397",
-						"7938",
-						"1031",
-						"19635",
-						"11551",
-						"38176",
-						"49651",
-						"41635",
-						"32710",
-						"4502",
-						"33783",
-						"3656",
-						"58244",
-						"7112",
-						"13885",
-						"28012",
-						"4011",
-						"9355",
-						"49978",
-						"41819"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"60% increased total Recovery per second from Life Leech"
-					],
-					"via_reachable_node_id": "49978"
 				},
 				{
 					"name": "Ancestral Bond",
@@ -82107,30 +82060,6 @@
 					"via_reachable_node_id": "33783"
 				},
 				{
-					"name": "Burning Damage Multiplier",
-					"node_id": "4713",
-					"shortest_executable_prefix": [
-						"61525",
-						"63965",
-						"14151",
-						"27564",
-						"17735",
-						"13009",
-						"60398",
-						"46340",
-						"42760",
-						"36678",
-						"7444",
-						"4713"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"+4% to Fire Damage over Time Multiplier"
-					],
-					"via_reachable_node_id": "7444"
-				},
-				{
 					"name": "Life and Energy Shield on Kill",
 					"node_id": "47362",
 					"shortest_executable_prefix": [
@@ -82600,6 +82529,45 @@
 					"via_reachable_node_id": "24083"
 				},
 				{
+					"name": "Mana on Hit",
+					"node_id": "49481",
+					"shortest_executable_prefix": [
+						"61525",
+						"20228",
+						"39916",
+						"35556",
+						"44908",
+						"2913",
+						"50862",
+						"15405",
+						"33740",
+						"46910",
+						"65034",
+						"55485",
+						"13714",
+						"46578",
+						"28330",
+						"19144",
+						"16167",
+						"10829",
+						"238",
+						"11497",
+						"5408",
+						"63139",
+						"61306",
+						"60942",
+						"32555",
+						"51420",
+						"49481"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"Gain 3 Mana per Enemy Hit with Attacks"
+					],
+					"via_reachable_node_id": "51420"
+				},
+				{
 					"name": "Spell Suppression and Energy Shield Recharge Rate",
 					"node_id": "49515",
 					"shortest_executable_prefix": [
@@ -82874,45 +82842,6 @@
 						"+1% to maximum Lightning Resistance"
 					],
 					"via_reachable_node_id": "35706"
-				},
-				{
-					"name": "Life Leech",
-					"node_id": "50038",
-					"shortest_executable_prefix": [
-						"61525",
-						"20228",
-						"39916",
-						"35556",
-						"44908",
-						"2913",
-						"50862",
-						"15405",
-						"33740",
-						"46910",
-						"65034",
-						"55485",
-						"13714",
-						"46578",
-						"28330",
-						"19144",
-						"16167",
-						"10829",
-						"238",
-						"11497",
-						"5408",
-						"56589",
-						"23471",
-						"5237",
-						"30679",
-						"22266",
-						"50038"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"0.5% of Attack Damage Leeched as Life"
-					],
-					"via_reachable_node_id": "22266"
 				},
 				{
 					"name": "Physical Bow Damage",
@@ -83353,44 +83282,6 @@
 						"12% increased Cold Damage with Attack Skills"
 					],
 					"via_reachable_node_id": "5237"
-				},
-				{
-					"name": "Mana Leech",
-					"node_id": "51420",
-					"shortest_executable_prefix": [
-						"61525",
-						"20228",
-						"39916",
-						"35556",
-						"44908",
-						"2913",
-						"50862",
-						"15405",
-						"33740",
-						"46910",
-						"65034",
-						"55485",
-						"13714",
-						"46578",
-						"28330",
-						"19144",
-						"16167",
-						"10829",
-						"238",
-						"11497",
-						"5408",
-						"63139",
-						"61306",
-						"60942",
-						"32555",
-						"51420"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"0.4% of Attack Damage Leeched as Mana"
-					],
-					"via_reachable_node_id": "32555"
 				},
 				{
 					"name": "Druidic Rite",
@@ -83960,6 +83851,31 @@
 					"via_reachable_node_id": "2913"
 				},
 				{
+					"name": "Magmatic Strikes",
+					"node_id": "5430",
+					"shortest_executable_prefix": [
+						"61525",
+						"20228",
+						"39916",
+						"35556",
+						"44908",
+						"2913",
+						"50862",
+						"50422",
+						"10221",
+						"54396",
+						"2550",
+						"1550",
+						"5430"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"Every 10 seconds, gain 30% of Physical Damage\nas Extra Fire Damage for 4 seconds"
+					],
+					"via_reachable_node_id": "1550"
+				},
+				{
 					"name": "Acrobatics",
 					"node_id": "54307",
 					"shortest_executable_prefix": [
@@ -84037,28 +83953,6 @@
 						"Sword Attacks deal 12% increased Damage with Hits and Ailments"
 					],
 					"via_reachable_node_id": "12412"
-				},
-				{
-					"name": "Burning Damage Multiplier",
-					"node_id": "54396",
-					"shortest_executable_prefix": [
-						"61525",
-						"20228",
-						"39916",
-						"35556",
-						"44908",
-						"2913",
-						"50862",
-						"50422",
-						"10221",
-						"54396"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"+4% to Fire Damage over Time Multiplier"
-					],
-					"via_reachable_node_id": "10221"
 				},
 				{
 					"name": "Staff Area of Effect",
@@ -86140,35 +86034,6 @@
 					"via_reachable_node_id": "28574"
 				},
 				{
-					"name": "Life Leech and Attack Speed",
-					"node_id": "62108",
-					"shortest_executable_prefix": [
-						"61525",
-						"20228",
-						"39916",
-						"35556",
-						"44908",
-						"2913",
-						"50862",
-						"44606",
-						"26523",
-						"6446",
-						"55649",
-						"22285",
-						"53793",
-						"40653",
-						"62108"
-					],
-					"status": "partial",
-					"supported": [
-						"3% increased Attack Speed"
-					],
-					"unsupported": [
-						"0.4% of Physical Attack Damage Leeched as Life"
-					],
-					"via_reachable_node_id": "40653"
-				},
-				{
 					"name": "Melee Damage",
 					"node_id": "62319",
 					"shortest_executable_prefix": [
@@ -86199,6 +86064,31 @@
 						"Attacks with Melee Weapons deal 4% increased Damage with Ailments"
 					],
 					"via_reachable_node_id": "34400"
+				},
+				{
+					"name": "Chance to Ignite",
+					"node_id": "6245",
+					"shortest_executable_prefix": [
+						"61525",
+						"63965",
+						"14151",
+						"27564",
+						"17735",
+						"13009",
+						"60398",
+						"46340",
+						"42760",
+						"36678",
+						"7444",
+						"4713",
+						"6245"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"20% chance to Ignite"
+					],
+					"via_reachable_node_id": "4713"
 				},
 				{
 					"name": "Shock Chance",
@@ -86878,12 +86768,13 @@
 						"43374",
 						"64816"
 					],
-					"status": "unsupported",
-					"supported": [],
+					"status": "partial",
+					"supported": [
+						"0.4% of Physical Attack Damage Leeched as Life"
+					],
 					"unsupported": [
 						"12% increased Physical Damage with Two Handed Melee Weapons",
-						"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments",
-						"0.4% of Physical Attack Damage Leeched as Life"
+						"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments"
 					],
 					"via_reachable_node_id": "43374"
 				},
@@ -87502,6 +87393,35 @@
 					"via_reachable_node_id": "24914"
 				},
 				{
+					"name": "Ignite Chance and Duration",
+					"node_id": "8624",
+					"shortest_executable_prefix": [
+						"61525",
+						"63965",
+						"14151",
+						"27564",
+						"17735",
+						"13009",
+						"60398",
+						"46340",
+						"42760",
+						"36678",
+						"39841",
+						"63447",
+						"44184",
+						"61804",
+						"13559",
+						"8624"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"15% increased Ignite Duration on Enemies",
+						"15% chance to Ignite"
+					],
+					"via_reachable_node_id": "13559"
+				},
+				{
 					"name": "Cast Speed",
 					"node_id": "8643",
 					"shortest_executable_prefix": [
@@ -87787,18 +87707,18 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 451,
+			"blocked_frontier_count": 448,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
-				"partial": 117,
-				"unsupported": 334
+				"partial": 118,
+				"unsupported": 330
 			},
 			"class_id": 5,
 			"class_name": "Templar",
 			"excluded_adjacent_counts": {
 				"blighted_only": 0,
-				"mastery_not_path": 30,
+				"mastery_not_path": 39,
 				"other_class_start": 6,
 				"position_proxy": 0
 			},
@@ -87807,6 +87727,11 @@
 					"node_id": "10729",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "23690"
+				},
+				{
+					"node_id": "11505",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "29049"
 				},
 				{
 					"node_id": "12125",
@@ -87839,9 +87764,19 @@
 					"via_reachable_node_id": "21435"
 				},
 				{
+					"node_id": "25446",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "1382"
+				},
+				{
 					"node_id": "26148",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "47484"
+				},
+				{
+					"node_id": "28862",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "63422"
 				},
 				{
 					"node_id": "30393",
@@ -87864,6 +87799,11 @@
 					"via_reachable_node_id": "48298"
 				},
 				{
+					"node_id": "34927",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "11924"
+				},
+				{
 					"node_id": "35085",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "30471"
@@ -87874,9 +87814,24 @@
 					"via_reachable_node_id": "2225"
 				},
 				{
+					"node_id": "35859",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "22356"
+				},
+				{
+					"node_id": "40383",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "61039"
+				},
+				{
 					"node_id": "42533",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "52230"
+				},
+				{
+					"node_id": "43495",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "62094"
 				},
 				{
 					"node_id": "43818",
@@ -87897,6 +87852,11 @@
 					"node_id": "47212",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "41119"
+				},
+				{
+					"node_id": "48267",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "2550"
 				},
 				{
 					"node_id": "50459",
@@ -87959,6 +87919,11 @@
 					"via_reachable_node_id": "10835"
 				},
 				{
+					"node_id": "6384",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "65053"
+				},
+				{
 					"node_id": "63861",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "61981"
@@ -87984,9 +87949,9 @@
 					"via_reachable_node_id": "47306"
 				}
 			],
-			"reachable_count_excluding_start": 656,
-			"reachable_count_including_start": 657,
-			"reachable_full_direct_effect_nodes": 641,
+			"reachable_count_excluding_start": 685,
+			"reachable_count_including_start": 686,
+			"reachable_full_direct_effect_nodes": 670,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -88010,6 +87975,7 @@
 				"11688",
 				"11700",
 				"11859",
+				"11924",
 				"1203",
 				"12250",
 				"12412",
@@ -88024,9 +87990,11 @@
 				"1325",
 				"13322",
 				"1346",
+				"13559",
 				"13714",
 				"13753",
 				"13782",
+				"1382",
 				"13885",
 				"14021",
 				"14040",
@@ -88049,6 +88017,7 @@
 				"15228",
 				"15365",
 				"15405",
+				"1550",
 				"15549",
 				"15631",
 				"15678",
@@ -88123,6 +88092,7 @@
 				"22266",
 				"22285",
 				"22315",
+				"22356",
 				"22473",
 				"22618",
 				"22627",
@@ -88150,6 +88120,7 @@
 				"25067",
 				"25237",
 				"25260",
+				"2550",
 				"25531",
 				"25714",
 				"25757",
@@ -88175,12 +88146,14 @@
 				"27929",
 				"28012",
 				"28221",
+				"28311",
 				"28330",
 				"28475",
 				"28574",
 				"28658",
 				"28754",
 				"29005",
+				"29049",
 				"29061",
 				"29104",
 				"2913",
@@ -88188,6 +88161,7 @@
 				"29292",
 				"29353",
 				"29379",
+				"29547",
 				"29629",
 				"29781",
 				"29933",
@@ -88206,6 +88180,7 @@
 				"31080",
 				"31153",
 				"31315",
+				"31462",
 				"31471",
 				"31583",
 				"31628",
@@ -88259,6 +88234,7 @@
 				"35283",
 				"35288",
 				"35503",
+				"35507",
 				"35556",
 				"35568",
 				"35706",
@@ -88271,6 +88247,7 @@
 				"36221",
 				"36222",
 				"36287",
+				"3634",
 				"36412",
 				"3644",
 				"36452",
@@ -88281,6 +88258,7 @@
 				"36634",
 				"36678",
 				"367",
+				"36704",
 				"3676",
 				"36774",
 				"36858",
@@ -88293,6 +88271,7 @@
 				"37619",
 				"37671",
 				"37690",
+				"37800",
 				"37884",
 				"37999",
 				"38048",
@@ -88313,6 +88292,7 @@
 				"38906",
 				"39023",
 				"39211",
+				"39530",
 				"39631",
 				"39648",
 				"39678",
@@ -88346,6 +88326,7 @@
 				"41536",
 				"41635",
 				"41689",
+				"41819",
 				"41866",
 				"41967",
 				"42104",
@@ -88362,6 +88343,7 @@
 				"43374",
 				"43608",
 				"4367",
+				"4378",
 				"43787",
 				"4397",
 				"44184",
@@ -88401,6 +88383,7 @@
 				"46910",
 				"47030",
 				"47062",
+				"4713",
 				"47251",
 				"47306",
 				"47312",
@@ -88434,6 +88417,7 @@
 				"49900",
 				"49929",
 				"49978",
+				"50038",
 				"50197",
 				"50264",
 				"50306",
@@ -88446,6 +88430,7 @@
 				"50969",
 				"51220",
 				"51291",
+				"51420",
 				"5152",
 				"51786",
 				"51801",
@@ -88471,7 +88456,9 @@
 				"54127",
 				"54142",
 				"54338",
+				"54396",
 				"5456",
+				"54872",
 				"55085",
 				"55247",
 				"55332",
@@ -88517,6 +88504,7 @@
 				"58831",
 				"58854",
 				"59005",
+				"5916",
 				"59220",
 				"59252",
 				"59306",
@@ -88546,6 +88534,7 @@
 				"60803",
 				"60942",
 				"61007",
+				"61039",
 				"61198",
 				"61217",
 				"61262",
@@ -88565,7 +88554,9 @@
 				"62021",
 				"6204",
 				"62069",
+				"62094",
 				"62103",
+				"62108",
 				"6230",
 				"62303",
 				"62363",
@@ -88581,6 +88572,7 @@
 				"63228",
 				"63282",
 				"63398",
+				"63422",
 				"63439",
 				"63447",
 				"6359",
@@ -88603,6 +88595,7 @@
 				"64709",
 				"65033",
 				"65034",
+				"65053",
 				"65167",
 				"65203",
 				"65308",
@@ -88637,6 +88630,7 @@
 				"8938",
 				"8948",
 				"9009",
+				"9171",
 				"918",
 				"9206",
 				"9355",
@@ -89666,35 +89660,6 @@
 						"Gain 1 Rage on Melee Hit"
 					],
 					"via_reachable_node_id": "487"
-				},
-				{
-					"name": "Burning Damage Multiplier",
-					"node_id": "13559",
-					"shortest_executable_prefix": [
-						"44683",
-						"38129",
-						"11334",
-						"15549",
-						"20546",
-						"21301",
-						"37671",
-						"27415",
-						"32710",
-						"41635",
-						"49651",
-						"5296",
-						"19501",
-						"4367",
-						"44184",
-						"61804",
-						"13559"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"+5% to Fire Damage over Time Multiplier"
-					],
-					"via_reachable_node_id": "61804"
 				},
 				{
 					"name": "Reduced Skill Duration",
@@ -92359,6 +92324,34 @@
 					"via_reachable_node_id": "3656"
 				},
 				{
+					"name": "Life Gain on Hit",
+					"node_id": "26820",
+					"shortest_executable_prefix": [
+						"44683",
+						"45272",
+						"8640",
+						"45838",
+						"4011",
+						"28012",
+						"59252",
+						"59606",
+						"1461",
+						"36287",
+						"20807",
+						"12412",
+						"32555",
+						"22266",
+						"50038",
+						"26820"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"Gain 6 Life per Enemy Hit with Attacks"
+					],
+					"via_reachable_node_id": "50038"
+				},
+				{
 					"name": "Mace Damage",
 					"node_id": "27134",
 					"shortest_executable_prefix": [
@@ -92860,11 +92853,12 @@
 						"5408",
 						"29359"
 					],
-					"status": "unsupported",
-					"supported": [],
+					"status": "partial",
+					"supported": [
+						"0.4% of Physical Attack Damage Leeched as Life"
+					],
 					"unsupported": [
 						"12% increased Attack Damage",
-						"0.4% of Physical Attack Damage Leeched as Life",
 						"12% increased Damage with Ailments from Attack Skills"
 					],
 					"via_reachable_node_id": "5408"
@@ -94612,38 +94606,6 @@
 					"via_reachable_node_id": "5972"
 				},
 				{
-					"name": "Life and Mana Leech",
-					"node_id": "36704",
-					"shortest_executable_prefix": [
-						"44683",
-						"45272",
-						"8640",
-						"45838",
-						"4011",
-						"28012",
-						"59252",
-						"59606",
-						"1461",
-						"36287",
-						"20807",
-						"12412",
-						"32555",
-						"22266",
-						"30679",
-						"5237",
-						"23471",
-						"20010",
-						"36704"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"0.4% of Attack Damage Leeched as Life",
-						"0.4% of Attack Damage Leeched as Mana"
-					],
-					"via_reachable_node_id": "20010"
-				},
-				{
 					"name": "Trap Damage",
 					"node_id": "36877",
 					"shortest_executable_prefix": [
@@ -94903,41 +94865,6 @@
 					"via_reachable_node_id": "56460"
 				},
 				{
-					"name": "Life Leech",
-					"node_id": "37800",
-					"shortest_executable_prefix": [
-						"44683",
-						"45272",
-						"8640",
-						"45838",
-						"4011",
-						"28012",
-						"59252",
-						"59606",
-						"1461",
-						"36287",
-						"20807",
-						"12412",
-						"32555",
-						"22266",
-						"30679",
-						"5237",
-						"6363",
-						"29937",
-						"8544",
-						"16544",
-						"24083",
-						"61262",
-						"37800"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"0.6% of Physical Attack Damage Leeched as Life"
-					],
-					"via_reachable_node_id": "61262"
-				},
-				{
 					"name": "Bow Damage",
 					"node_id": "38149",
 					"shortest_executable_prefix": [
@@ -95111,6 +95038,39 @@
 						"Attacks with Melee Weapons deal 12% increased Damage with Ailments"
 					],
 					"via_reachable_node_id": "58449"
+				},
+				{
+					"name": "Ignite Chance and Duration",
+					"node_id": "38789",
+					"shortest_executable_prefix": [
+						"44683",
+						"38129",
+						"11334",
+						"15549",
+						"20546",
+						"21301",
+						"37671",
+						"27415",
+						"32710",
+						"41635",
+						"49651",
+						"5296",
+						"19501",
+						"4367",
+						"44184",
+						"61804",
+						"13559",
+						"31462",
+						"11924",
+						"38789"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"15% increased Ignite Duration on Enemies",
+						"15% chance to Ignite"
+					],
+					"via_reachable_node_id": "11924"
 				},
 				{
 					"name": "Chain Distance",
@@ -95759,26 +95719,6 @@
 						"+2% Chance to Block Attack Damage while wielding a Staff"
 					],
 					"via_reachable_node_id": "15631"
-				},
-				{
-					"name": "Life Leech Speed",
-					"node_id": "41819",
-					"shortest_executable_prefix": [
-						"44683",
-						"45272",
-						"8640",
-						"45838",
-						"4011",
-						"9355",
-						"49978",
-						"41819"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"60% increased total Recovery per second from Life Leech"
-					],
-					"via_reachable_node_id": "49978"
 				},
 				{
 					"name": "Ancestral Bond",
@@ -97170,38 +97110,6 @@
 					"via_reachable_node_id": "33783"
 				},
 				{
-					"name": "Burning Damage Multiplier",
-					"node_id": "4713",
-					"shortest_executable_prefix": [
-						"44683",
-						"38129",
-						"11334",
-						"15549",
-						"20546",
-						"21301",
-						"37671",
-						"27415",
-						"32710",
-						"41635",
-						"49651",
-						"5296",
-						"19501",
-						"4367",
-						"44184",
-						"63447",
-						"39841",
-						"36678",
-						"7444",
-						"4713"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"+4% to Fire Damage over Time Multiplier"
-					],
-					"via_reachable_node_id": "7444"
-				},
-				{
 					"name": "Life and Energy Shield on Kill",
 					"node_id": "47362",
 					"shortest_executable_prefix": [
@@ -97685,6 +97593,33 @@
 					"via_reachable_node_id": "24083"
 				},
 				{
+					"name": "Mana on Hit",
+					"node_id": "49481",
+					"shortest_executable_prefix": [
+						"44683",
+						"45272",
+						"8640",
+						"45838",
+						"4011",
+						"28012",
+						"59252",
+						"59606",
+						"1461",
+						"36287",
+						"20807",
+						"12412",
+						"32555",
+						"51420",
+						"49481"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"Gain 3 Mana per Enemy Hit with Attacks"
+					],
+					"via_reachable_node_id": "51420"
+				},
+				{
 					"name": "Spell Suppression and Energy Shield Recharge Rate",
 					"node_id": "49515",
 					"shortest_executable_prefix": [
@@ -97935,33 +97870,6 @@
 						"+1% to maximum Lightning Resistance"
 					],
 					"via_reachable_node_id": "35706"
-				},
-				{
-					"name": "Life Leech",
-					"node_id": "50038",
-					"shortest_executable_prefix": [
-						"44683",
-						"45272",
-						"8640",
-						"45838",
-						"4011",
-						"28012",
-						"59252",
-						"59606",
-						"1461",
-						"36287",
-						"20807",
-						"12412",
-						"32555",
-						"22266",
-						"50038"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"0.5% of Attack Damage Leeched as Life"
-					],
-					"via_reachable_node_id": "22266"
 				},
 				{
 					"name": "Physical Bow Damage",
@@ -98381,32 +98289,6 @@
 						"12% increased Cold Damage with Attack Skills"
 					],
 					"via_reachable_node_id": "5237"
-				},
-				{
-					"name": "Mana Leech",
-					"node_id": "51420",
-					"shortest_executable_prefix": [
-						"44683",
-						"45272",
-						"8640",
-						"45838",
-						"4011",
-						"28012",
-						"59252",
-						"59606",
-						"1461",
-						"36287",
-						"20807",
-						"12412",
-						"32555",
-						"51420"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"0.4% of Attack Damage Leeched as Mana"
-					],
-					"via_reachable_node_id": "32555"
 				},
 				{
 					"name": "Druidic Rite",
@@ -98958,6 +98840,45 @@
 					"via_reachable_node_id": "2913"
 				},
 				{
+					"name": "Magmatic Strikes",
+					"node_id": "5430",
+					"shortest_executable_prefix": [
+						"44683",
+						"38129",
+						"11334",
+						"15549",
+						"20546",
+						"21301",
+						"37671",
+						"48778",
+						"51923",
+						"46092",
+						"60090",
+						"3452",
+						"22473",
+						"10490",
+						"33479",
+						"63976",
+						"16775",
+						"46910",
+						"33740",
+						"15405",
+						"50862",
+						"50422",
+						"10221",
+						"54396",
+						"2550",
+						"1550",
+						"5430"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"Every 10 seconds, gain 30% of Physical Damage\nas Extra Fire Damage for 4 seconds"
+					],
+					"via_reachable_node_id": "1550"
+				},
+				{
 					"name": "Acrobatics",
 					"node_id": "54307",
 					"shortest_executable_prefix": [
@@ -99004,42 +98925,6 @@
 						"Sword Attacks deal 12% increased Damage with Hits and Ailments"
 					],
 					"via_reachable_node_id": "12412"
-				},
-				{
-					"name": "Burning Damage Multiplier",
-					"node_id": "54396",
-					"shortest_executable_prefix": [
-						"44683",
-						"38129",
-						"11334",
-						"15549",
-						"20546",
-						"21301",
-						"37671",
-						"48778",
-						"51923",
-						"46092",
-						"60090",
-						"3452",
-						"22473",
-						"10490",
-						"33479",
-						"63976",
-						"16775",
-						"46910",
-						"33740",
-						"15405",
-						"50862",
-						"50422",
-						"10221",
-						"54396"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"+4% to Fire Damage over Time Multiplier"
-					],
-					"via_reachable_node_id": "10221"
 				},
 				{
 					"name": "Staff Area of Effect",
@@ -100890,49 +100775,6 @@
 					"via_reachable_node_id": "28574"
 				},
 				{
-					"name": "Life Leech and Attack Speed",
-					"node_id": "62108",
-					"shortest_executable_prefix": [
-						"44683",
-						"38129",
-						"11334",
-						"15549",
-						"20546",
-						"21301",
-						"37671",
-						"48778",
-						"51923",
-						"46092",
-						"60090",
-						"3452",
-						"22473",
-						"10490",
-						"33479",
-						"63976",
-						"16775",
-						"46910",
-						"33740",
-						"15405",
-						"50862",
-						"44606",
-						"26523",
-						"6446",
-						"55649",
-						"22285",
-						"53793",
-						"40653",
-						"62108"
-					],
-					"status": "partial",
-					"supported": [
-						"3% increased Attack Speed"
-					],
-					"unsupported": [
-						"0.4% of Physical Attack Damage Leeched as Life"
-					],
-					"via_reachable_node_id": "40653"
-				},
-				{
 					"name": "Melee Damage",
 					"node_id": "62319",
 					"shortest_executable_prefix": [
@@ -100970,6 +100812,39 @@
 						"Attacks with Melee Weapons deal 4% increased Damage with Ailments"
 					],
 					"via_reachable_node_id": "34400"
+				},
+				{
+					"name": "Chance to Ignite",
+					"node_id": "6245",
+					"shortest_executable_prefix": [
+						"44683",
+						"38129",
+						"11334",
+						"15549",
+						"20546",
+						"21301",
+						"37671",
+						"27415",
+						"32710",
+						"41635",
+						"49651",
+						"5296",
+						"19501",
+						"4367",
+						"44184",
+						"63447",
+						"39841",
+						"36678",
+						"7444",
+						"4713",
+						"6245"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"20% chance to Ignite"
+					],
+					"via_reachable_node_id": "4713"
 				},
 				{
 					"name": "Shock Chance",
@@ -101610,12 +101485,13 @@
 						"43374",
 						"64816"
 					],
-					"status": "unsupported",
-					"supported": [],
+					"status": "partial",
+					"supported": [
+						"0.4% of Physical Attack Damage Leeched as Life"
+					],
 					"unsupported": [
 						"12% increased Physical Damage with Two Handed Melee Weapons",
-						"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments",
-						"0.4% of Physical Attack Damage Leeched as Life"
+						"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments"
 					],
 					"via_reachable_node_id": "43374"
 				},
@@ -102288,6 +102164,37 @@
 					"via_reachable_node_id": "24914"
 				},
 				{
+					"name": "Ignite Chance and Duration",
+					"node_id": "8624",
+					"shortest_executable_prefix": [
+						"44683",
+						"38129",
+						"11334",
+						"15549",
+						"20546",
+						"21301",
+						"37671",
+						"27415",
+						"32710",
+						"41635",
+						"49651",
+						"5296",
+						"19501",
+						"4367",
+						"44184",
+						"61804",
+						"13559",
+						"8624"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"15% increased Ignite Duration on Enemies",
+						"15% chance to Ignite"
+					],
+					"via_reachable_node_id": "13559"
+				},
+				{
 					"name": "Cast Speed",
 					"node_id": "8643",
 					"shortest_executable_prefix": [
@@ -102578,18 +102485,18 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 451,
+			"blocked_frontier_count": 448,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
-				"partial": 117,
-				"unsupported": 334
+				"partial": 118,
+				"unsupported": 330
 			},
 			"class_id": 6,
 			"class_name": "Shadow",
 			"excluded_adjacent_counts": {
 				"blighted_only": 0,
-				"mastery_not_path": 30,
+				"mastery_not_path": 39,
 				"other_class_start": 6,
 				"position_proxy": 0
 			},
@@ -102598,6 +102505,11 @@
 					"node_id": "10729",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "23690"
+				},
+				{
+					"node_id": "11505",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "29049"
 				},
 				{
 					"node_id": "12125",
@@ -102630,9 +102542,19 @@
 					"via_reachable_node_id": "21435"
 				},
 				{
+					"node_id": "25446",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "1382"
+				},
+				{
 					"node_id": "26148",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "47484"
+				},
+				{
+					"node_id": "28862",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "63422"
 				},
 				{
 					"node_id": "30393",
@@ -102655,6 +102577,11 @@
 					"via_reachable_node_id": "48298"
 				},
 				{
+					"node_id": "34927",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "11924"
+				},
+				{
 					"node_id": "35085",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "30471"
@@ -102665,9 +102592,24 @@
 					"via_reachable_node_id": "2225"
 				},
 				{
+					"node_id": "35859",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "22356"
+				},
+				{
+					"node_id": "40383",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "61039"
+				},
+				{
 					"node_id": "42533",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "52230"
+				},
+				{
+					"node_id": "43495",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "62094"
 				},
 				{
 					"node_id": "43818",
@@ -102683,6 +102625,11 @@
 					"node_id": "47212",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "41119"
+				},
+				{
+					"node_id": "48267",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "2550"
 				},
 				{
 					"node_id": "50459",
@@ -102750,6 +102697,11 @@
 					"via_reachable_node_id": "10835"
 				},
 				{
+					"node_id": "6384",
+					"reason": "mastery_not_path",
+					"via_reachable_node_id": "65053"
+				},
+				{
 					"node_id": "63861",
 					"reason": "mastery_not_path",
 					"via_reachable_node_id": "61981"
@@ -102775,9 +102727,9 @@
 					"via_reachable_node_id": "47306"
 				}
 			],
-			"reachable_count_excluding_start": 656,
-			"reachable_count_including_start": 657,
-			"reachable_full_direct_effect_nodes": 641,
+			"reachable_count_excluding_start": 685,
+			"reachable_count_including_start": 686,
+			"reachable_full_direct_effect_nodes": 670,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -102801,6 +102753,7 @@
 				"11688",
 				"11700",
 				"11859",
+				"11924",
 				"1203",
 				"12250",
 				"12412",
@@ -102815,9 +102768,11 @@
 				"1325",
 				"13322",
 				"1346",
+				"13559",
 				"13714",
 				"13753",
 				"13782",
+				"1382",
 				"13885",
 				"14021",
 				"14040",
@@ -102840,6 +102795,7 @@
 				"15228",
 				"15365",
 				"15405",
+				"1550",
 				"15549",
 				"15631",
 				"15678",
@@ -102914,6 +102870,7 @@
 				"22266",
 				"22285",
 				"22315",
+				"22356",
 				"22473",
 				"22618",
 				"22627",
@@ -102941,6 +102898,7 @@
 				"25067",
 				"25237",
 				"25260",
+				"2550",
 				"25531",
 				"25714",
 				"25757",
@@ -102966,12 +102924,14 @@
 				"27929",
 				"28012",
 				"28221",
+				"28311",
 				"28330",
 				"28475",
 				"28574",
 				"28658",
 				"28754",
 				"29005",
+				"29049",
 				"29061",
 				"29104",
 				"2913",
@@ -102979,6 +102939,7 @@
 				"29292",
 				"29353",
 				"29379",
+				"29547",
 				"29629",
 				"29781",
 				"29933",
@@ -102997,6 +102958,7 @@
 				"31080",
 				"31153",
 				"31315",
+				"31462",
 				"31471",
 				"31583",
 				"31628",
@@ -103050,6 +103012,7 @@
 				"35283",
 				"35288",
 				"35503",
+				"35507",
 				"35556",
 				"35568",
 				"35706",
@@ -103062,6 +103025,7 @@
 				"36221",
 				"36222",
 				"36287",
+				"3634",
 				"36412",
 				"3644",
 				"36452",
@@ -103072,6 +103036,7 @@
 				"36634",
 				"36678",
 				"367",
+				"36704",
 				"3676",
 				"36774",
 				"36858",
@@ -103084,6 +103049,7 @@
 				"37619",
 				"37671",
 				"37690",
+				"37800",
 				"37884",
 				"37999",
 				"38048",
@@ -103104,6 +103070,7 @@
 				"38906",
 				"39023",
 				"39211",
+				"39530",
 				"39631",
 				"39648",
 				"39678",
@@ -103137,6 +103104,7 @@
 				"41536",
 				"41635",
 				"41689",
+				"41819",
 				"41866",
 				"41967",
 				"42104",
@@ -103153,6 +103121,7 @@
 				"43374",
 				"43608",
 				"4367",
+				"4378",
 				"43787",
 				"4397",
 				"44184",
@@ -103193,6 +103162,7 @@
 				"46910",
 				"47030",
 				"47062",
+				"4713",
 				"47251",
 				"47306",
 				"47312",
@@ -103226,6 +103196,7 @@
 				"49900",
 				"49929",
 				"49978",
+				"50038",
 				"50197",
 				"50264",
 				"50306",
@@ -103238,6 +103209,7 @@
 				"50969",
 				"51220",
 				"51291",
+				"51420",
 				"5152",
 				"51786",
 				"51801",
@@ -103263,7 +103235,9 @@
 				"54127",
 				"54142",
 				"54338",
+				"54396",
 				"5456",
+				"54872",
 				"55085",
 				"55247",
 				"55332",
@@ -103309,6 +103283,7 @@
 				"58831",
 				"58854",
 				"59005",
+				"5916",
 				"59220",
 				"59252",
 				"59306",
@@ -103338,6 +103313,7 @@
 				"60803",
 				"60942",
 				"61007",
+				"61039",
 				"61198",
 				"61217",
 				"61262",
@@ -103356,7 +103332,9 @@
 				"62021",
 				"6204",
 				"62069",
+				"62094",
 				"62103",
+				"62108",
 				"6230",
 				"62303",
 				"62363",
@@ -103372,6 +103350,7 @@
 				"63228",
 				"63282",
 				"63398",
+				"63422",
 				"63439",
 				"63447",
 				"6359",
@@ -103394,6 +103373,7 @@
 				"64709",
 				"65033",
 				"65034",
+				"65053",
 				"65167",
 				"65203",
 				"65308",
@@ -103428,6 +103408,7 @@
 				"8938",
 				"8948",
 				"9009",
+				"9171",
 				"918",
 				"9206",
 				"9355",
@@ -103444,35 +103425,35 @@
 	"effect_coverage": {
 		"all_source": {
 			"direct_effect_entries": {
-				"full": 797,
+				"full": 832,
 				"no_direct_stats": 165,
 				"other_status": 0,
-				"partial": 425,
+				"partial": 441,
 				"total_with_stats": 4709,
-				"unsupported": 3487
+				"unsupported": 3436
 			},
 			"mastery_nodes": 353,
 			"mastery_option_status_counts": {
-				"full": 33,
+				"full": 37,
 				"other": 0,
-				"partial": 6,
-				"unsupported": 1798
+				"partial": 14,
+				"unsupported": 1786
 			},
 			"mastery_options": 1837,
 			"mastery_options_with_direct_stats": 1837,
 			"mastery_options_without_direct_stats": 0,
 			"node_api_status_counts": {
 				"choice": 353,
-				"full": 929,
-				"partial": 419,
+				"full": 960,
+				"partial": 427,
 				"unknown": 0,
-				"unsupported": 1689
+				"unsupported": 1650
 			},
 			"node_direct_effect_status_counts": {
-				"full": 797,
+				"full": 832,
 				"other": 0,
-				"partial": 425,
-				"unsupported": 3487
+				"partial": 441,
+				"unsupported": 3436
 			},
 			"node_records": 3390,
 			"nodes_with_direct_stats": 2872,
@@ -103481,35 +103462,35 @@
 		"counting_rule": "Only source entries with non-empty direct stats count as full, partial or unsupported effect entries. Empty-stat nodes/options are recorded as no_direct_stats even when node_effect returns full with no grants.",
 		"standard_allocation_graph": {
 			"direct_effect_entries": {
-				"full": 693,
+				"full": 726,
 				"no_direct_stats": 64,
 				"other_status": 0,
-				"partial": 231,
+				"partial": 244,
 				"total_with_stats": 3845,
-				"unsupported": 2921
+				"unsupported": 2875
 			},
 			"mastery_nodes": 315,
 			"mastery_option_status_counts": {
-				"full": 33,
+				"full": 37,
 				"other": 0,
-				"partial": 6,
-				"unsupported": 1798
+				"partial": 14,
+				"unsupported": 1786
 			},
 			"mastery_options": 1837,
 			"mastery_options_with_direct_stats": 1837,
 			"mastery_options_without_direct_stats": 0,
 			"node_api_status_counts": {
 				"choice": 315,
-				"full": 724,
-				"partial": 225,
+				"full": 753,
+				"partial": 230,
 				"unknown": 0,
-				"unsupported": 1123
+				"unsupported": 1089
 			},
 			"node_direct_effect_status_counts": {
-				"full": 693,
+				"full": 726,
 				"other": 0,
-				"partial": 231,
-				"unsupported": 2921
+				"partial": 244,
+				"unsupported": 2875
 			},
 			"node_records": 2387,
 			"nodes_with_direct_stats": 2008,
@@ -109168,13 +109149,20 @@
 					"effect": 36313.0,
 					"effect_id": 36313,
 					"execution": {
-						"api_status": "unsupported",
-						"coverage_status": "unsupported",
-						"grants": [],
+						"api_status": "partial",
+						"coverage_status": "partial",
+						"grants": [
+							{
+								"mode": "flat",
+								"stat": "fire_dot_multiplier_add",
+								"value": 0.12
+							}
+						],
 						"has_direct_stats": true,
-						"supported": [],
+						"supported": [
+							"+12% to Fire Damage over Time Multiplier"
+						],
 						"unsupported": [
-							"+12% to Fire Damage over Time Multiplier",
 							"50% increased Ignite Duration on you"
 						]
 					},
@@ -110720,9 +110708,14 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
+					{
+						"mode": "flat",
+						"stat": "fire_dot_multiplier_add",
+						"value": 0.1
+					},
 					{
 						"mode": "increased",
 						"stat": "fire_increased",
@@ -110731,11 +110724,10 @@
 				],
 				"has_direct_stats": true,
 				"supported": [
+					"+10% to Fire Damage over Time Multiplier",
 					"30% increased Fire Damage"
 				],
-				"unsupported": [
-					"+10% to Fire Damage over Time Multiplier"
-				]
+				"unsupported": []
 			},
 			"group_id": "408",
 			"has_position": true,
@@ -114584,9 +114576,14 @@
 		{
 			"default_allocation_graph": false,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
+					{
+						"mode": "flat",
+						"stat": "fire_dot_multiplier_add",
+						"value": 0.04
+					},
 					{
 						"mode": "increased",
 						"stat": "elemental_increased",
@@ -114595,11 +114592,10 @@
 				],
 				"has_direct_stats": true,
 				"supported": [
+					"+4% to Fire Damage over Time Multiplier",
 					"10% increased Elemental Damage"
 				],
-				"unsupported": [
-					"+4% to Fire Damage over Time Multiplier"
-				]
+				"unsupported": []
 			},
 			"group_id": "426",
 			"has_position": true,
@@ -117149,14 +117145,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "fire_dot_multiplier_add",
+						"value": 0.05
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"+5% to Fire Damage over Time Multiplier"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "408",
 			"has_position": true,
@@ -117926,15 +117928,26 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "attack_mana_leech",
+						"value": 0.01
+					},
+					{
+						"mode": "increased",
+						"stat": "mana_leech_max_rate_increased",
+						"value": 0.4
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"1% of Attack Damage Leeched as Mana",
 					"40% increased Maximum total Mana Recovery per second from Leech"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "530",
 			"has_position": true,
@@ -120573,14 +120586,19 @@
 						"mode": "increased",
 						"stat": "attack_speed_increased",
 						"value": 0.08
+					},
+					{
+						"mode": "flat",
+						"stat": "attack_mana_leech",
+						"value": 0.004
 					}
 				],
 				"has_direct_stats": true,
 				"supported": [
-					"8% increased Attack Speed"
+					"8% increased Attack Speed",
+					"0.4% of Attack Damage Leeched as Mana"
 				],
 				"unsupported": [
-					"0.4% of Attack Damage Leeched as Mana",
 					"20% increased Damage while Leeching"
 				]
 			},
@@ -122467,14 +122485,19 @@
 						"mode": "increased",
 						"stat": "max_mana",
 						"value": 0.18
+					},
+					{
+						"mode": "flat",
+						"stat": "attack_mana_leech",
+						"value": 0.004
 					}
 				],
 				"has_direct_stats": true,
 				"supported": [
-					"18% increased maximum Mana"
+					"18% increased maximum Mana",
+					"0.4% of Attack Damage Leeched as Mana"
 				],
 				"unsupported": [
-					"0.4% of Attack Damage Leeched as Mana",
 					"25% increased Cost Efficiency of Attacks"
 				]
 			},
@@ -123549,14 +123572,19 @@
 						"mode": "increased",
 						"stat": "max_health",
 						"value": 0.08
+					},
+					{
+						"mode": "flat",
+						"stat": "attack_life_leech",
+						"value": 0.004
 					}
 				],
 				"has_direct_stats": true,
 				"supported": [
-					"8% increased maximum Life"
+					"8% increased maximum Life",
+					"0.4% of Attack Damage Leeched as Life"
 				],
 				"unsupported": [
-					"0.4% of Attack Damage Leeched as Life",
 					"Gain 10 Life per Enemy Hit with Attacks"
 				]
 			},
@@ -137015,13 +137043,20 @@
 					"effect": 36313.0,
 					"effect_id": 36313,
 					"execution": {
-						"api_status": "unsupported",
-						"coverage_status": "unsupported",
-						"grants": [],
+						"api_status": "partial",
+						"coverage_status": "partial",
+						"grants": [
+							{
+								"mode": "flat",
+								"stat": "fire_dot_multiplier_add",
+								"value": 0.12
+							}
+						],
 						"has_direct_stats": true,
-						"supported": [],
+						"supported": [
+							"+12% to Fire Damage over Time Multiplier"
+						],
 						"unsupported": [
-							"+12% to Fire Damage over Time Multiplier",
 							"50% increased Ignite Duration on you"
 						]
 					},
@@ -144762,15 +144797,26 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "life_leech_max_rate_increased",
+						"value": 0.4
+					},
+					{
+						"mode": "increased",
+						"stat": "life_leech_rate_increased",
+						"value": 1.0
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"40% increased Maximum total Life Recovery per second from Leech",
 					"100% increased total Recovery per second from Life Leech"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "378",
 			"has_position": true,
@@ -156997,9 +157043,14 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
+					{
+						"mode": "flat",
+						"stat": "fire_dot_multiplier_add",
+						"value": 0.1
+					},
 					{
 						"mode": "flat",
 						"stat": "life_regen_percent",
@@ -157008,11 +157059,10 @@
 				],
 				"has_direct_stats": true,
 				"supported": [
+					"+10% to Fire Damage over Time Multiplier",
 					"Regenerate 1.2% of Life per second"
 				],
-				"unsupported": [
-					"+10% to Fire Damage over Time Multiplier"
-				]
+				"unsupported": []
 			},
 			"group_id": "219",
 			"has_position": true,
@@ -159846,13 +159896,20 @@
 		{
 			"default_allocation_graph": false,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "attack_life_leech",
+						"value": 0.004
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
+				"supported": [
+					"0.4% of Attack Damage Leeched as Life"
+				],
 				"unsupported": [
-					"0.4% of Attack Damage Leeched as Life",
 					"30% increased Damage while Leeching",
 					"15% increased Attack Speed while Leeching"
 				]
@@ -162471,15 +162528,22 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "physical_attack_life_leech",
+						"value": 0.008
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
+				"supported": [
+					"0.8% of Physical Attack Damage Leeched as Life"
+				],
 				"unsupported": [
 					"12% increased Physical Damage with Two Handed Melee Weapons",
-					"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments",
-					"0.8% of Physical Attack Damage Leeched as Life"
+					"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments"
 				]
 			},
 			"group_id": "338",
@@ -163608,15 +163672,22 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "life_leech_rate_increased",
+						"value": 1.0
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
+				"supported": [
+					"100% increased total Recovery per second from Life Leech"
+				],
 				"unsupported": [
 					"30% increased Physical Damage with Two Handed Melee Weapons",
 					"Attacks with Two Handed Melee Weapons deal 30% increased Damage with Ailments",
-					"100% increased total Recovery per second from Life Leech",
 					"Hits have 30% chance to ignore Enemy Physical Damage Reduction"
 				]
 			},
@@ -164355,13 +164426,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "physical_attack_mana_leech",
+						"value": 0.005
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
+				"supported": [
+					"0.5% of Physical Attack Damage Leeched as Mana"
+				],
 				"unsupported": [
-					"0.5% of Physical Attack Damage Leeched as Mana",
 					"25% increased Cost Efficiency of Attacks"
 				]
 			},
@@ -167742,22 +167820,26 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
 					{
 						"mode": "increased",
 						"stat": "attack_speed_increased",
 						"value": 0.03
+					},
+					{
+						"mode": "increased",
+						"stat": "life_leech_rate_increased",
+						"value": 0.4
 					}
 				],
 				"has_direct_stats": true,
 				"supported": [
-					"3% increased Attack Speed"
-				],
-				"unsupported": [
+					"3% increased Attack Speed",
 					"40% increased total Recovery per second from Life Leech"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "180",
 			"has_position": true,
@@ -170600,9 +170682,14 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
+					{
+						"mode": "flat",
+						"stat": "fire_dot_multiplier_add",
+						"value": 0.12
+					},
 					{
 						"mode": "flat",
 						"stat": "fire_resistance",
@@ -170611,11 +170698,10 @@
 				],
 				"has_direct_stats": true,
 				"supported": [
+					"+12% to Fire Damage over Time Multiplier",
 					"+24% to Fire Resistance"
 				],
-				"unsupported": [
-					"+12% to Fire Damage over Time Multiplier"
-				]
+				"unsupported": []
 			},
 			"group_id": "162",
 			"has_position": true,
@@ -171644,14 +171730,21 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "physical_attack_life_leech",
+						"value": 0.004
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
+				"supported": [
+					"0.4% of Physical Attack Damage Leeched as Life"
+				],
 				"unsupported": [
 					"12% increased Attack Damage",
-					"0.4% of Physical Attack Damage Leeched as Life",
 					"12% increased Damage with Ailments from Attack Skills"
 				]
 			},
@@ -172079,14 +172172,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "life_leech_max_rate_increased",
+						"value": 0.15
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"15% increased Maximum total Life Recovery per second from Leech"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "378",
 			"has_position": true,
@@ -178011,14 +178110,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "fire_dot_multiplier_add",
+						"value": 0.05
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"+5% to Fire Damage over Time Multiplier"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "408",
 			"has_position": true,
@@ -188064,14 +188169,21 @@
 		{
 			"default_allocation_graph": false,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "attack_life_leech",
+						"value": 0.004
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
-					"10% increased Attack Damage",
+				"supported": [
 					"0.4% of Attack Damage Leeched as Life"
+				],
+				"unsupported": [
+					"10% increased Attack Damage"
 				]
 			},
 			"group_id": "517",
@@ -191338,13 +191450,20 @@
 					"effect": 36313.0,
 					"effect_id": 36313,
 					"execution": {
-						"api_status": "unsupported",
-						"coverage_status": "unsupported",
-						"grants": [],
+						"api_status": "partial",
+						"coverage_status": "partial",
+						"grants": [
+							{
+								"mode": "flat",
+								"stat": "fire_dot_multiplier_add",
+								"value": 0.12
+							}
+						],
 						"has_direct_stats": true,
-						"supported": [],
+						"supported": [
+							"+12% to Fire Damage over Time Multiplier"
+						],
 						"unsupported": [
-							"+12% to Fire Damage over Time Multiplier",
 							"50% increased Ignite Duration on you"
 						]
 					},
@@ -191525,15 +191644,22 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "life_leech_rate_increased",
+						"value": 0.6
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
+				"supported": [
+					"60% increased total Recovery per second from Life Leech"
+				],
 				"unsupported": [
 					"12% increased Physical Damage with Two Handed Melee Weapons",
-					"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments",
-					"60% increased total Recovery per second from Life Leech"
+					"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments"
 				]
 			},
 			"group_id": "338",
@@ -191860,15 +191986,26 @@
 					"effect": 15133.0,
 					"effect_id": 15133,
 					"execution": {
-						"api_status": "unsupported",
-						"coverage_status": "unsupported",
-						"grants": [],
+						"api_status": "full",
+						"coverage_status": "full",
+						"grants": [
+							{
+								"mode": "flat",
+								"stat": "attack_life_leech",
+								"value": 0.005
+							},
+							{
+								"mode": "flat",
+								"stat": "attack_mana_leech",
+								"value": 0.005
+							}
+						],
 						"has_direct_stats": true,
-						"supported": [],
-						"unsupported": [
+						"supported": [
 							"0.5% of Attack Damage Leeched as Life",
 							"0.5% of Attack Damage Leeched as Mana"
-						]
+						],
+						"unsupported": []
 					},
 					"reminderText": [
 						"(Leeched Life is recovered over time. Multiple Leeches can occur simultaneously, up to a maximum rate)",
@@ -194261,14 +194398,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "life_leech_rate_increased",
+						"value": 0.6
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"60% increased total Recovery per second from Life Leech"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "378",
 			"has_position": true,
@@ -197029,14 +197172,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "attack_life_leech",
+						"value": 0.004
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"0.4% of Attack Damage Leeched as Life"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "640",
 			"has_position": true,
@@ -198105,15 +198254,26 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "attack_life_leech",
+						"value": 0.004
+					},
+					{
+						"mode": "flat",
+						"stat": "attack_mana_leech",
+						"value": 0.004
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"0.4% of Attack Damage Leeched as Life",
 					"0.4% of Attack Damage Leeched as Mana"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "530",
 			"has_position": true,
@@ -202234,14 +202394,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "physical_attack_life_leech",
+						"value": 0.006
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"0.6% of Physical Attack Damage Leeched as Life"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "378",
 			"has_position": true,
@@ -202415,14 +202581,21 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "life_leech_rate_increased",
+						"value": 0.6
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
+				"supported": [
+					"60% increased total Recovery per second from Life Leech"
+				],
 				"unsupported": [
 					"12% increased Attack Damage",
-					"60% increased total Recovery per second from Life Leech",
 					"12% increased Damage with Ailments from Attack Skills"
 				]
 			},
@@ -202635,13 +202808,20 @@
 					"effect": 36313.0,
 					"effect_id": 36313,
 					"execution": {
-						"api_status": "unsupported",
-						"coverage_status": "unsupported",
-						"grants": [],
+						"api_status": "partial",
+						"coverage_status": "partial",
+						"grants": [
+							{
+								"mode": "flat",
+								"stat": "fire_dot_multiplier_add",
+								"value": 0.12
+							}
+						],
 						"has_direct_stats": true,
-						"supported": [],
+						"supported": [
+							"+12% to Fire Damage over Time Multiplier"
+						],
 						"unsupported": [
-							"+12% to Fire Damage over Time Multiplier",
 							"50% increased Ignite Duration on you"
 						]
 					},
@@ -204300,13 +204480,20 @@
 					"effect": 36313.0,
 					"effect_id": 36313,
 					"execution": {
-						"api_status": "unsupported",
-						"coverage_status": "unsupported",
-						"grants": [],
+						"api_status": "partial",
+						"coverage_status": "partial",
+						"grants": [
+							{
+								"mode": "flat",
+								"stat": "fire_dot_multiplier_add",
+								"value": 0.12
+							}
+						],
 						"has_direct_stats": true,
-						"supported": [],
+						"supported": [
+							"+12% to Fire Damage over Time Multiplier"
+						],
 						"unsupported": [
-							"+12% to Fire Damage over Time Multiplier",
 							"50% increased Ignite Duration on you"
 						]
 					},
@@ -209319,14 +209506,21 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "attack_life_leech",
+						"value": 0.008
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
-					"20% increased Critical Strike Chance with Daggers",
+				"supported": [
 					"0.8% of Attack Damage Leeched as Life"
+				],
+				"unsupported": [
+					"20% increased Critical Strike Chance with Daggers"
 				]
 			},
 			"group_id": "645",
@@ -209499,15 +209693,26 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "attack_life_leech",
+						"value": 0.01
+					},
+					{
+						"mode": "increased",
+						"stat": "life_leech_max_rate_increased",
+						"value": 0.4
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"1% of Attack Damage Leeched as Life",
 					"40% increased Maximum total Life Recovery per second from Leech"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "530",
 			"has_position": true,
@@ -212399,13 +212604,20 @@
 					"effect": 36313.0,
 					"effect_id": 36313,
 					"execution": {
-						"api_status": "unsupported",
-						"coverage_status": "unsupported",
-						"grants": [],
+						"api_status": "partial",
+						"coverage_status": "partial",
+						"grants": [
+							{
+								"mode": "flat",
+								"stat": "fire_dot_multiplier_add",
+								"value": 0.12
+							}
+						],
 						"has_direct_stats": true,
-						"supported": [],
+						"supported": [
+							"+12% to Fire Damage over Time Multiplier"
+						],
 						"unsupported": [
-							"+12% to Fire Damage over Time Multiplier",
 							"50% increased Ignite Duration on you"
 						]
 					},
@@ -216856,13 +217068,20 @@
 		{
 			"default_allocation_graph": false,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "attack_life_leech",
+						"value": 0.008
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
+				"supported": [
+					"0.8% of Attack Damage Leeched as Life"
+				],
 				"unsupported": [
-					"0.8% of Attack Damage Leeched as Life",
 					"25% increased Attack Damage when on Full Life",
 					"Attacks have 10% chance to Maim on Hit"
 				]
@@ -218709,14 +218928,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "life_leech_rate_increased",
+						"value": 0.6
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"60% increased total Recovery per second from Life Leech"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "640",
 			"has_position": true,
@@ -225878,14 +226103,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "life_leech_max_rate_increased",
+						"value": 0.15
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"15% increased Maximum total Life Recovery per second from Leech"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "378",
 			"has_position": true,
@@ -233920,14 +234151,21 @@
 		{
 			"default_allocation_graph": false,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "attack_life_leech",
+						"value": 0.004
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
-					"10% increased Attack Damage",
+				"supported": [
 					"0.4% of Attack Damage Leeched as Life"
+				],
+				"unsupported": [
+					"10% increased Attack Damage"
 				]
 			},
 			"group_id": "517",
@@ -237916,14 +238154,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "fire_dot_multiplier_add",
+						"value": 0.04
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"+4% to Fire Damage over Time Multiplier"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "162",
 			"has_position": true,
@@ -241788,13 +242032,20 @@
 					"effect": 36313.0,
 					"effect_id": 36313,
 					"execution": {
-						"api_status": "unsupported",
-						"coverage_status": "unsupported",
-						"grants": [],
+						"api_status": "partial",
+						"coverage_status": "partial",
+						"grants": [
+							{
+								"mode": "flat",
+								"stat": "fire_dot_multiplier_add",
+								"value": 0.12
+							}
+						],
 						"has_direct_stats": true,
-						"supported": [],
+						"supported": [
+							"+12% to Fire Damage over Time Multiplier"
+						],
 						"unsupported": [
-							"+12% to Fire Damage over Time Multiplier",
 							"50% increased Ignite Duration on you"
 						]
 					},
@@ -242911,15 +243162,26 @@
 					"effect": 15133.0,
 					"effect_id": 15133,
 					"execution": {
-						"api_status": "unsupported",
-						"coverage_status": "unsupported",
-						"grants": [],
+						"api_status": "full",
+						"coverage_status": "full",
+						"grants": [
+							{
+								"mode": "flat",
+								"stat": "attack_life_leech",
+								"value": 0.005
+							},
+							{
+								"mode": "flat",
+								"stat": "attack_mana_leech",
+								"value": 0.005
+							}
+						],
 						"has_direct_stats": true,
-						"supported": [],
-						"unsupported": [
+						"supported": [
 							"0.5% of Attack Damage Leeched as Life",
 							"0.5% of Attack Damage Leeched as Mana"
-						]
+						],
+						"unsupported": []
 					},
 					"reminderText": [
 						"(Leeched Life is recovered over time. Multiple Leeches can occur simultaneously, up to a maximum rate)",
@@ -245812,9 +246074,14 @@
 		{
 			"default_allocation_graph": false,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
+					{
+						"mode": "increased",
+						"stat": "life_leech_rate_increased",
+						"value": 0.3
+					},
 					{
 						"mode": "increased",
 						"stat": "physical_increased",
@@ -245823,11 +246090,10 @@
 				],
 				"has_direct_stats": true,
 				"supported": [
+					"30% increased total Recovery per second from Life Leech",
 					"10% increased Physical Damage"
 				],
-				"unsupported": [
-					"30% increased total Recovery per second from Life Leech"
-				]
+				"unsupported": []
 			},
 			"group_id": "28",
 			"has_position": true,
@@ -247706,14 +247972,21 @@
 		{
 			"default_allocation_graph": false,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "life_leech_rate_increased",
+						"value": 0.2
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
+				"supported": [
+					"20% increased total Recovery per second from Life Leech"
+				],
 				"unsupported": [
 					"2% of Attack Damage Leeched as Life against Bleeding Enemies",
-					"20% increased total Recovery per second from Life Leech",
 					"20% increased Damage with Bleeding"
 				]
 			},
@@ -250224,14 +250497,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "attack_life_leech",
+						"value": 0.005
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"0.5% of Attack Damage Leeched as Life"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "678",
 			"has_position": true,
@@ -253924,14 +254203,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "attack_mana_leech",
+						"value": 0.004
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"0.4% of Attack Damage Leeched as Mana"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "707",
 			"has_position": true,
@@ -263531,15 +263816,26 @@
 					"effect": 15133.0,
 					"effect_id": 15133,
 					"execution": {
-						"api_status": "unsupported",
-						"coverage_status": "unsupported",
-						"grants": [],
+						"api_status": "full",
+						"coverage_status": "full",
+						"grants": [
+							{
+								"mode": "flat",
+								"stat": "attack_life_leech",
+								"value": 0.005
+							},
+							{
+								"mode": "flat",
+								"stat": "attack_mana_leech",
+								"value": 0.005
+							}
+						],
 						"has_direct_stats": true,
-						"supported": [],
-						"unsupported": [
+						"supported": [
 							"0.5% of Attack Damage Leeched as Life",
 							"0.5% of Attack Damage Leeched as Mana"
-						]
+						],
+						"unsupported": []
 					},
 					"reminderText": [
 						"(Leeched Life is recovered over time. Multiple Leeches can occur simultaneously, up to a maximum rate)",
@@ -265228,14 +265524,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "fire_dot_multiplier_add",
+						"value": 0.04
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"+4% to Fire Damage over Time Multiplier"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "219",
 			"has_position": true,
@@ -266895,14 +267197,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "mana_leech_rate_increased",
+						"value": 0.6
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"60% increased total Recovery per second from Mana Leech"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "530",
 			"has_position": true,
@@ -272046,15 +272354,26 @@
 					"effect": 15133.0,
 					"effect_id": 15133,
 					"execution": {
-						"api_status": "unsupported",
-						"coverage_status": "unsupported",
-						"grants": [],
+						"api_status": "full",
+						"coverage_status": "full",
+						"grants": [
+							{
+								"mode": "flat",
+								"stat": "attack_life_leech",
+								"value": 0.005
+							},
+							{
+								"mode": "flat",
+								"stat": "attack_mana_leech",
+								"value": 0.005
+							}
+						],
 						"has_direct_stats": true,
-						"supported": [],
-						"unsupported": [
+						"supported": [
 							"0.5% of Attack Damage Leeched as Life",
 							"0.5% of Attack Damage Leeched as Mana"
-						]
+						],
+						"unsupported": []
 					},
 					"reminderText": [
 						"(Leeched Life is recovered over time. Multiple Leeches can occur simultaneously, up to a maximum rate)",
@@ -272957,15 +273276,27 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "attack_life_leech",
+						"value": 0.006
+					},
+					{
+						"mode": "flat",
+						"stat": "attack_mana_leech",
+						"value": 0.006
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
-					"+30% to Critical Strike Multiplier with Daggers",
+				"supported": [
 					"0.6% of Attack Damage Leeched as Life",
 					"0.6% of Attack Damage Leeched as Mana"
+				],
+				"unsupported": [
+					"+30% to Critical Strike Multiplier with Daggers"
 				]
 			},
 			"group_id": "645",
@@ -282092,16 +282423,21 @@
 				"grants": [
 					{
 						"mode": "flat",
+						"stat": "attack_life_leech",
+						"value": 0.004
+					},
+					{
+						"mode": "flat",
 						"stat": "life_regen_percent",
 						"value": 0.015
 					}
 				],
 				"has_direct_stats": true,
 				"supported": [
+					"0.4% of Attack Damage Leeched as Life",
 					"Regenerate 1.5% of Life per second"
 				],
 				"unsupported": [
-					"0.4% of Attack Damage Leeched as Life",
 					"+6% Chance to Block Attack Damage"
 				]
 			},
@@ -282850,14 +283186,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "fire_dot_multiplier_add",
+						"value": 0.06
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"+6% to Fire Damage over Time Multiplier"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "162",
 			"has_position": true,
@@ -289033,15 +289375,26 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "attack_life_leech",
+						"value": 0.008
+					},
+					{
+						"mode": "increased",
+						"stat": "life_leech_max_rate_increased",
+						"value": 0.3
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"0.8% of Attack Damage Leeched as Life",
 					"30% increased Maximum total Life Recovery per second from Leech"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "678",
 			"has_position": true,
@@ -293329,15 +293682,26 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "attack_life_leech",
+						"value": 0.01
+					},
+					{
+						"mode": "increased",
+						"stat": "life_leech_max_rate_increased",
+						"value": 0.3
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"1% of Attack Damage Leeched as Life",
 					"30% increased Maximum total Life Recovery per second from Leech"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "640",
 			"has_position": true,
@@ -293440,22 +293804,26 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
 					{
 						"mode": "increased",
 						"stat": "attack_speed_increased",
 						"value": 0.03
+					},
+					{
+						"mode": "flat",
+						"stat": "physical_attack_life_leech",
+						"value": 0.004
 					}
 				],
 				"has_direct_stats": true,
 				"supported": [
-					"3% increased Attack Speed"
-				],
-				"unsupported": [
+					"3% increased Attack Speed",
 					"0.4% of Physical Attack Damage Leeched as Life"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "180",
 			"has_position": true,
@@ -298232,13 +298600,20 @@
 					"effect": 36313.0,
 					"effect_id": 36313,
 					"execution": {
-						"api_status": "unsupported",
-						"coverage_status": "unsupported",
-						"grants": [],
+						"api_status": "partial",
+						"coverage_status": "partial",
+						"grants": [
+							{
+								"mode": "flat",
+								"stat": "fire_dot_multiplier_add",
+								"value": 0.12
+							}
+						],
 						"has_direct_stats": true,
-						"supported": [],
+						"supported": [
+							"+12% to Fire Damage over Time Multiplier"
+						],
 						"unsupported": [
-							"+12% to Fire Damage over Time Multiplier",
 							"50% increased Ignite Duration on you"
 						]
 					},
@@ -298992,22 +299367,26 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "partial",
-				"coverage_status": "partial",
+				"api_status": "full",
+				"coverage_status": "full",
 				"grants": [
 					{
 						"mode": "increased",
 						"stat": "attack_speed_increased",
 						"value": 0.12
+					},
+					{
+						"mode": "flat",
+						"stat": "physical_attack_life_leech",
+						"value": 0.015
 					}
 				],
 				"has_direct_stats": true,
 				"supported": [
-					"12% increased Attack Speed"
-				],
-				"unsupported": [
+					"12% increased Attack Speed",
 					"1.5% of Physical Attack Damage Leeched as Life"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "180",
 			"has_position": true,
@@ -300787,14 +301166,21 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "physical_attack_life_leech",
+						"value": 0.01
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
+				"supported": [
+					"1% of Physical Attack Damage Leeched as Life"
+				],
 				"unsupported": [
 					"10% increased Attack Speed when on Full Life",
-					"1% of Physical Attack Damage Leeched as Life",
 					"40% increased Attack Damage while Leeching"
 				]
 			},
@@ -304814,15 +305200,22 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "physical_attack_life_leech",
+						"value": 0.004
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
+				"supported": [
+					"0.4% of Physical Attack Damage Leeched as Life"
+				],
 				"unsupported": [
 					"12% increased Physical Damage with Two Handed Melee Weapons",
-					"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments",
-					"0.4% of Physical Attack Damage Leeched as Life"
+					"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments"
 				]
 			},
 			"group_id": "338",
@@ -305246,16 +305639,32 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "attack_mana_leech",
+						"value": 0.005
+					},
+					{
+						"mode": "increased",
+						"stat": "mana_leech_max_rate_increased",
+						"value": 0.5
+					},
+					{
+						"mode": "increased",
+						"stat": "mana_leech_rate_increased",
+						"value": 1.0
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"0.5% of Attack Damage Leeched as Mana",
 					"50% increased Maximum total Mana Recovery per second from Leech",
 					"100% increased total Recovery per second from Mana Leech"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "707",
 			"has_position": true,
@@ -309289,15 +309698,22 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "partial",
+				"coverage_status": "partial",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "life_leech_rate_increased",
+						"value": 0.6
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
+				"supported": [
+					"60% increased total Recovery per second from Life Leech"
+				],
 				"unsupported": [
 					"12% increased Physical Damage with Two Handed Melee Weapons",
-					"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments",
-					"60% increased total Recovery per second from Life Leech"
+					"Attacks with Two Handed Melee Weapons deal 12% increased Damage with Ailments"
 				]
 			},
 			"group_id": "338",
@@ -313648,15 +314064,26 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "attack_life_leech",
+						"value": 0.01
+					},
+					{
+						"mode": "flat",
+						"stat": "attack_mana_leech",
+						"value": 0.01
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"1% of Attack Damage Leeched as Life",
 					"1% of Attack Damage Leeched as Mana"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "737",
 			"has_position": true,
@@ -318437,14 +318864,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "life_leech_rate_increased",
+						"value": 0.6
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"60% increased total Recovery per second from Life Leech"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "530",
 			"has_position": true,
