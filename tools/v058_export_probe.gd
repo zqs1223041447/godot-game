@@ -25,7 +25,7 @@ func run() -> void:
 	var model:RefCounted=arena.state;var old:Dictionary=JSON.parse_string(original.get_string_from_utf8());var expected:=old.duplicate(true);expected.version=35
 	check(str(ProjectSettings.get_setting("application/config/version"))=="0.58.0" and model.snapshot().version==35,"Actual version and migrated schema35")
 	check(FileAccess.get_file_as_bytes(arena.build_save_path+".v34-backup.json")==original,"Published34 input is backed up as exact original bytes")
-	check(Same._same_data(JSON.parse_string(JSON.stringify(model.snapshot())),expected),"Migration changes only version, with no items or points granted")
+	check(Same._same_data(JSON.parse_string(JSON.stringify(model.snapshot())),JSON.parse_string(JSON.stringify(expected))),"Migration changes only version, with no items or points granted")
 	check(model.migration_message.contains("魔力") and not model.migration_message.contains("两瓶药剂"),"Correct schema34 migration explanation")
 	check(str(ProjectSettings.get_setting("application/config/custom_user_dir_name"))=="godot-game-preview-v021" and model.bag_layout()=={"pages":2,"columns":12,"rows":10},"Existing userdata directory and240slots")
 	var font:=load("res://assets/fonts/arena_sans.otf") as FontFile;font.allow_system_fallback=false

@@ -1,0 +1,161 @@
+{
+	"actual_hit": {
+		"actor": "player",
+		"armour": 0.0,
+		"components": {
+			"chaos": 100.0
+		},
+		"damage_total": 100.0,
+		"details": [
+			{
+				"base": 100.0,
+				"before_defense": 100.0,
+				"final": 100.0,
+				"increased": 0.0,
+				"modifiers": [],
+				"more": 1.0,
+				"resistance": 0.0,
+				"type": "chaos"
+			}
+		],
+		"effective_resistances": {
+			"cold": 0.0,
+			"fire": 0.0,
+			"lightning": 0.0
+		},
+		"health_lost": 60.0,
+		"mana_spent": 40.0,
+		"mitigated_components": {
+			"chaos": 0.0
+		},
+		"ok": true,
+		"overkill": 0.0,
+		"raw_components": {
+			"chaos": 100.0
+		},
+		"raw_resistances": {
+			"cold": 0.0,
+			"fire": 0.0,
+			"lightning": 0.0
+		},
+		"reason": "",
+		"remaining_health": 72.0,
+		"remaining_mana": 60.0,
+		"remaining_shield": 0.0,
+		"shield_spent": 0.0,
+		"source_id": 0,
+		"stage": "hit_mitigation"
+	},
+	"checks": 25,
+	"failures": 1,
+	"font_sha256": "23242a749119f9790a3640524b07cf29e0f54f47af6d3fcbad03e80fe1d5d6cf",
+	"fraction": 0.4,
+	"ok": false,
+	"pck_sha256": "3603754862299cbdb7f81328ef19a406ba568ed170332ac03235ebb4e2c3f331",
+	"results": [
+		{
+			"label": "Actual version and migrated schema35",
+			"ok": true
+		},
+		{
+			"label": "Published34 input is backed up as exact original bytes",
+			"ok": true
+		},
+		{
+			"label": "Migration changes only version, with no items or points granted",
+			"ok": false
+		},
+		{
+			"label": "Correct schema34 migration explanation",
+			"ok": true
+		},
+		{
+			"label": "Existing userdata directory and240slots",
+			"ok": true
+		},
+		{
+			"label": "Same previously expanded font is used by new resource wording",
+			"ok": true
+		},
+		{
+			"label": "Packed Chinese name and newly implemented line agree",
+			"ok": true
+		},
+		{
+			"label": "Old vocabulary rejects the newly enabled source node",
+			"ok": true
+		},
+		{
+			"label": "Other mixed source definitions stay partial",
+			"ok": true
+		},
+		{
+			"label": "No allocation gives no free mana protection",
+			"ok": true
+		},
+		{
+			"label": "Existing level/class transactions prepare lawful seven-point fixture",
+			"ok": true
+		},
+		{
+			"label": "Actual seven source allocations enable40percent profile",
+			"ok": true
+		},
+		{
+			"label": "Actual normal-practice entry uses the allocated build",
+			"ok": true
+		},
+		{
+			"label": "Actual unmitigated hit spends40mana and60life",
+			"ok": true
+		},
+		{
+			"label": "Mana spending remains separate from life loss and displayed loss",
+			"ok": true
+		},
+		{
+			"label": "Real shield absorption precedes the mana share",
+			"ok": true
+		},
+		{
+			"label": "Actual insufficient mana routes the shortfall to life",
+			"ok": true
+		},
+		{
+			"label": "Zero mana skill rejection spends no resources/cooldown/RNG",
+			"ok": true
+		},
+		{
+			"label": "Actual burn uses the same mana-before-life settlement",
+			"ok": true
+		},
+		{
+			"label": "Incoming defense causes no extra reward RNG or persistence writes",
+			"ok": true
+		},
+		{
+			"label": "Actual refund disables future mana protection",
+			"ok": true
+		},
+		{
+			"label": "Disabled profile keeps original settlement shape",
+			"ok": true
+		},
+		{
+			"label": "Existing point can be reallocated without duplication",
+			"ok": true
+		},
+		{
+			"label": "Schema35 source selection reloads without saving active mana state",
+			"ok": true
+		},
+		{
+			"label": "Transient resource spending is absent from persistent build",
+			"ok": true
+		}
+	],
+	"schema": 35,
+	"scope": "Linux same-PCK focused new resource guard, not Windows hardware FPS or physical-input acceptance",
+	"source_commit": "8cd1f85e7cd7e3b4cce7844fe9ed993ea154a00c",
+	"source_node": "34098"
+}

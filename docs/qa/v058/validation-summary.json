@@ -160,6 +160,14 @@
     "docs/qa/v058/final-import.log": {
       "bytes": 2215,
       "sha256": "a20559ac2851af412ae203e20eb2cc8a7ba5a58b9bd0b68cc379f056e48c7e46"
+    },
+    "docs/qa/v058/packed-probe-first.log": {
+      "bytes": 548,
+      "sha256": "6da5283e2a42a51e3e464ed8e2f64cef69f6a6090f1eedc36d1a479ae2b29379"
+    },
+    "docs/qa/v058/probe-json-type-diagnostic.log": {
+      "bytes": 193,
+      "sha256": "1da81714f243cd668f232062a5397b0012cfd1ba483e919980c0f06d0aa0c30d"
     }
   },
   "known_limits": [
@@ -170,5 +178,13 @@
     "No historical battle full suite,600-second test,new images,or extra native screenshot gate. Windows hardware FPS remains unverified."
   ],
   "total_checks": 89502,
-  "count_scope": "Sum of retained successful assertion evidence; message recheck can overlap earlier successful migration assertions, not a count of unique gameplay scenarios"
+  "count_scope": "Sum of retained successful assertion evidence; message recheck can overlap earlier successful migration assertions, not a count of unique gameplay scenarios",
+  "package_probe_first_attempt": {
+    "checks": 25,
+    "failures": 1,
+    "issue": "Expected version int35 versus JSON float35 in strict typed comparison",
+    "correction": "Normalize both complete documents through JSON before typed comparison; original backup byte check unchanged",
+    "product_and_pck_unchanged": true,
+    "diagnostic_checks": 3
+  }
 }
