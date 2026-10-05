@@ -71,6 +71,8 @@ PHRASES = {
     "Damage with Ailments": "异常状态伤害",
     "Damage over Time Taken": "所受持续伤害",
     "Damage with Hits and Ailments": "击中与异常状态伤害",
+    "Damage with Attack Skills": "攻击技能造成的伤害",
+    "Damage with Spell Skills": "法术技能造成的伤害",
     "Attack and Cast Speed": "攻击与施法速度",
     "Cast Speed": "施法速度",
     "Attack Speed": "攻击速度",
@@ -92,9 +94,15 @@ PHRASES = {
     "Passive Skill Point": "被动天赋点",
     "Passive Skill Points": "被动天赋点",
     "Jewel Socket": "珠宝插槽",
+    "Flask Charges gained": "获得的药剂充能",
     "Skill Gems": "技能宝石",
     "Skill Gem": "技能宝石",
     "Skill Effect Duration": "技能效果持续时间",
+    "Herald of Ash": "灰烬之捷",
+    "Herald of Ice": "冰霜之捷",
+    "Herald of Thunder": "雷电之捷",
+    "Herald of Purity": "纯净之捷",
+    "Herald of Agony": "苦痛之捷",
     "Effect of": "效果",
     "Area of Effect per": "每",
     "Low Life": "低血状态",
@@ -136,6 +144,8 @@ PHRASES = {
     "no more than": "不超过",
     "more than": "超过",
     "less than": "少于",
+    "or more": "或以上",
+    "or less": "或以下",
     "instead of": "而非",
     "as though": "视为",
     "as Extra": "作为额外",
@@ -169,7 +179,7 @@ PHRASES = {
 # Shared PoE/game vocabulary.  The four damage modifiers are deliberately
 # separate: increased/reduced are additive; more/less are independent multipliers.
 WORDS = {
-    "a": "一", "an": "一", "the": "", "and": "与", "or": "或", "of": "的",
+    "a": "", "an": "", "the": "", "and": "与", "or": "或", "of": "的",
     "to": "至", "from": "来自", "by": "由", "for": "对", "with": "与", "without": "没有",
     "if": "若", "when": "当", "while": "当", "after": "后", "before": "前", "during": "期间",
     "per": "每", "each": "每个", "every": "每", "you": "你", "your": "你的", "you've": "你已",
@@ -177,7 +187,7 @@ WORDS = {
     "have": "拥有", "has": "拥有", "been": "已", "be": "成为", "being": "处于", "can": "可以",
     "cannot": "无法", "can't": "无法", "does": "会", "do": "会", "not": "不", "no": "没有",
     "all": "所有", "any": "任意", "other": "其他", "another": "另一个", "additional": "额外",
-    "extra": "额外", "more": "额外提高", "less": "额外降低", "increased": "提高", "increases": "提高",
+    "extra": "额外", "more": "更多", "less": "更少", "increased": "提高", "increases": "提高",
     "increase": "提高", "reduced": "降低", "reductions": "降低", "reduction": "降低",
     "faster": "更快", "slower": "更慢", "inherently": "固有地", "bonus": "加成", "bonuses": "加成",
     "effect": "效果", "effects": "效果", "magnitude": "幅度", "chance": "几率", "rate": "速度",
@@ -218,8 +228,8 @@ WORDS = {
     "brand": "烙印", "brands": "烙印", "totem": "图腾", "totems": "图腾", "trap": "陷阱",
     "traps": "陷阱", "mine": "地雷", "mines": "地雷", "curse": "诅咒", "curses": "诅咒",
     "cursed": "被诅咒", "mark": "印记", "marked": "被标记", "impale": "穿刺", "impales": "穿刺",
-    "bleed": "流血", "leech": "偷取", "leeched": "已偷取", "leeching": "偷取中", "recoup": "追回复",
-    "recouped": "追回复", "reservation": "保留", "reserved": "已保留", "efficiency": "效能",
+    "bleed": "流血", "leech": "偷取", "leeched": "已偷取", "leeching": "偷取中", "recoup": "延迟回复",
+    "recouped": "延迟回复", "reservation": "保留", "reserved": "已保留", "efficiency": "效能",
     "cost": "消耗", "costs": "消耗", "level": "等级", "levels": "等级", "weapon": "武器",
     "weapons": "武器", "sword": "剑", "swords": "剑", "axe": "斧", "axes": "斧", "mace": "锤",
     "maces": "锤", "sceptre": "权杖", "sceptres": "权杖", "staff": "长杖", "staves": "长杖",
@@ -234,7 +244,7 @@ WORDS = {
     "lightning": "闪电", "chaos": "混沌", "elemental": "元素", "all": "所有", "maximum": "最大",
     "minimum": "最小", "base": "基础", "value": "数值", "increased": "提高", "reduced": "降低",
     "increase": "提高", "increases": "提高", "reduction": "降低", "reductions": "降低",
-    "more": "额外提高", "less": "额外降低", "extra": "额外", "additional": "额外", "faster": "更快",
+    "more": "更多", "less": "更少", "extra": "额外", "additional": "额外", "faster": "更快",
     "slower": "更慢", "recently": "近期", "recent": "近期", "past": "过去", "every": "每",
     "each": "每个", "another": "另一个", "one": "一", "two": "两", "twice": "两倍",
     "half": "一半", "quarter": "四分之一", "third": "三分之一", "first": "首次", "final": "最后",
@@ -303,7 +313,7 @@ WORDS = {
     "of": "的", "from": "来自", "by": "由", "for": "对", "with": "与", "without": "没有",
     "and": "与", "or": "或", "the": "", "a": "一", "an": "一", "any": "任意", "all": "所有",
     "other": "其他", "another": "另一个", "one": "一", "two": "两", "twice": "两倍", "half": "一半",
-    "quarter": "四分之一", "third": "三分之一", "more": "额外提高", "less": "额外降低",
+    "quarter": "四分之一", "third": "三分之一", "more": "更多", "less": "更少",
     "increased": "提高", "reduced": "降低", "increases": "提高", "increase": "提高",
     "reduction": "降低", "reductions": "降低", "extra": "额外", "additional": "额外", "faster": "更快",
     "slower": "更慢", "number": "数量", "value": "数值", "type": "类型", "types": "类型",
@@ -769,6 +779,9 @@ NAME_OVERRIDES = {
     "Life Mastery": "生命专精",
     "Mana Mastery": "魔力专精",
     "Armour Mastery": "护甲专精",
+    "Fuel the Fight": "战斗补给",
+    "Heart of Oak": "橡木之心",
+    "Two Hand Mastery": "双手武器专精",
 }
 
 PHRASES.update({
@@ -820,7 +833,7 @@ PHRASES.update({
     "Life Regeneration Rate": "生命回复速度",
     "Mana Regeneration Rate": "魔力回复速度",
     "maximum Total Life Recovery per Second from Leech": "偷取每秒最大生命总回复",
-    "Maximum total Life Recovery per second from Leech": "偷取每秒最大生命总回复",
+    "Maximum total Life Recovery per second from Leech": "生命偷取每秒总回复上限",
     "Maximum total Mana Recovery per second from Leech": "偷取每秒最大魔力总回复",
     "Maximum total Energy Shield Recovery per second from Leech": "偷取每秒最大能量护盾总回复",
     "Damage over Time Multiplier for Poison you inflict on Bleeding Enemies": "你施加给流血敌人的中毒持续伤害倍率",
@@ -840,7 +853,400 @@ PHRASES.update({
     "Duration of Non-Damaging Ailments": "非伤害性异常状态持续时间",
     "Duration of Ailments": "异常状态持续时间",
     "Duration of your Ailments": "你的异常状态持续时间",
+    "Damage over Time with Bow Skills": "弓技能造成的持续伤害",
+    "Damage with Hits": "击中伤害",
+    "Damage with Ailments": "异常状态伤害",
+    "Damage with Hits and Ailments": "击中与异常状态伤害",
+    "Damage dealt": "造成的伤害",
+    "Damage taken": "所受伤害",
+    "Enemy Stun Threshold": "敌人眩晕门槛",
+    "Stun Threshold": "眩晕门槛",
+    "Chance to Suppress Spell Damage": "法术压制几率",
+    "Chance to Avoid being Stunned": "避免眩晕几率",
+    "Chance to Shock": "感电几率",
+    "is equal to": "等于",
+    "is based on": "基于",
+    "is doubled": "翻倍",
+    "is not applied": "不生效",
+    "cannot be Stunned": "无法被眩晕",
+    "Enemies you Kill": "你击杀的敌人",
+    "Enemy you Kill": "你击杀的敌人",
+    "provides no inherent bonus to": "不提供固有加成",
+    "provides no bonus to": "不提供加成",
+    "Life Reservation Efficiency of Skills": "技能的生命保留效能",
+    "Mana Reservation Efficiency of Skills": "技能的魔力保留效能",
+    "Attack and Cast Speed": "攻击与施法速度",
+    "Cooldown Recovery Rate": "冷却回复速度",
+    "Effect of Buffs": "增益效果",
+    "Effect of Auras": "光环效果",
+    "Off Hand": "副手",
+    "Main Hand": "主手",
+    "Left and Right": "左右两侧",
+    "Damage from Hits": "击中造成的伤害",
+    "Damage from Spell Hits": "法术击中造成的伤害",
+    "Maximum Life becomes": "最大生命变为",
+    "Life Recovery from Regeneration": "生命回复",
+    "Your Movement Speed": "你的移动速度",
+    "Unreserved Life is Filled": "未保留生命已回满",
+    "Unreserved Mana is Filled": "未保留魔力已回满",
+    "Enemies that are on Low Life": "低血状态的敌人",
+    "Enemies that are on Full Life": "满血状态的敌人",
+    "Enemies affected by": "受到影响的敌人",
+    "Damage over Time Multiplier for Bleeding": "流血持续伤害倍率",
+    "Damage over Time Multiplier for Poison": "中毒持续伤害倍率",
+    "Damage over Time Multiplier for Ignite": "点燃持续伤害倍率",
+    "to maximum Chance to Block": "最大格挡几率",
+    "is instant": "即时回复",
+    "is lucky": "视为幸运",
+    "is unlucky": "视为不幸",
+    "is aggravated": "被加剧",
+    "is immune to": "免疫",
+    "at least one nearby corpse": "附近至少有一具尸体",
+    "Immune to": "免疫",
+    "Immune to Chaos Damage": "免疫混沌伤害",
+    "Immune to Physical Damage": "免疫物理伤害",
+    "Immune to Elemental Ailments": "免疫元素异常状态",
 })
+
+# Whole multiline entries are translated as complete display records. Keeping
+# these reviewed phrases keyed by the exact raw string preserves line-level
+# runtime support checks and makes complex effects auditable.
+MULTILINE_OVERRIDES = {
+    "+10% to all Elemental Resistances and maximum Elemental Resistances while affected by a Non-Vaal Guard Skill\n20% additional Physical Damage Reduction while affected by a Non-Vaal Guard Skill\n20% more Damage taken if a Non-Vaal Guard Buff was lost Recently": "受到非瓦尔防护技能影响时，所有元素抗性和元素抗性上限+10%\n受到非瓦尔防护技能影响时，物理伤害减免额外提高20%\n若近期失去非瓦尔防护增益效果，所受伤害额外提高20%",
+    "+4% to Critical Strike Multiplier for each Mine Detonated\nRecently, up to 40%": "每近期引爆一座地雷，暴击伤害倍率+4%\n最多40%",
+    "-1 to maximum number of Summoned Totems\nYou can have an additional Brand Attached to an Enemy": "召唤图腾数量上限-1\n你可以额外在一个敌人身上附着一个烙印",
+    "-10% to maximum Chance to Block Attack Damage\n-10% to maximum Chance to Block Spell Damage\n+2% Chance to Block Spell Damage for each 1% Overcapped Chance to Block Attack Damage": "攻击伤害格挡几率上限-10%\n法术伤害格挡几率上限-10%\n攻击伤害格挡几率每超上限1%，法术伤害格挡几率+2%",
+    "1.5% of Physical Damage prevented from Hits in the past\n10 seconds is Regenerated as Life per second": "过去10秒内被击中所阻止的物理伤害的1.5%，会转化为每秒回复的生命",
+    "10% increased Critical Strike Chance for each Mine Detonated\nRecently, up to 100%": "你近期每引爆一座地雷，暴击几率提高10%\n最多提高100%",
+    "10% increased Effect of Arcane Surge on you per\n200 Mana spent Recently, up to 50%": "你近期每消耗200魔力，身上的奥术浪涌效果提高10%\n最多提高50%",
+    "100% chance to Defend with 200% of Armour\nMaximum Damage Reduction for any Damage Type is 50%": "以200%护甲值进行防御的几率为100%\n任意伤害类型的最大伤害减免为50%",
+    "100% increased Armour and Energy Shield from Equipped Body Armour if Equipped Helmet,\nGloves and Boots all have Armour and Energy Shield": "若已装备的头盔、手套和鞋子均有护甲与能量护盾，已装备的身体护甲所提供的护甲与能量护盾提高100%",
+    "20% chance on Hit to remove all Impales from Enemy\nImpales removed this way multiply their Reflected Damage for this Hit by the number of Hits they have left": "击中时有20%几率移除敌人身上的所有穿刺\n以此方式移除的穿刺会按其剩余击中次数，乘算此次击中的反射伤害",
+    "20% increased Maximum total Life Recovery per second from\nLeech if you've dealt a Critical Strike recently": "若你近期造成过暴击，生命偷取每秒总回复上限提高20%",
+    "20% less Attack Damage taken if you haven't been Hit by an Attack Recently\n10% more chance to Evade Attacks if you have been Hit by an Attack Recently\n20% more Attack Damage taken if you have been Hit by an Attack Recently": "若你近期未被攻击击中，所受攻击伤害额外降低20%\n若你近期被攻击击中，攻击闪避几率额外提高10%\n若你近期被攻击击中，所受攻击伤害额外提高20%",
+    "25% more Maximum Lightning Damage\n50% less Minimum Lightning Damage\nCannot deal non-Lightning Damage": "闪电最大伤害额外提高25%\n闪电最小伤害额外降低50%\n无法造成非闪电伤害",
+    "30% increased Armour and Evasion Rating if your Main Hand Weapon\nhas a Red and Green Socket": "若你的主手武器有红色和绿色插槽，护甲与闪避值提高30%",
+    "40% more Attack Damage if Accuracy Rating is higher than Maximum Life\nNever deal Critical Strikes": "若命中值高于最大生命，攻击伤害额外提高40%\n不会造成暴击",
+    "5% chance to Defend with 200% of Armour for each\ntime you've been Hit by an Enemy Recently, up to 30%": "你近期每被敌人击中一次，以200%护甲值进行防御的几率提高5%\n最多提高30%",
+    "5% increased Poison Duration for each Poison you have inflicted Recently, up\nto a maximum of 100%": "你近期每施加一次中毒效果，中毒持续时间提高5%\n最多提高100%",
+    "50% less Life Regeneration Rate\n50% less maximum Total Life Recovery per Second from Leech\nEnergy Shield Recharge instead applies to Life": "生命回复速度额外降低50%\n偷取每秒最大总生命回复额外降低50%\n能量护盾充能改为作用于生命",
+    "50% of Physical, Cold and Lightning Damage Converted to Fire Damage\nDeal no Non-Fire Damage": "50%的物理、冰霜与闪电伤害转化为火焰伤害\n无法造成非火焰伤害",
+    "Attack Projectiles always inflict Bleeding and Maim, and Knock Back Enemies\nProjectiles cannot Pierce, Fork or Chain": "攻击投射物始终施加流血与瘫痪，并击退敌人\n投射物无法穿透、分叉或连锁",
+    "Auras from your Skills can only affect you\nAura Skills have 1% more Aura Effect per 2% of maximum Mana they Reserve\n40% more Mana Reservation of Aura Skills": "你的技能产生的光环只能影响你\n光环技能每保留最大魔力的2%，光环效果额外提高1%\n光环技能的魔力保留额外提高40%",
+    "Auras from your Skills grant 2% increased Attack and Cast\nSpeed to you and Allies": "你的技能产生的光环使你和友军的攻击与施法速度提高2%",
+    "Auras from your Skills grant 3% increased Attack and Cast\nSpeed to you and Allies": "你的技能产生的光环使你和友军的攻击与施法速度提高3%",
+    "Auras from your Skills have 8% increased Effect on you for\neach Herald affecting you, up to a maximum of 40%": "每有一个捷光影响你，你身上的光环效果提高8%\n最多提高40%",
+    "Bleeding Enemies you Kill Explode, dealing 20% of\ntheir Maximum Life as Physical Damage": "你击杀的流血敌人会爆炸，造成相当于其最大生命20%的物理伤害",
+    "Cannot Evade enemy Attacks\nCannot be Stunned": "无法闪避敌人的攻击\n无法被眩晕",
+    "Cannot Ignite, Chill, Freeze or Shock\nCritical Strikes inflict Scorch, Brittle and Sapped": "无法被点燃、冰缓、冻结或感电\n暴击会施加焦灼、脆弱与枯竭",
+    "Cannot Recover Energy Shield to above Armour\n3% of Physical Damage prevented from Hits Recently is Regenerated as Energy Shield per second": "能量护盾无法回复到高于护甲值\n近期被击中所阻止的物理伤害的3%，会转化为每秒回复的能量护盾",
+    "Cannot Recover Energy Shield to above Evasion Rating\nEvery 2 seconds, gain a Ghost Shroud, up to a maximum of 3\nWhen Hit, lose a Ghost Shroud to Recover Energy Shield equal to 3% of your Evasion Rating": "能量护盾无法回复到高于闪避值\n每2秒获得一层幽魂缠绕，最多3层\n被击中时，失去一层幽魂缠绕，回复相当于你闪避值3%的能量护盾",
+    "Chance to Block Attack Damage is doubled\nChance to Block Spell Damage is doubled\nYou take 65% of Damage from Blocked Hits": "攻击伤害格挡几率翻倍\n法术伤害格挡几率翻倍\n你承受格挡击中伤害的65%",
+    "Consecrated Ground you create also grants\n50% reduced duration of Damaging Ailments on you": "你创造的奉献地面还会使你身上的伤害型异常状态持续时间降低50%",
+    "Consecrated Ground you create causes Life Regeneration to\nalso Recover Energy Shield for you and Allies": "你创造的奉献地面还会使你和友军的生命回复同时回复能量护盾",
+    "Damage over Time Multiplier for Ailments is equal to Critical Strike Multiplier\nCritical Strikes do not deal extra Damage\nNon-Critical Strikes cannot inflict Ailments": "异常状态的持续伤害倍率等于暴击伤害倍率\n暴击不会造成额外伤害\n非暴击无法施加异常状态",
+    "Damageable Minions deal 30% increased Damage for each second they have been alive,\nup to a maximum of 150%": "可受伤召唤物每存活一秒，造成的伤害提高30%\n最多提高150%",
+    "Damageable Minions take 5% increased Damage for each second they have been alive,\nup to a maximum of 50%": "可受伤召唤物每存活一秒，受到的伤害提高5%\n最多提高50%",
+    "Dexterity provides no inherent bonus to Evasion Rating\n+1% Chance to Suppress Spell Damage per 15 Dexterity": "敏捷不再提供闪避值固有加成\n每15点敏捷，法术压制几率+1%",
+    "Enemies Chilled by your Hits have Cold Damage taken increased by Chill Effect\nEnemies in your Chilling Areas have Cold Damage taken increased by Chill Effect\nCannot deal non-Cold Damage": "被你的击中冰缓的敌人，按冰缓效果提高其所受冰霜伤害\n处于你创造的冰缓区域内的敌人，按冰缓效果提高其所受冰霜伤害\n无法造成非冰霜伤害",
+    "Enemies you Kill that are affected by Elemental Ailments\ngrant 100% increased Flask Charges": "你击杀的受元素异常状态影响的敌人会使药剂充能获得提高100%",
+    "Energy Shield Recharge is not interrupted by Damage if Recharge began Recently\n40% less Energy Shield Recharge Rate": "近期开始的能量护盾充能不会因伤害中断\n能量护盾充能速度额外降低40%",
+    "Evasion Rating is Doubled against Projectile Attacks\n25% less Evasion Rating against Melee Attacks": "对投射物攻击时，闪避值翻倍\n对近战攻击时，闪避值额外降低25%",
+    "Every 10 seconds, gain 30% of Physical Damage\nas Extra Fire Damage for 4 seconds": "每10秒，获得相当于物理伤害30%的额外火焰伤害，持续4秒",
+    "Every 10 seconds:\nTake 50% less Damage from Hits for 5 seconds\nTake 50% less Damage over Time for 5 seconds": "每10秒：\n受到的击中伤害额外降低50%，持续5秒\n受到的持续伤害额外降低50%，持续5秒",
+    "Every second, Consume a nearby Corpse to Recover 5% of Life and Mana\n10% more Damage taken if you haven't Consumed a Corpse Recently": "每秒消耗附近一具尸体，回复相当于最大生命和魔力各5%的数值\n若近期未消耗尸体，所受伤害额外提高10%",
+    "Flasks adjacent to active Tinctures gain 2 charges when you Hit an\nEnemy with a Melee Weapon, no more than once every second": "你用近战武器击中敌人时，与已激活灵药相邻的药剂获得2份充能\n每秒最多触发一次",
+    "Flasks adjacent to active Tinctures gain 3 charges when you Hit an\nEnemy with a Melee Weapon, no more than once every second": "你用近战武器击中敌人时，与已激活灵药相邻的药剂获得3份充能\n每秒最多触发一次",
+    "Flasks adjacent to applied Tincture have 10% increased Effect when\nused if you've Hit an enemy with a Weapon Recently": "若你近期用武器击中过敌人，使用与已施加灵药相邻的药剂时，药剂效果提高10%",
+    "Flasks adjacent to applied Tincture have 30% increased Effect when\nused if you've Hit an enemy with a Weapon Recently": "若你近期用武器击中过敌人，使用与已施加灵药相邻的药剂时，药剂效果提高30%",
+    "For each nearby corpse, you and nearby Allies Regenerate 5 Mana\nper second, up to 50 per second": "每有一具附近尸体，你和附近友军每秒回复5魔力\n最多每秒回复50魔力",
+    "Gain 1 Gale Force when you use a Skill\n10% increased Effect of Tailwind on you per Gale Force": "你使用技能时获得1层疾风之力\n每有一层疾风之力，你身上的顺风效果提高10%",
+    "Gain 1 Unbound Fury when you inflict an Elemental Ailment with a Hit on an Enemy, no more than once every 0.2 seconds for each type of Ailment\nCannot gain Unbound Fury while Unbound": "你用击中对敌人施加元素异常状态时，获得1层未束缚怒火；每种异常状态0.2秒最多触发一次\n处于未束缚状态时无法获得未束缚怒火",
+    "Gain 2 Grasping Vines each second while stationary\n2% chance to deal Double Damage per Grasping Vine\n1% less Damage taken per Grasping Vine": "静止时每秒获得2层抓握藤蔓\n每层抓握藤蔓使造成双倍伤害的几率提高2%\n每层抓握藤蔓使你所受伤害额外降低1%",
+    "Gain 20% of Physical Damage as Extra Cold Damage if you've\nused a Sapphire Flask Recently": "若你近期使用过蓝玉药剂，物理伤害的20%作为额外冰霜伤害",
+    "Gain 20% of Physical Damage as Extra Fire Damage if you've\nused a Ruby Flask Recently": "若你近期使用过红玉药剂，物理伤害的20%作为额外火焰伤害",
+    "Gain 20% of Physical Damage as Extra Lightning Damage if you've\nused a Topaz Flask Recently": "若你近期使用过黄玉药剂，物理伤害的20%作为额外闪电伤害",
+    "Gain Defiance for 10 seconds on losing Life to an Enemy Hit, no\nmore than once every 0.3 seconds": "因敌人击中而失去生命时，获得抗争10秒\n每0.3秒最多触发一次",
+    "Grant bonuses to Non-Channelling Skills you use by consuming 3 Charges from a Flask of\neach of the following types, if possible:": "消耗以下每种类型药剂中的3份充能，为你使用的非引导技能施加加成（若可行）：",
+    "Grants maximum Energy Shield equal to 10% of your Reserved Mana to\nyou and nearby Allies": "为你和附近友军提供相当于你保留魔力10%的最大能量护盾",
+    "Hits that deal Elemental Damage remove Exposure to those Elements and inflict Exposure to other Elements\nExposure inflicted this way applies -25% to Resistances": "造成元素伤害的击中会移除对应元素的曝露，并对其他元素施加曝露\n以此方式施加的曝露使抗性-25%",
+    "If you've Impaled an Enemy Recently, you\nand nearby Allies have +1000 to Armour": "若你近期对敌人施加过穿刺，你和附近友军获得护甲+1000",
+    "If your Mercenary's Life is higher than your own, 20% of Damage from Hits is\ntaken from your Mercenary's Life before you": "若你的佣兵生命值高于你自身，击中造成的伤害有20%会先由佣兵的生命值承受",
+    "Increases and Reductions to Armour also apply to Energy\nShield Recharge Rate at 20% of their value": "护甲的提高与降低也会按其数值的20%作用于能量护盾充能速度",
+    "Increases and Reductions to Light Radius also apply to Effect\nof your Link Skill Buffs on your Mercenary": "光照范围的提高与降低也会按其数值作用于你施加在佣兵身上的连接技能增益效果",
+    "Inflict a Grasping Vine on Hit against Enemies with fewer than\n8 Grasping Vines during Effect of any Life Flask": "任意生命药剂效果期间，击中拥有少于8层抓握藤蔓的敌人时，对其施加一层抓握藤蔓",
+    "Intelligence provides no inherent bonus to Energy Shield\n2% reduced Duration of Elemental Ailments on you per 15 Intelligence": "智慧不再提供能量护盾固有加成\n每15点智慧，你身上的元素异常状态持续时间降低2%",
+    "Leech Energy Shield instead of Life\nMaximum total Energy Shield Recovery per second from Leech is doubled\nCannot Recharge Energy Shield": "改为偷取能量护盾而非生命\n偷取每秒最大能量护盾总回复翻倍\n能量护盾无法充能",
+    "Life Flask Effects are not removed when Unreserved Life is Filled\nLife Flask Effects do not Queue": "未保留生命回满时，生命药剂效果不会移除\n生命药剂效果不会进入队列",
+    "Life Leech from Melee Damage is Instant\nCannot Recover Life other than from Leech": "近战伤害产生的生命偷取会立即回复\n除偷取外，无法回复生命",
+    "Lose all Rage on reaching Maximum Rage and gain Wild Savagery\nfor 1 second per 10 Rage lost this way": "达到最大怒火时，失去所有怒火并获得荒野蛮性\n以此方式每失去10点怒火，效果持续1秒",
+    "Modifiers to Chance to Suppress Spell Damage instead apply to Chance to Dodge Spell Hits at 50% of their value\nMaximum Chance to Dodge Spell Hits is 75%": "法术压制几率词缀改为按其数值的50%作用于法术击中闪避几率\n法术击中闪避几率上限为75%",
+    "Nearby Enemy Monsters' Fire Resistance against\nDamage over Time is -20% while you are Stationary": "静止时，附近敌人怪物对持续伤害的火焰抗性为-20%",
+    "Non-Unique Jewels cause Small and Notable Passive Skills in a Large Radius to\nalso grant +4 to Strength": "非传奇珠宝使大型范围内的小型和核心被动天赋额外获得力量+4",
+    "Projectiles deal 20% increased Damage with Hits and Ailments for\neach remaining Chain, up to a maximum of 100%": "投射物每剩余一段连锁，击中与异常状态伤害提高20%\n最多提高100%",
+    "Projectiles deal 40% increased Damage with Hits to targets at the start\nof their movement, reducing to 0% as they travel farther": "投射物在移动开始处对目标的击中伤害提高40%\n随着飞行距离增加，伤害加成逐渐降至0%",
+    "Projectiles gain Damage as they travel farther, dealing up\nto 30% more Damage with Hits and Ailments": "投射物飞行距离越远，造成的伤害越高\n击中与异常状态伤害最多额外提高30%",
+    "Projectiles gain Damage as they travel farther, dealing up\nto 60% increased Damage with Hits to targets": "投射物飞行距离越远，造成的伤害越高\n对目标的击中伤害最多提高60%",
+    "Removes all Energy Shield\nWhile not on Full Life, Sacrifice 20% of Mana per Second to Recover that much Life": "移除所有能量护盾\n未满血时，每秒牺牲20%魔力以回复等量生命",
+    "Removes all mana\n10% more maximum Life\nSkills Cost Life instead of Mana\nSkills Reserve Life instead of Mana": "移除所有魔力\n最大生命额外提高10%\n技能消耗生命而非魔力\n技能保留生命而非魔力",
+    "Skills that have dealt a Critical Strike in the past 8 seconds deal 40% more Elemental Damage with Hits and Ailments\nYour Critical Strikes do not deal extra Damage\nAilments never count as being from Critical Strikes": "过去8秒内造成过暴击的技能，其击中与异常状态造成的元素伤害额外提高40%\n你的暴击不会造成额外伤害\n异常状态不再视为来自暴击",
+    "Spend Energy Shield before Mana for Skill Mana Costs\nEnergy Shield protects Mana instead of Life\n50% less Energy Shield Recharge Rate": "技能魔力消耗优先消耗能量护盾\n能量护盾保护魔力而非生命\n能量护盾充能速度额外降低50%",
+    "Take 50% less Damage over Time if you've started taking Damage over Time in the past second\n100% more Duration of Ailments on you": "若你在过去一秒内开始承受持续伤害，所受持续伤害额外降低50%\n你身上的异常状态持续时间额外提高100%",
+    "Tinctures inflict Weeping Wounds instead of Mana Burn\nEffects that interact with Mana Burn interact with Weeping Wounds instead": "灵药施加哀泣伤口而非魔力燃烧\n与魔力燃烧互动的效果改为与哀泣伤口互动",
+    "Trigger Level 30 Assassin's Mark on Attack Critical Strike against\na Rare or Unique Enemy and you have no Mark": "对稀有或传奇敌人攻击造成暴击且你没有印记时，触发30级刺客印记",
+    "Triggers Level 20 Primal Aegis when Allocated\nPrimal Aegis can take 75 Elemental Damage per Allocated Notable Passive Skill": "分配后触发20级原始神盾\n每分配一个核心被动天赋，原始神盾可承受75点元素伤害",
+    "Unattached Brands gain 20% increased Brand Attachment Range per\nsecond, up to a maximum of 100%": "未附着的烙印每秒获得20%烙印附着范围\n最多提高100%",
+    "When your Hits Impale Enemies, also Impale other Enemies near them\nInflict 5 additional Impales on Enemies you Impale\nFor 5 seconds after you Impale Enemies, they cannot be Impaled again, and Impales cannot be Called from them": "你的击中对敌人施加穿刺时，也会对其附近的其他敌人施加穿刺\n对你施加穿刺的敌人额外施加5层穿刺\n施加穿刺后5秒内，这些敌人无法再次被穿刺，且无法从它们身上调用穿刺",
+    "You and nearby Allies deal 6 to 12 added Physical Damage for\neach Impale on Enemy": "你和附近友军每有一层敌人身上的穿刺，便附加6至12点物理伤害",
+    "You can inflict Bleeding on an Enemy up to 8 times\nYour Bleeding does not deal extra Damage while the Enemy is moving and cannot be Aggravated\n50% less Damage with Bleeding": "你对每个敌人最多可施加8层流血\n敌人移动时，你造成的流血不会造成额外伤害，且无法被加剧\n流血伤害额外降低50%",
+    "You can inflict an additional Ignite on each Enemy\nBase Ignite Duration is 1 second\n25% less Damage with Ignite\nCannot deal non-Fire Damage": "你对每个敌人可额外施加一层点燃\n基础点燃持续时间为1秒\n点燃伤害额外降低25%\n无法造成非火焰伤害",
+    "You can only have one Herald\n50% more Effect of Herald Buffs on you\n100% more Damage with Hits from Herald Skills\n50% more Damage Over Time with Herald Skills\nMinions from Herald Skills deal 25% more Damage\nYour Aura Skills are Disabled": "你最多只能拥有一个捷光\n你身上的捷光增益效果额外提高50%\n捷光技能造成的击中伤害额外提高100%\n捷光技能造成的持续伤害额外提高50%\n捷光技能的召唤物伤害额外提高25%\n你的光环技能被禁用",
+    "You can't deal Damage with Skills yourself\n+1 to maximum number of Summoned Totems": "你自身无法用技能造成伤害\n召唤图腾数量上限+1",
+    "You count as Dual Wielding while you are Unencumbered\n40% more Attack Speed with Melee Skills while you are Unencumbered\nAdds 14 to 20 Attack Physical Damage to Melee Skills per 10 Dexterity while you are Unencumbered": "未装备武器时，你视为双持\n未装备武器时，近战技能的攻击速度额外提高40%\n未装备武器时，每10点敏捷使近战技能附加14至20点攻击物理伤害",
+    "Your Hexes have infinite Duration\n20% less Effect of your Curses": "你的诅咒持续时间无限\n你的诅咒效果额外降低20%",
+    "Your Mercenary and their Minions deal 8% more Damage for\neach Unique item they have equipped": "你的佣兵及其召唤物每装备一件传奇物品，伤害额外提高8%",
+    "Your Warcries do not grant Buffs or Charges to You\n100% more Warcry Duration": "你的战吼不会对你施加增益效果或提供球\n战吼持续时间额外提高100%",
+    "Your hits can't be Evaded\nNever deal Critical Strikes": "你的击中无法被闪避\n不会造成暴击",
+}
+
+# Reviewed exact single-row exceptions for common source grammar that does not
+# map cleanly through word-by-word translation (negation, state, and timing).
+SINGLE_LINE_OVERRIDES = {
+    "Action Speed cannot be modified to below Base Value": "行动速度无法降低至基础值以下",
+    "Action Speed cannot be modified to below Base Value if you have Equipped Boots with no Socketed Gems": "若你装备的鞋子没有镶嵌宝石，行动速度无法降低至基础值以下",
+    "Cannot Be Stunned while you have Energy Shield": "当你拥有能量护盾时，不会被眩晕",
+    "Cannot be Blinded": "无法被致盲",
+    "Cannot be Chilled": "无法被冰缓",
+    "Cannot be Chilled while Burning": "燃烧时不会被冰缓",
+    "Cannot be Chilled while at maximum Frenzy Charges": "狂怒球达到上限时不会被冰缓",
+    "Cannot be Frozen": "无法被冻结",
+    "Cannot be Ignited while at maximum Endurance Charges": "耐力球达到上限时不会被点燃",
+    "Cannot be Knocked Back": "不会被击退",
+    "Cannot be Shocked while at maximum Power Charges": "暴击球达到上限时不会被感电",
+    "Cannot be Stunned": "无法被眩晕",
+    "Cannot be Stunned by Hits that deal only Physical Damage": "不会被仅造成物理伤害的击中眩晕",
+    "Cannot be Stunned if you have an Equipped Helmet with no Socketed Gems": "若你装备的头盔没有镶嵌宝石，你不会被眩晕",
+    "Cannot be Stunned while Leeching": "偷取期间不会被眩晕",
+    "Cannot be Stunned while you have at least 25 Rage": "拥有至少25点怒火时不会被眩晕",
+    "Corrupted Blood cannot be inflicted on you": "你不会受到腐化之血",
+    "Damage cannot be Reflected": "伤害不会被反射",
+    "Damaging Ailments Cannot Be inflicted on you while you already have one": "当你已受到一种伤害型异常状态时，无法再被施加其他伤害型异常状态",
+    "Elemental Ailments cannot be inflicted on you if you have an Equipped Body Armour with no Socketed Gems": "若你装备的胸甲没有镶嵌宝石，你不会受到元素异常状态",
+    "Elemental Hit's Added Damage cannot be replaced this way": "元素打击的附加伤害无法以此方式替换",
+    "Elusive has 50% chance to be removed from you at 100% effect": "灵巧效果达到100%时，有50%几率从你身上移除",
+    "Gain 3% of Missing Unreserved Life before being Hit by an Enemy Per Defiance": "每层抗争使你在被敌人击中前，获得相当于缺失未保留生命3%的数值",
+    "Hits against you Cannot be Critical Strikes if you've been Stunned Recently": "若你近期被眩晕，对你的击中无法造成暴击",
+    "Mines cannot be Damaged": "地雷不会受到伤害",
+    "Minions cannot be Killed, but die 6 seconds after being reduced to 1 Life": "召唤物不会被击杀；生命降至1后6秒会死亡",
+    "Minions created Recently cannot be Damaged": "近期召唤的召唤物不会受到伤害",
+    "Movement Speed cannot be modified to below Base Value": "移动速度无法降低至基础值以下",
+    "Non-Damaging Ailments Cannot Be inflicted on you while you already have one": "当你已受到一种非伤害性异常状态时，无法再被施加其他非伤害性异常状态",
+    "Non-Unique Jewels cause Increases and Reductions to other Damage Types in a Large Radius to be Transformed to apply to Fire Damage": "非传奇珠宝会使大型范围内其他伤害类型的提高与降低转而作用于火焰伤害",
+    "Projectiles have 30% chance to be able to Chain when colliding with terrain": "投射物与地形碰撞时，有30%几率触发连锁",
+    "Summoned Golems are Resummoned 4 seconds after being Killed": "召唤的魔像被击杀后4秒会重新召唤",
+    "Totems' Action Speed cannot be modified to below Base Value": "图腾的行动速度无法降低至基础值以下",
+    "Traps cannot be Damaged": "陷阱不会受到伤害",
+    "You cannot be Frozen if you've been Frozen Recently": "近期被冻结后，你不会再次被冻结",
+    "You cannot be Hindered": "你不会受到阻碍",
+    "You cannot be Ignited if you've been Ignited Recently": "近期被点燃后，你不会再次被点燃",
+    "You cannot be Impaled": "你不会被穿刺",
+    "You cannot be Maimed": "你不会被瘫痪",
+    "You cannot be Shocked if you've been Shocked Recently": "近期被感电后，你不会再次被感电",
+    "Your Elemental Resistances cannot be lowered by Curses": "诅咒无法降低你的元素抗性",
+    "Your Hits against Marked Enemy cannot be Blocked or Suppressed": "你对被标记敌人的击中无法被格挡或压制",
+    "10% increased Attack Speed when on Full Life": "满血时，攻击速度提高10%",
+    "25% increased Attack Damage when on Full Life": "满血时，攻击伤害提高25%",
+    "30% more Spell Damage when on Low Life": "低血时，法术伤害额外提高30%",
+    "25% chance to gain an Endurance Charge each second while Channelling": "引导期间，每秒有25%几率获得一个耐力球",
+    "Gain a Frenzy Charge each second while Moving": "移动期间，每秒获得一个狂怒球",
+    "Gain a Power Charge each second while Channelling a Spell": "引导法术期间，每秒获得一个暴击球",
+    "Life Flasks gain a Charge when you hit an Enemy, no more than once each second": "击中敌人时，生命药剂获得一份充能；每秒最多触发一次",
+    "20% increased Armour per second you've been stationary, up to a maximum of 100%": "你每静止一秒，护甲提高20%，最多提高100%",
+    "Tinctures deactivate when you have 12 or more Mana Burn": "当你身上有12层或以上魔力燃烧时，灵药会停用",
+    "1% increased Flask Charges gained per Mana Burn on you": "你身上每层魔力燃烧，获得的药剂充能提高1%",
+    "+1% to Critical Strike Multiplier per 10 Maximum Energy Shield on Shield": "盾牌上的最大能量护盾每有10点，暴击伤害倍率+1%",
+    "Life Recoup Effects instead occur over 3 seconds": "生命延迟回复效果改为在3秒内完成",
+    "Hits have 20% chance to deal 50% more Area Damage": "击中有20%几率使范围伤害额外提高50%",
+    "Hits have 30% chance to deal 50% more Area Damage": "击中有30%几率使范围伤害额外提高50%",
+    "30% chance to take 50% less Area Damage from Hits": "有30%几率使你受到的击中范围伤害额外降低50%",
+    "Hits Stun as though dealing 50% more Melee Fire Damage": "击中造成眩晕时，眩晕判定按额外提高50%的近战火焰伤害计算",
+    "Intimidate you inflict causes targets to deal 10% less Damage": "你施加的威吓会使目标造成的伤害额外降低10%",
+    "Poison you inflict with Critical Strikes deals 20% more Damage": "你以暴击施加的中毒造成的伤害额外提高20%",
+    "Unsealed Spells gain 5% more Damage each time their effects Reoccur": "未封印法术的效果每再次触发一次，其伤害额外提高5%",
+    "Tinctures applied to you have 30% less Mana Burn rate": "施加于你的灵药使魔力燃烧速度额外降低30%",
+    "25% less Damage taken from other Enemies near your Marked Enemy": "你受到来自被你标记敌人附近其他敌人的伤害额外降低25%",
+    "Arcane Surge also grants 10% more Spell Damage to you": "奥术涌浪还会使你获得的法术伤害额外提高10%",
+    "Arcane Surge also grants 20% more Spell Damage to you": "奥术涌浪还会使你获得的法术伤害额外提高20%",
+    "Deal 10% more Chaos Damage to enemies which have Energy Shield": "对拥有能量护盾的敌人造成的混沌伤害额外提高10%",
+    "Deal up to 15% more Melee Damage to Enemies, based on proximity": "根据与敌人的距离，近战伤害最多额外提高15%",
+    "Gain Convergence when you Hit a Unique Enemy, no more than once every 8 seconds": "击中传奇敌人时获得汇聚；每8秒最多触发一次",
+    "Ignites from Stunning Melee Hits deal 20% more Damage": "近战击中造成眩晕时，点燃伤害额外提高20%",
+    "Skills used by Totems deal 10% more Damage per maximum number of Summoned Totems": "召唤图腾数量上限每有一个，图腾使用的技能伤害额外提高10%",
+    "Vaal Skills deal 1% more Damage per Soul Required": "瓦尔技能每需要一个灵魂，造成的伤害额外提高1%",
+    "Vaal Skills require 30% less Souls per Use": "每次使用所需的灵魂数量额外降低30%",
+    "Take 40% less Damage from Hits": "受到击中造成的伤害额外降低40%",
+    "50% less Damage Taken from Damage over Time while you have Unbroken Ward": "拥有未破损灵护时，所受持续伤害额外降低50%",
+    "10% more Maximum Physical Attack Damage": "攻击造成的最大物理伤害额外提高10%",
+    "Brands have 100% more Activation Frequency if 75% of Attached Duration expired": "若烙印附着持续时间已过去75%，激活频率额外提高100%",
+    "Herald Skills have 2% more Buff Effect for every 1% of Maximum Mana they Reserve": "捷光技能每保留最大魔力的1%，其增益效果额外提高2%",
+    "25% increased Maximum Life if you have Equipped Gloves with no Socketed Gems": "若你装备的手套没有镶嵌宝石，最大生命提高25%",
+    "30% increased Movement Speed if you have Equipped Boots with no Socketed Gems": "若你装备的鞋子没有镶嵌宝石，移动速度提高30%",
+    "Defences from Equipped Body Armour are doubled if it has no Socketed Gems": "若你装备的胸甲没有镶嵌宝石，来自该胸甲的防御属性翻倍",
+    "Minions affected by Affliction have Onslaught": "受到苦痛影响的召唤物获得猛攻",
+    "Recover 1% of Mana on Kill while you have a Tincture active": "灵药激活期间，击杀时回复最大魔力的1%",
+    "Gain 1 Fanatic Charge every second if you've Attacked in the past second": "若你在过去一秒内攻击过，每秒获得1层狂热球",
+    "10% chance to Aggravate Bleeding on targets you Hit with Attacks": "你使用攻击击中的目标有10%几率使其流血加剧",
+    "25% chance to Aggravate Bleeding on targets you Hit with Attacks": "你使用攻击击中的目标有25%几率使其流血加剧",
+    "15% chance to Intimidate Enemies for 4 seconds on Hit with Attacks": "使用攻击击中敌人时，有15%几率威吓敌人，持续4秒",
+    "Drop Brine Ground while moving, lasting 4 seconds": "移动时留下盐水地面，持续4秒",
+    "Targets affected by Maim you inflict cannot deal Critical Strikes": "受到你施加的瘫痪影响的目标无法造成暴击",
+    "20% chance to Maim Enemies on Critical Strike with Attacks": "使用攻击造成暴击时，有20%几率瘫痪敌人",
+    "25% chance to Aggravate Bleeding on targets you Critically Strike with Attacks": "你使用攻击造成暴击时，有25%几率使目标流血加剧",
+    "50% chance to Aggravate Bleeding on targets you Stun with Attacks Hits": "你使用攻击击晕目标时，有50%几率使其流血加剧",
+    "While affected by Glorious Madness, inflict Mania on nearby Enemies every second": "受到荣耀疯狂影响时，每秒对附近敌人施加一层躁狂",
+    "30% faster Restoration of Ward per Enemy Hit taken Recently": "近期每受到敌人一次击中，灵护恢复速度加快30%",
+    "Freezes you inflict spread to other Enemies within 1.2 metres": "你施加的冻结会蔓延至1.2米内的其他敌人",
+    "Ignites you inflict spread to other Enemies within a Radius of 1.5 metres": "你施加的点燃会蔓延至半径1.5米内的其他敌人",
+    "Shocks you inflict spread to other Enemies within 1 metre": "你施加的感电会蔓延至1米内的其他敌人",
+    "Rare and Unique Enemies within 120 metres have Minimap Icons": "120米内的稀有和传奇敌人会显示在小地图上",
+}
+
+# Longer single-row source effects combine multiple clauses. Keep these as
+# complete reviewed sentences instead of allowing the lexical fallback to
+# reorder conditions, subjects, and numeric scopes.
+REVIEWED_LONG_LINE_OVERRIDES = {
+    "Projectile Attack Hits deal up to 30% more Damage to targets at the start of their movement, dealing less Damage to targets as the projectile travels farther": "投射物攻击在飞行起点命中目标时，伤害最多额外提高30%；飞行距离越远，对目标造成的伤害额外降低",
+    "Deal 1% more Damage with Hits and Ailments to Rare and Unique Enemies for every 2 seconds they've ever been in your Presence, up to a maximum of 50%": "稀有或传奇敌人在你附近每累计停留2秒，你对其造成的击中与异常状态伤害额外提高1%，最多额外提高50%",
+    "Gain 10% of Physical Damage as Extra Lightning Damage for each of your Hallowing Flames that have been removed by an allied hit recently, up to 80%": "近期每有一道你的圣化烈焰被友军击中移除，你就获得相当于物理伤害10%的额外闪电伤害，最多80%",
+    "Deal 1% more Damage with Hits and Ailments to Rare and Unique Enemies for each second they've ever been in your Presence, up to a maximum of 100%": "稀有或传奇敌人在你附近每累计停留一秒，你对其造成的击中与异常状态伤害额外提高1%，最多额外提高100%",
+    "Spells you cast yourself gain Added Physical Damage equal to 75% of Life Cost, if Life Cost is not higher than the maximum you could spend": "你亲自施放的法术获得相当于生命消耗75%的附加物理伤害；仅当生命消耗不超过你可支付的上限时生效",
+    "Tincture Effects Linger on you for 0.5 seconds per Mana Burn on you when the Tincture was deactivated, up to a maximum of 6 seconds": "灵药停用时，你身上每层魔力燃烧会使灵药效果额外持续0.5秒，最多6秒",
+    "Cursed Enemies you or your Minions Kill have a 50% chance to Explode, dealing a quarter of their maximum Life as Chaos Damage": "被诅咒的敌人被你或你的召唤物击杀时，有50%几率爆炸，造成相当于其最大生命四分之一的混沌伤害",
+    "25% chance to Trigger Level 20 Summon Elemental Relic when you or a nearby Ally Kill an Enemy, or Hit a Rare or Unique Enemy": "你或附近友军击杀敌人，或击中稀有或传奇敌人时，有25%几率触发20级召唤元素遗物",
+    "Enemies permanently take 1% increased Damage for each second they've ever been Chilled by you, up to a maximum of 10%": "敌人每累计被你冰缓一秒，所受伤害永久提高1%，最多提高10%",
+    "Skills gain Added Chaos Damage equal to 25% of Life Cost, if Life Cost is not higher than the maximum you could spend": "技能获得相当于生命消耗25%的附加混沌伤害；仅当生命消耗不超过你可支付的上限时生效",
+    "Enemies permanently take 5% increased Damage for each second they've ever been Frozen by you, up to a maximum of 50%": "敌人每累计被你冻结一秒，所受伤害永久提高5%，最多提高50%",
+    "You gain Added Lightning Damage instead of Added Damage of other types if Intelligence exceeds both other Attributes": "若你的智慧高于另外两项属性，你获得附加闪电伤害，替代其他类型的附加伤害",
+    "Herald Skills and Minions from Herald Skills deal 1% more Damage for every 1% of Maximum Life those Skills Reserve": "捷光技能及其召唤物每保留1%最大生命，造成的伤害额外提高1%",
+    "For each nearby corpse, you and nearby Allies Regenerate 0.2% of Energy Shield per second, up to 2.0% per second": "你和附近友军每有一具附近尸体，每秒回复最大能量护盾的0.2%，最多每秒2.0%",
+    "+15% chance to Suppress Spell Damage if Equipped Helmet, Body Armour, Gloves, and Boots all have Evasion Rating": "若你装备的头盔、胸甲、手套和鞋子均有闪避值，法术压制几率+15%",
+    "Enemies Killed with Attack Hits have a 15% chance to Explode, dealing a tenth of their Life as Physical Damage": "被攻击击中击杀的敌人有15%几率爆炸，造成相当于其生命值十分之一的物理伤害",
+    "Enemies you or your Totems Kill have 10% chance to Explode, dealing 250% of their maximum Life as Fire Damage": "被你或你的图腾击杀的敌人有10%几率爆炸，造成相当于其最大生命250%的火焰伤害",
+    "Enemies Killed near your Banner have 20% chance to Explode, dealing a tenth of their Life as Physical Damage": "在你的旗帜附近被击杀的敌人有20%几率爆炸，造成相当于其生命值十分之一的物理伤害",
+    "You gain Added Cold Damage instead of Added Damage of other types if Dexterity exceeds both other Attributes": "若你的敏捷高于另外两项属性，你获得附加冰霜伤害，替代其他类型的附加伤害",
+    "+1% to all maximum Elemental Resistances if Equipped Helmet, Body Armour, Gloves, and Boots all have Armour": "若你装备的头盔、胸甲、手套和鞋子均有护甲，所有元素抗性上限+1%",
+    "10% more Attack Damage for each Non-Instant Spell you've Cast in the past 8 seconds, up to a maximum of 30%": "你在过去8秒内每施放一个非瞬时法术，攻击伤害额外提高10%，最多额外提高30%",
+    "20% increased Maximum Energy Shield if both Equipped Left and Right Rings have an Explicit Evasion Modifier": "若你装备的左戒指和右戒指均带有闪避词缀，最大能量护盾提高20%",
+    "Enemies Killed with Wand Hits have a 10% chance to Explode, dealing a quarter of their Life as Chaos Damage": "被魔杖击中击杀的敌人有10%几率爆炸，造成相当于其生命值四分之一的混沌伤害",
+    "You and Allies near your Banner Regenerate 0.1% of Life per second for each Valour consumed for that Banner": "你和旗帜附近的友军每消耗一点该旗帜的英勇值，每秒回复最大生命的0.1%",
+    "Burning Enemies you kill have a 3% chance to Explode, dealing a tenth of their maximum Life as Fire Damage": "被你击杀的燃烧敌人有3%几率爆炸，造成相当于其最大生命十分之一的火焰伤害",
+    "30% more Damage with Hits and Ailments against Enemies that are on Low Life while you are wielding an Axe": "你持有斧类武器时，对低血敌人造成的击中与异常状态伤害额外提高30%",
+    "5% chance to deal Double Damage if you've dealt a Critical Strike with a Two Handed Melee Weapon Recently": "若你近期使用双手近战武器造成过暴击，有5%几率造成双倍伤害",
+    "Minions Explode when reduced to Low Life, dealing 33% of their Life as Fire Damage to surrounding Enemies": "召唤物降至低血状态时爆炸，对周围敌人造成相当于其生命值33%的火焰伤害",
+    "10% increased Melee Damage for each second you've been affected by a Warcry Buff, up to a maximum of 60%": "你每受到战吼增益效果影响一秒，近战伤害提高10%，最多提高60%",
+    "50% chance to inflict Withered for two seconds on Hit if there are 5 or fewer Withered Debuffs on Enemy": "击中时有50%几率施加枯萎，持续两秒；若敌人身上的枯萎减益不超过5层",
+    "Enemies you Kill have a 10% chance to Explode, dealing a quarter of their maximum Life as Chaos Damage": "被你击杀的敌人有10%几率爆炸，造成相当于其最大生命四分之一的混沌伤害",
+    "25% chance that if you would gain Endurance Charges, you instead gain up to maximum Endurance Charges": "你获得耐力球时有25%几率改为直接获得至耐力球上限所需的数量",
+    "Enemies Taunted by your Warcries Explode on death, dealing 8% of their maximum Life as Chaos Damage": "被你的战吼嘲讽的敌人死亡时会爆炸，造成相当于其最大生命8%的混沌伤害",
+    "Arrows gain Damage as they travel farther, dealing up to 50% increased Damage with Hits to targets": "箭矢飞行距离越远，击中伤害越高；对目标造成的击中伤害最多提高50%",
+    "Arrows gain Critical Strike Chance as they travel farther, up to 100% increased Critical Strike Chance": "箭矢飞行距离越远，暴击几率提高越多，最多提高100%",
+    "15% increased Area of Effect if you've Stunned an Enemy with a Two Handed Melee Weapon Recently": "若你近期使用双手近战武器击晕过敌人，效果范围提高15%",
+    "Modifiers to Fire Resistance also apply to Cold and Lightning Resistances at 50% of their Value": "火焰抗性词缀也会按其数值的50%作用于冰霜抗性和闪电抗性",
+    "+15% to Critical Strike Multiplier if you dealt a Critical Strike with a Herald Skill Recently": "若你近期使用捷光技能造成过暴击，暴击伤害倍率+15%",
+    "10% chance to create Consecrated Ground when you Hit a Rare or Unique Enemy, lasting 8 seconds": "击中稀有或传奇敌人时，有10%几率生成奉献地面，持续8秒",
+    "10% chance when you use a Retaliation Skill for a different Retaliation Skill to become Usable": "使用反击技能时，有10%几率使另一项反击技能变为可用",
+    "25% chance when you use a Retaliation Skill for a different Retaliation Skill to become Usable": "使用反击技能时，有25%几率使另一项反击技能变为可用",
+    "6% increased Energy Shield Recharge Rate for each different type of Mastery you have Allocated": "每分配一种不同类型的专精，能量护盾充能速度提高6%",
+    "Four seconds after each Hit you take, lose Life equal to 40% of the Damage taken from that Hit": "每次受到击中后四秒，失去相当于该次击中伤害40%的生命",
+    "When you kill a Poisoned Enemy during any Flask Effect, Enemies within 1.5 metres are Poisoned": "任意药剂效果期间，你击杀中毒敌人时，1.5米范围内的敌人会中毒",
+    "1% increased Critical Strike Chance per point of Strength or Intelligence, whichever is lower": "力量或智慧中较低者每有一点，暴击几率提高1%",
+    "25% of Damage taken Recouped as Life if Leech was removed by Filling Unreserved Life Recently": "若近期因未保留生命回满而移除偷取效果，所受伤害的25%会延迟回复为生命",
+    "4% increased Attack and Cast Speed for each corpse Consumed Recently, up to a maximum of 200%": "近期每消耗一具尸体，攻击与施法速度提高4%，最多提高200%",
+    "40% increased Energy Shield Recharge Rate if Equipped Amulet has an Explicit Evasion Modifier": "若你装备的项链带有闪避词缀，能量护盾充能速度提高40%",
+    "If you've Cast a Spell Recently, you and nearby Allies have +10% Chance to Block Spell Damage": "若你近期施放过法术，你和附近友军的法术伤害格挡几率+10%",
+    "If you've Cast a Spell Recently, you and nearby Allies have +25% Chance to Block Spell Damage": "若你近期施放过法术，你和附近友军的法术伤害格挡几率+25%",
+    "Your Hits ignore Enemy Monster Lightning Resistances if all Equipped Rings are Synaptic Rings": "若你装备的戒指均为突触戒指，你的击中无视敌方怪物的闪电抗性",
+    "20% increased Armour for each different Retaliation Skill you've used in the past 10 seconds": "你在过去10秒内每使用一种不同的反击技能，护甲提高20%",
+    "Gain 25% increased Armour per 5 Power for 8 seconds when you Warcry, up to a maximum of 100%": "你使用战吼时，接下来8秒内每有5点力量，护甲提高25%，最多提高100%",
+    "If you've Consumed a corpse Recently, you and your Minions have 30% increased Area of Effect": "若你近期消耗过尸体，你和你的召唤物的效果范围提高30%",
+    "If your Mercenary's Life is lower than your own, 40% of Damage they take is Recouped as Life": "若佣兵的生命低于你，佣兵承受伤害的40%会延迟回复为生命",
+    "Projectiles deal 20% increased Damage with Hits and Ailments for each time they have Chained": "投射物每连锁一次，击中与异常状态伤害提高20%",
+    "Take no Extra Damage from Critical Strikes if you have Equipped Gloves with no Socketed Gems": "若你装备的手套没有镶嵌宝石，你不会受到暴击造成的额外伤害",
+    "10% chance on Hitting an Enemy for all Impales on that Enemy to last for an additional Hit": "击中敌人时，有10%几率使该敌人身上的所有穿刺额外持续一次击中",
+    "30% increased Effect of Impales you inflict with Two Handed Weapons on Non-Impaled Enemies": "你使用双手武器对尚未被穿刺的敌人施加的穿刺效果提高30%",
+    "If you've Attacked Recently, you and nearby Allies have +10% Chance to Block Attack Damage": "若你近期攻击过，你和附近友军的攻击伤害格挡几率+10%",
+    "If you've Attacked Recently, you and nearby Allies have +25% Chance to Block Attack Damage": "若你近期攻击过，你和附近友军的攻击伤害格挡几率+25%",
+    "When you take a Savage Hit, lose Baryatic Tension to recover that much Life, up to maximum": "受到凶猛击中时，消耗巴雅提克张力以回复等量生命，最多回复至上限",
+    "100% increased Evasion Rating if Energy Shield Recharge has started in the past 2 seconds": "若能量护盾充能在过去2秒内开始，闪避值提高100%",
+    "Brands Attach to a new Enemy each time they Activate, no more than once every 0.3 seconds": "烙印每次启动都会附着到一名新敌人身上，每0.3秒最多触发一次",
+    "Elusive also grants +40% to Critical Strike Multiplier for Skills Supported by Nightblade": "灵巧还使夜刃辅助的技能获得暴击伤害倍率+40%",
+    "Gain 4 Mana per Enemy Hit with Attacks if you've used a Mana Flask in the past 10 seconds": "若你在过去10秒内使用过魔力药剂，每次攻击击中敌人时获得4点魔力",
+    "Increases and reductions to Maximum Mana also apply to Shock Effect at 30% of their value": "最大魔力的提高与降低也会按其数值的30%作用于感电效果",
+    "Inflict Fire, Cold and Lightning Exposure on Enemies when you Suppress their Spell Damage": "压制敌人的法术伤害时，对其施加火焰、冰霜和闪电曝露",
+    "Modifiers to Maximum Fire Resistance also apply to Maximum Cold and Lightning Resistances": "最大火焰抗性词缀也会作用于最大冰霜抗性和最大闪电抗性",
+    "Recover 1% of Energy Shield on Kill for each different type of Mastery you have Allocated": "每分配一种不同类型的专精，击杀时回复1%能量护盾",
+    "Recover 5% of Energy Shield over 1 second when you take Physical Damage from an Enemy Hit": "受到敌人击中的物理伤害时，在1秒内回复5%能量护盾",
+    "+2 to Level of all Lightning Skill Gems if at least 4 Foulborn Unique Items are Equipped": "若装备至少4件污秽传奇物品，所有闪电技能宝石等级+2",
+    "Every 4 seconds, Recover 1 Life for every 0.1 Life Recovery per second from Regeneration": "每4秒根据生命回复速度回复生命：每秒回复速度每达到0.1，回复1点生命",
+    "Skills used by Totems have 10% more Area of Effect per maximum number of Summoned Totems": "图腾使用的技能效果范围按召唤图腾数量上限每个额外提高10%",
+    "25% increased Maximum total Life, Mana and Energy Shield Recovery per second from Leech": "偷取提供的每秒最大生命、魔力和能量护盾总回复提高25%",
+    "Every 4 seconds, Regenerate Life equal to 1% of Armour and Evasion Rating over 1 second": "每4秒在1秒内回复相当于护甲值与闪避值总和1%的生命",
+    "Maim you inflict causes Hits against the target to have 20% more Critical Strike Chance": "你施加的瘫痪会使对目标的击中暴击几率额外提高20%",
+    "Regenerate 2% of Life per Second for each Trap Triggered Recently, up to 10% per second": "近期每触发一颗陷阱，每秒回复最大生命的2%，最多每秒10%",
+    "Regenerate 2% of Life per second for each Mine Detonated Recently, up to 10% per second": "近期每引爆一颗地雷，每秒回复最大生命的2%，最多每秒10%",
+    "Skills used by Mines have 15% increased Area of Effect if you Detonated a Mine Recently": "若你近期引爆过地雷，地雷使用的技能效果范围提高15%",
+    "Tinctures applied to you have 15% increased Effect if you've used a Life Flask Recently": "若你近期使用过生命药剂，施加于你的灵药效果提高15%",
+    "Your Hits ignore Enemy Monster Cold Resistances if all Equipped Rings are Cryonic Rings": "若你装备的戒指均为冷凝戒指，你的击中无视敌方怪物的冰霜抗性",
+    "+50% to all Elemental Resistances if you have an Equipped Helmet with no Socketed Gems": "若你装备的头盔没有镶嵌宝石，所有元素抗性+50%",
+    "+6% to Physical Damage over Time Multiplier if you've dealt a Critical Strike Recently": "若你近期造成过暴击，物理持续伤害倍率+6%",
+    "10% increased Area of Effect per second you've been stationary, up to a maximum of 50%": "你每静止一秒，效果范围提高10%，最多提高50%",
+    "20% chance for used Retaliation Skills to remain Usable and not consume a Cooldown Use": "已使用的反击技能有20%几率仍可使用，且不消耗一次冷却使用次数",
+    "3% chance for Hits to deal 300% of Physical Damage as Extra Damage of a random Element": "击中有3%几率将物理伤害的300%转为随机元素的额外伤害",
+    "50% chance for used Retaliation Skills to remain Usable and not consume a Cooldown Use": "已使用的反击技能有50%几率仍可使用，且不消耗一次冷却使用次数",
+    "Attacks with Two Handed Melee Weapons deal 20% increased Damage with Hits and Ailments": "双手近战武器攻击造成的击中与异常状态伤害提高20%",
+    "Attacks with Two Handed Melee Weapons deal 25% increased Damage with Hits and Ailments": "双手近战武器攻击造成的击中与异常状态伤害提高25%",
+    "Brand Recall has 4% increased Cooldown Recovery Rate per Brand, up to a maximum of 40%": "每有一个烙印，烙印召回的冷却回复速度提高4%，最多提高40%",
+    "25% increased Maximum total Life Recovery per second from Leech while at maximum Rage": "怒火达到上限时，偷取提供的每秒最大生命总回复提高25%",
+    "Elemental Resistances are capped by your highest Maximum Elemental Resistance instead": "元素抗性上限改为你最高的元素抗性上限",
+    "Every 4 seconds, Regenerate Energy Shield equal to 1% of Evasion Rating over 1 second": "每4秒在1秒内回复相当于闪避值1%的能量护盾",
+    "Impale Damage dealt to Enemies Impaled by you ignores Enemy Physical Damage Reduction": "你施加穿刺后造成的穿刺伤害无视敌人的物理伤害减免",
+    "When you leave your Banner's Area, recover 30% of the Valour consumed for that Banner": "离开旗帜范围时，回复该旗帜消耗英勇值的30%",
+    "12% chance to deal Double Damage with Attacks if Attack Time is longer than 1 second": "攻击时间超过1秒时，攻击有12%几率造成双倍伤害",
+    "12% increased maximum Life and Mana if your equipped Staff has a Red and Blue Socket": "若你装备的长杖有红色和蓝色插槽，最大生命和最大魔力提高12%",
+    "8% more Damage with Hits and Ailments against Enemies affected by at least 5 Poisons": "对至少受到5层中毒影响的敌人，击中与异常状态伤害额外提高8%",
+    "Consecrated Ground you create grants 30% increased Accuracy Rating to you and Allies": "你创造的奉献地面使你和友军的命中值提高30%",
+    "Converts all Evasion Rating to Armour. Dexterity provides no bonus to Evasion Rating": "将全部闪避值转化为护甲；敏捷不再提供闪避值加成",
+    "If Amethyst Flask Charges are consumed, 37% of Physical Damage as Extra Chaos Damage": "消耗紫晶药剂充能时，获得相当于物理伤害37%的额外混沌伤害",
+    "Poisons you inflict during any Flask Effect have 20% chance to deal 100% more Damage": "任意药剂效果期间，你施加的中毒有20%几率使中毒伤害额外提高100%",
+    "Remove a random Ailment on you when you consume at least 10 Valour to place a Banner": "消耗至少10点英勇值放置旗帜时，移除你身上一种随机异常状态",
+    "Skills used by Mines deal 30% increased Area Damage if you Detonated a Mine Recently": "若你近期引爆过地雷，地雷使用的技能造成的范围伤害提高30%",
+    "Unholy Might you grant also causes target's Damage to Penetrate 10% Chaos Resistance": "你施加的邪恶之力还会使目标造成的伤害穿透10%混沌抗性",
+    "+1% to all maximum Elemental Resistances if you have Killed a Cursed Enemy Recently": "若你近期击杀过被诅咒的敌人，所有元素抗性上限+1%",
+    "+2 to Level of all Cold Skill Gems if at least 4 Foulborn Unique Items are Equipped": "若装备至少4件污秽传奇物品，所有冰霜技能宝石等级+2",
+    "+20% to Critical Strike Multiplier if you've been Channelling for at least 1 second": "引导至少1秒后，暴击伤害倍率+20%",
+    "Gain 10% increased Attack Speed for 20 seconds when you Kill a Rare or Unique Enemy": "击杀稀有或传奇敌人时，攻击速度提高10%，持续20秒",
+    "Hits have 15% chance to treat Enemy Monster Elemental Resistance values as inverted": "击中有15%几率将敌方怪物的元素抗性数值视为反转",
+    "Impales you inflict gain 50% increased Effect once 1 second of Duration has expired": "你施加的穿刺持续1秒后，效果提高50%",
+    "Projectiles deal 20% increased Damage with Hits and Ailments for each Enemy Pierced": "投射物每穿透一名敌人，击中与异常状态伤害提高20%",
+    "Regenerate 2% of Life per Second if you've used a Life Flask in the past 10 seconds": "若你在过去10秒内使用过生命药剂，每秒回复最大生命的2%",
+    "Strength's Damage bonus applies to Projectile Attack Damage as well as Melee Damage": "力量提供的伤害加成同时作用于投射物攻击伤害和近战伤害",
+    "+60% to Critical Strike Multiplier if you haven't dealt a Critical Strike Recently": "若你近期未造成暴击，暴击伤害倍率+60%",
+    "20% increased Buff Effect of your Links for which 50% of Link Duration has Expired": "连接持续时间已过去50%的连接技能增益效果提高20%",
+    "40% reduced Effect of Non-Damaging Ailments on you during Effect of any Life Flask": "任意生命药剂效果期间，你身上的非伤害性异常状态效果降低40%",
+    "5% increased Cooldown Recovery Rate for throwing Traps per Mine Detonated Recently": "近期每引爆一颗地雷，投掷陷阱的冷却回复速度提高5%",
+    "Inherent Attack Speed bonus from Dual Wielding is doubled while wielding two Claws": "持有两把爪类武器时，双持提供的固有攻击速度加成翻倍",
+    "Link Skills have 20% increased Buff Effect if you have Linked to a target Recently": "若你近期连接过目标，连接技能的增益效果提高20%",
+    "Nearby Enemies have Lightning Exposure while you are affected by Herald of Thunder": "受到雷电之捷影响时，附近敌人会受到闪电曝露",
+    "Non-Cluster, Non-Passage Jewels Socketed in your Passive Skill Tree have no effect": "镶嵌在被动天赋树中的非星团、非通路珠宝不产生效果",
+    "Profane Ground you create also affects you and your Allies, granting Chaotic Might": "你创造的亵渎地面也会影响你和友军，并赋予混沌之力",
+    "15% increased maximum Life if there are no Life Modifiers on Equipped Body Armour": "若你装备的胸甲没有生命词缀，最大生命提高15%",
+    "20% of Damage from Hits is taken from your Sentinel of Radiance's Life before you": "击中伤害由你承受前，会先从光辉哨兵的生命值中扣除20%",
+    "25% more Damage with Hits against Enemies that cannot have Life Leeched from them": "对无法被偷取生命的敌人，击中伤害额外提高25%",
+    "6% increased Cast Speed for each different Non-Instant Spell you've Cast Recently": "近期每施放一种不同的非瞬时法术，施法速度提高6%",
+    "Damage taken bypasses Unbroken Ward if the Hit deals less Damage than 15% of Ward": "若该次击中造成的伤害低于灵护值的15%，所受伤害会绕过未破损灵护",
+    "Gain [SpiritInfusion|Spirit Infusion] every 0.5 seconds while Channelling a Spell": "引导法术时，每0.5秒获得一层灵体灌注",
+    "Hallowing Flame you inflict has 1% increased magnitude per 2% Attack Block chance": "你施加的圣化烈焰效果幅度每有2%攻击伤害格挡几率便提高1%",
+}
 
 CLASS_NAMES = {
     "Scion": "贵族", "Marauder": "野蛮人", "Ranger": "游侠", "Witch": "女巫",
@@ -853,6 +1259,8 @@ NUMBER_PATTERN = re.compile(r"[+-]?\d+(?:\.\d+)?")
 
 
 def _translate_terms(text: str, unknown: set[str]) -> str:
+    # Chinese classifiers belong between a number and a countable noun.
+    text = re.sub(r"(?i)\bup to ([0-9]+(?:\.[0-9]+)?) additional\b", r"至多\1个额外", text)
     # Protect modifier terms here; the entry point will translate them as
     # operators when they express a numeric modifier, and as normal wording
     # in other phrases.
@@ -923,12 +1331,52 @@ def _translate_condition(condition: str, unknown: set[str]) -> str:
     match = re.match(r"(?i)^if you've killed recently$", value)
     if match:
         return "若你近期击杀过敌人"
+    match = re.match(r"(?i)^if you've hit an? (.+?) recently$", value)
+    if match:
+        return "若你近期击中过" + _translate_terms(match.group(1), unknown)
+    match = re.match(r"(?i)^if you've dealt an? (.+?) recently$", value)
+    if match:
+        return "若你近期造成过" + _translate_terms(match.group(1), unknown)
+    match = re.match(r"(?i)^if you've used an? (.+?) recently$", value)
+    if match:
+        return "若你近期使用过" + _translate_terms(match.group(1), unknown)
+    match = re.match(r"(?i)^if you've cast an? (.+?) recently$", value)
+    if match:
+        return "若你近期施放过" + _translate_terms(match.group(1), unknown)
+    match = re.match(r"(?i)^if you've been stunned while casting recently$", value)
+    if match:
+        return "若你近期施法时被眩晕"
+    match = re.match(r"(?i)^if you've (.+?) recently$", value)
+    if match:
+        action = _translate_terms(match.group(1), unknown)
+        action = action[1:] if action.startswith("已") else action
+        return "若你近期已" + action
+    match = re.match(r"(?i)^if you've consumed a corpse recently$", value)
+    if match:
+        return "若你近期消耗过尸体"
+    match = re.match(r"(?i)^if you have at least ([0-9]+(?:\.[0-9]+)?) Life Masteries allocated$", value)
+    if match:
+        return "若你至少已分配" + match.group(1) + "个生命专精"
     match = re.match(r"(?i)^if you have at least (.+)$", value)
     if match:
         return "若你至少拥有" + _translate_terms(match.group(1), unknown)
+    match = re.match(r"(?i)^if you have not (.+?) recently$", value)
+    if match:
+        action = _translate_terms(match.group(1), unknown)
+        action = action[1:] if action.startswith("已") else action
+        return "若你近期未" + action
+    match = re.match(r"(?i)^if you have an? equipped (.+?) with no socketed gems$", value)
+    if match:
+        return "若你装备的" + _translate_terms(match.group(1), unknown) + "没有镶嵌宝石"
+    match = re.match(r"(?i)^if you are affected by (.+)$", value)
+    if match:
+        return "若你受到" + _translate_terms(match.group(1), unknown) + "影响"
     match = re.match(r"(?i)^if you've (.+)$", value)
     if match:
-        return "若你已" + _translate_terms(match.group(1), unknown)
+        translated = _translate_terms(match.group(1), unknown)
+        if translated.startswith("已"):
+            translated = translated[1:]
+        return "若你已" + translated
     match = re.match(r"(?i)^if you (.+)$", value)
     if match:
         return "若你" + _translate_terms(match.group(1), unknown)
@@ -938,6 +1386,9 @@ def _translate_condition(condition: str, unknown: set[str]) -> str:
     match = re.match(r"(?i)^while you have (.+)$", value)
     if match:
         return "当你拥有" + _translate_terms(match.group(1), unknown) + "时"
+    match = re.match(r"(?i)^while you are affected by (.+)$", value)
+    if match:
+        return "受到" + _translate_terms(match.group(1), unknown) + "影响期间"
     match = re.match(r"(?i)^while you are (.+)$", value)
     if match:
         return "当你处于" + _translate_terms(match.group(1), unknown) + "时"
@@ -947,8 +1398,116 @@ def _translate_condition(condition: str, unknown: set[str]) -> str:
     match = re.match(r"(?i)^while holding (?:a |an )?(.+)$", value)
     if match:
         return "持有" + _translate_terms(match.group(1), unknown) + "时"
+    match = re.match(r"(?i)^when you use (?:a |an )?(.+)$", value)
+    if match:
+        return "使用" + _translate_terms(match.group(1), unknown) + "时"
+    match = re.match(r"(?i)^when you consume (?:a |an )?(.+)$", value)
+    if match:
+        return "你消耗" + _translate_terms(match.group(1), unknown) + "时"
+    match = re.match(r"(?i)^when (Stunned|Frozen|Chilled|Ignited|Shocked)$", value)
+    if match:
+        status = {"stunned": "眩晕", "frozen": "冻结", "chilled": "冰缓", "ignited": "点燃", "shocked": "感电"}[match.group(1).lower()]
+        return "受到" + status + "时"
+    match = re.match(r"(?i)^when you kill (?:a |an )?(.+)$", value)
+    if match:
+        return "击杀" + _translate_terms(match.group(1), unknown) + "时"
+    match = re.match(r"(?i)^when your (.+?) is triggered by an enemy$", value)
+    if match:
+        return "你的" + _translate_terms(match.group(1), unknown) + "被敌人触发时"
+    match = re.match(r"(?i)^when you are (.+)$", value)
+    if match:
+        return "当你处于" + _translate_terms(match.group(1), unknown) + "时"
+    match = re.match(r"(?i)^when on (.+)$", value)
+    if match:
+        return "处于" + _translate_terms(match.group(1), unknown) + "时"
+    match = re.match(r"(?i)^while on (.+)$", value)
+    if match:
+        return "处于" + _translate_terms(match.group(1), unknown) + "时"
+    match = re.match(r"(?i)^while at maximum (.+)$", value)
+    if match:
+        return _translate_terms(match.group(1), unknown) + "达到上限时"
+    match = re.match(r"(?i)^while unbound$", value)
+    if match:
+        return "处于未束缚状态时"
+    match = re.match(r"(?i)^while they are on (.+)$", value)
+    if match:
+        return "它们处于" + _translate_terms(match.group(1), unknown) + "时"
+    match = re.match(r"(?i)^while there is at most one (Rare|Unique) or (Rare|Unique) Enemy nearby$", value)
+    if match:
+        return "附近至多有一名稀有或传奇敌人时"
+    match = re.match(r"(?i)^while there are at least (two|three|four|[0-9]+(?:\.[0-9]+)?) (Rare|Unique) or (Rare|Unique) Enemies nearby$", value)
+    if match:
+        amount, _first, _second = match.groups()
+        amount_zh = {"two": "两", "three": "三", "four": "四"}.get(amount.lower(), amount)
+        return "附近至少有" + amount_zh + "名稀有或传奇敌人时"
+    match = re.match(r"(?i)^during Effect of any (.+)$", value)
+    if match:
+        return "任意" + _translate_terms(match.group(1), unknown) + "效果期间"
+    match = re.match(r"(?i)^while (moving|stationary)$", value)
+    if match:
+        return ("移动期间" if match.group(1).lower() == "moving" else "静止期间")
+    match = re.match(r"(?i)^while affected by no (.+)$", value)
+    if match:
+        return "未受到任何" + _translate_terms(match.group(1), unknown) + "影响时"
+    match = re.match(r"(?i)^while affected by (.+)$", value)
+    if match:
+        return "受到" + _translate_terms(match.group(1), unknown) + "影响时"
+    match = re.match(r"(?i)^if equipped (.+)$", value)
+    if match:
+        return "若已装备" + _translate_terms(match.group(1), unknown)
+    match = re.match(r"(?i)^with at least one nearby corpse$", value)
+    if match:
+        return "附近至少有一具尸体时"
     if value.lower() == "on you":
         return "在你身上"
+    match = re.match(r"(?i)^on hit with (.+)$", value)
+    if match:
+        scope = match.group(1)
+        if scope.lower() == "attacks":
+            return "使用攻击击中时"
+        if scope.lower() == "spells":
+            return "使用法术击中时"
+        return "以" + _translate_terms(scope, unknown) + "击中时"
+    match = re.match(r"(?i)^against enemies affected by (.+)$", value)
+    if match:
+        return "对受到" + _translate_terms(match.group(1), unknown) + "影响的敌人"
+    match = re.match(r"(?i)^against enemies that are (not )?on low life$", value)
+    if match:
+        return "对" + ("不处于" if match.group(1) else "处于") + "低血状态的敌人"
+    match = re.match(r"(?i)^against enemies which have (.+)$", value)
+    if match:
+        return "对拥有" + _translate_terms(match.group(1), unknown) + "的敌人"
+    match = re.match(r"(?i)^at close range$", value)
+    if match:
+        return "处于近距离时"
+    match = re.match(r"(?i)^for each different type of (.+?) you have allocated$", value)
+    if match:
+        return "你每分配一种不同类型的" + _translate_terms(match.group(1), unknown)
+    match = re.match(r"(?i)^for every ([0-9]+(?:\.[0-9]+)?)% of maximum mana they reserve$", value)
+    if match:
+        return "其每保留最大魔力的" + match.group(1) + "%"
+    match = re.match(r"(?i)^per (Frenzy|Endurance|Power) Charge$", value)
+    if match:
+        charge = {"frenzy": "狂怒球", "endurance": "耐力球", "power": "暴击球"}[match.group(1).lower()]
+        return "每个" + charge
+    match = re.match(r"(?i)^per Summoned Totem$", value)
+    if match:
+        return "每个召唤图腾"
+    match = re.match(r"(?i)^per maximum number of Summoned Totems$", value)
+    if match:
+        return "按召唤图腾数量上限计算"
+    match = re.match(r"(?i)^per Fortification above ([0-9]+(?:\.[0-9]+)?)$", value)
+    if match:
+        return "护体值超过" + match.group(1) + "点后的每层护体"
+    match = re.match(r"(?i)^per Gale Force$", value)
+    if match:
+        return "每层疾风力量"
+    match = re.match(r"(?i)^during any flask effect$", value)
+    if match:
+        return "任意药剂效果期间"
+    match = re.match(r"(?i)^no more than once each second$", value)
+    if match:
+        return "每秒最多触发一次"
     match = re.match(r"(?i)^for ([0-9]+(?:\.[0-9]+)?) seconds?$", value)
     if match:
         return f"持续{match.group(1)}秒"
@@ -976,7 +1535,7 @@ def _split_condition(text: str) -> tuple[str, str]:
     # longer "for each" forms are checked first to keep scaling qualifiers intact.
     connectors = [
         " if ", " when ", " while ", " against ", " per ", " for each ", " for every ",
-        " for ", " from ", " on you", " on kill", " on hit", " after ", " before ", " during ",
+        " for ", " from ", " on you", " on kill", " on hit", " after ", " before ", " during ", " at close range",
     ]
     found: list[tuple[int, str]] = []
     lowered = text.lower()
@@ -990,6 +1549,33 @@ def _split_condition(text: str) -> tuple[str, str]:
     return text[:index], text[index:]
 
 
+def _modifier_left(prefix: str, subject: str, unknown: set[str]) -> str:
+    # English passive text often says "Skills have X% increased Y". Render
+    # that ownership relation as "技能的 Y" in Chinese.
+    match = re.match(r"(?is)^(.*?)\b(?:have|has)\s+$", prefix)
+    if match:
+        owner = _translate_terms(match.group(1), unknown).rstrip()
+        return _compact_zh(owner + "的" + _translate_terms(subject, unknown))
+    normalized = subject.strip()
+    if normalized.lower() == "damage taken":
+        return "所受伤害"
+    match = re.match(r"(?i)^(.+?) Damage Taken$", normalized)
+    if match:
+        return "所受" + _translate_terms(match.group(1), unknown) + "伤害"
+    match = re.match(r"(?i)^Chance to Evade (.+)$", normalized)
+    if match:
+        return "对" + _translate_terms(match.group(1), unknown) + "的闪避几率"
+    match = re.match(r"(?i)^Damage with Triggered Spells$", normalized)
+    if match:
+        return "触发法术造成的伤害"
+    if normalized.lower() == "cost of link skills":
+        return "连接技能消耗"
+    match = re.match(r"(?i)^(.+?) Duration with (Two Handed Weapons?)$", normalized)
+    if match:
+        return "持有" + _translate_terms(match.group(2), unknown) + "时，" + _translate_terms(match.group(1) + " Duration", unknown)
+    return _translate_terms(prefix + subject, unknown)
+
+
 def translate_name(source: str, unknown: set[str]) -> str:
     if source in NAME_OVERRIDES:
         return NAME_OVERRIDES[source]
@@ -1000,12 +1586,123 @@ def translate_effect(source: str, unknown: set[str]) -> str:
     # Preserve complete source entries, including embedded line breaks, as the
     # unit to which support is assigned. These display transforms do not split
     # or feed Chinese strings back into the source parser.
+    if source in MULTILINE_OVERRIDES:
+        return MULTILINE_OVERRIDES[source]
+    if source in REVIEWED_LONG_LINE_OVERRIDES:
+        return REVIEWED_LONG_LINE_OVERRIDES[source]
+    if source in SINGLE_LINE_OVERRIDES:
+        return SINGLE_LINE_OVERRIDES[source]
     if "\n" in source or "\r" in source:
         return "\n".join(translate_effect(part, unknown) for part in source.splitlines())
+
+    # Recoup is a delayed recovery effect, not an instantaneous restoration.
+    recoup = re.match(r"(?i)^([0-9]+(?:\.[0-9]+)?)% of (Physical )?Damage taken Recouped as (Life|Mana)(?: if (.+))?$", source)
+    if recoup:
+        amount, damage_type, resource, condition = recoup.groups()
+        damage_zh = "物理伤害" if damage_type else "伤害"
+        resource_zh = "生命" if resource.lower() == "life" else "魔力"
+        result = f"所受{damage_zh}的{amount}%会延迟回复为{resource_zh}"
+        if condition:
+            result += "（" + _translate_condition("if " + condition, unknown) + "）"
+        return result
+    recoup_grant = re.match(r"(?i)^Arcane Surge also grants ([0-9]+(?:\.[0-9]+)?)% of Damage taken Recouped as (Life|Mana) to you$", source)
+    if recoup_grant:
+        amount, resource = recoup_grant.groups()
+        resource_zh = "生命" if resource.lower() == "life" else "魔力"
+        return f"奥术浪涌还会使你所受伤害的{amount}%延迟回复为{resource_zh}"
+
+    # “over N seconds” in recovery stats means recovery is spread through
+    # that interval; it is not a threshold comparison (“超过 N 秒”).
+    recovery_over = re.match(
+        r"(?i)^(Recover|Regenerate) ([0-9]+(?:\.[0-9]+)?)(%?)\s+(?:of\s+)?(Life|Mana|Energy Shield) over ([0-9]+(?:\.[0-9]+)?) seconds?(.*)$",
+        source,
+    )
+    if recovery_over:
+        _verb, amount, percent, resource, duration, suffix = recovery_over.groups()
+        resource_zh = {"life": "生命", "mana": "魔力", "energy shield": "能量护盾"}[resource.lower()]
+        restored = f"相当于最大{resource_zh}{amount}%的{resource_zh}" if percent else f"{amount}{resource_zh}"
+        result = f"在{duration}秒内回复{restored}"
+        if suffix.strip():
+            _, condition = _split_condition(suffix)
+            if condition:
+                result += "（" + _translate_condition(condition, unknown) + "）"
+        return result
 
     faster_ailment = re.match(r"(?i)^Damaging Ailments deal damage ([0-9]+(?:\.[0-9]+)?)% faster$", source)
     if faster_ailment:
         return f"伤害型异常状态的伤害结算加快{faster_ailment.group(1)}%"
+    bow_dot = re.match(r"(?i)^([0-9]+(?:\.[0-9]+)?)% increased Damage over Time with Bow Skills$", source)
+    if bow_dot:
+        return f"弓技能造成的持续伤害提高{bow_dot.group(1)}%"
+
+    match = re.match(r"(?i)^With at least one nearby corpse, (.+)$", source)
+    if match:
+        return "附近至少有一具尸体时，" + translate_effect(match.group(1), unknown)
+    match = re.match(r"(?i)^Each Mine applies ([0-9]+(?:\.[0-9]+)?)% (increased|reduced) Damage (taken|dealt) to Enemies near it, up to ([0-9]+(?:\.[0-9]+)?)%$", source)
+    if match:
+        amount, modifier, scope, maximum = match.groups()
+        verb = "所受伤害" if scope.lower() == "taken" else "造成的伤害"
+        return f"每颗地雷使附近敌人的{verb}{MODIFIERS[modifier.lower()]}{amount}%，最多{MODIFIERS[modifier.lower()]}{maximum}%"
+    match = re.match(r"(?i)^Every ([0-9]+(?:\.[0-9]+)?) seconds?, Regenerate Energy Shield equal to ([0-9]+(?:\.[0-9]+)?)% of Evasion Rating over ([0-9]+(?:\.[0-9]+)?) seconds?$", source)
+    if match:
+        cadence, amount, duration = match.groups()
+        return f"每{cadence}秒，在{duration}秒内回复相当于闪避值{amount}%的能量护盾"
+    match = re.match(r"(?i)^Reflects ([0-9]+(?:\.[0-9]+)?) (.+?) Damage to (.+)$", source)
+    if match:
+        amount, damage_type, targets = match.groups()
+        return f"对{_translate_terms(targets, unknown)}反射{amount}{_translate_terms(damage_type, unknown)}伤害"
+    match = re.match(r"(?i)^([0-9]+(?:\.[0-9]+)?)% of your Energy Shield is added to your Stun Threshold$", source)
+    if match:
+        return f"你的眩晕门槛增加相当于能量护盾{match.group(1)}%的数值"
+    match = re.match(r"(?i)^Fire Exposure you inflict applies an extra (-?[0-9]+(?:\.[0-9]+)?)% to Fire Resistance$", source)
+    if match:
+        return f"你施加的火焰曝露使火焰抗性额外变动{match.group(1)}%"
+    match = re.match(r"(?i)^Exposure you inflict applies (?:an extra )?(-?[0-9]+(?:\.[0-9]+)?)% to the affected Resistance$", source)
+    if match:
+        return f"你施加的曝露使受影响的抗性额外变动{match.group(1)}%"
+    match = re.match(r"(?i)^Exposure you inflict applies at least (-?[0-9]+(?:\.[0-9]+)?)% to the affected Resistance$", source)
+    if match:
+        return f"你施加的曝露使受影响的抗性至少达到{match.group(1)}%"
+    match = re.match(r"(?i)^([0-9]+(?:\.[0-9]+)?)% of (Life|Mana) Leech is Instant per Equipped Claw$", source)
+    if match:
+        amount, resource = match.groups()
+        resource_zh = "生命" if resource.lower() == "life" else "魔力"
+        return f"每装备一把爪类武器，{resource_zh}偷取的{amount}%即时回复"
+    match = re.match(r"(?i)^Damageable Minions (deal|take) ([0-9]+(?:\.[0-9]+)?)% increased Damage for each second they have been alive, up to a maximum of ([0-9]+(?:\.[0-9]+)?)%$", source)
+    if match:
+        action, amount, maximum = match.groups()
+        damage = "造成的伤害" if action.lower() == "deal" else "受到的伤害"
+        return f"可受伤召唤物每存活一秒，{damage}提高{amount}%，最多提高{maximum}%"
+    match = re.match(r"(?i)^Gain ([0-9]+(?:\.[0-9]+)?) (Life|Mana) per Enemy Hit with (.+?)(?: if (.+))?$", source)
+    if match:
+        amount, resource, attack_scope, condition = match.groups()
+        resource_zh = "生命" if resource.lower() == "life" else "魔力"
+        result = f"每次{_translate_terms(attack_scope, unknown)}击中敌人，获得{amount}{resource_zh}"
+        if condition:
+            result += "（" + _translate_condition("if " + condition, unknown) + "）"
+        return _compact_zh(result)
+
+    # Keep recovery sources and rates in natural Chinese order.
+    match = re.match(r"(?i)^Regenerate ([0-9]+(?:\.[0-9]+)?)% of (Life|Mana|Energy Shield) per second(.*)$", source)
+    if match:
+        amount, resource, suffix = match.groups()
+        resource_zh = {"life": "生命", "mana": "魔力", "energy shield": "能量护盾"}[resource.lower()]
+        result = f"每秒回复相当于最大{resource_zh}{amount}%的{resource_zh}"
+        if suffix:
+            _, condition = _split_condition(suffix)
+            if condition:
+                result += "（" + _translate_condition(condition, unknown) + "）"
+        return result
+    match = re.match(r"(?i)^Regenerate ([0-9]+(?:\.[0-9]+)?) (Life|Mana|Energy Shield) per second(.*)$", source)
+    if match:
+        amount, resource, suffix = match.groups()
+        resource_zh = {"life": "生命", "mana": "魔力", "energy shield": "能量护盾"}[resource.lower()]
+        result = f"每秒回复{amount}{resource_zh}"
+        if suffix:
+            _, condition = _split_condition(suffix)
+            if condition:
+                result += "（" + _translate_condition(condition, unknown) + "）"
+        return result
 
     special_multiplier = re.match(
         r"(?i)^([+-]?\d+(?:\.\d+)?)% to Damage over Time Multiplier for Poison you inflict on Bleeding Enemies$",
@@ -1035,11 +1732,62 @@ def translate_effect(source: str, unknown: set[str]) -> str:
         return (f"每{cadence}秒，将{_translate_terms(base, unknown)}的{percent}%转为额外"
                 f"{_translate_terms(extra, unknown)}，持续{duration}秒")
 
+    match = re.match(r"(?i)^Every ([0-9]+(?:\.[0-9]+)?) seconds?, Consume (.+?) to Recover ([0-9]+(?:\.[0-9]+)?)% of (Life|Mana|Energy Shield)(.*)$", source)
+    if match:
+        cadence, consumed, amount, resource, suffix = match.groups()
+        resource_zh = {"life": "生命", "mana": "魔力", "energy shield": "能量护盾"}[resource.lower()]
+        result = f"每{cadence}秒消耗{_translate_terms(consumed, unknown)}，回复相当于最大{resource_zh}{amount}%的{resource_zh}"
+        if suffix:
+            _, condition = _split_condition(suffix)
+            if condition:
+                result += "（" + _translate_condition(condition, unknown) + "）"
+        return result
+
+    match = re.match(r"(?i)^Recover ([0-9]+(?:\.[0-9]+)?)(%?)\s+(?:of\s+)?(Life|Mana|Energy Shield)(.*)$", source)
+    if match:
+        amount, percent, resource, suffix = match.groups()
+        resource_zh = {"life": "生命", "mana": "魔力", "energy shield": "能量护盾"}[resource.lower()]
+        result = f"回复相当于最大{resource_zh}{amount}%的{resource_zh}" if percent else f"回复{amount}{resource_zh}"
+        if suffix:
+            duration = re.match(r"(?i)^\s+over ([0-9]+(?:\.[0-9]+)?) seconds?(.*)$", suffix)
+            if duration:
+                seconds, remainder = duration.groups()
+                result += f"，在{seconds}秒内"
+                suffix = remainder
+            if suffix.strip():
+                _, condition = _split_condition(suffix)
+                if condition:
+                    result += "（" + _translate_condition(condition, unknown) + "）"
+        return result
+
+    match = re.match(r"(?i)^([+-]?[0-9]+(?:\.[0-9]+)?)%\s+chance to Defend with ([0-9]+(?:\.[0-9]+)?)% of Armour(.*)$", source)
+    if match:
+        amount, armour_percent, suffix = match.groups()
+        result = f"有{amount}%几率以相当于护甲值{armour_percent}%的数值进行防御"
+        if suffix:
+            _, condition = _split_condition(suffix)
+            if condition:
+                result += "（" + _translate_condition(condition, unknown) + "）"
+        return _compact_zh(result)
+
     match = re.match(r"(?i)^([+-]?[0-9]+(?:\.[0-9]+)?)%\s+[Cc]hance to (.+)$", source)
     if match:
         amount, action = match.groups()
         # Chance is a base chance, not an increased or more modifier.
-        return _compact_zh(_translate_terms(action, unknown) + "几率" + amount + "%")
+        subject, condition = _split_condition(action)
+        avoid_being = re.match(r"(?i)^avoid being (Poisoned|Stunned|Chilled|Frozen|Ignited|Shocked|Impaled|Maimed|Hindered)$", subject)
+        if avoid_being:
+            translated_subject = "避免" + {
+                "poisoned": "中毒", "stunned": "眩晕", "chilled": "冰缓", "frozen": "冻结",
+                "ignited": "点燃", "shocked": "感电", "impaled": "穿刺", "maimed": "瘫痪",
+                "hindered": "阻碍",
+            }[avoid_being.group(1).lower()]
+        else:
+            translated_subject = _translate_terms(subject, unknown)
+        result = translated_subject + "几率" + amount + "%" if amount.startswith(("+", "-")) else f"有{amount}%几率{translated_subject}"
+        if condition:
+            result += "（" + _translate_condition(condition, unknown) + "）"
+        return _compact_zh(result)
 
     # A multiplier stat adds percentage points to that multiplier. Keep its
     # additive sign and never label it as the independent "more" operator.
@@ -1052,6 +1800,9 @@ def translate_effect(source: str, unknown: set[str]) -> str:
             return _compact_zh(label + " " + amount + "%（" + _translate_condition(condition, unknown) + "）")
         if suffix.lower().startswith(" for "):
             return _compact_zh(_translate_terms(suffix[5:], unknown) + label + " " + amount + "%")
+        if suffix.lower().startswith(" with "):
+            scope = _translate_terms(suffix[6:], unknown)
+            return _compact_zh(scope + "的" + label + " " + amount + "%")
         return _compact_zh(label + " " + amount + "%" + _translate_terms(suffix, unknown))
 
     match = re.search(r"(?<![A-Za-z])([+-]?\d+(?:\.\d+)?)%\s+(increased|reduced|more|less)\s+", source, re.IGNORECASE)
@@ -1060,7 +1811,7 @@ def translate_effect(source: str, unknown: set[str]) -> str:
         prefix = source[:match.start()]
         body = source[match.end():]
         subject, condition = _split_condition(body)
-        left = _translate_terms(prefix + subject, unknown).rstrip()
+        left = _modifier_left(prefix, subject, unknown).rstrip()
         result = left + MODIFIERS[modifier.lower()] + amount + "%"
         if condition:
             result += "（" + _translate_condition(condition, unknown) + "）"
@@ -1087,7 +1838,11 @@ def translate_effect(source: str, unknown: set[str]) -> str:
 
     # "faster start" is a time reduction, not the more/less damage operator.
     text = re.sub(r"(?i)(\d+(?:\.\d+)?)% faster start of Energy Shield Recharge", r"能量护盾开始充能时间缩短\1%", source)
-    return _compact_zh(_translate_terms(text, unknown))
+    subject, condition = _split_condition(text)
+    translated = _translate_terms(subject, unknown)
+    if condition:
+        translated += "（" + _translate_condition(condition, unknown) + "）"
+    return _compact_zh(translated)
 
 
 def iter_source_texts(data: dict):
@@ -1113,6 +1868,19 @@ def main() -> int:
     for source in sorted(set(line for n in data["nodes"].values() for line in n.get("stats", [])) |
                          set(line for n in data["nodes"].values() for effect in n.get("masteryEffects", []) for line in effect.get("stats", []))):
         lines[source] = translate_effect(source, unknown)
+
+    multiline_sources = {source for source in lines if "\n" in source or "\r" in source}
+    missing_multiline = multiline_sources - set(MULTILINE_OVERRIDES)
+    if missing_multiline:
+        print("Unreviewed multiline source effects:", file=sys.stderr)
+        print("\n".join(sorted(missing_multiline)), file=sys.stderr)
+        return 3
+    long_sources = {source for source in lines if "\n" not in source and "\r" not in source and len(source) > 80}
+    missing_long = long_sources - set(REVIEWED_LONG_LINE_OVERRIDES) - set(SINGLE_LINE_OVERRIDES)
+    if missing_long:
+        print("Unreviewed long single-line source effects:", file=sys.stderr)
+        print("\n".join(sorted(missing_long)), file=sys.stderr)
+        return 3
 
     classes = {entry["name"]: CLASS_NAMES[entry["name"]] for entry in data["classes"]}
     partitions = {}
@@ -1147,6 +1915,10 @@ def main() -> int:
             "unique_source_node_names": len(set(n["source"] for n in names.values() if n["source"])),
             "effect_occurrences": effect_occurrences,
             "unique_effect_lines": len(lines),
+            "multiline_effect_lines": len(multiline_sources),
+            "multiline_unreviewed": 0,
+            "reviewed_long_single_line_effects": len(long_sources),
+            "long_single_line_unreviewed": 0,
             "mastery_nodes": sum(bool(n.get("isMastery")) for n in data["nodes"].values()),
             "mastery_options": mastery_options,
             "standard_nodes": len(data["standard_tree"]["default_allocation_graph"]["node_ids"]),
@@ -1154,6 +1926,10 @@ def main() -> int:
             "classes": len(classes),
             "ascendancy_partitions": len(partitions),
             "expansion_jewel_nodes": len(data["special_subtrees"]["expansion_jewels"]["positioned_node_ids"]),
+            "reminder_text_records_not_displayed_by_canonical_panel": sum("reminderText" in n for n in data["nodes"].values()),
+            "reminder_text_entries_not_displayed_by_canonical_panel": sum(
+                len(n.get("reminderText", [])) for n in data["nodes"].values()
+            ),
             "untranslated_names": 0,
             "untranslated_effect_lines": 0,
         },
