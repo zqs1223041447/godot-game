@@ -1,0 +1,191 @@
+{
+  "base_commit": "0816322e4c9a53d264bce9c5223810a93ead2348",
+  "stage_commit": "e9b490a28f0f62e257c488e199e37b132320c4b5",
+  "counts": {
+    "pure_catalog_and_crafting": 10466,
+    "strict_migration": 211,
+    "actual_main_and_transactions": 613
+  },
+  "total_checks": 11290,
+  "count_scope": "Final successful assertion counts only, not11290distinct gameplay scenarios. The repeated successful pure run is not double-counted.",
+  "old_item_rng_byte_cases": 954,
+  "old_craft_typed_results": 2406,
+  "legacy_api_contract": "Explicit old pools/profile order and equipment vocabularies1..36 keep actual historical behavior, including35/36 rejection; saved35/36 equipment is mapped to historical34.",
+  "intentional_new_behavior": "Current37 natural defense supply and current crafting use two new suffix families; new loot results/RNG states are not claimed equal to old34.",
+  "passive_execution_policy": 36,
+  "pure_run_history": [
+    {
+      "stamp": "20261005-204036",
+      "result": "test parse failed before checks; static call syntax fixed"
+    },
+    {
+      "stamp": "20261005-204056",
+      "result": "passed10466/0 exit0, report JSON10465 omitted final report-writable check",
+      "seconds": 5.272
+    },
+    {
+      "stamp": "20261005-204206",
+      "result": "passed10466/0 exit0 after test-only report count assignment; repeated successful set, no new coverage/production change",
+      "seconds": 4.912
+    }
+  ],
+  "consumer_first_parse_failure": "Test aliasPanel collided with native Godot class; retained and fixed test only before613/0pass.",
+  "reference_validation_separate": "docs/qa/v060-reference/README.md",
+  "same_gameplay_production_after_tests": true,
+  "pending_at_recording": [
+    "Single Windows export and focused same-PCK29check/short startup; final external handoff records terminal status."
+  ],
+  "logs": {
+    "docs/qa/v060-consumers/20261005T204036678617Z.log.txt": {
+      "bytes": 390,
+      "sha256": "dd4d6546811503650680ad850ffa37aa862fc55a21ae293b9b913cf866c12616"
+    },
+    "docs/qa/v060-consumers/20261005T204053227759Z.log.txt": {
+      "bytes": 309,
+      "sha256": "046cc95069497e8d80599e71ca4546cacfc1ea9d3299a8d645c19c0af52d41a9"
+    },
+    "docs/qa/v060-integration/import.log.txt": {
+      "bytes": 72096,
+      "sha256": "b14f91756a578c821f98b9a813f95704e2abfc83a36d9618912b647a00672f96"
+    },
+    "docs/qa/v060-integration/probe-parse.log.txt": {
+      "bytes": 73,
+      "sha256": "a9912b85473f126d3f4f63ec824170c828df3473a292f866dde86cafda5b66da"
+    },
+    "docs/qa/v060-migration/20261005T203957633536Z.log.txt": {
+      "bytes": 131,
+      "sha256": "9d4fea7f139cdde65adcc777e735558484015b6d7f2590d70875db52b223443d"
+    },
+    "docs/qa/v060-reference/build-check.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v060-reference/build-check.stdout.log.txt": {
+      "bytes": 52,
+      "sha256": "65d47533eaf556129a1f3a295db12ab1bc36a8df0770c71cb9378490d54d03ba"
+    },
+    "docs/qa/v060-reference/build.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v060-reference/build.stdout.log.txt": {
+      "bytes": 51,
+      "sha256": "012220630ba6aba7c4f07504d126fcb9bff060d7b392c9600ed58a0b80028f49"
+    },
+    "docs/qa/v060-reference/corrected-build-check.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v060-reference/corrected-build-check.stdout.log.txt": {
+      "bytes": 52,
+      "sha256": "65d47533eaf556129a1f3a295db12ab1bc36a8df0770c71cb9378490d54d03ba"
+    },
+    "docs/qa/v060-reference/corrected-build.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v060-reference/corrected-build.stdout.log.txt": {
+      "bytes": 51,
+      "sha256": "47da6c6cfc6cd014ee8bf52c839a7608e5b54c5abdb60dd417262be03aae0e26"
+    },
+    "docs/qa/v060-reference/corrected-godot-export.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v060-reference/corrected-godot-export.stdout.log.txt": {
+      "bytes": 205,
+      "sha256": "881c3c8a76e46d3e862aafeb146330317ff3f9b9ded3708c83c5c5e40bdf8c0b"
+    },
+    "docs/qa/v060-reference/corrected-javascript-syntax.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v060-reference/corrected-javascript-syntax.stdout.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v060-reference/focused-reference.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v060-reference/focused-reference.stdout.log.txt": {
+      "bytes": 1193,
+      "sha256": "1e1afad557edd0149da98d2f6db4cdca8c7fb5c7e4182fca705bc0620ca57448"
+    },
+    "docs/qa/v060-reference/font-coverage.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v060-reference/font-coverage.stdout.log.txt": {
+      "bytes": 305,
+      "sha256": "db77b4f0a0b8ffe6f98b0bc3b68bb80bca16e772ecf0f5a5e051d295205fbaa7"
+    },
+    "docs/qa/v060-reference/godot-export.stderr.log.txt": {
+      "bytes": 1860,
+      "sha256": "67958315cea06ec28ecf70b6c6cebf4b01123a18658b45801fb3f9dbec7b9d31"
+    },
+    "docs/qa/v060-reference/godot-export.stdout.log.txt": {
+      "bytes": 205,
+      "sha256": "881c3c8a76e46d3e862aafeb146330317ff3f9b9ded3708c83c5c5e40bdf8c0b"
+    },
+    "docs/qa/v060-reference/javascript-syntax.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v060-reference/javascript-syntax.stdout.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v060-rules/20261005-204036-rules.log.txt": {
+      "bytes": 716,
+      "sha256": "6daa1acbc8c706b3871fe1dea4be74df57bdda3bd182dd39449e4b557f773d47"
+    },
+    "docs/qa/v060-rules/20261005-204056-rules.log.txt": {
+      "bytes": 177,
+      "sha256": "743c198272afc3808f7ec227db7bcff3fa67a7baff9b066bb4ea3f311df0f32b"
+    },
+    "docs/qa/v060-rules/20261005-204206-rules.log.txt": {
+      "bytes": 177,
+      "sha256": "743c198272afc3808f7ec227db7bcff3fa67a7baff9b066bb4ea3f311df0f32b"
+    }
+  },
+  "reports": {
+    "docs/qa/v060-rules/20261005-204206-receipt.json": {
+      "bytes": 2435,
+      "sha256": "d6286bdf4feb8fad2a3401a77d76a276c3d2679f38cb1e69ccb74fe652900849"
+    },
+    "docs/qa/v060-rules/20261005-204206-result.json": {
+      "bytes": 1971,
+      "sha256": "a9a200b8f6296b96f7ff4c630fccd6d68faf7c51433bb33ece59e668418e2ada"
+    },
+    "docs/qa/v060-migration/20261005T203957633536Z-attempt.json": {
+      "bytes": 39570,
+      "sha256": "b23eb0bc53964d3467a804fbbea0fa69f22b9aeed791d40744e1716723d684bc"
+    },
+    "docs/qa/v060-migration/20261005T203957633536Z-checks.json": {
+      "bytes": 1064,
+      "sha256": "d9d57a917f106e92db14819b94e714b6199b91871343c35e89d2729067006596"
+    },
+    "docs/qa/v060-consumers/20261005T204053227759Z-run.json": {
+      "bytes": 111946,
+      "sha256": "1f032aa91631c445ad0877eae915eeddcc5769a3c824e53be77daf429edf7d7e"
+    },
+    "docs/qa/v060-consumers/20261005T204053227759Z-checks.json": {
+      "bytes": 4389,
+      "sha256": "2631b17d84b2b6efb5fa2114b9573ee8ea155b3198730bb532001d51203bbdd4"
+    },
+    "docs/qa/v060-reference/focused-reference-result.json": {
+      "bytes": 202,
+      "sha256": "99a8022fc8b15f5605148016c9849182948258a0de12f1334247759407e0e0e2"
+    },
+    "docs/qa/v060-reference/font-coverage-result.json": {
+      "bytes": 204,
+      "sha256": "38b7c1cd390b3315d1c800e7c7beefc170a22a84ced5f4365740c539c72aae7f"
+    }
+  },
+  "post_gameplay_production_changes": {
+    "project.godot": "Application version0.59.0 to0.60.0 only"
+  },
+  "final_production_files": "docs/qa/v060/final-production-files.json",
+  "font_reference_evidence": "docs/qa/v060-reference/README.md"
+}

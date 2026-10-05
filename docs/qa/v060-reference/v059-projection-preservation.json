@@ -1,0 +1,661 @@
+{
+  "passed": true,
+  "baseline_commit": "0816322e4c9a53d264bce9c5223810a93ead2348",
+  "numeric_decode": "Both catalogs parse_int=float and parse_float=float; canonical object keys",
+  "old_catalog_semantic_sha256": "936eb70603b572bff57c8ab99a110cde42ecf2ed752b1973d210ceccbaeea1bb",
+  "current_catalog_semantic_sha256": "830b8deb12f9a478c06ed625e606383e03a2c2d8c37a7b59f576ed2e2b2c5dee",
+  "projected_catalog_semantic_sha256": "936eb70603b572bff57c8ab99a110cde42ecf2ed752b1973d210ceccbaeea1bb",
+  "approved_changed_leaves": 48,
+  "rendered_authoritative_values_checked": 56,
+  "html_ids": 3813,
+  "all_html_anchor_and_local_asset_links_valid": true,
+  "old_asset_pngs_unchanged": 61,
+  "old_reference_pngs_unchanged": 68,
+  "font_and_manifest_unchanged": true,
+  "source_coverage_bytes_unchanged": true,
+  "font_report": {
+    "mapped_codepoints": 1655,
+    "required_codepoints": 1650,
+    "required_han": 1528,
+    "baseline_codepoints": 874,
+    "fallback_symbols": [
+      8961,
+      9672
+    ],
+    "missing": [],
+    "lost_baseline": [],
+    "empty_han": [],
+    "errors": [],
+    "ok": true,
+    "runtime_files": 173,
+    "missing_locations": {}
+  },
+  "ordinary_reforge_seed": 3.0,
+  "approved_changes": [
+    {
+      "kind": "changed",
+      "path": [
+        "affixes",
+        "coalglow",
+        "pools"
+      ],
+      "category": "appended_pool_membership",
+      "before": [
+        "legacy",
+        "runewood",
+        "defense",
+        "local_weapon",
+        "build_legacy_v27"
+      ],
+      "after_sha256": "1e4a92682452b295298970a0db5b8d66222e14ece9f5279ba0eb25dc3da92fde"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "affixes",
+        "deepwell",
+        "pools"
+      ],
+      "category": "appended_pool_membership",
+      "before": [
+        "legacy",
+        "runewood",
+        "defense",
+        "local_weapon",
+        "build_legacy_v27",
+        "forgeblade_v34"
+      ],
+      "after_sha256": "460bab1d9b386b2e9ee250b92e17a683d82ba6c04c0582fc31c3cff69389f745"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "affixes",
+        "emberward",
+        "pools"
+      ],
+      "category": "appended_pool_membership",
+      "before": [
+        "defense"
+      ],
+      "after_sha256": "91abe84d6a10deb3fd4cef71782d12a38a4fee641a874ef42b659d0b5c4df31d"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "affixes",
+        "lanternveil",
+        "pools"
+      ],
+      "category": "appended_pool_membership",
+      "before": [
+        "legacy",
+        "runewood",
+        "defense",
+        "build_legacy_v27"
+      ],
+      "after_sha256": "d9f44b1d292c03f3ec3da18cd0f183b827679246fed75f455389932916d52433"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "affixes",
+        "rimeecho",
+        "pools"
+      ],
+      "category": "appended_pool_membership",
+      "before": [
+        "legacy",
+        "runewood",
+        "defense",
+        "local_weapon",
+        "build_legacy_v27"
+      ],
+      "after_sha256": "1e4a92682452b295298970a0db5b8d66222e14ece9f5279ba0eb25dc3da92fde"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "affixes",
+        "rimeward"
+      ],
+      "category": "new_v37_projection",
+      "before": null,
+      "after_sha256": "7f283b623c36a033b2b3c84d610748b52b963a4c1f7b0bf713788499ac798bc0"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "affixes",
+        "rootwell",
+        "pools"
+      ],
+      "category": "appended_pool_membership",
+      "before": [
+        "legacy",
+        "runewood",
+        "defense",
+        "build_legacy_v27"
+      ],
+      "after_sha256": "d9f44b1d292c03f3ec3da18cd0f183b827679246fed75f455389932916d52433"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "affixes",
+        "sparkthread",
+        "pools"
+      ],
+      "category": "appended_pool_membership",
+      "before": [
+        "legacy",
+        "runewood",
+        "defense",
+        "local_weapon",
+        "build_legacy_v27"
+      ],
+      "after_sha256": "1e4a92682452b295298970a0db5b8d66222e14ece9f5279ba0eb25dc3da92fde"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "affixes",
+        "stormward"
+      ],
+      "category": "new_v37_projection",
+      "before": null,
+      "after_sha256": "a6ae57f2acd19191d2eee6f9e0e572da6e5d861c35fa8b3afff4e53e2930bb81"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "affixes",
+        "trailstep",
+        "pools"
+      ],
+      "category": "appended_pool_membership",
+      "before": [
+        "legacy",
+        "runewood",
+        "defense",
+        "build_legacy_v27"
+      ],
+      "after_sha256": "d9f44b1d292c03f3ec3da18cd0f183b827679246fed75f455389932916d52433"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "affixes",
+        "wellturn",
+        "pools"
+      ],
+      "category": "appended_pool_membership",
+      "before": [
+        "legacy",
+        "runewood",
+        "defense",
+        "local_weapon",
+        "build_legacy_v27",
+        "forgeblade_v34"
+      ],
+      "after_sha256": "460bab1d9b386b2e9ee250b92e17a683d82ba6c04c0582fc31c3cff69389f745"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "canonical",
+        "default_build",
+        "version"
+      ],
+      "category": "schema_version",
+      "before": 36.0,
+      "after_sha256": "4b28a7af7cd67294f54660cc9a39a51c9a72de22caaab70b3b8cdd11aac3b9f9"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "canonical",
+        "save_version"
+      ],
+      "category": "schema_version",
+      "before": 36.0,
+      "after_sha256": "4b28a7af7cd67294f54660cc9a39a51c9a72de22caaab70b3b8cdd11aac3b9f9"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "augment",
+        "example",
+        "save_version"
+      ],
+      "category": "schema_version",
+      "before": 36.0,
+      "after_sha256": "4b28a7af7cd67294f54660cc9a39a51c9a72de22caaab70b3b8cdd11aac3b9f9"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "calibration_shard",
+        "rules",
+        "affix_ids"
+      ],
+      "category": "appended_v37_families",
+      "before": [
+        "nine_slot_prefix_vitality",
+        "nine_slot_prefix_clarity",
+        "nine_slot_prefix_aegis",
+        "nine_slot_suffix_endurance",
+        "nine_slot_suffix_mana_flow",
+        "nine_slot_suffix_stride",
+        "nine_slot_suffix_skill_row",
+        "rootwell",
+        "deepwell",
+        "lanternveil",
+        "runesong",
+        "prismedge",
+        "farweave",
+        "coalglow",
+        "rimeecho",
+        "sparkthread",
+        "wellturn",
+        "trailstep",
+        "beatlink",
+        "attack_added_physical",
+        "attack_added_fire",
+        "spell_added_cold",
+        "spell_added_lightning",
+        "emberward",
+        "whetstone_edge",
+        "tempered_edge",
+        "attack_life_leech",
+        "attack_mana_leech",
+        "global_critical_chance",
+        "global_critical_multiplier"
+      ],
+      "after_sha256": "4e09c2676ec98dc2d646733b298da3edbeaf3c4ffdaf485e22e01b628db000a7"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "calibration_shard",
+        "rules",
+        "catalog_vocabulary"
+      ],
+      "category": "current_crafting_vocabulary",
+      "before": 34.0,
+      "after_sha256": "4b28a7af7cd67294f54660cc9a39a51c9a72de22caaab70b3b8cdd11aac3b9f9"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "calibration_shard",
+        "rules",
+        "eligible_families_by_base",
+        "emberhide_vest"
+      ],
+      "category": "appended_v37_families",
+      "before": [
+        "rootwell",
+        "deepwell",
+        "lanternveil",
+        "coalglow",
+        "rimeecho",
+        "sparkthread",
+        "wellturn",
+        "trailstep",
+        "emberward"
+      ],
+      "after_sha256": "5c42da385e3d49547f7043d627996abd6d09eded362b4b6923511679aa903e91"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "calibration_shard",
+        "save_version"
+      ],
+      "category": "schema_version",
+      "before": 36.0,
+      "after_sha256": "4b28a7af7cd67294f54660cc9a39a51c9a72de22caaab70b3b8cdd11aac3b9f9"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "elevate",
+        "example",
+        "save_version"
+      ],
+      "category": "schema_version",
+      "before": 36.0,
+      "after_sha256": "4b28a7af7cd67294f54660cc9a39a51c9a72de22caaab70b3b8cdd11aac3b9f9"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "enchant",
+        "example",
+        "save_version"
+      ],
+      "category": "schema_version",
+      "before": 36.0,
+      "after_sha256": "4b28a7af7cd67294f54660cc9a39a51c9a72de22caaab70b3b8cdd11aac3b9f9"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "recalibrate",
+        "example",
+        "save_version"
+      ],
+      "category": "schema_version",
+      "before": 36.0,
+      "after_sha256": "4b28a7af7cd67294f54660cc9a39a51c9a72de22caaab70b3b8cdd11aac3b9f9"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "reforge",
+        "example",
+        "save_version"
+      ],
+      "category": "schema_version",
+      "before": 36.0,
+      "after_sha256": "4b28a7af7cd67294f54660cc9a39a51c9a72de22caaab70b3b8cdd11aac3b9f9"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "salvage",
+        "example",
+        "save_version"
+      ],
+      "category": "schema_version",
+      "before": 36.0,
+      "after_sha256": "4b28a7af7cd67294f54660cc9a39a51c9a72de22caaab70b3b8cdd11aac3b9f9"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "targeted_reforge_critical",
+        "catalog_vocabulary"
+      ],
+      "category": "current_crafting_vocabulary",
+      "before": 34.0,
+      "after_sha256": "4b28a7af7cd67294f54660cc9a39a51c9a72de22caaab70b3b8cdd11aac3b9f9"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "targeted_reforge_critical",
+        "example",
+        "save_version"
+      ],
+      "category": "schema_version",
+      "before": 36.0,
+      "after_sha256": "4b28a7af7cd67294f54660cc9a39a51c9a72de22caaab70b3b8cdd11aac3b9f9"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "targeted_reforge_damage",
+        "catalog_vocabulary"
+      ],
+      "category": "current_crafting_vocabulary",
+      "before": 34.0,
+      "after_sha256": "4b28a7af7cd67294f54660cc9a39a51c9a72de22caaab70b3b8cdd11aac3b9f9"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "targeted_reforge_damage",
+        "example",
+        "save_version"
+      ],
+      "category": "schema_version",
+      "before": 36.0,
+      "after_sha256": "4b28a7af7cd67294f54660cc9a39a51c9a72de22caaab70b3b8cdd11aac3b9f9"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "targeted_reforge_life_leech",
+        "catalog_vocabulary"
+      ],
+      "category": "current_crafting_vocabulary",
+      "before": 34.0,
+      "after_sha256": "4b28a7af7cd67294f54660cc9a39a51c9a72de22caaab70b3b8cdd11aac3b9f9"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "targeted_reforge_life_leech",
+        "example",
+        "save_version"
+      ],
+      "category": "schema_version",
+      "before": 36.0,
+      "after_sha256": "4b28a7af7cd67294f54660cc9a39a51c9a72de22caaab70b3b8cdd11aac3b9f9"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "targeted_reforge_mana_leech",
+        "catalog_vocabulary"
+      ],
+      "category": "current_crafting_vocabulary",
+      "before": 34.0,
+      "after_sha256": "4b28a7af7cd67294f54660cc9a39a51c9a72de22caaab70b3b8cdd11aac3b9f9"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "targeted_reforge_mana_leech",
+        "example",
+        "save_version"
+      ],
+      "category": "schema_version",
+      "before": 36.0,
+      "after_sha256": "4b28a7af7cd67294f54660cc9a39a51c9a72de22caaab70b3b8cdd11aac3b9f9"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "currencies",
+        "calibration_shard",
+        "save_version"
+      ],
+      "category": "schema_version",
+      "before": 36.0,
+      "after_sha256": "4b28a7af7cd67294f54660cc9a39a51c9a72de22caaab70b3b8cdd11aac3b9f9"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "current_loot_profile",
+        2,
+        "pool_id"
+      ],
+      "category": "current_defense_lane",
+      "before": "defense",
+      "after_sha256": "a9235a537dcf7fc5920c58d17167abe1ecbe3ddd5e02ed5ae976f9144e1661bc"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "current_loot_profile_id"
+      ],
+      "category": "current_profile_name",
+      "before": "canonical_v34",
+      "after_sha256": "70bafa8acf4ce69e2b4104c604a67c7be8d61670c2e86330c8995a696d51d1df"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "elemental_defense_affixes"
+      ],
+      "category": "new_v37_projection",
+      "before": null,
+      "after_sha256": "264d584eda937ed086d2e30bc9cda1621bcfab02513408a67d3a3e9fba5291ed"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "elemental_resistance_caps",
+        "equipment",
+        "equipment_cold_sources"
+      ],
+      "category": "current_cold_supply",
+      "before": [],
+      "after_sha256": "3c907bf7fb1dc94e1ac720cb9c75211c42acbe8b7a0f125bc70ae3f6733197fb"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "elemental_resistance_caps",
+        "equipment",
+        "equipment_lightning_sources"
+      ],
+      "category": "current_lightning_supply",
+      "before": [],
+      "after_sha256": "f5709b919b06b41279fc31bea422f2da570ecdf1a4114a6121f2a581a25563fd"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "equipment",
+        "emberhide_vest",
+        "eligible_affixes"
+      ],
+      "category": "appended_v37_families",
+      "before": [
+        "rootwell",
+        "deepwell",
+        "lanternveil",
+        "coalglow",
+        "rimeecho",
+        "sparkthread",
+        "wellturn",
+        "trailstep",
+        "emberward"
+      ],
+      "after_sha256": "5c42da385e3d49547f7043d627996abd6d09eded362b4b6923511679aa903e91"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "equipment_pools",
+        "defense_v37"
+      ],
+      "category": "new_v37_projection",
+      "before": null,
+      "after_sha256": "918e50b7f7e2399b4699b75040f80a27c312ac403cbe17e0d691e2ef91077ade"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "forgeblade",
+        "current_loot_profile",
+        2,
+        "pool_id"
+      ],
+      "category": "current_defense_lane",
+      "before": "defense",
+      "after_sha256": "a9235a537dcf7fc5920c58d17167abe1ecbe3ddd5e02ed5ae976f9144e1661bc"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "forgeblade",
+        "current_loot_profile_id"
+      ],
+      "category": "current_profile_name",
+      "before": "canonical_v34",
+      "after_sha256": "70bafa8acf4ce69e2b4104c604a67c7be8d61670c2e86330c8995a696d51d1df"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "game_version"
+      ],
+      "category": "game_version",
+      "before": "0.59.0",
+      "after_sha256": "d6cf52f54f8be477b606ac3f949338404bf7bf90ed0e5e5ca9e454cc9de80389"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "loot_profiles",
+        "canonical_v37"
+      ],
+      "category": "new_v37_projection",
+      "before": null,
+      "after_sha256": "6bd7a91252092d67353bb9b30be9a09bc3b629d91951253cb27ce46efc9739ce"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "melee_basic",
+        "save_version"
+      ],
+      "category": "schema_version",
+      "before": 36.0,
+      "after_sha256": "4b28a7af7cd67294f54660cc9a39a51c9a72de22caaab70b3b8cdd11aac3b9f9"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "normal_gem_trading",
+        "schema"
+      ],
+      "category": "schema_version",
+      "before": 36.0,
+      "after_sha256": "4b28a7af7cd67294f54660cc9a39a51c9a72de22caaab70b3b8cdd11aac3b9f9"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "save_version"
+      ],
+      "category": "schema_version",
+      "before": 36.0,
+      "after_sha256": "4b28a7af7cd67294f54660cc9a39a51c9a72de22caaab70b3b8cdd11aac3b9f9"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "sunwell_terrace",
+        "save_version"
+      ],
+      "category": "schema_version",
+      "before": 36.0,
+      "after_sha256": "4b28a7af7cd67294f54660cc9a39a51c9a72de22caaab70b3b8cdd11aac3b9f9"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "town_maps",
+        "save_version"
+      ],
+      "category": "schema_version",
+      "before": 36.0,
+      "after_sha256": "4b28a7af7cd67294f54660cc9a39a51c9a72de22caaab70b3b8cdd11aac3b9f9"
+    }
+  ]
+}

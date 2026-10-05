@@ -1,0 +1,19 @@
+{
+  "command": [
+    "godot",
+    "--headless",
+    "--path",
+    ".",
+    "--script",
+    "res://tests/elemental_defense_affix_rules_test.gd"
+  ],
+  "exit_code": 1,
+  "log_error": true,
+  "elapsed_seconds": 0.574,
+  "log": "docs/qa/v060-rules/20261005-204036-rules.log.txt",
+  "tested_files": {
+    "scripts/items/equipment_catalog.gd": "9f24289ae625645da686bd86251df01948379412e5d42bd95b86b44e341feb51",
+    "scripts/items/elemental_defense_affix_profile.gd": "0e7eb38fddff3eea5a488a31aaef90bf77b9c8259bc38eaee090ac92f1eec113",
+    "tests/elemental_defense_affix_rules_test.gd": "f7d97f79aaa5adf41f0e43a37c10e9b6ad6ec543c45dd752530645c1bbe66755"
+  }
+}

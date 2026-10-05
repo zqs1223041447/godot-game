@@ -122,6 +122,7 @@ static func collect() -> Dictionary:
 	result["source_faster_burn"] = source_faster_burn_examples()
 	result["mana_guard"] = mana_guard_examples()
 	result["elemental_resistance_caps"] = elemental_resistance_cap_examples()
+	result["elemental_defense_affixes"] = elemental_defense_affix_examples()
 	result["forgeblade"] = forgeblade_examples()
 	result["melee_basic"] = melee_basic_examples(result.forgeblade)
 	result["normal_gem_trading"]={"offers":Canonical.GemTrade.offers(),"recycle_credit":Canonical.GemTrade.RECYCLE_CREDIT,"currency":Canonical.GemTrade.MATERIAL_ID,"location":"normal_town","level":1,"quality":0,"recycle_location":"bag","schema":Canonical.Rules.VERSION,"test_supply_separate":true,"pricing":"初版可调整预算；每次无词缀地图净得4碎片"}
@@ -1815,7 +1816,9 @@ static func elemental_resistance_cap_examples() -> Dictionary:
 		var stats: Dictionary = Equipment.base_definition(id).stats
 		assert(not stats.has("cold_resistance") and not stats.has("lightning_resistance"))
 	for id: String in Equipment.all_affix_ids():
-		assert(Equipment.affix_definition(id).stat not in ["cold_resistance", "lightning_resistance"])
+		var stat: String = Equipment.affix_definition(id).stat
+		if stat == "cold_resistance": equipment.equipment_cold_sources.append(id)
+		if stat == "lightning_resistance": equipment.equipment_lightning_sources.append(id)
 	return {"minimum_save_version":36, "source_policy":SourceTree.CURRENT_SAVE_VERSION, "source_version":"3.29.1", "source_sha256":SourceTree.Data.SOURCE_SHA256,
 		"base_cap":Defense.FIRE_RESISTANCE_CAP, "safety_cap":Defense.ELEMENTAL_RESISTANCE_SAFETY_CAP,
 		"nodes":nodes, "new_complete_ordinary_nodes":opened, "boundaries":boundaries, "mastery_boundaries":mastery_boundaries, "examples":cases,
@@ -1829,6 +1832,121 @@ static func elemental_resistance_cap_examples() -> Dictionary:
 		"scope":"只接入无条件最大火、冰、电抗性；全元素句展开三字段，每ID一次。寻枝珠宝只影响连接准入，不重复授予属性",
 		"route_scope":"野蛮人69级73点的普通连通可行见证，保留沿途全部属性，无写档；不是全局最省点或完整配装最优结论",
 		"migration":"schema36先严格校验旧35，原文件逐字节备份后只迁版本；不赠点、不赠物，旧35注入新完整节点仍拒绝"}
+
+
+# Offline reward probe: only presentation is stubbed; the production reward method
+# selects the current pool and computes ilvl. No scene, save, or user file is used.
+class ReferenceRewardHud extends CanvasLayer:
+	func notify(_message: String) -> void: pass
+
+
+static func _elemental_vest_example(ids: Array) -> Dictionary:
+	var model := Canonical.new()
+	var candidate: Dictionary = model.snapshot()
+	var previous_body: String = str(model.equipped_items().get("body_armour", ""))
+	if not previous_body.is_empty():
+		candidate.locations[previous_body] = model.first_bag_position(previous_body)
+	var uid: String = "gear_%06d" % int(candidate.next_item_serial)
+	var instance: Dictionary = {"id":uid, "base_id":"emberhide_vest", "rarity":"normal" if ids.is_empty() else "rare", "item_level":16, "affixes":[]}
+	for id: String in ids:
+		var tier: Dictionary = Equipment.affix_definition(id).tiers[-1]
+		instance.affixes.append({"id":id, "tier":int(tier.tier), "value":int(tier.max)})
+	assert(Equipment.validate_instance(instance))
+	candidate.items[uid] = Canonical.Items.wrap_equipment(instance)
+	candidate.locations[uid] = {"kind":"equipment", "slot_id":"body_armour"}
+	candidate.next_item_serial += 1
+	assert(Canonical.Rules.reason(candidate).is_empty())
+	model._accept_memory(candidate)
+	var stats: Dictionary = model.get_stats()
+	var profile: Dictionary = model.get_resistance_profile()
+	var hits: Dictionary = {}
+	var gaps: Dictionary = {"default_75":{}, "safety_83":{}}
+	for element: String in Defense.ELEMENTS:
+		hits[element] = Defense.incoming_source_hit({element:100.0}, stats, 0.0, 200.0)
+		assert(hits[element].ok)
+		gaps.default_75[element] = maxf(0.0, Defense.FIRE_RESISTANCE_CAP - profile.raw_resistances[element])
+		gaps.safety_83[element] = maxf(0.0, Defense.ELEMENTAL_RESISTANCE_SAFETY_CAP - profile.raw_resistances[element])
+	assert(profile.ok and model.save_attempts == 0)
+	return {"instance":instance, "definition":Equipment.definition(instance), "stats":stats, "profile":profile,
+		"hits":hits, "additional_raw_required":gaps, "whole_build_valid":true, "save_attempts":model.save_attempts}
+
+
+static func elemental_defense_affix_examples() -> Dictionary:
+	var new_ids: Array = Equipment.ElementalDefense.AFFIX_IDS.duplicate()
+	var families: Dictionary = {}
+	for id: String in new_ids:
+		var family: Dictionary = Equipment.affix_definition(id)
+		assert(Equipment.ElementalDefense.valid_family(family))
+		families[id] = family
+	var examples: Dictionary = {
+		"white_base":_elemental_vest_example([]),
+		"six_max":_elemental_vest_example(["rootwell", "deepwell", "lanternveil", "emberward", "rimeward", "stormward"]),
+		"mana_recovery":_elemental_vest_example(["rootwell", "deepwell", "lanternveil", "wellturn", "rimeward", "stormward"])}
+	var full: Dictionary = examples.six_max
+	assert(full.definition.stats.max_health == 40.0 and full.definition.stats.max_mana == 22.0 and full.definition.stats.max_shield == 22.0)
+	assert(is_equal_approx(full.profile.raw_resistances.fire, 0.4) and is_equal_approx(full.profile.raw_resistances.cold, 0.25) and is_equal_approx(full.profile.raw_resistances.lightning, 0.25))
+	var pool: Dictionary = Equipment.pool_profiles()[Equipment.CURRENT_DEFENSE_POOL_ID]
+	var boundaries: Dictionary = {}
+	for level: int in [1, 7, 8, 15, 16, 30]:
+		var accepted: Dictionary = {}
+		for id: String in new_ids: accepted[id] = []
+		for entry: Dictionary in Equipment._profile_eligible_tiers("emberhide_vest", level, "suffix", pool):
+			if accepted.has(entry.id): accepted[entry.id].append(entry.tier)
+		boundaries[str(level)] = accepted
+	var maps: Dictionary = {}
+	for map_id: String in Canonical.Journey.MAP_IDS:
+		var compiled: Dictionary = MapRules.compile_normal(map_id, 3, [], [])
+		assert(compiled.ok)
+		var arena := Arena.new()
+		arena.state = Canonical.new()
+		arena.hud = ReferenceRewardHud.new()
+		arena.wave = int(compiled.profile.wave)
+		arena.rng.seed = 600037
+		var before: Dictionary = arena.state.snapshot()
+		var uid: String = "gear_%06d" % int(before.next_item_serial)
+		arena._award_kill_equipment({"rarity":"rare", "equipment_pool":"defense"})
+		var awarded: Dictionary = arena.state.item(uid).payload
+		assert(not awarded.is_empty() and arena.state.save_attempts == 0)
+		var tiers: Array = []
+		for entry: Dictionary in Equipment._profile_eligible_tiers("emberhide_vest", int(awarded.item_level), "suffix", pool):
+			if entry.id == new_ids[0]: tiers.append(entry.tier)
+		maps[map_id] = {"map_profile":compiled.profile, "item_level":awarded.item_level, "eligible_tiers":tiers,
+			"sample":awarded, "save_attempts":arena.state.save_attempts, "producer":"Main._award_kill_equipment → Canonical.award_equipment"}
+		arena.hud.free()
+		arena.free()
+	var targeted: Array = []
+	for id: String in Craft.Targeted.TARGETS.targeted_reforge_damage.families:
+		if Equipment.family_eligible(id, "emberhide_vest"):
+			var family: Dictionary = Equipment.affix_definition(id)
+			targeted.append({"id":id, "kind":family.kind, "group":family.group})
+	assert(not targeted.is_empty())
+	for family: Dictionary in targeted: assert(family.kind == "suffix")
+	var reforge: Dictionary = {}
+	for seed_value: int in range(1, 4097):
+		var planned: Dictionary = Craft.operation_plan(full.instance, "reforge", seed_value)
+		assert(planned.ok)
+		var ids: Array = []
+		for affix: Dictionary in planned.instance.affixes: ids.append(affix.id)
+		if ids.has("emberward") and ids.has("rimeward") and ids.has("stormward"):
+			reforge = {"seed":seed_value, "plan":planned}
+			break
+	assert(not reforge.is_empty(), "Bounded ordinary reforge witness must contain all three resistance suffixes")
+	var offer: Dictionary = Town.offer("base:emberhide_vest")
+	var supplied: Dictionary = Town.make_item(offer, 1)
+	assert(supplied.payload.rarity == "normal" and supplied.payload.affixes.is_empty())
+	return {"minimum_save_version":Equipment.ElementalDefense.MIN_SAVE_VERSION, "vocabulary":Equipment.CURRENT_VOCABULARY,
+		"source_policy":SourceTree.CURRENT_SAVE_VERSION, "base_id":"emberhide_vest", "new_families":families,
+		"pool_id":Equipment.CURRENT_DEFENSE_POOL_ID, "pool":pool, "loot_profile_id":Equipment.CURRENT_LOOT_PROFILE_ID,
+		"loot_profile":Equipment.loot_profile(Equipment.CURRENT_LOOT_PROFILE_ID), "rarities":Equipment.RARITIES.duplicate(true),
+		"slot_targets":EquipmentSlotsData.targets_for_category("body_armour"), "examples":examples,
+		"tier_boundaries":boundaries, "formal_map_tier_iii":maps, "test_supply":{"offer":offer, "instance":supplied},
+		"damage_target_families":targeted, "ordinary_reforge_witness":reforge,
+		"producer":"EquipmentCatalog → canonical validated in-memory equipment location → Canonical.get_resistance_profile → Defense.incoming_source_hit",
+		"budget_scope":"单件胸甲合法六词顶值演算；不是掉落保证、免费成装、全局最优或完整构筑平衡结论",
+		"tradeoff":"三抗占满三个后缀，放弃元素增伤、魔力恢复与移速；伤害定向重铸保证一个真实伤害后缀，不能同时保留三抗",
+		"supply_scope":"自然新池只替换10%防御入口；新自然分布及后续随机状态有意改变，显式旧pool/profile仍保留历史结果",
+		"migration":"schema37严格校验旧36并保留原字节备份后仅迁版本；旧装备不自动重掷、补词或换UID，天赋源政策仍36",
+		"new_images":[]}
 
 
 static func mana_guard_examples() -> Dictionary:
