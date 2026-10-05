@@ -208,6 +208,7 @@ static func _stats_for(candidate: Dictionary) -> Dictionary:
 	var stats: Dictionary = Legacy.BASE_STATS.duplicate(true)
 	stats.additional_skill_slots = 0.0
 	stats.damaging_ailments_faster = 0.0
+	stats.damage_taken_from_mana_before_life = 0.0
 	# Explicit v39 player balance: natural monsters retain their zero base.
 	stats.crit_base_chance = 0.05
 	stats.crit_base_multiplier = 1.5
@@ -977,6 +978,10 @@ func get_flask_profile(uid:String)->Dictionary:
 
 func get_leech_profile() -> Dictionary:
 	return Leech.profile(get_stats())
+
+
+func get_mana_guard_profile() -> Dictionary:
+	return Defense.mana_guard_profile(get_stats())
 
 
 func normal_journey() -> Dictionary:

@@ -1613,7 +1613,12 @@ func hit_player_components(components: Variant, source_id: int = 0, delivery_tag
 	if not is_finite(at) or at<shock_runtime.read_floor():return false
 	if hit_context.has("shock_policy") and not ShockRules.policy_error(hit_context.shock_policy).is_empty():return false
 	var shock_increase:float=_shock_hit_increase("player",0,at)
-	var settlement: Dictionary = Defense.incoming_source_hit(components,_stats,shield,health,"player",shock_increase) if _stats.has("armour") else Defense.incoming_hit(components, {"fire_resistance": _stats.get("fire_resistance", 0.0)}, shield, health, "player",shock_increase)
+	var mana_ratio:Variant=_stats.get("damage_taken_from_mana_before_life",0.0)
+	var settlement: Dictionary
+	if typeof(mana_ratio) not in [TYPE_INT,TYPE_FLOAT] or float(mana_ratio)!=0.0:
+		settlement=Defense.incoming_source_hit(components,_stats,shield,health,"player",shock_increase,mana,mana_ratio) if _stats.has("armour") else Defense.incoming_hit(components,{"fire_resistance":_stats.get("fire_resistance",0.0)},shield,health,"player",shock_increase,mana,mana_ratio)
+	else:
+		settlement=Defense.incoming_source_hit(components,_stats,shield,health,"player",shock_increase) if _stats.has("armour") else Defense.incoming_hit(components, {"fire_resistance": _stats.get("fire_resistance", 0.0)}, shield, health, "player",shock_increase)
 	if not settlement.ok or float(settlement.damage_total) <= 0.0:
 		return false
 	if delivery_tags.has("attack") and _stats.has("evasion"):
@@ -1629,6 +1634,7 @@ func hit_player_components(components: Variant, source_id: int = 0, delivery_tag
 		if not admission.hit: return false
 	var amount: float = float(settlement.damage_total)
 	var absorbed: float = float(settlement.shield_spent)
+	if settlement.has("remaining_mana"):mana=float(settlement.remaining_mana)
 	shield = float(settlement.remaining_shield)
 	health = float(settlement.remaining_health)
 	var record: Dictionary = settlement.duplicate(true)
@@ -1859,8 +1865,13 @@ func _settle_burn_segments(segments:Array,targets:Dictionary={},death_states:Dic
 			var immune_until:float=_burn_immunity_until if _burn_step_active else elapsed+invulnerable if invulnerable>0.0 else 0.0
 			raw=float(segment.raw_dps)*maxf(0.0,float(segment.to_time)-maxf(float(segment.from_time),immune_until))
 			if raw<=0.0:continue
-			settlement=Defense.incoming_burn(raw,_stats.get("fire_resistance",0.0),shield,health,"player")
+			var mana_ratio:Variant=_stats.get("damage_taken_from_mana_before_life",0.0)
+			if typeof(mana_ratio) not in [TYPE_INT,TYPE_FLOAT] or float(mana_ratio)!=0.0:
+				settlement=Defense.incoming_burn(raw,_stats.get("fire_resistance",0.0),shield,health,"player",mana,mana_ratio)
+			else:
+				settlement=Defense.incoming_burn(raw,_stats.get("fire_resistance",0.0),shield,health,"player")
 			if not settlement.ok:continue
+			if settlement.has("remaining_mana"):mana=float(settlement.remaining_mana)
 			shield=settlement.remaining_shield;health=settlement.remaining_health
 			if float(settlement.damage_total)>0.0:damage_delay=float(_stats.get("shield_recharge_delay",Defense.RECHARGE_BASE_DELAY))
 			_record_damage_feedback("player", 0, "burn", settlement, player_pos)

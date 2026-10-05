@@ -87,6 +87,18 @@ const STAT_CONSUMER_GROUPS := {
 		],
 		"stats": ["fire_dot_multiplier_add"]
 	},
+	"mana_before_life": {
+		"evidence": "source_tree_runtime.gd::apply_stats -> canonical_game_state.gd::_stats_for -> defense_rules.gd::mana_guard_profile/settle_with_mana -> main.gd incoming settlement",
+		"code_checks": [
+			{"path": "scripts/canonical_game_state.gd", "contains": "damage_taken_from_mana_before_life"},
+			{"path": "scripts/mechanics/defense_rules.gd", "contains": "static func mana_guard_profile"},
+			{"path": "scripts/mechanics/defense_rules.gd", "contains": "static func settle_with_mana"},
+			{"path": "scripts/main.gd", "contains": "incoming_source_hit(components,_stats"},
+			{"path": "scripts/main.gd", "contains": "shield,health,\"player\",mana,mana_ratio"},
+			{"path": "scripts/main.gd", "contains": "settlement.remaining_mana"},
+		],
+		"stats": ["damage_taken_from_mana_before_life"]
+	},
 	"damaging_ailment_timing": {
 		"evidence": "source_stat_patterns.gd::FASTER_BURN_PATTERNS -> source_tree_runtime.gd schema33 -> burn_rules.gd::raw_fire_dps/burn_duration",
 		"code_checks": [

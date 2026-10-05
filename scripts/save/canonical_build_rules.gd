@@ -31,7 +31,8 @@ const V30_VERSION := 30
 const V31_VERSION := 31
 const V32_VERSION := 32
 const V33_VERSION := 33
-const VERSION := 34
+const V34_VERSION := 34
+const VERSION := 35
 const LEGACY_MAX_ITEMS := 1024
 const V17_MAX_ITEMS := LEGACY_MAX_ITEMS + 1
 const MAX_ITEMS := V17_MAX_ITEMS + 2 # Two once-only migration bottles; bag capacity is unchanged.
@@ -72,6 +73,12 @@ static func decode_v28(raw: Variant) -> Dictionary:
 
 static func decode_v29(raw: Variant) -> Dictionary:
 	return _decode(raw, true, V29_VERSION, true)
+
+
+## Schema34 keeps the schema33 source vocabulary and the existing equipment pools.
+static func decode_v34(raw: Variant) -> Dictionary:
+	var decoded := _decode(raw, true, V34_VERSION, true)
+	return decoded if reason_v34(decoded).is_empty() else {}
 
 
 ## The last pre-forgeblade envelope must validate completely before migration.
@@ -188,7 +195,9 @@ static func _decode(raw: Variant, paged: bool, expected_version: int, allow_curr
 
 
 static func reason(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
-	return _reason(value, VERSION, true, true, MAX_ITEMS, validate_talents, socket_ids)
+	var native_reason := _reason(value, VERSION, true, true, MAX_ITEMS, Callable(), socket_ids)
+	if not native_reason.is_empty(): return native_reason
+	return str(validate_talents.call(value)) if validate_talents.is_valid() else ""
 
 
 static func reason_v18(value:Variant,validate_talents:Callable=Callable(),socket_ids:Array=[])->String:
@@ -215,6 +224,13 @@ static func reason_v28(value: Variant, validate_talents: Callable = Callable(), 
 
 static func reason_v29(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
 	return _reason(value, V29_VERSION, true, true, MAX_ITEMS, validate_talents, socket_ids)
+
+
+static func reason_v34(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
+	# Frozen native source validation cannot be bypassed by a caller callback.
+	var native_reason := _reason(value, V34_VERSION, true, true, MAX_ITEMS, Callable(), socket_ids)
+	if not native_reason.is_empty(): return native_reason
+	return str(validate_talents.call(value)) if validate_talents.is_valid() else ""
 
 
 static func reason_v33(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:

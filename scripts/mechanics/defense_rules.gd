@@ -2,13 +2,23 @@ class_name DefenseRules
 extends RefCounted
 ## Original, bounded hit-defense rules shared by the player and monsters.
 ## DamageResolver owns the per-component formula; this module validates authored
-## defenses and settles its result against shield first, then health. No RNG.
+## defenses and settles against shield, optional mana diversion, then health.
+## Disabled mana diversion retains the original settlement contract. No RNG.
 
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
 const STAGE: String = "hit_mitigation"
 const FIRE_RESISTANCE_CAP: float = 0.75
 const ACTORS: Array[String] = ["player", "monster"]
 const RECHARGE_BASE_DELAY:=4.0
+const MANA_GUARD_STAT: String = "damage_taken_from_mana_before_life"
+
+
+static func mana_guard_profile(stats: Dictionary) -> Dictionary:
+	var fraction: Variant = stats.get(MANA_GUARD_STAT, 0.0)
+	if not _finite_number(fraction) or float(fraction) < 0.0 or float(fraction) > 1.0:
+		return _failure("Mana guard fraction must be a finite scalar from 0 to 1")
+	return {"ok": true, "reason": "", "enabled": float(fraction) != 0.0,
+		"fraction": float(fraction)}
 
 
 static func recharge_profile(stats:Dictionary,actor:String="player")->Dictionary:
@@ -70,7 +80,8 @@ static func defense_profile(stats: Variant, actor: String = "player", stage: Str
 
 
 static func incoming_hit(components: Variant, defense_stats: Variant, shield: Variant,
-		health: Variant, actor: String = "player", hit_taken_increased: Variant = 0.0) -> Dictionary:
+		health: Variant, actor: String = "player", hit_taken_increased: Variant = 0.0,
+		mana: Variant = 0.0, ratio: Variant = 0.0) -> Dictionary:
 	var checked: Dictionary = validate_components(components)
 	if not checked.ok:
 		return checked
@@ -83,7 +94,7 @@ static func incoming_hit(components: Variant, defense_stats: Variant, shield: Va
 	var packet: Dictionary = Damage.packet(checked.components, ["hit"], "incoming_hit")
 	var resolved: Dictionary = Damage.resolve(packet, [], profile.effective_resistances)
 	if not _finite_number(hit_taken_increased) or float(hit_taken_increased) != 0.0: resolved = apply_hit_damage_taken(resolved, hit_taken_increased)
-	var result: Dictionary = settle_resolved(resolved, shield, health)
+	var result: Dictionary = settle_with_mana(resolved, shield, health, mana, ratio) if not _finite_number(ratio) or float(ratio) != 0.0 else settle_resolved(resolved, shield, health)
 	if not result.ok:
 		return result
 	result["actor"] = actor
@@ -123,7 +134,7 @@ static func apply_armour(resolved: Dictionary, armour: float) -> Dictionary:
 	return result
 
 
-static func incoming_source_hit(components: Variant,stats: Dictionary,shield: Variant,health: Variant,actor: String="player",hit_taken_increased:Variant=0.0)->Dictionary:
+static func incoming_source_hit(components: Variant,stats: Dictionary,shield: Variant,health: Variant,actor: String="player",hit_taken_increased:Variant=0.0,mana:Variant=0.0,ratio:Variant=0.0)->Dictionary:
 	var checked := validate_components(components)
 	if not checked.ok: return checked
 	var profile := source_profile(stats,actor)
@@ -131,7 +142,7 @@ static func incoming_source_hit(components: Variant,stats: Dictionary,shield: Va
 	var packet := Damage.packet(checked.components,["hit"],"incoming_hit")
 	var resolved := apply_armour(Damage.resolve(packet,[],profile.effective_resistances),profile.armour)
 	if not _finite_number(hit_taken_increased) or float(hit_taken_increased) != 0.0: resolved = apply_hit_damage_taken(resolved,hit_taken_increased)
-	var result := settle_resolved(resolved,shield,health)
+	var result := settle_with_mana(resolved,shield,health,mana,ratio) if not _finite_number(ratio) or float(ratio)!=0.0 else settle_resolved(resolved,shield,health)
 	if result.ok:
 		result.actor=actor
 		result.stage=STAGE
@@ -169,13 +180,14 @@ static func apply_hit_damage_taken(resolved: Dictionary, increased: Variant) -> 
 
 ## Already-resolved raw burning has no offensive modifiers or hit admission.
 ## Reuse the same fire cap and resource settlement, without hit-size armour.
-static func incoming_burn(raw_amount:Variant,fire_resistance:Variant,shield:Variant,health:Variant,actor:String="player")->Dictionary:
+static func incoming_burn(raw_amount:Variant,fire_resistance:Variant,shield:Variant,health:Variant,actor:String="player",mana:Variant=0.0,ratio:Variant=0.0)->Dictionary:
 	if not _amount(raw_amount):return _failure("Burn amount must be finite and nonnegative")
 	var profile:Dictionary=defense_profile({"fire_resistance":fire_resistance},actor)
 	if not profile.ok:return profile
 	var raw:float=float(raw_amount);var resistance:float=profile.effective_resistances.fire
 	var amount:float=raw*(1.0-resistance)
-	var result:Dictionary=settle_resolved({"total":amount,"components":{"fire":amount},"details":[{"type":"fire","before_defense":raw,"resistance":resistance,"final":amount}]},shield,health)
+	var resolved:Dictionary={"total":amount,"components":{"fire":amount},"details":[{"type":"fire","before_defense":raw,"resistance":resistance,"final":amount}]}
+	var result:Dictionary=settle_with_mana(resolved,shield,health,mana,ratio) if not _finite_number(ratio) or float(ratio)!=0.0 else settle_resolved(resolved,shield,health)
 	if result.ok:result.actor=actor;result.stage="burning"
 	return result
 
@@ -245,6 +257,32 @@ static func settle_resolved(resolved: Variant, shield: Variant, health: Variant)
 		"remaining_shield": float(shield) - shield_spent,
 		"remaining_health": float(health) - health_lost,
 		"overkill": maxf(0.0, after_shield - health_lost), "details": details}
+
+
+## Reuse the original validation and mitigation trace, then divert only damage
+## left after shield. Mana spending is separate from actual shield/health loss.
+## Numeric zero takes the exact old path, including ignoring an unused mana pool.
+static func settle_with_mana(resolved: Variant, shield: Variant, health: Variant,
+		mana: Variant, ratio: Variant) -> Dictionary:
+	var result: Dictionary = settle_resolved(resolved, shield, health)
+	if not result.ok:
+		return result
+	if not _finite_number(ratio) or float(ratio) < 0.0 or float(ratio) > 1.0:
+		return _failure("Mana guard fraction must be a finite scalar from 0 to 1")
+	if float(ratio) == 0.0:
+		return result
+	if not _amount(mana):
+		return _failure("Mana must be a finite nonnegative scalar")
+	var after_shield: float = maxf(0.0, float(result.damage_total) - float(result.shield_spent))
+	var mana_spent: float = minf(float(mana), after_shield * float(ratio))
+	var after_mana: float = maxf(0.0, after_shield - mana_spent)
+	var health_lost: float = minf(float(health), after_mana)
+	result.health_lost = health_lost
+	result.remaining_health = float(health) - health_lost
+	result.overkill = maxf(0.0, after_mana - health_lost)
+	result["mana_spent"] = mana_spent
+	result["remaining_mana"] = float(mana) - mana_spent
+	return result
 
 
 static func _finite_number(value: Variant) -> bool:

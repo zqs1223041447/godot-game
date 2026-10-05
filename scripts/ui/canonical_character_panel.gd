@@ -22,6 +22,7 @@ const STAT_ROWS: Array[Dictionary] = [
 	{"id":"intelligence","label":"智慧","format":"whole"},
 	{"id":"max_health","label":"生命上限","format":"whole"},
 	{"id":"max_mana","label":"法力上限","format":"whole"},
+	{"id":"damage_taken_from_mana_before_life","label":"魔力分担生命伤害","format":"percent"},
 	{"id":"max_shield","label":"护盾上限","format":"whole"},
 	{"id":"shield_recharge_rate","label":"护盾充能 / 秒","format":"decimal"},
 	{"id":"shield_recharge_delay","label":"充能等待 / 秒","format":"decimal"},
@@ -58,6 +59,9 @@ func refresh() -> void:
 	var leech: Dictionary = leech_stat_values(model.get_leech_profile()) if model.has_method("get_leech_profile") else {}
 	stats = stats.duplicate()
 	stats.merge(leech)
+	if model.has_method("get_mana_guard_profile"):
+		var mana_guard: Dictionary = model.get_mana_guard_profile()
+		stats["damage_taken_from_mana_before_life"] = float(mana_guard.get("fraction", 0.0)) if bool(mana_guard.get("ok", false)) else 0.0
 	for row: Dictionary in STAT_ROWS:
 		var id: String = str(row.id)
 		var value: float = float(stats.get(id, 0.0))
@@ -143,5 +147,6 @@ func _build() -> void:
 		elif row.id == "shield_recharge_rate": card.tooltip_text = "等待结束后的实际每秒护盾充能；换装或退款会更新速率。即时回盾另行结算。"
 		elif row.id == "shield_recharge_delay": card.tooltip_text = "下一次有效损伤后的充能等待。闪避或零伤害不重置；已经开始的等待不随换装或退款改变。"
 		elif row.id == "armour": card.tooltip_text = "护甲减伤随每次物理命中大小变化。"
+		elif row.id == "damage_taken_from_mana_before_life": card.tooltip_text = "护盾吸收后，剩余命中或燃烧伤害按此比例先消耗魔力；魔力不足的部分由生命承担。施法仍消耗同一份魔力。"
 		elif str(row.id).contains("_leech_"): card.tooltip_text = "当前构筑的单次恢复速率与全部偷取的恢复速率上限，不是正在发生的回复。没有相应偷取来源时显示横线；资源回满时清除该资源的偷取。"
 		elif str(row.id).ends_with("_resistance"): card.tooltip_text = "显示当前有效抗性；元素抗性上限为75%。"

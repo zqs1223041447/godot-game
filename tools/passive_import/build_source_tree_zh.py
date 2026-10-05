@@ -787,6 +787,7 @@ WORDS.update({
 })
 
 NAME_OVERRIDES = {
+    "Mind Over Matter": "心灵升华",
     "": "",
     "Jewel Socket": "珠宝插槽",
     "root": "星图根节点",
@@ -1029,6 +1030,9 @@ MULTILINE_OVERRIDES = {
 # Reviewed exact single-row exceptions for common source grammar that does not
 # map cleanly through word-by-word translation (negation, state, and timing).
 SINGLE_LINE_OVERRIDES = {
+    "40% of Damage is taken from Mana before Life": "所受伤害的40%优先由魔力承担，再由生命承担",
+    "10% of Damage is taken from Mana before Life": "所受伤害的10%优先由魔力承担，再由生命承担",
+    "8% of Damage is taken from Mana before Life": "所受伤害的8%优先由魔力承担，再由生命承担",
     "Action Speed cannot be modified to below Base Value": "行动速度无法降低至基础值以下",
     "Action Speed cannot be modified to below Base Value if you have Equipped Boots with no Socketed Gems": "若你装备的鞋子没有镶嵌宝石，行动速度无法降低至基础值以下",
     "Cannot Be Stunned while you have Energy Shield": "当你拥有能量护盾时，不会被眩晕",
