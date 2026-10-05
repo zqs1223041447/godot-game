@@ -1,0 +1,142 @@
+{
+  "baseline_commit": "d6684d27517e4661abd832d586fcdbb72185929e",
+  "candidate_commit": "46dc4507328ed971d5e4fca668de400feba3fb05",
+  "main_only_changes_prediction_call": true,
+  "burn_runtime_unchanged": true,
+  "rate_pure_checks": 783,
+  "rate_pure_cases": 163,
+  "source_sha256": {
+    "scripts/main.gd": "555b3c85989ac3caba0332d90fccf02c7f0dba9fa3746077cb73e1cad57c7c6b",
+    "scripts/mechanics/defense_rules.gd": "dd34fedbcf3b361202bd00a246f20a74ac5e2ef77463e228bdbf77292b3976da",
+    "scripts/combat/burn_runtime.gd": "2ff6b2974b82bf65637702a2f9aa3e7e4e04521cf2280a55be4700e10337b5e3",
+    "tools/diagnostics/burn_rate_profile.gd": "9693305202d822ebfa09bb8cb626410e3c798ea4f485ad81f15d9996410db0ce"
+  },
+  "profiles": [
+    {
+      "mode": "ember_proliferation",
+      "before": {
+        "max_us": 730957,
+        "mean_us": 680462.5416666666,
+        "n": 24,
+        "over_16_7_ms": 24,
+        "over_33_3_ms": 24,
+        "p50_us": 678099,
+        "p95_us": 718447
+      },
+      "after": {
+        "max_us": 726105,
+        "mean_us": 619673.3333333334,
+        "n": 24,
+        "over_16_7_ms": 24,
+        "over_33_3_ms": 24,
+        "p50_us": 618162,
+        "p95_us": 670660
+      },
+      "mean_change_percent": -8.933512810924372,
+      "p95_change_percent": -6.651430098531974,
+      "max_change_percent": -0.6637873363275815,
+      "exact_observation_bytes": 1302852,
+      "observation_sha256": "efad18733c7d2a41d2138c5a7044d3929af55725b5d359715e1e5092d8e397d3",
+      "exact_save_bytes": 12177,
+      "save_sha256": "e5513bec27040478f5586161ba375795275908dd491cbe824044e92da3d56fd1",
+      "kills": 0,
+      "reward_kills": 0,
+      "hit_events": 8359
+    },
+    {
+      "mode": "ember_deaths",
+      "before": {
+        "max_us": 682945,
+        "mean_us": 41535.45333333333,
+        "n": 150,
+        "over_16_7_ms": 62,
+        "over_33_3_ms": 53,
+        "p50_us": 10144,
+        "p95_us": 144461
+      },
+      "after": {
+        "max_us": 549307,
+        "mean_us": 37416.86666666667,
+        "n": 150,
+        "over_16_7_ms": 63,
+        "over_33_3_ms": 53,
+        "p50_us": 10970,
+        "p95_us": 111794
+      },
+      "mean_change_percent": -9.91583415164361,
+      "p95_change_percent": -22.61302358421996,
+      "max_change_percent": -19.567900782639892,
+      "exact_observation_bytes": 250036,
+      "observation_sha256": "a45eabb7d2d448ddcb16a3679119d0265f3e325f35017a2109763784b6ac10ce",
+      "exact_save_bytes": 14156,
+      "save_sha256": "ecc65365d093daab5721cf21beeac3f54e0e80ece72d5115aff261a0de7973e8",
+      "kills": 27,
+      "reward_kills": 27,
+      "hit_events": 1469
+    },
+    {
+      "mode": "no_burn",
+      "before": {
+        "max_us": 57727,
+        "mean_us": 51016.75,
+        "n": 24,
+        "over_16_7_ms": 24,
+        "over_33_3_ms": 24,
+        "p50_us": 50969,
+        "p95_us": 56961
+      },
+      "after": {
+        "max_us": 64765,
+        "mean_us": 51061.625,
+        "n": 24,
+        "over_16_7_ms": 24,
+        "over_33_3_ms": 24,
+        "p50_us": 51483,
+        "p95_us": 61421
+      },
+      "mean_change_percent": 0.08796130682569014,
+      "p95_change_percent": 7.8299187163146655,
+      "max_change_percent": 12.191868623001367,
+      "exact_observation_bytes": 1122432,
+      "observation_sha256": "e670cf90128b3e986ef9f433fcf0e07b119b6fec5140e828898996228c1d12ee",
+      "exact_save_bytes": 12177,
+      "save_sha256": "e5513bec27040478f5586161ba375795275908dd491cbe824044e92da3d56fd1",
+      "kills": 0,
+      "reward_kills": 0,
+      "hit_events": 8359
+    },
+    {
+      "mode": "ignite",
+      "before": {
+        "max_us": 113788,
+        "mean_us": 100298.375,
+        "n": 24,
+        "over_16_7_ms": 24,
+        "over_33_3_ms": 24,
+        "p50_us": 98083,
+        "p95_us": 111216
+      },
+      "after": {
+        "max_us": 124665,
+        "mean_us": 104076.08333333333,
+        "n": 24,
+        "over_16_7_ms": 24,
+        "over_33_3_ms": 24,
+        "p50_us": 102779,
+        "p95_us": 117368
+      },
+      "mean_change_percent": 3.7664701280886392,
+      "p95_change_percent": 5.5315781901884575,
+      "max_change_percent": 9.559004464442644,
+      "exact_observation_bytes": 1261236,
+      "observation_sha256": "a01a1fc2e4fdf1e11d8a9c87ffb5dafead8036253e7d30460d88c9e178ee4366",
+      "exact_save_bytes": 12177,
+      "save_sha256": "e5513bec27040478f5586161ba375795275908dd491cbe824044e92da3d56fd1",
+      "kills": 0,
+      "reward_kills": 0,
+      "hit_events": 8359
+    }
+  ],
+  "status": "Experiment only; ordinary ignite3.8percent slower in one short control; do not claim all cases improve",
+  "timing_order": "before/after high collision, before/after death spread, candidate no_burn/ignite, baseline no_burn/ignite; all serial fresh isolated saves; not randomized statistical trials"
+}

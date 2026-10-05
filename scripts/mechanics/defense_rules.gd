@@ -147,20 +147,22 @@ static func burn_rate(raw_amount:Variant,fire_resistance:Variant,actor:String="p
 	if not _amount(raw_amount):return _failure("Burn amount must be finite and nonnegative")
 	var profile:Dictionary=defense_profile({"fire_resistance":fire_resistance},actor)
 	if not profile.ok:return profile
-	var raw:float=float(raw_amount);var resistance:float=profile.effective_resistances.fire
-	var amount:float=raw*(1.0-resistance)
-	profile.raw_amount=raw;profile.resistance=resistance;profile.component_amount=amount
-	# settle_resolved accumulates its single component from positive zero.
-	# Retain that operation, including negative-zero behavior, for exact rates.
-	profile.damage_total=0.0+amount
+	# The original generic component total accumulates from positive zero.
+	profile.damage_total=0.0+_burn_amount(float(raw_amount),float(profile.effective_resistances.fire))
 	return profile
 
 
+## One exact component expression; both callers have validated their inputs.
+static func _burn_amount(raw:float,resistance:float)->float:
+	return raw*(1.0-resistance)
+
+
 static func incoming_burn(raw_amount:Variant,fire_resistance:Variant,shield:Variant,health:Variant,actor:String="player")->Dictionary:
-	var profile:Dictionary=burn_rate(raw_amount,fire_resistance,actor)
+	if not _amount(raw_amount):return _failure("Burn amount must be finite and nonnegative")
+	var profile:Dictionary=defense_profile({"fire_resistance":fire_resistance},actor)
 	if not profile.ok:return profile
-	var raw:float=profile.raw_amount;var resistance:float=profile.resistance
-	var amount:float=profile.component_amount
+	var raw:float=float(raw_amount);var resistance:float=profile.effective_resistances.fire
+	var amount:float=_burn_amount(raw,resistance)
 	var result:Dictionary=settle_resolved({"total":amount,"components":{"fire":amount},"details":[{"type":"fire","before_defense":raw,"resistance":resistance,"final":amount}]},shield,health)
 	if result.ok:result.actor=actor;result.stage="burning"
 	return result
