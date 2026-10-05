@@ -1,0 +1,77 @@
+{
+  "scope": "v047 Ember support registration, compiler and profile contracts",
+  "engine": "Godot 4.6.3.stable.official.7d41c59c4",
+  "focused": {
+    "checks": 602,
+    "failures": 0,
+    "compatible_pairs": 11,
+    "frozen_v046_casts": 38
+  },
+  "baseline": {
+    "source": "frozen v046-complete-recovery",
+    "source_has_ignite": true,
+    "source_has_ember": false,
+    "cast_records": 38,
+    "ignite_records": 8,
+    "non_ignite_records": 30,
+    "comparison": "var_to_bytes(current_record) == var_to_bytes(frozen_record), including full cast bytes"
+  },
+  "production_files": {
+    "scripts/combat/ember_proliferation_support_rules.gd": "5553df1188d0b92986a150cf812ce8152b03aed3e0009798635087de41465abc",
+    "scripts/combat/support_registry.gd": "9ea9035fd5c1fc4ab38669150e02895d15b2eb03322d21586d8afbf42a80ef8c",
+    "scripts/combat/skill_compiler.gd": "a1fd514c6ba65081ea01914bfff2c95d757ebcca932ba647da8ce37741e26e06",
+    "scripts/combat/ember_proliferation_rules.gd": "3f62027c2f2783d5141241938863d419202c56d3d4fe59d793d7a2b5f66a177c",
+    "scripts/combat/projectile_runtime.gd": "380186b8097db9ee9855fb552699b19c6689460896d6a08f8549d4a00d0fea5c",
+    "scripts/combat/support_program.gd": "437a6ab0082ae80e916f1bb57c4e71fe4c3f5d0a147db5e7a97f86615712e0dd",
+    "scripts/combat/ignite_support_rules.gd": "23271171b1fd62f18d8e107dd1e6ad8001a40ca9780d08e2db325de374a1793e",
+    "scripts/combat/burn_rules.gd": "adf1bb84b7bd91e4b24b2aeeaa0b38daca30798c0da42303bb2235caf0a1aa75",
+    "scripts/combat/combat_data.gd": "7ebc6234afe5c1d6af6d3ede8a5a8b1bf72415915dc99d97e0a588d1204c270e",
+    "scripts/combat/damage_resolver.gd": "37429d9754708d3bbbe9638f92bb8a038284326a4b9c422a70b7c2c4cfe3a1d5",
+    "scripts/combat/damage_base_compiler.gd": "15491d08f4f3789e3d45ae6b8fae10c93a2f18dae0f4ab659fe0b94c24534824",
+    "scripts/combat/critical_strike_rules.gd": "635f0675dfe2187b01b4f618167a3927cb2de59f16ff1e25649f3630e927ef9a",
+    "scripts/combat/critical_strike_runtime.gd": "d5678da1780b90c5015b3fa70a2fe0cb447b440606b017dd24b73fc5348bc0ae",
+    "scripts/combat/source_resource_rules.gd": "cc84a561c34a3894f3599c39379d72bf4917e29fc2973f984a8aa63dc9dd03dc",
+    "scripts/combat/source_spatial_rules.gd": "3aec2921d0ee3025fac7e6edb010c6df03f1e027718e15716a77f3c43877c9cc",
+    "scripts/combat/leech_rules.gd": "c1037a4c12f9668cfcf4ca070474bad01adf384695eadd447e7036986c33caba",
+    "scripts/game_data.gd": "1ca97c45c243d6144e2a79d6d93762203c8bb76122adb0175a2ec80b2d77216b",
+    "scripts/items/weapon_local_rules.gd": "4bb31e82ade95ff91341e4b1720869ed930cfcbbe18c12a099304c177c3de307"
+  },
+  "owned_files": {
+    "scripts/combat/ember_proliferation_support_rules.gd": "5553df1188d0b92986a150cf812ce8152b03aed3e0009798635087de41465abc",
+    "scripts/combat/support_registry.gd": "9ea9035fd5c1fc4ab38669150e02895d15b2eb03322d21586d8afbf42a80ef8c",
+    "scripts/combat/skill_compiler.gd": "a1fd514c6ba65081ea01914bfff2c95d757ebcca932ba647da8ce37741e26e06",
+    "scripts/combat/ember_proliferation_support_rules.gd.uid": "b844ac44443dca9c5ec2f8dbce18127f7756d11708d71d25a2bac2b083aaf0e8",
+    "tests/ember_support_compiler_test.gd": "caff34ab0a1dee2e9f6a192d607d634f5da511d4174fc64c42f526e8a29c61fe",
+    "tests/ember_support_compiler_test.gd.uid": "8d1069db5b238895b312ed7facb495ff989a65067fa5b2f801433f9169261781"
+  },
+  "evidence_files": {
+    "docs/qa/v047-compiler/capture_v046.gd": {
+      "sha256": "212ee198a1f01de977a5576a09d3ab91fff747db623fe783b7706357cb1f5714",
+      "bytes": 5386
+    },
+    "docs/qa/v047-compiler/capture_v046.gd.uid": {
+      "sha256": "4279dc83cdc297f81486c54361b063d72992baf39b9d0f375993df8fa5bca5bd",
+      "bytes": 20
+    },
+    "docs/qa/v047-compiler/compiler-focused.log.txt": {
+      "sha256": "014368e2d3b4ddc5087059500492b77f032ce9191b4299041430f143a497137b",
+      "bytes": 169
+    },
+    "docs/qa/v047-compiler/compiler-v046.bin": {
+      "sha256": "9db64da1a1a4fb2d0b8643e032d353689674414ac44731c7dc7545fbcc9f3fdf",
+      "bytes": 312720
+    },
+    "docs/qa/v047-compiler/compiler-v046.log.txt": {
+      "sha256": "934fb3ca85af29f87207fdc43735f822e11886e13f392b5a5833c9759637ec78",
+      "bytes": 5028
+    },
+    "docs/qa/v047-compiler/compiler-v047.bin": {
+      "sha256": "89b8830334de7b47dc7826418a679379c43900de3a2ab7d62072ac16c984bc54",
+      "bytes": 312720
+    },
+    "docs/qa/v047-compiler/compiler-v047.log.txt": {
+      "sha256": "ab78c303b51efb4e8854a1d75e0b979fa67409bbf55668296cb59249e2aa961b",
+      "bytes": 3644
+    }
+  }
+}

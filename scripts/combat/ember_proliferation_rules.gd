@@ -37,15 +37,17 @@ static func transfer(status: Variant, at: Variant) -> Dictionary:
 		return {"ok": false, "reason": "Invalid ember status or time", "burn": {}}
 	var provenance: Variant = status.get("provenance", {})
 	if not provenance is Dictionary: return {"ok": false, "reason": "Invalid ember provenance", "burn": {}}
+	if provenance.has("ember_generation") != provenance.has("ember_expiry"):
+		return {"ok": false, "reason": "Incomplete ember lineage", "burn": {}}
 	if not provenance.has("ember_generation"): return {"ok": true, "reason": "not_ember", "burn": {}}
 	if typeof(provenance.ember_generation) != TYPE_INT or provenance.ember_generation not in [0, 1] \
-			or not _number(provenance.get("ember_expiry")) or not _number(status.get("raw_dps")) or float(status.raw_dps) <= 0.0:
+			or not _number(provenance.get("ember_expiry")) or float(provenance.ember_expiry) <= 0.0 or not _number(status.get("raw_dps")) or float(status.raw_dps) <= 0.0:
 		return {"ok": false, "reason": "Invalid ember lineage", "burn": {}}
 	var remaining: float = float(provenance.ember_expiry) - float(at)
 	if int(provenance.ember_generation) != 0 or remaining <= 0.0:
 		return {"ok": true, "reason": "spent_or_expired", "burn": {}}
 	var inherited: Dictionary = provenance.duplicate(true)
-	inherited.ember_generation = 1
+	inherited["ember_generation"] = 1
 	return {"ok": true, "reason": "", "burn": {"raw_dps": float(status.raw_dps),
 		"duration": remaining, "provenance": inherited}}
 

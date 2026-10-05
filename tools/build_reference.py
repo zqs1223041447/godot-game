@@ -13,7 +13,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 REF = ROOT / 'docs/reference'
 CATEGORIES = [('skills','主动技能'),('supports','辅助技能'),('equipment','随机装备'),('affixes','装备词缀'),('fixed_items','固定装备'),('jewels','珠宝'),('jewel_affixes','珠宝词缀'),('source_passives','源天赋与精通'),('passives','旧181节点研究'),('mechanisms','共用机制'),('weapon_stages','武器局部阶段'),('defenses','受击与防御'),('flasks','生命与魔力药剂'),('currencies','堆叠材料'),('crafting','制作与回收'),('monsters','怪物图鉴'),('monster_attacks','怪物攻击'),('encounters','本轮挑战'),('town_services','城镇服务'),('maps','有限地图'),('map_specials','地图特殊词缀'),('rules','规则与边界')]
-RULE_TITLES = {'damage':'伤害如何结算','supports':'辅助装配','projectiles':'分裂、返回与飞行结束','equipment':'装备与阶级','character_rates':'恢复、移动与普通攻击速度','basic_attack':'普通攻击与武器贡献','allocation':'天赋与珠宝规则','shared':'玩家和怪物共享机制','boundaries':'尚未实现的源游戏语义','sources':'数据来源与实现边界'}
+RULE_TITLES = {'damage':'伤害如何结算','supports':'辅助装配','projectiles':'分裂、返回与飞行结束','equipment':'装备与阶级','character_rates':'恢复、移动与普通攻击速度','basic_attack':'普通攻击与武器贡献','allocation':'天赋与珠宝规则','shared':'玩家和怪物共享机制','boundaries':'尚未实现的源游戏语义','sources':'数据来源与实现边界','ember_proliferation':'余烬扩散与剩余时长'}
 CAPABILITIES = {'initial_projectiles':'初始投射物数量','projectile_hit':'投射物命中','finite_projectile_pierce':'有限穿透','area_hit':'直接范围命中','chain_hit':'连锁命中'}
 SLOTS = {'weapon':'武器','armor':'护甲','charm':'项链','body_armour':'护甲','amulet':'项链','ring':'戒指','ring_1':'戒指一','ring_2':'戒指二','boots':'鞋','belt':'腰带','gloves':'手套','helmet':'头盔'}
 TYPES = {'small':'小天赋','notable':'显著天赋','socket':'珠宝孔','start':'起点','keystone':'基石','mastery':'精通','prefix':'前缀','suffix':'后缀','ordinary':'普通珠宝','special':'特殊珠宝','legacy':'原始词池','expansion':'扩展词池','runewood':'符木点伤池','defense':'火抗防具池','local_weapon':'白蜡长弓池','nine_slot':'九槽装备池','build_legacy_v27':'构筑原底材池','build_nine_slot_v27':'构筑九槽池'}
@@ -168,6 +168,8 @@ def build(data, art):
         image = f'<img class="emblem" src="art/{esc(img["file"])}" width="64" height="64" alt="" loading="lazy">' if img else '<span class="fallback-emblem" aria-hidden="true">✧</span>'
         if cat=='supports' and key=='ignite':
             image=f'<img class="emblem" src="{esc(data["burning"]["icon_file"])}" width="64" height="64" alt="" loading="lazy">'
+        elif cat=='supports' and key=='ember_proliferation':
+            image=f'<img class="emblem" src="{esc(data["ember_proliferation"]["icon_file"])}" width="64" height="64" alt="" loading="lazy">'
         badges = {'implemented':'已实现','research':'研究资料','planned':'尚未实现'}
         inner = f'<div class="entry-heading">{image}<div><span class="status {status}">{badges[status]}</span><h2><a href="#{aid}">{esc(name)}</a></h2><div class="entry-id">{esc(key)}</div></div></div>'
         if meta: inner += f'<div class="metadata">{meta}</div>'
@@ -212,7 +214,11 @@ def build(data, art):
         body += support_program_diagram(data['support_program_examples'][key],data['skills'],details)
         if key in ['breadth','concentrate']:
             body += area_diagram(data['area_support_examples'],data['skills'])
-        cards.append(add('supports',key,s['name'],s['description'],body,{'area':'范围辅助','projectile':'投射物辅助','resource':'资源辅助','element':'分量专注','delivery':'投射物辅助','control':'减速控制','chain':'连锁辅助','burning':'燃烧辅助'}[data['support_program_examples'][key]['family']],related=link('rules','supports')))
+        related=link('rules','supports')
+        if key=='ember_proliferation':
+            body+=facts([('互斥辅助',links('supports',data['ember_proliferation']['mutually_exclusive_with'])),('最低保存版本',number(data['ember_proliferation']['save_version']))])
+            related+=' · '+link('rules','ember_proliferation')+' · '+link('town_services','skill_merchant','宝石商人')
+        cards.append(add('supports',key,s['name'],s['description'],body,{'area':'范围辅助','projectile':'投射物辅助','resource':'资源辅助','element':'分量专注','delivery':'投射物辅助','control':'减速控制','chain':'连锁辅助','burning':'燃烧辅助'}[data['support_program_examples'][key]['family']],related=related))
     for key,e in data['equipment'].items():
         body = facts([('格数',' × '.join(map(number,e['size']))),('固有属性',lines(e['stats_text']))])+details('可出现的词缀',links('affixes',e['eligible_affixes']))
         related=link('rules','equipment')
@@ -454,6 +460,43 @@ def build(data, art):
                 rows.append((link('skills',skill)+' · '+esc(role),f"非暴击未计火抗每秒 {number(value['dps'])}，3秒总量 {number(value['total'])}；已含直击代价"))
         body=facts(rows)+'<p>'+esc(burn['scope'])+'。'+esc(burn['stacking'])+'。</p><p>'+esc(burn['secondary'])+'。'+esc(burn['immunity'])+'。</p><p>灰烬示例原接触标量20：保物理14、立即火7、每秒火7/3持续3秒，原始完整总量28；实际免疫/抗性会减少扣伤。预警仍0.7秒/90范围，可走开。</p><p>'+esc(burn['source_words'])+'。状态不存盘，不抽命中或表现随机数；真实死亡仍只走一次原奖励。</p>'
         rule_defs.append(('burning','点燃与燃烧取舍','牺牲即时命中换3秒持续火伤，单目标不叠加；主命中基数只结算一次。',body,'implemented'))
+    if 'ember_proliferation' in data:
+        ember=data['ember_proliferation'];policy=ember['player_policy'];spread=ember['proliferation_policy']
+        def ember_value(key, value, text=None):
+            return f'<strong data-ember-value="{esc(key)}" data-value="{esc(value)}">{esc(number(value) if text is None else text)}</strong>'
+        body=facts([
+            ('主命中倍率',ember_value('hit_multiplier',policy['hit_multiplier'])),
+            ('魔力倍率',ember_value('mana_multiplier',policy['mana_multiplier'])),
+            ('每秒火伤基数',ember_value('rate_fraction',policy['rate_fraction'],percent(policy['rate_fraction']))),
+            ('直接施加秒数',ember_value('duration',policy['duration'])),
+            ('扩散半径',ember_value('radius',spread['radius'])),
+            ('最多目标',ember_value('max_targets',spread['max_targets'])),
+            ('最多跳数',ember_value('max_hops',spread['max_hops'])),
+            ('可装配技能',links('skills',ember['examples'])),
+            ('互斥辅助',links('supports',ember['mutually_exclusive_with']))])
+        rows=[]
+        for skill,example in ember['examples'].items():
+            for role,value in example['profile']['roles'].items():
+                prefix=skill+'-'+role+'-'
+                cells=[link('skills',skill)+' · '+esc(role)]+[ember_value(prefix+field,value[field]) for field in ['fire_before_defense','dps','total']]
+                rows.append('<tr>'+''.join('<td>'+cell+'</td>' for cell in cells)+'</tr>')
+        body+='<div class="table-scroll"><table><caption>伤害标量100、无其他辅助；非暴击，未计目标火抗，已含直击代价</caption><thead><tr><th>主命中</th><th>防御前火焰</th><th>燃烧每秒</th><th>直接燃烧完整总量</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
+        sample=ember['transfer_example'];source_burn=sample['source'];transfer=sample['transfer']['burn'];recipient=sample['recipient']
+        body+=details('同源一跳示例 · 保留绝对截止时间',facts([
+            ('原始施加时刻',ember_value('started_at',sample['started_at'])),
+            ('源目标死亡时刻',ember_value('transferred_at',sample['transferred_at'])),
+            ('源燃烧每秒',ember_value('source_dps',source_burn['raw_dps'])),
+            ('继承燃烧每秒',ember_value('transferred_dps',transfer['raw_dps'])),
+            ('原绝对截止时间',ember_value('source_expiry',source_burn['provenance']['ember_expiry'])),
+            ('继承绝对截止时间',ember_value('transferred_expiry',recipient['provenance']['ember_expiry'])),
+            ('只剩秒数',ember_value('remaining',transfer['duration']))])+f'<p>已传播目标再次死亡：{esc(sample["second_hop"]["reason"])}，不产生第二跳。到原截止时间后：{esc(sample["at_expiry"]["reason"])}，不再传播。以上来自实际燃烧状态与扩散规则，尚未套用接收目标的火抗。</p>')
+        selection=ember['selection_example']
+        body+=details('同源选取示例 · 断墙遗迹实体墙',f'<p>10个可见存活候选按距离排序，实际选中ID：{esc("、".join(map(str,selection["target_ids"])))}。ID {selection["wall_blocked_id"]} 被实际地图墙阻挡；ID {selection["spawn_protected_id"]} 仍在出生保护；ID {selection["dead_id"]} 已死亡；ID {selection["outside_radius_id"]} 超出半径；ID {esc("、".join(map(str,selection["over_cap_ids"])))} 因目标上限未入选。源目标自身不入选，同距按ID排序。</p>')
+        migration=ember['migration_example'];quote=ember['merchant_quote']
+        body+=facts([('正式获取',link('town_services','skill_merchant','宝石商人')+' · '+ember_value('merchant_cost',quote['cost']['calibration_shard'])+' 校准碎片'),('保存版本',ember_value('save_version',ember['save_version'])),('迁移赠物',ember_value('granted_items',migration['granted_items'])),('当前辅助数量',str(len(data['supports'])))])
+        body+='<p>'+esc(ember['scope'])+'。</p><p>'+esc(ember['transfer_rule'])+'。</p><p>'+esc(ember['instant_kill_rule'])+'。</p><p>'+esc(ember['stacking'])+'。</p><p>'+esc(ember['lifecycle'])+'。</p><p>'+esc(ember['migration'])+f'。同源迁移示例物品数量 {migration["items_before"]} → {migration["items_after"]}；仅变化字段 {esc("、".join(migration["changed_fields"]))}。正式击杀宝石奖励词表保持冻结，未加入此新辅助。</p>'
+        body+='<p>'+link('supports','ember_proliferation')+' · '+link('supports','ignite')+' · '+link('rules','burning','原点燃与燃烧规则')+'</p>'
+        rule_defs.append(('ember_proliferation','余烬扩散与剩余时长','以更低燃烧比例和更高魔力消耗换取死亡传播；接收者保留原每秒伤害与截止时间。',body,'implemented'))
     if 'source_spatial' in data:
         spatial=data['source_spatial']
         rows=[]

@@ -10,14 +10,16 @@ ROOT=Path(__file__).resolve().parents[1]
 REF=ROOT/'docs/reference'
 class Inspector(HTMLParser):
     def __init__(self):
-        super().__init__(); self.ids=[]; self.links=[]; self.assets=[]; self.viewbox=None; self.node_ids=[]; self.trace_values={}; self.weapon_values={}; self.pierce_hits={}; self.craft_values={}; self.telegraph_values={}; self.encounter_values={}; self.flask_values={}
+        super().__init__(); self.ids=[]; self.links=[]; self.assets=[]; self.viewbox=None; self.node_ids=[]; self.trace_values={}; self.weapon_values={}; self.pierce_hits={}; self.craft_values={}; self.telegraph_values={}; self.encounter_values={}; self.flask_values={}; self.ember_values={}; self.entry_id=None; self.entry_images=[]
     def handle_starttag(self,tag,attrs):
         a=dict(attrs)
+        if tag=='article':self.entry_id=a.get('id')
         if 'id' in a:self.ids.append(a['id'])
         if tag=='a':self.links.append(a.get('href',''))
         if tag in ['img','script','link']:
             url=a.get('src',a.get('href',''))
             if url:self.assets.append(url)
+            if tag=='img':self.entry_images.append((self.entry_id,url))
         if tag=='svg' and a.get('id')=='passive-map':self.viewbox=list(map(float,a['viewbox'].split()))
         if 'data-node' in a:self.node_ids.append(a['data-node'])
         if 'data-pierce-hits' in a:self.pierce_hits[a['data-pierce-hits']]=int(a['data-value'])
@@ -27,6 +29,10 @@ class Inspector(HTMLParser):
         if 'data-craft-value' in a:self.craft_values[a['data-craft-value']]=int(a['data-value'])
         if 'data-weapon-trace' in a:self.weapon_values[a['data-weapon-trace']]=float(a['data-value'])
         if 'data-trace-value' in a:self.trace_values[a['data-trace-value']]=float(a['data-value'])
+        if 'data-ember-value' in a:self.ember_values[a['data-ember-value']]=float(a['data-value'])
+
+    def handle_endtag(self,tag):
+        if tag=='article':self.entry_id=None
 
 def main():
     source=(REF/'index.html').read_text()
@@ -85,6 +91,43 @@ def main():
     assert data['burning']['player_policy']=={'duration':3.0,'rate_fraction':0.3,'hit_multiplier':0.75,'mana_multiplier':1.2}
     assert data['burning']['enemy_budget']['total_before_defense']==28 and data['canonical']['gem_reward']['normal_frozen_definition_count']==26
     assert (REF/data['burning']['icon_file']).read_bytes()==(ROOT/'assets/ui/grimoire/ignite.png').read_bytes()
+    ember=data['ember_proliferation'];policy=ember['player_policy'];spread=ember['proliferation_policy']
+    assert len(data['supports'])==18 and len(data['support_program_examples'])==18
+    assert policy=={'duration':3.0,'rate_fraction':0.2,'hit_multiplier':0.75,'mana_multiplier':1.3}
+    assert spread=={'enabled':True,'radius':120.0,'max_targets':8,'max_hops':1,'preserves_expiry':True}
+    assert ember['save_version']==29 and data['save_version']==29 and ember['mutually_exclusive_with']==['ignite']
+    assert set(ember['examples'])=={'meteor','tornado'} and set(ember['incompatible_skills'])==set(data['skills'])-{'meteor','tornado'}
+    assert [sample['selection'] for sample in ember['exclusive_examples']]==[['ignite','ember_proliferation'],['ember_proliferation','ignite']]
+    assert all(sample['error'] for sample in ember['exclusive_examples'])
+    expected_ember={**policy,**{key:spread[key] for key in ['radius','max_targets','max_hops']}}
+    for skill,example in ember['examples'].items():
+        profile=example['profile']
+        assert {key:profile[key] for key in policy}==policy and profile['proliferation']==spread
+        assert set(profile['roles'])==({'parent','child'} if skill=='tornado' else {'direct'})
+        assert 'ember_proliferation' in data['skills'][skill]['compatible_supports']
+        for role,values in profile['roles'].items():
+            assert abs(values['dps']-values['fire_before_defense']*policy['rate_fraction'])<1e-9
+            assert abs(values['total']-values['dps']*policy['duration'])<1e-9
+            expected_ember.update({skill+'-'+role+'-'+field:values[field] for field in ['fire_before_defense','dps','total']})
+    sample=ember['transfer_example'];original=sample['source'];inherited=sample['transfer']['burn'];recipient=sample['recipient']
+    assert sample['transfer']['ok'] and inherited['raw_dps']==original['raw_dps']==recipient['raw_dps']
+    assert inherited['provenance']['ember_expiry']==original['provenance']['ember_expiry']==recipient['provenance']['ember_expiry']
+    assert inherited['duration']==original['provenance']['ember_expiry']-sample['transferred_at']<policy['duration']
+    assert original['provenance']['ember_generation']==0 and recipient['provenance']['ember_generation']==1
+    assert all(sample[key]['ok'] and sample[key]['burn']=={} and sample[key]['reason']=='spent_or_expired' for key in ['second_hop','at_expiry'])
+    selection=ember['selection_example']
+    assert selection['target_ids']==list(range(1,9)) and selection['over_cap_ids']==[9,10]
+    assert set(selection['target_ids']).isdisjoint(selection[key] for key in ['source_id','wall_blocked_id','spawn_protected_id','dead_id','outside_radius_id'])
+    migration=ember['migration_example'];quote=ember['merchant_quote']
+    assert migration['from_version']==28 and migration['to_version']==29 and migration['changed_fields']==['version']
+    assert migration['granted_items']==0 and migration['items_before']==migration['items_after']
+    assert quote['ok'] and quote['definition_id']=='support:ember_proliferation' and quote['cost']=={'calibration_shard':4}
+    assert gem_prices['support:ember_proliferation']==4 and not ember['normal_reward_pool_includes_support']
+    expected_ember.update({'started_at':sample['started_at'],'transferred_at':sample['transferred_at'],'source_dps':original['raw_dps'],'transferred_dps':inherited['raw_dps'],'source_expiry':original['provenance']['ember_expiry'],'transferred_expiry':recipient['provenance']['ember_expiry'],'remaining':inherited['duration'],'merchant_cost':quote['cost']['calibration_shard'],'save_version':ember['save_version'],'granted_items':migration['granted_items']})
+    assert inspector.ember_values==expected_ember, 'Ember display diverges from production policies, cast, transfer or migration'
+    assert 'rules-ember_proliferation' in inspector.ids and '#rules-ember_proliferation' in inspector.links
+    assert '瞬杀且未形成燃烧状态不传' in source and '不穿墙、不选出生保护目标' in source
+    assert (REF/ember['icon_file']).read_bytes()==(ROOT/'assets/ui/grimoire/ember_proliferation.png').read_bytes()
     assert data['current_loot_profile_id']=='canonical_v27'
     assert data['affixes']['attack_life_leech']['formatted_ranges'][0]=={'min':'+0.20%','max':'+0.30%'}
     assert data['affixes']['global_critical_multiplier']['formatted_ranges'][2]=={'min':'+12个百分点','max':'+15个百分点'}
@@ -121,12 +164,14 @@ def main():
     expected_art={(cat,key) for cat in ['skills','supports','equipment','fixed_items','jewels','monsters'] for key in data[cat]}
     expected_art.update(('flasks',key) for key in data.get('flasks',{}))
     actual_art={(('fixed_items' if row.get('entry_type')=='fixed_item' else row['category']),row['id']) for row in art['entries']}
-    # The legacy64 rendered thumbnails remain byte-identical; the new support
-    # is an explicitly retained original PNG, independently byte-checked above.
-    assert expected_art-actual_art=={('supports','ignite')} and not actual_art-expected_art, 'Only the declared original PNG may supplement the rendered manifest'
-    actual_art.add(('supports','ignite'))
+    # Exactly two retained original PNGs supplement the unchanged legacy64.
+    original_art={('supports','ignite'):data['burning']['icon_file'],('supports','ember_proliferation'):ember['icon_file']}
+    assert expected_art-actual_art==set(original_art) and not actual_art-expected_art, 'Only the two declared original PNGs may supplement the rendered manifest'
+    actual_art.update(original_art)
     assert actual_art==expected_art, 'Art manifest omits or adds runtime entries'
-    assert len(inspector.assets)==len(art['entries'])+1 and inspector.assets.count(data['burning']['icon_file'])==1, 'Runtime or original artwork missing from an entry'
+    assert len(inspector.assets)==len(art['entries'])+2, 'Runtime or original artwork count differs'
+    for (category,key),asset in original_art.items():
+        assert inspector.assets.count(asset)==1 and inspector.entry_images.count((f'{category}-{key}',asset))==1, 'Original artwork must belong to its exact support entry'
     assert module.build(data,art)==source, 'Generated HTML is stale'
     assert module.build(data,art)==module.build(data,art), 'Nondeterministic generator'
     print(f'Reference catalog: {len(inspector.ids)} unique anchors, {len(inspector.links)} links, {len(inspector.assets)} local images; complete geometry and deterministic HTML passed')

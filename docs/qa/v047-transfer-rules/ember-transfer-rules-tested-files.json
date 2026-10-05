@@ -1,0 +1,77 @@
+{
+  "recorded_at_utc": "2026-10-05T07:25:45.478507+00:00",
+  "finished_at_utc": "2026-10-05T07:25:46.043070+00:00",
+  "command": [
+    "godot",
+    "--headless",
+    "--path",
+    "/workspace/scratch/a51485f153de/v047-ember-proliferation",
+    "--script",
+    "res://tests/ember_transfer_rules_test.gd"
+  ],
+  "environment": {
+    "XDG_DATA_HOME": "/tmp/godot-m1-v047-pure/data",
+    "XDG_CONFIG_HOME": "/tmp/godot-m1-v047-pure/config",
+    "XDG_CACHE_HOME": "/tmp/godot-m1-v047-pure/cache",
+    "GODOT_SILENCE_ROOT_WARNING": "1"
+  },
+  "result": {
+    "exit_code": 0,
+    "error_lines": 0,
+    "checks": 1655,
+    "failures": 0,
+    "completed_cases": 9,
+    "main_markers": {
+      "begin": 1,
+      "end": 1
+    },
+    "verified_pass": true
+  },
+  "files_before_run": {
+    "scripts/combat/ember_proliferation_rules.gd": {
+      "bytes": 3426,
+      "sha256": "df17905689837b35388ef46fef5b7697f79b0258baa1c7a5f0f6bb5974aac31c"
+    },
+    "scripts/combat/burn_runtime.gd": {
+      "bytes": 9270,
+      "sha256": "90fb9eb2b42643ad64304452028cedb7dfd83a26332df503f31094dae50b2cd7"
+    },
+    "scripts/combat/burn_rules.gd": {
+      "bytes": 2685,
+      "sha256": "adf1bb84b7bd91e4b24b2aeeaa0b38daca30798c0da42303bb2235caf0a1aa75"
+    },
+    "tests/ember_transfer_rules_test.gd": {
+      "bytes": 23693,
+      "sha256": "7fdd5a76616287d54c56d6268a8b04baeafa2435882b87dcb94590cdc7b8d0ab"
+    },
+    "tests/ember_transfer_rules_test.gd.uid": {
+      "bytes": 18,
+      "sha256": "34600476754a5ecd9171891e802334089d21ff2fbd0b74819179ce6f8ff9a2a2"
+    }
+  },
+  "files_after_run": {
+    "scripts/combat/ember_proliferation_rules.gd": {
+      "bytes": 3426,
+      "sha256": "df17905689837b35388ef46fef5b7697f79b0258baa1c7a5f0f6bb5974aac31c"
+    },
+    "scripts/combat/burn_runtime.gd": {
+      "bytes": 9270,
+      "sha256": "90fb9eb2b42643ad64304452028cedb7dfd83a26332df503f31094dae50b2cd7"
+    },
+    "scripts/combat/burn_rules.gd": {
+      "bytes": 2685,
+      "sha256": "adf1bb84b7bd91e4b24b2aeeaa0b38daca30798c0da42303bb2235caf0a1aa75"
+    },
+    "tests/ember_transfer_rules_test.gd": {
+      "bytes": 23693,
+      "sha256": "7fdd5a76616287d54c56d6268a8b04baeafa2435882b87dcb94590cdc7b8d0ab"
+    },
+    "tests/ember_transfer_rules_test.gd.uid": {
+      "bytes": 18,
+      "sha256": "34600476754a5ecd9171891e802334089d21ff2fbd0b74819179ce6f8ff9a2a2"
+    }
+  },
+  "tested_files_unchanged_during_run": true,
+  "log": "docs/qa/v047-transfer-rules/ember-transfer-rules-test.log.txt",
+  "error_details": []
+}

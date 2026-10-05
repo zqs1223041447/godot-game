@@ -1,0 +1,43 @@
+{
+  "application_version": "0.46.0",
+  "schema": 28,
+  "capture": "External ember-migration-capture.gd run against retained released v46 game.pck; old pack validates schema28 and application0.46.0 before capture. Released map, XP, reward, equipment, binding, crafting, gem purchase and link APIs create the nontrivial states. No changed-source snapshot or current-version decrement creates old fixtures. Literal CRLF and surrounding whitespace test byte-exact backups.",
+  "pack_file": "v046-final-release/game.pck",
+  "pack": {
+    "bytes": 21583500,
+    "sha256": "3fe35502889fec4954f986413a346339175174a2a67cac21f46c19a04fd1b5fd"
+  },
+  "capture_script": "docs/qa/v047-migration/ember-migration-capture.gd",
+  "capture_script_signature": {
+    "bytes": 5557,
+    "sha256": "f31010f5a763c03766692a329399d44d835588c858c02dbba1c25176395f6041"
+  },
+  "isolation": "/tmp/godot-m1-v047-ember-fixture.*/{data,config,cache}",
+  "no_user_save_reads_or_writes": true,
+  "normal_journey_source_signature": {
+    "bytes": 10109,
+    "sha256": "10b2ba7db25764a0ad34f447ed71acb4a876a49e26bd6fa824056d1e1fee0f89"
+  },
+  "files": {
+    "v28-active.json": {
+      "bytes": 17349,
+      "sha256": "0419c87ee56cbe509eefe8acb5febd9151afbc49892973f08741887439491e8f"
+    },
+    "v28-default.json": {
+      "bytes": 14788,
+      "sha256": "3c65493949b3d293107d1a0ce42ba3401538fcb74e884aef342fa6fe3a3812a6"
+    },
+    "v28-ignite-bag.json": {
+      "bytes": 17095,
+      "sha256": "a4f223e76190e2aa9571d02a2928a0b65d0de902c538010ad3c0d7caea50f079"
+    },
+    "v28-pending.json": {
+      "bytes": 17197,
+      "sha256": "f5b723665ba8b535c68ec2f584eb7842fca28e20387f670beeb8790e3cf95426"
+    },
+    "v28-vocabulary-oracle.json": {
+      "bytes": 4653,
+      "sha256": "10405ba425f4c6cce9742c50f8c65d8f0c455e91aa27840d5c84e156b951297b"
+    }
+  }
+}

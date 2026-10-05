@@ -37,3 +37,6 @@ tests/fixtures/v035_flasks/*.bin binary
 tests/fixtures/v036_map_bosses/*.bin binary
 tests/fixtures/v040_leech/v24-*.json binary
 tests/fixtures/v040_leech/*.bin binary
+
+# Preserve the four literal released schema28 backup fixtures, including CRLF.
+docs/qa/v047-migration/fixtures/v28-*.json binary

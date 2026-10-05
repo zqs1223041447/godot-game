@@ -42,6 +42,8 @@ const MapBosses=preload("res://scripts/monsters/map_boss_profiles.gd")
 const MapAdmission=preload("res://scripts/world/map_admission.gd")
 const MonsterRuntime=preload("res://scripts/monsters/monster_runtime.gd")
 const AttackRules = preload("res://scripts/combat/attack_hit_rules.gd")
+const BurnRuntime = preload("res://scripts/combat/burn_runtime.gd")
+const EmberMigration = preload("res://scripts/save/ember_gem_migration.gd")
 
 func _initialize() -> void:
 	var target: String = "res://docs/reference/catalog.json"
@@ -87,6 +89,7 @@ static func collect() -> Dictionary:
 	result["map_camps"]={"old_garden":CampLayoutData.layout("old_garden",Arena.ARENA).landmarks,"broken_ruins":CampLayoutData.layout("broken_ruins",Arena.ARENA).landmarks}
 	result["normal_journey"] = normal_journey_examples()
 	result["burning"] = burning_examples()
+	result["ember_proliferation"] = ember_proliferation_examples()
 	result["normal_gem_trading"]={"offers":Canonical.GemTrade.offers(),"recycle_credit":Canonical.GemTrade.RECYCLE_CREDIT,"currency":Canonical.GemTrade.MATERIAL_ID,"location":"normal_town","level":1,"quality":0,"recycle_location":"bag","schema":Canonical.Rules.VERSION,"test_supply_separate":true,"pricing":"初版可调整预算；每次无词缀地图净得4碎片"}
 	result["source_tree"] = source_tree_reference()
 	result["source_spatial"] = source_spatial_examples()
@@ -974,3 +977,82 @@ static func burning_examples()->Dictionary:
 		"enemy_budget":{"contact_damage":20.0,"physical_hit":14.0,"fire_hit":7.0,"fire_burn_dps":7.0/3.0,"duration":3.0,"total_before_defense":28.0},
 		"immunity":"尊重原伤害免疫；期间时长流逝、不补扣，持续伤害本身不授予受击保护",
 		"source_words":"本游戏初版，不解锁尚未实现的PoE点燃或持续伤害源节点"}
+
+
+static func ember_proliferation_examples()->Dictionary:
+	var examples:Dictionary={}
+	var incompatible:Dictionary={}
+	for id:String in Data.SKILLS:
+		var reason:String=Supports.compatibility_reason(id,["ember_proliferation"])
+		if not reason.is_empty():
+			incompatible[id]=reason
+			continue
+		var cast:Dictionary=Compiler.compile_group(id,Recipes.snapshot({"damage":100.0},[]),["ember_proliferation"])
+		assert(cast.ok and cast.has("burn_profile"))
+		examples[id]={"profile":cast.burn_profile,"mana":cast.mana,"cooldown":cast.cooldown,"details":Preview.details(cast)}
+	var exclusive:Array=[]
+	for selection:Array in [["ignite","ember_proliferation"],["ember_proliferation","ignite"]]:
+		var result:Dictionary=Compiler.compile_group("meteor",Recipes.snapshot({"damage":100.0},[]),selection)
+		assert(not result.ok)
+		exclusive.append({"selection":selection,"error":result.error})
+	# An actual stored burn and the production selector provide the transfer example.
+	var runtime:=BurnRuntime.new()
+	var started_at:float=10.0
+	var transferred_at:float=11.75
+	var duration:float=float(Compiler.Ember.POLICY.duration)
+	var raw_dps:float=float(examples.meteor.profile.roles.direct.dps)
+	var attached:Dictionary=runtime.apply("monster",90,0,raw_dps,duration,started_at,
+		{"skill_id":"meteor","ember_generation":0,"ember_expiry":started_at+duration})
+	assert(attached.ok and attached.applied)
+	var source:Dictionary=runtime.status_for("monster",90)
+	var inherited:Dictionary=Compiler.Proliferation.transfer(source,transferred_at)
+	assert(inherited.ok and not inherited.burn.is_empty())
+	var received:Dictionary=runtime.apply("monster",1,90,inherited.burn.raw_dps,inherited.burn.duration,
+		transferred_at,inherited.burn.provenance)
+	assert(received.ok and received.applied)
+	var recipient:Dictionary=runtime.status_for("monster",1)
+	var second_hop:Dictionary=Compiler.Proliferation.transfer(recipient,transferred_at+0.25)
+	var expired:Dictionary=Compiler.Proliferation.transfer(source,started_at+duration)
+	assert(second_hop.ok and second_hop.burn.is_empty() and expired.ok and expired.burn.is_empty())
+	var geometry:=MapGeometryData.new()
+	assert(geometry.configure("broken_ruins",Rect2(0,0,1800,1000)))
+	var origin:=Vector2(560,300)
+	var candidates:Array=[]
+	for id:int in range(1,11):
+		candidates.append({"id":id,"pos":origin-Vector2(id*5,0),"health":100.0,"spawn":0.0})
+	candidates.append_array([
+		{"id":90,"pos":origin,"health":100.0,"spawn":0.0},
+		{"id":201,"pos":Vector2(650,300),"health":100.0,"spawn":0.0},
+		{"id":202,"pos":origin-Vector2(4,0),"health":100.0,"spawn":1.0},
+		{"id":203,"pos":origin-Vector2(3,0),"health":0.0,"spawn":0.0},
+		{"id":204,"pos":origin-Vector2(float(Compiler.Proliferation.POLICY.radius)+1.0,0),"health":100.0,"spawn":0.0}])
+	var selected:Dictionary=Compiler.Proliferation.select_targets(origin,90,candidates,geometry.visible)
+	assert(selected.ok and selected.target_ids==[1,2,3,4,5,6,7,8])
+	var old:Dictionary=Canonical.new().snapshot()
+	old.version=Canonical.Rules.V28_VERSION
+	var migrated:Dictionary=EmberMigration.migrate_v28(old)
+	assert(not migrated.is_empty())
+	var changed_fields:Array=[]
+	for field:String in old:
+		if old[field]!=migrated[field]:changed_fields.append(field)
+	assert(changed_fields==["version"])
+	var quote:Dictionary=Canonical.GemTrade.quote("buy","support:ember_proliferation")
+	assert(quote.ok)
+	return {"save_version":Compiler.Ember.SAVE_VERSION,"support_id":"ember_proliferation",
+		"icon_file":"originals/ember_proliferation.png","player_policy":Compiler.Ember.POLICY,
+		"proliferation_policy":Compiler.Proliferation.POLICY,"examples":examples,
+		"incompatible_skills":incompatible,"mutually_exclusive_with":["ignite"],"exclusive_examples":exclusive,
+		"transfer_example":{"started_at":started_at,"transferred_at":transferred_at,"source":source,
+			"transfer":inherited,"recipient":recipient,"second_hop":second_hop,"at_expiry":expired},
+		"selection_example":{"map_id":"broken_ruins","origin":origin,"source_id":90,"candidates":candidates,
+			"target_ids":selected.target_ids,"wall_blocked_id":201,"spawn_protected_id":202,
+			"dead_id":203,"outside_radius_id":204,"over_cap_ids":[9,10]},
+		"migration_example":{"from_version":old.version,"to_version":migrated.version,"changed_fields":changed_fields,
+			"items_before":old.items.size(),"items_after":migrated.items.size(),"granted_items":0},
+		"merchant_quote":quote,"normal_reward_pool_includes_support":Canonical.Journey.GEM_DEFINITIONS.has("support:ember_proliferation"),
+		"scope":"仅陨星直接命中与龙卷母子获准主命中；主命中防御前火焰分量只取一次基数，独立装备爆炸不继承",
+		"transfer_rule":"已有余烬燃烧的目标死亡才扩散；继承同一原始每秒伤害与原绝对截止时间，按距离再按ID选最多8个存活可见目标，不穿墙、不选出生保护目标",
+		"instant_kill_rule":"瞬杀且未形成燃烧状态不传；已有有效余烬燃烧的目标可在后续命中或燃烧致死时扩散",
+		"stacking":"与点燃共用单目标最强燃烧：更强覆盖，同强替换并采用新条自己的截止时间，弱条忽略；扩散不叠加也不重置3秒",
+		"lifecycle":"不新增命中、暴击、偷取、随机抽样或奖励路径；暂停冻结，返城与重开清空，燃烧状态不存盘",
+		"migration":"严格验证旧schema28与原字节备份后迁移schema29，仅版本字段变化，不赠物、不退款、不改旅程或既有UID"}

@@ -278,6 +278,7 @@ func _natural_end(shot: Dictionary, reason: String, events: Array[Dictionary], t
 		if effect_snapshot.has("burn_policy"):
 			effect_snapshot=effect_snapshot.duplicate(true)
 			effect_snapshot.erase("burn_policy")
+			effect_snapshot.erase("burn_proliferation")
 		_event(events, "explosion", shot, time, {"pos": shot.pos, "effect_id": "explosion:%d" % int(shot.id),
 			"radius": float(shot.snapshot.get("explosion_recipe", Recipes.TORNADO.explosion).radius), "payload": payload, "snapshot": effect_snapshot,
 			"color": Color("ffb576"), "reason": reason})

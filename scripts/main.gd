@@ -30,8 +30,13 @@ const FeedbackRuntime = preload("res://scripts/combat/combat_feedback_runtime.gd
 var feedback_runtime = FeedbackRuntime.new()
 const BurnRuntime=preload("res://scripts/combat/burn_runtime.gd")
 const BurnRules=preload("res://scripts/combat/burn_rules.gd")
+const EmberRules=preload("res://scripts/combat/ember_proliferation_rules.gd")
 var burn_runtime=BurnRuntime.new()
 var burn_trace:Array[Dictionary]=[]
+var _ember_advancing:=false
+var _ember_defer_deaths:=false
+var _ember_flushing:=false
+var _ember_deaths:Array[Dictionary]=[]
 var _burn_step_active:=false
 var _burn_step_start:=0.0
 var _burn_immunity_until:=0.0
@@ -370,7 +375,7 @@ func restart_run(camp_plan: Dictionary = {}) -> void:
 	group_cooldowns.reset()
 	_player_evasion_entropy = 50.0
 	attack_admission_trace.clear()
-	burn_runtime.reset();burn_trace.clear()
+	burn_runtime.reset();burn_trace.clear();_ember_deaths.clear()
 	for id: String in Data.SKILLS:
 		cooldowns[id] = 0.0
 	spawn_timer = 1.8
@@ -1238,13 +1243,17 @@ func _update_projectiles(delta: float) -> void:
 func _apply_damage_packet(enemy: Dictionary, packet: Dictionary, snapshot: Dictionary, color: Color,
 		slow: float = 0.0, provenance: Dictionary = {}) -> void:
 	var burn_at:float=_burn_event_time(float(provenance.time)) if provenance.has("time") else elapsed
+	var ember_hit:bool=snapshot.has("burn_proliferation") and packet.get("role","") in ["direct","parent","child"] and packet.skill_id in ["meteor","tornado"]
+	if burn_runtime.has_ember_states() or ember_hit:
+		burn_at=_ember_event_time(burn_at,provenance)
 	if not burn_runtime.is_empty():
 		var previous:float=burn_runtime.last_time_for("monster",int(enemy.id))
 		# The existing projectile scheduler treats near-equal relative times as
 		# one instant ordered by identity. Preserve that established hit order;
 		# only its tied burn applications share the latest processed timestamp.
 		if _burn_step_active and provenance.has("time") and previous>burn_at and previous<=elapsed and is_equal_approx(float(provenance.time),previous-_burn_step_start):burn_at=previous
-		_advance_monster_burn(enemy,burn_at)
+		if ember_hit:_advance_proliferating_burns(burn_at)
+		else:_advance_monster_burn(enemy,burn_at)
 	if float(enemy.health) <= 0.0 or float(enemy.get("spawn", 0.0)) > 0.0:
 		return
 	if not provenance.get("accuracy_checked",false) and not _attack_admitted(enemy,packet,snapshot): return
@@ -1270,13 +1279,16 @@ func _apply_damage_packet(enemy: Dictionary, packet: Dictionary, snapshot: Dicti
 	damage_trace.append(record)
 	if damage_trace.size() > 32:
 		damage_trace.pop_front()
-	_apply_enemy_settlement(enemy, settlement, color, slow, bool(critical.get("critical", false)))
+	_apply_enemy_settlement(enemy, settlement, color, slow, bool(critical.get("critical", false)), burn_at)
 	if float(enemy.health)>0.0 and snapshot.has("burn_policy") and packet.get("role","") in ["direct","parent","child"] and packet.skill_id in ["meteor","tornado"]:
 		var fire:float=float(settlement.raw_components.get("fire",0.0))
 		if fire>0.0 and float(settlement.components.get("fire",0.0))>0.0:
 			var burn:Dictionary=BurnRules.from_fire_hit(fire,snapshot.burn_policy)
 			if burn.ok:
-				var attached:Dictionary=burn_runtime.apply("monster",int(enemy.id),0,burn.raw_dps,burn.duration,burn_at,{"skill_id":str(packet.skill_id),"cast_id":int(provenance.get("cast_id",0)),"projectile_id":int(provenance.get("projectile_id",0)),"phase":str(provenance.get("phase","direct"))})
+				var burn_origin:Dictionary={"skill_id":str(packet.skill_id),"cast_id":int(provenance.get("cast_id",0)),"projectile_id":int(provenance.get("projectile_id",0)),"phase":str(provenance.get("phase","direct"))}
+				if snapshot.has("burn_proliferation"):
+					burn_origin["ember_generation"]=0;burn_origin["ember_expiry"]=burn_at+float(burn.duration)
+				var attached:Dictionary=burn_runtime.apply("monster",int(enemy.id),0,burn.raw_dps,burn.duration,burn_at,burn_origin)
 				_assert_burn_result(attached)
 				_settle_burn_segments(attached.segments)
 
@@ -1321,6 +1333,7 @@ func combat_preview() -> Dictionary:
 
 
 func _damage_enemy(enemy: Dictionary, amount: float, color: Color, slow: float = 0.0) -> void:
+	if burn_runtime.has_ember_states():_advance_proliferating_burns(elapsed)
 	if float(enemy.health) <= 0.0 or amount <= 0.0 or not is_finite(amount):
 		return
 	# Compatibility helper receives damage already resolved by its caller.
@@ -1329,7 +1342,7 @@ func _damage_enemy(enemy: Dictionary, amount: float, color: Color, slow: float =
 		_apply_enemy_settlement(enemy, settlement, color, slow)
 
 
-func _apply_enemy_settlement(enemy: Dictionary, settlement: Dictionary, color: Color, slow: float = 0.0, critical: bool = false) -> void:
+func _apply_enemy_settlement(enemy: Dictionary, settlement: Dictionary, color: Color, slow: float = 0.0, critical: bool = false, at: float = -1.0) -> void:
 	var amount: float = float(settlement.damage_total)
 	if not _apply_enemy_resources(enemy,settlement):return
 	var absorbed: float = float(settlement.shield_spent)
@@ -1342,7 +1355,7 @@ func _apply_enemy_settlement(enemy: Dictionary, settlement: Dictionary, color: C
 	_record_damage_feedback("monster", int(enemy.id), "critical" if critical else "hit", settlement, Vector2(enemy.pos))
 	for i: int in range(4):
 		_add_particle(Vector2(enemy.pos), Vector2.RIGHT.rotated(rng.randf() * TAU) * rng.randf_range(40, 130), color, 2.3, 0.3)
-	_finish_enemy_death(enemy)
+	_finish_enemy_death(enemy,true,at)
 
 
 func _apply_enemy_resources(enemy:Dictionary,settlement:Dictionary)->bool:
@@ -1355,14 +1368,17 @@ func _apply_enemy_resources(enemy:Dictionary,settlement:Dictionary)->bool:
 	return true
 
 
-func _finish_enemy_death(enemy:Dictionary,legacy_particles:bool=true)->void:
+func _finish_enemy_death(enemy:Dictionary,legacy_particles:bool=true,at:float=-1.0,source_burn:Dictionary={})->void:
 	if float(enemy.health)>0.0:return
+	var ember_source:Dictionary=burn_runtime.status_for("monster",int(enemy.id)) if source_burn.is_empty() else source_burn
 	feedback_runtime.flush_target("monster", int(enemy.id))
 	if not burn_runtime.is_empty():burn_runtime.remove("monster",int(enemy.id))
 	telegraphs.cancel(int(enemy.id))
 	var death: Dictionary = monster_runtime.process_death(enemy)
 	if not death.processed:
 		return
+	if not ember_source.is_empty() and ember_source.provenance.get("ember_generation",-1)==0:
+		_ember_deaths.append({"id":int(enemy.id),"origin":Vector2(enemy.pos),"at":elapsed if at<0.0 else at,"status":ember_source.duplicate(true)})
 	visual_cues.emit_cue("death", Vector2(enemy.pos), {"radius": float(enemy.radius), "color": Monsters.RARITIES[enemy.rarity].color, "target_id": int(enemy.id)})
 	kills += 1
 	var eligible: bool = bool(death.reward) and not demo_mode
@@ -1407,6 +1423,7 @@ func _finish_enemy_death(enemy:Dictionary,legacy_particles:bool=true)->void:
 	if legacy_particles:
 		for i: int in range(8):
 			_add_particle(Vector2(enemy.pos), Vector2.RIGHT.rotated(rng.randf() * TAU) * rng.randf_range(35, 120), Color("ce8070"), 3.0, 0.45)
+	if not _ember_defer_deaths:_flush_ember_deaths()
 
 
 func _award_kill_equipment(enemy: Dictionary) -> void:
@@ -1524,6 +1541,7 @@ func _finish_player_death()->void:
 	if health>0.0:return
 	feedback_runtime.flush_target("player", 0)
 	burn_runtime.reset()
+	_ember_deaths.clear()
 	flask_runtime.clear_effects()
 	leech_runtime.clear()
 	alive = false
@@ -1542,8 +1560,97 @@ func _assert_burn_result(result:Dictionary)->void:
 	assert(result.ok,"Validated burning timeline: "+str(result.reason))
 
 
+func _ember_event_time(at:float,event:Dictionary)->float:
+	var latest:float=at
+	for status:Dictionary in burn_runtime.statuses():
+		if status.target_kind=="monster":latest=maxf(latest,float(status.last_time))
+	if latest>at:
+		# Same tie contract as the projectile scheduler, relative to this tick.
+		assert(_burn_step_active and event.has("time") and latest<=elapsed and is_equal_approx(float(event.time),latest-_burn_step_start),"Ember events cannot reverse time outside an existing projectile tie")
+		return latest
+	return at
+
+
+## Only the new mechanism needs a shared monster burn clock. Ordinary ignite
+## keeps its historical per-target path byte for byte when no ember is active.
+func _advance_proliferating_burns(to_time:float)->void:
+	if _ember_advancing:return
+	_ember_advancing=true
+	var iterations:int=0
+	while true:
+		iterations+=1
+		assert(iterations<=BurnRuntime.MAX_TARGETS+1,"One burn-death boundary per living target")
+		var targets:Dictionary={}
+		for enemy:Dictionary in enemies:targets[int(enemy.id)]=enemy
+		var states:Array[Dictionary]=[]
+		var death_times:Dictionary={}
+		var cut:float=to_time
+		for status:Dictionary in burn_runtime.statuses():
+			if status.target_kind!="monster":continue
+			var target:Dictionary=targets.get(int(status.target_id),{})
+			if target.is_empty() or float(target.health)<=0.0:
+				burn_runtime.remove("monster",int(status.target_id));continue
+			assert(float(status.last_time)<=to_time,"Monster burn timeline cannot move backwards")
+			states.append(status)
+			var expiry:float=float(status.provenance.get("ember_expiry",float(status.last_time)+float(status.remaining)))
+			var end:float=minf(to_time,expiry)
+			if end<=float(status.last_time):continue
+			var rate:Dictionary=Defense.incoming_burn(float(status.raw_dps),target.get("resistances",{}).get("fire",0.0),0.0,1.0,"monster")
+			assert(rate.ok,"Validated burn defense")
+			if float(rate.damage_total)<=0.0:continue
+			var death_at:float=float(status.last_time)+(float(target.get("shield",0.0))+float(target.health))/float(rate.damage_total)
+			if death_at<=float(status.last_time):
+				# A positive lifetime smaller than one clock ULP still needs the
+				# next representable instant; never spin at a zero-width boundary.
+				var bits:=PackedByteArray();bits.resize(8);bits.encode_double(0,float(status.last_time))
+				bits.encode_u64(0,bits.decode_u64(0)+1);death_at=bits.decode_double(0)
+			if death_at<=end:
+				death_times[int(status.target_id)]=death_at
+				cut=minf(cut,death_at)
+		if states.is_empty():break
+		var segments:Array[Dictionary]=[]
+		var sources:Dictionary={}
+		var exact:Dictionary={}
+		for status:Dictionary in states:
+			# All currently burning actors reach the same causal boundary before
+			# any death can spread to them or select them as still alive.
+			if float(status.last_time)>cut:continue
+			var advanced:Dictionary=burn_runtime.advance_target("monster",int(status.target_id),cut)
+			_assert_burn_result(advanced)
+			segments.append_array(advanced.segments)
+			sources[int(status.target_id)]=status
+			if death_times.get(int(status.target_id),-1.0)==cut:exact[int(status.target_id)]=true
+		_ember_defer_deaths=true
+		_settle_burn_segments(segments,targets,sources,exact)
+		_ember_defer_deaths=false
+		_flush_ember_deaths()
+		if cut>=to_time:break
+	_ember_advancing=false
+
+
+func _flush_ember_deaths()->void:
+	if _ember_flushing or _ember_defer_deaths or _ember_deaths.is_empty():return
+	_ember_flushing=true
+	while not _ember_deaths.is_empty():
+		_ember_deaths.sort_custom(func(a:Dictionary,b:Dictionary)->bool:return int(a.id)<int(b.id) if float(a.at)==float(b.at) else float(a.at)<float(b.at))
+		var event:Dictionary=_ember_deaths.pop_front()
+		var transfer:Dictionary=EmberRules.transfer(event.status,event.at)
+		assert(transfer.ok,"Validated ember death lineage")
+		if transfer.burn.is_empty():continue
+		var selection:Dictionary=EmberRules.select_targets(event.origin,event.id,enemies,_terrain_visible)
+		assert(selection.ok,"Validated live ember targets")
+		for target_id:int in selection.target_ids:
+			var attached:Dictionary=burn_runtime.apply("monster",target_id,0,transfer.burn.raw_dps,transfer.burn.duration,event.at,transfer.burn.provenance)
+			_assert_burn_result(attached)
+			assert(attached.segments.is_empty(),"Recipients must already be at the transfer time")
+	_ember_flushing=false
+
+
 func _advance_monster_burn(enemy:Dictionary,to_time:float)->void:
 	if burn_runtime.is_empty():return
+	if burn_runtime.has_ember_states():
+		_advance_proliferating_burns(to_time)
+		return
 	var result:Dictionary=burn_runtime.advance_target("monster",int(enemy.id),to_time)
 	_assert_burn_result(result)
 	_settle_burn_segments(result.segments,{int(enemy.id):enemy})
@@ -1551,6 +1658,10 @@ func _advance_monster_burn(enemy:Dictionary,to_time:float)->void:
 
 func _advance_monster_burns(to_time:float)->void:
 	if burn_runtime.is_empty():return
+	if burn_runtime.has_ember_states():
+		_advance_proliferating_burns(to_time)
+		_flush_monster_spawns()
+		return
 	var targets:Dictionary={}
 	for enemy:Dictionary in enemies:targets[int(enemy.id)]=enemy
 	for status:Dictionary in burn_runtime.statuses():
@@ -1566,7 +1677,7 @@ func _advance_player_burn(to_time:float)->void:
 	_assert_burn_result(result);_settle_burn_segments(result.segments)
 
 
-func _settle_burn_segments(segments:Array,targets:Dictionary={})->void:
+func _settle_burn_segments(segments:Array,targets:Dictionary={},death_states:Dictionary={},exact_deaths:Dictionary={})->void:
 	for segment:Dictionary in segments:
 		var raw:float=segment.raw_amount
 		var settlement:Dictionary={}
@@ -1590,9 +1701,19 @@ func _settle_burn_segments(segments:Array,targets:Dictionary={})->void:
 				burn_runtime.remove("monster",int(segment.target_id));continue
 			settlement=Defense.incoming_burn(raw,target.get("resistances",{}).get("fire",0.0),target.get("shield",0.0),target.health,"monster")
 			if not settlement.ok:continue
+			if exact_deaths.has(int(target.id)) and float(settlement.remaining_health)>0.0:
+				# The analytic event boundary can round just below the final ULP.
+				# Settle exactly the remaining resources at that proven boundary.
+				var fraction:float=1.0-float(settlement.details[0].resistance)
+				assert(float(settlement.remaining_health)<=0.000000001*maxf(1.0,float(target.health)+float(target.get("shield",0.0))),"Only floating point residuals may be clamped at a planned death")
+				raw=(float(target.get("shield",0.0))+float(target.health))/fraction
+				settlement=Defense.incoming_burn(raw,target.get("resistances",{}).get("fire",0.0),target.get("shield",0.0),target.health,"monster")
+				settlement.damage_total=float(target.get("shield",0.0))+float(target.health)
+				settlement.shield_spent=float(target.get("shield",0.0));settlement.health_lost=float(target.health)
+				settlement.remaining_shield=0.0;settlement.remaining_health=0.0;settlement.overkill=0.0
 			if _apply_enemy_resources(target,settlement):
 				_record_damage_feedback("monster", int(target.id), "burn", settlement, Vector2(target.pos))
-				_finish_enemy_death(target,false)
+				_finish_enemy_death(target,false,float(segment.to_time),death_states.get(int(target.id),{}))
 		if settlement.is_empty():continue
 		var record:Dictionary=segment.duplicate(true);record.settlement=settlement;record.effective_raw_amount=raw
 		burn_trace.append(record)

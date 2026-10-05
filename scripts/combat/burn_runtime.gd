@@ -8,7 +8,7 @@ extends RefCounted
 const Rules = preload("res://scripts/combat/burn_rules.gd")
 const MAX_TARGETS: int = 101
 const MAX_PROVENANCE_TEXT: int = 128
-const PROVENANCE_KEYS: Array[String] = ["skill_id", "cast_id", "projectile_id", "phase"]
+const PROVENANCE_KEYS: Array[String] = ["skill_id", "cast_id", "projectile_id", "phase", "ember_generation", "ember_expiry"]
 var _states: Dictionary = {}
 
 
@@ -24,6 +24,12 @@ func apply(kind: Variant, id: Variant, source_id: Variant, raw_dps: Variant,
 	var start: float = float(at)
 	var lifetime: float = float(duration)
 	var expires: float = start + lifetime
+	if provenance.has("ember_expiry") and float(provenance.ember_expiry) != expires:
+		# Adding a remaining duration can round one ULP away from its original
+		# absolute deadline. The declared deadline is authoritative for embers.
+		if absf(float(provenance.ember_expiry) - expires) > 0.000000001:
+			return _application_failure("Ember duration must preserve its deadline")
+		expires = float(provenance.ember_expiry)
 	if not is_finite(expires) or expires <= start:
 		return _application_failure("Burn expiry is not representable at this timestamp")
 	var key: String = _key(kind, id)
@@ -103,6 +109,17 @@ func is_empty() -> bool:
 	return _states.is_empty()
 
 
+func status_for(kind: Variant, id: Variant) -> Dictionary:
+	if not _actor_error(kind, id).is_empty(): return {}
+	return _states.get(_key(kind, id), {}).duplicate(true)
+
+
+func has_ember_states() -> bool:
+	for state: Dictionary in _states.values():
+		if state.provenance.has("ember_generation"): return true
+	return false
+
+
 func statuses() -> Array[Dictionary]:
 	var result: Array[Dictionary] = []
 	for state: Dictionary in _states.values(): result.append(state.duplicate(true))
@@ -122,7 +139,7 @@ static func _plan_advance(state: Dictionary, to_time: float) -> Dictionary:
 	if to_time < last: return _failure("Burn time cannot move backwards for an active target")
 	# Subtract from the absolute expiry, rather than repeatedly subtracting frame
 	# widths from remaining, so common split intervals do not drift past expiry.
-	var expires: float = last + float(state.remaining)
+	var expires: float = float(state.provenance.get("ember_expiry", last + float(state.remaining)))
 	var end: float = minf(to_time, expires)
 	var width: float = end - last
 	var next: Dictionary = state.duplicate(true)
@@ -165,8 +182,13 @@ static func _provenance_error(value: Variant) -> String:
 			return "Unknown or non-String burn provenance field"
 		if key in ["cast_id", "projectile_id"]:
 			if not _source_id_valid(value[key]): return "Burn provenance IDs must be nonnegative integers"
+		elif key == "ember_generation":
+			if typeof(value[key]) != TYPE_INT or value[key] not in [0, 1]: return "Ember generation must be zero or one"
+		elif key == "ember_expiry":
+			if not Rules.positive_number(value[key]): return "Ember expiry must be finite and positive"
 		elif typeof(value[key]) != TYPE_STRING or value[key].length() > MAX_PROVENANCE_TEXT:
 			return "Burn provenance text must be a String of at most 128 characters"
+	if value.has("ember_generation") != value.has("ember_expiry"): return "Ember provenance requires generation and expiry"
 	return ""
 
 

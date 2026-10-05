@@ -1,0 +1,37 @@
+{
+  "checks": {
+    "old_64_rendered_images_and_manifest_byte_identical": true,
+    "old_ignite_png_byte_identical": true,
+    "old_burning_catalog_identical": true,
+    "old_burning_article_identical": true,
+    "original_ignite_png_matches_game_asset": true,
+    "original_ember_png_matches_game_asset": true,
+    "all_tested_sources_stable_during_checks": true,
+    "version_is_0.47.0": true
+  },
+  "outputs": {
+    "docs/reference/catalog.json": {
+      "bytes": 9808451,
+      "sha256": "a6f05bd83a915121ef46def3f6eae61ac19bc4b4227839f944e21edada8747f2"
+    },
+    "docs/reference/index.html": {
+      "bytes": 9639333,
+      "sha256": "ff5a2e02a003e11469e7bb4a4e897dd6f6ce263fdb48024a22b965266d597cf2"
+    },
+    "docs/reference/originals/ignite.png": {
+      "bytes": 823940,
+      "sha256": "7be32c4ceb7e701d60362109a2336885f79cfdd77ca322eaf290c454d4a17fbf"
+    },
+    "docs/reference/originals/ember_proliferation.png": {
+      "bytes": 761406,
+      "sha256": "ef4de82eaada6cbc74200bba9d1466aee441d25b46d40fc348ea544a6b76cc84"
+    }
+  },
+  "counts": {
+    "supports": 18,
+    "rendered_art": 64,
+    "supplementary_original_pngs": 2,
+    "local_images": 66
+  },
+  "scope": "One runtime catalog export, one HTML build, one reference_catalog_test.py execution; no art regeneration or historical full-suite execution."
+}
