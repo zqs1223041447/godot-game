@@ -119,6 +119,8 @@ static func details(cast: Dictionary) -> String:
 	lines.append_array(leech_lines(cast))
 	lines.append_array(burn_lines(cast))
 	lines.append_array(shock_lines(cast))
+	if cast.get("recipe", {}).get("delivery", "") == "melee" and cast.get("skill_id", "") == "basic":
+		lines.append("普通近战攻击：距离 %.0f · 最多 %d 个目标；不发射投射物。" % [float(cast.recipe.radius), int(cast.recipe.max_targets)])
 	if cast.snapshot.has("accuracy"):
 		lines.append("上方是成功命中的伤害，未把命中率乘入；攻击命中值 %.0f，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。" % float(cast.snapshot.accuracy))
 	if cast.get("recipe", {}).has("_projectile_support_ids"):

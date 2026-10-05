@@ -209,6 +209,7 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 static func compile_basic(snapshot:Dictionary)->Dictionary:
 	var reason:=_snapshot_error(snapshot)
 	if not reason.is_empty():return _failure(reason)
+	if Recipes.is_basic_melee_snapshot(snapshot):return _compile_basic_melee(snapshot)
 	var spatial:=Spatial.apply("basic",{"speed":640.0},snapshot,640.0)
 	if not spatial.error.is_empty():return _failure(spatial.error)
 	var frozen:Dictionary=spatial.snapshot
@@ -226,6 +227,27 @@ static func compile_basic(snapshot:Dictionary)->Dictionary:
 	var result:Dictionary={"ok":true,"error":"","skill_id":"basic","recipe":spatial.recipe,"snapshot":frozen,"packets":frozen.compiled_packets.duplicate(true)}
 	if not critical.critical.is_empty():result.critical=critical.critical.duplicate(true)
 	if not leech.leech.is_empty():result.leech=leech.leech.duplicate(true)
+	return result
+
+
+## This delivery has fixed reach, no projectile/area scaling and no secondary.
+## Input validation still runs in compile_basic before selecting the branch.
+static func _compile_basic_melee(snapshot: Dictionary) -> Dictionary:
+	var frozen: Dictionary = snapshot.duplicate(true)
+	var packet: Dictionary = Recipes.event_packet(frozen, "basic", "direct")
+	if packet.is_empty():return _failure("普通近战攻击伤害组装无效")
+	var critical: Dictionary = Critical.compile(frozen, packet.tags, false)
+	if not critical.ok:return _failure(critical.error)
+	if not critical.critical.is_empty():frozen.critical = critical.critical.duplicate(true)
+	var leech: Dictionary = Leech.compile(frozen, packet.tags)
+	if not leech.ok:return _failure(leech.error)
+	if not leech.leech.is_empty():frozen.leech = leech.leech.duplicate(true)
+	frozen.compiled_skill_id = "basic"
+	frozen.compiled_packets = {"direct": packet.duplicate(true)}
+	var result: Dictionary = {"ok": true, "error": "", "skill_id": "basic", "recipe": Recipes.BASIC_MELEE.duplicate(true),
+		"snapshot": frozen, "packets": frozen.compiled_packets.duplicate(true)}
+	if not critical.critical.is_empty():result.critical = critical.critical.duplicate(true)
+	if not leech.leech.is_empty():result.leech = leech.leech.duplicate(true)
 	return result
 
 

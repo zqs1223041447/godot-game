@@ -5,7 +5,7 @@ extends RefCounted
 
 const BASES: Dictionary = {
 	"forgeblade": {"name": "锻纹短刃", "slot": "weapon", "size": Vector2i(1, 3),
-		"description": "本武器物理单独结算，仅增强裂刃斩直接命中。详情列出基底、本地点数与本地提高。", "stats": {},
+		"description": "装备后普通攻击变为单目标近战挥击；本武器物理增强普通近战攻击与裂刃斩。", "stats": {},
 		"stage": "weapon_local", "scope": "equipped_weapon", "balance_origin": "original"},
 }
 const POOL_PROFILE: Dictionary = {

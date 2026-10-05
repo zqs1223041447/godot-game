@@ -9,6 +9,8 @@ const Critical=preload("res://scripts/combat/critical_strike_rules.gd")
 const Leech=preload("res://scripts/combat/leech_rules.gd")
 const ResourceCost=preload("res://scripts/combat/source_resource_rules.gd")
 const Spatial = preload("res://scripts/combat/source_spatial_rules.gd")
+const Weapon = preload("res://scripts/items/weapon_local_rules.gd")
+const BASIC_MELEE: Dictionary = {"delivery": "melee", "radius": 60.0, "half_angle": PI / 4.0, "max_targets": 1}
 const TORNADO: Dictionary = {
 	"parent_count": 3, "child_count": 3, "spread": 0.16,
 	"parent": {"speed": 420.0, "range": 150.0, "lifetime": 0.9, "coefficient": 1.0, "added_effectiveness": 1.0,
@@ -103,6 +105,8 @@ static func _event_recipe(snapshot_value: Dictionary, skill_id: String, role: St
 	if index != 0 and skill_id != "chain":
 		return {}
 	if skill_id == "basic":
+		if role == "direct" and is_basic_melee_snapshot(snapshot_value):
+			return _hit_recipe(skill_id, "direct", {"physical": 1.0}, 1.0, 1.0, ["hit", "attack", "melee"])
 		return _hit_recipe(skill_id, "projectile", {"physical": 1.0}, 1.0, 1.0, ["hit", "projectile", "attack"]) if role == "projectile" else {}
 	if skill_id == "tornado":
 		var tornado: Variant = snapshot_value.get("tornado_recipe", TORNADO)
@@ -133,6 +137,14 @@ static func _event_recipe(snapshot_value: Dictionary, skill_id: String, role: St
 	return {}
 
 
+## Only a validated equipped blade profile selects the new ordinary melee cast.
+## Frozen packets use their own weapon trace, so a later equipment swap cannot
+## reinterpret either this direct hit or an older in-flight basic projectile.
+static func is_basic_melee_snapshot(snapshot_value: Dictionary) -> bool:
+	var profile: Variant = snapshot_value.get("weapon_profile")
+	return profile is Dictionary and profile.get("base_id") == "forgeblade" and Weapon.profile_error(profile).is_empty()
+
+
 static func chain_hit_recipe(spec: Dictionary, index: int) -> Dictionary:
 	if not _valid_chain_recipe(spec) or index < 0 or index >= int(spec.bounce_count): return {}
 	return _hit_recipe("chain", "bounce", {spec.damage_type: 1.0},
@@ -161,7 +173,7 @@ static func _hit_recipe(skill_id: String, role: String, distribution: Dictionary
 static func _frozen_packet(snapshot_value: Dictionary, skill_id: String, role: String, index: int) -> Dictionary:
 	if snapshot_value.get("compiled_skill_id") != skill_id or not snapshot_value.get("compiled_packets") is Dictionary:
 		return {}
-	var allowed: Dictionary = {"basic": ["projectile", "secondary"], "tornado": ["parent", "child", "secondary"], "bolt": ["projectile", "secondary"],
+	var allowed: Dictionary = {"basic": ["projectile", "secondary", "direct"], "tornado": ["parent", "child", "secondary"], "bolt": ["projectile", "secondary"],
 		"frost": ["projectile", "secondary"], "shade_bolt": ["projectile", "secondary"], "cleave": ["direct"], "nova": ["direct"], "meteor": ["direct"], "chain": ["direct", "bounce"]}
 	if not allowed.has(skill_id) or not allowed[skill_id].has(role):
 		return {}
@@ -180,4 +192,12 @@ static func _frozen_packet(snapshot_value: Dictionary, skill_id: String, role: S
 		packet = packets.get(role)
 	if not BaseCompiler.packet_error(packet).is_empty() or packet.skill_id != skill_id or packet.role != expected_role:
 		return {}
+	if skill_id == "basic" and role == "direct":
+		# The new role is admitted only with its own validated blade provenance.
+		# A numerically valid bow/no-weapon packet cannot be relabeled as melee.
+		var trace: Dictionary = packet.assembly.get("weapon", {})
+		if trace.is_empty() or trace.profile.base_id != "forgeblade" \
+			or not Weapon.consumes_hit("forgeblade", skill_id, role, packet.tags) \
+			or float(packet.assembly.base_coefficient) != 1.0 or float(packet.assembly.added_effectiveness) != 1.0:
+			return {}
 	return packet.duplicate(true)

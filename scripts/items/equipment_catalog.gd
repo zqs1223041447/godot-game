@@ -430,7 +430,7 @@ static func definition(instance: Dictionary) -> Dictionary:
 			return {}
 		result["weapon_profile"] = profile
 		result["weapon_damage"] = resolved.components.duplicate(true)
-		var consumer_summary: String = "仅裂刃斩直接命中" if ForgebladeProfile.BASES.has(instance.base_id) else "仅普攻与龙卷箭体"
+		var consumer_summary: String = "普通近战攻击与裂刃斩" if ForgebladeProfile.BASES.has(instance.base_id) else "仅普攻与龙卷箭体"
 		result["weapon_damage_summary"] = "本武器物理：(%s + %s) × (1 + %s%%) = %s；%s" % [str(profile.base.physical), str(profile.flat.physical), str(snappedf(float(profile.increased.physical) * 100.0, 0.01)), str(snappedf(float(resolved.components.physical), 0.01)), consumer_summary]
 	return result
 

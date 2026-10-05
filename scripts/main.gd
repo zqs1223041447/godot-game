@@ -465,7 +465,7 @@ func use_flask(slot_id: Variant) -> Dictionary:
 
 func toggle_auto_fire() -> void:
 	auto_fire = not auto_fire
-	hud.notify("自动攻击：开启" if auto_fire else "自动攻击：关闭 · 按住鼠标左键射击")
+	hud.notify("自动攻击：开启" if auto_fire else "自动攻击：关闭 · 按住鼠标左键攻击")
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
@@ -1028,6 +1028,11 @@ func _update_auto_attack() -> void:
 	if attack_timer > 0.0:
 		return
 	var manual: bool = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
+	if not manual and not auto_fire: return
+	var delivery: Dictionary = state.get_basic_attack_profile() if state.has_method("get_basic_attack_profile") else {}
+	if delivery.get("delivery", "") == "melee":
+		_update_basic_melee(delivery, manual)
+		return
 	if not manual and (not auto_fire or _nearest_enemy(player_pos).is_empty()):
 		return
 	player_facing = _aim_direction()
@@ -1036,6 +1041,49 @@ func _update_auto_attack() -> void:
 		return
 	if _shoot(player_pos, player_facing, basic.packets.projectile, Color("75e5df"), 0, 0, float(basic.recipe.speed), {"snapshot": basic.snapshot}):
 		attack_timer = 1.0 / maxf(0.2, float(_stats.attack_speed))
+
+
+## Automatic melee turns toward the nearest body in actual reach. Manual
+## swings keep mouse-facing and select only one body in that sector. Equal
+## distances preserve the existing enemies-array order, as _nearest_enemy does.
+func _nearest_basic_melee_target(profile: Dictionary, facing: Vector2, automatic: bool) -> Dictionary:
+	var best: Dictionary = {}
+	var distance_sq: float = INF
+	for enemy: Dictionary in enemies:
+		if float(enemy.health) <= 0.0 or float(enemy.spawn) > 0.0: continue
+		var offset: Vector2 = Vector2(enemy.pos) - player_pos
+		var direction: Vector2 = facing
+		if automatic and not offset.is_zero_approx(): direction = offset.normalized()
+		if direction.is_zero_approx(): direction = Vector2.RIGHT
+		if not AreaRules.contains_sector_target(player_pos, direction, Vector2(enemy.pos), float(profile.radius), float(profile.half_angle), float(enemy.radius)): continue
+		if not _terrain_visible(player_pos, enemy.pos): continue
+		var candidate: float = offset.length_squared()
+		if candidate < distance_sq:
+			distance_sq = candidate
+			best = enemy
+	return best
+
+
+func _update_basic_melee(profile: Dictionary, manual: bool) -> void:
+	if not alive or not _ready_complete or _world_mode in ["town", "map_complete"] or hud.is_blocking(): return
+	var direction: Vector2 = _aim_direction() if manual else player_facing
+	if direction.is_zero_approx(): direction = Vector2.RIGHT
+	var target: Dictionary = _nearest_basic_melee_target(profile, direction, not manual)
+	if not manual and target.is_empty(): return
+	if not manual:
+		var offset: Vector2 = Vector2(target.pos) - player_pos
+		if not offset.is_zero_approx(): direction = offset.normalized()
+	var basic: Dictionary = state.get_basic_cast()
+	if not basic.get("ok", false) or basic.recipe.get("delivery", "") != "melee": return
+	var critical: Dictionary = critical_runtime.freeze(basic.snapshot)
+	if not critical.ok: return
+	var cast_id: int = projectile_runtime.new_cast()
+	player_facing = direction
+	# Freeze the current attack interval before a kill can grant level-up stats.
+	attack_timer = 1.0 / maxf(0.2, float(_stats.attack_speed))
+	if not target.is_empty():
+		_apply_damage_packet(target, basic.packets.direct, critical.snapshot, Color("d3c3a2"), 0.0, {"cast_id":cast_id})
+	visual_cues.emit_cue("cleave", player_pos, {"radius":float(basic.recipe.radius), "half_angle":float(basic.recipe.half_angle), "direction":direction, "color":Color("d3c3a2"), "skill":"basic"})
 
 
 func _shoot(origin: Vector2, direction: Vector2, packet: Dictionary, color: Color,

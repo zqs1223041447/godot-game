@@ -27,6 +27,7 @@ var _view_epoch := -1
 var _view_token := PackedByteArray()
 var _stats_build_count := 0
 var _cast_compile_count := 0
+var _basic_attack_profile_cache: Dictionary = {}
 
 
 # Read-only compatibility projections for the existing arena renderer and HUD.
@@ -96,6 +97,22 @@ func get_basic_cast() -> Dictionary:
 	var result:Dictionary=Compiler.compile_basic(get_combat_snapshot())
 	if result.ok:_cast_cache["$basic"]=result.duplicate(true)
 	return result
+
+
+## Cheap admission metadata only. Complete casting snapshots remain detached
+## and are compiled/read only after an attack can actually begin.
+func get_basic_attack_profile() -> Dictionary:
+	_ensure_cache()
+	if not _basic_attack_profile_cache.is_empty(): return _basic_attack_profile_cache.duplicate()
+	_basic_attack_profile_cache = {"delivery":"projectile"}
+	for uid: String in _current.locations:
+		var location: Dictionary = _current.locations[uid]
+		if location.kind != "equipment" or location.slot_id != "weapon": continue
+		var item: Dictionary = _current.items[uid]
+		if item.kind == "equipment" and item.payload.get("base_id", "") == "forgeblade":
+			_basic_attack_profile_cache = Compiler.Recipes.BASIC_MELEE.duplicate()
+		break
+	return _basic_attack_profile_cache.duplicate()
 
 
 func get_combat_snapshot() -> Dictionary:
@@ -278,6 +295,7 @@ func _ensure_cache() -> void:
 	_stats_cache.clear()
 	_snapshot_cache.clear()
 	_cast_cache.clear()
+	_basic_attack_profile_cache.clear()
 
 
 func cache_diagnostics() -> Dictionary:

@@ -24,13 +24,16 @@ static func support_reason(stat: String, stage: String = STAGE) -> String:
 
 ## Both assembly and frozen-packet admission use this base-specific boundary.
 ## Keep the bow's original tag semantics; the blade admits only the authored
-## direct cleave event, never a projectile, spell or independent secondary.
+## basic/cleave direct events, never a projectile, spell or independent secondary.
 static func consumes_hit(base_id: String, skill_id: String, role: String, tags: Variant) -> bool:
 	if base_id == BASE_ID:
 		return tags is Array and tags.has("hit") and tags.has("attack") and tags.has("projectile") \
 			and not tags.has("spell") and not tags.has("secondary") and not tags.has("explosion") \
 			and ((skill_id == "basic" and role == "projectile") or (skill_id == "tornado" and role in ["parent", "child"]))
 	if base_id == "forgeblade":
+		if skill_id == "basic":
+			return role == "direct" and tags is Array and tags.size() == 3 \
+				and tags.has("hit") and tags.has("attack") and tags.has("melee")
 		return skill_id == "cleave" and role == "direct" and tags is Array and tags.size() == 4 \
 			and tags.has("hit") and tags.has("attack") and tags.has("melee") and tags.has("area")
 	return false
@@ -44,9 +47,9 @@ static func metadata() -> Dictionary:
 			"https://www.pathofexile.com/forum/view-thread/3165009"],
 		"balance_version": "original-local-weapon-v1", "formula": "(base + flat) * (1 + increased)",
 		"hit_formula": "B * original_distribution * base_coefficient + W * base_coefficient + external_added * added_effectiveness",
-		"consumers": {"basic": ["projectile"], "tornado": ["parent", "child"], "cleave": ["direct"]},
-		"consumers_by_base": {"ashwood_bow": {"basic": ["projectile"], "tornado": ["parent", "child"]}, "forgeblade": {"cleave": ["direct"]}},
-		"description": "局部点伤与局部物理提高先结算本武器；长弓仅加入普通攻击与龙卷箭体，锻纹短刃仅加入裂刃斩直接命中，均按技能基础倍率加入物理点数。保留原有角色基伤，不是完整武器基伤替换。",
+		"consumers": {"basic": ["projectile", "direct"], "tornado": ["parent", "child"], "cleave": ["direct"]},
+		"consumers_by_base": {"ashwood_bow": {"basic": ["projectile"], "tornado": ["parent", "child"]}, "forgeblade": {"basic": ["direct"], "cleave": ["direct"]}},
+		"description": "局部点伤与局部物理提高先结算本武器；长弓仅加入普通攻击与龙卷箭体，锻纹短刃仅加入普通近战攻击与裂刃斩直接命中，均按技能基础倍率加入物理点数。保留原有角色基伤，不是完整武器基伤替换。",
 		"unsupported": ["conversion", "quality", "local_attack_speed", "local_critical_strike", "damage_ranges", "spell", "secondary"]}
 
 
