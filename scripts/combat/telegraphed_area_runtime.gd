@@ -20,9 +20,13 @@ func start(enemy: Variant, target_center: Vector2, overrides: Variant = {}, visu
 		return _failure("Source must be alive and outside birth protection")
 	if not visual_pattern is String:return _failure("Visual pattern must be a known string")
 	var ember_burn:bool=enemy.get("template_id","")=="ember_guard" and not enemy.has("map_boss_attack_id")
+	var storm_shock:bool=enemy.get("template_id","")=="storm_skitter" and not enemy.has("map_boss_attack_id")
 	if ember_burn and visual_pattern.is_empty():visual_pattern="ember_burn"
+	if storm_shock and visual_pattern.is_empty():visual_pattern="storm_shock"
 	if visual_pattern=="ember_burn":
 		if not ember_burn:return _failure("Burn pattern must match the ember guard")
+	elif visual_pattern=="storm_shock":
+		if not storm_shock:return _failure("Shock pattern must match the storm skitter")
 	elif not visual_pattern.is_empty() and (not BossProfiles.enemy_reason(enemy,visual_pattern).is_empty() or enemy.get("map_boss_attack_id")!=visual_pattern):return _failure("Visual pattern must match the authoritative map boss")
 	var source_id: int = int(enemy.id)
 	if _states.has(source_id):
@@ -61,6 +65,7 @@ func start(enemy: Variant, target_center: Vector2, overrides: Variant = {}, visu
 		"packet": Damage.packet(validated.components, ["attack", "area", "hit"], Profiles.PROFILE_ID),
 	}
 	if not burn_policy.is_empty():attack.burn_policy=burn_policy
+	if storm_shock:attack.shock_policy=Monsters.Shock.ENEMY_POLICY.duplicate(true)
 	if not visual_pattern.is_empty():attack.visual_pattern=visual_pattern
 	if visual_pattern=="sunwell_echo":
 		var echo:Dictionary=BossProfiles.definition(visual_pattern)
@@ -109,7 +114,8 @@ func advance(delta: float, live_enemies: Variant, with_timing: bool = false) -> 
 				"profile": attack.profile.duplicate(true), "packet": attack.packet.duplicate(true),
 			}})
 			if attack.has("burn_policy"):pending.back().event.burn_policy=attack.burn_policy.duplicate(true)
-			if with_timing or attack.has("burn_policy"):pending.back().event.step_time=maxf(0.0,windup-previous)
+			if attack.has("shock_policy"):pending.back().event.shock_policy=attack.shock_policy.duplicate(true)
+			if with_timing or attack.has("burn_policy") or attack.has("shock_policy"):pending.back().event.step_time=maxf(0.0,windup-previous)
 			if attack.has("visual_pattern"):pending.back().event.visual_pattern=attack.visual_pattern
 		if float(attack.elapsed) + TIME_EPSILON >= duration:
 			_states.erase(source_id)

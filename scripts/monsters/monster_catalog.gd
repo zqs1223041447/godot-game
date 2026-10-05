@@ -4,6 +4,7 @@ extends RefCounted
 const Registry = preload("res://scripts/mechanics/mechanic_registry.gd")
 const Defense = preload("res://scripts/mechanics/defense_rules.gd")
 const Burn=preload("res://scripts/combat/burn_rules.gd")
+const Shock=preload("res://scripts/combat/shock_rules.gd")
 const TelegraphProfiles = preload("res://scripts/monsters/telegraph_profiles.gd")
 const MapBossAttacks=preload("res://scripts/monsters/map_boss_profiles.gd")
 const SCHEMA_VERSION: int = 1
@@ -118,6 +119,8 @@ static func telegraph_policy(enemy: Dictionary) -> Dictionary:
 		"minimum_attack_speed": 0.2, "base_attack_speed": BASE_ATTACK_SPEED}
 	if id=="ember_guard" and map_rule.is_empty():
 		policy.burn_policy=Burn.ENEMY_POLICY.duplicate(true);policy.visual_pattern="ember_burn";policy.name="余烬锁点重击"
+	if id=="storm_skitter" and map_rule.is_empty():
+		policy.shock_policy=Shock.ENEMY_POLICY.duplicate(true);policy.visual_pattern="storm_shock";policy.name="雷纹锁点震击"
 	if not map_rule.is_empty():
 		policy.target_rule=map_rule.target_rule;policy.visual_pattern=map_rule.id;policy.name=map_rule.name
 	return policy

@@ -70,7 +70,7 @@ static func defense_profile(stats: Variant, actor: String = "player", stage: Str
 
 
 static func incoming_hit(components: Variant, defense_stats: Variant, shield: Variant,
-		health: Variant, actor: String = "player") -> Dictionary:
+		health: Variant, actor: String = "player", hit_taken_increased: Variant = 0.0) -> Dictionary:
 	var checked: Dictionary = validate_components(components)
 	if not checked.ok:
 		return checked
@@ -82,6 +82,7 @@ static func incoming_hit(components: Variant, defense_stats: Variant, shield: Va
 		return profile
 	var packet: Dictionary = Damage.packet(checked.components, ["hit"], "incoming_hit")
 	var resolved: Dictionary = Damage.resolve(packet, [], profile.effective_resistances)
+	if not _finite_number(hit_taken_increased) or float(hit_taken_increased) != 0.0: resolved = apply_hit_damage_taken(resolved, hit_taken_increased)
 	var result: Dictionary = settle_resolved(resolved, shield, health)
 	if not result.ok:
 		return result
@@ -122,13 +123,14 @@ static func apply_armour(resolved: Dictionary, armour: float) -> Dictionary:
 	return result
 
 
-static func incoming_source_hit(components: Variant,stats: Dictionary,shield: Variant,health: Variant,actor: String="player")->Dictionary:
+static func incoming_source_hit(components: Variant,stats: Dictionary,shield: Variant,health: Variant,actor: String="player",hit_taken_increased:Variant=0.0)->Dictionary:
 	var checked := validate_components(components)
 	if not checked.ok: return checked
 	var profile := source_profile(stats,actor)
 	if not profile.ok: return profile
 	var packet := Damage.packet(checked.components,["hit"],"incoming_hit")
 	var resolved := apply_armour(Damage.resolve(packet,[],profile.effective_resistances),profile.armour)
+	if not _finite_number(hit_taken_increased) or float(hit_taken_increased) != 0.0: resolved = apply_hit_damage_taken(resolved,hit_taken_increased)
 	var result := settle_resolved(resolved,shield,health)
 	if result.ok:
 		result.actor=actor
@@ -136,6 +138,32 @@ static func incoming_source_hit(components: Variant,stats: Dictionary,shield: Va
 		result.raw_resistances=profile.raw_resistances
 		result.effective_resistances=profile.effective_resistances
 		result.armour=profile.armour
+	return result
+
+
+## Post-mitigation hit-only adapter, shared by both actors. Incoming resolved
+## packets are validated by the original settlement contract before copying.
+## This prevents scaling from hiding an inconsistent original total/detail.
+## Before-defense components remain unchanged so hit-derived DOT is not raised.
+static func apply_hit_damage_taken(resolved: Dictionary, increased: Variant) -> Dictionary:
+	if not _finite_number(increased) or float(increased)<0.0 or float(increased)>1.0:return {}
+	if resolved.size()!=3 or not resolved.has_all(["total","components","details"]) \
+		or not resolved.components is Dictionary or not resolved.details is Array:return {}
+	if not settle_resolved(resolved,0.0,0.0).ok:return {}
+	var result:Dictionary=resolved.duplicate(true)
+	if float(increased)==0.0:return result
+	var multiplier:float=1.0+float(increased)
+	var total:=0.0
+	for type:Variant in result.components:
+		if not type is String or not Damage.TYPES.has(type) or not _amount(result.components[type]):return {}
+		var amount:float=float(result.components[type])*multiplier
+		if not _amount(amount):return {}
+		result.components[type]=amount;total+=amount
+	if not _amount(total):return {}
+	for detail:Variant in result.details:
+		if not detail is Dictionary or not detail.get("type") is String or not result.components.has(detail.type):return {}
+		detail.final=result.components[detail.type]
+	result.total=total
 	return result
 
 

@@ -8,6 +8,7 @@ const Extension = preload("res://scripts/combat/projectile_support_rules.gd")
 const Area = preload("res://scripts/combat/area_support_rules.gd")
 const Critical=preload("res://scripts/combat/critical_strike_rules.gd")
 const Burn=preload("res://scripts/combat/burn_rules.gd")
+const Shock = preload("res://scripts/combat/shock_rules.gd")
 const Ember=preload("res://scripts/combat/ember_proliferation_support_rules.gd")
 const Proliferation=preload("res://scripts/combat/ember_proliferation_rules.gd")
 const Leech=preload("res://scripts/combat/leech_rules.gd")
@@ -181,6 +182,17 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 			profile.roles[role]={"fire_before_defense":fire,"dps":dps,"total":dps*float(profile.duration)}
 		profile.proliferation=Proliferation.POLICY.duplicate(true)
 		result.burn_profile=profile
+	if canonical.has("shock"):
+		compiled_snapshot.shock_policy = Shock.PLAYER_POLICY.duplicate(true)
+		var profile: Dictionary = Shock.PLAYER_POLICY.duplicate(true)
+		profile.enabled = true
+		profile.trigger = "positive_lightning_hit_after_settlement"
+		profile.affects_hits_only = true
+		profile.affects_dot = false
+		profile.applies_after_current_hit = true
+		profile.stacking = "refresh_equal"
+		profile.roles = ["projectile"] if skill_id == "bolt" else ["bounce"] if skill_id == "chain" else ["direct"]
+		result.shock_profile = profile
 	return result
 
 
@@ -261,7 +273,7 @@ static func _failure(error: String) -> Dictionary:
 static func _snapshot_error(snapshot: Dictionary) -> String:
 	# initial_count is reserved for compiled projectile snapshots, including empty supports.
 	# Reject re-entry instead of applying support more factors a second time.
-	if snapshot.has("initial_count") or snapshot.has("compiled_packets") or snapshot.has("compiled_skill_id") or snapshot.has("critical") or snapshot.has("critical_roll") or snapshot.has("leech") or snapshot.has("burn_policy") or snapshot.has("burn_proliferation"):
+	if snapshot.has("initial_count") or snapshot.has("compiled_packets") or snapshot.has("compiled_skill_id") or snapshot.has("critical") or snapshot.has("critical_roll") or snapshot.has("leech") or snapshot.has("burn_policy") or snapshot.has("burn_proliferation") or snapshot.has("shock_policy"):
 		return "施放快照已编译；必须从基础构筑快照重新编译"
 	var critical_error:String=Critical.error(snapshot)
 	if not critical_error.is_empty():return critical_error

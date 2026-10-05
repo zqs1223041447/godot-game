@@ -11,10 +11,10 @@ const DEFAULTS: Dictionary = {
 	"radius": 90.0, "damage_multiplier": 1.4,
 }
 # Restricted natural elemental attacks share the same scheduler and settlement.
-# Original prototype balance; no slow/freeze/shock status is granted.
+# Original prototype balance. Storm shock is explicitly attached by its catalog.
 const ELEMENTAL: Dictionary = {
 	"frost_guard": {"windup_seconds": 0.9, "recovery_seconds": 1.8, "radius": 90.0, "damage_multiplier": 0.8},
-	"storm_skitter": {"windup_seconds": 0.7, "recovery_seconds": 1.6, "radius": 65.0, "damage_multiplier": 1.6},
+	"storm_skitter": {"windup_seconds": 0.7, "recovery_seconds": 1.6, "radius": 65.0, "damage_multiplier": 1.4},
 }
 const LIMITS: Dictionary = {
 	"windup_seconds": {"minimum": 0.001, "maximum": 60.0},

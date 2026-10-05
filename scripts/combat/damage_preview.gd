@@ -86,6 +86,14 @@ static func burn_lines(cast: Dictionary) -> PackedStringArray:
 		lines.append("保留原燃烧强度和剩余时间；扩散所得燃烧不再传播。")
 	return lines
 
+static func shock_lines(cast: Dictionary) -> PackedStringArray:
+	var lines := PackedStringArray()
+	var profile: Dictionary = cast.get("shock_profile", {})
+	if not bool(cast.get("ok", false)) or not bool(profile.get("enabled", false)): return lines
+	lines.append("感电 %.1f 秒 · 后续命中承受伤害提高 %.0f%%" % [float(profile.duration), float(profile.hit_damage_taken_increased) * 100.0])
+	lines.append("闪电命中结算后施加；不追溯增强本次命中，不影响持续伤害。同强度刷新，不叠加。")
+	return lines
+
 static func assembly_line(packet: Dictionary) -> String:
 	var trace: Dictionary = packet.get("assembly", {})
 	if trace.is_empty():
@@ -104,6 +112,7 @@ static func details(cast: Dictionary) -> String:
 	lines.append_array(critical_lines(cast))
 	lines.append_array(leech_lines(cast))
 	lines.append_array(burn_lines(cast))
+	lines.append_array(shock_lines(cast))
 	if cast.snapshot.has("accuracy"):
 		lines.append("上方是成功命中的伤害，未把命中率乘入；攻击命中值 %.0f，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。" % float(cast.snapshot.accuracy))
 	if cast.get("recipe", {}).has("_projectile_support_ids"):

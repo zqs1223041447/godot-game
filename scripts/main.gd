@@ -34,6 +34,9 @@ const EmberRules=preload("res://scripts/combat/ember_proliferation_rules.gd")
 const EmberClock=preload("res://scripts/combat/ember_event_clock.gd")
 var _ember_projectile_clock:Dictionary={}
 var burn_runtime=BurnRuntime.new()
+const ShockRules=preload("res://scripts/combat/shock_rules.gd")
+const ShockRuntime=preload("res://scripts/combat/shock_runtime.gd")
+var shock_runtime=ShockRuntime.new()
 var burn_trace:Array[Dictionary]=[]
 var _ember_advancing:=false
 var _ember_defer_deaths:=false
@@ -378,6 +381,7 @@ func restart_run(camp_plan: Dictionary = {}) -> void:
 	_player_evasion_entropy = 50.0
 	attack_admission_trace.clear()
 	burn_runtime.reset();burn_trace.clear();_ember_deaths.clear()
+	shock_runtime.reset()
 	for id: String in Data.SKILLS:
 		cooldowns[id] = 0.0
 	spawn_timer = 1.8
@@ -957,7 +961,10 @@ func _advance_enemy_telegraphs(delta: float) -> void:
 		var inside: bool = TelegraphRuntime.overlaps(event, player_pos, PLAYER_RADIUS) and _terrain_visible(event.center,player_pos)
 		if sequence_batch:invulnerable=maxf(0.0,_burn_immunity_until-event_time)
 		_burn_incoming_time=event_time
-		var applied: bool = hit_player_components(event.packet.base, int(event.source_id),event.packet.tags) if inside else false
+		var hit_context:Dictionary={}
+		if event.has("shock_policy"):
+			hit_context={"shock_policy":event.shock_policy,"at":event_time,"cast_id":int(event.attack_id),"skill_id":"storm_shock","phase":"telegraph"}
+		var applied: bool = hit_player_components(event.packet.base, int(event.source_id),event.packet.tags,hit_context) if inside else false
 		_burn_incoming_time=-1.0
 		if sequence_batch:invulnerable=maxf(0.0,_burn_immunity_until-elapsed)
 		if applied and alive and event.has("burn_policy"):
@@ -1213,16 +1220,32 @@ func _update_projectiles(delta: float) -> void:
 	for enemy: Dictionary in enemies: _projectile_targets[int(enemy.id)] = enemy
 	var terrain_query: Callable = _geometry.sweep if _geometry.has_walls() else Callable()
 	var events: Array[Dictionary] = projectile_runtime.advance(projectiles, delta, enemies, player_pos, MAX_PROJECTILES, _projectile_contact_admitted, terrain_query)
+	var settled:bool=_settle_projectile_events(events)
+	assert(settled,"Projectile batch must fit the retained shock event window")
+
+
+func _settle_projectile_events(events:Array[Dictionary])->bool:
 	var ember_batch:bool=burn_runtime.has_ember_states()
-	if not ember_batch:
+	var shock_batch:bool=not shock_runtime.is_empty()
+	if not ember_batch or not shock_batch:
 		for event:Dictionary in events:
 			if event.get("snapshot",{}).has("burn_proliferation"):
-				ember_batch=true;break
+				ember_batch=true
+			if event.get("snapshot",{}).has("shock_policy"):shock_batch=true
+			if ember_batch and shock_batch:break
+	# Validate the complete original batch before the first hit, admission,
+	# critical roll, feedback, death or reward. Production ticks are 1/60 s;
+	# ordered larger batches remain valid if their raw tie rewind fits one
+	# shortest policy interval. No cumulative elapsed-time tolerance is used.
+	if shock_batch:
+		var start:float=_burn_step_start if _burn_step_active else elapsed
+		var reason:String=ShockRules.projectile_batch_error(events,start,elapsed,shock_runtime.read_floor())
+		if not reason.is_empty():return false
 	var offsets:Array=[]
 	if ember_batch:
 		var prepared:Dictionary=EmberClock.offsets(events)
 		assert(prepared.ok,"Validated original projectile event tie chains: "+str(prepared.reason))
-		if not prepared.ok:return
+		if not prepared.ok:return false
 		offsets=prepared.offsets
 	var event_index:int=0
 	for event: Dictionary in events:
@@ -1259,11 +1282,17 @@ func _update_projectiles(delta: float) -> void:
 			hud.notify("投射物容量不足，本次三子箭整组取消；未触发爆炸")
 	_ember_projectile_clock.clear()
 	_flush_monster_spawns()
+	return true
 
 
 func _apply_damage_packet(enemy: Dictionary, packet: Dictionary, snapshot: Dictionary, color: Color,
 		slow: float = 0.0, provenance: Dictionary = {}) -> void:
 	var burn_at:float=_burn_event_time(float(provenance.time)) if provenance.has("time") else elapsed
+	# Shock queries the raw event instant, never the later normalized burn clock.
+	# An approximate-sort tie cannot make an earlier hit use a future status.
+	var shock_at:float=burn_at
+	if (not shock_runtime.is_empty() or snapshot.has("shock_policy")) and shock_at<shock_runtime.read_floor():return
+	if snapshot.has("shock_policy") and not ShockRules.policy_error(snapshot.shock_policy).is_empty():return
 	var ember_hit:bool=snapshot.has("burn_proliferation") and packet.get("role","") in ["direct","parent","child"] and packet.skill_id in ["meteor","tornado"]
 	if burn_runtime.has_ember_states() or ember_hit:
 		burn_at=_ember_event_time(burn_at,provenance)
@@ -1281,6 +1310,8 @@ func _apply_damage_packet(enemy: Dictionary, packet: Dictionary, snapshot: Dicti
 	var critical:Dictionary=snapshot.get("critical_roll",{})
 	var result: Dictionary = Damage.resolve(packet, snapshot.get("modifiers", []), enemy.get("resistances", {}),float(critical.get("multiplier",1.0)))
 	result = Defense.apply_armour(result,float(enemy.get("armour",0.0)))
+	var shock_increase:float=_shock_hit_increase("monster",int(enemy.id),shock_at)
+	if shock_increase>0.0:result=Defense.apply_hit_damage_taken(result,shock_increase)
 	var settlement: Dictionary = Defense.settle_resolved(result, float(enemy.get("shield", 0.0)), float(enemy.health))
 	if not settlement.ok:
 		return
@@ -1292,6 +1323,7 @@ func _apply_damage_packet(enemy: Dictionary, packet: Dictionary, snapshot: Dicti
 		"projectile_id": provenance.get("projectile_id", 0), "cast_id": provenance.get("cast_id", 0),
 		"phase": provenance.get("phase", "direct"), "effect_id": provenance.get("effect_id", "")}
 	if not critical.is_empty():record.critical=critical.duplicate(true)
+	if shock_increase>0.0:record.shock={"hit_damage_taken_increased":shock_increase,"at":shock_at}
 	if snapshot.has("leech"):
 		var admitted: Dictionary = leech_runtime.admit(packet, snapshot, settlement,
 			{"health": health, "mana": mana}, {"health": float(_stats.max_health), "mana": float(_stats.max_mana)})
@@ -1312,6 +1344,10 @@ func _apply_damage_packet(enemy: Dictionary, packet: Dictionary, snapshot: Dicti
 				var attached:Dictionary=burn_runtime.apply("monster",int(enemy.id),0,burn.raw_dps,burn.duration,burn_at,burn_origin)
 				_assert_burn_result(attached)
 				_settle_burn_segments(attached.segments)
+	if float(enemy.health)>0.0 and snapshot.has("shock_policy") and packet.get("role","") in ["direct","projectile","bounce"] and packet.skill_id in ["bolt","nova","chain"] and packet.tags.has("hit"):
+		var origin:Dictionary={"skill_id":str(packet.skill_id),"cast_id":int(provenance.get("cast_id",0)),"projectile_id":int(provenance.get("projectile_id",0)),"phase":str(provenance.get("phase","direct"))}
+		var attached:Dictionary=_attach_shock("monster",int(enemy.id),0,shock_at,snapshot.shock_policy,settlement,origin)
+		if attached.get("applied",false):record.shock_applied={"at":shock_at,"duration":float(snapshot.shock_policy.duration)}
 
 
 func _projectile_contact_admitted(shot: Dictionary,target_id: int) -> bool:
@@ -1358,7 +1394,7 @@ func _damage_enemy(enemy: Dictionary, amount: float, color: Color, slow: float =
 	if float(enemy.health) <= 0.0 or amount <= 0.0 or not is_finite(amount):
 		return
 	# Compatibility helper receives damage already resolved by its caller.
-	var settlement: Dictionary = Defense.incoming_hit({"physical": amount}, {}, float(enemy.get("shield", 0.0)), float(enemy.health), "monster")
+	var settlement: Dictionary = Defense.incoming_hit({"physical": amount}, {}, float(enemy.get("shield", 0.0)), float(enemy.health), "monster",_shock_hit_increase("monster",int(enemy.id),elapsed))
 	if settlement.ok:
 		_apply_enemy_settlement(enemy, settlement, color, slow)
 
@@ -1391,6 +1427,7 @@ func _apply_enemy_resources(enemy:Dictionary,settlement:Dictionary)->bool:
 
 func _finish_enemy_death(enemy:Dictionary,legacy_particles:bool=true,at:float=-1.0,source_burn:Dictionary={})->void:
 	if float(enemy.health)>0.0:return
+	if not shock_runtime.is_empty():shock_runtime.remove("monster",int(enemy.id))
 	var ember_source:Dictionary=burn_runtime.status_for("monster",int(enemy.id)) if source_burn.is_empty() else source_burn
 	feedback_runtime.flush_target("monster", int(enemy.id))
 	if not burn_runtime.is_empty():burn_runtime.remove("monster",int(enemy.id))
@@ -1521,10 +1558,14 @@ func player_defense_profile() -> Dictionary:
 	return Defense.defense_profile({"fire_resistance": _stats.get("fire_resistance", 0.0)}, "player")
 
 
-func hit_player_components(components: Variant, source_id: int = 0, delivery_tags: Array = []) -> bool:
+func hit_player_components(components: Variant, source_id: int = 0, delivery_tags: Array = [], hit_context:Dictionary={}) -> bool:
 	if not alive or invulnerable > 0.0:
 		return false
-	var settlement: Dictionary = Defense.incoming_source_hit(components,_stats,shield,health,"player") if _stats.has("armour") else Defense.incoming_hit(components, {"fire_resistance": _stats.get("fire_resistance", 0.0)}, shield, health, "player")
+	var at:float=float(hit_context.get("at",_burn_incoming_time if _burn_incoming_time>=0.0 else elapsed))
+	if not is_finite(at) or at<shock_runtime.read_floor():return false
+	if hit_context.has("shock_policy") and not ShockRules.policy_error(hit_context.shock_policy).is_empty():return false
+	var shock_increase:float=_shock_hit_increase("player",0,at)
+	var settlement: Dictionary = Defense.incoming_source_hit(components,_stats,shield,health,"player",shock_increase) if _stats.has("armour") else Defense.incoming_hit(components, {"fire_resistance": _stats.get("fire_resistance", 0.0)}, shield, health, "player",shock_increase)
 	if not settlement.ok or float(settlement.damage_total) <= 0.0:
 		return false
 	if delivery_tags.has("attack") and _stats.has("evasion"):
@@ -1544,6 +1585,7 @@ func hit_player_components(components: Variant, source_id: int = 0, delivery_tag
 	health = float(settlement.remaining_health)
 	var record: Dictionary = settlement.duplicate(true)
 	record["source_id"] = source_id
+	if shock_increase>0.0:record.shock={"hit_damage_taken_increased":shock_increase,"at":at}
 	incoming_damage_trace.append(record)
 	if incoming_damage_trace.size() > 32:
 		incoming_damage_trace.pop_front()
@@ -1554,6 +1596,10 @@ func hit_player_components(components: Variant, source_id: int = 0, delivery_tag
 	hurt_flash = 0.16
 	screen_shake = 2.5
 	_record_damage_feedback("player", 0, "hit", settlement, player_pos)
+	if health>0.0 and hit_context.has("shock_policy") and delivery_tags.has("hit"):
+		var origin:Dictionary={"skill_id":str(hit_context.get("skill_id","storm_shock")),"cast_id":int(hit_context.get("cast_id",0)),"phase":str(hit_context.get("phase","telegraph"))}
+		var attached:Dictionary=_attach_shock("player",0,source_id,at,hit_context.shock_policy,settlement,origin)
+		if attached.get("applied",false):record.shock_applied={"at":at,"duration":float(hit_context.shock_policy.duration)}
 	_finish_player_death()
 	return true
 
@@ -1562,6 +1608,7 @@ func _finish_player_death()->void:
 	if health>0.0:return
 	feedback_runtime.flush_target("player", 0)
 	burn_runtime.reset()
+	shock_runtime.reset()
 	_ember_deaths.clear()
 	flask_runtime.clear_effects()
 	leech_runtime.clear()
@@ -1579,6 +1626,44 @@ func _burn_event_time(offset:float)->float:
 
 func _assert_burn_result(result:Dictionary)->void:
 	assert(result.ok,"Validated burning timeline: "+str(result.reason))
+
+
+func _shock_hit_increase(kind:String,id:int,at:float)->float:
+	if shock_runtime.is_empty():return 0.0
+	var result:Dictionary=shock_runtime.status_at(kind,id,at)
+	assert(result.ok,"Validated shock query: "+str(result.reason))
+	return float(result.hit_damage_taken_increased) if result.ok and result.active else 0.0
+
+
+func _attach_shock(kind:String,id:int,source_id:int,at:float,policy:Dictionary,settlement:Dictionary,provenance:Dictionary)->Dictionary:
+	var actual_loss:float=float(settlement.get("shield_spent",0.0))+float(settlement.get("health_lost",0.0))
+	var lightning:float=float(settlement.get("components",{}).get("lightning",0.0))
+	if actual_loss<=0.0 or lightning<=0.0:return {"ok":true,"applied":false,"reason":"no_actual_lightning_hit"}
+	var checked:Dictionary=ShockRules.from_lightning_hit(lightning,policy)
+	assert(checked.ok,"Validated lightning shock policy: "+str(checked.reason))
+	if not checked.ok:return {"ok":false,"applied":false,"reason":checked.reason}
+	var result:Dictionary=shock_runtime.apply(kind,id,source_id,at,policy,provenance)
+	assert(result.ok,"Validated shock attachment: "+str(result.reason))
+	return result
+
+
+func shock_statuses()->Array[Dictionary]:
+	var result:Array[Dictionary]=[]
+	if shock_runtime.is_empty():return result
+	var targets:Dictionary={}
+	for enemy:Dictionary in enemies:targets[int(enemy.id)]=enemy
+	for status:Dictionary in shock_runtime.statuses(elapsed):
+		var position:Vector2=player_pos
+		if status.target_kind=="player":
+			if not alive:continue
+		else:
+			var target:Dictionary=targets.get(int(status.target_id),{})
+			if target.is_empty() or float(target.health)<=0.0:continue
+			position=target.pos
+		result.append({"target_kind":status.target_kind,"target_id":status.target_id,"source_id":status.source_id,
+			"position":position,"remaining_seconds":status.remaining_seconds,"expires_at":status.expires_at,
+			"hit_damage_taken_increased":status.hit_damage_taken_increased})
+	return result
 
 
 func _ember_event_time(at:float,event:Dictionary)->float:
@@ -1821,6 +1906,7 @@ func _add_ring(pos: Vector2, radius: float, color: Color, life: float) -> void:
 
 
 func _update_effects(delta: float) -> void:
+	if not shock_runtime.is_empty():shock_runtime.prune(elapsed)
 	visual_cues.advance(delta)
 	for particle: Dictionary in particles:
 		particle.pos = Vector2(particle.pos) + Vector2(particle.velocity) * delta
@@ -1971,6 +2057,7 @@ func _world_revision_ok(value:Variant)->bool:return value is int and value==_wor
 func _replace_build(next:RefCounted,path:String)->void:
 	if state.changed.is_connected(_on_build_changed):state.changed.disconnect(_on_build_changed)
 	state.retire_profile()
+	shock_runtime.reset()
 	state=next;build_save_path=path;state.changed.connect(_on_build_changed)
 	_stats=state.get_stats();_progress_hud_dirty=false;_progress_save_dirty=false;_progress_save_requested=false
 	build_state_replaced.emit()
@@ -2274,7 +2361,7 @@ func _check_map_complete()->void:
 		if float(enemy.health)>0.0:living+=1
 	if _map_run.check_complete(living,monster_runtime.queue.size()):
 		projectile_runtime.cancel_all(projectiles);telegraphs.reset()
-		_world_mode="map_complete";_world_revision+=1;burn_runtime.reset()
+		_world_mode="map_complete";_world_revision+=1;burn_runtime.reset();shock_runtime.reset()
 		var message:String="地图完成，可以返回城镇" if _is_test_profile() else "地图完成，返回正式城镇领取结算"
 		if not _is_test_profile():
 			_normal_completion_pending=true

@@ -12,6 +12,7 @@ const Combat = preload("res://scripts/combat/combat_data.gd")
 const Compiler = preload("res://scripts/combat/skill_compiler.gd")
 const Supports = preload("res://scripts/combat/support_registry.gd")
 const BurnRules = preload("res://scripts/combat/burn_rules.gd")
+const ShockRules = preload("res://scripts/combat/shock_rules.gd")
 const EmberSupportRules = preload("res://scripts/combat/ember_proliferation_support_rules.gd")
 const EmberSpreadRules = preload("res://scripts/combat/ember_proliferation_rules.gd")
 const CATEGORIES := {"weapon":"武器","body_armour":"护甲","amulet":"项链","ring":"戒指","boots":"鞋","belt":"腰带","gloves":"手套","helmet":"头盔"}
@@ -134,7 +135,14 @@ static func view(model: RefCounted, uid: String) -> Dictionary:
 			result.requirements = ["适用技能："+"、".join(supported_names)]
 
 			result.base_stats = []
-			if support_id == "ignite":
+			if support_id == "shock":
+				result.function = "造成闪电命中伤害后施加感电，提高目标承受的后续命中伤害。"
+				var shock_stats: Array[Dictionary] = []
+				_append_numeric_stat(shock_stats, "感电持续", ShockRules.PLAYER_POLICY.duration, " 秒")
+				_append_percent_stat(shock_stats, "后续命中承受伤害提高", ShockRules.PLAYER_POLICY.hit_damage_taken_increased)
+				result.base_stats = shock_stats
+				result.description = "新施加的感电不追溯增强本次命中；不影响持续伤害。同强度刷新，不叠加或传播。"
+			elif support_id == "ignite":
 				result.function = "火焰主命中附加点燃；同目标取最强，同强度刷新，独立爆炸不继承。"
 				var burn_stats: Array[Dictionary] = []
 				_append_numeric_stat(burn_stats, "持续时间", BurnRules.PLAYER_POLICY.duration, " 秒")
@@ -433,6 +441,7 @@ static func _append_current_preview(model: RefCounted, location: Dictionary, res
 		result.preview_lines.append_array(Preview.critical_lines(cast))
 		result.preview_lines.append_array(Preview.leech_lines(cast))
 		result.preview_lines.append_array(Preview.burn_lines(cast))
+		result.preview_lines.append_array(Preview.shock_lines(cast))
 		result.effect_lines = result.preview_lines.duplicate(true)
 	else:
 		var error: String = str(cast.get("error",""))
