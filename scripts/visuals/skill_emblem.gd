@@ -5,6 +5,7 @@ var skill_id: String = "bolt"
 var accent := Color("ba9148")
 var subdued: bool = false
 const ICONS: Dictionary = {
+	"ember_proliferation":preload("res://assets/ui/grimoire/ember_proliferation.png"),
 	"ignite":preload("res://assets/ui/grimoire/ignite.png"),
 	"cleave":preload("res://assets/ui/grimoire/cleave.png"),
 	"shade_bolt":preload("res://assets/ui/grimoire/shade_bolt.png"),

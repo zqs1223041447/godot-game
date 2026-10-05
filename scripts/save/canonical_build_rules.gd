@@ -25,7 +25,8 @@ const V24_VERSION := 24
 const V25_VERSION := 25
 const V26_VERSION := 26
 const V27_VERSION := 27
-const VERSION := 28
+const V28_VERSION := 28
+const VERSION := 29
 const LEGACY_MAX_ITEMS := 1024
 const V17_MAX_ITEMS := LEGACY_MAX_ITEMS + 1
 const MAX_ITEMS := V17_MAX_ITEMS + 2 # Two once-only migration bottles; bag capacity is unchanged.
@@ -58,6 +59,10 @@ static func decode_v26(raw: Variant) -> Dictionary:
 
 static func decode_v27(raw: Variant) -> Dictionary:
 	return _decode(raw, true, V27_VERSION, true)
+
+
+static func decode_v28(raw: Variant) -> Dictionary:
+	return _decode(raw, true, V28_VERSION, true)
 
 
 static func decode_v24(raw:Variant)->Dictionary:
@@ -173,6 +178,10 @@ static func reason_v26(value: Variant, validate_talents: Callable = Callable(), 
 
 static func reason_v27(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
 	return _reason(value, V27_VERSION, true, true, MAX_ITEMS, validate_talents, socket_ids)
+
+
+static func reason_v28(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
+	return _reason(value, V28_VERSION, true, true, MAX_ITEMS, validate_talents, socket_ids)
 
 
 static func reason_v24(value:Variant,validate_talents:Callable=Callable(),socket_ids:Array=[])->String:

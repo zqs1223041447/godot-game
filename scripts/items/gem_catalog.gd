@@ -31,7 +31,9 @@ static func definitions() -> Dictionary:
 ## The old canonical schema has a closed gem vocabulary. New definitions do
 ## not become valid inside a file claiming an older schema after a code update.
 static func minimum_save_version(definition_id: String) -> int:
-	# Ignite opens only in schema28; schema26 milestone rewards stay frozen.
+	# Gem additions open independently; schema26 milestone rewards stay frozen.
+	if definition_id == "support:ember_proliferation":
+		return 29
 	if definition_id == "support:ignite":
 		return 28
 	if definition_id.begins_with(SKILL_PREFIX) and Data.NEW_SKILL_IDS.has(definition_id.substr(SKILL_PREFIX.length())):

@@ -12,6 +12,8 @@ const Combat = preload("res://scripts/combat/combat_data.gd")
 const Compiler = preload("res://scripts/combat/skill_compiler.gd")
 const Supports = preload("res://scripts/combat/support_registry.gd")
 const BurnRules = preload("res://scripts/combat/burn_rules.gd")
+const EmberSupportRules = preload("res://scripts/combat/ember_proliferation_support_rules.gd")
+const EmberSpreadRules = preload("res://scripts/combat/ember_proliferation_rules.gd")
 const CATEGORIES := {"weapon":"武器","body_armour":"护甲","amulet":"项链","ring":"戒指","boots":"鞋","belt":"腰带","gloves":"手套","helmet":"头盔"}
 const RARITIES := {"normal":"普通","magic":"魔法","rare":"稀有","unique":"机制装备","special":"特殊"}
 const CAPABILITY_LABELS: Dictionary = {
@@ -138,6 +140,16 @@ static func view(model: RefCounted, uid: String) -> Dictionary:
 				_append_numeric_stat(burn_stats, "持续时间", BurnRules.PLAYER_POLICY.duration, " 秒")
 				_append_percent_stat(burn_stats, "每秒取防御前火伤", BurnRules.PLAYER_POLICY.rate_fraction)
 				result.base_stats = burn_stats
+			elif support_id == "ember_proliferation":
+				result.function = "火焰主命中附燃；目标死亡时向附近敌人传播剩余燃烧。仅传播一次，受墙体阻挡。"
+				result.requirements.append("不能与点燃辅助同时连接")
+				var spread_stats: Array[Dictionary] = []
+				_append_numeric_stat(spread_stats, "直接附燃持续", EmberSupportRules.POLICY.duration, " 秒")
+				_append_percent_stat(spread_stats, "每秒取防御前火伤", EmberSupportRules.POLICY.rate_fraction)
+				_append_numeric_stat(spread_stats, "死亡扩散半径", EmberSpreadRules.POLICY.radius)
+				_append_numeric_stat(spread_stats, "最多扩散目标", EmberSpreadRules.POLICY.max_targets)
+				result.base_stats = spread_stats
+				result.description = "扩散保留燃烧强度和剩余时间，不重新开始持续时间；同目标不叠加。"
 			result.modifiers = _support_modifiers(support_id, false)
 			var support_location: Dictionary = model.location(uid)
 			_append_current_preview(model, support_location, result)

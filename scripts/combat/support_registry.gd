@@ -8,6 +8,7 @@ const ResourceRules = preload("res://scripts/combat/resource_support_rules.gd")
 const ElementRules = preload("res://scripts/combat/element_support_rules.gd")
 const DeliveryRules = preload("res://scripts/combat/delivery_support_rules.gd")
 const Ignite = preload("res://scripts/combat/ignite_support_rules.gd")
+const Ember = preload("res://scripts/combat/ember_proliferation_support_rules.gd")
 const Program = preload("res://scripts/combat/support_program.gd")
 const Data = preload("res://scripts/game_data.gd")
 const MAX_SUPPORTS: int = Legacy.MAX_SUPPORTS
@@ -17,9 +18,9 @@ const BATCH_SAVE_VERSION: int = 13
 static var SUPPORTS: Dictionary = _definitions()
 
 static func _providers() -> Array:
-	return [Legacy, Extension, Area, ResourceRules, ElementRules, DeliveryRules, Ignite]
+	return [Legacy, Extension, Area, ResourceRules, ElementRules, DeliveryRules, Ignite, Ember]
 static func _program_providers() -> Array:
-	return [ResourceRules, ElementRules, DeliveryRules, Ignite]
+	return [ResourceRules, ElementRules, DeliveryRules, Ignite, Ember]
 static func _definitions() -> Dictionary:
 	var result: Dictionary = {}
 	for provider: Variant in _providers():
@@ -56,6 +57,7 @@ static func compatibility_reason(skill_id: String, support_ids: Variant, slot_li
 		if seen.has(value): return "同一技能不能重复装配辅助"
 		seen[value] = true
 		if get_definition(value).is_empty(): return "辅助元数据无效"
+	if seen.has("ignite") and seen.has("ember_proliferation"): return "点燃辅助与余烬扩散辅助不能同时装配"
 	var reason: String = Legacy.compatibility_reason(skill_id, select_owned(support_ids, Legacy.SUPPORTS))
 	if not reason.is_empty(): return reason
 	var skill: Dictionary = Data.SKILLS[skill_id]
@@ -96,7 +98,8 @@ static func saved_links_reason(skill_id: String, support_ids: Variant, save_vers
 	if not reason.is_empty(): return reason
 	for id: String in support_ids:
 		var minimum: int = 1
-		if Ignite.SUPPORTS.has(id): minimum = Ignite.SAVE_VERSION
+		if Ember.SUPPORTS.has(id): minimum = Ember.SAVE_VERSION
+		elif Ignite.SUPPORTS.has(id): minimum = Ignite.SAVE_VERSION
 		elif Extension.SUPPORTS.has(id): minimum = EXTENSION_SAVE_VERSION
 		elif Area.SUPPORTS.has(id): minimum = int(Area.SAVE_VERSIONS[id])
 		elif is_program_support(id): minimum = BATCH_SAVE_VERSION
@@ -105,7 +108,9 @@ static func saved_links_reason(skill_id: String, support_ids: Variant, save_vers
 static func definition_error(value: Variant) -> String:
 	if value is Dictionary and value.has("family"):
 		match value.family:
-			"burning": return Ignite.definition_error(value)
+			"burning":
+				if Ember.definition_error(value).is_empty(): return ""
+				return Ignite.definition_error(value)
 			"resource": return ResourceRules.definition_error(value)
 			"element": return ElementRules.definition_error(value)
 			"delivery", "control", "chain": return DeliveryRules.definition_error(value)
