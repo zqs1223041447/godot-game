@@ -1,0 +1,52 @@
+{
+  "runtime_source_commit": "1f543187aae6bd69f70cfcfc368ef7091f6e55bf",
+  "required_files": 420,
+  "all_original_27_png_restored_and_git_blob_matched": true,
+  "post_check_change": "project.godot application/config/version only,0.45.0 to0.46.0; gameplay/renderer source bytes unchanged",
+  "source_sha256": {
+    "scripts/main.gd": "2f68449a995be177d46c5c830f76adccb0f27e5eee27e016f0e5a21a6f2e3ad5",
+    "scripts/combat/combat_feedback_runtime.gd": "a22cebcb8a73f705c5c976363c0c328c3b3c349ca8357bbf73708e465585a1df",
+    "scripts/visuals/combat_feedback_renderer.gd": "9c3d96fada5e52703c6cf523ccfcd78e4f01a0805f320bd08d3436a709a688a8",
+    "scripts/visuals/arena_visuals.gd": "d8c00848a233f0d867597db65daefce1c96353fa2d639df7cba2a14bc8827611",
+    "scripts/visuals/foreground_arena_layer.gd": "d037c0cd84cb46c999d7bfda0d7a68d83c2cd3e161692961094d668393558cf3",
+    "tests/test_combat_feedback_runtime.gd": "32360d7e99922b7ff9ebbfa443bf8158d56b97c66f211c0d06ab3d41e6790726",
+    "tests/combat_feedback_gameplay_test.gd": "f7403c4309d71f98039681eb1edcb296d21d35d6e633634e82997750a5e336f9",
+    "tests/combat_feedback_presentation_test.gd": "7f7657ddc854013518f968f8bbcc6d28afddf346b343851be968023470188e2f"
+  },
+  "logs_sha256": {
+    "pure-initial.log.txt": "86c001616c26d3cf48e1f5f9a6131a495b840e1e6a0ae1076bf37e7f4248085a",
+    "import-restored.log.txt": "17718827da76928b74aed91d5243fbda2be7c25a9c5601407cea6ee291fbc2d7",
+    "main-restored.log.txt": "21ab9c9a9c0abb3f5a45334db4ef9ede3b21e9cd1602075cb4a4b41a8881f34b",
+    "display-restored.log.txt": "68e6d9408ad6ce392d5347e1b74c7de5df4c32a06bee217d89f1e237bd3f9722",
+    "startup-restored.log.txt": "ddfc716bdf50cbf08143c1ac4501127b2e82775cf1c8288bc005d4fce4a18f50"
+  },
+  "results": [
+    {
+      "test": "pure rules",
+      "checks": 680,
+      "failures": 0,
+      "exit_code": 0
+    },
+    {
+      "test": "main feedback",
+      "checks": 51,
+      "failures": 0,
+      "exit_code": null,
+      "completion_marker_seen": true
+    },
+    {
+      "test": "presentation format",
+      "checks": 12,
+      "failures": 0,
+      "exit_code": null,
+      "completion_marker_seen": true
+    }
+  ],
+  "source_check_total": 743,
+  "restored_log_producer": "not recoverable from persisted log metadata; no attribution claimed",
+  "restored_log_exit_metadata": "not persisted; completion lines and absence of ERROR observed, not substituted with inferred exit0",
+  "startup": "playable arena ready observed; original quit-after count and exit metadata not persisted",
+  "new_export_probe": "pending, separate artifact verification with captured exit result",
+  "historical_old_environment_v46_results_reused": false,
+  "source_tests_rerun_after_log_recovery": false
+}

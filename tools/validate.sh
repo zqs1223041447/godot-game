@@ -58,7 +58,7 @@ run_check() {
 				export XDG_DATA_HOME="$TOWN_UI_DIR/check-$CHECK_INDEX/data"
 				unset PIERCE_QA_ROOT
 				;;
-			res://tests/ignite_*|res://tests/burn_*|res://tests/gem_trade_controls_test.gd|res://tests/map_camp_*|res://tests/build_affix_*|res://tests/equipment_affix_*|res://tests/normal_*|res://tests/leech_*|res://tests/critical_*|res://tests/reward_batch_equivalence_v38_test.gd|res://tests/projectile_dense_equivalence_test.gd|res://tests/retained_actor_layer_test.gd|res://tests/item_presentation_data_v37_test.gd|res://tests/item_hover_lifecycle_v37_test.gd|res://tests/map_modifier_batch_gameplay_test.gd|res://tests/map_aegis_gameplay_test.gd|res://tests/map_geometry_integration_test.gd|res://tests/map_terrain_edge_test.gd|res://tests/terrain_crowd_and_blast_test.gd|res://tests/town_*|res://tests/reserved_hotkey_migration_test.gd|res://tests/map_runtime_boundaries_test.gd|res://tests/crafting_operations_test.gd|res://tests/crafting_growth_*|res://tests/canonical_*|res://tests/offense_skill_*|res://tests/elemental_encounter_*|res://tests/flask_*|res://tests/save_receipt_revision_test.gd|res://tests/source_*|res://tests/independent_menus_test.gd)
+			res://tests/test_combat_feedback_runtime.gd|res://tests/combat_feedback_*|res://tests/ignite_*|res://tests/burn_*|res://tests/gem_trade_controls_test.gd|res://tests/map_camp_*|res://tests/build_affix_*|res://tests/equipment_affix_*|res://tests/normal_*|res://tests/leech_*|res://tests/critical_*|res://tests/reward_batch_equivalence_v38_test.gd|res://tests/projectile_dense_equivalence_test.gd|res://tests/retained_actor_layer_test.gd|res://tests/item_presentation_data_v37_test.gd|res://tests/item_hover_lifecycle_v37_test.gd|res://tests/map_modifier_batch_gameplay_test.gd|res://tests/map_aegis_gameplay_test.gd|res://tests/map_geometry_integration_test.gd|res://tests/map_terrain_edge_test.gd|res://tests/terrain_crowd_and_blast_test.gd|res://tests/town_*|res://tests/reserved_hotkey_migration_test.gd|res://tests/map_runtime_boundaries_test.gd|res://tests/crafting_operations_test.gd|res://tests/crafting_growth_*|res://tests/canonical_*|res://tests/offense_skill_*|res://tests/elemental_encounter_*|res://tests/flask_*|res://tests/save_receipt_revision_test.gd|res://tests/source_*|res://tests/independent_menus_test.gd)
 				export XDG_DATA_HOME="$M1_VALIDATION_DIR/check-$CHECK_INDEX/data"
 				unset PIERCE_QA_ROOT
 				;;
@@ -115,14 +115,9 @@ fi
 echo "Godot version: $("$GODOT_BIN" --version)"
 python3 "$PROJECT_DIR/tools/check_font_coverage.py"
 run_check --editor --import
-run_check --script res://tests/burn_rules_runtime_test.gd
-run_check --script res://tests/ignite_gem_migration_test.gd
-run_check --script res://tests/ignite_compilation_test.gd
-run_check --script res://tests/ignite_gameplay_test.gd
-run_check --script res://tests/ignite_boundaries_test.gd
-run_check --script res://tests/ignite_acquisition_test.gd
-run_check --script res://tests/ignite_event_tie_test.gd
-run_check --script res://tests/burn_presentation_test.gd
+run_check --script res://tests/test_combat_feedback_runtime.gd
+run_check --script res://tests/combat_feedback_gameplay_test.gd
+run_check --script res://tests/combat_feedback_presentation_test.gd
 python3 "$PROJECT_DIR/tests/reference_catalog_test.py"
 run_check --quit-after 300
-echo "Current-batch validation passed: shared burning, primary snapshot scope, original hit ordering, real acquisition and strict schema28 migration."
+echo "Current-batch validation passed: actual-loss feedback, separate hit/critical/burn windows, bounded display and original RNG order."
