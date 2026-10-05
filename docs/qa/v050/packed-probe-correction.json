@@ -1,0 +1,16 @@
+{
+  "first_probe_exit_code": 1,
+  "first_probe_checks": 20,
+  "first_probe_failures": 1,
+  "cause": "GDScript decimal expected literals differ 1-4 ULP from exact frozen Runtime float values",
+  "correction": "Compare var_to_bytes of each raw event time to pinned original bytes, without tolerance",
+  "expected_variant_hex": [
+    "0300000000000000",
+    "030001005783d09fc567813f",
+    "0300010012350d0e0f66813f",
+    "03000100cb46746c0c61813f"
+  ],
+  "production_changed": false,
+  "exe_reexported": false,
+  "same_pck_sha256": "ea19261417093b81bef9bdbcb292129115eee6c4616c9339a74e998c0fa2794a"
+}

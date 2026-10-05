@@ -14,6 +14,9 @@ const FONT_MAPPED_CODEPOINTS: int = 1069
 const FONT_CHARACTERS: String = "燃烧余烬扩散辅助宝石伤害持续时间投射物目标生命魔力护盾"
 const FIXTURE_SHA256: String = "0da998461697075884fb6390691b8d51e7954a53488b5170860bb7c3200e2f23"
 const FIXTURE_BYTES: int = 25708
+# Decimal GDScript literals differ from these frozen runtime doubles by 1-4 ULP.
+# Pin exact Variant bytes rather than weakening equality with a tolerance.
+const RAW_TIME_VARIANTS: Array[String] = ["0300000000000000", "030001005783d09fc567813f", "0300010012350d0e0f66813f", "03000100cb46746c0c61813f"]
 const RAW_TIMES: Array[float] = [0.0, 0.008498710574771513, 0.008495442978210952, 0.008485886630782776]
 var arena: Node
 var model: RefCounted
@@ -131,6 +134,13 @@ func quiet_receipt() -> Dictionary:
 	return receipt
 
 
+func original_times_match(times: Array[float]) -> bool:
+	if times.size() != RAW_TIME_VARIANTS.size(): return false
+	for index: int in range(times.size()):
+		if var_to_bytes(times[index]).hex_encode() != RAW_TIME_VARIANTS[index]: return false
+	return true
+
+
 func run_clock_case(fixture: Dictionary, start: float, cast: Dictionary) -> Dictionary:
 	arena._world_mode = "normal"
 	arena._geometry.configure("old_garden", arena.ARENA)
@@ -201,7 +211,7 @@ func run_clock_case(fixture: Dictionary, start: float, cast: Dictionary) -> Dict
 	var living: bool = true
 	for enemy: Dictionary in arena.enemies: living = living and float(enemy.health) > 0.0
 	return {"ok": true, "start": start, "raw_times": times, "target_ids": ids, "sequences": sequences,
-		"expected_original": all_hits and times == RAW_TIMES and ids == [20, 20, 30, 39] and sequences == [2, 1, 3, 4]
+		"expected_original": all_hits and original_times_match(times) and ids == [20, 20, 30, 39] and sequences == [2, 1, 3, 4]
 			and var_to_bytes(expected) == expected_bytes,
 		"dispatch_exact": trace_exact and clock_exact and living and arena.event_counts == {"hit": 4}
 			and arena.damage_trace.size() == 4 and arena.kills == 0,
