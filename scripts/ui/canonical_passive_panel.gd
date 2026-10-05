@@ -6,6 +6,7 @@ signal hover_left
 const TreeView = preload("res://scripts/ui/source_passive_tree_view.gd")
 const Runtime = preload("res://scripts/passives/source_tree_runtime.gd")
 const Data = preload("res://scripts/passives/source_tree_data.gd")
+const Localization = preload("res://scripts/passives/source_tree_localization.gd")
 const Jewels = preload("res://scripts/jewel_data.gd")
 const CraftControls = preload("res://scripts/ui/crafting_controls.gd")
 var model: RefCounted
@@ -65,7 +66,7 @@ func _build()->void:
 	_class=WrappedOption.new()
 	_class.name="SourceClassPicker"
 	for entry: Dictionary in Data.class_starts():
-		_class.add_item(entry.class_name,int(entry.class_index))
+		_class.add_item(Localization.class_label(str(entry.class_name)),int(entry.class_index))
 	_class.tooltip_text="仅切换原始树起点。必须先退还所有已点节点；装备、宝石与未用点数保留。"
 	_class.item_selected.connect(_change_class)
 	toolbar.add_child(_class)
@@ -75,7 +76,7 @@ func _build()->void:
 	_partition.add_item("标准主树")
 	_partition.set_item_metadata(0,"standard")
 	for name_value: String in Data.special_subtrees().ascendancies:
-		_partition.add_item("升华 · "+name_value)
+		_partition.add_item("升华 · "+Localization.partition_label(name_value))
 		_partition.set_item_metadata(_partition.item_count-1,name_value)
 	_partition.add_item("扩展珠宝分区 · 仅浏览")
 	_partition.set_item_metadata(_partition.item_count-1,"expansion")
@@ -91,7 +92,7 @@ func _build()->void:
 	home.pressed.connect(_focus_start)
 	toolbar.add_child(home)
 	_search=LineEdit.new()
-	_search.placeholder_text="源名称 / 节点ID"
+	_search.placeholder_text="源名称 / 节点编号"
 	_search.custom_minimum_size.x=170
 	_search.text_submitted.connect(_find_node)
 	toolbar.add_child(_search)
@@ -219,8 +220,8 @@ func _load_graph()->void:
 		var node:=Data.node(id)
 		var effect:=Runtime.node_effect(id)
 		var locked:bool=_subtree!="standard" or node.source.get("isProxy",false) or node.source.get("isBlighted",false) or effect.status in ["partial","unsupported"]
-		nodes[id]={"id":id,"position":node.position,"type":node.type,"name":node.name,
-			"description":"\n".join(node.stats),"status":"locked" if locked else "choice" if effect.status=="choice" else "implemented"}
+		nodes[id]={"id":id,"position":node.position,"type":node.type,"name":Localization.node_name(id),
+			"description":Localization.display_lines(node.stats),"status":"locked" if locked else "choice" if effect.status=="choice" else "implemented"}
 	if _tree.set_tree(nodes,edges,focus):
 		_loaded_graph=key
 		if not nodes.has(selected_node_id):selected_node_id=focus
@@ -254,7 +255,7 @@ func _refresh_details()->void:
 	if is_mastery:
 		for effect:Dictionary in node.mastery_effects:
 			var execution:=Runtime.node_effect(selected_node_id,int(effect.effect))
-			_mastery.add_item(str(effect.stats[0]) if not effect.stats.is_empty() else "空效果")
+			_mastery.add_item(Localization.display_lines(effect.stats," · ") if not effect.stats.is_empty() else "空效果")
 			var index:int=_mastery.item_count-1
 			_mastery.set_item_metadata(index,int(effect.effect))
 			_mastery.set_item_disabled(index,execution.status!="full")
@@ -265,14 +266,15 @@ func _refresh_details()->void:
 	var effect_id:int=int(_mastery.get_item_metadata(_mastery.selected)) if is_mastery and _mastery.selected>=0 else 0
 	var execution:=Runtime.node_effect(selected_node_id,effect_id)
 	var lines:Array=Runtime.lines_for(selected_node_id,effect_id)
-	var status:String="效果已实现" if execution.status=="full" else "尚未实现全部效果 · 不可分配"
+	var display_lines:=Localization.display_lines(lines)
+	var status:String="当前节点或所选专精的全部效果均已接入游戏" if execution.status=="full" else "当前节点或所选专精仍有未接入效果 · 不可分配"
 	if _subtree!="standard":status="独立源子树 · 仅浏览，点数与效果未接入"
 	elif not node.has_position:status="无源坐标的定义记录 · 仅浏览"
 	elif node.source.get("isProxy",false):status="源位置代理 · 不可分配"
 	elif node.source.get("isBlighted",false):status="涂油专属节点 · 不可直接分配"
-	_detail.text="%s\n%s\n%s\n\n%s"%[node.name,selected_node_id,status,"\n".join(lines)]
-	_detail.tooltip_text="原始源文字与数值；部分支持不会部分授予。只在整个节点/所选精通效果全部具有消费者时允许分配。\n未实现：\n"+"\n".join(execution.unsupported)
-	_mastery.tooltip_text="\n".join(lines)
+	_detail.text="%s\n%s\n%s\n\n%s\n\n%s"%[Localization.node_name(selected_node_id),selected_node_id,status,display_lines,Localization.TERM_NOTE]
+	_detail.tooltip_text=Localization.TERM_NOTE+"\n\n词缀后的状态按完整源词条逐行判断。只有当前节点或所选专精的全部词缀均已接入游戏，才允许分配。"
+	_mastery.tooltip_text=display_lines
 	_allocate.disabled=_subtree!="standard" or allocated or not model.available_passives().has(selected_node_id) or execution.status!="full"
 	_refund.disabled=_subtree!="standard" or not allocated or selected_node_id==Data.start_for_class(int(snapshot.talents.class_id))
 	_socket_uid=""
@@ -296,7 +298,7 @@ func _node_clicked(id:String,button:int,double_click:bool)->void:
 	elif double_click:_allocate_selected()
 func _node_hovered(id:String,_anchor:Rect2)->void:
 	var node:=Data.node(id)
-	_tree.tooltip_text=node.name+"\n"+"\n".join(node.stats)+"\n点击查看原始效果与执行状态"
+	_tree.tooltip_text=Localization.node_name(id)+"\n"+Localization.display_lines(node.stats)+"\n点击查看逐条接入状态"
 func _allocate_selected()->void:
 	if _allocate.disabled:return
 	var effect:int=int(_mastery.get_item_metadata(_mastery.selected)) if _mastery.visible and _mastery.selected>=0 else 0
@@ -325,7 +327,8 @@ func _find_node(query:String)->void:
 	var needle:=query.strip_edges().to_lower()
 	if needle.is_empty():return
 	for id:String in _tree._nodes:
-		if id==needle or str(_tree._nodes[id].name).to_lower().contains(needle):
+		var source_name:=str(Data.node(id).name).to_lower()
+		if id==needle or str(_tree._nodes[id].name).to_lower().contains(needle) or source_name.contains(needle):
 			selected_node_id=id
 			_tree.pan=-Data.node(id).position*_tree.zoom
 			_refresh_details();_refresh_overlay();return
