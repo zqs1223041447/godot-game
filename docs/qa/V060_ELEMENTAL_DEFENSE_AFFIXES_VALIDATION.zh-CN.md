@@ -27,3 +27,7 @@
 - [原字节迁移](v060-migration/README.md)
 - [实际main与事务](v060-consumers/README.md)
 - [同源资料与字体](v060-reference/README.md)
+
+## 同PCK夹具补正
+
+首次包探针在穿戴验证后直接请求校准，被既有“先放回背包”门禁正确拒绝；探针随后读缺失handle导致超时。仅tools夹具增加合法回包并安全处理缺失句柄，原失败日志保留。相同EXE/PCK无需重导，受影响同PCK29项及300帧启动随后exit0。没有再跑已通过源套件。最终源仅tools/QA补正，发布清单单列与导出输入6d764dfe的差异。

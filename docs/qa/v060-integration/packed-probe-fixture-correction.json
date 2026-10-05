@@ -1,0 +1,17 @@
+{
+  "export_input_commit": "6d764dfe34ccbc93796085b7a23dec7bed8051bb",
+  "failure": "Probe requested recalibration while the inspected item was still equipped, correctly rejected; subsequent missing-handle access caused probe timeout.",
+  "fix": "Return the same UID to a legal bag position before quote; use safe rejected-quote lookup for final duplicate check.",
+  "production_changes": false,
+  "pck_sha256": "188b6a2485a801e4fc21db5e018cd64fb19e146ec349e32e9cdd1c58693cd334",
+  "source_checks_reused": 11290,
+  "reexport": false,
+  "recheck_exit_code": 0,
+  "recheck_checks": 29,
+  "recheck_failures": 0,
+  "startup_exit_code": 0,
+  "startup_frames": 300,
+  "corrected_probe_sha256": "6461bc94a12a92bb8609fc87507afe2a8ea51a73486c7919e28abb2a77b33d93",
+  "production_files_unchanged": true,
+  "exe_sha256": "05450ce90d3e1104427963b09124512fa87231cd9fff50979756a7c245cdd221"
+}

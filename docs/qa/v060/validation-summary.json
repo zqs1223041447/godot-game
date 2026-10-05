@@ -33,7 +33,7 @@
   "reference_validation_separate": "docs/qa/v060-reference/README.md",
   "same_gameplay_production_after_tests": true,
   "pending_at_recording": [
-    "Single Windows export and focused same-PCK29check/short startup; final external handoff records terminal status."
+    "final public source backup remains blocked; local same-PCK and startup completed"
   ],
   "logs": {
     "docs/qa/v060-consumers/20261005T204036678617Z.log.txt": {
@@ -147,6 +147,10 @@
     "docs/qa/v060-rules/20261005-204206-rules.log.txt": {
       "bytes": 177,
       "sha256": "743c198272afc3808f7ec227db7bcff3fa67a7baff9b066bb4ea3f311df0f32b"
+    },
+    "docs/qa/v060-integration/packed-probe-first.log.txt": {
+      "bytes": 1525,
+      "sha256": "36ddd08fe1bd6b76da93d597aca0578328e6adee6eb9558cc78e1c88c74f4ff6"
     }
   },
   "reports": {
@@ -181,11 +185,22 @@
     "docs/qa/v060-reference/font-coverage-result.json": {
       "bytes": 204,
       "sha256": "38b7c1cd390b3315d1c800e7c7beefc170a22a84ced5f4365740c539c72aae7f"
+    },
+    "docs/qa/v060-integration/packed-probe-fixture-correction.json": {
+      "bytes": 879,
+      "sha256": "362af14d214766590f67e2c38110786e6e66af6215f4a4362d7dfa43675ae207"
     }
   },
   "post_gameplay_production_changes": {
     "project.godot": "Application version0.59.0 to0.60.0 only"
   },
   "final_production_files": "docs/qa/v060/final-production-files.json",
-  "font_reference_evidence": "docs/qa/v060-reference/README.md"
+  "font_reference_evidence": "docs/qa/v060-reference/README.md",
+  "packed_probe_correction": "docs/qa/v060-integration/packed-probe-fixture-correction.json",
+  "packed_checks": 29,
+  "packed_failures": 0,
+  "packed_exit_code": 0,
+  "startup_frames": 300,
+  "startup_exit_code": 0,
+  "single_export_unchanged_pck_sha256": "188b6a2485a801e4fc21db5e018cd64fb19e146ec349e32e9cdd1c58693cd334"
 }
