@@ -5891,7 +5891,7 @@
 			"rules_version": "original-crafting-prototype-v3-affix27"
 		},
 		"calibration_shard": {
-			"description": "回收背包中的随机魔法、稀有装备获得。真实堆叠物品，用于校准、赋魔、升格、补缀与重铸；待安置碎片不能直接消费。",
+			"description": "回收背包中的随机魔法、稀有装备获得。真实堆叠物品，用于校准、赋魔、升格、补缀、重铸与定向重铸；待安置碎片不能直接消费。",
 			"kind": "material",
 			"max_revision": 1000000000,
 			"maximum": 1000000000,
@@ -6268,6 +6268,66 @@
 						},
 						"name": "回收",
 						"yield_formula": "rarity_units + sum(tier) * salvage_units_per_tier"
+					},
+					"targeted_reforge_critical": {
+						"consumes_item": false,
+						"cost": {
+							"magic": 16,
+							"rare": 40
+						},
+						"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的暴击词缀。",
+						"label": "定向重铸",
+						"operation": "targeted_reforge_critical",
+						"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+						"rules_version": "original-targeted-reforge-v1-affix27",
+						"target_id": "critical",
+						"target_label": "暴击",
+						"targeted": true
+					},
+					"targeted_reforge_damage": {
+						"consumes_item": false,
+						"cost": {
+							"magic": 16,
+							"rare": 40
+						},
+						"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的伤害词缀。",
+						"label": "定向重铸",
+						"operation": "targeted_reforge_damage",
+						"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+						"rules_version": "original-targeted-reforge-v1-affix27",
+						"target_id": "damage",
+						"target_label": "伤害",
+						"targeted": true
+					},
+					"targeted_reforge_life_leech": {
+						"consumes_item": false,
+						"cost": {
+							"magic": 16,
+							"rare": 40
+						},
+						"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的生命偷取词缀。",
+						"label": "定向重铸",
+						"operation": "targeted_reforge_life_leech",
+						"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+						"rules_version": "original-targeted-reforge-v1-affix27",
+						"target_id": "life_leech",
+						"target_label": "生命偷取",
+						"targeted": true
+					},
+					"targeted_reforge_mana_leech": {
+						"consumes_item": false,
+						"cost": {
+							"magic": 16,
+							"rare": 40
+						},
+						"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的魔力偷取词缀。",
+						"label": "定向重铸",
+						"operation": "targeted_reforge_mana_leech",
+						"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+						"rules_version": "original-targeted-reforge-v1-affix27",
+						"target_id": "mana_leech",
+						"target_label": "魔力偷取",
+						"targeted": true
 					}
 				},
 				"origin": "original",
@@ -7228,6 +7288,2821 @@
 				"yield_formula": "rarity_units + sum(tier) * salvage_units_per_tier"
 			},
 			"rules_version": "original-crafting-prototype-v3-affix27"
+		},
+		"targeted_reforge_critical": {
+			"catalog_vocabulary": 27,
+			"cost_by_rarity": {
+				"magic": 16,
+				"rare": 40
+			},
+			"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的暴击词缀。",
+			"eligibility": [
+				{
+					"base_id": "nine_slot_etched_ring",
+					"minimum_item_level_by_rarity": {
+						"magic": 1,
+						"rare": 1
+					},
+					"target_family_ids": [
+						"global_critical_chance",
+						"global_critical_multiplier"
+					],
+					"target_tiers_at_maximum_level": [
+						{
+							"group": "global_critical_chance",
+							"id": "global_critical_chance",
+							"kind": "suffix",
+							"max": 20,
+							"min": 15,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "global_critical_chance",
+							"id": "global_critical_chance",
+							"kind": "suffix",
+							"max": 30,
+							"min": 21,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "global_critical_chance",
+							"id": "global_critical_chance",
+							"kind": "suffix",
+							"max": 40,
+							"min": 31,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "global_critical_multiplier",
+							"id": "global_critical_multiplier",
+							"kind": "suffix",
+							"max": 7,
+							"min": 5,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "global_critical_multiplier",
+							"id": "global_critical_multiplier",
+							"kind": "suffix",
+							"max": 11,
+							"min": 8,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "global_critical_multiplier",
+							"id": "global_critical_multiplier",
+							"kind": "suffix",
+							"max": 15,
+							"min": 12,
+							"tier": 3,
+							"weight": 30
+						}
+					]
+				},
+				{
+					"base_id": "nine_slot_threaded_gloves",
+					"minimum_item_level_by_rarity": {
+						"magic": 1,
+						"rare": 1
+					},
+					"target_family_ids": [
+						"global_critical_chance",
+						"global_critical_multiplier"
+					],
+					"target_tiers_at_maximum_level": [
+						{
+							"group": "global_critical_chance",
+							"id": "global_critical_chance",
+							"kind": "suffix",
+							"max": 20,
+							"min": 15,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "global_critical_chance",
+							"id": "global_critical_chance",
+							"kind": "suffix",
+							"max": 30,
+							"min": 21,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "global_critical_chance",
+							"id": "global_critical_chance",
+							"kind": "suffix",
+							"max": 40,
+							"min": 31,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "global_critical_multiplier",
+							"id": "global_critical_multiplier",
+							"kind": "suffix",
+							"max": 7,
+							"min": 5,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "global_critical_multiplier",
+							"id": "global_critical_multiplier",
+							"kind": "suffix",
+							"max": 11,
+							"min": 8,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "global_critical_multiplier",
+							"id": "global_critical_multiplier",
+							"kind": "suffix",
+							"max": 15,
+							"min": 12,
+							"tier": 3,
+							"weight": 30
+						}
+					]
+				},
+				{
+					"base_id": "wayglass_token",
+					"minimum_item_level_by_rarity": {
+						"magic": 1,
+						"rare": 1
+					},
+					"target_family_ids": [
+						"global_critical_chance",
+						"global_critical_multiplier"
+					],
+					"target_tiers_at_maximum_level": [
+						{
+							"group": "global_critical_chance",
+							"id": "global_critical_chance",
+							"kind": "suffix",
+							"max": 20,
+							"min": 15,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "global_critical_chance",
+							"id": "global_critical_chance",
+							"kind": "suffix",
+							"max": 30,
+							"min": 21,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "global_critical_chance",
+							"id": "global_critical_chance",
+							"kind": "suffix",
+							"max": 40,
+							"min": 31,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "global_critical_multiplier",
+							"id": "global_critical_multiplier",
+							"kind": "suffix",
+							"max": 7,
+							"min": 5,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "global_critical_multiplier",
+							"id": "global_critical_multiplier",
+							"kind": "suffix",
+							"max": 11,
+							"min": 8,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "global_critical_multiplier",
+							"id": "global_critical_multiplier",
+							"kind": "suffix",
+							"max": 15,
+							"min": 12,
+							"tier": 3,
+							"weight": 30
+						}
+					]
+				},
+				{
+					"base_id": "pulse_seed",
+					"minimum_item_level_by_rarity": {
+						"magic": 1,
+						"rare": 1
+					},
+					"target_family_ids": [
+						"global_critical_chance",
+						"global_critical_multiplier"
+					],
+					"target_tiers_at_maximum_level": [
+						{
+							"group": "global_critical_chance",
+							"id": "global_critical_chance",
+							"kind": "suffix",
+							"max": 20,
+							"min": 15,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "global_critical_chance",
+							"id": "global_critical_chance",
+							"kind": "suffix",
+							"max": 30,
+							"min": 21,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "global_critical_chance",
+							"id": "global_critical_chance",
+							"kind": "suffix",
+							"max": 40,
+							"min": 31,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "global_critical_multiplier",
+							"id": "global_critical_multiplier",
+							"kind": "suffix",
+							"max": 7,
+							"min": 5,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "global_critical_multiplier",
+							"id": "global_critical_multiplier",
+							"kind": "suffix",
+							"max": 11,
+							"min": 8,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "global_critical_multiplier",
+							"id": "global_critical_multiplier",
+							"kind": "suffix",
+							"max": 15,
+							"min": 12,
+							"tier": 3,
+							"weight": 30
+						}
+					]
+				}
+			],
+			"eligibility_maximum_item_level": 30,
+			"eligibility_note": "仅下列底材存在可达合法结果；物品等级仍限制阶级，最终以当前装备报价为准。普通、固定、已穿戴装备不可用；无合法目标不收费。",
+			"eligible_base_ids": [
+				"nine_slot_etched_ring",
+				"nine_slot_threaded_gloves",
+				"wayglass_token",
+				"pulse_seed"
+			],
+			"example": {
+				"after_definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"后缀 · 重创 T1：全局暴击伤害倍率 +6个百分点",
+						"前缀 · 深汲 T1：最大魔力 +7"
+					],
+					"base_id": "wayglass_token",
+					"base_name": "途镜坠",
+					"description": "最大魔力 +6，魔力恢复 +0.3 / 秒。\n后缀 · 重创 T1：全局暴击伤害倍率 +6个百分点\n前缀 · 深汲 T1：最大魔力 +7",
+					"effects": [],
+					"id": "gear_000001",
+					"item_level": 16,
+					"name": "魔法 · 途镜坠",
+					"rarity": "magic",
+					"size": [
+						1,
+						1
+					],
+					"slot": "charm",
+					"stats": {
+						"crit_multiplier_add": 0.06,
+						"mana_regen": 0.3,
+						"max_mana": 13.0
+					}
+				},
+				"after_instance": {
+					"affixes": [
+						{
+							"id": "global_critical_multiplier",
+							"tier": 1,
+							"value": 6
+						},
+						{
+							"id": "deepwell",
+							"tier": 1,
+							"value": 7
+						}
+					],
+					"base_id": "wayglass_token",
+					"id": "gear_000001",
+					"item_level": 16,
+					"rarity": "magic"
+				},
+				"balance_after": 84,
+				"balance_before": 100,
+				"before_definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"后缀 · 锐察 T3：全局暴击几率提高 +40%"
+					],
+					"base_id": "wayglass_token",
+					"base_name": "途镜坠",
+					"description": "最大魔力 +6，魔力恢复 +0.3 / 秒。\n后缀 · 锐察 T3：全局暴击几率提高 +40%",
+					"effects": [],
+					"id": "gear_000001",
+					"item_level": 16,
+					"name": "魔法 · 途镜坠",
+					"rarity": "magic",
+					"size": [
+						1,
+						1
+					],
+					"slot": "charm",
+					"stats": {
+						"crit_chance_increased": 0.4,
+						"mana_regen": 0.3,
+						"max_mana": 6.0
+					}
+				},
+				"example_seed": 20261003,
+				"full_candidate_valid": true,
+				"quote": {
+					"code": "",
+					"consumes_item": false,
+					"cost": {
+						"calibration_shard": 16
+					},
+					"item_id": "gear_000001",
+					"materials": {
+
+					},
+					"ok": true,
+					"operation": "targeted_reforge_critical",
+					"reason": "",
+					"revision": 0,
+					"rules_version": "original-targeted-reforge-v1-affix27",
+					"source_instance": {
+						"affixes": [
+							{
+								"id": "global_critical_chance",
+								"tier": 3,
+								"value": 40
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000001",
+						"item_level": 16,
+						"rarity": "magic"
+					}
+				},
+				"revision_after": 1,
+				"revision_before": 0,
+				"save_version": 30,
+				"source": {
+					"affixes": [
+						{
+							"id": "global_critical_chance",
+							"tier": 3,
+							"value": 40
+						}
+					],
+					"base_id": "wayglass_token",
+					"id": "gear_000001",
+					"item_level": 16,
+					"rarity": "magic"
+				}
+			},
+			"kind": "operation",
+			"name": "定向重铸 · 暴击",
+			"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+			"rule": {
+				"consumes_item": false,
+				"cost": {
+					"magic": 16,
+					"rare": 40
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的暴击词缀。",
+				"label": "定向重铸",
+				"operation": "targeted_reforge_critical",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"rules_version": "original-targeted-reforge-v1-affix27",
+				"target_id": "critical",
+				"target_label": "暴击",
+				"targeted": true
+			},
+			"rules_version": "original-targeted-reforge-v1-affix27",
+			"selection_note": "先按目录正权重抽取可完成的目标家族与阶级，再从合法池补足；保持稀有度，不保留原词缀，也不保证高阶或更强。",
+			"target_family_ids": [
+				"global_critical_chance",
+				"global_critical_multiplier"
+			],
+			"target_id": "critical",
+			"target_label": "暴击",
+			"targeted": true
+		},
+		"targeted_reforge_damage": {
+			"catalog_vocabulary": 27,
+			"cost_by_rarity": {
+				"magic": 16,
+				"rare": 40
+			},
+			"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的伤害词缀。",
+			"eligibility": [
+				{
+					"base_id": "cinder_reed",
+					"minimum_item_level_by_rarity": {
+						"magic": 1,
+						"rare": 1
+					},
+					"target_family_ids": [
+						"runesong",
+						"prismedge",
+						"farweave",
+						"coalglow",
+						"rimeecho",
+						"sparkthread"
+					],
+					"target_tiers_at_maximum_level": [
+						{
+							"group": "spell_amplification",
+							"id": "runesong",
+							"kind": "prefix",
+							"max": 7,
+							"min": 4,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "spell_amplification",
+							"id": "runesong",
+							"kind": "prefix",
+							"max": 12,
+							"min": 8,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "spell_amplification",
+							"id": "runesong",
+							"kind": "prefix",
+							"max": 18,
+							"min": 13,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "attack_elemental_amplification",
+							"id": "prismedge",
+							"kind": "prefix",
+							"max": 7,
+							"min": 4,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "attack_elemental_amplification",
+							"id": "prismedge",
+							"kind": "prefix",
+							"max": 12,
+							"min": 8,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "attack_elemental_amplification",
+							"id": "prismedge",
+							"kind": "prefix",
+							"max": 18,
+							"min": 13,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "projectile_amplification",
+							"id": "farweave",
+							"kind": "prefix",
+							"max": 7,
+							"min": 4,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "projectile_amplification",
+							"id": "farweave",
+							"kind": "prefix",
+							"max": 12,
+							"min": 8,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "projectile_amplification",
+							"id": "farweave",
+							"kind": "prefix",
+							"max": 18,
+							"min": 13,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "fire_amplification",
+							"id": "coalglow",
+							"kind": "suffix",
+							"max": 8,
+							"min": 5,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "fire_amplification",
+							"id": "coalglow",
+							"kind": "suffix",
+							"max": 14,
+							"min": 9,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "fire_amplification",
+							"id": "coalglow",
+							"kind": "suffix",
+							"max": 20,
+							"min": 15,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "cold_amplification",
+							"id": "rimeecho",
+							"kind": "suffix",
+							"max": 8,
+							"min": 5,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "cold_amplification",
+							"id": "rimeecho",
+							"kind": "suffix",
+							"max": 14,
+							"min": 9,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "cold_amplification",
+							"id": "rimeecho",
+							"kind": "suffix",
+							"max": 20,
+							"min": 15,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "lightning_amplification",
+							"id": "sparkthread",
+							"kind": "suffix",
+							"max": 8,
+							"min": 5,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "lightning_amplification",
+							"id": "sparkthread",
+							"kind": "suffix",
+							"max": 14,
+							"min": 9,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "lightning_amplification",
+							"id": "sparkthread",
+							"kind": "suffix",
+							"max": 20,
+							"min": 15,
+							"tier": 3,
+							"weight": 30
+						}
+					]
+				},
+				{
+					"base_id": "gale_spindle",
+					"minimum_item_level_by_rarity": {
+						"magic": 1,
+						"rare": 1
+					},
+					"target_family_ids": [
+						"runesong",
+						"prismedge",
+						"farweave",
+						"coalglow",
+						"rimeecho",
+						"sparkthread"
+					],
+					"target_tiers_at_maximum_level": [
+						{
+							"group": "spell_amplification",
+							"id": "runesong",
+							"kind": "prefix",
+							"max": 7,
+							"min": 4,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "spell_amplification",
+							"id": "runesong",
+							"kind": "prefix",
+							"max": 12,
+							"min": 8,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "spell_amplification",
+							"id": "runesong",
+							"kind": "prefix",
+							"max": 18,
+							"min": 13,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "attack_elemental_amplification",
+							"id": "prismedge",
+							"kind": "prefix",
+							"max": 7,
+							"min": 4,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "attack_elemental_amplification",
+							"id": "prismedge",
+							"kind": "prefix",
+							"max": 12,
+							"min": 8,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "attack_elemental_amplification",
+							"id": "prismedge",
+							"kind": "prefix",
+							"max": 18,
+							"min": 13,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "projectile_amplification",
+							"id": "farweave",
+							"kind": "prefix",
+							"max": 7,
+							"min": 4,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "projectile_amplification",
+							"id": "farweave",
+							"kind": "prefix",
+							"max": 12,
+							"min": 8,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "projectile_amplification",
+							"id": "farweave",
+							"kind": "prefix",
+							"max": 18,
+							"min": 13,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "fire_amplification",
+							"id": "coalglow",
+							"kind": "suffix",
+							"max": 8,
+							"min": 5,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "fire_amplification",
+							"id": "coalglow",
+							"kind": "suffix",
+							"max": 14,
+							"min": 9,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "fire_amplification",
+							"id": "coalglow",
+							"kind": "suffix",
+							"max": 20,
+							"min": 15,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "cold_amplification",
+							"id": "rimeecho",
+							"kind": "suffix",
+							"max": 8,
+							"min": 5,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "cold_amplification",
+							"id": "rimeecho",
+							"kind": "suffix",
+							"max": 14,
+							"min": 9,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "cold_amplification",
+							"id": "rimeecho",
+							"kind": "suffix",
+							"max": 20,
+							"min": 15,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "lightning_amplification",
+							"id": "sparkthread",
+							"kind": "suffix",
+							"max": 8,
+							"min": 5,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "lightning_amplification",
+							"id": "sparkthread",
+							"kind": "suffix",
+							"max": 14,
+							"min": 9,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "lightning_amplification",
+							"id": "sparkthread",
+							"kind": "suffix",
+							"max": 20,
+							"min": 15,
+							"tier": 3,
+							"weight": 30
+						}
+					]
+				},
+				{
+					"base_id": "woven_bastion",
+					"minimum_item_level_by_rarity": {
+						"magic": 1,
+						"rare": 1
+					},
+					"target_family_ids": [
+						"coalglow",
+						"rimeecho",
+						"sparkthread"
+					],
+					"target_tiers_at_maximum_level": [
+						{
+							"group": "fire_amplification",
+							"id": "coalglow",
+							"kind": "suffix",
+							"max": 8,
+							"min": 5,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "fire_amplification",
+							"id": "coalglow",
+							"kind": "suffix",
+							"max": 14,
+							"min": 9,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "fire_amplification",
+							"id": "coalglow",
+							"kind": "suffix",
+							"max": 20,
+							"min": 15,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "cold_amplification",
+							"id": "rimeecho",
+							"kind": "suffix",
+							"max": 8,
+							"min": 5,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "cold_amplification",
+							"id": "rimeecho",
+							"kind": "suffix",
+							"max": 14,
+							"min": 9,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "cold_amplification",
+							"id": "rimeecho",
+							"kind": "suffix",
+							"max": 20,
+							"min": 15,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "lightning_amplification",
+							"id": "sparkthread",
+							"kind": "suffix",
+							"max": 8,
+							"min": 5,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "lightning_amplification",
+							"id": "sparkthread",
+							"kind": "suffix",
+							"max": 14,
+							"min": 9,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "lightning_amplification",
+							"id": "sparkthread",
+							"kind": "suffix",
+							"max": 20,
+							"min": 15,
+							"tier": 3,
+							"weight": 30
+						}
+					]
+				},
+				{
+					"base_id": "tidebound_coat",
+					"minimum_item_level_by_rarity": {
+						"magic": 1,
+						"rare": 1
+					},
+					"target_family_ids": [
+						"coalglow",
+						"rimeecho",
+						"sparkthread"
+					],
+					"target_tiers_at_maximum_level": [
+						{
+							"group": "fire_amplification",
+							"id": "coalglow",
+							"kind": "suffix",
+							"max": 8,
+							"min": 5,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "fire_amplification",
+							"id": "coalglow",
+							"kind": "suffix",
+							"max": 14,
+							"min": 9,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "fire_amplification",
+							"id": "coalglow",
+							"kind": "suffix",
+							"max": 20,
+							"min": 15,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "cold_amplification",
+							"id": "rimeecho",
+							"kind": "suffix",
+							"max": 8,
+							"min": 5,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "cold_amplification",
+							"id": "rimeecho",
+							"kind": "suffix",
+							"max": 14,
+							"min": 9,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "cold_amplification",
+							"id": "rimeecho",
+							"kind": "suffix",
+							"max": 20,
+							"min": 15,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "lightning_amplification",
+							"id": "sparkthread",
+							"kind": "suffix",
+							"max": 8,
+							"min": 5,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "lightning_amplification",
+							"id": "sparkthread",
+							"kind": "suffix",
+							"max": 14,
+							"min": 9,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "lightning_amplification",
+							"id": "sparkthread",
+							"kind": "suffix",
+							"max": 20,
+							"min": 15,
+							"tier": 3,
+							"weight": 30
+						}
+					]
+				},
+				{
+					"base_id": "wayglass_token",
+					"minimum_item_level_by_rarity": {
+						"magic": 1,
+						"rare": 1
+					},
+					"target_family_ids": [
+						"runesong",
+						"prismedge",
+						"farweave",
+						"coalglow",
+						"rimeecho",
+						"sparkthread"
+					],
+					"target_tiers_at_maximum_level": [
+						{
+							"group": "spell_amplification",
+							"id": "runesong",
+							"kind": "prefix",
+							"max": 7,
+							"min": 4,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "spell_amplification",
+							"id": "runesong",
+							"kind": "prefix",
+							"max": 12,
+							"min": 8,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "spell_amplification",
+							"id": "runesong",
+							"kind": "prefix",
+							"max": 18,
+							"min": 13,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "attack_elemental_amplification",
+							"id": "prismedge",
+							"kind": "prefix",
+							"max": 7,
+							"min": 4,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "attack_elemental_amplification",
+							"id": "prismedge",
+							"kind": "prefix",
+							"max": 12,
+							"min": 8,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "attack_elemental_amplification",
+							"id": "prismedge",
+							"kind": "prefix",
+							"max": 18,
+							"min": 13,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "projectile_amplification",
+							"id": "farweave",
+							"kind": "prefix",
+							"max": 7,
+							"min": 4,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "projectile_amplification",
+							"id": "farweave",
+							"kind": "prefix",
+							"max": 12,
+							"min": 8,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "projectile_amplification",
+							"id": "farweave",
+							"kind": "prefix",
+							"max": 18,
+							"min": 13,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "fire_amplification",
+							"id": "coalglow",
+							"kind": "suffix",
+							"max": 8,
+							"min": 5,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "fire_amplification",
+							"id": "coalglow",
+							"kind": "suffix",
+							"max": 14,
+							"min": 9,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "fire_amplification",
+							"id": "coalglow",
+							"kind": "suffix",
+							"max": 20,
+							"min": 15,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "cold_amplification",
+							"id": "rimeecho",
+							"kind": "suffix",
+							"max": 8,
+							"min": 5,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "cold_amplification",
+							"id": "rimeecho",
+							"kind": "suffix",
+							"max": 14,
+							"min": 9,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "cold_amplification",
+							"id": "rimeecho",
+							"kind": "suffix",
+							"max": 20,
+							"min": 15,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "lightning_amplification",
+							"id": "sparkthread",
+							"kind": "suffix",
+							"max": 8,
+							"min": 5,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "lightning_amplification",
+							"id": "sparkthread",
+							"kind": "suffix",
+							"max": 14,
+							"min": 9,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "lightning_amplification",
+							"id": "sparkthread",
+							"kind": "suffix",
+							"max": 20,
+							"min": 15,
+							"tier": 3,
+							"weight": 30
+						}
+					]
+				},
+				{
+					"base_id": "pulse_seed",
+					"minimum_item_level_by_rarity": {
+						"magic": 1,
+						"rare": 1
+					},
+					"target_family_ids": [
+						"runesong",
+						"prismedge",
+						"farweave",
+						"coalglow",
+						"rimeecho",
+						"sparkthread"
+					],
+					"target_tiers_at_maximum_level": [
+						{
+							"group": "spell_amplification",
+							"id": "runesong",
+							"kind": "prefix",
+							"max": 7,
+							"min": 4,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "spell_amplification",
+							"id": "runesong",
+							"kind": "prefix",
+							"max": 12,
+							"min": 8,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "spell_amplification",
+							"id": "runesong",
+							"kind": "prefix",
+							"max": 18,
+							"min": 13,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "attack_elemental_amplification",
+							"id": "prismedge",
+							"kind": "prefix",
+							"max": 7,
+							"min": 4,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "attack_elemental_amplification",
+							"id": "prismedge",
+							"kind": "prefix",
+							"max": 12,
+							"min": 8,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "attack_elemental_amplification",
+							"id": "prismedge",
+							"kind": "prefix",
+							"max": 18,
+							"min": 13,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "projectile_amplification",
+							"id": "farweave",
+							"kind": "prefix",
+							"max": 7,
+							"min": 4,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "projectile_amplification",
+							"id": "farweave",
+							"kind": "prefix",
+							"max": 12,
+							"min": 8,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "projectile_amplification",
+							"id": "farweave",
+							"kind": "prefix",
+							"max": 18,
+							"min": 13,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "fire_amplification",
+							"id": "coalglow",
+							"kind": "suffix",
+							"max": 8,
+							"min": 5,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "fire_amplification",
+							"id": "coalglow",
+							"kind": "suffix",
+							"max": 14,
+							"min": 9,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "fire_amplification",
+							"id": "coalglow",
+							"kind": "suffix",
+							"max": 20,
+							"min": 15,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "cold_amplification",
+							"id": "rimeecho",
+							"kind": "suffix",
+							"max": 8,
+							"min": 5,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "cold_amplification",
+							"id": "rimeecho",
+							"kind": "suffix",
+							"max": 14,
+							"min": 9,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "cold_amplification",
+							"id": "rimeecho",
+							"kind": "suffix",
+							"max": 20,
+							"min": 15,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "lightning_amplification",
+							"id": "sparkthread",
+							"kind": "suffix",
+							"max": 8,
+							"min": 5,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "lightning_amplification",
+							"id": "sparkthread",
+							"kind": "suffix",
+							"max": 14,
+							"min": 9,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "lightning_amplification",
+							"id": "sparkthread",
+							"kind": "suffix",
+							"max": 20,
+							"min": 15,
+							"tier": 3,
+							"weight": 30
+						}
+					]
+				},
+				{
+					"base_id": "runewood_focus",
+					"minimum_item_level_by_rarity": {
+						"magic": 1,
+						"rare": 1
+					},
+					"target_family_ids": [
+						"runesong",
+						"prismedge",
+						"farweave",
+						"coalglow",
+						"rimeecho",
+						"sparkthread",
+						"attack_added_physical",
+						"attack_added_fire",
+						"spell_added_cold",
+						"spell_added_lightning"
+					],
+					"target_tiers_at_maximum_level": [
+						{
+							"group": "spell_amplification",
+							"id": "runesong",
+							"kind": "prefix",
+							"max": 7,
+							"min": 4,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "spell_amplification",
+							"id": "runesong",
+							"kind": "prefix",
+							"max": 12,
+							"min": 8,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "spell_amplification",
+							"id": "runesong",
+							"kind": "prefix",
+							"max": 18,
+							"min": 13,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "attack_elemental_amplification",
+							"id": "prismedge",
+							"kind": "prefix",
+							"max": 7,
+							"min": 4,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "attack_elemental_amplification",
+							"id": "prismedge",
+							"kind": "prefix",
+							"max": 12,
+							"min": 8,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "attack_elemental_amplification",
+							"id": "prismedge",
+							"kind": "prefix",
+							"max": 18,
+							"min": 13,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "projectile_amplification",
+							"id": "farweave",
+							"kind": "prefix",
+							"max": 7,
+							"min": 4,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "projectile_amplification",
+							"id": "farweave",
+							"kind": "prefix",
+							"max": 12,
+							"min": 8,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "projectile_amplification",
+							"id": "farweave",
+							"kind": "prefix",
+							"max": 18,
+							"min": 13,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "fire_amplification",
+							"id": "coalglow",
+							"kind": "suffix",
+							"max": 8,
+							"min": 5,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "fire_amplification",
+							"id": "coalglow",
+							"kind": "suffix",
+							"max": 14,
+							"min": 9,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "fire_amplification",
+							"id": "coalglow",
+							"kind": "suffix",
+							"max": 20,
+							"min": 15,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "cold_amplification",
+							"id": "rimeecho",
+							"kind": "suffix",
+							"max": 8,
+							"min": 5,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "cold_amplification",
+							"id": "rimeecho",
+							"kind": "suffix",
+							"max": 14,
+							"min": 9,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "cold_amplification",
+							"id": "rimeecho",
+							"kind": "suffix",
+							"max": 20,
+							"min": 15,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "lightning_amplification",
+							"id": "sparkthread",
+							"kind": "suffix",
+							"max": 8,
+							"min": 5,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "lightning_amplification",
+							"id": "sparkthread",
+							"kind": "suffix",
+							"max": 14,
+							"min": 9,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "lightning_amplification",
+							"id": "sparkthread",
+							"kind": "suffix",
+							"max": 20,
+							"min": 15,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "attack_added_physical",
+							"id": "attack_added_physical",
+							"kind": "prefix",
+							"max": 2,
+							"min": 1,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "attack_added_physical",
+							"id": "attack_added_physical",
+							"kind": "prefix",
+							"max": 4,
+							"min": 3,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "attack_added_physical",
+							"id": "attack_added_physical",
+							"kind": "prefix",
+							"max": 6,
+							"min": 5,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "attack_added_fire",
+							"id": "attack_added_fire",
+							"kind": "prefix",
+							"max": 2,
+							"min": 1,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "attack_added_fire",
+							"id": "attack_added_fire",
+							"kind": "prefix",
+							"max": 4,
+							"min": 3,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "attack_added_fire",
+							"id": "attack_added_fire",
+							"kind": "prefix",
+							"max": 6,
+							"min": 5,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "spell_added_cold",
+							"id": "spell_added_cold",
+							"kind": "prefix",
+							"max": 2,
+							"min": 1,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "spell_added_cold",
+							"id": "spell_added_cold",
+							"kind": "prefix",
+							"max": 4,
+							"min": 3,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "spell_added_cold",
+							"id": "spell_added_cold",
+							"kind": "prefix",
+							"max": 6,
+							"min": 5,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "spell_added_lightning",
+							"id": "spell_added_lightning",
+							"kind": "prefix",
+							"max": 2,
+							"min": 1,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "spell_added_lightning",
+							"id": "spell_added_lightning",
+							"kind": "prefix",
+							"max": 4,
+							"min": 3,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "spell_added_lightning",
+							"id": "spell_added_lightning",
+							"kind": "prefix",
+							"max": 6,
+							"min": 5,
+							"tier": 3,
+							"weight": 30
+						}
+					]
+				},
+				{
+					"base_id": "emberhide_vest",
+					"minimum_item_level_by_rarity": {
+						"magic": 1,
+						"rare": 1
+					},
+					"target_family_ids": [
+						"coalglow",
+						"rimeecho",
+						"sparkthread"
+					],
+					"target_tiers_at_maximum_level": [
+						{
+							"group": "fire_amplification",
+							"id": "coalglow",
+							"kind": "suffix",
+							"max": 8,
+							"min": 5,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "fire_amplification",
+							"id": "coalglow",
+							"kind": "suffix",
+							"max": 14,
+							"min": 9,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "fire_amplification",
+							"id": "coalglow",
+							"kind": "suffix",
+							"max": 20,
+							"min": 15,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "cold_amplification",
+							"id": "rimeecho",
+							"kind": "suffix",
+							"max": 8,
+							"min": 5,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "cold_amplification",
+							"id": "rimeecho",
+							"kind": "suffix",
+							"max": 14,
+							"min": 9,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "cold_amplification",
+							"id": "rimeecho",
+							"kind": "suffix",
+							"max": 20,
+							"min": 15,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "lightning_amplification",
+							"id": "sparkthread",
+							"kind": "suffix",
+							"max": 8,
+							"min": 5,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "lightning_amplification",
+							"id": "sparkthread",
+							"kind": "suffix",
+							"max": 14,
+							"min": 9,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "lightning_amplification",
+							"id": "sparkthread",
+							"kind": "suffix",
+							"max": 20,
+							"min": 15,
+							"tier": 3,
+							"weight": 30
+						}
+					]
+				},
+				{
+					"base_id": "ashwood_bow",
+					"minimum_item_level_by_rarity": {
+						"magic": 1,
+						"rare": 1
+					},
+					"target_family_ids": [
+						"runesong",
+						"prismedge",
+						"farweave",
+						"coalglow",
+						"rimeecho",
+						"sparkthread",
+						"whetstone_edge",
+						"tempered_edge"
+					],
+					"target_tiers_at_maximum_level": [
+						{
+							"group": "spell_amplification",
+							"id": "runesong",
+							"kind": "prefix",
+							"max": 7,
+							"min": 4,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "spell_amplification",
+							"id": "runesong",
+							"kind": "prefix",
+							"max": 12,
+							"min": 8,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "spell_amplification",
+							"id": "runesong",
+							"kind": "prefix",
+							"max": 18,
+							"min": 13,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "attack_elemental_amplification",
+							"id": "prismedge",
+							"kind": "prefix",
+							"max": 7,
+							"min": 4,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "attack_elemental_amplification",
+							"id": "prismedge",
+							"kind": "prefix",
+							"max": 12,
+							"min": 8,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "attack_elemental_amplification",
+							"id": "prismedge",
+							"kind": "prefix",
+							"max": 18,
+							"min": 13,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "projectile_amplification",
+							"id": "farweave",
+							"kind": "prefix",
+							"max": 7,
+							"min": 4,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "projectile_amplification",
+							"id": "farweave",
+							"kind": "prefix",
+							"max": 12,
+							"min": 8,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "projectile_amplification",
+							"id": "farweave",
+							"kind": "prefix",
+							"max": 18,
+							"min": 13,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "fire_amplification",
+							"id": "coalglow",
+							"kind": "suffix",
+							"max": 8,
+							"min": 5,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "fire_amplification",
+							"id": "coalglow",
+							"kind": "suffix",
+							"max": 14,
+							"min": 9,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "fire_amplification",
+							"id": "coalglow",
+							"kind": "suffix",
+							"max": 20,
+							"min": 15,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "cold_amplification",
+							"id": "rimeecho",
+							"kind": "suffix",
+							"max": 8,
+							"min": 5,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "cold_amplification",
+							"id": "rimeecho",
+							"kind": "suffix",
+							"max": 14,
+							"min": 9,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "cold_amplification",
+							"id": "rimeecho",
+							"kind": "suffix",
+							"max": 20,
+							"min": 15,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "lightning_amplification",
+							"id": "sparkthread",
+							"kind": "suffix",
+							"max": 8,
+							"min": 5,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "lightning_amplification",
+							"id": "sparkthread",
+							"kind": "suffix",
+							"max": 14,
+							"min": 9,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "lightning_amplification",
+							"id": "sparkthread",
+							"kind": "suffix",
+							"max": 20,
+							"min": 15,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "weapon_added_physical",
+							"id": "whetstone_edge",
+							"kind": "prefix",
+							"max": 2,
+							"min": 1,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "weapon_added_physical",
+							"id": "whetstone_edge",
+							"kind": "prefix",
+							"max": 4,
+							"min": 3,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "weapon_added_physical",
+							"id": "whetstone_edge",
+							"kind": "prefix",
+							"max": 6,
+							"min": 5,
+							"tier": 3,
+							"weight": 30
+						},
+						{
+							"group": "weapon_physical_increased",
+							"id": "tempered_edge",
+							"kind": "prefix",
+							"max": 15,
+							"min": 10,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "weapon_physical_increased",
+							"id": "tempered_edge",
+							"kind": "prefix",
+							"max": 22,
+							"min": 16,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "weapon_physical_increased",
+							"id": "tempered_edge",
+							"kind": "prefix",
+							"max": 30,
+							"min": 23,
+							"tier": 3,
+							"weight": 30
+						}
+					]
+				}
+			],
+			"eligibility_maximum_item_level": 30,
+			"eligibility_note": "仅下列底材存在可达合法结果；物品等级仍限制阶级，最终以当前装备报价为准。普通、固定、已穿戴装备不可用；无合法目标不收费。",
+			"eligible_base_ids": [
+				"cinder_reed",
+				"gale_spindle",
+				"woven_bastion",
+				"tidebound_coat",
+				"wayglass_token",
+				"pulse_seed",
+				"runewood_focus",
+				"emberhide_vest",
+				"ashwood_bow"
+			],
+			"example": {
+				"after_definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"前缀 · 折辉 T1：攻击元素伤害提高 +7%",
+						"后缀 · 引霆 T1：闪电伤害提高 +7%"
+					],
+					"base_id": "ashwood_bow",
+					"base_name": "白蜡长弓",
+					"description": "本武器物理单独结算，仅增强普攻和龙卷箭体。详情列出基底、本地点数与本地提高。\n前缀 · 折辉 T1：攻击元素伤害提高 +7%\n后缀 · 引霆 T1：闪电伤害提高 +7%",
+					"effects": [],
+					"id": "gear_000001",
+					"item_level": 16,
+					"name": "魔法 · 白蜡长弓",
+					"rarity": "magic",
+					"size": [
+						2,
+						3
+					],
+					"slot": "weapon",
+					"stats": {
+						"attack_elemental_increased": 0.07,
+						"lightning_increased": 0.07
+					},
+					"weapon_damage": {
+						"physical": 4.0
+					},
+					"weapon_damage_summary": "本武器物理：(4.0 + 0.0) × (1 + 0.0%) = 4.0；仅普攻与龙卷箭体",
+					"weapon_profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "ashwood_bow",
+						"flat": {
+							"physical": 0.0
+						},
+						"increased": {
+							"physical": 0.0
+						},
+						"item_id": "gear_000001",
+						"sources": [],
+						"stage": "weapon_local"
+					}
+				},
+				"after_instance": {
+					"affixes": [
+						{
+							"id": "prismedge",
+							"tier": 1,
+							"value": 7
+						},
+						{
+							"id": "sparkthread",
+							"tier": 1,
+							"value": 7
+						}
+					],
+					"base_id": "ashwood_bow",
+					"id": "gear_000001",
+					"item_level": 16,
+					"rarity": "magic"
+				},
+				"balance_after": 84,
+				"balance_before": 100,
+				"before_definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"前缀 · 砥刃 T3：本武器附加物理伤害 +6"
+					],
+					"base_id": "ashwood_bow",
+					"base_name": "白蜡长弓",
+					"description": "本武器物理单独结算，仅增强普攻和龙卷箭体。详情列出基底、本地点数与本地提高。\n前缀 · 砥刃 T3：本武器附加物理伤害 +6",
+					"effects": [],
+					"id": "gear_000001",
+					"item_level": 16,
+					"name": "魔法 · 白蜡长弓",
+					"rarity": "magic",
+					"size": [
+						2,
+						3
+					],
+					"slot": "weapon",
+					"stats": {
+
+					},
+					"weapon_damage": {
+						"physical": 10.0
+					},
+					"weapon_damage_summary": "本武器物理：(4.0 + 6.0) × (1 + 0.0%) = 10.0；仅普攻与龙卷箭体",
+					"weapon_profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "ashwood_bow",
+						"flat": {
+							"physical": 6.0
+						},
+						"increased": {
+							"physical": 0.0
+						},
+						"item_id": "gear_000001",
+						"sources": [
+							{
+								"affix_id": "whetstone_edge",
+								"stat": "weapon_added_physical",
+								"value": 6.0
+							}
+						],
+						"stage": "weapon_local"
+					}
+				},
+				"example_seed": 20261003,
+				"full_candidate_valid": true,
+				"quote": {
+					"code": "",
+					"consumes_item": false,
+					"cost": {
+						"calibration_shard": 16
+					},
+					"item_id": "gear_000001",
+					"materials": {
+
+					},
+					"ok": true,
+					"operation": "targeted_reforge_damage",
+					"reason": "",
+					"revision": 0,
+					"rules_version": "original-targeted-reforge-v1-affix27",
+					"source_instance": {
+						"affixes": [
+							{
+								"id": "whetstone_edge",
+								"tier": 3,
+								"value": 6
+							}
+						],
+						"base_id": "ashwood_bow",
+						"id": "gear_000001",
+						"item_level": 16,
+						"rarity": "magic"
+					}
+				},
+				"revision_after": 1,
+				"revision_before": 0,
+				"save_version": 30,
+				"source": {
+					"affixes": [
+						{
+							"id": "whetstone_edge",
+							"tier": 3,
+							"value": 6
+						}
+					],
+					"base_id": "ashwood_bow",
+					"id": "gear_000001",
+					"item_level": 16,
+					"rarity": "magic"
+				}
+			},
+			"kind": "operation",
+			"name": "定向重铸 · 伤害",
+			"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+			"rule": {
+				"consumes_item": false,
+				"cost": {
+					"magic": 16,
+					"rare": 40
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的伤害词缀。",
+				"label": "定向重铸",
+				"operation": "targeted_reforge_damage",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"rules_version": "original-targeted-reforge-v1-affix27",
+				"target_id": "damage",
+				"target_label": "伤害",
+				"targeted": true
+			},
+			"rules_version": "original-targeted-reforge-v1-affix27",
+			"selection_note": "先按目录正权重抽取可完成的目标家族与阶级，再从合法池补足；保持稀有度，不保留原词缀，也不保证高阶或更强。",
+			"target_family_ids": [
+				"runesong",
+				"prismedge",
+				"farweave",
+				"coalglow",
+				"rimeecho",
+				"sparkthread",
+				"attack_added_physical",
+				"attack_added_fire",
+				"spell_added_cold",
+				"spell_added_lightning",
+				"whetstone_edge",
+				"tempered_edge"
+			],
+			"target_id": "damage",
+			"target_label": "伤害",
+			"targeted": true
+		},
+		"targeted_reforge_life_leech": {
+			"catalog_vocabulary": 27,
+			"cost_by_rarity": {
+				"magic": 16,
+				"rare": 40
+			},
+			"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的生命偷取词缀。",
+			"eligibility": [
+				{
+					"base_id": "nine_slot_etched_ring",
+					"minimum_item_level_by_rarity": {
+						"magic": 1,
+						"rare": 1
+					},
+					"target_family_ids": [
+						"attack_life_leech"
+					],
+					"target_tiers_at_maximum_level": [
+						{
+							"group": "attack_life_leech",
+							"id": "attack_life_leech",
+							"kind": "prefix",
+							"max": 30,
+							"min": 20,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "attack_life_leech",
+							"id": "attack_life_leech",
+							"kind": "prefix",
+							"max": 45,
+							"min": 31,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "attack_life_leech",
+							"id": "attack_life_leech",
+							"kind": "prefix",
+							"max": 60,
+							"min": 46,
+							"tier": 3,
+							"weight": 30
+						}
+					]
+				},
+				{
+					"base_id": "nine_slot_threaded_gloves",
+					"minimum_item_level_by_rarity": {
+						"magic": 1,
+						"rare": 1
+					},
+					"target_family_ids": [
+						"attack_life_leech"
+					],
+					"target_tiers_at_maximum_level": [
+						{
+							"group": "attack_life_leech",
+							"id": "attack_life_leech",
+							"kind": "prefix",
+							"max": 30,
+							"min": 20,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "attack_life_leech",
+							"id": "attack_life_leech",
+							"kind": "prefix",
+							"max": 45,
+							"min": 31,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "attack_life_leech",
+							"id": "attack_life_leech",
+							"kind": "prefix",
+							"max": 60,
+							"min": 46,
+							"tier": 3,
+							"weight": 30
+						}
+					]
+				},
+				{
+					"base_id": "wayglass_token",
+					"minimum_item_level_by_rarity": {
+						"magic": 1,
+						"rare": 1
+					},
+					"target_family_ids": [
+						"attack_life_leech"
+					],
+					"target_tiers_at_maximum_level": [
+						{
+							"group": "attack_life_leech",
+							"id": "attack_life_leech",
+							"kind": "prefix",
+							"max": 30,
+							"min": 20,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "attack_life_leech",
+							"id": "attack_life_leech",
+							"kind": "prefix",
+							"max": 45,
+							"min": 31,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "attack_life_leech",
+							"id": "attack_life_leech",
+							"kind": "prefix",
+							"max": 60,
+							"min": 46,
+							"tier": 3,
+							"weight": 30
+						}
+					]
+				},
+				{
+					"base_id": "pulse_seed",
+					"minimum_item_level_by_rarity": {
+						"magic": 1,
+						"rare": 1
+					},
+					"target_family_ids": [
+						"attack_life_leech"
+					],
+					"target_tiers_at_maximum_level": [
+						{
+							"group": "attack_life_leech",
+							"id": "attack_life_leech",
+							"kind": "prefix",
+							"max": 30,
+							"min": 20,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "attack_life_leech",
+							"id": "attack_life_leech",
+							"kind": "prefix",
+							"max": 45,
+							"min": 31,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "attack_life_leech",
+							"id": "attack_life_leech",
+							"kind": "prefix",
+							"max": 60,
+							"min": 46,
+							"tier": 3,
+							"weight": 30
+						}
+					]
+				}
+			],
+			"eligibility_maximum_item_level": 30,
+			"eligibility_note": "仅下列底材存在可达合法结果；物品等级仍限制阶级，最终以当前装备报价为准。普通、固定、已穿戴装备不可用；无合法目标不收费。",
+			"eligible_base_ids": [
+				"nine_slot_etched_ring",
+				"nine_slot_threaded_gloves",
+				"wayglass_token",
+				"pulse_seed"
+			],
+			"example": {
+				"after_definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"前缀 · 血汲 T1：攻击伤害偷取为生命 +0.21%",
+						"后缀 · 霜回 T1：冰霜伤害提高 +7%"
+					],
+					"base_id": "wayglass_token",
+					"base_name": "途镜坠",
+					"description": "最大魔力 +6，魔力恢复 +0.3 / 秒。\n前缀 · 血汲 T1：攻击伤害偷取为生命 +0.21%\n后缀 · 霜回 T1：冰霜伤害提高 +7%",
+					"effects": [],
+					"id": "gear_000001",
+					"item_level": 16,
+					"name": "魔法 · 途镜坠",
+					"rarity": "magic",
+					"size": [
+						1,
+						1
+					],
+					"slot": "charm",
+					"stats": {
+						"attack_life_leech": 0.0021,
+						"cold_increased": 0.07,
+						"mana_regen": 0.3,
+						"max_mana": 6.0
+					}
+				},
+				"after_instance": {
+					"affixes": [
+						{
+							"id": "attack_life_leech",
+							"tier": 1,
+							"value": 21
+						},
+						{
+							"id": "rimeecho",
+							"tier": 1,
+							"value": 7
+						}
+					],
+					"base_id": "wayglass_token",
+					"id": "gear_000001",
+					"item_level": 16,
+					"rarity": "magic"
+				},
+				"balance_after": 84,
+				"balance_before": 100,
+				"before_definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"后缀 · 锐察 T3：全局暴击几率提高 +40%"
+					],
+					"base_id": "wayglass_token",
+					"base_name": "途镜坠",
+					"description": "最大魔力 +6，魔力恢复 +0.3 / 秒。\n后缀 · 锐察 T3：全局暴击几率提高 +40%",
+					"effects": [],
+					"id": "gear_000001",
+					"item_level": 16,
+					"name": "魔法 · 途镜坠",
+					"rarity": "magic",
+					"size": [
+						1,
+						1
+					],
+					"slot": "charm",
+					"stats": {
+						"crit_chance_increased": 0.4,
+						"mana_regen": 0.3,
+						"max_mana": 6.0
+					}
+				},
+				"example_seed": 20261003,
+				"full_candidate_valid": true,
+				"quote": {
+					"code": "",
+					"consumes_item": false,
+					"cost": {
+						"calibration_shard": 16
+					},
+					"item_id": "gear_000001",
+					"materials": {
+
+					},
+					"ok": true,
+					"operation": "targeted_reforge_life_leech",
+					"reason": "",
+					"revision": 0,
+					"rules_version": "original-targeted-reforge-v1-affix27",
+					"source_instance": {
+						"affixes": [
+							{
+								"id": "global_critical_chance",
+								"tier": 3,
+								"value": 40
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000001",
+						"item_level": 16,
+						"rarity": "magic"
+					}
+				},
+				"revision_after": 1,
+				"revision_before": 0,
+				"save_version": 30,
+				"source": {
+					"affixes": [
+						{
+							"id": "global_critical_chance",
+							"tier": 3,
+							"value": 40
+						}
+					],
+					"base_id": "wayglass_token",
+					"id": "gear_000001",
+					"item_level": 16,
+					"rarity": "magic"
+				}
+			},
+			"kind": "operation",
+			"name": "定向重铸 · 生命偷取",
+			"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+			"rule": {
+				"consumes_item": false,
+				"cost": {
+					"magic": 16,
+					"rare": 40
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的生命偷取词缀。",
+				"label": "定向重铸",
+				"operation": "targeted_reforge_life_leech",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"rules_version": "original-targeted-reforge-v1-affix27",
+				"target_id": "life_leech",
+				"target_label": "生命偷取",
+				"targeted": true
+			},
+			"rules_version": "original-targeted-reforge-v1-affix27",
+			"selection_note": "先按目录正权重抽取可完成的目标家族与阶级，再从合法池补足；保持稀有度，不保留原词缀，也不保证高阶或更强。",
+			"target_family_ids": [
+				"attack_life_leech"
+			],
+			"target_id": "life_leech",
+			"target_label": "生命偷取",
+			"targeted": true
+		},
+		"targeted_reforge_mana_leech": {
+			"catalog_vocabulary": 27,
+			"cost_by_rarity": {
+				"magic": 16,
+				"rare": 40
+			},
+			"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的魔力偷取词缀。",
+			"eligibility": [
+				{
+					"base_id": "nine_slot_etched_ring",
+					"minimum_item_level_by_rarity": {
+						"magic": 1,
+						"rare": 1
+					},
+					"target_family_ids": [
+						"attack_mana_leech"
+					],
+					"target_tiers_at_maximum_level": [
+						{
+							"group": "attack_mana_leech",
+							"id": "attack_mana_leech",
+							"kind": "prefix",
+							"max": 15,
+							"min": 10,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "attack_mana_leech",
+							"id": "attack_mana_leech",
+							"kind": "prefix",
+							"max": 25,
+							"min": 16,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "attack_mana_leech",
+							"id": "attack_mana_leech",
+							"kind": "prefix",
+							"max": 35,
+							"min": 26,
+							"tier": 3,
+							"weight": 30
+						}
+					]
+				},
+				{
+					"base_id": "nine_slot_threaded_gloves",
+					"minimum_item_level_by_rarity": {
+						"magic": 1,
+						"rare": 1
+					},
+					"target_family_ids": [
+						"attack_mana_leech"
+					],
+					"target_tiers_at_maximum_level": [
+						{
+							"group": "attack_mana_leech",
+							"id": "attack_mana_leech",
+							"kind": "prefix",
+							"max": 15,
+							"min": 10,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "attack_mana_leech",
+							"id": "attack_mana_leech",
+							"kind": "prefix",
+							"max": 25,
+							"min": 16,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "attack_mana_leech",
+							"id": "attack_mana_leech",
+							"kind": "prefix",
+							"max": 35,
+							"min": 26,
+							"tier": 3,
+							"weight": 30
+						}
+					]
+				},
+				{
+					"base_id": "wayglass_token",
+					"minimum_item_level_by_rarity": {
+						"magic": 1,
+						"rare": 1
+					},
+					"target_family_ids": [
+						"attack_mana_leech"
+					],
+					"target_tiers_at_maximum_level": [
+						{
+							"group": "attack_mana_leech",
+							"id": "attack_mana_leech",
+							"kind": "prefix",
+							"max": 15,
+							"min": 10,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "attack_mana_leech",
+							"id": "attack_mana_leech",
+							"kind": "prefix",
+							"max": 25,
+							"min": 16,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "attack_mana_leech",
+							"id": "attack_mana_leech",
+							"kind": "prefix",
+							"max": 35,
+							"min": 26,
+							"tier": 3,
+							"weight": 30
+						}
+					]
+				},
+				{
+					"base_id": "pulse_seed",
+					"minimum_item_level_by_rarity": {
+						"magic": 1,
+						"rare": 1
+					},
+					"target_family_ids": [
+						"attack_mana_leech"
+					],
+					"target_tiers_at_maximum_level": [
+						{
+							"group": "attack_mana_leech",
+							"id": "attack_mana_leech",
+							"kind": "prefix",
+							"max": 15,
+							"min": 10,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "attack_mana_leech",
+							"id": "attack_mana_leech",
+							"kind": "prefix",
+							"max": 25,
+							"min": 16,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "attack_mana_leech",
+							"id": "attack_mana_leech",
+							"kind": "prefix",
+							"max": 35,
+							"min": 26,
+							"tier": 3,
+							"weight": 30
+						}
+					]
+				}
+			],
+			"eligibility_maximum_item_level": 30,
+			"eligibility_note": "仅下列底材存在可达合法结果；物品等级仍限制阶级，最终以当前装备报价为准。普通、固定、已穿戴装备不可用；无合法目标不收费。",
+			"eligible_base_ids": [
+				"nine_slot_etched_ring",
+				"nine_slot_threaded_gloves",
+				"wayglass_token",
+				"pulse_seed"
+			],
+			"example": {
+				"after_definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"前缀 · 灵汲 T1：攻击伤害偷取为魔力 +0.11%",
+						"后缀 · 霜回 T1：冰霜伤害提高 +7%"
+					],
+					"base_id": "wayglass_token",
+					"base_name": "途镜坠",
+					"description": "最大魔力 +6，魔力恢复 +0.3 / 秒。\n前缀 · 灵汲 T1：攻击伤害偷取为魔力 +0.11%\n后缀 · 霜回 T1：冰霜伤害提高 +7%",
+					"effects": [],
+					"id": "gear_000001",
+					"item_level": 16,
+					"name": "魔法 · 途镜坠",
+					"rarity": "magic",
+					"size": [
+						1,
+						1
+					],
+					"slot": "charm",
+					"stats": {
+						"attack_mana_leech": 0.0011,
+						"cold_increased": 0.07,
+						"mana_regen": 0.3,
+						"max_mana": 6.0
+					}
+				},
+				"after_instance": {
+					"affixes": [
+						{
+							"id": "attack_mana_leech",
+							"tier": 1,
+							"value": 11
+						},
+						{
+							"id": "rimeecho",
+							"tier": 1,
+							"value": 7
+						}
+					],
+					"base_id": "wayglass_token",
+					"id": "gear_000001",
+					"item_level": 16,
+					"rarity": "magic"
+				},
+				"balance_after": 84,
+				"balance_before": 100,
+				"before_definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"后缀 · 锐察 T3：全局暴击几率提高 +40%"
+					],
+					"base_id": "wayglass_token",
+					"base_name": "途镜坠",
+					"description": "最大魔力 +6，魔力恢复 +0.3 / 秒。\n后缀 · 锐察 T3：全局暴击几率提高 +40%",
+					"effects": [],
+					"id": "gear_000001",
+					"item_level": 16,
+					"name": "魔法 · 途镜坠",
+					"rarity": "magic",
+					"size": [
+						1,
+						1
+					],
+					"slot": "charm",
+					"stats": {
+						"crit_chance_increased": 0.4,
+						"mana_regen": 0.3,
+						"max_mana": 6.0
+					}
+				},
+				"example_seed": 20261003,
+				"full_candidate_valid": true,
+				"quote": {
+					"code": "",
+					"consumes_item": false,
+					"cost": {
+						"calibration_shard": 16
+					},
+					"item_id": "gear_000001",
+					"materials": {
+
+					},
+					"ok": true,
+					"operation": "targeted_reforge_mana_leech",
+					"reason": "",
+					"revision": 0,
+					"rules_version": "original-targeted-reforge-v1-affix27",
+					"source_instance": {
+						"affixes": [
+							{
+								"id": "global_critical_chance",
+								"tier": 3,
+								"value": 40
+							}
+						],
+						"base_id": "wayglass_token",
+						"id": "gear_000001",
+						"item_level": 16,
+						"rarity": "magic"
+					}
+				},
+				"revision_after": 1,
+				"revision_before": 0,
+				"save_version": 30,
+				"source": {
+					"affixes": [
+						{
+							"id": "global_critical_chance",
+							"tier": 3,
+							"value": 40
+						}
+					],
+					"base_id": "wayglass_token",
+					"id": "gear_000001",
+					"item_level": 16,
+					"rarity": "magic"
+				}
+			},
+			"kind": "operation",
+			"name": "定向重铸 · 魔力偷取",
+			"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+			"rule": {
+				"consumes_item": false,
+				"cost": {
+					"magic": 16,
+					"rare": 40
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的魔力偷取词缀。",
+				"label": "定向重铸",
+				"operation": "targeted_reforge_mana_leech",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"rules_version": "original-targeted-reforge-v1-affix27",
+				"target_id": "mana_leech",
+				"target_label": "魔力偷取",
+				"targeted": true
+			},
+			"rules_version": "original-targeted-reforge-v1-affix27",
+			"selection_note": "先按目录正权重抽取可完成的目标家族与阶级，再从合法池补足；保持稀有度，不保留原词缀，也不保证高阶或更强。",
+			"target_family_ids": [
+				"attack_mana_leech"
+			],
+			"target_id": "mana_leech",
+			"target_label": "魔力偷取",
+			"targeted": true
 		}
 	},
 	"currencies": {
@@ -15057,7 +17932,7 @@
 			"status": "implemented"
 		}
 	},
-	"game_version": "0.48.0",
+	"game_version": "0.49.0",
 	"jewel_affixes": {
 		"barrier": {
 			"kind": "prefix",

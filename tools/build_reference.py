@@ -317,17 +317,25 @@ def build(data, art):
         if c['kind']=='material':
             body=facts([('余额上限',number(c['maximum'])),('存档版本',number(c['save_version'])),('规则版本',esc(c['rules']['rules_version']))])
             body+='<p>真实校准碎片存放在背包中。回收收益为稀有度基数（魔法1、稀有3）加全部词缀阶级之和；校准成本为该装备回收收益的2倍。赋魔8、升格24、补缀6；重铸魔法10、稀有28。T1入门、T3高阶是本游戏顺序，数值为可调原创平衡。</p>'
+            targeted_costs=[esc(entry['target_label'])+'：魔法'+number(entry['cost_by_rarity']['magic'])+'、稀有'+number(entry['cost_by_rarity']['rare']) for entry in data['crafting'].values() if entry.get('targeted')]
+            if targeted_costs:body+='<p>定向重铸消耗校准碎片：'+'；'.join(targeted_costs)+'。仅在底材与物品等级存在合法目标及完整结果时可用。</p>'
             related=' · '.join(link('crafting',op) for op,entry in data['crafting'].items() if entry['kind']=='operation')
         else:
             sample=c['example']; quote=sample['quote']; source=sample['source']
             amount=quote['materials'].get('calibration_shard',0) if key=='salvage' else quote['cost']['calibration_shard']
             action='获得' if key=='salvage' else '消耗'
             mark='<svg viewBox="0 0 64 64" width="48" height="48" aria-hidden="true"><path d="M32 5 L51 22 L42 53 L16 42 L12 21 Z M32 5 L29 30 L42 53 M12 21 L29 30 L51 22" fill="#dfc99a" stroke="#79571f" stroke-width="2"/></svg>'
-            body='<figure class="defense-flow"><figcaption>实际规则示例 · 白蜡长弓</figcaption><ol><li><span class="flow-step">01 · 原物品</span><strong>'+esc(sample['before_definition']['base_name'])+'</strong><span>'+lines('\n'.join(sample['before_definition']['affix_lines']))+'</span></li><li><span class="flow-step">02 · '+action+'校准碎片</span>'+mark+f'<strong data-craft-value="{key}-amount" data-value="{amount}">{amount}</strong></li><li><span class="flow-step">03 · 余额与结果</span>'+f'<strong><span data-craft-value="{key}-before" data-value="{sample["balance_before"]}">{sample["balance_before"]}</span> → <span data-craft-value="{key}-after" data-value="{sample["balance_after"]}">{sample["balance_after"]}</span></strong>'
+            body='<figure class="defense-flow"><figcaption>实际规则示例 · '+esc(sample['before_definition']['base_name'])+'</figcaption><ol><li><span class="flow-step">01 · 原物品</span><strong>'+esc(sample['before_definition']['base_name'])+'</strong><span>'+lines('\n'.join(sample['before_definition']['affix_lines']))+'</span></li><li><span class="flow-step">02 · '+action+'校准碎片</span>'+mark+f'<strong data-craft-value="{key}-amount" data-value="{amount}">{amount}</strong></li><li><span class="flow-step">03 · 余额与结果</span>'+f'<strong><span data-craft-value="{key}-before" data-value="{sample["balance_before"]}">{sample["balance_before"]}</span> → <span data-craft-value="{key}-after" data-value="{sample["balance_after"]}">{sample["balance_after"]}</span></strong>'
             body+='<span>原装备被消耗，空位释放</span>' if key=='salvage' else '<span>'+lines('\n'.join(sample['after_definition']['affix_lines']))+'</span>'
             body+='</li></ol><p class="fine">演示使用合法背包装备与固定示例种子；收益、成本和结果来自实际规则/规划器，真实碎片物品与完整当前版本候选通过当前校验。它不预告玩家下一次随机结果。</p></figure>'
             preconditions={'salvage':'背包中未穿戴的随机魔法或稀有装备','recalibrate':'背包中未穿戴的随机魔法或稀有装备','enchant':'背包中未穿戴的随机普通装备','elevate':'背包中未穿戴的随机魔法装备，能达到合法稀有词缀数','augment':'背包中的随机魔法或稀有装备，必须存在合法空位','reforge':'背包中未穿戴的随机魔法或稀有装备'}
             preserves={'salvage':'消耗选中装备，其余物品保持','recalibrate':'物品ID、底材、等级、稀有度、词缀种类/顺序/阶级；只重掷数值','enchant':'物品ID、底材、物品等级和位置','elevate':'物品ID、底材、物品等级、位置及已有全部词缀','augment':'物品ID、底材、物品等级、位置及已有全部词缀','reforge':'物品ID、底材、物品等级、位置和稀有度；全部词缀重新生成'}
+            if c.get('targeted'):
+                preconditions[key]=esc(c['eligibility_note'])
+                preserves[key]=preserves['reforge']
+                costs=' · '.join(('魔法' if rarity=='magic' else '稀有')+f' <span data-targeted-cost="{key}-{rarity}" data-value="{cost}">{cost}</span> 枚' for rarity,cost in c['cost_by_rarity'].items())
+                eligibility='；'.join(link('equipment',entry['base_id'])+'：'+ ' / '.join(('魔法' if rarity=='magic' else '稀有')+'物品等级≥'+number(level) for rarity,level in entry['minimum_item_level_by_rarity'].items()) for entry in c['eligibility'])
+                body+=facts([('保证目标',esc(c['target_label'])),('目标家族',links('affixes',c['target_family_ids'])),('费用',costs),('最低物品等级',eligibility),('抽取边界',esc(c['selection_note'])),('规则版本',esc(c['rules_version']))])
             body+=facts([('可用底材',links('equipment',c['eligible_base_ids'])),('前置条件',preconditions[key]),('风险',esc(c['risk'])),('保存顺序','完整候选验证 → 原子写盘 → 内存提交与刷新'),('失败保护','拒绝或写盘失败不动装备、材料和序号；取消不收费，失败重试保持种子'),('保持字段',preserves[key])])
             related=link('crafting','calibration_shard')+' · '+link('equipment',source['base_id'])+' · '+links('affixes',[a['id'] for a in source['affixes']])
         cards.append(add('crafting',key,c['name'],c['description'],body,'材料' if c['kind']=='material' else '制作操作',related=related))

@@ -1,0 +1,161 @@
+{
+  "isolated_xdg_root": "/tmp/godot-m1-v049-reference",
+  "before": {
+    "project.godot": {
+      "sha256": "224e4229ca6f2b5f06ad7fe59688c8e29df332ee58ff1a8253b2b4889cda24d2",
+      "bytes": 872
+    },
+    "tools/export_reference.gd": {
+      "sha256": "59e7525adac7c29c792f9a071370d9e901c5efa1cd330b4cc330481c997acfea",
+      "bytes": 83157
+    },
+    "tools/build_reference.py": {
+      "sha256": "40423832336d8fb70bc4033e6a216c64eb0727a87f5e8fe56ca8b5d9b7d72c21",
+      "bytes": 115808
+    },
+    "tests/targeted_reforge_reference_test.gd": {
+      "sha256": "9773009283830485c17e26a6a1747f2c262716d0081774740ebb10e7ddc5550a",
+      "bytes": 9194
+    },
+    "scripts/items/equipment_catalog.gd": {
+      "sha256": "c787ab2a9d5f80601390cf47266585476b244d81bfed651c591c4a6f92331008",
+      "bytes": 37740
+    },
+    "scripts/items/build_affix_profile.gd": {
+      "sha256": "325c970baa227ad7ad1a1f815c63a60825d087918310cfb12b7435a655d4b7be",
+      "bytes": 3096
+    },
+    "scripts/items/crafting_rules.gd": {
+      "sha256": "553ac091068d50cbb2fcf0f74e779dd0078ec00abcbc7c5c76e5bc8128576249",
+      "bytes": 12027
+    },
+    "scripts/items/crafting_expansion_rules.gd": {
+      "sha256": "b690c538a2274b2451f2caa195d30ce0f670284a6b718959c677f0ed30ad2eff",
+      "bytes": 8472
+    },
+    "scripts/items/targeted_reforge_rules.gd": {
+      "sha256": "c0aab3ecf3bc7f006ac8d10865e373c402a1abda21f1a52fdc3166f572f1c7ad",
+      "bytes": 7097
+    },
+    "scripts/items/crafting_transaction_planner.gd": {
+      "sha256": "fdf425b8154c7847666a3a0c64874c040d9d750e4666d65bde14ecbe4ef8294f",
+      "bytes": 10698
+    },
+    "scripts/canonical_game_state.gd": {
+      "sha256": "c4310a8e465b0dea66d6a65fca6f25d01b23774d9ebfecc5839e43619f07cc20",
+      "bytes": 57917
+    },
+    "scripts/save/canonical_build_rules.gd": {
+      "sha256": "43a1a177f10983135248d56d40e46e4965aee98c1215277d5e39981ee1def58e",
+      "bytes": 20623
+    },
+    "docs/qa/v049-reference/reference-baseline.json": {
+      "sha256": "d6b989807d44f2df10ce9871756582e5f57b3f55255c638287830b8056581f4b",
+      "bytes": 50232
+    }
+  },
+  "commands": [
+    {
+      "phase": "export",
+      "command": [
+        "godot",
+        "--headless",
+        "--path",
+        ".",
+        "--script",
+        "res://tools/export_reference.gd"
+      ],
+      "exit_code": 0,
+      "seconds": 5.648
+    },
+    {
+      "phase": "build",
+      "command": [
+        "python3",
+        "tools/build_reference.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.379
+    },
+    {
+      "phase": "test",
+      "command": [
+        "godot",
+        "--headless",
+        "--path",
+        ".",
+        "--script",
+        "res://tests/targeted_reforge_reference_test.gd",
+        "--",
+        "--artifacts"
+      ],
+      "exit_code": 0,
+      "seconds": 3.241
+    },
+    {
+      "phase": "determinism",
+      "command": [
+        "python3",
+        "tools/build_reference.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.419
+    }
+  ],
+  "after": {
+    "project.godot": {
+      "sha256": "224e4229ca6f2b5f06ad7fe59688c8e29df332ee58ff1a8253b2b4889cda24d2",
+      "bytes": 872
+    },
+    "tools/export_reference.gd": {
+      "sha256": "59e7525adac7c29c792f9a071370d9e901c5efa1cd330b4cc330481c997acfea",
+      "bytes": 83157
+    },
+    "tools/build_reference.py": {
+      "sha256": "40423832336d8fb70bc4033e6a216c64eb0727a87f5e8fe56ca8b5d9b7d72c21",
+      "bytes": 115808
+    },
+    "tests/targeted_reforge_reference_test.gd": {
+      "sha256": "9773009283830485c17e26a6a1747f2c262716d0081774740ebb10e7ddc5550a",
+      "bytes": 9194
+    },
+    "scripts/items/equipment_catalog.gd": {
+      "sha256": "c787ab2a9d5f80601390cf47266585476b244d81bfed651c591c4a6f92331008",
+      "bytes": 37740
+    },
+    "scripts/items/build_affix_profile.gd": {
+      "sha256": "325c970baa227ad7ad1a1f815c63a60825d087918310cfb12b7435a655d4b7be",
+      "bytes": 3096
+    },
+    "scripts/items/crafting_rules.gd": {
+      "sha256": "553ac091068d50cbb2fcf0f74e779dd0078ec00abcbc7c5c76e5bc8128576249",
+      "bytes": 12027
+    },
+    "scripts/items/crafting_expansion_rules.gd": {
+      "sha256": "b690c538a2274b2451f2caa195d30ce0f670284a6b718959c677f0ed30ad2eff",
+      "bytes": 8472
+    },
+    "scripts/items/targeted_reforge_rules.gd": {
+      "sha256": "c0aab3ecf3bc7f006ac8d10865e373c402a1abda21f1a52fdc3166f572f1c7ad",
+      "bytes": 7097
+    },
+    "scripts/items/crafting_transaction_planner.gd": {
+      "sha256": "fdf425b8154c7847666a3a0c64874c040d9d750e4666d65bde14ecbe4ef8294f",
+      "bytes": 10698
+    },
+    "scripts/canonical_game_state.gd": {
+      "sha256": "c4310a8e465b0dea66d6a65fca6f25d01b23774d9ebfecc5839e43619f07cc20",
+      "bytes": 57917
+    },
+    "scripts/save/canonical_build_rules.gd": {
+      "sha256": "43a1a177f10983135248d56d40e46e4965aee98c1215277d5e39981ee1def58e",
+      "bytes": 20623
+    },
+    "docs/qa/v049-reference/reference-baseline.json": {
+      "sha256": "d6b989807d44f2df10ce9871756582e5f57b3f55255c638287830b8056581f4b",
+      "bytes": 50232
+    }
+  },
+  "stable": true
+}

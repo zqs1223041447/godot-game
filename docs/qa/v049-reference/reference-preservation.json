@@ -1,0 +1,312 @@
+{
+  "game_version": "0.49.0",
+  "save_version": 30,
+  "catalog_sha256": "02a1af32f4d4891247332f751d4b9e55a65027f2b5340568900e69c45b95f987",
+  "html_sha256": "ffe3ff632e5df22f689aaee660428175775db83d84929edf59dac779de4ec65d",
+  "unchanged_catalog_sections": {
+    "affixes": true,
+    "area_support_examples": true,
+    "burning": true,
+    "canonical": true,
+    "configurations": true,
+    "currencies": true,
+    "current_loot_profile": true,
+    "current_loot_profile_id": true,
+    "defenses": true,
+    "edges": true,
+    "effects": true,
+    "elemental_encounters": true,
+    "ember_proliferation": true,
+    "encounters": true,
+    "equipment": true,
+    "equipment_pools": true,
+    "equipment_rarities": true,
+    "fire_encounter": true,
+    "fixed_items": true,
+    "flasks": true,
+    "jewel_affixes": true,
+    "jewel_rarities": true,
+    "jewels": true,
+    "known_target": true,
+    "limits": true,
+    "loot_profiles": true,
+    "map_bosses": true,
+    "map_camps": true,
+    "mechanisms": true,
+    "monster_attacks": true,
+    "monster_rarities": true,
+    "monsters": true,
+    "normal_gem_trading": true,
+    "normal_journey": true,
+    "passive_caps": true,
+    "passive_policy": true,
+    "passives": true,
+    "projectile_support_examples": true,
+    "save_version": true,
+    "schema_version": true,
+    "sectors": true,
+    "skills": true,
+    "source_critical": true,
+    "source_flasks": true,
+    "source_leech": true,
+    "source_mana_cost": true,
+    "source_recharge": true,
+    "source_spatial": true,
+    "source_tree": true,
+    "sources": true,
+    "special_coverage": true,
+    "sunwell_terrace": true,
+    "support_program_examples": true,
+    "supports": true,
+    "tornado_recipe": true,
+    "town_maps": true,
+    "weapon_stages": true
+  },
+  "legacy_craft_articles": {
+    "salvage": true,
+    "recalibrate": true,
+    "enchant": true,
+    "elevate": true,
+    "augment": true,
+    "reforge": true
+  },
+  "preserved_files": {
+    "docs/reference/art/equipment/ashwood_bow.png": true,
+    "docs/reference/art/equipment/azure_charm.png": true,
+    "docs/reference/art/equipment/cinder_reed.png": true,
+    "docs/reference/art/equipment/detonation_charm.png": true,
+    "docs/reference/art/equipment/ember_wand.png": true,
+    "docs/reference/art/equipment/emberhide_vest.png": true,
+    "docs/reference/art/equipment/gale_spindle.png": true,
+    "docs/reference/art/equipment/guardian_robe.png": true,
+    "docs/reference/art/equipment/nine_slot_etched_ring.png": true,
+    "docs/reference/art/equipment/nine_slot_folded_belt.png": true,
+    "docs/reference/art/equipment/nine_slot_slate_helmet.png": true,
+    "docs/reference/art/equipment/nine_slot_threaded_gloves.png": true,
+    "docs/reference/art/equipment/nine_slot_trail_boots.png": true,
+    "docs/reference/art/equipment/prism_bow.png": true,
+    "docs/reference/art/equipment/pulse_seed.png": true,
+    "docs/reference/art/equipment/return_mantle.png": true,
+    "docs/reference/art/equipment/runewood_focus.png": true,
+    "docs/reference/art/equipment/storm_charm.png": true,
+    "docs/reference/art/equipment/swift_blade.png": true,
+    "docs/reference/art/equipment/tidebound_coat.png": true,
+    "docs/reference/art/equipment/vitality_armor.png": true,
+    "docs/reference/art/equipment/wayglass_token.png": true,
+    "docs/reference/art/equipment/woven_bastion.png": true,
+    "docs/reference/art/flasks/life.png": true,
+    "docs/reference/art/flasks/mana.png": true,
+    "docs/reference/art/jewels/branchfinder.png": true,
+    "docs/reference/art/jewels/emberheart.png": true,
+    "docs/reference/art/jewels/tideglass.png": true,
+    "docs/reference/art/jewels/windweave.png": true,
+    "docs/reference/art/monsters/brood_host.png": true,
+    "docs/reference/art/monsters/brute.png": true,
+    "docs/reference/art/monsters/crawler.png": true,
+    "docs/reference/art/monsters/ember_guard.png": true,
+    "docs/reference/art/monsters/frost_guard.png": true,
+    "docs/reference/art/monsters/rift_warden.png": true,
+    "docs/reference/art/monsters/skitter.png": true,
+    "docs/reference/art/monsters/splitter.png": true,
+    "docs/reference/art/monsters/storm_skitter.png": true,
+    "docs/reference/art/skills/bolt.png": true,
+    "docs/reference/art/skills/chain.png": true,
+    "docs/reference/art/skills/cleave.png": true,
+    "docs/reference/art/skills/dash.png": true,
+    "docs/reference/art/skills/frost.png": true,
+    "docs/reference/art/skills/meteor.png": true,
+    "docs/reference/art/skills/nova.png": true,
+    "docs/reference/art/skills/shade_bolt.png": true,
+    "docs/reference/art/skills/tornado.png": true,
+    "docs/reference/art/skills/ward.png": true,
+    "docs/reference/art/supports/breadth.png": true,
+    "docs/reference/art/supports/chain_extension.png": true,
+    "docs/reference/art/supports/chain_reach.png": true,
+    "docs/reference/art/supports/cold_focus.png": true,
+    "docs/reference/art/supports/concentrate.png": true,
+    "docs/reference/art/supports/efficiency.png": true,
+    "docs/reference/art/supports/fire_focus.png": true,
+    "docs/reference/art/supports/focus.png": true,
+    "docs/reference/art/supports/heavy_projectiles.png": true,
+    "docs/reference/art/supports/lightning_focus.png": true,
+    "docs/reference/art/supports/lingering_chill.png": true,
+    "docs/reference/art/supports/physical_focus.png": true,
+    "docs/reference/art/supports/pierce.png": true,
+    "docs/reference/art/supports/quickcast.png": true,
+    "docs/reference/art/supports/swift_projectiles.png": true,
+    "docs/reference/art/supports/volley.png": true,
+    "docs/reference/originals/ember_proliferation.png": true,
+    "docs/reference/originals/ignite.png": true
+  },
+  "png_inventory_unchanged": true,
+  "targeted_summary": {
+    "targeted_reforge_critical": {
+      "name": "定向重铸 · 暴击",
+      "eligible_base_ids": [
+        "nine_slot_etched_ring",
+        "nine_slot_threaded_gloves",
+        "wayglass_token",
+        "pulse_seed"
+      ],
+      "minimum_item_levels": {
+        "nine_slot_etched_ring": {
+          "magic": 1,
+          "rare": 1
+        },
+        "nine_slot_threaded_gloves": {
+          "magic": 1,
+          "rare": 1
+        },
+        "wayglass_token": {
+          "magic": 1,
+          "rare": 1
+        },
+        "pulse_seed": {
+          "magic": 1,
+          "rare": 1
+        }
+      },
+      "cost_by_rarity": {
+        "magic": 16,
+        "rare": 40
+      },
+      "rules_version": "original-targeted-reforge-v1-affix27",
+      "example_base": "wayglass_token"
+    },
+    "targeted_reforge_damage": {
+      "name": "定向重铸 · 伤害",
+      "eligible_base_ids": [
+        "cinder_reed",
+        "gale_spindle",
+        "woven_bastion",
+        "tidebound_coat",
+        "wayglass_token",
+        "pulse_seed",
+        "runewood_focus",
+        "emberhide_vest",
+        "ashwood_bow"
+      ],
+      "minimum_item_levels": {
+        "cinder_reed": {
+          "magic": 1,
+          "rare": 1
+        },
+        "gale_spindle": {
+          "magic": 1,
+          "rare": 1
+        },
+        "woven_bastion": {
+          "magic": 1,
+          "rare": 1
+        },
+        "tidebound_coat": {
+          "magic": 1,
+          "rare": 1
+        },
+        "wayglass_token": {
+          "magic": 1,
+          "rare": 1
+        },
+        "pulse_seed": {
+          "magic": 1,
+          "rare": 1
+        },
+        "runewood_focus": {
+          "magic": 1,
+          "rare": 1
+        },
+        "emberhide_vest": {
+          "magic": 1,
+          "rare": 1
+        },
+        "ashwood_bow": {
+          "magic": 1,
+          "rare": 1
+        }
+      },
+      "cost_by_rarity": {
+        "magic": 16,
+        "rare": 40
+      },
+      "rules_version": "original-targeted-reforge-v1-affix27",
+      "example_base": "ashwood_bow"
+    },
+    "targeted_reforge_life_leech": {
+      "name": "定向重铸 · 生命偷取",
+      "eligible_base_ids": [
+        "nine_slot_etched_ring",
+        "nine_slot_threaded_gloves",
+        "wayglass_token",
+        "pulse_seed"
+      ],
+      "minimum_item_levels": {
+        "nine_slot_etched_ring": {
+          "magic": 1,
+          "rare": 1
+        },
+        "nine_slot_threaded_gloves": {
+          "magic": 1,
+          "rare": 1
+        },
+        "wayglass_token": {
+          "magic": 1,
+          "rare": 1
+        },
+        "pulse_seed": {
+          "magic": 1,
+          "rare": 1
+        }
+      },
+      "cost_by_rarity": {
+        "magic": 16,
+        "rare": 40
+      },
+      "rules_version": "original-targeted-reforge-v1-affix27",
+      "example_base": "wayglass_token"
+    },
+    "targeted_reforge_mana_leech": {
+      "name": "定向重铸 · 魔力偷取",
+      "eligible_base_ids": [
+        "nine_slot_etched_ring",
+        "nine_slot_threaded_gloves",
+        "wayglass_token",
+        "pulse_seed"
+      ],
+      "minimum_item_levels": {
+        "nine_slot_etched_ring": {
+          "magic": 1,
+          "rare": 1
+        },
+        "nine_slot_threaded_gloves": {
+          "magic": 1,
+          "rare": 1
+        },
+        "wayglass_token": {
+          "magic": 1,
+          "rare": 1
+        },
+        "pulse_seed": {
+          "magic": 1,
+          "rare": 1
+        }
+      },
+      "cost_by_rarity": {
+        "magic": 16,
+        "rare": 40
+      },
+      "rules_version": "original-targeted-reforge-v1-affix27",
+      "example_base": "wayglass_token"
+    }
+  },
+  "all_preserved": true,
+  "art_manifest": {
+    "baseline_sha256": "f2008c3c86505df53031757edff134f00a9136dc4b5f1fa18c9a9e16a9aad0d5",
+    "current_sha256": "f2008c3c86505df53031757edff134f00a9136dc4b5f1fa18c9a9e16a9aad0d5",
+    "unchanged": true
+  },
+  "html_inventory": {
+    "anchors": 3801,
+    "hrefs": 17998,
+    "local_png_files": 66
+  }
+}

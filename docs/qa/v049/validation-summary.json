@@ -1,0 +1,130 @@
+{
+  "source_checks": 41032,
+  "suites": {
+    "pure_rules": {
+      "checks": 17920,
+      "failures": 0,
+      "exit_code": 0
+    },
+    "transactions": {
+      "checks": 943,
+      "failures": 0,
+      "exit_code": 0
+    },
+    "root_controls": {
+      "checks": 17,
+      "failures": 0,
+      "exit_code": 0
+    },
+    "root_actual_ui_flow": {
+      "checks": 14,
+      "failures": 0,
+      "exit_code": 0
+    },
+    "reference_and_links": {
+      "checks": 22138,
+      "failures": 0,
+      "exit_code": 0
+    }
+  },
+  "legacy_six_byte_equivalence": {
+    "base_commit": "57ed67b2d77db3cbd60020e2a94e51cbc8b65db4",
+    "records": 1008,
+    "plan_pairs": 3024,
+    "bytes": 6621672,
+    "sha256": "5c3461742c8c3509116268d34b855382f4afd540d548dd0b43279b3ae08b1118",
+    "exact_bytes_equal": true,
+    "baseline_exit_code": 0,
+    "candidate_exit_code": 0,
+    "comparison": "Old six operations only; metadata, seed versions, rule plans, planner quotes/plans, and global RNG probes",
+    "tested_files": {
+      "scripts/items/crafting_rules.gd": "553ac091068d50cbb2fcf0f74e779dd0078ec00abcbc7c5c76e5bc8128576249",
+      "scripts/items/crafting_transaction_planner.gd": "fdf425b8154c7847666a3a0c64874c040d9d750e4666d65bde14ecbe4ef8294f",
+      "scripts/items/crafting_expansion_rules.gd": "b690c538a2274b2451f2caa195d30ce0f670284a6b718959c677f0ed30ad2eff",
+      "scripts/items/equipment_catalog.gd": "c787ab2a9d5f80601390cf47266585476b244d81bfed651c591c4a6f92331008",
+      "scripts/items/targeted_reforge_rules.gd": "c0aab3ecf3bc7f006ac8d10865e373c402a1abda21f1a52fdc3166f572f1c7ad",
+      "tests/legacy_crafting_equivalence_probe.gd": "20c2c59d6aa3a26f504768e0643792c65da809dcfb2551e0d79a30235642f8ad"
+    }
+  },
+  "font": {
+    "mapped_codepoints": 1069,
+    "required_codepoints": 1064,
+    "required_han": 943,
+    "baseline_codepoints": 874,
+    "fallback_symbols": [
+      8961,
+      9672
+    ],
+    "missing": [],
+    "lost_baseline": [],
+    "empty_han": [],
+    "errors": [],
+    "ok": true,
+    "runtime_files": 157,
+    "missing_locations": {}
+  },
+  "logs": {
+    "docs/qa/v049-rules/rules.log": {
+      "bytes": 216,
+      "sha256": "0c4e574b595ab2a157901521181858962fd71261a3d8b5ddcfbafb8c3756af20"
+    },
+    "docs/qa/v049-compat/candidate.log": {
+      "bytes": 126,
+      "sha256": "1803fff56c55d27bffd0a6b613ec10ad7153b9fa159ae5634b0be7935e33780e"
+    },
+    "docs/qa/v049-compat/baseline.log": {
+      "bytes": 126,
+      "sha256": "1803fff56c55d27bffd0a6b613ec10ad7153b9fa159ae5634b0be7935e33780e"
+    },
+    "docs/qa/v049-transactions/transactions.log": {
+      "bytes": 128,
+      "sha256": "ec764d3d477567c33894e92bb8810f385cb78b8be84ab90aa0d795218bde7acc"
+    },
+    "docs/qa/v049-transactions/transactions.log.txt": {
+      "bytes": 128,
+      "sha256": "ec764d3d477567c33894e92bb8810f385cb78b8be84ab90aa0d795218bde7acc"
+    },
+    "docs/qa/v049-transactions/initial-fixture-correction.log": {
+      "bytes": 2260,
+      "sha256": "716f19e0410e9faf1c53ad8f558b1d20926c4cb889d098946a99ace9436a557e"
+    },
+    "docs/qa/v049-transactions/initial-fixture-correction.log.txt": {
+      "bytes": 2260,
+      "sha256": "716f19e0410e9faf1c53ad8f558b1d20926c4cb889d098946a99ace9436a557e"
+    },
+    "docs/qa/v049-root-ui/actual-ui-flow.log": {
+      "bytes": 155,
+      "sha256": "18d5f8d1b70c485c1e9194ee9b697bb8a704d9e8a7c4a4d3c7c0ffe6d2ab1389"
+    },
+    "docs/qa/v049-root-ui/controls.log": {
+      "bytes": 123,
+      "sha256": "552501fb8da8120021fa8e37c01461612191d438af69860310a189e9c4a4a5c3"
+    },
+    "docs/qa/v049/import.log": {
+      "bytes": 64537,
+      "sha256": "fa632de53f492a78c374763d97def9051561544d162706c23f0dbb235136b74c"
+    },
+    "docs/qa/v049-reference/test.log": {
+      "bytes": 126,
+      "sha256": "372dd521ad681a7a0bd58e9a66092315850256d26a13d2fd662c4ef38c85a350"
+    },
+    "docs/qa/v049-reference/determinism.log": {
+      "bytes": 52,
+      "sha256": "65d47533eaf556129a1f3a295db12ab1bc36a8df0770c71cb9378490d54d03ba"
+    },
+    "docs/qa/v049-reference/build.log": {
+      "bytes": 50,
+      "sha256": "5f82f1b4028223cb5182a6dc09d060ab620af0d7c8995d9eff1509969032b5aa"
+    },
+    "docs/qa/v049-reference/export.log": {
+      "bytes": 127,
+      "sha256": "51e3b0bc619efba5c710e1863eedea0402e6700d8c973b9ecb758418906e7297"
+    }
+  },
+  "limits": [
+    "No additional native visual acceptance run",
+    "No Windows hardware FPS claim",
+    "No 600-second or historical full-suite run"
+  ],
+  "initial_failure": "Four transaction test expectations corrected to distinguish insufficient funds from stale revision; no production change"
+}

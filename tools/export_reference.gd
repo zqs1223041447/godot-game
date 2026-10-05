@@ -428,11 +428,13 @@ static func crafting_examples() -> Dictionary:
 	var metadata: Dictionary = Craft.metadata()
 	metadata["integration_status"] = "implemented"
 	var result: Dictionary = {Craft.MATERIAL_ID: {"name": "校准碎片", "kind": "material",
-		"description": "回收背包中的随机魔法、稀有装备获得。真实堆叠物品，用于校准、赋魔、升格、补缀与重铸；待安置碎片不能直接消费。",
+		"description": "回收背包中的随机魔法、稀有装备获得。真实堆叠物品，用于校准、赋魔、升格、补缀、重铸与定向重铸；待安置碎片不能直接消费。",
 		"maximum": Canonical.ShardCatalog.INVENTORY_LIMIT, "rules": metadata,
 		"max_revision": Canonical.Rules.MAX_SERIAL, "save_version": Canonical.Rules.VERSION}}
 	for operation: String in Craft.operation_ids():
 		var instance: Dictionary = _local_instance(["whetstone_edge"], "magic")
+		if Craft.Targeted.operation_ids().has(operation) and operation != "targeted_reforge_damage":
+			instance = _local_instance(["global_critical_chance"], "magic", "wayglass_token")
 		instance.id = "gear_000001"
 		if operation == "enchant": instance.rarity = "normal"; instance.affixes = []
 		var model := Canonical.new()
@@ -455,20 +457,79 @@ static func crafting_examples() -> Dictionary:
 		candidate.revision += 1
 		assert(Canonical.Rules.reason(candidate).is_empty(), "Craft reference must validate the full current canonical build")
 		var presentation := Craft.operation_metadata(operation)
-		result[operation] = {"name": presentation.label, "kind": "operation",
+		var name: String = presentation.label
+		if presentation.get("targeted", false): name += " · " + presentation.target_label
+		result[operation] = {"name": name, "kind": "operation",
 			"description": presentation.description, "risk": presentation.risk,
-			"rule": metadata.operations[operation], "rules_version": Craft.CURRENT_RULES_VERSION, "eligible_base_ids": metadata.base_ids,
+			"rule": metadata.operations[operation], "rules_version": quote.rules_version, "eligible_base_ids": metadata.base_ids,
 			"example": {"source": instance.duplicate(true), "before_definition": Equipment.definition(instance),
 				"quote": quote, "balance_before": 100, "balance_after": planned.candidate.materials[Craft.MATERIAL_ID],
 				"revision_before": 0, "revision_after": planned.candidate.revision,
 				"after_instance": planned.candidate.equipment_instances.get(instance.id, {}),
 				"after_definition": Equipment.definition(planned.candidate.equipment_instances.get(instance.id, {})),
 				"full_candidate_valid": true, "save_version": candidate.version, "example_seed": 20261003}}
+		if presentation.get("targeted", false):
+			result[operation].merge(_targeted_crafting_constraints(operation), true)
 	return result
+
+
+## Eligibility is proven by production quotes for legal catalog instances,
+## including rare completion limits, rather than copied from the base inventory.
+static func _targeted_crafting_constraints(operation: String) -> Dictionary:
+	var target: Dictionary = Craft.Targeted.TARGETS[operation]
+	var eligible_base_ids: Array[String] = []
+	var eligibility: Array[Dictionary] = []
+	for base_id: String in Equipment.all_base_ids():
+		var entry: Dictionary = {"base_id": base_id, "minimum_item_level_by_rarity": {},
+			"target_family_ids": [], "target_tiers_at_maximum_level": []}
+		var pool: Array[Dictionary] = Craft.Expansion._pool(base_id, Equipment.MAX_ITEM_LEVEL, [])
+		for tier: Dictionary in pool:
+			if not target.families.has(tier.id): continue
+			entry.target_tiers_at_maximum_level.append(tier.duplicate(true))
+			if not entry.target_family_ids.has(tier.id): entry.target_family_ids.append(tier.id)
+		for rarity: String in Craft.Targeted.COSTS:
+			var maximum_source: Dictionary = _crafting_probe_instance(base_id, Equipment.MAX_ITEM_LEVEL, rarity)
+			if maximum_source.is_empty() or not Craft.operation_quote(maximum_source, operation).ok: continue
+			for level: int in range(Equipment.MIN_ITEM_LEVEL, Equipment.MAX_ITEM_LEVEL + 1):
+				var source: Dictionary = _crafting_probe_instance(base_id, level, rarity)
+				if not source.is_empty() and Craft.operation_quote(source, operation).ok:
+					entry.minimum_item_level_by_rarity[rarity] = level
+					break
+		if not entry.minimum_item_level_by_rarity.is_empty():
+			eligible_base_ids.append(base_id)
+			eligibility.append(entry)
+	var costs: Dictionary = {}
+	for rarity: String in Craft.Targeted.COSTS:
+		var source: Dictionary = _crafting_probe_instance(eligible_base_ids[0], Equipment.MAX_ITEM_LEVEL, rarity)
+		var quote: Dictionary = Craft.operation_quote(source, operation)
+		assert(quote.ok)
+		costs[rarity] = int(quote.cost[Craft.MATERIAL_ID])
+	return {"targeted": true, "target_id": target.id, "target_label": target.label,
+		"target_family_ids": target.families.duplicate(), "eligible_base_ids": eligible_base_ids,
+		"eligibility": eligibility, "cost_by_rarity": costs,
+		"catalog_vocabulary": Equipment.CURRENT_VOCABULARY,
+		"eligibility_maximum_item_level": Equipment.MAX_ITEM_LEVEL,
+		"eligibility_note": "仅下列底材存在可达合法结果；物品等级仍限制阶级，最终以当前装备报价为准。普通、固定、已穿戴装备不可用；无合法目标不收费。",
+		"selection_note": "先按目录正权重抽取可完成的目标家族与阶级，再从合法池补足；保持稀有度，不保留原词缀，也不保证高阶或更强。"}
+
+
+static func _crafting_probe_instance(base_id: String, level: int, rarity: String) -> Dictionary:
+	var pool: Array[Dictionary] = Craft.Expansion._pool(base_id, level, [])
+	if pool.is_empty(): return {}
+	var first: Dictionary = pool[0]
+	var instance: Dictionary = {"id": "gear_000001", "base_id": base_id, "rarity": "magic",
+		"item_level": level, "affixes": [{"id": first.id, "tier": first.tier, "value": first.min}]}
+	if not Equipment.validate_instance(instance): return {}
+	if rarity == "rare":
+		var expanded: Dictionary = Craft.Expansion.plan(instance, "elevate", 20261003)
+		if not expanded.ok: return {}
+		instance = expanded.instance
+	assert(Equipment.validate_instance(instance))
+	return instance
 
 ## Hand-authored legal examples derive every roll from the live family tiers.
 ## No random generator, save path, migration, or player-owned build is accessed.
-static func _local_instance(affix_ids: Array = [], rarity: String = "normal") -> Dictionary:
+static func _local_instance(affix_ids: Array = [], rarity: String = "normal", base_id: String = WeaponLocal.BASE_ID) -> Dictionary:
 	var affixes: Array = []
 	var level: int = Equipment.MIN_ITEM_LEVEL
 	for id: String in affix_ids:
@@ -476,7 +537,7 @@ static func _local_instance(affix_ids: Array = [], rarity: String = "normal") ->
 		var tier: Dictionary = family.tiers.back()
 		level = maxi(level, int(tier.level))
 		affixes.append({"id": id, "tier": tier.tier, "value": tier.max})
-	return {"id": "gear_000001", "base_id": WeaponLocal.BASE_ID, "rarity": rarity, "item_level": level, "affixes": affixes}
+	return {"id": "gear_000001", "base_id": base_id, "rarity": rarity, "item_level": level, "affixes": affixes}
 
 static func local_build(instance: Dictionary) -> RefCounted:
 	assert(Equipment.validate_instance(instance), "Reference equipment must be a legal real instance")
