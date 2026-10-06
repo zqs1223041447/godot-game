@@ -1,0 +1,216 @@
+{
+	"engine": "4.6.3-stable (official)",
+	"failures": [],
+	"phases": [
+		{
+			"after": {
+				"changed": 23,
+				"items": 43,
+				"refresh": 1,
+				"revision": 24,
+				"saves": 3,
+				"shards": 100
+			},
+			"before": {
+				"changed": 23,
+				"items": 43,
+				"refresh": 0,
+				"revision": 24,
+				"saves": 3,
+				"shards": 100
+			},
+			"phase": "first_I_open",
+			"us": 20283
+		},
+		{
+			"after": {
+				"changed": 23,
+				"items": 43,
+				"refresh": 1,
+				"revision": 24,
+				"saves": 3,
+				"shards": 100
+			},
+			"before": {
+				"changed": 23,
+				"items": 43,
+				"refresh": 1,
+				"revision": 24,
+				"saves": 3,
+				"shards": 100
+			},
+			"phase": "select_item",
+			"us": 3550
+		},
+		{
+			"after": {
+				"changed": 23,
+				"items": 43,
+				"refresh": 1,
+				"revision": 24,
+				"saves": 3,
+				"shards": 100
+			},
+			"before": {
+				"changed": 23,
+				"items": 43,
+				"refresh": 1,
+				"revision": 24,
+				"saves": 3,
+				"shards": 100
+			},
+			"phase": "warm_close_0",
+			"us": 195
+		},
+		{
+			"after": {
+				"changed": 23,
+				"items": 43,
+				"refresh": 1,
+				"revision": 24,
+				"saves": 3,
+				"shards": 100
+			},
+			"before": {
+				"changed": 23,
+				"items": 43,
+				"refresh": 1,
+				"revision": 24,
+				"saves": 3,
+				"shards": 100
+			},
+			"phase": "warm_open_0",
+			"us": 274
+		},
+		{
+			"after": {
+				"changed": 23,
+				"items": 43,
+				"refresh": 1,
+				"revision": 24,
+				"saves": 3,
+				"shards": 100
+			},
+			"before": {
+				"changed": 23,
+				"items": 43,
+				"refresh": 1,
+				"revision": 24,
+				"saves": 3,
+				"shards": 100
+			},
+			"phase": "warm_close_1",
+			"us": 238
+		},
+		{
+			"after": {
+				"changed": 23,
+				"items": 43,
+				"refresh": 1,
+				"revision": 24,
+				"saves": 3,
+				"shards": 100
+			},
+			"before": {
+				"changed": 23,
+				"items": 43,
+				"refresh": 1,
+				"revision": 24,
+				"saves": 3,
+				"shards": 100
+			},
+			"phase": "warm_open_1",
+			"us": 374
+		},
+		{
+			"after": {
+				"changed": 23,
+				"items": 43,
+				"refresh": 1,
+				"revision": 24,
+				"saves": 3,
+				"shards": 100
+			},
+			"before": {
+				"changed": 23,
+				"items": 43,
+				"refresh": 1,
+				"revision": 24,
+				"saves": 3,
+				"shards": 100
+			},
+			"phase": "warm_close_2",
+			"us": 184
+		},
+		{
+			"after": {
+				"changed": 23,
+				"items": 43,
+				"refresh": 1,
+				"revision": 24,
+				"saves": 3,
+				"shards": 100
+			},
+			"before": {
+				"changed": 23,
+				"items": 43,
+				"refresh": 1,
+				"revision": 24,
+				"saves": 3,
+				"shards": 100
+			},
+			"phase": "warm_open_2",
+			"us": 257
+		},
+		{
+			"after": {
+				"changed": 23,
+				"items": 43,
+				"refresh": 1,
+				"revision": 24,
+				"saves": 3,
+				"shards": 100
+			},
+			"before": {
+				"changed": 23,
+				"items": 43,
+				"refresh": 1,
+				"revision": 24,
+				"saves": 3,
+				"shards": 100
+			},
+			"phase": "request_quote",
+			"us": 7747
+		},
+		{
+			"after": {
+				"changed": 24,
+				"items": 43,
+				"refresh": 2,
+				"revision": 25,
+				"saves": 4,
+				"shards": 84
+			},
+			"before": {
+				"changed": 23,
+				"items": 43,
+				"refresh": 1,
+				"revision": 24,
+				"saves": 3,
+				"shards": 100
+			},
+			"phase": "confirm_visible_craft",
+			"us": 18295
+		}
+	],
+	"scope": "One fresh-process actual production Main/HUD panel path; startup load+ready and first-I separately measured, no production timing wrappers; headless CPU only",
+	"setup": {
+		"engine_elapsed_to_ready_us": 2073875,
+		"fixture_prepare_us": 899956,
+		"grid_cached_before_first_I": true,
+		"main_load_and_ready_us": 1071538,
+		"main_new_ready_us": 258881,
+		"main_script_load_us": 812657
+	},
+	"source": "bcecff233e0e37082c590c662af6e6f67b01b47b + root static Grid preload"
+}

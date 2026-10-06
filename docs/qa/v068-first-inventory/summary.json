@@ -1,0 +1,34 @@
+{
+  "base_commit": "bcecff233e0e37082c590c662af6e6f67b01b47b",
+  "production_files_changed": [
+    "scripts/ui/canonical_inventory_panel.gd"
+  ],
+  "production_diff": "Add one static Grid Script preload; instantiate that script in the existing build location instead of loading it at first open",
+  "first_I_us": {
+    "before": 41298,
+    "after": 20283,
+    "difference": -21015
+  },
+  "main_load_and_ready_us": {
+    "before": 1120330,
+    "after": 1071538,
+    "difference": -48792
+  },
+  "paired_samples": 1,
+  "observation": {
+    "exact_observation_equal": true,
+    "before_sha256": "64fa33ff6ccdf06314e6353e0f5b0181adc3b6e72b81fdda985f2b751a990fcb",
+    "after_sha256": "64fa33ff6ccdf06314e6353e0f5b0181adc3b6e72b81fdda985f2b751a990fcb",
+    "bytes": 108156,
+    "same_harness_all_runs": true
+  },
+  "source_only": true,
+  "version_and_schema_unchanged": true,
+  "limitations": [
+    "The one-time script parse moves to startup; no total work reduction claim.",
+    "One startup sample decreased rather than increased due to uncontrolled timing noise; this is not evidence of startup improvement.",
+    "First open remains20.283ms, above16.7ms. No claim of zero hitch or Windows FPS.",
+    "No new full benchmark, screenshot, Windows export, package, tag or Release.",
+    "Warm opens perform zero dirty refreshes; one actual craft debits16, saves once and refreshes once."
+  ]
+}

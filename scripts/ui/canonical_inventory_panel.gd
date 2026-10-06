@@ -6,6 +6,7 @@ signal feedback(message: String)
 signal character_requested
 signal item_hovered(uid: String, anchor: Rect2)
 signal hover_left
+const UnifiedGridView = preload("res://scripts/ui/unified_bag_grid.gd")
 const FlaskSlotView = preload("res://scripts/ui/flask_slot.gd")
 const CraftControls = preload("res://scripts/ui/crafting_controls.gd")
 const ThemeStyle = preload("res://scripts/visuals/visual_theme.gd")
@@ -192,8 +193,7 @@ func _build() -> void:
 	_next_page.pressed.connect(_turn_page.bind(1))
 	page_bar.add_child(_next_page)
 	top.add_child(page_bar)
-	var grid_script: Script = load("res://scripts/ui/unified_bag_grid.gd")
-	_grid = grid_script.new()
+	_grid = UnifiedGridView.new()
 	_grid.name = "SharedCanonicalBagGrid"
 	_grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_grid.size_flags_vertical = Control.SIZE_EXPAND_FILL
