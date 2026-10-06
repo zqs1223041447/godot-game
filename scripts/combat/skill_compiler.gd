@@ -6,6 +6,7 @@ const Recipes = preload("res://scripts/combat/combat_data.gd")
 const Supports = preload("res://scripts/combat/support_registry.gd")
 const Extension = preload("res://scripts/combat/projectile_support_rules.gd")
 const Ambush = preload("res://scripts/combat/ambush_support_rules.gd")
+const InwardPull = preload("res://scripts/combat/inward_pull_support_rules.gd")
 const Area = preload("res://scripts/combat/area_support_rules.gd")
 const Critical=preload("res://scripts/combat/critical_strike_rules.gd")
 const Resolute = preload("res://scripts/combat/resolute_technique_rules.gd")
@@ -211,6 +212,11 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 		var trap_profile: Dictionary = {"enabled": true}
 		trap_profile.merge(Ambush.POLICY.duplicate(true))
 		result.trap_profile = trap_profile
+	if canonical.has("inward_pull"):
+		var impulse_profile: Dictionary = {"enabled": true}
+		impulse_profile.merge(InwardPull.POLICY.duplicate(true))
+		compiled_snapshot.area_impulse_policy = impulse_profile.duplicate(true)
+		result.area_impulse_profile = impulse_profile
 	var hit_policy: Dictionary = Resolute.compiled_profile(compiled_snapshot)
 	if not hit_policy.is_empty():result.hit_policy = hit_policy
 	return result

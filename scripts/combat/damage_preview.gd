@@ -123,6 +123,7 @@ static func details(cast: Dictionary) -> String:
 	lines.append_array(burn_lines(cast))
 	lines.append_array(shock_lines(cast))
 	lines.append_array(trap_lines(cast))
+	lines.append_array(inward_pull_lines(cast))
 	if cast.get("recipe", {}).get("delivery", "") == "melee" and cast.get("skill_id", "") == "basic":
 		lines.append("普通近战攻击：距离 %.0f · 最多 %d 个目标；不发射投射物。" % [float(cast.recipe.radius), int(cast.recipe.max_targets)])
 	if not entries(cast).is_empty() and bool(cast.get("hit_policy", {}).get("hits_cannot_be_evaded", false)):
@@ -180,4 +181,11 @@ static func trap_lines(cast: Dictionary) -> PackedStringArray:
 	lines.append("脚下布置 · %.2f 秒后布防 · 触发半径 %.0f" % [float(profile.arming_seconds), float(profile.trigger_radius)])
 	lines.append("保留 %.0f 秒 · 所有技能组共享 %d 枚；满额不消耗魔力或冷却。" % [float(profile.lifetime_seconds), int(profile.maximum_traps)])
 	lines.append("放置时固定伤害与暴击；敌人靠近后释放一次，到期消失。触发需视线，范围增幅只改变爆发范围。")
+	return lines
+
+
+static func inward_pull_lines(cast: Dictionary) -> PackedStringArray:
+	var lines := PackedStringArray()
+	if not bool(cast.get("ok", false)) or not bool(cast.get("area_impulse_profile", {}).get("enabled", false)): return lines
+	lines.append("命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。")
 	return lines

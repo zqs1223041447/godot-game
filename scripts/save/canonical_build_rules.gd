@@ -39,7 +39,8 @@ const V38_VERSION := 38
 const V39_VERSION := 39
 const V40_VERSION := 40
 const V41_VERSION := 41
-const VERSION := 42
+const V42_VERSION := 42
+const VERSION := 43
 const LEGACY_MAX_ITEMS := 1024
 const V17_MAX_ITEMS := LEGACY_MAX_ITEMS + 1
 const MAX_ITEMS := V17_MAX_ITEMS + 2 # Two once-only migration bottles; bag capacity is unchanged.
@@ -82,8 +83,15 @@ static func decode_v29(raw: Variant) -> Dictionary:
 	return _decode(raw, true, V29_VERSION, true)
 
 
+## Freeze all schema42 fields, source policy41 and equipment vocabulary39.
+## Current catalogs must not admit a schema43 gem through an older envelope.
+static func decode_v42(raw: Variant) -> Dictionary:
+	var decoded := _decode(raw, true, V42_VERSION, true)
+	return decoded if reason_v42(decoded).is_empty() else {}
+
+
 ## Freeze all schema41 fields, source policy41 and equipment vocabulary39.
-## Current catalogs must not admit a schema42 gem through an older envelope.
+## Current catalogs must not admit later gems through an older envelope.
 static func decode_v41(raw: Variant) -> Dictionary:
 	var decoded := _decode(raw, true, V41_VERSION, true)
 	return decoded if reason_v41(decoded).is_empty() else {}
@@ -276,6 +284,13 @@ static func reason_v29(value: Variant, validate_talents: Callable = Callable(), 
 	return _reason(value, V29_VERSION, true, true, MAX_ITEMS, validate_talents, socket_ids)
 
 
+static func reason_v42(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
+	# Full frozen native legality is mandatory; callbacks can only add restrictions.
+	var native_reason := _reason(value, V42_VERSION, true, true, MAX_ITEMS, Callable(), socket_ids)
+	if not native_reason.is_empty(): return native_reason
+	return str(validate_talents.call(value)) if validate_talents.is_valid() else ""
+
+
 static func reason_v41(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
 	# Full frozen native legality is mandatory; callbacks can only add restrictions.
 	var native_reason := _reason(value, V41_VERSION, true, true, MAX_ITEMS, Callable(), socket_ids)
@@ -458,7 +473,7 @@ static func _reason(value: Variant, expected_version: int, paged: bool, allow_cu
 	return str(validate_talents.call(value)) if validate_talents.is_valid() else SourceTree.reason(value)
 
 
-## Source-only schemas35/36/38/40/41 and gem-only42 define no equipment vocabularies.
+## Source-only schemas35/36/38/40/41 and gem-only42/43 define no equipment vocabularies.
 ## Keep save-to-equipment mapping explicit and the Catalog API historically strict.
 static func equipment_vocabulary_for_save_version(save_version: int) -> int:
 	if save_version >= V39_VERSION: return 39

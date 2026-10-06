@@ -26,6 +26,7 @@ const Combat = preload("res://scripts/combat/combat_data.gd")
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
 const Defense = preload("res://scripts/mechanics/defense_rules.gd")
 const TrapRuntime = preload("res://scripts/combat/player_trap_runtime.gd")
+const InwardPull = preload("res://scripts/combat/inward_pull_support_rules.gd")
 var trap_runtime = TrapRuntime.new()
 var trap_trace: Array[Dictionary] = []
 const CriticalRuntime = preload("res://scripts/combat/critical_strike_runtime.gd")
@@ -1268,11 +1269,18 @@ func _area_damage(origin: Vector2, radius: float, packet: Dictionary, color: Col
 	if packet.is_empty():
 		return
 	var cast_snapshot: Dictionary = state.get_combat_snapshot() if snapshot.is_empty() else snapshot
+	var inward: bool = cast_snapshot.has("area_impulse_policy")
+	if inward and not InwardPull.policy_error(cast_snapshot.area_impulse_policy).is_empty(): return
 	for enemy: Dictionary in enemies:
 		if float(enemy.health) > 0.0 and float(enemy.spawn) <= 0.0 and AreaRules.contains_target(origin, Vector2(enemy.pos), radius, float(enemy.radius)) and _terrain_visible(origin,enemy.pos):
 			_apply_damage_packet(enemy, packet, cast_snapshot, color, slow, provenance)
-			var direction: Vector2 = (Vector2(enemy.pos) - origin).normalized()
-			enemy.knockback = direction * 190.0
+			# Keep admission and post-settlement impulse assignment identical.
+			# A frozen area policy only changes direction, not lifetime or damage.
+			if inward:
+				enemy.knockback = InwardPull.impulse(origin, Vector2(enemy.pos), cast_snapshot.area_impulse_policy)
+			else:
+				var direction: Vector2 = (Vector2(enemy.pos) - origin).normalized()
+				enemy.knockback = direction * 190.0
 
 
 func _place_ambush(compiled: Dictionary, group_id: String, main_uid: String) -> bool:

@@ -136,7 +136,10 @@ static func view(model: RefCounted, uid: String) -> Dictionary:
 			result.requirements = ["适用技能："+"、".join(supported_names)]
 
 			result.base_stats = []
-			if support_id == "ambush":
+			if support_id == "inward_pull":
+				result.function = "范围命中将敌人推向本次爆发的圆心。"
+				result.description = "牵引受墙体与怪物分离影响，不保证聚到一点。自身周围施放会把敌人拉近；连接符印伏击时，以符印为圆心。"
+			elif support_id == "ambush":
 				result.function = "在脚下预置符印，敌人靠近后释放相连技能一次。"
 				var trap_stats: Array[Dictionary] = []
 				_append_numeric_stat(trap_stats, "布防时间", AmbushRules.POLICY.arming_seconds, " 秒")
