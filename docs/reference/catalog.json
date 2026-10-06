@@ -6416,7 +6416,7 @@
 				"normal_points": 5,
 				"source_version": "3.29.1"
 			},
-			"version": 46
+			"version": 47
 		},
 		"default_casts": {
 			"group_000001": {
@@ -7224,6 +7224,28 @@
 				"skills": [],
 				"support_id": "focus"
 			},
+			"support:frost_lock": {
+				"capabilities": [],
+				"definition_id": "support:frost_lock",
+				"description": "仅辅助冰霜脉冲：主命中伤害×0.75，魔力消耗×1.20。正值冰霜命中冻结普通与魔法敌人0.60秒、稀有敌人0.35秒、首领0.20秒；结束后免疫冻结1.50秒。保留原有3秒减速，与寒意延长辅助互斥，占用1个辅助槽。",
+				"family": "frost_lock",
+				"glyph": "",
+				"icon": "res://assets/ui/grimoire/frost_lock.png",
+				"icon_texture": "res://assets/ui/grimoire/frost_lock.png",
+				"kind": "support_gem",
+				"name": "霜锁辅助",
+				"requires": [],
+				"short_name": "霜锁辅助",
+				"size": [
+					1,
+					1
+				],
+				"skill_id": "",
+				"skills": [
+					"frost"
+				],
+				"support_id": "frost_lock"
+			},
 			"support:heavy_projectiles": {
 				"capabilities": [
 					"projectile_hit"
@@ -7512,7 +7534,7 @@
 			}
 		},
 		"gem_reward": {
-			"definition_count": 31,
+			"definition_count": 32,
 			"duplicate_definitions_have_distinct_uid": true,
 			"eligible_root_kill_interval": 30,
 			"failed_admission_restores_rng": true,
@@ -7539,7 +7561,7 @@
 				"evasion": 320.0
 			}
 		},
-		"save_version": 46,
+		"save_version": 47,
 		"skitter_accuracy_example": {
 			"base_accuracy": 140,
 			"base_chance": 0.96,
@@ -8089,7 +8111,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 46,
+				"save_version": 47,
 				"source": {
 					"affixes": [
 						{
@@ -8601,7 +8623,7 @@
 				"schema_version": 2,
 				"status": "prototype"
 			},
-			"save_version": 46
+			"save_version": 47
 		},
 		"elevate": {
 			"description": "保留魔法装备已有词缀，升为稀有并补至4至6条。",
@@ -8803,7 +8825,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 46,
+				"save_version": 47,
 				"source": {
 					"affixes": [
 						{
@@ -8988,7 +9010,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 46,
+				"save_version": 47,
 				"source": {
 					"affixes": [],
 					"base_id": "ashwood_bow",
@@ -9175,7 +9197,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 46,
+				"save_version": 47,
 				"source": {
 					"affixes": [
 						{
@@ -9379,7 +9401,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 46,
+				"save_version": 47,
 				"source": {
 					"affixes": [
 						{
@@ -9522,7 +9544,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 46,
+				"save_version": 47,
 				"source": {
 					"affixes": [
 						{
@@ -10006,7 +10028,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 46,
+				"save_version": 47,
 				"source": {
 					"affixes": [
 						{
@@ -11810,7 +11832,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 46,
+				"save_version": 47,
 				"source": {
 					"affixes": [
 						{
@@ -12140,7 +12162,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 46,
+				"save_version": 47,
 				"source": {
 					"affixes": [
 						{
@@ -12459,7 +12481,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 46,
+				"save_version": 47,
 				"source": {
 					"affixes": [
 						{
@@ -12522,7 +12544,7 @@
 			"example_quantity": 1,
 			"name": "校准碎片",
 			"quantity_source": "items[uid].payload.quantity",
-			"save_version": 46,
+			"save_version": 47,
 			"size": [
 				1,
 				1
@@ -36975,7 +36997,984 @@
 		"pool_id": "forgeblade_v34",
 		"save_version": 34
 	},
-	"game_version": "0.72.0",
+	"frost_lock": {
+		"admission": "按当前命中结算边界elapsed附加，立即阻止tick末新预警起手；下一敌方阶段开始暂停，不追溯取消本tick已经结算的攻击",
+		"bounds": "仅新增一枚霜锁辅助及其灰白冰晶；不支持玩家被冻、碎冰、传播或新的冻结天赋。静态资料验证不等于原生、Windows或打包验收",
+		"cleanup": "最多100个既有怪物ID状态，免疫结束清理；死亡立即移除，玩家死亡、换图、返城、重启清空。公开冻结列表只显示正在冻结的怪物",
+		"continuing": "外力冲量、怪物分离、墙体碰撞、燃烧、感电、其他状态与护盾恢复继续；仍可能被推移，冻结不暂停世界资源时钟",
+		"eligibility": "只有冰霜脉冲主投射物通过原出生与命中准入、造成正的实际冰伤盾血损失且目标仍存活，才进入冻结；抵消为零、致死、DOT、独立爆炸与其他技能附加冰伤不触发",
+		"equipment_vocabulary": 46,
+		"example_scope": "直接复用通过实际Main的完整合法47存档，在内存只读重编译；无辅助冰霜为同快照对照。数值是非暴击、无防御单次主命中，不是DPS。时间示例调用FreezeRuntime，不重跑Main",
+		"examples": {
+			"basic": {
+				"compiled": {
+					"critical": {
+						"primary": {
+							"chance": 0.05,
+							"multiplier": 1.5
+						},
+						"secondary": {
+							"chance": 0.05,
+							"multiplier": 1.5
+						}
+					},
+					"error": "",
+					"ok": true,
+					"packets": {
+						"projectile": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 1.0,
+								"base_coefficient": 1.0,
+								"intrinsic": {
+									"physical": 26.0
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 26.0
+							},
+							"role": "projectile",
+							"skill_id": "basic",
+							"tags": [
+								"hit",
+								"projectile",
+								"attack"
+							]
+						},
+						"secondary": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.0,
+								"base_coefficient": 0.9,
+								"intrinsic": {
+									"fire": 23.400000000000002
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 23.400000000000002
+							},
+							"role": "secondary",
+							"skill_id": "basic",
+							"tags": [
+								"hit",
+								"area",
+								"secondary",
+								"explosion"
+							]
+						}
+					},
+					"recipe": {
+						"speed": 640.0
+					},
+					"skill_id": "basic",
+					"snapshot": {
+						"accuracy": 128.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"projectile": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 1.0,
+									"base_coefficient": 1.0,
+									"intrinsic": {
+										"physical": 26.0
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"physical": 26.0
+								},
+								"role": "projectile",
+								"skill_id": "basic",
+								"tags": [
+									"hit",
+									"projectile",
+									"attack"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "basic",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "basic",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5,
+							"spell_crit_chance_increased": 0.2
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.02
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					}
+				},
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 128，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n实际投射速度 640.00\n投射速度改变飞行快慢，不增加距离上限或存续时间。\n每枚投射物：物理 26.00\n固有：物理 26.00；附加：无；附加效用 1.00\n独立爆炸：火焰 23.40\n固有：火焰 23.40；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+				"resolved": {
+					"components": {
+						"physical": 26.0
+					},
+					"details": [
+						{
+							"base": 26.0,
+							"before_defense": 26.0,
+							"final": 26.0,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "physical"
+						}
+					],
+					"total": 26.0
+				},
+				"summary": "非暴击命中预估（未计敌方防御）：每枚投射物 26.00"
+			},
+			"frost": {
+				"compiled": {
+					"cooldown": 4.0,
+					"critical": {
+						"primary": {
+							"chance": 0.06,
+							"multiplier": 1.5
+						},
+						"secondary": {
+							"chance": 0.05,
+							"multiplier": 1.5
+						}
+					},
+					"error": "",
+					"freeze_profile": {
+						"duration_by_rarity": {
+							"boss": 0.2,
+							"magic": 0.6,
+							"normal": 0.6,
+							"rare": 0.35
+						},
+						"enabled": true,
+						"hit_multiplier": 0.75,
+						"immunity_seconds": 1.5,
+						"mana_multiplier": 1.2
+					},
+					"group_id": "group_000002",
+					"initial_count": 5,
+					"main_uid": "migration_gem_000002",
+					"mana": 19.2,
+					"ok": true,
+					"packets": {
+						"projectile": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.85,
+								"base_coefficient": 0.85,
+								"intrinsic": {
+									"cold": 22.099999999999998
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"cold": 22.099999999999998
+							},
+							"role": "projectile",
+							"skill_id": "frost",
+							"tags": [
+								"hit",
+								"projectile",
+								"spell"
+							]
+						},
+						"secondary": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.0,
+								"base_coefficient": 0.9,
+								"intrinsic": {
+									"fire": 23.400000000000002
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 23.400000000000002
+							},
+							"role": "secondary",
+							"skill_id": "frost",
+							"tags": [
+								"hit",
+								"area",
+								"secondary",
+								"explosion"
+							]
+						}
+					},
+					"recipe": {
+						"added_effectiveness": 0.85,
+						"coefficient": 0.85,
+						"damage_type": "cold",
+						"initial_count": 5,
+						"pierce": 2,
+						"slow": 3.0,
+						"speed": 520.0,
+						"spread": 0.14
+					},
+					"skill_id": "frost",
+					"snapshot": {
+						"accuracy": 128.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"projectile": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.85,
+									"base_coefficient": 0.85,
+									"intrinsic": {
+										"cold": 22.099999999999998
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"cold": 22.099999999999998
+								},
+								"role": "projectile",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"projectile",
+									"spell"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "frost",
+						"critical": {
+							"primary": {
+								"chance": 0.06,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5,
+							"spell_crit_chance_increased": 0.2
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"freeze_policy": {
+							"duration_by_rarity": {
+								"boss": 0.2,
+								"magic": 0.6,
+								"normal": 0.6,
+								"rare": 0.35
+							},
+							"hit_multiplier": 0.75,
+							"immunity_seconds": 1.5,
+							"mana_multiplier": 1.2
+						},
+						"initial_count": 5,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.02
+							},
+							{
+								"all_tags": [
+									"hit",
+									"spell",
+									"projectile"
+								],
+								"damage_types": [],
+								"id": "support:frost_lock",
+								"mode": "more",
+								"skills": [
+									"frost"
+								],
+								"value": -0.25
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": [
+						"frost_lock"
+					]
+				},
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 6.0% · 暴击伤害 150.0%\n霜锁：普通/魔法 0.60 秒 · 稀有 0.35 秒 · 首领 0.20 秒\n冻结不刷新；解冻后 1.50 秒不能再被冻结，所有施法共享。\n暂停自主移动与攻击进度，外力和持续伤害仍生效；不撤销已经发生的攻击。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 128，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n现有减速时长 3.00 秒。距离、生命周期与穿透分别结算；延长减速不等于新增异常状态。\n实际投射速度 520.00\n投射速度改变飞行快慢，不增加距离上限或存续时间。\n每枚投射物：冰霜 16.57\n固有：冰霜 22.10；附加：无；附加效用 0.85\n独立爆炸：火焰 23.40\n固有：火焰 23.40；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+				"resolved": {
+					"components": {
+						"cold": 16.575
+					},
+					"details": [
+						{
+							"base": 22.099999999999998,
+							"before_defense": 16.575,
+							"final": 16.575,
+							"increased": 0.0,
+							"modifiers": [
+								"support:frost_lock"
+							],
+							"more": 0.75,
+							"resistance": 0.0,
+							"type": "cold"
+						}
+					],
+					"total": 16.575
+				},
+				"summary": "非暴击命中预估（未计敌方防御）：每枚投射物 16.57"
+			},
+			"plain_frost": {
+				"compiled": {
+					"cooldown": 4.0,
+					"critical": {
+						"primary": {
+							"chance": 0.06,
+							"multiplier": 1.5
+						},
+						"secondary": {
+							"chance": 0.05,
+							"multiplier": 1.5
+						}
+					},
+					"error": "",
+					"initial_count": 5,
+					"mana": 16.0,
+					"ok": true,
+					"packets": {
+						"projectile": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.85,
+								"base_coefficient": 0.85,
+								"intrinsic": {
+									"cold": 22.099999999999998
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"cold": 22.099999999999998
+							},
+							"role": "projectile",
+							"skill_id": "frost",
+							"tags": [
+								"hit",
+								"projectile",
+								"spell"
+							]
+						},
+						"secondary": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.0,
+								"base_coefficient": 0.9,
+								"intrinsic": {
+									"fire": 23.400000000000002
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 23.400000000000002
+							},
+							"role": "secondary",
+							"skill_id": "frost",
+							"tags": [
+								"hit",
+								"area",
+								"secondary",
+								"explosion"
+							]
+						}
+					},
+					"recipe": {
+						"added_effectiveness": 0.85,
+						"coefficient": 0.85,
+						"damage_type": "cold",
+						"initial_count": 5,
+						"pierce": 2,
+						"slow": 3.0,
+						"speed": 520.0,
+						"spread": 0.14
+					},
+					"skill_id": "frost",
+					"snapshot": {
+						"accuracy": 128.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"projectile": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.85,
+									"base_coefficient": 0.85,
+									"intrinsic": {
+										"cold": 22.099999999999998
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"cold": 22.099999999999998
+								},
+								"role": "projectile",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"projectile",
+									"spell"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "frost",
+						"critical": {
+							"primary": {
+								"chance": 0.06,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5,
+							"spell_crit_chance_increased": 0.2
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 5,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.02
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"support_ids": []
+				},
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 6.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 128，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n现有减速时长 3.00 秒。距离、生命周期与穿透分别结算；延长减速不等于新增异常状态。\n实际投射速度 520.00\n投射速度改变飞行快慢，不增加距离上限或存续时间。\n每枚投射物：冰霜 22.10\n固有：冰霜 22.10；附加：无；附加效用 0.85\n独立爆炸：火焰 23.40\n固有：火焰 23.40；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+				"resolved": {
+					"components": {
+						"cold": 22.099999999999998
+					},
+					"details": [
+						{
+							"base": 22.099999999999998,
+							"before_defense": 22.099999999999998,
+							"final": 22.099999999999998,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "cold"
+						}
+					],
+					"total": 22.099999999999998
+				},
+				"summary": "非暴击命中预估（未计敌方防御）：每枚投射物 22.10"
+			}
+		},
+		"expected_fixture": "docs/qa/v073-gameplay/fixtures/selected-casts.json",
+		"expected_sha256": "783f5a054aa8a147ff99e8d2ccd4786d41b764acc92944d85e71cc1d5d2c4ef3",
+		"expiry": "冻结不刷新、不叠加；解冻后免疫，跨技能组共用同一怪物ID。精确到期恢复，跨解冻帧仅推进剩余delta，预警事件相对时间补上冻结前缀",
+		"fixture": "docs/qa/v073-gameplay/fixtures/selected.json",
+		"fixture_sha256": "50c3c14261f0a35be1a88ec65bdd99fe3940ba2fbf0fcdc44574ec1b49e44545",
+		"icon_file": "originals/frost_lock.png",
+		"icon_source": "res://assets/ui/grimoire/frost_lock.png",
+		"matches_actual_main": true,
+		"max_targets": 100,
+		"merchant_quote": {
+			"code": "",
+			"cost": {
+				"calibration_shard": 4
+			},
+			"definition_id": "support:frost_lock",
+			"materials": {
+
+			},
+			"name": "霜锁辅助",
+			"ok": true,
+			"operation": "buy",
+			"reason": "",
+			"target": "support:frost_lock"
+		},
+		"migration": "严格decode_v46与旧46完整验证，备份原字节后仅迁version到47；不赠宝石或碎片，装备词汇46、源政策45、既有26种正式奖励顺序保持",
+		"minimum_save_version": 47,
+		"mutually_exclusive_with": [
+			"lingering_chill"
+		],
+		"normal_reward_definition_count": 26,
+		"normal_reward_pool_includes_support": false,
+		"paused": "暂停自主移动、接触攻击计时及预警蓄力、恢复、双响局部时钟；保留原锁定圆心、已过蓄力与pulse序号，解冻接续原攻击",
+		"policy": {
+			"duration_by_rarity": {
+				"boss": 0.2,
+				"magic": 0.6,
+				"normal": 0.6,
+				"rare": 0.35
+			},
+			"hit_multiplier": 0.75,
+			"immunity_seconds": 1.5,
+			"mana_multiplier": 1.2
+		},
+		"save_attempts": 0,
+		"skills": [
+			"frost"
+		],
+		"snapshot": "施放时独立保存compiled.freeze_profile与snapshot.freeze_policy；在途投射物不因拆石、换装或退款改变。无辅助不添加空冻结字段；原3秒移动减缓保持",
+		"source_policy": 45,
+		"stats": {
+			"accuracy": 128.0,
+			"accuracy_increased": 0.0,
+			"additional_skill_slots": 0.0,
+			"area_increased": 0.0,
+			"area_size_increased": 0.0,
+			"armour": 0.0,
+			"armour_increased": 0.0,
+			"attack_added_fire": 0.0,
+			"attack_added_physical": 0.0,
+			"attack_crit_chance_increased": 0.0,
+			"attack_elemental_increased": 0.0,
+			"attack_life_leech": 0.0,
+			"attack_mana_leech": 0.0,
+			"attack_physical_increased": 0.0,
+			"attack_speed": 1.7,
+			"attack_speed_increased": 0.0,
+			"chaos_increased": 0.0,
+			"cold_increased": 0.0,
+			"cold_resistance": 0.0,
+			"crit_base_chance": 0.05,
+			"crit_base_multiplier": 1.5,
+			"crit_chance_increased": 0.0,
+			"crit_multiplier_add": 0.0,
+			"damage": 26.0,
+			"damage_taken_from_mana_before_life": 0.0,
+			"damaging_ailments_faster": 0.0,
+			"dexterity": 14.0,
+			"elemental_increased": 0.0,
+			"evasion": 15.3,
+			"evasion_increased": 0.0,
+			"fire_dot_multiplier_add": 0.0,
+			"fire_increased": 0.0,
+			"fire_resistance": 0.0,
+			"flask_charges_gained_increased": 0.0,
+			"flask_life_recovery_increased": 0.0,
+			"flask_mana_recovery_increased": 0.0,
+			"global_increased": 0.0,
+			"intelligence": 92.0,
+			"life_leech_max_rate_increased": 0.0,
+			"life_leech_rate_increased": 0.0,
+			"life_regen": 0.0,
+			"life_regen_percent": 0.0,
+			"lightning_increased": 0.0,
+			"lightning_resistance": 0.0,
+			"mana_cost_efficiency_increased": 0.0,
+			"mana_cost_increased": 0.0,
+			"mana_leech_max_rate_increased": 0.0,
+			"mana_leech_rate_increased": 0.0,
+			"mana_regen": 12.0,
+			"mana_regen_increased": 0.0,
+			"max_health": 127.0,
+			"max_mana": 192.0,
+			"max_shield": 113.36000000000001,
+			"maximum_cold_resistance_add": 0.0,
+			"maximum_fire_resistance_add": 0.0,
+			"maximum_lightning_resistance_add": 0.0,
+			"melee_area_size_increased": 0.0,
+			"melee_crit_chance_increased": 0.0,
+			"melee_crit_multiplier_add": 0.0,
+			"melee_physical_increased": 0.02,
+			"move_speed": 240.0,
+			"move_speed_increased": 0.0,
+			"physical_attack_life_leech": 0.0,
+			"physical_attack_mana_leech": 0.0,
+			"physical_increased": 0.0,
+			"projectile_attack_crit_chance_increased": 0.0,
+			"projectile_attack_crit_multiplier_add": 0.0,
+			"projectile_count": 0.0,
+			"projectile_increased": 0.0,
+			"projectile_speed_increased": 0.0,
+			"resolute_technique": 0.0,
+			"shield_recharge_delay": 4.0,
+			"shield_recharge_rate": 16.0,
+			"shield_recharge_rate_increased": 0.0,
+			"shield_recharge_start_faster": 0.0,
+			"shield_regen": 16.0,
+			"spell_added_cold": 0.0,
+			"spell_added_lightning": 0.0,
+			"spell_area_size_increased": 0.0,
+			"spell_crit_chance_increased": 0.2,
+			"spell_crit_multiplier_add": 0.0,
+			"spell_increased": 0.0,
+			"strength": 14.0
+		},
+		"support_id": "frost_lock",
+		"test_offer": {
+			"available": true,
+			"catalog_id": "support:frost_lock",
+			"category": "",
+			"definition_id": "support:frost_lock",
+			"description": "仅辅助冰霜脉冲：主命中伤害×0.75，魔力消耗×1.20。正值冰霜命中冻结普通与魔法敌人0.60秒、稀有敌人0.35秒、首领0.20秒；结束后免疫冻结1.50秒。保留原有3秒减速，与寒意延长辅助互斥，占用1个辅助槽。",
+			"icon_path": "",
+			"id": "support:frost_lock",
+			"kind": "support_gem",
+			"name": "霜锁辅助",
+			"preview": {
+				"capabilities": [],
+				"category": "",
+				"definition_id": "support:frost_lock",
+				"description": "仅辅助冰霜脉冲：主命中伤害×0.75，魔力消耗×1.20。正值冰霜命中冻结普通与魔法敌人0.60秒、稀有敌人0.35秒、首领0.20秒；结束后免疫冻结1.50秒。保留原有3秒减速，与寒意延长辅助互斥，占用1个辅助槽。",
+				"family": "frost_lock",
+				"glyph": "",
+				"icon": "res://assets/ui/grimoire/frost_lock.png",
+				"icon_texture": "res://assets/ui/grimoire/frost_lock.png",
+				"kind": "support_gem",
+				"name": "霜锁辅助",
+				"requires": [],
+				"short_name": "霜锁辅助",
+				"size": [
+					1,
+					1
+				],
+				"skill_id": "",
+				"skills": [
+					"frost"
+				],
+				"support_id": "frost_lock",
+				"uid": "item_000001"
+			},
+			"price_label": "测试免费",
+			"quantity": 1,
+			"reason": "",
+			"size": [
+				1,
+				1
+			],
+			"supply_kind": "gem"
+		},
+		"timing": {
+			"partial_frame": {
+				"active_delta": 0.15000000000000002,
+				"delta": 0.25,
+				"frozen_prefix": 0.09999999999999998,
+				"start": 0.5
+			},
+			"states": {
+				"boss": {
+					"frozen_from": 0.0,
+					"frozen_until": 0.2,
+					"immune_until": 1.7,
+					"provenance": {
+						"phase": "projectile",
+						"skill_id": "frost"
+					},
+					"rarity": "boss",
+					"target_id": 4
+				},
+				"magic": {
+					"frozen_from": 0.0,
+					"frozen_until": 0.6,
+					"immune_until": 2.1,
+					"provenance": {
+						"phase": "projectile",
+						"skill_id": "frost"
+					},
+					"rarity": "magic",
+					"target_id": 2
+				},
+				"normal": {
+					"frozen_from": 0.0,
+					"frozen_until": 0.6,
+					"immune_until": 2.1,
+					"provenance": {
+						"phase": "projectile",
+						"skill_id": "frost"
+					},
+					"rarity": "normal",
+					"target_id": 1
+				},
+				"rare": {
+					"frozen_from": 0.0,
+					"frozen_until": 0.35,
+					"immune_until": 1.85,
+					"provenance": {
+						"phase": "projectile",
+						"skill_id": "frost"
+					},
+					"rarity": "rare",
+					"target_id": 3
+				}
+			}
+		},
+		"whole_build_valid": true
+	},
+	"game_version": "0.73.0",
 	"glove_ring_affixes": {
 		"accuracy_probes": {
 			"baseline_accuracy": 284.0,
@@ -55044,7 +56043,7 @@
 			"max_targets": 1,
 			"radius": 60.0
 		},
-		"save_version": 46,
+		"save_version": 47,
 		"scope": "hit + attack + melee；不含area，不受范围或投射物速度提高，也不占投射物容量，无返回或飞行结束爆炸。",
 		"timing": "沿用attack_timer与当前attack_speed；没有独立技能冷却或魔力支付。"
 	},
@@ -58133,6 +59132,12 @@
 			},
 			{
 				"cost": 4,
+				"definition_id": "support:frost_lock",
+				"kind": "support_gem",
+				"name": "霜锁辅助"
+			},
+			{
+				"cost": 4,
 				"definition_id": "support:heavy_projectiles",
 				"kind": "support_gem",
 				"name": "缓速强击辅助"
@@ -58202,7 +59207,7 @@
 		"quality": 0,
 		"recycle_credit": 1,
 		"recycle_location": "bag",
-		"schema": 46,
+		"schema": 47,
 		"test_supply_separate": true
 	},
 	"normal_journey": {
@@ -84160,7 +85165,7 @@
 		},
 		"timing": "施放时冻结；分配、退款和换装只影响新施放，旧飞行、母子箭、返回与独立爆炸保持各自快照"
 	},
-	"save_version": 46,
+	"save_version": 47,
 	"schema_version": 3,
 	"sectors": [
 		{
@@ -153774,7 +154779,8 @@
 				"cold_focus",
 				"swift_projectiles",
 				"heavy_projectiles",
-				"lingering_chill"
+				"lingering_chill",
+				"frost_lock"
 			],
 			"cooldown": 4.0,
 			"description": "扇形发射五枚冰弹，造成 85% 伤害并减速 3 秒。",
@@ -542027,7 +543033,7 @@
 			}
 		},
 		"roster_scope": "只展示原抽签为基础物种的按位替换；灰烬保留名额，分裂体与母巢保留原抽签且占用序号；稀有度、机制与奖励不变；所选巡逻词缀最后按编排物种替换",
-		"save_version": 46,
+		"save_version": 47,
 		"spawn_seconds": 0.6,
 		"tiers": [
 			{
@@ -543738,6 +544744,48 @@
 			"family": "projectile",
 			"native_recipe_eligibility": true
 		},
+		"frost_lock": {
+			"examples": {
+				"frost": {
+					"after": {
+						"cooldown": 4.0,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n霜锁：普通/魔法 0.60 秒 · 稀有 0.35 秒 · 首领 0.20 秒\n冻结不刷新；解冻后 1.50 秒不能再被冻结，所有施法共享。\n暂停自主移动与攻击进度，外力和持续伤害仍生效；不撤销已经发生的攻击。\n现有减速时长 3.00 秒。距离、生命周期与穿透分别结算；延长减速不等于新增异常状态。\n实际投射速度 520.00\n投射速度改变飞行快慢，不增加距离上限或存续时间。\n每枚投射物：冰霜 16.57\n固有：冰霜 22.10；附加：无；附加效用 0.85\n独立爆炸：火焰 23.40\n固有：火焰 23.40；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+						"initial_count": 5,
+						"mana": 19.2,
+						"recipe": {
+							"added_effectiveness": 0.85,
+							"coefficient": 0.85,
+							"damage_type": "cold",
+							"initial_count": 5,
+							"pierce": 2,
+							"slow": 3.0,
+							"speed": 520.0,
+							"spread": 0.14
+						},
+						"summary": "命中预估（未计敌方防御）：每枚投射物 16.57"
+					},
+					"before": {
+						"cooldown": 4.0,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n现有减速时长 3.00 秒。距离、生命周期与穿透分别结算；延长减速不等于新增异常状态。\n实际投射速度 520.00\n投射速度改变飞行快慢，不增加距离上限或存续时间。\n每枚投射物：冰霜 22.10\n固有：冰霜 22.10；附加：无；附加效用 0.85\n独立爆炸：火焰 23.40\n固有：火焰 23.40；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+						"initial_count": 5,
+						"mana": 16.0,
+						"recipe": {
+							"added_effectiveness": 0.85,
+							"coefficient": 0.85,
+							"damage_type": "cold",
+							"initial_count": 5,
+							"pierce": 2,
+							"slow": 3.0,
+							"speed": 520.0,
+							"spread": 0.14
+						},
+						"summary": "命中预估（未计敌方防御）：每枚投射物 22.10"
+					}
+				}
+			},
+			"family": "frost_lock",
+			"native_recipe_eligibility": true
+		},
 		"heavy_projectiles": {
 			"examples": {
 				"bolt": {
@@ -545407,6 +546455,25 @@
 				"projectile_hit"
 			]
 		},
+		"frost_lock": {
+			"description": "仅辅助冰霜脉冲：主命中伤害×0.75，魔力消耗×1.20。正值冰霜命中冻结普通与魔法敌人0.60秒、稀有敌人0.35秒、首领0.20秒；结束后免疫冻结1.50秒。保留原有3秒减速，与寒意延长辅助互斥，占用1个辅助槽。",
+			"family": "frost_lock",
+			"name": "霜锁辅助",
+			"operations": [
+				{
+					"op": "primary_hit_more",
+					"value": -0.25
+				},
+				{
+					"op": "mana_multiplier",
+					"value": 1.2
+				}
+			],
+			"requires": [],
+			"skills": [
+				"frost"
+			]
+		},
 		"heavy_projectiles": {
 			"description": "飞弹、冰霜与蚀影飞弹：投射物速度 ×0.75，主命中伤害总增 20%，魔力 ×1.15。龙卷与独立爆炸不适用。",
 			"family": "delivery",
@@ -546503,7 +547570,7 @@
 		},
 		"reserved_character_key": "C",
 		"retired_profile_writes": false,
-		"save_version": 46,
+		"save_version": 47,
 		"services": [
 			{
 				"description": "免费测试供应全部已实现主动与辅助宝石。",
@@ -548818,6 +549885,49 @@
 						"skill_id": "",
 						"skills": [],
 						"support_id": "focus",
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "gem"
+				},
+				{
+					"available": true,
+					"catalog_id": "support:frost_lock",
+					"category": "",
+					"definition_id": "support:frost_lock",
+					"description": "仅辅助冰霜脉冲：主命中伤害×0.75，魔力消耗×1.20。正值冰霜命中冻结普通与魔法敌人0.60秒、稀有敌人0.35秒、首领0.20秒；结束后免疫冻结1.50秒。保留原有3秒减速，与寒意延长辅助互斥，占用1个辅助槽。",
+					"icon_path": "",
+					"id": "support:frost_lock",
+					"kind": "support_gem",
+					"name": "霜锁辅助",
+					"preview": {
+						"capabilities": [],
+						"category": "",
+						"definition_id": "support:frost_lock",
+						"description": "仅辅助冰霜脉冲：主命中伤害×0.75，魔力消耗×1.20。正值冰霜命中冻结普通与魔法敌人0.60秒、稀有敌人0.35秒、首领0.20秒；结束后免疫冻结1.50秒。保留原有3秒减速，与寒意延长辅助互斥，占用1个辅助槽。",
+						"family": "frost_lock",
+						"glyph": "",
+						"icon": "res://assets/ui/grimoire/frost_lock.png",
+						"icon_texture": "res://assets/ui/grimoire/frost_lock.png",
+						"kind": "support_gem",
+						"name": "霜锁辅助",
+						"requires": [],
+						"short_name": "霜锁辅助",
+						"size": [
+							1,
+							1
+						],
+						"skill_id": "",
+						"skills": [
+							"frost"
+						],
+						"support_id": "frost_lock",
 						"uid": "item_000001"
 					},
 					"price_label": "测试免费",

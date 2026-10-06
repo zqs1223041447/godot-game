@@ -1,0 +1,7 @@
+ERROR: Frozen autonomous pursuit pauses got=(991.6495, 461.8719) expected=(983.0001, 459.3846)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/frost_lock_gameplay_test.gd:25)
+       [1] vector_near (res://tests/frost_lock_gameplay_test.gd:30)
+       [2] current_boundary_and_contacts (res://tests/frost_lock_gameplay_test.gd:200)
+       [3] run (res://tests/frost_lock_gameplay_test.gd:328)

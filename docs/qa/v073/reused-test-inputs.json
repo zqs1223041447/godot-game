@@ -1,0 +1,36 @@
+{
+  "method": "Final byte hashes compared with captured accepted test inputs; no game rerun.",
+  "reports": {
+    "docs/qa/v073-rules/20261006T074340774521Z-receipt.json": {
+      "count": 4,
+      "mismatches": []
+    },
+    "docs/qa/v073-compiler/20261006T074351264435Z-compiler-receipt.json": {
+      "count": 36,
+      "mismatches": []
+    },
+    "docs/qa/v073-compiler/20261006T074353056849Z-migration-receipt.json": {
+      "count": 168,
+      "mismatches": []
+    },
+    "docs/qa/v073-telegraph-pause/validation.json": {
+      "count": 25,
+      "mismatches": []
+    },
+    "docs/qa/v073-gameplay/attempts/20261006T074500.621859Z/inputs-after.json": {
+      "count": 410,
+      "mismatches": [
+        "tests/frost_lock_gameplay_test.gd"
+      ]
+    },
+    "docs/qa/v073-gameplay/attempts/20261006T074557.092484Z/inputs-after.json": {
+      "count": 410,
+      "mismatches": []
+    },
+    "docs/qa/v073-legacy/tested-inputs.json": {
+      "count": 190,
+      "mismatches": []
+    }
+  },
+  "scope": "First Main attempt differs only by documented pursuit test assertion fix; production is unchanged."
+}

@@ -1,0 +1,19 @@
+{
+  "scripts/combat/support_registry.gd": {
+    "base_commit": "70b75bc255c3f54c8365f959c046934e61759f6e",
+    "original_sha256": "ec4a19eff33678676cca099ca6676676be4ddc2f6afbcea3dfded01a449eeba1",
+    "frozen_sha256": "d75d79f4340a94a12edae7963d21db3a347d441e02816ff2d4d22e593e9eff58",
+    "edits": [
+      "Remove global class_name to avoid collision"
+    ]
+  },
+  "scripts/combat/skill_compiler.gd": {
+    "base_commit": "70b75bc255c3f54c8365f959c046934e61759f6e",
+    "original_sha256": "fda7faca7b1ac60ade9e8b630f2338fc927e0d157fe4ebe28b4a157744f66a56",
+    "frozen_sha256": "89eca49e46571186ecdeb22c5e035475e1ce6591d2342cfad34eee39d53cf140",
+    "edits": [
+      "Remove global class_name to avoid collision",
+      "Point Supports preload at frozen registry"
+    ]
+  }
+}

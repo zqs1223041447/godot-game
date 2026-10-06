@@ -1,0 +1,57 @@
+{
+  "between_attempt_input_changes": [
+    "tests/frost_lock_gameplay_test.gd"
+  ],
+  "checks": 328,
+  "excluded_scope": [
+    "No historical full simulation or old-byte rerun",
+    "No editor UI, screenshots, Windows package or publishing",
+    "No duplicate exhaustive echo scheduler coverage; separate scheduler suite owns it"
+  ],
+  "failures": 0,
+  "fixture_export_attempt": "export-attempt-02",
+  "fixtures": {
+    "fixtures/selected-casts.json": "783f5a054aa8a147ff99e8d2ccd4786d41b764acc92944d85e71cc1d5d2c4ef3",
+    "fixtures/selected.json": "50c3c14261f0a35be1a88ec65bdd99fe3940ba2fbf0fcdc44574ec1b49e44545"
+  },
+  "passed": true,
+  "production_inputs_identical": true,
+  "retry_reason": "Fixture assertion originally ignored native projectile45-unit external knockback, which correctly remains active under freeze. Pursuit case now explicitly zeros only that impulse; production unchanged.",
+  "sections": {
+    "cleanup_and_capacity": {
+      "attempt": "docs/qa/v073-gameplay/attempts/20261006T074500.621859Z",
+      "checks": 133,
+      "failures": 0
+    },
+    "continuing_resources": {
+      "attempt": "docs/qa/v073-gameplay/attempts/20261006T074500.621859Z",
+      "checks": 28,
+      "failures": 0
+    },
+    "current_boundary_and_contacts": {
+      "attempt": "docs/qa/v073-gameplay/attempts/20261006T074557.092484Z",
+      "checks": 24,
+      "failures": 0
+    },
+    "flying_snapshot": {
+      "attempt": "docs/qa/v073-gameplay/attempts/20261006T074500.621859Z",
+      "checks": 27,
+      "failures": 0
+    },
+    "owned_cost_and_exclusion": {
+      "attempt": "docs/qa/v073-gameplay/attempts/20261006T074500.621859Z",
+      "checks": 29,
+      "failures": 0
+    },
+    "settlement_eligibility": {
+      "attempt": "docs/qa/v073-gameplay/attempts/20261006T074500.621859Z",
+      "checks": 63,
+      "failures": 0
+    },
+    "telegraph_pause": {
+      "attempt": "docs/qa/v073-gameplay/attempts/20261006T074500.621859Z",
+      "checks": 24,
+      "failures": 0
+    }
+  }
+}

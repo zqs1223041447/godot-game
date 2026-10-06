@@ -1,0 +1,439 @@
+{
+  "base_commit": "70b75bc255c3f54c8365f959c046934e61759f6e",
+  "stage_commit": "d98c13fb9cb61c85db68b75ea06a2db402de1d17",
+  "counts": {
+    "freeze_rules_runtime": 501,
+    "telegraph_pause": 855,
+    "compiler_including879_legacy_comparisons": 2920,
+    "migration_and_economy": 345,
+    "actual_main_unique": 328,
+    "root_display": 12
+  },
+  "total_checks": 4961,
+  "production_inputs": 549,
+  "save_schema": 47,
+  "equipment_vocabulary_unchanged": 46,
+  "source_policy_unchanged": 45,
+  "normal_reward_definitions_unchanged": 26,
+  "legacy90tick": {
+    "observations_equal": true,
+    "bytes": 8844304,
+    "sha256": "bc9d401e91c165aafa195f81584f4391ec149b3f5a7aa6587c99b2e100e8f094",
+    "save_version_token_only": true,
+    "projected_save_equal": true,
+    "before_save_sha256": "5bbd2759d4fc63d3257c1c0cdbbaa8f70182d95a82790868c4f3de389223640f",
+    "current_save_sha256": "7d225ea7a6a60a75861f111e1b4b399c27ea25c184acdc096efb7ef08fb71ad7",
+    "input_hashes_unchanged": true
+  },
+  "reference": {
+    "passed": true,
+    "baseline_commit": "70b75bc255c3f54c8365f959c046934e61759f6e",
+    "reused_actual_main_fixture_count": 1,
+    "exact_current_casts_checked": 3,
+    "historical_main_casts_preserved": 24,
+    "old_catalog_preserved_except_explicit_projection": true,
+    "source_policy_preserved": 45,
+    "equipment_vocabulary_preserved": 46,
+    "normal_reward_definition_count_preserved": 26,
+    "source_coverage_byte_identical": true,
+    "authoritative_html_values_and_labels_checked": 32,
+    "old_html_anchors_preserved": 3831,
+    "html_unique_ids": 3833,
+    "new_html_anchors": [
+      "rules-frost_lock",
+      "supports-frost_lock"
+    ],
+    "all_anchor_and_local_file_links_valid": true,
+    "old_pngs_preserved": 133,
+    "new_pngs": [
+      "assets/ui/grimoire/frost_lock.png",
+      "docs/reference/originals/frost_lock.png"
+    ],
+    "icon_sha256": "dad5f51c2f10b2ca932ba0fe5a4f3ed608e94eea41c30e6392af964b4450e673",
+    "catalog_sha256": "93da692e440bdd782822d10f151d5e9a4018835de0dab58dc364e64f58da5fdb",
+    "html_sha256": "704b6ae0e00694c6e946afdb2832c86228ef2c3706ce73d28da0888b2960a3b7",
+    "fixtures": {
+      "fixtures/selected-casts.json": "783f5a054aa8a147ff99e8d2ccd4786d41b764acc92944d85e71cc1d5d2c4ef3",
+      "fixtures/selected.json": "50c3c14261f0a35be1a88ec65bdd99fe3940ba2fbf0fcdc44574ec1b49e44545"
+    },
+    "exact_allowed_catalog_changed_paths": [
+      {
+        "kind": "changed",
+        "path": [
+          "canonical",
+          "default_build",
+          "version"
+        ]
+      },
+      {
+        "kind": "added",
+        "path": [
+          "canonical",
+          "gem_definitions",
+          "support:frost_lock"
+        ]
+      },
+      {
+        "kind": "changed",
+        "path": [
+          "canonical",
+          "gem_reward",
+          "definition_count"
+        ]
+      },
+      {
+        "kind": "changed",
+        "path": [
+          "canonical",
+          "save_version"
+        ]
+      },
+      {
+        "kind": "changed",
+        "path": [
+          "crafting",
+          "augment",
+          "example",
+          "save_version"
+        ]
+      },
+      {
+        "kind": "changed",
+        "path": [
+          "crafting",
+          "calibration_shard",
+          "save_version"
+        ]
+      },
+      {
+        "kind": "changed",
+        "path": [
+          "crafting",
+          "elevate",
+          "example",
+          "save_version"
+        ]
+      },
+      {
+        "kind": "changed",
+        "path": [
+          "crafting",
+          "enchant",
+          "example",
+          "save_version"
+        ]
+      },
+      {
+        "kind": "changed",
+        "path": [
+          "crafting",
+          "recalibrate",
+          "example",
+          "save_version"
+        ]
+      },
+      {
+        "kind": "changed",
+        "path": [
+          "crafting",
+          "reforge",
+          "example",
+          "save_version"
+        ]
+      },
+      {
+        "kind": "changed",
+        "path": [
+          "crafting",
+          "salvage",
+          "example",
+          "save_version"
+        ]
+      },
+      {
+        "kind": "changed",
+        "path": [
+          "crafting",
+          "targeted_reforge_critical",
+          "example",
+          "save_version"
+        ]
+      },
+      {
+        "kind": "changed",
+        "path": [
+          "crafting",
+          "targeted_reforge_damage",
+          "example",
+          "save_version"
+        ]
+      },
+      {
+        "kind": "changed",
+        "path": [
+          "crafting",
+          "targeted_reforge_life_leech",
+          "example",
+          "save_version"
+        ]
+      },
+      {
+        "kind": "changed",
+        "path": [
+          "crafting",
+          "targeted_reforge_mana_leech",
+          "example",
+          "save_version"
+        ]
+      },
+      {
+        "kind": "changed",
+        "path": [
+          "currencies",
+          "calibration_shard",
+          "save_version"
+        ]
+      },
+      {
+        "kind": "added",
+        "path": [
+          "frost_lock"
+        ]
+      },
+      {
+        "kind": "changed",
+        "path": [
+          "game_version"
+        ]
+      },
+      {
+        "kind": "changed",
+        "path": [
+          "melee_basic",
+          "save_version"
+        ]
+      },
+      {
+        "kind": "changed",
+        "path": [
+          "normal_gem_trading",
+          "offers"
+        ]
+      },
+      {
+        "kind": "changed",
+        "path": [
+          "normal_gem_trading",
+          "schema"
+        ]
+      },
+      {
+        "kind": "changed",
+        "path": [
+          "save_version"
+        ]
+      },
+      {
+        "kind": "changed",
+        "path": [
+          "skills",
+          "frost",
+          "compatible_supports"
+        ]
+      },
+      {
+        "kind": "changed",
+        "path": [
+          "sunwell_terrace",
+          "save_version"
+        ]
+      },
+      {
+        "kind": "added",
+        "path": [
+          "support_program_examples",
+          "frost_lock"
+        ]
+      },
+      {
+        "kind": "added",
+        "path": [
+          "supports",
+          "frost_lock"
+        ]
+      },
+      {
+        "kind": "changed",
+        "path": [
+          "town_maps",
+          "save_version"
+        ]
+      },
+      {
+        "kind": "changed",
+        "path": [
+          "town_maps",
+          "stock",
+          "skill_merchant"
+        ]
+      }
+    ],
+    "historical_fixed_gate_audit": {
+      "docs/qa/v070-reference/check-reference.py": "Immutable v70/schema45 receipt; current exporter uses validated45→46→47 memory migration with exact stats and casts",
+      "docs/qa/v072-reference/check-reference.py": "Immutable v72/schema46 receipt; current exporter uses validated46→47 memory migration with exact stats, resistances and casts"
+    },
+    "scope": "One Godot export and Python build/determinism/preservation; no new Main, import, native launch or packaging"
+  },
+  "font": {
+    "unchanged": true,
+    "mapped": 1661,
+    "sha256": "74a2ff2eac4a552a7d891ebb420502ddbbe632ea46a29adb67c2ec9bcf90caeb",
+    "runtime_files": 199,
+    "fresh_scanned": 20,
+    "missing": []
+  },
+  "delivery": "Source branch/main normal fast-forward; no export/package/tag/Release.",
+  "boundaries": [
+    "Main first pursuit fixture ignored native knockback; only the affected24checks rerun after fixture correction, production unchanged.",
+    "Fixture export first attempt failed in engine userdata initialization without isolated XDG; corrected XDG succeeded, no gameplay repeat.",
+    "F8 exporter ran once; Python checker alone retried for an omitted existing empty category field.",
+    "Original1661font retained after root replaced two fullwidth slashes; old133PNG preserved, one original icon and byte-identical F8 copy added.",
+    "No Windows hardware FPS, native screenshot gate, long performance test or performance improvement claim."
+  ],
+  "reports": {
+    "docs/qa/v073-rules/20261006T074340774521Z-receipt.json": {
+      "bytes": 1311,
+      "sha256": "c512da7a84b2076844145a134c3fb6c7047b1a31ea0b3eb7999a07750c63b18d"
+    },
+    "docs/qa/v073-compiler/20261006T074351264435Z-compiler-receipt.json": {
+      "bytes": 8667,
+      "sha256": "721cd83564c745e08e8890c9f6ca824c24f7f885d72ae7a74e2a0e2b3845e993"
+    },
+    "docs/qa/v073-compiler/20261006T074353056849Z-migration-receipt.json": {
+      "bytes": 38572,
+      "sha256": "39e828b8ea8bc51cd8784dcc4a7ca108ed36ab7416396d05c1c62b34b96a3428"
+    },
+    "docs/qa/v073-telegraph-pause/validation.json": {
+      "bytes": 5952,
+      "sha256": "b2d94116a07cfb886e3a4e5794a02a8ed466e373cf925eec7f053acf701214cd"
+    },
+    "docs/qa/v073-gameplay/acceptance-summary.json": {
+      "bytes": 1994,
+      "sha256": "2cbb1427a5858919caf38c090e555c0e3585e7815cc9434194c0799b9f0b0259"
+    },
+    "docs/qa/v073-reference/v072-preservation.json": {
+      "bytes": 26413,
+      "sha256": "2658bad29559f63fcbe007fb4c8e7b0dfcb9ddb83d1cf182d392a448d237ef51"
+    },
+    "docs/qa/v073-legacy/comparison.json": {
+      "bytes": 419,
+      "sha256": "f392345e2a033bc6e36f21bcd2d6f22c1ea838f3b2648b8526ffc21bb2ca6aff"
+    }
+  },
+  "logs": {
+    "docs/qa/v073-compiler/20261006T074351264435Z-compiler.log.txt": {
+      "bytes": 163,
+      "sha256": "5e758ab449749e0ba36250ebd06f244642f4c452fc7b233edaf3f2c33c209bb2"
+    },
+    "docs/qa/v073-compiler/20261006T074353056849Z-migration.log.txt": {
+      "bytes": 126,
+      "sha256": "2aeb8e7ee3bd21bffcf68bd629b732e7f95c0147b29aa298fe7c52138eacd8ff"
+    },
+    "docs/qa/v073-telegraph-pause/focused-test.log.txt": {
+      "bytes": 148,
+      "sha256": "9ebda5675de0f01d6b1e6e4fa4ddd9eaf4f828dcbe9c2e528c5dd51c88e4e186"
+    },
+    "docs/qa/v073-rules/20261006T074340774521Z-run.log.txt": {
+      "bytes": 122,
+      "sha256": "938ca1e63c29a4b63c6c60b39fc82ff29d0af492dc42e7a0ef023cc50fd9404b"
+    },
+    "docs/qa/v073-root-ui/presentation.log": {
+      "bytes": 119,
+      "sha256": "da8d2dbdd1ec11c6fe790af8e040e39d3dbe4ac8a7126ea39272f50dcb8c53c4"
+    },
+    "docs/qa/v073-root-ui/presentation.log.txt": {
+      "bytes": 119,
+      "sha256": "da8d2dbdd1ec11c6fe790af8e040e39d3dbe4ac8a7126ea39272f50dcb8c53c4"
+    },
+    "docs/qa/v073-reference/build-check.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v073-reference/build-check.stdout.log.txt": {
+      "bytes": 52,
+      "sha256": "65d47533eaf556129a1f3a295db12ab1bc36a8df0770c71cb9378490d54d03ba"
+    },
+    "docs/qa/v073-reference/build.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v073-reference/build.stdout.log.txt": {
+      "bytes": 51,
+      "sha256": "4ce0aca8862f1ec68647070d4d5bd363d7073ed1b7bb0788c7e63d1c47ccce28"
+    },
+    "docs/qa/v073-reference/corrected-focused-reference.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v073-reference/corrected-focused-reference.stdout.log.txt": {
+      "bytes": 1584,
+      "sha256": "5c19d4193e148cc0ce07f09bd7ee85b733634e6bdeecce1b526ca9286bdbbe4b"
+    },
+    "docs/qa/v073-reference/focused-reference.stderr.log.txt": {
+      "bytes": 447,
+      "sha256": "25a99a978b2151f873625481cb29ba58af485111a46c36e09c0da31e2c4a8742"
+    },
+    "docs/qa/v073-reference/focused-reference.stdout.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v073-reference/godot-export.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v073-reference/godot-export.stdout.log.txt": {
+      "bytes": 182,
+      "sha256": "59160bd31fa5e2371ef953c9894cfc5c21702fa589e2aa0eab8795ac6f1e5526"
+    },
+    "docs/qa/v073-integration/initial-import.log.txt": {
+      "bytes": 70168,
+      "sha256": "561a6a4b139b597002ff2e19720cc76bc5c5a4db5bac817bd9e435ff4b7ec566"
+    },
+    "docs/qa/v073-legacy/current.log.txt": {
+      "bytes": 901,
+      "sha256": "953f8a41d8ccd2128e34a29a4c1eaa1e29029b69ffd27cbb15bf39cdbdb01cdc"
+    },
+    "docs/qa/v073-gameplay/attempts/20261006T074500.621859Z/stderr.log": {
+      "bytes": 479,
+      "sha256": "a973df44b6f0070dc12f010b039d17dfe71854f20185a555a64aaa9a31cd942c"
+    },
+    "docs/qa/v073-gameplay/attempts/20261006T074500.621859Z/stdout.log": {
+      "bytes": 998,
+      "sha256": "bf6abff8d7ce104b49ed4005e39510afb7e894ba9ef7e48f44b2347a1349d2ff"
+    },
+    "docs/qa/v073-gameplay/attempts/20261006T074557.092484Z/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v073-gameplay/attempts/20261006T074557.092484Z/stdout.log": {
+      "bytes": 301,
+      "sha256": "c943c458b260250909f30949e0a772ea77e7216d3c97274015820f50246c2d06"
+    },
+    "docs/qa/v073-gameplay/export-attempt-01/export.stderr.log": {
+      "bytes": 2588,
+      "sha256": "7cfbecc860d221aa2ec5ed86cad29fdc07d457c7687e5434f1fea9ba906d1763"
+    },
+    "docs/qa/v073-gameplay/export-attempt-01/export.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v073-gameplay/export-attempt-02/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v073-gameplay/export-attempt-02/stdout.log": {
+      "bytes": 148,
+      "sha256": "3170369fd5608042fd19e1362e22bc03973eb062043cdd82d896887fc19858b6"
+    }
+  }
+}

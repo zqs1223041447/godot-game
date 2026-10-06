@@ -31,6 +31,7 @@ RULE_TITLES['physical_fire_conversion'] = '物理转火焰：40%转换与伤害�
 RULE_TITLES['precise_technique'] = '精准技艺：严格命中条件与全局禁暴击'
 RULE_TITLES['inward_pull'] = '牵引辅助：朝真实爆发圆心反转冲量'
 RULE_TITLES['glove_ring_affixes'] = '精瞄手套与三抗戒指：前后缀取舍'
+RULE_TITLES['frost_lock'] = '霜锁辅助：短冻结、解冻免疫与攻击接续'
 TYPES['defense_v37'] = '历史三抗防具池'
 TYPES['defense_v39'] = '护甲闪避与三抗防具池'
 TYPES['build_nine_slot_v46'] = '精瞄与三抗九槽池'
@@ -625,6 +626,32 @@ def precise_technique_rule(data,link,facts,details):
     return body
 
 
+def frost_lock_rule(data,link,facts,details):
+    rule=data['frost_lock'];policy=rule['policy'];examples=rule['examples']
+    def value(key,amount):
+        return f'<strong data-frost-lock-value="{esc(key)}" data-value="{esc(amount)}">{format(amount, ".10g")}</strong>'
+    body=facts([('最低存档版本',value('save-version',rule['minimum_save_version'])),('装备词汇 / 源政策',value('vocabulary',rule['equipment_vocabulary'])+' / '+value('source-policy',rule['source_policy'])),('主命中 / 魔力倍率',value('hit-multiplier',policy['hit_multiplier'])+' / '+value('mana-multiplier',policy['mana_multiplier'])),('共享状态上限',value('max-targets',rule['max_targets'])+' 个怪物ID'),('互斥辅助',link('supports','lingering_chill'))])
+    body+='<p>'+esc(rule['eligibility'])+'。</p><p>'+esc(rule['admission'])+'。</p>'
+    rows=''
+    for rarity,label in [('normal','普通'),('magic','魔法'),('rare','稀有'),('boss','首领')]:
+        state=rule['timing']['states'][rarity]
+        rows+='<tr><th>'+label+'</th><td>'+value(rarity+'-duration',policy['duration_by_rarity'][rarity])+'</td><td>'+value(rarity+'-immune-until',state['immune_until'])+'</td></tr>'
+    body+='<h3>一次准入后的状态与时间</h3><p>以成功冻结为0秒；到期即解冻，再经过 '+value('immunity',policy['immunity_seconds'])+' 秒免疫才可重新冻结。期间后续命中不刷新或叠加。</p><div class="table-scroll"><table><thead><tr><th>目标</th><th>冻结秒数</th><th>再次可冻结时刻（秒）</th></tr></thead><tbody>'+rows+'</tbody></table></div>'
+    body+='<p>'+esc(rule['paused'])+'。</p><p>'+esc(rule['continuing'])+'。</p><p>'+esc(rule['expiry'])+'。</p>'
+    split=rule['timing']['partial_frame']
+    body+='<p>普通敌人示例：从 '+value('frame-start',split['start'])+' 秒开始的 '+value('frame-delta',split['delta'])+' 秒帧，冻结前缀为 '+value('frame-prefix',split['frozen_prefix'])+' 秒，只推进余下 '+value('frame-active',split['active_delta'])+' 秒；原圆心与攻击进度接续。</p>'
+    rows=''
+    for key,label in [('plain_frost','同快照无辅助'),('frost','实际霜锁技能组')]:
+        row=examples[key];cast=row['compiled']
+        rows+='<tr><th>'+label+'</th><td>'+value(key+'-hit',row['resolved']['total'])+'</td><td>'+value(key+'-mana',cast['mana'])+'</td><td>'+value(key+'-count',cast['initial_count'])+'</td><td>'+value(key+'-pierce',cast['recipe']['pierce'])+'</td><td>'+value(key+'-slow',cast['recipe']['slow'])+'</td><td>'+value(key+'-cooldown',cast['cooldown'])+'</td></tr>'
+    body+='<h3>通过实际Main的同源构筑</h3><p>'+esc(rule['example_scope'])+'。</p><div class="table-scroll"><table><thead><tr><th>状态</th><th>主命中</th><th>魔力</th><th>投射数</th><th>穿透</th><th>原减速秒</th><th>冷却秒</th></tr></thead><tbody>'+rows+'</tbody></table></div>'
+    body+=details('施放快照与原命中预览','<p>'+esc(rule['snapshot'])+'。</p><p>'+esc(examples['frost']['summary'])+'</p><p>'+lines(examples['frost']['details'])+'</p>')
+    body+='<p>正式商人 '+value('price',rule['merchant_quote']['cost']['calibration_shard'])+' 校准碎片；测试动态供应可取得。'+esc(rule['migration'])+'。</p><p>'+esc(rule['cleanup'])+'。</p>'
+    body+='<p><a href="../'+esc(rule['fixture'].removeprefix('docs/'))+'">完整合法构筑</a> · <a href="../'+esc(rule['expected_fixture'].removeprefix('docs/'))+'">Main完整预期</a> · <a href="../FROST_LOCK_SUPPORT.zh-CN.md">霜锁辅助说明</a> · <a href="../qa/v073-reference/README.md">本批资料验证</a></p>'
+    body+='<p>'+link('skills','frost')+' · '+link('supports','frost_lock')+' · '+link('supports','lingering_chill')+' · '+link('town_services','skill_merchant')+'。'+esc(rule['bounds'])+'。</p>'
+    return body
+
+
 def glove_ring_affix_rule(data,link,facts,details):
     rule=data['glove_ring_affixes']
     def value(key,amount,ratio=False):
@@ -703,6 +730,8 @@ def build(data, art):
             image=f'<img class="emblem" src="{esc(data["ambush"]["icon_file"])}" width="64" height="64" alt="" loading="lazy">'
         elif cat=='supports' and key=='inward_pull':
             image=f'<img class="emblem" src="{esc(data["inward_pull"]["icon_file"])}" width="64" height="64" alt="" loading="lazy">'
+        elif cat=='supports' and key=='frost_lock':
+            image=f'<img class="emblem" src="{esc(data["frost_lock"]["icon_file"])}" width="64" height="64" alt="" loading="lazy">'
         elif cat=='equipment' and key=='forgeblade':
             image=f'<img class="emblem" src="{esc(data["forgeblade"]["icon_file"])}" width="64" height="64" alt="" loading="lazy">'
         badges = {'implemented':'已实现','research':'研究资料','planned':'尚未实现'}
@@ -747,6 +776,9 @@ def build(data, art):
         if 'inward_pull' in compatible:
             body+='<p>牵引辅助把原击退冲量反转为朝本次真实爆发圆心，魔力乘1.20。'+link('rules','inward_pull','查看牵引与伏击冻结快照的代表编译示例')+'。</p>'
             related+=' · '+link('rules','inward_pull')
+        if 'frost_lock' in compatible:
+            body+='<p>霜锁辅助提供短冻结窗口，与寒意延长互斥；保留原3秒移动减缓。'+link('rules','frost_lock','查看冻结、免疫与原攻击接续')+'。</p>'
+            related+=' · '+link('rules','frost_lock')
         cards.append(add('skills',key,s['name'],s['description'],body,'投射物' if 'projectile_hit' in s['capabilities'] else '其他技能',related=related))
     for key,s in data['supports'].items():
         eligible = [i for i,x in data['skills'].items() if key in x['compatible_supports']]
@@ -769,7 +801,10 @@ def build(data, art):
         if key=='inward_pull':
             body+='<p>沿用原冲量衰减、墙体碰撞与分离规则，不保证拉到圆心；可与符印伏击同用并在放置时冻结。'+link('rules','inward_pull','查看实际圆心、魔力代价与伤害不变的同源示例')+'。</p>'
             related+=' · '+link('rules','inward_pull')+' · '+link('rules','ambush')+' · '+link('town_services','skill_merchant','宝石商人')
-        cards.append(add('supports',key,s['name'],s['description'],body,{'area':'范围辅助','projectile':'投射物辅助','resource':'资源辅助','element':'分量专注','delivery':'投射物辅助','control':'减速控制','chain':'连锁辅助','burning':'燃烧辅助','shock':'感电辅助','ambush':'预置伏击辅助','inward_pull':'冲量方向辅助'}[data['support_program_examples'][key]['family']],related=related))
+        if key in ['frost_lock','lingering_chill']:
+            body+='<p>霜锁辅助与寒意延长辅助不能同时装配；冻结只暂停自主行为，外力和资源状态继续。'+link('rules','frost_lock','查看完整准入与时间边界')+'。</p>'
+            related+=' · '+link('rules','frost_lock')
+        cards.append(add('supports',key,s['name'],s['description'],body,{'area':'范围辅助','projectile':'投射物辅助','resource':'资源辅助','element':'分量专注','delivery':'投射物辅助','control':'减速控制','chain':'连锁辅助','burning':'燃烧辅助','shock':'感电辅助','ambush':'预置伏击辅助','inward_pull':'冲量方向辅助','frost_lock':'冻结控制辅助'}[data['support_program_examples'][key]['family']],related=related))
     for key,e in data['equipment'].items():
         body = facts([('格数',' × '.join(map(number,e['size']))),('固有属性',lines(e['stats_text']))])+details('可出现的词缀',links('affixes',e['eligible_affixes']))
         related=link('rules','equipment')
@@ -1219,6 +1254,8 @@ def build(data, art):
         rule_defs.append(('defense_rating_affixes',RULE_TITLES['defense_rating_affixes'],'全局固定护甲与闪避占用已有前缀，物理命中、攻击准入和持续燃烧各有明确边界。',defense_rating_affix_rule(data,link,facts,details),'implemented'))
     if 'iron_reflexes' in data:
         rule_defs.append(('iron_reflexes',RULE_TITLES['iron_reflexes'],'全部原始闪避转换为护甲，取消敏捷闪避提高；同一句双提高只计一次，失去闪避仍有代价。',iron_reflexes_rule(data,link,facts,details),'implemented'))
+    if 'frost_lock' in data:
+        rule_defs.append(('frost_lock',RULE_TITLES['frost_lock'],'冰霜脉冲主命中乘0.75、魔力乘1.20；仅正值实际冰伤使存活敌人短暂冻结，解冻后免疫1.50秒。',frost_lock_rule(data,link,facts,details),'implemented'))
     if 'glove_ring_affixes' in data:
         rule_defs.append(('glove_ring_affixes',RULE_TITLES['glove_ring_affixes'],'既有手套新增固定命中前缀，既有双戒新增三抗后缀；通过实际Main的阈值与抗性供给对照。',glove_ring_affix_rule(data,link,facts,details),'implemented'))
     if 'precise_technique' in data:
@@ -1367,6 +1404,15 @@ def main():
         if args.check:
             if not target.exists() or target.read_bytes()!=source.read_bytes():
                 raise SystemExit('Inward Pull reference image differs from original asset bytes')
+        elif not target.exists() or target.read_bytes()!=source.read_bytes():
+            target.parent.mkdir(parents=True,exist_ok=True)
+            target.write_bytes(source.read_bytes())
+    if 'frost_lock' in data:
+        source=ROOT/data['frost_lock']['icon_source'].removeprefix('res://')
+        target=REF/data['frost_lock']['icon_file']
+        if args.check:
+            if not target.exists() or target.read_bytes()!=source.read_bytes():
+                raise SystemExit('Frost Lock reference image differs from original asset bytes')
         elif not target.exists() or target.read_bytes()!=source.read_bytes():
             target.parent.mkdir(parents=True,exist_ok=True)
             target.write_bytes(source.read_bytes())

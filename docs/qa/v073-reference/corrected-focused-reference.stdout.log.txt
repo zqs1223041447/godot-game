@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "baseline_commit": "70b75bc255c3f54c8365f959c046934e61759f6e",
+  "reused_actual_main_fixture_count": 1,
+  "exact_current_casts_checked": 3,
+  "historical_main_casts_preserved": 24,
+  "old_catalog_preserved_except_explicit_projection": true,
+  "source_policy_preserved": 45,
+  "equipment_vocabulary_preserved": 46,
+  "normal_reward_definition_count_preserved": 26,
+  "source_coverage_byte_identical": true,
+  "authoritative_html_values_and_labels_checked": 32,
+  "old_html_anchors_preserved": 3831,
+  "html_unique_ids": 3833,
+  "new_html_anchors": [
+    "rules-frost_lock",
+    "supports-frost_lock"
+  ],
+  "all_anchor_and_local_file_links_valid": true,
+  "old_pngs_preserved": 133,
+  "new_pngs": [
+    "assets/ui/grimoire/frost_lock.png",
+    "docs/reference/originals/frost_lock.png"
+  ],
+  "icon_sha256": "dad5f51c2f10b2ca932ba0fe5a4f3ed608e94eea41c30e6392af964b4450e673",
+  "catalog_sha256": "93da692e440bdd782822d10f151d5e9a4018835de0dab58dc364e64f58da5fdb",
+  "html_sha256": "704b6ae0e00694c6e946afdb2832c86228ef2c3706ce73d28da0888b2960a3b7",
+  "historical_fixed_gate_audit": {
+    "docs/qa/v070-reference/check-reference.py": "Immutable v70/schema45 receipt; current exporter uses validated45→46→47 memory migration with exact stats and casts",
+    "docs/qa/v072-reference/check-reference.py": "Immutable v72/schema46 receipt; current exporter uses validated46→47 memory migration with exact stats, resistances and casts"
+  },
+  "scope": "One Godot export and Python build/determinism/preservation; no new Main, import, native launch or packaging"
+}

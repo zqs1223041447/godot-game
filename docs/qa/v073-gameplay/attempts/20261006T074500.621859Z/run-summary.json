@@ -1,0 +1,55 @@
+{
+  "changed_inputs": [],
+  "checks": 328,
+  "command": [
+    "godot",
+    "--headless",
+    "--path",
+    "/workspace/scratch/a51485f153de/v073-frost-lock",
+    "--script",
+    "res://tests/frost_lock_gameplay_test.gd"
+  ],
+  "engine": "/usr/local/bin/godot",
+  "failures": 1,
+  "finished_utc": "2026-10-06T07:45:04.472541+00:00",
+  "input_hashes_match": true,
+  "isolated_data_home": "/tmp/godot-m1-v073-frost-lock-y2ad3795",
+  "passed": false,
+  "raw_exit": 1,
+  "requested_sections": "",
+  "scope": "Current v073 actual Main only. Unified import is external. No historical byte oracle, editor UI, Windows pack, or long performance run.",
+  "sections": {
+    "cleanup_and_capacity": {
+      "checks": 133,
+      "failures": 0
+    },
+    "continuing_resources": {
+      "checks": 28,
+      "failures": 0
+    },
+    "current_boundary_and_contacts": {
+      "checks": 24,
+      "failures": 1
+    },
+    "flying_snapshot": {
+      "checks": 27,
+      "failures": 0
+    },
+    "owned_cost_and_exclusion": {
+      "checks": 29,
+      "failures": 0
+    },
+    "settlement_eligibility": {
+      "checks": 63,
+      "failures": 0
+    },
+    "telegraph_pause": {
+      "checks": 24,
+      "failures": 0
+    }
+  },
+  "started_utc": "2026-10-06T07:45:00.661730+00:00",
+  "stderr_sha256": "a973df44b6f0070dc12f010b039d17dfe71854f20185a555a64aaa9a31cd942c",
+  "stdout_sha256": "bf6abff8d7ce104b49ed4005e39510afb7e894ba9ef7e48f44b2347a1349d2ff",
+  "timeout": false
+}

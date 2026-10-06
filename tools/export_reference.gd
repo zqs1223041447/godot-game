@@ -58,6 +58,8 @@ const ForgebladeMigrationData = preload("res://scripts/save/forgeblade_migration
 const ManaGuardMigrationData = preload("res://scripts/save/mana_guard_migration.gd")
 const ResoluteRules = preload("res://scripts/combat/resolute_technique_rules.gd")
 const GloveRingMigration = preload("res://scripts/save/glove_ring_affix_migration.gd")
+const FrostLockMigration = preload("res://scripts/save/frost_lock_gem_migration.gd")
+const FreezeRuntimeData = preload("res://scripts/combat/freeze_runtime.gd")
 const SourceCoverage = preload("res://tools/export_source_execution_coverage.gd")
 
 func _initialize() -> void:
@@ -140,6 +142,7 @@ static func collect() -> Dictionary:
 	result["glove_ring_affixes"] = glove_ring_affix_examples()
 	result["ambush"] = ambush_examples()
 	result["inward_pull"] = inward_pull_examples()
+	result["frost_lock"] = frost_lock_examples()
 	result["resolute_technique"] = resolute_technique_examples()
 	result["forgeblade"] = forgeblade_examples()
 	result["melee_basic"] = melee_basic_examples(result.forgeblade)
@@ -237,6 +240,7 @@ static func collect() -> Dictionary:
 			var historical_supports: Array = skill.compatible_supports.duplicate()
 			historical_supports.erase("ambush")
 			historical_supports.erase("inward_pull")
+			historical_supports.erase("frost_lock")
 			var combinations: Array = support_combinations(historical_supports)
 			skill.examples[config] = []
 			for combination: Array in combinations:
@@ -2729,7 +2733,9 @@ static func precise_technique_examples() -> Dictionary:
 		# relabel raw JSON or rewrite historical Main fixtures for the exporter.
 		var historical: Dictionary = Canonical.Rules.decode_v45(JSON.parse_string(FileAccess.get_file_as_string(path)))
 		assert(not historical.is_empty(), "Frozen schema45 gameplay fixture must validate: " + name)
-		var raw: Dictionary = GloveRingMigration.migrate_v45(historical, SourceTree.reason)
+		var schema46: Dictionary = GloveRingMigration.migrate_v45(historical, SourceTree.reason)
+		assert(not schema46.is_empty() and int(schema46.version) == 46)
+		var raw: Dictionary = FrostLockMigration.migrate_v46(schema46, SourceTree.reason)
 		var expected_migration: Dictionary = historical.duplicate(true)
 		expected_migration.version = Canonical.Rules.VERSION
 		assert(raw == expected_migration, "Historical Main fixture may change only version in memory: " + name)
@@ -2793,7 +2799,12 @@ static func glove_ring_affix_examples() -> Dictionary:
 		var fixture_hash: String = FileAccess.get_sha256(path)
 		var expected_hash: String = FileAccess.get_sha256(expected_path)
 		assert(acceptance.fixtures.get(name + ".json") == fixture_hash and acceptance.fixtures.get(name + "-expected.json") == expected_hash, "Fixture must match passing Main receipt: " + name)
-		var raw: Dictionary = Canonical.Rules.decode(JSON.parse_string(FileAccess.get_file_as_string(path)))
+		var historical: Dictionary = Canonical.Rules.decode_v46(JSON.parse_string(FileAccess.get_file_as_string(path)))
+		assert(not historical.is_empty(), "Frozen schema46 Main fixture must validate: " + name)
+		var raw: Dictionary = FrostLockMigration.migrate_v46(historical, SourceTree.reason)
+		var expected_migration: Dictionary = historical.duplicate(true)
+		expected_migration.version = 47
+		assert(raw == expected_migration, "Historical Main fixture may change only version in memory: " + name)
 		var expected: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(expected_path))
 		assert(not raw.is_empty() and int(raw.version) == Canonical.Rules.VERSION and Canonical.Rules.reason(raw).is_empty() and SourceTree.reason(raw).is_empty(), "Complete Main fixture must validate: " + name)
 		var model := Canonical.new()
@@ -2844,3 +2855,64 @@ static func glove_ring_affix_examples() -> Dictionary:
 		"migration":"严格decode_v45和旧45全量验证后备份原字节，再仅迁version到46；源政策仍45，装备词汇46。旧词族元数据、物品UID与掷值保持，不重掷、不赠物或点数",
 		"producer":"Passing actual Main snapshots → current Canonical Rules / Model → SkillCompiler / DefenseRules; isolated endpoints → AttackHitRules",
 		"new_images":[], "bounds":"不新增底材、UI、素材、源节点或定向制作按钮；五个实际Main构筑仅只读重编译，本页不是DPS、最优构筑、长期掉落频率或Windows成品验收"}
+
+
+## Rehydrate the passing real Main fixture; no authored reference gear or saves.
+static func frost_lock_examples() -> Dictionary:
+	var fixture: String = "docs/qa/v073-gameplay/fixtures/selected.json"
+	var expected_fixture: String = "docs/qa/v073-gameplay/fixtures/selected-casts.json"
+	var acceptance: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://docs/qa/v073-gameplay/acceptance-summary.json"))
+	assert(acceptance.get("passed", false), "v73 actual Main must pass first")
+	var fixture_hash: String = FileAccess.get_sha256("res://" + fixture)
+	var expected_hash: String = FileAccess.get_sha256("res://" + expected_fixture)
+	assert(acceptance.fixtures["fixtures/selected.json"] == fixture_hash and acceptance.fixtures["fixtures/selected-casts.json"] == expected_hash)
+	var raw: Dictionary = Canonical.Rules.decode(JSON.parse_string(FileAccess.get_file_as_string("res://" + fixture)))
+	assert(not raw.is_empty() and int(raw.version) == 47 and Canonical.Rules.reason(raw).is_empty() and SourceTree.reason(raw).is_empty())
+	var expected: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://" + expected_fixture))
+	var model := Canonical.new()
+	model._accept_memory(raw.duplicate(true))
+	var casts: Dictionary = {"basic":model.get_basic_cast(), "frost":model.get_group_cast(str(expected.frost.group_id)),
+		"plain_frost":Compiler.compile_group("frost", model.get_combat_snapshot(), [])}
+	var stats: Dictionary = model.get_stats()
+	assert(JSON.parse_string(JSON.stringify(stats, "", true, true)) == expected.stats)
+	var examples: Dictionary = {}
+	for key: String in casts:
+		var cast: Dictionary = casts[key]
+		assert(cast.get("ok", false) and JSON.parse_string(JSON.stringify(cast, "", true, true)) == expected[key], "v73 Main cast must match: " + key)
+		var resolved: Dictionary = Damage.resolve(cast.packets.projectile, cast.snapshot.modifiers)
+		examples[key] = {"compiled":cast, "resolved":resolved, "summary":Preview.summary(cast), "details":Preview.details(cast)}
+	assert(model.save_attempts == 0 and model.snapshot() == raw)
+	assert(FileAccess.get_sha256("res://" + fixture) == fixture_hash and FileAccess.get_sha256("res://" + expected_fixture) == expected_hash)
+	var policy: Dictionary = Compiler.FrostLock.PLAYER_POLICY.duplicate(true)
+	var durations: Dictionary = {}
+	var runtime := FreezeRuntimeData.new()
+	var id: int = 1
+	for rarity: String in Compiler.FrostLock.RARITY_KEYS:
+		assert(runtime.apply(id, rarity, 0.0, policy, {"skill_id":"frost", "phase":"projectile"}).applied)
+		durations[rarity] = runtime.state_for(id)
+		id += 1
+	var split: Dictionary = runtime.frame_prefixes(0.5, 0.25)
+	assert(split.ok)
+	var blocked: float = float(split.by_id[1])
+	var quote: Dictionary = Canonical.GemTrade.quote("buy", "support:frost_lock")
+	var test_offer: Dictionary = Town.offer("support:frost_lock")
+	assert(quote.ok and test_offer.available)
+	return {"minimum_save_version":Supports.FrostLock.SAVE_VERSION, "source_policy":SourceTree.CURRENT_SAVE_VERSION,
+		"equipment_vocabulary":Equipment.CURRENT_VOCABULARY, "support_id":"frost_lock", "skills":Supports.FrostLock.SKILLS,
+		"mutually_exclusive_with":["lingering_chill"], "policy":policy, "max_targets":FreezeRuntimeData.MAX_TARGETS,
+		"icon_source":GemCatalogData.definition("support:frost_lock").icon, "icon_file":"originals/frost_lock.png",
+		"fixture":fixture, "fixture_sha256":fixture_hash, "expected_fixture":expected_fixture, "expected_sha256":expected_hash,
+		"stats":stats, "examples":examples, "whole_build_valid":true, "matches_actual_main":true, "save_attempts":model.save_attempts,
+		"merchant_quote":quote, "test_offer":test_offer, "normal_reward_pool_includes_support":Canonical.Journey.GEM_DEFINITIONS.has("support:frost_lock"),
+		"normal_reward_definition_count":Canonical.Journey.GEM_DEFINITIONS.size(),
+		"timing":{"states":durations, "partial_frame":{"start":0.5, "delta":0.25, "frozen_prefix":blocked, "active_delta":0.25-blocked}},
+		"eligibility":"只有冰霜脉冲主投射物通过原出生与命中准入、造成正的实际冰伤盾血损失且目标仍存活，才进入冻结；抵消为零、致死、DOT、独立爆炸与其他技能附加冰伤不触发",
+		"admission":"按当前命中结算边界elapsed附加，立即阻止tick末新预警起手；下一敌方阶段开始暂停，不追溯取消本tick已经结算的攻击",
+		"paused":"暂停自主移动、接触攻击计时及预警蓄力、恢复、双响局部时钟；保留原锁定圆心、已过蓄力与pulse序号，解冻接续原攻击",
+		"continuing":"外力冲量、怪物分离、墙体碰撞、燃烧、感电、其他状态与护盾恢复继续；仍可能被推移，冻结不暂停世界资源时钟",
+		"expiry":"冻结不刷新、不叠加；解冻后免疫，跨技能组共用同一怪物ID。精确到期恢复，跨解冻帧仅推进剩余delta，预警事件相对时间补上冻结前缀",
+		"snapshot":"施放时独立保存compiled.freeze_profile与snapshot.freeze_policy；在途投射物不因拆石、换装或退款改变。无辅助不添加空冻结字段；原3秒移动减缓保持",
+		"cleanup":"最多100个既有怪物ID状态，免疫结束清理；死亡立即移除，玩家死亡、换图、返城、重启清空。公开冻结列表只显示正在冻结的怪物",
+		"migration":"严格decode_v46与旧46完整验证，备份原字节后仅迁version到47；不赠宝石或碎片，装备词汇46、源政策45、既有26种正式奖励顺序保持",
+		"example_scope":"直接复用通过实际Main的完整合法47存档，在内存只读重编译；无辅助冰霜为同快照对照。数值是非暴击、无防御单次主命中，不是DPS。时间示例调用FreezeRuntime，不重跑Main",
+		"bounds":"仅新增一枚霜锁辅助及其灰白冰晶；不支持玩家被冻、碎冰、传播或新的冻结天赋。静态资料验证不等于原生、Windows或打包验收"}
