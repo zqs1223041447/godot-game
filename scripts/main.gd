@@ -1245,13 +1245,13 @@ func _execute_compiled(compiled: Dictionary, group_id: String = "", main_uid: St
 			if _geometry.has_walls(): player_pos = _geometry.move(start,player_pos,PLAYER_RADIUS,_camp_movement if _world_mode=="map" else null)
 			elif _world_mode=="map":_camp_movement.append([start,player_pos])
 			visual_cues.emit_cue("dash", start, {"destination": player_pos, "color": color})
-			invulnerable = 0.6
+			invulnerable = maxf(invulnerable, 0.6)
 			for i: int in range(14):
 				_add_particle(start.lerp(player_pos, i / 14.0), Vector2.ZERO, color, 9.0 - i * 0.4, 0.38)
 		"ward":
 			shield = minf(float(_stats.max_shield), shield + float(_stats.max_shield) * 0.75)
 			damage_delay = 0.0
-			invulnerable = 0.8
+			invulnerable = maxf(invulnerable, 0.8)
 			visual_cues.emit_cue("ward", player_pos, {"radius": 60.0, "color": color})
 			_add_text(player_pos + Vector2(0, -32), "护盾充能", color)
 		"meteor":
