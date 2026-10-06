@@ -113,7 +113,7 @@ static func sources_error(value: Variant) -> String:
 
 
 static func packet_error(packet: Variant) -> String:
-	if not packet is Dictionary or packet.size() != 5 or not packet.has_all(["base", "tags", "skill_id", "role", "assembly"]):
+	if not packet is Dictionary or packet.size() != (6 if packet.has("conversion") else 5) or not packet.has_all(["base", "tags", "skill_id", "role", "assembly"]):
 		return "冻结伤害包结构无效"
 	if not _typed_points(packet.base) or not packet.skill_id is String or packet.skill_id.is_empty() or not packet.role is String or not ROLES.has(packet.role):
 		return "冻结伤害包来源或点数无效"
@@ -146,7 +146,10 @@ static func packet_error(packet: Variant) -> String:
 			return "冻结伤害包与组装记录不一致"
 	if packet.role == "secondary" and not trace.added.is_empty():
 		return "独立爆炸不可继承附加伤害"
-	return _event_error(packet.tags, packet.role, float(trace.added_effectiveness))
+	var event_error: String = _event_error(packet.tags, packet.role, float(trace.added_effectiveness))
+	if not event_error.is_empty():
+		return event_error
+	return Damage.conversion_error(packet) if packet.has("conversion") else ""
 
 
 static func _weapon_trace_error(trace: Variant, packet: Dictionary, coefficient: float) -> String:

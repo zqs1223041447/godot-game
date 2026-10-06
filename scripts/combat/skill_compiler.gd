@@ -18,6 +18,7 @@ const Leech=preload("res://scripts/combat/leech_rules.gd")
 const ResourceCost=preload("res://scripts/combat/source_resource_rules.gd")
 const Spatial = preload("res://scripts/combat/source_spatial_rules.gd")
 const BaseCompiler = preload("res://scripts/combat/damage_base_compiler.gd")
+const Conversion = preload("res://scripts/combat/physical_fire_conversion_rules.gd")
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
 const Weapon = preload("res://scripts/items/weapon_local_rules.gd")
 const MAX_INITIAL_PROJECTILES: int = 9
@@ -217,6 +218,7 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 		impulse_profile.merge(InwardPull.POLICY.duplicate(true))
 		compiled_snapshot.area_impulse_policy = impulse_profile.duplicate(true)
 		result.area_impulse_profile = impulse_profile
+	_append_conversion_profile(result, packets, compiled_snapshot)
 	var hit_policy: Dictionary = Resolute.compiled_profile(compiled_snapshot)
 	if not hit_policy.is_empty():result.hit_policy = hit_policy
 	return result
@@ -244,6 +246,7 @@ static func compile_basic(snapshot:Dictionary)->Dictionary:
 	var result:Dictionary={"ok":true,"error":"","skill_id":"basic","recipe":spatial.recipe,"snapshot":frozen,"packets":frozen.compiled_packets.duplicate(true)}
 	if not critical.critical.is_empty():result.critical=critical.critical.duplicate(true)
 	if not leech.leech.is_empty():result.leech=leech.leech.duplicate(true)
+	_append_conversion_profile(result, result.packets, frozen)
 	var hit_policy: Dictionary = Resolute.compiled_profile(frozen)
 	if not hit_policy.is_empty():result.hit_policy = hit_policy
 	return result
@@ -268,6 +271,7 @@ static func _compile_basic_melee(snapshot: Dictionary) -> Dictionary:
 		"snapshot": frozen, "packets": frozen.compiled_packets.duplicate(true)}
 	if not critical.critical.is_empty():result.critical = critical.critical.duplicate(true)
 	if not leech.leech.is_empty():result.leech = leech.leech.duplicate(true)
+	_append_conversion_profile(result, result.packets, frozen)
 	var hit_policy: Dictionary = Resolute.compiled_profile(frozen)
 	if not hit_policy.is_empty():result.hit_policy = hit_policy
 	return result
@@ -327,8 +331,10 @@ static func _failure(error: String) -> Dictionary:
 static func _snapshot_error(snapshot: Dictionary) -> String:
 	# initial_count is reserved for compiled projectile snapshots, including empty supports.
 	# Reject re-entry instead of applying support more factors a second time.
-	if snapshot.has("initial_count") or snapshot.has("compiled_packets") or snapshot.has("compiled_skill_id") or snapshot.has("critical") or snapshot.has("critical_roll") or snapshot.has("leech") or snapshot.has("burn_policy") or snapshot.has("burn_proliferation") or snapshot.has("shock_policy") or snapshot.has("hit_policy") or snapshot.has("area_impulse_policy") or snapshot.has("area_impulse_profile"):
+	if snapshot.has("initial_count") or snapshot.has("compiled_packets") or snapshot.has("compiled_skill_id") or snapshot.has("critical") or snapshot.has("critical_roll") or snapshot.has("leech") or snapshot.has("burn_policy") or snapshot.has("burn_proliferation") or snapshot.has("shock_policy") or snapshot.has("hit_policy") or snapshot.has("area_impulse_policy") or snapshot.has("area_impulse_profile") or snapshot.has("conversion_profile"):
 		return "施放快照已编译；必须从基础构筑快照重新编译"
+	var conversion_error: String = Conversion.snapshot_error(snapshot)
+	if not conversion_error.is_empty(): return conversion_error
 	var dot_error:String=Burn.snapshot_multiplier_error(snapshot)
 	if not dot_error.is_empty():return dot_error
 	var critical_error:String=Critical.error(snapshot)
@@ -432,3 +438,17 @@ static func _nonnegative(value: Variant) -> bool:
 
 static func _integer(value: Variant, minimum: int, maximum: int) -> bool:
 	return _number(value) and float(value) == floorf(float(value)) and float(value) >= minimum and float(value) <= maximum
+
+
+static func _append_conversion_profile(result: Dictionary, packets: Dictionary, snapshot: Dictionary) -> void:
+	for value: Variant in packets.values():
+		if value is Dictionary and value.has("conversion"):
+			result.conversion_profile = Conversion.profile(float(snapshot.get(Conversion.STAT, 0.0)))
+			return
+		if value is Array:
+			for packet: Dictionary in value:
+				if packet.has("conversion"):
+					result.conversion_profile = Conversion.profile(float(snapshot.get(Conversion.STAT, 0.0)))
+					return
+	# A zero source or hit set without physical points needs no frozen policy.
+	if snapshot.has(Conversion.STAT): snapshot.erase(Conversion.STAT)

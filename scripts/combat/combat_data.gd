@@ -4,6 +4,7 @@ extends RefCounted
 const Burn=preload("res://scripts/combat/burn_rules.gd")
 const Data = preload("res://scripts/game_data.gd")
 const BaseCompiler = preload("res://scripts/combat/damage_base_compiler.gd")
+const Conversion = preload("res://scripts/combat/physical_fire_conversion_rules.gd")
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
 const Critical=preload("res://scripts/combat/critical_strike_rules.gd")
 const Resolute = preload("res://scripts/combat/resolute_technique_rules.gd")
@@ -68,6 +69,7 @@ static func snapshot(stats: Dictionary, effects: Array) -> Dictionary:
 	var leech:Dictionary=Leech.from_stats(stats)
 	if not leech.is_empty():value.leech_modifiers=leech
 	value.merge(Resolute.from_stats(stats))
+	value.merge(Conversion.from_stats(stats))
 	return value
 
 
@@ -84,8 +86,9 @@ static func event_packet(snapshot_value: Dictionary, skill_id: String, role: Str
 	if snapshot_value.has("weapon_profile") and snapshot_value.weapon_profile is Dictionary and snapshot_value.weapon_profile.is_empty():
 		return {}
 	var recipe: Dictionary = _event_recipe(snapshot_value, skill_id, role, index)
-	return BaseCompiler.assemble(snapshot_value.get("base_damage"), recipe,
+	var packet: Dictionary = BaseCompiler.assemble(snapshot_value.get("base_damage"), recipe,
 		snapshot_value.get("added_damage", {}), snapshot_value.get("added_damage_sources", []), snapshot_value.get("weapon_profile", {}))
+	return _convert_assembled(snapshot_value, packet)
 
 
 static func secondary_packet(snapshot_value: Dictionary, skill_id: String) -> Dictionary:
@@ -98,9 +101,10 @@ static func secondary_packet(snapshot_value: Dictionary, skill_id: String) -> Di
 	var spec: Variant = snapshot_value.get("explosion_recipe", TORNADO.explosion)
 	if not spec is Dictionary or not spec.has_all(["coefficient", "added_effectiveness", "radius"]) or not BaseCompiler._nonnegative(spec.radius):
 		return {}
-	return BaseCompiler.assemble(snapshot_value.get("base_damage"), _hit_recipe(skill_id, "secondary",
+	var packet: Dictionary = BaseCompiler.assemble(snapshot_value.get("base_damage"), _hit_recipe(skill_id, "secondary",
 		{"fire": 1.0}, spec.coefficient, spec.added_effectiveness, ["hit", "area", "secondary", "explosion"]),
 		snapshot_value.get("added_damage", {}), snapshot_value.get("added_damage_sources", []), snapshot_value.get("weapon_profile", {}))
+	return _convert_assembled(snapshot_value, packet)
 
 
 static func _event_recipe(snapshot_value: Dictionary, skill_id: String, role: String, index: int) -> Dictionary:
@@ -155,8 +159,9 @@ static func chain_hit_recipe(spec: Dictionary, index: int) -> Dictionary:
 
 
 static func chain_packet(snapshot_value: Dictionary, spec: Dictionary, index: int) -> Dictionary:
-	return BaseCompiler.assemble(snapshot_value.get("base_damage"), chain_hit_recipe(spec, index),
+	var packet: Dictionary = BaseCompiler.assemble(snapshot_value.get("base_damage"), chain_hit_recipe(spec, index),
 		snapshot_value.get("added_damage", {}), snapshot_value.get("added_damage_sources", []), snapshot_value.get("weapon_profile", {}))
+	return _convert_assembled(snapshot_value, packet)
 
 
 static func _valid_chain_recipe(spec: Dictionary) -> bool:
@@ -203,3 +208,12 @@ static func _frozen_packet(snapshot_value: Dictionary, skill_id: String, role: S
 			or float(packet.assembly.base_coefficient) != 1.0 or float(packet.assembly.added_effectiveness) != 1.0:
 			return {}
 	return packet.duplicate(true)
+
+
+## Only raw assembly enters this stage. Frozen packet reads above never convert again.
+static func _convert_assembled(snapshot_value: Dictionary, packet: Dictionary) -> Dictionary:
+	if not snapshot_value.has(Conversion.STAT): return packet
+	if not Conversion.snapshot_error(snapshot_value).is_empty(): return {}
+	var fraction: float = float(snapshot_value[Conversion.STAT])
+	if fraction == 0.0 or packet.is_empty(): return packet
+	return Conversion.apply(packet, fraction)

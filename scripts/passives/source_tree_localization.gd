@@ -12,6 +12,16 @@ const TERM_NOTE := "词缀说明：提高/降低为同类加算；额外提高/�
 # A parser match is not sufficient by itself. These closed-world groups name
 # the actual runtime paths that consume each parsed stat after SourceTree.apply_stats.
 const STAT_CONSUMER_GROUPS := {
+	"physical_fire_conversion": {
+		"evidence": "source_tree_runtime.gd::apply_stats -> combat_data.gd::snapshot/event_packet -> physical_fire_conversion_rules.gd::from_stats/apply -> damage_resolver.gd conversion provenance",
+		"code_checks": [
+			{"path": "scripts/passives/source_tree_runtime.gd", "contains": "result.physical_to_fire_conversion"},
+			{"path": "scripts/combat/combat_data.gd", "contains": "Conversion.from_stats(stats)"},
+			{"path": "scripts/combat/combat_data.gd", "contains": "Conversion.apply"},
+			{"path": "scripts/combat/physical_fire_conversion_rules.gd", "contains": "static func apply"},
+		],
+		"stats": ["physical_to_fire_conversion"]
+	},
 	"attributes_and_capacity": {
 		"evidence": "source_tree_runtime.gd::apply_stats; canonical_game_state.gd::_stats_for; main.gd resource and hit paths",
 		"code_checks": [

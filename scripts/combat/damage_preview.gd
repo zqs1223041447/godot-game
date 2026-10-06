@@ -124,6 +124,7 @@ static func details(cast: Dictionary) -> String:
 	lines.append_array(shock_lines(cast))
 	lines.append_array(trap_lines(cast))
 	lines.append_array(inward_pull_lines(cast))
+	lines.append_array(conversion_lines(cast))
 	if cast.get("recipe", {}).get("delivery", "") == "melee" and cast.get("skill_id", "") == "basic":
 		lines.append("普通近战攻击：距离 %.0f · 最多 %d 个目标；不发射投射物。" % [float(cast.recipe.radius), int(cast.recipe.max_targets)])
 	if not entries(cast).is_empty() and bool(cast.get("hit_policy", {}).get("hits_cannot_be_evaded", false)):
@@ -188,4 +189,29 @@ static func inward_pull_lines(cast: Dictionary) -> PackedStringArray:
 	var lines := PackedStringArray()
 	if not bool(cast.get("ok", false)) or not bool(cast.get("area_impulse_profile", {}).get("enabled", false)): return lines
 	lines.append("命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。")
+	return lines
+
+
+static func conversion_lines(cast: Dictionary) -> PackedStringArray:
+	var lines := PackedStringArray()
+	var profile: Dictionary = cast.get("conversion_profile", {})
+	if not bool(cast.get("ok", false)) or not bool(profile.get("enabled", false)): return lines
+	lines.append("%.0f%% 物理伤害转为火焰；转化部分同时适用物理和火焰增伤，每条仅计一次。" % (float(profile.fraction) * 100.0))
+	if "physical_focus" in cast.get("support_ids", []) or "fire_focus" in cast.get("support_ids", []):
+		lines.append("类型专注的两条独立效果均作用于转化部分：×1.20 ×0.80 = ×0.96。")
+	return lines
+
+static func component_detail_lines(detail: Dictionary) -> PackedStringArray:
+	var lines := PackedStringArray()
+	var names := {"physical":"物理", "fire":"火焰", "cold":"冰冷", "lightning":"闪电", "chaos":"混沌"}
+	var final_name: String = str(names.get(detail.type, detail.type))
+	if not detail.has("parts"):
+		lines.append("%s %.2f × (1 + %.0f%%) × %.2f = %.2f" % [final_name, float(detail.base), float(detail.increased) * 100.0, float(detail.more), float(detail.final)])
+		return lines
+	for part: Dictionary in detail.parts:
+		var path := PackedStringArray()
+		for source_type: String in part.lineage: path.append(str(names.get(source_type, source_type)))
+		var label: String = "→".join(path) if path.size() > 1 else "原生" + "".join(path)
+		lines.append("%s %.2f × (1 + %.0f%%) × %.2f = %.2f（防御前）" % [label, float(part.base), float(part.increased) * 100.0, float(part.more), float(part.before_defense)])
+	lines.append("%s合计：防御前 %.2f · 防御后 %.2f" % [final_name, float(detail.before_defense), float(detail.final)])
 	return lines

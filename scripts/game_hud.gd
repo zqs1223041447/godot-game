@@ -1190,8 +1190,7 @@ func _build_combat_panel() -> void:
 		if not packet.is_empty():
 			details.append(TypedPreview.assembly_line(packet))
 		for part: Dictionary in result.details:
-			var type_name: String = {"physical": "物理", "fire": "火焰", "cold": "冰冷", "lightning": "闪电", "chaos": "混沌"}.get(part.type, part.type)
-			details.append("%s %.2f × (1 + %.0f%%) × %.2f = %.2f" % [type_name, float(part.base), float(part.increased) * 100.0, float(part.more), float(part.final)])
+			details.append_array(TypedPreview.component_detail_lines(part))
 		_card(_panel_body, "%s · 合计 %.2f%s" % [title, float(result.total), "（未装备爆炸，仅显示配方）" if role == "explosion" and not exploding else ""], "\n".join(details), GOLD if role == "explosion" else CYAN)
 	_section("03  本轮真实事件", "母箭绿 · 子箭青 · 返回紫 · 爆炸橙")
 	var counts: Dictionary = _arena.get("event_counts")
