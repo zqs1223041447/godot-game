@@ -8,7 +8,8 @@ const MAX_SERIAL := 1000000000
 const GEM_INTERVAL := 30
 const FLASK_INTERVAL := 60
 const LEGACY_MAP_IDS := ["old_garden", "broken_ruins"] # Frozen schema26..29 vocabulary.
-const MAP_IDS := ["old_garden", "broken_ruins", "sunwell_terrace"]
+const V49_MAP_IDS := ["old_garden", "broken_ruins", "sunwell_terrace"] # Frozen schema30..49 vocabulary.
+const MAP_IDS := ["old_garden", "broken_ruins", "sunwell_terrace", "ginkgo_arcade"]
 const FIELDS := ["normal_root_kills", "best_tiers", "next_run_id", "active_run", "pending_map_reward", "claimed_gems", "claimed_flasks"]
 const ACTIVE_FIELDS := ["run_id", "map_id", "tier", "normal_ids", "special_ids", "fee_paid"]
 const PENDING_FIELDS := ["run_id", "map_id", "tier", "shards"]
@@ -24,6 +25,12 @@ const GEM_DEFINITIONS := [
 
 
 static func empty() -> Dictionary:
+	var value := empty_v49()
+	value.best_tiers["ginkgo_arcade"] = 0
+	return value
+
+
+static func empty_v49() -> Dictionary:
 	var value := empty_legacy()
 	value.best_tiers["sunwell_terrace"] = 0
 	return value
@@ -42,6 +49,10 @@ static func decode(raw: Variant) -> Dictionary:
 
 static func decode_legacy(raw: Variant) -> Dictionary:
 	return _decode(raw, LEGACY_MAP_IDS)
+
+
+static func decode_v49(raw: Variant) -> Dictionary:
+	return _decode(raw, V49_MAP_IDS)
 
 
 static func _decode(raw: Variant, map_ids: Array) -> Dictionary:
@@ -73,6 +84,10 @@ static func reason(journey: Variant) -> String:
 
 static func reason_legacy(journey: Variant) -> String:
 	return _reason(journey, LEGACY_MAP_IDS)
+
+
+static func reason_v49(journey: Variant) -> String:
+	return _reason(journey, V49_MAP_IDS)
 
 
 static func _reason(journey: Variant, map_ids: Array) -> String:

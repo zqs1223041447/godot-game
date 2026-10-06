@@ -46,7 +46,8 @@ const V45_VERSION := 45
 const V46_VERSION := 46
 const V47_VERSION := 47
 const V48_VERSION := 48
-const VERSION := 49
+const V49_VERSION := 49
+const VERSION := 50
 const LEGACY_MAX_ITEMS := 1024
 const V17_MAX_ITEMS := LEGACY_MAX_ITEMS + 1
 const MAX_ITEMS := V17_MAX_ITEMS + 2 # Two once-only migration bottles; bag capacity is unchanged.
@@ -87,6 +88,12 @@ static func decode_v28(raw: Variant) -> Dictionary:
 
 static func decode_v29(raw: Variant) -> Dictionary:
 	return _decode(raw, true, V29_VERSION, true)
+
+
+## Freeze the full three-map schema49 envelope before adding a fourth map.
+static func decode_v49(raw: Variant) -> Dictionary:
+	var decoded := _decode(raw, true, V49_VERSION, true)
+	return decoded if reason_v49(decoded).is_empty() else {}
 
 
 ## Freeze schema48 before opening the exact cold ailment duration entry.
@@ -257,7 +264,7 @@ static func _decode(raw: Variant, paged: bool, expected_version: int, allow_curr
 		value[field] = int(value[field])
 	if value.version != expected_version: return {}
 	if expected_version >= 26:
-		value.journey = Journey.decode_legacy(value.journey) if expected_version <= V29_VERSION else Journey.decode(value.journey)
+		value.journey = Journey.decode_legacy(value.journey) if expected_version <= V29_VERSION else Journey.decode_v49(value.journey) if expected_version <= V49_VERSION else Journey.decode(value.journey)
 		if value.journey.is_empty(): return {}
 	if not value.items is Dictionary or not value.locations is Dictionary: return {}
 	for uid: Variant in value.items:
@@ -328,6 +335,13 @@ static func reason_v28(value: Variant, validate_talents: Callable = Callable(), 
 
 static func reason_v29(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
 	return _reason(value, V29_VERSION, true, true, MAX_ITEMS, validate_talents, socket_ids)
+
+
+static func reason_v49(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
+	# Frozen source policy49, equipment46 and three-map legality precede callbacks.
+	var native_reason := _reason(value, V49_VERSION, true, true, MAX_ITEMS, Callable(), socket_ids)
+	if not native_reason.is_empty(): return native_reason
+	return str(validate_talents.call(value)) if validate_talents.is_valid() else ""
 
 
 static func reason_v48(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
@@ -495,7 +509,7 @@ static func _reason(value: Variant, expected_version: int, paged: bool, allow_cu
 	if not Locations._exact_string_keys(value, FIELDS if expected_version >= 26 else LEGACY_FIELDS): return "保存结构无效"
 	if not value.version is int or value.version != expected_version: return "保存版本不兼容"
 	if expected_version >= 26:
-		var journey_error: String = Journey.reason_legacy(value.journey) if expected_version <= V29_VERSION else Journey.reason(value.journey)
+		var journey_error: String = Journey.reason_legacy(value.journey) if expected_version <= V29_VERSION else Journey.reason_v49(value.journey) if expected_version <= V49_VERSION else Journey.reason(value.journey)
 		if not journey_error.is_empty(): return journey_error
 	if not _integer(value.revision, 0, MAX_SERIAL) or not _integer(value.next_item_serial, 1, MAX_SERIAL): return "修订或物品序号无效"
 	if not value.items is Dictionary or value.items.size() > item_limit: return "物品注册表无效"
@@ -561,7 +575,7 @@ static func _reason(value: Variant, expected_version: int, paged: bool, allow_cu
 	return str(validate_talents.call(value)) if validate_talents.is_valid() else SourceTree.reason(value)
 
 
-## Source-only schemas35/36/38/40/41/44/45/48/49 and gem-only42/43/47 define no equipment vocabularies.
+## Source-only schemas35/36/38/40/41/44/45/48/49, gem-only42/43/47 and map-only50 define no equipment vocabularies.
 ## Keep save-to-equipment mapping explicit and the Catalog API historically strict.
 static func equipment_vocabulary_for_save_version(save_version: int) -> int:
 	if save_version >= 46: return 46

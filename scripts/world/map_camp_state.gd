@@ -5,6 +5,7 @@ extends RefCounted
 const Maps = preload("res://scripts/world/map_compiler.gd")
 const Monsters = preload("res://scripts/monsters/monster_catalog.gd")
 const Sunwell = preload("res://scripts/world/sunwell_roster_rules.gd")
+const Ginkgo = preload("res://scripts/world/ginkgo_roster_rules.gd")
 const MistSkitter = preload("res://scripts/world/mist_skitter_roster_rules.gd")
 const CAMP_IDS: Array[String] = ["camp_west", "camp_north", "camp_east"]
 var _state: Dictionary = {}
@@ -51,6 +52,9 @@ func begin(profile: Variant, landmarks: Variant, seed_value: Variant,
 				if profile.id == "sunwell_terrace":
 					template_id = Sunwell.template_for_roll(profile.wave, camp_id, ordinal, roll)
 					special_roll = Sunwell.species_roll(roll, template_id)
+				elif profile.id == "ginkgo_arcade":
+					template_id = Ginkgo.template_for_roll(profile.wave, camp_id, ordinal, roll)
+					special_roll = Ginkgo.species_roll(roll, template_id)
 				else:
 					var elemental := Monsters.elemental_template_for_roll(profile.wave, admission_index, roll)
 					if not elemental.is_empty():

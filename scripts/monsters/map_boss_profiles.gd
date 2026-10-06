@@ -6,6 +6,7 @@ const DEFINITIONS={
 	"garden_slam":{"id":"garden_slam","map_id":"old_garden","name":"近身震地","target_rule":"self_at_start","trigger_distance":140.0,"profile":{"radius":130.0,"windup_seconds":0.9,"recovery_seconds":1.7,"damage_multiplier":1.4}},
 	"ruins_mark":{"id":"ruins_mark","map_id":"broken_ruins","name":"断垣落印","target_rule":"player_at_start","trigger_distance":420.0,"profile":{"radius":75.0,"windup_seconds":1.0,"recovery_seconds":1.5,"damage_multiplier":1.15}},
 	"sunwell_echo":{"id":"sunwell_echo","map_id":"sunwell_terrace","name":"泉脉双响","target_rule":"player_at_start","trigger_distance":420.0,"profile":{"radius":85.0,"windup_seconds":0.8,"recovery_seconds":1.9,"damage_multiplier":0.65},"pulse_count":2,"pulse_interval":0.8},
+	"ginkgo_shelter_slam":{"id":"ginkgo_shelter_slam","map_id":"ginkgo_arcade","name":"回廊震击","target_rule":"self_at_start","trigger_distance":240.0,"profile":{"radius":240.0,"windup_seconds":1.4,"recovery_seconds":1.9,"damage_multiplier":1.2}},
 }
 static func definition(id:Variant)->Dictionary:
 	return DEFINITIONS[id].duplicate(true) if id is String and DEFINITIONS.has(id) else {}

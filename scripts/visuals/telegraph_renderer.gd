@@ -94,7 +94,7 @@ static func _read_state(raw: Variant) -> Dictionary:
 		clampf((age - windup_seconds) / recovery_seconds, 0.0, 1.0)
 	return {"source_id": int(source_id), "center": center, "radius": float(radius),
 		"phase": phase, "progress": progress,
-		"pattern": raw.get("visual_pattern", "") if raw.get("visual_pattern", "") in ["garden_slam", "ruins_mark", "ember_burn", "sunwell_echo"] else "",
+		"pattern": raw.get("visual_pattern", "") if raw.get("visual_pattern", "") in ["garden_slam", "ruins_mark", "ember_burn", "sunwell_echo", "ginkgo_shelter_slam"] else "",
 		"pulse_index": clampi(int(raw.get("pulse_index",0)),0,1) if typeof(raw.get("pulse_index",0)) == TYPE_INT else 0,
 		"element": raw.get("visual_element", "") if raw.get("visual_element", "") in ["cold", "lightning"] else ""}
 
@@ -118,6 +118,7 @@ static func _append_state(state: Dictionary, effects: int, fills: Array[Dictiona
 	if state.element == "cold": pigment = Color("b3c5c8").lerp(Color("77969f"), progress) if winding else ASH
 	elif state.element == "lightning": pigment = Color("d5c68e").lerp(Color("ae884e"), progress) if winding else ASH
 	if state.pattern == "ember_burn": pigment = Color("c8905b").lerp(Color("b7643e"), progress) if winding else ASH
+	if state.pattern == "ginkgo_shelter_slam": pigment = Color("d7c48b").lerp(Color("bc925a"), progress) if winding else ASH
 	if state.pattern == "sunwell_echo": pigment = Color("dfc685").lerp(Color("bf8052"), progress) if winding else ASH
 	var fill_alpha: float = lerpf(0.035, 0.085, progress) if winding else 0.065 * fade
 	fills.append(_circle(state, "ground_tint", Color(SOIL, fill_alpha), true, -1.0))
@@ -136,6 +137,9 @@ static func _append_state(state: Dictionary, effects: int, fills: Array[Dictiona
 	elif state.pattern == "ember_burn":
 		var p: Vector2 = state.center + Vector2(0, -radius * 0.6)
 		rune = PackedVector2Array([p + Vector2(-7, 6), p + Vector2(-2, -3), p + Vector2(0, 2), p + Vector2(5, -9), p + Vector2(8, 6)])
+	elif state.pattern == "ginkgo_shelter_slam":
+		var p: Vector2 = state.center + Vector2(0, -radius * 0.52)
+		rune = PackedVector2Array([p+Vector2(0,12),p+Vector2(-17,-1),p+Vector2(-12,-10),p+Vector2(0,-5),p+Vector2(12,-10),p+Vector2(17,-1)])
 	elif state.pattern == "sunwell_echo":
 		var p: Vector2 = state.center + Vector2(0, -radius * 0.55)
 		rune = PackedVector2Array([p+Vector2(-15,3),p+Vector2(-8,-4),p+Vector2(0,3),p+Vector2(8,-4),p+Vector2(15,3)])

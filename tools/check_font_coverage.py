@@ -138,13 +138,16 @@ def collect_required(root: Path, manifest: dict) -> tuple[dict[int, set[str]], i
     locations = defaultdict(set)
     paths = runtime_paths(root)
     for path in paths:
+        relative = path.relative_to(root)
         for line, text in file_strings(path):
+            location = f"{relative}:{line}"
             for codepoint in printable_codepoints(text):
-                locations[codepoint].add(f"{path.relative_to(root)}:{line}")
+                locations[codepoint].add(location)
     for source in manifest["supplemental_sources"]:
         for item in source["strings"]:
+            location = f"{source['commit']}:{source['path']}:{item['line']}"
             for codepoint in printable_codepoints(item["text"]):
-                locations[codepoint].add(f"{source['commit']}:{source['path']}:{item['line']}")
+                locations[codepoint].add(location)
     return dict(locations), len(paths)
 
 

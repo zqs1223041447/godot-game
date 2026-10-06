@@ -9,7 +9,7 @@ const CAMP_NAMES: Array[String] = ["西侧据点", "北侧据点", "东侧据点
 
 
 static func layout(map_id: Variant, bounds: Rect2) -> Dictionary:
-	if not map_id is String or map_id not in ["old_garden", "broken_ruins", "sunwell_terrace"]:
+	if not map_id is String or map_id not in ["old_garden", "broken_ruins", "sunwell_terrace", "ginkgo_arcade"]:
 		return _rejected("未知据点地图")
 	if not bounds.position.is_finite() or not bounds.size.is_finite() or not bounds.end.is_finite():
 		return _rejected("据点地图边界必须有限")
@@ -25,6 +25,10 @@ static func layout(map_id: Variant, bounds: Rect2) -> Dictionary:
 		centers.assign([Vector2(290, 160), Vector2(920, 130), Vector2(1550, 540)])
 		triggers.assign([Vector2(290, 590), Vector2(920, 550), Vector2(1550, 120)])
 		names = ["西泉据点", "北门据点", "东阶据点"]
+	elif map_id == "ginkgo_arcade":
+		centers.assign([Vector2(230, 150), Vector2(920, 100), Vector2(1690, 150)])
+		triggers.assign([Vector2(230, 570), Vector2(1310, 130), Vector2(1600, 570)])
+		names = ["西叶据点", "北廊据点", "东荫据点"]
 	var rows: Array[float] = []
 	rows.assign([-28.0, 28.0] if garden else [-56.0, 0.0, 56.0])
 	var origin := bounds.position
@@ -46,6 +50,9 @@ static func layout(map_id: Variant, bounds: Rect2) -> Dictionary:
 	if map_id == "sunwell_terrace":
 		boss_center = Vector2(920, 355)
 		boss_trigger = Vector2(920, 670)
+	elif map_id == "ginkgo_arcade":
+		boss_center = Vector2(1530, 330)
+		boss_trigger = Vector2(1530, 650)
 	relative_points.append_array([boss_center, boss_trigger])
 	# A finite but enormous origin can erase formation offsets in Vector2's
 	# float precision. Reject that input instead of returning overlapping roots.

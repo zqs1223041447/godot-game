@@ -6,6 +6,7 @@ static func draw(arena: Node2D) -> void:
 	var geometry: Dictionary = arena.world_geometry() if arena.has_method("world_geometry") else {}
 	var broken: bool = not geometry.get("walls",[]).is_empty()
 	var spring: bool = geometry.get("obstacle_style", "") == "spring_basin"
+	var ginkgo: bool = geometry.get("obstacle_style", "") == "ginkgo_planters"
 	var bounds: Rect2=arena.ARENA
 	arena.draw_rect(bounds.grow(600),Color("68704d") if spring else Color("4b5940"))
 	# Irregular shrubs and grass beds beyond the playable stone edge.
@@ -75,11 +76,12 @@ static func draw(arena: Node2D) -> void:
 	arena.draw_colored_polygon(PackedVector2Array([bounds.position+Vector2(24,12),bounds.position+Vector2(bounds.size.x*0.25,12),Vector2(bounds.position.x+bounds.size.x*0.55,bounds.end.y-11),Vector2(bounds.position.x+bounds.size.x*0.4,bounds.end.y-11)]),Color(0.96,0.89,0.63,0.035))
 	if broken:
 		for wall: Rect2 in geometry.walls:
-			if spring: _draw_spring_basin(arena, wall)
+			if ginkgo: _draw_ginkgo_planter(arena, wall)
+			elif spring: _draw_spring_basin(arena, wall)
 			else: _draw_ruin_wall(arena,wall)
 	CampSigns.draw_ground(arena, geometry.get("landmarks", {}))
 	if arena._font:
-		arena.draw_string(arena._font,bounds.position+Vector2(38,36),"晴泉台地" if spring else "断垣试炼" if broken else "灰烬庭院",HORIZONTAL_ALIGNMENT_LEFT,-1,15,Color("4e573f"))
+		arena.draw_string(arena._font,bounds.position+Vector2(38,36),"银杏回廊" if ginkgo else "晴泉台地" if spring else "断垣试炼" if broken else "灰烬庭院",HORIZONTAL_ALIGNMENT_LEFT,-1,15,Color("4e573f"))
 		arena.draw_string(arena._font,bounds.end-Vector2(138,28),"试炼之地",HORIZONTAL_ALIGNMENT_LEFT,-1,13,Color("586044"))
 
 static func _stone(rect: Rect2, cut: float) -> PackedVector2Array:
@@ -155,3 +157,33 @@ static func _draw_spring_basin(arena: Node2D, wall: Rect2) -> void:
 		arena.draw_line(Vector2(x,wall.position.y+5),Vector2(x,water.position.y-4),Color("958560"),1.3,true)
 		arena.draw_line(Vector2(x,water.end.y+4),Vector2(x,wall.end.y-5),Color("958560"),1.3,true)
 	arena.draw_rect(wall.grow(-0.8), Color("655b43"), false, 1.6)
+
+
+static func ginkgo_planter_regions(wall: Rect2) -> Dictionary:
+	if not wall.position.is_finite() or not wall.size.is_finite() or wall.size.x < 32.0 or wall.size.y < 32.0: return {}
+	return {"outline":wall,"rim":wall.grow(-5.0),"inner":wall.grow(-13.0),"garden":wall.size.x > 200.0}
+
+static func _draw_ginkgo_planter(arena: Node2D, wall: Rect2) -> void:
+	var regions := ginkgo_planter_regions(wall)
+	if regions.is_empty(): return
+	arena.draw_rect(wall,Color("615943"))
+	arena.draw_rect(regions.rim,Color("d0c09a"))
+	arena.draw_rect(regions.inner,Color("5a6547") if regions.garden else Color("a69c7e"))
+	arena.draw_line(wall.position+Vector2(5,5),Vector2(wall.end.x-5,wall.position.y+5),Color("eee0ba"),2.0,true)
+	arena.draw_line(Vector2(wall.position.x+5,wall.end.y-5),wall.end-Vector2(5,5),Color("877957"),3.0,true)
+	if regions.garden:
+		for row: int in range(3):
+			for column: int in range(8):
+				var p: Vector2 = regions.inner.position+Vector2(regions.inner.size.x*(column+0.5)/8.0,regions.inner.size.y*(row+0.5)/3.0)
+				arena.draw_circle(p+Vector2(0,4),13.0,Color("435638"))
+				arena.draw_circle(p,10.0,Color("7c8a52"))
+				_draw_ginkgo_leaf(arena,p+Vector2(2,-3),8.0,Color("d1b963") if (row+column)%2==0 else Color("b6ac63"))
+	else:
+		_draw_ginkgo_leaf(arena,wall.get_center(),16.0,Color("e4cc83"))
+	arena.draw_rect(wall.grow(-0.8),Color("655d47"),false,1.6)
+
+static func _draw_ginkgo_leaf(arena: Node2D, center: Vector2, size: float, color: Color) -> void:
+	var shape := PackedVector2Array([center+Vector2(0,size),center+Vector2(-size,0),center+Vector2(-size*0.7,-size*0.65),center+Vector2(0,-size*0.35),center+Vector2(size*0.7,-size*0.65),center+Vector2(size,0)])
+	arena.draw_colored_polygon(shape,color)
+	arena.draw_line(center+Vector2(0,size),center+Vector2(-size*0.3,-size*0.15),Color("927b4c"),1.0,true)
+	arena.draw_line(center+Vector2(0,size),center+Vector2(size*0.3,-size*0.15),Color("927b4c"),1.0,true)

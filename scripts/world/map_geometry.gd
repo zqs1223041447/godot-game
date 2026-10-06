@@ -11,7 +11,7 @@ var _revision := 0
 var _routes: Dictionary = {}
 
 func configure(id: String, bounds: Rect2) -> bool:
-	if id not in ["normal", "town", "old_garden", "broken_ruins", "sunwell_terrace"] or not bounds.position.is_finite() or not bounds.size.is_finite() or bounds.size.x < 1500.0 or bounds.size.y < 710.0:
+	if id not in ["normal", "town", "old_garden", "broken_ruins", "sunwell_terrace", "ginkgo_arcade"] or not bounds.position.is_finite() or not bounds.size.is_finite() or bounds.size.x < 1500.0 or bounds.size.y < 710.0:
 		return false
 	if id == _id and bounds == _bounds: return true
 	_id = id; _bounds = bounds; _walls.clear(); _routes.clear(); _revision += 1
@@ -19,11 +19,14 @@ func configure(id: String, bounds: Rect2) -> bool:
 		_walls.assign([Rect2(bounds.position + Vector2(580,100),Vector2(56,400)), Rect2(bounds.position + Vector2(1180,210),Vector2(56,400))])
 	elif id == "sunwell_terrace":
 		_walls.assign([Rect2(bounds.position + Vector2(520,140),Vector2(240,140)), Rect2(bounds.position + Vector2(1080,140),Vector2(240,140)), Rect2(bounds.position + Vector2(520,430),Vector2(240,140)), Rect2(bounds.position + Vector2(1080,430),Vector2(240,140))])
+	elif id == "ginkgo_arcade":
+		_walls.assign([Rect2(bounds.position + Vector2(660,230),Vector2(520,250)), Rect2(bounds.position + Vector2(420,310),Vector2(90,90)), Rect2(bounds.position + Vector2(1330,310),Vector2(90,90))])
 	return true
 
 func snapshot() -> Dictionary:
 	var result := {"id":_id,"bounds":_bounds,"walls":_walls.duplicate(),"spawn":_bounds.get_center(),"revision":_revision}
 	if _id == "sunwell_terrace": result.obstacle_style = "spring_basin"
+	if _id == "ginkgo_arcade": result.obstacle_style = "ginkgo_planters"
 	return result
 
 func has_walls() -> bool: return not _walls.is_empty()
