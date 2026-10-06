@@ -1,0 +1,30 @@
+{
+  "run": "run-01",
+  "script": "tests/defense_rating_affix_rules_test.gd",
+  "stdout_artifact": "docs/qa/v062-rules/run-01.log.txt",
+  "results_artifact": "docs/qa/v062-rules/results.json",
+  "exit_code": 0,
+  "actual_duration_seconds": "unknown",
+  "duration_note": "The original tool results report time spent waiting for each call, not the complete command duration. The full elapsed runtime was not reported and is not inferred from those wait slices.",
+  "provenance": "Transcribed from the original exec_command and write_stdin tool results in this task conversation. No command or check was rerun to create this receipt.",
+  "original_exec_command_result": {
+    "chunk_id": "bb9f05",
+    "wall_time_seconds": 1.001073469,
+    "session_id": 70511,
+    "original_token_count": 26,
+    "output": "PASS: all11 original and transformed closure hashes match publishedv61; no production preload remains\n"
+  },
+  "original_write_stdin_arguments": {
+    "session_id": 70511,
+    "chars": "",
+    "yield_time_ms": 1000,
+    "max_output_tokens": 2000
+  },
+  "original_write_stdin_result": {
+    "chunk_id": "addd0f",
+    "wall_time_seconds": 0.000035075,
+    "exit_code": 0,
+    "original_token_count": 0,
+    "output": ""
+  }
+}

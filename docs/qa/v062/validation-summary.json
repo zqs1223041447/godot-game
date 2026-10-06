@@ -1,0 +1,375 @@
+{
+  "base_commit": "d884caea7a2260f4535ba4da2d7e005e6df006d4",
+  "stage_commit": "95f4f199610e6830a7c0427ad6145c05a9330fa2",
+  "total_checks": 18693,
+  "counts": {
+    "pure_rules": 13913,
+    "strict_migration": 4451,
+    "actual_main_consumers": 329
+  },
+  "count_scope": "Only final successful functional source assertions; repeated failed runs and paired283+283 legacy checks / reference numeric and link checks / budget rows remain separately disclosed",
+  "legacy": {
+    "bin": {
+      "same": true,
+      "before_bytes": 8748660,
+      "after_bytes": 8748660,
+      "before_sha256": "49d301ce7d343ea75f3388b1333d4598189e025928098c9f9f4cd443137ef1df",
+      "after_sha256": "49d301ce7d343ea75f3388b1333d4598189e025928098c9f9f4cd443137ef1df"
+    },
+    "save": {
+      "same": false,
+      "before_bytes": 12818,
+      "after_bytes": 12818,
+      "before_sha256": "4945d78e0680375bba75825cc8856460945fbbad20d62cb846c9d4f12a500c2a",
+      "after_sha256": "522a4b0dbede45f99c9e09d44d7f32076d52a535295f49f168fc5109537e58e2"
+    },
+    "projected-save.json": {
+      "same": true,
+      "before_bytes": 12802,
+      "after_bytes": 12802,
+      "before_sha256": "ef2b686238753c973b7b75bab6f00a247870dd64c02cd8c9ac720ea68c76de79",
+      "after_sha256": "ef2b686238753c973b7b75bab6f00a247870dd64c02cd8c9ac720ea68c76de79"
+    },
+    "raw_version_token_only": true,
+    "projections": {
+      "model_and_saved_json": "Remove only version38→39",
+      "stats": "None",
+      "source_cache": "None",
+      "combat_and_rng": "None",
+      "raw_save": "Only version token38→39; exact bytes otherwise"
+    },
+    "storage": {
+      "before": "legacy-v061-02.bin.gz",
+      "after": "legacy-v062-02.bin.gz",
+      "encoding": "gzip mtime0, uncompressed hashes/sizes above"
+    },
+    "runs": {
+      "legacy-v061-02": {
+        "checks": 283,
+        "failures": 0,
+        "json_matches_stdout": true
+      },
+      "legacy-v062-02": {
+        "checks": 283,
+        "failures": 0,
+        "json_matches_stdout": true
+      },
+      "main-01": {
+        "checks": 329,
+        "failures": 0,
+        "json_matches_stdout": true
+      }
+    }
+  },
+  "reference": "docs/qa/v062-reference/README.md",
+  "font": "docs/qa/v062-integration/font-addition-preservation.json",
+  "production_file_count": 499,
+  "post_stage_production_changes": [
+    "assets/fonts/arena_sans.otf",
+    "assets/fonts/coverage_manifest.json",
+    "project.godot"
+  ],
+  "boundaries": [
+    "Migration first fixed empty equipment payload API misuse:4460checks9fail, final4451/0; no production fix",
+    "Legacy first pair empty fixed payload affixes read failed on both sides; get fallback only then final283/0 each; current329 first run passed",
+    "C/Presenter metadata uses actual model, no UI screenshot/physical-input claim",
+    "ManaGuard resource-order control uses explicitly synthetic live capacity/40percent guard with real equipment ratings",
+    "Oldpool observations project only schema, new current pool intentionally changes rolls",
+    "Source policy38 remains exact, item vocabulary39/save39; fixed global values not local item multipliers",
+    "Source code unaltered after stage except3declared font/version fields; no historical full suite/600seconds/Windows hardware FPS"
+  ],
+  "log_count": 25,
+  "logs": {
+    "docs/qa/v062-budget/budget.log.txt": {
+      "bytes": 142,
+      "sha256": "64185cb0818f001f81021370e840ac3bca9895d0fcb704f63e7889e0b15b6473"
+    },
+    "docs/qa/v062-consumers/legacy-v061-01.log.txt": {
+      "bytes": 1109,
+      "sha256": "1dbf719d6f4ddb3a31ef1aa26ecb109ab1636c2185ed60d372d316ebd249db6c"
+    },
+    "docs/qa/v062-consumers/legacy-v061-02.log.txt": {
+      "bytes": 911,
+      "sha256": "2693af08972271936df07e9165b2a8ac378dc6ee2badae909824378b00df9263"
+    },
+    "docs/qa/v062-consumers/legacy-v062-01.log.txt": {
+      "bytes": 839,
+      "sha256": "2573f44239634fbc7b2f68d152f2a0c2ee771e92f3fa461c819be7992e628805"
+    },
+    "docs/qa/v062-consumers/legacy-v062-02.log.txt": {
+      "bytes": 911,
+      "sha256": "3080f1b1bb1ecc2af4c2d7db6aaf7e545dadd2671f6aaa16d843a02900d5fc39"
+    },
+    "docs/qa/v062-consumers/main-01.log.txt": {
+      "bytes": 3196,
+      "sha256": "9fcb04bf178d3761ad4f7a289638f0e1aa84b1a655e4965def2ffb5c78e65eb5"
+    },
+    "docs/qa/v062-integration/font-import.log.txt": {
+      "bytes": 2740,
+      "sha256": "896bf2dc88d8cbfdc8a5514ccbf32e0a4f4e3ad61b50946a1efb160612a514af"
+    },
+    "docs/qa/v062-integration/font-subset.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v062-integration/initial-import.log.txt": {
+      "bytes": 75618,
+      "sha256": "e5c4bfdbf7defe18b475be3c1608db38b56b3ec8b11eead8dbfe4924f83adca8"
+    },
+    "docs/qa/v062-integration/probe-parse.log.txt": {
+      "bytes": 73,
+      "sha256": "a9912b85473f126d3f4f63ec824170c828df3473a292f866dde86cafda5b66da"
+    },
+    "docs/qa/v062-migration/20261006T012910405907Z-capture38.log.txt": {
+      "bytes": 145,
+      "sha256": "67f5f2c8970129986de53195e6feaa8edcfabb6fb79ea296af391c7b4fa49402"
+    },
+    "docs/qa/v062-migration/20261006T013043973668Z-capture38.log.txt": {
+      "bytes": 145,
+      "sha256": "b98754409a23f87ca49bec97486e3b1dc20dd30f00ab98ae501201d8cae32692"
+    },
+    "docs/qa/v062-migration/20261006T013202310966Z-migration.log.txt": {
+      "bytes": 3777,
+      "sha256": "64cd06c4fe04a183f7024d446f386880984e88650ba4ea6ed3d973b524878e8c"
+    },
+    "docs/qa/v062-migration/20261006T013239227556Z-migration.log.txt": {
+      "bytes": 123,
+      "sha256": "015cf847ea18cb853f008b53d64ed69d79261aecd4fd5a8e1f2fd5fed410c545"
+    },
+    "docs/qa/v062-reference/build-check.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v062-reference/build-check.stdout.log.txt": {
+      "bytes": 52,
+      "sha256": "65d47533eaf556129a1f3a295db12ab1bc36a8df0770c71cb9378490d54d03ba"
+    },
+    "docs/qa/v062-reference/build.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v062-reference/build.stdout.log.txt": {
+      "bytes": 51,
+      "sha256": "77b701552e90ca326fec7ab034f5896bae29db6e75396896096fd46a17e92b2c"
+    },
+    "docs/qa/v062-reference/focused-reference.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v062-reference/focused-reference.stdout.log.txt": {
+      "bytes": 1027,
+      "sha256": "85de589df06572da935ca5c5fb3d681c6a063bab2be48708af3b2b4ee4806711"
+    },
+    "docs/qa/v062-reference/godot-export.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v062-reference/godot-export.stdout.log.txt": {
+      "bytes": 205,
+      "sha256": "881c3c8a76e46d3e862aafeb146330317ff3f9b9ded3708c83c5c5e40bdf8c0b"
+    },
+    "docs/qa/v062-reference/javascript-syntax.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v062-reference/javascript-syntax.stdout.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v062-rules/run-01.log.txt": {
+      "bytes": 175,
+      "sha256": "7952b832b50015541e034c82bed0cbc8ddb1d3718eba7ef46eed8aacc1cb5094"
+    }
+  },
+  "report_count": 47,
+  "reports": {
+    "docs/qa/v062-budget/budget-run.json": {
+      "bytes": 54,
+      "sha256": "b6d3c406e3be84fe61b142730be7ede06c628a08a66d71ccbb5df337b3b6469a"
+    },
+    "docs/qa/v062-budget/budget.json": {
+      "bytes": 226966,
+      "sha256": "39e93547de126badbe67e271860c4845ba830a62d7edfce82a7862991b574220"
+    },
+    "docs/qa/v062-consumers/execution-receipts.json": {
+      "bytes": 16320,
+      "sha256": "ac0f1cdc98442cc9cb88060087bd1185c612059c220f922e5ef5688e19647797"
+    },
+    "docs/qa/v062-consumers/legacy-comparison-02.json": {
+      "bytes": 1572,
+      "sha256": "41075b145705d605458e9e0e6e920e9ffe089361d33b33ad38b04db7f42d2245"
+    },
+    "docs/qa/v062-consumers/legacy-v061-01.json": {
+      "bytes": 32,
+      "sha256": "7a907b15a8200f3322dca8b310799bf969496d64b042c521941628455610b37f"
+    },
+    "docs/qa/v062-consumers/legacy-v061-02.json": {
+      "bytes": 1069,
+      "sha256": "cb7ee4cd33161795051785c7d550e38e20bb52a2c82654ce8f685a801b4daa96"
+    },
+    "docs/qa/v062-consumers/legacy-v061-02.projected-save.json": {
+      "bytes": 12802,
+      "sha256": "ef2b686238753c973b7b75bab6f00a247870dd64c02cd8c9ac720ea68c76de79"
+    },
+    "docs/qa/v062-consumers/legacy-v061-production-inputs.json": {
+      "bytes": 56560,
+      "sha256": "4390729ac03d6172ebe5b2dd2a14db11f4fb68b3a88b87d495b18517cc183809"
+    },
+    "docs/qa/v062-consumers/legacy-v062-01.json": {
+      "bytes": 32,
+      "sha256": "7a907b15a8200f3322dca8b310799bf969496d64b042c521941628455610b37f"
+    },
+    "docs/qa/v062-consumers/legacy-v062-02.json": {
+      "bytes": 1069,
+      "sha256": "1edc484434b61f49ab160876a4ad71d80365a890b11a62aaa84ca194dbb7526e"
+    },
+    "docs/qa/v062-consumers/legacy-v062-02.projected-save.json": {
+      "bytes": 12802,
+      "sha256": "ef2b686238753c973b7b75bab6f00a247870dd64c02cd8c9ac720ea68c76de79"
+    },
+    "docs/qa/v062-consumers/main-01.json": {
+      "bytes": 23217,
+      "sha256": "3b31272b13d3f777f49672d9ac7362dd40ec1db5867a09c6a7d225f47e3040ac"
+    },
+    "docs/qa/v062-integration/font-addition-preservation.json": {
+      "bytes": 986,
+      "sha256": "89e0174801aeded11a0758c0e11a8056e41ba57425afccf84f983e7e77bffeab"
+    },
+    "docs/qa/v062-integration/font-import-result.json": {
+      "bytes": 53,
+      "sha256": "dea4aab288459bc03b2a6408f7ca8dbd870c071b60f2542d073474173a113322"
+    },
+    "docs/qa/v062-integration/font-subset-result.json": {
+      "bytes": 198,
+      "sha256": "a593530cf617ee37e1bf7c5ee9c411ba497ec8e04c914a202ada7327bc3aa20f"
+    },
+    "docs/qa/v062-integration/font-subset.json": {
+      "bytes": 2756,
+      "sha256": "95952f67adbb5c81a648335b1aa75b588e5f2e4ee3c5bdaac1c6aab407d283dc"
+    },
+    "docs/qa/v062-integration/initial-import-result.json": {
+      "bytes": 54,
+      "sha256": "dfe899104bb87028d08349d40dc562bc59b40177fbc34060a6e1cb6ac55b72dc"
+    },
+    "docs/qa/v062-integration/probe-parse-result.json": {
+      "bytes": 84,
+      "sha256": "6eec5cfcaf9a042f5a04f1fd907714e12aa71730bc61fa8d02ea135c6de0d83e"
+    },
+    "docs/qa/v062-migration/20261006T012910405907Z-capture38-attempt.json": {
+      "bytes": 58710,
+      "sha256": "ace93a3d07da51703c3b315e8580d10cc398551b582e016d0490646f5a1d2ecf"
+    },
+    "docs/qa/v062-migration/20261006T013043973668Z-capture38-attempt.json": {
+      "bytes": 58710,
+      "sha256": "701571b27b8c6d98ac1c93ca0dc00b12ffcc137554b41995ff5f04adc2a00b90"
+    },
+    "docs/qa/v062-migration/20261006T013202310966Z-migration-attempt.json": {
+      "bytes": 59724,
+      "sha256": "f01b6843ed6eb8413f5d1a351987c3c1c88ebfeac2768dc7a21231d567da4377"
+    },
+    "docs/qa/v062-migration/20261006T013202310966Z-migration-checks.json": {
+      "bytes": 1191,
+      "sha256": "e441891650c6ee7b2d07d5ce9c9b4feaadba7b32bbaf21c9af5dcecd300d6782"
+    },
+    "docs/qa/v062-migration/20261006T013239227556Z-migration-attempt.json": {
+      "bytes": 59724,
+      "sha256": "c708132cc047a237ebe958ae48fffd616cd49dd8b04df688c0b338b1628e2bf7"
+    },
+    "docs/qa/v062-migration/20261006T013239227556Z-migration-checks.json": {
+      "bytes": 1191,
+      "sha256": "b9bd7bccb438a9c03e0298d06e164fba258ebde96b74a99872e7839d74801c63"
+    },
+    "docs/qa/v062-migration/fixtures/manifest.json": {
+      "bytes": 893,
+      "sha256": "c7c1f03af5910cd7d89c7b04b0d6dae26963fb8fa3dbbcc2ddfdf5f0a335eed0"
+    },
+    "docs/qa/v062-migration/fixtures/v38-frozen-v061.json": {
+      "bytes": 19805,
+      "sha256": "41d1223ba3656b8d687e93754fe10acb961e4ba48d2288c5fe72bb6ac87c18ac"
+    },
+    "docs/qa/v062-migration/fixtures/v38-vocabulary-oracle.json": {
+      "bytes": 102276,
+      "sha256": "e2039f451bc9f5a1b5933425cf7840ad4872b2e5650c782878d6853092811b5f"
+    },
+    "docs/qa/v062-migration/frozen-release-evidence.json": {
+      "bytes": 1402,
+      "sha256": "fdabd4d4755d7757da1c8acc5c7447a6e7b4cd782a331d95085acdb1df7ab504"
+    },
+    "docs/qa/v062-migration/unchanged-source-evidence.json": {
+      "bytes": 1730,
+      "sha256": "949dae29543f1161fd547fd1d48f8ca02dd105ffce2409c099247bdcacc25369"
+    },
+    "docs/qa/v062-reference/build-check-input-sha256.json": {
+      "bytes": 620,
+      "sha256": "8923aa3cb5f6ca3acb42bc1c6d5a0635d3e9033987d873177e5a0e2b1c86f80c"
+    },
+    "docs/qa/v062-reference/build-check-result.json": {
+      "bytes": 200,
+      "sha256": "b8dd1bc24a5a072708840eb96a4dbea6b7423600ddf0a231367a6f84234bb83b"
+    },
+    "docs/qa/v062-reference/build-input-sha256.json": {
+      "bytes": 620,
+      "sha256": "8923aa3cb5f6ca3acb42bc1c6d5a0635d3e9033987d873177e5a0e2b1c86f80c"
+    },
+    "docs/qa/v062-reference/build-result.json": {
+      "bytes": 184,
+      "sha256": "b5925ac4f119aca6f2199104792fa24ab98dd4a43d0c00e5bcbbaf26a0c35c90"
+    },
+    "docs/qa/v062-reference/final-deliverable-sha256.json": {
+      "bytes": 4363,
+      "sha256": "2f236629a40abf2702364271de4adde375166287253b1cf8a9f222437ecb7eb5"
+    },
+    "docs/qa/v062-reference/focused-reference-input-sha256.json": {
+      "bytes": 547,
+      "sha256": "6558e5fba06c49950e12cfa19e7be618a06e035c91f6c0859a87471f27cab707"
+    },
+    "docs/qa/v062-reference/focused-reference-result.json": {
+      "bytes": 202,
+      "sha256": "5886935fa6125f071ff6cce2f31d70a646e3a6af792c198a29102a54ceee102d"
+    },
+    "docs/qa/v062-reference/font-cmap-result.json": {
+      "bytes": 861,
+      "sha256": "fb9f946a36614671fbc9f3b0a769e3a2ba99a0d05ab674d8192a04d4fccc8a54"
+    },
+    "docs/qa/v062-reference/font-runtime-input-sha256.json": {
+      "bytes": 19704,
+      "sha256": "ac4ede744661d60bd440d563f2e81230b7a84b3fe0fd6302cfb85a41b41b7d8b"
+    },
+    "docs/qa/v062-reference/godot-export-input-sha256.json": {
+      "bytes": 21347,
+      "sha256": "59a1dacacc229739b7aafa3edd17cc6151ac645f9dc37b35cd4fd4308258d1fb"
+    },
+    "docs/qa/v062-reference/godot-export-result.json": {
+      "bytes": 306,
+      "sha256": "f1d3b63bd12258149b42c5264d7078baaf7b71e0a1b31a9bd1f08b7c2f3ee8fa"
+    },
+    "docs/qa/v062-reference/javascript-syntax-input-sha256.json": {
+      "bytes": 620,
+      "sha256": "8923aa3cb5f6ca3acb42bc1c6d5a0635d3e9033987d873177e5a0e2b1c86f80c"
+    },
+    "docs/qa/v062-reference/javascript-syntax-result.json": {
+      "bytes": 200,
+      "sha256": "97ac078e4f5d9ecec7c8b719e3fbe623ab6b4f185278cf9bf12eb0e4af37cece"
+    },
+    "docs/qa/v062-reference/v061-baseline.json": {
+      "bytes": 15045,
+      "sha256": "67c2f1d9cd54484c4f8f260a561988ac9e78f96b9f23de0c75580e8062849059"
+    },
+    "docs/qa/v062-reference/v061-projection-preservation.json": {
+      "bytes": 24540,
+      "sha256": "8a0fb0750a99117ed6fc9800580a150eb2c1fad93c0705142ef0e9790127f2d6"
+    },
+    "docs/qa/v062-rules/frozen/manifest.json": {
+      "bytes": 3003,
+      "sha256": "b08804f33740f3ebcf808f5aa161556377ce6df573b33d0eda5d29d1ee2db8e5"
+    },
+    "docs/qa/v062-rules/results.json": {
+      "bytes": 2013,
+      "sha256": "c5618d6957fde44f807717889caa8efed907fba2a916cd73114fd28bd18e9f86"
+    },
+    "docs/qa/v062-rules/run-01-receipt.json": {
+      "bytes": 1229,
+      "sha256": "29e331dab604098b2237802a14f3804f72df22415fe7e6953b201b6f64e968f0"
+    }
+  }
+}

@@ -1,0 +1,319 @@
+{
+  "purpose": "Transcription of already completed execution and log-read evidence; no rerun performed for this receipt.",
+  "timing_semantics": "Tool wall_time_seconds is the duration of that launch or terminal polling call, not the complete child process runtime. Complete process wall time was not captured and is unknown for all five runs. The legacy1.5seconds figure is simulated game time, not elapsed wall time.",
+  "tools": "functions.exec orchestrated nested exec_command/write_stdin calls. Chunk IDs and session IDs below are copied from those nested tool results in the worker conversation.",
+  "runs": [
+    {
+      "run_id": "main-01",
+      "working_directory": "/workspace/scratch/a51485f153de/v062-armour-evasion-affixes",
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-v062-consumers-main-01",
+        "DEFENSE_RATING_REPORT": "/workspace/scratch/a51485f153de/v062-armour-evasion-affixes/docs/qa/v062-consumers/main-01.json"
+      },
+      "argv": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/v062-armour-evasion-affixes",
+        "--script",
+        "res://tests/defense_rating_gameplay_test.gd"
+      ],
+      "redirection": {
+        "stdout_and_stderr": "/workspace/scratch/a51485f153de/v062-armour-evasion-affixes/docs/qa/v062-consumers/main-01.log.txt"
+      },
+      "launch_tool": "exec_command",
+      "launch_result_metadata": {
+        "chunk_id": "1e41df",
+        "wall_time_seconds": 1.000900537,
+        "session_id": 83112,
+        "original_token_count": 417,
+        "exit_code": null
+      },
+      "terminal_tool": "write_stdin",
+      "terminal_arguments": {
+        "session_id": 83112,
+        "chars": "",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 1000
+      },
+      "terminal_result_metadata": {
+        "chunk_id": "36a9a1",
+        "wall_time_seconds": 2.3255e-05,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      },
+      "complete_process_wall_time_seconds": "unknown",
+      "checks": 329,
+      "failures": 0,
+      "log_sha256": "9fcb04bf178d3761ad4f7a289638f0e1aa84b1a655e4965def2ffb5c78e65eb5",
+      "report_sha256": "3b31272b13d3f777f49672d9ac7362dd40ec1db5867a09c6a7d225f47e3040ac",
+      "log_and_report_final_counters_match": true,
+      "final_stdout_line": "DEFENSE_RATING_GAMEPLAY {\"checks\":329,\"failures\":0,\"sections\":{\"actual_attacks_and_nonattacks\":47,\"actual_crafts\":187,\"burn_and_resource_order\":19,\"full_bag_and_natural_supply\":30,\"owned_equipment_source\":44}}",
+      "script_sha256": "898e4c1950faf932c3f46c37e242af63125185443097dff7d49ac2ed0d7765ba"
+    },
+    {
+      "run_id": "legacy-v061-01",
+      "working_directory": "/workspace/scratch/a51485f153de/v062-armour-evasion-affixes",
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-v062-consumers-legacy-v061-01",
+        "DEFENSE_RATING_LEGACY_OUTPUT": "/workspace/scratch/a51485f153de/v062-armour-evasion-affixes/docs/qa/v062-consumers/legacy-v061-01",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-v062-consumers-cache-v061-01"
+      },
+      "argv": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/v061-final-source-snapshot",
+        "--script",
+        "/workspace/scratch/a51485f153de/v062-armour-evasion-affixes/docs/qa/v062-consumers/legacy-01-harness.gd"
+      ],
+      "redirection": {
+        "stdout_and_stderr": "/workspace/scratch/a51485f153de/v062-armour-evasion-affixes/docs/qa/v062-consumers/legacy-v061-01.log.txt"
+      },
+      "launch_tool": "exec_command",
+      "launch_result_metadata": {
+        "chunk_id": "945987",
+        "wall_time_seconds": 1.001465975,
+        "session_id": 48330,
+        "original_token_count": 0,
+        "exit_code": null
+      },
+      "terminal_tool": "write_stdin",
+      "terminal_arguments": {
+        "session_id": 48330,
+        "chars": "",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 1000
+      },
+      "terminal_result_metadata": {
+        "chunk_id": "140341",
+        "wall_time_seconds": 2.5041e-05,
+        "exit_code": 1,
+        "original_token_count": 0,
+        "output": ""
+      },
+      "complete_process_wall_time_seconds": "unknown",
+      "checks": 3,
+      "failures": 1,
+      "log_sha256": "1dbf719d6f4ddb3a31ef1aa26ecb109ab1636c2185ed60d372d316ebd249db6c",
+      "report_sha256": "7a907b15a8200f3322dca8b310799bf969496d64b042c521941628455610b37f",
+      "log_and_report_final_counters_match": true,
+      "final_stdout_line": "DEFENSE_RATING_LEGACY {\"checks\":3,\"failures\":1}",
+      "script_sha256": "451024b1302ca2e2479e77a0b6d31367c567b3cb72f762cb622777c4a09b2b6c"
+    },
+    {
+      "run_id": "legacy-v062-01",
+      "working_directory": "/workspace/scratch/a51485f153de/v062-armour-evasion-affixes",
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-v062-consumers-legacy-v062-01",
+        "DEFENSE_RATING_LEGACY_OUTPUT": "/workspace/scratch/a51485f153de/v062-armour-evasion-affixes/docs/qa/v062-consumers/legacy-v062-01",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-v062-consumers-cache-v062-01"
+      },
+      "argv": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/v062-armour-evasion-affixes",
+        "--script",
+        "/workspace/scratch/a51485f153de/v062-armour-evasion-affixes/docs/qa/v062-consumers/legacy-01-harness.gd"
+      ],
+      "redirection": {
+        "stdout_and_stderr": "/workspace/scratch/a51485f153de/v062-armour-evasion-affixes/docs/qa/v062-consumers/legacy-v062-01.log.txt"
+      },
+      "launch_tool": "exec_command",
+      "launch_result_metadata": {
+        "chunk_id": "8fd9e9",
+        "wall_time_seconds": 1.001129757,
+        "session_id": 81293,
+        "original_token_count": 0,
+        "exit_code": null
+      },
+      "terminal_tool": "write_stdin",
+      "terminal_arguments": {
+        "session_id": 81293,
+        "chars": "",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 1000
+      },
+      "terminal_result_metadata": {
+        "chunk_id": "466d3b",
+        "wall_time_seconds": 2.3107e-05,
+        "exit_code": 1,
+        "original_token_count": 0,
+        "output": ""
+      },
+      "complete_process_wall_time_seconds": "unknown",
+      "checks": 3,
+      "failures": 1,
+      "log_sha256": "2573f44239634fbc7b2f68d152f2a0c2ee771e92f3fa461c819be7992e628805",
+      "report_sha256": "7a907b15a8200f3322dca8b310799bf969496d64b042c521941628455610b37f",
+      "log_and_report_final_counters_match": true,
+      "final_stdout_line": "DEFENSE_RATING_LEGACY {\"checks\":3,\"failures\":1}",
+      "script_sha256": "451024b1302ca2e2479e77a0b6d31367c567b3cb72f762cb622777c4a09b2b6c"
+    },
+    {
+      "run_id": "legacy-v061-02",
+      "working_directory": "/workspace/scratch/a51485f153de/v062-armour-evasion-affixes",
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-v062-consumers-legacy-v061-02",
+        "DEFENSE_RATING_LEGACY_OUTPUT": "/workspace/scratch/a51485f153de/v062-armour-evasion-affixes/docs/qa/v062-consumers/legacy-v061-02",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-v062-consumers-cache-v061-02"
+      },
+      "argv": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/v061-final-source-snapshot",
+        "--script",
+        "/workspace/scratch/a51485f153de/v062-armour-evasion-affixes/docs/qa/v062-consumers/legacy-02-harness.gd"
+      ],
+      "redirection": {
+        "stdout_and_stderr": "/workspace/scratch/a51485f153de/v062-armour-evasion-affixes/docs/qa/v062-consumers/legacy-v061-02.log.txt"
+      },
+      "launch_tool": "exec_command",
+      "launch_result_metadata": {
+        "chunk_id": "7f556c",
+        "wall_time_seconds": 1.000824974,
+        "session_id": 58360,
+        "original_token_count": 0,
+        "exit_code": null
+      },
+      "terminal_tool": "write_stdin",
+      "terminal_arguments": {
+        "session_id": 58360,
+        "chars": "",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 1000
+      },
+      "terminal_result_metadata": {
+        "chunk_id": "26253c",
+        "wall_time_seconds": 4.1968e-05,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      },
+      "complete_process_wall_time_seconds": "unknown",
+      "checks": 283,
+      "failures": 0,
+      "log_sha256": "2693af08972271936df07e9165b2a8ac378dc6ee2badae909824378b00df9263",
+      "report_sha256": "cb7ee4cd33161795051785c7d550e38e20bb52a2c82654ce8f685a801b4daa96",
+      "log_and_report_final_counters_match": true,
+      "final_stdout_line": "DEFENSE_RATING_LEGACY {\"casts\":2,\"checks\":283,\"critical\":{\"draws\":5,\"events\":5,\"state\":7381331573855578659},\"damage\":774.8,\"events\":{\"flight_ended\":9,\"hit\":13,\"range_reached\":12,\"spawned\":9,\"split\":3,\"terminated\":15},\"failures\":0,\"historical_defense_item\":{\"definition_id\":\"equipment:emberhide_vest\",\"kind\":\"equipment\",\"payload\":{\"affixes\":[{\"id\":\"rootwell\",\"tier\":3,\"value\":24},{\"id\":\"deepwell\",\"tier\":2,\"value\":12},{\"id\":\"lanternveil\",\"tier\":1,\"value\":7},{\"id\":\"trailstep\",\"tier\":2,\"value\":3}],\"base_id\":\"emberhide_vest\",\"id\":\"gear_000004\",\"item_level\":16,\"rarity\":\"rare\"},\"uid\":\"gear_000004\"},\"kills\":3,\"observation_projection\":\"version38/39 only; no stats, combat or source-cache projection\",\"project_version\":\"0.61.0\",\"reward_kills\":3,\"rng\":-923159645260406414,\"seconds\":1.5,\"ticks\":90,\"version\":38}",
+      "script_sha256": "f7d2efab82febe4f716064f9263acda40dac8e698cccc2afe4bab76bdfc24519"
+    },
+    {
+      "run_id": "legacy-v062-02",
+      "working_directory": "/workspace/scratch/a51485f153de/v062-armour-evasion-affixes",
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-v062-consumers-legacy-v062-02",
+        "DEFENSE_RATING_LEGACY_OUTPUT": "/workspace/scratch/a51485f153de/v062-armour-evasion-affixes/docs/qa/v062-consumers/legacy-v062-02",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-v062-consumers-cache-v062-02"
+      },
+      "argv": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/v062-armour-evasion-affixes",
+        "--script",
+        "/workspace/scratch/a51485f153de/v062-armour-evasion-affixes/docs/qa/v062-consumers/legacy-02-harness.gd"
+      ],
+      "redirection": {
+        "stdout_and_stderr": "/workspace/scratch/a51485f153de/v062-armour-evasion-affixes/docs/qa/v062-consumers/legacy-v062-02.log.txt"
+      },
+      "launch_tool": "exec_command",
+      "launch_result_metadata": {
+        "chunk_id": "973ef4",
+        "wall_time_seconds": 1.000289372,
+        "session_id": 71222,
+        "original_token_count": 0,
+        "exit_code": null
+      },
+      "terminal_tool": "write_stdin",
+      "terminal_arguments": {
+        "session_id": 71222,
+        "chars": "",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 1000
+      },
+      "terminal_result_metadata": {
+        "chunk_id": "f2b301",
+        "wall_time_seconds": 3.0154e-05,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      },
+      "complete_process_wall_time_seconds": "unknown",
+      "checks": 283,
+      "failures": 0,
+      "log_sha256": "3080f1b1bb1ecc2af4c2d7db6aaf7e545dadd2671f6aaa16d843a02900d5fc39",
+      "report_sha256": "1edc484434b61f49ab160876a4ad71d80365a890b11a62aaa84ca194dbb7526e",
+      "log_and_report_final_counters_match": true,
+      "final_stdout_line": "DEFENSE_RATING_LEGACY {\"casts\":2,\"checks\":283,\"critical\":{\"draws\":5,\"events\":5,\"state\":7381331573855578659},\"damage\":774.8,\"events\":{\"flight_ended\":9,\"hit\":13,\"range_reached\":12,\"spawned\":9,\"split\":3,\"terminated\":15},\"failures\":0,\"historical_defense_item\":{\"definition_id\":\"equipment:emberhide_vest\",\"kind\":\"equipment\",\"payload\":{\"affixes\":[{\"id\":\"rootwell\",\"tier\":3,\"value\":24},{\"id\":\"deepwell\",\"tier\":2,\"value\":12},{\"id\":\"lanternveil\",\"tier\":1,\"value\":7},{\"id\":\"trailstep\",\"tier\":2,\"value\":3}],\"base_id\":\"emberhide_vest\",\"id\":\"gear_000004\",\"item_level\":16,\"rarity\":\"rare\"},\"uid\":\"gear_000004\"},\"kills\":3,\"observation_projection\":\"version38/39 only; no stats, combat or source-cache projection\",\"project_version\":\"0.62.0\",\"reward_kills\":3,\"rng\":-923159645260406414,\"seconds\":1.5,\"ticks\":90,\"version\":39}",
+      "script_sha256": "f7d2efab82febe4f716064f9263acda40dac8e698cccc2afe4bab76bdfc24519"
+    }
+  ],
+  "script_identity": {
+    "digest_read_chunk_id": "87043d",
+    "digest_algorithm": "SHA256",
+    "digests_recorded_after_execution": true,
+    "pre_execution_digest_capture": false,
+    "unchanged_since_execution_evidence": "This worker wrote the main test, then changed Panel to CharacterSheet before main-01 launch. It made no subsequent test edits. Legacy-01 was retained unchanged. Legacy-02 was created by the single documented payload.get replacement before both02 launches, and was not edited afterward. These execution receipts are the only file added in this follow-up.",
+    "files": [
+      {
+        "path": "tests/defense_rating_gameplay_test.gd",
+        "sha256": "898e4c1950faf932c3f46c37e242af63125185443097dff7d49ac2ed0d7765ba",
+        "bytes": 24758
+      },
+      {
+        "path": "docs/qa/v062-consumers/legacy-01-harness.gd",
+        "sha256": "451024b1302ca2e2479e77a0b6d31367c567b3cb72f762cb622777c4a09b2b6c",
+        "bytes": 8749
+      },
+      {
+        "path": "docs/qa/v062-consumers/legacy-02-harness.gd",
+        "sha256": "f7d2efab82febe4f716064f9263acda40dac8e698cccc2afe4bab76bdfc24519",
+        "bytes": 8760
+      }
+    ],
+    "legacy02_matches_exact_recorded_legacy01_correction": true,
+    "limitation": "The current digests identify the unchanged executed scripts via the authoring/edit ledger; they were not independently captured immediately before process launch."
+  },
+  "production_boundary": {
+    "current_execution_reference": "95f4f19 production bytes, with project.godot application/config/version already changed to0.62.0 before these runs",
+    "reference_basis": "Parent handoff at01:35 confirmed migration4451/0, production ready, project version changed to0.62, otherwise unchanged since95f4f19. Successful legacy-v062-02 stdout independently records project_version0.62.0/schema39.",
+    "frozen_baseline_commit": "d884caea7a2260f4535ba4da2d7e005e6df006d4",
+    "frozen_input_manifest": "legacy-v061-production-inputs.json",
+    "frozen_production_files": 495,
+    "frozen_commit_match_basis": "Parent verified frozen production match; worker recorded the495-file digest inventory and checked pre-run inventoried files unchanged.",
+    "post_execution_font_supplement": "Any font subset/coverage supplement made after these runs lies outside their executed asset bytes. These receipts preserve the pre-supplement test boundary and do not claim validation of later font assets. No passed set was rerun for the font change or this receipt."
+  },
+  "read_provenance": [
+    {
+      "chunk_id": "efc6e9",
+      "action": "Read main-01 persisted stdout log;329/0 observed before terminal exit0 poll."
+    },
+    {
+      "chunk_id": "d03c18",
+      "action": "Read first legacy failure log tails and main report."
+    },
+    {
+      "chunk_id": "0fadf0",
+      "action": "Read complete current first-failure log and source line; confirmed empty fixed starter payload.affixes harness error."
+    },
+    {
+      "chunk_id": "409793",
+      "action": "Read both successful02 final stdout lines;283/0 each."
+    },
+    {
+      "chunk_id": "cfec99",
+      "action": "Compared full legacy binaries/save bytes, compressed evidence, and verified report/stdout counters for all successful runs."
+    },
+    {
+      "chunk_id": "87043d",
+      "action": "Read current script/log SHA256 and all five persisted final stdout lines for receipt creation."
+    }
+  ],
+  "first_failure_preservation": "Both01 legacy logs, both3/1 JSON reports and the original legacy-01 script remain preserved. Only the previously failed pair was rerun, as02, after the single harness correction; no production fix was made.",
+  "comparison": "legacy-comparison-02.json"
+}

@@ -1,0 +1,53 @@
+{
+  "bin": {
+    "same": true,
+    "before_bytes": 8748660,
+    "after_bytes": 8748660,
+    "before_sha256": "49d301ce7d343ea75f3388b1333d4598189e025928098c9f9f4cd443137ef1df",
+    "after_sha256": "49d301ce7d343ea75f3388b1333d4598189e025928098c9f9f4cd443137ef1df"
+  },
+  "save": {
+    "same": false,
+    "before_bytes": 12818,
+    "after_bytes": 12818,
+    "before_sha256": "4945d78e0680375bba75825cc8856460945fbbad20d62cb846c9d4f12a500c2a",
+    "after_sha256": "522a4b0dbede45f99c9e09d44d7f32076d52a535295f49f168fc5109537e58e2"
+  },
+  "projected-save.json": {
+    "same": true,
+    "before_bytes": 12802,
+    "after_bytes": 12802,
+    "before_sha256": "ef2b686238753c973b7b75bab6f00a247870dd64c02cd8c9ac720ea68c76de79",
+    "after_sha256": "ef2b686238753c973b7b75bab6f00a247870dd64c02cd8c9ac720ea68c76de79"
+  },
+  "raw_version_token_only": true,
+  "projections": {
+    "model_and_saved_json": "Remove only version38\u219239",
+    "stats": "None",
+    "source_cache": "None",
+    "combat_and_rng": "None",
+    "raw_save": "Only version token38\u219239; exact bytes otherwise"
+  },
+  "storage": {
+    "before": "legacy-v061-02.bin.gz",
+    "after": "legacy-v062-02.bin.gz",
+    "encoding": "gzip mtime0, uncompressed hashes/sizes above"
+  },
+  "runs": {
+    "legacy-v061-02": {
+      "checks": 283,
+      "failures": 0,
+      "json_matches_stdout": true
+    },
+    "legacy-v062-02": {
+      "checks": 283,
+      "failures": 0,
+      "json_matches_stdout": true
+    },
+    "main-01": {
+      "checks": 329,
+      "failures": 0,
+      "json_matches_stdout": true
+    }
+  }
+}

@@ -1,0 +1,14 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+godot-game: playable arena ready
+SCRIPT ERROR: Invalid access to property or key 'affixes' on a base object of type 'Dictionary'.
+          at: legacy_probe (res://docs/qa/v062-consumers/legacy-01-harness.gd:60)
+          GDScript backtrace (most recent call first):
+              [0] legacy_probe (res://docs/qa/v062-consumers/legacy-01-harness.gd:60)
+              [1] run (res://docs/qa/v062-consumers/legacy-01-harness.gd:106)
+ERROR: Legacy probe returned normally
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://docs/qa/v062-consumers/legacy-01-harness.gd:15)
+       [1] run (res://docs/qa/v062-consumers/legacy-01-harness.gd:106)
+DEFENSE_RATING_LEGACY {"checks":3,"failures":1}

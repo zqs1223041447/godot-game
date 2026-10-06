@@ -1,0 +1,930 @@
+{
+	"actual_attacks": {
+		"gear_000004": {
+			"cold": {
+				"chance": 1.0,
+				"damage": 3000.0,
+				"hits": 100
+			},
+			"lightning": {
+				"chance": 1.0,
+				"damage": 3000.0,
+				"hits": 100
+			},
+			"physical": {
+				"chance": 1.0,
+				"damage": 4000.0,
+				"hits": 100
+			}
+		},
+		"gear_000005": {
+			"cold": {
+				"chance": 0.76,
+				"damage": 2280.0,
+				"hits": 76
+			},
+			"lightning": {
+				"chance": 0.76,
+				"damage": 2280.0,
+				"hits": 76
+			},
+			"physical": {
+				"chance": 0.76,
+				"damage": 1858.1907090464533,
+				"hits": 76
+			}
+		}
+	},
+	"actual_craft_outputs": {
+		"augment": {
+			"affixes": [
+				{
+					"id": "ironhide",
+					"tier": 3,
+					"value": 120
+				},
+				{
+					"id": "coalglow",
+					"tier": 1,
+					"value": 8
+				}
+			],
+			"base_id": "emberhide_vest",
+			"id": "gear_000004",
+			"item_level": 16,
+			"rarity": "magic"
+		},
+		"elevate": {
+			"affixes": [
+				{
+					"id": "ironhide",
+					"tier": 3,
+					"value": 120
+				},
+				{
+					"id": "rootwell",
+					"tier": 2,
+					"value": 18
+				},
+				{
+					"id": "rimeward",
+					"tier": 2,
+					"value": 18
+				},
+				{
+					"id": "wellturn",
+					"tier": 1,
+					"value": 4
+				},
+				{
+					"id": "mistweave",
+					"tier": 1,
+					"value": 254
+				},
+				{
+					"id": "rimeecho",
+					"tier": 1,
+					"value": 5
+				}
+			],
+			"base_id": "emberhide_vest",
+			"id": "gear_000004",
+			"item_level": 16,
+			"rarity": "rare"
+		},
+		"enchant": {
+			"affixes": [
+				{
+					"id": "emberward",
+					"tier": 1,
+					"value": 8
+				}
+			],
+			"base_id": "emberhide_vest",
+			"id": "gear_000004",
+			"item_level": 16,
+			"rarity": "magic"
+		},
+		"recalibrate": {
+			"affixes": [
+				{
+					"id": "ironhide",
+					"tier": 3,
+					"value": 86
+				},
+				{
+					"id": "mistweave",
+					"tier": 3,
+					"value": 410
+				},
+				{
+					"id": "rootwell",
+					"tier": 3,
+					"value": 25
+				},
+				{
+					"id": "emberward",
+					"tier": 3,
+					"value": 22
+				},
+				{
+					"id": "rimeward",
+					"tier": 3,
+					"value": 19
+				},
+				{
+					"id": "stormward",
+					"tier": 3,
+					"value": 24
+				}
+			],
+			"base_id": "emberhide_vest",
+			"id": "gear_000004",
+			"item_level": 16,
+			"rarity": "rare"
+		},
+		"reforge": {
+			"affixes": [
+				{
+					"id": "stormward",
+					"tier": 3,
+					"value": 22
+				},
+				{
+					"id": "deepwell",
+					"tier": 1,
+					"value": 5
+				},
+				{
+					"id": "trailstep",
+					"tier": 1,
+					"value": 2
+				},
+				{
+					"id": "ironhide",
+					"tier": 1,
+					"value": 41
+				},
+				{
+					"id": "rimeward",
+					"tier": 3,
+					"value": 25
+				}
+			],
+			"base_id": "emberhide_vest",
+			"id": "gear_000004",
+			"item_level": 16,
+			"rarity": "rare"
+		}
+	},
+	"burn_exact_controls": [
+		{
+			"resources": [
+				165.84,
+				137.0,
+				0.0
+			],
+			"settlement": {
+				"actor": "player",
+				"components": {
+					"fire": 12.0
+				},
+				"damage_total": 12.0,
+				"details": [
+					{
+						"before_defense": 20.0,
+						"final": 12.0,
+						"resistance": 0.4,
+						"type": "fire"
+					}
+				],
+				"health_lost": 12.0,
+				"mitigated_components": {
+					"fire": 8.0
+				},
+				"ok": true,
+				"overkill": 0.0,
+				"raw_components": {
+					"fire": 20.0
+				},
+				"reason": "",
+				"remaining_health": 165.84,
+				"remaining_shield": 0.0,
+				"shield_spent": 0.0,
+				"stage": "burning"
+			},
+			"status": {
+				"last_time": 1.0,
+				"provenance": {
+
+				},
+				"raw_dps": 20.0,
+				"remaining": 2.0,
+				"source_id": 71,
+				"target_id": 0,
+				"target_kind": "player"
+			}
+		},
+		{
+			"resources": [
+				165.84,
+				137.0,
+				0.0
+			],
+			"settlement": {
+				"actor": "player",
+				"components": {
+					"fire": 12.0
+				},
+				"damage_total": 12.0,
+				"details": [
+					{
+						"before_defense": 20.0,
+						"final": 12.0,
+						"resistance": 0.4,
+						"type": "fire"
+					}
+				],
+				"health_lost": 12.0,
+				"mitigated_components": {
+					"fire": 8.0
+				},
+				"ok": true,
+				"overkill": 0.0,
+				"raw_components": {
+					"fire": 20.0
+				},
+				"reason": "",
+				"remaining_health": 165.84,
+				"remaining_shield": 0.0,
+				"shield_spent": 0.0,
+				"stage": "burning"
+			},
+			"status": {
+				"last_time": 1.0,
+				"provenance": {
+
+				},
+				"raw_dps": 20.0,
+				"remaining": 2.0,
+				"source_id": 71,
+				"target_id": 0,
+				"target_kind": "player"
+			}
+		}
+	],
+	"checks": 329,
+	"failures": 0,
+	"natural_supply": {
+		"ironhide": {
+			"item": {
+				"affixes": [
+					{
+						"id": "ironhide",
+						"tier": 1,
+						"value": 31
+					},
+					{
+						"id": "rimeward",
+						"tier": 1,
+						"value": 12
+					},
+					{
+						"id": "rimeecho",
+						"tier": 3,
+						"value": 20
+					},
+					{
+						"id": "emberward",
+						"tier": 1,
+						"value": 10
+					}
+				],
+				"base_id": "emberhide_vest",
+				"id": "gear_000006",
+				"item_level": 17,
+				"rarity": "rare"
+			},
+			"seed": 1
+		},
+		"mistweave": {
+			"item": {
+				"affixes": [
+					{
+						"id": "rootwell",
+						"tier": 1,
+						"value": 11
+					},
+					{
+						"id": "ironhide",
+						"tier": 2,
+						"value": 79
+					},
+					{
+						"id": "mistweave",
+						"tier": 3,
+						"value": 371
+					},
+					{
+						"id": "rimeward",
+						"tier": 1,
+						"value": 12
+					},
+					{
+						"id": "stormward",
+						"tier": 1,
+						"value": 12
+					}
+				],
+				"base_id": "emberhide_vest",
+				"id": "gear_000007",
+				"item_level": 17,
+				"rarity": "rare"
+			},
+			"seed": 2
+		}
+	},
+	"root_only": {
+		"armour_factor": 1.0,
+		"baseline": {
+			"accuracy": 140.0,
+			"accuracy_increased": 0.0,
+			"additional_skill_slots": 0.0,
+			"area_increased": 0.0,
+			"area_size_increased": 0.0,
+			"armour": 0.0,
+			"armour_increased": 0.0,
+			"attack_added_fire": 0.0,
+			"attack_added_physical": 0.0,
+			"attack_crit_chance_increased": 0.0,
+			"attack_elemental_increased": 0.0,
+			"attack_life_leech": 0.0,
+			"attack_mana_leech": 0.0,
+			"attack_physical_increased": 0.0,
+			"attack_speed": 1.7,
+			"attack_speed_increased": 0.0,
+			"chaos_increased": 0.0,
+			"cold_increased": 0.0,
+			"cold_resistance": 0.25,
+			"crit_base_chance": 0.05,
+			"crit_base_multiplier": 1.5,
+			"crit_chance_increased": 0.0,
+			"crit_multiplier_add": 0.0,
+			"damage": 26.0,
+			"damage_taken_from_mana_before_life": 0.0,
+			"damaging_ailments_faster": 0.0,
+			"dexterity": 20.0,
+			"elemental_increased": 0.0,
+			"evasion": 15.600000000000001,
+			"evasion_increased": 0.0,
+			"fire_dot_multiplier_add": 0.0,
+			"fire_increased": 0.0,
+			"fire_resistance": 0.4,
+			"flask_charges_gained_increased": 0.0,
+			"flask_life_recovery_increased": 0.0,
+			"flask_mana_recovery_increased": 0.0,
+			"global_increased": 0.0,
+			"intelligence": 20.0,
+			"life_leech_max_rate_increased": 0.0,
+			"life_leech_rate_increased": 0.0,
+			"life_regen": 0.0,
+			"life_regen_percent": 0.0,
+			"lightning_increased": 0.0,
+			"lightning_resistance": 0.25,
+			"mana_cost_efficiency_increased": 0.0,
+			"mana_cost_increased": 0.0,
+			"mana_leech_max_rate_increased": 0.0,
+			"mana_leech_rate_increased": 0.0,
+			"mana_regen": 12.0,
+			"mana_regen_increased": 0.0,
+			"max_health": 170.0,
+			"max_mana": 140.0,
+			"max_shield": 61.2,
+			"maximum_cold_resistance_add": 0.0,
+			"maximum_fire_resistance_add": 0.0,
+			"maximum_lightning_resistance_add": 0.0,
+			"melee_area_size_increased": 0.0,
+			"melee_crit_chance_increased": 0.0,
+			"melee_crit_multiplier_add": 0.0,
+			"melee_physical_increased": 0.04,
+			"move_speed": 240.0,
+			"move_speed_increased": 0.0,
+			"physical_attack_life_leech": 0.0,
+			"physical_attack_mana_leech": 0.0,
+			"physical_increased": 0.0,
+			"projectile_attack_crit_chance_increased": 0.0,
+			"projectile_attack_crit_multiplier_add": 0.0,
+			"projectile_count": 0.0,
+			"projectile_increased": 0.0,
+			"projectile_speed_increased": 0.0,
+			"resolute_technique": 0.0,
+			"shield_recharge_delay": 4.0,
+			"shield_recharge_rate": 13.0,
+			"shield_recharge_rate_increased": 0.0,
+			"shield_recharge_start_faster": 0.0,
+			"shield_regen": 13.0,
+			"spell_added_cold": 0.0,
+			"spell_added_lightning": 0.0,
+			"spell_area_size_increased": 0.0,
+			"spell_crit_chance_increased": 0.0,
+			"spell_crit_multiplier_add": 0.0,
+			"spell_increased": 0.0,
+			"strength": 20.0
+		},
+		"equipped": {
+			"accuracy": 140.0,
+			"accuracy_increased": 0.0,
+			"additional_skill_slots": 0.0,
+			"area_increased": 0.0,
+			"area_size_increased": 0.0,
+			"armour": 120.0,
+			"armour_increased": 0.0,
+			"attack_added_fire": 0.0,
+			"attack_added_physical": 0.0,
+			"attack_crit_chance_increased": 0.0,
+			"attack_elemental_increased": 0.0,
+			"attack_life_leech": 0.0,
+			"attack_mana_leech": 0.0,
+			"attack_physical_increased": 0.0,
+			"attack_speed": 1.7,
+			"attack_speed_increased": 0.0,
+			"chaos_increased": 0.0,
+			"cold_increased": 0.0,
+			"cold_resistance": 0.25,
+			"crit_base_chance": 0.05,
+			"crit_base_multiplier": 1.5,
+			"crit_chance_increased": 0.0,
+			"crit_multiplier_add": 0.0,
+			"damage": 26.0,
+			"damage_taken_from_mana_before_life": 0.0,
+			"damaging_ailments_faster": 0.0,
+			"dexterity": 20.0,
+			"elemental_increased": 0.0,
+			"evasion": 483.6,
+			"evasion_increased": 0.0,
+			"fire_dot_multiplier_add": 0.0,
+			"fire_increased": 0.0,
+			"fire_resistance": 0.4,
+			"flask_charges_gained_increased": 0.0,
+			"flask_life_recovery_increased": 0.0,
+			"flask_mana_recovery_increased": 0.0,
+			"global_increased": 0.0,
+			"intelligence": 20.0,
+			"life_leech_max_rate_increased": 0.0,
+			"life_leech_rate_increased": 0.0,
+			"life_regen": 0.0,
+			"life_regen_percent": 0.0,
+			"lightning_increased": 0.0,
+			"lightning_resistance": 0.25,
+			"mana_cost_efficiency_increased": 0.0,
+			"mana_cost_increased": 0.0,
+			"mana_leech_max_rate_increased": 0.0,
+			"mana_leech_rate_increased": 0.0,
+			"mana_regen": 12.0,
+			"mana_regen_increased": 0.0,
+			"max_health": 170.0,
+			"max_mana": 140.0,
+			"max_shield": 61.2,
+			"maximum_cold_resistance_add": 0.0,
+			"maximum_fire_resistance_add": 0.0,
+			"maximum_lightning_resistance_add": 0.0,
+			"melee_area_size_increased": 0.0,
+			"melee_crit_chance_increased": 0.0,
+			"melee_crit_multiplier_add": 0.0,
+			"melee_physical_increased": 0.04,
+			"move_speed": 240.0,
+			"move_speed_increased": 0.0,
+			"physical_attack_life_leech": 0.0,
+			"physical_attack_mana_leech": 0.0,
+			"physical_increased": 0.0,
+			"projectile_attack_crit_chance_increased": 0.0,
+			"projectile_attack_crit_multiplier_add": 0.0,
+			"projectile_count": 0.0,
+			"projectile_increased": 0.0,
+			"projectile_speed_increased": 0.0,
+			"resolute_technique": 0.0,
+			"shield_recharge_delay": 4.0,
+			"shield_recharge_rate": 13.0,
+			"shield_recharge_rate_increased": 0.0,
+			"shield_recharge_start_faster": 0.0,
+			"shield_regen": 13.0,
+			"spell_added_cold": 0.0,
+			"spell_added_lightning": 0.0,
+			"spell_area_size_increased": 0.0,
+			"spell_crit_chance_increased": 0.0,
+			"spell_crit_multiplier_add": 0.0,
+			"spell_increased": 0.0,
+			"strength": 20.0
+		},
+		"evasion_factor": 1.04
+	},
+	"scope": "One bounded actual-main/model fixture; C/Presenter metadata only; resource-order control explicitly synthetic",
+	"sections": {
+		"actual_attacks_and_nonattacks": 47,
+		"actual_crafts": 187,
+		"burn_and_resource_order": 19,
+		"full_bag_and_natural_supply": 30,
+		"owned_equipment_source": 44
+	},
+	"source_allocated": {
+		"armour_factor": 1.06,
+		"baseline": {
+			"accuracy": 171.0,
+			"accuracy_increased": 0.0,
+			"additional_skill_slots": 0.0,
+			"area_increased": 0.0,
+			"area_size_increased": 0.0,
+			"armour": 0.0,
+			"armour_increased": 0.06,
+			"attack_added_fire": 0.0,
+			"attack_added_physical": 0.0,
+			"attack_crit_chance_increased": 0.0,
+			"attack_elemental_increased": 0.0,
+			"attack_life_leech": 0.0,
+			"attack_mana_leech": 0.0,
+			"attack_physical_increased": 0.0,
+			"attack_speed": 1.853,
+			"attack_speed_increased": 0.09,
+			"chaos_increased": 0.0,
+			"cold_increased": 0.0,
+			"cold_resistance": 0.25,
+			"crit_base_chance": 0.05,
+			"crit_base_multiplier": 1.5,
+			"crit_chance_increased": 0.0,
+			"crit_multiplier_add": 0.0,
+			"damage": 26.0,
+			"damage_taken_from_mana_before_life": 0.0,
+			"damaging_ailments_faster": 0.0,
+			"dexterity": 23.0,
+			"elemental_increased": 0.0,
+			"evasion": 16.5,
+			"evasion_increased": 0.06,
+			"fire_dot_multiplier_add": 0.0,
+			"fire_increased": 0.0,
+			"fire_resistance": 0.4,
+			"flask_charges_gained_increased": 0.0,
+			"flask_life_recovery_increased": 0.0,
+			"flask_mana_recovery_increased": 0.0,
+			"global_increased": 0.0,
+			"intelligence": 14.0,
+			"life_leech_max_rate_increased": 0.0,
+			"life_leech_rate_increased": 0.0,
+			"life_regen": 0.0,
+			"life_regen_percent": 0.0,
+			"lightning_increased": 0.0,
+			"lightning_resistance": 0.25,
+			"mana_cost_efficiency_increased": 0.0,
+			"mana_cost_increased": 0.0,
+			"mana_leech_max_rate_increased": 0.0,
+			"mana_leech_rate_increased": 0.0,
+			"mana_regen": 12.0,
+			"mana_regen_increased": 0.0,
+			"max_health": 177.84,
+			"max_mana": 137.0,
+			"max_shield": 60.6,
+			"maximum_cold_resistance_add": 0.0,
+			"maximum_fire_resistance_add": 0.0,
+			"maximum_lightning_resistance_add": 0.0,
+			"melee_area_size_increased": 0.0,
+			"melee_crit_chance_increased": 0.0,
+			"melee_crit_multiplier_add": 0.0,
+			"melee_physical_increased": 0.04,
+			"move_speed": 240.0,
+			"move_speed_increased": 0.0,
+			"physical_attack_life_leech": 0.0,
+			"physical_attack_mana_leech": 0.0,
+			"physical_increased": 0.0,
+			"projectile_attack_crit_chance_increased": 0.0,
+			"projectile_attack_crit_multiplier_add": 0.0,
+			"projectile_count": 0.0,
+			"projectile_increased": 0.0,
+			"projectile_speed_increased": 0.0,
+			"resolute_technique": 0.0,
+			"shield_recharge_delay": 4.0,
+			"shield_recharge_rate": 13.0,
+			"shield_recharge_rate_increased": 0.0,
+			"shield_recharge_start_faster": 0.0,
+			"shield_regen": 13.0,
+			"spell_added_cold": 0.0,
+			"spell_added_lightning": 0.0,
+			"spell_area_size_increased": 0.0,
+			"spell_crit_chance_increased": 0.0,
+			"spell_crit_multiplier_add": 0.0,
+			"spell_increased": 0.0,
+			"strength": 23.0
+		},
+		"equipped": {
+			"accuracy": 171.0,
+			"accuracy_increased": 0.0,
+			"additional_skill_slots": 0.0,
+			"area_increased": 0.0,
+			"area_size_increased": 0.0,
+			"armour": 127.2,
+			"armour_increased": 0.06,
+			"attack_added_fire": 0.0,
+			"attack_added_physical": 0.0,
+			"attack_crit_chance_increased": 0.0,
+			"attack_elemental_increased": 0.0,
+			"attack_life_leech": 0.0,
+			"attack_mana_leech": 0.0,
+			"attack_physical_increased": 0.0,
+			"attack_speed": 1.853,
+			"attack_speed_increased": 0.09,
+			"chaos_increased": 0.0,
+			"cold_increased": 0.0,
+			"cold_resistance": 0.25,
+			"crit_base_chance": 0.05,
+			"crit_base_multiplier": 1.5,
+			"crit_chance_increased": 0.0,
+			"crit_multiplier_add": 0.0,
+			"damage": 26.0,
+			"damage_taken_from_mana_before_life": 0.0,
+			"damaging_ailments_faster": 0.0,
+			"dexterity": 23.0,
+			"elemental_increased": 0.0,
+			"evasion": 511.50000000000006,
+			"evasion_increased": 0.06,
+			"fire_dot_multiplier_add": 0.0,
+			"fire_increased": 0.0,
+			"fire_resistance": 0.4,
+			"flask_charges_gained_increased": 0.0,
+			"flask_life_recovery_increased": 0.0,
+			"flask_mana_recovery_increased": 0.0,
+			"global_increased": 0.0,
+			"intelligence": 14.0,
+			"life_leech_max_rate_increased": 0.0,
+			"life_leech_rate_increased": 0.0,
+			"life_regen": 0.0,
+			"life_regen_percent": 0.0,
+			"lightning_increased": 0.0,
+			"lightning_resistance": 0.25,
+			"mana_cost_efficiency_increased": 0.0,
+			"mana_cost_increased": 0.0,
+			"mana_leech_max_rate_increased": 0.0,
+			"mana_leech_rate_increased": 0.0,
+			"mana_regen": 12.0,
+			"mana_regen_increased": 0.0,
+			"max_health": 177.84,
+			"max_mana": 137.0,
+			"max_shield": 60.6,
+			"maximum_cold_resistance_add": 0.0,
+			"maximum_fire_resistance_add": 0.0,
+			"maximum_lightning_resistance_add": 0.0,
+			"melee_area_size_increased": 0.0,
+			"melee_crit_chance_increased": 0.0,
+			"melee_crit_multiplier_add": 0.0,
+			"melee_physical_increased": 0.04,
+			"move_speed": 240.0,
+			"move_speed_increased": 0.0,
+			"physical_attack_life_leech": 0.0,
+			"physical_attack_mana_leech": 0.0,
+			"physical_increased": 0.0,
+			"projectile_attack_crit_chance_increased": 0.0,
+			"projectile_attack_crit_multiplier_add": 0.0,
+			"projectile_count": 0.0,
+			"projectile_increased": 0.0,
+			"projectile_speed_increased": 0.0,
+			"resolute_technique": 0.0,
+			"shield_recharge_delay": 4.0,
+			"shield_recharge_rate": 13.0,
+			"shield_recharge_rate_increased": 0.0,
+			"shield_recharge_start_faster": 0.0,
+			"shield_regen": 13.0,
+			"spell_added_cold": 0.0,
+			"spell_added_lightning": 0.0,
+			"spell_area_size_increased": 0.0,
+			"spell_crit_chance_increased": 0.0,
+			"spell_crit_multiplier_add": 0.0,
+			"spell_increased": 0.0,
+			"strength": 23.0
+		},
+		"evasion_factor": 1.1
+	},
+	"source_refunded": {
+		"armour_factor": 1.0,
+		"baseline": {
+			"accuracy": 171.0,
+			"accuracy_increased": 0.0,
+			"additional_skill_slots": 0.0,
+			"area_increased": 0.0,
+			"area_size_increased": 0.0,
+			"armour": 0.0,
+			"armour_increased": 0.0,
+			"attack_added_fire": 0.0,
+			"attack_added_physical": 0.0,
+			"attack_crit_chance_increased": 0.0,
+			"attack_elemental_increased": 0.0,
+			"attack_life_leech": 0.0,
+			"attack_mana_leech": 0.0,
+			"attack_physical_increased": 0.0,
+			"attack_speed": 1.853,
+			"attack_speed_increased": 0.09,
+			"chaos_increased": 0.0,
+			"cold_increased": 0.0,
+			"cold_resistance": 0.25,
+			"crit_base_chance": 0.05,
+			"crit_base_multiplier": 1.5,
+			"crit_chance_increased": 0.0,
+			"crit_multiplier_add": 0.0,
+			"damage": 26.0,
+			"damage_taken_from_mana_before_life": 0.0,
+			"damaging_ailments_faster": 0.0,
+			"dexterity": 23.0,
+			"elemental_increased": 0.0,
+			"evasion": 15.600000000000001,
+			"evasion_increased": 0.0,
+			"fire_dot_multiplier_add": 0.0,
+			"fire_increased": 0.0,
+			"fire_resistance": 0.4,
+			"flask_charges_gained_increased": 0.0,
+			"flask_life_recovery_increased": 0.0,
+			"flask_mana_recovery_increased": 0.0,
+			"global_increased": 0.0,
+			"intelligence": 14.0,
+			"life_leech_max_rate_increased": 0.0,
+			"life_leech_rate_increased": 0.0,
+			"life_regen": 0.0,
+			"life_regen_percent": 0.0,
+			"lightning_increased": 0.0,
+			"lightning_resistance": 0.25,
+			"mana_cost_efficiency_increased": 0.0,
+			"mana_cost_increased": 0.0,
+			"mana_leech_max_rate_increased": 0.0,
+			"mana_leech_rate_increased": 0.0,
+			"mana_regen": 12.0,
+			"mana_regen_increased": 0.0,
+			"max_health": 171.0,
+			"max_mana": 137.0,
+			"max_shield": 60.6,
+			"maximum_cold_resistance_add": 0.0,
+			"maximum_fire_resistance_add": 0.0,
+			"maximum_lightning_resistance_add": 0.0,
+			"melee_area_size_increased": 0.0,
+			"melee_crit_chance_increased": 0.0,
+			"melee_crit_multiplier_add": 0.0,
+			"melee_physical_increased": 0.04,
+			"move_speed": 240.0,
+			"move_speed_increased": 0.0,
+			"physical_attack_life_leech": 0.0,
+			"physical_attack_mana_leech": 0.0,
+			"physical_increased": 0.0,
+			"projectile_attack_crit_chance_increased": 0.0,
+			"projectile_attack_crit_multiplier_add": 0.0,
+			"projectile_count": 0.0,
+			"projectile_increased": 0.0,
+			"projectile_speed_increased": 0.0,
+			"resolute_technique": 0.0,
+			"shield_recharge_delay": 4.0,
+			"shield_recharge_rate": 13.0,
+			"shield_recharge_rate_increased": 0.0,
+			"shield_recharge_start_faster": 0.0,
+			"shield_regen": 13.0,
+			"spell_added_cold": 0.0,
+			"spell_added_lightning": 0.0,
+			"spell_area_size_increased": 0.0,
+			"spell_crit_chance_increased": 0.0,
+			"spell_crit_multiplier_add": 0.0,
+			"spell_increased": 0.0,
+			"strength": 23.0
+		},
+		"equipped": {
+			"accuracy": 171.0,
+			"accuracy_increased": 0.0,
+			"additional_skill_slots": 0.0,
+			"area_increased": 0.0,
+			"area_size_increased": 0.0,
+			"armour": 120.0,
+			"armour_increased": 0.0,
+			"attack_added_fire": 0.0,
+			"attack_added_physical": 0.0,
+			"attack_crit_chance_increased": 0.0,
+			"attack_elemental_increased": 0.0,
+			"attack_life_leech": 0.0,
+			"attack_mana_leech": 0.0,
+			"attack_physical_increased": 0.0,
+			"attack_speed": 1.853,
+			"attack_speed_increased": 0.09,
+			"chaos_increased": 0.0,
+			"cold_increased": 0.0,
+			"cold_resistance": 0.25,
+			"crit_base_chance": 0.05,
+			"crit_base_multiplier": 1.5,
+			"crit_chance_increased": 0.0,
+			"crit_multiplier_add": 0.0,
+			"damage": 26.0,
+			"damage_taken_from_mana_before_life": 0.0,
+			"damaging_ailments_faster": 0.0,
+			"dexterity": 23.0,
+			"elemental_increased": 0.0,
+			"evasion": 483.6,
+			"evasion_increased": 0.0,
+			"fire_dot_multiplier_add": 0.0,
+			"fire_increased": 0.0,
+			"fire_resistance": 0.4,
+			"flask_charges_gained_increased": 0.0,
+			"flask_life_recovery_increased": 0.0,
+			"flask_mana_recovery_increased": 0.0,
+			"global_increased": 0.0,
+			"intelligence": 14.0,
+			"life_leech_max_rate_increased": 0.0,
+			"life_leech_rate_increased": 0.0,
+			"life_regen": 0.0,
+			"life_regen_percent": 0.0,
+			"lightning_increased": 0.0,
+			"lightning_resistance": 0.25,
+			"mana_cost_efficiency_increased": 0.0,
+			"mana_cost_increased": 0.0,
+			"mana_leech_max_rate_increased": 0.0,
+			"mana_leech_rate_increased": 0.0,
+			"mana_regen": 12.0,
+			"mana_regen_increased": 0.0,
+			"max_health": 171.0,
+			"max_mana": 137.0,
+			"max_shield": 60.6,
+			"maximum_cold_resistance_add": 0.0,
+			"maximum_fire_resistance_add": 0.0,
+			"maximum_lightning_resistance_add": 0.0,
+			"melee_area_size_increased": 0.0,
+			"melee_crit_chance_increased": 0.0,
+			"melee_crit_multiplier_add": 0.0,
+			"melee_physical_increased": 0.04,
+			"move_speed": 240.0,
+			"move_speed_increased": 0.0,
+			"physical_attack_life_leech": 0.0,
+			"physical_attack_mana_leech": 0.0,
+			"physical_increased": 0.0,
+			"projectile_attack_crit_chance_increased": 0.0,
+			"projectile_attack_crit_multiplier_add": 0.0,
+			"projectile_count": 0.0,
+			"projectile_increased": 0.0,
+			"projectile_speed_increased": 0.0,
+			"resolute_technique": 0.0,
+			"shield_recharge_delay": 4.0,
+			"shield_recharge_rate": 13.0,
+			"shield_recharge_rate_increased": 0.0,
+			"shield_recharge_start_faster": 0.0,
+			"shield_regen": 13.0,
+			"spell_added_cold": 0.0,
+			"spell_added_lightning": 0.0,
+			"spell_area_size_increased": 0.0,
+			"spell_crit_chance_increased": 0.0,
+			"spell_crit_multiplier_add": 0.0,
+			"spell_increased": 0.0,
+			"strength": 23.0
+		},
+		"evasion_factor": 1.04
+	},
+	"source_route": [
+		"50986",
+		"39725",
+		"24377",
+		"35568"
+	],
+	"synthetic_resource_order": {
+		"actor": "player",
+		"armour": 127.2,
+		"components": {
+			"physical": 79.71938775510205
+		},
+		"damage_total": 79.71938775510205,
+		"details": [
+			{
+				"base": 100.0,
+				"before_defense": 100.0,
+				"final": 79.71938775510205,
+				"increased": 0.0,
+				"modifiers": [],
+				"more": 1.0,
+				"resistance": 0.20280612244897958,
+				"type": "physical"
+			}
+		],
+		"effective_resistances": {
+			"cold": 0.25,
+			"fire": 0.4,
+			"lightning": 0.25
+		},
+		"health_lost": 41.83163265306123,
+		"mana_spent": 27.88775510204082,
+		"mitigated_components": {
+			"physical": 20.280612244897952
+		},
+		"ok": true,
+		"overkill": 0.0,
+		"raw_components": {
+			"physical": 100.0
+		},
+		"raw_resistances": {
+			"cold": 0.25,
+			"fire": 0.4,
+			"lightning": 0.25
+		},
+		"reason": "",
+		"remaining_health": 958.1683673469388,
+		"remaining_mana": 72.11224489795919,
+		"remaining_shield": 0.0,
+		"shield_spent": 10.0,
+		"source_id": 0,
+		"stage": "hit_mitigation"
+	}
+}

@@ -416,7 +416,8 @@
 				"defense",
 				"local_weapon",
 				"build_legacy_v27",
-				"defense_v37"
+				"defense_v37",
+				"defense_v39"
 			],
 			"slots": [
 				"weapon",
@@ -494,7 +495,8 @@
 				"local_weapon",
 				"build_legacy_v27",
 				"forgeblade_v34",
-				"defense_v37"
+				"defense_v37",
+				"defense_v39"
 			],
 			"slots": [
 				"weapon",
@@ -565,7 +567,8 @@
 			"other_consumers": [],
 			"pools": [
 				"defense",
-				"defense_v37"
+				"defense_v37",
+				"defense_v39"
 			],
 			"scope": "equipped_character",
 			"slots": [
@@ -846,6 +849,76 @@
 			],
 			"unit": "percent"
 		},
+		"ironhide": {
+			"actors": [
+				"player",
+				"monster"
+			],
+			"affected_skills": [],
+			"allowed_base_ids": [
+				"emberhide_vest"
+			],
+			"eligible_bases": [
+				"emberhide_vest"
+			],
+			"formatted_examples": [
+				"前缀 · 铁革 T1：护甲 +50",
+				"前缀 · 铁革 T2：护甲 +80",
+				"前缀 · 铁革 T3：护甲 +120"
+			],
+			"formatted_ranges": [
+				{
+					"max": "+50",
+					"min": "+30"
+				},
+				{
+					"max": "+80",
+					"min": "+55"
+				},
+				{
+					"max": "+120",
+					"min": "+85"
+				}
+			],
+			"group": "armour_rating",
+			"kind": "prefix",
+			"label": "护甲",
+			"name": "铁革",
+			"other_consumers": [],
+			"pools": [
+				"defense_v39"
+			],
+			"scope": "equipped_character",
+			"slots": [
+				"armor"
+			],
+			"stage": "hit_mitigation",
+			"stat": "armour",
+			"tiers": [
+				{
+					"level": 1,
+					"max": 50,
+					"min": 30,
+					"tier": 1,
+					"weight": 100
+				},
+				{
+					"level": 8,
+					"max": 80,
+					"min": 55,
+					"tier": 2,
+					"weight": 60
+				},
+				{
+					"level": 16,
+					"max": 120,
+					"min": 85,
+					"tier": 3,
+					"weight": 30
+				}
+			],
+			"unit": "flat"
+		},
 		"lanternveil": {
 			"affected_skills": [],
 			"eligible_bases": [
@@ -884,7 +957,8 @@
 				"runewood",
 				"defense",
 				"build_legacy_v27",
-				"defense_v37"
+				"defense_v37",
+				"defense_v39"
 			],
 			"slots": [
 				"armor",
@@ -910,6 +984,76 @@
 					"level": 16,
 					"max": 22,
 					"min": 16,
+					"tier": 3,
+					"weight": 30
+				}
+			],
+			"unit": "flat"
+		},
+		"mistweave": {
+			"actors": [
+				"player",
+				"monster"
+			],
+			"affected_skills": [],
+			"allowed_base_ids": [
+				"emberhide_vest"
+			],
+			"eligible_bases": [
+				"emberhide_vest"
+			],
+			"formatted_examples": [
+				"前缀 · 雾织 T1：闪避值 +260",
+				"前缀 · 雾织 T2：闪避值 +350",
+				"前缀 · 雾织 T3：闪避值 +450"
+			],
+			"formatted_ranges": [
+				{
+					"max": "+260",
+					"min": "+200"
+				},
+				{
+					"max": "+350",
+					"min": "+270"
+				},
+				{
+					"max": "+450",
+					"min": "+360"
+				}
+			],
+			"group": "evasion_rating",
+			"kind": "prefix",
+			"label": "闪避值",
+			"name": "雾织",
+			"other_consumers": [],
+			"pools": [
+				"defense_v39"
+			],
+			"scope": "equipped_character",
+			"slots": [
+				"armor"
+			],
+			"stage": "hit_admission",
+			"stat": "evasion",
+			"tiers": [
+				{
+					"level": 1,
+					"max": 260,
+					"min": 200,
+					"tier": 1,
+					"weight": 100
+				},
+				{
+					"level": 8,
+					"max": 350,
+					"min": 270,
+					"tier": 2,
+					"weight": 60
+				},
+				{
+					"level": 16,
+					"max": 450,
+					"min": 360,
 					"tier": 3,
 					"weight": 30
 				}
@@ -1517,7 +1661,8 @@
 				"defense",
 				"local_weapon",
 				"build_legacy_v27",
-				"defense_v37"
+				"defense_v37",
+				"defense_v39"
 			],
 			"slots": [
 				"weapon",
@@ -1588,7 +1733,8 @@
 			"name": "护寒",
 			"other_consumers": [],
 			"pools": [
-				"defense_v37"
+				"defense_v37",
+				"defense_v39"
 			],
 			"scope": "equipped_character",
 			"slots": [
@@ -1659,7 +1805,8 @@
 				"runewood",
 				"defense",
 				"build_legacy_v27",
-				"defense_v37"
+				"defense_v37",
+				"defense_v39"
 			],
 			"slots": [
 				"armor",
@@ -1815,7 +1962,8 @@
 				"defense",
 				"local_weapon",
 				"build_legacy_v27",
-				"defense_v37"
+				"defense_v37",
+				"defense_v39"
 			],
 			"slots": [
 				"weapon",
@@ -2042,7 +2190,8 @@
 			"name": "护雷",
 			"other_consumers": [],
 			"pools": [
-				"defense_v37"
+				"defense_v37",
+				"defense_v39"
 			],
 			"scope": "equipped_character",
 			"slots": [
@@ -2356,7 +2505,8 @@
 				"runewood",
 				"defense",
 				"build_legacy_v27",
-				"defense_v37"
+				"defense_v37",
+				"defense_v39"
 			],
 			"slots": [
 				"armor",
@@ -2433,7 +2583,8 @@
 				"local_weapon",
 				"build_legacy_v27",
 				"forgeblade_v34",
-				"defense_v37"
+				"defense_v37",
+				"defense_v39"
 			],
 			"slots": [
 				"weapon",
@@ -4439,7 +4590,7 @@
 				"normal_points": 5,
 				"source_version": "3.29.1"
 			},
-			"version": 38
+			"version": 39
 		},
 		"default_casts": {
 			"group_000001": {
@@ -5516,7 +5667,7 @@
 				"evasion": 320.0
 			}
 		},
-		"save_version": 38,
+		"save_version": 39,
 		"skitter_accuracy_example": {
 			"base_accuracy": 140,
 			"base_chance": 0.96,
@@ -6066,7 +6217,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 38,
+				"save_version": 39,
 				"source": {
 					"affixes": [
 						{
@@ -6137,7 +6288,9 @@
 					"global_critical_chance",
 					"global_critical_multiplier",
 					"rimeward",
-					"stormward"
+					"stormward",
+					"ironhide",
+					"mistweave"
 				],
 				"balance": {
 					"recalibrate_cost_multiplier": 2,
@@ -6165,7 +6318,7 @@
 					"forgeblade"
 				],
 				"catalog_source": "res://scripts/items/equipment_catalog.gd",
-				"catalog_vocabulary": 37,
+				"catalog_vocabulary": 39,
 				"eligible_families_by_base": {
 					"ashwood_bow": [
 						"deepwell",
@@ -6202,7 +6355,9 @@
 						"trailstep",
 						"emberward",
 						"rimeward",
-						"stormward"
+						"stormward",
+						"ironhide",
+						"mistweave"
 					],
 					"forgeblade": [
 						"deepwell",
@@ -6566,7 +6721,7 @@
 				"schema_version": 2,
 				"status": "prototype"
 			},
-			"save_version": 38
+			"save_version": 39
 		},
 		"elevate": {
 			"description": "保留魔法装备已有词缀，升为稀有并补至4至6条。",
@@ -6768,7 +6923,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 38,
+				"save_version": 39,
 				"source": {
 					"affixes": [
 						{
@@ -6953,7 +7108,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 38,
+				"save_version": 39,
 				"source": {
 					"affixes": [],
 					"base_id": "ashwood_bow",
@@ -7140,7 +7295,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 38,
+				"save_version": 39,
 				"source": {
 					"affixes": [
 						{
@@ -7344,7 +7499,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 38,
+				"save_version": 39,
 				"source": {
 					"affixes": [
 						{
@@ -7487,7 +7642,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 38,
+				"save_version": 39,
 				"source": {
 					"affixes": [
 						{
@@ -7516,7 +7671,7 @@
 			"rules_version": "original-crafting-prototype-v3-affix27"
 		},
 		"targeted_reforge_critical": {
-			"catalog_vocabulary": 37,
+			"catalog_vocabulary": 39,
 			"cost_by_rarity": {
 				"magic": 16,
 				"rare": 40
@@ -7971,7 +8126,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 38,
+				"save_version": 39,
 				"source": {
 					"affixes": [
 						{
@@ -8015,7 +8170,7 @@
 			"targeted": true
 		},
 		"targeted_reforge_damage": {
-			"catalog_vocabulary": 37,
+			"catalog_vocabulary": 39,
 			"cost_by_rarity": {
 				"magic": 16,
 				"rare": 40
@@ -9775,7 +9930,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 38,
+				"save_version": 39,
 				"source": {
 					"affixes": [
 						{
@@ -9829,7 +9984,7 @@
 			"targeted": true
 		},
 		"targeted_reforge_life_leech": {
-			"catalog_vocabulary": 37,
+			"catalog_vocabulary": 39,
 			"cost_by_rarity": {
 				"magic": 16,
 				"rare": 40
@@ -10105,7 +10260,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 38,
+				"save_version": 39,
 				"source": {
 					"affixes": [
 						{
@@ -10148,7 +10303,7 @@
 			"targeted": true
 		},
 		"targeted_reforge_mana_leech": {
-			"catalog_vocabulary": 37,
+			"catalog_vocabulary": 39,
 			"cost_by_rarity": {
 				"magic": 16,
 				"rare": 40
@@ -10424,7 +10579,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 38,
+				"save_version": 39,
 				"source": {
 					"affixes": [
 						{
@@ -10487,7 +10642,7 @@
 			"example_quantity": 1,
 			"name": "校准碎片",
 			"quantity_source": "items[uid].payload.quantity",
-			"save_version": 38,
+			"save_version": 39,
 			"size": [
 				1,
 				1
@@ -10505,7 +10660,7 @@
 			"weight": 20
 		},
 		{
-			"pool_id": "defense_v37",
+			"pool_id": "defense_v39",
 			"weight": 10
 		},
 		{
@@ -10521,7 +10676,2336 @@
 			"weight": 5
 		}
 	],
-	"current_loot_profile_id": "canonical_v37",
+	"current_loot_profile_id": "canonical_v39",
+	"defense_rating_affixes": {
+		"accuracy_scope": "当前自然怪accuracy为100，等级波次、稀有度与地图增伤不提高accuracy；不推断未来怪物曲线",
+		"base_id": "emberhide_vest",
+		"budget_scope": "实际目录单次命中与七职业最终统计的隔离比较；不包含攻击频率、走位、抗性、护盾或魔力分担，不是实战DPS或平均存活提升",
+		"burn_example": {
+			"actor": "player",
+			"components": {
+				"fire": 100.0
+			},
+			"damage_total": 100.0,
+			"details": [
+				{
+					"before_defense": 100.0,
+					"final": 100.0,
+					"resistance": 0.0,
+					"type": "fire"
+				}
+			],
+			"health_lost": 100.0,
+			"mitigated_components": {
+				"fire": 0.0
+			},
+			"ok": true,
+			"overkill": 0.0,
+			"raw_components": {
+				"fire": 100.0
+			},
+			"reason": "",
+			"remaining_health": 900.0,
+			"remaining_shield": 0.0,
+			"shield_spent": 0.0,
+			"stage": "burning"
+		},
+		"catalog_attacks": [
+			{
+				"accuracy": 100.0,
+				"after": {
+					"actor": "player",
+					"armour": 120.0,
+					"components": {
+						"physical": 2.9411764705882346
+					},
+					"damage_total": 2.9411764705882346,
+					"details": [
+						{
+							"base": 10.0,
+							"before_defense": 10.0,
+							"final": 2.9411764705882346,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.7058823529411765,
+							"type": "physical"
+						}
+					],
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"health_lost": 2.9411764705882346,
+					"mitigated_components": {
+						"physical": 7.058823529411765
+					},
+					"ok": true,
+					"overkill": 0.0,
+					"raw_components": {
+						"physical": 10.0
+					},
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"remaining_health": 99997.05882352941,
+					"remaining_shield": 0.0,
+					"shield_spent": 0.0,
+					"stage": "hit_mitigation"
+				},
+				"armour": 120.0,
+				"attack_id": "contact",
+				"before": {
+					"actor": "player",
+					"armour": 0.0,
+					"components": {
+						"physical": 10.0
+					},
+					"damage_total": 10.0,
+					"details": [
+						{
+							"base": 10.0,
+							"before_defense": 10.0,
+							"final": 10.0,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "physical"
+						}
+					],
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"health_lost": 10.0,
+					"mitigated_components": {
+						"physical": 0.0
+					},
+					"ok": true,
+					"overkill": 0.0,
+					"raw_components": {
+						"physical": 10.0
+					},
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"remaining_health": 99990.0,
+					"remaining_shield": 0.0,
+					"shield_spent": 0.0,
+					"stage": "hit_mitigation"
+				},
+				"components": {
+					"physical": 10.0
+				},
+				"damage_modifier": false,
+				"map_id": "old_garden",
+				"species": "crawler",
+				"tier": 1,
+				"wave": 1
+			},
+			{
+				"accuracy": 100.0,
+				"after": {
+					"actor": "player",
+					"armour": 120.0,
+					"components": {
+						"physical": 37.27331494830312
+					},
+					"damage_total": 37.27331494830312,
+					"details": [
+						{
+							"base": 53.877039999999994,
+							"before_defense": 53.877039999999994,
+							"final": 37.27331494830312,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.30817812284596335,
+							"type": "physical"
+						}
+					],
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"health_lost": 37.27331494830312,
+					"mitigated_components": {
+						"physical": 16.603725051696877
+					},
+					"ok": true,
+					"overkill": 0.0,
+					"raw_components": {
+						"physical": 53.877039999999994
+					},
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"remaining_health": 99962.72668505169,
+					"remaining_shield": 0.0,
+					"shield_spent": 0.0,
+					"stage": "hit_mitigation"
+				},
+				"armour": 120.0,
+				"attack_id": "garden_slam",
+				"before": {
+					"actor": "player",
+					"armour": 0.0,
+					"components": {
+						"physical": 53.877039999999994
+					},
+					"damage_total": 53.877039999999994,
+					"details": [
+						{
+							"base": 53.877039999999994,
+							"before_defense": 53.877039999999994,
+							"final": 53.877039999999994,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "physical"
+						}
+					],
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"health_lost": 53.877039999999994,
+					"mitigated_components": {
+						"physical": 0.0
+					},
+					"ok": true,
+					"overkill": 0.0,
+					"raw_components": {
+						"physical": 53.877039999999994
+					},
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"remaining_health": 99946.12296,
+					"remaining_shield": 0.0,
+					"shield_spent": 0.0,
+					"stage": "hit_mitigation"
+				},
+				"components": {
+					"physical": 53.877039999999994
+				},
+				"damage_modifier": true,
+				"map_id": "old_garden",
+				"species": "rift_warden",
+				"tier": 3,
+				"wave": 8
+			},
+			{
+				"accuracy": 100.0,
+				"after": {
+					"actor": "player",
+					"armour": 120.0,
+					"components": {
+						"physical": 29.833740875680547
+					},
+					"damage_total": 29.833740875680547,
+					"details": [
+						{
+							"base": 45.552189999999996,
+							"before_defense": 45.552189999999996,
+							"final": 29.833740875680547,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.34506461982002296,
+							"type": "physical"
+						}
+					],
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"health_lost": 29.833740875680547,
+					"mitigated_components": {
+						"physical": 15.718449124319449
+					},
+					"ok": true,
+					"overkill": 0.0,
+					"raw_components": {
+						"physical": 45.552189999999996
+					},
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"remaining_health": 99970.16625912432,
+					"remaining_shield": 0.0,
+					"shield_spent": 0.0,
+					"stage": "hit_mitigation"
+				},
+				"armour": 120.0,
+				"attack_id": "ruins_mark",
+				"before": {
+					"actor": "player",
+					"armour": 0.0,
+					"components": {
+						"physical": 45.552189999999996
+					},
+					"damage_total": 45.552189999999996,
+					"details": [
+						{
+							"base": 45.552189999999996,
+							"before_defense": 45.552189999999996,
+							"final": 45.552189999999996,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "physical"
+						}
+					],
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"health_lost": 45.552189999999996,
+					"mitigated_components": {
+						"physical": 0.0
+					},
+					"ok": true,
+					"overkill": 0.0,
+					"raw_components": {
+						"physical": 45.552189999999996
+					},
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"remaining_health": 99954.44781,
+					"remaining_shield": 0.0,
+					"shield_spent": 0.0,
+					"stage": "hit_mitigation"
+				},
+				"components": {
+					"physical": 45.552189999999996
+				},
+				"damage_modifier": true,
+				"map_id": "broken_ruins",
+				"species": "rift_warden",
+				"tier": 3,
+				"wave": 9
+			},
+			{
+				"accuracy": 100.0,
+				"after": {
+					"actor": "player",
+					"armour": 120.0,
+					"components": {
+						"physical": 13.890026171320438
+					},
+					"damage_total": 13.890026171320438,
+					"details": [
+						{
+							"base": 26.479439999999993,
+							"before_defense": 26.479439999999993,
+							"final": 13.890026171320438,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.47544109047168515,
+							"type": "physical"
+						}
+					],
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"health_lost": 13.890026171320438,
+					"mitigated_components": {
+						"physical": 12.589413828679556
+					},
+					"ok": true,
+					"overkill": 0.0,
+					"raw_components": {
+						"physical": 26.479439999999993
+					},
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"remaining_health": 99986.10997382869,
+					"remaining_shield": 0.0,
+					"shield_spent": 0.0,
+					"stage": "hit_mitigation"
+				},
+				"armour": 120.0,
+				"attack_id": "sunwell_echo",
+				"before": {
+					"actor": "player",
+					"armour": 0.0,
+					"components": {
+						"physical": 26.479439999999993
+					},
+					"damage_total": 26.479439999999993,
+					"details": [
+						{
+							"base": 26.479439999999993,
+							"before_defense": 26.479439999999993,
+							"final": 26.479439999999993,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "physical"
+						}
+					],
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"health_lost": 26.479439999999993,
+					"mitigated_components": {
+						"physical": 0.0
+					},
+					"ok": true,
+					"overkill": 0.0,
+					"raw_components": {
+						"physical": 26.479439999999993
+					},
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"remaining_health": 99973.52056,
+					"remaining_shield": 0.0,
+					"shield_spent": 0.0,
+					"stage": "hit_mitigation"
+				},
+				"components": {
+					"physical": 26.479439999999993
+				},
+				"damage_modifier": true,
+				"map_id": "sunwell_terrace",
+				"species": "rift_warden",
+				"tier": 3,
+				"wave": 10
+			}
+		],
+		"evasion_rows": [
+			{
+				"base_dexterity": 20.0,
+				"baseline_evasion": 15.600000000000001,
+				"baseline_hit_chance": 1.0,
+				"bound": "min",
+				"class_id": 0,
+				"effective_evasion": 223.6,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 200,
+				"hit_chance": 0.96,
+				"save_attempts": 0,
+				"tier": 1,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 20.0,
+				"baseline_evasion": 15.600000000000001,
+				"baseline_hit_chance": 1.0,
+				"bound": "max",
+				"class_id": 0,
+				"effective_evasion": 286.0,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 260,
+				"hit_chance": 0.9,
+				"save_attempts": 0,
+				"tier": 1,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 20.0,
+				"baseline_evasion": 15.600000000000001,
+				"baseline_hit_chance": 1.0,
+				"bound": "min",
+				"class_id": 0,
+				"effective_evasion": 296.40000000000003,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 270,
+				"hit_chance": 0.9,
+				"save_attempts": 0,
+				"tier": 2,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 20.0,
+				"baseline_evasion": 15.600000000000001,
+				"baseline_hit_chance": 1.0,
+				"bound": "max",
+				"class_id": 0,
+				"effective_evasion": 379.6,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 350,
+				"hit_chance": 0.84,
+				"save_attempts": 0,
+				"tier": 2,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 20.0,
+				"baseline_evasion": 15.600000000000001,
+				"baseline_hit_chance": 1.0,
+				"bound": "min",
+				"class_id": 0,
+				"effective_evasion": 390.0,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 360,
+				"hit_chance": 0.83,
+				"save_attempts": 0,
+				"tier": 3,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 20.0,
+				"baseline_evasion": 15.600000000000001,
+				"baseline_hit_chance": 1.0,
+				"bound": "max",
+				"class_id": 0,
+				"effective_evasion": 483.6,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 450,
+				"hit_chance": 0.78,
+				"save_attempts": 0,
+				"tier": 3,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 14.0,
+				"baseline_evasion": 15.3,
+				"baseline_hit_chance": 1.0,
+				"bound": "min",
+				"class_id": 1,
+				"effective_evasion": 219.3,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 200,
+				"hit_chance": 0.96,
+				"save_attempts": 0,
+				"tier": 1,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 14.0,
+				"baseline_evasion": 15.3,
+				"baseline_hit_chance": 1.0,
+				"bound": "max",
+				"class_id": 1,
+				"effective_evasion": 280.5,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 260,
+				"hit_chance": 0.91,
+				"save_attempts": 0,
+				"tier": 1,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 14.0,
+				"baseline_evasion": 15.3,
+				"baseline_hit_chance": 1.0,
+				"bound": "min",
+				"class_id": 1,
+				"effective_evasion": 290.7,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 270,
+				"hit_chance": 0.9,
+				"save_attempts": 0,
+				"tier": 2,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 14.0,
+				"baseline_evasion": 15.3,
+				"baseline_hit_chance": 1.0,
+				"bound": "max",
+				"class_id": 1,
+				"effective_evasion": 372.3,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 350,
+				"hit_chance": 0.84,
+				"save_attempts": 0,
+				"tier": 2,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 14.0,
+				"baseline_evasion": 15.3,
+				"baseline_hit_chance": 1.0,
+				"bound": "min",
+				"class_id": 1,
+				"effective_evasion": 382.5,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 360,
+				"hit_chance": 0.84,
+				"save_attempts": 0,
+				"tier": 3,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 14.0,
+				"baseline_evasion": 15.3,
+				"baseline_hit_chance": 1.0,
+				"bound": "max",
+				"class_id": 1,
+				"effective_evasion": 474.3,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 450,
+				"hit_chance": 0.78,
+				"save_attempts": 0,
+				"tier": 3,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 32.0,
+				"baseline_evasion": 15.9,
+				"baseline_hit_chance": 1.0,
+				"bound": "min",
+				"class_id": 2,
+				"effective_evasion": 227.9,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 200,
+				"hit_chance": 0.95,
+				"save_attempts": 0,
+				"tier": 1,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 32.0,
+				"baseline_evasion": 15.9,
+				"baseline_hit_chance": 1.0,
+				"bound": "max",
+				"class_id": 2,
+				"effective_evasion": 291.5,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 260,
+				"hit_chance": 0.9,
+				"save_attempts": 0,
+				"tier": 1,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 32.0,
+				"baseline_evasion": 15.9,
+				"baseline_hit_chance": 1.0,
+				"bound": "min",
+				"class_id": 2,
+				"effective_evasion": 302.1,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 270,
+				"hit_chance": 0.89,
+				"save_attempts": 0,
+				"tier": 2,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 32.0,
+				"baseline_evasion": 15.9,
+				"baseline_hit_chance": 1.0,
+				"bound": "max",
+				"class_id": 2,
+				"effective_evasion": 386.90000000000003,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 350,
+				"hit_chance": 0.83,
+				"save_attempts": 0,
+				"tier": 2,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 32.0,
+				"baseline_evasion": 15.9,
+				"baseline_hit_chance": 1.0,
+				"bound": "min",
+				"class_id": 2,
+				"effective_evasion": 397.5,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 360,
+				"hit_chance": 0.83,
+				"save_attempts": 0,
+				"tier": 3,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 32.0,
+				"baseline_evasion": 15.9,
+				"baseline_hit_chance": 1.0,
+				"bound": "max",
+				"class_id": 2,
+				"effective_evasion": 492.90000000000003,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 450,
+				"hit_chance": 0.77,
+				"save_attempts": 0,
+				"tier": 3,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 14.0,
+				"baseline_evasion": 15.3,
+				"baseline_hit_chance": 1.0,
+				"bound": "min",
+				"class_id": 3,
+				"effective_evasion": 219.3,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 200,
+				"hit_chance": 0.96,
+				"save_attempts": 0,
+				"tier": 1,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 14.0,
+				"baseline_evasion": 15.3,
+				"baseline_hit_chance": 1.0,
+				"bound": "max",
+				"class_id": 3,
+				"effective_evasion": 280.5,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 260,
+				"hit_chance": 0.91,
+				"save_attempts": 0,
+				"tier": 1,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 14.0,
+				"baseline_evasion": 15.3,
+				"baseline_hit_chance": 1.0,
+				"bound": "min",
+				"class_id": 3,
+				"effective_evasion": 290.7,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 270,
+				"hit_chance": 0.9,
+				"save_attempts": 0,
+				"tier": 2,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 14.0,
+				"baseline_evasion": 15.3,
+				"baseline_hit_chance": 1.0,
+				"bound": "max",
+				"class_id": 3,
+				"effective_evasion": 372.3,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 350,
+				"hit_chance": 0.84,
+				"save_attempts": 0,
+				"tier": 2,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 14.0,
+				"baseline_evasion": 15.3,
+				"baseline_hit_chance": 1.0,
+				"bound": "min",
+				"class_id": 3,
+				"effective_evasion": 382.5,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 360,
+				"hit_chance": 0.84,
+				"save_attempts": 0,
+				"tier": 3,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 14.0,
+				"baseline_evasion": 15.3,
+				"baseline_hit_chance": 1.0,
+				"bound": "max",
+				"class_id": 3,
+				"effective_evasion": 474.3,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 450,
+				"hit_chance": 0.78,
+				"save_attempts": 0,
+				"tier": 3,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 23.0,
+				"baseline_evasion": 15.600000000000001,
+				"baseline_hit_chance": 1.0,
+				"bound": "min",
+				"class_id": 4,
+				"effective_evasion": 223.6,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 200,
+				"hit_chance": 0.96,
+				"save_attempts": 0,
+				"tier": 1,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 23.0,
+				"baseline_evasion": 15.600000000000001,
+				"baseline_hit_chance": 1.0,
+				"bound": "max",
+				"class_id": 4,
+				"effective_evasion": 286.0,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 260,
+				"hit_chance": 0.9,
+				"save_attempts": 0,
+				"tier": 1,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 23.0,
+				"baseline_evasion": 15.600000000000001,
+				"baseline_hit_chance": 1.0,
+				"bound": "min",
+				"class_id": 4,
+				"effective_evasion": 296.40000000000003,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 270,
+				"hit_chance": 0.9,
+				"save_attempts": 0,
+				"tier": 2,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 23.0,
+				"baseline_evasion": 15.600000000000001,
+				"baseline_hit_chance": 1.0,
+				"bound": "max",
+				"class_id": 4,
+				"effective_evasion": 379.6,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 350,
+				"hit_chance": 0.84,
+				"save_attempts": 0,
+				"tier": 2,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 23.0,
+				"baseline_evasion": 15.600000000000001,
+				"baseline_hit_chance": 1.0,
+				"bound": "min",
+				"class_id": 4,
+				"effective_evasion": 390.0,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 360,
+				"hit_chance": 0.83,
+				"save_attempts": 0,
+				"tier": 3,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 23.0,
+				"baseline_evasion": 15.600000000000001,
+				"baseline_hit_chance": 1.0,
+				"bound": "max",
+				"class_id": 4,
+				"effective_evasion": 483.6,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 450,
+				"hit_chance": 0.78,
+				"save_attempts": 0,
+				"tier": 3,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 14.0,
+				"baseline_evasion": 15.3,
+				"baseline_hit_chance": 1.0,
+				"bound": "min",
+				"class_id": 5,
+				"effective_evasion": 219.3,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 200,
+				"hit_chance": 0.96,
+				"save_attempts": 0,
+				"tier": 1,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 14.0,
+				"baseline_evasion": 15.3,
+				"baseline_hit_chance": 1.0,
+				"bound": "max",
+				"class_id": 5,
+				"effective_evasion": 280.5,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 260,
+				"hit_chance": 0.91,
+				"save_attempts": 0,
+				"tier": 1,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 14.0,
+				"baseline_evasion": 15.3,
+				"baseline_hit_chance": 1.0,
+				"bound": "min",
+				"class_id": 5,
+				"effective_evasion": 290.7,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 270,
+				"hit_chance": 0.9,
+				"save_attempts": 0,
+				"tier": 2,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 14.0,
+				"baseline_evasion": 15.3,
+				"baseline_hit_chance": 1.0,
+				"bound": "max",
+				"class_id": 5,
+				"effective_evasion": 372.3,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 350,
+				"hit_chance": 0.84,
+				"save_attempts": 0,
+				"tier": 2,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 14.0,
+				"baseline_evasion": 15.3,
+				"baseline_hit_chance": 1.0,
+				"bound": "min",
+				"class_id": 5,
+				"effective_evasion": 382.5,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 360,
+				"hit_chance": 0.84,
+				"save_attempts": 0,
+				"tier": 3,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 14.0,
+				"baseline_evasion": 15.3,
+				"baseline_hit_chance": 1.0,
+				"bound": "max",
+				"class_id": 5,
+				"effective_evasion": 474.3,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 450,
+				"hit_chance": 0.78,
+				"save_attempts": 0,
+				"tier": 3,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 23.0,
+				"baseline_evasion": 15.600000000000001,
+				"baseline_hit_chance": 1.0,
+				"bound": "min",
+				"class_id": 6,
+				"effective_evasion": 223.6,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 200,
+				"hit_chance": 0.96,
+				"save_attempts": 0,
+				"tier": 1,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 23.0,
+				"baseline_evasion": 15.600000000000001,
+				"baseline_hit_chance": 1.0,
+				"bound": "max",
+				"class_id": 6,
+				"effective_evasion": 286.0,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 260,
+				"hit_chance": 0.9,
+				"save_attempts": 0,
+				"tier": 1,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 23.0,
+				"baseline_evasion": 15.600000000000001,
+				"baseline_hit_chance": 1.0,
+				"bound": "min",
+				"class_id": 6,
+				"effective_evasion": 296.40000000000003,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 270,
+				"hit_chance": 0.9,
+				"save_attempts": 0,
+				"tier": 2,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 23.0,
+				"baseline_evasion": 15.600000000000001,
+				"baseline_hit_chance": 1.0,
+				"bound": "max",
+				"class_id": 6,
+				"effective_evasion": 379.6,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 350,
+				"hit_chance": 0.84,
+				"save_attempts": 0,
+				"tier": 2,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 23.0,
+				"baseline_evasion": 15.600000000000001,
+				"baseline_hit_chance": 1.0,
+				"bound": "min",
+				"class_id": 6,
+				"effective_evasion": 390.0,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 360,
+				"hit_chance": 0.83,
+				"save_attempts": 0,
+				"tier": 3,
+				"whole_build_valid": true
+			},
+			{
+				"base_dexterity": 23.0,
+				"baseline_evasion": 15.600000000000001,
+				"baseline_hit_chance": 1.0,
+				"bound": "max",
+				"class_id": 6,
+				"effective_evasion": 483.6,
+				"enemy_accuracy": 100.0,
+				"flat_item_evasion": 450,
+				"hit_chance": 0.78,
+				"save_attempts": 0,
+				"tier": 3,
+				"whole_build_valid": true
+			}
+		],
+		"examples": {
+			"deepwell": {
+				"class_id": 0,
+				"definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"前缀 · 铁革 T3：护甲 +120",
+						"前缀 · 雾织 T3：闪避值 +450",
+						"前缀 · 深汲 T3：最大魔力 +22",
+						"后缀 · 护火 T3：火焰抗性 +25%",
+						"后缀 · 护寒 T3：冰霜抗性 +25%",
+						"后缀 · 护雷 T3：闪电抗性 +25%"
+					],
+					"base_id": "emberhide_vest",
+					"base_name": "灰烬皮甲",
+					"description": "最大生命 +8，火焰抗性 +15%。火焰抗性降低火焰命中与燃烧伤害；默认上限75%，最大抗性天赋可提高至本游戏安全上限83%，仍需另外取得足够原始抗性。\n前缀 · 铁革 T3：护甲 +120\n前缀 · 雾织 T3：闪避值 +450\n前缀 · 深汲 T3：最大魔力 +22\n后缀 · 护火 T3：火焰抗性 +25%\n后缀 · 护寒 T3：冰霜抗性 +25%\n后缀 · 护雷 T3：闪电抗性 +25%",
+					"effects": [],
+					"id": "gear_000004",
+					"item_level": 16,
+					"name": "稀有 · 灰烬皮甲",
+					"rarity": "rare",
+					"size": [
+						2,
+						3
+					],
+					"slot": "armor",
+					"stats": {
+						"armour": 120.0,
+						"cold_resistance": 0.25,
+						"evasion": 450.0,
+						"fire_resistance": 0.4,
+						"lightning_resistance": 0.25,
+						"max_health": 8.0,
+						"max_mana": 22.0
+					}
+				},
+				"instance": {
+					"affixes": [
+						{
+							"id": "ironhide",
+							"tier": 3,
+							"value": 120
+						},
+						{
+							"id": "mistweave",
+							"tier": 3,
+							"value": 450
+						},
+						{
+							"id": "deepwell",
+							"tier": 3,
+							"value": 22
+						},
+						{
+							"id": "emberward",
+							"tier": 3,
+							"value": 25
+						},
+						{
+							"id": "rimeward",
+							"tier": 3,
+							"value": 25
+						},
+						{
+							"id": "stormward",
+							"tier": 3,
+							"value": 25
+						}
+					],
+					"base_id": "emberhide_vest",
+					"id": "gear_000004",
+					"item_level": 16,
+					"rarity": "rare"
+				},
+				"save_attempts": 0,
+				"stats": {
+					"accuracy": 140.0,
+					"accuracy_increased": 0.0,
+					"additional_skill_slots": 0.0,
+					"area_increased": 0.0,
+					"area_size_increased": 0.0,
+					"armour": 120.0,
+					"armour_increased": 0.0,
+					"attack_added_fire": 0.0,
+					"attack_added_physical": 0.0,
+					"attack_crit_chance_increased": 0.0,
+					"attack_elemental_increased": 0.0,
+					"attack_life_leech": 0.0,
+					"attack_mana_leech": 0.0,
+					"attack_physical_increased": 0.0,
+					"attack_speed": 1.7,
+					"attack_speed_increased": 0.0,
+					"chaos_increased": 0.0,
+					"cold_increased": 0.0,
+					"cold_resistance": 0.25,
+					"crit_base_chance": 0.05,
+					"crit_base_multiplier": 1.5,
+					"crit_chance_increased": 0.0,
+					"crit_multiplier_add": 0.0,
+					"damage": 26.0,
+					"damage_taken_from_mana_before_life": 0.0,
+					"damaging_ailments_faster": 0.0,
+					"dexterity": 20.0,
+					"elemental_increased": 0.0,
+					"evasion": 483.6,
+					"evasion_increased": 0.0,
+					"fire_dot_multiplier_add": 0.0,
+					"fire_increased": 0.0,
+					"fire_resistance": 0.4,
+					"flask_charges_gained_increased": 0.0,
+					"flask_life_recovery_increased": 0.0,
+					"flask_mana_recovery_increased": 0.0,
+					"global_increased": 0.0,
+					"intelligence": 20.0,
+					"life_leech_max_rate_increased": 0.0,
+					"life_leech_rate_increased": 0.0,
+					"life_regen": 0.0,
+					"life_regen_percent": 0.0,
+					"lightning_increased": 0.0,
+					"lightning_resistance": 0.25,
+					"mana_cost_efficiency_increased": 0.0,
+					"mana_cost_increased": 0.0,
+					"mana_leech_max_rate_increased": 0.0,
+					"mana_leech_rate_increased": 0.0,
+					"mana_regen": 12.0,
+					"mana_regen_increased": 0.0,
+					"max_health": 138.0,
+					"max_mana": 162.0,
+					"max_shield": 61.2,
+					"maximum_cold_resistance_add": 0.0,
+					"maximum_fire_resistance_add": 0.0,
+					"maximum_lightning_resistance_add": 0.0,
+					"melee_area_size_increased": 0.0,
+					"melee_crit_chance_increased": 0.0,
+					"melee_crit_multiplier_add": 0.0,
+					"melee_physical_increased": 0.04,
+					"move_speed": 240.0,
+					"move_speed_increased": 0.0,
+					"physical_attack_life_leech": 0.0,
+					"physical_attack_mana_leech": 0.0,
+					"physical_increased": 0.0,
+					"projectile_attack_crit_chance_increased": 0.0,
+					"projectile_attack_crit_multiplier_add": 0.0,
+					"projectile_count": 0.0,
+					"projectile_increased": 0.0,
+					"projectile_speed_increased": 0.0,
+					"resolute_technique": 0.0,
+					"shield_recharge_delay": 4.0,
+					"shield_recharge_rate": 13.0,
+					"shield_recharge_rate_increased": 0.0,
+					"shield_recharge_start_faster": 0.0,
+					"shield_regen": 13.0,
+					"spell_added_cold": 0.0,
+					"spell_added_lightning": 0.0,
+					"spell_area_size_increased": 0.0,
+					"spell_crit_chance_increased": 0.0,
+					"spell_crit_multiplier_add": 0.0,
+					"spell_increased": 0.0,
+					"strength": 20.0
+				},
+				"whole_build_valid": true
+			},
+			"lanternveil": {
+				"class_id": 0,
+				"definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"前缀 · 铁革 T3：护甲 +120",
+						"前缀 · 雾织 T3：闪避值 +450",
+						"前缀 · 灯帷 T3：全局最大护盾 +22",
+						"后缀 · 护火 T3：火焰抗性 +25%",
+						"后缀 · 护寒 T3：冰霜抗性 +25%",
+						"后缀 · 护雷 T3：闪电抗性 +25%"
+					],
+					"base_id": "emberhide_vest",
+					"base_name": "灰烬皮甲",
+					"description": "最大生命 +8，火焰抗性 +15%。火焰抗性降低火焰命中与燃烧伤害；默认上限75%，最大抗性天赋可提高至本游戏安全上限83%，仍需另外取得足够原始抗性。\n前缀 · 铁革 T3：护甲 +120\n前缀 · 雾织 T3：闪避值 +450\n前缀 · 灯帷 T3：全局最大护盾 +22\n后缀 · 护火 T3：火焰抗性 +25%\n后缀 · 护寒 T3：冰霜抗性 +25%\n后缀 · 护雷 T3：闪电抗性 +25%",
+					"effects": [],
+					"id": "gear_000004",
+					"item_level": 16,
+					"name": "稀有 · 灰烬皮甲",
+					"rarity": "rare",
+					"size": [
+						2,
+						3
+					],
+					"slot": "armor",
+					"stats": {
+						"armour": 120.0,
+						"cold_resistance": 0.25,
+						"evasion": 450.0,
+						"fire_resistance": 0.4,
+						"lightning_resistance": 0.25,
+						"max_health": 8.0,
+						"max_shield": 22.0
+					}
+				},
+				"instance": {
+					"affixes": [
+						{
+							"id": "ironhide",
+							"tier": 3,
+							"value": 120
+						},
+						{
+							"id": "mistweave",
+							"tier": 3,
+							"value": 450
+						},
+						{
+							"id": "lanternveil",
+							"tier": 3,
+							"value": 22
+						},
+						{
+							"id": "emberward",
+							"tier": 3,
+							"value": 25
+						},
+						{
+							"id": "rimeward",
+							"tier": 3,
+							"value": 25
+						},
+						{
+							"id": "stormward",
+							"tier": 3,
+							"value": 25
+						}
+					],
+					"base_id": "emberhide_vest",
+					"id": "gear_000004",
+					"item_level": 16,
+					"rarity": "rare"
+				},
+				"save_attempts": 0,
+				"stats": {
+					"accuracy": 140.0,
+					"accuracy_increased": 0.0,
+					"additional_skill_slots": 0.0,
+					"area_increased": 0.0,
+					"area_size_increased": 0.0,
+					"armour": 120.0,
+					"armour_increased": 0.0,
+					"attack_added_fire": 0.0,
+					"attack_added_physical": 0.0,
+					"attack_crit_chance_increased": 0.0,
+					"attack_elemental_increased": 0.0,
+					"attack_life_leech": 0.0,
+					"attack_mana_leech": 0.0,
+					"attack_physical_increased": 0.0,
+					"attack_speed": 1.7,
+					"attack_speed_increased": 0.0,
+					"chaos_increased": 0.0,
+					"cold_increased": 0.0,
+					"cold_resistance": 0.25,
+					"crit_base_chance": 0.05,
+					"crit_base_multiplier": 1.5,
+					"crit_chance_increased": 0.0,
+					"crit_multiplier_add": 0.0,
+					"damage": 26.0,
+					"damage_taken_from_mana_before_life": 0.0,
+					"damaging_ailments_faster": 0.0,
+					"dexterity": 20.0,
+					"elemental_increased": 0.0,
+					"evasion": 483.6,
+					"evasion_increased": 0.0,
+					"fire_dot_multiplier_add": 0.0,
+					"fire_increased": 0.0,
+					"fire_resistance": 0.4,
+					"flask_charges_gained_increased": 0.0,
+					"flask_life_recovery_increased": 0.0,
+					"flask_mana_recovery_increased": 0.0,
+					"global_increased": 0.0,
+					"intelligence": 20.0,
+					"life_leech_max_rate_increased": 0.0,
+					"life_leech_rate_increased": 0.0,
+					"life_regen": 0.0,
+					"life_regen_percent": 0.0,
+					"lightning_increased": 0.0,
+					"lightning_resistance": 0.25,
+					"mana_cost_efficiency_increased": 0.0,
+					"mana_cost_increased": 0.0,
+					"mana_leech_max_rate_increased": 0.0,
+					"mana_leech_rate_increased": 0.0,
+					"mana_regen": 12.0,
+					"mana_regen_increased": 0.0,
+					"max_health": 138.0,
+					"max_mana": 140.0,
+					"max_shield": 83.64,
+					"maximum_cold_resistance_add": 0.0,
+					"maximum_fire_resistance_add": 0.0,
+					"maximum_lightning_resistance_add": 0.0,
+					"melee_area_size_increased": 0.0,
+					"melee_crit_chance_increased": 0.0,
+					"melee_crit_multiplier_add": 0.0,
+					"melee_physical_increased": 0.04,
+					"move_speed": 240.0,
+					"move_speed_increased": 0.0,
+					"physical_attack_life_leech": 0.0,
+					"physical_attack_mana_leech": 0.0,
+					"physical_increased": 0.0,
+					"projectile_attack_crit_chance_increased": 0.0,
+					"projectile_attack_crit_multiplier_add": 0.0,
+					"projectile_count": 0.0,
+					"projectile_increased": 0.0,
+					"projectile_speed_increased": 0.0,
+					"resolute_technique": 0.0,
+					"shield_recharge_delay": 4.0,
+					"shield_recharge_rate": 13.0,
+					"shield_recharge_rate_increased": 0.0,
+					"shield_recharge_start_faster": 0.0,
+					"shield_regen": 13.0,
+					"spell_added_cold": 0.0,
+					"spell_added_lightning": 0.0,
+					"spell_area_size_increased": 0.0,
+					"spell_crit_chance_increased": 0.0,
+					"spell_crit_multiplier_add": 0.0,
+					"spell_increased": 0.0,
+					"strength": 20.0
+				},
+				"whole_build_valid": true
+			},
+			"rootwell": {
+				"class_id": 0,
+				"definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"前缀 · 铁革 T3：护甲 +120",
+						"前缀 · 雾织 T3：闪避值 +450",
+						"前缀 · 根泉 T3：最大生命 +32",
+						"后缀 · 护火 T3：火焰抗性 +25%",
+						"后缀 · 护寒 T3：冰霜抗性 +25%",
+						"后缀 · 护雷 T3：闪电抗性 +25%"
+					],
+					"base_id": "emberhide_vest",
+					"base_name": "灰烬皮甲",
+					"description": "最大生命 +8，火焰抗性 +15%。火焰抗性降低火焰命中与燃烧伤害；默认上限75%，最大抗性天赋可提高至本游戏安全上限83%，仍需另外取得足够原始抗性。\n前缀 · 铁革 T3：护甲 +120\n前缀 · 雾织 T3：闪避值 +450\n前缀 · 根泉 T3：最大生命 +32\n后缀 · 护火 T3：火焰抗性 +25%\n后缀 · 护寒 T3：冰霜抗性 +25%\n后缀 · 护雷 T3：闪电抗性 +25%",
+					"effects": [],
+					"id": "gear_000004",
+					"item_level": 16,
+					"name": "稀有 · 灰烬皮甲",
+					"rarity": "rare",
+					"size": [
+						2,
+						3
+					],
+					"slot": "armor",
+					"stats": {
+						"armour": 120.0,
+						"cold_resistance": 0.25,
+						"evasion": 450.0,
+						"fire_resistance": 0.4,
+						"lightning_resistance": 0.25,
+						"max_health": 40.0
+					}
+				},
+				"instance": {
+					"affixes": [
+						{
+							"id": "ironhide",
+							"tier": 3,
+							"value": 120
+						},
+						{
+							"id": "mistweave",
+							"tier": 3,
+							"value": 450
+						},
+						{
+							"id": "rootwell",
+							"tier": 3,
+							"value": 32
+						},
+						{
+							"id": "emberward",
+							"tier": 3,
+							"value": 25
+						},
+						{
+							"id": "rimeward",
+							"tier": 3,
+							"value": 25
+						},
+						{
+							"id": "stormward",
+							"tier": 3,
+							"value": 25
+						}
+					],
+					"base_id": "emberhide_vest",
+					"id": "gear_000004",
+					"item_level": 16,
+					"rarity": "rare"
+				},
+				"save_attempts": 0,
+				"stats": {
+					"accuracy": 140.0,
+					"accuracy_increased": 0.0,
+					"additional_skill_slots": 0.0,
+					"area_increased": 0.0,
+					"area_size_increased": 0.0,
+					"armour": 120.0,
+					"armour_increased": 0.0,
+					"attack_added_fire": 0.0,
+					"attack_added_physical": 0.0,
+					"attack_crit_chance_increased": 0.0,
+					"attack_elemental_increased": 0.0,
+					"attack_life_leech": 0.0,
+					"attack_mana_leech": 0.0,
+					"attack_physical_increased": 0.0,
+					"attack_speed": 1.7,
+					"attack_speed_increased": 0.0,
+					"chaos_increased": 0.0,
+					"cold_increased": 0.0,
+					"cold_resistance": 0.25,
+					"crit_base_chance": 0.05,
+					"crit_base_multiplier": 1.5,
+					"crit_chance_increased": 0.0,
+					"crit_multiplier_add": 0.0,
+					"damage": 26.0,
+					"damage_taken_from_mana_before_life": 0.0,
+					"damaging_ailments_faster": 0.0,
+					"dexterity": 20.0,
+					"elemental_increased": 0.0,
+					"evasion": 483.6,
+					"evasion_increased": 0.0,
+					"fire_dot_multiplier_add": 0.0,
+					"fire_increased": 0.0,
+					"fire_resistance": 0.4,
+					"flask_charges_gained_increased": 0.0,
+					"flask_life_recovery_increased": 0.0,
+					"flask_mana_recovery_increased": 0.0,
+					"global_increased": 0.0,
+					"intelligence": 20.0,
+					"life_leech_max_rate_increased": 0.0,
+					"life_leech_rate_increased": 0.0,
+					"life_regen": 0.0,
+					"life_regen_percent": 0.0,
+					"lightning_increased": 0.0,
+					"lightning_resistance": 0.25,
+					"mana_cost_efficiency_increased": 0.0,
+					"mana_cost_increased": 0.0,
+					"mana_leech_max_rate_increased": 0.0,
+					"mana_leech_rate_increased": 0.0,
+					"mana_regen": 12.0,
+					"mana_regen_increased": 0.0,
+					"max_health": 170.0,
+					"max_mana": 140.0,
+					"max_shield": 61.2,
+					"maximum_cold_resistance_add": 0.0,
+					"maximum_fire_resistance_add": 0.0,
+					"maximum_lightning_resistance_add": 0.0,
+					"melee_area_size_increased": 0.0,
+					"melee_crit_chance_increased": 0.0,
+					"melee_crit_multiplier_add": 0.0,
+					"melee_physical_increased": 0.04,
+					"move_speed": 240.0,
+					"move_speed_increased": 0.0,
+					"physical_attack_life_leech": 0.0,
+					"physical_attack_mana_leech": 0.0,
+					"physical_increased": 0.0,
+					"projectile_attack_crit_chance_increased": 0.0,
+					"projectile_attack_crit_multiplier_add": 0.0,
+					"projectile_count": 0.0,
+					"projectile_increased": 0.0,
+					"projectile_speed_increased": 0.0,
+					"resolute_technique": 0.0,
+					"shield_recharge_delay": 4.0,
+					"shield_recharge_rate": 13.0,
+					"shield_recharge_rate_increased": 0.0,
+					"shield_recharge_start_faster": 0.0,
+					"shield_regen": 13.0,
+					"spell_added_cold": 0.0,
+					"spell_added_lightning": 0.0,
+					"spell_area_size_increased": 0.0,
+					"spell_crit_chance_increased": 0.0,
+					"spell_crit_multiplier_add": 0.0,
+					"spell_increased": 0.0,
+					"strength": 20.0
+				},
+				"whole_build_valid": true
+			},
+			"white_base": {
+				"class_id": 0,
+				"definition": {
+					"added_sources": [],
+					"affix_lines": [],
+					"base_id": "emberhide_vest",
+					"base_name": "灰烬皮甲",
+					"description": "最大生命 +8，火焰抗性 +15%。火焰抗性降低火焰命中与燃烧伤害；默认上限75%，最大抗性天赋可提高至本游戏安全上限83%，仍需另外取得足够原始抗性。",
+					"effects": [],
+					"id": "gear_000004",
+					"item_level": 16,
+					"name": "普通 · 灰烬皮甲",
+					"rarity": "normal",
+					"size": [
+						2,
+						3
+					],
+					"slot": "armor",
+					"stats": {
+						"fire_resistance": 0.15,
+						"max_health": 8.0
+					}
+				},
+				"instance": {
+					"affixes": [],
+					"base_id": "emberhide_vest",
+					"id": "gear_000004",
+					"item_level": 16,
+					"rarity": "normal"
+				},
+				"save_attempts": 0,
+				"stats": {
+					"accuracy": 140.0,
+					"accuracy_increased": 0.0,
+					"additional_skill_slots": 0.0,
+					"area_increased": 0.0,
+					"area_size_increased": 0.0,
+					"armour": 0.0,
+					"armour_increased": 0.0,
+					"attack_added_fire": 0.0,
+					"attack_added_physical": 0.0,
+					"attack_crit_chance_increased": 0.0,
+					"attack_elemental_increased": 0.0,
+					"attack_life_leech": 0.0,
+					"attack_mana_leech": 0.0,
+					"attack_physical_increased": 0.0,
+					"attack_speed": 1.7,
+					"attack_speed_increased": 0.0,
+					"chaos_increased": 0.0,
+					"cold_increased": 0.0,
+					"cold_resistance": 0.0,
+					"crit_base_chance": 0.05,
+					"crit_base_multiplier": 1.5,
+					"crit_chance_increased": 0.0,
+					"crit_multiplier_add": 0.0,
+					"damage": 26.0,
+					"damage_taken_from_mana_before_life": 0.0,
+					"damaging_ailments_faster": 0.0,
+					"dexterity": 20.0,
+					"elemental_increased": 0.0,
+					"evasion": 15.600000000000001,
+					"evasion_increased": 0.0,
+					"fire_dot_multiplier_add": 0.0,
+					"fire_increased": 0.0,
+					"fire_resistance": 0.15,
+					"flask_charges_gained_increased": 0.0,
+					"flask_life_recovery_increased": 0.0,
+					"flask_mana_recovery_increased": 0.0,
+					"global_increased": 0.0,
+					"intelligence": 20.0,
+					"life_leech_max_rate_increased": 0.0,
+					"life_leech_rate_increased": 0.0,
+					"life_regen": 0.0,
+					"life_regen_percent": 0.0,
+					"lightning_increased": 0.0,
+					"lightning_resistance": 0.0,
+					"mana_cost_efficiency_increased": 0.0,
+					"mana_cost_increased": 0.0,
+					"mana_leech_max_rate_increased": 0.0,
+					"mana_leech_rate_increased": 0.0,
+					"mana_regen": 12.0,
+					"mana_regen_increased": 0.0,
+					"max_health": 138.0,
+					"max_mana": 140.0,
+					"max_shield": 61.2,
+					"maximum_cold_resistance_add": 0.0,
+					"maximum_fire_resistance_add": 0.0,
+					"maximum_lightning_resistance_add": 0.0,
+					"melee_area_size_increased": 0.0,
+					"melee_crit_chance_increased": 0.0,
+					"melee_crit_multiplier_add": 0.0,
+					"melee_physical_increased": 0.04,
+					"move_speed": 240.0,
+					"move_speed_increased": 0.0,
+					"physical_attack_life_leech": 0.0,
+					"physical_attack_mana_leech": 0.0,
+					"physical_increased": 0.0,
+					"projectile_attack_crit_chance_increased": 0.0,
+					"projectile_attack_crit_multiplier_add": 0.0,
+					"projectile_count": 0.0,
+					"projectile_increased": 0.0,
+					"projectile_speed_increased": 0.0,
+					"resolute_technique": 0.0,
+					"shield_recharge_delay": 4.0,
+					"shield_recharge_rate": 13.0,
+					"shield_recharge_rate_increased": 0.0,
+					"shield_recharge_start_faster": 0.0,
+					"shield_regen": 13.0,
+					"spell_added_cold": 0.0,
+					"spell_added_lightning": 0.0,
+					"spell_area_size_increased": 0.0,
+					"spell_crit_chance_increased": 0.0,
+					"spell_crit_multiplier_add": 0.0,
+					"spell_increased": 0.0,
+					"strength": 20.0
+				},
+				"whole_build_valid": true
+			}
+		},
+		"legacy_scope": "新canonical_v39只替换原10%防御入口；其余六分池权重与顺序保持。显式旧defense、defense_v37、canonical_v37及设备词汇1–38保留历史输出、拒绝语义与随机状态",
+		"loot_profile": [
+			{
+				"pool_id": "build_legacy_v27",
+				"weight": 25
+			},
+			{
+				"pool_id": "runewood",
+				"weight": 20
+			},
+			{
+				"pool_id": "defense_v39",
+				"weight": 10
+			},
+			{
+				"pool_id": "local_weapon",
+				"weight": 10
+			},
+			{
+				"pool_id": "build_nine_slot_v27",
+				"weight": 30
+			},
+			{
+				"pool_id": "forgeblade_v34",
+				"weight": 5
+			}
+		],
+		"loot_profile_id": "canonical_v39",
+		"migration": "schema39严格验证旧38并原字节备份，只升级版本；旧物品、UID、点数、货币与旅程保持，不补词或重掷。源政策仍38，schema37/38映射旧装备词汇37",
+		"minimum_save_version": 39,
+		"new_families": {
+			"ironhide": {
+				"actors": [
+					"player",
+					"monster"
+				],
+				"allowed_base_ids": [
+					"emberhide_vest"
+				],
+				"group": "armour_rating",
+				"kind": "prefix",
+				"label": "护甲",
+				"name": "铁革",
+				"scope": "equipped_character",
+				"slots": [
+					"armor"
+				],
+				"stage": "hit_mitigation",
+				"stat": "armour",
+				"tiers": [
+					{
+						"level": 1,
+						"max": 50,
+						"min": 30,
+						"tier": 1,
+						"weight": 100
+					},
+					{
+						"level": 8,
+						"max": 80,
+						"min": 55,
+						"tier": 2,
+						"weight": 60
+					},
+					{
+						"level": 16,
+						"max": 120,
+						"min": 85,
+						"tier": 3,
+						"weight": 30
+					}
+				],
+				"unit": "flat"
+			},
+			"mistweave": {
+				"actors": [
+					"player",
+					"monster"
+				],
+				"allowed_base_ids": [
+					"emberhide_vest"
+				],
+				"group": "evasion_rating",
+				"kind": "prefix",
+				"label": "闪避值",
+				"name": "雾织",
+				"scope": "equipped_character",
+				"slots": [
+					"armor"
+				],
+				"stage": "hit_admission",
+				"stat": "evasion",
+				"tiers": [
+					{
+						"level": 1,
+						"max": 260,
+						"min": 200,
+						"tier": 1,
+						"weight": 100
+					},
+					{
+						"level": 8,
+						"max": 350,
+						"min": 270,
+						"tier": 2,
+						"weight": 60
+					},
+					{
+						"level": 16,
+						"max": 450,
+						"min": 360,
+						"tier": 3,
+						"weight": 30
+					}
+				],
+				"unit": "flat"
+			}
+		},
+		"new_images": [],
+		"pool": {
+			"affix_ids": [
+				"rootwell",
+				"deepwell",
+				"lanternveil",
+				"coalglow",
+				"rimeecho",
+				"sparkthread",
+				"wellturn",
+				"trailstep",
+				"emberward",
+				"rimeward",
+				"stormward",
+				"ironhide",
+				"mistweave"
+			],
+			"base_ids": [
+				"emberhide_vest"
+			],
+			"min_save_version": 39
+		},
+		"pool_id": "defense_v39",
+		"prefix_families": [
+			"rootwell",
+			"deepwell",
+			"lanternveil",
+			"ironhide",
+			"mistweave"
+		],
+		"producer": "EquipmentCatalog → validated Canonical.get_stats → SourceTree.apply_stats → AttackHitRules / DefenseRules",
+		"rarities": {
+			"magic": {
+				"color": "#8eb8ff",
+				"max_affixes": 2,
+				"max_prefixes": 1,
+				"max_suffixes": 1,
+				"min_affixes": 1,
+				"name": "魔法",
+				"weight": 55
+			},
+			"normal": {
+				"color": "#e1e7ef",
+				"max_affixes": 0,
+				"max_prefixes": 0,
+				"max_suffixes": 0,
+				"min_affixes": 0,
+				"name": "普通",
+				"weight": 30
+			},
+			"rare": {
+				"color": "#e9ce7c",
+				"max_affixes": 6,
+				"max_prefixes": 3,
+				"max_suffixes": 3,
+				"min_affixes": 4,
+				"name": "稀有",
+				"weight": 15
+			}
+		},
+		"rating_order": "装备与珠宝、源天赋固定值先加到角色原始基数，再由源天赋执行器统一提高一次；护甲不是本地防具倍率，闪避还读取合计敏捷",
+		"scope": "护甲只降低物理命中；闪避只决定attack命中准入，物理与元素攻击均可躲避。非attack命中与持续燃烧不读闪避；已有燃烧不会因提高双防御而消失",
+		"scope_hits": {
+			"chaos": {
+				"after": {
+					"actor": "player",
+					"armour": 120.0,
+					"components": {
+						"chaos": 100.0
+					},
+					"damage_total": 100.0,
+					"details": [
+						{
+							"base": 100.0,
+							"before_defense": 100.0,
+							"final": 100.0,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "chaos"
+						}
+					],
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"health_lost": 100.0,
+					"mitigated_components": {
+						"chaos": 0.0
+					},
+					"ok": true,
+					"overkill": 0.0,
+					"raw_components": {
+						"chaos": 100.0
+					},
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"remaining_health": 900.0,
+					"remaining_shield": 0.0,
+					"shield_spent": 0.0,
+					"stage": "hit_mitigation"
+				},
+				"before": {
+					"actor": "player",
+					"armour": 0.0,
+					"components": {
+						"chaos": 100.0
+					},
+					"damage_total": 100.0,
+					"details": [
+						{
+							"base": 100.0,
+							"before_defense": 100.0,
+							"final": 100.0,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "chaos"
+						}
+					],
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"health_lost": 100.0,
+					"mitigated_components": {
+						"chaos": 0.0
+					},
+					"ok": true,
+					"overkill": 0.0,
+					"raw_components": {
+						"chaos": 100.0
+					},
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"remaining_health": 900.0,
+					"remaining_shield": 0.0,
+					"shield_spent": 0.0,
+					"stage": "hit_mitigation"
+				}
+			},
+			"cold": {
+				"after": {
+					"actor": "player",
+					"armour": 120.0,
+					"components": {
+						"cold": 100.0
+					},
+					"damage_total": 100.0,
+					"details": [
+						{
+							"base": 100.0,
+							"before_defense": 100.0,
+							"final": 100.0,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "cold"
+						}
+					],
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"health_lost": 100.0,
+					"mitigated_components": {
+						"cold": 0.0
+					},
+					"ok": true,
+					"overkill": 0.0,
+					"raw_components": {
+						"cold": 100.0
+					},
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"remaining_health": 900.0,
+					"remaining_shield": 0.0,
+					"shield_spent": 0.0,
+					"stage": "hit_mitigation"
+				},
+				"before": {
+					"actor": "player",
+					"armour": 0.0,
+					"components": {
+						"cold": 100.0
+					},
+					"damage_total": 100.0,
+					"details": [
+						{
+							"base": 100.0,
+							"before_defense": 100.0,
+							"final": 100.0,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "cold"
+						}
+					],
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"health_lost": 100.0,
+					"mitigated_components": {
+						"cold": 0.0
+					},
+					"ok": true,
+					"overkill": 0.0,
+					"raw_components": {
+						"cold": 100.0
+					},
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"remaining_health": 900.0,
+					"remaining_shield": 0.0,
+					"shield_spent": 0.0,
+					"stage": "hit_mitigation"
+				}
+			},
+			"fire": {
+				"after": {
+					"actor": "player",
+					"armour": 120.0,
+					"components": {
+						"fire": 100.0
+					},
+					"damage_total": 100.0,
+					"details": [
+						{
+							"base": 100.0,
+							"before_defense": 100.0,
+							"final": 100.0,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "fire"
+						}
+					],
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"health_lost": 100.0,
+					"mitigated_components": {
+						"fire": 0.0
+					},
+					"ok": true,
+					"overkill": 0.0,
+					"raw_components": {
+						"fire": 100.0
+					},
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"remaining_health": 900.0,
+					"remaining_shield": 0.0,
+					"shield_spent": 0.0,
+					"stage": "hit_mitigation"
+				},
+				"before": {
+					"actor": "player",
+					"armour": 0.0,
+					"components": {
+						"fire": 100.0
+					},
+					"damage_total": 100.0,
+					"details": [
+						{
+							"base": 100.0,
+							"before_defense": 100.0,
+							"final": 100.0,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "fire"
+						}
+					],
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"health_lost": 100.0,
+					"mitigated_components": {
+						"fire": 0.0
+					},
+					"ok": true,
+					"overkill": 0.0,
+					"raw_components": {
+						"fire": 100.0
+					},
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"remaining_health": 900.0,
+					"remaining_shield": 0.0,
+					"shield_spent": 0.0,
+					"stage": "hit_mitigation"
+				}
+			},
+			"lightning": {
+				"after": {
+					"actor": "player",
+					"armour": 120.0,
+					"components": {
+						"lightning": 100.0
+					},
+					"damage_total": 100.0,
+					"details": [
+						{
+							"base": 100.0,
+							"before_defense": 100.0,
+							"final": 100.0,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "lightning"
+						}
+					],
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"health_lost": 100.0,
+					"mitigated_components": {
+						"lightning": 0.0
+					},
+					"ok": true,
+					"overkill": 0.0,
+					"raw_components": {
+						"lightning": 100.0
+					},
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"remaining_health": 900.0,
+					"remaining_shield": 0.0,
+					"shield_spent": 0.0,
+					"stage": "hit_mitigation"
+				},
+				"before": {
+					"actor": "player",
+					"armour": 0.0,
+					"components": {
+						"lightning": 100.0
+					},
+					"damage_total": 100.0,
+					"details": [
+						{
+							"base": 100.0,
+							"before_defense": 100.0,
+							"final": 100.0,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "lightning"
+						}
+					],
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"health_lost": 100.0,
+					"mitigated_components": {
+						"lightning": 0.0
+					},
+					"ok": true,
+					"overkill": 0.0,
+					"raw_components": {
+						"lightning": 100.0
+					},
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"remaining_health": 900.0,
+					"remaining_shield": 0.0,
+					"shield_spent": 0.0,
+					"stage": "hit_mitigation"
+				}
+			},
+			"physical": {
+				"after": {
+					"actor": "player",
+					"armour": 120.0,
+					"components": {
+						"physical": 80.64516129032258
+					},
+					"damage_total": 80.64516129032258,
+					"details": [
+						{
+							"base": 100.0,
+							"before_defense": 100.0,
+							"final": 80.64516129032258,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.1935483870967742,
+							"type": "physical"
+						}
+					],
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"health_lost": 80.64516129032258,
+					"mitigated_components": {
+						"physical": 19.354838709677423
+					},
+					"ok": true,
+					"overkill": 0.0,
+					"raw_components": {
+						"physical": 100.0
+					},
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"remaining_health": 919.3548387096774,
+					"remaining_shield": 0.0,
+					"shield_spent": 0.0,
+					"stage": "hit_mitigation"
+				},
+				"before": {
+					"actor": "player",
+					"armour": 0.0,
+					"components": {
+						"physical": 100.0
+					},
+					"damage_total": 100.0,
+					"details": [
+						{
+							"base": 100.0,
+							"before_defense": 100.0,
+							"final": 100.0,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "physical"
+						}
+					],
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"health_lost": 100.0,
+					"mitigated_components": {
+						"physical": 0.0
+					},
+					"ok": true,
+					"overkill": 0.0,
+					"raw_components": {
+						"physical": 100.0
+					},
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"remaining_health": 900.0,
+					"remaining_shield": 0.0,
+					"shield_spent": 0.0,
+					"stage": "hit_mitigation"
+				}
+			}
+		},
+		"source_policy": 38,
+		"tier_boundaries": {
+			"1": {
+				"ironhide": [
+					1
+				],
+				"mistweave": [
+					1
+				]
+			},
+			"15": {
+				"ironhide": [
+					1,
+					2
+				],
+				"mistweave": [
+					1,
+					2
+				]
+			},
+			"16": {
+				"ironhide": [
+					1,
+					2,
+					3
+				],
+				"mistweave": [
+					1,
+					2,
+					3
+				]
+			},
+			"30": {
+				"ironhide": [
+					1,
+					2,
+					3
+				],
+				"mistweave": [
+					1,
+					2,
+					3
+				]
+			},
+			"7": {
+				"ironhide": [
+					1
+				],
+				"mistweave": [
+					1
+				]
+			},
+			"8": {
+				"ironhide": [
+					1,
+					2
+				],
+				"mistweave": [
+					1,
+					2
+				]
+			}
+		},
+		"tradeoff": "五个前缀族争三个名额。双防御配生命会放弃魔力、护盾前缀；改配魔力或护盾则放弃生命前缀。三抗仍占满后缀，与伤害、魔力恢复和移速竞争",
+		"vocabulary": 39
+	},
 	"defenses": {
 		"fire_resistance": {
 			"balance_version": "original-fire-defense-v1",
@@ -12189,6 +14673,8 @@
 		}
 	},
 	"elemental_defense_affixes": {
+		"authored_pool_id": "defense_v37",
+		"authored_vocabulary": 37,
 		"base_id": "emberhide_vest",
 		"budget_scope": "单件胸甲合法六词顶值演算；不是掉落保证、免费成装、全局最优或完整构筑平衡结论",
 		"damage_target_families": [
@@ -13220,19 +15706,19 @@
 				"sample": {
 					"affixes": [
 						{
-							"id": "lanternveil",
+							"id": "ironhide",
 							"tier": 1,
-							"value": 8
+							"value": 31
 						},
 						{
-							"id": "rootwell",
+							"id": "lanternveil",
 							"tier": 2,
-							"value": 18
+							"value": 13
 						},
 						{
-							"id": "deepwell",
+							"id": "mistweave",
 							"tier": 2,
-							"value": 12
+							"value": 347
 						},
 						{
 							"id": "rimeecho",
@@ -13328,9 +15814,9 @@
 				"sample": {
 					"affixes": [
 						{
-							"id": "lanternveil",
+							"id": "ironhide",
 							"tier": 2,
-							"value": 14
+							"value": 61
 						},
 						{
 							"id": "deepwell",
@@ -13437,19 +15923,19 @@
 				"sample": {
 					"affixes": [
 						{
-							"id": "lanternveil",
+							"id": "ironhide",
 							"tier": 1,
-							"value": 8
+							"value": 31
 						},
 						{
-							"id": "rootwell",
+							"id": "lanternveil",
 							"tier": 2,
-							"value": 18
+							"value": 13
 						},
 						{
-							"id": "deepwell",
+							"id": "mistweave",
 							"tier": 2,
-							"value": 12
+							"value": 347
 						},
 						{
 							"id": "rimeecho",
@@ -13485,7 +15971,7 @@
 				"weight": 20
 			},
 			{
-				"pool_id": "defense_v37",
+				"pool_id": "defense_v39",
 				"weight": 10
 			},
 			{
@@ -13501,7 +15987,7 @@
 				"weight": 5
 			}
 		],
-		"loot_profile_id": "canonical_v37",
+		"loot_profile_id": "canonical_v39",
 		"migration": "schema37严格校验旧36并保留原字节备份后仅迁版本；旧装备不自动重掷、补词或换UID，天赋源政策仍36",
 		"minimum_save_version": 37,
 		"new_families": {
@@ -13719,14 +16205,16 @@
 				"trailstep",
 				"emberward",
 				"rimeward",
-				"stormward"
+				"stormward",
+				"ironhide",
+				"mistweave"
 			],
 			"base_ids": [
 				"emberhide_vest"
 			],
-			"min_save_version": 37
+			"min_save_version": 39
 		},
-		"pool_id": "defense_v37",
+		"pool_id": "defense_v39",
 		"producer": "EquipmentCatalog → canonical validated in-memory equipment location → Canonical.get_resistance_profile → Defense.incoming_source_hit",
 		"rarities": {
 			"magic": {
@@ -13757,6 +16245,7 @@
 				"weight": 15
 			}
 		},
+		"reforge_vocabulary": 37,
 		"slot_targets": [
 			"body_armour"
 		],
@@ -13883,7 +16372,7 @@
 			}
 		},
 		"tradeoff": "三抗占满三个后缀，放弃元素增伤、魔力恢复与移速；伤害定向重铸保证一个真实伤害后缀，不能同时保留三抗",
-		"vocabulary": 37
+		"vocabulary": 39
 	},
 	"elemental_encounters": {
 		"balance_source": "original_game_balance",
@@ -21579,7 +24068,9 @@
 				"trailstep",
 				"emberward",
 				"rimeward",
-				"stormward"
+				"stormward",
+				"ironhide",
+				"mistweave"
 			],
 			"name": "灰烬皮甲",
 			"pool": "defense",
@@ -22053,6 +24544,27 @@
 				"emberhide_vest"
 			],
 			"min_save_version": 37
+		},
+		"defense_v39": {
+			"affix_ids": [
+				"rootwell",
+				"deepwell",
+				"lanternveil",
+				"coalglow",
+				"rimeecho",
+				"sparkthread",
+				"wellturn",
+				"trailstep",
+				"emberward",
+				"rimeward",
+				"stormward",
+				"ironhide",
+				"mistweave"
+			],
+			"base_ids": [
+				"emberhide_vest"
+			],
+			"min_save_version": 39
 		},
 		"forgeblade_v34": {
 			"affix_ids": [
@@ -23265,7 +25777,7 @@
 				"weight": 20
 			},
 			{
-				"pool_id": "defense_v37",
+				"pool_id": "defense_v39",
 				"weight": 10
 			},
 			{
@@ -23281,7 +25793,7 @@
 				"weight": 5
 			}
 		],
-		"current_loot_profile_id": "canonical_v37",
+		"current_loot_profile_id": "canonical_v39",
 		"example_scope": "真实合法装备实例→目录派生属性与武器profile→实际编译器；隔离B18、基础暴击5%/150%，无职业三属性、天赋、其他装备或辅助。不是默认角色伤害或实战DPS。",
 		"examples": {
 			"dual_t1_max": {
@@ -32550,7 +35062,7 @@
 		"pool_id": "forgeblade_v34",
 		"save_version": 34
 	},
-	"game_version": "0.61.0",
+	"game_version": "0.62.0",
 	"jewel_affixes": {
 		"barrier": {
 			"kind": "prefix",
@@ -32843,6 +35355,32 @@
 			},
 			{
 				"pool_id": "defense_v37",
+				"weight": 10
+			},
+			{
+				"pool_id": "local_weapon",
+				"weight": 10
+			},
+			{
+				"pool_id": "build_nine_slot_v27",
+				"weight": 30
+			},
+			{
+				"pool_id": "forgeblade_v34",
+				"weight": 5
+			}
+		],
+		"canonical_v39": [
+			{
+				"pool_id": "build_legacy_v27",
+				"weight": 25
+			},
+			{
+				"pool_id": "runewood",
+				"weight": 20
+			},
+			{
+				"pool_id": "defense_v39",
 				"weight": 10
 			},
 			{
@@ -38658,7 +41196,7 @@
 			"max_targets": 1,
 			"radius": 60.0
 		},
-		"save_version": 38,
+		"save_version": 39,
 		"scope": "hit + attack + melee；不含area，不受范围或投射物速度提高，也不占投射物容量，无返回或飞行结束爆炸。",
 		"timing": "沿用attack_timer与当前attack_speed；没有独立技能冷却或魔力支付。"
 	},
@@ -41543,7 +44081,7 @@
 		"quality": 0,
 		"recycle_credit": 1,
 		"recycle_location": "bag",
-		"schema": 38,
+		"schema": 39,
 		"test_supply_separate": true
 	},
 	"normal_journey": {
@@ -46722,7 +49260,7 @@
 			"reason": ""
 		},
 		"defense_scope": "护甲500与原始三抗100%为既有防御规则的隔离输入；按当前默认75%上限结算，不代表新增怪物或平衡调整",
-		"equipment_vocabulary": 37,
+		"equipment_vocabulary": 39,
 		"example_scope": "同一7级野蛮人合法路径，仅比较最后1点；两边都装备已有棱光长弓和终焰护符。技能按该角色快照无辅助编译，不宣称同时装配；预期值是一次尝试的统计比较，不是实战DPS",
 		"examples": {
 			"after": {
@@ -50452,7 +52990,7 @@
 		},
 		"timing": "施放时冻结；分配、退款和换装只影响新施放，旧飞行、母子箭、返回与独立爆炸保持各自快照"
 	},
-	"save_version": 38,
+	"save_version": 39,
 	"schema_version": 3,
 	"sectors": [
 		{
@@ -508225,7 +510763,7 @@
 			}
 		},
 		"roster_scope": "只展示原抽签为基础物种的按位替换；灰烬保留名额，分裂体与母巢保留原抽签且占用序号；稀有度、机制与奖励不变；所选巡逻词缀最后按编排物种替换",
-		"save_version": 38,
+		"save_version": 39,
 		"spawn_seconds": 0.6,
 		"tiers": [
 			{
@@ -512535,7 +515073,7 @@
 		},
 		"reserved_character_key": "C",
 		"retired_profile_writes": false,
-		"save_version": 38,
+		"save_version": 39,
 		"services": [
 			{
 				"description": "免费测试供应全部已实现主动与辅助宝石。",

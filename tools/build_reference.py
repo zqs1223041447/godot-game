@@ -22,8 +22,10 @@ RULE_TITLES['melee_basic'] = '短刃近战普攻与裂刃衔接'
 RULE_TITLES['mana_guard'] = '心灵升华与魔力先承伤'
 RULE_TITLES['elemental_resistance_caps'] = '三元素最大抗性与有效抗性'
 RULE_TITLES['elemental_defense_affixes'] = '灰烬皮甲与原始三抗供给'
+RULE_TITLES['defense_rating_affixes'] = '灰烬皮甲：护甲、闪避与前缀取舍'
 RULE_TITLES['resolute_technique'] = '坚决技艺：稳定命中与暴击取舍'
-TYPES['defense_v37'] = '三抗防具池'
+TYPES['defense_v37'] = '历史三抗防具池'
+TYPES['defense_v39'] = '护甲闪避与三抗防具池'
 
 def esc(value): return html.escape(str(value), quote=True)
 def lines(value): return '<br>'.join(esc(value).split('\n'))
@@ -326,13 +328,14 @@ def elemental_defense_affix_rule(data, link, facts, details):
     def value(key, amount, ratio=False):
         return f'<strong data-elemental-affix-value="{esc(key)}" data-value="{esc(amount)}">{percent(amount) if ratio else number(amount)}</strong>'
     body='<p>护寒、护雷是原始冰霜/闪电抗性后缀，只能出现在 '+link('equipment',supply['base_id'])+'，由同一装备formatter显示百分比；不会提高最大抗性，也不新增珠宝、装备位或底材。</p>'
-    body+=facts([('当前装备词汇',value('vocabulary',supply['vocabulary'])),('存档版本',value('save-version',supply['minimum_save_version'])),('天赋源政策',value('source-policy',supply['source_policy'])),('可穿胸甲数',value('body-slots',len(supply['slot_targets']))),('当前词池',esc(supply['pool_id']))])
+    body+=facts([('当前装备词汇',value('vocabulary',supply['vocabulary'])),('三抗引入版本',value('save-version',supply['minimum_save_version'])),('天赋源政策',value('source-policy',supply['source_policy'])),('可穿胸甲数',value('body-slots',len(supply['slot_targets']))),('当前词池',esc(supply['pool_id']))])
     rows=[]
     for key,family in supply['new_families'].items():
         for tier,ranges in zip(family['tiers'],data['affixes'][key]['formatted_ranges']):
             stem=key+'-'+str(tier['tier'])
             rows.append('<tr><th>'+link('affixes',key)+'</th><td>T'+value(stem+'-tier',tier['tier'])+'</td><td>'+value(stem+'-level',tier['level'])+'</td><td>'+esc(family['label']+' '+ranges['min']+' ～ '+ranges['max'])+'</td><td>'+value(stem+'-weight',tier['weight'])+'</td></tr>')
     body+='<h3>同源档位与资格</h3><p>同族或同组不能重复，高物品等级仍可出低阶。整数25经实际目录只换算一次为25%，不会变成2500%或0.25%。白装无词缀；蓝装最多1前1后，冷电两个后缀不能同时存在；金装4–6词，最多3前3后。</p><div class="table-scroll"><table><thead><tr><th>族</th><th>档</th><th>最低物品等级</th><th>实际显示范围</th><th>候选权重</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
+    body+='<p>当前词池已扩为护甲、闪避与生命、魔力、护盾五个前缀族争三个名额，见 '+link('rules','defense_rating_affixes')+'。下表保留v0.60原三资源与三抗六词预算，仍合法，但不是唯一满前缀组合。</p>'
     body+='<h3>一件胸甲的真实预算</h3><p>'+esc(supply['budget_scope'])+'。生命、魔力、护盾为该物品含底材的加值；三抗读取装备所在合法角色的权威profile，默认上限仍75%。</p>'
     labels={'white_base':'测试供应白底材','six_max':'六词T3顶值','mana_recovery':'以泉旋替换护火'}
     rows=[]
@@ -350,14 +353,61 @@ def elemental_defense_affix_rule(data, link, facts, details):
         rows.append('<tr><th>'+label+'</th>'+''.join('<td>'+value(key+'-'+element+'-gap',full['additional_raw_required'][key][element],True)+'</td>' for element in ['fire','cold','lightning'])+'</tr>')
     body+='<div class="table-scroll"><table><caption>六词顶值胸甲之外仍须补的原始抗性（百分点）</caption><thead><tr><th>目标</th><th>火</th><th>冰</th><th>电</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div><p>83%目标还须真实分配对应最大抗性天赋；新增后缀不会赠送这些天赋或上限。'+link('rules','elemental_resistance_caps')+'保留73点可达路线，但它不是这件装备的最省点搭配结论。</p>'
     body+='<p>'+esc(supply['tradeoff'])+'。同一胸甲位不能多穿灰烬皮甲补抗。</p><h3>实际取得与制作取舍</h3>'
-    body+='<p>'+esc(supply['supply_scope'])+'。灰烬守卫的逻辑defense在实际奖励入口映射当前三抗池，仍只结算原来的一件奖励；明确调用历史defense保留原结果。</p>'
+    body+='<p>'+esc(supply['supply_scope'])+'。灰烬守卫的逻辑defense在实际奖励入口映射当前防御池，仍只结算原来的一件奖励；明确调用历史defense保留原结果。</p>'
     for map_id,example in supply['formal_map_tier_iii'].items():
         body+='<p>'+link('maps',map_id)+' III：真实奖励物品等级 '+value(map_id+'-ilvl',example['item_level'])+'；合格档位 '+esc(' / '.join('T'+str(t) for t in example['eligible_tiers']))+'。高档可出不等于必出。</p>'
     body+='<p>测试供应仍是白底材，仅有15%火抗；可使用已有真实测试材料制作。赋魔、升格、补缀、普通重铸使用当前池，普通重铸能得到三抗后缀；校准只重掷已有族和档位内数值。</p>'
     witness=supply['ordinary_reforge_witness']
-    body+=details('普通重铸可复验见证','<p>工艺seed '+value('reforge-seed',witness['seed'])+'；由CraftingRules.operation_plan导出以下真实合法结果，不是随机频率或每次成功保证。</p>'+lines('\n'.join(witness['plan']['definition']['affix_lines'])))
+    body+=details('历史v37普通重铸见证','<p>显式历史装备词汇 '+value('reforge-vocabulary',supply['reforge_vocabulary'])+'；工艺seed '+value('reforge-seed',witness['seed'])+'；由CraftingRules.operation_plan导出以下真实合法结果，保留原三抗制作样本；当前池的同seed结果可不同，不是随机频率或每次成功保证。</p>'+lines('\n'.join(witness['plan']['definition']['affix_lines'])))
     body+='<p>伤害定向的合法目标只有 '+ '、'.join(link('affixes',family['id']) for family in supply['damage_target_families'])+'，全是后缀；因此最多再容纳两条抗性。六工艺费用、回收公式与校准seed规则保持，不新增抗性定向按钮。</p>'
     body+='<h3>旧装、历史池与存档</h3><p>'+esc(supply['migration'])+'。旧35/36存档仍映射历史装备词汇34，原接口显式设备词汇35/36仍拒绝；旧36不能注入新族。玩家主动制作才会选择当前池。</p><p><a href="../ELEMENTAL_DEFENSE_AFFIXES.zh-CN.md">完整供给说明与复验入口</a> · '+link('rules','equipment')+' · '+link('crafting','calibration_shard')+'</p>'
+    return body
+
+
+def defense_rating_affix_rule(data,link,facts,details):
+    rule=data['defense_rating_affixes']
+    def value(key,amount,ratio=False):
+        return f'<strong data-defense-rating-value="{esc(key)}" data-value="{esc(amount)}">{percent(amount) if ratio else number(amount)}</strong>'
+    body=facts([('底材',link('equipment',rule['base_id'])),('存档 / 装备词汇 / 源政策',value('save-version',rule['minimum_save_version'])+' / '+value('vocabulary',rule['vocabulary'])+' / '+value('source-policy',rule['source_policy'])),('当前词池',esc(rule['pool_id'])),('当前掉落配置',esc(rule['loot_profile_id']))])
+    body+='<p>'+esc(rule['rating_order'])+'。原始护甲×(1+护甲提高)；原始闪避×(1+闪避提高+每5敏捷的1%)。以下最终数值已经由实际角色计算，网页不再乘算。</p>'
+    rows=[]
+    for key,family in rule['new_families'].items():
+        for tier,ranges in zip(family['tiers'],data['affixes'][key]['formatted_ranges']):
+            stem=key+'-'+str(tier['tier'])
+            rows.append('<tr><th>'+link('affixes',key)+'</th><td>T'+value(stem+'-tier',tier['tier'])+'</td><td>'+value(stem+'-level',tier['level'])+'</td><td>'+value(stem+'-min',tier['min'])+' ～ '+value(stem+'-max',tier['max'])+'</td><td>'+value(stem+'-weight',tier['weight'])+'</td></tr>')
+    body+='<h3>固定值前缀与资格</h3><p>仅灰烬皮甲，端点包含，高物品等级仍可出低阶。白装无词缀，魔法至多1前1后，稀有4–6词至多3前3后；同族或同组不重复。实际显示为“护甲 +X”与“闪避值 +X”，整数点数不除100。</p><div class="table-scroll"><table><thead><tr><th>族</th><th>阶</th><th>最低物品等级</th><th>固定点数</th><th>候选权重</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
+    body+='<h3>五选三：资源不能全拿</h3><p>'+esc(rule['tradeoff'])+'。候选前缀：'+ '、'.join(link('affixes',key) for key in rule['prefix_families'])+'。</p>'
+    labels={'white_base':'白底材','rootwell':'双防御 + 生命','deepwell':'双防御 + 魔力','lanternveil':'双防御 + 护盾'}
+    rows=[]
+    for key,example in rule['examples'].items():
+        item,stats=example['definition']['stats'],example['stats']
+        cells=[value(key+'-item-'+field,item.get(field,0)) for field in ['armour','evasion','max_health','max_mana','max_shield']]
+        cells += [value(key+'-final-'+field,stats[field]) for field in ['armour','evasion']]
+        rows.append('<tr><th>'+esc(labels[key])+'</th>'+''.join('<td>'+cell+'</td>' for cell in cells)+'</tr>')
+    body+='<p>三件金装均用合法T3顶值，后缀同为三抗；默认贵族只有起点，保留真实默认角色与其他装备。前五列为本件含底材加值，后两列为最终角色值。</p><div class="table-scroll"><table><thead><tr><th>装备</th><th>护甲加值</th><th>闪避加值</th><th>生命加值</th><th>魔力加值</th><th>护盾加值</th><th>最终护甲</th><th>最终闪避</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
+    body+=details('合法词缀实例',''.join('<p>'+esc(labels[key])+'</p>'+lines('\n'.join(example['definition']['affix_lines'])) for key,example in rule['examples'].items() if key!='white_base'))
+    body+='<h3>最低闪避已有效，最高档仍会被命中</h3><p>'+esc(rule['accuracy_scope'])+'。下表只改变灰烬皮甲的闪避前缀；角色只有职业起点，敌方命中率由实际AttackHitRules取得。</p>'
+    class_names={0:'贵族',1:'野蛮人',2:'游侠',3:'女巫',4:'决斗者',5:'圣堂武僧',6:'暗影刺客'}
+    rows=[]
+    for row in rule['evasion_rows']:
+        if (row['tier'],row['bound']) not in [(1,'min'),(3,'max')]:continue
+        stem='evasion-'+str(row['class_id'])+'-'+str(row['tier'])+'-'+row['bound']
+        cells=[value(stem+'-dexterity',row['base_dexterity']),value(stem+'-flat',row['flat_item_evasion']),value(stem+'-effective',row['effective_evasion']),value(stem+'-accuracy',row['enemy_accuracy']),value(stem+'-before',row['baseline_hit_chance'],True),value(stem+'-after',row['hit_chance'],True)]
+        rows.append('<tr><th>'+class_names[row['class_id']]+' · T'+str(row['tier'])+('最低' if row['bound']=='min' else '最高')+'</th>'+''.join('<td>'+cell+'</td>' for cell in cells)+'</tr>')
+    body+='<div class="table-scroll"><table><thead><tr><th>职业 / 阶</th><th>敏捷</th><th>装备闪避</th><th>最终闪避</th><th>敌人命中值</th><th>白装敌命中率</th><th>装备后敌命中率</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
+    body+='<h3>护甲取决于每次物理命中的大小</h3><p>'+esc(rule['budget_scope'])+'。以下护甲来自合法双防御胸甲的最终统计；三图III首领均含现有凶猛15%增伤，晴泉两响分别结算，不相加成一次命中。</p>'
+    rows=[]
+    for index,row in enumerate(rule['catalog_attacks']):
+        stem='attack-'+str(index)
+        rows.append('<tr><th>'+link('maps',row['map_id'])+' '+('III 首领' if row['tier']==3 else 'I 爬行怪')+'</th><td>'+value(stem+'-armour',row['armour'])+'</td><td>'+value(stem+'-before',row['before']['damage_total'])+'</td><td>'+value(stem+'-after',row['after']['damage_total'])+'</td></tr>')
+    body+='<div class="table-scroll"><table><thead><tr><th>实际目录单次命中</th><th>护甲</th><th>零护甲伤害</th><th>护甲后伤害</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
+    body+='<p>'+esc(rule['scope'])+'。护甲减伤沿既有90%上限，随后仍走护盾→魔力先承伤→生命。躲开灰烬攻击会阻止该次附燃，已经存在的燃烧继续结算。</p>'
+    rows=[]
+    for key,case in rule['scope_hits'].items():
+        rows.append('<tr><th>'+DAMAGE_NAMES[key]+'</th><td>'+value('scope-'+key+'-before',case['before']['damage_total'])+'</td><td>'+value('scope-'+key+'-after',case['after']['damage_total'])+'</td></tr>')
+    body+=details('隔离护甲的五类100点命中','<p>只设护甲，抗性、护盾、魔力分担均为零；这项比较不先掷闪避。</p><table><thead><tr><th>类型</th><th>零护甲</th><th>T3顶值护甲</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table><p>同样100点原始燃烧仍造成 '+value('burn-damage',rule['burn_example']['damage_total'])+'；燃烧入口不接受护甲或闪避参数。</p>')
+    body+='<h3>制作、来源与旧结果</h3><p>六工艺复用原按钮与费用。赋魔、升格、补缀和重铸可取得当前新族；校准仅重掷已有族与档位。伤害定向仍保证真实伤害后缀，不能同时保留三抗；没有防御定向按钮。</p><p>'+esc(rule['legacy_scope'])+'。</p><p>'+esc(rule['migration'])+'。</p><p>灰烬守卫的逻辑defense奖励读取当前池；显式历史池保持。'+link('rules','elemental_defense_affixes')+'保留原三抗预算，'+link('rules','elemental_resistance_caps')+'说明原始值与上限取舍。</p>'
+    body+='<p><a href="../DEFENSE_RATING_AFFIXES.zh-CN.md">完整护甲闪避规则</a> · <a href="../qa/v062-reference/README.md">本批图鉴证据</a> · '+link('rules','source_defenses')+' · '+link('crafting','calibration_shard')+'</p>'
     return body
 
 
@@ -451,7 +501,7 @@ def build(data, art):
             body+='<p>'+esc(e['normal_definition']['weapon_damage_summary'])+'</p><p>局部词缀与原有武器前缀共享稀有装备的三个前缀名额；两条局部前缀不能一起出现在仅允许一个前缀的魔法装备上。</p>'
             related+=' · '+link('weapon_stages','weapon_local')+' · '+(link('rules','forgeblade')+' · '+link('skills','cleave') if key=='forgeblade' else link('rules','basic_attack')+' · '+link('skills','tornado'))
         if e['stats'].get('fire_resistance',0): related+=' · '+link('defenses','fire_resistance','火焰抗性与受击结算')
-        if key==data.get('elemental_defense_affixes',{}).get('base_id'): related+=' · '+link('rules','elemental_defense_affixes')
+        if key==data.get('elemental_defense_affixes',{}).get('base_id'): related+=' · '+link('rules','elemental_defense_affixes')+' · '+link('rules','defense_rating_affixes')
         display_pool=data['elemental_defense_affixes']['pool_id'] if key==data.get('elemental_defense_affixes',{}).get('base_id') else e['pool']
         cards.append(add('equipment',key,e['name'],e['description'],body,SLOTS[e['slot']],meta=tags([SLOTS[e['slot']],TYPES[display_pool]]),related=related))
     for key,f in data['affixes'].items():
@@ -461,6 +511,9 @@ def build(data, art):
         related = link('defenses','fire_resistance','火焰抗性与受击结算') if f['stat']=='fire_resistance' else (links('skills',f.get('affected_skills',[])) if f.get('affected_skills') else link('rules','character_rates'))
         if f['stat'] in ['fire_resistance','cold_resistance','lightning_resistance']:
             related=link('rules','elemental_defense_affixes')+' · '+link('rules','elemental_resistance_caps')
+        if key in data.get('defense_rating_affixes',{}).get('new_families',{}):
+            body+='<p>角色全局固定值；直接加到原始基数，由天赋和合计敏捷统一处理。不是百分比，也不是本地防具倍率；与生命、魔力、护盾争前缀名额。</p>'
+            related=link('rules','defense_rating_affixes')+' · '+link('rules','source_defenses')
         if f['stat'] in ['attack_life_leech','attack_mana_leech']:
             body+='<p>按防御后实际扣除敌人护盾与生命计算，仅攻击命中；不含过量伤害或即时回复。与天赋同比例相加，仍受既有单次与总恢复上限。保存整数基点，100基点为1%，每一刻度为0.01个百分点。</p>'
             related=link('rules','source_leech')+' · '+links('skills',f['affected_skills'])
@@ -675,7 +728,7 @@ def build(data, art):
             body+='<p>'+link('monster_attacks',m.get('attack_reference',m['telegraph_policy']['profile_id']),'查看锁点重击：预警、躲避与真实伤害')+'</p>'
         encounter=data['fire_encounter']
         if key==encounter['template_id']:
-            body+=details('出现条件与专属装备奖励',f'<p>第 {encounter["minimum_wave"]} 波及之后，普通成功入场计数每逢 {encounter["ordinary_admission_interval"]} 的倍数出现。初始入场计入该计数；满员未入场不递增，重开重置。</p><p>符合奖励资格的原始怪物死亡时，仅结算一次：{encounter["reward_count"]} 件 {esc(data["equipment_rarities"][encounter["reward_rarity"]]["name"])} {esc(TYPES[encounter["reward_pool"]])} 装备。可用底材：{links("equipment",data["equipment_pools"][encounter["reward_pool"]]["base_ids"])}。逻辑defense在实际奖励入口映射当前三抗池，详见 {link("rules","elemental_defense_affixes")}；显式旧池仍保留历史结果。</p><p>出生节奏、分量、抗性与掉落保障均为本游戏原创平衡。</p>')
+            body+=details('出现条件与专属装备奖励',f'<p>第 {encounter["minimum_wave"]} 波及之后，普通成功入场计数每逢 {encounter["ordinary_admission_interval"]} 的倍数出现。初始入场计入该计数；满员未入场不递增，重开重置。</p><p>符合奖励资格的原始怪物死亡时，仅结算一次：{encounter["reward_count"]} 件 {esc(data["equipment_rarities"][encounter["reward_rarity"]]["name"])} {esc(TYPES[encounter["reward_pool"]])} 装备。可用底材：{links("equipment",data["equipment_pools"][encounter["reward_pool"]]["base_ids"])}。逻辑defense在实际奖励入口映射当前防御池，详见 {link("rules","elemental_defense_affixes")}；显式旧池仍保留历史结果。</p><p>出生节奏、分量、抗性与掉落保障均为本游戏原创平衡。</p>')
         body+=details(f'第 {m["example_wave"]} 波模板示例',facts([(label,number(e[field])) for label,field in [('生命','max_health'),('护盾','max_shield'),('攻击基底 · 防御前','damage'),('速度','speed'),('攻击频率','attack_speed'),('经验奖励','xp_reward')]])+'<p>包含模板固有稀有度与机制。后续波次、普通随机稀有度和机制组合会改变这些值。</p>')
         cards.append(add('monsters',key,m['name'],summary,body,tier,related=link('rules','shared')+' · '+link('defenses','fire_resistance')))
 
@@ -877,6 +930,8 @@ def build(data, art):
         rule_defs.append(('melee_basic',RULE_TITLES['melee_basic'],'短刃普攻使用独立近战派送，保留原攻击间隔；与裂刃几何、资源及逐次伤害分开展示。',melee_basic_rule(data,link,facts,details),'implemented'))
     if 'resolute_technique' in data:
         rule_defs.append(('resolute_technique',RULE_TITLES['resolute_technique'],'命中不能被闪避，但所有命中不能暴击；已有装备与天赋仍需权衡。',resolute_technique_rule(data,link,facts,details),'implemented'))
+    if 'defense_rating_affixes' in data:
+        rule_defs.append(('defense_rating_affixes',RULE_TITLES['defense_rating_affixes'],'全局固定护甲与闪避占用已有前缀，物理命中、攻击准入和持续燃烧各有明确边界。',defense_rating_affix_rule(data,link,facts,details),'implemented'))
     if 'elemental_defense_affixes' in data:
         rule_defs.append(('elemental_defense_affixes',RULE_TITLES['elemental_defense_affixes'],'一件胸甲提供原始火、冰、电抗性；三抗满后缀仍须天赋补足原始值与最大上限。',elemental_defense_affix_rule(data,link,facts,details),'implemented'))
     if 'elemental_resistance_caps' in data:

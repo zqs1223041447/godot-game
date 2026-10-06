@@ -124,6 +124,7 @@ static func collect() -> Dictionary:
 	result["mana_guard"] = mana_guard_examples()
 	result["elemental_resistance_caps"] = elemental_resistance_cap_examples()
 	result["elemental_defense_affixes"] = elemental_defense_affix_examples()
+	result["defense_rating_affixes"] = defense_rating_affix_examples()
 	result["resolute_technique"] = resolute_technique_examples()
 	result["forgeblade"] = forgeblade_examples()
 	result["melee_basic"] = melee_basic_examples(result.forgeblade)
@@ -1925,7 +1926,7 @@ static func elemental_defense_affix_examples() -> Dictionary:
 	for family: Dictionary in targeted: assert(family.kind == "suffix")
 	var reforge: Dictionary = {}
 	for seed_value: int in range(1, 4097):
-		var planned: Dictionary = Craft.operation_plan(full.instance, "reforge", seed_value)
+		var planned: Dictionary = Craft.operation_plan(full.instance, "reforge", seed_value, Equipment.ElementalDefense.MIN_SAVE_VERSION)
 		assert(planned.ok)
 		var ids: Array = []
 		for affix: Dictionary in planned.instance.affixes: ids.append(affix.id)
@@ -1938,6 +1939,7 @@ static func elemental_defense_affix_examples() -> Dictionary:
 	assert(supplied.payload.rarity == "normal" and supplied.payload.affixes.is_empty())
 	return {"minimum_save_version":Equipment.ElementalDefense.MIN_SAVE_VERSION, "vocabulary":Equipment.CURRENT_VOCABULARY,
 		"source_policy":SourceTree.CURRENT_SAVE_VERSION, "base_id":"emberhide_vest", "new_families":families,
+		"authored_vocabulary":Equipment.ElementalDefense.MIN_SAVE_VERSION, "authored_pool_id":"defense_v37", "reforge_vocabulary":Equipment.ElementalDefense.MIN_SAVE_VERSION,
 		"pool_id":Equipment.CURRENT_DEFENSE_POOL_ID, "pool":pool, "loot_profile_id":Equipment.CURRENT_LOOT_PROFILE_ID,
 		"loot_profile":Equipment.loot_profile(Equipment.CURRENT_LOOT_PROFILE_ID), "rarities":Equipment.RARITIES.duplicate(true),
 		"slot_targets":EquipmentSlotsData.targets_for_category("body_armour"), "examples":examples,
@@ -1949,6 +1951,114 @@ static func elemental_defense_affix_examples() -> Dictionary:
 		"supply_scope":"自然新池只替换10%防御入口；新自然分布及后续随机状态有意改变，显式旧pool/profile仍保留历史结果",
 		"migration":"schema37严格校验旧36并保留原字节备份后仅迁版本；旧装备不自动重掷、补词或换UID，天赋源政策仍36",
 		"new_images":[]}
+
+
+static func _rating_vest_model(affixes: Array, class_id: int = 0) -> Dictionary:
+	var model := Canonical.new()
+	var candidate: Dictionary = model.snapshot()
+	candidate.talents.class_id = class_id
+	candidate.talents.allocated = [SourceTree.Data.start_for_class(class_id)]
+	var previous_body: String = str(model.equipped_items().get("body_armour", ""))
+	if not previous_body.is_empty(): candidate.locations[previous_body] = model.first_bag_position(previous_body)
+	var uid: String = "gear_%06d" % int(candidate.next_item_serial)
+	var instance: Dictionary = {"id":uid, "base_id":"emberhide_vest", "rarity":"normal" if affixes.is_empty() else ("magic" if affixes.size() == 1 else "rare"), "item_level":16, "affixes":affixes.duplicate(true)}
+	assert(Equipment.validate_instance(instance))
+	candidate.items[uid] = Canonical.Items.wrap_equipment(instance)
+	candidate.locations[uid] = {"kind":"equipment", "slot_id":"body_armour"}
+	candidate.next_item_serial += 1
+	assert(Canonical.Rules.reason(candidate).is_empty())
+	model._accept_memory(candidate)
+	var stats: Dictionary = model.get_stats()
+	assert(model.save_attempts == 0)
+	return {"instance":instance, "definition":Equipment.definition(instance), "stats":stats,
+		"class_id":class_id, "whole_build_valid":true, "save_attempts":model.save_attempts}
+
+
+static func _rating_catalog_attack(map_id: String, tier: int, boss: bool, armour: float) -> Dictionary:
+	var compiled: Dictionary = MapRules.compile_normal(map_id, tier, [], [])
+	assert(compiled.ok)
+	var species: String = "rift_warden" if boss else "crawler"
+	var enemy: Dictionary = Monsters.make_enemy(620001, species, int(compiled.profile.wave), Vector2.ZERO,
+		"map_boss" if boss else "ordinary", "boss" if boss else "normal", Monsters.TEMPLATES[species].mechanisms.duplicate() if boss else [])
+	var applied: Dictionary = EncounterCompiler.apply_to_enemy(enemy, EncounterCompiler.compile(["enemy_damage_115"] if boss else []).profile)
+	assert(applied.ok)
+	enemy = applied.enemy
+	if boss: enemy.map_boss_attack_id = Maps.MAPS[map_id].boss_attack_id
+	var components: Dictionary = Monsters.contact_components(enemy)
+	var policy: Dictionary = Monsters.telegraph_policy(enemy)
+	if not policy.is_empty():
+		for type: String in components: components[type] *= float(policy.profile.damage_multiplier)
+		if policy.has("burn_policy"): components.fire *= float(policy.burn_policy.upfront_fire_multiplier)
+	var before: Dictionary = Defense.incoming_source_hit(components, {"armour":0.0}, 0.0, 100000.0)
+	var after: Dictionary = Defense.incoming_source_hit(components, {"armour":armour}, 0.0, 100000.0)
+	assert(before.ok and after.ok)
+	return {"map_id":map_id, "tier":tier, "wave":compiled.profile.wave, "species":species,
+		"damage_modifier":boss, "attack_id":str(enemy.get("map_boss_attack_id", "contact")), "components":components,
+		"armour":armour, "before":before, "after":after, "accuracy":AttackRules.monster_profile(int(enemy.kind)).accuracy}
+
+
+static func defense_rating_affix_examples() -> Dictionary:
+	var families: Dictionary = {}
+	var boundaries: Dictionary = {}
+	var pool: Dictionary = Equipment.pool_profiles()[Equipment.CURRENT_DEFENSE_POOL_ID]
+	var prefixes: Array = []
+	for id: String in pool.affix_ids:
+		if Equipment.affix_definition(id).kind == "prefix": prefixes.append(id)
+	assert(prefixes.size() == 5)
+	for id: String in Equipment.DefenseRatings.AFFIX_IDS:
+		families[id] = Equipment.affix_definition(id)
+		assert(Equipment.DefenseRatings.valid_family(families[id]))
+	for level: int in [1, 7, 8, 15, 16, 30]:
+		var available: Dictionary = {"ironhide":[], "mistweave":[]}
+		for entry: Dictionary in Equipment._profile_eligible_tiers("emberhide_vest", level, "prefix", pool):
+			if available.has(entry.id): available[entry.id].append(entry.tier)
+		boundaries[str(level)] = available
+	var examples: Dictionary = {"white_base":_rating_vest_model([])}
+	for resource: String in ["rootwell", "deepwell", "lanternveil"]:
+		var entries: Array = []
+		for id: String in ["ironhide", "mistweave", resource, "emberward", "rimeward", "stormward"]:
+			var tier: Dictionary = Equipment.affix_definition(id).tiers[-1]
+			entries.append({"id":id, "tier":int(tier.tier), "value":int(tier.max)})
+		examples[resource] = _rating_vest_model(entries)
+	var evasion_rows: Array = []
+	var accuracy: float = float(AttackRules.monster_profile(0).accuracy)
+	for class_id: int in range(7):
+		var baseline: Dictionary = _rating_vest_model([], class_id)
+		for tier: Dictionary in families.mistweave.tiers:
+			for bound: String in ["min", "max"]:
+				var rating: int = int(tier[bound])
+				var example: Dictionary = _rating_vest_model([{"id":"mistweave", "tier":int(tier.tier), "value":rating}], class_id)
+				var admission: Dictionary = AttackRules.resolve(accuracy, float(example.stats.evasion))
+				assert(admission.ok)
+				evasion_rows.append({"class_id":class_id, "tier":tier.tier, "bound":bound, "flat_item_evasion":rating,
+					"base_dexterity":example.stats.dexterity, "baseline_evasion":baseline.stats.evasion,
+					"baseline_hit_chance":AttackRules.chance(accuracy, float(baseline.stats.evasion)),
+					"effective_evasion":example.stats.evasion, "enemy_accuracy":accuracy, "hit_chance":admission.chance,
+					"whole_build_valid":example.whole_build_valid, "save_attempts":example.save_attempts})
+	var armour: float = float(examples.rootwell.stats.armour)
+	var attacks: Array = [_rating_catalog_attack("old_garden", 1, false, armour)]
+	for map_id: String in Canonical.Journey.MAP_IDS: attacks.append(_rating_catalog_attack(map_id, 3, true, armour))
+	var scope_hits: Dictionary = {}
+	for type: String in Damage.TYPES:
+		var before: Dictionary = Defense.incoming_source_hit({type:100.0}, {"armour":0.0}, 0.0, 1000.0)
+		var after: Dictionary = Defense.incoming_source_hit({type:100.0}, {"armour":armour}, 0.0, 1000.0)
+		assert(before.ok and after.ok)
+		if type != "physical": assert(is_equal_approx(before.damage_total, after.damage_total))
+		scope_hits[type] = {"before":before, "after":after}
+	return {"minimum_save_version":Equipment.DefenseRatings.MIN_SAVE_VERSION, "vocabulary":Equipment.CURRENT_VOCABULARY,
+		"source_policy":SourceTree.CURRENT_SAVE_VERSION, "base_id":"emberhide_vest", "new_families":families,
+		"pool_id":Equipment.CURRENT_DEFENSE_POOL_ID, "pool":pool, "loot_profile_id":Equipment.CURRENT_LOOT_PROFILE_ID,
+		"loot_profile":Equipment.loot_profile(Equipment.CURRENT_LOOT_PROFILE_ID), "prefix_families":prefixes, "rarities":Equipment.RARITIES.duplicate(true),
+		"tier_boundaries":boundaries, "examples":examples, "evasion_rows":evasion_rows, "catalog_attacks":attacks, "scope_hits":scope_hits,
+		"burn_example":Defense.incoming_burn(100.0, 0.0, 0.0, 1000.0), "new_images":[],
+		"producer":"EquipmentCatalog → validated Canonical.get_stats → SourceTree.apply_stats → AttackHitRules / DefenseRules",
+		"rating_order":"装备与珠宝、源天赋固定值先加到角色原始基数，再由源天赋执行器统一提高一次；护甲不是本地防具倍率，闪避还读取合计敏捷",
+		"tradeoff":"五个前缀族争三个名额。双防御配生命会放弃魔力、护盾前缀；改配魔力或护盾则放弃生命前缀。三抗仍占满后缀，与伤害、魔力恢复和移速竞争",
+		"scope":"护甲只降低物理命中；闪避只决定attack命中准入，物理与元素攻击均可躲避。非attack命中与持续燃烧不读闪避；已有燃烧不会因提高双防御而消失",
+		"budget_scope":"实际目录单次命中与七职业最终统计的隔离比较；不包含攻击频率、走位、抗性、护盾或魔力分担，不是实战DPS或平均存活提升",
+		"accuracy_scope":"当前自然怪accuracy为100，等级波次、稀有度与地图增伤不提高accuracy；不推断未来怪物曲线",
+		"migration":"schema39严格验证旧38并原字节备份，只升级版本；旧物品、UID、点数、货币与旅程保持，不补词或重掷。源政策仍38，schema37/38映射旧装备词汇37",
+		"legacy_scope":"新canonical_v39只替换原10%防御入口；其余六分池权重与顺序保持。显式旧defense、defense_v37、canonical_v37及设备词汇1–38保留历史输出、拒绝语义与随机状态"}
 
 
 static func mana_guard_examples() -> Dictionary:

@@ -1,0 +1,27 @@
+{
+  "passed": false,
+  "mode": "Fresh collect_required/cmap check; unchanged font bytes reuse v61 glyph-outline proof",
+  "runtime_files": 177,
+  "required_codepoints": 1652,
+  "required_han": 1530,
+  "mapped_codepoints": 1656,
+  "missing": [
+    {
+      "codepoint": "U+9769",
+      "character": "革",
+      "locations": [
+        "scripts/items/defense_rating_affix_profile.gd:11"
+      ]
+    }
+  ],
+  "fallback_symbols": [
+    "U+2301",
+    "U+25C8"
+  ],
+  "baseline_commit": "d884caea7a2260f4535ba4da2d7e005e6df006d4",
+  "old_font_sha256": "cf1b9dafadce2987fadce98e249801f5f5215d9523bac40620921b4eceae72b8",
+  "current_font_sha256": "cf1b9dafadce2987fadce98e249801f5f5215d9523bac40620921b4eceae72b8",
+  "font_bytes_unchanged": true,
+  "inherited_glyph_proof": "../v061-reference/font-addition-preservation.json",
+  "full_outline_rescan_performed": false
+}
