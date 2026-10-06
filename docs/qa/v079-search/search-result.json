@@ -1,0 +1,47 @@
+{
+  "status": "passed",
+  "command": [
+    "/usr/local/bin/godot",
+    "--headless",
+    "--path",
+    "/workspace/scratch/a51485f153de/v079-name-recovery",
+    "--script",
+    "res://tests/passive_name_corrections_test.gd"
+  ],
+  "cwd": "/workspace/scratch/a51485f153de/v079-name-recovery",
+  "base_commit": "2e25e4710d95464c63a48f1e5413be3eb95a2b0a",
+  "started_utc": "2026-10-06T11:09:12.870483+00:00",
+  "duration_seconds": 4.164,
+  "exit_code": 0,
+  "timed_out": false,
+  "userdata_root": "/tmp/godot-m1-v079-search/recovered-vkj39g72",
+  "input_sha256_before": {
+    "tests/passive_name_corrections_test.gd": "65b79da556d129c84327caadc42b052acd1a0c7b5a711f21739fc3019f2aadc7",
+    "data/passive_source/localization_zh_CN.json": "91d896cb3d4d786ab3fa8110a19f01e9f1ff8879db2e414c05b1b0a7dee07efd",
+    "tools/passive_import/build_source_tree_zh.py": "1d295775d835823395d1a95d4d81b54c2052091a316f67f666334d5f907285be",
+    "scripts/ui/canonical_passive_panel.gd": "7feb6fd5d6b40cf5d8aed54e4465630c6ba0f3cc37ffb432e15e7d65ce8bd054",
+    "scripts/ui/source_passive_tree_view.gd": "7e393571017e6d247dd4578f44ab39bae36e370c19ebeb370e37c87ecc701e84",
+    "scripts/canonical_game_state.gd": "4322e78da73e1deb5c14cb4998b8ab7c664dffa4c0d44e376460e902a7317000",
+    "scripts/passives/source_tree_data.gd": "d8863d372b77b043974afa5398f0cd3a22965e6caf2af51205163ad10dff024b",
+    "scripts/passives/source_tree_localization.gd": "95f6c191a5da8a9617f3384e51d19a10940bfa93f877e02b74741a11c762deb0",
+    "scripts/save/canonical_build_store.gd": "8fd5646ded9299e0676d7522f266abe1b922a622afaf0362ed21262b9ba09d0c",
+    "data/passives/official_tree_runtime.json": "9774a8ec1fe16199e775fe99a20853837ca8c7725c48dfcd9d6ee69646ff934f",
+    "project.godot": "6985acdd769b390393eeef2d11e86b5a65e48bbebf552d76c9f65296fecd779d"
+  },
+  "input_sha256_after": {
+    "tests/passive_name_corrections_test.gd": "65b79da556d129c84327caadc42b052acd1a0c7b5a711f21739fc3019f2aadc7",
+    "data/passive_source/localization_zh_CN.json": "91d896cb3d4d786ab3fa8110a19f01e9f1ff8879db2e414c05b1b0a7dee07efd",
+    "tools/passive_import/build_source_tree_zh.py": "1d295775d835823395d1a95d4d81b54c2052091a316f67f666334d5f907285be",
+    "scripts/ui/canonical_passive_panel.gd": "7feb6fd5d6b40cf5d8aed54e4465630c6ba0f3cc37ffb432e15e7d65ce8bd054",
+    "scripts/ui/source_passive_tree_view.gd": "7e393571017e6d247dd4578f44ab39bae36e370c19ebeb370e37c87ecc701e84",
+    "scripts/canonical_game_state.gd": "4322e78da73e1deb5c14cb4998b8ab7c664dffa4c0d44e376460e902a7317000",
+    "scripts/passives/source_tree_data.gd": "d8863d372b77b043974afa5398f0cd3a22965e6caf2af51205163ad10dff024b",
+    "scripts/passives/source_tree_localization.gd": "95f6c191a5da8a9617f3384e51d19a10940bfa93f877e02b74741a11c762deb0",
+    "scripts/save/canonical_build_store.gd": "8fd5646ded9299e0676d7522f266abe1b922a622afaf0362ed21262b9ba09d0c",
+    "data/passives/official_tree_runtime.json": "9774a8ec1fe16199e775fe99a20853837ca8c7725c48dfcd9d6ee69646ff934f",
+    "project.godot": "6985acdd769b390393eeef2d11e86b5a65e48bbebf552d76c9f65296fecd779d"
+  },
+  "inputs_unchanged": true,
+  "stdout_sha256": "4d4c05964a2483170ed2b1847dc22430909b2e2de523e67db915efa70496d5a9",
+  "scope": "Real CanonicalPassivePanel plus CanonicalGameState; six actual LineEdit submissions; no arena/combat or allocation; no full localization suite."
+}
