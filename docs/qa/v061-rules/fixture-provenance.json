@@ -1,0 +1,124 @@
+{
+  "commit": "b389993ed7f7a90f4043c668704583d44b22f343",
+  "seeds": [
+    "scripts/combat/combat_data.gd",
+    "scripts/combat/skill_compiler.gd",
+    "scripts/combat/critical_strike_rules.gd",
+    "scripts/combat/attack_hit_rules.gd",
+    "scripts/combat/critical_strike_runtime.gd"
+  ],
+  "transforms": [
+    "Remove class_name declarations to avoid global class collisions.",
+    "Rewrite every GD preload/load dependency in the recursively frozen closure to its frozen fixture path."
+  ],
+  "files": {
+    "scripts/combat/area_support_rules.gd": {
+      "source_sha256": "5692b2c50caf98eb085fcdcd476531730ff7fbebc86259fc2b55e8b2e89ab3b5",
+      "fixture_sha256": "bc196e3c5c806b89f06ec1cf48476a4eaec311452e3be0d4aa8b05dae6cae86f"
+    },
+    "scripts/combat/attack_hit_rules.gd": {
+      "source_sha256": "0c56472b13fe934c380d33068ce435094aa923270f17ffa9e2c96c9d043b0678",
+      "fixture_sha256": "22f53fb9c45e8ff9397fd05a33957589ba84a1f04e1fdaf9a93022006cba680c"
+    },
+    "scripts/combat/burn_rules.gd": {
+      "source_sha256": "3c22b93054ea7f51d75a1086bea33fbf1124a7cfe4a75bd49db86e9c411aeb47",
+      "fixture_sha256": "296c695d0832e0cc56f523594bcfd92fafa8b498f2f96a2fe5896d47b88b99b9"
+    },
+    "scripts/combat/combat_data.gd": {
+      "source_sha256": "2b1e6101745682513b81e89963f1bd4917f045762f831a1a4f2738ed8ac78d16",
+      "fixture_sha256": "75201f04c02afb2c2e9711b93e1afda9966115d507117e829c6f64d5a7b5ec8c"
+    },
+    "scripts/combat/critical_strike_rules.gd": {
+      "source_sha256": "635f0675dfe2187b01b4f618167a3927cb2de59f16ff1e25649f3630e927ef9a",
+      "fixture_sha256": "c1529654051a3f7fedd4800768192566a8aeee135339a3b02baaffeb6a09df86"
+    },
+    "scripts/combat/critical_strike_runtime.gd": {
+      "source_sha256": "d5678da1780b90c5015b3fa70a2fe0cb447b440606b017dd24b73fc5348bc0ae",
+      "fixture_sha256": "15437aa9cd48882fcb6f8536c5360824fd6ed5cf1d08a2b21b80d5620f39e8cf"
+    },
+    "scripts/combat/damage_base_compiler.gd": {
+      "source_sha256": "0db4f094b99055881e658789d1a0282ba6798231787228184d60258eeb3504b3",
+      "fixture_sha256": "febc1a58f8eee9b3019dae1e181a7eb1bd2058b5f1f09752ca4186da3c1ae5e5"
+    },
+    "scripts/combat/damage_resolver.gd": {
+      "source_sha256": "37429d9754708d3bbbe9638f92bb8a038284326a4b9c422a70b7c2c4cfe3a1d5",
+      "fixture_sha256": "d9f3036bfda9c83066d786bd792137fbfc07ffc1fa5f2a49c48711d9832db612"
+    },
+    "scripts/combat/delivery_support_rules.gd": {
+      "source_sha256": "08e8815f5cdb2c7db3c7fcb23cb6b6c1b9cc259c94c76da1a1394118cd3b2159",
+      "fixture_sha256": "c98fe6dfd948a408ff3cef81298c37087445ef9dfb66a77bf459dd67e8df4df1"
+    },
+    "scripts/combat/element_support_rules.gd": {
+      "source_sha256": "15967f974ac24e49ea9545897f4288277ab2874575c863ceeb69be611162c75a",
+      "fixture_sha256": "40e47fb8b4f4e127c336d65fffa82e9db1ebc58566d96ff9f8e6d32e23417fd4"
+    },
+    "scripts/combat/ember_event_clock.gd": {
+      "source_sha256": "53e3d1ab85311b433a18ca307db06eef82178553a3eff73389c01f01808b9ae6",
+      "fixture_sha256": "ae2b67dacae6579c06420a767b518dd3252912165c54749064c79071ae5eeb32"
+    },
+    "scripts/combat/ember_proliferation_rules.gd": {
+      "source_sha256": "df17905689837b35388ef46fef5b7697f79b0258baa1c7a5f0f6bb5974aac31c",
+      "fixture_sha256": "b17f08c296a4bbcca5c8fc0894d6f31be78c5360323237ddc7b813b0481203bc"
+    },
+    "scripts/combat/ember_proliferation_support_rules.gd": {
+      "source_sha256": "5553df1188d0b92986a150cf812ce8152b03aed3e0009798635087de41465abc",
+      "fixture_sha256": "38e11c7fa4f44e85b23c2aba3bc7a8eb99412245eb5dc692838e4b1017f97018"
+    },
+    "scripts/combat/ignite_support_rules.gd": {
+      "source_sha256": "23271171b1fd62f18d8e107dd1e6ad8001a40ca9780d08e2db325de374a1793e",
+      "fixture_sha256": "044ca324db55dddfbadca7217ff69f0f55ab8db5c6f645663f371c338a6fed94"
+    },
+    "scripts/combat/leech_rules.gd": {
+      "source_sha256": "c1037a4c12f9668cfcf4ca070474bad01adf384695eadd447e7036986c33caba",
+      "fixture_sha256": "dbba51c45be68b98d8a8d544a835025fd6b9d728b9d56fde28a86277c9646279"
+    },
+    "scripts/combat/projectile_support_rules.gd": {
+      "source_sha256": "46591b5824d3128c0d25ffa0bd62addfb6a7b2f587019f8f4ebf1abdbb04b6e5",
+      "fixture_sha256": "7ba5bb2423dee7f0b124a7c54bffa01651054203e695da10dbe5d4b65511cbcc"
+    },
+    "scripts/combat/resource_support_rules.gd": {
+      "source_sha256": "6b01ff6c2a9704a8a9519cd8ad35f83f6f70471988eadcb091d99764a1e18413",
+      "fixture_sha256": "d39e71cf36f1c40409b9631fb5583e56405e5936e83dc64d2b3dc9ab08a72269"
+    },
+    "scripts/combat/shock_rules.gd": {
+      "source_sha256": "15d4d44793995c1e5f98a0ece88c7d32bee7e694e411a0f8b768057e1cdb23df",
+      "fixture_sha256": "f95713baf378f379e6a3c6319e3f2074a39c599f21f1590db8a90c795465f73e"
+    },
+    "scripts/combat/shock_support_rules.gd": {
+      "source_sha256": "65bc199e49adc8a1a7d7fec01e38b9070887be3a977dbe738d3a28c2aebd10df",
+      "fixture_sha256": "915d4799400c41bf1e4250fc39a09e6689596ed08c0189b23535e42374e30d96"
+    },
+    "scripts/combat/skill_compiler.gd": {
+      "source_sha256": "de0092eabcb681cdcc96661b1a6dc2693dcd78a46cd16a4193b8d9323b8e75c7",
+      "fixture_sha256": "ae9b726623aa03847fd1da0c3014f8afda7eeaa58bf9a6341bf2edccf3800ffc"
+    },
+    "scripts/combat/source_resource_rules.gd": {
+      "source_sha256": "cc84a561c34a3894f3599c39379d72bf4917e29fc2973f984a8aa63dc9dd03dc",
+      "fixture_sha256": "fb63bacc3993d0bf88da215a32a1905aa664a767de85c53985fe5f400f39c811"
+    },
+    "scripts/combat/source_spatial_rules.gd": {
+      "source_sha256": "3aec2921d0ee3025fac7e6edb010c6df03f1e027718e15716a77f3c43877c9cc",
+      "fixture_sha256": "03c986fed6e5697d5c33887cbc9a37fa2e699788683753a3a57b42163bec6946"
+    },
+    "scripts/combat/support_catalog.gd": {
+      "source_sha256": "3bd43dfd250397fc4058fffd4f69402312417cfa9491f06175cb0568909894d3",
+      "fixture_sha256": "139e64d53e67fd0fcc46d6eefcdfd48ed6067d925f72a96e11c0f0689ba0fe96"
+    },
+    "scripts/combat/support_program.gd": {
+      "source_sha256": "437a6ab0082ae80e916f1bb57c4e71fe4c3f5d0a147db5e7a97f86615712e0dd",
+      "fixture_sha256": "fb5ec3d20a88e896aedccfff10cafea06cd192d3c37eb2bf2e3adabe62c541fc"
+    },
+    "scripts/combat/support_registry.gd": {
+      "source_sha256": "7ce0cda6d5a473fd557e3633063bc63f50b81046cd9731f9eb16912b1584adbd",
+      "fixture_sha256": "0d42e8af430957587f0cf69bca2906f49c25cddba5c87cd6123d4e72f394d5cf"
+    },
+    "scripts/game_data.gd": {
+      "source_sha256": "1ca97c45c243d6144e2a79d6d93762203c8bb76122adb0175a2ec80b2d77216b",
+      "fixture_sha256": "5854a49a8b3400211e80bae389ff43322b7b259b3f10385c44bfa9f9e6ad957a"
+    },
+    "scripts/items/weapon_local_rules.gd": {
+      "source_sha256": "73e4308828e856a741ef00386d33150a008bdb3f07ef31a031a204d71fe93b8d",
+      "fixture_sha256": "f77a4f3bc544234b6f88bdb59ac25514dcddc06f1e6db78426b6e460b775d426"
+    }
+  }
+}

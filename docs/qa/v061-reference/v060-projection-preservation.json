@@ -1,0 +1,721 @@
+{
+  "passed": true,
+  "baseline_commit": "b389993ed7f7a90f4043c668704583d44b22f343",
+  "old_catalog_semantic_sha256": "830b8deb12f9a478c06ed625e606383e03a2c2d8c37a7b59f576ed2e2b2c5dee",
+  "current_catalog_semantic_sha256": "55d88d14a8154bcb1a0155904750e6f1d51af4082bb07054d84ab4ba4186c943",
+  "projected_catalog_semantic_sha256": "830b8deb12f9a478c06ed625e606383e03a2c2d8c37a7b59f576ed2e2b2c5dee",
+  "approved_changed_leaves": 57,
+  "rendered_authoritative_values_checked": 59,
+  "before_after_hit_roles_checked": 7,
+  "html_ids": 3814,
+  "all_html_anchor_and_local_asset_links_valid": true,
+  "equipment_and_loot_data_unchanged": true,
+  "old_asset_pngs_unchanged": 61,
+  "old_reference_pngs_unchanged": 68,
+  "font_verification": "Separate affected-only font-addition-preservation.json; initial full runtime scan retained",
+  "source_coverage_exact_one_node_opened": true,
+  "source_coverage_other_nodes_masteries_geometry_preserved": true,
+  "source_coverage_current_sha256": "91bf32fe4801df3a9ca828ab337ef01e056fcc72c9c07ea8629644161fc0e922",
+  "approved_changes": [
+    {
+      "kind": "changed",
+      "path": [
+        "canonical",
+        "default_build",
+        "version"
+      ],
+      "category": "current_save_version",
+      "before": 37.0,
+      "after_sha256": "cc179cc6804e03b317abe487bbfd0651951ccd6f562d6db1fa9296da87076e7e"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "canonical",
+        "default_stats",
+        "resolute_technique"
+      ],
+      "category": "zero_derived_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "canonical",
+        "save_version"
+      ],
+      "category": "current_save_version",
+      "before": 37.0,
+      "after_sha256": "cc179cc6804e03b317abe487bbfd0651951ccd6f562d6db1fa9296da87076e7e"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "configurations",
+        "fresh",
+        "stats",
+        "resolute_technique"
+      ],
+      "category": "zero_derived_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "augment",
+        "example",
+        "save_version"
+      ],
+      "category": "current_save_version",
+      "before": 37.0,
+      "after_sha256": "cc179cc6804e03b317abe487bbfd0651951ccd6f562d6db1fa9296da87076e7e"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "calibration_shard",
+        "save_version"
+      ],
+      "category": "current_save_version",
+      "before": 37.0,
+      "after_sha256": "cc179cc6804e03b317abe487bbfd0651951ccd6f562d6db1fa9296da87076e7e"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "elevate",
+        "example",
+        "save_version"
+      ],
+      "category": "current_save_version",
+      "before": 37.0,
+      "after_sha256": "cc179cc6804e03b317abe487bbfd0651951ccd6f562d6db1fa9296da87076e7e"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "enchant",
+        "example",
+        "save_version"
+      ],
+      "category": "current_save_version",
+      "before": 37.0,
+      "after_sha256": "cc179cc6804e03b317abe487bbfd0651951ccd6f562d6db1fa9296da87076e7e"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "recalibrate",
+        "example",
+        "save_version"
+      ],
+      "category": "current_save_version",
+      "before": 37.0,
+      "after_sha256": "cc179cc6804e03b317abe487bbfd0651951ccd6f562d6db1fa9296da87076e7e"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "reforge",
+        "example",
+        "save_version"
+      ],
+      "category": "current_save_version",
+      "before": 37.0,
+      "after_sha256": "cc179cc6804e03b317abe487bbfd0651951ccd6f562d6db1fa9296da87076e7e"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "salvage",
+        "example",
+        "save_version"
+      ],
+      "category": "current_save_version",
+      "before": 37.0,
+      "after_sha256": "cc179cc6804e03b317abe487bbfd0651951ccd6f562d6db1fa9296da87076e7e"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "targeted_reforge_critical",
+        "example",
+        "save_version"
+      ],
+      "category": "current_save_version",
+      "before": 37.0,
+      "after_sha256": "cc179cc6804e03b317abe487bbfd0651951ccd6f562d6db1fa9296da87076e7e"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "targeted_reforge_damage",
+        "example",
+        "save_version"
+      ],
+      "category": "current_save_version",
+      "before": 37.0,
+      "after_sha256": "cc179cc6804e03b317abe487bbfd0651951ccd6f562d6db1fa9296da87076e7e"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "targeted_reforge_life_leech",
+        "example",
+        "save_version"
+      ],
+      "category": "current_save_version",
+      "before": 37.0,
+      "after_sha256": "cc179cc6804e03b317abe487bbfd0651951ccd6f562d6db1fa9296da87076e7e"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "crafting",
+        "targeted_reforge_mana_leech",
+        "example",
+        "save_version"
+      ],
+      "category": "current_save_version",
+      "before": 37.0,
+      "after_sha256": "cc179cc6804e03b317abe487bbfd0651951ccd6f562d6db1fa9296da87076e7e"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "currencies",
+        "calibration_shard",
+        "save_version"
+      ],
+      "category": "current_save_version",
+      "before": 37.0,
+      "after_sha256": "cc179cc6804e03b317abe487bbfd0651951ccd6f562d6db1fa9296da87076e7e"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "elemental_defense_affixes",
+        "examples",
+        "mana_recovery",
+        "stats",
+        "resolute_technique"
+      ],
+      "category": "zero_derived_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "elemental_defense_affixes",
+        "examples",
+        "six_max",
+        "stats",
+        "resolute_technique"
+      ],
+      "category": "zero_derived_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "elemental_defense_affixes",
+        "examples",
+        "white_base",
+        "stats",
+        "resolute_technique"
+      ],
+      "category": "zero_derived_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "elemental_defense_affixes",
+        "source_policy"
+      ],
+      "category": "current_source_policy",
+      "before": 36.0,
+      "after_sha256": "cc179cc6804e03b317abe487bbfd0651951ccd6f562d6db1fa9296da87076e7e"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "elemental_resistance_caps",
+        "reachable_build",
+        "stats",
+        "resolute_technique"
+      ],
+      "category": "zero_derived_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "elemental_resistance_caps",
+        "source_policy"
+      ],
+      "category": "current_source_policy",
+      "before": 36.0,
+      "after_sha256": "cc179cc6804e03b317abe487bbfd0651951ccd6f562d6db1fa9296da87076e7e"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "game_version"
+      ],
+      "category": "game_version",
+      "before": "0.60.0",
+      "after_sha256": "92b52c906937f270d7f3b79714f5a229b107ee52c62578dc65e5d4339170b6d4"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "mana_guard",
+        "class_paths",
+        0,
+        "stats",
+        "resolute_technique"
+      ],
+      "category": "zero_derived_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "mana_guard",
+        "class_paths",
+        1,
+        "stats",
+        "resolute_technique"
+      ],
+      "category": "zero_derived_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "mana_guard",
+        "class_paths",
+        2,
+        "stats",
+        "resolute_technique"
+      ],
+      "category": "zero_derived_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "mana_guard",
+        "class_paths",
+        3,
+        "stats",
+        "resolute_technique"
+      ],
+      "category": "zero_derived_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "mana_guard",
+        "class_paths",
+        4,
+        "stats",
+        "resolute_technique"
+      ],
+      "category": "zero_derived_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "mana_guard",
+        "class_paths",
+        5,
+        "stats",
+        "resolute_technique"
+      ],
+      "category": "zero_derived_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "mana_guard",
+        "class_paths",
+        6,
+        "stats",
+        "resolute_technique"
+      ],
+      "category": "zero_derived_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "melee_basic",
+        "equipped_examples",
+        "normal",
+        "stats",
+        "resolute_technique"
+      ],
+      "category": "zero_derived_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "melee_basic",
+        "equipped_examples",
+        "six_t3_max",
+        "stats",
+        "resolute_technique"
+      ],
+      "category": "zero_derived_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "melee_basic",
+        "save_version"
+      ],
+      "category": "current_save_version",
+      "before": 37.0,
+      "after_sha256": "cc179cc6804e03b317abe487bbfd0651951ccd6f562d6db1fa9296da87076e7e"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "monster_attacks",
+        "locked_circle_cold",
+        "example",
+        "cases",
+        "armored",
+        "defense_stats",
+        "resolute_technique"
+      ],
+      "category": "zero_derived_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "monster_attacks",
+        "locked_circle_cold",
+        "example",
+        "cases",
+        "moving",
+        "defense_stats",
+        "resolute_technique"
+      ],
+      "category": "zero_derived_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "monster_attacks",
+        "locked_circle_cold",
+        "example",
+        "cases",
+        "standing",
+        "defense_stats",
+        "resolute_technique"
+      ],
+      "category": "zero_derived_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "monster_attacks",
+        "locked_circle_lightning",
+        "example",
+        "cases",
+        "armored",
+        "defense_stats",
+        "resolute_technique"
+      ],
+      "category": "zero_derived_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "monster_attacks",
+        "locked_circle_lightning",
+        "example",
+        "cases",
+        "moving",
+        "defense_stats",
+        "resolute_technique"
+      ],
+      "category": "zero_derived_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "monster_attacks",
+        "locked_circle_lightning",
+        "example",
+        "cases",
+        "standing",
+        "defense_stats",
+        "resolute_technique"
+      ],
+      "category": "zero_derived_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "normal_gem_trading",
+        "schema"
+      ],
+      "category": "current_save_version",
+      "before": 37.0,
+      "after_sha256": "cc179cc6804e03b317abe487bbfd0651951ccd6f562d6db1fa9296da87076e7e"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "resolute_technique"
+      ],
+      "category": "single_new_rule_section",
+      "before": null,
+      "after_sha256": "5bef8da54d46b756ecc2fdf89bf734cd5d3dcc972dea1ae74a137e2779ec68a2"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "save_version"
+      ],
+      "category": "current_save_version",
+      "before": 37.0,
+      "after_sha256": "cc179cc6804e03b317abe487bbfd0651951ccd6f562d6db1fa9296da87076e7e"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "source_faster_burn",
+        "legal_build_examples",
+        0,
+        "stats",
+        "resolute_technique"
+      ],
+      "category": "zero_derived_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "source_fire_dot",
+        "legal_build_examples",
+        0,
+        "stats",
+        "resolute_technique"
+      ],
+      "category": "zero_derived_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "source_fire_dot",
+        "legal_build_examples",
+        1,
+        "stats",
+        "resolute_technique"
+      ],
+      "category": "zero_derived_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "added",
+      "path": [
+        "source_fire_dot",
+        "legal_build_examples",
+        2,
+        "stats",
+        "resolute_technique"
+      ],
+      "category": "zero_derived_stat",
+      "before": null,
+      "after_sha256": "8aed642bf5118b9d3c859bd4be35ecac75b6e873cce34e7b6f554b06f75550d7"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "31961",
+        "execution",
+        "grants"
+      ],
+      "category": "exact_node_execution",
+      "before": [],
+      "after_sha256": "6cabe3cf4327477fe7a1c0dac3aa2c1e5ce2959743627873ae73d9a3f54241e8"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "31961",
+        "execution",
+        "status"
+      ],
+      "category": "exact_node_execution",
+      "before": "unsupported",
+      "after_sha256": "1e5941238a72b1f89a5d4cfad9164d5d37f08fab209161841ebf39bf057083d4"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "31961",
+        "execution",
+        "supported"
+      ],
+      "category": "exact_node_execution",
+      "before": [],
+      "after_sha256": "a3edec70084bfa73543535d37041f7d0e82d00ffff37d3c6a82f5662ec0a507f"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree",
+        "nodes",
+        "31961",
+        "execution",
+        "unsupported"
+      ],
+      "category": "exact_node_execution",
+      "before": [
+        "Your hits can't be Evaded\nNever deal Critical Strikes"
+      ],
+      "after_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "Your hits can't be Evaded\nNever deal Critical Strikes",
+        "status",
+        "grants"
+      ],
+      "category": "exact_whole_entry_localized_status",
+      "before": [],
+      "after_sha256": "6cabe3cf4327477fe7a1c0dac3aa2c1e5ce2959743627873ae73d9a3f54241e8"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "Your hits can't be Evaded\nNever deal Critical Strikes",
+        "status",
+        "implemented"
+      ],
+      "category": "exact_whole_entry_localized_status",
+      "before": false,
+      "after_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "Your hits can't be Evaded\nNever deal Critical Strikes",
+        "status",
+        "parser_supported"
+      ],
+      "category": "exact_whole_entry_localized_status",
+      "before": false,
+      "after_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "lines",
+        "Your hits can't be Evaded\nNever deal Critical Strikes",
+        "text"
+      ],
+      "category": "exact_whole_entry_localized_status",
+      "before": "你的击中无法被闪避\n不会造成暴击（暂未实装）",
+      "after_sha256": "751f3691921172be95ddfb9d5ff022f560e171cadc3d314696c99b34ae095d32"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "source_tree_localization",
+        "nodes",
+        "31961",
+        "stats"
+      ],
+      "category": "exact_node_localized_status",
+      "before": "你的击中无法被闪避\n不会造成暴击（暂未实装）",
+      "after_sha256": "751f3691921172be95ddfb9d5ff022f560e171cadc3d314696c99b34ae095d32"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "sunwell_terrace",
+        "save_version"
+      ],
+      "category": "current_save_version",
+      "before": 37.0,
+      "after_sha256": "cc179cc6804e03b317abe487bbfd0651951ccd6f562d6db1fa9296da87076e7e"
+    },
+    {
+      "kind": "changed",
+      "path": [
+        "town_maps",
+        "save_version"
+      ],
+      "category": "current_save_version",
+      "before": 37.0,
+      "after_sha256": "cc179cc6804e03b317abe487bbfd0651951ccd6f562d6db1fa9296da87076e7e"
+    }
+  ]
+}

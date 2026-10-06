@@ -1,0 +1,180 @@
+{
+  "gameplay": {
+    "checks": 412,
+    "failures": 0,
+    "exit": 0,
+    "seconds": 2.5759402039984707,
+    "test_sha256": "8dfb40ed32165a990199f0e88248538230ae3d390d25ed2d96d8fb8b6804767e"
+  },
+  "baseline": {
+    "ticks_each": 90,
+    "exits": [
+      0,
+      0
+    ],
+    "observations_exact_after_explicit_projections": true,
+    "observation_sha256": "d4d43b4f211e52c4f1e01ba30bb9a65e4c98132b9373a326025f68e18b569ece",
+    "projected_save_exact": true,
+    "raw_save_equal": false,
+    "raw_save_version_token_only": true,
+    "baseline_production_match": true,
+    "baseline_files": 491
+  },
+  "scope_limits": [
+    "Headless controlled actual main only",
+    "No UI screenshots, Windows performance or 600-second run",
+    "No production or existing test edits"
+  ],
+  "files": {
+    "README.md": {
+      "bytes": 5881,
+      "sha256": "5251cfa9fd12c607cb956a3d6e0f3a5fec0a387ec3a1db875110b111a9ac9b06"
+    },
+    "gameplay-01-run.json": {
+      "bytes": 133,
+      "sha256": "68cd5d48f8d13e0182bad13fc3ca78f70806b27d83b7d2d338a6427fbbd79838"
+    },
+    "gameplay-01.json": {
+      "bytes": 200,
+      "sha256": "431a8d88c5433ce0c3876962a4f26dfe3f08f878970ef80324d6bbb9f6d8be95"
+    },
+    "gameplay-01.log.txt": {
+      "bytes": 3980,
+      "sha256": "1ec79e30d1ca56e0026285d104978f60b0dae4634ce940b49e2cf753c8a6d6bd"
+    },
+    "gameplay-02-run.json": {
+      "bytes": 132,
+      "sha256": "9e9bbb731c7f1326a55bc984cdcf9868a5d6666ce903cbdd5e590dd40eb0e2bf"
+    },
+    "gameplay-02.json": {
+      "bytes": 200,
+      "sha256": "667582f6981deb1283f7ed7b45adc43dd5cb5ad795bc028921b52d58d7c27b31"
+    },
+    "gameplay-02.log.txt": {
+      "bytes": 1333,
+      "sha256": "4818a03a43d21d1aebb1f5eae598c5b882238dc4718c0e54737ebca49d346dde"
+    },
+    "gameplay-03-run.json": {
+      "bytes": 131,
+      "sha256": "72914edfd40fe0fa50e3a7bfdfba28a63d0e00a9c767faf27ea60b619e127e0e"
+    },
+    "gameplay-03.json": {
+      "bytes": 3133,
+      "sha256": "65b3fe92db4633d22ef4c8da77959dafcdc2657d39ea4b0c942105600a41389a"
+    },
+    "gameplay-03.log.txt": {
+      "bytes": 5146,
+      "sha256": "ad23bad0864db42ee3267288229ba5ce1bddbabdc411ea4a1c21bd6b887230ce"
+    },
+    "gameplay-04-run.json": {
+      "bytes": 133,
+      "sha256": "9ae3c34bfdd7aff859d85010a5089eebda19b3b2bac711223256b21236ed2e39"
+    },
+    "gameplay-04.json": {
+      "bytes": 3165,
+      "sha256": "39b6c783031e995d26c5e88bde420572b5abfababab93d62dfd4c07757aa2430"
+    },
+    "gameplay-04.log.txt": {
+      "bytes": 1302,
+      "sha256": "4b6c632cae60628d418d3e22e8d46efde858a3ec2406e6e8174c0abb121c8321"
+    },
+    "gameplay-05-harness.gd": {
+      "bytes": 33805,
+      "sha256": "2f7543fe036395e6138a96cede42af3180a309a64bbd5497026b8ef08ffd6074"
+    },
+    "gameplay-05-run.json": {
+      "bytes": 132,
+      "sha256": "09fed3250ebca2df778387a981d8d3f687bef9f45457fda2583185e876cab3df"
+    },
+    "gameplay-05.json": {
+      "bytes": 37471,
+      "sha256": "a2fb47641cb2abf86627ac9789fd2fc2a9f0bc571291c5225b12324b45872613"
+    },
+    "gameplay-05.log.txt": {
+      "bytes": 355,
+      "sha256": "e794e1656913cb44d504383516d693cd59da2d1f0c3864fe4d33cb5bbc0bf7c5"
+    },
+    "gameplay-06-harness.gd": {
+      "bytes": 36007,
+      "sha256": "8dfb40ed32165a990199f0e88248538230ae3d390d25ed2d96d8fb8b6804767e"
+    },
+    "gameplay-06-run.json": {
+      "bytes": 133,
+      "sha256": "5708a0c7623935ac9798fe121dbd618be6e5b213958695f895271a8b76701ade"
+    },
+    "gameplay-06.json": {
+      "bytes": 44355,
+      "sha256": "59034953485906cfec03fbe67ce2d166ef44f3326c79f1848b3d39d58dcd57f8"
+    },
+    "gameplay-06.log.txt": {
+      "bytes": 355,
+      "sha256": "1f35ce2ab1ccdcc9dd17cbbae73133bddf6683b48bc28f2cab595ae0c0597a7b"
+    },
+    "gameplay-production-inputs.json": {
+      "bytes": 78914,
+      "sha256": "14ea92e53c77afa30276e8f09279e945213c17052b6392a1808a0e6caee51cdc"
+    },
+    "legacy-01-harness.gd": {
+      "bytes": 33305,
+      "sha256": "26874434a5a3ee95833795a8df417411313e6fc1133433b6679dee5a2bb7dec3"
+    },
+    "legacy-comparison-01.json": {
+      "bytes": 1352,
+      "sha256": "250e9f720699dcd7e81622524d5d3dcb6f9037ab360401150fc5421511ba78ef"
+    },
+    "legacy-v060-01-run.json": {
+      "bytes": 207,
+      "sha256": "4c86a559b75e799bb09514b2be482f3bd08f4b2362e39d0a43ec7934a078c85f"
+    },
+    "legacy-v060-01.bin.gz": {
+      "bytes": 749494,
+      "sha256": "d621ae84199ff1004f0274fe9d60edc77936fbb893d0633fb18d4cf8dada2672"
+    },
+    "legacy-v060-01.json": {
+      "bytes": 434,
+      "sha256": "66aa30fc6db7a66b109020e66c18e1882b537ebe76a73bc546d2fa13d438613f"
+    },
+    "legacy-v060-01.log.txt": {
+      "bytes": 166,
+      "sha256": "f2e06d980db906090c5caa13c1447ce586a16fa73005fee487be57939762062c"
+    },
+    "legacy-v060-01.projected-save.json": {
+      "bytes": 12161,
+      "sha256": "dafc2ca608d8ba2db37ab75f1f4a326b9428532fd3a93efe0d14e15128d95e07"
+    },
+    "legacy-v060-01.save": {
+      "bytes": 12177,
+      "sha256": "5147caa69cf4c7b23fee431cc4847af653dc5fd7cc89bb1c1f112842fe9fdfa5"
+    },
+    "legacy-v060-production-inputs.json": {
+      "bytes": 125066,
+      "sha256": "ac90f38b25605b668818e2e1200b5fb9db814388a69553a624e815dec1b256c6"
+    },
+    "legacy-v061-01-run.json": {
+      "bytes": 201,
+      "sha256": "5f02eec2a1e1c0cf1aaa9201ee8d2fbed60dd92a16e4ab2ac3502d983bc6b943"
+    },
+    "legacy-v061-01.bin.gz": {
+      "bytes": 749494,
+      "sha256": "d621ae84199ff1004f0274fe9d60edc77936fbb893d0633fb18d4cf8dada2672"
+    },
+    "legacy-v061-01.json": {
+      "bytes": 434,
+      "sha256": "501e00e3b9052c3633c72b36e15b6fe12ca16a9ddc679f81d95f0fde1aba79c6"
+    },
+    "legacy-v061-01.log.txt": {
+      "bytes": 166,
+      "sha256": "e9beb61c796262f91e280860c8a1003a38f3d21dca3788f7230fbd2afe4db000"
+    },
+    "legacy-v061-01.projected-save.json": {
+      "bytes": 12161,
+      "sha256": "dafc2ca608d8ba2db37ab75f1f4a326b9428532fd3a93efe0d14e15128d95e07"
+    },
+    "legacy-v061-01.save": {
+      "bytes": 12177,
+      "sha256": "311a806d06b00ebab0541848e7975b1d25419ef0a6a4420f88862379bafbddde"
+    }
+  },
+  "current_test_sha256": "f83f4138025f77e52674e48201cf38111a6f819e9d49e7ed69e2ed35a92f5a89",
+  "post_execution_change": "Only one success-label and its nearby comment clarified that explosion charm remains equipped; no assertion, control flow, API call or fixture data changed."
+}

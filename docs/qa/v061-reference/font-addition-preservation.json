@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "mode": "Preserved full runtime scan plus unchanged text hashes and affected font comparison",
+  "initial_full_scan": "font-coverage.stdout.log.txt",
+  "initial_receipt": "font-coverage-result.json",
+  "runtime_files_unchanged": 175,
+  "unrelated_source_rescan_performed": false,
+  "only_changed_inputs": [
+    "assets/fonts/arena_sans.otf",
+    "assets/fonts/coverage_manifest.json"
+  ],
+  "added_codepoints": [
+    "U+62EC"
+  ],
+  "added_character": "括",
+  "all_old_1655_glyphs_and_advances_preserved": true,
+  "old_glyphs_sha256": "3e79ccecab46a2ce6fd04b37747b90c208077fc97296069048178b9971b56f76",
+  "new_old_glyphs_sha256": "3e79ccecab46a2ce6fd04b37747b90c208077fc97296069048178b9971b56f76",
+  "layout_family_license_preserved": true,
+  "old_font_sha256": "23242a749119f9790a3640524b07cf29e0f54f47af6d3fcbad03e80fe1d5d6cf",
+  "new_font_sha256": "cf1b9dafadce2987fadce98e249801f5f5215d9523bac40620921b4eceae72b8",
+  "old_manifest_sha256": "9266c3051209a7bfa20e985372ef1e864ab673a28314b4c03f200c018de59ec2",
+  "new_manifest_sha256": "1e55114933ea35a3c72e070da0f98e781d5f44d02aa09792a6ebcbef3c180e7d",
+  "final_coverage": {
+    "mapped_codepoints": 1656,
+    "required_codepoints": 1651,
+    "required_han": 1529,
+    "baseline_codepoints": 874,
+    "fallback_symbols": [
+      8961,
+      9672
+    ],
+    "missing": [],
+    "lost_baseline": [],
+    "empty_han": [],
+    "errors": [],
+    "ok": true,
+    "runtime_files": 175,
+    "missing_locations": {}
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "command": [
+    "godot",
+    "--headless",
+    "--path",
+    "/workspace/scratch/a51485f153de/v061-resolute-technique",
+    "--script",
+    "res://tests/resolute_technique_rules_test.gd"
+  ],
+  "environment": {
+    "XDG_DATA_HOME": "/tmp/godot-m1-v061-rules/data",
+    "XDG_CONFIG_HOME": "/tmp/godot-m1-v061-rules/config",
+    "XDG_CACHE_HOME": "/tmp/godot-m1-v061-rules/cache",
+    "RESOLUTE_RULES_REPORT": "/workspace/scratch/a51485f153de/v061-resolute-technique/docs/qa/v061-rules/20261006-003128-result.json"
+  },
+  "exit_code": 0,
+  "elapsed_seconds": 0.43910981199587695,
+  "error_lines": [],
+  "tested_file_sha256": {
+    "scripts/combat/resolute_technique_rules.gd": "0631c5247fc062f9e6c1cccbbf6f4ca56532963087a3b79a20c3b133d700e093",
+    "scripts/combat/combat_data.gd": "1927f57309d8f580f2cfd82a31ff094f45715cc6c402198c47f5fae57ac7fb02",
+    "scripts/combat/critical_strike_rules.gd": "5bc5a331d4fa860b044f1ba7ee09deffe78cc50aae2da81a54f83c6355cfa884",
+    "scripts/combat/attack_hit_rules.gd": "30c58c7ee72644a72873e07a7e1711a223a9fceb7740ad4a37dd85b184d21093",
+    "scripts/combat/skill_compiler.gd": "0a0d1f7a16715a8286cf43fcf1cb828a4538483a64c6a3f8af5191b3db0075eb",
+    "scripts/combat/critical_strike_runtime.gd": "d5678da1780b90c5015b3fa70a2fe0cb447b440606b017dd24b73fc5348bc0ae",
+    "tests/resolute_technique_rules_test.gd": "40b992f12e40e6bec0476e69dbd6720df3f46422a2ad5911cfd203842fcc265a"
+  }
+}

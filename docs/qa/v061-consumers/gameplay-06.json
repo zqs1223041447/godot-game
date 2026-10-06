@@ -1,0 +1,2241 @@
+{
+	"actual_casts": [
+		{
+			"admission": [
+				{
+					"actor": "monster",
+					"chance": 1.0,
+					"hit": true,
+					"target_id": 1
+				}
+			],
+			"critical": {
+				"draws": 0,
+				"events": 0,
+				"state": 3175619884672556388
+			},
+			"hits": [
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 1.0,
+						"base_coefficient": 1.0,
+						"intrinsic": {
+							"physical": 18.0
+						},
+						"stage": "hit_base",
+						"weapon": {
+							"coefficient": 1.0,
+							"components": {
+								"physical": 4.0
+							},
+							"contribution": {
+								"physical": 4.0
+							},
+							"profile": {
+								"base": {
+									"physical": 4.0
+								},
+								"base_id": "forgeblade",
+								"flat": {
+									"physical": 0.0
+								},
+								"increased": {
+									"physical": 0.0
+								},
+								"item_id": "gear_000004",
+								"sources": [],
+								"stage": "weapon_local"
+							}
+						}
+					},
+					"before_defense_components": {
+						"physical": 30.799999999999997
+					},
+					"cast_id": 1,
+					"components": {
+						"physical": 30.799999999999997
+					},
+					"details": [
+						{
+							"base": 22.0,
+							"before_defense": 30.799999999999997,
+							"final": 30.799999999999997,
+							"increased": 0.4,
+							"modifiers": [
+								"melee_physical_increased"
+							],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "physical"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 30.799999999999997,
+					"leech": {
+						"health": 0.1848,
+						"mana": 0.10779999999999999
+					},
+					"phase": "direct",
+					"prevented_components": {
+						"physical": 0.0
+					},
+					"projectile_id": 0,
+					"shield_spent": 0.0,
+					"skill_id": "basic",
+					"tags": [
+						"hit",
+						"attack",
+						"melee"
+					],
+					"target_id": 1,
+					"total": 30.799999999999997
+				}
+			],
+			"id": "melee"
+		},
+		{
+			"admission": [
+				{
+					"actor": "monster",
+					"chance": 1.0,
+					"hit": true,
+					"target_id": 1
+				}
+			],
+			"critical": {
+				"draws": 0,
+				"events": 0,
+				"state": 3175619884672556388
+			},
+			"hits": [
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 1.0,
+						"base_coefficient": 1.0,
+						"intrinsic": {
+							"physical": 18.0
+						},
+						"stage": "hit_base",
+						"weapon": {
+							"coefficient": 1.0,
+							"components": {
+								"physical": 4.0
+							},
+							"contribution": {
+								"physical": 4.0
+							},
+							"profile": {
+								"base": {
+									"physical": 4.0
+								},
+								"base_id": "ashwood_bow",
+								"flat": {
+									"physical": 0.0
+								},
+								"increased": {
+									"physical": 0.0
+								},
+								"item_id": "gear_000005",
+								"sources": [],
+								"stage": "weapon_local"
+							}
+						}
+					},
+					"before_defense_components": {
+						"physical": 22.0
+					},
+					"cast_id": 1,
+					"components": {
+						"physical": 22.0
+					},
+					"details": [
+						{
+							"base": 22.0,
+							"before_defense": 22.0,
+							"final": 22.0,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "physical"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 22.0,
+					"leech": {
+						"health": 0.132,
+						"mana": 0.077
+					},
+					"phase": "outbound",
+					"prevented_components": {
+						"physical": 0.0
+					},
+					"projectile_id": 1,
+					"shield_spent": 0.0,
+					"skill_id": "basic",
+					"tags": [
+						"hit",
+						"projectile",
+						"attack"
+					],
+					"target_id": 1,
+					"total": 22.0
+				}
+			],
+			"id": "bow"
+		},
+		{
+			"admission": [
+				{
+					"actor": "monster",
+					"chance": 1.0,
+					"hit": true,
+					"target_id": 1
+				},
+				{
+					"actor": "monster",
+					"chance": 1.0,
+					"hit": true,
+					"target_id": 2
+				}
+			],
+			"critical": {
+				"draws": 0,
+				"events": 0,
+				"state": 3175619884672556388
+			},
+			"hits": [
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 2.8,
+						"base_coefficient": 2.8,
+						"intrinsic": {
+							"physical": 50.4
+						},
+						"stage": "hit_base",
+						"weapon": {
+							"coefficient": 2.8,
+							"components": {
+								"physical": 4.0
+							},
+							"contribution": {
+								"physical": 11.2
+							},
+							"profile": {
+								"base": {
+									"physical": 4.0
+								},
+								"base_id": "forgeblade",
+								"flat": {
+									"physical": 0.0
+								},
+								"increased": {
+									"physical": 0.0
+								},
+								"item_id": "gear_000004",
+								"sources": [],
+								"stage": "weapon_local"
+							}
+						}
+					},
+					"before_defense_components": {
+						"physical": 86.23999999999998
+					},
+					"cast_id": 1,
+					"components": {
+						"physical": 86.23999999999998
+					},
+					"details": [
+						{
+							"base": 61.599999999999994,
+							"before_defense": 86.23999999999998,
+							"final": 86.23999999999998,
+							"increased": 0.4,
+							"modifiers": [
+								"melee_physical_increased"
+							],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "physical"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 86.23999999999998,
+					"leech": {
+						"health": 0.5174399999999999,
+						"mana": 0.30183999999999994
+					},
+					"phase": "direct",
+					"prevented_components": {
+						"physical": 0.0
+					},
+					"projectile_id": 0,
+					"shield_spent": 0.0,
+					"skill_id": "cleave",
+					"tags": [
+						"hit",
+						"attack",
+						"melee",
+						"area"
+					],
+					"target_id": 1,
+					"total": 86.23999999999998
+				},
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 2.8,
+						"base_coefficient": 2.8,
+						"intrinsic": {
+							"physical": 50.4
+						},
+						"stage": "hit_base",
+						"weapon": {
+							"coefficient": 2.8,
+							"components": {
+								"physical": 4.0
+							},
+							"contribution": {
+								"physical": 11.2
+							},
+							"profile": {
+								"base": {
+									"physical": 4.0
+								},
+								"base_id": "forgeblade",
+								"flat": {
+									"physical": 0.0
+								},
+								"increased": {
+									"physical": 0.0
+								},
+								"item_id": "gear_000004",
+								"sources": [],
+								"stage": "weapon_local"
+							}
+						}
+					},
+					"before_defense_components": {
+						"physical": 86.23999999999998
+					},
+					"cast_id": 1,
+					"components": {
+						"physical": 86.23999999999998
+					},
+					"details": [
+						{
+							"base": 61.599999999999994,
+							"before_defense": 86.23999999999998,
+							"final": 86.23999999999998,
+							"increased": 0.4,
+							"modifiers": [
+								"melee_physical_increased"
+							],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "physical"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 86.23999999999998,
+					"leech": {
+						"health": 0.5174399999999999,
+						"mana": 0.30183999999999994
+					},
+					"phase": "direct",
+					"prevented_components": {
+						"physical": 0.0
+					},
+					"projectile_id": 0,
+					"shield_spent": 0.0,
+					"skill_id": "cleave",
+					"tags": [
+						"hit",
+						"attack",
+						"melee",
+						"area"
+					],
+					"target_id": 2,
+					"total": 86.23999999999998
+				}
+			],
+			"id": "cleave",
+			"loot": 918383887290477855
+		},
+		{
+			"admission": [
+				{
+					"actor": "monster",
+					"chance": 1.0,
+					"hit": true,
+					"target_id": 1
+				},
+				{
+					"actor": "monster",
+					"chance": 1.0,
+					"hit": true,
+					"target_id": 1
+				},
+				{
+					"actor": "monster",
+					"chance": 1.0,
+					"hit": true,
+					"target_id": 1
+				},
+				{
+					"actor": "monster",
+					"chance": 1.0,
+					"hit": true,
+					"target_id": 2
+				}
+			],
+			"critical": {
+				"draws": 0,
+				"events": 0,
+				"state": 3175619884672556388
+			},
+			"hits": [
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 1.0,
+						"base_coefficient": 1.0,
+						"intrinsic": {
+							"fire": 7.2,
+							"physical": 10.799999999999999
+						},
+						"stage": "hit_base"
+					},
+					"before_defense_components": {
+						"fire": 7.2,
+						"physical": 10.799999999999999
+					},
+					"cast_id": 1,
+					"components": {
+						"fire": 7.2,
+						"physical": 10.799999999999999
+					},
+					"details": [
+						{
+							"base": 10.799999999999999,
+							"before_defense": 10.799999999999999,
+							"final": 10.799999999999999,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "physical"
+						},
+						{
+							"base": 7.2,
+							"before_defense": 7.2,
+							"final": 7.2,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "fire"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 18.0,
+					"leech": {
+						"health": 0.108,
+						"mana": 0.063
+					},
+					"phase": "outbound",
+					"prevented_components": {
+						"fire": 0.0,
+						"physical": 0.0
+					},
+					"projectile_id": 2,
+					"shield_spent": 0.0,
+					"skill_id": "tornado",
+					"tags": [
+						"hit",
+						"attack",
+						"projectile"
+					],
+					"target_id": 1,
+					"total": 18.0
+				},
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 1.0,
+						"base_coefficient": 1.0,
+						"intrinsic": {
+							"fire": 7.2,
+							"physical": 10.799999999999999
+						},
+						"stage": "hit_base"
+					},
+					"before_defense_components": {
+						"fire": 7.2,
+						"physical": 10.799999999999999
+					},
+					"cast_id": 1,
+					"components": {
+						"fire": 7.2,
+						"physical": 10.799999999999999
+					},
+					"details": [
+						{
+							"base": 10.799999999999999,
+							"before_defense": 10.799999999999999,
+							"final": 10.799999999999999,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "physical"
+						},
+						{
+							"base": 7.2,
+							"before_defense": 7.2,
+							"final": 7.2,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "fire"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 18.0,
+					"leech": {
+						"health": 0.108,
+						"mana": 0.063
+					},
+					"phase": "outbound",
+					"prevented_components": {
+						"fire": 0.0,
+						"physical": 0.0
+					},
+					"projectile_id": 1,
+					"shield_spent": 0.0,
+					"skill_id": "tornado",
+					"tags": [
+						"hit",
+						"attack",
+						"projectile"
+					],
+					"target_id": 1,
+					"total": 18.0
+				},
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 1.0,
+						"base_coefficient": 1.0,
+						"intrinsic": {
+							"fire": 7.2,
+							"physical": 10.799999999999999
+						},
+						"stage": "hit_base"
+					},
+					"before_defense_components": {
+						"fire": 7.2,
+						"physical": 10.799999999999999
+					},
+					"cast_id": 1,
+					"components": {
+						"fire": 7.2,
+						"physical": 10.799999999999999
+					},
+					"details": [
+						{
+							"base": 10.799999999999999,
+							"before_defense": 10.799999999999999,
+							"final": 10.799999999999999,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "physical"
+						},
+						{
+							"base": 7.2,
+							"before_defense": 7.2,
+							"final": 7.2,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "fire"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 18.0,
+					"leech": {
+						"health": 0.108,
+						"mana": 0.063
+					},
+					"phase": "outbound",
+					"prevented_components": {
+						"fire": 0.0,
+						"physical": 0.0
+					},
+					"projectile_id": 3,
+					"shield_spent": 0.0,
+					"skill_id": "tornado",
+					"tags": [
+						"hit",
+						"attack",
+						"projectile"
+					],
+					"target_id": 1,
+					"total": 18.0
+				},
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 1.0,
+						"base_coefficient": 1.0,
+						"intrinsic": {
+							"fire": 7.2,
+							"physical": 10.799999999999999
+						},
+						"stage": "hit_base"
+					},
+					"before_defense_components": {
+						"fire": 7.2,
+						"physical": 10.799999999999999
+					},
+					"cast_id": 1,
+					"components": {
+						"fire": 7.2,
+						"physical": 10.799999999999999
+					},
+					"details": [
+						{
+							"base": 10.799999999999999,
+							"before_defense": 10.799999999999999,
+							"final": 10.799999999999999,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "physical"
+						},
+						{
+							"base": 7.2,
+							"before_defense": 7.2,
+							"final": 7.2,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "fire"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 18.0,
+					"leech": {
+						"health": 0.108,
+						"mana": 0.063
+					},
+					"phase": "outbound",
+					"prevented_components": {
+						"fire": 0.0,
+						"physical": 0.0
+					},
+					"projectile_id": 3,
+					"shield_spent": 0.0,
+					"skill_id": "tornado",
+					"tags": [
+						"hit",
+						"attack",
+						"projectile"
+					],
+					"target_id": 2,
+					"total": 18.0
+				}
+			],
+			"id": "tornado",
+			"loot": 2087057772478645923
+		},
+		{
+			"admission": [],
+			"critical": {
+				"draws": 0,
+				"events": 0,
+				"state": 3175619884672556388
+			},
+			"hits": [
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 1.6,
+						"base_coefficient": 1.6,
+						"intrinsic": {
+							"lightning": 28.8
+						},
+						"stage": "hit_base"
+					},
+					"before_defense_components": {
+						"lightning": 28.8
+					},
+					"cast_id": 1,
+					"components": {
+						"lightning": 28.8
+					},
+					"details": [
+						{
+							"base": 28.8,
+							"before_defense": 28.8,
+							"final": 28.8,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "lightning"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 28.8,
+					"phase": "outbound",
+					"prevented_components": {
+						"lightning": 0.0
+					},
+					"projectile_id": 2,
+					"shield_spent": 0.0,
+					"skill_id": "bolt",
+					"tags": [
+						"hit",
+						"projectile",
+						"spell"
+					],
+					"target_id": 1,
+					"total": 28.8
+				},
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 1.6,
+						"base_coefficient": 1.6,
+						"intrinsic": {
+							"lightning": 28.8
+						},
+						"stage": "hit_base"
+					},
+					"before_defense_components": {
+						"lightning": 28.8
+					},
+					"cast_id": 1,
+					"components": {
+						"lightning": 28.8
+					},
+					"details": [
+						{
+							"base": 28.8,
+							"before_defense": 28.8,
+							"final": 28.8,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "lightning"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 28.8,
+					"phase": "outbound",
+					"prevented_components": {
+						"lightning": 0.0
+					},
+					"projectile_id": 3,
+					"shield_spent": 0.0,
+					"skill_id": "bolt",
+					"tags": [
+						"hit",
+						"projectile",
+						"spell"
+					],
+					"target_id": 1,
+					"total": 28.8
+				},
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 1.6,
+						"base_coefficient": 1.6,
+						"intrinsic": {
+							"lightning": 28.8
+						},
+						"stage": "hit_base"
+					},
+					"before_defense_components": {
+						"lightning": 28.8
+					},
+					"cast_id": 1,
+					"components": {
+						"lightning": 28.8
+					},
+					"details": [
+						{
+							"base": 28.8,
+							"before_defense": 28.8,
+							"final": 28.8,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "lightning"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 28.8,
+					"phase": "outbound",
+					"prevented_components": {
+						"lightning": 0.0
+					},
+					"projectile_id": 1,
+					"shield_spent": 0.0,
+					"skill_id": "bolt",
+					"tags": [
+						"hit",
+						"projectile",
+						"spell"
+					],
+					"target_id": 1,
+					"total": 28.8
+				},
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 1.6,
+						"base_coefficient": 1.6,
+						"intrinsic": {
+							"lightning": 28.8
+						},
+						"stage": "hit_base"
+					},
+					"before_defense_components": {
+						"lightning": 28.8
+					},
+					"cast_id": 1,
+					"components": {
+						"lightning": 28.8
+					},
+					"details": [
+						{
+							"base": 28.8,
+							"before_defense": 28.8,
+							"final": 28.8,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "lightning"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 28.8,
+					"phase": "outbound",
+					"prevented_components": {
+						"lightning": 0.0
+					},
+					"projectile_id": 3,
+					"shield_spent": 0.0,
+					"skill_id": "bolt",
+					"tags": [
+						"hit",
+						"projectile",
+						"spell"
+					],
+					"target_id": 2,
+					"total": 28.8
+				}
+			],
+			"id": "bolt",
+			"loot": 7297947109173953127
+		},
+		{
+			"admission": [],
+			"critical": {
+				"draws": 0,
+				"events": 0,
+				"state": 3175619884672556388
+			},
+			"hits": [
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 0.85,
+						"base_coefficient": 0.85,
+						"intrinsic": {
+							"cold": 15.299999999999999
+						},
+						"stage": "hit_base"
+					},
+					"before_defense_components": {
+						"cold": 15.299999999999999
+					},
+					"cast_id": 1,
+					"components": {
+						"cold": 15.299999999999999
+					},
+					"details": [
+						{
+							"base": 15.299999999999999,
+							"before_defense": 15.299999999999999,
+							"final": 15.299999999999999,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "cold"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 15.299999999999999,
+					"phase": "outbound",
+					"prevented_components": {
+						"cold": 0.0
+					},
+					"projectile_id": 3,
+					"shield_spent": 0.0,
+					"skill_id": "frost",
+					"tags": [
+						"hit",
+						"projectile",
+						"spell"
+					],
+					"target_id": 1,
+					"total": 15.299999999999999
+				},
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 0.85,
+						"base_coefficient": 0.85,
+						"intrinsic": {
+							"cold": 15.299999999999999
+						},
+						"stage": "hit_base"
+					},
+					"before_defense_components": {
+						"cold": 15.299999999999999
+					},
+					"cast_id": 1,
+					"components": {
+						"cold": 15.299999999999999
+					},
+					"details": [
+						{
+							"base": 15.299999999999999,
+							"before_defense": 15.299999999999999,
+							"final": 15.299999999999999,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "cold"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 15.299999999999999,
+					"phase": "outbound",
+					"prevented_components": {
+						"cold": 0.0
+					},
+					"projectile_id": 2,
+					"shield_spent": 0.0,
+					"skill_id": "frost",
+					"tags": [
+						"hit",
+						"projectile",
+						"spell"
+					],
+					"target_id": 1,
+					"total": 15.299999999999999
+				},
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 0.85,
+						"base_coefficient": 0.85,
+						"intrinsic": {
+							"cold": 15.299999999999999
+						},
+						"stage": "hit_base"
+					},
+					"before_defense_components": {
+						"cold": 15.299999999999999
+					},
+					"cast_id": 1,
+					"components": {
+						"cold": 15.299999999999999
+					},
+					"details": [
+						{
+							"base": 15.299999999999999,
+							"before_defense": 15.299999999999999,
+							"final": 15.299999999999999,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "cold"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 15.299999999999999,
+					"phase": "outbound",
+					"prevented_components": {
+						"cold": 0.0
+					},
+					"projectile_id": 4,
+					"shield_spent": 0.0,
+					"skill_id": "frost",
+					"tags": [
+						"hit",
+						"projectile",
+						"spell"
+					],
+					"target_id": 1,
+					"total": 15.299999999999999
+				},
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 0.85,
+						"base_coefficient": 0.85,
+						"intrinsic": {
+							"cold": 15.299999999999999
+						},
+						"stage": "hit_base"
+					},
+					"before_defense_components": {
+						"cold": 15.299999999999999
+					},
+					"cast_id": 1,
+					"components": {
+						"cold": 15.299999999999999
+					},
+					"details": [
+						{
+							"base": 15.299999999999999,
+							"before_defense": 15.299999999999999,
+							"final": 15.299999999999999,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "cold"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 15.299999999999999,
+					"phase": "outbound",
+					"prevented_components": {
+						"cold": 0.0
+					},
+					"projectile_id": 4,
+					"shield_spent": 0.0,
+					"skill_id": "frost",
+					"tags": [
+						"hit",
+						"projectile",
+						"spell"
+					],
+					"target_id": 2,
+					"total": 15.299999999999999
+				}
+			],
+			"id": "frost",
+			"loot": -3466129511775507585
+		},
+		{
+			"admission": [],
+			"critical": {
+				"draws": 0,
+				"events": 0,
+				"state": 3175619884672556388
+			},
+			"hits": [
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 2.4,
+						"base_coefficient": 2.4,
+						"intrinsic": {
+							"chaos": 43.199999999999996
+						},
+						"stage": "hit_base"
+					},
+					"before_defense_components": {
+						"chaos": 43.199999999999996
+					},
+					"cast_id": 1,
+					"components": {
+						"chaos": 43.199999999999996
+					},
+					"details": [
+						{
+							"base": 43.199999999999996,
+							"before_defense": 43.199999999999996,
+							"final": 43.199999999999996,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "chaos"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 43.199999999999996,
+					"phase": "outbound",
+					"prevented_components": {
+						"chaos": 0.0
+					},
+					"projectile_id": 1,
+					"shield_spent": 0.0,
+					"skill_id": "shade_bolt",
+					"tags": [
+						"hit",
+						"projectile",
+						"spell"
+					],
+					"target_id": 1,
+					"total": 43.199999999999996
+				}
+			],
+			"id": "shade_bolt",
+			"loot": -7785618848728543615
+		},
+		{
+			"admission": [],
+			"critical": {
+				"draws": 0,
+				"events": 0,
+				"state": 3175619884672556388
+			},
+			"hits": [
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 2.7,
+						"base_coefficient": 2.7,
+						"intrinsic": {
+							"lightning": 48.6
+						},
+						"stage": "hit_base"
+					},
+					"before_defense_components": {
+						"lightning": 48.6
+					},
+					"cast_id": 0,
+					"components": {
+						"lightning": 48.6
+					},
+					"details": [
+						{
+							"base": 48.6,
+							"before_defense": 48.6,
+							"final": 48.6,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "lightning"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 48.6,
+					"phase": "direct",
+					"prevented_components": {
+						"lightning": 0.0
+					},
+					"projectile_id": 0,
+					"shield_spent": 0.0,
+					"skill_id": "nova",
+					"tags": [
+						"hit",
+						"spell",
+						"area"
+					],
+					"target_id": 1,
+					"total": 48.6
+				},
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 2.7,
+						"base_coefficient": 2.7,
+						"intrinsic": {
+							"lightning": 48.6
+						},
+						"stage": "hit_base"
+					},
+					"before_defense_components": {
+						"lightning": 48.6
+					},
+					"cast_id": 0,
+					"components": {
+						"lightning": 48.6
+					},
+					"details": [
+						{
+							"base": 48.6,
+							"before_defense": 48.6,
+							"final": 48.6,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "lightning"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 48.6,
+					"phase": "direct",
+					"prevented_components": {
+						"lightning": 0.0
+					},
+					"projectile_id": 0,
+					"shield_spent": 0.0,
+					"skill_id": "nova",
+					"tags": [
+						"hit",
+						"spell",
+						"area"
+					],
+					"target_id": 2,
+					"total": 48.6
+				}
+			],
+			"id": "nova",
+			"loot": 918383887290477855
+		},
+		{
+			"admission": [],
+			"critical": {
+				"draws": 0,
+				"events": 0,
+				"state": 3175619884672556388
+			},
+			"hits": [
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 4.3,
+						"base_coefficient": 4.3,
+						"intrinsic": {
+							"fire": 77.39999999999999
+						},
+						"stage": "hit_base"
+					},
+					"before_defense_components": {
+						"fire": 77.39999999999999
+					},
+					"cast_id": 0,
+					"components": {
+						"fire": 77.39999999999999
+					},
+					"details": [
+						{
+							"base": 77.39999999999999,
+							"before_defense": 77.39999999999999,
+							"final": 77.39999999999999,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "fire"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 77.39999999999999,
+					"phase": "direct",
+					"prevented_components": {
+						"fire": 0.0
+					},
+					"projectile_id": 0,
+					"shield_spent": 0.0,
+					"skill_id": "meteor",
+					"tags": [
+						"hit",
+						"spell",
+						"area"
+					],
+					"target_id": 1,
+					"total": 77.39999999999999
+				},
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 4.3,
+						"base_coefficient": 4.3,
+						"intrinsic": {
+							"fire": 77.39999999999999
+						},
+						"stage": "hit_base"
+					},
+					"before_defense_components": {
+						"fire": 77.39999999999999
+					},
+					"cast_id": 0,
+					"components": {
+						"fire": 77.39999999999999
+					},
+					"details": [
+						{
+							"base": 77.39999999999999,
+							"before_defense": 77.39999999999999,
+							"final": 77.39999999999999,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "fire"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 77.39999999999999,
+					"phase": "direct",
+					"prevented_components": {
+						"fire": 0.0
+					},
+					"projectile_id": 0,
+					"shield_spent": 0.0,
+					"skill_id": "meteor",
+					"tags": [
+						"hit",
+						"spell",
+						"area"
+					],
+					"target_id": 2,
+					"total": 77.39999999999999
+				}
+			],
+			"id": "meteor",
+			"loot": 7706162816341096927
+		},
+		{
+			"admission": [],
+			"critical": {
+				"draws": 0,
+				"events": 0,
+				"state": 3175619884672556388
+			},
+			"hits": [
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 2.2,
+						"base_coefficient": 2.2,
+						"intrinsic": {
+							"lightning": 39.6
+						},
+						"stage": "hit_base"
+					},
+					"before_defense_components": {
+						"lightning": 39.6
+					},
+					"cast_id": 1,
+					"components": {
+						"lightning": 39.6
+					},
+					"details": [
+						{
+							"base": 39.6,
+							"before_defense": 39.6,
+							"final": 39.6,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "lightning"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 39.6,
+					"phase": "direct",
+					"prevented_components": {
+						"lightning": 0.0
+					},
+					"projectile_id": 0,
+					"shield_spent": 0.0,
+					"skill_id": "chain",
+					"tags": [
+						"hit",
+						"spell",
+						"chain"
+					],
+					"target_id": 1,
+					"total": 39.6
+				},
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 2.0,
+						"base_coefficient": 2.0,
+						"intrinsic": {
+							"lightning": 36.0
+						},
+						"stage": "hit_base"
+					},
+					"before_defense_components": {
+						"lightning": 36.0
+					},
+					"cast_id": 1,
+					"components": {
+						"lightning": 36.0
+					},
+					"details": [
+						{
+							"base": 36.0,
+							"before_defense": 36.0,
+							"final": 36.0,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "lightning"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 36.0,
+					"phase": "direct",
+					"prevented_components": {
+						"lightning": 0.0
+					},
+					"projectile_id": 0,
+					"shield_spent": 0.0,
+					"skill_id": "chain",
+					"tags": [
+						"hit",
+						"spell",
+						"chain"
+					],
+					"target_id": 2,
+					"total": 36.0
+				}
+			],
+			"id": "chain",
+			"loot": -3466129511775507585
+		}
+	],
+	"admission_leech": [
+		{
+			"admission": [
+				{
+					"actor": "monster",
+					"chance": 0.05,
+					"hit": false,
+					"target_id": 1
+				}
+			],
+			"critical_after": {
+				"draws": 1,
+				"events": 1,
+				"state": -8228891633627444941
+			},
+			"critical_before": {
+				"draws": 0,
+				"events": 0,
+				"state": 3175619884672556388
+			},
+			"enabled": false,
+			"entropy": 18.25,
+			"hits": [],
+			"loot_after": -1693667366896553509,
+			"loot_before": -1693667366896553509
+		},
+		{
+			"admission": [
+				{
+					"actor": "monster",
+					"chance": 1.0,
+					"hit": true,
+					"target_id": 1
+				}
+			],
+			"critical_after": {
+				"draws": 0,
+				"events": 0,
+				"state": 3175619884672556388
+			},
+			"critical_before": {
+				"draws": 0,
+				"events": 0,
+				"state": 3175619884672556388
+			},
+			"enabled": true,
+			"entropy": 13.25,
+			"hits": [
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 2.8,
+						"base_coefficient": 2.8,
+						"intrinsic": {
+							"physical": 50.4
+						},
+						"stage": "hit_base",
+						"weapon": {
+							"coefficient": 2.8,
+							"components": {
+								"physical": 4.0
+							},
+							"contribution": {
+								"physical": 11.2
+							},
+							"profile": {
+								"base": {
+									"physical": 4.0
+								},
+								"base_id": "forgeblade",
+								"flat": {
+									"physical": 0.0
+								},
+								"increased": {
+									"physical": 0.0
+								},
+								"item_id": "gear_000004",
+								"sources": [],
+								"stage": "weapon_local"
+							}
+						}
+					},
+					"before_defense_components": {
+						"physical": 86.23999999999998
+					},
+					"cast_id": 1,
+					"components": {
+						"physical": 86.23999999999998
+					},
+					"details": [
+						{
+							"base": 61.599999999999994,
+							"before_defense": 86.23999999999998,
+							"final": 86.23999999999998,
+							"increased": 0.4,
+							"modifiers": [
+								"melee_physical_increased"
+							],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "physical"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 10.0,
+					"leech": {
+						"health": 0.09,
+						"mana": 0.0525
+					},
+					"phase": "direct",
+					"prevented_components": {
+						"physical": 0.0
+					},
+					"projectile_id": 0,
+					"shield_spent": 5.0,
+					"skill_id": "cleave",
+					"tags": [
+						"hit",
+						"attack",
+						"melee",
+						"area"
+					],
+					"target_id": 1,
+					"total": 86.23999999999998
+				}
+			],
+			"loot_after": -677041210617379179,
+			"loot_before": -1693667366896553509
+		}
+	],
+	"checks": 412,
+	"failures": 0,
+	"frozen_real_cast": {
+		"critical": {
+			"draws": 0,
+			"events": 0,
+			"state": 3175619884672556388
+		},
+		"events": {
+			"explosion": 15,
+			"flight_ended": 15,
+			"hit": 3,
+			"lifetime_expired": 15,
+			"range_reached": 20,
+			"return_started": 15,
+			"spawned": 15,
+			"split": 5,
+			"terminated": 20
+		},
+		"hits": [
+			{
+				"assembly": {
+					"added": {
+
+					},
+					"added_effectiveness": 0.7,
+					"base_coefficient": 0.7,
+					"intrinsic": {
+						"fire": 6.16,
+						"physical": 9.239999999999998
+					},
+					"stage": "hit_base"
+				},
+				"before_defense_components": {
+					"fire": 11.704,
+					"physical": 14.783999999999999
+				},
+				"cast_id": 1,
+				"components": {
+					"fire": 11.704,
+					"physical": 14.783999999999999
+				},
+				"details": [
+					{
+						"base": 9.239999999999998,
+						"before_defense": 14.783999999999999,
+						"final": 14.783999999999999,
+						"increased": 0.6000000000000001,
+						"modifiers": [
+							"global_increased",
+							"projectile_increased"
+						],
+						"more": 1.0,
+						"resistance": 0.0,
+						"type": "physical"
+					},
+					{
+						"base": 6.16,
+						"before_defense": 11.704,
+						"final": 11.704,
+						"increased": 0.9000000000000001,
+						"modifiers": [
+							"global_increased",
+							"projectile_increased",
+							"elemental_increased"
+						],
+						"more": 1.0,
+						"resistance": 0.0,
+						"type": "fire"
+					}
+				],
+				"effect_id": "",
+				"health_lost": 26.488,
+				"phase": "returning",
+				"prevented_components": {
+					"fire": 0.0,
+					"physical": 0.0
+				},
+				"projectile_id": 18,
+				"shield_spent": 0.0,
+				"skill_id": "tornado",
+				"tags": [
+					"hit",
+					"attack",
+					"projectile"
+				],
+				"target_id": 3,
+				"total": 26.488
+			},
+			{
+				"assembly": {
+					"added": {
+
+					},
+					"added_effectiveness": 0.0,
+					"base_coefficient": 0.9,
+					"intrinsic": {
+						"fire": 19.8
+					},
+					"stage": "hit_base"
+				},
+				"before_defense_components": {
+					"fire": 29.700000000000003
+				},
+				"cast_id": 1,
+				"components": {
+					"fire": 29.700000000000003
+				},
+				"details": [
+					{
+						"base": 19.8,
+						"before_defense": 29.700000000000003,
+						"final": 29.700000000000003,
+						"increased": 0.5,
+						"modifiers": [
+							"global_increased",
+							"elemental_increased"
+						],
+						"more": 1.0,
+						"resistance": 0.0,
+						"type": "fire"
+					}
+				],
+				"effect_id": "explosion:6",
+				"health_lost": 29.700000000000003,
+				"phase": "returning",
+				"prevented_components": {
+					"fire": 0.0
+				},
+				"projectile_id": 6,
+				"shield_spent": 0.0,
+				"skill_id": "tornado",
+				"tags": [
+					"hit",
+					"area",
+					"secondary",
+					"explosion"
+				],
+				"target_id": 3,
+				"total": 29.700000000000003
+			},
+			{
+				"assembly": {
+					"added": {
+
+					},
+					"added_effectiveness": 0.0,
+					"base_coefficient": 0.9,
+					"intrinsic": {
+						"fire": 19.8
+					},
+					"stage": "hit_base"
+				},
+				"before_defense_components": {
+					"fire": 29.700000000000003
+				},
+				"cast_id": 1,
+				"components": {
+					"fire": 29.700000000000003
+				},
+				"details": [
+					{
+						"base": 19.8,
+						"before_defense": 29.700000000000003,
+						"final": 29.700000000000003,
+						"increased": 0.5,
+						"modifiers": [
+							"global_increased",
+							"elemental_increased"
+						],
+						"more": 1.0,
+						"resistance": 0.0,
+						"type": "fire"
+					}
+				],
+				"effect_id": "explosion:9",
+				"health_lost": 29.700000000000003,
+				"phase": "returning",
+				"prevented_components": {
+					"fire": 0.0
+				},
+				"projectile_id": 9,
+				"shield_spent": 0.0,
+				"skill_id": "tornado",
+				"tags": [
+					"hit",
+					"area",
+					"secondary",
+					"explosion"
+				],
+				"target_id": 3,
+				"total": 29.700000000000003
+			},
+			{
+				"assembly": {
+					"added": {
+
+					},
+					"added_effectiveness": 0.0,
+					"base_coefficient": 0.9,
+					"intrinsic": {
+						"fire": 19.8
+					},
+					"stage": "hit_base"
+				},
+				"before_defense_components": {
+					"fire": 29.700000000000003
+				},
+				"cast_id": 1,
+				"components": {
+					"fire": 29.700000000000003
+				},
+				"details": [
+					{
+						"base": 19.8,
+						"before_defense": 29.700000000000003,
+						"final": 29.700000000000003,
+						"increased": 0.5,
+						"modifiers": [
+							"global_increased",
+							"elemental_increased"
+						],
+						"more": 1.0,
+						"resistance": 0.0,
+						"type": "fire"
+					}
+				],
+				"effect_id": "explosion:12",
+				"health_lost": 29.700000000000003,
+				"phase": "returning",
+				"prevented_components": {
+					"fire": 0.0
+				},
+				"projectile_id": 12,
+				"shield_spent": 0.0,
+				"skill_id": "tornado",
+				"tags": [
+					"hit",
+					"area",
+					"secondary",
+					"explosion"
+				],
+				"target_id": 3,
+				"total": 29.700000000000003
+			},
+			{
+				"assembly": {
+					"added": {
+
+					},
+					"added_effectiveness": 0.0,
+					"base_coefficient": 0.9,
+					"intrinsic": {
+						"fire": 19.8
+					},
+					"stage": "hit_base"
+				},
+				"before_defense_components": {
+					"fire": 29.700000000000003
+				},
+				"cast_id": 1,
+				"components": {
+					"fire": 29.700000000000003
+				},
+				"details": [
+					{
+						"base": 19.8,
+						"before_defense": 29.700000000000003,
+						"final": 29.700000000000003,
+						"increased": 0.5,
+						"modifiers": [
+							"global_increased",
+							"elemental_increased"
+						],
+						"more": 1.0,
+						"resistance": 0.0,
+						"type": "fire"
+					}
+				],
+				"effect_id": "explosion:15",
+				"health_lost": 29.700000000000003,
+				"phase": "returning",
+				"prevented_components": {
+					"fire": 0.0
+				},
+				"projectile_id": 15,
+				"shield_spent": 0.0,
+				"skill_id": "tornado",
+				"tags": [
+					"hit",
+					"area",
+					"secondary",
+					"explosion"
+				],
+				"target_id": 3,
+				"total": 29.700000000000003
+			},
+			{
+				"assembly": {
+					"added": {
+
+					},
+					"added_effectiveness": 0.0,
+					"base_coefficient": 0.9,
+					"intrinsic": {
+						"fire": 19.8
+					},
+					"stage": "hit_base"
+				},
+				"before_defense_components": {
+					"fire": 29.700000000000003
+				},
+				"cast_id": 1,
+				"components": {
+					"fire": 29.700000000000003
+				},
+				"details": [
+					{
+						"base": 19.8,
+						"before_defense": 29.700000000000003,
+						"final": 29.700000000000003,
+						"increased": 0.5,
+						"modifiers": [
+							"global_increased",
+							"elemental_increased"
+						],
+						"more": 1.0,
+						"resistance": 0.0,
+						"type": "fire"
+					}
+				],
+				"effect_id": "explosion:18",
+				"health_lost": 29.700000000000003,
+				"phase": "returning",
+				"prevented_components": {
+					"fire": 0.0
+				},
+				"projectile_id": 18,
+				"shield_spent": 0.0,
+				"skill_id": "tornado",
+				"tags": [
+					"hit",
+					"area",
+					"secondary",
+					"explosion"
+				],
+				"target_id": 3,
+				"total": 29.700000000000003
+			}
+		],
+		"loot": 183606673326253163
+	},
+	"incoming": [
+		[
+			18.25,
+			[
+				{
+					"actor": "player",
+					"chance": 0.05,
+					"hit": false,
+					"target_id": 91
+				}
+			],
+			-1693667366896553509,
+			{
+				"draws": 0,
+				"events": 0,
+				"state": 3175619884672556388
+			}
+		],
+		[
+			18.25,
+			[
+				{
+					"actor": "player",
+					"chance": 0.05,
+					"hit": false,
+					"target_id": 91
+				}
+			],
+			-1693667366896553509,
+			{
+				"draws": 0,
+				"events": 0,
+				"state": 3175619884672556388
+			}
+		]
+	],
+	"scope": "Bounded headless actual main, real owned items and model transactions; no visual/Windows acceptance",
+	"secondary": {
+		"critical": {
+			"draws": 0,
+			"events": 0,
+			"state": 3175619884672556388
+		},
+		"events": {
+			"explosion": 1,
+			"flight_ended": 1,
+			"lifetime_expired": 1,
+			"terminated": 1
+		},
+		"hits": [
+			{
+				"assembly": {
+					"added": {
+
+					},
+					"added_effectiveness": 0.0,
+					"base_coefficient": 0.9,
+					"intrinsic": {
+						"fire": 19.8
+					},
+					"stage": "hit_base"
+				},
+				"before_defense_components": {
+					"fire": 29.700000000000003
+				},
+				"cast_id": 1,
+				"components": {
+					"fire": 29.700000000000003
+				},
+				"details": [
+					{
+						"base": 19.8,
+						"before_defense": 29.700000000000003,
+						"final": 29.700000000000003,
+						"increased": 0.5,
+						"modifiers": [
+							"global_increased",
+							"elemental_increased"
+						],
+						"more": 1.0,
+						"resistance": 0.0,
+						"type": "fire"
+					}
+				],
+				"effect_id": "explosion:1",
+				"health_lost": 29.700000000000003,
+				"phase": "outbound",
+				"prevented_components": {
+					"fire": 0.0
+				},
+				"projectile_id": 1,
+				"shield_spent": 0.0,
+				"skill_id": "tornado",
+				"tags": [
+					"hit",
+					"area",
+					"secondary",
+					"explosion"
+				],
+				"target_id": 1,
+				"total": 29.700000000000003
+			},
+			{
+				"assembly": {
+					"added": {
+
+					},
+					"added_effectiveness": 0.0,
+					"base_coefficient": 0.9,
+					"intrinsic": {
+						"fire": 19.8
+					},
+					"stage": "hit_base"
+				},
+				"before_defense_components": {
+					"fire": 29.700000000000003
+				},
+				"cast_id": 1,
+				"components": {
+					"fire": 29.700000000000003
+				},
+				"details": [
+					{
+						"base": 19.8,
+						"before_defense": 29.700000000000003,
+						"final": 29.700000000000003,
+						"increased": 0.5,
+						"modifiers": [
+							"global_increased",
+							"elemental_increased"
+						],
+						"more": 1.0,
+						"resistance": 0.0,
+						"type": "fire"
+					}
+				],
+				"effect_id": "explosion:1",
+				"health_lost": 29.700000000000003,
+				"phase": "outbound",
+				"prevented_components": {
+					"fire": 0.0
+				},
+				"projectile_id": 1,
+				"shield_spent": 0.0,
+				"skill_id": "tornado",
+				"tags": [
+					"hit",
+					"area",
+					"secondary",
+					"explosion"
+				],
+				"target_id": 2,
+				"total": 29.700000000000003
+			}
+		],
+		"loot": 918383887290477855
+	},
+	"sections": {
+		"actual_cast_matrix": 134,
+		"admitted_hits_and_leech": 37,
+		"flying_snapshot_transactions": 22,
+		"geometry_and_refusals": 31,
+		"legal_source_and_equipment": 90,
+		"tornado_children_return_and_explosion": 98
+	},
+	"shared_rng": [
+		{
+			"critical": {
+				"draws": 1,
+				"events": 1,
+				"state": -8228891633627444941
+			},
+			"loot": 2050734825326033269
+		},
+		{
+			"critical": {
+				"draws": 0,
+				"events": 0,
+				"state": 3175619884672556388
+			},
+			"loot": 2050734825326033269
+		}
+	],
+	"source": {
+		"class_id": 1,
+		"level": 7,
+		"route": [
+			"47175",
+			"31628",
+			"9511",
+			"23881",
+			"26523",
+			"6446",
+			"10221",
+			"50422",
+			"50570",
+			"29353",
+			"63282",
+			"31961"
+		],
+		"spent_points": 11,
+		"stats": {
+			"accuracy": 128.0,
+			"accuracy_increased": 0.0,
+			"additional_skill_slots": 0.0,
+			"area_increased": 0.0,
+			"area_size_increased": 0.0,
+			"armour": 0.0,
+			"armour_increased": 0.0,
+			"attack_added_fire": 0.0,
+			"attack_added_physical": 0.0,
+			"attack_crit_chance_increased": 0.0,
+			"attack_elemental_increased": 0.0,
+			"attack_life_leech": 0.006,
+			"attack_mana_leech": 0.0035,
+			"attack_physical_increased": 0.0,
+			"attack_speed": 1.7,
+			"attack_speed_increased": 0.0,
+			"chaos_increased": 0.0,
+			"cold_increased": 0.0,
+			"cold_resistance": 0.25,
+			"crit_base_chance": 0.05,
+			"crit_base_multiplier": 1.5,
+			"crit_chance_increased": 0.4,
+			"crit_multiplier_add": 0.15,
+			"damage": 18.0,
+			"damage_taken_from_mana_before_life": 0.0,
+			"damaging_ailments_faster": 0.0,
+			"dexterity": 14.0,
+			"elemental_increased": 0.0,
+			"evasion": 15.3,
+			"evasion_increased": 0.0,
+			"fire_dot_multiplier_add": 0.0,
+			"fire_increased": 0.0,
+			"fire_resistance": 0.15,
+			"flask_charges_gained_increased": 0.0,
+			"flask_life_recovery_increased": 0.0,
+			"flask_mana_recovery_increased": 0.0,
+			"global_increased": 0.0,
+			"intelligence": 14.0,
+			"life_leech_max_rate_increased": 0.0,
+			"life_leech_rate_increased": 0.0,
+			"life_regen": 0.0,
+			"life_regen_percent": 0.0,
+			"lightning_increased": 0.0,
+			"lightning_resistance": 0.25,
+			"mana_cost_efficiency_increased": 0.0,
+			"mana_cost_increased": 0.0,
+			"mana_leech_max_rate_increased": 0.0,
+			"mana_leech_rate_increased": 0.0,
+			"mana_regen": 9.3,
+			"mana_regen_increased": 0.0,
+			"max_health": 237.0,
+			"max_mana": 135.0,
+			"max_shield": 60.6,
+			"maximum_cold_resistance_add": 0.0,
+			"maximum_fire_resistance_add": 0.0,
+			"maximum_lightning_resistance_add": 0.0,
+			"melee_area_size_increased": 0.0,
+			"melee_crit_chance_increased": 0.0,
+			"melee_crit_multiplier_add": 0.0,
+			"melee_physical_increased": 0.4,
+			"move_speed": 240.0,
+			"move_speed_increased": 0.0,
+			"physical_attack_life_leech": 0.0,
+			"physical_attack_mana_leech": 0.0,
+			"physical_increased": 0.0,
+			"projectile_attack_crit_chance_increased": 0.0,
+			"projectile_attack_crit_multiplier_add": 0.0,
+			"projectile_count": 0.0,
+			"projectile_increased": 0.0,
+			"projectile_speed_increased": 0.0,
+			"resolute_technique": 1.0,
+			"shield_recharge_delay": 4.0,
+			"shield_recharge_rate": 13.0,
+			"shield_recharge_rate_increased": 0.0,
+			"shield_recharge_start_faster": 0.0,
+			"shield_regen": 13.0,
+			"spell_added_cold": 0.0,
+			"spell_added_lightning": 0.0,
+			"spell_area_size_increased": 0.0,
+			"spell_crit_chance_increased": 0.0,
+			"spell_crit_multiplier_add": 0.0,
+			"spell_increased": 0.0,
+			"strength": 122.0
+		}
+	}
+}

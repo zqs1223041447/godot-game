@@ -1,0 +1,6 @@
+{
+  "exit_code": 1,
+  "error": "AssertionError: assets/art-only selection returned28 rather than the61 frozen runtime PNG paths",
+  "cause": "The original art inventory spans more than assets/art. No product code was executed.",
+  "correction": "Reuse the existing complete61-path baseline membership and read every byte independently from v60 commit b389993."
+}

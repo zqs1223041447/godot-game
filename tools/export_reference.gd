@@ -54,6 +54,7 @@ const FireDotMigration = preload("res://scripts/save/fire_dot_migration.gd")
 const FasterBurnMigrationData = preload("res://scripts/save/faster_burn_migration.gd")
 const ForgebladeMigrationData = preload("res://scripts/save/forgeblade_migration.gd")
 const ManaGuardMigrationData = preload("res://scripts/save/mana_guard_migration.gd")
+const ResoluteRules = preload("res://scripts/combat/resolute_technique_rules.gd")
 const SourceCoverage = preload("res://tools/export_source_execution_coverage.gd")
 
 func _initialize() -> void:
@@ -123,6 +124,7 @@ static func collect() -> Dictionary:
 	result["mana_guard"] = mana_guard_examples()
 	result["elemental_resistance_caps"] = elemental_resistance_cap_examples()
 	result["elemental_defense_affixes"] = elemental_defense_affix_examples()
+	result["resolute_technique"] = resolute_technique_examples()
 	result["forgeblade"] = forgeblade_examples()
 	result["melee_basic"] = melee_basic_examples(result.forgeblade)
 	result["normal_gem_trading"]={"offers":Canonical.GemTrade.offers(),"recycle_credit":Canonical.GemTrade.RECYCLE_CREDIT,"currency":Canonical.GemTrade.MATERIAL_ID,"location":"normal_town","level":1,"quality":0,"recycle_location":"bag","schema":Canonical.Rules.VERSION,"test_supply_separate":true,"pricing":"初版可调整预算；每次无词缀地图净得4碎片"}
@@ -1752,9 +1754,9 @@ static func elemental_resistance_cap_examples() -> Dictionary:
 	var opened: Array = []
 	var nodes: Dictionary = {}
 	for id: String in SourceTree.Data.standard_ids():
-		if SourceTree.node_effect(id, 0, 35).status != "full" and SourceTree.node_effect(id).status == "full": opened.append(id)
+		if SourceTree.node_effect(id, 0, 35).status != "full" and SourceTree.node_effect(id, 0, 36).status == "full": opened.append(id)
 	opened.sort()
-	assert(SourceTree.CURRENT_SAVE_VERSION == 36 and opened == expected)
+	assert(opened == expected) # Historical v59 opening window is fixed at35→36.
 	var boundaries: Dictionary = {}
 	for id: String in expected + ["11820", "20832", "40743", "38683", "42313", "44203", "48803", "54766"]:
 		var raw: Dictionary = SourceTree.Data.node(id)
@@ -2064,3 +2066,94 @@ static func _mana_guard_supported_path(start_id: String) -> Array:
 			parents[next] = id
 			queue.append(next)
 	return []
+
+
+## v61: one fully legal in-memory source path, same equipment before/after.
+## Numerical examples call current compiler/admission/damage/defense rules only.
+static func resolute_technique_examples() -> Dictionary:
+	var route: Array = ["47175", "31628", "9511", "23881", "26523", "6446", "10221", "50422", "50570", "29353", "63282", "31961"]
+	var raw: Dictionary = SourceTree.Data.node("31961")
+	var effect: Dictionary = SourceTree.node_effect("31961", 0, 38)
+	assert(effect.status == "full" and effect.grants == [{"stat":"resolute_technique", "value":1.0, "mode":"flat"}])
+	var fixture := Canonical.new()
+	# Vacate all old slots first; never leave duplicate equipment locations.
+	for uid: String in fixture.equipped_items().values():
+		var bag: Dictionary = fixture.first_bag_position(uid)
+		assert(not bag.is_empty())
+		_reference_move(fixture, uid, bag)
+	_reference_move(fixture, "prism_bow", {"kind":"equipment", "slot_id":"weapon"})
+	_reference_move(fixture, "detonation_charm", {"kind":"equipment", "slot_id":"amulet"})
+	var states: Dictionary = {}
+	var target_evasion: float = float(AttackRules.monster_profile(1).evasion)
+	var targets: Dictionary = {"evasive":{"evasion":target_evasion,"resistances":{},"armour":0.0},
+		"no_evasion":{"evasion":0.0,"resistances":{},"armour":0.0}}
+	var defense_input: Dictionary = {"armour":500.0, "fire_resistance":1.0, "cold_resistance":1.0, "lightning_resistance":1.0}
+	var defense: Dictionary = Defense.source_profile(defense_input)
+	assert(defense.get("ok", false) and defense.has("effective_resistances"))
+	targets["armour_and_capped_resistance"] = {"evasion":target_evasion, "resistances":defense.effective_resistances, "armour":defense.armour}
+	for mode: String in ["before", "after"]:
+		var model := Canonical.new()
+		var candidate: Dictionary = fixture.snapshot()
+		candidate.progress = {"level":7, "xp":0}
+		candidate.talents.class_id = 1
+		candidate.talents.allocated = route.duplicate()
+		candidate.talents.normal_points = 0
+		if mode == "before":
+			candidate.talents.allocated.pop_back()
+			candidate.talents.normal_points = 1
+		assert(Canonical.Rules.reason(candidate).is_empty() and SourceTree.reason(candidate).is_empty())
+		model._accept_memory(candidate)
+		var snapshot: Dictionary = model.get_combat_snapshot()
+		assert(ResoluteRules.active(snapshot) == (mode == "after"))
+		var casts: Dictionary = {}
+		for skill: String in ["basic", "cleave", "tornado", "nova"]:
+			var cast: Dictionary = model.get_basic_cast() if skill == "basic" else Compiler.compile_group(skill, snapshot, [])
+			assert(cast.get("ok", false) and cast.has("packets") and cast.has("critical"))
+			var hits: Dictionary = {}
+			for role: String in cast.packets:
+				if not cast.packets[role] is Dictionary: continue
+				var packet: Dictionary = cast.packets[role]
+				var profile_role: String = "secondary" if role == "secondary" else "primary"
+				assert(cast.critical.has(profile_role))
+				var critical: Dictionary = cast.critical[profile_role]
+				var cases: Dictionary = {}
+				for target_id: String in targets:
+					var target: Dictionary = targets[target_id]
+					var admitted: Dictionary = AttackRules.resolve(float(snapshot.accuracy), float(target.evasion), 50.0, ResoluteRules.active(snapshot)) if packet.tags.has("attack") else {"ok":true,"hit":true,"chance":1.0,"entropy":50.0}
+					assert(admitted.get("ok", false) and admitted.has("chance") and admitted.has("entropy"))
+					var ordinary: Dictionary = Defense.apply_armour(Damage.resolve(packet, snapshot.modifiers, target.resistances), float(target.armour))
+					var potential: Dictionary = Defense.apply_armour(Damage.resolve(packet, snapshot.modifiers, target.resistances, float(critical.multiplier)), float(target.armour))
+					assert(not ordinary.has("error") and not potential.has("error") and ordinary.has("total") and potential.has("total"))
+					var expected: float = float(ordinary.total) * (1.0 - float(critical.chance)) + float(potential.total) * float(critical.chance)
+					cases[target_id] = {"admission":admitted, "successful_noncritical_hit":ordinary, "potential_critical_hit":potential,
+						"expected_per_successful_hit":expected, "expected_per_attempt":expected * float(admitted.chance)}
+				hits[role] = {"packet":packet, "critical":critical, "critical_role":profile_role, "targets":cases}
+			casts[skill] = {"hit_policy":cast.get("hit_policy", {}), "hits":hits,
+				"recipe":cast.recipe, "mana":cast.get("mana",0.0), "cooldown":cast.get("cooldown",0.0),
+				"summary":Preview.summary(cast), "details":Preview.details(cast)}
+		states[mode] = {"talents":candidate.talents, "progress":candidate.progress, "stats":model.get_stats(), "snapshot":snapshot,
+			"casts":casts, "equipment":model.equipped_items(), "whole_build_valid":true, "save_attempts":model.save_attempts}
+		assert(model.save_attempts == 0)
+	assert(states.before.casts.basic.hits.projectile.targets.evasive.admission.chance < 1.0)
+	assert(states.after.casts.basic.hits.projectile.targets.evasive.admission.chance == 1.0)
+	var opened: Array = []
+	for id: String in SourceTree.Data.standard_ids():
+		if SourceTree.Data.node(id).type != "mastery" and SourceTree.node_effect(id,0,37).status != "full" and SourceTree.node_effect(id,0,38).status == "full": opened.append(id)
+	assert(opened == ["31961"])
+	var blocked: Dictionary = {}
+	for id: String in ["63620", "40907", "35448"]:
+		blocked[id] = {"source_lines":SourceTree.Data.node(id).stats, "execution":SourceTree.node_effect(id)}
+		assert(blocked[id].execution.status != "full")
+	return {"minimum_save_version":38, "source_policy":SourceTree.CURRENT_SAVE_VERSION, "equipment_vocabulary":Equipment.CURRENT_VOCABULARY,
+		"node":{"id":"31961", "name":raw.name, "source_lines":raw.stats, "execution":effect, "legacy_execution":SourceTree.node_effect("31961",0,37)},
+		"policy":ResoluteRules.POLICY.duplicate(true), "new_complete_ordinary_nodes":opened, "new_mastery_effect_ids":[], "new_images":[],
+		"route":route, "class_id":1, "required_level":7, "points_spent":11, "examples":states, "targets":targets,
+		"defense_input":defense_input, "defense_profile":defense, "blocked_matching_nodes":blocked,
+		"producer":"SourceTree → validated CanonicalGameState → SkillCompiler → AttackHitRules → DamageResolver / DefenseRules",
+		"scope":"完整原双句只授予一个开关；所有命中不能被闪避但不能暴击，攻击、法术、母子箭、返回与独立爆炸均承担禁暴击代价",
+		"bounds":"距离、墙体、出生保护、目标存活、支付和容量仍正常检查；成功命中仍结算护甲、抗性、护盾与生命",
+		"timing":"施放时冻结；分配、退款和换装只影响新施放，旧飞行、母子箭、返回与独立爆炸保持各自快照",
+		"randomness":"开启时命中率为1且闪避熵保持原值；私有暴击随机流零抽样，掉落随机流无新增抽样；未点路径保留旧字节与随机流，不要求开关前后私有暴击随机状态相同",
+		"example_scope":"同一7级野蛮人合法路径，仅比较最后1点；两边都装备已有棱光长弓和终焰护符。技能按该角色快照无辅助编译，不宣称同时装配；预期值是一次尝试的统计比较，不是实战DPS",
+		"defense_scope":"护甲500与原始三抗100%为既有防御规则的隔离输入；按当前默认75%上限结算，不代表新增怪物或平衡调整",
+		"migration":"schema38严格验证旧37并原字节备份，只迁版本；装备词汇保持37，不赠物、不赠点、不重掷词缀"}

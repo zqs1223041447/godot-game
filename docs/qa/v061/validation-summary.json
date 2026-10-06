@@ -1,0 +1,589 @@
+{
+  "base_commit": "b389993ed7f7a90f4043c668704583d44b22f343",
+  "stage_commit": "1d5b1c07f4c4da86d9274614c47a484d1a11df77",
+  "aggregation_mode": "Read existing receipts and current file bytes only; no test, export, scanner, game or UI execution performed for this aggregation.",
+  "counts": {
+    "pure_combat_rules": 651,
+    "source_rules_and_transactions": 5197,
+    "strict_migration": 193,
+    "actual_main_consumers": 412,
+    "root_preview_text": 12
+  },
+  "total_checks": 6465,
+  "failures_in_final_counted_runs": 0,
+  "count_scope": "Final successful assertion counts only; not6465distinct gameplay scenarios. Prior396-check success is superseded by final412 and is not added. Reference, font, capture, import, parse guards and90-tick runs are separate evidence, not extra assertion counts.",
+  "contract": {
+    "node_id": "31961",
+    "source_entry": "Your hits can't be Evaded\nNever deal Critical Strikes",
+    "atomic_stat": {
+      "resolute_technique": 1.0
+    },
+    "save_schema": 38,
+    "source_policy": 38,
+    "old_schema_37_source_policy": 36,
+    "equipment_vocabulary": 37,
+    "new_full_standard_nodes": [
+      "31961"
+    ],
+    "new_mastery_effects": 0,
+    "all_hit_critical_chance": 0,
+    "evasion_admission_chance": 1,
+    "enabled_entropy": "unchanged",
+    "private_critical_rng_enabled": "zero draws; no before/after stream equality claim",
+    "loot_rng": "no additional draw introduced by the flag"
+  },
+  "final_runs": {
+    "pure_combat_rules": {
+      "checks": 651,
+      "exit_code": 0,
+      "seconds": 0.43910981199587695,
+      "receipt": "docs/qa/v061-rules/20261006-003128-receipt.json"
+    },
+    "source_rules_and_transactions": {
+      "checks": 5197,
+      "exit_code": 0,
+      "seconds": 3.278,
+      "receipt": "docs/qa/v061-source/20261006T003318477975Z-rules-attempt.json"
+    },
+    "strict_migration": {
+      "checks": 193,
+      "exit_code": 0,
+      "seconds": 11.731,
+      "receipt": "docs/qa/v061-source/20261006T003318477975Z-migration-attempt.json"
+    },
+    "actual_main_consumers": {
+      "checks": 412,
+      "exit_code": 0,
+      "seconds": 2.5759402039984707,
+      "receipt": "docs/qa/v061-consumers/gameplay-06-run.json",
+      "executed_test": "docs/qa/v061-consumers/gameplay-06-harness.gd",
+      "executed_test_sha256": "8dfb40ed32165a990199f0e88248538230ae3d390d25ed2d96d8fb8b6804767e",
+      "current_test_sha256": "f83f4138025f77e52674e48201cf38111a6f819e9d49e7ed69e2ed35a92f5a89",
+      "post_execution_change": "Only one success-label and its nearby comment clarified that explosion charm remains equipped; no assertion, control flow, API call or fixture data changed."
+    },
+    "root_preview_text": {
+      "checks": 12,
+      "exit_code": 0,
+      "evidence_kind": "Transcription of original tool results f72d88/164990, not a newly executed test or raw redirected log",
+      "transcript": "docs/qa/v061-root-preview-result.txt",
+      "transcript_file": {
+        "bytes": 1041,
+        "sha256": "d939104ba4d685bfe0dc3213f36af4ca6dc1523325ecc7cad6b6e8a0b38f781f"
+      },
+      "first_attempt": {
+        "exit_code": 134,
+        "test_started": false,
+        "cause": "XDG/log/font-cache directory not writable"
+      },
+      "correction": "Only isolated writable XDG_DATA_HOME/XDG_CONFIG_HOME/XDG_CACHE_HOME; no intervening production/test edits",
+      "native_visual_coverage": false
+    }
+  },
+  "preserved_history": {
+    "pure_first_attempt": {
+      "receipt": "docs/qa/v061-rules/20261006-003109-receipt.json",
+      "exit_code": 1,
+      "checks_ran": false,
+      "cause": "Two test-local inferred Dictionary variables; explicit types fixed before the651-check pass"
+    },
+    "consumer_attempts_01_to_04": {
+      "exit_codes": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "causes": [
+        "Rare fixture had fewer than4 affixes",
+        "Legacy armor alias used instead of canonical body_armour",
+        "Fixture expected display hit_policy redundantly inside snapshot",
+        "Repeated equip of already-equipped UID correctly returned no_change"
+      ],
+      "production_fix_for_these_failures": false
+    },
+    "prior_consumer_success": {
+      "checks": 396,
+      "counted_in_total": false,
+      "receipt": "docs/qa/v061-consumers/gameplay-05-run.json",
+      "executed_test": "docs/qa/v061-consumers/gameplay-05-harness.gd",
+      "note": "Final412 contains16 added boundary/descendant assertions; do not double-count396"
+    },
+    "reference_baseline_capture": "docs/qa/v061-reference/baseline-capture-first-failure.json"
+  },
+  "legacy_90_tick_comparison": {
+    "ticks_each": 90,
+    "exits": [
+      0,
+      0
+    ],
+    "observations_exact_after_explicit_projections": true,
+    "observation_sha256": "d4d43b4f211e52c4f1e01ba30bb9a65e4c98132b9373a326025f68e18b569ece",
+    "projected_save_exact": true,
+    "raw_save_equal": false,
+    "raw_save_version_token_only": true,
+    "baseline_production_match": true,
+    "baseline_files": 491,
+    "receipt": "docs/qa/v061-consumers/legacy-comparison-01.json",
+    "observation_bytes": 8607900,
+    "projections": {
+      "model_and_saved_json": "Remove only version (37 -> 38)",
+      "derived_stats": "Remove only resolute_technique, and only after requiring a float value exactly 0.0",
+      "nested_cast_snapshots": "No projection; exact bytes",
+      "raw_save_bytes": "Different; parsing proves version is the only JSON difference"
+    },
+    "scope": "Same external harness; actual casts,13 projectile hit events,3 root kills/rewards,incoming hit and save; not a long-run or full historical gameplay guarantee",
+    "raw_save_claim": "Raw saves differ. Exact version37→38 token replacement restores bytes; projected JSON is equal.",
+    "nested_cast_snapshots": "No projection; exact bytes"
+  },
+  "reference": {
+    "receipt": "docs/qa/v061-reference/README.md",
+    "godot_exports": 1,
+    "export_seconds": 16.81,
+    "export_exit_code": 0,
+    "rendered_authoritative_values": 59,
+    "before_after_hit_roles": 7,
+    "html_unique_ids": 3814,
+    "approved_catalog_differences": 57,
+    "old_catalog_projected_sha256": "830b8deb12f9a478c06ed625e606383e03a2c2d8c37a7b59f576ed2e2b2c5dee",
+    "equipment_and_loot_data_unchanged": true,
+    "old_runtime_pngs_preserved": 61,
+    "old_reference_pngs_preserved": 68,
+    "source_coverage": "Exact single31961 opening; every other node/mastery/source/geometry retained",
+    "final_input_reconciliation": "docs/qa/v061-reference/final-deliverable-sha256.json"
+  },
+  "font": {
+    "initial_full_scan": {
+      "receipt": "docs/qa/v061-reference/font-coverage-result.json",
+      "exit_code": 1,
+      "seconds": 90.055,
+      "runtime_files": 175,
+      "required_codepoints": 1651,
+      "mapped_codepoints": 1655,
+      "only_missing": "U+62EC 括",
+      "no_other_errors": true
+    },
+    "subset_generation": {
+      "record": "docs/qa/v061-integration/font-subset.json",
+      "exit_code": null,
+      "exit_status": "Original process session unavailable; a successful exit code is not claimed",
+      "stderr_empty": true,
+      "font_bytes": 698992,
+      "font_sha256": "cf1b9dafadce2987fadce98e249801f5f5215d9523bac40620921b4eceae72b8"
+    },
+    "targeted_validation": {
+      "receipt": "docs/qa/v061-reference/targeted-font-addition-result.json",
+      "proof": "docs/qa/v061-reference/font-addition-preservation.json",
+      "exit_code": 0,
+      "seconds": 1.07,
+      "unchanged_runtime_files": 175,
+      "all_previous1655_outlines_advances_vertical_metrics_preserved": true,
+      "layout_family_license_preserved": true,
+      "added_nonempty_codepoints": [
+        "U+62EC"
+      ],
+      "final_mapped_codepoints": 1656,
+      "final_required_codepoints": 1651,
+      "missing": [],
+      "full_source_rescan_performed": false
+    },
+    "font_import": "docs/qa/v061-integration/font-import-result.json"
+  },
+  "integration_setup": {
+    "shared_import": "docs/qa/v061-integration/import-result.json",
+    "probe_parse_guard": {
+      "receipt": "docs/qa/v061-integration/probe-parse-result.json",
+      "exit_code": 78,
+      "expected_exit_code": 78,
+      "errors": false,
+      "claim": "Expected environment guard; not a packed-gameplay pass"
+    }
+  },
+  "post_gameplay_production_changes": {
+    "assets/fonts/arena_sans.otf": {
+      "executed_sha256": "23242a749119f9790a3640524b07cf29e0f54f47af6d3fcbad03e80fe1d5d6cf",
+      "final_sha256": "cf1b9dafadce2987fadce98e249801f5f5215d9523bac40620921b4eceae72b8",
+      "reason": "Same-source subset adds only U+62EC 括; all1655 previously mapped outlines and metrics independently preserved"
+    },
+    "assets/fonts/coverage_manifest.json": {
+      "executed_sha256": "9266c3051209a7bfa20e985372ef1e864ab673a28314b4c03f200c018de59ec2",
+      "final_sha256": "1e55114933ea35a3c72e070da0f98e781d5f44d02aa09792a6ebcbef3c180e7d",
+      "reason": "Generation metadata updated for1656 mappings and unchanged175 runtime inputs"
+    },
+    "project.godot": {
+      "executed_sha256": "21238c7dc0c6e19dac8de3c3edd5adc89583003f51d383efd3d94ac649523607",
+      "final_sha256": "8e9b365f116d850915233d94727c63121e3eef052d0c1aa29c6976d16f4c54cb",
+      "reason": "Application version0.60.0→0.61.0 only"
+    }
+  },
+  "same_gameplay_production_after_tests": true,
+  "final_production_files": "docs/qa/v061/final-production-files.json",
+  "tracked_production_file_count": 495,
+  "aggregate_validation_document": "docs/qa/V061_RESOLUTE_TECHNIQUE_VALIDATION.zh-CN.md",
+  "release_scope": "This aggregation does not assert final package export, same-PCK probe, startup, publication or remote availability; release coordinator records those separately.",
+  "not_run_for_this_batch": [
+    "Historical full battle suite",
+    "600-second performance run",
+    "New UI screenshot gate",
+    "Native Windows visual/performance acceptance"
+  ],
+  "logs": {
+    "docs/qa/v061-consumers/gameplay-01.log.txt": {
+      "bytes": 3980,
+      "sha256": "1ec79e30d1ca56e0026285d104978f60b0dae4634ce940b49e2cf753c8a6d6bd"
+    },
+    "docs/qa/v061-consumers/gameplay-02.log.txt": {
+      "bytes": 1333,
+      "sha256": "4818a03a43d21d1aebb1f5eae598c5b882238dc4718c0e54737ebca49d346dde"
+    },
+    "docs/qa/v061-consumers/gameplay-03.log.txt": {
+      "bytes": 5146,
+      "sha256": "ad23bad0864db42ee3267288229ba5ce1bddbabdc411ea4a1c21bd6b887230ce"
+    },
+    "docs/qa/v061-consumers/gameplay-04.log.txt": {
+      "bytes": 1302,
+      "sha256": "4b6c632cae60628d418d3e22e8d46efde858a3ec2406e6e8174c0abb121c8321"
+    },
+    "docs/qa/v061-consumers/gameplay-05.log.txt": {
+      "bytes": 355,
+      "sha256": "e794e1656913cb44d504383516d693cd59da2d1f0c3864fe4d33cb5bbc0bf7c5"
+    },
+    "docs/qa/v061-consumers/gameplay-06.log.txt": {
+      "bytes": 355,
+      "sha256": "1f35ce2ab1ccdcc9dd17cbbae73133bddf6683b48bc28f2cab595ae0c0597a7b"
+    },
+    "docs/qa/v061-consumers/legacy-v060-01.log.txt": {
+      "bytes": 166,
+      "sha256": "f2e06d980db906090c5caa13c1447ce586a16fa73005fee487be57939762062c"
+    },
+    "docs/qa/v061-consumers/legacy-v061-01.log.txt": {
+      "bytes": 166,
+      "sha256": "e9beb61c796262f91e280860c8a1003a38f3d21dca3788f7230fbd2afe4db000"
+    },
+    "docs/qa/v061-integration/font-import.log.txt": {
+      "bytes": 2995,
+      "sha256": "a495312e79f092182cfa6dc3569790b0824c5bf4306800434af994a624cd3261"
+    },
+    "docs/qa/v061-integration/font-subset.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v061-integration/import.log.txt": {
+      "bytes": 74116,
+      "sha256": "f6f456a0fef38426ef190a774bd23af7728cb439537224a1e5f10deb11b23ff3"
+    },
+    "docs/qa/v061-integration/probe-parse.log.txt": {
+      "bytes": 73,
+      "sha256": "a9912b85473f126d3f4f63ec824170c828df3473a292f866dde86cafda5b66da"
+    },
+    "docs/qa/v061-reference/build-check.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v061-reference/build-check.stdout.log.txt": {
+      "bytes": 52,
+      "sha256": "65d47533eaf556129a1f3a295db12ab1bc36a8df0770c71cb9378490d54d03ba"
+    },
+    "docs/qa/v061-reference/build.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v061-reference/build.stdout.log.txt": {
+      "bytes": 51,
+      "sha256": "4c1c732886ccda43af5705869064efb045048d4fbf9e692918fb617c485cb488"
+    },
+    "docs/qa/v061-reference/focused-reference.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v061-reference/focused-reference.stdout.log.txt": {
+      "bytes": 1048,
+      "sha256": "53885edb79c655144aa13da6762e26fbd8e0510ece7f081569a45293d7a4fe3c"
+    },
+    "docs/qa/v061-reference/font-coverage.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v061-reference/font-coverage.stdout.log.txt": {
+      "bytes": 388,
+      "sha256": "40d4a04aa82c67d327aff54bcb7faeee5fd0ae08393053b834b63ac5f94ce4ce"
+    },
+    "docs/qa/v061-reference/godot-export.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v061-reference/godot-export.stdout.log.txt": {
+      "bytes": 205,
+      "sha256": "881c3c8a76e46d3e862aafeb146330317ff3f9b9ded3708c83c5c5e40bdf8c0b"
+    },
+    "docs/qa/v061-reference/javascript-syntax.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v061-reference/javascript-syntax.stdout.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v061-reference/targeted-font-addition.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v061-reference/targeted-font-addition.stdout.log.txt": {
+      "bytes": 1487,
+      "sha256": "8baccfe8aa5560784c9ae4c31ef4c834ec096fee66a7f66553500d8b4d1a572f"
+    },
+    "docs/qa/v061-rules/20261006-003109-rules.log.txt": {
+      "bytes": 616,
+      "sha256": "dae97d4e58f9e85fc45f12eb9915c99cf713573fa49fde9cf05840acaddafe43"
+    },
+    "docs/qa/v061-rules/20261006-003128-rules.log.txt": {
+      "bytes": 244,
+      "sha256": "b8b3421a7f9c372f09139c7856f94925ad9d33b5e4e040dc20fe8aa834a99324"
+    },
+    "docs/qa/v061-source/20261006T003318477975Z-capture37.log.txt": {
+      "bytes": 145,
+      "sha256": "33ab842d92a32e4df988d90d674ad4ce559ec6386f6afbec702c379eb8481d4a"
+    },
+    "docs/qa/v061-source/20261006T003318477975Z-migration.log.txt": {
+      "bytes": 123,
+      "sha256": "c031a616cb8e46e19e8300966951a2b8927a23693068b1f19b65389c8175e60c"
+    },
+    "docs/qa/v061-source/20261006T003318477975Z-rules.log.txt": {
+      "bytes": 153,
+      "sha256": "559316f519e0dea2d0d784b8a3bf21b8f88c9e670d58d078037b5f62a1a70dc1"
+    }
+  },
+  "reports": {
+    "docs/qa/v061-consumers/gameplay-01-run.json": {
+      "bytes": 133,
+      "sha256": "68cd5d48f8d13e0182bad13fc3ca78f70806b27d83b7d2d338a6427fbbd79838"
+    },
+    "docs/qa/v061-consumers/gameplay-01.json": {
+      "bytes": 200,
+      "sha256": "431a8d88c5433ce0c3876962a4f26dfe3f08f878970ef80324d6bbb9f6d8be95"
+    },
+    "docs/qa/v061-consumers/gameplay-02-run.json": {
+      "bytes": 132,
+      "sha256": "9e9bbb731c7f1326a55bc984cdcf9868a5d6666ce903cbdd5e590dd40eb0e2bf"
+    },
+    "docs/qa/v061-consumers/gameplay-02.json": {
+      "bytes": 200,
+      "sha256": "667582f6981deb1283f7ed7b45adc43dd5cb5ad795bc028921b52d58d7c27b31"
+    },
+    "docs/qa/v061-consumers/gameplay-03-run.json": {
+      "bytes": 131,
+      "sha256": "72914edfd40fe0fa50e3a7bfdfba28a63d0e00a9c767faf27ea60b619e127e0e"
+    },
+    "docs/qa/v061-consumers/gameplay-03.json": {
+      "bytes": 3133,
+      "sha256": "65b3fe92db4633d22ef4c8da77959dafcdc2657d39ea4b0c942105600a41389a"
+    },
+    "docs/qa/v061-consumers/gameplay-04-run.json": {
+      "bytes": 133,
+      "sha256": "9ae3c34bfdd7aff859d85010a5089eebda19b3b2bac711223256b21236ed2e39"
+    },
+    "docs/qa/v061-consumers/gameplay-04.json": {
+      "bytes": 3165,
+      "sha256": "39b6c783031e995d26c5e88bde420572b5abfababab93d62dfd4c07757aa2430"
+    },
+    "docs/qa/v061-consumers/gameplay-05-run.json": {
+      "bytes": 132,
+      "sha256": "09fed3250ebca2df778387a981d8d3f687bef9f45457fda2583185e876cab3df"
+    },
+    "docs/qa/v061-consumers/gameplay-05.json": {
+      "bytes": 37471,
+      "sha256": "a2fb47641cb2abf86627ac9789fd2fc2a9f0bc571291c5225b12324b45872613"
+    },
+    "docs/qa/v061-consumers/gameplay-06-run.json": {
+      "bytes": 133,
+      "sha256": "5708a0c7623935ac9798fe121dbd618be6e5b213958695f895271a8b76701ade"
+    },
+    "docs/qa/v061-consumers/gameplay-06.json": {
+      "bytes": 44355,
+      "sha256": "59034953485906cfec03fbe67ce2d166ef44f3326c79f1848b3d39d58dcd57f8"
+    },
+    "docs/qa/v061-consumers/gameplay-production-inputs.json": {
+      "bytes": 78914,
+      "sha256": "14ea92e53c77afa30276e8f09279e945213c17052b6392a1808a0e6caee51cdc"
+    },
+    "docs/qa/v061-consumers/legacy-comparison-01.json": {
+      "bytes": 1352,
+      "sha256": "250e9f720699dcd7e81622524d5d3dcb6f9037ab360401150fc5421511ba78ef"
+    },
+    "docs/qa/v061-consumers/legacy-v060-01-run.json": {
+      "bytes": 207,
+      "sha256": "4c86a559b75e799bb09514b2be482f3bd08f4b2362e39d0a43ec7934a078c85f"
+    },
+    "docs/qa/v061-consumers/legacy-v060-01.json": {
+      "bytes": 434,
+      "sha256": "66aa30fc6db7a66b109020e66c18e1882b537ebe76a73bc546d2fa13d438613f"
+    },
+    "docs/qa/v061-consumers/legacy-v060-01.projected-save.json": {
+      "bytes": 12161,
+      "sha256": "dafc2ca608d8ba2db37ab75f1f4a326b9428532fd3a93efe0d14e15128d95e07"
+    },
+    "docs/qa/v061-consumers/legacy-v060-production-inputs.json": {
+      "bytes": 125066,
+      "sha256": "ac90f38b25605b668818e2e1200b5fb9db814388a69553a624e815dec1b256c6"
+    },
+    "docs/qa/v061-consumers/legacy-v061-01-run.json": {
+      "bytes": 201,
+      "sha256": "5f02eec2a1e1c0cf1aaa9201ee8d2fbed60dd92a16e4ab2ac3502d983bc6b943"
+    },
+    "docs/qa/v061-consumers/legacy-v061-01.json": {
+      "bytes": 434,
+      "sha256": "501e00e3b9052c3633c72b36e15b6fe12ca16a9ddc679f81d95f0fde1aba79c6"
+    },
+    "docs/qa/v061-consumers/legacy-v061-01.projected-save.json": {
+      "bytes": 12161,
+      "sha256": "dafc2ca608d8ba2db37ab75f1f4a326b9428532fd3a93efe0d14e15128d95e07"
+    },
+    "docs/qa/v061-consumers/validation-summary.json": {
+      "bytes": 6321,
+      "sha256": "2f4ddad084ea95dee29e3427e31328a0f76fffe1639ca684fa55d7fcbd994cec"
+    },
+    "docs/qa/v061-integration/font-import-result.json": {
+      "bytes": 111,
+      "sha256": "3db572803abe8e4094596429e628abed275675bde1c38613398063b2d0dcc4bc"
+    },
+    "docs/qa/v061-integration/font-subset.json": {
+      "bytes": 2753,
+      "sha256": "232fbcd700ea21902f3ae5f5a35c24d5f3644c66f66b3be82482e952ab02842f"
+    },
+    "docs/qa/v061-integration/import-result.json": {
+      "bytes": 110,
+      "sha256": "95acc4094cb8c1c1ac226a6e2360d621cf9c687e7f827ce96f4ab7216173a4d5"
+    },
+    "docs/qa/v061-integration/probe-parse-result.json": {
+      "bytes": 103,
+      "sha256": "6f8f5e24d429bd48ec3fc13f5ab9ab6f79931e29ac41241834bd4cf11a31fb4e"
+    },
+    "docs/qa/v061-reference/baseline-capture-first-failure.json": {
+      "bytes": 363,
+      "sha256": "06b327ddb4c3601805140018d1642bb66911a90cf2d920119c03f54f94b30ec2"
+    },
+    "docs/qa/v061-reference/build-check-input-sha256.json": {
+      "bytes": 620,
+      "sha256": "f754c161f18c61cd7c1594c4cfc59d285df3c5487acfdbb889531055119eaa76"
+    },
+    "docs/qa/v061-reference/build-check-result.json": {
+      "bytes": 200,
+      "sha256": "111134d06625e8168e04c184d607ea00f896f953527438f578b5397690e5d6a5"
+    },
+    "docs/qa/v061-reference/build-input-sha256.json": {
+      "bytes": 620,
+      "sha256": "f754c161f18c61cd7c1594c4cfc59d285df3c5487acfdbb889531055119eaa76"
+    },
+    "docs/qa/v061-reference/build-result.json": {
+      "bytes": 185,
+      "sha256": "4caae0b0919dcb5f349186483c179523b87a58bcff746a06303b50dc9f57e0db"
+    },
+    "docs/qa/v061-reference/final-deliverable-sha256.json": {
+      "bytes": 6762,
+      "sha256": "161a70a6059db78b4abf93b58f4620dd672c9c8b402daafb96a400dbaad001ce"
+    },
+    "docs/qa/v061-reference/focused-reference-input-sha256.json": {
+      "bytes": 547,
+      "sha256": "17b36c392e158b394b997cf4d365e2438c1800304d83f7d6123269d4da137933"
+    },
+    "docs/qa/v061-reference/focused-reference-result.json": {
+      "bytes": 202,
+      "sha256": "839592623ca96350c6db74bee320954e1a36eeeb9b335bfa70221fd948226ab6"
+    },
+    "docs/qa/v061-reference/font-addition-preservation.json": {
+      "bytes": 1487,
+      "sha256": "8baccfe8aa5560784c9ae4c31ef4c834ec096fee66a7f66553500d8b4d1a572f"
+    },
+    "docs/qa/v061-reference/font-coverage-input-sha256.json": {
+      "bytes": 19465,
+      "sha256": "63902e383b46c66f1bc9539cd58765e39ea7662120e8d6eada6c0a95f0ad5853"
+    },
+    "docs/qa/v061-reference/font-coverage-result.json": {
+      "bytes": 204,
+      "sha256": "d301fcb9a4fc8fc5d4042029b38d5fcbaa390c174a2adcebb444b0e2752122dd"
+    },
+    "docs/qa/v061-reference/godot-export-input-sha256.json": {
+      "bytes": 21108,
+      "sha256": "5cd2ba1bdec935a94009c3810a946bd1b3866be6cdd81b6ab6dbec5fd9b213fc"
+    },
+    "docs/qa/v061-reference/godot-export-result.json": {
+      "bytes": 301,
+      "sha256": "ef1843f84530658fe35056207ff05e1a0692b961a727b50ff4998cd0b6309625"
+    },
+    "docs/qa/v061-reference/javascript-syntax-input-sha256.json": {
+      "bytes": 620,
+      "sha256": "f754c161f18c61cd7c1594c4cfc59d285df3c5487acfdbb889531055119eaa76"
+    },
+    "docs/qa/v061-reference/javascript-syntax-result.json": {
+      "bytes": 199,
+      "sha256": "22239b3f0ec2285b6d8e37ec5215afad00a9d0abcf728a5d22b2ad90c47a51b3"
+    },
+    "docs/qa/v061-reference/targeted-font-addition-input-sha256.json": {
+      "bytes": 19465,
+      "sha256": "0127118121acd8adf834b24f93505f635dbc214655686b02ac1bff724a25f3ce"
+    },
+    "docs/qa/v061-reference/targeted-font-addition-result.json": {
+      "bytes": 205,
+      "sha256": "dda7716da8e2e51b6811df2b69f7b32095f45714356779a0a3aca1d78c5bf159"
+    },
+    "docs/qa/v061-reference/v060-baseline.json": {
+      "bytes": 15170,
+      "sha256": "074d8426c4c58b268f65e1b6c74430ba03bc716ff83a6477f15006e4c5d6d8d3"
+    },
+    "docs/qa/v061-reference/v060-projection-preservation.json": {
+      "bytes": 19214,
+      "sha256": "6a7f3d2c047f7c9272c4ee5d2c49e3ec6f4cb837942bebf8afdf564978398460"
+    },
+    "docs/qa/v061-rules/20261006-003109-receipt.json": {
+      "bytes": 1782,
+      "sha256": "ae896ebc7b5795bb87851f78e8c24d1ae8397f48fe2373d1d8fad6a47c59180b"
+    },
+    "docs/qa/v061-rules/20261006-003128-receipt.json": {
+      "bytes": 1422,
+      "sha256": "9c36ed9a8004290ac3cce9d189c477d733651efe26374ac2cff50df40247bace"
+    },
+    "docs/qa/v061-rules/20261006-003128-result.json": {
+      "bytes": 363,
+      "sha256": "26ef84607c0f84c0b88790c7a4158a4e8afdbd1d5eaaf6b7942df9042143aa44"
+    },
+    "docs/qa/v061-rules/fixture-provenance.json": {
+      "bytes": 6850,
+      "sha256": "2e3af1ceaa61e676dcc0ee77a119c4011234f64a5481e593c46bee39b332acdf"
+    },
+    "docs/qa/v061-source/20261006T003318477975Z-capture37-attempt.json": {
+      "bytes": 57973,
+      "sha256": "752689faab3810b3f66ed27956bb15d22e73b98c725c56bf2b2df76d8ef203ab"
+    },
+    "docs/qa/v061-source/20261006T003318477975Z-migration-attempt.json": {
+      "bytes": 57638,
+      "sha256": "40ecfdb8183f01f18a6ff0e6f201ed828641c63996e62ab0ce56da83ecf7ad39"
+    },
+    "docs/qa/v061-source/20261006T003318477975Z-migration-checks.json": {
+      "bytes": 711,
+      "sha256": "7f6f7fe1ae2a08fa99ef14b3cde610aa33539a5ae762384e35a2a6c39e3834e1"
+    },
+    "docs/qa/v061-source/20261006T003318477975Z-rules-attempt.json": {
+      "bytes": 57617,
+      "sha256": "c0c7f2cdb67f79e09852995b11ee70673f18a099bf8df9ecbc221fdbe9724a14"
+    },
+    "docs/qa/v061-source/20261006T003318477975Z-rules-checks.json": {
+      "bytes": 2540,
+      "sha256": "c0d0cf6be6d5aeb0054e71a159621670f2d2adcd1d4b86de8b8557f67509eb1b"
+    },
+    "docs/qa/v061-source/fixtures/manifest.json": {
+      "bytes": 860,
+      "sha256": "03aa5205ef9e4ab0e7e49dcbcee6f84a3583ee90559ce425ccf86f378b61c90c"
+    },
+    "docs/qa/v061-source/fixtures/v37-frozen-v060.json": {
+      "bytes": 18510,
+      "sha256": "6833be76156b9808b33e3867caf1fb0b44c28b31b374083c81386dfe7fa54955"
+    },
+    "docs/qa/v061-source/fixtures/v37-vocabulary-oracle.json": {
+      "bytes": 102177,
+      "sha256": "1ab0ba9f17b58def666bfc4f5d985825fe371868f8b965fe872431efe3e017b1"
+    },
+    "docs/qa/v061-source/unchanged-source-evidence.json": {
+      "bytes": 782,
+      "sha256": "e519590e6a21f873ef494913da05fdf32f514d3f5f93336b5db24fbf23e33bba"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "bin": {
+    "same": true,
+    "before_bytes": 8607900,
+    "after_bytes": 8607900,
+    "before_sha256": "d4d43b4f211e52c4f1e01ba30bb9a65e4c98132b9373a326025f68e18b569ece",
+    "after_sha256": "d4d43b4f211e52c4f1e01ba30bb9a65e4c98132b9373a326025f68e18b569ece"
+  },
+  "save": {
+    "same": false,
+    "before_bytes": 12177,
+    "after_bytes": 12177,
+    "before_sha256": "5147caa69cf4c7b23fee431cc4847af653dc5fd7cc89bb1c1f112842fe9fdfa5",
+    "after_sha256": "311a806d06b00ebab0541848e7975b1d25419ef0a6a4420f88862379bafbddde"
+  },
+  "projected-save.json": {
+    "same": true,
+    "before_bytes": 12161,
+    "after_bytes": 12161,
+    "before_sha256": "dafc2ca608d8ba2db37ab75f1f4a326b9428532fd3a93efe0d14e15128d95e07",
+    "after_sha256": "dafc2ca608d8ba2db37ab75f1f4a326b9428532fd3a93efe0d14e15128d95e07"
+  },
+  "projections": {
+    "model_and_saved_json": "Remove only version (37 -> 38)",
+    "derived_stats": "Remove only resolute_technique, and only after requiring a float value exactly 0.0",
+    "nested_cast_snapshots": "No projection; exact bytes",
+    "raw_save_bytes": "Different; parsing proves version is the only JSON difference"
+  },
+  "storage": {
+    "before": "legacy-v060-01.bin.gz",
+    "after": "legacy-v061-01.bin.gz",
+    "encoding": "gzip, mtime=0; uncompressed hashes and sizes above"
+  },
+  "raw_version_token_only": true
+}

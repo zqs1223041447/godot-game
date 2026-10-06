@@ -4439,7 +4439,7 @@
 				"normal_points": 5,
 				"source_version": "3.29.1"
 			},
-			"version": 37
+			"version": 38
 		},
 		"default_casts": {
 			"group_000001": {
@@ -4570,6 +4570,7 @@
 			"projectile_count": 0.0,
 			"projectile_increased": 0.0,
 			"projectile_speed_increased": 0.0,
+			"resolute_technique": 0.0,
 			"shield_recharge_delay": 4.0,
 			"shield_recharge_rate": 16.0,
 			"shield_recharge_rate_increased": 0.0,
@@ -5515,7 +5516,7 @@
 				"evasion": 320.0
 			}
 		},
-		"save_version": 37,
+		"save_version": 38,
 		"skitter_accuracy_example": {
 			"base_accuracy": 140,
 			"base_chance": 0.96,
@@ -5620,6 +5621,7 @@
 				"projectile_count": 0.0,
 				"projectile_increased": 0.0,
 				"projectile_speed_increased": 0.0,
+				"resolute_technique": 0.0,
 				"shield_recharge_delay": 4.0,
 				"shield_recharge_rate": 16.0,
 				"shield_recharge_rate_increased": 0.0,
@@ -6064,7 +6066,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 37,
+				"save_version": 38,
 				"source": {
 					"affixes": [
 						{
@@ -6564,7 +6566,7 @@
 				"schema_version": 2,
 				"status": "prototype"
 			},
-			"save_version": 37
+			"save_version": 38
 		},
 		"elevate": {
 			"description": "保留魔法装备已有词缀，升为稀有并补至4至6条。",
@@ -6766,7 +6768,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 37,
+				"save_version": 38,
 				"source": {
 					"affixes": [
 						{
@@ -6951,7 +6953,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 37,
+				"save_version": 38,
 				"source": {
 					"affixes": [],
 					"base_id": "ashwood_bow",
@@ -7138,7 +7140,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 37,
+				"save_version": 38,
 				"source": {
 					"affixes": [
 						{
@@ -7342,7 +7344,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 37,
+				"save_version": 38,
 				"source": {
 					"affixes": [
 						{
@@ -7485,7 +7487,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 37,
+				"save_version": 38,
 				"source": {
 					"affixes": [
 						{
@@ -7969,7 +7971,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 37,
+				"save_version": 38,
 				"source": {
 					"affixes": [
 						{
@@ -9773,7 +9775,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 37,
+				"save_version": 38,
 				"source": {
 					"affixes": [
 						{
@@ -10103,7 +10105,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 37,
+				"save_version": 38,
 				"source": {
 					"affixes": [
 						{
@@ -10422,7 +10424,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 37,
+				"save_version": 38,
 				"source": {
 					"affixes": [
 						{
@@ -10485,7 +10487,7 @@
 			"example_quantity": 1,
 			"name": "校准碎片",
 			"quantity_source": "items[uid].payload.quantity",
-			"save_version": 37,
+			"save_version": 38,
 			"size": [
 				1,
 				1
@@ -12518,6 +12520,7 @@
 					"projectile_count": 0.0,
 					"projectile_increased": 0.0,
 					"projectile_speed_increased": 0.0,
+					"resolute_technique": 0.0,
 					"shield_recharge_delay": 4.0,
 					"shield_recharge_rate": 13.0,
 					"shield_recharge_rate_increased": 0.0,
@@ -12843,6 +12846,7 @@
 					"projectile_count": 0.0,
 					"projectile_increased": 0.0,
 					"projectile_speed_increased": 0.0,
+					"resolute_technique": 0.0,
 					"shield_recharge_delay": 4.0,
 					"shield_recharge_rate": 13.0,
 					"shield_recharge_rate_increased": 0.0,
@@ -13126,6 +13130,7 @@
 					"projectile_count": 0.0,
 					"projectile_increased": 0.0,
 					"projectile_speed_increased": 0.0,
+					"resolute_technique": 0.0,
 					"shield_recharge_delay": 4.0,
 					"shield_recharge_rate": 13.0,
 					"shield_recharge_rate_increased": 0.0,
@@ -13755,7 +13760,7 @@
 		"slot_targets": [
 			"body_armour"
 		],
-		"source_policy": 36,
+		"source_policy": 38,
 		"supply_scope": "自然新池只替换10%防御入口；新自然分布及后续随机状态有意改变，显式旧pool/profile仍保留历史结果",
 		"test_supply": {
 			"instance": {
@@ -16302,6 +16307,7 @@
 				"projectile_count": 0.0,
 				"projectile_increased": 0.0,
 				"projectile_speed_increased": 0.0,
+				"resolute_technique": 0.0,
 				"shield_recharge_delay": 4.0,
 				"shield_recharge_rate": 18.4,
 				"shield_recharge_rate_increased": 0.15,
@@ -16321,7 +16327,7 @@
 		"route_scope": "野蛮人69级73点的普通连通可行见证，保留沿途全部属性，无写档；不是全局最省点或完整配装最优结论",
 		"safety_cap": 0.83,
 		"scope": "只接入无条件最大火、冰、电抗性；全元素句展开三字段，每ID一次。寻枝珠宝只影响连接准入，不重复授予属性",
-		"source_policy": 36,
+		"source_policy": 38,
 		"source_reminder": "源资料90%提醒原样保留；本游戏安全上限为83%，不采用90%预算",
 		"source_sha256": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
 		"source_version": "3.29.1",
@@ -32544,7 +32550,7 @@
 		"pool_id": "forgeblade_v34",
 		"save_version": 34
 	},
-	"game_version": "0.60.0",
+	"game_version": "0.61.0",
 	"jewel_affixes": {
 		"barrier": {
 			"kind": "prefix",
@@ -33089,6 +33095,7 @@
 					"projectile_count": 0.0,
 					"projectile_increased": 0.0,
 					"projectile_speed_increased": 0.0,
+					"resolute_technique": 0.0,
 					"shield_recharge_delay": 4.0,
 					"shield_recharge_rate": 16.0,
 					"shield_recharge_rate_increased": 0.0,
@@ -33208,6 +33215,7 @@
 					"projectile_count": 0.0,
 					"projectile_increased": 0.0,
 					"projectile_speed_increased": 0.0,
+					"resolute_technique": 0.0,
 					"shield_recharge_delay": 4.0,
 					"shield_recharge_rate": 16.0,
 					"shield_recharge_rate_increased": 0.0,
@@ -33335,6 +33343,7 @@
 					"projectile_count": 0.0,
 					"projectile_increased": 0.0,
 					"projectile_speed_increased": 0.0,
+					"resolute_technique": 0.0,
 					"shield_recharge_delay": 4.0,
 					"shield_recharge_rate": 16.0,
 					"shield_recharge_rate_increased": 0.0,
@@ -33444,6 +33453,7 @@
 					"projectile_count": 0.0,
 					"projectile_increased": 0.0,
 					"projectile_speed_increased": 0.0,
+					"resolute_technique": 0.0,
 					"shield_recharge_delay": 4.0,
 					"shield_recharge_rate": 16.0,
 					"shield_recharge_rate_increased": 0.0,
@@ -33567,6 +33577,7 @@
 					"projectile_count": 0.0,
 					"projectile_increased": 0.0,
 					"projectile_speed_increased": 0.0,
+					"resolute_technique": 0.0,
 					"shield_recharge_delay": 4.0,
 					"shield_recharge_rate": 16.0,
 					"shield_recharge_rate_increased": 0.0,
@@ -33676,6 +33687,7 @@
 					"projectile_count": 0.0,
 					"projectile_increased": 0.0,
 					"projectile_speed_increased": 0.0,
+					"resolute_technique": 0.0,
 					"shield_recharge_delay": 4.0,
 					"shield_recharge_rate": 16.0,
 					"shield_recharge_rate_increased": 0.0,
@@ -33795,6 +33807,7 @@
 					"projectile_count": 0.0,
 					"projectile_increased": 0.0,
 					"projectile_speed_increased": 0.0,
+					"resolute_technique": 0.0,
 					"shield_recharge_delay": 4.0,
 					"shield_recharge_rate": 16.0,
 					"shield_recharge_rate_increased": 0.0,
@@ -37528,6 +37541,7 @@
 					"projectile_count": 0.0,
 					"projectile_increased": 0.0,
 					"projectile_speed_increased": 0.0,
+					"resolute_technique": 0.0,
 					"shield_recharge_delay": 4.0,
 					"shield_recharge_rate": 13.0,
 					"shield_recharge_rate_increased": 0.0,
@@ -37980,6 +37994,7 @@
 					"projectile_count": 0.0,
 					"projectile_increased": 0.0,
 					"projectile_speed_increased": 0.0,
+					"resolute_technique": 0.0,
 					"shield_recharge_delay": 4.0,
 					"shield_recharge_rate": 13.0,
 					"shield_recharge_rate_increased": 0.0,
@@ -38643,7 +38658,7 @@
 			"max_targets": 1,
 			"radius": 60.0
 		},
-		"save_version": 37,
+		"save_version": 38,
 		"scope": "hit + attack + melee；不含area，不受范围或投射物速度提高，也不占投射物容量，无返回或飞行结束爆炸。",
 		"timing": "沿用attack_timer与当前attack_speed；没有独立技能冷却或魔力支付。"
 	},
@@ -39194,6 +39209,7 @@
 							"projectile_count": 0.0,
 							"projectile_increased": 0.0,
 							"projectile_speed_increased": 0.0,
+							"resolute_technique": 0.0,
 							"shield_recharge_delay": 4.0,
 							"shield_recharge_rate": 16.0,
 							"shield_recharge_rate_increased": 0.0,
@@ -39329,6 +39345,7 @@
 							"projectile_count": 0.0,
 							"projectile_increased": 0.0,
 							"projectile_speed_increased": 0.0,
+							"resolute_technique": 0.0,
 							"shield_recharge_delay": 4.0,
 							"shield_recharge_rate": 16.0,
 							"shield_recharge_rate_increased": 0.0,
@@ -39423,6 +39440,7 @@
 							"projectile_count": 0.0,
 							"projectile_increased": 0.0,
 							"projectile_speed_increased": 0.0,
+							"resolute_technique": 0.0,
 							"shield_recharge_delay": 4.0,
 							"shield_recharge_rate": 16.0,
 							"shield_recharge_rate_increased": 0.0,
@@ -39825,6 +39843,7 @@
 							"projectile_count": 0.0,
 							"projectile_increased": 0.0,
 							"projectile_speed_increased": 0.0,
+							"resolute_technique": 0.0,
 							"shield_recharge_delay": 4.0,
 							"shield_recharge_rate": 16.0,
 							"shield_recharge_rate_increased": 0.0,
@@ -39960,6 +39979,7 @@
 							"projectile_count": 0.0,
 							"projectile_increased": 0.0,
 							"projectile_speed_increased": 0.0,
+							"resolute_technique": 0.0,
 							"shield_recharge_delay": 4.0,
 							"shield_recharge_rate": 16.0,
 							"shield_recharge_rate_increased": 0.0,
@@ -40054,6 +40074,7 @@
 							"projectile_count": 0.0,
 							"projectile_increased": 0.0,
 							"projectile_speed_increased": 0.0,
+							"resolute_technique": 0.0,
 							"shield_recharge_delay": 4.0,
 							"shield_recharge_rate": 16.0,
 							"shield_recharge_rate_increased": 0.0,
@@ -41522,7 +41543,7 @@
 		"quality": 0,
 		"recycle_credit": 1,
 		"recycle_location": "bag",
-		"schema": 37,
+		"schema": 38,
 		"test_supply_separate": true
 	},
 	"normal_journey": {
@@ -46621,7 +46642,3817 @@
 		"source": "SkillCompiler + ProjectileRuntime.advance + DamageResolver",
 		"target_count": 6
 	},
-	"save_version": 37,
+	"resolute_technique": {
+		"blocked_matching_nodes": {
+			"35448": {
+				"execution": {
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "max_health",
+							"value": 100.0
+						}
+					],
+					"status": "partial",
+					"supported": [
+						"+100 to maximum Life"
+					],
+					"unsupported": [
+						"Cannot be Knocked Back",
+						"Action Speed cannot be modified to below Base Value",
+						"Cannot Evade enemy Attacks\nCannot be Stunned"
+					]
+				},
+				"source_lines": [
+					"+100 to maximum Life",
+					"Cannot be Knocked Back",
+					"Action Speed cannot be modified to below Base Value",
+					"Cannot Evade enemy Attacks\nCannot be Stunned"
+				]
+			},
+			"40907": {
+				"execution": {
+					"grants": [],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"Cannot Evade enemy Attacks\nCannot be Stunned"
+					]
+				},
+				"source_lines": [
+					"Cannot Evade enemy Attacks\nCannot be Stunned"
+				]
+			},
+			"63620": {
+				"execution": {
+					"grants": [],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"40% more Attack Damage if Accuracy Rating is higher than Maximum Life\nNever deal Critical Strikes"
+					]
+				},
+				"source_lines": [
+					"40% more Attack Damage if Accuracy Rating is higher than Maximum Life\nNever deal Critical Strikes"
+				]
+			}
+		},
+		"bounds": "距离、墙体、出生保护、目标存活、支付和容量仍正常检查；成功命中仍结算护甲、抗性、护盾与生命",
+		"class_id": 1,
+		"defense_input": {
+			"armour": 500.0,
+			"cold_resistance": 1.0,
+			"fire_resistance": 1.0,
+			"lightning_resistance": 1.0
+		},
+		"defense_profile": {
+			"actor": "player",
+			"armour": 500.0,
+			"effective_resistances": {
+				"cold": 0.75,
+				"fire": 0.75,
+				"lightning": 0.75
+			},
+			"ok": true,
+			"raw_resistances": {
+				"cold": 1.0,
+				"fire": 1.0,
+				"lightning": 1.0
+			},
+			"reason": ""
+		},
+		"defense_scope": "护甲500与原始三抗100%为既有防御规则的隔离输入；按当前默认75%上限结算，不代表新增怪物或平衡调整",
+		"equipment_vocabulary": 37,
+		"example_scope": "同一7级野蛮人合法路径，仅比较最后1点；两边都装备已有棱光长弓和终焰护符。技能按该角色快照无辅助编译，不宣称同时装配；预期值是一次尝试的统计比较，不是实战DPS",
+		"examples": {
+			"after": {
+				"casts": {
+					"basic": {
+						"cooldown": 0.0,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n不能造成暴击（包括独立爆炸）\n命中不能被闪避；仍受距离、范围、墙体、免疫、护甲与抗性约束。\n实际投射速度 640.00\n投射速度改变飞行快慢，不增加距离上限或存续时间。\n独立爆炸半径 76.00 · 面积 ×1.0000\n每枚投射物：物理 35.20\n固有：物理 22.00；附加：无；附加效用 1.00\n独立爆炸：火焰 29.70\n固有：火焰 19.80；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+						"hit_policy": {
+							"cannot_deal_critical_strikes": true,
+							"hits_cannot_be_evaded": true,
+							"id": "resolute_technique"
+						},
+						"hits": {
+							"projectile": {
+								"critical": {
+									"chance": 0.0,
+									"multiplier": 1.5
+								},
+								"critical_role": "primary",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 1.0,
+										"base_coefficient": 1.0,
+										"intrinsic": {
+											"physical": 22.0
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"physical": 22.0
+									},
+									"role": "projectile",
+									"skill_id": "basic",
+									"tags": [
+										"hit",
+										"projectile",
+										"attack"
+									]
+								},
+								"targets": {
+									"armour_and_capped_resistance": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 9.16449704142012,
+										"expected_per_successful_hit": 9.16449704142012,
+										"potential_critical_hit": {
+											"components": {
+												"physical": 18.245026178010473
+											},
+											"details": [
+												{
+													"base": 22.0,
+													"before_defense": 52.800000000000004,
+													"final": 18.245026178010473,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.6544502617801047,
+													"type": "physical"
+												}
+											],
+											"total": 18.245026178010473
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"physical": 9.16449704142012
+											},
+											"details": [
+												{
+													"base": 22.0,
+													"before_defense": 35.2,
+													"final": 9.16449704142012,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.7396449704142012,
+													"type": "physical"
+												}
+											],
+											"total": 9.16449704142012
+										}
+									},
+									"evasive": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 35.2,
+										"expected_per_successful_hit": 35.2,
+										"potential_critical_hit": {
+											"components": {
+												"physical": 52.800000000000004
+											},
+											"details": [
+												{
+													"base": 22.0,
+													"before_defense": 52.800000000000004,
+													"final": 52.800000000000004,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "physical"
+												}
+											],
+											"total": 52.800000000000004
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"physical": 35.2
+											},
+											"details": [
+												{
+													"base": 22.0,
+													"before_defense": 35.2,
+													"final": 35.2,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "physical"
+												}
+											],
+											"total": 35.2
+										}
+									},
+									"no_evasion": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 35.2,
+										"expected_per_successful_hit": 35.2,
+										"potential_critical_hit": {
+											"components": {
+												"physical": 52.800000000000004
+											},
+											"details": [
+												{
+													"base": 22.0,
+													"before_defense": 52.800000000000004,
+													"final": 52.800000000000004,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "physical"
+												}
+											],
+											"total": 52.800000000000004
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"physical": 35.2
+											},
+											"details": [
+												{
+													"base": 22.0,
+													"before_defense": 35.2,
+													"final": 35.2,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "physical"
+												}
+											],
+											"total": 35.2
+										}
+									}
+								}
+							},
+							"secondary": {
+								"critical": {
+									"chance": 0.0,
+									"multiplier": 1.5
+								},
+								"critical_role": "secondary",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.0,
+										"base_coefficient": 0.9,
+										"intrinsic": {
+											"fire": 19.8
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 19.8
+									},
+									"role": "secondary",
+									"skill_id": "basic",
+									"tags": [
+										"hit",
+										"area",
+										"secondary",
+										"explosion"
+									]
+								},
+								"targets": {
+									"armour_and_capped_resistance": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 7.425000000000001,
+										"expected_per_successful_hit": 7.425000000000001,
+										"potential_critical_hit": {
+											"components": {
+												"fire": 11.137500000000001
+											},
+											"details": [
+												{
+													"base": 19.8,
+													"before_defense": 44.550000000000004,
+													"final": 11.137500000000001,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.75,
+													"type": "fire"
+												}
+											],
+											"total": 11.137500000000001
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"fire": 7.425000000000001
+											},
+											"details": [
+												{
+													"base": 19.8,
+													"before_defense": 29.700000000000003,
+													"final": 7.425000000000001,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.75,
+													"type": "fire"
+												}
+											],
+											"total": 7.425000000000001
+										}
+									},
+									"evasive": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 29.700000000000003,
+										"expected_per_successful_hit": 29.700000000000003,
+										"potential_critical_hit": {
+											"components": {
+												"fire": 44.550000000000004
+											},
+											"details": [
+												{
+													"base": 19.8,
+													"before_defense": 44.550000000000004,
+													"final": 44.550000000000004,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "fire"
+												}
+											],
+											"total": 44.550000000000004
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"fire": 29.700000000000003
+											},
+											"details": [
+												{
+													"base": 19.8,
+													"before_defense": 29.700000000000003,
+													"final": 29.700000000000003,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "fire"
+												}
+											],
+											"total": 29.700000000000003
+										}
+									},
+									"no_evasion": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 29.700000000000003,
+										"expected_per_successful_hit": 29.700000000000003,
+										"potential_critical_hit": {
+											"components": {
+												"fire": 44.550000000000004
+											},
+											"details": [
+												{
+													"base": 19.8,
+													"before_defense": 44.550000000000004,
+													"final": 44.550000000000004,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "fire"
+												}
+											],
+											"total": 44.550000000000004
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"fire": 29.700000000000003
+											},
+											"details": [
+												{
+													"base": 19.8,
+													"before_defense": 29.700000000000003,
+													"final": 29.700000000000003,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "fire"
+												}
+											],
+											"total": 29.700000000000003
+										}
+									}
+								}
+							}
+						},
+						"mana": 0.0,
+						"recipe": {
+							"speed": 640.0
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每枚投射物 35.20 / 独立爆炸 29.70"
+					},
+					"cleave": {
+						"cooldown": 1.4,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n不能造成暴击（包括独立爆炸）\n命中不能被闪避；仍受距离、范围、墙体、免疫、护甲与抗性约束。\n扇形范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n独立爆炸半径 76.00 · 面积 ×1.0000\n每次命中：物理 98.56\n固有：物理 61.60；附加：无；附加效用 2.80",
+						"hit_policy": {
+							"cannot_deal_critical_strikes": true,
+							"hits_cannot_be_evaded": true,
+							"id": "resolute_technique"
+						},
+						"hits": {
+							"direct": {
+								"critical": {
+									"chance": 0.0,
+									"multiplier": 1.5
+								},
+								"critical_role": "primary",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 2.8,
+										"base_coefficient": 2.8,
+										"intrinsic": {
+											"physical": 61.599999999999994
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"physical": 61.599999999999994
+									},
+									"role": "direct",
+									"skill_id": "cleave",
+									"tags": [
+										"hit",
+										"attack",
+										"melee",
+										"area"
+									]
+								},
+								"targets": {
+									"armour_and_capped_resistance": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 48.92261079774376,
+										"expected_per_successful_hit": 48.92261079774376,
+										"potential_critical_hit": {
+											"components": {
+												"physical": 88.18861200774694
+											},
+											"details": [
+												{
+													"base": 61.599999999999994,
+													"before_defense": 147.84,
+													"final": 88.18861200774694,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"melee_physical_increased",
+														"global_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.4034861200774693,
+													"type": "physical"
+												}
+											],
+											"total": 88.18861200774694
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"physical": 48.92261079774376
+											},
+											"details": [
+												{
+													"base": 61.599999999999994,
+													"before_defense": 98.56,
+													"final": 48.92261079774376,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"melee_physical_increased",
+														"global_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.5036261079774376,
+													"type": "physical"
+												}
+											],
+											"total": 48.92261079774376
+										}
+									},
+									"evasive": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 98.56,
+										"expected_per_successful_hit": 98.56,
+										"potential_critical_hit": {
+											"components": {
+												"physical": 147.84
+											},
+											"details": [
+												{
+													"base": 61.599999999999994,
+													"before_defense": 147.84,
+													"final": 147.84,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"melee_physical_increased",
+														"global_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "physical"
+												}
+											],
+											"total": 147.84
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"physical": 98.56
+											},
+											"details": [
+												{
+													"base": 61.599999999999994,
+													"before_defense": 98.56,
+													"final": 98.56,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"melee_physical_increased",
+														"global_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "physical"
+												}
+											],
+											"total": 98.56
+										}
+									},
+									"no_evasion": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 98.56,
+										"expected_per_successful_hit": 98.56,
+										"potential_critical_hit": {
+											"components": {
+												"physical": 147.84
+											},
+											"details": [
+												{
+													"base": 61.599999999999994,
+													"before_defense": 147.84,
+													"final": 147.84,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"melee_physical_increased",
+														"global_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "physical"
+												}
+											],
+											"total": 147.84
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"physical": 98.56
+											},
+											"details": [
+												{
+													"base": 61.599999999999994,
+													"before_defense": 98.56,
+													"final": 98.56,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"melee_physical_increased",
+														"global_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "physical"
+												}
+											],
+											"total": 98.56
+										}
+									}
+								}
+							}
+						},
+						"mana": 12.0,
+						"recipe": {
+							"half_angle": 1.5707963267948966,
+							"radius": 95.0
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每次命中 98.56"
+					},
+					"nova": {
+						"cooldown": 6.0,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n不能造成暴击（包括独立爆炸）\n命中不能被闪避；仍受距离、范围、墙体、免疫、护甲与抗性约束。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n独立爆炸半径 76.00 · 面积 ×1.0000\n每次命中：闪电 89.10\n固有：闪电 59.40；附加：无；附加效用 2.70",
+						"hit_policy": {
+							"cannot_deal_critical_strikes": true,
+							"hits_cannot_be_evaded": true,
+							"id": "resolute_technique"
+						},
+						"hits": {
+							"direct": {
+								"critical": {
+									"chance": 0.0,
+									"multiplier": 1.5
+								},
+								"critical_role": "primary",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 2.7,
+										"base_coefficient": 2.7,
+										"intrinsic": {
+											"lightning": 59.400000000000006
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"lightning": 59.400000000000006
+									},
+									"role": "direct",
+									"skill_id": "nova",
+									"tags": [
+										"hit",
+										"spell",
+										"area"
+									]
+								},
+								"targets": {
+									"armour_and_capped_resistance": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 22.275000000000002,
+										"expected_per_successful_hit": 22.275000000000002,
+										"potential_critical_hit": {
+											"components": {
+												"lightning": 33.4125
+											},
+											"details": [
+												{
+													"base": 59.400000000000006,
+													"before_defense": 133.65,
+													"final": 33.4125,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.75,
+													"type": "lightning"
+												}
+											],
+											"total": 33.4125
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"lightning": 22.275000000000002
+											},
+											"details": [
+												{
+													"base": 59.400000000000006,
+													"before_defense": 89.10000000000001,
+													"final": 22.275000000000002,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.75,
+													"type": "lightning"
+												}
+											],
+											"total": 22.275000000000002
+										}
+									},
+									"evasive": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 89.10000000000001,
+										"expected_per_successful_hit": 89.10000000000001,
+										"potential_critical_hit": {
+											"components": {
+												"lightning": 133.65
+											},
+											"details": [
+												{
+													"base": 59.400000000000006,
+													"before_defense": 133.65,
+													"final": 133.65,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "lightning"
+												}
+											],
+											"total": 133.65
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"lightning": 89.10000000000001
+											},
+											"details": [
+												{
+													"base": 59.400000000000006,
+													"before_defense": 89.10000000000001,
+													"final": 89.10000000000001,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "lightning"
+												}
+											],
+											"total": 89.10000000000001
+										}
+									},
+									"no_evasion": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 89.10000000000001,
+										"expected_per_successful_hit": 89.10000000000001,
+										"potential_critical_hit": {
+											"components": {
+												"lightning": 133.65
+											},
+											"details": [
+												{
+													"base": 59.400000000000006,
+													"before_defense": 133.65,
+													"final": 133.65,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "lightning"
+												}
+											],
+											"total": 133.65
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"lightning": 89.10000000000001
+											},
+											"details": [
+												{
+													"base": 59.400000000000006,
+													"before_defense": 89.10000000000001,
+													"final": 89.10000000000001,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "lightning"
+												}
+											],
+											"total": 89.10000000000001
+										}
+									}
+								}
+							}
+						},
+						"mana": 24.0,
+						"recipe": {
+							"radius": 155.0
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每次命中 89.10"
+					},
+					"tornado": {
+						"cooldown": 2.5,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n不能造成暴击（包括独立爆炸）\n命中不能被闪避；仍受距离、范围、墙体、免疫、护甲与抗性约束。\n母箭速度 420.00 · 子箭速度 260.00；返回沿用各自速度。\n投射速度改变飞行快慢，不增加距离上限或存续时间。\n独立爆炸半径 76.00 · 面积 ×1.0000\n母箭：物理 21.12 + 火焰 16.72\n固有：物理 13.20 + 火焰 8.80；附加：无；附加效用 1.00\n子箭：物理 14.78 + 火焰 11.70\n固有：物理 9.24 + 火焰 6.16；附加：无；附加效用 0.70\n独立爆炸：火焰 29.70\n固有：火焰 19.80；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+						"hit_policy": {
+							"cannot_deal_critical_strikes": true,
+							"hits_cannot_be_evaded": true,
+							"id": "resolute_technique"
+						},
+						"hits": {
+							"child": {
+								"critical": {
+									"chance": 0.0,
+									"multiplier": 1.5
+								},
+								"critical_role": "primary",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.7,
+										"base_coefficient": 0.7,
+										"intrinsic": {
+											"fire": 6.16,
+											"physical": 9.239999999999998
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 6.16,
+										"physical": 9.239999999999998
+									},
+									"role": "child",
+									"skill_id": "tornado",
+									"tags": [
+										"hit",
+										"attack",
+										"projectile"
+									]
+								},
+								"targets": {
+									"armour_and_capped_resistance": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 4.830156119319765,
+										"expected_per_successful_hit": 4.830156119319765,
+										"potential_critical_hit": {
+											"components": {
+												"fire": 4.389,
+												"physical": 4.025135673127291
+											},
+											"details": [
+												{
+													"base": 9.239999999999998,
+													"before_defense": 22.176,
+													"final": 4.025135673127291,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.8184913567312729,
+													"type": "physical"
+												},
+												{
+													"base": 6.16,
+													"before_defense": 17.556,
+													"final": 4.389,
+													"increased": 0.9000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.75,
+													"type": "fire"
+												}
+											],
+											"total": 8.41413567312729
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"fire": 2.926,
+												"physical": 1.9041561193197651
+											},
+											"details": [
+												{
+													"base": 9.239999999999998,
+													"before_defense": 14.783999999999999,
+													"final": 1.9041561193197651,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.8712015611931977,
+													"type": "physical"
+												},
+												{
+													"base": 6.16,
+													"before_defense": 11.704,
+													"final": 2.926,
+													"increased": 0.9000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.75,
+													"type": "fire"
+												}
+											],
+											"total": 4.830156119319765
+										}
+									},
+									"evasive": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 26.488,
+										"expected_per_successful_hit": 26.488,
+										"potential_critical_hit": {
+											"components": {
+												"fire": 17.556,
+												"physical": 22.176
+											},
+											"details": [
+												{
+													"base": 9.239999999999998,
+													"before_defense": 22.176,
+													"final": 22.176,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "physical"
+												},
+												{
+													"base": 6.16,
+													"before_defense": 17.556,
+													"final": 17.556,
+													"increased": 0.9000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "fire"
+												}
+											],
+											"total": 39.732
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"fire": 11.704,
+												"physical": 14.783999999999999
+											},
+											"details": [
+												{
+													"base": 9.239999999999998,
+													"before_defense": 14.783999999999999,
+													"final": 14.783999999999999,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "physical"
+												},
+												{
+													"base": 6.16,
+													"before_defense": 11.704,
+													"final": 11.704,
+													"increased": 0.9000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "fire"
+												}
+											],
+											"total": 26.488
+										}
+									},
+									"no_evasion": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 26.488,
+										"expected_per_successful_hit": 26.488,
+										"potential_critical_hit": {
+											"components": {
+												"fire": 17.556,
+												"physical": 22.176
+											},
+											"details": [
+												{
+													"base": 9.239999999999998,
+													"before_defense": 22.176,
+													"final": 22.176,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "physical"
+												},
+												{
+													"base": 6.16,
+													"before_defense": 17.556,
+													"final": 17.556,
+													"increased": 0.9000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "fire"
+												}
+											],
+											"total": 39.732
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"fire": 11.704,
+												"physical": 14.783999999999999
+											},
+											"details": [
+												{
+													"base": 9.239999999999998,
+													"before_defense": 14.783999999999999,
+													"final": 14.783999999999999,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "physical"
+												},
+												{
+													"base": 6.16,
+													"before_defense": 11.704,
+													"final": 11.704,
+													"increased": 0.9000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "fire"
+												}
+											],
+											"total": 26.488
+										}
+									}
+								}
+							},
+							"parent": {
+								"critical": {
+									"chance": 0.0,
+									"multiplier": 1.5
+								},
+								"critical_role": "primary",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 1.0,
+										"base_coefficient": 1.0,
+										"intrinsic": {
+											"fire": 8.8,
+											"physical": 13.2
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 8.8,
+										"physical": 13.2
+									},
+									"role": "parent",
+									"skill_id": "tornado",
+									"tags": [
+										"hit",
+										"attack",
+										"projectile"
+									]
+								},
+								"targets": {
+									"armour_and_capped_resistance": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 7.862747688243065,
+										"expected_per_successful_hit": 7.862747688243065,
+										"potential_critical_hit": {
+											"components": {
+												"fire": 6.270000000000001,
+												"physical": 7.62167679222357
+											},
+											"details": [
+												{
+													"base": 13.2,
+													"before_defense": 31.68,
+													"final": 7.62167679222357,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.7594167679222358,
+													"type": "physical"
+												},
+												{
+													"base": 8.8,
+													"before_defense": 25.080000000000005,
+													"final": 6.270000000000001,
+													"increased": 0.9000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.75,
+													"type": "fire"
+												}
+											],
+											"total": 13.89167679222357
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"fire": 4.180000000000001,
+												"physical": 3.6827476882430648
+											},
+											"details": [
+												{
+													"base": 13.2,
+													"before_defense": 21.12,
+													"final": 3.6827476882430648,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.8256274768824307,
+													"type": "physical"
+												},
+												{
+													"base": 8.8,
+													"before_defense": 16.720000000000002,
+													"final": 4.180000000000001,
+													"increased": 0.9000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.75,
+													"type": "fire"
+												}
+											],
+											"total": 7.862747688243065
+										}
+									},
+									"evasive": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 37.84,
+										"expected_per_successful_hit": 37.84,
+										"potential_critical_hit": {
+											"components": {
+												"fire": 25.080000000000005,
+												"physical": 31.68
+											},
+											"details": [
+												{
+													"base": 13.2,
+													"before_defense": 31.68,
+													"final": 31.68,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "physical"
+												},
+												{
+													"base": 8.8,
+													"before_defense": 25.080000000000005,
+													"final": 25.080000000000005,
+													"increased": 0.9000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "fire"
+												}
+											],
+											"total": 56.760000000000005
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"fire": 16.720000000000002,
+												"physical": 21.12
+											},
+											"details": [
+												{
+													"base": 13.2,
+													"before_defense": 21.12,
+													"final": 21.12,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "physical"
+												},
+												{
+													"base": 8.8,
+													"before_defense": 16.720000000000002,
+													"final": 16.720000000000002,
+													"increased": 0.9000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "fire"
+												}
+											],
+											"total": 37.84
+										}
+									},
+									"no_evasion": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 37.84,
+										"expected_per_successful_hit": 37.84,
+										"potential_critical_hit": {
+											"components": {
+												"fire": 25.080000000000005,
+												"physical": 31.68
+											},
+											"details": [
+												{
+													"base": 13.2,
+													"before_defense": 31.68,
+													"final": 31.68,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "physical"
+												},
+												{
+													"base": 8.8,
+													"before_defense": 25.080000000000005,
+													"final": 25.080000000000005,
+													"increased": 0.9000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "fire"
+												}
+											],
+											"total": 56.760000000000005
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"fire": 16.720000000000002,
+												"physical": 21.12
+											},
+											"details": [
+												{
+													"base": 13.2,
+													"before_defense": 21.12,
+													"final": 21.12,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "physical"
+												},
+												{
+													"base": 8.8,
+													"before_defense": 16.720000000000002,
+													"final": 16.720000000000002,
+													"increased": 0.9000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "fire"
+												}
+											],
+											"total": 37.84
+										}
+									}
+								}
+							},
+							"secondary": {
+								"critical": {
+									"chance": 0.0,
+									"multiplier": 1.5
+								},
+								"critical_role": "secondary",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.0,
+										"base_coefficient": 0.9,
+										"intrinsic": {
+											"fire": 19.8
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 19.8
+									},
+									"role": "secondary",
+									"skill_id": "tornado",
+									"tags": [
+										"hit",
+										"area",
+										"secondary",
+										"explosion"
+									]
+								},
+								"targets": {
+									"armour_and_capped_resistance": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 7.425000000000001,
+										"expected_per_successful_hit": 7.425000000000001,
+										"potential_critical_hit": {
+											"components": {
+												"fire": 11.137500000000001
+											},
+											"details": [
+												{
+													"base": 19.8,
+													"before_defense": 44.550000000000004,
+													"final": 11.137500000000001,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.75,
+													"type": "fire"
+												}
+											],
+											"total": 11.137500000000001
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"fire": 7.425000000000001
+											},
+											"details": [
+												{
+													"base": 19.8,
+													"before_defense": 29.700000000000003,
+													"final": 7.425000000000001,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.75,
+													"type": "fire"
+												}
+											],
+											"total": 7.425000000000001
+										}
+									},
+									"evasive": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 29.700000000000003,
+										"expected_per_successful_hit": 29.700000000000003,
+										"potential_critical_hit": {
+											"components": {
+												"fire": 44.550000000000004
+											},
+											"details": [
+												{
+													"base": 19.8,
+													"before_defense": 44.550000000000004,
+													"final": 44.550000000000004,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "fire"
+												}
+											],
+											"total": 44.550000000000004
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"fire": 29.700000000000003
+											},
+											"details": [
+												{
+													"base": 19.8,
+													"before_defense": 29.700000000000003,
+													"final": 29.700000000000003,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "fire"
+												}
+											],
+											"total": 29.700000000000003
+										}
+									},
+									"no_evasion": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 29.700000000000003,
+										"expected_per_successful_hit": 29.700000000000003,
+										"potential_critical_hit": {
+											"components": {
+												"fire": 44.550000000000004
+											},
+											"details": [
+												{
+													"base": 19.8,
+													"before_defense": 44.550000000000004,
+													"final": 44.550000000000004,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "fire"
+												}
+											],
+											"total": 44.550000000000004
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"fire": 29.700000000000003
+											},
+											"details": [
+												{
+													"base": 19.8,
+													"before_defense": 29.700000000000003,
+													"final": 29.700000000000003,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "fire"
+												}
+											],
+											"total": 29.700000000000003
+										}
+									}
+								}
+							}
+						},
+						"mana": 18.0,
+						"recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"initial_count": 5,
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：母箭 37.84 / 子箭 26.49 / 独立爆炸 29.70"
+					}
+				},
+				"equipment": {
+					"amulet": "detonation_charm",
+					"weapon": "prism_bow"
+				},
+				"progress": {
+					"level": 7,
+					"xp": 0
+				},
+				"save_attempts": 0,
+				"snapshot": {
+					"accuracy": 128.0,
+					"added_damage": {
+						"attack": {
+							"fire": 0.0,
+							"physical": 0.0
+						},
+						"spell": {
+							"cold": 0.0,
+							"lightning": 0.0
+						}
+					},
+					"added_damage_sources": [],
+					"base_damage": 22.0,
+					"critical_modifiers": {
+						"base_chance": 0.05,
+						"base_multiplier": 1.5
+					},
+					"effects": [
+						"explode_on_flight_end"
+					],
+					"explosion_recipe": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"modifiers": [
+						{
+							"all_tags": [
+								"attack",
+								"melee"
+							],
+							"damage_types": [
+								"physical"
+							],
+							"id": "melee_physical_increased",
+							"mode": "increased",
+							"value": 0.4
+						},
+						{
+							"all_tags": [],
+							"damage_types": [],
+							"id": "global_increased",
+							"mode": "increased",
+							"value": 0.2
+						},
+						{
+							"all_tags": [
+								"projectile"
+							],
+							"damage_types": [],
+							"id": "projectile_increased",
+							"mode": "increased",
+							"value": 0.4
+						},
+						{
+							"all_tags": [],
+							"damage_types": [
+								"fire",
+								"cold",
+								"lightning"
+							],
+							"id": "elemental_increased",
+							"mode": "increased",
+							"value": 0.3
+						}
+					],
+					"projectile_count": 2,
+					"resolute_technique": 1.0,
+					"tornado_recipe": {
+						"child": {
+							"added_effectiveness": 0.7,
+							"coefficient": 0.7,
+							"lifetime": 1.7,
+							"pierce": -1,
+							"radius": 4.5,
+							"range": 150.0,
+							"role": "child",
+							"speed": 260.0,
+							"split": false
+						},
+						"child_count": 3,
+						"explosion": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"parent": {
+							"added_effectiveness": 1.0,
+							"coefficient": 1.0,
+							"lifetime": 0.9,
+							"pierce": -1,
+							"radius": 6.0,
+							"range": 150.0,
+							"role": "parent",
+							"speed": 420.0,
+							"split": true
+						},
+						"parent_count": 3,
+						"spread": 0.16
+					}
+				},
+				"stats": {
+					"accuracy": 128.0,
+					"accuracy_increased": 0.0,
+					"additional_skill_slots": 0.0,
+					"area_increased": 0.0,
+					"area_size_increased": 0.0,
+					"armour": 0.0,
+					"armour_increased": 0.0,
+					"attack_added_fire": 0.0,
+					"attack_added_physical": 0.0,
+					"attack_crit_chance_increased": 0.0,
+					"attack_elemental_increased": 0.0,
+					"attack_life_leech": 0.0,
+					"attack_mana_leech": 0.0,
+					"attack_physical_increased": 0.0,
+					"attack_speed": 1.7,
+					"attack_speed_increased": 0.0,
+					"chaos_increased": 0.0,
+					"cold_increased": 0.0,
+					"cold_resistance": 0.0,
+					"crit_base_chance": 0.05,
+					"crit_base_multiplier": 1.5,
+					"crit_chance_increased": 0.0,
+					"crit_multiplier_add": 0.0,
+					"damage": 22.0,
+					"damage_taken_from_mana_before_life": 0.0,
+					"damaging_ailments_faster": 0.0,
+					"dexterity": 14.0,
+					"elemental_increased": 0.3,
+					"evasion": 15.3,
+					"evasion_increased": 0.0,
+					"fire_dot_multiplier_add": 0.0,
+					"fire_increased": 0.0,
+					"fire_resistance": 0.0,
+					"flask_charges_gained_increased": 0.0,
+					"flask_life_recovery_increased": 0.0,
+					"flask_mana_recovery_increased": 0.0,
+					"global_increased": 0.2,
+					"intelligence": 14.0,
+					"life_leech_max_rate_increased": 0.0,
+					"life_leech_rate_increased": 0.0,
+					"life_regen": 0.0,
+					"life_regen_percent": 0.0,
+					"lightning_increased": 0.0,
+					"lightning_resistance": 0.0,
+					"mana_cost_efficiency_increased": 0.0,
+					"mana_cost_increased": 0.0,
+					"mana_leech_max_rate_increased": 0.0,
+					"mana_leech_rate_increased": 0.0,
+					"mana_regen": 9.0,
+					"mana_regen_increased": 0.0,
+					"max_health": 197.0,
+					"max_mana": 107.0,
+					"max_shield": 60.6,
+					"maximum_cold_resistance_add": 0.0,
+					"maximum_fire_resistance_add": 0.0,
+					"maximum_lightning_resistance_add": 0.0,
+					"melee_area_size_increased": 0.0,
+					"melee_crit_chance_increased": 0.0,
+					"melee_crit_multiplier_add": 0.0,
+					"melee_physical_increased": 0.4,
+					"move_speed": 240.0,
+					"move_speed_increased": 0.0,
+					"physical_attack_life_leech": 0.0,
+					"physical_attack_mana_leech": 0.0,
+					"physical_increased": 0.0,
+					"projectile_attack_crit_chance_increased": 0.0,
+					"projectile_attack_crit_multiplier_add": 0.0,
+					"projectile_count": 2.0,
+					"projectile_increased": 0.4,
+					"projectile_speed_increased": 0.0,
+					"resolute_technique": 1.0,
+					"shield_recharge_delay": 4.0,
+					"shield_recharge_rate": 13.0,
+					"shield_recharge_rate_increased": 0.0,
+					"shield_recharge_start_faster": 0.0,
+					"shield_regen": 13.0,
+					"spell_added_cold": 0.0,
+					"spell_added_lightning": 0.0,
+					"spell_area_size_increased": 0.0,
+					"spell_crit_chance_increased": 0.0,
+					"spell_crit_multiplier_add": 0.0,
+					"spell_increased": 0.0,
+					"strength": 122.0
+				},
+				"talents": {
+					"allocated": [
+						"47175",
+						"31628",
+						"9511",
+						"23881",
+						"26523",
+						"6446",
+						"10221",
+						"50422",
+						"50570",
+						"29353",
+						"63282",
+						"31961"
+					],
+					"ascendancy": "",
+					"ascendancy_allocated": [],
+					"ascendancy_points": 0,
+					"class_id": 1,
+					"masteries": {
+
+					},
+					"normal_points": 0,
+					"source_version": "3.29.1"
+				},
+				"whole_build_valid": true
+			},
+			"before": {
+				"casts": {
+					"basic": {
+						"cooldown": 0.0,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n独立爆炸 · 暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 128，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n实际投射速度 640.00\n投射速度改变飞行快慢，不增加距离上限或存续时间。\n独立爆炸半径 76.00 · 面积 ×1.0000\n每枚投射物：物理 35.20\n固有：物理 22.00；附加：无；附加效用 1.00\n独立爆炸：火焰 29.70\n固有：火焰 19.80；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+						"hit_policy": {
+
+						},
+						"hits": {
+							"projectile": {
+								"critical": {
+									"chance": 0.05,
+									"multiplier": 1.5
+								},
+								"critical_role": "primary",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 1.0,
+										"base_coefficient": 1.0,
+										"intrinsic": {
+											"physical": 22.0
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"physical": 22.0
+									},
+									"role": "projectile",
+									"skill_id": "basic",
+									"tags": [
+										"hit",
+										"projectile",
+										"attack"
+									]
+								},
+								"targets": {
+									"armour_and_capped_resistance": {
+										"admission": {
+											"chance": 0.94,
+											"entropy": 44.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 9.041412088354658,
+										"expected_per_successful_hit": 9.618523498249637,
+										"potential_critical_hit": {
+											"components": {
+												"physical": 18.245026178010473
+											},
+											"details": [
+												{
+													"base": 22.0,
+													"before_defense": 52.800000000000004,
+													"final": 18.245026178010473,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.6544502617801047,
+													"type": "physical"
+												}
+											],
+											"total": 18.245026178010473
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"physical": 9.16449704142012
+											},
+											"details": [
+												{
+													"base": 22.0,
+													"before_defense": 35.2,
+													"final": 9.16449704142012,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.7396449704142012,
+													"type": "physical"
+												}
+											],
+											"total": 9.16449704142012
+										}
+									},
+									"evasive": {
+										"admission": {
+											"chance": 0.94,
+											"entropy": 44.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 33.9152,
+										"expected_per_successful_hit": 36.08,
+										"potential_critical_hit": {
+											"components": {
+												"physical": 52.800000000000004
+											},
+											"details": [
+												{
+													"base": 22.0,
+													"before_defense": 52.800000000000004,
+													"final": 52.800000000000004,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "physical"
+												}
+											],
+											"total": 52.800000000000004
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"physical": 35.2
+											},
+											"details": [
+												{
+													"base": 22.0,
+													"before_defense": 35.2,
+													"final": 35.2,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "physical"
+												}
+											],
+											"total": 35.2
+										}
+									},
+									"no_evasion": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 36.08,
+										"expected_per_successful_hit": 36.08,
+										"potential_critical_hit": {
+											"components": {
+												"physical": 52.800000000000004
+											},
+											"details": [
+												{
+													"base": 22.0,
+													"before_defense": 52.800000000000004,
+													"final": 52.800000000000004,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "physical"
+												}
+											],
+											"total": 52.800000000000004
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"physical": 35.2
+											},
+											"details": [
+												{
+													"base": 22.0,
+													"before_defense": 35.2,
+													"final": 35.2,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "physical"
+												}
+											],
+											"total": 35.2
+										}
+									}
+								}
+							},
+							"secondary": {
+								"critical": {
+									"chance": 0.05,
+									"multiplier": 1.5
+								},
+								"critical_role": "secondary",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.0,
+										"base_coefficient": 0.9,
+										"intrinsic": {
+											"fire": 19.8
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 19.8
+									},
+									"role": "secondary",
+									"skill_id": "basic",
+									"tags": [
+										"hit",
+										"area",
+										"secondary",
+										"explosion"
+									]
+								},
+								"targets": {
+									"armour_and_capped_resistance": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 7.610625,
+										"expected_per_successful_hit": 7.610625,
+										"potential_critical_hit": {
+											"components": {
+												"fire": 11.137500000000001
+											},
+											"details": [
+												{
+													"base": 19.8,
+													"before_defense": 44.550000000000004,
+													"final": 11.137500000000001,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.75,
+													"type": "fire"
+												}
+											],
+											"total": 11.137500000000001
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"fire": 7.425000000000001
+											},
+											"details": [
+												{
+													"base": 19.8,
+													"before_defense": 29.700000000000003,
+													"final": 7.425000000000001,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.75,
+													"type": "fire"
+												}
+											],
+											"total": 7.425000000000001
+										}
+									},
+									"evasive": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 30.4425,
+										"expected_per_successful_hit": 30.4425,
+										"potential_critical_hit": {
+											"components": {
+												"fire": 44.550000000000004
+											},
+											"details": [
+												{
+													"base": 19.8,
+													"before_defense": 44.550000000000004,
+													"final": 44.550000000000004,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "fire"
+												}
+											],
+											"total": 44.550000000000004
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"fire": 29.700000000000003
+											},
+											"details": [
+												{
+													"base": 19.8,
+													"before_defense": 29.700000000000003,
+													"final": 29.700000000000003,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "fire"
+												}
+											],
+											"total": 29.700000000000003
+										}
+									},
+									"no_evasion": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 30.4425,
+										"expected_per_successful_hit": 30.4425,
+										"potential_critical_hit": {
+											"components": {
+												"fire": 44.550000000000004
+											},
+											"details": [
+												{
+													"base": 19.8,
+													"before_defense": 44.550000000000004,
+													"final": 44.550000000000004,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "fire"
+												}
+											],
+											"total": 44.550000000000004
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"fire": 29.700000000000003
+											},
+											"details": [
+												{
+													"base": 19.8,
+													"before_defense": 29.700000000000003,
+													"final": 29.700000000000003,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "fire"
+												}
+											],
+											"total": 29.700000000000003
+										}
+									}
+								}
+							}
+						},
+						"mana": 0.0,
+						"recipe": {
+							"speed": 640.0
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每枚投射物 35.20 / 独立爆炸 29.70"
+					},
+					"cleave": {
+						"cooldown": 1.4,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 128，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n扇形范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n独立爆炸半径 76.00 · 面积 ×1.0000\n每次命中：物理 98.56\n固有：物理 61.60；附加：无；附加效用 2.80",
+						"hit_policy": {
+
+						},
+						"hits": {
+							"direct": {
+								"critical": {
+									"chance": 0.05,
+									"multiplier": 1.5
+								},
+								"critical_role": "primary",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 2.8,
+										"base_coefficient": 2.8,
+										"intrinsic": {
+											"physical": 61.599999999999994
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"physical": 61.599999999999994
+									},
+									"role": "direct",
+									"skill_id": "cleave",
+									"tags": [
+										"hit",
+										"attack",
+										"melee",
+										"area"
+									]
+								},
+								"targets": {
+									"armour_and_capped_resistance": {
+										"admission": {
+											"chance": 0.94,
+											"entropy": 44.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 47.83275620674927,
+										"expected_per_successful_hit": 50.88591085824391,
+										"potential_critical_hit": {
+											"components": {
+												"physical": 88.18861200774694
+											},
+											"details": [
+												{
+													"base": 61.599999999999994,
+													"before_defense": 147.84,
+													"final": 88.18861200774694,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"melee_physical_increased",
+														"global_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.4034861200774693,
+													"type": "physical"
+												}
+											],
+											"total": 88.18861200774694
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"physical": 48.92261079774376
+											},
+											"details": [
+												{
+													"base": 61.599999999999994,
+													"before_defense": 98.56,
+													"final": 48.92261079774376,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"melee_physical_increased",
+														"global_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.5036261079774376,
+													"type": "physical"
+												}
+											],
+											"total": 48.92261079774376
+										}
+									},
+									"evasive": {
+										"admission": {
+											"chance": 0.94,
+											"entropy": 44.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 94.96255999999998,
+										"expected_per_successful_hit": 101.02399999999999,
+										"potential_critical_hit": {
+											"components": {
+												"physical": 147.84
+											},
+											"details": [
+												{
+													"base": 61.599999999999994,
+													"before_defense": 147.84,
+													"final": 147.84,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"melee_physical_increased",
+														"global_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "physical"
+												}
+											],
+											"total": 147.84
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"physical": 98.56
+											},
+											"details": [
+												{
+													"base": 61.599999999999994,
+													"before_defense": 98.56,
+													"final": 98.56,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"melee_physical_increased",
+														"global_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "physical"
+												}
+											],
+											"total": 98.56
+										}
+									},
+									"no_evasion": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 101.02399999999999,
+										"expected_per_successful_hit": 101.02399999999999,
+										"potential_critical_hit": {
+											"components": {
+												"physical": 147.84
+											},
+											"details": [
+												{
+													"base": 61.599999999999994,
+													"before_defense": 147.84,
+													"final": 147.84,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"melee_physical_increased",
+														"global_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "physical"
+												}
+											],
+											"total": 147.84
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"physical": 98.56
+											},
+											"details": [
+												{
+													"base": 61.599999999999994,
+													"before_defense": 98.56,
+													"final": 98.56,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"melee_physical_increased",
+														"global_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "physical"
+												}
+											],
+											"total": 98.56
+										}
+									}
+								}
+							}
+						},
+						"mana": 12.0,
+						"recipe": {
+							"half_angle": 1.5707963267948966,
+							"radius": 95.0
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每次命中 98.56"
+					},
+					"nova": {
+						"cooldown": 6.0,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 128，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n独立爆炸半径 76.00 · 面积 ×1.0000\n每次命中：闪电 89.10\n固有：闪电 59.40；附加：无；附加效用 2.70",
+						"hit_policy": {
+
+						},
+						"hits": {
+							"direct": {
+								"critical": {
+									"chance": 0.05,
+									"multiplier": 1.5
+								},
+								"critical_role": "primary",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 2.7,
+										"base_coefficient": 2.7,
+										"intrinsic": {
+											"lightning": 59.400000000000006
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"lightning": 59.400000000000006
+									},
+									"role": "direct",
+									"skill_id": "nova",
+									"tags": [
+										"hit",
+										"spell",
+										"area"
+									]
+								},
+								"targets": {
+									"armour_and_capped_resistance": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 22.831875000000004,
+										"expected_per_successful_hit": 22.831875000000004,
+										"potential_critical_hit": {
+											"components": {
+												"lightning": 33.4125
+											},
+											"details": [
+												{
+													"base": 59.400000000000006,
+													"before_defense": 133.65,
+													"final": 33.4125,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.75,
+													"type": "lightning"
+												}
+											],
+											"total": 33.4125
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"lightning": 22.275000000000002
+											},
+											"details": [
+												{
+													"base": 59.400000000000006,
+													"before_defense": 89.10000000000001,
+													"final": 22.275000000000002,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.75,
+													"type": "lightning"
+												}
+											],
+											"total": 22.275000000000002
+										}
+									},
+									"evasive": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 91.32750000000001,
+										"expected_per_successful_hit": 91.32750000000001,
+										"potential_critical_hit": {
+											"components": {
+												"lightning": 133.65
+											},
+											"details": [
+												{
+													"base": 59.400000000000006,
+													"before_defense": 133.65,
+													"final": 133.65,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "lightning"
+												}
+											],
+											"total": 133.65
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"lightning": 89.10000000000001
+											},
+											"details": [
+												{
+													"base": 59.400000000000006,
+													"before_defense": 89.10000000000001,
+													"final": 89.10000000000001,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "lightning"
+												}
+											],
+											"total": 89.10000000000001
+										}
+									},
+									"no_evasion": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 91.32750000000001,
+										"expected_per_successful_hit": 91.32750000000001,
+										"potential_critical_hit": {
+											"components": {
+												"lightning": 133.65
+											},
+											"details": [
+												{
+													"base": 59.400000000000006,
+													"before_defense": 133.65,
+													"final": 133.65,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "lightning"
+												}
+											],
+											"total": 133.65
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"lightning": 89.10000000000001
+											},
+											"details": [
+												{
+													"base": 59.400000000000006,
+													"before_defense": 89.10000000000001,
+													"final": 89.10000000000001,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "lightning"
+												}
+											],
+											"total": 89.10000000000001
+										}
+									}
+								}
+							}
+						},
+						"mana": 24.0,
+						"recipe": {
+							"radius": 155.0
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每次命中 89.10"
+					},
+					"tornado": {
+						"cooldown": 2.5,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n独立爆炸 · 暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 128，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n母箭速度 420.00 · 子箭速度 260.00；返回沿用各自速度。\n投射速度改变飞行快慢，不增加距离上限或存续时间。\n独立爆炸半径 76.00 · 面积 ×1.0000\n母箭：物理 21.12 + 火焰 16.72\n固有：物理 13.20 + 火焰 8.80；附加：无；附加效用 1.00\n子箭：物理 14.78 + 火焰 11.70\n固有：物理 9.24 + 火焰 6.16；附加：无；附加效用 0.70\n独立爆炸：火焰 29.70\n固有：火焰 19.80；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+						"hit_policy": {
+
+						},
+						"hits": {
+							"child": {
+								"critical": {
+									"chance": 0.05,
+									"multiplier": 1.5
+								},
+								"critical_role": "primary",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.7,
+										"base_coefficient": 0.7,
+										"intrinsic": {
+											"fire": 6.16,
+											"physical": 9.239999999999998
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 6.16,
+										"physical": 9.239999999999998
+									},
+									"role": "child",
+									"skill_id": "tornado",
+									"tags": [
+										"hit",
+										"attack",
+										"projectile"
+									]
+								},
+								"targets": {
+									"armour_and_capped_resistance": {
+										"admission": {
+											"chance": 0.94,
+											"entropy": 44.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 4.708793791189533,
+										"expected_per_successful_hit": 5.0093550970101415,
+										"potential_critical_hit": {
+											"components": {
+												"fire": 4.389,
+												"physical": 4.025135673127291
+											},
+											"details": [
+												{
+													"base": 9.239999999999998,
+													"before_defense": 22.176,
+													"final": 4.025135673127291,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.8184913567312729,
+													"type": "physical"
+												},
+												{
+													"base": 6.16,
+													"before_defense": 17.556,
+													"final": 4.389,
+													"increased": 0.9000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.75,
+													"type": "fire"
+												}
+											],
+											"total": 8.41413567312729
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"fire": 2.926,
+												"physical": 1.9041561193197651
+											},
+											"details": [
+												{
+													"base": 9.239999999999998,
+													"before_defense": 14.783999999999999,
+													"final": 1.9041561193197651,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.8712015611931977,
+													"type": "physical"
+												},
+												{
+													"base": 6.16,
+													"before_defense": 11.704,
+													"final": 2.926,
+													"increased": 0.9000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.75,
+													"type": "fire"
+												}
+											],
+											"total": 4.830156119319765
+										}
+									},
+									"evasive": {
+										"admission": {
+											"chance": 0.94,
+											"entropy": 44.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 25.521187999999995,
+										"expected_per_successful_hit": 27.150199999999998,
+										"potential_critical_hit": {
+											"components": {
+												"fire": 17.556,
+												"physical": 22.176
+											},
+											"details": [
+												{
+													"base": 9.239999999999998,
+													"before_defense": 22.176,
+													"final": 22.176,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "physical"
+												},
+												{
+													"base": 6.16,
+													"before_defense": 17.556,
+													"final": 17.556,
+													"increased": 0.9000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "fire"
+												}
+											],
+											"total": 39.732
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"fire": 11.704,
+												"physical": 14.783999999999999
+											},
+											"details": [
+												{
+													"base": 9.239999999999998,
+													"before_defense": 14.783999999999999,
+													"final": 14.783999999999999,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "physical"
+												},
+												{
+													"base": 6.16,
+													"before_defense": 11.704,
+													"final": 11.704,
+													"increased": 0.9000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "fire"
+												}
+											],
+											"total": 26.488
+										}
+									},
+									"no_evasion": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 27.150199999999998,
+										"expected_per_successful_hit": 27.150199999999998,
+										"potential_critical_hit": {
+											"components": {
+												"fire": 17.556,
+												"physical": 22.176
+											},
+											"details": [
+												{
+													"base": 9.239999999999998,
+													"before_defense": 22.176,
+													"final": 22.176,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "physical"
+												},
+												{
+													"base": 6.16,
+													"before_defense": 17.556,
+													"final": 17.556,
+													"increased": 0.9000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "fire"
+												}
+											],
+											"total": 39.732
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"fire": 11.704,
+												"physical": 14.783999999999999
+											},
+											"details": [
+												{
+													"base": 9.239999999999998,
+													"before_defense": 14.783999999999999,
+													"final": 14.783999999999999,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "physical"
+												},
+												{
+													"base": 6.16,
+													"before_defense": 11.704,
+													"final": 11.704,
+													"increased": 0.9000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "fire"
+												}
+											],
+											"total": 26.488
+										}
+									}
+								}
+							},
+							"parent": {
+								"critical": {
+									"chance": 0.05,
+									"multiplier": 1.5
+								},
+								"critical_role": "primary",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 1.0,
+										"base_coefficient": 1.0,
+										"intrinsic": {
+											"fire": 8.8,
+											"physical": 13.2
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 8.8,
+										"physical": 13.2
+									},
+									"role": "parent",
+									"skill_id": "tornado",
+									"tags": [
+										"hit",
+										"attack",
+										"projectile"
+									]
+								},
+								"targets": {
+									"armour_and_capped_resistance": {
+										"admission": {
+											"chance": 0.94,
+											"entropy": 44.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 7.674342494835563,
+										"expected_per_successful_hit": 8.164194143442089,
+										"potential_critical_hit": {
+											"components": {
+												"fire": 6.270000000000001,
+												"physical": 7.62167679222357
+											},
+											"details": [
+												{
+													"base": 13.2,
+													"before_defense": 31.68,
+													"final": 7.62167679222357,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.7594167679222358,
+													"type": "physical"
+												},
+												{
+													"base": 8.8,
+													"before_defense": 25.080000000000005,
+													"final": 6.270000000000001,
+													"increased": 0.9000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.75,
+													"type": "fire"
+												}
+											],
+											"total": 13.89167679222357
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"fire": 4.180000000000001,
+												"physical": 3.6827476882430648
+											},
+											"details": [
+												{
+													"base": 13.2,
+													"before_defense": 21.12,
+													"final": 3.6827476882430648,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.8256274768824307,
+													"type": "physical"
+												},
+												{
+													"base": 8.8,
+													"before_defense": 16.720000000000002,
+													"final": 4.180000000000001,
+													"increased": 0.9000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.75,
+													"type": "fire"
+												}
+											],
+											"total": 7.862747688243065
+										}
+									},
+									"evasive": {
+										"admission": {
+											"chance": 0.94,
+											"entropy": 44.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 36.45884,
+										"expected_per_successful_hit": 38.786,
+										"potential_critical_hit": {
+											"components": {
+												"fire": 25.080000000000005,
+												"physical": 31.68
+											},
+											"details": [
+												{
+													"base": 13.2,
+													"before_defense": 31.68,
+													"final": 31.68,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "physical"
+												},
+												{
+													"base": 8.8,
+													"before_defense": 25.080000000000005,
+													"final": 25.080000000000005,
+													"increased": 0.9000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "fire"
+												}
+											],
+											"total": 56.760000000000005
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"fire": 16.720000000000002,
+												"physical": 21.12
+											},
+											"details": [
+												{
+													"base": 13.2,
+													"before_defense": 21.12,
+													"final": 21.12,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "physical"
+												},
+												{
+													"base": 8.8,
+													"before_defense": 16.720000000000002,
+													"final": 16.720000000000002,
+													"increased": 0.9000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "fire"
+												}
+											],
+											"total": 37.84
+										}
+									},
+									"no_evasion": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 38.786,
+										"expected_per_successful_hit": 38.786,
+										"potential_critical_hit": {
+											"components": {
+												"fire": 25.080000000000005,
+												"physical": 31.68
+											},
+											"details": [
+												{
+													"base": 13.2,
+													"before_defense": 31.68,
+													"final": 31.68,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "physical"
+												},
+												{
+													"base": 8.8,
+													"before_defense": 25.080000000000005,
+													"final": 25.080000000000005,
+													"increased": 0.9000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "fire"
+												}
+											],
+											"total": 56.760000000000005
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"fire": 16.720000000000002,
+												"physical": 21.12
+											},
+											"details": [
+												{
+													"base": 13.2,
+													"before_defense": 21.12,
+													"final": 21.12,
+													"increased": 0.6000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "physical"
+												},
+												{
+													"base": 8.8,
+													"before_defense": 16.720000000000002,
+													"final": 16.720000000000002,
+													"increased": 0.9000000000000001,
+													"modifiers": [
+														"global_increased",
+														"projectile_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "fire"
+												}
+											],
+											"total": 37.84
+										}
+									}
+								}
+							},
+							"secondary": {
+								"critical": {
+									"chance": 0.05,
+									"multiplier": 1.5
+								},
+								"critical_role": "secondary",
+								"packet": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.0,
+										"base_coefficient": 0.9,
+										"intrinsic": {
+											"fire": 19.8
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 19.8
+									},
+									"role": "secondary",
+									"skill_id": "tornado",
+									"tags": [
+										"hit",
+										"area",
+										"secondary",
+										"explosion"
+									]
+								},
+								"targets": {
+									"armour_and_capped_resistance": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 7.610625,
+										"expected_per_successful_hit": 7.610625,
+										"potential_critical_hit": {
+											"components": {
+												"fire": 11.137500000000001
+											},
+											"details": [
+												{
+													"base": 19.8,
+													"before_defense": 44.550000000000004,
+													"final": 11.137500000000001,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.75,
+													"type": "fire"
+												}
+											],
+											"total": 11.137500000000001
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"fire": 7.425000000000001
+											},
+											"details": [
+												{
+													"base": 19.8,
+													"before_defense": 29.700000000000003,
+													"final": 7.425000000000001,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.75,
+													"type": "fire"
+												}
+											],
+											"total": 7.425000000000001
+										}
+									},
+									"evasive": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 30.4425,
+										"expected_per_successful_hit": 30.4425,
+										"potential_critical_hit": {
+											"components": {
+												"fire": 44.550000000000004
+											},
+											"details": [
+												{
+													"base": 19.8,
+													"before_defense": 44.550000000000004,
+													"final": 44.550000000000004,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "fire"
+												}
+											],
+											"total": 44.550000000000004
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"fire": 29.700000000000003
+											},
+											"details": [
+												{
+													"base": 19.8,
+													"before_defense": 29.700000000000003,
+													"final": 29.700000000000003,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "fire"
+												}
+											],
+											"total": 29.700000000000003
+										}
+									},
+									"no_evasion": {
+										"admission": {
+											"chance": 1.0,
+											"entropy": 50.0,
+											"hit": true,
+											"ok": true
+										},
+										"expected_per_attempt": 30.4425,
+										"expected_per_successful_hit": 30.4425,
+										"potential_critical_hit": {
+											"components": {
+												"fire": 44.550000000000004
+											},
+											"details": [
+												{
+													"base": 19.8,
+													"before_defense": 44.550000000000004,
+													"final": 44.550000000000004,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "fire"
+												}
+											],
+											"total": 44.550000000000004
+										},
+										"successful_noncritical_hit": {
+											"components": {
+												"fire": 29.700000000000003
+											},
+											"details": [
+												{
+													"base": 19.8,
+													"before_defense": 29.700000000000003,
+													"final": 29.700000000000003,
+													"increased": 0.5,
+													"modifiers": [
+														"global_increased",
+														"elemental_increased"
+													],
+													"more": 1.0,
+													"resistance": 0.0,
+													"type": "fire"
+												}
+											],
+											"total": 29.700000000000003
+										}
+									}
+								}
+							}
+						},
+						"mana": 18.0,
+						"recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"initial_count": 5,
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：母箭 37.84 / 子箭 26.49 / 独立爆炸 29.70"
+					}
+				},
+				"equipment": {
+					"amulet": "detonation_charm",
+					"weapon": "prism_bow"
+				},
+				"progress": {
+					"level": 7,
+					"xp": 0
+				},
+				"save_attempts": 0,
+				"snapshot": {
+					"accuracy": 128.0,
+					"added_damage": {
+						"attack": {
+							"fire": 0.0,
+							"physical": 0.0
+						},
+						"spell": {
+							"cold": 0.0,
+							"lightning": 0.0
+						}
+					},
+					"added_damage_sources": [],
+					"base_damage": 22.0,
+					"critical_modifiers": {
+						"base_chance": 0.05,
+						"base_multiplier": 1.5
+					},
+					"effects": [
+						"explode_on_flight_end"
+					],
+					"explosion_recipe": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"modifiers": [
+						{
+							"all_tags": [
+								"attack",
+								"melee"
+							],
+							"damage_types": [
+								"physical"
+							],
+							"id": "melee_physical_increased",
+							"mode": "increased",
+							"value": 0.4
+						},
+						{
+							"all_tags": [],
+							"damage_types": [],
+							"id": "global_increased",
+							"mode": "increased",
+							"value": 0.2
+						},
+						{
+							"all_tags": [
+								"projectile"
+							],
+							"damage_types": [],
+							"id": "projectile_increased",
+							"mode": "increased",
+							"value": 0.4
+						},
+						{
+							"all_tags": [],
+							"damage_types": [
+								"fire",
+								"cold",
+								"lightning"
+							],
+							"id": "elemental_increased",
+							"mode": "increased",
+							"value": 0.3
+						}
+					],
+					"projectile_count": 2,
+					"tornado_recipe": {
+						"child": {
+							"added_effectiveness": 0.7,
+							"coefficient": 0.7,
+							"lifetime": 1.7,
+							"pierce": -1,
+							"radius": 4.5,
+							"range": 150.0,
+							"role": "child",
+							"speed": 260.0,
+							"split": false
+						},
+						"child_count": 3,
+						"explosion": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"parent": {
+							"added_effectiveness": 1.0,
+							"coefficient": 1.0,
+							"lifetime": 0.9,
+							"pierce": -1,
+							"radius": 6.0,
+							"range": 150.0,
+							"role": "parent",
+							"speed": 420.0,
+							"split": true
+						},
+						"parent_count": 3,
+						"spread": 0.16
+					}
+				},
+				"stats": {
+					"accuracy": 128.0,
+					"accuracy_increased": 0.0,
+					"additional_skill_slots": 0.0,
+					"area_increased": 0.0,
+					"area_size_increased": 0.0,
+					"armour": 0.0,
+					"armour_increased": 0.0,
+					"attack_added_fire": 0.0,
+					"attack_added_physical": 0.0,
+					"attack_crit_chance_increased": 0.0,
+					"attack_elemental_increased": 0.0,
+					"attack_life_leech": 0.0,
+					"attack_mana_leech": 0.0,
+					"attack_physical_increased": 0.0,
+					"attack_speed": 1.7,
+					"attack_speed_increased": 0.0,
+					"chaos_increased": 0.0,
+					"cold_increased": 0.0,
+					"cold_resistance": 0.0,
+					"crit_base_chance": 0.05,
+					"crit_base_multiplier": 1.5,
+					"crit_chance_increased": 0.0,
+					"crit_multiplier_add": 0.0,
+					"damage": 22.0,
+					"damage_taken_from_mana_before_life": 0.0,
+					"damaging_ailments_faster": 0.0,
+					"dexterity": 14.0,
+					"elemental_increased": 0.3,
+					"evasion": 15.3,
+					"evasion_increased": 0.0,
+					"fire_dot_multiplier_add": 0.0,
+					"fire_increased": 0.0,
+					"fire_resistance": 0.0,
+					"flask_charges_gained_increased": 0.0,
+					"flask_life_recovery_increased": 0.0,
+					"flask_mana_recovery_increased": 0.0,
+					"global_increased": 0.2,
+					"intelligence": 14.0,
+					"life_leech_max_rate_increased": 0.0,
+					"life_leech_rate_increased": 0.0,
+					"life_regen": 0.0,
+					"life_regen_percent": 0.0,
+					"lightning_increased": 0.0,
+					"lightning_resistance": 0.0,
+					"mana_cost_efficiency_increased": 0.0,
+					"mana_cost_increased": 0.0,
+					"mana_leech_max_rate_increased": 0.0,
+					"mana_leech_rate_increased": 0.0,
+					"mana_regen": 9.0,
+					"mana_regen_increased": 0.0,
+					"max_health": 197.0,
+					"max_mana": 107.0,
+					"max_shield": 60.6,
+					"maximum_cold_resistance_add": 0.0,
+					"maximum_fire_resistance_add": 0.0,
+					"maximum_lightning_resistance_add": 0.0,
+					"melee_area_size_increased": 0.0,
+					"melee_crit_chance_increased": 0.0,
+					"melee_crit_multiplier_add": 0.0,
+					"melee_physical_increased": 0.4,
+					"move_speed": 240.0,
+					"move_speed_increased": 0.0,
+					"physical_attack_life_leech": 0.0,
+					"physical_attack_mana_leech": 0.0,
+					"physical_increased": 0.0,
+					"projectile_attack_crit_chance_increased": 0.0,
+					"projectile_attack_crit_multiplier_add": 0.0,
+					"projectile_count": 2.0,
+					"projectile_increased": 0.4,
+					"projectile_speed_increased": 0.0,
+					"resolute_technique": 0.0,
+					"shield_recharge_delay": 4.0,
+					"shield_recharge_rate": 13.0,
+					"shield_recharge_rate_increased": 0.0,
+					"shield_recharge_start_faster": 0.0,
+					"shield_regen": 13.0,
+					"spell_added_cold": 0.0,
+					"spell_added_lightning": 0.0,
+					"spell_area_size_increased": 0.0,
+					"spell_crit_chance_increased": 0.0,
+					"spell_crit_multiplier_add": 0.0,
+					"spell_increased": 0.0,
+					"strength": 122.0
+				},
+				"talents": {
+					"allocated": [
+						"47175",
+						"31628",
+						"9511",
+						"23881",
+						"26523",
+						"6446",
+						"10221",
+						"50422",
+						"50570",
+						"29353",
+						"63282"
+					],
+					"ascendancy": "",
+					"ascendancy_allocated": [],
+					"ascendancy_points": 0,
+					"class_id": 1,
+					"masteries": {
+
+					},
+					"normal_points": 1,
+					"source_version": "3.29.1"
+				},
+				"whole_build_valid": true
+			}
+		},
+		"migration": "schema38严格验证旧37并原字节备份，只迁版本；装备词汇保持37，不赠物、不赠点、不重掷词缀",
+		"minimum_save_version": 38,
+		"new_complete_ordinary_nodes": [
+			"31961"
+		],
+		"new_images": [],
+		"new_mastery_effect_ids": [],
+		"node": {
+			"execution": {
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "resolute_technique",
+						"value": 1.0
+					}
+				],
+				"status": "full",
+				"supported": [
+					"Your hits can't be Evaded\nNever deal Critical Strikes"
+				],
+				"unsupported": []
+			},
+			"id": "31961",
+			"legacy_execution": {
+				"grants": [],
+				"status": "unsupported",
+				"supported": [],
+				"unsupported": [
+					"Your hits can't be Evaded\nNever deal Critical Strikes"
+				]
+			},
+			"name": "Resolute Technique",
+			"source_lines": [
+				"Your hits can't be Evaded\nNever deal Critical Strikes"
+			]
+		},
+		"points_spent": 11,
+		"policy": {
+			"cannot_deal_critical_strikes": true,
+			"hits_cannot_be_evaded": true,
+			"id": "resolute_technique"
+		},
+		"producer": "SourceTree → validated CanonicalGameState → SkillCompiler → AttackHitRules → DamageResolver / DefenseRules",
+		"randomness": "开启时命中率为1且闪避熵保持原值；私有暴击随机流零抽样，掉落随机流无新增抽样；未点路径保留旧字节与随机流，不要求开关前后私有暴击随机状态相同",
+		"required_level": 7,
+		"route": [
+			"47175",
+			"31628",
+			"9511",
+			"23881",
+			"26523",
+			"6446",
+			"10221",
+			"50422",
+			"50570",
+			"29353",
+			"63282",
+			"31961"
+		],
+		"scope": "完整原双句只授予一个开关；所有命中不能被闪避但不能暴击，攻击、法术、母子箭、返回与独立爆炸均承担禁暴击代价",
+		"source_policy": 38,
+		"targets": {
+			"armour_and_capped_resistance": {
+				"armour": 500.0,
+				"evasion": 320.0,
+				"resistances": {
+					"cold": 0.75,
+					"fire": 0.75,
+					"lightning": 0.75
+				}
+			},
+			"evasive": {
+				"armour": 0.0,
+				"evasion": 320.0,
+				"resistances": {
+
+				}
+			},
+			"no_evasion": {
+				"armour": 0.0,
+				"evasion": 0.0,
+				"resistances": {
+
+				}
+			}
+		},
+		"timing": "施放时冻结；分配、退款和换装只影响新施放，旧飞行、母子箭、返回与独立爆炸保持各自快照"
+	},
+	"save_version": 38,
 	"schema_version": 3,
 	"sectors": [
 		{
@@ -281575,6 +285406,7 @@
 					"projectile_count": 0.0,
 					"projectile_increased": 0.0,
 					"projectile_speed_increased": 0.0,
+					"resolute_technique": 0.0,
 					"shield_recharge_delay": 4.0,
 					"shield_recharge_rate": 16.0,
 					"shield_recharge_rate_increased": 0.0,
@@ -289371,6 +293203,7 @@
 					"projectile_count": 0.0,
 					"projectile_increased": 0.0,
 					"projectile_speed_increased": 0.0,
+					"resolute_technique": 0.0,
 					"shield_recharge_delay": 4.0,
 					"shield_recharge_rate": 16.0,
 					"shield_recharge_rate_increased": 0.0,
@@ -289671,6 +293504,7 @@
 					"projectile_count": 0.0,
 					"projectile_increased": 0.0,
 					"projectile_speed_increased": 0.0,
+					"resolute_technique": 0.0,
 					"shield_recharge_delay": 4.0,
 					"shield_recharge_rate": 16.0,
 					"shield_recharge_rate_increased": 0.0,
@@ -289968,6 +293802,7 @@
 					"projectile_count": 0.0,
 					"projectile_increased": 0.0,
 					"projectile_speed_increased": 0.0,
+					"resolute_technique": 0.0,
 					"shield_recharge_delay": 4.0,
 					"shield_recharge_rate": 16.0,
 					"shield_recharge_rate_increased": 0.0,
@@ -353536,12 +357371,18 @@
 			"31961": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "resolute_technique",
+							"value": 1.0
+						}
+					],
+					"status": "full",
+					"supported": [
 						"Your hits can't be Evaded\nNever deal Critical Strikes"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "31961",
@@ -472814,12 +476655,18 @@
 			},
 			"Your hits can't be Evaded\nNever deal Critical Strikes": {
 				"status": {
-					"grants": [],
-					"implemented": false,
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "resolute_technique",
+							"value": 1.0
+						}
+					],
+					"implemented": true,
 					"missing_consumers": [],
-					"parser_supported": false
+					"parser_supported": true
 				},
-				"text": "你的击中无法被闪避\n不会造成暴击（暂未实装）"
+				"text": "你的击中无法被闪避\n不会造成暴击"
 			},
 			"Zealotry has 50% increased Mana Reservation Efficiency": {
 				"status": {
@@ -483054,7 +486901,7 @@
 				},
 				"name": "坚决技艺",
 				"partition": "标准主树",
-				"stats": "你的击中无法被闪避\n不会造成暴击（暂未实装）"
+				"stats": "你的击中无法被闪避\n不会造成暴击"
 			},
 			"31973": {
 				"mastery_choices": {
@@ -504378,7 +508225,7 @@
 			}
 		},
 		"roster_scope": "只展示原抽签为基础物种的按位替换；灰烬保留名额，分裂体与母巢保留原抽签且占用序号；稀有度、机制与奖励不变；所选巡逻词缀最后按编排物种替换",
-		"save_version": 37,
+		"save_version": 38,
 		"spawn_seconds": 0.6,
 		"tiers": [
 			{
@@ -508688,7 +512535,7 @@
 		},
 		"reserved_character_key": "C",
 		"retired_profile_writes": false,
-		"save_version": 37,
+		"save_version": 38,
 		"services": [
 			{
 				"description": "免费测试供应全部已实现主动与辅助宝石。",

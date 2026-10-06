@@ -1,0 +1,16 @@
+Root-owned preview test execution record
+Source: tools.exec_command results f72d88 and 164990, 2026-10-06 UTC.
+
+Initial command: godot --headless --path . --script res://tests/resolute_preview_text_test.gd
+Exit code: 134. The test did not start.
+Environment errors: Fontconfig had no writable cache directories; Godot could not create /home/agent/.local/share/godot-game-preview-v021 or user://logs. Engine terminated with signal 11 while initializing its data/log directory.
+
+Corrected environment only: XDG_DATA_HOME=/tmp/v061-root-preview/data XDG_CACHE_HOME=/tmp/v061-root-preview/cache XDG_CONFIG_HOME=/tmp/v061-root-preview/config
+Same test command. No production or test edits between attempts.
+Captured stdout:
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+Resolute preview: 12 checks, 0 failures
+Exit code: 0.
+
+This record transcribes the original tool results; it is not a fresh execution or a raw redirected log. No layout, image, or native Windows visual check was performed for this text-only change.

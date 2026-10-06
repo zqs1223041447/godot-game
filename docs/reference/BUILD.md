@@ -110,3 +110,13 @@ node --check docs/reference/reference.js
 唯一Godot导出14.628秒/exit0，所有64个旧catalog段只允许游戏版本变化，68原PNG与全部source execution/覆盖保持。3808锚点/20028链接和其他卡片精确投影通过；19个辅助卡自动版本文案及root哨兵的测试前提修正保留原日志，无重导出或生产公式修改。
 
 本批只运行 `tests/passive_localization_reference_test.py`、确定性HTML构建与JS语法检查。详情见[本批图鉴证据](../qa/v057-reference/README.md)。
+
+## v0.61.0 坚决技艺
+
+新增入口 `index.html#rules-resolute_technique`，数据来自 `catalog.json.resolute_technique`。源31961完整原双行块只授予一个开关：命中不能被闪避，同时所有命中不能暴击。七职业的可达预算与7级野蛮人11点真实路径见[规则说明](../RESOLUTE_TECHNIQUE.zh-CN.md)。没有扩开条件“精准技艺”、新精通或任意多行词句。
+
+示例先把旧装备合法放回包，再装备已有棱光长弓与终焰护符；两边使用同一7级野蛮人路径，仅改变最后1点。实际Canonical、Compiler、AttackHitRules、DamageResolver与DefenseRules导出7类命中角色。敏捷型闪避320时普通攻击命中率94%→100%，成功非暴击伤害35.2不变，每次尝试期望33.9152→35.2；零闪避时36.08→35.2，明确显示禁暴击代价。它们不是实战DPS。攻击、法术和独立爆炸一并禁暴击，护甲及抗性仍参与减伤；网页不重复公式。
+
+正式Godot导出一次通过：16.810秒、exit0、无错误行或输入漂移。HTML构建、确定性重建、JS语法与本批聚焦检查均通过。59个页面权威数值、3814个唯一锚点及全部内部/本地资源链接核对完成。旧catalog只投影57处精确批准的新增章节、零属性、版本与31961执行/中文状态差异后，与独立v60语义hash完全相同；装备、词缀、掉落池与旧61张运行时/68张图鉴PNG保持。source-tree-coverage严格等于仅31961从unsupported转full、七职业各多可达一个节点的期望，其余节点、精通、源文本和几何保持。
+
+字体首轮完整扫描发现UI新文案的唯一缺字“括”，首次失败完整保留。保持原文案，按原同源字体仅补这一字；定向验证1.070秒exit0，旧1655全部字形与度量保留，mapped1656覆盖全部1651需求。175份运行时文本输入保持，未重复90秒全扫描或已过Godot、F8、历史战斗。详细生成记录与独立验证见[本批证据](../qa/v061-reference/README.md)。

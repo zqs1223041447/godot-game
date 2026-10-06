@@ -22,6 +22,7 @@ RULE_TITLES['melee_basic'] = '短刃近战普攻与裂刃衔接'
 RULE_TITLES['mana_guard'] = '心灵升华与魔力先承伤'
 RULE_TITLES['elemental_resistance_caps'] = '三元素最大抗性与有效抗性'
 RULE_TITLES['elemental_defense_affixes'] = '灰烬皮甲与原始三抗供给'
+RULE_TITLES['resolute_technique'] = '坚决技艺：稳定命中与暴击取舍'
 TYPES['defense_v37'] = '三抗防具池'
 
 def esc(value): return html.escape(str(value), quote=True)
@@ -281,6 +282,45 @@ def elemental_resistance_cap_rule(data, link, facts, details):
     return body
 
 
+def resolute_technique_rule(data, link, facts, details):
+    rule=data['resolute_technique'];before=rule['examples']['before'];after=rule['examples']['after']
+    def value(key, amount, ratio=False):
+        return f'<strong data-resolute-value="{esc(key)}" data-value="{esc(amount)}">{percent(amount) if ratio else number(amount)}</strong>'
+    body=facts([('源节点',link('source_passives','31961')),('可行路线',f'野蛮人 {value("required-level",rule["required_level"])} 级 / {value("points-spent",rule["points_spent"])} 点'),('存档 / 源政策 / 装备词汇',value('save-version',rule['minimum_save_version'])+' / '+value('source-policy',rule['source_policy'])+' / '+value('equipment-vocabulary',rule['equipment_vocabulary']))])
+    body+='<p>'+esc(rule['scope'])+'。</p><p>'+esc(rule['bounds'])+'。</p>'
+    body+='<p>'+esc(rule['example_scope'])+'。两边保留沿途全部属性；分配前余1点，分配后余0点，不把11点当成免费获得。</p>'
+    body+='<h3>高闪避与零闪避：这一点换来了什么</h3><p>下表普通攻击取当前构筑同一枚投射物。成功命中伤害不含暴击；单次尝试期望先按暴击几率加权，再计闪避准入，不累计多弹、攻速或覆盖人数。</p>'
+    rows=[]
+    for target_id,label in [('evasive','敏捷型怪物的闪避'),('no_evasion','无闪避目标')]:
+        left=before['casts']['basic']['hits']['projectile']['targets'][target_id];right=after['casts']['basic']['hits']['projectile']['targets'][target_id]
+        cells=[value(target_id+'-evasion',rule['targets'][target_id]['evasion'])]
+        for mode,case in [('before',left),('after',right)]:
+            stem=target_id+'-'+mode
+            cells += [value(stem+'-chance',case['admission']['chance'],True),value(stem+'-successful',case['successful_noncritical_hit']['total']),value(stem+'-expected',case['expected_per_attempt'])]
+        rows.append('<tr><th>'+label+'</th>'+''.join('<td>'+cell+'</td>' for cell in cells)+'</tr>')
+    body+='<div class="table-scroll"><table><caption>同构筑、无护甲与抗性的逐次比较</caption><thead><tr><th>目标</th><th>闪避值</th><th>分配前命中率</th><th>成功非暴击命中</th><th>每次尝试期望</th><th>分配后命中率</th><th>成功命中</th><th>每次尝试期望</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
+    body+='<p>原本有闪避时，稳定命中可能抵偿失去暴击的代价，结果取决于原命中率与暴击投入；原本已经100%命中的目标没有新增命中收益，只失去暴击机会。法术原本不进行攻击闪避，同样承担禁暴击代价。</p>'
+    body+='<h3>攻击、法术和独立爆炸一并禁暴击</h3>';rows=[]
+    role_labels={'projectile':'投射物','direct':'直接命中','parent':'母箭','child':'子箭','secondary':'独立爆炸'}
+    for skill in ['basic','cleave','tornado','nova']:
+        for role,hit in after['casts'][skill]['hits'].items():
+            old=before['casts'][skill]['hits'][role];stem=skill+'-'+role
+            label=('普通攻击' if skill=='basic' else link('skills',skill))+' / '+role_labels.get(role,role)
+            cells=[value(stem+'-before-crit',old['critical']['chance'],True),value(stem+'-after-crit',hit['critical']['chance'],True),value(stem+'-before-expected',old['targets']['no_evasion']['expected_per_attempt']),value(stem+'-after-expected',hit['targets']['no_evasion']['expected_per_attempt'])]
+            rows.append('<tr><th>'+label+'</th>'+''.join('<td>'+cell+'</td>' for cell in cells)+'</tr>')
+    body+='<div class="table-scroll"><table><caption>零闪避、零防御下的全局代价；各行独立，不能相加成DPS</caption><thead><tr><th>命中来源</th><th>分配前暴击率</th><th>分配后暴击率</th><th>分配前单次期望</th><th>分配后单次期望</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div><p>已装备'+link('fixed_items','detonation_charm')+'才有独立爆炸，仍须满足自然飞行结束的触发条件。禁暴击时不展示无意义的暴击伤害倍率；既有词缀与潜在倍率仍保留，退款后的新施放恢复读取。</p>'
+    body+='<h3>护甲与抗性继续结算</h3><p>'+esc(rule['defense_scope'])+'。</p>';rows=[]
+    for skill,role in [('basic','projectile'),('cleave','direct'),('nova','direct'),('tornado','secondary')]:
+        hit=after['casts'][skill]['hits'][role];stem='defense-'+skill+'-'+role
+        rows.append('<tr><th>'+('普通攻击' if skill=='basic' else link('skills',skill))+' / '+role_labels[role]+'</th><td>'+value(stem+'-before',hit['targets']['no_evasion']['successful_noncritical_hit']['total'])+'</td><td>'+value(stem+'-after',hit['targets']['armour_and_capped_resistance']['successful_noncritical_hit']['total'])+'</td></tr>')
+    body+=facts([('目标护甲',value('target-armour',rule['defense_profile']['armour'])),('目标有效三抗',' / '.join(value('target-'+element+'-resistance',rule['defense_profile']['effective_resistances'][element],True) for element in ['fire','cold','lightning']))])
+    body+='<div class="table-scroll"><table><thead><tr><th>已分配坚决技艺</th><th>防御前成功命中</th><th>防御后成功命中</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
+    body+=''.join('<p>'+esc(rule[key])+'。</p>' for key in ['timing','randomness','migration'])
+    body+=details('完整原词条与合法路径','<p>'+esc(rule['node']['source_lines'][0]).replace('\n','<br>')+'</p><p>'+' → '.join(link('source_passives',node) for node in rule['route'])+'</p><p>本批仅31961成为完整标准节点，没有新精通。'+link('source_passives','63620')+'的条件攻击伤害与其他任意多行效果仍未开放。</p>')
+    body+='<p>'+link('rules','source_critical')+' · '+link('rules','elemental_resistance_caps')+' · <a href="../RESOLUTE_TECHNIQUE.zh-CN.md">坚决技艺说明</a> · <a href="../qa/v061-reference/README.md">本批图鉴验证</a></p>'
+    return body
+
+
 def elemental_defense_affix_rule(data, link, facts, details):
     supply=data['elemental_defense_affixes']
     def value(key, amount, ratio=False):
@@ -463,7 +503,7 @@ def build(data, art):
             body+=details(f'精通 {choice["effect"]} · {label}','<p>'+lines(localized['mastery_choices'][str(choice['effect'])])+'</p>')
         if p['neighbors']:body+=details('原始标准邻接',links('source_passives',p['neighbors']))
         aliases=' '.join([p['name'],p['partition'],*p['stats'],*(line for choice in p['mastery_choices'] for line in choice['stats'])])
-        cards.append(add('source_passives',key,localized['name'],localized['stats'] or state,body,TYPES[p['type']],status='implemented' if selectable else 'research',related=link('rules','source_tree')+(' · '+link('rules','source_fire_dot') if key in data.get('source_fire_dot',{}).get('nodes',{}) else '')+(' · '+link('rules','source_faster_burn') if key in data.get('source_faster_burn',{}).get('nodes',{}) or key in data.get('source_faster_burn',{}).get('blocked_matching_nodes',{}) else '')+(' · '+link('rules','mana_guard') if key == data.get('mana_guard',{}).get('node',{}).get('id') or key in data.get('mana_guard',{}).get('blocked_matching_nodes',{}) else '')+(' · '+link('rules','elemental_resistance_caps') if key in data.get('elemental_resistance_caps',{}).get('nodes',{}) or key in data.get('elemental_resistance_caps',{}).get('boundaries',{}) else ''),search_aliases=aliases))
+        cards.append(add('source_passives',key,localized['name'],localized['stats'] or state,body,TYPES[p['type']],status='implemented' if selectable else 'research',related=link('rules','source_tree')+(' · '+link('rules','resolute_technique') if key == '31961' else '')+(' · '+link('rules','source_fire_dot') if key in data.get('source_fire_dot',{}).get('nodes',{}) else '')+(' · '+link('rules','source_faster_burn') if key in data.get('source_faster_burn',{}).get('nodes',{}) or key in data.get('source_faster_burn',{}).get('blocked_matching_nodes',{}) else '')+(' · '+link('rules','mana_guard') if key == data.get('mana_guard',{}).get('node',{}).get('id') or key in data.get('mana_guard',{}).get('blocked_matching_nodes',{}) else '')+(' · '+link('rules','elemental_resistance_caps') if key in data.get('elemental_resistance_caps',{}).get('nodes',{}) or key in data.get('elemental_resistance_caps',{}).get('boundaries',{}) else ''),search_aliases=aliases))
     for key,m in data['mechanisms'].items():
         player_nodes=[k for k,v in data['passives'].items() if key in v['mechanism_ids']]
         monsters=[k for k,v in data['monsters'].items() if key in v['mechanisms']]
@@ -835,6 +875,8 @@ def build(data, art):
         rule_defs.append(('forgeblade',RULE_TITLES['forgeblade'],'本地物理4、六族合法词池；W增强普通近战与裂刃direct，全局暴击与资源仍保持原范围。',forgeblade_rule(data,link,facts,details),'implemented'))
     if 'melee_basic' in data:
         rule_defs.append(('melee_basic',RULE_TITLES['melee_basic'],'短刃普攻使用独立近战派送，保留原攻击间隔；与裂刃几何、资源及逐次伤害分开展示。',melee_basic_rule(data,link,facts,details),'implemented'))
+    if 'resolute_technique' in data:
+        rule_defs.append(('resolute_technique',RULE_TITLES['resolute_technique'],'命中不能被闪避，但所有命中不能暴击；已有装备与天赋仍需权衡。',resolute_technique_rule(data,link,facts,details),'implemented'))
     if 'elemental_defense_affixes' in data:
         rule_defs.append(('elemental_defense_affixes',RULE_TITLES['elemental_defense_affixes'],'一件胸甲提供原始火、冰、电抗性；三抗满后缀仍须天赋补足原始值与最大上限。',elemental_defense_affix_rule(data,link,facts,details),'implemented'))
     if 'elemental_resistance_caps' in data:

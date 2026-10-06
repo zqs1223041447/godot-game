@@ -1,0 +1,19 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+godot-game: playable arena ready
+ERROR: Real equip gear_000004 -> weapon: {"displaced_uid":"","error_code":"no_change","locations":{},"moved_uid":"","ok":false,"reason":"","revision":-1}
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/resolute_technique_gameplay_test.gd:31)
+       [1] accepted (res://tests/resolute_technique_gameplay_test.gd:36)
+       [2] equip (res://tests/resolute_technique_gameplay_test.gd:80)
+       [3] admitted_hits_and_leech (res://tests/resolute_technique_gameplay_test.gd:148)
+       [4] section (res://tests/resolute_technique_gameplay_test.gd:40)
+       [5] run (res://tests/resolute_technique_gameplay_test.gd:422)
+ERROR: Section returned normally: admitted_hits_and_leech
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/resolute_technique_gameplay_test.gd:31)
+       [1] section (res://tests/resolute_technique_gameplay_test.gd:41)
+       [2] run (res://tests/resolute_technique_gameplay_test.gd:422)
+RESOLUTE_GAMEPLAY {"checks":92,"failures":2,"sections":{"admitted_hits_and_leech":2,"legal_source_and_equipment":90}}
