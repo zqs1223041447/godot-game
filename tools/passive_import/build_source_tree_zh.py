@@ -787,6 +787,8 @@ WORDS.update({
 })
 
 NAME_OVERRIDES = {
+    "Heart of Ice": "冰霜之心",
+    "Heart of Thunder": "雷霆之心",
     "Mind Over Matter": "心灵升华",
     "": "",
     "Jewel Socket": "珠宝插槽",
