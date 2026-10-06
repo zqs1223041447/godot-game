@@ -12,6 +12,17 @@ const TERM_NOTE := "词缀说明：提高/降低为同类加算；额外提高/�
 # A parser match is not sufficient by itself. These closed-world groups name
 # the actual runtime paths that consume each parsed stat after SourceTree.apply_stats.
 const STAT_CONSUMER_GROUPS := {
+	"precise_technique": {
+		"evidence": "source_tree_runtime.gd::apply_stats -> combat_data.gd::snapshot -> precise_technique_rules.gd::from_stats/attack_modifier -> damage_resolver.gd; critical_strike_rules.gd prevents all critical strikes",
+		"code_checks": [
+			{"path": "scripts/passives/source_tree_runtime.gd", "contains": "result.precise_technique = 1.0"},
+			{"path": "scripts/combat/combat_data.gd", "contains": "Precise.from_stats"},
+			{"path": "scripts/combat/combat_data.gd", "contains": "Precise.attack_modifier"},
+			{"path": "scripts/combat/precise_technique_rules.gd", "contains": "static func attack_modifier"},
+			{"path": "scripts/combat/critical_strike_rules.gd", "contains": "Precise.active(snapshot)"},
+		],
+		"stats": ["precise_technique"]
+	},
 	"physical_fire_conversion": {
 		"evidence": "source_tree_runtime.gd::apply_stats -> combat_data.gd::snapshot/event_packet -> physical_fire_conversion_rules.gd::from_stats/apply -> damage_resolver.gd conversion provenance",
 		"code_checks": [

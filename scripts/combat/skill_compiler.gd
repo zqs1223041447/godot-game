@@ -10,6 +10,7 @@ const InwardPull = preload("res://scripts/combat/inward_pull_support_rules.gd")
 const Area = preload("res://scripts/combat/area_support_rules.gd")
 const Critical=preload("res://scripts/combat/critical_strike_rules.gd")
 const Resolute = preload("res://scripts/combat/resolute_technique_rules.gd")
+const Precise = preload("res://scripts/combat/precise_technique_rules.gd")
 const Burn=preload("res://scripts/combat/burn_rules.gd")
 const Shock = preload("res://scripts/combat/shock_rules.gd")
 const Ember=preload("res://scripts/combat/ember_proliferation_support_rules.gd")
@@ -221,6 +222,7 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 	_append_conversion_profile(result, packets, compiled_snapshot)
 	var hit_policy: Dictionary = Resolute.compiled_profile(compiled_snapshot)
 	if not hit_policy.is_empty():result.hit_policy = hit_policy
+	_append_precise_profile(result)
 	return result
 
 
@@ -249,6 +251,7 @@ static func compile_basic(snapshot:Dictionary)->Dictionary:
 	_append_conversion_profile(result, result.packets, frozen)
 	var hit_policy: Dictionary = Resolute.compiled_profile(frozen)
 	if not hit_policy.is_empty():result.hit_policy = hit_policy
+	_append_precise_profile(result)
 	return result
 
 
@@ -274,6 +277,7 @@ static func _compile_basic_melee(snapshot: Dictionary) -> Dictionary:
 	_append_conversion_profile(result, result.packets, frozen)
 	var hit_policy: Dictionary = Resolute.compiled_profile(frozen)
 	if not hit_policy.is_empty():result.hit_policy = hit_policy
+	_append_precise_profile(result)
 	return result
 
 
@@ -331,7 +335,7 @@ static func _failure(error: String) -> Dictionary:
 static func _snapshot_error(snapshot: Dictionary) -> String:
 	# initial_count is reserved for compiled projectile snapshots, including empty supports.
 	# Reject re-entry instead of applying support more factors a second time.
-	if snapshot.has("initial_count") or snapshot.has("compiled_packets") or snapshot.has("compiled_skill_id") or snapshot.has("critical") or snapshot.has("critical_roll") or snapshot.has("leech") or snapshot.has("burn_policy") or snapshot.has("burn_proliferation") or snapshot.has("shock_policy") or snapshot.has("hit_policy") or snapshot.has("area_impulse_policy") or snapshot.has("area_impulse_profile") or snapshot.has("conversion_profile"):
+	if snapshot.has("initial_count") or snapshot.has("compiled_packets") or snapshot.has("compiled_skill_id") or snapshot.has("critical") or snapshot.has("critical_roll") or snapshot.has("leech") or snapshot.has("burn_policy") or snapshot.has("burn_proliferation") or snapshot.has("shock_policy") or snapshot.has("hit_policy") or snapshot.has("area_impulse_policy") or snapshot.has("area_impulse_profile") or snapshot.has("conversion_profile") or snapshot.has("precise_technique_profile"):
 		return "施放快照已编译；必须从基础构筑快照重新编译"
 	var conversion_error: String = Conversion.snapshot_error(snapshot)
 	if not conversion_error.is_empty(): return conversion_error
@@ -393,7 +397,9 @@ static func _snapshot_error(snapshot: Dictionary) -> String:
 	var explosion: Variant = snapshot.explosion_recipe
 	if not explosion is Dictionary or explosion.size() != 3 or not _nonnegative(explosion.get("coefficient")) or not _nonnegative(explosion.get("radius")) or not _nonnegative(explosion.get("added_effectiveness")) or float(explosion.added_effectiveness) != 0.0:
 		return "独立爆炸配方无效"
-	return Resolute.snapshot_error(snapshot)
+	var resolute_error: String = Resolute.snapshot_error(snapshot)
+	if not resolute_error.is_empty(): return resolute_error
+	return Precise.snapshot_error(snapshot)
 
 
 static func _projectile_recipe_error(recipe: Variant) -> String:
@@ -452,3 +458,15 @@ static func _append_conversion_profile(result: Dictionary, packets: Dictionary, 
 					return
 	# A zero source or hit set without physical points needs no frozen policy.
 	if snapshot.has(Conversion.STAT): snapshot.erase(Conversion.STAT)
+
+
+static func _append_precise_profile(result: Dictionary) -> void:
+	var snapshot: Dictionary = result.snapshot
+	if not Precise.active(snapshot): return
+	var profile: Dictionary = Precise.profile(snapshot)
+	profile.attack_applies = bool(profile.condition_met) and _primary_tags(result.packets).has("attack")
+	result.precise_technique_profile = profile
+	# Resolute still owns the cannot-be-evaded flag. Precise alone only bans crit.
+	if not result.has("hit_policy"):
+		result.hit_policy = {"id":"precise_technique", "hits_cannot_be_evaded":false,
+			"cannot_deal_critical_strikes":true}

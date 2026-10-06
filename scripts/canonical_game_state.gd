@@ -18,6 +18,7 @@ const Data = preload("res://scripts/game_data.gd")
 const ShardCatalog = preload("res://scripts/items/currency_catalog.gd")
 const LOOT_PROFILE_ID := Gear.CANONICAL_LOOT_PROFILE_ID
 const SourceTree = preload("res://scripts/passives/source_tree_runtime.gd")
+const Precise = preload("res://scripts/combat/precise_technique_rules.gd")
 var _build_signature := PackedByteArray()
 var _stats_cache: Dictionary = {}
 var _snapshot_cache: Dictionary = {}
@@ -588,7 +589,9 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	var loaded:=super.load_build(path)
 	if loaded and old_version>0 and old_version<Rules.VERSION:
 		migrated_from_legacy=true
-		if old_version == Rules.V43_VERSION:
+		if old_version == Rules.V44_VERSION:
+			migration_message="旧存档已原字节备份，精准技艺已开放；最终命中值高于最大生命时攻击伤害总增40%，始终不能暴击。原物品和点数保持，不额外赠物或赠点。"
+		elif old_version == Rules.V43_VERSION:
 			migration_message="旧存档已原字节备份，火焰精通的40%物理转火已开放；原物品、天赋和旅程保持，不额外赠物或赠点。"
 		elif old_version == Rules.V42_VERSION:
 			migration_message="旧存档已原字节备份，牵引辅助已加入正式宝石商人；原物品、天赋和旅程保持，不额外赠物或赠点。"
@@ -1158,3 +1161,7 @@ func _place_journey_reward(candidate: Dictionary, wrapped: Dictionary) -> bool:
 	if position.is_empty(): candidate.items.erase(wrapped.uid); return false
 	candidate.locations[wrapped.uid] = position; candidate.next_item_serial += 1
 	return true
+
+
+func get_precise_technique_profile() -> Dictionary:
+	return Precise.profile(Precise.from_stats(get_stats()))

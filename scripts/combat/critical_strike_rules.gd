@@ -3,6 +3,7 @@ extends RefCounted
 ## Pure critical profiles. Runtime owns the random stream and hit resolution.
 ## Chance increases add before scaling the base; multiplier additions are points.
 const Resolute = preload("res://scripts/combat/resolute_technique_rules.gd")
+const Precise = preload("res://scripts/combat/precise_technique_rules.gd")
 const STAT_KEYS: Array[String] = [
 	"crit_chance_increased", "attack_crit_chance_increased", "spell_crit_chance_increased",
 	"melee_crit_chance_increased", "projectile_attack_crit_chance_increased",
@@ -62,7 +63,10 @@ static func compile(snapshot: Dictionary, primary_tags: Array, has_secondary: bo
 	var reason: String = Resolute.snapshot_error(snapshot)
 	if not reason.is_empty():
 		return _compiled({}, reason)
-	if not Resolute.active(snapshot) or not primary_tags.has("hit"):
+	reason = Precise.snapshot_error(snapshot)
+	if not reason.is_empty():
+		return _compiled({}, reason)
+	if not (Resolute.active(snapshot) or Precise.active(snapshot)) or not primary_tags.has("hit"):
 		return result
 	if result.critical.is_empty():
 		result.critical.primary = {"chance": 0.0, "multiplier": 1.5}

@@ -31,6 +31,7 @@ var trap_runtime = TrapRuntime.new()
 var trap_trace: Array[Dictionary] = []
 const CriticalRuntime = preload("res://scripts/combat/critical_strike_runtime.gd")
 const Resolute = preload("res://scripts/combat/resolute_technique_rules.gd")
+const Precise = preload("res://scripts/combat/precise_technique_rules.gd")
 var critical_runtime = CriticalRuntime.new()
 const FeedbackRuntime = preload("res://scripts/combat/combat_feedback_runtime.gd")
 var feedback_runtime = FeedbackRuntime.new()
@@ -1431,6 +1432,7 @@ func _settle_projectile_events(events:Array[Dictionary],original_delta:float=0.0
 func _apply_damage_packet(enemy: Dictionary, packet: Dictionary, snapshot: Dictionary, color: Color,
 		slow: float = 0.0, provenance: Dictionary = {}) -> void:
 	if snapshot.has("resolute_technique") and not Resolute.snapshot_error(snapshot).is_empty(): return
+	if snapshot.has(Precise.STAT) and not Precise.snapshot_error(snapshot).is_empty(): return
 	var burn_at:float=_burn_event_time(float(provenance.time)) if provenance.has("time") else elapsed
 	# Shock queries the raw event instant, never the later normalized burn clock.
 	# An approximate-sort tie cannot make an earlier hit use a future status.
@@ -1454,6 +1456,7 @@ func _apply_damage_packet(enemy: Dictionary, packet: Dictionary, snapshot: Dicti
 	var critical:Dictionary=snapshot.get("critical_roll",{})
 	# Read only this hit's frozen policy, never the currently equipped build.
 	if snapshot.has("resolute_technique") and Resolute.active(snapshot): critical={}
+	if snapshot.has(Precise.STAT) and Precise.active(snapshot): critical={}
 	var result: Dictionary = Damage.resolve(packet, snapshot.get("modifiers", []), enemy.get("resistances", {}),float(critical.get("multiplier",1.0)))
 	result = Defense.apply_armour(result,float(enemy.get("armour",0.0)))
 	var shock_increase:float=_shock_hit_increase("monster",int(enemy.id),shock_at)

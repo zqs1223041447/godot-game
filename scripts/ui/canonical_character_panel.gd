@@ -17,6 +17,7 @@ var _progress: Label
 var _values: Dictionary = {}
 var _resistance_cards: Dictionary = {}
 var _defense_cards: Dictionary = {}
+var _precision_cards: Dictionary = {}
 
 const STAT_ROWS: Array[Dictionary] = [
 	{"id":"strength","label":"力量","format":"whole"},
@@ -64,6 +65,9 @@ func refresh() -> void:
 	var tips: Dictionary = defense_tooltips(conversion)
 	for id: String in _defense_cards:
 		_defense_cards[id].tooltip_text = tips[id]
+	var precision: Dictionary = model.get_precise_technique_profile() if model.has_method("get_precise_technique_profile") else {}
+	for id: String in _precision_cards:
+		_precision_cards[id].tooltip_text = precise_technique_tooltip(precision, id)
 	var leech: Dictionary = leech_stat_values(model.get_leech_profile()) if model.has_method("get_leech_profile") else {}
 	stats = stats.duplicate()
 	stats.merge(leech)
@@ -94,6 +98,12 @@ func refresh() -> void:
 		_values[id].text = formatted
 	_dirty = false
 	refresh_generation += 1
+
+
+static func precise_technique_tooltip(profile: Dictionary, stat_id: String) -> String:
+	var base: String = "攻击命中率取决于目标闪避；法术不进行闪避判定。" if stat_id == "accuracy" else ""
+	if not bool(profile.get("enabled", false)): return base
+	return base + ("\n" if not base.is_empty() else "") + "精准技艺：命中值 %.2f，最大生命 %.2f，%s。\n仅命中值严格更高时，攻击伤害额外提高40%%；所有命中始终不能暴击。" % [float(profile.accuracy), float(profile.max_health), "门槛成立" if bool(profile.condition_met) else "门槛未成立"]
 
 
 static func defense_tooltips(profile: Dictionary) -> Dictionary:
@@ -168,6 +178,7 @@ func _build() -> void:
 		value.add_theme_color_override("font_color", ThemeStyle.TEXT)
 		stack.add_child(value)
 		_values[str(row.id)] = value
+		if row.id in ["accuracy", "max_health"]: _precision_cards[str(row.id)] = card
 		if row.id in ["armour", "evasion"]: _defense_cards[str(row.id)] = card
 		if row.id in ["accuracy","evasion"]: card.tooltip_text = "攻击命中率取决于目标闪避；法术不进行闪避判定。"
 		elif row.id == "life_regen": card.tooltip_text = "当前生命自然再生；不含药剂、偷取或拾取回复。生命再生转为护盾时此项为零。"

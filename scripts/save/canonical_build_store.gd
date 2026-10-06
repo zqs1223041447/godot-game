@@ -24,6 +24,7 @@ const DefenseRatingAffixMigration = preload("res://scripts/save/defense_rating_a
 const ZealotsOathMigration = preload("res://scripts/save/zealots_oath_migration.gd")
 const AmbushGemMigration = preload("res://scripts/save/ambush_gem_migration.gd")
 const PhysicalFireConversionMigration = preload("res://scripts/save/physical_fire_conversion_migration.gd")
+const PreciseTechniqueMigration = preload("res://scripts/save/precise_technique_migration.gd")
 const InwardPullGemMigration = preload("res://scripts/save/inward_pull_gem_migration.gd")
 const IronReflexesMigration = preload("res://scripts/save/iron_reflexes_migration.gd")
 const ResoluteTechniqueMigration = preload("res://scripts/save/resolute_technique_migration.gd")
@@ -80,8 +81,9 @@ func _init() -> void:
 	var source_v41: Dictionary = ZealotsOathMigration.migrate_v40(source_v40, _talent_validator, _socket_ids)
 	var source_v42: Dictionary = AmbushGemMigration.migrate_v41(source_v41, _talent_validator, _socket_ids)
 	var source_v43: Dictionary = InwardPullGemMigration.migrate_v42(source_v42, _talent_validator, _socket_ids)
-	_current = PhysicalFireConversionMigration.migrate_v43(source_v43, _talent_validator, _socket_ids)
-	assert(not _current.is_empty() and Rules.reason(_current).is_empty(), "The built-in canonical fixture must migrate to v44")
+	var source_v44: Dictionary = PhysicalFireConversionMigration.migrate_v43(source_v43, _talent_validator, _socket_ids)
+	_current = PreciseTechniqueMigration.migrate_v44(source_v44, _talent_validator, _socket_ids)
+	assert(not _current.is_empty() and Rules.reason(_current).is_empty(), "The built-in canonical fixture must migrate to v45")
 	_current.migration_ledger.from_version = 0
 
 
@@ -145,7 +147,9 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	var old_version := int(raw.version)
 	if old_version > Rules.VERSION: return _reject(path, "存档属于未来版本，已保护原文件")
 	var candidate: Dictionary = {}
-	if old_version == Rules.V43_VERSION:
+	if old_version == Rules.V44_VERSION:
+		candidate = Rules.decode_v44(raw)
+	elif old_version == Rules.V43_VERSION:
 		candidate = Rules.decode_v43(raw)
 	elif old_version == Rules.V42_VERSION:
 		candidate = Rules.decode_v42(raw)
@@ -290,8 +294,10 @@ func load_build(path: String = "user://build_save.json") -> bool:
 		candidate = AmbushGemMigration.migrate_v41(candidate, _talent_validator, _socket_ids)
 	if old_version < Rules.V43_VERSION:
 		candidate = InwardPullGemMigration.migrate_v42(candidate, _talent_validator, _socket_ids)
-	if old_version < Rules.VERSION:
+	if old_version < Rules.V44_VERSION:
 		candidate = PhysicalFireConversionMigration.migrate_v43(candidate, _talent_validator, _socket_ids)
+	if old_version < Rules.VERSION:
+		candidate = PreciseTechniqueMigration.migrate_v44(candidate, _talent_validator, _socket_ids)
 	var reason: String = Rules.reason(candidate, _talent_validator, _socket_ids)
 	if not reason.is_empty(): return _reject(path, reason)
 	var loaded_revision: int = int(candidate.revision)

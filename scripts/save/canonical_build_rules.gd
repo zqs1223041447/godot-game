@@ -41,7 +41,8 @@ const V40_VERSION := 40
 const V41_VERSION := 41
 const V42_VERSION := 42
 const V43_VERSION := 43
-const VERSION := 44
+const V44_VERSION := 44
+const VERSION := 45
 const LEGACY_MAX_ITEMS := 1024
 const V17_MAX_ITEMS := LEGACY_MAX_ITEMS + 1
 const MAX_ITEMS := V17_MAX_ITEMS + 2 # Two once-only migration bottles; bag capacity is unchanged.
@@ -82,6 +83,13 @@ static func decode_v28(raw: Variant) -> Dictionary:
 
 static func decode_v29(raw: Variant) -> Dictionary:
 	return _decode(raw, true, V29_VERSION, true)
+
+
+## Freeze all schema44 fields before opening the complete Precise Technique node.
+## Source policy44 and equipment vocabulary39 remain mandatory.
+static func decode_v44(raw: Variant) -> Dictionary:
+	var decoded := _decode(raw, true, V44_VERSION, true)
+	return decoded if reason_v44(decoded).is_empty() else {}
 
 
 ## Freeze all schema43 fields before opening physical-to-fire conversion.
@@ -292,6 +300,13 @@ static func reason_v29(value: Variant, validate_talents: Callable = Callable(), 
 	return _reason(value, V29_VERSION, true, true, MAX_ITEMS, validate_talents, socket_ids)
 
 
+static func reason_v44(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
+	# Complete frozen native legality always precedes optional callbacks.
+	var native_reason := _reason(value, V44_VERSION, true, true, MAX_ITEMS, Callable(), socket_ids)
+	if not native_reason.is_empty(): return native_reason
+	return str(validate_talents.call(value)) if validate_talents.is_valid() else ""
+
+
 static func reason_v43(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
 	# Native legality always runs first; callbacks can only add restrictions.
 	var native_reason := _reason(value, V43_VERSION, true, true, MAX_ITEMS, Callable(), socket_ids)
@@ -488,7 +503,7 @@ static func _reason(value: Variant, expected_version: int, paged: bool, allow_cu
 	return str(validate_talents.call(value)) if validate_talents.is_valid() else SourceTree.reason(value)
 
 
-## Source-only schemas35/36/38/40/41/44 and gem-only42/43 define no equipment vocabularies.
+## Source-only schemas35/36/38/40/41/44/45 and gem-only42/43 define no equipment vocabularies.
 ## Keep save-to-equipment mapping explicit and the Catalog API historically strict.
 static func equipment_vocabulary_for_save_version(save_version: int) -> int:
 	if save_version >= V39_VERSION: return 39
