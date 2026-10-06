@@ -33,6 +33,11 @@ var _stock_revision := -1
 var _stock_refresh_queued := false
 var _normal := {}
 var _special := {}
+var _map_summary: Label
+var _map_launch: Button
+var _map_selection_dirty := false
+var _map_status_queued := false
+var _map_prepared_revision := -1
 
 func setup(value: Node) -> void:
 	arena = value
@@ -137,6 +142,7 @@ func refresh_world() -> void:
 	if not testing and _service not in ["", "map_device", "crafter", "passive_reset", "skill_merchant"]:
 		_select("map_device")
 	_queue_stock_refresh()
+	_queue_map_status_refresh()
 
 func _observe_stock_model() -> void:
 	if _stock_model == arena.state: return
@@ -149,6 +155,7 @@ func _observe_stock_model() -> void:
 func _on_stock_changed() -> void:
 	_cancel_gem_purchase()
 	_queue_stock_refresh()
+	_queue_map_status_refresh()
 
 func _queue_stock_refresh() -> void:
 	if _stock_refresh_queued or not is_visible_in_tree() or _service != "skill_merchant": return
@@ -159,6 +166,26 @@ func _refresh_stock_if_needed() -> void:
 	_stock_refresh_queued = false
 	if is_visible_in_tree() and _service == "skill_merchant" and _stock_revision != arena.state.revision():
 		_select("skill_merchant")
+
+func _queue_map_status_refresh() -> void:
+	if _map_status_queued or not is_visible_in_tree() or _service != "map_device": return
+	_map_status_queued = true
+	_refresh_map_status.call_deferred()
+
+func _refresh_map_status() -> void:
+	_map_status_queued = false
+	if not is_visible_in_tree() or _service != "map_device" or not is_instance_valid(_map_summary) or not is_instance_valid(_map_launch): return
+	var draft: Dictionary = arena.map_draft()
+	_map_summary.text = str(draft.summary)
+	if not bool(arena.world_context().get("test_mode", false)):
+		_map_summary.text += "\n入场 %d 校准碎片 · 完成奖励 %d" % [int(draft.get("cost", 0)), int(draft.get("completion_reward", 0))]
+		if not str(draft.get("reason", "")).is_empty(): _map_summary.text += "\n" + str(draft.reason)
+	# Currency updates never prepare changed controls or adopt an external draft.
+	_map_launch.disabled = _map_selection_dirty or int(draft.revision) != _map_prepared_revision or not bool(draft.get("can_start", draft.valid))
+
+func _mark_map_selection_dirty() -> void:
+	_map_selection_dirty = true
+	if is_instance_valid(_map_launch): _map_launch.disabled = true
 
 static func _has_pending_rewards(context: Dictionary) -> bool:
 	for key: String in ["pending_map_reward", "pending_gems", "pending_flasks"]:
@@ -179,6 +206,10 @@ func open_service(id: String = "") -> void:
 	elif not _service.is_empty(): _select(_service)
 
 func _clear() -> void:
+	_map_summary = null
+	_map_launch = null
+	_map_selection_dirty = false
+	_map_prepared_revision = -1
 	for child in _content.get_children():
 		_content.remove_child(child)
 		child.queue_free()
@@ -285,6 +316,9 @@ func _build_map() -> void:
 			if group == "normal_modifiers": _normal[str(entry.id)] = check
 			else: _special[str(entry.id)] = check
 	var summary := Label.new()
+	_map_summary = summary
+	_map_selection_dirty = false
+	_map_prepared_revision = int(draft.revision)
 	summary.text = str(draft.summary)
 	if not bool(arena.world_context().get("test_mode", false)):
 		summary.text += "\n入场 %d 校准碎片 · 完成奖励 %d" % [int(draft.get("cost", 0)), int(draft.get("completion_reward", 0))]
@@ -296,6 +330,7 @@ func _build_map() -> void:
 	craft.pressed.connect(_craft_map)
 	_content.add_child(craft)
 	var launch := Button.new()
+	_map_launch = launch
 	launch.text = "开启地图"
 	launch.disabled = not bool(draft.get("can_start", draft.valid))
 	var revision: int = int(draft.revision)
@@ -306,10 +341,10 @@ func _build_map() -> void:
 	_content.add_child(launch)
 	_map_select.item_selected.connect(func(_index: int):
 		_update_tiers(options, 1)
-		launch.disabled = true)
-	_tier_select.item_selected.connect(func(_index: int): launch.disabled = true)
+		_mark_map_selection_dirty())
+	_tier_select.item_selected.connect(func(_index: int): _mark_map_selection_dirty())
 	for check: CheckBox in _normal.values()+_special.values():
-		check.toggled.connect(func(_value: bool): launch.disabled = true)
+		check.toggled.connect(func(_value: bool): _mark_map_selection_dirty())
 
 func _update_tiers(options: Dictionary, selected: int) -> void:
 	_tier_select.clear()
