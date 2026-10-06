@@ -1,0 +1,305 @@
+{
+  "base_commit": "23983fe8138e591d2b1af6892b7df13a918dd19d",
+  "stage_commit": "5a41fcf44b9dfada72ad9635886126936408da44",
+  "total_checks": 9809,
+  "counts": {
+    "source_and_formula": 9428,
+    "strict_migration": 201,
+    "actual_main_consumers": 170,
+    "root_character_text": 10
+  },
+  "count_scope": "Final focused successful assertions only; paired285+285 legacy assertions and failed fixtures listed separately",
+  "save_schema": 41,
+  "source_policy": 41,
+  "equipment_vocabulary": 39,
+  "newly_full_nodes": [
+    "63425"
+  ],
+  "full_standard_node_count": 772,
+  "legacy": {
+    "bin": {
+      "same": true,
+      "before_bytes": 8844304,
+      "after_bytes": 8844304,
+      "before_sha256": "bc9d401e91c165aafa195f81584f4391ec149b3f5a7aa6587c99b2e100e8f094",
+      "after_sha256": "bc9d401e91c165aafa195f81584f4391ec149b3f5a7aa6587c99b2e100e8f094"
+    },
+    "save": {
+      "same": false,
+      "before_bytes": 12818,
+      "after_bytes": 12818,
+      "before_sha256": "dd10639bd977e80acd6f4e92163abf39deb091851203efc5d5a96845f0f8f14d",
+      "after_sha256": "0f27ecbf71fb6c0925dd792ac83bccce684bd5a72207d1128f9ec13d15987119"
+    },
+    "projected-save.json": {
+      "same": true,
+      "before_bytes": 12802,
+      "after_bytes": 12802,
+      "before_sha256": "ef2b686238753c973b7b75bab6f00a247870dd64c02cd8c9ac720ea68c76de79",
+      "after_sha256": "ef2b686238753c973b7b75bab6f00a247870dd64c02cd8c9ac720ea68c76de79"
+    },
+    "raw_version_token_only": true,
+    "projection": "Only serialized build version40 ->41; no stats/combat/resources/RNG projection"
+  },
+  "font": "docs/qa/v065-integration/font-coverage.json",
+  "known_boundaries": [
+    "Source/pure9428, strictmigration201 and root10 first focused runs passed. Gameplay initial fixture type and dead-menu cleanup problems preserved, final170 passed; production unchanged.",
+    "No-node stats/combat/RNG unprojected; only serialized build version40 ->41 identity differs. Raw disk differs in this version token only.",
+    "Current game resource phase ordering retained. Percentage regeneration uses final maximum shield by explicit game rule. No health-pool redirect of flasks/leech/pickups or delayed recharge.",
+    "No Windows hardware FPS / new native visual gate / long performance sample. Density peaks and first inventory delay remain independent open issues."
+  ],
+  "reports": {
+    "docs/qa/v065-source/execution-receipt.json": {
+      "bytes": 524,
+      "sha256": "1c9953f16820f41cf26ac4d8646a87278f3c78b553e70cc8e3db6ff6597a3524"
+    },
+    "docs/qa/v065-source/manifest.json": {
+      "bytes": 3209,
+      "sha256": "e5465d8f3597128f2f42fb9a0277cbccdc59025a73347818cadccd77449e6a7f"
+    },
+    "docs/qa/v065-source/results.json": {
+      "bytes": 4531,
+      "sha256": "55b2e1f5d882d5760450cfe58b22edc5298801f1a87d763bd4e8284688dc240b"
+    },
+    "docs/qa/v065-source/tested-input-sha256.json": {
+      "bytes": 3452,
+      "sha256": "bbc19c4712feb9cf474b4a2e438daadde5ba6b0ab2d556d80167fba69abc1ec4"
+    },
+    "docs/qa/v065-migration/20261006T031002268173Z-capture40-attempt.json": {
+      "bytes": 60100,
+      "sha256": "d6500bc3c0111f4ce5c691cb5da34a02fe1ec7ee9b48f0db68baa34bbd11b5f7"
+    },
+    "docs/qa/v065-migration/20261006T031027879959Z-migration-attempt.json": {
+      "bytes": 58627,
+      "sha256": "9f7264d05b45a3193f1d7f3326db3d576a59079d64e673469494b246938d3832"
+    },
+    "docs/qa/v065-migration/20261006T031027879959Z-migration-checks.json": {
+      "bytes": 3789,
+      "sha256": "f23c740ba3deaf784b860a75debcf75b995ee95a06242571a5a8c0b8b3320b46"
+    },
+    "docs/qa/v065-migration/fixtures/manifest.json": {
+      "bytes": 835,
+      "sha256": "fe79a533e19f71d85dc029edf6d4365b93260834d75bfc512bf9e9cf3ab872c9"
+    },
+    "docs/qa/v065-migration/fixtures/v40-frozen-v064.json": {
+      "bytes": 20088,
+      "sha256": "8baa30904f56487d05606a956d1f580caa2ec874d287d2c8835af920206dcbb5"
+    },
+    "docs/qa/v065-migration/fixtures/v40-stats-oracle.json": {
+      "bytes": 2977,
+      "sha256": "e5daed1648e90bc1ba843290ccd7b9c2ba3a6e49e4ac00cebf1dc0fb9f71c077"
+    },
+    "docs/qa/v065-migration/frozen-release-evidence.json": {
+      "bytes": 40125,
+      "sha256": "ca452ad82f95a30b610bdf4968bf3607918359ae8cee7f25887178b37653c4df"
+    },
+    "docs/qa/v065-migration/unchanged-equipment-evidence.json": {
+      "bytes": 4767,
+      "sha256": "d136b8fef57be9ebc08bebd6692837e09ad1c21e85b236ca8e14b5995da151c7"
+    },
+    "docs/qa/v065-gameplay/gameplay-01-run.json": {
+      "bytes": 853,
+      "sha256": "4fcea49d636ca4ca87cf47463592e676b828c7f6c395d0ff251f1f1926b4ceac"
+    },
+    "docs/qa/v065-gameplay/gameplay-02-run.json": {
+      "bytes": 318,
+      "sha256": "9d9ddd494e588997d3f8e7aeb0ece6d249bceb90e581eacd4798a7d6b6e98a61"
+    },
+    "docs/qa/v065-gameplay/gameplay-03-run.json": {
+      "bytes": 853,
+      "sha256": "81a7a9bebb40343d87032f226715fcbdc0c40318d3fcea5e406f0b87feb99c11"
+    },
+    "docs/qa/v065-gameplay/gameplay-03.json": {
+      "bytes": 6363,
+      "sha256": "22764fa8b66d1d6df8e7fdd48fb330c1103b60481b65b7bdfc9357adc3ff67e2"
+    },
+    "docs/qa/v065-legacy/after-inputs.json": {
+      "bytes": 18796,
+      "sha256": "39423d34589060a8435bcea13ebb8041ca9240bf0f0301c1a3bd5eec3819c991"
+    },
+    "docs/qa/v065-legacy/after.json": {
+      "bytes": 1057,
+      "sha256": "0126681fe49da529e765bceb4bad7a2fa37fd32005cc9475300d89f94d2c1979"
+    },
+    "docs/qa/v065-legacy/after.projected-save.json": {
+      "bytes": 12802,
+      "sha256": "ef2b686238753c973b7b75bab6f00a247870dd64c02cd8c9ac720ea68c76de79"
+    },
+    "docs/qa/v065-legacy/before-inputs.json": {
+      "bytes": 18571,
+      "sha256": "bfe82430f3e197597f2a6ee0146a042a921de90b947442984bb70c35a44aa6d3"
+    },
+    "docs/qa/v065-legacy/before.json": {
+      "bytes": 1057,
+      "sha256": "642912da309f8f26bacabc18a967747af4e61ad25b84f61e5cf15991662591b8"
+    },
+    "docs/qa/v065-legacy/before.projected-save.json": {
+      "bytes": 12802,
+      "sha256": "ef2b686238753c973b7b75bab6f00a247870dd64c02cd8c9ac720ea68c76de79"
+    },
+    "docs/qa/v065-legacy/comparison.json": {
+      "bytes": 946,
+      "sha256": "fd2d6b5c97b5262eed8ac1d0f3253ed8fc6e0854b170ed02d532fe0278bff5f8"
+    },
+    "docs/qa/v065-legacy/run-results.json": {
+      "bytes": 945,
+      "sha256": "f72a08b1c0798b0168de6ff66e4c8b07e74bc261017e49240aa6ab308c9ad871"
+    },
+    "docs/qa/v065-integration/font-coverage.json": {
+      "bytes": 29262,
+      "sha256": "89aaa0e4a73aa25fe424c00b10cd0e54c9e4d4740bc66f38f1667f813c204f22"
+    },
+    "docs/qa/v065-integration/initial-import-result.json": {
+      "bytes": 230,
+      "sha256": "065f9846412e6e11015794d7641e843bf94c5f3df3d6defcde6ae5f5dd3cdee2"
+    },
+    "docs/qa/v065-integration/preservation.json": {
+      "bytes": 1216,
+      "sha256": "7e9c4a32aa6514e2b83673596e6af48f905a00b894b7a51f255a68e098cc79fd"
+    },
+    "docs/qa/v065-integration/probe-parse.json": {
+      "bytes": 981,
+      "sha256": "40c82e28db65a02c8f4f738d420e45ce2eb02fd21542d63924d42aee8d3c8339"
+    },
+    "docs/qa/v065-reference/build-check-input-sha256.json": {
+      "bytes": 511,
+      "sha256": "03be7dfeda0195c79adf1734496e2109d25eb684c035c01beda99b7d9871a0b5"
+    },
+    "docs/qa/v065-reference/build-check-result.json": {
+      "bytes": 200,
+      "sha256": "0494160432c893589986cec388ffa695580e4dfe51965890e2bde450a00f5b7a"
+    },
+    "docs/qa/v065-reference/build-input-sha256.json": {
+      "bytes": 511,
+      "sha256": "03be7dfeda0195c79adf1734496e2109d25eb684c035c01beda99b7d9871a0b5"
+    },
+    "docs/qa/v065-reference/build-result.json": {
+      "bytes": 185,
+      "sha256": "46371ae58351afbf0ea02ea2d27e30b897017b3fe7e0822eafa6c5371e3008c9"
+    },
+    "docs/qa/v065-reference/corrected-godot-export-input-sha256.json": {
+      "bytes": 21205,
+      "sha256": "429eeac5816ceeeacdbe93e89fa5ad08fe848a27a0e53fe94301119f7772f147"
+    },
+    "docs/qa/v065-reference/corrected-godot-export-result.json": {
+      "bytes": 311,
+      "sha256": "e1875215d8dcac29ce16e4652751adae533bc4840ece19b76462c2eeb8b01e73"
+    },
+    "docs/qa/v065-reference/focused-reference-input-sha256.json": {
+      "bytes": 432,
+      "sha256": "45dbf2dd093108cd13ea038518b403e8eaf7fdd81a36f9fff3dcad5a581e0167"
+    },
+    "docs/qa/v065-reference/focused-reference-result.json": {
+      "bytes": 202,
+      "sha256": "f4f8c83640a3740138d059e45e6a73f05c5f5a45dbc86851b8c9ee10bae48aed"
+    },
+    "docs/qa/v065-reference/godot-export-input-sha256.json": {
+      "bytes": 21205,
+      "sha256": "b8b88293c2d705367d2aef59e6fcd239ff93da528c18f4966f1c6ba8706f3707"
+    },
+    "docs/qa/v065-reference/godot-export-result.json": {
+      "bytes": 311,
+      "sha256": "0f3f53806346094aa2ea90fed1f63702d443c6d388e8d458927372e2853b89c4"
+    },
+    "docs/qa/v065-reference/v064-preservation.json": {
+      "bytes": 27223,
+      "sha256": "0c01f3ec25734ad110028c6bf109346e1ed8ab247f5fc3e1bf9a29918740a758"
+    }
+  },
+  "logs": {
+    "docs/qa/v065-source/focused.log.txt": {
+      "bytes": 151,
+      "sha256": "dff09b7c123fb0d33bca0be9bfbc46883ba0bc06ae2fa12744ba0279711518f9"
+    },
+    "docs/qa/v065-migration/20261006T031002268173Z-capture40.log.txt": {
+      "bytes": 157,
+      "sha256": "bd6b9567ff09a291078d28d147293ed01d7f7cca56165d029c882d665556faee"
+    },
+    "docs/qa/v065-migration/20261006T031027879959Z-migration.log.txt": {
+      "bytes": 128,
+      "sha256": "f9811c4f197e46260c8da5b29241d3bd6223eaa9381abb81951873aa1db3ca00"
+    },
+    "docs/qa/v065-gameplay/gameplay-01.log.txt": {
+      "bytes": 413,
+      "sha256": "d1d22819dd0796882e86f20c99b87b9abda56d08a7fec0f3d789a5d965f571a7"
+    },
+    "docs/qa/v065-gameplay/gameplay-02.log.txt": {
+      "bytes": 106,
+      "sha256": "ddfc716bdf50cbf08143c1ac4501127b2e82775cf1c8288bc005d4fce4a18f50"
+    },
+    "docs/qa/v065-gameplay/gameplay-03.log.txt": {
+      "bytes": 335,
+      "sha256": "5ebc1fb209b2cc646e72822fb444deaf4a0121dd15ea9832efb3d7c1c294da9f"
+    },
+    "docs/qa/v065-root-ui/presentation.log.txt": {
+      "bytes": 123,
+      "sha256": "320332a3d914067697ca1ff0844045a18452bce48997e3fd796654050be8788b"
+    },
+    "docs/qa/v065-legacy/after.log.txt": {
+      "bytes": 909,
+      "sha256": "c619da80f9e1677314564c2287448e7448896c7c8bde3dde34641c1074d49b25"
+    },
+    "docs/qa/v065-legacy/before.log.txt": {
+      "bytes": 909,
+      "sha256": "556e75681646c79be134eae220c3c4e67c4e366956e1fcaf3c4f36dc40327e8e"
+    },
+    "docs/qa/v065-integration/initial-import.log.txt": {
+      "bytes": 78360,
+      "sha256": "6024e9fdc8cab083f9c03e54b8a4892f0f93b408bb9f697eee1d7b25541ac6b7"
+    },
+    "docs/qa/v065-integration/probe-parse.log.txt": {
+      "bytes": 190,
+      "sha256": "1ea337321c4236fc4c642ba8e29482bacd33b7879533630e9118cd1dc16c94fe"
+    },
+    "docs/qa/v065-reference/build-check.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v065-reference/build-check.stdout.log.txt": {
+      "bytes": 52,
+      "sha256": "65d47533eaf556129a1f3a295db12ab1bc36a8df0770c71cb9378490d54d03ba"
+    },
+    "docs/qa/v065-reference/build.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v065-reference/build.stdout.log.txt": {
+      "bytes": 51,
+      "sha256": "0c186c479a6379680dc6d8311a762f817ace4c33c184e92eac59c590f96270d1"
+    },
+    "docs/qa/v065-reference/corrected-godot-export.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v065-reference/corrected-godot-export.stdout.log.txt": {
+      "bytes": 205,
+      "sha256": "881c3c8a76e46d3e862aafeb146330317ff3f9b9ded3708c83c5c5e40bdf8c0b"
+    },
+    "docs/qa/v065-reference/focused-reference.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v065-reference/focused-reference.stdout.log.txt": {
+      "bytes": 764,
+      "sha256": "795ff95b00cf876473d0f986abefc472925464a15bbbb80429fe9711866137c6"
+    },
+    "docs/qa/v065-reference/godot-export.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v065-reference/godot-export.stdout.log.txt": {
+      "bytes": 205,
+      "sha256": "881c3c8a76e46d3e862aafeb146330317ff3f9b9ded3708c83c5c5e40bdf8c0b"
+    }
+  },
+  "reference": {
+    "display_values_separate": 32,
+    "real_model_states": 3,
+    "html_ids": 3819,
+    "catalog_allowed_changes": 35,
+    "standard_full_count": 772,
+    "class_reachable_nonstart": 704,
+    "evidence": "docs/qa/v065-reference/focused-reference-result.json",
+    "export_reuse_boundary": "First export passed; changed count-description from full standard nodes to actual class-reachable nonstart nodes, then one corrected export passed. No game runtime changes."
+  }
+}

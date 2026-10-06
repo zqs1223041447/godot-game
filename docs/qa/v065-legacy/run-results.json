@@ -1,0 +1,32 @@
+[
+  {
+    "label": "before",
+    "command": [
+      "/usr/local/bin/godot",
+      "--headless",
+      "--path",
+      "/workspace/scratch/a51485f153de/v064-final-source-snapshot",
+      "--script",
+      "/workspace/scratch/a51485f153de/v065-zealots-oath/docs/qa/v065-legacy/harness.gd"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 2.9789129449927714,
+    "harness_sha256": "c32051a35783456e3746b55310699383daa3c066d3670e62b8a5125ae7f62b7e",
+    "script_error": false
+  },
+  {
+    "label": "after",
+    "command": [
+      "/usr/local/bin/godot",
+      "--headless",
+      "--path",
+      "/workspace/scratch/a51485f153de/v065-zealots-oath",
+      "--script",
+      "/workspace/scratch/a51485f153de/v065-zealots-oath/docs/qa/v065-legacy/harness.gd"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 3.4271336770034395,
+    "harness_sha256": "c32051a35783456e3746b55310699383daa3c066d3670e62b8a5125ae7f62b7e",
+    "script_error": false
+  }
+]

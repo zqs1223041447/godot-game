@@ -25,6 +25,7 @@ RULE_TITLES['elemental_defense_affixes'] = '灰烬皮甲与原始三抗供给'
 RULE_TITLES['defense_rating_affixes'] = '灰烬皮甲：护甲、闪避与前缀取舍'
 RULE_TITLES['resolute_technique'] = '坚决技艺：稳定命中与暴击取舍'
 RULE_TITLES['iron_reflexes'] = '铁反射（闪转甲）：闪避转换与护甲取舍'
+RULE_TITLES['zealots_oath'] = '狂信者的誓约：生命再生改为作用于能量护盾'
 TYPES['defense_v37'] = '历史三抗防具池'
 TYPES['defense_v39'] = '护甲闪避与三抗防具池'
 
@@ -449,6 +450,33 @@ def iron_reflexes_rule(data,link,facts,details):
     return body
 
 
+def zealots_oath_rule(data,link,facts,details):
+    rule=data['zealots_oath']
+    def value(key,amount,ratio=False):
+        return f'<strong data-zealots-oath-value="{esc(key)}" data-value="{esc(amount)}">{percent(amount) if ratio else format(amount, ".10g")}</strong>'
+    body=facts([('关键天赋',link('source_passives',rule['node']['id'])),('存档 / 装备词汇 / 源政策',value('save-version',rule['minimum_save_version'])+' / '+value('vocabulary',rule['equipment_vocabulary'])+' / '+value('source-policy',rule['source_policy']))])
+    body+='<p>生命再生改为作用于能量护盾。每秒护盾再生 = '+esc(rule['formula'])+'；生命再生 = '+value('active-life-rate',0)+'。</p><p>'+esc(rule['raw_rule'])+'。</p>'
+    body+='<h3>真实装备与最后一点天赋</h3><p>'+esc(rule['example_scope'])+'。下列结果直接读取实际Model的最终数值；页面不再乘算。</p>'
+    body+=facts([('原始固定再生 R',value('raw-flat',rule['raw_flat_regeneration'])+' / 秒'),('原始百分比 P',value('raw-percent',rule['life_regeneration_fraction'],True))])
+    labels={'before':'未点 · 守护长袍','after':'已点 · 守护长袍','changed_shield':'已点 · 改穿灯帷潮缄袍'}
+    rows=[]
+    for key in ['before','after','changed_shield']:
+        row=rule['examples'][key]
+        cells=[value(key+'-points',row['points_spent']),value(key+'-remaining',row['points_remaining']),value(key+'-max-life',row['stats']['max_health']),value(key+'-max-shield',row['stats']['max_shield']),value(key+'-life-rate',row['profile']['life_rate']),value(key+'-shield-rate',row['profile']['shield_rate']),value(key+'-recharge-rate',row['stats']['shield_recharge_rate']),value(key+'-recharge-delay',row['stats']['shield_recharge_delay'])]
+        rows.append('<tr><th>'+esc(labels[key])+'</th>'+''.join('<td>'+cell+'</td>' for cell in cells)+'</tr>')
+    body+='<div class="table-scroll"><table><thead><tr><th>合法构筑</th><th>已花点数</th><th>余点</th><th>最终生命</th><th>最终护盾</th><th>生命再生 / 秒</th><th>护盾再生 / 秒</th><th>独立充能 / 秒</th><th>充能等待秒数</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
+    body+='<p>'+esc(rule['tradeoff'])+'。</p><p>'+esc(rule['capacity_rule'])+'。</p>'
+    source_rows=[]
+    for node_id,source in rule['sources'].items():
+        translated='\n'.join(data['source_tree_localization']['lines'][line]['text'] for line in source['source_lines'])
+        source_rows.append('<p>'+link('source_passives',node_id,node_id)+'：'+lines(translated)+'</p>')
+    body+=details('原始再生、护盾提高与合法装备', ''.join(source_rows)+'<p>31033同时供固定10与1.2%；32482另供0.6%，合计1.8%。38906提高护盾4%，智慧按既有取整规则先进入最终护盾。</p>'+''.join('<p>'+link('equipment',instance['base_id'])+'：'+lines('\n'.join(rule['examples']['changed_shield']['equipment'][slot]['definition']['affix_lines']))+'</p>' for slot,instance in [('body_armour',rule['instances']['tidebound_coat']),('amulet',rule['instances']['wayglass_token'])]))
+    body+=details('主路线、独立分支与预算', '<p>等级 '+value('level',19)+'，总点数预算 '+value('budget',23)+'。主路线：'+' → '.join(link('source_passives',node_id,node_id) for node_id in rule['route'])+'</p><p>再生分支：'+'、'.join(link('source_passives',node_id,node_id) for node_id in rule['regeneration_branch'])+'；护盾分支：'+'、'.join(link('source_passives',node_id,node_id) for node_id in rule['shield_branch'])+'。分支是附加分配清单，不表示各分支之间有连续边。三个完整候选均通过实际构筑与源树校验，不读写用户存档。</p>')
+    body+=''.join('<p>'+esc(rule[key])+'。</p>' for key in ['scope','timing','lifecycle','migration','complete_gate'])
+    body+='<p><a href="../ZEALOTS_OATH_RULES.zh-CN.md">完整狂信者的誓约规则</a> · <a href="../qa/v065-reference/README.md">本批图鉴证据</a> · '+link('rules','source_recharge')+' · '+link('rules','character_rates')+' · <a href="source-tree-coverage.json">同源执行覆盖JSON</a></p>'
+    return body
+
+
 def build(data, art):
     records = []
     by_id = {}
@@ -594,7 +622,7 @@ def build(data, art):
             body+=details(f'精通 {choice["effect"]} · {label}','<p>'+lines(localized['mastery_choices'][str(choice['effect'])])+'</p>')
         if p['neighbors']:body+=details('原始标准邻接',links('source_passives',p['neighbors']))
         aliases=' '.join([p['name'],p['partition'],*p['stats'],*(line for choice in p['mastery_choices'] for line in choice['stats'])])
-        cards.append(add('source_passives',key,localized['name'],localized['stats'] or state,body,TYPES[p['type']],status='implemented' if selectable else 'research',related=link('rules','source_tree')+(' · '+link('rules','iron_reflexes') if key == '10661' else '')+(' · '+link('rules','resolute_technique') if key == '31961' else '')+(' · '+link('rules','source_fire_dot') if key in data.get('source_fire_dot',{}).get('nodes',{}) else '')+(' · '+link('rules','source_faster_burn') if key in data.get('source_faster_burn',{}).get('nodes',{}) or key in data.get('source_faster_burn',{}).get('blocked_matching_nodes',{}) else '')+(' · '+link('rules','mana_guard') if key == data.get('mana_guard',{}).get('node',{}).get('id') or key in data.get('mana_guard',{}).get('blocked_matching_nodes',{}) else '')+(' · '+link('rules','elemental_resistance_caps') if key in data.get('elemental_resistance_caps',{}).get('nodes',{}) or key in data.get('elemental_resistance_caps',{}).get('boundaries',{}) else ''),search_aliases=aliases))
+        cards.append(add('source_passives',key,localized['name'],localized['stats'] or state,body,TYPES[p['type']],status='implemented' if selectable else 'research',related=link('rules','source_tree')+(' · '+link('rules','zealots_oath') if key == '63425' else '')+(' · '+link('rules','iron_reflexes') if key == '10661' else '')+(' · '+link('rules','resolute_technique') if key == '31961' else '')+(' · '+link('rules','source_fire_dot') if key in data.get('source_fire_dot',{}).get('nodes',{}) else '')+(' · '+link('rules','source_faster_burn') if key in data.get('source_faster_burn',{}).get('nodes',{}) or key in data.get('source_faster_burn',{}).get('blocked_matching_nodes',{}) else '')+(' · '+link('rules','mana_guard') if key == data.get('mana_guard',{}).get('node',{}).get('id') or key in data.get('mana_guard',{}).get('blocked_matching_nodes',{}) else '')+(' · '+link('rules','elemental_resistance_caps') if key in data.get('elemental_resistance_caps',{}).get('nodes',{}) or key in data.get('elemental_resistance_caps',{}).get('boundaries',{}) else ''),search_aliases=aliases))
     for key,m in data['mechanisms'].items():
         player_nodes=[k for k,v in data['passives'].items() if key in v['mechanism_ids']]
         monsters=[k for k,v in data['monsters'].items() if key in v['mechanisms']]
@@ -972,6 +1000,8 @@ def build(data, art):
         rule_defs.append(('defense_rating_affixes',RULE_TITLES['defense_rating_affixes'],'全局固定护甲与闪避占用已有前缀，物理命中、攻击准入和持续燃烧各有明确边界。',defense_rating_affix_rule(data,link,facts,details),'implemented'))
     if 'iron_reflexes' in data:
         rule_defs.append(('iron_reflexes',RULE_TITLES['iron_reflexes'],'全部原始闪避转换为护甲，取消敏捷闪避提高；同一句双提高只计一次，失去闪避仍有代价。',iron_reflexes_rule(data,link,facts,details),'implemented'))
+    if 'zealots_oath' in data:
+        rule_defs.append(('zealots_oath',RULE_TITLES['zealots_oath'],'原始固定再生加百分比乘最终护盾；生命再生归零，护盾充能、药剂与偷取仍独立。',zealots_oath_rule(data,link,facts,details),'implemented'))
     if 'elemental_defense_affixes' in data:
         rule_defs.append(('elemental_defense_affixes',RULE_TITLES['elemental_defense_affixes'],'一件胸甲提供原始火、冰、电抗性；三抗满后缀仍须天赋补足原始值与最大上限。',elemental_defense_affix_rule(data,link,facts,details),'implemented'))
     if 'elemental_resistance_caps' in data:

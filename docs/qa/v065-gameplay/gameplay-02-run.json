@@ -1,0 +1,7 @@
+{
+  "exit_code": 124,
+  "timeout_seconds": 90,
+  "isolated": "/tmp/godot-m1-v065-gameplay-f9px6831",
+  "diagnosis": "Harness cleanup loop after actual death retained the existing HUD death latch. Fixed by refreshing actual HUD before bounded menu closing. No production change.",
+  "no_final_assertion_report": true
+}

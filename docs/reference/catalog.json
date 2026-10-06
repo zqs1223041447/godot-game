@@ -4590,7 +4590,7 @@
 				"normal_points": 5,
 				"source_version": "3.29.1"
 			},
-			"version": 40
+			"version": 41
 		},
 		"default_casts": {
 			"group_000001": {
@@ -5667,7 +5667,7 @@
 				"evasion": 320.0
 			}
 		},
-		"save_version": 40,
+		"save_version": 41,
 		"skitter_accuracy_example": {
 			"base_accuracy": 140,
 			"base_chance": 0.96,
@@ -6217,7 +6217,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 40,
+				"save_version": 41,
 				"source": {
 					"affixes": [
 						{
@@ -6721,7 +6721,7 @@
 				"schema_version": 2,
 				"status": "prototype"
 			},
-			"save_version": 40
+			"save_version": 41
 		},
 		"elevate": {
 			"description": "保留魔法装备已有词缀，升为稀有并补至4至6条。",
@@ -6923,7 +6923,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 40,
+				"save_version": 41,
 				"source": {
 					"affixes": [
 						{
@@ -7108,7 +7108,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 40,
+				"save_version": 41,
 				"source": {
 					"affixes": [],
 					"base_id": "ashwood_bow",
@@ -7295,7 +7295,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 40,
+				"save_version": 41,
 				"source": {
 					"affixes": [
 						{
@@ -7499,7 +7499,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 40,
+				"save_version": 41,
 				"source": {
 					"affixes": [
 						{
@@ -7642,7 +7642,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 40,
+				"save_version": 41,
 				"source": {
 					"affixes": [
 						{
@@ -8126,7 +8126,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 40,
+				"save_version": 41,
 				"source": {
 					"affixes": [
 						{
@@ -9930,7 +9930,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 40,
+				"save_version": 41,
 				"source": {
 					"affixes": [
 						{
@@ -10260,7 +10260,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 40,
+				"save_version": 41,
 				"source": {
 					"affixes": [
 						{
@@ -10579,7 +10579,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 40,
+				"save_version": 41,
 				"source": {
 					"affixes": [
 						{
@@ -10642,7 +10642,7 @@
 			"example_quantity": 1,
 			"name": "校准碎片",
 			"quantity_source": "items[uid].payload.quantity",
-			"save_version": 40,
+			"save_version": 41,
 			"size": [
 				1,
 				1
@@ -12940,7 +12940,7 @@
 				}
 			}
 		},
-		"source_policy": 40,
+		"source_policy": 41,
 		"tier_boundaries": {
 			"1": {
 				"ironhide": [
@@ -16249,7 +16249,7 @@
 		"slot_targets": [
 			"body_armour"
 		],
-		"source_policy": 40,
+		"source_policy": 41,
 		"supply_scope": "自然新池只替换10%防御入口；新自然分布及后续随机状态有意改变，显式旧pool/profile仍保留历史结果",
 		"test_supply": {
 			"instance": {
@@ -18816,7 +18816,7 @@
 		"route_scope": "野蛮人69级73点的普通连通可行见证，保留沿途全部属性，无写档；不是全局最省点或完整配装最优结论",
 		"safety_cap": 0.83,
 		"scope": "只接入无条件最大火、冰、电抗性；全元素句展开三字段，每ID一次。寻枝珠宝只影响连接准入，不重复授予属性",
-		"source_policy": 40,
+		"source_policy": 41,
 		"source_reminder": "源资料90%提醒原样保留；本游戏安全上限为83%，不采用90%预算",
 		"source_sha256": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
 		"source_version": "3.29.1",
@@ -35062,7 +35062,7 @@
 		"pool_id": "forgeblade_v34",
 		"save_version": 34
 	},
-	"game_version": "0.64.0",
+	"game_version": "0.65.0",
 	"iron_reflexes": {
 		"base_scope": "A0、E0合计角色原始基础、已装备物品、珠宝与天赋固定值；本组实际装备和路线只有胸甲提供护甲/闪避固定值，角色基础闪避为15",
 		"budget_scope": "生产Model导出的静态装备/天赋与单次命中预算；命中示例设当前护盾0、生命10000，不包含频率、走位或实战存活时长",
@@ -38088,7 +38088,7 @@
 		],
 		"scope": "护甲只降低物理命中；元素命中与已存在的燃烧不会因转换护甲而减伤。开启后失去闪避，不能把护甲增幅当成总体生存提升",
 		"shared_rule": "H只扣除同一原始词句同时提供护甲与闪避提高的部分；不同原句的两个提高即使数值相同也分别生效，不能按两总量较小值去重",
-		"source_policy": 40,
+		"source_policy": 41,
 		"source_sha256": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
 		"source_version": "3.29.1"
 	},
@@ -44225,7 +44225,7 @@
 			"max_targets": 1,
 			"radius": 60.0
 		},
-		"save_version": 40,
+		"save_version": 41,
 		"scope": "hit + attack + melee；不含area，不受范围或投射物速度提高，也不占投射物容量，无返回或飞行结束爆炸。",
 		"timing": "沿用attack_timer与当前attack_speed；没有独立技能冷却或魔力支付。"
 	},
@@ -47110,7 +47110,7 @@
 		"quality": 0,
 		"recycle_credit": 1,
 		"recycle_location": "bag",
-		"schema": 40,
+		"schema": 41,
 		"test_supply_separate": true
 	},
 	"normal_journey": {
@@ -55991,7 +55991,7 @@
 			"31961"
 		],
 		"scope": "完整原双句只授予一个开关；所有命中不能被闪避但不能暴击，攻击、法术、母子箭、返回与独立爆炸均承担禁暴击代价",
-		"source_policy": 40,
+		"source_policy": 41,
 		"targets": {
 			"armour_and_capped_resistance": {
 				"armour": 500.0,
@@ -56019,7 +56019,7 @@
 		},
 		"timing": "施放时冻结；分配、退款和换装只影响新施放，旧飞行、母子箭、返回与独立爆炸保持各自快照"
 	},
-	"save_version": 40,
+	"save_version": 41,
 	"schema_version": 3,
 	"sectors": [
 		{
@@ -438527,12 +438527,18 @@
 			"63425": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "zealots_oath",
+							"value": 1.0
+						}
+					],
+					"status": "full",
+					"supported": [
 						"Life Regeneration is applied to Energy Shield instead"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "63425",
@@ -476435,12 +476441,18 @@
 			},
 			"Life Regeneration is applied to Energy Shield instead": {
 				"status": {
-					"grants": [],
-					"implemented": false,
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "zealots_oath",
+							"value": 1.0
+						}
+					],
+					"implemented": true,
 					"missing_consumers": [],
-					"parser_supported": false
+					"parser_supported": true
 				},
-				"text": "生命回复是生效至能量护盾改为（暂未实装）"
+				"text": "生命再生改为作用于能量护盾"
 			},
 			"Light Radius is based on Energy Shield instead of Life": {
 				"status": {
@@ -508005,7 +508017,7 @@
 				},
 				"name": "狂信者的誓约",
 				"partition": "标准主树",
-				"stats": "生命回复是生效至能量护盾改为（暂未实装）"
+				"stats": "生命再生改为作用于能量护盾"
 			},
 			"63439": {
 				"mastery_choices": {
@@ -513804,7 +513816,7 @@
 			}
 		},
 		"roster_scope": "只展示原抽签为基础物种的按位替换；灰烬保留名额，分裂体与母巢保留原抽签且占用序号；稀有度、机制与奖励不变；所选巡逻词缀最后按编排物种替换",
-		"save_version": 40,
+		"save_version": 41,
 		"spawn_seconds": 0.6,
 		"tiers": [
 			{
@@ -518114,7 +518126,7 @@
 		},
 		"reserved_character_key": "C",
 		"retired_profile_writes": false,
-		"save_version": 40,
+		"save_version": 41,
 		"services": [
 			{
 				"description": "免费测试供应全部已实现主动与辅助宝石。",
@@ -522358,5 +522370,930 @@
 				"secondary"
 			]
 		}
+	},
+	"zealots_oath": {
+		"capacity_rule": "满盾或最大护盾0时溢出丢弃，不回流生命；C页与F8显示潜在每秒速率，不是此刻实际已恢复量",
+		"complete_gate": "只新增63425完整原句，标准图完整节点771→772，七职业各703→704可达非起点节点；混合未实现节点仍锁定。原始英文、身份、图结构保持，未分配不新增再生键、队列、扫描或随机抽样",
+		"disabled_profile": {
+			"enabled": false,
+			"life_rate": 0.0,
+			"shield_rate": 0.0
+		},
+		"equipment_vocabulary": 39,
+		"example_scope": "同一19级野蛮人23点预算，未点花22点且余1点，点后花23点。保留默认其余装备及沿途属性；守护长袍加合法灯帷途镜坠，换装仅改为合法灯帷潮缄袍，不新增或赠送装备",
+		"examples": {
+			"after": {
+				"allocated": [
+					"47175",
+					"31628",
+					"9511",
+					"23881",
+					"26523",
+					"6446",
+					"10221",
+					"50422",
+					"50570",
+					"29353",
+					"44202",
+					"23027",
+					"60472",
+					"26270",
+					"64210",
+					"7444",
+					"55649",
+					"22285",
+					"53793",
+					"37884",
+					"32482",
+					"31033",
+					"38906",
+					"63425"
+				],
+				"class_id": 1,
+				"equipment": {
+					"amulet": {
+						"definition": {
+							"added_sources": [],
+							"affix_lines": [
+								"前缀 · 灯帷 T3：全局最大护盾 +22"
+							],
+							"base_id": "wayglass_token",
+							"base_name": "途镜坠",
+							"category": "amulet",
+							"definition_id": "equipment:wayglass_token",
+							"description": "最大魔力 +6，魔力恢复 +0.3 / 秒。\n前缀 · 灯帷 T3：全局最大护盾 +22",
+							"effects": [],
+							"id": "gear_000006",
+							"item_level": 16,
+							"kind": "equipment",
+							"name": "魔法 · 途镜坠",
+							"rarity": "magic",
+							"size": [
+								1,
+								1
+							],
+							"slot": "charm",
+							"stats": {
+								"mana_regen": 0.3,
+								"max_mana": 6.0,
+								"max_shield": 22.0
+							},
+							"uid": "gear_000006"
+						},
+						"item": {
+							"definition_id": "equipment:wayglass_token",
+							"kind": "equipment",
+							"payload": {
+								"affixes": [
+									{
+										"id": "lanternveil",
+										"tier": 3,
+										"value": 22
+									}
+								],
+								"base_id": "wayglass_token",
+								"id": "gear_000006",
+								"item_level": 16,
+								"rarity": "magic"
+							},
+							"uid": "gear_000006"
+						}
+					},
+					"body_armour": {
+						"definition": {
+							"affix_lines": [],
+							"base_id": "guardian_robe",
+							"base_name": "守护长袍",
+							"category": "body_armour",
+							"definition_id": "equipment:guardian_robe",
+							"description": "最大护盾 +30，护盾恢复 +3 / 秒",
+							"id": "gear_000004",
+							"item_level": 1,
+							"kind": "equipment",
+							"name": "守护长袍",
+							"rarity": "unique",
+							"size": [
+								2,
+								3
+							],
+							"slot": "armor",
+							"stats": {
+								"max_shield": 30.0,
+								"shield_regen": 3.0
+							},
+							"uid": "gear_000004"
+						},
+						"item": {
+							"definition_id": "equipment:guardian_robe",
+							"kind": "equipment",
+							"payload": {
+
+							},
+							"uid": "gear_000004"
+						}
+					},
+					"weapon": {
+						"definition": {
+							"affix_lines": [],
+							"base_id": "ember_wand",
+							"base_name": "余烬法杖",
+							"category": "weapon",
+							"definition_id": "equipment:ember_wand",
+							"description": "伤害 +8，魔力恢复 +1 / 秒",
+							"id": "ember_wand",
+							"item_level": 1,
+							"kind": "equipment",
+							"name": "余烬法杖",
+							"rarity": "unique",
+							"size": [
+								1,
+								3
+							],
+							"slot": "weapon",
+							"stats": {
+								"damage": 8.0,
+								"mana_regen": 1.0
+							},
+							"uid": "ember_wand"
+						},
+						"item": {
+							"definition_id": "equipment:ember_wand",
+							"kind": "equipment",
+							"payload": {
+
+							},
+							"uid": "ember_wand"
+						}
+					}
+				},
+				"level": 19,
+				"points_remaining": 0,
+				"points_spent": 23,
+				"profile": {
+					"enabled": true,
+					"life_rate": 0.0,
+					"shield_rate": 12.17728
+				},
+				"save_attempts": 0,
+				"stats": {
+					"accuracy": 128.0,
+					"accuracy_increased": 0.0,
+					"additional_skill_slots": 0.0,
+					"area_increased": 0.0,
+					"area_size_increased": 0.0,
+					"armour": 0.0,
+					"armour_increased": 0.1,
+					"attack_added_fire": 0.0,
+					"attack_added_physical": 0.0,
+					"attack_crit_chance_increased": 0.0,
+					"attack_elemental_increased": 0.0,
+					"attack_life_leech": 0.0,
+					"attack_mana_leech": 0.0,
+					"attack_physical_increased": 0.0,
+					"attack_speed": 1.7,
+					"attack_speed_increased": 0.0,
+					"chaos_increased": 0.0,
+					"cold_increased": 0.0,
+					"cold_resistance": 0.05,
+					"crit_base_chance": 0.05,
+					"crit_base_multiplier": 1.5,
+					"crit_chance_increased": 0.0,
+					"crit_multiplier_add": 0.0,
+					"damage": 26.0,
+					"damage_taken_from_mana_before_life": 0.0,
+					"damaging_ailments_faster": 0.0,
+					"dexterity": 14.0,
+					"elemental_increased": 0.0,
+					"evasion": 15.3,
+					"evasion_increased": 0.0,
+					"fire_dot_multiplier_add": 0.0,
+					"fire_increased": 0.0,
+					"fire_resistance": 0.05,
+					"flask_charges_gained_increased": 0.0,
+					"flask_life_recovery_increased": 0.0,
+					"flask_mana_recovery_increased": 0.0,
+					"global_increased": 0.0,
+					"intelligence": 44.0,
+					"life_leech_max_rate_increased": 0.0,
+					"life_leech_rate_increased": 0.0,
+					"life_regen": 0.0,
+					"life_regen_percent": 0.018000000000000002,
+					"lightning_increased": 0.0,
+					"lightning_resistance": 0.05,
+					"mana_cost_efficiency_increased": 0.0,
+					"mana_cost_increased": 0.0,
+					"mana_leech_max_rate_increased": 0.0,
+					"mana_leech_rate_increased": 0.0,
+					"mana_regen": 10.3,
+					"mana_regen_increased": 0.0,
+					"max_health": 222.0,
+					"max_mana": 128.0,
+					"max_shield": 120.96000000000001,
+					"maximum_cold_resistance_add": 0.0,
+					"maximum_fire_resistance_add": 0.0,
+					"maximum_lightning_resistance_add": 0.0,
+					"melee_area_size_increased": 0.0,
+					"melee_crit_chance_increased": 0.0,
+					"melee_crit_multiplier_add": 0.0,
+					"melee_physical_increased": 0.5,
+					"move_speed": 240.0,
+					"move_speed_increased": 0.0,
+					"physical_attack_life_leech": 0.0,
+					"physical_attack_mana_leech": 0.0,
+					"physical_increased": 0.0,
+					"projectile_attack_crit_chance_increased": 0.0,
+					"projectile_attack_crit_multiplier_add": 0.0,
+					"projectile_count": 0.0,
+					"projectile_increased": 0.0,
+					"projectile_speed_increased": 0.0,
+					"resolute_technique": 0.0,
+					"shield_recharge_delay": 4.0,
+					"shield_recharge_rate": 16.0,
+					"shield_recharge_rate_increased": 0.0,
+					"shield_recharge_start_faster": 0.0,
+					"shield_regen": 16.0,
+					"shield_regeneration_rate": 12.17728,
+					"spell_added_cold": 0.0,
+					"spell_added_lightning": 0.0,
+					"spell_area_size_increased": 0.0,
+					"spell_crit_chance_increased": 0.0,
+					"spell_crit_multiplier_add": 0.0,
+					"spell_increased": 0.0,
+					"strength": 172.0,
+					"zealots_oath": 1.0
+				},
+				"whole_build_valid": true
+			},
+			"before": {
+				"allocated": [
+					"47175",
+					"31628",
+					"9511",
+					"23881",
+					"26523",
+					"6446",
+					"10221",
+					"50422",
+					"50570",
+					"29353",
+					"44202",
+					"23027",
+					"60472",
+					"26270",
+					"64210",
+					"7444",
+					"55649",
+					"22285",
+					"53793",
+					"37884",
+					"32482",
+					"31033",
+					"38906"
+				],
+				"class_id": 1,
+				"equipment": {
+					"amulet": {
+						"definition": {
+							"added_sources": [],
+							"affix_lines": [
+								"前缀 · 灯帷 T3：全局最大护盾 +22"
+							],
+							"base_id": "wayglass_token",
+							"base_name": "途镜坠",
+							"category": "amulet",
+							"definition_id": "equipment:wayglass_token",
+							"description": "最大魔力 +6，魔力恢复 +0.3 / 秒。\n前缀 · 灯帷 T3：全局最大护盾 +22",
+							"effects": [],
+							"id": "gear_000006",
+							"item_level": 16,
+							"kind": "equipment",
+							"name": "魔法 · 途镜坠",
+							"rarity": "magic",
+							"size": [
+								1,
+								1
+							],
+							"slot": "charm",
+							"stats": {
+								"mana_regen": 0.3,
+								"max_mana": 6.0,
+								"max_shield": 22.0
+							},
+							"uid": "gear_000006"
+						},
+						"item": {
+							"definition_id": "equipment:wayglass_token",
+							"kind": "equipment",
+							"payload": {
+								"affixes": [
+									{
+										"id": "lanternveil",
+										"tier": 3,
+										"value": 22
+									}
+								],
+								"base_id": "wayglass_token",
+								"id": "gear_000006",
+								"item_level": 16,
+								"rarity": "magic"
+							},
+							"uid": "gear_000006"
+						}
+					},
+					"body_armour": {
+						"definition": {
+							"affix_lines": [],
+							"base_id": "guardian_robe",
+							"base_name": "守护长袍",
+							"category": "body_armour",
+							"definition_id": "equipment:guardian_robe",
+							"description": "最大护盾 +30，护盾恢复 +3 / 秒",
+							"id": "gear_000004",
+							"item_level": 1,
+							"kind": "equipment",
+							"name": "守护长袍",
+							"rarity": "unique",
+							"size": [
+								2,
+								3
+							],
+							"slot": "armor",
+							"stats": {
+								"max_shield": 30.0,
+								"shield_regen": 3.0
+							},
+							"uid": "gear_000004"
+						},
+						"item": {
+							"definition_id": "equipment:guardian_robe",
+							"kind": "equipment",
+							"payload": {
+
+							},
+							"uid": "gear_000004"
+						}
+					},
+					"weapon": {
+						"definition": {
+							"affix_lines": [],
+							"base_id": "ember_wand",
+							"base_name": "余烬法杖",
+							"category": "weapon",
+							"definition_id": "equipment:ember_wand",
+							"description": "伤害 +8，魔力恢复 +1 / 秒",
+							"id": "ember_wand",
+							"item_level": 1,
+							"kind": "equipment",
+							"name": "余烬法杖",
+							"rarity": "unique",
+							"size": [
+								1,
+								3
+							],
+							"slot": "weapon",
+							"stats": {
+								"damage": 8.0,
+								"mana_regen": 1.0
+							},
+							"uid": "ember_wand"
+						},
+						"item": {
+							"definition_id": "equipment:ember_wand",
+							"kind": "equipment",
+							"payload": {
+
+							},
+							"uid": "ember_wand"
+						}
+					}
+				},
+				"level": 19,
+				"points_remaining": 1,
+				"points_spent": 22,
+				"profile": {
+					"enabled": false,
+					"life_rate": 13.996,
+					"shield_rate": 0.0
+				},
+				"save_attempts": 0,
+				"stats": {
+					"accuracy": 128.0,
+					"accuracy_increased": 0.0,
+					"additional_skill_slots": 0.0,
+					"area_increased": 0.0,
+					"area_size_increased": 0.0,
+					"armour": 0.0,
+					"armour_increased": 0.1,
+					"attack_added_fire": 0.0,
+					"attack_added_physical": 0.0,
+					"attack_crit_chance_increased": 0.0,
+					"attack_elemental_increased": 0.0,
+					"attack_life_leech": 0.0,
+					"attack_mana_leech": 0.0,
+					"attack_physical_increased": 0.0,
+					"attack_speed": 1.7,
+					"attack_speed_increased": 0.0,
+					"chaos_increased": 0.0,
+					"cold_increased": 0.0,
+					"cold_resistance": 0.05,
+					"crit_base_chance": 0.05,
+					"crit_base_multiplier": 1.5,
+					"crit_chance_increased": 0.0,
+					"crit_multiplier_add": 0.0,
+					"damage": 26.0,
+					"damage_taken_from_mana_before_life": 0.0,
+					"damaging_ailments_faster": 0.0,
+					"dexterity": 14.0,
+					"elemental_increased": 0.0,
+					"evasion": 15.3,
+					"evasion_increased": 0.0,
+					"fire_dot_multiplier_add": 0.0,
+					"fire_increased": 0.0,
+					"fire_resistance": 0.05,
+					"flask_charges_gained_increased": 0.0,
+					"flask_life_recovery_increased": 0.0,
+					"flask_mana_recovery_increased": 0.0,
+					"global_increased": 0.0,
+					"intelligence": 44.0,
+					"life_leech_max_rate_increased": 0.0,
+					"life_leech_rate_increased": 0.0,
+					"life_regen": 13.996,
+					"life_regen_percent": 0.018000000000000002,
+					"lightning_increased": 0.0,
+					"lightning_resistance": 0.05,
+					"mana_cost_efficiency_increased": 0.0,
+					"mana_cost_increased": 0.0,
+					"mana_leech_max_rate_increased": 0.0,
+					"mana_leech_rate_increased": 0.0,
+					"mana_regen": 10.3,
+					"mana_regen_increased": 0.0,
+					"max_health": 222.0,
+					"max_mana": 128.0,
+					"max_shield": 120.96000000000001,
+					"maximum_cold_resistance_add": 0.0,
+					"maximum_fire_resistance_add": 0.0,
+					"maximum_lightning_resistance_add": 0.0,
+					"melee_area_size_increased": 0.0,
+					"melee_crit_chance_increased": 0.0,
+					"melee_crit_multiplier_add": 0.0,
+					"melee_physical_increased": 0.5,
+					"move_speed": 240.0,
+					"move_speed_increased": 0.0,
+					"physical_attack_life_leech": 0.0,
+					"physical_attack_mana_leech": 0.0,
+					"physical_increased": 0.0,
+					"projectile_attack_crit_chance_increased": 0.0,
+					"projectile_attack_crit_multiplier_add": 0.0,
+					"projectile_count": 0.0,
+					"projectile_increased": 0.0,
+					"projectile_speed_increased": 0.0,
+					"resolute_technique": 0.0,
+					"shield_recharge_delay": 4.0,
+					"shield_recharge_rate": 16.0,
+					"shield_recharge_rate_increased": 0.0,
+					"shield_recharge_start_faster": 0.0,
+					"shield_regen": 16.0,
+					"spell_added_cold": 0.0,
+					"spell_added_lightning": 0.0,
+					"spell_area_size_increased": 0.0,
+					"spell_crit_chance_increased": 0.0,
+					"spell_crit_multiplier_add": 0.0,
+					"spell_increased": 0.0,
+					"strength": 172.0
+				},
+				"whole_build_valid": true
+			},
+			"changed_shield": {
+				"allocated": [
+					"47175",
+					"31628",
+					"9511",
+					"23881",
+					"26523",
+					"6446",
+					"10221",
+					"50422",
+					"50570",
+					"29353",
+					"44202",
+					"23027",
+					"60472",
+					"26270",
+					"64210",
+					"7444",
+					"55649",
+					"22285",
+					"53793",
+					"37884",
+					"32482",
+					"31033",
+					"38906",
+					"63425"
+				],
+				"class_id": 1,
+				"equipment": {
+					"amulet": {
+						"definition": {
+							"added_sources": [],
+							"affix_lines": [
+								"前缀 · 灯帷 T3：全局最大护盾 +22"
+							],
+							"base_id": "wayglass_token",
+							"base_name": "途镜坠",
+							"category": "amulet",
+							"definition_id": "equipment:wayglass_token",
+							"description": "最大魔力 +6，魔力恢复 +0.3 / 秒。\n前缀 · 灯帷 T3：全局最大护盾 +22",
+							"effects": [],
+							"id": "gear_000006",
+							"item_level": 16,
+							"kind": "equipment",
+							"name": "魔法 · 途镜坠",
+							"rarity": "magic",
+							"size": [
+								1,
+								1
+							],
+							"slot": "charm",
+							"stats": {
+								"mana_regen": 0.3,
+								"max_mana": 6.0,
+								"max_shield": 22.0
+							},
+							"uid": "gear_000006"
+						},
+						"item": {
+							"definition_id": "equipment:wayglass_token",
+							"kind": "equipment",
+							"payload": {
+								"affixes": [
+									{
+										"id": "lanternveil",
+										"tier": 3,
+										"value": 22
+									}
+								],
+								"base_id": "wayglass_token",
+								"id": "gear_000006",
+								"item_level": 16,
+								"rarity": "magic"
+							},
+							"uid": "gear_000006"
+						}
+					},
+					"body_armour": {
+						"definition": {
+							"added_sources": [],
+							"affix_lines": [
+								"前缀 · 灯帷 T3：全局最大护盾 +22"
+							],
+							"base_id": "tidebound_coat",
+							"base_name": "潮缄袍",
+							"category": "body_armour",
+							"definition_id": "equipment:tidebound_coat",
+							"description": "最大护盾 +10，护盾恢复 +0.6 / 秒。护盾为角色全局加值。\n前缀 · 灯帷 T3：全局最大护盾 +22",
+							"effects": [],
+							"id": "gear_000005",
+							"item_level": 16,
+							"kind": "equipment",
+							"name": "魔法 · 潮缄袍",
+							"rarity": "magic",
+							"size": [
+								2,
+								3
+							],
+							"slot": "armor",
+							"stats": {
+								"max_shield": 32.0,
+								"shield_regen": 0.6
+							},
+							"uid": "gear_000005"
+						},
+						"item": {
+							"definition_id": "equipment:tidebound_coat",
+							"kind": "equipment",
+							"payload": {
+								"affixes": [
+									{
+										"id": "lanternveil",
+										"tier": 3,
+										"value": 22
+									}
+								],
+								"base_id": "tidebound_coat",
+								"id": "gear_000005",
+								"item_level": 16,
+								"rarity": "magic"
+							},
+							"uid": "gear_000005"
+						}
+					},
+					"weapon": {
+						"definition": {
+							"affix_lines": [],
+							"base_id": "ember_wand",
+							"base_name": "余烬法杖",
+							"category": "weapon",
+							"definition_id": "equipment:ember_wand",
+							"description": "伤害 +8，魔力恢复 +1 / 秒",
+							"id": "ember_wand",
+							"item_level": 1,
+							"kind": "equipment",
+							"name": "余烬法杖",
+							"rarity": "unique",
+							"size": [
+								1,
+								3
+							],
+							"slot": "weapon",
+							"stats": {
+								"damage": 8.0,
+								"mana_regen": 1.0
+							},
+							"uid": "ember_wand"
+						},
+						"item": {
+							"definition_id": "equipment:ember_wand",
+							"kind": "equipment",
+							"payload": {
+
+							},
+							"uid": "ember_wand"
+						}
+					}
+				},
+				"level": 19,
+				"points_remaining": 0,
+				"points_spent": 23,
+				"profile": {
+					"enabled": true,
+					"life_rate": 0.0,
+					"shield_rate": 12.21616
+				},
+				"save_attempts": 0,
+				"stats": {
+					"accuracy": 128.0,
+					"accuracy_increased": 0.0,
+					"additional_skill_slots": 0.0,
+					"area_increased": 0.0,
+					"area_size_increased": 0.0,
+					"armour": 0.0,
+					"armour_increased": 0.1,
+					"attack_added_fire": 0.0,
+					"attack_added_physical": 0.0,
+					"attack_crit_chance_increased": 0.0,
+					"attack_elemental_increased": 0.0,
+					"attack_life_leech": 0.0,
+					"attack_mana_leech": 0.0,
+					"attack_physical_increased": 0.0,
+					"attack_speed": 1.7,
+					"attack_speed_increased": 0.0,
+					"chaos_increased": 0.0,
+					"cold_increased": 0.0,
+					"cold_resistance": 0.05,
+					"crit_base_chance": 0.05,
+					"crit_base_multiplier": 1.5,
+					"crit_chance_increased": 0.0,
+					"crit_multiplier_add": 0.0,
+					"damage": 26.0,
+					"damage_taken_from_mana_before_life": 0.0,
+					"damaging_ailments_faster": 0.0,
+					"dexterity": 14.0,
+					"elemental_increased": 0.0,
+					"evasion": 15.3,
+					"evasion_increased": 0.0,
+					"fire_dot_multiplier_add": 0.0,
+					"fire_increased": 0.0,
+					"fire_resistance": 0.05,
+					"flask_charges_gained_increased": 0.0,
+					"flask_life_recovery_increased": 0.0,
+					"flask_mana_recovery_increased": 0.0,
+					"global_increased": 0.0,
+					"intelligence": 44.0,
+					"life_leech_max_rate_increased": 0.0,
+					"life_leech_rate_increased": 0.0,
+					"life_regen": 0.0,
+					"life_regen_percent": 0.018000000000000002,
+					"lightning_increased": 0.0,
+					"lightning_resistance": 0.05,
+					"mana_cost_efficiency_increased": 0.0,
+					"mana_cost_increased": 0.0,
+					"mana_leech_max_rate_increased": 0.0,
+					"mana_leech_rate_increased": 0.0,
+					"mana_regen": 10.3,
+					"mana_regen_increased": 0.0,
+					"max_health": 222.0,
+					"max_mana": 128.0,
+					"max_shield": 123.12,
+					"maximum_cold_resistance_add": 0.0,
+					"maximum_fire_resistance_add": 0.0,
+					"maximum_lightning_resistance_add": 0.0,
+					"melee_area_size_increased": 0.0,
+					"melee_crit_chance_increased": 0.0,
+					"melee_crit_multiplier_add": 0.0,
+					"melee_physical_increased": 0.5,
+					"move_speed": 240.0,
+					"move_speed_increased": 0.0,
+					"physical_attack_life_leech": 0.0,
+					"physical_attack_mana_leech": 0.0,
+					"physical_increased": 0.0,
+					"projectile_attack_crit_chance_increased": 0.0,
+					"projectile_attack_crit_multiplier_add": 0.0,
+					"projectile_count": 0.0,
+					"projectile_increased": 0.0,
+					"projectile_speed_increased": 0.0,
+					"resolute_technique": 0.0,
+					"shield_recharge_delay": 4.0,
+					"shield_recharge_rate": 13.6,
+					"shield_recharge_rate_increased": 0.0,
+					"shield_recharge_start_faster": 0.0,
+					"shield_regen": 13.6,
+					"shield_regeneration_rate": 12.21616,
+					"spell_added_cold": 0.0,
+					"spell_added_lightning": 0.0,
+					"spell_area_size_increased": 0.0,
+					"spell_crit_chance_increased": 0.0,
+					"spell_crit_multiplier_add": 0.0,
+					"spell_increased": 0.0,
+					"strength": 172.0,
+					"zealots_oath": 1.0
+				},
+				"whole_build_valid": true
+			}
+		},
+		"formula": "R + P × 最终最大护盾",
+		"instances": {
+			"tidebound_coat": {
+				"affixes": [
+					{
+						"id": "lanternveil",
+						"tier": 3,
+						"value": 22
+					}
+				],
+				"base_id": "tidebound_coat",
+				"id": "gear_000005",
+				"item_level": 16,
+				"rarity": "magic"
+			},
+			"wayglass_token": {
+				"affixes": [
+					{
+						"id": "lanternveil",
+						"tier": 3,
+						"value": 22
+					}
+				],
+				"base_id": "wayglass_token",
+				"id": "gear_000006",
+				"item_level": 16,
+				"rarity": "magic"
+			}
+		},
+		"life_regeneration_fraction": 0.018,
+		"lifecycle": "死亡或暂停沿既有process门禁停止推进，不能救活致死伤害；分配、退款和换装只重算速率，不补当前资源",
+		"migration": "schema41先严格验证旧40并备份原文件字节，只升级版本；源政策41、装备词汇39，不赠物品、点数，不改UID或重掷",
+		"minimum_save_version": 41,
+		"new_images": [],
+		"node": {
+			"execution": {
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "zealots_oath",
+						"value": 1.0
+					}
+				],
+				"status": "full",
+				"supported": [
+					"Life Regeneration is applied to Energy Shield instead"
+				],
+				"unsupported": []
+			},
+			"id": "63425",
+			"legacy_execution": {
+				"grants": [],
+				"status": "unsupported",
+				"supported": [],
+				"unsupported": [
+					"Life Regeneration is applied to Energy Shield instead"
+				]
+			},
+			"name": "Zealot's Oath",
+			"source_lines": [
+				"Life Regeneration is applied to Energy Shield instead"
+			]
+		},
+		"producer": "EquipmentCatalog → validated CanonicalGameState.get_stats/get_regeneration_profile",
+		"raw_flat_regeneration": 10.0,
+		"raw_rule": "R是原始固定生命再生每秒点数，P是原始同类百分比合计；固定值与百分比分别只计一次，不是已按生命计算值。容量和智慧提高先算最终最大护盾，再取该值作为百分比基数",
+		"regeneration_branch": [
+			"55649",
+			"22285",
+			"53793",
+			"37884",
+			"32482",
+			"31033"
+		],
+		"route": [
+			"47175",
+			"31628",
+			"9511",
+			"23881",
+			"26523",
+			"6446",
+			"10221",
+			"50422",
+			"50570",
+			"29353",
+			"44202",
+			"23027",
+			"60472",
+			"26270",
+			"64210",
+			"7444",
+			"63425"
+		],
+		"scope": "生命再生变为0；生命药剂、生命偷取、即时及拾取回复仍恢复生命，现有护盾充能与其等待延迟独立，再生可与充能相加",
+		"shield_branch": [
+			"38906"
+		],
+		"source_policy": 41,
+		"source_sha256": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+		"source_version": "3.29.1",
+		"sources": {
+			"31033": {
+				"execution": {
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "life_regen",
+							"value": 10.0
+						},
+						{
+							"mode": "flat",
+							"stat": "life_regen_percent",
+							"value": 0.012
+						}
+					],
+					"status": "full",
+					"supported": [
+						"Regenerate 10 Life per second",
+						"Regenerate 1.2% of Life per second"
+					],
+					"unsupported": []
+				},
+				"source_lines": [
+					"Regenerate 10 Life per second",
+					"Regenerate 1.2% of Life per second"
+				]
+			},
+			"32482": {
+				"execution": {
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "life_regen_percent",
+							"value": 0.006
+						}
+					],
+					"status": "full",
+					"supported": [
+						"Regenerate 0.6% of Life per second"
+					],
+					"unsupported": []
+				},
+				"source_lines": [
+					"Regenerate 0.6% of Life per second"
+				]
+			},
+			"38906": {
+				"execution": {
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "armour_increased",
+							"value": 0.1
+						},
+						{
+							"mode": "increased",
+							"stat": "max_shield",
+							"value": 0.04
+						}
+					],
+					"status": "full",
+					"supported": [
+						"10% increased Armour",
+						"4% increased maximum Energy Shield"
+					],
+					"unsupported": []
+				},
+				"source_lines": [
+					"10% increased Armour",
+					"4% increased maximum Energy Shield"
+				]
+			}
+		},
+		"timing": "沿既有1/60模拟资源阶段，在生命再生之后、药剂之前计入护盾再生；受伤与充能等待不阻止再生，不新增连续事件规划器",
+		"tradeoff": "失去生命再生后需靠既有生命恢复来源；更高护盾容量只提高百分比项，固定再生不跟随放大。换装还改变原充能供给，不能把盾再生增加称为整体生存提升"
 	}
 }

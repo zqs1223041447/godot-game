@@ -126,6 +126,7 @@ static func collect() -> Dictionary:
 	result["elemental_defense_affixes"] = elemental_defense_affix_examples()
 	result["defense_rating_affixes"] = defense_rating_affix_examples()
 	result["iron_reflexes"] = iron_reflexes_examples()
+	result["zealots_oath"] = zealots_oath_examples()
 	result["resolute_technique"] = resolute_technique_examples()
 	result["forgeblade"] = forgeblade_examples()
 	result["melee_basic"] = melee_basic_examples(result.forgeblade)
@@ -2119,7 +2120,7 @@ static func iron_reflexes_examples() -> Dictionary:
 		assert(before.instance == after.instance and before.stats.accuracy == after.stats.accuracy)
 		for type: String in before.elemental_hits:
 			assert(before.elemental_hits[type].damage_total == after.elemental_hits[type].damage_total)
-		assert(before.burn == after.burn)
+		assert(before.burn.damage_total == after.burn.damage_total)
 		var base_armour: float = float(before.definition.stats.get("armour", 0.0))
 		var base_evasion: float = 15.0 + float(before.definition.stats.get("evasion", 0.0))
 		var ia: float = float(before.stats.armour_increased)
@@ -2150,6 +2151,80 @@ static func iron_reflexes_examples() -> Dictionary:
 		"resource_rule":"点选、退款、换装只重算派生数值，不补当前生命、护盾、魔力，也不重置命中熵；C页转换贡献已计入最终护甲，不再相加",
 		"migration":"schema40严格校验旧39并保留原文件字节备份，只升级版本；装备词汇与掉落池仍39，不赠物、不赠点、不改UID或重掷。旧39注入10661拒绝",
 		"complete_gate":"仅10661完整原句接通；含其他未实现效果的混合节点仍不可分配；未分配时保留旧公式与字段，不新增计时器、战斗扫描或随机数"}
+
+
+## v65: complete legal Model candidates; no user save access or synthetic stats.
+static func zealots_oath_examples() -> Dictionary:
+	var route: Array = ["47175", "31628", "9511", "23881", "26523", "6446", "10221", "50422", "50570", "29353", "44202", "23027", "60472", "26270", "64210", "7444", "63425"]
+	var branch: Array = ["55649", "22285", "53793", "37884", "32482", "31033"]
+	var fixture := Canonical.new()
+	for uid: String in fixture.pending_items():
+		var destination: Dictionary = fixture.first_bag_position(uid)
+		assert(not destination.is_empty())
+		_reference_move(fixture, uid, destination)
+	var robe_uid: String = "gear_%06d" % int(fixture.snapshot().next_item_serial)
+	assert(fixture._admit_reward_item(Canonical.Items.fixed_equipment(robe_uid, "guardian_robe")))
+	_reference_move(fixture, robe_uid, {"kind":"equipment", "slot_id":"body_armour"})
+	var instances: Dictionary = {}
+	for base: String in ["tidebound_coat", "wayglass_token"]:
+		var uid: String = "gear_%06d" % int(fixture.snapshot().next_item_serial)
+		var tier: Dictionary = Equipment.affix_definition("lanternveil").tiers[2]
+		var instance: Dictionary = {"id":uid, "base_id":base, "rarity":"magic", "item_level":16,
+			"affixes":[{"id":"lanternveil", "tier":int(tier.tier), "value":int(tier.max)}]}
+		assert(Equipment.validate_instance(instance) and fixture._admit_reward_item(Canonical.Items.wrap_equipment(instance)))
+		instances[base] = instance
+	_reference_move(fixture, instances.wayglass_token.id, {"kind":"equipment", "slot_id":"amulet"})
+	var examples: Dictionary = {}
+	for mode: String in ["before", "after", "changed_shield"]:
+		var model := Canonical.new()
+		var candidate: Dictionary = fixture.snapshot()
+		candidate.progress = {"level":19, "xp":0}
+		candidate.talents.class_id = 1
+		candidate.talents.allocated = route.slice(0, route.size()-1) + branch + ["38906"]
+		candidate.talents.normal_points = 1
+		if mode != "before":
+			candidate.talents.allocated.append("63425")
+			candidate.talents.normal_points = 0
+		assert(Canonical.Rules.reason(candidate).is_empty() and SourceTree.reason(candidate).is_empty())
+		model._accept_memory(candidate)
+		if mode == "changed_shield":
+			_reference_move(model, instances.tidebound_coat.id, {"kind":"equipment", "slot_id":"body_armour"})
+		var stats: Dictionary = model.get_stats()
+		var profile: Dictionary = model.get_regeneration_profile()
+		assert(profile.enabled == (mode != "before") and model.save_attempts == 0)
+		assert(is_equal_approx(stats.life_regen_percent, 0.018))
+		assert(is_equal_approx(profile.life_rate, 10.0 + 0.018 * stats.max_health) if mode == "before" else profile.life_rate == 0.0)
+		assert(profile.shield_rate == 0.0 if mode == "before" else is_equal_approx(profile.shield_rate, 10.0 + 0.018 * stats.max_shield))
+		var equipment: Dictionary = {}
+		for slot: String in model.equipped_items():
+			var uid: String = model.equipped_items()[slot]
+			equipment[slot] = {"item":model.item(uid), "definition":model.item_definition(uid)}
+		examples[mode] = {"class_id":1, "level":19, "allocated":model.snapshot().talents.allocated,
+			"points_spent":model.snapshot().talents.allocated.size()-1, "points_remaining":model.talent_points,
+			"stats":stats, "profile":profile, "equipment":equipment, "whole_build_valid":true, "save_attempts":model.save_attempts}
+	var raw: Dictionary = SourceTree.Data.node("63425")
+	var effect: Dictionary = SourceTree.node_effect("63425", 0, 41)
+	var old: Dictionary = SourceTree.node_effect("63425", 0, 40)
+	assert(effect.status == "full" and old.status == "unsupported")
+	var sources: Dictionary = {}
+	for id: String in ["31033", "32482", "38906"]:
+		sources[id] = {"source_lines":SourceTree.Data.node(id).stats, "execution":SourceTree.node_effect(id)}
+	return {"minimum_save_version":SourceTree.ZEALOTS_OATH_SAVE_VERSION, "source_policy":SourceTree.CURRENT_SAVE_VERSION,
+		"equipment_vocabulary":Equipment.CURRENT_VOCABULARY, "source_version":"3.29.1", "source_sha256":SourceTree.Data.SOURCE_SHA256,
+		"node":{"id":"63425", "name":raw.name, "source_lines":raw.stats, "execution":effect, "legacy_execution":old},
+		"formula":"R + P × 最终最大护盾", "raw_flat_regeneration":10.0, "life_regeneration_fraction":0.018,
+		"route":route, "regeneration_branch":branch, "shield_branch":["38906"], "sources":sources, "instances":instances,
+		"examples":examples, "disabled_profile":Canonical.new().get_regeneration_profile(), "new_images":[],
+		"producer":"EquipmentCatalog → validated CanonicalGameState.get_stats/get_regeneration_profile",
+		"raw_rule":"R是原始固定生命再生每秒点数，P是原始同类百分比合计；固定值与百分比分别只计一次，不是已按生命计算值。容量和智慧提高先算最终最大护盾，再取该值作为百分比基数",
+		"scope":"生命再生变为0；生命药剂、生命偷取、即时及拾取回复仍恢复生命，现有护盾充能与其等待延迟独立，再生可与充能相加",
+		"timing":"沿既有1/60模拟资源阶段，在生命再生之后、药剂之前计入护盾再生；受伤与充能等待不阻止再生，不新增连续事件规划器",
+		"capacity_rule":"满盾或最大护盾0时溢出丢弃，不回流生命；C页与F8显示潜在每秒速率，不是此刻实际已恢复量",
+		"lifecycle":"死亡或暂停沿既有process门禁停止推进，不能救活致死伤害；分配、退款和换装只重算速率，不补当前资源",
+		"example_scope":"同一19级野蛮人23点预算，未点花22点且余1点，点后花23点。保留默认其余装备及沿途属性；守护长袍加合法灯帷途镜坠，换装仅改为合法灯帷潮缄袍，不新增或赠送装备",
+		"tradeoff":"失去生命再生后需靠既有生命恢复来源；更高护盾容量只提高百分比项，固定再生不跟随放大。换装还改变原充能供给，不能把盾再生增加称为整体生存提升",
+		"migration":"schema41先严格验证旧40并备份原文件字节，只升级版本；源政策41、装备词汇39，不赠物品、点数，不改UID或重掷",
+		"complete_gate":"只新增63425完整原句，标准图完整节点771→772，七职业各703→704可达非起点节点；混合未实现节点仍锁定。原始英文、身份、图结构保持，未分配不新增再生键、队列、扫描或随机抽样"}
 
 
 static func mana_guard_examples() -> Dictionary:

@@ -1,0 +1,18 @@
+{
+  "base_commit": "23983fe8138e591d2b1af6892b7df13a918dd19d",
+  "translation_change_only": {
+    "source": "Life Regeneration is applied to Energy Shield instead",
+    "before": "生命回复是生效至能量护盾改为",
+    "after": "生命再生改为作用于能量护盾"
+  },
+  "unchanged_sources_and_engines": {
+    "data/passives/official_tree_runtime.json": "9774a8ec1fe16199e775fe99a20853837ca8c7725c48dfcd9d6ee69646ff934f",
+    "data/passive_source/data.json": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+    "data/passive_source/normalized_tree.json": "5807df8d3a8d29cdd0402c7ceaf79680439beab4812c945b29c94fc6f0a13b05",
+    "scripts/items/equipment_catalog.gd": "5d6804a0d42bc28b711152a50659261fb533149e35161b3936b430af733859be",
+    "scripts/combat/leech_rules.gd": "c1037a4c12f9668cfcf4ca070474bad01adf384695eadd447e7036986c33caba",
+    "scripts/combat/leech_runtime.gd": "fa2b94cc94ffea671124de3986ecd80f0f1ac8feb4ad1e6f2fba554ae1ef8696",
+    "scripts/combat/burn_runtime.gd": "2ff6b2974b82bf65637702a2f9aa3e7e4e04521cf2280a55be4700e10337b5e3"
+  },
+  "rules_consumer_only": "Source exact-line consumer and player resource phase; no edits to incoming burn or leech engine"
+}

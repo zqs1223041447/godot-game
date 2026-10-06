@@ -1,0 +1,25 @@
+{
+  "purpose": "Source syntax/load check only; expected missing-PCK guard exit78. No packed runtime checks executed.",
+  "started_utc": "2026-10-06T03:17:39.452397+00:00",
+  "command": [
+    "/usr/local/bin/godot",
+    "--headless",
+    "--path",
+    "/workspace/scratch/a51485f153de/v065-zealots-oath",
+    "--script",
+    "/workspace/scratch/a51485f153de/v065-zealots-oath/tools/v065_export_probe.gd"
+  ],
+  "xdg_data_home": "/tmp/godot-m1-v065-probe-parse-ewi2eymo/data",
+  "xdg_config_home": "/tmp/godot-m1-v065-probe-parse-ewi2eymo/config",
+  "xdg_cache_home": "/tmp/godot-m1-v065-probe-parse-ewi2eymo/cache",
+  "timeout_seconds": 30,
+  "elapsed_seconds": 1.144,
+  "exit_code": 78,
+  "expected_exit_code": 78,
+  "script_errors": 0,
+  "engine_errors": 0,
+  "guard_seen": true,
+  "probe_sha256_before": "3b76581a86651df6320e67c39efddfc0faba0e3d4bab5dca7aedfae869ce0c42",
+  "probe_sha256_after": "3b76581a86651df6320e67c39efddfc0faba0e3d4bab5dca7aedfae869ce0c42",
+  "ok": true
+}

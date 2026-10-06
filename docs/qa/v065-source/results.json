@@ -1,0 +1,299 @@
+{
+	"checks": 9428,
+	"class_paths": [
+		{
+			"class_id": 0,
+			"minimum_level": 11,
+			"name": "Scion",
+			"path": [
+				"58833",
+				"2151",
+				"37690",
+				"48423",
+				"6204",
+				"63976",
+				"33479",
+				"10490",
+				"47251",
+				"7388",
+				"60398",
+				"46340",
+				"42760",
+				"36678",
+				"7444",
+				"63425"
+			],
+			"points": 15
+		},
+		{
+			"class_id": 1,
+			"minimum_level": 12,
+			"name": "Marauder",
+			"path": [
+				"47175",
+				"31628",
+				"9511",
+				"23881",
+				"26523",
+				"6446",
+				"10221",
+				"50422",
+				"50570",
+				"29353",
+				"44202",
+				"23027",
+				"60472",
+				"26270",
+				"64210",
+				"7444",
+				"63425"
+			],
+			"points": 16
+		},
+		{
+			"class_id": 2,
+			"minimum_level": 22,
+			"name": "Ranger",
+			"path": [
+				"50459",
+				"45035",
+				"59370",
+				"63795",
+				"38662",
+				"5616",
+				"39718",
+				"59606",
+				"1461",
+				"49900",
+				"46277",
+				"56295",
+				"18182",
+				"53456",
+				"36858",
+				"60440",
+				"49605",
+				"33310",
+				"5296",
+				"19501",
+				"4367",
+				"44184",
+				"63447",
+				"39841",
+				"36678",
+				"7444",
+				"63425"
+			],
+			"points": 26
+		},
+		{
+			"class_id": 3,
+			"minimum_level": 7,
+			"name": "Witch",
+			"path": [
+				"54447",
+				"57264",
+				"37569",
+				"36542",
+				"4397",
+				"7938",
+				"14021",
+				"55332",
+				"42760",
+				"36678",
+				"7444",
+				"63425"
+			],
+			"points": 11
+		},
+		{
+			"class_id": 4,
+			"minimum_level": 18,
+			"name": "Duelist",
+			"path": [
+				"50986",
+				"47389",
+				"42911",
+				"40867",
+				"476",
+				"24865",
+				"6741",
+				"14056",
+				"34400",
+				"14930",
+				"3644",
+				"5233",
+				"63723",
+				"59928",
+				"63282",
+				"29353",
+				"44202",
+				"23027",
+				"60472",
+				"26270",
+				"64210",
+				"7444",
+				"63425"
+			],
+			"points": 22
+		},
+		{
+			"class_id": 5,
+			"minimum_level": 7,
+			"name": "Templar",
+			"path": [
+				"61525",
+				"63965",
+				"14151",
+				"27564",
+				"17735",
+				"13009",
+				"60398",
+				"46340",
+				"42760",
+				"36678",
+				"7444",
+				"63425"
+			],
+			"points": 11
+		},
+		{
+			"class_id": 6,
+			"minimum_level": 15,
+			"name": "Shadow",
+			"path": [
+				"44683",
+				"38129",
+				"11334",
+				"15549",
+				"20546",
+				"3656",
+				"33783",
+				"4502",
+				"32710",
+				"41635",
+				"49651",
+				"5296",
+				"19501",
+				"4367",
+				"44184",
+				"63447",
+				"39841",
+				"36678",
+				"7444",
+				"63425"
+			],
+			"points": 19
+		}
+	],
+	"composition_cases": [
+		{
+			"life_with_oath": 0.0,
+			"life_without_oath": 0.0,
+			"max_shield": 206.0,
+			"name": "no_regeneration",
+			"nodes": [],
+			"shield_rate": 0.0
+		},
+		{
+			"life_with_oath": 0.0,
+			"life_without_oath": 7.5,
+			"max_shield": 206.0,
+			"name": "raw_flat_only",
+			"nodes": [],
+			"shield_rate": 7.5
+		},
+		{
+			"life_with_oath": 0.0,
+			"life_without_oath": 10.07,
+			"max_shield": 206.0,
+			"name": "raw_percent_only",
+			"nodes": [],
+			"shield_rate": 2.06
+		},
+		{
+			"life_with_oath": 0.0,
+			"life_without_oath": 17.57,
+			"max_shield": 206.0,
+			"name": "raw_flat_and_percent",
+			"nodes": [],
+			"shield_rate": 9.56
+		},
+		{
+			"life_with_oath": 0.0,
+			"life_without_oath": 22.084,
+			"max_shield": 206.0,
+			"name": "real_robust_flat10_percent1_2",
+			"nodes": [
+				"31033"
+			],
+			"shield_rate": 12.472
+		},
+		{
+			"life_with_oath": 0.0,
+			"life_without_oath": 6.042,
+			"max_shield": 206.0,
+			"name": "real_percent0_6",
+			"nodes": [
+				"32482"
+			],
+			"shield_rate": 1.236
+		},
+		{
+			"life_with_oath": 0.0,
+			"life_without_oath": 28.126,
+			"max_shield": 206.0,
+			"name": "real_robust_and_percent",
+			"nodes": [
+				"31033",
+				"32482"
+			],
+			"shield_rate": 13.708
+		},
+		{
+			"life_with_oath": 0.0,
+			"life_without_oath": 28.126,
+			"max_shield": 214.0,
+			"name": "real_robust_percent_shield4",
+			"nodes": [
+				"31033",
+				"32482",
+				"38906"
+			],
+			"shield_rate": 13.852
+		},
+		{
+			"life_with_oath": 0.0,
+			"life_without_oath": 32.64,
+			"max_shield": 214.0,
+			"name": "raw_and_all_source_components",
+			"nodes": [
+				"31033",
+				"32482",
+				"38906"
+			],
+			"shield_rate": 16.78
+		},
+		{
+			"life_with_oath": 0.0,
+			"life_without_oath": 28.126,
+			"max_shield": 233.10000000000002,
+			"name": "extra_flat_and_percent_capacity",
+			"nodes": [
+				"31033",
+				"32482",
+				"38906",
+				"19374"
+			],
+			"shield_rate": 14.195800000000002
+		}
+	],
+	"failures": 0,
+	"newly_full": [
+		"63425"
+	],
+	"source_masteries_compared": 1837,
+	"source_nodes_compared": 2387,
+	"standard_full_after": 772,
+	"standard_full_before": 771,
+	"unchanged_stats_vectors": 67
+}
