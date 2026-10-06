@@ -21,6 +21,16 @@ const STAT_CONSUMER_GROUPS := {
 		],
 		"stats": ["strength", "dexterity", "intelligence", "max_health", "max_mana", "max_shield", "life_regen", "life_regen_percent", "accuracy", "accuracy_increased", "evasion", "evasion_increased", "armour", "armour_increased", "fire_resistance", "cold_resistance", "lightning_resistance"]
 	},
+	"zealots_oath": {
+		"evidence": "source_tree_runtime.gd::apply_stats -> zealots_oath_rules.gd::profile -> canonical_game_state.gd::get_stats -> main.gd continuous resource regeneration",
+		"code_checks": [
+			{"path": "scripts/passives/source_tree_runtime.gd", "contains": "ZealotsOath.profile"},
+			{"path": "scripts/mechanics/zealots_oath_rules.gd", "contains": "static func profile"},
+			{"path": "scripts/canonical_game_state.gd", "contains": "get_regeneration_profile"},
+			{"path": "scripts/main.gd", "contains": "float(_stats.shield_regeneration_rate) * delta"},
+		],
+		"stats": ["zealots_oath"]
+	},
 	"iron_reflexes": {
 		"evidence": "source_tree_runtime.gd::apply_stats -> iron_reflexes_rules.gd::profile -> canonical_game_state.gd::get_stats -> existing attack admission and physical hit mitigation",
 		"code_checks": [

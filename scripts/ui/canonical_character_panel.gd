@@ -26,9 +26,10 @@ const STAT_ROWS: Array[Dictionary] = [
 	{"id":"max_mana","label":"法力上限","format":"whole"},
 	{"id":"damage_taken_from_mana_before_life","label":"魔力分担生命伤害","format":"percent"},
 	{"id":"max_shield","label":"护盾上限","format":"whole"},
+	{"id":"shield_regeneration_rate","label":"护盾再生 / 秒","format":"decimal"},
 	{"id":"shield_recharge_rate","label":"护盾充能 / 秒","format":"decimal"},
 	{"id":"shield_recharge_delay","label":"充能等待 / 秒","format":"decimal"},
-	{"id":"life_regen","label":"生命回复 / 秒","format":"decimal"},
+	{"id":"life_regen","label":"生命再生 / 秒","format":"decimal"},
 	{"id":"mana_regen","label":"法力回复 / 秒","format":"decimal"},
 	{"id":"health_leech_instance","label":"单次生命偷取 / 秒","format":"decimal"},
 	{"id":"health_leech_cap","label":"生命偷取总上限 / 秒","format":"decimal"},
@@ -69,6 +70,10 @@ func refresh() -> void:
 	if model.has_method("get_mana_guard_profile"):
 		var mana_guard: Dictionary = model.get_mana_guard_profile()
 		stats["damage_taken_from_mana_before_life"] = float(mana_guard.get("fraction", 0.0)) if bool(mana_guard.get("ok", false)) else 0.0
+	if model.has_method("get_regeneration_profile"):
+		var regeneration: Dictionary = model.get_regeneration_profile()
+		stats["life_regen"] = float(regeneration.get("life_rate", stats.get("life_regen", 0.0)))
+		stats["shield_regeneration_rate"] = float(regeneration.get("shield_rate", 0.0))
 	for row: Dictionary in STAT_ROWS:
 		var id: String = str(row.id)
 		var value: float = float(stats.get(id, 0.0))
@@ -165,6 +170,8 @@ func _build() -> void:
 		_values[str(row.id)] = value
 		if row.id in ["armour", "evasion"]: _defense_cards[str(row.id)] = card
 		if row.id in ["accuracy","evasion"]: card.tooltip_text = "攻击命中率取决于目标闪避；法术不进行闪避判定。"
+		elif row.id == "life_regen": card.tooltip_text = "当前生命自然再生；不含药剂、偷取或拾取回复。生命再生转为护盾时此项为零。"
+		elif row.id == "shield_regeneration_rate": card.tooltip_text = "持续再生，无需等待充能。生命再生转为护盾时，固定值直接转移，百分比按护盾上限计算；不转换药剂或偷取。"
 		elif row.id == "shield_recharge_rate": card.tooltip_text = "等待结束后的实际每秒护盾充能；换装或退款会更新速率。即时回盾另行结算。"
 		elif row.id == "shield_recharge_delay": card.tooltip_text = "下一次有效损伤后的充能等待。闪避或零伤害不重置；已经开始的等待不随换装或退款改变。"
 		elif row.id == "armour": card.tooltip_text = "护甲减伤随每次物理命中大小变化。"

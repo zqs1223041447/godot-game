@@ -1030,6 +1030,7 @@ MULTILINE_OVERRIDES = {
 # Reviewed exact single-row exceptions for common source grammar that does not
 # map cleanly through word-by-word translation (negation, state, and timing).
 SINGLE_LINE_OVERRIDES = {
+    "Life Regeneration is applied to Energy Shield instead": "生命再生改为作用于能量护盾",
     "40% of Damage is taken from Mana before Life": "所受伤害的40%优先由魔力承担，再由生命承担",
     "10% of Damage is taken from Mana before Life": "所受伤害的10%优先由魔力承担，再由生命承担",
     "8% of Damage is taken from Mana before Life": "所受伤害的8%优先由魔力承担，再由生命承担",

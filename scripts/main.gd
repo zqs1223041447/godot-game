@@ -550,6 +550,10 @@ func _tick(delta: float) -> void:
 	screen_shake = maxf(0.0, screen_shake - delta * 15.0)
 	mana = minf(float(_stats.max_mana), mana + float(_stats.mana_regen) * delta)
 	health = minf(float(_stats.max_health),health+float(_stats.get("life_regen",0.0))*delta)
+	# Continuous regeneration shares the existing resource phase. Recharge below
+	# remains an independent delayed recovery source; no status/event queues.
+	if float(_stats.get("shield_regeneration_rate", 0.0)) > 0.0:
+		shield = minf(float(_stats.max_shield), shield + float(_stats.shield_regeneration_rate) * delta)
 	var flask_gain: Dictionary = flask_runtime.advance(delta,{"health":health,"mana":mana},{"health":float(_stats.max_health),"mana":float(_stats.max_mana)})
 	health = minf(float(_stats.max_health),health+float(flask_gain.health))
 	mana = minf(float(_stats.max_mana),mana+float(flask_gain.mana))

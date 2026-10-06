@@ -1009,6 +1009,13 @@ func get_defense_conversion_profile() -> Dictionary:
 		"dexterity_evasion_disabled": enabled}
 
 
+func get_regeneration_profile() -> Dictionary:
+	var stats := get_stats()
+	return {"enabled": float(stats.get("zealots_oath", 0.0)) > 0.0,
+		"life_rate": float(stats.get("life_regen", 0.0)),
+		"shield_rate": float(stats.get("shield_regeneration_rate", 0.0))}
+
+
 func normal_journey() -> Dictionary:
 	return _current.journey.duplicate(true)
 

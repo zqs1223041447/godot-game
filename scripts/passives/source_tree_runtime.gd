@@ -7,6 +7,7 @@ const Data = preload("res://scripts/passives/source_tree_data.gd")
 const Allocation = preload("res://scripts/passives/source_tree_allocation_rules.gd")
 const Patterns = preload("res://scripts/passives/source_stat_patterns.gd")
 const IronReflexes = preload("res://scripts/mechanics/iron_reflexes_rules.gd")
+const ZealotsOath = preload("res://scripts/mechanics/zealots_oath_rules.gd")
 const Jewels = preload("res://scripts/jewel_data.gd")
 const Locations = preload("res://scripts/items/item_location_rules.gd")
 const TALENT_KEYS := ["source_version","class_id","allocated","masteries","ascendancy","ascendancy_allocated","normal_points","ascendancy_points"]
@@ -22,7 +23,8 @@ const MANA_GUARD_SAVE_VERSION:=35
 const ELEMENTAL_RESISTANCE_CAP_SAVE_VERSION:=36
 const RESOLUTE_TECHNIQUE_SAVE_VERSION:=38
 const IRON_REFLEXES_SAVE_VERSION:=40
-const CURRENT_SAVE_VERSION:=IRON_REFLEXES_SAVE_VERSION
+const ZEALOTS_OATH_SAVE_VERSION:=41
+const CURRENT_SAVE_VERSION:=ZEALOTS_OATH_SAVE_VERSION
 static var _contexts: Dictionary = {}
 static var _line_cache: Dictionary = {}
 static var _node_effect_cache: Dictionary = {}
@@ -42,7 +44,8 @@ static func _execution_policy(version:int)->int:
 	if version<MANA_GUARD_SAVE_VERSION:return FASTER_BURN_SAVE_VERSION
 	if version<ELEMENTAL_RESISTANCE_CAP_SAVE_VERSION:return MANA_GUARD_SAVE_VERSION
 	if version<RESOLUTE_TECHNIQUE_SAVE_VERSION:return ELEMENTAL_RESISTANCE_CAP_SAVE_VERSION
-	return RESOLUTE_TECHNIQUE_SAVE_VERSION if version<IRON_REFLEXES_SAVE_VERSION else IRON_REFLEXES_SAVE_VERSION
+	if version<IRON_REFLEXES_SAVE_VERSION:return RESOLUTE_TECHNIQUE_SAVE_VERSION
+	return IRON_REFLEXES_SAVE_VERSION if version<ZEALOTS_OATH_SAVE_VERSION else ZEALOTS_OATH_SAVE_VERSION
 
 
 static func _context(class_id: int, budget: int) -> Dictionary:
@@ -131,7 +134,7 @@ static func lines_for(id: String, mastery_effect: int = 0) -> Array:
 static func line_effect(line: String, save_version:int=CURRENT_SAVE_VERSION) -> Dictionary:
 	var policy:int=_execution_policy(save_version)
 	var key:="%d:%s"%[policy,line]
-	if not _line_cache.has(key): _line_cache[key] = Patterns.parse_line(line,policy>=SPATIAL_SAVE_VERSION,policy>=RECHARGE_SAVE_VERSION,policy>=RESOURCE_SAVE_VERSION,policy>=FLASK_SAVE_VERSION,policy>=CRITICAL_SAVE_VERSION,policy>=LEECH_SAVE_VERSION,policy>=FIRE_DOT_SAVE_VERSION,policy>=FASTER_BURN_SAVE_VERSION,policy>=MANA_GUARD_SAVE_VERSION,policy>=ELEMENTAL_RESISTANCE_CAP_SAVE_VERSION,policy>=RESOLUTE_TECHNIQUE_SAVE_VERSION,policy>=IRON_REFLEXES_SAVE_VERSION)
+	if not _line_cache.has(key): _line_cache[key] = Patterns.parse_line(line,policy>=SPATIAL_SAVE_VERSION,policy>=RECHARGE_SAVE_VERSION,policy>=RESOURCE_SAVE_VERSION,policy>=FLASK_SAVE_VERSION,policy>=CRITICAL_SAVE_VERSION,policy>=LEECH_SAVE_VERSION,policy>=FIRE_DOT_SAVE_VERSION,policy>=FASTER_BURN_SAVE_VERSION,policy>=MANA_GUARD_SAVE_VERSION,policy>=ELEMENTAL_RESISTANCE_CAP_SAVE_VERSION,policy>=RESOLUTE_TECHNIQUE_SAVE_VERSION,policy>=IRON_REFLEXES_SAVE_VERSION,policy>=ZEALOTS_OATH_SAVE_VERSION)
 	return _line_cache[key].duplicate(true)
 
 
@@ -173,6 +176,7 @@ static func apply_stats(stats: Dictionary, candidate: Dictionary) -> Dictionary:
 			if grant.mode == "increased" and capacity_increased.has(grant.stat):
 				capacity_increased[grant.stat] += float(grant.value)
 			elif grant.stat == "iron_reflexes": result.iron_reflexes = 1.0
+			elif grant.stat == "zealots_oath": result.zealots_oath = 1.0
 			elif result.has(grant.stat): result[grant.stat] += float(grant.value)
 	# Every slotted jewel was admitted by the same allocation validator. Sum raw
 	# flat/increased modifiers before final capacity/rate stages, never per item.
@@ -200,7 +204,14 @@ static func apply_stats(stats: Dictionary, candidate: Dictionary) -> Dictionary:
 		result.evasion = float(result.get("evasion",15.0)) * (1.0+float(result.get("evasion_increased",0.0))+floorf(float(result.dexterity)/5.0)*0.01)
 		result.armour = float(result.get("armour",0.0))*(1.0+float(result.get("armour_increased",0.0)))
 	for stat: String in capacity_increased: result[stat] *= 1.0 + float(capacity_increased[stat])
-	result.life_regen = float(result.get("life_regen",0.0)) + float(result.get("life_regen_percent",0.0))*float(result.max_health)
+	if float(result.get("zealots_oath", 0.0)) > 0.0:
+		var regeneration := ZealotsOath.profile(float(result.get("life_regen", 0.0)),
+			float(result.get("life_regen_percent", 0.0)), float(result.max_shield))
+		assert(regeneration.ok, "Validated source regeneration redirection must compile")
+		result.life_regen = regeneration.life_rate
+		result.shield_regeneration_rate = regeneration.shield_rate
+	else:
+		result.life_regen = float(result.get("life_regen",0.0)) + float(result.get("life_regen_percent",0.0))*float(result.max_health)
 	return result
 
 
