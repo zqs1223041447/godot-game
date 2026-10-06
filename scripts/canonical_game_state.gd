@@ -588,7 +588,9 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	var loaded:=super.load_build(path)
 	if loaded and old_version>0 and old_version<Rules.VERSION:
 		migrated_from_legacy=true
-		if old_version == Rules.V37_VERSION:
+		if old_version == Rules.V38_VERSION:
+			migration_message="旧存档已原字节备份，灰烬皮甲新增护甲与闪避值前缀；旧装备保持原值，新掉落或主动制作才使用新词池，不额外赠物或赠点。"
+		elif old_version == Rules.V37_VERSION:
 			migration_message="旧存档已原字节备份，坚决技艺已开放：你的击中不能被闪避，同时不能造成暴击。原装备、点数与旅程保持，不额外赠物或赠点。"
 		elif old_version == Rules.V36_VERSION:
 			migration_message="旧存档已原字节备份，灰烬皮甲新增冰霜抗性与闪电抗性后缀；旧装备保持原值，新掉落或主动制作才使用新词池，不额外赠物或赠点。"
