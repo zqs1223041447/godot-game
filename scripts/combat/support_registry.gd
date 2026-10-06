@@ -12,6 +12,7 @@ const Ember = preload("res://scripts/combat/ember_proliferation_support_rules.gd
 const Shock = preload("res://scripts/combat/shock_support_rules.gd")
 const Ambush = preload("res://scripts/combat/ambush_support_rules.gd")
 const InwardPull = preload("res://scripts/combat/inward_pull_support_rules.gd")
+const FrostLock = preload("res://scripts/combat/frost_lock_support_rules.gd")
 const Program = preload("res://scripts/combat/support_program.gd")
 const Data = preload("res://scripts/game_data.gd")
 const MAX_SUPPORTS: int = Legacy.MAX_SUPPORTS
@@ -21,9 +22,9 @@ const BATCH_SAVE_VERSION: int = 13
 static var SUPPORTS: Dictionary = _definitions()
 
 static func _providers() -> Array:
-	return [Legacy, Extension, Area, ResourceRules, ElementRules, DeliveryRules, Ignite, Ember, Shock, Ambush, InwardPull]
+	return [Legacy, Extension, Area, ResourceRules, ElementRules, DeliveryRules, Ignite, Ember, Shock, Ambush, InwardPull, FrostLock]
 static func _program_providers() -> Array:
-	return [ResourceRules, ElementRules, DeliveryRules, Ignite, Ember, Shock, Ambush, InwardPull]
+	return [ResourceRules, ElementRules, DeliveryRules, Ignite, Ember, Shock, Ambush, InwardPull, FrostLock]
 static func _definitions() -> Dictionary:
 	var result: Dictionary = {}
 	for provider: Variant in _providers():
@@ -61,6 +62,7 @@ static func compatibility_reason(skill_id: String, support_ids: Variant, slot_li
 		seen[value] = true
 		if get_definition(value).is_empty(): return "辅助元数据无效"
 	if seen.has("ignite") and seen.has("ember_proliferation"): return "点燃辅助与余烬扩散辅助不能同时装配"
+	if seen.has("frost_lock") and seen.has("lingering_chill"): return "霜锁辅助与寒意延长辅助不能同时装配"
 	var reason: String = Legacy.compatibility_reason(skill_id, select_owned(support_ids, Legacy.SUPPORTS))
 	if not reason.is_empty(): return reason
 	var skill: Dictionary = Data.SKILLS[skill_id]
@@ -101,7 +103,8 @@ static func saved_links_reason(skill_id: String, support_ids: Variant, save_vers
 	if not reason.is_empty(): return reason
 	for id: String in support_ids:
 		var minimum: int = 1
-		if InwardPull.SUPPORTS.has(id): minimum = InwardPull.SAVE_VERSION
+		if FrostLock.SUPPORTS.has(id): minimum = FrostLock.SAVE_VERSION
+		elif InwardPull.SUPPORTS.has(id): minimum = InwardPull.SAVE_VERSION
 		elif Ambush.SUPPORTS.has(id): minimum = Ambush.SAVE_VERSION
 		elif Shock.SUPPORTS.has(id): minimum = Shock.SAVE_VERSION
 		elif Ember.SUPPORTS.has(id): minimum = Ember.SAVE_VERSION
@@ -114,6 +117,7 @@ static func saved_links_reason(skill_id: String, support_ids: Variant, save_vers
 static func definition_error(value: Variant) -> String:
 	if value is Dictionary and value.has("family"):
 		match value.family:
+			"frost_lock": return FrostLock.definition_error(value)
 			"inward_pull": return InwardPull.definition_error(value)
 			"ambush": return Ambush.definition_error(value)
 			"shock": return Shock.definition_error(value)

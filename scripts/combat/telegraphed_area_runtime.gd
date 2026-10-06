@@ -75,18 +75,28 @@ func start(enemy: Variant, target_center: Vector2, overrides: Variant = {}, visu
 	return {"ok": true, "reason": "", "attack": state_for(source_id)}
 
 
-func advance(delta: float, live_enemies: Variant, with_timing: bool = false) -> Array[Dictionary]:
+func advance(delta: float, live_enemies: Variant, with_timing: bool = false, paused_prefixes: Dictionary = {}) -> Array[Dictionary]:
 	var events: Array[Dictionary] = []
+	# Prefixes pause only each source's local action clock, never its liveness.
+	# Keys name members of the complete snapshot, including dead/protected sources.
+	# A new pause batch is transactional, including validation of its source universe.
+	# Empty batches retain the original fail-closed cancellation contract.
+	if not paused_prefixes.is_empty() and (paused_prefixes.size() > MAX_ACTIVE or not is_finite(delta) or delta < 0.0):
+		return events
 	# Reject a partial/ambiguous source universe rather than guessing who survived.
 	if not live_enemies is Array or live_enemies.size() > MAX_ACTIVE:
-		reset()
+		if paused_prefixes.is_empty(): reset()
 		return events
 	var live: Dictionary = {}
 	for enemy: Variant in live_enemies:
 		if not enemy is Dictionary or not _valid_id(enemy.get("id")) or live.has(enemy.id):
-			reset()
+			if paused_prefixes.is_empty(): reset()
 			return events
 		live[enemy.id] = _can_attack(enemy)
+	for source_id: Variant in paused_prefixes:
+		var prefix: Variant = paused_prefixes[source_id]
+		if not _valid_id(source_id) or not live.has(source_id) or not _nonnegative_number(prefix) or float(prefix) > delta:
+			return events
 	var pending: Array[Dictionary] = []
 	for source_id: int in _states.keys():
 		# Cancellation also runs on zero, negative, or nonfinite delta.
@@ -95,15 +105,29 @@ func advance(delta: float, live_enemies: Variant, with_timing: bool = false) -> 
 			continue
 		if not is_finite(delta) or delta <= 0.0:
 			continue
+		var paused_prefix: float = float(paused_prefixes.get(source_id, 0.0))
+		var active_delta: float = delta
+		if paused_prefix > 0.0:
+			active_delta = delta - paused_prefix
+			if active_delta <= 0.0:
+				continue
+		var first_pending: int = pending.size()
 		var attack: Dictionary = _states[source_id]
 		if attack.get("visual_pattern","")=="sunwell_echo":
-			_advance_echo(attack,delta,pending)
+			if paused_prefix > 0.0:
+				_advance_echo(attack,active_delta,pending)
+				_offset_pending(pending, first_pending, paused_prefix)
+			else:
+				_advance_echo(attack,delta,pending)
 			continue
 		var windup: float = float(attack.profile.windup_seconds)
 		var duration: float = windup + float(attack.profile.recovery_seconds)
 		var previous: float = float(attack.elapsed)
 		# Cap arithmetic, not the caller's simulated time; even a huge delta finishes.
-		attack.elapsed = minf(duration, previous + minf(delta, duration))
+		if paused_prefix > 0.0:
+			attack.elapsed = minf(duration, previous + minf(active_delta, duration))
+		else:
+			attack.elapsed = minf(duration, previous + minf(delta, duration))
 		if attack.phase == "windup" and float(attack.elapsed) + TIME_EPSILON >= windup:
 			attack.phase = "recovery"
 			pending.append({"at": maxf(0.0, windup - previous), "event": {
@@ -117,6 +141,8 @@ func advance(delta: float, live_enemies: Variant, with_timing: bool = false) -> 
 			if attack.has("shock_policy"):pending.back().event.shock_policy=attack.shock_policy.duplicate(true)
 			if with_timing or attack.has("burn_policy") or attack.has("shock_policy"):pending.back().event.step_time=maxf(0.0,windup-previous)
 			if attack.has("visual_pattern"):pending.back().event.visual_pattern=attack.visual_pattern
+		if paused_prefix > 0.0:
+			_offset_pending(pending, first_pending, paused_prefix)
 		if float(attack.elapsed) + TIME_EPSILON >= duration:
 			_states.erase(source_id)
 	# Stable chronological order within this call; equal deadlines use source identity.
@@ -127,6 +153,14 @@ func advance(delta: float, live_enemies: Variant, with_timing: bool = false) -> 
 	for item: Dictionary in pending:
 		events.append(item.event)
 	return events
+
+
+func _offset_pending(pending: Array[Dictionary], first: int, prefix: float) -> void:
+	# Convert resumed local deadlines back to this frame's clock before sorting.
+	for index: int in range(first, pending.size()):
+		pending[index].at = float(pending[index].at) + prefix
+		if pending[index].event.has("step_time"):
+			pending[index].event.step_time = float(pending[index].event.step_time) + prefix
 
 
 func cancel(source_id: int) -> bool:

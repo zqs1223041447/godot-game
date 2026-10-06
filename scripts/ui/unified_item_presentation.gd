@@ -12,6 +12,7 @@ const Combat = preload("res://scripts/combat/combat_data.gd")
 const Compiler = preload("res://scripts/combat/skill_compiler.gd")
 const Supports = preload("res://scripts/combat/support_registry.gd")
 const BurnRules = preload("res://scripts/combat/burn_rules.gd")
+const FrostLockRules = preload("res://scripts/combat/frost_lock_rules.gd")
 const AmbushRules = preload("res://scripts/combat/ambush_support_rules.gd")
 const ShockRules = preload("res://scripts/combat/shock_rules.gd")
 const EmberSupportRules = preload("res://scripts/combat/ember_proliferation_support_rules.gd")
@@ -136,7 +137,17 @@ static func view(model: RefCounted, uid: String) -> Dictionary:
 			result.requirements = ["适用技能："+"、".join(supported_names)]
 
 			result.base_stats = []
-			if support_id == "inward_pull":
+			if support_id == "frost_lock":
+				result.function = "冰霜脉冲造成冰冷伤害后，短暂冻结存活敌人的自主行动与攻击。"
+				result.requirements.append("不能与寒意延长同时连接")
+				var freeze_stats: Array[Dictionary] = []
+				_append_numeric_stat(freeze_stats, "普通/魔法冻结", FrostLockRules.PLAYER_POLICY.duration_by_rarity.normal, " 秒")
+				_append_numeric_stat(freeze_stats, "稀有冻结", FrostLockRules.PLAYER_POLICY.duration_by_rarity.rare, " 秒")
+				_append_numeric_stat(freeze_stats, "首领冻结", FrostLockRules.PLAYER_POLICY.duration_by_rarity.boss, " 秒")
+				_append_numeric_stat(freeze_stats, "解冻后保护", FrostLockRules.PLAYER_POLICY.immunity_seconds, " 秒")
+				result.base_stats = freeze_stats
+				result.description = "冻结期间不刷新时长；解冻后短时间不能再次冻结。外力位移与持续伤害仍生效，原有减速保留。"
+			elif support_id == "inward_pull":
 				result.function = "范围命中将敌人推向本次爆发的圆心。"
 				result.description = "牵引受墙体与怪物分离影响，不保证聚到一点。自身周围施放会把敌人拉近；连接符印伏击时，以符印为圆心。"
 			elif support_id == "ambush":

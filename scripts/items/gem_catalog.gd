@@ -32,6 +32,8 @@ static func definitions() -> Dictionary:
 ## not become valid inside a file claiming an older schema after a code update.
 static func minimum_save_version(definition_id: String) -> int:
 	# Gem additions open independently; schema26 milestone rewards stay frozen.
+	if definition_id == "support:frost_lock":
+		return 47
 	if definition_id == "support:inward_pull":
 		return 43
 	if definition_id == "support:ambush":

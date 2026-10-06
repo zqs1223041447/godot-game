@@ -12,6 +12,7 @@ const Critical=preload("res://scripts/combat/critical_strike_rules.gd")
 const Resolute = preload("res://scripts/combat/resolute_technique_rules.gd")
 const Precise = preload("res://scripts/combat/precise_technique_rules.gd")
 const Burn=preload("res://scripts/combat/burn_rules.gd")
+const FrostLock = preload("res://scripts/combat/frost_lock_rules.gd")
 const Shock = preload("res://scripts/combat/shock_rules.gd")
 const Ember=preload("res://scripts/combat/ember_proliferation_support_rules.gd")
 const Proliferation=preload("res://scripts/combat/ember_proliferation_rules.gd")
@@ -199,6 +200,11 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 		profile.proliferation=Proliferation.POLICY.duplicate(true)
 		if compiled_snapshot.has("fire_dot_multiplier"):profile.fire_dot_multiplier=compiled_snapshot.fire_dot_multiplier
 		result.burn_profile=profile
+	if canonical.has("frost_lock"):
+		compiled_snapshot.freeze_policy = FrostLock.PLAYER_POLICY.duplicate(true)
+		var profile: Dictionary = FrostLock.PLAYER_POLICY.duplicate(true)
+		profile.enabled = true
+		result.freeze_profile = profile
 	if canonical.has("shock"):
 		compiled_snapshot.shock_policy = Shock.PLAYER_POLICY.duplicate(true)
 		var profile: Dictionary = Shock.PLAYER_POLICY.duplicate(true)
@@ -335,7 +341,7 @@ static func _failure(error: String) -> Dictionary:
 static func _snapshot_error(snapshot: Dictionary) -> String:
 	# initial_count is reserved for compiled projectile snapshots, including empty supports.
 	# Reject re-entry instead of applying support more factors a second time.
-	if snapshot.has("initial_count") or snapshot.has("compiled_packets") or snapshot.has("compiled_skill_id") or snapshot.has("critical") or snapshot.has("critical_roll") or snapshot.has("leech") or snapshot.has("burn_policy") or snapshot.has("burn_proliferation") or snapshot.has("shock_policy") or snapshot.has("hit_policy") or snapshot.has("area_impulse_policy") or snapshot.has("area_impulse_profile") or snapshot.has("conversion_profile") or snapshot.has("precise_technique_profile"):
+	if snapshot.has("initial_count") or snapshot.has("compiled_packets") or snapshot.has("compiled_skill_id") or snapshot.has("critical") or snapshot.has("critical_roll") or snapshot.has("leech") or snapshot.has("burn_policy") or snapshot.has("burn_proliferation") or snapshot.has("shock_policy") or snapshot.has("hit_policy") or snapshot.has("area_impulse_policy") or snapshot.has("area_impulse_profile") or snapshot.has("conversion_profile") or snapshot.has("precise_technique_profile") or snapshot.has("freeze_policy") or snapshot.has("freeze_profile"):
 		return "施放快照已编译；必须从基础构筑快照重新编译"
 	var conversion_error: String = Conversion.snapshot_error(snapshot)
 	if not conversion_error.is_empty(): return conversion_error

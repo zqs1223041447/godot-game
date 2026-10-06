@@ -44,6 +44,9 @@ var burn_runtime=BurnRuntime.new()
 const ShockRules=preload("res://scripts/combat/shock_rules.gd")
 const ShockRuntime=preload("res://scripts/combat/shock_runtime.gd")
 var shock_runtime=ShockRuntime.new()
+const FrostLockRules = preload("res://scripts/combat/frost_lock_rules.gd")
+const FreezeRuntime = preload("res://scripts/combat/freeze_runtime.gd")
+var freeze_runtime = FreezeRuntime.new()
 var burn_trace:Array[Dictionary]=[]
 var _ember_advancing:=false
 var _ember_defer_deaths:=false
@@ -389,7 +392,7 @@ func restart_run(camp_plan: Dictionary = {}) -> void:
 	_player_evasion_entropy = 50.0
 	attack_admission_trace.clear()
 	burn_runtime.reset();burn_trace.clear();_ember_deaths.clear()
-	shock_runtime.reset()
+	shock_runtime.reset();freeze_runtime.reset()
 	for id: String in Data.SKILLS:
 		cooldowns[id] = 0.0
 	spawn_timer = 1.8
@@ -579,6 +582,7 @@ func _tick(delta: float) -> void:
 	_update_effects(delta)
 	_update_pickups(delta)
 	_start_enemy_telegraphs()
+	if not freeze_runtime.is_empty(): freeze_runtime.prune(elapsed)
 	if _world_mode=="map":_check_map_complete()
 	_autosave_timer += delta
 	if _autosave_timer >= 15.0:
@@ -888,7 +892,14 @@ func _encounter_failed(reason: String) -> void:
 func _update_enemies(delta: float) -> void:
 	# Existing actions advance against the complete source set before birth
 	# protection changes. Admission happens only at the end of the whole tick.
-	_advance_enemy_telegraphs(delta)
+	var frozen_prefixes: Dictionary = {}
+	if not freeze_runtime.is_empty():
+		var frame_start: float = _burn_step_start if _burn_step_active else elapsed - delta
+		var pauses: Dictionary = freeze_runtime.frame_prefixes(frame_start, delta)
+		assert(pauses.ok, "Validated freeze frame: " + str(pauses.reason))
+		if not pauses.ok: return
+		frozen_prefixes = pauses.by_id
+	_advance_enemy_telegraphs(delta, frozen_prefixes)
 	_advance_player_burn(elapsed)
 	if not alive:
 		return
@@ -904,7 +915,9 @@ func _update_enemies(delta: float) -> void:
 		enemy.damage_delay = maxf(0.0, float(enemy.get("damage_delay", 0.0)) - delta)
 		if float(enemy.damage_delay) <= 0.0:
 			enemy.shield = minf(float(enemy.get("max_shield", 0.0)), float(enemy.get("shield", 0.0)) + float(enemy.get("shield_recharge_rate",enemy.get("shield_regen",0.0))) * shield_recovery_time)
-		enemy.attack_timer = maxf(0.0, float(enemy.attack_timer) - delta)
+		var frozen_prefix: float = float(frozen_prefixes.get(int(enemy.id), 0.0))
+		var active_delta: float = maxf(0.0, delta - frozen_prefix) if frozen_prefix > 0.0 else delta
+		enemy.attack_timer = maxf(0.0, float(enemy.attack_timer) - active_delta)
 		enemy.flash = maxf(0.0, float(enemy.flash) - delta)
 		enemy.slow = maxf(0.0, float(enemy.slow) - delta)
 		enemy.spawn = maxf(0.0, float(enemy.spawn) - delta)
@@ -914,7 +927,10 @@ func _update_enemies(delta: float) -> void:
 		var performing: bool = not telegraphs.state_for(int(enemy.id)).is_empty()
 		var speed: float = float(enemy.speed) * (0.36 if float(enemy.slow) > 0 else 1.0)
 		var direction: Vector2 = Vector2.ZERO if performing else (player_pos - Vector2(enemy.pos)).normalized()
-		if not performing and _geometry.has_walls(): direction = _geometry.direction(enemy.pos,player_pos,float(enemy.radius),speed*delta)
+		if frozen_prefix > 0.0:
+			if active_delta <= 0.0: direction = Vector2.ZERO
+			elif not performing and _geometry.has_walls(): direction = _geometry.direction(enemy.pos,player_pos,float(enemy.radius),speed*active_delta)
+		elif not performing and _geometry.has_walls(): direction = _geometry.direction(enemy.pos,player_pos,float(enemy.radius),speed*delta)
 		var separation := Vector2.ZERO
 		var candidates: Array = enemy_spatial.query_circle(enemy.pos, float(enemy.radius) + 3.0) if use_spatial_separation else range(enemies.size())
 		separation_candidate_visits += candidates.size()
@@ -929,13 +945,18 @@ func _update_enemies(delta: float) -> void:
 			if distance > 0.1 and distance < separation_distance:
 				separation += offset / distance * (separation_distance - distance) * 2.5
 		var previous: Vector2 = enemy.pos
-		enemy.pos = Vector2(enemy.pos) + (direction * speed + separation + Vector2(enemy.knockback)) * delta
+		if frozen_prefix > 0.0:
+			# Freeze prevents autonomous motion, not external impulse or crowd separation.
+			enemy.pos = Vector2(enemy.pos) + direction * speed * active_delta + (separation + Vector2(enemy.knockback)) * delta
+		else:
+			enemy.pos = Vector2(enemy.pos) + (direction * speed + separation + Vector2(enemy.knockback)) * delta
 		enemy.pos = _clamp_to_arena(Vector2(enemy.pos), float(enemy.radius))
 		if _geometry.has_walls(): enemy.pos = _geometry.move(previous,enemy.pos,float(enemy.radius))
 		if use_spatial_separation:
 			enemy_spatial.update(enemy_index)
 		enemy.knockback = Vector2(enemy.knockback).move_toward(Vector2.ZERO, 520.0 * delta)
 		if not uses_telegraph and Vector2(enemy.pos).distance_to(player_pos) < PLAYER_RADIUS + float(enemy.radius) + 1.0 and _terrain_visible(enemy.pos,player_pos):
+			if not freeze_runtime.is_empty() and freeze_runtime.is_frozen(int(enemy.id), elapsed): continue
 			if float(enemy.attack_timer) <= 0.0:
 				enemy.attack_timer = 1.0 / maxf(0.2, float(enemy.get("attack_speed", 1.0 / 0.85)))
 				hit_player_components(Monsters.contact_components(enemy), int(enemy.id), ["hit","attack","melee"])
@@ -949,6 +970,7 @@ func _start_enemy_telegraphs() -> void:
 	for enemy: Dictionary in enemies:
 		if float(enemy.health) <= 0.0 or float(enemy.spawn) > 0.0 or float(enemy.attack_timer) > 0.0:
 			continue
+		if not freeze_runtime.is_empty() and freeze_runtime.is_frozen(int(enemy.id), elapsed): continue
 		if not telegraphs.state_for(int(enemy.id)).is_empty():
 			continue
 		var policy: Dictionary = Monsters.telegraph_policy(enemy)
@@ -961,9 +983,9 @@ func _start_enemy_telegraphs() -> void:
 			event_counts["enemy_telegraph_started"] = int(event_counts.get("enemy_telegraph_started", 0)) + 1
 
 
-func _advance_enemy_telegraphs(delta: float) -> void:
+func _advance_enemy_telegraphs(delta: float, frozen_prefixes: Dictionary = {}) -> void:
 	var sequence_batch:bool=telegraphs.has_timed_sequence_actions()
-	var events: Array[Dictionary] = telegraphs.advance(delta, enemies,sequence_batch or not burn_runtime.is_empty() or telegraphs.has_burning_actions())
+	var events: Array[Dictionary] = telegraphs.advance(delta, enemies,sequence_batch or not burn_runtime.is_empty() or telegraphs.has_burning_actions() or not frozen_prefixes.is_empty(), frozen_prefixes)
 	for event: Dictionary in events:
 		if not alive:
 			telegraphs.reset()
@@ -1439,6 +1461,7 @@ func _apply_damage_packet(enemy: Dictionary, packet: Dictionary, snapshot: Dicti
 	var shock_at:float=burn_at
 	if (not shock_runtime.is_empty() or snapshot.has("shock_policy")) and shock_at<shock_runtime.read_floor():return
 	if snapshot.has("shock_policy") and not ShockRules.policy_error(snapshot.shock_policy).is_empty():return
+	if snapshot.has("freeze_policy") and not FrostLockRules.policy_error(snapshot.freeze_policy).is_empty(): return
 	var ember_hit:bool=snapshot.has("burn_proliferation") and packet.get("role","") in ["direct","parent","child"] and packet.skill_id in ["meteor","tornado"]
 	if burn_runtime.has_ember_states() or ember_hit:
 		burn_at=_ember_event_time(burn_at,provenance)
@@ -1497,6 +1520,19 @@ func _apply_damage_packet(enemy: Dictionary, packet: Dictionary, snapshot: Dicti
 		var origin:Dictionary={"skill_id":str(packet.skill_id),"cast_id":int(provenance.get("cast_id",0)),"projectile_id":int(provenance.get("projectile_id",0)),"phase":str(provenance.get("phase","direct"))}
 		var attached:Dictionary=_attach_shock("monster",int(enemy.id),0,shock_at,snapshot.shock_policy,settlement,origin)
 		if attached.get("applied",false):record.shock_applied={"at":shock_at,"duration":float(snapshot.shock_policy.duration)}
+	if snapshot.has("freeze_policy"):
+		var total: float = float(settlement.get("damage_total", 0.0))
+		var loss: float = float(settlement.get("shield_spent", 0.0)) + float(settlement.get("health_lost", 0.0))
+		var actual_cold: float = loss * (float(settlement.get("components", {}).get("cold", 0.0)) / total) if total > 0.0 else 0.0
+		if FrostLockRules.eligible(packet, snapshot.freeze_policy, actual_cold, float(enemy.health) > 0.0):
+			# This phase boundary never undoes an enemy attack already resolved this tick.
+			var origin: Dictionary = {"skill_id":str(packet.skill_id), "cast_id":int(provenance.get("cast_id", 0)),
+				"projectile_id":int(provenance.get("projectile_id", 0)), "phase":str(provenance.get("phase", "direct"))}
+			var attached: Dictionary = freeze_runtime.apply(int(enemy.id), str(enemy.rarity), elapsed, snapshot.freeze_policy, origin)
+			assert(attached.ok, "Validated frost lock: " + str(attached.reason))
+			if attached.get("applied", false):
+				var frozen: Dictionary = freeze_runtime.state_for(int(enemy.id))
+				record.freeze_applied = {"at":elapsed, "frozen_until":frozen.frozen_until, "immune_until":frozen.immune_until}
 
 
 func _projectile_contact_admitted(shot: Dictionary,target_id: int) -> bool:
@@ -1582,6 +1618,7 @@ func _apply_enemy_resources(enemy:Dictionary,settlement:Dictionary)->bool:
 
 func _finish_enemy_death(enemy:Dictionary,legacy_particles:bool=true,at:float=-1.0,source_burn:Dictionary={})->void:
 	if float(enemy.health)>0.0:return
+	if not freeze_runtime.is_empty(): freeze_runtime.remove(int(enemy.id))
 	if not shock_runtime.is_empty():shock_runtime.remove("monster",int(enemy.id))
 	var ember_source:Dictionary=burn_runtime.status_for("monster",int(enemy.id)) if source_burn.is_empty() else source_burn
 	feedback_runtime.flush_target("monster", int(enemy.id))
@@ -1773,7 +1810,7 @@ func _finish_player_death()->void:
 	feedback_runtime.flush_target("player", 0)
 	trap_runtime.reset()
 	burn_runtime.reset()
-	shock_runtime.reset()
+	shock_runtime.reset();freeze_runtime.reset()
 	_ember_deaths.clear()
 	flask_runtime.clear_effects()
 	leech_runtime.clear()
@@ -1828,6 +1865,17 @@ func shock_statuses()->Array[Dictionary]:
 		result.append({"target_kind":status.target_kind,"target_id":status.target_id,"source_id":status.source_id,
 			"position":position,"remaining_seconds":status.remaining_seconds,"expires_at":status.expires_at,
 			"hit_damage_taken_increased":status.hit_damage_taken_increased})
+	return result
+
+
+func freeze_statuses() -> Array[Dictionary]:
+	var result: Array[Dictionary] = []
+	if freeze_runtime.is_empty(): return result
+	for enemy: Dictionary in enemies:
+		if float(enemy.health) <= 0.0: continue
+		var remaining: float = freeze_runtime.remaining_seconds(int(enemy.id), elapsed)
+		if remaining <= 0.0: continue
+		result.append({"target_kind":"monster", "target_id":int(enemy.id), "position":enemy.pos, "remaining_seconds":remaining})
 	return result
 
 
@@ -2237,7 +2285,7 @@ func _replace_build(next:RefCounted,path:String)->void:
 	trap_runtime.reset()
 	if state.changed.is_connected(_on_build_changed):state.changed.disconnect(_on_build_changed)
 	state.retire_profile()
-	shock_runtime.reset()
+	shock_runtime.reset();freeze_runtime.reset()
 	state=next;build_save_path=path;state.changed.connect(_on_build_changed)
 	_stats=state.get_stats();_progress_hud_dirty=false;_progress_save_dirty=false;_progress_save_requested=false
 	build_state_replaced.emit()
@@ -2541,7 +2589,7 @@ func _check_map_complete()->void:
 		if float(enemy.health)>0.0:living+=1
 	if _map_run.check_complete(living,monster_runtime.queue.size()):
 		projectile_runtime.cancel_all(projectiles);telegraphs.reset()
-		_world_mode="map_complete";_world_revision+=1;burn_runtime.reset();shock_runtime.reset();trap_runtime.reset()
+		_world_mode="map_complete";_world_revision+=1;burn_runtime.reset();shock_runtime.reset();freeze_runtime.reset();trap_runtime.reset()
 		var message:String="地图完成，可以返回城镇" if _is_test_profile() else "地图完成，返回正式城镇领取结算"
 		if not _is_test_profile():
 			_normal_completion_pending=true

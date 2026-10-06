@@ -589,7 +589,9 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	var loaded:=super.load_build(path)
 	if loaded and old_version>0 and old_version<Rules.VERSION:
 		migrated_from_legacy=true
-		if old_version == Rules.V45_VERSION:
+		if old_version == Rules.V46_VERSION:
+			migration_message="旧存档已原字节备份，霜锁辅助已加入正式宝石商人；仅辅助冰霜脉冲，与寒意延长辅助互斥。原物品、天赋和旅程保持，不额外赠物或赠点。"
+		elif old_version == Rules.V45_VERSION:
 			migration_message="旧存档已原字节备份，手套新增命中值前缀，戒指新增火焰、冰霜和闪电抗性后缀；旧装备保持原值，新掉落或主动制作才使用新词池，不额外赠物或赠点。"
 		elif old_version == Rules.V44_VERSION:
 			migration_message="旧存档已原字节备份，精准技艺已开放；最终命中值高于最大生命时攻击伤害总增40%，始终不能暴击。原物品和点数保持，不额外赠物或赠点。"

@@ -122,6 +122,7 @@ static func details(cast: Dictionary) -> String:
 	lines.append_array(leech_lines(cast))
 	lines.append_array(burn_lines(cast))
 	lines.append_array(shock_lines(cast))
+	lines.append_array(freeze_lines(cast))
 	lines.append_array(trap_lines(cast))
 	lines.append_array(inward_pull_lines(cast))
 	lines.append_array(conversion_lines(cast))
@@ -225,4 +226,15 @@ static func precise_technique_lines(cast: Dictionary) -> PackedStringArray:
 	lines.append("精准技艺：命中值 %.2f / 最大生命 %.2f · %s" % [float(profile.accuracy), float(profile.max_health), "门槛成立" if bool(profile.condition_met) else "门槛未成立"])
 	lines.append("本次攻击伤害额外提高 %.0f%%（已计入预估）" % (float(profile.attack_more) * 100.0) if bool(profile.get("attack_applies", false)) else "本次技能未获得精准技艺的攻击伤害加成。")
 	lines.append("命中值必须严格高于最大生命；门槛未成立也不能暴击，此天赋不绕过闪避。")
+	return lines
+
+
+static func freeze_lines(cast: Dictionary) -> PackedStringArray:
+	var lines := PackedStringArray()
+	var profile: Dictionary = cast.get("freeze_profile", {})
+	if not bool(cast.get("ok", false)) or not bool(profile.get("enabled", false)): return lines
+	var times: Dictionary = profile.duration_by_rarity
+	lines.append("霜锁：普通/魔法 %.2f 秒 · 稀有 %.2f 秒 · 首领 %.2f 秒" % [float(times.normal), float(times.rare), float(times.boss)])
+	lines.append("冻结不刷新；解冻后 %.2f 秒不能再被冻结，所有施法共享。" % float(profile.immunity_seconds))
+	lines.append("暂停自主移动与攻击进度，外力和持续伤害仍生效；不撤销已经发生的攻击。")
 	return lines
