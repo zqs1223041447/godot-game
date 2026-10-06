@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/a51485f153de/v064-iron-reflexes/docs/qa/v064-reference/check-reference.py", line 116, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/scratch/a51485f153de/v064-iron-reflexes/docs/qa/v064-reference/check-reference.py", line 104, in main
+    group[field]['full']+=1;group[field]['unsupported']-=1
+    ~~~~~^^^^^^^
+TypeError: string indices must be integers, not 'str'

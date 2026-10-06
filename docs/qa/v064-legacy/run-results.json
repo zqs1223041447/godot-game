@@ -1,0 +1,32 @@
+[
+  {
+    "label": "before",
+    "command": [
+      "/usr/local/bin/godot",
+      "--headless",
+      "--path",
+      "/workspace/scratch/a51485f153de/v063-final-source-snapshot",
+      "--script",
+      "/workspace/scratch/a51485f153de/v064-iron-reflexes/docs/qa/v064-legacy/harness.gd"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 3.1236489009897923,
+    "harness_sha256": "c7df69810925f7ea3ed0643837fe93623a331614aab7a94d343c93d1af2b964f",
+    "script_error": false
+  },
+  {
+    "label": "after",
+    "command": [
+      "/usr/local/bin/godot",
+      "--headless",
+      "--path",
+      "/workspace/scratch/a51485f153de/v064-iron-reflexes",
+      "--script",
+      "/workspace/scratch/a51485f153de/v064-iron-reflexes/docs/qa/v064-legacy/harness.gd"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 2.620915284991497,
+    "harness_sha256": "c7df69810925f7ea3ed0643837fe93623a331614aab7a94d343c93d1af2b964f",
+    "script_error": false
+  }
+]

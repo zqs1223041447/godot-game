@@ -1,0 +1,364 @@
+{
+	"actual_damage": {
+		"off": {
+			"cold": {
+				"chance": 0.71,
+				"hits": 71,
+				"per_hit": 30.0,
+				"total_damage": 2130.0
+			},
+			"fire": {
+				"chance": 0.71,
+				"hits": 71,
+				"per_hit": 24.0,
+				"total_damage": 1704.0
+			},
+			"lightning": {
+				"chance": 0.71,
+				"hits": 71,
+				"per_hit": 30.0,
+				"total_damage": 2130.0
+			},
+			"physical": {
+				"chance": 0.71,
+				"hits": 71,
+				"per_hit": 24.44987775061125,
+				"total_damage": 1735.9413202933972
+			}
+		},
+		"on": {
+			"cold": {
+				"chance": 1.0,
+				"hits": 100,
+				"per_hit": 30.0,
+				"total_damage": 3000.0
+			},
+			"fire": {
+				"chance": 1.0,
+				"hits": 100,
+				"per_hit": 24.0,
+				"total_damage": 2400.0
+			},
+			"lightning": {
+				"chance": 1.0,
+				"hits": 100,
+				"per_hit": 30.0,
+				"total_damage": 3000.0
+			},
+			"physical": {
+				"chance": 1.0,
+				"hits": 100,
+				"per_hit": 9.754907938056334,
+				"total_damage": 975.4907938056355
+			}
+		}
+	},
+	"burn_controls": [
+		{
+			"resources": [
+				165.84,
+				137.0,
+				0.0
+			],
+			"settlement": {
+				"actor": "player",
+				"components": {
+					"fire": 12.0
+				},
+				"damage_total": 12.0,
+				"details": [
+					{
+						"before_defense": 20.0,
+						"final": 12.0,
+						"resistance": 0.4,
+						"type": "fire"
+					}
+				],
+				"health_lost": 12.0,
+				"mitigated_components": {
+					"fire": 8.0
+				},
+				"ok": true,
+				"overkill": 0.0,
+				"raw_components": {
+					"fire": 20.0
+				},
+				"reason": "",
+				"remaining_health": 165.84,
+				"remaining_shield": 0.0,
+				"shield_spent": 0.0,
+				"stage": "burning"
+			},
+			"status": {
+				"last_time": 1.0,
+				"provenance": {
+
+				},
+				"raw_dps": 20.0,
+				"remaining": 2.0,
+				"source_id": 71,
+				"target_id": 0,
+				"target_kind": "player"
+			}
+		},
+		{
+			"resources": [
+				165.84,
+				137.0,
+				0.0
+			],
+			"settlement": {
+				"actor": "player",
+				"components": {
+					"fire": 12.0
+				},
+				"damage_total": 12.0,
+				"details": [
+					{
+						"before_defense": 20.0,
+						"final": 12.0,
+						"resistance": 0.4,
+						"type": "fire"
+					}
+				],
+				"health_lost": 12.0,
+				"mitigated_components": {
+					"fire": 8.0
+				},
+				"ok": true,
+				"overkill": 0.0,
+				"raw_components": {
+					"fire": 20.0
+				},
+				"reason": "",
+				"remaining_health": 165.84,
+				"remaining_shield": 0.0,
+				"shield_spent": 0.0,
+				"stage": "burning"
+			},
+			"status": {
+				"last_time": 1.0,
+				"provenance": {
+
+				},
+				"raw_dps": 20.0,
+				"remaining": 2.0,
+				"source_id": 71,
+				"target_id": 0,
+				"target_kind": "player"
+			}
+		}
+	],
+	"checks": 191,
+	"compiled_skills": [
+		"basic",
+		"group_000001",
+		"group_000002",
+		"group_000003",
+		"group_000004",
+		"group_000005",
+		"group_000006",
+		"group_000007",
+		"group_000008"
+	],
+	"failures": 0,
+	"hybrid_branch": [
+		"24377",
+		"35568"
+	],
+	"off_stats": {
+		"accuracy": 371.0,
+		"accuracy_increased": 0.0,
+		"additional_skill_slots": 0.0,
+		"area_increased": 0.0,
+		"area_size_increased": 0.0,
+		"armour": 127.2,
+		"armour_increased": 0.06,
+		"attack_added_fire": 0.0,
+		"attack_added_physical": 0.0,
+		"attack_crit_chance_increased": 0.0,
+		"attack_elemental_increased": 0.0,
+		"attack_life_leech": 0.0,
+		"attack_mana_leech": 0.0,
+		"attack_physical_increased": 0.0,
+		"attack_speed": 1.853,
+		"attack_speed_increased": 0.09,
+		"chaos_increased": 0.0,
+		"cold_increased": 0.0,
+		"cold_resistance": 0.25,
+		"crit_base_chance": 0.05,
+		"crit_base_multiplier": 1.5,
+		"crit_chance_increased": 0.0,
+		"crit_multiplier_add": 0.0,
+		"damage": 26.0,
+		"damage_taken_from_mana_before_life": 0.0,
+		"damaging_ailments_faster": 0.0,
+		"dexterity": 123.0,
+		"elemental_increased": 0.0,
+		"evasion": 604.5,
+		"evasion_increased": 0.06,
+		"fire_dot_multiplier_add": 0.0,
+		"fire_increased": 0.0,
+		"fire_resistance": 0.4,
+		"flask_charges_gained_increased": 0.0,
+		"flask_life_recovery_increased": 0.0,
+		"flask_mana_recovery_increased": 0.0,
+		"global_increased": 0.0,
+		"intelligence": 14.0,
+		"life_leech_max_rate_increased": 0.0,
+		"life_leech_rate_increased": 0.0,
+		"life_regen": 0.0,
+		"life_regen_percent": 0.0,
+		"lightning_increased": 0.0,
+		"lightning_resistance": 0.25,
+		"mana_cost_efficiency_increased": 0.0,
+		"mana_cost_increased": 0.0,
+		"mana_leech_max_rate_increased": 0.0,
+		"mana_leech_rate_increased": 0.0,
+		"mana_regen": 12.0,
+		"mana_regen_increased": 0.0,
+		"max_health": 177.84,
+		"max_mana": 137.0,
+		"max_shield": 60.6,
+		"maximum_cold_resistance_add": 0.0,
+		"maximum_fire_resistance_add": 0.0,
+		"maximum_lightning_resistance_add": 0.0,
+		"melee_area_size_increased": 0.0,
+		"melee_crit_chance_increased": 0.0,
+		"melee_crit_multiplier_add": 0.0,
+		"melee_physical_increased": 0.04,
+		"move_speed": 240.0,
+		"move_speed_increased": 0.0,
+		"physical_attack_life_leech": 0.0,
+		"physical_attack_mana_leech": 0.0,
+		"physical_increased": 0.0,
+		"projectile_attack_crit_chance_increased": 0.0,
+		"projectile_attack_crit_multiplier_add": 0.0,
+		"projectile_count": 0.0,
+		"projectile_increased": 0.0,
+		"projectile_speed_increased": 0.0,
+		"resolute_technique": 0.0,
+		"shield_recharge_delay": 4.0,
+		"shield_recharge_rate": 13.0,
+		"shield_recharge_rate_increased": 0.0,
+		"shield_recharge_start_faster": 0.0,
+		"shield_regen": 13.0,
+		"spell_added_cold": 0.0,
+		"spell_added_lightning": 0.0,
+		"spell_area_size_increased": 0.0,
+		"spell_crit_chance_increased": 0.0,
+		"spell_crit_multiplier_add": 0.0,
+		"spell_increased": 0.0,
+		"strength": 23.0
+	},
+	"on_stats": {
+		"accuracy": 371.0,
+		"accuracy_increased": 0.0,
+		"additional_skill_slots": 0.0,
+		"area_increased": 0.0,
+		"area_size_increased": 0.0,
+		"armour": 620.1,
+		"armour_increased": 0.06,
+		"attack_added_fire": 0.0,
+		"attack_added_physical": 0.0,
+		"attack_crit_chance_increased": 0.0,
+		"attack_elemental_increased": 0.0,
+		"attack_life_leech": 0.0,
+		"attack_mana_leech": 0.0,
+		"attack_physical_increased": 0.0,
+		"attack_speed": 1.853,
+		"attack_speed_increased": 0.09,
+		"chaos_increased": 0.0,
+		"cold_increased": 0.0,
+		"cold_resistance": 0.25,
+		"crit_base_chance": 0.05,
+		"crit_base_multiplier": 1.5,
+		"crit_chance_increased": 0.0,
+		"crit_multiplier_add": 0.0,
+		"damage": 26.0,
+		"damage_taken_from_mana_before_life": 0.0,
+		"damaging_ailments_faster": 0.0,
+		"dexterity": 123.0,
+		"elemental_increased": 0.0,
+		"evasion": 0.0,
+		"evasion_converted_to_armour": 492.90000000000003,
+		"evasion_increased": 0.06,
+		"fire_dot_multiplier_add": 0.0,
+		"fire_increased": 0.0,
+		"fire_resistance": 0.4,
+		"flask_charges_gained_increased": 0.0,
+		"flask_life_recovery_increased": 0.0,
+		"flask_mana_recovery_increased": 0.0,
+		"global_increased": 0.0,
+		"intelligence": 14.0,
+		"iron_reflexes": 1.0,
+		"life_leech_max_rate_increased": 0.0,
+		"life_leech_rate_increased": 0.0,
+		"life_regen": 0.0,
+		"life_regen_percent": 0.0,
+		"lightning_increased": 0.0,
+		"lightning_resistance": 0.25,
+		"mana_cost_efficiency_increased": 0.0,
+		"mana_cost_increased": 0.0,
+		"mana_leech_max_rate_increased": 0.0,
+		"mana_leech_rate_increased": 0.0,
+		"mana_regen": 12.0,
+		"mana_regen_increased": 0.0,
+		"max_health": 177.84,
+		"max_mana": 137.0,
+		"max_shield": 60.6,
+		"maximum_cold_resistance_add": 0.0,
+		"maximum_fire_resistance_add": 0.0,
+		"maximum_lightning_resistance_add": 0.0,
+		"melee_area_size_increased": 0.0,
+		"melee_crit_chance_increased": 0.0,
+		"melee_crit_multiplier_add": 0.0,
+		"melee_physical_increased": 0.04,
+		"move_speed": 240.0,
+		"move_speed_increased": 0.0,
+		"physical_attack_life_leech": 0.0,
+		"physical_attack_mana_leech": 0.0,
+		"physical_increased": 0.0,
+		"projectile_attack_crit_chance_increased": 0.0,
+		"projectile_attack_crit_multiplier_add": 0.0,
+		"projectile_count": 0.0,
+		"projectile_increased": 0.0,
+		"projectile_speed_increased": 0.0,
+		"resolute_technique": 0.0,
+		"shield_recharge_delay": 4.0,
+		"shield_recharge_rate": 13.0,
+		"shield_recharge_rate_increased": 0.0,
+		"shield_recharge_start_faster": 0.0,
+		"shield_regen": 13.0,
+		"spell_added_cold": 0.0,
+		"spell_added_lightning": 0.0,
+		"spell_area_size_increased": 0.0,
+		"spell_crit_chance_increased": 0.0,
+		"spell_crit_multiplier_add": 0.0,
+		"spell_increased": 0.0,
+		"strength": 23.0
+	},
+	"route": [
+		"50986",
+		"39725",
+		"63649",
+		"49806",
+		"6580",
+		"19711",
+		"20010",
+		"23471",
+		"5237",
+		"6363",
+		"29937",
+		"8544",
+		"10661"
+	],
+	"scope": "One bounded actual-main/model fixture; lawful level budget fixture loaded through store; source allocation, equipment and combat use actual APIs. No screenshots or historical full simulation.",
+	"sections": {
+		"actual_burn_control": 14,
+		"actual_damage_and_evasion": 64,
+		"failed_and_successful_transactions": 42,
+		"prepare_real_model": 42,
+		"readonly_cache_and_equipment": 27
+	}
+}

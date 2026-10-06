@@ -125,6 +125,7 @@ static func collect() -> Dictionary:
 	result["elemental_resistance_caps"] = elemental_resistance_cap_examples()
 	result["elemental_defense_affixes"] = elemental_defense_affix_examples()
 	result["defense_rating_affixes"] = defense_rating_affix_examples()
+	result["iron_reflexes"] = iron_reflexes_examples()
 	result["resolute_technique"] = resolute_technique_examples()
 	result["forgeblade"] = forgeblade_examples()
 	result["melee_basic"] = melee_basic_examples(result.forgeblade)
@@ -2059,6 +2060,96 @@ static func defense_rating_affix_examples() -> Dictionary:
 		"accuracy_scope":"当前自然怪accuracy为100，等级波次、稀有度与地图增伤不提高accuracy；不推断未来怪物曲线",
 		"migration":"schema39严格验证旧38并原字节备份，只升级版本；旧物品、UID、点数、货币与旅程保持，不补词或重掷。源政策仍38，schema37/38映射旧装备词汇37",
 		"legacy_scope":"新canonical_v39只替换原10%防御入口；其余六分池权重与顺序保持。显式旧defense、defense_v37、canonical_v37及设备词汇1–38保留历史输出、拒绝语义与随机状态"}
+
+
+## v64: actual legal equipment and complete canonical candidates, no user saves.
+static func _iron_reflexes_model(route: Array, affix_ids: Array, level: int, enabled: bool) -> Dictionary:
+	var model := Canonical.new()
+	var candidate: Dictionary = model.snapshot()
+	var previous: String = str(model.equipped_items().get("body_armour", ""))
+	if not previous.is_empty(): candidate.locations[previous] = model.first_bag_position(previous)
+	var uid: String = "gear_%06d" % int(candidate.next_item_serial)
+	var affixes: Array = []
+	for id: String in affix_ids:
+		var tier: Dictionary = Equipment.affix_definition(id).tiers[-1]
+		affixes.append({"id":id, "tier":int(tier.tier), "value":int(tier.max)})
+	var instance: Dictionary = {"id":uid, "base_id":"emberhide_vest", "rarity":"rare", "item_level":16, "affixes":affixes}
+	assert(Equipment.validate_instance(instance))
+	candidate.items[uid] = Canonical.Items.wrap_equipment(instance)
+	candidate.locations[uid] = {"kind":"equipment", "slot_id":"body_armour"}
+	candidate.next_item_serial += 1
+	candidate.progress = {"level":level, "xp":0}
+	candidate.talents.class_id = 4
+	candidate.talents.allocated = route.duplicate()
+	if enabled: candidate.talents.allocated.append("10661")
+	candidate.talents.normal_points = level + 5 - candidate.talents.allocated.size()
+	assert(Canonical.Rules.reason(candidate).is_empty() and SourceTree.reason(candidate).is_empty())
+	model._accept_memory(candidate)
+	var stats: Dictionary = model.get_stats()
+	var profile: Dictionary = model.get_defense_conversion_profile()
+	assert(profile.enabled == enabled and model.save_attempts == 0)
+	var hits: Dictionary = {}
+	for amount: float in [20.0, 100.0, 500.0]:
+		hits[str(int(amount))] = Defense.incoming_source_hit({"physical":amount}, stats, 0.0, 10000.0)
+	var elements: Dictionary = {}
+	for type: String in ["fire", "cold", "lightning"]:
+		elements[type] = Defense.incoming_source_hit({type:100.0}, stats, 0.0, 10000.0)
+	return {"instance":instance, "definition":Equipment.definition(instance), "class_id":4, "level":level,
+		"allocated":candidate.talents.allocated, "points_spent":candidate.talents.allocated.size()-1,
+		"points_remaining":candidate.talents.normal_points, "stats":stats, "profile":profile,
+		"shared_increased":SourceTree._shared_defense_increased(candidate), "physical_hits":hits, "elemental_hits":elements,
+		"burn":Defense.incoming_burn(100.0, float(stats.fire_resistance), 0.0, 10000.0),
+		"enemy_accuracy":float(AttackRules.monster_profile(0).accuracy),
+		"enemy_hit_chance":AttackRules.chance(float(AttackRules.monster_profile(0).accuracy), float(stats.evasion)),
+		"whole_build_valid":true, "save_attempts":model.save_attempts}
+
+
+static func iron_reflexes_examples() -> Dictionary:
+	var route: Array = ["50986", "39725", "63649", "49806", "6580", "19711", "20010", "23471", "5237", "6363", "29937", "8544"]
+	var branch: Array = ["24377", "35568"]
+	var dual: Array = ["ironhide", "mistweave", "rootwell", "emberward", "rimeward", "stormward"]
+	var legacy: Array = ["rootwell", "emberward", "rimeward", "stormward"]
+	var examples: Dictionary = {}
+	for spec: Dictionary in [
+		{"id":"dual_ratings", "route":route, "affixes":dual, "level":8},
+		{"id":"dual_ratings_hybrid", "route":route+branch, "affixes":dual, "level":10},
+		{"id":"resources_hybrid", "route":route+branch, "affixes":legacy, "level":10}]:
+		var before: Dictionary = _iron_reflexes_model(spec.route, spec.affixes, spec.level, false)
+		var after: Dictionary = _iron_reflexes_model(spec.route, spec.affixes, spec.level, true)
+		assert(before.instance == after.instance and before.stats.accuracy == after.stats.accuracy)
+		for type: String in before.elemental_hits:
+			assert(before.elemental_hits[type].damage_total == after.elemental_hits[type].damage_total)
+		assert(before.burn == after.burn)
+		var base_armour: float = float(before.definition.stats.get("armour", 0.0))
+		var base_evasion: float = 15.0 + float(before.definition.stats.get("evasion", 0.0))
+		var ia: float = float(before.stats.armour_increased)
+		var ie: float = float(before.stats.evasion_increased)
+		var shared: float = float(after.shared_increased)
+		assert(is_equal_approx(before.stats.armour, base_armour*(1.0+ia)))
+		assert(is_equal_approx(before.stats.evasion, base_evasion*(1.0+ie+floorf(before.stats.dexterity/5.0)*0.01)))
+		assert(is_equal_approx(after.profile.armour, base_armour*(1.0+ia)+base_evasion*(1.0+ia+ie-shared)))
+		examples[spec.id] = {"before":before, "after":after,
+			"inputs":{"base_armour":base_armour, "base_evasion":base_evasion, "armour_increased":ia, "evasion_increased":ie, "shared_increased":shared}}
+	var node: Dictionary = SourceTree.Data.node("10661")
+	var effect: Dictionary = SourceTree.node_effect("10661", 0, 40)
+	var old: Dictionary = SourceTree.node_effect("10661", 0, 39)
+	assert(effect.status == "full" and old.status == "unsupported")
+	return {"minimum_save_version":SourceTree.IRON_REFLEXES_SAVE_VERSION, "source_policy":SourceTree.CURRENT_SAVE_VERSION,
+		"equipment_vocabulary":Equipment.CURRENT_VOCABULARY, "source_version":"3.29.1", "source_sha256":SourceTree.Data.SOURCE_SHA256,
+		"node":{"id":"10661", "name":node.name, "source_lines":node.stats, "execution":effect, "legacy_execution":old},
+		"formula":"A0 × (1 + IA) + E0 × (1 + IA + IE − H)", "evasion":0.0,
+		"hybrid_source":{"id":"35568", "source_lines":SourceTree.Data.node("35568").stats, "execution":SourceTree.node_effect("35568")},
+		"route":route+["10661"], "hybrid_branch":branch, "examples":examples, "disabled_profile":Canonical.new().get_defense_conversion_profile(),
+		"new_images":[], "producer":"EquipmentCatalog → validated CanonicalGameState.get_stats/get_defense_conversion_profile → AttackHitRules / DefenseRules",
+		"base_scope":"A0、E0合计角色原始基础、已装备物品、珠宝与天赋固定值；本组实际装备和路线只有胸甲提供护甲/闪避固定值，角色基础闪避为15",
+		"shared_rule":"H只扣除同一原始词句同时提供护甲与闪避提高的部分；不同原句的两个提高即使数值相同也分别生效，不能按两总量较小值去重",
+		"dexterity_rule":"取消敏捷对闪避的提高；敏捷仍每点提供2命中，保留后续命中提高。最终闪避为0，沿既有攻击命中规则判定",
+		"scope":"护甲只降低物理命中；元素命中与已存在的燃烧不会因转换护甲而减伤。开启后失去闪避，不能把护甲增幅当成总体生存提升",
+		"example_scope":"同一合法决斗者逐行比较最后1点，完整保留沿途属性与其余默认装备。稀有胸甲为真实合法4或6词缀；既有双防御前缀仍与生命、魔力、护盾争三个前缀位，不新增物品或词族",
+		"budget_scope":"生产Model导出的静态装备/天赋与单次命中预算；命中示例设当前护盾0、生命10000，不包含频率、走位或实战存活时长",
+		"resource_rule":"点选、退款、换装只重算派生数值，不补当前生命、护盾、魔力，也不重置命中熵；C页转换贡献已计入最终护甲，不再相加",
+		"migration":"schema40严格校验旧39并保留原文件字节备份，只升级版本；装备词汇与掉落池仍39，不赠物、不赠点、不改UID或重掷。旧39注入10661拒绝",
+		"complete_gate":"仅10661完整原句接通；含其他未实现效果的混合节点仍不可分配；未分配时保留旧公式与字段，不新增计时器、战斗扫描或随机数"}
 
 
 static func mana_guard_examples() -> Dictionary:

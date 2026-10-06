@@ -1,0 +1,443 @@
+{
+  "base_commit": "76e2abccf533cd31c20daea92c0e05b02c0980af",
+  "stage_commit": "b215d86435d464127cb9b164c6134983a4a05cd1",
+  "total_checks": 7445,
+  "counts": {
+    "source_and_formula": 7045,
+    "strict_migration": 198,
+    "actual_main_consumers": 191,
+    "root_character_text": 11
+  },
+  "count_scope": "Final successful new functional assertions only; failed attempts and paired285+285 legacy assertions are separate, not added twice",
+  "save_schema": 40,
+  "source_policy": 40,
+  "equipment_vocabulary": 39,
+  "newly_full_nodes": [
+    "10661"
+  ],
+  "full_standard_node_count": 771,
+  "legacy": {
+    "bin": {
+      "same": true,
+      "before_bytes": 8844304,
+      "after_bytes": 8844304,
+      "before_sha256": "bc9d401e91c165aafa195f81584f4391ec149b3f5a7aa6587c99b2e100e8f094",
+      "after_sha256": "bc9d401e91c165aafa195f81584f4391ec149b3f5a7aa6587c99b2e100e8f094"
+    },
+    "save": {
+      "same": false,
+      "before_bytes": 12818,
+      "after_bytes": 12818,
+      "before_sha256": "522a4b0dbede45f99c9e09d44d7f32076d52a535295f49f168fc5109537e58e2",
+      "after_sha256": "dd10639bd977e80acd6f4e92163abf39deb091851203efc5d5a96845f0f8f14d"
+    },
+    "projected-save.json": {
+      "same": true,
+      "before_bytes": 12802,
+      "after_bytes": 12802,
+      "before_sha256": "ef2b686238753c973b7b75bab6f00a247870dd64c02cd8c9ac720ea68c76de79",
+      "after_sha256": "ef2b686238753c973b7b75bab6f00a247870dd64c02cd8c9ac720ea68c76de79"
+    },
+    "raw_version_token_only": true,
+    "projection": "Only serialized build version39 ->40; no stats/combat/resources/RNG projection"
+  },
+  "font": {
+    "runtime_files": 179,
+    "required": 1652,
+    "mapped": 1657,
+    "unchanged_from_v63": {
+      "assets/fonts/arena_sans.otf": "e0a3131d572b7f804e9beecf64dd0c9564af678815ebce1b40039c634b56580c",
+      "assets/fonts/coverage_manifest.json": "6871aeb8da9e76cc8eab6e04cb5e55e25b5e17df3583d4a2e266ebcd14341d2c"
+    },
+    "seconds": 92.94409292499768,
+    "method": "Fresh current literal/cmap scan; font bytes and its previously verified old glyphs unchanged",
+    "fallback_symbols": [
+      {
+        "char": "◈",
+        "codepoint": "U+25C8",
+        "locations": [
+          "scripts/game_hud.gd:444",
+          "scripts/passive_panel.gd:329"
+        ]
+      },
+      {
+        "char": "⌁",
+        "codepoint": "U+2301",
+        "locations": [
+          "scripts/passive_panel.gd:330"
+        ]
+      }
+    ],
+    "missing": [],
+    "all_required_han_covered": true,
+    "no_font_changes_required": true
+  },
+  "known_boundaries": [
+    "Source test first attempt had fixture Array typing comparison and rare-item affix-count issues; final full scoped rerun passed. Production unchanged.",
+    "Migration first attempt incorrectly read absent disabled iron_reflexes stats key; final uses get default, all198 passed. Production unchanged.",
+    "Gameplay first parse required explicit float local type in the new fixture; corrected test ran191/0. Production unchanged.",
+    "Root11 text checks and source/main tests are headless. No separate native visual gate or Windows hardware benchmark.",
+    "Current source39 ->40 migration is intentional; unallocated derived stats/combat/RNG and disk bytes beyond version token remain exactly equal.",
+    "No defense pool, monster growth, economy, random sampling or damage-calculation formula outside conversion changes. Physical mitigation and evasion keep existing consumers."
+  ],
+  "reports": {
+    "docs/qa/v064-source/attempt-01-receipt.json": {
+      "bytes": 423,
+      "sha256": "a1119debe20b1a9677c1765b1dd04d0d3086377609d92dd0f690c4a558a901bd"
+    },
+    "docs/qa/v064-source/execution-receipt.json": {
+      "bytes": 487,
+      "sha256": "895d3e5cad64c2de164bfdf7461a21b5f251c92a79e27e1599c548b16379f547"
+    },
+    "docs/qa/v064-source/manifest.json": {
+      "bytes": 2956,
+      "sha256": "0ceb824672df5050a0583332575fd837db96a49dae140c128c12594832d38f20"
+    },
+    "docs/qa/v064-source/results.json": {
+      "bytes": 4804,
+      "sha256": "f5b660484f9300ef7c2d147f92d0cecf2aa53af4fd2e4178a993e1146b292165"
+    },
+    "docs/qa/v064-source/tested-input-sha256.json": {
+      "bytes": 2781,
+      "sha256": "c2ce4d119da3d773f2b91bd2b872fff7fd4398cc73f2e14a1907bc66a329b1d1"
+    },
+    "docs/qa/v064-migration/20261006T023946429171Z-capture39-attempt.json": {
+      "bytes": 57335,
+      "sha256": "b613ac6901dfb1fbc1111984d8d93b39f720541d879b07d67ec5c80203d85831"
+    },
+    "docs/qa/v064-migration/20261006T024210249055Z-migration-attempt.json": {
+      "bytes": 57267,
+      "sha256": "a93950e74c86824769a53b619289a972b50b01cf699a611a6a69d1fb520e5f15"
+    },
+    "docs/qa/v064-migration/20261006T024210249055Z-migration-checks.json": {
+      "bytes": 267,
+      "sha256": "caa2d258085298cb279070ac49720ea87c1632e22637c86edb872c0fdf37731b"
+    },
+    "docs/qa/v064-migration/20261006T024235835781Z-migration-attempt.json": {
+      "bytes": 57267,
+      "sha256": "762f9c77c3b67d423ca5ccc638aa6e72945e972c79226acadb7f5f724c0399df"
+    },
+    "docs/qa/v064-migration/20261006T024235835781Z-migration-checks.json": {
+      "bytes": 938,
+      "sha256": "a7f2a37998b2a6580990b7f0c64c6d4416d44696d8d94a54203f7a094d3b30b1"
+    },
+    "docs/qa/v064-migration/equipment-identity-evidence.json": {
+      "bytes": 5187,
+      "sha256": "c42a237744cf41d08bddae4d923234f33af261594184baf06ad07f1a036197df"
+    },
+    "docs/qa/v064-migration/fixtures/manifest.json": {
+      "bytes": 887,
+      "sha256": "677688061313ebec12c4bde27f814354ae08c89d2d2342c9f24fe3221db53d4f"
+    },
+    "docs/qa/v064-migration/fixtures/v39-frozen-v063.json": {
+      "bytes": 20620,
+      "sha256": "6c64f8498acbbe9fac490d6e012923a2588b0129b55e24fec3433ec796c9c056"
+    },
+    "docs/qa/v064-migration/fixtures/v39-vocabulary-oracle.json": {
+      "bytes": 102276,
+      "sha256": "3e0789a182261a72d0881fc5a70e62631f21bf20d26bf01e38b0b9397c905b3e"
+    },
+    "docs/qa/v064-migration/frozen-release-evidence.json": {
+      "bytes": 2931,
+      "sha256": "bd0928562f1da1755a3b714c8a1d1c93131a4645c6c41537e60fe886be64f728"
+    },
+    "docs/qa/v064-migration/unchanged-equipment-evidence.json": {
+      "bytes": 535,
+      "sha256": "528eb50153d787d74ab49b8a9cf4ee42a0d0c7ffa6412308cfca8c1c2b6892ab"
+    },
+    "docs/qa/v064-gameplay/exit-statuses.json": {
+      "bytes": 230,
+      "sha256": "2b5833c8ebe08d1c9907c0c837cd3095f803e2b3cb628b3a1a8fa05bde5f12a3"
+    },
+    "docs/qa/v064-gameplay/result.json": {
+      "bytes": 8690,
+      "sha256": "5f499c0582347cf188da1a230dea20005d2a6aaabc452bb8ae1fc2abcc1ce8af"
+    },
+    "docs/qa/v064-legacy/after-inputs.json": {
+      "bytes": 18571,
+      "sha256": "bfe82430f3e197597f2a6ee0146a042a921de90b947442984bb70c35a44aa6d3"
+    },
+    "docs/qa/v064-legacy/after.json": {
+      "bytes": 1057,
+      "sha256": "d52edfe7742e398e36c7c0460781a13dfa6945f795054faf68243ea66ca55411"
+    },
+    "docs/qa/v064-legacy/after.projected-save.json": {
+      "bytes": 12802,
+      "sha256": "ef2b686238753c973b7b75bab6f00a247870dd64c02cd8c9ac720ea68c76de79"
+    },
+    "docs/qa/v064-legacy/before-inputs.json": {
+      "bytes": 18344,
+      "sha256": "76187849b0b914e67c31c2e7912b743a56898c1c227418276851553d903e7f05"
+    },
+    "docs/qa/v064-legacy/before.json": {
+      "bytes": 1057,
+      "sha256": "47472f8b0dc32a57d10b35eb30f1bb24fd2b32049c5d4dac2dd2369bdf4e7b81"
+    },
+    "docs/qa/v064-legacy/before.projected-save.json": {
+      "bytes": 12802,
+      "sha256": "ef2b686238753c973b7b75bab6f00a247870dd64c02cd8c9ac720ea68c76de79"
+    },
+    "docs/qa/v064-legacy/comparison.json": {
+      "bytes": 946,
+      "sha256": "57eaefe16ae2137642907bfac50020020025b71070a6edebf667dbb5f9946021"
+    },
+    "docs/qa/v064-legacy/run-results.json": {
+      "bytes": 947,
+      "sha256": "ae09be17436f90da92cbea9c086de2b1806f3f150971bca37dc2624c283da539"
+    },
+    "docs/qa/v064-integration/font-cmap.json": {
+      "bytes": 863,
+      "sha256": "f75f93a810515661948d50b643ff45da24d36c61fd39bc61e3254520cd21d69d"
+    },
+    "docs/qa/v064-integration/initial-import-result.json": {
+      "bytes": 231,
+      "sha256": "2e89ed6758a9c7a65c7f987836dc93b79d8cd4f26663ec47df419174903f13f2"
+    },
+    "docs/qa/v064-integration/probe-parse-result.json": {
+      "bytes": 1076,
+      "sha256": "d899f0e25c97d053c59df70c87f3f4cd8a19582a47dac79581f9ae8f6d232859"
+    },
+    "docs/qa/v064-reference/build-input-sha256.json": {
+      "bytes": 511,
+      "sha256": "ddda89f508e712e81f9a1fca630edff69d2e0147010ff53bb43185de0d19e0a3"
+    },
+    "docs/qa/v064-reference/build-result.json": {
+      "bytes": 245,
+      "sha256": "07e8ba5abe2673cc3d65472e5b24260ce2360a1394d336fd70687528b90ea39c"
+    },
+    "docs/qa/v064-reference/checked-focused-reference-input-sha256.json": {
+      "bytes": 432,
+      "sha256": "797ae5765605f768a7f76013c186dfaeb95fc89f9188a980e955c57729ad233d"
+    },
+    "docs/qa/v064-reference/checked-focused-reference-result.json": {
+      "bytes": 202,
+      "sha256": "4ed9e70347cbff03423687e49b8ec970222f0fb7b8ccfd8d50af2b5d299b32d9"
+    },
+    "docs/qa/v064-reference/corrected-build-check-input-sha256.json": {
+      "bytes": 511,
+      "sha256": "cca61fe31788eae104a3ac4f83fac6eceacd858a4f1974c6093e44d9004d167f"
+    },
+    "docs/qa/v064-reference/corrected-build-check-result.json": {
+      "bytes": 200,
+      "sha256": "3a733502ac81885b98b2b6514cbe1596ca281c8a5b60f935f4fee5cbbe554e41"
+    },
+    "docs/qa/v064-reference/corrected-build-input-sha256.json": {
+      "bytes": 511,
+      "sha256": "cca61fe31788eae104a3ac4f83fac6eceacd858a4f1974c6093e44d9004d167f"
+    },
+    "docs/qa/v064-reference/corrected-build-result.json": {
+      "bytes": 185,
+      "sha256": "85e4326c1323ea2b674d4bf988d81f36209c95195579ef40e3fcdced79b2e1db"
+    },
+    "docs/qa/v064-reference/corrected-godot-export-input-sha256.json": {
+      "bytes": 20980,
+      "sha256": "83c59e8c3bcc05b990292e0c1a9d9fc497260dd74478e9eef7845ee1f90943d7"
+    },
+    "docs/qa/v064-reference/corrected-godot-export-result.json": {
+      "bytes": 312,
+      "sha256": "bebce8ba8796ba74cf59cbdbfd4d8f5673725a7aadcbf3937115979cd762b662"
+    },
+    "docs/qa/v064-reference/final-build-check-input-sha256.json": {
+      "bytes": 511,
+      "sha256": "d46227720a4a3ff74056ee592639394fcbd65ec66e365c47d609d71a42b94e48"
+    },
+    "docs/qa/v064-reference/final-build-check-result.json": {
+      "bytes": 200,
+      "sha256": "234d0430661b6af9521dade3245a9e36439ff8c463a38054980223e9269aec93"
+    },
+    "docs/qa/v064-reference/final-build-input-sha256.json": {
+      "bytes": 511,
+      "sha256": "d46227720a4a3ff74056ee592639394fcbd65ec66e365c47d609d71a42b94e48"
+    },
+    "docs/qa/v064-reference/final-build-result.json": {
+      "bytes": 185,
+      "sha256": "44ad09820b36dbc21d709c21b883c78b092e560c60ea2d575b39605f9d3abe8f"
+    },
+    "docs/qa/v064-reference/final-focused-reference-input-sha256.json": {
+      "bytes": 432,
+      "sha256": "377ad32a66e4b8ce609bf154a0c55035482f61e696c6651363ae6ba372c010ce"
+    },
+    "docs/qa/v064-reference/final-focused-reference-result.json": {
+      "bytes": 246,
+      "sha256": "76277fa05f41a665edb6d703453db6aaaf62b534759c65fd1518e5d1e3ce118e"
+    },
+    "docs/qa/v064-reference/focused-reference-input-sha256.json": {
+      "bytes": 432,
+      "sha256": "42056b852a958180c6280990864c93563a7d06f54fca6dbaf5bec7a12ffd488e"
+    },
+    "docs/qa/v064-reference/focused-reference-result.json": {
+      "bytes": 261,
+      "sha256": "904f9c48b487cbec945e05cc6aa623263df4e9ae5eb2d195b69c51902fa5bc5d"
+    },
+    "docs/qa/v064-reference/godot-export-input-sha256.json": {
+      "bytes": 20980,
+      "sha256": "2ee609732e5c21cb86e9ea96bb017155fecd6a0b080d872d6385e4d6fb09f41e"
+    },
+    "docs/qa/v064-reference/godot-export-result.json": {
+      "bytes": 369,
+      "sha256": "d7db7f0299a5cf132978d3b8aa49709fa6e09e81940b7e99adf5dc526a670de2"
+    },
+    "docs/qa/v064-reference/v063-preservation.json": {
+      "bytes": 26903,
+      "sha256": "7764b77c6f3c6e2d336ba10b757a45831253fa91cadc38231768fb1fa60ae1db"
+    },
+    "docs/qa/v064-reference/verified-focused-reference-input-sha256.json": {
+      "bytes": 432,
+      "sha256": "9500b0808d4691295ebe5e2caaa4a0c0138e0425ceebc922bcfc2ddb78821fe3"
+    },
+    "docs/qa/v064-reference/verified-focused-reference-result.json": {
+      "bytes": 202,
+      "sha256": "96a6fc2dfc5d6ce3cd24a2eda765148b1dedbf4814acd31b63d639adf5738b64"
+    }
+  },
+  "logs": {
+    "docs/qa/v064-source/attempt-01.log.txt": {
+      "bytes": 3113,
+      "sha256": "2655a5cf1b3a6f1b4e2b971e6e738ed6ad08b7a0ce9b1a6f2a609b986fc433d6"
+    },
+    "docs/qa/v064-source/focused.log.txt": {
+      "bytes": 151,
+      "sha256": "52b05c5f6052ab06ffa9d5b6e61dbc0ebd601d6f157a6a0514cd7a6d7c15499e"
+    },
+    "docs/qa/v064-migration/20261006T023946429171Z-capture39.log.txt": {
+      "bytes": 145,
+      "sha256": "731eea8da587f9cbba9ac30b2fa58a15de3a9f234e37851d85169dfb50b30985"
+    },
+    "docs/qa/v064-migration/20261006T024210249055Z-migration.log.txt": {
+      "bytes": 966,
+      "sha256": "61e623ddf5090bf8e042ad27744c8488ec82f12b7d5fe317074a0e8a71f5189b"
+    },
+    "docs/qa/v064-migration/20261006T024235835781Z-migration.log.txt": {
+      "bytes": 128,
+      "sha256": "4ea00746bffc88615d8a01c07ee95c7cbe23dd734992beb7a3855ba2fc27bb23"
+    },
+    "docs/qa/v064-gameplay/run-01.log.txt": {
+      "bytes": 417,
+      "sha256": "823b8430527429ac5494b70522efb7a4f89f91468d99fccf35d628b3fde5e8b0"
+    },
+    "docs/qa/v064-gameplay/run-02.log.txt": {
+      "bytes": 324,
+      "sha256": "3eabeae75cb57c19cb640b1faa63651b91494c31b04a0fad2a06a3497bcae41f"
+    },
+    "docs/qa/v064-root-ui/presentation.log.txt": {
+      "bytes": 123,
+      "sha256": "51ad15f0aa377a6f811a20430823e9c35e4329284a8faaf5d06859d91da537ba"
+    },
+    "docs/qa/v064-legacy/after.log.txt": {
+      "bytes": 910,
+      "sha256": "2d7bd457205f131c545c0d363522b049cdcf3f5d92ef6594549bb6d839bf573f"
+    },
+    "docs/qa/v064-legacy/before.log.txt": {
+      "bytes": 910,
+      "sha256": "93caa7fcc1c00b0f0126e284cf95d642c9feb6a0cb24a0b0fd02ae10b57a7009"
+    },
+    "docs/qa/v064-integration/initial-import.log.txt": {
+      "bytes": 77280,
+      "sha256": "58c786f24e4c24621ed26f59cc1afe0dbadb1dd9b3afbef996a705d2690c69ea"
+    },
+    "docs/qa/v064-integration/probe-parse.log.txt": {
+      "bytes": 190,
+      "sha256": "7c34b985795a464c1bc2c9bc5e46196cc1abf2efa9378a88ef6a7dc9dfda7191"
+    },
+    "docs/qa/v064-reference/build.stderr.log.txt": {
+      "bytes": 144,
+      "sha256": "837025b2b1f2ff7d8edd91bde6e2450c56f1fade535e6faaa43da838e50772aa"
+    },
+    "docs/qa/v064-reference/build.stdout.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v064-reference/checked-focused-reference.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v064-reference/checked-focused-reference.stdout.log.txt": {
+      "bytes": 611,
+      "sha256": "f0ddcf412f2ffa548819d91835e3635b5d09b893d61a6b5dea0623d90749f589"
+    },
+    "docs/qa/v064-reference/corrected-build-check.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v064-reference/corrected-build-check.stdout.log.txt": {
+      "bytes": 52,
+      "sha256": "65d47533eaf556129a1f3a295db12ab1bc36a8df0770c71cb9378490d54d03ba"
+    },
+    "docs/qa/v064-reference/corrected-build.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v064-reference/corrected-build.stdout.log.txt": {
+      "bytes": 51,
+      "sha256": "cb4bc6206e100ae24ecad508e5ab4a72a5fb361c846fe695a933022714b9015a"
+    },
+    "docs/qa/v064-reference/corrected-godot-export.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v064-reference/corrected-godot-export.stdout.log.txt": {
+      "bytes": 205,
+      "sha256": "881c3c8a76e46d3e862aafeb146330317ff3f9b9ded3708c83c5c5e40bdf8c0b"
+    },
+    "docs/qa/v064-reference/final-build-check.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v064-reference/final-build-check.stdout.log.txt": {
+      "bytes": 52,
+      "sha256": "65d47533eaf556129a1f3a295db12ab1bc36a8df0770c71cb9378490d54d03ba"
+    },
+    "docs/qa/v064-reference/final-build.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v064-reference/final-build.stdout.log.txt": {
+      "bytes": 51,
+      "sha256": "09666a054a5a2aecff2c09175fd7e3c3795505eab5ff7e69bd89e695ba04f3c8"
+    },
+    "docs/qa/v064-reference/final-focused-reference.stderr.log.txt": {
+      "bytes": 481,
+      "sha256": "c3f57ca2b466bc6193d140f6381f9a3e9e343c02b52d0e57b71e60b40ed9e604"
+    },
+    "docs/qa/v064-reference/final-focused-reference.stdout.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v064-reference/focused-reference.stderr.log.txt": {
+      "bytes": 160,
+      "sha256": "0676d1e8f4e2b2d62ba11d1e1a0f87306d182bf2024d51967bedc2c00860a965"
+    },
+    "docs/qa/v064-reference/focused-reference.stdout.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v064-reference/godot-export.stderr.log.txt": {
+      "bytes": 374,
+      "sha256": "09cf51d55b2ed25a59d092d4613af6cd4cd3b27e029400961b4bba298103517f"
+    },
+    "docs/qa/v064-reference/godot-export.stdout.log.txt": {
+      "bytes": 73,
+      "sha256": "a9912b85473f126d3f4f63ec824170c828df3473a292f866dde86cafda5b66da"
+    },
+    "docs/qa/v064-reference/verified-focused-reference.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v064-reference/verified-focused-reference.stdout.log.txt": {
+      "bytes": 611,
+      "sha256": "f0ddcf412f2ffa548819d91835e3635b5d09b893d61a6b5dea0623d90749f589"
+    }
+  },
+  "reference": {
+    "checks_separate": 81,
+    "real_model_states": 6,
+    "html_ids": 3818,
+    "evidence": "docs/qa/v064-reference/verified-focused-reference-result.json",
+    "first_attempts": "Export comparison included unrelated armour metadata; HTML helper and verification fixture assumptions corrected. Original failed tool logs preserved; no game production changes."
+  },
+  "package_probe_parse": {
+    "initial_exit_code": 78,
+    "actual_package_not_yet_run": true,
+    "post_parse_change": "Only normalize expected JSON boundary for strict numeric-type comparison; final same-PCK run will validate it."
+  }
+}

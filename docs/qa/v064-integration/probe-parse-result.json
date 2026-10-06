@@ -1,0 +1,23 @@
+{
+  "exit_code": 78,
+  "expected_exit": 78,
+  "seconds": 1.1378875549999066,
+  "command": [
+    "/usr/local/bin/godot",
+    "--headless",
+    "--path",
+    "/workspace/scratch/a51485f153de/v064-iron-reflexes",
+    "--script",
+    "res://tools/v064_export_probe.gd"
+  ],
+  "xdg_data_home": "/tmp/godot-m1-v064-probe-parse/data",
+  "checked_at_utc": "2026-10-06T02:51:41.069433+00:00",
+  "parse_guard_passed": true,
+  "actual_new_package_test": "not_run",
+  "runtime_checks_executed": 0,
+  "scope": "Single source invocation with all V064 variables removed; expected guard exit78 only. No source suite or actual packed gameplay executed.",
+  "parsed_script_sha256": "41f58043d11fff2f4b96ddd8cacf319177eb8ae5b07530a4b2dbccf9ea75aec0",
+  "current_script_sha256": "5f25862d7bb6d4fdaf825579baa4ab3f7d20cc706f2428545969e90e7f098adc",
+  "current_script_reparsed": false,
+  "post_parse_change": "One migration-comparison operand is normalized through JSON encode/decode, matching v062, so strict numeric types compare at equal JSON boundaries. No second source invocation was made."
+}

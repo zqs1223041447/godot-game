@@ -24,6 +24,7 @@ RULE_TITLES['elemental_resistance_caps'] = '三元素最大抗性与有效抗性
 RULE_TITLES['elemental_defense_affixes'] = '灰烬皮甲与原始三抗供给'
 RULE_TITLES['defense_rating_affixes'] = '灰烬皮甲：护甲、闪避与前缀取舍'
 RULE_TITLES['resolute_technique'] = '坚决技艺：稳定命中与暴击取舍'
+RULE_TITLES['iron_reflexes'] = '铁反射（闪转甲）：闪避转换与护甲取舍'
 TYPES['defense_v37'] = '历史三抗防具池'
 TYPES['defense_v39'] = '护甲闪避与三抗防具池'
 
@@ -369,7 +370,7 @@ def defense_rating_affix_rule(data,link,facts,details):
     def value(key,amount,ratio=False):
         return f'<strong data-defense-rating-value="{esc(key)}" data-value="{esc(amount)}">{percent(amount) if ratio else number(amount)}</strong>'
     body=facts([('底材',link('equipment',rule['base_id'])),('存档 / 装备词汇 / 源政策',value('save-version',rule['minimum_save_version'])+' / '+value('vocabulary',rule['vocabulary'])+' / '+value('source-policy',rule['source_policy'])),('当前词池',esc(rule['pool_id'])),('当前掉落配置',esc(rule['loot_profile_id']))])
-    body+='<p>'+esc(rule['rating_order'])+'。原始护甲×(1+护甲提高)；原始闪避×(1+闪避提高+每5敏捷的1%)。以下最终数值已经由实际角色计算，网页不再乘算。</p>'
+    body+='<p>'+esc(rule['rating_order'])+'。原始护甲×(1+护甲提高)；原始闪避×(1+闪避提高+每5敏捷的1%)。这些示例未分配铁反射（闪转甲）；其转换与敏捷例外见 '+link('rules','iron_reflexes')+'。以下最终数值已经由实际角色计算，网页不再乘算。</p>'
     rows=[]
     for key,family in rule['new_families'].items():
         for tier,ranges in zip(family['tiers'],data['affixes'][key]['formatted_ranges']):
@@ -408,6 +409,43 @@ def defense_rating_affix_rule(data,link,facts,details):
     body+=details('隔离护甲的五类100点命中','<p>只设护甲，抗性、护盾、魔力分担均为零；这项比较不先掷闪避。</p><table><thead><tr><th>类型</th><th>零护甲</th><th>T3顶值护甲</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table><p>同样100点原始燃烧仍造成 '+value('burn-damage',rule['burn_example']['damage_total'])+'；燃烧入口不接受护甲或闪避参数。</p>')
     body+='<h3>制作、来源与旧结果</h3><p>六工艺复用原按钮与费用。赋魔、升格、补缀和重铸可取得当前新族；校准仅重掷已有族与档位。伤害定向仍保证真实伤害后缀，不能同时保留三抗；没有防御定向按钮。</p><p>'+esc(rule['legacy_scope'])+'。</p><p>'+esc(rule['migration'])+'。</p><p>灰烬守卫的逻辑defense奖励读取当前池；显式历史池保持。'+link('rules','elemental_defense_affixes')+'保留原三抗预算，'+link('rules','elemental_resistance_caps')+'说明原始值与上限取舍。</p>'
     body+='<p><a href="../DEFENSE_RATING_AFFIXES.zh-CN.md">完整护甲闪避规则</a> · <a href="../qa/v062-reference/README.md">本批图鉴证据</a> · '+link('rules','source_defenses')+' · '+link('crafting','calibration_shard')+'</p>'
+    return body
+
+
+def iron_reflexes_rule(data,link,facts,details):
+    rule=data['iron_reflexes']
+    def source_lines(raw_lines):
+        return '\n'.join(data['source_tree_localization']['lines'][line]['text'] for line in raw_lines)
+    def value(key,amount,ratio=False):
+        return f'<strong data-iron-reflexes-value="{esc(key)}" data-value="{esc(amount)}">{percent(amount) if ratio else number(amount)}</strong>'
+    body=facts([('关键天赋',link('source_passives',rule['node']['id'])),('存档 / 装备词汇 / 源政策',value('save-version',rule['minimum_save_version'])+' / '+value('vocabulary',rule['equipment_vocabulary'])+' / '+value('source-policy',rule['source_policy']))])
+    body+='<p>'+lines(source_lines(rule['node']['source_lines']))+'</p><p>最终护甲 = '+esc(rule['formula'])+'；最终闪避 = '+value('final-evasion',rule['evasion'])+'。</p>'
+    body+='<p>'+esc(rule['base_scope'])+'。IA为护甲提高，IE为闪避提高，均不含敏捷；'+esc(rule['shared_rule'])+'。</p><p>'+esc(rule['dexterity_rule'])+'。</p>'
+    body+='<h3>真实装备与最后一点天赋</h3><p>'+esc(rule['example_scope'])+'。'+esc(rule['budget_scope'])+'。</p>'
+    labels={'dual_ratings':'双防御胸甲 · 12点','dual_ratings_hybrid':'双防御胸甲 + 双提高 · 14点','resources_hybrid':'旧生命三抗胸甲 + 双提高 · 14点'}
+    rows=[]
+    for key,example in rule['examples'].items():
+        for state,label in [('before','未点'),('after','已点')]:
+            row=example[state];prefix=key+'-'+state+'-'
+            cells=[value(prefix+'points',row['points_spent']),value(prefix+'armour',row['profile']['armour']),value(prefix+'evasion',row['profile']['evasion']),value(prefix+'converted',row['profile']['converted_armour']),value(prefix+'dexterity',row['stats']['dexterity']),value(prefix+'accuracy',row['stats']['accuracy']),value(prefix+'enemy-hit-chance',row['enemy_hit_chance'],True)]
+            rows.append('<tr><th>'+esc(labels[key])+' · '+label+'</th>'+''.join('<td>'+cell+'</td>' for cell in cells)+'</tr>')
+    body+='<div class="table-scroll"><table><thead><tr><th>合法构筑</th><th>已花点数</th><th>最终护甲</th><th>最终闪避</th><th>护甲中的转换贡献</th><th>敏捷</th><th>命中值</th><th>敌方攻击命中率</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
+    body+='<p>敌方命中值取当前自然怪物100。双防御分支示例的敌方命中率由71%变为100%；旧胸甲的低闪避在该命中值下原本已是100%。转换贡献已经包含在最终护甲中，不能再加一次；闪避为0后敌方攻击仍沿既有规则判定。</p>'
+    for key,example in rule['examples'].items():
+        inputs=example['inputs'];after=example['after']
+        cells=[('等级 / 点数预算',value(key+'-level',after['level'])+' / '+value(key+'-budget',after['points_spent'])),('A0 / E0',value(key+'-A0',inputs['base_armour'])+' / '+value(key+'-E0',inputs['base_evasion'])),('IA / IE / H',' / '.join(value(key+'-'+field,inputs[field],True) for field in ['armour_increased','evasion_increased','shared_increased']))]
+        body+=details(labels[key]+' · 原始值、合法装备与路线',facts(cells)+lines('\n'.join(after['definition']['affix_lines']))+'<p>'+' → '.join(link('source_passives',node_id,node_id) for node_id in after['allocated'])+'</p><p>完整候选通过当前构筑与源树校验，未读写用户存档；路线清单保留分支，箭头表示分配顺序。</p>')
+    body+='<p>双提高来自 '+link('source_passives',rule['hybrid_source']['id'])+' 的同一原句：'+lines(source_lines(rule['hybrid_source']['source_lines']))+'。各6%的两个提高在转换部分只计一次；不同原句的独立提高不互相抵消。</p>'
+    example=rule['examples']['dual_ratings_hybrid'];rows=[]
+    for amount in ['20','100','500']:
+        cells=[value('physical-'+amount+'-'+state,example[state]['physical_hits'][amount]['damage_total']) for state in ['before','after']]
+        rows.append('<tr><th>物理 '+amount+'</th>'+''.join('<td>'+cell+'</td>' for cell in cells)+'</tr>')
+    for kind,label in [('fire','火'),('cold','冰'),('lightning','电')]:
+        rows.append('<tr><th>'+label+' 100</th>'+''.join('<td>'+value('element-'+kind+'-'+state,example[state]['elemental_hits'][kind]['damage_total'])+'</td>' for state in ['before','after'])+'</tr>')
+    rows.append('<tr><th>原始燃烧 100</th>'+''.join('<td>'+value('burn-'+state,example[state]['burn']['damage_total'])+'</td>' for state in ['before','after'])+'</tr>')
+    body+='<h3>转换护甲影响哪些伤害</h3><p>'+esc(rule['scope'])+'。以下使用上表同一14点双防御胸甲角色的真实护甲与抗性，比较已获准命中的损伤，不把闪避概率乘进伤害。</p><div class="table-scroll"><table><thead><tr><th>独立输入</th><th>点前损伤</th><th>点后损伤</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
+    body+=''.join('<p>'+esc(rule[key])+'。</p>' for key in ['resource_rule','migration','complete_gate'])
+    body+='<p><a href="../IRON_REFLEXES_RULES.zh-CN.md">完整铁反射（闪转甲）规则</a> · <a href="../qa/v064-reference/README.md">本批图鉴证据</a> · '+link('rules','defense_rating_affixes')+' · '+link('rules','source_defenses')+'</p>'
     return body
 
 
@@ -556,7 +594,7 @@ def build(data, art):
             body+=details(f'精通 {choice["effect"]} · {label}','<p>'+lines(localized['mastery_choices'][str(choice['effect'])])+'</p>')
         if p['neighbors']:body+=details('原始标准邻接',links('source_passives',p['neighbors']))
         aliases=' '.join([p['name'],p['partition'],*p['stats'],*(line for choice in p['mastery_choices'] for line in choice['stats'])])
-        cards.append(add('source_passives',key,localized['name'],localized['stats'] or state,body,TYPES[p['type']],status='implemented' if selectable else 'research',related=link('rules','source_tree')+(' · '+link('rules','resolute_technique') if key == '31961' else '')+(' · '+link('rules','source_fire_dot') if key in data.get('source_fire_dot',{}).get('nodes',{}) else '')+(' · '+link('rules','source_faster_burn') if key in data.get('source_faster_burn',{}).get('nodes',{}) or key in data.get('source_faster_burn',{}).get('blocked_matching_nodes',{}) else '')+(' · '+link('rules','mana_guard') if key == data.get('mana_guard',{}).get('node',{}).get('id') or key in data.get('mana_guard',{}).get('blocked_matching_nodes',{}) else '')+(' · '+link('rules','elemental_resistance_caps') if key in data.get('elemental_resistance_caps',{}).get('nodes',{}) or key in data.get('elemental_resistance_caps',{}).get('boundaries',{}) else ''),search_aliases=aliases))
+        cards.append(add('source_passives',key,localized['name'],localized['stats'] or state,body,TYPES[p['type']],status='implemented' if selectable else 'research',related=link('rules','source_tree')+(' · '+link('rules','iron_reflexes') if key == '10661' else '')+(' · '+link('rules','resolute_technique') if key == '31961' else '')+(' · '+link('rules','source_fire_dot') if key in data.get('source_fire_dot',{}).get('nodes',{}) else '')+(' · '+link('rules','source_faster_burn') if key in data.get('source_faster_burn',{}).get('nodes',{}) or key in data.get('source_faster_burn',{}).get('blocked_matching_nodes',{}) else '')+(' · '+link('rules','mana_guard') if key == data.get('mana_guard',{}).get('node',{}).get('id') or key in data.get('mana_guard',{}).get('blocked_matching_nodes',{}) else '')+(' · '+link('rules','elemental_resistance_caps') if key in data.get('elemental_resistance_caps',{}).get('nodes',{}) or key in data.get('elemental_resistance_caps',{}).get('boundaries',{}) else ''),search_aliases=aliases))
     for key,m in data['mechanisms'].items():
         player_nodes=[k for k,v in data['passives'].items() if key in v['mechanism_ids']]
         monsters=[k for k,v in data['monsters'].items() if key in v['mechanisms']]
@@ -763,7 +801,7 @@ def build(data, art):
             ('supports','技能行与五辅助','每行1个主宝石、5个辅助；10行起步，+1技能行词缀真正增加可绑定的行。',f'<p>原16辅助保留，新增点燃辅助仅适配陨星/龙卷；按主动技能原生能力判定资格；同组不重复同一辅助定义。同名主宝石可独立装配。组与主宝石UID双冷却账阻止换孔/换键刷新。</p><p>真实五辅助冰霜示例：耗魔 {number(example["mana"])}，冷却 {number(example["cooldown"])}秒，初始 {example["initial_count"]}发。</p>'+details('同源实际配方',lines(example['summary']+'\n'+example['details']))+'<p>正式档每30有效根怪累积一件固定26种序列的1级0品质宝石，满包保留待领；原序列不插入新石。点燃辅助通过正式商人4碎片购买或独立测试供应获得。测试随机宝石使用当前目录，失败回滚随机状态；后代/重复死亡无奖励。同名独立UID，正式城镇可回收所选背包宝石得1碎片。</p>','implemented'),
             ('source_tree','锁定源树与执行覆盖','完整源记录与已实现效果分别报告；数据存在不等于可花点使用。',f'<p>源版本 {source["source_version"]}，原始SHA256 {source["source_sha256"]}。保留 {len(source["nodes"])} 条记录、2387个标准位置和2697条内部边；升华/扩展分区分开。42代理与30涂油节点不可直接分配。<a href="#category-source_passives">逐项查源节点及精通</a></p><p>节点所有效果必须完整执行，精通按选中效果检查。未支持节点灰色锁定，也会阻断后续路径。源数值没有旧181投影上限；旧树仅作历史与怪物机制参考。</p><p>自己的职业起点免费，预算min(level+4,123)。普通节点/精通均1点，专精需同组普通连通的显著节点，重复效果ID拒绝。未分配其他节点可切七起点；升华点数来源尚未实现，不免费授点。</p>','implemented'),
             ('allocation','源树与珠宝资格','每件珠宝只有一个统一位置；孔必须已分配并沿普通连线连接自己的起点。','<p>寻枝半径280采用当前源坐标单位，允许小型/显著节点断连分配，仍花1点。远程点不向外扩路、不激活孔；未实现节点即使在范围内也不能分配。退款、移动、替换、取回都验证最终构筑，不能遗留依赖失效的节点。原型半径规则不是PoE某颗珠宝的完整复刻。</p><p>'+link('rules','source_tree')+'；下方旧181覆盖图保留作历史机制研究。</p>','implemented'),
-            ('source_defenses','属性与命中防御','原始三属性数值进入真实容量、命中、闪避和近战物理作用域。','<p>力量每2点取整+1生命、每5点取整+1%近战物理；敏捷每点+2命中、每5点取整+1%闪避；智慧每2点取整+1魔力、每10点取整+1%护盾（3.28以后规则）。法术不进行攻击闪避。护甲随物理命中大小重新求减伤，三元素分别使用当前抗性上限（默认75%，最大抗性天赋可提高到本游戏安全上限83%），原始与有效值详见 '+link('rules','elemental_resistance_caps')+'，然后护盾、生命。分配心灵升华后，护盾剩余损伤先按比例交由当前魔力承担，详见 '+link('rules','mana_guard')+'。本段混合受击示例未分配该节点。</p>'+facts([('同源混合受击示例','物理/火/冰/电各100；护甲500、抗性50%/25%/75%'),('防御后分量',esc(component_text(defense['components']))),('护盾扣减',number(defense['shield_spent'])),('生命扣减',number(defense['health_lost']))])+f'<p>本游戏敏捷型怪物闪避320；默认Scion命中140，对应 {percent(c["skitter_accuracy_example"]["base_chance"])}；增加10敏捷后命中160，对应 {percent(c["skitter_accuracy_example"]["improved_chance"])}。预览展示成功命中伤害，未把命中率伪乘成DPS。</p>','implemented'),
+            ('source_defenses','属性与命中防御','原始三属性数值进入真实容量、命中、闪避和近战物理作用域。','<p>力量每2点取整+1生命、每5点取整+1%近战物理；敏捷每点+2命中、每5点取整+1%闪避（分配铁反射（闪转甲）后取消此闪避提高并转换原始闪避，见 '+link('rules','iron_reflexes')+'）；智慧每2点取整+1魔力、每10点取整+1%护盾（3.28以后规则）。法术不进行攻击闪避。护甲随物理命中大小重新求减伤，三元素分别使用当前抗性上限（默认75%，最大抗性天赋可提高到本游戏安全上限83%），原始与有效值详见 '+link('rules','elemental_resistance_caps')+'，然后护盾、生命。分配心灵升华后，护盾剩余损伤先按比例交由当前魔力承担，详见 '+link('rules','mana_guard')+'。本段混合受击示例未分配该节点。</p>'+facts([('同源混合受击示例','物理/火/冰/电各100；护甲500、抗性50%/25%/75%'),('防御后分量',esc(component_text(defense['components']))),('护盾扣减',number(defense['shield_spent'])),('生命扣减',number(defense['health_lost']))])+f'<p>本游戏敏捷型怪物闪避320；默认Scion命中140，对应 {percent(c["skitter_accuracy_example"]["base_chance"])}；增加10敏捷后命中160，对应 {percent(c["skitter_accuracy_example"]["improved_chance"])}。预览展示成功命中伤害，未把命中率伪乘成DPS。</p>','implemented'),
             ('shared','共享消费者与历史注册表','人物和怪物共用伤害分量、防御、命中和结算函数。','<p>旧MechanicRegistry仍约束怪物机制包；旧181节点引用保留作研究与回归。当前人物改用原始源树逐项能力门槛，不能再套用旧投影合计上限。未支持机制继续拒绝，不借导入数据悄悄生效。</p>','implemented'),
             ('boundaries','尚未实现的机制','未执行源节点整体锁定，原文与位置保留。','<p>仍未完成：施法动作时长/施法速度、条件/局部武器暴击、格挡、压制、抗性穿透、完整异常与持续伤害体系（无条件火焰持续伤害加成与三节点更快燃烧已接入；流血和中毒仍未实现）、召唤物、属性装备需求、星团/永恒珠宝、升华点数来源及复杂条件机制。源树浏览不等于以上均可用。制作已有回收、校准、赋魔、升格、补缀与重铸；更复杂的定向制作尚未实现。</p>','planned'),
             ('sources','来源与实现边界','目录来自运行时导出，源树保留功能数据，所有美术由本项目创作。',f'<p><a href="{esc(source["source_url"])}">GGG源树固定提交 {source["source_commit"]}</a> · 3.29.1。保留节点身份、原始规则词句、精通和几何；未包含官方图像或叙事风味文本。上游数据再分发授权未明确，不宣称公共领域。</p><p>旧181节点与词缀校准研究仍有各自固定版本，不代表当前角色全部源效果已实现。原型怪物数值、掉落权重与熵初值由本项目定义。</p><p><a href="source-tree-coverage.json">完整执行覆盖与七职业可达前沿JSON</a>：空stats结构节点和精通本体不冒充属性效果，精通逐选项统计；可达集合不代表123点可以全部同时点出。</p>','research')
@@ -932,6 +970,8 @@ def build(data, art):
         rule_defs.append(('resolute_technique',RULE_TITLES['resolute_technique'],'命中不能被闪避，但所有命中不能暴击；已有装备与天赋仍需权衡。',resolute_technique_rule(data,link,facts,details),'implemented'))
     if 'defense_rating_affixes' in data:
         rule_defs.append(('defense_rating_affixes',RULE_TITLES['defense_rating_affixes'],'全局固定护甲与闪避占用已有前缀，物理命中、攻击准入和持续燃烧各有明确边界。',defense_rating_affix_rule(data,link,facts,details),'implemented'))
+    if 'iron_reflexes' in data:
+        rule_defs.append(('iron_reflexes',RULE_TITLES['iron_reflexes'],'全部原始闪避转换为护甲，取消敏捷闪避提高；同一句双提高只计一次，失去闪避仍有代价。',iron_reflexes_rule(data,link,facts,details),'implemented'))
     if 'elemental_defense_affixes' in data:
         rule_defs.append(('elemental_defense_affixes',RULE_TITLES['elemental_defense_affixes'],'一件胸甲提供原始火、冰、电抗性；三抗满后缀仍须天赋补足原始值与最大上限。',elemental_defense_affix_rule(data,link,facts,details),'implemented'))
     if 'elemental_resistance_caps' in data:

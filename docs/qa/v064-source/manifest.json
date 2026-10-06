@@ -1,0 +1,65 @@
+{
+  "source_commit": "76e2abccf533cd31c20daea92c0e05b02c0980af",
+  "source_version": "v63",
+  "save_version": 39,
+  "source_execution_policy": 38,
+  "transformation": "Only remove class_name declarations and relocate every recursive preload/load into frozen/. No production script is loaded by the oracle. Shared unchanged JSON inputs are pinned separately.",
+  "entries": [
+    {
+      "path": "scripts/items/item_location_rules.gd",
+      "source_sha256": "7b215b19093b693216f47a1b0f2c35b3a1aced96acab8a27a3eb5f2a7e8a867a",
+      "frozen_sha256": "4fd1425cbc277a29097c44c20704c97039377837692db8de80234e81131c3a12"
+    },
+    {
+      "path": "scripts/jewel_data.gd",
+      "source_sha256": "60122964b76b93fc529cdfe314d0f54cd507c7e3f19a66b89a609fb9018acc93",
+      "frozen_sha256": "794b50585e7c80d7e1c4d8427ae2ea27beb558c9b18522f0a9d62623d5ba46bb"
+    },
+    {
+      "path": "scripts/mechanics/mechanic_registry.gd",
+      "source_sha256": "e57c6455e752bfcf630d4f489d0dcb9199778a2e62d6ee967f1bf5b11c8f0c42",
+      "frozen_sha256": "40560b4ac35957f00dd35466dfc26ee7c0ee039db6365c30bf07f063fe623945"
+    },
+    {
+      "path": "scripts/mechanics/passive_balance_adapter.gd",
+      "source_sha256": "4b860a7aa2318a2a41de0018a5ff528ebfb0e6cd808a1168c75a857a95a7e496",
+      "frozen_sha256": "badc267a0a65bd2ef599bd329034a983b53fb8e87cb3da94f2bd9a70e91a7ede"
+    },
+    {
+      "path": "scripts/passive_data.gd",
+      "source_sha256": "0181b25f45dddab5f106c5342f8a68a70820126beb59576be34b42f48a77857d",
+      "frozen_sha256": "ce9a977f94cec542e65010f9f9fd078f515c8127e4e695a80c13726230a5e9ea"
+    },
+    {
+      "path": "scripts/passives/source_stat_patterns.gd",
+      "source_sha256": "c4c5a6a2ddd5b566982dbe7056b27b14e8a78cd5c0e4040b2d7ae3972fd8e0c5",
+      "frozen_sha256": "3630b2ba730daaf7e644fa38d91e74ecd4ce732d1d85dd4e0efa210ea2b024a6"
+    },
+    {
+      "path": "scripts/passives/source_tree_allocation_rules.gd",
+      "source_sha256": "631792b2ecf06481c6cc43165cd9f97688d578f6cd5cf394905b0c9beb814ef3",
+      "frozen_sha256": "6ad11b1c9d400e70119e12ee79f7c392eb218cae4caa22f06e7c772f232f45a4"
+    },
+    {
+      "path": "scripts/passives/source_tree_data.gd",
+      "source_sha256": "9ce28c773f4ca8b8174cca73008cd1c9002237681378d58f5108def2f761bbee",
+      "frozen_sha256": "66712f08e46611f7e64358c19ebcee4bb220c9aa3462e04ceeabb33bcd8740fd"
+    },
+    {
+      "path": "scripts/passives/source_tree_runtime.gd",
+      "source_sha256": "40f9586a851c3445775c97602efdfcabf57aba24b931a4b990d2659042723b68",
+      "frozen_sha256": "d1acd3770ddbfcaabfb9aaeec9a94a61fc11261a17ddce95f449758f0aae3914"
+    }
+  ],
+  "shared_inputs": [
+    {
+      "path": "data/passive_balance.json",
+      "sha256": "21e2dbcf4d9d90ef4c25f5129b1af465b696cac649c74bf892793b67ba774e5a"
+    },
+    {
+      "path": "data/passives/official_tree_runtime.json",
+      "sha256": "9774a8ec1fe16199e775fe99a20853837ca8c7725c48dfcd9d6ee69646ff934f"
+    }
+  ],
+  "source_bytes": 97517
+}
