@@ -7581,6 +7581,228 @@
 		},
 		"support_slots": 5
 	},
+	"cold_ailment_duration": {
+		"actual_main_report": "docs/qa/v082-gameplay/main-result.json",
+		"actual_main_report_sha256": "aff0efb7cbe79b05940e6c1a2eba606cc7a858763eb343f8936262be2aaeaba7",
+		"compiled_fixture": "docs/qa/v082-gameplay/fixtures/compiled-preview.json",
+		"compiled_fixture_sha256": "55a5f40c76ff886bfd190efd7298aaee8f0ead29bbd5de121a1b4c1cdd272859",
+		"equipment_vocabulary": 46,
+		"examples": {
+			"after-frost-lock": {
+				"cooldown": 4.0,
+				"fixture": "docs/qa/v082-gameplay/fixtures/after-frost-lock.json",
+				"fixture_sha256": "c48cd60d99c915811ad07b1322e6bf2f92b24c5b7d1b16b5fa329868ada3829c",
+				"freeze_profile": {
+					"cold_ailment_duration_increased": 0.2,
+					"duration_by_rarity": {
+						"boss": 0.24,
+						"magic": 0.72,
+						"normal": 0.72,
+						"rare": 0.42
+					},
+					"enabled": true,
+					"hit_multiplier": 0.75,
+					"immunity_seconds": 1.5,
+					"mana_multiplier": 1.2
+				},
+				"group_id": "group_000002",
+				"initial_count": 5,
+				"mana": 19.2,
+				"preview": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n霜锁：普通/魔法 0.72 秒 · 稀有 0.42 秒 · 首领 0.24 秒\n冻结不刷新；解冻后 1.50 秒不能再被冻结，所有施法共享。\n暂停自主移动与攻击进度，外力和持续伤害仍生效；不撤销已经发生的攻击。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 148，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n现有减速时长 3.60 秒。距离、生命周期与穿透分别结算；延长减速不等于新增异常状态。\n实际投射速度 520.00\n投射速度改变飞行快慢，不增加距离上限或存续时间。\n每枚投射物：冰霜 16.57\n固有：冰霜 22.10；附加：无；附加效用 0.85\n独立爆炸：火焰 23.40\n固有：火焰 23.40；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+				"read_only_rebuilt": true,
+				"recipe": {
+					"added_effectiveness": 0.85,
+					"coefficient": 0.85,
+					"damage_type": "cold",
+					"initial_count": 5,
+					"pierce": 2,
+					"slow": 3.5999999999999996,
+					"speed": 520.0,
+					"spread": 0.14
+				},
+				"save_attempts": 0,
+				"snapshot_increased": 0.2,
+				"summary": "非暴击命中预估（未计敌方防御）：每枚投射物 16.57",
+				"support_ids": [
+					"frost_lock"
+				],
+				"whole_build_valid": true,
+				"whole_cast_matches_main": true
+			},
+			"after-lingering-frost": {
+				"cooldown": 4.0,
+				"fixture": "docs/qa/v082-gameplay/fixtures/after-lingering-frost.json",
+				"fixture_sha256": "481d609f503283e34cb6d854f436b3ddac8152d197bc4b5b67cbad64a7b55eda",
+				"freeze_profile": {},
+				"group_id": "group_000002",
+				"initial_count": 5,
+				"mana": 17.6,
+				"preview": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 148，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n现有减速时长 5.40 秒。距离、生命周期与穿透分别结算；延长减速不等于新增异常状态。\n实际投射速度 520.00\n投射速度改变飞行快慢，不增加距离上限或存续时间。\n每枚投射物：冰霜 19.89\n固有：冰霜 22.10；附加：无；附加效用 0.85\n独立爆炸：火焰 23.40\n固有：火焰 23.40；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+				"read_only_rebuilt": true,
+				"recipe": {
+					"added_effectiveness": 0.85,
+					"coefficient": 0.85,
+					"damage_type": "cold",
+					"initial_count": 5,
+					"pierce": 2,
+					"slow": 5.3999999999999995,
+					"speed": 520.0,
+					"spread": 0.14
+				},
+				"save_attempts": 0,
+				"snapshot_increased": 0.2,
+				"summary": "非暴击命中预估（未计敌方防御）：每枚投射物 19.89",
+				"support_ids": [
+					"lingering_chill"
+				],
+				"whole_build_valid": true,
+				"whole_cast_matches_main": true
+			},
+			"after-plain-frost": {
+				"cooldown": 4.0,
+				"fixture": "docs/qa/v082-gameplay/fixtures/after-plain-frost.json",
+				"fixture_sha256": "7bc1dc9ef4b0106ea4986dab519aef060cd91d3b24b11b300d5f901bb1876d5c",
+				"freeze_profile": {},
+				"group_id": "group_000002",
+				"initial_count": 5,
+				"mana": 16.0,
+				"preview": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 148，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n现有减速时长 3.60 秒。距离、生命周期与穿透分别结算；延长减速不等于新增异常状态。\n实际投射速度 520.00\n投射速度改变飞行快慢，不增加距离上限或存续时间。\n每枚投射物：冰霜 22.10\n固有：冰霜 22.10；附加：无；附加效用 0.85\n独立爆炸：火焰 23.40\n固有：火焰 23.40；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+				"read_only_rebuilt": true,
+				"recipe": {
+					"added_effectiveness": 0.85,
+					"coefficient": 0.85,
+					"damage_type": "cold",
+					"initial_count": 5,
+					"pierce": 2,
+					"slow": 3.5999999999999996,
+					"speed": 520.0,
+					"spread": 0.14
+				},
+				"save_attempts": 0,
+				"snapshot_increased": 0.2,
+				"summary": "非暴击命中预估（未计敌方防御）：每枚投射物 22.10",
+				"support_ids": [],
+				"whole_build_valid": true,
+				"whole_cast_matches_main": true
+			},
+			"before-frost-lock": {
+				"cooldown": 4.0,
+				"fixture": "docs/qa/v082-gameplay/fixtures/before-frost-lock.json",
+				"fixture_sha256": "8a35c114672294d05835b3f38952de1c09062c8508bd068a8cf1154554a8d49e",
+				"freeze_profile": {
+					"duration_by_rarity": {
+						"boss": 0.2,
+						"magic": 0.6,
+						"normal": 0.6,
+						"rare": 0.35
+					},
+					"enabled": true,
+					"hit_multiplier": 0.75,
+					"immunity_seconds": 1.5,
+					"mana_multiplier": 1.2
+				},
+				"group_id": "group_000002",
+				"initial_count": 5,
+				"mana": 19.2,
+				"preview": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n霜锁：普通/魔法 0.60 秒 · 稀有 0.35 秒 · 首领 0.20 秒\n冻结不刷新；解冻后 1.50 秒不能再被冻结，所有施法共享。\n暂停自主移动与攻击进度，外力和持续伤害仍生效；不撤销已经发生的攻击。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 148，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n现有减速时长 3.00 秒。距离、生命周期与穿透分别结算；延长减速不等于新增异常状态。\n实际投射速度 520.00\n投射速度改变飞行快慢，不增加距离上限或存续时间。\n每枚投射物：冰霜 16.57\n固有：冰霜 22.10；附加：无；附加效用 0.85\n独立爆炸：火焰 23.40\n固有：火焰 23.40；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+				"read_only_rebuilt": true,
+				"recipe": {
+					"added_effectiveness": 0.85,
+					"coefficient": 0.85,
+					"damage_type": "cold",
+					"initial_count": 5,
+					"pierce": 2,
+					"slow": 3.0,
+					"speed": 520.0,
+					"spread": 0.14
+				},
+				"save_attempts": 0,
+				"snapshot_increased": 0.0,
+				"summary": "非暴击命中预估（未计敌方防御）：每枚投射物 16.57",
+				"support_ids": [
+					"frost_lock"
+				],
+				"whole_build_valid": true,
+				"whole_cast_matches_main": true
+			},
+			"before-lingering-frost": {
+				"cooldown": 4.0,
+				"fixture": "docs/qa/v082-gameplay/fixtures/before-lingering-frost.json",
+				"fixture_sha256": "cfd0414a0e2e53ada9f24d83134d99adbd31ccec527029adf3e16bbc2596fae7",
+				"freeze_profile": {},
+				"group_id": "group_000002",
+				"initial_count": 5,
+				"mana": 17.6,
+				"preview": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 148，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n现有减速时长 4.50 秒。距离、生命周期与穿透分别结算；延长减速不等于新增异常状态。\n实际投射速度 520.00\n投射速度改变飞行快慢，不增加距离上限或存续时间。\n每枚投射物：冰霜 19.89\n固有：冰霜 22.10；附加：无；附加效用 0.85\n独立爆炸：火焰 23.40\n固有：火焰 23.40；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+				"read_only_rebuilt": true,
+				"recipe": {
+					"added_effectiveness": 0.85,
+					"coefficient": 0.85,
+					"damage_type": "cold",
+					"initial_count": 5,
+					"pierce": 2,
+					"slow": 4.5,
+					"speed": 520.0,
+					"spread": 0.14
+				},
+				"save_attempts": 0,
+				"snapshot_increased": 0.0,
+				"summary": "非暴击命中预估（未计敌方防御）：每枚投射物 19.89",
+				"support_ids": [
+					"lingering_chill"
+				],
+				"whole_build_valid": true,
+				"whole_cast_matches_main": true
+			},
+			"before-plain-frost": {
+				"cooldown": 4.0,
+				"fixture": "docs/qa/v082-gameplay/fixtures/before-plain-frost.json",
+				"fixture_sha256": "5eb3ba6d14acd8265c463f7241b03180bee0012156b79110a539a56c11cb2aa6",
+				"freeze_profile": {},
+				"group_id": "group_000002",
+				"initial_count": 5,
+				"mana": 16.0,
+				"preview": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 148，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n现有减速时长 3.00 秒。距离、生命周期与穿透分别结算；延长减速不等于新增异常状态。\n实际投射速度 520.00\n投射速度改变飞行快慢，不增加距离上限或存续时间。\n每枚投射物：冰霜 22.10\n固有：冰霜 22.10；附加：无；附加效用 0.85\n独立爆炸：火焰 23.40\n固有：火焰 23.40；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+				"read_only_rebuilt": true,
+				"recipe": {
+					"added_effectiveness": 0.85,
+					"coefficient": 0.85,
+					"damage_type": "cold",
+					"initial_count": 5,
+					"pierce": 2,
+					"slow": 3.0,
+					"speed": 520.0,
+					"spread": 0.14
+				},
+				"save_attempts": 0,
+				"snapshot_increased": 0.0,
+				"summary": "非暴击命中预估（未计敌方防御）：每枚投射物 22.10",
+				"support_ids": [],
+				"whole_build_valid": true,
+				"whole_cast_matches_main": true
+			}
+		},
+		"fixture_helper": "tests/fixtures/v082/cold_ailment_duration_fixture.gd",
+		"fixture_helper_sha256": "8cccb23fbadea82ea3f367b47fc7818b5607da0c5a3ad74f588122c2b2cf72a6",
+		"increased": 0.2,
+		"level": 4,
+		"max_targets": 100,
+		"minimum_save_version": 49,
+		"point_budget": 8,
+		"route": [
+			"54447",
+			"57226",
+			"21678",
+			"32210",
+			"8948",
+			"27659",
+			"37671",
+			"27415",
+			"14209"
+		],
+		"source_line": "20% increased Duration of Cold Ailments",
+		"source_policy": 49
+	},
 	"configurations": {
 		"fresh": {
 			"allocated_nodes": [
@@ -62899,7 +63121,7 @@
 		},
 		"whole_build_valid": true
 	},
-	"game_version": "0.78.0",
+	"game_version": "0.82.0",
 	"glove_ring_affixes": {
 		"accuracy_probes": {
 			"baseline_accuracy": 284.0,
@@ -79307,7 +79529,7 @@
 			"id": "source_aegis_capacity",
 			"kind": "stat_bundle",
 			"name": "辉壁储盾",
-			"policy_version": "source-tree:3.29.1:policy:48",
+			"policy_version": "source-tree:3.29.1:policy:49",
 			"schema_version": 1,
 			"source_entry": {
 				"node_id": "58218",
@@ -79320,7 +79542,7 @@
 				"stat_index": 0
 			},
 			"source_line": "8% increased maximum Energy Shield",
-			"source_policy": 48,
+			"source_policy": 49,
 			"source_refs": [
 				{
 					"node_id": "58218",
@@ -79333,7 +79555,7 @@
 					"stat_index": 0
 				}
 			],
-			"source_save_version": 48,
+			"source_save_version": 49,
 			"stats": {},
 			"support_reason": "",
 			"supported_actors": [
@@ -79357,7 +79579,7 @@
 			"id": "source_aegis_recovery",
 			"kind": "stat_bundle",
 			"name": "辉壁复苏",
-			"policy_version": "source-tree:3.29.1:policy:48",
+			"policy_version": "source-tree:3.29.1:policy:49",
 			"schema_version": 1,
 			"source_entries": [
 				{
@@ -79393,7 +79615,7 @@
 			},
 			"source_entry_scope": "first_entry_only",
 			"source_line": "4% increased maximum Energy Shield\n10% increased Energy Shield Recharge Rate",
-			"source_policy": 48,
+			"source_policy": 49,
 			"source_refs": [
 				{
 					"node_id": "21929",
@@ -79416,7 +79638,7 @@
 					"stat_index": 1
 				}
 			],
-			"source_save_version": 48,
+			"source_save_version": 49,
 			"stats": {
 				"shield_recharge_rate_increased": 0.1
 			},
@@ -79444,7 +79666,7 @@
 			"id": "source_ember_power",
 			"kind": "stat_bundle",
 			"name": "烬火威力",
-			"policy_version": "source-tree:3.29.1:policy:48",
+			"policy_version": "source-tree:3.29.1:policy:49",
 			"schema_version": 1,
 			"source_entry": {
 				"node_id": "13219",
@@ -79457,7 +79679,7 @@
 				"stat_index": 0
 			},
 			"source_line": "10% increased Damage",
-			"source_policy": 48,
+			"source_policy": 49,
 			"source_refs": [
 				{
 					"node_id": "13219",
@@ -79470,7 +79692,7 @@
 					"stat_index": 0
 				}
 			],
-			"source_save_version": 48,
+			"source_save_version": 49,
 			"stats": {
 				"global_increased": 0.1
 			},
@@ -79493,7 +79715,7 @@
 			"id": "source_gale_stride",
 			"kind": "stat_bundle",
 			"name": "流岚疾行",
-			"policy_version": "source-tree:3.29.1:policy:48",
+			"policy_version": "source-tree:3.29.1:policy:49",
 			"schema_version": 1,
 			"source_entry": {
 				"node_id": "63417",
@@ -79506,7 +79728,7 @@
 				"stat_index": 1
 			},
 			"source_line": "4% increased Movement Speed",
-			"source_policy": 48,
+			"source_policy": 49,
 			"source_refs": [
 				{
 					"node_id": "63417",
@@ -79519,7 +79741,7 @@
 					"stat_index": 1
 				}
 			],
-			"source_save_version": 48,
+			"source_save_version": 49,
 			"stats": {
 				"move_speed_increased": 0.04
 			},
@@ -79538,7 +79760,7 @@
 			"id": "source_grove_vitality",
 			"kind": "stat_bundle",
 			"name": "苍林生机",
-			"policy_version": "source-tree:3.29.1:policy:48",
+			"policy_version": "source-tree:3.29.1:policy:49",
 			"schema_version": 1,
 			"source_entry": {
 				"node_id": "52282",
@@ -79551,7 +79773,7 @@
 				"stat_index": 0
 			},
 			"source_line": "5% increased maximum Life",
-			"source_policy": 48,
+			"source_policy": 49,
 			"source_refs": [
 				{
 					"node_id": "52282",
@@ -79564,7 +79786,7 @@
 					"stat_index": 0
 				}
 			],
-			"source_save_version": 48,
+			"source_save_version": 49,
 			"stats": {},
 			"support_reason": "",
 			"supported_actors": [
@@ -110371,7 +110593,7 @@
 		},
 		"timing": "施放时冻结；分配、退款和换装只影响新施放，旧飞行、母子箭、返回与独立爆炸保持各自快照"
 	},
-	"save_version": 48,
+	"save_version": 49,
 	"schema_version": 3,
 	"sectors": [
 		{
@@ -398677,12 +398899,18 @@
 			"14209": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "cold_ailment_duration_increased",
+							"value": 0.2
+						}
+					],
+					"status": "full",
+					"supported": [
 						"20% increased Duration of Cold Ailments"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "14209",
@@ -527129,7 +527357,7 @@
 			"totalPoints": 123.0
 		},
 		"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
-		"source_policy": 48,
+		"source_policy": 49,
 		"source_sha256": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
 		"source_url": "https://github.com/grindinggear/skilltree-export/tree/8bd138b32ea2631455cac5935bfab089f826094f",
 		"source_version": "3.29.1",
@@ -537910,12 +538138,18 @@
 			},
 			"20% increased Duration of Cold Ailments": {
 				"status": {
-					"grants": [],
-					"implemented": false,
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "cold_ailment_duration_increased",
+							"value": 0.2
+						}
+					],
+					"implemented": true,
 					"missing_consumers": [],
-					"parser_supported": false
+					"parser_supported": true
 				},
-				"text": "持续时间的冰霜异常状态提高20%（暂未实装）"
+				"text": "冰霜异常状态持续时间提高20%"
 			},
 			"20% increased Duration of Elemental Ailments on Enemies": {
 				"status": {
@@ -558697,7 +558931,7 @@
 				},
 				"name": "冰霜异常状态持续时间",
 				"partition": "标准主树",
-				"stats": "持续时间的冰霜异常状态提高20%（暂未实装）"
+				"stats": "冰霜异常状态持续时间提高20%"
 			},
 			"14211": {
 				"mastery_choices": {

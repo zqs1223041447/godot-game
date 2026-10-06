@@ -1,0 +1,320 @@
+{
+  "ok": true,
+  "checks": 42,
+  "failures": 0,
+  "runs": {
+    "main": {
+      "elapsed_seconds": 9.128,
+      "logged_checks": 283,
+      "report_checks": 282,
+      "failures": 0
+    },
+    "v081-zero": {
+      "elapsed_seconds": 7.652,
+      "logged_checks": 74,
+      "report_checks": 73,
+      "failures": 0
+    },
+    "v082-zero": {
+      "elapsed_seconds": 7.411,
+      "logged_checks": 74,
+      "report_checks": 73,
+      "failures": 0
+    }
+  },
+  "zero_source": {
+    "comparison": "unmodified var_to_bytes of five complete cast/preview and combat-observation records",
+    "scenario_count": 5,
+    "observations_per_scenario": 5,
+    "bytes_each": 619724,
+    "sha256": "f0df2381f8fc605d9b76097682c1f0c18407f32b75cfab2b026141e1bdd90ecb",
+    "byte_equal": true,
+    "removed_combat_fields": [],
+    "schema_note": "48/49 and full final canonical models remain in raw JSON, outside combat-record byte stream"
+  },
+  "fixtures": {
+    "after-ambush-nova": {
+      "file": "fixtures/after-ambush-nova.json",
+      "sha256": "d192ff4d6e49608f3fb747f51259e414a31784f65f75802c7a6934da0a029f28",
+      "group_id": "group_000003",
+      "mana": 30.0,
+      "cooldown": 6.0,
+      "slow": null,
+      "freeze": null
+    },
+    "after-frost-lock": {
+      "file": "fixtures/after-frost-lock.json",
+      "sha256": "c48cd60d99c915811ad07b1322e6bf2f92b24c5b7d1b16b5fa329868ada3829c",
+      "group_id": "group_000002",
+      "mana": 19.2,
+      "cooldown": 4.0,
+      "slow": 3.5999999999999996,
+      "freeze": {
+        "cold_ailment_duration_increased": 0.2,
+        "duration_by_rarity": {
+          "boss": 0.24,
+          "magic": 0.72,
+          "normal": 0.72,
+          "rare": 0.42
+        },
+        "enabled": true,
+        "hit_multiplier": 0.75,
+        "immunity_seconds": 1.5,
+        "mana_multiplier": 1.2
+      }
+    },
+    "after-lingering-frost": {
+      "file": "fixtures/after-lingering-frost.json",
+      "sha256": "481d609f503283e34cb6d854f436b3ddac8152d197bc4b5b67cbad64a7b55eda",
+      "group_id": "group_000002",
+      "mana": 17.6,
+      "cooldown": 4.0,
+      "slow": 5.3999999999999995,
+      "freeze": null
+    },
+    "after-nova": {
+      "file": "fixtures/after-nova.json",
+      "sha256": "7bc1dc9ef4b0106ea4986dab519aef060cd91d3b24b11b300d5f901bb1876d5c",
+      "group_id": "group_000003",
+      "mana": 24.0,
+      "cooldown": 6.0,
+      "slow": null,
+      "freeze": null
+    },
+    "after-plain-frost": {
+      "file": "fixtures/after-plain-frost.json",
+      "sha256": "7bc1dc9ef4b0106ea4986dab519aef060cd91d3b24b11b300d5f901bb1876d5c",
+      "group_id": "group_000002",
+      "mana": 16.0,
+      "cooldown": 4.0,
+      "slow": 3.5999999999999996,
+      "freeze": null
+    },
+    "before-ambush-nova": {
+      "file": "fixtures/before-ambush-nova.json",
+      "sha256": "068106a151e7c61579e0a3b945be9df298ddf1100e65b0594ef7440d088d4443",
+      "group_id": "group_000003",
+      "mana": 30.0,
+      "cooldown": 6.0,
+      "slow": null,
+      "freeze": null
+    },
+    "before-frost-lock": {
+      "file": "fixtures/before-frost-lock.json",
+      "sha256": "8a35c114672294d05835b3f38952de1c09062c8508bd068a8cf1154554a8d49e",
+      "group_id": "group_000002",
+      "mana": 19.2,
+      "cooldown": 4.0,
+      "slow": 3.0,
+      "freeze": {
+        "duration_by_rarity": {
+          "boss": 0.2,
+          "magic": 0.6,
+          "normal": 0.6,
+          "rare": 0.35
+        },
+        "enabled": true,
+        "hit_multiplier": 0.75,
+        "immunity_seconds": 1.5,
+        "mana_multiplier": 1.2
+      }
+    },
+    "before-lingering-frost": {
+      "file": "fixtures/before-lingering-frost.json",
+      "sha256": "cfd0414a0e2e53ada9f24d83134d99adbd31ccec527029adf3e16bbc2596fae7",
+      "group_id": "group_000002",
+      "mana": 17.6,
+      "cooldown": 4.0,
+      "slow": 4.5,
+      "freeze": null
+    },
+    "before-nova": {
+      "file": "fixtures/before-nova.json",
+      "sha256": "5eb3ba6d14acd8265c463f7241b03180bee0012156b79110a539a56c11cb2aa6",
+      "group_id": "group_000003",
+      "mana": 24.0,
+      "cooldown": 6.0,
+      "slow": null,
+      "freeze": null
+    },
+    "before-plain-frost": {
+      "file": "fixtures/before-plain-frost.json",
+      "sha256": "5eb3ba6d14acd8265c463f7241b03180bee0012156b79110a539a56c11cb2aa6",
+      "group_id": "group_000002",
+      "mana": 16.0,
+      "cooldown": 4.0,
+      "slow": 3.0,
+      "freeze": null
+    }
+  },
+  "checks_detail": [
+    {
+      "ok": true,
+      "label": "main success, no engine errors"
+    },
+    {
+      "ok": true,
+      "label": "main tested final script hash"
+    },
+    {
+      "ok": true,
+      "label": "main one final report-open check is logged after serializing report"
+    },
+    {
+      "ok": true,
+      "label": "v081-zero success, no engine errors"
+    },
+    {
+      "ok": true,
+      "label": "v081-zero tested final script hash"
+    },
+    {
+      "ok": true,
+      "label": "v081-zero one final report-open check is logged after serializing report"
+    },
+    {
+      "ok": true,
+      "label": "v082-zero success, no engine errors"
+    },
+    {
+      "ok": true,
+      "label": "v082-zero tested final script hash"
+    },
+    {
+      "ok": true,
+      "label": "v082-zero one final report-open check is logged after serializing report"
+    },
+    {
+      "ok": true,
+      "label": "all observed combat bytes exactly match without projection"
+    },
+    {
+      "ok": true,
+      "label": "all raw JSON combat objects exactly match"
+    },
+    {
+      "ok": true,
+      "label": "schema is retained separately as48→49"
+    },
+    {
+      "ok": true,
+      "label": "after-ambush-nova current schema and lawful level4"
+    },
+    {
+      "ok": true,
+      "label": "after-ambush-nova exact selected source state"
+    },
+    {
+      "ok": true,
+      "label": "after-ambush-nova eight-point budget"
+    },
+    {
+      "ok": true,
+      "label": "after-frost-lock current schema and lawful level4"
+    },
+    {
+      "ok": true,
+      "label": "after-frost-lock exact selected source state"
+    },
+    {
+      "ok": true,
+      "label": "after-frost-lock eight-point budget"
+    },
+    {
+      "ok": true,
+      "label": "after-lingering-frost current schema and lawful level4"
+    },
+    {
+      "ok": true,
+      "label": "after-lingering-frost exact selected source state"
+    },
+    {
+      "ok": true,
+      "label": "after-lingering-frost eight-point budget"
+    },
+    {
+      "ok": true,
+      "label": "after-nova current schema and lawful level4"
+    },
+    {
+      "ok": true,
+      "label": "after-nova exact selected source state"
+    },
+    {
+      "ok": true,
+      "label": "after-nova eight-point budget"
+    },
+    {
+      "ok": true,
+      "label": "after-plain-frost current schema and lawful level4"
+    },
+    {
+      "ok": true,
+      "label": "after-plain-frost exact selected source state"
+    },
+    {
+      "ok": true,
+      "label": "after-plain-frost eight-point budget"
+    },
+    {
+      "ok": true,
+      "label": "before-ambush-nova current schema and lawful level4"
+    },
+    {
+      "ok": true,
+      "label": "before-ambush-nova exact selected source state"
+    },
+    {
+      "ok": true,
+      "label": "before-ambush-nova eight-point budget"
+    },
+    {
+      "ok": true,
+      "label": "before-frost-lock current schema and lawful level4"
+    },
+    {
+      "ok": true,
+      "label": "before-frost-lock exact selected source state"
+    },
+    {
+      "ok": true,
+      "label": "before-frost-lock eight-point budget"
+    },
+    {
+      "ok": true,
+      "label": "before-lingering-frost current schema and lawful level4"
+    },
+    {
+      "ok": true,
+      "label": "before-lingering-frost exact selected source state"
+    },
+    {
+      "ok": true,
+      "label": "before-lingering-frost eight-point budget"
+    },
+    {
+      "ok": true,
+      "label": "before-nova current schema and lawful level4"
+    },
+    {
+      "ok": true,
+      "label": "before-nova exact selected source state"
+    },
+    {
+      "ok": true,
+      "label": "before-nova eight-point budget"
+    },
+    {
+      "ok": true,
+      "label": "before-plain-frost current schema and lawful level4"
+    },
+    {
+      "ok": true,
+      "label": "before-plain-frost exact selected source state"
+    },
+    {
+      "ok": true,
+      "label": "before-plain-frost eight-point budget"
+    }
+  ]
+}

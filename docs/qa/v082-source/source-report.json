@@ -1,0 +1,110 @@
+{
+	"changed_old48_nodes": [],
+	"checks": 8768,
+	"exact_line_occurrences": [
+		"14209"
+	],
+	"failures": 0,
+	"new_full_nodes": [
+		"14209"
+	],
+	"new_schema": 49,
+	"old_schema": 48,
+	"routes": [
+		{
+			"class_id": 3,
+			"paid_points": 8,
+			"path": [
+				"54447",
+				"57226",
+				"21678",
+				"32210",
+				"8948",
+				"27659",
+				"37671",
+				"27415",
+				"14209"
+			],
+			"refunded_stat": 0.0,
+			"selected_stat": 0.2,
+			"transactions": "allocate/reload/failed allocation/failed refund/disconnect/refund/reload"
+		},
+		{
+			"class_id": 6,
+			"paid_points": 8,
+			"path": [
+				"44683",
+				"38129",
+				"11334",
+				"15549",
+				"20546",
+				"21301",
+				"37671",
+				"27415",
+				"14209"
+			],
+			"refunded_stat": 0.0,
+			"selected_stat": 0.2,
+			"transactions": "allocate/reload/failed allocation/failed refund/disconnect/refund/reload"
+		}
+	],
+	"source_monster_metadata": [
+		{
+			"changed_fields": [
+				"source_policy",
+				"source_save_version",
+				"policy_version"
+			],
+			"id": "source_gale_stride",
+			"new_policy": 49,
+			"numeric_grants_unchanged": true,
+			"old_policy": 48
+		},
+		{
+			"changed_fields": [
+				"source_policy",
+				"source_save_version",
+				"policy_version"
+			],
+			"id": "source_ember_power",
+			"new_policy": 49,
+			"numeric_grants_unchanged": true,
+			"old_policy": 48
+		},
+		{
+			"changed_fields": [
+				"source_policy",
+				"source_save_version",
+				"policy_version"
+			],
+			"id": "source_grove_vitality",
+			"new_policy": 49,
+			"numeric_grants_unchanged": true,
+			"old_policy": 48
+		},
+		{
+			"changed_fields": [
+				"source_policy",
+				"source_save_version",
+				"policy_version"
+			],
+			"id": "source_aegis_capacity",
+			"new_policy": 49,
+			"numeric_grants_unchanged": true,
+			"old_policy": 48
+		},
+		{
+			"changed_fields": [
+				"source_policy",
+				"source_save_version",
+				"policy_version"
+			],
+			"id": "source_aegis_recovery",
+			"new_policy": 49,
+			"numeric_grants_unchanged": true,
+			"old_policy": 48
+		}
+	],
+	"source_sha256": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+	"source_version": "3.29.1"
+}
