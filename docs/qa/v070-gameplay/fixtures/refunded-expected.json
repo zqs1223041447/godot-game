@@ -1,0 +1,956 @@
+{
+	"basic": {
+		"critical": {
+			"primary": {
+				"chance": 0.05,
+				"multiplier": 1.5
+			}
+		},
+		"error": "",
+		"ok": true,
+		"packets": {
+			"direct": {
+				"assembly": {
+					"added": {
+
+					},
+					"added_effectiveness": 1.0,
+					"base_coefficient": 1.0,
+					"intrinsic": {
+						"physical": 18.0
+					},
+					"stage": "hit_base",
+					"weapon": {
+						"coefficient": 1.0,
+						"components": {
+							"physical": 13.0
+						},
+						"contribution": {
+							"physical": 13.0
+						},
+						"profile": {
+							"base": {
+								"physical": 4.0
+							},
+							"base_id": "forgeblade",
+							"flat": {
+								"physical": 6.0
+							},
+							"increased": {
+								"physical": 0.3
+							},
+							"item_id": "gear_000004",
+							"sources": [
+								{
+									"affix_id": "whetstone_edge",
+									"stat": "weapon_added_physical",
+									"value": 6.0
+								},
+								{
+									"affix_id": "tempered_edge",
+									"stat": "weapon_physical_increased",
+									"value": 0.3
+								}
+							],
+							"stage": "weapon_local"
+						}
+					}
+				},
+				"base": {
+					"physical": 31.0
+				},
+				"role": "direct",
+				"skill_id": "basic",
+				"tags": [
+					"hit",
+					"attack",
+					"melee"
+				]
+			}
+		},
+		"recipe": {
+			"delivery": "melee",
+			"half_angle": 0.7853981633974483,
+			"max_targets": 1,
+			"radius": 60.0
+		},
+		"skill_id": "basic",
+		"snapshot": {
+			"accuracy": 284.0,
+			"added_damage": {
+				"attack": {
+					"fire": 0.0,
+					"physical": 0.0
+				},
+				"spell": {
+					"cold": 0.0,
+					"lightning": 0.0
+				}
+			},
+			"added_damage_sources": [],
+			"base_damage": 18.0,
+			"compiled_packets": {
+				"direct": {
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 1.0,
+						"base_coefficient": 1.0,
+						"intrinsic": {
+							"physical": 18.0
+						},
+						"stage": "hit_base",
+						"weapon": {
+							"coefficient": 1.0,
+							"components": {
+								"physical": 13.0
+							},
+							"contribution": {
+								"physical": 13.0
+							},
+							"profile": {
+								"base": {
+									"physical": 4.0
+								},
+								"base_id": "forgeblade",
+								"flat": {
+									"physical": 6.0
+								},
+								"increased": {
+									"physical": 0.3
+								},
+								"item_id": "gear_000004",
+								"sources": [
+									{
+										"affix_id": "whetstone_edge",
+										"stat": "weapon_added_physical",
+										"value": 6.0
+									},
+									{
+										"affix_id": "tempered_edge",
+										"stat": "weapon_physical_increased",
+										"value": 0.3
+									}
+								],
+								"stage": "weapon_local"
+							}
+						}
+					},
+					"base": {
+						"physical": 31.0
+					},
+					"role": "direct",
+					"skill_id": "basic",
+					"tags": [
+						"hit",
+						"attack",
+						"melee"
+					]
+				}
+			},
+			"compiled_skill_id": "basic",
+			"critical": {
+				"primary": {
+					"chance": 0.05,
+					"multiplier": 1.5
+				}
+			},
+			"critical_modifiers": {
+				"base_chance": 0.05,
+				"base_multiplier": 1.5
+			},
+			"effects": [
+				"explode_on_flight_end",
+				"return_on_range"
+			],
+			"explosion_recipe": {
+				"added_effectiveness": 0.0,
+				"coefficient": 0.9,
+				"radius": 76.0
+			},
+			"modifiers": [
+				{
+					"all_tags": [
+						"attack",
+						"melee"
+					],
+					"damage_types": [
+						"physical"
+					],
+					"id": "melee_physical_increased",
+					"mode": "increased",
+					"value": 0.02
+				},
+				{
+					"all_tags": [],
+					"damage_types": [],
+					"id": "global_increased",
+					"mode": "increased",
+					"value": 0.2
+				},
+				{
+					"all_tags": [],
+					"damage_types": [
+						"fire",
+						"cold",
+						"lightning"
+					],
+					"id": "elemental_increased",
+					"mode": "increased",
+					"value": 0.3
+				}
+			],
+			"projectile_count": 0,
+			"tornado_recipe": {
+				"child": {
+					"added_effectiveness": 0.7,
+					"coefficient": 0.7,
+					"lifetime": 1.7,
+					"pierce": -1,
+					"radius": 4.5,
+					"range": 150.0,
+					"role": "child",
+					"speed": 260.0,
+					"split": false
+				},
+				"child_count": 3,
+				"explosion": {
+					"added_effectiveness": 0.0,
+					"coefficient": 0.9,
+					"radius": 76.0
+				},
+				"parent": {
+					"added_effectiveness": 1.0,
+					"coefficient": 1.0,
+					"lifetime": 0.9,
+					"pierce": -1,
+					"radius": 6.0,
+					"range": 150.0,
+					"role": "parent",
+					"speed": 420.0,
+					"split": true
+				},
+				"parent_count": 3,
+				"spread": 0.16
+			},
+			"weapon_profile": {
+				"base": {
+					"physical": 4.0
+				},
+				"base_id": "forgeblade",
+				"flat": {
+					"physical": 6.0
+				},
+				"increased": {
+					"physical": 0.3
+				},
+				"item_id": "gear_000004",
+				"sources": [
+					{
+						"affix_id": "whetstone_edge",
+						"stat": "weapon_added_physical",
+						"value": 6.0
+					},
+					{
+						"affix_id": "tempered_edge",
+						"stat": "weapon_physical_increased",
+						"value": 0.3
+					}
+				],
+				"stage": "weapon_local"
+			}
+		}
+	},
+	"cleave": {
+		"cooldown": 1.4,
+		"critical": {
+			"primary": {
+				"chance": 0.05,
+				"multiplier": 1.5
+			}
+		},
+		"error": "",
+		"group_id": "group_000009",
+		"initial_count": 0,
+		"main_uid": "item_000014",
+		"mana": 12.0,
+		"ok": true,
+		"packets": {
+			"direct": {
+				"assembly": {
+					"added": {
+
+					},
+					"added_effectiveness": 2.8,
+					"base_coefficient": 2.8,
+					"intrinsic": {
+						"physical": 50.4
+					},
+					"stage": "hit_base",
+					"weapon": {
+						"coefficient": 2.8,
+						"components": {
+							"physical": 13.0
+						},
+						"contribution": {
+							"physical": 36.4
+						},
+						"profile": {
+							"base": {
+								"physical": 4.0
+							},
+							"base_id": "forgeblade",
+							"flat": {
+								"physical": 6.0
+							},
+							"increased": {
+								"physical": 0.3
+							},
+							"item_id": "gear_000004",
+							"sources": [
+								{
+									"affix_id": "whetstone_edge",
+									"stat": "weapon_added_physical",
+									"value": 6.0
+								},
+								{
+									"affix_id": "tempered_edge",
+									"stat": "weapon_physical_increased",
+									"value": 0.3
+								}
+							],
+							"stage": "weapon_local"
+						}
+					}
+				},
+				"base": {
+					"physical": 86.8
+				},
+				"role": "direct",
+				"skill_id": "cleave",
+				"tags": [
+					"hit",
+					"attack",
+					"melee",
+					"area"
+				]
+			}
+		},
+		"recipe": {
+			"half_angle": 1.5707963267948966,
+			"radius": 95.0
+		},
+		"skill_id": "cleave",
+		"snapshot": {
+			"accuracy": 284.0,
+			"added_damage": {
+				"attack": {
+					"fire": 0.0,
+					"physical": 0.0
+				},
+				"spell": {
+					"cold": 0.0,
+					"lightning": 0.0
+				}
+			},
+			"added_damage_sources": [],
+			"base_damage": 18.0,
+			"compiled_packets": {
+				"direct": {
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 2.8,
+						"base_coefficient": 2.8,
+						"intrinsic": {
+							"physical": 50.4
+						},
+						"stage": "hit_base",
+						"weapon": {
+							"coefficient": 2.8,
+							"components": {
+								"physical": 13.0
+							},
+							"contribution": {
+								"physical": 36.4
+							},
+							"profile": {
+								"base": {
+									"physical": 4.0
+								},
+								"base_id": "forgeblade",
+								"flat": {
+									"physical": 6.0
+								},
+								"increased": {
+									"physical": 0.3
+								},
+								"item_id": "gear_000004",
+								"sources": [
+									{
+										"affix_id": "whetstone_edge",
+										"stat": "weapon_added_physical",
+										"value": 6.0
+									},
+									{
+										"affix_id": "tempered_edge",
+										"stat": "weapon_physical_increased",
+										"value": 0.3
+									}
+								],
+								"stage": "weapon_local"
+							}
+						}
+					},
+					"base": {
+						"physical": 86.8
+					},
+					"role": "direct",
+					"skill_id": "cleave",
+					"tags": [
+						"hit",
+						"attack",
+						"melee",
+						"area"
+					]
+				}
+			},
+			"compiled_skill_id": "cleave",
+			"critical": {
+				"primary": {
+					"chance": 0.05,
+					"multiplier": 1.5
+				}
+			},
+			"critical_modifiers": {
+				"base_chance": 0.05,
+				"base_multiplier": 1.5
+			},
+			"effects": [
+				"explode_on_flight_end",
+				"return_on_range"
+			],
+			"explosion_recipe": {
+				"added_effectiveness": 0.0,
+				"coefficient": 0.9,
+				"radius": 76.0
+			},
+			"modifiers": [
+				{
+					"all_tags": [
+						"attack",
+						"melee"
+					],
+					"damage_types": [
+						"physical"
+					],
+					"id": "melee_physical_increased",
+					"mode": "increased",
+					"value": 0.02
+				},
+				{
+					"all_tags": [],
+					"damage_types": [],
+					"id": "global_increased",
+					"mode": "increased",
+					"value": 0.2
+				},
+				{
+					"all_tags": [],
+					"damage_types": [
+						"fire",
+						"cold",
+						"lightning"
+					],
+					"id": "elemental_increased",
+					"mode": "increased",
+					"value": 0.3
+				}
+			],
+			"projectile_count": 0,
+			"tornado_recipe": {
+				"child": {
+					"added_effectiveness": 0.7,
+					"coefficient": 0.7,
+					"lifetime": 1.7,
+					"pierce": -1,
+					"radius": 4.5,
+					"range": 150.0,
+					"role": "child",
+					"speed": 260.0,
+					"split": false
+				},
+				"child_count": 3,
+				"explosion": {
+					"added_effectiveness": 0.0,
+					"coefficient": 0.9,
+					"radius": 76.0
+				},
+				"parent": {
+					"added_effectiveness": 1.0,
+					"coefficient": 1.0,
+					"lifetime": 0.9,
+					"pierce": -1,
+					"radius": 6.0,
+					"range": 150.0,
+					"role": "parent",
+					"speed": 420.0,
+					"split": true
+				},
+				"parent_count": 3,
+				"spread": 0.16
+			},
+			"weapon_profile": {
+				"base": {
+					"physical": 4.0
+				},
+				"base_id": "forgeblade",
+				"flat": {
+					"physical": 6.0
+				},
+				"increased": {
+					"physical": 0.3
+				},
+				"item_id": "gear_000004",
+				"sources": [
+					{
+						"affix_id": "whetstone_edge",
+						"stat": "weapon_added_physical",
+						"value": 6.0
+					},
+					{
+						"affix_id": "tempered_edge",
+						"stat": "weapon_physical_increased",
+						"value": 0.3
+					}
+				],
+				"stage": "weapon_local"
+			}
+		},
+		"support_ids": []
+	},
+	"stats": {
+		"accuracy": 284.0,
+		"accuracy_increased": 0.0,
+		"additional_skill_slots": 0.0,
+		"area_increased": 0.0,
+		"area_size_increased": 0.0,
+		"armour": 0.0,
+		"armour_increased": 0.0,
+		"attack_added_fire": 0.0,
+		"attack_added_physical": 0.0,
+		"attack_crit_chance_increased": 0.0,
+		"attack_elemental_increased": 0.0,
+		"attack_life_leech": 0.0,
+		"attack_mana_leech": 0.0,
+		"attack_physical_increased": 0.0,
+		"attack_speed": 1.7,
+		"attack_speed_increased": 0.0,
+		"chaos_increased": 0.0,
+		"cold_increased": 0.0,
+		"cold_resistance": 0.0,
+		"crit_base_chance": 0.05,
+		"crit_base_multiplier": 1.5,
+		"crit_chance_increased": 0.0,
+		"crit_multiplier_add": 0.0,
+		"damage": 18.0,
+		"damage_taken_from_mana_before_life": 0.0,
+		"damaging_ailments_faster": 0.0,
+		"dexterity": 92.0,
+		"elemental_increased": 0.3,
+		"evasion": 41.3,
+		"evasion_increased": 0.0,
+		"fire_dot_multiplier_add": 0.0,
+		"fire_increased": 0.0,
+		"fire_resistance": 0.0,
+		"flask_charges_gained_increased": 0.0,
+		"flask_life_recovery_increased": 0.0,
+		"flask_mana_recovery_increased": 0.0,
+		"global_increased": 0.2,
+		"intelligence": 14.0,
+		"life_leech_max_rate_increased": 0.0,
+		"life_leech_rate_increased": 0.0,
+		"life_regen": 0.0,
+		"life_regen_percent": 0.0,
+		"lightning_increased": 0.0,
+		"lightning_resistance": 0.0,
+		"mana_cost_efficiency_increased": 0.0,
+		"mana_cost_increased": 0.0,
+		"mana_leech_max_rate_increased": 0.0,
+		"mana_leech_rate_increased": 0.0,
+		"mana_regen": 10.260000000000002,
+		"mana_regen_increased": 0.14,
+		"max_health": 141.0,
+		"max_mana": 129.0,
+		"max_shield": 75.75,
+		"maximum_cold_resistance_add": 0.0,
+		"maximum_fire_resistance_add": 0.0,
+		"maximum_lightning_resistance_add": 0.0,
+		"melee_area_size_increased": 0.0,
+		"melee_crit_chance_increased": 0.0,
+		"melee_crit_multiplier_add": 0.0,
+		"melee_physical_increased": 0.02,
+		"move_speed": 240.0,
+		"move_speed_increased": 0.0,
+		"physical_attack_life_leech": 0.0,
+		"physical_attack_mana_leech": 0.0,
+		"physical_increased": 0.0,
+		"projectile_attack_crit_chance_increased": 0.0,
+		"projectile_attack_crit_multiplier_add": 0.0,
+		"projectile_count": 0.0,
+		"projectile_increased": 0.0,
+		"projectile_speed_increased": 0.0,
+		"resolute_technique": 0.0,
+		"shield_recharge_delay": 4.0,
+		"shield_recharge_rate": 13.0,
+		"shield_recharge_rate_increased": 0.0,
+		"shield_recharge_start_faster": 0.0,
+		"shield_regen": 13.0,
+		"spell_added_cold": 0.0,
+		"spell_added_lightning": 0.0,
+		"spell_area_size_increased": 0.0,
+		"spell_crit_chance_increased": 0.0,
+		"spell_crit_multiplier_add": 0.0,
+		"spell_increased": 0.0,
+		"strength": 14.0
+	},
+	"tornado": {
+		"cooldown": 2.5,
+		"critical": {
+			"primary": {
+				"chance": 0.05,
+				"multiplier": 1.5
+			},
+			"secondary": {
+				"chance": 0.05,
+				"multiplier": 1.5
+			}
+		},
+		"error": "",
+		"group_id": "group_000008",
+		"initial_count": 3,
+		"main_uid": "migration_gem_000008",
+		"mana": 18.0,
+		"ok": true,
+		"packets": {
+			"child": {
+				"assembly": {
+					"added": {
+
+					},
+					"added_effectiveness": 0.7,
+					"base_coefficient": 0.7,
+					"intrinsic": {
+						"fire": 5.04,
+						"physical": 7.559999999999999
+					},
+					"stage": "hit_base"
+				},
+				"base": {
+					"fire": 5.04,
+					"physical": 7.559999999999999
+				},
+				"role": "child",
+				"skill_id": "tornado",
+				"tags": [
+					"hit",
+					"attack",
+					"projectile"
+				]
+			},
+			"parent": {
+				"assembly": {
+					"added": {
+
+					},
+					"added_effectiveness": 1.0,
+					"base_coefficient": 1.0,
+					"intrinsic": {
+						"fire": 7.2,
+						"physical": 10.799999999999999
+					},
+					"stage": "hit_base"
+				},
+				"base": {
+					"fire": 7.2,
+					"physical": 10.799999999999999
+				},
+				"role": "parent",
+				"skill_id": "tornado",
+				"tags": [
+					"hit",
+					"attack",
+					"projectile"
+				]
+			},
+			"secondary": {
+				"assembly": {
+					"added": {
+
+					},
+					"added_effectiveness": 0.0,
+					"base_coefficient": 0.9,
+					"intrinsic": {
+						"fire": 16.2
+					},
+					"stage": "hit_base"
+				},
+				"base": {
+					"fire": 16.2
+				},
+				"role": "secondary",
+				"skill_id": "tornado",
+				"tags": [
+					"hit",
+					"area",
+					"secondary",
+					"explosion"
+				]
+			}
+		},
+		"recipe": {
+			"child": {
+				"added_effectiveness": 0.7,
+				"coefficient": 0.7,
+				"lifetime": 1.7,
+				"pierce": -1,
+				"radius": 4.5,
+				"range": 150.0,
+				"role": "child",
+				"speed": 260.0,
+				"split": false
+			},
+			"child_count": 3,
+			"explosion": {
+				"added_effectiveness": 0.0,
+				"coefficient": 0.9,
+				"radius": 76.0
+			},
+			"initial_count": 3,
+			"parent": {
+				"added_effectiveness": 1.0,
+				"coefficient": 1.0,
+				"lifetime": 0.9,
+				"pierce": -1,
+				"radius": 6.0,
+				"range": 150.0,
+				"role": "parent",
+				"speed": 420.0,
+				"split": true
+			},
+			"parent_count": 3,
+			"spread": 0.16
+		},
+		"skill_id": "tornado",
+		"snapshot": {
+			"accuracy": 284.0,
+			"added_damage": {
+				"attack": {
+					"fire": 0.0,
+					"physical": 0.0
+				},
+				"spell": {
+					"cold": 0.0,
+					"lightning": 0.0
+				}
+			},
+			"added_damage_sources": [],
+			"base_damage": 18.0,
+			"compiled_packets": {
+				"child": {
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 0.7,
+						"base_coefficient": 0.7,
+						"intrinsic": {
+							"fire": 5.04,
+							"physical": 7.559999999999999
+						},
+						"stage": "hit_base"
+					},
+					"base": {
+						"fire": 5.04,
+						"physical": 7.559999999999999
+					},
+					"role": "child",
+					"skill_id": "tornado",
+					"tags": [
+						"hit",
+						"attack",
+						"projectile"
+					]
+				},
+				"parent": {
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 1.0,
+						"base_coefficient": 1.0,
+						"intrinsic": {
+							"fire": 7.2,
+							"physical": 10.799999999999999
+						},
+						"stage": "hit_base"
+					},
+					"base": {
+						"fire": 7.2,
+						"physical": 10.799999999999999
+					},
+					"role": "parent",
+					"skill_id": "tornado",
+					"tags": [
+						"hit",
+						"attack",
+						"projectile"
+					]
+				},
+				"secondary": {
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 0.0,
+						"base_coefficient": 0.9,
+						"intrinsic": {
+							"fire": 16.2
+						},
+						"stage": "hit_base"
+					},
+					"base": {
+						"fire": 16.2
+					},
+					"role": "secondary",
+					"skill_id": "tornado",
+					"tags": [
+						"hit",
+						"area",
+						"secondary",
+						"explosion"
+					]
+				}
+			},
+			"compiled_skill_id": "tornado",
+			"critical": {
+				"primary": {
+					"chance": 0.05,
+					"multiplier": 1.5
+				},
+				"secondary": {
+					"chance": 0.05,
+					"multiplier": 1.5
+				}
+			},
+			"critical_modifiers": {
+				"base_chance": 0.05,
+				"base_multiplier": 1.5
+			},
+			"effects": [
+				"explode_on_flight_end",
+				"return_on_range"
+			],
+			"explosion_recipe": {
+				"added_effectiveness": 0.0,
+				"coefficient": 0.9,
+				"radius": 76.0
+			},
+			"initial_count": 3,
+			"modifiers": [
+				{
+					"all_tags": [
+						"attack",
+						"melee"
+					],
+					"damage_types": [
+						"physical"
+					],
+					"id": "melee_physical_increased",
+					"mode": "increased",
+					"value": 0.02
+				},
+				{
+					"all_tags": [],
+					"damage_types": [],
+					"id": "global_increased",
+					"mode": "increased",
+					"value": 0.2
+				},
+				{
+					"all_tags": [],
+					"damage_types": [
+						"fire",
+						"cold",
+						"lightning"
+					],
+					"id": "elemental_increased",
+					"mode": "increased",
+					"value": 0.3
+				}
+			],
+			"projectile_count": 0,
+			"tornado_recipe": {
+				"child": {
+					"added_effectiveness": 0.7,
+					"coefficient": 0.7,
+					"lifetime": 1.7,
+					"pierce": -1,
+					"radius": 4.5,
+					"range": 150.0,
+					"role": "child",
+					"speed": 260.0,
+					"split": false
+				},
+				"child_count": 3,
+				"explosion": {
+					"added_effectiveness": 0.0,
+					"coefficient": 0.9,
+					"radius": 76.0
+				},
+				"parent": {
+					"added_effectiveness": 1.0,
+					"coefficient": 1.0,
+					"lifetime": 0.9,
+					"pierce": -1,
+					"radius": 6.0,
+					"range": 150.0,
+					"role": "parent",
+					"speed": 420.0,
+					"split": true
+				},
+				"parent_count": 3,
+				"spread": 0.16
+			},
+			"weapon_profile": {
+				"base": {
+					"physical": 4.0
+				},
+				"base_id": "forgeblade",
+				"flat": {
+					"physical": 6.0
+				},
+				"increased": {
+					"physical": 0.3
+				},
+				"item_id": "gear_000004",
+				"sources": [
+					{
+						"affix_id": "whetstone_edge",
+						"stat": "weapon_added_physical",
+						"value": 6.0
+					},
+					{
+						"affix_id": "tempered_edge",
+						"stat": "weapon_physical_increased",
+						"value": 0.3
+					}
+				],
+				"stage": "weapon_local"
+			}
+		},
+		"support_ids": []
+	}
+}

@@ -4345,7 +4345,7 @@
 			"meteor"
 		],
 		"snapshot": "成功放置时冻结技能、伤害、范围和一次主暴击；之后换装、退款或移除辅助不改变已有符印，也不释放未触发名额；爆发时读取目标当前防御",
-		"source_policy": 44,
+		"source_policy": 45,
 		"statuses": "新星可与感电同用，先结算本次命中再向存活目标施加，后续命中受益；陨星可接点燃或余烬扩散，两者仍互斥，沿原火分量与持续伤害准入；伏击不额外重复应用伤害倍率",
 		"support_id": "ambush",
 		"test_offer": {
@@ -6123,7 +6123,7 @@
 				"normal_points": 5,
 				"source_version": "3.29.1"
 			},
-			"version": 44
+			"version": 45
 		},
 		"default_casts": {
 			"group_000001": {
@@ -7246,7 +7246,7 @@
 				"evasion": 320.0
 			}
 		},
-		"save_version": 44,
+		"save_version": 45,
 		"skitter_accuracy_example": {
 			"base_accuracy": 140,
 			"base_chance": 0.96,
@@ -7796,7 +7796,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 44,
+				"save_version": 45,
 				"source": {
 					"affixes": [
 						{
@@ -8300,7 +8300,7 @@
 				"schema_version": 2,
 				"status": "prototype"
 			},
-			"save_version": 44
+			"save_version": 45
 		},
 		"elevate": {
 			"description": "保留魔法装备已有词缀，升为稀有并补至4至6条。",
@@ -8502,7 +8502,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 44,
+				"save_version": 45,
 				"source": {
 					"affixes": [
 						{
@@ -8687,7 +8687,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 44,
+				"save_version": 45,
 				"source": {
 					"affixes": [],
 					"base_id": "ashwood_bow",
@@ -8874,7 +8874,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 44,
+				"save_version": 45,
 				"source": {
 					"affixes": [
 						{
@@ -9078,7 +9078,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 44,
+				"save_version": 45,
 				"source": {
 					"affixes": [
 						{
@@ -9221,7 +9221,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 44,
+				"save_version": 45,
 				"source": {
 					"affixes": [
 						{
@@ -9705,7 +9705,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 44,
+				"save_version": 45,
 				"source": {
 					"affixes": [
 						{
@@ -11509,7 +11509,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 44,
+				"save_version": 45,
 				"source": {
 					"affixes": [
 						{
@@ -11839,7 +11839,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 44,
+				"save_version": 45,
 				"source": {
 					"affixes": [
 						{
@@ -12158,7 +12158,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 44,
+				"save_version": 45,
 				"source": {
 					"affixes": [
 						{
@@ -12221,7 +12221,7 @@
 			"example_quantity": 1,
 			"name": "校准碎片",
 			"quantity_source": "items[uid].payload.quantity",
-			"save_version": 44,
+			"save_version": 45,
 			"size": [
 				1,
 				1
@@ -14519,7 +14519,7 @@
 				}
 			}
 		},
-		"source_policy": 44,
+		"source_policy": 45,
 		"tier_boundaries": {
 			"1": {
 				"ironhide": [
@@ -17828,7 +17828,7 @@
 		"slot_targets": [
 			"body_armour"
 		],
-		"source_policy": 44,
+		"source_policy": 45,
 		"supply_scope": "自然新池只替换10%防御入口；新自然分布及后续随机状态有意改变，显式旧pool/profile仍保留历史结果",
 		"test_supply": {
 			"instance": {
@@ -20395,7 +20395,7 @@
 		"route_scope": "野蛮人69级73点的普通连通可行见证，保留沿途全部属性，无写档；不是全局最省点或完整配装最优结论",
 		"safety_cap": 0.83,
 		"scope": "只接入无条件最大火、冰、电抗性；全元素句展开三字段，每ID一次。寻枝珠宝只影响连接准入，不重复授予属性",
-		"source_policy": 44,
+		"source_policy": 45,
 		"source_reminder": "源资料90%提醒原样保留；本游戏安全上限为83%，不采用90%预算",
 		"source_sha256": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
 		"source_version": "3.29.1",
@@ -36641,7 +36641,7 @@
 		"pool_id": "forgeblade_v34",
 		"save_version": 34
 	},
-	"game_version": "0.69.0",
+	"game_version": "0.70.0",
 	"inward_pull": {
 		"damage_scope": "仍是原direct法术、范围、命中；不添加trap伤害标签，不开放陷阱伤害、牵引词族或新的源树消费者",
 		"direction": "命中照常结算后，将原向外冲量反转为朝本次真实爆发圆心；新星使用施放圆心、陨星使用实际落点、伏击使用已放置符印位置；目标恰好在圆心时冲量为零",
@@ -37465,7 +37465,7 @@
 			"meteor"
 		],
 		"snapshot": "compiled.area_impulse_profile与snapshot.area_impulse_policy保存独立副本；符印伏击在放置时冻结牵引，之后换装、退款或拆卸辅助不改变已有符印",
-		"source_policy": 44,
+		"source_policy": 45,
 		"statuses": "感电、点燃或余烬扩散继续使用原准入与结算顺序；牵引不改变它们的数值，点燃与余烬仍互斥",
 		"support_id": "inward_pull",
 		"test_offer": {
@@ -40538,7 +40538,7 @@
 		],
 		"scope": "护甲只降低物理命中；元素命中与已存在的燃烧不会因转换护甲而减伤。开启后失去闪避，不能把护甲增幅当成总体生存提升",
 		"shared_rule": "H只扣除同一原始词句同时提供护甲与闪避提高的部分；不同原句的两个提高即使数值相同也分别生效，不能按两总量较小值去重",
-		"source_policy": 44,
+		"source_policy": 45,
 		"source_sha256": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
 		"source_version": "3.29.1"
 	},
@@ -46675,7 +46675,7 @@
 			"max_targets": 1,
 			"radius": 60.0
 		},
-		"save_version": 44,
+		"save_version": 45,
 		"scope": "hit + attack + melee；不含area，不受范围或投射物速度提高，也不占投射物容量，无返回或飞行结束爆炸。",
 		"timing": "沿用attack_timer与当前attack_speed；没有独立技能冷却或魔力支付。"
 	},
@@ -49572,7 +49572,7 @@
 		"quality": 0,
 		"recycle_credit": 1,
 		"recycle_location": "bag",
-		"schema": 44,
+		"schema": 45,
 		"test_supply_separate": true
 	},
 	"normal_journey": {
@@ -66950,7 +66950,7 @@
 		],
 		"snapshot": "施放时冻结原始组装、转换比例和modifier；退款或换装仅影响之后的新施放，已在途母箭、子箭和已建立燃烧保留原快照。无转换时不增加空profile、parts或转换字段",
 		"source_line": "40% of Physical Damage Converted to Fire Damage",
-		"source_policy": 44,
+		"source_policy": 45,
 		"source_sha256": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
 		"source_version": "3.29.1",
 		"targets": {
@@ -66961,6 +66961,4703 @@
 				"fire_resistance": 0.75
 			}
 		}
+	},
+	"precise_technique": {
+		"attack_more": 0.4,
+		"availability": "仅节点63620的完整多行原文开放，不接受截断的增伤句、禁暴击半句或同义改写。没有新节点、宝石、词缀或图片；坚决技艺仍独立决定不能被闪避，两个禁暴击效果取并集",
+		"bounds": "本节是实际Main快照的只读重编译与资料保全；实际在途、转换与暴击随机流证据见本批gameplay和rules记录。没有Windows、打包、tag或Release验收",
+		"condition": "A为最终命中值，L为最终最大生命；仅A严格大于L时获得一条40%攻击伤害MORE，等于或低于时为0。当前受伤生命不参与比较，喝药或回复不会切换条件",
+		"critical_cost": "只要分配精准技艺，无论A与L是否满足条件，所有攻击、法术及独立爆炸均不能暴击。既有潜在倍率可保留展示，但最终暴击率为0；不额外授予不能被闪避",
+		"early_tradeoff": "游侠从原起点沿8点合法路线即可到达；裸装前置属性为A284、L141，早期容易满足条件，因此是已知的强势入口。持续堆生命会抬高L并失去攻击MORE，禁暴击代价仍在；这不是长期平衡或最优路线结论",
+		"equipment_vocabulary": 39,
+		"example_scope": "三个状态直接复用本批通过实际Main的快照：已点且A>L、已点且A<L、已退款。前两者以实际生命装备切换阈值；已点高于阈值与退款状态使用相同短刃和已装备物品，可直接比较增伤与暴击取舍，数值是成功且不暴击、零防御的一次命中，不是DPS",
+		"examples": {
+			"refunded": {
+				"casts": {
+					"basic": {
+						"compiled": {
+							"critical": {
+								"primary": {
+									"chance": 0.05,
+									"multiplier": 1.5
+								}
+							},
+							"error": "",
+							"ok": true,
+							"packets": {
+								"direct": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 1.0,
+										"base_coefficient": 1.0,
+										"intrinsic": {
+											"physical": 18.0
+										},
+										"stage": "hit_base",
+										"weapon": {
+											"coefficient": 1.0,
+											"components": {
+												"physical": 13.0
+											},
+											"contribution": {
+												"physical": 13.0
+											},
+											"profile": {
+												"base": {
+													"physical": 4.0
+												},
+												"base_id": "forgeblade",
+												"flat": {
+													"physical": 6.0
+												},
+												"increased": {
+													"physical": 0.3
+												},
+												"item_id": "gear_000004",
+												"sources": [
+													{
+														"affix_id": "whetstone_edge",
+														"stat": "weapon_added_physical",
+														"value": 6.0
+													},
+													{
+														"affix_id": "tempered_edge",
+														"stat": "weapon_physical_increased",
+														"value": 0.3
+													}
+												],
+												"stage": "weapon_local"
+											}
+										}
+									},
+									"base": {
+										"physical": 31.0
+									},
+									"role": "direct",
+									"skill_id": "basic",
+									"tags": [
+										"hit",
+										"attack",
+										"melee"
+									]
+								}
+							},
+							"recipe": {
+								"delivery": "melee",
+								"half_angle": 0.7853981633974483,
+								"max_targets": 1,
+								"radius": 60.0
+							},
+							"skill_id": "basic",
+							"snapshot": {
+								"accuracy": 284.0,
+								"added_damage": {
+									"attack": {
+										"fire": 0.0,
+										"physical": 0.0
+									},
+									"spell": {
+										"cold": 0.0,
+										"lightning": 0.0
+									}
+								},
+								"added_damage_sources": [],
+								"base_damage": 18.0,
+								"compiled_packets": {
+									"direct": {
+										"assembly": {
+											"added": {
+
+											},
+											"added_effectiveness": 1.0,
+											"base_coefficient": 1.0,
+											"intrinsic": {
+												"physical": 18.0
+											},
+											"stage": "hit_base",
+											"weapon": {
+												"coefficient": 1.0,
+												"components": {
+													"physical": 13.0
+												},
+												"contribution": {
+													"physical": 13.0
+												},
+												"profile": {
+													"base": {
+														"physical": 4.0
+													},
+													"base_id": "forgeblade",
+													"flat": {
+														"physical": 6.0
+													},
+													"increased": {
+														"physical": 0.3
+													},
+													"item_id": "gear_000004",
+													"sources": [
+														{
+															"affix_id": "whetstone_edge",
+															"stat": "weapon_added_physical",
+															"value": 6.0
+														},
+														{
+															"affix_id": "tempered_edge",
+															"stat": "weapon_physical_increased",
+															"value": 0.3
+														}
+													],
+													"stage": "weapon_local"
+												}
+											}
+										},
+										"base": {
+											"physical": 31.0
+										},
+										"role": "direct",
+										"skill_id": "basic",
+										"tags": [
+											"hit",
+											"attack",
+											"melee"
+										]
+									}
+								},
+								"compiled_skill_id": "basic",
+								"critical": {
+									"primary": {
+										"chance": 0.05,
+										"multiplier": 1.5
+									}
+								},
+								"critical_modifiers": {
+									"base_chance": 0.05,
+									"base_multiplier": 1.5
+								},
+								"effects": [
+									"explode_on_flight_end",
+									"return_on_range"
+								],
+								"explosion_recipe": {
+									"added_effectiveness": 0.0,
+									"coefficient": 0.9,
+									"radius": 76.0
+								},
+								"modifiers": [
+									{
+										"all_tags": [
+											"attack",
+											"melee"
+										],
+										"damage_types": [
+											"physical"
+										],
+										"id": "melee_physical_increased",
+										"mode": "increased",
+										"value": 0.02
+									},
+									{
+										"all_tags": [],
+										"damage_types": [],
+										"id": "global_increased",
+										"mode": "increased",
+										"value": 0.2
+									},
+									{
+										"all_tags": [],
+										"damage_types": [
+											"fire",
+											"cold",
+											"lightning"
+										],
+										"id": "elemental_increased",
+										"mode": "increased",
+										"value": 0.3
+									}
+								],
+								"projectile_count": 0,
+								"tornado_recipe": {
+									"child": {
+										"added_effectiveness": 0.7,
+										"coefficient": 0.7,
+										"lifetime": 1.7,
+										"pierce": -1,
+										"radius": 4.5,
+										"range": 150.0,
+										"role": "child",
+										"speed": 260.0,
+										"split": false
+									},
+									"child_count": 3,
+									"explosion": {
+										"added_effectiveness": 0.0,
+										"coefficient": 0.9,
+										"radius": 76.0
+									},
+									"parent": {
+										"added_effectiveness": 1.0,
+										"coefficient": 1.0,
+										"lifetime": 0.9,
+										"pierce": -1,
+										"radius": 6.0,
+										"range": 150.0,
+										"role": "parent",
+										"speed": 420.0,
+										"split": true
+									},
+									"parent_count": 3,
+									"spread": 0.16
+								},
+								"weapon_profile": {
+									"base": {
+										"physical": 4.0
+									},
+									"base_id": "forgeblade",
+									"flat": {
+										"physical": 6.0
+									},
+									"increased": {
+										"physical": 0.3
+									},
+									"item_id": "gear_000004",
+									"sources": [
+										{
+											"affix_id": "whetstone_edge",
+											"stat": "weapon_added_physical",
+											"value": 6.0
+										},
+										{
+											"affix_id": "tempered_edge",
+											"stat": "weapon_physical_increased",
+											"value": 0.3
+										}
+									],
+									"stage": "weapon_local"
+								}
+							}
+						},
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n普通近战攻击：距离 60 · 最多 1 个目标；不发射投射物。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 284，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n每次命中：物理 37.82\n固有：物理 18.00；附加：无；附加效用 1.00；武器：物理 13.00〔(4.00 + 6.00) × (1 + 0.30) × 技能倍率 1.00〕",
+						"hits": {
+							"direct": {
+								"critical": {
+									"chance": 0.05,
+									"multiplier": 1.5
+								},
+								"resolved": {
+									"components": {
+										"physical": 37.82
+									},
+									"details": [
+										{
+											"base": 31.0,
+											"before_defense": 37.82,
+											"final": 37.82,
+											"increased": 0.22,
+											"modifiers": [
+												"melee_physical_increased",
+												"global_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "physical"
+										}
+									],
+									"total": 37.82
+								},
+								"tags": [
+									"hit",
+									"attack",
+									"melee"
+								]
+							}
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每次命中 37.82"
+					},
+					"cleave": {
+						"compiled": {
+							"cooldown": 1.4,
+							"critical": {
+								"primary": {
+									"chance": 0.05,
+									"multiplier": 1.5
+								}
+							},
+							"error": "",
+							"group_id": "group_000009",
+							"initial_count": 0,
+							"main_uid": "item_000014",
+							"mana": 12.0,
+							"ok": true,
+							"packets": {
+								"direct": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 2.8,
+										"base_coefficient": 2.8,
+										"intrinsic": {
+											"physical": 50.4
+										},
+										"stage": "hit_base",
+										"weapon": {
+											"coefficient": 2.8,
+											"components": {
+												"physical": 13.0
+											},
+											"contribution": {
+												"physical": 36.4
+											},
+											"profile": {
+												"base": {
+													"physical": 4.0
+												},
+												"base_id": "forgeblade",
+												"flat": {
+													"physical": 6.0
+												},
+												"increased": {
+													"physical": 0.3
+												},
+												"item_id": "gear_000004",
+												"sources": [
+													{
+														"affix_id": "whetstone_edge",
+														"stat": "weapon_added_physical",
+														"value": 6.0
+													},
+													{
+														"affix_id": "tempered_edge",
+														"stat": "weapon_physical_increased",
+														"value": 0.3
+													}
+												],
+												"stage": "weapon_local"
+											}
+										}
+									},
+									"base": {
+										"physical": 86.8
+									},
+									"role": "direct",
+									"skill_id": "cleave",
+									"tags": [
+										"hit",
+										"attack",
+										"melee",
+										"area"
+									]
+								}
+							},
+							"recipe": {
+								"half_angle": 1.5707963267948966,
+								"radius": 95.0
+							},
+							"skill_id": "cleave",
+							"snapshot": {
+								"accuracy": 284.0,
+								"added_damage": {
+									"attack": {
+										"fire": 0.0,
+										"physical": 0.0
+									},
+									"spell": {
+										"cold": 0.0,
+										"lightning": 0.0
+									}
+								},
+								"added_damage_sources": [],
+								"base_damage": 18.0,
+								"compiled_packets": {
+									"direct": {
+										"assembly": {
+											"added": {
+
+											},
+											"added_effectiveness": 2.8,
+											"base_coefficient": 2.8,
+											"intrinsic": {
+												"physical": 50.4
+											},
+											"stage": "hit_base",
+											"weapon": {
+												"coefficient": 2.8,
+												"components": {
+													"physical": 13.0
+												},
+												"contribution": {
+													"physical": 36.4
+												},
+												"profile": {
+													"base": {
+														"physical": 4.0
+													},
+													"base_id": "forgeblade",
+													"flat": {
+														"physical": 6.0
+													},
+													"increased": {
+														"physical": 0.3
+													},
+													"item_id": "gear_000004",
+													"sources": [
+														{
+															"affix_id": "whetstone_edge",
+															"stat": "weapon_added_physical",
+															"value": 6.0
+														},
+														{
+															"affix_id": "tempered_edge",
+															"stat": "weapon_physical_increased",
+															"value": 0.3
+														}
+													],
+													"stage": "weapon_local"
+												}
+											}
+										},
+										"base": {
+											"physical": 86.8
+										},
+										"role": "direct",
+										"skill_id": "cleave",
+										"tags": [
+											"hit",
+											"attack",
+											"melee",
+											"area"
+										]
+									}
+								},
+								"compiled_skill_id": "cleave",
+								"critical": {
+									"primary": {
+										"chance": 0.05,
+										"multiplier": 1.5
+									}
+								},
+								"critical_modifiers": {
+									"base_chance": 0.05,
+									"base_multiplier": 1.5
+								},
+								"effects": [
+									"explode_on_flight_end",
+									"return_on_range"
+								],
+								"explosion_recipe": {
+									"added_effectiveness": 0.0,
+									"coefficient": 0.9,
+									"radius": 76.0
+								},
+								"modifiers": [
+									{
+										"all_tags": [
+											"attack",
+											"melee"
+										],
+										"damage_types": [
+											"physical"
+										],
+										"id": "melee_physical_increased",
+										"mode": "increased",
+										"value": 0.02
+									},
+									{
+										"all_tags": [],
+										"damage_types": [],
+										"id": "global_increased",
+										"mode": "increased",
+										"value": 0.2
+									},
+									{
+										"all_tags": [],
+										"damage_types": [
+											"fire",
+											"cold",
+											"lightning"
+										],
+										"id": "elemental_increased",
+										"mode": "increased",
+										"value": 0.3
+									}
+								],
+								"projectile_count": 0,
+								"tornado_recipe": {
+									"child": {
+										"added_effectiveness": 0.7,
+										"coefficient": 0.7,
+										"lifetime": 1.7,
+										"pierce": -1,
+										"radius": 4.5,
+										"range": 150.0,
+										"role": "child",
+										"speed": 260.0,
+										"split": false
+									},
+									"child_count": 3,
+									"explosion": {
+										"added_effectiveness": 0.0,
+										"coefficient": 0.9,
+										"radius": 76.0
+									},
+									"parent": {
+										"added_effectiveness": 1.0,
+										"coefficient": 1.0,
+										"lifetime": 0.9,
+										"pierce": -1,
+										"radius": 6.0,
+										"range": 150.0,
+										"role": "parent",
+										"speed": 420.0,
+										"split": true
+									},
+									"parent_count": 3,
+									"spread": 0.16
+								},
+								"weapon_profile": {
+									"base": {
+										"physical": 4.0
+									},
+									"base_id": "forgeblade",
+									"flat": {
+										"physical": 6.0
+									},
+									"increased": {
+										"physical": 0.3
+									},
+									"item_id": "gear_000004",
+									"sources": [
+										{
+											"affix_id": "whetstone_edge",
+											"stat": "weapon_added_physical",
+											"value": 6.0
+										},
+										{
+											"affix_id": "tempered_edge",
+											"stat": "weapon_physical_increased",
+											"value": 0.3
+										}
+									],
+									"stage": "weapon_local"
+								}
+							},
+							"support_ids": []
+						},
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 284，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n扇形范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n独立爆炸半径 76.00 · 面积 ×1.0000\n每次命中：物理 105.90\n固有：物理 50.40；附加：无；附加效用 2.80；武器：物理 36.40〔(4.00 + 6.00) × (1 + 0.30) × 技能倍率 2.80〕",
+						"hits": {
+							"direct": {
+								"critical": {
+									"chance": 0.05,
+									"multiplier": 1.5
+								},
+								"resolved": {
+									"components": {
+										"physical": 105.896
+									},
+									"details": [
+										{
+											"base": 86.8,
+											"before_defense": 105.896,
+											"final": 105.896,
+											"increased": 0.22,
+											"modifiers": [
+												"melee_physical_increased",
+												"global_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "physical"
+										}
+									],
+									"total": 105.896
+								},
+								"tags": [
+									"hit",
+									"attack",
+									"melee",
+									"area"
+								]
+							}
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每次命中 105.90"
+					},
+					"tornado": {
+						"compiled": {
+							"cooldown": 2.5,
+							"critical": {
+								"primary": {
+									"chance": 0.05,
+									"multiplier": 1.5
+								},
+								"secondary": {
+									"chance": 0.05,
+									"multiplier": 1.5
+								}
+							},
+							"error": "",
+							"group_id": "group_000008",
+							"initial_count": 3,
+							"main_uid": "migration_gem_000008",
+							"mana": 18.0,
+							"ok": true,
+							"packets": {
+								"child": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.7,
+										"base_coefficient": 0.7,
+										"intrinsic": {
+											"fire": 5.04,
+											"physical": 7.559999999999999
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 5.04,
+										"physical": 7.559999999999999
+									},
+									"role": "child",
+									"skill_id": "tornado",
+									"tags": [
+										"hit",
+										"attack",
+										"projectile"
+									]
+								},
+								"parent": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 1.0,
+										"base_coefficient": 1.0,
+										"intrinsic": {
+											"fire": 7.2,
+											"physical": 10.799999999999999
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 7.2,
+										"physical": 10.799999999999999
+									},
+									"role": "parent",
+									"skill_id": "tornado",
+									"tags": [
+										"hit",
+										"attack",
+										"projectile"
+									]
+								},
+								"secondary": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.0,
+										"base_coefficient": 0.9,
+										"intrinsic": {
+											"fire": 16.2
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 16.2
+									},
+									"role": "secondary",
+									"skill_id": "tornado",
+									"tags": [
+										"hit",
+										"area",
+										"secondary",
+										"explosion"
+									]
+								}
+							},
+							"recipe": {
+								"child": {
+									"added_effectiveness": 0.7,
+									"coefficient": 0.7,
+									"lifetime": 1.7,
+									"pierce": -1,
+									"radius": 4.5,
+									"range": 150.0,
+									"role": "child",
+									"speed": 260.0,
+									"split": false
+								},
+								"child_count": 3,
+								"explosion": {
+									"added_effectiveness": 0.0,
+									"coefficient": 0.9,
+									"radius": 76.0
+								},
+								"initial_count": 3,
+								"parent": {
+									"added_effectiveness": 1.0,
+									"coefficient": 1.0,
+									"lifetime": 0.9,
+									"pierce": -1,
+									"radius": 6.0,
+									"range": 150.0,
+									"role": "parent",
+									"speed": 420.0,
+									"split": true
+								},
+								"parent_count": 3,
+								"spread": 0.16
+							},
+							"skill_id": "tornado",
+							"snapshot": {
+								"accuracy": 284.0,
+								"added_damage": {
+									"attack": {
+										"fire": 0.0,
+										"physical": 0.0
+									},
+									"spell": {
+										"cold": 0.0,
+										"lightning": 0.0
+									}
+								},
+								"added_damage_sources": [],
+								"base_damage": 18.0,
+								"compiled_packets": {
+									"child": {
+										"assembly": {
+											"added": {
+
+											},
+											"added_effectiveness": 0.7,
+											"base_coefficient": 0.7,
+											"intrinsic": {
+												"fire": 5.04,
+												"physical": 7.559999999999999
+											},
+											"stage": "hit_base"
+										},
+										"base": {
+											"fire": 5.04,
+											"physical": 7.559999999999999
+										},
+										"role": "child",
+										"skill_id": "tornado",
+										"tags": [
+											"hit",
+											"attack",
+											"projectile"
+										]
+									},
+									"parent": {
+										"assembly": {
+											"added": {
+
+											},
+											"added_effectiveness": 1.0,
+											"base_coefficient": 1.0,
+											"intrinsic": {
+												"fire": 7.2,
+												"physical": 10.799999999999999
+											},
+											"stage": "hit_base"
+										},
+										"base": {
+											"fire": 7.2,
+											"physical": 10.799999999999999
+										},
+										"role": "parent",
+										"skill_id": "tornado",
+										"tags": [
+											"hit",
+											"attack",
+											"projectile"
+										]
+									},
+									"secondary": {
+										"assembly": {
+											"added": {
+
+											},
+											"added_effectiveness": 0.0,
+											"base_coefficient": 0.9,
+											"intrinsic": {
+												"fire": 16.2
+											},
+											"stage": "hit_base"
+										},
+										"base": {
+											"fire": 16.2
+										},
+										"role": "secondary",
+										"skill_id": "tornado",
+										"tags": [
+											"hit",
+											"area",
+											"secondary",
+											"explosion"
+										]
+									}
+								},
+								"compiled_skill_id": "tornado",
+								"critical": {
+									"primary": {
+										"chance": 0.05,
+										"multiplier": 1.5
+									},
+									"secondary": {
+										"chance": 0.05,
+										"multiplier": 1.5
+									}
+								},
+								"critical_modifiers": {
+									"base_chance": 0.05,
+									"base_multiplier": 1.5
+								},
+								"effects": [
+									"explode_on_flight_end",
+									"return_on_range"
+								],
+								"explosion_recipe": {
+									"added_effectiveness": 0.0,
+									"coefficient": 0.9,
+									"radius": 76.0
+								},
+								"initial_count": 3,
+								"modifiers": [
+									{
+										"all_tags": [
+											"attack",
+											"melee"
+										],
+										"damage_types": [
+											"physical"
+										],
+										"id": "melee_physical_increased",
+										"mode": "increased",
+										"value": 0.02
+									},
+									{
+										"all_tags": [],
+										"damage_types": [],
+										"id": "global_increased",
+										"mode": "increased",
+										"value": 0.2
+									},
+									{
+										"all_tags": [],
+										"damage_types": [
+											"fire",
+											"cold",
+											"lightning"
+										],
+										"id": "elemental_increased",
+										"mode": "increased",
+										"value": 0.3
+									}
+								],
+								"projectile_count": 0,
+								"tornado_recipe": {
+									"child": {
+										"added_effectiveness": 0.7,
+										"coefficient": 0.7,
+										"lifetime": 1.7,
+										"pierce": -1,
+										"radius": 4.5,
+										"range": 150.0,
+										"role": "child",
+										"speed": 260.0,
+										"split": false
+									},
+									"child_count": 3,
+									"explosion": {
+										"added_effectiveness": 0.0,
+										"coefficient": 0.9,
+										"radius": 76.0
+									},
+									"parent": {
+										"added_effectiveness": 1.0,
+										"coefficient": 1.0,
+										"lifetime": 0.9,
+										"pierce": -1,
+										"radius": 6.0,
+										"range": 150.0,
+										"role": "parent",
+										"speed": 420.0,
+										"split": true
+									},
+									"parent_count": 3,
+									"spread": 0.16
+								},
+								"weapon_profile": {
+									"base": {
+										"physical": 4.0
+									},
+									"base_id": "forgeblade",
+									"flat": {
+										"physical": 6.0
+									},
+									"increased": {
+										"physical": 0.3
+									},
+									"item_id": "gear_000004",
+									"sources": [
+										{
+											"affix_id": "whetstone_edge",
+											"stat": "weapon_added_physical",
+											"value": 6.0
+										},
+										{
+											"affix_id": "tempered_edge",
+											"stat": "weapon_physical_increased",
+											"value": 0.3
+										}
+									],
+									"stage": "weapon_local"
+								}
+							},
+							"support_ids": []
+						},
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n独立爆炸 · 暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 284，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n母箭速度 420.00 · 子箭速度 260.00；返回沿用各自速度。\n投射速度改变飞行快慢，不增加距离上限或存续时间。\n独立爆炸半径 76.00 · 面积 ×1.0000\n母箭：物理 12.96 + 火焰 10.80\n固有：物理 10.80 + 火焰 7.20；附加：无；附加效用 1.00\n子箭：物理 9.07 + 火焰 7.56\n固有：物理 7.56 + 火焰 5.04；附加：无；附加效用 0.70\n独立爆炸：火焰 24.30\n固有：火焰 16.20；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+						"hits": {
+							"child": {
+								"critical": {
+									"chance": 0.05,
+									"multiplier": 1.5
+								},
+								"resolved": {
+									"components": {
+										"fire": 7.5600000000000005,
+										"physical": 9.071999999999997
+									},
+									"details": [
+										{
+											"base": 7.559999999999999,
+											"before_defense": 9.071999999999997,
+											"final": 9.071999999999997,
+											"increased": 0.2,
+											"modifiers": [
+												"global_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 5.04,
+											"before_defense": 7.5600000000000005,
+											"final": 7.5600000000000005,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 16.631999999999998
+								},
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"parent": {
+								"critical": {
+									"chance": 0.05,
+									"multiplier": 1.5
+								},
+								"resolved": {
+									"components": {
+										"fire": 10.8,
+										"physical": 12.959999999999999
+									},
+									"details": [
+										{
+											"base": 10.799999999999999,
+											"before_defense": 12.959999999999999,
+											"final": 12.959999999999999,
+											"increased": 0.2,
+											"modifiers": [
+												"global_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 7.2,
+											"before_defense": 10.8,
+											"final": 10.8,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 23.759999999999998
+								},
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"secondary": {
+								"critical": {
+									"chance": 0.05,
+									"multiplier": 1.5
+								},
+								"resolved": {
+									"components": {
+										"fire": 24.299999999999997
+									},
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 24.299999999999997,
+											"final": 24.299999999999997,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 24.299999999999997
+								},
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：母箭 23.76 / 子箭 16.63 / 独立爆炸 24.30"
+					}
+				},
+				"equipment": {
+					"amulet": {
+						"definition": {
+							"affix_lines": [],
+							"base_id": "detonation_charm",
+							"base_name": "终焰护符",
+							"category": "amulet",
+							"definition_id": "equipment:detonation_charm",
+							"description": "全局伤害提高 20%，元素伤害提高 30%。自然飞行结束爆炸：造成 90% 基础火焰范围伤害。返回可延后爆炸；分裂、碰撞消耗和取消不爆炸。",
+							"effects": [
+								"explode_on_flight_end"
+							],
+							"id": "detonation_charm",
+							"item_level": 1,
+							"kind": "equipment",
+							"name": "终焰护符",
+							"rarity": "unique",
+							"size": [
+								1,
+								1
+							],
+							"slot": "charm",
+							"stats": {
+								"elemental_increased": 0.3,
+								"global_increased": 0.2
+							},
+							"uid": "detonation_charm"
+						},
+						"item": {
+							"definition_id": "equipment:detonation_charm",
+							"kind": "equipment",
+							"payload": {
+
+							},
+							"uid": "detonation_charm"
+						},
+						"uid": "detonation_charm"
+					},
+					"body_armour": {
+						"definition": {
+							"affix_lines": [],
+							"base_id": "return_mantle",
+							"base_name": "归航披风",
+							"category": "body_armour",
+							"definition_id": "equipment:return_mantle",
+							"description": "最大护盾 +15。投射物抵达射程后，朝此刻角色中心方向返回一次；穿过中心继续飞行，不刷新寿命。母箭优先分裂。",
+							"effects": [
+								"return_on_range"
+							],
+							"id": "return_mantle",
+							"item_level": 1,
+							"kind": "equipment",
+							"name": "归航披风",
+							"rarity": "unique",
+							"size": [
+								2,
+								3
+							],
+							"slot": "armor",
+							"stats": {
+								"max_shield": 15.0
+							},
+							"uid": "return_mantle"
+						},
+						"item": {
+							"definition_id": "equipment:return_mantle",
+							"kind": "equipment",
+							"payload": {
+
+							},
+							"uid": "return_mantle"
+						},
+						"uid": "return_mantle"
+					},
+					"weapon": {
+						"definition": {
+							"added_sources": [],
+							"affix_lines": [
+								"前缀 · 砥刃 T3：本武器附加物理伤害 +6",
+								"前缀 · 淬锋 T3：本武器物理伤害提高 +30%",
+								"前缀 · 深汲 T3：最大魔力 +22",
+								"后缀 · 泉旋 T3：魔力恢复速度提高 +14%"
+							],
+							"base_id": "forgeblade",
+							"base_name": "锻纹短刃",
+							"category": "weapon",
+							"definition_id": "equipment:forgeblade",
+							"description": "装备后普通攻击变为单目标近战挥击；本武器物理增强普通近战攻击与裂刃斩。\n前缀 · 砥刃 T3：本武器附加物理伤害 +6\n前缀 · 淬锋 T3：本武器物理伤害提高 +30%\n前缀 · 深汲 T3：最大魔力 +22\n后缀 · 泉旋 T3：魔力恢复速度提高 +14%",
+							"effects": [],
+							"id": "gear_000004",
+							"item_level": 16,
+							"kind": "equipment",
+							"name": "稀有 · 锻纹短刃",
+							"rarity": "rare",
+							"size": [
+								1,
+								3
+							],
+							"slot": "weapon",
+							"stats": {
+								"mana_regen_increased": 0.14,
+								"max_mana": 22.0
+							},
+							"uid": "gear_000004",
+							"weapon_damage": {
+								"physical": 13.0
+							},
+							"weapon_damage_summary": "本武器物理：(4.0 + 6.0) × (1 + 30.0%) = 13.0；普通近战攻击与裂刃斩",
+							"weapon_profile": {
+								"base": {
+									"physical": 4.0
+								},
+								"base_id": "forgeblade",
+								"flat": {
+									"physical": 6.0
+								},
+								"increased": {
+									"physical": 0.3
+								},
+								"item_id": "gear_000004",
+								"sources": [
+									{
+										"affix_id": "whetstone_edge",
+										"stat": "weapon_added_physical",
+										"value": 6.0
+									},
+									{
+										"affix_id": "tempered_edge",
+										"stat": "weapon_physical_increased",
+										"value": 0.3
+									}
+								],
+								"stage": "weapon_local"
+							}
+						},
+						"item": {
+							"definition_id": "equipment:forgeblade",
+							"kind": "equipment",
+							"payload": {
+								"affixes": [
+									{
+										"id": "whetstone_edge",
+										"tier": 3,
+										"value": 6
+									},
+									{
+										"id": "tempered_edge",
+										"tier": 3,
+										"value": 30
+									},
+									{
+										"id": "deepwell",
+										"tier": 3,
+										"value": 22
+									},
+									{
+										"id": "wellturn",
+										"tier": 3,
+										"value": 14
+									}
+								],
+								"base_id": "forgeblade",
+								"id": "gear_000004",
+								"item_level": 16,
+								"rarity": "rare"
+							},
+							"uid": "gear_000004"
+						},
+						"uid": "gear_000004"
+					}
+				},
+				"expected_fixture": "docs/qa/v070-gameplay/fixtures/refunded-expected.json",
+				"expected_sha256": "1c9df69fc83d7fad1e153746e302c0a6a25339016d0e3ccab5b30d59da659712",
+				"fixture": "docs/qa/v070-gameplay/fixtures/refunded.json",
+				"fixture_sha256": "7eda809b6a52e477e53ce2b03e81f09db14059aa22dfa1a23cf347c6541edbf8",
+				"matches_actual_main": true,
+				"progress": {
+					"level": 4,
+					"xp": 0
+				},
+				"save_attempts": 0,
+				"stats": {
+					"accuracy": 284.0,
+					"accuracy_increased": 0.0,
+					"additional_skill_slots": 0.0,
+					"area_increased": 0.0,
+					"area_size_increased": 0.0,
+					"armour": 0.0,
+					"armour_increased": 0.0,
+					"attack_added_fire": 0.0,
+					"attack_added_physical": 0.0,
+					"attack_crit_chance_increased": 0.0,
+					"attack_elemental_increased": 0.0,
+					"attack_life_leech": 0.0,
+					"attack_mana_leech": 0.0,
+					"attack_physical_increased": 0.0,
+					"attack_speed": 1.7,
+					"attack_speed_increased": 0.0,
+					"chaos_increased": 0.0,
+					"cold_increased": 0.0,
+					"cold_resistance": 0.0,
+					"crit_base_chance": 0.05,
+					"crit_base_multiplier": 1.5,
+					"crit_chance_increased": 0.0,
+					"crit_multiplier_add": 0.0,
+					"damage": 18.0,
+					"damage_taken_from_mana_before_life": 0.0,
+					"damaging_ailments_faster": 0.0,
+					"dexterity": 92.0,
+					"elemental_increased": 0.3,
+					"evasion": 41.3,
+					"evasion_increased": 0.0,
+					"fire_dot_multiplier_add": 0.0,
+					"fire_increased": 0.0,
+					"fire_resistance": 0.0,
+					"flask_charges_gained_increased": 0.0,
+					"flask_life_recovery_increased": 0.0,
+					"flask_mana_recovery_increased": 0.0,
+					"global_increased": 0.2,
+					"intelligence": 14.0,
+					"life_leech_max_rate_increased": 0.0,
+					"life_leech_rate_increased": 0.0,
+					"life_regen": 0.0,
+					"life_regen_percent": 0.0,
+					"lightning_increased": 0.0,
+					"lightning_resistance": 0.0,
+					"mana_cost_efficiency_increased": 0.0,
+					"mana_cost_increased": 0.0,
+					"mana_leech_max_rate_increased": 0.0,
+					"mana_leech_rate_increased": 0.0,
+					"mana_regen": 10.260000000000002,
+					"mana_regen_increased": 0.14,
+					"max_health": 141.0,
+					"max_mana": 129.0,
+					"max_shield": 75.75,
+					"maximum_cold_resistance_add": 0.0,
+					"maximum_fire_resistance_add": 0.0,
+					"maximum_lightning_resistance_add": 0.0,
+					"melee_area_size_increased": 0.0,
+					"melee_crit_chance_increased": 0.0,
+					"melee_crit_multiplier_add": 0.0,
+					"melee_physical_increased": 0.02,
+					"move_speed": 240.0,
+					"move_speed_increased": 0.0,
+					"physical_attack_life_leech": 0.0,
+					"physical_attack_mana_leech": 0.0,
+					"physical_increased": 0.0,
+					"projectile_attack_crit_chance_increased": 0.0,
+					"projectile_attack_crit_multiplier_add": 0.0,
+					"projectile_count": 0.0,
+					"projectile_increased": 0.0,
+					"projectile_speed_increased": 0.0,
+					"resolute_technique": 0.0,
+					"shield_recharge_delay": 4.0,
+					"shield_recharge_rate": 13.0,
+					"shield_recharge_rate_increased": 0.0,
+					"shield_recharge_start_faster": 0.0,
+					"shield_regen": 13.0,
+					"spell_added_cold": 0.0,
+					"spell_added_lightning": 0.0,
+					"spell_area_size_increased": 0.0,
+					"spell_crit_chance_increased": 0.0,
+					"spell_crit_multiplier_add": 0.0,
+					"spell_increased": 0.0,
+					"strength": 14.0
+				},
+				"talents": {
+					"allocated": [
+						"50459",
+						"39821",
+						"52904",
+						"444",
+						"61306",
+						"60942",
+						"64709",
+						"3469"
+					],
+					"ascendancy": "",
+					"ascendancy_allocated": [],
+					"ascendancy_points": 0,
+					"class_id": 2,
+					"masteries": {
+
+					},
+					"normal_points": 1,
+					"source_version": "3.29.1"
+				},
+				"whole_build_valid": true
+			},
+			"selected-above": {
+				"casts": {
+					"basic": {
+						"compiled": {
+							"critical": {
+								"primary": {
+									"chance": 0.0,
+									"multiplier": 1.5
+								}
+							},
+							"error": "",
+							"hit_policy": {
+								"cannot_deal_critical_strikes": true,
+								"hits_cannot_be_evaded": false,
+								"id": "precise_technique"
+							},
+							"ok": true,
+							"packets": {
+								"direct": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 1.0,
+										"base_coefficient": 1.0,
+										"intrinsic": {
+											"physical": 18.0
+										},
+										"stage": "hit_base",
+										"weapon": {
+											"coefficient": 1.0,
+											"components": {
+												"physical": 13.0
+											},
+											"contribution": {
+												"physical": 13.0
+											},
+											"profile": {
+												"base": {
+													"physical": 4.0
+												},
+												"base_id": "forgeblade",
+												"flat": {
+													"physical": 6.0
+												},
+												"increased": {
+													"physical": 0.3
+												},
+												"item_id": "gear_000004",
+												"sources": [
+													{
+														"affix_id": "whetstone_edge",
+														"stat": "weapon_added_physical",
+														"value": 6.0
+													},
+													{
+														"affix_id": "tempered_edge",
+														"stat": "weapon_physical_increased",
+														"value": 0.3
+													}
+												],
+												"stage": "weapon_local"
+											}
+										}
+									},
+									"base": {
+										"physical": 31.0
+									},
+									"role": "direct",
+									"skill_id": "basic",
+									"tags": [
+										"hit",
+										"attack",
+										"melee"
+									]
+								}
+							},
+							"precise_technique_profile": {
+								"accuracy": 284.0,
+								"attack_applies": true,
+								"attack_more": 0.4,
+								"cannot_deal_critical_strikes": true,
+								"condition_met": true,
+								"enabled": true,
+								"max_health": 141.0
+							},
+							"recipe": {
+								"delivery": "melee",
+								"half_angle": 0.7853981633974483,
+								"max_targets": 1,
+								"radius": 60.0
+							},
+							"skill_id": "basic",
+							"snapshot": {
+								"accuracy": 284.0,
+								"added_damage": {
+									"attack": {
+										"fire": 0.0,
+										"physical": 0.0
+									},
+									"spell": {
+										"cold": 0.0,
+										"lightning": 0.0
+									}
+								},
+								"added_damage_sources": [],
+								"base_damage": 18.0,
+								"compiled_packets": {
+									"direct": {
+										"assembly": {
+											"added": {
+
+											},
+											"added_effectiveness": 1.0,
+											"base_coefficient": 1.0,
+											"intrinsic": {
+												"physical": 18.0
+											},
+											"stage": "hit_base",
+											"weapon": {
+												"coefficient": 1.0,
+												"components": {
+													"physical": 13.0
+												},
+												"contribution": {
+													"physical": 13.0
+												},
+												"profile": {
+													"base": {
+														"physical": 4.0
+													},
+													"base_id": "forgeblade",
+													"flat": {
+														"physical": 6.0
+													},
+													"increased": {
+														"physical": 0.3
+													},
+													"item_id": "gear_000004",
+													"sources": [
+														{
+															"affix_id": "whetstone_edge",
+															"stat": "weapon_added_physical",
+															"value": 6.0
+														},
+														{
+															"affix_id": "tempered_edge",
+															"stat": "weapon_physical_increased",
+															"value": 0.3
+														}
+													],
+													"stage": "weapon_local"
+												}
+											}
+										},
+										"base": {
+											"physical": 31.0
+										},
+										"role": "direct",
+										"skill_id": "basic",
+										"tags": [
+											"hit",
+											"attack",
+											"melee"
+										]
+									}
+								},
+								"compiled_skill_id": "basic",
+								"critical": {
+									"primary": {
+										"chance": 0.0,
+										"multiplier": 1.5
+									}
+								},
+								"critical_modifiers": {
+									"base_chance": 0.05,
+									"base_multiplier": 1.5
+								},
+								"effects": [
+									"explode_on_flight_end",
+									"return_on_range"
+								],
+								"explosion_recipe": {
+									"added_effectiveness": 0.0,
+									"coefficient": 0.9,
+									"radius": 76.0
+								},
+								"modifiers": [
+									{
+										"all_tags": [
+											"attack",
+											"melee"
+										],
+										"damage_types": [
+											"physical"
+										],
+										"id": "melee_physical_increased",
+										"mode": "increased",
+										"value": 0.02
+									},
+									{
+										"all_tags": [],
+										"damage_types": [],
+										"id": "global_increased",
+										"mode": "increased",
+										"value": 0.2
+									},
+									{
+										"all_tags": [],
+										"damage_types": [
+											"fire",
+											"cold",
+											"lightning"
+										],
+										"id": "elemental_increased",
+										"mode": "increased",
+										"value": 0.3
+									},
+									{
+										"all_tags": [
+											"hit",
+											"attack"
+										],
+										"damage_types": [],
+										"id": "precise_technique_attack_more",
+										"mode": "more",
+										"skills": [],
+										"value": 0.4
+									}
+								],
+								"precise_technique": {
+									"accuracy": 284.0,
+									"max_health": 141.0
+								},
+								"projectile_count": 0,
+								"tornado_recipe": {
+									"child": {
+										"added_effectiveness": 0.7,
+										"coefficient": 0.7,
+										"lifetime": 1.7,
+										"pierce": -1,
+										"radius": 4.5,
+										"range": 150.0,
+										"role": "child",
+										"speed": 260.0,
+										"split": false
+									},
+									"child_count": 3,
+									"explosion": {
+										"added_effectiveness": 0.0,
+										"coefficient": 0.9,
+										"radius": 76.0
+									},
+									"parent": {
+										"added_effectiveness": 1.0,
+										"coefficient": 1.0,
+										"lifetime": 0.9,
+										"pierce": -1,
+										"radius": 6.0,
+										"range": 150.0,
+										"role": "parent",
+										"speed": 420.0,
+										"split": true
+									},
+									"parent_count": 3,
+									"spread": 0.16
+								},
+								"weapon_profile": {
+									"base": {
+										"physical": 4.0
+									},
+									"base_id": "forgeblade",
+									"flat": {
+										"physical": 6.0
+									},
+									"increased": {
+										"physical": 0.3
+									},
+									"item_id": "gear_000004",
+									"sources": [
+										{
+											"affix_id": "whetstone_edge",
+											"stat": "weapon_added_physical",
+											"value": 6.0
+										},
+										{
+											"affix_id": "tempered_edge",
+											"stat": "weapon_physical_increased",
+											"value": 0.3
+										}
+									],
+									"stage": "weapon_local"
+								}
+							}
+						},
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n不能造成暴击（包括独立爆炸）\n精准技艺：命中值 284.00 / 最大生命 141.00 · 门槛成立\n本次攻击伤害额外提高 40%（已计入预估）\n命中值必须严格高于最大生命；门槛未成立也不能暴击，此天赋不绕过闪避。\n普通近战攻击：距离 60 · 最多 1 个目标；不发射投射物。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 284，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n每次命中：物理 52.95\n固有：物理 18.00；附加：无；附加效用 1.00；武器：物理 13.00〔(4.00 + 6.00) × (1 + 0.30) × 技能倍率 1.00〕",
+						"hits": {
+							"direct": {
+								"critical": {
+									"chance": 0.0,
+									"multiplier": 1.5
+								},
+								"resolved": {
+									"components": {
+										"physical": 52.948
+									},
+									"details": [
+										{
+											"base": 31.0,
+											"before_defense": 52.948,
+											"final": 52.948,
+											"increased": 0.22,
+											"modifiers": [
+												"melee_physical_increased",
+												"global_increased",
+												"precise_technique_attack_more"
+											],
+											"more": 1.4,
+											"resistance": 0.0,
+											"type": "physical"
+										}
+									],
+									"total": 52.948
+								},
+								"tags": [
+									"hit",
+									"attack",
+									"melee"
+								]
+							}
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每次命中 52.95"
+					},
+					"cleave": {
+						"compiled": {
+							"cooldown": 1.4,
+							"critical": {
+								"primary": {
+									"chance": 0.0,
+									"multiplier": 1.5
+								}
+							},
+							"error": "",
+							"group_id": "group_000009",
+							"hit_policy": {
+								"cannot_deal_critical_strikes": true,
+								"hits_cannot_be_evaded": false,
+								"id": "precise_technique"
+							},
+							"initial_count": 0,
+							"main_uid": "item_000014",
+							"mana": 12.0,
+							"ok": true,
+							"packets": {
+								"direct": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 2.8,
+										"base_coefficient": 2.8,
+										"intrinsic": {
+											"physical": 50.4
+										},
+										"stage": "hit_base",
+										"weapon": {
+											"coefficient": 2.8,
+											"components": {
+												"physical": 13.0
+											},
+											"contribution": {
+												"physical": 36.4
+											},
+											"profile": {
+												"base": {
+													"physical": 4.0
+												},
+												"base_id": "forgeblade",
+												"flat": {
+													"physical": 6.0
+												},
+												"increased": {
+													"physical": 0.3
+												},
+												"item_id": "gear_000004",
+												"sources": [
+													{
+														"affix_id": "whetstone_edge",
+														"stat": "weapon_added_physical",
+														"value": 6.0
+													},
+													{
+														"affix_id": "tempered_edge",
+														"stat": "weapon_physical_increased",
+														"value": 0.3
+													}
+												],
+												"stage": "weapon_local"
+											}
+										}
+									},
+									"base": {
+										"physical": 86.8
+									},
+									"role": "direct",
+									"skill_id": "cleave",
+									"tags": [
+										"hit",
+										"attack",
+										"melee",
+										"area"
+									]
+								}
+							},
+							"precise_technique_profile": {
+								"accuracy": 284.0,
+								"attack_applies": true,
+								"attack_more": 0.4,
+								"cannot_deal_critical_strikes": true,
+								"condition_met": true,
+								"enabled": true,
+								"max_health": 141.0
+							},
+							"recipe": {
+								"half_angle": 1.5707963267948966,
+								"radius": 95.0
+							},
+							"skill_id": "cleave",
+							"snapshot": {
+								"accuracy": 284.0,
+								"added_damage": {
+									"attack": {
+										"fire": 0.0,
+										"physical": 0.0
+									},
+									"spell": {
+										"cold": 0.0,
+										"lightning": 0.0
+									}
+								},
+								"added_damage_sources": [],
+								"base_damage": 18.0,
+								"compiled_packets": {
+									"direct": {
+										"assembly": {
+											"added": {
+
+											},
+											"added_effectiveness": 2.8,
+											"base_coefficient": 2.8,
+											"intrinsic": {
+												"physical": 50.4
+											},
+											"stage": "hit_base",
+											"weapon": {
+												"coefficient": 2.8,
+												"components": {
+													"physical": 13.0
+												},
+												"contribution": {
+													"physical": 36.4
+												},
+												"profile": {
+													"base": {
+														"physical": 4.0
+													},
+													"base_id": "forgeblade",
+													"flat": {
+														"physical": 6.0
+													},
+													"increased": {
+														"physical": 0.3
+													},
+													"item_id": "gear_000004",
+													"sources": [
+														{
+															"affix_id": "whetstone_edge",
+															"stat": "weapon_added_physical",
+															"value": 6.0
+														},
+														{
+															"affix_id": "tempered_edge",
+															"stat": "weapon_physical_increased",
+															"value": 0.3
+														}
+													],
+													"stage": "weapon_local"
+												}
+											}
+										},
+										"base": {
+											"physical": 86.8
+										},
+										"role": "direct",
+										"skill_id": "cleave",
+										"tags": [
+											"hit",
+											"attack",
+											"melee",
+											"area"
+										]
+									}
+								},
+								"compiled_skill_id": "cleave",
+								"critical": {
+									"primary": {
+										"chance": 0.0,
+										"multiplier": 1.5
+									}
+								},
+								"critical_modifiers": {
+									"base_chance": 0.05,
+									"base_multiplier": 1.5
+								},
+								"effects": [
+									"explode_on_flight_end",
+									"return_on_range"
+								],
+								"explosion_recipe": {
+									"added_effectiveness": 0.0,
+									"coefficient": 0.9,
+									"radius": 76.0
+								},
+								"modifiers": [
+									{
+										"all_tags": [
+											"attack",
+											"melee"
+										],
+										"damage_types": [
+											"physical"
+										],
+										"id": "melee_physical_increased",
+										"mode": "increased",
+										"value": 0.02
+									},
+									{
+										"all_tags": [],
+										"damage_types": [],
+										"id": "global_increased",
+										"mode": "increased",
+										"value": 0.2
+									},
+									{
+										"all_tags": [],
+										"damage_types": [
+											"fire",
+											"cold",
+											"lightning"
+										],
+										"id": "elemental_increased",
+										"mode": "increased",
+										"value": 0.3
+									},
+									{
+										"all_tags": [
+											"hit",
+											"attack"
+										],
+										"damage_types": [],
+										"id": "precise_technique_attack_more",
+										"mode": "more",
+										"skills": [],
+										"value": 0.4
+									}
+								],
+								"precise_technique": {
+									"accuracy": 284.0,
+									"max_health": 141.0
+								},
+								"projectile_count": 0,
+								"tornado_recipe": {
+									"child": {
+										"added_effectiveness": 0.7,
+										"coefficient": 0.7,
+										"lifetime": 1.7,
+										"pierce": -1,
+										"radius": 4.5,
+										"range": 150.0,
+										"role": "child",
+										"speed": 260.0,
+										"split": false
+									},
+									"child_count": 3,
+									"explosion": {
+										"added_effectiveness": 0.0,
+										"coefficient": 0.9,
+										"radius": 76.0
+									},
+									"parent": {
+										"added_effectiveness": 1.0,
+										"coefficient": 1.0,
+										"lifetime": 0.9,
+										"pierce": -1,
+										"radius": 6.0,
+										"range": 150.0,
+										"role": "parent",
+										"speed": 420.0,
+										"split": true
+									},
+									"parent_count": 3,
+									"spread": 0.16
+								},
+								"weapon_profile": {
+									"base": {
+										"physical": 4.0
+									},
+									"base_id": "forgeblade",
+									"flat": {
+										"physical": 6.0
+									},
+									"increased": {
+										"physical": 0.3
+									},
+									"item_id": "gear_000004",
+									"sources": [
+										{
+											"affix_id": "whetstone_edge",
+											"stat": "weapon_added_physical",
+											"value": 6.0
+										},
+										{
+											"affix_id": "tempered_edge",
+											"stat": "weapon_physical_increased",
+											"value": 0.3
+										}
+									],
+									"stage": "weapon_local"
+								}
+							},
+							"support_ids": []
+						},
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n不能造成暴击（包括独立爆炸）\n精准技艺：命中值 284.00 / 最大生命 141.00 · 门槛成立\n本次攻击伤害额外提高 40%（已计入预估）\n命中值必须严格高于最大生命；门槛未成立也不能暴击，此天赋不绕过闪避。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 284，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n扇形范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n独立爆炸半径 76.00 · 面积 ×1.0000\n每次命中：物理 148.25\n固有：物理 50.40；附加：无；附加效用 2.80；武器：物理 36.40〔(4.00 + 6.00) × (1 + 0.30) × 技能倍率 2.80〕",
+						"hits": {
+							"direct": {
+								"critical": {
+									"chance": 0.0,
+									"multiplier": 1.5
+								},
+								"resolved": {
+									"components": {
+										"physical": 148.2544
+									},
+									"details": [
+										{
+											"base": 86.8,
+											"before_defense": 148.2544,
+											"final": 148.2544,
+											"increased": 0.22,
+											"modifiers": [
+												"melee_physical_increased",
+												"global_increased",
+												"precise_technique_attack_more"
+											],
+											"more": 1.4,
+											"resistance": 0.0,
+											"type": "physical"
+										}
+									],
+									"total": 148.2544
+								},
+								"tags": [
+									"hit",
+									"attack",
+									"melee",
+									"area"
+								]
+							}
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每次命中 148.25"
+					},
+					"tornado": {
+						"compiled": {
+							"cooldown": 2.5,
+							"critical": {
+								"primary": {
+									"chance": 0.0,
+									"multiplier": 1.5
+								},
+								"secondary": {
+									"chance": 0.0,
+									"multiplier": 1.5
+								}
+							},
+							"error": "",
+							"group_id": "group_000008",
+							"hit_policy": {
+								"cannot_deal_critical_strikes": true,
+								"hits_cannot_be_evaded": false,
+								"id": "precise_technique"
+							},
+							"initial_count": 3,
+							"main_uid": "migration_gem_000008",
+							"mana": 18.0,
+							"ok": true,
+							"packets": {
+								"child": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.7,
+										"base_coefficient": 0.7,
+										"intrinsic": {
+											"fire": 5.04,
+											"physical": 7.559999999999999
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 5.04,
+										"physical": 7.559999999999999
+									},
+									"role": "child",
+									"skill_id": "tornado",
+									"tags": [
+										"hit",
+										"attack",
+										"projectile"
+									]
+								},
+								"parent": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 1.0,
+										"base_coefficient": 1.0,
+										"intrinsic": {
+											"fire": 7.2,
+											"physical": 10.799999999999999
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 7.2,
+										"physical": 10.799999999999999
+									},
+									"role": "parent",
+									"skill_id": "tornado",
+									"tags": [
+										"hit",
+										"attack",
+										"projectile"
+									]
+								},
+								"secondary": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.0,
+										"base_coefficient": 0.9,
+										"intrinsic": {
+											"fire": 16.2
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 16.2
+									},
+									"role": "secondary",
+									"skill_id": "tornado",
+									"tags": [
+										"hit",
+										"area",
+										"secondary",
+										"explosion"
+									]
+								}
+							},
+							"precise_technique_profile": {
+								"accuracy": 284.0,
+								"attack_applies": true,
+								"attack_more": 0.4,
+								"cannot_deal_critical_strikes": true,
+								"condition_met": true,
+								"enabled": true,
+								"max_health": 141.0
+							},
+							"recipe": {
+								"child": {
+									"added_effectiveness": 0.7,
+									"coefficient": 0.7,
+									"lifetime": 1.7,
+									"pierce": -1,
+									"radius": 4.5,
+									"range": 150.0,
+									"role": "child",
+									"speed": 260.0,
+									"split": false
+								},
+								"child_count": 3,
+								"explosion": {
+									"added_effectiveness": 0.0,
+									"coefficient": 0.9,
+									"radius": 76.0
+								},
+								"initial_count": 3,
+								"parent": {
+									"added_effectiveness": 1.0,
+									"coefficient": 1.0,
+									"lifetime": 0.9,
+									"pierce": -1,
+									"radius": 6.0,
+									"range": 150.0,
+									"role": "parent",
+									"speed": 420.0,
+									"split": true
+								},
+								"parent_count": 3,
+								"spread": 0.16
+							},
+							"skill_id": "tornado",
+							"snapshot": {
+								"accuracy": 284.0,
+								"added_damage": {
+									"attack": {
+										"fire": 0.0,
+										"physical": 0.0
+									},
+									"spell": {
+										"cold": 0.0,
+										"lightning": 0.0
+									}
+								},
+								"added_damage_sources": [],
+								"base_damage": 18.0,
+								"compiled_packets": {
+									"child": {
+										"assembly": {
+											"added": {
+
+											},
+											"added_effectiveness": 0.7,
+											"base_coefficient": 0.7,
+											"intrinsic": {
+												"fire": 5.04,
+												"physical": 7.559999999999999
+											},
+											"stage": "hit_base"
+										},
+										"base": {
+											"fire": 5.04,
+											"physical": 7.559999999999999
+										},
+										"role": "child",
+										"skill_id": "tornado",
+										"tags": [
+											"hit",
+											"attack",
+											"projectile"
+										]
+									},
+									"parent": {
+										"assembly": {
+											"added": {
+
+											},
+											"added_effectiveness": 1.0,
+											"base_coefficient": 1.0,
+											"intrinsic": {
+												"fire": 7.2,
+												"physical": 10.799999999999999
+											},
+											"stage": "hit_base"
+										},
+										"base": {
+											"fire": 7.2,
+											"physical": 10.799999999999999
+										},
+										"role": "parent",
+										"skill_id": "tornado",
+										"tags": [
+											"hit",
+											"attack",
+											"projectile"
+										]
+									},
+									"secondary": {
+										"assembly": {
+											"added": {
+
+											},
+											"added_effectiveness": 0.0,
+											"base_coefficient": 0.9,
+											"intrinsic": {
+												"fire": 16.2
+											},
+											"stage": "hit_base"
+										},
+										"base": {
+											"fire": 16.2
+										},
+										"role": "secondary",
+										"skill_id": "tornado",
+										"tags": [
+											"hit",
+											"area",
+											"secondary",
+											"explosion"
+										]
+									}
+								},
+								"compiled_skill_id": "tornado",
+								"critical": {
+									"primary": {
+										"chance": 0.0,
+										"multiplier": 1.5
+									},
+									"secondary": {
+										"chance": 0.0,
+										"multiplier": 1.5
+									}
+								},
+								"critical_modifiers": {
+									"base_chance": 0.05,
+									"base_multiplier": 1.5
+								},
+								"effects": [
+									"explode_on_flight_end",
+									"return_on_range"
+								],
+								"explosion_recipe": {
+									"added_effectiveness": 0.0,
+									"coefficient": 0.9,
+									"radius": 76.0
+								},
+								"initial_count": 3,
+								"modifiers": [
+									{
+										"all_tags": [
+											"attack",
+											"melee"
+										],
+										"damage_types": [
+											"physical"
+										],
+										"id": "melee_physical_increased",
+										"mode": "increased",
+										"value": 0.02
+									},
+									{
+										"all_tags": [],
+										"damage_types": [],
+										"id": "global_increased",
+										"mode": "increased",
+										"value": 0.2
+									},
+									{
+										"all_tags": [],
+										"damage_types": [
+											"fire",
+											"cold",
+											"lightning"
+										],
+										"id": "elemental_increased",
+										"mode": "increased",
+										"value": 0.3
+									},
+									{
+										"all_tags": [
+											"hit",
+											"attack"
+										],
+										"damage_types": [],
+										"id": "precise_technique_attack_more",
+										"mode": "more",
+										"skills": [],
+										"value": 0.4
+									}
+								],
+								"precise_technique": {
+									"accuracy": 284.0,
+									"max_health": 141.0
+								},
+								"projectile_count": 0,
+								"tornado_recipe": {
+									"child": {
+										"added_effectiveness": 0.7,
+										"coefficient": 0.7,
+										"lifetime": 1.7,
+										"pierce": -1,
+										"radius": 4.5,
+										"range": 150.0,
+										"role": "child",
+										"speed": 260.0,
+										"split": false
+									},
+									"child_count": 3,
+									"explosion": {
+										"added_effectiveness": 0.0,
+										"coefficient": 0.9,
+										"radius": 76.0
+									},
+									"parent": {
+										"added_effectiveness": 1.0,
+										"coefficient": 1.0,
+										"lifetime": 0.9,
+										"pierce": -1,
+										"radius": 6.0,
+										"range": 150.0,
+										"role": "parent",
+										"speed": 420.0,
+										"split": true
+									},
+									"parent_count": 3,
+									"spread": 0.16
+								},
+								"weapon_profile": {
+									"base": {
+										"physical": 4.0
+									},
+									"base_id": "forgeblade",
+									"flat": {
+										"physical": 6.0
+									},
+									"increased": {
+										"physical": 0.3
+									},
+									"item_id": "gear_000004",
+									"sources": [
+										{
+											"affix_id": "whetstone_edge",
+											"stat": "weapon_added_physical",
+											"value": 6.0
+										},
+										{
+											"affix_id": "tempered_edge",
+											"stat": "weapon_physical_increased",
+											"value": 0.3
+										}
+									],
+									"stage": "weapon_local"
+								}
+							},
+							"support_ids": []
+						},
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n不能造成暴击（包括独立爆炸）\n精准技艺：命中值 284.00 / 最大生命 141.00 · 门槛成立\n本次攻击伤害额外提高 40%（已计入预估）\n命中值必须严格高于最大生命；门槛未成立也不能暴击，此天赋不绕过闪避。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 284，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n母箭速度 420.00 · 子箭速度 260.00；返回沿用各自速度。\n投射速度改变飞行快慢，不增加距离上限或存续时间。\n独立爆炸半径 76.00 · 面积 ×1.0000\n母箭：物理 18.14 + 火焰 15.12\n固有：物理 10.80 + 火焰 7.20；附加：无；附加效用 1.00\n子箭：物理 12.70 + 火焰 10.58\n固有：物理 7.56 + 火焰 5.04；附加：无；附加效用 0.70\n独立爆炸：火焰 24.30\n固有：火焰 16.20；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+						"hits": {
+							"child": {
+								"critical": {
+									"chance": 0.0,
+									"multiplier": 1.5
+								},
+								"resolved": {
+									"components": {
+										"fire": 10.584,
+										"physical": 12.700799999999996
+									},
+									"details": [
+										{
+											"base": 7.559999999999999,
+											"before_defense": 12.700799999999996,
+											"final": 12.700799999999996,
+											"increased": 0.2,
+											"modifiers": [
+												"global_increased",
+												"precise_technique_attack_more"
+											],
+											"more": 1.4,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 5.04,
+											"before_defense": 10.584,
+											"final": 10.584,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased",
+												"precise_technique_attack_more"
+											],
+											"more": 1.4,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 23.284799999999997
+								},
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"parent": {
+								"critical": {
+									"chance": 0.0,
+									"multiplier": 1.5
+								},
+								"resolved": {
+									"components": {
+										"fire": 15.12,
+										"physical": 18.144
+									},
+									"details": [
+										{
+											"base": 10.799999999999999,
+											"before_defense": 18.144,
+											"final": 18.144,
+											"increased": 0.2,
+											"modifiers": [
+												"global_increased",
+												"precise_technique_attack_more"
+											],
+											"more": 1.4,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 7.2,
+											"before_defense": 15.12,
+											"final": 15.12,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased",
+												"precise_technique_attack_more"
+											],
+											"more": 1.4,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 33.263999999999996
+								},
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"secondary": {
+								"critical": {
+									"chance": 0.0,
+									"multiplier": 1.5
+								},
+								"resolved": {
+									"components": {
+										"fire": 24.299999999999997
+									},
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 24.299999999999997,
+											"final": 24.299999999999997,
+											"increased": 0.5,
+											"modifiers": [
+												"global_increased",
+												"elemental_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 24.299999999999997
+								},
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：母箭 33.26 / 子箭 23.28 / 独立爆炸 24.30"
+					}
+				},
+				"equipment": {
+					"amulet": {
+						"definition": {
+							"affix_lines": [],
+							"base_id": "detonation_charm",
+							"base_name": "终焰护符",
+							"category": "amulet",
+							"definition_id": "equipment:detonation_charm",
+							"description": "全局伤害提高 20%，元素伤害提高 30%。自然飞行结束爆炸：造成 90% 基础火焰范围伤害。返回可延后爆炸；分裂、碰撞消耗和取消不爆炸。",
+							"effects": [
+								"explode_on_flight_end"
+							],
+							"id": "detonation_charm",
+							"item_level": 1,
+							"kind": "equipment",
+							"name": "终焰护符",
+							"rarity": "unique",
+							"size": [
+								1,
+								1
+							],
+							"slot": "charm",
+							"stats": {
+								"elemental_increased": 0.3,
+								"global_increased": 0.2
+							},
+							"uid": "detonation_charm"
+						},
+						"item": {
+							"definition_id": "equipment:detonation_charm",
+							"kind": "equipment",
+							"payload": {
+
+							},
+							"uid": "detonation_charm"
+						},
+						"uid": "detonation_charm"
+					},
+					"body_armour": {
+						"definition": {
+							"affix_lines": [],
+							"base_id": "return_mantle",
+							"base_name": "归航披风",
+							"category": "body_armour",
+							"definition_id": "equipment:return_mantle",
+							"description": "最大护盾 +15。投射物抵达射程后，朝此刻角色中心方向返回一次；穿过中心继续飞行，不刷新寿命。母箭优先分裂。",
+							"effects": [
+								"return_on_range"
+							],
+							"id": "return_mantle",
+							"item_level": 1,
+							"kind": "equipment",
+							"name": "归航披风",
+							"rarity": "unique",
+							"size": [
+								2,
+								3
+							],
+							"slot": "armor",
+							"stats": {
+								"max_shield": 15.0
+							},
+							"uid": "return_mantle"
+						},
+						"item": {
+							"definition_id": "equipment:return_mantle",
+							"kind": "equipment",
+							"payload": {
+
+							},
+							"uid": "return_mantle"
+						},
+						"uid": "return_mantle"
+					},
+					"weapon": {
+						"definition": {
+							"added_sources": [],
+							"affix_lines": [
+								"前缀 · 砥刃 T3：本武器附加物理伤害 +6",
+								"前缀 · 淬锋 T3：本武器物理伤害提高 +30%",
+								"前缀 · 深汲 T3：最大魔力 +22",
+								"后缀 · 泉旋 T3：魔力恢复速度提高 +14%"
+							],
+							"base_id": "forgeblade",
+							"base_name": "锻纹短刃",
+							"category": "weapon",
+							"definition_id": "equipment:forgeblade",
+							"description": "装备后普通攻击变为单目标近战挥击；本武器物理增强普通近战攻击与裂刃斩。\n前缀 · 砥刃 T3：本武器附加物理伤害 +6\n前缀 · 淬锋 T3：本武器物理伤害提高 +30%\n前缀 · 深汲 T3：最大魔力 +22\n后缀 · 泉旋 T3：魔力恢复速度提高 +14%",
+							"effects": [],
+							"id": "gear_000004",
+							"item_level": 16,
+							"kind": "equipment",
+							"name": "稀有 · 锻纹短刃",
+							"rarity": "rare",
+							"size": [
+								1,
+								3
+							],
+							"slot": "weapon",
+							"stats": {
+								"mana_regen_increased": 0.14,
+								"max_mana": 22.0
+							},
+							"uid": "gear_000004",
+							"weapon_damage": {
+								"physical": 13.0
+							},
+							"weapon_damage_summary": "本武器物理：(4.0 + 6.0) × (1 + 30.0%) = 13.0；普通近战攻击与裂刃斩",
+							"weapon_profile": {
+								"base": {
+									"physical": 4.0
+								},
+								"base_id": "forgeblade",
+								"flat": {
+									"physical": 6.0
+								},
+								"increased": {
+									"physical": 0.3
+								},
+								"item_id": "gear_000004",
+								"sources": [
+									{
+										"affix_id": "whetstone_edge",
+										"stat": "weapon_added_physical",
+										"value": 6.0
+									},
+									{
+										"affix_id": "tempered_edge",
+										"stat": "weapon_physical_increased",
+										"value": 0.3
+									}
+								],
+								"stage": "weapon_local"
+							}
+						},
+						"item": {
+							"definition_id": "equipment:forgeblade",
+							"kind": "equipment",
+							"payload": {
+								"affixes": [
+									{
+										"id": "whetstone_edge",
+										"tier": 3,
+										"value": 6
+									},
+									{
+										"id": "tempered_edge",
+										"tier": 3,
+										"value": 30
+									},
+									{
+										"id": "deepwell",
+										"tier": 3,
+										"value": 22
+									},
+									{
+										"id": "wellturn",
+										"tier": 3,
+										"value": 14
+									}
+								],
+								"base_id": "forgeblade",
+								"id": "gear_000004",
+								"item_level": 16,
+								"rarity": "rare"
+							},
+							"uid": "gear_000004"
+						},
+						"uid": "gear_000004"
+					}
+				},
+				"expected_fixture": "docs/qa/v070-gameplay/fixtures/selected-above-expected.json",
+				"expected_sha256": "c330ee05dd6ee904a42eb62fab9a3e7fe0e7fd73fdf76e622fb408c9664f550d",
+				"fixture": "docs/qa/v070-gameplay/fixtures/selected-above.json",
+				"fixture_sha256": "ed7b452008ab389b70cd9b6de7657e105a9985417e0b7ece0e58a72ef7b4e624",
+				"matches_actual_main": true,
+				"progress": {
+					"level": 4,
+					"xp": 0
+				},
+				"save_attempts": 0,
+				"stats": {
+					"accuracy": 284.0,
+					"accuracy_increased": 0.0,
+					"additional_skill_slots": 0.0,
+					"area_increased": 0.0,
+					"area_size_increased": 0.0,
+					"armour": 0.0,
+					"armour_increased": 0.0,
+					"attack_added_fire": 0.0,
+					"attack_added_physical": 0.0,
+					"attack_crit_chance_increased": 0.0,
+					"attack_elemental_increased": 0.0,
+					"attack_life_leech": 0.0,
+					"attack_mana_leech": 0.0,
+					"attack_physical_increased": 0.0,
+					"attack_speed": 1.7,
+					"attack_speed_increased": 0.0,
+					"chaos_increased": 0.0,
+					"cold_increased": 0.0,
+					"cold_resistance": 0.0,
+					"crit_base_chance": 0.05,
+					"crit_base_multiplier": 1.5,
+					"crit_chance_increased": 0.0,
+					"crit_multiplier_add": 0.0,
+					"damage": 18.0,
+					"damage_taken_from_mana_before_life": 0.0,
+					"damaging_ailments_faster": 0.0,
+					"dexterity": 92.0,
+					"elemental_increased": 0.3,
+					"evasion": 41.3,
+					"evasion_increased": 0.0,
+					"fire_dot_multiplier_add": 0.0,
+					"fire_increased": 0.0,
+					"fire_resistance": 0.0,
+					"flask_charges_gained_increased": 0.0,
+					"flask_life_recovery_increased": 0.0,
+					"flask_mana_recovery_increased": 0.0,
+					"global_increased": 0.2,
+					"intelligence": 14.0,
+					"life_leech_max_rate_increased": 0.0,
+					"life_leech_rate_increased": 0.0,
+					"life_regen": 0.0,
+					"life_regen_percent": 0.0,
+					"lightning_increased": 0.0,
+					"lightning_resistance": 0.0,
+					"mana_cost_efficiency_increased": 0.0,
+					"mana_cost_increased": 0.0,
+					"mana_leech_max_rate_increased": 0.0,
+					"mana_leech_rate_increased": 0.0,
+					"mana_regen": 10.260000000000002,
+					"mana_regen_increased": 0.14,
+					"max_health": 141.0,
+					"max_mana": 129.0,
+					"max_shield": 75.75,
+					"maximum_cold_resistance_add": 0.0,
+					"maximum_fire_resistance_add": 0.0,
+					"maximum_lightning_resistance_add": 0.0,
+					"melee_area_size_increased": 0.0,
+					"melee_crit_chance_increased": 0.0,
+					"melee_crit_multiplier_add": 0.0,
+					"melee_physical_increased": 0.02,
+					"move_speed": 240.0,
+					"move_speed_increased": 0.0,
+					"physical_attack_life_leech": 0.0,
+					"physical_attack_mana_leech": 0.0,
+					"physical_increased": 0.0,
+					"precise_technique": 1.0,
+					"projectile_attack_crit_chance_increased": 0.0,
+					"projectile_attack_crit_multiplier_add": 0.0,
+					"projectile_count": 0.0,
+					"projectile_increased": 0.0,
+					"projectile_speed_increased": 0.0,
+					"resolute_technique": 0.0,
+					"shield_recharge_delay": 4.0,
+					"shield_recharge_rate": 13.0,
+					"shield_recharge_rate_increased": 0.0,
+					"shield_recharge_start_faster": 0.0,
+					"shield_regen": 13.0,
+					"spell_added_cold": 0.0,
+					"spell_added_lightning": 0.0,
+					"spell_area_size_increased": 0.0,
+					"spell_crit_chance_increased": 0.0,
+					"spell_crit_multiplier_add": 0.0,
+					"spell_increased": 0.0,
+					"strength": 14.0
+				},
+				"talents": {
+					"allocated": [
+						"50459",
+						"39821",
+						"52904",
+						"444",
+						"61306",
+						"60942",
+						"64709",
+						"3469",
+						"63620"
+					],
+					"ascendancy": "",
+					"ascendancy_allocated": [],
+					"ascendancy_points": 0,
+					"class_id": 2,
+					"masteries": {
+
+					},
+					"normal_points": 0,
+					"source_version": "3.29.1"
+				},
+				"whole_build_valid": true
+			},
+			"selected-below": {
+				"casts": {
+					"basic": {
+						"compiled": {
+							"critical": {
+								"primary": {
+									"chance": 0.0,
+									"multiplier": 1.5
+								}
+							},
+							"error": "",
+							"hit_policy": {
+								"cannot_deal_critical_strikes": true,
+								"hits_cannot_be_evaded": false,
+								"id": "precise_technique"
+							},
+							"ok": true,
+							"packets": {
+								"direct": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 1.0,
+										"base_coefficient": 1.0,
+										"intrinsic": {
+											"physical": 18.0
+										},
+										"stage": "hit_base",
+										"weapon": {
+											"coefficient": 1.0,
+											"components": {
+												"physical": 13.0
+											},
+											"contribution": {
+												"physical": 13.0
+											},
+											"profile": {
+												"base": {
+													"physical": 4.0
+												},
+												"base_id": "forgeblade",
+												"flat": {
+													"physical": 6.0
+												},
+												"increased": {
+													"physical": 0.3
+												},
+												"item_id": "gear_000004",
+												"sources": [
+													{
+														"affix_id": "whetstone_edge",
+														"stat": "weapon_added_physical",
+														"value": 6.0
+													},
+													{
+														"affix_id": "tempered_edge",
+														"stat": "weapon_physical_increased",
+														"value": 0.3
+													}
+												],
+												"stage": "weapon_local"
+											}
+										}
+									},
+									"base": {
+										"physical": 31.0
+									},
+									"role": "direct",
+									"skill_id": "basic",
+									"tags": [
+										"hit",
+										"attack",
+										"melee"
+									]
+								}
+							},
+							"precise_technique_profile": {
+								"accuracy": 284.0,
+								"attack_applies": false,
+								"attack_more": 0.0,
+								"cannot_deal_critical_strikes": true,
+								"condition_met": false,
+								"enabled": true,
+								"max_health": 358.0
+							},
+							"recipe": {
+								"delivery": "melee",
+								"half_angle": 0.7853981633974483,
+								"max_targets": 1,
+								"radius": 60.0
+							},
+							"skill_id": "basic",
+							"snapshot": {
+								"accuracy": 284.0,
+								"added_damage": {
+									"attack": {
+										"fire": 0.0,
+										"physical": 0.0
+									},
+									"spell": {
+										"cold": 0.0,
+										"lightning": 0.0
+									}
+								},
+								"added_damage_sources": [],
+								"base_damage": 18.0,
+								"compiled_packets": {
+									"direct": {
+										"assembly": {
+											"added": {
+
+											},
+											"added_effectiveness": 1.0,
+											"base_coefficient": 1.0,
+											"intrinsic": {
+												"physical": 18.0
+											},
+											"stage": "hit_base",
+											"weapon": {
+												"coefficient": 1.0,
+												"components": {
+													"physical": 13.0
+												},
+												"contribution": {
+													"physical": 13.0
+												},
+												"profile": {
+													"base": {
+														"physical": 4.0
+													},
+													"base_id": "forgeblade",
+													"flat": {
+														"physical": 6.0
+													},
+													"increased": {
+														"physical": 0.3
+													},
+													"item_id": "gear_000004",
+													"sources": [
+														{
+															"affix_id": "whetstone_edge",
+															"stat": "weapon_added_physical",
+															"value": 6.0
+														},
+														{
+															"affix_id": "tempered_edge",
+															"stat": "weapon_physical_increased",
+															"value": 0.3
+														}
+													],
+													"stage": "weapon_local"
+												}
+											}
+										},
+										"base": {
+											"physical": 31.0
+										},
+										"role": "direct",
+										"skill_id": "basic",
+										"tags": [
+											"hit",
+											"attack",
+											"melee"
+										]
+									}
+								},
+								"compiled_skill_id": "basic",
+								"critical": {
+									"primary": {
+										"chance": 0.0,
+										"multiplier": 1.5
+									}
+								},
+								"critical_modifiers": {
+									"base_chance": 0.05,
+									"base_multiplier": 1.5
+								},
+								"effects": [],
+								"explosion_recipe": {
+									"added_effectiveness": 0.0,
+									"coefficient": 0.9,
+									"radius": 76.0
+								},
+								"modifiers": [
+									{
+										"all_tags": [
+											"attack",
+											"melee"
+										],
+										"damage_types": [
+											"physical"
+										],
+										"id": "melee_physical_increased",
+										"mode": "increased",
+										"value": 0.02
+									}
+								],
+								"precise_technique": {
+									"accuracy": 284.0,
+									"max_health": 358.0
+								},
+								"projectile_count": 0,
+								"tornado_recipe": {
+									"child": {
+										"added_effectiveness": 0.7,
+										"coefficient": 0.7,
+										"lifetime": 1.7,
+										"pierce": -1,
+										"radius": 4.5,
+										"range": 150.0,
+										"role": "child",
+										"speed": 260.0,
+										"split": false
+									},
+									"child_count": 3,
+									"explosion": {
+										"added_effectiveness": 0.0,
+										"coefficient": 0.9,
+										"radius": 76.0
+									},
+									"parent": {
+										"added_effectiveness": 1.0,
+										"coefficient": 1.0,
+										"lifetime": 0.9,
+										"pierce": -1,
+										"radius": 6.0,
+										"range": 150.0,
+										"role": "parent",
+										"speed": 420.0,
+										"split": true
+									},
+									"parent_count": 3,
+									"spread": 0.16
+								},
+								"weapon_profile": {
+									"base": {
+										"physical": 4.0
+									},
+									"base_id": "forgeblade",
+									"flat": {
+										"physical": 6.0
+									},
+									"increased": {
+										"physical": 0.3
+									},
+									"item_id": "gear_000004",
+									"sources": [
+										{
+											"affix_id": "whetstone_edge",
+											"stat": "weapon_added_physical",
+											"value": 6.0
+										},
+										{
+											"affix_id": "tempered_edge",
+											"stat": "weapon_physical_increased",
+											"value": 0.3
+										}
+									],
+									"stage": "weapon_local"
+								}
+							}
+						},
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n不能造成暴击（包括独立爆炸）\n精准技艺：命中值 284.00 / 最大生命 358.00 · 门槛未成立\n本次技能未获得精准技艺的攻击伤害加成。\n命中值必须严格高于最大生命；门槛未成立也不能暴击，此天赋不绕过闪避。\n普通近战攻击：距离 60 · 最多 1 个目标；不发射投射物。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 284，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n每次命中：物理 31.62\n固有：物理 18.00；附加：无；附加效用 1.00；武器：物理 13.00〔(4.00 + 6.00) × (1 + 0.30) × 技能倍率 1.00〕",
+						"hits": {
+							"direct": {
+								"critical": {
+									"chance": 0.0,
+									"multiplier": 1.5
+								},
+								"resolved": {
+									"components": {
+										"physical": 31.62
+									},
+									"details": [
+										{
+											"base": 31.0,
+											"before_defense": 31.62,
+											"final": 31.62,
+											"increased": 0.02,
+											"modifiers": [
+												"melee_physical_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "physical"
+										}
+									],
+									"total": 31.62
+								},
+								"tags": [
+									"hit",
+									"attack",
+									"melee"
+								]
+							}
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每次命中 31.62"
+					},
+					"cleave": {
+						"compiled": {
+							"cooldown": 1.4,
+							"critical": {
+								"primary": {
+									"chance": 0.0,
+									"multiplier": 1.5
+								}
+							},
+							"error": "",
+							"group_id": "group_000009",
+							"hit_policy": {
+								"cannot_deal_critical_strikes": true,
+								"hits_cannot_be_evaded": false,
+								"id": "precise_technique"
+							},
+							"initial_count": 0,
+							"main_uid": "item_000014",
+							"mana": 12.0,
+							"ok": true,
+							"packets": {
+								"direct": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 2.8,
+										"base_coefficient": 2.8,
+										"intrinsic": {
+											"physical": 50.4
+										},
+										"stage": "hit_base",
+										"weapon": {
+											"coefficient": 2.8,
+											"components": {
+												"physical": 13.0
+											},
+											"contribution": {
+												"physical": 36.4
+											},
+											"profile": {
+												"base": {
+													"physical": 4.0
+												},
+												"base_id": "forgeblade",
+												"flat": {
+													"physical": 6.0
+												},
+												"increased": {
+													"physical": 0.3
+												},
+												"item_id": "gear_000004",
+												"sources": [
+													{
+														"affix_id": "whetstone_edge",
+														"stat": "weapon_added_physical",
+														"value": 6.0
+													},
+													{
+														"affix_id": "tempered_edge",
+														"stat": "weapon_physical_increased",
+														"value": 0.3
+													}
+												],
+												"stage": "weapon_local"
+											}
+										}
+									},
+									"base": {
+										"physical": 86.8
+									},
+									"role": "direct",
+									"skill_id": "cleave",
+									"tags": [
+										"hit",
+										"attack",
+										"melee",
+										"area"
+									]
+								}
+							},
+							"precise_technique_profile": {
+								"accuracy": 284.0,
+								"attack_applies": false,
+								"attack_more": 0.0,
+								"cannot_deal_critical_strikes": true,
+								"condition_met": false,
+								"enabled": true,
+								"max_health": 358.0
+							},
+							"recipe": {
+								"half_angle": 1.5707963267948966,
+								"radius": 95.0
+							},
+							"skill_id": "cleave",
+							"snapshot": {
+								"accuracy": 284.0,
+								"added_damage": {
+									"attack": {
+										"fire": 0.0,
+										"physical": 0.0
+									},
+									"spell": {
+										"cold": 0.0,
+										"lightning": 0.0
+									}
+								},
+								"added_damage_sources": [],
+								"base_damage": 18.0,
+								"compiled_packets": {
+									"direct": {
+										"assembly": {
+											"added": {
+
+											},
+											"added_effectiveness": 2.8,
+											"base_coefficient": 2.8,
+											"intrinsic": {
+												"physical": 50.4
+											},
+											"stage": "hit_base",
+											"weapon": {
+												"coefficient": 2.8,
+												"components": {
+													"physical": 13.0
+												},
+												"contribution": {
+													"physical": 36.4
+												},
+												"profile": {
+													"base": {
+														"physical": 4.0
+													},
+													"base_id": "forgeblade",
+													"flat": {
+														"physical": 6.0
+													},
+													"increased": {
+														"physical": 0.3
+													},
+													"item_id": "gear_000004",
+													"sources": [
+														{
+															"affix_id": "whetstone_edge",
+															"stat": "weapon_added_physical",
+															"value": 6.0
+														},
+														{
+															"affix_id": "tempered_edge",
+															"stat": "weapon_physical_increased",
+															"value": 0.3
+														}
+													],
+													"stage": "weapon_local"
+												}
+											}
+										},
+										"base": {
+											"physical": 86.8
+										},
+										"role": "direct",
+										"skill_id": "cleave",
+										"tags": [
+											"hit",
+											"attack",
+											"melee",
+											"area"
+										]
+									}
+								},
+								"compiled_skill_id": "cleave",
+								"critical": {
+									"primary": {
+										"chance": 0.0,
+										"multiplier": 1.5
+									}
+								},
+								"critical_modifiers": {
+									"base_chance": 0.05,
+									"base_multiplier": 1.5
+								},
+								"effects": [],
+								"explosion_recipe": {
+									"added_effectiveness": 0.0,
+									"coefficient": 0.9,
+									"radius": 76.0
+								},
+								"modifiers": [
+									{
+										"all_tags": [
+											"attack",
+											"melee"
+										],
+										"damage_types": [
+											"physical"
+										],
+										"id": "melee_physical_increased",
+										"mode": "increased",
+										"value": 0.02
+									}
+								],
+								"precise_technique": {
+									"accuracy": 284.0,
+									"max_health": 358.0
+								},
+								"projectile_count": 0,
+								"tornado_recipe": {
+									"child": {
+										"added_effectiveness": 0.7,
+										"coefficient": 0.7,
+										"lifetime": 1.7,
+										"pierce": -1,
+										"radius": 4.5,
+										"range": 150.0,
+										"role": "child",
+										"speed": 260.0,
+										"split": false
+									},
+									"child_count": 3,
+									"explosion": {
+										"added_effectiveness": 0.0,
+										"coefficient": 0.9,
+										"radius": 76.0
+									},
+									"parent": {
+										"added_effectiveness": 1.0,
+										"coefficient": 1.0,
+										"lifetime": 0.9,
+										"pierce": -1,
+										"radius": 6.0,
+										"range": 150.0,
+										"role": "parent",
+										"speed": 420.0,
+										"split": true
+									},
+									"parent_count": 3,
+									"spread": 0.16
+								},
+								"weapon_profile": {
+									"base": {
+										"physical": 4.0
+									},
+									"base_id": "forgeblade",
+									"flat": {
+										"physical": 6.0
+									},
+									"increased": {
+										"physical": 0.3
+									},
+									"item_id": "gear_000004",
+									"sources": [
+										{
+											"affix_id": "whetstone_edge",
+											"stat": "weapon_added_physical",
+											"value": 6.0
+										},
+										{
+											"affix_id": "tempered_edge",
+											"stat": "weapon_physical_increased",
+											"value": 0.3
+										}
+									],
+									"stage": "weapon_local"
+								}
+							},
+							"support_ids": []
+						},
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n不能造成暴击（包括独立爆炸）\n精准技艺：命中值 284.00 / 最大生命 358.00 · 门槛未成立\n本次技能未获得精准技艺的攻击伤害加成。\n命中值必须严格高于最大生命；门槛未成立也不能暴击，此天赋不绕过闪避。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 284，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n扇形范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 88.54\n固有：物理 50.40；附加：无；附加效用 2.80；武器：物理 36.40〔(4.00 + 6.00) × (1 + 0.30) × 技能倍率 2.80〕",
+						"hits": {
+							"direct": {
+								"critical": {
+									"chance": 0.0,
+									"multiplier": 1.5
+								},
+								"resolved": {
+									"components": {
+										"physical": 88.536
+									},
+									"details": [
+										{
+											"base": 86.8,
+											"before_defense": 88.536,
+											"final": 88.536,
+											"increased": 0.02,
+											"modifiers": [
+												"melee_physical_increased"
+											],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "physical"
+										}
+									],
+									"total": 88.536
+								},
+								"tags": [
+									"hit",
+									"attack",
+									"melee",
+									"area"
+								]
+							}
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每次命中 88.54"
+					},
+					"tornado": {
+						"compiled": {
+							"cooldown": 2.5,
+							"critical": {
+								"primary": {
+									"chance": 0.0,
+									"multiplier": 1.5
+								},
+								"secondary": {
+									"chance": 0.0,
+									"multiplier": 1.5
+								}
+							},
+							"error": "",
+							"group_id": "group_000008",
+							"hit_policy": {
+								"cannot_deal_critical_strikes": true,
+								"hits_cannot_be_evaded": false,
+								"id": "precise_technique"
+							},
+							"initial_count": 3,
+							"main_uid": "migration_gem_000008",
+							"mana": 18.0,
+							"ok": true,
+							"packets": {
+								"child": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.7,
+										"base_coefficient": 0.7,
+										"intrinsic": {
+											"fire": 5.04,
+											"physical": 7.559999999999999
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 5.04,
+										"physical": 7.559999999999999
+									},
+									"role": "child",
+									"skill_id": "tornado",
+									"tags": [
+										"hit",
+										"attack",
+										"projectile"
+									]
+								},
+								"parent": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 1.0,
+										"base_coefficient": 1.0,
+										"intrinsic": {
+											"fire": 7.2,
+											"physical": 10.799999999999999
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 7.2,
+										"physical": 10.799999999999999
+									},
+									"role": "parent",
+									"skill_id": "tornado",
+									"tags": [
+										"hit",
+										"attack",
+										"projectile"
+									]
+								},
+								"secondary": {
+									"assembly": {
+										"added": {
+
+										},
+										"added_effectiveness": 0.0,
+										"base_coefficient": 0.9,
+										"intrinsic": {
+											"fire": 16.2
+										},
+										"stage": "hit_base"
+									},
+									"base": {
+										"fire": 16.2
+									},
+									"role": "secondary",
+									"skill_id": "tornado",
+									"tags": [
+										"hit",
+										"area",
+										"secondary",
+										"explosion"
+									]
+								}
+							},
+							"precise_technique_profile": {
+								"accuracy": 284.0,
+								"attack_applies": false,
+								"attack_more": 0.0,
+								"cannot_deal_critical_strikes": true,
+								"condition_met": false,
+								"enabled": true,
+								"max_health": 358.0
+							},
+							"recipe": {
+								"child": {
+									"added_effectiveness": 0.7,
+									"coefficient": 0.7,
+									"lifetime": 1.7,
+									"pierce": -1,
+									"radius": 4.5,
+									"range": 150.0,
+									"role": "child",
+									"speed": 260.0,
+									"split": false
+								},
+								"child_count": 3,
+								"explosion": {
+									"added_effectiveness": 0.0,
+									"coefficient": 0.9,
+									"radius": 76.0
+								},
+								"initial_count": 3,
+								"parent": {
+									"added_effectiveness": 1.0,
+									"coefficient": 1.0,
+									"lifetime": 0.9,
+									"pierce": -1,
+									"radius": 6.0,
+									"range": 150.0,
+									"role": "parent",
+									"speed": 420.0,
+									"split": true
+								},
+								"parent_count": 3,
+								"spread": 0.16
+							},
+							"skill_id": "tornado",
+							"snapshot": {
+								"accuracy": 284.0,
+								"added_damage": {
+									"attack": {
+										"fire": 0.0,
+										"physical": 0.0
+									},
+									"spell": {
+										"cold": 0.0,
+										"lightning": 0.0
+									}
+								},
+								"added_damage_sources": [],
+								"base_damage": 18.0,
+								"compiled_packets": {
+									"child": {
+										"assembly": {
+											"added": {
+
+											},
+											"added_effectiveness": 0.7,
+											"base_coefficient": 0.7,
+											"intrinsic": {
+												"fire": 5.04,
+												"physical": 7.559999999999999
+											},
+											"stage": "hit_base"
+										},
+										"base": {
+											"fire": 5.04,
+											"physical": 7.559999999999999
+										},
+										"role": "child",
+										"skill_id": "tornado",
+										"tags": [
+											"hit",
+											"attack",
+											"projectile"
+										]
+									},
+									"parent": {
+										"assembly": {
+											"added": {
+
+											},
+											"added_effectiveness": 1.0,
+											"base_coefficient": 1.0,
+											"intrinsic": {
+												"fire": 7.2,
+												"physical": 10.799999999999999
+											},
+											"stage": "hit_base"
+										},
+										"base": {
+											"fire": 7.2,
+											"physical": 10.799999999999999
+										},
+										"role": "parent",
+										"skill_id": "tornado",
+										"tags": [
+											"hit",
+											"attack",
+											"projectile"
+										]
+									},
+									"secondary": {
+										"assembly": {
+											"added": {
+
+											},
+											"added_effectiveness": 0.0,
+											"base_coefficient": 0.9,
+											"intrinsic": {
+												"fire": 16.2
+											},
+											"stage": "hit_base"
+										},
+										"base": {
+											"fire": 16.2
+										},
+										"role": "secondary",
+										"skill_id": "tornado",
+										"tags": [
+											"hit",
+											"area",
+											"secondary",
+											"explosion"
+										]
+									}
+								},
+								"compiled_skill_id": "tornado",
+								"critical": {
+									"primary": {
+										"chance": 0.0,
+										"multiplier": 1.5
+									},
+									"secondary": {
+										"chance": 0.0,
+										"multiplier": 1.5
+									}
+								},
+								"critical_modifiers": {
+									"base_chance": 0.05,
+									"base_multiplier": 1.5
+								},
+								"effects": [],
+								"explosion_recipe": {
+									"added_effectiveness": 0.0,
+									"coefficient": 0.9,
+									"radius": 76.0
+								},
+								"initial_count": 3,
+								"modifiers": [
+									{
+										"all_tags": [
+											"attack",
+											"melee"
+										],
+										"damage_types": [
+											"physical"
+										],
+										"id": "melee_physical_increased",
+										"mode": "increased",
+										"value": 0.02
+									}
+								],
+								"precise_technique": {
+									"accuracy": 284.0,
+									"max_health": 358.0
+								},
+								"projectile_count": 0,
+								"tornado_recipe": {
+									"child": {
+										"added_effectiveness": 0.7,
+										"coefficient": 0.7,
+										"lifetime": 1.7,
+										"pierce": -1,
+										"radius": 4.5,
+										"range": 150.0,
+										"role": "child",
+										"speed": 260.0,
+										"split": false
+									},
+									"child_count": 3,
+									"explosion": {
+										"added_effectiveness": 0.0,
+										"coefficient": 0.9,
+										"radius": 76.0
+									},
+									"parent": {
+										"added_effectiveness": 1.0,
+										"coefficient": 1.0,
+										"lifetime": 0.9,
+										"pierce": -1,
+										"radius": 6.0,
+										"range": 150.0,
+										"role": "parent",
+										"speed": 420.0,
+										"split": true
+									},
+									"parent_count": 3,
+									"spread": 0.16
+								},
+								"weapon_profile": {
+									"base": {
+										"physical": 4.0
+									},
+									"base_id": "forgeblade",
+									"flat": {
+										"physical": 6.0
+									},
+									"increased": {
+										"physical": 0.3
+									},
+									"item_id": "gear_000004",
+									"sources": [
+										{
+											"affix_id": "whetstone_edge",
+											"stat": "weapon_added_physical",
+											"value": 6.0
+										},
+										{
+											"affix_id": "tempered_edge",
+											"stat": "weapon_physical_increased",
+											"value": 0.3
+										}
+									],
+									"stage": "weapon_local"
+								}
+							},
+							"support_ids": []
+						},
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n不能造成暴击（包括独立爆炸）\n精准技艺：命中值 284.00 / 最大生命 358.00 · 门槛未成立\n本次技能未获得精准技艺的攻击伤害加成。\n命中值必须严格高于最大生命；门槛未成立也不能暴击，此天赋不绕过闪避。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 284，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n母箭速度 420.00 · 子箭速度 260.00；返回沿用各自速度。\n投射速度改变飞行快慢，不增加距离上限或存续时间。\n母箭：物理 10.80 + 火焰 7.20\n固有：物理 10.80 + 火焰 7.20；附加：无；附加效用 1.00\n子箭：物理 7.56 + 火焰 5.04\n固有：物理 7.56 + 火焰 5.04；附加：无；附加效用 0.70\n独立爆炸：火焰 16.20\n固有：火焰 16.20；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+						"hits": {
+							"child": {
+								"critical": {
+									"chance": 0.0,
+									"multiplier": 1.5
+								},
+								"resolved": {
+									"components": {
+										"fire": 5.04,
+										"physical": 7.559999999999999
+									},
+									"details": [
+										{
+											"base": 7.559999999999999,
+											"before_defense": 7.559999999999999,
+											"final": 7.559999999999999,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 5.04,
+											"before_defense": 5.04,
+											"final": 5.04,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 12.599999999999998
+								},
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"parent": {
+								"critical": {
+									"chance": 0.0,
+									"multiplier": 1.5
+								},
+								"resolved": {
+									"components": {
+										"fire": 7.2,
+										"physical": 10.799999999999999
+									},
+									"details": [
+										{
+											"base": 10.799999999999999,
+											"before_defense": 10.799999999999999,
+											"final": 10.799999999999999,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "physical"
+										},
+										{
+											"base": 7.2,
+											"before_defense": 7.2,
+											"final": 7.2,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 18.0
+								},
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"secondary": {
+								"critical": {
+									"chance": 0.0,
+									"multiplier": 1.5
+								},
+								"resolved": {
+									"components": {
+										"fire": 16.2
+									},
+									"details": [
+										{
+											"base": 16.2,
+											"before_defense": 16.2,
+											"final": 16.2,
+											"increased": 0.0,
+											"modifiers": [],
+											"more": 1.0,
+											"resistance": 0.0,
+											"type": "fire"
+										}
+									],
+									"total": 16.2
+								},
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：母箭 18.00 / 子箭 12.60"
+					}
+				},
+				"equipment": {
+					"amulet": {
+						"definition": {
+							"added_sources": [],
+							"affix_lines": [
+								"前缀 · 根泉 T3：最大生命 +32",
+								"前缀 · 深汲 T3：最大魔力 +22",
+								"后缀 · 泉旋 T3：魔力恢复速度提高 +14%",
+								"后缀 · 循迹 T3：移动速度提高 +6%"
+							],
+							"base_id": "pulse_seed",
+							"base_name": "脉籽符",
+							"category": "amulet",
+							"definition_id": "equipment:pulse_seed",
+							"description": "最大生命 +8，移动速度 +3。\n前缀 · 根泉 T3：最大生命 +32\n前缀 · 深汲 T3：最大魔力 +22\n后缀 · 泉旋 T3：魔力恢复速度提高 +14%\n后缀 · 循迹 T3：移动速度提高 +6%",
+							"effects": [],
+							"id": "gear_000007",
+							"item_level": 16,
+							"kind": "equipment",
+							"name": "稀有 · 脉籽符",
+							"rarity": "rare",
+							"size": [
+								1,
+								1
+							],
+							"slot": "charm",
+							"stats": {
+								"mana_regen_increased": 0.14,
+								"max_health": 40.0,
+								"max_mana": 22.0,
+								"move_speed": 3.0,
+								"move_speed_increased": 0.06
+							},
+							"uid": "gear_000007"
+						},
+						"item": {
+							"definition_id": "equipment:pulse_seed",
+							"kind": "equipment",
+							"payload": {
+								"affixes": [
+									{
+										"id": "rootwell",
+										"tier": 3,
+										"value": 32
+									},
+									{
+										"id": "deepwell",
+										"tier": 3,
+										"value": 22
+									},
+									{
+										"id": "wellturn",
+										"tier": 3,
+										"value": 14
+									},
+									{
+										"id": "trailstep",
+										"tier": 3,
+										"value": 6
+									}
+								],
+								"base_id": "pulse_seed",
+								"id": "gear_000007",
+								"item_level": 16,
+								"rarity": "rare"
+							},
+							"uid": "gear_000007"
+						},
+						"uid": "gear_000007"
+					},
+					"belt": {
+						"definition": {
+							"added_sources": [],
+							"affix_lines": [
+								"前缀 · 坚生 T3：最大生命 +12",
+								"前缀 · 澄意 T3：最大魔力 +10",
+								"后缀 · 耐守 T3：最大生命 +7",
+								"后缀 · 泉行 T3：魔力恢复速度提高 +8%"
+							],
+							"base_id": "nine_slot_folded_belt",
+							"base_name": "折纹腰带",
+							"category": "belt",
+							"definition_id": "equipment:nine_slot_folded_belt",
+							"description": "最大生命 +4，最大护盾 +2。\n前缀 · 坚生 T3：最大生命 +12\n前缀 · 澄意 T3：最大魔力 +10\n后缀 · 耐守 T3：最大生命 +7\n后缀 · 泉行 T3：魔力恢复速度提高 +8%",
+							"effects": [],
+							"id": "gear_000011",
+							"item_level": 16,
+							"kind": "equipment",
+							"name": "稀有 · 折纹腰带",
+							"rarity": "rare",
+							"size": [
+								2,
+								1
+							],
+							"slot": "belt",
+							"stats": {
+								"mana_regen_increased": 0.08,
+								"max_health": 23.0,
+								"max_mana": 10.0,
+								"max_shield": 2.0
+							},
+							"uid": "gear_000011"
+						},
+						"item": {
+							"definition_id": "equipment:nine_slot_folded_belt",
+							"kind": "equipment",
+							"payload": {
+								"affixes": [
+									{
+										"id": "nine_slot_prefix_vitality",
+										"tier": 3,
+										"value": 12
+									},
+									{
+										"id": "nine_slot_prefix_clarity",
+										"tier": 3,
+										"value": 10
+									},
+									{
+										"id": "nine_slot_suffix_endurance",
+										"tier": 3,
+										"value": 7
+									},
+									{
+										"id": "nine_slot_suffix_mana_flow",
+										"tier": 3,
+										"value": 8
+									}
+								],
+								"base_id": "nine_slot_folded_belt",
+								"id": "gear_000011",
+								"item_level": 16,
+								"rarity": "rare"
+							},
+							"uid": "gear_000011"
+						},
+						"uid": "gear_000011"
+					},
+					"body_armour": {
+						"definition": {
+							"added_sources": [],
+							"affix_lines": [
+								"前缀 · 根泉 T3：最大生命 +32",
+								"前缀 · 深汲 T3：最大魔力 +22",
+								"后缀 · 泉旋 T3：魔力恢复速度提高 +14%",
+								"后缀 · 循迹 T3：移动速度提高 +6%"
+							],
+							"base_id": "woven_bastion",
+							"base_name": "绳垒衣",
+							"category": "body_armour",
+							"definition_id": "equipment:woven_bastion",
+							"description": "最大生命 +12，最大护盾 +5。护盾为角色全局加值。\n前缀 · 根泉 T3：最大生命 +32\n前缀 · 深汲 T3：最大魔力 +22\n后缀 · 泉旋 T3：魔力恢复速度提高 +14%\n后缀 · 循迹 T3：移动速度提高 +6%",
+							"effects": [],
+							"id": "gear_000006",
+							"item_level": 16,
+							"kind": "equipment",
+							"name": "稀有 · 绳垒衣",
+							"rarity": "rare",
+							"size": [
+								2,
+								3
+							],
+							"slot": "armor",
+							"stats": {
+								"mana_regen_increased": 0.14,
+								"max_health": 44.0,
+								"max_mana": 22.0,
+								"max_shield": 5.0,
+								"move_speed_increased": 0.06
+							},
+							"uid": "gear_000006"
+						},
+						"item": {
+							"definition_id": "equipment:woven_bastion",
+							"kind": "equipment",
+							"payload": {
+								"affixes": [
+									{
+										"id": "rootwell",
+										"tier": 3,
+										"value": 32
+									},
+									{
+										"id": "deepwell",
+										"tier": 3,
+										"value": 22
+									},
+									{
+										"id": "wellturn",
+										"tier": 3,
+										"value": 14
+									},
+									{
+										"id": "trailstep",
+										"tier": 3,
+										"value": 6
+									}
+								],
+								"base_id": "woven_bastion",
+								"id": "gear_000006",
+								"item_level": 16,
+								"rarity": "rare"
+							},
+							"uid": "gear_000006"
+						},
+						"uid": "gear_000006"
+					},
+					"boots": {
+						"definition": {
+							"added_sources": [],
+							"affix_lines": [
+								"前缀 · 坚生 T3：最大生命 +12",
+								"前缀 · 澄意 T3：最大魔力 +10",
+								"后缀 · 耐守 T3：最大生命 +7",
+								"后缀 · 泉行 T3：魔力恢复速度提高 +8%"
+							],
+							"base_id": "nine_slot_trail_boots",
+							"base_name": "踏纹短靴",
+							"category": "boots",
+							"definition_id": "equipment:nine_slot_trail_boots",
+							"description": "最大生命 +3，移动速度 +1。\n前缀 · 坚生 T3：最大生命 +12\n前缀 · 澄意 T3：最大魔力 +10\n后缀 · 耐守 T3：最大生命 +7\n后缀 · 泉行 T3：魔力恢复速度提高 +8%",
+							"effects": [],
+							"id": "gear_000010",
+							"item_level": 16,
+							"kind": "equipment",
+							"name": "稀有 · 踏纹短靴",
+							"rarity": "rare",
+							"size": [
+								2,
+								2
+							],
+							"slot": "boots",
+							"stats": {
+								"mana_regen_increased": 0.08,
+								"max_health": 22.0,
+								"max_mana": 10.0,
+								"move_speed": 1.0
+							},
+							"uid": "gear_000010"
+						},
+						"item": {
+							"definition_id": "equipment:nine_slot_trail_boots",
+							"kind": "equipment",
+							"payload": {
+								"affixes": [
+									{
+										"id": "nine_slot_prefix_vitality",
+										"tier": 3,
+										"value": 12
+									},
+									{
+										"id": "nine_slot_prefix_clarity",
+										"tier": 3,
+										"value": 10
+									},
+									{
+										"id": "nine_slot_suffix_endurance",
+										"tier": 3,
+										"value": 7
+									},
+									{
+										"id": "nine_slot_suffix_mana_flow",
+										"tier": 3,
+										"value": 8
+									}
+								],
+								"base_id": "nine_slot_trail_boots",
+								"id": "gear_000010",
+								"item_level": 16,
+								"rarity": "rare"
+							},
+							"uid": "gear_000010"
+						},
+						"uid": "gear_000010"
+					},
+					"gloves": {
+						"definition": {
+							"added_sources": [],
+							"affix_lines": [
+								"前缀 · 坚生 T3：最大生命 +12",
+								"前缀 · 澄意 T3：最大魔力 +10",
+								"后缀 · 耐守 T3：最大生命 +7",
+								"后缀 · 泉行 T3：魔力恢复速度提高 +8%"
+							],
+							"base_id": "nine_slot_threaded_gloves",
+							"base_name": "织纹手套",
+							"category": "gloves",
+							"definition_id": "equipment:nine_slot_threaded_gloves",
+							"description": "最大魔力 +2，魔力恢复 +0.1 / 秒。\n前缀 · 坚生 T3：最大生命 +12\n前缀 · 澄意 T3：最大魔力 +10\n后缀 · 耐守 T3：最大生命 +7\n后缀 · 泉行 T3：魔力恢复速度提高 +8%",
+							"effects": [],
+							"id": "gear_000012",
+							"item_level": 16,
+							"kind": "equipment",
+							"name": "稀有 · 织纹手套",
+							"rarity": "rare",
+							"size": [
+								2,
+								2
+							],
+							"slot": "gloves",
+							"stats": {
+								"mana_regen": 0.1,
+								"mana_regen_increased": 0.08,
+								"max_health": 19.0,
+								"max_mana": 12.0
+							},
+							"uid": "gear_000012"
+						},
+						"item": {
+							"definition_id": "equipment:nine_slot_threaded_gloves",
+							"kind": "equipment",
+							"payload": {
+								"affixes": [
+									{
+										"id": "nine_slot_prefix_vitality",
+										"tier": 3,
+										"value": 12
+									},
+									{
+										"id": "nine_slot_prefix_clarity",
+										"tier": 3,
+										"value": 10
+									},
+									{
+										"id": "nine_slot_suffix_endurance",
+										"tier": 3,
+										"value": 7
+									},
+									{
+										"id": "nine_slot_suffix_mana_flow",
+										"tier": 3,
+										"value": 8
+									}
+								],
+								"base_id": "nine_slot_threaded_gloves",
+								"id": "gear_000012",
+								"item_level": 16,
+								"rarity": "rare"
+							},
+							"uid": "gear_000012"
+						},
+						"uid": "gear_000012"
+					},
+					"helmet": {
+						"definition": {
+							"added_sources": [],
+							"affix_lines": [
+								"前缀 · 坚生 T3：最大生命 +12",
+								"前缀 · 澄意 T3：最大魔力 +10",
+								"后缀 · 耐守 T3：最大生命 +7",
+								"后缀 · 泉行 T3：魔力恢复速度提高 +8%"
+							],
+							"base_id": "nine_slot_slate_helmet",
+							"base_name": "石脊头盔",
+							"category": "helmet",
+							"definition_id": "equipment:nine_slot_slate_helmet",
+							"description": "最大生命 +4，最大护盾 +2。\n前缀 · 坚生 T3：最大生命 +12\n前缀 · 澄意 T3：最大魔力 +10\n后缀 · 耐守 T3：最大生命 +7\n后缀 · 泉行 T3：魔力恢复速度提高 +8%",
+							"effects": [],
+							"id": "gear_000013",
+							"item_level": 16,
+							"kind": "equipment",
+							"name": "稀有 · 石脊头盔",
+							"rarity": "rare",
+							"size": [
+								2,
+								2
+							],
+							"slot": "helmet",
+							"stats": {
+								"mana_regen_increased": 0.08,
+								"max_health": 23.0,
+								"max_mana": 10.0,
+								"max_shield": 2.0
+							},
+							"uid": "gear_000013"
+						},
+						"item": {
+							"definition_id": "equipment:nine_slot_slate_helmet",
+							"kind": "equipment",
+							"payload": {
+								"affixes": [
+									{
+										"id": "nine_slot_prefix_vitality",
+										"tier": 3,
+										"value": 12
+									},
+									{
+										"id": "nine_slot_prefix_clarity",
+										"tier": 3,
+										"value": 10
+									},
+									{
+										"id": "nine_slot_suffix_endurance",
+										"tier": 3,
+										"value": 7
+									},
+									{
+										"id": "nine_slot_suffix_mana_flow",
+										"tier": 3,
+										"value": 8
+									}
+								],
+								"base_id": "nine_slot_slate_helmet",
+								"id": "gear_000013",
+								"item_level": 16,
+								"rarity": "rare"
+							},
+							"uid": "gear_000013"
+						},
+						"uid": "gear_000013"
+					},
+					"ring_1": {
+						"definition": {
+							"added_sources": [],
+							"affix_lines": [
+								"前缀 · 坚生 T3：最大生命 +12",
+								"前缀 · 澄意 T3：最大魔力 +10",
+								"后缀 · 耐守 T3：最大生命 +7",
+								"后缀 · 泉行 T3：魔力恢复速度提高 +8%"
+							],
+							"base_id": "nine_slot_etched_ring",
+							"base_name": "纹刻指环",
+							"category": "ring",
+							"definition_id": "equipment:nine_slot_etched_ring",
+							"description": "最大生命 +4，最大魔力 +2。\n前缀 · 坚生 T3：最大生命 +12\n前缀 · 澄意 T3：最大魔力 +10\n后缀 · 耐守 T3：最大生命 +7\n后缀 · 泉行 T3：魔力恢复速度提高 +8%",
+							"effects": [],
+							"id": "gear_000008",
+							"item_level": 16,
+							"kind": "equipment",
+							"name": "稀有 · 纹刻指环",
+							"rarity": "rare",
+							"size": [
+								1,
+								1
+							],
+							"slot": "ring",
+							"stats": {
+								"mana_regen_increased": 0.08,
+								"max_health": 23.0,
+								"max_mana": 12.0
+							},
+							"uid": "gear_000008"
+						},
+						"item": {
+							"definition_id": "equipment:nine_slot_etched_ring",
+							"kind": "equipment",
+							"payload": {
+								"affixes": [
+									{
+										"id": "nine_slot_prefix_vitality",
+										"tier": 3,
+										"value": 12
+									},
+									{
+										"id": "nine_slot_prefix_clarity",
+										"tier": 3,
+										"value": 10
+									},
+									{
+										"id": "nine_slot_suffix_endurance",
+										"tier": 3,
+										"value": 7
+									},
+									{
+										"id": "nine_slot_suffix_mana_flow",
+										"tier": 3,
+										"value": 8
+									}
+								],
+								"base_id": "nine_slot_etched_ring",
+								"id": "gear_000008",
+								"item_level": 16,
+								"rarity": "rare"
+							},
+							"uid": "gear_000008"
+						},
+						"uid": "gear_000008"
+					},
+					"ring_2": {
+						"definition": {
+							"added_sources": [],
+							"affix_lines": [
+								"前缀 · 坚生 T3：最大生命 +12",
+								"前缀 · 澄意 T3：最大魔力 +10",
+								"后缀 · 耐守 T3：最大生命 +7",
+								"后缀 · 泉行 T3：魔力恢复速度提高 +8%"
+							],
+							"base_id": "nine_slot_etched_ring",
+							"base_name": "纹刻指环",
+							"category": "ring",
+							"definition_id": "equipment:nine_slot_etched_ring",
+							"description": "最大生命 +4，最大魔力 +2。\n前缀 · 坚生 T3：最大生命 +12\n前缀 · 澄意 T3：最大魔力 +10\n后缀 · 耐守 T3：最大生命 +7\n后缀 · 泉行 T3：魔力恢复速度提高 +8%",
+							"effects": [],
+							"id": "gear_000009",
+							"item_level": 16,
+							"kind": "equipment",
+							"name": "稀有 · 纹刻指环",
+							"rarity": "rare",
+							"size": [
+								1,
+								1
+							],
+							"slot": "ring",
+							"stats": {
+								"mana_regen_increased": 0.08,
+								"max_health": 23.0,
+								"max_mana": 12.0
+							},
+							"uid": "gear_000009"
+						},
+						"item": {
+							"definition_id": "equipment:nine_slot_etched_ring",
+							"kind": "equipment",
+							"payload": {
+								"affixes": [
+									{
+										"id": "nine_slot_prefix_vitality",
+										"tier": 3,
+										"value": 12
+									},
+									{
+										"id": "nine_slot_prefix_clarity",
+										"tier": 3,
+										"value": 10
+									},
+									{
+										"id": "nine_slot_suffix_endurance",
+										"tier": 3,
+										"value": 7
+									},
+									{
+										"id": "nine_slot_suffix_mana_flow",
+										"tier": 3,
+										"value": 8
+									}
+								],
+								"base_id": "nine_slot_etched_ring",
+								"id": "gear_000009",
+								"item_level": 16,
+								"rarity": "rare"
+							},
+							"uid": "gear_000009"
+						},
+						"uid": "gear_000009"
+					},
+					"weapon": {
+						"definition": {
+							"added_sources": [],
+							"affix_lines": [
+								"前缀 · 砥刃 T3：本武器附加物理伤害 +6",
+								"前缀 · 淬锋 T3：本武器物理伤害提高 +30%",
+								"前缀 · 深汲 T3：最大魔力 +22",
+								"后缀 · 泉旋 T3：魔力恢复速度提高 +14%"
+							],
+							"base_id": "forgeblade",
+							"base_name": "锻纹短刃",
+							"category": "weapon",
+							"definition_id": "equipment:forgeblade",
+							"description": "装备后普通攻击变为单目标近战挥击；本武器物理增强普通近战攻击与裂刃斩。\n前缀 · 砥刃 T3：本武器附加物理伤害 +6\n前缀 · 淬锋 T3：本武器物理伤害提高 +30%\n前缀 · 深汲 T3：最大魔力 +22\n后缀 · 泉旋 T3：魔力恢复速度提高 +14%",
+							"effects": [],
+							"id": "gear_000004",
+							"item_level": 16,
+							"kind": "equipment",
+							"name": "稀有 · 锻纹短刃",
+							"rarity": "rare",
+							"size": [
+								1,
+								3
+							],
+							"slot": "weapon",
+							"stats": {
+								"mana_regen_increased": 0.14,
+								"max_mana": 22.0
+							},
+							"uid": "gear_000004",
+							"weapon_damage": {
+								"physical": 13.0
+							},
+							"weapon_damage_summary": "本武器物理：(4.0 + 6.0) × (1 + 30.0%) = 13.0；普通近战攻击与裂刃斩",
+							"weapon_profile": {
+								"base": {
+									"physical": 4.0
+								},
+								"base_id": "forgeblade",
+								"flat": {
+									"physical": 6.0
+								},
+								"increased": {
+									"physical": 0.3
+								},
+								"item_id": "gear_000004",
+								"sources": [
+									{
+										"affix_id": "whetstone_edge",
+										"stat": "weapon_added_physical",
+										"value": 6.0
+									},
+									{
+										"affix_id": "tempered_edge",
+										"stat": "weapon_physical_increased",
+										"value": 0.3
+									}
+								],
+								"stage": "weapon_local"
+							}
+						},
+						"item": {
+							"definition_id": "equipment:forgeblade",
+							"kind": "equipment",
+							"payload": {
+								"affixes": [
+									{
+										"id": "whetstone_edge",
+										"tier": 3,
+										"value": 6
+									},
+									{
+										"id": "tempered_edge",
+										"tier": 3,
+										"value": 30
+									},
+									{
+										"id": "deepwell",
+										"tier": 3,
+										"value": 22
+									},
+									{
+										"id": "wellturn",
+										"tier": 3,
+										"value": 14
+									}
+								],
+								"base_id": "forgeblade",
+								"id": "gear_000004",
+								"item_level": 16,
+								"rarity": "rare"
+							},
+							"uid": "gear_000004"
+						},
+						"uid": "gear_000004"
+					}
+				},
+				"expected_fixture": "docs/qa/v070-gameplay/fixtures/selected-below-expected.json",
+				"expected_sha256": "510789d81bf3df721cf12acbc4b9b142079620c7eb18be862675ccc4d699ee79",
+				"fixture": "docs/qa/v070-gameplay/fixtures/selected-below.json",
+				"fixture_sha256": "1fd76e2487c418dac4a556a4a6d684d80aa8ac099580c214c10ee5633e6d9ec2",
+				"matches_actual_main": true,
+				"progress": {
+					"level": 4,
+					"xp": 0
+				},
+				"save_attempts": 0,
+				"stats": {
+					"accuracy": 284.0,
+					"accuracy_increased": 0.0,
+					"additional_skill_slots": 0.0,
+					"area_increased": 0.0,
+					"area_size_increased": 0.0,
+					"armour": 0.0,
+					"armour_increased": 0.0,
+					"attack_added_fire": 0.0,
+					"attack_added_physical": 0.0,
+					"attack_crit_chance_increased": 0.0,
+					"attack_elemental_increased": 0.0,
+					"attack_life_leech": 0.0,
+					"attack_mana_leech": 0.0,
+					"attack_physical_increased": 0.0,
+					"attack_speed": 1.7,
+					"attack_speed_increased": 0.0,
+					"chaos_increased": 0.0,
+					"cold_increased": 0.0,
+					"cold_resistance": 0.0,
+					"crit_base_chance": 0.05,
+					"crit_base_multiplier": 1.5,
+					"crit_chance_increased": 0.0,
+					"crit_multiplier_add": 0.0,
+					"damage": 18.0,
+					"damage_taken_from_mana_before_life": 0.0,
+					"damaging_ailments_faster": 0.0,
+					"dexterity": 92.0,
+					"elemental_increased": 0.0,
+					"evasion": 41.3,
+					"evasion_increased": 0.0,
+					"fire_dot_multiplier_add": 0.0,
+					"fire_increased": 0.0,
+					"fire_resistance": 0.0,
+					"flask_charges_gained_increased": 0.0,
+					"flask_life_recovery_increased": 0.0,
+					"flask_mana_recovery_increased": 0.0,
+					"global_increased": 0.0,
+					"intelligence": 14.0,
+					"life_leech_max_rate_increased": 0.0,
+					"life_leech_rate_increased": 0.0,
+					"life_regen": 0.0,
+					"life_regen_percent": 0.0,
+					"lightning_increased": 0.0,
+					"lightning_resistance": 0.0,
+					"mana_cost_efficiency_increased": 0.0,
+					"mana_cost_increased": 0.0,
+					"mana_leech_max_rate_increased": 0.0,
+					"mana_leech_rate_increased": 0.0,
+					"mana_regen": 17.29,
+					"mana_regen_increased": 0.8999999999999998,
+					"max_health": 358.0,
+					"max_mana": 239.0,
+					"max_shield": 69.69,
+					"maximum_cold_resistance_add": 0.0,
+					"maximum_fire_resistance_add": 0.0,
+					"maximum_lightning_resistance_add": 0.0,
+					"melee_area_size_increased": 0.0,
+					"melee_crit_chance_increased": 0.0,
+					"melee_crit_multiplier_add": 0.0,
+					"melee_physical_increased": 0.02,
+					"move_speed": 273.28000000000003,
+					"move_speed_increased": 0.12,
+					"physical_attack_life_leech": 0.0,
+					"physical_attack_mana_leech": 0.0,
+					"physical_increased": 0.0,
+					"precise_technique": 1.0,
+					"projectile_attack_crit_chance_increased": 0.0,
+					"projectile_attack_crit_multiplier_add": 0.0,
+					"projectile_count": 0.0,
+					"projectile_increased": 0.0,
+					"projectile_speed_increased": 0.0,
+					"resolute_technique": 0.0,
+					"shield_recharge_delay": 4.0,
+					"shield_recharge_rate": 13.0,
+					"shield_recharge_rate_increased": 0.0,
+					"shield_recharge_start_faster": 0.0,
+					"shield_regen": 13.0,
+					"spell_added_cold": 0.0,
+					"spell_added_lightning": 0.0,
+					"spell_area_size_increased": 0.0,
+					"spell_crit_chance_increased": 0.0,
+					"spell_crit_multiplier_add": 0.0,
+					"spell_increased": 0.0,
+					"strength": 14.0
+				},
+				"talents": {
+					"allocated": [
+						"50459",
+						"39821",
+						"52904",
+						"444",
+						"61306",
+						"60942",
+						"64709",
+						"3469",
+						"63620"
+					],
+					"ascendancy": "",
+					"ascendancy_allocated": [],
+					"ascendancy_points": 0,
+					"class_id": 2,
+					"masteries": {
+
+					},
+					"normal_points": 0,
+					"source_version": "3.29.1"
+				},
+				"whole_build_valid": true
+			}
+		},
+		"migration": "schema44→45先按旧44完整验证并备份原字节，再只升级版本；源政策45、装备词汇39。不赠点、不赠物、不重掷，不改变原始源树、拓扑或经济",
+		"minimum_save_version": 45,
+		"new_complete_ordinary_nodes": [
+			"63620"
+		],
+		"new_images": [],
+		"new_mastery_effect_ids": [],
+		"node": {
+			"execution": {
+				"grants": [
+					{
+						"mode": "flat",
+						"stat": "precise_technique",
+						"value": 1.0
+					}
+				],
+				"status": "full",
+				"supported": [
+					"40% more Attack Damage if Accuracy Rating is higher than Maximum Life\nNever deal Critical Strikes"
+				],
+				"unsupported": []
+			},
+			"id": "63620",
+			"legacy_execution": {
+				"grants": [],
+				"status": "unsupported",
+				"supported": [],
+				"unsupported": [
+					"40% more Attack Damage if Accuracy Rating is higher than Maximum Life\nNever deal Critical Strikes"
+				]
+			},
+			"name": "Precise Technique",
+			"source_lines": [
+				"40% more Attack Damage if Accuracy Rating is higher than Maximum Life\nNever deal Critical Strikes"
+			]
+		},
+		"producer": "Passing actual Main snapshots → current Canonical Rules / Model → SkillCompiler → DamageResolver",
+		"scope": "该MORE必须同时匹配hit与attack，适用所有伤害类型，转换火焰也只计一次；普通攻击、裂刃、龙卷母子箭及返回攻击按各自冻结命中包结算。法术与独立爆炸不享受攻击MORE",
+		"snapshot": "原始属性precise_technique为1；施放快照只冻结accuracy与max_health，编译profile公开enabled、accuracy、max_health、condition_met、attack_more、cannot_deal_critical_strikes与attack_applies。分配、退款及换装仅影响新施放，在途命中保持旧快照",
+		"source_policy": 45
 	},
 	"projectile_support_examples": {
 		"fixture": "one_carrier_six_stationary_targets",
@@ -70805,7 +75502,7 @@
 			"31961"
 		],
 		"scope": "完整原双句只授予一个开关；所有命中不能被闪避但不能暴击，攻击、法术、母子箭、返回与独立爆炸均承担禁暴击代价",
-		"source_policy": 44,
+		"source_policy": 45,
 		"targets": {
 			"armour_and_capped_resistance": {
 				"armour": 500.0,
@@ -70833,7 +75530,7 @@
 		},
 		"timing": "施放时冻结；分配、退款和换装只影响新施放，旧飞行、母子箭、返回与独立爆炸保持各自快照"
 	},
-	"save_version": 44,
+	"save_version": 45,
 	"schema_version": 3,
 	"sectors": [
 		{
@@ -454043,12 +458740,18 @@
 			"63620": {
 				"blighted_only": false,
 				"execution": {
-					"grants": [],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "precise_technique",
+							"value": 1.0
+						}
+					],
+					"status": "full",
+					"supported": [
 						"40% more Attack Damage if Accuracy Rating is higher than Maximum Life\nNever deal Critical Strikes"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "63620",
@@ -483349,12 +488052,18 @@
 			},
 			"40% more Attack Damage if Accuracy Rating is higher than Maximum Life\nNever deal Critical Strikes": {
 				"status": {
-					"grants": [],
-					"implemented": false,
+					"grants": [
+						{
+							"mode": "flat",
+							"stat": "precise_technique",
+							"value": 1.0
+						}
+					],
+					"implemented": true,
 					"missing_consumers": [],
-					"parser_supported": false
+					"parser_supported": true
 				},
-				"text": "若命中值高于最大生命，攻击伤害额外提高40%\n不会造成暴击（暂未实装）"
+				"text": "若命中值高于最大生命，攻击伤害额外提高40%\n不会造成暴击"
 			},
 			"40% more Damage": {
 				"status": {
@@ -523011,7 +527720,7 @@
 				},
 				"name": "精准技艺",
 				"partition": "标准主树",
-				"stats": "若命中值高于最大生命，攻击伤害额外提高40%\n不会造成暴击（暂未实装）"
+				"stats": "若命中值高于最大生命，攻击伤害额外提高40%\n不会造成暴击"
 			},
 			"63623": {
 				"mastery_choices": {
@@ -528688,7 +533397,7 @@
 			}
 		},
 		"roster_scope": "只展示原抽签为基础物种的按位替换；灰烬保留名额，分裂体与母巢保留原抽签且占用序号；稀有度、机制与奖励不变；所选巡逻词缀最后按编排物种替换",
-		"save_version": 44,
+		"save_version": 45,
 		"spawn_seconds": 0.6,
 		"tiers": [
 			{
@@ -533164,7 +537873,7 @@
 		},
 		"reserved_character_key": "C",
 		"retired_profile_writes": false,
-		"save_version": 44,
+		"save_version": 45,
 		"services": [
 			{
 				"description": "免费测试供应全部已实现主动与辅助宝石。",
@@ -538343,7 +543052,7 @@
 		"shield_branch": [
 			"38906"
 		],
-		"source_policy": 44,
+		"source_policy": 45,
 		"source_sha256": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
 		"source_version": "3.29.1",
 		"sources": {

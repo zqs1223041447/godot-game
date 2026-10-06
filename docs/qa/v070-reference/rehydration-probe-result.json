@@ -1,0 +1,17 @@
+{
+  "command": [
+    "/usr/local/bin/godot",
+    "--headless",
+    "--path",
+    "/workspace/scratch/a51485f153de/v070-precise-technique",
+    "--script",
+    "res://docs/qa/v070-reference/rehydration-probe.gd"
+  ],
+  "exit_code": -15,
+  "stopped_on": "first_error_line",
+  "seconds": 2.258,
+  "error_lines": [
+    "SCRIPT ERROR: Assertion failed: Rehydrated stats must match passing actual Main: selected-above"
+  ],
+  "source_changed_during_run": []
+}

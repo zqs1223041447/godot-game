@@ -1,0 +1,64 @@
+{
+  "passed": true,
+  "unique_section_checks": 654,
+  "sections": {
+    "legal_source_and_owned_items": {
+      "checks": 50,
+      "attempt": "attempts/20261006T061155.061039Z",
+      "passed": true
+    },
+    "maximum_life_gear_and_resources": {
+      "checks": 79,
+      "attempt": "attempts/20261006T061020.202641Z",
+      "passed": true
+    },
+    "actual_basic_cleave_and_spells": {
+      "checks": 176,
+      "attempt": "attempts/20261006T061117.271984Z",
+      "passed": true
+    },
+    "evasion_and_resolute_union": {
+      "checks": 40,
+      "attempt": "attempts/20261006T061117.271984Z",
+      "passed": true
+    },
+    "flying_allocation_refund_and_gear": {
+      "checks": 100,
+      "attempt": "attempts/20261006T061155.061039Z",
+      "passed": true
+    },
+    "false_condition_secondary": {
+      "checks": 35,
+      "attempt": "attempts/20261006T061117.271984Z",
+      "passed": true
+    },
+    "tornado_conversion_frozen_lifecycle": {
+      "checks": 174,
+      "attempt": "attempts/20261006T061117.271984Z",
+      "passed": true
+    }
+  },
+  "production_inputs_identical_across_attempts": true,
+  "between_attempt_changed_inputs": [
+    [
+      "tests/precise_technique_gameplay_test.gd"
+    ],
+    [
+      "tests/precise_technique_gameplay_test.gd"
+    ]
+  ],
+  "initial_harness_corrections": [
+    "Expected legacy hit/shot visual RNG draws are9 for melee and15 for bow, not0; the scoped retry pins these exact counts",
+    "Original bolt volley has3 projectiles; all3 contacts are checked",
+    "Refunded fixture export moved to post-refund blade equip to match the above-threshold selected fixture"
+  ],
+  "fixtures": {
+    "refunded-expected.json": "1c9df69fc83d7fad1e153746e302c0a6a25339016d0e3ccab5b30d59da659712",
+    "refunded.json": "7eda809b6a52e477e53ce2b03e81f09db14059aa22dfa1a23cf347c6541edbf8",
+    "selected-above-expected.json": "c330ee05dd6ee904a42eb62fab9a3e7fe0e7fd73fdf76e622fb408c9664f550d",
+    "selected-above.json": "ed7b452008ab389b70cd9b6de7657e105a9985417e0b7ece0e58a72ef7b4e624",
+    "selected-below-expected.json": "510789d81bf3df721cf12acbc4b9b142079620c7eb18be862675ccc4d699ee79",
+    "selected-below.json": "1fd76e2487c418dac4a556a4a6d684d80aa8ac099580c214c10ee5633e6d9ec2"
+  },
+  "scope": "Bounded actual Main and real legal source/item transactions. Passes retained by section; no repeated full suite. No Windows, visual, package, long-run or historical-byte claims."
+}

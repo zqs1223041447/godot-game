@@ -1,0 +1,193 @@
+{
+  "base_commit": "d25717c4485bf36688df36460f2c85ebb11b7623",
+  "stage_commit": "42d1c5ea35ff8bbae5f1d3bb1e5549d77761bb12",
+  "total_checks": 11243,
+  "counts": {
+    "pure_rules": 1642,
+    "source_allocation": 8552,
+    "strict_migration": 384,
+    "actual_main_unique": 654,
+    "root_text": 11
+  },
+  "production_inputs": 531,
+  "save_schema": 45,
+  "source_policy": 45,
+  "equipment_vocabulary": 39,
+  "complete_source_node": 63620,
+  "legacy": {
+    "observations_equal": true,
+    "bytes": 8844304,
+    "sha256": "bc9d401e91c165aafa195f81584f4391ec149b3f5a7aa6587c99b2e100e8f094",
+    "save_version_token_only": true,
+    "projected_save_equal": true,
+    "before_save_sha256": "441c529e7400e17452885a439ebda766534f3449ec7f90dd9310520bab33b279",
+    "current_save_sha256": "5bbd2759d4fc63d3257c1c0cdbbaa8f70182d95a82790868c4f3de389223640f",
+    "input_hashes_unchanged": true
+  },
+  "font": {
+    "unchanged": true,
+    "mapped_codepoints": 1660,
+    "sha256": "8ca9fe7e3521f7cecec290b39363a4c16c55d5948eabeb152e2af1057e3cc7be",
+    "evidence": "docs/qa/v070-integration/font-coverage.json"
+  },
+  "reference": {
+    "passed": true,
+    "reused_actual_main_fixture_count": 3,
+    "exact_compiled_casts_checked": 9,
+    "individual_hits_checked": 15,
+    "authoritative_html_values_and_labels_checked": 91,
+    "old_html_anchors_preserved": 3824,
+    "old_asset_pngs_preserved": 63,
+    "old_reference_pngs_preserved": 70
+  },
+  "delivery": "Source-only; branch and main normal fast-forward after validation, no export/package/tag/Release.",
+  "known_limits": [
+    "Early low-life and low-crit attack builds gain strongly; this preserves the original40%MORE and is not a long-term balance claim.",
+    "Main and F8 harness failures retained; affected sections only rerun, production unchanged.",
+    "Dense-combat peaks and hardware Windows FPS remain separate unresolved work."
+  ],
+  "reports": {
+    "docs/qa/v070-rules/20261006T060953.193740Z-checks.json": {
+      "bytes": 498,
+      "sha256": "e94103b53c86c078896c966854a805e5bd9785e8e77fd8f8ba297ca6366aa38d"
+    },
+    "docs/qa/v070-migration/20261006T061019864029Z-source-checks.json": {
+      "bytes": 648,
+      "sha256": "67c08c548e73eba8966df8837dcf13681290c5ba57016b2c099333a1386f6b97"
+    },
+    "docs/qa/v070-migration/20261006T061028415083Z-migration-checks.json": {
+      "bytes": 8748,
+      "sha256": "ca7a7775df28e97308359d44b23dccb34dac9d8208b2819b09954943f9476091"
+    },
+    "docs/qa/v070-gameplay/acceptance.json": {
+      "bytes": 2426,
+      "sha256": "7e5f9069bd7d44f6d6d9e32c55b539477fc76efb15da68392d1d6b41ac33a451"
+    },
+    "docs/qa/v070-legacy/comparison.json": {
+      "bytes": 419,
+      "sha256": "91871457b5a60d3f67a76b0b9030de6eae1ff0576f1d80bb3657b68f78a0c109"
+    },
+    "docs/qa/v070-reference/v069-preservation.json": {
+      "bytes": 33003,
+      "sha256": "ea90d0ddca3ebf940bca15d531d056521e2db5df96d801bb7bfb819da6fbd06d"
+    }
+  },
+  "logs": {
+    "docs/qa/v070-gameplay/attempts/20261006T061020.202641Z/stderr.log": {
+      "bytes": 1769,
+      "sha256": "38c20209928ebe6af3a02ff4cd6b959277bf839db0a4609d1d06a3a4dca993b4"
+    },
+    "docs/qa/v070-gameplay/attempts/20261006T061020.202641Z/stdout.log": {
+      "bytes": 271,
+      "sha256": "da56f07d15e36e4a058a7af87c8bcda1be100559db77047ded68782be0d1fec4"
+    },
+    "docs/qa/v070-gameplay/attempts/20261006T061117.271984Z/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v070-gameplay/attempts/20261006T061117.271984Z/stdout.log": {
+      "bytes": 380,
+      "sha256": "11fd0032927ed2f0913ad73385d5fa32166ebbafc46122434a47897ec626f6ac"
+    },
+    "docs/qa/v070-gameplay/attempts/20261006T061155.061039Z/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v070-gameplay/attempts/20261006T061155.061039Z/stdout.log": {
+      "bytes": 238,
+      "sha256": "49d13bfdc9790d9998e353e49e85d3bcf6247acbd0771e1055f41a46438c00a0"
+    },
+    "docs/qa/v070-integration/initial-import.log.txt": {
+      "bytes": 67926,
+      "sha256": "a24ba0d32994f7f116c58776022a160fa33ef6821d6990c0dc4b58e9979537ee"
+    },
+    "docs/qa/v070-legacy/current.log.txt": {
+      "bytes": 901,
+      "sha256": "c56abe4ac961177cf8a84d6fb265a508ec3066650c394f41af2f7122cee9bfd2"
+    },
+    "docs/qa/v070-migration/20261006T060231269466Z-capture44.log.txt": {
+      "bytes": 258,
+      "sha256": "19d728bb74377e915378d5fd5b34c4af151f37c370e0c4eb0684bf3dd94fdc3e"
+    },
+    "docs/qa/v070-migration/20261006T061019864029Z-source.log.txt": {
+      "bytes": 123,
+      "sha256": "057cb1573a34a34aaafa91f6f3bbd2e1b361a16978b62f31e37f16de1df1ca26"
+    },
+    "docs/qa/v070-migration/20261006T061028415083Z-migration.log.txt": {
+      "bytes": 125,
+      "sha256": "fc953dae0b4e25badae55dd87383610d7b7fb0bfc564f1fbd86913bcf4254306"
+    },
+    "docs/qa/v070-reference/final-build-check.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v070-reference/final-build-check.stdout.log.txt": {
+      "bytes": 52,
+      "sha256": "65d47533eaf556129a1f3a295db12ab1bc36a8df0770c71cb9378490d54d03ba"
+    },
+    "docs/qa/v070-reference/final-build.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v070-reference/final-build.stdout.log.txt": {
+      "bytes": 51,
+      "sha256": "edbff33e38af9aab4080582a27dbf46a50e5da35f29861b2b82e6c2a4e6197d0"
+    },
+    "docs/qa/v070-reference/final-focused-reference.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v070-reference/final-focused-reference.stdout.log.txt": {
+      "bytes": 1053,
+      "sha256": "129c1d7ac568537f3282712a4b26b2c020cf06d08e2c4b1b536437f26376fcb8"
+    },
+    "docs/qa/v070-reference/final-godot-export.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v070-reference/final-godot-export.stdout.log.txt": {
+      "bytes": 205,
+      "sha256": "881c3c8a76e46d3e862aafeb146330317ff3f9b9ded3708c83c5c5e40bdf8c0b"
+    },
+    "docs/qa/v070-reference/godot-export.stderr.log.txt": {
+      "bytes": 446,
+      "sha256": "74269cc6391da9669d736e666fe1388dbcc3fb5cdd6d0718016264a453228ad4"
+    },
+    "docs/qa/v070-reference/godot-export.stdout.log.txt": {
+      "bytes": 73,
+      "sha256": "a9912b85473f126d3f4f63ec824170c828df3473a292f866dde86cafda5b66da"
+    },
+    "docs/qa/v070-reference/rehydration-corrected.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v070-reference/rehydration-corrected.stdout.log.txt": {
+      "bytes": 165,
+      "sha256": "fa6f73e86f3702f6b238836a65e4eaee966b6ee5629f1c8959feda6d02398586"
+    },
+    "docs/qa/v070-reference/rehydration-diagnostic.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v070-reference/rehydration-diagnostic.stdout.log.txt": {
+      "bytes": 139,
+      "sha256": "0788192ef6eae20d3a86efc93257fdc8d1ce5529407bebef75e69177682b2c83"
+    },
+    "docs/qa/v070-reference/rehydration-probe.stderr.log.txt": {
+      "bytes": 399,
+      "sha256": "38ea14e33f0db26471a91bef79b7636f8190f446c5bce3d6588431a2c151df13"
+    },
+    "docs/qa/v070-reference/rehydration-probe.stdout.log.txt": {
+      "bytes": 73,
+      "sha256": "a9912b85473f126d3f4f63ec824170c828df3473a292f866dde86cafda5b66da"
+    },
+    "docs/qa/v070-root-ui/presentation.log.txt": {
+      "bytes": 119,
+      "sha256": "81351371e0660d32e713927843d14e3c4ab87d27b8f9e08fc0a444cbd4353086"
+    },
+    "docs/qa/v070-rules/20261006T060953.193740Z-raw.log.txt": {
+      "bytes": 313,
+      "sha256": "f4d752b8510757c521651ca16b982e8f95de0b80a0e813df622736cf622d63ae"
+    }
+  }
+}

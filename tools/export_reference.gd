@@ -1,5 +1,5 @@
 extends SceneTree
-## Offline reference export. Only fresh in-memory builds; never loads/saves user data.
+## Offline reference export. Fresh builds and validated QA fixtures only; no user data.
 const Data = preload("res://scripts/game_data.gd")
 const Build = preload("res://scripts/build_state.gd")
 const Equipment = preload("res://scripts/items/equipment_catalog.gd")
@@ -61,12 +61,13 @@ func _initialize() -> void:
 	var target: String = "res://docs/reference/catalog.json"
 	if not OS.get_cmdline_user_args().is_empty():
 		target = OS.get_cmdline_user_args()[0]
+	# Validate every fixture before opening/truncating the previous artifact.
+	var content: Dictionary = collect()
 	var file: FileAccess = FileAccess.open(target, FileAccess.WRITE)
 	if file == null:
 		push_error("Cannot open reference output: " + target)
 		quit(1)
 		return
-	var content: Dictionary = collect()
 	file.store_string(JSON.stringify(clean(content), "\t", true, true) + "\n")
 	file.close()
 	print("Reference exported: " + target)
@@ -128,6 +129,7 @@ static func collect() -> Dictionary:
 	result["iron_reflexes"] = iron_reflexes_examples()
 	result["zealots_oath"] = zealots_oath_examples()
 	result["physical_fire_conversion"] = physical_fire_conversion_examples()
+	result["precise_technique"] = precise_technique_examples()
 	result["ambush"] = ambush_examples()
 	result["inward_pull"] = inward_pull_examples()
 	result["resolute_technique"] = resolute_technique_examples()
@@ -2541,7 +2543,8 @@ static func resolute_technique_examples() -> Dictionary:
 	assert(opened == ["31961"])
 	var blocked: Dictionary = {}
 	for id: String in ["63620", "40907", "35448"]:
-		blocked[id] = {"source_lines":SourceTree.Data.node(id).stats, "execution":SourceTree.node_effect(id)}
+		# This is the v38 historical example, not the current source coverage.
+		blocked[id] = {"source_lines":SourceTree.Data.node(id).stats, "execution":SourceTree.node_effect(id, 0, 38)}
 		assert(blocked[id].execution.status != "full")
 	return {"minimum_save_version":38, "source_policy":SourceTree.CURRENT_SAVE_VERSION, "equipment_vocabulary":Equipment.CURRENT_VOCABULARY,
 		"node":{"id":"31961", "name":raw.name, "source_lines":raw.stats, "execution":effect, "legacy_execution":SourceTree.node_effect("31961",0,37)},
@@ -2647,3 +2650,64 @@ static func physical_fire_conversion_examples() -> Dictionary:
 		"availability":"仅原始Fire Mastery65020完整原句开放。8个入口共享唯一效果，当前4个原始显著天赋组可达；另外4组仍被未实现前置阻挡。退款后才可由另一入口重新选择，不是可叠加8次",
 		"migration":"schema43→44先严格验证旧43并备份原字节；只升级版本，source44开放此一词汇，装备词汇仍39。不送点、宝石或装备，不改经济、原始源树英文、中文映射或素材",
 		"bounds":"没有多段或其他类型转换、额外获得伤害、Avatar of Fire、DoT转换、穿透或新异常规则；本页不把编译验证当作实战或Windows成品验收"}
+
+
+## v70: consume exactly the three passing actual-Main snapshots. Never create
+## another item, choose a new route, or mutate/re-save the gameplay fixtures.
+static func precise_technique_examples() -> Dictionary:
+	var fixture_root: String = "res://docs/qa/v070-gameplay/fixtures/"
+	var acceptance: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://docs/qa/v070-gameplay/acceptance.json"))
+	assert(acceptance.get("passed", false), "Actual-Main section acceptance must pass first")
+	var examples: Dictionary = {}
+	for name: String in ["selected-above", "selected-below", "refunded"]:
+		var path: String = fixture_root + name + ".json"
+		var expected_path: String = fixture_root + name + "-expected.json"
+		assert(FileAccess.file_exists(path) and FileAccess.file_exists(expected_path), "Passing actual-Main fixtures are required: " + name)
+		var fixture_hash: String = FileAccess.get_sha256(path)
+		var expected_hash: String = FileAccess.get_sha256(expected_path)
+		assert(acceptance.fixtures.get(name + ".json") == fixture_hash and acceptance.fixtures.get(name + "-expected.json") == expected_hash, "Fixture must match passing actual-Main receipt: " + name)
+		var raw: Dictionary = Canonical.Rules.decode(JSON.parse_string(FileAccess.get_file_as_string(path)))
+		var expected: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(expected_path))
+		assert(not raw.is_empty() and int(raw.version) == Canonical.Rules.VERSION and Canonical.Rules.reason(raw).is_empty() and SourceTree.reason(raw).is_empty(), "Current complete gameplay fixture must validate: " + name)
+		var model := Canonical.new()
+		model._accept_memory(raw.duplicate(true))
+		var stats: Dictionary = model.get_stats()
+		assert(JSON.parse_string(JSON.stringify(stats, "", true, true)) == expected.stats, "Rehydrated stats must match passing actual Main: " + name)
+		var casts: Dictionary = {}
+		for skill: String in ["basic", "cleave", "tornado"]:
+			var cast: Dictionary = model.get_basic_cast() if skill == "basic" else model.get_group_cast(str(expected[skill].group_id))
+			assert(cast.get("ok", false) and JSON.parse_string(JSON.stringify(cast, "", true, true)) == expected[skill], "Recompiled cast must match passing actual Main: " + name + "/" + skill)
+			var hits: Dictionary = {}
+			for role: String in cast.packets:
+				var packet: Dictionary = cast.packets[role]
+				var resolved: Dictionary = Damage.resolve(packet, cast.snapshot.modifiers)
+				var critical_role: String = "secondary" if role == "secondary" else "primary"
+				assert(not resolved.has("error") and cast.critical.has(critical_role))
+				hits[role] = {"resolved":resolved, "critical":cast.critical[critical_role], "tags":packet.tags}
+			casts[skill] = {"compiled":cast, "hits":hits, "summary":Preview.summary(cast), "details":Preview.details(cast)}
+		var equipment: Dictionary = {}
+		for slot: String in model.equipped_items():
+			var uid: String = model.equipped_items()[slot]
+			equipment[slot] = {"uid":uid, "item":raw.items[uid], "definition":model.item_definition(uid)}
+		assert(model.save_attempts == 0 and model.snapshot() == raw)
+		assert(FileAccess.get_sha256(path) == fixture_hash and FileAccess.get_sha256(expected_path) == expected_hash)
+		examples[name] = {"fixture":"docs/qa/v070-gameplay/fixtures/" + name + ".json", "fixture_sha256":fixture_hash,
+			"expected_fixture":"docs/qa/v070-gameplay/fixtures/" + name + "-expected.json", "expected_sha256":expected_hash,
+			"stats":stats, "talents":raw.talents, "progress":raw.progress, "equipment":equipment,
+			"whole_build_valid":true, "matches_actual_main":true, "save_attempts":model.save_attempts, "casts":casts}
+	var node: Dictionary = SourceTree.Data.node("63620")
+	var execution: Dictionary = SourceTree.node_effect("63620", 0, 45)
+	assert(execution.status == "full" and SourceTree.node_effect("63620", 0, 44).status == "unsupported")
+	return {"minimum_save_version":45, "source_policy":SourceTree.CURRENT_SAVE_VERSION, "equipment_vocabulary":Equipment.CURRENT_VOCABULARY,
+		"node":{"id":"63620", "name":node.name, "source_lines":node.stats, "execution":execution, "legacy_execution":SourceTree.node_effect("63620",0,44)},
+		"new_complete_ordinary_nodes":["63620"], "new_mastery_effect_ids":[], "new_images":[], "attack_more":0.4,
+		"examples":examples, "producer":"Passing actual Main snapshots → current Canonical Rules / Model → SkillCompiler → DamageResolver",
+		"condition":"A为最终命中值，L为最终最大生命；仅A严格大于L时获得一条40%攻击伤害MORE，等于或低于时为0。当前受伤生命不参与比较，喝药或回复不会切换条件",
+		"scope":"该MORE必须同时匹配hit与attack，适用所有伤害类型，转换火焰也只计一次；普通攻击、裂刃、龙卷母子箭及返回攻击按各自冻结命中包结算。法术与独立爆炸不享受攻击MORE",
+		"critical_cost":"只要分配精准技艺，无论A与L是否满足条件，所有攻击、法术及独立爆炸均不能暴击。既有潜在倍率可保留展示，但最终暴击率为0；不额外授予不能被闪避",
+		"snapshot":"原始属性precise_technique为1；施放快照只冻结accuracy与max_health，编译profile公开enabled、accuracy、max_health、condition_met、attack_more、cannot_deal_critical_strikes与attack_applies。分配、退款及换装仅影响新施放，在途命中保持旧快照",
+		"early_tradeoff":"游侠从原起点沿8点合法路线即可到达；裸装前置属性为A284、L141，早期容易满足条件，因此是已知的强势入口。持续堆生命会抬高L并失去攻击MORE，禁暴击代价仍在；这不是长期平衡或最优路线结论",
+		"example_scope":"三个状态直接复用本批通过实际Main的快照：已点且A>L、已点且A<L、已退款。前两者以实际生命装备切换阈值；已点高于阈值与退款状态使用相同短刃和已装备物品，可直接比较增伤与暴击取舍，数值是成功且不暴击、零防御的一次命中，不是DPS",
+		"availability":"仅节点63620的完整多行原文开放，不接受截断的增伤句、禁暴击半句或同义改写。没有新节点、宝石、词缀或图片；坚决技艺仍独立决定不能被闪避，两个禁暴击效果取并集",
+		"migration":"schema44→45先按旧44完整验证并备份原字节，再只升级版本；源政策45、装备词汇39。不赠点、不赠物、不重掷，不改变原始源树、拓扑或经济",
+		"bounds":"本节是实际Main快照的只读重编译与资料保全；实际在途、转换与暴击随机流证据见本批gameplay和rules记录。没有Windows、打包、tag或Release验收"}

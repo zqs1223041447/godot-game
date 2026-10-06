@@ -28,6 +28,7 @@ RULE_TITLES['iron_reflexes'] = '铁反射（闪转甲）：闪避转换与护甲
 RULE_TITLES['zealots_oath'] = '狂信者的誓约：生命再生改为作用于能量护盾'
 RULE_TITLES['ambush'] = '符印伏击：预置、触发与冻结快照'
 RULE_TITLES['physical_fire_conversion'] = '物理转火焰：40%转换与伤害来源'
+RULE_TITLES['precise_technique'] = '精准技艺：严格命中条件与全局禁暴击'
 RULE_TITLES['inward_pull'] = '牵引辅助：朝真实爆发圆心反转冲量'
 TYPES['defense_v37'] = '历史三抗防具池'
 TYPES['defense_v39'] = '护甲闪避与三抗防具池'
@@ -323,7 +324,7 @@ def resolute_technique_rule(data, link, facts, details):
     body+=facts([('目标护甲',value('target-armour',rule['defense_profile']['armour'])),('目标有效三抗',' / '.join(value('target-'+element+'-resistance',rule['defense_profile']['effective_resistances'][element],True) for element in ['fire','cold','lightning']))])
     body+='<div class="table-scroll"><table><thead><tr><th>已分配坚决技艺</th><th>防御前成功命中</th><th>防御后成功命中</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
     body+=''.join('<p>'+esc(rule[key])+'。</p>' for key in ['timing','randomness','migration'])
-    body+=details('完整原词条与合法路径','<p>'+esc(rule['node']['source_lines'][0]).replace('\n','<br>')+'</p><p>'+' → '.join(link('source_passives',node) for node in rule['route'])+'</p><p>本批仅31961成为完整标准节点，没有新精通。'+link('source_passives','63620')+'的条件攻击伤害与其他任意多行效果仍未开放。</p>')
+    body+=details('完整原词条与合法路径','<p>'+esc(rule['node']['source_lines'][0]).replace('\n','<br>')+'</p><p>'+' → '.join(link('source_passives',node) for node in rule['route'])+'</p><p>以上为v61/source38历史范围：当时仅31961成为完整标准节点，没有新精通，63620尚未开放；旧数值与构筑保留。当前source45已完整实现'+link('rules','precise_technique','精准技艺63620')+'；其他未完整支持的多行效果仍按当前源覆盖锁定。</p>')
     body+='<p>'+link('rules','source_critical')+' · '+link('rules','elemental_resistance_caps')+' · <a href="../RESOLUTE_TECHNIQUE.zh-CN.md">坚决技艺说明</a> · <a href="../qa/v061-reference/README.md">本批图鉴验证</a></p>'
     return body
 
@@ -590,6 +591,38 @@ def physical_fire_conversion_rule(data,link,facts,details):
     return body
 
 
+def precise_technique_rule(data,link,facts,details):
+    rule=data['precise_technique']
+    def value(key,amount):
+        return f'<strong data-precise-value="{esc(key)}" data-value="{esc(amount)}">{format(amount, ".10g")}</strong>'
+    body=facts([('关键天赋',link('source_passives','63620')),('最低存档 / 当前源政策 / 装备词汇',value('save-version',rule['minimum_save_version'])+' / '+value('source-policy',rule['source_policy'])+' / '+value('vocabulary',rule['equipment_vocabulary'])),('满足严格条件时的攻击MORE',value('attack-more',rule['attack_more'])+'（40%）')])
+    body+=''.join('<p>'+esc(rule[key])+'。</p>' for key in ['condition','scope','critical_cost','early_tradeoff'])
+    body+='<h3>三个通过实际Main的冻结构筑</h3><p>'+esc(rule['example_scope'])+'。</p>'
+    names={'selected-above':'已分配 · 最终命中值高于最大生命','selected-below':'已分配 · 最终命中值低于最大生命','refunded':'已退款 · 恢复既有暴击规则'}
+    roles={'direct':'直接命中','projectile':'普通投射物','parent':'龙卷母箭','child':'龙卷子箭','secondary':'独立爆炸'}
+    for name in ['selected-above','selected-below','refunded']:
+        row=rule['examples'][name];stats=row['stats'];profile=row['casts']['basic']['compiled'].get('precise_technique_profile',{})
+        body+='<h4>'+names[name]+'</h4>'+facts([('最终命中值A',value(name+'-accuracy',stats['accuracy'])),('最终最大生命L',value(name+'-max-health',stats['max_health'])),('攻击MORE',value(name+'-attack-more',profile.get('attack_more',0))),('始终不能暴击','是' if profile.get('cannot_deal_critical_strikes',False) else '否'),('保存次数',value(name+'-save-attempts',row['save_attempts']))])
+        hits=[]
+        for skill in ['basic','cleave','tornado']:
+            cast=row['casts'][skill];compiled=cast['compiled']
+            for role,hit in cast['hits'].items():
+                key=name+'-'+skill+'-'+role;cells=[]
+                for dtype in ['physical','fire']:
+                    cells.append(value(key+'-'+dtype,hit['resolved']['components'].get(dtype,0)))
+                cells += [value(key+'-total',hit['resolved']['total']),value(key+'-critical-chance',hit['critical']['chance']),value(key+'-critical-multiplier',hit['critical']['multiplier'])]
+                hits.append('<tr><th>'+('普通攻击' if skill=='basic' else link('skills',skill))+' / '+roles[role]+'</th>'+''.join('<td>'+cell+'</td>' for cell in cells)+'</tr>')
+            body+=details(('普通攻击' if skill=='basic' else data['skills'][skill]['name'])+' · 真实编译预览','<p>'+esc(cast['summary'])+'</p><p>'+lines(cast['details'])+'</p><p>本次命中profile：'+esc(json.dumps(compiled.get('precise_technique_profile',{}),ensure_ascii=False,sort_keys=True))+'</p>')
+        body+='<div class="table-scroll"><table><thead><tr><th>成功且不暴击的命中</th><th>物理</th><th>火焰</th><th>合计</th><th>最终暴击率（比例）</th><th>潜在暴击倍率</th></tr></thead><tbody>'+''.join(hits)+'</tbody></table></div>'
+        equipment=''.join('<p>'+esc(SLOTS.get(slot,slot))+'：'+esc(item['definition']['name'])+' · '+esc(item['uid'])+'</p>' for slot,item in row['equipment'].items())
+        route=' → '.join(link('source_passives',node,node) for node in row['talents']['allocated'])
+        body+=details('实际构筑、来源文件与只读校验',equipment+'<p>原分配：'+route+'。</p><p><a href="../'+esc(row['fixture'].removeprefix('docs/'))+'">实际Main原始构筑</a> · <a href="../'+esc(row['expected_fixture'].removeprefix('docs/'))+'">同场景stats与compiled预期</a></p><p>原构筑SHA256：'+esc(row['fixture_sha256'])+'；完整候选校验通过、全部三种cast与实际Main预期相同、读取前后原文件字节保持。</p>')
+    body+=''.join('<p>'+esc(rule[key])+'。</p>' for key in ['snapshot','availability','migration','bounds'])
+    body+=details('完整原始多行英文','<p>'+lines('\n'.join(rule['node']['source_lines']))+'</p>')
+    body+='<p><a href="../PRECISE_TECHNIQUE.zh-CN.md">精准技艺完整合同</a> · <a href="../qa/v070-reference/README.md">本批图鉴验证</a> · <a href="../qa/v070-gameplay/README.md">实际Main验证</a> · '+link('rules','resolute_technique')+' · '+link('rules','physical_fire_conversion')+' · '+link('rules','source_critical')+'</p>'
+    return body
+
+
 def build(data, art):
     records = []
     by_id = {}
@@ -751,7 +784,7 @@ def build(data, art):
             body+=details(f'精通 {choice["effect"]} · {label}','<p>'+lines(localized['mastery_choices'][str(choice['effect'])])+'</p>')
         if p['neighbors']:body+=details('原始标准邻接',links('source_passives',p['neighbors']))
         aliases=' '.join([p['name'],p['partition'],*p['stats'],*(line for choice in p['mastery_choices'] for line in choice['stats'])])
-        cards.append(add('source_passives',key,localized['name'],localized['stats'] or state,body,TYPES[p['type']],status='implemented' if selectable else 'research',related=link('rules','source_tree')+(' · '+link('rules','physical_fire_conversion') if key in data.get('physical_fire_conversion',{}).get('entrances',{}) else '')+(' · '+link('rules','zealots_oath') if key == '63425' else '')+(' · '+link('rules','iron_reflexes') if key == '10661' else '')+(' · '+link('rules','resolute_technique') if key == '31961' else '')+(' · '+link('rules','source_fire_dot') if key in data.get('source_fire_dot',{}).get('nodes',{}) else '')+(' · '+link('rules','source_faster_burn') if key in data.get('source_faster_burn',{}).get('nodes',{}) or key in data.get('source_faster_burn',{}).get('blocked_matching_nodes',{}) else '')+(' · '+link('rules','mana_guard') if key == data.get('mana_guard',{}).get('node',{}).get('id') or key in data.get('mana_guard',{}).get('blocked_matching_nodes',{}) else '')+(' · '+link('rules','elemental_resistance_caps') if key in data.get('elemental_resistance_caps',{}).get('nodes',{}) or key in data.get('elemental_resistance_caps',{}).get('boundaries',{}) else ''),search_aliases=aliases))
+        cards.append(add('source_passives',key,localized['name'],localized['stats'] or state,body,TYPES[p['type']],status='implemented' if selectable else 'research',related=link('rules','source_tree')+(' · '+link('rules','physical_fire_conversion') if key in data.get('physical_fire_conversion',{}).get('entrances',{}) else '')+(' · '+link('rules','zealots_oath') if key == '63425' else '')+(' · '+link('rules','iron_reflexes') if key == '10661' else '')+(' · '+link('rules','resolute_technique') if key == '31961' else '')+(' · '+link('rules','precise_technique') if key == '63620' else '')+(' · '+link('rules','source_fire_dot') if key in data.get('source_fire_dot',{}).get('nodes',{}) else '')+(' · '+link('rules','source_faster_burn') if key in data.get('source_faster_burn',{}).get('nodes',{}) or key in data.get('source_faster_burn',{}).get('blocked_matching_nodes',{}) else '')+(' · '+link('rules','mana_guard') if key == data.get('mana_guard',{}).get('node',{}).get('id') or key in data.get('mana_guard',{}).get('blocked_matching_nodes',{}) else '')+(' · '+link('rules','elemental_resistance_caps') if key in data.get('elemental_resistance_caps',{}).get('nodes',{}) or key in data.get('elemental_resistance_caps',{}).get('boundaries',{}) else ''),search_aliases=aliases))
     for key,m in data['mechanisms'].items():
         player_nodes=[k for k,v in data['passives'].items() if key in v['mechanism_ids']]
         monsters=[k for k,v in data['monsters'].items() if key in v['mechanisms']]
@@ -1129,6 +1162,8 @@ def build(data, art):
         rule_defs.append(('defense_rating_affixes',RULE_TITLES['defense_rating_affixes'],'全局固定护甲与闪避占用已有前缀，物理命中、攻击准入和持续燃烧各有明确边界。',defense_rating_affix_rule(data,link,facts,details),'implemented'))
     if 'iron_reflexes' in data:
         rule_defs.append(('iron_reflexes',RULE_TITLES['iron_reflexes'],'全部原始闪避转换为护甲，取消敏捷闪避提高；同一句双提高只计一次，失去闪避仍有代价。',iron_reflexes_rule(data,link,facts,details),'implemented'))
+    if 'precise_technique' in data:
+        rule_defs.append(('precise_technique',RULE_TITLES['precise_technique'],'最终命中值严格高于最大生命时，攻击伤害额外提高40%；选中后始终不能暴击。',precise_technique_rule(data,link,facts,details),'implemented'))
     if 'physical_fire_conversion' in data:
         rule_defs.append(('physical_fire_conversion',RULE_TITLES['physical_fire_conversion'],'原始物理组装后40%转火；逐条伤害来源、专注取舍、燃烧与物理偷取边界。',physical_fire_conversion_rule(data,link,facts,details),'implemented'))
     if 'zealots_oath' in data:
