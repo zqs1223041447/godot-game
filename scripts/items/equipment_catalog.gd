@@ -14,8 +14,9 @@ const BuildAffixes = preload("res://scripts/items/build_affix_profile.gd")
 const ForgebladeProfile = preload("res://scripts/items/forgeblade_profile.gd")
 const ElementalDefense = preload("res://scripts/items/elemental_defense_affix_profile.gd")
 const DefenseRatings = preload("res://scripts/items/defense_rating_affix_profile.gd")
-const CURRENT_VOCABULARY: int = 39
-const CANONICAL_LOOT_PROFILE_ID: String = "canonical_v39"
+const GloveRingAffixes = preload("res://scripts/items/glove_ring_affix_profile.gd")
+const CURRENT_VOCABULARY: int = 46
+const CANONICAL_LOOT_PROFILE_ID: String = "canonical_v46"
 const CURRENT_DEFENSE_POOL_ID: String = "defense_v39"
 const MIN_ITEM_LEVEL: int = 1
 const MAX_ITEM_LEVEL: int = 30
@@ -124,6 +125,7 @@ const LOCAL_WEAPON_AFFIXES: Dictionary = {
 }
 ## Derive only the new eligibility from frozen authored budgets.
 static var _current_extended_affixes: Dictionary = ForgebladeProfile.extend_affixes(LOCAL_WEAPON_AFFIXES, BuildAffixes.AFFIXES)
+static var _glove_ring_affixes: Dictionary = GloveRingAffixes.build_affixes(DEFENSE_AFFIXES, ElementalDefense.AFFIXES)
 
 ## Ordering is part of the RNG contract. Do not derive these arrays from a registry
 ## that later releases can extend. New content belongs in a new profile.
@@ -144,6 +146,7 @@ const POOL_PROFILES: Dictionary = {
 	"forgeblade_v34": ForgebladeProfile.POOL_PROFILE,
 	"defense_v37": ElementalDefense.POOL_PROFILE,
 	"defense_v39": DefenseRatings.POOL_PROFILE,
+	"build_nine_slot_v46": GloveRingAffixes.POOL_PROFILE,
 }
 const LOOT_PROFILES: Dictionary = {
 	"canonical_v27": [{"pool_id":"build_legacy_v27","weight":30},{"pool_id":"runewood","weight":20},{"pool_id":"defense","weight":10},{"pool_id":"local_weapon","weight":10},{"pool_id":"build_nine_slot_v27","weight":30}],
@@ -153,8 +156,9 @@ const LOOT_PROFILES: Dictionary = {
 	"canonical_v34": [{"pool_id":"build_legacy_v27","weight":25},{"pool_id":"runewood","weight":20},{"pool_id":"defense","weight":10},{"pool_id":"local_weapon","weight":10},{"pool_id":"build_nine_slot_v27","weight":30},{"pool_id":"forgeblade_v34","weight":5}],
 	"canonical_v37": [{"pool_id":"build_legacy_v27","weight":25},{"pool_id":"runewood","weight":20},{"pool_id":"defense_v37","weight":10},{"pool_id":"local_weapon","weight":10},{"pool_id":"build_nine_slot_v27","weight":30},{"pool_id":"forgeblade_v34","weight":5}],
 	"canonical_v39": [{"pool_id":"build_legacy_v27","weight":25},{"pool_id":"runewood","weight":20},{"pool_id":"defense_v39","weight":10},{"pool_id":"local_weapon","weight":10},{"pool_id":"build_nine_slot_v27","weight":30},{"pool_id":"forgeblade_v34","weight":5}],
+	"canonical_v46": [{"pool_id":"build_legacy_v27","weight":25},{"pool_id":"runewood","weight":20},{"pool_id":"defense_v39","weight":10},{"pool_id":"local_weapon","weight":10},{"pool_id":"build_nine_slot_v46","weight":30},{"pool_id":"forgeblade_v34","weight":5}],
 }
-const CURRENT_LOOT_PROFILE_ID: String = "canonical_v39"
+const CURRENT_LOOT_PROFILE_ID: String = "canonical_v46"
 
 
 static func all_base_ids() -> Array[String]:
@@ -208,8 +212,10 @@ static func pool_for_base(base_id: String) -> String:
 static func pool_for_base_version(base_id: String, vocabulary: int) -> String:
 	var original := pool_for_base(base_id)
 	if original == "defense":
-		if vocabulary == DefenseRatings.MIN_SAVE_VERSION: return "defense_v39"
+		if vocabulary in [DefenseRatings.MIN_SAVE_VERSION, GloveRingAffixes.MIN_SAVE_VERSION]: return "defense_v39"
 		if vocabulary == ElementalDefense.MIN_SAVE_VERSION: return "defense_v37"
+	if original == "nine_slot" and vocabulary == GloveRingAffixes.MIN_SAVE_VERSION:
+		return "build_nine_slot_v46"
 	if vocabulary >= 27:
 		if original == "legacy": return "build_legacy_v27"
 		if original == "nine_slot": return "build_nine_slot_v27"
@@ -260,6 +266,8 @@ static func _base_record(id: String) -> Dictionary:
 
 
 static func _affix_record(id: String) -> Dictionary:
+	if _glove_ring_affixes.has(id):
+		return _glove_ring_affixes[id]
 	if DefenseRatings.AFFIXES.has(id):
 		return DefenseRatings.AFFIXES[id]
 	if ElementalDefense.AFFIXES.has(id):
@@ -356,9 +364,9 @@ static func validate_instance(value: Variant, vocabulary: Variant = null) -> boo
 
 
 static func validate_instance_for_version(value: Variant, save_version: int) -> bool:
-	# Source-only schemas35/36/38 never opened an equipment vocabulary. Their
+	# Source-only schemas35/36/38/40..45 never opened an equipment vocabulary. Their
 	# save adapters retain their previous vocabulary; explicit requests reject.
-	if save_version < 1 or (save_version > 34 and save_version not in [ElementalDefense.MIN_SAVE_VERSION, DefenseRatings.MIN_SAVE_VERSION]):
+	if save_version < 1 or (save_version > 34 and save_version not in [ElementalDefense.MIN_SAVE_VERSION, DefenseRatings.MIN_SAVE_VERSION, GloveRingAffixes.MIN_SAVE_VERSION]):
 		return false
 	if not value is Dictionary:
 		return false
@@ -517,6 +525,8 @@ static func _family_eligible(id: String, family: Dictionary, base_id: String) ->
 		return ElementalDefense.valid_family(family) and family.allowed_base_ids.has(base_id)
 	if DefenseRatings.AFFIXES.has(id):
 		return DefenseRatings.valid_family(family) and family.allowed_base_ids.has(base_id)
+	if _glove_ring_affixes.has(id):
+		return GloveRingAffixes.valid_family(family) and family.allowed_base_ids.has(base_id)
 	if LOCAL_WEAPON_AFFIXES.has(id):
 		return _valid_local_weapon_family(family) and family.allowed_base_ids.has(base_id)
 	if BuildAffixes.AFFIXES.has(id): return family.allowed_base_ids.has(base_id)
