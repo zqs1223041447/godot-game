@@ -1,0 +1,1733 @@
+{
+	"attacks": {
+		"1": {
+			"attack": {
+				"attack_id": 1,
+				"center": "(1572.0, 434.0)",
+				"elapsed": 0.0,
+				"packet": {
+					"base": {
+						"physical": 34.276799999999994
+					},
+					"skill_id": "locked_circle",
+					"tags": [
+						"attack",
+						"area",
+						"hit"
+					]
+				},
+				"phase": "windup",
+				"profile": {
+					"damage_multiplier": 1.2,
+					"radius": 240.0,
+					"recovery_seconds": 1.8479299537288065,
+					"windup_seconds": 1.4
+				},
+				"source_id": 59,
+				"visual_pattern": "ginkgo_shelter_slam"
+			},
+			"boss": {
+				"accuracy": 100.0,
+				"armour": 0.0,
+				"attack_speed": 1.2096205882352942,
+				"attack_timer": 0.0,
+				"contact_weights": {
+					"physical": 1.0
+				},
+				"damage": 28.563999999999997,
+				"damage_delay": 0.0,
+				"death_processed": false,
+				"death_spawns": [
+					{
+						"count": 4,
+						"template": "crawler"
+					}
+				],
+				"defense_stats": {
+
+				},
+				"equipment_pool": "",
+				"evasion": 0.0,
+				"flash": 0.0,
+				"generation": 0,
+				"health": 501.6,
+				"id": 59,
+				"kind": 2,
+				"knockback": "(0.0, 0.0)",
+				"map_boss_attack_id": "ginkgo_shelter_slam",
+				"max_health": 501.6,
+				"max_shield": 7.8,
+				"mechanism_ids": [
+					"ember_mastery",
+					"aegis_mastery"
+				],
+				"mechanism_policy": "poe-passive-v1",
+				"mechanism_revision": 1,
+				"mechanism_schema": 1,
+				"mechanism_stats": {
+					"attack_speed": 0.03315,
+					"damage": 1.404,
+					"max_shield": 7.8,
+					"shield_regen": 1.2675
+				},
+				"name": "裂隙守卫",
+				"pos": "(1572.0, 434.0)",
+				"radius": 27.5,
+				"rarity": "boss",
+				"resistances": {
+					"fire": 0.0
+				},
+				"reward_eligible": true,
+				"root_id": 59,
+				"shield": 7.8,
+				"shield_regen": 1.2675,
+				"slow": 0.0,
+				"spawn": 0.0,
+				"speed": 47.2,
+				"template_id": "rift_warden",
+				"wave": 3,
+				"xp_reward": 48
+			},
+			"visual": [
+				{
+					"attack_id": 1,
+					"center": "(1572.0, 434.0)",
+					"elapsed": 0.0,
+					"packet": {
+						"base": {
+							"physical": 34.276799999999994
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"phase": "windup",
+					"profile": {
+						"damage_multiplier": 1.2,
+						"radius": 240.0,
+						"recovery_seconds": 1.8479299537288065,
+						"windup_seconds": 1.4
+					},
+					"source_id": 59,
+					"visual_pattern": "ginkgo_shelter_slam"
+				}
+			]
+		},
+		"2": {
+			"attack": {
+				"attack_id": 7,
+				"center": "(1572.0, 434.0)",
+				"elapsed": 0.0,
+				"packet": {
+					"base": {
+						"physical": 43.475519999999996
+					},
+					"skill_id": "locked_circle",
+					"tags": [
+						"attack",
+						"area",
+						"hit"
+					]
+				},
+				"phase": "windup",
+				"profile": {
+					"damage_multiplier": 1.2,
+					"radius": 240.0,
+					"recovery_seconds": 1.679936321571642,
+					"windup_seconds": 1.4
+				},
+				"source_id": 126,
+				"visual_pattern": "ginkgo_shelter_slam"
+			},
+			"boss": {
+				"accuracy": 100.0,
+				"armour": 0.0,
+				"attack_speed": 1.3305826470588238,
+				"attack_timer": 0.0,
+				"contact_weights": {
+					"physical": 1.0
+				},
+				"damage": 36.2296,
+				"damage_delay": 0.0,
+				"death_processed": false,
+				"death_spawns": [
+					{
+						"count": 4,
+						"template": "crawler"
+					}
+				],
+				"defense_stats": {
+
+				},
+				"encounter_source": {
+					"before": {
+						"armour": 0.0,
+						"attack_speed": 1.2096205882352942,
+						"damage": 31.503999999999998,
+						"health": 684.0,
+						"max_health": 684.0,
+						"max_shield": 7.8,
+						"shield": 7.8,
+						"speed": 51.4
+					},
+					"enemy_id": 126,
+					"mechanism_policy": "poe-passive-v1",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"profile": {
+						"additions": {
+							"armour": 0.0,
+							"shield_from_base_health": 0.0
+						},
+						"definitions": [
+							{
+								"description": "怪物攻击速度 ×1.10；预警时长保持，仅加快接触与预警后恢复",
+								"field": "attack_speed",
+								"id": "enemy_attack_speed_110",
+								"multiplier": 1.1,
+								"name": "疾攻",
+								"operation": "multiply",
+								"risk": {
+									"assessment": "prototype_budget_not_balance_proof",
+									"field": "attack_speed",
+									"label": "怪物攻击速度 ×1.10；预警时长保持，仅加快接触与预警后恢复",
+									"multiplier": 1.1,
+									"operation": "multiply",
+									"relative_increase": 0.10000000000000009,
+									"value": 1.1
+								},
+								"source_id": "encounter:enemy_attack_speed_110",
+								"value": 1.1
+							},
+							{
+								"description": "接触与预警伤害基底 ×1.15",
+								"field": "damage",
+								"id": "enemy_damage_115",
+								"multiplier": 1.15,
+								"name": "凶猛",
+								"operation": "multiply",
+								"risk": {
+									"assessment": "prototype_budget_not_balance_proof",
+									"field": "damage",
+									"label": "接触与预警伤害基底 ×1.15",
+									"multiplier": 1.15,
+									"operation": "multiply",
+									"relative_increase": 0.1499999999999999,
+									"value": 1.15
+								},
+								"source_id": "encounter:enemy_damage_115",
+								"value": 1.15
+							}
+						],
+						"modifier_ids": [
+							"enemy_attack_speed_110",
+							"enemy_damage_115"
+						],
+						"multipliers": {
+							"attack_speed": 1.1,
+							"damage": 1.15,
+							"max_health": 1.0,
+							"speed": 1.0
+						},
+						"resource_policy": {
+							"armour": "add_flat_then_existing_hit_size_formula",
+							"attack_speed": "multiply_contact_rate_and_recovery_only",
+							"damage": "multiply_canonical_once",
+							"health": "preserve_current_to_max_ratio",
+							"max_health": "multiply_canonical_once",
+							"max_shield": "add_fraction_of_unmodified_canonical_max_health",
+							"rounding": "float_no_integer_rounding",
+							"shield": "add_same_bonus_preserve_missing_amount",
+							"shield_regen": "unchanged",
+							"speed": "multiply_canonical_once",
+							"telegraph_windup": "unchanged"
+						},
+						"reward_budget": {
+							"creates_map_items": false,
+							"enabled": false,
+							"grants_rewards": false,
+							"proposed_bonus_fraction": null,
+							"status": "metadata_only"
+						},
+						"risk_parameters": [
+							{
+								"assessment": "prototype_budget_not_balance_proof",
+								"field": "attack_speed",
+								"label": "怪物攻击速度 ×1.10；预警时长保持，仅加快接触与预警后恢复",
+								"multiplier": 1.1,
+								"operation": "multiply",
+								"relative_increase": 0.10000000000000009,
+								"value": 1.1
+							},
+							{
+								"assessment": "prototype_budget_not_balance_proof",
+								"field": "damage",
+								"label": "接触与预警伤害基底 ×1.15",
+								"multiplier": 1.15,
+								"operation": "multiply",
+								"relative_increase": 0.1499999999999999,
+								"value": 1.15
+							}
+						],
+						"source": {
+							"balance_source": "original_game_balance",
+							"catalog": "res://scripts/encounters/encounter_catalog.gd",
+							"definition_revision": 2,
+							"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+							"monster_schema_version": 1,
+							"policy_version": 2,
+							"schema_version": 1
+						}
+					},
+					"rarity": "boss",
+					"shield_bonus": 0.0,
+					"template_id": "rift_warden",
+					"wave": 6
+				},
+				"equipment_pool": "",
+				"evasion": 0.0,
+				"flash": 0.0,
+				"generation": 0,
+				"health": 684.0,
+				"id": 126,
+				"kind": 2,
+				"knockback": "(0.0, 0.0)",
+				"map_boss_attack_id": "ginkgo_shelter_slam",
+				"max_health": 684.0,
+				"max_shield": 7.8,
+				"mechanism_ids": [
+					"ember_mastery",
+					"aegis_mastery"
+				],
+				"mechanism_policy": "poe-passive-v1",
+				"mechanism_revision": 1,
+				"mechanism_schema": 1,
+				"mechanism_stats": {
+					"attack_speed": 0.03315,
+					"damage": 1.404,
+					"max_shield": 7.8,
+					"shield_regen": 1.2675
+				},
+				"name": "裂隙守卫",
+				"pos": "(1572.0, 434.0)",
+				"radius": 27.5,
+				"rarity": "boss",
+				"resistances": {
+					"fire": 0.0
+				},
+				"reward_eligible": true,
+				"root_id": 126,
+				"shield": 7.8,
+				"shield_regen": 1.2675,
+				"slow": 0.0,
+				"spawn": 0.0,
+				"speed": 51.4,
+				"template_id": "rift_warden",
+				"wave": 6,
+				"xp_reward": 48
+			},
+			"visual": [
+				{
+					"attack_id": 7,
+					"center": "(1572.0, 434.0)",
+					"elapsed": 0.0,
+					"packet": {
+						"base": {
+							"physical": 43.475519999999996
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"phase": "windup",
+					"profile": {
+						"damage_multiplier": 1.2,
+						"radius": 240.0,
+						"recovery_seconds": 1.679936321571642,
+						"windup_seconds": 1.4
+					},
+					"source_id": 126,
+					"visual_pattern": "ginkgo_shelter_slam"
+				}
+			]
+		},
+		"freeze": {
+			"paused": {
+				"attack_id": 5,
+				"center": "(1572.0, 434.0)",
+				"elapsed": 0.5,
+				"packet": {
+					"base": {
+						"physical": 34.276799999999994
+					},
+					"skill_id": "locked_circle",
+					"tags": [
+						"attack",
+						"area",
+						"hit"
+					]
+				},
+				"phase": "windup",
+				"profile": {
+					"damage_multiplier": 1.2,
+					"radius": 240.0,
+					"recovery_seconds": 1.8479299537288065,
+					"windup_seconds": 1.4
+				},
+				"source_id": 59,
+				"visual_pattern": "ginkgo_shelter_slam"
+			},
+			"resolved": [
+				{
+					"applied": true,
+					"attack_age": 1.4,
+					"attack_id": 5,
+					"balance_version": "original-telegraphed-area-v1",
+					"center": "(1572.0, 434.0)",
+					"inside": true,
+					"packet": {
+						"base": {
+							"physical": 34.276799999999994
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"player_position": "(1572.0, 534.0)",
+					"profile": {
+						"damage_multiplier": 1.2,
+						"radius": 240.0,
+						"recovery_seconds": 1.8479299537288065,
+						"windup_seconds": 1.4
+					},
+					"profile_id": "locked_circle",
+					"radius": 240.0,
+					"schema_version": 1,
+					"shape": "circle",
+					"source_id": 59,
+					"type": "circle_attack",
+					"visual_pattern": "ginkgo_shelter_slam"
+				}
+			],
+			"state": {
+				"frozen_from": 0.6,
+				"frozen_until": 0.84,
+				"immune_until": 2.34,
+				"provenance": {
+					"cast_id": 8301,
+					"phase": "projectile",
+					"projectile_id": 8301,
+					"skill_id": "frost"
+				},
+				"rarity": "boss",
+				"target_id": 59
+			}
+		}
+	},
+	"checks": 212,
+	"failures": 0,
+	"method": "Actual main.tscn; controlled full-roster deaths and static actors; not natural combat footage",
+	"runs": [
+		{
+			"boss_children": 4,
+			"canceled_attack_id": 6,
+			"claim": {
+				"claimed_flasks": 0,
+				"claimed_gems": 0,
+				"claimed_shards": 4,
+				"code": "",
+				"ok": true,
+				"reason": "",
+				"world": {
+					"boss_defeated": false,
+					"boss_phase": "sealed",
+					"camp_states": [],
+					"can_claim_normal_rewards": false,
+					"can_enter_normal_town": false,
+					"can_leave_normal_town": true,
+					"can_return": false,
+					"claim_reason": "没有待领取奖励",
+					"completion_save_pending": false,
+					"description": "正式城镇",
+					"fee_paid": 0,
+					"map_id": "",
+					"map_name": "",
+					"map_tier": 0,
+					"mode": "town",
+					"normal_root_kills": 37,
+					"normal_town": true,
+					"ordinary_kills": 0,
+					"ordinary_target": 0,
+					"pending_flasks": 0,
+					"pending_gems": 0,
+					"pending_map_reward": {
+
+					},
+					"retry_cost": 0,
+					"revision": 7,
+					"run_revision": 3,
+					"save_path": "user://build_save.json",
+					"supply_enabled": false,
+					"test_mode": false
+				}
+			},
+			"coexisting_roots": 36,
+			"draft_before_start": {
+				"can_start": true,
+				"completion_reward": 4,
+				"cost": 0,
+				"cost_label": "入图 0 碎片 · 完成 4 碎片",
+				"map_id": "ginkgo_arcade",
+				"normal_ids": [],
+				"reason": "",
+				"revision": 1,
+				"special_ids": [],
+				"summary": "银杏回廊 · I",
+				"tier": 1,
+				"valid": true
+			},
+			"pending": {
+				"map_id": "ginkgo_arcade",
+				"run_id": 1,
+				"shards": 4,
+				"tier": 1
+			},
+			"profile": {
+				"base_completion_reward": 4,
+				"boss_attack_id": "ginkgo_shelter_slam",
+				"boss_id": "rift_warden",
+				"completion_reward": 4,
+				"description": "中央花圃与两座基台阻挡移动、弹体和视线，沿内外通路绕行。三个据点各12根怪，可自由选择顺序；清理36根怪后激活首领。回廊震击锁定首领起手位置：离开圆圈，或利用实体障碍阻断视线。",
+				"encounter_profile": {
+					"additions": {
+						"armour": 0.0,
+						"shield_from_base_health": 0.0
+					},
+					"definitions": [],
+					"modifier_ids": [],
+					"multipliers": {
+						"attack_speed": 1.0,
+						"damage": 1.0,
+						"max_health": 1.0,
+						"speed": 1.0
+					},
+					"resource_policy": {
+						"armour": "add_flat_then_existing_hit_size_formula",
+						"attack_speed": "multiply_contact_rate_and_recovery_only",
+						"damage": "multiply_canonical_once",
+						"health": "preserve_current_to_max_ratio",
+						"max_health": "multiply_canonical_once",
+						"max_shield": "add_fraction_of_unmodified_canonical_max_health",
+						"rounding": "float_no_integer_rounding",
+						"shield": "add_same_bonus_preserve_missing_amount",
+						"shield_regen": "unchanged",
+						"speed": "multiply_canonical_once",
+						"telegraph_windup": "unchanged"
+					},
+					"reward_budget": {
+						"creates_map_items": false,
+						"enabled": false,
+						"grants_rewards": false,
+						"proposed_bonus_fraction": null,
+						"status": "metadata_only"
+					},
+					"risk_parameters": [],
+					"source": {
+						"balance_source": "original_game_balance",
+						"catalog": "res://scripts/encounters/encounter_catalog.gd",
+						"definition_revision": 2,
+						"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+						"monster_schema_version": 1,
+						"policy_version": 2,
+						"schema_version": 1
+					}
+				},
+				"fee": 0,
+				"id": "ginkgo_arcade",
+				"journey_tier": 1,
+				"name": "银杏回廊 · I",
+				"normal_ids": [],
+				"normal_map": true,
+				"ordinary_target": 36,
+				"special_ids": [],
+				"summary": "银杏回廊 · I",
+				"wave": 3
+			},
+			"roots": 37,
+			"roster": {
+				"camps": [
+					{
+						"entries": [
+							{
+								"admission_index": 1,
+								"mechanisms": [
+									"source_gale_stride",
+									"source_grove_vitality"
+								],
+								"position": "(188.0, 198.0)",
+								"rarity": "rare",
+								"template_id": "skitter"
+							},
+							{
+								"admission_index": 2,
+								"mechanisms": [],
+								"position": "(244.0, 198.0)",
+								"rarity": "normal",
+								"template_id": "crawler"
+							},
+							{
+								"admission_index": 3,
+								"mechanisms": [],
+								"position": "(300.0, 198.0)",
+								"rarity": "normal",
+								"template_id": "skitter"
+							},
+							{
+								"admission_index": 4,
+								"mechanisms": [],
+								"position": "(356.0, 198.0)",
+								"rarity": "normal",
+								"template_id": "crawler"
+							},
+							{
+								"admission_index": 5,
+								"mechanisms": [
+									"source_gale_stride"
+								],
+								"position": "(188.0, 254.0)",
+								"rarity": "magic",
+								"template_id": "brute"
+							},
+							{
+								"admission_index": 6,
+								"mechanisms": [
+									"source_aegis_capacity"
+								],
+								"position": "(244.0, 254.0)",
+								"rarity": "magic",
+								"template_id": "skitter"
+							},
+							{
+								"admission_index": 7,
+								"mechanisms": [],
+								"position": "(300.0, 254.0)",
+								"rarity": "normal",
+								"template_id": "skitter"
+							},
+							{
+								"admission_index": 8,
+								"mechanisms": [],
+								"position": "(356.0, 254.0)",
+								"rarity": "",
+								"template_id": "ember_guard"
+							},
+							{
+								"admission_index": 9,
+								"mechanisms": [],
+								"position": "(188.0, 310.0)",
+								"rarity": "normal",
+								"template_id": "skitter"
+							},
+							{
+								"admission_index": 10,
+								"mechanisms": [
+									"source_aegis_capacity"
+								],
+								"position": "(244.0, 310.0)",
+								"rarity": "magic",
+								"template_id": "crawler"
+							},
+							{
+								"admission_index": 11,
+								"mechanisms": [],
+								"position": "(300.0, 310.0)",
+								"rarity": "normal",
+								"template_id": "brute"
+							},
+							{
+								"admission_index": 12,
+								"mechanisms": [],
+								"position": "(356.0, 310.0)",
+								"rarity": "normal",
+								"template_id": "skitter"
+							}
+						],
+						"id": "camp_west",
+						"root_ids": []
+					},
+					{
+						"entries": [
+							{
+								"admission_index": 13,
+								"mechanisms": [],
+								"position": "(878.0, 148.0)",
+								"rarity": "normal",
+								"template_id": "brute"
+							},
+							{
+								"admission_index": 14,
+								"mechanisms": [
+									"source_gale_stride"
+								],
+								"position": "(934.0, 148.0)",
+								"rarity": "magic",
+								"template_id": "brute"
+							},
+							{
+								"admission_index": 15,
+								"mechanisms": [
+									"source_ember_power"
+								],
+								"position": "(990.0, 148.0)",
+								"rarity": "magic",
+								"template_id": "crawler"
+							},
+							{
+								"admission_index": 16,
+								"mechanisms": [],
+								"position": "(1046.0, 148.0)",
+								"rarity": "",
+								"template_id": "ember_guard"
+							},
+							{
+								"admission_index": 17,
+								"mechanisms": [],
+								"position": "(878.0, 204.0)",
+								"rarity": "normal",
+								"template_id": "brute"
+							},
+							{
+								"admission_index": 18,
+								"mechanisms": [
+									"grove_mastery",
+									"aegis_recovery"
+								],
+								"position": "(934.0, 204.0)",
+								"rarity": "rare",
+								"template_id": "brood_host"
+							},
+							{
+								"admission_index": 19,
+								"mechanisms": [],
+								"position": "(990.0, 204.0)",
+								"rarity": "normal",
+								"template_id": "brute"
+							},
+							{
+								"admission_index": 20,
+								"mechanisms": [
+									"source_grove_vitality"
+								],
+								"position": "(1046.0, 204.0)",
+								"rarity": "magic",
+								"template_id": "brute"
+							},
+							{
+								"admission_index": 21,
+								"mechanisms": [],
+								"position": "(878.0, 260.0)",
+								"rarity": "normal",
+								"template_id": "crawler"
+							},
+							{
+								"admission_index": 22,
+								"mechanisms": [
+									"grove_vitality"
+								],
+								"position": "(934.0, 260.0)",
+								"rarity": "magic",
+								"template_id": "splitter"
+							},
+							{
+								"admission_index": 23,
+								"mechanisms": [
+									"source_aegis_recovery"
+								],
+								"position": "(990.0, 260.0)",
+								"rarity": "magic",
+								"template_id": "brute"
+							},
+							{
+								"admission_index": 24,
+								"mechanisms": [],
+								"position": "(1046.0, 260.0)",
+								"rarity": "",
+								"template_id": "ember_guard"
+							}
+						],
+						"id": "camp_north",
+						"root_ids": []
+					},
+					{
+						"entries": [
+							{
+								"admission_index": 25,
+								"mechanisms": [],
+								"position": "(1648.0, 198.0)",
+								"rarity": "normal",
+								"template_id": "brute"
+							},
+							{
+								"admission_index": 26,
+								"mechanisms": [],
+								"position": "(1704.0, 198.0)",
+								"rarity": "normal",
+								"template_id": "skitter"
+							},
+							{
+								"admission_index": 27,
+								"mechanisms": [
+									"grove_vitality"
+								],
+								"position": "(1760.0, 198.0)",
+								"rarity": "magic",
+								"template_id": "splitter"
+							},
+							{
+								"admission_index": 28,
+								"mechanisms": [],
+								"position": "(1816.0, 198.0)",
+								"rarity": "normal",
+								"template_id": "brute"
+							},
+							{
+								"admission_index": 29,
+								"mechanisms": [
+									"source_gale_stride"
+								],
+								"position": "(1648.0, 254.0)",
+								"rarity": "magic",
+								"template_id": "crawler"
+							},
+							{
+								"admission_index": 30,
+								"mechanisms": [],
+								"position": "(1704.0, 254.0)",
+								"rarity": "normal",
+								"template_id": "skitter"
+							},
+							{
+								"admission_index": 31,
+								"mechanisms": [
+									"source_grove_vitality"
+								],
+								"position": "(1760.0, 254.0)",
+								"rarity": "magic",
+								"template_id": "brute"
+							},
+							{
+								"admission_index": 32,
+								"mechanisms": [],
+								"position": "(1816.0, 254.0)",
+								"rarity": "",
+								"template_id": "ember_guard"
+							},
+							{
+								"admission_index": 33,
+								"mechanisms": [],
+								"position": "(1648.0, 310.0)",
+								"rarity": "normal",
+								"template_id": "skitter"
+							},
+							{
+								"admission_index": 34,
+								"mechanisms": [],
+								"position": "(1704.0, 310.0)",
+								"rarity": "normal",
+								"template_id": "brute"
+							},
+							{
+								"admission_index": 35,
+								"mechanisms": [
+									"source_grove_vitality"
+								],
+								"position": "(1760.0, 310.0)",
+								"rarity": "magic",
+								"template_id": "crawler"
+							},
+							{
+								"admission_index": 36,
+								"mechanisms": [
+									"grove_mastery",
+									"aegis_recovery"
+								],
+								"position": "(1816.0, 310.0)",
+								"rarity": "rare",
+								"template_id": "brood_host"
+							}
+						],
+						"id": "camp_east",
+						"root_ids": []
+					}
+				],
+				"landmarks": {
+					"boss": {
+						"center": "(1572.0, 434.0)",
+						"id": "rift_warden",
+						"name": "裂隙守卫",
+						"trigger_center": "(1572.0, 754.0)",
+						"trigger_radius": 64.0
+					},
+					"camps": [
+						{
+							"center": "(272.0, 254.0)",
+							"id": "camp_west",
+							"name": "西叶据点",
+							"positions": [
+								"(188.0, 198.0)",
+								"(244.0, 198.0)",
+								"(300.0, 198.0)",
+								"(356.0, 198.0)",
+								"(188.0, 254.0)",
+								"(244.0, 254.0)",
+								"(300.0, 254.0)",
+								"(356.0, 254.0)",
+								"(188.0, 310.0)",
+								"(244.0, 310.0)",
+								"(300.0, 310.0)",
+								"(356.0, 310.0)"
+							],
+							"root_count": 12,
+							"trigger_center": "(272.0, 674.0)",
+							"trigger_radius": 64.0
+						},
+						{
+							"center": "(962.0, 204.0)",
+							"id": "camp_north",
+							"name": "北廊据点",
+							"positions": [
+								"(878.0, 148.0)",
+								"(934.0, 148.0)",
+								"(990.0, 148.0)",
+								"(1046.0, 148.0)",
+								"(878.0, 204.0)",
+								"(934.0, 204.0)",
+								"(990.0, 204.0)",
+								"(1046.0, 204.0)",
+								"(878.0, 260.0)",
+								"(934.0, 260.0)",
+								"(990.0, 260.0)",
+								"(1046.0, 260.0)"
+							],
+							"root_count": 12,
+							"trigger_center": "(1352.0, 234.0)",
+							"trigger_radius": 64.0
+						},
+						{
+							"center": "(1732.0, 254.0)",
+							"id": "camp_east",
+							"name": "东荫据点",
+							"positions": [
+								"(1648.0, 198.0)",
+								"(1704.0, 198.0)",
+								"(1760.0, 198.0)",
+								"(1816.0, 198.0)",
+								"(1648.0, 254.0)",
+								"(1704.0, 254.0)",
+								"(1760.0, 254.0)",
+								"(1816.0, 254.0)",
+								"(1648.0, 310.0)",
+								"(1704.0, 310.0)",
+								"(1760.0, 310.0)",
+								"(1816.0, 310.0)"
+							],
+							"root_count": 12,
+							"trigger_center": "(1642.0, 674.0)",
+							"trigger_radius": 64.0
+						}
+					],
+					"entry": "(962.0, 774.0)"
+				},
+				"profile": {
+					"base_completion_reward": 4,
+					"boss_attack_id": "ginkgo_shelter_slam",
+					"boss_id": "rift_warden",
+					"completion_reward": 4,
+					"description": "中央花圃与两座基台阻挡移动、弹体和视线，沿内外通路绕行。三个据点各12根怪，可自由选择顺序；清理36根怪后激活首领。回廊震击锁定首领起手位置：离开圆圈，或利用实体障碍阻断视线。",
+					"encounter_profile": {
+						"additions": {
+							"armour": 0.0,
+							"shield_from_base_health": 0.0
+						},
+						"definitions": [],
+						"modifier_ids": [],
+						"multipliers": {
+							"attack_speed": 1.0,
+							"damage": 1.0,
+							"max_health": 1.0,
+							"speed": 1.0
+						},
+						"resource_policy": {
+							"armour": "add_flat_then_existing_hit_size_formula",
+							"attack_speed": "multiply_contact_rate_and_recovery_only",
+							"damage": "multiply_canonical_once",
+							"health": "preserve_current_to_max_ratio",
+							"max_health": "multiply_canonical_once",
+							"max_shield": "add_fraction_of_unmodified_canonical_max_health",
+							"rounding": "float_no_integer_rounding",
+							"shield": "add_same_bonus_preserve_missing_amount",
+							"shield_regen": "unchanged",
+							"speed": "multiply_canonical_once",
+							"telegraph_windup": "unchanged"
+						},
+						"reward_budget": {
+							"creates_map_items": false,
+							"enabled": false,
+							"grants_rewards": false,
+							"proposed_bonus_fraction": null,
+							"status": "metadata_only"
+						},
+						"risk_parameters": [],
+						"source": {
+							"balance_source": "original_game_balance",
+							"catalog": "res://scripts/encounters/encounter_catalog.gd",
+							"definition_revision": 2,
+							"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+							"monster_schema_version": 1,
+							"policy_version": 2,
+							"schema_version": 1
+						}
+					},
+					"fee": 0,
+					"id": "ginkgo_arcade",
+					"journey_tier": 1,
+					"name": "银杏回廊 · I",
+					"normal_ids": [],
+					"normal_map": true,
+					"ordinary_target": 36,
+					"special_ids": [],
+					"summary": "银杏回廊 · I",
+					"wave": 3
+				},
+				"seed": 426091480204669216
+			},
+			"tier": 1
+		},
+		{
+			"boss_children": 4,
+			"canceled_attack_id": 8,
+			"claim": {
+				"claimed_flasks": 0,
+				"claimed_gems": 0,
+				"claimed_shards": 12,
+				"code": "",
+				"ok": true,
+				"reason": "",
+				"world": {
+					"boss_defeated": false,
+					"boss_phase": "sealed",
+					"camp_states": [],
+					"can_claim_normal_rewards": false,
+					"can_enter_normal_town": false,
+					"can_leave_normal_town": true,
+					"can_return": false,
+					"claim_reason": "没有待领取奖励",
+					"completion_save_pending": false,
+					"description": "正式城镇",
+					"fee_paid": 0,
+					"map_id": "",
+					"map_name": "",
+					"map_tier": 0,
+					"mode": "town",
+					"normal_root_kills": 74,
+					"normal_town": true,
+					"ordinary_kills": 0,
+					"ordinary_target": 0,
+					"pending_flasks": 0,
+					"pending_gems": 0,
+					"pending_map_reward": {
+
+					},
+					"retry_cost": 0,
+					"revision": 14,
+					"run_revision": 5,
+					"save_path": "user://build_save.json",
+					"supply_enabled": false,
+					"test_mode": false
+				}
+			},
+			"coexisting_roots": 36,
+			"draft_before_start": {
+				"can_start": true,
+				"completion_reward": 12,
+				"cost": 4,
+				"cost_label": "入图 4 碎片 · 完成 12 碎片",
+				"map_id": "ginkgo_arcade",
+				"normal_ids": [
+					"enemy_attack_speed_110",
+					"enemy_damage_115"
+				],
+				"reason": "",
+				"revision": 4,
+				"special_ids": [
+					"frost_patrol"
+				],
+				"summary": "银杏回廊 · II · 疾攻 · 凶猛 · 霜纹巡逻",
+				"tier": 2,
+				"valid": true
+			},
+			"pending": {
+				"map_id": "ginkgo_arcade",
+				"run_id": 2,
+				"shards": 12,
+				"tier": 2
+			},
+			"profile": {
+				"base_completion_reward": 8,
+				"boss_attack_id": "ginkgo_shelter_slam",
+				"boss_id": "rift_warden",
+				"completion_reward": 12,
+				"description": "中央花圃与两座基台阻挡移动、弹体和视线，沿内外通路绕行。三个据点各12根怪，可自由选择顺序；清理36根怪后激活首领。回廊震击锁定首领起手位置：离开圆圈，或利用实体障碍阻断视线。",
+				"encounter_profile": {
+					"additions": {
+						"armour": 0.0,
+						"shield_from_base_health": 0.0
+					},
+					"definitions": [
+						{
+							"description": "怪物攻击速度 ×1.10；预警时长保持，仅加快接触与预警后恢复",
+							"field": "attack_speed",
+							"id": "enemy_attack_speed_110",
+							"multiplier": 1.1,
+							"name": "疾攻",
+							"operation": "multiply",
+							"risk": {
+								"assessment": "prototype_budget_not_balance_proof",
+								"field": "attack_speed",
+								"label": "怪物攻击速度 ×1.10；预警时长保持，仅加快接触与预警后恢复",
+								"multiplier": 1.1,
+								"operation": "multiply",
+								"relative_increase": 0.10000000000000009,
+								"value": 1.1
+							},
+							"source_id": "encounter:enemy_attack_speed_110",
+							"value": 1.1
+						},
+						{
+							"description": "接触与预警伤害基底 ×1.15",
+							"field": "damage",
+							"id": "enemy_damage_115",
+							"multiplier": 1.15,
+							"name": "凶猛",
+							"operation": "multiply",
+							"risk": {
+								"assessment": "prototype_budget_not_balance_proof",
+								"field": "damage",
+								"label": "接触与预警伤害基底 ×1.15",
+								"multiplier": 1.15,
+								"operation": "multiply",
+								"relative_increase": 0.1499999999999999,
+								"value": 1.15
+							},
+							"source_id": "encounter:enemy_damage_115",
+							"value": 1.15
+						}
+					],
+					"modifier_ids": [
+						"enemy_attack_speed_110",
+						"enemy_damage_115"
+					],
+					"multipliers": {
+						"attack_speed": 1.1,
+						"damage": 1.15,
+						"max_health": 1.0,
+						"speed": 1.0
+					},
+					"resource_policy": {
+						"armour": "add_flat_then_existing_hit_size_formula",
+						"attack_speed": "multiply_contact_rate_and_recovery_only",
+						"damage": "multiply_canonical_once",
+						"health": "preserve_current_to_max_ratio",
+						"max_health": "multiply_canonical_once",
+						"max_shield": "add_fraction_of_unmodified_canonical_max_health",
+						"rounding": "float_no_integer_rounding",
+						"shield": "add_same_bonus_preserve_missing_amount",
+						"shield_regen": "unchanged",
+						"speed": "multiply_canonical_once",
+						"telegraph_windup": "unchanged"
+					},
+					"reward_budget": {
+						"creates_map_items": false,
+						"enabled": false,
+						"grants_rewards": false,
+						"proposed_bonus_fraction": null,
+						"status": "metadata_only"
+					},
+					"risk_parameters": [
+						{
+							"assessment": "prototype_budget_not_balance_proof",
+							"field": "attack_speed",
+							"label": "怪物攻击速度 ×1.10；预警时长保持，仅加快接触与预警后恢复",
+							"multiplier": 1.1,
+							"operation": "multiply",
+							"relative_increase": 0.10000000000000009,
+							"value": 1.1
+						},
+						{
+							"assessment": "prototype_budget_not_balance_proof",
+							"field": "damage",
+							"label": "接触与预警伤害基底 ×1.15",
+							"multiplier": 1.15,
+							"operation": "multiply",
+							"relative_increase": 0.1499999999999999,
+							"value": 1.15
+						}
+					],
+					"source": {
+						"balance_source": "original_game_balance",
+						"catalog": "res://scripts/encounters/encounter_catalog.gd",
+						"definition_revision": 2,
+						"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+						"monster_schema_version": 1,
+						"policy_version": 2,
+						"schema_version": 1
+					}
+				},
+				"fee": 4,
+				"id": "ginkgo_arcade",
+				"journey_tier": 2,
+				"name": "银杏回廊 · II",
+				"normal_ids": [
+					"enemy_attack_speed_110",
+					"enemy_damage_115"
+				],
+				"normal_map": true,
+				"ordinary_target": 36,
+				"special_ids": [
+					"frost_patrol"
+				],
+				"summary": "银杏回廊 · II · 疾攻 · 凶猛 · 霜纹巡逻",
+				"wave": 6
+			},
+			"roots": 37,
+			"roster": {
+				"camps": [
+					{
+						"entries": [
+							{
+								"admission_index": 1,
+								"mechanisms": [],
+								"position": "(188.0, 198.0)",
+								"rarity": "normal",
+								"template_id": "skitter"
+							},
+							{
+								"admission_index": 2,
+								"mechanisms": [],
+								"position": "(244.0, 198.0)",
+								"rarity": "normal",
+								"template_id": "crawler"
+							},
+							{
+								"admission_index": 3,
+								"mechanisms": [],
+								"position": "(300.0, 198.0)",
+								"rarity": "normal",
+								"template_id": "skitter"
+							},
+							{
+								"admission_index": 4,
+								"mechanisms": [],
+								"position": "(356.0, 198.0)",
+								"rarity": "normal",
+								"template_id": "crawler"
+							},
+							{
+								"admission_index": 5,
+								"mechanisms": [
+									"source_ember_power"
+								],
+								"position": "(188.0, 254.0)",
+								"rarity": "magic",
+								"template_id": "frost_guard"
+							},
+							{
+								"admission_index": 6,
+								"mechanisms": [
+									"grove_vitality"
+								],
+								"position": "(244.0, 254.0)",
+								"rarity": "magic",
+								"template_id": "splitter"
+							},
+							{
+								"admission_index": 7,
+								"mechanisms": [
+									"source_aegis_recovery"
+								],
+								"position": "(300.0, 254.0)",
+								"rarity": "magic",
+								"template_id": "skitter"
+							},
+							{
+								"admission_index": 8,
+								"mechanisms": [],
+								"position": "(356.0, 254.0)",
+								"rarity": "",
+								"template_id": "ember_guard"
+							},
+							{
+								"admission_index": 9,
+								"mechanisms": [],
+								"position": "(188.0, 310.0)",
+								"rarity": "normal",
+								"template_id": "skitter"
+							},
+							{
+								"admission_index": 10,
+								"mechanisms": [],
+								"position": "(244.0, 310.0)",
+								"rarity": "normal",
+								"template_id": "crawler"
+							},
+							{
+								"admission_index": 11,
+								"mechanisms": [
+									"grove_vitality"
+								],
+								"position": "(300.0, 310.0)",
+								"rarity": "magic",
+								"template_id": "splitter"
+							},
+							{
+								"admission_index": 12,
+								"mechanisms": [
+									"grove_vitality"
+								],
+								"position": "(356.0, 310.0)",
+								"rarity": "magic",
+								"template_id": "splitter"
+							}
+						],
+						"id": "camp_west",
+						"root_ids": []
+					},
+					{
+						"entries": [
+							{
+								"admission_index": 13,
+								"mechanisms": [
+									"source_aegis_capacity",
+									"source_grove_vitality"
+								],
+								"position": "(878.0, 148.0)",
+								"rarity": "rare",
+								"template_id": "frost_guard"
+							},
+							{
+								"admission_index": 14,
+								"mechanisms": [
+									"source_gale_stride"
+								],
+								"position": "(934.0, 148.0)",
+								"rarity": "magic",
+								"template_id": "frost_guard"
+							},
+							{
+								"admission_index": 15,
+								"mechanisms": [
+									"source_ember_power",
+									"source_aegis_recovery"
+								],
+								"position": "(990.0, 148.0)",
+								"rarity": "rare",
+								"template_id": "crawler"
+							},
+							{
+								"admission_index": 16,
+								"mechanisms": [],
+								"position": "(1046.0, 148.0)",
+								"rarity": "",
+								"template_id": "ember_guard"
+							},
+							{
+								"admission_index": 17,
+								"mechanisms": [],
+								"position": "(878.0, 204.0)",
+								"rarity": "normal",
+								"template_id": "frost_guard"
+							},
+							{
+								"admission_index": 18,
+								"mechanisms": [],
+								"position": "(934.0, 204.0)",
+								"rarity": "normal",
+								"template_id": "crawler"
+							},
+							{
+								"admission_index": 19,
+								"mechanisms": [
+									"source_aegis_recovery",
+									"source_grove_vitality"
+								],
+								"position": "(990.0, 204.0)",
+								"rarity": "rare",
+								"template_id": "frost_guard"
+							},
+							{
+								"admission_index": 20,
+								"mechanisms": [
+									"source_aegis_capacity"
+								],
+								"position": "(1046.0, 204.0)",
+								"rarity": "magic",
+								"template_id": "frost_guard"
+							},
+							{
+								"admission_index": 21,
+								"mechanisms": [],
+								"position": "(878.0, 260.0)",
+								"rarity": "normal",
+								"template_id": "crawler"
+							},
+							{
+								"admission_index": 22,
+								"mechanisms": [
+									"grove_vitality"
+								],
+								"position": "(934.0, 260.0)",
+								"rarity": "magic",
+								"template_id": "splitter"
+							},
+							{
+								"admission_index": 23,
+								"mechanisms": [],
+								"position": "(990.0, 260.0)",
+								"rarity": "normal",
+								"template_id": "frost_guard"
+							},
+							{
+								"admission_index": 24,
+								"mechanisms": [],
+								"position": "(1046.0, 260.0)",
+								"rarity": "",
+								"template_id": "ember_guard"
+							}
+						],
+						"id": "camp_north",
+						"root_ids": []
+					},
+					{
+						"entries": [
+							{
+								"admission_index": 25,
+								"mechanisms": [],
+								"position": "(1648.0, 198.0)",
+								"rarity": "normal",
+								"template_id": "frost_guard"
+							},
+							{
+								"admission_index": 26,
+								"mechanisms": [
+									"source_ember_power"
+								],
+								"position": "(1704.0, 198.0)",
+								"rarity": "magic",
+								"template_id": "storm_skitter"
+							},
+							{
+								"admission_index": 27,
+								"mechanisms": [
+									"source_ember_power"
+								],
+								"position": "(1760.0, 198.0)",
+								"rarity": "magic",
+								"template_id": "skitter"
+							},
+							{
+								"admission_index": 28,
+								"mechanisms": [
+									"source_gale_stride"
+								],
+								"position": "(1816.0, 198.0)",
+								"rarity": "magic",
+								"template_id": "frost_guard"
+							},
+							{
+								"admission_index": 29,
+								"mechanisms": [
+									"grove_mastery",
+									"aegis_recovery"
+								],
+								"position": "(1648.0, 254.0)",
+								"rarity": "rare",
+								"template_id": "brood_host"
+							},
+							{
+								"admission_index": 30,
+								"mechanisms": [],
+								"position": "(1704.0, 254.0)",
+								"rarity": "normal",
+								"template_id": "storm_skitter"
+							},
+							{
+								"admission_index": 31,
+								"mechanisms": [
+									"grove_vitality"
+								],
+								"position": "(1760.0, 254.0)",
+								"rarity": "magic",
+								"template_id": "splitter"
+							},
+							{
+								"admission_index": 32,
+								"mechanisms": [],
+								"position": "(1816.0, 254.0)",
+								"rarity": "",
+								"template_id": "ember_guard"
+							},
+							{
+								"admission_index": 33,
+								"mechanisms": [],
+								"position": "(1648.0, 310.0)",
+								"rarity": "normal",
+								"template_id": "skitter"
+							},
+							{
+								"admission_index": 34,
+								"mechanisms": [
+									"grove_vitality"
+								],
+								"position": "(1704.0, 310.0)",
+								"rarity": "magic",
+								"template_id": "splitter"
+							},
+							{
+								"admission_index": 35,
+								"mechanisms": [],
+								"position": "(1760.0, 310.0)",
+								"rarity": "normal",
+								"template_id": "crawler"
+							},
+							{
+								"admission_index": 36,
+								"mechanisms": [],
+								"position": "(1816.0, 310.0)",
+								"rarity": "normal",
+								"template_id": "storm_skitter"
+							}
+						],
+						"id": "camp_east",
+						"root_ids": []
+					}
+				],
+				"landmarks": {
+					"boss": {
+						"center": "(1572.0, 434.0)",
+						"id": "rift_warden",
+						"name": "裂隙守卫",
+						"trigger_center": "(1572.0, 754.0)",
+						"trigger_radius": 64.0
+					},
+					"camps": [
+						{
+							"center": "(272.0, 254.0)",
+							"id": "camp_west",
+							"name": "西叶据点",
+							"positions": [
+								"(188.0, 198.0)",
+								"(244.0, 198.0)",
+								"(300.0, 198.0)",
+								"(356.0, 198.0)",
+								"(188.0, 254.0)",
+								"(244.0, 254.0)",
+								"(300.0, 254.0)",
+								"(356.0, 254.0)",
+								"(188.0, 310.0)",
+								"(244.0, 310.0)",
+								"(300.0, 310.0)",
+								"(356.0, 310.0)"
+							],
+							"root_count": 12,
+							"trigger_center": "(272.0, 674.0)",
+							"trigger_radius": 64.0
+						},
+						{
+							"center": "(962.0, 204.0)",
+							"id": "camp_north",
+							"name": "北廊据点",
+							"positions": [
+								"(878.0, 148.0)",
+								"(934.0, 148.0)",
+								"(990.0, 148.0)",
+								"(1046.0, 148.0)",
+								"(878.0, 204.0)",
+								"(934.0, 204.0)",
+								"(990.0, 204.0)",
+								"(1046.0, 204.0)",
+								"(878.0, 260.0)",
+								"(934.0, 260.0)",
+								"(990.0, 260.0)",
+								"(1046.0, 260.0)"
+							],
+							"root_count": 12,
+							"trigger_center": "(1352.0, 234.0)",
+							"trigger_radius": 64.0
+						},
+						{
+							"center": "(1732.0, 254.0)",
+							"id": "camp_east",
+							"name": "东荫据点",
+							"positions": [
+								"(1648.0, 198.0)",
+								"(1704.0, 198.0)",
+								"(1760.0, 198.0)",
+								"(1816.0, 198.0)",
+								"(1648.0, 254.0)",
+								"(1704.0, 254.0)",
+								"(1760.0, 254.0)",
+								"(1816.0, 254.0)",
+								"(1648.0, 310.0)",
+								"(1704.0, 310.0)",
+								"(1760.0, 310.0)",
+								"(1816.0, 310.0)"
+							],
+							"root_count": 12,
+							"trigger_center": "(1642.0, 674.0)",
+							"trigger_radius": 64.0
+						}
+					],
+					"entry": "(962.0, 774.0)"
+				},
+				"profile": {
+					"base_completion_reward": 8,
+					"boss_attack_id": "ginkgo_shelter_slam",
+					"boss_id": "rift_warden",
+					"completion_reward": 12,
+					"description": "中央花圃与两座基台阻挡移动、弹体和视线，沿内外通路绕行。三个据点各12根怪，可自由选择顺序；清理36根怪后激活首领。回廊震击锁定首领起手位置：离开圆圈，或利用实体障碍阻断视线。",
+					"encounter_profile": {
+						"additions": {
+							"armour": 0.0,
+							"shield_from_base_health": 0.0
+						},
+						"definitions": [
+							{
+								"description": "怪物攻击速度 ×1.10；预警时长保持，仅加快接触与预警后恢复",
+								"field": "attack_speed",
+								"id": "enemy_attack_speed_110",
+								"multiplier": 1.1,
+								"name": "疾攻",
+								"operation": "multiply",
+								"risk": {
+									"assessment": "prototype_budget_not_balance_proof",
+									"field": "attack_speed",
+									"label": "怪物攻击速度 ×1.10；预警时长保持，仅加快接触与预警后恢复",
+									"multiplier": 1.1,
+									"operation": "multiply",
+									"relative_increase": 0.10000000000000009,
+									"value": 1.1
+								},
+								"source_id": "encounter:enemy_attack_speed_110",
+								"value": 1.1
+							},
+							{
+								"description": "接触与预警伤害基底 ×1.15",
+								"field": "damage",
+								"id": "enemy_damage_115",
+								"multiplier": 1.15,
+								"name": "凶猛",
+								"operation": "multiply",
+								"risk": {
+									"assessment": "prototype_budget_not_balance_proof",
+									"field": "damage",
+									"label": "接触与预警伤害基底 ×1.15",
+									"multiplier": 1.15,
+									"operation": "multiply",
+									"relative_increase": 0.1499999999999999,
+									"value": 1.15
+								},
+								"source_id": "encounter:enemy_damage_115",
+								"value": 1.15
+							}
+						],
+						"modifier_ids": [
+							"enemy_attack_speed_110",
+							"enemy_damage_115"
+						],
+						"multipliers": {
+							"attack_speed": 1.1,
+							"damage": 1.15,
+							"max_health": 1.0,
+							"speed": 1.0
+						},
+						"resource_policy": {
+							"armour": "add_flat_then_existing_hit_size_formula",
+							"attack_speed": "multiply_contact_rate_and_recovery_only",
+							"damage": "multiply_canonical_once",
+							"health": "preserve_current_to_max_ratio",
+							"max_health": "multiply_canonical_once",
+							"max_shield": "add_fraction_of_unmodified_canonical_max_health",
+							"rounding": "float_no_integer_rounding",
+							"shield": "add_same_bonus_preserve_missing_amount",
+							"shield_regen": "unchanged",
+							"speed": "multiply_canonical_once",
+							"telegraph_windup": "unchanged"
+						},
+						"reward_budget": {
+							"creates_map_items": false,
+							"enabled": false,
+							"grants_rewards": false,
+							"proposed_bonus_fraction": null,
+							"status": "metadata_only"
+						},
+						"risk_parameters": [
+							{
+								"assessment": "prototype_budget_not_balance_proof",
+								"field": "attack_speed",
+								"label": "怪物攻击速度 ×1.10；预警时长保持，仅加快接触与预警后恢复",
+								"multiplier": 1.1,
+								"operation": "multiply",
+								"relative_increase": 0.10000000000000009,
+								"value": 1.1
+							},
+							{
+								"assessment": "prototype_budget_not_balance_proof",
+								"field": "damage",
+								"label": "接触与预警伤害基底 ×1.15",
+								"multiplier": 1.15,
+								"operation": "multiply",
+								"relative_increase": 0.1499999999999999,
+								"value": 1.15
+							}
+						],
+						"source": {
+							"balance_source": "original_game_balance",
+							"catalog": "res://scripts/encounters/encounter_catalog.gd",
+							"definition_revision": 2,
+							"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+							"monster_schema_version": 1,
+							"policy_version": 2,
+							"schema_version": 1
+						}
+					},
+					"fee": 4,
+					"id": "ginkgo_arcade",
+					"journey_tier": 2,
+					"name": "银杏回廊 · II",
+					"normal_ids": [
+						"enemy_attack_speed_110",
+						"enemy_damage_115"
+					],
+					"normal_map": true,
+					"ordinary_target": 36,
+					"special_ids": [
+						"frost_patrol"
+					],
+					"summary": "银杏回廊 · II · 疾攻 · 凶猛 · 霜纹巡逻",
+					"wave": 6
+				},
+				"seed": 287673162231319267
+			},
+			"tier": 2
+		}
+	]
+}

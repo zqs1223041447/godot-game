@@ -63,6 +63,69 @@ def sunwell_sequence(boss):
     body+='<p>最后一响后进入恢复，基础 '+sunwell_value('base-recovery',sequence['base_recovery_seconds'])+' 秒；当前首领攻速 '+sunwell_value('attack-speed',sequence['source_attack_speed'])+'，真实策略恢复 '+sunwell_value('actual-recovery',sequence['actual_recovery_seconds'])+' 秒。攻速只影响恢复，两段完整预警不缩短。'+esc(sequence['settlement_scope'])+'。</p>'
     return body
 
+def ginkgo_map_body(data, link, facts, details):
+    """New-map-only card; geometry and markers come from the same runtime fragment."""
+    ginkgo=data['ginkgo_arcade'];geometry=ginkgo['geometry'];marks=geometry['landmarks']
+    boss=ginkgo['boss_definition'];profile=boss['profile'];camps=marks['camps']
+    def value(path):
+        result=ginkgo
+        for field in path.split('/'): result=result[int(field)] if isinstance(result,list) else result[field]
+        return f'<strong data-ginkgo-path="{esc(path)}" data-value="{esc(result)}">{number(result)}</strong>'
+    body='<h4>三据点自由推进</h4>'+facts([
+        ('据点',esc(' / '.join(camp['name'] for camp in camps))),
+        ('密度','每组 '+value('geometry/landmarks/camps/0/root_count')+' 根怪，三组共 '+value('definition/ordinary_target')+'；可任意顺序或同时激活'),
+        ('整组出生','穿过木牌 '+value('geometry/landmarks/camps/0/trigger_radius')+' 范围；安全距离至少 '+value('player_clearance')+'，出生提示 '+value('spawn_seconds')+' 秒；容量不足整组等待'),
+        ('完成','击败全部据点根怪后激活独立首领；首领及其死亡后代清完才完成'),
+        ('收益','保留合法根怪奖励与原完成奖；后代不增加奖励。没有新掉落或雾羽名额'),
+        ('解锁与领奖','本图I初始开放；完成前一档解锁本图下一档，返城领取冻结奖励，待领奖时不能再入图')])
+    rows=[]
+    for index,row in enumerate(ginkgo['tiers']):
+        path=f'tiers/{index}/base/'
+        specials='、'.join(link('map_specials',key) for key in row['eligible_special_ids']) or '未达特殊词缀波次门槛'
+        bonus=row['maximum_bonus_example']['completion_reward']-row['base']['completion_reward']
+        rows.append('<tr><th scope="row">'+esc(row['base']['name'])+'</th><td>'+value(path+'wave')+'</td><td>'+value(path+'fee')+'</td><td>'+value(path+'completion_reward')+'</td><td>'+number(bonus)+'</td><td>'+specials+'</td></tr>')
+    body+='<div class="table-scroll"><table><caption>正式三档：沿用原费用、基础完成奖与波次门槛</caption><thead><tr><th>地图阶级</th><th>波次</th><th>入场碎片</th><th>基础完成碎片</th><th>合法词缀最多加奖</th><th>可选特殊词缀</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
+    body+='<p>普通词缀每项+1，最多两项；特殊词缀每项+2，最多一项。I档未达特殊门槛，最多+2；II/III档最多+4。独立测试地图免费制作，固定第 '+value('test_profile/wave')+' 波，不增加正式完成奖励。</p>'
+    bounds=geometry['bounds'];ox,oy=bounds['position'];width,height=bounds['size']
+    drawing=f'<rect x="{ox}" y="{oy}" width="{width}" height="{height}" fill="#e5dfc3"/>'
+    for index,wall in enumerate(geometry['walls']):
+        x,y=wall['position'];w,h=wall['size']
+        drawing+=f'<rect data-ginkgo-wall="{index}" x="{number(x)}" y="{number(y)}" width="{number(w)}" height="{number(h)}" fill="#b6b585" stroke="#6e704c" stroke-width="4"/>'
+    for index,camp in enumerate(camps):
+        cx,cy=camp['center'];tx,ty=camp['trigger_center'];radius=camp['trigger_radius']
+        drawing+=f'<path d="M{number(cx)} {number(cy)}L{number(tx)} {number(ty)}" stroke="#897b54" stroke-width="3" stroke-dasharray="9 8"/>'
+        for ordinal,position in enumerate(camp['positions']):
+            x,y=position
+            drawing+=f'<circle data-ginkgo-root="{index}-{ordinal}" cx="{number(x)}" cy="{number(y)}" r="6" fill="#5d7656"/>'
+        drawing+=f'<circle data-ginkgo-trigger="{index}" cx="{number(tx)}" cy="{number(ty)}" r="{number(radius)}" fill="#d7b66a" fill-opacity=".2" stroke="#967a39" stroke-width="3"/>'
+        drawing+=f'<text x="{number(cx)}" y="{number(cy+100)}" text-anchor="middle" fill="#443b26" font-size="24">{esc(camp["name"])}</text>'
+    ex,ey=marks['entry'];bx,by=marks['boss']['center'];tx,ty=marks['boss']['trigger_center']
+    drawing+=f'<circle data-ginkgo-entry="true" cx="{number(ex)}" cy="{number(ey)}" r="12" fill="#366f71"/><text x="{number(ex+22)}" y="{number(ey+9)}" fill="#30585a" font-size="23">入场</text>'
+    drawing+=f'<circle data-ginkgo-boss="true" cx="{number(bx)}" cy="{number(by)}" r="13" fill="#995e47"/><text x="{number(bx+25)}" y="{number(by+8)}" fill="#69412d" font-size="23">首领</text>'
+    drawing+=f'<circle data-ginkgo-trigger="boss" cx="{number(tx)}" cy="{number(ty)}" r="{number(marks["boss"]["trigger_radius"])}" fill="none" stroke="#995e47" stroke-width="3"/><text x="{number(tx)}" y="{number(ty+8)}" text-anchor="middle" fill="#69412d" font-size="20">首领入口</text>'
+    body+=f'<figure><figcaption>银杏回廊 · 实际同源地形与完整阵形</figcaption><svg data-ginkgo-layout="true" viewBox="{ox} {oy} {width} {height}" role="img" aria-label="银杏回廊的三个实体障碍、三组十二个根怪、木牌触发范围与首领入口">{drawing}</svg><figcaption>矩形为真实阻挡足印；绿点为根怪出生中心，金圈为木牌触发区。虚线只连接同组标记，不代表通路或视线；点的显示大小不表示怪物碰撞半径。</figcaption></figure>'
+    body+='<p>中央花圃与两座基台阻挡移动、冲刺、击退、弹体和视线，沿内外通路绕行。贯穿与返回弹体仍碰墙；碰墙不触发自然到期爆炸、分裂或返回。范围命中、连锁与敌预警沿原LOS检查。位置与墙体直接读取MapCampLayout、MapGeometry；渲染不拥有另一套坐标或碰撞规则。</p>'
+    body+='<h4>同源基础物种编排</h4><p>先作原普通抽签，再按据点及组内序号映射基础物种，保留原稀有度、机制、灰烬与死亡繁衍名额；巡逻特殊词缀优先。霜纹从第 '+value('elemental_gates/frost_guard/minimum_wave')+' 波、雷纹从第 '+value('elemental_gates/storm_skitter/minimum_wave')+' 波出现，门槛前回退基础物种。下表只展示基础名额的按位映射，实际Main整组还包含固定名额与原抽签结果。</p>'
+    for wave,rosters in ginkgo['roster_examples_by_wave'].items():
+        body+=details('第 '+wave+' 波 · 基础名额按位示例',facts([(camp['name'],' → '.join(link('monsters',key) for key in rosters[camp['id']])) for camp in camps]))
+    body+='<h4>'+esc(boss['name'])+' · 首领起手点的一次震击</h4>'+facts([
+        ('锁定','首领起手位置；击退推动本体也不拖动锁定圆心'),
+        ('启动距离 / 攻击半径',value('boss_definition/trigger_distance')+' / '+value('boss_definition/profile/radius')),
+        ('完整预警',value('boss_definition/profile/windup_seconds')+' 秒，攻速不缩短'),
+        ('单次伤害','本图首领当前接触分量 × '+value('boss_definition/profile/damage_multiplier')+'；只结算一响，沿共享防御链'),
+        ('恢复','基础 '+value('boss_definition/profile/recovery_seconds')+' 秒；由既有策略按当前攻速缩放并保留原上下限'),
+        ('躲避','身体完全离开预警圆，或用实体障碍阻断结算LOS；角色半径仍参与边缘相交'),
+        ('冻结与取消','冻结暂停并续接同一个动作；来源/玩家死亡、返城或重开取消，恢复期不新增一响')])
+    examples=[]
+    for index,entry in enumerate(ginkgo['actual_main_examples']):
+        path=f'actual_main_examples/{index}/'
+        examples.append('<tr><th scope="row">'+esc(entry['profile']['summary'])+'</th><td>'+value(path+'source_attack_speed')+'</td><td>'+value(path+'attack_profile/recovery_seconds')+'</td><td>'+component_text(entry['packet']['base'])+'</td></tr>')
+    body+='<div class="table-scroll"><table><caption>已通过Main样本的冻结攻击参数；恢复并非固定1.9秒</caption><thead><tr><th>实际配置</th><th>来源攻速</th><th>实际恢复秒数</th><th>防御前伤害分量</th></tr></thead><tbody>'+''.join(examples)+'</tbody></table></div>'
+    body+='<p>冻结证据复用独立合法的霜锁与20%冰霜异常持续时间构筑，对首领冻结 '+value('actual_freeze_seconds')+' 秒；该构筑未替换正式地图角色或增加地图奖励。单响动作沿既有调度，不增接触伤害、燃烧、冻结或感电。</p>'
+    body+='<h4>保存与证据范围</h4><p>schema '+value('save_version')+'：严格验证旧49并备份原字节，仅升级版本并新增本图best_tiers=0。旧三图进度、物品、天赋、货币、在途记录与奖励序列保留。源政策 '+value('source_policy')+'、装备词汇 '+value('equipment_vocabulary')+'；没有新源消费者，完整源coverage保留原字节。</p>'
+    body+='<p>'+esc(ginkgo['scope'])+' Main使用受控完整怪群死亡与静态站位，不是自然战斗录像；不宣称全战斗、600秒稳定性或Release通过。</p><p><a href="../GINKGO_ARCADE.zh-CN.md">银杏回廊内容合同</a> · <a href="../qa/v083-reference/README.md">本批窄导出与保全证据</a> · <a href="../'+esc(ginkgo['actual_main_report']['path'].removeprefix('docs/'))+'">实际Main结果</a></p>'
+    return body
+
 def skill_delivery_diagram(skill_id, skill):
     if skill_id == 'cleave':
         recipe=skill['examples']['fresh'][0]['recipe']
@@ -1195,6 +1258,9 @@ def build(data, art):
                 body+='<div class="table-scroll"><table><thead><tr><th>实际供应目录</th><th>数量</th><th>价格</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
             if key=='passive_reset':body+='<p>保留当前起点，退还实际已花普通点。已镶珠宝保留原UID，优先回背包，放不下进入可见待安置；保存失败不改变点数或物品。</p>'
             if key=='crafter':body+='<p>继续消耗测试档里的真实碎片，不建立材料钱包。测试背包装备可确认丢弃并重新领取，正常进度保留原回收规则。</p>'+links('crafting',[op for op,c in data['crafting'].items() if c['kind']=='operation'])
+            if key=='map_device' and 'ginkgo_arcade' in data:
+                current_maps=town['options']['maps']+[data['ginkgo_arcade']['definition']]
+                body+='<p>当前可用四张地图：'+' · '.join(link('maps',entry['id'],entry['name']) for entry in current_maps)+'。正式地图各有I/II/III独立成长；独立测试地图免费，正式入场沿分档费用。</p>'
             body+='<p>重进测试档不重新复制或覆盖。退出后恢复正常档并进入正式城镇。被替换的旧model拒绝迟到写入；原确认、拖拽与面板一并关闭。</p>'
             cards.append(add('town_services',key,service['name'],'正式付费购买与独立测试供应' if key=='skill_merchant' else service['description'],body,'正式购买 · 测试供应' if key=='skill_merchant' else '可选测试服务'))
         for m in town['options']['maps']:
@@ -1244,6 +1310,9 @@ def build(data, art):
             else:
                 body+='<p>旧庭为开阔庭院；断垣的两道错位残墙有真实阻挡，角色、怪物需沿端部通道绕行，击退和冲刺同样受阻。贯穿不能穿墙，返回飞行也会碰墙；碰墙终止不触发自然到期爆炸、分裂或返回。范围命中、连锁与敌预警也检查墙视线，圈只表示最大半径。地图完成保留地形，返城清除障碍；不是可破坏场景或完整终局系统。</p>'
             cards.append(add('maps',key,m['name'],m['description'],body,'正式三档 / 独立测试',related=link('town_services','map_device')))
+        if 'ginkgo_arcade' in data:
+            m=data['ginkgo_arcade']['definition']
+            cards.append(add('maps',m['id'],m['name'],m['description'],ginkgo_map_body(data,link,facts,details),'正式三档 / 独立测试',related=link('town_services','map_device')))
         for special in town['options']['special_modifiers']:
             if special.get('kind')=='defense':
                 body=facts([('最低波次',number(special['minimum_wave'])),('原始加值',number(special['resistance_bonus']*100)+' 个百分点 / '+ '、'.join(DAMAGE_NAMES[t] for t in special['damage_types'])),('有效上限','未授予最大抗性加成，默认0%–75%'),('适用','根怪、首领、死亡后代各从本身原始值加一次'),('保留','物理/混沌抗性、护甲、血盾伤速、身份、稀有度、奖励和RNG'),('分层','最多1特殊词缀，与霜纹/雷纹巡逻互斥')])
@@ -1254,7 +1323,10 @@ def build(data, art):
             else:
                 consumer='已有元素预警攻击和共享防御链；雷纹锁点震击按显式规则施加感电' if data['monsters'][special['template']]['telegraph_policy'].get('shock_policy') else '已有冰冷预警攻击和共享防御链；不增加冻结或感电'
                 body=facts([('最低波次',number(special['minimum_wave'])),('匹配原物种',link('monsters',special['species'])),('替换为',link('monsters',special['template'])),('保留','原抽签稀有度、机制、血伤速度与XP；灰烬名额优先'),('真实消费者',consumer),('分层','独立于生命/速度普通词缀，最多1个特殊词缀')])
-            cards.append(add('map_specials',special['id'],special['name'],special['description'],body,'已实装特殊词缀',related=links('maps',[m['id'] for m in town['options']['maps'] if m['wave']>=special['minimum_wave']])))
+            related_maps=links('maps',[m['id'] for m in town['options']['maps'] if m['wave']>=special['minimum_wave']])
+            if 'ginkgo_arcade' in data and data['ginkgo_arcade']['definition']['wave']>=special['minimum_wave']:
+                related_maps+=' · '+link('maps','ginkgo_arcade',data['ginkgo_arcade']['definition']['name'])
+            cards.append(add('map_specials',special['id'],special['name'],special['description'],body,'已实装特殊词缀',related=related_maps))
     for key,a in data['monster_attacks'].items():
         p=a['profile']; policy=a['policy']
         body=telegraph_diagram(a)+facts([('来源',links('monsters',a['integrated_templates'])),('发动距离',number(policy['trigger_distance'])+' 世界单位'),('原始伤害',component_text(a['example']['event']['packet']['base'])),('倍率',number(p['damage_multiplier'])+' × 来源接触基底'),('攻速作用','只缩放恢复期；预警时间固定；开始后本次时序和伤害冻结'),('期间行动','暂停主动追击；击退仍有效；同一守卫不再叠加贴身接触攻击'),('取消与保护','来源死亡/出生保护/移除、玩家死亡或重开取消；暂停冻结时钟；多次同时命中沿用玩家无敌帧'),('规则版本',esc(a['balance_version']))])

@@ -1,0 +1,309 @@
+{
+  "source": "docs/qa/v082-source/fixtures/witch-refunded.json",
+  "source_sha256": "f675a61dda9552022cdb8c2eeefd8ecc79a55bda5f9491001c857d90140b6489",
+  "I_ready_exact_two_field_migration": true,
+  "fixtures": {
+    "v49-broken_ruins-active.json": {
+      "sha256": "6c7e7674ddd68864d0e54050baac7247bb13ee02140abd4fb2169f7dbf36a42f",
+      "version": 49,
+      "revision": 10,
+      "journey": {
+        "active_run": {
+          "run_id": 17,
+          "map_id": "broken_ruins",
+          "tier": 3,
+          "normal_ids": [
+            "enemy_max_health_120",
+            "enemy_move_speed_110"
+          ],
+          "special_ids": [
+            "elemental_aegis"
+          ],
+          "fee_paid": 8
+        },
+        "best_tiers": {
+          "broken_ruins": 2,
+          "old_garden": 0,
+          "sunwell_terrace": 0
+        },
+        "claimed_flasks": 2,
+        "claimed_gems": 4,
+        "next_run_id": 18,
+        "normal_root_kills": 180,
+        "pending_map_reward": {}
+      },
+      "item_count": 38
+    },
+    "v49-broken_ruins-pending.json": {
+      "sha256": "b35fad3c30361f0f6c2286ee596538af03eb96312fdad1a49af71f6f7c157fe0",
+      "version": 49,
+      "revision": 10,
+      "journey": {
+        "active_run": {},
+        "best_tiers": {
+          "broken_ruins": 2,
+          "old_garden": 0,
+          "sunwell_terrace": 0
+        },
+        "claimed_flasks": 2,
+        "claimed_gems": 4,
+        "next_run_id": 18,
+        "normal_root_kills": 180,
+        "pending_map_reward": {
+          "run_id": 17,
+          "map_id": "broken_ruins",
+          "tier": 2,
+          "shards": 8
+        }
+      },
+      "item_count": 38
+    },
+    "v49-old_garden-active.json": {
+      "sha256": "f73207993c5bfc2628eb299095f67e821b21f00e0c923a0f97920ed8d1f0f05b",
+      "version": 49,
+      "revision": 10,
+      "journey": {
+        "active_run": {
+          "run_id": 17,
+          "map_id": "old_garden",
+          "tier": 3,
+          "normal_ids": [
+            "enemy_max_health_120",
+            "enemy_move_speed_110"
+          ],
+          "special_ids": [
+            "elemental_aegis"
+          ],
+          "fee_paid": 8
+        },
+        "best_tiers": {
+          "broken_ruins": 0,
+          "old_garden": 2,
+          "sunwell_terrace": 0
+        },
+        "claimed_flasks": 2,
+        "claimed_gems": 4,
+        "next_run_id": 18,
+        "normal_root_kills": 180,
+        "pending_map_reward": {}
+      },
+      "item_count": 38
+    },
+    "v49-old_garden-pending.json": {
+      "sha256": "cd2b5846727c58150feb48e724fae348e319225c4689b8a3b766458a235e19ed",
+      "version": 49,
+      "revision": 10,
+      "journey": {
+        "active_run": {},
+        "best_tiers": {
+          "broken_ruins": 0,
+          "old_garden": 2,
+          "sunwell_terrace": 0
+        },
+        "claimed_flasks": 2,
+        "claimed_gems": 4,
+        "next_run_id": 18,
+        "normal_root_kills": 180,
+        "pending_map_reward": {
+          "run_id": 17,
+          "map_id": "old_garden",
+          "tier": 2,
+          "shards": 8
+        }
+      },
+      "item_count": 38
+    },
+    "v49-sunwell_terrace-active.json": {
+      "sha256": "e45e04ff0b7a579e319ba0d30c597d21b562ee8cee717b530b56f347d9c2bba5",
+      "version": 49,
+      "revision": 10,
+      "journey": {
+        "active_run": {
+          "run_id": 17,
+          "map_id": "sunwell_terrace",
+          "tier": 3,
+          "normal_ids": [
+            "enemy_max_health_120",
+            "enemy_move_speed_110"
+          ],
+          "special_ids": [
+            "elemental_aegis"
+          ],
+          "fee_paid": 8
+        },
+        "best_tiers": {
+          "broken_ruins": 0,
+          "old_garden": 0,
+          "sunwell_terrace": 2
+        },
+        "claimed_flasks": 2,
+        "claimed_gems": 4,
+        "next_run_id": 18,
+        "normal_root_kills": 180,
+        "pending_map_reward": {}
+      },
+      "item_count": 38
+    },
+    "v49-sunwell_terrace-pending.json": {
+      "sha256": "e0340ac36673da63d8c6ca98c6b1ed3d14613e727a080b990f506f86037daa5d",
+      "version": 49,
+      "revision": 10,
+      "journey": {
+        "active_run": {},
+        "best_tiers": {
+          "broken_ruins": 0,
+          "old_garden": 0,
+          "sunwell_terrace": 2
+        },
+        "claimed_flasks": 2,
+        "claimed_gems": 4,
+        "next_run_id": 18,
+        "normal_root_kills": 180,
+        "pending_map_reward": {
+          "run_id": 17,
+          "map_id": "sunwell_terrace",
+          "tier": 2,
+          "shards": 8
+        }
+      },
+      "item_count": 38
+    },
+    "v50-ginkgo-I-active.json": {
+      "sha256": "a57e6a7cf173676022744ecc7382108ccbcfd2614f8d3f13514b702404cb411d",
+      "version": 50,
+      "revision": 11,
+      "journey": {
+        "active_run": {
+          "run_id": 1,
+          "map_id": "ginkgo_arcade",
+          "tier": 1,
+          "normal_ids": [],
+          "special_ids": [],
+          "fee_paid": 0
+        },
+        "best_tiers": {
+          "broken_ruins": 0,
+          "old_garden": 0,
+          "sunwell_terrace": 0,
+          "ginkgo_arcade": 0
+        },
+        "claimed_flasks": 0,
+        "claimed_gems": 0,
+        "next_run_id": 2,
+        "normal_root_kills": 0,
+        "pending_map_reward": {}
+      },
+      "item_count": 38
+    },
+    "v50-ginkgo-I-pending.json": {
+      "sha256": "60076bf0c51932680c4d3c5c632383d7e8aedc7350667835268d241688c39689",
+      "version": 50,
+      "revision": 12,
+      "journey": {
+        "active_run": {},
+        "best_tiers": {
+          "broken_ruins": 0,
+          "old_garden": 0,
+          "sunwell_terrace": 0,
+          "ginkgo_arcade": 1
+        },
+        "claimed_flasks": 0,
+        "claimed_gems": 0,
+        "next_run_id": 2,
+        "normal_root_kills": 0,
+        "pending_map_reward": {
+          "run_id": 1,
+          "map_id": "ginkgo_arcade",
+          "tier": 1,
+          "shards": 4
+        }
+      },
+      "item_count": 38
+    },
+    "v50-ginkgo-I-ready.json": {
+      "sha256": "5ab204726376091493f8ff44a5742c9461bdcf007e1b02d1a4580a192b0f05b7",
+      "version": 50,
+      "revision": 10,
+      "journey": {
+        "active_run": {},
+        "best_tiers": {
+          "broken_ruins": 0,
+          "old_garden": 0,
+          "sunwell_terrace": 0,
+          "ginkgo_arcade": 0
+        },
+        "claimed_flasks": 0,
+        "claimed_gems": 0,
+        "next_run_id": 1,
+        "normal_root_kills": 0,
+        "pending_map_reward": {}
+      },
+      "item_count": 38
+    },
+    "v50-ginkgo-II-ready.json": {
+      "sha256": "04390b5094057951add629f08abd98bc6a39e3d90d3ee8f31c40e3f25ca512bc",
+      "version": 50,
+      "revision": 13,
+      "journey": {
+        "active_run": {},
+        "best_tiers": {
+          "broken_ruins": 0,
+          "old_garden": 0,
+          "sunwell_terrace": 0,
+          "ginkgo_arcade": 1
+        },
+        "claimed_flasks": 0,
+        "claimed_gems": 0,
+        "next_run_id": 2,
+        "normal_root_kills": 0,
+        "pending_map_reward": {}
+      },
+      "item_count": 39
+    },
+    "v50-ginkgo-III-ready.json": {
+      "sha256": "82ec16ce755a9c95c90762c6bc03dd7ba96ac6be09e719c30828ab825e8e774d",
+      "version": 50,
+      "revision": 16,
+      "journey": {
+        "active_run": {},
+        "best_tiers": {
+          "broken_ruins": 0,
+          "old_garden": 0,
+          "sunwell_terrace": 0,
+          "ginkgo_arcade": 2
+        },
+        "claimed_flasks": 0,
+        "claimed_gems": 0,
+        "next_run_id": 3,
+        "normal_root_kills": 0,
+        "pending_map_reward": {}
+      },
+      "item_count": 39
+    },
+    "v50-ginkgo-full-pending.json": {
+      "sha256": "dbfcb179f8f5f16992525db364c24e0d358d8fba71ccd20024e88cacaf16bbb9",
+      "version": 50,
+      "revision": 85,
+      "journey": {
+        "active_run": {},
+        "best_tiers": {
+          "broken_ruins": 0,
+          "old_garden": 0,
+          "sunwell_terrace": 0,
+          "ginkgo_arcade": 3
+        },
+        "claimed_flasks": 0,
+        "claimed_gems": 0,
+        "next_run_id": 7,
+        "normal_root_kills": 60,
+        "pending_map_reward": {
+          "run_id": 6,
+          "map_id": "ginkgo_arcade",
+          "tier": 1,
+          "shards": 4
+        }
+      },
+      "item_count": 253
+    }
+  }
+}
