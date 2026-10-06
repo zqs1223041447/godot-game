@@ -12,6 +12,7 @@ const Markers = preload("res://scripts/visuals/world_markers.gd")
 const TelegraphArt = preload("res://scripts/visuals/telegraph_renderer.gd")
 const BurnArt = preload("res://scripts/visuals/burn_status_renderer.gd")
 const AmbushArt = preload("res://scripts/visuals/ambush_trap_renderer.gd")
+const ChillArt = preload("res://scripts/visuals/chill_status_renderer.gd")
 const FreezeArt = preload("res://scripts/visuals/freeze_status_renderer.gd")
 const ShockArt = preload("res://scripts/visuals/shock_status_renderer.gd")
 const FeedbackArt = preload("res://scripts/visuals/combat_feedback_renderer.gd")
@@ -83,6 +84,7 @@ static func draw_scene(arena: Node2D, preferences: Settings, include_environment
 	if arena.has_method("burn_statuses"): BurnArt.draw(arena, arena.burn_statuses(), preferences.effects_level)
 	if arena.has_method("shock_statuses"): ShockArt.draw(arena, arena.shock_statuses(), preferences.effects_level)
 	if arena.has_method("freeze_statuses"): FreezeArt.draw(arena, arena.freeze_statuses(), preferences.effects_level)
+	if arena.has_method("chill_statuses"): ChillArt.draw(arena, arena.chill_statuses(), preferences.effects_level)
 	if arena.has_method("trap_statuses"): AmbushArt.draw(arena, arena.trap_statuses(), preferences.effects_level)
 	stamp = _diagnostic_mark("player",stamp)
 	for enemy:Dictionary in ordered:
@@ -216,6 +218,7 @@ static func draw_after_actors(arena:Node2D,preferences:Settings)->void:
 	if arena.has_method("burn_statuses"): BurnArt.draw(arena, arena.burn_statuses(), preferences.effects_level)
 	if arena.has_method("shock_statuses"): ShockArt.draw(arena, arena.shock_statuses(), preferences.effects_level)
 	if arena.has_method("freeze_statuses"): FreezeArt.draw(arena, arena.freeze_statuses(), preferences.effects_level)
+	if arena.has_method("chill_statuses"): ChillArt.draw(arena, arena.chill_statuses(), preferences.effects_level)
 	if arena.has_method("trap_statuses"): AmbushArt.draw(arena, arena.trap_statuses(), preferences.effects_level)
 	stamp = _diagnostic_mark("player",stamp)
 	for enemy:Dictionary in ordered:
