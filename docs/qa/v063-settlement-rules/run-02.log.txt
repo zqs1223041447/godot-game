@@ -1,0 +1,9 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ERROR: Receipt insertion order stays exact
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/burn_settlement_equivalence_test.gd:53)
+       [1] _valid_scalars (res://tests/burn_settlement_equivalence_test.gd:120)
+       [2] _initialize (res://tests/burn_settlement_equivalence_test.gd:25)
+BURN_SETTLEMENT_EQUIVALENCE {"baseline_commit":"b93018005413444ad6f988974f4ef3ea09902c5e","checks":58586,"engine":"4.6.3-stable (official)","failures":1,"microbenchmark":{},"scope":"Pure incoming_burn receipts and unchanged public defense paths. Not a gameplay/frame-rate result.","typed_byte_comparisons":{"deterministic_float_bits":6000,"explicit_signed_zero":1,"full_error_precedence":8,"health_ulp_boundary":1360,"ignored_or_validated_mana":96,"individual_invalid_and_ignored":455,"mana_cap_player_fallback":18000,"omitted_defaults":5,"ordinary_nonburn_adapters":864,"pairwise_error_priority":17745,"public_hit_multiplier":490,"public_mana_settlement":2628,"public_settle_resolved":438,"shield_ulp_boundary":1360,"unchanged_components":8,"unchanged_metadata":1,"unchanged_profiles":72,"valid_scalar_grid":7800,"zero_sign_and_types":1215}}

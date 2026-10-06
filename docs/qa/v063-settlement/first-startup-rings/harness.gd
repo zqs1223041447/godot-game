@@ -1,5 +1,5 @@
 extends SceneTree
-## Short exact-observation stress comparison; timed calls are production only.
+## Short same-source stress samples; instrumentation lives only in this tool.
 ## The protected player fixture leaves monster AI/attack scheduling enabled.
 const Compiler=preload("res://scripts/combat/skill_compiler.gd")
 const Combat=preload("res://scripts/combat/combat_data.gd")
@@ -35,9 +35,6 @@ func run()->void:
 		arena._world_mode="normal";arena.restart_run();arena.auto_fire=false;arena.spawn_timer=100000.0
 		arena.rng.seed=500050;arena.critical_runtime.reset(500051)
 		arena.enemies.clear();arena.monster_runtime.reset();arena.telegraphs.reset();arena.projectiles.clear()
-		# Restart spawns three random pre-seed visual rings. The controlled scene
-		# owns its initial population; remove those discarded actors' effects too.
-		arena.rings.clear();arena.particles.clear();arena.floating_text.clear();arena.pickups.clear()
 		arena.invulnerable=1000.0;arena.player_pos=arena.ARENA.get_center()+Vector2(0,210)
 		while arena.hud.is_blocking():arena.hud.close_panel()
 		for index:int in range(100):

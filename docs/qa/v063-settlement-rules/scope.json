@@ -1,0 +1,38 @@
+{
+  "baseline_commit": "b93018005413444ad6f988974f4ef3ea09902c5e",
+  "changed_existing_functions": [
+    "incoming_burn"
+  ],
+  "new_functions": [
+    "_settle_validated_monster_burn"
+  ],
+  "unchanged_existing_functions": [
+    "mana_guard_profile",
+    "recharge_profile",
+    "supports_stat",
+    "support_reason",
+    "metadata",
+    "defense_profile",
+    "resistance_profile",
+    "_maximum_elemental_resistance",
+    "_effective_elemental_resistance",
+    "incoming_hit",
+    "source_profile",
+    "apply_armour",
+    "incoming_source_hit",
+    "apply_hit_damage_taken",
+    "validate_components",
+    "settle_resolved",
+    "settle_with_mana",
+    "_finite_number",
+    "_amount",
+    "_resources_error",
+    "_same_amount",
+    "_failure"
+  ],
+  "sha256": {
+    "scripts/mechanics/defense_rules.gd": "a211d7714f8b23cd382dbe5093328104ee95c8022b99813329aa2f8534c45361",
+    "tests/burn_settlement_equivalence_test.gd": "1af63eb8e90c492e7010c371ec8f23a554cc9239135313333f89f09ce506f98d"
+  },
+  "passing_run": "run-03.log.txt"
+}

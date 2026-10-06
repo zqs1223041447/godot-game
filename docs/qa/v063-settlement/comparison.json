@@ -1,0 +1,84 @@
+{
+  "no_burn": {
+    "before": {
+      "max_us": 71601,
+      "mean_us": 52481.875,
+      "n": 24,
+      "over_16_7_ms": 24,
+      "over_33_3_ms": 24,
+      "p50_us": 51453,
+      "p95_us": 63996
+    },
+    "after": {
+      "max_us": 71942,
+      "mean_us": 51051.5,
+      "n": 24,
+      "over_16_7_ms": 24,
+      "over_33_3_ms": 24,
+      "p50_us": 49479,
+      "p95_us": 65708
+    },
+    "mean_change_fraction": -0.027254647437805923,
+    "median_change_fraction": -0.03836510990612796,
+    "p95_change_fraction": 0.02675167197949868,
+    "peak_change_fraction": 0.004762503316992683,
+    "equal": {
+      ".bin": {
+        "bytes": 29154664,
+        "sha256": "67b59a8dbe484f78859579b42708f2a092f8e923c9c038b5b61723ceba1a4dba",
+        "exact_equal": true
+      },
+      ".save": {
+        "bytes": 12177,
+        "sha256": "36d34d509f6f43ea18e1d63ef814762c7aab46e214ec0a676eda232d8f729f68",
+        "exact_equal": true
+      }
+    },
+    "reward_kills": 0,
+    "initial_enemies": 100,
+    "frames": 24,
+    "paired_frames_candidate_faster": 15,
+    "paired_frames": 24
+  },
+  "ember_deaths": {
+    "before": {
+      "max_us": 635268,
+      "mean_us": 45278.32666666667,
+      "n": 150,
+      "over_16_7_ms": 64,
+      "over_33_3_ms": 53,
+      "p50_us": 12432,
+      "p95_us": 148306
+    },
+    "after": {
+      "max_us": 564997,
+      "mean_us": 34848.94,
+      "n": 150,
+      "over_16_7_ms": 59,
+      "over_33_3_ms": 52,
+      "p50_us": 8709,
+      "p95_us": 118826
+    },
+    "mean_change_fraction": -0.23033948987219632,
+    "median_change_fraction": -0.29946911196911197,
+    "p95_change_fraction": -0.1987782018259544,
+    "peak_change_fraction": -0.11061630681853962,
+    "equal": {
+      ".bin": {
+        "bytes": 109388768,
+        "sha256": "8e3ea9b53c6ed033c5f15b9286118332241b4f4ab08139ab816c4af2da79b2a3",
+        "exact_equal": true
+      },
+      ".save": {
+        "bytes": 14160,
+        "sha256": "86be411f36df6cb337303a6435982123b0295326ccae1d56065b30b9e21fe70a",
+        "exact_equal": true
+      }
+    },
+    "reward_kills": 27,
+    "initial_enemies": 100,
+    "frames": 150,
+    "paired_frames_candidate_faster": 148,
+    "paired_frames": 150
+  }
+}
