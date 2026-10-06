@@ -227,6 +227,12 @@ static func incoming_burn(raw_amount:Variant,fire_resistance:Variant,shield:Vari
 	if not profile.ok:return profile
 	var raw:float=float(raw_amount);var resistance:float=profile.effective_resistances.fire
 	var amount:float=raw*(1.0-resistance)
+	# This private receipt is already proved valid by the raw/profile checks.
+	# Keep public settlement validation for every other actor and option.
+	if actor=="monster" and _finite_number(ratio) and float(ratio)==0.0 and _finite_number(max_fire_bonus) and float(max_fire_bonus)==0.0:
+		var resources_error:String=_resources_error(shield,health)
+		if not resources_error.is_empty():return _failure(resources_error)
+		return _settle_validated_monster_burn(raw,resistance,amount,float(shield),float(health))
 	var resolved:Dictionary={"total":amount,"components":{"fire":amount},"details":[{"type":"fire","before_defense":raw,"resistance":resistance,"final":amount}]}
 	var result:Dictionary=settle_with_mana(resolved,shield,health,mana,ratio) if not _finite_number(ratio) or float(ratio)!=0.0 else settle_resolved(resolved,shield,health)
 	# All original parameter errors retain precedence over the appended bonus.
@@ -241,6 +247,23 @@ static func incoming_burn(raw_amount:Variant,fire_resistance:Variant,shield:Vari
 		result=settle_with_mana(resolved,shield,health,mana,ratio) if float(ratio)!=0.0 else settle_resolved(resolved,shield,health)
 	if result.ok:result.actor=actor;result.stage="burning"
 	return result
+
+
+## Only incoming_burn calls this after authoritative raw, fire and pool checks.
+## Preserve the general receipt's types, insertion order and exact arithmetic.
+static func _settle_validated_monster_burn(raw:float,resistance:float,amount:float,shield:float,health:float)->Dictionary:
+	var total:float=0.0
+	total+=amount # validate_components starts at +0.0, including for -0.0 damage.
+	var shield_spent:float=minf(shield,total)
+	var after_shield:float=maxf(0.0,total-shield_spent)
+	var health_lost:float=minf(health,after_shield)
+	var details:Array[Dictionary]=[{"type":"fire","before_defense":raw,"resistance":resistance,"final":amount}]
+	return {"ok":true,"reason":"","raw_components":{"fire":raw},
+		"components":{"fire":amount},"mitigated_components":{"fire":raw-amount},
+		"damage_total":total,"shield_spent":shield_spent,"health_lost":health_lost,
+		"remaining_shield":shield-shield_spent,"remaining_health":health-health_lost,
+		"overkill":maxf(0.0,after_shield-health_lost),"details":details,
+		"actor":"monster","stage":"burning"}
 
 
 static func validate_components(components: Variant) -> Dictionary:
