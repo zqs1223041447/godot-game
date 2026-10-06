@@ -1,0 +1,57 @@
+{
+  "started_utc": "2026-10-06T13:27:39.864574+00:00",
+  "elapsed_seconds": 4.491,
+  "baseline_commit": "33ed04b73edf3545b98339291df81b4c49f891cf",
+  "worktree_head": "33ed04b73edf3545b98339291df81b4c49f891cf",
+  "godot_version": "4.6.3.stable.official.7d41c59c4",
+  "command": [
+    "/usr/local/bin/godot",
+    "--headless",
+    "--path",
+    "/workspace/scratch/a51485f153de/v080-passive-resource-wording",
+    "--script",
+    "res://tests/passive_resource_wording_test.gd"
+  ],
+  "isolation": {
+    "XDG_DATA_HOME": "/tmp/godot-m1-v080-wording/20261006T132739.864574Z-y0dw7u_g/data",
+    "XDG_CONFIG_HOME": "/tmp/godot-m1-v080-wording/20261006T132739.864574Z-y0dw7u_g/config",
+    "XDG_CACHE_HOME": "/tmp/godot-m1-v080-wording/20261006T132739.864574Z-y0dw7u_g/cache"
+  },
+  "uses_existing_shared_import": true,
+  "exit_code": 0,
+  "timed_out": false,
+  "checks": 447,
+  "failures": 0,
+  "engine_errors": [],
+  "input_sha256_before": {
+    "project.godot": "6985acdd769b390393eeef2d11e86b5a65e48bbebf552d76c9f65296fecd779d",
+    "tests/passive_resource_wording_test.gd": "6af6f94e711326d54fb1969f3a37760917110690e0bc9acbe40f093e5754262b",
+    "scripts/canonical_game_state.gd": "4322e78da73e1deb5c14cb4998b8ab7c664dffa4c0d44e376460e902a7317000",
+    "scripts/ui/canonical_passive_panel.gd": "7feb6fd5d6b40cf5d8aed54e4465630c6ba0f3cc37ffb432e15e7d65ce8bd054",
+    "scripts/ui/source_passive_tree_view.gd": "7e393571017e6d247dd4578f44ab39bae36e370c19ebeb370e37c87ecc701e84",
+    "scripts/passives/source_tree_data.gd": "d8863d372b77b043974afa5398f0cd3a22965e6caf2af51205163ad10dff024b",
+    "scripts/passives/source_tree_runtime.gd": "38b59748c87e34b7dd9e323dd100aca386a2d66fb40f2ffe0e1bae79e8539a62",
+    "scripts/passives/source_stat_patterns.gd": "7d0e3c68e1f54c9a14a214a6f08298a0a03e244550d54bcd9201e7d0933effb6",
+    "scripts/passives/source_tree_localization.gd": "95f6c191a5da8a9617f3384e51d19a10940bfa93f877e02b74741a11c762deb0",
+    "data/passives/official_tree_runtime.json": "9774a8ec1fe16199e775fe99a20853837ca8c7725c48dfcd9d6ee69646ff934f",
+    "data/passive_source/localization_zh_CN.json": "ae6fc9a89b8fa4da8c22971c94e4eea79b307769c318db19c543220062eed959",
+    "tools/passive_import/build_source_tree_zh.py": "68ad3c0d727cb4c9647e974adb7c758d89ffb9916d763ceff281d177bf94e086"
+  },
+  "input_sha256_after": {
+    "project.godot": "6985acdd769b390393eeef2d11e86b5a65e48bbebf552d76c9f65296fecd779d",
+    "tests/passive_resource_wording_test.gd": "6af6f94e711326d54fb1969f3a37760917110690e0bc9acbe40f093e5754262b",
+    "scripts/canonical_game_state.gd": "4322e78da73e1deb5c14cb4998b8ab7c664dffa4c0d44e376460e902a7317000",
+    "scripts/ui/canonical_passive_panel.gd": "7feb6fd5d6b40cf5d8aed54e4465630c6ba0f3cc37ffb432e15e7d65ce8bd054",
+    "scripts/ui/source_passive_tree_view.gd": "7e393571017e6d247dd4578f44ab39bae36e370c19ebeb370e37c87ecc701e84",
+    "scripts/passives/source_tree_data.gd": "d8863d372b77b043974afa5398f0cd3a22965e6caf2af51205163ad10dff024b",
+    "scripts/passives/source_tree_runtime.gd": "38b59748c87e34b7dd9e323dd100aca386a2d66fb40f2ffe0e1bae79e8539a62",
+    "scripts/passives/source_stat_patterns.gd": "7d0e3c68e1f54c9a14a214a6f08298a0a03e244550d54bcd9201e7d0933effb6",
+    "scripts/passives/source_tree_localization.gd": "95f6c191a5da8a9617f3384e51d19a10940bfa93f877e02b74741a11c762deb0",
+    "data/passives/official_tree_runtime.json": "9774a8ec1fe16199e775fe99a20853837ca8c7725c48dfcd9d6ee69646ff934f",
+    "data/passive_source/localization_zh_CN.json": "ae6fc9a89b8fa4da8c22971c94e4eea79b307769c318db19c543220062eed959",
+    "tools/passive_import/build_source_tree_zh.py": "68ad3c0d727cb4c9647e974adb7c758d89ffb9916d763ceff281d177bf94e086"
+  },
+  "inputs_unchanged": true,
+  "stdout_sha256": "a65521bb568340bc8f56464e05743a020b1f1d004c4db72a9248b94db898b720",
+  "passed": true
+}

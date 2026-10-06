@@ -1032,6 +1032,16 @@ MULTILINE_OVERRIDES = {
 # Reviewed exact single-row exceptions for common source grammar that does not
 # map cleanly through word-by-word translation (negation, state, and timing).
 SINGLE_LINE_OVERRIDES = {
+    "5% increased Mana Cost of Skills": "技能的魔力消耗提高5%",
+    "10% increased Mana Cost of Skills": "技能的魔力消耗提高10%",
+    "30% increased Mana Regeneration Rate": "魔力再生速率提高30%",
+    "Regenerate 10 Life per second": "每秒再生10点生命",
+    "Regenerate 1.2% of Life per second": "每秒再生相当于最大生命1.2%的生命",
+    "100% increased total Recovery per second from Life Leech": "生命偷取的每秒总回复速率提高100%",
+    "100% increased total Recovery per second from Mana Leech": "魔力偷取的每秒总回复速率提高100%",
+    "40% increased Maximum total Life Recovery per second from Leech": "生命偷取的每秒总回复上限提高40%",
+    "50% increased Maximum total Mana Recovery per second from Leech": "魔力偷取的每秒总回复上限提高50%",
+
     "Life Regeneration is applied to Energy Shield instead": "生命再生改为作用于能量护盾",
     "40% of Damage is taken from Mana before Life": "所受伤害的40%优先由魔力承担，再由生命承担",
     "10% of Damage is taken from Mana before Life": "所受伤害的10%优先由魔力承担，再由生命承担",
