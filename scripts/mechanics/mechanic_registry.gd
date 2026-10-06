@@ -40,7 +40,7 @@ static func policy_version() -> String:
 
 
 static func canonical_id(id: String) -> String:
-	if id == SourceGrants.ID: return id
+	if SourceGrants.owns(id): return id
 	if _definitions.has(id):
 		return id
 	var target: String = str(ALIASES.get(id, ""))
@@ -52,7 +52,8 @@ static func get_ids(actor: String = "") -> Array[String]:
 	for id: String in _definitions:
 		if actor.is_empty() or is_supported(id, actor):
 			result.append(id)
-	if actor.is_empty() or is_supported(SourceGrants.ID, actor): result.append(SourceGrants.ID)
+	for id: String in SourceGrants.IDS:
+		if actor.is_empty() or is_supported(id, actor): result.append(id)
 	return result
 
 
@@ -61,7 +62,7 @@ static func get_definition(id: String) -> Dictionary:
 	if canonical.is_empty():
 		return {}
 	var result: Dictionary
-	if canonical == SourceGrants.ID:
+	if SourceGrants.owns(canonical):
 		var source := SourceGrants.resolve(canonical)
 		if not source.ok: return {}
 		result = source.definition.duplicate(true)
@@ -75,7 +76,7 @@ static func get_definition(id: String) -> Dictionary:
 	result["kind"] = "stat_bundle"
 	result["schema_version"] = SCHEMA_VERSION
 	result["definition_revision"] = _revision
-	if canonical != SourceGrants.ID: result["policy_version"] = policy_version()
+	if not SourceGrants.owns(canonical): result["policy_version"] = policy_version()
 	result["supported_actors"] = actors
 	result["support_reason"] = support_reason(canonical, "monster")
 	return result
@@ -88,10 +89,12 @@ static func support_reason(id: String, actor: String) -> String:
 	if canonical.is_empty():
 		return "Unknown mechanism: " + id
 	var stats: Dictionary
-	if canonical == SourceGrants.ID:
+	if SourceGrants.owns(canonical):
 		var source := SourceGrants.resolve(canonical)
 		if not source.ok: return source.reason
-		stats = source.stats
+		# Exact source-ID admission validated stat AND mode in the adapter.
+		# Do not widen the legacy monster whitelist (e.g. poe_global_damage).
+		return ""
 	else:
 		stats = _definitions[canonical]["stats"]
 	var invalid: String = _stats_error(stats)
@@ -151,16 +154,21 @@ static func resolve_grants(ids: Array, actor: String = "player", role_coefficien
 			errors.append(reason)
 	var stats: Dictionary = {}
 	var source_grants: Array[Dictionary] = []
+	var capacity_increased: Dictionary = {}
 	if errors.is_empty():
 		for id: String in canonical_ids:
 			var definition_stats: Dictionary
-			if id == SourceGrants.ID:
+			if SourceGrants.owns(id):
 				var source := SourceGrants.resolve(id)
 				if not source.ok:
 					errors.append(source.reason)
 					break
 				definition_stats = source.stats
 				source_grants.append(source.definition.duplicate(true))
+				for stat: String in source.get("capacity_increased", {}):
+					var value: float = float(capacity_increased.get(stat, 0.0)) + float(source.capacity_increased[stat]) * role_coefficient
+					if not is_finite(value): errors.append("Source capacity increase overflow: " + stat)
+					else: capacity_increased[stat] = value
 			else:
 				definition_stats = _definitions[id]["stats"]
 			for stat: String in definition_stats:
@@ -173,12 +181,14 @@ static func resolve_grants(ids: Array, actor: String = "player", role_coefficien
 		stats.clear()
 		canonical_ids.clear()
 		source_grants.clear()
+		capacity_increased.clear()
 	var result := {"ok": errors.is_empty(), "stats": stats, "mechanism_ids": canonical_ids,
 		"errors": errors, "actor": actor, "role_coefficient": role_coefficient,
 		"schema_version": SCHEMA_VERSION, "definition_revision": _revision, "policy_version": policy_version()}
 	if not source_grants.is_empty():
 		result.source_grants = source_grants
 		result.policy_version = policy_version() + "+" + str(source_grants[0].policy_version)
+	if not capacity_increased.is_empty(): result.capacity_increased = capacity_increased
 	return result
 
 
@@ -186,7 +196,7 @@ static func set_definition_stats(id: String, stats: Dictionary) -> bool:
 	# Content tuning is atomic and preserves the complete existing effect contract.
 	# New mechanisms/stat fields belong in this registry, not arbitrary runtime payloads.
 	var canonical: String = canonical_id(id)
-	if canonical.is_empty() or canonical == SourceGrants.ID or not _stats_error(stats).is_empty():
+	if canonical.is_empty() or SourceGrants.owns(canonical) or not _stats_error(stats).is_empty():
 		return false
 	var original: Dictionary = _definitions[canonical]["stats"]
 	if stats.size() != original.size():

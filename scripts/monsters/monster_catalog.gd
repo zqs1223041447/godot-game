@@ -43,8 +43,10 @@ const SPECIES: Array[Dictionary] = [
 ]
 const AFFIX_POOL: Array[String] = ["ember_power", "gale_stride", "grove_vitality", "aegis_capacity", "aegis_recovery"]
 const LEGACY_ROLL_POLICY := "legacy_flat_v1"
-const CURRENT_ROLL_POLICY := "source_stride_v1"
-const CURRENT_AFFIX_POOL: Array[String] = ["ember_power", "source_gale_stride", "grove_vitality", "aegis_capacity", "aegis_recovery"]
+const STRIDE_ROLL_POLICY := "source_stride_v1"
+const CURRENT_ROLL_POLICY := "source_damage_life_v2"
+const STRIDE_AFFIX_POOL: Array[String] = ["ember_power", "source_gale_stride", "grove_vitality", "aegis_capacity", "aegis_recovery"]
+const CURRENT_AFFIX_POOL: Array[String] = ["source_ember_power", "source_gale_stride", "source_grove_vitality", "aegis_capacity", "aegis_recovery"]
 const TEMPLATES: Dictionary = {
 	"crawler": {"name": "巡游体", "kind": 0, "rarity": "normal", "mechanisms": [], "death_spawns": []},
 	"skitter": {"name": "掠行体", "kind": 1, "rarity": "normal", "mechanisms": [], "death_spawns": []},
@@ -162,11 +164,22 @@ static func ordinary_roll(rng: RandomNumberGenerator, wave: int) -> Dictionary:
 
 ## A single identity replacement after the frozen sampler consumes exactly the
 ## same RNG calls; old explicit ordinary_roll remains the historical contract.
-static func ordinary_roll_current(rng: RandomNumberGenerator, wave: int) -> Dictionary:
+static func ordinary_roll_source_stride(rng: RandomNumberGenerator, wave: int) -> Dictionary:
 	var result := ordinary_roll(rng, wave)
 	for index: int in range(result.mechanisms.size()):
 		if result.mechanisms[index] == "gale_stride":
 			result.mechanisms[index] = "source_gale_stride"
+	return result
+
+
+## Current v2 remaps only draws from the ordinary three-species pool.
+## Special splitter/brood templates carry explicit historical bundles.
+static func ordinary_roll_current(rng: RandomNumberGenerator, wave: int) -> Dictionary:
+	var result := ordinary_roll_source_stride(rng, wave)
+	if result.template not in ["crawler", "skitter", "brute"]: return result
+	for index: int in range(result.mechanisms.size()):
+		if result.mechanisms[index] == "ember_power": result.mechanisms[index] = "source_ember_power"
+		elif result.mechanisms[index] == "grove_vitality": result.mechanisms[index] = "source_grove_vitality"
 	return result
 
 
@@ -280,6 +293,11 @@ static func make_enemy(id: int, template_id: String, wave: int, position: Vector
 	var tier: Dictionary = RARITIES[rarity]
 	var modifiers: Dictionary = resolved.stats
 	var hp: float = float(species.health) * (1.0 + (wave - 1) * 0.16) * float(tier.health) + float(modifiers.get("max_health", 0.0))
+	# Capacity increases retain their typed mode; never add .05 as flat life.
+	var life_increase: float = float(resolved.get("capacity_increased", {}).get("max_health", 0.0))
+	if life_increase != 0.0:
+		hp *= 1.0 + life_increase
+		if not is_finite(hp) or hp <= 0.0: return {}
 	var maximum_shield: float = float(modifiers.get("max_shield", 0.0))
 	var defense: Dictionary = Defense.defense_profile(template.get("defense_stats", {}), "monster")
 	var recharge:=Defense.recharge_profile(modifiers,"monster")
@@ -307,6 +325,10 @@ static func make_enemy(id: int, template_id: String, wave: int, position: Vector
 		# authored species/wave/flat base, before optional map multipliers.
 		result.speed *= 1.0 + float(modifiers.get("move_speed_increased", 0.0))
 		if not is_finite(result.speed) or result.speed < 0.0: return {}
+		var damage_increase: float = float(modifiers.get("global_increased", 0.0))
+		if damage_increase != 0.0:
+			result.damage *= 1.0 + damage_increase
+			if not is_finite(result.damage) or result.damage < 0.0: return {}
 		result.mechanism_source_grants = resolved.source_grants.duplicate(true)
 	if template_id == "mist_skitter":
 		result.health *= float(MIST_SKITTER_POLICY.health_multiplier)
