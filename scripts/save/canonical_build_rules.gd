@@ -36,7 +36,8 @@ const V35_VERSION := 35
 const V36_VERSION := 36
 const V37_VERSION := 37
 const V38_VERSION := 38
-const VERSION := 39
+const V39_VERSION := 39
+const VERSION := 40
 const LEGACY_MAX_ITEMS := 1024
 const V17_MAX_ITEMS := LEGACY_MAX_ITEMS + 1
 const MAX_ITEMS := V17_MAX_ITEMS + 2 # Two once-only migration bottles; bag capacity is unchanged.
@@ -77,6 +78,12 @@ static func decode_v28(raw: Variant) -> Dictionary:
 
 static func decode_v29(raw: Variant) -> Dictionary:
 	return _decode(raw, true, V29_VERSION, true)
+
+
+## Freeze all schema39 fields, source policy38 and equipment vocabulary39.
+static func decode_v39(raw: Variant) -> Dictionary:
+	var decoded := _decode(raw, true, V39_VERSION, true)
+	return decoded if reason_v39(decoded).is_empty() else {}
 
 
 ## Freeze all schema38 fields, source policy38 and equipment vocabulary37.
@@ -254,6 +261,13 @@ static func reason_v29(value: Variant, validate_talents: Callable = Callable(), 
 	return _reason(value, V29_VERSION, true, true, MAX_ITEMS, validate_talents, socket_ids)
 
 
+static func reason_v39(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
+	# Frozen native legality is mandatory; callbacks can only add restrictions.
+	var native_reason := _reason(value, V39_VERSION, true, true, MAX_ITEMS, Callable(), socket_ids)
+	if not native_reason.is_empty(): return native_reason
+	return str(validate_talents.call(value)) if validate_talents.is_valid() else ""
+
+
 static func reason_v38(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
 	# Frozen native source and equipment legality always precede extra restrictions.
 	var native_reason := _reason(value, V38_VERSION, true, true, MAX_ITEMS, Callable(), socket_ids)
@@ -415,10 +429,10 @@ static func _reason(value: Variant, expected_version: int, paged: bool, allow_cu
 	return str(validate_talents.call(value)) if validate_talents.is_valid() else SourceTree.reason(value)
 
 
-## Source-only save schemas35/36/38 never defined equipment vocabularies.
+## Source-only save schemas35/36/38/40 never defined equipment vocabularies.
 ## Keep save-to-equipment mapping explicit and the Catalog API historically strict.
 static func equipment_vocabulary_for_save_version(save_version: int) -> int:
-	if save_version >= VERSION: return 39
+	if save_version >= V39_VERSION: return 39
 	if save_version >= V37_VERSION: return 37
 	return 34 if save_version >= V34_VERSION else save_version
 

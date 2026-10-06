@@ -21,6 +21,15 @@ const STAT_CONSUMER_GROUPS := {
 		],
 		"stats": ["strength", "dexterity", "intelligence", "max_health", "max_mana", "max_shield", "life_regen", "life_regen_percent", "accuracy", "accuracy_increased", "evasion", "evasion_increased", "armour", "armour_increased", "fire_resistance", "cold_resistance", "lightning_resistance"]
 	},
+	"iron_reflexes": {
+		"evidence": "source_tree_runtime.gd::apply_stats -> iron_reflexes_rules.gd::profile -> canonical_game_state.gd::get_stats -> existing attack admission and physical hit mitigation",
+		"code_checks": [
+			{"path": "scripts/passives/source_tree_runtime.gd", "contains": "IronReflexes.profile"},
+			{"path": "scripts/mechanics/iron_reflexes_rules.gd", "contains": "static func profile"},
+			{"path": "scripts/canonical_game_state.gd", "contains": "get_defense_conversion_profile"},
+		],
+		"stats": ["iron_reflexes"]
+	},
 	"elemental_resistance_caps": {
 		"evidence": "source_tree_runtime.gd::apply_stats -> canonical_game_state.gd::_stats_for -> defense_rules.gd::resistance_profile/source_profile/incoming_burn -> main.gd incoming hit and burn settlement",
 		"code_checks": [

@@ -1001,6 +1001,14 @@ func get_resistance_profile() -> Dictionary:
 	return Defense.resistance_profile(get_stats(), "player")
 
 
+func get_defense_conversion_profile() -> Dictionary:
+	var stats := get_stats()
+	var enabled := float(stats.get("iron_reflexes", 0.0)) > 0.0
+	return {"enabled": enabled, "armour": float(stats.armour), "evasion": float(stats.evasion),
+		"converted_armour": float(stats.get("evasion_converted_to_armour", 0.0)),
+		"dexterity_evasion_disabled": enabled}
+
+
 func normal_journey() -> Dictionary:
 	return _current.journey.duplicate(true)
 

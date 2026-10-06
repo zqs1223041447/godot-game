@@ -16,6 +16,7 @@ var _body: VBoxContainer
 var _progress: Label
 var _values: Dictionary = {}
 var _resistance_cards: Dictionary = {}
+var _defense_cards: Dictionary = {}
 
 const STAT_ROWS: Array[Dictionary] = [
 	{"id":"strength","label":"力量","format":"whole"},
@@ -58,6 +59,10 @@ func refresh() -> void:
 	_progress.text = "Lv.%d   ·   经验 %d   ·   未用天赋点 %d" % [int(model.level), int(model.xp), int(model.talent_points)]
 	var stats: Dictionary = model.get_stats()
 	var resistance_profile: Dictionary = model.get_resistance_profile() if model.has_method("get_resistance_profile") else {}
+	var conversion: Dictionary = model.get_defense_conversion_profile() if model.has_method("get_defense_conversion_profile") else {}
+	var tips: Dictionary = defense_tooltips(conversion)
+	for id: String in _defense_cards:
+		_defense_cards[id].tooltip_text = tips[id]
 	var leech: Dictionary = leech_stat_values(model.get_leech_profile()) if model.has_method("get_leech_profile") else {}
 	stats = stats.duplicate()
 	stats.merge(leech)
@@ -84,6 +89,13 @@ func refresh() -> void:
 		_values[id].text = formatted
 	_dirty = false
 	refresh_generation += 1
+
+
+static func defense_tooltips(profile: Dictionary) -> Dictionary:
+	if bool(profile.get("enabled", false)):
+		return {"armour":"闪避转为护甲：贡献 %.2f 护甲，已计入上方数值。护甲只减少物理命中伤害。" % float(profile.get("converted_armour", 0.0)),
+			"evasion":"全部闪避值已转为护甲；敏捷不再提高闪避值，仍提高命中值。"}
+	return {"armour":"护甲减伤随每次物理命中大小变化。", "evasion":"攻击命中率取决于目标闪避；法术不进行闪避判定。"}
 
 
 static func leech_stat_values(profile: Dictionary) -> Dictionary:
@@ -151,6 +163,7 @@ func _build() -> void:
 		value.add_theme_color_override("font_color", ThemeStyle.TEXT)
 		stack.add_child(value)
 		_values[str(row.id)] = value
+		if row.id in ["armour", "evasion"]: _defense_cards[str(row.id)] = card
 		if row.id in ["accuracy","evasion"]: card.tooltip_text = "攻击命中率取决于目标闪避；法术不进行闪避判定。"
 		elif row.id == "shield_recharge_rate": card.tooltip_text = "等待结束后的实际每秒护盾充能；换装或退款会更新速率。即时回盾另行结算。"
 		elif row.id == "shield_recharge_delay": card.tooltip_text = "下一次有效损伤后的充能等待。闪避或零伤害不重置；已经开始的等待不随换装或退款改变。"

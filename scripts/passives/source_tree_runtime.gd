@@ -6,6 +6,7 @@ extends RefCounted
 const Data = preload("res://scripts/passives/source_tree_data.gd")
 const Allocation = preload("res://scripts/passives/source_tree_allocation_rules.gd")
 const Patterns = preload("res://scripts/passives/source_stat_patterns.gd")
+const IronReflexes = preload("res://scripts/mechanics/iron_reflexes_rules.gd")
 const Jewels = preload("res://scripts/jewel_data.gd")
 const Locations = preload("res://scripts/items/item_location_rules.gd")
 const TALENT_KEYS := ["source_version","class_id","allocated","masteries","ascendancy","ascendancy_allocated","normal_points","ascendancy_points"]
@@ -20,7 +21,8 @@ const FASTER_BURN_SAVE_VERSION:=33
 const MANA_GUARD_SAVE_VERSION:=35
 const ELEMENTAL_RESISTANCE_CAP_SAVE_VERSION:=36
 const RESOLUTE_TECHNIQUE_SAVE_VERSION:=38
-const CURRENT_SAVE_VERSION:=RESOLUTE_TECHNIQUE_SAVE_VERSION
+const IRON_REFLEXES_SAVE_VERSION:=40
+const CURRENT_SAVE_VERSION:=IRON_REFLEXES_SAVE_VERSION
 static var _contexts: Dictionary = {}
 static var _line_cache: Dictionary = {}
 static var _node_effect_cache: Dictionary = {}
@@ -39,7 +41,8 @@ static func _execution_policy(version:int)->int:
 	if version<FASTER_BURN_SAVE_VERSION:return FIRE_DOT_SAVE_VERSION
 	if version<MANA_GUARD_SAVE_VERSION:return FASTER_BURN_SAVE_VERSION
 	if version<ELEMENTAL_RESISTANCE_CAP_SAVE_VERSION:return MANA_GUARD_SAVE_VERSION
-	return ELEMENTAL_RESISTANCE_CAP_SAVE_VERSION if version<RESOLUTE_TECHNIQUE_SAVE_VERSION else RESOLUTE_TECHNIQUE_SAVE_VERSION
+	if version<RESOLUTE_TECHNIQUE_SAVE_VERSION:return ELEMENTAL_RESISTANCE_CAP_SAVE_VERSION
+	return RESOLUTE_TECHNIQUE_SAVE_VERSION if version<IRON_REFLEXES_SAVE_VERSION else IRON_REFLEXES_SAVE_VERSION
 
 
 static func _context(class_id: int, budget: int) -> Dictionary:
@@ -128,7 +131,7 @@ static func lines_for(id: String, mastery_effect: int = 0) -> Array:
 static func line_effect(line: String, save_version:int=CURRENT_SAVE_VERSION) -> Dictionary:
 	var policy:int=_execution_policy(save_version)
 	var key:="%d:%s"%[policy,line]
-	if not _line_cache.has(key): _line_cache[key] = Patterns.parse_line(line,policy>=SPATIAL_SAVE_VERSION,policy>=RECHARGE_SAVE_VERSION,policy>=RESOURCE_SAVE_VERSION,policy>=FLASK_SAVE_VERSION,policy>=CRITICAL_SAVE_VERSION,policy>=LEECH_SAVE_VERSION,policy>=FIRE_DOT_SAVE_VERSION,policy>=FASTER_BURN_SAVE_VERSION,policy>=MANA_GUARD_SAVE_VERSION,policy>=ELEMENTAL_RESISTANCE_CAP_SAVE_VERSION,policy>=RESOLUTE_TECHNIQUE_SAVE_VERSION)
+	if not _line_cache.has(key): _line_cache[key] = Patterns.parse_line(line,policy>=SPATIAL_SAVE_VERSION,policy>=RECHARGE_SAVE_VERSION,policy>=RESOURCE_SAVE_VERSION,policy>=FLASK_SAVE_VERSION,policy>=CRITICAL_SAVE_VERSION,policy>=LEECH_SAVE_VERSION,policy>=FIRE_DOT_SAVE_VERSION,policy>=FASTER_BURN_SAVE_VERSION,policy>=MANA_GUARD_SAVE_VERSION,policy>=ELEMENTAL_RESISTANCE_CAP_SAVE_VERSION,policy>=RESOLUTE_TECHNIQUE_SAVE_VERSION,policy>=IRON_REFLEXES_SAVE_VERSION)
 	return _line_cache[key].duplicate(true)
 
 
@@ -169,6 +172,7 @@ static func apply_stats(stats: Dictionary, candidate: Dictionary) -> Dictionary:
 		for grant: Dictionary in effect.grants:
 			if grant.mode == "increased" and capacity_increased.has(grant.stat):
 				capacity_increased[grant.stat] += float(grant.value)
+			elif grant.stat == "iron_reflexes": result.iron_reflexes = 1.0
 			elif result.has(grant.stat): result[grant.stat] += float(grant.value)
 	# Every slotted jewel was admitted by the same allocation validator. Sum raw
 	# flat/increased modifiers before final capacity/rate stages, never per item.
@@ -185,11 +189,39 @@ static func apply_stats(stats: Dictionary, candidate: Dictionary) -> Dictionary:
 	result.melee_physical_increased = float(result.get("melee_physical_increased",0.0)) + floorf(float(result.strength)/5.0)*0.01
 	capacity_increased.max_shield += floorf(float(result.intelligence)/10.0)*0.01
 	result.accuracy = (float(result.get("accuracy",100.0))+2.0*float(result.dexterity)) * (1.0+float(result.get("accuracy_increased",0.0)))
-	result.evasion = float(result.get("evasion",15.0)) * (1.0+float(result.get("evasion_increased",0.0))+floorf(float(result.dexterity)/5.0)*0.01)
-	result.armour = float(result.get("armour",0.0))*(1.0+float(result.get("armour_increased",0.0)))
+	if float(result.get("iron_reflexes", 0.0)) > 0.0:
+		var conversion := IronReflexes.profile(float(result.get("armour", 0.0)), float(result.get("evasion", 15.0)),
+			float(result.get("armour_increased", 0.0)), float(result.get("evasion_increased", 0.0)), _shared_defense_increased(candidate))
+		assert(conversion.ok, "Validated source defence conversion must compile")
+		result.armour = conversion.armour
+		result.evasion = conversion.evasion
+		result.evasion_converted_to_armour = conversion.converted_armour
+	else:
+		result.evasion = float(result.get("evasion",15.0)) * (1.0+float(result.get("evasion_increased",0.0))+floorf(float(result.dexterity)/5.0)*0.01)
+		result.armour = float(result.get("armour",0.0))*(1.0+float(result.get("armour_increased",0.0)))
 	for stat: String in capacity_increased: result[stat] *= 1.0 + float(capacity_increased[stat])
 	result.life_regen = float(result.get("life_regen",0.0)) + float(result.get("life_regen_percent",0.0))*float(result.max_health)
 	return result
+
+
+## Count a compound source modifier once on the converted portion. Two separate
+## source entries never share identity, even when their numeric values are equal.
+## Current equipment/jewels supply flat ratings only, so all rating-increase
+## provenance is preserved here in the authoritative source entry boundary.
+static func _shared_defense_increased(candidate: Dictionary) -> float:
+	var shared := 0.0
+	for id: String in candidate.talents.allocated:
+		for line: String in lines_for(id, int(candidate.talents.masteries.get(id, 0))):
+			var parsed := line_effect(line, int(candidate.get("version", CURRENT_SAVE_VERSION)))
+			if not parsed.supported: continue
+			var armour := 0.0
+			var evasion := 0.0
+			for grant: Dictionary in parsed.grants:
+				if grant.mode != "increased": continue
+				if grant.stat == "armour_increased": armour += float(grant.value)
+				elif grant.stat == "evasion_increased": evasion += float(grant.value)
+			shared += minf(armour, evasion)
+	return shared
 
 
 static func available(candidate: Dictionary) -> Array[String]:
