@@ -1,0 +1,41 @@
+{
+  "status": "passed",
+  "base": "587c195d2a78c2028f1ae781b3aa460426fc898c",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "final_files": {
+    "tests/combat_outcome_gameplay_test.gd": "16cdcd8a954b6b055b80ddd881b5aff94713b65194ccc0f9e8baedf8ff5c2869",
+    "tools/run_v077_gameplay.py": "218eb0b9ca39dacc744816d1426d364aedfff1c28ccde21f56574364505c4c39"
+  },
+  "unique_main_checks": 230,
+  "main_failures": 0,
+  "full_gameplay_evidence": "corrected-gameplay.json",
+  "focused_event_identity_evidence": "event-identity-gameplay.json",
+  "counts_explanation": "228 accepted full checks with real_attack_paths 25 replaced by 27 in focused rerun: 230 unique checks. Legal-source prerequisite reruns are not added.",
+  "legacy_terminal_checks_per_version": 21,
+  "legacy_failures": 0,
+  "legacy_comparison": {
+    ".bin": {
+      "equal": true,
+      "bytes": 6956972,
+      "old_sha256": "53c7f5ff9fd220c052cafeb97e54c20bbb3cdcdacd646247762c359ee9c6a5b5",
+      "new_sha256": "53c7f5ff9fd220c052cafeb97e54c20bbb3cdcdacd646247762c359ee9c6a5b5"
+    },
+    ".save": {
+      "equal": true,
+      "bytes": 12511,
+      "old_sha256": "9059b58d2a29a34779135e3c4acce4aa26225d9a80cbb41502a42a253ea64327",
+      "new_sha256": "9059b58d2a29a34779135e3c4acce4aa26225d9a80cbb41502a42a253ea64327"
+    }
+  },
+  "baseline_verified_files": 412,
+  "source_manifest": "accepted-legacy-sources.json",
+  "preserved_initial_failures": [
+    "first-gameplay.log",
+    "first-gameplay.json",
+    "first-sources.json",
+    "legacy-v076.log",
+    "legacy-v076-run.json",
+    "legacy-v076.json",
+    "legacy-sources.json"
+  ]
+}

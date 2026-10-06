@@ -1,0 +1,144 @@
+{
+  "base_commit": "587c195d2a78c2028f1ae781b3aa460426fc898c",
+  "stage_commit": "78b7c1cf8c0d25d18e0b2d95f515eb7b78dc371e",
+  "source_only": true,
+  "checks": {
+    "pure_runtime": 3638,
+    "main_unique": 230,
+    "presentation": 13,
+    "combined_functional": 3881,
+    "oracle_each_revision": 21
+  },
+  "production_inputs": 553,
+  "stage_inputs_unchanged": 552,
+  "extra_final_manifest_input": "export_presets.cfg (unchanged baseline; absent from stage manifest)",
+  "save_schema": 47,
+  "source_policy": 45,
+  "gear_vocabulary": 46,
+  "legacy_comparison": {
+    ".bin": {
+      "equal": true,
+      "bytes": 6956972,
+      "old_sha256": "53c7f5ff9fd220c052cafeb97e54c20bbb3cdcdacd646247762c359ee9c6a5b5",
+      "new_sha256": "53c7f5ff9fd220c052cafeb97e54c20bbb3cdcdacd646247762c359ee9c6a5b5"
+    },
+    ".save": {
+      "equal": true,
+      "bytes": 12511,
+      "old_sha256": "9059b58d2a29a34779135e3c4acce4aa26225d9a80cbb41502a42a253ea64327",
+      "new_sha256": "9059b58d2a29a34779135e3c4acce4aa26225d9a80cbb41502a42a253ea64327"
+    }
+  },
+  "font": {
+    "sha256": "74a2ff2eac4a552a7d891ebb420502ddbbe632ea46a29adb67c2ec9bcf90caeb",
+    "mapped": 1661,
+    "runtime_files": 201,
+    "fresh_scanned": 5,
+    "missing": []
+  },
+  "scope": "Bounded presentation observations only; no projectile event injection, repeated geometry or new RNG. Birth protection records settlement-entry refusals only. F8 numerical catalog and all assets/data/scenes unchanged.",
+  "gameplay_production_changes": [
+    "project.godot",
+    "scripts/combat/combat_feedback_runtime.gd",
+    "scripts/game_hud.gd",
+    "scripts/main.gd",
+    "scripts/visuals/combat_feedback_renderer.gd"
+  ],
+  "gameplay_acceptance": {
+    "status": "passed",
+    "base": "587c195d2a78c2028f1ae781b3aa460426fc898c",
+    "godot": "4.6.3.stable.official.7d41c59c4",
+    "final_files": {
+      "tests/combat_outcome_gameplay_test.gd": "16cdcd8a954b6b055b80ddd881b5aff94713b65194ccc0f9e8baedf8ff5c2869",
+      "tools/run_v077_gameplay.py": "218eb0b9ca39dacc744816d1426d364aedfff1c28ccde21f56574364505c4c39"
+    },
+    "unique_main_checks": 230,
+    "main_failures": 0,
+    "full_gameplay_evidence": "corrected-gameplay.json",
+    "focused_event_identity_evidence": "event-identity-gameplay.json",
+    "counts_explanation": "228 accepted full checks with real_attack_paths 25 replaced by 27 in focused rerun: 230 unique checks. Legal-source prerequisite reruns are not added.",
+    "legacy_terminal_checks_per_version": 21,
+    "legacy_failures": 0,
+    "legacy_comparison": {
+      ".bin": {
+        "equal": true,
+        "bytes": 6956972,
+        "old_sha256": "53c7f5ff9fd220c052cafeb97e54c20bbb3cdcdacd646247762c359ee9c6a5b5",
+        "new_sha256": "53c7f5ff9fd220c052cafeb97e54c20bbb3cdcdacd646247762c359ee9c6a5b5"
+      },
+      ".save": {
+        "equal": true,
+        "bytes": 12511,
+        "old_sha256": "9059b58d2a29a34779135e3c4acce4aa26225d9a80cbb41502a42a253ea64327",
+        "new_sha256": "9059b58d2a29a34779135e3c4acce4aa26225d9a80cbb41502a42a253ea64327"
+      }
+    },
+    "baseline_verified_files": 412,
+    "source_manifest": "accepted-legacy-sources.json",
+    "preserved_initial_failures": [
+      "first-gameplay.log",
+      "first-gameplay.json",
+      "first-sources.json",
+      "legacy-v076.log",
+      "legacy-v076-run.json",
+      "legacy-v076.json",
+      "legacy-sources.json"
+    ]
+  },
+  "logs": {
+    "docs/qa/v077-runtime/runtime-test.log.txt": {
+      "bytes": 133,
+      "sha256": "7f872daf9b6e4b47dace9f4a49cfd52de37fd3a5632ad4704dacf66d9877feec"
+    },
+    "docs/qa/v077-runtime/runtime-test.exit.txt": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "docs/qa/v077-gameplay/event-identity-gameplay.log": {
+      "bytes": 410,
+      "sha256": "aee5d0d34b9fcd3c649a7782d69c9129264f37475d50bae370bf3a59e96732f3"
+    },
+    "docs/qa/v077-gameplay/legacy-v076.log": {
+      "bytes": 672,
+      "sha256": "262c10a2f47b81c0766ca72379459407910e30f40ba5bf9e63c04e7cdc8562ef"
+    },
+    "docs/qa/v077-gameplay/first-gameplay.log": {
+      "bytes": 1278,
+      "sha256": "b649f4a3218f7b9c07772e6280ef0ef70e3ec236be6c6104971e4eb74635b6ba"
+    },
+    "docs/qa/v077-gameplay/corrected-gameplay.log": {
+      "bytes": 1092,
+      "sha256": "3e5b44667a254d0088823387618539eaff407fb8afedc1d199bb809a92dfd558"
+    },
+    "docs/qa/v077-gameplay/accepted-legacy-v076.log": {
+      "bytes": 164,
+      "sha256": "0d037806d3f91328643418a666a4462447c89428bac0d566bf3aa52d26af3d97"
+    },
+    "docs/qa/v077-gameplay/accepted-legacy-v077.log": {
+      "bytes": 164,
+      "sha256": "0d037806d3f91328643418a666a4462447c89428bac0d566bf3aa52d26af3d97"
+    },
+    "docs/qa/v077-root-ui/exit-code.txt": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "docs/qa/v077-root-ui/presentation.log": {
+      "bytes": 116,
+      "sha256": "51997405d706f0423cbc7886e9afaaf5f94aa4e3ecb6c70892d7eeaa43f342da"
+    }
+  },
+  "reports": {
+    "docs/qa/v077-gameplay/acceptance.json": {
+      "bytes": 1600,
+      "sha256": "3b7c5152c44506b6405ec60b1648c6694b64f6d6a5816cc9e0ae2f730175f527"
+    },
+    "docs/qa/v077-gameplay/accepted-legacy-comparison.json": {
+      "bytes": 460,
+      "sha256": "4f4bbc767a96b52b9e5b24dff52956e167ece9c0f6ef1be27808cd6cfb728f2d"
+    },
+    "docs/qa/v077-runtime/runtime-test.sha256.txt": {
+      "bytes": 338,
+      "sha256": "5bb2c954976a2ec79ed38d444f677869f30d395e04dec83401181befeb39fee4"
+    }
+  }
+}

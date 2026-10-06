@@ -27,4 +27,8 @@ XDG_CACHE_HOME=/tmp/godot-m1-v077-runtime/cache \
 
 A pass requires process exit code 0 and `COMBAT_OUTCOME_RUNTIME_TEST_COMPLETE checks=<n> failures=0`. No historical broad suites are part of this runtime check.
 
-Status: implementation prepared; execution awaits the coordinator's project import.
+Verified 2026-10-06 after the coordinator's shared import, using Godot `4.6.3.stable.official.7d41c59c4` and the isolated XDG directories above. The first and only focused run exited 0 in approximately 0.75 seconds:
+
+`COMBAT_OUTCOME_RUNTIME_TEST_COMPLETE checks=3638 failures=0`
+
+Evidence: [stdout/stderr](runtime-test.log.txt), [exit code](runtime-test.exit.txt), and [exact source SHA-256s](runtime-test.sha256.txt). No production or test source was changed after this run. `git diff --check` passed. A direct source comparison also confirmed every original damage function is byte-identical except `advance`, `flush_target`, and `reset`, which add only the independent observer hooks.

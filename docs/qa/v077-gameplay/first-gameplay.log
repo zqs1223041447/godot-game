@@ -1,0 +1,22 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+godot-game: playable arena ready
+OUTCOME_SECTION_BEGIN legal_source_setup
+OUTCOME_SECTION_END legal_source_setup checks=19 failures=0
+OUTCOME_SECTION_BEGIN real_attack_paths
+ERROR: Actual tornado parent miss observed exactly once
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/combat_outcome_gameplay_test.gd:24)
+       [1] real_attack_paths (res://tests/combat_outcome_gameplay_test.gd:147)
+       [2] section (res://tests/combat_outcome_gameplay_test.gd:34)
+       [3] run (res://tests/combat_outcome_gameplay_test.gd:339)
+ERROR: Tornado miss emits no numeric damage
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/combat_outcome_gameplay_test.gd:24)
+       [1] real_attack_paths (res://tests/combat_outcome_gameplay_test.gd:148)
+       [2] section (res://tests/combat_outcome_gameplay_test.gd:34)
+       [3] run (res://tests/combat_outcome_gameplay_test.gd:339)
+OUTCOME_SECTION_END real_attack_paths checks=24 failures=2
+OUTCOME_GAMEPLAY {"checks":43,"failures":2,"sections":{"legal_source_setup":19,"real_attack_paths":24}}

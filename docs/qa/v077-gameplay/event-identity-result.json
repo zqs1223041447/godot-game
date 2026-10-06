@@ -1,0 +1,21 @@
+{
+  "runs": [
+    {
+      "label": "event-identity-gameplay",
+      "exit": 0,
+      "seconds": 2.975,
+      "log": "docs/qa/v077-gameplay/event-identity-gameplay.log",
+      "log_sha256": "aee5d0d34b9fcd3c649a7782d69c9129264f37475d50bae370bf3a59e96732f3",
+      "isolated_data": "/tmp/godot-m1-v077-event-identity-gameplay-2e9c611v",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/v077-combat-outcome-feedback",
+        "--script",
+        "/workspace/scratch/a51485f153de/v077-combat-outcome-feedback/tests/combat_outcome_gameplay_test.gd"
+      ]
+    }
+  ],
+  "sources": "event-identity-sources.json"
+}

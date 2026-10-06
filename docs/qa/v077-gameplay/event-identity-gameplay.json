@@ -1,0 +1,43 @@
+{
+	"attack_paths": {
+		"events": {
+			"evaded": 2,
+			"hit": 1
+		},
+		"tornado_outcomes": [
+			{
+				"at": 0.0,
+				"cast_id": 1,
+				"chance": 0.45,
+				"id": 1,
+				"outcome": "evaded",
+				"phase": "outbound",
+				"position": "(1022.0, 459.3846)",
+				"projectile_id": 1,
+				"skill_id": "tornado",
+				"target_id": 1,
+				"target_kind": "monster"
+			},
+			{
+				"at": 0.0,
+				"cast_id": 1,
+				"chance": 0.45,
+				"id": 2,
+				"outcome": "evaded",
+				"phase": "outbound",
+				"position": "(1022.0, 459.3846)",
+				"projectile_id": 2,
+				"skill_id": "tornado",
+				"target_id": 1,
+				"target_kind": "monster"
+			}
+		]
+	},
+	"checks": 46,
+	"failures": 0,
+	"scope": "Bounded actual Main, real legal gear/source APIs and isolated disk; no screenshot, export, full-history or performance claim",
+	"sections": {
+		"legal_source_setup": 19,
+		"real_attack_paths": 27
+	}
+}

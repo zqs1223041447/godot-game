@@ -1,0 +1,21 @@
+{
+  "runs": [
+    {
+      "label": "corrected-gameplay",
+      "exit": 0,
+      "seconds": 3.223,
+      "log": "docs/qa/v077-gameplay/corrected-gameplay.log",
+      "log_sha256": "3e5b44667a254d0088823387618539eaff407fb8afedc1d199bb809a92dfd558",
+      "isolated_data": "/tmp/godot-m1-v077-corrected-gameplay-bq5x4py7",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/v077-combat-outcome-feedback",
+        "--script",
+        "/workspace/scratch/a51485f153de/v077-combat-outcome-feedback/tests/combat_outcome_gameplay_test.gd"
+      ]
+    }
+  ],
+  "sources": "corrected-sources.json"
+}

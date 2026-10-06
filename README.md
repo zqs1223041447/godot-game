@@ -4,7 +4,7 @@
 
 F6新增有限结果记录，区分真实闪避、已命中零损失、投射物撞墙和实际进入结算的出生保护拒绝；极小正伤不再显示成零。保护记录不是全量候选追踪，未知目标/施放ID不编造。原命中熵、伤害、事件队列、奖励和随机流保持。
 
-[观察范围与容量](docs/COMBAT_OUTCOME_FEEDBACK.zh-CN.md)
+[观察范围与容量](docs/COMBAT_OUTCOME_FEEDBACK.zh-CN.md) · [源码验证](docs/qa/V077_COMBAT_OUTCOME_FEEDBACK_VALIDATION.zh-CN.md)
 
 ## v0.76.0 怪物护盾与充能完成源语义接线（源码更新）
 
