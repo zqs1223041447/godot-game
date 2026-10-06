@@ -25,6 +25,9 @@ const Jewels = preload("res://scripts/jewel_data.gd")
 const Combat = preload("res://scripts/combat/combat_data.gd")
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
 const Defense = preload("res://scripts/mechanics/defense_rules.gd")
+const TrapRuntime = preload("res://scripts/combat/player_trap_runtime.gd")
+var trap_runtime = TrapRuntime.new()
+var trap_trace: Array[Dictionary] = []
 const CriticalRuntime = preload("res://scripts/combat/critical_strike_runtime.gd")
 const Resolute = preload("res://scripts/combat/resolute_technique_rules.gd")
 var critical_runtime = CriticalRuntime.new()
@@ -340,6 +343,7 @@ func restart_run(camp_plan: Dictionary = {}) -> void:
 		_map_camps.clear();_camp_landmarks.clear()
 	_camp_movement.clear();_camp_requested.clear();_camp_wait_reasons.clear();_boss_requested=false
 	_normal_reset_authorized = false
+	trap_runtime.reset(); trap_trace.clear()
 	_sync_flasks(true)
 	run_revision += 1
 	critical_runtime.reset(rng.seed ^ run_revision)
@@ -569,6 +573,7 @@ func _tick(delta: float) -> void:
 	_update_auto_attack()
 	_update_projectiles(delta)
 	_advance_monster_burns(elapsed)
+	_update_traps()
 	_update_effects(delta)
 	_update_pickups(delta)
 	_start_enemy_telegraphs()
@@ -1167,6 +1172,8 @@ func _execute_compiled(compiled: Dictionary, group_id: String = "", main_uid: St
 	if mana < mana_cost:
 		hud.notify("魔力不足 · 等待恢复或拾取补给")
 		return false
+	if compiled.has("trap_profile"):
+		return _place_ambush(compiled, group_id, main_uid)
 	var volley_size: int = int(compiled.initial_count)
 	if volley_size > 0 and projectiles.size() + volley_size > MAX_PROJECTILES:
 		hud.notify("投射物空间不足以发射完整技能，本次未消耗法力或冷却")
@@ -1257,15 +1264,89 @@ func _execute_compiled(compiled: Dictionary, group_id: String = "", main_uid: St
 
 
 func _area_damage(origin: Vector2, radius: float, packet: Dictionary, color: Color, slow: float,
-		snapshot: Dictionary = {}) -> void:
+		snapshot: Dictionary = {}, provenance: Dictionary = {}) -> void:
 	if packet.is_empty():
 		return
 	var cast_snapshot: Dictionary = state.get_combat_snapshot() if snapshot.is_empty() else snapshot
 	for enemy: Dictionary in enemies:
 		if float(enemy.health) > 0.0 and float(enemy.spawn) <= 0.0 and AreaRules.contains_target(origin, Vector2(enemy.pos), radius, float(enemy.radius)) and _terrain_visible(origin,enemy.pos):
-			_apply_damage_packet(enemy, packet, cast_snapshot, color, slow)
+			_apply_damage_packet(enemy, packet, cast_snapshot, color, slow, provenance)
 			var direction: Vector2 = (Vector2(enemy.pos) - origin).normalized()
 			enemy.knockback = direction * 190.0
+
+
+func _place_ambush(compiled: Dictionary, group_id: String, main_uid: String) -> bool:
+	if not _geometry.is_clear(player_pos, PLAYER_RADIUS):
+		hud.notify("当前位置不能布置符印")
+		return false
+	if not group_id.is_empty() and (not GroupCooldowns._stable_id(group_id) or not GroupCooldowns._stable_id(main_uid)):
+		return false
+	var admitted: Dictionary = trap_runtime.can_place(elapsed, player_pos, compiled)
+	if not admitted.ok:
+		hud.notify("符印已达3枚，等待触发或消失" if admitted.get("error_code", "") == "capacity" else "符印配置无效")
+		return false
+	var checkpoint: Dictionary = critical_runtime.checkpoint()
+	var frozen: Dictionary = critical_runtime.freeze(compiled.snapshot)
+	if not frozen.ok: return false
+	# Peek at the serial; rejection does not consume an ID, mana or cooldown.
+	var cast_id: int = projectile_runtime.next_cast_id
+	var placed: Dictionary = trap_runtime.place(elapsed, player_pos, compiled, frozen.snapshot, cast_id)
+	if not placed.ok:
+		critical_runtime.restore(checkpoint)
+		return false
+	var committed_id: int = projectile_runtime.new_cast()
+	assert(committed_id == cast_id, "Accepted trap owns the next cast identity")
+	mana -= float(compiled.mana)
+	if group_id.is_empty(): cooldowns[str(compiled.skill_id)] = float(compiled.cooldown)
+	else:
+		var began: bool = group_cooldowns.begin(group_id, main_uid, float(compiled.cooldown))
+		assert(began, "Admitted trap must own a ready cooldown")
+	player_facing = _aim_direction()
+	_record_trap_event({"event":"placed", "id":int(placed.id), "cast_id":cast_id,
+		"skill_id":str(compiled.skill_id), "position":player_pos, "at":elapsed})
+	return true
+
+
+func _record_trap_event(event: Dictionary) -> void:
+	trap_trace.append(event)
+	if trap_trace.size() > 32: trap_trace.pop_front()
+
+
+func trap_statuses() -> Array[Dictionary]:
+	return trap_runtime.statuses(elapsed)
+
+
+func _update_traps() -> void:
+	if trap_runtime.is_empty(): return
+	if not alive or _world_mode in ["town", "map_complete"]:
+		trap_runtime.reset()
+		return
+	# Observe only after all earlier projectile and burn events have settled.
+	# Each consumed trap then sees the deaths/knockback of preceding trap IDs.
+	var advanced: Dictionary = trap_runtime.ready(elapsed)
+	assert(advanced.ok, "Validated trap observation clock")
+	if not advanced.ok: return
+	for candidate: Dictionary in advanced.ready:
+		var trigger: Dictionary = {}
+		var closest := INF
+		for enemy: Dictionary in enemies:
+			if float(enemy.health) <= 0.0 or float(enemy.spawn) > 0.0: continue
+			if not AreaRules.contains_target(candidate.position, Vector2(enemy.pos), float(candidate.trigger_radius), float(enemy.radius)): continue
+			if not _terrain_visible(candidate.position, enemy.pos): continue
+			var distance: float = Vector2(candidate.position).distance_squared_to(Vector2(enemy.pos))
+			if distance < closest or (distance == closest and (trigger.is_empty() or int(enemy.id) < int(trigger.id))):
+				closest = distance
+				trigger = enemy
+		if trigger.is_empty(): continue
+		var taken: Dictionary = trap_runtime.take(int(candidate.id), elapsed)
+		assert(taken.ok, "Ready trap can be consumed exactly once")
+		if not taken.ok: return
+		var entry: Dictionary = taken.entry
+		_record_trap_event({"event":"triggered", "id":entry.id, "cast_id":entry.cast_id,
+			"skill_id":entry.skill_id, "position":entry.position, "target_id":int(trigger.id), "at":elapsed})
+		_area_damage(entry.position, float(entry.radius), entry.packet, entry.color, float(entry.slow),
+			entry.snapshot, {"cast_id":entry.cast_id, "phase":"trap"})
+		visual_cues.emit_cue(str(entry.skill_id), entry.position, {"radius":float(entry.radius), "color":entry.color})
 
 
 func _update_projectiles(delta: float) -> void:
@@ -1679,6 +1760,7 @@ func hit_player_components(components: Variant, source_id: int = 0, delivery_tag
 func _finish_player_death()->void:
 	if health>0.0:return
 	feedback_runtime.flush_target("player", 0)
+	trap_runtime.reset()
 	burn_runtime.reset()
 	shock_runtime.reset()
 	_ember_deaths.clear()
@@ -2141,6 +2223,7 @@ func _world_failure(code:String,reason:String)->Dictionary:return {"ok":false,"c
 func _world_ok()->Dictionary:return {"ok":true,"code":"","reason":"","world":world_context()}
 func _world_revision_ok(value:Variant)->bool:return value is int and value==_world_revision
 func _replace_build(next:RefCounted,path:String)->void:
+	trap_runtime.reset()
 	if state.changed.is_connected(_on_build_changed):state.changed.disconnect(_on_build_changed)
 	state.retire_profile()
 	shock_runtime.reset()
@@ -2447,7 +2530,7 @@ func _check_map_complete()->void:
 		if float(enemy.health)>0.0:living+=1
 	if _map_run.check_complete(living,monster_runtime.queue.size()):
 		projectile_runtime.cancel_all(projectiles);telegraphs.reset()
-		_world_mode="map_complete";_world_revision+=1;burn_runtime.reset();shock_runtime.reset()
+		_world_mode="map_complete";_world_revision+=1;burn_runtime.reset();shock_runtime.reset();trap_runtime.reset()
 		var message:String="地图完成，可以返回城镇" if _is_test_profile() else "地图完成，返回正式城镇领取结算"
 		if not _is_test_profile():
 			_normal_completion_pending=true

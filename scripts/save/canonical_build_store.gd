@@ -22,6 +22,7 @@ const ElementalResistanceCapMigration = preload("res://scripts/save/elemental_re
 const ElementalDefenseAffixMigration = preload("res://scripts/save/elemental_defense_affix_migration.gd")
 const DefenseRatingAffixMigration = preload("res://scripts/save/defense_rating_affix_migration.gd")
 const ZealotsOathMigration = preload("res://scripts/save/zealots_oath_migration.gd")
+const AmbushGemMigration = preload("res://scripts/save/ambush_gem_migration.gd")
 const IronReflexesMigration = preload("res://scripts/save/iron_reflexes_migration.gd")
 const ResoluteTechniqueMigration = preload("res://scripts/save/resolute_technique_migration.gd")
 const SourceLeechMigration=preload("res://scripts/save/source_leech_migration.gd")
@@ -74,8 +75,9 @@ func _init() -> void:
 	var source_v38: Dictionary = ResoluteTechniqueMigration.migrate_v37(source_v37, _talent_validator, _socket_ids)
 	var source_v39: Dictionary = DefenseRatingAffixMigration.migrate_v38(source_v38, _talent_validator, _socket_ids)
 	var source_v40: Dictionary = IronReflexesMigration.migrate_v39(source_v39, _talent_validator, _socket_ids)
-	_current = ZealotsOathMigration.migrate_v40(source_v40, _talent_validator, _socket_ids)
-	assert(not _current.is_empty() and Rules.reason(_current).is_empty(), "The built-in canonical fixture must migrate to v41")
+	var source_v41: Dictionary = ZealotsOathMigration.migrate_v40(source_v40, _talent_validator, _socket_ids)
+	_current = AmbushGemMigration.migrate_v41(source_v41, _talent_validator, _socket_ids)
+	assert(not _current.is_empty() and Rules.reason(_current).is_empty(), "The built-in canonical fixture must migrate to v42")
 	_current.migration_ledger.from_version = 0
 
 
@@ -139,7 +141,9 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	var old_version := int(raw.version)
 	if old_version > Rules.VERSION: return _reject(path, "存档属于未来版本，已保护原文件")
 	var candidate: Dictionary = {}
-	if old_version == Rules.V40_VERSION:
+	if old_version == Rules.V41_VERSION:
+		candidate = Rules.decode_v41(raw)
+	elif old_version == Rules.V40_VERSION:
 		candidate = Rules.decode_v40(raw)
 	elif old_version == Rules.V39_VERSION:
 		candidate = Rules.decode_v39(raw)
@@ -272,8 +276,10 @@ func load_build(path: String = "user://build_save.json") -> bool:
 		candidate = DefenseRatingAffixMigration.migrate_v38(candidate, _talent_validator, _socket_ids)
 	if old_version < Rules.V40_VERSION:
 		candidate = IronReflexesMigration.migrate_v39(candidate, _talent_validator, _socket_ids)
-	if old_version < Rules.VERSION:
+	if old_version < Rules.V41_VERSION:
 		candidate = ZealotsOathMigration.migrate_v40(candidate, _talent_validator, _socket_ids)
+	if old_version < Rules.VERSION:
+		candidate = AmbushGemMigration.migrate_v41(candidate, _talent_validator, _socket_ids)
 	var reason: String = Rules.reason(candidate, _talent_validator, _socket_ids)
 	if not reason.is_empty(): return _reject(path, reason)
 	var loaded_revision: int = int(candidate.revision)

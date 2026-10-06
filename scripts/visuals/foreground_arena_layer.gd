@@ -15,6 +15,8 @@ func burn_statuses() -> Array:
 	return source.burn_statuses() if is_instance_valid(source) and source.has_method("burn_statuses") else []
 func shock_statuses() -> Array:
 	return source.shock_statuses() if is_instance_valid(source) and source.has_method("shock_statuses") else []
+func trap_statuses() -> Array:
+	return source.trap_statuses() if is_instance_valid(source) and source.has_method("trap_statuses") else []
 func damage_feedback() -> Array:
 	return source.damage_feedback() if is_instance_valid(source) and source.has_method("damage_feedback") else []
 func _draw()->void:

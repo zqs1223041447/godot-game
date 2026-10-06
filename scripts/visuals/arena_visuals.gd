@@ -11,6 +11,7 @@ const View = preload("res://scripts/visuals/world_view.gd")
 const Markers = preload("res://scripts/visuals/world_markers.gd")
 const TelegraphArt = preload("res://scripts/visuals/telegraph_renderer.gd")
 const BurnArt = preload("res://scripts/visuals/burn_status_renderer.gd")
+const AmbushArt = preload("res://scripts/visuals/ambush_trap_renderer.gd")
 const ShockArt = preload("res://scripts/visuals/shock_status_renderer.gd")
 const FeedbackArt = preload("res://scripts/visuals/combat_feedback_renderer.gd")
 
@@ -80,6 +81,7 @@ static func draw_scene(arena: Node2D, preferences: Settings, include_environment
 	draw_player(arena,preferences)
 	if arena.has_method("burn_statuses"): BurnArt.draw(arena, arena.burn_statuses(), preferences.effects_level)
 	if arena.has_method("shock_statuses"): ShockArt.draw(arena, arena.shock_statuses(), preferences.effects_level)
+	if arena.has_method("trap_statuses"): AmbushArt.draw(arena, arena.trap_statuses(), preferences.effects_level)
 	stamp = _diagnostic_mark("player",stamp)
 	for enemy:Dictionary in ordered:
 		Markers.draw_enemy(arena,enemy,preferences,names.has(int(enemy.id)))
@@ -211,6 +213,7 @@ static func draw_after_actors(arena:Node2D,preferences:Settings)->void:
 	draw_player(arena,preferences)
 	if arena.has_method("burn_statuses"): BurnArt.draw(arena, arena.burn_statuses(), preferences.effects_level)
 	if arena.has_method("shock_statuses"): ShockArt.draw(arena, arena.shock_statuses(), preferences.effects_level)
+	if arena.has_method("trap_statuses"): AmbushArt.draw(arena, arena.trap_statuses(), preferences.effects_level)
 	stamp = _diagnostic_mark("player",stamp)
 	for enemy:Dictionary in ordered:
 		Markers.draw_enemy(arena,enemy,preferences,names.has(int(enemy.id)))

@@ -12,6 +12,7 @@ const Combat = preload("res://scripts/combat/combat_data.gd")
 const Compiler = preload("res://scripts/combat/skill_compiler.gd")
 const Supports = preload("res://scripts/combat/support_registry.gd")
 const BurnRules = preload("res://scripts/combat/burn_rules.gd")
+const AmbushRules = preload("res://scripts/combat/ambush_support_rules.gd")
 const ShockRules = preload("res://scripts/combat/shock_rules.gd")
 const EmberSupportRules = preload("res://scripts/combat/ember_proliferation_support_rules.gd")
 const EmberSpreadRules = preload("res://scripts/combat/ember_proliferation_rules.gd")
@@ -135,7 +136,16 @@ static func view(model: RefCounted, uid: String) -> Dictionary:
 			result.requirements = ["适用技能："+"、".join(supported_names)]
 
 			result.base_stats = []
-			if support_id == "shock":
+			if support_id == "ambush":
+				result.function = "在脚下预置符印，敌人靠近后释放相连技能一次。"
+				var trap_stats: Array[Dictionary] = []
+				_append_numeric_stat(trap_stats, "布防时间", AmbushRules.POLICY.arming_seconds, " 秒")
+				_append_numeric_stat(trap_stats, "触发半径", AmbushRules.POLICY.trigger_radius)
+				_append_numeric_stat(trap_stats, "保留时间", AmbushRules.POLICY.lifetime_seconds, " 秒")
+				_append_numeric_stat(trap_stats, "共享上限", AmbushRules.POLICY.maximum_traps, " 枚")
+				result.base_stats = trap_stats
+				result.description = "受墙体阻挡；到期消失。范围增幅只改变爆发范围，不改变触发半径。"
+			elif support_id == "shock":
 				result.function = "造成闪电命中伤害后施加感电，提高目标承受的后续命中伤害。"
 				var shock_stats: Array[Dictionary] = []
 				_append_numeric_stat(shock_stats, "感电持续", ShockRules.PLAYER_POLICY.duration, " 秒")

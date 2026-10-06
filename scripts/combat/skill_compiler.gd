@@ -5,6 +5,7 @@ const Data = preload("res://scripts/game_data.gd")
 const Recipes = preload("res://scripts/combat/combat_data.gd")
 const Supports = preload("res://scripts/combat/support_registry.gd")
 const Extension = preload("res://scripts/combat/projectile_support_rules.gd")
+const Ambush = preload("res://scripts/combat/ambush_support_rules.gd")
 const Area = preload("res://scripts/combat/area_support_rules.gd")
 const Critical=preload("res://scripts/combat/critical_strike_rules.gd")
 const Resolute = preload("res://scripts/combat/resolute_technique_rules.gd")
@@ -206,6 +207,10 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 		profile.stacking = "refresh_equal"
 		profile.roles = ["projectile"] if skill_id == "bolt" else ["bounce"] if skill_id == "chain" else ["direct"]
 		result.shock_profile = profile
+	if canonical.has("ambush"):
+		var trap_profile: Dictionary = {"enabled": true}
+		trap_profile.merge(Ambush.POLICY.duplicate(true))
+		result.trap_profile = trap_profile
 	var hit_policy: Dictionary = Resolute.compiled_profile(compiled_snapshot)
 	if not hit_policy.is_empty():result.hit_policy = hit_policy
 	return result

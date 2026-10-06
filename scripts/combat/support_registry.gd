@@ -10,6 +10,7 @@ const DeliveryRules = preload("res://scripts/combat/delivery_support_rules.gd")
 const Ignite = preload("res://scripts/combat/ignite_support_rules.gd")
 const Ember = preload("res://scripts/combat/ember_proliferation_support_rules.gd")
 const Shock = preload("res://scripts/combat/shock_support_rules.gd")
+const Ambush = preload("res://scripts/combat/ambush_support_rules.gd")
 const Program = preload("res://scripts/combat/support_program.gd")
 const Data = preload("res://scripts/game_data.gd")
 const MAX_SUPPORTS: int = Legacy.MAX_SUPPORTS
@@ -19,9 +20,9 @@ const BATCH_SAVE_VERSION: int = 13
 static var SUPPORTS: Dictionary = _definitions()
 
 static func _providers() -> Array:
-	return [Legacy, Extension, Area, ResourceRules, ElementRules, DeliveryRules, Ignite, Ember, Shock]
+	return [Legacy, Extension, Area, ResourceRules, ElementRules, DeliveryRules, Ignite, Ember, Shock, Ambush]
 static func _program_providers() -> Array:
-	return [ResourceRules, ElementRules, DeliveryRules, Ignite, Ember, Shock]
+	return [ResourceRules, ElementRules, DeliveryRules, Ignite, Ember, Shock, Ambush]
 static func _definitions() -> Dictionary:
 	var result: Dictionary = {}
 	for provider: Variant in _providers():
@@ -99,7 +100,8 @@ static func saved_links_reason(skill_id: String, support_ids: Variant, save_vers
 	if not reason.is_empty(): return reason
 	for id: String in support_ids:
 		var minimum: int = 1
-		if Shock.SUPPORTS.has(id): minimum = Shock.SAVE_VERSION
+		if Ambush.SUPPORTS.has(id): minimum = Ambush.SAVE_VERSION
+		elif Shock.SUPPORTS.has(id): minimum = Shock.SAVE_VERSION
 		elif Ember.SUPPORTS.has(id): minimum = Ember.SAVE_VERSION
 		elif Ignite.SUPPORTS.has(id): minimum = Ignite.SAVE_VERSION
 		elif Extension.SUPPORTS.has(id): minimum = EXTENSION_SAVE_VERSION
@@ -110,6 +112,7 @@ static func saved_links_reason(skill_id: String, support_ids: Variant, save_vers
 static func definition_error(value: Variant) -> String:
 	if value is Dictionary and value.has("family"):
 		match value.family:
+			"ambush": return Ambush.definition_error(value)
 			"shock": return Shock.definition_error(value)
 			"burning":
 				if Ember.definition_error(value).is_empty(): return ""

@@ -122,6 +122,7 @@ static func details(cast: Dictionary) -> String:
 	lines.append_array(leech_lines(cast))
 	lines.append_array(burn_lines(cast))
 	lines.append_array(shock_lines(cast))
+	lines.append_array(trap_lines(cast))
 	if cast.get("recipe", {}).get("delivery", "") == "melee" and cast.get("skill_id", "") == "basic":
 		lines.append("普通近战攻击：距离 %.0f · 最多 %d 个目标；不发射投射物。" % [float(cast.recipe.radius), int(cast.recipe.max_targets)])
 	if not entries(cast).is_empty() and bool(cast.get("hit_policy", {}).get("hits_cannot_be_evaded", false)):
@@ -169,4 +170,14 @@ static func spatial_details(cast: Dictionary) -> PackedStringArray:
 		lines.append("独立爆炸半径 %.2f · 面积 ×%.4f" % [float(explosion.radius),float(explosion.get("area_multiplier",1.0))])
 	if recipe.has("source_area_multiplier") or float(explosion.get("area_multiplier",1.0)) != 1.0:
 		lines.append("范围增幅按面积计算；半径按面积倍率的平方根变化。")
+	return lines
+
+
+static func trap_lines(cast: Dictionary) -> PackedStringArray:
+	var lines := PackedStringArray()
+	var profile: Dictionary = cast.get("trap_profile", {})
+	if not bool(cast.get("ok", false)) or not bool(profile.get("enabled", false)): return lines
+	lines.append("脚下布置 · %.2f 秒后布防 · 触发半径 %.0f" % [float(profile.arming_seconds), float(profile.trigger_radius)])
+	lines.append("保留 %.0f 秒 · 所有技能组共享 %d 枚；满额不消耗魔力或冷却。" % [float(profile.lifetime_seconds), int(profile.maximum_traps)])
+	lines.append("放置时固定伤害与暴击；敌人靠近后释放一次，到期消失。触发需视线，范围增幅只改变爆发范围。")
 	return lines
