@@ -648,7 +648,7 @@ func _spawn_enemy(forced_position: Vector2 = Vector2.ZERO, forced_kind: int = -1
 	if not encounter.is_empty():
 		enemy = _spawn_monster(encounter)
 	else:
-		var roll: Dictionary = Monsters.ordinary_roll(rng, wave)
+		var roll: Dictionary = Monsters.ordinary_roll_current(rng, wave)
 		var elemental: String = Monsters.elemental_template_for_roll(wave, ordinary_admissions + 1, roll) if natural else ""
 		if natural and _world_mode=="map":
 			var special:String=MapCompiler.special_template(_map_run.profile,roll)
@@ -2509,7 +2509,7 @@ func _prepare_camp_run(profile:Dictionary,sequence:int)->Dictionary:
 	var state_plan:=CampState.new()
 	var seed_text:String=JSON.stringify([rng.seed,sequence,profile.id,profile.get("journey_tier",0),"map-camps-v1"])
 	var seed_value:int=seed_text.sha256_text().substr(0,15).hex_to_int()
-	var prepared:Dictionary=state_plan.begin(profile,layout.landmarks,seed_value)
+	var prepared:Dictionary=state_plan.begin(profile,layout.landmarks,seed_value,Monsters.CURRENT_ROLL_POLICY)
 	if not prepared.ok:return prepared
 	var geometry:=Geometry.new()
 	if not geometry.configure(profile.id,ARENA):return {"ok":false,"reason":"地图几何无效"}

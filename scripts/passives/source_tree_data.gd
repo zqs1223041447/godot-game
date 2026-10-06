@@ -33,6 +33,19 @@ static func ready() -> bool:
 
 static func node(id: String) -> Dictionary:
 	return _nodes.get(id,{}).duplicate(true) if ready() else {}
+## One detached original stat and its source identity. This uses the existing
+## cached tree and never copies the full node/tree for a per-actor lookup.
+static func stat_entry(id: String, stat_index: int) -> Dictionary:
+	if not ready() or stat_index < 0: return {}
+	var record: Variant = _nodes.get(id)
+	if not record is Dictionary or not record.get("stats") is Array: return {}
+	if stat_index >= record.stats.size() or not record.stats[stat_index] is String: return {}
+	var source: Variant = _data.get("source")
+	if not source is Dictionary: return {}
+	return {"node_id":id,"stat_index":stat_index,"raw_line":record.stats[stat_index],
+		"node_name":record.get("name",""),"source_version":source.get("version",""),
+		"source_hash":source.get("data_sha256",""),"source_commit":source.get("commit",""),
+		"source_url":source.get("data_url","")}.duplicate(true)
 static func nodes() -> Dictionary:
 	return _nodes.duplicate(true) if ready() else {}
 static func standard_ids() -> Array:

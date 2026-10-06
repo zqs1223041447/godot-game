@@ -42,6 +42,9 @@ const SPECIES: Array[Dictionary] = [
 	{"name": "重壳体", "health": 95.0, "speed": 43.0, "damage": 18.0, "radius": 22.0},
 ]
 const AFFIX_POOL: Array[String] = ["ember_power", "gale_stride", "grove_vitality", "aegis_capacity", "aegis_recovery"]
+const LEGACY_ROLL_POLICY := "legacy_flat_v1"
+const CURRENT_ROLL_POLICY := "source_stride_v1"
+const CURRENT_AFFIX_POOL: Array[String] = ["ember_power", "source_gale_stride", "grove_vitality", "aegis_capacity", "aegis_recovery"]
 const TEMPLATES: Dictionary = {
 	"crawler": {"name": "巡游体", "kind": 0, "rarity": "normal", "mechanisms": [], "death_spawns": []},
 	"skitter": {"name": "掠行体", "kind": 1, "rarity": "normal", "mechanisms": [], "death_spawns": []},
@@ -156,6 +159,16 @@ static func ordinary_roll(rng: RandomNumberGenerator, wave: int) -> Dictionary:
 		affixes.append(pool[selected])
 		pool.remove_at(selected)
 	return {"template": ["crawler", "skitter", "brute"][kind], "rarity": rarity, "mechanisms": affixes}
+
+## A single identity replacement after the frozen sampler consumes exactly the
+## same RNG calls; old explicit ordinary_roll remains the historical contract.
+static func ordinary_roll_current(rng: RandomNumberGenerator, wave: int) -> Dictionary:
+	var result := ordinary_roll(rng, wave)
+	for index: int in range(result.mechanisms.size()):
+		if result.mechanisms[index] == "gale_stride":
+			result.mechanisms[index] = "source_gale_stride"
+	return result
+
 
 static func validate_templates(templates: Dictionary) -> Array[String]:
 	var errors: Array[String] = []
@@ -289,6 +302,12 @@ static func make_enemy(id: int, template_id: String, wave: int, position: Vector
 		"xp_reward": (6 if kind == 2 else 3) * int(tier.xp)}
 	if float(modifiers.get("shield_recharge_rate_increased",0.0))!=0.0 or float(modifiers.get("shield_recharge_start_faster",0.0))!=0.0:
 		result.shield_recharge_rate=recharge.rate;result.shield_recharge_delay=recharge.delay
+	if resolved.has("source_grants"):
+		# Same additive-increase stage as CanonicalGameState, applied once after
+		# authored species/wave/flat base, before optional map multipliers.
+		result.speed *= 1.0 + float(modifiers.get("move_speed_increased", 0.0))
+		if not is_finite(result.speed) or result.speed < 0.0: return {}
+		result.mechanism_source_grants = resolved.source_grants.duplicate(true)
 	if template_id == "mist_skitter":
 		result.health *= float(MIST_SKITTER_POLICY.health_multiplier)
 		result.max_health *= float(MIST_SKITTER_POLICY.health_multiplier)

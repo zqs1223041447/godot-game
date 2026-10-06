@@ -5,6 +5,7 @@ extends RefCounted
 ## Adding a stat/actor requires an explicit supported-stat entry and runtime consumer.
 
 const Balance = preload("res://scripts/mechanics/passive_balance_adapter.gd")
+const SourceGrants = preload("res://scripts/mechanics/source_monster_grants.gd")
 const SCHEMA_VERSION: int = 1
 const PLAYER_STATS: Array[String] = [
 	"damage", "max_health", "max_mana", "max_shield", "attack_speed", "move_speed",
@@ -15,6 +16,7 @@ const PLAYER_STATS: Array[String] = [
 	"attack_added_physical", "attack_added_fire", "spell_added_cold", "spell_added_lightning",
 ]
 const MONSTER_STATS: Array[String] = [
+	"move_speed_increased",
 	"damage", "max_health", "max_shield", "attack_speed", "move_speed", "shield_regen", "fire_resistance", "shield_recharge_rate_increased", "shield_recharge_start_faster",
 ]
 # Explicit compatibility spellings. Never infer an alias from a prefix or substring.
@@ -38,6 +40,7 @@ static func policy_version() -> String:
 
 
 static func canonical_id(id: String) -> String:
+	if id == SourceGrants.ID: return id
 	if _definitions.has(id):
 		return id
 	var target: String = str(ALIASES.get(id, ""))
@@ -49,6 +52,7 @@ static func get_ids(actor: String = "") -> Array[String]:
 	for id: String in _definitions:
 		if actor.is_empty() or is_supported(id, actor):
 			result.append(id)
+	if actor.is_empty() or is_supported(SourceGrants.ID, actor): result.append(SourceGrants.ID)
 	return result
 
 
@@ -56,7 +60,13 @@ static func get_definition(id: String) -> Dictionary:
 	var canonical: String = canonical_id(id)
 	if canonical.is_empty():
 		return {}
-	var result: Dictionary = _definitions[canonical].duplicate(true)
+	var result: Dictionary
+	if canonical == SourceGrants.ID:
+		var source := SourceGrants.resolve(canonical)
+		if not source.ok: return {}
+		result = source.definition.duplicate(true)
+	else:
+		result = _definitions[canonical].duplicate(true)
 	var actors: Array[String] = []
 	for actor: String in ["player", "monster"]:
 		if is_supported(canonical, actor):
@@ -65,7 +75,7 @@ static func get_definition(id: String) -> Dictionary:
 	result["kind"] = "stat_bundle"
 	result["schema_version"] = SCHEMA_VERSION
 	result["definition_revision"] = _revision
-	result["policy_version"] = policy_version()
+	if canonical != SourceGrants.ID: result["policy_version"] = policy_version()
 	result["supported_actors"] = actors
 	result["support_reason"] = support_reason(canonical, "monster")
 	return result
@@ -77,7 +87,13 @@ static func support_reason(id: String, actor: String) -> String:
 	var canonical: String = canonical_id(id)
 	if canonical.is_empty():
 		return "Unknown mechanism: " + id
-	var stats: Dictionary = _definitions[canonical]["stats"]
+	var stats: Dictionary
+	if canonical == SourceGrants.ID:
+		var source := SourceGrants.resolve(canonical)
+		if not source.ok: return source.reason
+		stats = source.stats
+	else:
+		stats = _definitions[canonical]["stats"]
 	var invalid: String = _stats_error(stats)
 	if not invalid.is_empty():
 		return "Invalid mechanism %s: %s" % [canonical, invalid]
@@ -134,9 +150,19 @@ static func resolve_grants(ids: Array, actor: String = "player", role_coefficien
 		if not reason.is_empty():
 			errors.append(reason)
 	var stats: Dictionary = {}
+	var source_grants: Array[Dictionary] = []
 	if errors.is_empty():
 		for id: String in canonical_ids:
-			var definition_stats: Dictionary = _definitions[id]["stats"]
+			var definition_stats: Dictionary
+			if id == SourceGrants.ID:
+				var source := SourceGrants.resolve(id)
+				if not source.ok:
+					errors.append(source.reason)
+					break
+				definition_stats = source.stats
+				source_grants.append(source.definition.duplicate(true))
+			else:
+				definition_stats = _definitions[id]["stats"]
 			for stat: String in definition_stats:
 				var value: float = float(stats.get(stat, 0.0)) + float(definition_stats[stat]) * role_coefficient
 				if not is_finite(value):
@@ -146,16 +172,21 @@ static func resolve_grants(ids: Array, actor: String = "player", role_coefficien
 	if not errors.is_empty():
 		stats.clear()
 		canonical_ids.clear()
-	return {"ok": errors.is_empty(), "stats": stats, "mechanism_ids": canonical_ids,
+		source_grants.clear()
+	var result := {"ok": errors.is_empty(), "stats": stats, "mechanism_ids": canonical_ids,
 		"errors": errors, "actor": actor, "role_coefficient": role_coefficient,
 		"schema_version": SCHEMA_VERSION, "definition_revision": _revision, "policy_version": policy_version()}
+	if not source_grants.is_empty():
+		result.source_grants = source_grants
+		result.policy_version = policy_version() + "+" + str(source_grants[0].policy_version)
+	return result
 
 
 static func set_definition_stats(id: String, stats: Dictionary) -> bool:
 	# Content tuning is atomic and preserves the complete existing effect contract.
 	# New mechanisms/stat fields belong in this registry, not arbitrary runtime payloads.
 	var canonical: String = canonical_id(id)
-	if canonical.is_empty() or not _stats_error(stats).is_empty():
+	if canonical.is_empty() or canonical == SourceGrants.ID or not _stats_error(stats).is_empty():
 		return false
 	var original: Dictionary = _definitions[canonical]["stats"]
 	if stats.size() != original.size():
