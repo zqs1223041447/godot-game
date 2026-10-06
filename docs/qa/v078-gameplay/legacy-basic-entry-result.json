@@ -1,0 +1,90 @@
+{
+  "runs": [
+    {
+      "label": "legacy-basic-entry-v077",
+      "exit": 0,
+      "seconds": 2.521,
+      "log": "docs/qa/v078-gameplay/legacy-basic-entry-v077.log",
+      "log_sha256": "e1b79fbcaa00a88f6bb75e0801b04755b4036836daf2701fdbd8494f91f1d515",
+      "sandbox": "/tmp/godot-m1-v078-gameplay-nfvaa7xh",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/v077-combat-outcome-feedback",
+        "--script",
+        "/workspace/scratch/a51485f153de/v078-elemental-conversion/tests/elemental_conversion_legacy_probe.gd"
+      ]
+    },
+    {
+      "label": "legacy-basic-entry-v078",
+      "exit": 0,
+      "seconds": 2.522,
+      "log": "docs/qa/v078-gameplay/legacy-basic-entry-v078.log",
+      "log_sha256": "e1b79fbcaa00a88f6bb75e0801b04755b4036836daf2701fdbd8494f91f1d515",
+      "sandbox": "/tmp/godot-m1-v078-gameplay-iw7z_env",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/v078-elemental-conversion",
+        "--script",
+        "/workspace/scratch/a51485f153de/v078-elemental-conversion/tests/elemental_conversion_legacy_probe.gd"
+      ]
+    }
+  ],
+  "comparison": {
+    ".bin": {
+      "equal": true,
+      "bytes": [
+        305228,
+        305228
+      ],
+      "sha256": [
+        "12400d3ce0a75bf66bd87c2407d61f6901785ab410b9d5bb26e9a712adda08e6",
+        "12400d3ce0a75bf66bd87c2407d61f6901785ab410b9d5bb26e9a712adda08e6"
+      ]
+    },
+    ".actors.bin": {
+      "equal": true,
+      "bytes": [
+        25216,
+        25216
+      ],
+      "sha256": [
+        "bc74cfa8b3320cff5d14bf3a859dc30fe2f04dc7ab67f531bc34bbbfcd622a34",
+        "bc74cfa8b3320cff5d14bf3a859dc30fe2f04dc7ab67f531bc34bbbfcd622a34"
+      ]
+    },
+    ".actors-without-policy-versions.bin": {
+      "equal": true,
+      "bytes": [
+        25096,
+        25096
+      ],
+      "sha256": [
+        "a655acc533b36937e5d41577ba2ff7d0f3c1d9d7f11877710d38c97730efd45b",
+        "a655acc533b36937e5d41577ba2ff7d0f3c1d9d7f11877710d38c97730efd45b"
+      ]
+    },
+    ".save": {
+      "equal": false,
+      "bytes": [
+        13461,
+        13461
+      ],
+      "sha256": [
+        "43b14206d1c051d2caf54f03caf087753f25094cd8d76d5a51b1235602e9f4ed",
+        "c1967e01baa5cfe4804ce3a1d9c638adb5514697d001446d9372d91c3c89c30c"
+      ]
+    },
+    "save_schema": [
+      47,
+      48
+    ],
+    "save_equal_except_schema": true,
+    "source_metadata_changes": [],
+    "metadata_scope_valid": true
+  },
+  "source_manifest": "legacy-basic-entry-sources.json"
+}

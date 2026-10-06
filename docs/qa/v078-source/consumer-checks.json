@@ -1,0 +1,62 @@
+[
+  {
+    "path": "scripts/passives/source_tree_runtime.gd",
+    "contains": "physical_to_cold_conversion",
+    "passed": true
+  },
+  {
+    "path": "scripts/passives/source_tree_runtime.gd",
+    "contains": "physical_to_lightning_conversion",
+    "passed": true
+  },
+  {
+    "path": "scripts/combat/combat_data.gd",
+    "contains": "Conversion.from_stats(stats)",
+    "passed": true
+  },
+  {
+    "path": "scripts/combat/combat_data.gd",
+    "contains": "Conversion.apply_snapshot(packet, snapshot_value)",
+    "passed": true
+  },
+  {
+    "path": "scripts/combat/physical_fire_conversion_rules.gd",
+    "contains": "const STATS: Dictionary",
+    "passed": true
+  },
+  {
+    "path": "scripts/combat/damage_resolver.gd",
+    "contains": "packet.conversion.converted_base.get(type, 0.0)",
+    "passed": true
+  },
+  {
+    "path": "scripts/passives/source_tree_runtime.gd",
+    "contains": "cold_penetration",
+    "passed": true
+  },
+  {
+    "path": "scripts/passives/source_tree_runtime.gd",
+    "contains": "lightning_penetration",
+    "passed": true
+  },
+  {
+    "path": "scripts/combat/combat_data.gd",
+    "contains": "Penetration.from_stats(stats)",
+    "passed": true
+  },
+  {
+    "path": "scripts/combat/combat_data.gd",
+    "contains": "Penetration.attach(converted, snapshot_value)",
+    "passed": true
+  },
+  {
+    "path": "scripts/combat/hit_penetration_rules.gd",
+    "contains": "result.penetration = applicable",
+    "passed": true
+  },
+  {
+    "path": "scripts/combat/damage_resolver.gd",
+    "contains": "maxf(Penetration.MINIMUM_RESISTANCE, resistance - penetration)",
+    "passed": true
+  }
+]

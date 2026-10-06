@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/a51485f153de/v078-elemental-conversion/docs/qa/v078-reference/merge-fragment.py", line 87, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/scratch/a51485f153de/v078-elemental-conversion/docs/qa/v078-reference/merge-fragment.py", line 43, in main
+    for path,a,b in differences:assert path[-1] in ['source_policy','source_save_version'] and a==45 and b==48,(key,path,a,b)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('source_aegis_capacity', ('policy_version',), 'source-tree:3.29.1:policy:45', 'source-tree:3.29.1:policy:48')

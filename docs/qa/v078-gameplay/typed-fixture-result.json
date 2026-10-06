@@ -1,0 +1,22 @@
+{
+  "runs": [
+    {
+      "label": "typed-fixture-gameplay",
+      "exit": 0,
+      "seconds": 4.377,
+      "log": "docs/qa/v078-gameplay/typed-fixture-gameplay.log",
+      "log_sha256": "1cddd6b11ef68cc831b5c20ed72990d5ed84d353ca6a73ccf012d47ea97016bf",
+      "sandbox": "/tmp/godot-m1-v078-gameplay-xa7xi17o",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/v078-elemental-conversion",
+        "--script",
+        "/workspace/scratch/a51485f153de/v078-elemental-conversion/tests/elemental_conversion_gameplay_test.gd"
+      ]
+    }
+  ],
+  "comparison": {},
+  "source_manifest": "typed-fixture-sources.json"
+}

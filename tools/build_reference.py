@@ -27,6 +27,7 @@ RULE_TITLES['resolute_technique'] = '坚决技艺：稳定命中与暴击取舍'
 RULE_TITLES['iron_reflexes'] = '铁反射（闪转甲）：闪避转换与护甲取舍'
 RULE_TITLES['zealots_oath'] = '狂信者的誓约：生命再生改为作用于能量护盾'
 RULE_TITLES['ambush'] = '符印伏击：预置、触发与冻结快照'
+RULE_TITLES['elemental_conversion'] = '三元素转换与命中穿透：统一分配与实际来源'
 RULE_TITLES['physical_fire_conversion'] = '物理转火焰：40%转换与伤害来源'
 RULE_TITLES['precise_technique'] = '精准技艺：严格命中条件与全局禁暴击'
 RULE_TITLES['inward_pull'] = '牵引辅助：朝真实爆发圆心反转冲量'
@@ -553,6 +554,71 @@ def inward_pull_rule(data,link,facts,details):
     return body
 
 
+def elemental_conversion_rule(data,link,facts,details):
+    rule=data['elemental_conversion']
+    def value(path):
+        item=rule
+        for field in path.split('/'):
+            item=item[int(field)] if isinstance(item,list) else item.get(field,0)
+        assert isinstance(item,(int,float)) and not isinstance(item,bool),path
+        return f'<strong data-elemental-path="{esc(path)}" data-value="{esc(item)}">{format(item,".12g")}</strong>'
+    body=facts([('存档 / 当前源政策 / 装备词汇',value('minimum_save_version')+' / '+value('source_policy')+' / '+value('equipment_vocabulary')),('实际同角色预算','女巫 '+value('level')+' 级 / '+value('point_budget')+' 点'),('新增完整前置',link('source_passives','8833')+' · '+link('source_passives','56716'))])
+    body+='<p>'+esc(rule['scope'])+'。</p><p>冷、雷各有一个当前合法可达组：60170与58816。六个冰霜入口、五个闪电入口都识别同一元素效果，但其他组前置仍未完整执行；不能因此直接花点。</p>'
+    body+=facts([(DAMAGE_NAMES[k]+'精通',link('source_passives',v['id'])+' / '+value('masteries/'+k+'/effect')) for k,v in rule['masteries'].items()])
+    body+=details('同源合法普通路线','<p>'+esc(' → '.join(rule['normal_route']))+'</p><p>普通节点含免费起点共25个，花24点；三个不同精通各1点。此处证明可达，不声称最短路线。</p>')
+    body+=''.join('<p>'+esc(rule[k])+'。</p>' for k in ['conversion','lineage','focus','penetration','preview'])
+    body+='<h3>同一装备与真实技能组 · 四种选择</h3><p>四份构筑均装备同一合法稀有短刃，局部物理只由普攻和裂刃消费；龙卷使用其原始组装。龙卷真实五辅为物理专注、火焰专注、点燃、专注与节能，不是逐个辅助隔离。所有数字来自已通过实际Main的存档只读重编译；防御前分量不含穿透，零抗目标已含穿透。护甲靶只设500护甲；75%靶三元素有效抗性均为75%，零护甲。无护盾、生命10000，不是新怪物模板。当前四份构筑均未装备爆破护符；独立爆炸一行仅比较已有冻结包，当前装备不会触发，不计入技能预估总量。</p>'
+    labels={'zero':'不选三精通','cold':'仅冰霜40%','cold-lightning':'冰霜40%＋闪电40%','fire-cold-lightning':'火冰雷各请求40%'}
+    roles={'direct':'直接命中','projectile':'普通投射物','parent':'龙卷母箭','child':'龙卷子箭','secondary':'纯火独立爆炸'}
+    for name in ['zero','cold','cold-lightning','fire-cold-lightning']:
+        example=rule['examples'][name]
+        prefix='examples/'+name
+        body+='<h4>'+labels[name]+'</h4><p>剩余点数 '+value(prefix+'/talents/normal_points')+'；<a href="../'+esc(example['fixture'].removeprefix('docs/'))+'">Main原始构筑</a>，已完整校验且只读重编译。</p>'
+        rows=[];traces=[]
+        for skill,cast in example['casts'].items():
+            cast_path=prefix+'/casts/'+skill
+            for role,hit in cast['hits'].items():
+                hit_path=cast_path+'/hits/'+role
+                cells=[value(hit_path+'/before_defense/'+kind) for kind in ['physical','fire','cold','lightning']]
+                cells+=[value(hit_path+'/zero_target/total'),value(hit_path+'/targets/armour500/settlement/damage_total'),value(hit_path+'/targets/elemental75/settlement/damage_total')]
+                rows.append('<tr><th>'+('普通攻击' if skill=='basic' else link('skills',skill))+' / '+roles[role]+('（仅冻结包，当前不触发）' if role=='secondary' and 'explode_on_flight_end' not in cast['compiled']['snapshot']['effects'] else '')+'</th>'+''.join('<td>'+c+'</td>' for c in cells)+'</tr>')
+                packet=hit['packet']
+                if 'conversion' not in packet:continue
+                split=packet['conversion'];split_path=hit_path+'/packet/conversion'
+                trace='<h5>'+('普通攻击' if skill=='basic' else esc(data['skills'][skill]['name']))+' / '+roles[role]+'</h5><p>原始物理 '+value(split_path+'/source_base')+'；转换后残余 '+value(split_path+'/remaining_base')+'；转换分配：'+' · '.join(DAMAGE_NAMES[t]+' '+value(split_path+'/converted_base/'+t)+'（实际比例 '+value(split_path+'/effective/'+t)+'）' for t in split['converted_base'])+'。</p>'
+                part_rows=[]
+                for j,detail in enumerate(hit['zero_target']['details']):
+                    for i,part in enumerate(detail.get('parts',[])):
+                        part_path=hit_path+'/zero_target/details/'+str(j)+'/parts/'+str(i)
+                        part_rows.append('<tr><th>'+esc(' → '.join(DAMAGE_NAMES[t] for t in part['lineage']))+'</th>'+''.join('<td>'+value(part_path+'/'+f)+'</td>' for f in ['base','increased','more','before_defense'])+'<td>'+esc(', '.join(str(idx)+': '+sid for idx,sid in zip(part['modifier_indices'],part['modifiers'])))+'</td></tr>')
+                trace+='<table><thead><tr><th>来源</th><th>基底</th><th>increased</th><th>MORE乘积</th><th>防御前</th><th>条目下标与id</th></tr></thead><tbody>'+''.join(part_rows)+'</tbody></table>'
+                traces.append(trace)
+            body+='<p>'+('普通攻击' if skill=='basic' else link('skills',skill))+'：'+esc(cast['summary'])+'</p>'
+        body+='<div class="table-scroll"><table><thead><tr><th>单次成功、不暴击命中</th><th>防御前物理</th><th>防御前火焰</th><th>防御前冰霜</th><th>防御前闪电</th><th>零抗性含穿透</th><th>500护甲靶</th><th>75%元素抗靶</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
+        body+=details('实际拆分与每条modifier证据',''.join(traces) or '<p>未选择转换，维持原始类型。</p>')
+    body+='<h3>有效抗性 → 对应穿透 → 实际抗性</h3><p>以三元素全选的普通攻击逐类型读取。原生和转换部分先合并，同一最终类型只结算一次；下限行不能穿到−100%以下。</p>'
+    rows=[];sample=rule['examples']['fire-cold-lightning']['casts']['basic']['hits']
+    for role,hit in sample.items():
+        for target_name,target in hit['targets'].items():
+            if target_name=='armour500':continue
+            for i,detail in enumerate(target['resolved']['details']):
+                if 'penetration' not in detail:continue
+                path='examples/fire-cold-lightning/casts/basic/hits/'+role+'/targets/'+target_name+'/resolved/details/'+str(i)
+                rows.append('<tr><th>'+esc(target_name)+' / '+DAMAGE_NAMES[detail['type']]+'</th>'+''.join('<td>'+value(path+'/'+field)+'</td>' for field in ['effective_resistance','penetration','resistance','before_defense','final'])+'</tr>')
+    body+='<table><thead><tr><th>目标与最终元素</th><th>原有效抗性</th><th>穿透</th><th>实际抗性</th><th>防御前</th><th>防御后</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table>'
+    body+='<h3>已有燃烧只取最终火焰一次</h3>';rows=[]
+    for name in ['zero','cold','cold-lightning','fire-cold-lightning']:
+        example=rule['examples'][name]
+        for skill,cast in example['casts'].items():
+            for role,burn in cast['compiled'].get('burn_profile',{}).get('roles',{}).items():
+                path='examples/'+name+'/casts/'+skill+'/compiled/burn_profile/roles/'+role
+                rows.append('<tr><th>'+labels[name]+' / '+roles[role]+'</th>'+''.join('<td>'+value(path+'/'+f)+'</td>' for f in ['fire_before_defense','dps','total'])+'</tr>')
+    body+='<table><thead><tr><th>现有点燃</th><th>防御前火输入</th><th>每秒火焰</th><th>理论完整总量</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table><p>这是既有辅助的非暴击、未计火抗燃烧预算；不把DOT再次转换或读取命中穿透。</p>'
+    body+=''.join('<p>'+esc(rule[k])+'。</p>' for k in ['leech','bounds','freeze','migration','monster_metadata','historical'])
+    body+='<p><a href="../ELEMENTAL_CONVERSION.zh-CN.md">完整规则与范围</a> · <a href="../qa/v078-reference/README.md">本批窄导出证据</a> · <a href="source-tree-coverage.json">当前同源完整执行覆盖</a> · '+link('rules','physical_fire_conversion')+' · '+link('rules','source_leech')+'</p>'
+    return body
+
+
 def physical_fire_conversion_rule(data,link,facts,details):
     rule=data['physical_fire_conversion']
     def value(key,amount):
@@ -594,6 +660,8 @@ def physical_fire_conversion_rule(data,link,facts,details):
     body+=''.join('<p>'+esc(rule[key])+'。</p>' for key in ['burn','leech','snapshot','availability','migration','bounds'])
     body+=details('既有入口、原始路线与完整英文', '<p>'+esc(rule['source_line'])+'</p><p>全部入口：'+'、'.join(link('source_passives',node_id,node_id) for node_id in rule['entrances'])+'。</p><p>当前可达组的显著天赋 → 精通：'+'；'.join(link('source_passives',gateway,gateway)+' → '+link('source_passives',mastery,mastery) for mastery,gateway in rule['reachable_gateways'].items())+'。</p><p>本页5级野蛮人路线：'+' → '.join(link('source_passives',node_id,node_id) for node_id in rule['route']+[rule['mastery_id']])+'；预算 '+value('point-budget',rule['point_budget'])+' 点。所有候选完整通过Canonical与源树校验，保存次数为0。</p>')
     body+='<p><a href="../PHYSICAL_FIRE_CONVERSION.zh-CN.md">完整物理转火焰合同</a> · <a href="../qa/v069-reference/README.md">本批图鉴验证</a> · <a href="source-tree-coverage.json">当前同源执行覆盖JSON</a> · '+link('rules','source_fire_dot')+' · '+link('rules','source_faster_burn')+' · '+link('rules','source_leech')+'</p>'
+    if 'elemental_conversion' in data:
+        body='<p class="fine">历史快照：本章保留上批导出数值与当时元数据；当前存档48、源政策48及开放范围见 '+link('rules','elemental_conversion')+'。旧怪物出生快照不追溯改写，新生源定义仅刷新溯源政策。</p>'+body
     return body
 
 
@@ -644,6 +712,8 @@ def source_monster_movement_rule(data,link,facts,details):
     body+=details('自然池、历史入口与边界', '<p>legacy_flat_v1历史池：'+links_for_pool(rule['legacy_pool'],link)+'。</p><p>source_stride_v1移动池：'+links_for_pool(rule['stride_pool'],link)+'。</p><p>source_damage_life_v2历史池：'+links_for_pool(rule['damage_life_pool'],link)+'。</p><p>'+esc(rule['current_roll_policy'])+'当前池：'+links_for_pool(rule['current_pool'],link)+'。</p><p>v1只替换原gale_stride位置；v2另替换烬火与苍林，见'+link('rules','source_monster_damage_life')+'；v3替换辉壁最后两槽，见'+link('rules','source_monster_shield_recharge')+'。词池数量、次序、稀有度和机制抽签次数及RNG状态保持。旧图鉴示例仍为历史显式模板；上表移动速度预算保持v0.74原值，不代表v2生命与伤害保持旧值。</p><p>'+esc(rule['current_admission'])+'。</p>')
     body+=facts([('存档结构',value('save-version',rule['save_version'])),('装备词汇',value('vocabulary',rule['equipment_vocabulary'])),('源执行政策',value('source-policy',rule['source_policy'])),('来源版本',esc(entry['source_version'])),('来源SHA256',esc(entry['source_hash']))])
     body+='<p><a href="'+esc(entry['source_url'])+'">固定来源导出</a> · '+link('rules','shared')+' · <a href="../SOURCE_MONSTER_MOVEMENT.zh-CN.md">单条源移动绑定合同</a> · <a href="../qa/v074-reference/README.md">本批资料验证</a></p>'
+    if 'elemental_conversion' in data:
+        body='<p class="fine">历史快照：本章保留上批导出数值与当时元数据；当前存档48、源政策48及开放范围见 '+link('rules','elemental_conversion')+'。旧怪物出生快照不追溯改写，新生源定义仅刷新溯源政策。</p>'+body
     return body
 
 
@@ -675,6 +745,8 @@ def source_monster_damage_life_rule(data,link,facts,details):
     body+=details('四代入口与五槽身份',facts([('ordinary_roll · '+rule['legacy_roll_policy'],links_for_pool(rule['legacy_pool'],link)),('ordinary_roll_source_stride · '+rule['stride_roll_policy'],links_for_pool(rule['stride_pool'],link)),('ordinary_roll_source_damage_life · '+rule['damage_life_roll_policy'],links_for_pool(rule['damage_life_pool'],link)),('ordinary_roll_current · '+rule['current_roll_policy'],links_for_pool(rule['current_pool'],link))])+'<p>'+esc(rule['sampler'])+'。</p>')
     body+=facts([('存档结构',value('save-version',rule['save_version'])),('装备词汇',value('vocabulary',rule['equipment_vocabulary'])),('源执行政策',value('source-policy',rule['source_policy']))])
     body+='<p>'+link('rules','source_monster_movement')+' · '+link('rules','source_monster_shield_recharge')+' · '+link('rules','shared')+' · <a href="../SOURCE_MONSTER_DAMAGE_LIFE.zh-CN.md">源伤害与生命绑定合同</a> · <a href="../qa/v075-reference/README.md">本批资料验证</a></p>'
+    if 'elemental_conversion' in data:
+        body='<p class="fine">历史快照：本章保留上批导出数值与当时元数据；当前存档48、源政策48及开放范围见 '+link('rules','elemental_conversion')+'。旧怪物出生快照不追溯改写，新生源定义仅刷新溯源政策。</p>'+body
     return body
 
 
@@ -712,6 +784,8 @@ def source_monster_shield_recharge_rule(data,link,facts,details):
     body+=details('四代五槽词池与历史边界',facts([('ordinary_roll · '+rule['legacy_roll_policy'],links_for_pool(rule['legacy_pool'],link)),('ordinary_roll_source_stride · '+rule['stride_roll_policy'],links_for_pool(rule['stride_pool'],link)),('ordinary_roll_source_damage_life · '+rule['damage_life_roll_policy'],links_for_pool(rule['damage_life_pool'],link)),('ordinary_roll_current · '+rule['current_roll_policy'],links_for_pool(rule['current_pool'],link))])+'<p>'+esc(rule['sampler'])+'。</p>')
     body+=facts([('存档结构 · Canonical.Rules.VERSION',value('save-version',rule['save_version'])),('装备词汇',value('vocabulary',rule['equipment_vocabulary'])),('源执行政策',value('source-policy',rule['source_policy']))])
     body+='<p>'+link('rules','source_monster_movement')+' · '+link('rules','source_monster_damage_life')+' · '+link('rules','shared')+' · <a href="../SOURCE_MONSTER_SHIELD_RECHARGE.zh-CN.md">源护盾与回复完整合同</a> · <a href="../qa/v076-reference/README.md">本批资料验证</a></p>'
+    if 'elemental_conversion' in data:
+        body='<p class="fine">历史快照：本章保留上批导出数值与当时元数据；当前存档48、源政策48及开放范围见 '+link('rules','elemental_conversion')+'。旧怪物出生快照不追溯改写，新生源定义仅刷新溯源政策。</p>'+body
     return body
 
 
@@ -963,7 +1037,7 @@ def build(data, art):
             body+=details(f'精通 {choice["effect"]} · {label}','<p>'+lines(localized['mastery_choices'][str(choice['effect'])])+'</p>')
         if p['neighbors']:body+=details('原始标准邻接',links('source_passives',p['neighbors']))
         aliases=' '.join([p['name'],p['partition'],*p['stats'],*(line for choice in p['mastery_choices'] for line in choice['stats'])])
-        cards.append(add('source_passives',key,localized['name'],localized['stats'] or state,body,TYPES[p['type']],status='implemented' if selectable else 'research',related=link('rules','source_tree')+(' · '+link('rules','physical_fire_conversion') if key in data.get('physical_fire_conversion',{}).get('entrances',{}) else '')+(' · '+link('rules','zealots_oath') if key == '63425' else '')+(' · '+link('rules','iron_reflexes') if key == '10661' else '')+(' · '+link('rules','resolute_technique') if key == '31961' else '')+(' · '+link('rules','precise_technique') if key == '63620' else '')+(' · '+link('rules','source_fire_dot') if key in data.get('source_fire_dot',{}).get('nodes',{}) else '')+(' · '+link('rules','source_faster_burn') if key in data.get('source_faster_burn',{}).get('nodes',{}) or key in data.get('source_faster_burn',{}).get('blocked_matching_nodes',{}) else '')+(' · '+link('rules','mana_guard') if key == data.get('mana_guard',{}).get('node',{}).get('id') or key in data.get('mana_guard',{}).get('blocked_matching_nodes',{}) else '')+(' · '+link('rules','elemental_resistance_caps') if key in data.get('elemental_resistance_caps',{}).get('nodes',{}) or key in data.get('elemental_resistance_caps',{}).get('boundaries',{}) else ''),search_aliases=aliases))
+        cards.append(add('source_passives',key,localized['name'],localized['stats'] or state,body,TYPES[p['type']],status='implemented' if selectable else 'research',related=link('rules','source_tree')+(' · '+link('rules','elemental_conversion') if 'elemental_conversion' in data and (key in ['8833','56716'] or any(c['effect'] in [4116,53046] for c in p['mastery_choices'])) else '')+(' · '+link('rules','physical_fire_conversion') if key in data.get('physical_fire_conversion',{}).get('entrances',{}) else '')+(' · '+link('rules','zealots_oath') if key == '63425' else '')+(' · '+link('rules','iron_reflexes') if key == '10661' else '')+(' · '+link('rules','resolute_technique') if key == '31961' else '')+(' · '+link('rules','precise_technique') if key == '63620' else '')+(' · '+link('rules','source_fire_dot') if key in data.get('source_fire_dot',{}).get('nodes',{}) else '')+(' · '+link('rules','source_faster_burn') if key in data.get('source_faster_burn',{}).get('nodes',{}) or key in data.get('source_faster_burn',{}).get('blocked_matching_nodes',{}) else '')+(' · '+link('rules','mana_guard') if key == data.get('mana_guard',{}).get('node',{}).get('id') or key in data.get('mana_guard',{}).get('blocked_matching_nodes',{}) else '')+(' · '+link('rules','elemental_resistance_caps') if key in data.get('elemental_resistance_caps',{}).get('nodes',{}) or key in data.get('elemental_resistance_caps',{}).get('boundaries',{}) else ''),search_aliases=aliases))
     for key,m in data['mechanisms'].items():
         player_nodes=[k for k,v in data['passives'].items() if key in v['mechanism_ids']]
         monsters=[k for k,v in data['monsters'].items() if key in v['mechanisms']]
@@ -1197,7 +1271,7 @@ def build(data, art):
         rule_defs.extend([
             ('ownership','统一物品与独立菜单','装备、珠宝、宝石、药剂和碎片都以唯一UID持有，一个实例只能处于一个位置。',ownership+slot_rows+'<p>I/B行囊固定右侧，K技能与角色属性共用左侧；两侧可同时打开并拖动宝石。T源树全屏，关闭后恢复原左右栏；菜单打开时背景战斗冻结。'+bag_text+'悬停详情，Shift比较双戒指目标。容量下降保留宝石和多余技能行，仅停用超出部分。旧装备UID与掷值保持，armor→body_armour、charm→amulet；旧技能/辅助转为独立实例，原始文件先备份，失败不覆盖。v0.26沿用v0.21试玩目录，旧schema14至17先原字节备份后原子迁移为schema18；仅首次新增两瓶入药剂槽1/2，不删除旧物品或再次退天赋点。</p>','implemented'),
             ('supports','技能行与五辅助','每行1个主宝石、5个辅助；10行起步，+1技能行词缀真正增加可绑定的行。',f'<p>原16辅助保留，新增点燃辅助仅适配陨星/龙卷；按主动技能原生能力判定资格；同组不重复同一辅助定义。同名主宝石可独立装配。组与主宝石UID双冷却账阻止换孔/换键刷新。</p><p>真实五辅助冰霜示例：耗魔 {number(example["mana"])}，冷却 {number(example["cooldown"])}秒，初始 {example["initial_count"]}发。</p>'+details('同源实际配方',lines(example['summary']+'\n'+example['details']))+'<p>正式档每30有效根怪累积一件固定26种序列的1级0品质宝石，满包保留待领；原序列不插入新石。点燃辅助通过正式商人4碎片购买或独立测试供应获得。测试随机宝石使用当前目录，失败回滚随机状态；后代/重复死亡无奖励。同名独立UID，正式城镇可回收所选背包宝石得1碎片。</p>','implemented'),
-            ('source_tree','锁定源树与执行覆盖','完整源记录与已实现效果分别报告；数据存在不等于可花点使用。',f'<p>源版本 {source["source_version"]}，原始SHA256 {source["source_sha256"]}。保留 {len(source["nodes"])} 条记录、2387个标准位置和2697条内部边；升华/扩展分区分开。42代理与30涂油节点不可直接分配。<a href="#category-source_passives">逐项查源节点及精通</a></p><p>节点所有效果必须完整执行，精通按选中效果检查。未支持节点灰色锁定，也会阻断后续路径。源数值没有旧181投影上限；旧树仅作历史与怪物机制参考。</p><p>自己的职业起点免费，预算min(level+4,123)。普通节点/精通均1点，专精需同组普通连通的显著节点，重复效果ID拒绝。未分配其他节点可切七起点；升华点数来源尚未实现，不免费授点。</p>','implemented'),
+            ('source_tree','锁定源树与执行覆盖','完整源记录与已实现效果分别报告；数据存在不等于可花点使用。',f'<p>源版本 {source["source_version"]}，原始SHA256 {source["source_sha256"]}。保留 {len(source["nodes"])} 条记录、2387个标准位置和2697条内部边；升华/扩展分区分开。42代理与30涂油节点不可直接分配。<a href="#category-source_passives">逐项查源节点及精通</a></p><p>当前存档 {data['save_version']}；当前源执行政策 {data.get('elemental_conversion',{}).get('source_policy',45)}。节点所有效果必须完整执行，精通按选中效果检查。未支持节点灰色锁定，也会阻断后续路径。源数值没有旧181投影上限；旧树仅作历史与怪物机制参考。</p><p>自己的职业起点免费，预算min(level+4,123)。普通节点/精通均1点，专精需同组普通连通的显著节点，重复效果ID拒绝。未分配其他节点可切七起点；升华点数来源尚未实现，不免费授点。</p>','implemented'),
             ('allocation','源树与珠宝资格','每件珠宝只有一个统一位置；孔必须已分配并沿普通连线连接自己的起点。','<p>寻枝半径280采用当前源坐标单位，允许小型/显著节点断连分配，仍花1点。远程点不向外扩路、不激活孔；未实现节点即使在范围内也不能分配。退款、移动、替换、取回都验证最终构筑，不能遗留依赖失效的节点。原型半径规则不是PoE某颗珠宝的完整复刻。</p><p>'+link('rules','source_tree')+'；下方旧181覆盖图保留作历史机制研究。</p>','implemented'),
             ('source_defenses','属性与命中防御','原始三属性数值进入真实容量、命中、闪避和近战物理作用域。','<p>力量每2点取整+1生命、每5点取整+1%近战物理；敏捷每点+2命中、每5点取整+1%闪避（分配铁反射（闪转甲）后取消此闪避提高并转换原始闪避，见 '+link('rules','iron_reflexes')+'）；智慧每2点取整+1魔力、每10点取整+1%护盾（3.28以后规则）。法术不进行攻击闪避。护甲随物理命中大小重新求减伤，三元素分别使用当前抗性上限（默认75%，最大抗性天赋可提高到本游戏安全上限83%），原始与有效值详见 '+link('rules','elemental_resistance_caps')+'，然后护盾、生命。分配心灵升华后，护盾剩余损伤先按比例交由当前魔力承担，详见 '+link('rules','mana_guard')+'。本段混合受击示例未分配该节点。</p>'+facts([('同源混合受击示例','物理/火/冰/电各100；护甲500、抗性50%/25%/75%'),('防御后分量',esc(component_text(defense['components']))),('护盾扣减',number(defense['shield_spent'])),('生命扣减',number(defense['health_lost']))])+f'<p>本游戏敏捷型怪物闪避320；默认Scion命中140，对应 {percent(c["skitter_accuracy_example"]["base_chance"])}；增加10敏捷后命中160，对应 {percent(c["skitter_accuracy_example"]["improved_chance"])}。预览展示成功命中伤害，未把命中率伪乘成DPS。</p>','implemented'),
             ('shared','共享消费者、历史定义与五条源绑定','人物和怪物共用伤害分量、防御、命中和结算函数；当前有移动、伤害、生命、护盾与回复五条源属性绑定。','<p>23条历史MechanicRegistry定义保持，旧181节点引用保留作研究与回归。当前人物使用原始源树逐项能力门槛，不能套用旧投影合计上限。</p><p>当前共28条定义：23条历史定义，加上'+links('mechanisms',['source_gale_stride','source_ember_power','source_grove_vitality','source_aegis_capacity','source_aegis_recovery'])+'五条当前源绑定。v1仅替换移动；v2替换烬火和苍林；当前v3普通三物种池再替换辉壁最后两槽。'+link('rules','source_monster_movement','移动预算')+'、'+link('rules','source_monster_damage_life','伤害/生命预算')+'及'+link('rules','source_monster_shield_recharge','护盾/回复预算')+'来自实际工厂。</p><p>不表示所有源基石均已共享。仅绑定63417:1、13219:0、52282:0、58218:0以及复苏的21929:1＋6949:1；复苏完整显示两条来源，不把第一条展示别名当作完整证据。不授予整节点、升华资格、Body Transfiguration或更快开始回复。源授予没有固定护盾/回复，独立怪物预算不会授予玩家。</p><p>新护盾身份使地图新增M按冻结容量倍率缩放一次；原护盾S不重复缩放，缺失护盾量保留；无新身份保留旧地图加法。该路径是有意的预算变化。特殊模板、首领与死亡后代保留历史定义，RNG、名额和奖励资格保持。</p>','implemented'),
@@ -1382,6 +1456,8 @@ def build(data, art):
         rule_defs.append(('glove_ring_affixes',RULE_TITLES['glove_ring_affixes'],'既有手套新增固定命中前缀，既有双戒新增三抗后缀；通过实际Main的阈值与抗性供给对照。',glove_ring_affix_rule(data,link,facts,details),'implemented'))
     if 'precise_technique' in data:
         rule_defs.append(('precise_technique',RULE_TITLES['precise_technique'],'最终命中值严格高于最大生命时，攻击伤害额外提高40%；选中后始终不能暴击。',precise_technique_rule(data,link,facts,details),'implemented'))
+    if 'elemental_conversion' in data:
+        rule_defs.append(('elemental_conversion',RULE_TITLES['elemental_conversion'],'同一女巫27点可取三种40%请求，超额统一归一；冰霜与闪电6%穿透只影响最终命中元素。',elemental_conversion_rule(data,link,facts,details),'implemented'))
     if 'physical_fire_conversion' in data:
         rule_defs.append(('physical_fire_conversion',RULE_TITLES['physical_fire_conversion'],'原始物理组装后40%转火；逐条伤害来源、专注取舍、燃烧与物理偷取边界。',physical_fire_conversion_rule(data,link,facts,details),'implemented'))
     if 'zealots_oath' in data:

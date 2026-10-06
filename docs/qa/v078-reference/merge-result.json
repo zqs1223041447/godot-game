@@ -1,0 +1,16 @@
+{
+  "command": [
+    "python3",
+    "docs/qa/v078-reference/merge-fragment.py"
+  ],
+  "exit_code": 1,
+  "seconds": 0.751,
+  "stopped_on": null,
+  "error_lines": [
+    "Traceback (most recent call last):",
+    "AssertionError: ('source_aegis_capacity', ('policy_version',), 'source-tree:3.29.1:policy:45', 'source-tree:3.29.1:policy:48')"
+  ],
+  "source_changed_during_run": [],
+  "reference_pngs_unchanged_in_bytes_and_mtime": true,
+  "unexpected_preserved_file_writes": []
+}

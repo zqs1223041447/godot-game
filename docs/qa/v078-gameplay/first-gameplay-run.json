@@ -1,0 +1,16 @@
+{
+  "label": "first-gameplay",
+  "exit": 1,
+  "seconds": 0.616,
+  "log": "docs/qa/v078-gameplay/first-gameplay.log",
+  "log_sha256": "34fbdddf7054ba007e539db735591eadb4ee5533fd9aabe1a46c8c4d484c9d2f",
+  "sandbox": "/tmp/godot-m1-v078-gameplay-hzbsop77",
+  "command": [
+    "/usr/local/bin/godot",
+    "--headless",
+    "--path",
+    "/workspace/scratch/a51485f153de/v078-elemental-conversion",
+    "--script",
+    "/workspace/scratch/a51485f153de/v078-elemental-conversion/tests/elemental_conversion_gameplay_test.gd"
+  ]
+}

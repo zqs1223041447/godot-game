@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/a51485f153de/v078-elemental-conversion/docs/qa/v078-reference/check-reference.py", line 147, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/scratch/a51485f153de/v078-elemental-conversion/docs/qa/v078-reference/check-reference.py", line 109, in main
+    assert fixture[key]==fixture_bytes['zero'][key],(name,key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('cold-lightning', 'locations')

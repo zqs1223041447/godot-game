@@ -1,0 +1,291 @@
+{
+  "runs": [
+    {
+      "label": "accepted-legacy-v077",
+      "exit": 0,
+      "seconds": 3.274,
+      "log": "docs/qa/v078-gameplay/accepted-legacy-v077.log",
+      "log_sha256": "f4a1fd26b688b200076f6ff25760ac266508adf583de538c891d96044e67bbc8",
+      "sandbox": "/tmp/godot-m1-v078-gameplay-yrk7sf1b",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/v077-combat-outcome-feedback",
+        "--script",
+        "/workspace/scratch/a51485f153de/v078-elemental-conversion/tests/elemental_conversion_legacy_probe.gd"
+      ]
+    },
+    {
+      "label": "accepted-legacy-v078",
+      "exit": 0,
+      "seconds": 3.426,
+      "log": "docs/qa/v078-gameplay/accepted-legacy-v078.log",
+      "log_sha256": "f4a1fd26b688b200076f6ff25760ac266508adf583de538c891d96044e67bbc8",
+      "sandbox": "/tmp/godot-m1-v078-gameplay-qjaz5vvg",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/v078-elemental-conversion",
+        "--script",
+        "/workspace/scratch/a51485f153de/v078-elemental-conversion/tests/elemental_conversion_legacy_probe.gd"
+      ]
+    }
+  ],
+  "comparison": {
+    ".bin": {
+      "equal": true,
+      "bytes": [
+        311776,
+        311776
+      ],
+      "sha256": [
+        "526e6e70c1eaa22fdf0ab328c55df5fbe049d5733d503f0d7dee85b0752307a2",
+        "526e6e70c1eaa22fdf0ab328c55df5fbe049d5733d503f0d7dee85b0752307a2"
+      ]
+    },
+    ".actors.bin": {
+      "equal": false,
+      "bytes": [
+        42016,
+        42016
+      ],
+      "sha256": [
+        "32f2cd8d80f9de3e0e8c108d9f181a44980d9b1cd96c3f3e1695c5a3ef010584",
+        "0788aa4e4909ccd72ce9e2b238373e317216af847166bb2839bb8b36c3e6aba3"
+      ]
+    },
+    ".actors-without-policy-versions.bin": {
+      "equal": true,
+      "bytes": [
+        42016,
+        42016
+      ],
+      "sha256": [
+        "8ec24e4da7fb90fbb3ca8ffa0105ec0bffb10e0dcb751e71060e37019dd19528",
+        "8ec24e4da7fb90fbb3ca8ffa0105ec0bffb10e0dcb751e71060e37019dd19528"
+      ]
+    },
+    ".save": {
+      "equal": false,
+      "bytes": [
+        15162,
+        15162
+      ],
+      "sha256": [
+        "e8f3650749174f5c59eaadca65a925301becb6df38cdc3d4a9714fa97c8c9eec",
+        "b490f7c23c0a99b784345e75ca351f3787698d8f2ae1273a83d54b3115a7117c"
+      ]
+    },
+    "save_schema": [
+      47,
+      48
+    ],
+    "save_equal_except_schema": true,
+    "source_metadata_changes": [
+      {
+        "path": "sample/0/1/mechanism_policy",
+        "v077": "poe-passive-v1+source-tree:3.29.1:policy:45",
+        "v078": "poe-passive-v1+source-tree:3.29.1:policy:48"
+      },
+      {
+        "path": "sample/0/1/mechanism_source_grants/0/source_policy",
+        "v077": 45,
+        "v078": 48
+      },
+      {
+        "path": "sample/0/1/mechanism_source_grants/0/source_save_version",
+        "v077": 45,
+        "v078": 48
+      },
+      {
+        "path": "sample/0/1/mechanism_source_grants/0/policy_version",
+        "v077": "source-tree:3.29.1:policy:45",
+        "v078": "source-tree:3.29.1:policy:48"
+      },
+      {
+        "path": "sample/1/1/mechanism_policy",
+        "v077": "poe-passive-v1+source-tree:3.29.1:policy:45",
+        "v078": "poe-passive-v1+source-tree:3.29.1:policy:48"
+      },
+      {
+        "path": "sample/1/1/mechanism_source_grants/0/source_policy",
+        "v077": 45,
+        "v078": 48
+      },
+      {
+        "path": "sample/1/1/mechanism_source_grants/0/source_save_version",
+        "v077": 45,
+        "v078": 48
+      },
+      {
+        "path": "sample/1/1/mechanism_source_grants/0/policy_version",
+        "v077": "source-tree:3.29.1:policy:45",
+        "v078": "source-tree:3.29.1:policy:48"
+      },
+      {
+        "path": "sample/2/1/mechanism_policy",
+        "v077": "poe-passive-v1+source-tree:3.29.1:policy:45",
+        "v078": "poe-passive-v1+source-tree:3.29.1:policy:48"
+      },
+      {
+        "path": "sample/2/1/mechanism_source_grants/0/source_policy",
+        "v077": 45,
+        "v078": 48
+      },
+      {
+        "path": "sample/2/1/mechanism_source_grants/0/source_save_version",
+        "v077": 45,
+        "v078": 48
+      },
+      {
+        "path": "sample/2/1/mechanism_source_grants/0/policy_version",
+        "v077": "source-tree:3.29.1:policy:45",
+        "v078": "source-tree:3.29.1:policy:48"
+      },
+      {
+        "path": "sample/3/1/mechanism_policy",
+        "v077": "poe-passive-v1+source-tree:3.29.1:policy:45",
+        "v078": "poe-passive-v1+source-tree:3.29.1:policy:48"
+      },
+      {
+        "path": "sample/3/1/mechanism_source_grants/0/source_policy",
+        "v077": 45,
+        "v078": 48
+      },
+      {
+        "path": "sample/3/1/mechanism_source_grants/0/source_save_version",
+        "v077": 45,
+        "v078": 48
+      },
+      {
+        "path": "sample/3/1/mechanism_source_grants/0/policy_version",
+        "v077": "source-tree:3.29.1:policy:45",
+        "v078": "source-tree:3.29.1:policy:48"
+      },
+      {
+        "path": "sample/4/1/mechanism_policy",
+        "v077": "poe-passive-v1+source-tree:3.29.1:policy:45",
+        "v078": "poe-passive-v1+source-tree:3.29.1:policy:48"
+      },
+      {
+        "path": "sample/4/1/mechanism_source_grants/0/source_policy",
+        "v077": 45,
+        "v078": 48
+      },
+      {
+        "path": "sample/4/1/mechanism_source_grants/0/source_save_version",
+        "v077": 45,
+        "v078": 48
+      },
+      {
+        "path": "sample/4/1/mechanism_source_grants/0/policy_version",
+        "v077": "source-tree:3.29.1:policy:45",
+        "v078": "source-tree:3.29.1:policy:48"
+      },
+      {
+        "path": "sample/5/1/mechanism_policy",
+        "v077": "poe-passive-v1+source-tree:3.29.1:policy:45",
+        "v078": "poe-passive-v1+source-tree:3.29.1:policy:48"
+      },
+      {
+        "path": "sample/5/1/mechanism_source_grants/0/source_policy",
+        "v077": 45,
+        "v078": 48
+      },
+      {
+        "path": "sample/5/1/mechanism_source_grants/0/source_save_version",
+        "v077": 45,
+        "v078": 48
+      },
+      {
+        "path": "sample/5/1/mechanism_source_grants/0/policy_version",
+        "v077": "source-tree:3.29.1:policy:45",
+        "v078": "source-tree:3.29.1:policy:48"
+      },
+      {
+        "path": "sample/6/1/mechanism_policy",
+        "v077": "poe-passive-v1+source-tree:3.29.1:policy:45",
+        "v078": "poe-passive-v1+source-tree:3.29.1:policy:48"
+      },
+      {
+        "path": "sample/6/1/mechanism_source_grants/0/source_policy",
+        "v077": 45,
+        "v078": 48
+      },
+      {
+        "path": "sample/6/1/mechanism_source_grants/0/source_save_version",
+        "v077": 45,
+        "v078": 48
+      },
+      {
+        "path": "sample/6/1/mechanism_source_grants/0/policy_version",
+        "v077": "source-tree:3.29.1:policy:45",
+        "v078": "source-tree:3.29.1:policy:48"
+      },
+      {
+        "path": "sample/7/1/mechanism_policy",
+        "v077": "poe-passive-v1+source-tree:3.29.1:policy:45",
+        "v078": "poe-passive-v1+source-tree:3.29.1:policy:48"
+      },
+      {
+        "path": "sample/7/1/mechanism_source_grants/0/source_policy",
+        "v077": 45,
+        "v078": 48
+      },
+      {
+        "path": "sample/7/1/mechanism_source_grants/0/source_save_version",
+        "v077": 45,
+        "v078": 48
+      },
+      {
+        "path": "sample/7/1/mechanism_source_grants/0/policy_version",
+        "v077": "source-tree:3.29.1:policy:45",
+        "v078": "source-tree:3.29.1:policy:48"
+      },
+      {
+        "path": "sample/8/1/mechanism_policy",
+        "v077": "poe-passive-v1+source-tree:3.29.1:policy:45",
+        "v078": "poe-passive-v1+source-tree:3.29.1:policy:48"
+      },
+      {
+        "path": "sample/8/1/mechanism_source_grants/0/source_policy",
+        "v077": 45,
+        "v078": 48
+      },
+      {
+        "path": "sample/8/1/mechanism_source_grants/0/source_save_version",
+        "v077": 45,
+        "v078": 48
+      },
+      {
+        "path": "sample/8/1/mechanism_source_grants/0/policy_version",
+        "v077": "source-tree:3.29.1:policy:45",
+        "v078": "source-tree:3.29.1:policy:48"
+      },
+      {
+        "path": "sample/9/1/mechanism_policy",
+        "v077": "poe-passive-v1+source-tree:3.29.1:policy:45",
+        "v078": "poe-passive-v1+source-tree:3.29.1:policy:48"
+      },
+      {
+        "path": "sample/9/1/mechanism_source_grants/0/source_policy",
+        "v077": 45,
+        "v078": 48
+      },
+      {
+        "path": "sample/9/1/mechanism_source_grants/0/source_save_version",
+        "v077": 45,
+        "v078": 48
+      },
+      {
+        "path": "sample/9/1/mechanism_source_grants/0/policy_version",
+        "v077": "source-tree:3.29.1:policy:45",
+        "v078": "source-tree:3.29.1:policy:48"
+      }
+    ],
+    "metadata_scope_valid": true
+  },
+  "source_manifest": "accepted-legacy-sources.json"
+}

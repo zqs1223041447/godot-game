@@ -1,0 +1,7615 @@
+{
+	"actual_hits": [
+		{
+			"assembly": {
+				"added": {
+
+				},
+				"added_effectiveness": 1.0,
+				"base_coefficient": 1.0,
+				"intrinsic": {
+					"physical": 18.0
+				},
+				"stage": "hit_base",
+				"weapon": {
+					"coefficient": 1.0,
+					"components": {
+						"physical": 13.0
+					},
+					"contribution": {
+						"physical": 13.0
+					},
+					"profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "forgeblade",
+						"flat": {
+							"physical": 6.0
+						},
+						"increased": {
+							"physical": 0.3
+						},
+						"item_id": "gear_000004",
+						"sources": [
+							{
+								"affix_id": "whetstone_edge",
+								"stat": "weapon_added_physical",
+								"value": 6.0
+							},
+							{
+								"affix_id": "tempered_edge",
+								"stat": "weapon_physical_increased",
+								"value": 0.3
+							}
+						],
+						"stage": "weapon_local"
+					}
+				}
+			},
+			"before_defense_components": {
+				"cold": 23.808000000000003,
+				"physical": 18.971999999999998
+			},
+			"cast_id": 1,
+			"components": {
+				"cold": 25.236480000000004,
+				"physical": 18.971999999999998
+			},
+			"critical": {
+				"chance": 0.05,
+				"critical": false,
+				"multiplier": 1.0
+			},
+			"details": [
+				{
+					"before_defense": 18.971999999999998,
+					"final": 18.971999999999998,
+					"parts": [
+						{
+							"base": 18.599999999999998,
+							"before_defense": 18.971999999999998,
+							"increased": 0.02,
+							"lineage": [
+								"physical"
+							],
+							"modifier_indices": [
+								0
+							],
+							"modifiers": [
+								"melee_physical_increased"
+							],
+							"more": 1.0
+						}
+					],
+					"resistance": 0.0,
+					"type": "physical"
+				},
+				{
+					"before_defense": 23.808000000000003,
+					"effective_resistance": 0.0,
+					"final": 25.236480000000004,
+					"parts": [
+						{
+							"base": 12.4,
+							"before_defense": 23.808000000000003,
+							"increased": 0.9200000000000002,
+							"lineage": [
+								"physical",
+								"cold"
+							],
+							"modifier_indices": [
+								0,
+								2
+							],
+							"modifiers": [
+								"melee_physical_increased",
+								"cold_increased"
+							],
+							"more": 1.0
+						}
+					],
+					"penetration": 0.06,
+					"resistance": -0.06,
+					"type": "cold"
+				}
+			],
+			"effect_id": "",
+			"health_lost": 44.20848,
+			"phase": "direct",
+			"prevented_components": {
+				"cold": -1.4284800000000004,
+				"physical": 0.0
+			},
+			"projectile_id": 0,
+			"shield_spent": 0.0,
+			"skill_id": "basic",
+			"tags": [
+				"hit",
+				"attack",
+				"melee"
+			],
+			"target_id": 1,
+			"total": 44.20848
+		},
+		{
+			"assembly": {
+				"added": {
+
+				},
+				"added_effectiveness": 1.0,
+				"base_coefficient": 1.0,
+				"intrinsic": {
+					"physical": 18.0
+				},
+				"stage": "hit_base",
+				"weapon": {
+					"coefficient": 1.0,
+					"components": {
+						"physical": 13.0
+					},
+					"contribution": {
+						"physical": 13.0
+					},
+					"profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "ashwood_bow",
+						"flat": {
+							"physical": 6.0
+						},
+						"increased": {
+							"physical": 0.3
+						},
+						"item_id": "gear_000005",
+						"sources": [
+							{
+								"affix_id": "whetstone_edge",
+								"stat": "weapon_added_physical",
+								"value": 6.0
+							},
+							{
+								"affix_id": "tempered_edge",
+								"stat": "weapon_physical_increased",
+								"value": 0.3
+							}
+						],
+						"stage": "weapon_local"
+					}
+				}
+			},
+			"before_defense_components": {
+				"cold": 23.560000000000002,
+				"physical": 18.599999999999998
+			},
+			"cast_id": 1,
+			"components": {
+				"cold": 24.973600000000005,
+				"physical": 18.599999999999998
+			},
+			"critical": {
+				"chance": 0.05,
+				"critical": false,
+				"multiplier": 1.0
+			},
+			"details": [
+				{
+					"before_defense": 18.599999999999998,
+					"final": 18.599999999999998,
+					"parts": [
+						{
+							"base": 18.599999999999998,
+							"before_defense": 18.599999999999998,
+							"increased": 0.0,
+							"lineage": [
+								"physical"
+							],
+							"modifier_indices": [],
+							"modifiers": [],
+							"more": 1.0
+						}
+					],
+					"resistance": 0.0,
+					"type": "physical"
+				},
+				{
+					"before_defense": 23.560000000000002,
+					"effective_resistance": 0.0,
+					"final": 24.973600000000005,
+					"parts": [
+						{
+							"base": 12.4,
+							"before_defense": 23.560000000000002,
+							"increased": 0.9000000000000001,
+							"lineage": [
+								"physical",
+								"cold"
+							],
+							"modifier_indices": [
+								2
+							],
+							"modifiers": [
+								"cold_increased"
+							],
+							"more": 1.0
+						}
+					],
+					"penetration": 0.06,
+					"resistance": -0.06,
+					"type": "cold"
+				}
+			],
+			"effect_id": "",
+			"health_lost": 43.5736,
+			"phase": "outbound",
+			"prevented_components": {
+				"cold": -1.4136000000000024,
+				"physical": 0.0
+			},
+			"projectile_id": 1,
+			"shield_spent": 0.0,
+			"skill_id": "basic",
+			"tags": [
+				"hit",
+				"projectile",
+				"attack"
+			],
+			"target_id": 1,
+			"total": 43.5736
+		},
+		{
+			"assembly": {
+				"added": {
+
+				},
+				"added_effectiveness": 2.8,
+				"base_coefficient": 2.8,
+				"intrinsic": {
+					"physical": 50.4
+				},
+				"stage": "hit_base",
+				"weapon": {
+					"coefficient": 2.8,
+					"components": {
+						"physical": 13.0
+					},
+					"contribution": {
+						"physical": 36.4
+					},
+					"profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "forgeblade",
+						"flat": {
+							"physical": 6.0
+						},
+						"increased": {
+							"physical": 0.3
+						},
+						"item_id": "gear_000004",
+						"sources": [
+							{
+								"affix_id": "whetstone_edge",
+								"stat": "weapon_added_physical",
+								"value": 6.0
+							},
+							{
+								"affix_id": "tempered_edge",
+								"stat": "weapon_physical_increased",
+								"value": 0.3
+							}
+						],
+						"stage": "weapon_local"
+					}
+				}
+			},
+			"before_defense_components": {
+				"cold": 66.6624,
+				"physical": 53.1216
+			},
+			"cast_id": 1,
+			"components": {
+				"cold": 70.66214400000001,
+				"physical": 53.1216
+			},
+			"critical": {
+				"chance": 0.05,
+				"critical": false,
+				"multiplier": 1.0
+			},
+			"details": [
+				{
+					"before_defense": 53.1216,
+					"final": 53.1216,
+					"parts": [
+						{
+							"base": 52.08,
+							"before_defense": 53.1216,
+							"increased": 0.02,
+							"lineage": [
+								"physical"
+							],
+							"modifier_indices": [
+								0
+							],
+							"modifiers": [
+								"melee_physical_increased"
+							],
+							"more": 1.0
+						}
+					],
+					"resistance": 0.0,
+					"type": "physical"
+				},
+				{
+					"before_defense": 66.6624,
+					"effective_resistance": 0.0,
+					"final": 70.66214400000001,
+					"parts": [
+						{
+							"base": 34.72,
+							"before_defense": 66.6624,
+							"increased": 0.9200000000000002,
+							"lineage": [
+								"physical",
+								"cold"
+							],
+							"modifier_indices": [
+								0,
+								2
+							],
+							"modifiers": [
+								"melee_physical_increased",
+								"cold_increased"
+							],
+							"more": 1.0
+						}
+					],
+					"penetration": 0.06,
+					"resistance": -0.06,
+					"type": "cold"
+				}
+			],
+			"effect_id": "",
+			"health_lost": 123.78374400000001,
+			"phase": "direct",
+			"prevented_components": {
+				"cold": -3.999744000000007,
+				"physical": 0.0
+			},
+			"projectile_id": 0,
+			"shield_spent": 0.0,
+			"skill_id": "cleave",
+			"tags": [
+				"hit",
+				"attack",
+				"melee",
+				"area"
+			],
+			"target_id": 1,
+			"total": 123.78374400000001
+		},
+		{
+			"assembly": {
+				"added": {
+					"fire": 6.0,
+					"physical": 6.0
+				},
+				"added_damage_sources": [
+					{
+						"affix_id": "attack_added_physical",
+						"damage_type": "physical",
+						"item_id": "gear_000006",
+						"scope": "attack",
+						"stat": "attack_added_physical",
+						"value": 6.0
+					},
+					{
+						"affix_id": "attack_added_fire",
+						"damage_type": "fire",
+						"item_id": "gear_000006",
+						"scope": "attack",
+						"stat": "attack_added_fire",
+						"value": 6.0
+					}
+				],
+				"added_effectiveness": 1.0,
+				"base_coefficient": 1.0,
+				"intrinsic": {
+					"fire": 7.2,
+					"physical": 10.799999999999999
+				},
+				"stage": "hit_base"
+			},
+			"before_defense_components": {
+				"cold": 9.19296,
+				"fire": 19.245600000000003,
+				"physical": 9.071999999999997
+			},
+			"cast_id": 1,
+			"components": {
+				"cold": 9.7445376,
+				"fire": 19.245600000000003,
+				"physical": 9.071999999999997
+			},
+			"critical": {
+				"chance": 0.05,
+				"critical": false,
+				"multiplier": 1.0
+			},
+			"details": [
+				{
+					"before_defense": 9.071999999999997,
+					"final": 9.071999999999997,
+					"parts": [
+						{
+							"base": 10.079999999999998,
+							"before_defense": 9.071999999999997,
+							"increased": 0.0,
+							"lineage": [
+								"physical"
+							],
+							"modifier_indices": [
+								4,
+								6,
+								7,
+								9
+							],
+							"modifiers": [
+								"support:focus",
+								"support:fire_focus",
+								"support:physical_focus",
+								"support:ignite"
+							],
+							"more": 0.8999999999999999
+						}
+					],
+					"resistance": 0.0,
+					"type": "physical"
+				},
+				{
+					"before_defense": 19.245600000000003,
+					"final": 19.245600000000003,
+					"parts": [
+						{
+							"base": 13.2,
+							"before_defense": 19.245600000000003,
+							"increased": 0.62,
+							"lineage": [
+								"fire"
+							],
+							"modifier_indices": [
+								1,
+								4,
+								5,
+								8,
+								9
+							],
+							"modifiers": [
+								"fire_increased",
+								"support:focus",
+								"support:fire_focus",
+								"support:physical_focus",
+								"support:ignite"
+							],
+							"more": 0.9000000000000001
+						}
+					],
+					"resistance": 0.0,
+					"type": "fire"
+				},
+				{
+					"before_defense": 9.19296,
+					"effective_resistance": 0.0,
+					"final": 9.7445376,
+					"parts": [
+						{
+							"base": 6.719999999999999,
+							"before_defense": 9.19296,
+							"increased": 0.9000000000000001,
+							"lineage": [
+								"physical",
+								"cold"
+							],
+							"modifier_indices": [
+								2,
+								4,
+								6,
+								7,
+								8,
+								9
+							],
+							"modifiers": [
+								"cold_increased",
+								"support:focus",
+								"support:fire_focus",
+								"support:physical_focus",
+								"support:physical_focus",
+								"support:ignite"
+							],
+							"more": 0.72
+						}
+					],
+					"penetration": 0.06,
+					"resistance": -0.06,
+					"type": "cold"
+				}
+			],
+			"effect_id": "",
+			"health_lost": 38.0621376,
+			"phase": "outbound",
+			"prevented_components": {
+				"cold": -0.5515775999999999,
+				"fire": 0.0,
+				"physical": 0.0
+			},
+			"projectile_id": 2,
+			"shield_spent": 0.0,
+			"skill_id": "tornado",
+			"tags": [
+				"hit",
+				"attack",
+				"projectile"
+			],
+			"target_id": 1,
+			"total": 38.0621376
+		},
+		{
+			"assembly": {
+				"added": {
+
+				},
+				"added_effectiveness": 1.0,
+				"base_coefficient": 1.0,
+				"intrinsic": {
+					"physical": 18.0
+				},
+				"stage": "hit_base",
+				"weapon": {
+					"coefficient": 1.0,
+					"components": {
+						"physical": 13.0
+					},
+					"contribution": {
+						"physical": 13.0
+					},
+					"profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "forgeblade",
+						"flat": {
+							"physical": 6.0
+						},
+						"increased": {
+							"physical": 0.3
+						},
+						"item_id": "gear_000004",
+						"sources": [
+							{
+								"affix_id": "whetstone_edge",
+								"stat": "weapon_added_physical",
+								"value": 6.0
+							},
+							{
+								"affix_id": "tempered_edge",
+								"stat": "weapon_physical_increased",
+								"value": 0.3
+							}
+						],
+						"stage": "weapon_local"
+					}
+				}
+			},
+			"before_defense_components": {
+				"lightning": 23.808000000000003,
+				"physical": 18.971999999999998
+			},
+			"cast_id": 1,
+			"components": {
+				"lightning": 25.236480000000004,
+				"physical": 18.971999999999998
+			},
+			"critical": {
+				"chance": 0.05,
+				"critical": false,
+				"multiplier": 1.0
+			},
+			"details": [
+				{
+					"before_defense": 18.971999999999998,
+					"final": 18.971999999999998,
+					"parts": [
+						{
+							"base": 18.599999999999998,
+							"before_defense": 18.971999999999998,
+							"increased": 0.02,
+							"lineage": [
+								"physical"
+							],
+							"modifier_indices": [
+								0
+							],
+							"modifiers": [
+								"melee_physical_increased"
+							],
+							"more": 1.0
+						}
+					],
+					"resistance": 0.0,
+					"type": "physical"
+				},
+				{
+					"before_defense": 23.808000000000003,
+					"effective_resistance": 0.0,
+					"final": 25.236480000000004,
+					"parts": [
+						{
+							"base": 12.4,
+							"before_defense": 23.808000000000003,
+							"increased": 0.9200000000000002,
+							"lineage": [
+								"physical",
+								"lightning"
+							],
+							"modifier_indices": [
+								0,
+								3
+							],
+							"modifiers": [
+								"melee_physical_increased",
+								"lightning_increased"
+							],
+							"more": 1.0
+						}
+					],
+					"penetration": 0.06,
+					"resistance": -0.06,
+					"type": "lightning"
+				}
+			],
+			"effect_id": "",
+			"health_lost": 44.20848,
+			"phase": "direct",
+			"prevented_components": {
+				"lightning": -1.4284800000000004,
+				"physical": 0.0
+			},
+			"projectile_id": 0,
+			"shield_spent": 0.0,
+			"skill_id": "basic",
+			"tags": [
+				"hit",
+				"attack",
+				"melee"
+			],
+			"target_id": 1,
+			"total": 44.20848
+		},
+		{
+			"assembly": {
+				"added": {
+
+				},
+				"added_effectiveness": 1.0,
+				"base_coefficient": 1.0,
+				"intrinsic": {
+					"physical": 18.0
+				},
+				"stage": "hit_base",
+				"weapon": {
+					"coefficient": 1.0,
+					"components": {
+						"physical": 13.0
+					},
+					"contribution": {
+						"physical": 13.0
+					},
+					"profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "ashwood_bow",
+						"flat": {
+							"physical": 6.0
+						},
+						"increased": {
+							"physical": 0.3
+						},
+						"item_id": "gear_000005",
+						"sources": [
+							{
+								"affix_id": "whetstone_edge",
+								"stat": "weapon_added_physical",
+								"value": 6.0
+							},
+							{
+								"affix_id": "tempered_edge",
+								"stat": "weapon_physical_increased",
+								"value": 0.3
+							}
+						],
+						"stage": "weapon_local"
+					}
+				}
+			},
+			"before_defense_components": {
+				"lightning": 23.560000000000002,
+				"physical": 18.599999999999998
+			},
+			"cast_id": 1,
+			"components": {
+				"lightning": 24.973600000000005,
+				"physical": 18.599999999999998
+			},
+			"critical": {
+				"chance": 0.05,
+				"critical": false,
+				"multiplier": 1.0
+			},
+			"details": [
+				{
+					"before_defense": 18.599999999999998,
+					"final": 18.599999999999998,
+					"parts": [
+						{
+							"base": 18.599999999999998,
+							"before_defense": 18.599999999999998,
+							"increased": 0.0,
+							"lineage": [
+								"physical"
+							],
+							"modifier_indices": [],
+							"modifiers": [],
+							"more": 1.0
+						}
+					],
+					"resistance": 0.0,
+					"type": "physical"
+				},
+				{
+					"before_defense": 23.560000000000002,
+					"effective_resistance": 0.0,
+					"final": 24.973600000000005,
+					"parts": [
+						{
+							"base": 12.4,
+							"before_defense": 23.560000000000002,
+							"increased": 0.9000000000000001,
+							"lineage": [
+								"physical",
+								"lightning"
+							],
+							"modifier_indices": [
+								3
+							],
+							"modifiers": [
+								"lightning_increased"
+							],
+							"more": 1.0
+						}
+					],
+					"penetration": 0.06,
+					"resistance": -0.06,
+					"type": "lightning"
+				}
+			],
+			"effect_id": "",
+			"health_lost": 43.5736,
+			"phase": "outbound",
+			"prevented_components": {
+				"lightning": -1.4136000000000024,
+				"physical": 0.0
+			},
+			"projectile_id": 1,
+			"shield_spent": 0.0,
+			"skill_id": "basic",
+			"tags": [
+				"hit",
+				"projectile",
+				"attack"
+			],
+			"target_id": 1,
+			"total": 43.5736
+		},
+		{
+			"assembly": {
+				"added": {
+
+				},
+				"added_effectiveness": 2.8,
+				"base_coefficient": 2.8,
+				"intrinsic": {
+					"physical": 50.4
+				},
+				"stage": "hit_base",
+				"weapon": {
+					"coefficient": 2.8,
+					"components": {
+						"physical": 13.0
+					},
+					"contribution": {
+						"physical": 36.4
+					},
+					"profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "forgeblade",
+						"flat": {
+							"physical": 6.0
+						},
+						"increased": {
+							"physical": 0.3
+						},
+						"item_id": "gear_000004",
+						"sources": [
+							{
+								"affix_id": "whetstone_edge",
+								"stat": "weapon_added_physical",
+								"value": 6.0
+							},
+							{
+								"affix_id": "tempered_edge",
+								"stat": "weapon_physical_increased",
+								"value": 0.3
+							}
+						],
+						"stage": "weapon_local"
+					}
+				}
+			},
+			"before_defense_components": {
+				"lightning": 66.6624,
+				"physical": 53.1216
+			},
+			"cast_id": 1,
+			"components": {
+				"lightning": 70.66214400000001,
+				"physical": 53.1216
+			},
+			"critical": {
+				"chance": 0.05,
+				"critical": false,
+				"multiplier": 1.0
+			},
+			"details": [
+				{
+					"before_defense": 53.1216,
+					"final": 53.1216,
+					"parts": [
+						{
+							"base": 52.08,
+							"before_defense": 53.1216,
+							"increased": 0.02,
+							"lineage": [
+								"physical"
+							],
+							"modifier_indices": [
+								0
+							],
+							"modifiers": [
+								"melee_physical_increased"
+							],
+							"more": 1.0
+						}
+					],
+					"resistance": 0.0,
+					"type": "physical"
+				},
+				{
+					"before_defense": 66.6624,
+					"effective_resistance": 0.0,
+					"final": 70.66214400000001,
+					"parts": [
+						{
+							"base": 34.72,
+							"before_defense": 66.6624,
+							"increased": 0.9200000000000002,
+							"lineage": [
+								"physical",
+								"lightning"
+							],
+							"modifier_indices": [
+								0,
+								3
+							],
+							"modifiers": [
+								"melee_physical_increased",
+								"lightning_increased"
+							],
+							"more": 1.0
+						}
+					],
+					"penetration": 0.06,
+					"resistance": -0.06,
+					"type": "lightning"
+				}
+			],
+			"effect_id": "",
+			"health_lost": 123.78374400000001,
+			"phase": "direct",
+			"prevented_components": {
+				"lightning": -3.999744000000007,
+				"physical": 0.0
+			},
+			"projectile_id": 0,
+			"shield_spent": 0.0,
+			"skill_id": "cleave",
+			"tags": [
+				"hit",
+				"attack",
+				"melee",
+				"area"
+			],
+			"target_id": 1,
+			"total": 123.78374400000001
+		},
+		{
+			"assembly": {
+				"added": {
+					"fire": 6.0,
+					"physical": 6.0
+				},
+				"added_damage_sources": [
+					{
+						"affix_id": "attack_added_physical",
+						"damage_type": "physical",
+						"item_id": "gear_000006",
+						"scope": "attack",
+						"stat": "attack_added_physical",
+						"value": 6.0
+					},
+					{
+						"affix_id": "attack_added_fire",
+						"damage_type": "fire",
+						"item_id": "gear_000006",
+						"scope": "attack",
+						"stat": "attack_added_fire",
+						"value": 6.0
+					}
+				],
+				"added_effectiveness": 1.0,
+				"base_coefficient": 1.0,
+				"intrinsic": {
+					"fire": 7.2,
+					"physical": 10.799999999999999
+				},
+				"stage": "hit_base"
+			},
+			"before_defense_components": {
+				"fire": 19.245600000000003,
+				"lightning": 9.19296,
+				"physical": 9.071999999999997
+			},
+			"cast_id": 1,
+			"components": {
+				"fire": 19.245600000000003,
+				"lightning": 9.7445376,
+				"physical": 9.071999999999997
+			},
+			"critical": {
+				"chance": 0.05,
+				"critical": false,
+				"multiplier": 1.0
+			},
+			"details": [
+				{
+					"before_defense": 9.071999999999997,
+					"final": 9.071999999999997,
+					"parts": [
+						{
+							"base": 10.079999999999998,
+							"before_defense": 9.071999999999997,
+							"increased": 0.0,
+							"lineage": [
+								"physical"
+							],
+							"modifier_indices": [
+								4,
+								6,
+								7,
+								9
+							],
+							"modifiers": [
+								"support:focus",
+								"support:fire_focus",
+								"support:physical_focus",
+								"support:ignite"
+							],
+							"more": 0.8999999999999999
+						}
+					],
+					"resistance": 0.0,
+					"type": "physical"
+				},
+				{
+					"before_defense": 19.245600000000003,
+					"final": 19.245600000000003,
+					"parts": [
+						{
+							"base": 13.2,
+							"before_defense": 19.245600000000003,
+							"increased": 0.62,
+							"lineage": [
+								"fire"
+							],
+							"modifier_indices": [
+								1,
+								4,
+								5,
+								8,
+								9
+							],
+							"modifiers": [
+								"fire_increased",
+								"support:focus",
+								"support:fire_focus",
+								"support:physical_focus",
+								"support:ignite"
+							],
+							"more": 0.9000000000000001
+						}
+					],
+					"resistance": 0.0,
+					"type": "fire"
+				},
+				{
+					"before_defense": 9.19296,
+					"effective_resistance": 0.0,
+					"final": 9.7445376,
+					"parts": [
+						{
+							"base": 6.719999999999999,
+							"before_defense": 9.19296,
+							"increased": 0.9000000000000001,
+							"lineage": [
+								"physical",
+								"lightning"
+							],
+							"modifier_indices": [
+								3,
+								4,
+								6,
+								7,
+								8,
+								9
+							],
+							"modifiers": [
+								"lightning_increased",
+								"support:focus",
+								"support:fire_focus",
+								"support:physical_focus",
+								"support:physical_focus",
+								"support:ignite"
+							],
+							"more": 0.72
+						}
+					],
+					"penetration": 0.06,
+					"resistance": -0.06,
+					"type": "lightning"
+				}
+			],
+			"effect_id": "",
+			"health_lost": 38.0621376,
+			"phase": "outbound",
+			"prevented_components": {
+				"fire": 0.0,
+				"lightning": -0.5515775999999999,
+				"physical": 0.0
+			},
+			"projectile_id": 2,
+			"shield_spent": 0.0,
+			"skill_id": "tornado",
+			"tags": [
+				"hit",
+				"attack",
+				"projectile"
+			],
+			"target_id": 1,
+			"total": 38.0621376
+		},
+		{
+			"assembly": {
+				"added": {
+
+				},
+				"added_effectiveness": 1.0,
+				"base_coefficient": 1.0,
+				"intrinsic": {
+					"physical": 18.0
+				},
+				"stage": "hit_base",
+				"weapon": {
+					"coefficient": 1.0,
+					"components": {
+						"physical": 13.0
+					},
+					"contribution": {
+						"physical": 13.0
+					},
+					"profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "forgeblade",
+						"flat": {
+							"physical": 6.0
+						},
+						"increased": {
+							"physical": 0.3
+						},
+						"item_id": "gear_000004",
+						"sources": [
+							{
+								"affix_id": "whetstone_edge",
+								"stat": "weapon_added_physical",
+								"value": 6.0
+							},
+							{
+								"affix_id": "tempered_edge",
+								"stat": "weapon_physical_increased",
+								"value": 0.3
+							}
+						],
+						"stage": "weapon_local"
+					}
+				}
+			},
+			"before_defense_components": {
+				"cold": 23.808000000000003,
+				"lightning": 23.808000000000003,
+				"physical": 6.323999999999998
+			},
+			"cast_id": 1,
+			"components": {
+				"cold": 25.236480000000004,
+				"lightning": 25.236480000000004,
+				"physical": 6.323999999999998
+			},
+			"critical": {
+				"chance": 0.05,
+				"critical": false,
+				"multiplier": 1.0
+			},
+			"details": [
+				{
+					"before_defense": 6.323999999999998,
+					"final": 6.323999999999998,
+					"parts": [
+						{
+							"base": 6.199999999999998,
+							"before_defense": 6.323999999999998,
+							"increased": 0.02,
+							"lineage": [
+								"physical"
+							],
+							"modifier_indices": [
+								0
+							],
+							"modifiers": [
+								"melee_physical_increased"
+							],
+							"more": 1.0
+						}
+					],
+					"resistance": 0.0,
+					"type": "physical"
+				},
+				{
+					"before_defense": 23.808000000000003,
+					"effective_resistance": 0.0,
+					"final": 25.236480000000004,
+					"parts": [
+						{
+							"base": 12.4,
+							"before_defense": 23.808000000000003,
+							"increased": 0.9200000000000002,
+							"lineage": [
+								"physical",
+								"cold"
+							],
+							"modifier_indices": [
+								0,
+								2
+							],
+							"modifiers": [
+								"melee_physical_increased",
+								"cold_increased"
+							],
+							"more": 1.0
+						}
+					],
+					"penetration": 0.06,
+					"resistance": -0.06,
+					"type": "cold"
+				},
+				{
+					"before_defense": 23.808000000000003,
+					"effective_resistance": 0.0,
+					"final": 25.236480000000004,
+					"parts": [
+						{
+							"base": 12.4,
+							"before_defense": 23.808000000000003,
+							"increased": 0.9200000000000002,
+							"lineage": [
+								"physical",
+								"lightning"
+							],
+							"modifier_indices": [
+								0,
+								3
+							],
+							"modifiers": [
+								"melee_physical_increased",
+								"lightning_increased"
+							],
+							"more": 1.0
+						}
+					],
+					"penetration": 0.06,
+					"resistance": -0.06,
+					"type": "lightning"
+				}
+			],
+			"effect_id": "",
+			"health_lost": 56.796960000000006,
+			"phase": "direct",
+			"prevented_components": {
+				"cold": -1.4284800000000004,
+				"lightning": -1.4284800000000004,
+				"physical": 0.0
+			},
+			"projectile_id": 0,
+			"shield_spent": 0.0,
+			"skill_id": "basic",
+			"tags": [
+				"hit",
+				"attack",
+				"melee"
+			],
+			"target_id": 1,
+			"total": 56.796960000000006
+		},
+		{
+			"assembly": {
+				"added": {
+
+				},
+				"added_effectiveness": 1.0,
+				"base_coefficient": 1.0,
+				"intrinsic": {
+					"physical": 18.0
+				},
+				"stage": "hit_base",
+				"weapon": {
+					"coefficient": 1.0,
+					"components": {
+						"physical": 13.0
+					},
+					"contribution": {
+						"physical": 13.0
+					},
+					"profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "ashwood_bow",
+						"flat": {
+							"physical": 6.0
+						},
+						"increased": {
+							"physical": 0.3
+						},
+						"item_id": "gear_000005",
+						"sources": [
+							{
+								"affix_id": "whetstone_edge",
+								"stat": "weapon_added_physical",
+								"value": 6.0
+							},
+							{
+								"affix_id": "tempered_edge",
+								"stat": "weapon_physical_increased",
+								"value": 0.3
+							}
+						],
+						"stage": "weapon_local"
+					}
+				}
+			},
+			"before_defense_components": {
+				"cold": 23.560000000000002,
+				"lightning": 23.560000000000002,
+				"physical": 6.199999999999998
+			},
+			"cast_id": 1,
+			"components": {
+				"cold": 24.973600000000005,
+				"lightning": 24.973600000000005,
+				"physical": 6.199999999999998
+			},
+			"critical": {
+				"chance": 0.05,
+				"critical": false,
+				"multiplier": 1.0
+			},
+			"details": [
+				{
+					"before_defense": 6.199999999999998,
+					"final": 6.199999999999998,
+					"parts": [
+						{
+							"base": 6.199999999999998,
+							"before_defense": 6.199999999999998,
+							"increased": 0.0,
+							"lineage": [
+								"physical"
+							],
+							"modifier_indices": [],
+							"modifiers": [],
+							"more": 1.0
+						}
+					],
+					"resistance": 0.0,
+					"type": "physical"
+				},
+				{
+					"before_defense": 23.560000000000002,
+					"effective_resistance": 0.0,
+					"final": 24.973600000000005,
+					"parts": [
+						{
+							"base": 12.4,
+							"before_defense": 23.560000000000002,
+							"increased": 0.9000000000000001,
+							"lineage": [
+								"physical",
+								"cold"
+							],
+							"modifier_indices": [
+								2
+							],
+							"modifiers": [
+								"cold_increased"
+							],
+							"more": 1.0
+						}
+					],
+					"penetration": 0.06,
+					"resistance": -0.06,
+					"type": "cold"
+				},
+				{
+					"before_defense": 23.560000000000002,
+					"effective_resistance": 0.0,
+					"final": 24.973600000000005,
+					"parts": [
+						{
+							"base": 12.4,
+							"before_defense": 23.560000000000002,
+							"increased": 0.9000000000000001,
+							"lineage": [
+								"physical",
+								"lightning"
+							],
+							"modifier_indices": [
+								3
+							],
+							"modifiers": [
+								"lightning_increased"
+							],
+							"more": 1.0
+						}
+					],
+					"penetration": 0.06,
+					"resistance": -0.06,
+					"type": "lightning"
+				}
+			],
+			"effect_id": "",
+			"health_lost": 56.14720000000001,
+			"phase": "outbound",
+			"prevented_components": {
+				"cold": -1.4136000000000024,
+				"lightning": -1.4136000000000024,
+				"physical": 0.0
+			},
+			"projectile_id": 1,
+			"shield_spent": 0.0,
+			"skill_id": "basic",
+			"tags": [
+				"hit",
+				"projectile",
+				"attack"
+			],
+			"target_id": 1,
+			"total": 56.14720000000001
+		},
+		{
+			"assembly": {
+				"added": {
+
+				},
+				"added_effectiveness": 2.8,
+				"base_coefficient": 2.8,
+				"intrinsic": {
+					"physical": 50.4
+				},
+				"stage": "hit_base",
+				"weapon": {
+					"coefficient": 2.8,
+					"components": {
+						"physical": 13.0
+					},
+					"contribution": {
+						"physical": 36.4
+					},
+					"profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "forgeblade",
+						"flat": {
+							"physical": 6.0
+						},
+						"increased": {
+							"physical": 0.3
+						},
+						"item_id": "gear_000004",
+						"sources": [
+							{
+								"affix_id": "whetstone_edge",
+								"stat": "weapon_added_physical",
+								"value": 6.0
+							},
+							{
+								"affix_id": "tempered_edge",
+								"stat": "weapon_physical_increased",
+								"value": 0.3
+							}
+						],
+						"stage": "weapon_local"
+					}
+				}
+			},
+			"before_defense_components": {
+				"cold": 66.6624,
+				"lightning": 66.6624,
+				"physical": 17.707199999999997
+			},
+			"cast_id": 1,
+			"components": {
+				"cold": 70.66214400000001,
+				"lightning": 70.66214400000001,
+				"physical": 17.707199999999997
+			},
+			"critical": {
+				"chance": 0.05,
+				"critical": false,
+				"multiplier": 1.0
+			},
+			"details": [
+				{
+					"before_defense": 17.707199999999997,
+					"final": 17.707199999999997,
+					"parts": [
+						{
+							"base": 17.359999999999996,
+							"before_defense": 17.707199999999997,
+							"increased": 0.02,
+							"lineage": [
+								"physical"
+							],
+							"modifier_indices": [
+								0
+							],
+							"modifiers": [
+								"melee_physical_increased"
+							],
+							"more": 1.0
+						}
+					],
+					"resistance": 0.0,
+					"type": "physical"
+				},
+				{
+					"before_defense": 66.6624,
+					"effective_resistance": 0.0,
+					"final": 70.66214400000001,
+					"parts": [
+						{
+							"base": 34.72,
+							"before_defense": 66.6624,
+							"increased": 0.9200000000000002,
+							"lineage": [
+								"physical",
+								"cold"
+							],
+							"modifier_indices": [
+								0,
+								2
+							],
+							"modifiers": [
+								"melee_physical_increased",
+								"cold_increased"
+							],
+							"more": 1.0
+						}
+					],
+					"penetration": 0.06,
+					"resistance": -0.06,
+					"type": "cold"
+				},
+				{
+					"before_defense": 66.6624,
+					"effective_resistance": 0.0,
+					"final": 70.66214400000001,
+					"parts": [
+						{
+							"base": 34.72,
+							"before_defense": 66.6624,
+							"increased": 0.9200000000000002,
+							"lineage": [
+								"physical",
+								"lightning"
+							],
+							"modifier_indices": [
+								0,
+								3
+							],
+							"modifiers": [
+								"melee_physical_increased",
+								"lightning_increased"
+							],
+							"more": 1.0
+						}
+					],
+					"penetration": 0.06,
+					"resistance": -0.06,
+					"type": "lightning"
+				}
+			],
+			"effect_id": "",
+			"health_lost": 159.03148800000002,
+			"phase": "direct",
+			"prevented_components": {
+				"cold": -3.999744000000007,
+				"lightning": -3.999744000000007,
+				"physical": 0.0
+			},
+			"projectile_id": 0,
+			"shield_spent": 0.0,
+			"skill_id": "cleave",
+			"tags": [
+				"hit",
+				"attack",
+				"melee",
+				"area"
+			],
+			"target_id": 1,
+			"total": 159.03148800000002
+		},
+		{
+			"assembly": {
+				"added": {
+					"fire": 6.0,
+					"physical": 6.0
+				},
+				"added_damage_sources": [
+					{
+						"affix_id": "attack_added_physical",
+						"damage_type": "physical",
+						"item_id": "gear_000006",
+						"scope": "attack",
+						"stat": "attack_added_physical",
+						"value": 6.0
+					},
+					{
+						"affix_id": "attack_added_fire",
+						"damage_type": "fire",
+						"item_id": "gear_000006",
+						"scope": "attack",
+						"stat": "attack_added_fire",
+						"value": 6.0
+					}
+				],
+				"added_effectiveness": 1.0,
+				"base_coefficient": 1.0,
+				"intrinsic": {
+					"fire": 7.2,
+					"physical": 10.799999999999999
+				},
+				"stage": "hit_base"
+			},
+			"before_defense_components": {
+				"cold": 9.19296,
+				"fire": 19.245600000000003,
+				"lightning": 9.19296,
+				"physical": 3.0239999999999982
+			},
+			"cast_id": 1,
+			"components": {
+				"cold": 9.7445376,
+				"fire": 19.245600000000003,
+				"lightning": 9.7445376,
+				"physical": 3.0239999999999982
+			},
+			"critical": {
+				"chance": 0.05,
+				"critical": false,
+				"multiplier": 1.0
+			},
+			"details": [
+				{
+					"before_defense": 3.0239999999999982,
+					"final": 3.0239999999999982,
+					"parts": [
+						{
+							"base": 3.3599999999999985,
+							"before_defense": 3.0239999999999982,
+							"increased": 0.0,
+							"lineage": [
+								"physical"
+							],
+							"modifier_indices": [
+								4,
+								6,
+								7,
+								9
+							],
+							"modifiers": [
+								"support:focus",
+								"support:fire_focus",
+								"support:physical_focus",
+								"support:ignite"
+							],
+							"more": 0.8999999999999999
+						}
+					],
+					"resistance": 0.0,
+					"type": "physical"
+				},
+				{
+					"before_defense": 19.245600000000003,
+					"final": 19.245600000000003,
+					"parts": [
+						{
+							"base": 13.2,
+							"before_defense": 19.245600000000003,
+							"increased": 0.62,
+							"lineage": [
+								"fire"
+							],
+							"modifier_indices": [
+								1,
+								4,
+								5,
+								8,
+								9
+							],
+							"modifiers": [
+								"fire_increased",
+								"support:focus",
+								"support:fire_focus",
+								"support:physical_focus",
+								"support:ignite"
+							],
+							"more": 0.9000000000000001
+						}
+					],
+					"resistance": 0.0,
+					"type": "fire"
+				},
+				{
+					"before_defense": 9.19296,
+					"effective_resistance": 0.0,
+					"final": 9.7445376,
+					"parts": [
+						{
+							"base": 6.719999999999999,
+							"before_defense": 9.19296,
+							"increased": 0.9000000000000001,
+							"lineage": [
+								"physical",
+								"cold"
+							],
+							"modifier_indices": [
+								2,
+								4,
+								6,
+								7,
+								8,
+								9
+							],
+							"modifiers": [
+								"cold_increased",
+								"support:focus",
+								"support:fire_focus",
+								"support:physical_focus",
+								"support:physical_focus",
+								"support:ignite"
+							],
+							"more": 0.72
+						}
+					],
+					"penetration": 0.06,
+					"resistance": -0.06,
+					"type": "cold"
+				},
+				{
+					"before_defense": 9.19296,
+					"effective_resistance": 0.0,
+					"final": 9.7445376,
+					"parts": [
+						{
+							"base": 6.719999999999999,
+							"before_defense": 9.19296,
+							"increased": 0.9000000000000001,
+							"lineage": [
+								"physical",
+								"lightning"
+							],
+							"modifier_indices": [
+								3,
+								4,
+								6,
+								7,
+								8,
+								9
+							],
+							"modifiers": [
+								"lightning_increased",
+								"support:focus",
+								"support:fire_focus",
+								"support:physical_focus",
+								"support:physical_focus",
+								"support:ignite"
+							],
+							"more": 0.72
+						}
+					],
+					"penetration": 0.06,
+					"resistance": -0.06,
+					"type": "lightning"
+				}
+			],
+			"effect_id": "",
+			"health_lost": 41.7586752,
+			"phase": "outbound",
+			"prevented_components": {
+				"cold": -0.5515775999999999,
+				"fire": 0.0,
+				"lightning": -0.5515775999999999,
+				"physical": 0.0
+			},
+			"projectile_id": 2,
+			"shield_spent": 0.0,
+			"skill_id": "tornado",
+			"tags": [
+				"hit",
+				"attack",
+				"projectile"
+			],
+			"target_id": 1,
+			"total": 41.7586752
+		},
+		{
+			"assembly": {
+				"added": {
+
+				},
+				"added_effectiveness": 1.0,
+				"base_coefficient": 1.0,
+				"intrinsic": {
+					"physical": 18.0
+				},
+				"stage": "hit_base",
+				"weapon": {
+					"coefficient": 1.0,
+					"components": {
+						"physical": 13.0
+					},
+					"contribution": {
+						"physical": 13.0
+					},
+					"profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "forgeblade",
+						"flat": {
+							"physical": 6.0
+						},
+						"increased": {
+							"physical": 0.3
+						},
+						"item_id": "gear_000004",
+						"sources": [
+							{
+								"affix_id": "whetstone_edge",
+								"stat": "weapon_added_physical",
+								"value": 6.0
+							},
+							{
+								"affix_id": "tempered_edge",
+								"stat": "weapon_physical_increased",
+								"value": 0.3
+							}
+						],
+						"stage": "weapon_local"
+					}
+				}
+			},
+			"before_defense_components": {
+				"cold": 19.84,
+				"fire": 14.879999999999997,
+				"lightning": 19.84
+			},
+			"cast_id": 1,
+			"components": {
+				"cold": 21.0304,
+				"fire": 14.879999999999997,
+				"lightning": 21.0304
+			},
+			"critical": {
+				"chance": 0.05,
+				"critical": false,
+				"multiplier": 1.0
+			},
+			"details": [
+				{
+					"before_defense": 14.879999999999997,
+					"final": 14.879999999999997,
+					"parts": [
+						{
+							"base": 10.333333333333332,
+							"before_defense": 14.879999999999997,
+							"increased": 0.44,
+							"lineage": [
+								"physical",
+								"fire"
+							],
+							"modifier_indices": [
+								0,
+								1
+							],
+							"modifiers": [
+								"melee_physical_increased",
+								"fire_increased"
+							],
+							"more": 1.0
+						}
+					],
+					"resistance": 0.0,
+					"type": "fire"
+				},
+				{
+					"before_defense": 19.84,
+					"effective_resistance": 0.0,
+					"final": 21.0304,
+					"parts": [
+						{
+							"base": 10.333333333333332,
+							"before_defense": 19.84,
+							"increased": 0.9200000000000002,
+							"lineage": [
+								"physical",
+								"cold"
+							],
+							"modifier_indices": [
+								0,
+								2
+							],
+							"modifiers": [
+								"melee_physical_increased",
+								"cold_increased"
+							],
+							"more": 1.0
+						}
+					],
+					"penetration": 0.06,
+					"resistance": -0.06,
+					"type": "cold"
+				},
+				{
+					"before_defense": 19.84,
+					"effective_resistance": 0.0,
+					"final": 21.0304,
+					"parts": [
+						{
+							"base": 10.333333333333332,
+							"before_defense": 19.84,
+							"increased": 0.9200000000000002,
+							"lineage": [
+								"physical",
+								"lightning"
+							],
+							"modifier_indices": [
+								0,
+								3
+							],
+							"modifiers": [
+								"melee_physical_increased",
+								"lightning_increased"
+							],
+							"more": 1.0
+						}
+					],
+					"penetration": 0.06,
+					"resistance": -0.06,
+					"type": "lightning"
+				}
+			],
+			"effect_id": "",
+			"health_lost": 56.940799999999996,
+			"phase": "direct",
+			"prevented_components": {
+				"cold": -1.1904000000000003,
+				"fire": 0.0,
+				"lightning": -1.1904000000000003
+			},
+			"projectile_id": 0,
+			"shield_spent": 0.0,
+			"skill_id": "basic",
+			"tags": [
+				"hit",
+				"attack",
+				"melee"
+			],
+			"target_id": 1,
+			"total": 56.940799999999996
+		},
+		{
+			"assembly": {
+				"added": {
+
+				},
+				"added_effectiveness": 1.0,
+				"base_coefficient": 1.0,
+				"intrinsic": {
+					"physical": 18.0
+				},
+				"stage": "hit_base",
+				"weapon": {
+					"coefficient": 1.0,
+					"components": {
+						"physical": 13.0
+					},
+					"contribution": {
+						"physical": 13.0
+					},
+					"profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "ashwood_bow",
+						"flat": {
+							"physical": 6.0
+						},
+						"increased": {
+							"physical": 0.3
+						},
+						"item_id": "gear_000005",
+						"sources": [
+							{
+								"affix_id": "whetstone_edge",
+								"stat": "weapon_added_physical",
+								"value": 6.0
+							},
+							{
+								"affix_id": "tempered_edge",
+								"stat": "weapon_physical_increased",
+								"value": 0.3
+							}
+						],
+						"stage": "weapon_local"
+					}
+				}
+			},
+			"before_defense_components": {
+				"cold": 19.633333333333333,
+				"fire": 14.67333333333333,
+				"lightning": 19.633333333333333
+			},
+			"cast_id": 1,
+			"components": {
+				"cold": 20.811333333333334,
+				"fire": 14.67333333333333,
+				"lightning": 20.811333333333334
+			},
+			"critical": {
+				"chance": 0.05,
+				"critical": false,
+				"multiplier": 1.0
+			},
+			"details": [
+				{
+					"before_defense": 14.67333333333333,
+					"final": 14.67333333333333,
+					"parts": [
+						{
+							"base": 10.333333333333332,
+							"before_defense": 14.67333333333333,
+							"increased": 0.42,
+							"lineage": [
+								"physical",
+								"fire"
+							],
+							"modifier_indices": [
+								1
+							],
+							"modifiers": [
+								"fire_increased"
+							],
+							"more": 1.0
+						}
+					],
+					"resistance": 0.0,
+					"type": "fire"
+				},
+				{
+					"before_defense": 19.633333333333333,
+					"effective_resistance": 0.0,
+					"final": 20.811333333333334,
+					"parts": [
+						{
+							"base": 10.333333333333332,
+							"before_defense": 19.633333333333333,
+							"increased": 0.9000000000000001,
+							"lineage": [
+								"physical",
+								"cold"
+							],
+							"modifier_indices": [
+								2
+							],
+							"modifiers": [
+								"cold_increased"
+							],
+							"more": 1.0
+						}
+					],
+					"penetration": 0.06,
+					"resistance": -0.06,
+					"type": "cold"
+				},
+				{
+					"before_defense": 19.633333333333333,
+					"effective_resistance": 0.0,
+					"final": 20.811333333333334,
+					"parts": [
+						{
+							"base": 10.333333333333332,
+							"before_defense": 19.633333333333333,
+							"increased": 0.9000000000000001,
+							"lineage": [
+								"physical",
+								"lightning"
+							],
+							"modifier_indices": [
+								3
+							],
+							"modifiers": [
+								"lightning_increased"
+							],
+							"more": 1.0
+						}
+					],
+					"penetration": 0.06,
+					"resistance": -0.06,
+					"type": "lightning"
+				}
+			],
+			"effect_id": "",
+			"health_lost": 56.29599999999999,
+			"phase": "outbound",
+			"prevented_components": {
+				"cold": -1.1780000000000008,
+				"fire": 0.0,
+				"lightning": -1.1780000000000008
+			},
+			"projectile_id": 1,
+			"shield_spent": 0.0,
+			"skill_id": "basic",
+			"tags": [
+				"hit",
+				"projectile",
+				"attack"
+			],
+			"target_id": 1,
+			"total": 56.29599999999999
+		},
+		{
+			"assembly": {
+				"added": {
+
+				},
+				"added_effectiveness": 2.8,
+				"base_coefficient": 2.8,
+				"intrinsic": {
+					"physical": 50.4
+				},
+				"stage": "hit_base",
+				"weapon": {
+					"coefficient": 2.8,
+					"components": {
+						"physical": 13.0
+					},
+					"contribution": {
+						"physical": 36.4
+					},
+					"profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "forgeblade",
+						"flat": {
+							"physical": 6.0
+						},
+						"increased": {
+							"physical": 0.3
+						},
+						"item_id": "gear_000004",
+						"sources": [
+							{
+								"affix_id": "whetstone_edge",
+								"stat": "weapon_added_physical",
+								"value": 6.0
+							},
+							{
+								"affix_id": "tempered_edge",
+								"stat": "weapon_physical_increased",
+								"value": 0.3
+							}
+						],
+						"stage": "weapon_local"
+					}
+				}
+			},
+			"before_defense_components": {
+				"cold": 55.552,
+				"fire": 41.663999999999994,
+				"lightning": 55.552
+			},
+			"cast_id": 1,
+			"components": {
+				"cold": 58.88512,
+				"fire": 41.663999999999994,
+				"lightning": 58.88512
+			},
+			"critical": {
+				"chance": 0.05,
+				"critical": false,
+				"multiplier": 1.0
+			},
+			"details": [
+				{
+					"before_defense": 41.663999999999994,
+					"final": 41.663999999999994,
+					"parts": [
+						{
+							"base": 28.93333333333333,
+							"before_defense": 41.663999999999994,
+							"increased": 0.44,
+							"lineage": [
+								"physical",
+								"fire"
+							],
+							"modifier_indices": [
+								0,
+								1
+							],
+							"modifiers": [
+								"melee_physical_increased",
+								"fire_increased"
+							],
+							"more": 1.0
+						}
+					],
+					"resistance": 0.0,
+					"type": "fire"
+				},
+				{
+					"before_defense": 55.552,
+					"effective_resistance": 0.0,
+					"final": 58.88512,
+					"parts": [
+						{
+							"base": 28.93333333333333,
+							"before_defense": 55.552,
+							"increased": 0.9200000000000002,
+							"lineage": [
+								"physical",
+								"cold"
+							],
+							"modifier_indices": [
+								0,
+								2
+							],
+							"modifiers": [
+								"melee_physical_increased",
+								"cold_increased"
+							],
+							"more": 1.0
+						}
+					],
+					"penetration": 0.06,
+					"resistance": -0.06,
+					"type": "cold"
+				},
+				{
+					"before_defense": 55.552,
+					"effective_resistance": 0.0,
+					"final": 58.88512,
+					"parts": [
+						{
+							"base": 28.93333333333333,
+							"before_defense": 55.552,
+							"increased": 0.9200000000000002,
+							"lineage": [
+								"physical",
+								"lightning"
+							],
+							"modifier_indices": [
+								0,
+								3
+							],
+							"modifiers": [
+								"melee_physical_increased",
+								"lightning_increased"
+							],
+							"more": 1.0
+						}
+					],
+					"penetration": 0.06,
+					"resistance": -0.06,
+					"type": "lightning"
+				}
+			],
+			"effect_id": "",
+			"health_lost": 159.43424,
+			"phase": "direct",
+			"prevented_components": {
+				"cold": -3.333120000000001,
+				"fire": 0.0,
+				"lightning": -3.333120000000001
+			},
+			"projectile_id": 0,
+			"shield_spent": 0.0,
+			"skill_id": "cleave",
+			"tags": [
+				"hit",
+				"attack",
+				"melee",
+				"area"
+			],
+			"target_id": 1,
+			"total": 159.43424
+		},
+		{
+			"assembly": {
+				"added": {
+					"fire": 6.0,
+					"physical": 6.0
+				},
+				"added_damage_sources": [
+					{
+						"affix_id": "attack_added_physical",
+						"damage_type": "physical",
+						"item_id": "gear_000006",
+						"scope": "attack",
+						"stat": "attack_added_physical",
+						"value": 6.0
+					},
+					{
+						"affix_id": "attack_added_fire",
+						"damage_type": "fire",
+						"item_id": "gear_000006",
+						"scope": "attack",
+						"stat": "attack_added_fire",
+						"value": 6.0
+					}
+				],
+				"added_effectiveness": 1.0,
+				"base_coefficient": 1.0,
+				"intrinsic": {
+					"fire": 7.2,
+					"physical": 10.799999999999999
+				},
+				"stage": "hit_base"
+			},
+			"before_defense_components": {
+				"cold": 7.660799999999999,
+				"fire": 27.083808000000005,
+				"lightning": 7.660799999999999
+			},
+			"cast_id": 1,
+			"components": {
+				"cold": 8.120448,
+				"fire": 27.083808000000005,
+				"lightning": 8.120448
+			},
+			"critical": {
+				"chance": 0.05,
+				"critical": false,
+				"multiplier": 1.0
+			},
+			"details": [
+				{
+					"before_defense": 27.083808000000005,
+					"final": 27.083808000000005,
+					"parts": [
+						{
+							"base": 13.2,
+							"before_defense": 19.245600000000003,
+							"increased": 0.62,
+							"lineage": [
+								"fire"
+							],
+							"modifier_indices": [
+								1,
+								4,
+								5,
+								8,
+								9
+							],
+							"modifiers": [
+								"fire_increased",
+								"support:focus",
+								"support:fire_focus",
+								"support:physical_focus",
+								"support:ignite"
+							],
+							"more": 0.9000000000000001
+						},
+						{
+							"base": 5.599999999999999,
+							"before_defense": 7.838208,
+							"increased": 0.62,
+							"lineage": [
+								"physical",
+								"fire"
+							],
+							"modifier_indices": [
+								1,
+								4,
+								5,
+								6,
+								7,
+								8,
+								9
+							],
+							"modifiers": [
+								"fire_increased",
+								"support:focus",
+								"support:fire_focus",
+								"support:fire_focus",
+								"support:physical_focus",
+								"support:physical_focus",
+								"support:ignite"
+							],
+							"more": 0.8640000000000001
+						}
+					],
+					"resistance": 0.0,
+					"type": "fire"
+				},
+				{
+					"before_defense": 7.660799999999999,
+					"effective_resistance": 0.0,
+					"final": 8.120448,
+					"parts": [
+						{
+							"base": 5.599999999999999,
+							"before_defense": 7.660799999999999,
+							"increased": 0.9000000000000001,
+							"lineage": [
+								"physical",
+								"cold"
+							],
+							"modifier_indices": [
+								2,
+								4,
+								6,
+								7,
+								8,
+								9
+							],
+							"modifiers": [
+								"cold_increased",
+								"support:focus",
+								"support:fire_focus",
+								"support:physical_focus",
+								"support:physical_focus",
+								"support:ignite"
+							],
+							"more": 0.72
+						}
+					],
+					"penetration": 0.06,
+					"resistance": -0.06,
+					"type": "cold"
+				},
+				{
+					"before_defense": 7.660799999999999,
+					"effective_resistance": 0.0,
+					"final": 8.120448,
+					"parts": [
+						{
+							"base": 5.599999999999999,
+							"before_defense": 7.660799999999999,
+							"increased": 0.9000000000000001,
+							"lineage": [
+								"physical",
+								"lightning"
+							],
+							"modifier_indices": [
+								3,
+								4,
+								6,
+								7,
+								8,
+								9
+							],
+							"modifiers": [
+								"lightning_increased",
+								"support:focus",
+								"support:fire_focus",
+								"support:physical_focus",
+								"support:physical_focus",
+								"support:ignite"
+							],
+							"more": 0.72
+						}
+					],
+					"penetration": 0.06,
+					"resistance": -0.06,
+					"type": "lightning"
+				}
+			],
+			"effect_id": "",
+			"health_lost": 43.324704,
+			"phase": "outbound",
+			"prevented_components": {
+				"cold": -0.4596480000000005,
+				"fire": 0.0,
+				"lightning": -0.4596480000000005
+			},
+			"projectile_id": 2,
+			"shield_spent": 0.0,
+			"skill_id": "tornado",
+			"tags": [
+				"hit",
+				"attack",
+				"projectile"
+			],
+			"target_id": 1,
+			"total": 43.324704
+		}
+	],
+	"burning": [
+		{
+			"burn": {
+				"last_time": 0.0,
+				"provenance": {
+					"cast_id": 1,
+					"phase": "outbound",
+					"projectile_id": 2,
+					"skill_id": "tornado"
+				},
+				"raw_dps": 112.23765,
+				"remaining": 2.4,
+				"source_id": 0,
+				"target_id": 1,
+				"target_kind": "monster"
+			},
+			"hit": {
+				"assembly": {
+					"added": {
+						"fire": 7.0,
+						"physical": 10.0
+					},
+					"added_effectiveness": 1.0,
+					"base_coefficient": 1.0,
+					"intrinsic": {
+						"fire": 40.0,
+						"physical": 60.0
+					},
+					"stage": "hit_base"
+				},
+				"before_defense_components": {
+					"cold": 60.48,
+					"fire": 213.78600000000003,
+					"lightning": 60.48
+				},
+				"cast_id": 1,
+				"components": {
+					"cold": 64.1088,
+					"fire": 160.33950000000002,
+					"lightning": 64.1088
+				},
+				"critical": {
+					"chance": 1.0,
+					"critical": true,
+					"multiplier": 2.0
+				},
+				"details": [
+					{
+						"before_defense": 213.78600000000003,
+						"final": 160.33950000000002,
+						"parts": [
+							{
+								"base": 47.0,
+								"before_defense": 131.13000000000002,
+								"increased": 0.55,
+								"lineage": [
+									"fire"
+								],
+								"modifier_indices": [
+									1,
+									2,
+									3,
+									4,
+									5,
+									8,
+									9
+								],
+								"modifiers": [
+									"global_increased",
+									"elemental_increased",
+									"fire_increased",
+									"support:focus",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:ignite"
+								],
+								"more": 0.9000000000000001
+							},
+							{
+								"base": 23.333333333333332,
+								"before_defense": 82.656,
+								"increased": 1.05,
+								"lineage": [
+									"physical",
+									"fire"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									2,
+									3,
+									4,
+									5,
+									6,
+									7,
+									8,
+									9
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"elemental_increased",
+									"fire_increased",
+									"support:focus",
+									"support:fire_focus",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:physical_focus",
+									"support:ignite"
+								],
+								"more": 0.8640000000000001
+							}
+						],
+						"resistance": 0.25,
+						"type": "fire"
+					},
+					{
+						"before_defense": 60.48,
+						"effective_resistance": 0.0,
+						"final": 64.1088,
+						"parts": [
+							{
+								"base": 23.333333333333332,
+								"before_defense": 60.48,
+								"increased": 0.8,
+								"lineage": [
+									"physical",
+									"cold"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									2,
+									4,
+									6,
+									7,
+									8,
+									9
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"elemental_increased",
+									"support:focus",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:physical_focus",
+									"support:ignite"
+								],
+								"more": 0.72
+							}
+						],
+						"penetration": 0.06,
+						"resistance": -0.06,
+						"type": "cold"
+					},
+					{
+						"before_defense": 60.48,
+						"effective_resistance": 0.0,
+						"final": 64.1088,
+						"parts": [
+							{
+								"base": 23.333333333333332,
+								"before_defense": 60.48,
+								"increased": 0.8,
+								"lineage": [
+									"physical",
+									"lightning"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									2,
+									4,
+									6,
+									7,
+									8,
+									9
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"elemental_increased",
+									"support:focus",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:physical_focus",
+									"support:ignite"
+								],
+								"more": 0.72
+							}
+						],
+						"penetration": 0.06,
+						"resistance": -0.06,
+						"type": "lightning"
+					}
+				],
+				"effect_id": "",
+				"health_lost": 288.5571,
+				"leech": {
+					"health": 2.885571,
+					"mana": 5.771142
+				},
+				"phase": "outbound",
+				"prevented_components": {
+					"cold": -3.6288000000000054,
+					"fire": 53.446500000000015,
+					"lightning": -3.6288000000000054
+				},
+				"projectile_id": 2,
+				"shield_spent": 0.0,
+				"skill_id": "tornado",
+				"tags": [
+					"hit",
+					"attack",
+					"projectile"
+				],
+				"target_id": 1,
+				"total": 288.5571
+			},
+			"support": "ignite"
+		},
+		{
+			"burn": {
+				"last_time": 0.0,
+				"provenance": {
+					"cast_id": 1,
+					"ember_expiry": 2.4,
+					"ember_generation": 0,
+					"phase": "outbound",
+					"projectile_id": 2,
+					"skill_id": "tornado"
+				},
+				"raw_dps": 74.82510000000002,
+				"remaining": 2.4,
+				"source_id": 0,
+				"target_id": 1,
+				"target_kind": "monster"
+			},
+			"hit": {
+				"assembly": {
+					"added": {
+						"fire": 7.0,
+						"physical": 10.0
+					},
+					"added_effectiveness": 1.0,
+					"base_coefficient": 1.0,
+					"intrinsic": {
+						"fire": 40.0,
+						"physical": 60.0
+					},
+					"stage": "hit_base"
+				},
+				"before_defense_components": {
+					"cold": 60.48,
+					"fire": 213.78600000000003,
+					"lightning": 60.48
+				},
+				"cast_id": 1,
+				"components": {
+					"cold": 64.1088,
+					"fire": 160.33950000000002,
+					"lightning": 64.1088
+				},
+				"critical": {
+					"chance": 1.0,
+					"critical": true,
+					"multiplier": 2.0
+				},
+				"details": [
+					{
+						"before_defense": 213.78600000000003,
+						"final": 160.33950000000002,
+						"parts": [
+							{
+								"base": 47.0,
+								"before_defense": 131.13000000000002,
+								"increased": 0.55,
+								"lineage": [
+									"fire"
+								],
+								"modifier_indices": [
+									1,
+									2,
+									3,
+									4,
+									5,
+									8,
+									9
+								],
+								"modifiers": [
+									"global_increased",
+									"elemental_increased",
+									"fire_increased",
+									"support:focus",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:ember_proliferation"
+								],
+								"more": 0.9000000000000001
+							},
+							{
+								"base": 23.333333333333332,
+								"before_defense": 82.656,
+								"increased": 1.05,
+								"lineage": [
+									"physical",
+									"fire"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									2,
+									3,
+									4,
+									5,
+									6,
+									7,
+									8,
+									9
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"elemental_increased",
+									"fire_increased",
+									"support:focus",
+									"support:fire_focus",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:physical_focus",
+									"support:ember_proliferation"
+								],
+								"more": 0.8640000000000001
+							}
+						],
+						"resistance": 0.25,
+						"type": "fire"
+					},
+					{
+						"before_defense": 60.48,
+						"effective_resistance": 0.0,
+						"final": 64.1088,
+						"parts": [
+							{
+								"base": 23.333333333333332,
+								"before_defense": 60.48,
+								"increased": 0.8,
+								"lineage": [
+									"physical",
+									"cold"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									2,
+									4,
+									6,
+									7,
+									8,
+									9
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"elemental_increased",
+									"support:focus",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:physical_focus",
+									"support:ember_proliferation"
+								],
+								"more": 0.72
+							}
+						],
+						"penetration": 0.06,
+						"resistance": -0.06,
+						"type": "cold"
+					},
+					{
+						"before_defense": 60.48,
+						"effective_resistance": 0.0,
+						"final": 64.1088,
+						"parts": [
+							{
+								"base": 23.333333333333332,
+								"before_defense": 60.48,
+								"increased": 0.8,
+								"lineage": [
+									"physical",
+									"lightning"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									2,
+									4,
+									6,
+									7,
+									8,
+									9
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"elemental_increased",
+									"support:focus",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:physical_focus",
+									"support:ember_proliferation"
+								],
+								"more": 0.72
+							}
+						],
+						"penetration": 0.06,
+						"resistance": -0.06,
+						"type": "lightning"
+					}
+				],
+				"effect_id": "",
+				"health_lost": 288.5571,
+				"leech": {
+					"health": 2.885571,
+					"mana": 5.771142
+				},
+				"phase": "outbound",
+				"prevented_components": {
+					"cold": -3.6288000000000054,
+					"fire": 53.446500000000015,
+					"lightning": -3.6288000000000054
+				},
+				"projectile_id": 2,
+				"shield_spent": 0.0,
+				"skill_id": "tornado",
+				"tags": [
+					"hit",
+					"attack",
+					"projectile"
+				],
+				"target_id": 1,
+				"total": 288.5571
+			},
+			"support": "ember_proliferation"
+		}
+	],
+	"checks": 1803,
+	"failures": 0,
+	"focus_defense_leech": [
+		[
+			{
+				"assembly": {
+					"added": {
+						"fire": 7.0,
+						"physical": 10.0
+					},
+					"added_effectiveness": 1.0,
+					"base_coefficient": 1.0,
+					"intrinsic": {
+						"fire": 40.0,
+						"physical": 60.0
+					},
+					"stage": "hit_base"
+				},
+				"before_defense_components": {
+					"cold": 45.15840000000001,
+					"fire": 83.472,
+					"lightning": 45.15840000000001,
+					"physical": 25.53599999999999
+				},
+				"cast_id": 1,
+				"components": {
+					"cold": 7.225343999999998,
+					"fire": 62.604,
+					"lightning": 90.31680000000001,
+					"physical": 8.867592689295035
+				},
+				"details": [
+					{
+						"before_defense": 25.53599999999999,
+						"final": 8.867592689295035,
+						"parts": [
+							{
+								"base": 13.999999999999996,
+								"before_defense": 25.53599999999999,
+								"increased": 0.8999999999999999,
+								"lineage": [
+									"physical"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									4,
+									6,
+									7
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"dual_once",
+									"support:fire_focus",
+									"support:physical_focus"
+								],
+								"more": 0.96
+							}
+						],
+						"resistance": 0.6527415143603134,
+						"type": "physical"
+					},
+					{
+						"before_defense": 83.472,
+						"final": 62.604,
+						"parts": [
+							{
+								"base": 47.0,
+								"before_defense": 83.472,
+								"increased": 0.8500000000000001,
+								"lineage": [
+									"fire"
+								],
+								"modifier_indices": [
+									1,
+									2,
+									3,
+									4,
+									5,
+									8
+								],
+								"modifiers": [
+									"global_increased",
+									"elemental_increased",
+									"fire_increased",
+									"dual_once",
+									"support:fire_focus",
+									"support:physical_focus"
+								],
+								"more": 0.96
+							}
+						],
+						"resistance": 0.25,
+						"type": "fire"
+					},
+					{
+						"before_defense": 45.15840000000001,
+						"effective_resistance": 0.9,
+						"final": 7.225343999999998,
+						"parts": [
+							{
+								"base": 28.0,
+								"before_defense": 45.15840000000001,
+								"increased": 1.1,
+								"lineage": [
+									"physical",
+									"cold"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									2,
+									4,
+									6,
+									7,
+									8
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"elemental_increased",
+									"dual_once",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:physical_focus"
+								],
+								"more": 0.768
+							}
+						],
+						"penetration": 0.06,
+						"resistance": 0.8400000000000001,
+						"type": "cold"
+					},
+					{
+						"before_defense": 45.15840000000001,
+						"effective_resistance": -1.0,
+						"final": 90.31680000000001,
+						"parts": [
+							{
+								"base": 28.0,
+								"before_defense": 45.15840000000001,
+								"increased": 1.1,
+								"lineage": [
+									"physical",
+									"lightning"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									2,
+									4,
+									6,
+									7,
+									8
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"elemental_increased",
+									"dual_once",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:physical_focus"
+								],
+								"more": 0.768
+							}
+						],
+						"penetration": 0.06,
+						"resistance": -1.0,
+						"type": "lightning"
+					}
+				],
+				"effect_id": "",
+				"health_lost": 169.01373668929506,
+				"leech": {
+					"health": 1.8674892206788514,
+					"mana": 3.6463025144647525
+				},
+				"phase": "outbound",
+				"prevented_components": {
+					"cold": 37.93305600000001,
+					"fire": 20.867999999999995,
+					"lightning": -45.15840000000001,
+					"physical": 16.668407310704957
+				},
+				"projectile_id": 2,
+				"shield_spent": 0.0,
+				"skill_id": "tornado",
+				"tags": [
+					"hit",
+					"attack",
+					"projectile"
+				],
+				"target_id": 1,
+				"total": 169.01373668929506
+			},
+			{
+				"assembly": {
+					"added": {
+						"fire": 7.0,
+						"physical": 10.0
+					},
+					"added_effectiveness": 1.0,
+					"base_coefficient": 1.0,
+					"intrinsic": {
+						"fire": 40.0,
+						"physical": 60.0
+					},
+					"stage": "hit_base"
+				},
+				"before_defense_components": {
+					"cold": 45.15840000000001,
+					"fire": 83.472,
+					"lightning": 45.15840000000001,
+					"physical": 25.53599999999999
+				},
+				"cast_id": 1,
+				"components": {
+					"cold": 7.225343999999998,
+					"fire": 62.604,
+					"lightning": 90.31680000000001,
+					"physical": 8.867592689295035
+				},
+				"details": [
+					{
+						"before_defense": 25.53599999999999,
+						"final": 8.867592689295035,
+						"parts": [
+							{
+								"base": 13.999999999999996,
+								"before_defense": 25.53599999999999,
+								"increased": 0.8999999999999999,
+								"lineage": [
+									"physical"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									4,
+									6,
+									7
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"dual_once",
+									"support:fire_focus",
+									"support:physical_focus"
+								],
+								"more": 0.96
+							}
+						],
+						"resistance": 0.6527415143603134,
+						"type": "physical"
+					},
+					{
+						"before_defense": 83.472,
+						"final": 62.604,
+						"parts": [
+							{
+								"base": 47.0,
+								"before_defense": 83.472,
+								"increased": 0.8500000000000001,
+								"lineage": [
+									"fire"
+								],
+								"modifier_indices": [
+									1,
+									2,
+									3,
+									4,
+									5,
+									8
+								],
+								"modifiers": [
+									"global_increased",
+									"elemental_increased",
+									"fire_increased",
+									"dual_once",
+									"support:fire_focus",
+									"support:physical_focus"
+								],
+								"more": 0.96
+							}
+						],
+						"resistance": 0.25,
+						"type": "fire"
+					},
+					{
+						"before_defense": 45.15840000000001,
+						"effective_resistance": 0.9,
+						"final": 7.225343999999998,
+						"parts": [
+							{
+								"base": 28.0,
+								"before_defense": 45.15840000000001,
+								"increased": 1.1,
+								"lineage": [
+									"physical",
+									"cold"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									2,
+									4,
+									6,
+									7,
+									8
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"elemental_increased",
+									"dual_once",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:physical_focus"
+								],
+								"more": 0.768
+							}
+						],
+						"penetration": 0.06,
+						"resistance": 0.8400000000000001,
+						"type": "cold"
+					},
+					{
+						"before_defense": 45.15840000000001,
+						"effective_resistance": -1.0,
+						"final": 90.31680000000001,
+						"parts": [
+							{
+								"base": 28.0,
+								"before_defense": 45.15840000000001,
+								"increased": 1.1,
+								"lineage": [
+									"physical",
+									"lightning"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									2,
+									4,
+									6,
+									7,
+									8
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"elemental_increased",
+									"dual_once",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:physical_focus"
+								],
+								"more": 0.768
+							}
+						],
+						"penetration": 0.06,
+						"resistance": -1.0,
+						"type": "lightning"
+					}
+				],
+				"effect_id": "",
+				"health_lost": 10.0,
+				"leech": {
+					"health": 0.16574000941520517,
+					"mana": 0.3236100141228077
+				},
+				"phase": "outbound",
+				"prevented_components": {
+					"cold": 37.93305600000001,
+					"fire": 20.867999999999995,
+					"lightning": -45.15840000000001,
+					"physical": 16.668407310704957
+				},
+				"projectile_id": 3,
+				"shield_spent": 5.0,
+				"skill_id": "tornado",
+				"tags": [
+					"hit",
+					"attack",
+					"projectile"
+				],
+				"target_id": 2,
+				"total": 169.01373668929506
+			}
+		],
+		[
+			{
+				"assembly": {
+					"added": {
+						"fire": 7.0,
+						"physical": 10.0
+					},
+					"added_effectiveness": 1.0,
+					"base_coefficient": 1.0,
+					"intrinsic": {
+						"fire": 40.0,
+						"physical": 60.0
+					},
+					"stage": "hit_base"
+				},
+				"before_defense_components": {
+					"cold": 90.31680000000001,
+					"fire": 166.944,
+					"lightning": 90.31680000000001,
+					"physical": 51.07199999999998
+				},
+				"cast_id": 1,
+				"components": {
+					"cold": 14.450687999999996,
+					"fire": 125.208,
+					"lightning": 180.63360000000003,
+					"physical": 26.32781395348836
+				},
+				"critical": {
+					"chance": 1.0,
+					"critical": true,
+					"multiplier": 2.0
+				},
+				"details": [
+					{
+						"before_defense": 51.07199999999998,
+						"final": 26.32781395348836,
+						"parts": [
+							{
+								"base": 13.999999999999996,
+								"before_defense": 51.07199999999998,
+								"increased": 0.8999999999999999,
+								"lineage": [
+									"physical"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									4,
+									6,
+									7
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"dual_once",
+									"support:fire_focus",
+									"support:physical_focus"
+								],
+								"more": 0.96
+							}
+						],
+						"resistance": 0.48449612403100784,
+						"type": "physical"
+					},
+					{
+						"before_defense": 166.944,
+						"final": 125.208,
+						"parts": [
+							{
+								"base": 47.0,
+								"before_defense": 166.944,
+								"increased": 0.8500000000000001,
+								"lineage": [
+									"fire"
+								],
+								"modifier_indices": [
+									1,
+									2,
+									3,
+									4,
+									5,
+									8
+								],
+								"modifiers": [
+									"global_increased",
+									"elemental_increased",
+									"fire_increased",
+									"dual_once",
+									"support:fire_focus",
+									"support:physical_focus"
+								],
+								"more": 0.96
+							}
+						],
+						"resistance": 0.25,
+						"type": "fire"
+					},
+					{
+						"before_defense": 90.31680000000001,
+						"effective_resistance": 0.9,
+						"final": 14.450687999999996,
+						"parts": [
+							{
+								"base": 28.0,
+								"before_defense": 90.31680000000001,
+								"increased": 1.1,
+								"lineage": [
+									"physical",
+									"cold"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									2,
+									4,
+									6,
+									7,
+									8
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"elemental_increased",
+									"dual_once",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:physical_focus"
+								],
+								"more": 0.768
+							}
+						],
+						"penetration": 0.06,
+						"resistance": 0.8400000000000001,
+						"type": "cold"
+					},
+					{
+						"before_defense": 90.31680000000001,
+						"effective_resistance": -1.0,
+						"final": 180.63360000000003,
+						"parts": [
+							{
+								"base": 28.0,
+								"before_defense": 90.31680000000001,
+								"increased": 1.1,
+								"lineage": [
+									"physical",
+									"lightning"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									2,
+									4,
+									6,
+									7,
+									8
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"elemental_increased",
+									"dual_once",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:physical_focus"
+								],
+								"more": 0.768
+							}
+						],
+						"penetration": 0.06,
+						"resistance": -1.0,
+						"type": "lightning"
+					}
+				],
+				"effect_id": "",
+				"health_lost": 346.62010195348836,
+				"leech": {
+					"health": 3.992757298604651,
+					"mana": 7.722236457674418
+				},
+				"phase": "outbound",
+				"prevented_components": {
+					"cold": 75.86611200000002,
+					"fire": 41.73599999999999,
+					"lightning": -90.31680000000001,
+					"physical": 24.744186046511622
+				},
+				"projectile_id": 2,
+				"shield_spent": 0.0,
+				"skill_id": "tornado",
+				"tags": [
+					"hit",
+					"attack",
+					"projectile"
+				],
+				"target_id": 1,
+				"total": 346.62010195348836
+			},
+			{
+				"assembly": {
+					"added": {
+						"fire": 7.0,
+						"physical": 10.0
+					},
+					"added_effectiveness": 1.0,
+					"base_coefficient": 1.0,
+					"intrinsic": {
+						"fire": 40.0,
+						"physical": 60.0
+					},
+					"stage": "hit_base"
+				},
+				"before_defense_components": {
+					"cold": 90.31680000000001,
+					"fire": 166.944,
+					"lightning": 90.31680000000001,
+					"physical": 51.07199999999998
+				},
+				"cast_id": 1,
+				"components": {
+					"cold": 14.450687999999996,
+					"fire": 125.208,
+					"lightning": 180.63360000000003,
+					"physical": 26.32781395348836
+				},
+				"critical": {
+					"chance": 1.0,
+					"critical": true,
+					"multiplier": 2.0
+				},
+				"details": [
+					{
+						"before_defense": 51.07199999999998,
+						"final": 26.32781395348836,
+						"parts": [
+							{
+								"base": 13.999999999999996,
+								"before_defense": 51.07199999999998,
+								"increased": 0.8999999999999999,
+								"lineage": [
+									"physical"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									4,
+									6,
+									7
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"dual_once",
+									"support:fire_focus",
+									"support:physical_focus"
+								],
+								"more": 0.96
+							}
+						],
+						"resistance": 0.48449612403100784,
+						"type": "physical"
+					},
+					{
+						"before_defense": 166.944,
+						"final": 125.208,
+						"parts": [
+							{
+								"base": 47.0,
+								"before_defense": 166.944,
+								"increased": 0.8500000000000001,
+								"lineage": [
+									"fire"
+								],
+								"modifier_indices": [
+									1,
+									2,
+									3,
+									4,
+									5,
+									8
+								],
+								"modifiers": [
+									"global_increased",
+									"elemental_increased",
+									"fire_increased",
+									"dual_once",
+									"support:fire_focus",
+									"support:physical_focus"
+								],
+								"more": 0.96
+							}
+						],
+						"resistance": 0.25,
+						"type": "fire"
+					},
+					{
+						"before_defense": 90.31680000000001,
+						"effective_resistance": 0.9,
+						"final": 14.450687999999996,
+						"parts": [
+							{
+								"base": 28.0,
+								"before_defense": 90.31680000000001,
+								"increased": 1.1,
+								"lineage": [
+									"physical",
+									"cold"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									2,
+									4,
+									6,
+									7,
+									8
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"elemental_increased",
+									"dual_once",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:physical_focus"
+								],
+								"more": 0.768
+							}
+						],
+						"penetration": 0.06,
+						"resistance": 0.8400000000000001,
+						"type": "cold"
+					},
+					{
+						"before_defense": 90.31680000000001,
+						"effective_resistance": -1.0,
+						"final": 180.63360000000003,
+						"parts": [
+							{
+								"base": 28.0,
+								"before_defense": 90.31680000000001,
+								"increased": 1.1,
+								"lineage": [
+									"physical",
+									"lightning"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									2,
+									4,
+									6,
+									7,
+									8
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"elemental_increased",
+									"dual_once",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:physical_focus"
+								],
+								"more": 0.768
+							}
+						],
+						"penetration": 0.06,
+						"resistance": -1.0,
+						"type": "lightning"
+					}
+				],
+				"effect_id": "",
+				"health_lost": 10.0,
+				"leech": {
+					"health": 0.1727867458971158,
+					"mana": 0.33418011884567367
+				},
+				"phase": "outbound",
+				"prevented_components": {
+					"cold": 75.86611200000002,
+					"fire": 41.73599999999999,
+					"lightning": -90.31680000000001,
+					"physical": 24.744186046511622
+				},
+				"projectile_id": 3,
+				"shield_spent": 5.0,
+				"skill_id": "tornado",
+				"tags": [
+					"hit",
+					"attack",
+					"projectile"
+				],
+				"target_id": 2,
+				"total": 346.62010195348836
+			}
+		],
+		[
+			{
+				"assembly": {
+					"added": {
+						"fire": 7.0,
+						"physical": 10.0
+					},
+					"added_effectiveness": 1.0,
+					"base_coefficient": 1.0,
+					"intrinsic": {
+						"fire": 40.0,
+						"physical": 60.0
+					},
+					"stage": "hit_base"
+				},
+				"before_defense_components": {
+					"cold": 37.632,
+					"fire": 134.00639999999999,
+					"lightning": 37.632
+				},
+				"cast_id": 1,
+				"components": {
+					"cold": 6.021119999999996,
+					"fire": 100.50479999999999,
+					"lightning": 75.264
+				},
+				"details": [
+					{
+						"before_defense": 134.00639999999999,
+						"final": 100.50479999999999,
+						"parts": [
+							{
+								"base": 47.0,
+								"before_defense": 83.472,
+								"increased": 0.8500000000000001,
+								"lineage": [
+									"fire"
+								],
+								"modifier_indices": [
+									1,
+									2,
+									3,
+									4,
+									5,
+									8
+								],
+								"modifiers": [
+									"global_increased",
+									"elemental_increased",
+									"fire_increased",
+									"dual_once",
+									"support:fire_focus",
+									"support:physical_focus"
+								],
+								"more": 0.96
+							},
+							{
+								"base": 23.333333333333332,
+								"before_defense": 50.5344,
+								"increased": 1.35,
+								"lineage": [
+									"physical",
+									"fire"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									2,
+									3,
+									4,
+									5,
+									6,
+									7,
+									8
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"elemental_increased",
+									"fire_increased",
+									"dual_once",
+									"support:fire_focus",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:physical_focus"
+								],
+								"more": 0.9216
+							}
+						],
+						"resistance": 0.25,
+						"type": "fire"
+					},
+					{
+						"before_defense": 37.632,
+						"effective_resistance": 0.9,
+						"final": 6.021119999999996,
+						"parts": [
+							{
+								"base": 23.333333333333332,
+								"before_defense": 37.632,
+								"increased": 1.1,
+								"lineage": [
+									"physical",
+									"cold"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									2,
+									4,
+									6,
+									7,
+									8
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"elemental_increased",
+									"dual_once",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:physical_focus"
+								],
+								"more": 0.768
+							}
+						],
+						"penetration": 0.06,
+						"resistance": 0.8400000000000001,
+						"type": "cold"
+					},
+					{
+						"before_defense": 37.632,
+						"effective_resistance": -1.0,
+						"final": 75.264,
+						"parts": [
+							{
+								"base": 23.333333333333332,
+								"before_defense": 37.632,
+								"increased": 1.1,
+								"lineage": [
+									"physical",
+									"lightning"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									2,
+									4,
+									6,
+									7,
+									8
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"elemental_increased",
+									"dual_once",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:physical_focus"
+								],
+								"more": 0.768
+							}
+						],
+						"penetration": 0.06,
+						"resistance": -1.0,
+						"type": "lightning"
+					}
+				],
+				"effect_id": "",
+				"health_lost": 181.78992,
+				"leech": {
+					"health": 1.8178992,
+					"mana": 3.6357984
+				},
+				"phase": "outbound",
+				"prevented_components": {
+					"cold": 31.61088,
+					"fire": 33.501599999999996,
+					"lightning": -37.632
+				},
+				"projectile_id": 2,
+				"shield_spent": 0.0,
+				"skill_id": "tornado",
+				"tags": [
+					"hit",
+					"attack",
+					"projectile"
+				],
+				"target_id": 1,
+				"total": 181.78992
+			},
+			{
+				"assembly": {
+					"added": {
+						"fire": 7.0,
+						"physical": 10.0
+					},
+					"added_effectiveness": 1.0,
+					"base_coefficient": 1.0,
+					"intrinsic": {
+						"fire": 40.0,
+						"physical": 60.0
+					},
+					"stage": "hit_base"
+				},
+				"before_defense_components": {
+					"cold": 37.632,
+					"fire": 134.00639999999999,
+					"lightning": 37.632
+				},
+				"cast_id": 1,
+				"components": {
+					"cold": 6.021119999999996,
+					"fire": 100.50479999999999,
+					"lightning": 75.264
+				},
+				"details": [
+					{
+						"before_defense": 134.00639999999999,
+						"final": 100.50479999999999,
+						"parts": [
+							{
+								"base": 47.0,
+								"before_defense": 83.472,
+								"increased": 0.8500000000000001,
+								"lineage": [
+									"fire"
+								],
+								"modifier_indices": [
+									1,
+									2,
+									3,
+									4,
+									5,
+									8
+								],
+								"modifiers": [
+									"global_increased",
+									"elemental_increased",
+									"fire_increased",
+									"dual_once",
+									"support:fire_focus",
+									"support:physical_focus"
+								],
+								"more": 0.96
+							},
+							{
+								"base": 23.333333333333332,
+								"before_defense": 50.5344,
+								"increased": 1.35,
+								"lineage": [
+									"physical",
+									"fire"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									2,
+									3,
+									4,
+									5,
+									6,
+									7,
+									8
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"elemental_increased",
+									"fire_increased",
+									"dual_once",
+									"support:fire_focus",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:physical_focus"
+								],
+								"more": 0.9216
+							}
+						],
+						"resistance": 0.25,
+						"type": "fire"
+					},
+					{
+						"before_defense": 37.632,
+						"effective_resistance": 0.9,
+						"final": 6.021119999999996,
+						"parts": [
+							{
+								"base": 23.333333333333332,
+								"before_defense": 37.632,
+								"increased": 1.1,
+								"lineage": [
+									"physical",
+									"cold"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									2,
+									4,
+									6,
+									7,
+									8
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"elemental_increased",
+									"dual_once",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:physical_focus"
+								],
+								"more": 0.768
+							}
+						],
+						"penetration": 0.06,
+						"resistance": 0.8400000000000001,
+						"type": "cold"
+					},
+					{
+						"before_defense": 37.632,
+						"effective_resistance": -1.0,
+						"final": 75.264,
+						"parts": [
+							{
+								"base": 23.333333333333332,
+								"before_defense": 37.632,
+								"increased": 1.1,
+								"lineage": [
+									"physical",
+									"lightning"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									2,
+									4,
+									6,
+									7,
+									8
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"elemental_increased",
+									"dual_once",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:physical_focus"
+								],
+								"more": 0.768
+							}
+						],
+						"penetration": 0.06,
+						"resistance": -1.0,
+						"type": "lightning"
+					}
+				],
+				"effect_id": "",
+				"health_lost": 10.0,
+				"leech": {
+					"health": 0.15,
+					"mana": 0.3
+				},
+				"phase": "outbound",
+				"prevented_components": {
+					"cold": 31.61088,
+					"fire": 33.501599999999996,
+					"lightning": -37.632
+				},
+				"projectile_id": 3,
+				"shield_spent": 5.0,
+				"skill_id": "tornado",
+				"tags": [
+					"hit",
+					"attack",
+					"projectile"
+				],
+				"target_id": 2,
+				"total": 181.78992
+			}
+		],
+		[
+			{
+				"assembly": {
+					"added": {
+						"fire": 7.0,
+						"physical": 10.0
+					},
+					"added_effectiveness": 1.0,
+					"base_coefficient": 1.0,
+					"intrinsic": {
+						"fire": 40.0,
+						"physical": 60.0
+					},
+					"stage": "hit_base"
+				},
+				"before_defense_components": {
+					"cold": 75.264,
+					"fire": 268.01279999999997,
+					"lightning": 75.264
+				},
+				"cast_id": 1,
+				"components": {
+					"cold": 12.042239999999993,
+					"fire": 201.00959999999998,
+					"lightning": 150.528
+				},
+				"critical": {
+					"chance": 1.0,
+					"critical": true,
+					"multiplier": 2.0
+				},
+				"details": [
+					{
+						"before_defense": 268.01279999999997,
+						"final": 201.00959999999998,
+						"parts": [
+							{
+								"base": 47.0,
+								"before_defense": 166.944,
+								"increased": 0.8500000000000001,
+								"lineage": [
+									"fire"
+								],
+								"modifier_indices": [
+									1,
+									2,
+									3,
+									4,
+									5,
+									8
+								],
+								"modifiers": [
+									"global_increased",
+									"elemental_increased",
+									"fire_increased",
+									"dual_once",
+									"support:fire_focus",
+									"support:physical_focus"
+								],
+								"more": 0.96
+							},
+							{
+								"base": 23.333333333333332,
+								"before_defense": 101.0688,
+								"increased": 1.35,
+								"lineage": [
+									"physical",
+									"fire"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									2,
+									3,
+									4,
+									5,
+									6,
+									7,
+									8
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"elemental_increased",
+									"fire_increased",
+									"dual_once",
+									"support:fire_focus",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:physical_focus"
+								],
+								"more": 0.9216
+							}
+						],
+						"resistance": 0.25,
+						"type": "fire"
+					},
+					{
+						"before_defense": 75.264,
+						"effective_resistance": 0.9,
+						"final": 12.042239999999993,
+						"parts": [
+							{
+								"base": 23.333333333333332,
+								"before_defense": 75.264,
+								"increased": 1.1,
+								"lineage": [
+									"physical",
+									"cold"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									2,
+									4,
+									6,
+									7,
+									8
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"elemental_increased",
+									"dual_once",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:physical_focus"
+								],
+								"more": 0.768
+							}
+						],
+						"penetration": 0.06,
+						"resistance": 0.8400000000000001,
+						"type": "cold"
+					},
+					{
+						"before_defense": 75.264,
+						"effective_resistance": -1.0,
+						"final": 150.528,
+						"parts": [
+							{
+								"base": 23.333333333333332,
+								"before_defense": 75.264,
+								"increased": 1.1,
+								"lineage": [
+									"physical",
+									"lightning"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									2,
+									4,
+									6,
+									7,
+									8
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"elemental_increased",
+									"dual_once",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:physical_focus"
+								],
+								"more": 0.768
+							}
+						],
+						"penetration": 0.06,
+						"resistance": -1.0,
+						"type": "lightning"
+					}
+				],
+				"effect_id": "",
+				"health_lost": 363.57984,
+				"leech": {
+					"health": 3.6357984,
+					"mana": 7.2715968
+				},
+				"phase": "outbound",
+				"prevented_components": {
+					"cold": 63.22176,
+					"fire": 67.00319999999999,
+					"lightning": -75.264
+				},
+				"projectile_id": 2,
+				"shield_spent": 0.0,
+				"skill_id": "tornado",
+				"tags": [
+					"hit",
+					"attack",
+					"projectile"
+				],
+				"target_id": 1,
+				"total": 363.57984
+			},
+			{
+				"assembly": {
+					"added": {
+						"fire": 7.0,
+						"physical": 10.0
+					},
+					"added_effectiveness": 1.0,
+					"base_coefficient": 1.0,
+					"intrinsic": {
+						"fire": 40.0,
+						"physical": 60.0
+					},
+					"stage": "hit_base"
+				},
+				"before_defense_components": {
+					"cold": 75.264,
+					"fire": 268.01279999999997,
+					"lightning": 75.264
+				},
+				"cast_id": 1,
+				"components": {
+					"cold": 12.042239999999993,
+					"fire": 201.00959999999998,
+					"lightning": 150.528
+				},
+				"critical": {
+					"chance": 1.0,
+					"critical": true,
+					"multiplier": 2.0
+				},
+				"details": [
+					{
+						"before_defense": 268.01279999999997,
+						"final": 201.00959999999998,
+						"parts": [
+							{
+								"base": 47.0,
+								"before_defense": 166.944,
+								"increased": 0.8500000000000001,
+								"lineage": [
+									"fire"
+								],
+								"modifier_indices": [
+									1,
+									2,
+									3,
+									4,
+									5,
+									8
+								],
+								"modifiers": [
+									"global_increased",
+									"elemental_increased",
+									"fire_increased",
+									"dual_once",
+									"support:fire_focus",
+									"support:physical_focus"
+								],
+								"more": 0.96
+							},
+							{
+								"base": 23.333333333333332,
+								"before_defense": 101.0688,
+								"increased": 1.35,
+								"lineage": [
+									"physical",
+									"fire"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									2,
+									3,
+									4,
+									5,
+									6,
+									7,
+									8
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"elemental_increased",
+									"fire_increased",
+									"dual_once",
+									"support:fire_focus",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:physical_focus"
+								],
+								"more": 0.9216
+							}
+						],
+						"resistance": 0.25,
+						"type": "fire"
+					},
+					{
+						"before_defense": 75.264,
+						"effective_resistance": 0.9,
+						"final": 12.042239999999993,
+						"parts": [
+							{
+								"base": 23.333333333333332,
+								"before_defense": 75.264,
+								"increased": 1.1,
+								"lineage": [
+									"physical",
+									"cold"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									2,
+									4,
+									6,
+									7,
+									8
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"elemental_increased",
+									"dual_once",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:physical_focus"
+								],
+								"more": 0.768
+							}
+						],
+						"penetration": 0.06,
+						"resistance": 0.8400000000000001,
+						"type": "cold"
+					},
+					{
+						"before_defense": 75.264,
+						"effective_resistance": -1.0,
+						"final": 150.528,
+						"parts": [
+							{
+								"base": 23.333333333333332,
+								"before_defense": 75.264,
+								"increased": 1.1,
+								"lineage": [
+									"physical",
+									"lightning"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									2,
+									4,
+									6,
+									7,
+									8
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"elemental_increased",
+									"dual_once",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:physical_focus"
+								],
+								"more": 0.768
+							}
+						],
+						"penetration": 0.06,
+						"resistance": -1.0,
+						"type": "lightning"
+					}
+				],
+				"effect_id": "",
+				"health_lost": 10.0,
+				"leech": {
+					"health": 0.15,
+					"mana": 0.3
+				},
+				"phase": "outbound",
+				"prevented_components": {
+					"cold": 63.22176,
+					"fire": 67.00319999999999,
+					"lightning": -75.264
+				},
+				"projectile_id": 3,
+				"shield_spent": 5.0,
+				"skill_id": "tornado",
+				"tags": [
+					"hit",
+					"attack",
+					"projectile"
+				],
+				"target_id": 2,
+				"total": 363.57984
+			}
+		]
+	],
+	"frozen": {
+		"child": {
+			"assembly": {
+				"added": {
+
+				},
+				"added_effectiveness": 0.7,
+				"base_coefficient": 0.7,
+				"intrinsic": {
+					"fire": 5.04,
+					"physical": 7.559999999999999
+				},
+				"stage": "hit_base",
+				"weapon": {
+					"coefficient": 0.7,
+					"components": {
+						"physical": 13.0
+					},
+					"contribution": {
+						"physical": 9.1
+					},
+					"profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "ashwood_bow",
+						"flat": {
+							"physical": 6.0
+						},
+						"increased": {
+							"physical": 0.3
+						},
+						"item_id": "gear_000005",
+						"sources": [
+							{
+								"affix_id": "whetstone_edge",
+								"stat": "weapon_added_physical",
+								"value": 6.0
+							},
+							{
+								"affix_id": "tempered_edge",
+								"stat": "weapon_physical_increased",
+								"value": 0.3
+							}
+						],
+						"stage": "weapon_local"
+					}
+				}
+			},
+			"before_defense_components": {
+				"cold": 9.59616,
+				"fire": 17.9214336,
+				"lightning": 9.59616
+			},
+			"cast_id": 1,
+			"components": {
+				"cold": 10.1719296,
+				"fire": 17.9214336,
+				"lightning": 10.1719296
+			},
+			"critical": {
+				"chance": 0.05,
+				"critical": false,
+				"multiplier": 1.0
+			},
+			"details": [
+				{
+					"before_defense": 17.9214336,
+					"final": 17.9214336,
+					"parts": [
+						{
+							"base": 5.04,
+							"before_defense": 8.709120000000002,
+							"increased": 0.9199999999999999,
+							"lineage": [
+								"fire"
+							],
+							"modifier_indices": [
+								1,
+								2,
+								3,
+								6,
+								7,
+								10,
+								11
+							],
+							"modifiers": [
+								"global_increased",
+								"elemental_increased",
+								"fire_increased",
+								"support:focus",
+								"support:fire_focus",
+								"support:physical_focus",
+								"support:ignite"
+							],
+							"more": 0.9000000000000001
+						},
+						{
+							"base": 5.553333333333332,
+							"before_defense": 9.212313599999998,
+							"increased": 0.9199999999999999,
+							"lineage": [
+								"physical",
+								"fire"
+							],
+							"modifier_indices": [
+								1,
+								2,
+								3,
+								6,
+								7,
+								8,
+								9,
+								10,
+								11
+							],
+							"modifiers": [
+								"global_increased",
+								"elemental_increased",
+								"fire_increased",
+								"support:focus",
+								"support:fire_focus",
+								"support:fire_focus",
+								"support:physical_focus",
+								"support:physical_focus",
+								"support:ignite"
+							],
+							"more": 0.8640000000000001
+						}
+					],
+					"resistance": 0.0,
+					"type": "fire"
+				},
+				{
+					"before_defense": 9.59616,
+					"effective_resistance": 0.0,
+					"final": 10.1719296,
+					"parts": [
+						{
+							"base": 5.553333333333332,
+							"before_defense": 9.59616,
+							"increased": 1.4000000000000001,
+							"lineage": [
+								"physical",
+								"cold"
+							],
+							"modifier_indices": [
+								1,
+								2,
+								4,
+								6,
+								8,
+								9,
+								10,
+								11
+							],
+							"modifiers": [
+								"global_increased",
+								"elemental_increased",
+								"cold_increased",
+								"support:focus",
+								"support:fire_focus",
+								"support:physical_focus",
+								"support:physical_focus",
+								"support:ignite"
+							],
+							"more": 0.72
+						}
+					],
+					"penetration": 0.06,
+					"resistance": -0.06,
+					"type": "cold"
+				},
+				{
+					"before_defense": 9.59616,
+					"effective_resistance": 0.0,
+					"final": 10.1719296,
+					"parts": [
+						{
+							"base": 5.553333333333332,
+							"before_defense": 9.59616,
+							"increased": 1.4000000000000001,
+							"lineage": [
+								"physical",
+								"lightning"
+							],
+							"modifier_indices": [
+								1,
+								2,
+								5,
+								6,
+								8,
+								9,
+								10,
+								11
+							],
+							"modifiers": [
+								"global_increased",
+								"elemental_increased",
+								"lightning_increased",
+								"support:focus",
+								"support:fire_focus",
+								"support:physical_focus",
+								"support:physical_focus",
+								"support:ignite"
+							],
+							"more": 0.72
+						}
+					],
+					"penetration": 0.06,
+					"resistance": -0.06,
+					"type": "lightning"
+				}
+			],
+			"effect_id": "",
+			"health_lost": 38.2652928,
+			"phase": "outbound",
+			"prevented_components": {
+				"cold": -0.575769600000001,
+				"fire": 0.0,
+				"lightning": -0.575769600000001
+			},
+			"projectile_id": 4,
+			"shield_spent": 0.0,
+			"skill_id": "tornado",
+			"tags": [
+				"hit",
+				"attack",
+				"projectile"
+			],
+			"target_id": 2,
+			"total": 38.2652928
+		},
+		"events": {
+			"explosion": 9,
+			"flight_ended": 9,
+			"hit": 3,
+			"lifetime_expired": 9,
+			"range_reached": 12,
+			"return_started": 9,
+			"spawned": 9,
+			"split": 3,
+			"terminated": 12
+		},
+		"parent": {
+			"assembly": {
+				"added": {
+
+				},
+				"added_effectiveness": 1.0,
+				"base_coefficient": 1.0,
+				"intrinsic": {
+					"fire": 7.2,
+					"physical": 10.799999999999999
+				},
+				"stage": "hit_base",
+				"weapon": {
+					"coefficient": 1.0,
+					"components": {
+						"physical": 13.0
+					},
+					"contribution": {
+						"physical": 13.0
+					},
+					"profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "ashwood_bow",
+						"flat": {
+							"physical": 6.0
+						},
+						"increased": {
+							"physical": 0.3
+						},
+						"item_id": "gear_000005",
+						"sources": [
+							{
+								"affix_id": "whetstone_edge",
+								"stat": "weapon_added_physical",
+								"value": 6.0
+							},
+							{
+								"affix_id": "tempered_edge",
+								"stat": "weapon_physical_increased",
+								"value": 0.3
+							}
+						],
+						"stage": "weapon_local"
+					}
+				}
+			},
+			"before_defense_components": {
+				"cold": 13.708799999999998,
+				"fire": 25.602047999999996,
+				"lightning": 13.708799999999998
+			},
+			"cast_id": 1,
+			"components": {
+				"cold": 14.531327999999998,
+				"fire": 25.602047999999996,
+				"lightning": 14.531327999999998
+			},
+			"critical": {
+				"chance": 0.05,
+				"critical": false,
+				"multiplier": 1.0
+			},
+			"details": [
+				{
+					"before_defense": 25.602047999999996,
+					"final": 25.602047999999996,
+					"parts": [
+						{
+							"base": 7.2,
+							"before_defense": 12.441600000000001,
+							"increased": 0.9199999999999999,
+							"lineage": [
+								"fire"
+							],
+							"modifier_indices": [
+								1,
+								2,
+								3,
+								6,
+								7,
+								10,
+								11
+							],
+							"modifiers": [
+								"global_increased",
+								"elemental_increased",
+								"fire_increased",
+								"support:focus",
+								"support:fire_focus",
+								"support:physical_focus",
+								"support:ignite"
+							],
+							"more": 0.9000000000000001
+						},
+						{
+							"base": 7.933333333333332,
+							"before_defense": 13.160447999999997,
+							"increased": 0.9199999999999999,
+							"lineage": [
+								"physical",
+								"fire"
+							],
+							"modifier_indices": [
+								1,
+								2,
+								3,
+								6,
+								7,
+								8,
+								9,
+								10,
+								11
+							],
+							"modifiers": [
+								"global_increased",
+								"elemental_increased",
+								"fire_increased",
+								"support:focus",
+								"support:fire_focus",
+								"support:fire_focus",
+								"support:physical_focus",
+								"support:physical_focus",
+								"support:ignite"
+							],
+							"more": 0.8640000000000001
+						}
+					],
+					"resistance": 0.0,
+					"type": "fire"
+				},
+				{
+					"before_defense": 13.708799999999998,
+					"effective_resistance": 0.0,
+					"final": 14.531327999999998,
+					"parts": [
+						{
+							"base": 7.933333333333332,
+							"before_defense": 13.708799999999998,
+							"increased": 1.4000000000000001,
+							"lineage": [
+								"physical",
+								"cold"
+							],
+							"modifier_indices": [
+								1,
+								2,
+								4,
+								6,
+								8,
+								9,
+								10,
+								11
+							],
+							"modifiers": [
+								"global_increased",
+								"elemental_increased",
+								"cold_increased",
+								"support:focus",
+								"support:fire_focus",
+								"support:physical_focus",
+								"support:physical_focus",
+								"support:ignite"
+							],
+							"more": 0.72
+						}
+					],
+					"penetration": 0.06,
+					"resistance": -0.06,
+					"type": "cold"
+				},
+				{
+					"before_defense": 13.708799999999998,
+					"effective_resistance": 0.0,
+					"final": 14.531327999999998,
+					"parts": [
+						{
+							"base": 7.933333333333332,
+							"before_defense": 13.708799999999998,
+							"increased": 1.4000000000000001,
+							"lineage": [
+								"physical",
+								"lightning"
+							],
+							"modifier_indices": [
+								1,
+								2,
+								5,
+								6,
+								8,
+								9,
+								10,
+								11
+							],
+							"modifiers": [
+								"global_increased",
+								"elemental_increased",
+								"lightning_increased",
+								"support:focus",
+								"support:fire_focus",
+								"support:physical_focus",
+								"support:physical_focus",
+								"support:ignite"
+							],
+							"more": 0.72
+						}
+					],
+					"penetration": 0.06,
+					"resistance": -0.06,
+					"type": "lightning"
+				}
+			],
+			"effect_id": "",
+			"health_lost": 54.664704,
+			"phase": "outbound",
+			"prevented_components": {
+				"cold": -0.8225280000000001,
+				"fire": 0.0,
+				"lightning": -0.8225280000000001
+			},
+			"projectile_id": 2,
+			"shield_spent": 0.0,
+			"skill_id": "tornado",
+			"tags": [
+				"hit",
+				"attack",
+				"projectile"
+			],
+			"target_id": 1,
+			"total": 54.664704
+		},
+		"return": {
+			"assembly": {
+				"added": {
+
+				},
+				"added_effectiveness": 0.7,
+				"base_coefficient": 0.7,
+				"intrinsic": {
+					"fire": 5.04,
+					"physical": 7.559999999999999
+				},
+				"stage": "hit_base",
+				"weapon": {
+					"coefficient": 0.7,
+					"components": {
+						"physical": 13.0
+					},
+					"contribution": {
+						"physical": 9.1
+					},
+					"profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "ashwood_bow",
+						"flat": {
+							"physical": 6.0
+						},
+						"increased": {
+							"physical": 0.3
+						},
+						"item_id": "gear_000005",
+						"sources": [
+							{
+								"affix_id": "whetstone_edge",
+								"stat": "weapon_added_physical",
+								"value": 6.0
+							},
+							{
+								"affix_id": "tempered_edge",
+								"stat": "weapon_physical_increased",
+								"value": 0.3
+							}
+						],
+						"stage": "weapon_local"
+					}
+				}
+			},
+			"before_defense_components": {
+				"cold": 9.59616,
+				"fire": 17.9214336,
+				"lightning": 9.59616
+			},
+			"cast_id": 1,
+			"components": {
+				"cold": 10.1719296,
+				"fire": 17.9214336,
+				"lightning": 10.1719296
+			},
+			"critical": {
+				"chance": 0.05,
+				"critical": false,
+				"multiplier": 1.0
+			},
+			"details": [
+				{
+					"before_defense": 17.9214336,
+					"final": 17.9214336,
+					"parts": [
+						{
+							"base": 5.04,
+							"before_defense": 8.709120000000002,
+							"increased": 0.9199999999999999,
+							"lineage": [
+								"fire"
+							],
+							"modifier_indices": [
+								1,
+								2,
+								3,
+								6,
+								7,
+								10,
+								11
+							],
+							"modifiers": [
+								"global_increased",
+								"elemental_increased",
+								"fire_increased",
+								"support:focus",
+								"support:fire_focus",
+								"support:physical_focus",
+								"support:ignite"
+							],
+							"more": 0.9000000000000001
+						},
+						{
+							"base": 5.553333333333332,
+							"before_defense": 9.212313599999998,
+							"increased": 0.9199999999999999,
+							"lineage": [
+								"physical",
+								"fire"
+							],
+							"modifier_indices": [
+								1,
+								2,
+								3,
+								6,
+								7,
+								8,
+								9,
+								10,
+								11
+							],
+							"modifiers": [
+								"global_increased",
+								"elemental_increased",
+								"fire_increased",
+								"support:focus",
+								"support:fire_focus",
+								"support:fire_focus",
+								"support:physical_focus",
+								"support:physical_focus",
+								"support:ignite"
+							],
+							"more": 0.8640000000000001
+						}
+					],
+					"resistance": 0.0,
+					"type": "fire"
+				},
+				{
+					"before_defense": 9.59616,
+					"effective_resistance": 0.0,
+					"final": 10.1719296,
+					"parts": [
+						{
+							"base": 5.553333333333332,
+							"before_defense": 9.59616,
+							"increased": 1.4000000000000001,
+							"lineage": [
+								"physical",
+								"cold"
+							],
+							"modifier_indices": [
+								1,
+								2,
+								4,
+								6,
+								8,
+								9,
+								10,
+								11
+							],
+							"modifiers": [
+								"global_increased",
+								"elemental_increased",
+								"cold_increased",
+								"support:focus",
+								"support:fire_focus",
+								"support:physical_focus",
+								"support:physical_focus",
+								"support:ignite"
+							],
+							"more": 0.72
+						}
+					],
+					"penetration": 0.06,
+					"resistance": -0.06,
+					"type": "cold"
+				},
+				{
+					"before_defense": 9.59616,
+					"effective_resistance": 0.0,
+					"final": 10.1719296,
+					"parts": [
+						{
+							"base": 5.553333333333332,
+							"before_defense": 9.59616,
+							"increased": 1.4000000000000001,
+							"lineage": [
+								"physical",
+								"lightning"
+							],
+							"modifier_indices": [
+								1,
+								2,
+								5,
+								6,
+								8,
+								9,
+								10,
+								11
+							],
+							"modifiers": [
+								"global_increased",
+								"elemental_increased",
+								"lightning_increased",
+								"support:focus",
+								"support:fire_focus",
+								"support:physical_focus",
+								"support:physical_focus",
+								"support:ignite"
+							],
+							"more": 0.72
+						}
+					],
+					"penetration": 0.06,
+					"resistance": -0.06,
+					"type": "lightning"
+				}
+			],
+			"effect_id": "",
+			"health_lost": 38.2652928,
+			"phase": "returning",
+			"prevented_components": {
+				"cold": -0.575769600000001,
+				"fire": 0.0,
+				"lightning": -0.575769600000001
+			},
+			"projectile_id": 4,
+			"shield_spent": 0.0,
+			"skill_id": "tornado",
+			"tags": [
+				"hit",
+				"attack",
+				"projectile"
+			],
+			"target_id": 3,
+			"total": 38.2652928
+		},
+		"secondary": [
+			{
+				"assembly": {
+					"added": {
+
+					},
+					"added_effectiveness": 0.0,
+					"base_coefficient": 0.9,
+					"intrinsic": {
+						"fire": 16.2
+					},
+					"stage": "hit_base"
+				},
+				"before_defense_components": {
+					"fire": 31.104
+				},
+				"cast_id": 1,
+				"components": {
+					"fire": 31.104
+				},
+				"critical": {
+					"chance": 0.05,
+					"critical": false,
+					"multiplier": 1.0
+				},
+				"details": [
+					{
+						"base": 16.2,
+						"before_defense": 31.104,
+						"final": 31.104,
+						"increased": 0.9199999999999999,
+						"modifiers": [
+							"global_increased",
+							"elemental_increased",
+							"fire_increased"
+						],
+						"more": 1.0,
+						"resistance": 0.0,
+						"type": "fire"
+					}
+				],
+				"effect_id": "explosion:4",
+				"health_lost": 31.104,
+				"phase": "returning",
+				"prevented_components": {
+					"fire": 0.0
+				},
+				"projectile_id": 4,
+				"shield_spent": 0.0,
+				"skill_id": "tornado",
+				"tags": [
+					"hit",
+					"area",
+					"secondary",
+					"explosion"
+				],
+				"target_id": 4,
+				"total": 31.104
+			},
+			{
+				"assembly": {
+					"added": {
+
+					},
+					"added_effectiveness": 0.0,
+					"base_coefficient": 0.9,
+					"intrinsic": {
+						"fire": 16.2
+					},
+					"stage": "hit_base"
+				},
+				"before_defense_components": {
+					"fire": 31.104
+				},
+				"cast_id": 1,
+				"components": {
+					"fire": 31.104
+				},
+				"critical": {
+					"chance": 0.05,
+					"critical": false,
+					"multiplier": 1.0
+				},
+				"details": [
+					{
+						"base": 16.2,
+						"before_defense": 31.104,
+						"final": 31.104,
+						"increased": 0.9199999999999999,
+						"modifiers": [
+							"global_increased",
+							"elemental_increased",
+							"fire_increased"
+						],
+						"more": 1.0,
+						"resistance": 0.0,
+						"type": "fire"
+					}
+				],
+				"effect_id": "explosion:7",
+				"health_lost": 31.104,
+				"phase": "returning",
+				"prevented_components": {
+					"fire": 0.0
+				},
+				"projectile_id": 7,
+				"shield_spent": 0.0,
+				"skill_id": "tornado",
+				"tags": [
+					"hit",
+					"area",
+					"secondary",
+					"explosion"
+				],
+				"target_id": 4,
+				"total": 31.104
+			},
+			{
+				"assembly": {
+					"added": {
+
+					},
+					"added_effectiveness": 0.0,
+					"base_coefficient": 0.9,
+					"intrinsic": {
+						"fire": 16.2
+					},
+					"stage": "hit_base"
+				},
+				"before_defense_components": {
+					"fire": 31.104
+				},
+				"cast_id": 1,
+				"components": {
+					"fire": 31.104
+				},
+				"critical": {
+					"chance": 0.05,
+					"critical": false,
+					"multiplier": 1.0
+				},
+				"details": [
+					{
+						"base": 16.2,
+						"before_defense": 31.104,
+						"final": 31.104,
+						"increased": 0.9199999999999999,
+						"modifiers": [
+							"global_increased",
+							"elemental_increased",
+							"fire_increased"
+						],
+						"more": 1.0,
+						"resistance": 0.0,
+						"type": "fire"
+					}
+				],
+				"effect_id": "explosion:10",
+				"health_lost": 31.104,
+				"phase": "returning",
+				"prevented_components": {
+					"fire": 0.0
+				},
+				"projectile_id": 10,
+				"shield_spent": 0.0,
+				"skill_id": "tornado",
+				"tags": [
+					"hit",
+					"area",
+					"secondary",
+					"explosion"
+				],
+				"target_id": 4,
+				"total": 31.104
+			}
+		]
+	},
+	"pure_fire": {
+		"burn_trace": [
+			{
+				"effective_raw_amount": 74.98125,
+				"from_time": 0.0,
+				"provenance": {
+					"cast_id": 0,
+					"phase": "direct",
+					"projectile_id": 0,
+					"skill_id": "meteor"
+				},
+				"raw_amount": 74.98125,
+				"raw_dps": 149.9625,
+				"settlement": {
+					"actor": "monster",
+					"components": {
+						"fire": 56.235937500000006
+					},
+					"damage_total": 56.235937500000006,
+					"details": [
+						{
+							"before_defense": 74.98125,
+							"final": 56.235937500000006,
+							"resistance": 0.25,
+							"type": "fire"
+						}
+					],
+					"health_lost": 56.235937500000006,
+					"mitigated_components": {
+						"fire": 18.745312499999997
+					},
+					"ok": true,
+					"overkill": 0.0,
+					"raw_components": {
+						"fire": 74.98125
+					},
+					"reason": "",
+					"remaining_health": 9568.8578125,
+					"remaining_shield": 0.0,
+					"shield_spent": 0.0,
+					"stage": "burning"
+				},
+				"source_id": 0,
+				"target_id": 1,
+				"target_kind": "monster",
+				"to_time": 0.5
+			}
+		],
+		"burns": [
+			{
+				"last_time": 0.5,
+				"provenance": {
+					"cast_id": 0,
+					"phase": "direct",
+					"projectile_id": 0,
+					"skill_id": "meteor"
+				},
+				"raw_dps": 149.9625,
+				"remaining": 2.5,
+				"source_id": 0,
+				"target_id": 1,
+				"target_kind": "monster"
+			}
+		],
+		"health": 9568.8578125,
+		"hits": [
+			{
+				"assembly": {
+					"added": {
+
+					},
+					"added_effectiveness": 4.3,
+					"base_coefficient": 4.3,
+					"intrinsic": {
+						"fire": 430.0
+					},
+					"stage": "hit_base"
+				},
+				"before_defense_components": {
+					"fire": 499.875
+				},
+				"cast_id": 0,
+				"components": {
+					"fire": 374.90625
+				},
+				"details": [
+					{
+						"base": 430.0,
+						"before_defense": 499.875,
+						"final": 374.90625,
+						"increased": 0.55,
+						"modifiers": [
+							"global_increased",
+							"elemental_increased",
+							"fire_increased",
+							"support:ignite"
+						],
+						"more": 0.75,
+						"resistance": 0.25,
+						"type": "fire"
+					}
+				],
+				"effect_id": "",
+				"health_lost": 374.90625,
+				"phase": "direct",
+				"prevented_components": {
+					"fire": 124.96875
+				},
+				"projectile_id": 0,
+				"shield_spent": 0.0,
+				"skill_id": "meteor",
+				"tags": [
+					"hit",
+					"spell",
+					"area"
+				],
+				"target_id": 1,
+				"total": 374.90625
+			}
+		],
+		"packet": {
+			"assembly": {
+				"added": {
+
+				},
+				"added_effectiveness": 4.3,
+				"base_coefficient": 4.3,
+				"intrinsic": {
+					"fire": 430.0
+				},
+				"stage": "hit_base"
+			},
+			"base": {
+				"fire": 430.0
+			},
+			"role": "direct",
+			"skill_id": "meteor",
+			"tags": [
+				"hit",
+				"spell",
+				"area"
+			]
+		}
+	},
+	"scope": "Bounded actual Main plus legal source48 27-point allocations, real owned gear/groups, Compiler/Preview, Defense and frozen carriers; no UI/export/full history",
+	"sections": {
+		"actual_source_hits": 253,
+		"focus_defense_leech_and_critical": 145,
+		"frozen_parent_child_return_and_secondary": 66,
+		"legal_source_and_owned_group": 49,
+		"penetration_defense_and_trap": 64,
+		"pure_fire_and_dot_unchanged": 10,
+		"source_matrix_and_previews": 1178,
+		"tornado_ignite_and_ember": 38
+	},
+	"source": {
+		"items": {
+			"azure_charm": {
+				"definition_id": "equipment:azure_charm",
+				"kind": "equipment",
+				"payload": {
+
+				},
+				"uid": "azure_charm"
+			},
+			"detonation_charm": {
+				"definition_id": "equipment:detonation_charm",
+				"kind": "equipment",
+				"payload": {
+
+				},
+				"uid": "detonation_charm"
+			},
+			"ember_wand": {
+				"definition_id": "equipment:ember_wand",
+				"kind": "equipment",
+				"payload": {
+
+				},
+				"uid": "ember_wand"
+			},
+			"gear_000004": {
+				"definition_id": "equipment:forgeblade",
+				"kind": "equipment",
+				"payload": {
+					"affixes": [
+						{
+							"id": "whetstone_edge",
+							"tier": 3,
+							"value": 6
+						},
+						{
+							"id": "tempered_edge",
+							"tier": 3,
+							"value": 30
+						},
+						{
+							"id": "deepwell",
+							"tier": 3,
+							"value": 22
+						},
+						{
+							"id": "wellturn",
+							"tier": 3,
+							"value": 14
+						}
+					],
+					"base_id": "forgeblade",
+					"id": "gear_000004",
+					"item_level": 16,
+					"rarity": "rare"
+				},
+				"uid": "gear_000004"
+			},
+			"gear_000005": {
+				"definition_id": "equipment:ashwood_bow",
+				"kind": "equipment",
+				"payload": {
+					"affixes": [
+						{
+							"id": "whetstone_edge",
+							"tier": 3,
+							"value": 6
+						},
+						{
+							"id": "tempered_edge",
+							"tier": 3,
+							"value": 30
+						},
+						{
+							"id": "deepwell",
+							"tier": 3,
+							"value": 22
+						},
+						{
+							"id": "wellturn",
+							"tier": 3,
+							"value": 14
+						}
+					],
+					"base_id": "ashwood_bow",
+					"id": "gear_000005",
+					"item_level": 16,
+					"rarity": "rare"
+				},
+				"uid": "gear_000005"
+			},
+			"gear_000006": {
+				"definition_id": "equipment:runewood_focus",
+				"kind": "equipment",
+				"payload": {
+					"affixes": [
+						{
+							"id": "attack_added_physical",
+							"tier": 3,
+							"value": 6
+						},
+						{
+							"id": "attack_added_fire",
+							"tier": 3,
+							"value": 6
+						},
+						{
+							"id": "coalglow",
+							"tier": 3,
+							"value": 20
+						},
+						{
+							"id": "wellturn",
+							"tier": 3,
+							"value": 14
+						}
+					],
+					"base_id": "runewood_focus",
+					"id": "gear_000006",
+					"item_level": 16,
+					"rarity": "rare"
+				},
+				"uid": "gear_000006"
+			},
+			"guardian_robe": {
+				"definition_id": "equipment:guardian_robe",
+				"kind": "equipment",
+				"payload": {
+
+				},
+				"uid": "guardian_robe"
+			},
+			"item_000007": {
+				"definition_id": "skill:cleave",
+				"kind": "skill_gem",
+				"payload": {
+					"level": 1,
+					"quality": 0
+				},
+				"uid": "item_000007"
+			},
+			"item_000008": {
+				"definition_id": "support:physical_focus",
+				"kind": "support_gem",
+				"payload": {
+					"level": 1,
+					"quality": 0
+				},
+				"uid": "item_000008"
+			},
+			"item_000009": {
+				"definition_id": "support:fire_focus",
+				"kind": "support_gem",
+				"payload": {
+					"level": 1,
+					"quality": 0
+				},
+				"uid": "item_000009"
+			},
+			"item_000010": {
+				"definition_id": "support:ignite",
+				"kind": "support_gem",
+				"payload": {
+					"level": 1,
+					"quality": 0
+				},
+				"uid": "item_000010"
+			},
+			"item_000011": {
+				"definition_id": "support:focus",
+				"kind": "support_gem",
+				"payload": {
+					"level": 1,
+					"quality": 0
+				},
+				"uid": "item_000011"
+			},
+			"item_000012": {
+				"definition_id": "support:efficiency",
+				"kind": "support_gem",
+				"payload": {
+					"level": 1,
+					"quality": 0
+				},
+				"uid": "item_000012"
+			},
+			"jewel_000001": {
+				"definition_id": "jewel:emberheart",
+				"kind": "jewel",
+				"payload": {
+					"affixes": [
+						{
+							"id": "force",
+							"value": 4.0
+						},
+						{
+							"id": "tempo",
+							"value": 0.08
+						}
+					],
+					"base": "emberheart",
+					"id": "jewel_000001",
+					"rarity": "magic"
+				},
+				"uid": "jewel_000001"
+			},
+			"jewel_000002": {
+				"definition_id": "jewel:tideglass",
+				"kind": "jewel",
+				"payload": {
+					"affixes": [
+						{
+							"id": "barrier",
+							"value": 16.0
+						},
+						{
+							"id": "renewal",
+							"value": 0.7
+						}
+					],
+					"base": "tideglass",
+					"id": "jewel_000002",
+					"rarity": "magic"
+				},
+				"uid": "jewel_000002"
+			},
+			"jewel_000003": {
+				"definition_id": "jewel:windweave",
+				"kind": "jewel",
+				"payload": {
+					"affixes": [
+						{
+							"id": "vitality",
+							"value": 20.0
+						},
+						{
+							"id": "clarity",
+							"value": 14.0
+						},
+						{
+							"id": "stride",
+							"value": 8.0
+						},
+						{
+							"id": "tempo",
+							"value": 0.06
+						}
+					],
+					"base": "windweave",
+					"id": "jewel_000003",
+					"rarity": "rare"
+				},
+				"uid": "jewel_000003"
+			},
+			"migration_flask_000001": {
+				"definition_id": "flask:life",
+				"kind": "flask",
+				"payload": {
+
+				},
+				"uid": "migration_flask_000001"
+			},
+			"migration_flask_000002": {
+				"definition_id": "flask:mana",
+				"kind": "flask",
+				"payload": {
+
+				},
+				"uid": "migration_flask_000002"
+			},
+			"migration_gem_000001": {
+				"definition_id": "skill:bolt",
+				"kind": "skill_gem",
+				"payload": {
+					"level": 1,
+					"quality": 0
+				},
+				"uid": "migration_gem_000001"
+			},
+			"migration_gem_000002": {
+				"definition_id": "skill:frost",
+				"kind": "skill_gem",
+				"payload": {
+					"level": 1,
+					"quality": 0
+				},
+				"uid": "migration_gem_000002"
+			},
+			"migration_gem_000003": {
+				"definition_id": "skill:nova",
+				"kind": "skill_gem",
+				"payload": {
+					"level": 1,
+					"quality": 0
+				},
+				"uid": "migration_gem_000003"
+			},
+			"migration_gem_000004": {
+				"definition_id": "skill:dash",
+				"kind": "skill_gem",
+				"payload": {
+					"level": 1,
+					"quality": 0
+				},
+				"uid": "migration_gem_000004"
+			},
+			"migration_gem_000005": {
+				"definition_id": "skill:ward",
+				"kind": "skill_gem",
+				"payload": {
+					"level": 1,
+					"quality": 0
+				},
+				"uid": "migration_gem_000005"
+			},
+			"migration_gem_000006": {
+				"definition_id": "skill:chain",
+				"kind": "skill_gem",
+				"payload": {
+					"level": 1,
+					"quality": 0
+				},
+				"uid": "migration_gem_000006"
+			},
+			"migration_gem_000007": {
+				"definition_id": "skill:meteor",
+				"kind": "skill_gem",
+				"payload": {
+					"level": 1,
+					"quality": 0
+				},
+				"uid": "migration_gem_000007"
+			},
+			"migration_gem_000008": {
+				"definition_id": "skill:tornado",
+				"kind": "skill_gem",
+				"payload": {
+					"level": 1,
+					"quality": 0
+				},
+				"uid": "migration_gem_000008"
+			},
+			"migration_gem_000009": {
+				"definition_id": "support:breadth",
+				"kind": "support_gem",
+				"payload": {
+					"level": 1,
+					"quality": 0
+				},
+				"uid": "migration_gem_000009"
+			},
+			"migration_gem_000010": {
+				"definition_id": "support:chain_extension",
+				"kind": "support_gem",
+				"payload": {
+					"level": 1,
+					"quality": 0
+				},
+				"uid": "migration_gem_000010"
+			},
+			"migration_gem_000011": {
+				"definition_id": "support:chain_reach",
+				"kind": "support_gem",
+				"payload": {
+					"level": 1,
+					"quality": 0
+				},
+				"uid": "migration_gem_000011"
+			},
+			"migration_gem_000012": {
+				"definition_id": "support:cold_focus",
+				"kind": "support_gem",
+				"payload": {
+					"level": 1,
+					"quality": 0
+				},
+				"uid": "migration_gem_000012"
+			},
+			"migration_gem_000013": {
+				"definition_id": "support:concentrate",
+				"kind": "support_gem",
+				"payload": {
+					"level": 1,
+					"quality": 0
+				},
+				"uid": "migration_gem_000013"
+			},
+			"migration_gem_000014": {
+				"definition_id": "support:efficiency",
+				"kind": "support_gem",
+				"payload": {
+					"level": 1,
+					"quality": 0
+				},
+				"uid": "migration_gem_000014"
+			},
+			"migration_gem_000015": {
+				"definition_id": "support:fire_focus",
+				"kind": "support_gem",
+				"payload": {
+					"level": 1,
+					"quality": 0
+				},
+				"uid": "migration_gem_000015"
+			},
+			"migration_gem_000016": {
+				"definition_id": "support:focus",
+				"kind": "support_gem",
+				"payload": {
+					"level": 1,
+					"quality": 0
+				},
+				"uid": "migration_gem_000016"
+			},
+			"migration_gem_000017": {
+				"definition_id": "support:heavy_projectiles",
+				"kind": "support_gem",
+				"payload": {
+					"level": 1,
+					"quality": 0
+				},
+				"uid": "migration_gem_000017"
+			},
+			"migration_gem_000018": {
+				"definition_id": "support:lightning_focus",
+				"kind": "support_gem",
+				"payload": {
+					"level": 1,
+					"quality": 0
+				},
+				"uid": "migration_gem_000018"
+			},
+			"migration_gem_000019": {
+				"definition_id": "support:lingering_chill",
+				"kind": "support_gem",
+				"payload": {
+					"level": 1,
+					"quality": 0
+				},
+				"uid": "migration_gem_000019"
+			},
+			"migration_gem_000020": {
+				"definition_id": "support:physical_focus",
+				"kind": "support_gem",
+				"payload": {
+					"level": 1,
+					"quality": 0
+				},
+				"uid": "migration_gem_000020"
+			},
+			"migration_gem_000021": {
+				"definition_id": "support:pierce",
+				"kind": "support_gem",
+				"payload": {
+					"level": 1,
+					"quality": 0
+				},
+				"uid": "migration_gem_000021"
+			},
+			"migration_gem_000022": {
+				"definition_id": "support:quickcast",
+				"kind": "support_gem",
+				"payload": {
+					"level": 1,
+					"quality": 0
+				},
+				"uid": "migration_gem_000022"
+			},
+			"migration_gem_000023": {
+				"definition_id": "support:swift_projectiles",
+				"kind": "support_gem",
+				"payload": {
+					"level": 1,
+					"quality": 0
+				},
+				"uid": "migration_gem_000023"
+			},
+			"migration_gem_000024": {
+				"definition_id": "support:volley",
+				"kind": "support_gem",
+				"payload": {
+					"level": 1,
+					"quality": 0
+				},
+				"uid": "migration_gem_000024"
+			},
+			"prism_bow": {
+				"definition_id": "equipment:prism_bow",
+				"kind": "equipment",
+				"payload": {
+
+				},
+				"uid": "prism_bow"
+			},
+			"return_mantle": {
+				"definition_id": "equipment:return_mantle",
+				"kind": "equipment",
+				"payload": {
+
+				},
+				"uid": "return_mantle"
+			},
+			"storm_charm": {
+				"definition_id": "equipment:storm_charm",
+				"kind": "equipment",
+				"payload": {
+
+				},
+				"uid": "storm_charm"
+			},
+			"swift_blade": {
+				"definition_id": "equipment:swift_blade",
+				"kind": "equipment",
+				"payload": {
+
+				},
+				"uid": "swift_blade"
+			},
+			"vitality_armor": {
+				"definition_id": "equipment:vitality_armor",
+				"kind": "equipment",
+				"payload": {
+
+				},
+				"uid": "vitality_armor"
+			}
+		},
+		"stats": {
+			"accuracy": 128.0,
+			"accuracy_increased": 0.0,
+			"additional_skill_slots": 0.0,
+			"area_increased": 0.0,
+			"area_size_increased": 0.0,
+			"armour": 0.0,
+			"armour_increased": 0.0,
+			"attack_added_fire": 0.0,
+			"attack_added_physical": 0.0,
+			"attack_crit_chance_increased": 0.0,
+			"attack_elemental_increased": 0.0,
+			"attack_life_leech": 0.0,
+			"attack_mana_leech": 0.0,
+			"attack_physical_increased": 0.0,
+			"attack_speed": 1.7,
+			"attack_speed_increased": 0.0,
+			"chaos_increased": 0.0,
+			"cold_increased": 0.9000000000000001,
+			"cold_penetration": 0.06,
+			"cold_resistance": 0.0,
+			"crit_base_chance": 0.05,
+			"crit_base_multiplier": 1.5,
+			"crit_chance_increased": 0.0,
+			"crit_multiplier_add": 0.0,
+			"damage": 18.0,
+			"damage_taken_from_mana_before_life": 0.0,
+			"damaging_ailments_faster": 0.0,
+			"dexterity": 14.0,
+			"elemental_increased": 0.0,
+			"evasion": 15.3,
+			"evasion_increased": 0.0,
+			"fire_dot_multiplier_add": 0.2,
+			"fire_increased": 0.42,
+			"fire_resistance": 0.0,
+			"flask_charges_gained_increased": 0.0,
+			"flask_life_recovery_increased": 0.0,
+			"flask_mana_recovery_increased": 0.0,
+			"global_increased": 0.0,
+			"intelligence": 122.0,
+			"life_leech_max_rate_increased": 0.0,
+			"life_leech_rate_increased": 0.0,
+			"life_regen": 0.0,
+			"life_regen_percent": 0.0,
+			"lightning_increased": 0.9000000000000001,
+			"lightning_penetration": 0.06,
+			"lightning_resistance": 0.0,
+			"mana_cost_efficiency_increased": 0.0,
+			"mana_cost_increased": 0.0,
+			"mana_leech_max_rate_increased": 0.0,
+			"mana_leech_rate_increased": 0.0,
+			"mana_regen": 12.540000000000001,
+			"mana_regen_increased": 0.14,
+			"max_health": 127.0,
+			"max_mana": 229.0,
+			"max_shield": 116.48000000000002,
+			"maximum_cold_resistance_add": 0.0,
+			"maximum_fire_resistance_add": 0.0,
+			"maximum_lightning_resistance_add": 0.0,
+			"melee_area_size_increased": 0.0,
+			"melee_crit_chance_increased": 0.0,
+			"melee_crit_multiplier_add": 0.0,
+			"melee_physical_increased": 0.02,
+			"move_speed": 240.0,
+			"move_speed_increased": 0.0,
+			"physical_attack_life_leech": 0.0,
+			"physical_attack_mana_leech": 0.0,
+			"physical_increased": 0.0,
+			"physical_to_cold_conversion": 0.4,
+			"physical_to_fire_conversion": 0.4,
+			"physical_to_lightning_conversion": 0.4,
+			"projectile_attack_crit_chance_increased": 0.0,
+			"projectile_attack_crit_multiplier_add": 0.0,
+			"projectile_count": 0.0,
+			"projectile_increased": 0.0,
+			"projectile_speed_increased": 0.0,
+			"resolute_technique": 0.0,
+			"shield_recharge_delay": 4.0,
+			"shield_recharge_rate": 16.0,
+			"shield_recharge_rate_increased": 0.0,
+			"shield_recharge_start_faster": 0.0,
+			"shield_regen": 16.0,
+			"spell_added_cold": 0.0,
+			"spell_added_lightning": 0.0,
+			"spell_area_size_increased": 0.0,
+			"spell_crit_chance_increased": 0.0,
+			"spell_crit_multiplier_add": 0.0,
+			"spell_increased": 0.0,
+			"strength": 14.0
+		},
+		"talents": {
+			"allocated": [
+				"54447",
+				"57226",
+				"21678",
+				"32210",
+				"8948",
+				"38176",
+				"49651",
+				"5296",
+				"19501",
+				"5972",
+				"36412",
+				"22090",
+				"40609",
+				"8833",
+				"4367",
+				"44184",
+				"61804",
+				"13559",
+				"31462",
+				"11924",
+				"32431",
+				"36121",
+				"57362",
+				"55647",
+				"56716",
+				"34927",
+				"60170",
+				"58816"
+			],
+			"ascendancy": "",
+			"ascendancy_allocated": [],
+			"ascendancy_points": 0,
+			"class_id": 3,
+			"masteries": {
+				"34927": 65020,
+				"58816": 53046,
+				"60170": 4116
+			},
+			"normal_points": 0,
+			"source_version": "3.29.1"
+		},
+		"version": 48
+	},
+	"source_matrix": [
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.6,
+				"requested": {
+					"cold": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"cold"
+			],
+			"skill": "basic",
+			"weapon": "gear_000004"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.6,
+				"requested": {
+					"cold": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"cold"
+			],
+			"skill": "cleave",
+			"weapon": "gear_000004"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.6,
+				"requested": {
+					"cold": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"cold"
+			],
+			"skill": "tornado",
+			"weapon": "gear_000004"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.6,
+				"requested": {
+					"cold": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"cold"
+			],
+			"skill": "basic",
+			"weapon": "gear_000005"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.6,
+				"requested": {
+					"cold": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"cold"
+			],
+			"skill": "cleave",
+			"weapon": "gear_000005"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.6,
+				"requested": {
+					"cold": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"cold"
+			],
+			"skill": "tornado",
+			"weapon": "gear_000005"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.6,
+				"requested": {
+					"cold": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"cold"
+			],
+			"skill": "basic",
+			"weapon": "gear_000006"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.6,
+				"requested": {
+					"cold": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"cold"
+			],
+			"skill": "cleave",
+			"weapon": "gear_000006"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.6,
+				"requested": {
+					"cold": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"cold"
+			],
+			"skill": "tornado",
+			"weapon": "gear_000006"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"lightning": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"lightning": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.6,
+				"requested": {
+					"lightning": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"lightning"
+			],
+			"skill": "basic",
+			"weapon": "gear_000004"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"lightning": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"lightning": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.6,
+				"requested": {
+					"lightning": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"lightning"
+			],
+			"skill": "cleave",
+			"weapon": "gear_000004"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"lightning": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"lightning": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.6,
+				"requested": {
+					"lightning": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"lightning"
+			],
+			"skill": "tornado",
+			"weapon": "gear_000004"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"lightning": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"lightning": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.6,
+				"requested": {
+					"lightning": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"lightning"
+			],
+			"skill": "basic",
+			"weapon": "gear_000005"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"lightning": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"lightning": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.6,
+				"requested": {
+					"lightning": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"lightning"
+			],
+			"skill": "cleave",
+			"weapon": "gear_000005"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"lightning": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"lightning": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.6,
+				"requested": {
+					"lightning": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"lightning"
+			],
+			"skill": "tornado",
+			"weapon": "gear_000005"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"lightning": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"lightning": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.6,
+				"requested": {
+					"lightning": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"lightning"
+			],
+			"skill": "basic",
+			"weapon": "gear_000006"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"lightning": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"lightning": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.6,
+				"requested": {
+					"lightning": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"lightning"
+			],
+			"skill": "cleave",
+			"weapon": "gear_000006"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"lightning": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"lightning": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.6,
+				"requested": {
+					"lightning": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"lightning"
+			],
+			"skill": "tornado",
+			"weapon": "gear_000006"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06,
+					"lightning": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.4,
+					"lightning": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.19999999999999996,
+				"requested": {
+					"cold": 0.4,
+					"lightning": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"cold",
+				"lightning"
+			],
+			"skill": "basic",
+			"weapon": "gear_000004"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06,
+					"lightning": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.4,
+					"lightning": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.19999999999999996,
+				"requested": {
+					"cold": 0.4,
+					"lightning": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"cold",
+				"lightning"
+			],
+			"skill": "cleave",
+			"weapon": "gear_000004"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06,
+					"lightning": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.4,
+					"lightning": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.19999999999999996,
+				"requested": {
+					"cold": 0.4,
+					"lightning": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"cold",
+				"lightning"
+			],
+			"skill": "tornado",
+			"weapon": "gear_000004"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06,
+					"lightning": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.4,
+					"lightning": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.19999999999999996,
+				"requested": {
+					"cold": 0.4,
+					"lightning": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"cold",
+				"lightning"
+			],
+			"skill": "basic",
+			"weapon": "gear_000005"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06,
+					"lightning": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.4,
+					"lightning": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.19999999999999996,
+				"requested": {
+					"cold": 0.4,
+					"lightning": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"cold",
+				"lightning"
+			],
+			"skill": "cleave",
+			"weapon": "gear_000005"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06,
+					"lightning": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.4,
+					"lightning": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.19999999999999996,
+				"requested": {
+					"cold": 0.4,
+					"lightning": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"cold",
+				"lightning"
+			],
+			"skill": "tornado",
+			"weapon": "gear_000005"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06,
+					"lightning": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.4,
+					"lightning": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.19999999999999996,
+				"requested": {
+					"cold": 0.4,
+					"lightning": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"cold",
+				"lightning"
+			],
+			"skill": "basic",
+			"weapon": "gear_000006"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06,
+					"lightning": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.4,
+					"lightning": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.19999999999999996,
+				"requested": {
+					"cold": 0.4,
+					"lightning": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"cold",
+				"lightning"
+			],
+			"skill": "cleave",
+			"weapon": "gear_000006"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06,
+					"lightning": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.4,
+					"lightning": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.19999999999999996,
+				"requested": {
+					"cold": 0.4,
+					"lightning": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"cold",
+				"lightning"
+			],
+			"skill": "tornado",
+			"weapon": "gear_000006"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.4,
+					"fire": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.19999999999999996,
+				"requested": {
+					"cold": 0.4,
+					"fire": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"fire",
+				"cold"
+			],
+			"skill": "basic",
+			"weapon": "gear_000004"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.4,
+					"fire": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.19999999999999996,
+				"requested": {
+					"cold": 0.4,
+					"fire": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"fire",
+				"cold"
+			],
+			"skill": "cleave",
+			"weapon": "gear_000004"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.4,
+					"fire": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.19999999999999996,
+				"requested": {
+					"cold": 0.4,
+					"fire": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"fire",
+				"cold"
+			],
+			"skill": "tornado",
+			"weapon": "gear_000004"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.4,
+					"fire": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.19999999999999996,
+				"requested": {
+					"cold": 0.4,
+					"fire": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"fire",
+				"cold"
+			],
+			"skill": "basic",
+			"weapon": "gear_000005"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.4,
+					"fire": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.19999999999999996,
+				"requested": {
+					"cold": 0.4,
+					"fire": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"fire",
+				"cold"
+			],
+			"skill": "cleave",
+			"weapon": "gear_000005"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.4,
+					"fire": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.19999999999999996,
+				"requested": {
+					"cold": 0.4,
+					"fire": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"fire",
+				"cold"
+			],
+			"skill": "tornado",
+			"weapon": "gear_000005"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.4,
+					"fire": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.19999999999999996,
+				"requested": {
+					"cold": 0.4,
+					"fire": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"fire",
+				"cold"
+			],
+			"skill": "basic",
+			"weapon": "gear_000006"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.4,
+					"fire": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.19999999999999996,
+				"requested": {
+					"cold": 0.4,
+					"fire": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"fire",
+				"cold"
+			],
+			"skill": "cleave",
+			"weapon": "gear_000006"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.4,
+					"fire": 0.4
+				},
+				"enabled": true,
+				"normalized": false,
+				"physical_fraction": 0.19999999999999996,
+				"requested": {
+					"cold": 0.4,
+					"fire": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"fire",
+				"cold"
+			],
+			"skill": "tornado",
+			"weapon": "gear_000006"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06,
+					"lightning": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.3333333333333333,
+					"fire": 0.3333333333333333,
+					"lightning": 0.3333333333333333
+				},
+				"enabled": true,
+				"normalized": true,
+				"physical_fraction": 0.0,
+				"requested": {
+					"cold": 0.4,
+					"fire": 0.4,
+					"lightning": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"fire",
+				"cold",
+				"lightning"
+			],
+			"skill": "basic",
+			"weapon": "gear_000004"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06,
+					"lightning": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.3333333333333333,
+					"fire": 0.3333333333333333,
+					"lightning": 0.3333333333333333
+				},
+				"enabled": true,
+				"normalized": true,
+				"physical_fraction": 0.0,
+				"requested": {
+					"cold": 0.4,
+					"fire": 0.4,
+					"lightning": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"fire",
+				"cold",
+				"lightning"
+			],
+			"skill": "cleave",
+			"weapon": "gear_000004"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06,
+					"lightning": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.3333333333333333,
+					"fire": 0.3333333333333333,
+					"lightning": 0.3333333333333333
+				},
+				"enabled": true,
+				"normalized": true,
+				"physical_fraction": 0.0,
+				"requested": {
+					"cold": 0.4,
+					"fire": 0.4,
+					"lightning": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"fire",
+				"cold",
+				"lightning"
+			],
+			"skill": "tornado",
+			"weapon": "gear_000004"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06,
+					"lightning": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.3333333333333333,
+					"fire": 0.3333333333333333,
+					"lightning": 0.3333333333333333
+				},
+				"enabled": true,
+				"normalized": true,
+				"physical_fraction": 0.0,
+				"requested": {
+					"cold": 0.4,
+					"fire": 0.4,
+					"lightning": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"fire",
+				"cold",
+				"lightning"
+			],
+			"skill": "basic",
+			"weapon": "gear_000005"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06,
+					"lightning": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.3333333333333333,
+					"fire": 0.3333333333333333,
+					"lightning": 0.3333333333333333
+				},
+				"enabled": true,
+				"normalized": true,
+				"physical_fraction": 0.0,
+				"requested": {
+					"cold": 0.4,
+					"fire": 0.4,
+					"lightning": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"fire",
+				"cold",
+				"lightning"
+			],
+			"skill": "cleave",
+			"weapon": "gear_000005"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06,
+					"lightning": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.3333333333333333,
+					"fire": 0.3333333333333333,
+					"lightning": 0.3333333333333333
+				},
+				"enabled": true,
+				"normalized": true,
+				"physical_fraction": 0.0,
+				"requested": {
+					"cold": 0.4,
+					"fire": 0.4,
+					"lightning": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"fire",
+				"cold",
+				"lightning"
+			],
+			"skill": "tornado",
+			"weapon": "gear_000005"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06,
+					"lightning": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.3333333333333333,
+					"fire": 0.3333333333333333,
+					"lightning": 0.3333333333333333
+				},
+				"enabled": true,
+				"normalized": true,
+				"physical_fraction": 0.0,
+				"requested": {
+					"cold": 0.4,
+					"fire": 0.4,
+					"lightning": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"fire",
+				"cold",
+				"lightning"
+			],
+			"skill": "basic",
+			"weapon": "gear_000006"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06,
+					"lightning": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.3333333333333333,
+					"fire": 0.3333333333333333,
+					"lightning": 0.3333333333333333
+				},
+				"enabled": true,
+				"normalized": true,
+				"physical_fraction": 0.0,
+				"requested": {
+					"cold": 0.4,
+					"fire": 0.4,
+					"lightning": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"fire",
+				"cold",
+				"lightning"
+			],
+			"skill": "cleave",
+			"weapon": "gear_000006"
+		},
+		{
+			"penetration": {
+				"enabled": true,
+				"fractions": {
+					"cold": 0.06,
+					"lightning": 0.06
+				},
+				"minimum_resistance": -1.0
+			},
+			"profile": {
+				"effective": {
+					"cold": 0.3333333333333333,
+					"fire": 0.3333333333333333,
+					"lightning": 0.3333333333333333
+				},
+				"enabled": true,
+				"normalized": true,
+				"physical_fraction": 0.0,
+				"requested": {
+					"cold": 0.4,
+					"fire": 0.4,
+					"lightning": 0.4
+				},
+				"source_type": "physical",
+				"version": 2
+			},
+			"selected": [
+				"fire",
+				"cold",
+				"lightning"
+			],
+			"skill": "tornado",
+			"weapon": "gear_000006"
+		}
+	],
+	"trap": {
+		"assembly": {
+			"added": {
+
+			},
+			"added_effectiveness": 2.7,
+			"base_coefficient": 2.7,
+			"intrinsic": {
+				"lightning": 48.6
+			},
+			"stage": "hit_base"
+		},
+		"before_defense_components": {
+			"lightning": 99.144
+		},
+		"cast_id": 1,
+		"components": {
+			"lightning": 105.09264000000002
+		},
+		"critical": {
+			"chance": 0.05,
+			"critical": false,
+			"multiplier": 1.0
+		},
+		"details": [
+			{
+				"base": 48.6,
+				"before_defense": 99.144,
+				"effective_resistance": 0.0,
+				"final": 105.09264000000002,
+				"increased": 1.4000000000000001,
+				"modifiers": [
+					"global_increased",
+					"elemental_increased",
+					"lightning_increased",
+					"support:ambush"
+				],
+				"more": 0.85,
+				"penetration": 0.06,
+				"resistance": -0.06,
+				"type": "lightning"
+			}
+		],
+		"effect_id": "",
+		"health_lost": 105.09264000000002,
+		"phase": "trap",
+		"prevented_components": {
+			"lightning": -5.948640000000012
+		},
+		"projectile_id": 0,
+		"shield_spent": 0.0,
+		"skill_id": "nova",
+		"tags": [
+			"hit",
+			"spell",
+			"area"
+		],
+		"target_id": 1,
+		"total": 105.09264000000002
+	}
+}

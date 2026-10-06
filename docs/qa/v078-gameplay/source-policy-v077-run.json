@@ -1,0 +1,16 @@
+{
+  "label": "source-policy-v077",
+  "exit": 1,
+  "seconds": 2.623,
+  "log": "docs/qa/v078-gameplay/source-policy-v077.log",
+  "log_sha256": "808285a66d20417c6842b4fb31166463009f4ac97ba68c017e1bf80d70ff6c26",
+  "sandbox": "/tmp/godot-m1-v078-gameplay-5uvqjr3i",
+  "command": [
+    "/usr/local/bin/godot",
+    "--headless",
+    "--path",
+    "/workspace/scratch/a51485f153de/v077-combat-outcome-feedback",
+    "--script",
+    "/workspace/scratch/a51485f153de/v078-elemental-conversion/tests/elemental_conversion_legacy_probe.gd"
+  ]
+}

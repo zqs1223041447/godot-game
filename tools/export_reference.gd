@@ -68,8 +68,9 @@ func _initialize() -> void:
 	if not OS.get_cmdline_user_args().is_empty():
 		target = OS.get_cmdline_user_args()[0]
 	# Validate every fixture before opening/truncating the previous artifact.
-	var narrow: bool = OS.get_cmdline_user_args().has("--source-monster-fragment")
-	var content: Dictionary = source_monster_fragment() if narrow else collect()
+	var elemental: bool = OS.get_cmdline_user_args().has("--elemental-conversion-fragment")
+	var narrow: bool = elemental or OS.get_cmdline_user_args().has("--source-monster-fragment")
+	var content: Dictionary = elemental_conversion_fragment() if elemental else source_monster_fragment() if narrow else collect()
 	var file: FileAccess = FileAccess.open(target, FileAccess.WRITE)
 	if file == null:
 		push_error("Cannot open reference output: " + target)
@@ -78,6 +79,13 @@ func _initialize() -> void:
 	file.store_string(JSON.stringify(clean(content), "\t", true, true) + "\n")
 	file.close()
 	print("Reference exported: " + target)
+	if elemental:
+		var current_coverage: Dictionary = SourceCoverage.build_report()
+		assert(not current_coverage.is_empty() and current_coverage.integrity.ok)
+		var current_file: FileAccess = FileAccess.open("res://docs/qa/v078-reference/source-tree-coverage.json", FileAccess.WRITE)
+		assert(current_file != null)
+		current_file.store_string(SourceCoverage.serialize_report(current_coverage))
+		current_file.close()
 	if target == "res://docs/reference/catalog.json" and not narrow:
 		var coverage: Dictionary = SourceCoverage.build_report()
 		assert(not coverage.is_empty() and coverage.integrity.ok)
@@ -3166,3 +3174,109 @@ static func frost_lock_examples() -> Dictionary:
 		"migration":"严格decode_v46与旧46完整验证，备份原字节后仅迁version到47；不赠宝石或碎片，装备词汇46、源政策45、既有26种正式奖励顺序保持",
 		"example_scope":"直接复用通过实际Main的完整合法47存档，在内存只读重编译；无辅助冰霜为同快照对照。数值是非暴击、无防御单次主命中，不是DPS。时间示例调用FreezeRuntime，不重跑Main",
 		"bounds":"仅新增一枚霜锁辅助及其灰白冰晶；不支持玩家被冻、碎冰、传播或新的冻结天赋。静态资料验证不等于原生、Windows或打包验收"}
+
+
+## v78 exports only new authoritative examples and the four newly supported
+## source sentences. Historical catalog data never enters this Godot process.
+static func elemental_conversion_fragment() -> Dictionary:
+	var affected_lines: Array[String] = ["40% of Physical Damage Converted to Cold Damage",
+		"40% of Physical Damage Converted to Lightning Damage", "Damage Penetrates 6% Cold Resistance",
+		"Damage Penetrates 6% Lightning Resistance"]
+	var nodes: Dictionary = {}
+	var localized_nodes: Dictionary = {}
+	var localized_lines: Dictionary = {}
+	for line: String in affected_lines:
+		localized_lines[line] = {"text":SourceLocalization.display_lines([line]), "status":SourceLocalization.line_status(line)}
+	for id: String in SourceTree.Data.nodes():
+		var raw: Dictionary = SourceTree.Data.node(id)
+		var affected: bool = false
+		for line: String in raw.stats:
+			if affected_lines.has(line): affected = true
+		for choice: Dictionary in raw.mastery_effects:
+			for line: String in choice.stats:
+				if affected_lines.has(line): affected = true
+		if not affected: continue
+		var choices: Array = []
+		var localized_choices: Dictionary = {}
+		for choice: Dictionary in raw.mastery_effects:
+			choices.append({"effect":int(choice.effect), "stats":choice.stats, "execution":SourceTree.node_effect(id,int(choice.effect))})
+			localized_choices[str(int(choice.effect))] = SourceLocalization.display_lines(choice.stats)
+		nodes[id] = {"execution":SourceTree.node_effect(id), "mastery_choices":choices}
+		localized_nodes[id] = {"stats":SourceLocalization.display_lines(raw.stats), "mastery_choices":localized_choices}
+	assert(nodes.size() == 13, "Only two notables and eleven existing mastery entrances change")
+	var mechanisms: Dictionary = {}
+	for id: String in SourceMonster.IDS: mechanisms[id] = mechanism_reference(id)
+	return {"game_version":ProjectSettings.get_setting("application/config/version"), "save_version":Canonical.Rules.VERSION,
+		"source_policy":SourceTree.CURRENT_SAVE_VERSION, "nodes":nodes, "localized_nodes":localized_nodes,
+		"localized_lines":localized_lines, "mechanisms":mechanisms, "elemental_conversion":elemental_conversion_examples()}
+
+
+static func _elemental_reference_hit(packet: Dictionary, cast: Dictionary) -> Dictionary:
+	var resolved: Dictionary = Damage.resolve(packet,cast.snapshot.modifiers)
+	assert(not resolved.has("error"))
+	var before_defense: Dictionary = {}
+	for detail: Dictionary in resolved.details: before_defense[detail.type] = detail.before_defense
+	var targets: Dictionary = {}
+	for spec: Dictionary in [
+		{"id":"zero", "armour":0.0, "resistances":{}},
+		{"id":"armour500", "armour":500.0, "resistances":{}},
+		{"id":"elemental75", "armour":0.0, "resistances":{"fire":0.75,"cold":0.75,"lightning":0.75}},
+		{"id":"elemental90", "armour":0.0, "resistances":{"fire":0.9,"cold":0.9,"lightning":0.9}},
+		{"id":"elemental_floor", "armour":0.0, "resistances":{"fire":-1.0,"cold":-1.0,"lightning":-1.0}}]:
+		var frozen: PackedByteArray = var_to_bytes(spec.resistances)
+		var defended: Dictionary = Defense.apply_armour(Damage.resolve(packet,cast.snapshot.modifiers,spec.resistances),spec.armour)
+		var settlement: Dictionary = Defense.settle_resolved(defended,0.0,10000.0)
+		assert(not defended.has("error") and settlement.ok and frozen == var_to_bytes(spec.resistances))
+		targets[spec.id] = {"resistances":spec.resistances,"armour":spec.armour,"resolved":defended,"settlement":settlement}
+	return {"packet":packet, "before_defense":before_defense, "zero_target":resolved,"targets":targets}
+
+
+static func elemental_conversion_examples() -> Dictionary:
+	var root: String = "res://docs/qa/v078-gameplay/fixtures/"
+	var acceptance: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://docs/qa/v078-gameplay/reference-acceptance.json"))
+	assert(acceptance.get("passed",false), "Passing actual-Main receipt is required before the narrow F8 export")
+	var examples: Dictionary = {}
+	for name: String in ["zero","cold","cold-lightning","fire-cold-lightning"]:
+		var path: String = root + name + ".json"
+		var fixture_hash: String = FileAccess.get_sha256(path)
+		assert(acceptance.fixtures.get(name+".json") == fixture_hash)
+		var raw: Dictionary = Canonical.Rules.decode(JSON.parse_string(FileAccess.get_file_as_string(path)))
+		assert(not raw.is_empty() and Canonical.Rules.reason(raw).is_empty() and SourceTree.reason(raw).is_empty())
+		var model := Canonical.new()
+		model._accept_memory(raw.duplicate(true))
+		var stats: Dictionary = model.get_stats()
+		var groups: Dictionary = {}
+		for group: Dictionary in model.snapshot().skill_groups:
+			var current: Dictionary = model.get_group_cast(str(group.id))
+			if current.get("ok",false): groups[current.skill_id] = str(group.id)
+		var casts: Dictionary = {}
+		for skill: String in ["basic","cleave","tornado"]:
+			var cast: Dictionary = model.get_basic_cast() if skill == "basic" else model.get_group_cast(str(groups[skill]))
+			assert(cast.get("ok",false), "Read-only cast from passing Main fixture: "+name+"/"+skill)
+			var hits: Dictionary = {}
+			for role: String in cast.packets: hits[role] = _elemental_reference_hit(cast.packets[role],cast)
+			casts[skill] = {"compiled":cast,"hits":hits,"summary":Preview.summary(cast),"details":Preview.details(cast)}
+		assert(model.save_attempts == 0 and model.snapshot() == raw)
+		assert(FileAccess.get_sha256(path) == fixture_hash)
+		examples[name] = {"fixture":"docs/qa/v078-gameplay/fixtures/"+name+".json","fixture_sha256":fixture_hash,
+			"stats":stats,"talents":raw.talents,"progress":raw.progress,"whole_build_valid":true,
+			"actual_main_fixture":true,"read_only_rebuilt":true,"save_attempts":model.save_attempts,"casts":casts}
+	var fixture: Script = load("res://tests/fixtures/v078/elemental_conversion_fixture.gd")
+	return {"minimum_save_version":Canonical.Rules.VERSION,"source_policy":SourceTree.CURRENT_SAVE_VERSION,
+		"equipment_vocabulary":Equipment.CURRENT_VOCABULARY,"class_id":fixture.CLASS_ID,"level":fixture.LEVEL,
+		"point_budget":fixture.BUDGET,"normal_route":fixture.NORMAL_ROUTE,"masteries":fixture.MASTERIES,
+		"new_complete_ordinary_nodes":["8833","56716"],"new_mastery_effect_ids":[4116,53046],"new_images":[],
+		"examples":examples,"source_sha256":SourceTree.Data.SOURCE_SHA256,
+		"producer":"Passing actual Main snapshots → Canonical Rules / Model → SkillCompiler → DamageResolver → DefenseRules",
+		"scope":"同一23级女巫27点预算、同装备及真实技能组；zero仍保留两notable的30%元素提高和6%命中穿透，未用3点。每次成功不暴击命中，不是DPS",
+		"conversion":"先组装全部物理；请求总和不超过100%时依各40%分配，超过时按总额归一。三40%各约三分之一，残余物理显式0；原生元素独立，龙卷60/40是更早组装",
+		"lineage":"转换部分保留physical和最终元素来源；每个modifier数组条目只匹配一次，同id不同记录不去重；increased相加，独立MORE各乘；每种最终类型只一条detail",
+		"focus":"物理专注对各转换部分×0.96；火焰专注对转火×0.96，对转冰霜及闪电仅×0.80；原生分量按自身来源",
+		"penetration":"只按最终命中元素：已有有效抗性先clamp到[-1,0.9]，减6%后仅守-100%下限；零抗→-6%、75→69%、90→84%、原-100保持。目标stats不变，DOT不读",
+		"preview":"默认空目标是零抗性，启用穿透的summary含穿透收益；before_defense不含。下表分别显示防御前与零抗性目标结果",
+		"bounds":"不新增shock、frost_lock或原生元素专注适配；DOT不转换，既有纯fire独立爆炸保持。现有燃烧只读最终防御前fire合计一次",
+		"leech":"全攻击偷取读实际护盾加生命损失；物理攻击偷取仅残余physical实际份额，三40%归一后为0；超杀不增加，DOT不偷取",
+		"freeze":"施放时冻结转换、穿透与修饰器；母子箭、返回、符印及燃烧不受之后退款/换装/换辅助回溯，不二次转换",
+		"migration":"严格验证并备份旧47原字节后升48；源执行政策48、装备词汇46，不赠点物，不重掷，不改UID；旧文件注入新词汇拒绝",
+		"monster_metadata":"当前五个怪物源定义仅刷新源政策45→48的溯源metadata，数值不变，也未获得转换或穿透；旧actor出生快照冻结，不宣称新生actor全字节不变",
+		"historical":"旧机制章节保留上批导出快照及数值；其中当前一词指该历史快照当时。当前开放状态以源节点条目、本章和source-tree-coverage.json为准"}
