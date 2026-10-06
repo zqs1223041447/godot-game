@@ -12,6 +12,7 @@ const Recipes = preload("res://scripts/combat/combat_data.gd")
 const Jewels = preload("res://scripts/jewel_data.gd")
 const Passives = preload("res://scripts/passive_data.gd")
 const Registry = preload("res://scripts/mechanics/mechanic_registry.gd")
+const SourceMonster = preload("res://scripts/mechanics/source_monster_grants.gd")
 const Balance = preload("res://scripts/mechanics/passive_balance_adapter.gd")
 const Rules = preload("res://scripts/passives/allocation_rules.gd")
 const Defense = preload("res://scripts/mechanics/defense_rules.gd")
@@ -143,6 +144,7 @@ static func collect() -> Dictionary:
 	result["ambush"] = ambush_examples()
 	result["inward_pull"] = inward_pull_examples()
 	result["frost_lock"] = frost_lock_examples()
+	result["source_monster_movement"] = source_monster_movement_examples()
 	result["resolute_technique"] = resolute_technique_examples()
 	result["forgeblade"] = forgeblade_examples()
 	result["melee_basic"] = melee_basic_examples(result.forgeblade)
@@ -326,9 +328,12 @@ static func collect() -> Dictionary:
 		# No source-game names, prose, art, or layout are redistributed.
 		var refs: Array = []
 		for source: Dictionary in mechanism.get("source_refs", []):
-			refs.append({"modifier_id": source.get("modifier_id"), "target_stat": source.get("target_stat"),
-				"adaptation": source.get("adaptation"), "source_value": source.get("source_value"),
-				"scale": source.get("scale"), "reference_base": source.get("reference_base")})
+			if id == SourceMonster.ID:
+				refs.append(source.duplicate(true))
+			else:
+				refs.append({"modifier_id": source.get("modifier_id"), "target_stat": source.get("target_stat"),
+					"adaptation": source.get("adaptation"), "source_value": source.get("source_value"),
+					"scale": source.get("scale"), "reference_base": source.get("reference_base")})
 		mechanism["source_refs"] = refs
 		mechanism["description"] = Passives.describe_stats(mechanism.stats)
 		result.mechanisms[id] = mechanism
@@ -419,6 +424,40 @@ static func currency_examples()->Dictionary:
 		"definition_id":instance.definition_id,"size":[1,1],"stack_limit":int(definition.stack_limit),
 		"example_quantity":1,"quantity_source":"items[uid].payload.quantity","save_version":Canonical.Rules.VERSION,
 		"bag_pages":Canonical.new().bag_layout(),"example_instance":instance}}
+
+
+static func source_monster_movement_examples() -> Dictionary:
+	var source: Dictionary = SourceMonster.resolve(SourceMonster.ID)
+	assert(source.ok, "Source movement reference requires the validated current source entry")
+	var definition: Dictionary = source.definition
+	var entry: Dictionary = definition.source_entry
+	var effect: Dictionary = SourceTree.line_effect(entry.raw_line, SourceTree.CURRENT_SAVE_VERSION)
+	var player: Dictionary = Registry.resolve(SourceMonster.ID, "player")
+	var monster: Dictionary = Registry.resolve(SourceMonster.ID, "monster")
+	var legacy: Dictionary = Registry.resolve("gale_stride", "monster")
+	assert(effect.supported and player.ok and monster.ok and legacy.ok)
+	assert(effect.grants.size() == 1 and player.stats == monster.stats and monster.stats == source.stats)
+	assert(float(effect.grants[0].value) == float(monster.stats.move_speed_increased))
+	var budget: Array[Dictionary] = []
+	for wave: int in [1, 6, 10, 15]:
+		for template_id: String in ["crawler", "skitter", "brute"]:
+			var base: Dictionary = Monsters.make_enemy(1, template_id, wave, Vector2.ZERO, "demo", "magic", [])
+			var old: Dictionary = Monsters.make_enemy(1, template_id, wave, Vector2.ZERO, "demo", "magic", ["gale_stride"])
+			var current: Dictionary = Monsters.make_enemy(1, template_id, wave, Vector2.ZERO, "demo", "magic", [SourceMonster.ID])
+			assert(not base.is_empty() and not old.is_empty() and not current.is_empty())
+			assert(is_equal_approx(current.speed, base.speed * (1.0 + float(monster.stats.move_speed_increased))))
+			budget.append({"template_id": template_id, "wave": wave, "base": base, "legacy": old, "current": current,
+				"speed_delta": current.speed - old.speed, "relative_to_legacy": current.speed / old.speed - 1.0})
+	return {"mechanism_id": SourceMonster.ID, "legacy_id": "gale_stride", "save_version": Canonical.Rules.VERSION,
+		"equipment_vocabulary": Equipment.CURRENT_VOCABULARY, "source_policy": SourceTree.CURRENT_SAVE_VERSION,
+		"definition": definition, "source_entry": entry, "source_effect": effect, "player_grant": player,
+		"monster_grant": monster, "legacy_grant": legacy, "actor_coefficient": monster.role_coefficient,
+		"legacy_pool": Monsters.AFFIX_POOL.duplicate(), "current_pool": Monsters.CURRENT_AFFIX_POOL.duplicate(),
+		"legacy_definition_count": Balance.definitions().size(), "current_definition_count": Registry.get_ids().size(),
+		"budget": budget, "formula": "(species + wave + other_flat) * (1 + move_speed_increased)",
+		"budget_scope": "同物种、波次与蓝色稀有度的单移动词缀对照；由实际MonsterCatalog生成，地图倍率前；不是综合难度评分",
+		"current_admission": "当前Main普通入场及当前地图据点显式选择current入口；历史ordinary_roll与旧地图帮助函数保持",
+		"boundary": "只绑定63417的stat_index 1；不授予同节点护甲、整个节点、升华资格或其他源基石"}
 
 
 static func source_tree_reference()->Dictionary:

@@ -37974,7 +37974,7 @@
 		},
 		"whole_build_valid": true
 	},
-	"game_version": "0.73.0",
+	"game_version": "0.74.0",
 	"glove_ring_affixes": {
 		"accuracy_probes": {
 			"baseline_accuracy": 284.0,
@@ -54366,6 +54366,48 @@
 			"stats": {
 				"damage": 0.234,
 				"max_health": 1.95
+			},
+			"support_reason": "",
+			"supported_actors": [
+				"player",
+				"monster"
+			]
+		},
+		"source_gale_stride": {
+			"definition_revision": 1,
+			"description": "移动速度提高 +4.0%",
+			"id": "source_gale_stride",
+			"kind": "stat_bundle",
+			"name": "流岚疾行",
+			"policy_version": "source-tree:3.29.1:policy:45",
+			"schema_version": 1,
+			"source_entry": {
+				"node_id": "63417",
+				"node_name": "Armour, Movement Speed",
+				"raw_line": "4% increased Movement Speed",
+				"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+				"source_hash": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+				"source_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+				"source_version": "3.29.1",
+				"stat_index": 1
+			},
+			"source_line": "4% increased Movement Speed",
+			"source_policy": 45,
+			"source_refs": [
+				{
+					"node_id": "63417",
+					"node_name": "Armour, Movement Speed",
+					"raw_line": "4% increased Movement Speed",
+					"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+					"source_hash": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+					"source_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+					"source_version": "3.29.1",
+					"stat_index": 1
+				}
+			],
+			"source_save_version": 45,
+			"stats": {
+				"move_speed_increased": 0.04
 			},
 			"support_reason": "",
 			"supported_actors": [
@@ -330613,6 +330655,2557 @@
 			"生命转费",
 			"保留效率"
 		]
+	},
+	"source_monster_movement": {
+		"actor_coefficient": 1.0,
+		"boundary": "只绑定63417的stat_index 1；不授予同节点护甲、整个节点、升华资格或其他源基石",
+		"budget": [
+			{
+				"base": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 11.0,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 58.9,
+					"id": 1,
+					"kind": 0,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 58.9,
+					"max_shield": 0.0,
+					"mechanism_ids": [],
+					"mechanism_policy": "poe-passive-v1",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_stats": {},
+					"name": "巡游体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 14.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 65.4,
+					"template_id": "crawler",
+					"wave": 1,
+					"xp_reward": 6
+				},
+				"current": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 11.0,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 58.9,
+					"id": 1,
+					"kind": 0,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 58.9,
+					"max_shield": 0.0,
+					"mechanism_ids": [
+						"source_gale_stride"
+					],
+					"mechanism_policy": "poe-passive-v1+source-tree:3.29.1:policy:45",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_source_grants": [
+						{
+							"id": "source_gale_stride",
+							"name": "流岚疾行",
+							"policy_version": "source-tree:3.29.1:policy:45",
+							"source_entry": {
+								"node_id": "63417",
+								"node_name": "Armour, Movement Speed",
+								"raw_line": "4% increased Movement Speed",
+								"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+								"source_hash": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+								"source_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+								"source_version": "3.29.1",
+								"stat_index": 1
+							},
+							"source_line": "4% increased Movement Speed",
+							"source_policy": 45,
+							"source_refs": [
+								{
+									"node_id": "63417",
+									"node_name": "Armour, Movement Speed",
+									"raw_line": "4% increased Movement Speed",
+									"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+									"source_hash": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+									"source_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+									"source_version": "3.29.1",
+									"stat_index": 1
+								}
+							],
+							"source_save_version": 45,
+							"stats": {
+								"move_speed_increased": 0.04
+							}
+						}
+					],
+					"mechanism_stats": {
+						"move_speed_increased": 0.04
+					},
+					"name": "巡游体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 14.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 68.016,
+					"template_id": "crawler",
+					"wave": 1,
+					"xp_reward": 6
+				},
+				"legacy": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 11.0,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 58.9,
+					"id": 1,
+					"kind": 0,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 58.9,
+					"max_shield": 0.0,
+					"mechanism_ids": [
+						"gale_stride"
+					],
+					"mechanism_policy": "poe-passive-v1",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_stats": {
+						"move_speed": 3.12
+					},
+					"name": "巡游体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 14.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 68.52000000000001,
+					"template_id": "crawler",
+					"wave": 1,
+					"xp_reward": 6
+				},
+				"relative_to_legacy": -0.007355516637478132,
+				"speed_delta": -0.5040000000000049,
+				"template_id": "crawler",
+				"wave": 1
+			},
+			{
+				"base": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 8.8,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 38.75,
+					"id": 1,
+					"kind": 1,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 38.75,
+					"max_shield": 0.0,
+					"mechanism_ids": [],
+					"mechanism_policy": "poe-passive-v1",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_stats": {},
+					"name": "掠行体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 10.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 104.4,
+					"template_id": "skitter",
+					"wave": 1,
+					"xp_reward": 6
+				},
+				"current": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 8.8,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 38.75,
+					"id": 1,
+					"kind": 1,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 38.75,
+					"max_shield": 0.0,
+					"mechanism_ids": [
+						"source_gale_stride"
+					],
+					"mechanism_policy": "poe-passive-v1+source-tree:3.29.1:policy:45",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_source_grants": [
+						{
+							"id": "source_gale_stride",
+							"name": "流岚疾行",
+							"policy_version": "source-tree:3.29.1:policy:45",
+							"source_entry": {
+								"node_id": "63417",
+								"node_name": "Armour, Movement Speed",
+								"raw_line": "4% increased Movement Speed",
+								"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+								"source_hash": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+								"source_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+								"source_version": "3.29.1",
+								"stat_index": 1
+							},
+							"source_line": "4% increased Movement Speed",
+							"source_policy": 45,
+							"source_refs": [
+								{
+									"node_id": "63417",
+									"node_name": "Armour, Movement Speed",
+									"raw_line": "4% increased Movement Speed",
+									"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+									"source_hash": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+									"source_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+									"source_version": "3.29.1",
+									"stat_index": 1
+								}
+							],
+							"source_save_version": 45,
+							"stats": {
+								"move_speed_increased": 0.04
+							}
+						}
+					],
+					"mechanism_stats": {
+						"move_speed_increased": 0.04
+					},
+					"name": "掠行体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 10.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 108.57600000000001,
+					"template_id": "skitter",
+					"wave": 1,
+					"xp_reward": 6
+				},
+				"legacy": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 8.8,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 38.75,
+					"id": 1,
+					"kind": 1,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 38.75,
+					"max_shield": 0.0,
+					"mechanism_ids": [
+						"gale_stride"
+					],
+					"mechanism_policy": "poe-passive-v1",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_stats": {
+						"move_speed": 3.12
+					},
+					"name": "掠行体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 10.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 107.52000000000001,
+					"template_id": "skitter",
+					"wave": 1,
+					"xp_reward": 6
+				},
+				"relative_to_legacy": 0.009821428571428648,
+				"speed_delta": 1.0559999999999974,
+				"template_id": "skitter",
+				"wave": 1
+			},
+			{
+				"base": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 19.8,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 147.25,
+					"id": 1,
+					"kind": 2,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 147.25,
+					"max_shield": 0.0,
+					"mechanism_ids": [],
+					"mechanism_policy": "poe-passive-v1",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_stats": {},
+					"name": "重壳体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 22.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 44.4,
+					"template_id": "brute",
+					"wave": 1,
+					"xp_reward": 12
+				},
+				"current": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 19.8,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 147.25,
+					"id": 1,
+					"kind": 2,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 147.25,
+					"max_shield": 0.0,
+					"mechanism_ids": [
+						"source_gale_stride"
+					],
+					"mechanism_policy": "poe-passive-v1+source-tree:3.29.1:policy:45",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_source_grants": [
+						{
+							"id": "source_gale_stride",
+							"name": "流岚疾行",
+							"policy_version": "source-tree:3.29.1:policy:45",
+							"source_entry": {
+								"node_id": "63417",
+								"node_name": "Armour, Movement Speed",
+								"raw_line": "4% increased Movement Speed",
+								"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+								"source_hash": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+								"source_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+								"source_version": "3.29.1",
+								"stat_index": 1
+							},
+							"source_line": "4% increased Movement Speed",
+							"source_policy": 45,
+							"source_refs": [
+								{
+									"node_id": "63417",
+									"node_name": "Armour, Movement Speed",
+									"raw_line": "4% increased Movement Speed",
+									"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+									"source_hash": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+									"source_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+									"source_version": "3.29.1",
+									"stat_index": 1
+								}
+							],
+							"source_save_version": 45,
+							"stats": {
+								"move_speed_increased": 0.04
+							}
+						}
+					],
+					"mechanism_stats": {
+						"move_speed_increased": 0.04
+					},
+					"name": "重壳体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 22.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 46.176,
+					"template_id": "brute",
+					"wave": 1,
+					"xp_reward": 12
+				},
+				"legacy": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 19.8,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 147.25,
+					"id": 1,
+					"kind": 2,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 147.25,
+					"max_shield": 0.0,
+					"mechanism_ids": [
+						"gale_stride"
+					],
+					"mechanism_policy": "poe-passive-v1",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_stats": {
+						"move_speed": 3.12
+					},
+					"name": "重壳体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 22.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 47.519999999999996,
+					"template_id": "brute",
+					"wave": 1,
+					"xp_reward": 12
+				},
+				"relative_to_legacy": -0.028282828282828132,
+				"speed_delta": -1.343999999999994,
+				"template_id": "brute",
+				"wave": 1
+			},
+			{
+				"base": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 14.850000000000001,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 106.02000000000001,
+					"id": 1,
+					"kind": 0,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 106.02000000000001,
+					"max_shield": 0.0,
+					"mechanism_ids": [],
+					"mechanism_policy": "poe-passive-v1",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_stats": {},
+					"name": "巡游体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 14.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 72.4,
+					"template_id": "crawler",
+					"wave": 6,
+					"xp_reward": 6
+				},
+				"current": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 14.850000000000001,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 106.02000000000001,
+					"id": 1,
+					"kind": 0,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 106.02000000000001,
+					"max_shield": 0.0,
+					"mechanism_ids": [
+						"source_gale_stride"
+					],
+					"mechanism_policy": "poe-passive-v1+source-tree:3.29.1:policy:45",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_source_grants": [
+						{
+							"id": "source_gale_stride",
+							"name": "流岚疾行",
+							"policy_version": "source-tree:3.29.1:policy:45",
+							"source_entry": {
+								"node_id": "63417",
+								"node_name": "Armour, Movement Speed",
+								"raw_line": "4% increased Movement Speed",
+								"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+								"source_hash": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+								"source_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+								"source_version": "3.29.1",
+								"stat_index": 1
+							},
+							"source_line": "4% increased Movement Speed",
+							"source_policy": 45,
+							"source_refs": [
+								{
+									"node_id": "63417",
+									"node_name": "Armour, Movement Speed",
+									"raw_line": "4% increased Movement Speed",
+									"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+									"source_hash": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+									"source_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+									"source_version": "3.29.1",
+									"stat_index": 1
+								}
+							],
+							"source_save_version": 45,
+							"stats": {
+								"move_speed_increased": 0.04
+							}
+						}
+					],
+					"mechanism_stats": {
+						"move_speed_increased": 0.04
+					},
+					"name": "巡游体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 14.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 75.296,
+					"template_id": "crawler",
+					"wave": 6,
+					"xp_reward": 6
+				},
+				"legacy": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 14.850000000000001,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 106.02000000000001,
+					"id": 1,
+					"kind": 0,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 106.02000000000001,
+					"max_shield": 0.0,
+					"mechanism_ids": [
+						"gale_stride"
+					],
+					"mechanism_policy": "poe-passive-v1",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_stats": {
+						"move_speed": 3.12
+					},
+					"name": "巡游体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 14.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 75.52000000000001,
+					"template_id": "crawler",
+					"wave": 6,
+					"xp_reward": 6
+				},
+				"relative_to_legacy": -0.0029661016949152907,
+				"speed_delta": -0.22400000000000375,
+				"template_id": "crawler",
+				"wave": 6
+			},
+			{
+				"base": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 12.65,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 69.75,
+					"id": 1,
+					"kind": 1,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 69.75,
+					"max_shield": 0.0,
+					"mechanism_ids": [],
+					"mechanism_policy": "poe-passive-v1",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_stats": {},
+					"name": "掠行体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 10.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 111.4,
+					"template_id": "skitter",
+					"wave": 6,
+					"xp_reward": 6
+				},
+				"current": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 12.65,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 69.75,
+					"id": 1,
+					"kind": 1,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 69.75,
+					"max_shield": 0.0,
+					"mechanism_ids": [
+						"source_gale_stride"
+					],
+					"mechanism_policy": "poe-passive-v1+source-tree:3.29.1:policy:45",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_source_grants": [
+						{
+							"id": "source_gale_stride",
+							"name": "流岚疾行",
+							"policy_version": "source-tree:3.29.1:policy:45",
+							"source_entry": {
+								"node_id": "63417",
+								"node_name": "Armour, Movement Speed",
+								"raw_line": "4% increased Movement Speed",
+								"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+								"source_hash": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+								"source_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+								"source_version": "3.29.1",
+								"stat_index": 1
+							},
+							"source_line": "4% increased Movement Speed",
+							"source_policy": 45,
+							"source_refs": [
+								{
+									"node_id": "63417",
+									"node_name": "Armour, Movement Speed",
+									"raw_line": "4% increased Movement Speed",
+									"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+									"source_hash": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+									"source_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+									"source_version": "3.29.1",
+									"stat_index": 1
+								}
+							],
+							"source_save_version": 45,
+							"stats": {
+								"move_speed_increased": 0.04
+							}
+						}
+					],
+					"mechanism_stats": {
+						"move_speed_increased": 0.04
+					},
+					"name": "掠行体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 10.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 115.85600000000001,
+					"template_id": "skitter",
+					"wave": 6,
+					"xp_reward": 6
+				},
+				"legacy": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 12.65,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 69.75,
+					"id": 1,
+					"kind": 1,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 69.75,
+					"max_shield": 0.0,
+					"mechanism_ids": [
+						"gale_stride"
+					],
+					"mechanism_policy": "poe-passive-v1",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_stats": {
+						"move_speed": 3.12
+					},
+					"name": "掠行体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 10.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 114.52000000000001,
+					"template_id": "skitter",
+					"wave": 6,
+					"xp_reward": 6
+				},
+				"relative_to_legacy": 0.011666084526720244,
+				"speed_delta": 1.3359999999999985,
+				"template_id": "skitter",
+				"wave": 6
+			},
+			{
+				"base": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 23.650000000000002,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 265.05,
+					"id": 1,
+					"kind": 2,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 265.05,
+					"max_shield": 0.0,
+					"mechanism_ids": [],
+					"mechanism_policy": "poe-passive-v1",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_stats": {},
+					"name": "重壳体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 22.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 51.4,
+					"template_id": "brute",
+					"wave": 6,
+					"xp_reward": 12
+				},
+				"current": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 23.650000000000002,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 265.05,
+					"id": 1,
+					"kind": 2,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 265.05,
+					"max_shield": 0.0,
+					"mechanism_ids": [
+						"source_gale_stride"
+					],
+					"mechanism_policy": "poe-passive-v1+source-tree:3.29.1:policy:45",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_source_grants": [
+						{
+							"id": "source_gale_stride",
+							"name": "流岚疾行",
+							"policy_version": "source-tree:3.29.1:policy:45",
+							"source_entry": {
+								"node_id": "63417",
+								"node_name": "Armour, Movement Speed",
+								"raw_line": "4% increased Movement Speed",
+								"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+								"source_hash": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+								"source_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+								"source_version": "3.29.1",
+								"stat_index": 1
+							},
+							"source_line": "4% increased Movement Speed",
+							"source_policy": 45,
+							"source_refs": [
+								{
+									"node_id": "63417",
+									"node_name": "Armour, Movement Speed",
+									"raw_line": "4% increased Movement Speed",
+									"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+									"source_hash": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+									"source_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+									"source_version": "3.29.1",
+									"stat_index": 1
+								}
+							],
+							"source_save_version": 45,
+							"stats": {
+								"move_speed_increased": 0.04
+							}
+						}
+					],
+					"mechanism_stats": {
+						"move_speed_increased": 0.04
+					},
+					"name": "重壳体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 22.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 53.456,
+					"template_id": "brute",
+					"wave": 6,
+					"xp_reward": 12
+				},
+				"legacy": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 23.650000000000002,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 265.05,
+					"id": 1,
+					"kind": 2,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 265.05,
+					"max_shield": 0.0,
+					"mechanism_ids": [
+						"gale_stride"
+					],
+					"mechanism_policy": "poe-passive-v1",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_stats": {
+						"move_speed": 3.12
+					},
+					"name": "重壳体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 22.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 54.519999999999996,
+					"template_id": "brute",
+					"wave": 6,
+					"xp_reward": 12
+				},
+				"relative_to_legacy": -0.019515774027879518,
+				"speed_delta": -1.063999999999993,
+				"template_id": "brute",
+				"wave": 6
+			},
+			{
+				"base": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 17.930000000000003,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 143.716,
+					"id": 1,
+					"kind": 0,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 143.716,
+					"max_shield": 0.0,
+					"mechanism_ids": [],
+					"mechanism_policy": "poe-passive-v1",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_stats": {},
+					"name": "巡游体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 14.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 78.0,
+					"template_id": "crawler",
+					"wave": 10,
+					"xp_reward": 6
+				},
+				"current": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 17.930000000000003,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 143.716,
+					"id": 1,
+					"kind": 0,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 143.716,
+					"max_shield": 0.0,
+					"mechanism_ids": [
+						"source_gale_stride"
+					],
+					"mechanism_policy": "poe-passive-v1+source-tree:3.29.1:policy:45",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_source_grants": [
+						{
+							"id": "source_gale_stride",
+							"name": "流岚疾行",
+							"policy_version": "source-tree:3.29.1:policy:45",
+							"source_entry": {
+								"node_id": "63417",
+								"node_name": "Armour, Movement Speed",
+								"raw_line": "4% increased Movement Speed",
+								"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+								"source_hash": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+								"source_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+								"source_version": "3.29.1",
+								"stat_index": 1
+							},
+							"source_line": "4% increased Movement Speed",
+							"source_policy": 45,
+							"source_refs": [
+								{
+									"node_id": "63417",
+									"node_name": "Armour, Movement Speed",
+									"raw_line": "4% increased Movement Speed",
+									"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+									"source_hash": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+									"source_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+									"source_version": "3.29.1",
+									"stat_index": 1
+								}
+							],
+							"source_save_version": 45,
+							"stats": {
+								"move_speed_increased": 0.04
+							}
+						}
+					],
+					"mechanism_stats": {
+						"move_speed_increased": 0.04
+					},
+					"name": "巡游体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 14.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 81.12,
+					"template_id": "crawler",
+					"wave": 10,
+					"xp_reward": 6
+				},
+				"legacy": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 17.930000000000003,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 143.716,
+					"id": 1,
+					"kind": 0,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 143.716,
+					"max_shield": 0.0,
+					"mechanism_ids": [
+						"gale_stride"
+					],
+					"mechanism_policy": "poe-passive-v1",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_stats": {
+						"move_speed": 3.12
+					},
+					"name": "巡游体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 14.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 81.12,
+					"template_id": "crawler",
+					"wave": 10,
+					"xp_reward": 6
+				},
+				"relative_to_legacy": 0.0,
+				"speed_delta": 0.0,
+				"template_id": "crawler",
+				"wave": 10
+			},
+			{
+				"base": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 15.730000000000002,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 94.55,
+					"id": 1,
+					"kind": 1,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 94.55,
+					"max_shield": 0.0,
+					"mechanism_ids": [],
+					"mechanism_policy": "poe-passive-v1",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_stats": {},
+					"name": "掠行体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 10.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 117.0,
+					"template_id": "skitter",
+					"wave": 10,
+					"xp_reward": 6
+				},
+				"current": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 15.730000000000002,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 94.55,
+					"id": 1,
+					"kind": 1,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 94.55,
+					"max_shield": 0.0,
+					"mechanism_ids": [
+						"source_gale_stride"
+					],
+					"mechanism_policy": "poe-passive-v1+source-tree:3.29.1:policy:45",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_source_grants": [
+						{
+							"id": "source_gale_stride",
+							"name": "流岚疾行",
+							"policy_version": "source-tree:3.29.1:policy:45",
+							"source_entry": {
+								"node_id": "63417",
+								"node_name": "Armour, Movement Speed",
+								"raw_line": "4% increased Movement Speed",
+								"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+								"source_hash": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+								"source_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+								"source_version": "3.29.1",
+								"stat_index": 1
+							},
+							"source_line": "4% increased Movement Speed",
+							"source_policy": 45,
+							"source_refs": [
+								{
+									"node_id": "63417",
+									"node_name": "Armour, Movement Speed",
+									"raw_line": "4% increased Movement Speed",
+									"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+									"source_hash": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+									"source_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+									"source_version": "3.29.1",
+									"stat_index": 1
+								}
+							],
+							"source_save_version": 45,
+							"stats": {
+								"move_speed_increased": 0.04
+							}
+						}
+					],
+					"mechanism_stats": {
+						"move_speed_increased": 0.04
+					},
+					"name": "掠行体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 10.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 121.68,
+					"template_id": "skitter",
+					"wave": 10,
+					"xp_reward": 6
+				},
+				"legacy": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 15.730000000000002,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 94.55,
+					"id": 1,
+					"kind": 1,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 94.55,
+					"max_shield": 0.0,
+					"mechanism_ids": [
+						"gale_stride"
+					],
+					"mechanism_policy": "poe-passive-v1",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_stats": {
+						"move_speed": 3.12
+					},
+					"name": "掠行体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 10.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 120.12,
+					"template_id": "skitter",
+					"wave": 10,
+					"xp_reward": 6
+				},
+				"relative_to_legacy": 0.012987012987013102,
+				"speed_delta": 1.5600000000000023,
+				"template_id": "skitter",
+				"wave": 10
+			},
+			{
+				"base": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 26.730000000000004,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 359.28999999999996,
+					"id": 1,
+					"kind": 2,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 359.28999999999996,
+					"max_shield": 0.0,
+					"mechanism_ids": [],
+					"mechanism_policy": "poe-passive-v1",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_stats": {},
+					"name": "重壳体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 22.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 57.0,
+					"template_id": "brute",
+					"wave": 10,
+					"xp_reward": 12
+				},
+				"current": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 26.730000000000004,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 359.28999999999996,
+					"id": 1,
+					"kind": 2,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 359.28999999999996,
+					"max_shield": 0.0,
+					"mechanism_ids": [
+						"source_gale_stride"
+					],
+					"mechanism_policy": "poe-passive-v1+source-tree:3.29.1:policy:45",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_source_grants": [
+						{
+							"id": "source_gale_stride",
+							"name": "流岚疾行",
+							"policy_version": "source-tree:3.29.1:policy:45",
+							"source_entry": {
+								"node_id": "63417",
+								"node_name": "Armour, Movement Speed",
+								"raw_line": "4% increased Movement Speed",
+								"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+								"source_hash": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+								"source_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+								"source_version": "3.29.1",
+								"stat_index": 1
+							},
+							"source_line": "4% increased Movement Speed",
+							"source_policy": 45,
+							"source_refs": [
+								{
+									"node_id": "63417",
+									"node_name": "Armour, Movement Speed",
+									"raw_line": "4% increased Movement Speed",
+									"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+									"source_hash": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+									"source_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+									"source_version": "3.29.1",
+									"stat_index": 1
+								}
+							],
+							"source_save_version": 45,
+							"stats": {
+								"move_speed_increased": 0.04
+							}
+						}
+					],
+					"mechanism_stats": {
+						"move_speed_increased": 0.04
+					},
+					"name": "重壳体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 22.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 59.28,
+					"template_id": "brute",
+					"wave": 10,
+					"xp_reward": 12
+				},
+				"legacy": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 26.730000000000004,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 359.28999999999996,
+					"id": 1,
+					"kind": 2,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 359.28999999999996,
+					"max_shield": 0.0,
+					"mechanism_ids": [
+						"gale_stride"
+					],
+					"mechanism_policy": "poe-passive-v1",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_stats": {
+						"move_speed": 3.12
+					},
+					"name": "重壳体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 22.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 60.12,
+					"template_id": "brute",
+					"wave": 10,
+					"xp_reward": 12
+				},
+				"relative_to_legacy": -0.013972055888223478,
+				"speed_delta": -0.8399999999999963,
+				"template_id": "brute",
+				"wave": 10
+			},
+			{
+				"base": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 21.779999999999998,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 190.836,
+					"id": 1,
+					"kind": 0,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 190.836,
+					"max_shield": 0.0,
+					"mechanism_ids": [],
+					"mechanism_policy": "poe-passive-v1",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_stats": {},
+					"name": "巡游体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 14.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 85.0,
+					"template_id": "crawler",
+					"wave": 15,
+					"xp_reward": 6
+				},
+				"current": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 21.779999999999998,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 190.836,
+					"id": 1,
+					"kind": 0,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 190.836,
+					"max_shield": 0.0,
+					"mechanism_ids": [
+						"source_gale_stride"
+					],
+					"mechanism_policy": "poe-passive-v1+source-tree:3.29.1:policy:45",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_source_grants": [
+						{
+							"id": "source_gale_stride",
+							"name": "流岚疾行",
+							"policy_version": "source-tree:3.29.1:policy:45",
+							"source_entry": {
+								"node_id": "63417",
+								"node_name": "Armour, Movement Speed",
+								"raw_line": "4% increased Movement Speed",
+								"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+								"source_hash": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+								"source_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+								"source_version": "3.29.1",
+								"stat_index": 1
+							},
+							"source_line": "4% increased Movement Speed",
+							"source_policy": 45,
+							"source_refs": [
+								{
+									"node_id": "63417",
+									"node_name": "Armour, Movement Speed",
+									"raw_line": "4% increased Movement Speed",
+									"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+									"source_hash": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+									"source_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+									"source_version": "3.29.1",
+									"stat_index": 1
+								}
+							],
+							"source_save_version": 45,
+							"stats": {
+								"move_speed_increased": 0.04
+							}
+						}
+					],
+					"mechanism_stats": {
+						"move_speed_increased": 0.04
+					},
+					"name": "巡游体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 14.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 88.4,
+					"template_id": "crawler",
+					"wave": 15,
+					"xp_reward": 6
+				},
+				"legacy": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 21.779999999999998,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 190.836,
+					"id": 1,
+					"kind": 0,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 190.836,
+					"max_shield": 0.0,
+					"mechanism_ids": [
+						"gale_stride"
+					],
+					"mechanism_policy": "poe-passive-v1",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_stats": {
+						"move_speed": 3.12
+					},
+					"name": "巡游体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 14.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 88.12,
+					"template_id": "crawler",
+					"wave": 15,
+					"xp_reward": 6
+				},
+				"relative_to_legacy": 0.003177485247390033,
+				"speed_delta": 0.28000000000000114,
+				"template_id": "crawler",
+				"wave": 15
+			},
+			{
+				"base": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 19.58,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 125.55,
+					"id": 1,
+					"kind": 1,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 125.55,
+					"max_shield": 0.0,
+					"mechanism_ids": [],
+					"mechanism_policy": "poe-passive-v1",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_stats": {},
+					"name": "掠行体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 10.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 124.0,
+					"template_id": "skitter",
+					"wave": 15,
+					"xp_reward": 6
+				},
+				"current": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 19.58,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 125.55,
+					"id": 1,
+					"kind": 1,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 125.55,
+					"max_shield": 0.0,
+					"mechanism_ids": [
+						"source_gale_stride"
+					],
+					"mechanism_policy": "poe-passive-v1+source-tree:3.29.1:policy:45",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_source_grants": [
+						{
+							"id": "source_gale_stride",
+							"name": "流岚疾行",
+							"policy_version": "source-tree:3.29.1:policy:45",
+							"source_entry": {
+								"node_id": "63417",
+								"node_name": "Armour, Movement Speed",
+								"raw_line": "4% increased Movement Speed",
+								"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+								"source_hash": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+								"source_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+								"source_version": "3.29.1",
+								"stat_index": 1
+							},
+							"source_line": "4% increased Movement Speed",
+							"source_policy": 45,
+							"source_refs": [
+								{
+									"node_id": "63417",
+									"node_name": "Armour, Movement Speed",
+									"raw_line": "4% increased Movement Speed",
+									"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+									"source_hash": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+									"source_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+									"source_version": "3.29.1",
+									"stat_index": 1
+								}
+							],
+							"source_save_version": 45,
+							"stats": {
+								"move_speed_increased": 0.04
+							}
+						}
+					],
+					"mechanism_stats": {
+						"move_speed_increased": 0.04
+					},
+					"name": "掠行体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 10.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 128.96,
+					"template_id": "skitter",
+					"wave": 15,
+					"xp_reward": 6
+				},
+				"legacy": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 19.58,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 125.55,
+					"id": 1,
+					"kind": 1,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 125.55,
+					"max_shield": 0.0,
+					"mechanism_ids": [
+						"gale_stride"
+					],
+					"mechanism_policy": "poe-passive-v1",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_stats": {
+						"move_speed": 3.12
+					},
+					"name": "掠行体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 10.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 127.12,
+					"template_id": "skitter",
+					"wave": 15,
+					"xp_reward": 6
+				},
+				"relative_to_legacy": 0.014474512271869022,
+				"speed_delta": 1.8400000000000034,
+				"template_id": "skitter",
+				"wave": 15
+			},
+			{
+				"base": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 30.58,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 477.09000000000003,
+					"id": 1,
+					"kind": 2,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 477.09000000000003,
+					"max_shield": 0.0,
+					"mechanism_ids": [],
+					"mechanism_policy": "poe-passive-v1",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_stats": {},
+					"name": "重壳体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 22.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 64.0,
+					"template_id": "brute",
+					"wave": 15,
+					"xp_reward": 12
+				},
+				"current": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 30.58,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 477.09000000000003,
+					"id": 1,
+					"kind": 2,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 477.09000000000003,
+					"max_shield": 0.0,
+					"mechanism_ids": [
+						"source_gale_stride"
+					],
+					"mechanism_policy": "poe-passive-v1+source-tree:3.29.1:policy:45",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_source_grants": [
+						{
+							"id": "source_gale_stride",
+							"name": "流岚疾行",
+							"policy_version": "source-tree:3.29.1:policy:45",
+							"source_entry": {
+								"node_id": "63417",
+								"node_name": "Armour, Movement Speed",
+								"raw_line": "4% increased Movement Speed",
+								"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+								"source_hash": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+								"source_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+								"source_version": "3.29.1",
+								"stat_index": 1
+							},
+							"source_line": "4% increased Movement Speed",
+							"source_policy": 45,
+							"source_refs": [
+								{
+									"node_id": "63417",
+									"node_name": "Armour, Movement Speed",
+									"raw_line": "4% increased Movement Speed",
+									"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+									"source_hash": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+									"source_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+									"source_version": "3.29.1",
+									"stat_index": 1
+								}
+							],
+							"source_save_version": 45,
+							"stats": {
+								"move_speed_increased": 0.04
+							}
+						}
+					],
+					"mechanism_stats": {
+						"move_speed_increased": 0.04
+					},
+					"name": "重壳体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 22.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 66.56,
+					"template_id": "brute",
+					"wave": 15,
+					"xp_reward": 12
+				},
+				"legacy": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 30.58,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 477.09000000000003,
+					"id": 1,
+					"kind": 2,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 477.09000000000003,
+					"max_shield": 0.0,
+					"mechanism_ids": [
+						"gale_stride"
+					],
+					"mechanism_policy": "poe-passive-v1",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_stats": {
+						"move_speed": 3.12
+					},
+					"name": "重壳体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 22.0,
+					"rarity": "magic",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 67.12,
+					"template_id": "brute",
+					"wave": 15,
+					"xp_reward": 12
+				},
+				"relative_to_legacy": -0.008343265792610244,
+				"speed_delta": -0.5600000000000023,
+				"template_id": "brute",
+				"wave": 15
+			}
+		],
+		"budget_scope": "同物种、波次与蓝色稀有度的单移动词缀对照；由实际MonsterCatalog生成，地图倍率前；不是综合难度评分",
+		"current_admission": "当前Main普通入场及当前地图据点显式选择current入口；历史ordinary_roll与旧地图帮助函数保持",
+		"current_definition_count": 24,
+		"current_pool": [
+			"ember_power",
+			"source_gale_stride",
+			"grove_vitality",
+			"aegis_capacity",
+			"aegis_recovery"
+		],
+		"definition": {
+			"id": "source_gale_stride",
+			"name": "流岚疾行",
+			"policy_version": "source-tree:3.29.1:policy:45",
+			"source_entry": {
+				"node_id": "63417",
+				"node_name": "Armour, Movement Speed",
+				"raw_line": "4% increased Movement Speed",
+				"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+				"source_hash": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+				"source_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+				"source_version": "3.29.1",
+				"stat_index": 1
+			},
+			"source_line": "4% increased Movement Speed",
+			"source_policy": 45,
+			"source_refs": [
+				{
+					"node_id": "63417",
+					"node_name": "Armour, Movement Speed",
+					"raw_line": "4% increased Movement Speed",
+					"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+					"source_hash": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+					"source_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+					"source_version": "3.29.1",
+					"stat_index": 1
+				}
+			],
+			"source_save_version": 45,
+			"stats": {
+				"move_speed_increased": 0.04
+			}
+		},
+		"equipment_vocabulary": 46,
+		"formula": "(species + wave + other_flat) * (1 + move_speed_increased)",
+		"legacy_definition_count": 23,
+		"legacy_grant": {
+			"actor": "monster",
+			"definition_revision": 1,
+			"errors": [],
+			"mechanism_ids": [
+				"gale_stride"
+			],
+			"ok": true,
+			"policy_version": "poe-passive-v1",
+			"role_coefficient": 1.0,
+			"schema_version": 1,
+			"stats": {
+				"move_speed": 3.12
+			}
+		},
+		"legacy_id": "gale_stride",
+		"legacy_pool": [
+			"ember_power",
+			"gale_stride",
+			"grove_vitality",
+			"aegis_capacity",
+			"aegis_recovery"
+		],
+		"mechanism_id": "source_gale_stride",
+		"monster_grant": {
+			"actor": "monster",
+			"definition_revision": 1,
+			"errors": [],
+			"mechanism_ids": [
+				"source_gale_stride"
+			],
+			"ok": true,
+			"policy_version": "poe-passive-v1+source-tree:3.29.1:policy:45",
+			"role_coefficient": 1.0,
+			"schema_version": 1,
+			"source_grants": [
+				{
+					"id": "source_gale_stride",
+					"name": "流岚疾行",
+					"policy_version": "source-tree:3.29.1:policy:45",
+					"source_entry": {
+						"node_id": "63417",
+						"node_name": "Armour, Movement Speed",
+						"raw_line": "4% increased Movement Speed",
+						"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+						"source_hash": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+						"source_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+						"source_version": "3.29.1",
+						"stat_index": 1
+					},
+					"source_line": "4% increased Movement Speed",
+					"source_policy": 45,
+					"source_refs": [
+						{
+							"node_id": "63417",
+							"node_name": "Armour, Movement Speed",
+							"raw_line": "4% increased Movement Speed",
+							"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+							"source_hash": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+							"source_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+							"source_version": "3.29.1",
+							"stat_index": 1
+						}
+					],
+					"source_save_version": 45,
+					"stats": {
+						"move_speed_increased": 0.04
+					}
+				}
+			],
+			"stats": {
+				"move_speed_increased": 0.04
+			}
+		},
+		"player_grant": {
+			"actor": "player",
+			"definition_revision": 1,
+			"errors": [],
+			"mechanism_ids": [
+				"source_gale_stride"
+			],
+			"ok": true,
+			"policy_version": "poe-passive-v1+source-tree:3.29.1:policy:45",
+			"role_coefficient": 1.0,
+			"schema_version": 1,
+			"source_grants": [
+				{
+					"id": "source_gale_stride",
+					"name": "流岚疾行",
+					"policy_version": "source-tree:3.29.1:policy:45",
+					"source_entry": {
+						"node_id": "63417",
+						"node_name": "Armour, Movement Speed",
+						"raw_line": "4% increased Movement Speed",
+						"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+						"source_hash": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+						"source_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+						"source_version": "3.29.1",
+						"stat_index": 1
+					},
+					"source_line": "4% increased Movement Speed",
+					"source_policy": 45,
+					"source_refs": [
+						{
+							"node_id": "63417",
+							"node_name": "Armour, Movement Speed",
+							"raw_line": "4% increased Movement Speed",
+							"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+							"source_hash": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+							"source_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+							"source_version": "3.29.1",
+							"stat_index": 1
+						}
+					],
+					"source_save_version": 45,
+					"stats": {
+						"move_speed_increased": 0.04
+					}
+				}
+			],
+			"stats": {
+				"move_speed_increased": 0.04
+			}
+		},
+		"save_version": 47,
+		"source_effect": {
+			"grants": [
+				{
+					"mode": "increased",
+					"stat": "move_speed_increased",
+					"value": 0.04
+				}
+			],
+			"reason": "",
+			"supported": true
+		},
+		"source_entry": {
+			"node_id": "63417",
+			"node_name": "Armour, Movement Speed",
+			"raw_line": "4% increased Movement Speed",
+			"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
+			"source_hash": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+			"source_url": "https://raw.githubusercontent.com/grindinggear/skilltree-export/8bd138b32ea2631455cac5935bfab089f826094f/data.json",
+			"source_version": "3.29.1",
+			"stat_index": 1
+		},
+		"source_policy": 45
 	},
 	"source_recharge": {
 		"base_delay": 4.0,

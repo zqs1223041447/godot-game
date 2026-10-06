@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/a51485f153de/v074-source-gale-stride/tools/build_reference.py", line 1467, in <module>
+    if __name__=='__main__': main()
+                             ^^^^^^
+  File "/workspace/scratch/a51485f153de/v074-source-gale-stride/tools/build_reference.py", line 1460, in main
+    output=build(data,art)
+           ^^^^^^^^^^^^^^^
+  File "/workspace/scratch/a51485f153de/v074-source-gale-stride/tools/build_reference.py", line 810, in build
+    body += piercing_diagram(data['projectile_support_examples'],data['skills'])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/a51485f153de/v074-source-gale-stride/tools/build_reference.py", line 123, in piercing_diagram
+    for target in range(1, examples['target_count']+1):
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'float' object cannot be interpreted as an integer

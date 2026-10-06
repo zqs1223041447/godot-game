@@ -1,0 +1,211 @@
+{
+  "base_commit": "a1dd1acf9a5aaa38820ce0d2a2e57ea49d33dfd8",
+  "stage_commit": "82b91c55cc8148513ece7eb3ea9e9acfdbaefe38",
+  "functional_checks": 845,
+  "functional_counts": {
+    "source_adapter": 79,
+    "integration_unique": 766
+  },
+  "separate_structure_checks": 16955,
+  "production_inputs": 551,
+  "save_schema_unchanged": 47,
+  "source_policy_unchanged": 45,
+  "equipment_vocabulary_unchanged": 46,
+  "scope": "Only current source_gale_stride; existing23 bundles and explicitlegacy helpers remain. Same random sampling, new ID+percentage speed admitted in current runtime.",
+  "reference": {
+    "passed": true,
+    "baseline_commit": "a1dd1acf",
+    "legacy_definitions_preserved": 23,
+    "new_current_source_bindings": 1,
+    "budget_rows_from_catalog": 12,
+    "authoritative_html_values_and_labels_checked": 68,
+    "save_version": 47,
+    "equipment_vocabulary": 46,
+    "source_policy": 45,
+    "preserved_file_count": 184,
+    "old_pngs_preserved": 135,
+    "new_art_files": 0,
+    "source_coverage_byte_identical": true,
+    "old_html_anchors_preserved": 3833,
+    "new_html_anchors": [
+      "mechanisms-source_gale_stride",
+      "rules-source_monster_movement"
+    ],
+    "all_anchor_and_local_file_links_valid": true,
+    "catalog_sha256": "1e4a06cf7b87dd6f8d5d49d713f05ff4d3402a7b85f12a13f6661cca194e22cf",
+    "html_sha256": "9e69303dcc3ac680c88d1f39f7852baad2e3bedc8503426e1844304f48526838",
+    "scope": "One full Godot export plus one new-chapter-only correction; recover historical JSON number types from the hash-verified baseline; rebuild HTML for corrected schema and effective shared-card wording; focused source-binding and preservation checks; no historical full test rerun, import, UI, art or package work",
+    "catalog_format_only_update": {
+      "proof": "catalog-format-preservation.json",
+      "same_typed_ordered_json": true,
+      "previous_catalog_sha256": "5c5efdb9a9cf520e1bd900316361217eccd8f35df63c89a54dbf2d63a5f8527a",
+      "all_other_source_bytes_preserved": true,
+      "deterministic_html_check": {
+        "command": "python3 tools/build_reference.py --check",
+        "exit_code": 0,
+        "stdout": "Reference HTML matches runtime export and templates",
+        "recording": "Observed tool result transcribed; no new Godot run"
+      }
+    }
+  },
+  "font": {
+    "sha256": "74a2ff2eac4a552a7d891ebb420502ddbbe632ea46a29adb67c2ec9bcf90caeb",
+    "mapped": 1661,
+    "runtime_files": 200,
+    "fresh_scanned": 7,
+    "missing": [],
+    "changed": false
+  },
+  "boundaries": [
+    "Initial integration expected untyped Array; fixture corrected, same bounded766 rerun once, unique counts only. Production unchanged.",
+    "F8 one full export plus one new-chapter-only correction for historicalBuild13 vs currentCanonical47.",
+    "Godot JSON reload changed old integer tokens; restored exacthash baseline and merged new chapter with Python without another full export.",
+    "Shared-rule card later override corrected; only HTML rebuild and focusedchecker repeated. Failedreceipts retained.",
+    "Source adapter test captured docs/reference/index.html before its documented independent generation; all production inputs stillmatch.",
+    "No Windows/export/package/tag/Release or new visual/performance gate."
+  ],
+  "reports": {
+    "docs/qa/v074-source-grants/20261006T081739.716539Z-receipt.json": {
+      "bytes": 59977,
+      "sha256": "dceb2d082be881db424249a682b3f9e1facaec1ccc898f01409cdd8043feaee8"
+    },
+    "docs/qa/v074-integration-tests/integration-report.json": {
+      "bytes": 1770,
+      "sha256": "35ff29d45884dbd197f34459cd85d872e2959067a5bd8f899b77a024b33fcfec"
+    },
+    "docs/qa/v074-integration-tests/dependency-evidence.json": {
+      "bytes": 125971,
+      "sha256": "025a08d541fc025d6f735fb898bc2e401f618401af2555f6141d3e91cd914915"
+    },
+    "docs/qa/v074-reference/v073-preservation.json": {
+      "bytes": 3305,
+      "sha256": "b9885c92c83b48b4a3bdcd3cbbc886feb0909c36a169aa3b72a57cff97a4fbb5"
+    }
+  },
+  "logs": {
+    "docs/qa/v074-integration/initial-import.log.txt": {
+      "bytes": 84654,
+      "sha256": "1351c4bf6cd144dbe6da9b4384d69a263afb3b0e723079165cefb66b9e242994"
+    },
+    "docs/qa/v074-reference/build-check.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v074-reference/build-check.stdout.log.txt": {
+      "bytes": 52,
+      "sha256": "65d47533eaf556129a1f3a295db12ab1bc36a8df0770c71cb9378490d54d03ba"
+    },
+    "docs/qa/v074-reference/build.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v074-reference/build.stdout.log.txt": {
+      "bytes": 51,
+      "sha256": "b78459f0189c65908522815fabd105065c1c8c3405ab0c8c27546271a1e04342"
+    },
+    "docs/qa/v074-reference/corrected-build.stderr.log.txt": {
+      "bytes": 951,
+      "sha256": "a8a4160f2af68102f75bdea8eeb4a59c214ca113da9c23dc661ede0a054cf989"
+    },
+    "docs/qa/v074-reference/corrected-build.stdout.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v074-reference/corrected-focused-reference.stderr.log.txt": {
+      "bytes": 409,
+      "sha256": "55a5b33a68a5eccc2a468974f9bc956f5fbc44aa50bc68e9ab771b8a17556103"
+    },
+    "docs/qa/v074-reference/corrected-focused-reference.stdout.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v074-reference/final-build-check.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v074-reference/final-build-check.stdout.log.txt": {
+      "bytes": 52,
+      "sha256": "65d47533eaf556129a1f3a295db12ab1bc36a8df0770c71cb9378490d54d03ba"
+    },
+    "docs/qa/v074-reference/final-build.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v074-reference/final-build.stdout.log.txt": {
+      "bytes": 51,
+      "sha256": "1006aff11b4aefcbbb8d6b83702a9239f45f9aa17bd8f03731560df6d86fa74e"
+    },
+    "docs/qa/v074-reference/final-focused-reference.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v074-reference/final-focused-reference.stdout.log.txt": {
+      "bytes": 2616,
+      "sha256": "90b97cff2f9428906aac105d64fa4d196ed24b9b61cbe8fa0380ffbe64e77d60"
+    },
+    "docs/qa/v074-reference/focused-reference.stderr.log.txt": {
+      "bytes": 440,
+      "sha256": "e8f086e8709439d80dce4d28929c4945e570e497308fa47a386dc06eaf41ef86"
+    },
+    "docs/qa/v074-reference/focused-reference.stdout.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v074-reference/godot-export.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v074-reference/godot-export.stdout.log.txt": {
+      "bytes": 182,
+      "sha256": "59160bd31fa5e2371ef953c9894cfc5c21702fa589e2aa0eab8795ac6f1e5526"
+    },
+    "docs/qa/v074-reference/restored-build-check.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v074-reference/restored-build-check.stdout.log.txt": {
+      "bytes": 52,
+      "sha256": "65d47533eaf556129a1f3a295db12ab1bc36a8df0770c71cb9378490d54d03ba"
+    },
+    "docs/qa/v074-reference/restored-build.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v074-reference/restored-build.stdout.log.txt": {
+      "bytes": 51,
+      "sha256": "b78459f0189c65908522815fabd105065c1c8c3405ab0c8c27546271a1e04342"
+    },
+    "docs/qa/v074-reference/scope-final-focused-reference.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v074-reference/scope-final-focused-reference.stdout.log.txt": {
+      "bytes": 2769,
+      "sha256": "e52f4540e21c4d17640fc3fc4f5ac298b30a2de78370104b07e052d28ea78961"
+    },
+    "docs/qa/v074-reference/source-chapter-correction.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v074-reference/source-chapter-correction.stdout.log.txt": {
+      "bytes": 139,
+      "sha256": "bee97783e8871976affa04e1fce323f7b5a1223ffe46509601b8a797b9689ebd"
+    },
+    "docs/qa/v074-source-grants/20261006T081739.716539Z-source_monster_grants_test.log.txt": {
+      "bytes": 118,
+      "sha256": "4afad759c8e4f6cf97bf50a1e4731fda8d2d020e84e37b88c174090f4690477e"
+    },
+    "docs/qa/v074-source-grants/20261006T081739.716539Z-source_tree_data_test.log.txt": {
+      "bytes": 116,
+      "sha256": "cb519c00b8ed1b2a8145938a5d616131227d74d17346919aa26c7242c21ce4c6"
+    },
+    "docs/qa/v074-integration-tests/initial-fixture-failure.log.txt": {
+      "bytes": 699,
+      "sha256": "fb52efb7f5fd776c457b6c38e98c051425103a32ece2840fa76dcedfa7f78321"
+    },
+    "docs/qa/v074-integration-tests/integration.log.txt": {
+      "bytes": 156,
+      "sha256": "a5253fda9d4810e4a9633e567fa3e1b23197fbd9b34601923844a3a5166a099e"
+    }
+  }
+}

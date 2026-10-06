@@ -1,0 +1,106 @@
+{
+	"baseline_commit": "a1dd1acf",
+	"checks": 766,
+	"failures": 0,
+	"rolls_per_seed_wave": 6,
+	"schema": 47,
+	"sections": {
+		"actual_main_current_adoption": {
+			"checks": 13,
+			"failures": 0
+		},
+		"actual_main_motion_freeze_slow_impulse": {
+			"checks": 29,
+			"failures": 0
+		},
+		"all23_legacy_registry_bytes": {
+			"checks": 286,
+			"failures": 0
+		},
+		"frozen_camp_policy": {
+			"checks": 56,
+			"failures": 0
+		},
+		"legacy_catalog_sampling_rng_bytes": {
+			"checks": 301,
+			"failures": 0
+		},
+		"motion_examples": [
+			{
+				"distance": 17.0918369293213,
+				"id": "gale_stride",
+				"mode": "plain",
+				"speed": 75.52
+			},
+			{
+				"distance": 9.67293834686279,
+				"id": "gale_stride",
+				"mode": "slow",
+				"speed": 75.52
+			},
+			{
+				"distance": 8.0,
+				"id": "gale_stride",
+				"mode": "frozen",
+				"speed": 75.52
+			},
+			{
+				"distance": 11.0014877319336,
+				"id": "gale_stride",
+				"mode": "thaw_prefix",
+				"speed": 75.52
+			},
+			{
+				"distance": 17.0522613525391,
+				"id": "source_gale_stride",
+				"mode": "plain",
+				"speed": 75.296
+			},
+			{
+				"distance": 9.66388988494873,
+				"id": "source_gale_stride",
+				"mode": "slow",
+				"speed": 75.296
+			},
+			{
+				"distance": 8.0,
+				"id": "source_gale_stride",
+				"mode": "frozen",
+				"speed": 75.296
+			},
+			{
+				"distance": 10.986123085022,
+				"id": "source_gale_stride",
+				"mode": "thaw_prefix",
+				"speed": 75.296
+			}
+		],
+		"source_cache_and_transactions": {
+			"checks": 12,
+			"failures": 0
+		},
+		"source_species_wave_projection": {
+			"checks": 69,
+			"failures": 0
+		}
+	},
+	"seeds": [
+		7,
+		73,
+		74074
+	],
+	"source_execution_version": 45,
+	"source_seed": 2,
+	"species": [
+		"crawler",
+		"skitter",
+		"brute"
+	],
+	"waves": [
+		1,
+		6,
+		10,
+		15,
+		100
+	]
+}

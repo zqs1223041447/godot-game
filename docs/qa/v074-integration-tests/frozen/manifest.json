@@ -1,0 +1,28 @@
+{
+  "baseline_commit": "a1dd1acf",
+  "transforms": [
+    "remove class_name line",
+    "catalog preloads frozen Registry",
+    "camp_state preloads frozen Catalog"
+  ],
+  "files": [
+    {
+      "path": "scripts/mechanics/mechanic_registry.gd",
+      "original_sha256": "e57c6455e752bfcf630d4f489d0dcb9199778a2e62d6ee967f1bf5b11c8f0c42",
+      "fixture": "docs/qa/v074-integration-tests/frozen/registry.gd",
+      "fixture_sha256": "16ddc63c7beb5d5d43ba89878a310feae39685d4b64843500f9e1830546a4153"
+    },
+    {
+      "path": "scripts/monsters/monster_catalog.gd",
+      "original_sha256": "52c274e8925cfb93ea4cb749f6548cee60d43d41c045609c7e2dd75384340deb",
+      "fixture": "docs/qa/v074-integration-tests/frozen/catalog.gd",
+      "fixture_sha256": "171375e9a48ccd779fb1a19158f52534658e4f803819333cd1de6d98536efb71"
+    },
+    {
+      "path": "scripts/world/map_camp_state.gd",
+      "original_sha256": "cd7f78a928389e1fd7a00c8931fc96c1eeba66907cb7b93c157cbb26feed7251",
+      "fixture": "docs/qa/v074-integration-tests/frozen/camp_state.gd",
+      "fixture_sha256": "ca88cbe88a14a9c9f8e6de5e73a5a8d5fcd80179ec56d18a524817f2e94aa26a"
+    }
+  ]
+}
