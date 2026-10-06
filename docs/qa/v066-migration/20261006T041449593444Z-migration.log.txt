@@ -1,0 +1,31 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ERROR: String formatting error: unsupported format character.
+   at: validated_evaluate (core/variant/variant_op.h:829)
+   GDScript backtrace (most recent call first):
+       [0] literal_checks (res://tests/ambush_gem_migration_test.gd:184)
+       [1] _initialize (res://tests/ambush_gem_migration_test.gd:321)
+ERROR: String formatting error: unsupported format character.
+   at: validated_evaluate (core/variant/variant_op.h:829)
+   GDScript backtrace (most recent call first):
+       [0] literal_checks (res://tests/ambush_gem_migration_test.gd:184)
+       [1] _initialize (res://tests/ambush_gem_migration_test.gd:321)
+STAT DIAGNOSTIC zo life_regen_percent runtime=0.018 oracle=0.018 precise=%.17g vs %.17g
+ERROR: String formatting error: unsupported format character.
+   at: validated_evaluate (core/variant/variant_op.h:829)
+   GDScript backtrace (most recent call first):
+       [0] literal_checks (res://tests/ambush_gem_migration_test.gd:184)
+       [1] _initialize (res://tests/ambush_gem_migration_test.gd:321)
+ERROR: String formatting error: unsupported format character.
+   at: validated_evaluate (core/variant/variant_op.h:829)
+   GDScript backtrace (most recent call first):
+       [0] literal_checks (res://tests/ambush_gem_migration_test.gd:184)
+       [1] _initialize (res://tests/ambush_gem_migration_test.gd:321)
+STAT DIAGNOSTIC zo shield_regeneration_rate runtime=11.7496 oracle=11.7496 precise=%.17g vs %.17g
+ERROR: All old native stats equal old-engine oracle: zo
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/ambush_gem_migration_test.gd:44)
+       [1] literal_checks (res://tests/ambush_gem_migration_test.gd:185)
+       [2] _initialize (res://tests/ambush_gem_migration_test.gd:321)
+Ambush gem migration: 298 checks, 1 failures

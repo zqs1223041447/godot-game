@@ -26,6 +26,7 @@ RULE_TITLES['defense_rating_affixes'] = '灰烬皮甲：护甲、闪避与前缀
 RULE_TITLES['resolute_technique'] = '坚决技艺：稳定命中与暴击取舍'
 RULE_TITLES['iron_reflexes'] = '铁反射（闪转甲）：闪避转换与护甲取舍'
 RULE_TITLES['zealots_oath'] = '狂信者的誓约：生命再生改为作用于能量护盾'
+RULE_TITLES['ambush'] = '符印伏击：预置、触发与冻结快照'
 TYPES['defense_v37'] = '历史三抗防具池'
 TYPES['defense_v39'] = '护甲闪避与三抗防具池'
 
@@ -477,6 +478,41 @@ def zealots_oath_rule(data,link,facts,details):
     return body
 
 
+def ambush_rule(data,link,facts,details):
+    rule=data['ambush']; policy=rule['policy']
+    def value(key,amount):
+        return f'<strong data-ambush-value="{esc(key)}" data-value="{esc(amount)}">{format(amount, ".10g")}</strong>'
+    body=facts([('适配技能',' · '.join(link('skills',key) for key in rule['skills'])),('存档 / 源政策 / 装备词汇',value('save-version',rule['minimum_save_version'])+' / '+value('source-policy',rule['source_policy'])+' / '+value('vocabulary',rule['equipment_vocabulary'])),('布防',value('arming',policy['arming_seconds'])+' 秒'),('触发半径',value('trigger-radius',policy['trigger_radius'])),('未触发寿命',value('lifetime',policy['lifetime_seconds'])+' 秒'),('所有技能组共享上限',value('maximum-traps',policy['maximum_traps'])+' 枚'),('主命中倍率',value('hit-multiplier',policy['hit_multiplier'])),('魔力倍率',value('mana-multiplier',policy['mana_multiplier']))])
+    body+=''.join('<p>'+esc(rule[key])+'。</p>' for key in ['placement','payment','snapshot','geometry'])
+    body+='<h3>少量代表组合 · 加入伏击前后</h3><p>'+esc(rule['example_scope'])+'。每行左值是相同其他辅助下的普通直接施放，右值为加入伏击；数值直接来自生产编译结果。</p>'
+    for skill,examples in rule['examples'].items():
+        rows=[];status_rows=[]
+        for mode,pair in examples.items():
+            before,after=pair['before'],pair['after'];prefix=skill+'-'+mode
+            others=[key for key in after['support_ids'] if key!='ambush']
+            label='仅伏击' if not others else '伏击＋'+'＋'.join(data['supports'][key]['name'].removesuffix('辅助') for key in others)
+            cells=[]
+            for field,source in [('hit',lambda row:row['resolved']['total']),('mana',lambda row:row['mana']),('cooldown',lambda row:row['cooldown']),('radius',lambda row:row['recipe']['radius'])]:
+                cells.append(value(prefix+'-'+field+'-before',source(before))+' → '+value(prefix+'-'+field+'-after',source(after)))
+            cells.append(value(prefix+'-trigger-radius',after['trap_profile']['trigger_radius']))
+            rows.append('<tr><th>'+esc(label)+'</th>'+''.join('<td>'+cell+'</td>' for cell in cells)+'</tr>')
+            if 'shock_profile' in after:
+                status=after['shock_profile']
+                status_rows.append('<p>'+esc(label)+'：感电 '+value(prefix+'-shock-duration',status['duration'])+' 秒，后续命中承伤增加 '+value(prefix+'-shock-increased',status['hit_damage_taken_increased'])+'（比例）；本次施加命中不享受自己的新感电。</p>')
+            if 'burn_profile' in after:
+                status=after['burn_profile'];direct=status['roles']['direct']
+                status_rows.append('<p>'+esc(label)+'：燃烧 '+value(prefix+'-burn-duration',status['duration'])+' 秒，每秒 '+value(prefix+'-burn-dps',direct['dps'])+' 火焰，完整持续 '+value(prefix+'-burn-total',direct['total'])+'；这些值已包含伏击对主命中火分量的影响。</p>')
+                if 'proliferation' in status:
+                    propagation=status['proliferation']
+                    status_rows.append('<p>余烬死亡扩散半径 '+value(prefix+'-ember-radius',propagation['radius'])+'，最多 '+value(prefix+'-ember-targets',propagation['max_targets'])+' 个目标；沿原规则保留每秒伤害和剩余时长，不再传播。</p>')
+        body+='<h4>'+link('skills',skill)+'</h4><div class="table-scroll"><table><thead><tr><th>辅助组合</th><th>防御前单击</th><th>魔力</th><th>冷却秒</th><th>爆发半径</th><th>触发半径</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'+''.join(status_rows)
+    body+=''.join('<p>'+esc(rule[key])+'。</p>' for key in ['statuses','timing','lifecycle','damage_scope','provenance'])
+    quote=rule['merchant_quote']
+    body+='<p>正式宝石商人使用现有交易：'+value('merchant-cost',quote['cost']['calibration_shard'])+' 碎片；独立测试目录免费供应。原里程碑奖励仍是 '+value('reward-count',rule['normal_reward_definition_count'])+' 枚固定身份，符印伏击不插入其序列。</p><p>'+esc(rule['migration'])+'。</p>'
+    body+='<p>'+link('supports','ambush')+' · '+link('rules','shock')+' · '+link('rules','burning')+' · '+link('rules','ember_proliferation')+' · <a href="../AMBUSH_SUPPORT_RULES.zh-CN.md">完整符印伏击规则</a> · <a href="../qa/v066-reference/README.md">本批图鉴验证</a></p>'
+    return body
+
+
 def build(data, art):
     records = []
     by_id = {}
@@ -505,6 +541,8 @@ def build(data, art):
             image=f'<img class="emblem" src="{esc(data["ember_proliferation"]["icon_file"])}" width="64" height="64" alt="" loading="lazy">'
         elif cat=='supports' and key=='shock':
             image=f'<img class="emblem" src="{esc(data["shock"]["icon_file"])}" width="64" height="64" alt="" loading="lazy">'
+        elif cat=='supports' and key=='ambush':
+            image=f'<img class="emblem" src="{esc(data["ambush"]["icon_file"])}" width="64" height="64" alt="" loading="lazy">'
         elif cat=='equipment' and key=='forgeblade':
             image=f'<img class="emblem" src="{esc(data["forgeblade"]["icon_file"])}" width="64" height="64" alt="" loading="lazy">'
         badges = {'implemented':'已实现','research':'研究资料','planned':'尚未实现'}
@@ -543,6 +581,9 @@ def build(data, art):
         body = skill_delivery_diagram(key,s)+facts([('原始消耗',number(s['mana'])+' 魔力'),('原始冷却',number(s['cooldown'])+' 秒'),('最低保存版本',number(s.get('minimum_save_version',14))),('可装配辅助',links('supports',compatible))])+panels
         affected = [i for i,f in data['affixes'].items() if key in f.get('affected_skills',[])]
         related = link('rules','damage')+' · '+link('rules','supports')+((' · '+links('affixes',affected)) if affected else '')
+        if 'ambush' in compatible:
+            body+='<p>符印伏击改为脚下预置，成功放置时支付魔力；触发后才命中。'+link('rules','ambush','查看伏击、感电、燃烧与范围组合的代表编译示例')+'。</p>'
+            related+=' · '+link('rules','ambush')
         cards.append(add('skills',key,s['name'],s['description'],body,'投射物' if 'projectile_hit' in s['capabilities'] else '其他技能',related=related))
     for key,s in data['supports'].items():
         eligible = [i for i,x in data['skills'].items() if key in x['compatible_supports']]
@@ -559,7 +600,10 @@ def build(data, art):
         if key=='shock':
             body+=facts([('最低保存版本',number(data['shock']['save_version']))])
             related+=' · '+link('rules','shock')+' · '+link('town_services','skill_merchant','宝石商人')
-        cards.append(add('supports',key,s['name'],s['description'],body,{'area':'范围辅助','projectile':'投射物辅助','resource':'资源辅助','element':'分量专注','delivery':'投射物辅助','control':'减速控制','chain':'连锁辅助','burning':'燃烧辅助','shock':'感电辅助'}[data['support_program_examples'][key]['family']],related=related))
+        if key=='ambush':
+            body+='<p>放置时不立即命中；脚下固定符印等待活敌触发。共享三枚，未触发过期不爆炸；范围只影响爆发圈。'+link('rules','ambush','查看冻结快照、魔力与冷却、原异常组合及生命周期')+'。</p>'
+            related+=' · '+link('rules','ambush')+' · '+link('town_services','skill_merchant','宝石商人')
+        cards.append(add('supports',key,s['name'],s['description'],body,{'area':'范围辅助','projectile':'投射物辅助','resource':'资源辅助','element':'分量专注','delivery':'投射物辅助','control':'减速控制','chain':'连锁辅助','burning':'燃烧辅助','shock':'感电辅助','ambush':'预置伏击辅助'}[data['support_program_examples'][key]['family']],related=related))
     for key,e in data['equipment'].items():
         body = facts([('格数',' × '.join(map(number,e['size']))),('固有属性',lines(e['stats_text']))])+details('可出现的词缀',links('affixes',e['eligible_affixes']))
         related=link('rules','equipment')
@@ -1002,6 +1046,8 @@ def build(data, art):
         rule_defs.append(('iron_reflexes',RULE_TITLES['iron_reflexes'],'全部原始闪避转换为护甲，取消敏捷闪避提高；同一句双提高只计一次，失去闪避仍有代价。',iron_reflexes_rule(data,link,facts,details),'implemented'))
     if 'zealots_oath' in data:
         rule_defs.append(('zealots_oath',RULE_TITLES['zealots_oath'],'原始固定再生加百分比乘最终护盾；生命再生归零，护盾充能、药剂与偷取仍独立。',zealots_oath_rule(data,link,facts,details),'implemented'))
+    if 'ambush' in data:
+        rule_defs.append(('ambush',RULE_TITLES['ambush'],'技能改为脚下预置，布防后由活敌触发；共享三枚，未触发过期不爆炸。',ambush_rule(data,link,facts,details),'implemented'))
     if 'elemental_defense_affixes' in data:
         rule_defs.append(('elemental_defense_affixes',RULE_TITLES['elemental_defense_affixes'],'一件胸甲提供原始火、冰、电抗性；三抗满后缀仍须天赋补足原始值与最大上限。',elemental_defense_affix_rule(data,link,facts,details),'implemented'))
     if 'elemental_resistance_caps' in data:
@@ -1120,6 +1166,15 @@ def main():
         if args.check:
             if not target.exists() or target.read_bytes()!=source.read_bytes():
                 raise SystemExit('Forgeblade reference image differs from original asset bytes')
+        else:
+            target.parent.mkdir(parents=True,exist_ok=True)
+            target.write_bytes(source.read_bytes())
+    if 'ambush' in data:
+        source=ROOT/data['ambush']['icon_source'].removeprefix('res://')
+        target=REF/data['ambush']['icon_file']
+        if args.check:
+            if not target.exists() or target.read_bytes()!=source.read_bytes():
+                raise SystemExit('Ambush reference image differs from original asset bytes')
         else:
             target.parent.mkdir(parents=True,exist_ok=True)
             target.write_bytes(source.read_bytes())

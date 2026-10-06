@@ -1,0 +1,26 @@
+{
+  "purpose": "One source invocation validates parsing only; missing complete V066 environment must exit78 before runtime checks",
+  "timestamp_utc": "2026-10-06T04:28:31.152565+00:00",
+  "command": [
+    "godot",
+    "--headless",
+    "--path",
+    "/workspace/scratch/a51485f153de/v066-ambush-support",
+    "--script",
+    "tools/v066_export_probe.gd"
+  ],
+  "xdg": {
+    "XDG_DATA_HOME": "/tmp/godot-m1-v066-probe-parse/data",
+    "XDG_CONFIG_HOME": "/tmp/godot-m1-v066-probe-parse/config",
+    "XDG_CACHE_HOME": "/tmp/godot-m1-v066-probe-parse/cache"
+  },
+  "elapsed_seconds": 1.0181760779960314,
+  "exit_code": 78,
+  "guard_seen": true,
+  "script_errors": 0,
+  "errors": 0,
+  "probe_sha256_before": "9419f6d182dd36de351aec06c04b536357dfed600dc491c28cf97912667ba16c",
+  "probe_sha256_after": "9419f6d182dd36de351aec06c04b536357dfed600dc491c28cf97912667ba16c",
+  "runtime_checks_executed": false,
+  "ok": true
+}

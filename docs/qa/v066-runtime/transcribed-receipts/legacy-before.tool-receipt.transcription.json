@@ -1,0 +1,23 @@
+{
+  "name": "legacy-before",
+  "command": "env XDG_DATA_HOME=/tmp/godot-m1-v066-old-support-before/data XDG_CONFIG_HOME=/tmp/godot-m1-v066-old-support-before/config XDG_CACHE_HOME=/tmp/godot-m1-v066-old-support-before/cache AMBUSH_SUPPORT_PROBE_OUT=/tmp/ambush-old-support-before.json /usr/local/bin/godot --headless --path /workspace/scratch/a51485f153de/v065-zealots-oath --script /workspace/scratch/a51485f153de/v066-ambush-support/tests/ambush_legacy_support_probe.gd",
+  "cwd": "/workspace/scratch/a51485f153de/v066-ambush-support",
+  "returns": [
+    {
+      "chunk_id": "136253",
+      "wall_time_seconds": 1.001386306,
+      "session_id": 64881,
+      "original_token_count": 31,
+      "output": "Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\n\nOld support baseline probe: 783 byte-hashed rows\n"
+    },
+    {
+      "chunk_id": "e247be",
+      "wall_time_seconds": 2.3849e-05,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    }
+  ],
+  "provenance": "TRANSCRIPTION: copied from the original exec_command/write_stdin tool results still present in this worker conversation. Not a new execution, shell tee log, or recovered session file. The tool output field is combined process output; stdout/stderr were not separately captured.",
+  "timing_note": "wall_time_seconds is copied per original tool return only. Total test elapsed time was not recorded and is not inferred."
+}

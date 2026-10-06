@@ -1,0 +1,31 @@
+{
+  "engine": "Godot 4.6.3.stable.official.7d41c59c4",
+  "base_commit": "b2bd4a1eb795a39c20a47cd6c5419537b9dadd12",
+  "tests": [
+    {
+      "script": "tests/ambush_rules_runtime_test.gd",
+      "checks": 195,
+      "failures": 0,
+      "exit_code": 0
+    },
+    {
+      "script": "tests/ambush_support_compiler_test.gd",
+      "checks": 309,
+      "failures": 0,
+      "compositions": 18,
+      "exit_code": 0
+    }
+  ],
+  "legacy_equivalence": {
+    "script": "tests/ambush_legacy_support_probe.gd",
+    "rows": 783,
+    "same_json_bytes": true,
+    "sha256_before": "3c8262b7111eaf883b1931496ad55283118c994ea0967448b57702796eddb0de",
+    "sha256_after": "3c8262b7111eaf883b1931496ad55283118c994ea0967448b57702796eddb0de",
+    "same_global_rng": true
+  },
+  "scope": "Pure provider/compiler/carrier only. Main gameplay, rendered UI, migration and packaging are verified separately.",
+  "raw_receipt_provenance": "Transcribed original tool returns; see transcribed-receipts. Combined output and exit codes are preserved. No test rerun and no inferred total elapsed time.",
+  "tested_input_hashes": "tested-input-sha256.json (post-run capture of retained final inputs; see its capture_boundary)",
+  "after_test_boundary": "Later font and GameState migration-message edits reported by parent are outside these pure tests. Runtime/Compiler core and focused test files were not changed after their final passing runs."
+}

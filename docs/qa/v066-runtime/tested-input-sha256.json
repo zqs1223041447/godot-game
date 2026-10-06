@@ -1,0 +1,371 @@
+{
+  "captured_at_utc": "2026-10-06T04:30:45.921218+00:00",
+  "algorithm": "SHA-256 of raw file bytes",
+  "capture_boundary": "Post-run evidence capture, not a pre-execution manifest. Core source/test mtimes predate their final receipts, and the parent confirmed the final Runtime/Compiler inputs stayed unchanged after those runs. Hashes describe these currently retained final tested inputs; original tests did not emit source hashes.",
+  "current_project": "/workspace/scratch/a51485f153de/v066-ambush-support",
+  "current_static_script_dependency_closure": [
+    {
+      "path": "scripts/combat/ambush_support_rules.gd",
+      "sha256": "da39741b4a2b92d4627892b2608115752b233b43b2a185c5cb9b6e28f37cea00",
+      "bytes": 2608,
+      "mtime_utc": "2026-10-06T04:12:37.852618+00:00"
+    },
+    {
+      "path": "scripts/combat/area_support_rules.gd",
+      "sha256": "5692b2c50caf98eb085fcdcd476531730ff7fbebc86259fc2b55e8b2e89ab3b5",
+      "bytes": 7665,
+      "mtime_utc": "2026-10-06T03:40:08.648290+00:00"
+    },
+    {
+      "path": "scripts/combat/burn_rules.gd",
+      "sha256": "3c22b93054ea7f51d75a1086bea33fbf1124a7cfe4a75bd49db86e9c411aeb47",
+      "bytes": 5086,
+      "mtime_utc": "2026-10-06T03:40:08.648840+00:00"
+    },
+    {
+      "path": "scripts/combat/combat_data.gd",
+      "sha256": "1927f57309d8f580f2cfd82a31ff094f45715cc6c402198c47f5fae57ac7fb02",
+      "bytes": 12612,
+      "mtime_utc": "2026-10-06T03:40:08.648840+00:00"
+    },
+    {
+      "path": "scripts/combat/critical_strike_rules.gd",
+      "sha256": "5bc5a331d4fa860b044f1ba7ee09deffe78cc50aae2da81a54f83c6355cfa884",
+      "bytes": 7061,
+      "mtime_utc": "2026-10-06T03:40:08.648840+00:00"
+    },
+    {
+      "path": "scripts/combat/critical_strike_runtime.gd",
+      "sha256": "d5678da1780b90c5015b3fa70a2fe0cb447b440606b017dd24b73fc5348bc0ae",
+      "bytes": 2173,
+      "mtime_utc": "2026-10-06T03:40:08.648840+00:00"
+    },
+    {
+      "path": "scripts/combat/damage_base_compiler.gd",
+      "sha256": "0db4f094b99055881e658789d1a0282ba6798231787228184d60258eeb3504b3",
+      "bytes": 10765,
+      "mtime_utc": "2026-10-06T03:40:08.648840+00:00"
+    },
+    {
+      "path": "scripts/combat/damage_resolver.gd",
+      "sha256": "37429d9754708d3bbbe9638f92bb8a038284326a4b9c422a70b7c2c4cfe3a1d5",
+      "bytes": 2764,
+      "mtime_utc": "2026-10-06T03:40:08.648840+00:00"
+    },
+    {
+      "path": "scripts/combat/delivery_support_rules.gd",
+      "sha256": "08e8815f5cdb2c7db3c7fcb23cb6b6c1b9cc259c94c76da1a1394118cd3b2159",
+      "bytes": 7754,
+      "mtime_utc": "2026-10-06T03:40:08.648840+00:00"
+    },
+    {
+      "path": "scripts/combat/element_support_rules.gd",
+      "sha256": "15967f974ac24e49ea9545897f4288277ab2874575c863ceeb69be611162c75a",
+      "bytes": 6354,
+      "mtime_utc": "2026-10-06T03:40:08.648840+00:00"
+    },
+    {
+      "path": "scripts/combat/ember_event_clock.gd",
+      "sha256": "53e3d1ab85311b433a18ca307db06eef82178553a3eff73389c01f01808b9ae6",
+      "bytes": 1304,
+      "mtime_utc": "2026-10-06T03:40:08.648840+00:00"
+    },
+    {
+      "path": "scripts/combat/ember_proliferation_rules.gd",
+      "sha256": "df17905689837b35388ef46fef5b7697f79b0258baa1c7a5f0f6bb5974aac31c",
+      "bytes": 3426,
+      "mtime_utc": "2026-10-06T03:40:08.648840+00:00"
+    },
+    {
+      "path": "scripts/combat/ember_proliferation_support_rules.gd",
+      "sha256": "5553df1188d0b92986a150cf812ce8152b03aed3e0009798635087de41465abc",
+      "bytes": 1794,
+      "mtime_utc": "2026-10-06T03:40:08.648840+00:00"
+    },
+    {
+      "path": "scripts/combat/ignite_support_rules.gd",
+      "sha256": "23271171b1fd62f18d8e107dd1e6ad8001a40ca9780d08e2db325de374a1793e",
+      "bytes": 1547,
+      "mtime_utc": "2026-10-06T03:40:08.648840+00:00"
+    },
+    {
+      "path": "scripts/combat/leech_rules.gd",
+      "sha256": "c1037a4c12f9668cfcf4ca070474bad01adf384695eadd447e7036986c33caba",
+      "bytes": 9791,
+      "mtime_utc": "2026-10-06T03:40:08.648840+00:00"
+    },
+    {
+      "path": "scripts/combat/player_trap_runtime.gd",
+      "sha256": "0578c4f7a665f0ad412c9082dc933136609b30f3b2fd0f92a58b31640b0a431c",
+      "bytes": 12640,
+      "mtime_utc": "2026-10-06T04:17:01.674048+00:00"
+    },
+    {
+      "path": "scripts/combat/projectile_support_rules.gd",
+      "sha256": "46591b5824d3128c0d25ffa0bd62addfb6a7b2f587019f8f4ebf1abdbb04b6e5",
+      "bytes": 8853,
+      "mtime_utc": "2026-10-06T03:40:08.648840+00:00"
+    },
+    {
+      "path": "scripts/combat/resolute_technique_rules.gd",
+      "sha256": "0631c5247fc062f9e6c1cccbbf6f4ca56532963087a3b79a20c3b133d700e093",
+      "bytes": 1405,
+      "mtime_utc": "2026-10-06T03:40:08.648840+00:00"
+    },
+    {
+      "path": "scripts/combat/resource_support_rules.gd",
+      "sha256": "6b01ff6c2a9704a8a9519cd8ad35f83f6f70471988eadcb091d99764a1e18413",
+      "bytes": 4250,
+      "mtime_utc": "2026-10-06T03:40:08.648840+00:00"
+    },
+    {
+      "path": "scripts/combat/shock_rules.gd",
+      "sha256": "15d4d44793995c1e5f98a0ece88c7d32bee7e694e411a0f8b768057e1cdb23df",
+      "bytes": 4142,
+      "mtime_utc": "2026-10-06T03:40:08.648840+00:00"
+    },
+    {
+      "path": "scripts/combat/shock_support_rules.gd",
+      "sha256": "65bc199e49adc8a1a7d7fec01e38b9070887be3a977dbe738d3a28c2aebd10df",
+      "bytes": 1676,
+      "mtime_utc": "2026-10-06T03:40:08.651832+00:00"
+    },
+    {
+      "path": "scripts/combat/skill_compiler.gd",
+      "sha256": "2782e026cebf93033677145fc80229007e01336f0213372768891a1af5337d6a",
+      "bytes": 25241,
+      "mtime_utc": "2026-10-06T04:11:03.894683+00:00"
+    },
+    {
+      "path": "scripts/combat/source_resource_rules.gd",
+      "sha256": "cc84a561c34a3894f3599c39379d72bf4917e29fc2973f984a8aa63dc9dd03dc",
+      "bytes": 2196,
+      "mtime_utc": "2026-10-06T03:40:08.651832+00:00"
+    },
+    {
+      "path": "scripts/combat/source_spatial_rules.gd",
+      "sha256": "3aec2921d0ee3025fac7e6edb010c6df03f1e027718e15716a77f3c43877c9cc",
+      "bytes": 4069,
+      "mtime_utc": "2026-10-06T03:40:08.651832+00:00"
+    },
+    {
+      "path": "scripts/combat/support_catalog.gd",
+      "sha256": "3bd43dfd250397fc4058fffd4f69402312417cfa9491f06175cb0568909894d3",
+      "bytes": 5041,
+      "mtime_utc": "2026-10-06T03:40:08.651832+00:00"
+    },
+    {
+      "path": "scripts/combat/support_program.gd",
+      "sha256": "437a6ab0082ae80e916f1bb57c4e71fe4c3f5d0a147db5e7a97f86615712e0dd",
+      "bytes": 2514,
+      "mtime_utc": "2026-10-06T03:40:08.651832+00:00"
+    },
+    {
+      "path": "scripts/combat/support_registry.gd",
+      "sha256": "48e71e6cfb9db1ff6061a3d66f788537bd97f18f1619325f3ba97d81f944a24a",
+      "bytes": 7336,
+      "mtime_utc": "2026-10-06T03:46:21.047603+00:00"
+    },
+    {
+      "path": "scripts/game_data.gd",
+      "sha256": "1ca97c45c243d6144e2a79d6d93762203c8bb76122adb0175a2ec80b2d77216b",
+      "bytes": 8075,
+      "mtime_utc": "2026-10-06T03:40:08.655910+00:00"
+    },
+    {
+      "path": "scripts/items/weapon_local_rules.gd",
+      "sha256": "73e4308828e856a741ef00386d33150a008bdb3f07ef31a031a204d71fe93b8d",
+      "bytes": 6536,
+      "mtime_utc": "2026-10-06T03:40:08.656929+00:00"
+    },
+    {
+      "path": "tests/ambush_legacy_support_probe.gd",
+      "sha256": "89fdb4e9a0412ad6fb7fda9f2bafa59ad5d056d3e75c2e0227b89d70f3bcec34",
+      "bytes": 2806,
+      "mtime_utc": "2026-10-06T04:16:00.236791+00:00"
+    },
+    {
+      "path": "tests/ambush_rules_runtime_test.gd",
+      "sha256": "efa4579ea41d51296cca1ddf1e154a4751a3b1d4f94757c9b37f6a455db886d9",
+      "bytes": 13433,
+      "mtime_utc": "2026-10-06T04:17:03.278081+00:00"
+    },
+    {
+      "path": "tests/ambush_support_compiler_test.gd",
+      "sha256": "21bca7de1c2cfcdab8d0ffedb88ccdb424cfdcfe37853d0d52671c76477589ee",
+      "bytes": 7609,
+      "mtime_utc": "2026-10-06T04:14:43.119246+00:00"
+    }
+  ],
+  "baseline_project": "/workspace/scratch/a51485f153de/v065-zealots-oath",
+  "baseline_commit": "b2bd4a1eb795a39c20a47cd6c5419537b9dadd12",
+  "baseline_static_script_dependency_closure": [
+    {
+      "path": "scripts/combat/area_support_rules.gd",
+      "sha256": "5692b2c50caf98eb085fcdcd476531730ff7fbebc86259fc2b55e8b2e89ab3b5",
+      "bytes": 7665,
+      "mtime_utc": "2026-10-06T03:05:27.652466+00:00"
+    },
+    {
+      "path": "scripts/combat/burn_rules.gd",
+      "sha256": "3c22b93054ea7f51d75a1086bea33fbf1124a7cfe4a75bd49db86e9c411aeb47",
+      "bytes": 5086,
+      "mtime_utc": "2026-10-06T03:05:27.652796+00:00"
+    },
+    {
+      "path": "scripts/combat/combat_data.gd",
+      "sha256": "1927f57309d8f580f2cfd82a31ff094f45715cc6c402198c47f5fae57ac7fb02",
+      "bytes": 12612,
+      "mtime_utc": "2026-10-06T03:05:27.652796+00:00"
+    },
+    {
+      "path": "scripts/combat/critical_strike_rules.gd",
+      "sha256": "5bc5a331d4fa860b044f1ba7ee09deffe78cc50aae2da81a54f83c6355cfa884",
+      "bytes": 7061,
+      "mtime_utc": "2026-10-06T03:05:27.652796+00:00"
+    },
+    {
+      "path": "scripts/combat/damage_base_compiler.gd",
+      "sha256": "0db4f094b99055881e658789d1a0282ba6798231787228184d60258eeb3504b3",
+      "bytes": 10765,
+      "mtime_utc": "2026-10-06T03:05:27.652796+00:00"
+    },
+    {
+      "path": "scripts/combat/damage_resolver.gd",
+      "sha256": "37429d9754708d3bbbe9638f92bb8a038284326a4b9c422a70b7c2c4cfe3a1d5",
+      "bytes": 2764,
+      "mtime_utc": "2026-10-06T03:05:27.652796+00:00"
+    },
+    {
+      "path": "scripts/combat/delivery_support_rules.gd",
+      "sha256": "08e8815f5cdb2c7db3c7fcb23cb6b6c1b9cc259c94c76da1a1394118cd3b2159",
+      "bytes": 7754,
+      "mtime_utc": "2026-10-06T03:05:27.652796+00:00"
+    },
+    {
+      "path": "scripts/combat/element_support_rules.gd",
+      "sha256": "15967f974ac24e49ea9545897f4288277ab2874575c863ceeb69be611162c75a",
+      "bytes": 6354,
+      "mtime_utc": "2026-10-06T03:05:27.652796+00:00"
+    },
+    {
+      "path": "scripts/combat/ember_event_clock.gd",
+      "sha256": "53e3d1ab85311b433a18ca307db06eef82178553a3eff73389c01f01808b9ae6",
+      "bytes": 1304,
+      "mtime_utc": "2026-10-06T03:05:27.652796+00:00"
+    },
+    {
+      "path": "scripts/combat/ember_proliferation_rules.gd",
+      "sha256": "df17905689837b35388ef46fef5b7697f79b0258baa1c7a5f0f6bb5974aac31c",
+      "bytes": 3426,
+      "mtime_utc": "2026-10-06T03:05:27.652796+00:00"
+    },
+    {
+      "path": "scripts/combat/ember_proliferation_support_rules.gd",
+      "sha256": "5553df1188d0b92986a150cf812ce8152b03aed3e0009798635087de41465abc",
+      "bytes": 1794,
+      "mtime_utc": "2026-10-06T03:05:27.652796+00:00"
+    },
+    {
+      "path": "scripts/combat/ignite_support_rules.gd",
+      "sha256": "23271171b1fd62f18d8e107dd1e6ad8001a40ca9780d08e2db325de374a1793e",
+      "bytes": 1547,
+      "mtime_utc": "2026-10-06T03:05:27.652796+00:00"
+    },
+    {
+      "path": "scripts/combat/leech_rules.gd",
+      "sha256": "c1037a4c12f9668cfcf4ca070474bad01adf384695eadd447e7036986c33caba",
+      "bytes": 9791,
+      "mtime_utc": "2026-10-06T03:05:27.652796+00:00"
+    },
+    {
+      "path": "scripts/combat/projectile_support_rules.gd",
+      "sha256": "46591b5824d3128c0d25ffa0bd62addfb6a7b2f587019f8f4ebf1abdbb04b6e5",
+      "bytes": 8853,
+      "mtime_utc": "2026-10-06T03:05:27.652796+00:00"
+    },
+    {
+      "path": "scripts/combat/resolute_technique_rules.gd",
+      "sha256": "0631c5247fc062f9e6c1cccbbf6f4ca56532963087a3b79a20c3b133d700e093",
+      "bytes": 1405,
+      "mtime_utc": "2026-10-06T03:05:27.652796+00:00"
+    },
+    {
+      "path": "scripts/combat/resource_support_rules.gd",
+      "sha256": "6b01ff6c2a9704a8a9519cd8ad35f83f6f70471988eadcb091d99764a1e18413",
+      "bytes": 4250,
+      "mtime_utc": "2026-10-06T03:05:27.652796+00:00"
+    },
+    {
+      "path": "scripts/combat/shock_rules.gd",
+      "sha256": "15d4d44793995c1e5f98a0ece88c7d32bee7e694e411a0f8b768057e1cdb23df",
+      "bytes": 4142,
+      "mtime_utc": "2026-10-06T03:05:27.652796+00:00"
+    },
+    {
+      "path": "scripts/combat/shock_support_rules.gd",
+      "sha256": "65bc199e49adc8a1a7d7fec01e38b9070887be3a977dbe738d3a28c2aebd10df",
+      "bytes": 1676,
+      "mtime_utc": "2026-10-06T03:05:27.652796+00:00"
+    },
+    {
+      "path": "scripts/combat/skill_compiler.gd",
+      "sha256": "0a0d1f7a16715a8286cf43fcf1cb828a4538483a64c6a3f8af5191b3db0075eb",
+      "bytes": 25001,
+      "mtime_utc": "2026-10-06T03:05:27.652796+00:00"
+    },
+    {
+      "path": "scripts/combat/source_resource_rules.gd",
+      "sha256": "cc84a561c34a3894f3599c39379d72bf4917e29fc2973f984a8aa63dc9dd03dc",
+      "bytes": 2196,
+      "mtime_utc": "2026-10-06T03:05:27.652796+00:00"
+    },
+    {
+      "path": "scripts/combat/source_spatial_rules.gd",
+      "sha256": "3aec2921d0ee3025fac7e6edb010c6df03f1e027718e15716a77f3c43877c9cc",
+      "bytes": 4069,
+      "mtime_utc": "2026-10-06T03:05:27.652796+00:00"
+    },
+    {
+      "path": "scripts/combat/support_catalog.gd",
+      "sha256": "3bd43dfd250397fc4058fffd4f69402312417cfa9491f06175cb0568909894d3",
+      "bytes": 5041,
+      "mtime_utc": "2026-10-06T03:05:27.652796+00:00"
+    },
+    {
+      "path": "scripts/combat/support_program.gd",
+      "sha256": "437a6ab0082ae80e916f1bb57c4e71fe4c3f5d0a147db5e7a97f86615712e0dd",
+      "bytes": 2514,
+      "mtime_utc": "2026-10-06T03:05:27.652796+00:00"
+    },
+    {
+      "path": "scripts/combat/support_registry.gd",
+      "sha256": "7ce0cda6d5a473fd557e3633063bc63f50b81046cd9731f9eb16912b1584adbd",
+      "bytes": 7136,
+      "mtime_utc": "2026-10-06T03:05:27.652796+00:00"
+    },
+    {
+      "path": "scripts/game_data.gd",
+      "sha256": "1ca97c45c243d6144e2a79d6d93762203c8bb76122adb0175a2ec80b2d77216b",
+      "bytes": 8075,
+      "mtime_utc": "2026-10-06T03:05:27.655215+00:00"
+    },
+    {
+      "path": "scripts/items/weapon_local_rules.gd",
+      "sha256": "73e4308828e856a741ef00386d33150a008bdb3f07ef31a031a204d71fe93b8d",
+      "bytes": 6536,
+      "mtime_utc": "2026-10-06T03:05:27.655952+00:00"
+    }
+  ],
+  "baseline_probe_script": {
+    "path": "tests/ambush_legacy_support_probe.gd",
+    "sha256": "89fdb4e9a0412ad6fb7fda9f2bafa59ad5d056d3e75c2e0227b89d70f3bcec34",
+    "bytes": 2806,
+    "mtime_utc": "2026-10-06T04:16:00.236791+00:00"
+  },
+  "scope_exclusions": [
+    "This is the static GDScript dependency closure of the three pure tests/probe; no claim is made for Main, UI, fonts, save migration or export packaging.",
+    "The parent reported later font and GameState migration-notification changes. These are outside this pure-test dependency closure and are not retrospectively covered by these receipts.",
+    "No tests were rerun to create this evidence. No source code changed during this evidence capture."
+  ]
+}

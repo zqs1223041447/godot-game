@@ -1,0 +1,16 @@
+{
+  "name": "runtime-final",
+  "command": "env XDG_DATA_HOME=/tmp/godot-m1-v066-ambush-rules/data XDG_CONFIG_HOME=/tmp/godot-m1-v066-ambush-rules/config XDG_CACHE_HOME=/tmp/godot-m1-v066-ambush-rules/cache /usr/local/bin/godot --headless --path . --script res://tests/ambush_rules_runtime_test.gd",
+  "cwd": "/workspace/scratch/a51485f153de/v066-ambush-support",
+  "returns": [
+    {
+      "chunk_id": "d614b4",
+      "wall_time_seconds": 0.248315757,
+      "exit_code": 0,
+      "original_token_count": 30,
+      "output": "Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\n\nAmbush rules/runtime: 195 checks, 0 failures\n"
+    }
+  ],
+  "provenance": "TRANSCRIPTION: copied from the original exec_command/write_stdin tool results still present in this worker conversation. Not a new execution, shell tee log, or recovered session file. The tool output field is combined process output; stdout/stderr were not separately captured.",
+  "timing_note": "wall_time_seconds is copied per original tool return only. Total test elapsed time was not recorded and is not inferred."
+}

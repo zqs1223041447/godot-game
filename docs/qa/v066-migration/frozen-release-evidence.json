@@ -1,0 +1,698 @@
+{
+  "all_production_scripts_identical": true,
+  "release_commit": "b2bd4a1",
+  "files": {
+    "scripts/build_state.gd": {
+      "frozen_sha256": "574fe676565b3a68ccf589f2abee6fedec65c4d66009a5c4d56067a449002e79",
+      "release_sha256": "574fe676565b3a68ccf589f2abee6fedec65c4d66009a5c4d56067a449002e79"
+    },
+    "scripts/canonical_game_state.gd": {
+      "frozen_sha256": "37f04bd4b3c89f37f451e8da3b60d822b369f6d53469147f1778ab42b7910b59",
+      "release_sha256": "37f04bd4b3c89f37f451e8da3b60d822b369f6d53469147f1778ab42b7910b59"
+    },
+    "scripts/combat/area_support_rules.gd": {
+      "frozen_sha256": "5692b2c50caf98eb085fcdcd476531730ff7fbebc86259fc2b55e8b2e89ab3b5",
+      "release_sha256": "5692b2c50caf98eb085fcdcd476531730ff7fbebc86259fc2b55e8b2e89ab3b5"
+    },
+    "scripts/combat/attack_hit_rules.gd": {
+      "frozen_sha256": "30c58c7ee72644a72873e07a7e1711a223a9fceb7740ad4a37dd85b184d21093",
+      "release_sha256": "30c58c7ee72644a72873e07a7e1711a223a9fceb7740ad4a37dd85b184d21093"
+    },
+    "scripts/combat/burn_rules.gd": {
+      "frozen_sha256": "3c22b93054ea7f51d75a1086bea33fbf1124a7cfe4a75bd49db86e9c411aeb47",
+      "release_sha256": "3c22b93054ea7f51d75a1086bea33fbf1124a7cfe4a75bd49db86e9c411aeb47"
+    },
+    "scripts/combat/burn_runtime.gd": {
+      "frozen_sha256": "2ff6b2974b82bf65637702a2f9aa3e7e4e04521cf2280a55be4700e10337b5e3",
+      "release_sha256": "2ff6b2974b82bf65637702a2f9aa3e7e4e04521cf2280a55be4700e10337b5e3"
+    },
+    "scripts/combat/combat_data.gd": {
+      "frozen_sha256": "1927f57309d8f580f2cfd82a31ff094f45715cc6c402198c47f5fae57ac7fb02",
+      "release_sha256": "1927f57309d8f580f2cfd82a31ff094f45715cc6c402198c47f5fae57ac7fb02"
+    },
+    "scripts/combat/combat_feedback_runtime.gd": {
+      "frozen_sha256": "a22cebcb8a73f705c5c976363c0c328c3b3c349ca8357bbf73708e465585a1df",
+      "release_sha256": "a22cebcb8a73f705c5c976363c0c328c3b3c349ca8357bbf73708e465585a1df"
+    },
+    "scripts/combat/critical_strike_rules.gd": {
+      "frozen_sha256": "5bc5a331d4fa860b044f1ba7ee09deffe78cc50aae2da81a54f83c6355cfa884",
+      "release_sha256": "5bc5a331d4fa860b044f1ba7ee09deffe78cc50aae2da81a54f83c6355cfa884"
+    },
+    "scripts/combat/critical_strike_runtime.gd": {
+      "frozen_sha256": "d5678da1780b90c5015b3fa70a2fe0cb447b440606b017dd24b73fc5348bc0ae",
+      "release_sha256": "d5678da1780b90c5015b3fa70a2fe0cb447b440606b017dd24b73fc5348bc0ae"
+    },
+    "scripts/combat/damage_base_compiler.gd": {
+      "frozen_sha256": "0db4f094b99055881e658789d1a0282ba6798231787228184d60258eeb3504b3",
+      "release_sha256": "0db4f094b99055881e658789d1a0282ba6798231787228184d60258eeb3504b3"
+    },
+    "scripts/combat/damage_preview.gd": {
+      "frozen_sha256": "647448f84b8b28a8d20c458eac012249105dc62ef8ce40f7efb3bd8ff1adb130",
+      "release_sha256": "647448f84b8b28a8d20c458eac012249105dc62ef8ce40f7efb3bd8ff1adb130"
+    },
+    "scripts/combat/damage_resolver.gd": {
+      "frozen_sha256": "37429d9754708d3bbbe9638f92bb8a038284326a4b9c422a70b7c2c4cfe3a1d5",
+      "release_sha256": "37429d9754708d3bbbe9638f92bb8a038284326a4b9c422a70b7c2c4cfe3a1d5"
+    },
+    "scripts/combat/delivery_support_rules.gd": {
+      "frozen_sha256": "08e8815f5cdb2c7db3c7fcb23cb6b6c1b9cc259c94c76da1a1394118cd3b2159",
+      "release_sha256": "08e8815f5cdb2c7db3c7fcb23cb6b6c1b9cc259c94c76da1a1394118cd3b2159"
+    },
+    "scripts/combat/element_support_rules.gd": {
+      "frozen_sha256": "15967f974ac24e49ea9545897f4288277ab2874575c863ceeb69be611162c75a",
+      "release_sha256": "15967f974ac24e49ea9545897f4288277ab2874575c863ceeb69be611162c75a"
+    },
+    "scripts/combat/ember_event_clock.gd": {
+      "frozen_sha256": "53e3d1ab85311b433a18ca307db06eef82178553a3eff73389c01f01808b9ae6",
+      "release_sha256": "53e3d1ab85311b433a18ca307db06eef82178553a3eff73389c01f01808b9ae6"
+    },
+    "scripts/combat/ember_proliferation_rules.gd": {
+      "frozen_sha256": "df17905689837b35388ef46fef5b7697f79b0258baa1c7a5f0f6bb5974aac31c",
+      "release_sha256": "df17905689837b35388ef46fef5b7697f79b0258baa1c7a5f0f6bb5974aac31c"
+    },
+    "scripts/combat/ember_proliferation_support_rules.gd": {
+      "frozen_sha256": "5553df1188d0b92986a150cf812ce8152b03aed3e0009798635087de41465abc",
+      "release_sha256": "5553df1188d0b92986a150cf812ce8152b03aed3e0009798635087de41465abc"
+    },
+    "scripts/combat/flask_modifier_rules.gd": {
+      "frozen_sha256": "86b11f9ea2dc214ff619755bfa5e203444bec2686fe5b264101e090daa7f6968",
+      "release_sha256": "86b11f9ea2dc214ff619755bfa5e203444bec2686fe5b264101e090daa7f6968"
+    },
+    "scripts/combat/flask_runtime.gd": {
+      "frozen_sha256": "0cfe1669ed60af48cc80b23c32a126841601820e9f564cc35115aa322478f9e0",
+      "release_sha256": "0cfe1669ed60af48cc80b23c32a126841601820e9f564cc35115aa322478f9e0"
+    },
+    "scripts/combat/ignite_support_rules.gd": {
+      "frozen_sha256": "23271171b1fd62f18d8e107dd1e6ad8001a40ca9780d08e2db325de374a1793e",
+      "release_sha256": "23271171b1fd62f18d8e107dd1e6ad8001a40ca9780d08e2db325de374a1793e"
+    },
+    "scripts/combat/leech_rules.gd": {
+      "frozen_sha256": "c1037a4c12f9668cfcf4ca070474bad01adf384695eadd447e7036986c33caba",
+      "release_sha256": "c1037a4c12f9668cfcf4ca070474bad01adf384695eadd447e7036986c33caba"
+    },
+    "scripts/combat/leech_runtime.gd": {
+      "frozen_sha256": "fa2b94cc94ffea671124de3986ecd80f0f1ac8feb4ad1e6f2fba554ae1ef8696",
+      "release_sha256": "fa2b94cc94ffea671124de3986ecd80f0f1ac8feb4ad1e6f2fba554ae1ef8696"
+    },
+    "scripts/combat/projectile_runtime.gd": {
+      "frozen_sha256": "380186b8097db9ee9855fb552699b19c6689460896d6a08f8549d4a00d0fea5c",
+      "release_sha256": "380186b8097db9ee9855fb552699b19c6689460896d6a08f8549d4a00d0fea5c"
+    },
+    "scripts/combat/projectile_support_rules.gd": {
+      "frozen_sha256": "46591b5824d3128c0d25ffa0bd62addfb6a7b2f587019f8f4ebf1abdbb04b6e5",
+      "release_sha256": "46591b5824d3128c0d25ffa0bd62addfb6a7b2f587019f8f4ebf1abdbb04b6e5"
+    },
+    "scripts/combat/resolute_technique_rules.gd": {
+      "frozen_sha256": "0631c5247fc062f9e6c1cccbbf6f4ca56532963087a3b79a20c3b133d700e093",
+      "release_sha256": "0631c5247fc062f9e6c1cccbbf6f4ca56532963087a3b79a20c3b133d700e093"
+    },
+    "scripts/combat/resource_support_rules.gd": {
+      "frozen_sha256": "6b01ff6c2a9704a8a9519cd8ad35f83f6f70471988eadcb091d99764a1e18413",
+      "release_sha256": "6b01ff6c2a9704a8a9519cd8ad35f83f6f70471988eadcb091d99764a1e18413"
+    },
+    "scripts/combat/shock_rules.gd": {
+      "frozen_sha256": "15d4d44793995c1e5f98a0ece88c7d32bee7e694e411a0f8b768057e1cdb23df",
+      "release_sha256": "15d4d44793995c1e5f98a0ece88c7d32bee7e694e411a0f8b768057e1cdb23df"
+    },
+    "scripts/combat/shock_runtime.gd": {
+      "frozen_sha256": "0f7c3b8d0b1993643d1dbc489bdbde106c995faef56680bbbaaec19707a4ecf4",
+      "release_sha256": "0f7c3b8d0b1993643d1dbc489bdbde106c995faef56680bbbaaec19707a4ecf4"
+    },
+    "scripts/combat/shock_support_rules.gd": {
+      "frozen_sha256": "65bc199e49adc8a1a7d7fec01e38b9070887be3a977dbe738d3a28c2aebd10df",
+      "release_sha256": "65bc199e49adc8a1a7d7fec01e38b9070887be3a977dbe738d3a28c2aebd10df"
+    },
+    "scripts/combat/skill_compiler.gd": {
+      "frozen_sha256": "0a0d1f7a16715a8286cf43fcf1cb828a4538483a64c6a3f8af5191b3db0075eb",
+      "release_sha256": "0a0d1f7a16715a8286cf43fcf1cb828a4538483a64c6a3f8af5191b3db0075eb"
+    },
+    "scripts/combat/skill_cooldown_ledger.gd": {
+      "frozen_sha256": "e9bc7568d7f5b13c10e75ca3e2843c165a7a48668023f98cac9243788fd8473e",
+      "release_sha256": "e9bc7568d7f5b13c10e75ca3e2843c165a7a48668023f98cac9243788fd8473e"
+    },
+    "scripts/combat/source_resource_rules.gd": {
+      "frozen_sha256": "cc84a561c34a3894f3599c39379d72bf4917e29fc2973f984a8aa63dc9dd03dc",
+      "release_sha256": "cc84a561c34a3894f3599c39379d72bf4917e29fc2973f984a8aa63dc9dd03dc"
+    },
+    "scripts/combat/source_spatial_rules.gd": {
+      "frozen_sha256": "3aec2921d0ee3025fac7e6edb010c6df03f1e027718e15716a77f3c43877c9cc",
+      "release_sha256": "3aec2921d0ee3025fac7e6edb010c6df03f1e027718e15716a77f3c43877c9cc"
+    },
+    "scripts/combat/spatial_target_index.gd": {
+      "frozen_sha256": "7f1b14e9f340b0740b6c19288f015a572eea6edf20f73693179e8565ccda8ef4",
+      "release_sha256": "7f1b14e9f340b0740b6c19288f015a572eea6edf20f73693179e8565ccda8ef4"
+    },
+    "scripts/combat/support_catalog.gd": {
+      "frozen_sha256": "3bd43dfd250397fc4058fffd4f69402312417cfa9491f06175cb0568909894d3",
+      "release_sha256": "3bd43dfd250397fc4058fffd4f69402312417cfa9491f06175cb0568909894d3"
+    },
+    "scripts/combat/support_program.gd": {
+      "frozen_sha256": "437a6ab0082ae80e916f1bb57c4e71fe4c3f5d0a147db5e7a97f86615712e0dd",
+      "release_sha256": "437a6ab0082ae80e916f1bb57c4e71fe4c3f5d0a147db5e7a97f86615712e0dd"
+    },
+    "scripts/combat/support_registry.gd": {
+      "frozen_sha256": "7ce0cda6d5a473fd557e3633063bc63f50b81046cd9731f9eb16912b1584adbd",
+      "release_sha256": "7ce0cda6d5a473fd557e3633063bc63f50b81046cd9731f9eb16912b1584adbd"
+    },
+    "scripts/combat/telegraphed_area_runtime.gd": {
+      "frozen_sha256": "f89ef26902dbf28b1db465393e33a37ef6f2dd60e24bee5828cc51be75d941b4",
+      "release_sha256": "f89ef26902dbf28b1db465393e33a37ef6f2dd60e24bee5828cc51be75d941b4"
+    },
+    "scripts/encounters/encounter_admission.gd": {
+      "frozen_sha256": "a88a587b40c6942ee5fe8a84ca3c56e97514d237dce4bb39f2c1fe628b35b849",
+      "release_sha256": "a88a587b40c6942ee5fe8a84ca3c56e97514d237dce4bb39f2c1fe628b35b849"
+    },
+    "scripts/encounters/encounter_catalog.gd": {
+      "frozen_sha256": "47b79db49886188f536bf7509adcbf143d8d424df48a841efc4b8a895d8dcb20",
+      "release_sha256": "47b79db49886188f536bf7509adcbf143d8d424df48a841efc4b8a895d8dcb20"
+    },
+    "scripts/encounters/encounter_compiler.gd": {
+      "frozen_sha256": "57ac247e6bd9dbeeb07b909fd1041b5bff08659ca63d55feedb4d10a2279f5b6",
+      "release_sha256": "57ac247e6bd9dbeeb07b909fd1041b5bff08659ca63d55feedb4d10a2279f5b6"
+    },
+    "scripts/game_data.gd": {
+      "frozen_sha256": "1ca97c45c243d6144e2a79d6d93762203c8bb76122adb0175a2ec80b2d77216b",
+      "release_sha256": "1ca97c45c243d6144e2a79d6d93762203c8bb76122adb0175a2ec80b2d77216b"
+    },
+    "scripts/game_hud.gd": {
+      "frozen_sha256": "95c2944678893dfeabeaa93f8f40cad66c270518b5b6844a92e34e6fbd9440f9",
+      "release_sha256": "95c2944678893dfeabeaa93f8f40cad66c270518b5b6844a92e34e6fbd9440f9"
+    },
+    "scripts/inventory_panel.gd": {
+      "frozen_sha256": "51a5475f52dc91c5d29027d8b664c5a00a09da8ceae67d427b8d3a414292ac02",
+      "release_sha256": "51a5475f52dc91c5d29027d8b664c5a00a09da8ceae67d427b8d3a414292ac02"
+    },
+    "scripts/item_grid_view.gd": {
+      "frozen_sha256": "37b6656f6a68e7f60b5c99ff294c725719b440c4c5c4979cd1e47966a7132561",
+      "release_sha256": "37b6656f6a68e7f60b5c99ff294c725719b440c4c5c4979cd1e47966a7132561"
+    },
+    "scripts/items/build_affix_profile.gd": {
+      "frozen_sha256": "325c970baa227ad7ad1a1f815c63a60825d087918310cfb12b7435a655d4b7be",
+      "release_sha256": "325c970baa227ad7ad1a1f815c63a60825d087918310cfb12b7435a655d4b7be"
+    },
+    "scripts/items/crafting_expansion_rules.gd": {
+      "frozen_sha256": "b690c538a2274b2451f2caa195d30ce0f670284a6b718959c677f0ed30ad2eff",
+      "release_sha256": "b690c538a2274b2451f2caa195d30ce0f670284a6b718959c677f0ed30ad2eff"
+    },
+    "scripts/items/crafting_rules.gd": {
+      "frozen_sha256": "553ac091068d50cbb2fcf0f74e779dd0078ec00abcbc7c5c76e5bc8128576249",
+      "release_sha256": "553ac091068d50cbb2fcf0f74e779dd0078ec00abcbc7c5c76e5bc8128576249"
+    },
+    "scripts/items/crafting_transaction_planner.gd": {
+      "frozen_sha256": "fdf425b8154c7847666a3a0c64874c040d9d750e4666d65bde14ecbe4ef8294f",
+      "release_sha256": "fdf425b8154c7847666a3a0c64874c040d9d750e4666d65bde14ecbe4ef8294f"
+    },
+    "scripts/items/currency_catalog.gd": {
+      "frozen_sha256": "0be41da90e8bb8551f10a10371b95712c2f8a88551574a68c2fcac39c7972b74",
+      "release_sha256": "0be41da90e8bb8551f10a10371b95712c2f8a88551574a68c2fcac39c7972b74"
+    },
+    "scripts/items/defense_rating_affix_profile.gd": {
+      "frozen_sha256": "bd2782e04a18ab1fde0c40ee852fa14b0848f6e6d177356764d53b2e0171f215",
+      "release_sha256": "bd2782e04a18ab1fde0c40ee852fa14b0848f6e6d177356764d53b2e0171f215"
+    },
+    "scripts/items/elemental_defense_affix_profile.gd": {
+      "frozen_sha256": "0e7eb38fddff3eea5a488a31aaef90bf77b9c8259bc38eaee090ac92f1eec113",
+      "release_sha256": "0e7eb38fddff3eea5a488a31aaef90bf77b9c8259bc38eaee090ac92f1eec113"
+    },
+    "scripts/items/equipment_catalog.gd": {
+      "frozen_sha256": "5d6804a0d42bc28b711152a50659261fb533149e35161b3936b430af733859be",
+      "release_sha256": "5d6804a0d42bc28b711152a50659261fb533149e35161b3936b430af733859be"
+    },
+    "scripts/items/equipment_slots.gd": {
+      "frozen_sha256": "9605098a16073537f771cfd1e71e36d201f582928900d192e164dc26f93ca497",
+      "release_sha256": "9605098a16073537f771cfd1e71e36d201f582928900d192e164dc26f93ca497"
+    },
+    "scripts/items/flask_catalog.gd": {
+      "frozen_sha256": "5895bb0bdcb6765cbbb733e3ca5713fc8d541508745009845f892e44e3ad0fe5",
+      "release_sha256": "5895bb0bdcb6765cbbb733e3ca5713fc8d541508745009845f892e44e3ad0fe5"
+    },
+    "scripts/items/forgeblade_profile.gd": {
+      "frozen_sha256": "9e6c595b23acdbb7edcc88c71fc14eb6e07379ce04436ffe07ea0f5e4693fe14",
+      "release_sha256": "9e6c595b23acdbb7edcc88c71fc14eb6e07379ce04436ffe07ea0f5e4693fe14"
+    },
+    "scripts/items/gem_catalog.gd": {
+      "frozen_sha256": "4a3445fc328c9a74fdd607e1663109dcd2c287ef350fd3fb6dea3c86fd69bc14",
+      "release_sha256": "4a3445fc328c9a74fdd607e1663109dcd2c287ef350fd3fb6dea3c86fd69bc14"
+    },
+    "scripts/items/gem_trade_rules.gd": {
+      "frozen_sha256": "f4a57e88dae94a8493977a3e50e7bfc4a35e39579a71776c4282a60c4cf18616",
+      "release_sha256": "f4a57e88dae94a8493977a3e50e7bfc4a35e39579a71776c4282a60c4cf18616"
+    },
+    "scripts/items/item_location_rules.gd": {
+      "frozen_sha256": "7b215b19093b693216f47a1b0f2c35b3a1aced96acab8a27a3eb5f2a7e8a867a",
+      "release_sha256": "7b215b19093b693216f47a1b0f2c35b3a1aced96acab8a27a3eb5f2a7e8a867a"
+    },
+    "scripts/items/item_transfer_plan.gd": {
+      "frozen_sha256": "e19bacba06c9c3fa175e60694d9eafc1a2381db15747c4e1bf5e8fe67edad760",
+      "release_sha256": "e19bacba06c9c3fa175e60694d9eafc1a2381db15747c4e1bf5e8fe67edad760"
+    },
+    "scripts/items/nine_slot_equipment_profile.gd": {
+      "frozen_sha256": "4138bfd9c5229f40566a7ebde21c5552e3fce26c5ce0e306b2a66688fb5a2801",
+      "release_sha256": "4138bfd9c5229f40566a7ebde21c5552e3fce26c5ce0e306b2a66688fb5a2801"
+    },
+    "scripts/items/paged_bag_layout.gd": {
+      "frozen_sha256": "7df7297acabc4957120a91383e7145e627df18eebd095d9f50d1f738ad5f215e",
+      "release_sha256": "7df7297acabc4957120a91383e7145e627df18eebd095d9f50d1f738ad5f215e"
+    },
+    "scripts/items/targeted_reforge_rules.gd": {
+      "frozen_sha256": "c0aab3ecf3bc7f006ac8d10865e373c402a1abda21f1a52fdc3166f572f1c7ad",
+      "release_sha256": "c0aab3ecf3bc7f006ac8d10865e373c402a1abda21f1a52fdc3166f572f1c7ad"
+    },
+    "scripts/items/unified_item_catalog.gd": {
+      "frozen_sha256": "ae499e3e68f30269fa2359d2a21a4d7226a2d4d984b41fa38f48f69f226d5fbc",
+      "release_sha256": "ae499e3e68f30269fa2359d2a21a4d7226a2d4d984b41fa38f48f69f226d5fbc"
+    },
+    "scripts/items/weapon_local_rules.gd": {
+      "frozen_sha256": "73e4308828e856a741ef00386d33150a008bdb3f07ef31a031a204d71fe93b8d",
+      "release_sha256": "73e4308828e856a741ef00386d33150a008bdb3f07ef31a031a204d71fe93b8d"
+    },
+    "scripts/jewel_data.gd": {
+      "frozen_sha256": "60122964b76b93fc529cdfe314d0f54cd507c7e3f19a66b89a609fb9018acc93",
+      "release_sha256": "60122964b76b93fc529cdfe314d0f54cd507c7e3f19a66b89a609fb9018acc93"
+    },
+    "scripts/main.gd": {
+      "frozen_sha256": "a24e0d287314a5cd0cb8232f5be397386f83f9252c56da5e63b073e37a753140",
+      "release_sha256": "a24e0d287314a5cd0cb8232f5be397386f83f9252c56da5e63b073e37a753140"
+    },
+    "scripts/mechanics/defense_rules.gd": {
+      "frozen_sha256": "a211d7714f8b23cd382dbe5093328104ee95c8022b99813329aa2f8534c45361",
+      "release_sha256": "a211d7714f8b23cd382dbe5093328104ee95c8022b99813329aa2f8534c45361"
+    },
+    "scripts/mechanics/iron_reflexes_rules.gd": {
+      "frozen_sha256": "0db661a4ba5122a153d933976f6c9f16ee8454a08fb5758769f66ea9c6168545",
+      "release_sha256": "0db661a4ba5122a153d933976f6c9f16ee8454a08fb5758769f66ea9c6168545"
+    },
+    "scripts/mechanics/mechanic_registry.gd": {
+      "frozen_sha256": "e57c6455e752bfcf630d4f489d0dcb9199778a2e62d6ee967f1bf5b11c8f0c42",
+      "release_sha256": "e57c6455e752bfcf630d4f489d0dcb9199778a2e62d6ee967f1bf5b11c8f0c42"
+    },
+    "scripts/mechanics/passive_balance_adapter.gd": {
+      "frozen_sha256": "4b860a7aa2318a2a41de0018a5ff528ebfb0e6cd808a1168c75a857a95a7e496",
+      "release_sha256": "4b860a7aa2318a2a41de0018a5ff528ebfb0e6cd808a1168c75a857a95a7e496"
+    },
+    "scripts/mechanics/zealots_oath_rules.gd": {
+      "frozen_sha256": "955beb07e3875b83ffead95106699f469013aa6ae7528d478da3898f6e728189",
+      "release_sha256": "955beb07e3875b83ffead95106699f469013aa6ae7528d478da3898f6e728189"
+    },
+    "scripts/monsters/map_boss_profiles.gd": {
+      "frozen_sha256": "e499f0c06c4442a2026c0c2205fc15a86df85f08b85a26c931ff6ec360629924",
+      "release_sha256": "e499f0c06c4442a2026c0c2205fc15a86df85f08b85a26c931ff6ec360629924"
+    },
+    "scripts/monsters/monster_catalog.gd": {
+      "frozen_sha256": "bfa4359c185e9da37285a6a2c0afa453ec362c0633be9b9bc058ebf08f63b3c2",
+      "release_sha256": "bfa4359c185e9da37285a6a2c0afa453ec362c0633be9b9bc058ebf08f63b3c2"
+    },
+    "scripts/monsters/monster_runtime.gd": {
+      "frozen_sha256": "6280cbf52cdf373af0fe8d564b77b2ad1f1e934b207d37988f69bbdd404751a3",
+      "release_sha256": "6280cbf52cdf373af0fe8d564b77b2ad1f1e934b207d37988f69bbdd404751a3"
+    },
+    "scripts/monsters/telegraph_profiles.gd": {
+      "frozen_sha256": "fb258eb68317a3b3e2b39e93f64af0797413a3cb99a889ebac2de495f00a2c33",
+      "release_sha256": "fb258eb68317a3b3e2b39e93f64af0797413a3cb99a889ebac2de495f00a2c33"
+    },
+    "scripts/passive_data.gd": {
+      "frozen_sha256": "0181b25f45dddab5f106c5342f8a68a70820126beb59576be34b42f48a77857d",
+      "release_sha256": "0181b25f45dddab5f106c5342f8a68a70820126beb59576be34b42f48a77857d"
+    },
+    "scripts/passive_panel.gd": {
+      "frozen_sha256": "8a6e1ee97c9ba205261488303775e2154ab85163dfdc46f75b7c808cd1a0f6f1",
+      "release_sha256": "8a6e1ee97c9ba205261488303775e2154ab85163dfdc46f75b7c808cd1a0f6f1"
+    },
+    "scripts/passive_tree_view.gd": {
+      "frozen_sha256": "bc68b06c8b5a7db80a2a1c2a6661dace2e6e0c85099351d26b543899694c7afa",
+      "release_sha256": "bc68b06c8b5a7db80a2a1c2a6661dace2e6e0c85099351d26b543899694c7afa"
+    },
+    "scripts/passives/allocation_rules.gd": {
+      "frozen_sha256": "3c2c1c6d3625393726c6562c515124c12c1facfe9680ef37f2a48d2b95a9f0da",
+      "release_sha256": "3c2c1c6d3625393726c6562c515124c12c1facfe9680ef37f2a48d2b95a9f0da"
+    },
+    "scripts/passives/source_stat_patterns.gd": {
+      "frozen_sha256": "fab697727fdd057ad89217d79fbc2190999180dde8a7a848bb9b5e63fb20c2c3",
+      "release_sha256": "fab697727fdd057ad89217d79fbc2190999180dde8a7a848bb9b5e63fb20c2c3"
+    },
+    "scripts/passives/source_tree_allocation_rules.gd": {
+      "frozen_sha256": "631792b2ecf06481c6cc43165cd9f97688d578f6cd5cf394905b0c9beb814ef3",
+      "release_sha256": "631792b2ecf06481c6cc43165cd9f97688d578f6cd5cf394905b0c9beb814ef3"
+    },
+    "scripts/passives/source_tree_data.gd": {
+      "frozen_sha256": "9ce28c773f4ca8b8174cca73008cd1c9002237681378d58f5108def2f761bbee",
+      "release_sha256": "9ce28c773f4ca8b8174cca73008cd1c9002237681378d58f5108def2f761bbee"
+    },
+    "scripts/passives/source_tree_localization.gd": {
+      "frozen_sha256": "b7cf9e6f002e001a03da518539c7fa2a0708af1968d741d43f5e3ef06069212e",
+      "release_sha256": "b7cf9e6f002e001a03da518539c7fa2a0708af1968d741d43f5e3ef06069212e"
+    },
+    "scripts/passives/source_tree_runtime.gd": {
+      "frozen_sha256": "cf388bc963d62172f64186b7e40854d1b9faff52ffcdcd19e2507354bd6c782c",
+      "release_sha256": "cf388bc963d62172f64186b7e40854d1b9faff52ffcdcd19e2507354bd6c782c"
+    },
+    "scripts/save/active_skill_migration.gd": {
+      "frozen_sha256": "b47562ffd79f0240673d50876212fe766615e7752f8435e3dd73b79ddba95492",
+      "release_sha256": "b47562ffd79f0240673d50876212fe766615e7752f8435e3dd73b79ddba95492"
+    },
+    "scripts/save/canonical_build_migration.gd": {
+      "frozen_sha256": "1c2878c7ecf8ad6fa879332f849e58586056f70ce8a11efe4ceb1d79cbcf0058",
+      "release_sha256": "1c2878c7ecf8ad6fa879332f849e58586056f70ce8a11efe4ceb1d79cbcf0058"
+    },
+    "scripts/save/canonical_build_rules.gd": {
+      "frozen_sha256": "bd093c4f51e246b9b389670ec066046c1d0f599ada71d34e2eab72f22c702102",
+      "release_sha256": "bd093c4f51e246b9b389670ec066046c1d0f599ada71d34e2eab72f22c702102"
+    },
+    "scripts/save/canonical_build_store.gd": {
+      "frozen_sha256": "105b4507ec0eabca438d79bd3a5462fa1f8bb86d93c73dc0587d90f405eba3d7",
+      "release_sha256": "105b4507ec0eabca438d79bd3a5462fa1f8bb86d93c73dc0587d90f405eba3d7"
+    },
+    "scripts/save/currency_item_migration.gd": {
+      "frozen_sha256": "4f7c31f07ec7e12faa503ffc773b7177d70d11769a45bf8a05a3bdb13e0ffcb5",
+      "release_sha256": "4f7c31f07ec7e12faa503ffc773b7177d70d11769a45bf8a05a3bdb13e0ffcb5"
+    },
+    "scripts/save/defense_rating_affix_migration.gd": {
+      "frozen_sha256": "74f82f234133a5625f3f86622d9e2307d017bd578faac1c5e2da43e84a3f3a46",
+      "release_sha256": "74f82f234133a5625f3f86622d9e2307d017bd578faac1c5e2da43e84a3f3a46"
+    },
+    "scripts/save/elemental_defense_affix_migration.gd": {
+      "frozen_sha256": "88133344470820488311d799926cdfdcbc440cd702cc12d1a18f7666a8c51156",
+      "release_sha256": "88133344470820488311d799926cdfdcbc440cd702cc12d1a18f7666a8c51156"
+    },
+    "scripts/save/elemental_resistance_cap_migration.gd": {
+      "frozen_sha256": "3be242eb5cf1efad3f6cb5d8115bffd2ca45cbd7e6b7da3753a65f495d80f84c",
+      "release_sha256": "3be242eb5cf1efad3f6cb5d8115bffd2ca45cbd7e6b7da3753a65f495d80f84c"
+    },
+    "scripts/save/ember_gem_migration.gd": {
+      "frozen_sha256": "c68d558d0b24a61571bc17a142692a8124bdd225239624739f787ec78deed373",
+      "release_sha256": "c68d558d0b24a61571bc17a142692a8124bdd225239624739f787ec78deed373"
+    },
+    "scripts/save/equipment_affix_migration.gd": {
+      "frozen_sha256": "d655c9c455de2b690c5a100028d456c41593165579eb527de92225158b20d426",
+      "release_sha256": "d655c9c455de2b690c5a100028d456c41593165579eb527de92225158b20d426"
+    },
+    "scripts/save/faster_burn_migration.gd": {
+      "frozen_sha256": "16242c0a8d10848ce6fe7c51314fed829fc80af2ca5034dc79dd559697bd3cfb",
+      "release_sha256": "16242c0a8d10848ce6fe7c51314fed829fc80af2ca5034dc79dd559697bd3cfb"
+    },
+    "scripts/save/fire_dot_migration.gd": {
+      "frozen_sha256": "86fd4711901ad99bf11c7d8c8e564ae1f37c522c21b8a009fbb91f9fbb80b647",
+      "release_sha256": "86fd4711901ad99bf11c7d8c8e564ae1f37c522c21b8a009fbb91f9fbb80b647"
+    },
+    "scripts/save/flask_item_migration.gd": {
+      "frozen_sha256": "ef8fb7108ccd9f2d22728b0e209fd5a1b30f62b06427693b3742bf871a1f61db",
+      "release_sha256": "ef8fb7108ccd9f2d22728b0e209fd5a1b30f62b06427693b3742bf871a1f61db"
+    },
+    "scripts/save/forgeblade_migration.gd": {
+      "frozen_sha256": "d78eea2028b49f5fe3a4abb88c7ef61096ecc3b01c5fde1f183d161e52239de8",
+      "release_sha256": "d78eea2028b49f5fe3a4abb88c7ef61096ecc3b01c5fde1f183d161e52239de8"
+    },
+    "scripts/save/ignite_gem_migration.gd": {
+      "frozen_sha256": "dfe892f797b9b964e7493f2957c97e6a59be6431d285e099d0ccee4538dd093c",
+      "release_sha256": "dfe892f797b9b964e7493f2957c97e6a59be6431d285e099d0ccee4538dd093c"
+    },
+    "scripts/save/iron_reflexes_migration.gd": {
+      "frozen_sha256": "e57ea3cc48b25af3e8781bc8c2cef7c2e72c277766c5330907effc882fdc4c99",
+      "release_sha256": "e57ea3cc48b25af3e8781bc8c2cef7c2e72c277766c5330907effc882fdc4c99"
+    },
+    "scripts/save/mana_guard_migration.gd": {
+      "frozen_sha256": "d6f1bc71ab1900989ea775150a10cdbcc2e86cace10c8ef06d120b3d8375241f",
+      "release_sha256": "d6f1bc71ab1900989ea775150a10cdbcc2e86cace10c8ef06d120b3d8375241f"
+    },
+    "scripts/save/normal_journey_migration.gd": {
+      "frozen_sha256": "24575eddd16c77833ea01deadad32794dfc41cf137f378f1da64164e2803229c",
+      "release_sha256": "24575eddd16c77833ea01deadad32794dfc41cf137f378f1da64164e2803229c"
+    },
+    "scripts/save/paged_bag_migration.gd": {
+      "frozen_sha256": "051afead9dd6e9c1428fb61fc07584ef9564764dacd555ca43e3300c21c1aea6",
+      "release_sha256": "051afead9dd6e9c1428fb61fc07584ef9564764dacd555ca43e3300c21c1aea6"
+    },
+    "scripts/save/reserved_hotkey_migration.gd": {
+      "frozen_sha256": "919f4a3b44a69c2950f4c3f5fa65ffc2d59ed06166ae4a22e8dee5f4b7b0e10b",
+      "release_sha256": "919f4a3b44a69c2950f4c3f5fa65ffc2d59ed06166ae4a22e8dee5f4b7b0e10b"
+    },
+    "scripts/save/resolute_technique_migration.gd": {
+      "frozen_sha256": "ced4e5adda9f14ce052a1ce07a4723fc2487c922a9ec12d89b3463d99f8a9ff5",
+      "release_sha256": "ced4e5adda9f14ce052a1ce07a4723fc2487c922a9ec12d89b3463d99f8a9ff5"
+    },
+    "scripts/save/shock_gem_migration.gd": {
+      "frozen_sha256": "94d07363b86416171b9ad8a4a0bfefdd9b3f3e61bb60654cc135d59047c85968",
+      "release_sha256": "94d07363b86416171b9ad8a4a0bfefdd9b3f3e61bb60654cc135d59047c85968"
+    },
+    "scripts/save/source_critical_migration.gd": {
+      "frozen_sha256": "a5f0ab3f0028490050dbe0a5dffbe7bee313eda4ab1b5e504be639251b280d6f",
+      "release_sha256": "a5f0ab3f0028490050dbe0a5dffbe7bee313eda4ab1b5e504be639251b280d6f"
+    },
+    "scripts/save/source_flask_migration.gd": {
+      "frozen_sha256": "d430c047d6f2d7b9388f6fb5de69d43aff07172dc5eb76e12122b8eb7f01aaf4",
+      "release_sha256": "d430c047d6f2d7b9388f6fb5de69d43aff07172dc5eb76e12122b8eb7f01aaf4"
+    },
+    "scripts/save/source_leech_migration.gd": {
+      "frozen_sha256": "e562f62f6bec0a62b93a156ac73fe634c7c82f250ab450467aaca1ab9adeba9c",
+      "release_sha256": "e562f62f6bec0a62b93a156ac73fe634c7c82f250ab450467aaca1ab9adeba9c"
+    },
+    "scripts/save/source_recharge_migration.gd": {
+      "frozen_sha256": "552808d6087ef405943b3ff04d9795972aa8c84f70a97da3c6d4af54d011bb0a",
+      "release_sha256": "552808d6087ef405943b3ff04d9795972aa8c84f70a97da3c6d4af54d011bb0a"
+    },
+    "scripts/save/source_resource_migration.gd": {
+      "frozen_sha256": "7178122e08f7e887731e6369a0117d578216ba4af3331ee0726f7f14c317d4ca",
+      "release_sha256": "7178122e08f7e887731e6369a0117d578216ba4af3331ee0726f7f14c317d4ca"
+    },
+    "scripts/save/source_spatial_migration.gd": {
+      "frozen_sha256": "63e0c3b00e87b24f7deb575a74dedd9c021b90a4a60990f0076be942b34f6548",
+      "release_sha256": "63e0c3b00e87b24f7deb575a74dedd9c021b90a4a60990f0076be942b34f6548"
+    },
+    "scripts/save/third_map_migration.gd": {
+      "frozen_sha256": "0554e8bfa7196dd07ab336517e95469153ac915537c75b88b51be24775b93832",
+      "release_sha256": "0554e8bfa7196dd07ab336517e95469153ac915537c75b88b51be24775b93832"
+    },
+    "scripts/save/zealots_oath_migration.gd": {
+      "frozen_sha256": "22e9b398a33f5fa66b60021a64544adca073ecb9f328dd9f3d4e56365cc89c8f",
+      "release_sha256": "22e9b398a33f5fa66b60021a64544adca073ecb9f328dd9f3d4e56365cc89c8f"
+    },
+    "scripts/skill_support_panel.gd": {
+      "frozen_sha256": "3a5a9342eb877cd45db317af9c7ee6b18c8c24c4855a53e76e94a3261fa98cf1",
+      "release_sha256": "3a5a9342eb877cd45db317af9c7ee6b18c8c24c4855a53e76e94a3261fa98cf1"
+    },
+    "scripts/town/town_catalog.gd": {
+      "frozen_sha256": "235225d644ea65dd02ff75a398440cde198689bca0127b0c61cd3f4927fe63c0",
+      "release_sha256": "235225d644ea65dd02ff75a398440cde198689bca0127b0c61cd3f4927fe63c0"
+    },
+    "scripts/ui/canonical_character_panel.gd": {
+      "frozen_sha256": "72e6771ba17c5f68bf1940397ae89f4eabe216e06d63aad6701beba3af039b71",
+      "release_sha256": "72e6771ba17c5f68bf1940397ae89f4eabe216e06d63aad6701beba3af039b71"
+    },
+    "scripts/ui/canonical_inventory_panel.gd": {
+      "frozen_sha256": "4343d119da1def8f6405a5a3254f9b2639c0b27e676f33621777c33a79a6de71",
+      "release_sha256": "4343d119da1def8f6405a5a3254f9b2639c0b27e676f33621777c33a79a6de71"
+    },
+    "scripts/ui/canonical_passive_panel.gd": {
+      "frozen_sha256": "7feb6fd5d6b40cf5d8aed54e4465630c6ba0f3cc37ffb432e15e7d65ce8bd054",
+      "release_sha256": "7feb6fd5d6b40cf5d8aed54e4465630c6ba0f3cc37ffb432e15e7d65ce8bd054"
+    },
+    "scripts/ui/canonical_skill_panel.gd": {
+      "frozen_sha256": "a575f577f2206e8c0acd3c1de2ff08787118045cdcaa2b7c9acf3ad6c3128327",
+      "release_sha256": "a575f577f2206e8c0acd3c1de2ff08787118045cdcaa2b7c9acf3ad6c3128327"
+    },
+    "scripts/ui/crafting_controls.gd": {
+      "frozen_sha256": "328cf47c2ee6770c94ff0c03b7bfc2c0cef39575b2c1f0ad29206f4e1343ca86",
+      "release_sha256": "328cf47c2ee6770c94ff0c03b7bfc2c0cef39575b2c1f0ad29206f4e1343ca86"
+    },
+    "scripts/ui/dock_visual_style.gd": {
+      "frozen_sha256": "c1e85d52a89807bb1f2c8cc2cdfcf0fc883323bc51817c2213d8ca0f7b3e8c79",
+      "release_sha256": "c1e85d52a89807bb1f2c8cc2cdfcf0fc883323bc51817c2213d8ca0f7b3e8c79"
+    },
+    "scripts/ui/docked_menu_state.gd": {
+      "frozen_sha256": "9e250bff9e8a5831299716b3f02c047385bbebd0e5220cdc4a0591acdb54a85a",
+      "release_sha256": "9e250bff9e8a5831299716b3f02c047385bbebd0e5220cdc4a0591acdb54a85a"
+    },
+    "scripts/ui/encounter_controls.gd": {
+      "frozen_sha256": "a9bbb9c0a4399c150c3bd0711953d4ce8e7b00b5f334e59602d705ceeb126338",
+      "release_sha256": "a9bbb9c0a4399c150c3bd0711953d4ce8e7b00b5f334e59602d705ceeb126338"
+    },
+    "scripts/ui/flask_slot.gd": {
+      "frozen_sha256": "8357bf8646f9fbd141164d91d8298d8dccca883f01e7e7303d2c498a6fc8a1f7",
+      "release_sha256": "8357bf8646f9fbd141164d91d8298d8dccca883f01e7e7303d2c498a6fc8a1f7"
+    },
+    "scripts/ui/gem_icon.gd": {
+      "frozen_sha256": "d2c04a867292424d87fa5e24c8547848ccd4482340809c41391c6e882b855f48",
+      "release_sha256": "d2c04a867292424d87fa5e24c8547848ccd4482340809c41391c6e882b855f48"
+    },
+    "scripts/ui/item_hover_card.gd": {
+      "frozen_sha256": "75769615bd59d86a358c4b689909cd2ae13a395653da3e7edcae3988fa95df81",
+      "release_sha256": "75769615bd59d86a358c4b689909cd2ae13a395653da3e7edcae3988fa95df81"
+    },
+    "scripts/ui/item_rarity_style.gd": {
+      "frozen_sha256": "91f621ae90506cb8782138fd53f08302c958db6f9f543b4ac4a4e367304fcf44",
+      "release_sha256": "91f621ae90506cb8782138fd53f08302c958db6f9f543b4ac4a4e367304fcf44"
+    },
+    "scripts/ui/menu_route_state.gd": {
+      "frozen_sha256": "ac436fb6810705df8531c55c484f483817d49e918edaae417ae0c07b3f19b623",
+      "release_sha256": "ac436fb6810705df8531c55c484f483817d49e918edaae417ae0c07b3f19b623"
+    },
+    "scripts/ui/skill_group_rows.gd": {
+      "frozen_sha256": "704039dbfc409c58d44cac0c8e0d5514f7722ed091c3bafab8b63588d925a0c2",
+      "release_sha256": "704039dbfc409c58d44cac0c8e0d5514f7722ed091c3bafab8b63588d925a0c2"
+    },
+    "scripts/ui/source_passive_tree_view.gd": {
+      "frozen_sha256": "7e393571017e6d247dd4578f44ab39bae36e370c19ebeb370e37c87ecc701e84",
+      "release_sha256": "7e393571017e6d247dd4578f44ab39bae36e370c19ebeb370e37c87ecc701e84"
+    },
+    "scripts/ui/town_service_panel.gd": {
+      "frozen_sha256": "908ab394e8da45695ad93a6decc8c4e13831e4e817c66062c2714fe738a33eb0",
+      "release_sha256": "908ab394e8da45695ad93a6decc8c4e13831e4e817c66062c2714fe738a33eb0"
+    },
+    "scripts/ui/town_square_view.gd": {
+      "frozen_sha256": "97941b8089f6813c593c03cc5be81d8d14b4736d6db4be4e40af7b4b2008e461",
+      "release_sha256": "97941b8089f6813c593c03cc5be81d8d14b4736d6db4be4e40af7b4b2008e461"
+    },
+    "scripts/ui/unified_bag_grid.gd": {
+      "frozen_sha256": "bf4d3b393c486c11251edeec904cdd3f60c9446077f479d952ff84c42e12cc4c",
+      "release_sha256": "bf4d3b393c486c11251edeec904cdd3f60c9446077f479d952ff84c42e12cc4c"
+    },
+    "scripts/ui/unified_item_presentation.gd": {
+      "frozen_sha256": "984fb596483ad1c9023ca0e41fb5df2088e51eace52f2cfa9dbab260f773d8a8",
+      "release_sha256": "984fb596483ad1c9023ca0e41fb5df2088e51eace52f2cfa9dbab260f773d8a8"
+    },
+    "scripts/visuals/arena_visuals.gd": {
+      "frozen_sha256": "06817417b335aa98dd1ce7c6f343203daf4b89b93d20bea10f0c0a7f8db52eca",
+      "release_sha256": "06817417b335aa98dd1ce7c6f343203daf4b89b93d20bea10f0c0a7f8db52eca"
+    },
+    "scripts/visuals/burn_status_renderer.gd": {
+      "frozen_sha256": "325f9d1c19977e1e47518ed97c96bf3efbcba6c7d5d36760215178ef467d7a9d",
+      "release_sha256": "325f9d1c19977e1e47518ed97c96bf3efbcba6c7d5d36760215178ef467d7a9d"
+    },
+    "scripts/visuals/combat_cue_renderer.gd": {
+      "frozen_sha256": "642cc3732d6448103ecce9a4440f1cc84d2cb479769c70835020586a63fc534e",
+      "release_sha256": "642cc3732d6448103ecce9a4440f1cc84d2cb479769c70835020586a63fc534e"
+    },
+    "scripts/visuals/combat_cues.gd": {
+      "frozen_sha256": "e793f12a2c4680f2105350605bba4f97fc22f53209613ea7743f172fdb21d19b",
+      "release_sha256": "e793f12a2c4680f2105350605bba4f97fc22f53209613ea7743f172fdb21d19b"
+    },
+    "scripts/visuals/combat_feedback_renderer.gd": {
+      "frozen_sha256": "9c3d96fada5e52703c6cf523ccfcd78e4f01a0805f320bd08d3436a709a688a8",
+      "release_sha256": "9c3d96fada5e52703c6cf523ccfcd78e4f01a0805f320bd08d3436a709a688a8"
+    },
+    "scripts/visuals/equipment_art.gd": {
+      "frozen_sha256": "9688436adde48c6576ab6b66f79cc68a477fb5b536b87034182a0c9f2558b3ba",
+      "release_sha256": "9688436adde48c6576ab6b66f79cc68a477fb5b536b87034182a0c9f2558b3ba"
+    },
+    "scripts/visuals/equipment_painterly_art.gd": {
+      "frozen_sha256": "86ad4a399323fc325abdd34c77e59ef7c6cc9565ae1d769a7e47402b27148fba",
+      "release_sha256": "86ad4a399323fc325abdd34c77e59ef7c6cc9565ae1d769a7e47402b27148fba"
+    },
+    "scripts/visuals/fantasy_actors.gd": {
+      "frozen_sha256": "6b9e9f0c99db4015573cd0c2e98f3e30cafcd28419a8a90e12fae2e5be0f9657",
+      "release_sha256": "6b9e9f0c99db4015573cd0c2e98f3e30cafcd28419a8a90e12fae2e5be0f9657"
+    },
+    "scripts/visuals/fantasy_environment.gd": {
+      "frozen_sha256": "46cb198ac5be968908a5a76639dcb96cfb97821d7c0b61c13fd27bd9c083b40c",
+      "release_sha256": "46cb198ac5be968908a5a76639dcb96cfb97821d7c0b61c13fd27bd9c083b40c"
+    },
+    "scripts/visuals/fantasy_palette.gd": {
+      "frozen_sha256": "a088fd528408a731cb4b0bba2ac56029e95e3ad7096514817295ecdc4f6181b5",
+      "release_sha256": "a088fd528408a731cb4b0bba2ac56029e95e3ad7096514817295ecdc4f6181b5"
+    },
+    "scripts/visuals/foreground_arena_layer.gd": {
+      "frozen_sha256": "b353b3e5f24901fed9509d73d3763d2cd67a544c0878a3decc07a5a6a9961ca9",
+      "release_sha256": "b353b3e5f24901fed9509d73d3763d2cd67a544c0878a3decc07a5a6a9961ca9"
+    },
+    "scripts/visuals/jewel_emblem.gd": {
+      "frozen_sha256": "980e16d4b752a7f869fbc93cf0bdce46552d1344358375165bddde0e9edb413a",
+      "release_sha256": "980e16d4b752a7f869fbc93cf0bdce46552d1344358375165bddde0e9edb413a"
+    },
+    "scripts/visuals/map_camp_signs.gd": {
+      "frozen_sha256": "dc38ef0655ed3aa4d366f74e1990f05be7b491e22e75085ed4e25bc5cb377d84",
+      "release_sha256": "dc38ef0655ed3aa4d366f74e1990f05be7b491e22e75085ed4e25bc5cb377d84"
+    },
+    "scripts/visuals/material_frame.gd": {
+      "frozen_sha256": "d2b9e536cedbe27c992ad0bc19061e94e242cd41326faa6d65aa058c25440c67",
+      "release_sha256": "d2b9e536cedbe27c992ad0bc19061e94e242cd41326faa6d65aa058c25440c67"
+    },
+    "scripts/visuals/retained_actor_layer.gd": {
+      "frozen_sha256": "0e399f021aa1c48b9a903b0364f5f55d358450554cc48ebb089bb6a02b367c6c",
+      "release_sha256": "0e399f021aa1c48b9a903b0364f5f55d358450554cc48ebb089bb6a02b367c6c"
+    },
+    "scripts/visuals/shock_status_renderer.gd": {
+      "frozen_sha256": "1815536923b4f4586a81ac13587f5e37d2a5ab5efd79fd0a2beb2b486a60274f",
+      "release_sha256": "1815536923b4f4586a81ac13587f5e37d2a5ab5efd79fd0a2beb2b486a60274f"
+    },
+    "scripts/visuals/skill_emblem.gd": {
+      "frozen_sha256": "17fb6e8f0a02048f27d7f1673e7cb26415a162095e5670380ea9b9fbb5301796",
+      "release_sha256": "17fb6e8f0a02048f27d7f1673e7cb26415a162095e5670380ea9b9fbb5301796"
+    },
+    "scripts/visuals/static_arena_layer.gd": {
+      "frozen_sha256": "738e0595eb26f5305ecff687a3c6b95aed7345239eb5a1755a331067d2d4ccb6",
+      "release_sha256": "738e0595eb26f5305ecff687a3c6b95aed7345239eb5a1755a331067d2d4ccb6"
+    },
+    "scripts/visuals/telegraph_renderer.gd": {
+      "frozen_sha256": "bebbc5f0a40717fe66ee92d2117e9db236641336b061429c4073a5c28aa20074",
+      "release_sha256": "bebbc5f0a40717fe66ee92d2117e9db236641336b061429c4073a5c28aa20074"
+    },
+    "scripts/visuals/visual_settings.gd": {
+      "frozen_sha256": "a06225057e169dd8ca7426f63345375f633fbb3317fbf167b220982d803c527a",
+      "release_sha256": "a06225057e169dd8ca7426f63345375f633fbb3317fbf167b220982d803c527a"
+    },
+    "scripts/visuals/visual_theme.gd": {
+      "frozen_sha256": "5d93724c4876a49bfa80c2b5af1553e370c0a2571654d773c84339731c7b4792",
+      "release_sha256": "5d93724c4876a49bfa80c2b5af1553e370c0a2571654d773c84339731c7b4792"
+    },
+    "scripts/visuals/world_markers.gd": {
+      "frozen_sha256": "ce925752cb67b3a9e19fcf431730039eb908b12a1f256701707d875d45c3ea75",
+      "release_sha256": "ce925752cb67b3a9e19fcf431730039eb908b12a1f256701707d875d45c3ea75"
+    },
+    "scripts/visuals/world_view.gd": {
+      "frozen_sha256": "af8b176f49290bea54659f23631f04a00cef72b0f19ed042e2b9f20d1e2e5643",
+      "release_sha256": "af8b176f49290bea54659f23631f04a00cef72b0f19ed042e2b9f20d1e2e5643"
+    },
+    "scripts/world/map_admission.gd": {
+      "frozen_sha256": "39c4d7dc34993587a081759f423192c1db2b6e8267c91854ef729f36ae4368c2",
+      "release_sha256": "39c4d7dc34993587a081759f423192c1db2b6e8267c91854ef729f36ae4368c2"
+    },
+    "scripts/world/map_camp_admission.gd": {
+      "frozen_sha256": "90fc4a6174ea37a1bdca677a6d0195fd585f32b43e793e29f09f10e391bc43c1",
+      "release_sha256": "90fc4a6174ea37a1bdca677a6d0195fd585f32b43e793e29f09f10e391bc43c1"
+    },
+    "scripts/world/map_camp_layout.gd": {
+      "frozen_sha256": "c3903c7eb964743c329f27d38ded79d42e5814d8cf59c976598697e29d073f39",
+      "release_sha256": "c3903c7eb964743c329f27d38ded79d42e5814d8cf59c976598697e29d073f39"
+    },
+    "scripts/world/map_camp_state.gd": {
+      "frozen_sha256": "6abe4a2320425bbcffb421d0b993573242a4fb877434f51d37b99ef2ffc5e11d",
+      "release_sha256": "6abe4a2320425bbcffb421d0b993573242a4fb877434f51d37b99ef2ffc5e11d"
+    },
+    "scripts/world/map_catalog.gd": {
+      "frozen_sha256": "1ab4fd17f6df4314abe23605e3d21101dd5f0dad7841a9b403fd544a5af0c225",
+      "release_sha256": "1ab4fd17f6df4314abe23605e3d21101dd5f0dad7841a9b403fd544a5af0c225"
+    },
+    "scripts/world/map_compiler.gd": {
+      "frozen_sha256": "c800ccaf90a9807cc753fc694c19c614e52fff8226fdcaa27f0f5fdc2fcb5851",
+      "release_sha256": "c800ccaf90a9807cc753fc694c19c614e52fff8226fdcaa27f0f5fdc2fcb5851"
+    },
+    "scripts/world/map_defense_rules.gd": {
+      "frozen_sha256": "add71a7859890a0ae1b4060acc3559156a9361a35f5f96fdc66e9df2b42e287b",
+      "release_sha256": "add71a7859890a0ae1b4060acc3559156a9361a35f5f96fdc66e9df2b42e287b"
+    },
+    "scripts/world/map_geometry.gd": {
+      "frozen_sha256": "182959f178e95ae48fdc6b1866bc0a9f87281e5813d4dbb76160d002e3f2db4a",
+      "release_sha256": "182959f178e95ae48fdc6b1866bc0a9f87281e5813d4dbb76160d002e3f2db4a"
+    },
+    "scripts/world/map_run_state.gd": {
+      "frozen_sha256": "5766d751f7aacf6d1cc7686d40f90dced0244ad554ee9a2db9d78f3d52337b66",
+      "release_sha256": "5766d751f7aacf6d1cc7686d40f90dced0244ad554ee9a2db9d78f3d52337b66"
+    },
+    "scripts/world/normal_journey_state.gd": {
+      "frozen_sha256": "d4be554dffbf912fc0aa144b9817cabe9bc412327b11258be375f45b8d3e61b9",
+      "release_sha256": "d4be554dffbf912fc0aa144b9817cabe9bc412327b11258be375f45b8d3e61b9"
+    },
+    "scripts/world/normal_map_catalog.gd": {
+      "frozen_sha256": "7916feb807b79cb9b578642f56b5016d77b96c0d4a34b2d1c760741339349ca1",
+      "release_sha256": "7916feb807b79cb9b578642f56b5016d77b96c0d4a34b2d1c760741339349ca1"
+    },
+    "scripts/world/sunwell_roster_rules.gd": {
+      "frozen_sha256": "8cc8b064b938e41b0ea61b786a60afedaa5640846d061897864f56433abef3eb",
+      "release_sha256": "8cc8b064b938e41b0ea61b786a60afedaa5640846d061897864f56433abef3eb"
+    },
+    "project.godot": {
+      "frozen_sha256": "dfbbf06dfe87a8216d37ca53ca96a9e8d70f7910d3951fa6bbb09688df053493",
+      "release_sha256": "dfbbf06dfe87a8216d37ca53ca96a9e8d70f7910d3951fa6bbb09688df053493"
+    }
+  }
+}

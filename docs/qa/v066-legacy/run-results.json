@@ -1,0 +1,32 @@
+[
+  {
+    "label": "before",
+    "command": [
+      "/usr/local/bin/godot",
+      "--headless",
+      "--path",
+      "/workspace/scratch/a51485f153de/v065-final-source-snapshot",
+      "--script",
+      "/workspace/scratch/a51485f153de/v066-ambush-support/docs/qa/v066-legacy/harness.gd"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 3.1668678499991074,
+    "harness_sha256": "343b28dee2abb11a65ff93ba2d25db49547a1988a8bc6c6bd3a3df6acd866677",
+    "script_error": false
+  },
+  {
+    "label": "after",
+    "command": [
+      "/usr/local/bin/godot",
+      "--headless",
+      "--path",
+      "/workspace/scratch/a51485f153de/v066-ambush-support",
+      "--script",
+      "/workspace/scratch/a51485f153de/v066-ambush-support/docs/qa/v066-legacy/harness.gd"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 3.0688790069980314,
+    "harness_sha256": "343b28dee2abb11a65ff93ba2d25db49547a1988a8bc6c6bd3a3df6acd866677",
+    "script_error": false
+  }
+]

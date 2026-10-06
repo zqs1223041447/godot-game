@@ -127,6 +127,7 @@ static func collect() -> Dictionary:
 	result["defense_rating_affixes"] = defense_rating_affix_examples()
 	result["iron_reflexes"] = iron_reflexes_examples()
 	result["zealots_oath"] = zealots_oath_examples()
+	result["ambush"] = ambush_examples()
 	result["resolute_technique"] = resolute_technique_examples()
 	result["forgeblade"] = forgeblade_examples()
 	result["melee_basic"] = melee_basic_examples(result.forgeblade)
@@ -219,7 +220,11 @@ static func collect() -> Dictionary:
 		skill["examples"] = {}
 		for config: String in builds:
 			var build: RefCounted = builds[config]
-			var combinations: Array = support_combinations(skill.compatible_supports)
+			# Preserve the historical zero/two-slot reference rows. The new
+			# delivery mode has a small explicit five-slot-compatible chapter.
+			var historical_supports: Array = skill.compatible_supports.duplicate()
+			historical_supports.erase("ambush")
+			var combinations: Array = support_combinations(historical_supports)
 			skill.examples[config] = []
 			for combination: Array in combinations:
 				if not Supports.compatibility_reason(id, combination).is_empty():
@@ -1102,8 +1107,67 @@ static func support_program_examples() -> Dictionary:
 	return result
 
 static func support_cast_brief(cast: Dictionary) -> Dictionary:
-	return {"mana": cast.mana, "cooldown": cast.cooldown, "initial_count": cast.initial_count,
+	var result: Dictionary = {"mana": cast.mana, "cooldown": cast.cooldown, "initial_count": cast.initial_count,
 		"recipe": cast.recipe.duplicate(true), "summary": Preview.summary(cast), "details": Preview.details(cast)}
+	if cast.has("trap_profile"): result["trap_profile"] = cast.trap_profile.duplicate(true)
+	return result
+
+
+static func ambush_examples() -> Dictionary:
+	var model := Canonical.new()
+	var snapshot: Dictionary = model.get_combat_snapshot()
+	var examples: Dictionary = {}
+	var selections: Dictionary = {
+		"nova": {"base": [], "shock": ["shock"], "wide": ["breadth"],
+			"concentrated": ["concentrate"], "combined_area": ["breadth", "concentrate"]},
+		"meteor": {"base": [], "ignite": ["ignite"], "ember": ["ember_proliferation"],
+			"combined_area": ["breadth", "concentrate"]},
+	}
+	for skill_id: String in selections:
+		var rows: Dictionary = {}
+		for mode: String in selections[skill_id]:
+			var other_supports: Array = selections[skill_id][mode].duplicate()
+			var linked: Array = other_supports.duplicate()
+			linked.append("ambush")
+			var before: Dictionary = Compiler.compile_group(skill_id, snapshot, other_supports)
+			var after: Dictionary = Compiler.compile_group(skill_id, snapshot, linked)
+			assert(before.ok and after.ok and after.has("trap_profile"))
+			assert(Compiler.Ambush.profile_error(after.trap_profile).is_empty())
+			assert(before.recipe == after.recipe and before.cooldown == after.cooldown)
+			assert(not after.packets.direct.tags.has("trap"))
+			rows[mode] = {"before": _ambush_cast_brief(before), "after": _ambush_cast_brief(after)}
+		examples[skill_id] = rows
+	var quote: Dictionary = Canonical.GemTrade.quote("buy", "support:ambush")
+	var test_offer: Dictionary = Town.offer("support:ambush")
+	assert(quote.ok and test_offer.available)
+	return {"minimum_save_version": Compiler.Ambush.SAVE_VERSION, "source_policy": SourceTree.CURRENT_SAVE_VERSION,
+		"equipment_vocabulary": Equipment.CURRENT_VOCABULARY, "support_id": "ambush",
+		"skills": Compiler.Ambush.SKILLS, "policy": examples.nova.base.after.trap_profile,
+		"icon_source": GemCatalogData.definition("support:ambush").icon, "icon_file": "originals/ambush.png",
+		"example_stats": model.get_stats(), "examples": examples, "merchant_quote": quote, "test_offer": test_offer,
+		"normal_reward_pool_includes_support": Canonical.Journey.GEM_DEFINITIONS.has("support:ambush"),
+		"normal_reward_definition_count": Canonical.Journey.GEM_DEFINITIONS.size(),
+		"example_scope": "同一新建角色的真实战斗快照，只替换表列辅助并调用生产Compiler.compile_group；非暴击、未计目标防御的单次命中与原异常配置，不是DPS或实际装配存档",
+		"placement": "按下技能只在脚下固定位置放置，不立即造成命中；所有技能组共享名额，布防完成后由当前活敌、出生门禁、目标体型与真实视线共同判定触发",
+		"payment": "位置、配置、共享容量、魔力和冷却都通过才放置；成功扣费并记录原冷却，满额失败不消耗魔力、冷却、随机抽样或施放ID；符印不占弹体容量",
+		"snapshot": "成功放置时冻结技能、伤害、范围和一次主暴击；之后换装、退款或移除辅助不改变已有符印，也不释放未触发名额；爆发时读取目标当前防御",
+		"geometry": "触发圆与爆发圆不同：范围辅助和源范围属性只改变原技能最终爆发半径，不放大触发距离；爆发保留原减速、击退与技能画面",
+		"timing": "固定模拟tick在该步投射物与燃烧事件结算后观察当前活敌，不承诺连续扫掠；符印按ID逐枚重读活目标，先前击杀不能供下一枚触发；精确到期先于触发，未触发过期直接消失，不爆炸",
+		"lifecycle": "暂停冻结；死亡、重开、地图完成或离开、切换存档取消全部符印；临时符印和计时器不写入存档",
+		"statuses": "新星可与感电同用，先结算本次命中再向存活目标施加，后续命中受益；陨星可接点燃或余烬扩散，两者仍互斥，沿原火分量与持续伤害准入；伏击不额外重复应用伤害倍率",
+		"damage_scope": "爆发仍为原技能direct法术、范围、命中，不添加trap伤害标签，不开放陷阱伤害或其他未实现的源树陷阱属性消费者",
+		"provenance": "只有新增符印向范围入口传递真实cast_id与phase=trap；普通直接Area历史cast_id=0记录本批保留，未一并修正",
+		"migration": "严格校验旧schema41并保留原字节备份后升级42；不赠新石，不改变源政策41、装备词汇39或既有26枚里程碑奖励身份表"}
+
+
+static func _ambush_cast_brief(cast: Dictionary) -> Dictionary:
+	var result: Dictionary = support_cast_brief(cast)
+	result["support_ids"] = cast.support_ids.duplicate()
+	result["packet"] = cast.packets.direct.duplicate(true)
+	result["resolved"] = Damage.resolve(cast.packets.direct, cast.snapshot.modifiers)
+	for field: String in ["burn_profile", "shock_profile", "critical"]:
+		if cast.has(field): result[field] = cast[field].duplicate(true)
+	return result
 
 static func source_spatial_examples()->Dictionary:
 	var examples:Array=[]
