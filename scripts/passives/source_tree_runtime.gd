@@ -27,7 +27,8 @@ const ZEALOTS_OATH_SAVE_VERSION:=41
 const PHYSICAL_FIRE_CONVERSION_SAVE_VERSION:=44
 const PRECISE_TECHNIQUE_SAVE_VERSION:=45
 const ELEMENTAL_CONVERSION_SAVE_VERSION:=48
-const CURRENT_SAVE_VERSION:=ELEMENTAL_CONVERSION_SAVE_VERSION
+const COLD_AILMENT_DURATION_SAVE_VERSION:=49
+const CURRENT_SAVE_VERSION:=COLD_AILMENT_DURATION_SAVE_VERSION
 static var _contexts: Dictionary = {}
 static var _line_cache: Dictionary = {}
 static var _node_effect_cache: Dictionary = {}
@@ -51,7 +52,8 @@ static func _execution_policy(version:int)->int:
 	if version<ZEALOTS_OATH_SAVE_VERSION:return IRON_REFLEXES_SAVE_VERSION
 	if version<PHYSICAL_FIRE_CONVERSION_SAVE_VERSION:return ZEALOTS_OATH_SAVE_VERSION
 	if version<PRECISE_TECHNIQUE_SAVE_VERSION:return PHYSICAL_FIRE_CONVERSION_SAVE_VERSION
-	return PRECISE_TECHNIQUE_SAVE_VERSION if version<ELEMENTAL_CONVERSION_SAVE_VERSION else ELEMENTAL_CONVERSION_SAVE_VERSION
+	if version<ELEMENTAL_CONVERSION_SAVE_VERSION:return PRECISE_TECHNIQUE_SAVE_VERSION
+	return ELEMENTAL_CONVERSION_SAVE_VERSION if version<COLD_AILMENT_DURATION_SAVE_VERSION else COLD_AILMENT_DURATION_SAVE_VERSION
 
 
 static func _context(class_id: int, budget: int) -> Dictionary:
@@ -140,7 +142,7 @@ static func lines_for(id: String, mastery_effect: int = 0) -> Array:
 static func line_effect(line: String, save_version:int=CURRENT_SAVE_VERSION) -> Dictionary:
 	var policy:int=_execution_policy(save_version)
 	var key:="%d:%s"%[policy,line]
-	if not _line_cache.has(key): _line_cache[key] = Patterns.parse_line(line,policy>=SPATIAL_SAVE_VERSION,policy>=RECHARGE_SAVE_VERSION,policy>=RESOURCE_SAVE_VERSION,policy>=FLASK_SAVE_VERSION,policy>=CRITICAL_SAVE_VERSION,policy>=LEECH_SAVE_VERSION,policy>=FIRE_DOT_SAVE_VERSION,policy>=FASTER_BURN_SAVE_VERSION,policy>=MANA_GUARD_SAVE_VERSION,policy>=ELEMENTAL_RESISTANCE_CAP_SAVE_VERSION,policy>=RESOLUTE_TECHNIQUE_SAVE_VERSION,policy>=IRON_REFLEXES_SAVE_VERSION,policy>=ZEALOTS_OATH_SAVE_VERSION,policy>=PHYSICAL_FIRE_CONVERSION_SAVE_VERSION,policy>=PRECISE_TECHNIQUE_SAVE_VERSION,policy>=ELEMENTAL_CONVERSION_SAVE_VERSION)
+	if not _line_cache.has(key): _line_cache[key] = Patterns.parse_line(line,policy>=SPATIAL_SAVE_VERSION,policy>=RECHARGE_SAVE_VERSION,policy>=RESOURCE_SAVE_VERSION,policy>=FLASK_SAVE_VERSION,policy>=CRITICAL_SAVE_VERSION,policy>=LEECH_SAVE_VERSION,policy>=FIRE_DOT_SAVE_VERSION,policy>=FASTER_BURN_SAVE_VERSION,policy>=MANA_GUARD_SAVE_VERSION,policy>=ELEMENTAL_RESISTANCE_CAP_SAVE_VERSION,policy>=RESOLUTE_TECHNIQUE_SAVE_VERSION,policy>=IRON_REFLEXES_SAVE_VERSION,policy>=ZEALOTS_OATH_SAVE_VERSION,policy>=PHYSICAL_FIRE_CONVERSION_SAVE_VERSION,policy>=PRECISE_TECHNIQUE_SAVE_VERSION,policy>=ELEMENTAL_CONVERSION_SAVE_VERSION,policy>=COLD_AILMENT_DURATION_SAVE_VERSION)
 	return _line_cache[key].duplicate(true)
 
 
@@ -187,6 +189,8 @@ static func apply_stats(stats: Dictionary, candidate: Dictionary) -> Dictionary:
 			elif grant.stat == "physical_to_fire_conversion": result.physical_to_fire_conversion = float(result.get("physical_to_fire_conversion", 0.0)) + float(grant.value)
 			elif grant.stat in ["physical_to_cold_conversion", "physical_to_lightning_conversion", "cold_penetration", "lightning_penetration"] and effect.status == "full":
 				result[grant.stat] = float(result.get(grant.stat, 0.0)) + float(grant.value)
+			elif grant.stat == "cold_ailment_duration_increased":
+				if effect.status == "full" and id == "14209": result[grant.stat] = float(result.get(grant.stat, 0.0)) + float(grant.value)
 			elif result.has(grant.stat): result[grant.stat] += float(grant.value)
 	# Every slotted jewel was admitted by the same allocation validator. Sum raw
 	# flat/increased modifiers before final capacity/rate stages, never per item.

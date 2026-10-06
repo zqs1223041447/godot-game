@@ -209,6 +209,7 @@ static func _stats_for(candidate: Dictionary) -> Dictionary:
 	var stats: Dictionary = Legacy.BASE_STATS.duplicate(true)
 	stats.additional_skill_slots = 0.0
 	stats.damaging_ailments_faster = 0.0
+	stats.cold_ailment_duration_increased = 0.0
 	stats.damage_taken_from_mana_before_life = 0.0
 	stats.resolute_technique = 0.0
 	for stat: String in ["maximum_fire_resistance_add", "maximum_cold_resistance_add", "maximum_lightning_resistance_add"]:
@@ -589,7 +590,9 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	var loaded:=super.load_build(path)
 	if loaded and old_version>0 and old_version<Rules.VERSION:
 		migrated_from_legacy=true
-		if old_version == Rules.V47_VERSION:
+		if old_version == Rules.V48_VERSION:
+			migration_message="旧存档已原字节备份，冰霜异常状态持续时间提高20%的源天赋已开放，可延长冰霜脉冲的冰缓及霜锁冻结；原物品、天赋和旅程保持，不额外赠物或赠点。"
+		elif old_version == Rules.V47_VERSION:
 			migration_message="旧存档已原字节备份，冰霜与闪电精通的40%物理转换及其6%抗性穿透前置已开放；原物品、天赋和旅程保持，不额外赠物或赠点。"
 		elif old_version == Rules.V46_VERSION:
 			migration_message="旧存档已原字节备份，霜锁辅助已加入正式宝石商人；仅辅助冰霜脉冲，与寒意延长辅助互斥。原物品、天赋和旅程保持，不额外赠物或赠点。"

@@ -13,6 +13,7 @@ const Resolute = preload("res://scripts/combat/resolute_technique_rules.gd")
 const Precise = preload("res://scripts/combat/precise_technique_rules.gd")
 const Burn=preload("res://scripts/combat/burn_rules.gd")
 const FrostLock = preload("res://scripts/combat/frost_lock_rules.gd")
+const ColdDuration = preload("res://scripts/combat/cold_ailment_duration_rules.gd")
 const Shock = preload("res://scripts/combat/shock_rules.gd")
 const Ember=preload("res://scripts/combat/ember_proliferation_support_rules.gd")
 const Proliferation=preload("res://scripts/combat/ember_proliferation_rules.gd")
@@ -75,6 +76,8 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 	var compiled_snapshot: Dictionary = snapshot.duplicate(true)
 	if compiled_snapshot.has(Resolute.STAT) and not Resolute.active(compiled_snapshot):
 		compiled_snapshot.erase(Resolute.STAT)
+	if compiled_snapshot.has(ColdDuration.STAT) and float(compiled_snapshot[ColdDuration.STAT]) == 0.0:
+		compiled_snapshot.erase(ColdDuration.STAT)
 	var mana: float = float(skill.mana)
 	var has_extension: bool = false
 	# Compatibility validates every definition before this execution stage.
@@ -129,6 +132,12 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 	if skill_id in ["bolt", "frost", "shade_bolt"]:
 		recipe.speed *= float(factors.get("projectile_speed_multiplier", 1.0))
 		recipe.slow *= float(factors.get("slow_duration_multiplier", 1.0))
+		# The source grant lengthens existing frost chill after its support factor.
+		# Nova's generic area slow is not a cold ailment and never enters this path.
+		if skill_id == "frost" and compiled_snapshot.has(ColdDuration.STAT):
+			var cold_duration: Dictionary = ColdDuration.duration(recipe.slow, compiled_snapshot[ColdDuration.STAT])
+			if not cold_duration.ok: return _failure(cold_duration.reason)
+			recipe.slow = cold_duration.duration
 		if not _number(recipe.speed) or float(recipe.speed) <= 0.0 or float(recipe.speed) > 3000.0 or not _number(recipe.slow) or float(recipe.slow) < 0.0 or float(recipe.slow) > 15.0:
 			return _failure("编译后的速度或减速时长无效")
 	if skill_id == "chain":
@@ -203,7 +212,10 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 		result.burn_profile=profile
 	if canonical.has("frost_lock"):
 		compiled_snapshot.freeze_policy = FrostLock.PLAYER_POLICY.duplicate(true)
-		var profile: Dictionary = FrostLock.PLAYER_POLICY.duplicate(true)
+		if compiled_snapshot.has(ColdDuration.STAT):
+			compiled_snapshot.freeze_policy = FrostLock.derived_policy(compiled_snapshot[ColdDuration.STAT])
+			if compiled_snapshot.freeze_policy.is_empty(): return _failure("霜锁策略无效")
+		var profile: Dictionary = compiled_snapshot.freeze_policy.duplicate(true)
 		profile.enabled = true
 		result.freeze_profile = profile
 	if canonical.has("shock"):
@@ -411,7 +423,9 @@ static func _snapshot_error(snapshot: Dictionary) -> String:
 		return "独立爆炸配方无效"
 	var resolute_error: String = Resolute.snapshot_error(snapshot)
 	if not resolute_error.is_empty(): return resolute_error
-	return Precise.snapshot_error(snapshot)
+	var precise_error: String = Precise.snapshot_error(snapshot)
+	if not precise_error.is_empty(): return precise_error
+	return ColdDuration.snapshot_error(snapshot)
 
 
 static func _projectile_recipe_error(recipe: Variant) -> String:

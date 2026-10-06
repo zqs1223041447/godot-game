@@ -25,6 +25,7 @@ const ZealotsOathMigration = preload("res://scripts/save/zealots_oath_migration.
 const AmbushGemMigration = preload("res://scripts/save/ambush_gem_migration.gd")
 const PhysicalFireConversionMigration = preload("res://scripts/save/physical_fire_conversion_migration.gd")
 const PreciseTechniqueMigration = preload("res://scripts/save/precise_technique_migration.gd")
+const ColdAilmentDurationMigration = preload("res://scripts/save/cold_ailment_duration_migration.gd")
 const ElementalConversionMigration = preload("res://scripts/save/elemental_conversion_migration.gd")
 const FrostLockGemMigration = preload("res://scripts/save/frost_lock_gem_migration.gd")
 const GloveRingAffixMigration = preload("res://scripts/save/glove_ring_affix_migration.gd")
@@ -88,8 +89,9 @@ func _init() -> void:
 	var source_v45: Dictionary = PreciseTechniqueMigration.migrate_v44(source_v44, _talent_validator, _socket_ids)
 	var source_v46: Dictionary = GloveRingAffixMigration.migrate_v45(source_v45, _talent_validator, _socket_ids)
 	var source_v47: Dictionary = FrostLockGemMigration.migrate_v46(source_v46, _talent_validator, _socket_ids)
-	_current = ElementalConversionMigration.migrate_v47(source_v47, _talent_validator, _socket_ids)
-	assert(not _current.is_empty() and Rules.reason(_current).is_empty(), "The built-in canonical fixture must migrate to v48")
+	var source_v48: Dictionary = ElementalConversionMigration.migrate_v47(source_v47, _talent_validator, _socket_ids)
+	_current = ColdAilmentDurationMigration.migrate_v48(source_v48, _talent_validator, _socket_ids)
+	assert(not _current.is_empty() and Rules.reason(_current).is_empty(), "The built-in canonical fixture must migrate to v49")
 	_current.migration_ledger.from_version = 0
 
 
@@ -153,7 +155,9 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	var old_version := int(raw.version)
 	if old_version > Rules.VERSION: return _reject(path, "存档属于未来版本，已保护原文件")
 	var candidate: Dictionary = {}
-	if old_version == Rules.V47_VERSION:
+	if old_version == Rules.V48_VERSION:
+		candidate = Rules.decode_v48(raw)
+	elif old_version == Rules.V47_VERSION:
 		candidate = Rules.decode_v47(raw)
 	elif old_version == Rules.V46_VERSION:
 		candidate = Rules.decode_v46(raw)
@@ -314,8 +318,10 @@ func load_build(path: String = "user://build_save.json") -> bool:
 		candidate = GloveRingAffixMigration.migrate_v45(candidate, _talent_validator, _socket_ids)
 	if old_version < Rules.V47_VERSION:
 		candidate = FrostLockGemMigration.migrate_v46(candidate, _talent_validator, _socket_ids)
-	if old_version < Rules.VERSION:
+	if old_version < Rules.V48_VERSION:
 		candidate = ElementalConversionMigration.migrate_v47(candidate, _talent_validator, _socket_ids)
+	if old_version < Rules.VERSION:
+		candidate = ColdAilmentDurationMigration.migrate_v48(candidate, _talent_validator, _socket_ids)
 	var reason: String = Rules.reason(candidate, _talent_validator, _socket_ids)
 	if not reason.is_empty(): return _reject(path, reason)
 	var loaded_revision: int = int(candidate.revision)

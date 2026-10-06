@@ -2,6 +2,7 @@ class_name FrostLockRules
 extends RefCounted
 ## Frozen player frost-lock policy. Eligibility reads settled cold shield/health
 ## loss; the caller owns settlement, spawn protection, and current actor liveness.
+const ColdDuration = preload("res://scripts/combat/cold_ailment_duration_rules.gd")
 const PLAYER_POLICY: Dictionary = {
 	"duration_by_rarity": {"normal": 0.60, "magic": 0.60, "rare": 0.35, "boss": 0.20},
 	"immunity_seconds": 1.50, "hit_multiplier": 0.75, "mana_multiplier": 1.20,
@@ -12,12 +13,34 @@ const POLICY_KEYS: Array[String] = [
 const RARITY_KEYS: Array[String] = ["normal", "magic", "rare", "boss"]
 
 
+static func derived_policy(increased: Variant) -> Dictionary:
+	if not ColdDuration.snapshot_error({ColdDuration.STAT: increased}).is_empty():
+		return {}
+	var result: Dictionary = PLAYER_POLICY.duplicate(true)
+	if float(increased) == 0.0:
+		return result
+	result[ColdDuration.STAT] = float(increased)
+	for rarity: String in RARITY_KEYS:
+		result.duration_by_rarity[rarity] = float(PLAYER_POLICY.duration_by_rarity[rarity]) * (1.0 + float(increased))
+	return result
+
+
 static func policy_error(policy: Variant) -> String:
-	if not policy is Dictionary or policy.size() != POLICY_KEYS.size():
+	var derived: bool = policy is Dictionary and policy.size() == POLICY_KEYS.size() + 1 \
+		and policy.has(ColdDuration.STAT)
+	if not policy is Dictionary or (policy.size() != POLICY_KEYS.size() and not derived):
 		return "Frost-lock policy must have the exact frozen player shape"
 	for key: Variant in policy:
-		if typeof(key) != TYPE_STRING or key not in POLICY_KEYS:
+		if typeof(key) != TYPE_STRING or (key not in POLICY_KEYS and not (derived and key == ColdDuration.STAT)):
 			return "Unknown or non-String frost-lock policy field"
+	var expected: Dictionary = PLAYER_POLICY
+	if derived:
+		var reason: String = ColdDuration.snapshot_error(policy)
+		if not reason.is_empty():
+			return reason
+		if float(policy[ColdDuration.STAT]) == 0.0:
+			return "Zero-increase frost-lock policy must keep the exact frozen player shape"
+		expected = derived_policy(policy[ColdDuration.STAT])
 	var durations: Variant = policy.get("duration_by_rarity")
 	if not durations is Dictionary or durations.size() != RARITY_KEYS.size():
 		return "Frost-lock durations must have the exact frozen rarity shape"
@@ -26,7 +49,7 @@ static func policy_error(policy: Variant) -> String:
 			return "Unknown or non-String frost-lock rarity"
 		if not positive_number(durations[rarity]):
 			return "Frost-lock durations must be finite positive numbers"
-		if float(durations[rarity]) != float(PLAYER_POLICY.duration_by_rarity[rarity]):
+		if float(durations[rarity]) != float(expected.duration_by_rarity[rarity]):
 			return "Frost-lock durations must match the frozen player policy"
 	for key: String in ["immunity_seconds", "hit_multiplier", "mana_multiplier"]:
 		if not positive_number(policy.get(key)):

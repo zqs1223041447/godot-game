@@ -146,6 +146,9 @@ const ELEMENTAL_CONVERSION_ENTRIES := {
 	"Damage Penetrates 6% Lightning Resistance": {"stat":"lightning_penetration","value":0.06,"mode":"flat"},
 }
 
+# Schema49 only: the complete original node14209 entry. No percentage family.
+const COLD_AILMENT_DURATION_ENTRY := "20% increased Duration of Cold Ailments"
+
 const ZEALOTS_OATH_ENTRY := "Life Regeneration is applied to Energy Shield instead"
 
 const NEGATIVE_PATTERN: String = "^-([0-9]+(?:\\.[0-9]+)?)(?: to maximum (?:Life|Mana|Energy Shield)|% increased (?:Damage|Projectile Damage|Spell Damage|Fire Damage|Cold Damage|Lightning Damage|Elemental Damage|Area Damage|Attack Speed|Movement Speed|Mana Regeneration Rate|maximum Life|maximum Mana|maximum Energy Shield))$"
@@ -161,7 +164,7 @@ static func _expression(pattern: String) -> RegEx:
 	return _regex_cache[pattern]
 
 
-static func parse_line(raw_line: Variant, allow_spatial:bool=true,allow_recharge:bool=true,allow_resource:bool=true,allow_flask:bool=true,allow_critical:bool=true,allow_leech:bool=true,allow_fire_dot:bool=true,allow_faster_burn:bool=true,allow_mana_guard:bool=true,allow_elemental_resistance_cap:bool=true,allow_resolute:bool=true,allow_iron_reflexes:bool=true,allow_zealots_oath:bool=true,allow_physical_fire_conversion:bool=true,allow_precise_technique:bool=true,allow_elemental_conversion:bool=true) -> Dictionary:
+static func parse_line(raw_line: Variant, allow_spatial:bool=true,allow_recharge:bool=true,allow_resource:bool=true,allow_flask:bool=true,allow_critical:bool=true,allow_leech:bool=true,allow_fire_dot:bool=true,allow_faster_burn:bool=true,allow_mana_guard:bool=true,allow_elemental_resistance_cap:bool=true,allow_resolute:bool=true,allow_iron_reflexes:bool=true,allow_zealots_oath:bool=true,allow_physical_fire_conversion:bool=true,allow_precise_technique:bool=true,allow_elemental_conversion:bool=true,allow_cold_ailment_duration:bool=true) -> Dictionary:
 	if not raw_line is String:
 		return _unsupported("输入必须是单行英文字符串")
 	var line: String = raw_line
@@ -178,6 +181,8 @@ static func parse_line(raw_line: Variant, allow_spatial:bool=true,allow_recharge
 		return {"supported":true,"reason":"","grants":[{"stat":"precise_technique","value":1.0,"mode":"flat"}]}
 	if allow_spatial and allow_recharge and allow_resource and allow_flask and allow_critical and allow_leech and allow_fire_dot and allow_faster_burn and allow_mana_guard and allow_elemental_resistance_cap and allow_resolute and allow_iron_reflexes and allow_zealots_oath and allow_physical_fire_conversion and allow_precise_technique and allow_elemental_conversion and ELEMENTAL_CONVERSION_ENTRIES.has(line):
 		return {"supported":true,"reason":"","grants":[ELEMENTAL_CONVERSION_ENTRIES[line].duplicate(true)]}
+	if allow_spatial and allow_recharge and allow_resource and allow_flask and allow_critical and allow_leech and allow_fire_dot and allow_faster_burn and allow_mana_guard and allow_elemental_resistance_cap and allow_resolute and allow_iron_reflexes and allow_zealots_oath and allow_physical_fire_conversion and allow_precise_technique and allow_elemental_conversion and allow_cold_ailment_duration and line == COLD_AILMENT_DURATION_ENTRY:
+		return {"supported":true,"reason":"","grants":[{"stat":"cold_ailment_duration_increased","value":0.20,"mode":"increased"}]}
 	if line.contains("\n") or line.contains("\r"):
 		return _unsupported("多行文本不支持")
 	if line.strip_edges().is_empty():

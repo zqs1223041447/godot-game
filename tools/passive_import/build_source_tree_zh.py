@@ -1032,6 +1032,7 @@ MULTILINE_OVERRIDES = {
 # Reviewed exact single-row exceptions for common source grammar that does not
 # map cleanly through word-by-word translation (negation, state, and timing).
 SINGLE_LINE_OVERRIDES = {
+    "20% increased Duration of Cold Ailments": "冰霜异常状态持续时间提高20%",
     "5% increased Mana Cost of Skills": "技能的魔力消耗提高5%",
     "10% increased Mana Cost of Skills": "技能的魔力消耗提高10%",
     "30% increased Mana Regeneration Rate": "魔力再生速率提高30%",

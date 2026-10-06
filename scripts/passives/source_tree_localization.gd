@@ -12,6 +12,16 @@ const TERM_NOTE := "词缀说明：提高/降低为同类加算；额外提高/�
 # A parser match is not sufficient by itself. These closed-world groups name
 # the actual runtime paths that consume each parsed stat after SourceTree.apply_stats.
 const STAT_CONSUMER_GROUPS := {
+	"cold_ailment_duration": {
+		"evidence": "source_tree_runtime.gd::apply_stats -> combat_data.gd::snapshot -> cold_ailment_duration_rules.gd::from_stats/duration -> skill_compiler.gd frost recipe.slow and FrostLock.derived_policy -> existing main.gd slow/freeze consumers",
+		"code_checks": [
+			{"path": "scripts/passives/source_tree_runtime.gd", "contains": "elif grant.stat == \"cold_ailment_duration_increased\":"},
+			{"path": "scripts/combat/combat_data.gd", "contains": "value.merge(ColdDuration.from_stats(stats))"},
+			{"path": "scripts/combat/skill_compiler.gd", "contains": "ColdDuration.duration(recipe.slow, compiled_snapshot[ColdDuration.STAT])"},
+			{"path": "scripts/combat/skill_compiler.gd", "contains": "FrostLock.derived_policy"},
+		],
+		"stats": ["cold_ailment_duration_increased"]
+	},
 	"precise_technique": {
 		"evidence": "source_tree_runtime.gd::apply_stats -> combat_data.gd::snapshot -> precise_technique_rules.gd::from_stats/attack_modifier -> damage_resolver.gd; critical_strike_rules.gd prevents all critical strikes",
 		"code_checks": [
