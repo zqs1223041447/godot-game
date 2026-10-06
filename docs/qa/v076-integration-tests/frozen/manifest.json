@@ -1,0 +1,42 @@
+{
+  "baseline_commit": "76c9cab",
+  "isolation": "Only class_name removal and direct dependencies rewritten to frozen peers",
+  "files": [
+    {
+      "source": "scripts/mechanics/mechanic_registry.gd",
+      "fixture": "docs/qa/v076-integration-tests/frozen/registry.gd",
+      "original_sha256": "506d248d7edf0888c320c1e6f16d81da1bb4f942122d10427d755a667d8b0cc1",
+      "fixture_sha256": "617de9efe56fa4188968f78b9273876d381f46be514d70be89862b355a3db7bc"
+    },
+    {
+      "source": "scripts/mechanics/source_monster_grants.gd",
+      "fixture": "docs/qa/v076-integration-tests/frozen/source.gd",
+      "original_sha256": "edc5f27ffeac782484e763c1ea87ce0d0935238029fe76f7883b79f5d36c04a5",
+      "fixture_sha256": "c21d6652e279e1bb72820738cdf962312a761c7efd54fa3994255de6fe232b08"
+    },
+    {
+      "source": "scripts/monsters/monster_catalog.gd",
+      "fixture": "docs/qa/v076-integration-tests/frozen/catalog.gd",
+      "original_sha256": "c765a882cfa8af59e123e52f748e403af86bf501385c3ad97239f97727ec7575",
+      "fixture_sha256": "2ad9ab0cb9a3b73116e4e6d0156ba802a17d99936067d4106c9fb423203e4952"
+    },
+    {
+      "source": "scripts/world/map_camp_state.gd",
+      "fixture": "docs/qa/v076-integration-tests/frozen/camp_state.gd",
+      "original_sha256": "c3608b9832c18d54920edda917c74c89001651d7730358e159c8bcd83109a32c",
+      "fixture_sha256": "2e264509c6196878cbf2d6de78af0308bf1eab3e3f23279616dd4896489fd368"
+    },
+    {
+      "source": "scripts/monsters/monster_runtime.gd",
+      "fixture": "docs/qa/v076-integration-tests/frozen/monster_runtime.gd",
+      "original_sha256": "6280cbf52cdf373af0fe8d564b77b2ad1f1e934b207d37988f69bbdd404751a3",
+      "fixture_sha256": "76d6d8b932901d274d84f87daf07c4829d4df16b30ce11b7cb69c03a703524da"
+    },
+    {
+      "source": "scripts/encounters/encounter_compiler.gd",
+      "fixture": "docs/qa/v076-integration-tests/frozen/encounter_compiler.gd",
+      "original_sha256": "57ac247e6bd9dbeeb07b909fd1041b5bff08659ca63d55feedb4d10a2279f5b6",
+      "fixture_sha256": "18506fc2b822728734d4e844a04877f473f529e5f5f3ae7518f726f5d9bacbb2"
+    }
+  ]
+}

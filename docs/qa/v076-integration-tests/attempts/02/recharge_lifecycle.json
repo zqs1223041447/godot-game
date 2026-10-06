@@ -1,0 +1,35 @@
+{
+	"baseline_commit": "76c9cab",
+	"checks": 34,
+	"failures": 0,
+	"observations": {
+		"actual_recharge": {
+			"capacity_only": 3.3696,
+			"crossing_residual": 0.25,
+			"delay": 4.0,
+			"freeze_uses_global_delta": true,
+			"paired": 5.2416,
+			"rate": 0.46475,
+			"recovery_only": 1.6224
+		}
+	},
+	"rolls_per_seed_wave": 12,
+	"sections": {
+		"recharge_lifecycle": {
+			"checks": 34,
+			"failures": 0
+		}
+	},
+	"seeds": [
+		7,
+		73,
+		76076
+	],
+	"source_execution_version": 45,
+	"test_scope": "bounded source shield integration; no broad performance or full-history run",
+	"waves": [
+		1,
+		6,
+		15
+	]
+}

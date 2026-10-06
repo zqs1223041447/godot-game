@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/a51485f153de/v076-source-shield-recharge/docs/qa/v076-reference/check-reference.py", line 133, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/scratch/a51485f153de/v076-source-shield-recharge/docs/qa/v076-reference/check-reference.py", line 128, in main
+    for phrase in ['4% increased maximum Energy Shield','10% increased Energy Shield Recharge Rate','first_entry_only']:assert phrase in text,(card,phrase)
+                                                                                                                               ^^^^^^^^^^^^^^
+AssertionError: ('rules-source_monster_shield_recharge', 'first_entry_only')

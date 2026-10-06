@@ -1,0 +1,245 @@
+{
+  "attempts": [
+    {
+      "attempt": 1,
+      "checks": 259,
+      "elapsed_seconds": 1.095,
+      "errors": [],
+      "executed_sections": [
+        "registry"
+      ],
+      "passed": true,
+      "selected_sections": [
+        "registry"
+      ]
+    },
+    {
+      "attempt": 2,
+      "checks": 1768,
+      "elapsed_seconds": 10.701,
+      "errors": [
+        "ERROR: SOURCE_SHIELD: Main current camp roster exercises source shield identities",
+        "ERROR: SOURCE_SHIELD: Main rejects current source preflight for each atomic member",
+        "ERROR: SOURCE_SHIELD: Main rejects current source preflight for each atomic member",
+        "ERROR: SOURCE_SHIELD: Main rejects current source preflight for each atomic member"
+      ],
+      "executed_sections": [
+        "sampling",
+        "camps",
+        "factory_maps",
+        "snapshot_transactions",
+        "cache_atomicity",
+        "special_lineages",
+        "main_adoption",
+        "recharge_lifecycle"
+      ],
+      "passed": false,
+      "selected_sections": [
+        "sampling",
+        "camps",
+        "factory_maps",
+        "snapshot_transactions",
+        "cache_atomicity",
+        "special_lineages",
+        "main_adoption",
+        "recharge_lifecycle"
+      ]
+    },
+    {
+      "attempt": 3,
+      "checks": 25,
+      "elapsed_seconds": 2.686,
+      "errors": [],
+      "executed_sections": [
+        "main_adoption"
+      ],
+      "passed": true,
+      "selected_sections": [
+        "main_adoption"
+      ]
+    },
+    {
+      "attempt": 4,
+      "checks": 27,
+      "elapsed_seconds": 0.891,
+      "errors": [],
+      "executed_sections": [
+        "special_lineages"
+      ],
+      "passed": true,
+      "selected_sections": [
+        "special_lineages"
+      ]
+    }
+  ],
+  "baseline_commit": "76c9cab",
+  "complete": true,
+  "observations": {
+    "actual_main_seeds": {
+      "camp_rng_seed": 2,
+      "source_aegis_capacity": 8,
+      "source_aegis_recovery": 12
+    },
+    "actual_recharge": {
+      "capacity_only": 3.3696,
+      "crossing_residual": 0.25,
+      "delay": 4.0,
+      "freeze_uses_global_delta": true,
+      "paired": 5.2416,
+      "rate": 0.46475,
+      "recovery_only": 1.6224
+    },
+    "camp_source_entries": 5,
+    "sampled": {
+      "brood_host": 8,
+      "source_aegis_capacity": 6,
+      "source_aegis_recovery": 9,
+      "splitter": 16
+    },
+    "shield_arithmetic": [
+      {
+        "base": 3.12,
+        "ids": [
+          "source_aegis_capacity"
+        ],
+        "increase": 0.08,
+        "max": 3.3696,
+        "rate": 0.0
+      },
+      {
+        "base": 1.56,
+        "ids": [
+          "source_aegis_recovery"
+        ],
+        "increase": 0.04,
+        "max": 1.6224,
+        "rate": 0.46475
+      },
+      {
+        "base": 4.68,
+        "ids": [
+          "source_aegis_capacity",
+          "source_aegis_recovery"
+        ],
+        "increase": 0.12,
+        "max": 5.2416,
+        "rate": 0.46475
+      },
+      {
+        "base": 6.24,
+        "ids": [
+          "source_aegis_capacity",
+          "source_aegis_capacity"
+        ],
+        "increase": 0.16,
+        "max": 7.2384,
+        "rate": 0.0
+      }
+    ],
+    "snapshot_tamper_fixtures": 44
+  },
+  "passed": true,
+  "sections": {
+    "cache_atomicity": {
+      "attempt": 2,
+      "checks": 29,
+      "errors": [],
+      "exit_code": 0,
+      "failures": 0,
+      "production_snapshot_sha256": "a2c1a03640cfdbd0fb7c35eccf1455c515a284da25fceefd9df69a7795719fe6",
+      "production_unchanged": true,
+      "raw_log": "docs/qa/v076-integration-tests/attempts/02/cache_atomicity.log.txt",
+      "test_sha256": "9724bc087955dba40cfff014ebdaeab4f44203f7b43dac3ac499d5292e7ba725"
+    },
+    "camps": {
+      "attempt": 2,
+      "checks": 74,
+      "errors": [],
+      "exit_code": 0,
+      "failures": 0,
+      "production_snapshot_sha256": "a2c1a03640cfdbd0fb7c35eccf1455c515a284da25fceefd9df69a7795719fe6",
+      "production_unchanged": true,
+      "raw_log": "docs/qa/v076-integration-tests/attempts/02/camps.log.txt",
+      "test_sha256": "9724bc087955dba40cfff014ebdaeab4f44203f7b43dac3ac499d5292e7ba725"
+    },
+    "factory_maps": {
+      "attempt": 2,
+      "checks": 827,
+      "errors": [],
+      "exit_code": 0,
+      "failures": 0,
+      "production_snapshot_sha256": "a2c1a03640cfdbd0fb7c35eccf1455c515a284da25fceefd9df69a7795719fe6",
+      "production_unchanged": true,
+      "raw_log": "docs/qa/v076-integration-tests/attempts/02/factory_maps.log.txt",
+      "test_sha256": "9724bc087955dba40cfff014ebdaeab4f44203f7b43dac3ac499d5292e7ba725"
+    },
+    "main_adoption": {
+      "attempt": 3,
+      "checks": 25,
+      "errors": [],
+      "exit_code": 0,
+      "failures": 0,
+      "production_snapshot_sha256": "a2c1a03640cfdbd0fb7c35eccf1455c515a284da25fceefd9df69a7795719fe6",
+      "production_unchanged": true,
+      "raw_log": "docs/qa/v076-integration-tests/attempts/03/main_adoption.log.txt",
+      "test_sha256": "72567fa40d0155f836a9ff700c22c8a5da3dd6a3f46da9dc1cb2381d3d4732b1"
+    },
+    "recharge_lifecycle": {
+      "attempt": 2,
+      "checks": 34,
+      "errors": [],
+      "exit_code": 0,
+      "failures": 0,
+      "production_snapshot_sha256": "a2c1a03640cfdbd0fb7c35eccf1455c515a284da25fceefd9df69a7795719fe6",
+      "production_unchanged": true,
+      "raw_log": "docs/qa/v076-integration-tests/attempts/02/recharge_lifecycle.log.txt",
+      "test_sha256": "9724bc087955dba40cfff014ebdaeab4f44203f7b43dac3ac499d5292e7ba725"
+    },
+    "registry": {
+      "attempt": 1,
+      "checks": 259,
+      "errors": [],
+      "exit_code": 0,
+      "failures": 0,
+      "production_snapshot_sha256": "a2c1a03640cfdbd0fb7c35eccf1455c515a284da25fceefd9df69a7795719fe6",
+      "production_unchanged": true,
+      "raw_log": "docs/qa/v076-integration-tests/attempts/01/registry.log.txt",
+      "test_sha256": "9724bc087955dba40cfff014ebdaeab4f44203f7b43dac3ac499d5292e7ba725"
+    },
+    "sampling": {
+      "attempt": 2,
+      "checks": 658,
+      "errors": [],
+      "exit_code": 0,
+      "failures": 0,
+      "production_snapshot_sha256": "a2c1a03640cfdbd0fb7c35eccf1455c515a284da25fceefd9df69a7795719fe6",
+      "production_unchanged": true,
+      "raw_log": "docs/qa/v076-integration-tests/attempts/02/sampling.log.txt",
+      "test_sha256": "9724bc087955dba40cfff014ebdaeab4f44203f7b43dac3ac499d5292e7ba725"
+    },
+    "snapshot_transactions": {
+      "attempt": 2,
+      "checks": 98,
+      "errors": [],
+      "exit_code": 0,
+      "failures": 0,
+      "production_snapshot_sha256": "a2c1a03640cfdbd0fb7c35eccf1455c515a284da25fceefd9df69a7795719fe6",
+      "production_unchanged": true,
+      "raw_log": "docs/qa/v076-integration-tests/attempts/02/snapshot_transactions.log.txt",
+      "test_sha256": "9724bc087955dba40cfff014ebdaeab4f44203f7b43dac3ac499d5292e7ba725"
+    },
+    "special_lineages": {
+      "attempt": 4,
+      "checks": 27,
+      "errors": [],
+      "exit_code": 0,
+      "failures": 0,
+      "production_snapshot_sha256": "a2c1a03640cfdbd0fb7c35eccf1455c515a284da25fceefd9df69a7795719fe6",
+      "production_unchanged": true,
+      "raw_log": "docs/qa/v076-integration-tests/attempts/04/special_lineages.log.txt",
+      "test_sha256": "7d1d9eed1efb556369ae2bc092faa42afcd69e64231896779a8dfde2db42141a"
+    }
+  },
+  "unique_checks": 2031,
+  "unique_failures": 0
+}

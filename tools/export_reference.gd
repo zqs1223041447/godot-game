@@ -147,6 +147,7 @@ static func collect() -> Dictionary:
 	result["frost_lock"] = frost_lock_examples()
 	result["source_monster_movement"] = source_monster_movement_examples()
 	result["source_monster_damage_life"] = source_monster_damage_life_examples()
+	result["source_monster_shield_recharge"] = source_monster_shield_recharge_examples()
 	result["resolute_technique"] = resolute_technique_examples()
 	result["forgeblade"] = forgeblade_examples()
 	result["melee_basic"] = melee_basic_examples(result.forgeblade)
@@ -430,10 +431,13 @@ static func mechanism_reference(id: String) -> Dictionary:
 	# Capacity mode is separate from flat stats; 0.05 must display as 5%, never +0.05 life.
 	var descriptions: PackedStringArray = []
 	var flat_description: String = Passives.describe_stats(mechanism.stats)
+	if id == "source_aegis_recovery":
+		flat_description = "能量护盾回复率提高 %s%%" % str(float(mechanism.stats.shield_recharge_rate_increased) * 100.0)
 	if not flat_description.is_empty(): descriptions.append(flat_description)
 	for stat: String in mechanism.get("capacity_increased", {}):
-		assert(stat == "max_health")
-		descriptions.append("最大生命提高 %s%%" % str(float(mechanism.capacity_increased[stat]) * 100.0))
+		assert(stat in ["max_health", "max_shield"])
+		var label: String = "最大生命" if stat == "max_health" else "最大能量护盾"
+		descriptions.append("%s提高 %s%%" % [label, str(float(mechanism.capacity_increased[stat]) * 100.0)])
 	mechanism["description"] = "\n".join(descriptions)
 	return mechanism
 
@@ -444,12 +448,118 @@ static func source_monster_fragment() -> Dictionary:
 	var mechanisms: Dictionary = {}
 	for id: String in SourceMonster.IDS:
 		mechanisms[id] = mechanism_reference(id)
+	var updates: Dictionary = _source_monster_current_updates()
 	return {"game_version":ProjectSettings.get_setting("application/config/version"),
-		"mechanisms":mechanisms, "source_monster_damage_life":source_monster_damage_life_examples(),
-		"movement_updates":{"current_definition_count":Registry.get_ids().size(),
-			"stride_pool":Monsters.STRIDE_AFFIX_POOL.duplicate(), "current_pool":Monsters.CURRENT_AFFIX_POOL.duplicate(),
-			"legacy_roll_policy":Monsters.LEGACY_ROLL_POLICY, "stride_roll_policy":Monsters.STRIDE_ROLL_POLICY,
-			"current_roll_policy":Monsters.CURRENT_ROLL_POLICY}}
+		"mechanisms":mechanisms, "source_monster_shield_recharge":source_monster_shield_recharge_examples(),
+		"movement_updates":updates,
+		"damage_life_updates":updates.merged({"current_source_definition_count":SourceMonster.IDS.size(),
+			"cache":"按五个明确ID独立缓存来源身份、原始行与当前政策；复苏两行作为原子包；最多五项，出生快照冻结，每帧不重新解析",
+			"sampler":"ordinary_roll_source_damage_life冻结v2伤害/生命池；ordinary_roll_current为v3，仅把普通三物种最后两个辉壁槽替换为新ID；见源护盾与回复章节；无额外RNG、名额或奖励"})}
+
+
+static func _source_monster_current_updates() -> Dictionary:
+	return {"current_definition_count":Registry.get_ids().size(),
+		"stride_pool":Monsters.STRIDE_AFFIX_POOL.duplicate(),
+		"damage_life_pool":Monsters.DAMAGE_LIFE_AFFIX_POOL.duplicate(),
+		"current_pool":Monsters.CURRENT_AFFIX_POOL.duplicate(),
+		"legacy_roll_policy":Monsters.LEGACY_ROLL_POLICY,"stride_roll_policy":Monsters.STRIDE_ROLL_POLICY,
+		"damage_life_roll_policy":Monsters.DAMAGE_LIFE_ROLL_POLICY,"current_roll_policy":Monsters.CURRENT_ROLL_POLICY}
+
+
+static func source_monster_shield_recharge_examples() -> Dictionary:
+	var bindings: Dictionary = {}
+	for pair: Array in [["source_aegis_capacity","aegis_capacity"],["source_aegis_recovery","aegis_recovery"]]:
+		var id: String = pair[0]
+		var source: Dictionary = SourceMonster.resolve(id)
+		assert(source.ok)
+		var definition: Dictionary = source.definition
+		var entries: Array = definition.source_refs
+		var effects: Array[Dictionary] = []
+		var grants: Array = []
+		for entry: Dictionary in entries:
+			var effect: Dictionary = SourceTree.line_effect(entry.raw_line, SourceTree.CURRENT_SAVE_VERSION)
+			assert(effect.supported and effect.grants.size() == 1)
+			effects.append(effect)
+			grants.append_array(effect.grants)
+		assert(grants == definition.typed_grants)
+		var player: Dictionary = Registry.resolve(id,"player")
+		var monster: Dictionary = Registry.resolve(id,"monster")
+		var legacy: Dictionary = Registry.resolve(pair[1],"monster")
+		assert(player.ok and monster.ok and legacy.ok)
+		assert(player.stats == monster.stats and player.capacity_increased == monster.capacity_increased)
+		assert(not player.stats.has("max_shield") and not player.stats.has("shield_regen"))
+		assert(not monster.stats.has("max_shield") and not monster.stats.has("shield_regen"))
+		assert(not player.stats.has("shield_recharge_start_faster"))
+		bindings[id] = {"legacy_id":pair[1],"definition":definition,"source_entries":entries,
+			"source_effects":effects,"player_grant":player,"monster_grant":monster,
+			"legacy_grant":legacy,"actor_coefficient":monster.role_coefficient}
+	var shield_map: Dictionary = EncounterCompiler.compile(["enemy_shield_from_health_20"])
+	var strong_map: Dictionary = EncounterCompiler.compile(["enemy_max_health_120","enemy_shield_from_health_20"])
+	assert(shield_map.ok and strong_map.ok)
+	var variants: Dictionary = {"base":[],"legacy_capacity":["aegis_capacity"],
+		"legacy_recovery":["aegis_recovery"],"legacy_pair":["aegis_capacity","aegis_recovery"],
+		"current_capacity":["source_aegis_capacity"],"current_recovery":["source_aegis_recovery"],
+		"current_pair":["source_aegis_capacity","source_aegis_recovery"]}
+	var budget: Array[Dictionary] = []
+	for sample: Array in [["crawler",2],["brute",10]]:
+		var template_id: String = sample[0]
+		var wave: int = sample[1]
+		var examples: Dictionary = {}
+		for key: String in variants:
+			var plain: Dictionary = Monsters.make_enemy(1,template_id,wave,Vector2.ZERO,"demo","rare",variants[key])
+			assert(not plain.is_empty())
+			var profile: Dictionary = _monster_recharge_reference(plain)
+			var mapped: Dictionary = EncounterCompiler.apply_to_enemy(plain,shield_map.profile)
+			var strong: Dictionary = EncounterCompiler.apply_to_enemy(plain,strong_map.profile)
+			assert(mapped.ok and strong.ok)
+			var multiplier: float = float(plain.get("source_shield_profile",{}).get("capacity_multiplier",1.0))
+			var map_base: float = float(plain.max_health) * 0.20
+			var added: float = map_base * multiplier
+			assert(is_equal_approx(mapped.enemy.max_shield,plain.max_shield + added))
+			assert(is_equal_approx(strong.enemy.max_shield,mapped.enemy.max_shield))
+			assert(is_equal_approx(strong.enemy.max_health,plain.max_health * 1.20))
+			var damaged: Dictionary = plain.duplicate(true)
+			damaged.shield = maxf(0.0,float(plain.shield) - 1.0)
+			var damaged_map: Dictionary = EncounterCompiler.apply_to_enemy(damaged,shield_map.profile)
+			assert(damaged_map.ok)
+			assert(is_equal_approx(damaged.max_shield - damaged.shield,damaged_map.enemy.max_shield - damaged_map.enemy.shield))
+			examples[key] = {"plain":plain,"recharge_profile":profile,"map":mapped.enemy,
+				"strong_map":strong.enemy,"map_base_shield":map_base,"map_shield_bonus":added,
+				"damaged_plain":damaged,"damaged_map":damaged_map.enemy,
+				"missing_shield_preserved":damaged.max_shield - damaged.shield}
+		assert(is_equal_approx(examples.current_capacity.plain.max_shield,3.3696))
+		assert(is_equal_approx(examples.current_capacity.recharge_profile.rate,0.0))
+		assert(is_equal_approx(examples.current_recovery.plain.max_shield,1.6224))
+		assert(is_equal_approx(examples.current_recovery.recharge_profile.rate,0.46475))
+		assert(is_equal_approx(examples.current_pair.plain.max_shield,5.2416))
+		assert(is_equal_approx(examples.current_pair.recharge_profile.rate,0.46475))
+		budget.append({"template_id":template_id,"wave":wave,"rarity":"rare","examples":examples})
+	var result: Dictionary = _source_monster_current_updates()
+	result.merge({"bindings":bindings,"budget":budget,"legacy_pool":Monsters.AFFIX_POOL.duplicate(),
+		"legacy_definition_count":Balance.definitions().size(),"current_source_definition_count":SourceMonster.IDS.size(),
+		"save_version":Canonical.Rules.VERSION,"equipment_vocabulary":Equipment.CURRENT_VOCABULARY,
+		"source_policy":SourceTree.CURRENT_SAVE_VERSION,"budget_policy":Monsters.ShieldSupply.POLICY,
+		"supplies":Monsters.ShieldSupply.SUPPLIES.duplicate(true),"shield_map_profile":shield_map.profile,
+		"strong_shield_map_profile":strong_map.profile,
+		"capacity_formula":"(legacy_flat_shield + sum_authored_monster_shield_supply) * (1 + sum_source_max_shield_increased)",
+		"recharge_formula":"(legacy_flat_recharge_rate + sum_authored_monster_recharge_supply) * (1 + sum_source_recharge_rate_increased)",
+		"map_formula":"existing_canonical_shield + (0.20 * canonical_max_health_before_strong) * frozen_capacity_multiplier",
+		"boundary":"只绑定58218:0与原子组合21929:1、6949:1；不授予同节点其他行、整节点或更快开始回复；源授予没有固定护盾或固定回复，玩家不获怪物供给",
+		"snapshot":"source_shield_profile冻结budget_policy、supplies、基础护盾/回复与capacity_multiplier；地图仅读取出生快照，不重解析源树，不对旧护盾S再次乘提高",
+		"map_order":"M=0.20×强健前canonical最大生命；有新身份时当前与最大护盾各加M×冻结倍率，无新身份仍各加原M；缺失护盾量保持；这是新身份的有意预算变化，不宣称旧新地图等价",
+		"cache":"最多五个明确身份缓存；复苏两条来源与两种类型化授予原子验证、原子失效；source_entry仅第一条展示别名，以source_entries和source_refs读取完整双来源",
+		"budget_scope":"第2波金色巡游体与第10波金色重壳体；真实MonsterCatalog与EncounterCompiler生成；独立原创怪物预算，不是PoE固定效果或DPS，也不声称全局平衡",
+		"sampler":"ordinary_roll_current采用source_shield_v3，仅替换普通三物种五槽池最后两槽；legacy、stride、damage_life三代入口冻结；历史别名、显式特殊模板、首领、后代、RNG消耗、名额与奖励资格不变"})
+	return result
+
+
+static func _monster_recharge_reference(enemy: Dictionary) -> Dictionary:
+	var inputs: Dictionary = enemy.mechanism_stats.duplicate(true)
+	inputs.shield_regen = enemy.shield_regen
+	var profile: Dictionary = Defense.recharge_profile(inputs,"monster")
+	assert(profile.ok and is_equal_approx(profile.delay,4.0))
+	assert(is_equal_approx(float(enemy.get("shield_recharge_rate",enemy.shield_regen)),profile.rate))
+	return profile
 
 
 static func source_monster_damage_life_examples() -> Dictionary:
@@ -510,6 +620,7 @@ static func source_monster_damage_life_examples() -> Dictionary:
 		"mixed_fixed_before_increased":{"base":plain, "damage":mixed_damage, "life":mixed_life},
 		"legacy_player_only_rejection":unsupported,
 		"legacy_pool":Monsters.AFFIX_POOL.duplicate(), "stride_pool":Monsters.STRIDE_AFFIX_POOL.duplicate(),
+		"damage_life_pool":Monsters.DAMAGE_LIFE_AFFIX_POOL.duplicate(), "damage_life_roll_policy":Monsters.DAMAGE_LIFE_ROLL_POLICY,
 		"current_pool":Monsters.CURRENT_AFFIX_POOL.duplicate(), "legacy_roll_policy":Monsters.LEGACY_ROLL_POLICY,
 		"stride_roll_policy":Monsters.STRIDE_ROLL_POLICY, "current_roll_policy":Monsters.CURRENT_ROLL_POLICY,
 		"legacy_definition_count":Balance.definitions().size(), "current_source_definition_count":SourceMonster.IDS.size(),
@@ -519,9 +630,9 @@ static func source_monster_damage_life_examples() -> Dictionary:
 		"life_formula":"(species_health * (1 + (wave - 1) * 0.16) * rarity_health + flat_max_health) * (1 + sum_max_health_increased)",
 		"budget_scope":"独立单词缀工厂对照；第1波蓝色，第6/10/15波金色；每格由实际MonsterCatalog生成，地图倍率前；不是自然分布或DPS评分",
 		"boundary":"只绑定13219:0的伤害提高和52282:0的最大生命提高；不授予整个节点、升华资格、Body Transfiguration或其他源效果",
-		"cache":"按三个明确ID独立缓存来源身份、原始行与当前政策；最多三项，出生快照冻结，每帧不重新解析",
+		"cache":"按五个明确ID独立缓存来源身份、原始行与当前政策；复苏两行作为原子包；最多五项，出生快照冻结，每帧不重新解析",
 		"map_order":"先固定基底，再同类increased加算并乘一次，之后应用现有地图倍率；20% canonical生命护盾仍按既有依赖取最终canonical生命",
-		"sampler":"ordinary_roll保留legacy_flat_v1；ordinary_roll_source_stride保留source_stride_v1；ordinary_roll_current只将普通三物种的原烬火/苍林位置映射到新ID；裂殖、孵化、首领、死亡后代保持历史定义；无额外RNG、名额或奖励"}
+		"sampler":"ordinary_roll_source_damage_life冻结v2伤害/生命池；ordinary_roll_current为v3，仅把普通三物种最后两个辉壁槽替换为新ID；见源护盾与回复章节；无额外RNG、名额或奖励"}
 
 
 static func source_monster_movement_examples() -> Dictionary:
@@ -552,6 +663,7 @@ static func source_monster_movement_examples() -> Dictionary:
 		"monster_grant": monster, "legacy_grant": legacy, "actor_coefficient": monster.role_coefficient,
 		"legacy_pool": Monsters.AFFIX_POOL.duplicate(), "stride_pool": Monsters.STRIDE_AFFIX_POOL.duplicate(), "current_pool": Monsters.CURRENT_AFFIX_POOL.duplicate(),
 		"legacy_roll_policy": Monsters.LEGACY_ROLL_POLICY, "stride_roll_policy": Monsters.STRIDE_ROLL_POLICY, "current_roll_policy": Monsters.CURRENT_ROLL_POLICY,
+		"damage_life_pool":Monsters.DAMAGE_LIFE_AFFIX_POOL.duplicate(), "damage_life_roll_policy":Monsters.DAMAGE_LIFE_ROLL_POLICY,
 		"legacy_definition_count": Balance.definitions().size(), "current_definition_count": Registry.get_ids().size(),
 		"budget": budget, "formula": "(species + wave + other_flat) * (1 + move_speed_increased)",
 		"budget_scope": "同物种、波次与蓝色稀有度的单移动词缀对照；由实际MonsterCatalog生成，地图倍率前；不是综合难度评分",

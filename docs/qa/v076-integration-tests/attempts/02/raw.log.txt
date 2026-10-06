@@ -1,0 +1,77 @@
+SECTION sampling
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+V076_SECTION sampling {"checks":658,"failures":0}
+Source shield integration: 658 checks, 0 failures
+
+SECTION camps
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+V076_SECTION camps {"checks":74,"failures":0}
+Source shield integration: 74 checks, 0 failures
+
+SECTION factory_maps
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+V076_SECTION factory_maps {"checks":827,"failures":0}
+Source shield integration: 827 checks, 0 failures
+
+SECTION snapshot_transactions
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+V076_SECTION snapshot_transactions {"checks":98,"failures":0}
+Source shield integration: 98 checks, 0 failures
+
+SECTION cache_atomicity
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+V076_SECTION cache_atomicity {"checks":29,"failures":0}
+Source shield integration: 29 checks, 0 failures
+
+SECTION special_lineages
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+V076_SECTION special_lineages {"checks":24,"failures":0}
+Source shield integration: 24 checks, 0 failures
+
+SECTION main_adoption
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+godot-game: playable arena ready
+ERROR: SOURCE_SHIELD: Main current camp roster exercises source shield identities
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/source_shield_integration_test.gd:57)
+       [1] main_adoption (res://tests/source_shield_integration_test.gd:476)
+       [2] section (res://tests/source_shield_integration_test.gd:67)
+       [3] run (res://tests/source_shield_integration_test.gd:97)
+ERROR: SOURCE_SHIELD: Main rejects current source preflight for each atomic member
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/source_shield_integration_test.gd:57)
+       [1] main_adoption (res://tests/source_shield_integration_test.gd:483)
+       [2] section (res://tests/source_shield_integration_test.gd:67)
+       [3] run (res://tests/source_shield_integration_test.gd:97)
+ERROR: SOURCE_SHIELD: Main rejects current source preflight for each atomic member
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/source_shield_integration_test.gd:57)
+       [1] main_adoption (res://tests/source_shield_integration_test.gd:483)
+       [2] section (res://tests/source_shield_integration_test.gd:67)
+       [3] run (res://tests/source_shield_integration_test.gd:97)
+ERROR: SOURCE_SHIELD: Main rejects current source preflight for each atomic member
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/source_shield_integration_test.gd:57)
+       [1] main_adoption (res://tests/source_shield_integration_test.gd:483)
+       [2] section (res://tests/source_shield_integration_test.gd:67)
+       [3] run (res://tests/source_shield_integration_test.gd:97)
+V076_SECTION main_adoption {"checks":24,"failures":4}
+Source shield integration: 24 checks, 4 failures
+
+SECTION recharge_lifecycle
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+godot-game: playable arena ready
+V076_SECTION recharge_lifecycle {"checks":34,"failures":0}
+Source shield integration: 34 checks, 0 failures

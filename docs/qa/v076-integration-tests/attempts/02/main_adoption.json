@@ -1,0 +1,30 @@
+{
+	"baseline_commit": "76c9cab",
+	"checks": 24,
+	"failures": 4,
+	"observations": {
+		"actual_main_seeds": {
+			"source_aegis_capacity": 8,
+			"source_aegis_recovery": 12
+		}
+	},
+	"rolls_per_seed_wave": 12,
+	"sections": {
+		"main_adoption": {
+			"checks": 24,
+			"failures": 4
+		}
+	},
+	"seeds": [
+		7,
+		73,
+		76076
+	],
+	"source_execution_version": 45,
+	"test_scope": "bounded source shield integration; no broad performance or full-history run",
+	"waves": [
+		1,
+		6,
+		15
+	]
+}

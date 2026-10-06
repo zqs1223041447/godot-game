@@ -1,0 +1,66 @@
+{
+	"baseline_commit": "76c9cab",
+	"checks": 827,
+	"failures": 0,
+	"observations": {
+		"shield_arithmetic": [
+			{
+				"base": 3.12,
+				"ids": [
+					"source_aegis_capacity"
+				],
+				"increase": 0.08,
+				"max": 3.3696,
+				"rate": 0.0
+			},
+			{
+				"base": 1.56,
+				"ids": [
+					"source_aegis_recovery"
+				],
+				"increase": 0.04,
+				"max": 1.6224,
+				"rate": 0.46475
+			},
+			{
+				"base": 4.68,
+				"ids": [
+					"source_aegis_capacity",
+					"source_aegis_recovery"
+				],
+				"increase": 0.12,
+				"max": 5.2416,
+				"rate": 0.46475
+			},
+			{
+				"base": 6.24,
+				"ids": [
+					"source_aegis_capacity",
+					"source_aegis_capacity"
+				],
+				"increase": 0.16,
+				"max": 7.2384,
+				"rate": 0.0
+			}
+		]
+	},
+	"rolls_per_seed_wave": 12,
+	"sections": {
+		"factory_maps": {
+			"checks": 827,
+			"failures": 0
+		}
+	},
+	"seeds": [
+		7,
+		73,
+		76076
+	],
+	"source_execution_version": 45,
+	"test_scope": "bounded source shield integration; no broad performance or full-history run",
+	"waves": [
+		1,
+		6,
+		15
+	]
+}

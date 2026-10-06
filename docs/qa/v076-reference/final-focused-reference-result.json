@@ -1,0 +1,16 @@
+{
+  "command": [
+    "python3",
+    "docs/qa/v076-reference/check-reference.py"
+  ],
+  "exit_code": 1,
+  "seconds": 1.978,
+  "stopped_on": null,
+  "error_lines": [
+    "Traceback (most recent call last):",
+    "AssertionError: ('rules-source_monster_shield_recharge', '首条仅为摘要')"
+  ],
+  "source_changed_during_run": [],
+  "coverage_and_reference_pngs_unchanged_in_bytes_and_mtime": true,
+  "unexpected_preserved_file_writes": []
+}
