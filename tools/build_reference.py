@@ -27,6 +27,7 @@ RULE_TITLES['resolute_technique'] = '坚决技艺：稳定命中与暴击取舍'
 RULE_TITLES['iron_reflexes'] = '铁反射（闪转甲）：闪避转换与护甲取舍'
 RULE_TITLES['zealots_oath'] = '狂信者的誓约：生命再生改为作用于能量护盾'
 RULE_TITLES['ambush'] = '符印伏击：预置、触发与冻结快照'
+RULE_TITLES['physical_fire_conversion'] = '物理转火焰：40%转换与伤害来源'
 RULE_TITLES['inward_pull'] = '牵引辅助：朝真实爆发圆心反转冲量'
 TYPES['defense_v37'] = '历史三抗防具池'
 TYPES['defense_v39'] = '护甲闪避与三抗防具池'
@@ -545,6 +546,50 @@ def inward_pull_rule(data,link,facts,details):
     return body
 
 
+def physical_fire_conversion_rule(data,link,facts,details):
+    rule=data['physical_fire_conversion']
+    def value(key,amount):
+        return f'<strong data-physical-fire-value="{esc(key)}" data-value="{esc(amount)}">{format(amount, ".10g")}</strong>'
+    body=facts([('既有火焰精通',value('effect-id',rule['effect_id'])+' · '+link('source_passives',rule['mastery_id'])),('最低存档 / 当前源政策 / 装备词汇',value('save-version',rule['minimum_save_version'])+' / '+value('source-policy',rule['source_policy'])+' / '+value('vocabulary',rule['equipment_vocabulary'])),('物理转火焰比例',value('fraction',rule['fraction'])+'（40%）')])
+    body+=''.join('<p>'+esc(rule[key])+'。</p>' for key in ['assembly','lineage','focus','defense'])
+    body+='<h3>五组实际编译对照 · 仅切换精通</h3><p>'+esc(rule['example_scope'])+'。护甲靶为护甲500且零抗性；火抗靶为火抗75%且零护甲；均无护盾、生命10000。两个靶分别说明防御取舍，不代表固定怪物模板。</p>'
+    role_labels={'direct':'直接命中','projectile':'普通投射物','parent':'龙卷母箭','child':'龙卷子箭','secondary':'纯火独立爆炸'}
+    for key,pair in rule['examples'].items():
+        before,after=pair['states']['before'],pair['states']['after']
+        body+='<h4>'+esc(pair['name'])+'</h4><p>'+link('equipment',pair['base_id'])+' · '+(' · '.join(link('supports',sid) for sid in pair['supports']) or '无辅助')+'</p>'
+        rows=[];provenance=[]
+        for role in before['hits']:
+            prefix=key+'-'+role;cells=[]
+            for field in ['physical','fire']:
+                cells.append(' → '.join(value(prefix+'-'+field+'-'+state,pair['states'][state]['hits'][role]['resolved']['components'].get(field,0)) for state in ['before','after']))
+            for target in ['armour','fire_resistance']:
+                cells.append(' → '.join(value(prefix+'-'+target+'-'+state,pair['states'][state]['hits'][role]['defended'][target]['settlement']['damage_total']) for state in ['before','after']))
+            rows.append('<tr><th>'+esc(role_labels[role])+'</th>'+''.join('<td>'+cell+'</td>' for cell in cells)+'</tr>')
+            hit=after['hits'][role];packet=hit['packet']
+            if 'conversion' in packet:
+                split=packet['conversion'];assembly=packet['assembly']
+                provenance.append('<p>'+esc(role_labels[role])+'：组装物理 '+value(prefix+'-source',split['source_base'])+' = 固有 '+value(prefix+'-intrinsic',assembly['intrinsic'].get('physical',0))+' + 外部附加 '+value(prefix+'-added',assembly['added'].get('physical',0))+' + 局部武器贡献 '+value(prefix+'-weapon',assembly.get('weapon',{}).get('contribution',{}).get('physical',0))+'；残余物理 '+value(prefix+'-remaining',split['remaining_base'])+'，转换火焰 '+value(prefix+'-converted',split['converted_base'])+'。</p>')
+                part_rows=[]
+                for detail in hit['resolved']['details']:
+                    for i,part in enumerate(detail['parts']):
+                        pkey=prefix+'-'+detail['type']+'-part'+str(i)
+                        part_rows.append('<tr><th>'+esc(' → '.join(DAMAGE_NAMES[t] for t in part['lineage']))+'</th>'+''.join('<td>'+value(pkey+'-'+field,part[field])+'</td>' for field in ['base','increased','more','before_defense'])+'<td>'+esc(', '.join(str(index)+': '+sid for index,sid in zip(part['modifier_indices'],part['modifiers'])))+'</td></tr>')
+                provenance.append('<div class="table-scroll"><table><thead><tr><th>来源 → 最终类型</th><th>基底</th><th>increased合计</th><th>MORE乘积</th><th>防御前</th><th>modifier数组下标及id</th></tr></thead><tbody>'+''.join(part_rows)+'</tbody></table></div>')
+        body+='<div class="table-scroll"><table><thead><tr><th>每次成功命中 · 未点 → 已点</th><th>防御前物理</th><th>防御前火焰</th><th>护甲靶实际伤害</th><th>火抗靶实际伤害</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
+        body+='<p>耗魔 '+value(key+'-mana',after['mana'])+'、冷却 '+value(key+'-cooldown',after['cooldown'])+' 秒，选择精通前后相同；普攻两值为0，实际攻击节奏仍取角色攻速。剩余天赋点 '+value(key+'-points-before',before['points_remaining'])+' → '+value(key+'-points-after',after['points_remaining'])+'。</p>'
+        if 'burn_profile' in after:
+            burn_rows=[]
+            for role in after['burn_profile']['roles']:
+                prefix=key+'-burn-'+role
+                burn_rows.append('<tr><th>'+esc(role_labels[role])+'</th>'+''.join('<td>'+' → '.join(value(prefix+'-'+field+'-'+state,pair['states'][state]['burn_profile']['roles'][role][field]) for state in ['before','after'])+'</td>' for field in ['fire_before_defense','dps','total'])+'</tr>')
+            body+='<p>原有燃烧持续 '+value(key+'-burn-duration',after['burn_profile']['duration'])+' 秒；以下为不暴击、零火抗下理论燃烧预算，实际敌人火抗仍在每次结算生效。</p><div class="table-scroll"><table><thead><tr><th>既有点燃角色</th><th>唯一防御前火焰输入</th><th>每秒</th><th>完整持续总量</th></tr></thead><tbody>'+''.join(burn_rows)+'</tbody></table></div>'
+        body+=details('组装、分量来源与逐条modifier证据',''.join(provenance)+'<p>最终details每种类型仅一行；内部parts保留lineage、base、increased、more、before_defense、modifiers、modifier_indices。原生火焰和转换火焰各自计算后才合并；这些值来自实际解析器。</p>')
+    body+=''.join('<p>'+esc(rule[key])+'。</p>' for key in ['burn','leech','snapshot','availability','migration','bounds'])
+    body+=details('既有入口、原始路线与完整英文', '<p>'+esc(rule['source_line'])+'</p><p>全部入口：'+'、'.join(link('source_passives',node_id,node_id) for node_id in rule['entrances'])+'。</p><p>当前可达组的显著天赋 → 精通：'+'；'.join(link('source_passives',gateway,gateway)+' → '+link('source_passives',mastery,mastery) for mastery,gateway in rule['reachable_gateways'].items())+'。</p><p>本页5级野蛮人路线：'+' → '.join(link('source_passives',node_id,node_id) for node_id in rule['route']+[rule['mastery_id']])+'；预算 '+value('point-budget',rule['point_budget'])+' 点。所有候选完整通过Canonical与源树校验，保存次数为0。</p>')
+    body+='<p><a href="../PHYSICAL_FIRE_CONVERSION.zh-CN.md">完整物理转火焰合同</a> · <a href="../qa/v069-reference/README.md">本批图鉴验证</a> · <a href="source-tree-coverage.json">当前同源执行覆盖JSON</a> · '+link('rules','source_fire_dot')+' · '+link('rules','source_faster_burn')+' · '+link('rules','source_leech')+'</p>'
+    return body
+
+
 def build(data, art):
     records = []
     by_id = {}
@@ -614,7 +659,7 @@ def build(data, art):
             panels += details(cfg['name']+' · 编译示例',body)
         body = skill_delivery_diagram(key,s)+facts([('原始消耗',number(s['mana'])+' 魔力'),('原始冷却',number(s['cooldown'])+' 秒'),('最低保存版本',number(s.get('minimum_save_version',14))),('可装配辅助',links('supports',compatible))])+panels
         affected = [i for i,f in data['affixes'].items() if key in f.get('affected_skills',[])]
-        related = link('rules','damage')+' · '+link('rules','supports')+((' · '+links('affixes',affected)) if affected else '')
+        related = link('rules','damage')+' · '+link('rules','supports')+(' · '+link('rules','physical_fire_conversion') if key in ['physical_focus','fire_focus','ignite','ember_proliferation'] and 'physical_fire_conversion' in data else '')+((' · '+links('affixes',affected)) if affected else '')
         if 'ambush' in compatible:
             body+='<p>符印伏击改为脚下预置，成功放置时支付魔力；触发后才命中。'+link('rules','ambush','查看伏击、感电、燃烧与范围组合的代表编译示例')+'。</p>'
             related+=' · '+link('rules','ambush')
@@ -706,7 +751,7 @@ def build(data, art):
             body+=details(f'精通 {choice["effect"]} · {label}','<p>'+lines(localized['mastery_choices'][str(choice['effect'])])+'</p>')
         if p['neighbors']:body+=details('原始标准邻接',links('source_passives',p['neighbors']))
         aliases=' '.join([p['name'],p['partition'],*p['stats'],*(line for choice in p['mastery_choices'] for line in choice['stats'])])
-        cards.append(add('source_passives',key,localized['name'],localized['stats'] or state,body,TYPES[p['type']],status='implemented' if selectable else 'research',related=link('rules','source_tree')+(' · '+link('rules','zealots_oath') if key == '63425' else '')+(' · '+link('rules','iron_reflexes') if key == '10661' else '')+(' · '+link('rules','resolute_technique') if key == '31961' else '')+(' · '+link('rules','source_fire_dot') if key in data.get('source_fire_dot',{}).get('nodes',{}) else '')+(' · '+link('rules','source_faster_burn') if key in data.get('source_faster_burn',{}).get('nodes',{}) or key in data.get('source_faster_burn',{}).get('blocked_matching_nodes',{}) else '')+(' · '+link('rules','mana_guard') if key == data.get('mana_guard',{}).get('node',{}).get('id') or key in data.get('mana_guard',{}).get('blocked_matching_nodes',{}) else '')+(' · '+link('rules','elemental_resistance_caps') if key in data.get('elemental_resistance_caps',{}).get('nodes',{}) or key in data.get('elemental_resistance_caps',{}).get('boundaries',{}) else ''),search_aliases=aliases))
+        cards.append(add('source_passives',key,localized['name'],localized['stats'] or state,body,TYPES[p['type']],status='implemented' if selectable else 'research',related=link('rules','source_tree')+(' · '+link('rules','physical_fire_conversion') if key in data.get('physical_fire_conversion',{}).get('entrances',{}) else '')+(' · '+link('rules','zealots_oath') if key == '63425' else '')+(' · '+link('rules','iron_reflexes') if key == '10661' else '')+(' · '+link('rules','resolute_technique') if key == '31961' else '')+(' · '+link('rules','source_fire_dot') if key in data.get('source_fire_dot',{}).get('nodes',{}) else '')+(' · '+link('rules','source_faster_burn') if key in data.get('source_faster_burn',{}).get('nodes',{}) or key in data.get('source_faster_burn',{}).get('blocked_matching_nodes',{}) else '')+(' · '+link('rules','mana_guard') if key == data.get('mana_guard',{}).get('node',{}).get('id') or key in data.get('mana_guard',{}).get('blocked_matching_nodes',{}) else '')+(' · '+link('rules','elemental_resistance_caps') if key in data.get('elemental_resistance_caps',{}).get('nodes',{}) or key in data.get('elemental_resistance_caps',{}).get('boundaries',{}) else ''),search_aliases=aliases))
     for key,m in data['mechanisms'].items():
         player_nodes=[k for k,v in data['passives'].items() if key in v['mechanism_ids']]
         monsters=[k for k,v in data['monsters'].items() if key in v['mechanisms']]
@@ -1084,6 +1129,8 @@ def build(data, art):
         rule_defs.append(('defense_rating_affixes',RULE_TITLES['defense_rating_affixes'],'全局固定护甲与闪避占用已有前缀，物理命中、攻击准入和持续燃烧各有明确边界。',defense_rating_affix_rule(data,link,facts,details),'implemented'))
     if 'iron_reflexes' in data:
         rule_defs.append(('iron_reflexes',RULE_TITLES['iron_reflexes'],'全部原始闪避转换为护甲，取消敏捷闪避提高；同一句双提高只计一次，失去闪避仍有代价。',iron_reflexes_rule(data,link,facts,details),'implemented'))
+    if 'physical_fire_conversion' in data:
+        rule_defs.append(('physical_fire_conversion',RULE_TITLES['physical_fire_conversion'],'原始物理组装后40%转火；逐条伤害来源、专注取舍、燃烧与物理偷取边界。',physical_fire_conversion_rule(data,link,facts,details),'implemented'))
     if 'zealots_oath' in data:
         rule_defs.append(('zealots_oath',RULE_TITLES['zealots_oath'],'原始固定再生加百分比乘最终护盾；生命再生归零，护盾充能、药剂与偷取仍独立。',zealots_oath_rule(data,link,facts,details),'implemented'))
     if 'ambush' in data:

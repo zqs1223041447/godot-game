@@ -100568,19 +100568,19 @@
 	"effect_coverage": {
 		"all_source": {
 			"direct_effect_entries": {
-				"full": 856,
+				"full": 864,
 				"no_direct_stats": 165,
 				"other_status": 0,
 				"partial": 437,
 				"total_with_stats": 4709,
-				"unsupported": 3416
+				"unsupported": 3408
 			},
 			"mastery_nodes": 353,
 			"mastery_option_status_counts": {
-				"full": 37,
+				"full": 45,
 				"other": 0,
 				"partial": 14,
-				"unsupported": 1786
+				"unsupported": 1778
 			},
 			"mastery_options": 1837,
 			"mastery_options_with_direct_stats": 1837,
@@ -100593,10 +100593,10 @@
 				"unsupported": 1630
 			},
 			"node_direct_effect_status_counts": {
-				"full": 856,
+				"full": 864,
 				"other": 0,
 				"partial": 437,
-				"unsupported": 3416
+				"unsupported": 3408
 			},
 			"node_records": 3390,
 			"nodes_with_direct_stats": 2872,
@@ -100605,19 +100605,19 @@
 		"counting_rule": "Only source entries with non-empty direct stats count as full, partial or unsupported effect entries. Empty-stat nodes/options are recorded as no_direct_stats even when node_effect returns full with no grants.",
 		"standard_allocation_graph": {
 			"direct_effect_entries": {
-				"full": 745,
+				"full": 753,
 				"no_direct_stats": 64,
 				"other_status": 0,
 				"partial": 244,
 				"total_with_stats": 3845,
-				"unsupported": 2856
+				"unsupported": 2848
 			},
 			"mastery_nodes": 315,
 			"mastery_option_status_counts": {
-				"full": 37,
+				"full": 45,
 				"other": 0,
 				"partial": 14,
-				"unsupported": 1786
+				"unsupported": 1778
 			},
 			"mastery_options": 1837,
 			"mastery_options_with_direct_stats": 1837,
@@ -100630,10 +100630,10 @@
 				"unsupported": 1070
 			},
 			"node_direct_effect_status_counts": {
-				"full": 745,
+				"full": 753,
 				"other": 0,
 				"partial": 244,
-				"unsupported": 2856
+				"unsupported": 2848
 			},
 			"node_records": 2387,
 			"nodes_with_direct_stats": 2008,
@@ -106366,14 +106366,20 @@
 					"effect": 65020.0,
 					"effect_id": 65020,
 					"execution": {
-						"api_status": "unsupported",
-						"coverage_status": "unsupported",
-						"grants": [],
+						"api_status": "full",
+						"coverage_status": "full",
+						"grants": [
+							{
+								"mode": "flat",
+								"stat": "physical_to_fire_conversion",
+								"value": 0.4
+							}
+						],
 						"has_direct_stats": true,
-						"supported": [],
-						"unsupported": [
+						"supported": [
 							"40% of Physical Damage Converted to Fire Damage"
-						]
+						],
+						"unsupported": []
 					},
 					"source": {
 						"effect": 65020.0,
@@ -134295,14 +134301,20 @@
 					"effect": 65020.0,
 					"effect_id": 65020,
 					"execution": {
-						"api_status": "unsupported",
-						"coverage_status": "unsupported",
-						"grants": [],
+						"api_status": "full",
+						"coverage_status": "full",
+						"grants": [
+							{
+								"mode": "flat",
+								"stat": "physical_to_fire_conversion",
+								"value": 0.4
+							}
+						],
 						"has_direct_stats": true,
-						"supported": [],
-						"unsupported": [
+						"supported": [
 							"40% of Physical Damage Converted to Fire Damage"
-						]
+						],
+						"unsupported": []
 					},
 					"source": {
 						"effect": 65020.0,
@@ -188762,14 +188774,20 @@
 					"effect": 65020.0,
 					"effect_id": 65020,
 					"execution": {
-						"api_status": "unsupported",
-						"coverage_status": "unsupported",
-						"grants": [],
+						"api_status": "full",
+						"coverage_status": "full",
+						"grants": [
+							{
+								"mode": "flat",
+								"stat": "physical_to_fire_conversion",
+								"value": 0.4
+							}
+						],
 						"has_direct_stats": true,
-						"supported": [],
-						"unsupported": [
+						"supported": [
 							"40% of Physical Damage Converted to Fire Damage"
-						]
+						],
+						"unsupported": []
 					},
 					"source": {
 						"effect": 65020.0,
@@ -200120,14 +200138,20 @@
 					"effect": 65020.0,
 					"effect_id": 65020,
 					"execution": {
-						"api_status": "unsupported",
-						"coverage_status": "unsupported",
-						"grants": [],
+						"api_status": "full",
+						"coverage_status": "full",
+						"grants": [
+							{
+								"mode": "flat",
+								"stat": "physical_to_fire_conversion",
+								"value": 0.4
+							}
+						],
 						"has_direct_stats": true,
-						"supported": [],
-						"unsupported": [
+						"supported": [
 							"40% of Physical Damage Converted to Fire Damage"
-						]
+						],
+						"unsupported": []
 					},
 					"source": {
 						"effect": 65020.0,
@@ -201792,14 +201816,20 @@
 					"effect": 65020.0,
 					"effect_id": 65020,
 					"execution": {
-						"api_status": "unsupported",
-						"coverage_status": "unsupported",
-						"grants": [],
+						"api_status": "full",
+						"coverage_status": "full",
+						"grants": [
+							{
+								"mode": "flat",
+								"stat": "physical_to_fire_conversion",
+								"value": 0.4
+							}
+						],
 						"has_direct_stats": true,
-						"supported": [],
-						"unsupported": [
+						"supported": [
 							"40% of Physical Damage Converted to Fire Damage"
-						]
+						],
+						"unsupported": []
 					},
 					"source": {
 						"effect": 65020.0,
@@ -209920,14 +209950,20 @@
 					"effect": 65020.0,
 					"effect_id": 65020,
 					"execution": {
-						"api_status": "unsupported",
-						"coverage_status": "unsupported",
-						"grants": [],
+						"api_status": "full",
+						"coverage_status": "full",
+						"grants": [
+							{
+								"mode": "flat",
+								"stat": "physical_to_fire_conversion",
+								"value": 0.4
+							}
+						],
 						"has_direct_stats": true,
-						"supported": [],
-						"unsupported": [
+						"supported": [
 							"40% of Physical Damage Converted to Fire Damage"
-						]
+						],
+						"unsupported": []
 					},
 					"source": {
 						"effect": 65020.0,
@@ -239414,14 +239450,20 @@
 					"effect": 65020.0,
 					"effect_id": 65020,
 					"execution": {
-						"api_status": "unsupported",
-						"coverage_status": "unsupported",
-						"grants": [],
+						"api_status": "full",
+						"coverage_status": "full",
+						"grants": [
+							{
+								"mode": "flat",
+								"stat": "physical_to_fire_conversion",
+								"value": 0.4
+							}
+						],
 						"has_direct_stats": true,
-						"supported": [],
-						"unsupported": [
+						"supported": [
 							"40% of Physical Damage Converted to Fire Damage"
-						]
+						],
+						"unsupported": []
 					},
 					"source": {
 						"effect": 65020.0,
@@ -296060,14 +296102,20 @@
 					"effect": 65020.0,
 					"effect_id": 65020,
 					"execution": {
-						"api_status": "unsupported",
-						"coverage_status": "unsupported",
-						"grants": [],
+						"api_status": "full",
+						"coverage_status": "full",
+						"grants": [
+							{
+								"mode": "flat",
+								"stat": "physical_to_fire_conversion",
+								"value": 0.4
+							}
+						],
 						"has_direct_stats": true,
-						"supported": [],
-						"unsupported": [
+						"supported": [
 							"40% of Physical Damage Converted to Fire Damage"
-						]
+						],
+						"unsupported": []
 					},
 					"source": {
 						"effect": 65020.0,

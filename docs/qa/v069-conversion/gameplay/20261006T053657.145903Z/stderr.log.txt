@@ -1,0 +1,13 @@
+ERROR: Real starting mantle and charm provide return and secondary
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/physical_fire_conversion_gameplay_test.gd:33)
+       [1] frozen_parent_child_return_and_secondary (res://tests/physical_fire_conversion_gameplay_test.gd:325)
+       [2] section (res://tests/physical_fire_conversion_gameplay_test.gd:42)
+       [3] run (res://tests/physical_fire_conversion_gameplay_test.gd:388)
+ERROR: Section returned normally: frozen_parent_child_return_and_secondary
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/physical_fire_conversion_gameplay_test.gd:33)
+       [1] section (res://tests/physical_fire_conversion_gameplay_test.gd:43)
+       [2] run (res://tests/physical_fire_conversion_gameplay_test.gd:388)

@@ -1,0 +1,1768 @@
+{
+	"basic_and_cleave": [
+		{
+			"assembly": {
+				"added": {
+
+				},
+				"added_effectiveness": 1.0,
+				"base_coefficient": 1.0,
+				"intrinsic": {
+					"physical": 18.0
+				},
+				"stage": "hit_base",
+				"weapon": {
+					"coefficient": 1.0,
+					"components": {
+						"physical": 13.0
+					},
+					"contribution": {
+						"physical": 13.0
+					},
+					"profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "forgeblade",
+						"flat": {
+							"physical": 6.0
+						},
+						"increased": {
+							"physical": 0.3
+						},
+						"item_id": "gear_000004",
+						"sources": [
+							{
+								"affix_id": "whetstone_edge",
+								"stat": "weapon_added_physical",
+								"value": 6.0
+							},
+							{
+								"affix_id": "tempered_edge",
+								"stat": "weapon_physical_increased",
+								"value": 0.3
+							}
+						],
+						"stage": "weapon_local"
+					}
+				}
+			},
+			"before_defense_components": {
+				"fire": 16.368000000000002,
+				"physical": 24.552
+			},
+			"cast_id": 1,
+			"components": {
+				"fire": 16.368000000000002,
+				"physical": 24.552
+			},
+			"critical": {
+				"chance": 0.05,
+				"critical": false,
+				"multiplier": 1.0
+			},
+			"details": [
+				{
+					"before_defense": 24.552,
+					"final": 24.552,
+					"parts": [
+						{
+							"base": 18.599999999999998,
+							"before_defense": 24.552,
+							"increased": 0.32,
+							"lineage": [
+								"physical"
+							],
+							"modifier_indices": [
+								0
+							],
+							"modifiers": [
+								"melee_physical_increased"
+							],
+							"more": 1.0
+						}
+					],
+					"resistance": 0.0,
+					"type": "physical"
+				},
+				{
+					"before_defense": 16.368000000000002,
+					"final": 16.368000000000002,
+					"parts": [
+						{
+							"base": 12.4,
+							"before_defense": 16.368000000000002,
+							"increased": 0.32,
+							"lineage": [
+								"physical",
+								"fire"
+							],
+							"modifier_indices": [
+								0
+							],
+							"modifiers": [
+								"melee_physical_increased"
+							],
+							"more": 1.0
+						}
+					],
+					"resistance": 0.0,
+					"type": "fire"
+				}
+			],
+			"effect_id": "",
+			"health_lost": 40.92,
+			"phase": "direct",
+			"prevented_components": {
+				"fire": 0.0,
+				"physical": 0.0
+			},
+			"projectile_id": 0,
+			"shield_spent": 0.0,
+			"skill_id": "basic",
+			"tags": [
+				"hit",
+				"attack",
+				"melee"
+			],
+			"target_id": 1,
+			"total": 40.92
+		},
+		{
+			"assembly": {
+				"added": {
+
+				},
+				"added_effectiveness": 1.0,
+				"base_coefficient": 1.0,
+				"intrinsic": {
+					"physical": 18.0
+				},
+				"stage": "hit_base",
+				"weapon": {
+					"coefficient": 1.0,
+					"components": {
+						"physical": 13.0
+					},
+					"contribution": {
+						"physical": 13.0
+					},
+					"profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "ashwood_bow",
+						"flat": {
+							"physical": 6.0
+						},
+						"increased": {
+							"physical": 0.3
+						},
+						"item_id": "gear_000005",
+						"sources": [
+							{
+								"affix_id": "whetstone_edge",
+								"stat": "weapon_added_physical",
+								"value": 6.0
+							},
+							{
+								"affix_id": "tempered_edge",
+								"stat": "weapon_physical_increased",
+								"value": 0.3
+							}
+						],
+						"stage": "weapon_local"
+					}
+				}
+			},
+			"before_defense_components": {
+				"fire": 12.4,
+				"physical": 18.599999999999998
+			},
+			"cast_id": 1,
+			"components": {
+				"fire": 12.4,
+				"physical": 18.599999999999998
+			},
+			"critical": {
+				"chance": 0.05,
+				"critical": false,
+				"multiplier": 1.0
+			},
+			"details": [
+				{
+					"before_defense": 18.599999999999998,
+					"final": 18.599999999999998,
+					"parts": [
+						{
+							"base": 18.599999999999998,
+							"before_defense": 18.599999999999998,
+							"increased": 0.0,
+							"lineage": [
+								"physical"
+							],
+							"modifier_indices": [],
+							"modifiers": [],
+							"more": 1.0
+						}
+					],
+					"resistance": 0.0,
+					"type": "physical"
+				},
+				{
+					"before_defense": 12.4,
+					"final": 12.4,
+					"parts": [
+						{
+							"base": 12.4,
+							"before_defense": 12.4,
+							"increased": 0.0,
+							"lineage": [
+								"physical",
+								"fire"
+							],
+							"modifier_indices": [],
+							"modifiers": [],
+							"more": 1.0
+						}
+					],
+					"resistance": 0.0,
+					"type": "fire"
+				}
+			],
+			"effect_id": "",
+			"health_lost": 31.0,
+			"phase": "outbound",
+			"prevented_components": {
+				"fire": 0.0,
+				"physical": 0.0
+			},
+			"projectile_id": 1,
+			"shield_spent": 0.0,
+			"skill_id": "basic",
+			"tags": [
+				"hit",
+				"projectile",
+				"attack"
+			],
+			"target_id": 1,
+			"total": 31.0
+		},
+		{
+			"assembly": {
+				"added": {
+
+				},
+				"added_effectiveness": 2.8,
+				"base_coefficient": 2.8,
+				"intrinsic": {
+					"physical": 50.4
+				},
+				"stage": "hit_base",
+				"weapon": {
+					"coefficient": 2.8,
+					"components": {
+						"physical": 13.0
+					},
+					"contribution": {
+						"physical": 36.4
+					},
+					"profile": {
+						"base": {
+							"physical": 4.0
+						},
+						"base_id": "forgeblade",
+						"flat": {
+							"physical": 6.0
+						},
+						"increased": {
+							"physical": 0.3
+						},
+						"item_id": "gear_000004",
+						"sources": [
+							{
+								"affix_id": "whetstone_edge",
+								"stat": "weapon_added_physical",
+								"value": 6.0
+							},
+							{
+								"affix_id": "tempered_edge",
+								"stat": "weapon_physical_increased",
+								"value": 0.3
+							}
+						],
+						"stage": "weapon_local"
+					}
+				}
+			},
+			"before_defense_components": {
+				"fire": 45.8304,
+				"physical": 68.7456
+			},
+			"cast_id": 1,
+			"components": {
+				"fire": 45.8304,
+				"physical": 68.7456
+			},
+			"critical": {
+				"chance": 0.05,
+				"critical": false,
+				"multiplier": 1.0
+			},
+			"details": [
+				{
+					"before_defense": 68.7456,
+					"final": 68.7456,
+					"parts": [
+						{
+							"base": 52.08,
+							"before_defense": 68.7456,
+							"increased": 0.32,
+							"lineage": [
+								"physical"
+							],
+							"modifier_indices": [
+								0
+							],
+							"modifiers": [
+								"melee_physical_increased"
+							],
+							"more": 1.0
+						}
+					],
+					"resistance": 0.0,
+					"type": "physical"
+				},
+				{
+					"before_defense": 45.8304,
+					"final": 45.8304,
+					"parts": [
+						{
+							"base": 34.72,
+							"before_defense": 45.8304,
+							"increased": 0.32,
+							"lineage": [
+								"physical",
+								"fire"
+							],
+							"modifier_indices": [
+								0
+							],
+							"modifiers": [
+								"melee_physical_increased"
+							],
+							"more": 1.0
+						}
+					],
+					"resistance": 0.0,
+					"type": "fire"
+				}
+			],
+			"effect_id": "",
+			"health_lost": 114.576,
+			"phase": "direct",
+			"prevented_components": {
+				"fire": 0.0,
+				"physical": 0.0
+			},
+			"projectile_id": 0,
+			"shield_spent": 0.0,
+			"skill_id": "cleave",
+			"tags": [
+				"hit",
+				"attack",
+				"melee",
+				"area"
+			],
+			"target_id": 1,
+			"total": 114.576
+		}
+	],
+	"burning": [
+		{
+			"burn": {
+				"last_time": 0.0,
+				"provenance": {
+					"cast_id": 1,
+					"phase": "outbound",
+					"projectile_id": 2,
+					"skill_id": "tornado"
+				},
+				"raw_dps": 120.91653000000001,
+				"remaining": 2.4,
+				"source_id": 0,
+				"target_id": 1,
+				"target_kind": "monster"
+			},
+			"hit": {
+				"assembly": {
+					"added": {
+						"fire": 7.0,
+						"physical": 10.0
+					},
+					"added_effectiveness": 1.0,
+					"base_coefficient": 1.0,
+					"intrinsic": {
+						"fire": 40.0,
+						"physical": 60.0
+					},
+					"stage": "hit_base"
+				},
+				"before_defense_components": {
+					"fire": 230.3172,
+					"physical": 120.96
+				},
+				"cast_id": 1,
+				"components": {
+					"fire": 172.73790000000002,
+					"physical": 120.96
+				},
+				"critical": {
+					"chance": 1.0,
+					"critical": true,
+					"multiplier": 2.0
+				},
+				"details": [
+					{
+						"before_defense": 120.96,
+						"final": 120.96,
+						"parts": [
+							{
+								"base": 42.0,
+								"before_defense": 120.96,
+								"increased": 0.6,
+								"lineage": [
+									"physical"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									4,
+									6,
+									7,
+									9
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"support:focus",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:ignite"
+								],
+								"more": 0.8999999999999999
+							}
+						],
+						"resistance": 0.0,
+						"type": "physical"
+					},
+					{
+						"before_defense": 230.3172,
+						"final": 172.73790000000002,
+						"parts": [
+							{
+								"base": 47.0,
+								"before_defense": 131.13000000000002,
+								"increased": 0.55,
+								"lineage": [
+									"fire"
+								],
+								"modifier_indices": [
+									1,
+									2,
+									3,
+									4,
+									5,
+									8,
+									9
+								],
+								"modifiers": [
+									"global_increased",
+									"elemental_increased",
+									"fire_increased",
+									"support:focus",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:ignite"
+								],
+								"more": 0.9000000000000001
+							},
+							{
+								"base": 28.0,
+								"before_defense": 99.18719999999999,
+								"increased": 1.05,
+								"lineage": [
+									"physical",
+									"fire"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									2,
+									3,
+									4,
+									5,
+									6,
+									7,
+									8,
+									9
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"elemental_increased",
+									"fire_increased",
+									"support:focus",
+									"support:fire_focus",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:physical_focus",
+									"support:ignite"
+								],
+								"more": 0.8640000000000001
+							}
+						],
+						"resistance": 0.25,
+						"type": "fire"
+					}
+				],
+				"effect_id": "",
+				"health_lost": 293.6979,
+				"leech": {
+					"health": 5.356179,
+					"mana": 9.502758
+				},
+				"phase": "outbound",
+				"prevented_components": {
+					"fire": 57.57929999999999,
+					"physical": 0.0
+				},
+				"projectile_id": 2,
+				"shield_spent": 0.0,
+				"skill_id": "tornado",
+				"tags": [
+					"hit",
+					"attack",
+					"projectile"
+				],
+				"target_id": 1,
+				"total": 293.6979
+			},
+			"support": "ignite"
+		},
+		{
+			"burn": {
+				"last_time": 0.0,
+				"provenance": {
+					"cast_id": 1,
+					"ember_expiry": 2.4,
+					"ember_generation": 0,
+					"phase": "outbound",
+					"projectile_id": 2,
+					"skill_id": "tornado"
+				},
+				"raw_dps": 80.61102,
+				"remaining": 2.4,
+				"source_id": 0,
+				"target_id": 1,
+				"target_kind": "monster"
+			},
+			"hit": {
+				"assembly": {
+					"added": {
+						"fire": 7.0,
+						"physical": 10.0
+					},
+					"added_effectiveness": 1.0,
+					"base_coefficient": 1.0,
+					"intrinsic": {
+						"fire": 40.0,
+						"physical": 60.0
+					},
+					"stage": "hit_base"
+				},
+				"before_defense_components": {
+					"fire": 230.3172,
+					"physical": 120.96
+				},
+				"cast_id": 1,
+				"components": {
+					"fire": 172.73790000000002,
+					"physical": 120.96
+				},
+				"critical": {
+					"chance": 1.0,
+					"critical": true,
+					"multiplier": 2.0
+				},
+				"details": [
+					{
+						"before_defense": 120.96,
+						"final": 120.96,
+						"parts": [
+							{
+								"base": 42.0,
+								"before_defense": 120.96,
+								"increased": 0.6,
+								"lineage": [
+									"physical"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									4,
+									6,
+									7,
+									9
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"support:focus",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:ember_proliferation"
+								],
+								"more": 0.8999999999999999
+							}
+						],
+						"resistance": 0.0,
+						"type": "physical"
+					},
+					{
+						"before_defense": 230.3172,
+						"final": 172.73790000000002,
+						"parts": [
+							{
+								"base": 47.0,
+								"before_defense": 131.13000000000002,
+								"increased": 0.55,
+								"lineage": [
+									"fire"
+								],
+								"modifier_indices": [
+									1,
+									2,
+									3,
+									4,
+									5,
+									8,
+									9
+								],
+								"modifiers": [
+									"global_increased",
+									"elemental_increased",
+									"fire_increased",
+									"support:focus",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:ember_proliferation"
+								],
+								"more": 0.9000000000000001
+							},
+							{
+								"base": 28.0,
+								"before_defense": 99.18719999999999,
+								"increased": 1.05,
+								"lineage": [
+									"physical",
+									"fire"
+								],
+								"modifier_indices": [
+									0,
+									1,
+									2,
+									3,
+									4,
+									5,
+									6,
+									7,
+									8,
+									9
+								],
+								"modifiers": [
+									"physical_increased",
+									"global_increased",
+									"elemental_increased",
+									"fire_increased",
+									"support:focus",
+									"support:fire_focus",
+									"support:fire_focus",
+									"support:physical_focus",
+									"support:physical_focus",
+									"support:ember_proliferation"
+								],
+								"more": 0.8640000000000001
+							}
+						],
+						"resistance": 0.25,
+						"type": "fire"
+					}
+				],
+				"effect_id": "",
+				"health_lost": 293.6979,
+				"leech": {
+					"health": 5.356179,
+					"mana": 9.502758
+				},
+				"phase": "outbound",
+				"prevented_components": {
+					"fire": 57.57929999999999,
+					"physical": 0.0
+				},
+				"projectile_id": 2,
+				"shield_spent": 0.0,
+				"skill_id": "tornado",
+				"tags": [
+					"hit",
+					"attack",
+					"projectile"
+				],
+				"target_id": 1,
+				"total": 293.6979
+			},
+			"support": "ember_proliferation"
+		}
+	],
+	"checks": 305,
+	"failures": 2,
+	"focus_defense_leech_critical": [
+		{
+			"critical": {
+				"draws": 0,
+				"events": 0,
+				"state": 4006165110084267948
+			},
+			"hits": [
+				{
+					"assembly": {
+						"added": {
+							"fire": 19.599999999999998,
+							"physical": 28.0
+						},
+						"added_effectiveness": 2.8,
+						"base_coefficient": 2.8,
+						"intrinsic": {
+							"physical": 280.0
+						},
+						"stage": "hit_base"
+					},
+					"before_defense_components": {
+						"fire": 306.9472,
+						"physical": 421.34399999999994
+					},
+					"cast_id": 1,
+					"components": {
+						"fire": 230.2104,
+						"physical": 378.25297934137853
+					},
+					"details": [
+						{
+							"before_defense": 421.34399999999994,
+							"final": 378.25297934137853,
+							"parts": [
+								{
+									"base": 184.79999999999998,
+									"before_defense": 421.34399999999994,
+									"increased": 0.8999999999999999,
+									"lineage": [
+										"physical"
+									],
+									"modifier_indices": [
+										0,
+										1,
+										4,
+										6
+									],
+									"modifiers": [
+										"physical_increased",
+										"global_increased",
+										"dual_lineage_once",
+										"support:physical_focus"
+									],
+									"more": 1.2
+								}
+							],
+							"resistance": 0.10227040294538761,
+							"type": "physical"
+						},
+						{
+							"before_defense": 306.9472,
+							"final": 230.2104,
+							"parts": [
+								{
+									"base": 19.599999999999998,
+									"before_defense": 29.008,
+									"increased": 0.8500000000000001,
+									"lineage": [
+										"fire"
+									],
+									"modifier_indices": [
+										1,
+										2,
+										3,
+										4,
+										7
+									],
+									"modifiers": [
+										"global_increased",
+										"elemental_increased",
+										"fire_increased",
+										"dual_lineage_once",
+										"support:physical_focus"
+									],
+									"more": 0.8
+								},
+								{
+									"base": 123.2,
+									"before_defense": 277.9392,
+									"increased": 1.35,
+									"lineage": [
+										"physical",
+										"fire"
+									],
+									"modifier_indices": [
+										0,
+										1,
+										2,
+										3,
+										4,
+										6,
+										7
+									],
+									"modifiers": [
+										"physical_increased",
+										"global_increased",
+										"elemental_increased",
+										"fire_increased",
+										"dual_lineage_once",
+										"support:physical_focus",
+										"support:physical_focus"
+									],
+									"more": 0.96
+								}
+							],
+							"resistance": 0.25,
+							"type": "fire"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 608.4633793413785,
+					"leech": {
+						"health": 13.649693380241356,
+						"mana": 23.516856967068925
+					},
+					"phase": "direct",
+					"prevented_components": {
+						"fire": 76.73680000000002,
+						"physical": 43.0910206586214
+					},
+					"projectile_id": 0,
+					"shield_spent": 0.0,
+					"skill_id": "cleave",
+					"tags": [
+						"hit",
+						"attack",
+						"melee",
+						"area"
+					],
+					"target_id": 1,
+					"total": 608.4633793413785
+				},
+				{
+					"assembly": {
+						"added": {
+							"fire": 19.599999999999998,
+							"physical": 28.0
+						},
+						"added_effectiveness": 2.8,
+						"base_coefficient": 2.8,
+						"intrinsic": {
+							"physical": 280.0
+						},
+						"stage": "hit_base"
+					},
+					"before_defense_components": {
+						"fire": 306.9472,
+						"physical": 421.34399999999994
+					},
+					"cast_id": 1,
+					"components": {
+						"fire": 230.2104,
+						"physical": 378.25297934137853
+					},
+					"details": [
+						{
+							"before_defense": 421.34399999999994,
+							"final": 378.25297934137853,
+							"parts": [
+								{
+									"base": 184.79999999999998,
+									"before_defense": 421.34399999999994,
+									"increased": 0.8999999999999999,
+									"lineage": [
+										"physical"
+									],
+									"modifier_indices": [
+										0,
+										1,
+										4,
+										6
+									],
+									"modifiers": [
+										"physical_increased",
+										"global_increased",
+										"dual_lineage_once",
+										"support:physical_focus"
+									],
+									"more": 1.2
+								}
+							],
+							"resistance": 0.10227040294538761,
+							"type": "physical"
+						},
+						{
+							"before_defense": 306.9472,
+							"final": 230.2104,
+							"parts": [
+								{
+									"base": 19.599999999999998,
+									"before_defense": 29.008,
+									"increased": 0.8500000000000001,
+									"lineage": [
+										"fire"
+									],
+									"modifier_indices": [
+										1,
+										2,
+										3,
+										4,
+										7
+									],
+									"modifiers": [
+										"global_increased",
+										"elemental_increased",
+										"fire_increased",
+										"dual_lineage_once",
+										"support:physical_focus"
+									],
+									"more": 0.8
+								},
+								{
+									"base": 123.2,
+									"before_defense": 277.9392,
+									"increased": 1.35,
+									"lineage": [
+										"physical",
+										"fire"
+									],
+									"modifier_indices": [
+										0,
+										1,
+										2,
+										3,
+										4,
+										6,
+										7
+									],
+									"modifiers": [
+										"physical_increased",
+										"global_increased",
+										"elemental_increased",
+										"fire_increased",
+										"dual_lineage_once",
+										"support:physical_focus",
+										"support:physical_focus"
+									],
+									"more": 0.96
+								}
+							],
+							"resistance": 0.25,
+							"type": "fire"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 10.0,
+					"leech": {
+						"health": 0.3364958478277587,
+						"mana": 0.579743771741638
+					},
+					"phase": "direct",
+					"prevented_components": {
+						"fire": 76.73680000000002,
+						"physical": 43.0910206586214
+					},
+					"projectile_id": 0,
+					"shield_spent": 5.0,
+					"skill_id": "cleave",
+					"tags": [
+						"hit",
+						"attack",
+						"melee",
+						"area"
+					],
+					"target_id": 2,
+					"total": 608.4633793413785
+				}
+			],
+			"policy": [
+				false,
+				false
+			]
+		},
+		{
+			"critical": {
+				"draws": 0,
+				"events": 1,
+				"state": 4006165110084267948
+			},
+			"hits": [
+				{
+					"assembly": {
+						"added": {
+							"fire": 19.599999999999998,
+							"physical": 28.0
+						},
+						"added_effectiveness": 2.8,
+						"base_coefficient": 2.8,
+						"intrinsic": {
+							"physical": 280.0
+						},
+						"stage": "hit_base"
+					},
+					"before_defense_components": {
+						"fire": 613.8944,
+						"physical": 842.6879999999999
+					},
+					"cast_id": 1,
+					"components": {
+						"fire": 460.4208,
+						"physical": 797.2747643888767
+					},
+					"critical": {
+						"chance": 1.0,
+						"critical": true,
+						"multiplier": 2.0
+					},
+					"details": [
+						{
+							"before_defense": 842.6879999999999,
+							"final": 797.2747643888767,
+							"parts": [
+								{
+									"base": 184.79999999999998,
+									"before_defense": 842.6879999999999,
+									"increased": 0.8999999999999999,
+									"lineage": [
+										"physical"
+									],
+									"modifier_indices": [
+										0,
+										1,
+										4,
+										6
+									],
+									"modifiers": [
+										"physical_increased",
+										"global_increased",
+										"dual_lineage_once",
+										"support:physical_focus"
+									],
+									"more": 1.2
+								}
+							],
+							"resistance": 0.05389092476826903,
+							"type": "physical"
+						},
+						{
+							"before_defense": 613.8944,
+							"final": 460.4208,
+							"parts": [
+								{
+									"base": 19.599999999999998,
+									"before_defense": 58.016,
+									"increased": 0.8500000000000001,
+									"lineage": [
+										"fire"
+									],
+									"modifier_indices": [
+										1,
+										2,
+										3,
+										4,
+										7
+									],
+									"modifiers": [
+										"global_increased",
+										"elemental_increased",
+										"fire_increased",
+										"dual_lineage_once",
+										"support:physical_focus"
+									],
+									"more": 0.8
+								},
+								{
+									"base": 123.2,
+									"before_defense": 555.8784,
+									"increased": 1.35,
+									"lineage": [
+										"physical",
+										"fire"
+									],
+									"modifier_indices": [
+										0,
+										1,
+										2,
+										3,
+										4,
+										6,
+										7
+									],
+									"modifiers": [
+										"physical_increased",
+										"global_increased",
+										"elemental_increased",
+										"fire_increased",
+										"dual_lineage_once",
+										"support:physical_focus",
+										"support:physical_focus"
+									],
+									"more": 0.96
+								}
+							],
+							"resistance": 0.25,
+							"type": "fire"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 1257.6955643888768,
+					"leech": {
+						"health": 28.522450931666302,
+						"mana": 49.07215421944384
+					},
+					"phase": "direct",
+					"prevented_components": {
+						"fire": 153.47360000000003,
+						"physical": 45.41323561112313
+					},
+					"projectile_id": 0,
+					"shield_spent": 0.0,
+					"skill_id": "cleave",
+					"tags": [
+						"hit",
+						"attack",
+						"melee",
+						"area"
+					],
+					"target_id": 1,
+					"total": 1257.6955643888768
+				},
+				{
+					"assembly": {
+						"added": {
+							"fire": 19.599999999999998,
+							"physical": 28.0
+						},
+						"added_effectiveness": 2.8,
+						"base_coefficient": 2.8,
+						"intrinsic": {
+							"physical": 280.0
+						},
+						"stage": "hit_base"
+					},
+					"before_defense_components": {
+						"fire": 613.8944,
+						"physical": 842.6879999999999
+					},
+					"cast_id": 1,
+					"components": {
+						"fire": 460.4208,
+						"physical": 797.2747643888767
+					},
+					"critical": {
+						"chance": 1.0,
+						"critical": true,
+						"multiplier": 2.0
+					},
+					"details": [
+						{
+							"before_defense": 842.6879999999999,
+							"final": 797.2747643888767,
+							"parts": [
+								{
+									"base": 184.79999999999998,
+									"before_defense": 842.6879999999999,
+									"increased": 0.8999999999999999,
+									"lineage": [
+										"physical"
+									],
+									"modifier_indices": [
+										0,
+										1,
+										4,
+										6
+									],
+									"modifiers": [
+										"physical_increased",
+										"global_increased",
+										"dual_lineage_once",
+										"support:physical_focus"
+									],
+									"more": 1.2
+								}
+							],
+							"resistance": 0.05389092476826903,
+							"type": "physical"
+						},
+						{
+							"before_defense": 613.8944,
+							"final": 460.4208,
+							"parts": [
+								{
+									"base": 19.599999999999998,
+									"before_defense": 58.016,
+									"increased": 0.8500000000000001,
+									"lineage": [
+										"fire"
+									],
+									"modifier_indices": [
+										1,
+										2,
+										3,
+										4,
+										7
+									],
+									"modifiers": [
+										"global_increased",
+										"elemental_increased",
+										"fire_increased",
+										"dual_lineage_once",
+										"support:physical_focus"
+									],
+									"more": 0.8
+								},
+								{
+									"base": 123.2,
+									"before_defense": 555.8784,
+									"increased": 1.35,
+									"lineage": [
+										"physical",
+										"fire"
+									],
+									"modifier_indices": [
+										0,
+										1,
+										2,
+										3,
+										4,
+										6,
+										7
+									],
+									"modifiers": [
+										"physical_increased",
+										"global_increased",
+										"elemental_increased",
+										"fire_increased",
+										"dual_lineage_once",
+										"support:physical_focus",
+										"support:physical_focus"
+									],
+									"more": 0.96
+								}
+							],
+							"resistance": 0.25,
+							"type": "fire"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 10.0,
+					"leech": {
+						"health": 0.34017513942881994,
+						"mana": 0.5852627091432299
+					},
+					"phase": "direct",
+					"prevented_components": {
+						"fire": 153.47360000000003,
+						"physical": 45.41323561112313
+					},
+					"projectile_id": 0,
+					"shield_spent": 5.0,
+					"skill_id": "cleave",
+					"tags": [
+						"hit",
+						"attack",
+						"melee",
+						"area"
+					],
+					"target_id": 2,
+					"total": 1257.6955643888768
+				}
+			],
+			"policy": [
+				true,
+				false
+			]
+		},
+		{
+			"critical": {
+				"draws": 0,
+				"events": 0,
+				"state": 4006165110084267948
+			},
+			"hits": [
+				{
+					"assembly": {
+						"added": {
+							"fire": 19.599999999999998,
+							"physical": 28.0
+						},
+						"added_effectiveness": 2.8,
+						"base_coefficient": 2.8,
+						"intrinsic": {
+							"physical": 280.0
+						},
+						"stage": "hit_base"
+					},
+					"before_defense_components": {
+						"fire": 306.9472,
+						"physical": 421.34399999999994
+					},
+					"cast_id": 1,
+					"components": {
+						"fire": 230.2104,
+						"physical": 378.25297934137853
+					},
+					"details": [
+						{
+							"before_defense": 421.34399999999994,
+							"final": 378.25297934137853,
+							"parts": [
+								{
+									"base": 184.79999999999998,
+									"before_defense": 421.34399999999994,
+									"increased": 0.8999999999999999,
+									"lineage": [
+										"physical"
+									],
+									"modifier_indices": [
+										0,
+										1,
+										4,
+										6
+									],
+									"modifiers": [
+										"physical_increased",
+										"global_increased",
+										"dual_lineage_once",
+										"support:physical_focus"
+									],
+									"more": 1.2
+								}
+							],
+							"resistance": 0.10227040294538761,
+							"type": "physical"
+						},
+						{
+							"before_defense": 306.9472,
+							"final": 230.2104,
+							"parts": [
+								{
+									"base": 19.599999999999998,
+									"before_defense": 29.008,
+									"increased": 0.8500000000000001,
+									"lineage": [
+										"fire"
+									],
+									"modifier_indices": [
+										1,
+										2,
+										3,
+										4,
+										7
+									],
+									"modifiers": [
+										"global_increased",
+										"elemental_increased",
+										"fire_increased",
+										"dual_lineage_once",
+										"support:physical_focus"
+									],
+									"more": 0.8
+								},
+								{
+									"base": 123.2,
+									"before_defense": 277.9392,
+									"increased": 1.35,
+									"lineage": [
+										"physical",
+										"fire"
+									],
+									"modifier_indices": [
+										0,
+										1,
+										2,
+										3,
+										4,
+										6,
+										7
+									],
+									"modifiers": [
+										"physical_increased",
+										"global_increased",
+										"elemental_increased",
+										"fire_increased",
+										"dual_lineage_once",
+										"support:physical_focus",
+										"support:physical_focus"
+									],
+									"more": 0.96
+								}
+							],
+							"resistance": 0.25,
+							"type": "fire"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 608.4633793413785,
+					"leech": {
+						"health": 13.649693380241356,
+						"mana": 23.516856967068925
+					},
+					"phase": "direct",
+					"prevented_components": {
+						"fire": 76.73680000000002,
+						"physical": 43.0910206586214
+					},
+					"projectile_id": 0,
+					"shield_spent": 0.0,
+					"skill_id": "cleave",
+					"tags": [
+						"hit",
+						"attack",
+						"melee",
+						"area"
+					],
+					"target_id": 1,
+					"total": 608.4633793413785
+				},
+				{
+					"assembly": {
+						"added": {
+							"fire": 19.599999999999998,
+							"physical": 28.0
+						},
+						"added_effectiveness": 2.8,
+						"base_coefficient": 2.8,
+						"intrinsic": {
+							"physical": 280.0
+						},
+						"stage": "hit_base"
+					},
+					"before_defense_components": {
+						"fire": 306.9472,
+						"physical": 421.34399999999994
+					},
+					"cast_id": 1,
+					"components": {
+						"fire": 230.2104,
+						"physical": 378.25297934137853
+					},
+					"details": [
+						{
+							"before_defense": 421.34399999999994,
+							"final": 378.25297934137853,
+							"parts": [
+								{
+									"base": 184.79999999999998,
+									"before_defense": 421.34399999999994,
+									"increased": 0.8999999999999999,
+									"lineage": [
+										"physical"
+									],
+									"modifier_indices": [
+										0,
+										1,
+										4,
+										6
+									],
+									"modifiers": [
+										"physical_increased",
+										"global_increased",
+										"dual_lineage_once",
+										"support:physical_focus"
+									],
+									"more": 1.2
+								}
+							],
+							"resistance": 0.10227040294538761,
+							"type": "physical"
+						},
+						{
+							"before_defense": 306.9472,
+							"final": 230.2104,
+							"parts": [
+								{
+									"base": 19.599999999999998,
+									"before_defense": 29.008,
+									"increased": 0.8500000000000001,
+									"lineage": [
+										"fire"
+									],
+									"modifier_indices": [
+										1,
+										2,
+										3,
+										4,
+										7
+									],
+									"modifiers": [
+										"global_increased",
+										"elemental_increased",
+										"fire_increased",
+										"dual_lineage_once",
+										"support:physical_focus"
+									],
+									"more": 0.8
+								},
+								{
+									"base": 123.2,
+									"before_defense": 277.9392,
+									"increased": 1.35,
+									"lineage": [
+										"physical",
+										"fire"
+									],
+									"modifier_indices": [
+										0,
+										1,
+										2,
+										3,
+										4,
+										6,
+										7
+									],
+									"modifiers": [
+										"physical_increased",
+										"global_increased",
+										"elemental_increased",
+										"fire_increased",
+										"dual_lineage_once",
+										"support:physical_focus",
+										"support:physical_focus"
+									],
+									"more": 0.96
+								}
+							],
+							"resistance": 0.25,
+							"type": "fire"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 10.0,
+					"leech": {
+						"health": 0.3364958478277587,
+						"mana": 0.579743771741638
+					},
+					"phase": "direct",
+					"prevented_components": {
+						"fire": 76.73680000000002,
+						"physical": 43.0910206586214
+					},
+					"projectile_id": 0,
+					"shield_spent": 5.0,
+					"skill_id": "cleave",
+					"tags": [
+						"hit",
+						"attack",
+						"melee",
+						"area"
+					],
+					"target_id": 2,
+					"total": 608.4633793413785
+				}
+			],
+			"policy": [
+				true,
+				true
+			]
+		}
+	],
+	"pure_fire": {
+		"burn_trace": [
+			{
+				"effective_raw_amount": 74.98125,
+				"from_time": 0.0,
+				"provenance": {
+					"cast_id": 0,
+					"phase": "direct",
+					"projectile_id": 0,
+					"skill_id": "meteor"
+				},
+				"raw_amount": 74.98125,
+				"raw_dps": 149.9625,
+				"settlement": {
+					"actor": "monster",
+					"components": {
+						"fire": 56.235937500000006
+					},
+					"damage_total": 56.235937500000006,
+					"details": [
+						{
+							"before_defense": 74.98125,
+							"final": 56.235937500000006,
+							"resistance": 0.25,
+							"type": "fire"
+						}
+					],
+					"health_lost": 56.235937500000006,
+					"mitigated_components": {
+						"fire": 18.745312499999997
+					},
+					"ok": true,
+					"overkill": 0.0,
+					"raw_components": {
+						"fire": 74.98125
+					},
+					"reason": "",
+					"remaining_health": 9568.8578125,
+					"remaining_shield": 0.0,
+					"shield_spent": 0.0,
+					"stage": "burning"
+				},
+				"source_id": 0,
+				"target_id": 1,
+				"target_kind": "monster",
+				"to_time": 0.5
+			}
+		],
+		"burns": [
+			{
+				"last_time": 0.5,
+				"provenance": {
+					"cast_id": 0,
+					"phase": "direct",
+					"projectile_id": 0,
+					"skill_id": "meteor"
+				},
+				"raw_dps": 149.9625,
+				"remaining": 2.5,
+				"source_id": 0,
+				"target_id": 1,
+				"target_kind": "monster"
+			}
+		],
+		"health": 9568.8578125,
+		"hits": [
+			{
+				"assembly": {
+					"added": {
+
+					},
+					"added_effectiveness": 4.3,
+					"base_coefficient": 4.3,
+					"intrinsic": {
+						"fire": 430.0
+					},
+					"stage": "hit_base"
+				},
+				"before_defense_components": {
+					"fire": 499.875
+				},
+				"cast_id": 0,
+				"components": {
+					"fire": 374.90625
+				},
+				"details": [
+					{
+						"base": 430.0,
+						"before_defense": 499.875,
+						"final": 374.90625,
+						"increased": 0.55,
+						"modifiers": [
+							"global_increased",
+							"elemental_increased",
+							"fire_increased",
+							"support:ignite"
+						],
+						"more": 0.75,
+						"resistance": 0.25,
+						"type": "fire"
+					}
+				],
+				"effect_id": "",
+				"health_lost": 374.90625,
+				"phase": "direct",
+				"prevented_components": {
+					"fire": 124.96875
+				},
+				"projectile_id": 0,
+				"shield_spent": 0.0,
+				"skill_id": "meteor",
+				"tags": [
+					"hit",
+					"spell",
+					"area"
+				],
+				"target_id": 1,
+				"total": 374.90625
+			}
+		],
+		"packet": {
+			"assembly": {
+				"added": {
+
+				},
+				"added_effectiveness": 4.3,
+				"base_coefficient": 4.3,
+				"intrinsic": {
+					"fire": 430.0
+				},
+				"stage": "hit_base"
+			},
+			"base": {
+				"fire": 430.0
+			},
+			"role": "direct",
+			"skill_id": "meteor",
+			"tags": [
+				"hit",
+				"spell",
+				"area"
+			]
+		}
+	},
+	"scope": "Bounded headless actual Main, real source allocations and owned support/equipment transactions; no visual or Windows acceptance; no historical-byte oracle",
+	"sections": {
+		"actual_basic_and_cleave": 52,
+		"focus_defense_leech_and_critical": 148,
+		"frozen_parent_child_return_and_secondary": 5,
+		"legal_source_and_owned_group": 56,
+		"pure_fire_and_dot_unchanged": 10,
+		"tornado_ignite_and_ember": 34
+	},
+	"source": {
+		"class_id": 1,
+		"effect": 65020,
+		"level": 5,
+		"mastery": "48267",
+		"route": [
+			"47175",
+			"31628",
+			"9511",
+			"23881",
+			"26523",
+			"6446",
+			"10221",
+			"54396",
+			"2550"
+		],
+		"supports": [
+			"physical_focus",
+			"fire_focus",
+			"ignite",
+			"focus",
+			"efficiency"
+		],
+		"version": 44
+	}
+}

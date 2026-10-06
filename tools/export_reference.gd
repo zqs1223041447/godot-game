@@ -127,6 +127,7 @@ static func collect() -> Dictionary:
 	result["defense_rating_affixes"] = defense_rating_affix_examples()
 	result["iron_reflexes"] = iron_reflexes_examples()
 	result["zealots_oath"] = zealots_oath_examples()
+	result["physical_fire_conversion"] = physical_fire_conversion_examples()
 	result["ambush"] = ambush_examples()
 	result["inward_pull"] = inward_pull_examples()
 	result["resolute_technique"] = resolute_technique_examples()
@@ -2555,3 +2556,94 @@ static func resolute_technique_examples() -> Dictionary:
 		"example_scope":"同一7级野蛮人合法路径，仅比较最后1点；两边都装备已有棱光长弓和终焰护符。技能按该角色快照无辅助编译，不宣称同时装配；预期值是一次尝试的统计比较，不是实战DPS",
 		"defense_scope":"护甲500与原始三抗100%为既有防御规则的隔离输入；按当前默认75%上限结算，不代表新增怪物或平衡调整",
 		"migration":"schema38严格验证旧37并原字节备份，只迁版本；装备词汇保持37，不赠物、不赠点、不重掷词缀"}
+
+
+## Five narrow comparisons use validated in-memory source builds and the real
+## compiler. No synthetic UI arithmetic, user saves, new items or images.
+static func physical_fire_conversion_examples() -> Dictionary:
+	var route: Array = ["47175", "31628", "9511", "23881", "26523", "6446", "10221", "54396", "2550"]
+	var entrances: Array = ["11505", "19749", "34927", "37911", "38320", "40271", "48267", "63268"]
+	var gateways: Dictionary = {"11505":"29049", "63268":"24324", "48267":"2550", "34927":"11924"}
+	var source: Dictionary = {}
+	for id: String in entrances:
+		var node: Dictionary = SourceTree.Data.node(id)
+		var selected: Dictionary = SourceTree.node_effect(id, 65020, 44)
+		assert(selected.status == "full" and SourceTree.node_effect(id, 65020, 43).status == "unsupported")
+		source[id] = {"group_id":node.group_id, "execution":selected, "reachable_group":gateways.has(id),
+			"gateway_id":gateways.get(id, ""), "legacy_execution":SourceTree.node_effect(id,65020,43)}
+	var target_stats: Dictionary = {"armour":{"armour":500.0}, "fire_resistance":{"fire_resistance":0.75}}
+	var examples: Dictionary = {}
+	for spec: Dictionary in [
+		{"id":"basic_blade", "name":"短刃近战普攻", "skill":"basic", "base":"forgeblade", "supports":[], "affixes":["whetstone_edge","tempered_edge","deepwell","wellturn"]},
+		{"id":"cleave_physical_focus", "name":"短刃裂刃＋物理专注", "skill":"cleave", "base":"forgeblade", "supports":["physical_focus"], "affixes":["whetstone_edge","tempered_edge","deepwell","wellturn"]},
+		{"id":"tornado_physical_focus_ignite", "name":"长弓龙卷＋物理专注＋点燃", "skill":"tornado", "base":"ashwood_bow", "supports":["physical_focus","ignite"], "affixes":["whetstone_edge","tempered_edge","deepwell","wellturn"]},
+		{"id":"tornado_fire_focus_ember", "name":"长弓龙卷＋火焰专注＋余烬扩散", "skill":"tornado", "base":"ashwood_bow", "supports":["fire_focus","ember_proliferation"], "affixes":["whetstone_edge","tempered_edge","deepwell","wellturn"]},
+		{"id":"tornado_added", "name":"符木龙卷＋外部物理及火焰点伤", "skill":"tornado", "base":"runewood_focus", "supports":[], "affixes":["attack_added_physical","attack_added_fire","deepwell","wellturn"]}]:
+		var pair: Dictionary = {"name":spec.name, "skill_id":spec.skill, "base_id":spec.base, "supports":spec.supports, "states":{}}
+		for enabled: bool in [false,true]:
+			var model := Canonical.new()
+			var item: Dictionary = _local_instance(spec.affixes,"rare",spec.base)
+			item.id = "gear_%06d" % int(model.snapshot().next_item_serial)
+			assert(Equipment.validate_instance(item), "Conversion reference weapon must be legal: " + spec.id)
+			assert(model._admit_reward_item(Canonical.Items.wrap_equipment(item)), "Conversion reference item must enter the real inventory: " + spec.id)
+			_reference_move(model,item.id,{"kind":"equipment","slot_id":"weapon"})
+			# Equip the already-owned detonation charm to retain a nonzero pure-fire
+			# secondary packet in the tornado rows. This is not a new reward.
+			_reference_move(model,"detonation_charm",{"kind":"equipment","slot_id":"amulet"})
+			var candidate: Dictionary = model.snapshot()
+			candidate.progress = {"level":5,"xp":0}
+			candidate.talents.class_id = 1
+			candidate.talents.allocated = route.duplicate()
+			candidate.talents.masteries = {}
+			candidate.talents.normal_points = 1
+			if enabled:
+				candidate.talents.allocated.append("48267")
+				candidate.talents.masteries["48267"] = 65020
+				candidate.talents.normal_points = 0
+			assert(Canonical.Rules.reason(candidate).is_empty() and SourceTree.reason(candidate).is_empty())
+			model._accept_memory(candidate)
+			var input: Dictionary = model.get_combat_snapshot()
+			var cast: Dictionary = Compiler.compile_basic(input) if spec.skill == "basic" else Compiler.compile_group(spec.skill,input,spec.supports)
+			assert(cast.ok and model.save_attempts == 0)
+			var state: Dictionary = {"stats":model.get_stats(), "snapshot":cast.snapshot, "instance":item,
+				"allocated":candidate.talents.allocated, "points_remaining":model.talent_points,
+				"whole_build_valid":true, "save_attempts":model.save_attempts, "hits":{},
+				"support_ids":cast.get("support_ids",[]), "mana":cast.get("mana",0.0), "cooldown":cast.get("cooldown",0.0),
+				"summary":Preview.summary(cast), "details":Preview.details(cast)}
+			for field: String in ["conversion_profile", "burn_profile", "critical"]:
+				if cast.has(field): state[field] = cast[field].duplicate(true)
+			for role: String in cast.packets:
+				var packet: Dictionary = cast.packets[role]
+				var resolved: Dictionary = Damage.resolve(packet,cast.snapshot.modifiers)
+				assert(not resolved.has("error"))
+				var hit: Dictionary = {"packet":packet, "resolved":resolved, "defended":{}}
+				for target_id: String in target_stats:
+					var profile: Dictionary = Defense.source_profile(target_stats[target_id],"monster")
+					var defended: Dictionary = Defense.apply_armour(Damage.resolve(packet,cast.snapshot.modifiers,profile.effective_resistances),profile.armour)
+					var settlement: Dictionary = Defense.settle_resolved(defended,0.0,10000.0)
+					assert(profile.ok and settlement.ok)
+					hit.defended[target_id] = {"profile":profile,"resolved":defended,"settlement":settlement}
+				state.hits[role] = hit
+			pair.states["after" if enabled else "before"] = state
+		var before: Dictionary = pair.states.before
+		var after: Dictionary = pair.states.after
+		assert(before.instance == after.instance and before.mana == after.mana and before.cooldown == after.cooldown)
+		if before.hits.has("secondary"):
+			assert(before.hits.secondary == after.hits.secondary and not after.hits.secondary.packet.has("conversion"))
+		examples[spec.id] = pair
+	return {"minimum_save_version":44,"source_policy":SourceTree.CURRENT_SAVE_VERSION,"equipment_vocabulary":Equipment.CURRENT_VOCABULARY,
+		"effect_id":65020,"source_line":"40% of Physical Damage Converted to Fire Damage","source_version":"3.29.1","source_sha256":SourceTree.Data.SOURCE_SHA256,
+		"fraction":0.4,"entrances":source,"reachable_gateways":gateways,"route":route,"mastery_id":"48267","class_id":1,"level":5,"point_budget":9,
+		"targets":target_stats,"examples":examples,"new_images":[],
+		"producer":"SourceTree → validated CanonicalGameState → SkillCompiler → DamageResolver → DefenseRules",
+		"example_scope":"同一5级野蛮人9点预算：前置路线花8点，选精通后花9点。装备为既有合法四缀稀有武器，双T3伤害前缀加深汲与泉旋，其他装备保持默认，仅改穿已拥有的爆破护符；每组只切换同一精通。数值是不暴击、成功命中的单次伤害，不是DPS",
+		"assembly":"先合计技能固有物理、按附加效用缩放的外部物理点伤与按命中系数缩放的局部武器物理，再把40%分给火焰、60%留作物理；原生火焰单独保留。龙卷自身原有60%物理/40%火焰分布不等于本次转换",
+		"lineage":"转换火焰保留physical/fire两种伤害来源；每条modifier数组记录只匹配一次。increased相加，独立MORE逐条相乘；同时覆盖两类型的一条记录不重复，同id的不同记录仍各算一次",
+		"focus":"物理专注或火焰专注对转换部分的两个独立条款均匹配，×1.20再×0.80＝×0.96；不能按id去重，也不是只取最终火焰标签。残余物理与原生火焰分别按自己的来源匹配",
+		"defense":"同一最终类型先合并一次，再走当前护甲和抗性；物理只对残余物理计算随命中大小变化的护甲，火焰合并原生与转换部分后走火抗。转换不是无条件增伤，对应防御与专注搭配会改变收益",
+		"burn":"仅既有可点燃命中继续点燃：最终防御前火焰合计只作为一次燃烧输入，然后火焰持续伤害加成与加速燃烧各算一次。燃烧tick不再转换或重吃命中增伤；没有新增普攻或裂刃点燃资格，纯火独立爆炸保持原规则",
+		"leech":"全攻击偷取按实际造成的命中总量；物理攻击偷取只取防御后且受实际护盾/生命扣减限制的残余物理占比，转换火焰不再算物理偷取。燃烧仍不偷取",
+		"snapshot":"施放时冻结原始组装、转换比例和modifier；退款或换装仅影响之后的新施放，已在途母箭、子箭和已建立燃烧保留原快照。无转换时不增加空profile、parts或转换字段",
+		"availability":"仅原始Fire Mastery65020完整原句开放。8个入口共享唯一效果，当前4个原始显著天赋组可达；另外4组仍被未实现前置阻挡。退款后才可由另一入口重新选择，不是可叠加8次",
+		"migration":"schema43→44先严格验证旧43并备份原字节；只升级版本，source44开放此一词汇，装备词汇仍39。不送点、宝石或装备，不改经济、原始源树英文、中文映射或素材",
+		"bounds":"没有多段或其他类型转换、额外获得伤害、Avatar of Fire、DoT转换、穿透或新异常规则；本页不把编译验证当作实战或Windows成品验收"}

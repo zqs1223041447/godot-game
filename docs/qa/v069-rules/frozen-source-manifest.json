@@ -1,0 +1,19 @@
+{
+  "base_commit": "094c1d7",
+  "files": [
+    {
+      "source": "scripts/combat/damage_resolver.gd",
+      "source_sha256": "37429d9754708d3bbbe9638f92bb8a038284326a4b9c422a70b7c2c4cfe3a1d5",
+      "fixture": "docs/qa/v069-rules/frozen/damage_resolver.gd",
+      "fixture_sha256": "d9f3036bfda9c83066d786bd792137fbfc07ffc1fa5f2a49c48711d9832db612",
+      "only_change": "Remove class_name declaration to avoid current global class collision"
+    },
+    {
+      "source": "scripts/combat/damage_base_compiler.gd",
+      "source_sha256": "0db4f094b99055881e658789d1a0282ba6798231787228184d60258eeb3504b3",
+      "fixture": "docs/qa/v069-rules/frozen/damage_base_compiler.gd",
+      "fixture_sha256": "c68b2fb9de6ebeef39ed3c50dcc9dad27a3760e84f9dad351221677e9c7a7410",
+      "only_change": "Remove class_name declaration to avoid current global class collision"
+    }
+  ]
+}
