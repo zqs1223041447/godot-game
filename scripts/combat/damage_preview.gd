@@ -43,6 +43,9 @@ static func critical_lines(cast: Dictionary) -> PackedStringArray:
 	var lines := PackedStringArray()
 	if not bool(cast.get("ok", false)) or entries(cast).is_empty():
 		return lines
+	if bool(cast.get("hit_policy", {}).get("cannot_deal_critical_strikes", false)):
+		lines.append("不能造成暴击（包括独立爆炸）")
+		return lines
 	var profiles: Dictionary = cast.get("critical", {})
 	for role: String in ["primary", "secondary"]:
 		if not profiles.has(role):
@@ -121,7 +124,9 @@ static func details(cast: Dictionary) -> String:
 	lines.append_array(shock_lines(cast))
 	if cast.get("recipe", {}).get("delivery", "") == "melee" and cast.get("skill_id", "") == "basic":
 		lines.append("普通近战攻击：距离 %.0f · 最多 %d 个目标；不发射投射物。" % [float(cast.recipe.radius), int(cast.recipe.max_targets)])
-	if cast.snapshot.has("accuracy"):
+	if not entries(cast).is_empty() and bool(cast.get("hit_policy", {}).get("hits_cannot_be_evaded", false)):
+		lines.append("命中不能被闪避；仍受距离、范围、墙体、免疫、护甲与抗性约束。")
+	elif cast.snapshot.has("accuracy"):
 		lines.append("上方是成功命中的伤害，未把命中率乘入；攻击命中值 %.0f，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。" % float(cast.snapshot.accuracy))
 	if cast.get("recipe", {}).has("_projectile_support_ids"):
 		var pierce: int = int(cast.recipe.pierce)

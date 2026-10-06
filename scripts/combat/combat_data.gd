@@ -6,6 +6,7 @@ const Data = preload("res://scripts/game_data.gd")
 const BaseCompiler = preload("res://scripts/combat/damage_base_compiler.gd")
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
 const Critical=preload("res://scripts/combat/critical_strike_rules.gd")
+const Resolute = preload("res://scripts/combat/resolute_technique_rules.gd")
 const Leech=preload("res://scripts/combat/leech_rules.gd")
 const ResourceCost=preload("res://scripts/combat/source_resource_rules.gd")
 const Spatial = preload("res://scripts/combat/source_spatial_rules.gd")
@@ -66,6 +67,7 @@ static func snapshot(stats: Dictionary, effects: Array) -> Dictionary:
 	value.merge(Burn.multiplier_from_stats(stats))
 	var leech:Dictionary=Leech.from_stats(stats)
 	if not leech.is_empty():value.leech_modifiers=leech
+	value.merge(Resolute.from_stats(stats))
 	return value
 
 

@@ -1,6 +1,6 @@
 class_name SourceStatPatterns
 extends RefCounted
-## Pure, closed-world parsing for a small set of raw PoE passive stat lines.
+## Pure, closed-world parsing for a small set of raw PoE passive stat entries.
 ## This parser does not apply the returned grants to a character or passive tree.
 
 const POSITIVE_PATTERNS: Array[Dictionary] = [
@@ -126,6 +126,9 @@ const ELEMENTAL_RESISTANCE_CAP_COMPOUND_PATTERNS: Array[Dictionary] = [
 	{"expression":"^\\+([0-9]+(?:\\.[0-9]+)?)% to all maximum Elemental Resistances$","stats":["maximum_fire_resistance_add","maximum_cold_resistance_add","maximum_lightning_resistance_add"],"mode":"flat","scale":0.01},
 ]
 
+# Schema38 only: one indivisible source entry, including its exact newline and case.
+const RESOLUTE_TECHNIQUE_ENTRY := "Your hits can't be Evaded\nNever deal Critical Strikes"
+
 const NEGATIVE_PATTERN: String = "^-([0-9]+(?:\\.[0-9]+)?)(?: to maximum (?:Life|Mana|Energy Shield)|% increased (?:Damage|Projectile Damage|Spell Damage|Fire Damage|Cold Damage|Lightning Damage|Elemental Damage|Area Damage|Attack Speed|Movement Speed|Mana Regeneration Rate|maximum Life|maximum Mana|maximum Energy Shield))$"
 const NO_EXACT_MATCH_REASON: String = "整行不匹配任何受支持的完整格式；未知 stat、附加词语、条件、武器限定、DoT、Minion 或标点变体均拒绝"
 static var _regex_cache: Dictionary = {}
@@ -139,10 +142,13 @@ static func _expression(pattern: String) -> RegEx:
 	return _regex_cache[pattern]
 
 
-static func parse_line(raw_line: Variant, allow_spatial:bool=true,allow_recharge:bool=true,allow_resource:bool=true,allow_flask:bool=true,allow_critical:bool=true,allow_leech:bool=true,allow_fire_dot:bool=true,allow_faster_burn:bool=true,allow_mana_guard:bool=true,allow_elemental_resistance_cap:bool=true) -> Dictionary:
+static func parse_line(raw_line: Variant, allow_spatial:bool=true,allow_recharge:bool=true,allow_resource:bool=true,allow_flask:bool=true,allow_critical:bool=true,allow_leech:bool=true,allow_fire_dot:bool=true,allow_faster_burn:bool=true,allow_mana_guard:bool=true,allow_elemental_resistance_cap:bool=true,allow_resolute:bool=true) -> Dictionary:
 	if not raw_line is String:
 		return _unsupported("输入必须是单行英文字符串")
 	var line: String = raw_line
+	# Do not split arbitrary multiline entries: both effects must enter together.
+	if allow_spatial and allow_recharge and allow_resource and allow_flask and allow_critical and allow_leech and allow_fire_dot and allow_faster_burn and allow_mana_guard and allow_elemental_resistance_cap and allow_resolute and line == RESOLUTE_TECHNIQUE_ENTRY:
+		return {"supported":true,"reason":"","grants":[{"stat":"resolute_technique","value":1.0,"mode":"flat"}]}
 	if line.contains("\n") or line.contains("\r"):
 		return _unsupported("多行文本不支持")
 	if line.strip_edges().is_empty():

@@ -34,7 +34,8 @@ const V33_VERSION := 33
 const V34_VERSION := 34
 const V35_VERSION := 35
 const V36_VERSION := 36
-const VERSION := 37
+const V37_VERSION := 37
+const VERSION := 38
 const LEGACY_MAX_ITEMS := 1024
 const V17_MAX_ITEMS := LEGACY_MAX_ITEMS + 1
 const MAX_ITEMS := V17_MAX_ITEMS + 2 # Two once-only migration bottles; bag capacity is unchanged.
@@ -75,6 +76,12 @@ static func decode_v28(raw: Variant) -> Dictionary:
 
 static func decode_v29(raw: Variant) -> Dictionary:
 	return _decode(raw, true, V29_VERSION, true)
+
+
+## Freeze all schema37 fields, source policy36 and equipment vocabulary37.
+static func decode_v37(raw: Variant) -> Dictionary:
+	var decoded := _decode(raw, true, V37_VERSION, true)
+	return decoded if reason_v37(decoded).is_empty() else {}
 
 
 ## Schema36 opens maximum resistance source nodes, but keeps equipment vocabulary34.
@@ -240,6 +247,13 @@ static func reason_v29(value: Variant, validate_talents: Callable = Callable(), 
 	return _reason(value, V29_VERSION, true, true, MAX_ITEMS, validate_talents, socket_ids)
 
 
+static func reason_v37(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
+	# A caller may add restrictions only after the whole frozen envelope is legal.
+	var native_reason := _reason(value, V37_VERSION, true, true, MAX_ITEMS, Callable(), socket_ids)
+	if not native_reason.is_empty(): return native_reason
+	return str(validate_talents.call(value)) if validate_talents.is_valid() else ""
+
+
 static func reason_v36(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
 	# Neither equipment nor native source legality may be relaxed by a callback.
 	var native_reason := _reason(value, V36_VERSION, true, true, MAX_ITEMS, Callable(), socket_ids)
@@ -390,7 +404,7 @@ static func _reason(value: Variant, expected_version: int, paged: bool, allow_cu
 ## Save schemas35/36 changed source policy only; they never defined equipment
 ## vocabularies35/36. Keep the explicit Catalog version API historically strict.
 static func equipment_vocabulary_for_save_version(save_version: int) -> int:
-	if save_version >= 37: return 37
+	if save_version >= V37_VERSION: return 37
 	return 34 if save_version >= V34_VERSION else save_version
 
 

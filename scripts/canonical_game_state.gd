@@ -209,6 +209,7 @@ static func _stats_for(candidate: Dictionary) -> Dictionary:
 	stats.additional_skill_slots = 0.0
 	stats.damaging_ailments_faster = 0.0
 	stats.damage_taken_from_mana_before_life = 0.0
+	stats.resolute_technique = 0.0
 	for stat: String in ["maximum_fire_resistance_add", "maximum_cold_resistance_add", "maximum_lightning_resistance_add"]:
 		stats[stat] = 0.0
 	# Explicit v39 player balance: natural monsters retain their zero base.
@@ -587,7 +588,9 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	var loaded:=super.load_build(path)
 	if loaded and old_version>0 and old_version<Rules.VERSION:
 		migrated_from_legacy=true
-		if old_version == Rules.V36_VERSION:
+		if old_version == Rules.V37_VERSION:
+			migration_message="旧存档已原字节备份，坚决技艺已开放：你的击中不能被闪避，同时不能造成暴击。原装备、点数与旅程保持，不额外赠物或赠点。"
+		elif old_version == Rules.V36_VERSION:
 			migration_message="旧存档已原字节备份，灰烬皮甲新增冰霜抗性与闪电抗性后缀；旧装备保持原值，新掉落或主动制作才使用新词池，不额外赠物或赠点。"
 		elif old_version == Rules.V35_VERSION:
 			migration_message="旧存档已原字节备份，三元素最大抗性天赋已开放；基础上限75%，本游戏安全上限83%。原始抗性需另行获得，原物品、点数与旅程保持，不额外赠物或赠点。"

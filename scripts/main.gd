@@ -26,6 +26,7 @@ const Combat = preload("res://scripts/combat/combat_data.gd")
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
 const Defense = preload("res://scripts/mechanics/defense_rules.gd")
 const CriticalRuntime = preload("res://scripts/combat/critical_strike_runtime.gd")
+const Resolute = preload("res://scripts/combat/resolute_technique_rules.gd")
 var critical_runtime = CriticalRuntime.new()
 const FeedbackRuntime = preload("res://scripts/combat/combat_feedback_runtime.gd")
 var feedback_runtime = FeedbackRuntime.new()
@@ -1336,6 +1337,7 @@ func _settle_projectile_events(events:Array[Dictionary],original_delta:float=0.0
 
 func _apply_damage_packet(enemy: Dictionary, packet: Dictionary, snapshot: Dictionary, color: Color,
 		slow: float = 0.0, provenance: Dictionary = {}) -> void:
+	if snapshot.has("resolute_technique") and not Resolute.snapshot_error(snapshot).is_empty(): return
 	var burn_at:float=_burn_event_time(float(provenance.time)) if provenance.has("time") else elapsed
 	# Shock queries the raw event instant, never the later normalized burn clock.
 	# An approximate-sort tie cannot make an earlier hit use a future status.
@@ -1357,6 +1359,8 @@ func _apply_damage_packet(enemy: Dictionary, packet: Dictionary, snapshot: Dicti
 		return
 	if not provenance.get("accuracy_checked",false) and not _attack_admitted(enemy,packet,snapshot): return
 	var critical:Dictionary=snapshot.get("critical_roll",{})
+	# Read only this hit's frozen policy, never the currently equipped build.
+	if snapshot.has("resolute_technique") and Resolute.active(snapshot): critical={}
 	var result: Dictionary = Damage.resolve(packet, snapshot.get("modifiers", []), enemy.get("resistances", {}),float(critical.get("multiplier",1.0)))
 	result = Defense.apply_armour(result,float(enemy.get("armour",0.0)))
 	var shock_increase:float=_shock_hit_increase("monster",int(enemy.id),shock_at)
@@ -1405,8 +1409,14 @@ func _projectile_contact_admitted(shot: Dictionary,target_id: int) -> bool:
 
 
 func _attack_admitted(enemy: Dictionary,packet: Dictionary,snapshot: Dictionary) -> bool:
-	if not packet.get("tags",[]).has("attack") or not snapshot.has("accuracy"): return true
-	var result := AttackHit.resolve(float(snapshot.accuracy),float(enemy.get("evasion",0.0)),float(enemy.get("evasion_entropy",50.0)))
+	if snapshot.has("resolute_technique") and not Resolute.snapshot_error(snapshot).is_empty(): return false
+	var unerring: bool = snapshot.has("resolute_technique") and Resolute.active(snapshot)
+	if not packet.get("tags",[]).has("attack") or (not snapshot.has("accuracy") and not unerring): return true
+	var result: Dictionary
+	if unerring:
+		result=AttackHit.resolve(float(snapshot.get("accuracy",0.0)),float(enemy.get("evasion",0.0)),float(enemy.get("evasion_entropy",50.0)),true)
+	else:
+		result=AttackHit.resolve(float(snapshot.accuracy),float(enemy.get("evasion",0.0)),float(enemy.get("evasion_entropy",50.0)))
 	if not result.ok: return false
 	enemy.evasion_entropy = result.entropy
 	_record_attack_admission("monster",int(enemy.id),result)

@@ -2,6 +2,7 @@ class_name CriticalStrikeRules
 extends RefCounted
 ## Pure critical profiles. Runtime owns the random stream and hit resolution.
 ## Chance increases add before scaling the base; multiplier additions are points.
+const Resolute = preload("res://scripts/combat/resolute_technique_rules.gd")
 const STAT_KEYS: Array[String] = [
 	"crit_chance_increased", "attack_crit_chance_increased", "spell_crit_chance_increased",
 	"melee_crit_chance_increased", "projectile_attack_crit_chance_increased",
@@ -53,6 +54,27 @@ static func error(snapshot: Dictionary) -> String:
 
 
 static func compile(snapshot: Dictionary, primary_tags: Array, has_secondary: bool) -> Dictionary:
+	# Run the complete old validation and arithmetic before applying the ban.
+	# Even an invalid derived multiplier must not become a valid zero profile.
+	var result: Dictionary = _compile_profiles(snapshot, primary_tags, has_secondary)
+	if not result.ok:
+		return result
+	var reason: String = Resolute.snapshot_error(snapshot)
+	if not reason.is_empty():
+		return _compiled({}, reason)
+	if not Resolute.active(snapshot) or not primary_tags.has("hit"):
+		return result
+	if result.critical.is_empty():
+		result.critical.primary = {"chance": 0.0, "multiplier": 1.5}
+		if has_secondary:
+			result.critical.secondary = {"chance": 0.0, "multiplier": 1.5}
+	else:
+		for role: String in result.critical:
+			result.critical[role].chance = 0.0
+	return result
+
+
+static func _compile_profiles(snapshot: Dictionary, primary_tags: Array, has_secondary: bool) -> Dictionary:
 	var reason: String = error(snapshot)
 	if not reason.is_empty():
 		return _compiled({}, reason)

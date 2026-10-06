@@ -19,7 +19,8 @@ const FIRE_DOT_SAVE_VERSION:=32
 const FASTER_BURN_SAVE_VERSION:=33
 const MANA_GUARD_SAVE_VERSION:=35
 const ELEMENTAL_RESISTANCE_CAP_SAVE_VERSION:=36
-const CURRENT_SAVE_VERSION:=ELEMENTAL_RESISTANCE_CAP_SAVE_VERSION
+const RESOLUTE_TECHNIQUE_SAVE_VERSION:=38
+const CURRENT_SAVE_VERSION:=RESOLUTE_TECHNIQUE_SAVE_VERSION
 static var _contexts: Dictionary = {}
 static var _line_cache: Dictionary = {}
 static var _node_effect_cache: Dictionary = {}
@@ -37,7 +38,8 @@ static func _execution_policy(version:int)->int:
 	if version<FIRE_DOT_SAVE_VERSION:return LEECH_SAVE_VERSION
 	if version<FASTER_BURN_SAVE_VERSION:return FIRE_DOT_SAVE_VERSION
 	if version<MANA_GUARD_SAVE_VERSION:return FASTER_BURN_SAVE_VERSION
-	return MANA_GUARD_SAVE_VERSION if version<ELEMENTAL_RESISTANCE_CAP_SAVE_VERSION else ELEMENTAL_RESISTANCE_CAP_SAVE_VERSION
+	if version<ELEMENTAL_RESISTANCE_CAP_SAVE_VERSION:return MANA_GUARD_SAVE_VERSION
+	return ELEMENTAL_RESISTANCE_CAP_SAVE_VERSION if version<RESOLUTE_TECHNIQUE_SAVE_VERSION else RESOLUTE_TECHNIQUE_SAVE_VERSION
 
 
 static func _context(class_id: int, budget: int) -> Dictionary:
@@ -126,7 +128,7 @@ static func lines_for(id: String, mastery_effect: int = 0) -> Array:
 static func line_effect(line: String, save_version:int=CURRENT_SAVE_VERSION) -> Dictionary:
 	var policy:int=_execution_policy(save_version)
 	var key:="%d:%s"%[policy,line]
-	if not _line_cache.has(key): _line_cache[key] = Patterns.parse_line(line,policy>=SPATIAL_SAVE_VERSION,policy>=RECHARGE_SAVE_VERSION,policy>=RESOURCE_SAVE_VERSION,policy>=FLASK_SAVE_VERSION,policy>=CRITICAL_SAVE_VERSION,policy>=LEECH_SAVE_VERSION,policy>=FIRE_DOT_SAVE_VERSION,policy>=FASTER_BURN_SAVE_VERSION,policy>=MANA_GUARD_SAVE_VERSION,policy>=ELEMENTAL_RESISTANCE_CAP_SAVE_VERSION)
+	if not _line_cache.has(key): _line_cache[key] = Patterns.parse_line(line,policy>=SPATIAL_SAVE_VERSION,policy>=RECHARGE_SAVE_VERSION,policy>=RESOURCE_SAVE_VERSION,policy>=FLASK_SAVE_VERSION,policy>=CRITICAL_SAVE_VERSION,policy>=LEECH_SAVE_VERSION,policy>=FIRE_DOT_SAVE_VERSION,policy>=FASTER_BURN_SAVE_VERSION,policy>=MANA_GUARD_SAVE_VERSION,policy>=ELEMENTAL_RESISTANCE_CAP_SAVE_VERSION,policy>=RESOLUTE_TECHNIQUE_SAVE_VERSION)
 	return _line_cache[key].duplicate(true)
 
 

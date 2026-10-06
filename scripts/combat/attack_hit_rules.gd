@@ -15,10 +15,14 @@ static func chance(accuracy: float,evasion: float) -> float:
 	return clampf(roundf(125.0*accuracy/(accuracy+pow(evasion/5.0,0.9))),5.0,100.0)/100.0
 
 
-static func resolve(accuracy: float,evasion: float,entropy: float = 50.0) -> Dictionary:
+static func resolve(accuracy: float,evasion: float,entropy: float = 50.0,hits_cannot_be_evaded: bool = false) -> Dictionary:
 	var probability := chance(accuracy,evasion)
 	if probability < 0.0 or not is_finite(entropy) or entropy < 0.0 or entropy >= 100.0:
 		return {"ok":false,"hit":false,"chance":0.0,"entropy":entropy}
+	# Bypass evasion only after the original inputs pass validation. Pausing
+	# entropy preserves the exact next ordinary roll after this frozen cast.
+	if hits_cannot_be_evaded:
+		return {"ok":true,"hit":true,"chance":1.0,"entropy":entropy}
 	var accumulated := entropy+probability*100.0
 	var hit := accumulated >= 100.0
 	return {"ok":true,"hit":hit,"chance":probability,"entropy":accumulated-100.0 if hit else accumulated}

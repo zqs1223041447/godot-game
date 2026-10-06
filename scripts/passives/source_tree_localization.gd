@@ -75,6 +75,19 @@ const STAT_CONSUMER_GROUPS := {
 		],
 		"stats": ["flask_life_recovery_increased", "flask_mana_recovery_increased", "flask_charges_gained_increased"]
 	},
+	"resolute_technique": {
+		"evidence": "source_tree_runtime.gd::apply_stats -> canonical_game_state.gd::_stats_for -> resolute_technique_rules.gd -> combat_data.gd snapshot -> skill_compiler.gd/attack_hit_rules.gd/critical_strike_rules.gd -> main.gd hit settlement",
+		"code_checks": [
+			{"path": "scripts/canonical_game_state.gd", "contains": "resolute_technique"},
+			{"path": "scripts/combat/resolute_technique_rules.gd", "contains": "static func active"},
+			{"path": "scripts/combat/resolute_technique_rules.gd", "contains": "cannot_deal_critical_strikes"},
+			{"path": "scripts/combat/combat_data.gd", "contains": "resolute_technique"},
+			{"path": "scripts/combat/skill_compiler.gd", "contains": "hit_policy"},
+			{"path": "scripts/combat/attack_hit_rules.gd", "contains": "if hits_cannot_be_evaded:"},
+			{"path": "scripts/combat/critical_strike_rules.gd", "contains": "Resolute.active"},
+		],
+		"stats": ["resolute_technique"]
+	},
 	"critical": {
 		"evidence": "critical_strike_rules.gd -> combat compilation and hit resolution",
 		"code_checks": [

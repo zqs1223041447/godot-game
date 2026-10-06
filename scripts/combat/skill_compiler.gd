@@ -7,6 +7,7 @@ const Supports = preload("res://scripts/combat/support_registry.gd")
 const Extension = preload("res://scripts/combat/projectile_support_rules.gd")
 const Area = preload("res://scripts/combat/area_support_rules.gd")
 const Critical=preload("res://scripts/combat/critical_strike_rules.gd")
+const Resolute = preload("res://scripts/combat/resolute_technique_rules.gd")
 const Burn=preload("res://scripts/combat/burn_rules.gd")
 const Shock = preload("res://scripts/combat/shock_rules.gd")
 const Ember=preload("res://scripts/combat/ember_proliferation_support_rules.gd")
@@ -66,6 +67,8 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 		canonical.append(id)
 	canonical.sort()
 	var compiled_snapshot: Dictionary = snapshot.duplicate(true)
+	if compiled_snapshot.has(Resolute.STAT) and not Resolute.active(compiled_snapshot):
+		compiled_snapshot.erase(Resolute.STAT)
 	var mana: float = float(skill.mana)
 	var has_extension: bool = false
 	# Compatibility validates every definition before this execution stage.
@@ -203,6 +206,8 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 		profile.stacking = "refresh_equal"
 		profile.roles = ["projectile"] if skill_id == "bolt" else ["bounce"] if skill_id == "chain" else ["direct"]
 		result.shock_profile = profile
+	var hit_policy: Dictionary = Resolute.compiled_profile(compiled_snapshot)
+	if not hit_policy.is_empty():result.hit_policy = hit_policy
 	return result
 
 
@@ -213,6 +218,7 @@ static func compile_basic(snapshot:Dictionary)->Dictionary:
 	var spatial:=Spatial.apply("basic",{"speed":640.0},snapshot,640.0)
 	if not spatial.error.is_empty():return _failure(spatial.error)
 	var frozen:Dictionary=spatial.snapshot
+	if frozen.has(Resolute.STAT) and not Resolute.active(frozen):frozen.erase(Resolute.STAT)
 	var packet:Dictionary=Recipes.event_packet(frozen,"basic","projectile")
 	var secondary:Dictionary=Recipes.secondary_packet(frozen,"basic")
 	if packet.is_empty() or secondary.is_empty():return _failure("普通攻击伤害组装无效")
@@ -227,6 +233,8 @@ static func compile_basic(snapshot:Dictionary)->Dictionary:
 	var result:Dictionary={"ok":true,"error":"","skill_id":"basic","recipe":spatial.recipe,"snapshot":frozen,"packets":frozen.compiled_packets.duplicate(true)}
 	if not critical.critical.is_empty():result.critical=critical.critical.duplicate(true)
 	if not leech.leech.is_empty():result.leech=leech.leech.duplicate(true)
+	var hit_policy: Dictionary = Resolute.compiled_profile(frozen)
+	if not hit_policy.is_empty():result.hit_policy = hit_policy
 	return result
 
 
@@ -234,6 +242,7 @@ static func compile_basic(snapshot:Dictionary)->Dictionary:
 ## Input validation still runs in compile_basic before selecting the branch.
 static func _compile_basic_melee(snapshot: Dictionary) -> Dictionary:
 	var frozen: Dictionary = snapshot.duplicate(true)
+	if frozen.has(Resolute.STAT) and not Resolute.active(frozen):frozen.erase(Resolute.STAT)
 	var packet: Dictionary = Recipes.event_packet(frozen, "basic", "direct")
 	if packet.is_empty():return _failure("普通近战攻击伤害组装无效")
 	var critical: Dictionary = Critical.compile(frozen, packet.tags, false)
@@ -248,6 +257,8 @@ static func _compile_basic_melee(snapshot: Dictionary) -> Dictionary:
 		"snapshot": frozen, "packets": frozen.compiled_packets.duplicate(true)}
 	if not critical.critical.is_empty():result.critical = critical.critical.duplicate(true)
 	if not leech.leech.is_empty():result.leech = leech.leech.duplicate(true)
+	var hit_policy: Dictionary = Resolute.compiled_profile(frozen)
+	if not hit_policy.is_empty():result.hit_policy = hit_policy
 	return result
 
 
@@ -305,7 +316,7 @@ static func _failure(error: String) -> Dictionary:
 static func _snapshot_error(snapshot: Dictionary) -> String:
 	# initial_count is reserved for compiled projectile snapshots, including empty supports.
 	# Reject re-entry instead of applying support more factors a second time.
-	if snapshot.has("initial_count") or snapshot.has("compiled_packets") or snapshot.has("compiled_skill_id") or snapshot.has("critical") or snapshot.has("critical_roll") or snapshot.has("leech") or snapshot.has("burn_policy") or snapshot.has("burn_proliferation") or snapshot.has("shock_policy"):
+	if snapshot.has("initial_count") or snapshot.has("compiled_packets") or snapshot.has("compiled_skill_id") or snapshot.has("critical") or snapshot.has("critical_roll") or snapshot.has("leech") or snapshot.has("burn_policy") or snapshot.has("burn_proliferation") or snapshot.has("shock_policy") or snapshot.has("hit_policy"):
 		return "施放快照已编译；必须从基础构筑快照重新编译"
 	var dot_error:String=Burn.snapshot_multiplier_error(snapshot)
 	if not dot_error.is_empty():return dot_error
@@ -365,7 +376,7 @@ static func _snapshot_error(snapshot: Dictionary) -> String:
 	var explosion: Variant = snapshot.explosion_recipe
 	if not explosion is Dictionary or explosion.size() != 3 or not _nonnegative(explosion.get("coefficient")) or not _nonnegative(explosion.get("radius")) or not _nonnegative(explosion.get("added_effectiveness")) or float(explosion.added_effectiveness) != 0.0:
 		return "独立爆炸配方无效"
-	return ""
+	return Resolute.snapshot_error(snapshot)
 
 
 static func _projectile_recipe_error(recipe: Variant) -> String:
