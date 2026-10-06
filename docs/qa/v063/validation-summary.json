@@ -1,0 +1,264 @@
+{
+  "base_commit": "b93018005413444ad6f988974f4ef3ea09902c5e",
+  "total_checks": 58593,
+  "counts": {
+    "pure_contract_assertions": 58593
+  },
+  "count_scope": "58546 full typed-return comparisons included within58593 assertions; scene bytes, seven frozen PCKgolden vectors, microbench calls and repeated failed tests are not counted as extra features",
+  "full_typed_byte_comparisons": 58546,
+  "scene_comparison": {
+    "no_burn": {
+      "before": {
+        "max_us": 71601,
+        "mean_us": 52481.875,
+        "n": 24,
+        "over_16_7_ms": 24,
+        "over_33_3_ms": 24,
+        "p50_us": 51453,
+        "p95_us": 63996
+      },
+      "after": {
+        "max_us": 71942,
+        "mean_us": 51051.5,
+        "n": 24,
+        "over_16_7_ms": 24,
+        "over_33_3_ms": 24,
+        "p50_us": 49479,
+        "p95_us": 65708
+      },
+      "mean_change_fraction": -0.027254647437805923,
+      "median_change_fraction": -0.03836510990612796,
+      "p95_change_fraction": 0.02675167197949868,
+      "peak_change_fraction": 0.004762503316992683,
+      "equal": {
+        ".bin": {
+          "bytes": 29154664,
+          "sha256": "67b59a8dbe484f78859579b42708f2a092f8e923c9c038b5b61723ceba1a4dba",
+          "exact_equal": true
+        },
+        ".save": {
+          "bytes": 12177,
+          "sha256": "36d34d509f6f43ea18e1d63ef814762c7aab46e214ec0a676eda232d8f729f68",
+          "exact_equal": true
+        }
+      },
+      "reward_kills": 0,
+      "initial_enemies": 100,
+      "frames": 24,
+      "paired_frames_candidate_faster": 15,
+      "paired_frames": 24
+    },
+    "ember_deaths": {
+      "before": {
+        "max_us": 635268,
+        "mean_us": 45278.32666666667,
+        "n": 150,
+        "over_16_7_ms": 64,
+        "over_33_3_ms": 53,
+        "p50_us": 12432,
+        "p95_us": 148306
+      },
+      "after": {
+        "max_us": 564997,
+        "mean_us": 34848.94,
+        "n": 150,
+        "over_16_7_ms": 59,
+        "over_33_3_ms": 52,
+        "p50_us": 8709,
+        "p95_us": 118826
+      },
+      "mean_change_fraction": -0.23033948987219632,
+      "median_change_fraction": -0.29946911196911197,
+      "p95_change_fraction": -0.1987782018259544,
+      "peak_change_fraction": -0.11061630681853962,
+      "equal": {
+        ".bin": {
+          "bytes": 109388768,
+          "sha256": "8e3ea9b53c6ed033c5f15b9286118332241b4f4ab08139ab816c4af2da79b2a3",
+          "exact_equal": true
+        },
+        ".save": {
+          "bytes": 14160,
+          "sha256": "86be411f36df6cb337303a6435982123b0295326ccae1d56065b30b9e21fe70a",
+          "exact_equal": true
+        }
+      },
+      "reward_kills": 27,
+      "initial_enemies": 100,
+      "frames": 150,
+      "paired_frames_candidate_faster": 148,
+      "paired_frames": 150
+    }
+  },
+  "production_inputs": 499,
+  "changed_gameplay_file": "scripts/mechanics/defense_rules.gd",
+  "scope_manifest": "docs/qa/v063-settlement-rules/scope.json",
+  "reference_preservation": "docs/qa/v063-integration/reference-preservation.json",
+  "old_images_and_font_unchanged": true,
+  "schema": 39,
+  "equipment_vocabulary": 39,
+  "source_policy": 38,
+  "boundaries": [
+    "Only validated ordinarymonster fireburn fastpath; publicinvalid inputs remainchecked, no claimallbranches optimized",
+    "First candidateString actor/stagekeys corrected to originalStringName; nextfailure was one testexpectation only; originallogs retained",
+    "Pure execution receipts are originaltoolresult transcriptions; unknownelapsednotinvented; prior harnessSHA reconstruction documented",
+    "First no-burn scene pair differedonlyrandompreseedstartup rings; correctedfixture clearsdiscarded initial effects; finalobservations stillincluderings withoutprojection",
+    "All174ticks fullbefore/afterobservations and actualsavebytes exact;27rootrewards unchanged",
+    "No-burn mixedsmalltiming variations included; deathcase mean-23percent/p95-19.9percent/peak-11.1percent is boundedcloudCPU result, notWindowsFPS; residual565mspeak remains",
+    "UnmodifiedSourceTree/UI/items/defense numbers reused; no newfontglyph/assets/screenshots/migration/600seconds/historicalsuite"
+  ],
+  "logs": {
+    "docs/qa/v063-integration/golden.log.txt": {
+      "bytes": 146,
+      "sha256": "81c1fa155f3f282e126453aa313c8e23bf45a2725bbf52bcc19a2ec29ef70840"
+    },
+    "docs/qa/v063-integration/probe-parse.log.txt": {
+      "bytes": 73,
+      "sha256": "a9912b85473f126d3f4f63ec824170c828df3473a292f866dde86cafda5b66da"
+    },
+    "docs/qa/v063-integration/reference-export.log.txt": {
+      "bytes": 205,
+      "sha256": "881c3c8a76e46d3e862aafeb146330317ff3f9b9ded3708c83c5c5e40bdf8c0b"
+    },
+    "docs/qa/v063-settlement-rules/run-01.log.txt": {
+      "bytes": 34562,
+      "sha256": "5db4992c4cc848c65a1d6014309b2783fc69828de265cee57e238081e7a72abf"
+    },
+    "docs/qa/v063-settlement-rules/run-02.log.txt": {
+      "bytes": 1292,
+      "sha256": "002824cfa6b37ed442e2b5b4a46390d9196e433ca9926ed3252df828814f38d9"
+    },
+    "docs/qa/v063-settlement-rules/run-03.log.txt": {
+      "bytes": 1211,
+      "sha256": "69e4a4f64db37587e31e0430294e20109166984d0a95201da39e7c2d819cfa22"
+    },
+    "docs/qa/v063-settlement/after-ember_deaths.log.txt": {
+      "bytes": 284,
+      "sha256": "3639f9cfd3202812a7d812a7cc2ece15f8e505380f45db93a108d8d539069d9b"
+    },
+    "docs/qa/v063-settlement/after-no_burn.log.txt": {
+      "bytes": 276,
+      "sha256": "c7e58e8c03360c14d8c2a0b6fb6b46f697d858a976111e8e29899a1e1b830fa0"
+    },
+    "docs/qa/v063-settlement/before-ember_deaths.log.txt": {
+      "bytes": 293,
+      "sha256": "e9da9fdf27e826016068a71f66428ba29fc18629a8a88b8cd57abb3a266e499e"
+    },
+    "docs/qa/v063-settlement/before-no_burn.log.txt": {
+      "bytes": 278,
+      "sha256": "de9f91699979c1a35b9034889eb7f9b4ea089e8cec2fd5436f17fdbbb47ed4a8"
+    },
+    "docs/qa/v063-settlement/first-comparison-diff.log.txt": {
+      "bytes": 1552,
+      "sha256": "c6f501fe285ee0c13afd084df4cb78436bf6302a150b95a5615f10b9f9d86ff2"
+    },
+    "docs/qa/v063-settlement/first-startup-rings/after-no_burn.log.txt": {
+      "bytes": 285,
+      "sha256": "4a5b01207d7deecadd5d455f40d279819cb36f3907f4d3bbe022f24793e7a9e5"
+    },
+    "docs/qa/v063-settlement/first-startup-rings/before-no_burn.log.txt": {
+      "bytes": 285,
+      "sha256": "60725d89645f4e071b1f8fa30fac3e719c303be75ff0335dce97e1fe382bfe24"
+    },
+    "docs/qa/v063-settlement/parse.log.txt": {
+      "bytes": 73,
+      "sha256": "a9912b85473f126d3f4f63ec824170c828df3473a292f866dde86cafda5b66da"
+    },
+    "docs/qa/v063-settlement/startup-rings-diagnosis.log.txt": {
+      "bytes": 149,
+      "sha256": "256c93696d02ff1bb84a2a0ec55d7c4b5c0ab4b4d59aab5a5254ca899222b741"
+    }
+  },
+  "log_count": 15,
+  "reports": {
+    "docs/qa/v063-integration/golden-result.json": {
+      "bytes": 164,
+      "sha256": "85446516df7c3f1b05ac2aebee14fefd7c77be2e23c43339cacd4f893dcd944b"
+    },
+    "docs/qa/v063-integration/probe-parse-result.json": {
+      "bytes": 165,
+      "sha256": "dcbd924e38ef056d1c512f82dd2fadeddc78c624f34fd613f744e32f16b1731a"
+    },
+    "docs/qa/v063-integration/reference-export-result.json": {
+      "bytes": 54,
+      "sha256": "742b0edb2689a3f1422bdaac42f301e641fa6f7badbdf6ac7acba00bc19b2390"
+    },
+    "docs/qa/v063-integration/reference-preservation.json": {
+      "bytes": 15558,
+      "sha256": "d63e9ed5e2b59e1ef5278e43195ac9bad69a4cb4fb3621ed8ec4220400a42db2"
+    },
+    "docs/qa/v063-settlement-rules/execution-receipts.json": {
+      "bytes": 7679,
+      "sha256": "bc6c15ad0fb9fd15c77aaa20787eea99cf146eef731694bfb24f30ab711c6d8d"
+    },
+    "docs/qa/v063-settlement-rules/manifest.json": {
+      "bytes": 783,
+      "sha256": "3201ca6e7a460f8aec2902d2138e6e9673e1b4db2c9585f2f90bf2bd13778aab"
+    },
+    "docs/qa/v063-settlement-rules/results.json": {
+      "bytes": 1306,
+      "sha256": "dcfc3f137b8cf88fea1e5a9fb657bb5487a8aeefbf8218b0c21c2aa2ae7365e7"
+    },
+    "docs/qa/v063-settlement-rules/scope.json": {
+      "bytes": 1034,
+      "sha256": "4aa892ac744e9df92992b13858433b12730aba0298cc3fb5a3b609f77dca699a"
+    },
+    "docs/qa/v063-settlement/after-ember_deaths.json": {
+      "bytes": 36792,
+      "sha256": "e1c0c5c2355251f4b9f1af5d0bc8d9dc1eff4d046b58982ac253c2826747a1b8"
+    },
+    "docs/qa/v063-settlement/after-no_burn.json": {
+      "bytes": 6869,
+      "sha256": "8c1e1ea0405febf2a00875f81bbec8e0e96483b0a2176588ca2c7200ac108a65"
+    },
+    "docs/qa/v063-settlement/before-ember_deaths.json": {
+      "bytes": 36876,
+      "sha256": "3f997aaab563359650eda27e170da2e01c1bf05d70adb98f856ef3f116f01abc"
+    },
+    "docs/qa/v063-settlement/before-no_burn.json": {
+      "bytes": 6871,
+      "sha256": "b8c0d9582f0e2e10433f6efd6c07ebf4fb53ca21bfd023768825ae1be337a439"
+    },
+    "docs/qa/v063-settlement/comparison.json": {
+      "bytes": 2178,
+      "sha256": "5171fc2bd3fb0f9c574cef8ddf41ef4a11cdf050d8686dda8652eb6d31a62277"
+    },
+    "docs/qa/v063-settlement/first-startup-rings/after-no_burn.json": {
+      "bytes": 6880,
+      "sha256": "03d4923f0a290565c5bae2117a8c7762a634f11517aac015c9587b606f781d95"
+    },
+    "docs/qa/v063-settlement/first-startup-rings/archives.json": {
+      "bytes": 551,
+      "sha256": "60f22240f4dcd5645e555ddd9bb2224a22720e2a44745182c4da28deb8ac589b"
+    },
+    "docs/qa/v063-settlement/first-startup-rings/before-no_burn.json": {
+      "bytes": 6880,
+      "sha256": "e8e0488315417f57d2053bc84124ac5d19bb0515d722e87819376d78d9640522"
+    },
+    "docs/qa/v063-settlement/first-startup-rings/production-inputs.json": {
+      "bytes": 79346,
+      "sha256": "0c5d81db42c35c3d9feff489ab36dcf1f925bbdb210ad04e6f544837c4a8c3c2"
+    },
+    "docs/qa/v063-settlement/first-startup-rings/run-results.json": {
+      "bytes": 489,
+      "sha256": "a456f57c83049b0aee6e76cd8175887ed612413567a80acf7ddd3064bf99e0e2"
+    },
+    "docs/qa/v063-settlement/observation-archives.json": {
+      "bytes": 1165,
+      "sha256": "575d3d456977ec93ae31da972b59578299b535e8ac74135a1ef8c126d03597eb"
+    },
+    "docs/qa/v063-settlement/parse-result.json": {
+      "bytes": 46,
+      "sha256": "f0a0ac49d82a191ad4d3d81672134bb19a7d0cbdaf73c2067272b9030fabd149"
+    },
+    "docs/qa/v063-settlement/production-inputs.json": {
+      "bytes": 79346,
+      "sha256": "58883cc317863922ac9c8e6b70f6e61ab4e8b25e158a762df19c01f1dafa7bea"
+    },
+    "docs/qa/v063-settlement/run-results.json": {
+      "bytes": 988,
+      "sha256": "a90fbda24b31a2a26c51710c671cf65a5cdd2741f1894dd835127bf64af20d02"
+    }
+  },
+  "report_count": 22
+}

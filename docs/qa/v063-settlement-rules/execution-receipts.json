@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "origin": "Transcribed original exec_command/write_stdin receipts from this worker and the retained original log bytes. No test was rerun to create this record.",
+  "baseline_commit": "b93018005413444ad6f988974f4ef3ea09902c5e",
+  "cwd": "/workspace/scratch/a51485f153de/v063-burn-settlement",
+  "command_template": "XDG_DATA_HOME=/tmp/godot-m1-v063-settlement-rules-data XDG_CONFIG_HOME=/tmp/godot-m1-v063-settlement-rules-config XDG_CACHE_HOME=/tmp/godot-m1-v063-settlement-rules-cache /usr/local/bin/godot --headless --path . --script res://tests/burn_settlement_equivalence_test.gd > docs/qa/v063-settlement-rules/run-{NN}.log.txt 2>&1",
+  "time_note": "Original process start/end UTC timestamps and whole-process duration were not recorded, so they remain null. Tool wall_time_seconds values are exact original tool-call waits; they are not test durations. The final original log/results.json retains the separate microbenchmark durations.",
+  "source_hash_provenance": {
+    "test_path": "tests/burn_settlement_equivalence_test.gd",
+    "production_path": "scripts/mechanics/defense_rules.gd",
+    "run_03": "Current file bytes match the tested SHA-256 values already pinned in scope.json.",
+    "run_02_test": "Reconstructed in memory from the hash-verified run-03 source by reversing the one recorded expectation-line patch. This historical hash was reconstructed after execution, not captured at launch.",
+    "run_01_test": "Reconstructed in memory from run-02 by removing the one recorded StringName key-type assertion added after run 1. This historical hash was reconstructed after execution, not captured at launch.",
+    "run_01_production": "Reversed the recorded two-key StringName production correction and verified the resulting complete bytes against Git commit 8cb70c7:scripts/mechanics/defense_rules.gd.",
+    "test_patch_after_run_01": {
+      "operation": "insert immediately after insertion-order expectation",
+      "inserted_line": "\t_check(typeof(signed.keys()[12]) == TYPE_STRING_NAME and typeof(signed.keys()[13]) == TYPE_STRING_NAME, \"Original property-assigned actor/stage keys remain StringName\")"
+    },
+    "test_patch_after_run_02": {
+      "old_line": "\t_check(signed.keys() == [\"ok\", \"reason\", \"raw_components\", \"components\", \"mitigated_components\", \"damage_total\", \"shield_spent\", \"health_lost\", \"remaining_shield\", \"remaining_health\", \"overkill\", \"details\", \"actor\", \"stage\"], \"Receipt insertion order stays exact\")",
+      "new_line": "\t_check(signed.keys() == [\"ok\", \"reason\", \"raw_components\", \"components\", \"mitigated_components\", \"damage_total\", \"shield_spent\", \"health_lost\", \"remaining_shield\", \"remaining_health\", \"overkill\", \"details\", &\"actor\", &\"stage\"], \"Receipt insertion order stays exact\")"
+    }
+  },
+  "runs": [
+    {
+      "run": 1,
+      "log": "run-01.log.txt",
+      "log_sha256": "5db4992c4cc848c65a1d6014309b2783fc69828de265cee57e238081e7a72abf",
+      "test_source_sha256": "193cbbeb1dc57d4e11113477683a1194c1aee0ad4a3a0d9e17a4acf44131e131",
+      "production_source_sha256": "23f95193e5fa488d80583a3516ca5215bbfe0d05f77f1bb52bb09c514948f8c9",
+      "started_at_utc": null,
+      "finished_at_utc": null,
+      "process_elapsed_seconds": null,
+      "launch_tool_result": {
+        "tool": "exec_command",
+        "chunk_id": "3beaa8",
+        "session_id": 12960,
+        "wall_time_seconds": 1.001894615,
+        "exit_code": null
+      },
+      "completion_tool_result": {
+        "tool": "write_stdin",
+        "chunk_id": "1f9d5e",
+        "session_id": 12960,
+        "wall_time_seconds": 2.6803e-05,
+        "exit_code": 1
+      },
+      "checks": 58585,
+      "failures": 12853,
+      "typed_byte_comparisons": 58546,
+      "note": "Initial candidate: actor/stage receipt keys were String; original property assignments use StringName. Production exact-byte differences remain in this failed log."
+    },
+    {
+      "run": 2,
+      "log": "run-02.log.txt",
+      "log_sha256": "002824cfa6b37ed442e2b5b4a46390d9196e433ca9926ed3252df828814f38d9",
+      "test_source_sha256": "3a99529963115fe634e189c38ceedc3d870a12fb9ed08367f7ff9052eaf83f37",
+      "production_source_sha256": "a211d7714f8b23cd382dbe5093328104ee95c8022b99813329aa2f8534c45361",
+      "started_at_utc": null,
+      "finished_at_utc": null,
+      "process_elapsed_seconds": null,
+      "launch_tool_result": {
+        "tool": "exec_command",
+        "chunk_id": "98b30b",
+        "session_id": 30819,
+        "wall_time_seconds": 1.001281802,
+        "exit_code": null
+      },
+      "completion_tool_result": {
+        "tool": "write_stdin",
+        "chunk_id": "8d2d21",
+        "session_id": 30819,
+        "wall_time_seconds": 2.302e-05,
+        "exit_code": 1
+      },
+      "checks": 58586,
+      "failures": 1,
+      "typed_byte_comparisons": 58546,
+      "note": "Production correction changes only actor/stage key literals to StringName. Added an explicit key-type assertion. All 58,546 oracle byte comparisons pass; the sole failure is the independent insertion-order expectation still using String keys."
+    },
+    {
+      "run": 3,
+      "log": "run-03.log.txt",
+      "log_sha256": "69e4a4f64db37587e31e0430294e20109166984d0a95201da39e7c2d819cfa22",
+      "test_source_sha256": "1af63eb8e90c492e7010c371ec8f23a554cc9239135313333f89f09ce506f98d",
+      "production_source_sha256": "a211d7714f8b23cd382dbe5093328104ee95c8022b99813329aa2f8534c45361",
+      "started_at_utc": null,
+      "finished_at_utc": null,
+      "process_elapsed_seconds": null,
+      "launch_tool_result": {
+        "tool": "exec_command",
+        "chunk_id": "fb7ef3",
+        "session_id": 62437,
+        "wall_time_seconds": 1.001281802,
+        "exit_code": null
+      },
+      "completion_tool_result": {
+        "tool": "write_stdin",
+        "chunk_id": "f423ea",
+        "session_id": 62437,
+        "wall_time_seconds": 0.000113591,
+        "exit_code": 0
+      },
+      "checks": 58593,
+      "failures": 0,
+      "typed_byte_comparisons": 58546,
+      "note": "Only the insertion-order test expectation changes actor/stage to StringName after run 2. Production is unchanged from run 2. Passing original run includes the seven timing-total checks."
+    }
+  ],
+  "coverage_already_in_passing_58593": [
+    {
+      "coverage": "Full metadata typed-byte equivalence",
+      "checks": 1,
+      "source": "tests/burn_settlement_equivalence_test.gd:246",
+      "original_report_category": "unchanged_metadata"
+    },
+    {
+      "coverage": "Independent nested burn-return dictionaries/typed arrays and later-call isolation, both actors across zero/mana/cap/mana-plus-cap options",
+      "checks": 16,
+      "source": "tests/burn_settlement_equivalence_test.gd:249",
+      "assertion_lines": [
+        261,
+        262
+      ]
+    },
+    {
+      "coverage": "Public settlement result cannot mutate its nested resolved input, including detail modifiers",
+      "checks": 1,
+      "source": "tests/burn_settlement_equivalence_test.gd:263",
+      "assertion_lines": [
+        269
+      ]
+    },
+    {
+      "coverage": "Hit and source-hit result mutation cannot alter caller components/defense stats",
+      "checks": 2,
+      "source": "tests/burn_settlement_equivalence_test.gd:270",
+      "assertion_lines": [
+        278
+      ]
+    }
+  ],
+  "coverage_note": "These 20 metadata/ownership/input-isolation checks are included in the original 58,593 total, not additional rerun checks. The input-isolation assertions explicitly cover the resolved packet and hit/source-hit caller dictionaries; burn output isolation covers its freshly constructed nested receipts."
+}
