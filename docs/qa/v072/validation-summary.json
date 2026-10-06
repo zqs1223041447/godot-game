@@ -1,0 +1,172 @@
+{
+  "base_commit": "bf794d05f2468ccda22bb170a643839b5aba880e",
+  "stage_commit": "c60bc6d881a4b18235b9dac6cd704267e6c659e6",
+  "total_checks": 7252,
+  "counts": {
+    "pure_gear_and_craft": 5317,
+    "strict_migration": 347,
+    "actual_main_unique": 1588
+  },
+  "production_inputs": 537,
+  "save_schema": 46,
+  "equipment_vocabulary": 46,
+  "source_policy_unchanged": 45,
+  "current_loot_profile": "canonical_v46",
+  "current_armor_pool_unchanged": "defense_v39",
+  "legacy_comparisons": {
+    "item_and_post_rng": 81,
+    "full_craft_plans": 664,
+    "scope": "Old explicit histories preserved, current30% nine-slot pool deliberately changes supported drops; other bases/loot weights/order preserved."
+  },
+  "reference": {
+    "passed": true,
+    "baseline_commit": "bf794d05f2468ccda22bb170a643839b5aba880e",
+    "reused_actual_main_fixture_count": 5,
+    "exact_current_casts_checked": 15,
+    "historical_v070_casts_preserved": 9,
+    "old_catalog_preserved_except_explicit_projection": true,
+    "source_coverage_byte_identical": true,
+    "source_policy_preserved": 45,
+    "authoritative_html_values_and_labels_checked": 65,
+    "old_html_anchors_preserved": 3826,
+    "html_unique_ids": 3831,
+    "all_anchor_and_local_file_links_valid": true,
+    "old_asset_pngs_preserved": 63,
+    "old_reference_pngs_preserved": 70,
+    "catalog_bytes": 13926879,
+    "catalog_sha256": "4b3cfbc9a3427f834b34e25beb6fda85c4a899ea934830675aaf817fdfcd9e92",
+    "html_sha256": "956b97ed387728b385ce33d12965bfb3bd69e5a543360e5ea1d074c8aa03f1b9",
+    "scope": "One export/build/check; no new Main, historical full-suite, native launch, import or packaging"
+  },
+  "font": {
+    "unchanged": true,
+    "mapped": 1661,
+    "sha256": "74a2ff2eac4a552a7d891ebb420502ddbbe632ea46a29adb67c2ec9bcf90caeb",
+    "runtime_files": 194,
+    "fresh_scanned": 8,
+    "missing": []
+  },
+  "delivery": "Source-only branch/main normalFF; no export/package/tag/Release.",
+  "boundaries": [
+    "Main1539 firstpass, then only accuracy section322 with strengthened actualcriticalfield assertion; unique1588, not sum.",
+    "Pure-suite original exit/stdout transcribed;35file inputSHA was after-run readback, no invented runtime duration.",
+    "F8 two checker-only failures and wording-only rebuild retained; Godot data export once, no Main repeat.",
+    "Nine perfect resist suffixes are an upper bound, not ordinary loot expectation."
+  ],
+  "reports": {
+    "docs/qa/v072-rules/glove-ring-rules.json": {
+      "bytes": 3598,
+      "sha256": "a11fcead30ee9e462e397aa52e290614c57e31c88258806163a77667a367937d"
+    },
+    "docs/qa/v072-rules/glove-ring-run-receipt.json": {
+      "bytes": 3997,
+      "sha256": "0b939d629130984de3a9fc6fafdadb4ccc3279d5b04356c819daf0a17464d383"
+    },
+    "docs/qa/v072-migration/20261006T070613579808Z-checks.json": {
+      "bytes": 2923,
+      "sha256": "595dd39e9251ddd3aba7eb4a886bf1bb83d1abce40fa699fc2bef534b4f8b281"
+    },
+    "docs/qa/v072-gameplay/acceptance.json": {
+      "bytes": 3041,
+      "sha256": "6f531c4e617b32e6fa04651ef523ae3bc6cdf03703bfcce67d428e86cba8625e"
+    },
+    "docs/qa/v072-reference/v071-preservation.json": {
+      "bytes": 31115,
+      "sha256": "9d3d476e3d2520e7dc106d9a807560611ca163a7bc18392e39a773eee4b7d83f"
+    }
+  },
+  "logs": {
+    "docs/qa/v072-gameplay/attempts/20261006T070850.548412Z/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v072-gameplay/attempts/20261006T070850.548412Z/stdout.log": {
+      "bytes": 352,
+      "sha256": "780c9cfd7f2fcf18798287f46e4267702172d1c6f3a8f68eaad1811a79fb825b"
+    },
+    "docs/qa/v072-gameplay/attempts/20261006T071146.414691Z/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v072-gameplay/attempts/20261006T071146.414691Z/stdout.log": {
+      "bytes": 218,
+      "sha256": "3d2013c053d431f373962234adacbd722f182557178fb512a3398de92b3dfb99"
+    },
+    "docs/qa/v072-integration/initial-import.log.txt": {
+      "bytes": 68949,
+      "sha256": "405d2449837e92177471c12abac5f1edc1a979987a83fef691beeb77f3b67069"
+    },
+    "docs/qa/v072-migration/20261006T070613579808Z-run.log.txt": {
+      "bytes": 118,
+      "sha256": "0706341b34b606b0f6a24938254ceeb7cfbd74c2bad14ee4bcfbae96ff26f2f6"
+    },
+    "docs/qa/v072-reference/build-check.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v072-reference/build-check.stdout.log.txt": {
+      "bytes": 52,
+      "sha256": "65d47533eaf556129a1f3a295db12ab1bc36a8df0770c71cb9378490d54d03ba"
+    },
+    "docs/qa/v072-reference/build.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v072-reference/build.stdout.log.txt": {
+      "bytes": 51,
+      "sha256": "f5b1241636a7a913b24230ce8e9a32e2bcbbb904ff098c364b7176a34218508e"
+    },
+    "docs/qa/v072-reference/corrected-focused-reference.stderr.log.txt": {
+      "bytes": 682,
+      "sha256": "233e137b3ea87727e44faf078f0881dacd083b3a3062799d0cc1bd3cedb6b0c8"
+    },
+    "docs/qa/v072-reference/corrected-focused-reference.stdout.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v072-reference/final-focused-reference.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v072-reference/final-focused-reference.stdout.log.txt": {
+      "bytes": 1533,
+      "sha256": "382fdca2951b2d52e752694720c71d8d8d9753dd3beabddbebc923714859934e"
+    },
+    "docs/qa/v072-reference/focused-reference.stderr.log.txt": {
+      "bytes": 398,
+      "sha256": "178a55bc72d509dff7b131a9f385442a1510ea44eda28c31732e3b15b51ae54a"
+    },
+    "docs/qa/v072-reference/focused-reference.stdout.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v072-reference/godot-export.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v072-reference/godot-export.stdout.log.txt": {
+      "bytes": 182,
+      "sha256": "59160bd31fa5e2371ef953c9894cfc5c21702fa589e2aa0eab8795ac6f1e5526"
+    },
+    "docs/qa/v072-reference/wording-build-check.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v072-reference/wording-build-check.stdout.log.txt": {
+      "bytes": 52,
+      "sha256": "65d47533eaf556129a1f3a295db12ab1bc36a8df0770c71cb9378490d54d03ba"
+    },
+    "docs/qa/v072-reference/wording-build.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v072-reference/wording-build.stdout.log.txt": {
+      "bytes": 51,
+      "sha256": "7e0640fcdfc22d11931e3e879bc8e62de8c81f8b62d33c065b642061ed892b8c"
+    },
+    "docs/qa/v072-rules/glove-ring-rules.log": {
+      "bytes": 205,
+      "sha256": "b41129114b1629677163d709ff43af1bc1ca9fccff502a10afffb82b033ba2e4"
+    }
+  }
+}

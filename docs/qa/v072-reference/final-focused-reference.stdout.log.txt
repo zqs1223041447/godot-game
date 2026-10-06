@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "baseline_commit": "bf794d05f2468ccda22bb170a643839b5aba880e",
+  "reused_actual_main_fixture_count": 5,
+  "exact_current_casts_checked": 15,
+  "historical_v070_casts_preserved": 9,
+  "old_catalog_preserved_except_explicit_projection": true,
+  "source_coverage_byte_identical": true,
+  "source_policy_preserved": 45,
+  "authoritative_html_values_and_labels_checked": 65,
+  "old_html_anchors_preserved": 3826,
+  "html_unique_ids": 3831,
+  "new_html_anchors": [
+    "affixes-glove_accuracy",
+    "affixes-ring_emberward",
+    "affixes-ring_rimeward",
+    "affixes-ring_stormward",
+    "rules-glove_ring_affixes"
+  ],
+  "all_anchor_and_local_file_links_valid": true,
+  "old_asset_pngs_preserved": 63,
+  "old_reference_pngs_preserved": 70,
+  "catalog_bytes": 13926879,
+  "catalog_sha256": "4b3cfbc9a3427f834b34e25beb6fda85c4a899ea934830675aaf817fdfcd9e92",
+  "html_sha256": "956b97ed387728b385ce33d12965bfb3bd69e5a543360e5ea1d074c8aa03f1b9",
+  "historical_fixed_gate_audit": {
+    "docs/qa/v070-reference/check-reference.py": "Historical v0.70/schema45/equipment39 receipt; immutable, superseded for current output by this exact projection",
+    "docs/qa/v071-reference/check-reference.py": "Historical v0.71/schema45 receipt; immutable, preserved mist-skitter subtree exactly",
+    "tests/source_critical_reference_test.gd": "Historical v0.39/schema24 fixed gate, not a current whole-reference gate"
+  },
+  "scope": "One export/build/check; no new Main, historical full-suite, native launch, import or packaging"
+}

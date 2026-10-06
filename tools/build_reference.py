@@ -30,8 +30,10 @@ RULE_TITLES['ambush'] = '符印伏击：预置、触发与冻结快照'
 RULE_TITLES['physical_fire_conversion'] = '物理转火焰：40%转换与伤害来源'
 RULE_TITLES['precise_technique'] = '精准技艺：严格命中条件与全局禁暴击'
 RULE_TITLES['inward_pull'] = '牵引辅助：朝真实爆发圆心反转冲量'
+RULE_TITLES['glove_ring_affixes'] = '精瞄手套与三抗戒指：前后缀取舍'
 TYPES['defense_v37'] = '历史三抗防具池'
 TYPES['defense_v39'] = '护甲闪避与三抗防具池'
+TYPES['build_nine_slot_v46'] = '精瞄与三抗九槽池'
 
 def esc(value): return html.escape(str(value), quote=True)
 def lines(value): return '<br>'.join(esc(value).split('\n'))
@@ -285,7 +287,7 @@ def elemental_resistance_cap_rule(data, link, facts, details):
     body+='<h3>73点可达构筑与装备供给</h3><p>'+esc(caps['route_scope'])+'。</p>'+facts([('等级',value('route-level',route['level'])),('已用点数',value('route-points',route['points_spent']))]+[(DAMAGE_NAMES[element]+' 原始 / 当前上限 / 有效',value('route-'+element+'-raw',p['raw_resistances'][element],True)+' / '+value('route-'+element+'-maximum',p['maximum_resistances'][element],True)+' / '+value('route-'+element+'-effective',p['effective_resistances'][element],True)) for element in ['fire','cold','lightning']])
     body+=details('普通连接路线与全部节点','<p>'+' → '.join(link('source_passives',node_id,node_id) for node_id in route['allocated'])+'</p><p>列表为逐点可连接顺序，分支之间不表示每两个连续ID都有直接边；完整候选已通过生产构筑验证。</p>')
     equipment=caps['equipment']
-    body+='<p>当前 '+link('equipment',equipment['base_id'])+' 提供原始火抗：底材 '+value('equipment-base-fire',equipment['base_raw_fire'],True)+' 加 '+link('affixes',equipment['affix_id'])+' 最高 '+value('equipment-affix-fire',equipment['affix_max_raw_fire'],True)+'，单件最多 '+value('equipment-total-fire',equipment['maximum_raw_fire'],True)+'。v0.60新增 '+ '、'.join(link('affixes',key) for key in equipment['equipment_cold_sources']+equipment['equipment_lightning_sources'])+' 后缀供给原始冰、电抗；当前单件六词预算与取舍见 '+link('rules','elemental_defense_affixes')+'。珠宝未新增抗性来源，普通源天赋仍须补足缺口。</p>'
+    body+='<p>当前 '+link('equipment',equipment['base_id'])+' 提供原始火抗：底材 '+value('equipment-base-fire',equipment['base_raw_fire'],True)+' 加 '+link('affixes',equipment['affix_id'])+' 最高 '+value('equipment-affix-fire',equipment['affix_max_raw_fire'],True)+'，单件最多 '+value('equipment-total-fire',equipment['maximum_raw_fire'],True)+'。当前原始冰、电抗装备来源：'+ '、'.join(link('affixes',key) for key in equipment['equipment_cold_sources']+equipment['equipment_lightning_sources'])+'；v0.60胸甲单件预算见 '+link('rules','elemental_defense_affixes')+'，v0.72双戒供给与后缀取舍见 '+link('rules','glove_ring_affixes')+'。珠宝未新增抗性来源；提高最大上限后仍须检查原始抗性是否足够。</p>'
     body+='<h3>结算时间与旧存档</h3><p>'+esc(caps['timing'])+'。命中沿既有护甲、抗性、感电，再结算护盾、魔力分担、生命；燃烧不加入护甲或感电命中乘区。自然怪及现地图元素庇护未获得最大抗性加成，继续使用默认75%上限。</p><p>'+esc(caps['migration'])+'。缺字段或显式零保留既有结算与返回结构；新36文件不声称与旧35字节相同。</p><p><a href="../ELEMENTAL_RESISTANCE_CAPS.zh-CN.md">最大抗性说明</a> · '+link('rules','source_tree')+' · '+link('rules','mana_guard')+' · <a href="source-tree-coverage.json">同源执行覆盖JSON</a></p>'
     return body
 
@@ -623,6 +625,35 @@ def precise_technique_rule(data,link,facts,details):
     return body
 
 
+def glove_ring_affix_rule(data,link,facts,details):
+    rule=data['glove_ring_affixes']
+    def value(key,amount,ratio=False):
+        return f'<strong data-glove-ring-value="{esc(key)}" data-value="{esc(amount)}">{percent(amount) if ratio else format(amount,".10g")}</strong>'
+    body=facts([('存档 / 装备词汇 / 源政策',value('save-version',rule['minimum_save_version'])+' / '+value('vocabulary',rule['equipment_vocabulary'])+' / '+value('source-policy',rule['source_policy'])),('既有槽位 / 随机底材 / 固定装备',value('slots',rule['existing_slot_count'])+' / '+value('bases',rule['existing_random_base_count'])+' / '+value('fixed',rule['existing_fixed_item_count']))])
+    body+='<p>'+esc(rule['supply_scope'])+'。</p><p>'+esc(rule['accuracy_scope'])+'。</p>'
+    rows=[]
+    for key,family in rule['new_families'].items():
+        rows.append('<tr><th>'+link('affixes',key)+'</th><td>'+TYPES[family['kind']]+'</td><td>'+link('equipment',family['allowed_base_ids'][0])+'</td>'+''.join('<td>'+esc(r['min'])+' ～ '+esc(r['max'])+'</td>' for r in data['affixes'][key]['formatted_ranges'])+'</tr>')
+    body+='<div class="table-scroll"><table><caption>沿用等级1/8/16、权重100/60/30；高等级仍能掷到低阶</caption><thead><tr><th>词族</th><th>类型</th><th>唯一底材</th><th>T1</th><th>T2</th><th>T3</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div><p>'+esc(rule['prefix_tradeoff'])+'。</p>'
+    probes=rule['accuracy_probes'];rows=[]
+    for row in probes['tiers']:
+        key='t'+str(int(row['tier']));ends=row['endpoints']
+        rows.append('<tr><th>T'+str(int(row['tier']))+'</th><td>'+value(key+'-flat-min',ends['min']['flat_accuracy'])+' ～ '+value(key+'-flat-max',ends['max']['flat_accuracy'])+'</td><td>'+value(key+'-accuracy-min',ends['min']['accuracy'])+' ～ '+value(key+'-accuracy-max',ends['max']['accuracy'])+'</td><td>'+value(key+'-chance-min',ends['min']['chance'],True)+' ～ '+value(key+'-chance-max',ends['max']['chance'],True)+'</td></tr>')
+    body+='<h3>对雾羽掠行体的命中收益</h3><p>隔离探针以最终命中A='+value('baseline-accuracy',probes['baseline_accuracy'])+'、闪避'+value('evasion',probes['evasion'])+'为起点；原命中率'+value('baseline-chance',probes['baseline_chance'],True)+'，以下只增加一条精瞄，不含命中提高。结果来自实际AttackHitRules；命中率变化不是伤害MORE或DPS。</p><div class="table-scroll"><table><thead><tr><th>档位</th><th>固定命中</th><th>最终命中</th><th>命中率</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
+    body+='<p>'+esc(rule['ring_tradeoff'])+'。</p><p>'+esc(rule['cap_scope'])+'。</p><h3>五个通过实际Main的原构筑</h3>'
+    names={'precise-equal':'精准条件 · 命中等于生命','precise-above':'精准条件 · 命中高于生命','glove-finesse':'精瞄与源命中提高','rings-triple-default':'双戒加胸甲 · 默认上限','rings-source-cap83':'相同抗性供给 · 源上限83%'}
+    for name in names:
+        row=rule['examples'][name];stats=row['stats'];profile=row['casts']['basic'].get('precise_technique_profile',{});res=row['resistance']
+        body+='<h4>'+names[name]+'</h4>'+facts([('最终命中A / 最大生命L',value(name+'-accuracy',stats['accuracy'])+' / '+value(name+'-life',stats['max_health'])),('精准攻击MORE',value(name+'-more',profile.get('attack_more',0),True)),('保存次数',value(name+'-saves',row['save_attempts']))])
+        if name.startswith('rings-'):
+            body+='<div class="table-scroll"><table><thead><tr><th>元素</th><th>原始抗性</th><th>最大上限</th><th>有效抗性</th></tr></thead><tbody>'+''.join('<tr><th>'+DAMAGE_NAMES[element]+'</th>'+''.join('<td>'+value(name+'-'+element+'-'+field,res[field][element],True)+'</td>' for field in ['raw_resistances','maximum_resistances','effective_resistances'])+'</tr>' for element in ['fire','cold','lightning'])+'</tbody></table></div>'
+        equipment=''.join('<p>'+esc(SLOTS.get(slot,slot))+'：'+esc(item['definition']['name'])+' · '+esc(item['uid'])+'<br>'+lines('\n'.join(item['definition'].get('affix_lines',[])))+'</p>' for slot,item in row['equipment'].items())
+        body+=details('实际装备与Main只读证据',equipment+'<p><a href="../'+esc(row['fixture'].removeprefix('docs/'))+'">Main原始构筑</a> · <a href="../'+esc(row['expected_fixture'].removeprefix('docs/'))+'">stats、三种cast与抗性预期</a>；SHA256 '+esc(row['fixture_sha256'])+'。全构筑校验、全部预期精度对照与读取前后字节保全均通过。</p>')
+    body+='<p>精准技艺仍要求A严格大于最大生命；等于时没有攻击MORE，已分配时始终禁暴击。增加命中不授予坚决技艺，也不提高最大抗性。</p><p>'+esc(rule['migration'])+'。</p><p>'+esc(rule['bounds'])+'。</p>'
+    body+='<p>'+link('rules','precise_technique')+' · '+link('rules','elemental_resistance_caps')+' · '+link('monsters','mist_skitter')+' · <a href="../GLOVE_RING_AFFIXES.zh-CN.md">手套与戒指合同</a> · <a href="../qa/v072-reference/README.md">本批资料验证</a></p>'
+    return body
+
+
 def mist_skitter_hint(monster, link):
     budget=monster['encounter_budget'];policy=budget['policy']
     def value(key, amount, ratio=False):
@@ -745,6 +776,7 @@ def build(data, art):
         if e.get('stage')=='weapon_local':
             body+='<p>'+esc(e['normal_definition']['weapon_damage_summary'])+'</p><p>局部词缀与原有武器前缀共享稀有装备的三个前缀名额；两条局部前缀不能一起出现在仅允许一个前缀的魔法装备上。</p>'
             related+=' · '+link('weapon_stages','weapon_local')+' · '+(link('rules','forgeblade')+' · '+link('skills','cleave') if key=='forgeblade' else link('rules','basic_attack')+' · '+link('skills','tornado'))
+        if key in data.get('glove_ring_affixes',{}).get('base_ids',[]): related+=' · '+link('rules','glove_ring_affixes')
         if e['stats'].get('fire_resistance',0): related+=' · '+link('defenses','fire_resistance','火焰抗性与受击结算')
         if key==data.get('elemental_defense_affixes',{}).get('base_id'): related+=' · '+link('rules','elemental_defense_affixes')+' · '+link('rules','defense_rating_affixes')
         display_pool=data['elemental_defense_affixes']['pool_id'] if key==data.get('elemental_defense_affixes',{}).get('base_id') else e['pool']
@@ -759,6 +791,8 @@ def build(data, art):
         if key in data.get('defense_rating_affixes',{}).get('new_families',{}):
             body+='<p>角色全局固定值；直接加到原始基数，由天赋和合计敏捷统一处理。不是百分比，也不是本地防具倍率；与生命、魔力、护盾争前缀名额。</p>'
             related=link('rules','defense_rating_affixes')+' · '+link('rules','source_defenses')
+        if key in data.get('glove_ring_affixes',{}).get('new_families',{}):
+            related=link('rules','glove_ring_affixes')+' · '+link('rules','precise_technique' if key=='glove_accuracy' else 'elemental_resistance_caps')
         if f['stat'] in ['attack_life_leech','attack_mana_leech']:
             body+='<p>按防御后实际扣除敌人护盾与生命计算，仅攻击命中；不含过量伤害或即时回复。与天赋同比例相加，仍受既有单次与总恢复上限。保存整数基点，100基点为1%，每一刻度为0.01个百分点。</p>'
             related=link('rules','source_leech')+' · '+links('skills',f['affected_skills'])
@@ -1185,6 +1219,8 @@ def build(data, art):
         rule_defs.append(('defense_rating_affixes',RULE_TITLES['defense_rating_affixes'],'全局固定护甲与闪避占用已有前缀，物理命中、攻击准入和持续燃烧各有明确边界。',defense_rating_affix_rule(data,link,facts,details),'implemented'))
     if 'iron_reflexes' in data:
         rule_defs.append(('iron_reflexes',RULE_TITLES['iron_reflexes'],'全部原始闪避转换为护甲，取消敏捷闪避提高；同一句双提高只计一次，失去闪避仍有代价。',iron_reflexes_rule(data,link,facts,details),'implemented'))
+    if 'glove_ring_affixes' in data:
+        rule_defs.append(('glove_ring_affixes',RULE_TITLES['glove_ring_affixes'],'既有手套新增固定命中前缀，既有双戒新增三抗后缀；通过实际Main的阈值与抗性供给对照。',glove_ring_affix_rule(data,link,facts,details),'implemented'))
     if 'precise_technique' in data:
         rule_defs.append(('precise_technique',RULE_TITLES['precise_technique'],'最终命中值严格高于最大生命时，攻击伤害额外提高40%；选中后始终不能暴击。',precise_technique_rule(data,link,facts,details),'implemented'))
     if 'physical_fire_conversion' in data:

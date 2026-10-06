@@ -1,0 +1,127 @@
+{
+	"accuracy_matrix": [
+		{
+			"accuracy": 319.0,
+			"chance": 0.8,
+			"max_health": 358.0,
+			"precise": {
+				"accuracy": 319.0,
+				"attack_applies": false,
+				"attack_more": 0.0,
+				"cannot_deal_critical_strikes": true,
+				"condition_met": false,
+				"enabled": true,
+				"max_health": 358.0
+			},
+			"roll": 35,
+			"tier": 1
+		},
+		{
+			"accuracy": 344.0,
+			"chance": 0.82,
+			"max_health": 358.0,
+			"precise": {
+				"accuracy": 344.0,
+				"attack_applies": false,
+				"attack_more": 0.0,
+				"cannot_deal_critical_strikes": true,
+				"condition_met": false,
+				"enabled": true,
+				"max_health": 358.0
+			},
+			"roll": 60,
+			"tier": 1
+		},
+		{
+			"accuracy": 354.0,
+			"chance": 0.83,
+			"max_health": 358.0,
+			"precise": {
+				"accuracy": 354.0,
+				"attack_applies": false,
+				"attack_more": 0.0,
+				"cannot_deal_critical_strikes": true,
+				"condition_met": false,
+				"enabled": true,
+				"max_health": 358.0
+			},
+			"roll": 70,
+			"tier": 2
+		},
+		{
+			"accuracy": 394.0,
+			"chance": 0.86,
+			"max_health": 358.0,
+			"precise": {
+				"accuracy": 394.0,
+				"attack_applies": true,
+				"attack_more": 0.4,
+				"cannot_deal_critical_strikes": true,
+				"condition_met": true,
+				"enabled": true,
+				"max_health": 358.0
+			},
+			"roll": 110,
+			"tier": 2
+		},
+		{
+			"accuracy": 404.0,
+			"chance": 0.87,
+			"max_health": 358.0,
+			"precise": {
+				"accuracy": 404.0,
+				"attack_applies": true,
+				"attack_more": 0.4,
+				"cannot_deal_critical_strikes": true,
+				"condition_met": true,
+				"enabled": true,
+				"max_health": 358.0
+			},
+			"roll": 120,
+			"tier": 3
+		},
+		{
+			"accuracy": 444.0,
+			"chance": 0.89,
+			"max_health": 358.0,
+			"precise": {
+				"accuracy": 444.0,
+				"attack_applies": true,
+				"attack_more": 0.4,
+				"cannot_deal_critical_strikes": true,
+				"condition_met": true,
+				"enabled": true,
+				"max_health": 358.0
+			},
+			"roll": 160,
+			"tier": 3
+		},
+		{
+			"accuracy": 358.0,
+			"chance": 0.83,
+			"max_health": 358.0,
+			"precise": {
+				"accuracy": 358.0,
+				"attack_applies": false,
+				"attack_more": 0.0,
+				"cannot_deal_critical_strikes": true,
+				"condition_met": false,
+				"enabled": true,
+				"max_health": 358.0
+			},
+			"roll": 74,
+			"tier": 2
+		}
+	],
+	"checks": 322,
+	"failures": 0,
+	"fixtures": [
+		"precise-above",
+		"precise-equal"
+	],
+	"scope": "Bounded real Main/model/crafting consumers; lawful migrated v45 source and owned equipment; source policy45 unchanged. Explicit cap-only boundary is labeled separately. No UI/export/performance acceptance.",
+	"sections": {
+		"accuracy_and_precise": 312,
+		"legal_source_setup": 10
+	}
+}

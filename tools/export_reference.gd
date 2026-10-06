@@ -57,6 +57,7 @@ const FasterBurnMigrationData = preload("res://scripts/save/faster_burn_migratio
 const ForgebladeMigrationData = preload("res://scripts/save/forgeblade_migration.gd")
 const ManaGuardMigrationData = preload("res://scripts/save/mana_guard_migration.gd")
 const ResoluteRules = preload("res://scripts/combat/resolute_technique_rules.gd")
+const GloveRingMigration = preload("res://scripts/save/glove_ring_affix_migration.gd")
 const SourceCoverage = preload("res://tools/export_source_execution_coverage.gd")
 
 func _initialize() -> void:
@@ -136,6 +137,7 @@ static func collect() -> Dictionary:
 	result["zealots_oath"] = zealots_oath_examples()
 	result["physical_fire_conversion"] = physical_fire_conversion_examples()
 	result["precise_technique"] = precise_technique_examples()
+	result["glove_ring_affixes"] = glove_ring_affix_examples()
 	result["ambush"] = ambush_examples()
 	result["inward_pull"] = inward_pull_examples()
 	result["resolute_technique"] = resolute_technique_examples()
@@ -2722,7 +2724,15 @@ static func precise_technique_examples() -> Dictionary:
 		var fixture_hash: String = FileAccess.get_sha256(path)
 		var expected_hash: String = FileAccess.get_sha256(expected_path)
 		assert(acceptance.fixtures.get(name + ".json") == fixture_hash and acceptance.fixtures.get(name + "-expected.json") == expected_hash, "Fixture must match passing actual-Main receipt: " + name)
-		var raw: Dictionary = Canonical.Rules.decode(JSON.parse_string(FileAccess.get_file_as_string(path)))
+		# These immutable receipts were recorded under schema45. Validate the
+		# frozen envelope before the production version-only migration; never
+		# relabel raw JSON or rewrite historical Main fixtures for the exporter.
+		var historical: Dictionary = Canonical.Rules.decode_v45(JSON.parse_string(FileAccess.get_file_as_string(path)))
+		assert(not historical.is_empty(), "Frozen schema45 gameplay fixture must validate: " + name)
+		var raw: Dictionary = GloveRingMigration.migrate_v45(historical, SourceTree.reason)
+		var expected_migration: Dictionary = historical.duplicate(true)
+		expected_migration.version = Canonical.Rules.VERSION
+		assert(raw == expected_migration, "Historical Main fixture may change only version in memory: " + name)
 		var expected: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(expected_path))
 		assert(not raw.is_empty() and int(raw.version) == Canonical.Rules.VERSION and Canonical.Rules.reason(raw).is_empty() and SourceTree.reason(raw).is_empty(), "Current complete gameplay fixture must validate: " + name)
 		var model := Canonical.new()
@@ -2767,3 +2777,70 @@ static func precise_technique_examples() -> Dictionary:
 		"availability":"仅节点63620的完整多行原文开放，不接受截断的增伤句、禁暴击半句或同义改写。没有新节点、宝石、词缀或图片；坚决技艺仍独立决定不能被闪避，两个禁暴击效果取并集",
 		"migration":"schema44→45先按旧44完整验证并备份原字节，再只升级版本；源政策45、装备词汇39。不赠点、不赠物、不重掷，不改变原始源树、拓扑或经济",
 		"bounds":"本节是实际Main快照的只读重编译与资料保全；实际在途、转换与暴击随机流证据见本批gameplay和rules记录。没有Windows、打包、tag或Release验收"}
+
+
+## v72 reuses the exact passing Main states and expected casts. Endpoint probes
+## below are isolated rule inputs, never substitute authored gear or builds.
+static func glove_ring_affix_examples() -> Dictionary:
+	var fixture_root: String = "res://docs/qa/v072-gameplay/fixtures/"
+	var acceptance: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://docs/qa/v072-gameplay/acceptance.json"))
+	assert(acceptance.get("passed", false), "v72 actual-Main acceptance must pass before reference export")
+	var examples: Dictionary = {}
+	for name: String in ["precise-equal", "precise-above", "glove-finesse", "rings-triple-default", "rings-source-cap83"]:
+		var path: String = fixture_root + name + ".json"
+		var expected_path: String = fixture_root + name + "-expected.json"
+		assert(FileAccess.file_exists(path) and FileAccess.file_exists(expected_path), "Passing Main fixture required: " + name)
+		var fixture_hash: String = FileAccess.get_sha256(path)
+		var expected_hash: String = FileAccess.get_sha256(expected_path)
+		assert(acceptance.fixtures.get(name + ".json") == fixture_hash and acceptance.fixtures.get(name + "-expected.json") == expected_hash, "Fixture must match passing Main receipt: " + name)
+		var raw: Dictionary = Canonical.Rules.decode(JSON.parse_string(FileAccess.get_file_as_string(path)))
+		var expected: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(expected_path))
+		assert(not raw.is_empty() and int(raw.version) == Canonical.Rules.VERSION and Canonical.Rules.reason(raw).is_empty() and SourceTree.reason(raw).is_empty(), "Complete Main fixture must validate: " + name)
+		var model := Canonical.new()
+		model._accept_memory(raw.duplicate(true))
+		var stats: Dictionary = model.get_stats()
+		var resistance: Dictionary = model.get_resistance_profile()
+		assert(JSON.parse_string(JSON.stringify(stats, "", true, true)) == expected.stats, "Main stats must match at recorded JSON precision: " + name)
+		assert(JSON.parse_string(JSON.stringify(resistance, "", true, true)) == expected.resistance, "Main resistance profile must match: " + name)
+		var casts: Dictionary = {}
+		for skill: String in ["basic", "cleave", "tornado"]:
+			var cast: Dictionary = model.get_basic_cast() if skill == "basic" else model.get_group_cast(str(expected[skill].group_id))
+			assert(cast.get("ok", false) and JSON.parse_string(JSON.stringify(cast, "", true, true)) == expected[skill], "Main cast must match: " + name + "/" + skill)
+			casts[skill] = cast
+		var equipment: Dictionary = {}
+		for slot: String in model.equipped_items():
+			var uid: String = model.equipped_items()[slot]
+			equipment[slot] = {"uid":uid, "item":raw.items[uid], "definition":model.item_definition(uid)}
+		assert(model.save_attempts == 0 and model.snapshot() == raw)
+		assert(FileAccess.get_sha256(path) == fixture_hash and FileAccess.get_sha256(expected_path) == expected_hash)
+		examples[name] = {"fixture":"docs/qa/v072-gameplay/fixtures/" + name + ".json", "fixture_sha256":fixture_hash,
+			"expected_fixture":"docs/qa/v072-gameplay/fixtures/" + name + "-expected.json", "expected_sha256":expected_hash,
+			"stats":stats, "resistance":resistance, "casts":casts, "equipment":equipment, "talents":raw.talents, "progress":raw.progress,
+			"whole_build_valid":true, "matches_actual_main":true, "save_attempts":model.save_attempts}
+	var families: Dictionary = {}
+	for id: String in Equipment.GloveRingAffixes.AFFIX_IDS:
+		families[id] = Equipment.affix_definition(id)
+		assert(Equipment.GloveRingAffixes.valid_family(families[id]))
+	var probes: Array = []
+	var baseline_accuracy: float = 284.0
+	var evasion: float = float(Monsters.MIST_SKITTER_POLICY.evasion)
+	for tier: Dictionary in families.glove_accuracy.tiers:
+		var endpoints: Dictionary = {}
+		for end: String in ["min", "max"]:
+			var accuracy: float = baseline_accuracy + float(tier[end])
+			endpoints[end] = {"flat_accuracy":tier[end], "accuracy":accuracy, "chance":AttackRules.resolve(accuracy, evasion).chance}
+		probes.append({"tier":tier.tier, "level":tier.level, "weight":tier.weight, "endpoints":endpoints})
+	return {"minimum_save_version":Equipment.GloveRingAffixes.MIN_SAVE_VERSION, "equipment_vocabulary":Equipment.CURRENT_VOCABULARY,
+		"source_policy":SourceTree.CURRENT_SAVE_VERSION, "new_families":families, "base_ids":[Equipment.GloveRingAffixes.GLOVE_BASE_ID, Equipment.GloveRingAffixes.RING_BASE_ID],
+		"pool_id":"build_nine_slot_v46", "pool":Equipment.pool_profiles().build_nine_slot_v46,
+		"loot_profile_id":Canonical.LOOT_PROFILE_ID, "loot_profile":Equipment.loot_profile(Canonical.LOOT_PROFILE_ID),
+		"existing_slot_count":EquipmentSlotsData.all_slots().size(), "existing_random_base_count":Equipment.all_base_ids().size(), "existing_fixed_item_count":Data.ITEMS.size(),
+		"examples":examples, "accuracy_probes":{"baseline_accuracy":baseline_accuracy, "evasion":evasion, "baseline_chance":AttackRules.resolve(baseline_accuracy, evasion).chance, "tiers":probes},
+		"accuracy_scope":"精瞄是角色全局固定命中值，装备固定值先汇总，再与每点敏捷的2命中一起乘源命中提高；只放大一次。攻击准入仍读原命中规则，法术不进行攻击闪避",
+		"prefix_tradeoff":"精瞄与生命、魔力、护盾竞争手套前缀；魔法至多1前1后，稀有至多3前3后。同族或同组不能在同一件物品重复",
+		"ring_tradeoff":"双戒与胸甲各取三条T3最高抗性后缀，合计九条完美后缀才得到原始火90%、冰75%、电75%；这是合法极值，不是正常预期掉落。戒指三抗占满后缀，放弃暴击、魔力恢复、移速等选择",
+		"cap_scope":"原始抗性、最大上限、有效抗性分别计算；原始值超过上限不继续减伤，提高上限也不会凭空补足原始抗性。装备抗性不授予最大抗性",
+		"supply_scope":"已有九槽、15种随机底材和9件固定装备均保持；本批为现有手套与戒指增加构筑选择，不是补不存在的空槽。canonical_v46仅把原30%九槽入口替换为同五底材的新池，其余入口与权重顺序保持",
+		"migration":"严格decode_v45和旧45全量验证后备份原字节，再仅迁version到46；源政策仍45，装备词汇46。旧词族元数据、物品UID与掷值保持，不重掷、不赠物或点数",
+		"producer":"Passing actual Main snapshots → current Canonical Rules / Model → SkillCompiler / DefenseRules; isolated endpoints → AttackHitRules",
+		"new_images":[], "bounds":"不新增底材、UI、素材、源节点或定向制作按钮；五个实际Main构筑仅只读重编译，本页不是DPS、最优构筑、长期掉落频率或Windows成品验收"}

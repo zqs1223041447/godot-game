@@ -1,0 +1,439 @@
+{
+	"accuracy_matrix": [
+		{
+			"accuracy": 319.0,
+			"chance": 0.8,
+			"max_health": 358.0,
+			"precise": {
+				"accuracy": 319.0,
+				"attack_applies": false,
+				"attack_more": 0.0,
+				"cannot_deal_critical_strikes": true,
+				"condition_met": false,
+				"enabled": true,
+				"max_health": 358.0
+			},
+			"roll": 35,
+			"tier": 1
+		},
+		{
+			"accuracy": 344.0,
+			"chance": 0.82,
+			"max_health": 358.0,
+			"precise": {
+				"accuracy": 344.0,
+				"attack_applies": false,
+				"attack_more": 0.0,
+				"cannot_deal_critical_strikes": true,
+				"condition_met": false,
+				"enabled": true,
+				"max_health": 358.0
+			},
+			"roll": 60,
+			"tier": 1
+		},
+		{
+			"accuracy": 354.0,
+			"chance": 0.83,
+			"max_health": 358.0,
+			"precise": {
+				"accuracy": 354.0,
+				"attack_applies": false,
+				"attack_more": 0.0,
+				"cannot_deal_critical_strikes": true,
+				"condition_met": false,
+				"enabled": true,
+				"max_health": 358.0
+			},
+			"roll": 70,
+			"tier": 2
+		},
+		{
+			"accuracy": 394.0,
+			"chance": 0.86,
+			"max_health": 358.0,
+			"precise": {
+				"accuracy": 394.0,
+				"attack_applies": true,
+				"attack_more": 0.4,
+				"cannot_deal_critical_strikes": true,
+				"condition_met": true,
+				"enabled": true,
+				"max_health": 358.0
+			},
+			"roll": 110,
+			"tier": 2
+		},
+		{
+			"accuracy": 404.0,
+			"chance": 0.87,
+			"max_health": 358.0,
+			"precise": {
+				"accuracy": 404.0,
+				"attack_applies": true,
+				"attack_more": 0.4,
+				"cannot_deal_critical_strikes": true,
+				"condition_met": true,
+				"enabled": true,
+				"max_health": 358.0
+			},
+			"roll": 120,
+			"tier": 3
+		},
+		{
+			"accuracy": 444.0,
+			"chance": 0.89,
+			"max_health": 358.0,
+			"precise": {
+				"accuracy": 444.0,
+				"attack_applies": true,
+				"attack_more": 0.4,
+				"cannot_deal_critical_strikes": true,
+				"condition_met": true,
+				"enabled": true,
+				"max_health": 358.0
+			},
+			"roll": 160,
+			"tier": 3
+		},
+		{
+			"accuracy": 358.0,
+			"chance": 0.83,
+			"max_health": 358.0,
+			"precise": {
+				"accuracy": 358.0,
+				"attack_applies": false,
+				"attack_more": 0.0,
+				"cannot_deal_critical_strikes": true,
+				"condition_met": false,
+				"enabled": true,
+				"max_health": 358.0
+			},
+			"roll": 74,
+			"tier": 2
+		}
+	],
+	"checks": 1539,
+	"failures": 0,
+	"finesse": {
+		"after": 556.5999999999999,
+		"before": 372.59999999999997,
+		"increased": 0.15,
+		"route": [
+			"50459",
+			"39821",
+			"52904",
+			"444",
+			"61306",
+			"60942",
+			"64709",
+			"3469",
+			"63620",
+			"54142"
+		]
+	},
+	"fixtures": [
+		"precise-above",
+		"precise-equal",
+		"glove-finesse",
+		"rings-triple-default",
+		"rings-source-cap83"
+	],
+	"rings": {
+		"actual_source_cap": {
+			"base_cap": 0.75,
+			"effective_resistances": {
+				"cold": 0.83,
+				"fire": 0.83,
+				"lightning": 0.83
+			},
+			"maximum_resistances": {
+				"cold": 0.83,
+				"fire": 0.83,
+				"lightning": 0.83
+			},
+			"ok": true,
+			"raw_resistances": {
+				"cold": 1.5800000000000003,
+				"fire": 1.8100000000000003,
+				"lightning": 1.5800000000000003
+			},
+			"reason": "",
+			"safety_cap": 0.83
+		},
+		"cap_only_control": {
+			"base_cap": 0.75,
+			"effective_resistances": {
+				"cold": 0.75,
+				"fire": 0.83,
+				"lightning": 0.75
+			},
+			"maximum_resistances": {
+				"cold": 0.83,
+				"fire": 0.83,
+				"lightning": 0.83
+			},
+			"ok": true,
+			"raw_resistances": {
+				"cold": 0.75,
+				"fire": 0.9,
+				"lightning": 0.75
+			},
+			"reason": "",
+			"safety_cap": 0.83
+		},
+		"default": {
+			"base_cap": 0.75,
+			"effective_resistances": {
+				"cold": 0.75,
+				"fire": 0.75,
+				"lightning": 0.75
+			},
+			"maximum_resistances": {
+				"cold": 0.75,
+				"fire": 0.75,
+				"lightning": 0.75
+			},
+			"ok": true,
+			"raw_resistances": {
+				"cold": 0.75,
+				"fire": 0.9,
+				"lightning": 0.75
+			},
+			"reason": "",
+			"safety_cap": 0.83
+		},
+		"uids": [
+			"gear_000015",
+			"gear_000016"
+		]
+	},
+	"scope": "Bounded real Main/model/crafting consumers; lawful migrated v45 source and owned equipment; source policy45 unchanged. Explicit cap-only boundary is labeled separately. No UI/export/performance acceptance.",
+	"sections": {
+		"accuracy_and_precise": 263,
+		"finesse_aggregate": 25,
+		"full_bag_and_supply": 104,
+		"legal_source_setup": 10,
+		"refusals_and_targeted": 85,
+		"six_crafts_and_metadata": 985,
+		"triple_rings_and_caps": 67
+	},
+	"six_crafts": [
+		{
+			"balance_after": 221,
+			"balance_before": 200,
+			"base": "nine_slot_threaded_gloves",
+			"cost": {
+
+			},
+			"materials": {
+				"calibration_shard": 21
+			},
+			"operation": "salvage"
+		},
+		{
+			"balance_after": 158,
+			"balance_before": 200,
+			"base": "nine_slot_threaded_gloves",
+			"cost": {
+				"calibration_shard": 42
+			},
+			"materials": {
+
+			},
+			"operation": "recalibrate"
+		},
+		{
+			"balance_after": 192,
+			"balance_before": 200,
+			"base": "nine_slot_threaded_gloves",
+			"cost": {
+				"calibration_shard": 8
+			},
+			"materials": {
+
+			},
+			"operation": "enchant"
+		},
+		{
+			"balance_after": 176,
+			"balance_before": 200,
+			"base": "nine_slot_threaded_gloves",
+			"cost": {
+				"calibration_shard": 24
+			},
+			"materials": {
+
+			},
+			"operation": "elevate"
+		},
+		{
+			"balance_after": 194,
+			"balance_before": 200,
+			"base": "nine_slot_threaded_gloves",
+			"cost": {
+				"calibration_shard": 6
+			},
+			"materials": {
+
+			},
+			"operation": "augment"
+		},
+		{
+			"balance_after": 172,
+			"balance_before": 200,
+			"base": "nine_slot_threaded_gloves",
+			"cost": {
+				"calibration_shard": 28
+			},
+			"materials": {
+
+			},
+			"operation": "reforge"
+		},
+		{
+			"balance_after": 221,
+			"balance_before": 200,
+			"base": "nine_slot_etched_ring",
+			"cost": {
+
+			},
+			"materials": {
+				"calibration_shard": 21
+			},
+			"operation": "salvage"
+		},
+		{
+			"balance_after": 158,
+			"balance_before": 200,
+			"base": "nine_slot_etched_ring",
+			"cost": {
+				"calibration_shard": 42
+			},
+			"materials": {
+
+			},
+			"operation": "recalibrate"
+		},
+		{
+			"balance_after": 192,
+			"balance_before": 200,
+			"base": "nine_slot_etched_ring",
+			"cost": {
+				"calibration_shard": 8
+			},
+			"materials": {
+
+			},
+			"operation": "enchant"
+		},
+		{
+			"balance_after": 176,
+			"balance_before": 200,
+			"base": "nine_slot_etched_ring",
+			"cost": {
+				"calibration_shard": 24
+			},
+			"materials": {
+
+			},
+			"operation": "elevate"
+		},
+		{
+			"balance_after": 194,
+			"balance_before": 200,
+			"base": "nine_slot_etched_ring",
+			"cost": {
+				"calibration_shard": 6
+			},
+			"materials": {
+
+			},
+			"operation": "augment"
+		},
+		{
+			"balance_after": 172,
+			"balance_before": 200,
+			"base": "nine_slot_etched_ring",
+			"cost": {
+				"calibration_shard": 28
+			},
+			"materials": {
+
+			},
+			"operation": "reforge"
+		}
+	],
+	"supply": {
+		"new_family_seed_witnesses": {
+			"glove_accuracy": 8,
+			"ring_emberward": 19,
+			"ring_rimeward": 20,
+			"ring_stormward": 37
+		},
+		"observed_bases": [
+			"forgeblade",
+			"emberhide_vest",
+			"runewood_focus",
+			"nine_slot_folded_belt",
+			"woven_bastion",
+			"gale_spindle",
+			"nine_slot_threaded_gloves",
+			"pulse_seed",
+			"ashwood_bow",
+			"wayglass_token",
+			"nine_slot_etched_ring",
+			"tidebound_coat",
+			"cinder_reed",
+			"nine_slot_trail_boots",
+			"nine_slot_slate_helmet"
+		],
+		"town_bases": [
+			"ashwood_bow",
+			"cinder_reed",
+			"emberhide_vest",
+			"forgeblade",
+			"gale_spindle",
+			"nine_slot_etched_ring",
+			"nine_slot_folded_belt",
+			"nine_slot_slate_helmet",
+			"nine_slot_threaded_gloves",
+			"nine_slot_trail_boots",
+			"pulse_seed",
+			"runewood_focus",
+			"tidebound_coat",
+			"wayglass_token",
+			"woven_bastion"
+		]
+	},
+	"targeted": [
+		{
+			"available": true,
+			"cost": {
+				"calibration_shard": 40
+			},
+			"operation": "targeted_reforge_critical"
+		},
+		{
+			"available": true,
+			"cost": {
+				"calibration_shard": 40
+			},
+			"operation": "targeted_reforge_life_leech"
+		},
+		{
+			"available": true,
+			"cost": {
+				"calibration_shard": 40
+			},
+			"operation": "targeted_reforge_mana_leech"
+		},
+		{
+			"available": false,
+			"cost": {
+
+			},
+			"operation": "targeted_reforge_damage"
+		}
+	]
+}

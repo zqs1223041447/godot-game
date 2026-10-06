@@ -1,0 +1,50 @@
+{
+  "passed": true,
+  "checks": 1588,
+  "failures": 0,
+  "sections": {
+    "accuracy_and_precise": 312,
+    "finesse_aggregate": 25,
+    "full_bag_and_supply": 104,
+    "legal_source_setup": 10,
+    "refusals_and_targeted": 85,
+    "six_crafts_and_metadata": 985,
+    "triple_rings_and_caps": 67
+  },
+  "attempt": "docs/qa/v072-gameplay/attempts/20261006T070850.548412Z",
+  "summary": "docs/qa/v072-gameplay/attempts/20261006T070850.548412Z/run-summary.json",
+  "fixtures": {
+    "glove-finesse-expected.json": "95adf9234160d8c45e8ec12dd95db04e57663fccdf6f30837e2844e3d10ffb50",
+    "glove-finesse.json": "495ea9786f06b6605a42448480497712482bd7e51a2c59736d4a0cbd61ef30fe",
+    "precise-above-expected.json": "32fb68439a1857d50a03a389b815611ba6b32a75c3795cd48e26d2e6675a6243",
+    "precise-above.json": "fe69c13d8d2d9df26e2f88e8b6b46fe90714cc6b150c75fa9f35dba99372a1fb",
+    "precise-equal-expected.json": "1a0a90d0a0d9776669963d3349b287e4562271e8a3fc8c7bae23eb8d7b5f6f97",
+    "precise-equal.json": "9f35ff7777bc5d75b324914b964987eac7fb5d375fcae3529cfb21703face9ec",
+    "rings-source-cap83-expected.json": "4d8cc9c5b117c08e6f8312db6ae29b5ed5dcc8be842041fe61cb8f53d4281d18",
+    "rings-source-cap83.json": "974d03d22e8e4da9f35715360975cdf4bbf877312db3a9848908e718f3113510",
+    "rings-triple-default-expected.json": "48913ce1cd4af492594ee8b7b9d073832139fd9cec7ae6f45aa132a05b1376c2",
+    "rings-triple-default.json": "edb234886575873ab1e88f0576795f9d90179f401420ff38b11729e6596edc08"
+  },
+  "provenance": "All fixtures exported from passing actual Main/model consumers using canonical owned-item admission, equipment commands, source allocation or validated existing source route; original v045 fixture decoded by Rules.decode_v45 then strict migration. No handwritten F8 replacement gear.",
+  "limitations": [
+    "No UI, export, Windows package or long performance acceptance in this scope.",
+    "Cap-only 83 boundary preserves real raw gear and explicitly controls only max-cap inputs; obtainable all83 source route is separately exercised."
+  ],
+  "inputs_before_sha256": "a7f57457cf2f3f5f51a864629bc3977b851244b6e1ca77a1695a65cf960bf590",
+  "inputs_after_sha256": "a7f57457cf2f3f5f51a864629bc3977b851244b6e1ca77a1695a65cf960bf590",
+  "scoped_verifications": [
+    {
+      "attempt": "docs/qa/v072-gameplay/attempts/20261006T071146.414691Z",
+      "summary": "docs/qa/v072-gameplay/attempts/20261006T071146.414691Z/run-summary.json",
+      "reason": "Tightened the existing no-crit-change assertion to require every actual Critical.STAT_KEYS field; only affected accuracy section was rerun. No observed failure.",
+      "checks": 322,
+      "sections": {
+        "accuracy_and_precise": 312,
+        "legal_source_setup": 10
+      },
+      "passed": true
+    }
+  ],
+  "coverage_kind": "Passing full initial run plus affected-section verification of the final test assertion refinement; checks is consolidated section coverage, not one run.",
+  "current_test_sha256": "71b14145c1f50b04325a4d7c6df27403b9dd755ee5eced46172da93c119cb40e"
+}

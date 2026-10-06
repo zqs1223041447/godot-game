@@ -1,0 +1,52 @@
+{
+  "kind": "verbatim_tool_result_transcription_for_existing_run_no_test_rerun",
+  "scope": "The already completed first tools/validate.sh execution. Creating this receipt only reads existing files and writes QA records.",
+  "command": "mkdir -p docs/qa/v072-rules\nGLOVE_RING_REPORT=\"$PWD/docs/qa/v072-rules/glove-ring-rules.json\" bash tools/validate.sh res://tests/glove_ring_affix_rules_test.gd > docs/qa/v072-rules/glove-ring-rules.log 2>&1\nresult=$?\ncat docs/qa/v072-rules/glove-ring-rules.log\nexit \"$result\"",
+  "workdir": "/workspace/scratch/a51485f153de/v072-glove-ring-affixes",
+  "initial_exec_command_arguments": {
+    "cmd": "mkdir -p docs/qa/v072-rules\nGLOVE_RING_REPORT=\"$PWD/docs/qa/v072-rules/glove-ring-rules.json\" bash tools/validate.sh res://tests/glove_ring_affix_rules_test.gd > docs/qa/v072-rules/glove-ring-rules.log 2>&1\nresult=$?\ncat docs/qa/v072-rules/glove-ring-rules.log\nexit \"$result\"",
+    "workdir": "/workspace/scratch/a51485f153de/v072-glove-ring-affixes",
+    "yield_time_ms": 1000,
+    "max_output_tokens": 4000
+  },
+  "initial_exec_command_result": {
+    "chunk_id": "346a79",
+    "wall_time_seconds": 1.00059219,
+    "session_id": 9427,
+    "original_token_count": 0,
+    "output": ""
+  },
+  "completion_write_stdin_arguments": {
+    "session_id": 9427,
+    "chars": "",
+    "yield_time_ms": 1000,
+    "max_output_tokens": 2000
+  },
+  "completion_write_stdin_result": {
+    "chunk_id": "cec4c1",
+    "wall_time_seconds": 2.0527e-05,
+    "exit_code": 0,
+    "original_token_count": 52,
+    "output": "Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\n\nGlove/ring affixes: 5317 checks, 0 failures; 81 historical item+RNG comparisons, 664 historical Craft plans\nSelected checks passed.\n"
+  },
+  "exit_code": 0,
+  "exit_code_scope": "The shell explicitly preserved the tools/validate.sh status in result and exited with that status after printing its redirected output.",
+  "elapsed_test_wall_time_seconds": null,
+  "timing_caveat": "The recorded wall_time_seconds values are tool-call wait durations, not full test elapsed time. The original execution did not use a timer; no complete elapsed duration can be reconstructed from these results.",
+  "original_stdout": "Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\n\nGlove/ring affixes: 5317 checks, 0 failures; 81 historical item+RNG comparisons, 664 historical Craft plans\nSelected checks passed.\n",
+  "original_log_still_matches_transcribed_stdout": true,
+  "input_evidence": {
+    "contemporaneous": "The original test read provenance.json and checked FileAccess.get_sha256 against the seven shared_unchanged_authorities before proceeding. Its zero-failure report confirms those expected baseline hashes matched in that execution. No complete contemporaneous input SHA manifest was separately captured.",
+    "contemporaneously_checked_expected_sha256": {
+      "scripts/items/nine_slot_equipment_profile.gd": "4138bfd9c5229f40566a7ebde21c5552e3fce26c5ce0e306b2a66688fb5a2801",
+      "scripts/items/build_affix_profile.gd": "325c970baa227ad7ad1a1f815c63a60825d087918310cfb12b7435a655d4b7be",
+      "scripts/items/forgeblade_profile.gd": "9e6c595b23acdbb7edcc88c71fc14eb6e07379ce04436ffe07ea0f5e4693fe14",
+      "scripts/items/elemental_defense_affix_profile.gd": "0e7eb38fddff3eea5a488a31aaef90bf77b9c8259bc38eaee090ac92f1eec113",
+      "scripts/items/defense_rating_affix_profile.gd": "bd2782e04a18ab1fde0c40ee852fa14b0848f6e6d177356764d53b2e0171f215",
+      "scripts/items/weapon_local_rules.gd": "73e4308828e856a741ef00386d33150a008bdb3f07ef31a031a204d71fe93b8d",
+      "scripts/mechanics/defense_rules.gd": "a211d7714f8b23cd382dbe5093328104ee95c8022b99813329aa2f8534c45361"
+    },
+    "after_run_read_only_inventory": "glove-ring-inputs-readback.json",
+    "after_run_limitation": "The inventory hashes are collected now from the current files. They must not be represented as hashes captured at the time of the passed execution."
+  }
+}
