@@ -128,6 +128,7 @@ static func collect() -> Dictionary:
 	result["iron_reflexes"] = iron_reflexes_examples()
 	result["zealots_oath"] = zealots_oath_examples()
 	result["ambush"] = ambush_examples()
+	result["inward_pull"] = inward_pull_examples()
 	result["resolute_technique"] = resolute_technique_examples()
 	result["forgeblade"] = forgeblade_examples()
 	result["melee_basic"] = melee_basic_examples(result.forgeblade)
@@ -224,6 +225,7 @@ static func collect() -> Dictionary:
 			# delivery mode has a small explicit five-slot-compatible chapter.
 			var historical_supports: Array = skill.compatible_supports.duplicate()
 			historical_supports.erase("ambush")
+			historical_supports.erase("inward_pull")
 			var combinations: Array = support_combinations(historical_supports)
 			skill.examples[config] = []
 			for combination: Array in combinations:
@@ -1110,6 +1112,62 @@ static func support_cast_brief(cast: Dictionary) -> Dictionary:
 	var result: Dictionary = {"mana": cast.mana, "cooldown": cast.cooldown, "initial_count": cast.initial_count,
 		"recipe": cast.recipe.duplicate(true), "summary": Preview.summary(cast), "details": Preview.details(cast)}
 	if cast.has("trap_profile"): result["trap_profile"] = cast.trap_profile.duplicate(true)
+	if cast.has("area_impulse_profile"): result["area_impulse_profile"] = cast.area_impulse_profile.duplicate(true)
+	return result
+
+
+static func inward_pull_examples() -> Dictionary:
+	var model := Canonical.new()
+	var snapshot: Dictionary = model.get_combat_snapshot()
+	var examples: Dictionary = {}
+	var selections: Dictionary = {
+		"nova": {"base": [], "ambush_shock": ["ambush", "shock"]},
+		"meteor": {"base": [], "ambush_ember_area": ["ambush", "ember_proliferation", "breadth", "concentrate"]},
+	}
+	for skill_id: String in selections:
+		var rows: Dictionary = {}
+		for mode: String in selections[skill_id]:
+			var other_supports: Array = selections[skill_id][mode].duplicate()
+			var linked: Array = other_supports.duplicate()
+			linked.append("inward_pull")
+			var before: Dictionary = Compiler.compile_group(skill_id, snapshot, other_supports)
+			var after: Dictionary = Compiler.compile_group(skill_id, snapshot, linked)
+			assert(before.ok and after.ok and after.has("area_impulse_profile"))
+			assert(Compiler.InwardPull.policy_error(after.area_impulse_profile).is_empty())
+			assert(after.area_impulse_profile == after.snapshot.area_impulse_policy)
+			assert(not before.has("area_impulse_profile") and not before.snapshot.has("area_impulse_policy"))
+			assert(before.recipe == after.recipe and before.cooldown == after.cooldown and before.packets == after.packets)
+			for field: String in ["trap_profile", "burn_profile", "shock_profile", "critical"]:
+				assert(before.get(field, {}) == after.get(field, {}))
+			assert(Damage.resolve(before.packets.direct, before.snapshot.modifiers) == Damage.resolve(after.packets.direct, after.snapshot.modifiers))
+			rows[mode] = {"before": _inward_pull_cast_brief(before), "after": _inward_pull_cast_brief(after)}
+		examples[skill_id] = rows
+	var quote: Dictionary = Canonical.GemTrade.quote("buy", "support:inward_pull")
+	var test_offer: Dictionary = Town.offer("support:inward_pull")
+	assert(quote.ok and test_offer.available)
+	return {"minimum_save_version": Compiler.InwardPull.SAVE_VERSION, "source_policy": SourceTree.CURRENT_SAVE_VERSION,
+		"equipment_vocabulary": Equipment.CURRENT_VOCABULARY, "support_id": "inward_pull",
+		"skills": Compiler.InwardPull.SKILLS, "policy": examples.nova.base.after.area_impulse_profile,
+		"icon_source": GemCatalogData.definition("support:inward_pull").icon, "icon_file": "originals/inward_pull.png",
+		"example_stats": model.get_stats(), "examples": examples, "merchant_quote": quote, "test_offer": test_offer,
+		"normal_reward_pool_includes_support": Canonical.Journey.GEM_DEFINITIONS.has("support:inward_pull"),
+		"normal_reward_definition_count": Canonical.Journey.GEM_DEFINITIONS.size(),
+		"example_scope": "同一新建角色的真实战斗快照，仅在对应辅助组合加入牵引并调用生产Compiler.compile_group；显示非暴击、防御前单次命中与冻结配置，不是DPS或实际战斗位移",
+		"direction": "命中照常结算后，将原向外冲量反转为朝本次真实爆发圆心；新星使用施放圆心、陨星使用实际落点、伏击使用已放置符印位置；目标恰好在圆心时冲量为零",
+		"movement": "只替换原190冲量方向，沿用原520/秒衰减、怪物移动、分离和墙体碰撞；没有持续吸附、瞬移、自动追踪或强制汇聚，不保证拉到圆心",
+		"snapshot": "compiled.area_impulse_profile与snapshot.area_impulse_policy保存独立副本；符印伏击在放置时冻结牵引，之后换装、退款或拆卸辅助不改变已有符印",
+		"scope": "仅奥能新星与陨星坠落可装配；占用一个辅助槽，魔力乘1.20，伤害、冷却、爆发半径与伏击触发半径不变；没有牵引时不新增空策略字段，原向外冲量保持",
+		"statuses": "感电、点燃或余烬扩散继续使用原准入与结算顺序；牵引不改变它们的数值，点燃与余烬仍互斥",
+		"damage_scope": "仍是原direct法术、范围、命中；不添加trap伤害标签，不开放陷阱伤害、牵引词族或新的源树消费者",
+		"risk": "自心新星会把敌人拉近角色，也可能增加贴身风险；地形、分离、敌人原移动与离散步长都会影响实际位移",
+		"migration": "严格校验旧schema42并保留原字节备份后升级43；不赠新石，不改变源政策41、装备词汇39或既有26枚里程碑奖励身份表"}
+
+
+static func _inward_pull_cast_brief(cast: Dictionary) -> Dictionary:
+	var result: Dictionary = _ambush_cast_brief(cast)
+	result["snapshot"] = {}
+	if cast.snapshot.has("area_impulse_policy"):
+		result.snapshot["area_impulse_policy"] = cast.snapshot.area_impulse_policy.duplicate(true)
 	return result
 
 

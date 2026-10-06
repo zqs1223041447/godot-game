@@ -1,0 +1,77 @@
+[
+  {
+    "script": "tests/inward_pull_rules_test.gd",
+    "command": [
+      "/usr/local/bin/godot",
+      "--headless",
+      "--path",
+      "/workspace/scratch/a51485f153de/v067-inward-pull",
+      "--script",
+      "res://tests/inward_pull_rules_test.gd"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.467,
+    "isolated_xdg": "/tmp/godot-v067-rules-0bnany_0",
+    "error_lines": [],
+    "same_input_hashes": true,
+    "stdout": "inward_pull_rules_test.run-01.log.txt"
+  },
+  {
+    "script": "tests/inward_pull_support_compiler_test.gd",
+    "command": [
+      "/usr/local/bin/godot",
+      "--headless",
+      "--path",
+      "/workspace/scratch/a51485f153de/v067-inward-pull",
+      "--script",
+      "res://tests/inward_pull_support_compiler_test.gd"
+    ],
+    "exit_code": 1,
+    "elapsed_seconds": 0.653,
+    "isolated_xdg": "/tmp/godot-v067-rules-tcjex1bu",
+    "error_lines": [
+      "ERROR: FAIL: Existing independent compile product unchanged: cost_factors",
+      "ERROR: FAIL: Existing independent compile product unchanged: cost_factors",
+      "ERROR: FAIL: Existing independent compile product unchanged: cost_factors",
+      "ERROR: FAIL: Existing independent compile product unchanged: cost_factors",
+      "ERROR: FAIL: Existing independent compile product unchanged: cost_factors",
+      "ERROR: FAIL: Existing independent compile product unchanged: cost_factors",
+      "ERROR: FAIL: Existing independent compile product unchanged: cost_factors",
+      "ERROR: FAIL: Existing independent compile product unchanged: cost_factors",
+      "ERROR: FAIL: Existing independent compile product unchanged: cost_factors",
+      "ERROR: FAIL: Existing independent compile product unchanged: cost_factors",
+      "ERROR: FAIL: Existing independent compile product unchanged: cost_factors",
+      "ERROR: FAIL: Existing independent compile product unchanged: cost_factors",
+      "ERROR: FAIL: Existing independent compile product unchanged: cost_factors",
+      "ERROR: FAIL: Existing independent compile product unchanged: cost_factors",
+      "ERROR: FAIL: Existing independent compile product unchanged: cost_factors",
+      "ERROR: FAIL: Existing independent compile product unchanged: cost_factors",
+      "ERROR: FAIL: Existing independent compile product unchanged: cost_factors",
+      "ERROR: FAIL: Existing independent compile product unchanged: cost_factors",
+      "ERROR: FAIL: Existing independent compile product unchanged: cost_factors",
+      "ERROR: FAIL: Existing independent compile product unchanged: cost_factors",
+      "ERROR: FAIL: Existing independent compile product unchanged: cost_factors",
+      "ERROR: FAIL: Unselected injected policy cannot bypass compiler ownership",
+      "ERROR: FAIL: Unselected injected policy cannot bypass compiler ownership"
+    ],
+    "same_input_hashes": true,
+    "stdout": "inward_pull_support_compiler_test.run-01.log.txt"
+  },
+  {
+    "script": "tests/inward_pull_legacy_compile_test.gd",
+    "command": [
+      "/usr/local/bin/godot",
+      "--headless",
+      "--path",
+      "/workspace/scratch/a51485f153de/v067-inward-pull",
+      "--script",
+      "res://tests/inward_pull_legacy_compile_test.gd"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 1.174,
+    "isolated_xdg": "/tmp/godot-v067-rules-3d8pnxqk",
+    "error_lines": [],
+    "same_input_hashes": true,
+    "stdout": "inward_pull_legacy_compile_test.run-01.log.txt"
+  }
+]

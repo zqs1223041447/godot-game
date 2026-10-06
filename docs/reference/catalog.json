@@ -6123,7 +6123,7 @@
 				"normal_points": 5,
 				"source_version": "3.29.1"
 			},
-			"version": 42
+			"version": 43
 		},
 		"default_casts": {
 			"group_000001": {
@@ -6982,6 +6982,29 @@
 				],
 				"support_id": "ignite"
 			},
+			"support:inward_pull": {
+				"capabilities": [],
+				"definition_id": "support:inward_pull",
+				"description": "奥能新星与陨星坠落的范围命中改为将敌人拉向本次爆发中心，初始牵引速度190，沿原击退衰减、地形与分离规则；魔力×1.20，伤害与冷却不变。占用1个辅助槽。",
+				"family": "inward_pull",
+				"glyph": "",
+				"icon": "res://assets/ui/grimoire/inward_pull.png",
+				"icon_texture": "res://assets/ui/grimoire/inward_pull.png",
+				"kind": "support_gem",
+				"name": "牵引辅助",
+				"requires": [],
+				"short_name": "牵引辅助",
+				"size": [
+					1,
+					1
+				],
+				"skill_id": "",
+				"skills": [
+					"nova",
+					"meteor"
+				],
+				"support_id": "inward_pull"
+			},
 			"support:lightning_focus": {
 				"capabilities": [],
 				"definition_id": "support:lightning_focus",
@@ -7196,7 +7219,7 @@
 			}
 		},
 		"gem_reward": {
-			"definition_count": 30,
+			"definition_count": 31,
 			"duplicate_definitions_have_distinct_uid": true,
 			"eligible_root_kill_interval": 30,
 			"failed_admission_restores_rng": true,
@@ -7223,7 +7246,7 @@
 				"evasion": 320.0
 			}
 		},
-		"save_version": 42,
+		"save_version": 43,
 		"skitter_accuracy_example": {
 			"base_accuracy": 140,
 			"base_chance": 0.96,
@@ -7773,7 +7796,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 42,
+				"save_version": 43,
 				"source": {
 					"affixes": [
 						{
@@ -8277,7 +8300,7 @@
 				"schema_version": 2,
 				"status": "prototype"
 			},
-			"save_version": 42
+			"save_version": 43
 		},
 		"elevate": {
 			"description": "保留魔法装备已有词缀，升为稀有并补至4至6条。",
@@ -8479,7 +8502,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 42,
+				"save_version": 43,
 				"source": {
 					"affixes": [
 						{
@@ -8664,7 +8687,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 42,
+				"save_version": 43,
 				"source": {
 					"affixes": [],
 					"base_id": "ashwood_bow",
@@ -8851,7 +8874,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 42,
+				"save_version": 43,
 				"source": {
 					"affixes": [
 						{
@@ -9055,7 +9078,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 42,
+				"save_version": 43,
 				"source": {
 					"affixes": [
 						{
@@ -9198,7 +9221,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 42,
+				"save_version": 43,
 				"source": {
 					"affixes": [
 						{
@@ -9682,7 +9705,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 42,
+				"save_version": 43,
 				"source": {
 					"affixes": [
 						{
@@ -11486,7 +11509,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 42,
+				"save_version": 43,
 				"source": {
 					"affixes": [
 						{
@@ -11816,7 +11839,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 42,
+				"save_version": 43,
 				"source": {
 					"affixes": [
 						{
@@ -12135,7 +12158,7 @@
 				},
 				"revision_after": 1,
 				"revision_before": 0,
-				"save_version": 42,
+				"save_version": 43,
 				"source": {
 					"affixes": [
 						{
@@ -12198,7 +12221,7 @@
 			"example_quantity": 1,
 			"name": "校准碎片",
 			"quantity_source": "items[uid].payload.quantity",
-			"save_version": 42,
+			"save_version": 43,
 			"size": [
 				1,
 				1
@@ -36618,7 +36641,878 @@
 		"pool_id": "forgeblade_v34",
 		"save_version": 34
 	},
-	"game_version": "0.66.0",
+	"game_version": "0.67.0",
+	"inward_pull": {
+		"damage_scope": "仍是原direct法术、范围、命中；不添加trap伤害标签，不开放陷阱伤害、牵引词族或新的源树消费者",
+		"direction": "命中照常结算后，将原向外冲量反转为朝本次真实爆发圆心；新星使用施放圆心、陨星使用实际落点、伏击使用已放置符印位置；目标恰好在圆心时冲量为零",
+		"equipment_vocabulary": 39,
+		"example_scope": "同一新建角色的真实战斗快照，仅在对应辅助组合加入牵引并调用生产Compiler.compile_group；显示非暴击、防御前单次命中与冻结配置，不是DPS或实际战斗位移",
+		"example_stats": {
+			"accuracy": 140.0,
+			"accuracy_increased": 0.0,
+			"additional_skill_slots": 0.0,
+			"area_increased": 0.0,
+			"area_size_increased": 0.0,
+			"armour": 0.0,
+			"armour_increased": 0.0,
+			"attack_added_fire": 0.0,
+			"attack_added_physical": 0.0,
+			"attack_crit_chance_increased": 0.0,
+			"attack_elemental_increased": 0.0,
+			"attack_life_leech": 0.0,
+			"attack_mana_leech": 0.0,
+			"attack_physical_increased": 0.0,
+			"attack_speed": 1.7,
+			"attack_speed_increased": 0.0,
+			"chaos_increased": 0.0,
+			"cold_increased": 0.0,
+			"cold_resistance": 0.0,
+			"crit_base_chance": 0.05,
+			"crit_base_multiplier": 1.5,
+			"crit_chance_increased": 0.0,
+			"crit_multiplier_add": 0.0,
+			"damage": 26.0,
+			"damage_taken_from_mana_before_life": 0.0,
+			"damaging_ailments_faster": 0.0,
+			"dexterity": 20.0,
+			"elemental_increased": 0.0,
+			"evasion": 15.600000000000001,
+			"evasion_increased": 0.0,
+			"fire_dot_multiplier_add": 0.0,
+			"fire_increased": 0.0,
+			"fire_resistance": 0.0,
+			"flask_charges_gained_increased": 0.0,
+			"flask_life_recovery_increased": 0.0,
+			"flask_mana_recovery_increased": 0.0,
+			"global_increased": 0.0,
+			"intelligence": 20.0,
+			"life_leech_max_rate_increased": 0.0,
+			"life_leech_rate_increased": 0.0,
+			"life_regen": 0.0,
+			"life_regen_percent": 0.0,
+			"lightning_increased": 0.0,
+			"lightning_resistance": 0.0,
+			"mana_cost_efficiency_increased": 0.0,
+			"mana_cost_increased": 0.0,
+			"mana_leech_max_rate_increased": 0.0,
+			"mana_leech_rate_increased": 0.0,
+			"mana_regen": 12.0,
+			"mana_regen_increased": 0.0,
+			"max_health": 130.0,
+			"max_mana": 140.0,
+			"max_shield": 91.8,
+			"maximum_cold_resistance_add": 0.0,
+			"maximum_fire_resistance_add": 0.0,
+			"maximum_lightning_resistance_add": 0.0,
+			"melee_area_size_increased": 0.0,
+			"melee_crit_chance_increased": 0.0,
+			"melee_crit_multiplier_add": 0.0,
+			"melee_physical_increased": 0.04,
+			"move_speed": 240.0,
+			"move_speed_increased": 0.0,
+			"physical_attack_life_leech": 0.0,
+			"physical_attack_mana_leech": 0.0,
+			"physical_increased": 0.0,
+			"projectile_attack_crit_chance_increased": 0.0,
+			"projectile_attack_crit_multiplier_add": 0.0,
+			"projectile_count": 0.0,
+			"projectile_increased": 0.0,
+			"projectile_speed_increased": 0.0,
+			"resolute_technique": 0.0,
+			"shield_recharge_delay": 4.0,
+			"shield_recharge_rate": 16.0,
+			"shield_recharge_rate_increased": 0.0,
+			"shield_recharge_start_faster": 0.0,
+			"shield_regen": 16.0,
+			"spell_added_cold": 0.0,
+			"spell_added_lightning": 0.0,
+			"spell_area_size_increased": 0.0,
+			"spell_crit_chance_increased": 0.0,
+			"spell_crit_multiplier_add": 0.0,
+			"spell_increased": 0.0,
+			"strength": 20.0
+		},
+		"examples": {
+			"meteor": {
+				"ambush_ember_area": {
+					"after": {
+						"area_impulse_profile": {
+							"direction": "toward_origin",
+							"enabled": true,
+							"impulse_speed": 190.0,
+							"mana_multiplier": 1.2
+						},
+						"burn_profile": {
+							"duration": 3.0,
+							"enabled": true,
+							"hit_multiplier": 0.75,
+							"mana_multiplier": 1.3,
+							"proliferation": {
+								"enabled": true,
+								"max_hops": 1,
+								"max_targets": 8,
+								"preserves_expiry": true,
+								"radius": 120.0
+							},
+							"rate_fraction": 0.2,
+							"roles": {
+								"direct": {
+									"dps": 15.14540625,
+									"fire_before_defense": 75.72703125,
+									"total": 45.43621875
+								}
+							},
+							"stacking": "strongest_refresh_equal"
+						},
+						"cooldown": 8.0,
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n点燃 3.0 秒 · 非暴击、未计火抗\n每秒 15.15 火焰 · 完整持续 45.44\n同一目标不叠加；强点燃覆盖，同强度刷新。\n死亡扩散：半径 120 · 最多 8 个目标 · 受墙体阻挡\n保留原燃烧强度和剩余时间；扩散所得燃烧不再传播。\n脚下布置 · 0.35 秒后布防 · 触发半径 70\n保留 12 秒 · 所有技能组共享 3 枚；满额不消耗魔力或冷却。\n放置时固定伤害与暴击；敌人靠近后释放一次，到期消失。触发需视线，范围增幅只改变爆发范围。\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n圆形范围：半径 110.00 → 105.60；面积 ×0.9216，半径 ×0.9600（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：火焰 75.73\n固有：火焰 111.80；附加：无；附加效用 4.30",
+						"initial_count": 0,
+						"mana": 89.856,
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 4.3,
+								"base_coefficient": 4.3,
+								"intrinsic": {
+									"fire": 111.8
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 111.8
+							},
+							"role": "direct",
+							"skill_id": "meteor",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"recipe": {
+							"area_multiplier": 0.9216,
+							"base_radius": 110.0,
+							"radius": 105.6
+						},
+						"resolved": {
+							"components": {
+								"fire": 75.72703125
+							},
+							"details": [
+								{
+									"base": 111.8,
+									"before_defense": 75.72703125,
+									"final": 75.72703125,
+									"increased": 0.0,
+									"modifiers": [
+										"support:breadth",
+										"support:concentrate",
+										"support:ember_proliferation",
+										"support:ambush"
+									],
+									"more": 0.67734375,
+									"resistance": 0.0,
+									"type": "fire"
+								}
+							],
+							"total": 75.72703125
+						},
+						"snapshot": {
+							"area_impulse_policy": {
+								"direction": "toward_origin",
+								"enabled": true,
+								"impulse_speed": 190.0,
+								"mana_multiplier": 1.2
+							}
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每次命中 75.73",
+						"support_ids": [
+							"ambush",
+							"breadth",
+							"concentrate",
+							"ember_proliferation",
+							"inward_pull"
+						],
+						"trap_profile": {
+							"arming_seconds": 0.35,
+							"enabled": true,
+							"hit_multiplier": 0.85,
+							"lifetime_seconds": 12.0,
+							"mana_multiplier": 1.25,
+							"maximum_traps": 3,
+							"trigger_radius": 70.0
+						}
+					},
+					"before": {
+						"burn_profile": {
+							"duration": 3.0,
+							"enabled": true,
+							"hit_multiplier": 0.75,
+							"mana_multiplier": 1.3,
+							"proliferation": {
+								"enabled": true,
+								"max_hops": 1,
+								"max_targets": 8,
+								"preserves_expiry": true,
+								"radius": 120.0
+							},
+							"rate_fraction": 0.2,
+							"roles": {
+								"direct": {
+									"dps": 15.14540625,
+									"fire_before_defense": 75.72703125,
+									"total": 45.43621875
+								}
+							},
+							"stacking": "strongest_refresh_equal"
+						},
+						"cooldown": 8.0,
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n点燃 3.0 秒 · 非暴击、未计火抗\n每秒 15.15 火焰 · 完整持续 45.44\n同一目标不叠加；强点燃覆盖，同强度刷新。\n死亡扩散：半径 120 · 最多 8 个目标 · 受墙体阻挡\n保留原燃烧强度和剩余时间；扩散所得燃烧不再传播。\n脚下布置 · 0.35 秒后布防 · 触发半径 70\n保留 12 秒 · 所有技能组共享 3 枚；满额不消耗魔力或冷却。\n放置时固定伤害与暴击；敌人靠近后释放一次，到期消失。触发需视线，范围增幅只改变爆发范围。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n圆形范围：半径 110.00 → 105.60；面积 ×0.9216，半径 ×0.9600（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：火焰 75.73\n固有：火焰 111.80；附加：无；附加效用 4.30",
+						"initial_count": 0,
+						"mana": 74.88,
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 4.3,
+								"base_coefficient": 4.3,
+								"intrinsic": {
+									"fire": 111.8
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 111.8
+							},
+							"role": "direct",
+							"skill_id": "meteor",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"recipe": {
+							"area_multiplier": 0.9216,
+							"base_radius": 110.0,
+							"radius": 105.6
+						},
+						"resolved": {
+							"components": {
+								"fire": 75.72703125
+							},
+							"details": [
+								{
+									"base": 111.8,
+									"before_defense": 75.72703125,
+									"final": 75.72703125,
+									"increased": 0.0,
+									"modifiers": [
+										"support:breadth",
+										"support:concentrate",
+										"support:ember_proliferation",
+										"support:ambush"
+									],
+									"more": 0.67734375,
+									"resistance": 0.0,
+									"type": "fire"
+								}
+							],
+							"total": 75.72703125
+						},
+						"snapshot": {
+
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每次命中 75.73",
+						"support_ids": [
+							"ambush",
+							"breadth",
+							"concentrate",
+							"ember_proliferation"
+						],
+						"trap_profile": {
+							"arming_seconds": 0.35,
+							"enabled": true,
+							"hit_multiplier": 0.85,
+							"lifetime_seconds": 12.0,
+							"mana_multiplier": 1.25,
+							"maximum_traps": 3,
+							"trigger_radius": 70.0
+						}
+					}
+				},
+				"base": {
+					"after": {
+						"area_impulse_profile": {
+							"direction": "toward_origin",
+							"enabled": true,
+							"impulse_speed": 190.0,
+							"mana_multiplier": 1.2
+						},
+						"cooldown": 8.0,
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n圆形范围：半径 110.00 → 110.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：火焰 111.80\n固有：火焰 111.80；附加：无；附加效用 4.30",
+						"initial_count": 0,
+						"mana": 38.4,
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 4.3,
+								"base_coefficient": 4.3,
+								"intrinsic": {
+									"fire": 111.8
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 111.8
+							},
+							"role": "direct",
+							"skill_id": "meteor",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"recipe": {
+							"radius": 110.0
+						},
+						"resolved": {
+							"components": {
+								"fire": 111.8
+							},
+							"details": [
+								{
+									"base": 111.8,
+									"before_defense": 111.8,
+									"final": 111.8,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "fire"
+								}
+							],
+							"total": 111.8
+						},
+						"snapshot": {
+							"area_impulse_policy": {
+								"direction": "toward_origin",
+								"enabled": true,
+								"impulse_speed": 190.0,
+								"mana_multiplier": 1.2
+							}
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每次命中 111.80",
+						"support_ids": [
+							"inward_pull"
+						]
+					},
+					"before": {
+						"cooldown": 8.0,
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n圆形范围：半径 110.00 → 110.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：火焰 111.80\n固有：火焰 111.80；附加：无；附加效用 4.30",
+						"initial_count": 0,
+						"mana": 32.0,
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 4.3,
+								"base_coefficient": 4.3,
+								"intrinsic": {
+									"fire": 111.8
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 111.8
+							},
+							"role": "direct",
+							"skill_id": "meteor",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"recipe": {
+							"radius": 110.0
+						},
+						"resolved": {
+							"components": {
+								"fire": 111.8
+							},
+							"details": [
+								{
+									"base": 111.8,
+									"before_defense": 111.8,
+									"final": 111.8,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "fire"
+								}
+							],
+							"total": 111.8
+						},
+						"snapshot": {
+
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每次命中 111.80",
+						"support_ids": []
+					}
+				}
+			},
+			"nova": {
+				"ambush_shock": {
+					"after": {
+						"area_impulse_profile": {
+							"direction": "toward_origin",
+							"enabled": true,
+							"impulse_speed": 190.0,
+							"mana_multiplier": 1.2
+						},
+						"cooldown": 6.0,
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n感电 2.0 秒 · 后续命中承受伤害提高 15%\n闪电命中结算后施加；不追溯增强本次命中，不影响持续伤害。同强度刷新，不叠加。\n脚下布置 · 0.35 秒后布防 · 触发半径 70\n保留 12 秒 · 所有技能组共享 3 枚；满额不消耗魔力或冷却。\n放置时固定伤害与暴击；敌人靠近后释放一次，到期消失。触发需视线，范围增幅只改变爆发范围。\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：闪电 47.74\n固有：闪电 70.20；附加：无；附加效用 2.70",
+						"initial_count": 0,
+						"mana": 43.199999999999996,
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 70.2
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 70.2
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"recipe": {
+							"radius": 155.0
+						},
+						"resolved": {
+							"components": {
+								"lightning": 47.736000000000004
+							},
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 47.736000000000004,
+									"final": 47.736000000000004,
+									"increased": 0.0,
+									"modifiers": [
+										"support:shock",
+										"support:ambush"
+									],
+									"more": 0.68,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 47.736000000000004
+						},
+						"shock_profile": {
+							"affects_dot": false,
+							"affects_hits_only": true,
+							"applies_after_current_hit": true,
+							"duration": 2.0,
+							"enabled": true,
+							"hit_damage_taken_increased": 0.15,
+							"hit_multiplier": 0.8,
+							"mana_multiplier": 1.2,
+							"roles": [
+								"direct"
+							],
+							"stacking": "refresh_equal",
+							"trigger": "positive_lightning_hit_after_settlement"
+						},
+						"snapshot": {
+							"area_impulse_policy": {
+								"direction": "toward_origin",
+								"enabled": true,
+								"impulse_speed": 190.0,
+								"mana_multiplier": 1.2
+							}
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每次命中 47.74",
+						"support_ids": [
+							"ambush",
+							"inward_pull",
+							"shock"
+						],
+						"trap_profile": {
+							"arming_seconds": 0.35,
+							"enabled": true,
+							"hit_multiplier": 0.85,
+							"lifetime_seconds": 12.0,
+							"mana_multiplier": 1.25,
+							"maximum_traps": 3,
+							"trigger_radius": 70.0
+						}
+					},
+					"before": {
+						"cooldown": 6.0,
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n感电 2.0 秒 · 后续命中承受伤害提高 15%\n闪电命中结算后施加；不追溯增强本次命中，不影响持续伤害。同强度刷新，不叠加。\n脚下布置 · 0.35 秒后布防 · 触发半径 70\n保留 12 秒 · 所有技能组共享 3 枚；满额不消耗魔力或冷却。\n放置时固定伤害与暴击；敌人靠近后释放一次，到期消失。触发需视线，范围增幅只改变爆发范围。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：闪电 47.74\n固有：闪电 70.20；附加：无；附加效用 2.70",
+						"initial_count": 0,
+						"mana": 36.0,
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 70.2
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 70.2
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"recipe": {
+							"radius": 155.0
+						},
+						"resolved": {
+							"components": {
+								"lightning": 47.736000000000004
+							},
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 47.736000000000004,
+									"final": 47.736000000000004,
+									"increased": 0.0,
+									"modifiers": [
+										"support:shock",
+										"support:ambush"
+									],
+									"more": 0.68,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 47.736000000000004
+						},
+						"shock_profile": {
+							"affects_dot": false,
+							"affects_hits_only": true,
+							"applies_after_current_hit": true,
+							"duration": 2.0,
+							"enabled": true,
+							"hit_damage_taken_increased": 0.15,
+							"hit_multiplier": 0.8,
+							"mana_multiplier": 1.2,
+							"roles": [
+								"direct"
+							],
+							"stacking": "refresh_equal",
+							"trigger": "positive_lightning_hit_after_settlement"
+						},
+						"snapshot": {
+
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每次命中 47.74",
+						"support_ids": [
+							"ambush",
+							"shock"
+						],
+						"trap_profile": {
+							"arming_seconds": 0.35,
+							"enabled": true,
+							"hit_multiplier": 0.85,
+							"lifetime_seconds": 12.0,
+							"mana_multiplier": 1.25,
+							"maximum_traps": 3,
+							"trigger_radius": 70.0
+						}
+					}
+				},
+				"base": {
+					"after": {
+						"area_impulse_profile": {
+							"direction": "toward_origin",
+							"enabled": true,
+							"impulse_speed": 190.0,
+							"mana_multiplier": 1.2
+						},
+						"cooldown": 6.0,
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：闪电 70.20\n固有：闪电 70.20；附加：无；附加效用 2.70",
+						"initial_count": 0,
+						"mana": 28.799999999999997,
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 70.2
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 70.2
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"recipe": {
+							"radius": 155.0
+						},
+						"resolved": {
+							"components": {
+								"lightning": 70.2
+							},
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 70.2,
+									"final": 70.2,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 70.2
+						},
+						"snapshot": {
+							"area_impulse_policy": {
+								"direction": "toward_origin",
+								"enabled": true,
+								"impulse_speed": 190.0,
+								"mana_multiplier": 1.2
+							}
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每次命中 70.20",
+						"support_ids": [
+							"inward_pull"
+						]
+					},
+					"before": {
+						"cooldown": 6.0,
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：闪电 70.20\n固有：闪电 70.20；附加：无；附加效用 2.70",
+						"initial_count": 0,
+						"mana": 24.0,
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 70.2
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 70.2
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"recipe": {
+							"radius": 155.0
+						},
+						"resolved": {
+							"components": {
+								"lightning": 70.2
+							},
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 70.2,
+									"final": 70.2,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 70.2
+						},
+						"snapshot": {
+
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每次命中 70.20",
+						"support_ids": []
+					}
+				}
+			}
+		},
+		"icon_file": "originals/inward_pull.png",
+		"icon_source": "res://assets/ui/grimoire/inward_pull.png",
+		"merchant_quote": {
+			"code": "",
+			"cost": {
+				"calibration_shard": 4
+			},
+			"definition_id": "support:inward_pull",
+			"materials": {
+
+			},
+			"name": "牵引辅助",
+			"ok": true,
+			"operation": "buy",
+			"reason": "",
+			"target": "support:inward_pull"
+		},
+		"migration": "严格校验旧schema42并保留原字节备份后升级43；不赠新石，不改变源政策41、装备词汇39或既有26枚里程碑奖励身份表",
+		"minimum_save_version": 43,
+		"movement": "只替换原190冲量方向，沿用原520/秒衰减、怪物移动、分离和墙体碰撞；没有持续吸附、瞬移、自动追踪或强制汇聚，不保证拉到圆心",
+		"normal_reward_definition_count": 26,
+		"normal_reward_pool_includes_support": false,
+		"policy": {
+			"direction": "toward_origin",
+			"enabled": true,
+			"impulse_speed": 190.0,
+			"mana_multiplier": 1.2
+		},
+		"risk": "自心新星会把敌人拉近角色，也可能增加贴身风险；地形、分离、敌人原移动与离散步长都会影响实际位移",
+		"scope": "仅奥能新星与陨星坠落可装配；占用一个辅助槽，魔力乘1.20，伤害、冷却、爆发半径与伏击触发半径不变；没有牵引时不新增空策略字段，原向外冲量保持",
+		"skills": [
+			"nova",
+			"meteor"
+		],
+		"snapshot": "compiled.area_impulse_profile与snapshot.area_impulse_policy保存独立副本；符印伏击在放置时冻结牵引，之后换装、退款或拆卸辅助不改变已有符印",
+		"source_policy": 41,
+		"statuses": "感电、点燃或余烬扩散继续使用原准入与结算顺序；牵引不改变它们的数值，点燃与余烬仍互斥",
+		"support_id": "inward_pull",
+		"test_offer": {
+			"available": true,
+			"catalog_id": "support:inward_pull",
+			"category": "",
+			"definition_id": "support:inward_pull",
+			"description": "奥能新星与陨星坠落的范围命中改为将敌人拉向本次爆发中心，初始牵引速度190，沿原击退衰减、地形与分离规则；魔力×1.20，伤害与冷却不变。占用1个辅助槽。",
+			"icon_path": "",
+			"id": "support:inward_pull",
+			"kind": "support_gem",
+			"name": "牵引辅助",
+			"preview": {
+				"capabilities": [],
+				"category": "",
+				"definition_id": "support:inward_pull",
+				"description": "奥能新星与陨星坠落的范围命中改为将敌人拉向本次爆发中心，初始牵引速度190，沿原击退衰减、地形与分离规则；魔力×1.20，伤害与冷却不变。占用1个辅助槽。",
+				"family": "inward_pull",
+				"glyph": "",
+				"icon": "res://assets/ui/grimoire/inward_pull.png",
+				"icon_texture": "res://assets/ui/grimoire/inward_pull.png",
+				"kind": "support_gem",
+				"name": "牵引辅助",
+				"requires": [],
+				"short_name": "牵引辅助",
+				"size": [
+					1,
+					1
+				],
+				"skill_id": "",
+				"skills": [
+					"nova",
+					"meteor"
+				],
+				"support_id": "inward_pull",
+				"uid": "item_000001"
+			},
+			"price_label": "测试免费",
+			"quantity": 1,
+			"reason": "",
+			"size": [
+				1,
+				1
+			],
+			"supply_kind": "gem"
+		}
+	},
 	"iron_reflexes": {
 		"base_scope": "A0、E0合计角色原始基础、已装备物品、珠宝与天赋固定值；本组实际装备和路线只有胸甲提供护甲/闪避固定值，角色基础闪避为15",
 		"budget_scope": "生产Model导出的静态装备/天赋与单次命中预算；命中示例设当前护盾0、生命10000，不包含频率、走位或实战存活时长",
@@ -45781,7 +46675,7 @@
 			"max_targets": 1,
 			"radius": 60.0
 		},
-		"save_version": 42,
+		"save_version": 43,
 		"scope": "hit + attack + melee；不含area，不受范围或投射物速度提高，也不占投射物容量，无返回或飞行结束爆炸。",
 		"timing": "沿用attack_timer与当前attack_speed；没有独立技能冷却或魔力支付。"
 	},
@@ -48621,6 +49515,12 @@
 			},
 			{
 				"cost": 4,
+				"definition_id": "support:inward_pull",
+				"kind": "support_gem",
+				"name": "牵引辅助"
+			},
+			{
+				"cost": 4,
 				"definition_id": "support:lightning_focus",
 				"kind": "support_gem",
 				"name": "闪电专注辅助"
@@ -48672,7 +49572,7 @@
 		"quality": 0,
 		"recycle_credit": 1,
 		"recycle_location": "bag",
-		"schema": 42,
+		"schema": 43,
 		"test_supply_separate": true
 	},
 	"normal_journey": {
@@ -57581,7 +58481,7 @@
 		},
 		"timing": "施放时冻结；分配、退款和换装只影响新施放，旧飞行、母子箭、返回与独立爆炸保持各自快照"
 	},
-	"save_version": 42,
+	"save_version": 43,
 	"schema_version": 3,
 	"sectors": [
 		{
@@ -168274,7 +169174,8 @@
 				"fire_focus",
 				"ignite",
 				"ember_proliferation",
-				"ambush"
+				"ambush",
+				"inward_pull"
 			],
 			"cooldown": 8.0,
 			"description": "在最近敌人处引爆陨星，造成 430% 范围伤害。",
@@ -181562,7 +182463,8 @@
 				"quickcast",
 				"lightning_focus",
 				"shock",
-				"ambush"
+				"ambush",
+				"inward_pull"
 			],
 			"cooldown": 6.0,
 			"description": "引爆周围 155 范围的奥能，造成 270% 伤害并击退。",
@@ -515380,7 +516282,7 @@
 			}
 		},
 		"roster_scope": "只展示原抽签为基础物种的按位替换；灰烬保留名额，分裂体与母巢保留原抽签且占用序号；稀有度、机制与奖励不变；所选巡逻词缀最后按编排物种替换",
-		"save_version": 42,
+		"save_version": 43,
 		"spawn_seconds": 0.6,
 		"tiers": [
 			{
@@ -517315,6 +518217,68 @@
 			"family": "burning",
 			"native_recipe_eligibility": true
 		},
+		"inward_pull": {
+			"examples": {
+				"meteor": {
+					"after": {
+						"area_impulse_profile": {
+							"direction": "toward_origin",
+							"enabled": true,
+							"impulse_speed": 190.0,
+							"mana_multiplier": 1.2
+						},
+						"cooldown": 8.0,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n圆形范围：半径 110.00 → 110.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：火焰 111.80\n固有：火焰 111.80；附加：无；附加效用 4.30",
+						"initial_count": 0,
+						"mana": 38.4,
+						"recipe": {
+							"radius": 110.0
+						},
+						"summary": "命中预估（未计敌方防御）：每次命中 111.80"
+					},
+					"before": {
+						"cooldown": 8.0,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 110.00 → 110.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：火焰 111.80\n固有：火焰 111.80；附加：无；附加效用 4.30",
+						"initial_count": 0,
+						"mana": 32.0,
+						"recipe": {
+							"radius": 110.0
+						},
+						"summary": "命中预估（未计敌方防御）：每次命中 111.80"
+					}
+				},
+				"nova": {
+					"after": {
+						"area_impulse_profile": {
+							"direction": "toward_origin",
+							"enabled": true,
+							"impulse_speed": 190.0,
+							"mana_multiplier": 1.2
+						},
+						"cooldown": 6.0,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：闪电 70.20\n固有：闪电 70.20；附加：无；附加效用 2.70",
+						"initial_count": 0,
+						"mana": 28.799999999999997,
+						"recipe": {
+							"radius": 155.0
+						},
+						"summary": "命中预估（未计敌方防御）：每次命中 70.20"
+					},
+					"before": {
+						"cooldown": 6.0,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：闪电 70.20\n固有：闪电 70.20；附加：无；附加效用 2.70",
+						"initial_count": 0,
+						"mana": 24.0,
+						"recipe": {
+							"radius": 155.0
+						},
+						"summary": "命中预估（未计敌方防御）：每次命中 70.20"
+					}
+				}
+			},
+			"family": "inward_pull",
+			"native_recipe_eligibility": true
+		},
 		"lightning_focus": {
 			"examples": {
 				"bolt": {
@@ -518745,6 +519709,22 @@
 				"tornado"
 			]
 		},
+		"inward_pull": {
+			"description": "奥能新星与陨星坠落的范围命中改为将敌人拉向本次爆发中心，初始牵引速度190，沿原击退衰减、地形与分离规则；魔力×1.20，伤害与冷却不变。占用1个辅助槽。",
+			"family": "inward_pull",
+			"name": "牵引辅助",
+			"operations": [
+				{
+					"op": "mana_multiplier",
+					"value": 1.2
+				}
+			],
+			"requires": [],
+			"skills": [
+				"nova",
+				"meteor"
+			]
+		},
 		"lightning_focus": {
 			"description": "飞弹、新星与连锁闪电主命中：闪电伤害总增 20%，其他类型伤害总降 20%；魔力 ×1.15，冷却不变。普攻与独立爆炸不变。",
 			"family": "element",
@@ -519778,7 +520758,7 @@
 		},
 		"reserved_character_key": "C",
 		"retired_profile_writes": false,
-		"save_version": 42,
+		"save_version": 43,
 		"services": [
 			{
 				"description": "免费测试供应全部已实现主动与辅助宝石。",
@@ -522186,6 +523166,50 @@
 							"tornado"
 						],
 						"support_id": "ignite",
+						"uid": "item_000001"
+					},
+					"price_label": "测试免费",
+					"quantity": 1,
+					"reason": "",
+					"size": [
+						1,
+						1
+					],
+					"supply_kind": "gem"
+				},
+				{
+					"available": true,
+					"catalog_id": "support:inward_pull",
+					"category": "",
+					"definition_id": "support:inward_pull",
+					"description": "奥能新星与陨星坠落的范围命中改为将敌人拉向本次爆发中心，初始牵引速度190，沿原击退衰减、地形与分离规则；魔力×1.20，伤害与冷却不变。占用1个辅助槽。",
+					"icon_path": "",
+					"id": "support:inward_pull",
+					"kind": "support_gem",
+					"name": "牵引辅助",
+					"preview": {
+						"capabilities": [],
+						"category": "",
+						"definition_id": "support:inward_pull",
+						"description": "奥能新星与陨星坠落的范围命中改为将敌人拉向本次爆发中心，初始牵引速度190，沿原击退衰减、地形与分离规则；魔力×1.20，伤害与冷却不变。占用1个辅助槽。",
+						"family": "inward_pull",
+						"glyph": "",
+						"icon": "res://assets/ui/grimoire/inward_pull.png",
+						"icon_texture": "res://assets/ui/grimoire/inward_pull.png",
+						"kind": "support_gem",
+						"name": "牵引辅助",
+						"requires": [],
+						"short_name": "牵引辅助",
+						"size": [
+							1,
+							1
+						],
+						"skill_id": "",
+						"skills": [
+							"nova",
+							"meteor"
+						],
+						"support_id": "inward_pull",
 						"uid": "item_000001"
 					},
 					"price_label": "测试免费",

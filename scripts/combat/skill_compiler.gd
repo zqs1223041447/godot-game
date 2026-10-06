@@ -327,7 +327,7 @@ static func _failure(error: String) -> Dictionary:
 static func _snapshot_error(snapshot: Dictionary) -> String:
 	# initial_count is reserved for compiled projectile snapshots, including empty supports.
 	# Reject re-entry instead of applying support more factors a second time.
-	if snapshot.has("initial_count") or snapshot.has("compiled_packets") or snapshot.has("compiled_skill_id") or snapshot.has("critical") or snapshot.has("critical_roll") or snapshot.has("leech") or snapshot.has("burn_policy") or snapshot.has("burn_proliferation") or snapshot.has("shock_policy") or snapshot.has("hit_policy"):
+	if snapshot.has("initial_count") or snapshot.has("compiled_packets") or snapshot.has("compiled_skill_id") or snapshot.has("critical") or snapshot.has("critical_roll") or snapshot.has("leech") or snapshot.has("burn_policy") or snapshot.has("burn_proliferation") or snapshot.has("shock_policy") or snapshot.has("hit_policy") or snapshot.has("area_impulse_policy") or snapshot.has("area_impulse_profile"):
 		return "施放快照已编译；必须从基础构筑快照重新编译"
 	var dot_error:String=Burn.snapshot_multiplier_error(snapshot)
 	if not dot_error.is_empty():return dot_error
