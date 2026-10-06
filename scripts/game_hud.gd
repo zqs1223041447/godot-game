@@ -813,6 +813,10 @@ func _update_live() -> void:
 		_run_label.tooltip_text = "独立测试进度" if bool(_world_context_cache.get("test_mode", false)) else "选择地图与挑战档位"
 	elif str(_world_context_cache.get("mode", "")) in ["map", "map_complete"]:
 		_run_label.tooltip_text = "独立测试进度" if bool(_world_context_cache.get("test_mode", false)) else "完成地图后返回城镇领取结算"
+		if str(_world_context_cache.get("encounter_mode", "")) == "exploration":
+			_wave_label.text = "探索 · 击败 %d · 剩余 %d" % [int(_arena.get("kills")), _arena.enemies.size()]
+			_run_label.text = "%02d:%02d   /   %s" % [seconds / 60, seconds % 60, "探索已暂停" if is_blocking() else "探索中"]
+			_run_label.tooltip_text = str(_world_context_cache.get("exploration_description", "寻找并击败地图中的敌人，清理完成后返回城镇"))
 		if str(_world_context_cache.mode) == "map_complete": _run_label.text = "挑战完成 · 返回城镇"
 	_run_label.mouse_filter = Control.MOUSE_FILTER_PASS
 	_level_label.text = "Lv.%d  ·  经验 %d  ·  天赋点 %d" % [_state.level, _state.xp, _state.talent_points]
@@ -1384,6 +1388,8 @@ func _build_death_panel() -> void:
 	_panel_footer.text = "装备、天赋与技能组合已保留  ·  重新挑战，寻找更强的连招"
 	var seconds: int = int(float(_arena.get("elapsed")))
 	var summary: String = "坚持 %02d:%02d     ·     击败 %d     ·     到达第 %d 波" % [seconds / 60, seconds % 60, int(_arena.get("kills")), int(_arena.get("wave"))]
+	if str(_world_context_cache.get("encounter_mode", "")) == "exploration":
+		summary = "探索 %02d:%02d     ·     击败 %d" % [seconds / 60, seconds % 60, int(_arena.get("kills"))]
 	_card(_panel_body, summary, "角色等级 %d  ·  可用天赋点 %d" % [_state.level, _state.talent_points], GOLD)
 	_card(_panel_body, "再试一次，让组合更进一步", "重新开始会恢复生命与法力，重置敌人和战斗计时。\n装备、已分配天赋和技能栏保留；进入战斗后可随时打开面板调整。")
 	var actions: HBoxContainer = HBoxContainer.new()
@@ -1674,9 +1680,9 @@ func _refresh_world() -> void:
 			_world_label.text = "城镇 · 独立测试存档" if bool(context.get("test_mode", false)) else "城镇 · 正式存档"
 			_world_button.text = "城镇服务"
 		_:
-			_world_label.text = "%s · %d / %d" % [str(context.map_name),int(context.ordinary_kills),int(context.ordinary_target)]
+			_world_label.text = exploration_progress_text(context) if str(context.get("encounter_mode", "")) == "exploration" else "%s · %d / %d" % [str(context.map_name),int(context.ordinary_kills),int(context.ordinary_target)]
 			var camps: Array = context.get("camp_states", [])
-			if not camps.is_empty():
+			if not camps.is_empty() and str(context.get("encounter_mode", "")) != "exploration":
 				var cleared := 0
 				for camp: Dictionary in camps:
 					if str(camp.state) == "cleared": cleared += 1
@@ -1755,3 +1761,10 @@ static func combat_outcome_text(row: Dictionary) -> String:
 	if outcome == "evaded" and row.has("chance"): text += " · 本次命中率 %.1f%%" % (float(row.chance)*100.0)
 	if row.has("at"): text += " · 记录时刻 %.3f 秒" % float(row.at)
 	return text
+
+
+static func exploration_progress_text(context: Dictionary) -> String:
+	var headline := "%s · %d / %d" % [str(context.get("map_name", "地图")), int(context.get("ordinary_kills", 0)), int(context.get("ordinary_target", 0))]
+	var phase := str(context.get("boss_phase", "active"))
+	var complete := str(context.get("mode", "")) == "map_complete"
+	return headline + "\n" + ("地图已清理" if complete else "首领已击败 · 继续清理" if phase == "defeated" else "寻找敌人 · 首领驻守")

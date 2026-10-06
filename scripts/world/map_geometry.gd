@@ -4,17 +4,22 @@ extends RefCounted
 const EPS := 0.000001
 const SKIN := 0.02
 const CORNER_CLEARANCE := 0.5
+const ExplorationLayout = preload("res://scripts/world/exploration_map_layout.gd")
 var _id := "normal"
 var _bounds := Rect2()
 var _walls: Array[Rect2] = []
 var _revision := 0
 var _routes: Dictionary = {}
+var _encounter_mode := "legacy"
+var _landmarks: Dictionary = {}
+var _obstacle_style := ""
 
 func configure(id: String, bounds: Rect2) -> bool:
 	if id not in ["normal", "town", "old_garden", "broken_ruins", "sunwell_terrace", "ginkgo_arcade"] or not bounds.position.is_finite() or not bounds.size.is_finite() or bounds.size.x < 1500.0 or bounds.size.y < 710.0:
 		return false
-	if id == _id and bounds == _bounds: return true
+	if id == _id and bounds == _bounds and _encounter_mode == "legacy": return true
 	_id = id; _bounds = bounds; _walls.clear(); _routes.clear(); _revision += 1
+	_encounter_mode = "legacy"; _landmarks.clear(); _obstacle_style = ""
 	if id == "broken_ruins":
 		_walls.assign([Rect2(bounds.position + Vector2(580,100),Vector2(56,400)), Rect2(bounds.position + Vector2(1180,210),Vector2(56,400))])
 	elif id == "sunwell_terrace":
@@ -23,8 +28,25 @@ func configure(id: String, bounds: Rect2) -> bool:
 		_walls.assign([Rect2(bounds.position + Vector2(660,230),Vector2(520,250)), Rect2(bounds.position + Vector2(420,310),Vector2(90,90)), Rect2(bounds.position + Vector2(1330,310),Vector2(90,90))])
 	return true
 
+## Explicit opt-in keeps historical geometry and normal/town callers unchanged.
+func configure_exploration(id: String, bounds: Rect2) -> bool:
+	var planned: Dictionary = ExplorationLayout.layout(id, bounds)
+	if not planned.ok: return false
+	if id == _id and bounds == _bounds and _encounter_mode == "exploration": return true
+	_id = id; _bounds = bounds; _walls.assign(planned.walls); _routes.clear(); _revision += 1
+	_encounter_mode = "exploration"
+	_landmarks = planned.landmarks.duplicate(true)
+	_obstacle_style = planned.obstacle_style
+	return true
+
 func snapshot() -> Dictionary:
 	var result := {"id":_id,"bounds":_bounds,"walls":_walls.duplicate(),"spawn":_bounds.get_center(),"revision":_revision}
+	if _encounter_mode == "exploration":
+		result.encounter_mode = _encounter_mode
+		result.landmarks = _landmarks.duplicate(true)
+		result.spawn = _landmarks.entry
+		result.obstacle_style = _obstacle_style
+		return result
 	if _id == "sunwell_terrace": result.obstacle_style = "spring_basin"
 	if _id == "ginkgo_arcade": result.obstacle_style = "ginkgo_planters"
 	return result

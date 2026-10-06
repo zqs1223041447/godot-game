@@ -26,11 +26,11 @@ func _draw() -> void:
 	var index := 0
 	for camp: Dictionary in _landmarks.get("camps", []):
 		var state := str(_states.get(str(camp.id), "dormant"))
-		_sign(Vector2(camp.trigger_center), ["I", "II", "III"][index % 3], state, false)
+		_sign(Vector2(camp.get("sign_position", camp.trigger_center)), ["I", "II", "III"][index % 3], state, false)
 		index += 1
 	var boss: Dictionary = _landmarks.get("boss", {})
 	if not boss.is_empty():
-		_sign(Vector2(boss.trigger_center), "首领", "cleared" if _boss == "defeated" else "active" if _boss in ["ready", "active"] else "dormant", true)
+		_sign(Vector2(boss.get("sign_position", boss.trigger_center)), "首领", "cleared" if _boss == "defeated" else "active" if _boss in ["ready", "active"] else "dormant", true)
 
 func _sign(center: Vector2, caption: String, state: String, boss: bool) -> void:
 	var cloth := Color("998768") if state == "dormant" else Color("af784a") if state == "active" else Color("748765")
