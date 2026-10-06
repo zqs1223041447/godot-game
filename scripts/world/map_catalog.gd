@@ -8,7 +8,7 @@ const MAPS={
 	"ginkgo_arcade":{"name":"银杏回廊","description":"中央花圃与两座基台阻挡移动、弹体和视线，沿内外通路绕行。三个据点各12根怪，可自由选择顺序；清理36根怪后激活首领。回廊震击锁定首领起手位置：离开圆圈，或利用实体障碍阻断视线。","wave":6,"ordinary_target":36,"boss_id":"rift_warden","boss_attack_id":"ginkgo_shelter_slam"}}
 const SPECIAL={
 	"elemental_aegis":{"name":"元素庇护","description":"地图怪物三元素原始抗性各加20个百分点，有效上限75%；物理和混沌不变。","kind":"defense","minimum_wave":4,"resistance_bonus":0.20,"damage_types":["fire","cold","lightning"]},
-	"frost_patrol":{"name":"霜纹巡逻","description":"原本生成重甲体的普通名额改为霜纹守卫，保留原稀有度与机制；灰烬名额不变。冰霜圆形预警可走开，不产生冻结。","minimum_wave":4,"species":"brute","template":"frost_guard"},
+	"frost_patrol":{"name":"霜纹巡逻","description":"原本生成重甲体的普通名额改为霜纹守卫，保留原稀有度与机制；灰烬名额不变。冰霜圆形预警可走开；受到实际冰霜伤害后，移动速度降低25%，持续1.2秒，不产生冻结。","minimum_wave":4,"species":"brute","template":"frost_guard"},
 	"storm_patrol":{"name":"雷纹巡逻","description":"原本生成掠行体的普通名额改为雷纹掠行体，保留原稀有度与机制；灰烬名额不变。雷电圆形预警可走开；命中会施加1秒感电，使后续命中承受伤害提高15%。","minimum_wave":5,"species":"skitter","template":"storm_skitter"}}
 static func options(test_mode:bool=true)->Dictionary:
 	var maps:Array[Dictionary]=[];var special:Array[Dictionary]=[];var normal:Array[Dictionary]=[]

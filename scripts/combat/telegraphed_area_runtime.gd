@@ -21,6 +21,7 @@ func start(enemy: Variant, target_center: Vector2, overrides: Variant = {}, visu
 	if not visual_pattern is String:return _failure("Visual pattern must be a known string")
 	var ember_burn:bool=enemy.get("template_id","")=="ember_guard" and not enemy.has("map_boss_attack_id")
 	var storm_shock:bool=enemy.get("template_id","")=="storm_skitter" and not enemy.has("map_boss_attack_id")
+	var frost_chill:bool=enemy.get("template_id","")=="frost_guard" and not enemy.has("map_boss_attack_id")
 	if ember_burn and visual_pattern.is_empty():visual_pattern="ember_burn"
 	if storm_shock and visual_pattern.is_empty():visual_pattern="storm_shock"
 	if visual_pattern=="ember_burn":
@@ -66,6 +67,7 @@ func start(enemy: Variant, target_center: Vector2, overrides: Variant = {}, visu
 	}
 	if not burn_policy.is_empty():attack.burn_policy=burn_policy
 	if storm_shock:attack.shock_policy=Monsters.Shock.ENEMY_POLICY.duplicate(true)
+	if frost_chill:attack.chill_policy=Monsters.Chill.ENEMY_POLICY.duplicate(true)
 	if not visual_pattern.is_empty():attack.visual_pattern=visual_pattern
 	if visual_pattern=="sunwell_echo":
 		var echo:Dictionary=BossProfiles.definition(visual_pattern)
@@ -139,7 +141,8 @@ func advance(delta: float, live_enemies: Variant, with_timing: bool = false, pau
 			}})
 			if attack.has("burn_policy"):pending.back().event.burn_policy=attack.burn_policy.duplicate(true)
 			if attack.has("shock_policy"):pending.back().event.shock_policy=attack.shock_policy.duplicate(true)
-			if with_timing or attack.has("burn_policy") or attack.has("shock_policy"):pending.back().event.step_time=maxf(0.0,windup-previous)
+			if attack.has("chill_policy"):pending.back().event.chill_policy=attack.chill_policy.duplicate(true)
+			if with_timing or attack.has("burn_policy") or attack.has("shock_policy") or attack.has("chill_policy"):pending.back().event.step_time=maxf(0.0,windup-previous)
 			if attack.has("visual_pattern"):pending.back().event.visual_pattern=attack.visual_pattern
 		if paused_prefix > 0.0:
 			_offset_pending(pending, first_pending, paused_prefix)

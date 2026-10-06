@@ -36,6 +36,9 @@ var critical_runtime = CriticalRuntime.new()
 const FeedbackRuntime = preload("res://scripts/combat/combat_feedback_runtime.gd")
 var feedback_runtime = FeedbackRuntime.new()
 const BurnRuntime=preload("res://scripts/combat/burn_runtime.gd")
+const ChillRules = preload("res://scripts/combat/chill_rules.gd")
+const PlayerChillRuntime = preload("res://scripts/combat/player_chill_runtime.gd")
+var chill_runtime = PlayerChillRuntime.new()
 const BurnRules=preload("res://scripts/combat/burn_rules.gd")
 const EmberRules=preload("res://scripts/combat/ember_proliferation_rules.gd")
 const EmberClock=preload("res://scripts/combat/ember_event_clock.gd")
@@ -392,7 +395,7 @@ func restart_run(camp_plan: Dictionary = {}) -> void:
 	_player_evasion_entropy = 50.0
 	attack_admission_trace.clear()
 	burn_runtime.reset();burn_trace.clear();_ember_deaths.clear()
-	shock_runtime.reset();freeze_runtime.reset()
+	shock_runtime.reset();freeze_runtime.reset();chill_runtime.reset()
 	for id: String in Data.SKILLS:
 		cooldowns[id] = 0.0
 	spawn_timer = 1.8
@@ -583,6 +586,7 @@ func _tick(delta: float) -> void:
 	_update_pickups(delta)
 	_start_enemy_telegraphs()
 	if not freeze_runtime.is_empty(): freeze_runtime.prune(elapsed)
+	if not chill_runtime.is_empty(): chill_runtime.prune(elapsed)
 	if _world_mode=="map":_check_map_complete()
 	_autosave_timer += delta
 	if _autosave_timer >= 15.0:
@@ -594,7 +598,17 @@ func _move_player(delta: float) -> void:
 	var before := player_pos
 	var movement := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if movement.length_squared() > 0.01:
-		player_pos += movement * float(_stats.move_speed) * delta
+		if chill_runtime.is_empty():
+			player_pos += movement * float(_stats.move_speed) * delta
+		else:
+			# Inputs apply between synchronous ticks. Only the portion before the
+			# stored expiry slows this movement; already completed movement is not replayed.
+			var start: float = _burn_step_start if _burn_step_active else elapsed
+			var end: float = elapsed if _burn_step_active else elapsed + delta
+			var slowed: Dictionary = chill_runtime.movement_factor(start, end)
+			assert(slowed.ok, "Validated player chill movement: " + str(slowed.reason))
+			if not slowed.ok: return
+			player_pos += movement * float(_stats.move_speed) * delta * float(slowed.factor)
 		player_facing = movement.normalized()
 		if rng.randf() < 0.4:
 			_add_particle(player_pos + Vector2(0, 10), -movement * 20.0, Color("547a83"), 2.0, 0.25)
@@ -999,6 +1013,8 @@ func _advance_enemy_telegraphs(delta: float, frozen_prefixes: Dictionary = {}) -
 		var hit_context:Dictionary={}
 		if event.has("shock_policy"):
 			hit_context={"shock_policy":event.shock_policy,"at":event_time,"cast_id":int(event.attack_id),"skill_id":"storm_shock","phase":"telegraph"}
+		if event.has("chill_policy"):
+			hit_context={"chill_policy":event.chill_policy,"at":event_time,"cast_id":int(event.attack_id),"skill_id":"frost_chill","phase":"telegraph"}
 		var applied: bool = hit_player_components(event.packet.base, int(event.source_id),event.packet.tags,hit_context) if inside else false
 		_burn_incoming_time=-1.0
 		if sequence_batch:invulnerable=maxf(0.0,_burn_immunity_until-elapsed)
@@ -1772,6 +1788,7 @@ func hit_player_components(components: Variant, source_id: int = 0, delivery_tag
 	var at:float=float(hit_context.get("at",_burn_incoming_time if _burn_incoming_time>=0.0 else elapsed))
 	if not is_finite(at) or at<shock_runtime.read_floor():return false
 	if hit_context.has("shock_policy") and not ShockRules.policy_error(hit_context.shock_policy).is_empty():return false
+	if hit_context.has("chill_policy") and not chill_runtime.application_error(source_id,at,hit_context.chill_policy).is_empty():return false
 	var shock_increase:float=_shock_hit_increase("player",0,at)
 	var mana_ratio:Variant=_stats.get("damage_taken_from_mana_before_life",0.0)
 	var settlement: Dictionary
@@ -1814,6 +1831,13 @@ func hit_player_components(components: Variant, source_id: int = 0, delivery_tag
 		var origin:Dictionary={"skill_id":str(hit_context.get("skill_id","storm_shock")),"cast_id":int(hit_context.get("cast_id",0)),"phase":str(hit_context.get("phase","telegraph"))}
 		var attached:Dictionary=_attach_shock("player",0,source_id,at,hit_context.shock_policy,settlement,origin)
 		if attached.get("applied",false):record.shock_applied={"at":at,"duration":float(hit_context.shock_policy.duration)}
+	if health>0.0 and hit_context.has("chill_policy") and delivery_tags.has("hit"):
+		var cold: Dictionary = ChillRules.actual_cold_loss(settlement)
+		assert(cold.ok, "Validated actual cold loss: " + str(cold.reason))
+		if cold.ok and float(cold.actual_cold)>0.0:
+			var chilled: Dictionary = chill_runtime.apply(source_id,at,hit_context.chill_policy)
+			assert(chilled.ok, "Validated player chill attachment: " + str(chilled.reason))
+			if chilled.get("applied",false):record.chill_applied={"at":at,"duration":float(hit_context.chill_policy.duration),"movement_speed_reduced":float(hit_context.chill_policy.movement_speed_reduced)}
 	_finish_player_death()
 	return true
 
@@ -1823,7 +1847,7 @@ func _finish_player_death()->void:
 	feedback_runtime.flush_target("player", 0)
 	trap_runtime.reset()
 	burn_runtime.reset()
-	shock_runtime.reset();freeze_runtime.reset()
+	shock_runtime.reset();freeze_runtime.reset();chill_runtime.reset()
 	_ember_deaths.clear()
 	flask_runtime.clear_effects()
 	leech_runtime.clear()
@@ -1859,6 +1883,16 @@ func _attach_shock(kind:String,id:int,source_id:int,at:float,policy:Dictionary,s
 	if not checked.ok:return {"ok":false,"applied":false,"reason":checked.reason}
 	var result:Dictionary=shock_runtime.apply(kind,id,source_id,at,policy,provenance)
 	assert(result.ok,"Validated shock attachment: "+str(result.reason))
+	return result
+
+
+func chill_statuses()->Array[Dictionary]:
+	var result:Array[Dictionary]=[]
+	if not alive or chill_runtime.is_empty():return result
+	var current:Dictionary=chill_runtime.status(elapsed)
+	if current.is_empty():return result
+	current.target_kind="player";current.target_id=0;current.position=player_pos
+	result.append(current)
 	return result
 
 
@@ -2329,7 +2363,7 @@ func _replace_build(next:RefCounted,path:String)->void:
 	trap_runtime.reset()
 	if state.changed.is_connected(_on_build_changed):state.changed.disconnect(_on_build_changed)
 	state.retire_profile()
-	shock_runtime.reset();freeze_runtime.reset()
+	shock_runtime.reset();freeze_runtime.reset();chill_runtime.reset()
 	state=next;build_save_path=path;state.changed.connect(_on_build_changed)
 	_stats=state.get_stats();_progress_hud_dirty=false;_progress_save_dirty=false;_progress_save_requested=false
 	build_state_replaced.emit()
@@ -2633,7 +2667,7 @@ func _check_map_complete()->void:
 		if float(enemy.health)>0.0:living+=1
 	if _map_run.check_complete(living,monster_runtime.queue.size()):
 		projectile_runtime.cancel_all(projectiles);telegraphs.reset()
-		_world_mode="map_complete";_world_revision+=1;burn_runtime.reset();shock_runtime.reset();freeze_runtime.reset();trap_runtime.reset()
+		_world_mode="map_complete";_world_revision+=1;burn_runtime.reset();shock_runtime.reset();freeze_runtime.reset();chill_runtime.reset();trap_runtime.reset()
 		var message:String="地图完成，可以返回城镇" if _is_test_profile() else "地图完成，返回正式城镇领取结算"
 		if not _is_test_profile():
 			_normal_completion_pending=true

@@ -5,6 +5,7 @@ const Registry = preload("res://scripts/mechanics/mechanic_registry.gd")
 const Defense = preload("res://scripts/mechanics/defense_rules.gd")
 const Burn=preload("res://scripts/combat/burn_rules.gd")
 const Shock=preload("res://scripts/combat/shock_rules.gd")
+const Chill=preload("res://scripts/combat/chill_rules.gd")
 const ShieldSupply=preload("res://scripts/monsters/source_shield_budget.gd")
 const TelegraphProfiles = preload("res://scripts/monsters/telegraph_profiles.gd")
 const MapBossAttacks=preload("res://scripts/monsters/map_boss_profiles.gd")
@@ -135,6 +136,8 @@ static func telegraph_policy(enemy: Dictionary) -> Dictionary:
 		policy.burn_policy=Burn.ENEMY_POLICY.duplicate(true);policy.visual_pattern="ember_burn";policy.name="余烬锁点重击"
 	if id=="storm_skitter" and map_rule.is_empty():
 		policy.shock_policy=Shock.ENEMY_POLICY.duplicate(true);policy.visual_pattern="storm_shock";policy.name="雷纹锁点震击"
+	if id=="frost_guard" and map_rule.is_empty():
+		policy.chill_policy=Chill.ENEMY_POLICY.duplicate(true);policy.name="霜纹锁点寒击"
 	if not map_rule.is_empty():
 		policy.target_rule=map_rule.target_rule;policy.visual_pattern=map_rule.id;policy.name=map_rule.name
 	return policy
