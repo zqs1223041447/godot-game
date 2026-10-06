@@ -1,0 +1,161 @@
+{
+  "base_commit": "f2427f317e14b872e63ddef79a06d34aea62e48b",
+  "stage_commit": "65aca254bb1b43962ae2776507ea9c51d14b1228",
+  "functional_checks": 1530,
+  "counts": {
+    "gale_compatibility": 79,
+    "new_source_grants": 234,
+    "integration_unique": 1217
+  },
+  "production_inputs": 551,
+  "save_schema_unchanged": 47,
+  "source_policy_unchanged": 45,
+  "equipment_vocabulary_unchanged": 46,
+  "reference": {
+    "passed": true,
+    "baseline_commit": "f2427f3",
+    "legacy_definitions_preserved": 23,
+    "old_source_gale_definition_preserved": true,
+    "old_movement_budget_preserved": true,
+    "new_source_bindings": 2,
+    "current_source_bindings": 3,
+    "total_definitions": 26,
+    "budget_rows_from_catalog": 12,
+    "fixed_before_increased_cases": 2,
+    "authoritative_html_values_and_labels_checked": 88,
+    "preserved_files": 186,
+    "old_pngs_preserved": 135,
+    "new_art_files": 0,
+    "old_html_anchors_preserved": 3835,
+    "new_html_anchors": [
+      "mechanisms-source_ember_power",
+      "mechanisms-source_grove_vitality",
+      "rules-source_monster_damage_life"
+    ],
+    "source_coverage_byte_identical": true,
+    "all_anchor_and_local_file_links_valid": true,
+    "save_version": 47,
+    "equipment_vocabulary": 46,
+    "source_policy": 45,
+    "catalog_sha256": "ab6f38d85c722b71846cc39d695c7da63e9c58ade7081d910afef6ec236e1da6",
+    "html_sha256": "07a051c6ebfb1cb26ce1397297abc5f922f0a033e4ccb93ac003483cf2e12a5b",
+    "scope": "Narrow runtime fragment only; preserve historical catalog bytes/types; deterministic HTML and focused new-source/preservation checks. No full export, historical combat suites, import, browser/UI, native launch, artwork or packaging."
+  },
+  "font": {
+    "unchanged": true,
+    "sha256": "74a2ff2eac4a552a7d891ebb420502ddbbe632ea46a29adb67c2ec9bcf90caeb",
+    "mapped": 1661,
+    "runtime_files": 200,
+    "fresh_scanned": 5,
+    "missing": []
+  },
+  "budget_boundary": "Selected natural samples raw damage+4.45..8.26%, life-4.60..+4.30%; deliberate source-semantic change, not old damage equality or long-term balance proof. Map shield-from-canonical-life follows existing rule.",
+  "scope": "Only two ordinary-pool source IDs in currentv2; legacy/v74v1 and authored special lineages retain historical contracts. No newUI/art/schema/package.",
+  "reports": {
+    "docs/qa/v075-source-grants/20261006T084830.968763Z-receipt.json": {
+      "bytes": 59799,
+      "sha256": "8e173a6c3ae4cb1840950a4ed1c8cde0832ceaa8b06fc5234ac92cba5187391e"
+    },
+    "docs/qa/v075-source-grants/20261006T084913.323439Z-receipt.json": {
+      "bytes": 59132,
+      "sha256": "8aa154df4c238c372f86663f9e57f1d4b35cc36df86d422581d67734c012363a"
+    },
+    "docs/qa/v075-integration-tests/integration-report.json": {
+      "bytes": 4203,
+      "sha256": "a6ce47364ee0fd15ec7d751950875b02fe3dc9994ef72082b5e50b0ec29cb3fe"
+    },
+    "docs/qa/v075-reference/v074-preservation.json": {
+      "bytes": 2906,
+      "sha256": "d43e661ee0bf383c875852a6443ff6d2c62b4f75aea881b92f2864a0a49d53d4"
+    }
+  },
+  "logs": {
+    "docs/qa/v075-integration/initial-import.log.txt": {
+      "bytes": 85350,
+      "sha256": "257c4e20a0953afd8d18dfd2ab8668373e46b0635209041e51eea33e123a0002"
+    },
+    "docs/qa/v075-integration-tests/attempts/01/raw.log.txt": {
+      "bytes": 434,
+      "sha256": "bc66386f69584bf5f18ebd13b0218f1056ce537345184832a0766736bff99690"
+    },
+    "docs/qa/v075-integration-tests/attempts/02/raw.log.txt": {
+      "bytes": 590,
+      "sha256": "3628fe59212b53c5f5de41f01ae31316c2878b965cfb07e48bc95931c66df952"
+    },
+    "docs/qa/v075-integration-tests/attempts/03/raw.log.txt": {
+      "bytes": 237,
+      "sha256": "98ef4f572a2d7f0c9a5d65d8ea5373fbc5106bc320d5ec091f3ab5cf6b595235"
+    },
+    "docs/qa/v075-integration-tests/first-failed.log.txt": {
+      "bytes": 434,
+      "sha256": "bc66386f69584bf5f18ebd13b0218f1056ce537345184832a0766736bff99690"
+    },
+    "docs/qa/v075-reference/build-check.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v075-reference/build-check.stdout.log.txt": {
+      "bytes": 52,
+      "sha256": "65d47533eaf556129a1f3a295db12ab1bc36a8df0770c71cb9378490d54d03ba"
+    },
+    "docs/qa/v075-reference/build.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v075-reference/build.stdout.log.txt": {
+      "bytes": 51,
+      "sha256": "67e4ac70d00430cd8c02cc2c345b58f8a9eab5622be982b237b00b26e55e163d"
+    },
+    "docs/qa/v075-reference/corrected-source-fragment.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v075-reference/corrected-source-fragment.stdout.log.txt": {
+      "bytes": 143,
+      "sha256": "f28c76fc8492d1b261d0204771ce74f0a4df7a4544fd9e2ddaab4317dbdeedfd"
+    },
+    "docs/qa/v075-reference/focused-reference.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v075-reference/focused-reference.stdout.log.txt": {
+      "bytes": 2906,
+      "sha256": "d43e661ee0bf383c875852a6443ff6d2c62b4f75aea881b92f2864a0a49d53d4"
+    },
+    "docs/qa/v075-reference/merge.stderr.log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/qa/v075-reference/merge.stdout.log.txt": {
+      "bytes": 1011,
+      "sha256": "fe6a22d2feb9d0ce2423d64d4a5a25eafe0fe2a96d5b2e57e0a83df1d9def89e"
+    },
+    "docs/qa/v075-reference/source-fragment.stderr.log.txt": {
+      "bytes": 370,
+      "sha256": "835bcd2585fcc0c828553e3b986f590b2816c299d4bdcaea727eb27a280f424c"
+    },
+    "docs/qa/v075-reference/source-fragment.stdout.log.txt": {
+      "bytes": 73,
+      "sha256": "a9912b85473f126d3f4f63ec824170c828df3473a292f866dde86cafda5b66da"
+    },
+    "docs/qa/v075-source-grants/20261006T084830.968763Z-source_damage_life_grants_test.log.txt": {
+      "bytes": 123,
+      "sha256": "af6576a9747d2137a68ed9a084f34a17a211be6e7e46c88f5605a11f7c07f188"
+    },
+    "docs/qa/v075-source-grants/20261006T084830.968763Z-source_monster_grants_test.log.txt": {
+      "bytes": 415,
+      "sha256": "74ae71875517576b673212cf31d8b1d4c673afb229d6278510b347eb89374a4d"
+    },
+    "docs/qa/v075-source-grants/20261006T084913.323439Z-source_monster_grants_test.log.txt": {
+      "bytes": 118,
+      "sha256": "4afad759c8e4f6cf97bf50a1e4731fda8d2d020e84e37b88c174090f4690477e"
+    }
+  },
+  "boundaries": [
+    "Initial Gale test and Main test parse failures were fixture type annotations; only affected unrun collections restarted. Production unchanged.",
+    "Main added per-roll numeric/cache cases after firstpass; onlytwo affected sections rerun, unique1217 notsum.",
+    "F8 initial unsupported%g formatting stopped; narrow fragment re-export only. Historical catalog exactbytes spliced, no full export.",
+    "Unchanged16955SourceData structure suite not rerun or included.",
+    "No WindowsFPS/performance/visual acceptance claim."
+  ]
+}

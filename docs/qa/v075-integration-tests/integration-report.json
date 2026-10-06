@@ -1,0 +1,146 @@
+{
+  "attempts": [
+    {
+      "attempt": 1,
+      "checks": 0,
+      "elapsed_seconds": 0.677,
+      "errors": [
+        "SCRIPT ERROR: Parse Error: Cannot infer the type of \"canonical\" variable because the value doesn't have a set type.",
+        "ERROR: Failed to load script \"res://tests/source_damage_life_integration_test.gd\" with error \"Parse error\"."
+      ],
+      "failures": null,
+      "passed": false,
+      "selected_sections": [
+        "registry",
+        "sampling",
+        "camps",
+        "arithmetic_maps",
+        "special_lineages",
+        "cache_transactions",
+        "main_adoption",
+        "combat_consumers"
+      ]
+    },
+    {
+      "attempt": 2,
+      "checks": 996,
+      "elapsed_seconds": 2.849,
+      "errors": [],
+      "failures": 0,
+      "passed": true,
+      "selected_sections": [
+        "registry",
+        "sampling",
+        "camps",
+        "arithmetic_maps",
+        "special_lineages",
+        "cache_transactions",
+        "main_adoption",
+        "combat_consumers"
+      ]
+    },
+    {
+      "attempt": 3,
+      "checks": 788,
+      "elapsed_seconds": 1.081,
+      "errors": [],
+      "failures": 0,
+      "passed": true,
+      "selected_sections": [
+        "sampling",
+        "cache_transactions"
+      ]
+    }
+  ],
+  "baseline_commit": "f2427f3",
+  "complete": true,
+  "observations": {
+    "actual_main_seeds": {
+      "source_ember_power": 12,
+      "source_grove_vitality": 5
+    },
+    "camp_source_entries": 24,
+    "ember_targeted_fixture": {
+      "burn_dps": 3.311,
+      "damage": 28.38,
+      "fire_packet": 9.933,
+      "natural_spawn_changed": false,
+      "warning_seconds": 0.7
+    },
+    "sampled": {
+      "brood_host": 8,
+      "source_ember_power": 9,
+      "source_grove_vitality": 5,
+      "splitter": 12
+    }
+  },
+  "passed": true,
+  "sections": {
+    "arithmetic_maps": {
+      "attempt": 2,
+      "checks": 70,
+      "failures": 0,
+      "production_unchanged": true,
+      "raw_log": "docs/qa/v075-integration-tests/attempts/02/raw.log.txt",
+      "test_sha256": "86f3dfbdd72a682041299784abc36990fd99ca018079af161c359979ede6b5a2"
+    },
+    "cache_transactions": {
+      "attempt": 3,
+      "checks": 23,
+      "failures": 0,
+      "production_unchanged": true,
+      "raw_log": "docs/qa/v075-integration-tests/attempts/03/raw.log.txt",
+      "test_sha256": "205582d53b79511baeb3f038b7d8b3080047d00ce6ee0de1b7e59a9e50bb4f38"
+    },
+    "camps": {
+      "attempt": 2,
+      "checks": 56,
+      "failures": 0,
+      "production_unchanged": true,
+      "raw_log": "docs/qa/v075-integration-tests/attempts/02/raw.log.txt",
+      "test_sha256": "86f3dfbdd72a682041299784abc36990fd99ca018079af161c359979ede6b5a2"
+    },
+    "combat_consumers": {
+      "attempt": 2,
+      "checks": 24,
+      "failures": 0,
+      "production_unchanged": true,
+      "raw_log": "docs/qa/v075-integration-tests/attempts/02/raw.log.txt",
+      "test_sha256": "86f3dfbdd72a682041299784abc36990fd99ca018079af161c359979ede6b5a2"
+    },
+    "main_adoption": {
+      "attempt": 2,
+      "checks": 20,
+      "failures": 0,
+      "production_unchanged": true,
+      "raw_log": "docs/qa/v075-integration-tests/attempts/02/raw.log.txt",
+      "test_sha256": "86f3dfbdd72a682041299784abc36990fd99ca018079af161c359979ede6b5a2"
+    },
+    "registry": {
+      "attempt": 2,
+      "checks": 235,
+      "failures": 0,
+      "production_unchanged": true,
+      "raw_log": "docs/qa/v075-integration-tests/attempts/02/raw.log.txt",
+      "test_sha256": "86f3dfbdd72a682041299784abc36990fd99ca018079af161c359979ede6b5a2"
+    },
+    "sampling": {
+      "attempt": 3,
+      "checks": 765,
+      "failures": 0,
+      "production_unchanged": true,
+      "raw_log": "docs/qa/v075-integration-tests/attempts/03/raw.log.txt",
+      "test_sha256": "205582d53b79511baeb3f038b7d8b3080047d00ce6ee0de1b7e59a9e50bb4f38"
+    },
+    "special_lineages": {
+      "attempt": 2,
+      "checks": 24,
+      "failures": 0,
+      "production_unchanged": true,
+      "raw_log": "docs/qa/v075-integration-tests/attempts/02/raw.log.txt",
+      "test_sha256": "86f3dfbdd72a682041299784abc36990fd99ca018079af161c359979ede6b5a2"
+    }
+  },
+  "unique_checks": 1217,
+  "unique_failures": 0
+}

@@ -1,0 +1,32 @@
+{
+  "method": "Read-back captured production hashes; no game rerun. Test-local type/coverage changes and later F8 HTML are separated.",
+  "reports": {
+    "docs/qa/v075-source-grants/20261006T084830.968763Z-receipt.json": {
+      "captured": 263,
+      "production_mismatches": [],
+      "post_run_test_or_reference_changes": [
+        "docs/reference/index.html",
+        "tests/source_monster_grants_test.gd"
+      ]
+    },
+    "docs/qa/v075-source-grants/20261006T084913.323439Z-receipt.json": {
+      "captured": 262,
+      "production_mismatches": [],
+      "post_run_test_or_reference_changes": [
+        "docs/reference/index.html"
+      ]
+    },
+    "docs/qa/v075-integration-tests/attempts/01/dependency-evidence.json": {
+      "captured": 550,
+      "production_mismatches": []
+    },
+    "docs/qa/v075-integration-tests/attempts/02/dependency-evidence.json": {
+      "captured": 550,
+      "production_mismatches": []
+    },
+    "docs/qa/v075-integration-tests/attempts/03/dependency-evidence.json": {
+      "captured": 550,
+      "production_mismatches": []
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "command": [
+    "/usr/local/bin/godot",
+    "--headless",
+    "--path",
+    "/workspace/scratch/a51485f153de/v075-source-damage-life",
+    "--script",
+    "res://tools/export_reference.gd",
+    "--",
+    "res://docs/qa/v075-reference/source-fragment.json",
+    "--source-monster-fragment"
+  ],
+  "exit_code": -15,
+  "seconds": 2.241,
+  "stopped_on": "first_error",
+  "error_lines": [
+    "ERROR: String formatting error: unsupported format character."
+  ],
+  "source_changed_during_run": [],
+  "coverage_and_reference_pngs_unchanged_in_bytes_and_mtime": true,
+  "unexpected_preserved_file_writes": []
+}

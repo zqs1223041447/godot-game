@@ -1,0 +1,39 @@
+{
+  "baseline_commit": "f2427f3",
+  "transforms": [
+    "remove class_name line",
+    "replace source/registry/catalog preloads with frozen v74 counterparts"
+  ],
+  "files": [
+    {
+      "path": "scripts/mechanics/source_monster_grants.gd",
+      "original_sha256": "25377090ec1f19e157321aaf3215d8ca111bdc79d2a9381b138f0a8bff5cab37",
+      "fixture": "docs/qa/v075-integration-tests/frozen/source.gd",
+      "fixture_sha256": "84cd3458800d651db4e4b2ae746d376f3e3da0d413a7a73d44ca49e6937a6bdb"
+    },
+    {
+      "path": "scripts/mechanics/mechanic_registry.gd",
+      "original_sha256": "f1b81451109ed310581c574b0e5a88055dfc408c9282145777f7503c351385a9",
+      "fixture": "docs/qa/v075-integration-tests/frozen/registry.gd",
+      "fixture_sha256": "b041076b6820d348b18325a6f8b22dce3e9ea198637cc44bc7169b1de4f68bd5"
+    },
+    {
+      "path": "scripts/monsters/monster_catalog.gd",
+      "original_sha256": "1dce935ed6ccdd4f6d5635594634287fcc7f43e419719c65311868439fe41380",
+      "fixture": "docs/qa/v075-integration-tests/frozen/catalog.gd",
+      "fixture_sha256": "d8e29ffe8fd9eeec4964eee773a7014d6ac0f62fa57dd95213a22b6e1822303c"
+    },
+    {
+      "path": "scripts/world/map_camp_state.gd",
+      "original_sha256": "8ea15aca48d6c991df0c272e0da00362d40cd7140e0bc353400fb2cc1ce612a3",
+      "fixture": "docs/qa/v075-integration-tests/frozen/camp_state.gd",
+      "fixture_sha256": "80b3ba6876d003df3d361904f034ea767ceee94d73e470bfe81ac2270c999262"
+    },
+    {
+      "path": "scripts/monsters/monster_runtime.gd",
+      "original_sha256": "6280cbf52cdf373af0fe8d564b77b2ad1f1e934b207d37988f69bbdd404751a3",
+      "fixture": "docs/qa/v075-integration-tests/frozen/monster_runtime.gd",
+      "fixture_sha256": "47ddc9d54ce448a68c9dfd8deb392e70b10b7c780dde6add7770ff9fd886e11d"
+    }
+  ]
+}

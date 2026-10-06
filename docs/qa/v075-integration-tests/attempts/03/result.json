@@ -1,0 +1,36 @@
+{
+	"baseline_commit": "f2427f3",
+	"checks": 788,
+	"failures": 0,
+	"observations": {
+		"sampled": {
+			"brood_host": 8,
+			"source_ember_power": 9,
+			"source_grove_vitality": 5,
+			"splitter": 12
+		}
+	},
+	"rolls_per_seed_wave": 12,
+	"sections": {
+		"cache_transactions": {
+			"checks": 23,
+			"failures": 0
+		},
+		"sampling": {
+			"checks": 765,
+			"failures": 0
+		}
+	},
+	"seeds": [
+		7,
+		73,
+		75075
+	],
+	"source_execution_version": 45,
+	"test_scope": "bounded integration, explicit ember fixture is not a new natural spawn policy",
+	"waves": [
+		1,
+		6,
+		15
+	]
+}

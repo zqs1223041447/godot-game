@@ -33,6 +33,7 @@ RULE_TITLES['inward_pull'] = '牵引辅助：朝真实爆发圆心反转冲量'
 RULE_TITLES['glove_ring_affixes'] = '精瞄手套与三抗戒指：前后缀取舍'
 RULE_TITLES['frost_lock'] = '霜锁辅助：短冻结、解冻免疫与攻击接续'
 RULE_TITLES['source_monster_movement'] = '流岚疾行：旧固定投影与当前源移动词条'
+RULE_TITLES['source_monster_damage_life'] = '烬火与苍林：源伤害提高与最大生命提高'
 TYPES['defense_v37'] = '历史三抗防具池'
 TYPES['defense_v39'] = '护甲闪避与三抗防具池'
 TYPES['build_nine_slot_v46'] = '精瞄与三抗九槽池'
@@ -631,17 +632,48 @@ def source_monster_movement_rule(data,link,facts,details):
     rule=data['source_monster_movement'];entry=rule['source_entry']
     def value(key,amount,as_percent=False):
         return f'<strong data-source-monster-value="{esc(key)}" data-value="{esc(amount)}">{percent(amount) if as_percent else number(amount)}</strong>'
-    body=facts([('当前唯一源绑定',link('mechanisms',rule['mechanism_id'])),('旧固定投影',link('mechanisms',rule['legacy_id'])),('来源条目',link('source_passives',entry['node_id'])+' · stat_index '+str(entry['stat_index'])+'（从0计数）'),('原始词条',esc(entry['raw_line'])),('相同类型化授予','玩家与怪物均使用当前SourceTreeRuntime.line_effect：move_speed_increased = '+value('increase',rule['monster_grant']['stats']['move_speed_increased'],True)),('对象系数',value('coefficient',rule['actor_coefficient'])),('旧固定加值',value('legacy-flat',rule['legacy_grant']['stats']['move_speed'])+' 世界单位/秒'),('定义数量',value('legacy-count',rule['legacy_definition_count'])+' 条历史定义原样保留，新增后共 '+value('current-count',rule['current_definition_count'])+' 条')])
+    body=facts([('v0.74引入的源绑定',link('mechanisms',rule['mechanism_id'])),('旧固定投影',link('mechanisms',rule['legacy_id'])),('来源条目',link('source_passives',entry['node_id'])+' · stat_index '+str(entry['stat_index'])+'（从0计数）'),('原始词条',esc(entry['raw_line'])),('相同类型化授予','玩家与怪物均使用当前SourceTreeRuntime.line_effect：move_speed_increased = '+value('increase',rule['monster_grant']['stats']['move_speed_increased'],True)),('对象系数',value('coefficient',rule['actor_coefficient'])),('旧固定加值',value('legacy-flat',rule['legacy_grant']['stats']['move_speed'])+' 世界单位/秒'),('定义数量',value('legacy-count',rule['legacy_definition_count'])+' 条历史定义原样保留，当前共 '+value('current-count',rule['current_definition_count'])+' 条')])
     body+='<p>当前速度＝（物种速度＋波次速度＋其他固定加值）×（1＋移动速度提高）。新词条保留源词条的4%提高语义，旧gale_stride继续固定增加3.12。来源条目、原始行和当前执行政策共同校验并缓存；怪物出生时冻结结果，每帧不重新解析源树。</p>'
-    body+='<p>'+esc(rule['boundary'])+'。63417仅作为这条移动属性的可追溯来源，不代表怪物分配了该升华节点；本批仅有这一条当前源绑定，不表示所有源基石均为共享机制。</p>'
+    body+='<p>'+esc(rule['boundary'])+'。63417仅作为这条移动属性的可追溯来源，不代表怪物分配了该升华节点；本章保留v0.74的单条移动预算；当前另有两条伤害/生命绑定，见下一章。不表示所有源基石均已共享。</p>'
     rows=[]
     for row in rule['budget']:
         prefix=str(row['wave'])+'-'+row['template_id']
         rows.append('<tr><th scope="row">'+number(row['wave'])+' · '+link('monsters',row['template_id'])+'</th>'+''.join('<td>'+value(prefix+'-'+key,row[key]['speed'])+'</td>' for key in ['base','legacy','current'])+'<td>'+value(prefix+'-delta',row['speed_delta'])+'</td><td>'+value(prefix+'-relative',row['relative_to_legacy'],True)+'</td></tr>')
     body+='<div class="table-scroll"><table><caption>'+esc(rule['budget_scope'])+'</caption><thead><tr><th>波次 / 物种</th><th>无移动词缀</th><th>旧固定投影</th><th>当前源词条</th><th>速度差</th><th>相对旧版变化</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div><p>这是代表性工厂预算，不是自然生成或地图阵容的分布。第1波重壳体仅为直接工厂对照；普通抽签从第2波才允许重壳体。</p>'
-    body+=details('自然池、历史入口与边界', '<p>旧自然池：'+links_for_pool(rule['legacy_pool'],link)+'。</p><p>当前自然池：'+links_for_pool(rule['current_pool'],link)+'。</p><p>只替换原gale_stride位置，词池数量、次序、稀有度和机制抽签次数及RNG状态保持；稀有度生命/伤害/经验、奖励资格及其他词缀保持。旧图鉴示例仍为历史显式模板，不替换成当前随机样本。</p><p>'+esc(rule['current_admission'])+'。</p>')
+    body+=details('自然池、历史入口与边界', '<p>legacy_flat_v1历史池：'+links_for_pool(rule['legacy_pool'],link)+'。</p><p>source_stride_v1移动池：'+links_for_pool(rule['stride_pool'],link)+'。</p><p>source_damage_life_v2当前池：'+links_for_pool(rule['current_pool'],link)+'。</p><p>v1只替换原gale_stride位置；v2另替换烬火与苍林，见'+link('rules','source_monster_damage_life')+'。词池数量、次序、稀有度和机制抽签次数及RNG状态保持。旧图鉴示例仍为历史显式模板；上表移动速度预算保持v0.74原值，不代表v2生命与伤害保持旧值。</p><p>'+esc(rule['current_admission'])+'。</p>')
     body+=facts([('存档结构',value('save-version',rule['save_version'])),('装备词汇',value('vocabulary',rule['equipment_vocabulary'])),('源执行政策',value('source-policy',rule['source_policy'])),('来源版本',esc(entry['source_version'])),('来源SHA256',esc(entry['source_hash']))])
     body+='<p><a href="'+esc(entry['source_url'])+'">固定来源导出</a> · '+link('rules','shared')+' · <a href="../SOURCE_MONSTER_MOVEMENT.zh-CN.md">单条源移动绑定合同</a> · <a href="../qa/v074-reference/README.md">本批资料验证</a></p>'
+    return body
+
+
+def source_monster_damage_life_rule(data,link,facts,details):
+    rule=data['source_monster_damage_life']
+    def value(key,amount,as_percent=False):
+        return f'<strong data-source-damage-life-value="{esc(key)}" data-value="{esc(amount)}">{percent(amount) if as_percent else number(amount)}</strong>'
+    body='<p>当前共'+value('current-count',rule['current_definition_count'])+'条机制：'+value('legacy-count',rule['legacy_definition_count'])+'条历史定义与'+value('source-count',rule['current_source_definition_count'])+'条当前源绑定。本批增加以下两条，既有流岚移动绑定保持。</p>'
+    for key,binding in rule['bindings'].items():
+        entry=binding['source_entry'];grant=binding['source_effect']['grants'][0]
+        label='伤害提高' if key=='source_ember_power' else '最大生命提高'
+        body+=details(label+' · '+data['mechanisms'][key]['name'],facts([
+            ('当前机制',link('mechanisms',key)),('历史固定投影',link('mechanisms',binding['legacy_id'])),
+            ('唯一来源',link('source_passives',entry['node_id'])+' · stat_index '+str(entry['stat_index'])+'（从0计数）'),
+            ('原始行',esc(entry['raw_line'])),('类型化授予',esc(grant['stat'])+' / '+esc(grant['mode'])+' / '+value(key+'-increase',grant['value'],True)),
+            ('玩家与怪物','同一SourceTreeRuntime.line_effect授予，对象系数 '+value(key+'-coefficient',binding['actor_coefficient'])),
+            ('历史固定加值',value(key+'-legacy-flat',next(iter(binding['legacy_grant']['stats'].values())))),
+            ('来源版本',esc(entry['source_version'])),('来源SHA256',esc(entry['source_hash']))])+ '<p><a href="'+esc(entry['source_url'])+'">固定来源导出</a></p>')
+    body+='<p>伤害＝［（物种伤害＋波次增量）×稀有度倍率＋固定伤害］×（1＋全局伤害提高之和）。最大生命＝［物种生命×波次倍率×稀有度倍率＋固定最大生命］×（1＋最大生命提高之和）。同类提高先加算，再乘一次；5%最大生命提高不会写成固定生命+0.05。</p>'
+    body+='<p>'+esc(rule['map_order'])+'。'+esc(rule['cache'])+'。'+esc(rule['boundary'])+'。旧玩家专属poe_global_damage仍拒绝怪物请求，不扩大历史白名单。</p>'
+    rows=[]
+    for row in rule['budget']:
+        prefix=str(row['wave'])+'-'+row['template_id'];base=row['base']
+        cells=[('base-life',base['health']),('old-life',row['legacy_life']['health']),('current-life',row['current_life']['health']),('base-damage',base['damage']),('old-damage',row['legacy_damage']['damage']),('current-damage',row['current_damage']['damage'])]
+        rows.append('<tr><th scope="row">'+str(row['wave'])+' · '+link('monsters',row['template_id'])+' · '+esc(data['monster_rarities'][row['rarity']]['name'])+'</th>'+''.join('<td>'+value(prefix+'-'+key,amount)+'</td>' for key,amount in cells)+'</tr>')
+    body+='<div class="table-scroll"><table><caption>'+esc(rule['budget_scope'])+'</caption><thead><tr><th>波次 / 物种 / 稀有度</th><th>基准生命</th><th>旧苍林生命</th><th>源苍林生命</th><th>基准伤害</th><th>旧烬火伤害</th><th>源烬火伤害</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div><p>每行生命和伤害分别来自独立的单词缀样本，蓝怪不同时持有两个词缀。第1波重壳体仅为直接工厂对照，普通抽签第2波才允许该物种。表中伤害是攻击基底，不是DPS；未据此宣称全局平衡。</p>'
+    mixed=rule['mixed_fixed_before_increased']
+    body+=details('固定加值先于提高 · 第6波金色重壳体',facts([('基准生命',value('mixed-base-life',mixed['base']['health'])),('旧苍林＋源苍林',value('mixed-life',mixed['life']['health'])),('基准伤害',value('mixed-base-damage',mixed['base']['damage'])),('旧烬火＋源烬火',value('mixed-damage',mixed['damage']['damage']))])+'<p>这是显式两词缀工厂对照，不是当前自然词池可能同时抽出的组合。</p>')
+    body+=details('三代入口与五槽身份',facts([('ordinary_roll · '+rule['legacy_roll_policy'],links_for_pool(rule['legacy_pool'],link)),('ordinary_roll_source_stride · '+rule['stride_roll_policy'],links_for_pool(rule['stride_pool'],link)),('ordinary_roll_current · '+rule['current_roll_policy'],links_for_pool(rule['current_pool'],link))])+'<p>'+esc(rule['sampler'])+'。</p>')
+    body+=facts([('存档结构',value('save-version',rule['save_version'])),('装备词汇',value('vocabulary',rule['equipment_vocabulary'])),('源执行政策',value('source-policy',rule['source_policy']))])
+    body+='<p>'+link('rules','source_monster_movement')+' · '+link('rules','shared')+' · <a href="../SOURCE_MONSTER_DAMAGE_LIFE.zh-CN.md">源伤害与生命绑定合同</a> · <a href="../qa/v075-reference/README.md">本批资料验证</a></p>'
     return body
 
 
@@ -898,21 +930,23 @@ def build(data, art):
         player_nodes=[k for k,v in data['passives'].items() if key in v['mechanism_ids']]
         monsters=[k for k,v in data['monsters'].items() if key in v['mechanisms']]
         actors='玩家、怪物' if 'monster' in m['supported_actors'] else '仅玩家'
-        current=key==data.get('source_monster_movement',{}).get('mechanism_id')
+        current=key==data.get('source_monster_movement',{}).get('mechanism_id') or key in data.get('source_monster_damage_life',{}).get('bindings',{})
         origin='当前单条源绑定' if current else '历史机制定义（保留）'
         body=facts([('支持对象',actors),('定义来源',origin),('定义版本',esc(m['policy_version']))])
         related=link('rules','shared')+' · '+link('rules','sources')
         title=m['name']
         if current:
             title+=' · 当前源词条'
-            body+='<p>仅绑定'+link('source_passives',m['source_entry']['node_id'])+'的stat_index '+str(m['source_entry']['stat_index'])+'：'+esc(m['source_line'])+'。玩家和怪物请求同一个类型化提高属性；当前普通自然池使用此ID。源节点的护甲与升华资格不随此条授予。</p>'
-            related+=' · '+link('rules','source_monster_movement')
+            body+='<p>仅绑定'+link('source_passives',m['source_entry']['node_id'])+'的stat_index '+str(m['source_entry']['stat_index'])+'：'+esc(m['source_line'])+'。玩家和怪物请求同一个类型化提高属性；当前普通自然池使用此ID。不授予整个节点、其他行或升华资格。</p>'
+            if key=='source_grove_vitality':
+                body+='<p>max_health / increased：最大生命提高5%，经capacity_increased消费；不是固定生命+0.05，也不授予Body Transfiguration。</p>'
+            related+=' · '+link('rules','source_monster_movement' if key=='source_gale_stride' else 'source_monster_damage_life')
         else:
             body+=details('历史使用者与来源映射', '<p>旧181节点天赋：'+links('passives',player_nodes)+'</p><p>显式怪物模板：'+links('monsters',monsters)+'</p><p>数值按固定参考基准映射，或保留原生加算提高语义；这些历史定义没有升级成完整源树绑定。源游戏条件词条不会自动获得支持。</p>')
-            if key=='gale_stride':
+            if key in ['gale_stride','ember_power','grove_vitality']:
                 title+=' · 旧固定投影'
-                body+='<p>保持固定+3.12速度与旧ID。旧ordinary_roll及历史显式调用继续使用；当前普通池的同一位置已选择新的source_gale_stride。</p>'
-                related+=' · '+link('rules','source_monster_movement')
+                body+='<p>保持原固定加值与旧ID。旧ordinary_roll及历史显式调用继续使用；当前普通池的同一位置已选择新的source_'+esc(key)+'。</p>'
+                related+=' · '+link('rules','source_monster_movement' if key=='gale_stride' else 'source_monster_damage_life')
         cards.append(add('mechanisms',key,title,m['description'],body,actors,related=related))
     for key,w in data['weapon_stages'].items():
         normal=w['examples']['local_normal']; rolled=w['examples']['local_max']
@@ -1121,7 +1155,7 @@ def build(data, art):
             ('source_tree','锁定源树与执行覆盖','完整源记录与已实现效果分别报告；数据存在不等于可花点使用。',f'<p>源版本 {source["source_version"]}，原始SHA256 {source["source_sha256"]}。保留 {len(source["nodes"])} 条记录、2387个标准位置和2697条内部边；升华/扩展分区分开。42代理与30涂油节点不可直接分配。<a href="#category-source_passives">逐项查源节点及精通</a></p><p>节点所有效果必须完整执行，精通按选中效果检查。未支持节点灰色锁定，也会阻断后续路径。源数值没有旧181投影上限；旧树仅作历史与怪物机制参考。</p><p>自己的职业起点免费，预算min(level+4,123)。普通节点/精通均1点，专精需同组普通连通的显著节点，重复效果ID拒绝。未分配其他节点可切七起点；升华点数来源尚未实现，不免费授点。</p>','implemented'),
             ('allocation','源树与珠宝资格','每件珠宝只有一个统一位置；孔必须已分配并沿普通连线连接自己的起点。','<p>寻枝半径280采用当前源坐标单位，允许小型/显著节点断连分配，仍花1点。远程点不向外扩路、不激活孔；未实现节点即使在范围内也不能分配。退款、移动、替换、取回都验证最终构筑，不能遗留依赖失效的节点。原型半径规则不是PoE某颗珠宝的完整复刻。</p><p>'+link('rules','source_tree')+'；下方旧181覆盖图保留作历史机制研究。</p>','implemented'),
             ('source_defenses','属性与命中防御','原始三属性数值进入真实容量、命中、闪避和近战物理作用域。','<p>力量每2点取整+1生命、每5点取整+1%近战物理；敏捷每点+2命中、每5点取整+1%闪避（分配铁反射（闪转甲）后取消此闪避提高并转换原始闪避，见 '+link('rules','iron_reflexes')+'）；智慧每2点取整+1魔力、每10点取整+1%护盾（3.28以后规则）。法术不进行攻击闪避。护甲随物理命中大小重新求减伤，三元素分别使用当前抗性上限（默认75%，最大抗性天赋可提高到本游戏安全上限83%），原始与有效值详见 '+link('rules','elemental_resistance_caps')+'，然后护盾、生命。分配心灵升华后，护盾剩余损伤先按比例交由当前魔力承担，详见 '+link('rules','mana_guard')+'。本段混合受击示例未分配该节点。</p>'+facts([('同源混合受击示例','物理/火/冰/电各100；护甲500、抗性50%/25%/75%'),('防御后分量',esc(component_text(defense['components']))),('护盾扣减',number(defense['shield_spent'])),('生命扣减',number(defense['health_lost']))])+f'<p>本游戏敏捷型怪物闪避320；默认Scion命中140，对应 {percent(c["skitter_accuracy_example"]["base_chance"])}；增加10敏捷后命中160，对应 {percent(c["skitter_accuracy_example"]["improved_chance"])}。预览展示成功命中伤害，未把命中率伪乘成DPS。</p>','implemented'),
-            ('shared','共享消费者、历史定义与单条源绑定','人物和怪物共用伤害分量、防御、命中和结算函数；当前新增一条源移动属性绑定。','<p>23条历史MechanicRegistry定义保持，旧181节点引用保留作研究与回归。当前人物使用原始源树逐项能力门槛，不能套用旧投影合计上限。</p><p>第24条'+link('mechanisms','source_gale_stride')+'调用当前源树解析器，玩家与怪物均获得同一移动速度提高属性；只有当前普通池的疾行位置换用它。'+link('rules','source_monster_movement','查看旧固定投影与当前源词条的工厂预算')+'。</p><p>这不表示所有源基石均已共享。仅绑定63417的stat_index 1，不授予护甲或升华资格；其余未支持机制继续拒绝。物种、波次、稀有度、原机制和奖励资格保持各自原有规则。</p>','implemented'),
+            ('shared','共享消费者、历史定义与三条源绑定','人物和怪物共用伤害分量、防御、命中和结算函数；当前有移动、伤害与最大生命三条源属性绑定。','<p>23条历史MechanicRegistry定义保持，旧181节点引用保留作研究与回归。当前人物使用原始源树逐项能力门槛，不能套用旧投影合计上限。</p><p>当前共26条定义：23条历史定义，加上'+links('mechanisms',['source_gale_stride','source_ember_power','source_grove_vitality'])+'三条当前单条源绑定。v1仅替换移动；当前v2普通三物种池另替换烬火和苍林位置。'+link('rules','source_monster_movement','移动预算')+'与'+link('rules','source_monster_damage_life','伤害/生命预算')+'分别来自实际工厂。</p><p>不表示所有源基石均已共享。仅绑定63417:1、13219:0、52282:0三个原始条目，不授予完整节点、升华资格或Body Transfiguration；其余未支持机制继续拒绝。特殊模板、首领与死亡后代保留历史定义，RNG、名额和奖励资格保持。</p>','implemented'),
             ('boundaries','尚未实现的机制','未执行源节点整体锁定，原文与位置保留。','<p>仍未完成：施法动作时长/施法速度、条件/局部武器暴击、格挡、压制、抗性穿透、完整异常与持续伤害体系（无条件火焰持续伤害加成与三节点更快燃烧已接入；流血和中毒仍未实现）、召唤物、属性装备需求、星团/永恒珠宝、升华点数来源及复杂条件机制。源树浏览不等于以上均可用。制作已有回收、校准、赋魔、升格、补缀与重铸；更复杂的定向制作尚未实现。</p>','planned'),
             ('sources','来源与实现边界','目录来自运行时导出，源树保留功能数据，所有美术由本项目创作。',f'<p><a href="{esc(source["source_url"])}">GGG源树固定提交 {source["source_commit"]}</a> · 3.29.1。保留节点身份、原始规则词句、精通和几何；未包含官方图像或叙事风味文本。上游数据再分发授权未明确，不宣称公共领域。</p><p>旧181节点与词缀校准研究仍有各自固定版本，不代表当前角色全部源效果已实现。原型怪物数值、掉落权重与熵初值由本项目定义。</p><p><a href="source-tree-coverage.json">完整执行覆盖与七职业可达前沿JSON</a>：空stats结构节点和精通本体不冒充属性效果，精通逐选项统计；可达集合不代表123点可以全部同时点出。</p>','research')
         ])
@@ -1292,7 +1326,9 @@ def build(data, art):
     if 'iron_reflexes' in data:
         rule_defs.append(('iron_reflexes',RULE_TITLES['iron_reflexes'],'全部原始闪避转换为护甲，取消敏捷闪避提高；同一句双提高只计一次，失去闪避仍有代价。',iron_reflexes_rule(data,link,facts,details),'implemented'))
     if 'source_monster_movement' in data:
-        rule_defs.append(('source_monster_movement',RULE_TITLES['source_monster_movement'],'当前普通怪物只将旧疾行槽换成源63417的一条移动提高属性；其余23条历史定义保持。',source_monster_movement_rule(data,link,facts,details),'implemented'))
+        rule_defs.append(('source_monster_movement',RULE_TITLES['source_monster_movement'],'保留v0.74移动词条与12组速度预算；当前v2词池另有伤害和生命绑定，分章列示。',source_monster_movement_rule(data,link,facts,details),'implemented'))
+    if 'source_monster_damage_life' in data:
+        rule_defs.append(('source_monster_damage_life',RULE_TITLES['source_monster_damage_life'],'普通三物种的烬火与苍林槽分别采用10%伤害提高、5%最大生命提高；旧固定投影继续保留。',source_monster_damage_life_rule(data,link,facts,details),'implemented'))
     if 'frost_lock' in data:
         rule_defs.append(('frost_lock',RULE_TITLES['frost_lock'],'冰霜脉冲主命中乘0.75、魔力乘1.20；仅正值实际冰伤使存活敌人短暂冻结，解冻后免疫1.50秒。',frost_lock_rule(data,link,facts,details),'implemented'))
     if 'glove_ring_affixes' in data:

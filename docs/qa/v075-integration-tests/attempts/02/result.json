@@ -1,0 +1,72 @@
+{
+	"baseline_commit": "f2427f3",
+	"checks": 996,
+	"failures": 0,
+	"observations": {
+		"actual_main_seeds": {
+			"source_ember_power": 12,
+			"source_grove_vitality": 5
+		},
+		"camp_source_entries": 24,
+		"ember_targeted_fixture": {
+			"burn_dps": 3.311,
+			"damage": 28.38,
+			"fire_packet": 9.933,
+			"natural_spawn_changed": false,
+			"warning_seconds": 0.7
+		},
+		"sampled": {
+			"brood_host": 8,
+			"source_ember_power": 9,
+			"source_grove_vitality": 5,
+			"splitter": 12
+		}
+	},
+	"rolls_per_seed_wave": 12,
+	"sections": {
+		"arithmetic_maps": {
+			"checks": 70,
+			"failures": 0
+		},
+		"cache_transactions": {
+			"checks": 18,
+			"failures": 0
+		},
+		"camps": {
+			"checks": 56,
+			"failures": 0
+		},
+		"combat_consumers": {
+			"checks": 24,
+			"failures": 0
+		},
+		"main_adoption": {
+			"checks": 20,
+			"failures": 0
+		},
+		"registry": {
+			"checks": 235,
+			"failures": 0
+		},
+		"sampling": {
+			"checks": 549,
+			"failures": 0
+		},
+		"special_lineages": {
+			"checks": 24,
+			"failures": 0
+		}
+	},
+	"seeds": [
+		7,
+		73,
+		75075
+	],
+	"source_execution_version": 45,
+	"test_scope": "bounded integration, explicit ember fixture is not a new natural spawn policy",
+	"waves": [
+		1,
+		6,
+		15
+	]
+}

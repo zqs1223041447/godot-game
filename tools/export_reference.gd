@@ -68,7 +68,8 @@ func _initialize() -> void:
 	if not OS.get_cmdline_user_args().is_empty():
 		target = OS.get_cmdline_user_args()[0]
 	# Validate every fixture before opening/truncating the previous artifact.
-	var content: Dictionary = collect()
+	var narrow: bool = OS.get_cmdline_user_args().has("--source-monster-fragment")
+	var content: Dictionary = source_monster_fragment() if narrow else collect()
 	var file: FileAccess = FileAccess.open(target, FileAccess.WRITE)
 	if file == null:
 		push_error("Cannot open reference output: " + target)
@@ -77,7 +78,7 @@ func _initialize() -> void:
 	file.store_string(JSON.stringify(clean(content), "\t", true, true) + "\n")
 	file.close()
 	print("Reference exported: " + target)
-	if target == "res://docs/reference/catalog.json":
+	if target == "res://docs/reference/catalog.json" and not narrow:
 		var coverage: Dictionary = SourceCoverage.build_report()
 		assert(not coverage.is_empty() and coverage.integrity.ok)
 		var coverage_text: String = SourceCoverage.serialize_report(coverage)
@@ -145,6 +146,7 @@ static func collect() -> Dictionary:
 	result["inward_pull"] = inward_pull_examples()
 	result["frost_lock"] = frost_lock_examples()
 	result["source_monster_movement"] = source_monster_movement_examples()
+	result["source_monster_damage_life"] = source_monster_damage_life_examples()
 	result["resolute_technique"] = resolute_technique_examples()
 	result["forgeblade"] = forgeblade_examples()
 	result["melee_basic"] = melee_basic_examples(result.forgeblade)
@@ -324,19 +326,7 @@ static func collect() -> Dictionary:
 		affix["range_text"] = Passives.describe_stats({affix.stat: affix.min}) + " ～ " + Passives.describe_stats({affix.stat: affix.max})
 		result.jewel_affixes[id] = affix
 	for id: String in Registry.get_ids():
-		var mechanism: Dictionary = Registry.get_definition(id)
-		# No source-game names, prose, art, or layout are redistributed.
-		var refs: Array = []
-		for source: Dictionary in mechanism.get("source_refs", []):
-			if id == SourceMonster.ID:
-				refs.append(source.duplicate(true))
-			else:
-				refs.append({"modifier_id": source.get("modifier_id"), "target_stat": source.get("target_stat"),
-					"adaptation": source.get("adaptation"), "source_value": source.get("source_value"),
-					"scale": source.get("scale"), "reference_base": source.get("reference_base")})
-		mechanism["source_refs"] = refs
-		mechanism["description"] = Passives.describe_stats(mechanism.stats)
-		result.mechanisms[id] = mechanism
+		result.mechanisms[id] = mechanism_reference(id)
 	for id: String in Monsters.TEMPLATES:
 		var template: Dictionary = Monsters.TEMPLATES[id].duplicate(true)
 		var context: String = "level_boss" if template.rarity == "boss" else "demo"
@@ -426,6 +416,114 @@ static func currency_examples()->Dictionary:
 		"bag_pages":Canonical.new().bag_layout(),"example_instance":instance}}
 
 
+static func mechanism_reference(id: String) -> Dictionary:
+	var mechanism: Dictionary = Registry.get_definition(id)
+	var refs: Array = []
+	for source: Dictionary in mechanism.get("source_refs", []):
+		if SourceMonster.owns(id):
+			refs.append(source.duplicate(true))
+		else:
+			refs.append({"modifier_id": source.get("modifier_id"), "target_stat": source.get("target_stat"),
+				"adaptation": source.get("adaptation"), "source_value": source.get("source_value"),
+				"scale": source.get("scale"), "reference_base": source.get("reference_base")})
+	mechanism["source_refs"] = refs
+	# Capacity mode is separate from flat stats; 0.05 must display as 5%, never +0.05 life.
+	var descriptions: PackedStringArray = []
+	var flat_description: String = Passives.describe_stats(mechanism.stats)
+	if not flat_description.is_empty(): descriptions.append(flat_description)
+	for stat: String in mechanism.get("capacity_increased", {}):
+		assert(stat == "max_health")
+		descriptions.append("最大生命提高 %s%%" % str(float(mechanism.capacity_increased[stat]) * 100.0))
+	mechanism["description"] = "\n".join(descriptions)
+	return mechanism
+
+
+## Narrow integration never parses or rewrites historical catalog values in Godot.
+## Python merges these new values into the exact checked-in baseline text.
+static func source_monster_fragment() -> Dictionary:
+	var mechanisms: Dictionary = {}
+	for id: String in SourceMonster.IDS:
+		mechanisms[id] = mechanism_reference(id)
+	return {"game_version":ProjectSettings.get_setting("application/config/version"),
+		"mechanisms":mechanisms, "source_monster_damage_life":source_monster_damage_life_examples(),
+		"movement_updates":{"current_definition_count":Registry.get_ids().size(),
+			"stride_pool":Monsters.STRIDE_AFFIX_POOL.duplicate(), "current_pool":Monsters.CURRENT_AFFIX_POOL.duplicate(),
+			"legacy_roll_policy":Monsters.LEGACY_ROLL_POLICY, "stride_roll_policy":Monsters.STRIDE_ROLL_POLICY,
+			"current_roll_policy":Monsters.CURRENT_ROLL_POLICY}}
+
+
+static func source_monster_damage_life_examples() -> Dictionary:
+	var bindings: Dictionary = {}
+	for pair: Array in [["source_ember_power", "ember_power"], ["source_grove_vitality", "grove_vitality"]]:
+		var id: String = pair[0]
+		var source: Dictionary = SourceMonster.resolve(id)
+		assert(source.ok)
+		var definition: Dictionary = source.definition
+		var entry: Dictionary = definition.source_entry
+		var effect: Dictionary = SourceTree.line_effect(entry.raw_line, SourceTree.CURRENT_SAVE_VERSION)
+		var player: Dictionary = Registry.resolve(id, "player")
+		var monster: Dictionary = Registry.resolve(id, "monster")
+		var legacy: Dictionary = Registry.resolve(pair[1], "monster")
+		assert(effect.supported and player.ok and monster.ok and legacy.ok)
+		assert(effect.grants.size() == 1 and effect.grants == definition.typed_grants)
+		assert(player.stats == monster.stats and monster.stats == source.stats)
+		assert(player.get("capacity_increased", {}) == monster.get("capacity_increased", {}))
+		assert(monster.get("capacity_increased", {}) == source.get("capacity_increased", {}))
+		bindings[id] = {"legacy_id":pair[1], "definition":definition, "source_entry":entry,
+			"source_effect":effect, "player_grant":player, "monster_grant":monster,
+			"legacy_grant":legacy, "actor_coefficient":monster.role_coefficient}
+	var damage_increase: float = bindings.source_ember_power.monster_grant.stats.global_increased
+	var life_increase: float = bindings.source_grove_vitality.monster_grant.capacity_increased.max_health
+	var budget: Array[Dictionary] = []
+	for wave: int in [1, 6, 10, 15]:
+		var rarity: String = "magic" if wave == 1 else "rare"
+		for template_id: String in ["crawler", "skitter", "brute"]:
+			var base: Dictionary = Monsters.make_enemy(1, template_id, wave, Vector2.ZERO, "demo", rarity, [])
+			var old_damage: Dictionary = Monsters.make_enemy(1, template_id, wave, Vector2.ZERO, "demo", rarity, ["ember_power"])
+			var current_damage: Dictionary = Monsters.make_enemy(1, template_id, wave, Vector2.ZERO, "demo", rarity, ["source_ember_power"])
+			var old_life: Dictionary = Monsters.make_enemy(1, template_id, wave, Vector2.ZERO, "demo", rarity, ["grove_vitality"])
+			var current_life: Dictionary = Monsters.make_enemy(1, template_id, wave, Vector2.ZERO, "demo", rarity, ["source_grove_vitality"])
+			for enemy: Dictionary in [base, old_damage, current_damage, old_life, current_life]: assert(not enemy.is_empty())
+			var species: Dictionary = Monsters.SPECIES[int(Monsters.TEMPLATES[template_id].kind)]
+			var tier: Dictionary = Monsters.RARITIES[rarity]
+			var hp_base: float = float(species.health) * (1.0 + (wave - 1) * 0.16) * float(tier.health)
+			var damage_base: float = (float(species.damage) + (wave - 1) * 0.7) * float(tier.damage)
+			assert(is_equal_approx(base.health, hp_base) and is_equal_approx(base.damage, damage_base))
+			assert(is_equal_approx(old_life.health, base.health + float(bindings.source_grove_vitality.legacy_grant.stats.max_health)))
+			assert(is_equal_approx(old_damage.damage, base.damage + float(bindings.source_ember_power.legacy_grant.stats.damage)))
+			assert(is_equal_approx(current_life.health, base.health * (1.0 + life_increase)))
+			assert(is_equal_approx(current_damage.damage, base.damage * (1.0 + damage_increase)))
+			budget.append({"template_id":template_id, "wave":wave, "rarity":rarity,
+				"species":species.duplicate(true), "rarity_multipliers":{"health":tier.health, "damage":tier.damage},
+				"base":base, "legacy_damage":old_damage, "current_damage":current_damage,
+				"legacy_life":old_life, "current_life":current_life,
+				"damage_delta":current_damage.damage - old_damage.damage,
+				"life_delta":current_life.health - old_life.health})
+	var mixed_damage: Dictionary = Monsters.make_enemy(1, "brute", 6, Vector2.ZERO, "demo", "rare", ["ember_power", "source_ember_power"])
+	var mixed_life: Dictionary = Monsters.make_enemy(1, "brute", 6, Vector2.ZERO, "demo", "rare", ["grove_vitality", "source_grove_vitality"])
+	var plain: Dictionary = Monsters.make_enemy(1, "brute", 6, Vector2.ZERO, "demo", "rare", [])
+	assert(is_equal_approx(mixed_damage.damage, (plain.damage + float(bindings.source_ember_power.legacy_grant.stats.damage)) * (1.0 + damage_increase)))
+	assert(is_equal_approx(mixed_life.health, (plain.health + float(bindings.source_grove_vitality.legacy_grant.stats.max_health)) * (1.0 + life_increase)))
+	var unsupported: Dictionary = Registry.resolve("poe_global_damage", "monster")
+	assert(not unsupported.ok)
+	return {"bindings":bindings, "budget":budget,
+		"mixed_fixed_before_increased":{"base":plain, "damage":mixed_damage, "life":mixed_life},
+		"legacy_player_only_rejection":unsupported,
+		"legacy_pool":Monsters.AFFIX_POOL.duplicate(), "stride_pool":Monsters.STRIDE_AFFIX_POOL.duplicate(),
+		"current_pool":Monsters.CURRENT_AFFIX_POOL.duplicate(), "legacy_roll_policy":Monsters.LEGACY_ROLL_POLICY,
+		"stride_roll_policy":Monsters.STRIDE_ROLL_POLICY, "current_roll_policy":Monsters.CURRENT_ROLL_POLICY,
+		"legacy_definition_count":Balance.definitions().size(), "current_source_definition_count":SourceMonster.IDS.size(),
+		"current_definition_count":Registry.get_ids().size(), "save_version":Canonical.Rules.VERSION,
+		"equipment_vocabulary":Equipment.CURRENT_VOCABULARY, "source_policy":SourceTree.CURRENT_SAVE_VERSION,
+		"damage_formula":"((species_damage + (wave - 1) * 0.7) * rarity_damage + flat_damage) * (1 + sum_global_increased)",
+		"life_formula":"(species_health * (1 + (wave - 1) * 0.16) * rarity_health + flat_max_health) * (1 + sum_max_health_increased)",
+		"budget_scope":"独立单词缀工厂对照；第1波蓝色，第6/10/15波金色；每格由实际MonsterCatalog生成，地图倍率前；不是自然分布或DPS评分",
+		"boundary":"只绑定13219:0的伤害提高和52282:0的最大生命提高；不授予整个节点、升华资格、Body Transfiguration或其他源效果",
+		"cache":"按三个明确ID独立缓存来源身份、原始行与当前政策；最多三项，出生快照冻结，每帧不重新解析",
+		"map_order":"先固定基底，再同类increased加算并乘一次，之后应用现有地图倍率；20% canonical生命护盾仍按既有依赖取最终canonical生命",
+		"sampler":"ordinary_roll保留legacy_flat_v1；ordinary_roll_source_stride保留source_stride_v1；ordinary_roll_current只将普通三物种的原烬火/苍林位置映射到新ID；裂殖、孵化、首领、死亡后代保持历史定义；无额外RNG、名额或奖励"}
+
+
 static func source_monster_movement_examples() -> Dictionary:
 	var source: Dictionary = SourceMonster.resolve(SourceMonster.ID)
 	assert(source.ok, "Source movement reference requires the validated current source entry")
@@ -452,7 +550,8 @@ static func source_monster_movement_examples() -> Dictionary:
 		"equipment_vocabulary": Equipment.CURRENT_VOCABULARY, "source_policy": SourceTree.CURRENT_SAVE_VERSION,
 		"definition": definition, "source_entry": entry, "source_effect": effect, "player_grant": player,
 		"monster_grant": monster, "legacy_grant": legacy, "actor_coefficient": monster.role_coefficient,
-		"legacy_pool": Monsters.AFFIX_POOL.duplicate(), "current_pool": Monsters.CURRENT_AFFIX_POOL.duplicate(),
+		"legacy_pool": Monsters.AFFIX_POOL.duplicate(), "stride_pool": Monsters.STRIDE_AFFIX_POOL.duplicate(), "current_pool": Monsters.CURRENT_AFFIX_POOL.duplicate(),
+		"legacy_roll_policy": Monsters.LEGACY_ROLL_POLICY, "stride_roll_policy": Monsters.STRIDE_ROLL_POLICY, "current_roll_policy": Monsters.CURRENT_ROLL_POLICY,
 		"legacy_definition_count": Balance.definitions().size(), "current_definition_count": Registry.get_ids().size(),
 		"budget": budget, "formula": "(species + wave + other_flat) * (1 + move_speed_increased)",
 		"budget_scope": "同物种、波次与蓝色稀有度的单移动词缀对照；由实际MonsterCatalog生成，地图倍率前；不是综合难度评分",

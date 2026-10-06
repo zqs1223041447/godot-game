@@ -91,11 +91,11 @@ func _test_invalid_results(_entry: Dictionary, parsed: Dictionary, policy: int) 
 
 func _test_cache(entry: Dictionary, policy: int) -> void:
 	Grants.resolve(Grants.ID)
-	var first: Dictionary = Grants._cached_definition
-	var first_key := Grants._cache_key.duplicate()
+	var first: Dictionary = Grants._cached_definitions[Grants.ID]
+	var first_key: PackedByteArray = Grants._cache_keys[Grants.ID].duplicate()
 	for index in range(100): Grants.resolve(Grants.ID)
-	check(is_same(first, Grants._cached_definition) and first_key == Grants._cache_key, "unchanged compact identity hits static cache")
-	check(Grants._cached_definition.id == Grants.ID and Grants._cached_definition.stats.size() == 1, "cache is one validated definition")
+	check(is_same(first, Grants._cached_definitions[Grants.ID]) and first_key == Grants._cache_keys[Grants.ID], "unchanged compact identity hits static cache")
+	check(Grants._cached_definitions[Grants.ID].id == Grants.ID and Grants._cached_definitions[Grants.ID].stats.size() == 1, "Gale cache entry is one validated definition")
 	check(Grants._entry_key(entry, policy + 1, Runtime.CURRENT_SAVE_VERSION) != first_key,
 		"execution policy change invalidates cache key")
 	check(Grants._entry_key(entry, policy, Runtime.CURRENT_SAVE_VERSION + 1) != first_key,
@@ -107,7 +107,7 @@ func _test_cache(entry: Dictionary, policy: int) -> void:
 		TreeData._data.source = original_source.duplicate(true)
 		TreeData._data.source[field] = "fixture-version" if field == "version" else ("a".repeat(64) if field == "data_sha256" else "b".repeat(40))
 		var changed := Grants.resolve(Grants.ID)
-		check(changed.ok and Grants._cache_key != first_key and not is_same(first, Grants._cached_definition),
+		check(changed.ok and Grants._cache_keys[Grants.ID] != first_key and not is_same(first, Grants._cached_definitions[Grants.ID]),
 			"actual changed source identity recompiles: " + field)
 	TreeData._data.source = original_source
 	var original_stats: Array = TreeData._nodes["63417"].stats.duplicate()
@@ -115,18 +115,18 @@ func _test_cache(entry: Dictionary, policy: int) -> void:
 	var changed_line := Grants.resolve(Grants.ID)
 	var changed_effect := Runtime.line_effect(TreeData._nodes["63417"].stats[1], Runtime.CURRENT_SAVE_VERSION)
 	check(changed_line.ok and changed_line.stats.move_speed_increased == changed_effect.grants[0].value
-		and Grants._cache_key != first_key, "changed raw source entry recomputes using authoritative parser")
+		and Grants._cache_keys[Grants.ID] != first_key, "changed raw source entry recomputes using authoritative parser")
 	for rejected_line: String in ["15% increased Armour", "This is not an executable stat", "4% increased Movement Speed\n15% increased Armour"]:
 		TreeData._nodes["63417"].stats[1] = rejected_line
 		var rejected := Grants.resolve(Grants.ID)
 		check(not rejected.ok and not rejected.reason.is_empty() and rejected.stats.is_empty() and rejected.definition.is_empty()
-			and Grants._cached_definition.is_empty() and Grants._cache_key.is_empty(), "changed invalid entry clears cache with no fallback")
+			and not Grants._cached_definitions.has(Grants.ID) and not Grants._cache_keys.has(Grants.ID), "changed invalid entry clears cache with no fallback")
 	TreeData._nodes["63417"].stats = original_stats
 	TreeData._data.source = original_source.duplicate(true)
 	TreeData._data.source.erase("commit")
-	check(not Grants.resolve(Grants.ID).ok and Grants._cached_definition.is_empty(), "missing metadata rejects and does not reuse stale result")
+	check(not Grants.resolve(Grants.ID).ok and not Grants._cached_definitions.has(Grants.ID), "missing metadata rejects and does not reuse stale result")
 	TreeData._data.source = original_source
-	check(Grants.resolve(Grants.ID).ok and Grants._cache_key == first_key, "restored source resolves original grant again")
+	check(Grants.resolve(Grants.ID).ok and Grants._cache_keys[Grants.ID] == first_key, "restored source resolves original grant again")
 
 
 func _test_compact_boundary() -> void:
