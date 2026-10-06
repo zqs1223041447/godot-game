@@ -12,7 +12,7 @@ var _state: Dictionary = {}
 
 func begin(profile: Variant, landmarks: Variant, seed_value: Variant,
 		monster_policy: String = Monsters.LEGACY_ROLL_POLICY) -> Dictionary:
-	if monster_policy not in [Monsters.LEGACY_ROLL_POLICY, Monsters.STRIDE_ROLL_POLICY, Monsters.CURRENT_ROLL_POLICY]:
+	if monster_policy not in [Monsters.LEGACY_ROLL_POLICY, Monsters.STRIDE_ROLL_POLICY, Monsters.DAMAGE_LIFE_ROLL_POLICY, Monsters.CURRENT_ROLL_POLICY]:
 		return {"ok": false, "reason": "Unknown monster source policy"}
 	var reason := Maps.profile_reason(profile)
 	if not reason.is_empty():
@@ -41,6 +41,7 @@ func begin(profile: Variant, landmarks: Variant, seed_value: Variant,
 			if template_id.is_empty():
 				var roll: Dictionary
 				if monster_policy == Monsters.CURRENT_ROLL_POLICY: roll = Monsters.ordinary_roll_current(rng, profile.wave)
+				elif monster_policy == Monsters.DAMAGE_LIFE_ROLL_POLICY: roll = Monsters.ordinary_roll_source_damage_life(rng, profile.wave)
 				elif monster_policy == Monsters.STRIDE_ROLL_POLICY: roll = Monsters.ordinary_roll_source_stride(rng, profile.wave)
 				else: roll = Monsters.ordinary_roll(rng, profile.wave)
 				template_id = roll.template

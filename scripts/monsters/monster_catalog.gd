@@ -5,6 +5,7 @@ const Registry = preload("res://scripts/mechanics/mechanic_registry.gd")
 const Defense = preload("res://scripts/mechanics/defense_rules.gd")
 const Burn=preload("res://scripts/combat/burn_rules.gd")
 const Shock=preload("res://scripts/combat/shock_rules.gd")
+const ShieldSupply=preload("res://scripts/monsters/source_shield_budget.gd")
 const TelegraphProfiles = preload("res://scripts/monsters/telegraph_profiles.gd")
 const MapBossAttacks=preload("res://scripts/monsters/map_boss_profiles.gd")
 const SCHEMA_VERSION: int = 1
@@ -44,9 +45,11 @@ const SPECIES: Array[Dictionary] = [
 const AFFIX_POOL: Array[String] = ["ember_power", "gale_stride", "grove_vitality", "aegis_capacity", "aegis_recovery"]
 const LEGACY_ROLL_POLICY := "legacy_flat_v1"
 const STRIDE_ROLL_POLICY := "source_stride_v1"
-const CURRENT_ROLL_POLICY := "source_damage_life_v2"
+const DAMAGE_LIFE_ROLL_POLICY := "source_damage_life_v2"
+const CURRENT_ROLL_POLICY := "source_shield_v3"
 const STRIDE_AFFIX_POOL: Array[String] = ["ember_power", "source_gale_stride", "grove_vitality", "aegis_capacity", "aegis_recovery"]
-const CURRENT_AFFIX_POOL: Array[String] = ["source_ember_power", "source_gale_stride", "source_grove_vitality", "aegis_capacity", "aegis_recovery"]
+const DAMAGE_LIFE_AFFIX_POOL: Array[String] = ["source_ember_power", "source_gale_stride", "source_grove_vitality", "aegis_capacity", "aegis_recovery"]
+const CURRENT_AFFIX_POOL: Array[String] = ["source_ember_power", "source_gale_stride", "source_grove_vitality", "source_aegis_capacity", "source_aegis_recovery"]
 const TEMPLATES: Dictionary = {
 	"crawler": {"name": "巡游体", "kind": 0, "rarity": "normal", "mechanisms": [], "death_spawns": []},
 	"skitter": {"name": "掠行体", "kind": 1, "rarity": "normal", "mechanisms": [], "death_spawns": []},
@@ -174,12 +177,22 @@ static func ordinary_roll_source_stride(rng: RandomNumberGenerator, wave: int) -
 
 ## Current v2 remaps only draws from the ordinary three-species pool.
 ## Special splitter/brood templates carry explicit historical bundles.
-static func ordinary_roll_current(rng: RandomNumberGenerator, wave: int) -> Dictionary:
+static func ordinary_roll_source_damage_life(rng: RandomNumberGenerator, wave: int) -> Dictionary:
 	var result := ordinary_roll_source_stride(rng, wave)
 	if result.template not in ["crawler", "skitter", "brute"]: return result
 	for index: int in range(result.mechanisms.size()):
 		if result.mechanisms[index] == "ember_power": result.mechanisms[index] = "source_ember_power"
 		elif result.mechanisms[index] == "grove_vitality": result.mechanisms[index] = "source_grove_vitality"
+	return result
+
+
+## v3 changes only the final two ordinary-pool identities.
+static func ordinary_roll_current(rng: RandomNumberGenerator, wave: int) -> Dictionary:
+	var result := ordinary_roll_source_damage_life(rng, wave)
+	if result.template not in ["crawler", "skitter", "brute"]: return result
+	for index: int in range(result.mechanisms.size()):
+		if result.mechanisms[index] == "aegis_capacity": result.mechanisms[index] = "source_aegis_capacity"
+		elif result.mechanisms[index] == "aegis_recovery": result.mechanisms[index] = "source_aegis_recovery"
 	return result
 
 
@@ -299,14 +312,23 @@ static func make_enemy(id: int, template_id: String, wave: int, position: Vector
 		hp *= 1.0 + life_increase
 		if not is_finite(hp) or hp <= 0.0: return {}
 	var maximum_shield: float = float(modifiers.get("max_shield", 0.0))
+	var base_recharge_rate: float = float(modifiers.get("shield_regen", 0.0))
+	var shield_supply := ShieldSupply.build(resolved.mechanism_ids, modifiers, resolved.get("capacity_increased", {}))
+	if not shield_supply.ok: return {}
+	var recharge_inputs: Dictionary = modifiers
+	if shield_supply.enabled:
+		maximum_shield = shield_supply.max_shield
+		base_recharge_rate = shield_supply.base_recharge_rate
+		recharge_inputs = modifiers.duplicate(true)
+		recharge_inputs.shield_regen = base_recharge_rate
 	var defense: Dictionary = Defense.defense_profile(template.get("defense_stats", {}), "monster")
-	var recharge:=Defense.recharge_profile(modifiers,"monster")
+	var recharge:=Defense.recharge_profile(recharge_inputs,"monster")
 	if not recharge.ok:return {}
 	var result:Dictionary={"id": id, "template_id": template_id, "name": template.get("name", template_id), "kind": kind,
 		"rarity": rarity, "mechanism_ids": resolved.mechanism_ids.duplicate(),
 		"mechanism_schema": resolved.schema_version, "mechanism_revision": resolved.definition_revision, "mechanism_policy": resolved.policy_version, "mechanism_stats": modifiers.duplicate(),
 		"pos": position, "health": hp, "max_health": hp, "shield": maximum_shield, "max_shield": maximum_shield,
-		"shield_regen": float(modifiers.get("shield_regen", 0.0)), "damage_delay": 0.0,
+		"shield_regen": base_recharge_rate, "damage_delay": 0.0,
 		"defense_stats": template.get("defense_stats", {}).duplicate(true), "resistances": defense.effective_resistances,
 		"contact_weights": template.get("contact_weights", {"physical": 1.0}).duplicate(true),
 		"equipment_pool": template.get("equipment_pool", ""),
@@ -320,6 +342,7 @@ static func make_enemy(id: int, template_id: String, wave: int, position: Vector
 		"xp_reward": (6 if kind == 2 else 3) * int(tier.xp)}
 	if float(modifiers.get("shield_recharge_rate_increased",0.0))!=0.0 or float(modifiers.get("shield_recharge_start_faster",0.0))!=0.0:
 		result.shield_recharge_rate=recharge.rate;result.shield_recharge_delay=recharge.delay
+	if shield_supply.enabled: result[ShieldSupply.FIELD] = shield_supply.profile.duplicate(true)
 	if resolved.has("source_grants"):
 		# Same additive-increase stage as CanonicalGameState, applied once after
 		# authored species/wave/flat base, before optional map multipliers.

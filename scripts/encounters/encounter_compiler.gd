@@ -70,6 +70,10 @@ static func apply_to_enemy(canonical_enemy: Variant, profile: Variant) -> Dictio
 	for field:String in ["damage","attack_speed"]:
 		if float(profile.multipliers[field])!=1.0:enemy[field]=float(canonical_enemy[field])*float(profile.multipliers[field])
 	var shield_bonus:float=float(canonical_enemy.max_health)*float(profile.additions.shield_from_base_health)
+	if shield_bonus!=0.0 and canonical_enemy.has(Monsters.ShieldSupply.FIELD):
+		# Canonical shield already contains its increase. Scale only the new
+		# map base contribution, using the frozen spawn multiplier once.
+		shield_bonus *= float(canonical_enemy[Monsters.ShieldSupply.FIELD].capacity_multiplier)
 	if shield_bonus!=0.0:
 		enemy.max_shield=float(canonical_enemy.max_shield)+shield_bonus
 		enemy.shield=float(canonical_enemy.shield)+shield_bonus
@@ -127,6 +131,8 @@ static func _enemy_error(enemy: Variant) -> String:
 	if float(enemy.max_health) <= 0.0 or float(enemy.health) > float(enemy.max_health) \
 		or float(enemy.shield) > float(enemy.max_shield):
 		return "怪物生命或护盾超出上限"
+	var shield_reason: String = Monsters.ShieldSupply.snapshot_reason(enemy)
+	if not shield_reason.is_empty(): return shield_reason
 	return ""
 
 
