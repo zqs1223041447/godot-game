@@ -1179,7 +1179,11 @@ func _build_combat_panel() -> void:
 	toggles.add_child(_button("爆炸：%s" % ("已装备" if exploding else "未装备"), "ToggleExplosionEffect", _toggle_combat_item.bind("detonation_charm"), 200))
 	toggles.add_child(_button("母箭数量：%d" % int(preview.count), "ToggleProjectileCount", _toggle_combat_item.bind("prism_bow"), 200))
 	_panel_body.add_child(_wrap_label("按钮实际穿戴或卸下对应装备，并自动保存。仅爆炸：射程处爆炸；仅返回：返回后寿命结束消失；两者都有：返回后寿命结束爆炸。", 14))
-	_section("02  当前构筑的逐分量伤害", "未计敌人抗性 · 非每秒伤害")
+	var has_preview_penetration := false
+	for preview_role: String in ["parent", "child", "explosion"]:
+		for detail: Dictionary in preview.get(preview_role, {}).get("details", []):
+			if float(detail.get("penetration", 0.0)) > 0.0: has_preview_penetration = true
+	_section("02  当前构筑的逐分量伤害", "零抗性、零护甲目标估算（含穿透） · 非每秒伤害" if has_preview_penetration else "未计敌人抗性 · 非每秒伤害")
 	_panel_body.add_child(_wrap_label("通用基础伤害 %.1f；全局提高 %.0f%%，投射物提高 %.0f%%，元素提高 %.0f%%。同一分量适用的“提高”先相加。" % [float(snapshot.base_damage), float(_state.get_stats().global_increased) * 100.0, float(_state.get_stats().projectile_increased) * 100.0, float(_state.get_stats().elemental_increased) * 100.0], 15, TEXT))
 	for role: String in ["parent", "child", "explosion"]:
 		var result: Dictionary = preview[role]

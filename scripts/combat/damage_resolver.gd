@@ -3,6 +3,7 @@ extends RefCounted
 ## A damage event has its own delivery tags. Skill or carrier tags never leak in.
 ## Values remain unrounded until UI display; all increased values add per component.
 
+const Penetration = preload("res://scripts/combat/hit_penetration_rules.gd")
 const TYPES: Array[String] = ["physical", "fire", "cold", "lightning", "chaos"]
 const ELEMENTS: Array[String] = ["fire", "cold", "lightning"]
 const CONVERSION_FRACTION: float = 0.4
@@ -12,6 +13,10 @@ static func resolve(packet: Dictionary, modifiers: Array, mitigation: Dictionary
 		return {"total":0.0,"components":{},"details":[],"error":"Invalid critical multiplier"}
 	if packet.has("conversion"):
 		return _resolve_converted(packet, modifiers, mitigation, critical_multiplier)
+	if packet.has("penetration"):
+		var penetration_reason: String = Penetration.packet_error(packet)
+		if not penetration_reason.is_empty():
+			return _conversion_failure(penetration_reason)
 	var components: Dictionary = {}
 	var details: Array[Dictionary] = []
 	var total: float = 0.0
@@ -40,11 +45,18 @@ static func resolve(packet: Dictionary, modifiers: Array, mitigation: Dictionary
 		# Keep the old arithmetic path exactly when no critical is active.
 		if critical_multiplier != 1.0: before_defense *= critical_multiplier
 		var resistance: float = clampf(float(mitigation.get(type, 0.0)), -1.0, 0.9)
+		var effective_resistance: float = resistance
+		var penetration: float = float(packet.get("penetration", {}).get(type, 0.0))
+		if penetration > 0.0:
+			resistance = maxf(Penetration.MINIMUM_RESISTANCE, resistance - penetration)
 		var amount: float = before_defense * (1.0 - resistance)
 		components[type] = amount
 		total += amount
 		details.append({"type": type, "base": base, "increased": increased, "more": more,
 			"before_defense": before_defense, "resistance": resistance, "final": amount, "modifiers": applied})
+		if penetration > 0.0:
+			details[-1].effective_resistance = effective_resistance
+			details[-1].penetration = penetration
 	return {"total": total, "components": components, "details": details}
 
 
@@ -52,6 +64,8 @@ static func resolve(packet: Dictionary, modifiers: Array, mitigation: Dictionary
 ## Validate exact derived floats; a merely conserved or approximately equal
 ## total is insufficient provenance for a different conversion fraction.
 static func conversion_error(packet: Dictionary) -> String:
+	if packet.get("conversion") is Dictionary and packet.conversion.has("version") and not packet.conversion.has("target_type"):
+		return _conversion_v2_error(packet)
 	var trace: Variant = packet.get("conversion")
 	var keys: Array[String] = ["source_type", "target_type", "fraction", "source_base", "remaining_base", "converted_base"]
 	if not trace is Dictionary or trace.size() != keys.size() or not trace.has_all(keys):
@@ -83,10 +97,96 @@ static func conversion_error(packet: Dictionary) -> String:
 	return ""
 
 
+## One expression and iteration order for both construction and strict admission.
+## The normalized remainder is explicitly zero, not 1 - summed rounded ratios.
+static func conversion_split(requested: Dictionary) -> Dictionary:
+	var requested_total: float = 0.0
+	for type: String in ELEMENTS:
+		if requested.has(type):
+			requested_total += float(requested[type])
+	var normalized: bool = requested_total > 1.0
+	var effective: Dictionary = {}
+	for type: String in ELEMENTS:
+		if requested.has(type):
+			effective[type] = float(requested[type]) / requested_total if normalized else float(requested[type])
+	return {"effective": effective, "physical_fraction": 0.0 if normalized else 1.0 - requested_total,
+		"normalized": normalized}
+
+
+static func _conversion_v2_error(packet: Dictionary) -> String:
+	var trace: Dictionary = packet.conversion
+	var keys: Array[String] = ["version", "source_type", "source_base", "requested", "effective", "remaining_base", "converted_base"]
+	if trace.size() != keys.size() or not trace.has_all(keys):
+		return "Invalid elemental conversion structure"
+	for key: Variant in trace:
+		if not key is String:
+			return "Invalid elemental conversion key"
+	if not trace.version is int or trace.version != 2 or not trace.source_type is String or trace.source_type != "physical":
+		return "Unsupported elemental conversion version or source"
+	if not _conversion_amount(trace.source_base) or float(trace.source_base) <= 0.0 or not _conversion_amount(trace.remaining_base):
+		return "Invalid elemental conversion amount"
+	if not trace.requested is Dictionary or trace.requested.is_empty() or not trace.effective is Dictionary or not trace.converted_base is Dictionary:
+		return "Invalid elemental conversion maps"
+	if not trace.requested.has("cold") and not trace.requested.has("lightning"):
+		return "Fire-only conversion must retain its original descriptor"
+	if trace.effective.size() != trace.requested.size() or trace.converted_base.size() != trace.requested.size():
+		return "Elemental conversion map keys disagree"
+	for values: Dictionary in [trace.effective, trace.converted_base]:
+		for type: Variant in values:
+			if not type is String or not trace.requested.has(type):
+				return "Elemental conversion map keys disagree"
+	for type: Variant in trace.requested:
+		if not type is String or not ELEMENTS.has(type) or not _conversion_amount(trace.requested[type]) or float(trace.requested[type]) != CONVERSION_FRACTION:
+			return "Unsupported elemental conversion request"
+		if not trace.effective.has(type) or not trace.converted_base.has(type) or not _conversion_amount(trace.effective[type]) or not _conversion_amount(trace.converted_base[type]):
+			return "Invalid elemental conversion map value"
+	if not packet.get("base") is Dictionary:
+		return "Invalid pre-conversion base"
+	var raw_total: float = 0.0
+	for type: Variant in packet.base:
+		if not type is String or not TYPES.has(type) or not _conversion_amount(packet.base[type]):
+			return "Invalid pre-conversion base"
+		raw_total += float(packet.base[type])
+		if not is_finite(raw_total):
+			return "Pre-conversion base overflow"
+	var source_base: float = float(packet.base.get("physical", 0.0))
+	var split: Dictionary = conversion_split(trace.requested)
+	if float(trace.source_base) != source_base or float(trace.remaining_base) != source_base * float(split.physical_fraction):
+		return "Conversion does not match its pre-conversion base"
+	var conserved: float = float(trace.remaining_base)
+	for type: String in ELEMENTS:
+		if not trace.requested.has(type):
+			continue
+		# No approximate comparison here: even one forged representable step is
+		# invalid. Conservation slack below only checks recomputed arithmetic.
+		if float(trace.effective[type]) != float(split.effective[type]) or float(trace.converted_base[type]) != source_base * float(split.effective[type]):
+			return "Conversion does not match its requested fractions"
+		conserved += float(trace.converted_base[type])
+	# At most four nonnegative terms are summed. Permit only four source ULPs
+	# for multiplication/addition rounding, never a relative gameplay tolerance.
+	if not is_finite(conserved) or absf(conserved - source_base) > 4.0 * _positive_ulp(source_base):
+		return "Elemental conversion does not conserve its source"
+	if not packet.get("tags") is Array or not packet.tags.has("hit") or packet.tags.has("dot"):
+		return "Only hit damage can be converted"
+	return ""
+
+
+static func _positive_ulp(value: float) -> float:
+	var encoded: PackedByteArray = PackedByteArray()
+	encoded.resize(8)
+	encoded.encode_double(0, value)
+	var exponent: int = (encoded.decode_u64(0) >> 52) & 0x7ff
+	return pow(2.0, -1074.0) if exponent == 0 else pow(2.0, float(exponent - 1023 - 52))
+
+
 static func _resolve_converted(packet: Dictionary, modifiers: Array, mitigation: Dictionary, critical_multiplier: float) -> Dictionary:
 	var reason: String = conversion_error(packet)
 	if not reason.is_empty():
 		return _conversion_failure(reason)
+	if packet.has("penetration"):
+		var penetration_reason: String = Penetration.packet_error(packet)
+		if not penetration_reason.is_empty():
+			return _conversion_failure(penetration_reason)
 	var components: Dictionary = {}
 	var details: Array[Dictionary] = []
 	var total: float = 0.0
@@ -99,10 +199,15 @@ static func _resolve_converted(packet: Dictionary, modifiers: Array, mitigation:
 			if native.is_empty():
 				return _conversion_failure("Converted damage overflow or invalid modifier")
 			parts.append(native)
-		# Native fire precedes converted fire, preserving distinct modifier scopes.
-		if type == "fire" and float(packet.conversion.converted_base) > 0.0:
-			var lineage: Array[String] = ["physical", "fire"]
-			var converted: Dictionary = _conversion_part(float(packet.conversion.converted_base), lineage, packet, modifiers, critical_multiplier)
+		# Native damage precedes its converted part, preserving modifier scopes.
+		var converted_base: float = 0.0
+		if packet.conversion.get("version") == 2:
+			converted_base = float(packet.conversion.converted_base.get(type, 0.0))
+		elif type == "fire":
+			converted_base = float(packet.conversion.converted_base)
+		if converted_base > 0.0:
+			var lineage: Array[String] = ["physical", type]
+			var converted: Dictionary = _conversion_part(converted_base, lineage, packet, modifiers, critical_multiplier)
 			if converted.is_empty():
 				return _conversion_failure("Converted damage overflow or invalid modifier")
 			parts.append(converted)
@@ -117,6 +222,10 @@ static func _resolve_converted(packet: Dictionary, modifiers: Array, mitigation:
 		if not (raw_resistance is int or raw_resistance is float) or not is_finite(float(raw_resistance)):
 			return _conversion_failure("Invalid converted damage resistance")
 		var resistance: float = clampf(float(raw_resistance), -1.0, 0.9)
+		var effective_resistance: float = resistance
+		var penetration: float = float(packet.get("penetration", {}).get(type, 0.0))
+		if penetration > 0.0:
+			resistance = maxf(Penetration.MINIMUM_RESISTANCE, resistance - penetration)
 		var amount: float = before_defense * (1.0 - resistance)
 		if not is_finite(amount):
 			return _conversion_failure("Converted damage resistance overflow")
@@ -128,6 +237,9 @@ static func _resolve_converted(packet: Dictionary, modifiers: Array, mitigation:
 		# authoritative. There is no meaningful aggregate increased/more value.
 		details.append({"type": type, "before_defense": before_defense, "resistance": resistance,
 			"final": amount, "parts": parts})
+		if penetration > 0.0:
+			details[-1].effective_resistance = effective_resistance
+			details[-1].penetration = penetration
 	return {"total": total, "components": components, "details": details}
 
 

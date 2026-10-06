@@ -137,6 +137,15 @@ const PRECISE_TECHNIQUE_ENTRY := "40% more Attack Damage if Accuracy Rating is h
 # Schema44 only: the complete, unconditional Fire Mastery65020 source entry.
 const PHYSICAL_FIRE_CONVERSION_ENTRY := "40% of Physical Damage Converted to Fire Damage"
 
+# Schema48 only: exact original mastery and unconditional notable entries.
+# No generic conversion or penetration pattern is admitted by this gate.
+const ELEMENTAL_CONVERSION_ENTRIES := {
+	"40% of Physical Damage Converted to Cold Damage": {"stat":"physical_to_cold_conversion","value":0.4,"mode":"flat"},
+	"40% of Physical Damage Converted to Lightning Damage": {"stat":"physical_to_lightning_conversion","value":0.4,"mode":"flat"},
+	"Damage Penetrates 6% Cold Resistance": {"stat":"cold_penetration","value":0.06,"mode":"flat"},
+	"Damage Penetrates 6% Lightning Resistance": {"stat":"lightning_penetration","value":0.06,"mode":"flat"},
+}
+
 const ZEALOTS_OATH_ENTRY := "Life Regeneration is applied to Energy Shield instead"
 
 const NEGATIVE_PATTERN: String = "^-([0-9]+(?:\\.[0-9]+)?)(?: to maximum (?:Life|Mana|Energy Shield)|% increased (?:Damage|Projectile Damage|Spell Damage|Fire Damage|Cold Damage|Lightning Damage|Elemental Damage|Area Damage|Attack Speed|Movement Speed|Mana Regeneration Rate|maximum Life|maximum Mana|maximum Energy Shield))$"
@@ -152,7 +161,7 @@ static func _expression(pattern: String) -> RegEx:
 	return _regex_cache[pattern]
 
 
-static func parse_line(raw_line: Variant, allow_spatial:bool=true,allow_recharge:bool=true,allow_resource:bool=true,allow_flask:bool=true,allow_critical:bool=true,allow_leech:bool=true,allow_fire_dot:bool=true,allow_faster_burn:bool=true,allow_mana_guard:bool=true,allow_elemental_resistance_cap:bool=true,allow_resolute:bool=true,allow_iron_reflexes:bool=true,allow_zealots_oath:bool=true,allow_physical_fire_conversion:bool=true,allow_precise_technique:bool=true) -> Dictionary:
+static func parse_line(raw_line: Variant, allow_spatial:bool=true,allow_recharge:bool=true,allow_resource:bool=true,allow_flask:bool=true,allow_critical:bool=true,allow_leech:bool=true,allow_fire_dot:bool=true,allow_faster_burn:bool=true,allow_mana_guard:bool=true,allow_elemental_resistance_cap:bool=true,allow_resolute:bool=true,allow_iron_reflexes:bool=true,allow_zealots_oath:bool=true,allow_physical_fire_conversion:bool=true,allow_precise_technique:bool=true,allow_elemental_conversion:bool=true) -> Dictionary:
 	if not raw_line is String:
 		return _unsupported("输入必须是单行英文字符串")
 	var line: String = raw_line
@@ -167,6 +176,8 @@ static func parse_line(raw_line: Variant, allow_spatial:bool=true,allow_recharge
 		return {"supported":true,"reason":"","grants":[{"stat":"physical_to_fire_conversion","value":0.4,"mode":"flat"}]}
 	if allow_spatial and allow_recharge and allow_resource and allow_flask and allow_critical and allow_leech and allow_fire_dot and allow_faster_burn and allow_mana_guard and allow_elemental_resistance_cap and allow_resolute and allow_iron_reflexes and allow_zealots_oath and allow_physical_fire_conversion and allow_precise_technique and line == PRECISE_TECHNIQUE_ENTRY:
 		return {"supported":true,"reason":"","grants":[{"stat":"precise_technique","value":1.0,"mode":"flat"}]}
+	if allow_spatial and allow_recharge and allow_resource and allow_flask and allow_critical and allow_leech and allow_fire_dot and allow_faster_burn and allow_mana_guard and allow_elemental_resistance_cap and allow_resolute and allow_iron_reflexes and allow_zealots_oath and allow_physical_fire_conversion and allow_precise_technique and allow_elemental_conversion and ELEMENTAL_CONVERSION_ENTRIES.has(line):
+		return {"supported":true,"reason":"","grants":[ELEMENTAL_CONVERSION_ENTRIES[line].duplicate(true)]}
 	if line.contains("\n") or line.contains("\r"):
 		return _unsupported("多行文本不支持")
 	if line.strip_edges().is_empty():

@@ -37,6 +37,8 @@ static func summary(cast: Dictionary) -> String:
 		var resolved: Dictionary = Damage.resolve(entry.packet, cast.snapshot.modifiers)
 		parts.append("%s %.2f" % [entry.label, float(resolved.total)])
 	var heading := "非暴击命中预估（未计敌方防御）：" if not cast.get("critical", {}).is_empty() else "命中预估（未计敌方防御）："
+	if bool(cast.get("penetration_profile", {}).get("enabled", false)):
+		heading = "非暴击命中预估（零抗性、零护甲目标，含穿透）：" if not cast.get("critical", {}).is_empty() else "命中预估（零抗性、零护甲目标，含穿透）："
 	return "此技能不直接造成命中伤害" if parts.is_empty() else heading + " / ".join(parts)
 
 static func critical_lines(cast: Dictionary) -> PackedStringArray:
@@ -118,6 +120,8 @@ static func details(cast: Dictionary) -> String:
 	if not bool(cast.get("ok", false)):
 		return str(cast.get("error", "伤害配置无效"))
 	var lines: PackedStringArray = ["逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。"]
+	if bool(cast.get("penetration_profile", {}).get("enabled", false)):
+		lines.append("上方命中预估按零抗性、零护甲目标计算，已计入穿透；分量算式另列防御前数值。")
 	lines.append_array(critical_lines(cast))
 	lines.append_array(leech_lines(cast))
 	lines.append_array(burn_lines(cast))
@@ -126,6 +130,7 @@ static func details(cast: Dictionary) -> String:
 	lines.append_array(trap_lines(cast))
 	lines.append_array(inward_pull_lines(cast))
 	lines.append_array(conversion_lines(cast))
+	lines.append_array(penetration_lines(cast))
 	lines.append_array(precise_technique_lines(cast))
 	if cast.get("recipe", {}).get("delivery", "") == "melee" and cast.get("skill_id", "") == "basic":
 		lines.append("普通近战攻击：距离 %.0f · 最多 %d 个目标；不发射投射物。" % [float(cast.recipe.radius), int(cast.recipe.max_targets)])
@@ -198,9 +203,33 @@ static func conversion_lines(cast: Dictionary) -> PackedStringArray:
 	var lines := PackedStringArray()
 	var profile: Dictionary = cast.get("conversion_profile", {})
 	if not bool(cast.get("ok", false)) or not bool(profile.get("enabled", false)): return lines
+	if int(profile.get("version", 1)) == 2:
+		var requested := PackedStringArray()
+		var effective := PackedStringArray()
+		for element: String in ["fire", "cold", "lightning"]:
+			if profile.requested.has(element): requested.append("%s %.0f%%" % [TYPE_NAMES[element], float(profile.requested[element])*100.0])
+			if profile.effective.has(element): effective.append("%s %.2f%%" % [TYPE_NAMES[element], float(profile.effective[element])*100.0])
+		lines.append("物理转化请求：" + "、".join(requested))
+		lines.append("实际分配：" + "、".join(effective) + "；保留物理 %.2f%%" % (float(profile.physical_fraction)*100.0))
+		if bool(profile.normalized): lines.append("总请求超过100%，按比例分配，天赋选择顺序没有先后优先。")
+		lines.append("转化部分适用物理与目标元素增伤，每条仅计一次。")
+		if "physical_focus" in cast.get("support_ids", []): lines.append("物理专注对各转化部分：×1.20 ×0.80 = ×0.96。")
+		elif "fire_focus" in cast.get("support_ids", []): lines.append("火焰专注：转火部分×0.96，转冰与转雷部分仅×0.80。")
+		return lines
 	lines.append("%.0f%% 物理伤害转为火焰；转化部分同时适用物理和火焰增伤，每条仅计一次。" % (float(profile.fraction) * 100.0))
 	if "physical_focus" in cast.get("support_ids", []) or "fire_focus" in cast.get("support_ids", []):
 		lines.append("类型专注的两条独立效果均作用于转化部分：×1.20 ×0.80 = ×0.96。")
+	return lines
+
+static func penetration_lines(cast: Dictionary) -> PackedStringArray:
+	var lines := PackedStringArray()
+	var profile: Dictionary = cast.get("penetration_profile", {})
+	if not bool(cast.get("ok", false)) or not bool(profile.get("enabled", false)): return lines
+	var parts := PackedStringArray()
+	for element: String in ["cold", "lightning"]:
+		if profile.fractions.has(element): parts.append("%s抗性 %.0f 个百分点" % [TYPE_NAMES[element], float(profile.fractions[element])*100.0])
+	lines.append("本次命中穿透：" + "、".join(parts))
+	lines.append("从目标有效抗性扣除，最低-100%；不修改目标抗性，也不作用于持续伤害。")
 	return lines
 
 static func component_detail_lines(detail: Dictionary) -> PackedStringArray:
@@ -209,6 +238,7 @@ static func component_detail_lines(detail: Dictionary) -> PackedStringArray:
 	var final_name: String = str(names.get(detail.type, detail.type))
 	if not detail.has("parts"):
 		lines.append("%s %.2f × (1 + %.0f%%) × %.2f = %.2f" % [final_name, float(detail.base), float(detail.increased) * 100.0, float(detail.more), float(detail.final)])
+		lines.append_array(penetration_detail_lines(detail))
 		return lines
 	for part: Dictionary in detail.parts:
 		var path := PackedStringArray()
@@ -216,6 +246,7 @@ static func component_detail_lines(detail: Dictionary) -> PackedStringArray:
 		var label: String = "→".join(path) if path.size() > 1 else "原生" + "".join(path)
 		lines.append("%s %.2f × (1 + %.0f%%) × %.2f = %.2f（防御前）" % [label, float(part.base), float(part.increased) * 100.0, float(part.more), float(part.before_defense)])
 	lines.append("%s合计：防御前 %.2f · 防御后 %.2f" % [final_name, float(detail.before_defense), float(detail.final)])
+	lines.append_array(penetration_detail_lines(detail))
 	return lines
 
 
@@ -238,3 +269,8 @@ static func freeze_lines(cast: Dictionary) -> PackedStringArray:
 	lines.append("冻结不刷新；解冻后 %.2f 秒不能再被冻结，所有施法共享。" % float(profile.immunity_seconds))
 	lines.append("暂停自主移动与攻击进度，外力和持续伤害仍生效；不撤销已经发生的攻击。")
 	return lines
+
+
+static func penetration_detail_lines(detail: Dictionary) -> PackedStringArray:
+	if not detail.has("penetration") or float(detail.penetration) <= 0.0: return PackedStringArray()
+	return PackedStringArray(["有效抗性 %.2f%% · 穿透 %.2f 个百分点 · 本次按 %.2f%% 结算" % [float(detail.effective_resistance)*100.0,float(detail.penetration)*100.0,float(detail.resistance)*100.0]])

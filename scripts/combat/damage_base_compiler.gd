@@ -4,6 +4,7 @@ extends RefCounted
 ## remain exclusively in DamageResolver. Local weapon points are resolved first;
 ## the authored intrinsic distribution never converts the weapon contribution.
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
+const Penetration = preload("res://scripts/combat/hit_penetration_rules.gd")
 const Weapon = preload("res://scripts/items/weapon_local_rules.gd")
 const STAGE: String = "hit_base"
 const SCOPES: Array[String] = ["attack", "spell"]
@@ -113,7 +114,7 @@ static func sources_error(value: Variant) -> String:
 
 
 static func packet_error(packet: Variant) -> String:
-	if not packet is Dictionary or packet.size() != (6 if packet.has("conversion") else 5) or not packet.has_all(["base", "tags", "skill_id", "role", "assembly"]):
+	if not packet is Dictionary or packet.size() != 5 + int(packet.has("conversion")) + int(packet.has("penetration")) or not packet.has_all(["base", "tags", "skill_id", "role", "assembly"]):
 		return "冻结伤害包结构无效"
 	if not _typed_points(packet.base) or not packet.skill_id is String or packet.skill_id.is_empty() or not packet.role is String or not ROLES.has(packet.role):
 		return "冻结伤害包来源或点数无效"
@@ -149,7 +150,11 @@ static func packet_error(packet: Variant) -> String:
 	var event_error: String = _event_error(packet.tags, packet.role, float(trace.added_effectiveness))
 	if not event_error.is_empty():
 		return event_error
-	return Damage.conversion_error(packet) if packet.has("conversion") else ""
+	if packet.has("conversion"):
+		var conversion_reason: String = Damage.conversion_error(packet)
+		if not conversion_reason.is_empty():
+			return conversion_reason
+	return Penetration.packet_error(packet)
 
 
 static func _weapon_trace_error(trace: Variant, packet: Dictionary, coefficient: float) -> String:

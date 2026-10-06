@@ -23,15 +23,29 @@ const STAT_CONSUMER_GROUPS := {
 		],
 		"stats": ["precise_technique"]
 	},
-	"physical_fire_conversion": {
-		"evidence": "source_tree_runtime.gd::apply_stats -> combat_data.gd::snapshot/event_packet -> physical_fire_conversion_rules.gd::from_stats/apply -> damage_resolver.gd conversion provenance",
+	"physical_elemental_conversion": {
+		"evidence": "source_tree_runtime.gd::apply_stats -> combat_data.gd::snapshot/event_packet -> physical_fire_conversion_rules.gd::from_stats/apply_snapshot -> damage_resolver.gd conversion provenance",
 		"code_checks": [
-			{"path": "scripts/passives/source_tree_runtime.gd", "contains": "result.physical_to_fire_conversion"},
+			{"path": "scripts/passives/source_tree_runtime.gd", "contains": "physical_to_cold_conversion"},
+			{"path": "scripts/passives/source_tree_runtime.gd", "contains": "physical_to_lightning_conversion"},
 			{"path": "scripts/combat/combat_data.gd", "contains": "Conversion.from_stats(stats)"},
-			{"path": "scripts/combat/combat_data.gd", "contains": "Conversion.apply"},
-			{"path": "scripts/combat/physical_fire_conversion_rules.gd", "contains": "static func apply"},
+			{"path": "scripts/combat/combat_data.gd", "contains": "Conversion.apply_snapshot(packet, snapshot_value)"},
+			{"path": "scripts/combat/physical_fire_conversion_rules.gd", "contains": "const STATS: Dictionary"},
+			{"path": "scripts/combat/damage_resolver.gd", "contains": "packet.conversion.converted_base.get(type, 0.0)"},
 		],
-		"stats": ["physical_to_fire_conversion"]
+		"stats": ["physical_to_fire_conversion", "physical_to_cold_conversion", "physical_to_lightning_conversion"]
+	},
+	"hit_elemental_penetration": {
+		"evidence": "source_tree_runtime.gd::apply_stats -> combat_data.gd::snapshot/event_packet -> hit_penetration_rules.gd::from_stats/attach -> damage_resolver.gd final-type resistance subtraction",
+		"code_checks": [
+			{"path": "scripts/passives/source_tree_runtime.gd", "contains": "cold_penetration"},
+			{"path": "scripts/passives/source_tree_runtime.gd", "contains": "lightning_penetration"},
+			{"path": "scripts/combat/combat_data.gd", "contains": "Penetration.from_stats(stats)"},
+			{"path": "scripts/combat/combat_data.gd", "contains": "Penetration.attach(converted, snapshot_value)"},
+			{"path": "scripts/combat/hit_penetration_rules.gd", "contains": "result.penetration = applicable"},
+			{"path": "scripts/combat/damage_resolver.gd", "contains": "maxf(Penetration.MINIMUM_RESISTANCE, resistance - penetration)"},
+		],
+		"stats": ["cold_penetration", "lightning_penetration"]
 	},
 	"attributes_and_capacity": {
 		"evidence": "source_tree_runtime.gd::apply_stats; canonical_game_state.gd::_stats_for; main.gd resource and hit paths",

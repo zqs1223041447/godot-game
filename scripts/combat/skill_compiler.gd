@@ -21,6 +21,7 @@ const ResourceCost=preload("res://scripts/combat/source_resource_rules.gd")
 const Spatial = preload("res://scripts/combat/source_spatial_rules.gd")
 const BaseCompiler = preload("res://scripts/combat/damage_base_compiler.gd")
 const Conversion = preload("res://scripts/combat/physical_fire_conversion_rules.gd")
+const Penetration = preload("res://scripts/combat/hit_penetration_rules.gd")
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
 const Weapon = preload("res://scripts/items/weapon_local_rules.gd")
 const MAX_INITIAL_PROJECTILES: int = 9
@@ -226,6 +227,7 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 		compiled_snapshot.area_impulse_policy = impulse_profile.duplicate(true)
 		result.area_impulse_profile = impulse_profile
 	_append_conversion_profile(result, packets, compiled_snapshot)
+	_append_penetration_profile(result, packets, compiled_snapshot)
 	var hit_policy: Dictionary = Resolute.compiled_profile(compiled_snapshot)
 	if not hit_policy.is_empty():result.hit_policy = hit_policy
 	_append_precise_profile(result)
@@ -255,6 +257,7 @@ static func compile_basic(snapshot:Dictionary)->Dictionary:
 	if not critical.critical.is_empty():result.critical=critical.critical.duplicate(true)
 	if not leech.leech.is_empty():result.leech=leech.leech.duplicate(true)
 	_append_conversion_profile(result, result.packets, frozen)
+	_append_penetration_profile(result, result.packets, frozen)
 	var hit_policy: Dictionary = Resolute.compiled_profile(frozen)
 	if not hit_policy.is_empty():result.hit_policy = hit_policy
 	_append_precise_profile(result)
@@ -281,6 +284,7 @@ static func _compile_basic_melee(snapshot: Dictionary) -> Dictionary:
 	if not critical.critical.is_empty():result.critical = critical.critical.duplicate(true)
 	if not leech.leech.is_empty():result.leech = leech.leech.duplicate(true)
 	_append_conversion_profile(result, result.packets, frozen)
+	_append_penetration_profile(result, result.packets, frozen)
 	var hit_policy: Dictionary = Resolute.compiled_profile(frozen)
 	if not hit_policy.is_empty():result.hit_policy = hit_policy
 	_append_precise_profile(result)
@@ -341,10 +345,12 @@ static func _failure(error: String) -> Dictionary:
 static func _snapshot_error(snapshot: Dictionary) -> String:
 	# initial_count is reserved for compiled projectile snapshots, including empty supports.
 	# Reject re-entry instead of applying support more factors a second time.
-	if snapshot.has("initial_count") or snapshot.has("compiled_packets") or snapshot.has("compiled_skill_id") or snapshot.has("critical") or snapshot.has("critical_roll") or snapshot.has("leech") or snapshot.has("burn_policy") or snapshot.has("burn_proliferation") or snapshot.has("shock_policy") or snapshot.has("hit_policy") or snapshot.has("area_impulse_policy") or snapshot.has("area_impulse_profile") or snapshot.has("conversion_profile") or snapshot.has("precise_technique_profile") or snapshot.has("freeze_policy") or snapshot.has("freeze_profile"):
+	if snapshot.has("initial_count") or snapshot.has("compiled_packets") or snapshot.has("compiled_skill_id") or snapshot.has("critical") or snapshot.has("critical_roll") or snapshot.has("leech") or snapshot.has("burn_policy") or snapshot.has("burn_proliferation") or snapshot.has("shock_policy") or snapshot.has("hit_policy") or snapshot.has("area_impulse_policy") or snapshot.has("area_impulse_profile") or snapshot.has("conversion_profile") or snapshot.has("precise_technique_profile") or snapshot.has("freeze_policy") or snapshot.has("freeze_profile") or snapshot.has("penetration_profile"):
 		return "施放快照已编译；必须从基础构筑快照重新编译"
 	var conversion_error: String = Conversion.snapshot_error(snapshot)
 	if not conversion_error.is_empty(): return conversion_error
+	var penetration_error: String = Penetration.snapshot_error(snapshot)
+	if not penetration_error.is_empty(): return penetration_error
 	var dot_error:String=Burn.snapshot_multiplier_error(snapshot)
 	if not dot_error.is_empty():return dot_error
 	var critical_error:String=Critical.error(snapshot)
@@ -455,15 +461,32 @@ static func _integer(value: Variant, minimum: int, maximum: int) -> bool:
 static func _append_conversion_profile(result: Dictionary, packets: Dictionary, snapshot: Dictionary) -> void:
 	for value: Variant in packets.values():
 		if value is Dictionary and value.has("conversion"):
-			result.conversion_profile = Conversion.profile(float(snapshot.get(Conversion.STAT, 0.0)))
+			result.conversion_profile = Conversion.profile_from_snapshot(snapshot)
 			return
 		if value is Array:
 			for packet: Dictionary in value:
 				if packet.has("conversion"):
-					result.conversion_profile = Conversion.profile(float(snapshot.get(Conversion.STAT, 0.0)))
+					result.conversion_profile = Conversion.profile_from_snapshot(snapshot)
 					return
 	# A zero source or hit set without physical points needs no frozen policy.
-	if snapshot.has(Conversion.STAT): snapshot.erase(Conversion.STAT)
+	for field: String in Conversion.STATS.values():
+		if snapshot.has(field): snapshot.erase(field)
+
+
+static func _append_penetration_profile(result: Dictionary, packets: Dictionary, snapshot: Dictionary) -> void:
+	if not snapshot.has("hit_penetration"): return
+	var fractions: Dictionary = {}
+	for value: Variant in packets.values():
+		var candidates: Array = value if value is Array else [value]
+		for packet: Variant in candidates:
+			if not packet is Dictionary: continue
+			for type: String in ["cold", "lightning"]:
+				if packet.get("penetration", {}).has(type):
+					fractions[type] = packet.penetration[type]
+	if fractions.is_empty():
+		snapshot.erase("hit_penetration")
+		return
+	result.penetration_profile = Penetration.profile_from_snapshot({"hit_penetration":fractions})
 
 
 static func _append_precise_profile(result: Dictionary) -> void:

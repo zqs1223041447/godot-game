@@ -5,6 +5,7 @@ const Burn=preload("res://scripts/combat/burn_rules.gd")
 const Data = preload("res://scripts/game_data.gd")
 const BaseCompiler = preload("res://scripts/combat/damage_base_compiler.gd")
 const Conversion = preload("res://scripts/combat/physical_fire_conversion_rules.gd")
+const Penetration = preload("res://scripts/combat/hit_penetration_rules.gd")
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
 const Critical=preload("res://scripts/combat/critical_strike_rules.gd")
 const Resolute = preload("res://scripts/combat/resolute_technique_rules.gd")
@@ -71,6 +72,7 @@ static func snapshot(stats: Dictionary, effects: Array) -> Dictionary:
 	if not leech.is_empty():value.leech_modifiers=leech
 	value.merge(Resolute.from_stats(stats))
 	value.merge(Conversion.from_stats(stats))
+	value.merge(Penetration.from_stats(stats))
 	value.merge(Precise.from_stats(stats))
 	var precise_modifier: Dictionary = Precise.attack_modifier(value)
 	if not precise_modifier.is_empty(): value.modifiers.append(precise_modifier)
@@ -216,8 +218,15 @@ static func _frozen_packet(snapshot_value: Dictionary, skill_id: String, role: S
 
 ## Only raw assembly enters this stage. Frozen packet reads above never convert again.
 static func _convert_assembled(snapshot_value: Dictionary, packet: Dictionary) -> Dictionary:
-	if not snapshot_value.has(Conversion.STAT): return packet
-	if not Conversion.snapshot_error(snapshot_value).is_empty(): return {}
-	var fraction: float = float(snapshot_value[Conversion.STAT])
-	if fraction == 0.0 or packet.is_empty(): return packet
-	return Conversion.apply(packet, fraction)
+	# Keep the original absent/fire-only path and its one copy/validation.
+	# Only new elemental requests enter the generalized split stage.
+	var converted: Dictionary = packet
+	if snapshot_value.has("physical_to_cold_conversion") or snapshot_value.has("physical_to_lightning_conversion"):
+		converted = Conversion.apply_snapshot(packet, snapshot_value)
+	elif snapshot_value.has(Conversion.STAT):
+		if not Conversion.snapshot_error(snapshot_value).is_empty(): return {}
+		var fraction: float = float(snapshot_value[Conversion.STAT])
+		if fraction != 0.0 and not packet.is_empty():
+			converted = Conversion.apply(packet, fraction)
+	if converted.is_empty() or not snapshot_value.has("hit_penetration"): return converted
+	return Penetration.attach(converted, snapshot_value)
