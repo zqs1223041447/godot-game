@@ -5,65 +5,12 @@ const WINDOW_SECONDS: float = 0.20
 const VISIBLE_LIFETIME: float = 0.75
 const MAX_PENDING: int = 303
 const MAX_VISIBLE: int = 48
-const MAX_OUTCOMES: int = 32
-const MAX_OBSERVATION_PENDING: int = 24
-const MAX_OBSERVATION_VISIBLE: int = 8
 var _time: float = 0.0
 var _epoch: int = 0
 var _next_sequence: int = 0
 var _next_id: int = 0
 var _pending: Dictionary = {}
 var _visible: Dictionary = {}
-var _next_outcome_id: int = 0
-var _next_observation_id: int = 0
-var _outcomes: Array[Dictionary] = []
-var _observation_pending: Dictionary = {}
-var _observation_visible: Dictionary = {}
-
-## Observe settled outcomes without participating in damage aggregation or RNG.
-func observe(event: Variant) -> Dictionary:
-	var reason: String = _observation_error(event)
-	if not reason.is_empty(): return _failure(reason)
-	var key: String = _key(event.target_kind, event.target_id, "evaded")
-	var deadline: float = 0.0
-	if event.outcome == "evaded" and not _observation_pending.has(key):
-		deadline = _time + WINDOW_SECONDS
-		if not is_finite(deadline) or deadline <= _time:
-			return _failure("Observation window deadline is not representable")
-	_next_outcome_id += 1
-	var receipt: Dictionary = {"id":_next_outcome_id, "outcome":event.outcome,
-		"target_kind":event.target_kind, "target_id":event.target_id,
-		"position":event.position, "at":float(event.at),
-		"skill_id":event.get("skill_id", ""), "phase":event.get("phase", ""),
-		"cast_id":event.get("cast_id", 0), "projectile_id":event.get("projectile_id", 0)}
-	if event.outcome == "evaded": receipt.chance = float(event.chance)
-	_outcomes.append(receipt)
-	if _outcomes.size() > MAX_OUTCOMES: _outcomes.pop_front()
-	if event.outcome != "evaded": return _success()
-	if _observation_pending.has(key):
-		var pending: Dictionary = _observation_pending[key]
-		pending.count += 1
-		pending.position = event.position
-		return _success()
-	if _observation_pending.size() >= MAX_OBSERVATION_PENDING:
-		_observation_pending.erase(_oldest_key(_observation_pending))
-	_observation_pending[key] = {"target_kind":event.target_kind,
-		"target_id":event.target_id, "kind":"evaded", "count":1,
-		"position":event.position, "deadline":deadline, "sequence":_next_outcome_id}
-	return _success()
-
-func outcomes() -> Array[Dictionary]:
-	return _outcomes.duplicate(true)
-
-func observation_entries() -> Array[Dictionary]:
-	var result: Array[Dictionary] = []
-	for key: String in _ordered_keys(_observation_visible):
-		var value: Dictionary = _observation_visible[key]
-		result.append({"id":value.id, "target_kind":value.target_kind,
-			"target_id":value.target_id, "kind":"evaded", "count":value.count,
-			"position":value.position, "age":_time-float(value.born),
-			"lifetime":VISIBLE_LIFETIME})
-	return result
 
 func record(event: Variant) -> Dictionary:
 	var reason: String = _event_error(event)
@@ -110,7 +57,6 @@ func advance(delta: Variant) -> Dictionary:
 		_publish(key, deadline)
 	_time = until
 	_expire_at(_time)
-	_advance_observations(until)
 	return _success()
 
 func flush_target(target_kind: Variant, target_id: Variant) -> Dictionary:
@@ -120,9 +66,6 @@ func flush_target(target_kind: Variant, target_id: Variant) -> Dictionary:
 		var pending: Dictionary = _pending[key]
 		if pending.target_kind == target_kind and pending.target_id == target_id:
 			_publish(key, _time)
-	var observation_key: String = _key(target_kind, target_id, "evaded")
-	_observation_pending.erase(observation_key)
-	_observation_visible.erase(observation_key)
 	return _success()
 
 func reset() -> void:
@@ -131,9 +74,6 @@ func reset() -> void:
 	_next_sequence = 0
 	_pending.clear()
 	_visible.clear()
-	_outcomes.clear()
-	_observation_pending.clear()
-	_observation_visible.clear()
 	# Output IDs stay unique after a reset even when gameplay target IDs repeat.
 
 func entries() -> Array[Dictionary]:
@@ -161,29 +101,6 @@ func _expire_at(at: float) -> void:
 	for key: String in _visible.keys():
 		if at >= float(_visible[key].born) + VISIBLE_LIFETIME: _visible.erase(key)
 
-func _advance_observations(until: float) -> void:
-	if _observation_pending.is_empty() and _observation_visible.is_empty(): return
-	for key: String in _ordered_keys(_observation_pending):
-		var deadline: float = float(_observation_pending[key].deadline)
-		if deadline > until: break
-		_expire_observations_at(deadline)
-		var value: Dictionary = _observation_pending[key]
-		_observation_pending.erase(key)
-		_next_observation_id += 1
-		# The renderer may combine damage and observation rows; keep IDs disjoint.
-		value.id = -_next_observation_id
-		value.born = deadline
-		value.sequence = _next_observation_id
-		_observation_visible[key] = value
-		if _observation_visible.size() > MAX_OBSERVATION_VISIBLE:
-			_observation_visible.erase(_oldest_key(_observation_visible))
-	_expire_observations_at(until)
-
-func _expire_observations_at(at: float) -> void:
-	for key: String in _observation_visible.keys():
-		if at >= float(_observation_visible[key].born) + VISIBLE_LIFETIME:
-			_observation_visible.erase(key)
-
 func _key(target_kind: String, target_id: int, kind: String) -> String:
 	return "%d:%s:%d:%s" % [_epoch, target_kind, target_id, kind]
 
@@ -210,32 +127,6 @@ static func _event_error(event: Variant) -> String:
 	if not _nonnegative_number(event.shield_spent) or not _nonnegative_number(event.health_lost):
 		return "Feedback resource loss must be finite and nonnegative"
 	if typeof(event.position) != TYPE_VECTOR2 or not event.position.is_finite(): return "Feedback position must be a finite Vector2"
-	return ""
-
-static func _observation_error(event: Variant) -> String:
-	if not event is Dictionary: return "Observation event must be a dictionary"
-	for field: String in ["outcome", "target_kind", "target_id", "position", "at"]:
-		if not event.has(field): return "Observation event is missing " + field
-	if typeof(event.outcome) != TYPE_STRING or event.outcome not in ["evaded", "zero_damage", "terrain_blocked", "spawn_protected"]:
-		return "Observation outcome must be evaded, zero_damage, terrain_blocked, or spawn_protected"
-	var terrain: bool = event.outcome == "terrain_blocked"
-	if typeof(event.target_kind) != TYPE_STRING or event.target_kind != ("environment" if terrain else "monster"):
-		return "Observation target kind must match outcome: environment for terrain_blocked, monster otherwise"
-	if typeof(event.target_id) != TYPE_INT or (event.target_id != 0 if terrain else event.target_id <= 0):
-		return "Observation target ID must be environment zero or a positive monster integer"
-	if typeof(event.position) != TYPE_VECTOR2 or not event.position.is_finite():
-		return "Observation position must be a finite Vector2"
-	if not _nonnegative_number(event.at): return "Observation at must be finite and nonnegative"
-	if event.outcome == "evaded":
-		if not event.has("chance"): return "Observation event is missing chance"
-		if not _nonnegative_number(event.chance) or float(event.chance) > 1.0:
-			return "Observation chance must be finite and between zero and one"
-	for field: String in ["skill_id", "phase"]:
-		if event.has(field) and typeof(event[field]) != TYPE_STRING:
-			return "Observation " + field + " must be a String"
-	for field: String in ["cast_id", "projectile_id"]:
-		if event.has(field) and (typeof(event[field]) != TYPE_INT or event[field] < 0):
-			return "Observation " + field + " must be a nonnegative integer"
 	return ""
 
 static func _target_error(target_kind: Variant, target_id: Variant) -> String:

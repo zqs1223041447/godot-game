@@ -12,6 +12,7 @@ static func amount_text(amount: float) -> String:
 	return str(roundi(amount))
 
 static func presentation(row: Dictionary) -> Dictionary:
+	if str(row.get("kind", "")) == "evaded": return evasion_presentation(row)
 	var amount := float(row.get("amount", 0.0))
 	var lifetime := float(row.get("lifetime", 0.75))
 	var age := float(row.get("age", 0.0))
@@ -55,3 +56,14 @@ static func draw(arena: Node2D, rows: Array, preferences: RefCounted) -> void:
 		arena.draw_string_outline(arena._font, offset, text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, 3, Color(0.09,0.07,0.04,color.a))
 		arena.draw_string(arena._font, offset, text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, color)
 		arena.draw_set_transform(Vector2.ZERO)
+
+
+static func evasion_presentation(row: Dictionary) -> Dictionary:
+	var lifetime := float(row.get("lifetime", 0.75))
+	var age := float(row.get("age", 0.0))
+	var count := int(row.get("count", 0))
+	if str(row.get("target_kind", "")) != "monster" or count < 1 or not is_finite(lifetime) or not is_finite(age) or lifetime <= 0.0 or age < 0.0 or age >= lifetime: return {}
+	var progress := clampf(age / lifetime, 0.0, 1.0)
+	var color := Color("c5c3b4")
+	color.a = clampf((1.0 - progress) / 0.35, 0.0, 1.0)
+	return {"text":"闪避" if count == 1 else "闪避 ×%d" % count,"color":color,"font_size":14,"offset":Vector2(0,-69.0-8.0*progress)}

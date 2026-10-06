@@ -1440,6 +1440,8 @@ func _settle_projectile_events(events:Array[Dictionary],original_delta:float=0.0
 					hit_targets[enemy.id] = true
 					_apply_damage_packet(enemy, event.payload, secondary.snapshot, event.color, 0.0, event)
 			visual_cues.emit_cue("explosion", event.pos, {"radius": float(event.radius), "color": event.color})
+		elif event.type == "terrain_hit":
+			_observe_combat_outcome("terrain_blocked", "environment", 0, Vector2(event.pos), {}, event)
 		elif event.type == "return_started":
 			visual_cues.emit_cue("return", event.pos, {"radius": 19.0, "color": Color("bd98ff")})
 		elif event.type == "split":
@@ -1473,9 +1475,14 @@ func _apply_damage_packet(enemy: Dictionary, packet: Dictionary, snapshot: Dicti
 		if _burn_step_active and provenance.has("time") and previous>burn_at and previous<=elapsed and is_equal_approx(float(provenance.time),previous-_burn_step_start):burn_at=previous
 		if ember_hit:_advance_proliferating_burns(burn_at)
 		else:_advance_monster_burn(enemy,burn_at)
-	if float(enemy.health) <= 0.0 or float(enemy.get("spawn", 0.0)) > 0.0:
+	if float(enemy.health) <= 0.0:
 		return
-	if not provenance.get("accuracy_checked",false) and not _attack_admitted(enemy,packet,snapshot): return
+	if float(enemy.get("spawn", 0.0)) > 0.0:
+		# Only this real settlement refusal is observed. Earlier targeting and
+		# contact filters remain silent; no geometry query is replayed for logs.
+		_observe_combat_outcome("spawn_protected", "monster", int(enemy.id), Vector2(enemy.pos), packet, provenance)
+		return
+	if not provenance.get("accuracy_checked",false) and not _attack_admitted(enemy,packet,snapshot,provenance): return
 	var critical:Dictionary=snapshot.get("critical_roll",{})
 	# Read only this hit's frozen policy, never the currently equipped build.
 	if snapshot.has("resolute_technique") and Resolute.active(snapshot): critical={}
@@ -1487,6 +1494,8 @@ func _apply_damage_packet(enemy: Dictionary, packet: Dictionary, snapshot: Dicti
 	var settlement: Dictionary = Defense.settle_resolved(result, float(enemy.get("shield", 0.0)), float(enemy.health))
 	if not settlement.ok:
 		return
+	if float(settlement.shield_spent) + float(settlement.health_lost) == 0.0:
+		_observe_combat_outcome("zero_damage", "monster", int(enemy.id), Vector2(enemy.pos), packet, provenance)
 	var record: Dictionary = {"target_id": enemy.id, "skill_id": packet.skill_id, "tags": packet.tags.duplicate(),
 		"components": result.components, "details": result.details, "total": result.total,
 		"before_defense_components": settlement.raw_components, "prevented_components": settlement.mitigated_components,
@@ -1537,10 +1546,10 @@ func _apply_damage_packet(enemy: Dictionary, packet: Dictionary, snapshot: Dicti
 
 func _projectile_contact_admitted(shot: Dictionary,target_id: int) -> bool:
 	if not _projectile_targets.has(target_id): return false
-	return _attack_admitted(_projectile_targets[target_id],shot.payload,shot.snapshot)
+	return _attack_admitted(_projectile_targets[target_id],shot.payload,shot.snapshot,shot)
 
 
-func _attack_admitted(enemy: Dictionary,packet: Dictionary,snapshot: Dictionary) -> bool:
+func _attack_admitted(enemy: Dictionary,packet: Dictionary,snapshot: Dictionary,provenance: Dictionary = {}) -> bool:
 	if snapshot.has("resolute_technique") and not Resolute.snapshot_error(snapshot).is_empty(): return false
 	var unerring: bool = snapshot.has("resolute_technique") and Resolute.active(snapshot)
 	if not packet.get("tags",[]).has("attack") or (not snapshot.has("accuracy") and not unerring): return true
@@ -1552,6 +1561,10 @@ func _attack_admitted(enemy: Dictionary,packet: Dictionary,snapshot: Dictionary)
 	if not result.ok: return false
 	enemy.evasion_entropy = result.entropy
 	_record_attack_admission("monster",int(enemy.id),result)
+	if not result.hit:
+		# Consume the one authoritative admission result. Projectile evaded
+		# events can also mean invalid input, so they are never another source.
+		_observe_combat_outcome("evaded", "monster", int(enemy.id), Vector2(enemy.pos), packet, provenance, float(result.chance))
 	return bool(result.hit)
 
 
@@ -2073,7 +2086,38 @@ func _record_damage_feedback(target_kind: String, target_id: int, kind: String, 
 
 
 func damage_feedback() -> Array[Dictionary]:
-	return feedback_runtime.entries()
+	var result: Array[Dictionary] = feedback_runtime.entries()
+	# Damage keeps its original queue, order and priority. Observation markers
+	# only occupy spare presentation rows; neither queue can affect combat.
+	var remaining: int = FeedbackRuntime.MAX_VISIBLE - result.size()
+	if remaining > 0:
+		var observations: Array[Dictionary] = feedback_runtime.observation_entries()
+		for index: int in range(mini(remaining, observations.size())):
+			result.append(observations[index])
+	return result
+
+
+func _observe_combat_outcome(outcome: String, target_kind: String, target_id: int,
+		position: Vector2, packet: Dictionary = {}, provenance: Dictionary = {}, chance: float = -1.0) -> void:
+	# at is the simulation clock at observation, not a reconstructed impact
+	# time. This independent sink never inserts into the projectile event batch.
+	var event: Dictionary = {"outcome":outcome, "target_kind":target_kind, "target_id":target_id,
+		"position":position, "at":elapsed, "skill_id":str(packet.get("skill_id", "")),
+		"cast_id":_known_observation_id(provenance.get("cast_id", 0)),
+		"projectile_id":_known_observation_id(provenance.get("projectile_id", provenance.get("id", 0))),
+		"phase":str(provenance.get("phase", provenance.get("state", "direct")))}
+	if outcome == "evaded": event.chance = chance
+	# An observation rejection must not interrupt otherwise unchanged combat.
+	# The sink validates atomically; no fabricated fallback record is emitted.
+	feedback_runtime.observe(event)
+
+
+static func _known_observation_id(value: Variant) -> int:
+	return int(value) if typeof(value) == TYPE_INT and value > 0 else 0
+
+
+func combat_outcomes() -> Array[Dictionary]:
+	return feedback_runtime.outcomes()
 
 
 func burn_statuses()->Array[Dictionary]:

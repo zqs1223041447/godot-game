@@ -1203,19 +1203,25 @@ func _build_combat_panel() -> void:
 			var record: Dictionary = records[index]
 			var parts: PackedStringArray = []
 			for type: String in record.components:
-				parts.append("%s %.2f" % [type, float(record.components[type])])
-			var damage_label: Label = _wrap_label("施放 #%d / 敌人 #%d · %s · 减伤后 %.2f（%s）" % [int(record.cast_id), int(record.target_id), "爆炸" if record.tags.has("explosion") else "返回命中" if record.phase == "returning" else "去程或直接命中", float(record.total), " + ".join(parts)], 14, GOLD if record.tags.has("explosion") else CYAN)
-			damage_label.tooltip_text = "敌方防御前：%s\n敌方防御后：%s\n护盾消耗 %.2f · 生命损失 %.2f；逐次命中，非每秒伤害。" % [TypedPreview.points(record.get("before_defense_components", {})), TypedPreview.points(record.components), float(record.get("shield_spent", 0.0)), float(record.get("health_lost", 0.0))]
+				parts.append("%s %s" % [type, observed_damage_text(float(record.components[type]))])
+			var damage_label: Label = _wrap_label("施放 #%d / 敌人 #%d · %s · 减伤后 %s（%s）" % [int(record.cast_id), int(record.target_id), "爆炸" if record.tags.has("explosion") else "返回命中" if record.phase == "returning" else "去程或直接命中", observed_damage_text(float(record.total)), " + ".join(parts)], 14, GOLD if record.tags.has("explosion") else CYAN)
+			damage_label.tooltip_text = "敌方防御前：%s\n敌方防御后：%s\n护盾消耗 %s · 生命损失 %s；逐次命中，非每秒伤害。" % [TypedPreview.points(record.get("before_defense_components", {})), TypedPreview.points(record.components), observed_damage_text(float(record.get("shield_spent", 0.0))), observed_damage_text(float(record.get("health_lost", 0.0)))]
 			damage_label.mouse_filter = Control.MOUSE_FILTER_PASS
 			_panel_body.add_child(damage_label)
 	var trace: Array = _arena.get("combat_trace")
 	var lines: PackedStringArray = []
-	var names: Dictionary = {"split": "分裂", "spawned": "子箭生成", "range_reached": "抵达射程", "return_started": "开始返回", "lifetime_expired": "寿命耗尽", "flight_ended": "自然飞行结束", "explosion": "爆炸", "terminated": "已终止", "hit": "碰撞命中", "spawn_rejected": "容量取消"}
+	var names: Dictionary = {"split": "分裂", "spawned": "子箭生成", "range_reached": "抵达射程", "return_started": "开始返回", "lifetime_expired": "寿命耗尽", "flight_ended": "自然飞行结束", "explosion": "爆炸", "terminated": "已终止", "hit": "碰撞命中", "spawn_rejected": "容量取消", "evaded": "攻击准入未通过（查看判定结果）", "terrain_hit": "投射物撞墙"}
 	for index: int in range(maxi(0, trace.size() - 12), trace.size()):
 		var event: Dictionary = trace[index]
 		lines.append("施放 #%d · 箭 #%d ← 母箭 #%d · %.3f 秒 · %s" % [int(event.cast_id), int(event.projectile_id), int(event.parent_id), float(event.age), names.get(event.type, event.type)])
 	if not lines.is_empty():
 		_panel_body.add_child(_wrap_label("\n".join(lines), 13))
+	if _arena.has_method("combat_outcomes"):
+		var outcomes: Array = _arena.combat_outcomes()
+		if not outcomes.is_empty():
+			_section("命中判定结果", "只记录已知结果；出生保护不含预选阶段被排除的目标")
+			for outcome: Dictionary in outcomes.slice(maxi(0,outcomes.size()-32)):
+				_panel_body.add_child(_wrap_label(combat_outcome_text(outcome),13))
 	_panel_footer.text = "F6 随时查看 · 命中按每枚箭每阶段每敌人一次 · 不同子箭与不同爆炸可分别命中 · 记录保留最近事件"
 
 
@@ -1727,3 +1733,21 @@ static func world_caption(context: Dictionary) -> String:
 	if str(context.get("mode", "")) in ["town", "normal_town"]:
 		return "测试城镇" if bool(context.get("test_mode", false)) else "正式城镇"
 	return "灰烬庭院"
+
+
+static func observed_damage_text(value: float) -> String:
+	if value > 0.0 and value < 0.01: return "<0.01"
+	return "%.2f" % value
+
+static func combat_outcome_text(row: Dictionary) -> String:
+	var labels := {"evaded":"攻击被闪避", "zero_damage":"已命中，实际损失为零", "terrain_blocked":"投射物撞墙", "spawn_protected":"出生保护：进入结算后被拒绝"}
+	var outcome: String = str(row.get("outcome", ""))
+	var text: String = str(labels.get(outcome, "未分类结果"))
+	var target_id: int = int(row.get("target_id", 0))
+	var cast_id: int = int(row.get("cast_id", 0))
+	text += " · 敌人 #%d" % target_id if target_id > 0 else " · 目标未知"
+	text += " · 施放 #%d" % cast_id if cast_id > 0 else " · 施放编号未知"
+	if int(row.get("projectile_id", 0)) > 0: text += " · 箭 #%d" % int(row.projectile_id)
+	if outcome == "evaded" and row.has("chance"): text += " · 本次命中率 %.1f%%" % (float(row.chance)*100.0)
+	if row.has("at"): text += " · 记录时刻 %.3f 秒" % float(row.at)
+	return text
