@@ -1,0 +1,2579 @@
+{
+	"budget": 23,
+	"class_id": 2,
+	"level": 19,
+	"rows": {
+		"critical12": {
+			"basic_blade": {
+				"components": {
+					"physical": 37.82
+				},
+				"cooldown": 0.0,
+				"critical": {
+					"chance": 0.05,
+					"multiplier": 1.5
+				},
+				"mana": 0.0,
+				"raw_noncritical": 37.82,
+				"recipe": {
+					"delivery": "melee",
+					"half_angle": 0.7853981633974483,
+					"max_targets": 1,
+					"radius": 60.0
+				},
+				"supports": [],
+				"tags": [
+					"hit",
+					"attack",
+					"melee"
+				],
+				"targets": {
+					"crawler": {
+						"armour": 0.0,
+						"critical_hit": 56.730000000000004,
+						"evasion": 0.0,
+						"expected_one_attempt": 38.7655,
+						"hit_chance": 1.0,
+						"noncritical_hit": 37.82,
+						"resistances": {
+							"fire": 0.0
+						}
+					},
+					"ember_guard": {
+						"armour": 0.0,
+						"critical_hit": 56.730000000000004,
+						"evasion": 0.0,
+						"expected_one_attempt": 38.7655,
+						"hit_chance": 1.0,
+						"noncritical_hit": 37.82,
+						"resistances": {
+							"fire": 0.25
+						}
+					},
+					"skitter": {
+						"armour": 0.0,
+						"critical_hit": 56.730000000000004,
+						"evasion": 320.0,
+						"expected_one_attempt": 38.7655,
+						"hit_chance": 1.0,
+						"noncritical_hit": 37.82,
+						"resistances": {
+							"fire": 0.0
+						}
+					}
+				},
+				"trap": {
+
+				}
+			},
+			"cleave_blade": {
+				"components": {
+					"physical": 105.896
+				},
+				"cooldown": 1.4,
+				"critical": {
+					"chance": 0.05,
+					"multiplier": 1.5
+				},
+				"mana": 12.0,
+				"raw_noncritical": 105.896,
+				"recipe": {
+					"half_angle": 1.5707963267948966,
+					"radius": 95.0
+				},
+				"supports": [],
+				"tags": [
+					"hit",
+					"attack",
+					"melee",
+					"area"
+				],
+				"targets": {
+					"crawler": {
+						"armour": 0.0,
+						"critical_hit": 158.844,
+						"evasion": 0.0,
+						"expected_one_attempt": 108.54339999999999,
+						"hit_chance": 1.0,
+						"noncritical_hit": 105.896,
+						"resistances": {
+							"fire": 0.0
+						}
+					},
+					"ember_guard": {
+						"armour": 0.0,
+						"critical_hit": 158.844,
+						"evasion": 0.0,
+						"expected_one_attempt": 108.54339999999999,
+						"hit_chance": 1.0,
+						"noncritical_hit": 105.896,
+						"resistances": {
+							"fire": 0.25
+						}
+					},
+					"skitter": {
+						"armour": 0.0,
+						"critical_hit": 158.844,
+						"evasion": 320.0,
+						"expected_one_attempt": 108.54339999999999,
+						"hit_chance": 1.0,
+						"noncritical_hit": 105.896,
+						"resistances": {
+							"fire": 0.0
+						}
+					}
+				},
+				"trap": {
+
+				}
+			},
+			"meteor_ambush": {
+				"components": {
+					"fire": 98.68499999999999
+				},
+				"cooldown": 8.0,
+				"critical": {
+					"chance": 0.05,
+					"multiplier": 1.5
+				},
+				"mana": 40.0,
+				"raw_noncritical": 98.68499999999999,
+				"recipe": {
+					"radius": 110.0
+				},
+				"supports": [
+					"ambush"
+				],
+				"tags": [
+					"hit",
+					"spell",
+					"area"
+				],
+				"targets": {
+					"crawler": {
+						"armour": 0.0,
+						"critical_hit": 148.02749999999997,
+						"evasion": 0.0,
+						"expected_one_attempt": 101.15212499999998,
+						"hit_chance": 1.0,
+						"noncritical_hit": 98.68499999999999,
+						"resistances": {
+							"fire": 0.0
+						}
+					},
+					"ember_guard": {
+						"armour": 0.0,
+						"critical_hit": 111.02062499999998,
+						"evasion": 0.0,
+						"expected_one_attempt": 75.86409374999998,
+						"hit_chance": 1.0,
+						"noncritical_hit": 74.01374999999999,
+						"resistances": {
+							"fire": 0.25
+						}
+					},
+					"skitter": {
+						"armour": 0.0,
+						"critical_hit": 148.02749999999997,
+						"evasion": 320.0,
+						"expected_one_attempt": 101.15212499999998,
+						"hit_chance": 1.0,
+						"noncritical_hit": 98.68499999999999,
+						"resistances": {
+							"fire": 0.0
+						}
+					}
+				},
+				"trap": {
+					"arming_seconds": 0.35,
+					"enabled": true,
+					"hit_multiplier": 0.85,
+					"lifetime_seconds": 12.0,
+					"mana_multiplier": 1.25,
+					"maximum_traps": 3,
+					"trigger_radius": 70.0
+				}
+			},
+			"nova_ambush": {
+				"components": {
+					"lightning": 61.965
+				},
+				"cooldown": 6.0,
+				"critical": {
+					"chance": 0.05,
+					"multiplier": 1.5
+				},
+				"mana": 30.0,
+				"raw_noncritical": 61.965,
+				"recipe": {
+					"radius": 155.0
+				},
+				"supports": [
+					"ambush"
+				],
+				"tags": [
+					"hit",
+					"spell",
+					"area"
+				],
+				"targets": {
+					"crawler": {
+						"armour": 0.0,
+						"critical_hit": 92.9475,
+						"evasion": 0.0,
+						"expected_one_attempt": 63.51412500000001,
+						"hit_chance": 1.0,
+						"noncritical_hit": 61.965,
+						"resistances": {
+							"fire": 0.0
+						}
+					},
+					"ember_guard": {
+						"armour": 0.0,
+						"critical_hit": 92.9475,
+						"evasion": 0.0,
+						"expected_one_attempt": 63.51412500000001,
+						"hit_chance": 1.0,
+						"noncritical_hit": 61.965,
+						"resistances": {
+							"fire": 0.25
+						}
+					},
+					"skitter": {
+						"armour": 0.0,
+						"critical_hit": 92.9475,
+						"evasion": 320.0,
+						"expected_one_attempt": 63.51412500000001,
+						"hit_chance": 1.0,
+						"noncritical_hit": 61.965,
+						"resistances": {
+							"fire": 0.0
+						}
+					}
+				},
+				"trap": {
+					"arming_seconds": 0.35,
+					"enabled": true,
+					"hit_multiplier": 0.85,
+					"lifetime_seconds": 12.0,
+					"mana_multiplier": 1.25,
+					"maximum_traps": 3,
+					"trigger_radius": 70.0
+				}
+			},
+			"nova_direct": {
+				"components": {
+					"lightning": 72.9
+				},
+				"cooldown": 6.0,
+				"critical": {
+					"chance": 0.05,
+					"multiplier": 1.5
+				},
+				"mana": 24.0,
+				"raw_noncritical": 72.9,
+				"recipe": {
+					"radius": 155.0
+				},
+				"supports": [],
+				"tags": [
+					"hit",
+					"spell",
+					"area"
+				],
+				"targets": {
+					"crawler": {
+						"armour": 0.0,
+						"critical_hit": 109.35000000000001,
+						"evasion": 0.0,
+						"expected_one_attempt": 74.7225,
+						"hit_chance": 1.0,
+						"noncritical_hit": 72.9,
+						"resistances": {
+							"fire": 0.0
+						}
+					},
+					"ember_guard": {
+						"armour": 0.0,
+						"critical_hit": 109.35000000000001,
+						"evasion": 0.0,
+						"expected_one_attempt": 74.7225,
+						"hit_chance": 1.0,
+						"noncritical_hit": 72.9,
+						"resistances": {
+							"fire": 0.25
+						}
+					},
+					"skitter": {
+						"armour": 0.0,
+						"critical_hit": 109.35000000000001,
+						"evasion": 320.0,
+						"expected_one_attempt": 74.7225,
+						"hit_chance": 1.0,
+						"noncritical_hit": 72.9,
+						"resistances": {
+							"fire": 0.0
+						}
+					}
+				},
+				"trap": {
+
+				}
+			},
+			"paid_points": 12,
+			"route": [
+				"50459",
+				"39821",
+				"52904",
+				"444",
+				"61306",
+				"60942",
+				"32555",
+				"22266",
+				"14804",
+				"28658",
+				"41119",
+				"12794",
+				"30455"
+			],
+			"stats": {
+				"accuracy": 284.0,
+				"accuracy_increased": 0.0,
+				"additional_skill_slots": 0.0,
+				"area_increased": 0.0,
+				"area_size_increased": 0.0,
+				"armour": 0.0,
+				"armour_increased": 0.0,
+				"attack_added_fire": 0.0,
+				"attack_added_physical": 0.0,
+				"attack_crit_chance_increased": 0.0,
+				"attack_elemental_increased": 0.0,
+				"attack_life_leech": 0.0,
+				"attack_mana_leech": 0.0,
+				"attack_physical_increased": 0.0,
+				"attack_speed": 1.7,
+				"attack_speed_increased": 0.0,
+				"chaos_increased": 0.0,
+				"cold_increased": 0.0,
+				"cold_resistance": 0.0,
+				"crit_base_chance": 0.05,
+				"crit_base_multiplier": 1.5,
+				"crit_chance_increased": 0.0,
+				"crit_multiplier_add": 0.0,
+				"damage": 18.0,
+				"damage_taken_from_mana_before_life": 0.0,
+				"damaging_ailments_faster": 0.0,
+				"dexterity": 92.0,
+				"elemental_increased": 0.3,
+				"evasion": 41.3,
+				"evasion_increased": 0.0,
+				"fire_dot_multiplier_add": 0.0,
+				"fire_increased": 0.0,
+				"fire_resistance": 0.0,
+				"flask_charges_gained_increased": 0.0,
+				"flask_life_recovery_increased": 0.0,
+				"flask_mana_recovery_increased": 0.0,
+				"global_increased": 0.2,
+				"intelligence": 14.0,
+				"life_leech_max_rate_increased": 0.0,
+				"life_leech_rate_increased": 0.0,
+				"life_regen": 0.0,
+				"life_regen_percent": 0.0,
+				"lightning_increased": 0.0,
+				"lightning_resistance": 0.0,
+				"mana_cost_efficiency_increased": 0.0,
+				"mana_cost_increased": 0.0,
+				"mana_leech_max_rate_increased": 0.0,
+				"mana_leech_rate_increased": 0.0,
+				"mana_regen": 10.260000000000002,
+				"mana_regen_increased": 0.14,
+				"max_health": 141.0,
+				"max_mana": 129.0,
+				"max_shield": 75.75,
+				"maximum_cold_resistance_add": 0.0,
+				"maximum_fire_resistance_add": 0.0,
+				"maximum_lightning_resistance_add": 0.0,
+				"melee_area_size_increased": 0.0,
+				"melee_crit_chance_increased": 0.0,
+				"melee_crit_multiplier_add": 0.0,
+				"melee_physical_increased": 0.02,
+				"move_speed": 240.0,
+				"move_speed_increased": 0.0,
+				"physical_attack_life_leech": 0.0,
+				"physical_attack_mana_leech": 0.0,
+				"physical_increased": 0.0,
+				"projectile_attack_crit_chance_increased": 1.1500000000000001,
+				"projectile_attack_crit_multiplier_add": 0.5,
+				"projectile_count": 0.0,
+				"projectile_increased": 0.0,
+				"projectile_speed_increased": 0.0,
+				"resolute_technique": 0.0,
+				"shield_recharge_delay": 4.0,
+				"shield_recharge_rate": 13.0,
+				"shield_recharge_rate_increased": 0.0,
+				"shield_recharge_start_faster": 0.0,
+				"shield_regen": 13.0,
+				"spell_added_cold": 0.0,
+				"spell_added_lightning": 0.0,
+				"spell_area_size_increased": 0.0,
+				"spell_crit_chance_increased": 0.0,
+				"spell_crit_multiplier_add": 0.0,
+				"spell_increased": 0.0,
+				"strength": 14.0
+			},
+			"tornado_bow": {
+				"components": {
+					"fire": 10.8,
+					"physical": 28.559999999999995
+				},
+				"cooldown": 2.5,
+				"critical": {
+					"chance": 0.10750000000000003,
+					"multiplier": 2.0
+				},
+				"mana": 18.0,
+				"raw_noncritical": 39.36,
+				"recipe": {
+					"child": {
+						"added_effectiveness": 0.7,
+						"coefficient": 0.7,
+						"lifetime": 1.7,
+						"pierce": -1,
+						"radius": 4.5,
+						"range": 150.0,
+						"role": "child",
+						"speed": 260.0,
+						"split": false
+					},
+					"child_count": 3,
+					"explosion": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"initial_count": 3,
+					"parent": {
+						"added_effectiveness": 1.0,
+						"coefficient": 1.0,
+						"lifetime": 0.9,
+						"pierce": -1,
+						"radius": 6.0,
+						"range": 150.0,
+						"role": "parent",
+						"speed": 420.0,
+						"split": true
+					},
+					"parent_count": 3,
+					"spread": 0.16
+				},
+				"supports": [],
+				"tags": [
+					"hit",
+					"attack",
+					"projectile"
+				],
+				"targets": {
+					"crawler": {
+						"armour": 0.0,
+						"critical_hit": 78.72,
+						"evasion": 0.0,
+						"expected_one_attempt": 43.5912,
+						"hit_chance": 1.0,
+						"noncritical_hit": 39.36,
+						"resistances": {
+							"fire": 0.0
+						}
+					},
+					"ember_guard": {
+						"armour": 0.0,
+						"critical_hit": 73.32,
+						"evasion": 0.0,
+						"expected_one_attempt": 40.60095,
+						"hit_chance": 1.0,
+						"noncritical_hit": 36.66,
+						"resistances": {
+							"fire": 0.25
+						}
+					},
+					"skitter": {
+						"armour": 0.0,
+						"critical_hit": 78.72,
+						"evasion": 320.0,
+						"expected_one_attempt": 43.5912,
+						"hit_chance": 1.0,
+						"noncritical_hit": 39.36,
+						"resistances": {
+							"fire": 0.0
+						}
+					}
+				},
+				"trap": {
+
+				}
+			},
+			"unspent_points": 11
+		},
+		"precise8": {
+			"basic_blade": {
+				"components": {
+					"physical": 52.948
+				},
+				"cooldown": 0.0,
+				"critical": {
+					"chance": 0.0,
+					"multiplier": 1.5
+				},
+				"mana": 0.0,
+				"raw_noncritical": 52.948,
+				"recipe": {
+					"delivery": "melee",
+					"half_angle": 0.7853981633974483,
+					"max_targets": 1,
+					"radius": 60.0
+				},
+				"supports": [],
+				"tags": [
+					"hit",
+					"attack",
+					"melee"
+				],
+				"targets": {
+					"crawler": {
+						"armour": 0.0,
+						"critical_hit": 79.422,
+						"evasion": 0.0,
+						"expected_one_attempt": 52.948,
+						"hit_chance": 1.0,
+						"noncritical_hit": 52.948,
+						"resistances": {
+							"fire": 0.0
+						}
+					},
+					"ember_guard": {
+						"armour": 0.0,
+						"critical_hit": 79.422,
+						"evasion": 0.0,
+						"expected_one_attempt": 52.948,
+						"hit_chance": 1.0,
+						"noncritical_hit": 52.948,
+						"resistances": {
+							"fire": 0.25
+						}
+					},
+					"skitter": {
+						"armour": 0.0,
+						"critical_hit": 79.422,
+						"evasion": 320.0,
+						"expected_one_attempt": 52.948,
+						"hit_chance": 1.0,
+						"noncritical_hit": 52.948,
+						"resistances": {
+							"fire": 0.0
+						}
+					}
+				},
+				"trap": {
+
+				}
+			},
+			"cleave_blade": {
+				"components": {
+					"physical": 148.2544
+				},
+				"cooldown": 1.4,
+				"critical": {
+					"chance": 0.0,
+					"multiplier": 1.5
+				},
+				"mana": 12.0,
+				"raw_noncritical": 148.2544,
+				"recipe": {
+					"half_angle": 1.5707963267948966,
+					"radius": 95.0
+				},
+				"supports": [],
+				"tags": [
+					"hit",
+					"attack",
+					"melee",
+					"area"
+				],
+				"targets": {
+					"crawler": {
+						"armour": 0.0,
+						"critical_hit": 222.3816,
+						"evasion": 0.0,
+						"expected_one_attempt": 148.2544,
+						"hit_chance": 1.0,
+						"noncritical_hit": 148.2544,
+						"resistances": {
+							"fire": 0.0
+						}
+					},
+					"ember_guard": {
+						"armour": 0.0,
+						"critical_hit": 222.3816,
+						"evasion": 0.0,
+						"expected_one_attempt": 148.2544,
+						"hit_chance": 1.0,
+						"noncritical_hit": 148.2544,
+						"resistances": {
+							"fire": 0.25
+						}
+					},
+					"skitter": {
+						"armour": 0.0,
+						"critical_hit": 222.3816,
+						"evasion": 320.0,
+						"expected_one_attempt": 148.2544,
+						"hit_chance": 1.0,
+						"noncritical_hit": 148.2544,
+						"resistances": {
+							"fire": 0.0
+						}
+					}
+				},
+				"trap": {
+
+				}
+			},
+			"meteor_ambush": {
+				"components": {
+					"fire": 98.68499999999999
+				},
+				"cooldown": 8.0,
+				"critical": {
+					"chance": 0.0,
+					"multiplier": 1.5
+				},
+				"mana": 40.0,
+				"raw_noncritical": 98.68499999999999,
+				"recipe": {
+					"radius": 110.0
+				},
+				"supports": [
+					"ambush"
+				],
+				"tags": [
+					"hit",
+					"spell",
+					"area"
+				],
+				"targets": {
+					"crawler": {
+						"armour": 0.0,
+						"critical_hit": 148.02749999999997,
+						"evasion": 0.0,
+						"expected_one_attempt": 98.68499999999999,
+						"hit_chance": 1.0,
+						"noncritical_hit": 98.68499999999999,
+						"resistances": {
+							"fire": 0.0
+						}
+					},
+					"ember_guard": {
+						"armour": 0.0,
+						"critical_hit": 111.02062499999998,
+						"evasion": 0.0,
+						"expected_one_attempt": 74.01374999999999,
+						"hit_chance": 1.0,
+						"noncritical_hit": 74.01374999999999,
+						"resistances": {
+							"fire": 0.25
+						}
+					},
+					"skitter": {
+						"armour": 0.0,
+						"critical_hit": 148.02749999999997,
+						"evasion": 320.0,
+						"expected_one_attempt": 98.68499999999999,
+						"hit_chance": 1.0,
+						"noncritical_hit": 98.68499999999999,
+						"resistances": {
+							"fire": 0.0
+						}
+					}
+				},
+				"trap": {
+					"arming_seconds": 0.35,
+					"enabled": true,
+					"hit_multiplier": 0.85,
+					"lifetime_seconds": 12.0,
+					"mana_multiplier": 1.25,
+					"maximum_traps": 3,
+					"trigger_radius": 70.0
+				}
+			},
+			"nova_ambush": {
+				"components": {
+					"lightning": 61.965
+				},
+				"cooldown": 6.0,
+				"critical": {
+					"chance": 0.0,
+					"multiplier": 1.5
+				},
+				"mana": 30.0,
+				"raw_noncritical": 61.965,
+				"recipe": {
+					"radius": 155.0
+				},
+				"supports": [
+					"ambush"
+				],
+				"tags": [
+					"hit",
+					"spell",
+					"area"
+				],
+				"targets": {
+					"crawler": {
+						"armour": 0.0,
+						"critical_hit": 92.9475,
+						"evasion": 0.0,
+						"expected_one_attempt": 61.965,
+						"hit_chance": 1.0,
+						"noncritical_hit": 61.965,
+						"resistances": {
+							"fire": 0.0
+						}
+					},
+					"ember_guard": {
+						"armour": 0.0,
+						"critical_hit": 92.9475,
+						"evasion": 0.0,
+						"expected_one_attempt": 61.965,
+						"hit_chance": 1.0,
+						"noncritical_hit": 61.965,
+						"resistances": {
+							"fire": 0.25
+						}
+					},
+					"skitter": {
+						"armour": 0.0,
+						"critical_hit": 92.9475,
+						"evasion": 320.0,
+						"expected_one_attempt": 61.965,
+						"hit_chance": 1.0,
+						"noncritical_hit": 61.965,
+						"resistances": {
+							"fire": 0.0
+						}
+					}
+				},
+				"trap": {
+					"arming_seconds": 0.35,
+					"enabled": true,
+					"hit_multiplier": 0.85,
+					"lifetime_seconds": 12.0,
+					"mana_multiplier": 1.25,
+					"maximum_traps": 3,
+					"trigger_radius": 70.0
+				}
+			},
+			"nova_direct": {
+				"components": {
+					"lightning": 72.9
+				},
+				"cooldown": 6.0,
+				"critical": {
+					"chance": 0.0,
+					"multiplier": 1.5
+				},
+				"mana": 24.0,
+				"raw_noncritical": 72.9,
+				"recipe": {
+					"radius": 155.0
+				},
+				"supports": [],
+				"tags": [
+					"hit",
+					"spell",
+					"area"
+				],
+				"targets": {
+					"crawler": {
+						"armour": 0.0,
+						"critical_hit": 109.35000000000001,
+						"evasion": 0.0,
+						"expected_one_attempt": 72.9,
+						"hit_chance": 1.0,
+						"noncritical_hit": 72.9,
+						"resistances": {
+							"fire": 0.0
+						}
+					},
+					"ember_guard": {
+						"armour": 0.0,
+						"critical_hit": 109.35000000000001,
+						"evasion": 0.0,
+						"expected_one_attempt": 72.9,
+						"hit_chance": 1.0,
+						"noncritical_hit": 72.9,
+						"resistances": {
+							"fire": 0.25
+						}
+					},
+					"skitter": {
+						"armour": 0.0,
+						"critical_hit": 109.35000000000001,
+						"evasion": 320.0,
+						"expected_one_attempt": 72.9,
+						"hit_chance": 1.0,
+						"noncritical_hit": 72.9,
+						"resistances": {
+							"fire": 0.0
+						}
+					}
+				},
+				"trap": {
+
+				}
+			},
+			"paid_points": 8,
+			"route": [
+				"50459",
+				"39821",
+				"52904",
+				"444",
+				"61306",
+				"60942",
+				"64709",
+				"3469",
+				"63620"
+			],
+			"stats": {
+				"accuracy": 284.0,
+				"accuracy_increased": 0.0,
+				"additional_skill_slots": 0.0,
+				"area_increased": 0.0,
+				"area_size_increased": 0.0,
+				"armour": 0.0,
+				"armour_increased": 0.0,
+				"attack_added_fire": 0.0,
+				"attack_added_physical": 0.0,
+				"attack_crit_chance_increased": 0.0,
+				"attack_elemental_increased": 0.0,
+				"attack_life_leech": 0.0,
+				"attack_mana_leech": 0.0,
+				"attack_physical_increased": 0.0,
+				"attack_speed": 1.7,
+				"attack_speed_increased": 0.0,
+				"chaos_increased": 0.0,
+				"cold_increased": 0.0,
+				"cold_resistance": 0.0,
+				"crit_base_chance": 0.05,
+				"crit_base_multiplier": 1.5,
+				"crit_chance_increased": 0.0,
+				"crit_multiplier_add": 0.0,
+				"damage": 18.0,
+				"damage_taken_from_mana_before_life": 0.0,
+				"damaging_ailments_faster": 0.0,
+				"dexterity": 92.0,
+				"elemental_increased": 0.3,
+				"evasion": 41.3,
+				"evasion_increased": 0.0,
+				"fire_dot_multiplier_add": 0.0,
+				"fire_increased": 0.0,
+				"fire_resistance": 0.0,
+				"flask_charges_gained_increased": 0.0,
+				"flask_life_recovery_increased": 0.0,
+				"flask_mana_recovery_increased": 0.0,
+				"global_increased": 0.2,
+				"intelligence": 14.0,
+				"life_leech_max_rate_increased": 0.0,
+				"life_leech_rate_increased": 0.0,
+				"life_regen": 0.0,
+				"life_regen_percent": 0.0,
+				"lightning_increased": 0.0,
+				"lightning_resistance": 0.0,
+				"mana_cost_efficiency_increased": 0.0,
+				"mana_cost_increased": 0.0,
+				"mana_leech_max_rate_increased": 0.0,
+				"mana_leech_rate_increased": 0.0,
+				"mana_regen": 10.260000000000002,
+				"mana_regen_increased": 0.14,
+				"max_health": 141.0,
+				"max_mana": 129.0,
+				"max_shield": 75.75,
+				"maximum_cold_resistance_add": 0.0,
+				"maximum_fire_resistance_add": 0.0,
+				"maximum_lightning_resistance_add": 0.0,
+				"melee_area_size_increased": 0.0,
+				"melee_crit_chance_increased": 0.0,
+				"melee_crit_multiplier_add": 0.0,
+				"melee_physical_increased": 0.02,
+				"move_speed": 240.0,
+				"move_speed_increased": 0.0,
+				"physical_attack_life_leech": 0.0,
+				"physical_attack_mana_leech": 0.0,
+				"physical_increased": 0.0,
+				"precise_technique": 1.0,
+				"projectile_attack_crit_chance_increased": 0.0,
+				"projectile_attack_crit_multiplier_add": 0.0,
+				"projectile_count": 0.0,
+				"projectile_increased": 0.0,
+				"projectile_speed_increased": 0.0,
+				"resolute_technique": 0.0,
+				"shield_recharge_delay": 4.0,
+				"shield_recharge_rate": 13.0,
+				"shield_recharge_rate_increased": 0.0,
+				"shield_recharge_start_faster": 0.0,
+				"shield_regen": 13.0,
+				"spell_added_cold": 0.0,
+				"spell_added_lightning": 0.0,
+				"spell_area_size_increased": 0.0,
+				"spell_crit_chance_increased": 0.0,
+				"spell_crit_multiplier_add": 0.0,
+				"spell_increased": 0.0,
+				"strength": 14.0
+			},
+			"tornado_bow": {
+				"components": {
+					"fire": 15.12,
+					"physical": 39.98399999999999
+				},
+				"cooldown": 2.5,
+				"critical": {
+					"chance": 0.0,
+					"multiplier": 1.5
+				},
+				"mana": 18.0,
+				"raw_noncritical": 55.103999999999985,
+				"recipe": {
+					"child": {
+						"added_effectiveness": 0.7,
+						"coefficient": 0.7,
+						"lifetime": 1.7,
+						"pierce": -1,
+						"radius": 4.5,
+						"range": 150.0,
+						"role": "child",
+						"speed": 260.0,
+						"split": false
+					},
+					"child_count": 3,
+					"explosion": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"initial_count": 3,
+					"parent": {
+						"added_effectiveness": 1.0,
+						"coefficient": 1.0,
+						"lifetime": 0.9,
+						"pierce": -1,
+						"radius": 6.0,
+						"range": 150.0,
+						"role": "parent",
+						"speed": 420.0,
+						"split": true
+					},
+					"parent_count": 3,
+					"spread": 0.16
+				},
+				"supports": [],
+				"tags": [
+					"hit",
+					"attack",
+					"projectile"
+				],
+				"targets": {
+					"crawler": {
+						"armour": 0.0,
+						"critical_hit": 82.65599999999998,
+						"evasion": 0.0,
+						"expected_one_attempt": 55.103999999999985,
+						"hit_chance": 1.0,
+						"noncritical_hit": 55.103999999999985,
+						"resistances": {
+							"fire": 0.0
+						}
+					},
+					"ember_guard": {
+						"armour": 0.0,
+						"critical_hit": 76.98599999999999,
+						"evasion": 0.0,
+						"expected_one_attempt": 51.323999999999984,
+						"hit_chance": 1.0,
+						"noncritical_hit": 51.323999999999984,
+						"resistances": {
+							"fire": 0.25
+						}
+					},
+					"skitter": {
+						"armour": 0.0,
+						"critical_hit": 82.65599999999998,
+						"evasion": 320.0,
+						"expected_one_attempt": 55.103999999999985,
+						"hit_chance": 1.0,
+						"noncritical_hit": 55.103999999999985,
+						"resistances": {
+							"fire": 0.0
+						}
+					}
+				},
+				"trap": {
+
+				}
+			},
+			"unspent_points": 15
+		},
+		"resolute23": {
+			"basic_blade": {
+				"components": {
+					"physical": 45.88
+				},
+				"cooldown": 0.0,
+				"critical": {
+					"chance": 0.0,
+					"multiplier": 1.5
+				},
+				"mana": 0.0,
+				"raw_noncritical": 45.88,
+				"recipe": {
+					"delivery": "melee",
+					"half_angle": 0.7853981633974483,
+					"max_targets": 1,
+					"radius": 60.0
+				},
+				"supports": [],
+				"tags": [
+					"hit",
+					"attack",
+					"melee"
+				],
+				"targets": {
+					"crawler": {
+						"armour": 0.0,
+						"critical_hit": 68.82000000000001,
+						"evasion": 0.0,
+						"expected_one_attempt": 45.88,
+						"hit_chance": 1.0,
+						"noncritical_hit": 45.88,
+						"resistances": {
+							"fire": 0.0
+						}
+					},
+					"ember_guard": {
+						"armour": 0.0,
+						"critical_hit": 68.82000000000001,
+						"evasion": 0.0,
+						"expected_one_attempt": 45.88,
+						"hit_chance": 1.0,
+						"noncritical_hit": 45.88,
+						"resistances": {
+							"fire": 0.25
+						}
+					},
+					"skitter": {
+						"armour": 0.0,
+						"critical_hit": 68.82000000000001,
+						"evasion": 320.0,
+						"expected_one_attempt": 45.88,
+						"hit_chance": 1.0,
+						"noncritical_hit": 45.88,
+						"resistances": {
+							"fire": 0.0
+						}
+					}
+				},
+				"trap": {
+
+				}
+			},
+			"cleave_blade": {
+				"components": {
+					"physical": 128.464
+				},
+				"cooldown": 1.4,
+				"critical": {
+					"chance": 0.0,
+					"multiplier": 1.5
+				},
+				"mana": 12.0,
+				"raw_noncritical": 128.464,
+				"recipe": {
+					"half_angle": 1.5707963267948966,
+					"radius": 95.0
+				},
+				"supports": [],
+				"tags": [
+					"hit",
+					"attack",
+					"melee",
+					"area"
+				],
+				"targets": {
+					"crawler": {
+						"armour": 0.0,
+						"critical_hit": 192.696,
+						"evasion": 0.0,
+						"expected_one_attempt": 128.464,
+						"hit_chance": 1.0,
+						"noncritical_hit": 128.464,
+						"resistances": {
+							"fire": 0.0
+						}
+					},
+					"ember_guard": {
+						"armour": 0.0,
+						"critical_hit": 192.696,
+						"evasion": 0.0,
+						"expected_one_attempt": 128.464,
+						"hit_chance": 1.0,
+						"noncritical_hit": 128.464,
+						"resistances": {
+							"fire": 0.25
+						}
+					},
+					"skitter": {
+						"armour": 0.0,
+						"critical_hit": 192.696,
+						"evasion": 320.0,
+						"expected_one_attempt": 128.464,
+						"hit_chance": 1.0,
+						"noncritical_hit": 128.464,
+						"resistances": {
+							"fire": 0.0
+						}
+					}
+				},
+				"trap": {
+
+				}
+			},
+			"meteor_ambush": {
+				"components": {
+					"fire": 98.68499999999999
+				},
+				"cooldown": 8.0,
+				"critical": {
+					"chance": 0.0,
+					"multiplier": 1.5
+				},
+				"mana": 40.0,
+				"raw_noncritical": 98.68499999999999,
+				"recipe": {
+					"radius": 110.0
+				},
+				"supports": [
+					"ambush"
+				],
+				"tags": [
+					"hit",
+					"spell",
+					"area"
+				],
+				"targets": {
+					"crawler": {
+						"armour": 0.0,
+						"critical_hit": 148.02749999999997,
+						"evasion": 0.0,
+						"expected_one_attempt": 98.68499999999999,
+						"hit_chance": 1.0,
+						"noncritical_hit": 98.68499999999999,
+						"resistances": {
+							"fire": 0.0
+						}
+					},
+					"ember_guard": {
+						"armour": 0.0,
+						"critical_hit": 111.02062499999998,
+						"evasion": 0.0,
+						"expected_one_attempt": 74.01374999999999,
+						"hit_chance": 1.0,
+						"noncritical_hit": 74.01374999999999,
+						"resistances": {
+							"fire": 0.25
+						}
+					},
+					"skitter": {
+						"armour": 0.0,
+						"critical_hit": 148.02749999999997,
+						"evasion": 320.0,
+						"expected_one_attempt": 98.68499999999999,
+						"hit_chance": 1.0,
+						"noncritical_hit": 98.68499999999999,
+						"resistances": {
+							"fire": 0.0
+						}
+					}
+				},
+				"trap": {
+					"arming_seconds": 0.35,
+					"enabled": true,
+					"hit_multiplier": 0.85,
+					"lifetime_seconds": 12.0,
+					"mana_multiplier": 1.25,
+					"maximum_traps": 3,
+					"trigger_radius": 70.0
+				}
+			},
+			"nova_ambush": {
+				"components": {
+					"lightning": 61.965
+				},
+				"cooldown": 6.0,
+				"critical": {
+					"chance": 0.0,
+					"multiplier": 1.5
+				},
+				"mana": 30.0,
+				"raw_noncritical": 61.965,
+				"recipe": {
+					"radius": 155.0
+				},
+				"supports": [
+					"ambush"
+				],
+				"tags": [
+					"hit",
+					"spell",
+					"area"
+				],
+				"targets": {
+					"crawler": {
+						"armour": 0.0,
+						"critical_hit": 92.9475,
+						"evasion": 0.0,
+						"expected_one_attempt": 61.965,
+						"hit_chance": 1.0,
+						"noncritical_hit": 61.965,
+						"resistances": {
+							"fire": 0.0
+						}
+					},
+					"ember_guard": {
+						"armour": 0.0,
+						"critical_hit": 92.9475,
+						"evasion": 0.0,
+						"expected_one_attempt": 61.965,
+						"hit_chance": 1.0,
+						"noncritical_hit": 61.965,
+						"resistances": {
+							"fire": 0.25
+						}
+					},
+					"skitter": {
+						"armour": 0.0,
+						"critical_hit": 92.9475,
+						"evasion": 320.0,
+						"expected_one_attempt": 61.965,
+						"hit_chance": 1.0,
+						"noncritical_hit": 61.965,
+						"resistances": {
+							"fire": 0.0
+						}
+					}
+				},
+				"trap": {
+					"arming_seconds": 0.35,
+					"enabled": true,
+					"hit_multiplier": 0.85,
+					"lifetime_seconds": 12.0,
+					"mana_multiplier": 1.25,
+					"maximum_traps": 3,
+					"trigger_radius": 70.0
+				}
+			},
+			"nova_direct": {
+				"components": {
+					"lightning": 72.9
+				},
+				"cooldown": 6.0,
+				"critical": {
+					"chance": 0.0,
+					"multiplier": 1.5
+				},
+				"mana": 24.0,
+				"raw_noncritical": 72.9,
+				"recipe": {
+					"radius": 155.0
+				},
+				"supports": [],
+				"tags": [
+					"hit",
+					"spell",
+					"area"
+				],
+				"targets": {
+					"crawler": {
+						"armour": 0.0,
+						"critical_hit": 109.35000000000001,
+						"evasion": 0.0,
+						"expected_one_attempt": 72.9,
+						"hit_chance": 1.0,
+						"noncritical_hit": 72.9,
+						"resistances": {
+							"fire": 0.0
+						}
+					},
+					"ember_guard": {
+						"armour": 0.0,
+						"critical_hit": 109.35000000000001,
+						"evasion": 0.0,
+						"expected_one_attempt": 72.9,
+						"hit_chance": 1.0,
+						"noncritical_hit": 72.9,
+						"resistances": {
+							"fire": 0.25
+						}
+					},
+					"skitter": {
+						"armour": 0.0,
+						"critical_hit": 109.35000000000001,
+						"evasion": 320.0,
+						"expected_one_attempt": 72.9,
+						"hit_chance": 1.0,
+						"noncritical_hit": 72.9,
+						"resistances": {
+							"fire": 0.0
+						}
+					}
+				},
+				"trap": {
+
+				}
+			},
+			"paid_points": 23,
+			"route": [
+				"50459",
+				"39821",
+				"52904",
+				"444",
+				"61306",
+				"63139",
+				"5408",
+				"11651",
+				"6580",
+				"19711",
+				"17201",
+				"56001",
+				"34031",
+				"24865",
+				"6741",
+				"14056",
+				"34400",
+				"14930",
+				"3644",
+				"5233",
+				"63723",
+				"59928",
+				"63282",
+				"31961"
+			],
+			"stats": {
+				"accuracy": 304.0,
+				"accuracy_increased": 0.0,
+				"additional_skill_slots": 0.0,
+				"area_increased": 0.0,
+				"area_size_increased": 0.0,
+				"armour": 0.0,
+				"armour_increased": 0.0,
+				"attack_added_fire": 0.0,
+				"attack_added_physical": 0.0,
+				"attack_crit_chance_increased": 0.0,
+				"attack_elemental_increased": 0.0,
+				"attack_life_leech": 0.0,
+				"attack_mana_leech": 0.0,
+				"attack_physical_increased": 0.0,
+				"attack_speed": 1.7,
+				"attack_speed_increased": 0.0,
+				"chaos_increased": 0.0,
+				"cold_increased": 0.0,
+				"cold_resistance": 0.0,
+				"crit_base_chance": 0.05,
+				"crit_base_multiplier": 1.5,
+				"crit_chance_increased": 0.0,
+				"crit_multiplier_add": 0.0,
+				"damage": 18.0,
+				"damage_taken_from_mana_before_life": 0.0,
+				"damaging_ailments_faster": 0.0,
+				"dexterity": 102.0,
+				"elemental_increased": 0.3,
+				"evasion": 42.0,
+				"evasion_increased": 0.0,
+				"fire_dot_multiplier_add": 0.0,
+				"fire_increased": 0.0,
+				"fire_resistance": 0.0,
+				"flask_charges_gained_increased": 0.0,
+				"flask_life_recovery_increased": 0.0,
+				"flask_mana_recovery_increased": 0.0,
+				"global_increased": 0.2,
+				"intelligence": 24.0,
+				"life_leech_max_rate_increased": 0.0,
+				"life_leech_rate_increased": 0.0,
+				"life_regen": 0.0,
+				"life_regen_percent": 0.0,
+				"lightning_increased": 0.0,
+				"lightning_resistance": 0.0,
+				"mana_cost_efficiency_increased": 0.0,
+				"mana_cost_increased": 0.0,
+				"mana_leech_max_rate_increased": 0.0,
+				"mana_leech_rate_increased": 0.0,
+				"mana_regen": 10.260000000000002,
+				"mana_regen_increased": 0.14,
+				"max_health": 206.0,
+				"max_mana": 134.0,
+				"max_shield": 76.5,
+				"maximum_cold_resistance_add": 0.0,
+				"maximum_fire_resistance_add": 0.0,
+				"maximum_lightning_resistance_add": 0.0,
+				"melee_area_size_increased": 0.0,
+				"melee_crit_chance_increased": 0.0,
+				"melee_crit_multiplier_add": 0.0,
+				"melee_physical_increased": 0.28,
+				"move_speed": 240.0,
+				"move_speed_increased": 0.0,
+				"physical_attack_life_leech": 0.0,
+				"physical_attack_mana_leech": 0.0,
+				"physical_increased": 0.0,
+				"projectile_attack_crit_chance_increased": 0.0,
+				"projectile_attack_crit_multiplier_add": 0.0,
+				"projectile_count": 0.0,
+				"projectile_increased": 0.0,
+				"projectile_speed_increased": 0.0,
+				"resolute_technique": 1.0,
+				"shield_recharge_delay": 4.0,
+				"shield_recharge_rate": 13.0,
+				"shield_recharge_rate_increased": 0.0,
+				"shield_recharge_start_faster": 0.0,
+				"shield_regen": 13.0,
+				"spell_added_cold": 0.0,
+				"spell_added_lightning": 0.0,
+				"spell_area_size_increased": 0.0,
+				"spell_crit_chance_increased": 0.0,
+				"spell_crit_multiplier_add": 0.0,
+				"spell_increased": 0.0,
+				"strength": 144.0
+			},
+			"tornado_bow": {
+				"components": {
+					"fire": 10.8,
+					"physical": 28.559999999999995
+				},
+				"cooldown": 2.5,
+				"critical": {
+					"chance": 0.0,
+					"multiplier": 1.5
+				},
+				"mana": 18.0,
+				"raw_noncritical": 39.36,
+				"recipe": {
+					"child": {
+						"added_effectiveness": 0.7,
+						"coefficient": 0.7,
+						"lifetime": 1.7,
+						"pierce": -1,
+						"radius": 4.5,
+						"range": 150.0,
+						"role": "child",
+						"speed": 260.0,
+						"split": false
+					},
+					"child_count": 3,
+					"explosion": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"initial_count": 3,
+					"parent": {
+						"added_effectiveness": 1.0,
+						"coefficient": 1.0,
+						"lifetime": 0.9,
+						"pierce": -1,
+						"radius": 6.0,
+						"range": 150.0,
+						"role": "parent",
+						"speed": 420.0,
+						"split": true
+					},
+					"parent_count": 3,
+					"spread": 0.16
+				},
+				"supports": [],
+				"tags": [
+					"hit",
+					"attack",
+					"projectile"
+				],
+				"targets": {
+					"crawler": {
+						"armour": 0.0,
+						"critical_hit": 59.03999999999999,
+						"evasion": 0.0,
+						"expected_one_attempt": 39.36,
+						"hit_chance": 1.0,
+						"noncritical_hit": 39.36,
+						"resistances": {
+							"fire": 0.0
+						}
+					},
+					"ember_guard": {
+						"armour": 0.0,
+						"critical_hit": 54.989999999999995,
+						"evasion": 0.0,
+						"expected_one_attempt": 36.66,
+						"hit_chance": 1.0,
+						"noncritical_hit": 36.66,
+						"resistances": {
+							"fire": 0.25
+						}
+					},
+					"skitter": {
+						"armour": 0.0,
+						"critical_hit": 59.03999999999999,
+						"evasion": 320.0,
+						"expected_one_attempt": 39.36,
+						"hit_chance": 1.0,
+						"noncritical_hit": 39.36,
+						"resistances": {
+							"fire": 0.0
+						}
+					}
+				},
+				"trap": {
+
+				}
+			},
+			"unspent_points": 0
+		},
+		"resolute_refunded22": {
+			"basic_blade": {
+				"components": {
+					"physical": 45.88
+				},
+				"cooldown": 0.0,
+				"critical": {
+					"chance": 0.05,
+					"multiplier": 1.5
+				},
+				"mana": 0.0,
+				"raw_noncritical": 45.88,
+				"recipe": {
+					"delivery": "melee",
+					"half_angle": 0.7853981633974483,
+					"max_targets": 1,
+					"radius": 60.0
+				},
+				"supports": [],
+				"tags": [
+					"hit",
+					"attack",
+					"melee"
+				],
+				"targets": {
+					"crawler": {
+						"armour": 0.0,
+						"critical_hit": 68.82000000000001,
+						"evasion": 0.0,
+						"expected_one_attempt": 47.027,
+						"hit_chance": 1.0,
+						"noncritical_hit": 45.88,
+						"resistances": {
+							"fire": 0.0
+						}
+					},
+					"ember_guard": {
+						"armour": 0.0,
+						"critical_hit": 68.82000000000001,
+						"evasion": 0.0,
+						"expected_one_attempt": 47.027,
+						"hit_chance": 1.0,
+						"noncritical_hit": 45.88,
+						"resistances": {
+							"fire": 0.25
+						}
+					},
+					"skitter": {
+						"armour": 0.0,
+						"critical_hit": 68.82000000000001,
+						"evasion": 320.0,
+						"expected_one_attempt": 47.027,
+						"hit_chance": 1.0,
+						"noncritical_hit": 45.88,
+						"resistances": {
+							"fire": 0.0
+						}
+					}
+				},
+				"trap": {
+
+				}
+			},
+			"cleave_blade": {
+				"components": {
+					"physical": 128.464
+				},
+				"cooldown": 1.4,
+				"critical": {
+					"chance": 0.05,
+					"multiplier": 1.5
+				},
+				"mana": 12.0,
+				"raw_noncritical": 128.464,
+				"recipe": {
+					"half_angle": 1.5707963267948966,
+					"radius": 95.0
+				},
+				"supports": [],
+				"tags": [
+					"hit",
+					"attack",
+					"melee",
+					"area"
+				],
+				"targets": {
+					"crawler": {
+						"armour": 0.0,
+						"critical_hit": 192.696,
+						"evasion": 0.0,
+						"expected_one_attempt": 131.6756,
+						"hit_chance": 1.0,
+						"noncritical_hit": 128.464,
+						"resistances": {
+							"fire": 0.0
+						}
+					},
+					"ember_guard": {
+						"armour": 0.0,
+						"critical_hit": 192.696,
+						"evasion": 0.0,
+						"expected_one_attempt": 131.6756,
+						"hit_chance": 1.0,
+						"noncritical_hit": 128.464,
+						"resistances": {
+							"fire": 0.25
+						}
+					},
+					"skitter": {
+						"armour": 0.0,
+						"critical_hit": 192.696,
+						"evasion": 320.0,
+						"expected_one_attempt": 131.6756,
+						"hit_chance": 1.0,
+						"noncritical_hit": 128.464,
+						"resistances": {
+							"fire": 0.0
+						}
+					}
+				},
+				"trap": {
+
+				}
+			},
+			"meteor_ambush": {
+				"components": {
+					"fire": 98.68499999999999
+				},
+				"cooldown": 8.0,
+				"critical": {
+					"chance": 0.05,
+					"multiplier": 1.5
+				},
+				"mana": 40.0,
+				"raw_noncritical": 98.68499999999999,
+				"recipe": {
+					"radius": 110.0
+				},
+				"supports": [
+					"ambush"
+				],
+				"tags": [
+					"hit",
+					"spell",
+					"area"
+				],
+				"targets": {
+					"crawler": {
+						"armour": 0.0,
+						"critical_hit": 148.02749999999997,
+						"evasion": 0.0,
+						"expected_one_attempt": 101.15212499999998,
+						"hit_chance": 1.0,
+						"noncritical_hit": 98.68499999999999,
+						"resistances": {
+							"fire": 0.0
+						}
+					},
+					"ember_guard": {
+						"armour": 0.0,
+						"critical_hit": 111.02062499999998,
+						"evasion": 0.0,
+						"expected_one_attempt": 75.86409374999998,
+						"hit_chance": 1.0,
+						"noncritical_hit": 74.01374999999999,
+						"resistances": {
+							"fire": 0.25
+						}
+					},
+					"skitter": {
+						"armour": 0.0,
+						"critical_hit": 148.02749999999997,
+						"evasion": 320.0,
+						"expected_one_attempt": 101.15212499999998,
+						"hit_chance": 1.0,
+						"noncritical_hit": 98.68499999999999,
+						"resistances": {
+							"fire": 0.0
+						}
+					}
+				},
+				"trap": {
+					"arming_seconds": 0.35,
+					"enabled": true,
+					"hit_multiplier": 0.85,
+					"lifetime_seconds": 12.0,
+					"mana_multiplier": 1.25,
+					"maximum_traps": 3,
+					"trigger_radius": 70.0
+				}
+			},
+			"nova_ambush": {
+				"components": {
+					"lightning": 61.965
+				},
+				"cooldown": 6.0,
+				"critical": {
+					"chance": 0.05,
+					"multiplier": 1.5
+				},
+				"mana": 30.0,
+				"raw_noncritical": 61.965,
+				"recipe": {
+					"radius": 155.0
+				},
+				"supports": [
+					"ambush"
+				],
+				"tags": [
+					"hit",
+					"spell",
+					"area"
+				],
+				"targets": {
+					"crawler": {
+						"armour": 0.0,
+						"critical_hit": 92.9475,
+						"evasion": 0.0,
+						"expected_one_attempt": 63.51412500000001,
+						"hit_chance": 1.0,
+						"noncritical_hit": 61.965,
+						"resistances": {
+							"fire": 0.0
+						}
+					},
+					"ember_guard": {
+						"armour": 0.0,
+						"critical_hit": 92.9475,
+						"evasion": 0.0,
+						"expected_one_attempt": 63.51412500000001,
+						"hit_chance": 1.0,
+						"noncritical_hit": 61.965,
+						"resistances": {
+							"fire": 0.25
+						}
+					},
+					"skitter": {
+						"armour": 0.0,
+						"critical_hit": 92.9475,
+						"evasion": 320.0,
+						"expected_one_attempt": 63.51412500000001,
+						"hit_chance": 1.0,
+						"noncritical_hit": 61.965,
+						"resistances": {
+							"fire": 0.0
+						}
+					}
+				},
+				"trap": {
+					"arming_seconds": 0.35,
+					"enabled": true,
+					"hit_multiplier": 0.85,
+					"lifetime_seconds": 12.0,
+					"mana_multiplier": 1.25,
+					"maximum_traps": 3,
+					"trigger_radius": 70.0
+				}
+			},
+			"nova_direct": {
+				"components": {
+					"lightning": 72.9
+				},
+				"cooldown": 6.0,
+				"critical": {
+					"chance": 0.05,
+					"multiplier": 1.5
+				},
+				"mana": 24.0,
+				"raw_noncritical": 72.9,
+				"recipe": {
+					"radius": 155.0
+				},
+				"supports": [],
+				"tags": [
+					"hit",
+					"spell",
+					"area"
+				],
+				"targets": {
+					"crawler": {
+						"armour": 0.0,
+						"critical_hit": 109.35000000000001,
+						"evasion": 0.0,
+						"expected_one_attempt": 74.7225,
+						"hit_chance": 1.0,
+						"noncritical_hit": 72.9,
+						"resistances": {
+							"fire": 0.0
+						}
+					},
+					"ember_guard": {
+						"armour": 0.0,
+						"critical_hit": 109.35000000000001,
+						"evasion": 0.0,
+						"expected_one_attempt": 74.7225,
+						"hit_chance": 1.0,
+						"noncritical_hit": 72.9,
+						"resistances": {
+							"fire": 0.25
+						}
+					},
+					"skitter": {
+						"armour": 0.0,
+						"critical_hit": 109.35000000000001,
+						"evasion": 320.0,
+						"expected_one_attempt": 74.7225,
+						"hit_chance": 1.0,
+						"noncritical_hit": 72.9,
+						"resistances": {
+							"fire": 0.0
+						}
+					}
+				},
+				"trap": {
+
+				}
+			},
+			"paid_points": 22,
+			"route": [
+				"50459",
+				"39821",
+				"52904",
+				"444",
+				"61306",
+				"63139",
+				"5408",
+				"11651",
+				"6580",
+				"19711",
+				"17201",
+				"56001",
+				"34031",
+				"24865",
+				"6741",
+				"14056",
+				"34400",
+				"14930",
+				"3644",
+				"5233",
+				"63723",
+				"59928",
+				"63282"
+			],
+			"stats": {
+				"accuracy": 304.0,
+				"accuracy_increased": 0.0,
+				"additional_skill_slots": 0.0,
+				"area_increased": 0.0,
+				"area_size_increased": 0.0,
+				"armour": 0.0,
+				"armour_increased": 0.0,
+				"attack_added_fire": 0.0,
+				"attack_added_physical": 0.0,
+				"attack_crit_chance_increased": 0.0,
+				"attack_elemental_increased": 0.0,
+				"attack_life_leech": 0.0,
+				"attack_mana_leech": 0.0,
+				"attack_physical_increased": 0.0,
+				"attack_speed": 1.7,
+				"attack_speed_increased": 0.0,
+				"chaos_increased": 0.0,
+				"cold_increased": 0.0,
+				"cold_resistance": 0.0,
+				"crit_base_chance": 0.05,
+				"crit_base_multiplier": 1.5,
+				"crit_chance_increased": 0.0,
+				"crit_multiplier_add": 0.0,
+				"damage": 18.0,
+				"damage_taken_from_mana_before_life": 0.0,
+				"damaging_ailments_faster": 0.0,
+				"dexterity": 102.0,
+				"elemental_increased": 0.3,
+				"evasion": 42.0,
+				"evasion_increased": 0.0,
+				"fire_dot_multiplier_add": 0.0,
+				"fire_increased": 0.0,
+				"fire_resistance": 0.0,
+				"flask_charges_gained_increased": 0.0,
+				"flask_life_recovery_increased": 0.0,
+				"flask_mana_recovery_increased": 0.0,
+				"global_increased": 0.2,
+				"intelligence": 24.0,
+				"life_leech_max_rate_increased": 0.0,
+				"life_leech_rate_increased": 0.0,
+				"life_regen": 0.0,
+				"life_regen_percent": 0.0,
+				"lightning_increased": 0.0,
+				"lightning_resistance": 0.0,
+				"mana_cost_efficiency_increased": 0.0,
+				"mana_cost_increased": 0.0,
+				"mana_leech_max_rate_increased": 0.0,
+				"mana_leech_rate_increased": 0.0,
+				"mana_regen": 10.260000000000002,
+				"mana_regen_increased": 0.14,
+				"max_health": 206.0,
+				"max_mana": 134.0,
+				"max_shield": 76.5,
+				"maximum_cold_resistance_add": 0.0,
+				"maximum_fire_resistance_add": 0.0,
+				"maximum_lightning_resistance_add": 0.0,
+				"melee_area_size_increased": 0.0,
+				"melee_crit_chance_increased": 0.0,
+				"melee_crit_multiplier_add": 0.0,
+				"melee_physical_increased": 0.28,
+				"move_speed": 240.0,
+				"move_speed_increased": 0.0,
+				"physical_attack_life_leech": 0.0,
+				"physical_attack_mana_leech": 0.0,
+				"physical_increased": 0.0,
+				"projectile_attack_crit_chance_increased": 0.0,
+				"projectile_attack_crit_multiplier_add": 0.0,
+				"projectile_count": 0.0,
+				"projectile_increased": 0.0,
+				"projectile_speed_increased": 0.0,
+				"resolute_technique": 0.0,
+				"shield_recharge_delay": 4.0,
+				"shield_recharge_rate": 13.0,
+				"shield_recharge_rate_increased": 0.0,
+				"shield_recharge_start_faster": 0.0,
+				"shield_regen": 13.0,
+				"spell_added_cold": 0.0,
+				"spell_added_lightning": 0.0,
+				"spell_area_size_increased": 0.0,
+				"spell_crit_chance_increased": 0.0,
+				"spell_crit_multiplier_add": 0.0,
+				"spell_increased": 0.0,
+				"strength": 144.0
+			},
+			"tornado_bow": {
+				"components": {
+					"fire": 10.8,
+					"physical": 28.559999999999995
+				},
+				"cooldown": 2.5,
+				"critical": {
+					"chance": 0.05,
+					"multiplier": 1.5
+				},
+				"mana": 18.0,
+				"raw_noncritical": 39.36,
+				"recipe": {
+					"child": {
+						"added_effectiveness": 0.7,
+						"coefficient": 0.7,
+						"lifetime": 1.7,
+						"pierce": -1,
+						"radius": 4.5,
+						"range": 150.0,
+						"role": "child",
+						"speed": 260.0,
+						"split": false
+					},
+					"child_count": 3,
+					"explosion": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"initial_count": 3,
+					"parent": {
+						"added_effectiveness": 1.0,
+						"coefficient": 1.0,
+						"lifetime": 0.9,
+						"pierce": -1,
+						"radius": 6.0,
+						"range": 150.0,
+						"role": "parent",
+						"speed": 420.0,
+						"split": true
+					},
+					"parent_count": 3,
+					"spread": 0.16
+				},
+				"supports": [],
+				"tags": [
+					"hit",
+					"attack",
+					"projectile"
+				],
+				"targets": {
+					"crawler": {
+						"armour": 0.0,
+						"critical_hit": 59.03999999999999,
+						"evasion": 0.0,
+						"expected_one_attempt": 40.343999999999994,
+						"hit_chance": 1.0,
+						"noncritical_hit": 39.36,
+						"resistances": {
+							"fire": 0.0
+						}
+					},
+					"ember_guard": {
+						"armour": 0.0,
+						"critical_hit": 54.989999999999995,
+						"evasion": 0.0,
+						"expected_one_attempt": 37.576499999999996,
+						"hit_chance": 1.0,
+						"noncritical_hit": 36.66,
+						"resistances": {
+							"fire": 0.25
+						}
+					},
+					"skitter": {
+						"armour": 0.0,
+						"critical_hit": 59.03999999999999,
+						"evasion": 320.0,
+						"expected_one_attempt": 40.343999999999994,
+						"hit_chance": 1.0,
+						"noncritical_hit": 39.36,
+						"resistances": {
+							"fire": 0.0
+						}
+					}
+				},
+				"trap": {
+
+				}
+			},
+			"unspent_points": 1
+		},
+		"spell15": {
+			"basic_blade": {
+				"components": {
+					"physical": 44.019999999999996
+				},
+				"cooldown": 0.0,
+				"critical": {
+					"chance": 0.06,
+					"multiplier": 1.5
+				},
+				"mana": 0.0,
+				"raw_noncritical": 44.019999999999996,
+				"recipe": {
+					"delivery": "melee",
+					"half_angle": 0.7853981633974483,
+					"max_targets": 1,
+					"radius": 60.0
+				},
+				"supports": [],
+				"tags": [
+					"hit",
+					"attack",
+					"melee"
+				],
+				"targets": {
+					"crawler": {
+						"armour": 0.0,
+						"critical_hit": 66.03,
+						"evasion": 0.0,
+						"expected_one_attempt": 45.34059999999999,
+						"hit_chance": 1.0,
+						"noncritical_hit": 44.019999999999996,
+						"resistances": {
+							"fire": 0.0
+						}
+					},
+					"ember_guard": {
+						"armour": 0.0,
+						"critical_hit": 66.03,
+						"evasion": 0.0,
+						"expected_one_attempt": 45.34059999999999,
+						"hit_chance": 1.0,
+						"noncritical_hit": 44.019999999999996,
+						"resistances": {
+							"fire": 0.25
+						}
+					},
+					"skitter": {
+						"armour": 0.0,
+						"critical_hit": 66.03,
+						"evasion": 320.0,
+						"expected_one_attempt": 45.34059999999999,
+						"hit_chance": 1.0,
+						"noncritical_hit": 44.019999999999996,
+						"resistances": {
+							"fire": 0.0
+						}
+					}
+				},
+				"trap": {
+
+				}
+			},
+			"cleave_blade": {
+				"components": {
+					"physical": 123.25599999999999
+				},
+				"cooldown": 1.4,
+				"critical": {
+					"chance": 0.06,
+					"multiplier": 1.5
+				},
+				"mana": 12.0,
+				"raw_noncritical": 123.25599999999999,
+				"recipe": {
+					"half_angle": 1.5707963267948966,
+					"radius": 95.0
+				},
+				"supports": [],
+				"tags": [
+					"hit",
+					"attack",
+					"melee",
+					"area"
+				],
+				"targets": {
+					"crawler": {
+						"armour": 0.0,
+						"critical_hit": 184.884,
+						"evasion": 0.0,
+						"expected_one_attempt": 126.95367999999998,
+						"hit_chance": 1.0,
+						"noncritical_hit": 123.25599999999999,
+						"resistances": {
+							"fire": 0.0
+						}
+					},
+					"ember_guard": {
+						"armour": 0.0,
+						"critical_hit": 184.884,
+						"evasion": 0.0,
+						"expected_one_attempt": 126.95367999999998,
+						"hit_chance": 1.0,
+						"noncritical_hit": 123.25599999999999,
+						"resistances": {
+							"fire": 0.25
+						}
+					},
+					"skitter": {
+						"armour": 0.0,
+						"critical_hit": 184.884,
+						"evasion": 320.0,
+						"expected_one_attempt": 126.95367999999998,
+						"hit_chance": 1.0,
+						"noncritical_hit": 123.25599999999999,
+						"resistances": {
+							"fire": 0.0
+						}
+					}
+				},
+				"trap": {
+
+				}
+			},
+			"meteor_ambush": {
+				"components": {
+					"fire": 111.84299999999999
+				},
+				"cooldown": 8.0,
+				"critical": {
+					"chance": 0.06,
+					"multiplier": 1.5
+				},
+				"mana": 40.0,
+				"raw_noncritical": 111.84299999999999,
+				"recipe": {
+					"radius": 110.0
+				},
+				"supports": [
+					"ambush"
+				],
+				"tags": [
+					"hit",
+					"spell",
+					"area"
+				],
+				"targets": {
+					"crawler": {
+						"armour": 0.0,
+						"critical_hit": 167.7645,
+						"evasion": 0.0,
+						"expected_one_attempt": 115.19828999999999,
+						"hit_chance": 1.0,
+						"noncritical_hit": 111.84299999999999,
+						"resistances": {
+							"fire": 0.0
+						}
+					},
+					"ember_guard": {
+						"armour": 0.0,
+						"critical_hit": 125.823375,
+						"evasion": 0.0,
+						"expected_one_attempt": 86.39871749999999,
+						"hit_chance": 1.0,
+						"noncritical_hit": 83.88225,
+						"resistances": {
+							"fire": 0.25
+						}
+					},
+					"skitter": {
+						"armour": 0.0,
+						"critical_hit": 167.7645,
+						"evasion": 320.0,
+						"expected_one_attempt": 115.19828999999999,
+						"hit_chance": 1.0,
+						"noncritical_hit": 111.84299999999999,
+						"resistances": {
+							"fire": 0.0
+						}
+					}
+				},
+				"trap": {
+					"arming_seconds": 0.35,
+					"enabled": true,
+					"hit_multiplier": 0.85,
+					"lifetime_seconds": 12.0,
+					"mana_multiplier": 1.25,
+					"maximum_traps": 3,
+					"trigger_radius": 70.0
+				}
+			},
+			"nova_ambush": {
+				"components": {
+					"lightning": 70.227
+				},
+				"cooldown": 6.0,
+				"critical": {
+					"chance": 0.06,
+					"multiplier": 1.5
+				},
+				"mana": 30.0,
+				"raw_noncritical": 70.227,
+				"recipe": {
+					"radius": 155.0
+				},
+				"supports": [
+					"ambush"
+				],
+				"tags": [
+					"hit",
+					"spell",
+					"area"
+				],
+				"targets": {
+					"crawler": {
+						"armour": 0.0,
+						"critical_hit": 105.3405,
+						"evasion": 0.0,
+						"expected_one_attempt": 72.33381,
+						"hit_chance": 1.0,
+						"noncritical_hit": 70.227,
+						"resistances": {
+							"fire": 0.0
+						}
+					},
+					"ember_guard": {
+						"armour": 0.0,
+						"critical_hit": 105.3405,
+						"evasion": 0.0,
+						"expected_one_attempt": 72.33381,
+						"hit_chance": 1.0,
+						"noncritical_hit": 70.227,
+						"resistances": {
+							"fire": 0.25
+						}
+					},
+					"skitter": {
+						"armour": 0.0,
+						"critical_hit": 105.3405,
+						"evasion": 320.0,
+						"expected_one_attempt": 72.33381,
+						"hit_chance": 1.0,
+						"noncritical_hit": 70.227,
+						"resistances": {
+							"fire": 0.0
+						}
+					}
+				},
+				"trap": {
+					"arming_seconds": 0.35,
+					"enabled": true,
+					"hit_multiplier": 0.85,
+					"lifetime_seconds": 12.0,
+					"mana_multiplier": 1.25,
+					"maximum_traps": 3,
+					"trigger_radius": 70.0
+				}
+			},
+			"nova_direct": {
+				"components": {
+					"lightning": 82.62
+				},
+				"cooldown": 6.0,
+				"critical": {
+					"chance": 0.06,
+					"multiplier": 1.5
+				},
+				"mana": 24.0,
+				"raw_noncritical": 82.62,
+				"recipe": {
+					"radius": 155.0
+				},
+				"supports": [],
+				"tags": [
+					"hit",
+					"spell",
+					"area"
+				],
+				"targets": {
+					"crawler": {
+						"armour": 0.0,
+						"critical_hit": 123.93,
+						"evasion": 0.0,
+						"expected_one_attempt": 85.0986,
+						"hit_chance": 1.0,
+						"noncritical_hit": 82.62,
+						"resistances": {
+							"fire": 0.0
+						}
+					},
+					"ember_guard": {
+						"armour": 0.0,
+						"critical_hit": 123.93,
+						"evasion": 0.0,
+						"expected_one_attempt": 85.0986,
+						"hit_chance": 1.0,
+						"noncritical_hit": 82.62,
+						"resistances": {
+							"fire": 0.25
+						}
+					},
+					"skitter": {
+						"armour": 0.0,
+						"critical_hit": 123.93,
+						"evasion": 320.0,
+						"expected_one_attempt": 85.0986,
+						"hit_chance": 1.0,
+						"noncritical_hit": 82.62,
+						"resistances": {
+							"fire": 0.0
+						}
+					}
+				},
+				"trap": {
+
+				}
+			},
+			"paid_points": 15,
+			"route": [
+				"50459",
+				"45035",
+				"59370",
+				"63795",
+				"38662",
+				"5616",
+				"39718",
+				"59606",
+				"59252",
+				"28012",
+				"13885",
+				"7112",
+				"58244",
+				"3656",
+				"20546",
+				"35894"
+			],
+			"stats": {
+				"accuracy": 414.0,
+				"accuracy_increased": 0.0,
+				"additional_skill_slots": 0.0,
+				"area_increased": 0.0,
+				"area_size_increased": 0.0,
+				"armour": 0.0,
+				"armour_increased": 0.0,
+				"attack_added_fire": 0.0,
+				"attack_added_physical": 0.0,
+				"attack_crit_chance_increased": 0.0,
+				"attack_elemental_increased": 0.0,
+				"attack_life_leech": 0.0,
+				"attack_mana_leech": 0.0,
+				"attack_physical_increased": 0.0,
+				"attack_speed": 1.7,
+				"attack_speed_increased": 0.0,
+				"chaos_increased": 0.0,
+				"cold_increased": 0.0,
+				"cold_resistance": 0.0,
+				"crit_base_chance": 0.05,
+				"crit_base_multiplier": 1.5,
+				"crit_chance_increased": 0.2,
+				"crit_multiplier_add": 0.0,
+				"damage": 18.0,
+				"damage_taken_from_mana_before_life": 0.0,
+				"damaging_ailments_faster": 0.0,
+				"dexterity": 142.0,
+				"elemental_increased": 0.3,
+				"evasion": 19.2,
+				"evasion_increased": 0.0,
+				"fire_dot_multiplier_add": 0.0,
+				"fire_increased": 0.0,
+				"fire_resistance": 0.0,
+				"flask_charges_gained_increased": 0.0,
+				"flask_life_recovery_increased": 0.0,
+				"flask_mana_recovery_increased": 0.0,
+				"global_increased": 0.4,
+				"intelligence": 54.0,
+				"life_leech_max_rate_increased": 0.0,
+				"life_leech_rate_increased": 0.0,
+				"life_regen": 0.0,
+				"life_regen_percent": 0.0,
+				"lightning_increased": 0.0,
+				"lightning_resistance": 0.0,
+				"mana_cost_efficiency_increased": 0.0,
+				"mana_cost_increased": 0.0,
+				"mana_leech_max_rate_increased": 0.0,
+				"mana_leech_rate_increased": 0.0,
+				"mana_regen": 10.260000000000002,
+				"mana_regen_increased": 0.14,
+				"max_health": 127.0,
+				"max_mana": 149.0,
+				"max_shield": 78.75,
+				"maximum_cold_resistance_add": 0.0,
+				"maximum_fire_resistance_add": 0.0,
+				"maximum_lightning_resistance_add": 0.0,
+				"melee_area_size_increased": 0.0,
+				"melee_crit_chance_increased": 0.0,
+				"melee_crit_multiplier_add": 0.0,
+				"melee_physical_increased": 0.02,
+				"move_speed": 240.0,
+				"move_speed_increased": 0.0,
+				"physical_attack_life_leech": 0.0,
+				"physical_attack_mana_leech": 0.0,
+				"physical_increased": 0.0,
+				"projectile_attack_crit_chance_increased": 0.0,
+				"projectile_attack_crit_multiplier_add": 0.0,
+				"projectile_count": 0.0,
+				"projectile_increased": 0.16,
+				"projectile_speed_increased": 0.0,
+				"resolute_technique": 0.0,
+				"shield_recharge_delay": 4.0,
+				"shield_recharge_rate": 13.0,
+				"shield_recharge_rate_increased": 0.0,
+				"shield_recharge_start_faster": 0.0,
+				"shield_regen": 13.0,
+				"spell_added_cold": 0.0,
+				"spell_added_lightning": 0.0,
+				"spell_area_size_increased": 0.0,
+				"spell_crit_chance_increased": 0.0,
+				"spell_crit_multiplier_add": 0.0,
+				"spell_increased": 0.0,
+				"strength": 14.0
+			},
+			"tornado_bow": {
+				"components": {
+					"fire": 13.392000000000001,
+					"physical": 37.128
+				},
+				"cooldown": 2.5,
+				"critical": {
+					"chance": 0.06,
+					"multiplier": 1.5
+				},
+				"mana": 18.0,
+				"raw_noncritical": 50.52,
+				"recipe": {
+					"child": {
+						"added_effectiveness": 0.7,
+						"coefficient": 0.7,
+						"lifetime": 1.7,
+						"pierce": -1,
+						"radius": 4.5,
+						"range": 150.0,
+						"role": "child",
+						"speed": 260.0,
+						"split": false
+					},
+					"child_count": 3,
+					"explosion": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"initial_count": 3,
+					"parent": {
+						"added_effectiveness": 1.0,
+						"coefficient": 1.0,
+						"lifetime": 0.9,
+						"pierce": -1,
+						"radius": 6.0,
+						"range": 150.0,
+						"role": "parent",
+						"speed": 420.0,
+						"split": true
+					},
+					"parent_count": 3,
+					"spread": 0.16
+				},
+				"supports": [],
+				"tags": [
+					"hit",
+					"attack",
+					"projectile"
+				],
+				"targets": {
+					"crawler": {
+						"armour": 0.0,
+						"critical_hit": 75.78,
+						"evasion": 0.0,
+						"expected_one_attempt": 52.035599999999995,
+						"hit_chance": 1.0,
+						"noncritical_hit": 50.52,
+						"resistances": {
+							"fire": 0.0
+						}
+					},
+					"ember_guard": {
+						"armour": 0.0,
+						"critical_hit": 70.758,
+						"evasion": 0.0,
+						"expected_one_attempt": 48.58716,
+						"hit_chance": 1.0,
+						"noncritical_hit": 47.172,
+						"resistances": {
+							"fire": 0.25
+						}
+					},
+					"skitter": {
+						"armour": 0.0,
+						"critical_hit": 75.78,
+						"evasion": 320.0,
+						"expected_one_attempt": 52.035599999999995,
+						"hit_chance": 1.0,
+						"noncritical_hit": 50.52,
+						"resistances": {
+							"fire": 0.0
+						}
+					}
+				},
+				"trap": {
+
+				}
+			},
+			"unspent_points": 8
+		}
+	},
+	"scope": "Deterministic source/model/compiler control, no gameplay or persistence; same existing items; support purchase assumed separately4 fragments/1slot."
+}

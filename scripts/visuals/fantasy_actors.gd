@@ -196,6 +196,7 @@ static func draw_enemy(arena: Node2D, enemy: Dictionary, preferences: VisualSett
 				_draw_brute(arena, r, gait, hurt, boss)
 	var element: String = "cold" if str(enemy.get("template_id", "")) == "frost_guard" else "lightning" if str(enemy.get("template_id", "")) == "storm_skitter" else ""
 	if not element.is_empty(): _draw_element_ward(arena, r, element, hurt)
+	if str(enemy.get("template_id", "")) == "mist_skitter": _draw_mist_feathers(arena, r, hurt)
 	arena.draw_set_transform(Vector2.ZERO)
 	if draw_marks:
 		_draw_enemy_marks(arena, enemy, preferences, tier, r, p)
@@ -427,9 +428,9 @@ static func _draw_enemy_marks(arena: Node2D, enemy: Dictionary, preferences: Vis
 		arena.draw_rect(Rect2(bar.position, Vector2(bar.size.x * shield_ratio, 2)), Color("b9b6cd"))
 		var sigil := p + Vector2(r + 6, -r - 21)
 		_path(arena, [sigil + Vector2(-3, -3), sigil + Vector2(3, -3), sigil + Vector2(2, 1), sigil + Vector2(0, 3), sigil + Vector2(-2, 1), sigil + Vector2(-3, -3)], Color("c5c1d5"), 1.0)
-	if (rarity != "normal" or arena.demo_mode) and arena._font:
+	if (rarity != "normal" or arena.demo_mode or str(enemy.get("template_id", "")) == "mist_skitter") and arena._font:
 		var rarity_name: String = str(Monsters.RARITIES.get(rarity, Monsters.RARITIES.normal).name).split(" · ")[-1]
-		var label: String = str(enemy.get("name", "怪物")) + " · " + rarity_name
+		var label: String = enemy_label(enemy, rarity_name)
 		var font_size: int = roundi(12.0 * preferences.font_scale)
 		var width: float = arena._font.get_string_size(label, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x
 		var baseline := p + Vector2(-width * 0.5, -r - 30)
@@ -516,3 +517,21 @@ static func draw_enemy_body(canvas:CanvasItem,enemy:Dictionary)->void:
 			else:_draw_brute_body(canvas,r,hurt,str(enemy.get("rarity","normal"))=="boss")
 	var element:String="cold" if str(enemy.get("template_id",""))=="frost_guard" else "lightning" if str(enemy.get("template_id",""))=="storm_skitter" else ""
 	if not element.is_empty():_draw_element_ward(canvas,r,element,hurt)
+	if str(enemy.get("template_id", "")) == "mist_skitter": _draw_mist_feathers(canvas, r, hurt)
+
+
+static func enemy_label(enemy: Dictionary, rarity_name: String) -> String:
+	return str(enemy.get("name", "怪物")) + " · " + ("高闪避·较脆" if str(enemy.get("template_id", "")) == "mist_skitter" else rarity_name)
+
+static func mist_feather_shapes(radius: float) -> Array[PackedVector2Array]:
+	var result: Array[PackedVector2Array] = []
+	if not is_finite(radius) or radius <= 0.0: return result
+	for side: float in [-1.0, 1.0]:
+		result.append(PackedVector2Array([Vector2(-0.3*radius, side*0.25*radius), Vector2(-0.8*radius, side*0.7*radius), Vector2(0.2*radius, side*0.5*radius), Vector2(0.5*radius, side*0.2*radius)]))
+	return result
+
+static func _draw_mist_feathers(canvas: CanvasItem, radius: float, hurt: bool) -> void:
+	var tint := Color("ede6ce") if not hurt else Color("fff5db")
+	for shape: PackedVector2Array in mist_feather_shapes(radius):
+		canvas.draw_colored_polygon(shape, tint)
+		canvas.draw_line(shape[0],shape[1],Color("b9a775"),1.2,true)

@@ -9,6 +9,11 @@ const TelegraphProfiles = preload("res://scripts/monsters/telegraph_profiles.gd"
 const MapBossAttacks=preload("res://scripts/monsters/map_boss_profiles.gd")
 const SCHEMA_VERSION: int = 1
 const BASE_ATTACK_SPEED: float = 1.0 / 0.85
+## Authored ordinary encounter budget. Final evasion enters the same
+## AttackHitRules admission used for player talent-derived accuracy/evasion.
+const MIST_SKITTER_POLICY: Dictionary = {
+	"evasion": 1600.0, "health_multiplier": 0.80, "damage_multiplier": 0.85,
+}
 const TELEGRAPH_TEMPLATES: Dictionary = {
 	"ember_guard": {"trigger_distance": 150.0},
 	"frost_guard": {"trigger_distance": 150.0},
@@ -40,6 +45,7 @@ const AFFIX_POOL: Array[String] = ["ember_power", "gale_stride", "grove_vitality
 const TEMPLATES: Dictionary = {
 	"crawler": {"name": "巡游体", "kind": 0, "rarity": "normal", "mechanisms": [], "death_spawns": []},
 	"skitter": {"name": "掠行体", "kind": 1, "rarity": "normal", "mechanisms": [], "death_spawns": []},
+	"mist_skitter": {"name": "雾羽掠行体", "kind": 1, "rarity": "normal", "mechanisms": [], "death_spawns": []},
 	"brute": {"name": "重壳体", "kind": 2, "rarity": "normal", "mechanisms": [], "death_spawns": []},
 	"splitter": {"name": "裂殖巡游体", "kind": 0, "rarity": "magic", "mechanisms": ["grove_vitality"],
 		"death_spawns": [{"template": "crawler", "count": 2}, {"template": "skitter", "count": 1}]},
@@ -161,6 +167,8 @@ static func validate_templates(templates: Dictionary) -> Array[String]:
 			errors.append("模板标识/数据格式错误")
 			continue
 		var entry: Dictionary = templates[id]
+		if id == "mist_skitter" and entry != TEMPLATES.mist_skitter:
+			errors.append("雾羽模板必须保留普通掠行体的完整来源")
 		var rarity: String = str(entry.get("rarity", ""))
 		if not RARITIES.has(rarity) or rarity == "reserved":
 			errors.append("%s: 未知/预留稀有度" % id)
@@ -197,6 +205,8 @@ static func validate_templates(templates: Dictionary) -> Array[String]:
 				continue
 			total += int(child.count)
 			var target: String = str(child.get("template", ""))
+			if target == "mist_skitter":
+				errors.append("雾羽不进入死亡后代模板")
 			if not templates.has(target) or not templates[target] is Dictionary:
 				errors.append("%s: 缺失子怪模板 %s" % [id, target])
 			elif str(templates[target].get("rarity", "")) not in ORDINARY_RARITIES:
@@ -243,6 +253,8 @@ static func make_enemy(id: int, template_id: String, wave: int, position: Vector
 	elif context not in ["ordinary", "death_child", "demo"]:
 		return {}
 	var mechanisms: Array = template.get("mechanisms", []) if rarity_override.is_empty() else mechanisms_override
+	if template_id == "mist_skitter" and (context != "ordinary" or rarity != "normal" or not mechanisms.is_empty()):
+		return {}
 	if mechanisms.size() > int(RARITIES[rarity].affixes):
 		return {}
 	var resolved: Dictionary = Registry.resolve_grants(mechanisms, "monster")
@@ -277,10 +289,17 @@ static func make_enemy(id: int, template_id: String, wave: int, position: Vector
 		"xp_reward": (6 if kind == 2 else 3) * int(tier.xp)}
 	if float(modifiers.get("shield_recharge_rate_increased",0.0))!=0.0 or float(modifiers.get("shield_recharge_start_faster",0.0))!=0.0:
 		result.shield_recharge_rate=recharge.rate;result.shield_recharge_delay=recharge.delay
+	if template_id == "mist_skitter":
+		result.health *= float(MIST_SKITTER_POLICY.health_multiplier)
+		result.max_health *= float(MIST_SKITTER_POLICY.health_multiplier)
+		result.damage *= float(MIST_SKITTER_POLICY.damage_multiplier)
+		result.evasion = float(MIST_SKITTER_POLICY.evasion)
 	return result
 
 static func mechanism_text(enemy: Dictionary) -> String:
 	var labels: PackedStringArray = []
+	if enemy.get("template_id", "") == "mist_skitter":
+		labels.append("高闪避·较脆")
 	var telegraph: Dictionary = telegraph_policy(enemy)
 	if not telegraph.is_empty():
 		labels.append("%s %.1f秒 · 范围 %.0f" % [telegraph.get("name","锁点重击"),telegraph.profile.windup_seconds, telegraph.profile.radius])
