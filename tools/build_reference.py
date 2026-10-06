@@ -623,6 +623,23 @@ def precise_technique_rule(data,link,facts,details):
     return body
 
 
+def mist_skitter_hint(monster, link):
+    budget=monster['encounter_budget'];policy=budget['policy']
+    def value(key, amount, ratio=False):
+        return f'<strong data-mist-value="{esc(key)}" data-value="{esc(amount)}">{percent(amount) if ratio else number(amount)}</strong>'
+    eligible=[row for row in budget['formal_profiles'] if row['eligible']]
+    waves=' / '.join('第'+str(row['tier'])+'档（波次'+str(row['wave'])+'）' for row in eligible)
+    body='<p>高闪避·较脆：闪避 '+value('evasion',monster['source_ratings']['evasion'])+'；生命为同波普通'+link('monsters',budget['baseline_template'])+'的 '+value('health-multiplier',policy['health_multiplier'],True)+'，攻击基底为 '+value('damage-multiplier',policy['damage_multiplier'],True)+'。移动、体型、攻击频率和原奖励资格保持。</p>'
+    body+='<p>仅正式'+link('maps','sunwell_terrace')+'的'+esc(waves)+'：全部原编排与巡逻替换完成后，每据点首个仍为普通白色掠行体的名额才替换，最多 '+value('maximum-per-camp',budget['maximum_per_camp'])+' 只/据点、'+value('maximum-per-map',budget['maximum_per_map'])+' / '+value('map-root-count',budget['map_root_count'])+' 根怪；没有合格名额则为0，雷纹巡逻优先，可整图为0。第一档、其他地图及旧固定波次'+value('fixed-test-wave',budget['fixed_test_wave'])+'的测试地图不出现；不替换蓝金怪、首领或死亡后代。</p>'
+    rows=[]
+    for row in budget['accuracy_probes']:
+        key=str(int(row['accuracy']))
+        rows.append('<tr><th scope="row">'+value('accuracy-'+key,row['accuracy'])+'</th><td>'+value('baseline-chance-'+key,row['baseline_chance'],True)+'</td><td>'+value('mist-chance-'+key,row['mist_chance'],True)+'</td></tr>')
+    body+='<div class="table-scroll"><table><caption>现有命中规则的独立输入探针；并非构筑排行或伤害增幅</caption><thead><tr><th>命中值</th><th>原掠行体 · 闪避 '+value('baseline-evasion',budget['baseline_evasion'])+'</th><th>雾羽掠行体命中率</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
+    body+='<p>'+link('rules','resolute_technique')+'仍以不能暴击换取 '+value('resolute-chance',budget['accuracy_probes'][0]['resolute_chance'],True)+' 闪避准入；'+link('rules','precise_technique')+'不会绕过闪避。法术仍不进行攻击闪避，距离、墙体、出生保护及后续防御保持。没有额外随机抽签或掉落加成。<a href="../MIST_SKITTER.zh-CN.md">出现与预算合同</a></p>'
+    return body
+
+
 def build(data, art):
     records = []
     by_id = {}
@@ -903,6 +920,9 @@ def build(data, art):
             if camp_layout:
                 if key=='sunwell_terrace':
                     sunwell=data[key];camps=camp_layout['camps'];migration=sunwell['migration_example']
+                    if 'mist_skitter' in data['monsters']:
+                        budget=data['monsters']['mist_skitter']['encounter_budget']
+                        body+='<p>正式第二、三档可能遇到'+link('monsters','mist_skitter')+'：每据点最多'+number(budget['maximum_per_camp'])+'只白怪，整图至多'+number(budget['maximum_per_map'])+'/'+number(budget['map_root_count'])+'根怪；没有合格名额则不出现，雷纹巡逻优先。第一档与旧固定波次'+number(budget['fixed_test_wave'])+'测试地图不出现。</p>'
                     intro=facts([('据点',esc(' / '.join(c['name'] for c in camps))),('密度',sunwell_value('camp-count',len(camps))+' 组 × '+sunwell_value('camp-roots',camps[0]['root_count'])+' 根怪，共 '+sunwell_value('total-roots',sum(c['root_count'] for c in camps))),('推进顺序','任意顺序，可同时激活多组；不必清完一组才触发下一组'),('整组出现','进入木牌 '+sunwell_value('trigger-radius',camps[0]['trigger_radius'])+' 范围，同组完整出现；出生提示 '+sunwell_value('spawn-seconds',sunwell['spawn_seconds'])+' 秒'),('安全边界','全部位置离玩家至少 '+sunwell_value('player-clearance',sunwell['player_clearance'])+'，真实半径不越界或压池；容量不足整组等待'),('首领入口','全部普通根怪死亡后开启南侧入口；首领及所有后代死亡才完成'),('经济','保留既有分档费用和完成奖励，后代不增加奖励'),('存档','schema '+sunwell_value('save-version',sunwell['save_version'])+'；旧 '+str(migration['from_version'])+' 验证后备份原字节，只升级版本并增加晴泉进度起点，物品和货币保持')])
                     tier_rows=[]
                     for row in sunwell['tiers']:
@@ -952,12 +972,15 @@ def build(data, art):
         body+=facts([('攻击基底分量 · 防御前',esc(component_text(m['contact_components']))),('有效火焰抗性',percent(m['defense_profile']['effective_resistances']['fire']))])
         if m.get('source_ratings'):
             body+=facts([('命中值',number(m['source_ratings']['accuracy'])),('闪避值',number(m['source_ratings']['evasion']))])
+        if key=='mist_skitter':
+            body+=mist_skitter_hint(m,link)
         if m.get('telegraph_policy'):
             body+='<p>'+link('monster_attacks',m.get('attack_reference',m['telegraph_policy']['profile_id']),'查看锁点重击：预警、躲避与真实伤害')+'</p>'
         encounter=data['fire_encounter']
         if key==encounter['template_id']:
             body+=details('出现条件与专属装备奖励',f'<p>第 {encounter["minimum_wave"]} 波及之后，普通成功入场计数每逢 {encounter["ordinary_admission_interval"]} 的倍数出现。初始入场计入该计数；满员未入场不递增，重开重置。</p><p>符合奖励资格的原始怪物死亡时，仅结算一次：{encounter["reward_count"]} 件 {esc(data["equipment_rarities"][encounter["reward_rarity"]]["name"])} {esc(TYPES[encounter["reward_pool"]])} 装备。可用底材：{links("equipment",data["equipment_pools"][encounter["reward_pool"]]["base_ids"])}。逻辑defense在实际奖励入口映射当前防御池，详见 {link("rules","elemental_defense_affixes")}；显式旧池仍保留历史结果。</p><p>出生节奏、分量、抗性与掉落保障均为本游戏原创平衡。</p>')
-        body+=details(f'第 {m["example_wave"]} 波模板示例',facts([(label,number(e[field])) for label,field in [('生命','max_health'),('护盾','max_shield'),('攻击基底 · 防御前','damage'),('速度','speed'),('攻击频率','attack_speed'),('经验奖励','xp_reward')]])+'<p>包含模板固有稀有度与机制。后续波次、普通随机稀有度和机制组合会改变这些值。</p>')
+        example_note='这是正式第二档的普通模板；第三档沿同波掠行体再应用上述预算，不接受蓝金稀有度或新增机制。' if key=='mist_skitter' else '包含模板固有稀有度与机制。后续波次、普通随机稀有度和机制组合会改变这些值。'
+        body+=details(f'第 {m["example_wave"]} 波模板示例',facts([(label,number(e[field])) for label,field in [('生命','max_health'),('护盾','max_shield'),('攻击基底 · 防御前','damage'),('速度','speed'),('攻击频率','attack_speed'),('经验奖励','xp_reward')]])+'<p>'+example_note+'</p>')
         cards.append(add('monsters',key,m['name'],summary,body,tier,related=link('rules','shared')+' · '+link('defenses','fire_resistance')))
 
     total_weight=sum(p['weight'] for p in data['current_loot_profile'])
@@ -1290,7 +1313,7 @@ def main():
         if args.check:
             if not target.exists() or target.read_bytes()!=source.read_bytes():
                 raise SystemExit('Forgeblade reference image differs from original asset bytes')
-        else:
+        elif not target.exists() or target.read_bytes()!=source.read_bytes():
             target.parent.mkdir(parents=True,exist_ok=True)
             target.write_bytes(source.read_bytes())
     if 'ambush' in data:
@@ -1299,7 +1322,7 @@ def main():
         if args.check:
             if not target.exists() or target.read_bytes()!=source.read_bytes():
                 raise SystemExit('Ambush reference image differs from original asset bytes')
-        else:
+        elif not target.exists() or target.read_bytes()!=source.read_bytes():
             target.parent.mkdir(parents=True,exist_ok=True)
             target.write_bytes(source.read_bytes())
     if 'inward_pull' in data:
@@ -1308,7 +1331,7 @@ def main():
         if args.check:
             if not target.exists() or target.read_bytes()!=source.read_bytes():
                 raise SystemExit('Inward Pull reference image differs from original asset bytes')
-        else:
+        elif not target.exists() or target.read_bytes()!=source.read_bytes():
             target.parent.mkdir(parents=True,exist_ok=True)
             target.write_bytes(source.read_bytes())
     manifest=REF/'art/manifest.json'

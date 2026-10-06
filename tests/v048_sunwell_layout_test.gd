@@ -106,6 +106,7 @@ func _patterns_and_rng() -> void:
 				var index := 0
 				for camp_index: int in range(3):
 					var entries: Array[Dictionary] = state.entries(Layout.CAMP_IDS[camp_index])
+					var mist_selected := false
 					for ordinal: int in range(entries.size()):
 						index += 1
 						var entry: Dictionary = entries[ordinal]
@@ -118,9 +119,12 @@ func _patterns_and_rng() -> void:
 							var species: String = {"frost_guard": "brute", "storm_skitter": "skitter"}.get(expected, expected)
 							if special.has("frost_patrol") and species == "brute": expected = "frost_guard"
 							if special.has("storm_patrol") and species == "skitter": expected = "storm_skitter"
+							if tier in [2, 3] and not mist_selected and expected == "skitter" and roll.rarity == "normal":
+								expected = "mist_skitter"
+								mist_selected = true
 							check(entry.template_id == expected and entry.rarity == roll.rarity and entry.mechanisms == roll.mechanisms, "Independent original RNG stream, unchanged rarity/mechanisms, composed species and final special precedence")
 						coverage[entry.template_id] = true
-	for id: String in ["crawler", "brute", "skitter", "splitter", "brood_host", "ember_guard", "frost_guard", "storm_skitter"]:
+	for id: String in ["crawler", "brute", "skitter", "mist_skitter", "splitter", "brood_host", "ember_guard", "frost_guard", "storm_skitter"]:
 		check(coverage.has(id), "Natural new-map seeds cover " + id)
 
 

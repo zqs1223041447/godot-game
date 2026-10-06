@@ -1,0 +1,39 @@
+{
+  "abort": "",
+  "changed_inputs": [],
+  "checks": 228,
+  "command": [
+    "godot",
+    "--headless",
+    "--path",
+    "/workspace/scratch/a51485f153de/v071-mist-skitter",
+    "--script",
+    "res://tests/mist_skitter_gameplay_test.gd"
+  ],
+  "elapsed_seconds": 2.7070312249998096,
+  "failures": 0,
+  "hash_boundary": "All scripts/scenes/data/non-font assets plus test/runner/frozen catalog. Assets/fonts are excluded because independent glyph work is concurrent; this test does not claim font/render validation.",
+  "input_hashes_match": true,
+  "isolated_environment": {
+    "MIST_GAMEPLAY_REPORT": "/workspace/scratch/a51485f153de/v071-mist-skitter/docs/qa/v071-gameplay/attempts/20261006T064647.481269Z/gameplay-report.json",
+    "MIST_GAMEPLAY_SECTIONS": "",
+    "XDG_CACHE_HOME": "/tmp/godot-m1-v071-mist-px647sgd/cache",
+    "XDG_CONFIG_HOME": "/tmp/godot-m1-v071-mist-px647sgd/config",
+    "XDG_DATA_HOME": "/tmp/godot-m1-v071-mist-px647sgd/data",
+    "XDG_RUNTIME_DIR": "/tmp/godot-m1-v071-mist-px647sgd/runtime",
+    "XDG_STATE_HOME": "/tmp/godot-m1-v071-mist-px647sgd/state"
+  },
+  "passed": true,
+  "raw_exit": 0,
+  "requested_sections": "",
+  "sections": {
+    "attack_critical_and_resolute": 90,
+    "catalog_and_admission": 67,
+    "legal_source_setup": 22,
+    "normal_root_rewards": 21,
+    "spell_and_burn": 28
+  },
+  "started_utc": "2026-10-06T06:46:47.589573+00:00",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_sha256": "1fa3434a23e23b2ef1431592e4bdfb59085893c7c25cfb4df6a0fe3dc8e6f785"
+}

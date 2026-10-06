@@ -39,6 +39,8 @@ const MapRules = preload("res://scripts/world/map_compiler.gd")
 const CampLayoutData=preload("res://scripts/world/map_camp_layout.gd")
 const CampAdmissionData=preload("res://scripts/world/map_camp_admission.gd")
 const SunwellRoster=preload("res://scripts/world/sunwell_roster_rules.gd")
+const MistSkitterRoster=preload("res://scripts/world/mist_skitter_roster_rules.gd")
+const CampRosterData=preload("res://scripts/world/map_camp_state.gd")
 const ThirdMapMigrationData=preload("res://scripts/save/third_map_migration.gd")
 const MapGeometryData = preload("res://scripts/world/map_geometry.gd")
 const MapDefense = preload("res://scripts/world/map_defense_rules.gd")
@@ -74,14 +76,18 @@ func _initialize() -> void:
 	if target == "res://docs/reference/catalog.json":
 		var coverage: Dictionary = SourceCoverage.build_report()
 		assert(not coverage.is_empty() and coverage.integrity.ok)
-		var coverage_file: FileAccess = FileAccess.open(SourceCoverage.OUTPUT_PATH, FileAccess.WRITE)
-		if coverage_file == null:
-			push_error("Cannot write source tree coverage report")
-			quit(1)
-			return
-		coverage_file.store_string(SourceCoverage.serialize_report(coverage))
-		coverage_file.close()
-		print("Source tree coverage exported: " + SourceCoverage.OUTPUT_PATH)
+		var coverage_text: String = SourceCoverage.serialize_report(coverage)
+		if FileAccess.file_exists(SourceCoverage.OUTPUT_PATH) and FileAccess.get_file_as_string(SourceCoverage.OUTPUT_PATH) == coverage_text:
+			print("Source tree coverage unchanged; retained existing file")
+		else:
+			var coverage_file: FileAccess = FileAccess.open(SourceCoverage.OUTPUT_PATH, FileAccess.WRITE)
+			if coverage_file == null:
+				push_error("Cannot write source tree coverage report")
+				quit(1)
+				return
+			coverage_file.store_string(coverage_text)
+			coverage_file.close()
+			print("Source tree coverage exported: " + SourceCoverage.OUTPUT_PATH)
 	quit(0)
 
 static func collect() -> Dictionary:
@@ -324,6 +330,9 @@ static func collect() -> Dictionary:
 		var template: Dictionary = Monsters.TEMPLATES[id].duplicate(true)
 		var context: String = "level_boss" if template.rarity == "boss" else "demo"
 		var example_wave: int = target_wave if id == target_id else int(Monsters.ELEMENTAL_ENCOUNTERS[id].minimum_wave) if Monsters.ELEMENTAL_ENCOUNTERS.has(id) else 1
+		if id == "mist_skitter":
+			context = "ordinary"
+			example_wave = int(MapRules.compile_normal("sunwell_terrace", 2, [], []).profile.wave)
 		template["example_wave"] = example_wave
 		template["runtime_example"] = Monsters.make_enemy(1, id, example_wave, Vector2.ZERO, context)
 		template["contact_components"] = Monsters.contact_components(template.runtime_example)
@@ -334,6 +343,9 @@ static func collect() -> Dictionary:
 			template["natural_selection"] = Monsters.ELEMENTAL_ENCOUNTERS[id].duplicate(true)
 		template["defense_profile"] = Defense.defense_profile(template.runtime_example.defense_stats, "monster")
 		template["source_ratings"] = AttackRules.monster_profile(int(template.runtime_example.kind))
+		if id == "mist_skitter":
+			template.source_ratings.evasion = template.runtime_example.evasion
+			template["encounter_budget"] = mist_skitter_examples(template.runtime_example)
 		result.monsters[id] = template
 	result["special_coverage"] = {}
 	for id: String in Jewels.SPECIAL_BASES:
@@ -1375,6 +1387,50 @@ static func map_boss_examples()->Dictionary:
 				"move_speed":stats.move_speed,"default_profile_max_events":TelegraphProfiles.metadata().max_events_per_attack,
 				"settlement_scope":"两次均为独立命中示例，各从护盾5、生命100开始；实际仍逐次检查位置、墙视线、闪避与受击保护，不将示例生命扣减相加"}
 	return examples
+
+
+static func mist_skitter_examples(enemy: Dictionary) -> Dictionary:
+	var map_id: String = "sunwell_terrace"
+	var layout: Dictionary = CampLayoutData.layout(map_id, Arena.ARENA).landmarks
+	var baseline: Dictionary = Monsters.make_enemy(1, "skitter", int(enemy.wave), Vector2.ZERO, "ordinary")
+	var baseline_evasion: float = float(AttackRules.monster_profile(int(baseline.kind)).evasion)
+	var chances: Array = []
+	# Formula probes, not authored equipment, build rankings, or extra damage.
+	for accuracy: float in [100.0, 284.0, 304.0, 414.0, 600.0]:
+		var ordinary: Dictionary = AttackRules.resolve(accuracy, float(enemy.evasion))
+		var old: Dictionary = AttackRules.resolve(accuracy, baseline_evasion)
+		var resolute: Dictionary = AttackRules.resolve(accuracy, float(enemy.evasion), 50.0, ResoluteRules.active({"resolute_technique":1.0}))
+		assert(ordinary.ok and old.ok and resolute.ok)
+		chances.append({"accuracy":accuracy, "mist_chance":ordinary.chance,
+			"baseline_chance":old.chance, "resolute_chance":resolute.chance})
+	var appearances: Array = []
+	for tier: int in [1, 2, 3]:
+		var profile: Dictionary = MapRules.compile_normal(map_id, tier, [], []).profile
+		appearances.append({"tier":tier, "wave":profile.wave, "eligible":MistSkitterRoster.eligible_profile(profile)})
+	var roster_examples: Array = []
+	for tier: int in [2, 3]:
+		for specials: Array in [[], ["storm_patrol"]]:
+			var profile: Dictionary = MapRules.compile_normal(map_id, tier, [], specials).profile
+			var state := CampRosterData.new()
+			assert(state.begin(profile, layout, 43).ok)
+			var admissions: Dictionary = {}
+			for camp: Dictionary in layout.camps:
+				var indices: Array = []
+				for entry: Dictionary in state.entries(str(camp.id)):
+					if entry.template_id == "mist_skitter":indices.append(entry.admission_index)
+				assert(indices.size() <= 1)
+				admissions[camp.id] = indices
+			roster_examples.append({"tier":tier, "wave":profile.wave,
+				"special_ids":profile.special_ids, "mist_admission_indices":admissions})
+	var fixed_test: Dictionary = MapRules.compile(map_id, [], []).profile
+	assert(not MistSkitterRoster.eligible_profile(fixed_test))
+	return {"policy":Monsters.MIST_SKITTER_POLICY.duplicate(true), "baseline_template":"skitter",
+		"baseline_example":baseline, "baseline_evasion":baseline_evasion,
+		"accuracy_probes":chances, "formal_profiles":appearances,
+		"fixed_test_wave":fixed_test.wave, "fixed_test_eligible":false,
+		"maximum_per_camp":1, "maximum_per_map":layout.camps.size(),
+		"map_root_count":Maps.MAPS[map_id].ordinary_target,
+		"roster_example_seed":43, "roster_examples":roster_examples}
 
 
 static func sunwell_examples()->Dictionary:

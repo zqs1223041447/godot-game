@@ -5,7 +5,6 @@ extends RefCounted
 const Maps = preload("res://scripts/world/map_compiler.gd")
 const Monsters = preload("res://scripts/monsters/monster_catalog.gd")
 const Sunwell = preload("res://scripts/world/sunwell_roster_rules.gd")
-const MistSkitter = preload("res://scripts/world/mist_skitter_roster_rules.gd")
 const CAMP_IDS: Array[String] = ["camp_west", "camp_north", "camp_east"]
 var _state: Dictionary = {}
 
@@ -53,9 +52,6 @@ func begin(profile: Variant, landmarks: Variant, seed_value: Variant) -> Diction
 					template_id = special
 			roster.append({"admission_index": admission_index, "template_id": template_id,
 				"rarity": rarity, "mechanisms": mechanisms, "position": position})
-		var mist_index := MistSkitter.replacement_index(profile, roster)
-		if mist_index >= 0:
-			roster[mist_index].template_id = "mist_skitter"
 		camps.append({"id": camp_id, "entries": roster, "root_ids": []})
 	# Publish only after validation and complete deterministic roster generation.
 	_state = {"profile": profile.duplicate(true), "landmarks": landmarks.duplicate(true),

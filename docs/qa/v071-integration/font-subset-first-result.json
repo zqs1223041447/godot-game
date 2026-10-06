@@ -1,0 +1,12 @@
+{
+  "status": "timeout",
+  "limit_seconds": 50,
+  "command": [
+    "python3",
+    "tools/subset_font.py",
+    "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc"
+  ],
+  "source": "Observed original exec traceback; no stdout/stderr file was written before subprocess timeout.",
+  "font_unchanged": true,
+  "original_font_sha256": "8ca9fe7e3521f7cecec290b39363a4c16c55d5948eabeb152e2af1057e3cc7be"
+}

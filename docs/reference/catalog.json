@@ -36641,7 +36641,7 @@
 		"pool_id": "forgeblade_v34",
 		"save_version": 34
 	},
-	"game_version": "0.70.0",
+	"game_version": "0.71.0",
 	"inward_pull": {
 		"damage_scope": "仍是原direct法术、范围、命中；不添加trap伤害标签，不开放陷阱伤害、牵引词族或新的源树消费者",
 		"direction": "命中照常结算后，将原向外冲量反转为朝本次真实爆发圆心；新星使用施放圆心、陨星使用实际落点、伏击使用已放置符印位置；目标恰好在圆心时冲量为零",
@@ -48963,6 +48963,267 @@
 				"recovery_scaling": "base_attack_speed_divided_by_current_attack_speed",
 				"replaces_contact": true,
 				"trigger_distance": 150.0
+			}
+		},
+		"mist_skitter": {
+			"contact_components": {
+				"physical": 9.775
+			},
+			"death_spawns": [],
+			"defense_profile": {
+				"actor": "monster",
+				"effective_resistances": {
+					"fire": 0.0
+				},
+				"ok": true,
+				"raw_resistances": {
+					"fire": 0.0
+				},
+				"reason": "",
+				"stage": "hit_mitigation"
+			},
+			"encounter_budget": {
+				"accuracy_probes": [
+					{
+						"accuracy": 100.0,
+						"baseline_chance": 0.88,
+						"mist_chance": 0.45,
+						"resolute_chance": 1.0
+					},
+					{
+						"accuracy": 284.0,
+						"baseline_chance": 1.0,
+						"mist_chance": 0.77,
+						"resolute_chance": 1.0
+					},
+					{
+						"accuracy": 304.0,
+						"baseline_chance": 1.0,
+						"mist_chance": 0.79,
+						"resolute_chance": 1.0
+					},
+					{
+						"accuracy": 414.0,
+						"baseline_chance": 1.0,
+						"mist_chance": 0.87,
+						"resolute_chance": 1.0
+					},
+					{
+						"accuracy": 600.0,
+						"baseline_chance": 1.0,
+						"mist_chance": 0.96,
+						"resolute_chance": 1.0
+					}
+				],
+				"baseline_evasion": 320.0,
+				"baseline_example": {
+					"attack_speed": 1.1764705882352942,
+					"attack_timer": 0.5,
+					"contact_weights": {
+						"physical": 1.0
+					},
+					"damage": 11.5,
+					"damage_delay": 0.0,
+					"death_processed": false,
+					"death_spawns": [],
+					"defense_stats": {
+
+					},
+					"equipment_pool": "",
+					"flash": 0.0,
+					"generation": 0,
+					"health": 45.0,
+					"id": 1,
+					"kind": 1,
+					"knockback": [
+						0.0,
+						0.0
+					],
+					"max_health": 45.0,
+					"max_shield": 0.0,
+					"mechanism_ids": [],
+					"mechanism_policy": "poe-passive-v1",
+					"mechanism_revision": 1,
+					"mechanism_schema": 1,
+					"mechanism_stats": {
+
+					},
+					"name": "掠行体",
+					"pos": [
+						0.0,
+						0.0
+					],
+					"radius": 10.0,
+					"rarity": "normal",
+					"resistances": {
+						"fire": 0.0
+					},
+					"reward_eligible": true,
+					"root_id": 1,
+					"shield": 0.0,
+					"shield_regen": 0.0,
+					"slow": 0.0,
+					"spawn": 0.6,
+					"speed": 111.4,
+					"template_id": "skitter",
+					"wave": 6,
+					"xp_reward": 3
+				},
+				"baseline_template": "skitter",
+				"fixed_test_eligible": false,
+				"fixed_test_wave": 6,
+				"formal_profiles": [
+					{
+						"eligible": false,
+						"tier": 1,
+						"wave": 3
+					},
+					{
+						"eligible": true,
+						"tier": 2,
+						"wave": 6
+					},
+					{
+						"eligible": true,
+						"tier": 3,
+						"wave": 10
+					}
+				],
+				"map_root_count": 36,
+				"maximum_per_camp": 1,
+				"maximum_per_map": 3,
+				"policy": {
+					"damage_multiplier": 0.85,
+					"evasion": 1600.0,
+					"health_multiplier": 0.8
+				},
+				"roster_example_seed": 43,
+				"roster_examples": [
+					{
+						"mist_admission_indices": {
+							"camp_east": [
+								25
+							],
+							"camp_north": [
+								21
+							],
+							"camp_west": [
+								6
+							]
+						},
+						"special_ids": [],
+						"tier": 2,
+						"wave": 6
+					},
+					{
+						"mist_admission_indices": {
+							"camp_east": [],
+							"camp_north": [],
+							"camp_west": []
+						},
+						"special_ids": [
+							"storm_patrol"
+						],
+						"tier": 2,
+						"wave": 6
+					},
+					{
+						"mist_admission_indices": {
+							"camp_east": [
+								25
+							],
+							"camp_north": [
+								21
+							],
+							"camp_west": [
+								6
+							]
+						},
+						"special_ids": [],
+						"tier": 3,
+						"wave": 10
+					},
+					{
+						"mist_admission_indices": {
+							"camp_east": [],
+							"camp_north": [],
+							"camp_west": []
+						},
+						"special_ids": [
+							"storm_patrol"
+						],
+						"tier": 3,
+						"wave": 10
+					}
+				]
+			},
+			"example_wave": 6,
+			"kind": 1,
+			"mechanism_text": "高闪避·较脆",
+			"mechanisms": [],
+			"name": "雾羽掠行体",
+			"rarity": "normal",
+			"runtime_example": {
+				"attack_speed": 1.1764705882352942,
+				"attack_timer": 0.5,
+				"contact_weights": {
+					"physical": 1.0
+				},
+				"damage": 9.775,
+				"damage_delay": 0.0,
+				"death_processed": false,
+				"death_spawns": [],
+				"defense_stats": {
+
+				},
+				"equipment_pool": "",
+				"evasion": 1600.0,
+				"flash": 0.0,
+				"generation": 0,
+				"health": 36.0,
+				"id": 1,
+				"kind": 1,
+				"knockback": [
+					0.0,
+					0.0
+				],
+				"max_health": 36.0,
+				"max_shield": 0.0,
+				"mechanism_ids": [],
+				"mechanism_policy": "poe-passive-v1",
+				"mechanism_revision": 1,
+				"mechanism_schema": 1,
+				"mechanism_stats": {
+
+				},
+				"name": "雾羽掠行体",
+				"pos": [
+					0.0,
+					0.0
+				],
+				"radius": 10.0,
+				"rarity": "normal",
+				"resistances": {
+					"fire": 0.0
+				},
+				"reward_eligible": true,
+				"root_id": 1,
+				"shield": 0.0,
+				"shield_regen": 0.0,
+				"slow": 0.0,
+				"spawn": 0.6,
+				"speed": 111.4,
+				"template_id": "mist_skitter",
+				"wave": 6,
+				"xp_reward": 3
+			},
+			"source_ratings": {
+				"accuracy": 100.0,
+				"armour": 0.0,
+				"evasion": 1600.0
+			},
+			"telegraph_policy": {
+
 			}
 		},
 		"rift_warden": {

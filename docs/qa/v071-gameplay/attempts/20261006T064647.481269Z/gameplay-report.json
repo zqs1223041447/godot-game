@@ -1,0 +1,861 @@
+{
+	"attacks": [
+		{
+			"accuracy": 100.0,
+			"admission": [
+				{
+					"actor": "monster",
+					"chance": 0.45,
+					"hit": false,
+					"target_id": 1
+				}
+			],
+			"critical": {
+				"draws": 1,
+				"events": 1,
+				"state": -7103008230215355876
+			},
+			"damage": [],
+			"entropy_after": 45.0,
+			"entropy_before": 0.0
+		},
+		{
+			"accuracy": 100.0,
+			"admission": [
+				{
+					"actor": "monster",
+					"chance": 0.45,
+					"hit": true,
+					"target_id": 1
+				}
+			],
+			"critical": {
+				"draws": 1,
+				"events": 1,
+				"state": -7103008230215355876
+			},
+			"damage": [
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 2.8,
+						"base_coefficient": 2.8,
+						"intrinsic": {
+							"physical": 50.4
+						},
+						"stage": "hit_base",
+						"weapon": {
+							"coefficient": 2.8,
+							"components": {
+								"physical": 4.0
+							},
+							"contribution": {
+								"physical": 11.2
+							},
+							"profile": {
+								"base": {
+									"physical": 4.0
+								},
+								"base_id": "forgeblade",
+								"flat": {
+									"physical": 0.0
+								},
+								"increased": {
+									"physical": 0.0
+								},
+								"item_id": "gear_000004",
+								"sources": [],
+								"stage": "weapon_local"
+							}
+						}
+					},
+					"before_defense_components": {
+						"physical": 129.35999999999996
+					},
+					"cast_id": 1,
+					"components": {
+						"physical": 129.35999999999996
+					},
+					"critical": {
+						"chance": 0.05,
+						"critical": true,
+						"multiplier": 1.5
+					},
+					"details": [
+						{
+							"base": 61.599999999999994,
+							"before_defense": 129.35999999999996,
+							"final": 129.35999999999996,
+							"increased": 0.4,
+							"modifiers": [
+								"melee_physical_increased"
+							],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "physical"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 129.35999999999996,
+					"phase": "direct",
+					"prevented_components": {
+						"physical": 0.0
+					},
+					"projectile_id": 0,
+					"shield_spent": 0.0,
+					"skill_id": "cleave",
+					"tags": [
+						"hit",
+						"attack",
+						"melee",
+						"area"
+					],
+					"target_id": 1,
+					"total": 129.35999999999996
+				}
+			],
+			"entropy_after": 44.0,
+			"entropy_before": 99.0
+		},
+		{
+			"accuracy": 284.0,
+			"admission": [
+				{
+					"actor": "monster",
+					"chance": 0.77,
+					"hit": false,
+					"target_id": 1
+				}
+			],
+			"critical": {
+				"draws": 1,
+				"events": 1,
+				"state": -7103008230215355876
+			},
+			"damage": [],
+			"entropy_after": 77.0,
+			"entropy_before": 0.0
+		},
+		{
+			"accuracy": 284.0,
+			"admission": [
+				{
+					"actor": "monster",
+					"chance": 0.77,
+					"hit": true,
+					"target_id": 1
+				}
+			],
+			"critical": {
+				"draws": 1,
+				"events": 1,
+				"state": -7103008230215355876
+			},
+			"damage": [
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 2.8,
+						"base_coefficient": 2.8,
+						"intrinsic": {
+							"physical": 50.4
+						},
+						"stage": "hit_base",
+						"weapon": {
+							"coefficient": 2.8,
+							"components": {
+								"physical": 4.0
+							},
+							"contribution": {
+								"physical": 11.2
+							},
+							"profile": {
+								"base": {
+									"physical": 4.0
+								},
+								"base_id": "forgeblade",
+								"flat": {
+									"physical": 0.0
+								},
+								"increased": {
+									"physical": 0.0
+								},
+								"item_id": "gear_000004",
+								"sources": [],
+								"stage": "weapon_local"
+							}
+						}
+					},
+					"before_defense_components": {
+						"physical": 129.35999999999996
+					},
+					"cast_id": 1,
+					"components": {
+						"physical": 129.35999999999996
+					},
+					"critical": {
+						"chance": 0.05,
+						"critical": true,
+						"multiplier": 1.5
+					},
+					"details": [
+						{
+							"base": 61.599999999999994,
+							"before_defense": 129.35999999999996,
+							"final": 129.35999999999996,
+							"increased": 0.4,
+							"modifiers": [
+								"melee_physical_increased"
+							],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "physical"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 129.35999999999996,
+					"phase": "direct",
+					"prevented_components": {
+						"physical": 0.0
+					},
+					"projectile_id": 0,
+					"shield_spent": 0.0,
+					"skill_id": "cleave",
+					"tags": [
+						"hit",
+						"attack",
+						"melee",
+						"area"
+					],
+					"target_id": 1,
+					"total": 129.35999999999996
+				}
+			],
+			"entropy_after": 76.0,
+			"entropy_before": 99.0
+		},
+		{
+			"accuracy": 304.0,
+			"admission": [
+				{
+					"actor": "monster",
+					"chance": 0.79,
+					"hit": false,
+					"target_id": 1
+				}
+			],
+			"critical": {
+				"draws": 1,
+				"events": 1,
+				"state": -7103008230215355876
+			},
+			"damage": [],
+			"entropy_after": 79.0,
+			"entropy_before": 0.0
+		},
+		{
+			"accuracy": 304.0,
+			"admission": [
+				{
+					"actor": "monster",
+					"chance": 0.79,
+					"hit": true,
+					"target_id": 1
+				}
+			],
+			"critical": {
+				"draws": 1,
+				"events": 1,
+				"state": -7103008230215355876
+			},
+			"damage": [
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 2.8,
+						"base_coefficient": 2.8,
+						"intrinsic": {
+							"physical": 50.4
+						},
+						"stage": "hit_base",
+						"weapon": {
+							"coefficient": 2.8,
+							"components": {
+								"physical": 4.0
+							},
+							"contribution": {
+								"physical": 11.2
+							},
+							"profile": {
+								"base": {
+									"physical": 4.0
+								},
+								"base_id": "forgeblade",
+								"flat": {
+									"physical": 0.0
+								},
+								"increased": {
+									"physical": 0.0
+								},
+								"item_id": "gear_000004",
+								"sources": [],
+								"stage": "weapon_local"
+							}
+						}
+					},
+					"before_defense_components": {
+						"physical": 129.35999999999996
+					},
+					"cast_id": 1,
+					"components": {
+						"physical": 129.35999999999996
+					},
+					"critical": {
+						"chance": 0.05,
+						"critical": true,
+						"multiplier": 1.5
+					},
+					"details": [
+						{
+							"base": 61.599999999999994,
+							"before_defense": 129.35999999999996,
+							"final": 129.35999999999996,
+							"increased": 0.4,
+							"modifiers": [
+								"melee_physical_increased"
+							],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "physical"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 129.35999999999996,
+					"phase": "direct",
+					"prevented_components": {
+						"physical": 0.0
+					},
+					"projectile_id": 0,
+					"shield_spent": 0.0,
+					"skill_id": "cleave",
+					"tags": [
+						"hit",
+						"attack",
+						"melee",
+						"area"
+					],
+					"target_id": 1,
+					"total": 129.35999999999996
+				}
+			],
+			"entropy_after": 78.0,
+			"entropy_before": 99.0
+		}
+	],
+	"catalog": {
+		"base": "4166822",
+		"map_enemy": {
+			"accuracy": 100.0,
+			"armour": 80.0,
+			"attack_speed": 1.1764705882352942,
+			"attack_timer": 0.5,
+			"contact_weights": {
+				"physical": 1.0
+			},
+			"damage": 9.775,
+			"damage_delay": 0.0,
+			"death_processed": false,
+			"death_spawns": [],
+			"defense_stats": {
+				"cold_resistance": 0.2,
+				"fire_resistance": 0.2,
+				"lightning_resistance": 0.2
+			},
+			"encounter_source": {
+				"before": {
+					"armour": 0.0,
+					"attack_speed": 1.1764705882352942,
+					"damage": 9.775,
+					"health": 36.0,
+					"max_health": 36.0,
+					"max_shield": 0.0,
+					"shield": 0.0,
+					"speed": 111.4
+				},
+				"enemy_id": 1,
+				"mechanism_policy": "poe-passive-v1",
+				"mechanism_revision": 1,
+				"mechanism_schema": 1,
+				"profile": {
+					"additions": {
+						"armour": 80.0,
+						"shield_from_base_health": 0.0
+					},
+					"definitions": [
+						{
+							"description": "怪物护甲 +80；按单次物理命中大小减伤，元素与混沌不变",
+							"field": "armour",
+							"id": "enemy_armour_80",
+							"multiplier": 1.0,
+							"name": "铁肤",
+							"operation": "add_flat",
+							"risk": {
+								"assessment": "prototype_budget_not_balance_proof",
+								"field": "armour",
+								"label": "怪物护甲 +80；按单次物理命中大小减伤，元素与混沌不变",
+								"multiplier": 1.0,
+								"operation": "add_flat",
+								"relative_increase": 0.0,
+								"value": 80.0
+							},
+							"source_id": "encounter:enemy_armour_80",
+							"value": 80.0
+						},
+						{
+							"description": "怪物最大生命 ×1.20",
+							"field": "max_health",
+							"id": "enemy_max_health_120",
+							"multiplier": 1.2,
+							"name": "强健",
+							"operation": "multiply",
+							"risk": {
+								"assessment": "prototype_budget_not_balance_proof",
+								"field": "max_health",
+								"label": "怪物最大生命 ×1.20",
+								"multiplier": 1.2,
+								"operation": "multiply",
+								"relative_increase": 0.19999999999999996,
+								"value": 1.2
+							},
+							"source_id": "encounter:enemy_max_health_120",
+							"value": 1.2
+						}
+					],
+					"modifier_ids": [
+						"enemy_armour_80",
+						"enemy_max_health_120"
+					],
+					"multipliers": {
+						"attack_speed": 1.0,
+						"damage": 1.0,
+						"max_health": 1.2,
+						"speed": 1.0
+					},
+					"resource_policy": {
+						"armour": "add_flat_then_existing_hit_size_formula",
+						"attack_speed": "multiply_contact_rate_and_recovery_only",
+						"damage": "multiply_canonical_once",
+						"health": "preserve_current_to_max_ratio",
+						"max_health": "multiply_canonical_once",
+						"max_shield": "add_fraction_of_unmodified_canonical_max_health",
+						"rounding": "float_no_integer_rounding",
+						"shield": "add_same_bonus_preserve_missing_amount",
+						"shield_regen": "unchanged",
+						"speed": "multiply_canonical_once",
+						"telegraph_windup": "unchanged"
+					},
+					"reward_budget": {
+						"creates_map_items": false,
+						"enabled": false,
+						"grants_rewards": false,
+						"proposed_bonus_fraction": null,
+						"status": "metadata_only"
+					},
+					"risk_parameters": [
+						{
+							"assessment": "prototype_budget_not_balance_proof",
+							"field": "armour",
+							"label": "怪物护甲 +80；按单次物理命中大小减伤，元素与混沌不变",
+							"multiplier": 1.0,
+							"operation": "add_flat",
+							"relative_increase": 0.0,
+							"value": 80.0
+						},
+						{
+							"assessment": "prototype_budget_not_balance_proof",
+							"field": "max_health",
+							"label": "怪物最大生命 ×1.20",
+							"multiplier": 1.2,
+							"operation": "multiply",
+							"relative_increase": 0.19999999999999996,
+							"value": 1.2
+						}
+					],
+					"source": {
+						"balance_source": "original_game_balance",
+						"catalog": "res://scripts/encounters/encounter_catalog.gd",
+						"definition_revision": 2,
+						"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+						"monster_schema_version": 1,
+						"policy_version": 2,
+						"schema_version": 1
+					}
+				},
+				"rarity": "normal",
+				"shield_bonus": 0.0,
+				"template_id": "mist_skitter",
+				"wave": 6
+			},
+			"equipment_pool": "",
+			"evasion": 1600.0,
+			"flash": 0.0,
+			"generation": 0,
+			"health": 43.199999999999996,
+			"id": 1,
+			"kind": 1,
+			"knockback": "(0.0, 0.0)",
+			"map_defense_source": {
+				"effective_resistances": {
+					"cold": 0.2,
+					"fire": 0.2,
+					"lightning": 0.2
+				},
+				"modifier_id": "elemental_aegis",
+				"raw_resistances": {
+					"cold": 0.2,
+					"fire": 0.2,
+					"lightning": 0.2
+				},
+				"source_stats": {
+
+				}
+			},
+			"max_health": 43.199999999999996,
+			"max_shield": 0.0,
+			"mechanism_ids": [],
+			"mechanism_policy": "poe-passive-v1",
+			"mechanism_revision": 1,
+			"mechanism_schema": 1,
+			"mechanism_stats": {
+
+			},
+			"name": "雾羽掠行体",
+			"pos": "(30.0, 40.0)",
+			"radius": 10.0,
+			"rarity": "normal",
+			"resistances": {
+				"cold": 0.2,
+				"fire": 0.2,
+				"lightning": 0.2
+			},
+			"reward_eligible": true,
+			"root_id": 1,
+			"shield": 0.0,
+			"shield_regen": 0.0,
+			"slow": 0.0,
+			"spawn": 0.6,
+			"speed": 111.4,
+			"template_id": "mist_skitter",
+			"wave": 6,
+			"xp_reward": 3
+		},
+		"old_templates": 9,
+		"waves": [
+			1,
+			7,
+			15
+		]
+	},
+	"checks": 228,
+	"failures": 0,
+	"mist_skitter_reward": {
+		"currency_delta": 0,
+		"item_delta": 1,
+		"rng_after": -2356080169426602564,
+		"rng_before": 7559304350212469693,
+		"root_delta": 1,
+		"xp": 3
+	},
+	"scope": "Bounded actual Main and catalog consumers. Controlled final accuracy, genuine source-allocated Resolute, genuine ordinary roots and normal reward pipeline. No roster/UI/Windows/full-history/performance claim.",
+	"sections": {
+		"attack_critical_and_resolute": 90,
+		"catalog_and_admission": 67,
+		"legal_source_setup": 22,
+		"normal_root_rewards": 21,
+		"spell_and_burn": 28
+	},
+	"skitter_reward": {
+		"currency_delta": 0,
+		"item_delta": 1,
+		"rng_after": -2356080169426602564,
+		"rng_before": 7559304350212469693,
+		"root_delta": 1,
+		"xp": 3
+	},
+	"spell_burn": [
+		{
+			"burn": {
+				"last_time": 0.0,
+				"provenance": {
+					"cast_id": 0,
+					"phase": "direct",
+					"projectile_id": 0,
+					"skill_id": "meteor"
+				},
+				"raw_dps": 17.415,
+				"remaining": 3.0,
+				"source_id": 0,
+				"target_id": 1,
+				"target_kind": "monster"
+			},
+			"burn_trace": [
+				{
+					"effective_raw_amount": 8.7075,
+					"from_time": 0.0,
+					"provenance": {
+						"cast_id": 0,
+						"phase": "direct",
+						"projectile_id": 0,
+						"skill_id": "meteor"
+					},
+					"raw_amount": 8.7075,
+					"raw_dps": 17.415,
+					"settlement": {
+						"actor": "monster",
+						"components": {
+							"fire": 8.7075
+						},
+						"damage_total": 8.7075,
+						"details": [
+							{
+								"before_defense": 8.7075,
+								"final": 8.7075,
+								"resistance": 0.0,
+								"type": "fire"
+							}
+						],
+						"health_lost": 8.7075,
+						"mitigated_components": {
+							"fire": 0.0
+						},
+						"ok": true,
+						"overkill": 0.0,
+						"raw_components": {
+							"fire": 8.7075
+						},
+						"reason": "",
+						"remaining_health": 9933.2425,
+						"remaining_shield": 0.0,
+						"shield_spent": 0.0,
+						"stage": "burning"
+					},
+					"source_id": 0,
+					"target_id": 1,
+					"target_kind": "monster",
+					"to_time": 0.5
+				}
+			],
+			"critical": {
+				"draws": 0,
+				"events": 0,
+				"state": -5523110331564227826
+			},
+			"health": 9933.2425,
+			"rng": -6932833750242069849,
+			"spell": {
+				"critical": {
+					"draws": 1,
+					"events": 1,
+					"state": 5610094564553555477
+				},
+				"damage": [
+					{
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 2.7,
+							"base_coefficient": 2.7,
+							"intrinsic": {
+								"lightning": 48.6
+							},
+							"stage": "hit_base"
+						},
+						"before_defense_components": {
+							"lightning": 48.6
+						},
+						"cast_id": 0,
+						"components": {
+							"lightning": 48.6
+						},
+						"critical": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"details": [
+							{
+								"base": 48.6,
+								"before_defense": 48.6,
+								"final": 48.6,
+								"increased": 0.0,
+								"modifiers": [],
+								"more": 1.0,
+								"resistance": 0.0,
+								"type": "lightning"
+							}
+						],
+						"effect_id": "",
+						"health_lost": 48.6,
+						"phase": "direct",
+						"prevented_components": {
+							"lightning": 0.0
+						},
+						"projectile_id": 0,
+						"shield_spent": 0.0,
+						"skill_id": "nova",
+						"tags": [
+							"hit",
+							"spell",
+							"area"
+						],
+						"target_id": 1,
+						"total": 48.6
+					}
+				],
+				"health": 9951.4,
+				"rng": -6932833750242069849
+			}
+		},
+		{
+			"burn": {
+				"last_time": 0.0,
+				"provenance": {
+					"cast_id": 0,
+					"phase": "direct",
+					"projectile_id": 0,
+					"skill_id": "meteor"
+				},
+				"raw_dps": 17.415,
+				"remaining": 3.0,
+				"source_id": 0,
+				"target_id": 1,
+				"target_kind": "monster"
+			},
+			"burn_trace": [
+				{
+					"effective_raw_amount": 8.7075,
+					"from_time": 0.0,
+					"provenance": {
+						"cast_id": 0,
+						"phase": "direct",
+						"projectile_id": 0,
+						"skill_id": "meteor"
+					},
+					"raw_amount": 8.7075,
+					"raw_dps": 17.415,
+					"settlement": {
+						"actor": "monster",
+						"components": {
+							"fire": 8.7075
+						},
+						"damage_total": 8.7075,
+						"details": [
+							{
+								"before_defense": 8.7075,
+								"final": 8.7075,
+								"resistance": 0.0,
+								"type": "fire"
+							}
+						],
+						"health_lost": 8.7075,
+						"mitigated_components": {
+							"fire": 0.0
+						},
+						"ok": true,
+						"overkill": 0.0,
+						"raw_components": {
+							"fire": 8.7075
+						},
+						"reason": "",
+						"remaining_health": 9933.2425,
+						"remaining_shield": 0.0,
+						"shield_spent": 0.0,
+						"stage": "burning"
+					},
+					"source_id": 0,
+					"target_id": 1,
+					"target_kind": "monster",
+					"to_time": 0.5
+				}
+			],
+			"critical": {
+				"draws": 0,
+				"events": 0,
+				"state": -5523110331564227826
+			},
+			"health": 9933.2425,
+			"rng": -6932833750242069849,
+			"spell": {
+				"critical": {
+					"draws": 1,
+					"events": 1,
+					"state": 5610094564553555477
+				},
+				"damage": [
+					{
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 2.7,
+							"base_coefficient": 2.7,
+							"intrinsic": {
+								"lightning": 48.6
+							},
+							"stage": "hit_base"
+						},
+						"before_defense_components": {
+							"lightning": 48.6
+						},
+						"cast_id": 0,
+						"components": {
+							"lightning": 48.6
+						},
+						"critical": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"details": [
+							{
+								"base": 48.6,
+								"before_defense": 48.6,
+								"final": 48.6,
+								"increased": 0.0,
+								"modifiers": [],
+								"more": 1.0,
+								"resistance": 0.0,
+								"type": "lightning"
+							}
+						],
+						"effect_id": "",
+						"health_lost": 48.6,
+						"phase": "direct",
+						"prevented_components": {
+							"lightning": 0.0
+						},
+						"projectile_id": 0,
+						"shield_spent": 0.0,
+						"skill_id": "nova",
+						"tags": [
+							"hit",
+							"spell",
+							"area"
+						],
+						"target_id": 1,
+						"total": 48.6
+					}
+				],
+				"health": 9951.4,
+				"rng": -6932833750242069849
+			}
+		}
+	]
+}
