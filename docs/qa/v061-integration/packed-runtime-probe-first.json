@@ -1,0 +1,55 @@
+{
+	"checks": 10,
+	"completed": false,
+	"evidence": {
+
+	},
+	"failures": 1,
+	"ok": false,
+	"pck_sha256": "dfd80602daebd95f4d8180d401c0fcb5370a11ca5d9953094a2b6e2e37869b63",
+	"results": [
+		{
+			"label": "Actual version and schema38",
+			"ok": true
+		},
+		{
+			"label": "Frozen v60 serializer37 bytes backed up exactly",
+			"ok": true
+		},
+		{
+			"label": "Migration changes only version using equal JSON boundaries",
+			"ok": true
+		},
+		{
+			"label": "Correct migration explanation and original user directory",
+			"ok": true
+		},
+		{
+			"label": "Actual new font contains the one added glyph",
+			"ok": true
+		},
+		{
+			"label": "Only exact keystone block opens at38; conditional source stays closed",
+			"ok": true
+		},
+		{
+			"label": "Packed Chinese line reads actual source support",
+			"ok": true
+		},
+		{
+			"label": "Actual isolated test-town entry",
+			"ok": true
+		},
+		{
+			"label": "Actual test-map entry",
+			"ok": true
+		},
+		{
+			"label": "Actual owned cleave gem uses existing skill group",
+			"ok": false
+		}
+	],
+	"schema": 38,
+	"scope": "Linux same-PCK focused keystone/transaction/snapshot checks, not Windows hardware FPS or physical-input acceptance",
+	"source_commit": "97b66d9bdae87593833415b01ac0f677b4a64956"
+}

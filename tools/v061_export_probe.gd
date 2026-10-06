@@ -58,6 +58,14 @@ func run()->void:
 	if not check(arena.enter_town_test(arena.world_context().revision).ok,"Actual isolated test-town entry"):return
 	if not check(arena.start_map(arena.map_draft().revision).ok,"Actual test-map entry"):return
 	model=arena.state
+	# The frozen migrated fixture has a preserved recovery queue. Respect the
+	# existing award guard by moving those owned items through real transactions.
+	for uid:String in model.pending_items():
+		var destination:Dictionary=model.first_bag_position(uid)
+		var moved:Dictionary=model.move_item(uid,destination,model.revision(),arena.build_save_path) if not destination.is_empty() else {"ok":false,"reason":"No fixture bag space"}
+		if not moved.get("ok",false):
+			check(false,"Recover original owned fixture item: "+str(moved.get("reason","missing result")));return
+	if not check(model.pending_items().is_empty(),"Original migrated recovery items enter the bag through real transactions"):return
 	var gem_uid:String=model.award_gem("skill:cleave")
 	if not check(not gem_uid.is_empty() and model.move_item(gem_uid,{"kind":"skill_main","group_id":"group_000009"},model.revision(),arena.build_save_path).ok,"Actual owned cleave gem uses existing skill group"):return
 	var candidate:Dictionary=model.snapshot();candidate.progress={"level":7,"xp":0};candidate.talents.class_id=1;candidate.talents.allocated=[ROUTE[0]];candidate.talents.normal_points=11;candidate.revision+=1

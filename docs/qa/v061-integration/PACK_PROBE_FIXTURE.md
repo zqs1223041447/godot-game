@@ -1,0 +1,7 @@
+# 包探针夹具前置修正
+
+首次同PCK运行前9项通过，第10项award_gem被现有待整理物品门禁正常拒绝，exit1在2.453秒立即退出；没有缺键异常或等待超时。所用真实v60序列化37夹具包含9件recovery物品，迁移按合同完整保留它们，而普通奖励入口要求先清理待整理物品。
+
+仅在探针中补齐：先用first_bag_position和真实move_item逐件把原物品转入背包，每次检查ok并失败立即退出，然后走原新增宝石流程。没有删除、造空或更改这些旧物品，不修改生产/PCK。首轮原日志/报告分别保留在本目录的packed-probe-first.log.txt与packed-runtime-probe-first.json。最终受影响探针及短启动结果归档在发布证据包。
+
+原导出输入97b66d9bdae87593833415b01ac0f677b4a64956。游戏EXE SHA256为3de41b2a3b63609f94391444c1ff6f2a35532cede482e56a5bd516f8e69c4774，PCK为dfd80602daebd95f4d8180d401c0fcb5370a11ca5d9953094a2b6e2e37869b63；本次仅tools/QA修正，不再导出或重跑6465项源检查。
