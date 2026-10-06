@@ -1,0 +1,81 @@
+{
+  "base_commit": "b93018005413444ad6f988974f4ef3ea09902c5e",
+  "hypothesis": "Per-fragment feedback dictionary allocation/field extraction might materially contribute to dense-burn frame cost",
+  "status": "No production candidate; measured whole feedback upper bound is limited and removable portion unmeasured",
+  "rows": {
+    "no_burn": {
+      "tick": {
+        "max_us": 82735,
+        "mean_us": 56277.083333333336,
+        "n": 24,
+        "over_16_7_ms": 24,
+        "over_33_3_ms": 24,
+        "p50_us": 55344,
+        "p95_us": 63369
+      },
+      "feedback_receipt_inclusive": {
+        "max_us": 5814,
+        "mean_us": 3714.0,
+        "n": 24,
+        "over_16_7_ms": 0,
+        "over_33_3_ms": 0,
+        "p50_us": 3544,
+        "p95_us": 4684
+      },
+      "feedback_fraction_of_mean": 0.06599489134860993,
+      "calls": {
+        "feedback_receipt": 8359
+      },
+      "kinds": {
+        "feedback_hit": 8359
+      },
+      "kills": 0,
+      "reward_kills": 0,
+      "mean_feedback_us_per_call": 10.663476492403397
+    },
+    "ember_deaths": {
+      "tick": {
+        "max_us": 739815,
+        "mean_us": 48964.58,
+        "n": 150,
+        "over_16_7_ms": 62,
+        "over_33_3_ms": 54,
+        "p50_us": 12503,
+        "p95_us": 168988
+      },
+      "feedback_receipt_inclusive": {
+        "max_us": 83697,
+        "mean_us": 4981.566666666667,
+        "n": 150,
+        "over_16_7_ms": 11,
+        "over_33_3_ms": 1,
+        "p50_us": 767,
+        "p95_us": 18762
+      },
+      "feedback_fraction_of_mean": 0.10173816801178866,
+      "calls": {
+        "feedback_receipt": 80587
+      },
+      "kinds": {
+        "feedback_burn": 79129,
+        "feedback_hit": 1458
+      },
+      "kills": 27,
+      "reward_kills": 27,
+      "mean_feedback_us_per_call": 9.272401255785672
+    }
+  },
+  "proof_since_v50": {
+    "feedback_runtime_exact_same_sha256": "a22cebcb8a73f705c5c976363c0c328c3b3c349ca8357bbf73708e465585a1df",
+    "main_record_method_exact_same": true
+  },
+  "limits": [
+    "Timing wrapper overhead included; no before/after speedup claim",
+    "Feedback costs are part of total tick, not additive; component maxima need not occur on same frame",
+    "Public validation, original addition order, caps and rendering outputs must remain",
+    "100catalog actors and controlled180-carrier setup; deathcase actual subsequent150ticks and27 rootrewards; no actor/attack disable except explicit protectedplayer",
+    "No WindowsFPS/render measurement",
+    "Initial combined-run failure excluded entirely from conclusion; both clean per-case runs exit0 without errors",
+    "Historical v50 absolute timings are context only, not comparable speedup baseline for this new measurement"
+  ]
+}
