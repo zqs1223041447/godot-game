@@ -31,3 +31,7 @@ The optional hero uses the backed-up eight static AI direction images. Walking a
 Complete this checkout's normal Godot resource import once, then run `bash tools/run_modular_study.sh`. WASD, original combat inputs and town-return UI remain available. The on-screen badge identifies an isolated study. The inherited old_garden title describes the reused admission/progression profile, not an added formal map selection.
 
 A successful startup prints `MODULAR_STUDY_READY`. Native visual observation is recorded separately when available. Existing v111 art/physics evidence is reused; focused adapter and real Main results are under `docs/qa/v112-modular-study`. No Windows export, Release, additional asset download, full historical regression, long soak or frame-rate claim is part of this slice.
+
+## Closure follow-up
+
+The v114 focused check confirms paths to all six outposts, the original boss and entry, plus the controlled real-model completion/town/claim loop. Formal menu entry still requires pre-admission native geometry validation, two authored route adjustments and an explicit map/progression identity. See [the bounded formal-entry conditions](MODULAR_STUDY_FORMAL_ENTRY.md); the study launcher remains isolated.

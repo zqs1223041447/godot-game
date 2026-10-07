@@ -1,0 +1,356 @@
+extends "res://tests/exploration_main_flow_test.gd"
+## Focused v114 closure: native spatial paths plus controlled lethal receipts.
+## No Main combat ticks, player relocation, gear/currency grant or pickup collection.
+## Natural UI combat remains the separate v112 three-kill evidence.
+const Session = preload("res://scripts/studies/modular_study_session.gd")
+const ExplorationPlan = preload("res://scripts/world/exploration_map_plan.gd")
+const SPATIAL_STEP := 32.0
+const MAX_SEGMENT := 40.0
+const MAX_ROUTE_STEPS := 512
+const TARGET_TOLERANCE := 0.05
+const OUTPUT := "res://docs/qa/v114-modular-map-closure/result.json"
+
+var study_geometry: Variant
+var original_landmarks: Dictionary = {}
+var original_roots: Array = []
+var ground_ref: WeakRef
+var marks_ref: WeakRef
+var pending_journey: Dictionary = {}
+var pending_model_snapshot: Dictionary = {}
+var pending_save_bytes: PackedByteArray = PackedByteArray()
+
+
+func authority_bytes() -> Dictionary:
+	# Route caches may change. Gameplay authority, original actor positions and
+	# persistent bytes must not; the sampler never assigns to any arena field.
+	return {"model": var_to_bytes(arena.state.snapshot()),
+		"actors": var_to_bytes(arena.enemies),
+		"rng": var_to_bytes([arena.rng.seed, arena.rng.state]),
+		"save": FileAccess.get_file_as_bytes(arena.NORMAL_BUILD_PATH),
+		"main": var_to_bytes([observation(), arena.elapsed, arena.health, arena.mana,
+			arena.shield, arena.alive, arena.kills, arena.reward_kills, arena.player_facing,
+			arena.projectiles, arena.projectile_runtime.next_cast_id, arena.cooldowns,
+			arena.attack_timer, arena._simulation_accumulator])}
+
+
+func sample_route(start: Vector2, target: Vector2, label: String) -> Dictionary:
+	var radius: float = arena.PLAYER_RADIUS
+	var position: Vector2 = start
+	var result: Dictionary = {"target": label, "start": start, "goal": target,
+		"radius": radius, "reached": false, "steps": 0, "swept_segments": 0,
+		"distance": 0.0, "maximum_segment": 0.0, "all_segments_clear": true,
+		"end": start, "error": "", "points": [start]}
+	if not arena._geometry.is_clear(start, radius) or not arena._geometry.is_clear(target, radius):
+		result.error = "Original start or target is not clear at the real player radius"
+		return result
+	for index: int in range(MAX_ROUTE_STEPS):
+		if position.distance_to(target) <= TARGET_TOLERANCE:
+			result.reached = true
+			break
+		var direction: Vector2 = arena._geometry.direction(position, target, radius, SPATIAL_STEP)
+		if not direction.is_finite() or direction.length_squared() <= 0.000001:
+			result.error = "Installed geometry returned no forward route"
+			break
+		var requested: Vector2 = position + direction * SPATIAL_STEP
+		var segments: Array = []
+		var next_position: Vector2 = arena._geometry.move(position, requested, radius, segments)
+		var previous_end: Vector2 = position
+		var step_valid: bool = requested.distance_to(position) <= MAX_SEGMENT \
+			and not segments.is_empty() and next_position.is_finite()
+		for segment: Array in segments:
+			var from: Vector2 = segment[0]
+			var to: Vector2 = segment[1]
+			var length: float = from.distance_to(to)
+			var swept: Dictionary = arena._geometry.sweep(from, to, radius)
+			var clear: bool = from.distance_to(previous_end) <= 0.001 \
+				and length <= MAX_SEGMENT and arena._geometry.is_clear(from, radius) \
+				and arena._geometry.is_clear(to, radius) and not bool(swept.hit)
+			step_valid = step_valid and clear
+			result.swept_segments += 1
+			result.distance += length
+			result.maximum_segment = maxf(float(result.maximum_segment), length)
+			result.points.append(to)
+			if not clear:
+				result.blocked_segment = {"from": from, "to": to, "length": length, "sweep": swept}
+			previous_end = to
+		step_valid = step_valid and previous_end.distance_to(next_position) <= 0.001 \
+			and position.distance_to(next_position) <= MAX_SEGMENT
+		result.steps = index + 1
+		result.end = next_position
+		result.all_segments_clear = bool(result.all_segments_clear) and step_valid
+		if not step_valid:
+			result.error = "Movement returned an invalid, discontinuous, oversized or blocked swept segment"
+			break
+		if next_position.distance_to(position) <= 0.0001:
+			result.error = "Installed movement made no spatial progress"
+			break
+		position = next_position
+	if position.distance_to(target) <= TARGET_TOLERANCE and bool(result.all_segments_clear):
+		result.reached = true
+	if not bool(result.reached) and str(result.error).is_empty():
+		result.error = "Finite spatial step budget exhausted"
+	result.remaining_distance = Vector2(result.end).distance_to(target)
+	return result
+
+
+func verify_reachability() -> bool:
+	var before: Dictionary = authority_bytes()
+	record_formal_route_constraints()
+	var entry: Vector2 = original_landmarks.entry
+	var position: Vector2 = entry
+	var goals: Array[Dictionary] = []
+	for outpost: Dictionary in original_landmarks.outposts:
+		goals.append({"id": str(outpost.id), "position": outpost.center})
+	goals.append({"id": "original_boss", "position": original_landmarks.boss.center})
+	goals.append({"id": "original_entry", "position": entry})
+	var center_routes: Array[Dictionary] = []
+	var centers_ok: bool = true
+	for goal: Dictionary in goals:
+		var route: Dictionary = sample_route(position, goal.position, str(goal.id))
+		center_routes.append(route)
+		var valid: bool = bool(route.reached) and bool(route.all_segments_clear)
+		check(valid, "Native radius-15 continuous spatial route reaches " + str(goal.id))
+		centers_ok = centers_ok and valid
+		if not valid:
+			print("MODULAR_MAP_REACHABILITY_BLOCKED " + JSON.stringify(route))
+			break
+		position = route.end
+	var actor_routes: Array[Dictionary] = []
+	var actors_ok: bool = original_roots.size() == 25
+	if centers_ok:
+		for record: Dictionary in original_roots:
+			var route: Dictionary = sample_route(entry, record.position, "root_" + str(record.root_id))
+			route.root_id = record.root_id
+			route.spawn_key = record.spawn_key
+			actor_routes.append(route)
+			var valid: bool = bool(route.reached) and bool(route.all_segments_clear)
+			actors_ok = actors_ok and valid
+			if not valid:
+				print("MODULAR_MAP_REACHABILITY_BLOCKED " + JSON.stringify(route))
+		check(actors_ok and actor_routes.size() == 25,
+			"All 25 original actor positions are individually reachable from entry through native swept radius-15 paths")
+	var after: Dictionary = authority_bytes()
+	var invariant: Dictionary = {}
+	var unchanged: bool = true
+	for key: String in before:
+		invariant[key + "_bytes_unchanged"] = before[key] == after[key]
+		unchanged = unchanged and bool(invariant[key + "_bytes_unchanged"])
+	check(unchanged, "Spatial queries preserve exact model, actor, RNG, save and Main authority bytes")
+	check(arena.elapsed == report.entry_elapsed and arena.player_pos == entry,
+		"Reachability sampling advances no battle time and never moves the actual player")
+	report.reachability = {"method": "Installed direction/move with every returned segment checked by native circle sweep",
+		"spatial_step": SPATIAL_STEP, "hard_maximum_segment": MAX_SEGMENT,
+		"maximum_steps_per_route": MAX_ROUTE_STEPS, "center_routes": center_routes,
+		"actor_routes": actor_routes, "invariance": invariant,
+		"all_centers_and_return_reached": centers_ok and center_routes.size() == 8,
+		"all_original_actor_positions_reached": actors_ok and actor_routes.size() == 25}
+	return centers_ok and actors_ok and unchanged
+
+
+func record_formal_route_constraints() -> void:
+	# This is a read-only audit of the original painted route contract, separate
+	# from player reachability. The v113 paint/filter margin was radius 57;
+	# formal entry instead checks the full original 72-unit width at radius 36.
+	var segments: Array[Dictionary] = []
+	var violations: Array[Dictionary] = []
+	var diagnostics_agree: bool = true
+	var widths_original: bool = true
+	for index: int in range(original_landmarks.route_segments.size()):
+		var segment: Dictionary = original_landmarks.route_segments[index]
+		var radius: float = float(segment.width) * 0.5
+		var start_clear: bool = arena._geometry.is_clear(segment.from, radius)
+		var end_clear: bool = arena._geometry.is_clear(segment.to, radius)
+		var swept: Dictionary = arena._geometry.sweep(segment.from, segment.to, radius)
+		var reason: String = ExplorationPlan._routes_reason({"route_segments": [segment]}, arena._geometry)
+		var valid: bool = start_clear and end_clear and not bool(swept.hit)
+		diagnostics_agree = diagnostics_agree and valid == reason.is_empty()
+		widths_original = widths_original and float(segment.width) == 72.0 and radius == 36.0
+		var detail: Dictionary = {"index": index, "from": segment.from, "to": segment.to,
+			"width": segment.width, "radius": radius, "start_clear": start_clear,
+			"end_clear": end_clear, "sweep": swept, "formal_reason": reason, "valid": valid}
+		segments.append(detail)
+		if not valid:
+			violations.append(detail)
+	var outpost_constraints: Array[Dictionary] = []
+	for outpost: Dictionary in original_landmarks.outposts:
+		var reason: String = ExplorationPlan._routes_reason({"outposts": [outpost]}, arena._geometry)
+		outpost_constraints.append({"id": outpost.id, "center": outpost.center,
+			"center_radius": 27.5, "center_clear": arena._geometry.is_clear(outpost.center, 27.5),
+			"sign_position": outpost.sign_position, "sign_radius": 15.0,
+			"sign_clear": arena._geometry.is_clear(outpost.sign_position, 15.0), "formal_reason": reason})
+	var full_reason: String = ExplorationPlan._routes_reason(original_landmarks, arena._geometry)
+	check(segments.size() == 12 and widths_original and diagnostics_agree,
+		"Read-only audit records all 12 original radius-36 route constraints using the actual formal planner predicate")
+	report.formal_route_audit = {"method": "ExplorationMapPlan._routes_reason on untouched original landmarks and installed native geometry",
+		"scope": "Future formal-entry contract gaps; route-paint failure alone does not imply a radius-15 player is blocked",
+		"v113_visual_filter_radius": 57.0, "formal_route_radius": 36.0, "player_radius": 15.0,
+		"segments": segments, "violations": violations, "outpost_constraints": outpost_constraints,
+		"full_original_landmarks_reason": full_reason, "formal_predicate_passes": full_reason.is_empty()}
+
+
+func return_to_town(label: String) -> bool:
+	# The inherited completion helper calls this immediately before clearing
+	# the run and claiming rewards. Capture evidence at that real boundary.
+	var outposts: Array = arena.world_context().outpost_states
+	var cleared: bool = outposts.size() == 6
+	var defeated_roots: int = 0
+	for outpost: Dictionary in outposts:
+		defeated_roots += int(outpost.roots_defeated)
+		cleared = cleared and str(outpost.state) == "cleared" \
+			and int(outpost.roots_defeated) == int(outpost.root_count) \
+			and int(outpost.living_count) == 0 and int(outpost.pending_descendants) == 0
+	check(cleared and defeated_roots == 24 and arena._map_run.complete,
+		"All six original outposts report cleared, with 24 defeated roots and no live or queued descendants")
+	report.completion = {"outposts": outposts, "run": arena._map_run.snapshot(),
+		"world": arena.world_context(), "living_actors": arena.enemies.size(),
+		"queued_descendants": arena.monster_runtime.queue.size()}
+	if not super.return_to_town(label):
+		return false
+	pause()
+	pending_journey = arena.state.normal_journey()
+	pending_model_snapshot = arena.state.snapshot()
+	pending_save_bytes = FileAccess.get_file_as_bytes(arena.NORMAL_BUILD_PATH)
+	var reloaded: Model = Model.new()
+	if not check(reloaded.load_build(arena.NORMAL_BUILD_PATH), "Reload actual town save before reward claim"):
+		return false
+	check(reloaded.snapshot() == pending_model_snapshot and reloaded.normal_journey() == pending_journey,
+		"Actual pre-claim save reload preserves the complete canonical model and journey")
+	check(pending_journey.active_run.is_empty() and pending_journey.pending_map_reward.get("shards", 0) == 4 \
+		and pending_journey.normal_root_kills == 25 and pending_journey.best_tiers.old_garden == 1 \
+		and reloaded.crafting_balance() == 0,
+		"Town save retains exactly four pending shards, 25 lawful root kills and tier I completion before claim")
+	report.pending_save = {"journey": pending_journey, "balance": reloaded.crafting_balance(),
+		"byte_count": pending_save_bytes.size(), "model_reload_equal": reloaded.snapshot() == pending_model_snapshot}
+	return true
+
+
+func verify_town_and_claimed_save() -> void:
+	var native_released: bool = not study_geometry._study_active and not study_geometry._space.is_valid() \
+		and study_geometry._bodies.is_empty() and study_geometry._shapes.is_empty() \
+		and study_geometry._polygons.is_empty() and study_geometry._query_circle == null \
+		and not study_geometry.physics_ready()
+	check(native_released, "Town return releases the isolated native space, bodies, shapes, contours and query circle")
+	var static_layer: Node2D = arena.static_environment
+	var ground_released: bool = ground_ref.get_ref() == null and marks_ref.get_ref() == null \
+		and not is_instance_valid(static_layer._study_ground) and not is_instance_valid(static_layer._study_marks)
+	check(ground_released and static_layer.material == null and static_layer._camp_signs.material == null \
+		and static_layer.world_geometry().id == "town", "Town releases study ground and marks and restores ordinary materials")
+	check(arena.dimensional_props.diagnostics().study_instances == 0 \
+		and not arena.world_geometry().has("module_polygons") and arena.retained_actors._hero_presentation.is_empty(),
+		"Town has no modular prop instances, polygon presentation or temporary hero selection")
+	var reloaded: Model = Model.new()
+	if not check(reloaded.load_build(arena.NORMAL_BUILD_PATH), "Reload actual saved model after the inherited four-shard claim"):
+		return
+	var journey: Dictionary = reloaded.normal_journey()
+	var saved_bytes: PackedByteArray = FileAccess.get_file_as_bytes(arena.NORMAL_BUILD_PATH)
+	check(reloaded.snapshot() == arena.state.snapshot() and journey == arena.state.normal_journey(),
+		"Post-claim disk reload exactly matches the current canonical model and journey")
+	check(journey.pending_map_reward.is_empty() and journey.active_run.is_empty() \
+		and journey.normal_root_kills == 25 and journey.best_tiers.old_garden == 1 \
+		and reloaded.crafting_balance() == 4 and saved_bytes != pending_save_bytes,
+		"Persisted claim clears only the pending map receipt and retains exactly four earned shards and completed progression")
+	check(Rules.reason(reloaded.snapshot()).is_empty() and reloaded.snapshot().version == 50 \
+		and not FileAccess.file_exists(arena.TOWN_TEST_BUILD_PATH),
+		"Final saved character remains valid schema 50 with no injected test profile")
+	report.cleanup = {"native_released": native_released, "ground_released": ground_released,
+		"world": arena.world_context(), "props": arena.dimensional_props.diagnostics()}
+	report.claimed_save = {"journey": journey, "balance": reloaded.crafting_balance(),
+		"byte_count": saved_bytes.size(), "model_reload_equal": reloaded.snapshot() == arena.state.snapshot()}
+
+
+func run() -> void:
+	var isolated: String = OS.get_environment("XDG_DATA_HOME").simplify_path()
+	if not isolated.begins_with("/tmp/godot-m1-v114-") or FileAccess.file_exists("user://build_save.json"):
+		printerr("Requires fresh isolated /tmp/godot-m1-v114-* XDG_DATA_HOME with no build_save.json")
+		quit(78)
+		return
+	report = {"method": "Fresh formal Main; native spatial path sampler; inherited real Defense controlled lethal receipts and original descendant/reward/completion/claim flow",
+		"natural_combat_claimed": false, "natural_ui_three_kills": "Separate v112 evidence; not repeated by this test",
+		"gear_or_currency_injected": false, "battle_ticks_for_reachability": 0,
+		"full_run": {}, "checks": 0, "failures": 0}
+	arena = load("res://scenes/main.tscn").instantiate()
+	root.add_child(arena)
+	await process_frame
+	pause()
+	if not check(arena.world_context().normal_town and not arena.world_context().test_mode \
+		and arena.enemies.is_empty() and arena.build_save_path == "user://build_save.json" \
+		and arena.state.normal_journey().normal_root_kills == 0 and arena.state.crafting_balance() == 0 \
+		and Rules.reason(arena.state.snapshot()).is_empty(), "Actual fresh Main starts lawful formal town with zero progression or shards"):
+		await finish()
+		return
+	if not check(arena.save_build(), "Save the fresh formal starter before entry"):
+		await finish()
+		return
+	if not accepted(arena.craft_normal_map("old_garden", 1, [], [], arena.map_draft().revision), "Lawful old_garden tier I draft"):
+		await finish()
+		return
+	if not accepted(arena.start_map(arena.map_draft().revision), "Lawful old_garden Main entry"):
+		await finish()
+		return
+	pause()
+	original_landmarks = arena.world_geometry().landmarks.duplicate(true)
+	original_roots = arena.map_spawn_records()
+	report.entry_elapsed = arena.elapsed
+	report.initial_roots = original_roots.size()
+	report.original_landmarks = original_landmarks
+	if not check(arena.PLAYER_RADIUS == 15.0 and original_roots.size() == 25 and arena.enemies.size() == 25 \
+		and original_landmarks.outposts.size() == 6 and arena.monster_runtime.queue.is_empty() \
+		and arena.player_pos == original_landmarks.entry and arena.state.crafting_balance() == 0,
+		"Untouched tier I entry supplies the original 25 roots, six outposts and real radius-15 player"):
+		await finish()
+		return
+	var before_install: Dictionary = authority_bytes()
+	var installed: Dictionary = await Session.install(arena)
+	if not accepted(installed, "Install v112 native polygon session over the original roster"):
+		await finish()
+		return
+	study_geometry = installed.geometry
+	if not check(arena._geometry == study_geometry and study_geometry.physics_ready() \
+		and int(installed.remapped_roots) == 0 and authority_bytes() == before_install,
+		"Native study installation preserves original gameplay, actor, RNG and save bytes without remapping"):
+		await finish()
+		return
+	await process_frame
+	if not check(is_instance_valid(arena.static_environment._study_ground) \
+		and arena.static_environment._study_ground.diagnostics().ready \
+		and is_instance_valid(arena.static_environment._study_marks), "The current natural study ground and marks are active before closure"):
+		await finish()
+		return
+	ground_ref = weakref(arena.static_environment._study_ground)
+	marks_ref = weakref(arena.static_environment._study_marks)
+	report.install = {"remapped_roots": installed.remapped_roots,
+		"geometry": arena.world_geometry(), "ground": arena.static_environment._study_ground.diagnostics()}
+	if not verify_reachability():
+		await finish()
+		return
+	# This is the existing real settlement/descendant/completion/idempotency
+	# integration helper. Its zero-starting-balance premise remains untouched.
+	if not complete_boss_first():
+		await finish()
+		return
+	pause()
+	await process_frame
+	await process_frame
+	verify_town_and_claimed_save()
+	await finish()
+
+
+func finish() -> void:
+	if is_instance_valid(arena):
+		arena.queue_free()
+		await process_frame
+		await process_frame
+	var destination: String = ProjectSettings.globalize_path(OUTPUT)
+	var directory_error: Error = DirAccess.make_dir_recursive_absolute(destination.get_base_dir())
+	check(directory_error == OK, "Evidence output directory is available")
+	var file: FileAccess = FileAccess.open(destination, FileAccess.WRITE)
+	check(file != null, "Focused closure JSON report opens")
+	report.checks = checks
+	report.failures = failures
+	report.failed_labels = labels
+	if file != null:
+		file.store_string(JSON.stringify(report, "\t", true, true))
+		file.close()
+	print("MODULAR_MAP_CLOSURE_JSON " + JSON.stringify(report))
+	print("MODULAR_MAP_CLOSURE checks=%d failures=%d" % [checks, failures])
+	quit(1 if failures else 0)

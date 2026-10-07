@@ -1,0 +1,63 @@
+{
+  "base": "bf8aacfb2c13b96fb6f489338fa7a7252ab190df",
+  "scope": "focused test, QA evidence, technical entry conditions only",
+  "unchanged_tracked_production_paths": [
+    "scripts",
+    "scenes",
+    "data",
+    "assets",
+    "project.godot",
+    "shaders",
+    "tools"
+  ],
+  "changed_production_files": [],
+  "protected_sources": [
+    {
+      "path": "scripts/main.gd",
+      "sha256": "1814f3d34a1ac518fe5442ee5362395c80c3a2231df5a64baaca868a64f9fd0c",
+      "base_exact": true
+    },
+    {
+      "path": "scripts/studies/modular_study_geometry.gd",
+      "sha256": "528914bddc2fbf78b1303888206262efd0411e547cc62f6b0729cf450094d7fe",
+      "base_exact": true
+    },
+    {
+      "path": "scripts/studies/modular_study_session.gd",
+      "sha256": "4a9ee54ae1f386f35ca956fd19c8d7134d5e74b06656bd71b0dde74d1f0e0b42",
+      "base_exact": true
+    },
+    {
+      "path": "scripts/world/map_camp_state.gd",
+      "sha256": "5d45c963e0403bb74f21cea1191a358119c6ea3bd9c5846f55aa9495660adf8a",
+      "base_exact": true
+    },
+    {
+      "path": "scripts/world/exploration_map_plan.gd",
+      "sha256": "3509c9f1475025d097786291342a88f24db96b728bd5af30ae1ec3b948ca2689",
+      "base_exact": true
+    },
+    {
+      "path": "scripts/save/canonical_build_rules.gd",
+      "sha256": "32d9406070dc8e471ba70c0b586e9ab4b8baadf8fbc71f8bb345f54c1ce51530",
+      "base_exact": true
+    },
+    {
+      "path": "scripts/canonical_game_state.gd",
+      "sha256": "18353b0ebcdf1fb6aa1b0e935c784bd8c91114c8a9ae2ce70e3bcf3baccbd309",
+      "base_exact": true
+    },
+    {
+      "path": "tests/exploration_main_flow_test.gd",
+      "sha256": "cf38b574e6bea3a33e8d200ccf84f08f505b0caf1b9af45bc1cb73953cb422a8",
+      "base_exact": true
+    }
+  ],
+  "prior_attempt_source_sha256": "a6136d29d9bdcc368dbc97c4afd917aa72da98b22ae8b71842ff0bfa30892530",
+  "full_result_sha256": "5eca1b0083e98bc1fcf9e29beee34ccf5c9987033580eb2d5a2aa90812c9979e",
+  "final_earned_save_sha256": "57cc365e657146a5bd65274297f158ad4363948d1e9c4f915f80e79c0511d1c8",
+  "final_earned_save_bytes": 15240,
+  "full_flow_rerun": false,
+  "new_import": false,
+  "main_changed": false
+}
