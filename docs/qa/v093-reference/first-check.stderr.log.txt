@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/a51485f153de/v093-chaos-defense-encounter/docs/qa/v093-reference/check-reference.py", line 135, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/scratch/a51485f153de/v093-chaos-defense-encounter/docs/qa/v093-reference/check-reference.py", line 112, in main
+    assert accepted['receipts']==data['chaos_defense']['actual_main_receipts']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

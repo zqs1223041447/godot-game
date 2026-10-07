@@ -192,7 +192,8 @@
 			"pools": [
 				"build_legacy_v27",
 				"build_nine_slot_v27",
-				"build_nine_slot_v46"
+				"build_nine_slot_v46",
+				"build_nine_slot_v51"
 			],
 			"slots": [
 				"charm",
@@ -269,7 +270,8 @@
 			"pools": [
 				"build_legacy_v27",
 				"build_nine_slot_v27",
-				"build_nine_slot_v46"
+				"build_nine_slot_v46",
+				"build_nine_slot_v51"
 			],
 			"slots": [
 				"charm",
@@ -731,7 +733,8 @@
 				"build_legacy_v27",
 				"build_nine_slot_v27",
 				"forgeblade_v34",
-				"build_nine_slot_v46"
+				"build_nine_slot_v46",
+				"build_nine_slot_v51"
 			],
 			"slots": [
 				"charm",
@@ -819,7 +822,8 @@
 				"build_legacy_v27",
 				"build_nine_slot_v27",
 				"forgeblade_v34",
-				"build_nine_slot_v46"
+				"build_nine_slot_v46",
+				"build_nine_slot_v51"
 			],
 			"slots": [
 				"charm",
@@ -890,7 +894,8 @@
 			"name": "精瞄",
 			"other_consumers": [],
 			"pools": [
-				"build_nine_slot_v46"
+				"build_nine_slot_v46",
+				"build_nine_slot_v51"
 			],
 			"scope": "equipped_character",
 			"slots": [
@@ -1170,7 +1175,8 @@
 			"pools": [
 				"nine_slot",
 				"build_nine_slot_v27",
-				"build_nine_slot_v46"
+				"build_nine_slot_v46",
+				"build_nine_slot_v51"
 			],
 			"slots": [
 				"ring",
@@ -1241,7 +1247,8 @@
 			"pools": [
 				"nine_slot",
 				"build_nine_slot_v27",
-				"build_nine_slot_v46"
+				"build_nine_slot_v46",
+				"build_nine_slot_v51"
 			],
 			"slots": [
 				"ring",
@@ -1312,7 +1319,8 @@
 			"pools": [
 				"nine_slot",
 				"build_nine_slot_v27",
-				"build_nine_slot_v46"
+				"build_nine_slot_v46",
+				"build_nine_slot_v51"
 			],
 			"slots": [
 				"ring",
@@ -1383,7 +1391,8 @@
 			"pools": [
 				"nine_slot",
 				"build_nine_slot_v27",
-				"build_nine_slot_v46"
+				"build_nine_slot_v46",
+				"build_nine_slot_v51"
 			],
 			"slots": [
 				"ring",
@@ -1454,7 +1463,8 @@
 			"pools": [
 				"nine_slot",
 				"build_nine_slot_v27",
-				"build_nine_slot_v46"
+				"build_nine_slot_v46",
+				"build_nine_slot_v51"
 			],
 			"slots": [
 				"ring",
@@ -1522,7 +1532,8 @@
 			"pools": [
 				"nine_slot",
 				"build_nine_slot_v27",
-				"build_nine_slot_v46"
+				"build_nine_slot_v46",
+				"build_nine_slot_v51"
 			],
 			"slots": [
 				"belt",
@@ -1590,7 +1601,8 @@
 			"pools": [
 				"nine_slot",
 				"build_nine_slot_v27",
-				"build_nine_slot_v46"
+				"build_nine_slot_v46",
+				"build_nine_slot_v51"
 			],
 			"slots": [
 				"ring",
@@ -1885,7 +1897,8 @@
 			"name": "护火",
 			"other_consumers": [],
 			"pools": [
-				"build_nine_slot_v46"
+				"build_nine_slot_v46",
+				"build_nine_slot_v51"
 			],
 			"scope": "equipped_character",
 			"slots": [
@@ -1956,7 +1969,8 @@
 			"name": "护寒",
 			"other_consumers": [],
 			"pools": [
-				"build_nine_slot_v46"
+				"build_nine_slot_v46",
+				"build_nine_slot_v51"
 			],
 			"scope": "equipped_character",
 			"slots": [
@@ -2027,7 +2041,8 @@
 			"name": "护雷",
 			"other_consumers": [],
 			"pools": [
-				"build_nine_slot_v46"
+				"build_nine_slot_v46",
+				"build_nine_slot_v51"
 			],
 			"scope": "equipped_character",
 			"slots": [
@@ -2035,6 +2050,77 @@
 			],
 			"stage": "hit_mitigation",
 			"stat": "lightning_resistance",
+			"tiers": [
+				{
+					"level": 1,
+					"max": 12,
+					"min": 8,
+					"tier": 1,
+					"weight": 100
+				},
+				{
+					"level": 8,
+					"max": 18,
+					"min": 13,
+					"tier": 2,
+					"weight": 60
+				},
+				{
+					"level": 16,
+					"max": 25,
+					"min": 19,
+					"tier": 3,
+					"weight": 30
+				}
+			],
+			"unit": "percent"
+		},
+		"ring_voidward": {
+			"actors": [
+				"player",
+				"monster"
+			],
+			"affected_skills": [],
+			"allowed_base_ids": [
+				"nine_slot_etched_ring"
+			],
+			"damage_type": "chaos",
+			"eligible_bases": [
+				"nine_slot_etched_ring"
+			],
+			"formatted_examples": [
+				"后缀 · 护虚 T1：混沌抗性 +12%",
+				"后缀 · 护虚 T2：混沌抗性 +18%",
+				"后缀 · 护虚 T3：混沌抗性 +25%"
+			],
+			"formatted_ranges": [
+				{
+					"max": "+12%",
+					"min": "+8%"
+				},
+				{
+					"max": "+18%",
+					"min": "+13%"
+				},
+				{
+					"max": "+25%",
+					"min": "+19%"
+				}
+			],
+			"group": "chaos_resistance",
+			"kind": "suffix",
+			"label": "混沌抗性",
+			"name": "护虚",
+			"other_consumers": [],
+			"pools": [
+				"build_nine_slot_v51"
+			],
+			"scope": "equipped_character",
+			"slots": [
+				"ring"
+			],
+			"stage": "hit_mitigation",
+			"stat": "chaos_resistance",
 			"tiers": [
 				{
 					"level": 1,
@@ -7581,6 +7667,709 @@
 		},
 		"support_slots": 5
 	},
+	"chaos_defense": {
+		"actual_main_checks": 130.0,
+		"actual_main_fixture": {
+			"path": "docs/qa/v093-integration/equipped-fixture.json",
+			"sha256": "fbcc30ce9d683cedaeead557c6c3bb114078530a8f8a6fb7d903acc210e6f698"
+		},
+		"actual_main_receipts": [
+			{
+				"before": {
+					"components": {
+						"chaos": 62.4
+					},
+					"details": [
+						{
+							"base": 62.4,
+							"before_defense": 62.4,
+							"final": 62.4,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "chaos"
+						}
+					],
+					"total": 62.4
+				},
+				"expected": {
+					"components": {
+						"chaos": 46.8
+					},
+					"details": [
+						{
+							"base": 62.4,
+							"before_defense": 62.4,
+							"final": 46.8,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.25,
+							"type": "chaos"
+						}
+					],
+					"total": 46.8
+				},
+				"packet": {
+					"assembly": {
+						"added": {},
+						"added_effectiveness": 2.4,
+						"base_coefficient": 2.4,
+						"intrinsic": {
+							"chaos": 62.4
+						},
+						"stage": "hit_base"
+					},
+					"base": {
+						"chaos": 62.4
+					},
+					"role": "projectile",
+					"skill_id": "shade_bolt",
+					"tags": [
+						"hit",
+						"projectile",
+						"spell"
+					]
+				},
+				"probe": "shade_bolt",
+				"receipt": {
+					"assembly": {
+						"added": {},
+						"added_effectiveness": 2.4,
+						"base_coefficient": 2.4,
+						"intrinsic": {
+							"chaos": 62.4
+						},
+						"stage": "hit_base"
+					},
+					"before_defense_components": {
+						"chaos": 62.4
+					},
+					"cast_id": 0,
+					"components": {
+						"chaos": 46.8
+					},
+					"details": [
+						{
+							"base": 62.4,
+							"before_defense": 62.4,
+							"final": 46.8,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.25,
+							"type": "chaos"
+						}
+					],
+					"effect_id": "",
+					"health_lost": 0.0,
+					"phase": "direct",
+					"prevented_components": {
+						"chaos": 15.600000000000001
+					},
+					"projectile_id": 0,
+					"shield_spent": 46.8,
+					"skill_id": "shade_bolt",
+					"tags": [
+						"hit",
+						"projectile",
+						"spell"
+					],
+					"target_id": 5,
+					"total": 46.8
+				}
+			},
+			{
+				"expected": {
+					"actor": "player",
+					"armour": 0.0,
+					"components": {
+						"chaos": 8.6
+					},
+					"damage_total": 8.6,
+					"details": [
+						{
+							"base": 17.2,
+							"before_defense": 17.2,
+							"final": 8.6,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.5,
+							"type": "chaos"
+						}
+					],
+					"effective_resistances": {
+						"chaos": 0.5,
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"health_lost": 3.5999999999999996,
+					"mitigated_components": {
+						"chaos": 8.6
+					},
+					"ok": true,
+					"overkill": 0.0,
+					"raw_components": {
+						"chaos": 17.2
+					},
+					"raw_resistances": {
+						"chaos": 0.5,
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"remaining_health": 496.4,
+					"remaining_shield": 0.0,
+					"shield_spent": 5.0,
+					"stage": "hit_mitigation"
+				},
+				"probe": "guardian_hit",
+				"receipt": {
+					"actor": "player",
+					"armour": 0.0,
+					"components": {
+						"chaos": 8.6
+					},
+					"damage_total": 8.6,
+					"details": [
+						{
+							"base": 17.2,
+							"before_defense": 17.2,
+							"final": 8.6,
+							"increased": 0.0,
+							"modifiers": [],
+							"more": 1.0,
+							"resistance": 0.5,
+							"type": "chaos"
+						}
+					],
+					"effective_resistances": {
+						"chaos": 0.5,
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"health_lost": 3.5999999999999996,
+					"mitigated_components": {
+						"chaos": 8.6
+					},
+					"ok": true,
+					"overkill": 0.0,
+					"raw_components": {
+						"chaos": 17.2
+					},
+					"raw_resistances": {
+						"chaos": 0.5,
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"remaining_health": 496.4,
+					"remaining_shield": 0.0,
+					"shield_spent": 5.0,
+					"source_id": 5,
+					"stage": "hit_mitigation"
+				}
+			}
+		],
+		"actual_main_report": {
+			"path": "docs/qa/v093-integration/main-result.json",
+			"sha256": "82548fe9805063bf106ffc38adf5ce9bd4a376c3d4162b59c01c3d5f3f02656e"
+		},
+		"actual_main_run": {
+			"path": "docs/qa/v093-integration/main-run.json",
+			"sha256": "d5431519885d7c7bd833310a3a1115cde7ad2d3418f9a0a0a12d10de8362389c"
+		},
+		"affix_id": "ring_voidward",
+		"base_id": "nine_slot_etched_ring",
+		"cap_examples": [
+			{
+				"cap": 0.75,
+				"effective": 0.0,
+				"ok": true,
+				"raw": -0.2,
+				"reason": ""
+			},
+			{
+				"cap": 0.75,
+				"effective": 0.0,
+				"ok": true,
+				"raw": 0.0,
+				"reason": ""
+			},
+			{
+				"cap": 0.75,
+				"effective": 0.25,
+				"ok": true,
+				"raw": 0.25,
+				"reason": ""
+			},
+			{
+				"cap": 0.75,
+				"effective": 0.5,
+				"ok": true,
+				"raw": 0.5,
+				"reason": ""
+			},
+			{
+				"cap": 0.75,
+				"effective": 0.75,
+				"ok": true,
+				"raw": 0.75,
+				"reason": ""
+			},
+			{
+				"cap": 0.75,
+				"effective": 0.75,
+				"ok": true,
+				"raw": 1.0,
+				"reason": ""
+			}
+		],
+		"current_loot_profile_id": "canonical_v51",
+		"equipment_vocabulary": 51,
+		"equipped_profile": {
+			"cap": 0.75,
+			"effective": 0.5,
+			"ok": true,
+			"raw": 0.5,
+			"reason": ""
+		},
+		"hit_examples": [
+			{
+				"packet_components": {
+					"chaos": 16.64
+				},
+				"settlements": {
+					"0": {
+						"actor": "player",
+						"armour": 0.0,
+						"components": {
+							"chaos": 16.64
+						},
+						"damage_total": 16.64,
+						"details": [
+							{
+								"base": 16.64,
+								"before_defense": 16.64,
+								"final": 16.64,
+								"increased": 0.0,
+								"modifiers": [],
+								"more": 1.0,
+								"resistance": 0.0,
+								"type": "chaos"
+							}
+						],
+						"effective_resistances": {
+							"chaos": 0.0,
+							"cold": 0.0,
+							"fire": 0.0,
+							"lightning": 0.0
+						},
+						"health_lost": 16.64,
+						"mitigated_components": {
+							"chaos": 0.0
+						},
+						"ok": true,
+						"overkill": 0.0,
+						"raw_components": {
+							"chaos": 16.64
+						},
+						"raw_resistances": {
+							"chaos": 0.0,
+							"cold": 0.0,
+							"fire": 0.0,
+							"lightning": 0.0
+						},
+						"reason": "",
+						"remaining_health": 83.36,
+						"remaining_shield": 0.0,
+						"shield_spent": 0.0,
+						"stage": "hit_mitigation"
+					},
+					"25": {
+						"actor": "player",
+						"armour": 0.0,
+						"components": {
+							"chaos": 12.48
+						},
+						"damage_total": 12.48,
+						"details": [
+							{
+								"base": 16.64,
+								"before_defense": 16.64,
+								"final": 12.48,
+								"increased": 0.0,
+								"modifiers": [],
+								"more": 1.0,
+								"resistance": 0.25,
+								"type": "chaos"
+							}
+						],
+						"effective_resistances": {
+							"chaos": 0.25,
+							"cold": 0.0,
+							"fire": 0.0,
+							"lightning": 0.0
+						},
+						"health_lost": 12.48,
+						"mitigated_components": {
+							"chaos": 4.16
+						},
+						"ok": true,
+						"overkill": 0.0,
+						"raw_components": {
+							"chaos": 16.64
+						},
+						"raw_resistances": {
+							"chaos": 0.25,
+							"cold": 0.0,
+							"fire": 0.0,
+							"lightning": 0.0
+						},
+						"reason": "",
+						"remaining_health": 87.52,
+						"remaining_shield": 0.0,
+						"shield_spent": 0.0,
+						"stage": "hit_mitigation"
+					},
+					"50": {
+						"actor": "player",
+						"armour": 0.0,
+						"components": {
+							"chaos": 8.32
+						},
+						"damage_total": 8.32,
+						"details": [
+							{
+								"base": 16.64,
+								"before_defense": 16.64,
+								"final": 8.32,
+								"increased": 0.0,
+								"modifiers": [],
+								"more": 1.0,
+								"resistance": 0.5,
+								"type": "chaos"
+							}
+						],
+						"effective_resistances": {
+							"chaos": 0.5,
+							"cold": 0.0,
+							"fire": 0.0,
+							"lightning": 0.0
+						},
+						"health_lost": 8.32,
+						"mitigated_components": {
+							"chaos": 8.32
+						},
+						"ok": true,
+						"overkill": 0.0,
+						"raw_components": {
+							"chaos": 16.64
+						},
+						"raw_resistances": {
+							"chaos": 0.5,
+							"cold": 0.0,
+							"fire": 0.0,
+							"lightning": 0.0
+						},
+						"reason": "",
+						"remaining_health": 91.68,
+						"remaining_shield": 0.0,
+						"shield_spent": 0.0,
+						"stage": "hit_mitigation"
+					}
+				},
+				"source_damage": 20.8,
+				"wave": 5
+			},
+			{
+				"packet_components": {
+					"chaos": 19.44
+				},
+				"settlements": {
+					"0": {
+						"actor": "player",
+						"armour": 0.0,
+						"components": {
+							"chaos": 19.44
+						},
+						"damage_total": 19.44,
+						"details": [
+							{
+								"base": 19.44,
+								"before_defense": 19.44,
+								"final": 19.44,
+								"increased": 0.0,
+								"modifiers": [],
+								"more": 1.0,
+								"resistance": 0.0,
+								"type": "chaos"
+							}
+						],
+						"effective_resistances": {
+							"chaos": 0.0,
+							"cold": 0.0,
+							"fire": 0.0,
+							"lightning": 0.0
+						},
+						"health_lost": 19.44,
+						"mitigated_components": {
+							"chaos": 0.0
+						},
+						"ok": true,
+						"overkill": 0.0,
+						"raw_components": {
+							"chaos": 19.44
+						},
+						"raw_resistances": {
+							"chaos": 0.0,
+							"cold": 0.0,
+							"fire": 0.0,
+							"lightning": 0.0
+						},
+						"reason": "",
+						"remaining_health": 80.56,
+						"remaining_shield": 0.0,
+						"shield_spent": 0.0,
+						"stage": "hit_mitigation"
+					},
+					"25": {
+						"actor": "player",
+						"armour": 0.0,
+						"components": {
+							"chaos": 14.580000000000002
+						},
+						"damage_total": 14.580000000000002,
+						"details": [
+							{
+								"base": 19.44,
+								"before_defense": 19.44,
+								"final": 14.580000000000002,
+								"increased": 0.0,
+								"modifiers": [],
+								"more": 1.0,
+								"resistance": 0.25,
+								"type": "chaos"
+							}
+						],
+						"effective_resistances": {
+							"chaos": 0.25,
+							"cold": 0.0,
+							"fire": 0.0,
+							"lightning": 0.0
+						},
+						"health_lost": 14.580000000000002,
+						"mitigated_components": {
+							"chaos": 4.859999999999999
+						},
+						"ok": true,
+						"overkill": 0.0,
+						"raw_components": {
+							"chaos": 19.44
+						},
+						"raw_resistances": {
+							"chaos": 0.25,
+							"cold": 0.0,
+							"fire": 0.0,
+							"lightning": 0.0
+						},
+						"reason": "",
+						"remaining_health": 85.42,
+						"remaining_shield": 0.0,
+						"shield_spent": 0.0,
+						"stage": "hit_mitigation"
+					},
+					"50": {
+						"actor": "player",
+						"armour": 0.0,
+						"components": {
+							"chaos": 9.72
+						},
+						"damage_total": 9.72,
+						"details": [
+							{
+								"base": 19.44,
+								"before_defense": 19.44,
+								"final": 9.72,
+								"increased": 0.0,
+								"modifiers": [],
+								"more": 1.0,
+								"resistance": 0.5,
+								"type": "chaos"
+							}
+						],
+						"effective_resistances": {
+							"chaos": 0.5,
+							"cold": 0.0,
+							"fire": 0.0,
+							"lightning": 0.0
+						},
+						"health_lost": 9.72,
+						"mitigated_components": {
+							"chaos": 9.72
+						},
+						"ok": true,
+						"overkill": 0.0,
+						"raw_components": {
+							"chaos": 19.44
+						},
+						"raw_resistances": {
+							"chaos": 0.5,
+							"cold": 0.0,
+							"fire": 0.0,
+							"lightning": 0.0
+						},
+						"reason": "",
+						"remaining_health": 90.28,
+						"remaining_shield": 0.0,
+						"shield_spent": 0.0,
+						"stage": "hit_mitigation"
+					}
+				},
+				"source_damage": 24.3,
+				"wave": 10
+			}
+		],
+		"metadata": {
+			"balance_version": "original-chaos-defense-v1",
+			"damage_type": "chaos",
+			"description": "本项目原创混沌命中防御，玩家与怪物共享；有效抗性为 0%–75%，独立于火焰、冰冷、闪电及其最大抗性加成。减伤后依次消耗护盾、可选魔力分担和生命；不会绕过护盾，不产生中毒或其他持续伤害，也不表示来源天赋已开放混沌抗性。",
+			"id": "chaos_resistance",
+			"kind": "hit_defense",
+			"maximum_effective": 0.75,
+			"minimum_effective": 0.0,
+			"name": "混沌抗性",
+			"origin": "original",
+			"schema_version": 1,
+			"settlement_order": [
+				"resistance",
+				"shield",
+				"mana_guard",
+				"health"
+			],
+			"source_refs": [],
+			"stacking": "additive_raw_then_clamp",
+			"stage": "hit_mitigation",
+			"stat": "chaos_resistance",
+			"supported_actors": [
+				"player",
+				"monster"
+			],
+			"unsupported": [
+				"source_talent_grants",
+				"maximum_chaos_resistance_add",
+				"chaos_bypass",
+				"poison",
+				"penetration"
+			]
+		},
+		"normal_special": {
+			"completion_reward_bonus": 2,
+			"description": "原本生成重壳体的普通名额改为蚀影守卫，保留原稀有度与机制；灰烬、分裂、孵化和首领不变。纯混沌攻击蓄力1秒，锁定你的起手位置，走出圆圈即可避开；守卫有25%混沌抗性。 正式地图完成奖励 +2 碎片。",
+			"id": "chaos_patrol",
+			"minimum_wave": 5,
+			"name": "蚀影巡逻",
+			"reward_description": "正式地图完成奖励 +2 碎片",
+			"species": "brute",
+			"template": "chaos_guard"
+		},
+		"pool_id": "build_nine_slot_v51",
+		"ring_slots": [
+			"ring_1",
+			"ring_2"
+		],
+		"rings": [
+			{
+				"definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"后缀 · 护虚 T3：混沌抗性 +25%"
+					],
+					"base_id": "nine_slot_etched_ring",
+					"base_name": "纹刻指环",
+					"description": "最大生命 +4，最大魔力 +2。\n后缀 · 护虚 T3：混沌抗性 +25%",
+					"effects": [],
+					"id": "gear_000006",
+					"item_level": 16,
+					"name": "魔法 · 纹刻指环",
+					"rarity": "magic",
+					"size": "(1, 1)",
+					"slot": "ring",
+					"stats": {
+						"chaos_resistance": 0.25,
+						"max_health": 4.0,
+						"max_mana": 2.0
+					}
+				},
+				"instance": {
+					"affixes": [
+						{
+							"id": "ring_voidward",
+							"tier": 3,
+							"value": 25
+						}
+					],
+					"base_id": "nine_slot_etched_ring",
+					"id": "gear_000006",
+					"item_level": 16,
+					"rarity": "magic"
+				},
+				"location": {
+					"kind": "equipment",
+					"slot_id": "ring_1"
+				}
+			},
+			{
+				"definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"后缀 · 护虚 T3：混沌抗性 +25%"
+					],
+					"base_id": "nine_slot_etched_ring",
+					"base_name": "纹刻指环",
+					"description": "最大生命 +4，最大魔力 +2。\n后缀 · 护虚 T3：混沌抗性 +25%",
+					"effects": [],
+					"id": "gear_000007",
+					"item_level": 16,
+					"name": "魔法 · 纹刻指环",
+					"rarity": "magic",
+					"size": "(1, 1)",
+					"slot": "ring",
+					"stats": {
+						"chaos_resistance": 0.25,
+						"max_health": 4.0,
+						"max_mana": 2.0
+					}
+				},
+				"instance": {
+					"affixes": [
+						{
+							"id": "ring_voidward",
+							"tier": 3,
+							"value": 25
+						}
+					],
+					"base_id": "nine_slot_etched_ring",
+					"id": "gear_000007",
+					"item_level": 16,
+					"rarity": "magic"
+				},
+				"location": {
+					"kind": "equipment",
+					"slot_id": "ring_2"
+				}
+			}
+		],
+		"save_version": 51,
+		"scope": "Read-only lawful actual-Main fixture and its receipts, plus bounded catalog/DefenseRules scalar examples. No Main, map generation, new random gear, saves, images or source-tree coverage export.",
+		"source_policy": 49
+	},
 	"cold_ailment_duration": {
 		"actual_main_report": "docs/qa/v082-gameplay/main-result.json",
 		"actual_main_report_sha256": "aff0efb7cbe79b05940e6c1a2eba606cc7a858763eb343f8936262be2aaeaba7",
@@ -12792,7 +13581,7 @@
 			"weight": 10
 		},
 		{
-			"pool_id": "build_nine_slot_v46",
+			"pool_id": "build_nine_slot_v51",
 			"weight": 30
 		},
 		{
@@ -12800,7 +13589,7 @@
 			"weight": 5
 		}
 	],
-	"current_loot_profile_id": "canonical_v46",
+	"current_loot_profile_id": "canonical_v51",
 	"defense_rating_affixes": {
 		"accuracy_scope": "当前自然怪accuracy为100，等级波次、稀有度与地图增伤不提高accuracy；不推断未来怪物曲线",
 		"base_id": "emberhide_vest",
@@ -51250,7 +52039,8 @@
 				"global_critical_multiplier",
 				"ring_emberward",
 				"ring_rimeward",
-				"ring_stormward"
+				"ring_stormward",
+				"ring_voidward"
 			],
 			"name": "纹刻指环",
 			"pool": "nine_slot",
@@ -51590,6 +52380,34 @@
 				"nine_slot_slate_helmet"
 			],
 			"min_save_version": 46
+		},
+		"build_nine_slot_v51": {
+			"affix_ids": [
+				"nine_slot_prefix_vitality",
+				"nine_slot_prefix_clarity",
+				"nine_slot_prefix_aegis",
+				"nine_slot_suffix_endurance",
+				"nine_slot_suffix_mana_flow",
+				"nine_slot_suffix_stride",
+				"nine_slot_suffix_skill_row",
+				"attack_life_leech",
+				"attack_mana_leech",
+				"global_critical_chance",
+				"global_critical_multiplier",
+				"glove_accuracy",
+				"ring_emberward",
+				"ring_rimeward",
+				"ring_stormward",
+				"ring_voidward"
+			],
+			"base_ids": [
+				"nine_slot_etched_ring",
+				"nine_slot_trail_boots",
+				"nine_slot_folded_belt",
+				"nine_slot_threaded_gloves",
+				"nine_slot_slate_helmet"
+			],
+			"min_save_version": 51
 		},
 		"defense": {
 			"affix_ids": [
@@ -88776,6 +89594,32 @@
 				"weight": 5
 			}
 		],
+		"canonical_v51": [
+			{
+				"pool_id": "build_legacy_v27",
+				"weight": 25
+			},
+			{
+				"pool_id": "runewood",
+				"weight": 20
+			},
+			{
+				"pool_id": "defense_v39",
+				"weight": 10
+			},
+			{
+				"pool_id": "local_weapon",
+				"weight": 10
+			},
+			{
+				"pool_id": "build_nine_slot_v51",
+				"weight": 30
+			},
+			{
+				"pool_id": "forgeblade_v34",
+				"weight": 5
+			}
+		],
 		"v0.11": [
 			{
 				"pool_id": "legacy",
@@ -95314,6 +96158,83 @@
 			"status": "implemented",
 			"target_rule": "lock_center_at_start"
 		},
+		"locked_circle_chaos": {
+			"automatic_repeat": false,
+			"balance_version": "original-telegraphed-area-v1",
+			"damage_rule": "contact_components_times_multiplier",
+			"defaults": {
+				"damage_multiplier": 1.4,
+				"radius": 90.0,
+				"recovery_seconds": 1.2,
+				"windup_seconds": 0.7
+			},
+			"description": "只在明确选择蚀影巡逻后替换原重壳体名额；锁定玩家起手位置，完整预警后结算一次纯混沌命中。",
+			"event_type": "circle_attack",
+			"id": "locked_circle_chaos",
+			"integrated_templates": [
+				"chaos_guard"
+			],
+			"limits": {
+				"damage_multiplier": {
+					"maximum": 100.0,
+					"minimum": 0.0
+				},
+				"radius": {
+					"maximum": 4096.0,
+					"minimum": 0.001
+				},
+				"recovery_seconds": {
+					"maximum": 60.0,
+					"minimum": 0.001
+				},
+				"windup_seconds": {
+					"maximum": 60.0,
+					"minimum": 0.001
+				}
+			},
+			"max_active": 100,
+			"max_events_per_attack": 1,
+			"max_sources_per_advance": 100,
+			"name": "蚀影锁点重击",
+			"ok": true,
+			"origin": "original",
+			"policy": {
+				"base_attack_speed": 1.1764705882352942,
+				"hold_pursuit_during_action": true,
+				"minimum_attack_speed": 0.2,
+				"name": "蚀影锁点重击",
+				"profile": {
+					"damage_multiplier": 0.8,
+					"radius": 90.0,
+					"recovery_seconds": 1.8,
+					"windup_seconds": 1.0
+				},
+				"profile_id": "locked_circle",
+				"recovery_scaling": "base_attack_speed_divided_by_current_attack_speed",
+				"replaces_contact": true,
+				"target_rule": "player_at_start",
+				"trigger_distance": 150.0,
+				"visual_pattern": "chaos_guard"
+			},
+			"profile": {
+				"damage_multiplier": 0.8,
+				"radius": 90.0,
+				"recovery_seconds": 1.8,
+				"windup_seconds": 1.0
+			},
+			"reason": "",
+			"schema_version": 1,
+			"settlement": "DamageResolver/DefenseRules",
+			"shape": "circle",
+			"source_refs": [],
+			"spawn_rule": "reject_or_cancel_while_spawn_positive",
+			"states": [
+				"windup",
+				"recovery"
+			],
+			"status": "implemented",
+			"target_rule": "lock_center_at_start"
+		},
 		"locked_circle_cold": {
 			"automatic_repeat": false,
 			"balance_version": "original-telegraphed-area-v1",
@@ -96838,6 +97759,101 @@
 			},
 			"telegraph_policy": {
 
+			}
+		},
+		"chaos_guard": {
+			"attack_reference": "locked_circle_chaos",
+			"contact_components": {
+				"chaos": 20.8
+			},
+			"contact_weights": {
+				"chaos": 1.0
+			},
+			"death_spawns": [],
+			"defense_profile": {
+				"effective_resistances": {
+					"chaos": 0.25,
+					"fire": 0.0
+				}
+			},
+			"defense_stats": {
+				"chaos_resistance": 0.25
+			},
+			"example_wave": 5,
+			"kind": 2,
+			"mechanism_text": "蚀影锁点重击 1.0秒 · 范围 90 · 混抗 25% · 纯混沌预警攻击；锁定起手位置，可走出圆圈",
+			"mechanisms": [],
+			"name": "蚀影守卫",
+			"rarity": "normal",
+			"runtime_example": {
+				"attack_speed": 1.1764705882352942,
+				"attack_timer": 0.5,
+				"contact_weights": {
+					"chaos": 1.0
+				},
+				"damage": 20.8,
+				"damage_delay": 0.0,
+				"death_processed": false,
+				"death_spawns": [],
+				"defense_stats": {
+					"chaos_resistance": 0.25
+				},
+				"equipment_pool": "",
+				"flash": 0.0,
+				"generation": 0,
+				"health": 155.8,
+				"id": 1,
+				"kind": 2,
+				"knockback": [
+					0.0,
+					0.0
+				],
+				"max_health": 155.8,
+				"max_shield": 0.0,
+				"mechanism_ids": [],
+				"mechanism_policy": "poe-passive-v1",
+				"mechanism_revision": 1,
+				"mechanism_schema": 1,
+				"mechanism_stats": {},
+				"name": "蚀影守卫",
+				"pos": [
+					0.0,
+					0.0
+				],
+				"radius": 22.0,
+				"rarity": "normal",
+				"resistances": {
+					"chaos": 0.25,
+					"fire": 0.0
+				},
+				"reward_eligible": true,
+				"root_id": 1,
+				"shield": 0.0,
+				"shield_regen": 0.0,
+				"slow": 0.0,
+				"spawn": 0.6,
+				"speed": 50.0,
+				"template_id": "chaos_guard",
+				"wave": 5,
+				"xp_reward": 6
+			},
+			"telegraph_policy": {
+				"base_attack_speed": 1.1764705882352942,
+				"hold_pursuit_during_action": true,
+				"minimum_attack_speed": 0.2,
+				"name": "蚀影锁点重击",
+				"profile": {
+					"damage_multiplier": 0.8,
+					"radius": 90.0,
+					"recovery_seconds": 1.8,
+					"windup_seconds": 1.0
+				},
+				"profile_id": "locked_circle",
+				"recovery_scaling": "base_attack_speed_divided_by_current_attack_speed",
+				"replaces_contact": true,
+				"target_rule": "player_at_start",
+				"trigger_distance": 150.0,
+				"visual_pattern": "chaos_guard"
 			}
 		},
 		"crawler": {
@@ -123979,7 +124995,7 @@
 		},
 		"timing": "施放时冻结；分配、退款和换装只影响新施放，旧飞行、母子箭、返回与独立爆炸保持各自快照"
 	},
-	"save_version": 50,
+	"save_version": 51,
 	"schema_version": 3,
 	"sectors": [
 		{
@@ -606282,6 +607298,16 @@
 					"reward_description": "测试模式不增加完成奖励",
 					"species": "skitter",
 					"template": "storm_skitter"
+				},
+				{
+					"completion_reward_bonus": 0,
+					"description": "原本生成重壳体的普通名额改为蚀影守卫，保留原稀有度与机制；灰烬、分裂、孵化和首领不变。纯混沌攻击蓄力1秒，锁定你的起手位置，走出圆圈即可避开；守卫有25%混沌抗性。",
+					"id": "chaos_patrol",
+					"minimum_wave": 5,
+					"name": "蚀影巡逻",
+					"reward_description": "测试模式不增加完成奖励",
+					"species": "brute",
+					"template": "chaos_guard"
 				}
 			]
 		},

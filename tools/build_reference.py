@@ -41,6 +41,8 @@ RULE_TITLES['source_monster_shield_recharge'] = '辉壁储盾与复苏：源护�
 TYPES['defense_v37'] = '历史三抗防具池'
 TYPES['defense_v39'] = '护甲闪避与三抗防具池'
 TYPES['build_nine_slot_v46'] = '精瞄与三抗九槽池'
+TYPES['build_nine_slot_v51'] = '精瞄、三抗与混抗九槽池'
+RULE_TITLES['chaos_defense'] = '混沌防御与蚀影巡逻：双戒和后缀取舍'
 
 def esc(value): return html.escape(str(value), quote=True)
 def lines(value): return '<br>'.join(esc(value).split('\n'))
@@ -50,6 +52,62 @@ DAMAGE_NAMES = {'physical':'物理','fire':'火焰','cold':'冰霜','lightning':
 def component_text(components):
     return ' + '.join(f'{DAMAGE_NAMES[k]} {number(v)}' for k,v in ((key,components.get(key,0)) for key in DAMAGE_NAMES) if v) or '无'
 def percent(value): return number(value*100)+'%'
+
+
+def chaos_value(key, amount, ratio=False):
+    return '<strong data-chaos-value="'+esc(key)+'" data-value="'+esc(amount)+'">'+(percent(amount) if ratio else number(amount))+'</strong>'
+
+
+def chaos_attack_body(data, link, facts):
+    attack=data['monster_attacks']['locked_circle_chaos']; profile=attack['profile']
+    body=facts([('来源',link('monsters','chaos_guard')),('锁定点','玩家起手位置，开始后不追踪'),
+        ('完整预警',chaos_value('windup',profile['windup_seconds'])+' 秒'),
+        ('半径 / 触发距离',chaos_value('radius',profile['radius'])+' / '+chaos_value('trigger-distance',attack['policy']['trigger_distance'])),
+        ('恢复',chaos_value('recovery',profile['recovery_seconds'])+' 秒，沿原攻速规则缩放'),
+        ('伤害',chaos_value('multiplier',profile['damage_multiplier'])+' × 来源接触基底，纯混沌命中'),
+        ('可避开','离开锁定圆圈、墙体阻断视线或原攻击闪避；冻结暂停局部动作时钟')])
+    body+='<p>同一守卫不再叠加贴身接触攻击；起手后时序与伤害冻结。来源死亡、移除、出生保护、玩家死亡或重开沿原取消规则，没有新异常状态或中毒。</p>'
+    return body+'<p>'+link('rules','chaos_defense','防御、单次伤害与实际Main凭据')+' · '+link('map_specials','chaos_patrol')+'</p>'
+
+
+def chaos_special_body(data, link, facts):
+    special=data['chaos_defense']['normal_special']
+    return facts([('最低波级',chaos_value('minimum-wave',special['minimum_wave'])),
+        ('替换',link('monsters',special['species'])+'的原普通名额 → '+link('monsters',special['template'])),
+        ('保留','原稀有度、机制、位置、出生保护、谱系与奖励资格；灰烬、分裂、孵化、首领和后代不替换'),
+        ('名额','沿原1个特殊词缀名额；不额外创建怪物'),
+        ('正式完成奖励','原基础奖励 +'+chaos_value('formal-special-reward',special['completion_reward_bonus'])+' 碎片；测试模式 +'+chaos_value('test-special-reward',0)),
+        ('正式可选档位','断垣、晴泉、银杏II起；旧庭III起，门槛均按实际波级5判断')])+'<p>只在地图装置明确选择后生效。全部初始怪物仍在入图时生成，沿既有警戒、唤醒与墙体视线规则。'+link('monster_attacks','locked_circle_chaos')+' · '+link('rules','chaos_defense')+'</p>'
+
+
+def chaos_defense_rule(data, link, facts):
+    rule=data['chaos_defense']; meta=rule['metadata']; family=data['affixes'][rule['affix_id']]
+    value=chaos_value
+    body='<p>'+esc(meta['description'])+'</p>'+facts([
+        ('当前存档 / 装备词汇 / 源政策',value('save-version',rule['save_version'])+' / '+value('equipment-vocabulary',rule['equipment_vocabulary'])+' / '+value('source-policy',rule['source_policy'])),
+        ('有效混抗下限 / 规则上限',value('minimum',meta['minimum_effective'],True)+' / '+value('cap',meta['maximum_effective'],True)),
+        ('当前装备可达',link('equipment',rule['base_id'])+'，仅戒指一与戒指二；双最高掷值 '+value('equipped-effective',rule['equipped_profile']['effective'],True)),
+        ('结算顺序','各伤害类型抗性 → 护盾 → 可选魔力分担 → 生命')])
+    rows=''.join('<tr><th>T'+number(t['tier'])+'</th><td>'+value('tier-'+number(t['tier'])+'-level',t['level'])+'</td><td>'+value('tier-'+number(t['tier'])+'-min',t['min'])+'%–'+value('tier-'+number(t['tier'])+'-max',t['max'])+'%</td><td>'+value('tier-'+number(t['tier'])+'-weight',t['weight'])+'</td></tr>' for t in family['tiers'])
+    body+='<h3>一条后缀的取舍</h3><p>'+link('affixes',rule['affix_id'])+'只可出现在原纹刻指环。魔法仍最多1后缀，稀有仍最多3后缀；混抗与火、冰、电抗及其他后缀竞争，同族不重复。双25%合计50%；75%是规则上限，当前双戒不能单独达到。</p><div class="table-scroll"><table><thead><tr><th>阶级</th><th>物等门槛</th><th>掷值（含端点）</th><th>权重</th></tr></thead><tbody>'+rows+'</tbody></table></div>'
+    body+='<p>原始混抗同类相加，有效值限制0%–75%；三元素抗性、三元素最大抗性与元素穿透不会提供混抗。没有混沌绕盾、毒、混沌最大抗性加成或新源天赋授权。</p>'
+    body+='<h3>当前来源与历史回放</h3><p>当前 '+esc(rule['current_loot_profile_id'])+' 仅将原30%九槽入口改为 '+esc(rule['pool_id'])+'。新掉落分布和主动制作候选会变化；显式旧池、旧词汇的结果与RNG回放保持，既有物品不自动重掷。不能把旧池回放保持理解为当前新掉落结果相同。</p><p>沿既有赋魔、升格、补缀、重铸取得当前合法词族；校准保留已有族与档位，回收沿原规则，没有防御定向按钮。取消、拒绝或保存失败不改变物品与材料。schema50严格校验并备份原字节后迁移51，只开放新词汇，不赠物品、点数或材料。</p>'
+    rows=[]
+    for row in rule['hit_examples']:
+        wave=number(row['wave'])
+        rows.append('<tr><th>'+wave+'</th><td>'+value('wave-'+wave+'-source',row['source_damage'])+'</td>'+''.join('<td>'+value('wave-'+wave+'-res-'+res,row['settlements'][res]['damage_total'])+'</td>' for res in ['0','25','50'])+'</tr>')
+    body+='<h3>蚀影守卫：单次命中预算</h3><p>普通、无机制增幅守卫的静态示例由真实目录与防御规则导出，护盾为0、生命为100。实际稀有度、源机制和地图增伤仍按原阶段作用，以下不是DPS或长期平衡结论。</p><div class="table-scroll"><table><thead><tr><th>波级</th><th>接触基底</th><th>0%混抗</th><th>25%混抗</th><th>双戒50%混抗</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
+    body+=chaos_special_body(data,link,facts)
+    receipts={row['probe']:row['receipt'] for row in rule['actual_main_receipts']}; hit=receipts['guardian_hit']; outgoing=receipts['shade_bolt']
+    body+='<h3>复用实际Main的双向凭据</h3><p>通过 '+value('main-checks',rule['actual_main_checks'])+' 项检查的隔离Main夹具装备两枚合法魔法指环，每枚只有1条25%混抗后缀；没有手写满词稀有物。该测试含受控资源、战斗探针和清图辅助，不是自然游玩录像。</p>'
+    body+=facts([('玩家蚀影飞弹命中守卫','混沌 '+value('outgoing-raw',outgoing['before_defense_components']['chaos'])+' → '+value('outgoing-mitigated',outgoing['components']['chaos'])+'；守卫自身25%混抗，先耗盾 '+value('outgoing-shield',outgoing['shield_spent'])+'，生命损失 '+value('outgoing-life',outgoing['health_lost'])),
+        ('守卫命中双戒玩家','混沌 '+value('incoming-raw',hit['raw_components']['chaos'])+' → '+value('incoming-mitigated',hit['damage_total'])+'；先耗盾 '+value('incoming-shield',hit['shield_spent'])+'，生命损失 '+value('incoming-life',hit['health_lost']))])
+    body+='<p>'+link('skills','shade_bolt')+' · '+link('monsters','chaos_guard')+' · '+link('monster_attacks','locked_circle_chaos')+' · '+link('rules','mana_guard')+' · <a href="../CHAOS_DEFENSE.zh-CN.md">混沌防御与巡逻合同</a> · <a href="../qa/v093-reference/README.md">本批小片段与保全证据</a>'
+    for key,label in [('actual_main_fixture','实际Main装备夹具'),('actual_main_report','实际Main结果')]:
+        body+=' · <a href="../'+esc(rule[key]['path'].removeprefix('docs/'))+'">'+label+'</a>'
+    return body+'</p>'
+
+
 def merge_jewel_crafting_fragment(data, fragment):
     """Merge one bounded game-data fragment; every unrelated value is preserved."""
     if set(fragment) != {'jewel_crafting'}:
@@ -262,7 +320,7 @@ def exploration_rule_body(data, facts):
         ('唯一当前配置', 'mechanism_config={}；非空配置在扣费前拒绝，optional_encounters=[]'),
         ('生成记录', 'spawn_key独立于actor ID游标且在本图内稳定；保留根/实体ID、来源组、序号、物种、位置、空encounter_id、standard奖励路线直到本图结束'),
         ('奖励边界', '当前只允许standard；未知路线拒绝，不回退普通奖励'),
-        ('持续存档', 'schema50 / source49 / equipment46保持；不把临时探索或未来机制状态写入旧profile')])
+        ('持续存档', ('schema51 / source49 / equipment51；' if 'chaos_defense' in data else 'schema50 / source49 / equipment46保持；')+'不把临时探索或未来机制状态写入旧profile')])
     if route_distribution:
         body += facts([
             ('当前空间分布', '每图6处驻点与1位首领；旧庭3/5怪各3处，其余地图4/8怪各3处，入图仍为25/37个根实体'),
@@ -1230,6 +1288,9 @@ def build(data, art):
             body+='<p>'+esc(e['normal_definition']['weapon_damage_summary'])+'</p><p>局部词缀与原有武器前缀共享稀有装备的三个前缀名额；两条局部前缀不能一起出现在仅允许一个前缀的魔法装备上。</p>'
             related+=' · '+link('weapon_stages','weapon_local')+' · '+(link('rules','forgeblade')+' · '+link('skills','cleave') if key=='forgeblade' else link('rules','basic_attack')+' · '+link('skills','tornado'))
         if key in data.get('glove_ring_affixes',{}).get('base_ids',[]): related+=' · '+link('rules','glove_ring_affixes')
+        if key==data.get('chaos_defense',{}).get('base_id'):
+            body+='<p>当前可选混沌抗性后缀，与三抗等后缀竞争原容量；双指环最高合计50%。'+link('rules','chaos_defense')+'</p>'
+            related+=' · '+link('rules','chaos_defense')
         if e['stats'].get('fire_resistance',0): related+=' · '+link('defenses','fire_resistance','火焰抗性与受击结算')
         if key==data.get('elemental_defense_affixes',{}).get('base_id'): related+=' · '+link('rules','elemental_defense_affixes')+' · '+link('rules','defense_rating_affixes')
         display_pool=data['elemental_defense_affixes']['pool_id'] if key==data.get('elemental_defense_affixes',{}).get('base_id') else e['pool']
@@ -1246,6 +1307,9 @@ def build(data, art):
             related=link('rules','defense_rating_affixes')+' · '+link('rules','source_defenses')
         if key in data.get('glove_ring_affixes',{}).get('new_families',{}):
             related=link('rules','glove_ring_affixes')+' · '+link('rules','precise_technique' if key=='glove_accuracy' else 'elemental_resistance_caps')
+        if key==data.get('chaos_defense',{}).get('affix_id'):
+            body+='<p>独立混沌命中防御；仅原指环后缀，先减伤再消耗护盾、可选魔力分担与生命。不是元素抗性、毒或绕盾。</p>'
+            related=link('rules','chaos_defense')+' · '+link('monsters','chaos_guard')
         if f['stat'] in ['attack_life_leech','attack_mana_leech']:
             body+='<p>按防御后实际扣除敌人护盾与生命计算，仅攻击命中；不含过量伤害或即时回复。与天赋同比例相加，仍受既有单次与总恢复上限。保存整数基点，100基点为1%，每一刻度为0.01个百分点。</p>'
             related=link('rules','source_leech')+' · '+links('skills',f['affected_skills'])
@@ -1476,6 +1540,9 @@ def build(data, art):
             m=data['ginkgo_arcade']['definition']
             cards.append(add('maps',m['id'],m['name'],m['description'],ginkgo_map_body(data,link,facts,details),'正式三档 / 独立测试',related=link('town_services','map_device')))
         for special in town['options']['special_modifiers']:
+            if special['id']=='chaos_patrol' and 'chaos_defense' in data:
+                cards.append(add('map_specials','chaos_patrol',special['name'],special['description'],chaos_special_body(data,link,facts),'已实装特殊词缀',related=link('rules','chaos_defense')))
+                continue
             if special.get('kind')=='defense':
                 body=facts([('最低波次',number(special['minimum_wave'])),('原始加值',number(special['resistance_bonus']*100)+' 个百分点 / '+ '、'.join(DAMAGE_NAMES[t] for t in special['damage_types'])),('有效上限','未授予最大抗性加成，默认0%–75%'),('适用','根怪、首领、死亡后代各从本身原始值加一次'),('保留','物理/混沌抗性、护甲、血盾伤速、身份、稀有度、奖励和RNG'),('分层','最多1特殊词缀，与霜纹/雷纹巡逻互斥')])
                 body+='<figure class="defense-flow"><figcaption>与角色天赋共享的结算</figcaption><ol><li><strong>原始抗性</strong><span>原怪物 + 地图20个百分点</span></li><li><strong>有效抗性</strong><span>未加最大抗性，默认0%–75%</span></li><li><strong>按类型减伤</strong><span>三元素各自结算</span></li><li><strong>护盾 → 生命</strong><span>物理/混沌部分保持</span></li></ol></figure>'
@@ -1494,6 +1561,9 @@ def build(data, art):
                 related_maps+=' · '+link('maps','ginkgo_arcade',data['ginkgo_arcade']['definition']['name'])
             cards.append(add('map_specials',special['id'],special['name'],special['description'],body,'已实装特殊词缀',related=related_maps))
     for key,a in data['monster_attacks'].items():
+        if key=='locked_circle_chaos' and 'chaos_defense' in data:
+            cards.append(add('monster_attacks',key,a['name'],a['description'],chaos_attack_body(data,link,facts),'已实装 · 原创规则',related=link('monsters','chaos_guard')+' · '+link('rules','chaos_defense')))
+            continue
         p=a['profile']; policy=a['policy']
         body=telegraph_diagram(a)+facts([('来源',links('monsters',a['integrated_templates'])),('发动距离',number(policy['trigger_distance'])+' 世界单位'),('原始伤害',component_text(a['example']['event']['packet']['base'])),('倍率',number(p['damage_multiplier'])+' × 来源接触基底'),('攻速作用','只缩放恢复期；预警时间固定；开始后本次时序和伤害冻结'),('期间行动','暂停主动追击；击退仍有效；同一守卫不再叠加贴身接触攻击'),('取消与保护','来源死亡/出生保护/移除、玩家死亡或重开取消；暂停冻结时钟；多次同时命中沿用玩家无敌帧'),('规则版本',esc(a['balance_version']))])
         if a.get('natural_selection'):
@@ -1515,6 +1585,9 @@ def build(data, art):
             body+=facts([('命中值',number(m['source_ratings']['accuracy'])),('闪避值',number(m['source_ratings']['evasion']))])
         if key=='mist_skitter':
             body+=mist_skitter_hint(m,link)
+        if key=='chaos_guard' and 'chaos_defense' in data:
+            body+=facts([('独立有效混沌抗性',chaos_value('monster-chaos-resistance',m['defense_profile']['effective_resistances']['chaos'],True)),('生命、移动与体积','沿原重壳体预算；保留原稀有度、源机制和奖励资格')])
+            body+='<p>仅'+link('map_specials','chaos_patrol')+'显式选择后替换原名额；混沌抗性会削减'+link('skills','shade_bolt')+'的混沌分量，其他类型分别按原防御结算。'+link('rules','chaos_defense')+'</p>'
         if m.get('telegraph_policy'):
             body+='<p>'+link('monster_attacks',m.get('attack_reference',m['telegraph_policy']['profile_id']),'查看锁点重击：预警、躲避与真实伤害')+'</p>'
         encounter=data['fire_encounter']
@@ -1850,6 +1923,8 @@ def build(data, art):
         rule_defs.append(('frost_guard_chill', '霜纹寒击与玩家冰缓', '霜纹寒击造成实际冰霜损伤后，存活玩家移动减速'+percent(policy['movement_speed_reduced'])+'，持续'+number(policy['duration'])+'秒；不追加伤害。', frost_chill_rule(data,link,facts), 'implemented'))
     if 'jewel_crafting' in data:
         rule_defs.append(('jewel_crafting', RULE_TITLES['jewel_crafting'], '背包中的三种普通珠宝可回收或整体重铸；保留底材与稀有度。', jewel_crafting_rule(data,link,facts), 'implemented'))
+    if 'chaos_defense' in data:
+        rule_defs.append(('chaos_defense', RULE_TITLES['chaos_defense'], '独立0%–75%混抗规则；现有双戒最高50%，可选蚀影巡逻沿原名额与完成奖励。', chaos_defense_rule(data,link,facts), 'implemented'))
     for key,name,summary,body,status in rule_defs: cards.append(add('rules',key,name,summary,body,{'implemented':'已实现规则','research':'研究来源','planned':'未实现边界'}[status],status))
     category_counts={cat:sum(x['cat']==cat for x in records) for cat,_ in CATEGORIES}
     nav=''.join(f'<a href="#category-{cat}" id="category-{cat}" class="nav-link" data-category="{cat}"><span>{label}</span><span>{category_counts[cat]}</span></a>' for cat,label in CATEGORIES)
