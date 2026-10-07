@@ -1,0 +1,107 @@
+{
+  "audit_date_utc": "2026-10-07",
+  "recorded_at_utc": "2026-10-07T15:52:16Z",
+  "scope": "Read-only portability, dependency, provenance and preservation audit of the original v109 walkable study. This record preserves already completed observations; it does not report a rerun of the 27 headless or 74 asset checks, a Godot import, native visual acceptance, or a fresh verification of the archive copy.",
+  "baseline_commit": "fc2cdbb817abf24ac5b6d7a5c849b3d3c4087c08",
+  "inspected_source": "art-work/v109-walkable-study",
+  "archive_project_relative_to_audit": "../godot_preview",
+  "result": "The original runtime resource set is complete and uses project-relative paths. A portable archive needs self-contained asset-verification expectations, font licensing, corrected environment credits, and an explicit first-import prerequisite.",
+  "runtime_dependencies": {
+    "inspected_files": ["project.godot", "study.tscn", "study.gd", "player.gd", "study_overlay.gd", "run.sh", "assets/environment/runtime-manifest.json"],
+    "absolute_workspace_runtime_dependency_found": false,
+    "main_scene": "res://study.tscn",
+    "resource_resolution": "Runtime scripts use res:// resources within the independent project. Environment images resolve from assets/environment plus the manifest image field. run.sh resolves its project root from its own location.",
+    "manifest_layers": 30,
+    "visible_layers_in_existing_contract": 28,
+    "missing_manifest_layer_files": [],
+    "blocking_objects": 20,
+    "collision_polygons": 21,
+    "source_symlinks_found": [],
+    "coordinate_contract": "Runtime uses original screen_pixel collision points, foot_screen_pixel anchors and sprite_offset_pixel offsets at identity screen-pixel scale, without applying the manifest camera_zoom conversion.",
+    "layout_limitation": "Original prop occlusion and lighting are baked. Original props cannot be freely moved or removed while claiming the same composition or lighting.",
+    "character_contract": "Eight static idle direction regions from the unchanged hero atlas; no animated walk or run frames or animation acceptance."
+  },
+  "completed_static_integrity_observation": {
+    "manifest": "qa/input-sha256.json",
+    "entries": 35,
+    "missing_entries": [],
+    "sha256_mismatches": [],
+    "meaning": "A one-time read-only SHA-256 comparison of the inspected original source files matched all 35 saved input expectations. No image regeneration or executable test suite was run for this observation.",
+    "coverage_limit": "The 35-entry input manifest covers asset and provenance inputs, not all project scripts or the later archive copy.",
+    "hero_sha256": "63bcf0d01273f448c44d642f8f3a63e54742762c7bc3119707f391ef2328e4ea",
+    "font_sha256": "8e84c0eaf389a86424df39a7e162519de7bd63297fc97679089a4d2a522e5ccc",
+    "runtime_manifest_sha256": "3de399ca6b7e2d84298076f1c2b231a759afe5a6f4b049b6052767f47bc8ea4c",
+    "hero_and_font_match_v108_archive": true,
+    "preservation_method": "Use ordinary independent-project files. Byte-identical copies can share Git blobs without symlinks."
+  },
+  "existing_test_evidence": {
+    "headless_report": "qa/headless-verification.json",
+    "headless_log": "qa/headless.log",
+    "headless_checks": 27,
+    "headless_failures": 0,
+    "asset_report": "qa/asset-verification.json",
+    "asset_log": "qa/assets.log",
+    "asset_checks": 74,
+    "asset_failures": 0,
+    "engine_recorded_in_logs": "Godot 4.6.3.stable.official.7d41c59c4",
+    "rerun_for_this_audit": false,
+    "handoff_record": "qa/handoff.json",
+    "handoff_visual_status": "pending_parent",
+    "handoff_screenshot_status": "not_run",
+    "handoff_fps_status": "not_run",
+    "interpretation": "Retain these as original completed-test evidence. Keep later native observations, archive checks or retests in separate records rather than rewriting the original handoff or claiming new execution."
+  },
+  "test_portability": {
+    "verify_study_gd": {
+      "external_source_directory_dependency_found": false,
+      "input": "preload res://study.gd; all tested scene resources come from the independent project",
+      "output": "res://qa/headless-verification.json",
+      "prerequisites": ["Godot 4.6.3", "Project resources imported", "Existing writable qa directory"],
+      "side_effect": "The script replaces qa/headless-verification.json when run. Its saved historical report should be protected by using a disposable checkout or a separate result destination."
+    },
+    "original_verify_assets_py": {
+      "external_source_dependencies": ["Sibling v108-professional-environment/exports/runtime-manifest.json", "Sibling v108-professional-environment/exports/layers/*.png", "Sibling v108-quality-scene/assets/arena_sans.otf", "Sibling v108-quality-scene/assets/hero_direction_study.png"],
+      "prerequisites": ["Python 3", "Pillow", "Existing writable qa directory"],
+      "output": "qa/asset-verification.json",
+      "recommended_portable_change": "Compare runtime inputs with frozen original SHA-256 expectations; accept original source directories only as an optional extra comparison. Preserve the previously executed test source separately and do not label the changed wrapper as already rerun."
+    },
+    "run_sh": {
+      "portable_root_resolution": true,
+      "first_import_required": true,
+      "first_import_guidance": "Open the independent project.godot in the Godot 4.6.3 editor and allow resource import to finish before running a fresh cache-free checkout. A documented optional CLI equivalent is godot --headless --editor --path PROJECT_DIRECTORY --import.",
+      "automatic_import_in_script": false,
+      "launch": "bash run.sh",
+      "windows_guidance": "Open project.godot directly in Godot. The Bash launcher is optional and is not a Windows-native launcher.",
+      "cache_policy": "Retain source .import files and .gd.uid files; omit .godot and .runtime-home. The engine reconstructs cache outputs from source assets and import settings."
+    }
+  },
+  "provenance_findings": {
+    "original_environment_sources": "assets/environment/SOURCES.md",
+    "original_credit_issue": "The original v109 copy still credits Grass Bermuda 01 to Rico Cilliers and Rob Tuytel. The inspected fc2cdbb v108 archive already corrects this to Rico Cilliers.",
+    "corrected_credit_source_in_baseline": "art-studies/v108/environment/SOURCES.md",
+    "environment_audit_in_baseline": "art-studies/v108/environment/asset-download-audit.json",
+    "font_license_in_baseline": "art-studies/v108/godot_preview/assets/OFL-NotoSansCJK.txt",
+    "character_provenance_in_baseline": "art-studies/v108/character-provenance.json",
+    "original_font_license_file_missing": true,
+    "license_scope": "Poly Haven asset records state CC0. The font has its separate SIL OFL license; the generated character provenance is separate. Do not label the entire project CC0.",
+    "original_download_audit_reference": "The original SOURCES.md refers to asset-download-audit.json, which was not present beside it in the inspected v109 source. Include the small audit or provide an explicit, working reference to the baseline record.",
+    "historical_hash_handling": "The original 35-entry input manifest includes the original SOURCES.md hash. Preserve that evidence unchanged when adopting corrected credits; record corrected provenance files and all delivered files in a separate archive manifest and source mapping."
+  },
+  "minimum_archive_contents": [
+    "Independent project.godot, study.tscn, study.gd, player.gd, study_overlay.gd, run.sh and README",
+    "Associated .gd.uid files and source .import settings",
+    "Hero PNG and font as ordinary project-local files",
+    "All 30 original environment PNGs, runtime-manifest.json and DELIVERY_FROZEN.json",
+    "Corrected environment source record, font OFL, character provenance and source/download mapping",
+    "Test scripts, preserved previously executed test sources and original QA evidence",
+    "Separate archive file inventory and original-to-archive mapping"
+  ],
+  "omit_from_new_archive_copy": [".godot", ".runtime-home", "Empty editor-generated directories", "Duplicate large blend files", "ZIP download packages", "Raw downloaded asset collections"],
+  "archive_work_reported_by_parent_not_independently_rechecked": {
+    "reported_at_utc": "2026-10-07T15:52:16Z",
+    "project_destination": "art-studies/v109/godot_preview",
+    "changes": ["Project copied into the archive", "verify_assets.py adapted to frozen original SHA plus optional source directories", "Previously executed test sources preserved under qa/original-test-sources", "Font OFL, corrected SOURCES and audit added", "Runtime GD scripts, scene and original 27-check test preserved byte-for-byte"],
+    "verification_status": "Parent-reported completion only; not an additional audit finding. No rescanning or test rerun was performed while writing this record."
+  },
+  "limits": ["No Godot import, scene launch or full test rerun during the audit", "No native visual, FPS, animation, export-package or full-game acceptance", "No source or main-game modification by the audit worker", "No commit or push by the audit worker", "The executor transport disconnected during an optional supplementary read after the core observations completed; no uncompleted read is claimed as evidence"]
+}

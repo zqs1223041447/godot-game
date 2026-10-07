@@ -1,0 +1,30 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS manifest_and_png_load []
+PASS all_30_source_layers_loaded_28_visible [30, 28]
+PASS 20_bodies_21_separate_polygons
+PASS two_gate_legs_retained
+PASS ground_and_detail_are_always_behind
+PASS diagnostics_off_by_default
+PASS layer_pixels_land_at_manifest_crop
+PASS collision_screen_points_unmodified
+PASS eight_direction_idle_regions_keep_same_physics_foot
+PASS gate_center_sweep_clear_at_14_22px_radius
+PASS character_moves_through_gate_front_to_rear { "reached": true, "ticks": 39, "end_pixel": [730.302612304688, 178.87223815918], "distance_to_target": 1.85323858261108, "contacts": 0, "last_contact": "" }
+PASS character_moves_through_gate_rear_to_front { "reached": true, "ticks": 39, "end_pixel": [715.642517089844, 276.676330566406], "distance_to_target": 1.85323858261108, "contacts": 0, "last_contact": "" }
+PASS gate_leg_0_blocks_sweep object_00
+PASS gate_leg_0_blocks_character { "reached": false, "ticks": 70, "end_pixel": [819.104675292969, 275.221435546875], "distance_to_target": 39.0126304626465, "contacts": 57, "last_contact": "object_00" }
+PASS gate_leg_0_no_foot_penetration
+PASS gate_leg_1_blocks_sweep object_00
+PASS gate_leg_1_blocks_character { "reached": false, "ticks": 70, "end_pixel": [626.8544921875, 255.854110717773], "distance_to_target": 37.6472129821777, "contacts": 56, "last_contact": "object_00" }
+PASS gate_leg_1_no_foot_penetration
+PASS rock_blocks_sweep object_08
+PASS rock_blocks_character { "reached": false, "ticks": 90, "end_pixel": [252.09880065918, 596.092712402344], "distance_to_target": 85.2272186279297, "contacts": 81, "last_contact": "object_08" }
+PASS shared_foot_y_sort_matches_frozen_prop_order
+PASS character_behind_arch_at_rear
+PASS character_in_front_of_arch_at_front
+PASS threshold_in_ground_contract
+PASS reset_restores_spawn_idle
+PASS no_animation_or_gameplay_nodes
+PASS three_scene_load_free_cycles_stable { "baseline_nodes": 1, "baseline_resources": 4, "cycles": [{ "cycle": 1, "nodes": 1, "resources": 4 }, { "cycle": 2, "nodes": 1, "resources": 4 }, { "cycle": 3, "nodes": 1, "resources": 4 }] }
+RESULT: 27 checks, 0 failures

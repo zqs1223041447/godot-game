@@ -1,0 +1,220 @@
+{
+  "animation_acceptance": "not_applicable_static_direction_images",
+  "character_radius_pixel": 14.2222222222,
+  "checks": [
+    {
+      "detail": [],
+      "name": "manifest_and_png_load",
+      "passed": true
+    },
+    {
+      "detail": [
+        30,
+        28
+      ],
+      "name": "all_30_source_layers_loaded_28_visible",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "20_bodies_21_separate_polygons",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "two_gate_legs_retained",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "ground_and_detail_are_always_behind",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "diagnostics_off_by_default",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "layer_pixels_land_at_manifest_crop",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "collision_screen_points_unmodified",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "eight_direction_idle_regions_keep_same_physics_foot",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "gate_center_sweep_clear_at_14_22px_radius",
+      "passed": true
+    },
+    {
+      "detail": {
+        "contacts": 0,
+        "distance_to_target": 1.85323858261108,
+        "end_pixel": [
+          730.302612304688,
+          178.87223815918
+        ],
+        "last_contact": "",
+        "reached": true,
+        "ticks": 39
+      },
+      "name": "character_moves_through_gate_front_to_rear",
+      "passed": true
+    },
+    {
+      "detail": {
+        "contacts": 0,
+        "distance_to_target": 1.85323858261108,
+        "end_pixel": [
+          715.642517089844,
+          276.676330566406
+        ],
+        "last_contact": "",
+        "reached": true,
+        "ticks": 39
+      },
+      "name": "character_moves_through_gate_rear_to_front",
+      "passed": true
+    },
+    {
+      "detail": "object_00",
+      "name": "gate_leg_0_blocks_sweep",
+      "passed": true
+    },
+    {
+      "detail": {
+        "contacts": 57,
+        "distance_to_target": 39.0126304626465,
+        "end_pixel": [
+          819.104675292969,
+          275.221435546875
+        ],
+        "last_contact": "object_00",
+        "reached": false,
+        "ticks": 70
+      },
+      "name": "gate_leg_0_blocks_character",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "gate_leg_0_no_foot_penetration",
+      "passed": true
+    },
+    {
+      "detail": "object_00",
+      "name": "gate_leg_1_blocks_sweep",
+      "passed": true
+    },
+    {
+      "detail": {
+        "contacts": 56,
+        "distance_to_target": 37.6472129821777,
+        "end_pixel": [
+          626.8544921875,
+          255.854110717773
+        ],
+        "last_contact": "object_00",
+        "reached": false,
+        "ticks": 70
+      },
+      "name": "gate_leg_1_blocks_character",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "gate_leg_1_no_foot_penetration",
+      "passed": true
+    },
+    {
+      "detail": "object_08",
+      "name": "rock_blocks_sweep",
+      "passed": true
+    },
+    {
+      "detail": {
+        "contacts": 81,
+        "distance_to_target": 85.2272186279297,
+        "end_pixel": [
+          252.09880065918,
+          596.092712402344
+        ],
+        "last_contact": "object_08",
+        "reached": false,
+        "ticks": 90
+      },
+      "name": "rock_blocks_character",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "shared_foot_y_sort_matches_frozen_prop_order",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "character_behind_arch_at_rear",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "character_in_front_of_arch_at_front",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "threshold_in_ground_contract",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "reset_restores_spawn_idle",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "no_animation_or_gameplay_nodes",
+      "passed": true
+    },
+    {
+      "detail": {
+        "baseline_nodes": 1,
+        "baseline_resources": 4,
+        "cycles": [
+          {
+            "cycle": 1,
+            "nodes": 1,
+            "resources": 4
+          },
+          {
+            "cycle": 2,
+            "nodes": 1,
+            "resources": 4
+          },
+          {
+            "cycle": 3,
+            "nodes": 1,
+            "resources": 4
+          }
+        ]
+      },
+      "name": "three_scene_load_free_cycles_stable",
+      "passed": true
+    }
+  ],
+  "coordinate_space": "identity screen_pixel; no Camera2D zoom; original collision points preserved",
+  "failures": 0,
+  "fps_benchmark": "not_run",
+  "native_visual_review": "not_run",
+  "passed": true,
+  "scope": "Headless layer, foot-anchor, physics, sort-contract and lifecycle checks only"
+}
