@@ -1,0 +1,60 @@
+{
+  "baseline_main": "d2d188ab3aa284a1abbb7d9e382eaf976678aab2",
+  "source_delivery_only": true,
+  "save_version": 53,
+  "source_policy": 49,
+  "equipment_vocabulary": 51,
+  "tests": {
+    "compiler": {
+      "checks": 138,
+      "failures": 0,
+      "scope": "four new combinations/all11 permutations,24 representative old compiled outputs"
+    },
+    "actual_main": {
+      "checks": 265,
+      "failures": 0,
+      "supersedes_intermediate_main_checks": 249,
+      "first_fixture_no_change_failure_preserved": true
+    },
+    "root_presentation": {
+      "checks": 11,
+      "failures": 0
+    },
+    "migration": {
+      "first_total": 391,
+      "first_failures": 27,
+      "failed_scope": "historical synthetic gate probe only",
+      "corrected_gate_pass": 104,
+      "final_direct_gate_pass": 105,
+      "overlap_not_added": true,
+      "readme": "docs/qa/v098-migration/README.md"
+    }
+  },
+  "font": {
+    "new_characters": "截跃",
+    "mapped": 1671,
+    "missing": [],
+    "old_outlines_and_metrics_preserved": true
+  },
+  "reference_result": "docs/qa/v098-reference/final-result.json",
+  "no_gameplay_tests_rerun_for_font_reference": true,
+  "production_files_sha256": {
+    "scripts/combat/long_stride_support_rules.gd": "ff4f0cc288dc5fec90fb1423e64f5923141c5c98b25ac11b34443e233523c9c1",
+    "scripts/combat/support_registry.gd": "17548161e61953736596cfbc4c7ec78e483924aca11744b0699b140495445c81",
+    "scripts/combat/skill_compiler.gd": "5744f06fb099042336ddc41c73cf3b2a8980eac42ea7f05b9ec4167eca03e82b",
+    "scripts/main.gd": "e5e01cce3dd6c0bc28806a564c16e40b9e45611d69040076324f9151848ce168",
+    "scripts/canonical_game_state.gd": "065d88dce77f6613fdd8e9a105b45038a537ce43975aaaca05d720694ee6875c",
+    "scripts/items/gem_catalog.gd": "791ab28f928503413133b0832a1cde944635a5da6e5b6a18d101a41c063aafe5",
+    "scripts/save/canonical_build_rules.gd": "32d9406070dc8e471ba70c0b586e9ab4b8baadf8fbc71f8bb345f54c1ce51530",
+    "scripts/save/canonical_build_store.gd": "c9936ff5e68b597a79adafffe13083603fad2d7774f987422dfe774a0168abd6",
+    "scripts/save/long_stride_gem_migration.gd": "e0823fbce84f130127f43a882642b69a186cc869c119eb0359c6873101f29541",
+    "scripts/save/encircling_cleave_gem_migration.gd": "d75e4ddbb05c273e3dbc2a7dbaad8fccefc9851df07dddd5624cf350f6ba560d",
+    "scripts/combat/damage_preview.gd": "d55c1eeb169c78ac54ca9ab52a564a4644475de0b7988097dfff39c46a59ea17",
+    "scripts/ui/unified_item_presentation.gd": "55b3dc53a869d6a9af6d4ca2f71a63eb08ebe8a6f2cfc098d7bfce8b3599c9cb",
+    "scripts/visuals/skill_emblem.gd": "f9c699df9e0f7dbc13a91501b67629f3eeb29f9274f6821657e04f98504a146f",
+    "assets/fonts/arena_sans.otf": "8e84c0eaf389a86424df39a7e162519de7bd63297fc97679089a4d2a522e5ccc",
+    "assets/fonts/coverage_manifest.json": "5f95747907febb38aa16fc228e151ad0522420e5a747aca5ea194e36b98095bb",
+    "assets/ui/grimoire/long_stride.png": "13540b90703ae35a1c222229c12f27907c224663c94637f82a55ea708c2bc8e7",
+    "assets/ui/grimoire/long_stride.png.import": "afd8a8567f5c3fb77f324afc3086396bc8f3b4a438b77a3eceb56b9ddace6f9e"
+  }
+}

@@ -1,0 +1,15 @@
+# v098 Longstride reference evidence
+
+This update adds only the Longstride support card and rule card, the existing dash card's compatibility and rule links, and current schema/support-count metadata. The existing F8 page layout, CSS, JavaScript, art and historical catalog values stay intact. Catalog edits preserve existing raw JSON tokens, including floating-point spelling.
+
+The bounded exporter rehydrates the exact legal schema53 `../v098-runtime/owned-fixture-after-runtime.json` through `Model._accept_memory`, reads `model.get_combat_snapshot()`, and compiles two dash preview selections: no support and Longstride only. It does not purchase, move, install or grant anything. Dash remains in `group_000008`; all three owned supports remain in their recorded bag locations. The previous Main report did not serialize complete compiled dictionaries, so this export does not claim byte equality to nonexistent serialized casts.
+
+The linked runtime evidence is reused: compiler138 checks (24 representative complete old casts compared to pinned d2d188a), final Main265 checks /0 failures. The reference exporter does not replay Main, battle matrices, historical maps, source coverage, full `export_reference.collect`, art generation or screenshots. It makes no natural-gameplay, DPS, FPS, Windows or full-release claim.
+
+`long-stride-fragment.json` records current policy, two previews, exact fixture/report/log hashes, owned item locations, merchant4-shard quote and dynamic test offer. `export-run.json` and its logs record the bounded export; `export-input-sha256.json` fingerprints its inputs. `merge-fragment.py` merges five paths from baseline d2d188a and copies only the existing original Longstride PNG. `check-reference.py` verifies exact old-card/token preservation, Chinese search, numeric facts, unique anchors, local links and asset hashes without a Godot rerun.
+
+The first bounded attempt is retained under `first-*`. It stopped before either preview compilation because Godot decoded bag coordinates as integers while raw JSON coordinates were floats; a Dictionary equality assertion treated these numeric representations as different. It produced an empty fragment and was rejected despite Godot returning0. The corrected exporter normalizes only the comparison and uses isolated writable XDG cache/config directories. The failed fragment is not merged.
+
+The coordinator separately extended the runtime font from the same font source with 截 / 跃. This reference has no bundled font file or local font resource to refresh. Preservation reports explicitly record that runtime font exception; they do not claim the old runtime font bytes are unchanged.
+
+Reproduction: the exporter is intentionally guarded against overwriting its original evidence. The static check can be rerun with `python docs/qa/v098-reference/check-reference.py`; it requires no scene execution or catalog regeneration. See `preservation.json`, `card-sha256.json`, `catalog-format-preservation.json` and `final-result.json` for the verified scope and counts.

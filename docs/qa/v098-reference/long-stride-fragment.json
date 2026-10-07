@@ -1,0 +1,247 @@
+{
+	"dash_compatible_supports": [
+		"efficiency",
+		"quickcast",
+		"long_stride"
+	],
+	"game_version": "0.87.0",
+	"long_stride": {
+		"active_uid": "item_000010",
+		"actual_main_checks": 265.0,
+		"actual_main_fixture": {
+			"path": "docs/qa/v098-runtime/owned-fixture-after-runtime.json",
+			"sha256": "2a7a92b544cf3ae54795f25da99f4e5832b4bef29406108dd5179d6f48410698"
+		},
+		"actual_main_log": {
+			"path": "docs/qa/v098-runtime/main3.log",
+			"sha256": "7813927706d57beb3d6ba7aa48ef85e1e34f5929669be040f86bb105d1afd5a5"
+		},
+		"actual_main_report": {
+			"path": "docs/qa/v098-runtime/main3-result.json",
+			"sha256": "dd190c94cda6594a9e96beaeb26ad0fae8867e0d93f65d3b38c3c0d00d52a47a"
+		},
+		"compatible_supports": [
+			"efficiency",
+			"quickcast",
+			"long_stride"
+		],
+		"compiler_checks": 138,
+		"equipment_vocabulary": 51,
+		"examples": {
+			"after": {
+				"cooldown": 3.0,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n长跃请求距离 175 → 280；实际移动受墙体与地图边界截断，不能穿墙。\n本次新增保护 0.6 → 0.0 秒；已有保护保留。魔力消耗倍率 120%，冷却不变。",
+				"immunity_grant": 0.0,
+				"initial_count": 0,
+				"long_stride_profile": {
+					"base_distance": 175.0,
+					"base_immunity_grant": 0.6,
+					"enabled": true,
+					"immunity_grant": 0.0,
+					"mana_multiplier": 1.2,
+					"requested_distance": 280.0
+				},
+				"mana": 14.399999999999999,
+				"recipe": {
+
+				},
+				"requested_distance": 280.0,
+				"summary": "此技能不直接造成命中伤害",
+				"support_ids": [
+					"long_stride"
+				]
+			},
+			"before": {
+				"cooldown": 3.0,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。",
+				"immunity_grant": 0.6,
+				"initial_count": 0,
+				"long_stride_profile": {
+
+				},
+				"mana": 12.0,
+				"recipe": {
+
+				},
+				"requested_distance": 175.0,
+				"summary": "此技能不直接造成命中伤害",
+				"support_ids": []
+			}
+		},
+		"final_support_locations": {
+			"item_000011": {
+				"kind": "bag",
+				"page": 0.0,
+				"x": 11.0,
+				"y": 0.0
+			},
+			"item_000012": {
+				"kind": "bag",
+				"page": 0.0,
+				"x": 8.0,
+				"y": 1.0
+			},
+			"item_000013": {
+				"kind": "bag",
+				"page": 0.0,
+				"x": 9.0,
+				"y": 1.0
+			}
+		},
+		"group_id": "group_000008",
+		"icon_file": "originals/long_stride.png",
+		"icon_sha256": "13540b90703ae35a1c222229c12f27907c224663c94637f82a55ea708c2bc8e7",
+		"icon_source": "res://assets/ui/grimoire/long_stride.png",
+		"maximum_supports": 5,
+		"merchant_quote": {
+			"code": "",
+			"cost": {
+				"calibration_shard": 4
+			},
+			"definition_id": "support:long_stride",
+			"materials": {
+
+			},
+			"name": "长跃辅助",
+			"ok": true,
+			"operation": "buy",
+			"reason": "",
+			"target": "support:long_stride"
+		},
+		"normal_reward_pool_includes_support": false,
+		"policy": {
+			"base_distance": 175.0,
+			"base_immunity_grant": 0.6,
+			"enabled": true,
+			"immunity_grant": 0.0,
+			"mana_multiplier": 1.2,
+			"requested_distance": 280.0
+		},
+		"reuse_fixture": {
+			"path": "docs/qa/v098-runtime/reuse-fixture.json",
+			"sha256": "3f78ea20d0875166b9e2b94f791b0a959df11dfbb49082141f03228381d44f40"
+		},
+		"runtime_tested_inputs": {
+			"path": "docs/qa/v098-runtime/tested-inputs.json",
+			"sha256": "a3ff296f515bae9e767631fc789b6dd445cd847d2c748f7d1ed179b32d30e3dd"
+		},
+		"save_version": 53,
+		"scope": "Exact legal schema53 actual-Main final fixture rehydrated read-only; dash remains in group8 and all three owned supports remain in the bag. Two compile_group preview selections only; no item move, purchase, Main replay, maps, RNG, save writes, historical exporter, source coverage or art generation.",
+		"skills": [
+			"dash"
+		],
+		"source_policy": 49,
+		"support_id": "long_stride",
+		"support_uids": {
+			"efficiency": "item_000012",
+			"long_stride": "item_000011",
+			"quickcast": "item_000013"
+		},
+		"test_offer": {
+			"available": true,
+			"catalog_id": "support:long_stride",
+			"category": "",
+			"definition_id": "support:long_stride",
+			"description": "仅辅助冲刺：请求距离由175提高到280，实际距离仍受墙体与边界限制；本次冲刺不再授予保护，已有保护不受影响。魔力消耗×1.20，冷却不变，占用1个辅助槽。",
+			"icon_path": "",
+			"id": "support:long_stride",
+			"kind": "support_gem",
+			"name": "长跃辅助",
+			"preview": {
+				"capabilities": [],
+				"category": "",
+				"definition_id": "support:long_stride",
+				"description": "仅辅助冲刺：请求距离由175提高到280，实际距离仍受墙体与边界限制；本次冲刺不再授予保护，已有保护不受影响。魔力消耗×1.20，冷却不变，占用1个辅助槽。",
+				"family": "long_stride",
+				"glyph": "",
+				"icon": "res://assets/ui/grimoire/long_stride.png",
+				"icon_texture": "(res://assets/ui/grimoire/long_stride.png):<CompressedTexture2D#-9223371903257803310>",
+				"kind": "support_gem",
+				"name": "长跃辅助",
+				"requires": [],
+				"short_name": "长跃辅助",
+				"size": [
+					1,
+					1
+				],
+				"skill_id": "",
+				"skills": [
+					"dash"
+				],
+				"support_id": "long_stride",
+				"uid": "item_000001"
+			},
+			"price_label": "测试免费",
+			"quantity": 1,
+			"reason": "",
+			"size": [
+				1,
+				1
+			],
+			"supply_kind": "gem"
+		}
+	},
+	"save_version": 53,
+	"support": {
+		"description": "仅辅助冲刺：请求距离由175提高到280，实际距离仍受墙体与边界限制；本次冲刺不再授予保护，已有保护不受影响。魔力消耗×1.20，冷却不变，占用1个辅助槽。",
+		"family": "long_stride",
+		"name": "长跃辅助",
+		"operations": [
+			{
+				"op": "mana_multiplier",
+				"value": 1.2
+			}
+		],
+		"requires": [],
+		"skills": [
+			"dash"
+		]
+	},
+	"support_program_example": {
+		"examples": {
+			"dash": {
+				"after": {
+					"cooldown": 3.0,
+					"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n长跃请求距离 175 → 280；实际移动受墙体与地图边界截断，不能穿墙。\n本次新增保护 0.6 → 0.0 秒；已有保护保留。魔力消耗倍率 120%，冷却不变。",
+					"immunity_grant": 0.0,
+					"initial_count": 0,
+					"long_stride_profile": {
+						"base_distance": 175.0,
+						"base_immunity_grant": 0.6,
+						"enabled": true,
+						"immunity_grant": 0.0,
+						"mana_multiplier": 1.2,
+						"requested_distance": 280.0
+					},
+					"mana": 14.399999999999999,
+					"recipe": {
+
+					},
+					"requested_distance": 280.0,
+					"summary": "此技能不直接造成命中伤害",
+					"support_ids": [
+						"long_stride"
+					]
+				},
+				"before": {
+					"cooldown": 3.0,
+					"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。",
+					"immunity_grant": 0.6,
+					"initial_count": 0,
+					"long_stride_profile": {
+
+					},
+					"mana": 12.0,
+					"recipe": {
+
+					},
+					"requested_distance": 175.0,
+					"summary": "此技能不直接造成命中伤害",
+					"support_ids": []
+				}
+			}
+		},
+		"family": "long_stride",
+		"native_recipe_eligibility": true
+	}
+}
