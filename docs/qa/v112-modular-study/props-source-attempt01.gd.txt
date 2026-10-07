@@ -147,7 +147,6 @@ func _study_sprite(layer: Dictionary, stable_name: String, source_to_world: floa
 	sprite.position = -layer.foot * source_to_world
 	sprite.scale = Vector2.ONE * source_to_world
 	sprite.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
-	sprite.set_meta("source_mipmap_count", layer.mipmap_count)
 	return sprite
 
 func _validate_study_geometry(depth: Node2D, geometry: Dictionary) -> String:
@@ -188,20 +187,13 @@ func _load_study_assets(manifest_path: String) -> Dictionary:
 	if not FileAccess.file_exists(manifest_path):
 		_study_error = "Study manifest is missing: " + manifest_path
 		return {}
-	var parser := JSON.new()
-	if parser.parse(FileAccess.get_file_as_string(manifest_path)) != OK:
-		_study_error = "Study manifest JSON is invalid at line %d: %s" % [parser.get_error_line(), parser.get_error_message()]
-		return {}
-	var parsed: Variant = parser.data
+	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(manifest_path))
 	if not parsed is Dictionary or parsed.get("schema") != "three-independent-environment-modules-v1":
 		_study_error = "Study manifest has invalid JSON or schema"
 		return {}
 	var projection: Variant = parsed.get("projection")
 	if not projection is Dictionary or not _study_number(projection.get("camera2d_zoom")) or float(projection.camera2d_zoom) <= 0.0:
 		_study_error = "Study manifest requires a finite positive authored camera2d_zoom"
-		return {}
-	if float(projection.camera2d_zoom) != 0.65:
-		_study_error = "Study manifest must retain the fixed authored camera2d_zoom of 0.65"
 		return {}
 	# This is the export's unit conversion, not the runtime Camera2D zoom.
 	var source_to_world := 1.0 / float(projection.camera2d_zoom)
@@ -262,16 +254,12 @@ func _load_study_layer(value: Variant, image_name: String, manifest_path: String
 	if image.generate_mipmaps() != OK:
 		_study_error = "Study image mipmaps failed: " + image_path
 		return {}
-	var mipmap_count := image.get_mipmap_count()
-	if mipmap_count <= 0:
-		_study_error = "Study image has no generated source mipmap chain: " + image_path
-		return {}
 	var texture := ImageTexture.create_from_image(image)
 	if texture == null:
 		_study_error = "Study image texture creation failed: " + image_path
 		return {}
 	_study_error = ""
-	return {"texture": texture, "foot": foot, "image_path": image_path, "mipmap_count": mipmap_count}
+	return {"texture": texture, "foot": foot, "image_path": image_path}
 
 func update_player(player_position: Vector2) -> void:
 	for tree: Dictionary in _trees:

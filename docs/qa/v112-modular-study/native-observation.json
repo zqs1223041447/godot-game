@@ -1,0 +1,30 @@
+{
+  "observed_at_utc": "2026-10-07 18:13–18:16",
+  "source": "Root native Godot observation of tools/run_modular_study.sh",
+  "actions": [
+    "W/D movement with following camera",
+    "Approach original enemies and automatic combat",
+    "W through arch to rear, S back to front"
+  ],
+  "observed": {
+    "hud_before": {
+      "kills": 0,
+      "remaining": 25
+    },
+    "hud_after": {
+      "kills": 3,
+      "remaining": 22,
+      "experience": 15
+    },
+    "arch_rear": "Character occluded correctly",
+    "arch_front": "Character visible again"
+  },
+  "screenshot": "native-observation.png",
+  "screenshot_sha256": "60e8ca1a02cf69b68c66af8ef09a7a65f9d3afcf25e39dd4dfeec71294df4244",
+  "limits": [
+    "Technical collision/combat/presentation integration only",
+    "Old repeated stone ground remains a visible quality issue",
+    "Static direction hero; no new animations",
+    "Not final environment art approval or FPS evidence"
+  ]
+}

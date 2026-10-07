@@ -1,0 +1,199 @@
+extends SceneTree
+## Focused native-query tests. Reads the retained source data without importing,
+## re-extracting or rendering the v111 art study or rerunning its 201-pose suite.
+const Geometry = preload("res://scripts/studies/modular_study_geometry.gd")
+const BaseGeometry = preload("res://scripts/world/map_geometry.gd")
+const Monsters = preload("res://scripts/monsters/monster_catalog.gd")
+const View = preload("res://scripts/visuals/world_view.gd")
+const ROOT := "res://art-studies/v111/exports/"
+var checks := 0
+var failures := 0
+
+
+func check(ok: bool, label: String) -> void:
+	checks += 1
+	if not ok:
+		failures += 1
+		push_error(label)
+
+
+func _initialize() -> void:
+	call_deferred("run")
+
+
+func point(value: Array) -> Vector2:
+	return Vector2(float(value[0]), float(value[1]))
+
+
+func read_json(path: String) -> Dictionary:
+	var result: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+	assert(result is Dictionary, path)
+	return result
+
+
+func run() -> void:
+	var source := read_json(ROOT + "collisions.json")
+	var assembly := read_json(ROOT + "assembly-layout.json")
+	var source_modules: Dictionary = {}
+	for module: Dictionary in source.modules:
+		source_modules[module.module_id] = module
+	var polygons: Array[PackedVector2Array] = []
+	var probes: Array[Vector2] = []
+	var instances: Array[Dictionary] = []
+	var arch_foot := Vector2.ZERO
+	var vertex_count := 0
+	# Unit conversion only, matching the 0.65 game camera and source contract.
+	# Preserve the assembly's shared rounded foot and original contour vertices.
+	var translation := View.exploration_arena().position + Vector2(800, 500)
+	for instance: Dictionary in assembly.instances:
+		var foot := translation + point(instance.foot_screen_pixel) / 0.65
+		instances.append({"id": instance.id, "module": instance.module, "foot_world": foot})
+		if instance.module == "walkable_arch":
+			arch_foot = foot
+		for record: Dictionary in source_modules[instance.module].polygons:
+			check(record.holes.is_empty(), "The retained source has no unrepresented holes")
+			var polygon := PackedVector2Array()
+			for raw: Array in record.outer.godot_local_world:
+				polygon.append(foot + point(raw))
+			vertex_count += polygon.size()
+			polygons.append(polygon)
+		for raw: Array in instance.probe_points_screen_pixel:
+			probes.append(translation + point(raw) / 0.65)
+	check(polygons.size() == 4 and vertex_count == 99, "Reuse all four original contours and exactly 99 vertices")
+	var bounds := View.exploration_arena()
+	var spawn := bounds.position + Vector2(320, 2080)
+	var presentation := {"module_instances": instances, "study_note": "translation only", "nested": {"version": 111}}
+	var geometry := Geometry.new()
+	var installed: Dictionary = geometry.install(bounds, polygons, spawn, presentation)
+	check(installed.ok, "Valid source contours install")
+	if not installed.ok:
+		print(installed)
+		quit(1)
+		return
+	check(not geometry.is_clear(spawn, 15.0) and geometry.sweep(spawn, spawn + Vector2(10, 0), 15.0).hit, "Queries fail closed before native readiness is established")
+	await physics_frame
+	await physics_frame
+	check(geometry.physics_ready(), "Every native convex piece is queryable after synchronization")
+	check(geometry.is_clear(spawn, 15.0), "Unchanged Main player radius is clear at spawn")
+	var original: Dictionary = geometry.snapshot()
+	check(original.id == "modular_study" and original.source_map_id == "old_garden" and original.walls.is_empty(), "Study identity is isolated and generic rendering receives no fake rectangles")
+	check(original.module_polygons == polygons and original.module_instances == instances, "Snapshot preserves source contours and supplied presentation metadata")
+	check(geometry.configure_exploration("old_garden", bounds) and geometry.snapshot() == original and geometry.physics_ready(), "Main exploration refresh preserves installed study and revision")
+	var external: Dictionary = geometry.snapshot()
+	external.module_polygons[0][0] += Vector2(100, 100)
+	external.module_instances[0].foot_world = Vector2.ZERO
+	presentation.nested.version = -1
+	instances[0].foot_world = Vector2.ZERO
+	polygons[0][0] += Vector2(200, 200)
+	check(geometry.snapshot() == original, "Input arrays, presentation and returned snapshots cannot mutate authority")
+	polygons.assign(original.module_polygons)
+	var radii: Array[float] = [15.0]
+	for species: Dictionary in Monsters.SPECIES:
+		for multiplier: float in [1.0, 1.25]:
+			var radius := float(species.radius) * multiplier
+			if radius not in radii:
+				radii.append(radius)
+	check(radii.size() == 7 and 14.0 in radii and 27.5 in radii, "Cover player 15 and all ordinary/boss source radii")
+	for index: int in range(probes.size()):
+		check(not geometry.is_clear(probes[index]), "Original blocker %d is native solid" % index)
+		var box := polygon_bounds(polygons[index])
+		var start := Vector2(box.position.x - 70.0, probes[index].y)
+		var finish := Vector2(box.end.x + 70.0, probes[index].y)
+		var ray: Dictionary = geometry.sweep(start, finish)
+		check(ray.hit and ray.wall == index and not geometry.visible(start, finish), "LOS/native ray hits original contour %d" % index)
+		for radius: float in radii:
+			var forward: Dictionary = geometry.sweep(start, finish, radius)
+			var reverse: Dictionary = geometry.sweep(finish, start, radius)
+			check(forward.hit and reverse.hit and forward.fraction < 1.0 and reverse.fraction < 1.0, "Both circle directions hit contour %d at radius %s" % [index, radius])
+			check(forward.normal.is_finite() and forward.normal.length() > 0.9 and forward.normal.dot(finish - start) < 0.0, "Circle receipt has an outward native normal")
+			var moved: Vector2 = geometry.move(start, finish, radius)
+			check(geometry.is_clear(moved, radius) and moved.x < probes[index].x, "Long Main-style movement cannot tunnel through contour %d" % index)
+			var legal: Vector2 = geometry.legal_point(probes[index], radius)
+			check(geometry.is_clear(legal, radius) and legal == geometry.legal_point(probes[index], radius), "Inside-contour birth has a deterministic native-clear projection")
+		for radius: float in [4.5, 6.0]:
+			check(geometry.sweep(start, finish, radius).hit, "Projectile circle hits contour %d" % index)
+	var line: Dictionary = source.portal_validation.verified_centerline
+	var arch_start := arch_foot + point(line.start.godot_local_world)
+	var arch_finish := arch_foot + point(line.end.godot_local_world)
+	for radius: float in [0.0, 4.5, 6.0] + radii:
+		check(not geometry.sweep(arch_start, arch_finish, radius).hit and not geometry.sweep(arch_finish, arch_start, radius).hit, "True arch opening passes both ways at radius %s" % radius)
+		check(geometry.visible(arch_start, arch_finish, radius), "Arch LOS uses the same open native footprint")
+		if radius > 0.0:
+			check(geometry.move(arch_start, arch_finish, radius).distance_to(arch_finish) < 0.01 and geometry.move(arch_finish, arch_start, radius).distance_to(arch_start) < 0.01, "Inherited Main movement traverses actual arch opening")
+	# Exercise the actual slanted source wall, not a synthetic rectangle.
+	var wall := polygons[0]
+	var edge_index := 0
+	for index: int in range(wall.size()):
+		if wall[index].distance_squared_to(wall[(index + 1) % wall.size()]) > wall[edge_index].distance_squared_to(wall[(edge_index + 1) % wall.size()]):
+			edge_index = index
+	var a := wall[edge_index]
+	var b := wall[(edge_index + 1) % wall.size()]
+	var tangent := (b - a).normalized()
+	var outward := Vector2(-tangent.y, tangent.x)
+	var midpoint := (a + b) * 0.5
+	if Geometry2D.is_point_in_polygon(midpoint + outward, wall):
+		outward = -outward
+	for radius: float in radii:
+		var start := midpoint + outward * (radius + 40.0)
+		var moved: Vector2 = geometry.move(start, midpoint - outward * 20.0 + tangent * 70.0, radius)
+		check(geometry.is_clear(moved, radius) and (moved - start).dot(tangent) > 50.0, "Circle slides along actual slanted wall at radius %s" % radius)
+		var corner_start := a + (a - polygon_bounds(wall).get_center()).normalized() * (radius + 60.0)
+		var corner_move: Vector2 = geometry.move(corner_start, midpoint, radius)
+		check(geometry.is_clear(corner_move, radius), "Actual polygon corner contact remains outside")
+	var rock_box := polygon_bounds(polygons[3])
+	var rock_left := Vector2(rock_box.position.x - 90.0, rock_box.get_center().y)
+	var rock_right := Vector2(rock_box.end.x + 90.0, rock_box.get_center().y)
+	for radius: float in [15.0, 27.5]:
+		check(not geometry.visible(rock_left, rock_right, radius), "Rock blocks the direct pursuit segment")
+		for path: Array in [[rock_left, rock_right], [rock_right, rock_left]]:
+			var position: Vector2 = path[0]
+			var goal: Vector2 = path[1]
+			var all_clear := true
+			var steps := 0
+			while position.distance_to(goal) > 0.05 and steps < 400:
+				var direction: Vector2 = geometry.direction(position, goal, radius, 5.0)
+				position = geometry.move(position, position + direction * 5.0, radius)
+				all_clear = all_clear and geometry.is_clear(position, radius)
+				steps += 1
+			check(all_clear and position.distance_to(goal) <= 0.05, "Existing finite waypoint graph routes both ways around original rock")
+	var invalids: Array = [
+		[],
+		[PackedVector2Array([Vector2(100, 200), Vector2(110, 210)])],
+		[PackedVector2Array([Vector2(100, 200), Vector2(200, 300), Vector2(100, 300), Vector2(200, 200)])],
+		[PackedVector2Array([Vector2(100, 200), Vector2(200, 200), Vector2(150, 200), Vector2(150, 300)])],
+		[PackedVector2Array([Vector2(INF, 200), Vector2(200, 200), Vector2(150, 300)])],
+		[PackedVector2Array([Vector2(100, 200), Vector2(200, 200), Vector2(100, 200), Vector2(150, 300)])],
+		[polygons[0], polygons[1], polygons[2], polygons[3], polygons[0]],
+	]
+	for invalid: Array in invalids:
+		var typed: Array[PackedVector2Array] = []
+		typed.assign(invalid)
+		check(not geometry.install(bounds, typed, spawn, {}).ok and geometry.snapshot() == original and geometry.physics_ready(), "Invalid contour install leaves live authority unchanged")
+	check(not geometry.install(Rect2(Vector2.ZERO, Vector2(INF, 1)), polygons, spawn, {}).ok and geometry.snapshot() == original, "Invalid bounds are atomic")
+	check(not geometry.install(bounds, polygons, Vector2(NAN, 0), {}).ok and geometry.snapshot() == original, "Invalid spawn is atomic")
+	check(not geometry.install(bounds, polygons, probes[0], {}).ok and geometry.snapshot() == original, "Blocked spawn is rejected atomically")
+	check(not geometry.install(bounds, polygons, spawn, {"object": geometry}).ok and geometry.snapshot() == original, "Shared object metadata is rejected atomically")
+	check(not geometry.configure("unknown", bounds) and geometry.snapshot() == original, "Invalid fallback does not release the study")
+	var baseline := BaseGeometry.new()
+	baseline.configure("town", View.WORLD_ARENA)
+	check(geometry.configure("town", View.WORLD_ARENA), "Town fallback configures")
+	check(not geometry._space.is_valid() and geometry._bodies.is_empty() and geometry._shapes.is_empty() and not geometry.physics_ready(), "Town releases all owned native bodies, shapes and space")
+	check(geometry.snapshot().id == baseline.snapshot().id and geometry.snapshot().walls == baseline.snapshot().walls and geometry.is_clear(View.WORLD_ARENA.get_center(), 15.0), "Town retains inherited open geometry")
+	check(geometry.configure_exploration("broken_ruins", bounds) and geometry.snapshot().walls.size() == 2, "Other maps use inherited authoritative geometry")
+	# Reinstall/release the same data to exercise ownership after a fallback.
+	check(geometry.install(bounds, polygons, spawn, {}).ok, "Study can be installed again after fallback")
+	await physics_frame
+	await physics_frame
+	check(geometry.physics_ready() and not geometry.is_clear(probes[3]), "Reinstalled space contains the original rock")
+	check(geometry.configure_exploration("sunwell_terrace", bounds) and not geometry._space.is_valid() and geometry.snapshot().walls.size() == 4, "Other exploration map releases study and restores inherited obstacles")
+	geometry = null
+	await process_frame
+	print("Modular study geometry: %d checks, %d failures" % [checks, failures])
+	quit(1 if failures else 0)
+
+
+func polygon_bounds(polygon: PackedVector2Array) -> Rect2:
+	var box := Rect2(polygon[0], Vector2.ZERO)
+	for vertex: Vector2 in polygon:
+		box = box.expand(vertex)
+	return box

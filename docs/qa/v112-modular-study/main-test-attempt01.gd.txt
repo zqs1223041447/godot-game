@@ -1,0 +1,478 @@
+extends SceneTree
+## Real Main integration, with one lawful fresh formal entry before any probe.
+## Later player/actor relocations are controlled test inputs, not natural play
+## or evidence of combat RNG/reward equivalence. Never grants equipment/gems.
+## Run only with a fresh /tmp/godot-m1-v112-* XDG_DATA_HOME.
+const Session = preload("res://scripts/studies/modular_study_session.gd")
+const Rules = preload("res://scripts/save/canonical_build_rules.gd")
+const Catalog = preload("res://scripts/visuals/actor_sprite_catalog.gd")
+const BaseGeometry = preload("res://scripts/world/map_geometry.gd")
+const STEP := 1.0 / 60.0
+const CROWD_TICK_LIMIT := 360
+const SOURCE_FILES: Array[String] = [
+	"res://scripts/world/map_catalog.gd", "res://scripts/world/exploration_map_layout.gd",
+	"res://art-studies/v111/exports/manifest.json", "res://art-studies/v111/exports/collisions.json",
+	"res://art-studies/v111/exports/assembly-layout.json"]
+
+var arena: Node2D
+var checks := 0
+var failures := 0
+var labels: Array[String] = []
+var original_ids: Array[int] = []
+var original_records: Array = []
+var initial_files: Dictionary = {}
+var report: Dictionary = {
+	"method": "Fresh lawful Main; install invariance; explicitly relocated movement/projectile/crowd probes; no full-map clear",
+	"install_remapped_roots": -1, "original_roots": 0, "original_contours": 0,
+	"move_wall_probes": 0, "dash_wall_probes": 0, "projectile_wall_probes": 0,
+	"projectile_gate_probes": 0, "projectile_steps": 0, "crowd_ticks": 0,
+	"crowd_selected": [], "crowd_crossed": 0, "crowd_samples_clear": true,
+	"post_combat_rng_or_reward_equivalence_claimed": false, "formal_entries": 0}
+
+
+func _initialize() -> void:
+	call_deferred("run")
+
+
+func check(value: bool, label: String) -> bool:
+	checks += 1
+	if not value:
+		failures += 1
+		labels.append(label)
+		printerr("FAIL: " + label)
+	return value
+
+
+func accepted(value: Dictionary, label: String) -> bool:
+	return check(bool(value.get("ok", false)), label + ": " + JSON.stringify(value))
+
+
+func pause_main() -> void:
+	arena.set_process(false)
+	arena.hud.set_process(false)
+	arena.auto_fire = false
+	for unused: int in range(4): arena.hud.close_panel()
+
+
+func ids() -> Array[int]:
+	var result: Array[int] = []
+	for enemy: Dictionary in arena.enemies: result.append(int(enemy.id))
+	return result
+
+
+func actor(id: int) -> Dictionary:
+	for enemy: Dictionary in arena.enemies:
+		if int(enemy.id) == id: return enemy
+	return {}
+
+
+func retained_ids() -> Dictionary:
+	var result: Dictionary = {}
+	for id: int in arena.retained_actors._actors:
+		result[id] = arena.retained_actors._actors[id].get_instance_id()
+	if is_instance_valid(arena.retained_actors._hero):
+		result["hero"] = arena.retained_actors._hero.get_instance_id()
+	return result
+
+
+func install_authority() -> PackedByteArray:
+	# Geometry and selected sprites are the intended changes. Everything below
+	# must remain byte-identical across the adapter's asynchronous installation.
+	return var_to_bytes([arena.state.snapshot(), arena.world_context(), arena.map_draft(),
+		arena._map_run.snapshot(), arena.EncounterAdmission._snapshot(arena.monster_runtime),
+		arena.map_spawn_records(), arena.map_mechanism_state(), arena.enemies,
+		arena.player_pos, arena.player_facing, arena.PLAYER_RADIUS, arena.ARENA,
+		arena.projectiles, arena.projectile_runtime.next_projectile_id, arena.projectile_runtime.next_cast_id,
+		arena.health, arena.mana, arena.shield, arena.alive, arena.kills, arena.reward_kills,
+		arena.ordinary_admissions, arena.elapsed, arena.cooldowns, arena.attack_timer,
+		arena.hurt_flash, arena.invulnerable, arena._simulation_accumulator,
+		arena.combat_trace, arena.damage_trace, arena.incoming_damage_trace, arena.attack_admission_trace,
+		arena.rng.seed, arena.rng.state, FileAccess.get_file_as_bytes(arena.NORMAL_BUILD_PATH)])
+
+
+func polygon_bounds(polygon: PackedVector2Array) -> Rect2:
+	var box := Rect2(polygon[0], Vector2.ZERO)
+	for point: Vector2 in polygon: box = box.expand(point)
+	return box
+
+
+func release_input() -> void:
+	for action: String in ["move_left", "move_right", "move_up", "move_down"]:
+		Input.action_release(action)
+
+
+func hold_direction(direction: Vector2) -> void:
+	release_input()
+	if direction.x < 0.0: Input.action_press("move_left", -direction.x)
+	if direction.x > 0.0: Input.action_press("move_right", direction.x)
+	if direction.y < 0.0: Input.action_press("move_up", -direction.y)
+	if direction.y > 0.0: Input.action_press("move_down", direction.y)
+
+
+func lawful_roster() -> bool:
+	var valid: bool = arena.enemies.size() == 25 and arena.map_spawn_records().size() == 25
+	var seen: Dictionary = {}
+	for record: Dictionary in arena.map_spawn_records():
+		var enemy := actor(int(record.actor_id))
+		valid = valid and not enemy.is_empty()
+		if enemy.is_empty(): continue
+		valid = valid and enemy.id == record.root_id and enemy.root_id == record.root_id \
+			and enemy.generation == 0 and enemy.reward_eligible and enemy.pos == record.position \
+			and enemy.map_spawn_key == record.spawn_key and enemy.template_id == record.template_id \
+			and record.reward_route == "standard" and not seen.has(record.spawn_key) \
+			and arena._geometry.is_clear(enemy.pos, float(enemy.radius))
+		seen[record.spawn_key] = true
+	return valid and seen.size() == 25
+
+
+func enter_formal_map() -> bool:
+	if not accepted(arena.craft_normal_map("old_garden", 1, [], [], arena.map_draft().revision), "Lawful tier I old_garden draft"): return false
+	if not accepted(arena.start_map(arena.map_draft().revision), "Lawful Main.start_map entry"): return false
+	report.formal_entries += 1
+	pause_main()
+	return true
+
+
+func verify_original_contours(layout: Dictionary) -> void:
+	var source: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(Session.COLLISIONS))
+	var expected: Array[PackedVector2Array] = []
+	var vertices := 0
+	for instance: Dictionary in layout.instances:
+		for module: Dictionary in source.modules:
+			if str(module.module_id) != str(instance.module_id): continue
+			for record: Dictionary in module.polygons:
+				check(record.holes.is_empty(), "Retained source contour has no omitted holes")
+				var polygon := PackedVector2Array()
+				for point: Array in record.outer.godot_local_world:
+					polygon.append(Vector2(instance.position) + Vector2(point[0], point[1]))
+				vertices += polygon.size()
+				expected.append(polygon)
+	check(expected.size() == 4 and vertices == 99 and layout.polygons == expected,
+		"Layout translates exactly the four original v111 contours and 99 vertices once")
+	check(arena.world_geometry().module_polygons == expected and arena.world_geometry().walls.is_empty(),
+		"Actual Main exposes original contour authority without fake rectangular walls")
+	report.original_contours = expected.size()
+
+
+func verify_presentation(layout: Dictionary, before_ids: Dictionary) -> void:
+	var layer: Node2D = arena.retained_actors
+	layer.sync(arena)
+	var hero: Node2D = layer._hero
+	var props: Dictionary = arena.dimensional_props.diagnostics()
+	var modules := 0
+	var aligned := true
+	for instance: Dictionary in layout.instances:
+		var body := arena.world_depth.get_node_or_null("Module_" + str(instance.id)) as Node2D
+		if not is_instance_valid(body):
+			aligned = false
+			continue
+		modules += 1
+		var sprite := body.get_node("Body") as Sprite2D
+		aligned = aligned and body.position == instance.position and body.scale == Vector2.ONE \
+			and sprite.scale.is_equal_approx(Vector2.ONE / 0.65) \
+			and body.get_meta("study_instance_id", "") == instance.id
+	check(props.study_instances == 3 and modules == 3 and str(props.study_error).is_empty() and aligned,
+		"Three actual module bodies use original feet and one source-to-world scale; ground batches are separate")
+	check(arena.get_node("WorldCamera").zoom == Vector2(0.65, 0.65)
+		and arena.PLAYER_RADIUS == 15.0 and retained_ids() == before_ids,
+		"Camera stays at 0.65, player radius stays 15, and hero plus 25 actor nodes retain identity")
+	var foot: Vector2 = Catalog.presentation_foot(hero.atlas, hero.frame)
+	var source: Rect2 = Catalog.presentation_source_rect(hero.atlas, hero.frame)
+	var scale_value: float = hero.atlas.display_scale
+	var destination := Rect2(-foot * scale_value, source.size * scale_value)
+	check(hero.atlas.get("custom_presentation", false) and hero.position == arena.player_pos
+		and hero.get_parent() == arena.world_depth and hero.scale == Vector2.ONE
+		and hero.body.transform == Transform2D.IDENTITY and hero.limbs.transform == Transform2D.IDENTITY
+		and (destination.position + foot * scale_value).is_zero_approx()
+		and hero.to_global(Vector2.ZERO).is_equal_approx(arena.to_global(arena.player_pos)),
+		"Static study hero has one authoritative world foot and no second body/node scale")
+	check(hero.atlas.frames_per_direction == 1 and hero.atlas.clips.has("idle")
+		and not hero.atlas.clips.has("walk") and not hero.atlas.clips.has("attack"),
+		"Sprite override supplies static directional idle images, not claimed locomotion or combat animation")
+
+
+func verify_player_motion(layout: Dictionary) -> void:
+	for index: int in range(layout.polygons.size()):
+		var box := polygon_bounds(layout.polygons[index])
+		var start := Vector2(Vector2(layout.solid_probes[index]).x, box.position.y - 70.0)
+		var goal := Vector2(start.x, box.end.y + 70.0)
+		if not check(arena._geometry.is_clear(start, arena.PLAYER_RADIUS)
+			and arena._geometry.is_clear(goal, arena.PLAYER_RADIUS), "Controlled Main movement endpoints clear for contour %d" % index): continue
+		var expected: Vector2 = arena._geometry.move(start, goal, arena.PLAYER_RADIUS)
+		arena.player_pos = start
+		arena._camp_movement.clear()
+		hold_direction(Vector2.DOWN)
+		arena._move_player(start.distance_to(goal) / float(arena._stats.move_speed))
+		release_input()
+		var traversed_clear := true
+		for segment: Array in arena._camp_movement:
+			var hit: Dictionary = arena._geometry.sweep(segment[0], segment[1], arena.PLAYER_RADIUS)
+			traversed_clear = traversed_clear and (not hit.hit or float(hit.fraction) >= 0.9999)
+		check(arena.player_pos.distance_to(expected) < 0.01 and arena.player_pos.distance_to(goal) > 1.0
+			and arena._geometry.is_clear(arena.player_pos, arena.PLAYER_RADIUS) and traversed_clear,
+			"Actual Main held movement is clipped by original contour %d with clear traversed segments" % index)
+		report.move_wall_probes += 1
+	# One real legally equipped dash, not repeated casts with fabricated cooldowns.
+	var dash_slot: int = arena.state.skill_slots.find("dash")
+	if not check(dash_slot >= 0 and bool(arena.state.get_skill_cast("dash").get("ok", false)), "Fresh canonical build actually owns and equips dash"): return
+	var wall := polygon_bounds(layout.polygons[0])
+	var dash_start := Vector2(Vector2(layout.solid_probes[0]).x, wall.position.y - 25.0)
+	var dash_goal := dash_start + Vector2.DOWN * 175.0
+	if not check(arena._geometry.is_clear(dash_start, arena.PLAYER_RADIUS)
+		and arena._geometry.sweep(dash_start, dash_goal, arena.PLAYER_RADIUS).hit, "Controlled dash starts clear and crosses the source wall"): return
+	var expected_dash: Vector2 = arena._geometry.move(dash_start, dash_goal, arena.PLAYER_RADIUS)
+	arena.player_pos = dash_start
+	hold_direction(Vector2.DOWN)
+	var cast: bool = arena.cast_skill(dash_slot)
+	release_input()
+	check(cast and arena.player_pos.distance_to(expected_dash) < 0.01 and arena.player_pos.distance_to(dash_goal) > 1.0
+		and arena._geometry.is_clear(arena.player_pos, arena.PLAYER_RADIUS), "Actual Main.cast_skill dash cannot tunnel through the source wall")
+	report.dash_wall_probes += 1
+	var front: Vector2 = layout.gate_front
+	var rear: Vector2 = layout.gate_rear
+	arena.player_pos = front
+	hold_direction((rear - front).normalized())
+	arena._move_player(front.distance_to(rear) / float(arena._stats.move_speed))
+	release_input()
+	check(arena.player_pos.distance_to(rear) < 0.05, "Actual Main held movement traverses the original open arch")
+
+
+func projectile_probe(start: Vector2, goal: Vector2, blocked: bool, contour: int) -> void:
+	var basic: Dictionary = arena.state.get_basic_cast()
+	if not check(bool(basic.get("ok", false)) and basic.get("packets", {}).has("projectile"), "Legal starter basic attack supplies the real projectile packet"): return
+	var direction := (goal - start).normalized()
+	var speed := 600.0
+	arena.player_pos = start
+	if not check(arena._shoot(start - direction * 19.0, direction, basic.packets.projectile,
+		Color.WHITE, 0, 0.0, speed, {"snapshot": basic.snapshot}), "Main._shoot admits the controlled source-contour projectile"): return
+	var shot: Dictionary = arena.projectiles.back()
+	var expected: Dictionary = arena._geometry.sweep(start, goal, float(shot.radius))
+	var trace_start: int = arena.combat_trace.size()
+	var advanced := false
+	for unused: int in range(60):
+		arena._update_projectiles(STEP)
+		report.projectile_steps += 1
+		advanced = advanced or Vector2(shot.pos).distance_to(start) > 0.1
+		if not bool(shot.active) or (Vector2(shot.pos) - start).dot(direction) >= start.distance_to(goal): break
+	var terrain_events := 0
+	var source_contacts := 0
+	for index: int in range(trace_start, arena.combat_trace.size()):
+		var event: Dictionary = arena.combat_trace[index]
+		if int(event.get("projectile_id", -1)) != int(shot.id): continue
+		if event.type == "terrain_hit": terrain_events += 1
+		if event.type == "hit": source_contacts += 1
+	if blocked:
+		check(expected.hit and expected.wall == contour and advanced and not shot.active
+			and shot.end_reason == "terrain_collision" and Vector2(shot.pos).distance_to(expected.point) < 0.15
+			and terrain_events == 1 and source_contacts == 0,
+			"Actual Main projectile advances then terminates on original contour %d" % contour)
+		report.projectile_wall_probes += 1
+	else:
+		check(not expected.hit and advanced and shot.active and terrain_events == 0 and source_contacts == 0
+			and (Vector2(shot.pos) - start).dot(direction) >= start.distance_to(goal),
+			"Actual Main projectile crosses the open arch without a fictitious AABB hit")
+		report.projectile_gate_probes += 1
+	arena.projectile_runtime.cancel_all(arena.projectiles)
+
+
+func verify_projectiles_and_los(layout: Dictionary) -> void:
+	for index: int in range(layout.polygons.size()):
+		var box := polygon_bounds(layout.polygons[index])
+		var start := Vector2(Vector2(layout.solid_probes[index]).x, box.position.y - 70.0)
+		var goal := Vector2(start.x, box.end.y + 70.0)
+		var receipt: Dictionary = arena._geometry.sweep(start, goal)
+		check(receipt.hit and receipt.wall == index and not arena._terrain_visible(start, goal)
+			and not arena._terrain_visible(goal, start), "Actual Main LOS blocks both directions on original contour %d" % index)
+		projectile_probe(start, goal, true, index)
+	var front: Vector2 = layout.gate_front
+	var rear: Vector2 = layout.gate_rear
+	var arch_box := polygon_bounds(layout.polygons[1]).merge(polygon_bounds(layout.polygons[2]))
+	check(BaseGeometry._box_contact(front, rear, arch_box).hit
+		and arena._terrain_visible(front, rear) and arena._terrain_visible(rear, front),
+		"Actual Main arch LOS stays open where a merged arch AABB would falsely block")
+	projectile_probe(front, rear, false, -1)
+
+
+func verify_three_actor_gate(layout: Dictionary) -> void:
+	# Reposition two existing ordinary roots and the existing natural boss.
+	# Keep all 25 actors, source IDs, radii, speeds, health and attack policies.
+	var selected: Array[Dictionary] = []
+	for enemy: Dictionary in arena.enemies:
+		if not enemy.has("map_boss_attack_id") and selected.size() < 2: selected.append(enemy)
+	var boss := actor(int(arena._map_run.boss_id))
+	if not check(selected.size() == 2 and not boss.is_empty(), "Three-actor fixture selects two original ordinary roots and the original boss"): return
+	selected.append(boss)
+	var front: Vector2 = layout.gate_front
+	var rear: Vector2 = layout.gate_rear
+	var through := (rear - front).normalized()
+	var across := Vector2(-through.y, through.x)
+	var trigger := 0.0
+	for enemy: Dictionary in selected:
+		var policy: Dictionary = arena.Monsters.telegraph_policy(enemy)
+		trigger = maxf(trigger, float(policy.get("trigger_distance", 0.0)))
+	arena.player_pos = rear + through * (trigger + 160.0)
+	var offsets: Array[float] = [-45.0, 45.0, 0.0]
+	var starts: Dictionary = {}
+	var source_fields: Dictionary = {}
+	var legal: bool = arena._geometry.is_clear(arena.player_pos, arena.PLAYER_RADIUS)
+	for index: int in range(selected.size()):
+		var enemy: Dictionary = selected[index]
+		enemy.pos = front + across * offsets[index]
+		starts[int(enemy.id)] = enemy.pos
+		source_fields[int(enemy.id)] = [enemy.root_id, enemy.generation, enemy.radius, enemy.speed,
+			enemy.template_id, enemy.reward_eligible, enemy.map_spawn_key, enemy.get("map_boss_attack_id", "")]
+		legal = legal and arena._geometry.is_clear(enemy.pos, float(enemy.radius))
+		report.crowd_selected.append({"id": enemy.id, "root_id": enemy.root_id, "template": enemy.template_id,
+			"radius": enemy.radius, "speed": enemy.speed, "start": enemy.pos})
+	if not check(legal, "Controlled three-actor and player positions are clear at unchanged source radii"): return
+	var other_positions: Dictionary = {}
+	var other_sources_safe := true
+	for enemy: Dictionary in arena.enemies:
+		if starts.has(int(enemy.id)): continue
+		other_positions[int(enemy.id)] = enemy.pos
+		other_sources_safe = other_sources_safe and not bool(enemy.get("exploration_awake", true)) \
+			and Vector2(enemy.pos).distance_to(arena.player_pos) > arena.EXPLORATION_AGGRO_RADIUS + 1.0
+	if not check(other_sources_safe and other_positions.size() == 22, "Other 22 original roots remain at authored sleeping positions beyond proximity wake"): return
+	# Selected source actors are explicitly awake controlled inputs. Birth time,
+	# separation, native collision, pursuit and telegraphs advance through tick.
+	for enemy: Dictionary in selected: arena._wake_exploration_enemy(enemy)
+	var crossed: Dictionary = {}
+	var all_clear := true
+	var identities_kept := true
+	var samples: Array = []
+	for step_index: int in range(CROWD_TICK_LIMIT):
+		var previous: Dictionary = {}
+		for enemy: Dictionary in selected: previous[int(enemy.id)] = enemy.pos
+		arena.tick(STEP)
+		report.crowd_ticks += 1
+		identities_kept = identities_kept and ids() == original_ids and arena.map_spawn_records() == original_records
+		for enemy: Dictionary in selected:
+			var radius: float = enemy.radius
+			var hit: Dictionary = arena._geometry.sweep(previous[int(enemy.id)], enemy.pos, radius)
+			all_clear = all_clear and arena._geometry.is_clear(enemy.pos, radius) \
+				and (not hit.hit or float(hit.fraction) >= 0.9999)
+			if (Vector2(enemy.pos) - rear).dot(through) >= radius:
+				crossed[int(enemy.id)] = true
+		if step_index % 30 == 0:
+			var positions: Array = []
+			for enemy: Dictionary in selected: positions.append({"id": enemy.id, "position": enemy.pos})
+			samples.append({"tick": step_index + 1, "actors": positions})
+		if crossed.size() == 3 or not arena.alive: break
+	var sleeping := true
+	var unchanged_sources := true
+	var progress := true
+	for enemy: Dictionary in arena.enemies:
+		if other_positions.has(int(enemy.id)):
+			sleeping = sleeping and not bool(enemy.exploration_awake) and enemy.pos == other_positions[int(enemy.id)]
+	for enemy: Dictionary in selected:
+		unchanged_sources = unchanged_sources and source_fields[int(enemy.id)] == [enemy.root_id, enemy.generation,
+			enemy.radius, enemy.speed, enemy.template_id, enemy.reward_eligible, enemy.map_spawn_key, enemy.get("map_boss_attack_id", "")]
+		progress = progress and Vector2(enemy.pos).distance_to(arena.player_pos) < Vector2(starts[int(enemy.id)]).distance_to(arena.player_pos)
+	check(crossed.size() == 3 and progress and arena.alive, "Three actual original enemies cross the gate rear plane and pursue the farther player within six simulated seconds")
+	check(all_clear and identities_kept and unchanged_sources and sleeping and arena.enemies.size() == 25,
+		"Every crowd step respects source contours while all 25 identities, unchanged source profiles and 22 sleepers remain")
+	report.crowd_crossed = crossed.size()
+	report.crowd_samples_clear = all_clear
+	report.crowd_samples = samples
+	report.crowd_seconds = int(report.crowd_ticks) * STEP
+	report.sleeping_original_roots = other_positions.size() if sleeping else -1
+	report.root_identities_preserved = identities_kept
+
+
+func verify_return_and_reentry(study: Variant, legacy_geometry: Dictionary) -> void:
+	if not accepted(arena.return_to_town(arena.world_context().revision), "Actual formal return abandons the bounded probe map"): return
+	pause_main()
+	arena.retained_actors.sync(arena)
+	await process_frame
+	check(arena.world_context().normal_town and arena.enemies.is_empty() and arena.map_spawn_records().is_empty()
+		and not study._study_active and not study._space.is_valid() and not study.physics_ready()
+		and not arena.world_geometry().has("module_polygons") and arena.dimensional_props.diagnostics().study_instances == 0
+		and arena.retained_actors._hero_presentation.is_empty() and arena.retained_actors._hero.atlas == Catalog.resource("hero"),
+		"Town return releases native study collision, all three module bodies and the temporary static hero selection")
+	if not enter_formal_map(): return
+	var current: Dictionary = arena.world_geometry()
+	check(current.id == "old_garden" and current.encounter_mode == "exploration"
+		and current.bounds == legacy_geometry.bounds and current.walls == legacy_geometry.walls
+		and current.landmarks == legacy_geometry.landmarks and not current.has("module_polygons")
+		and not arena._geometry.has_walls() and lawful_roster(),
+		"Subsequent lawful old_garden entry restores original geometry and all 25 original-position roots")
+	var clean_layout: Dictionary = Session.layout(arena.ARENA)
+	var solids_clear := true
+	for point: Vector2 in clean_layout.solid_probes: solids_clear = solids_clear and arena._geometry.is_clear(point)
+	check(solids_clear and arena.dimensional_props.diagnostics().study_instances == 0
+		and arena.retained_actors._hero_presentation.is_empty(), "No modular blocker or presentation survives into the legacy old_garden entry")
+	accepted(arena.return_to_town(arena.world_context().revision), "Cleanup returns the second lawful entry to town")
+	pause_main()
+
+
+func run() -> void:
+	var isolated: String = OS.get_environment("XDG_DATA_HOME").simplify_path()
+	if not isolated.begins_with("/tmp/godot-m1-v112-") or FileAccess.file_exists("user://build_save.json"):
+		printerr("Requires fresh isolated /tmp/godot-m1-v112-* XDG_DATA_HOME with no build_save.json")
+		quit(78)
+		return
+	for path: String in SOURCE_FILES: initial_files[path] = FileAccess.get_file_as_bytes(path)
+	arena = load("res://scenes/main.tscn").instantiate()
+	root.add_child(arena)
+	await process_frame
+	pause_main()
+	if not check(arena.world_context().normal_town and not arena.world_context().test_mode and arena.enemies.is_empty()
+		and arena.build_save_path == "user://build_save.json" and Rules.reason(arena.state.snapshot()).is_empty(),
+		"Actual fresh Main starts lawful formal town with canonical starter ownership"): await finish(); return
+	if not check(arena.save_build(), "Save fresh formal profile only inside isolated test directory"): await finish(); return
+	if not enter_formal_map(): await finish(); return
+	if not check(lawful_roster() and arena.world_context().initial_monsters == 25,
+		"All 25 original roots start at authored clear positions with standard reward records"): await finish(); return
+	original_ids = ids()
+	original_records = arena.map_spawn_records()
+	report.original_roots = original_ids.size()
+	var legacy_geometry: Dictionary = arena.world_geometry()
+	var old_geometry: Variant = arena._geometry
+	arena.retained_actors.sync(arena)
+	var before_nodes := retained_ids()
+	var layout: Dictionary = Session.layout(arena.ARENA)
+	if not accepted(layout, "Retained source assembly loads"): await finish(); return
+	# Fail closed on a deliberately colliding original root; no hidden remap.
+	var original_position: Vector2 = arena.enemies[0].pos
+	arena.enemies[0].pos = layout.solid_probes[0]
+	var rejected_before := install_authority()
+	var rejection: Dictionary = await Session.install(arena)
+	check(not bool(rejection.get("ok", false)) and str(rejection.get("error", "")).contains("intersects")
+		and arena._geometry == old_geometry and install_authority() == rejected_before
+		and arena.retained_actors._hero_presentation.is_empty(),
+		"Colliding original root rejects installation atomically without remapping or changing game/save state")
+	if bool(rejection.get("ok", false)): await finish(); return
+	arena.enemies[0].pos = original_position
+	var before := install_authority()
+	var installed: Dictionary = await Session.install(arena)
+	if not accepted(installed, "Install study on the untouched lawful 25-root source positions"): await finish(); return
+	check(installed.roots == 25 and installed.remapped_roots == 0 and arena._geometry == installed.geometry
+		and installed.geometry.physics_ready() and install_authority() == before and lawful_roster(),
+		"Installation preserves all roots, positions, spawn records, player, RNG, runtime and save bytes with zero remaps")
+	report.install_remapped_roots = installed.remapped_roots
+	verify_original_contours(installed.layout)
+	verify_presentation(installed.layout, before_nodes)
+	verify_player_motion(installed.layout)
+	verify_projectiles_and_los(installed.layout)
+	verify_three_actor_gate(installed.layout)
+	await verify_return_and_reentry(installed.geometry, legacy_geometry)
+	var files_unchanged := true
+	for path: String in SOURCE_FILES: files_unchanged = files_unchanged and FileAccess.get_file_as_bytes(path) == initial_files[path]
+	check(files_unchanged and not FileAccess.file_exists(arena.TOWN_TEST_BUILD_PATH)
+		and Rules.reason(arena.state.snapshot()).is_empty(), "Source map/art definitions remain unchanged and no test gear/profile was injected")
+	await finish()
+
+
+func finish() -> void:
+	release_input()
+	if is_instance_valid(arena):
+		arena.queue_free()
+		await process_frame
+		await process_frame
+	report.checks = checks
+	report.failures = failures
+	report.failed_labels = labels
+	print("MODULAR_COMBAT_STUDY_JSON " + JSON.stringify(report))
+	print("MODULAR_COMBAT_STUDY checks=%d failures=%d roots=%d crowd=%d ticks=%d" %
+		[checks, failures, int(report.original_roots), int(report.crowd_crossed), int(report.crowd_ticks)])
+	quit(1 if failures else 0)

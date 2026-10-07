@@ -1,0 +1,393 @@
+extends "res://scripts/world/map_geometry.gd"
+## Bounded, research-only geometry for the four unchanged v111 ground contours.
+## Call install(), allow two physics frames, then require physics_ready() before
+## assigning this adapter to Main. Native circle/ray queries fail closed until
+## the isolated static space has synchronized. No scene bodies or game RNG.
+const MAX_CONTOURS := 4
+const MAX_VERTICES := 99
+const SOURCE_MAP_ID := "old_garden"
+const CONTACT_PRECISION := 0.001
+
+var _study_active := false
+var _native_ready := false
+var _space := RID()
+var _bodies: Array[RID] = []
+var _shapes: Array[RID] = []
+var _body_contours: Dictionary = {}
+var _native_probes: Array[Vector2] = []
+var _probe_contours: Array[int] = []
+var _polygons: Array[PackedVector2Array] = []
+var _spawn := Vector2.ZERO
+var _presentation: Dictionary = {}
+var _query_circle: CircleShape2D
+
+
+func install(bounds: Rect2, polygons: Array[PackedVector2Array], spawn: Vector2, presentation: Dictionary) -> Dictionary:
+	if not bounds.position.is_finite() or not bounds.size.is_finite() or not bounds.end.is_finite() or bounds.size.x <= 0.0 or bounds.size.y <= 0.0:
+		return _failure("Study bounds must be finite and positive")
+	if not spawn.is_finite() or not bounds.has_point(spawn):
+		return _failure("Study spawn must be finite and inside bounds")
+	if polygons.is_empty() or polygons.size() > MAX_CONTOURS:
+		return _failure("Study requires one to four original contours")
+	if not _plain_metadata(presentation):
+		return _failure("Presentation must contain bounded, finite, detached data")
+	var detached: Array[PackedVector2Array] = []
+	var decomposed: Array = []
+	var boxes: Array[Rect2] = []
+	var vertex_count := 0
+	for polygon: PackedVector2Array in polygons:
+		vertex_count += polygon.size()
+		if vertex_count > MAX_VERTICES or not _simple_polygon(polygon, bounds):
+			return _failure("Contours must be simple, finite and within the 99-vertex study budget")
+		if Geometry2D.is_point_in_polygon(spawn, polygon):
+			return _failure("Study spawn intersects a contour")
+		var convex_parts: Array[PackedVector2Array] = Geometry2D.decompose_polygon_in_convex(polygon)
+		if convex_parts.is_empty():
+			return _failure("Godot could not decompose a study contour")
+		detached.append(polygon.duplicate())
+		decomposed.append(convex_parts)
+		var box := Rect2(polygon[0], Vector2.ZERO)
+		for point: Vector2 in polygon:
+			box = box.expand(point)
+		boxes.append(box)
+	# Validation above is atomic: invalid input cannot release an installed study.
+	_release_native()
+	_space = PhysicsServer2D.space_create()
+	PhysicsServer2D.space_set_active(_space, true)
+	for contour: int in range(decomposed.size()):
+		var body := PhysicsServer2D.body_create()
+		PhysicsServer2D.body_set_mode(body, PhysicsServer2D.BODY_MODE_STATIC)
+		PhysicsServer2D.body_set_collision_layer(body, 1)
+		PhysicsServer2D.body_set_collision_mask(body, 0)
+		_bodies.append(body)
+		_body_contours[body] = contour
+		for part: PackedVector2Array in decomposed[contour]:
+			var shape := PhysicsServer2D.convex_polygon_shape_create()
+			PhysicsServer2D.shape_set_data(shape, part)
+			PhysicsServer2D.body_add_shape(body, shape)
+			_shapes.append(shape)
+			var center := Vector2.ZERO
+			for vertex: Vector2 in part:
+				center += vertex
+			_native_probes.append(center / float(part.size()))
+			_probe_contours.append(contour)
+		PhysicsServer2D.body_set_space(body, _space)
+	_query_circle = CircleShape2D.new()
+	_polygons = detached
+	_spawn = spawn
+	_presentation = presentation.duplicate(true)
+	_study_active = true
+	_native_ready = false
+	_id = "modular_study"
+	_bounds = bounds
+	# These boxes supply only the base class's finite corner waypoint graph.
+	# They are never collision truth, legal-point projection or rendered walls.
+	_walls = boxes
+	_routes.clear()
+	_landmarks.clear()
+	_encounter_mode = "modular_study"
+	_obstacle_style = ""
+	_revision += 1
+	return {"ok": true, "error": ""}
+
+
+func physics_ready() -> bool:
+	if not _study_active or not _space.is_valid():
+		return false
+	if _native_ready:
+		return true
+	var space := PhysicsServer2D.space_get_direct_state(_space)
+	if space == null:
+		return false
+	# Check every convex piece, not just elapsed time or the existence of a RID.
+	for index: int in range(_native_probes.size()):
+		var query := PhysicsPointQueryParameters2D.new()
+		query.position = _native_probes[index]
+		query.collision_mask = 1
+		var found := false
+		for hit: Dictionary in space.intersect_point(query, MAX_VERTICES):
+			if int(_body_contours.get(hit.rid, -1)) == _probe_contours[index]:
+				found = true
+				break
+		if not found:
+			return false
+	_native_ready = true
+	_routes.clear()
+	return true
+
+
+func configure(id: String, bounds: Rect2) -> bool:
+	var configured := super.configure(id, bounds)
+	if configured and _study_active:
+		_release_native()
+	return configured
+
+
+func configure_exploration(id: String, bounds: Rect2) -> bool:
+	if _study_active and id == SOURCE_MAP_ID and bounds == _bounds:
+		return true
+	var configured := super.configure_exploration(id, bounds)
+	if configured and _study_active:
+		_release_native()
+	return configured
+
+
+func snapshot() -> Dictionary:
+	if not _study_active:
+		return super.snapshot()
+	var result := _presentation.duplicate(true)
+	result.id = "modular_study"
+	result.source_map_id = SOURCE_MAP_ID
+	result.bounds = _bounds
+	result.spawn = _spawn
+	result.revision = _revision
+	result.encounter_mode = "modular_study"
+	result.walls = []
+	var copies: Array[PackedVector2Array] = []
+	for polygon: PackedVector2Array in _polygons:
+		copies.append(polygon.duplicate())
+	result.module_polygons = copies
+	return result
+
+
+func has_walls() -> bool:
+	return not _polygons.is_empty() if _study_active else super.has_walls()
+
+
+func is_clear(point: Vector2, radius: float = 0.0) -> bool:
+	if not _study_active:
+		return super.is_clear(point, radius)
+	if not _native_ready or not point.is_finite() or not is_finite(radius) or radius < 0.0 or radius * 2.0 > minf(_bounds.size.x, _bounds.size.y) or _clamp(point, radius) != point:
+		return false
+	var space := PhysicsServer2D.space_get_direct_state(_space)
+	if radius == 0.0:
+		var query := PhysicsPointQueryParameters2D.new()
+		query.position = point
+		query.collision_mask = 1
+		return space.intersect_point(query, 1).is_empty()
+	return space.intersect_shape(_circle_query(point, radius), 1).is_empty()
+
+
+func legal_point(point: Vector2, radius: float) -> Vector2:
+	if not _study_active:
+		return super.legal_point(point, radius)
+	if not point.is_finite() or not is_finite(radius) or radius < 0.0 or not _native_ready:
+		return _spawn
+	var desired := _clamp(point, radius)
+	if is_clear(desired, radius):
+		return desired
+	var best := _spawn
+	var distance := desired.distance_squared_to(best) if is_clear(best, radius) else INF
+	# Propose exact-edge projections in both directions and at vertex bisectors.
+	# Native circle overlap remains the sole acceptance test for every candidate.
+	for polygon: PackedVector2Array in _polygons:
+		for index: int in range(polygon.size()):
+			var a := polygon[index]
+			var b := polygon[(index + 1) % polygon.size()]
+			var closest := Geometry2D.get_closest_point_to_segment(desired, a, b)
+			var edge := (b - a).normalized()
+			var normal := Vector2(-edge.y, edge.x)
+			var radial := (desired - closest).normalized()
+			for offset: Vector2 in [normal, -normal, radial, -radial]:
+				var candidate := _clamp(closest + offset * (radius + SKIN), radius)
+				var candidate_distance := desired.distance_squared_to(candidate)
+				if candidate_distance < distance and is_clear(candidate, radius):
+					best = candidate
+					distance = candidate_distance
+	return best
+
+
+func sweep(start: Vector2, end: Vector2, radius: float = 0.0) -> Dictionary:
+	if not _study_active:
+		return super.sweep(start, end, radius)
+	if not _native_ready or not start.is_finite() or not end.is_finite() or not is_finite(radius) or radius < 0.0:
+		return _receipt(true, 0.0, start)
+	var delta := end - start
+	var space := PhysicsServer2D.space_get_direct_state(_space)
+	if radius == 0.0:
+		if delta.length_squared() <= EPS:
+			return _receipt(not is_clear(start), 0.0 if not is_clear(start) else 1.0, start)
+		var ray := PhysicsRayQueryParameters2D.create(start, end, 1)
+		ray.hit_from_inside = true
+		var contact := space.intersect_ray(ray)
+		if contact.is_empty():
+			return _receipt(false, 1.0, end)
+		var fraction := clampf(start.distance_to(contact.position) / delta.length(), 0.0, 1.0)
+		return _receipt(true, fraction, start.lerp(end, fraction), contact.normal, int(_body_contours.get(contact.rid, -1)))
+	var query := _circle_query(start, radius)
+	var overlaps := space.intersect_shape(query, MAX_VERTICES)
+	if not overlaps.is_empty():
+		var wall := _first_contour(overlaps)
+		return _receipt(true, 0.0, start, _surface_normal(start, wall, delta), wall)
+	if delta.length_squared() <= EPS:
+		return _receipt(false, 1.0, end)
+	query.motion = delta
+	var cast := space.cast_motion(query)
+	if cast.size() != 2:
+		return _receipt(true, 0.0, start)
+	if cast[0] >= 1.0:
+		return _receipt(false, 1.0, end)
+	var safe := float(cast[0])
+	var unsafe := float(cast[1])
+	query.motion = Vector2.ZERO
+	query.transform.origin = start.lerp(end, unsafe)
+	overlaps = space.intersect_shape(query, MAX_VERTICES)
+	# Godot's cast bracket can span several units on a very long displacement.
+	# Refine that native bracket with native overlaps, never a polygon/AABB cast.
+	if not overlaps.is_empty():
+		for unused: int in range(16):
+			if (unsafe - safe) * delta.length() <= CONTACT_PRECISION:
+				break
+			var middle := (safe + unsafe) * 0.5
+			query.transform.origin = start.lerp(end, middle)
+			var middle_hits := space.intersect_shape(query, MAX_VERTICES)
+			if middle_hits.is_empty():
+				safe = middle
+			else:
+				unsafe = middle
+				overlaps = middle_hits
+	# Margin is used only to identify a touching native collider and its normal,
+	# never to decide whether the original zero-margin sweep was blocked.
+	query.transform.origin = start.lerp(end, unsafe)
+	query.margin = CONTACT_PRECISION * 2.0
+	if overlaps.is_empty():
+		overlaps = space.intersect_shape(query, MAX_VERTICES)
+	var wall := _first_contour(overlaps)
+	var rest := space.get_rest_info(query)
+	var normal := Vector2(rest.get("normal", Vector2.ZERO))
+	if wall < 0 and not rest.is_empty():
+		wall = int(_body_contours.get(rest.rid, -1))
+	if normal.length_squared() <= EPS or int(_body_contours.get(rest.get("rid", RID()), -1)) != wall:
+		normal = _surface_normal(start.lerp(end, safe), wall, delta)
+	return _receipt(true, safe, start.lerp(end, safe), normal, wall)
+
+
+func _circle_query(point: Vector2, radius: float) -> PhysicsShapeQueryParameters2D:
+	_query_circle.radius = radius
+	var query := PhysicsShapeQueryParameters2D.new()
+	query.shape = _query_circle
+	query.transform = Transform2D(0.0, point)
+	query.collision_mask = 1
+	query.margin = 0.0
+	return query
+
+
+func _first_contour(hits: Array[Dictionary]) -> int:
+	var first := MAX_CONTOURS
+	for hit: Dictionary in hits:
+		first = mini(first, int(_body_contours.get(hit.rid, MAX_CONTOURS)))
+	return first if first < MAX_CONTOURS else -1
+
+
+func _surface_normal(center: Vector2, wall: int, delta: Vector2) -> Vector2:
+	var nearest := Vector2.ZERO
+	var distance := INF
+	for contour: int in range(_polygons.size()):
+		if wall >= 0 and contour != wall:
+			continue
+		var polygon := _polygons[contour]
+		for index: int in range(polygon.size()):
+			var point := Geometry2D.get_closest_point_to_segment(center, polygon[index], polygon[(index + 1) % polygon.size()])
+			var separation := center.distance_squared_to(point)
+			if separation < distance:
+				nearest = point
+				distance = separation
+	var normal := (center - nearest).normalized()
+	return normal if normal.length_squared() > EPS else -delta.normalized()
+
+
+static func _simple_polygon(polygon: PackedVector2Array, bounds: Rect2) -> bool:
+	if polygon.size() < 3 or polygon.size() > MAX_VERTICES:
+		return false
+	# Never send NaN/Inf, including a later vertex, into an engine helper.
+	for point: Vector2 in polygon:
+		if not point.is_finite() or point.x < bounds.position.x or point.y < bounds.position.y or point.x > bounds.end.x or point.y > bounds.end.y:
+			return false
+	var double_area := 0.0
+	for index: int in range(polygon.size()):
+		var a := polygon[index]
+		var b := polygon[(index + 1) % polygon.size()]
+		if a.distance_squared_to(b) <= EPS * EPS:
+			return false
+		double_area += a.cross(b)
+		for other: int in range(index + 1, polygon.size()):
+			if a.distance_squared_to(polygon[other]) <= EPS * EPS:
+				return false
+			if other == index + 1 or (index == 0 and other == polygon.size() - 1):
+				continue
+			if Geometry2D.segment_intersects_segment(a, b, polygon[other], polygon[(other + 1) % polygon.size()]) != null:
+				return false
+			var pair := Geometry2D.get_closest_points_between_segments(a, b, polygon[other], polygon[(other + 1) % polygon.size()])
+			if pair[0].distance_squared_to(pair[1]) <= EPS * EPS:
+				return false
+		var previous := polygon[(index + polygon.size() - 1) % polygon.size()] - a
+		var following := b - a
+		if absf(previous.cross(following)) <= EPS and previous.dot(following) > 0.0:
+			return false
+	return is_finite(double_area) and absf(double_area) > EPS
+
+
+static func _plain_metadata(value: Variant, depth: int = 0) -> bool:
+	if depth > 16:
+		return false
+	if value is Dictionary:
+		if value.size() > 4096:
+			return false
+		for key: Variant in value:
+			if not (key is String or key is StringName) or not _plain_metadata(value[key], depth + 1):
+				return false
+		return true
+	if value is Array:
+		if value.size() > 4096:
+			return false
+		for item: Variant in value:
+			if not _plain_metadata(item, depth + 1):
+				return false
+		return true
+	if value is Vector2:
+		return value.is_finite()
+	if value is Rect2:
+		return value.position.is_finite() and value.size.is_finite() and value.end.is_finite()
+	if value is float:
+		return is_finite(value)
+	return value == null or value is bool or value is int or value is String or value is StringName
+
+
+static func _receipt(hit: bool, fraction: float, point: Vector2, normal: Vector2 = Vector2.ZERO, wall: int = -1) -> Dictionary:
+	return {"hit": hit, "fraction": fraction, "point": point, "normal": normal, "wall": wall}
+
+
+static func _failure(error: String) -> Dictionary:
+	return {"ok": false, "error": error}
+
+
+func _release_native() -> void:
+	_native_ready = false
+	_study_active = false
+	for body: RID in _bodies:
+		PhysicsServer2D.free_rid(body)
+	_bodies.clear()
+	for shape: RID in _shapes:
+		PhysicsServer2D.free_rid(shape)
+	_shapes.clear()
+	if _space.is_valid():
+		PhysicsServer2D.free_rid(_space)
+	_space = RID()
+	_query_circle = null
+	_body_contours.clear()
+	_native_probes.clear()
+	_probe_contours.clear()
+	_polygons.clear()
+	_presentation.clear()
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_PREDELETE:
+		# A RefCounted at zero references cannot call another instance method.
+		# Dispose owned server RIDs directly; Resource members release themselves.
+		for body: RID in _bodies:
+			PhysicsServer2D.free_rid(body)
+		for shape: RID in _shapes:
+			PhysicsServer2D.free_rid(shape)
+		if _space.is_valid():
+			PhysicsServer2D.free_rid(_space)

@@ -1,0 +1,289 @@
+extends SceneTree
+const PropManager = preload("res://scripts/visuals/dimensional_prop_manager.gd")
+const MANIFEST := "res://art-studies/v111/exports/manifest.json"
+const EXPECTED := {
+	"short_wall": {"sprite": [Vector2(108, 134), Vector2(216, 139)], "shadow": [Vector2(163, 154), Vector2(477, 214)]},
+	"walkable_arch": {"sprite": [Vector2(140, 173), Vector2(280, 178)], "shadow": [Vector2(195, 178), Vector2(590, 238)], "ground_detail": [Vector2(133, 78), Vector2(273, 79)]},
+	"moss_rock": {"sprite": [Vector2(98, 196), Vector2(193, 200)], "shadow": [Vector2(153, 228), Vector2(372, 303)]}
+}
+var checks := 0
+var failures := 0
+var fixture_root := ""
+var fixture_files: Array[String] = []
+var fixture_dirs: Array[String] = []
+
+func expect(value: bool, label: String) -> void:
+	checks += 1
+	if not value:
+		failures += 1
+		push_error(label)
+
+func _initialize() -> void:
+	call_deferred("run_resources_and_rejections" if "--resources-and-rejections" in OS.get_cmdline_user_args() else "run")
+
+func _geometry() -> Dictionary:
+	return {"id": "modular_study", "bounds": Rect2(0, 0, 2400, 1800), "walls": [],
+		"module_instances": [
+			{"id": "wall_1", "module_id": "short_wall", "position": Vector2(600, 710)},
+			{"id": "arch_1", "module_id": "walkable_arch", "position": Vector2(1240, 600)},
+			{"id": "rock_1", "module_id": "moss_rock", "position": Vector2(1810, 480)}],
+		"module_polygons": [PackedVector2Array([Vector2(520, 660), Vector2(680, 660), Vector2(680, 710), Vector2(520, 710)])],
+		"spawn": Vector2(300, 1000), "revision": 1}
+
+func _owned_ids(manager) -> Array:
+	var result: Array = []
+	for node: Node2D in manager._nodes: result.append(node.get_instance_id())
+	return result
+
+func _texture_ids(manager) -> Array:
+	var result: Array = []
+	for assets: Dictionary in manager._study_assets.values():
+		for module: Dictionary in assets.modules.values():
+			for layer: Dictionary in module.values(): result.append(layer.texture.get_instance_id())
+	return result
+
+func _expect_visual_only(node: Node) -> void:
+	expect(not node is CollisionObject2D and not node is CollisionShape2D and not node is CollisionPolygon2D, "Study adapter adds no collision nodes")
+	for child: Node in node.get_children(): _expect_visual_only(child)
+
+func _verify_layer(sprite: Sprite2D, module_id: String, layer_name: String, foot: Vector2) -> void:
+	var expected: Array = EXPECTED[module_id][layer_name]
+	var conversion := 1.0 / 0.65
+	expect(sprite.position.is_equal_approx(-expected[0] * conversion), "%s %s uses its own exact anchor" % [module_id, layer_name])
+	expect(sprite.scale.is_equal_approx(Vector2.ONE * conversion), "%s %s uses the fixed authored unit conversion" % [module_id, layer_name])
+	expect((sprite.global_position + expected[0] * sprite.global_scale).is_equal_approx(foot), "%s %s has the supplied world foot" % [module_id, layer_name])
+	expect(not sprite.centered and not sprite.flip_h and not sprite.flip_v and is_zero_approx(sprite.rotation), "%s %s is not centered, mirrored or rotated" % [module_id, layer_name])
+	expect(sprite.texture_filter == CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS, "Study sprites select mipmapped filtering")
+	_verify_texture(sprite.texture, module_id, layer_name, int(sprite.get_meta("source_mipmap_count", 0)))
+
+func _verify_texture(texture: Texture2D, module_id: String, layer_name: String, source_mipmap_count: int) -> void:
+	var expected: Array = EXPECTED[module_id][layer_name]
+	expect(texture is ImageTexture, "%s %s is a raw-image texture" % [module_id, layer_name])
+	expect(texture.get_size() == expected[1], "%s %s keeps the exact exported pixel dimensions" % [module_id, layer_name])
+	expect(source_mipmap_count > 0, "%s %s had a measured CPU mipmap chain before texture creation" % [module_id, layer_name])
+	# Dummy/headless rendering may return its shared Image. Inspect a duplicate;
+	# clearing the returned original would mutate the resource under test.
+	var pixels := texture.get_image().duplicate() as Image
+	expect(pixels.get_mipmap_count() == source_mipmap_count, "%s %s readback retains the measured mipmap count" % [module_id, layer_name])
+	pixels.clear_mipmaps()
+	var suffix := "" if layer_name == "sprite" else ("_shadow" if layer_name == "shadow" else "_sill")
+	var original := Image.new()
+	var error := original.load(ProjectSettings.globalize_path("res://art-studies/v111/exports/" + module_id + suffix + ".png"))
+	expect(error == OK and pixels.get_data() == original.get_data(), "%s %s retains every original base-level pixel" % [module_id, layer_name])
+
+func _verify_study_resources(manager) -> void:
+	var modules: Dictionary = manager._study_assets[MANIFEST].modules
+	for module_id: String in modules:
+		for layer_name: String in modules[module_id]:
+			var layer: Dictionary = modules[module_id][layer_name]
+			_verify_texture(layer.texture, module_id, layer_name, layer.mipmap_count)
+
+func _verify_scene(manager, depth: Node2D, geometry: Dictionary) -> void:
+	var shadows := depth.get_node("ModularStudyShadows") as Node2D
+	var details := depth.get_node("ModularStudyGroundDetails") as Node2D
+	expect(shadows != null and details != null, "Both ground batches exist")
+	if shadows == null or details == null: return
+	expect(shadows.z_index == -1 and details.z_index == -1 and not shadows.z_as_relative and not details.z_as_relative, "All ground layers stay at the floor's global z, above its earlier draw order")
+	expect(shadows.position == Vector2.ZERO and details.position == Vector2.ZERO and not shadows.y_sort_enabled and not details.y_sort_enabled, "Ground batches have equal sort origins and unsorted subtrees")
+	expect(shadows.get_index() < details.get_index(), "Every shadow batch draws before the sill batch")
+	expect(shadows.get_child_count() == 3 and details.get_child_count() == 1, "Three shadows and the one required arch sill are present")
+	for instance: Dictionary in geometry.module_instances:
+		var body := depth.get_node("Module_" + instance.id) as Node2D
+		expect(body != null and body.get_parent() == depth, "Module body shares WorldDepth directly with the hero")
+		if body == null: continue
+		expect(body.position == instance.position and body.z_index == 0 and body.scale == Vector2.ONE and is_zero_approx(body.rotation), "Body root sorts at the supplied foot without fitting or transform changes")
+		_verify_layer(body.get_child(0), instance.module_id, "sprite", instance.position)
+		var shadow_foot := shadows.get_node("Shadow_" + instance.id) as Node2D
+		expect(shadow_foot.position == instance.position and shadow_foot.z_index == 0, "Shadow foot is local to its ground batch")
+		_verify_layer(shadow_foot.get_child(0), instance.module_id, "shadow", instance.position)
+		if instance.module_id == "walkable_arch":
+			var detail_foot := details.get_node("Sill_" + instance.id) as Node2D
+			expect(detail_foot.position == instance.position and detail_foot.z_index == 0, "Arch sill has its own world-foot wrapper")
+			_verify_layer(detail_foot.get_child(0), instance.module_id, "ground_detail", instance.position)
+	for owned: Node2D in manager._nodes: _expect_visual_only(owned)
+
+func _expect_rejected(manager, depth: Node2D, geometry: Dictionary, label: String, manifest_path: String = MANIFEST) -> void:
+	var source_before := var_to_bytes(manager._source)
+	var presentation_before := var_to_bytes(manager._presentation)
+	var input_before := var_to_bytes(geometry)
+	var nodes_before := _owned_ids(manager)
+	var textures_before := _texture_ids(manager)
+	var result: Dictionary = manager.configure_modules(depth, geometry, manifest_path)
+	expect(not manager.diagnostics().study_error.is_empty(), label + " has an explicit diagnostic")
+	expect(_owned_ids(manager) == nodes_before and _texture_ids(manager) == textures_before, label + " preserves live nodes and the prior complete cache")
+	expect(var_to_bytes(manager._source) == source_before and var_to_bytes(manager._presentation) == presentation_before, label + " preserves previously configured geometry")
+	expect(var_to_bytes(geometry) == input_before and var_to_bytes(result) == input_before, label + " returns unchanged detached input without suppression claims")
+	result.walls.append(Rect2(1, 2, 3, 4))
+	expect(var_to_bytes(geometry) == input_before, label + " failure result does not alias the input")
+
+func _write_manifest(name: String, contents: String, relative_dir: String = "exports") -> String:
+	var directory := fixture_root.path_join(relative_dir)
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(directory))
+	if not directory in fixture_dirs: fixture_dirs.append(directory)
+	var path := directory.path_join(name)
+	var file := FileAccess.open(path, FileAccess.WRITE)
+	if file == null:
+		expect(false, "Can write isolated manifest fixture: " + path)
+		return path
+	file.store_string(contents)
+	file.close()
+	fixture_files.append(path)
+	return path
+
+func _clear_fixture_files() -> void:
+	for path: String in fixture_files: DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
+	fixture_dirs.reverse()
+	for directory: String in fixture_dirs: DirAccess.remove_absolute(ProjectSettings.globalize_path(directory))
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(fixture_root))
+
+func run_resources_and_rejections() -> void:
+	fixture_root = "user://v112_modular_prop_resources_%d" % Time.get_ticks_usec()
+	var depth := Node2D.new()
+	depth.y_sort_enabled = true
+	root.add_child(depth)
+	var hero := Node2D.new()
+	depth.add_child(hero)
+	var manager := PropManager.new()
+	var geometry := _geometry()
+	manager.configure_modules(depth, geometry)
+	expect(manager.diagnostics().study_error.is_empty(), "Resource subset configures the real archived modules")
+	_verify_study_resources(manager)
+	var nodes_before := _owned_ids(manager)
+	var textures_before := _texture_ids(manager)
+	manager.configure_modules(depth, geometry)
+	_verify_study_resources(manager)
+	expect(_owned_ids(manager) == nodes_before and _texture_ids(manager) == textures_before and manager.diagnostics().study_image_loads == 7, "Repeated resource inspection retains nodes, seven textures and their mipmaps")
+	var manifest: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(MANIFEST))
+	_expect_rejected(manager, depth, geometry, "Malformed JSON returns a diagnostic without engine parse_string errors", _write_manifest("malformed.json", "{"))
+	for zoom: float in [0.0, 1e-38, 1.0]:
+		var invalid_zoom_manifest := manifest.duplicate(true)
+		invalid_zoom_manifest.projection.camera2d_zoom = zoom
+		_expect_rejected(manager, depth, geometry, "Unauthored or overflowing conversion %s" % str(zoom), _write_manifest("zoom_%s.json" % str(zoom), JSON.stringify(invalid_zoom_manifest)))
+	var altered := manifest.duplicate(true)
+	altered.modules[0].sprite.image = "exports/../../short_wall.png"
+	_expect_rejected(manager, depth, geometry, "Unsafe image path", _write_manifest("unsafe_image.json", JSON.stringify(altered)))
+	altered = manifest.duplicate(true)
+	altered.modules[0].sprite.foot_local_pixel = [108, 133]
+	_expect_rejected(manager, depth, geometry, "Inconsistent foot metadata", _write_manifest("bad_anchor.json", JSON.stringify(altered)))
+	_expect_rejected(manager, depth, geometry, "Missing raw PNG", _write_manifest("missing_image.json", JSON.stringify(manifest)))
+	manager.configure_modules(depth, geometry)
+	expect(manager.diagnostics().study_error.is_empty() and _owned_ids(manager) == nodes_before, "Valid cached request recovers from rejection without replacing live nodes")
+	manager.clear()
+	expect(depth.get_child_count() == 1 and hero.get_parent() == depth, "Resource subset cleanup preserves the hero")
+	depth.queue_free()
+	_clear_fixture_files()
+	await process_frame
+	print("Modular prop resources and rejections: %d checks, %d failures" % [checks, failures])
+	quit(0 if failures == 0 else 1)
+
+func run() -> void:
+	fixture_root = "user://v112_modular_prop_adapter_%d" % Time.get_ticks_usec()
+	var stage := Node2D.new()
+	root.add_child(stage)
+	var floor_layer := Node2D.new()
+	floor_layer.name = "StaticArenaBackground"
+	floor_layer.z_index = -1
+	floor_layer.show_behind_parent = true
+	stage.add_child(floor_layer)
+	var depth := Node2D.new()
+	depth.name = "WorldDepth"
+	depth.y_sort_enabled = true
+	stage.add_child(depth)
+	var hero := Node2D.new()
+	hero.name = "HeroOwnedElsewhere"
+	hero.position = Vector2(1000, 620)
+	depth.add_child(hero)
+	var camera := Camera2D.new()
+	camera.zoom = Vector2(0.4, 0.4)
+	stage.add_child(camera)
+	var manager := PropManager.new()
+	var geometry := _geometry()
+	var original := var_to_bytes(geometry)
+	var result: Dictionary = manager.configure(depth, geometry)
+	expect(manager.diagnostics().study_error.is_empty(), "Explicit map ID routes configure() to the module adapter")
+	expect(var_to_bytes(geometry) == original and var_to_bytes(result) == original, "Presentation preserves every authoritative geometry field")
+	expect(not result.has("dimensional_wall_indices"), "Study does not claim rectangle-art suppression")
+	expect(not manager._loaded and manager._textures.is_empty() and manager._trees.is_empty(), "Study path never loads legacy assets or border trees")
+	expect(manager.diagnostics().study_instances == 3 and manager.diagnostics().study_shared_textures == 7 and manager.diagnostics().study_image_loads == 7, "All three modules share seven one-time image loads")
+	expect(is_equal_approx(manager.diagnostics().study_source_to_world, 1.0 / 0.65), "Authored source conversion is independent of the actual camera")
+	expect(floor_layer.get_index() < depth.get_index(), "Opaque floor precedes WorldDepth at ground z")
+	_verify_scene(manager, depth, geometry)
+	var first_nodes := _owned_ids(manager)
+	var first_textures := _texture_ids(manager)
+	result.module_instances[0].position = Vector2.ZERO
+	result.module_polygons[0][0] = Vector2.ZERO
+	result.walls.append(Rect2(1, 2, 3, 4))
+	expect(var_to_bytes(geometry) == original and var_to_bytes(manager._source) == original and var_to_bytes(manager._presentation) == original, "Returned nested metadata and contours are detached")
+	camera.zoom = Vector2(1.3, 1.3)
+	manager.configure_modules(depth, geometry)
+	expect(_owned_ids(manager) == first_nodes and _texture_ids(manager) == first_textures and manager.diagnostics().study_image_loads == 7, "Same input and camera changes retain nodes and shared textures")
+	_verify_scene(manager, depth, geometry)
+	var moved := geometry.duplicate(true)
+	moved.module_instances[0].position += Vector2(60, 40)
+	moved.revision = 2
+	manager.configure_modules(depth, moved)
+	expect(_owned_ids(manager) != first_nodes and _texture_ids(manager) == first_textures and manager.diagnostics().study_image_loads == 7, "Changed translation rebuilds owned nodes without another image load")
+	_verify_scene(manager, depth, moved)
+	var bad := moved.duplicate(true)
+	bad.module_instances[0].position = Vector2(NAN, 10)
+	_expect_rejected(manager, depth, bad, "Nonfinite foot")
+	bad = moved.duplicate(true)
+	bad.module_instances[0].scale = Vector2(2, 1)
+	_expect_rejected(manager, depth, bad, "Unauthored scale")
+	bad = moved.duplicate(true)
+	bad.module_instances[0].rotation = 0.2
+	_expect_rejected(manager, depth, bad, "Unauthored rotation")
+	bad = moved.duplicate(true)
+	bad.module_instances[0].module_id = "legacy_wall"
+	_expect_rejected(manager, depth, bad, "Unknown module")
+	bad = moved.duplicate(true)
+	bad.module_instances[1].id = bad.module_instances[0].id
+	_expect_rejected(manager, depth, bad, "Duplicate instance ID")
+	bad = moved.duplicate(true)
+	bad.module_instances.append({"id": "fourth", "module_id": "short_wall", "position": Vector2(10, 10)})
+	_expect_rejected(manager, depth, bad, "Oversized study")
+	bad = moved.duplicate(true)
+	bad.walls.append(Rect2(1, 2, 3, 4))
+	_expect_rejected(manager, depth, bad, "Legacy rectangle input")
+	bad = moved.duplicate(true)
+	bad.bounds = Rect2(Vector2.ZERO, Vector2(INF, 10))
+	_expect_rejected(manager, depth, bad, "Nonfinite bounds")
+	_expect_rejected(manager, null, moved, "Missing parent")
+	_expect_rejected(manager, depth, moved, "Unsafe manifest path", "res://art-studies/v111/exports/../exports/manifest.json")
+	_expect_rejected(manager, depth, moved, "Missing manifest", "res://art-studies/v111/exports/not-present.json")
+	_expect_rejected(manager, depth, moved, "Malformed manifest", _write_manifest("malformed.json", "{"))
+	var manifest: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(MANIFEST))
+	var altered := manifest.duplicate(true)
+	altered.projection.camera2d_zoom = 0
+	_expect_rejected(manager, depth, moved, "Invalid authored unit conversion", _write_manifest("zero_zoom.json", JSON.stringify(altered)))
+	altered = manifest.duplicate(true)
+	altered.modules[0].sprite.image = "exports/../../short_wall.png"
+	_expect_rejected(manager, depth, moved, "Unsafe image path", _write_manifest("unsafe_image.json", JSON.stringify(altered)))
+	altered = manifest.duplicate(true)
+	altered.modules[0].sprite.foot_local_pixel = [108, 133]
+	_expect_rejected(manager, depth, moved, "Inconsistent foot metadata", _write_manifest("bad_anchor.json", JSON.stringify(altered)))
+	_expect_rejected(manager, depth, moved, "Missing raw image", _write_manifest("missing_image.json", JSON.stringify(manifest)))
+	manager.configure_modules(depth, moved)
+	expect(manager.diagnostics().study_error.is_empty(), "A valid repeated request clears a prior error")
+	manager.clear()
+	expect(depth.get_child_count() == 1 and hero.get_parent() == depth, "Clear removes every study-owned node and preserves the hero")
+	expect(manager.diagnostics().study_instances == 0 and manager._source.is_empty() and manager._presentation.is_empty(), "Clear removes live study geometry and instance state")
+	manager.configure_modules(depth, geometry)
+	expect(_texture_ids(manager) == first_textures and manager.diagnostics().study_image_loads == 7, "A later entry reuses the manager's archived image cache")
+	# A focused old-path smoke check: the original rectangle presentation is intact.
+	manager._loaded = true
+	var legacy_texture: Texture2D = manager._study_assets[MANIFEST].modules.short_wall.sprite.texture
+	manager._textures = {"wall": legacy_texture}
+	manager._definitions = {"wall": {"world_footprint": [96, 64], "anchor_px": [4, 6], "pixels_per_world": 2}}
+	var legacy := {"id": "broken_ruins", "walls": [Rect2(50, 50, 96, 64)]}
+	result = manager.configure(depth, legacy)
+	expect(result.dimensional_wall_indices == [0] and manager._nodes.size() == 1 and manager.diagnostics().study_instances == 0, "Leaving the study restores the existing rectangle branch")
+	expect(manager._nodes[0].get_child(0).texture == legacy_texture and manager._textures.wall == legacy_texture, "Legacy texture dictionaries retain their existing identity")
+	_expect_rejected(manager, depth, bad, "Rejected study preserves a previously active legacy map")
+	manager.clear()
+	expect(depth.get_child_count() == 1 and hero.get_parent() == depth, "Final cleanup still preserves the hero")
+	stage.queue_free()
+	_clear_fixture_files()
+	await process_frame
+	print("Modular prop adapter: %d checks, %d failures" % [checks, failures])
+	quit(0 if failures == 0 else 1)
