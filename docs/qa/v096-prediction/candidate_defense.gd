@@ -1,4 +1,3 @@
-class_name DefenseRules
 extends RefCounted
 ## Original, bounded hit-defense rules shared by the player and monsters.
 ## DamageResolver owns the per-component formula; this module validates authored
@@ -257,7 +256,7 @@ static func incoming_burn(raw_amount:Variant,fire_resistance:Variant,shield:Vari
 	var profile:Dictionary=defense_profile({"fire_resistance":fire_resistance},actor)
 	if not profile.ok:return profile
 	var raw:float=float(raw_amount);var resistance:float=profile.effective_resistances.fire
-	var amount:float=raw*(1.0-resistance)
+	var amount:float=_burn_after_resistance(raw,resistance)
 	# This private receipt is already proved valid by the raw/profile checks.
 	# Keep public settlement validation for every other actor and option.
 	if actor=="monster" and _finite_number(ratio) and float(ratio)==0.0 and _finite_number(max_fire_bonus) and float(max_fire_bonus)==0.0:
@@ -273,11 +272,28 @@ static func incoming_burn(raw_amount:Variant,fire_resistance:Variant,shield:Vari
 		profile=resistance_profile({"fire_resistance":fire_resistance,"maximum_fire_resistance_add":max_fire_bonus},actor)
 		if not profile.ok:return profile
 		resistance=profile.effective_resistances.fire
-		amount=raw*(1.0-resistance)
+		amount=_burn_after_resistance(raw,resistance)
 		resolved={"total":amount,"components":{"fire":amount},"details":[{"type":"fire","before_defense":raw,"resistance":resistance,"final":amount}]}
 		result=settle_with_mana(resolved,shield,health,mana,ratio) if float(ratio)!=0.0 else settle_resolved(resolved,shield,health)
 	if result.ok:result.actor=actor;result.stage="burning"
 	return result
+
+
+## Prediction consumes only this rate, never a resource-settlement receipt.
+## Retain incoming_burn(raw, fire, 0.0, 1.0, "monster") validation and arithmetic.
+## The ordinary defense profile remains authoritative; no rate is cached.
+static func monster_burn_prediction(raw_amount:Variant,fire_resistance:Variant)->Dictionary:
+	if not _amount(raw_amount):return _failure("Burn amount must be finite and nonnegative")
+	var profile:Dictionary=defense_profile({"fire_resistance":fire_resistance},"monster")
+	if not profile.ok:return profile
+	var amount:float=_burn_after_resistance(float(raw_amount),float(profile.effective_resistances.fire))
+	var total:float=0.0
+	total+=amount # Keep the settlement's +0.0 accumulation, including negative zero.
+	return {"ok":true,"reason":"","damage_total":total}
+
+
+static func _burn_after_resistance(raw:float,resistance:float)->float:
+	return raw*(1.0-resistance)
 
 
 ## Only incoming_burn calls this after authoritative raw, fire and pool checks.

@@ -1,0 +1,69 @@
+{
+  "baseline_commit": "eaf298a8cbd22c8387da28da118a15afdcd2afb5",
+  "validated_head": "c3db858d304f61a7f9149af3b5923fa4204dd1fc",
+  "command": [
+    "/usr/local/bin/godot",
+    "--headless",
+    "--path",
+    "/workspace/scratch/a51485f153de/v096-burn-prediction-receipt",
+    "--script",
+    "res://tests/burn_prediction_equivalence_test.gd"
+  ],
+  "isolation": "/tmp/godot-m1-v096-rules-vw25bx5s",
+  "xdg": {
+    "XDG_DATA_HOME": "/tmp/godot-m1-v096-rules-vw25bx5s/data",
+    "XDG_CONFIG_HOME": "/tmp/godot-m1-v096-rules-vw25bx5s/config",
+    "XDG_CACHE_HOME": "/tmp/godot-m1-v096-rules-vw25bx5s/cache",
+    "XDG_STATE_HOME": "/tmp/godot-m1-v096-rules-vw25bx5s/state",
+    "XDG_RUNTIME_DIR": "/tmp/godot-m1-v096-rules-vw25bx5s/runtime"
+  },
+  "verification_start": {
+    "oracle_git_blob": "2e35f225146954938b3b0ed67151ee2138d038ea",
+    "oracle_source_sha256": "a4d88c005dfd27fe6408e86ea9b96a34fe01c786c24c8965113dd20498224226",
+    "oracle_frozen_sha256": "ad19ef28346ee4c03e2d60cb92004ac0740de0e3230b04728bdc32cb861dc04b",
+    "release_baseline_commit": "031ff92fab6383461a2688e3be85331655f05351",
+    "release_defense_equals_oracle_source": true,
+    "shared_dependency_paths": [
+      "scripts/combat/damage_base_compiler.gd",
+      "scripts/combat/damage_resolver.gd",
+      "scripts/combat/hit_penetration_rules.gd",
+      "scripts/items/weapon_local_rules.gd"
+    ],
+    "shared_dependency_hashes": {
+      "scripts/combat/damage_base_compiler.gd": "7c12ba22cc623c87a805a903a957e5841b4f8c0b26cb3b0ca8dae60cf8c9de8d",
+      "scripts/combat/damage_resolver.gd": "720dc69a7446334e8aec3ac15bdf7c1717fa7b96db5657e0c9622513121a4e23",
+      "scripts/combat/hit_penetration_rules.gd": "6b0733c563548a9034cd5169b1736287cbffc4b40a14cdf71f37a729c377fc88",
+      "scripts/items/weapon_local_rules.gd": "73e4308828e856a741ef00386d33150a008bdb3f07ef31a031a204d71fe93b8d"
+    },
+    "shared_dependency_closure_matches_both_baselines": true,
+    "independently_frozen_full_closure": false,
+    "existing_changed_production_functions": [
+      "incoming_burn"
+    ],
+    "new_production_functions": [
+      "_burn_after_resistance",
+      "monster_burn_prediction"
+    ],
+    "actual_burn_only_extracts_original_multiplication": true,
+    "main_only_replaces_single_prediction_call": true,
+    "unchanged_v095_vector_and_helper_functions": [
+      "_check",
+      "_compare",
+      "_verify_oracle",
+      "_adjacent",
+      "_valid_scalars",
+      "_random_positive",
+      "_float_samples",
+      "_invalid_priority",
+      "_optional_paths",
+      "_public_settlement",
+      "_other_adapters",
+      "_detached_returns",
+      "_current_metadata_and_fallbacks"
+    ]
+  },
+  "engine_import_invoked": false,
+  "microbenchmark_run": false,
+  "historical_suite_run": false,
+  "started_at_unix": 1791360703.7447276
+}

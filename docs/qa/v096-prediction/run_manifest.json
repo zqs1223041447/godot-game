@@ -1,0 +1,110 @@
+[
+  {
+    "label": "candidate_ember",
+    "command": [
+      "/usr/local/bin/godot",
+      "--headless",
+      "--path",
+      "/workspace/scratch/a51485f153de/v096-burn-prediction-receipt",
+      "--script",
+      "/workspace/scratch/a51485f153de/v096-burn-prediction-receipt/tools/diagnostics/burn_profile_allocation_audit.gd"
+    ],
+    "environment": {
+      "XDG_DATA_HOME": "/tmp/godot-m1-v095-candidate_ember-3t9jy2uf/data",
+      "XDG_CACHE_HOME": "/tmp/godot-m1-v095-candidate_ember-3t9jy2uf/cache",
+      "XDG_CONFIG_HOME": "/tmp/godot-m1-v095-candidate_ember-3t9jy2uf/config",
+      "V095_INSTRUMENTED": "0",
+      "V095_PROFILE_OUT": "/workspace/scratch/a51485f153de/v096-burn-prediction-receipt/docs/qa/v096-prediction/candidate_ember.json",
+      "V095_MODE": "ember_deaths"
+    },
+    "frames": {
+      "ember_deaths": 20
+    },
+    "started_at_unix": 1791360728.8564925,
+    "exit_code": 0,
+    "elapsed_seconds": 12.280215938008041,
+    "first_error": "",
+    "completion_marker": true
+  },
+  {
+    "label": "candidate_no_burn",
+    "command": [
+      "/usr/local/bin/godot",
+      "--headless",
+      "--path",
+      "/workspace/scratch/a51485f153de/v096-burn-prediction-receipt",
+      "--script",
+      "/workspace/scratch/a51485f153de/v096-burn-prediction-receipt/tools/diagnostics/burn_profile_allocation_audit.gd"
+    ],
+    "environment": {
+      "XDG_DATA_HOME": "/tmp/godot-m1-v095-candidate_no_burn-isxsfhch/data",
+      "XDG_CACHE_HOME": "/tmp/godot-m1-v095-candidate_no_burn-isxsfhch/cache",
+      "XDG_CONFIG_HOME": "/tmp/godot-m1-v095-candidate_no_burn-isxsfhch/config",
+      "V095_INSTRUMENTED": "0",
+      "V095_PROFILE_OUT": "/workspace/scratch/a51485f153de/v096-burn-prediction-receipt/docs/qa/v096-prediction/candidate_no_burn.json",
+      "V095_MODE": "no_burn"
+    },
+    "frames": {
+      "no_burn": 4
+    },
+    "started_at_unix": 1791360742.9362156,
+    "exit_code": 0,
+    "elapsed_seconds": 6.226196992007317,
+    "first_error": "",
+    "completion_marker": true
+  },
+  {
+    "label": "baseline_ignite",
+    "command": [
+      "/usr/local/bin/godot",
+      "--headless",
+      "--path",
+      "/workspace/scratch/a51485f153de/v095-burn-profile-audit",
+      "--script",
+      "/workspace/scratch/a51485f153de/v096-burn-prediction-receipt/docs/qa/v096-prediction/ignite-control.gd"
+    ],
+    "environment": {
+      "XDG_DATA_HOME": "/tmp/godot-m1-v095-baseline_ignite-g4qu5ktk/data",
+      "XDG_CACHE_HOME": "/tmp/godot-m1-v095-baseline_ignite-g4qu5ktk/cache",
+      "XDG_CONFIG_HOME": "/tmp/godot-m1-v095-baseline_ignite-g4qu5ktk/config",
+      "V095_INSTRUMENTED": "0",
+      "V095_PROFILE_OUT": "/workspace/scratch/a51485f153de/v096-burn-prediction-receipt/docs/qa/v096-prediction/baseline_ignite.json",
+      "V095_MODE": "ignite"
+    },
+    "frames": {
+      "ignite": 4
+    },
+    "started_at_unix": 1791360749.4478416,
+    "exit_code": 0,
+    "elapsed_seconds": 5.794241942989174,
+    "first_error": "",
+    "completion_marker": true
+  },
+  {
+    "label": "candidate_ignite",
+    "command": [
+      "/usr/local/bin/godot",
+      "--headless",
+      "--path",
+      "/workspace/scratch/a51485f153de/v096-burn-prediction-receipt",
+      "--script",
+      "/workspace/scratch/a51485f153de/v096-burn-prediction-receipt/docs/qa/v096-prediction/ignite-control.gd"
+    ],
+    "environment": {
+      "XDG_DATA_HOME": "/tmp/godot-m1-v095-candidate_ignite-le5hhtcd/data",
+      "XDG_CACHE_HOME": "/tmp/godot-m1-v095-candidate_ignite-le5hhtcd/cache",
+      "XDG_CONFIG_HOME": "/tmp/godot-m1-v095-candidate_ignite-le5hhtcd/config",
+      "V095_INSTRUMENTED": "0",
+      "V095_PROFILE_OUT": "/workspace/scratch/a51485f153de/v096-burn-prediction-receipt/docs/qa/v096-prediction/candidate_ignite.json",
+      "V095_MODE": "ignite"
+    },
+    "frames": {
+      "ignite": 4
+    },
+    "started_at_unix": 1791360755.2472727,
+    "exit_code": 0,
+    "elapsed_seconds": 6.038035631005187,
+    "first_error": "",
+    "completion_marker": true
+  }
+]

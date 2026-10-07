@@ -1,0 +1,20 @@
+{
+  "base": "031ff92fab6383461a2688e3be85331655f05351",
+  "candidate_commit": "c3db858d304f61a7f9149af3b5923fa4204dd1fc",
+  "production_changed": [
+    "scripts/main.gd",
+    "scripts/mechanics/defense_rules.gd"
+  ],
+  "candidate_hashes": {
+    "scripts/main.gd": "e98b758145429b2cb6f1b86c09183621e6599f6698b0d3ff8e19a2c6f8415278",
+    "scripts/mechanics/defense_rules.gd": "6a1d1797a980a9432b81c104f47f1b43a5026b4f13c9ce66e24196b6ab6e29e8"
+  },
+  "prior_valid_clean_20_4_reused": true,
+  "candidate_clean_processes": 3,
+  "new_baseline_ignite_processes": 1,
+  "new_candidate_frames": 28,
+  "instrumented": false,
+  "harness_sha256": "23f69ef1e45c3af3afbdb69b5de7a14809d086a657743777c53c5e9e4c2f8029",
+  "ignite_harness_sha256": "b4b607d68f249e60eaa54e51c5bf6855bf0df42267f954e61db8321e413f4a41",
+  "scope": "Single candidate; new ordinary-ignite control has same harness except mode selection. No counter wrappers inside timed tick. No repeat of existing clean 20/4 baseline."
+}

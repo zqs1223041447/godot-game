@@ -1,0 +1,121 @@
+{
+  "baseline": "031ff92fab6383461a2688e3be85331655f05351",
+  "candidate_commit": "c3db858d304f61a7f9149af3b5923fa4204dd1fc",
+  "withdrawn_at": "2026-10-07T08:13:48.621151+00:00",
+  "production": [
+    {
+      "path": "scripts/main.gd",
+      "candidate_archive": "candidate-main-source.gd.txt",
+      "candidate_sha256": "e98b758145429b2cb6f1b86c09183621e6599f6698b0d3ff8e19a2c6f8415278",
+      "restored_sha256": "115c5d777146b77cc54b533251f333eb8071a665ab35cdc93a2aae1eea06c0fc",
+      "restored_matches_baseline": true
+    },
+    {
+      "path": "scripts/mechanics/defense_rules.gd",
+      "candidate_archive": "candidate-defense-source.gd.txt",
+      "candidate_sha256": "6a1d1797a980a9432b81c104f47f1b43a5026b4f13c9ce66e24196b6ab6e29e8",
+      "restored_sha256": "a4d88c005dfd27fe6408e86ea9b96a34fe01c786c24c8965113dd20498224226",
+      "restored_matches_baseline": true
+    }
+  ],
+  "archives": [
+    {
+      "path": "baseline_ignite-ignite-final.bin.gz",
+      "raw_bytes": 1506012,
+      "raw_sha256": "be9a5213914031b7d81a1d5bb1a78c6e195a8ae40b171cd80887360b91f6a063",
+      "bytes": 45362,
+      "sha256": "6c7d998206241f1b9cc1f176d6a4e3049913392cc4a7d7b503b14007e6745980",
+      "roundtrip_exact": true
+    },
+    {
+      "path": "baseline_ignite-ignite.bin.gz",
+      "raw_bytes": 6023308,
+      "raw_sha256": "34e2581e02f283b8daae339bd871c5312285ea8c24a5fadbbd5373d9f036d93d",
+      "bytes": 177974,
+      "sha256": "81867c55f421a200feff2d5e9681490ada93763859cd6d778ffa813a5b1c86e8",
+      "roundtrip_exact": true
+    },
+    {
+      "path": "baseline_ignite-ignite.save.gz",
+      "raw_bytes": 12200,
+      "raw_sha256": "26aedc4587bb032d72d04ebc61df6795d89d5bd170759a017d872f0f9b3e3651",
+      "bytes": 1716,
+      "sha256": "ead5d3436105292b720f6f05ab0d9c06606c3a1c171fbacd25c97c4ae8d4e24c",
+      "roundtrip_exact": true
+    },
+    {
+      "path": "candidate_ember-ember_deaths-final.bin.gz",
+      "raw_bytes": 1491432,
+      "raw_sha256": "9f29791c3a0a255d3de995209b16319a4d79b37f797cd79be0b4d1e639ffba0d",
+      "bytes": 42876,
+      "sha256": "90b1ea7ff2d2777d1522d0a9ff462fb1db326ee7de756efd5caac444218f4ad6",
+      "roundtrip_exact": true
+    },
+    {
+      "path": "candidate_ember-ember_deaths.bin.gz",
+      "raw_bytes": 30888452,
+      "raw_sha256": "54f8bb9cb9393695328879f2b768ddc26bbd294a43fded6b742c3405ef24de7d",
+      "bytes": 873492,
+      "sha256": "dc661c33fb56e2e81e50731a0e529556fdabcc79347947d18f183ab06ef92284",
+      "roundtrip_exact": true
+    },
+    {
+      "path": "candidate_ember-ember_deaths.save.gz",
+      "raw_bytes": 13693,
+      "raw_sha256": "2ac20e9b6cfaa597aefddb20059ef490ab86bc10e5b89c36127323405c1f1eba",
+      "bytes": 1899,
+      "sha256": "38a927c2f6a0481d67eee1be053093d3ff8115c496c0c04239cca66dd386062a",
+      "roundtrip_exact": true
+    },
+    {
+      "path": "candidate_ignite-ignite-final.bin.gz",
+      "raw_bytes": 1506012,
+      "raw_sha256": "be9a5213914031b7d81a1d5bb1a78c6e195a8ae40b171cd80887360b91f6a063",
+      "bytes": 45362,
+      "sha256": "6c7d998206241f1b9cc1f176d6a4e3049913392cc4a7d7b503b14007e6745980",
+      "roundtrip_exact": true
+    },
+    {
+      "path": "candidate_ignite-ignite.bin.gz",
+      "raw_bytes": 6023308,
+      "raw_sha256": "34e2581e02f283b8daae339bd871c5312285ea8c24a5fadbbd5373d9f036d93d",
+      "bytes": 177974,
+      "sha256": "81867c55f421a200feff2d5e9681490ada93763859cd6d778ffa813a5b1c86e8",
+      "roundtrip_exact": true
+    },
+    {
+      "path": "candidate_ignite-ignite.save.gz",
+      "raw_bytes": 12200,
+      "raw_sha256": "26aedc4587bb032d72d04ebc61df6795d89d5bd170759a017d872f0f9b3e3651",
+      "bytes": 1716,
+      "sha256": "ead5d3436105292b720f6f05ab0d9c06606c3a1c171fbacd25c97c4ae8d4e24c",
+      "roundtrip_exact": true
+    },
+    {
+      "path": "candidate_no_burn-no_burn-final.bin.gz",
+      "raw_bytes": 1331232,
+      "raw_sha256": "7f1b2baceae0dbbef794c73ad44299b23f8d1f6c61aac3971ae1f5fa5d5dd1f0",
+      "bytes": 37546,
+      "sha256": "d6fff00056b1ebc2a6191cf32e5e53e988d3a85cbcfc39dd8cb2d3d4eb2ad85d",
+      "roundtrip_exact": true
+    },
+    {
+      "path": "candidate_no_burn-no_burn.bin.gz",
+      "raw_bytes": 5324164,
+      "raw_sha256": "5323da3ea47335c394b78d3a7e63fd61beb6506ee73614f32d241336e5f48c28",
+      "bytes": 146508,
+      "sha256": "985b2e0163cb66c422a7726cef34620ccc63a3bf021b37f08f79419bcd1154b4",
+      "roundtrip_exact": true
+    },
+    {
+      "path": "candidate_no_burn-no_burn.save.gz",
+      "raw_bytes": 12200,
+      "raw_sha256": "26aedc4587bb032d72d04ebc61df6795d89d5bd170759a017d872f0f9b3e3651",
+      "bytes": 1716,
+      "sha256": "ead5d3436105292b720f6f05ab0d9c06606c3a1c171fbacd25c97c4ae8d4e24c",
+      "roundtrip_exact": true
+    }
+  ],
+  "rerun_after_withdrawal": false,
+  "production_diff_paths": []
+}
