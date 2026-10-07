@@ -1,0 +1,117 @@
+{
+  "ok": true,
+  "main_core_flow_accepted": true,
+  "verification_kind": "Original complete Main run plus focused correction of its only failed synthetic input assertion; not a second full run",
+  "coverage_counting": "245 original assertions. 244 passed initially; the sole input-fixture failure is resolved by the 10-check focused input run. These are not 255 independent scenarios.",
+  "full_run": {
+    "checks": 245,
+    "passed": 244,
+    "failures": 1,
+    "unresolved_product_failures": 0,
+    "failed_labels": [
+      "Actual mouse state aims correctly through followed Main camera"
+    ],
+    "result": "docs/qa/v086-gameplay/main-result.json",
+    "launch_result": "docs/qa/v086-integration/main-attempt01-result.json",
+    "log": "docs/qa/v086-integration/main-attempt01.log.txt",
+    "original_result_preserved": true
+  },
+  "fixture_diagnosis": {
+    "cause": "Input.parse_input_event received logical viewport coordinates as native window coordinates. Headless window is 64x64, logical viewport 1280x720, screen transform scale 0.05 with y offset 14.",
+    "observed_before": {
+      "requested_logical": [
+        800,
+        335
+      ],
+      "viewport_mouse": [
+        16000,
+        6420
+      ],
+      "global_mouse": [
+        25476.77,
+        10665.54
+      ]
+    },
+    "fix": "Transform synthetic motion/press/release coordinates through root.get_screen_transform(); release is a newly allocated event. No production change.",
+    "diagnostic_attempt_log": "docs/qa/v086-integration/main-input-attempt02.log.txt",
+    "diagnostic_attempt_result": "docs/qa/v086-integration/main-input-attempt02-result.json"
+  },
+  "focused_input_validation": {
+    "checks": 10,
+    "failures": 0,
+    "seconds": 4.332,
+    "exit_code": 0,
+    "script_error_or_warning": false,
+    "native_event_position": [
+      40,
+      30.75
+    ],
+    "viewport_mouse": [
+      800,
+      335
+    ],
+    "expected_and_actual_global": [
+      2092.154,
+      1304
+    ],
+    "aim": [
+      1,
+      0
+    ],
+    "result": "docs/qa/v086-gameplay/input-result.json",
+    "launch_result": "docs/qa/v086-integration/main-input-attempt03-result.json",
+    "log": "docs/qa/v086-integration/main-input-attempt03.log.txt",
+    "final_test_sha256": "cf38b574e6bea3a33e8d200ccf84f08f505b0caf1b9af45bc1cb73953cb422a8",
+    "matches_verified_script": true
+  },
+  "unchanged_production_proof": {
+    "all_unchanged": true,
+    "baseline_manifest": "docs/qa/v086-integration/main-attempt01-inputs.json",
+    "files": {
+      "scripts/main.gd": {
+        "first_run_sha256": "3c82e0200fe061f68d2eea05c4c3794c7926f2f18c0e71039fae0f1fd9d9e4df",
+        "current_sha256": "3c82e0200fe061f68d2eea05c4c3794c7926f2f18c0e71039fae0f1fd9d9e4df",
+        "unchanged": true
+      },
+      "scripts/world/exploration_map_layout.gd": {
+        "first_run_sha256": "988a769dab343948e64967fd3c22ea0a0b7a2917549879ef0c85da87b799761c",
+        "current_sha256": "988a769dab343948e64967fd3c22ea0a0b7a2917549879ef0c85da87b799761c",
+        "unchanged": true
+      },
+      "scripts/world/exploration_map_plan.gd": {
+        "first_run_sha256": "456df2a897f3cff229d80d2e5fdc42e7e0a85646f6fcbe01a53e36f463b01906",
+        "current_sha256": "456df2a897f3cff229d80d2e5fdc42e7e0a85646f6fcbe01a53e36f463b01906",
+        "unchanged": true
+      },
+      "scripts/world/map_geometry.gd": {
+        "first_run_sha256": "4f76d248111f31568b49548f624503e3ffccd51f7f1f7be86ee240e2f392d461",
+        "current_sha256": "4f76d248111f31568b49548f624503e3ffccd51f7f1f7be86ee240e2f392d461",
+        "unchanged": true
+      },
+      "scripts/world/map_run_state.gd": {
+        "first_run_sha256": "7e71db299865764749160113b3030e416cab264893cefcb3fb75789e9a06a21d",
+        "current_sha256": "7e71db299865764749160113b3030e416cab264893cefcb3fb75789e9a06a21d",
+        "unchanged": true
+      },
+      "scripts/visuals/world_view.gd": {
+        "first_run_sha256": "eb715eb2ab912fa2e20e5d676161098539ad01fd6b4d84aa578b0a4084d5ebf2",
+        "current_sha256": "eb715eb2ab912fa2e20e5d676161098539ad01fd6b4d84aa578b0a4084d5ebf2",
+        "unchanged": true
+      }
+    }
+  },
+  "covered_core_flow": [
+    "Default fresh formal Main on user://build_save.json and existing schema50",
+    "Four actual 3600x2400 tier-I rosters: 25 or37 stable resident actors and initial spawn records",
+    "Default auto-fire entry idle preserves sleeping roots, positions and identities",
+    "450-unit plus LOS wake, offscreen shield/health damage wake, pursuit after awakening",
+    "Far shield recharge, birth protection, freeze, burn, external impulse and separation continue through Main ticks",
+    "Real held movement and native mouse input with actual Main camera consumers",
+    "Boss-first death cannot finish with ordinary roots, living descendants or queued descendants",
+    "Every initial root and boss reward once; descendants inherit spawn key without root rewards",
+    "Actual completion, town return, claim4 and earned tier-II reentry fee4",
+    "Unsupported mechanisms, write failure and repeated entry/claim reject atomically",
+    "Unknown reward routes reject without fallback to standard rewards"
+  ],
+  "scope_limit": "Controlled runtime integration, not natural combat footage; separate pure camera and map-plan suites own their larger matrices."
+}

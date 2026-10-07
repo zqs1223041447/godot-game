@@ -1,0 +1,42 @@
+{
+  "ok": true,
+  "base": "eb487876ec9b06d9bbe615853aaa87cc6f74bba4",
+  "tested_production_unchanged": {
+    "tests/exploration_map_plan_test.gd": "46f2a982c14625c770eff42cc1c139fe1e2e3590d669d5d9dfeffb742a5200fa",
+    "scripts/main.gd": "3c82e0200fe061f68d2eea05c4c3794c7926f2f18c0e71039fae0f1fd9d9e4df",
+    "scripts/world/exploration_map_layout.gd": "988a769dab343948e64967fd3c22ea0a0b7a2917549879ef0c85da87b799761c",
+    "scripts/world/exploration_map_plan.gd": "456df2a897f3cff229d80d2e5fdc42e7e0a85646f6fcbe01a53e36f463b01906",
+    "scripts/world/map_geometry.gd": "4f76d248111f31568b49548f624503e3ffccd51f7f1f7be86ee240e2f392d461",
+    "scripts/world/map_run_state.gd": "7e71db299865764749160113b3030e416cab264893cefcb3fb75789e9a06a21d",
+    "scripts/visuals/world_view.gd": "eb715eb2ab912fa2e20e5d676161098539ad01fd6b4d84aa578b0a4084d5ebf2"
+  },
+  "main_final_input_test_sha256": "cf38b574e6bea3a33e8d200ccf84f08f505b0caf1b9af45bc1cb73953cb422a8",
+  "reference_files_matched": 29,
+  "unchanged_shared_consumers_and_persistent_profiles": {
+    "scripts/save/canonical_build_rules.gd": "e5fb7dd04f50b55ed5620414810821bc4d58bbd328577ea01d091f1f9a87c99f",
+    "scripts/canonical_game_state.gd": "cf377a5aaf461e38d585cf1f3df03ecd0e82a16a07233c8396a591b75a115220",
+    "scripts/world/map_catalog.gd": "353c6945d485e12c7e2c3898a560bc263352be22c3899fa7d5341c79f674e225",
+    "scripts/world/map_compiler.gd": "c800ccaf90a9807cc753fc694c19c614e52fff8226fdcaa27f0f5fdc2fcb5851",
+    "scripts/monsters/monster_runtime.gd": "6280cbf52cdf373af0fe8d564b77b2ad1f1e934b207d37988f69bbdd404751a3",
+    "scripts/monsters/monster_catalog.gd": "76b24bce94c603d3150d6b19b3ea794c1aba8bd49afe8d6fbe48be120fce31c6",
+    "scripts/combat/burn_runtime.gd": "2ff6b2974b82bf65637702a2f9aa3e7e4e04521cf2280a55be4700e10337b5e3",
+    "scripts/combat/shock_runtime.gd": "0f7c3b8d0b1993643d1dbc489bdbde106c995faef56680bbbaaec19707a4ecf4",
+    "scripts/combat/freeze_runtime.gd": "460b00777986e6d81dd72d8cc947dc6b278e7906cb84b0c949de4e64c822689e",
+    "scripts/combat/damage_resolver.gd": "720dc69a7446334e8aec3ac15bdf7c1717fa7b96db5657e0c9622513121a4e23"
+  },
+  "checks": {
+    "final_plan": 247,
+    "camera": 68,
+    "hud": 7,
+    "main_original": 245,
+    "main_initial_passed": 244,
+    "main_input_only": 10,
+    "main_remaining_failures": 0
+  },
+  "counts_note": "The 10-check input-only correction is not 10 additional independent gameplay scenarios. Original 245/1 evidence retained.",
+  "main_acceptance_sha256": "9871c6056d9082cb21faca8b1f51d659839b237dd5453a610154268491e9da6b",
+  "font_sha256": "296ad904a224fbe61250118831b6aa3d2e01890f7e702fa77b2a89986ba6fe64",
+  "font_added": "探驻",
+  "native_images": "Root delivered interactive entry and walking screenshots; not Windows FPS.",
+  "reran_godot_for_this_audit": false
+}

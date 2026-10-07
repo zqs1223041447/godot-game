@@ -5,8 +5,11 @@ extends RefCounted
 const WORLD_BOUNDS := Rect2(42.0, 104.0, 3600.0, 2400.0)
 const MINIMUM_SIZE := Vector2(3600.0, 2400.0)
 const CAMP_IDS: Array[String] = ["camp_west", "camp_north", "camp_east"]
-const CAMP_CENTERS: Array[Vector2] = [Vector2(650, 1500), Vector2(1900, 600), Vector2(2800, 1580)]
+const CAMP_CENTERS: Array[Vector2] = [Vector2(950, 1300), Vector2(1900, 600), Vector2(2800, 1580)]
 const ENTRY := Vector2(320, 2080)
+## Keep the complete initial roster beyond the default 800-unit auto-targeting
+## range, so entering the world does not wake a group before the player moves.
+const ENTRY_CLEARANCE := 850.0
 const BOSS_CENTER := Vector2(3180, 320)
 const LANDMARK_RADIUS := 64.0
 

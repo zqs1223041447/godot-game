@@ -102,7 +102,7 @@ static func _roots_reason(roots: Array[Dictionary], total: int, geometry: RefCou
 		seen[enemy.id] = true
 		if not enemy.get("pos") is Vector2 or not enemy.pos.is_finite() or not geometry.is_clear(enemy.pos, enemy.radius):
 			return "探索地图成员位置越界或受阻"
-		if enemy.pos.distance_to(entry) < CampAdmission.PLAYER_CLEARANCE:
+		if enemy.pos.distance_to(entry) < maxf(CampAdmission.PLAYER_CLEARANCE, Layout.ENTRY_CLEARANCE):
 			return "探索地图成员距离入口过近"
 		for previous: int in range(index):
 			if enemy.pos.distance_to(roots[previous].pos) < float(enemy.radius) + float(roots[previous].radius):

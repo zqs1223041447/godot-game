@@ -1,0 +1,222 @@
+extends SceneTree
+const Plan = preload("res://scripts/world/exploration_map_plan.gd")
+const Layout = preload("res://scripts/world/exploration_map_layout.gd")
+const LegacyLayout = preload("res://scripts/world/map_camp_layout.gd")
+const Geometry = preload("res://scripts/world/map_geometry.gd")
+const RunState = preload("res://scripts/world/map_run_state.gd")
+const CampState = preload("res://scripts/world/map_camp_state.gd")
+const Maps = preload("res://scripts/world/map_compiler.gd")
+const Catalog = preload("res://scripts/world/map_catalog.gd")
+const Monsters = preload("res://scripts/monsters/monster_catalog.gd")
+const Runtime = preload("res://scripts/monsters/monster_runtime.gd")
+const Admission = preload("res://scripts/world/map_admission.gd")
+const Encounter = preload("res://scripts/encounters/encounter_admission.gd")
+const LEGACY_BOUNDS := Rect2(42, 104, 1840, 710)
+const SEED_VALUE := 861073
+var checks := 0
+var failures := 0
+
+
+func check(ok: bool, label: String) -> void:
+	checks += 1
+	if not ok:
+		failures += 1
+		push_error(label)
+
+
+func _initialize() -> void:
+	for map_id: String in Catalog.MAPS:
+		_layout(map_id)
+		for tier: int in range(1, 4):
+			var plain: Dictionary = Maps.compile_normal(map_id, tier, [], [])
+			var specials: Array = ["elemental_aegis"] if plain.profile.wave >= 4 else []
+			var profile: Dictionary = Maps.compile_normal(map_id, tier,
+				["enemy_max_health_120", "enemy_shield_from_health_20"], specials).profile
+			_positive(profile)
+	_failures()
+	_bookkeeping()
+	print("Exploration map plan: %d checks, %d failures" % [checks, failures])
+	quit(1 if failures else 0)
+
+
+func _runtime() -> RefCounted:
+	var runtime = Runtime.new()
+	var parent: Dictionary = runtime.create_root("splitter", 5, Vector2(150, 250))
+	parent.health = 0.0
+	runtime.process_death(parent)
+	runtime.create_root("brute", 5, Vector2(350, 250))
+	return runtime
+
+
+func _runtime_bytes(runtime: RefCounted) -> PackedByteArray:
+	return var_to_bytes([Encounter._snapshot(runtime), runtime.templates, runtime.validation_errors])
+
+
+func _layout(map_id: String) -> void:
+	var result: Dictionary = Layout.layout(map_id, Layout.WORLD_BOUNDS)
+	var geometry = Geometry.new()
+	check(result.ok and geometry.configure_exploration(map_id, Layout.WORLD_BOUNDS), "Exploration layout configures: " + map_id)
+	if not result.ok: return
+	var shape: Dictionary = geometry.snapshot()
+	var expected_walls: int = {"old_garden": 0, "broken_ruins": 2, "sunwell_terrace": 4, "ginkgo_arcade": 3}[map_id]
+	check(result.walls.size() == expected_walls and shape.walls == result.walls, "Snapshot uses the actual authored obstacles")
+	check(shape.encounter_mode == "exploration" and shape.spawn == result.landmarks.entry and shape.landmarks == result.landmarks, "Snapshot exposes exploration landmarks and entry")
+	var valid := true
+	var targets: Array[Vector2] = [result.landmarks.boss.center]
+	for camp: Dictionary in result.landmarks.camps:
+		valid = valid and camp.trigger_center == camp.center and geometry.is_clear(camp.sign_position, 15.0)
+		targets.append(camp.center)
+	valid = valid and geometry.is_clear(result.landmarks.boss.sign_position, 15.0)
+	check(valid and not Layout.description(map_id).is_empty(), "Group and boss signs sit at legal area entrances")
+	var reachable := true
+	for target: Vector2 in targets:
+		var point: Vector2 = result.landmarks.entry
+		var steps := 0
+		while point.distance_to(target) > 0.05 and steps < 1800:
+			point = geometry.move(point, point + geometry.direction(point, target, 27.5, 8.0) * 8.0, 27.5)
+			reachable = reachable and geometry.is_clear(point, 27.5)
+			steps += 1
+		reachable = reachable and point.distance_to(target) <= 0.05
+	check(reachable, "Actual largest boss body can reach every group through open routes")
+	var external: Dictionary = geometry.snapshot()
+	external.walls.clear(); external.landmarks.camps.clear()
+	check(geometry.snapshot() == shape, "Snapshot mutation cannot alter geometry or landmarks")
+	check(not geometry.configure_exploration(map_id, LEGACY_BOUNDS) and geometry.snapshot() == shape, "Bad exploration bounds preserve previous geometry")
+	var old = Geometry.new()
+	old.configure(map_id, LEGACY_BOUNDS)
+	check(geometry.configure(map_id, LEGACY_BOUNDS) and _without_revision(geometry.snapshot()) == _without_revision(old.snapshot()), "Explicit legacy configure restores the historical geometry contract")
+	old.configure(map_id, Layout.WORLD_BOUNDS)
+	geometry.configure_exploration(map_id, Layout.WORLD_BOUNDS)
+	check(geometry.configure(map_id, Layout.WORLD_BOUNDS) and _without_revision(geometry.snapshot()) == _without_revision(old.snapshot()), "Same ID and bounds still switch exploration back to legacy")
+
+
+func _without_revision(shape: Dictionary) -> Dictionary:
+	shape.erase("revision")
+	return shape
+
+
+func _positive(profile: Dictionary) -> void:
+	var runtime: RefCounted = _runtime()
+	var runtime_before := _runtime_bytes(runtime)
+	var profile_before := var_to_bytes(profile)
+	seed(86001)
+	var expected_random: Array[int] = [randi(), randi()]
+	seed(86001)
+	var result: Dictionary = Plan.plan(profile, runtime, SEED_VALUE, Layout.WORLD_BOUNDS)
+	check([randi(), randi()] == expected_random, "Planning preserves the global RNG stream")
+	check(_runtime_bytes(runtime) == runtime_before and var_to_bytes(profile) == profile_before, "Planning leaves the live runtime and canonical profile unchanged")
+	check(result.ok, "All initial actors stage for " + profile.summary)
+	if not result.ok: return
+	var total: int = profile.ordinary_target + 1
+	check(result.roots.size() == total and result.ordinary_roots.size() == profile.ordinary_target and result.roots.back() == result.boss, "Full ordinary roster and boss exist together without truncation")
+	check(result.runtime_checkpoint.next_id == runtime.next_id + total and result.runtime_checkpoint.roots.size() == total and result.runtime_checkpoint.queue.is_empty() and result.runtime_checkpoint.trace.is_empty(), "Fresh checkpoint advances IDs and excludes old lineages, descendants and trace")
+	check(result.run.admitted.size() == profile.ordinary_target and result.run.boss_id == result.boss.id and result.run.defeated.is_empty(), "Run bookkeeping registers every root and boss at entry")
+	check(result.run.profile == profile and result.run.profile.fee == (profile.journey_tier - 1) * 4 and result.run.profile.completion_reward == profile.completion_reward, "Canonical fees and rewards survive planning unchanged")
+	check(result.mechanism_config.is_empty() and result.optional_encounters.is_empty() and result.spawn_records.size() == total, "Only standard encounters are planned in the initial mechanism contract")
+	var valid := true
+	var records_valid := true
+	var keys: Dictionary = {}
+	for index: int in range(total):
+		var enemy: Dictionary = result.roots[index]
+		valid = valid and enemy.id == runtime.next_id + index + 1 and enemy.root_id == enemy.id and enemy.generation == 0 and enemy.reward_eligible and enemy.exploration_awake == false
+		valid = valid and result.geometry.is_clear(enemy.pos, enemy.radius) and enemy.pos.distance_to(result.landmarks.entry) >= maxf(850.0, Layout.ENTRY_CLEARANCE)
+		for previous: int in range(index):
+			valid = valid and enemy.pos.distance_to(result.roots[previous].pos) >= float(enemy.radius) + float(result.roots[previous].radius)
+		var record: Dictionary = result.spawn_records[index]
+		records_valid = records_valid and not keys.has(record.spawn_key) and record.spawn_key == enemy.map_spawn_key and record.actor_id == enemy.id and record.root_id == enemy.root_id
+		records_valid = records_valid and record.position == enemy.pos and record.template_id == enemy.template_id and record.encounter_id == "" and record.reward_route == "standard"
+		keys[record.spawn_key] = true
+	check(valid, "Every real body is clear, separated, asleep and at least 850 units from entry with unique reward-eligible root IDs")
+	check(records_valid, "Stable spawn records exactly identify each standard actor and reward route")
+	var old_state = CampState.new()
+	old_state.begin(profile, LegacyLayout.layout(profile.id, LEGACY_BOUNDS).landmarks, SEED_VALUE, Monsters.CURRENT_ROLL_POLICY)
+	var same_roster := true
+	var active := true
+	for camp: Dictionary in result.landmarks.camps:
+		var entries: Array[Dictionary] = result.state.entries(camp.id)
+		var old_entries: Array[Dictionary] = old_state.entries(camp.id)
+		for index: int in range(entries.size()):
+			entries[index].erase("position"); old_entries[index].erase("position")
+			same_roster = same_roster and entries[index] == old_entries[index]
+	for state: Dictionary in result.state.states({}):
+		active = active and state.state == "active" and state.roots_spawned == state.root_count
+	check(same_roster and active, "Same seed keeps historical source selection and all groups are already registered")
+	var expected = Runtime.new(runtime.templates)
+	expected.next_id = runtime.next_id
+	var exact := true
+	var offset := 0
+	for camp: Dictionary in result.landmarks.camps:
+		for entry: Dictionary in result.state.entries(camp.id):
+			var canonical: Dictionary = Admission.create_root(expected, profile, entry.template_id, profile.wave, entry.position, "ordinary", entry.rarity, entry.mechanisms, true)
+			var actual: Dictionary = result.roots[offset].duplicate(true)
+			actual.erase("exploration_awake"); actual.erase("map_spawn_key")
+			exact = exact and canonical.ok and actual == canonical.enemy
+			offset += 1
+	var canonical_boss: Dictionary = Admission.create_root(expected, profile, profile.boss_id, profile.wave, result.landmarks.boss.center, "map_boss", "", [], true)
+	var actual_boss: Dictionary = result.boss.duplicate(true)
+	actual_boss.erase("exploration_awake"); actual_boss.erase("map_spawn_key")
+	check(exact and canonical_boss.ok and actual_boss == canonical_boss.enemy and Encounter._snapshot(expected) == result.runtime_checkpoint, "Factory stats, source grants, boss attacks and chained checkpoint remain exact")
+	check(result.run.record_death(result.boss) and not result.run.check_complete(profile.ordinary_target, 0), "Boss can die first without completing the map")
+	for enemy: Dictionary in result.ordinary_roots: result.run.record_death(enemy)
+	check(not result.run.check_complete(0, 1) and result.run.check_complete(0, 0) and not result.run.check_complete(0, 0), "Completion still waits for all living actors and descendants exactly once")
+
+
+func _failures() -> void:
+	var profile: Dictionary = Maps.compile("broken_ruins", [], []).profile
+	var runtime: RefCounted = _runtime()
+	var invalid_profile: Dictionary = profile.duplicate(true)
+	invalid_profile.ordinary_target = 1
+	var cases: Array[Dictionary] = [
+		{"capacity": 36}, {"capacity": 101}, {"capacity": 37.0}, {"capacity": null},
+		{"seed": 1.0}, {"seed": null}, {"policy": "unknown"}, {"profile": invalid_profile},
+		{"bounds": LEGACY_BOUNDS}, {"bounds": Rect2(Vector2(INF, 0), Vector2(3600, 2400))},
+		{"bounds": Rect2(Vector2(1.0e30, 1.0e30), Vector2(3600, 2400))},
+		{"mechanisms": null}, {"mechanisms": []}, {"mechanisms": {"reward_route": "unknown"}},
+		{"mechanisms": {"sealed_encounter": true}}]
+	for row: Dictionary in cases:
+		var before := _runtime_bytes(runtime)
+		var rejected: Dictionary = Plan.plan(row.get("profile", profile), runtime, row.get("seed", SEED_VALUE), row.get("bounds", Layout.WORLD_BOUNDS), row.get("capacity", 100), row.get("policy", Monsters.CURRENT_ROLL_POLICY), row.get("mechanisms", {}))
+		check(_empty_failure(rejected), "Invalid entry contract rejects without partial output")
+		check(_runtime_bytes(runtime) == before, "Failed entry preserves IDs, templates, roots and pending descendants")
+	var no_boss: RefCounted = _runtime()
+	no_boss.templates.erase("rift_warden")
+	var before := _runtime_bytes(no_boss)
+	check(_empty_failure(Plan.plan(profile, no_boss, SEED_VALUE, Layout.WORLD_BOUNDS)) and _runtime_bytes(no_boss) == before, "Late boss factory failure discards all already-staged groups atomically")
+	var exact: Dictionary = Plan.plan(profile, runtime, SEED_VALUE, Layout.WORLD_BOUNDS, 37)
+	check(exact.ok and exact.roots.size() == 37, "Exactly sufficient capacity accepts the entire map")
+	var old_keys: Array = exact.spawn_records.map(func(record: Dictionary) -> String: return record.spawn_key)
+	runtime.next_id += 1000
+	var later: Dictionary = Plan.plan(profile, runtime, SEED_VALUE, Layout.WORLD_BOUNDS)
+	check(later.ok and later.spawn_records.map(func(record: Dictionary) -> String: return record.spawn_key) == old_keys and later.boss.id != exact.boss.id, "Stable spawn keys are independent of the runtime identity cursor")
+
+
+func _empty_failure(result: Dictionary) -> bool:
+	return not result.ok and not result.reason.is_empty() and result.roots.is_empty() and result.ordinary_roots.is_empty() and result.boss.is_empty() and result.landmarks.is_empty() and result.runtime_checkpoint.is_empty() and result.spawn_records.is_empty() and result.state == null and result.run == null and result.geometry == null
+
+
+func _bookkeeping() -> void:
+	var profile: Dictionary = Maps.compile("old_garden", [], []).profile
+	var plan: Dictionary = Plan.plan(profile, Runtime.new(), SEED_VALUE, Layout.WORLD_BOUNDS)
+	if not plan.ok:
+		check(false, "Bookkeeping fixture stages")
+		return
+	for field: String in ["id", "root_id", "generation", "reward_eligible", "template_id"]:
+		var run = RunState.new()
+		run.begin(profile)
+		var before := var_to_bytes([run.profile, run.snapshot(), run.admitted, run.defeated])
+		var boss: Dictionary = plan.boss.duplicate(true)
+		boss[field] = {"id": 0, "root_id": 0, "generation": 1, "reward_eligible": false, "template_id": "crawler"}[field]
+		check(not run.register_initial_group(plan.ordinary_roots, boss) and var_to_bytes([run.profile, run.snapshot(), run.admitted, run.defeated]) == before, "Invalid initial boss cannot partially register ordinary roots: " + field)
+	var run = RunState.new()
+	run.begin(profile)
+	var repeated: Array[Dictionary] = plan.ordinary_roots.duplicate(true)
+	repeated[1] = repeated[0]
+	check(not run.register_initial_group(repeated, plan.boss) and run.admitted.is_empty(), "Duplicate ordinary root IDs reject atomically")
+	check(not run.register_initial_group(plan.ordinary_roots.slice(1), plan.boss) and run.admitted.is_empty(), "Partial initial ordinary roster rejects atomically")
+	var overlapping_boss: Dictionary = plan.boss.duplicate(true)
+	overlapping_boss.id = plan.ordinary_roots[0].id; overlapping_boss.root_id = overlapping_boss.id
+	check(not run.register_initial_group(plan.ordinary_roots, overlapping_boss) and run.admitted.is_empty(), "Boss cannot share an ordinary root identity")
+	check(run.register_initial_group(plan.ordinary_roots, plan.boss) and not run.register_initial_group(plan.ordinary_roots, plan.boss), "Initial group commits once and cannot be duplicated")
+	var unknown: Dictionary = plan.ordinary_roots[0].duplicate(true)
+	unknown.id = 99999; unknown.root_id = unknown.id
+	check(run.record_death(plan.boss) and not run.record_death(unknown) and not run.check_complete(0, 0), "Boss-first and an unregistered death cannot complete a map with unbeaten ordinary roots")
