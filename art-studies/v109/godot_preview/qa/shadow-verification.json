@@ -1,0 +1,80 @@
+{
+  "checks": [
+    {
+      "detail": null,
+      "name": "cast_and_contact_resources_present",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "ground_shadow_after_ground_before_all_props",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "shadow_never_enters_character_y_sort",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "all_eight_static_directions_keep_shadow_on_foot",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "shadow_reuses_exact_idle_source_regions",
+      "passed": true
+    },
+    {
+      "detail": {
+        "length_gain": 0.62,
+        "tip_pixel_for_1p8m": [
+          64.5197067260742,
+          -14.2935876846313
+        ]
+      },
+      "name": "projection_matches_environment_right_up_light",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "shadow_is_subtle_non_additive",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "contact_quad_small_and_below_actor",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "gate_sweep_unchanged",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "physics_nodes_unchanged",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "reset_reanchors_both_shadow_parts",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "shadow_freed_with_scene",
+      "passed": true
+    }
+  ],
+  "failures": 0,
+  "lighting_source": "v108-professional-environment/build_scene.py:167 and projection-godot.json",
+  "limits": [
+    "Fixed-direction 2D alpha projection, artistically shortened to 62 percent; not real-time 3D lighting",
+    "No animation, collision, game-flow or asset change",
+    "No screenshot, FPS, broad 27+74 suite or long-duration rerun"
+  ],
+  "native_visual_review": "pending_parent",
+  "passed": true,
+  "scope": "Focused static-character ground-shadow checks only"
+}

@@ -1,13 +1,12 @@
 {
   "base": "fc2cdbb817abf24ac5b6d7a5c849b3d3c4087c08",
   "scope": "Actual v109 archive files; manifest excludes itself. Research branch only; not a main-game release.",
-  "count": 97,
-  "total_bytes": 6666636,
+  "latest_increment_base": "7247b9620234e1f8a958184c2f4322b04405cfa3",
   "files": [
     {
       "path": "README.md",
-      "bytes": 3028,
-      "sha256": "33fa479911621da9e5826750119ff559aee54298dae4caf604d121fcc3797be6"
+      "bytes": 3976,
+      "sha256": "43d0fb645f4d2cbee16e5736af86e0c562470c242296830d89f82b9969af2f5a"
     },
     {
       "path": "character-provenance.json",
@@ -21,8 +20,8 @@
     },
     {
       "path": "godot_preview/README.md",
-      "bytes": 3893,
-      "sha256": "ee1b895b05d2534b4c2b96b205f2e9d456b02c91be0eb723f3dd1f5e43ad77c8"
+      "bytes": 5415,
+      "sha256": "2c4b7d677b2fb7a6dfdae28e8f1d074e6a2e75a242c696c12fb39ae9e66122a8"
     },
     {
       "path": "godot_preview/assets/OFL-NotoSansCJK.txt",
@@ -370,9 +369,24 @@
       "sha256": "c9fbb0e1521ebaf4fa1bdc61f5196b9452f1e94d07bb176542be0f871cb991ef"
     },
     {
+      "path": "godot_preview/cast_shadow.gdshader",
+      "bytes": 1314,
+      "sha256": "e29c539e2184d35210df3d2f72dcef5ba2053414663e9480a2626e5b1b71dead"
+    },
+    {
+      "path": "godot_preview/character_ground_shadow.gd",
+      "bytes": 3176,
+      "sha256": "8f340c1a764c9de77992dd4da0d70fb37ebcca5651875c272e7e9f196d785612"
+    },
+    {
+      "path": "godot_preview/contact_shadow.gdshader",
+      "bytes": 679,
+      "sha256": "8fc615f7f728c4df89d38568a679885367b27888eb0217d25df5f94febf639f4"
+    },
+    {
       "path": "godot_preview/player.gd",
-      "bytes": 3364,
-      "sha256": "aa120aaa03bcabab35b5fc237de28e93f9af9aa611526bdc8c2dcb2bcfd9b988"
+      "bytes": 3219,
+      "sha256": "03a831a9fe8f6894c9c528e242057cb3efa9d30fee479e42c6f345e44213492d"
     },
     {
       "path": "godot_preview/player.gd.uid",
@@ -420,14 +434,39 @@
       "sha256": "52492afb2cce3e5ee5b0c97183b55ed4bb117e68bed5ce20cbece23e30851c73"
     },
     {
+      "path": "godot_preview/qa/shadow-before-integrity.json",
+      "bytes": 4109,
+      "sha256": "310a97819849298af66b01f0c558926afaa54748b98e0fe7f40df7c75d809e3c"
+    },
+    {
+      "path": "godot_preview/qa/shadow-focused.log",
+      "bytes": 589,
+      "sha256": "35c41f7aa349edcdc1a0ca5cf5f2defa464a71cce08f43f32a8176635c68a73a"
+    },
+    {
+      "path": "godot_preview/qa/shadow-integrity.json",
+      "bytes": 452,
+      "sha256": "932034d680b0516f5ef61105d0000f2a8eae30f8c07b1c6d3202219293828df2"
+    },
+    {
+      "path": "godot_preview/qa/shadow-smoke.log",
+      "bytes": 73,
+      "sha256": "a9912b85473f126d3f4f63ec824170c828df3473a292f866dde86cafda5b66da"
+    },
+    {
+      "path": "godot_preview/qa/shadow-verification.json",
+      "bytes": 1942,
+      "sha256": "8c8a42b5c2fbf6995b222cadc35c439de72fd29acbf6ba085103da23de9bfb5b"
+    },
+    {
       "path": "godot_preview/run.sh",
       "bytes": 351,
       "sha256": "681d528367ac91e673610b6015d241d32a3803d8300abc9b62d9099d1be451f4"
     },
     {
       "path": "godot_preview/study.gd",
-      "bytes": 4314,
-      "sha256": "363ad0d9428a2591beeafb69718d1928de747feb88ed7f58302be661c9854a75"
+      "bytes": 4727,
+      "sha256": "fb1049f4c9d1c1cb9200d2fe43477455df806f480e5178fb4f66ef87ad8d7d04"
     },
     {
       "path": "godot_preview/study.gd.uid",
@@ -455,6 +494,11 @@
       "sha256": "9154f6dca29bed3475af66a4a91f5b0b004e447d9ee6b7ec7e2babb88aa2af48"
     },
     {
+      "path": "godot_preview/tests/verify_shadow.gd",
+      "bytes": 4245,
+      "sha256": "da8eed2c483bc3c60c0544a62ff572e3565d9ec0d5308c509b907cbbf62d020d"
+    },
+    {
       "path": "godot_preview/tests/verify_study.gd",
       "bytes": 9523,
       "sha256": "df45fd2612cb47e260f3f91bc05a00e0cf227d40139864bbe0540fb9896c57f9"
@@ -480,6 +524,16 @@
       "sha256": "590e62dd3c9e9a87162c8a950fd23f9cfab362e8dcce5985e1293f892b35ded8"
     },
     {
+      "path": "verification/shadow-archive-verification.json",
+      "bytes": 8416,
+      "sha256": "18bf5d5f6773594653a78b617e153dfdb1b12a75aa7d11e7ae9f0b6b543b8264"
+    },
+    {
+      "path": "verification/shadow-native-observation.json",
+      "bytes": 677,
+      "sha256": "6630fbd860a27fd4d3597ceed61ea45b77edaa4c0a79660adc53d8dfb6f686e8"
+    },
+    {
       "path": "verification/source-audit.json",
       "bytes": 9327,
       "sha256": "0b60f58b87e0b988db9736e9cedbbc91a0b61b9cb684a0d1708e104d05161623"
@@ -489,5 +543,7 @@
       "bytes": 5978,
       "sha256": "28a46e803dae758f471e8090dfb0a8829131c4e1e63e4c93e78d8807a16563db"
     }
-  ]
+  ],
+  "count": 108,
+  "total_bytes": 6695046
 }

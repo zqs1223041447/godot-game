@@ -14,6 +14,12 @@ WASD/方向键移动，R复位，F1切换诊断，Esc退出。此版本为1280×
 
 原生Godot窗口实际通过D/W移动到拱门后，诊断脚点(727.8,174.6)，人物被门正确遮住；按S返回门前后重新可见。见 [观察记录](verification/native-observation.json)。该观察不代表完整动画、全地图、Windows实机或FPS验收。
 
+## 人物落地阴影补充
+
+现增加跟随脚点的软接触阴影和屏幕右上方向的淡轮廓投影，复用原人物alpha；以原环境固定太阳方向为依据，投影长度取62%。它是固定光向2D近似，不含地形高度、墙面投影或实时3D光照。阴影在地面之后、所有物件和人物之前绘制。
+
+原样板新增 [12项聚焦检查](godot_preview/qa/shadow-verification.json) 已通过；归档只复制原结果并核对文件，没有重跑27/74项。2026-10-07 16:14 UTC原生窗口以S/D移动观察，接触阴影及右上投影可见并跟随脚点，见 [观察记录](verification/shadow-native-observation.json)。没有FPS或动作动画结论。
+
 ## 资源与源映射
 
 - 原30层PNG与runtime-manifest保留原字节：28层可见，2层完全被遮挡；20对象/21碰撞多边形按原screen_pixel坐标直接使用，拱门保留两条墙腿
@@ -25,8 +31,8 @@ WASD/方向键移动，R复位，F1切换诊断，Esc退出。此版本为1280×
 
 ## 归档与复验边界
 
-运行脚本、主场景、物理参数与原headless检查脚本均保原字节；仅资产复验脚本的原目录查询改为冻结输入SHA，并支持可选原源目录，报告默认写到新文件。原已执行脚本另存于 `godot_preview/qa/original-test-sources`，未更改74项判定规则。
+初次归档时运行脚本、主场景、物理参数与原headless检查脚本均保原字节；资产复验脚本的原目录查询改为冻结输入SHA，并支持可选原源目录，报告默认写到新文件。本次阴影增量保留该可搬迁修正：study.gd增加独立阴影节点，player.gd只删除旧硬圆绘制，物理推进方法不变。原已执行脚本另存于 `godot_preview/qa/original-test-sources`，未更改74项判定规则。
 
-原qa/input-sha256.json包含修正前的Grass Bermuda署名文件SHA，原handoff.json记录原生观察前的pending状态；这两份历史证据原样保留。归档已补OFL和下载审计，署名沿v108官方复核版本；当前文件以 [归档清单](verification/archive-manifest.json) 和 [复制/引用核对](verification/archive-verification.json) 为准。
+原qa/input-sha256.json包含修正前的Grass Bermuda署名文件SHA，原handoff.json记录原生观察前的pending状态；这两份历史证据原样保留。归档已补OFL和下载审计，署名沿v108官方复核版本；archive-verification.json与copy-records.json记录初次归档；阴影增量核对见 [阴影归档记录](verification/shadow-archive-verification.json)。当前文件以 [归档清单](verification/archive-manifest.json) 为准。
 
 未打包Windows程序、未建Release、未重渲染素材或执行长测。

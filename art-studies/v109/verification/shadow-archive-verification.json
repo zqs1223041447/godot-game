@@ -1,0 +1,170 @@
+{
+  "archive_base_commit": "7247b9620234e1f8a958184c2f4322b04405cfa3",
+  "scope": "Shadow-only incremental archive; no renderer or broad test execution during archive",
+  "original_focused_result": {
+    "checks": 12,
+    "failures": 0,
+    "log": "../godot_preview/qa/shadow-focused.log"
+  },
+  "copied_files": [
+    {
+      "path": "godot_preview/study.gd",
+      "source_relative_path": "study.gd",
+      "bytes": 4727,
+      "sha256": "fb1049f4c9d1c1cb9200d2fe43477455df806f480e5178fb4f66ef87ad8d7d04"
+    },
+    {
+      "path": "godot_preview/player.gd",
+      "source_relative_path": "player.gd",
+      "bytes": 3219,
+      "sha256": "03a831a9fe8f6894c9c528e242057cb3efa9d30fee479e42c6f345e44213492d"
+    },
+    {
+      "path": "godot_preview/character_ground_shadow.gd",
+      "source_relative_path": "character_ground_shadow.gd",
+      "bytes": 3176,
+      "sha256": "8f340c1a764c9de77992dd4da0d70fb37ebcca5651875c272e7e9f196d785612"
+    },
+    {
+      "path": "godot_preview/cast_shadow.gdshader",
+      "source_relative_path": "cast_shadow.gdshader",
+      "bytes": 1314,
+      "sha256": "e29c539e2184d35210df3d2f72dcef5ba2053414663e9480a2626e5b1b71dead"
+    },
+    {
+      "path": "godot_preview/contact_shadow.gdshader",
+      "source_relative_path": "contact_shadow.gdshader",
+      "bytes": 679,
+      "sha256": "8fc615f7f728c4df89d38568a679885367b27888eb0217d25df5f94febf639f4"
+    },
+    {
+      "path": "godot_preview/tests/verify_shadow.gd",
+      "source_relative_path": "tests/verify_shadow.gd",
+      "bytes": 4245,
+      "sha256": "da8eed2c483bc3c60c0544a62ff572e3565d9ec0d5308c509b907cbbf62d020d"
+    },
+    {
+      "path": "godot_preview/qa/shadow-before-integrity.json",
+      "source_relative_path": "qa/shadow-before-integrity.json",
+      "bytes": 4109,
+      "sha256": "310a97819849298af66b01f0c558926afaa54748b98e0fe7f40df7c75d809e3c"
+    },
+    {
+      "path": "godot_preview/qa/shadow-verification.json",
+      "source_relative_path": "qa/shadow-verification.json",
+      "bytes": 1942,
+      "sha256": "8c8a42b5c2fbf6995b222cadc35c439de72fd29acbf6ba085103da23de9bfb5b"
+    },
+    {
+      "path": "godot_preview/qa/shadow-integrity.json",
+      "source_relative_path": "qa/shadow-integrity.json",
+      "bytes": 452,
+      "sha256": "932034d680b0516f5ef61105d0000f2a8eae30f8c07b1c6d3202219293828df2"
+    },
+    {
+      "path": "godot_preview/qa/shadow-focused.log",
+      "source_relative_path": "qa/shadow-focused.log",
+      "bytes": 589,
+      "sha256": "35c41f7aa349edcdc1a0ca5cf5f2defa464a71cce08f43f32a8176635c68a73a"
+    },
+    {
+      "path": "godot_preview/qa/shadow-smoke.log",
+      "source_relative_path": "qa/shadow-smoke.log",
+      "bytes": 73,
+      "sha256": "a9912b85473f126d3f4f63ec824170c828df3473a292f866dde86cafda5b66da"
+    }
+  ],
+  "archive_files_preserved": [
+    "godot_preview/assets/OFL-NotoSansCJK.txt",
+    "godot_preview/assets/arena_sans.otf",
+    "godot_preview/assets/arena_sans.otf.import",
+    "godot_preview/assets/environment/DELIVERY_FROZEN.json",
+    "godot_preview/assets/environment/SOURCES.md",
+    "godot_preview/assets/environment/asset-download-audit.json",
+    "godot_preview/assets/environment/layers/00_ground.png",
+    "godot_preview/assets/environment/layers/00_ground.png.import",
+    "godot_preview/assets/environment/layers/01_grass_detail.png",
+    "godot_preview/assets/environment/layers/01_grass_detail.png.import",
+    "godot_preview/assets/environment/layers/arch_00.png",
+    "godot_preview/assets/environment/layers/arch_00.png.import",
+    "godot_preview/assets/environment/layers/arch_01.png",
+    "godot_preview/assets/environment/layers/arch_01.png.import",
+    "godot_preview/assets/environment/layers/arch_02.png",
+    "godot_preview/assets/environment/layers/arch_02.png.import",
+    "godot_preview/assets/environment/layers/arch_03.png",
+    "godot_preview/assets/environment/layers/arch_03.png.import",
+    "godot_preview/assets/environment/layers/arch_04.png",
+    "godot_preview/assets/environment/layers/arch_04.png.import",
+    "godot_preview/assets/environment/layers/arch_05.png",
+    "godot_preview/assets/environment/layers/arch_05.png.import",
+    "godot_preview/assets/environment/layers/arch_06.png",
+    "godot_preview/assets/environment/layers/arch_06.png.import",
+    "godot_preview/assets/environment/layers/arch_07.png",
+    "godot_preview/assets/environment/layers/arch_07.png.import",
+    "godot_preview/assets/environment/layers/foliage_east_front.png",
+    "godot_preview/assets/environment/layers/foliage_east_front.png.import",
+    "godot_preview/assets/environment/layers/foliage_east_mid.png",
+    "godot_preview/assets/environment/layers/foliage_east_mid.png.import",
+    "godot_preview/assets/environment/layers/foliage_east_wall.png",
+    "godot_preview/assets/environment/layers/foliage_east_wall.png.import",
+    "godot_preview/assets/environment/layers/foliage_west_front.png",
+    "godot_preview/assets/environment/layers/foliage_west_front.png.import",
+    "godot_preview/assets/environment/layers/foliage_west_mid.png",
+    "godot_preview/assets/environment/layers/foliage_west_mid.png.import",
+    "godot_preview/assets/environment/layers/foliage_west_wall.png",
+    "godot_preview/assets/environment/layers/foliage_west_wall.png.import",
+    "godot_preview/assets/environment/layers/rock_01.png",
+    "godot_preview/assets/environment/layers/rock_01.png.import",
+    "godot_preview/assets/environment/layers/rock_02.png",
+    "godot_preview/assets/environment/layers/rock_02.png.import",
+    "godot_preview/assets/environment/layers/rock_03.png",
+    "godot_preview/assets/environment/layers/rock_03.png.import",
+    "godot_preview/assets/environment/layers/rock_04.png",
+    "godot_preview/assets/environment/layers/rock_04.png.import",
+    "godot_preview/assets/environment/layers/rock_05.png",
+    "godot_preview/assets/environment/layers/rock_05.png.import",
+    "godot_preview/assets/environment/layers/rock_06.png",
+    "godot_preview/assets/environment/layers/rock_06.png.import",
+    "godot_preview/assets/environment/layers/rock_07.png",
+    "godot_preview/assets/environment/layers/rock_07.png.import",
+    "godot_preview/assets/environment/layers/rock_08.png",
+    "godot_preview/assets/environment/layers/rock_08.png.import",
+    "godot_preview/assets/environment/layers/rock_09.png",
+    "godot_preview/assets/environment/layers/rock_09.png.import",
+    "godot_preview/assets/environment/layers/rock_10.png",
+    "godot_preview/assets/environment/layers/rock_10.png.import",
+    "godot_preview/assets/environment/layers/rock_11.png",
+    "godot_preview/assets/environment/layers/rock_11.png.import",
+    "godot_preview/assets/environment/layers/rock_12.png",
+    "godot_preview/assets/environment/layers/rock_12.png.import",
+    "godot_preview/assets/environment/layers/tree_00.png",
+    "godot_preview/assets/environment/layers/tree_00.png.import",
+    "godot_preview/assets/environment/layers/tree_01.png",
+    "godot_preview/assets/environment/layers/tree_01.png.import",
+    "godot_preview/assets/environment/runtime-manifest.json",
+    "godot_preview/assets/hero_direction_study.png",
+    "godot_preview/assets/hero_direction_study.png.import",
+    "godot_preview/project.godot",
+    "godot_preview/qa/original-test-sources/verify_assets.py.txt",
+    "godot_preview/run.sh",
+    "godot_preview/study.tscn",
+    "godot_preview/study_overlay.gd",
+    "godot_preview/tests/verify_assets.py",
+    "godot_preview/tests/verify_study.gd"
+  ],
+  "player_gd_exact_delta": "Only remove old _draw hard contact ellipse; all preceding code including _physics_process is byte-identical",
+  "portable_asset_recheck_sha256": "9154f6dca29bed3475af66a4a91f5b0b004e447d9ee6b7ec7e2babb88aa2af48",
+  "resource_paths_exist": [
+    "assets/environment/",
+    "assets/environment/runtime-manifest.json",
+    "cast_shadow.gdshader",
+    "character_ground_shadow.gd",
+    "contact_shadow.gdshader",
+    "player.gd",
+    "qa/shadow-verification.json",
+    "study.gd",
+    "study_overlay.gd"
+  ],
+  "historical_evidence_note": "Original shadow integrity covers 35 source-workspace assets. Archive retains earlier official author credit correction in SOURCES.md, so source and archive SOURCES hashes intentionally differ; all archived asset and license files remain unchanged from archive base. Earlier archive verification and handoff files are historical snapshots.",
+  "passed": true
+}

@@ -3,6 +3,7 @@ extends Node2D
 
 const Player := preload("res://player.gd")
 const DebugOverlay := preload("res://study_overlay.gd")
+const GroundShadow := preload("res://character_ground_shadow.gd")
 const MANIFEST_PATH := "res://assets/environment/runtime-manifest.json"
 const ASSET_ROOT := "res://assets/environment/"
 const SPAWN_POINT := Vector2(640.0, 427.768)
@@ -13,6 +14,7 @@ var sorted_root: Node2D
 var collision_root: Node2D
 var player: CharacterBody2D
 var overlay: Node2D
+var ground_shadow: Node2D
 var prop_nodes: Dictionary = {}
 var collider_nodes: Dictionary = {}
 var loaded_images := 0
@@ -50,6 +52,13 @@ func _ready() -> void:
 	player = Player.new()
 	player.position = SPAWN_POINT
 	sorted_root.add_child(player)
+	# Same ground z as the background, but later in tree order. Every prop and
+	# the character remain at z=0, so the shadow cannot paint over their pixels.
+	ground_shadow = GroundShadow.new()
+	ground_shadow.name = "CharacterGroundShadow"
+	ground_shadow.z_index = -1
+	ground_shadow.target = player
+	add_child(ground_shadow)
 	var ui := CanvasLayer.new()
 	ui.name = "StudyDisclosureAndDiagnostics"
 	ui.layer = 10

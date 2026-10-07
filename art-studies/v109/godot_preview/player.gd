@@ -80,7 +80,3 @@ func _physics_process(_delta: float) -> void:
 			last_contact_id = str(collider.get_meta("collider_id", "screen_edge"))
 	# A finite single-screen test, not a world or camera controller.
 	position = position.clamp(Vector2(RADIUS_PIXEL, 52.0), Vector2(1280.0 - RADIUS_PIXEL, 653.0))
-
-func _draw() -> void:
-	draw_set_transform(Vector2.ZERO, 0.0, Vector2(1.0, 0.3))
-	draw_circle(Vector2.ZERO, 11.5, Color(0.09, 0.12, 0.09, 0.22))
