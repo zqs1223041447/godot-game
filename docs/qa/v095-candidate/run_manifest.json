@@ -1,0 +1,56 @@
+[
+  {
+    "label": "candidate_ember",
+    "command": [
+      "/usr/local/bin/godot",
+      "--headless",
+      "--path",
+      "/workspace/scratch/a51485f153de/v095-burn-profile-audit",
+      "--script",
+      "res://tools/diagnostics/burn_profile_allocation_audit.gd"
+    ],
+    "environment": {
+      "XDG_DATA_HOME": "/tmp/godot-m1-v095-candidate_ember-3t_lcorf/data",
+      "XDG_CACHE_HOME": "/tmp/godot-m1-v095-candidate_ember-3t_lcorf/cache",
+      "XDG_CONFIG_HOME": "/tmp/godot-m1-v095-candidate_ember-3t_lcorf/config",
+      "V095_INSTRUMENTED": "0",
+      "V095_PROFILE_OUT": "/workspace/scratch/a51485f153de/v095-burn-profile-audit/docs/qa/v095-candidate/candidate_ember.json",
+      "V095_MODE": "ember_deaths"
+    },
+    "frames": {
+      "ember_deaths": 20
+    },
+    "started_at_unix": 1791358479.1816652,
+    "exit_code": 0,
+    "elapsed_seconds": 11.2593689320056,
+    "first_error": "",
+    "completion_marker": true
+  },
+  {
+    "label": "candidate_no_burn",
+    "command": [
+      "/usr/local/bin/godot",
+      "--headless",
+      "--path",
+      "/workspace/scratch/a51485f153de/v095-burn-profile-audit",
+      "--script",
+      "res://tools/diagnostics/burn_profile_allocation_audit.gd"
+    ],
+    "environment": {
+      "XDG_DATA_HOME": "/tmp/godot-m1-v095-candidate_no_burn-_g5_3kvg/data",
+      "XDG_CACHE_HOME": "/tmp/godot-m1-v095-candidate_no_burn-_g5_3kvg/cache",
+      "XDG_CONFIG_HOME": "/tmp/godot-m1-v095-candidate_no_burn-_g5_3kvg/config",
+      "V095_INSTRUMENTED": "0",
+      "V095_PROFILE_OUT": "/workspace/scratch/a51485f153de/v095-burn-profile-audit/docs/qa/v095-candidate/candidate_no_burn.json",
+      "V095_MODE": "no_burn"
+    },
+    "frames": {
+      "no_burn": 4
+    },
+    "started_at_unix": 1791358492.142655,
+    "exit_code": 0,
+    "elapsed_seconds": 5.333765643008519,
+    "first_error": "",
+    "completion_marker": true
+  }
+]

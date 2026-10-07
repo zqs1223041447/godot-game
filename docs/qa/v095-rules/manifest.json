@@ -1,0 +1,35 @@
+{
+  "source_commit": "eaf298a8cbd22c8387da28da118a15afdcd2afb5",
+  "oracle_scope": "Only DefenseRules is frozen. DamageResolver and its complete literal preload/load closure are shared current production files, verified byte-identical to the source commit at start and finish. This is not an independently frozen full closure.",
+  "transformation": "Exact Git DefenseRules bytes retained as source/*.gd.txt; oracle only removes the class_name declaration. Its Damage preload remains the live production path.",
+  "entries": [
+    {
+      "path": "scripts/mechanics/defense_rules.gd",
+      "git_blob": "2e35f225146954938b3b0ed67151ee2138d038ea",
+      "source_sha256": "a4d88c005dfd27fe6408e86ea9b96a34fe01c786c24c8965113dd20498224226",
+      "frozen_sha256": "ad19ef28346ee4c03e2d60cb92004ac0740de0e3230b04728bdc32cb861dc04b"
+    }
+  ],
+  "shared_dependency_closure": [
+    {
+      "path": "scripts/combat/damage_base_compiler.gd",
+      "git_blob": "52803362ff4275d9de90745310b832d0acfa654d",
+      "source_sha256": "7c12ba22cc623c87a805a903a957e5841b4f8c0b26cb3b0ca8dae60cf8c9de8d"
+    },
+    {
+      "path": "scripts/combat/damage_resolver.gd",
+      "git_blob": "ee538f91062227452dd7fb7c924cc66d556d7ea3",
+      "source_sha256": "720dc69a7446334e8aec3ac15bdf7c1717fa7b96db5657e0c9622513121a4e23"
+    },
+    {
+      "path": "scripts/combat/hit_penetration_rules.gd",
+      "git_blob": "e65a35ed3b373192e0418e5b4457e780ffeb3a95",
+      "source_sha256": "6b0733c563548a9034cd5169b1736287cbffc4b40a14cdf71f37a729c377fc88"
+    },
+    {
+      "path": "scripts/items/weapon_local_rules.gd",
+      "git_blob": "3134299ee524da874f80c80e447c2454fab46a26",
+      "source_sha256": "73e4308828e856a741ef00386d33150a008bdb3f07ef31a031a204d71fe93b8d"
+    }
+  ]
+}

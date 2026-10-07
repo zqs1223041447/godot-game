@@ -1,0 +1,15 @@
+{
+  "decision": "withdrawn; production restored exactly",
+  "baseline": "eaf298a8cbd22c8387da28da118a15afdcd2afb5",
+  "production_sha256": "a4d88c005dfd27fe6408e86ea9b96a34fe01c786c24c8965113dd20498224226",
+  "candidate_source_sha256": "72766130856ecfa40d4dad05e702bcd9744f52d1ea3744aaa3799bbb2174289c",
+  "archived_candidate_sha256": "44b1bc91afdfcd55b118d921f6b6534b366c588ea6edba6bda1e66242e6ed59b",
+  "candidate_archive_change": "Only class_name removed; exact reverse replacement checked",
+  "test_as_executed_sha256": "460552cb93129b73aca7bb1517e2d3d59d18c699c96236b83f327e871e8765f0",
+  "relocated_test_sha256": "53512b364fbefed3e0a918ead4e41fc0be4a060309f04cf8ad88c9e612886257",
+  "test_relocation_only": [
+    "Point Current preload to archived candidate",
+    "Write optional future rerun result in isolated user path instead of overwriting historical evidence"
+  ],
+  "no_additional_runs": true
+}

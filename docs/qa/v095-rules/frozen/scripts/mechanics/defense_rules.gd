@@ -1,4 +1,3 @@
-class_name DefenseRules
 extends RefCounted
 ## Original, bounded hit-defense rules shared by the player and monsters.
 ## DamageResolver owns the per-component formula; this module validates authored

@@ -1,4 +1,3 @@
-class_name DefenseRules
 extends RefCounted
 ## Original, bounded hit-defense rules shared by the player and monsters.
 ## DamageResolver owns the per-component formula; this module validates authored
@@ -254,16 +253,21 @@ static func apply_hit_damage_taken(resolved: Dictionary, increased: Variant) -> 
 ## Reuse the same fire cap and resource settlement, without hit-size armour.
 static func incoming_burn(raw_amount:Variant,fire_resistance:Variant,shield:Variant,health:Variant,actor:String="player",mana:Variant=0.0,ratio:Variant=0.0,max_fire_bonus:Variant=0.0)->Dictionary:
 	if not _amount(raw_amount):return _failure("Burn amount must be finite and nonnegative")
+	# This authored branch has exactly one known stat and actor. Avoid creating
+	# a full fire-profile object only to discard every field except its scalar.
+	# Keep the same raw -> fire -> resource errors, clamp and arithmetic order.
+	if actor=="monster" and _finite_number(ratio) and float(ratio)==0.0 and _finite_number(max_fire_bonus) and float(max_fire_bonus)==0.0:
+		if not _finite_number(fire_resistance):return _failure("Defense stat must be a finite scalar: fire_resistance")
+		var monster_raw:float=float(raw_amount)
+		var monster_resistance:float=clampf(float(fire_resistance),0.0,FIRE_RESISTANCE_CAP)
+		var monster_amount:float=monster_raw*(1.0-monster_resistance)
+		var resources_error:String=_resources_error(shield,health)
+		if not resources_error.is_empty():return _failure(resources_error)
+		return _settle_validated_monster_burn(monster_raw,monster_resistance,monster_amount,float(shield),float(health))
 	var profile:Dictionary=defense_profile({"fire_resistance":fire_resistance},actor)
 	if not profile.ok:return profile
 	var raw:float=float(raw_amount);var resistance:float=profile.effective_resistances.fire
 	var amount:float=raw*(1.0-resistance)
-	# This private receipt is already proved valid by the raw/profile checks.
-	# Keep public settlement validation for every other actor and option.
-	if actor=="monster" and _finite_number(ratio) and float(ratio)==0.0 and _finite_number(max_fire_bonus) and float(max_fire_bonus)==0.0:
-		var resources_error:String=_resources_error(shield,health)
-		if not resources_error.is_empty():return _failure(resources_error)
-		return _settle_validated_monster_burn(raw,resistance,amount,float(shield),float(health))
 	var resolved:Dictionary={"total":amount,"components":{"fire":amount},"details":[{"type":"fire","before_defense":raw,"resistance":resistance,"final":amount}]}
 	var result:Dictionary=settle_with_mana(resolved,shield,health,mana,ratio) if not _finite_number(ratio) or float(ratio)!=0.0 else settle_resolved(resolved,shield,health)
 	# All original parameter errors retain precedence over the appended bonus.

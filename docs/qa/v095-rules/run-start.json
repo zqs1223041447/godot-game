@@ -1,0 +1,37 @@
+{
+  "baseline_commit": "eaf298a8cbd22c8387da28da118a15afdcd2afb5",
+  "command": [
+    "/usr/local/bin/godot",
+    "--headless",
+    "--path",
+    "/workspace/scratch/a51485f153de/v095-burn-profile-audit",
+    "--script",
+    "res://tests/burn_profile_shortcut_equivalence_test.gd"
+  ],
+  "isolation": "/tmp/godot-m1-v095-rules-wc7irbds",
+  "xdg": {
+    "XDG_DATA_HOME": "/tmp/godot-m1-v095-rules-wc7irbds/data",
+    "XDG_CONFIG_HOME": "/tmp/godot-m1-v095-rules-wc7irbds/config",
+    "XDG_CACHE_HOME": "/tmp/godot-m1-v095-rules-wc7irbds/cache",
+    "XDG_STATE_HOME": "/tmp/godot-m1-v095-rules-wc7irbds/state",
+    "XDG_RUNTIME_DIR": "/tmp/godot-m1-v095-rules-wc7irbds/runtime"
+  },
+  "verification_start": {
+    "oracle_git_blob": "2e35f225146954938b3b0ed67151ee2138d038ea",
+    "shared_dependency_paths": [
+      "scripts/combat/damage_base_compiler.gd",
+      "scripts/combat/damage_resolver.gd",
+      "scripts/combat/hit_penetration_rules.gd",
+      "scripts/items/weapon_local_rules.gd"
+    ],
+    "shared_dependency_closure_matches_baseline": true,
+    "changed_production_functions": [
+      "incoming_burn"
+    ],
+    "independently_frozen_full_closure": false
+  },
+  "engine_import_invoked": false,
+  "microbenchmark_run": false,
+  "historical_suite_run": false,
+  "started_at_unix": 1791358288.061428
+}
