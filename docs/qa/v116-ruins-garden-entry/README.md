@@ -97,13 +97,11 @@ draft (旧庭). After preparation it changes to 遗迹庭园. This is retained e
 draft behavior but can be confusing; clearer unprepared-selection messaging is
 follow-up UI work, outside this batch.
 
-Historical aggregate fixtures such as `exploration_map_plan_test` and
-`map_camp_admission_test` enumerate every catalogue entry while assuming each
-supports synchronous rectangle geometry. They have not been adapted to the
-explicit native-only entry contract and were not rerun. Native safety was not
-weakened to satisfy that old assumption. A future aggregate pass must separate
-the old four-map default contract from this new prepared-native contract.
-No full-regression or merge-readiness claim is made here.
+At the initial v116 implementation, the historical aggregate fixtures still
+assumed every catalogue map supported synchronous rectangle geometry. The
+subsequent [compatibility follow-on](COMPATIBILITY.md) explicitly exercises both
+contracts without changing production safety gates. It records exact partial/
+complete runs and concrete merge risks; no repository-wide pass is claimed.
 
 ## Reproduce the focused entry test
 

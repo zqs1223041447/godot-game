@@ -390,7 +390,7 @@ func _outpost_assignments_exact(result: Dictionary) -> bool:
 			if not actors.has(record.root_id) or record.root_id in expected[outpost.id]: return false
 			var enemy: Dictionary = actors[record.root_id]
 			var index: int = outpost.ordinals.find(record.ordinal)
-			if enemy.get("map_outpost_id") != outpost.id or record.outpost_id != outpost.id \
+			if enemy.get("map_outpost_id") != outpost.id or record.outpost_id != outpost.id
 				or enemy.pos != outpost.positions[index] or record.position != enemy.pos: return false
 			expected[outpost.id].append(record.root_id)
 			matched += 1

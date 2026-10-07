@@ -1,0 +1,33 @@
+{
+  "baseline": "7918f5040db07c99d583d2cffb5b15965e90986b",
+  "source": "tests/exploration_map_plan_test.gd",
+  "source_sha256": "3077ea572fb7ec13d7f3dd1d2e1bbb352b778cf225f6b7de8d8b9e244a69206b",
+  "attempts": [
+    {
+      "name": "compat-plan-attempt01",
+      "checks": 334,
+      "failures": 24,
+      "exit_code": 1,
+      "scope": "complete affected fixture",
+      "causes": {
+        "old factory reference omitted separately attached map_outpost_id": 12,
+        "native factory reference same omission": 6,
+        "native authored landmarks incorrectly included staged root_ids": 6
+      }
+    },
+    {
+      "name": "compat-plan-identity-parse",
+      "tests_executed": false,
+      "exit_code": 1,
+      "cause": "test-only missing condition line continuation; corrected before execution"
+    },
+    {
+      "name": "compat-plan-identity",
+      "checks": 273,
+      "failures": 0,
+      "exit_code": 0,
+      "scope": "old four-map tier identity/positive checks plus complete native contract; prior passing layout/legacy-negative/bookkeeping paths not rerun"
+    }
+  ],
+  "production_changes": false
+}

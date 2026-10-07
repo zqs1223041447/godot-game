@@ -34,23 +34,21 @@ func _initialize() -> void:
 
 
 func run() -> void:
-	var identity_only := "--identity-only" in OS.get_cmdline_user_args()
 	for map_id: String in Catalog.MAPS:
 		if map_id == "ruins_garden":
 			await _native_contract()
 			continue
 		check(map_id in ORDINARY_MAP_IDS, "Every catalogue map has an explicit geometry contract")
-		if not identity_only: _layout(map_id)
+		_layout(map_id)
 		for tier: int in range(1, 4):
 			var plain: Dictionary = Maps.compile_normal(map_id, tier, [], [])
 			var specials: Array = ["elemental_aegis"] if plain.profile.wave >= 4 else []
 			var profile: Dictionary = Maps.compile_normal(map_id, tier,
 				["enemy_max_health_120", "enemy_shield_from_health_20"], specials).profile
 			_positive(profile)
-	if not identity_only:
-		_failures()
-		_bookkeeping()
-	print("Exploration map plan: %d checks, %d failures; scope=%s" % [checks, failures, "identity-only" if identity_only else "complete affected fixture"])
+	_failures()
+	_bookkeeping()
+	print("Exploration map plan: %d checks, %d failures" % [checks, failures])
 	quit(1 if failures else 0)
 
 
@@ -156,7 +154,6 @@ func _positive(profile: Dictionary) -> void:
 	for state: Dictionary in result.state.states({}):
 		active = active and state.state == "active" and state.roots_spawned == state.root_count
 	check(same_roster and active, "Same seed keeps historical source selection and all groups are already registered")
-	check(_outpost_assignments_exact(result), "Every actor outpost ID and staged root list exactly match authored group/ordinal positions")
 	var expected = Runtime.new(runtime.templates)
 	expected.next_id = runtime.next_id
 	var exact := true
@@ -165,7 +162,7 @@ func _positive(profile: Dictionary) -> void:
 		for entry: Dictionary in result.state.entries(camp.id):
 			var canonical: Dictionary = Admission.create_root(expected, profile, entry.template_id, profile.wave, entry.position, "ordinary", entry.rarity, entry.mechanisms, true)
 			var actual: Dictionary = result.roots[offset].duplicate(true)
-			actual.erase("exploration_awake"); actual.erase("map_spawn_key"); actual.erase("map_outpost_id")
+			actual.erase("exploration_awake"); actual.erase("map_spawn_key")
 			exact = exact and canonical.ok and actual == canonical.enemy
 			offset += 1
 	var canonical_boss: Dictionary = Admission.create_root(expected, profile, profile.boss_id, profile.wave, result.landmarks.boss.center, "map_boss", "", [], true)
@@ -332,11 +329,8 @@ func _native_positive(profile: Dictionary, runtime: RefCounted, owner: RefCounte
 		and result.runtime_checkpoint.next_id == runtime.next_id + 25, "Native map stages its exact25-root budget and monotonic IDs")
 	check(result.run.profile == profile and result.run.profile.id == "ruins_garden" and result.run.admitted.size() == 24
 		and result.run.boss_id == result.boss.id and result.boss.map_boss_attack_id == "ruins_garden_slam", "Native run, progression and boss retain their own identities")
-	var detached_landmarks: Dictionary = result.landmarks.duplicate(true)
-	for outpost: Dictionary in detached_landmarks.outposts: outpost.erase("root_ids")
-	check(detached_landmarks == owner.landmarks() and result.landmarks.route_segments.size() == 14
+	check(result.landmarks == owner.landmarks() and result.landmarks.route_segments.size() == 14
 		and Plan._routes_reason(result.landmarks, geometry).is_empty(), "Native plan retains the complete authoritative detoured route contract")
-	check(_outpost_assignments_exact(result), "Every actor outpost ID and staged root list exactly match authored group/ordinal positions")
 	var expected = Runtime.new(runtime.templates)
 	expected.next_id = runtime.next_id
 	var valid := true
@@ -347,7 +341,7 @@ func _native_positive(profile: Dictionary, runtime: RefCounted, owner: RefCounte
 		for entry: Dictionary in result.state.entries(camp.id):
 			var canonical: Dictionary = Admission.create_root(expected, profile, entry.template_id, profile.wave, entry.position, "ordinary", entry.rarity, entry.mechanisms, true)
 			var actual: Dictionary = result.roots[offset].duplicate(true)
-			actual.erase("exploration_awake"); actual.erase("map_spawn_key"); actual.erase("map_outpost_id")
+			actual.erase("exploration_awake"); actual.erase("map_spawn_key")
 			exact = exact and canonical.ok and actual == canonical.enemy
 			offset += 1
 	var canonical_boss: Dictionary = Admission.create_root(expected, profile, profile.boss_id, profile.wave, result.landmarks.boss.center, "map_boss", "", [], true)
@@ -368,40 +362,3 @@ func _native_positive(profile: Dictionary, runtime: RefCounted, owner: RefCounte
 		keys[record.spawn_key] = true
 	check(valid and result.spawn_records.size() == 25 and result.mechanism_config.is_empty()
 		and result.optional_encounters.is_empty(), "All native roots/records keep real radii, separation, source identities and standard rewards")
-
-
-func _outpost_assignments_exact(result: Dictionary) -> bool:
-	# Planner-only metadata has its own strict source authority. It is removed
-	# from factory comparison only after this complete mapping check succeeds.
-	var authored: Dictionary = Layout.layout(result.run.profile.id, result.bounds)
-	if not authored.ok: return false
-	var expected: Dictionary = {}
-	for outpost: Dictionary in authored.landmarks.outposts: expected[outpost.id] = []
-	var actors: Dictionary = {}
-	for enemy: Dictionary in result.roots: actors[enemy.id] = enemy
-	var matched := 0
-	for record: Dictionary in result.spawn_records:
-		if record.root_id == result.boss.id:
-			if not record.outpost_id.is_empty() or result.boss.has("map_outpost_id"): return false
-			continue
-		var found := false
-		for outpost: Dictionary in authored.landmarks.outposts:
-			if outpost.source_group != record.source_group or not outpost.ordinals.has(record.ordinal): continue
-			if not actors.has(record.root_id) or record.root_id in expected[outpost.id]: return false
-			var enemy: Dictionary = actors[record.root_id]
-			var index: int = outpost.ordinals.find(record.ordinal)
-			if enemy.get("map_outpost_id") != outpost.id or record.outpost_id != outpost.id \
-				or enemy.pos != outpost.positions[index] or record.position != enemy.pos: return false
-			expected[outpost.id].append(record.root_id)
-			matched += 1
-			found = true
-			break
-		if not found: return false
-	if matched != result.ordinary_roots.size() or result.landmarks.outposts.size() != authored.landmarks.outposts.size(): return false
-	for index: int in range(authored.landmarks.outposts.size()):
-		var source: Dictionary = authored.landmarks.outposts[index]
-		var actual: Dictionary = result.landmarks.outposts[index].duplicate(true)
-		if actual.get("root_ids") != expected[source.id] or expected[source.id].size() != source.root_count: return false
-		actual.erase("root_ids")
-		if actual != source: return false
-	return true

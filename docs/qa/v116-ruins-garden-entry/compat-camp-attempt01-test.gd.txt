@@ -281,14 +281,11 @@ func _owner_snapshot(owner: Variant) -> PackedByteArray:
 func _native_snapshot(geometry: RefCounted) -> PackedByteArray:
 	var body_ids: Array[int] = []
 	var shape_ids: Array[int] = []
-	var body_spaces: Array[int] = []
-	for body: RID in geometry._bodies:
-		body_ids.append(body.get_id())
-		body_spaces.append(PhysicsServer2D.body_get_space(body).get_id())
+	for body: RID in geometry._bodies: body_ids.append(body.get_id())
 	for shape: RID in geometry._shapes: shape_ids.append(shape.get_id())
 	# The reusable circle's radius is query scratch, not collision authority.
 	return var_to_bytes([geometry.get_instance_id(), geometry.snapshot(), geometry._routes,
-		geometry._space.get_id(), body_ids, body_spaces, shape_ids, geometry._polygons,
+		geometry._space.get_id(), body_ids, shape_ids, geometry._polygons,
 		geometry._native_probes, geometry._probe_contours, geometry._study_active,
 		geometry._native_ready, geometry._query_circle.get_instance_id() if geometry._query_circle != null else 0])
 
@@ -459,11 +456,7 @@ func _native_checks(selections: Array) -> void:
 	check(pending.install(bounds, assembly.polygons, source.landmarks.entry, assembly.presentation, "ruins_garden").ok,
 		"Unready fixture installs the unchanged real native assembly")
 	check(pending_owner.attach(pending, Callable(pending, "_release_native")), "Unready fixture owns its detached native candidate")
-	# A headless physics server may synchronize immediately. Remove one real
-	# collider from this candidate space so native probe readiness is genuinely
-	# false, instead of treating elapsed frames as an authority for readiness.
-	PhysicsServer2D.body_set_space(pending._bodies[0], RID())
-	check(not pending.physics_ready(), "Installed native candidate is unready while an actual collision body is absent from its space")
+	check(not pending.physics_ready(), "Installed native candidate is genuinely unready before physics synchronization")
 	for context: String in ["ordinary", "map_boss"]:
 		_native_reject(runtime, profile, entries if context == "ordinary" else boss, pending,
 			source.landmarks.entry, 100, "Preparing native owner", context, pending_owner)
@@ -471,7 +464,7 @@ func _native_checks(selections: Array) -> void:
 		"Unready geometry is tested even with an active typed owner")
 	for context: String in ["ordinary", "map_boss"]:
 		_native_reject(runtime, profile, entries if context == "ordinary" else boss, pending,
-			source.landmarks.entry, 100, "Active owner with incomplete native collision readiness", context, pending_owner)
+			source.landmarks.entry, 100, "Active owner with unsynchronized native geometry", context, pending_owner)
 	pending_owner.finish_use(false)
 	_released(pending_owner, pending, "Rejected unready native candidate")
 	var geometry = NativeGeometry.new()
