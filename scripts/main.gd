@@ -169,9 +169,17 @@ var _progress_save_dirty: bool = false
 var _progress_save_requested: bool = false
 var _progress_flushing: bool = false
 var _progress_saving: bool = false
+var _safe_exit_busy: bool = false
+var _safe_exit_requested: bool = false
+var _owns_close_request: bool = false
+var _previous_auto_accept_quit: bool = true
 
 
 func _ready() -> void:
+	# The default window-close action must not bypass a failed save.
+	_previous_auto_accept_quit = get_tree().auto_accept_quit
+	get_tree().auto_accept_quit = false
+	_owns_close_request = true
 	var supply_config:Variant=ProjectSettings.get_setting("testing/town_supply_enabled",true)
 	test_supply_enabled=supply_config is bool and supply_config
 	visual_settings.load_settings()
@@ -327,10 +335,39 @@ func save_build() -> bool:
 	return _flush_progress(true)
 
 
+func request_safe_exit() -> Dictionary:
+	if _safe_exit_requested:
+		return {"ok": true, "error_code": "", "reason": ""}
+	if _safe_exit_busy or not _ready_complete:
+		return {"ok": false, "error_code": "busy", "reason": "当前操作尚未结束，请重试"}
+	_safe_exit_busy = true
+	# Completion is a separate atomic transaction. A successful plain save of
+	# the old active_run cannot stand in for its pending reward/tier receipt.
+	var completed: Dictionary = _finish_normal_map()
+	if not completed.ok:
+		_safe_exit_busy = false
+		return {"ok": false, "error_code": "completion_save_failed", "reason": "地图结算保存失败，暂不能退出：" + str(completed.reason)}
+	if not save_build():
+		_safe_exit_busy = false
+		var reason: String = state.save_block_reason()
+		return {"ok": false, "error_code": "save_failed", "reason": reason if not reason.is_empty() else "进度保存失败，请检查保存目录后重试"}
+	_safe_exit_requested = true
+	_safe_exit_busy = false
+	_quit_game()
+	return {"ok": true, "error_code": "", "reason": ""}
+
+
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		save_build()
-		_quit_game()
+		var result: Dictionary = request_safe_exit()
+		if not result.ok and is_instance_valid(hud):
+			hud.notify(str(result.reason))
+
+
+func _exit_tree() -> void:
+	if _owns_close_request:
+		get_tree().auto_accept_quit = _previous_auto_accept_quit
+		_owns_close_request = false
 
 
 func _quit_game() -> void:
