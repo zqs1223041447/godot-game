@@ -1,0 +1,54 @@
+[
+  {
+    "map": "old_garden",
+    "actors": 25,
+    "all_empty_and_asleep": true,
+    "same_roots_and_rng": true,
+    "rebuilds": 60,
+    "samples": 60,
+    "tick_us": {
+      "mean": 750.7,
+      "median": 597.0,
+      "p95": 1029,
+      "max": 1210
+    },
+    "projectile_us": {
+      "mean": 203.35,
+      "median": 190.5,
+      "p95": 238,
+      "max": 457
+    },
+    "index_us": {
+      "mean": 111.13,
+      "median": 105.0,
+      "p95": 128,
+      "max": 326
+    }
+  },
+  {
+    "map": "ginkgo_arcade",
+    "actors": 37,
+    "all_empty_and_asleep": true,
+    "same_roots_and_rng": true,
+    "rebuilds": 60,
+    "samples": 60,
+    "tick_us": {
+      "mean": 1343.03,
+      "median": 882.5,
+      "p95": 2262,
+      "max": 2792
+    },
+    "projectile_us": {
+      "mean": 288.68,
+      "median": 265.0,
+      "p95": 415,
+      "max": 707
+    },
+    "index_us": {
+      "mean": 181.47,
+      "median": 163.0,
+      "p95": 299,
+      "max": 482
+    }
+  }
+]

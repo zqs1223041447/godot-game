@@ -1,0 +1,25 @@
+{
+  "failure": "First empty25 map was prepared before fixture RNG seed was fixed; strict cross-process comparison correctly failed. All four processes exit0 and internal checks pass.",
+  "source_inputs": {
+    "scripts/main.gd": "33fa0d6f0c89662f700a78337a6a58f335977821b596248b5f9f4fef010e925e",
+    "scripts/combat/projectile_runtime.gd": "dbba5008038b3d35d5bc69ca5b2fe98127645fd0bec6f707cd3e8020a9bc4984",
+    "scripts/combat/spatial_target_index.gd": "7f1b14e9f340b0740b6c19288f015a572eea6edf20f73693179e8565ccda8ef4",
+    "tests/empty_projectile_main_probe.gd": "9d40c9440d747d08fda6e06973d1a2150750b6d8b11799667a271284ea20ea5b",
+    "docs/qa/v089-empty-projectiles/main_before.gd": "907cbe568922264b5786b6221551e1b0e032e1b6c3851f7869a0f045f4875c45",
+    "docs/qa/v089-empty-projectiles/runtime_before.gd": "581f105da73178f7546d27be0ae0c433776aa5d30d9a17d8dfaca3b14a34980a"
+  },
+  "affected": "empty25",
+  "preserved_results": [
+    "a0",
+    "b0",
+    "b1",
+    "a1"
+  ],
+  "reused_unchanged_cases": [
+    "empty37",
+    "active37",
+    "empty_status_tick",
+    "empty_lineage_flush",
+    "first_projectile_after_idle"
+  ]
+}

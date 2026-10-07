@@ -1,0 +1,27 @@
+{
+  "base": "63b0947fbb76bb219af541615f5c483a648f0b80",
+  "changed_production_files": [
+    "scripts/combat/projectile_runtime.gd",
+    "scripts/main.gd"
+  ],
+  "pure_runtime": {
+    "callbacks": 56,
+    "checks": 176,
+    "failures": 0,
+    "scope": "Fixed original runtime event/carrier/ID/counter equivalence; inactive private index clearing intentionally differs"
+  },
+  "main_checks_per_original_run": 211,
+  "main_runs_original": 4,
+  "affected_25_root_fix_runs": 2,
+  "all_valid_per_frame_snapshots_equal": true,
+  "all_valid_final_snapshots_exact": true,
+  "internal_index_and_private_target_table": "Intentionally empty while idle; never claimed byte-equivalent. Released target references and next nonempty complete rebuild are tested.",
+  "source_inputs": {
+    "scripts/main.gd": "33fa0d6f0c89662f700a78337a6a58f335977821b596248b5f9f4fef010e925e",
+    "scripts/combat/projectile_runtime.gd": "dbba5008038b3d35d5bc69ca5b2fe98127645fd0bec6f707cd3e8020a9bc4984",
+    "scripts/combat/spatial_target_index.gd": "7f1b14e9f340b0740b6c19288f015a572eea6edf20f73693179e8565ccda8ef4",
+    "tests/empty_projectile_runtime_test.gd": "5ad5c38103495588f1878446f1880a8af7c3b770ba2c9ae08cd67e6045fe746b",
+    "tests/empty_projectile_main_probe.gd": "cbf497e25d7349a0926d6dd17caff7d9fdf3262c40b6ec8ea5d562c59c19c194"
+  },
+  "no_rerun_of_unaffected_cases": true
+}

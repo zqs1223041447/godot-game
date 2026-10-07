@@ -1,0 +1,8 @@
+Transcribed from the first comparison orchestration tool result; not a rerun.
+All four Godot processes exited 0, with no ERROR and 211 checks / 0 failures each.
+The Python equality summary then exited 1 at run-main-comparison.py line 18:
+    cases=[x[2]['cases'][idx] for x in results];assert all(c['frame_sha256']==cases[0]['frame_sha256'] for c in cases)
+AssertionError
+
+Read-only decoding of a0/empty25.bin and b0/empty25.bin isolated differences to capture index 0 (enemy records) and 33 (spawn records). Their map_spawn_key carried different initial seed values. The fixture seeded arena.rng only after the first map had already been prepared. Later maps had the same seed and all existing valid snapshots already matched.
+The production files were unchanged. The probe now seeds before craft/start. Only empty25 was rerun; original results and original probe source remain preserved. Its original timing is excluded from the final result.
