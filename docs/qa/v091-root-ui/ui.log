@@ -1,0 +1,9 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+godot-game: playable arena ready
+UI_FEEDBACK 珠宝工艺已保存
+UI_RESULT balance=56 expected=56 source={ "id": "jewel_000004", "base": "emberheart", "rarity": "magic", "affixes": [{ "id": "force", "value": 4.0 }, { "id": "tempo", "value": 0.08 }] } item={ "uid": "jewel_000004", "kind": "jewel", "definition_id": "jewel:emberheart", "payload": { "id": "jewel_000004", "base": "emberheart", "rarity": "magic", "affixes": [{ "id": "vitality", "value": 16.0 }, { "id": "recharge", "value": 0.6 }] } }
+SALVAGE_STATE true title=确认回收珠宝 text=回收「魔法 · 烬心晶玉」？
+获得校准碎片 1 枚。
+这颗珠宝将被消耗，无法恢复。 disabled=false ops={ "salvage": { "operation": "salvage", "label": "回收", "description": "消耗这颗普通珠宝，魔法返还1枚、稀有返还2枚校准碎片。", "risk": "这颗珠宝会被消耗，无法撤销。", "cost": {  }, "materials": { "calibration_shard": 1 }, "available": true, "reason": "" }, "reforge": { "operation": "reforge", "label": "整体重铸", "description": "保留珠宝身份、底材和稀有度，重新随机全部合法词缀及数值；魔法8枚、稀有16枚校准碎片。", "risk": "全部原词缀会被替换，结果可能相同或更差，碎片仍会消耗。", "cost": { "calibration_shard": 8 }, "materials": {  }, "available": true, "reason": "" } }
+Jewel crafting UI: 15 checks, 0 failures

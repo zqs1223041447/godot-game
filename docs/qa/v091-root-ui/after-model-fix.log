@@ -1,0 +1,13 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+godot-game: playable arena ready
+UI_FEEDBACK 珠宝工艺已保存
+UI_RESULT balance=56 expected=56 source={ "id": "jewel_000004", "base": "emberheart", "rarity": "magic", "affixes": [{ "id": "force", "value": 4.0 }, { "id": "tempo", "value": 0.08 }] } item={ "uid": "jewel_000004", "kind": "jewel", "definition_id": "jewel:emberheart", "payload": { "id": "jewel_000004", "base": "emberheart", "rarity": "magic", "affixes": [{ "id": "vitality", "value": 16.0 }, { "id": "recharge", "value": 0.6 }] } }
+ERROR: Jewel salvage wording
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/jewel_crafting_ui_test.gd:12)
+       [1] run (res://tests/jewel_crafting_ui_test.gd:65)
+       [2] request (res://tests/jewel_crafting_ui_test.gd:19)
+       [3] frames (res://tests/jewel_crafting_ui_test.gd:14)
+Jewel crafting UI: 15 checks, 1 failures

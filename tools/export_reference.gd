@@ -123,6 +123,7 @@ static func collect() -> Dictionary:
 	result["support_program_examples"] = support_program_examples()
 	result["projectile_support_examples"] = piercing_examples()
 	result["crafting"] = crafting_examples()
+	result["jewel_crafting"] = preload("res://tools/jewel_crafting_reference.gd").build_snapshot()
 	result["monster_attacks"] = telegraph_examples()
 	result["encounters"] = encounter_examples()
 	result["canonical"] = canonical_examples()
