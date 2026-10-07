@@ -1,0 +1,292 @@
+extends SceneTree
+## One real Main, one lawful fresh old_garden entry, no combat simulation.
+## Run only with a fresh /tmp/godot-m1-v110-* XDG_DATA_HOME.
+const Catalog = preload("res://scripts/visuals/actor_sprite_catalog.gd")
+const Layer = preload("res://scripts/visuals/retained_actor_layer.gd")
+const Rules = preload("res://scripts/save/canonical_build_rules.gd")
+const View = preload("res://scripts/visuals/world_view.gd")
+const STUDY_PATH := "res://assets/actors/studies/hero_direction_study.json"
+
+var arena: Node2D
+var checks := 0
+var failures := 0
+
+func _initialize() -> void:
+	call_deferred("run")
+
+func check(value: bool, label: String) -> bool:
+	checks += 1
+	if not value:
+		failures += 1
+		push_error(label)
+	return value
+
+func accepted(value: Dictionary, label: String) -> bool:
+	return check(bool(value.get("ok", false)), label + ": " + JSON.stringify(value))
+
+func pause_main() -> void:
+	arena.set_process(false)
+	arena.hud.set_process(false)
+	arena.auto_fire = false
+	for unused: int in range(4): arena.hud.close_panel()
+
+func authority() -> PackedByteArray:
+	return var_to_bytes([
+		arena.state.snapshot(), arena.world_context(), arena.map_draft(),
+		arena._map_run.snapshot(), arena.EncounterAdmission._snapshot(arena.monster_runtime),
+		arena.map_spawn_records(), arena.map_mechanism_state(), arena.world_geometry(), arena.ARENA,
+		arena.enemies, arena.projectiles, arena.projectile_runtime.next_projectile_id,
+		arena.player_pos, arena.player_facing, arena.PLAYER_RADIUS, arena.health, arena.mana, arena.shield,
+		arena.alive, arena.kills, arena.reward_kills, arena.ordinary_admissions, arena.elapsed,
+		arena.attack_timer, arena.hurt_flash, arena.invulnerable, arena.cooldowns, arena._simulation_accumulator,
+		arena.combat_trace, arena.damage_trace, arena.incoming_damage_trace, arena.attack_admission_trace,
+		arena.visual_cues.cues, arena.particles, arena.rings, arena.pickups, arena.floating_text,
+		arena.rng.seed, arena.rng.state])
+
+func save_bytes() -> PackedByteArray:
+	return FileAccess.get_file_as_bytes(arena.NORMAL_BUILD_PATH)
+
+func identities(layer: Node2D) -> Dictionary:
+	var result: Dictionary = {}
+	for id: int in layer._actors:
+		var actor: Node2D = layer._actors[id]
+		result[id] = [actor.get_instance_id(), actor.body.get_instance_id(), actor.limbs.get_instance_id()]
+	if is_instance_valid(layer._hero):
+		result["hero"] = [layer._hero.get_instance_id(), layer._hero.body.get_instance_id(), layer._hero.limbs.get_instance_id()]
+	return result
+
+func presentation_state(layer: Node2D, hero: Node2D) -> Array:
+	return [layer._hero_presentation.duplicate(true), layer._hero_presentation_revision,
+		hero._hero_presentation.duplicate(true), hero.atlas.duplicate(true), hero.frame,
+		hero.configure_count, hero.body.redraw_requests, hero.limbs.redraw_requests,
+		hero.shadow_redraw_requests, layer.hero_presentation_bounds()]
+
+func restore_camera(camera: Camera2D, position_value: Vector2, zoom_value: Vector2) -> void:
+	camera.position = position_value
+	camera.zoom = zoom_value
+	camera.force_update_scroll()
+
+func separate_bounds(camera: Camera2D, legacy: Rect2, study: Rect2) -> bool:
+	# Move only the view. Place an edge between the selected and legacy extents,
+	# including the shared antialias margin; the authoritative foot never moves.
+	var frame: Dictionary = Layer._visibility_frame(arena)
+	if not frame.ok: return false
+	camera.position += Vector2(arena.player_pos) - Rect2(frame.rect).get_center()
+	camera.force_update_scroll()
+	frame = Layer._visibility_frame(arena)
+	var visible_rect: Rect2 = frame.rect
+	var margin: float = frame.aa_margin
+	var foot: Vector2 = arena.player_pos
+	if study.end.x > legacy.end.x + 0.01:
+		camera.position.x += foot.x + (study.end.x + legacy.end.x) * 0.5 + margin - visible_rect.position.x
+	elif study.position.x < legacy.position.x - 0.01:
+		camera.position.x += foot.x + (study.position.x + legacy.position.x) * 0.5 - margin - visible_rect.end.x
+	elif study.end.y > legacy.end.y + 0.01:
+		camera.position.y += foot.y + (study.end.y + legacy.end.y) * 0.5 + margin - visible_rect.position.y
+	elif study.position.y < legacy.position.y - 0.01:
+		camera.position.y += foot.y + (study.position.y + legacy.position.y) * 0.5 - margin - visible_rect.end.y
+	else:
+		return false
+	camera.force_update_scroll()
+	frame = Layer._visibility_frame(arena)
+	return not Layer._bounds_visible(foot, legacy, frame) and Layer._bounds_visible(foot, study, frame)
+
+func run() -> void:
+	var isolated: String = OS.get_environment("XDG_DATA_HOME").simplify_path()
+	if not isolated.begins_with("/tmp/godot-m1-v110-") or FileAccess.file_exists("user://build_save.json"):
+		printerr("Requires fresh isolated /tmp/godot-m1-v110-* XDG_DATA_HOME with no build_save.json")
+		quit(78)
+		return
+	var definition: Variant = JSON.parse_string(FileAccess.get_file_as_string(STUDY_PATH))
+	if not check(definition is Dictionary and not definition.is_empty(), "Bundled static direction study parses as JSON"):
+		await finish()
+		return
+	var pristine: Dictionary = definition.duplicate(true)
+	arena = load("res://scenes/main.tscn").instantiate()
+	root.add_child(arena)
+	await process_frame
+	pause_main()
+	var main_id: int = arena.get_instance_id()
+	if not check(arena.world_context().normal_town and not arena.world_context().test_mode and arena.enemies.is_empty()
+		and arena.build_save_path == "user://build_save.json" and arena.state.normal_journey().normal_root_kills == 0
+		and Rules.reason(arena.state.snapshot()).is_empty(), "Unmodified fresh Main starts lawful formal town without supplied gear or progression"):
+		await finish()
+		return
+	if not check(arena.save_build(), "Fresh formal profile is saved only inside the isolated test directory"):
+		await finish()
+		return
+	if not accepted(arena.craft_normal_map("old_garden", 1, [], [], arena.map_draft().revision), "Prepare ordinary tier I old_garden through Main API"):
+		await finish()
+		return
+	if not accepted(arena.start_map(arena.map_draft().revision), "Enter exactly one formal map through Main API"):
+		await finish()
+		return
+	pause_main()
+	var records: Array = arena.map_spawn_records()
+	var lawful_roots := arena.enemies.size() == 25 and records.size() == 25 and arena.world_context().initial_monsters == 25
+	var seen: Dictionary = {}
+	for record: Dictionary in records:
+		var found := false
+		for enemy: Dictionary in arena.enemies:
+			if int(enemy.id) != int(record.actor_id): continue
+			found = enemy.id == record.root_id and enemy.root_id == record.root_id and enemy.generation == 0 \
+				and enemy.reward_eligible and enemy.pos == record.position and enemy.map_spawn_key == record.spawn_key \
+				and enemy.template_id == record.template_id and record.reward_route == "standard" \
+				and arena._geometry.is_clear(enemy.pos, enemy.radius) and not seen.has(record.spawn_key)
+			seen[record.spawn_key] = true
+		lawful_roots = lawful_roots and found
+	check(lawful_roots and arena.ARENA.size == Vector2(3600, 2400) and arena.world_geometry().bounds == arena.ARENA,
+		"All 25 original root IDs, authored positions and standard spawn records occupy authoritative map geometry")
+	var layer: Node2D = arena.retained_actors
+	layer.sync(arena)
+	var hero: Node2D = layer._hero
+	if not check(is_instance_valid(hero) and hero.position == arena.player_pos and hero.get_parent() == arena.world_depth
+		and arena.world_depth == layer and layer._actors.size() == 25 and layer._hero_presentation.is_empty(),
+		"Real Main has one legacy hero and 25 retained root identities in shared WorldDepth"):
+		await finish()
+		return
+	var original_ids: Dictionary = identities(layer)
+	var before: PackedByteArray = authority()
+	var disk_before: PackedByteArray = save_bytes()
+	var camera: Camera2D = arena.get_node("WorldCamera")
+	var camera_position: Vector2 = camera.position
+	var camera_zoom: Vector2 = camera.zoom
+	var legacy: Dictionary = Catalog.resource("hero").duplicate(true)
+	var legacy_bounds: Rect2 = layer.hero_presentation_bounds()
+	var motion_before: bool = arena.visual_settings.motion
+	if not accepted(layer.set_hero_presentation(definition), "Select the static direction study on the already loaded map"):
+		await finish()
+		return
+	layer.sync(arena)
+	check(identities(layer) == original_ids and hero.atlas.get("custom_presentation", false)
+		and hero.atlas.texture.resource_path == pristine.texture_path and hero._hero_presentation == layer._hero_presentation,
+		"Study replaces presentation on the same hero, body, limbs and enemy nodes")
+	var study_bounds: Rect2 = layer.hero_presentation_bounds()
+	var shadow_half := Vector2(pristine.contact_shadow_half_size_world[0], pristine.contact_shadow_half_size_world[1])
+	var foot: Vector2 = Catalog.presentation_foot(hero.atlas, hero.frame)
+	var source: Rect2 = Catalog.presentation_source_rect(hero.atlas, hero.frame)
+	var scale_value: float = pristine.world_units_per_source_pixel
+	var destination := Rect2(-foot * scale_value, source.size * scale_value)
+	check(hero.visual_bounds() == study_bounds and study_bounds.encloses(Rect2(-shadow_half, shadow_half * 2.0))
+		and hero.atlas.contact_shadow_half_size == shadow_half and (destination.position + foot * scale_value).is_zero_approx()
+		and hero.to_global(Vector2.ZERO).is_equal_approx(arena.to_global(arena.player_pos))
+		and hero.scale == Vector2.ONE and hero.body.transform == Transform2D.IDENTITY and hero.limbs.transform == Transform2D.IDENTITY
+		and layer.scale == Vector2.ONE and arena.scale == Vector2.ONE,
+		"Study bounds include contact shadow, source foot lands on the unchanged world root and no node applies another scale")
+	var prepared_before: Dictionary = layer._hero_presentation.duplicate(true)
+	definition.frames[0].foot[0] = 1
+	definition.frames[0].region[2] = 1
+	definition.clips.idle[0] = 99
+	definition.contact_shadow_half_size_world[0] = 0
+	definition.world_units_per_source_pixel = 8.0
+	definition.provenance["mutated_input"] = true
+	check(layer._hero_presentation == prepared_before and hero.atlas == prepared_before and layer.hero_presentation_bounds() == study_bounds,
+		"Mutating caller JSON arrays and dictionaries cannot change the prepared instance presentation")
+	var invalid: Dictionary = pristine.duplicate(true)
+	invalid.world_units_per_source_pixel = 0.0
+	var presentation_before: Array = presentation_state(layer, hero)
+	var rejected: Dictionary = layer.set_hero_presentation(invalid)
+	check(not rejected.ok and not str(rejected.error_code).is_empty() and not str(rejected.reason).is_empty()
+		and presentation_state(layer, hero) == presentation_before and authority() == before and save_bytes() == disk_before,
+		"Invalid definition rejects atomically without replacing references, pose, bounds, redraw state, model or save")
+	var projected_sizes: Array[Vector2] = []
+	var zoom_ok := true
+	for zoom_value: float in [0.65, 1.3]:
+		camera.zoom = Vector2.ONE * zoom_value
+		camera.force_update_scroll()
+		layer.sync(arena)
+		var canvas: Transform2D = hero.body.get_global_transform_with_canvas()
+		var projected := Vector2((canvas * Vector2(destination.size.x, 0) - canvas * Vector2.ZERO).length(),
+			(canvas * Vector2(0, destination.size.y) - canvas * Vector2.ZERO).length())
+		projected_sizes.append(projected)
+		zoom_ok = zoom_ok and projected.is_equal_approx(destination.size * zoom_value) \
+			and float(hero.atlas.display_scale) == scale_value and hero.visual_bounds() == study_bounds \
+			and hero.position == arena.player_pos and hero.scale == Vector2.ONE and hero.body.scale == Vector2.ONE
+	restore_camera(camera, camera_position, camera_zoom)
+	layer.sync(arena)
+	check(zoom_ok and projected_sizes[1].is_equal_approx(projected_sizes[0] * 2.0)
+		and camera.position == camera_position and camera.zoom == camera_zoom,
+		"Actual camera zoom 0.65 to 1.3 doubles projection exactly once and restores the original camera")
+	# Exercise pose selection without moving Main's player or issuing gameplay attacks.
+	arena.visual_settings.motion = true
+	hero.position = Vector2(arena.player_pos) - Vector2.RIGHT
+	hero.configure_hero(arena, layer._visual_time + 0.1)
+	var walk_static: bool = hero.animation == "walk" and hero.frame == Catalog.presentation_frame(hero.atlas, hero.direction, "idle", 0.0)
+	hero.configure_hero(arena, layer._visual_time + 0.2, {"id": 1000001, "direction": Vector2.UP})
+	var attack_static: bool = hero.animation == "attack" and hero.direction == 6 and hero.frame == 6
+	for step: int in range(6): hero.configure_hero(arena, layer._visual_time + 0.3 + step * 0.1)
+	check(walk_static and attack_static and hero.frame == 6 and hero.atlas.frames_per_direction == 1
+		and not hero.atlas.clips.has("walk") and not hero.atlas.clips.has("attack"),
+		"Walk and attack requests use one static idle image per direction; the study supplies no animation clips")
+	arena.visual_settings.motion = false
+	hero.configure_hero(arena, layer._visual_time + 1.0, {"id": 1000002, "direction": Vector2.LEFT})
+	var still_frame: int = hero.frame
+	for step: int in range(4): hero.configure_hero(arena, layer._visual_time + 2.0 + step)
+	check(still_frame == 4 and hero.frame == still_frame and hero.pose_time == 0.0,
+		"Motion off selects the directional idle frame and remains static as presentation time advances")
+	arena.visual_settings.motion = motion_before
+	var independent: Node2D = Layer.new()
+	check(independent._hero_presentation.is_empty() and independent.hero_presentation_bounds() == legacy_bounds
+		and Catalog.resource("hero") == legacy, "Override is instance-local and cannot replace the shared legacy catalog")
+	independent.free()
+	for unused: int in range(4): layer.advance(0.1); layer.sync(arena)
+	check(authority() == before and save_bytes() == disk_before and identities(layer) == original_ids,
+		"Study updates leave game state, IDs, positions, spawn records, geometry, RNG and save bytes unchanged")
+	var cleared: Dictionary = layer.set_hero_presentation({})
+	layer.sync(arena)
+	check(cleared.ok and layer._hero_presentation.is_empty() and hero._hero_presentation.is_empty()
+		and hero.atlas == legacy and layer.hero_presentation_bounds() == legacy_bounds
+		and identities(layer) == original_ids and authority() == before and save_bytes() == disk_before,
+		"Explicit clear restores legacy on the same loaded Main and all the same nodes with no authoritative change")
+	if check(separate_bounds(camera, legacy_bounds, study_bounds), "Real camera can isolate study bounds from the legacy silhouette"):
+		var configure_before: int = hero.configure_count
+		layer.sync(arena)
+		check(not hero.visible and hero.configure_count == configure_before, "Legacy silhouette outside the view skips configuration")
+		var selected: Dictionary = layer.set_hero_presentation(pristine)
+		layer.sync(arena)
+		check(selected.ok and hero.visible and hero.configure_count == configure_before + 1 and identities(layer) == original_ids,
+			"Culling uses newly selected study bounds before configuration and reveals the existing hero")
+	camera.position += Vector2(10000, 10000)
+	camera.force_update_scroll()
+	layer.sync(arena)
+	var hidden_configure: int = hero.configure_count
+	var hidden_clear: Dictionary = layer.set_hero_presentation({})
+	layer.sync(arena)
+	check(hidden_clear.ok and not hero.visible and hero.configure_count == hidden_configure
+		and layer._hero_presentation.is_empty() and hero._hero_presentation.is_empty() and hero.atlas == legacy,
+		"Hidden clear immediately releases custom references without waiting for configuration or camera re-entry")
+	var hidden_select: Dictionary = layer.set_hero_presentation(pristine)
+	layer.sync(arena)
+	var selected_while_hidden: bool = (hidden_select.ok and not hero.visible and hero.configure_count == hidden_configure
+		and hero.atlas.get("custom_presentation", false))
+	restore_camera(camera, camera_position, camera_zoom)
+	layer.sync(arena)
+	check(selected_while_hidden and hero.visible and hero.position == arena.player_pos and identities(layer) == original_ids,
+		"Hidden study replacement appears on camera return with the original hero and world foot")
+	check(arena.get_instance_id() == main_id and authority() == before and save_bytes() == disk_before
+		and camera.position == camera_position and camera.zoom == camera_zoom,
+		"All switching and culling probes preserve the same map, player, geometry, roster, gameplay, RNG, save and restored camera")
+	var previous_hero: WeakRef = weakref(hero)
+	if not accepted(arena.return_to_town(arena.world_context().revision), "Actual formal town return clears the map through Main API"):
+		await finish()
+		return
+	pause_main()
+	check(layer._hero_presentation.is_empty() and layer._actors.is_empty() and arena.enemies.is_empty()
+		and arena.map_spawn_records().is_empty() and arena.world_context().normal_town,
+		"Map reset releases the layer's temporary selection together with the departed roster")
+	layer.sync(arena)
+	await process_frame
+	await process_frame
+	check(previous_hero.get_ref() == null and layer._hero._hero_presentation.is_empty() and layer._hero.atlas == legacy
+		and layer.hero_presentation_bounds() == legacy_bounds and arena.get_instance_id() == main_id
+		and not FileAccess.file_exists(arena.TOWN_TEST_BUILD_PATH),
+		"Town rebuild releases the old custom hero and uses legacy without creating a test profile or another Main")
+	await finish()
+
+func finish() -> void:
+	if is_instance_valid(arena):
+		arena.queue_free()
+		await process_frame
+		await process_frame
+	print("PRESENTATION_ADAPTER_MAIN checks=%d failures=%d maps=1 combat_ticks=0" % [checks, failures])
+	quit(1 if failures else 0)

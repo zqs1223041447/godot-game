@@ -1,0 +1,13 @@
+# v110 focused presentation adapter evidence
+
+Base: `e2fa6db67fb9c4c7f201c795df12bdeb9b699832`. Independent study branch only; Main is not updated or made to select the study by default.
+
+- One initial Godot 4.6.3 editor import passed, exit 0, no script errors. New PNG is original v109 bytes, full atlas resolution with mipmaps
+- Resource contract first run: 314 checks, 8 repeated contact-bound containment failures. The remaining 306 checks passed, including static idle fallback, input isolation, invalid definitions, real legacy atlas clip comparison and original draw sampling
+- The failure was a real conservative-bound arithmetic edge: Rect2 stores float32 and union produced end.y=9.230766 while shadow end.y=9.230769. The new custom bound now includes a filtering fringe of one source pixel, minimum one world unit. Only the affected normalization/containment group was rerun: 10 checks, 0 failures, exit 0. Original source, failed output, report and numerical probe are retained; these counts are not additive full-suite runs
+- Actual Main first startup failed at parse time because a test-local boolean used inference from dynamic properties; no checks ran. The test-local explicit bool annotation fixed it. The first effective execution passed 27 checks, exit 0: one lawful old_garden map, 25 original roots, no combat ticks; same hero/body/limbs and enemy identities, exact game/model/map/spawn/collision/RNG/save byte preservation across swaps, actual camera zoom 0.65/1.3, hidden selection/culling and formal return cleanup
+- Read-only review found a presentation transition edge: a previous clip countdown could survive a resource change. The setter now starts visual idle and clears its four pose/timer fields while preserving facing and observed attack IDs. Only that transition group was tested afterwards: 9 checks, 0 failures, including motion-disabled return to legacy. Main's 27 checks were not repeated
+
+The 27/74 tests from the standalone v109 scene were not rerun and are not counted here. The existing game's full actor, combat, map, save and reference suites were not rerun. No performance or rendered-art acceptance is claimed. Main's authoritative code, all rules, WorldView and map generation files remain byte-identical to the base; the source-scope record lists exact hashes.
+
+New resource and command caches are presentation-only and instance-local. Invalid definitions reject before replacing anything. Clearing releases the selection and contact override; the source atlas is never added to the permanent catalog cache. Body culling uses the selected bounds before configuration, and default legacy resources keep their original atlas and frame rules.

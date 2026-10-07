@@ -10,6 +10,8 @@ var _hero: Node2D
 var _visual_time := 0.0
 var synchronization_count := 0
 var measured_sync_usec := 0
+var _hero_presentation: Dictionary = {}
+var _hero_presentation_revision := 0
 
 func _init() -> void:
 	y_sort_enabled = true
@@ -17,6 +19,23 @@ func _init() -> void:
 
 func advance(delta: float) -> void:
 	if is_finite(delta) and delta > 0.0: _visual_time += delta
+
+func set_hero_presentation(definition: Dictionary) -> Dictionary:
+	# Optional runtime presentation, never persisted or used by game rules.
+	var entry: Dictionary = {}
+	if not definition.is_empty():
+		var prepared: Dictionary = Catalog.prepare_presentation(definition)
+		if not bool(prepared.ok):
+			return {"ok": false, "error_code": prepared.error_code, "reason": prepared.reason}
+		entry = prepared.entry
+	_hero_presentation = entry
+	_hero_presentation_revision += 1
+	if is_instance_valid(_hero):
+		_hero.set_hero_presentation(_hero_presentation, _hero_presentation_revision)
+	return {"ok": true, "error_code": "", "reason": ""}
+
+func hero_presentation_bounds() -> Rect2:
+	return _hero_presentation.visual_bounds if not _hero_presentation.is_empty() else Catalog.hero_visual_bounds()
 
 static func _visibility_frame(arena: Node2D) -> Dictionary:
 	var viewport_rect: Rect2 = arena.get_viewport_rect()
@@ -65,7 +84,8 @@ func sync(arena: Node2D) -> void:
 	if arena.get("player_facing") is Vector2:
 		if not is_instance_valid(_hero):
 			_hero = Actor.new(); _hero.name = "Hero"; add_child(_hero)
-		_hero.visible = _bounds_visible(arena.player_pos, Catalog.hero_visual_bounds(), frame)
+			if not _hero_presentation.is_empty(): _hero.set_hero_presentation(_hero_presentation, _hero_presentation_revision)
+		_hero.visible = _bounds_visible(arena.player_pos, hero_presentation_bounds(), frame)
 		if _hero.visible:
 			var cue: Dictionary = {}
 			var runtime: Variant = arena.get("visual_cues")
@@ -81,6 +101,8 @@ func clear() -> void:
 	_actors.clear()
 	if is_instance_valid(_hero): remove_child(_hero); _hero.queue_free()
 	_hero = null
+	_hero_presentation = {}
+	_hero_presentation_revision = 0
 	_visual_time = 0.0
 
 func diagnostics() -> Dictionary:

@@ -32,9 +32,13 @@ class Part extends Node2D:
 				Art.draw_enemy_limbs(self, actor.enemy, actor.preferences, actor.pose_time)
 		elif not actor.atlas.is_empty():
 			var scale_value: float = actor.atlas.display_scale
-			var destination := Rect2(-Vector2(actor.atlas.foot_anchor) * scale_value, Vector2(Catalog.FRAME_SIZE) * scale_value)
+			var source_rect: Rect2 = Catalog.frame_rect(actor.frame)
+			var destination := Rect2(-Vector2(actor.atlas.get("foot_anchor", Vector2.ZERO)) * scale_value, Vector2(Catalog.FRAME_SIZE) * scale_value)
+			if actor.is_hero and not actor._hero_presentation.is_empty():
+				source_rect = Catalog.presentation_source_rect(actor.atlas, actor.frame)
+				destination = Rect2(-Catalog.presentation_foot(actor.atlas, actor.frame) * scale_value, source_rect.size * scale_value)
 			var tint := Color(1.22, 1.13, 1.02) if actor.hurt else Color.WHITE
-			draw_texture_rect_region(actor.atlas.texture, destination, Catalog.frame_rect(actor.frame), tint)
+			draw_texture_rect_region(actor.atlas.texture, destination, source_rect, tint)
 			if actor.is_hero: _draw_hero_wards()
 		elif actor.is_hero:
 			Art.draw_player(self, actor.preferences)
@@ -79,6 +83,8 @@ var _attack_left := 0.0
 var _body_key: Array = []
 var _limb_key: Array = []
 var _shadow_key: Array = []
+var _hero_presentation: Dictionary = {}
+var _presentation_revision := 0
 
 func _init() -> void:
 	y_sort_enabled = false
@@ -106,9 +112,22 @@ func configure_enemy(value: Dictionary, settings: VisualSettings, time: float, p
 	_update_pose(next_position, displacement, time, attacking, attack_direction)
 	_refresh_commands()
 
+func set_hero_presentation(entry: Dictionary, revision: int) -> void:
+	# Called only by the owning retained layer after full resource validation.
+	# Release the old entry immediately, including while the hero is offscreen.
+	_hero_presentation = entry
+	_presentation_revision = revision
+	# A resource change starts its own visual idle pose; no previous clip timer
+	# or contact commands survive. Observed gameplay attack IDs stay untouched.
+	animation = "idle"; animation_time = 0.0; pose_time = 0.0; _attack_left = 0.0
+	atlas = entry if not entry.is_empty() else Catalog.resource("hero")
+	frame = Catalog.presentation_frame(atlas, direction, animation, animation_time, preferences.motion if preferences != null else false) if not entry.is_empty() else Catalog.frame_index(direction, animation, animation_time, preferences.motion if preferences != null else false)
+	_body_key.clear(); _shadow_key.clear()
+	body.invalidate(); queue_redraw()
+
 func configure_hero(arena: Node2D, time: float, attack_cue: Dictionary = {}) -> void:
 	is_hero = true; source = arena; preferences = arena.visual_settings; frozen = false
-	atlas = Catalog.resource("hero")
+	atlas = _hero_presentation if not _hero_presentation.is_empty() else Catalog.resource("hero")
 	var next_position: Vector2 = arena.player_pos
 	var displacement := next_position - position if _configured else Vector2.ZERO
 	var timer := float(arena.get("attack_timer")) if arena.get("attack_timer") != null else 0.0
@@ -136,6 +155,9 @@ func _update_pose(next_position: Vector2, displacement: Vector2, time: float, at
 		if not displacement.is_zero_approx(): facing = displacement.normalized()
 		if attacking:
 			_attack_left = 6.0 / Catalog.FPS
+			if not _hero_presentation.is_empty():
+				var clip: Vector2i = atlas.clips.get("attack", atlas.clips.idle)
+				_attack_left = float(clip.y) / float(atlas.fps)
 			if not attack_direction.is_zero_approx(): facing = attack_direction.normalized()
 		direction = Catalog.direction_index(facing, direction)
 		var next_animation := "attack" if _attack_left > 0.0 else "walk" if displacement.length_squared() > 0.00001 else "idle"
@@ -144,20 +166,22 @@ func _update_pose(next_position: Vector2, displacement: Vector2, time: float, at
 		elif preferences.motion: animation_time += delta
 		_attack_left = maxf(0.0, _attack_left - delta)
 	if not preferences.motion:
-		frame = Catalog.frame_index(direction, "idle", 0.0, false)
+		frame = Catalog.presentation_frame(atlas, direction, "idle", 0.0, false) if not _hero_presentation.is_empty() else Catalog.frame_index(direction, "idle", 0.0, false)
 		pose_time = 0.0
 	elif not frozen or not _configured:
-		frame = Catalog.frame_index(direction, animation, animation_time)
+		frame = Catalog.presentation_frame(atlas, direction, animation, animation_time) if not _hero_presentation.is_empty() else Catalog.frame_index(direction, animation, animation_time)
 		pose_time = floorf(animation_time * Catalog.FPS) / Catalog.FPS
 	_configured = true
 
 func _refresh_commands() -> void:
 	var radius := float(enemy.get("radius", 14.0))
 	var shadow_key: Array = [radius, is_hero, atlas.is_empty()]
+	if not _hero_presentation.is_empty(): shadow_key.append(_presentation_revision)
 	if shadow_key != _shadow_key:
 		_shadow_key = shadow_key; shadow_redraw_requests += 1; queue_redraw()
 	var body_key: Array = [is_hero, atlas.is_empty(), radius, int(enemy.get("kind", -1)), str(enemy.get("template_id", "")), str(enemy.get("rarity", "")), hurt]
 	if not atlas.is_empty(): body_key.append(frame)
+	if not _hero_presentation.is_empty(): body_key.append(_presentation_revision)
 	if is_hero:
 		body_key.append_array([source.shield, source.invulnerable > 0.0, source.alive])
 		if atlas.is_empty(): body_key.append_array([direction, pose_time, source.state.equipped.duplicate()])
@@ -169,15 +193,19 @@ func _refresh_commands() -> void:
 		_limb_key = limb_key; limbs.invalidate()
 
 func head_anchor() -> Vector2:
+	if is_hero and not _hero_presentation.is_empty(): return atlas.head_anchor
 	return Catalog.hero_head_anchor() if is_hero else Catalog.enemy_head_anchor(enemy)
 
 func visual_bounds() -> Rect2:
+	if is_hero and not _hero_presentation.is_empty(): return atlas.visual_bounds
 	return Catalog.hero_visual_bounds() if is_hero else Catalog.enemy_visual_bounds(enemy)
 
 func _draw() -> void:
 	if preferences == null or (is_hero and atlas.is_empty()): return
 	var began: int = Time.get_ticks_usec() if Visuals.diagnostic_profile_enabled else 0
 	var size := Vector2(21, 7) if is_hero else Catalog.shadow_bounds(enemy).size * 0.5
+	if is_hero and not _hero_presentation.is_empty(): size = atlas.contact_shadow_half_size
+	if size.x <= 0.0 or size.y <= 0.0: return
 	# Soft concentric ellipses are static commands, shared in shape and palette.
 	Art._shadow(self, Vector2.ZERO, size)
 	Art._shadow(self, Vector2.ZERO, size * 0.72)

@@ -209,10 +209,6 @@ static func prepare_presentation(definition: Dictionary) -> Dictionary:
 	var shadow := Rect2(-shadow_half_size, shadow_half_size * 2.0)
 	var visual_bounds := occupied_bounds.merge(shadow) if has_occupied_bounds else shadow
 	visual_bounds = visual_bounds.merge(HERO_WARD_BOUNDS)
-	# Include one source-pixel filtering fringe (at least one world unit).
-	# Rect2 stores float32 components; repeated unions can otherwise round an
-	# inclusive shadow edge inward by a few millionths of a world unit.
-	visual_bounds = visual_bounds.grow(maxf(1.0, display_scale))
 	if not _presentation_finite_rect(visual_bounds):
 		return _presentation_error("invalid_scale", "Presentation scale produces non-finite world bounds.")
 	return {"ok": true, "error_code": "", "reason": "", "entry": {
