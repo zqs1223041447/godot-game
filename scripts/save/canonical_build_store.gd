@@ -15,6 +15,7 @@ const EmberGemMigration = preload("res://scripts/save/ember_gem_migration.gd")
 const ThirdMapMigration = preload("res://scripts/save/third_map_migration.gd")
 const FourthMapMigration = preload("res://scripts/save/fourth_map_migration.gd")
 const ChaosResistanceAffixMigration = preload("res://scripts/save/chaos_resistance_affix_migration.gd")
+const EncirclingCleaveGemMigration = preload("res://scripts/save/encircling_cleave_gem_migration.gd")
 const ShockGemMigration = preload("res://scripts/save/shock_gem_migration.gd")
 const FireDotMigration = preload("res://scripts/save/fire_dot_migration.gd")
 const FasterBurnMigration = preload("res://scripts/save/faster_burn_migration.gd")
@@ -94,8 +95,9 @@ func _init() -> void:
 	var source_v48: Dictionary = ElementalConversionMigration.migrate_v47(source_v47, _talent_validator, _socket_ids)
 	var source_v49: Dictionary = ColdAilmentDurationMigration.migrate_v48(source_v48, _talent_validator, _socket_ids)
 	var source_v50: Dictionary = FourthMapMigration.migrate_v49(source_v49, _talent_validator, _socket_ids)
-	_current = ChaosResistanceAffixMigration.migrate_v50(source_v50, _talent_validator, _socket_ids)
-	assert(not _current.is_empty() and Rules.reason(_current).is_empty(), "The built-in canonical fixture must migrate to v51")
+	var source_v51: Dictionary = ChaosResistanceAffixMigration.migrate_v50(source_v50, _talent_validator, _socket_ids)
+	_current = EncirclingCleaveGemMigration.migrate_v51(source_v51, _talent_validator, _socket_ids)
+	assert(not _current.is_empty() and Rules.reason(_current).is_empty(), "The built-in canonical fixture must migrate to v52")
 	_current.migration_ledger.from_version = 0
 
 
@@ -159,7 +161,9 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	var old_version := int(raw.version)
 	if old_version > Rules.VERSION: return _reject(path, "存档属于未来版本，已保护原文件")
 	var candidate: Dictionary = {}
-	if old_version == Rules.V50_VERSION:
+	if old_version == Rules.V51_VERSION:
+		candidate = Rules.decode_v51(raw)
+	elif old_version == Rules.V50_VERSION:
 		candidate = Rules.decode_v50(raw)
 	elif old_version == Rules.V49_VERSION:
 		candidate = Rules.decode_v49(raw)
@@ -332,8 +336,10 @@ func load_build(path: String = "user://build_save.json") -> bool:
 		candidate = ColdAilmentDurationMigration.migrate_v48(candidate, _talent_validator, _socket_ids)
 	if old_version < Rules.V50_VERSION:
 		candidate = FourthMapMigration.migrate_v49(candidate, _talent_validator, _socket_ids)
-	if old_version < Rules.VERSION:
+	if old_version < Rules.V51_VERSION:
 		candidate = ChaosResistanceAffixMigration.migrate_v50(candidate, _talent_validator, _socket_ids)
+	if old_version < Rules.VERSION:
+		candidate = EncirclingCleaveGemMigration.migrate_v51(candidate, _talent_validator, _socket_ids)
 	var reason: String = Rules.reason(candidate, _talent_validator, _socket_ids)
 	if not reason.is_empty(): return _reject(path, reason)
 	var loaded_revision: int = int(candidate.revision)

@@ -143,8 +143,9 @@ static func details(cast: Dictionary) -> String:
 		lines.append("每枚投射物穿透 %d 次，最多命中 %d 次；去返共享剩余次数，同相位同目标至多命中一次。" % [pierce, pierce + 1])
 	if cast.skill_id in ["nova", "meteor", "cleave"] and cast.recipe.has("radius"):
 		var base_radius: float = float(cast.recipe.get("base_radius", cast.recipe.radius))
-		lines.append("%s范围：半径 %.2f → %.2f；面积 ×%.4f，半径 ×%.4f（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。" % ["扇形" if cast.skill_id == "cleave" else "圆形", base_radius, float(cast.recipe.radius), float(cast.recipe.get("area_multiplier", 1.0)), float(cast.recipe.radius) / base_radius])
+		lines.append("%s范围：半径 %.2f → %.2f；面积 ×%.4f，半径 ×%.4f（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。" % ["周身" if bool(cast.get("encircling_cleave_profile", {}).get("enabled", false)) else "扇形" if cast.skill_id == "cleave" else "圆形", base_radius, float(cast.recipe.radius), float(cast.recipe.get("area_multiplier", 1.0)), float(cast.recipe.radius) / base_radius])
 	if cast.skill_id == "cleave":
+		lines.append_array(encircling_cleave_lines(cast))
 		lines.append("近身扇区 %.0f 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。" % rad_to_deg(float(cast.recipe.half_angle)*2.0))
 	if cast.skill_id == "chain" and cast.recipe.has("hit"):
 		lines.append("连锁最多 %d 个目标（含首个）；首段 %.2f，续跳 %.2f。已命中过的目标不重复，每个目标沿原配方递减基础倍率和附加效用。" % [int(cast.recipe.hit.bounce_count), float(cast.recipe.first_range), float(cast.recipe.followup_range)])
@@ -274,3 +275,12 @@ static func freeze_lines(cast: Dictionary) -> PackedStringArray:
 static func penetration_detail_lines(detail: Dictionary) -> PackedStringArray:
 	if not detail.has("penetration") or float(detail.penetration) <= 0.0: return PackedStringArray()
 	return PackedStringArray(["有效抗性 %.2f%% · 穿透 %.2f 个百分点 · 本次按 %.2f%% 结算" % [float(detail.effective_resistance)*100.0,float(detail.penetration)*100.0,float(detail.resistance)*100.0]])
+
+
+static func encircling_cleave_lines(cast: Dictionary) -> Array[String]:
+	var lines: Array[String] = []
+	var profile: Dictionary = cast.get("encircling_cleave_profile", {})
+	if not bool(profile.get("enabled", false)): return lines
+	lines.append("环斩覆盖 %.0f 度；命中伤害额外降低 %.0f%%，魔力消耗倍率 %.0f%%。" % [float(profile.arc_degrees), (1.0-float(profile.hit_multiplier))*100.0, float(profile.mana_multiplier)*100.0])
+	lines.append("角度扩大不增加半径；上方面积倍率仅指范围词缀，每个目标最多命中一次。")
+	return lines

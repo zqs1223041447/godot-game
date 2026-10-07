@@ -48,7 +48,8 @@ const V47_VERSION := 47
 const V48_VERSION := 48
 const V49_VERSION := 49
 const V50_VERSION := 50
-const VERSION := 51
+const V51_VERSION := 51
+const VERSION := 52
 const LEGACY_MAX_ITEMS := 1024
 const V17_MAX_ITEMS := LEGACY_MAX_ITEMS + 1
 const MAX_ITEMS := V17_MAX_ITEMS + 2 # Two once-only migration bottles; bag capacity is unchanged.
@@ -89,6 +90,13 @@ static func decode_v28(raw: Variant) -> Dictionary:
 
 static func decode_v29(raw: Variant) -> Dictionary:
 	return _decode(raw, true, V29_VERSION, true)
+
+
+## Freeze every schema51 field: source policy49, equipment51 and chaos patrol.
+## New gem definitions remain unavailable in a file claiming this older schema.
+static func decode_v51(raw: Variant) -> Dictionary:
+	var decoded := _decode(raw, true, V51_VERSION, true)
+	return decoded if reason_v51(decoded).is_empty() else {}
 
 
 ## Freeze complete schema50: source policy49, equipment46 and all four maps.
@@ -280,7 +288,7 @@ static func _decode(raw: Variant, paged: bool, expected_version: int, allow_curr
 		if item.is_empty(): return {}
 		# A current item decoder may know later affixes. Opening an old envelope
 		# must still prove its payload belongs to that envelope's vocabulary.
-		if expected_version < Equipment.CURRENT_VOCABULARY and item.kind == "equipment" and not item.payload.is_empty() \
+		if equipment_vocabulary_for_save_version(expected_version) < Equipment.CURRENT_VOCABULARY and item.kind == "equipment" and not item.payload.is_empty() \
 				and not Equipment.validate_instance_for_version(item.payload, equipment_vocabulary_for_save_version(expected_version)): return {}
 		if item.kind=="flask" and expected_version<18:return {}
 		if item.kind in ["skill_gem","support_gem"] and Items.Gems.minimum_save_version(item.definition_id)>expected_version: return {}
@@ -342,6 +350,13 @@ static func reason_v28(value: Variant, validate_talents: Callable = Callable(), 
 
 static func reason_v29(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
 	return _reason(value, V29_VERSION, true, true, MAX_ITEMS, validate_talents, socket_ids)
+
+
+static func reason_v51(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
+	# Complete frozen legality precedes callbacks and current metadata cache hits.
+	var native_reason := _reason(value, V51_VERSION, true, true, MAX_ITEMS, Callable(), socket_ids)
+	if not native_reason.is_empty(): return native_reason
+	return str(validate_talents.call(value)) if validate_talents.is_valid() else ""
 
 
 static func reason_v50(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
@@ -539,7 +554,7 @@ static func _reason(value: Variant, expected_version: int, paged: bool, allow_cu
 			if item is Dictionary and item.get("kind", "") == "currency": return "旧版本不能包含货币物品"
 	# Older envelopes need a frozen vocabulary check before current metadata can
 	# accept them. Current saves retain the complete typed positive-cache path.
-	if expected_version < Equipment.CURRENT_VOCABULARY:
+	if equipment_vocabulary_for_save_version(expected_version) < Equipment.CURRENT_VOCABULARY:
 		for item: Variant in value.items.values():
 			if item is Dictionary and item.get("kind", "") == "equipment" \
 					and item.get("payload") is Dictionary and not item.payload.is_empty() \
@@ -593,9 +608,10 @@ static func _reason(value: Variant, expected_version: int, paged: bool, allow_cu
 	return str(validate_talents.call(value)) if validate_talents.is_valid() else SourceTree.reason(value)
 
 
-## Source-only schemas35/36/38/40/41/44/45/48/49, gem-only42/43/47 and map-only50 define no equipment vocabularies.
+## Source-only schemas35/36/38/40/41/44/45/48/49, gem-only42/43/47/52 and map-only50 define no equipment vocabularies.
 ## Keep save-to-equipment mapping explicit and the Catalog API historically strict.
 static func equipment_vocabulary_for_save_version(save_version: int) -> int:
+	if save_version == 52: return 51
 	if save_version >= 51: return 51
 	if save_version >= 46: return 46
 	if save_version >= V39_VERSION: return 39

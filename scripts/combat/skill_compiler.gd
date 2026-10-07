@@ -7,6 +7,7 @@ const Supports = preload("res://scripts/combat/support_registry.gd")
 const Extension = preload("res://scripts/combat/projectile_support_rules.gd")
 const Ambush = preload("res://scripts/combat/ambush_support_rules.gd")
 const InwardPull = preload("res://scripts/combat/inward_pull_support_rules.gd")
+const EncirclingCleave = preload("res://scripts/combat/encircling_cleave_support_rules.gd")
 const Area = preload("res://scripts/combat/area_support_rules.gd")
 const Critical=preload("res://scripts/combat/critical_strike_rules.gd")
 const Resolute = preload("res://scripts/combat/resolute_technique_rules.gd")
@@ -121,6 +122,8 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 		if skill_id == "cleave":
 			if not _number(skill.get("half_angle")) or float(skill.half_angle) <= 0.0 or float(skill.half_angle) > PI: return _failure("近战扇区角度无效")
 			recipe.half_angle = float(skill.half_angle)
+			if canonical.has("encircling_cleave"):
+				recipe.half_angle = deg_to_rad(float(EncirclingCleave.POLICY.arc_degrees) / 2.0)
 		compiled_snapshot.modifiers.append_array(area.modifiers)
 		mana *= float(area.mana_multiplier)
 	var program: Dictionary = Supports.compile_programs(skill_id, canonical, slot_limit)
@@ -238,6 +241,10 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 		impulse_profile.merge(InwardPull.POLICY.duplicate(true))
 		compiled_snapshot.area_impulse_policy = impulse_profile.duplicate(true)
 		result.area_impulse_profile = impulse_profile
+	if canonical.has("encircling_cleave"):
+		var profile: Dictionary = EncirclingCleave.POLICY.duplicate(true)
+		profile.radius = float(recipe.radius)
+		result.encircling_cleave_profile = profile
 	_append_conversion_profile(result, packets, compiled_snapshot)
 	_append_penetration_profile(result, packets, compiled_snapshot)
 	var hit_policy: Dictionary = Resolute.compiled_profile(compiled_snapshot)
@@ -355,6 +362,8 @@ static func _failure(error: String) -> Dictionary:
 
 
 static func _snapshot_error(snapshot: Dictionary) -> String:
+	if snapshot.has("encircling_cleave_profile"):
+		return "施放快照已编译；必须从基础构筑快照重新编译"
 	# initial_count is reserved for compiled projectile snapshots, including empty supports.
 	# Reject re-entry instead of applying support more factors a second time.
 	if snapshot.has("initial_count") or snapshot.has("compiled_packets") or snapshot.has("compiled_skill_id") or snapshot.has("critical") or snapshot.has("critical_roll") or snapshot.has("leech") or snapshot.has("burn_policy") or snapshot.has("burn_proliferation") or snapshot.has("shock_policy") or snapshot.has("hit_policy") or snapshot.has("area_impulse_policy") or snapshot.has("area_impulse_profile") or snapshot.has("conversion_profile") or snapshot.has("precise_technique_profile") or snapshot.has("freeze_policy") or snapshot.has("freeze_profile") or snapshot.has("penetration_profile"):

@@ -13,6 +13,7 @@ const Shock = preload("res://scripts/combat/shock_support_rules.gd")
 const Ambush = preload("res://scripts/combat/ambush_support_rules.gd")
 const InwardPull = preload("res://scripts/combat/inward_pull_support_rules.gd")
 const FrostLock = preload("res://scripts/combat/frost_lock_support_rules.gd")
+const EncirclingCleave = preload("res://scripts/combat/encircling_cleave_support_rules.gd")
 const Program = preload("res://scripts/combat/support_program.gd")
 const Data = preload("res://scripts/game_data.gd")
 const MAX_SUPPORTS: int = Legacy.MAX_SUPPORTS
@@ -22,9 +23,9 @@ const BATCH_SAVE_VERSION: int = 13
 static var SUPPORTS: Dictionary = _definitions()
 
 static func _providers() -> Array:
-	return [Legacy, Extension, Area, ResourceRules, ElementRules, DeliveryRules, Ignite, Ember, Shock, Ambush, InwardPull, FrostLock]
+	return [Legacy, Extension, Area, ResourceRules, ElementRules, DeliveryRules, Ignite, Ember, Shock, Ambush, InwardPull, FrostLock, EncirclingCleave]
 static func _program_providers() -> Array:
-	return [ResourceRules, ElementRules, DeliveryRules, Ignite, Ember, Shock, Ambush, InwardPull, FrostLock]
+	return [ResourceRules, ElementRules, DeliveryRules, Ignite, Ember, Shock, Ambush, InwardPull, FrostLock, EncirclingCleave]
 static func _definitions() -> Dictionary:
 	var result: Dictionary = {}
 	for provider: Variant in _providers():
@@ -103,7 +104,8 @@ static func saved_links_reason(skill_id: String, support_ids: Variant, save_vers
 	if not reason.is_empty(): return reason
 	for id: String in support_ids:
 		var minimum: int = 1
-		if FrostLock.SUPPORTS.has(id): minimum = FrostLock.SAVE_VERSION
+		if EncirclingCleave.SUPPORTS.has(id): minimum = EncirclingCleave.SAVE_VERSION
+		elif FrostLock.SUPPORTS.has(id): minimum = FrostLock.SAVE_VERSION
 		elif InwardPull.SUPPORTS.has(id): minimum = InwardPull.SAVE_VERSION
 		elif Ambush.SUPPORTS.has(id): minimum = Ambush.SAVE_VERSION
 		elif Shock.SUPPORTS.has(id): minimum = Shock.SAVE_VERSION
@@ -117,6 +119,7 @@ static func saved_links_reason(skill_id: String, support_ids: Variant, save_vers
 static func definition_error(value: Variant) -> String:
 	if value is Dictionary and value.has("family"):
 		match value.family:
+			"encircling_cleave": return EncirclingCleave.definition_error(value)
 			"frost_lock": return FrostLock.definition_error(value)
 			"inward_pull": return InwardPull.definition_error(value)
 			"ambush": return Ambush.definition_error(value)
