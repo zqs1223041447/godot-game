@@ -26,6 +26,7 @@ var _service_buttons: Dictionary = {}
 var _leave: Button
 var _test_enter: Button
 var _claim: Button
+var _reward_status: Label
 var _gem_dialog: ConfirmationDialog
 var _gem_pending: Dictionary = {}
 var _stock_model: RefCounted
@@ -75,11 +76,13 @@ func setup(value: Node) -> void:
 	scroll.add_child(_content)
 	_claim = Button.new()
 	_claim.text = "领取待领奖励"
-	_claim.pressed.connect(func():
-		_result(arena.claim_normal_rewards(int(arena.world_context().revision)))
-		refresh_world()
-		if not _service.is_empty(): _select(_service))
+	_claim.pressed.connect(_claim_rewards)
 	_body.add_child(_claim)
+	_reward_status = Label.new()
+	_reward_status.name = "RewardClaimStatus"
+	_reward_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_reward_status.add_theme_font_size_override("font_size", 13)
+	_body.add_child(_reward_status)
 	var routes := HBoxContainer.new()
 	_body.add_child(routes)
 	_leave = Button.new()
@@ -138,7 +141,12 @@ func refresh_world() -> void:
 		if _service_buttons[id].disabled: _service_buttons[id].tooltip_text = "免费供应仅在独立测试城镇开放。"
 	_claim.visible = not testing and _has_pending_rewards(context)
 	_claim.disabled = not bool(context.get("can_claim_normal_rewards", false))
-	_claim.tooltip_text = str(context.get("claim_reason", ""))
+	var pending_text := pending_reward_text(context)
+	_claim.tooltip_text = pending_text
+	if not str(context.get("claim_reason", "")).is_empty():
+		_claim.tooltip_text += ("\n" if not pending_text.is_empty() else "") + str(context.claim_reason)
+	_reward_status.text = pending_text
+	_reward_status.visible = not testing and not pending_text.is_empty()
 	if not testing and _service not in ["", "map_device", "crafter", "passive_reset", "skill_merchant"]:
 		_select("map_device")
 	_queue_stock_refresh()
@@ -373,6 +381,40 @@ func _craft_map() -> void:
 		result = arena.craft_normal_map(str(_map_select.get_selected_metadata()),int(_tier_select.get_selected_metadata()),normals,specials,int(arena.map_draft().revision))
 	_result(result)
 	if result.ok: _select("map_device")
+
+
+func _claim_rewards() -> void:
+	var result: Dictionary = arena.claim_normal_rewards(int(arena.world_context().revision))
+	# Results report committed quantities; current world context owns the remainder.
+	refresh_world()
+	if not _service.is_empty(): _select(_service)
+	var message := claim_reward_text(result, arena.world_context())
+	_reward_status.text = message
+	_reward_status.show()
+	feedback.emit(message)
+
+static func _reward_quantities(shards: int, gems: int, flasks: int) -> String:
+	var parts: Array[String] = []
+	if shards > 0: parts.append("校准碎片 ×%d" % shards)
+	if gems > 0: parts.append("宝石 ×%d" % gems)
+	if flasks > 0: parts.append("药剂 ×%d" % flasks)
+	return " · ".join(parts)
+
+static func pending_reward_text(context: Dictionary) -> String:
+	var map_reward: Dictionary = context.get("pending_map_reward", {})
+	var quantities := _reward_quantities(int(map_reward.get("shards", 0)), int(context.get("pending_gems", 0)), int(context.get("pending_flasks", 0)))
+	return "待领：" + quantities if not quantities.is_empty() else ""
+
+static func claim_reward_text(result: Dictionary, context: Dictionary) -> String:
+	var message: String
+	if bool(result.get("ok", false)):
+		var quantities := _reward_quantities(int(result.get("claimed_shards", 0)), int(result.get("claimed_gems", 0)), int(result.get("claimed_flasks", 0)))
+		message = "已领取：" + quantities if not quantities.is_empty() else "本次没有领取奖励"
+	else:
+		message = str(result.get("reason", "领取失败，请重试"))
+	var pending := pending_reward_text(context)
+	if not pending.is_empty(): message += "\n" + pending
+	return message
 
 func _result(result: Dictionary) -> void:
 	feedback.emit(str(result.get("reason","操作完成")) if not result.get("ok",false) else "操作完成")

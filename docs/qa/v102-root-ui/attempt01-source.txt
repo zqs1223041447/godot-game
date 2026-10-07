@@ -1,0 +1,29 @@
+extends SceneTree
+const Panel = preload("res://scripts/ui/town_service_panel.gd")
+var checks := 0
+var failures := 0
+func expect(value: bool, label: String) -> void:
+	checks += 1
+	if not value:
+		failures += 1
+		push_error(label)
+func _initialize() -> void:
+	var pending := {"pending_map_reward":{"shards":12},"pending_gems":2,"pending_flasks":1}
+	var bytes := var_to_bytes(pending)
+	expect(Panel.pending_reward_text(pending) == "待领：校准碎片 ×12 · 宝石 ×2 · 药剂 ×1", "All pending types exact")
+	expect(Panel.pending_reward_text({}).is_empty(), "No empty ledger clutter")
+	var result := {"ok":true,"claimed_shards":12,"claimed_gems":2,"claimed_flasks":1}
+	expect(Panel.claim_reward_text(result,{}) == "已领取：校准碎片 ×12 · 宝石 ×2 · 药剂 ×1", "Only committed claim counts")
+	result.claimed_gems = 0
+	result.claimed_flasks = 0
+	var remaining := {"pending_map_reward":{},"pending_gems":2,"pending_flasks":1}
+	expect(Panel.claim_reward_text(result,remaining) == "已领取：校准碎片 ×12\n待领：宝石 ×2 · 药剂 ×1", "Partial claim separates received and remainder")
+	for reason in ["背包已满", "保存失败", "没有待领取奖励"]:
+		var failed := {"ok":false,"reason":reason,"claimed_shards":99}
+		var message := Panel.claim_reward_text(failed,pending)
+		expect(message.begins_with(reason) and not message.contains("已领取") and not message.contains("99"), "Failure never asserts payment")
+		expect(message.ends_with(Panel.pending_reward_text(pending)), "Failure preserves current pending quantities")
+	expect(Panel.claim_reward_text({"ok":false,"reason":"没有待领取奖励"},{}) == "没有待领取奖励", "Repeated claim does not repeat previous success")
+	expect(var_to_bytes(pending) == bytes, "Formatting is nonmutating")
+	print("Reward claim presentation: %d checks, %d failures" % [checks,failures])
+	quit(0 if failures == 0 else 1)
