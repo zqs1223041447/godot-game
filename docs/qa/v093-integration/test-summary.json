@@ -1,0 +1,21 @@
+{
+  "base": "897dbfc16c1308b2b6916fa9ba52792d9d82c293",
+  "counts": {
+    "rules": 1188,
+    "equipment": 3961,
+    "migration_model": 198,
+    "encounter": 4484,
+    "root_ui": 29,
+    "main_final": 130,
+    "legacy_journey_gate": 22
+  },
+  "total": 10012,
+  "failures": 0,
+  "reuse_notes": [
+    "equipment/migration4159 passed before the narrow <=50 chaos_patrol gate;22 affected gate checks passed afterwards",
+    "MapCatalog new description changed a single equivalent word after encounter/main tests; no numeric/profile values changed",
+    "First Main fixture result40/1 and first encounter parse failure retained and excluded"
+  ],
+  "font": "1669 mapped/1664 required, no missing;original binary unchanged",
+  "no_export": true
+}

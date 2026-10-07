@@ -1,0 +1,23 @@
+{
+  "command": [
+    "godot",
+    "--headless",
+    "--path",
+    "/workspace/scratch/a51485f153de/v093-chaos-defense-encounter",
+    "--script",
+    "res://tests/chaos_resistance_rules_test.gd"
+  ],
+  "engine": "/usr/local/bin/godot",
+  "exit_code": 0,
+  "engine_errors": false,
+  "elapsed_seconds": 1.864,
+  "passed": true,
+  "engine_import_invoked": false,
+  "isolation": "Independent disposable /tmp/godot-m1-v093-chaos-rules-* XDG roots",
+  "input_sha256": {
+    "scripts/mechanics/defense_rules.gd": "a4d88c005dfd27fe6408e86ea9b96a34fe01c786c24c8965113dd20498224226",
+    "scripts/combat/damage_resolver.gd": "720dc69a7446334e8aec3ac15bdf7c1717fa7b96db5657e0c9622513121a4e23",
+    "scripts/combat/hit_penetration_rules.gd": "6b0733c563548a9034cd5169b1736287cbffc4b40a14cdf71f37a729c377fc88",
+    "tests/chaos_resistance_rules_test.gd": "f9031ed112da79db876d2d6f7ac374557647a38849113458be6805aee38515a9"
+  }
+}

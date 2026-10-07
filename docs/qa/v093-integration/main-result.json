@@ -1,0 +1,218 @@
+{
+	"checks": 130,
+	"failures": 0,
+	"labels": [],
+	"receipts": [
+		{
+			"before": {
+				"components": {
+					"chaos": 62.4
+				},
+				"details": [
+					{
+						"base": 62.4,
+						"before_defense": 62.4,
+						"final": 62.4,
+						"increased": 0.0,
+						"modifiers": [],
+						"more": 1.0,
+						"resistance": 0.0,
+						"type": "chaos"
+					}
+				],
+				"total": 62.4
+			},
+			"expected": {
+				"components": {
+					"chaos": 46.8
+				},
+				"details": [
+					{
+						"base": 62.4,
+						"before_defense": 62.4,
+						"final": 46.8,
+						"increased": 0.0,
+						"modifiers": [],
+						"more": 1.0,
+						"resistance": 0.25,
+						"type": "chaos"
+					}
+				],
+				"total": 46.8
+			},
+			"packet": {
+				"assembly": {
+					"added": {
+
+					},
+					"added_effectiveness": 2.4,
+					"base_coefficient": 2.4,
+					"intrinsic": {
+						"chaos": 62.4
+					},
+					"stage": "hit_base"
+				},
+				"base": {
+					"chaos": 62.4
+				},
+				"role": "projectile",
+				"skill_id": "shade_bolt",
+				"tags": [
+					"hit",
+					"projectile",
+					"spell"
+				]
+			},
+			"probe": "shade_bolt",
+			"receipt": {
+				"assembly": {
+					"added": {
+
+					},
+					"added_effectiveness": 2.4,
+					"base_coefficient": 2.4,
+					"intrinsic": {
+						"chaos": 62.4
+					},
+					"stage": "hit_base"
+				},
+				"before_defense_components": {
+					"chaos": 62.4
+				},
+				"cast_id": 0,
+				"components": {
+					"chaos": 46.8
+				},
+				"details": [
+					{
+						"base": 62.4,
+						"before_defense": 62.4,
+						"final": 46.8,
+						"increased": 0.0,
+						"modifiers": [],
+						"more": 1.0,
+						"resistance": 0.25,
+						"type": "chaos"
+					}
+				],
+				"effect_id": "",
+				"health_lost": 0.0,
+				"phase": "direct",
+				"prevented_components": {
+					"chaos": 15.600000000000001
+				},
+				"projectile_id": 0,
+				"shield_spent": 46.8,
+				"skill_id": "shade_bolt",
+				"tags": [
+					"hit",
+					"projectile",
+					"spell"
+				],
+				"target_id": 5,
+				"total": 46.8
+			}
+		},
+		{
+			"expected": {
+				"actor": "player",
+				"armour": 0.0,
+				"components": {
+					"chaos": 8.6
+				},
+				"damage_total": 8.6,
+				"details": [
+					{
+						"base": 17.2,
+						"before_defense": 17.2,
+						"final": 8.6,
+						"increased": 0.0,
+						"modifiers": [],
+						"more": 1.0,
+						"resistance": 0.5,
+						"type": "chaos"
+					}
+				],
+				"effective_resistances": {
+					"chaos": 0.5,
+					"cold": 0.0,
+					"fire": 0.0,
+					"lightning": 0.0
+				},
+				"health_lost": 3.5999999999999996,
+				"mitigated_components": {
+					"chaos": 8.6
+				},
+				"ok": true,
+				"overkill": 0.0,
+				"raw_components": {
+					"chaos": 17.2
+				},
+				"raw_resistances": {
+					"chaos": 0.5,
+					"cold": 0.0,
+					"fire": 0.0,
+					"lightning": 0.0
+				},
+				"reason": "",
+				"remaining_health": 496.4,
+				"remaining_shield": 0.0,
+				"shield_spent": 5.0,
+				"stage": "hit_mitigation"
+			},
+			"probe": "guardian_hit",
+			"receipt": {
+				"actor": "player",
+				"armour": 0.0,
+				"components": {
+					"chaos": 8.6
+				},
+				"damage_total": 8.6,
+				"details": [
+					{
+						"base": 17.2,
+						"before_defense": 17.2,
+						"final": 8.6,
+						"increased": 0.0,
+						"modifiers": [],
+						"more": 1.0,
+						"resistance": 0.5,
+						"type": "chaos"
+					}
+				],
+				"effective_resistances": {
+					"chaos": 0.5,
+					"cold": 0.0,
+					"fire": 0.0,
+					"lightning": 0.0
+				},
+				"health_lost": 3.5999999999999996,
+				"mitigated_components": {
+					"chaos": 8.6
+				},
+				"ok": true,
+				"overkill": 0.0,
+				"raw_components": {
+					"chaos": 17.2
+				},
+				"raw_resistances": {
+					"chaos": 0.5,
+					"cold": 0.0,
+					"fire": 0.0,
+					"lightning": 0.0
+				},
+				"reason": "",
+				"remaining_health": 496.4,
+				"remaining_shield": 0.0,
+				"shield_spent": 5.0,
+				"source_id": 5,
+				"stage": "hit_mitigation"
+			}
+		}
+	],
+	"rings": [
+		"gear_000006",
+		"gear_000007"
+	],
+	"scope": "Actual Main formal map, lawful two-ring/progression fixture, controlled combat probes and deaths; not natural play or FPS"
+}

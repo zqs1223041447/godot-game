@@ -1,4 +1,3 @@
-class_name MapCatalog
 extends RefCounted
 const Encounters=preload("res://scripts/encounters/encounter_catalog.gd")
 const MAPS={
@@ -9,8 +8,7 @@ const MAPS={
 const SPECIAL={
 	"elemental_aegis":{"name":"元素庇护","description":"地图怪物三元素原始抗性各加20个百分点，有效上限75%；物理和混沌不变。","kind":"defense","minimum_wave":4,"resistance_bonus":0.20,"damage_types":["fire","cold","lightning"]},
 	"frost_patrol":{"name":"霜纹巡逻","description":"原本生成重甲体的普通名额改为霜纹守卫，保留原稀有度与机制；灰烬名额不变。冰霜圆形预警可走开；受到实际冰霜伤害后，移动速度降低25%，持续1.2秒，不产生冻结。","minimum_wave":4,"species":"brute","template":"frost_guard"},
-	"storm_patrol":{"name":"雷纹巡逻","description":"原本生成掠行体的普通名额改为雷纹掠行体，保留原稀有度与机制；灰烬名额不变。雷电圆形预警可走开；命中会施加1秒感电，使后续命中承受伤害提高15%。","minimum_wave":5,"species":"skitter","template":"storm_skitter"},
-	"chaos_patrol":{"name":"蚀影巡逻","description":"原本生成重壳体的普通名额改为蚀影守卫，保留原稀有度与机制；灰烬、分裂、孵化和首领不变。纯混沌攻击蓄力1秒，锁定你的起手位置，走出圆圈即可避开；守卫有25%混沌抗性。","minimum_wave":5,"species":"brute","template":"chaos_guard"}}
+	"storm_patrol":{"name":"雷纹巡逻","description":"原本生成掠行体的普通名额改为雷纹掠行体，保留原稀有度与机制；灰烬名额不变。雷电圆形预警可走开；命中会施加1秒感电，使后续命中承受伤害提高15%。","minimum_wave":5,"species":"skitter","template":"storm_skitter"}}
 static func options(test_mode:bool=true)->Dictionary:
 	var maps:Array[Dictionary]=[];var special:Array[Dictionary]=[];var normal:Array[Dictionary]=[]
 	for id:String in MAPS:var row:Dictionary=MAPS[id].duplicate(true);row.id=id;maps.append(row)

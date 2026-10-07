@@ -525,6 +525,10 @@ static func _reason(value: Variant, expected_version: int, paged: bool, allow_cu
 	if expected_version >= 26:
 		var journey_error: String = Journey.reason_legacy(value.journey) if expected_version <= V29_VERSION else Journey.reason_v49(value.journey) if expected_version <= V49_VERSION else Journey.reason(value.journey)
 		if not journey_error.is_empty(): return journey_error
+		# Freeze pre51 encounter vocabulary after the existing journey validation.
+		if expected_version <= V50_VERSION and not value.journey.active_run.is_empty() \
+				and value.journey.active_run.special_ids.has("chaos_patrol"):
+			return "此存档版本不能包含新增地图特殊词缀"
 	if not _integer(value.revision, 0, MAX_SERIAL) or not _integer(value.next_item_serial, 1, MAX_SERIAL): return "修订或物品序号无效"
 	if not value.items is Dictionary or value.items.size() > item_limit: return "物品注册表无效"
 	if expected_version<18:

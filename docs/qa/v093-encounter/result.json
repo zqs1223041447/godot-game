@@ -1,0 +1,35 @@
+{
+  "base_commit": "897dbfc16c1308b2b6916fa9ba52792d9d82c293",
+  "worktree_head_at_report": "dd9a4117407d0e086263d8225231db349634a659",
+  "command": "XDG_DATA_HOME=/tmp/v093-chaos-encounter/data XDG_CONFIG_HOME=/tmp/v093-chaos-encounter/config XDG_CACHE_HOME=/tmp/v093-chaos-encounter/cache godot4 --headless --path . --script res://tests/chaos_patrol_encounter_test.gd",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "exit_code": 0,
+  "checks": 4484,
+  "failures": 0,
+  "legacy_profiles": 50,
+  "new_chaos_roots": 266,
+  "rarities": [
+    "normal",
+    "rare",
+    "magic"
+  ],
+  "sha256": {
+    "scripts/monsters/monster_catalog.gd": "499b12aa0dcc91ecb39c0f303745930ad853fb5b3b576b3c561714c771c44309",
+    "scripts/monsters/telegraph_profiles.gd": "de60d4f6bd3035235534d1643d792472c45dc26ba849f80efbba023aaa678369",
+    "scripts/world/map_catalog.gd": "7a0f0e532f808aa0411d646f07ef85e54cf1261595df9a804292cede3882cd93",
+    "scripts/combat/telegraphed_area_runtime.gd": "6c81759656ec31c2e5b46e72e6091f12f7e15800d025d3d7c3cca27fb66b9b90",
+    "scripts/mechanics/defense_rules.gd": "a4d88c005dfd27fe6408e86ea9b96a34fe01c786c24c8965113dd20498224226",
+    "scripts/world/map_compiler.gd": "c800ccaf90a9807cc753fc694c19c614e52fff8226fdcaa27f0f5fdc2fcb5851",
+    "scripts/world/map_camp_state.gd": "5d45c963e0403bb74f21cea1191a358119c6ea3bd9c5846f55aa9495660adf8a",
+    "scripts/world/map_camp_layout.gd": "b210d19d777b9e29ff1b67d70edc18f480ad44fc5668b0cfa45c527b672f5016",
+    "scripts/world/map_admission.gd": "39c4d7dc34993587a081759f423192c1db2b6e8267c91854ef729f36ae4368c2",
+    "scripts/monsters/monster_runtime.gd": "6280cbf52cdf373af0fe8d564b77b2ad1f1e934b207d37988f69bbdd404751a3",
+    "tests/chaos_patrol_encounter_test.gd": "bfe9e7df5eb840c33b7be64f63bb11a7ab9ffb9c1dbcef4caa34a7e8c897ce4c",
+    "docs/qa/v093-encounter/frozen/map_camp_state.gd": "862f45dde8b644bba2d81e609cf468a3ca8fddb88c25732fa7e42b70298ce077",
+    "docs/qa/v093-encounter/frozen/map_catalog.gd": "e4e1fef62193f184df0b47cfc8d3531d116a4e25b79be3265e8c5be6da8e610a",
+    "docs/qa/v093-encounter/frozen/map_compiler.gd": "0aa72a0342610566fce705cd512afbaa8a352f7c054d1d49080ce9e1c2e65709",
+    "docs/qa/v093-encounter/frozen/monster_catalog.gd": "d5df99287e99e32f15c7c02ae6e20de98d50dbaf91dfdd426b66a4828dc8a0aa",
+    "docs/qa/v093-encounter/frozen/telegraph_profiles.gd": "382237dd8cd804f8e2b23c571bd560812717d5aadbc18d823c0e397a0764b4bb",
+    "docs/qa/v093-encounter/frozen/telegraphed_area_runtime.gd": "f01d9dc20fdbdf150ac046b30e64ad99960da778dd789231661e98564102e8cc"
+  }
+}

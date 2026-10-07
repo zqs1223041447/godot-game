@@ -1,0 +1,33 @@
+{
+  "base_commit": "897dbfc16c1308b2b6916fa9ba52792d9d82c293",
+  "transforms": [
+    "remove class_name declaration",
+    "redirect the six frozen resource dependencies to this directory"
+  ],
+  "files": {
+    "scripts/monsters/monster_catalog.gd": {
+      "source_sha256": "ea0f1f775827e2607fc38f11284df71c52a0998cf6fe64f5fe77fb25f34ed8d7",
+      "frozen_sha256": "d5df99287e99e32f15c7c02ae6e20de98d50dbaf91dfdd426b66a4828dc8a0aa"
+    },
+    "scripts/monsters/telegraph_profiles.gd": {
+      "source_sha256": "fb258eb68317a3b3e2b39e93f64af0797413a3cb99a889ebac2de495f00a2c33",
+      "frozen_sha256": "382237dd8cd804f8e2b23c571bd560812717d5aadbc18d823c0e397a0764b4bb"
+    },
+    "scripts/world/map_catalog.gd": {
+      "source_sha256": "57c42b8dddaa4b7a37a2040a4605e39f7d5c6a46f67db0ff22bdbdfd5102ef18",
+      "frozen_sha256": "e4e1fef62193f184df0b47cfc8d3531d116a4e25b79be3265e8c5be6da8e610a"
+    },
+    "scripts/world/map_compiler.gd": {
+      "source_sha256": "c800ccaf90a9807cc753fc694c19c614e52fff8226fdcaa27f0f5fdc2fcb5851",
+      "frozen_sha256": "0aa72a0342610566fce705cd512afbaa8a352f7c054d1d49080ce9e1c2e65709"
+    },
+    "scripts/world/map_camp_state.gd": {
+      "source_sha256": "5d45c963e0403bb74f21cea1191a358119c6ea3bd9c5846f55aa9495660adf8a",
+      "frozen_sha256": "862f45dde8b644bba2d81e609cf468a3ca8fddb88c25732fa7e42b70298ce077"
+    },
+    "scripts/combat/telegraphed_area_runtime.gd": {
+      "source_sha256": "122fa910e1bc326c5a4afc756c8662c180e5347c36f8782d4877155c71c72093",
+      "frozen_sha256": "f01d9dc20fdbdf150ac046b30e64ad99960da778dd789231661e98564102e8cc"
+    }
+  }
+}
