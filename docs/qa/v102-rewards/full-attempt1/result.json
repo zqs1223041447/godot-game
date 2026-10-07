@@ -1,0 +1,611 @@
+{
+	"assertions": [
+		{
+			"label": "Fresh isolated canonical profile saved",
+			"ok": true
+		},
+		{
+			"label": "Compile current free tier-I map: ",
+			"ok": true
+		},
+		{
+			"label": "Actual model entry issues persisted run: ",
+			"ok": true
+		},
+		{
+			"label": "Entry includes run ID",
+			"ok": true
+		},
+		{
+			"label": "Actual model completion creates pending map receipt: ",
+			"ok": true
+		},
+		{
+			"label": "Sixty real reward-batch calls advance one revision each",
+			"ok": true
+		},
+		{
+			"label": "Milestone batch persisted",
+			"ok": true
+		},
+		{
+			"label": "Fixture owes four map shards, two milestone gems and one milestone flask; nothing credited",
+			"ok": true
+		},
+		{
+			"label": "Detached pending/world reads cannot mutate snapshot, revisions, disk, saves, RNG or notifications",
+			"ok": true
+		},
+		{
+			"label": "full_claim: one feedback signal matches visible claim status",
+			"ok": true
+		},
+		{
+			"label": "full_claim: result remains visible even when claim button hides",
+			"ok": true
+		},
+		{
+			"label": "full_claim: deferred frame preserves result without duplicate feedback",
+			"ok": true
+		},
+		{
+			"label": "full_claim: ",
+			"ok": true
+		},
+		{
+			"label": "full_claim: exact credited quantities and current pending categories in live panel",
+			"ok": true
+		},
+		{
+			"label": "full_claim: complete Main receipt",
+			"ok": true
+		},
+		{
+			"label": "full_claim actual model receipt: ",
+			"ok": true
+		},
+		{
+			"label": "full_claim: complete model receipt",
+			"ok": true
+		},
+		{
+			"label": "full_claim: exact authoritative claimed_shards",
+			"ok": true
+		},
+		{
+			"label": "full_claim: exact authoritative claimed_gems",
+			"ok": true
+		},
+		{
+			"label": "full_claim: exact authoritative claimed_flasks",
+			"ok": true
+		},
+		{
+			"label": "full_claim: success includes fresh post-commit world",
+			"ok": true
+		},
+		{
+			"label": "full_claim: one model/world revision",
+			"ok": true
+		},
+		{
+			"label": "full_claim: one committed save and each notification",
+			"ok": true
+		},
+		{
+			"label": "full_claim: exact shard delta without RNG use",
+			"ok": true
+		},
+		{
+			"label": "full_claim: committed file reloads",
+			"ok": true
+		},
+		{
+			"label": "full_claim: persisted state exactly matches receipt owner",
+			"ok": true
+		},
+		{
+			"label": "Exact frozen milestone ordinals materialize alongside one currency stack",
+			"ok": true
+		},
+		{
+			"label": "Full claim leaves no pending categories",
+			"ok": true
+		},
+		{
+			"label": "duplicate_world_receipt: Main rejects",
+			"ok": true
+		},
+		{
+			"label": "duplicate_world_receipt: exact error code and useful reason",
+			"ok": true
+		},
+		{
+			"label": "duplicate_world_receipt: no false claimed_shards credit",
+			"ok": true
+		},
+		{
+			"label": "duplicate_world_receipt: no false claimed_gems credit",
+			"ok": true
+		},
+		{
+			"label": "duplicate_world_receipt: no false claimed_flasks credit",
+			"ok": true
+		},
+		{
+			"label": "duplicate_world_receipt: failure does not reuse a successful world receipt",
+			"ok": true
+		},
+		{
+			"label": "duplicate_world_receipt: exact full snapshot, serials, balance, disk, RNG, world and notifications unchanged",
+			"ok": true
+		},
+		{
+			"label": "duplicate_world_receipt: expected persistence attempts only",
+			"ok": true
+		},
+		{
+			"label": "duplicate_world_receipt: stale world is rejected before model claim",
+			"ok": true
+		},
+		{
+			"label": "fresh_repeat_after_full_claim: one feedback signal matches visible claim status",
+			"ok": true
+		},
+		{
+			"label": "fresh_repeat_after_full_claim: result remains visible even when claim button hides",
+			"ok": true
+		},
+		{
+			"label": "fresh_repeat_after_full_claim: deferred frame preserves result without duplicate feedback",
+			"ok": true
+		},
+		{
+			"label": "fresh_repeat_after_full_claim: Main rejects",
+			"ok": true
+		},
+		{
+			"label": "fresh_repeat_after_full_claim: exact error code and useful reason",
+			"ok": true
+		},
+		{
+			"label": "fresh_repeat_after_full_claim: no false claimed_shards credit",
+			"ok": true
+		},
+		{
+			"label": "fresh_repeat_after_full_claim: no false claimed_gems credit",
+			"ok": true
+		},
+		{
+			"label": "fresh_repeat_after_full_claim: no false claimed_flasks credit",
+			"ok": true
+		},
+		{
+			"label": "fresh_repeat_after_full_claim: failure does not reuse a successful world receipt",
+			"ok": true
+		},
+		{
+			"label": "fresh_repeat_after_full_claim: exact full snapshot, serials, balance, disk, RNG, world and notifications unchanged",
+			"ok": true
+		},
+		{
+			"label": "fresh_repeat_after_full_claim: expected persistence attempts only",
+			"ok": true
+		},
+		{
+			"label": "fresh_repeat_after_full_claim: stale world is rejected before model claim",
+			"ok": true
+		},
+		{
+			"label": "fresh_repeat_after_full_claim: Main preserves actual model failure",
+			"ok": true
+		},
+		{
+			"label": "fresh_repeat_after_full_claim: model adds no claimed_shards credit",
+			"ok": true
+		},
+		{
+			"label": "fresh_repeat_after_full_claim: model adds no claimed_gems credit",
+			"ok": true
+		},
+		{
+			"label": "fresh_repeat_after_full_claim: model adds no claimed_flasks credit",
+			"ok": true
+		},
+		{
+			"label": "fresh_repeat_after_full_claim: failure shows reason and fresh pending quantities without credit",
+			"ok": true
+		},
+		{
+			"label": "Actual model rejects duplicate stale revision",
+			"ok": true
+		},
+		{
+			"label": "Stale model result has no claimed_shards",
+			"ok": true
+		},
+		{
+			"label": "Stale model result has no claimed_gems",
+			"ok": true
+		},
+		{
+			"label": "Stale model result has no claimed_flasks",
+			"ok": true
+		},
+		{
+			"label": "Stale model claim preserves full snapshot, serials, disk, balance, RNG and notifications",
+			"ok": true
+		}
+	],
+	"checks": 59,
+	"duration_ms": 1486,
+	"engine": "4.6.3-stable (official)",
+	"failures": 0,
+	"group": "full",
+	"receipts": [
+		{
+			"balance": 4,
+			"case": "full_claim",
+			"disk_sha256": "cbfee6c72fcca8af30c9b2eaa2b619b04bb3b65a36f3e5df6d165e378fa8ea61",
+			"feedback": "已领取：校准碎片 ×4 · 宝石 ×2 · 药剂 ×1",
+			"fresh_world_context": {
+				"awake_monsters": 0,
+				"boss_defeated": false,
+				"boss_phase": "sealed",
+				"camp_states": [],
+				"can_claim_normal_rewards": false,
+				"can_enter_normal_town": false,
+				"can_leave_normal_town": true,
+				"can_return": false,
+				"claim_reason": "没有待领取奖励",
+				"completion_save_pending": false,
+				"description": "正式城镇",
+				"encounter_mode": "",
+				"exploration_description": "",
+				"fee_paid": 0,
+				"initial_monsters": 0,
+				"map_id": "",
+				"map_name": "",
+				"map_tier": 0,
+				"mode": "town",
+				"normal_root_kills": 60,
+				"normal_town": true,
+				"ordinary_kills": 0,
+				"ordinary_target": 0,
+				"outpost_states": [],
+				"pending_flasks": 0,
+				"pending_gems": 0,
+				"pending_map_reward": {
+
+				},
+				"retry_cost": 0,
+				"revision": 1,
+				"run_revision": 0,
+				"save_path": "user://build_save.json",
+				"supply_enabled": false,
+				"test_mode": false
+			},
+			"main_result": {
+				"claimed_flasks": 1,
+				"claimed_gems": 2,
+				"claimed_shards": 4,
+				"code": "",
+				"ok": true,
+				"reason": "",
+				"world": {
+					"awake_monsters": 0,
+					"boss_defeated": false,
+					"boss_phase": "sealed",
+					"camp_states": [],
+					"can_claim_normal_rewards": false,
+					"can_enter_normal_town": false,
+					"can_leave_normal_town": true,
+					"can_return": false,
+					"claim_reason": "没有待领取奖励",
+					"completion_save_pending": false,
+					"description": "正式城镇",
+					"encounter_mode": "",
+					"exploration_description": "",
+					"fee_paid": 0,
+					"initial_monsters": 0,
+					"map_id": "",
+					"map_name": "",
+					"map_tier": 0,
+					"mode": "town",
+					"normal_root_kills": 60,
+					"normal_town": true,
+					"ordinary_kills": 0,
+					"ordinary_target": 0,
+					"outpost_states": [],
+					"pending_flasks": 0,
+					"pending_gems": 0,
+					"pending_map_reward": {
+
+					},
+					"retry_cost": 0,
+					"revision": 1,
+					"run_revision": 0,
+					"save_path": "user://build_save.json",
+					"supply_enabled": false,
+					"test_mode": false
+				}
+			},
+			"model_called": true,
+			"model_pending": {
+				"normal_root_kills": 60,
+				"pending_flasks": 0,
+				"pending_gems": 0,
+				"pending_map_reward": {
+
+				}
+			},
+			"model_result": {
+				"claimed_flasks": 1,
+				"claimed_gems": 2,
+				"claimed_shards": 4,
+				"error_code": "",
+				"ok": true,
+				"reason": "",
+				"revision": 63
+			},
+			"model_revision": 63,
+			"rng_state": "-3853855055942082768",
+			"status_text": "已领取：校准碎片 ×4 · 宝石 ×2 · 药剂 ×1",
+			"world_before": {
+				"awake_monsters": 0,
+				"boss_defeated": false,
+				"boss_phase": "sealed",
+				"camp_states": [],
+				"can_claim_normal_rewards": true,
+				"can_enter_normal_town": false,
+				"can_leave_normal_town": true,
+				"can_return": false,
+				"claim_reason": "",
+				"completion_save_pending": false,
+				"description": "正式城镇",
+				"encounter_mode": "",
+				"exploration_description": "",
+				"fee_paid": 0,
+				"initial_monsters": 0,
+				"map_id": "",
+				"map_name": "",
+				"map_tier": 0,
+				"mode": "town",
+				"normal_root_kills": 60,
+				"normal_town": true,
+				"ordinary_kills": 0,
+				"ordinary_target": 0,
+				"outpost_states": [],
+				"pending_flasks": 1,
+				"pending_gems": 2,
+				"pending_map_reward": {
+					"map_id": "old_garden",
+					"run_id": 1,
+					"shards": 4,
+					"tier": 1
+				},
+				"retry_cost": 0,
+				"revision": 0,
+				"run_revision": 0,
+				"save_path": "user://build_save.json",
+				"supply_enabled": false,
+				"test_mode": false
+			}
+		},
+		{
+			"balance": 4,
+			"case": "duplicate_world_receipt",
+			"disk_sha256": "cbfee6c72fcca8af30c9b2eaa2b619b04bb3b65a36f3e5df6d165e378fa8ea61",
+			"feedback": "已领取：校准碎片 ×4 · 宝石 ×2 · 药剂 ×1",
+			"fresh_world_context": {
+				"awake_monsters": 0,
+				"boss_defeated": false,
+				"boss_phase": "sealed",
+				"camp_states": [],
+				"can_claim_normal_rewards": false,
+				"can_enter_normal_town": false,
+				"can_leave_normal_town": true,
+				"can_return": false,
+				"claim_reason": "没有待领取奖励",
+				"completion_save_pending": false,
+				"description": "正式城镇",
+				"encounter_mode": "",
+				"exploration_description": "",
+				"fee_paid": 0,
+				"initial_monsters": 0,
+				"map_id": "",
+				"map_name": "",
+				"map_tier": 0,
+				"mode": "town",
+				"normal_root_kills": 60,
+				"normal_town": true,
+				"ordinary_kills": 0,
+				"ordinary_target": 0,
+				"outpost_states": [],
+				"pending_flasks": 0,
+				"pending_gems": 0,
+				"pending_map_reward": {
+
+				},
+				"retry_cost": 0,
+				"revision": 1,
+				"run_revision": 0,
+				"save_path": "user://build_save.json",
+				"supply_enabled": false,
+				"test_mode": false
+			},
+			"main_result": {
+				"code": "stale_world",
+				"ok": false,
+				"reason": "请先返回正式城镇领取"
+			},
+			"model_called": false,
+			"model_pending": {
+				"normal_root_kills": 60,
+				"pending_flasks": 0,
+				"pending_gems": 0,
+				"pending_map_reward": {
+
+				}
+			},
+			"model_result": {
+
+			},
+			"model_revision": 63,
+			"rng_state": "-3853855055942082768",
+			"status_text": "已领取：校准碎片 ×4 · 宝石 ×2 · 药剂 ×1",
+			"world_before": {
+				"awake_monsters": 0,
+				"boss_defeated": false,
+				"boss_phase": "sealed",
+				"camp_states": [],
+				"can_claim_normal_rewards": false,
+				"can_enter_normal_town": false,
+				"can_leave_normal_town": true,
+				"can_return": false,
+				"claim_reason": "没有待领取奖励",
+				"completion_save_pending": false,
+				"description": "正式城镇",
+				"encounter_mode": "",
+				"exploration_description": "",
+				"fee_paid": 0,
+				"initial_monsters": 0,
+				"map_id": "",
+				"map_name": "",
+				"map_tier": 0,
+				"mode": "town",
+				"normal_root_kills": 60,
+				"normal_town": true,
+				"ordinary_kills": 0,
+				"ordinary_target": 0,
+				"outpost_states": [],
+				"pending_flasks": 0,
+				"pending_gems": 0,
+				"pending_map_reward": {
+
+				},
+				"retry_cost": 0,
+				"revision": 1,
+				"run_revision": 0,
+				"save_path": "user://build_save.json",
+				"supply_enabled": false,
+				"test_mode": false
+			}
+		},
+		{
+			"balance": 4,
+			"case": "fresh_repeat_after_full_claim",
+			"disk_sha256": "cbfee6c72fcca8af30c9b2eaa2b619b04bb3b65a36f3e5df6d165e378fa8ea61",
+			"feedback": "没有待领取奖励",
+			"fresh_world_context": {
+				"awake_monsters": 0,
+				"boss_defeated": false,
+				"boss_phase": "sealed",
+				"camp_states": [],
+				"can_claim_normal_rewards": false,
+				"can_enter_normal_town": false,
+				"can_leave_normal_town": true,
+				"can_return": false,
+				"claim_reason": "没有待领取奖励",
+				"completion_save_pending": false,
+				"description": "正式城镇",
+				"encounter_mode": "",
+				"exploration_description": "",
+				"fee_paid": 0,
+				"initial_monsters": 0,
+				"map_id": "",
+				"map_name": "",
+				"map_tier": 0,
+				"mode": "town",
+				"normal_root_kills": 60,
+				"normal_town": true,
+				"ordinary_kills": 0,
+				"ordinary_target": 0,
+				"outpost_states": [],
+				"pending_flasks": 0,
+				"pending_gems": 0,
+				"pending_map_reward": {
+
+				},
+				"retry_cost": 0,
+				"revision": 1,
+				"run_revision": 0,
+				"save_path": "user://build_save.json",
+				"supply_enabled": false,
+				"test_mode": false
+			},
+			"main_result": {
+				"code": "no_pending_reward",
+				"ok": false,
+				"reason": "没有待领取奖励"
+			},
+			"model_called": true,
+			"model_pending": {
+				"normal_root_kills": 60,
+				"pending_flasks": 0,
+				"pending_gems": 0,
+				"pending_map_reward": {
+
+				}
+			},
+			"model_result": {
+				"error_code": "no_pending_reward",
+				"ok": false,
+				"reason": "没有待领取奖励",
+				"revision": -1
+			},
+			"model_revision": 63,
+			"rng_state": "-3853855055942082768",
+			"status_text": "没有待领取奖励",
+			"world_before": {
+				"awake_monsters": 0,
+				"boss_defeated": false,
+				"boss_phase": "sealed",
+				"camp_states": [],
+				"can_claim_normal_rewards": false,
+				"can_enter_normal_town": false,
+				"can_leave_normal_town": true,
+				"can_return": false,
+				"claim_reason": "没有待领取奖励",
+				"completion_save_pending": false,
+				"description": "正式城镇",
+				"encounter_mode": "",
+				"exploration_description": "",
+				"fee_paid": 0,
+				"initial_monsters": 0,
+				"map_id": "",
+				"map_name": "",
+				"map_tier": 0,
+				"mode": "town",
+				"normal_root_kills": 60,
+				"normal_town": true,
+				"ordinary_kills": 0,
+				"ordinary_target": 0,
+				"outpost_states": [],
+				"pending_flasks": 0,
+				"pending_gems": 0,
+				"pending_map_reward": {
+
+				},
+				"retry_cost": 0,
+				"revision": 1,
+				"run_revision": 0,
+				"save_path": "user://build_save.json",
+				"supply_enabled": false,
+				"test_mode": false
+			}
+		}
+	],
+	"scope": "Actual Main + canonical persistence + live TownServicePanel button/deferred feedback; no native GUI or combat simulation",
+	"source_hashes": {
+		"scripts/canonical_game_state.gd": "065d88dce77f6613fdd8e9a105b45038a537ce43975aaaca05d720694ee6875c",
+		"scripts/items/gem_catalog.gd": "791ab28f928503413133b0832a1cde944635a5da6e5b6a18d101a41c063aafe5",
+		"scripts/items/item_location_rules.gd": "7b215b19093b693216f47a1b0f2c35b3a1aced96acab8a27a3eb5f2a7e8a867a",
+		"scripts/main.gd": "eee89d17948d7c653c4f2f9b1615ed3e091345940c2a1bec4f3be00127940017",
+		"scripts/save/canonical_build_rules.gd": "32d9406070dc8e471ba70c0b586e9ab4b8baadf8fbc71f8bb345f54c1ce51530",
+		"scripts/save/canonical_build_store.gd": "c9936ff5e68b597a79adafffe13083603fad2d7774f987422dfe774a0168abd6",
+		"scripts/ui/town_service_panel.gd": "b229e1e0794b1f197dcc605139db94b91c4cf4d0cf483af7ba8a927ca8cd0d46",
+		"scripts/world/normal_journey_state.gd": "4e6a776c3ee1ec188f8c782d9aca23b1fb884c37a337544ae333d6988046ed6a",
+		"tests/reward_claim_feedback_test.gd": "b644c3f8d53414cde4274387872a3bacb80601bd2a493a70a0920a78e0de8cb6"
+	}
+}

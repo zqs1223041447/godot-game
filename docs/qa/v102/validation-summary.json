@@ -1,0 +1,29 @@
+{
+  "base": "a45aca0bef2345946c99384243b85218719afb27",
+  "production_changed": [
+    "scripts/ui/town_service_panel.gd"
+  ],
+  "source_hashes": {
+    "scripts/canonical_game_state.gd": "065d88dce77f6613fdd8e9a105b45038a537ce43975aaaca05d720694ee6875c",
+    "scripts/items/gem_catalog.gd": "791ab28f928503413133b0832a1cde944635a5da6e5b6a18d101a41c063aafe5",
+    "scripts/items/item_location_rules.gd": "7b215b19093b693216f47a1b0f2c35b3a1aced96acab8a27a3eb5f2a7e8a867a",
+    "scripts/main.gd": "eee89d17948d7c653c4f2f9b1615ed3e091345940c2a1bec4f3be00127940017",
+    "scripts/save/canonical_build_rules.gd": "32d9406070dc8e471ba70c0b586e9ab4b8baadf8fbc71f8bb345f54c1ce51530",
+    "scripts/save/canonical_build_store.gd": "c9936ff5e68b597a79adafffe13083603fad2d7774f987422dfe774a0168abd6",
+    "scripts/ui/town_service_panel.gd": "b229e1e0794b1f197dcc605139db94b91c4cf4d0cf483af7ba8a927ca8cd0d46",
+    "scripts/world/normal_journey_state.gd": "4e6a776c3ee1ec188f8c782d9aca23b1fb884c37a337544ae333d6988046ed6a",
+    "tests/reward_claim_feedback_test.gd": "b644c3f8d53414cde4274387872a3bacb80601bd2a493a70a0920a78e0de8cb6"
+  },
+  "checks": {
+    "live_panel_receipts": 262,
+    "presentation": 12,
+    "failures": 0
+  },
+  "scope": "Real TownServicePanel pressed signal invokes original Main methods and canonical transactions; no Main._ready or battle loop; next-frame label/feedback and exact atomic state checked",
+  "first_failure": "Root presentation test initially used native Panel name as alias and failed to parse; exact source/log retained; first valid business run passed12",
+  "resource_cache": "Reused baseline imports; single1.912s TownPanel dependency parse, no new assets",
+  "font_unchanged": true,
+  "schema_unchanged": true,
+  "rewards_and_transactions_unchanged": true,
+  "reference_unchanged": true
+}

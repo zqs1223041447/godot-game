@@ -19,7 +19,13 @@ script class, a focused dependency parse passed instead of repeating a full
 project import. New runtime strings have all existing font glyphs. Root's
 12 presentation checks passed on their first valid execution; the earlier
 test-only native-class naming parse failure remains in `../v102-root-ui/`.
-Actual model/button transaction checks are in progress and will be linked here.
+Actual model/button transaction checks passed on each group's first run:
+59 full-claim, 139 capacity/partial-claim and 64 persistence/reload checks.
+The actual TownServicePanel lives in the SceneTree and its button signal calls
+the original Main method and canonical transaction; status and feedback are
+checked after one deferred frame. The Main object does not execute `_ready()`
+or combat, so this is not a full-scene playthrough or native pointer-input test.
+See [model and UI evidence](../v102-rewards/README.md).
 
 Rewards, costs, loot order, save schema, Main, CanonicalGameState, journey rules,
 and save transactions remain unchanged. This is source delivery only.
