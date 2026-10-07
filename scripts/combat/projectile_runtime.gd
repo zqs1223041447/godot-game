@@ -88,6 +88,11 @@ func advance(shots: Array[Dictionary], delta: float, targets: Array[Dictionary],
 	_index_active = false
 	if delta <= 0.0 or not is_finite(delta):
 		return events
+	if shots.is_empty():
+		# Release previous actors without rebuilding a query nobody can use.
+		# The next nonempty batch still rebuilds from its complete target array.
+		_target_index.rebuild([])
+		return events
 	_in_advance = true
 	_index_active = use_spatial_index
 	if _index_active:

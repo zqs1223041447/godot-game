@@ -1430,7 +1430,8 @@ func _update_traps() -> void:
 func _update_projectiles(delta: float) -> void:
 	_ember_projectile_clock.clear()
 	_projectile_targets.clear()
-	for enemy: Dictionary in enemies: _projectile_targets[int(enemy.id)] = enemy
+	if not projectiles.is_empty():
+		for enemy: Dictionary in enemies: _projectile_targets[int(enemy.id)] = enemy
 	var terrain_query: Callable = _geometry.sweep if _geometry.has_walls() else Callable()
 	var events: Array[Dictionary] = projectile_runtime.advance(projectiles, delta, enemies, player_pos, MAX_PROJECTILES, _projectile_contact_admitted, terrain_query)
 	var settled:bool=_settle_projectile_events(events,delta)
