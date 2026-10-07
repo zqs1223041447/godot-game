@@ -1,0 +1,2144 @@
+{
+	"base": "181216b",
+	"cases": [],
+	"checks": 101,
+	"failure_count": 2,
+	"failures": [
+		"Retry survives real disk reload with every value and type preserved: allocate",
+		"Retry survives real disk reload with every value and type preserved: refund"
+	],
+	"reloads": [
+		{
+			"difference_paths": [
+				{
+					"after": [
+						"bindings",
+						"crafting",
+						"items",
+						"journey",
+						"locations",
+						"migration_ledger",
+						"next_item_serial",
+						"progress",
+						"revision",
+						"skill_groups",
+						"talents",
+						"version"
+					],
+					"before": [
+						"version",
+						"revision",
+						"items",
+						"locations",
+						"next_item_serial",
+						"skill_groups",
+						"bindings",
+						"talents",
+						"progress",
+						"crafting",
+						"migration_ledger",
+						"journey"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$"
+				},
+				{
+					"after": [
+						"azure_charm",
+						"detonation_charm",
+						"ember_wand",
+						"guardian_robe",
+						"jewel_000001",
+						"jewel_000002",
+						"jewel_000003",
+						"migration_flask_000001",
+						"migration_flask_000002",
+						"migration_gem_000001",
+						"migration_gem_000002",
+						"migration_gem_000003",
+						"migration_gem_000004",
+						"migration_gem_000005",
+						"migration_gem_000006",
+						"migration_gem_000007",
+						"migration_gem_000008",
+						"migration_gem_000009",
+						"migration_gem_000010",
+						"migration_gem_000011",
+						"migration_gem_000012",
+						"migration_gem_000013",
+						"migration_gem_000014",
+						"migration_gem_000015",
+						"migration_gem_000016",
+						"migration_gem_000017",
+						"migration_gem_000018",
+						"migration_gem_000019",
+						"migration_gem_000020",
+						"migration_gem_000021",
+						"migration_gem_000022",
+						"migration_gem_000023",
+						"migration_gem_000024",
+						"prism_bow",
+						"return_mantle",
+						"storm_charm",
+						"swift_blade",
+						"vitality_armor"
+					],
+					"before": [
+						"ember_wand",
+						"swift_blade",
+						"guardian_robe",
+						"vitality_armor",
+						"azure_charm",
+						"storm_charm",
+						"prism_bow",
+						"return_mantle",
+						"detonation_charm",
+						"jewel_000001",
+						"jewel_000002",
+						"jewel_000003",
+						"migration_gem_000001",
+						"migration_gem_000002",
+						"migration_gem_000003",
+						"migration_gem_000004",
+						"migration_gem_000005",
+						"migration_gem_000006",
+						"migration_gem_000007",
+						"migration_gem_000008",
+						"migration_gem_000009",
+						"migration_gem_000010",
+						"migration_gem_000011",
+						"migration_gem_000012",
+						"migration_gem_000013",
+						"migration_gem_000014",
+						"migration_gem_000015",
+						"migration_gem_000016",
+						"migration_gem_000017",
+						"migration_gem_000018",
+						"migration_gem_000019",
+						"migration_gem_000020",
+						"migration_gem_000021",
+						"migration_gem_000022",
+						"migration_gem_000023",
+						"migration_gem_000024",
+						"migration_flask_000001",
+						"migration_flask_000002"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.ember_wand"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.swift_blade"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.guardian_robe"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.vitality_armor"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.azure_charm"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.storm_charm"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.prism_bow"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.return_mantle"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.detonation_charm"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.jewel_000001"
+				},
+				{
+					"after": [
+						"affixes",
+						"base",
+						"id",
+						"rarity"
+					],
+					"before": [
+						"id",
+						"base",
+						"rarity",
+						"affixes"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.jewel_000001.payload"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.jewel_000002"
+				},
+				{
+					"after": [
+						"affixes",
+						"base",
+						"id",
+						"rarity"
+					],
+					"before": [
+						"id",
+						"base",
+						"rarity",
+						"affixes"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.jewel_000002.payload"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.jewel_000003"
+				},
+				{
+					"after": [
+						"affixes",
+						"base",
+						"id",
+						"rarity"
+					],
+					"before": [
+						"id",
+						"base",
+						"rarity",
+						"affixes"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.jewel_000003.payload"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000001"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000002"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000003"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000004"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000005"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000006"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000007"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000008"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000009"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000010"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000011"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000012"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000013"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000014"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000015"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000016"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000017"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000018"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000019"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000020"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000021"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000022"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000023"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000024"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_flask_000001"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_flask_000002"
+				},
+				{
+					"after": [
+						"azure_charm",
+						"detonation_charm",
+						"ember_wand",
+						"guardian_robe",
+						"jewel_000001",
+						"jewel_000002",
+						"jewel_000003",
+						"migration_flask_000001",
+						"migration_flask_000002",
+						"migration_gem_000001",
+						"migration_gem_000002",
+						"migration_gem_000003",
+						"migration_gem_000004",
+						"migration_gem_000005",
+						"migration_gem_000006",
+						"migration_gem_000007",
+						"migration_gem_000008",
+						"migration_gem_000009",
+						"migration_gem_000010",
+						"migration_gem_000011",
+						"migration_gem_000012",
+						"migration_gem_000013",
+						"migration_gem_000014",
+						"migration_gem_000015",
+						"migration_gem_000016",
+						"migration_gem_000017",
+						"migration_gem_000018",
+						"migration_gem_000019",
+						"migration_gem_000020",
+						"migration_gem_000021",
+						"migration_gem_000022",
+						"migration_gem_000023",
+						"migration_gem_000024",
+						"prism_bow",
+						"return_mantle",
+						"storm_charm",
+						"swift_blade",
+						"vitality_armor"
+					],
+					"before": [
+						"azure_charm",
+						"detonation_charm",
+						"ember_wand",
+						"guardian_robe",
+						"jewel_000001",
+						"jewel_000002",
+						"jewel_000003",
+						"migration_gem_000001",
+						"migration_gem_000002",
+						"migration_gem_000003",
+						"migration_gem_000004",
+						"migration_gem_000005",
+						"migration_gem_000006",
+						"migration_gem_000007",
+						"migration_gem_000008",
+						"migration_gem_000009",
+						"migration_gem_000010",
+						"migration_gem_000011",
+						"migration_gem_000012",
+						"migration_gem_000013",
+						"migration_gem_000014",
+						"migration_gem_000015",
+						"migration_gem_000016",
+						"migration_gem_000017",
+						"migration_gem_000018",
+						"migration_gem_000019",
+						"migration_gem_000020",
+						"migration_gem_000021",
+						"migration_gem_000022",
+						"migration_gem_000023",
+						"migration_gem_000024",
+						"prism_bow",
+						"return_mantle",
+						"storm_charm",
+						"swift_blade",
+						"vitality_armor",
+						"migration_flask_000001",
+						"migration_flask_000002"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.locations"
+				},
+				{
+					"after": [
+						"group_id",
+						"kind"
+					],
+					"before": [
+						"kind",
+						"group_id"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.locations.migration_gem_000001"
+				},
+				{
+					"after": [
+						"group_id",
+						"kind"
+					],
+					"before": [
+						"kind",
+						"group_id"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.locations.migration_gem_000002"
+				},
+				{
+					"after": [
+						"group_id",
+						"kind"
+					],
+					"before": [
+						"kind",
+						"group_id"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.locations.migration_gem_000003"
+				},
+				{
+					"after": [
+						"group_id",
+						"kind"
+					],
+					"before": [
+						"kind",
+						"group_id"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.locations.migration_gem_000004"
+				},
+				{
+					"after": [
+						"group_id",
+						"kind"
+					],
+					"before": [
+						"kind",
+						"group_id"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.locations.migration_gem_000005"
+				},
+				{
+					"after": [
+						"group_id",
+						"kind"
+					],
+					"before": [
+						"kind",
+						"group_id"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.locations.migration_gem_000006"
+				},
+				{
+					"after": [
+						"group_id",
+						"kind"
+					],
+					"before": [
+						"kind",
+						"group_id"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.locations.migration_gem_000007"
+				},
+				{
+					"after": [
+						"group_id",
+						"kind"
+					],
+					"before": [
+						"kind",
+						"group_id"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.locations.migration_gem_000008"
+				},
+				{
+					"after": [
+						"allocated",
+						"ascendancy",
+						"ascendancy_allocated",
+						"ascendancy_points",
+						"class_id",
+						"masteries",
+						"normal_points",
+						"source_version"
+					],
+					"before": [
+						"source_version",
+						"class_id",
+						"allocated",
+						"masteries",
+						"ascendancy",
+						"ascendancy_allocated",
+						"normal_points",
+						"ascendancy_points"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.talents"
+				},
+				{
+					"after": [
+						"default_class_id",
+						"default_start_id",
+						"excess_points_recorded",
+						"from_version",
+						"initial_recovery_count",
+						"legacy_allocated_nodes",
+						"legacy_points_earned",
+						"legacy_points_refunded",
+						"normal_budget_at_migration",
+						"returned_socketed_jewels"
+					],
+					"before": [
+						"from_version",
+						"legacy_points_earned",
+						"legacy_points_refunded",
+						"normal_budget_at_migration",
+						"excess_points_recorded",
+						"default_class_id",
+						"default_start_id",
+						"legacy_allocated_nodes",
+						"returned_socketed_jewels",
+						"initial_recovery_count"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.migration_ledger"
+				},
+				{
+					"after": 0,
+					"before": 4,
+					"kind": "array_container_type",
+					"path": "$.migration_ledger.legacy_allocated_nodes"
+				},
+				{
+					"after": [
+						"active_run",
+						"best_tiers",
+						"claimed_flasks",
+						"claimed_gems",
+						"next_run_id",
+						"normal_root_kills",
+						"pending_map_reward"
+					],
+					"before": [
+						"normal_root_kills",
+						"best_tiers",
+						"next_run_id",
+						"active_run",
+						"pending_map_reward",
+						"claimed_gems",
+						"claimed_flasks"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.journey"
+				},
+				{
+					"after": [
+						"broken_ruins",
+						"ginkgo_arcade",
+						"old_garden",
+						"sunwell_terrace"
+					],
+					"before": [
+						"old_garden",
+						"broken_ruins",
+						"sunwell_terrace",
+						"ginkgo_arcade"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.journey.best_tiers"
+				}
+			],
+			"loaded": true,
+			"operation": "allocate",
+			"raw_variant_bytes_equal": false,
+			"sorted_dictionary_variant_bytes_equal": false,
+			"sorted_json_equal": true,
+			"stats_equal": true,
+			"top_level_order_equal": false,
+			"typed_values_equal": true
+		},
+		{
+			"difference_paths": [
+				{
+					"after": [
+						"bindings",
+						"crafting",
+						"items",
+						"journey",
+						"locations",
+						"migration_ledger",
+						"next_item_serial",
+						"progress",
+						"revision",
+						"skill_groups",
+						"talents",
+						"version"
+					],
+					"before": [
+						"version",
+						"revision",
+						"items",
+						"locations",
+						"next_item_serial",
+						"skill_groups",
+						"bindings",
+						"talents",
+						"progress",
+						"crafting",
+						"migration_ledger",
+						"journey"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$"
+				},
+				{
+					"after": [
+						"azure_charm",
+						"detonation_charm",
+						"ember_wand",
+						"guardian_robe",
+						"jewel_000001",
+						"jewel_000002",
+						"jewel_000003",
+						"migration_flask_000001",
+						"migration_flask_000002",
+						"migration_gem_000001",
+						"migration_gem_000002",
+						"migration_gem_000003",
+						"migration_gem_000004",
+						"migration_gem_000005",
+						"migration_gem_000006",
+						"migration_gem_000007",
+						"migration_gem_000008",
+						"migration_gem_000009",
+						"migration_gem_000010",
+						"migration_gem_000011",
+						"migration_gem_000012",
+						"migration_gem_000013",
+						"migration_gem_000014",
+						"migration_gem_000015",
+						"migration_gem_000016",
+						"migration_gem_000017",
+						"migration_gem_000018",
+						"migration_gem_000019",
+						"migration_gem_000020",
+						"migration_gem_000021",
+						"migration_gem_000022",
+						"migration_gem_000023",
+						"migration_gem_000024",
+						"prism_bow",
+						"return_mantle",
+						"storm_charm",
+						"swift_blade",
+						"vitality_armor"
+					],
+					"before": [
+						"ember_wand",
+						"swift_blade",
+						"guardian_robe",
+						"vitality_armor",
+						"azure_charm",
+						"storm_charm",
+						"prism_bow",
+						"return_mantle",
+						"detonation_charm",
+						"jewel_000001",
+						"jewel_000002",
+						"jewel_000003",
+						"migration_gem_000001",
+						"migration_gem_000002",
+						"migration_gem_000003",
+						"migration_gem_000004",
+						"migration_gem_000005",
+						"migration_gem_000006",
+						"migration_gem_000007",
+						"migration_gem_000008",
+						"migration_gem_000009",
+						"migration_gem_000010",
+						"migration_gem_000011",
+						"migration_gem_000012",
+						"migration_gem_000013",
+						"migration_gem_000014",
+						"migration_gem_000015",
+						"migration_gem_000016",
+						"migration_gem_000017",
+						"migration_gem_000018",
+						"migration_gem_000019",
+						"migration_gem_000020",
+						"migration_gem_000021",
+						"migration_gem_000022",
+						"migration_gem_000023",
+						"migration_gem_000024",
+						"migration_flask_000001",
+						"migration_flask_000002"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.ember_wand"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.swift_blade"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.guardian_robe"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.vitality_armor"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.azure_charm"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.storm_charm"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.prism_bow"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.return_mantle"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.detonation_charm"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.jewel_000001"
+				},
+				{
+					"after": [
+						"affixes",
+						"base",
+						"id",
+						"rarity"
+					],
+					"before": [
+						"id",
+						"base",
+						"rarity",
+						"affixes"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.jewel_000001.payload"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.jewel_000002"
+				},
+				{
+					"after": [
+						"affixes",
+						"base",
+						"id",
+						"rarity"
+					],
+					"before": [
+						"id",
+						"base",
+						"rarity",
+						"affixes"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.jewel_000002.payload"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.jewel_000003"
+				},
+				{
+					"after": [
+						"affixes",
+						"base",
+						"id",
+						"rarity"
+					],
+					"before": [
+						"id",
+						"base",
+						"rarity",
+						"affixes"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.jewel_000003.payload"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000001"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000002"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000003"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000004"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000005"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000006"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000007"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000008"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000009"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000010"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000011"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000012"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000013"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000014"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000015"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000016"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000017"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000018"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000019"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000020"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000021"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000022"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000023"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_gem_000024"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_flask_000001"
+				},
+				{
+					"after": [
+						"definition_id",
+						"kind",
+						"payload",
+						"uid"
+					],
+					"before": [
+						"uid",
+						"kind",
+						"definition_id",
+						"payload"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.items.migration_flask_000002"
+				},
+				{
+					"after": [
+						"azure_charm",
+						"detonation_charm",
+						"ember_wand",
+						"guardian_robe",
+						"jewel_000001",
+						"jewel_000002",
+						"jewel_000003",
+						"migration_flask_000001",
+						"migration_flask_000002",
+						"migration_gem_000001",
+						"migration_gem_000002",
+						"migration_gem_000003",
+						"migration_gem_000004",
+						"migration_gem_000005",
+						"migration_gem_000006",
+						"migration_gem_000007",
+						"migration_gem_000008",
+						"migration_gem_000009",
+						"migration_gem_000010",
+						"migration_gem_000011",
+						"migration_gem_000012",
+						"migration_gem_000013",
+						"migration_gem_000014",
+						"migration_gem_000015",
+						"migration_gem_000016",
+						"migration_gem_000017",
+						"migration_gem_000018",
+						"migration_gem_000019",
+						"migration_gem_000020",
+						"migration_gem_000021",
+						"migration_gem_000022",
+						"migration_gem_000023",
+						"migration_gem_000024",
+						"prism_bow",
+						"return_mantle",
+						"storm_charm",
+						"swift_blade",
+						"vitality_armor"
+					],
+					"before": [
+						"azure_charm",
+						"detonation_charm",
+						"ember_wand",
+						"guardian_robe",
+						"jewel_000001",
+						"jewel_000002",
+						"jewel_000003",
+						"migration_gem_000001",
+						"migration_gem_000002",
+						"migration_gem_000003",
+						"migration_gem_000004",
+						"migration_gem_000005",
+						"migration_gem_000006",
+						"migration_gem_000007",
+						"migration_gem_000008",
+						"migration_gem_000009",
+						"migration_gem_000010",
+						"migration_gem_000011",
+						"migration_gem_000012",
+						"migration_gem_000013",
+						"migration_gem_000014",
+						"migration_gem_000015",
+						"migration_gem_000016",
+						"migration_gem_000017",
+						"migration_gem_000018",
+						"migration_gem_000019",
+						"migration_gem_000020",
+						"migration_gem_000021",
+						"migration_gem_000022",
+						"migration_gem_000023",
+						"migration_gem_000024",
+						"prism_bow",
+						"return_mantle",
+						"storm_charm",
+						"swift_blade",
+						"vitality_armor",
+						"migration_flask_000001",
+						"migration_flask_000002"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.locations"
+				},
+				{
+					"after": [
+						"group_id",
+						"kind"
+					],
+					"before": [
+						"kind",
+						"group_id"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.locations.migration_gem_000001"
+				},
+				{
+					"after": [
+						"group_id",
+						"kind"
+					],
+					"before": [
+						"kind",
+						"group_id"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.locations.migration_gem_000002"
+				},
+				{
+					"after": [
+						"group_id",
+						"kind"
+					],
+					"before": [
+						"kind",
+						"group_id"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.locations.migration_gem_000003"
+				},
+				{
+					"after": [
+						"group_id",
+						"kind"
+					],
+					"before": [
+						"kind",
+						"group_id"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.locations.migration_gem_000004"
+				},
+				{
+					"after": [
+						"group_id",
+						"kind"
+					],
+					"before": [
+						"kind",
+						"group_id"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.locations.migration_gem_000005"
+				},
+				{
+					"after": [
+						"group_id",
+						"kind"
+					],
+					"before": [
+						"kind",
+						"group_id"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.locations.migration_gem_000006"
+				},
+				{
+					"after": [
+						"group_id",
+						"kind"
+					],
+					"before": [
+						"kind",
+						"group_id"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.locations.migration_gem_000007"
+				},
+				{
+					"after": [
+						"group_id",
+						"kind"
+					],
+					"before": [
+						"kind",
+						"group_id"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.locations.migration_gem_000008"
+				},
+				{
+					"after": [
+						"allocated",
+						"ascendancy",
+						"ascendancy_allocated",
+						"ascendancy_points",
+						"class_id",
+						"masteries",
+						"normal_points",
+						"source_version"
+					],
+					"before": [
+						"source_version",
+						"class_id",
+						"allocated",
+						"masteries",
+						"ascendancy",
+						"ascendancy_allocated",
+						"normal_points",
+						"ascendancy_points"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.talents"
+				},
+				{
+					"after": [
+						"default_class_id",
+						"default_start_id",
+						"excess_points_recorded",
+						"from_version",
+						"initial_recovery_count",
+						"legacy_allocated_nodes",
+						"legacy_points_earned",
+						"legacy_points_refunded",
+						"normal_budget_at_migration",
+						"returned_socketed_jewels"
+					],
+					"before": [
+						"from_version",
+						"legacy_points_earned",
+						"legacy_points_refunded",
+						"normal_budget_at_migration",
+						"excess_points_recorded",
+						"default_class_id",
+						"default_start_id",
+						"legacy_allocated_nodes",
+						"returned_socketed_jewels",
+						"initial_recovery_count"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.migration_ledger"
+				},
+				{
+					"after": 0,
+					"before": 4,
+					"kind": "array_container_type",
+					"path": "$.migration_ledger.legacy_allocated_nodes"
+				},
+				{
+					"after": [
+						"active_run",
+						"best_tiers",
+						"claimed_flasks",
+						"claimed_gems",
+						"next_run_id",
+						"normal_root_kills",
+						"pending_map_reward"
+					],
+					"before": [
+						"normal_root_kills",
+						"best_tiers",
+						"next_run_id",
+						"active_run",
+						"pending_map_reward",
+						"claimed_gems",
+						"claimed_flasks"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.journey"
+				},
+				{
+					"after": [
+						"broken_ruins",
+						"ginkgo_arcade",
+						"old_garden",
+						"sunwell_terrace"
+					],
+					"before": [
+						"old_garden",
+						"broken_ruins",
+						"sunwell_terrace",
+						"ginkgo_arcade"
+					],
+					"kind": "dictionary_key_order",
+					"path": "$.journey.best_tiers"
+				}
+			],
+			"loaded": true,
+			"operation": "refund",
+			"raw_variant_bytes_equal": false,
+			"sorted_dictionary_variant_bytes_equal": false,
+			"sorted_json_equal": true,
+			"stats_equal": true,
+			"top_level_order_equal": false,
+			"typed_values_equal": true
+		}
+	],
+	"sections": {
+		"boundaries": {
+			"checks": 101,
+			"duration_ms": 2801,
+			"failures": 2
+		}
+	},
+	"source_fixtures": {
+
+	},
+	"source_sha256": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+	"source_version": "3.29.1"
+}

@@ -1,0 +1,649 @@
+{
+	"base": "181216b",
+	"cases": [
+		{
+			"effect": 0,
+			"label": "first-step",
+			"node_id": "2151",
+			"preview": {
+				"allocate": {
+					"allowed": true,
+					"error_code": "",
+					"reason": ""
+				},
+				"refund": {
+					"allowed": false,
+					"error_code": "not_allocated",
+					"reason": "此天赋尚未分配"
+				},
+				"revision": 0
+			}
+		},
+		{
+			"effect": 0,
+			"label": "disconnected-source",
+			"node_id": "26740",
+			"preview": {
+				"allocate": {
+					"allowed": false,
+					"error_code": "invalid_candidate",
+					"reason": "断连天赋不在任何普通连通珠宝孔的有效范围内"
+				},
+				"refund": {
+					"allowed": false,
+					"error_code": "not_allocated",
+					"reason": "此天赋尚未分配"
+				},
+				"revision": 0
+			}
+		},
+		{
+			"effect": 0,
+			"label": "own-start",
+			"node_id": "58833",
+			"preview": {
+				"allocate": {
+					"allowed": false,
+					"error_code": "already_allocated",
+					"reason": "天赋已分配"
+				},
+				"refund": {
+					"allowed": false,
+					"error_code": "invalid_candidate",
+					"reason": "必须保留自己的职业起点"
+				},
+				"revision": 0
+			}
+		},
+		{
+			"effect": 0,
+			"label": "legal-leaf-refund",
+			"node_id": "48423",
+			"preview": {
+				"allocate": {
+					"allowed": false,
+					"error_code": "already_allocated",
+					"reason": "天赋已分配"
+				},
+				"refund": {
+					"allowed": true,
+					"error_code": "",
+					"reason": ""
+				},
+				"revision": 0
+			}
+		},
+		{
+			"effect": 0,
+			"label": "bridge-disconnection",
+			"node_id": "37690",
+			"preview": {
+				"allocate": {
+					"allowed": false,
+					"error_code": "already_allocated",
+					"reason": "天赋已分配"
+				},
+				"refund": {
+					"allowed": false,
+					"error_code": "invalid_candidate",
+					"reason": "断连天赋不在任何普通连通珠宝孔的有效范围内"
+				},
+				"revision": 0
+			}
+		},
+		{
+			"effect": 0,
+			"label": "no-points",
+			"node_id": "62103",
+			"preview": {
+				"allocate": {
+					"allowed": false,
+					"error_code": "no_points",
+					"reason": "没有可用天赋点"
+				},
+				"refund": {
+					"allowed": false,
+					"error_code": "not_allocated",
+					"reason": "此天赋尚未分配"
+				},
+				"revision": 0
+			}
+		},
+		{
+			"effect": 0,
+			"label": "no-points-still-refunds",
+			"node_id": "2151",
+			"preview": {
+				"allocate": {
+					"allowed": false,
+					"error_code": "already_allocated",
+					"reason": "天赋已分配"
+				},
+				"refund": {
+					"allowed": true,
+					"error_code": "",
+					"reason": ""
+				},
+				"revision": 0
+			}
+		},
+		{
+			"effect": 0,
+			"label": "unknown-id",
+			"node_id": "1",
+			"preview": {
+				"allocate": {
+					"allowed": false,
+					"error_code": "unknown_node",
+					"reason": "未知源天赋"
+				},
+				"refund": {
+					"allowed": false,
+					"error_code": "not_allocated",
+					"reason": "此天赋尚未分配"
+				},
+				"revision": 0
+			}
+		},
+		{
+			"effect": 0,
+			"label": "invalid-node-type-0",
+			"node_id": null,
+			"preview": {
+				"allocate": {
+					"allowed": false,
+					"error_code": "unknown_node",
+					"reason": "未知源天赋"
+				},
+				"refund": {
+					"allowed": false,
+					"error_code": "not_allocated",
+					"reason": "此天赋尚未分配"
+				},
+				"revision": 0
+			}
+		},
+		{
+			"effect": 0,
+			"label": "invalid-node-type-2",
+			"node_id": 2151,
+			"preview": {
+				"allocate": {
+					"allowed": false,
+					"error_code": "unknown_node",
+					"reason": "未知源天赋"
+				},
+				"refund": {
+					"allowed": false,
+					"error_code": "not_allocated",
+					"reason": "此天赋尚未分配"
+				},
+				"revision": 0
+			}
+		},
+		{
+			"effect": 0,
+			"label": "invalid-node-type-1",
+			"node_id": true,
+			"preview": {
+				"allocate": {
+					"allowed": false,
+					"error_code": "unknown_node",
+					"reason": "未知源天赋"
+				},
+				"refund": {
+					"allowed": false,
+					"error_code": "not_allocated",
+					"reason": "此天赋尚未分配"
+				},
+				"revision": 0
+			}
+		},
+		{
+			"effect": 0,
+			"label": "invalid-node-type-28",
+			"node_id": [],
+			"preview": {
+				"allocate": {
+					"allowed": false,
+					"error_code": "unknown_node",
+					"reason": "未知源天赋"
+				},
+				"refund": {
+					"allowed": false,
+					"error_code": "not_allocated",
+					"reason": "此天赋尚未分配"
+				},
+				"revision": 0
+			}
+		},
+		{
+			"effect": 0,
+			"label": "invalid-node-type-27",
+			"node_id": {
+
+			},
+			"preview": {
+				"allocate": {
+					"allowed": false,
+					"error_code": "unknown_node",
+					"reason": "未知源天赋"
+				},
+				"refund": {
+					"allowed": false,
+					"error_code": "not_allocated",
+					"reason": "此天赋尚未分配"
+				},
+				"revision": 0
+			}
+		},
+		{
+			"effect": null,
+			"label": "invalid-effect-type-0",
+			"node_id": "2151",
+			"preview": {
+				"allocate": {
+					"allowed": false,
+					"error_code": "unknown_node",
+					"reason": "未知源天赋"
+				},
+				"refund": {
+					"allowed": false,
+					"error_code": "not_allocated",
+					"reason": "此天赋尚未分配"
+				},
+				"revision": 0
+			}
+		},
+		{
+			"effect": true,
+			"label": "invalid-effect-type-1",
+			"node_id": "2151",
+			"preview": {
+				"allocate": {
+					"allowed": false,
+					"error_code": "unknown_node",
+					"reason": "未知源天赋"
+				},
+				"refund": {
+					"allowed": false,
+					"error_code": "not_allocated",
+					"reason": "此天赋尚未分配"
+				},
+				"revision": 0
+			}
+		},
+		{
+			"effect": 0.0,
+			"label": "invalid-effect-type-3",
+			"node_id": "2151",
+			"preview": {
+				"allocate": {
+					"allowed": false,
+					"error_code": "unknown_node",
+					"reason": "未知源天赋"
+				},
+				"refund": {
+					"allowed": false,
+					"error_code": "not_allocated",
+					"reason": "此天赋尚未分配"
+				},
+				"revision": 0
+			}
+		},
+		{
+			"effect": "0",
+			"label": "invalid-effect-type-4",
+			"node_id": "2151",
+			"preview": {
+				"allocate": {
+					"allowed": false,
+					"error_code": "unknown_node",
+					"reason": "未知源天赋"
+				},
+				"refund": {
+					"allowed": false,
+					"error_code": "not_allocated",
+					"reason": "此天赋尚未分配"
+				},
+				"revision": 0
+			}
+		},
+		{
+			"effect": 1,
+			"label": "ordinary-node-with-mastery",
+			"node_id": "2151",
+			"preview": {
+				"allocate": {
+					"allowed": false,
+					"error_code": "invalid_mastery",
+					"reason": "普通节点不能携带精通选择"
+				},
+				"refund": {
+					"allowed": false,
+					"error_code": "not_allocated",
+					"reason": "此天赋尚未分配"
+				},
+				"revision": 0
+			}
+		},
+		{
+			"effect": 0,
+			"label": "full-envelope-revision-limit",
+			"node_id": "2151",
+			"preview": {
+				"allocate": {
+					"allowed": false,
+					"error_code": "invalid_candidate",
+					"reason": "修订或物品序号无效"
+				},
+				"refund": {
+					"allowed": false,
+					"error_code": "not_allocated",
+					"reason": "此天赋尚未分配"
+				},
+				"revision": 1000000000
+			}
+		},
+		{
+			"effect": 0,
+			"label": "connected-unimplemented-source",
+			"node_id": "22497",
+			"preview": {
+				"allocate": {
+					"allowed": false,
+					"error_code": "invalid_candidate",
+					"reason": "此节点仍有未实现效果，不能分配：Cast Speed"
+				},
+				"refund": {
+					"allowed": false,
+					"error_code": "not_allocated",
+					"reason": "此天赋尚未分配"
+				},
+				"revision": 0
+			}
+		},
+		{
+			"effect": 47642,
+			"label": "mastery-valid-choice",
+			"node_id": "4139",
+			"preview": {
+				"allocate": {
+					"allowed": true,
+					"error_code": "",
+					"reason": ""
+				},
+				"refund": {
+					"allowed": false,
+					"error_code": "not_allocated",
+					"reason": "此天赋尚未分配"
+				},
+				"revision": 0
+			}
+		},
+		{
+			"effect": 0,
+			"label": "mastery-needs-choice",
+			"node_id": "4139",
+			"preview": {
+				"allocate": {
+					"allowed": false,
+					"error_code": "invalid_candidate",
+					"reason": "精通效果不在该节点的源效果列表中"
+				},
+				"refund": {
+					"allowed": false,
+					"error_code": "not_allocated",
+					"reason": "此天赋尚未分配"
+				},
+				"revision": 0
+			}
+		},
+		{
+			"effect": -1,
+			"label": "mastery-invalid-choice",
+			"node_id": "4139",
+			"preview": {
+				"allocate": {
+					"allowed": false,
+					"error_code": "invalid_candidate",
+					"reason": "精通效果不在该节点的源效果列表中"
+				},
+				"refund": {
+					"allowed": false,
+					"error_code": "not_allocated",
+					"reason": "此天赋尚未分配"
+				},
+				"revision": 0
+			}
+		},
+		{
+			"effect": 47642,
+			"label": "mastery-no-notable",
+			"node_id": "4139",
+			"preview": {
+				"allocate": {
+					"allowed": false,
+					"error_code": "invalid_candidate",
+					"reason": "精通需要同组普通连通的显著天赋"
+				},
+				"refund": {
+					"allowed": false,
+					"error_code": "not_allocated",
+					"reason": "此天赋尚未分配"
+				},
+				"revision": 0
+			}
+		},
+		{
+			"effect": 0,
+			"label": "mastery-dependent-notable-refund",
+			"node_id": "53118",
+			"preview": {
+				"allocate": {
+					"allowed": false,
+					"error_code": "already_allocated",
+					"reason": "天赋已分配"
+				},
+				"refund": {
+					"allowed": false,
+					"error_code": "invalid_candidate",
+					"reason": "精通需要同组普通连通的显著天赋"
+				},
+				"revision": 0
+			}
+		},
+		{
+			"effect": 47642,
+			"label": "mastery-refund",
+			"node_id": "4139",
+			"preview": {
+				"allocate": {
+					"allowed": false,
+					"error_code": "already_allocated",
+					"reason": "天赋已分配"
+				},
+				"refund": {
+					"allowed": true,
+					"error_code": "",
+					"reason": ""
+				},
+				"revision": 0
+			}
+		},
+		{
+			"effect": 0,
+			"label": "occupied-jewel-socket-refund",
+			"node_id": "6230",
+			"preview": {
+				"allocate": {
+					"allowed": false,
+					"error_code": "already_allocated",
+					"reason": "天赋已分配"
+				},
+				"refund": {
+					"allowed": false,
+					"error_code": "invalid_candidate",
+					"reason": "珠宝孔必须已分配"
+				},
+				"revision": 6
+			}
+		},
+		{
+			"effect": 0,
+			"label": "special-jewel-remote-allocation",
+			"node_id": "26740",
+			"preview": {
+				"allocate": {
+					"allowed": true,
+					"error_code": "",
+					"reason": ""
+				},
+				"refund": {
+					"allowed": false,
+					"error_code": "not_allocated",
+					"reason": "此天赋尚未分配"
+				},
+				"revision": 6
+			}
+		},
+		{
+			"effect": 0,
+			"label": "special-jewel-remote-refund",
+			"node_id": "26740",
+			"preview": {
+				"allocate": {
+					"allowed": false,
+					"error_code": "already_allocated",
+					"reason": "天赋已分配"
+				},
+				"refund": {
+					"allowed": true,
+					"error_code": "",
+					"reason": ""
+				},
+				"revision": 7
+			}
+		},
+		{
+			"effect": 0,
+			"label": "special-jewel-supporting-bridge",
+			"node_id": "48423",
+			"preview": {
+				"allocate": {
+					"allowed": false,
+					"error_code": "already_allocated",
+					"reason": "天赋已分配"
+				},
+				"refund": {
+					"allowed": false,
+					"error_code": "invalid_candidate",
+					"reason": "断连分配仅支持小型或显著天赋"
+				},
+				"revision": 7
+			}
+		},
+		{
+			"effect": 0,
+			"label": "jewel-assisted-bridge-refund",
+			"node_id": "55906",
+			"preview": {
+				"allocate": {
+					"allowed": false,
+					"error_code": "already_allocated",
+					"reason": "天赋已分配"
+				},
+				"refund": {
+					"allowed": true,
+					"error_code": "",
+					"reason": ""
+				},
+				"revision": 6
+			}
+		},
+		{
+			"effect": 0,
+			"label": "same-bridge-without-jewel",
+			"node_id": "55906",
+			"preview": {
+				"allocate": {
+					"allowed": false,
+					"error_code": "already_allocated",
+					"reason": "天赋已分配"
+				},
+				"refund": {
+					"allowed": false,
+					"error_code": "invalid_candidate",
+					"reason": "断连天赋不在任何普通连通珠宝孔的有效范围内"
+				},
+				"revision": 6
+			}
+		}
+	],
+	"checks": 1108,
+	"failure_count": 2,
+	"failures": [
+		"Retry survives real disk reload: allocate",
+		"Retry survives real disk reload: refund"
+	],
+	"sections": {
+		"boundaries": {
+			"checks": 101,
+			"duration_ms": 2938,
+			"failures": 2
+		},
+		"core": {
+			"checks": 553,
+			"duration_ms": 38835,
+			"failures": 0
+		},
+		"jewels": {
+			"checks": 184,
+			"duration_ms": 13187,
+			"failures": 0
+		},
+		"mastery": {
+			"checks": 254,
+			"duration_ms": 16358,
+			"failures": 0
+		},
+		"panel": {
+			"checks": 16,
+			"duration_ms": 1495,
+			"failures": 0
+		}
+	},
+	"source_fixtures": {
+		"effect_id": 47642,
+		"jewel_bridge": "55906",
+		"mastery_id": "4139",
+		"notable_id": "53118",
+		"path": [
+			"58833",
+			"2151",
+			"37690",
+			"48423",
+			"6204",
+			"63976",
+			"16775",
+			"46910",
+			"33740",
+			"15405",
+			"50862",
+			"44606",
+			"26523",
+			"6446",
+			"55649",
+			"44429",
+			"53118"
+		],
+		"reachable_count": 709,
+		"unsupported_node": "22497",
+		"unsupported_prefix": [
+			"58833",
+			"2151"
+		]
+	},
+	"source_sha256": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+	"source_version": "3.29.1"
+}

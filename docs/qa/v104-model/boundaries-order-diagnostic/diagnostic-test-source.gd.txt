@@ -1,0 +1,484 @@
+extends SceneTree
+## v104. Run only this test; V104_MODEL_CASE selects an affected retry group.
+## Real canonical model and pinned source graph; no prototype talent fixture.
+const Model = preload("res://scripts/canonical_game_state.gd")
+const Runtime = preload("res://scripts/passives/source_tree_runtime.gd")
+const Rules = preload("res://scripts/save/canonical_build_rules.gd")
+const PassiveUI = preload("res://scripts/ui/canonical_passive_panel.gd")
+const ExactData = preload("res://scripts/items/crafting_transaction_planner.gd")
+
+class FaultModel extends Model:
+	var fail_save := false
+	var write_calls := 0
+	var disk_stamp_calls := 0
+	func _write_bytes(path: String, bytes: PackedByteArray) -> Error:
+		write_calls += 1
+		return ERR_CANT_CREATE if fail_save else super._write_bytes(path, bytes)
+	func _canonical_disk_stamp(path: String) -> Dictionary:
+		disk_stamp_calls += 1
+		return super._canonical_disk_stamp(path)
+
+# The two commands below are copied verbatim from production base 181216b.
+# Their independent guards/candidate construction serve as the differential oracle.
+class FrozenModel extends FaultModel:
+	func allocate_passive(node_id: Variant, mastery_effect: Variant, expected_revision: Variant, path: String) -> Dictionary:
+		if _busy: return _failure("busy","当前操作尚未结束")
+		if not expected_revision is int or expected_revision != revision(): return _failure("stale_revision","天赋配置已变化")
+		if not node_id is String or not mastery_effect is int or not SourceTree.Data.standard_ids().has(node_id): return _failure("unknown_node","未知源天赋")
+		var candidate := snapshot()
+		if candidate.talents.allocated.has(node_id): return _failure("already_allocated","天赋已分配")
+		if candidate.talents.normal_points <= 0: return _failure("no_points","没有可用天赋点")
+		var node := SourceTree.Data.node(node_id)
+		if node.type == "mastery":
+			candidate.talents.masteries[node_id] = mastery_effect
+		elif mastery_effect != 0: return _failure("invalid_mastery","普通节点不能携带精通选择")
+		candidate.talents.allocated.append(node_id)
+		candidate.talents.normal_points -= 1
+		candidate.revision += 1
+		return _commit(candidate,path)
+
+
+	func refund_passive(node_id: Variant, expected_revision: Variant, path: String) -> Dictionary:
+		if _busy: return _failure("busy","当前操作尚未结束")
+		if not expected_revision is int or expected_revision != revision(): return _failure("stale_revision","天赋配置已变化")
+		if not node_id is String or not _current.talents.allocated.has(node_id): return _failure("not_allocated","此天赋尚未分配")
+		var candidate := snapshot()
+		candidate.talents.allocated.erase(node_id)
+		candidate.talents.masteries.erase(node_id)
+		candidate.talents.normal_points += 1
+		candidate.revision += 1
+		return _commit(candidate,path)
+
+
+var checks := 0
+var failures := 0
+var serial := 0
+var run_id := str(Time.get_ticks_usec())
+var output_dir := ""
+var report := {"base":"181216b", "source_version":"3.29.1", "source_sha256":Runtime.Data.SOURCE_SHA256,
+	"sections":{}, "cases":[], "failures":[], "source_fixtures":{}, "reloads":[]}
+var base_source := {}
+var graph := {}
+
+func _initialize() -> void:
+	call_deferred("run")
+
+func check(value: bool, label: String) -> bool:
+	checks += 1
+	if not value:
+		failures += 1
+		report.failures.append(label)
+		push_error(label)
+	return value
+
+func fixture(source: Dictionary = {}, frozen: bool = false) -> Dictionary:
+	serial += 1
+	var model: FaultModel = FrozenModel.new() if frozen else FaultModel.new()
+	if not source.is_empty(): model._accept_memory(source.duplicate(true))
+	check(Rules.reason(model.snapshot()).is_empty(), "Fixture passes full canonical authority")
+	var path := "user://v104-preview-%s-%03d.json" % [run_id, serial]
+	check(model.save_build(path) == OK, "Persist lawful fixture")
+	model.get_stats()
+	model.get_combat_snapshot()
+	model.get_group_cast("group_000001")
+	var events := {"changed":0}
+	model.changed.connect(func() -> void: events.changed += 1)
+	return {"model":model, "path":path, "events":events}
+
+func economy(source: Dictionary) -> PackedByteArray:
+	var copy := source.duplicate(true)
+	copy.erase("talents")
+	copy.erase("revision")
+	return var_to_bytes(copy)
+
+func mark(f: Dictionary) -> Dictionary:
+	var model: FaultModel = f.model
+	var files := DirAccess.get_files_at(ProjectSettings.globalize_path(f.path).get_base_dir())
+	files.sort()
+	return {"typed":var_to_bytes(model.snapshot()), "economy":economy(model.snapshot()),
+		"stats":var_to_bytes(model.get_stats()), "combat":var_to_bytes(model.get_combat_snapshot()),
+		"cast":var_to_bytes(model.get_group_cast("group_000001")), "cache":model.cache_diagnostics(),
+		"revision":model.revision(), "attempts":model.save_attempts, "saves":model.successful_saves,
+		"writes":model.write_calls, "stamps":model.disk_stamp_calls, "changed":f.events.changed,
+		"disk":FileAccess.get_file_as_bytes(f.path) if FileAccess.file_exists(f.path) else PackedByteArray(),
+		"disk_exists":FileAccess.file_exists(f.path), "files":files, "last_error":model.last_error,
+		"receipt":var_to_bytes([model._path, model._disk_bytes, model._disk_expected_exists, model._disk_revision]),
+		"busy":model._busy, "epoch":model._content_epoch}
+
+func read_preview(f: Dictionary, node_id: Variant, effect: Variant = 0) -> Dictionary:
+	var before := mark(f)
+	seed(104029)
+	var expected_rng := randi()
+	seed(104029)
+	var preview: Dictionary = f.model.passive_action_preview(node_id, effect)
+	check(randi() == expected_rng, "Preview preserves global RNG")
+	check(mark(f) == before, "Preview preserves typed snapshot, live stats/casts/cache, revision, economy/RNG fields, signals, counters, disk and receipt")
+	check(preview.keys().size() == 3 and preview.get("revision") is int and preview.revision == before.revision,
+		"Preview is a detached current revision with exactly two actions")
+	for action: String in ["allocate", "refund"]:
+		var row: Dictionary = preview.get(action, {})
+		check(row.size() == 3 and row.get("allowed") is bool and row.get("error_code") is String and row.get("reason") is String,
+			"Typed minimal action result: " + action)
+		check((row.allowed and row.error_code.is_empty() and row.reason.is_empty()) or (not row.allowed and not row.error_code.is_empty() and not row.reason.is_empty()),
+			"Allowed/rejected metadata is coherent: " + action)
+	return preview
+
+func command(f: Dictionary, action: String, node_id: Variant, effect: Variant, revision: Variant) -> Dictionary:
+	return f.model.allocate_passive(node_id, effect, revision, f.path) if action == "allocate" else f.model.refund_passive(node_id, revision, f.path)
+
+func compare_case(label: String, source: Dictionary, node_id: Variant, effect: Variant = 0,
+		expected_allocate: bool = false, expected_refund: bool = false, code: String = "", reason_part: String = "", action: String = "allocate") -> void:
+	var f := fixture(source)
+	var preview := read_preview(f, node_id, effect)
+	check(preview.allocate.allowed == expected_allocate and preview.refund.allowed == expected_refund, label + ": expected separate allocation/refund eligibility")
+	if not code.is_empty(): check(preview[action].error_code == code, label + ": precise denial code")
+	if not reason_part.is_empty(): check(reason_part in preview[action].reason, label + ": precise authority reason")
+	report.cases.append({"label":label, "node_id":node_id, "effect":effect, "preview":preview.duplicate(true)})
+	for operation: String in ["allocate", "refund"]:
+		var actual := fixture(source)
+		var frozen := fixture(source, true)
+		var before := mark(actual)
+		var result := command(actual, operation, node_id, effect, actual.model.revision())
+		var old_result := command(frozen, operation, node_id, effect, frozen.model.revision())
+		check(result == old_result, label + ": complete command result equals 181216b: " + operation)
+		check(var_to_bytes(actual.model.snapshot()) == var_to_bytes(frozen.model.snapshot()) and actual.model.get_stats() == frozen.model.get_stats()
+			and FileAccess.get_file_as_bytes(actual.path) == FileAccess.get_file_as_bytes(frozen.path), label + ": exact saved/live differential: " + operation)
+		check(preview[operation].allowed == result.ok and preview[operation].error_code == result.error_code and preview[operation].reason == result.reason,
+			label + ": preview matches fresh real transaction: " + operation)
+		check(economy(actual.model.snapshot()) == before.economy, label + ": all non-talent/revision fields, items, currency, serials and crafting/journey state remain identical")
+		if result.ok:
+			check(actual.events.changed == 1 and actual.model.revision() == before.revision + 1
+				and actual.model.save_attempts == before.attempts + 1 and actual.model.successful_saves == before.saves + 1,
+				label + ": successful command persists once and signals once")
+		else:
+			check(mark(actual) == before, label + ": rules denial is completely atomic")
+
+func selection(allocated: Array, masteries: Dictionary = {}, level: int = 119) -> Dictionary:
+	var source := base_source.duplicate(true)
+	source.progress = {"level":level, "xp":0}
+	source.talents.allocated = allocated.duplicate(true)
+	source.talents.masteries = masteries.duplicate(true)
+	source.talents.normal_points = mini(level + 4, 123) - allocated.size() + 1
+	return source
+
+func source_graph() -> Dictionary:
+	if not graph.is_empty(): return graph
+	var context := Runtime._context(0, 123)
+	var reached := {"58833":true}
+	var queue: Array[String] = ["58833"]
+	var parent := {}
+	var blocked := ""
+	while not queue.is_empty():
+		var current: String = queue.pop_front()
+		for adjacent: String in context.adjacency[current]:
+			if reached.has(adjacent): continue
+			var node: Dictionary = context.nodes[adjacent]
+			if node.type in ["start", "proxy", "mastery"] or node.blighted: continue
+			if Runtime.node_effect(adjacent).status != "full":
+				if blocked.is_empty(): blocked = adjacent; parent[adjacent] = current
+				continue
+			reached[adjacent] = true
+			parent[adjacent] = current
+			queue.append(adjacent)
+	graph = {"context":context, "reached":reached, "parent":parent, "blocked":blocked}
+	check(reached.size() > 20 and not blocked.is_empty(), "Pinned graph has supported paths and unsupported frontier")
+	return graph
+
+func path_to(node_id: String) -> Array:
+	var ids: Array = [node_id]
+	var current := node_id
+	while source_graph().parent.has(current):
+		current = graph.parent[current]
+		ids.push_front(current)
+	return ids
+
+func core_cases() -> void:
+	compare_case("first-step", base_source, "2151", 0, true, false)
+	compare_case("disconnected-source", base_source, "26740", 0, false, false, "invalid_candidate", "断连")
+	compare_case("own-start", base_source, "58833", 0, false, false, "invalid_candidate", "职业起点", "refund")
+	var chain := selection(["58833", "2151", "37690", "48423"], {}, 1)
+	compare_case("legal-leaf-refund", chain, "48423", 0, false, true)
+	compare_case("bridge-disconnection", chain, "37690", 0, false, false, "invalid_candidate", "断连", "refund")
+	var spent := selection(["58833", "2151", "15144", "47062", "48828", "55373"], {}, 1)
+	compare_case("no-points", spent, "62103", 0, false, false, "no_points")
+	compare_case("no-points-still-refunds", spent, "2151", 0, false, true, "already_allocated")
+	compare_case("unknown-id", base_source, "1", 0, false, false, "unknown_node")
+	for node_id: Variant in [null, 2151, true, [], {}]:
+		compare_case("invalid-node-type-" + str(typeof(node_id)), base_source, node_id, 0, false, false, "unknown_node")
+	for effect: Variant in [null, true, 0.0, "0"]:
+		compare_case("invalid-effect-type-" + str(typeof(effect)), base_source, "2151", effect, false, false, "unknown_node")
+	compare_case("ordinary-node-with-mastery", base_source, "2151", 1, false, false, "invalid_mastery")
+	var ceiling := base_source.duplicate(true)
+	ceiling.revision = Rules.MAX_SERIAL
+	compare_case("full-envelope-revision-limit", ceiling, "2151", 0, false, false, "invalid_candidate", "修订")
+
+func mastery_cases() -> void:
+	var g := source_graph()
+	var prefix := path_to(g.blocked)
+	prefix.pop_back()
+	compare_case("connected-unimplemented-source", selection(prefix), g.blocked, 0, false, false, "invalid_candidate", "未实现")
+	var mastery_id := ""
+	var notable_id := ""
+	var effect_id := 0
+	for id: String in g.context.nodes:
+		if g.context.nodes[id].type != "mastery": continue
+		for notable: String in g.reached:
+			if g.context.nodes[notable].type != "notable" or g.context.nodes[notable].group_id != g.context.nodes[id].group_id: continue
+			for effect: int in g.context.nodes[id].mastery_effects:
+				if Runtime.node_effect(id, effect).status == "full":
+					mastery_id = id; notable_id = notable; effect_id = effect; break
+			if not mastery_id.is_empty(): break
+		if not mastery_id.is_empty(): break
+	if not check(not mastery_id.is_empty(), "Discover fully executed mastery via original connected notable"): return
+	var ids := path_to(notable_id)
+	var source := selection(ids)
+	report.source_fixtures = {"unsupported_node":g.blocked, "unsupported_prefix":prefix, "mastery_id":mastery_id,
+		"notable_id":notable_id, "effect_id":effect_id, "path":ids.duplicate(), "reachable_count":g.reached.size()}
+	compare_case("mastery-valid-choice", source, mastery_id, effect_id, true, false)
+	compare_case("mastery-needs-choice", source, mastery_id, 0, false, false, "invalid_candidate", "精通效果")
+	compare_case("mastery-invalid-choice", source, mastery_id, -1, false, false, "invalid_candidate", "精通效果")
+	compare_case("mastery-no-notable", base_source, mastery_id, effect_id, false, false, "invalid_candidate", "同组")
+	ids.append(mastery_id)
+	var selected := selection(ids, {mastery_id:effect_id})
+	compare_case("mastery-dependent-notable-refund", selected, notable_id, 0, false, false, "invalid_candidate", "同组", "refund")
+	compare_case("mastery-refund", selected, mastery_id, effect_id, false, true)
+	var f := fixture(source)
+	var valid := read_preview(f, mastery_id, effect_id)
+	var frozen := var_to_bytes(valid)
+	var missing := read_preview(f, mastery_id, 0)
+	var ordinary := read_preview(f, "15144")
+	check(valid.allocate.allowed and not missing.allocate.allowed and var_to_bytes(valid) == frozen, "Changing selected node/effect leaves prior result detached")
+	valid.allocate.reason = "caller mutated"
+	valid.refund.allowed = true
+	valid.revision = -1
+	check(read_preview(f, mastery_id, effect_id).allocate.reason.is_empty() and read_preview(f, mastery_id, 0) == missing
+		and read_preview(f, "15144") == ordinary, "Mutating returned actions/revision cannot poison later selections")
+
+func jewel_cases() -> void:
+	var f := fixture()
+	for id: String in ["2151", "37690", "48423", "6230"]:
+		check(f.model.allocate_passive(id, 0, f.model.revision(), f.path).ok, "Commit original Scion socket path " + id)
+	var jewel: String = f.model.award_special_jewel()
+	check(not jewel.is_empty() and f.model.move_item(jewel, {"kind":"passive_socket", "node_id":"6230"}, f.model.revision(), f.path).ok,
+		"Admit and socket actual special jewel instance")
+	var source: Dictionary = f.model.snapshot()
+	compare_case("occupied-jewel-socket-refund", source, "6230", 0, false, false, "invalid_candidate", "珠宝", "refund")
+	compare_case("special-jewel-remote-allocation", source, "26740", 0, true, false)
+	check(f.model.allocate_passive("26740", 0, f.model.revision(), f.path).ok and f.model.get_stats().life_regen > 0.0, "Remote exception gives actual life regeneration")
+	compare_case("special-jewel-remote-refund", f.model.snapshot(), "26740", 0, false, true)
+	compare_case("special-jewel-supporting-bridge", f.model.snapshot(), "48423", 0, false, false, "invalid_candidate", "断连", "refund")
+	# Find an original path where a bridge refund legally leaves the remote
+	# endpoint supported by this socket, then prove the same refund needs it.
+	var ids := path_to("26740")
+	for id: String in ["2151", "37690", "48423", "6230"]:
+		if not ids.has(id): ids.append(id)
+	source.talents.allocated = ids
+	source.progress = {"level":119, "xp":0}
+	source.talents.normal_points = 123 - ids.size() + 1
+	check(Rules.reason(source).is_empty(), "Normally connected remote endpoint plus actual jewel is lawful")
+	var bridge := ""
+	for id: String in ids:
+		if id in ["58833", "26740", "2151", "37690", "48423", "6230"]: continue
+		var candidate := source.duplicate(true)
+		candidate.talents.allocated.erase(id)
+		candidate.talents.normal_points += 1
+		if not Rules.reason(candidate).is_empty(): continue
+		var without := candidate.duplicate(true)
+		without.items.erase(jewel)
+		without.locations.erase(jewel)
+		if not Rules.reason(without).is_empty(): bridge = id; break
+	if check(not bridge.is_empty(), "Real graph contains legal jewel-assisted bridge refund"):
+		report.source_fixtures["jewel_bridge"] = bridge
+		compare_case("jewel-assisted-bridge-refund", source, bridge, 0, false, true)
+		var without := source.duplicate(true)
+		without.items.erase(jewel)
+		without.locations.erase(jewel)
+		compare_case("same-bridge-without-jewel", without, bridge, 0, false, false, "invalid_candidate", "断连", "refund")
+
+func failed_commit_unchanged(f: Dictionary, before: Dictionary, attempts: int, label: String) -> void:
+	var after := mark(f)
+	check(after.typed == before.typed and after.stats == before.stats and after.combat == before.combat and after.cast == before.cast
+		and after.economy == before.economy and after.disk == before.disk and after.receipt == before.receipt
+		and after.changed == before.changed and after.revision == before.revision and after.saves == before.saves
+		and after.attempts == before.attempts + attempts and not after.busy, label)
+
+# Sort dictionary insertion order only. Preserve Array container types,
+# array order, primitive types and every value when diagnosing save reloads.
+func ordered_variant(value: Variant) -> Variant:
+	if value is Dictionary:
+		var ordered: Dictionary = value.duplicate()
+		ordered.clear()
+		var keys: Array = value.keys()
+		keys.sort()
+		for key: Variant in keys: ordered[key] = ordered_variant(value[key])
+		return ordered
+	if value is Array:
+		var ordered: Array = value.duplicate()
+		for index: int in range(value.size()): ordered[index] = ordered_variant(value[index])
+		return ordered
+	return value
+
+func order_differences(left: Variant, right: Variant, path: String = "$") -> Array:
+	var differences: Array = []
+	if typeof(left) != typeof(right):
+		return [{"path":path, "kind":"value_type", "before_type":typeof(left), "after_type":typeof(right)}]
+	if left is Dictionary:
+		if left.keys() != right.keys(): differences.append({"path":path, "kind":"dictionary_key_order", "before":left.keys(), "after":right.keys()})
+		for key: Variant in left:
+			if right.has(key): differences.append_array(order_differences(left[key], right[key], path + "." + str(key)))
+	elif left is Array:
+		if left.is_typed() != right.is_typed() or left.get_typed_builtin() != right.get_typed_builtin():
+			differences.append({"path":path, "kind":"array_container_type", "before":left.get_typed_builtin(), "after":right.get_typed_builtin()})
+		for index: int in range(mini(left.size(), right.size())):
+			differences.append_array(order_differences(left[index], right[index], "%s[%d]" % [path, index]))
+	elif left != right: differences.append({"path":path, "kind":"value", "before":left, "after":right})
+	return differences
+
+func boundary_cases() -> void:
+	var f := fixture()
+	var old := read_preview(f, "2151")
+	check(old.allocate.allowed and f.model.allocate_passive("15144", 0, old.revision, f.path).ok, "State changes after an allowed preview")
+	var before := mark(f)
+	var stale: Dictionary = f.model.allocate_passive("2151", 0, old.revision, f.path)
+	check(not stale.ok and stale.error_code == "stale_revision" and mark(f) == before, "Captured preview revision never bypasses current command guard")
+	check(f.model.allocate_passive("2151", 0, f.model.revision(), f.path).ok, "Refreshed current command succeeds")
+	var saved_preview := read_preview(f, "2151")
+	check(saved_preview.refund.allowed and f.model.refund_passive("2151", f.model.revision(), f.path).ok, "Previously previewed refund executed once")
+	check(f.model.refund_passive("2151", saved_preview.revision, f.path).error_code == "stale_revision"
+		and f.model.refund_passive("2151", f.model.revision(), f.path).error_code == "not_allocated", "Replay rechecks both revision and live membership")
+	f.model._busy = true
+	var busy := read_preview(f, "15144")
+	check(busy.allocate.error_code == "busy" and busy.refund.error_code == "busy", "Reentrant preview reflects both busy command guards")
+	f.model._busy = false
+	for operation: String in ["allocate", "refund"]:
+		var source := base_source if operation == "allocate" else selection(["58833", "2151"], {}, 1)
+		f = fixture(source)
+		var allowed := read_preview(f, "2151")
+		check(allowed[operation].allowed, "Save fault starts from allowed " + operation)
+		f.model.fail_save = true
+		before = mark(f)
+		var failed := command(f, operation, "2151", 0, allowed.revision)
+		check(not failed.ok and failed.error_code == "save_failed", "Final persistence independently rejects " + operation)
+		failed_commit_unchanged(f, before, 1, "Failed write preserves complete state, currency/RNG fields and original save: " + operation)
+		check(read_preview(f, "2151")[operation].allowed, "Write fault does not turn legality preview into save guarantee")
+		f.model.fail_save = false
+		var retry := command(f, operation, "2151", 0, allowed.revision)
+		check(retry.ok and f.model.revision() == before.revision + 1 and f.events.changed == before.changed + 1
+			and f.model.save_attempts == before.attempts + 2 and f.model.successful_saves == before.saves + 1, "Restored save retries original command exactly once: " + operation)
+		var loaded := Model.new()
+		var loaded_ok := loaded.load_build(f.path)
+		# Canonical JSON intentionally sorts dictionary keys. Compare every value
+		# and type on reload; retain byte equality for same-memory preview checks.
+		var typed_equal: bool = ExactData._same_data(loaded.snapshot(), f.model.snapshot())
+		var stats_equal: bool = ExactData._same_data(loaded.get_stats(), f.model.get_stats())
+		var ordered_bytes_equal: bool = var_to_bytes(ordered_variant(loaded.snapshot())) == var_to_bytes(ordered_variant(f.model.snapshot()))
+		var json_equal: bool = JSON.stringify(loaded.snapshot(), "", true, true) == JSON.stringify(f.model.snapshot(), "", true, true)
+		report.reloads.append({"operation":operation, "loaded":loaded_ok, "typed_values_equal":typed_equal,
+			"stats_equal":stats_equal, "raw_variant_bytes_equal":var_to_bytes(loaded.snapshot()) == var_to_bytes(f.model.snapshot()),
+			"top_level_order_equal":loaded.snapshot().keys() == f.model.snapshot().keys(),
+			"sorted_dictionary_variant_bytes_equal":ordered_bytes_equal, "sorted_json_equal":json_equal,
+			"difference_paths":order_differences(f.model.snapshot(), loaded.snapshot())})
+		check(loaded_ok and typed_equal and stats_equal and ordered_bytes_equal and json_equal, "Retry survives real disk reload with every value and type preserved: " + operation)
+	f = fixture()
+	var allowed := read_preview(f, "2151")
+	var disk := FileAccess.get_file_as_bytes(f.path)
+	var file := FileAccess.open(f.path, FileAccess.WRITE)
+	file.store_buffer(disk)
+	file.store_string("\n")
+	file.close()
+	check(read_preview(f, "2151") == allowed, "Preview is independent of externally altered disk bytes")
+	before = mark(f)
+	var changed_disk := command(f, "allocate", "2151", 0, allowed.revision)
+	check(not changed_disk.ok and changed_disk.error_code == "save_failed" and "外部修改" in changed_disk.reason, "Real command detects disk change after allowed preview")
+	failed_commit_unchanged(f, before, 0, "External-disk rejection keeps memory and external bytes")
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(f.path))
+	check(read_preview(f, "2151") == allowed, "Preview also works without a disk file and creates none")
+	file = FileAccess.open(f.path, FileAccess.WRITE)
+	file.store_buffer(disk)
+	file.close()
+	check(command(f, "allocate", "2151", 0, allowed.revision).ok, "Restoring exact disk receipt enables ordinary commit retry")
+
+func panel_cases() -> void:
+	var f := fixture(selection(["58833", "2151", "37690", "48423"], {}, 1))
+	root.size = Vector2i(1280, 800)
+	var panel := PassiveUI.new()
+	root.add_child(panel)
+	panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	panel.setup(f.model, f.path)
+	await process_frame
+	var before := mark(f)
+	panel._tree.node_clicked.emit("37690", MOUSE_BUTTON_LEFT, false)
+	check(panel._refund.disabled and "无法退还" in panel._detail.text and "断连" in panel._refund.tooltip_text,
+		"Actual source click explains bridge refund denial")
+	panel._tree.node_clicked.emit("48423", MOUSE_BUTTON_LEFT, false)
+	check(not panel._refund.disabled and not "无法退还" in panel._detail.text and not "断连" in panel._refund.tooltip_text,
+		"Selecting actual leaf clears prior bridge denial")
+	check(mark(f) == before, "Source selection and live detail preview have no game-state or save side effects")
+	panel._refund.pressed.emit()
+	await process_frame
+	check(not f.model.snapshot().talents.allocated.has("48423") and panel._refund.disabled and not panel._allocate.disabled,
+		"Actual refund button commits and refreshes both buttons")
+	check(not "当前操作尚未结束" in panel._detail.text and not "当前操作尚未结束" in panel._allocate.tooltip_text,
+		"Refund refresh does not retain in-transaction busy result")
+	panel._allocate.pressed.emit()
+	await process_frame
+	check(f.model.snapshot().talents.allocated.has("48423") and panel._allocate.disabled and not panel._refund.disabled,
+		"Actual allocation button commits and next-frame refund is ready")
+	check(not "当前操作尚未结束" in panel._detail.text and not "当前操作尚未结束" in panel._refund.tooltip_text,
+		"Allocation refresh does not retain in-transaction busy result")
+	# External model mutations exercise deferred changed handling without _report.
+	panel.hide()
+	await process_frame
+	var generation: int = panel.refresh_generation
+	check(f.model.refund_passive("48423", f.model.revision(), f.path).ok, "Hidden-panel model changes through real command")
+	await process_frame
+	check(panel.refresh_generation == generation and panel._refresh_dirty, "Hidden changed signal preserves dirty state without refresh")
+	panel.show()
+	await process_frame
+	check(panel.refresh_generation == generation + 1 and not panel._refresh_dirty and not panel._allocate.disabled and panel._refund.disabled,
+		"Reopening refreshes once against committed state")
+	generation = panel.refresh_generation
+	check(f.model.allocate_passive("48423", 0, f.model.revision(), f.path).ok, "Visible-panel external transaction succeeds")
+	check(panel.refresh_generation == generation and panel._refresh_dirty, "Visible changed signal schedules rather than refreshing during busy commit")
+	await process_frame
+	check(panel.refresh_generation == generation + 1 and not panel._refund.disabled and not panel._refresh_dirty
+		and not "当前操作尚未结束" in panel._detail.text, "Deferred model-change refresh sees final non-busy state")
+	check(f.events.changed == 4 and f.model.save_attempts == before.attempts + 4 and f.model.successful_saves == before.saves + 4,
+		"UI cross-check has exactly four commands, saves and changed signals")
+	panel.queue_free()
+	await process_frame
+
+func run() -> void:
+	var isolated := OS.get_environment("XDG_DATA_HOME")
+	if not isolated.begins_with("/tmp/godot-m1-v104-model/") or not OS.get_user_data_dir().begins_with(isolated + "/"):
+		push_error("Use isolated /tmp/godot-m1-v104-model/data")
+		quit(78)
+		return
+	output_dir = OS.get_environment("V104_MODEL_OUT")
+	var initial := Model.new()
+	base_source = initial.snapshot()
+	var selected := OS.get_environment("V104_MODEL_CASE")
+	for section: String in ["core", "mastery", "jewels", "boundaries", "panel"]:
+		if not selected.is_empty() and selected != section: continue
+		var old_checks := checks
+		var old_failures := failures
+		var started := Time.get_ticks_msec()
+		match section:
+			"core": core_cases()
+			"mastery": mastery_cases()
+			"jewels": jewel_cases()
+			"boundaries": boundary_cases()
+			"panel": await panel_cases()
+		report.sections[section] = {"checks":checks-old_checks, "failures":failures-old_failures, "duration_ms":Time.get_ticks_msec()-started}
+		print("V104 passive preview %s: %s" % [section, JSON.stringify(report.sections[section])])
+	report["checks"] = checks
+	report["failure_count"] = failures
+	if not output_dir.is_empty():
+		DirAccess.make_dir_recursive_absolute(output_dir)
+		var file := FileAccess.open(output_dir.path_join("model-report.json"), FileAccess.WRITE)
+		if file != null:
+			file.store_string(JSON.stringify(report, "\t", true, true))
+			file.close()
+		else: check(false, "Write model evidence report")
+	print("V104 passive action preview: %d checks, %d failures" % [checks, failures])
+	quit(1 if failures else 0)

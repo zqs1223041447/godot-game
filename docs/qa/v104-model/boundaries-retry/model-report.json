@@ -1,0 +1,37 @@
+{
+	"base": "181216b",
+	"cases": [],
+	"checks": 101,
+	"failure_count": 0,
+	"failures": [],
+	"reloads": [
+		{
+			"loaded": true,
+			"operation": "allocate",
+			"raw_variant_bytes_equal": false,
+			"stats_equal": true,
+			"top_level_order_equal": false,
+			"typed_values_equal": true
+		},
+		{
+			"loaded": true,
+			"operation": "refund",
+			"raw_variant_bytes_equal": false,
+			"stats_equal": true,
+			"top_level_order_equal": false,
+			"typed_values_equal": true
+		}
+	],
+	"sections": {
+		"boundaries": {
+			"checks": 101,
+			"duration_ms": 3236,
+			"failures": 0
+		}
+	},
+	"source_fixtures": {
+
+	},
+	"source_sha256": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+	"source_version": "3.29.1"
+}
