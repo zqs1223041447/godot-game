@@ -1,0 +1,40 @@
+{
+  "scope": "Archive integrity and portable source review only",
+  "gameplay_or_main_changes": false,
+  "blender_runs": 0,
+  "godot_runs": 0,
+  "new_renders": 0,
+  "original_scene_hash": "b9f9ec71ff24d593bbe85b6294aeca24e2d0ca86ddea6370206bb2bdb127ffd7",
+  "scene_source_bytes_unchanged": true,
+  "environment_render_saved_once": "godot_preview/assets/environment-final.png",
+  "source_findings_resolved": {
+    "grass_credit": "Archive SOURCES.md now names Rico Cilliers only, per official asset page; original historical checksum remains identified as such",
+    "font_license": "OFL-NotoSansCJK.txt included next to identical Arena Sans SC font",
+    "packed_scene_verifier": "Original save_as_mainfile removed; optional report cannot overwrite original verification-final.json",
+    "build_recipe": "Explicitly documented as requiring the intentionally omitted raw assets directory",
+    "preview_startup": "Use independent project with --script res://preview.gd after normal initial resource import"
+  },
+  "excluded": [
+    "original source ZIP",
+    "raw assets download directory",
+    ".blend1 backup",
+    "one-off inspected .blend",
+    "intermediate previews",
+    "logs",
+    ".godot cache",
+    "later layer exports"
+  ],
+  "existing_evidence_reused": "Direct packed scene source audit, original 77 source hashes, original native static Godot observation at 2026-10-07 14:43 UTC",
+  "static_local_checks": {
+    "python_ast_files": 5,
+    "preview_res_paths": 3,
+    "newly_copied_import_settings": 3,
+    "packed_blend_files": 1
+  },
+  "limitations": [
+    "Static one-camera environment and one displayed character direction",
+    "AI mother image is not a rigged or animated 3D character",
+    "No collision, live map, animation or FPS acceptance",
+    "Branch backup only; no main integration"
+  ]
+}

@@ -1,0 +1,310 @@
+{
+  "schema_version": 1,
+  "audited_on_utc": "2026-10-07",
+  "scope": "Read-only source, license, dependency, and portability audit of the original environment and independent Godot static art study. This record preserves completed findings; no Blender/Godot execution or asset download was performed during the audit.",
+  "source_sets": {
+    "environment": "art-work/v108-professional-environment",
+    "godot": "art-work/v108-quality-scene",
+    "font_origin": "v108-art-direction-study/assets/fonts/arena_sans.otf",
+    "imagegen_origin_filename": "exec-ef974603-d866-4e93-a3f6-3eee2c594b9b.png"
+  },
+  "status": {
+    "environment_provenance": "confirmed_for_the_nine_listed_asset_families",
+    "environment_license": "CC0-1.0",
+    "unknown_environment_asset_license_found": false,
+    "archive_or_game_acceptance_claimed": false
+  },
+  "official_license_urls": [
+    "https://polyhaven.com/license",
+    "https://creativecommons.org/publicdomain/zero/1.0/"
+  ],
+  "assets": [
+    {
+      "id": "modular_fort_01",
+      "authors": [
+        {
+          "name": "Rico Cilliers"
+        }
+      ],
+      "use": "Authored gate, walls, buttress, and modified fallen masonry",
+      "credit_status": "matches_official_page",
+      "official_asset_url": "https://polyhaven.com/a/modular_fort_01",
+      "license": "CC0-1.0",
+      "present_in_build_script": true,
+      "present_in_packed_image_inventory": true
+    },
+    {
+      "id": "fern_02",
+      "authors": [
+        {
+          "name": "Rico Cilliers",
+          "role": "Modeling"
+        },
+        {
+          "name": "Rob Tuytel",
+          "role": "Scanning"
+        }
+      ],
+      "use": "Four fern-clump variants, instanced at edges and wall roots",
+      "credit_status": "matches_official_page",
+      "official_asset_url": "https://polyhaven.com/a/fern_02",
+      "license": "CC0-1.0",
+      "present_in_build_script": true,
+      "present_in_packed_image_inventory": true
+    },
+    {
+      "id": "rock_moss_set_01",
+      "authors": [
+        {
+          "name": "Kless Gyzen"
+        }
+      ],
+      "use": "Framing rocks, stones, and smaller rubble",
+      "credit_status": "matches_official_page",
+      "official_asset_url": "https://polyhaven.com/a/rock_moss_set_01",
+      "license": "CC0-1.0",
+      "present_in_build_script": true,
+      "present_in_packed_image_inventory": true
+    },
+    {
+      "id": "forest_ground_04",
+      "authors": [
+        {
+          "name": "Rico Cilliers",
+          "role": "Minor Adjustment"
+        },
+        {
+          "name": "Rob Tuytel",
+          "role": "Photography, Processing"
+        }
+      ],
+      "use": "Ground soil/gravel diffuse and normal layers",
+      "credit_status": "matches_official_page",
+      "official_asset_url": "https://polyhaven.com/a/forest_ground_04",
+      "license": "CC0-1.0",
+      "present_in_build_script": true,
+      "present_in_packed_image_inventory": true
+    },
+    {
+      "id": "aerial_grass_rock",
+      "authors": [
+        {
+          "name": "Rob Tuytel"
+        }
+      ],
+      "use": "Ground grass/moss diffuse and normal layers",
+      "credit_status": "matches_official_page",
+      "official_asset_url": "https://polyhaven.com/a/aerial_grass_rock",
+      "license": "CC0-1.0",
+      "present_in_build_script": true,
+      "present_in_packed_image_inventory": true
+    },
+    {
+      "id": "medieval_blocks_05",
+      "authors": [
+        {
+          "name": "Rob Tuytel"
+        }
+      ],
+      "use": "Localized old approach diffuse and normal layers",
+      "credit_status": "matches_official_page",
+      "official_asset_url": "https://polyhaven.com/a/medieval_blocks_05",
+      "license": "CC0-1.0",
+      "present_in_build_script": true,
+      "present_in_packed_image_inventory": true
+    },
+    {
+      "id": "grass_bermuda_01",
+      "authors": [
+        {
+          "name": "Rico Cilliers"
+        }
+      ],
+      "use": "Instanced grass blades at selected banks",
+      "credit_status": "original_sources_has_unsupported_additional_credit",
+      "credit_note": "The original SOURCES.md also credits Rob Tuytel (photography). The official asset page inspected on 2026-10-07 lists only Rico Cilliers; remove the additional credit unless another primary source supports it.",
+      "official_asset_url": "https://polyhaven.com/a/grass_bermuda_01",
+      "license": "CC0-1.0",
+      "present_in_build_script": true,
+      "present_in_packed_image_inventory": true
+    },
+    {
+      "id": "shrub_02",
+      "authors": [
+        {
+          "name": "Rico Cilliers"
+        }
+      ],
+      "use": "Sparse edge shrubs and wall-root foliage",
+      "credit_status": "matches_official_page",
+      "official_asset_url": "https://polyhaven.com/a/shrub_02",
+      "license": "CC0-1.0",
+      "present_in_build_script": true,
+      "present_in_packed_image_inventory": true
+    },
+    {
+      "id": "tree_small_02",
+      "authors": [
+        {
+          "name": "Rico Cilliers"
+        }
+      ],
+      "use": "Original trunk/branches plus 120000 original leaf triangles, re-instanced into two edge framing groups",
+      "credit_status": "matches_official_page",
+      "official_asset_url": "https://polyhaven.com/a/tree_small_02",
+      "license": "CC0-1.0",
+      "present_in_build_script": true,
+      "present_in_packed_image_inventory": true
+    }
+  ],
+  "direct_blend_inspection": {
+    "method": "Decompress Zstandard in memory, parse Blender BHead and SDNA records, inspect Image/PackedFile/ImagePackedFile references and embedded byte lengths. No Blender process, auto-execution, scene save, or rendering.",
+    "filename": "sunlit-ruins-environment.blend",
+    "bytes": 43434283,
+    "sha256": "b9f9ec71ff24d593bbe85b6294aeca24e2d0ca86ddea6370206bb2bdb127ffd7",
+    "decoded_header": "BLENDER-v403",
+    "decoded_bytes": 85490318,
+    "image_data_blocks": 40,
+    "images_with_packed_data": 40,
+    "packed_data_entries_with_existing_sufficient_length_buffers": 40,
+    "packed_image_bytes": 25514871,
+    "unpacked_images": [],
+    "linked_library_data_blocks": 0,
+    "absent_external_datablock_types": [
+      "Text",
+      "VFont",
+      "bSound",
+      "MovieClip",
+      "Volume",
+      "CacheFile"
+    ],
+    "image_paths": "All 40 Image.name path fields are //assets/... relative paths.",
+    "retained_metadata_paths": "Packed-image metadata contains original workspace asset paths. These are provenance/path metadata, not observed external file dependencies; their exact strings are omitted here.",
+    "caveat": "Binary structural inspection confirms the listed dependency facts, not rendering correctness, shading equivalence, performance, collision, or gameplay."
+  },
+  "integrity": {
+    "original_checksum_manifest": "delivery-file-checksums.json",
+    "original_checksum_entries_recomputed_sha256": 77,
+    "mismatch_files": [],
+    "original_download_audit": "asset-download-audit.json",
+    "full_download_records": 57,
+    "metadata_download_records": 3,
+    "whole_file_md5_verifications_reported_by_download_audit": 54,
+    "whole_file_md5_all_match_reported_by_download_audit": true,
+    "distinction": "This audit independently recomputed all 77 SHA-256 entries. The 54 MD5 successes are read from the existing download audit, not a new download or independent comparison with the current API.",
+    "tree_range_records": 15,
+    "tree_geometry_download_bytes": 9545002,
+    "tree_range_record_fields": [
+      "official_url",
+      "byte_range",
+      "content_range",
+      "sha256"
+    ],
+    "original_full_tree_md5_verified": false,
+    "retained_tree_subset_sha256": "c721be46843dc1b83e5472f2d1fbab159d966a6528691c787db44ecd1bc096e3",
+    "asset_download_bytes_excluding_api_metadata": 40094211,
+    "api_metadata_bytes_in_full_download_records": 88751,
+    "checksum_manifest_scope_note": "The original 77-entry checksum manifest describes the larger research source set. Assets intentionally absent from a compact archive must not be reported as archive corruption; generate a separate inventory for the actual archive."
+  },
+  "godot_art_study": {
+    "environment_png": {
+      "filename": "assets/environment-final.png",
+      "bytes": 1714856,
+      "sha256": "89a1e4ae4aa419df79fea42a6f8ab8abc365f18a85db8fb6166daed083d5f4ab",
+      "same_bytes_as": "renders/sunlit-ruins-1280x720.png"
+    },
+    "hero_png": {
+      "filename": "assets/hero_direction_study.png",
+      "bytes": 2376461,
+      "sha256": "63bcf0d01273f448c44d642f8f3a63e54742762c7bc3119707f391ef2328e4ea",
+      "same_bytes_as_imagegen_original": true,
+      "status": "AI-generated static idle direction master image; not a 3D model or animation acceptance deliverable",
+      "cc0_claimed": false
+    },
+    "font": {
+      "filename": "assets/arena_sans.otf",
+      "bytes": 705152,
+      "sha256": "8e84c0eaf389a86424df39a7e162519de7bd63297fc97679089a4d2a522e5ccc",
+      "same_bytes_as_project_font": true,
+      "embedded_family_name": "Arena Sans SC",
+      "embedded_copyright": "© 2014-2021 Adobe (http://www.adobe.com/).",
+      "embedded_license": "SIL Open Font License, Version 1.1",
+      "license_file_to_include": "v108-art-direction-study/assets/fonts/OFL-NotoSansCJK.txt",
+      "license_file_sha256": "849f4ea9c214fa4ac3593b770c699f387534b11ce671264c1b10d85bdcb5997b",
+      "observed_issue": "The original standalone Godot directory lacks the accompanying license text. Include it in the compact archive.",
+      "cc0_claimed": false
+    },
+    "import_settings": "Keep the three asset .import settings files; both PNGs specify mipmaps/generate=true. The .godot cache is regenerable.",
+    "launch": "project.godot has no application/run/main_scene; document launching with --script res://preview.gd.",
+    "no_godot_execution_performed": true
+  },
+  "portability_findings": [
+    {
+      "file": "build_scene.py",
+      "lines": [
+        8,
+        31,
+        33,
+        52,
+        59,
+        142
+      ],
+      "finding": "Uses paths relative to __file__; needs the excluded assets/ source tree. Preserve as a construction recipe, not a runnable compact-archive rebuild claim."
+    },
+    {
+      "file": "verify_scene.py",
+      "lines": [
+        13
+      ],
+      "finding": "Writes verification-final.json and saves/overwrites the blend with compression. It is not a read-only verifier; do not include its save behavior in a read-only entry point."
+    },
+    {
+      "file": "select_tree_data.py",
+      "lines": [
+        6,
+        7,
+        30
+      ],
+      "finding": "Reusable tree subset acquisition recipe, but performs network reads and output writes. Requires sources/tree_small_02-files.json and sources/tree_small_02_original.gltf.json; not needed to open or render the packed blend."
+    },
+    {
+      "file": "README.md",
+      "finding": "The original text says assets/ are included and the local glTF build can be run. A compact archive must explicitly distinguish rendering the packed blend from rebuilding with separately retrieved source assets."
+    }
+  ],
+  "research_only_scripts": [
+    "inspect_fort.py",
+    "inspect_nature.py",
+    "inspect_greenery.py",
+    "preview_gate.py"
+  ],
+  "safe_to_exclude_from_compact_archive": [
+    "sunlit-ruins-source.zip",
+    "sunlit-ruins-environment.blend1",
+    "fort-inspect.blend",
+    "assets/ original environment downloads",
+    ".godot/",
+    "import logs",
+    "intermediate preview renders"
+  ],
+  "document_secret_scan": {
+    "scope": "Environment root README/SOURCES, JSON audit/manifests/checksums, Python scripts, and sources/*.json",
+    "matching_suspect_fields_or_links_found": false,
+    "patterns": "Credential field/header names, password/secret markers, signed/token-bearing URL markers, and private absolute filesystem roots. No credential values were sought or printed.",
+    "caveat": "Pattern inspection is a scoped check, not a general-purpose secret-scanner guarantee."
+  },
+  "repeatability": {
+    "script": "inspect_blend.py",
+    "dependencies": "Python 3; zstandard is needed only for Zstandard-compressed .blend files.",
+    "usage": "python verification/inspect_blend.py PATH/TO/sunlit-ruins-environment.blend",
+    "output": "JSON to stdout only; input scene is never modified.",
+    "saved_script_status": "Saved from the already successful inline inspection method; the saved entry point has not been executed in this preservation step.",
+    "not_repeated_during_preservation": [
+      "Blender",
+      "Godot",
+      "rendering",
+      "all 77 SHA-256 checks",
+      "asset downloads"
+    ]
+  }
+}

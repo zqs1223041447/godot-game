@@ -1,0 +1,53 @@
+{
+  "resolution": [
+    1280,
+    720
+  ],
+  "blender_unit": "metre",
+  "orthographic_width_m": 27,
+  "elevation_degrees": 55,
+  "camera_target_m": [
+    0,
+    0.8,
+    0.35
+  ],
+  "camera_azimuth_degrees": 0,
+  "pixels_per_m_x": 47.407407407407405,
+  "pixels_per_m_ground_y": 38.83387469221887,
+  "pixels_per_m_height_z": 27.191771797382927,
+  "godot_camera_zoom": 0.65,
+  "world_units_per_m_x": 72.93447293447292,
+  "world_units_per_m_ground_y": 59.744422603413646,
+  "world_units_per_m_height_z": 41.83349507289681,
+  "render_center_px": [
+    640,
+    360
+  ],
+  "feet_reference_m": [
+    0,
+    -0.7,
+    0
+  ],
+  "feet_reference_px": [
+    640,
+    427.7679321674123
+  ],
+  "reference_body_height_m": 1.8,
+  "reference_body_height_px": 48.94518923528927,
+  "screen_formula_x": "640 + 47.4074074074 * x",
+  "screen_formula_y": "360 - 38.833874692219 * (y - 0.8) - 27.191771797383 * (z - 0.35)",
+  "godot_formula": "world_position = camera_center_world + (screen_position - Vector2(640, 360)) / 0.65",
+  "background_sprite_scale": 1.5384615384615383,
+  "background_sprite_position": "camera_center_world",
+  "clear_play_area_m": {
+    "x": [
+      -3.7,
+      3.7
+    ],
+    "y": [
+      -4.2,
+      1.8
+    ]
+  },
+  "not_game_integrated": true
+}
