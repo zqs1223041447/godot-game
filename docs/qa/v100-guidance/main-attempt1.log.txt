@@ -1,0 +1,10 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+godot-game: playable arena ready
+FAIL: Entry preserves existing schema and legal character ownership
+SCRIPT ERROR: Invalid access of index '0' on a base object of type: 'Array[Rect2]'.
+          at: query_group (res://tests/exploration_cleanup_hint_test.gd:118)
+          GDScript backtrace (most recent call first):
+              [0] query_group (res://tests/exploration_cleanup_hint_test.gd:118)
+              [1] run (res://tests/exploration_cleanup_hint_test.gd:242)
+EXPLORATION_CLEANUP_HINT checks=83 failures=1 groups={"query":{"checks":79,"completed":false,"failures":1}}

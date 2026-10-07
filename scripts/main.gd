@@ -2398,6 +2398,63 @@ func _outpost_states()->Array[Dictionary]:
 			"state":"cleared" if defeated>=int(outpost.root_count) and living_count==0 and pending_count==0 else "active" if awake_count>0 or pending_count>0 else "resident"})
 	return result
 
+## Presentation-only snapshot; HUD may poll at most once per 0.2 seconds.
+## Bearing is not a path or visibility claim and never wakes a resident actor.
+func exploration_cleanup_hint() -> Dictionary:
+	var result: Dictionary = {"kind": "inactive", "living_count": 0,
+		"pending_count": 0, "outposts": [], "target": {}}
+	if _world_mode not in ["map", "map_complete"]:
+		return result
+	if _world_mode == "map_complete":
+		result.kind = "settlement" if _normal_completion_pending else "complete"
+		return result
+	result.pending_count = monster_runtime.queue.size()
+	for outpost: Dictionary in _outpost_states():
+		if str(outpost.state) == "cleared":
+			continue
+		result.outposts.append({"id": str(outpost.id), "name": str(outpost.name),
+			"living_count": int(outpost.living_count),
+			"pending_descendants": int(outpost.pending_descendants)})
+	var closest: Dictionary = {}
+	var closest_distance: float = INF
+	for enemy: Dictionary in enemies:
+		if float(enemy.health) <= 0.0:
+			continue
+		result.living_count += 1
+		var distance: float = player_pos.distance_squared_to(Vector2(enemy.pos))
+		if distance < closest_distance or (distance == closest_distance and (closest.is_empty() or int(enemy.id) < int(closest.id))):
+			closest = enemy
+			closest_distance = distance
+	if result.living_count == 0 and result.pending_count > 0:
+		result.kind = "waiting"
+		return result
+	if result.living_count == 0 or result.living_count > 5:
+		result.kind = "overview"
+		return result
+	var root_id: int = int(closest.root_id)
+	var outpost_id := ""
+	var outpost_name := ""
+	if root_id == _map_run.boss_id:
+		outpost_id = "boss"
+		outpost_name = "首领" if int(closest.id) == _map_run.boss_id else "首领后代"
+	else:
+		for outpost: Dictionary in _camp_landmarks.get("outposts", []):
+			if root_id in outpost.get("root_ids", []):
+				outpost_id = str(outpost.id)
+				outpost_name = str(outpost.name)
+				break
+	var offset: Vector2 = Vector2(closest.pos) - player_pos
+	var direction := "here"
+	if offset != Vector2.ZERO:
+		var sector: int = posmod(int(floor((offset.angle() + PI / 8.0) / (PI / 4.0))), 8)
+		direction = ["east", "southeast", "south", "southwest", "west", "northwest", "north", "northeast"][sector]
+	result.kind = "target"
+	result.target = {"id": int(closest.id), "root_id": root_id,
+		"position": Vector2(closest.pos), "direction": direction,
+		"outpost_id": outpost_id, "outpost_name": outpost_name,
+		"is_boss": int(closest.id) == _map_run.boss_id}
+	return result
+
 func _sync_camp_presentation()->void:
 	if is_instance_valid(static_environment) and static_environment.has_method("set_encounter_state"):
 		static_environment.set_encounter_state(_outpost_states() if _camp_landmarks.has("outposts") else _camp_states(),_boss_phase())

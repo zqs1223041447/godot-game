@@ -1,0 +1,71 @@
+{
+  "base_commit": "d7e4121ddff09624de796f7857520926bd610d4e",
+  "engine": "Godot 4.6.3.stable.official.7d41c59c4",
+  "accepted": true,
+  "checks": 294,
+  "failures": 0,
+  "group_checks": 286,
+  "runs": [
+    {
+      "result": "main-query-result.json",
+      "log": "main-query.log.txt",
+      "exit_code": 0,
+      "checks": 111,
+      "failures": 0,
+      "groups": {
+        "query": {
+          "checks": 107,
+          "completed": true,
+          "failures": 0
+        }
+      },
+      "script_errors": false
+    },
+    {
+      "result": "main-lineage-settlement-result.json",
+      "log": "main-lineage-settlement.log.txt",
+      "exit_code": 0,
+      "checks": 183,
+      "failures": 0,
+      "groups": {
+        "lineage": {
+          "checks": 106,
+          "completed": true,
+          "failures": 0
+        },
+        "settlement": {
+          "checks": 73,
+          "completed": true,
+          "failures": 0
+        }
+      },
+      "script_errors": false
+    }
+  ],
+  "first_failure": {
+    "result": "main-attempt1-result.json",
+    "log": "main-attempt1.log.txt",
+    "exit_code": 1,
+    "script_error": true,
+    "scope": "fixture only: stale schema 50 assertion and wall-free old_garden walls[0] access",
+    "resolution": "preserve incoming schema; use real walled broken_ruins and its 37 initial actors; rerun query only; execute previously unrun lineage/settlement once"
+  },
+  "sha256": {
+    "docs/qa/v100-guidance/main-attempt1-result.json": "ed6d9664ced9991f7b15cb2fc785fe70898e93c4c2c25a2234e8fca4f844bd14",
+    "docs/qa/v100-guidance/main-attempt1.log.txt": "7c1843c2c40c5debaafc533e349a58eb0b9d3bfcf5806f3aa21f72447e48da14",
+    "docs/qa/v100-guidance/main-lineage-settlement-result.json": "14320a08f5815825aac81d7389d3fc5b1b413c1586a85abe6bd40a0476a3c6ef",
+    "docs/qa/v100-guidance/main-lineage-settlement.log.txt": "aef874de003d6137174dc605c959d281741493b3278be023a4afae60b66630ee",
+    "docs/qa/v100-guidance/main-query-result.json": "809d14f8c89cfbd9aec1a91df6f63b4e6bed785eefdf3725bcbd6f272c203516",
+    "docs/qa/v100-guidance/main-query.log.txt": "922d6411e31ae29c6dad80c6cc707886621ff850c856e7063a6aa7372c91b0ee",
+    "docs/qa/v100-guidance/runtime-validation.md": "aa0f57b90a78049e3b083cb7bf75880695832837a19471c31d415c72b40365dc",
+    "scripts/game_hud.gd": "36b34262bd28837d415287589da1302527a61842cefbc7c68f75be31c0bdb134",
+    "scripts/main.gd": "9aac6b731fde01f5a07aa921570e681b464f6608a16391c938ec9925d3cf7b57",
+    "tests/exploration_cleanup_hint_test.gd": "e5ad4070be3e5d10b9013904195dd8434b5bdf2d87e2a0793cf833a8c4b178fa",
+    "tests/exploration_main_flow_test.gd": "cf38b574e6bea3a33e8d200ccf84f08f505b0caf1b9af45bc1cb73953cb422a8"
+  },
+  "limitations": [
+    "Controlled actual lethal settlements and position probes, not natural combat footage",
+    "No full old suite, performance, long combat or Windows run",
+    "Main getter integration only; HUD schedule evidence belongs to parent task"
+  ]
+}

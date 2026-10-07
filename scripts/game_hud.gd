@@ -52,6 +52,8 @@ var _town_view: Control
 var _world_context_cache: Dictionary = {}
 var _world_button: Button
 var _world_label: Label
+var _cleanup_label: Label
+var _cleanup_elapsed := 0.0
 var _edition_label: Label
 var _return_dialog: ConfirmationDialog
 var _return_revision := -1
@@ -169,6 +171,7 @@ func _process(delta: float) -> void:
 		if compare != _hover_compare: _present_item_hover()
 		if _hover_exit_at > 0 and Time.get_ticks_msec() >= _hover_exit_at and not _item_hover.get_global_rect().has_point(_root.get_global_mouse_position()):
 			_dismiss_item_hover()
+	_tick_cleanup_hint(delta)
 	_refresh_clock += delta
 	if _refresh_clock >= 0.05:
 		_refresh_clock = 0.0
@@ -1644,6 +1647,12 @@ func _build_world_controls() -> void:
 	_world_label = _label("", 12)
 	_world_label.add_theme_color_override("font_color", Color("f8ecd0"))
 	box.add_child(_world_label)
+	_cleanup_label = _label("", 12)
+	_cleanup_label.name = "CleanupHint"
+	_cleanup_label.add_theme_color_override("font_color", Color("f8ecd0"))
+	_cleanup_label.mouse_filter = Control.MOUSE_FILTER_PASS
+	_cleanup_label.hide()
+	box.add_child(_cleanup_label)
 	_world_button = _button("城镇测试", "TownEntry", _world_action, 130)
 	_world_button.custom_minimum_size.y = 28
 	box.add_child(_world_button)
@@ -1665,6 +1674,7 @@ func _build_world_controls() -> void:
 
 
 func _refresh_world() -> void:
+	var previous_mode := str(_world_context_cache.get("mode", ""))
 	var context: Dictionary = _arena.world_context()
 	_world_context_cache = context
 	if is_instance_valid(_edition_label): _edition_label.text = world_caption(context)
@@ -1689,6 +1699,61 @@ func _refresh_world() -> void:
 				_world_label.text += "\n据点 %d/%d · %s" % [cleared, camps.size(), {"sealed":"首领封印中", "ready":"首领入口已开启", "active":"首领已出现", "defeated":"首领已击败"}.get(str(context.get("boss_phase", "sealed")), "")]
 			_world_button.text = "返回城镇"
 			_town_view.hide()
+
+
+	if previous_mode != str(context.mode):
+		_cleanup_elapsed = 0.0
+		_refresh_cleanup_hint()
+
+
+func _tick_cleanup_hint(delta: float) -> void:
+	if not is_instance_valid(_cleanup_label):
+		return
+	if str(_world_context_cache.get("encounter_mode", "")) != "exploration" or str(_world_context_cache.get("mode", "")) not in ["map", "map_complete"]:
+		_cleanup_elapsed = 0.0
+		_cleanup_label.hide()
+		_cleanup_label.text = ""
+		_cleanup_label.tooltip_text = ""
+		return
+	_cleanup_elapsed += maxf(delta, 0.0)
+	if _cleanup_elapsed >= 0.2:
+		_cleanup_elapsed = 0.0
+		_refresh_cleanup_hint()
+
+
+func _refresh_cleanup_hint() -> void:
+	if not is_instance_valid(_cleanup_label):
+		return
+	var view: Dictionary = cleanup_hint_view(_arena.exploration_cleanup_hint())
+	_cleanup_label.text = str(view.text)
+	_cleanup_label.tooltip_text = str(view.tooltip)
+	_cleanup_label.visible = not str(view.text).is_empty()
+
+
+static func cleanup_hint_view(hint: Dictionary) -> Dictionary:
+	var kind := str(hint.get("kind", "inactive"))
+	var text := ""
+	var details: Array[String] = []
+	match kind:
+		"target":
+			var target: Dictionary = hint.get("target", {})
+			var direction := str({"east":"东", "southeast":"东南", "south":"南", "southwest":"西南", "west":"西", "northwest":"西北", "north":"北", "northeast":"东北", "here":"附近"}.get(str(target.get("direction", "")), "附近"))
+			text = "余敌 %d · %s" % [int(hint.get("living_count", 0)), direction]
+			details.append("最近目标：%s" % ("首领" if bool(target.get("is_boss", false)) else str(target.get("outpost_name", "地图敌人"))))
+			details.append("方向按目标当前位置显示，需绕开障碍")
+		"overview":
+			text = "未清驻点 %d" % hint.get("outposts", []).size()
+		"waiting":
+			text = "等待后续怪物"
+		"settlement":
+			text = "结算待保存"
+		"complete":
+			text = "清理完成"
+	for outpost: Dictionary in hint.get("outposts", []):
+		details.append("%s：余敌 %d" % [str(outpost.get("name", "")), int(outpost.get("living_count", 0))])
+	var pending := int(hint.get("pending_count", 0))
+	if pending > 0: details.append("后续怪物 %d" % pending)
+	return {"text":text, "tooltip":"\n".join(details)}
 
 
 func _world_action() -> void:

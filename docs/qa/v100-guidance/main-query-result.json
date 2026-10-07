@@ -1,0 +1,583 @@
+{
+	"checks": 111,
+	"failed_labels": [],
+	"failures": 0,
+	"groups": {
+		"query": {
+			"checks": 107,
+			"completed": true,
+			"failures": 0
+		}
+	},
+	"method": "Real formal Main entry and original bounded death/lineage transactions; controlled runtime positions; exact snapshots/RNG/save bytes; no fabricated equipment, currency, root rewards or spawn records; no natural-combat, performance or UI-clock claim",
+	"probes": [
+		{
+			"disk_sha256": "5120f7f65aed15703d4dc9868807c8eb7d8ef9686309e80bbd67e64b982f7fbf",
+			"hint": {
+				"kind": "inactive",
+				"living_count": 0,
+				"outposts": [],
+				"pending_count": 0,
+				"target": {
+
+				}
+			},
+			"label": "Fresh town",
+			"rng": "-6550734451237762124"
+		},
+		{
+			"disk_sha256": "a3d0ce40ba309491e5101eaddf4f14c7d5fe4e3272ff8065e6c926de9ee967e8",
+			"hint": {
+				"kind": "overview",
+				"living_count": 37,
+				"outposts": [
+					{
+						"id": "camp_west_1",
+						"living_count": 4,
+						"name": "西侧据点 · 1",
+						"pending_descendants": 0
+					},
+					{
+						"id": "camp_west_2",
+						"living_count": 8,
+						"name": "西侧据点 · 2",
+						"pending_descendants": 0
+					},
+					{
+						"id": "camp_north_1",
+						"living_count": 4,
+						"name": "北侧据点 · 1",
+						"pending_descendants": 0
+					},
+					{
+						"id": "camp_north_2",
+						"living_count": 8,
+						"name": "北侧据点 · 2",
+						"pending_descendants": 0
+					},
+					{
+						"id": "camp_east_1",
+						"living_count": 4,
+						"name": "东侧据点 · 1",
+						"pending_descendants": 0
+					},
+					{
+						"id": "camp_east_2",
+						"living_count": 8,
+						"name": "东侧据点 · 2",
+						"pending_descendants": 0
+					}
+				],
+				"pending_count": 0,
+				"target": {
+
+				}
+			},
+			"label": "Initial full roster",
+			"rng": "-6550734451237762124"
+		},
+		{
+			"disk_sha256": "2c92a0ba3648e4a4ee8d338d5b51e9e98e29a7b8ebb06cc9d5a936618ae107ad",
+			"hint": {
+				"kind": "overview",
+				"living_count": 6,
+				"outposts": [
+					{
+						"id": "camp_west_1",
+						"living_count": 4,
+						"name": "西侧据点 · 1",
+						"pending_descendants": 0
+					},
+					{
+						"id": "camp_west_2",
+						"living_count": 2,
+						"name": "西侧据点 · 2",
+						"pending_descendants": 0
+					}
+				],
+				"pending_count": 0,
+				"target": {
+
+				}
+			},
+			"label": "Six roots left",
+			"rng": "-1295362678608368048"
+		},
+		{
+			"disk_sha256": "230209b016201082a720a5734e7c9b0d7b7d1b35ac5a3730c55dfdc0bb3cf2d7",
+			"hint": {
+				"kind": "target",
+				"living_count": 5,
+				"outposts": [
+					{
+						"id": "camp_west_1",
+						"living_count": 4,
+						"name": "西侧据点 · 1",
+						"pending_descendants": 0
+					},
+					{
+						"id": "camp_west_2",
+						"living_count": 1,
+						"name": "西侧据点 · 2",
+						"pending_descendants": 0
+					}
+				],
+				"pending_count": 0,
+				"target": {
+					"direction": "east",
+					"id": 1,
+					"is_boss": false,
+					"outpost_id": "camp_west_1",
+					"outpost_name": "西侧据点 · 1",
+					"position": "(1284.0, 2204.0)",
+					"root_id": 1
+				}
+			},
+			"label": "Five roots and a nearer dead actor",
+			"rng": "-8748472329036331084"
+		},
+		{
+			"disk_sha256": "230209b016201082a720a5734e7c9b0d7b7d1b35ac5a3730c55dfdc0bb3cf2d7",
+			"hint": {
+				"kind": "target",
+				"living_count": 5,
+				"outposts": [
+					{
+						"id": "camp_west_1",
+						"living_count": 4,
+						"name": "西侧据点 · 1",
+						"pending_descendants": 0
+					},
+					{
+						"id": "camp_west_2",
+						"living_count": 1,
+						"name": "西侧据点 · 2",
+						"pending_descendants": 0
+					}
+				],
+				"pending_count": 0,
+				"target": {
+					"direction": "east",
+					"id": 1,
+					"is_boss": false,
+					"outpost_id": "camp_west_1",
+					"outpost_name": "西侧据点 · 1",
+					"position": "(1284.0, 2204.0)",
+					"root_id": 1
+				}
+			},
+			"label": "Zero-health actor retained until normal cleanup",
+			"rng": "-8748472329036331084"
+		},
+		{
+			"disk_sha256": "230209b016201082a720a5734e7c9b0d7b7d1b35ac5a3730c55dfdc0bb3cf2d7",
+			"hint": {
+				"kind": "target",
+				"living_count": 5,
+				"outposts": [
+					{
+						"id": "camp_west_1",
+						"living_count": 4,
+						"name": "西侧据点 · 1",
+						"pending_descendants": 0
+					},
+					{
+						"id": "camp_west_2",
+						"living_count": 1,
+						"name": "西侧据点 · 2",
+						"pending_descendants": 0
+					}
+				],
+				"pending_count": 0,
+				"target": {
+					"direction": "east",
+					"id": 1,
+					"is_boss": false,
+					"outpost_id": "camp_west_1",
+					"outpost_name": "西侧据点 · 1",
+					"position": "(1942.0, 1304.0)",
+					"root_id": 1
+				}
+			},
+			"label": "Bearing east",
+			"rng": "-8748472329036331084"
+		},
+		{
+			"disk_sha256": "230209b016201082a720a5734e7c9b0d7b7d1b35ac5a3730c55dfdc0bb3cf2d7",
+			"hint": {
+				"kind": "target",
+				"living_count": 5,
+				"outposts": [
+					{
+						"id": "camp_west_1",
+						"living_count": 4,
+						"name": "西侧据点 · 1",
+						"pending_descendants": 0
+					},
+					{
+						"id": "camp_west_2",
+						"living_count": 1,
+						"name": "西侧据点 · 2",
+						"pending_descendants": 0
+					}
+				],
+				"pending_count": 0,
+				"target": {
+					"direction": "southeast",
+					"id": 1,
+					"is_boss": false,
+					"outpost_id": "camp_west_1",
+					"outpost_name": "西侧据点 · 1",
+					"position": "(1942.0, 1404.0)",
+					"root_id": 1
+				}
+			},
+			"label": "Bearing southeast",
+			"rng": "-8748472329036331084"
+		},
+		{
+			"disk_sha256": "230209b016201082a720a5734e7c9b0d7b7d1b35ac5a3730c55dfdc0bb3cf2d7",
+			"hint": {
+				"kind": "target",
+				"living_count": 5,
+				"outposts": [
+					{
+						"id": "camp_west_1",
+						"living_count": 4,
+						"name": "西侧据点 · 1",
+						"pending_descendants": 0
+					},
+					{
+						"id": "camp_west_2",
+						"living_count": 1,
+						"name": "西侧据点 · 2",
+						"pending_descendants": 0
+					}
+				],
+				"pending_count": 0,
+				"target": {
+					"direction": "south",
+					"id": 1,
+					"is_boss": false,
+					"outpost_id": "camp_west_1",
+					"outpost_name": "西侧据点 · 1",
+					"position": "(1842.0, 1404.0)",
+					"root_id": 1
+				}
+			},
+			"label": "Bearing south",
+			"rng": "-8748472329036331084"
+		},
+		{
+			"disk_sha256": "230209b016201082a720a5734e7c9b0d7b7d1b35ac5a3730c55dfdc0bb3cf2d7",
+			"hint": {
+				"kind": "target",
+				"living_count": 5,
+				"outposts": [
+					{
+						"id": "camp_west_1",
+						"living_count": 4,
+						"name": "西侧据点 · 1",
+						"pending_descendants": 0
+					},
+					{
+						"id": "camp_west_2",
+						"living_count": 1,
+						"name": "西侧据点 · 2",
+						"pending_descendants": 0
+					}
+				],
+				"pending_count": 0,
+				"target": {
+					"direction": "southwest",
+					"id": 1,
+					"is_boss": false,
+					"outpost_id": "camp_west_1",
+					"outpost_name": "西侧据点 · 1",
+					"position": "(1742.0, 1404.0)",
+					"root_id": 1
+				}
+			},
+			"label": "Bearing southwest",
+			"rng": "-8748472329036331084"
+		},
+		{
+			"disk_sha256": "230209b016201082a720a5734e7c9b0d7b7d1b35ac5a3730c55dfdc0bb3cf2d7",
+			"hint": {
+				"kind": "target",
+				"living_count": 5,
+				"outposts": [
+					{
+						"id": "camp_west_1",
+						"living_count": 4,
+						"name": "西侧据点 · 1",
+						"pending_descendants": 0
+					},
+					{
+						"id": "camp_west_2",
+						"living_count": 1,
+						"name": "西侧据点 · 2",
+						"pending_descendants": 0
+					}
+				],
+				"pending_count": 0,
+				"target": {
+					"direction": "west",
+					"id": 1,
+					"is_boss": false,
+					"outpost_id": "camp_west_1",
+					"outpost_name": "西侧据点 · 1",
+					"position": "(1742.0, 1304.0)",
+					"root_id": 1
+				}
+			},
+			"label": "Bearing west",
+			"rng": "-8748472329036331084"
+		},
+		{
+			"disk_sha256": "230209b016201082a720a5734e7c9b0d7b7d1b35ac5a3730c55dfdc0bb3cf2d7",
+			"hint": {
+				"kind": "target",
+				"living_count": 5,
+				"outposts": [
+					{
+						"id": "camp_west_1",
+						"living_count": 4,
+						"name": "西侧据点 · 1",
+						"pending_descendants": 0
+					},
+					{
+						"id": "camp_west_2",
+						"living_count": 1,
+						"name": "西侧据点 · 2",
+						"pending_descendants": 0
+					}
+				],
+				"pending_count": 0,
+				"target": {
+					"direction": "northwest",
+					"id": 1,
+					"is_boss": false,
+					"outpost_id": "camp_west_1",
+					"outpost_name": "西侧据点 · 1",
+					"position": "(1742.0, 1204.0)",
+					"root_id": 1
+				}
+			},
+			"label": "Bearing northwest",
+			"rng": "-8748472329036331084"
+		},
+		{
+			"disk_sha256": "230209b016201082a720a5734e7c9b0d7b7d1b35ac5a3730c55dfdc0bb3cf2d7",
+			"hint": {
+				"kind": "target",
+				"living_count": 5,
+				"outposts": [
+					{
+						"id": "camp_west_1",
+						"living_count": 4,
+						"name": "西侧据点 · 1",
+						"pending_descendants": 0
+					},
+					{
+						"id": "camp_west_2",
+						"living_count": 1,
+						"name": "西侧据点 · 2",
+						"pending_descendants": 0
+					}
+				],
+				"pending_count": 0,
+				"target": {
+					"direction": "north",
+					"id": 1,
+					"is_boss": false,
+					"outpost_id": "camp_west_1",
+					"outpost_name": "西侧据点 · 1",
+					"position": "(1842.0, 1204.0)",
+					"root_id": 1
+				}
+			},
+			"label": "Bearing north",
+			"rng": "-8748472329036331084"
+		},
+		{
+			"disk_sha256": "230209b016201082a720a5734e7c9b0d7b7d1b35ac5a3730c55dfdc0bb3cf2d7",
+			"hint": {
+				"kind": "target",
+				"living_count": 5,
+				"outposts": [
+					{
+						"id": "camp_west_1",
+						"living_count": 4,
+						"name": "西侧据点 · 1",
+						"pending_descendants": 0
+					},
+					{
+						"id": "camp_west_2",
+						"living_count": 1,
+						"name": "西侧据点 · 2",
+						"pending_descendants": 0
+					}
+				],
+				"pending_count": 0,
+				"target": {
+					"direction": "northeast",
+					"id": 1,
+					"is_boss": false,
+					"outpost_id": "camp_west_1",
+					"outpost_name": "西侧据点 · 1",
+					"position": "(1942.0, 1204.0)",
+					"root_id": 1
+				}
+			},
+			"label": "Bearing northeast",
+			"rng": "-8748472329036331084"
+		},
+		{
+			"disk_sha256": "230209b016201082a720a5734e7c9b0d7b7d1b35ac5a3730c55dfdc0bb3cf2d7",
+			"hint": {
+				"kind": "target",
+				"living_count": 5,
+				"outposts": [
+					{
+						"id": "camp_west_1",
+						"living_count": 4,
+						"name": "西侧据点 · 1",
+						"pending_descendants": 0
+					},
+					{
+						"id": "camp_west_2",
+						"living_count": 1,
+						"name": "西侧据点 · 2",
+						"pending_descendants": 0
+					}
+				],
+				"pending_count": 0,
+				"target": {
+					"direction": "here",
+					"id": 1,
+					"is_boss": false,
+					"outpost_id": "camp_west_1",
+					"outpost_name": "西侧据点 · 1",
+					"position": "(1842.0, 1304.0)",
+					"root_id": 1
+				}
+			},
+			"label": "Bearing here",
+			"rng": "-8748472329036331084"
+		},
+		{
+			"disk_sha256": "230209b016201082a720a5734e7c9b0d7b7d1b35ac5a3730c55dfdc0bb3cf2d7",
+			"hint": {
+				"kind": "target",
+				"living_count": 5,
+				"outposts": [
+					{
+						"id": "camp_west_1",
+						"living_count": 4,
+						"name": "西侧据点 · 1",
+						"pending_descendants": 0
+					},
+					{
+						"id": "camp_west_2",
+						"living_count": 1,
+						"name": "西侧据点 · 2",
+						"pending_descendants": 0
+					}
+				],
+				"pending_count": 0,
+				"target": {
+					"direction": "east",
+					"id": 1,
+					"is_boss": false,
+					"outpost_id": "camp_west_1",
+					"outpost_name": "西侧据点 · 1",
+					"position": "(1942.0, 1304.0)",
+					"root_id": 1
+				}
+			},
+			"label": "Equal squared distance",
+			"rng": "-8748472329036331084"
+		},
+		{
+			"disk_sha256": "230209b016201082a720a5734e7c9b0d7b7d1b35ac5a3730c55dfdc0bb3cf2d7",
+			"hint": {
+				"kind": "target",
+				"living_count": 5,
+				"outposts": [
+					{
+						"id": "camp_west_1",
+						"living_count": 4,
+						"name": "西侧据点 · 1",
+						"pending_descendants": 0
+					},
+					{
+						"id": "camp_west_2",
+						"living_count": 1,
+						"name": "西侧据点 · 2",
+						"pending_descendants": 0
+					}
+				],
+				"pending_count": 0,
+				"target": {
+					"direction": "east",
+					"id": 1,
+					"is_boss": false,
+					"outpost_id": "camp_west_1",
+					"outpost_name": "西侧据点 · 1",
+					"position": "(1942.0, 1304.0)",
+					"root_id": 1
+				}
+			},
+			"label": "Reversed actor order",
+			"rng": "-8748472329036331084"
+		},
+		{
+			"disk_sha256": "230209b016201082a720a5734e7c9b0d7b7d1b35ac5a3730c55dfdc0bb3cf2d7",
+			"hint": {
+				"kind": "target",
+				"living_count": 5,
+				"outposts": [
+					{
+						"id": "camp_west_1",
+						"living_count": 4,
+						"name": "西侧据点 · 1",
+						"pending_descendants": 0
+					},
+					{
+						"id": "camp_west_2",
+						"living_count": 1,
+						"name": "西侧据点 · 2",
+						"pending_descendants": 0
+					}
+				],
+				"pending_count": 0,
+				"target": {
+					"direction": "west",
+					"id": 1,
+					"is_boss": false,
+					"outpost_id": "camp_west_1",
+					"outpost_name": "西侧据点 · 1",
+					"position": "(1140.0, 1234.0)",
+					"root_id": 1
+				}
+			},
+			"label": "Bearing through blocking terrain",
+			"rng": "-8748472329036331084"
+		},
+		{
+			"disk_sha256": "db18dc85e965f87e51ad7ddb0f1403333be14bb1e917c17753c9aa3d01671119",
+			"hint": {
+				"kind": "inactive",
+				"living_count": 0,
+				"outposts": [],
+				"pending_count": 0,
+				"target": {
+
+				}
+			},
+			"label": "Town after target",
+			"rng": "-8748472329036331084"
+		}
+	]
+}
