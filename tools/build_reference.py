@@ -43,6 +43,7 @@ TYPES['defense_v39'] = '护甲闪避与三抗防具池'
 TYPES['build_nine_slot_v46'] = '精瞄与三抗九槽池'
 TYPES['build_nine_slot_v51'] = '精瞄、三抗与混抗九槽池'
 RULE_TITLES['chaos_defense'] = '混沌防御与蚀影巡逻：双戒和后缀取舍'
+RULE_TITLES['encircling_cleave'] = '环斩辅助：周身覆盖与单次伤害取舍'
 
 def esc(value): return html.escape(str(value), quote=True)
 def lines(value): return '<br>'.join(esc(value).split('\n'))
@@ -104,6 +105,37 @@ def chaos_defense_rule(data, link, facts):
         ('守卫命中双戒玩家','混沌 '+value('incoming-raw',hit['raw_components']['chaos'])+' → '+value('incoming-mitigated',hit['damage_total'])+'；先耗盾 '+value('incoming-shield',hit['shield_spent'])+'，生命损失 '+value('incoming-life',hit['health_lost']))])
     body+='<p>'+link('skills','shade_bolt')+' · '+link('monsters','chaos_guard')+' · '+link('monster_attacks','locked_circle_chaos')+' · '+link('rules','mana_guard')+' · <a href="../CHAOS_DEFENSE.zh-CN.md">混沌防御与巡逻合同</a> · <a href="../qa/v093-reference/README.md">本批小片段与保全证据</a>'
     for key,label in [('actual_main_fixture','实际Main装备夹具'),('actual_main_report','实际Main结果')]:
+        body+=' · <a href="../'+esc(rule[key]['path'].removeprefix('docs/'))+'">'+label+'</a>'
+    return body+'</p>'
+
+
+
+def encircling_value(key, amount):
+    return '<strong data-encircling-value="'+esc(key)+'" data-value="'+esc(amount)+'">'+number(amount)+'</strong>'
+
+
+def encircling_cleave_rule(data, link, facts):
+    rule=data['encircling_cleave']; policy=rule['policy']; before=rule['examples']['before']; after=rule['examples']['after']
+    value=encircling_value
+    body=facts([('唯一适配',link('skills','cleave')+' · direct近战范围主命中'),
+        ('当前存档 / 源政策 / 装备词汇',value('save-version',rule['save_version'])+' / '+value('source-policy',rule['source_policy'])+' / '+value('equipment-vocabulary',rule['equipment_vocabulary'])),
+        ('覆盖角度',value('base-arc',policy['base_arc_degrees'])+'度前方半圆 → '+value('arc',policy['arc_degrees'])+'度整圆'),
+        ('主命中 / 魔力倍率',value('hit-multiplier',policy['hit_multiplier'])+' / '+value('mana-multiplier',policy['mana_multiplier'])),
+        ('默认半径',value('radius',after['recipe']['radius'])+'；角度变化不增加半径'),
+        ('辅助槽取舍',value('compatible-count',len(rule['compatible_supports']))+'个兼容选项，最多'+value('maximum-supports',rule['maximum_supports'])+'槽；环斩占1槽'),
+        ('正式购买',link('town_services','skill_merchant','宝石商人')+' · '+value('merchant-cost',rule['merchant_quote']['cost']['calibration_shard'])+'校准碎片；免费测试供应读取当前目录')])
+    body+='<p>单个目标的主命中伤害总降25%，换取身后覆盖；每个现有目标仍只结算一次，首尾角不产生第二次命中。距离、目标体积、真实墙体视线、出生保护与攻击闪避仍须通过，背后目标同样受限。原暴击、偷取与击败奖励沿这次命中结算。</p>'
+    body+='<p>原'+value('base-coefficient',before['base_coefficient']*100)+'%基础系数与'+value('added-effectiveness',before['added_effectiveness']*100)+'%附加效用保持，0.75作为独立主命中倍率。广域、凝域及源范围加成沿原面积公式只计算一次，最终半径为原半径乘面积倍率的平方根；两倍角度不再乘伤害。范围外、墙后和未命中目标不会得到额外伤害事件。</p>'
+    body+='<p>与'+ ' · '.join(link('supports',key) for key in rule['compatible_supports'] if key != rule['support_id'])+'均兼容；拒绝重复同辅助及超过五槽。不作用于普通攻击、法术、独立爆炸，不新增异常、冲量、重复施放或额外队列。</p>'
+    rows=[]
+    for name,key,first,last in [('魔力','mana',before['mana'],after['mana']),('冷却（秒）','cooldown',before['cooldown'],after['cooldown']),('半径','radius-example',before['recipe']['radius'],after['recipe']['radius']),('单次非暴击物理命中','hit',before['resolved']['total'],after['resolved']['total'])]:
+        rows.append('<tr><th>'+name+'</th><td>'+value('before-'+key,first)+'</td><td>'+value('after-'+key,last)+'</td></tr>')
+    body+='<h3>实际持有构筑的同源前后预览</h3><p>只读复用通过'+value('main-checks',rule['actual_main_checks'])+'项检查的实际Main夹具：正式购买裂刃斩与环斩后安装到第9技能组。保留夹具原合法装备和源天赋，没有另造展示装备；本表未计敌方防御，不是DPS或自然游玩记录。</p><div class="table-scroll"><table><thead><tr><th>参数</th><th>未装环斩</th><th>只装环斩</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
+    sample=rule['actual_main_samples'][0]
+    body+='<p>同次Main的受控整圆探针留下'+value('actual-hit-targets',len(sample['receipts']))+'个不同目标的真实命中收据，每目标仅一次；单次物理伤害'+value('actual-hit',sample['receipts'][0]['total'])+'。探针采用受控站位、资源和既有地图实体；另有保护、闪避、边界与真实墙体视线检查，不能视为自然刷图或长期平衡结论。</p>'
+    body+='<p>schema51严格验证并备份原字节后迁移52，仅开放新宝石身份。来源政策49、装备词汇51、里程碑奖励序列、原持有物及宝石链接保留；不赠宝石、装备、点数或材料。摘除环斩恢复原半圆，重装及重载继续读取当前合法装配。</p>'
+    body+='<p>'+link('supports','encircling_cleave')+' · '+link('rules','supports')+' · <a href="../ENCIRCLING_CLEAVE.zh-CN.md">环斩辅助合同</a> · <a href="../qa/v094-reference/README.md">本批小片段与保全证据</a>'
+    for key,label in [('actual_main_fixture','实际Main已购夹具'),('actual_main_report','实际Main结果')]:
         body+=' · <a href="../'+esc(rule[key]['path'].removeprefix('docs/'))+'">'+label+'</a>'
     return body+'</p>'
 
@@ -320,7 +352,7 @@ def exploration_rule_body(data, facts):
         ('唯一当前配置', 'mechanism_config={}；非空配置在扣费前拒绝，optional_encounters=[]'),
         ('生成记录', 'spawn_key独立于actor ID游标且在本图内稳定；保留根/实体ID、来源组、序号、物种、位置、空encounter_id、standard奖励路线直到本图结束'),
         ('奖励边界', '当前只允许standard；未知路线拒绝，不回退普通奖励'),
-        ('持续存档', ('schema51 / source49 / equipment51；' if 'chaos_defense' in data else 'schema50 / source49 / equipment46保持；')+'不把临时探索或未来机制状态写入旧profile')])
+        ('持续存档', ('schema52 / source49 / equipment51；' if 'encircling_cleave' in data else 'schema51 / source49 / equipment51；' if 'chaos_defense' in data else 'schema50 / source49 / equipment46保持；')+'不把临时探索或未来机制状态写入旧profile')])
     if route_distribution:
         body += facts([
             ('当前空间分布', '每图6处驻点与1位首领；旧庭3/5怪各3处，其余地图4/8怪各3处，入图仍为25/37个根实体'),
@@ -1208,6 +1240,8 @@ def build(data, art):
             image=f'<img class="emblem" src="{esc(data["inward_pull"]["icon_file"])}" width="64" height="64" alt="" loading="lazy">'
         elif cat=='supports' and key=='frost_lock':
             image=f'<img class="emblem" src="{esc(data["frost_lock"]["icon_file"])}" width="64" height="64" alt="" loading="lazy">'
+        elif cat=='supports' and key=='encircling_cleave':
+            image=f'<img class="emblem" src="{esc(data["encircling_cleave"]["icon_file"])}" width="64" height="64" alt="" loading="lazy">'
         elif cat=='equipment' and key=='forgeblade':
             image=f'<img class="emblem" src="{esc(data["forgeblade"]["icon_file"])}" width="64" height="64" alt="" loading="lazy">'
         badges = {'implemented':'已实现','research':'研究资料','planned':'尚未实现'}
@@ -1255,6 +1289,9 @@ def build(data, art):
         if 'frost_lock' in compatible:
             body+='<p>霜锁辅助提供短冻结窗口，与寒意延长互斥；保留原3秒移动减缓。'+link('rules','frost_lock','查看冻结、免疫与原攻击接续')+'。</p>'
             related+=' · '+link('rules','frost_lock')
+        if 'encircling_cleave' in compatible:
+            body+='<p>环斩把原前方半圆改为周身整圆，主命中×0.75、魔力×1.25，冷却与原半径规则保持。'+link('rules','encircling_cleave','查看同源预览、五槽取舍与命中边界')+'。</p>'
+            related+=' · '+link('rules','encircling_cleave')
         cards.append(add('skills',key,s['name'],s['description'],body,'投射物' if 'projectile_hit' in s['capabilities'] else '其他技能',related=related))
     for key,s in data['supports'].items():
         eligible = [i for i,x in data['skills'].items() if key in x['compatible_supports']]
@@ -1280,7 +1317,10 @@ def build(data, art):
         if key in ['frost_lock','lingering_chill']:
             body+='<p>霜锁辅助与寒意延长辅助不能同时装配；冻结只暂停自主行为，外力和资源状态继续。'+link('rules','frost_lock','查看完整准入与时间边界')+'。</p>'
             related+=' · '+link('rules','frost_lock')
-        cards.append(add('supports',key,s['name'],s['description'],body,{'area':'范围辅助','projectile':'投射物辅助','resource':'资源辅助','element':'分量专注','delivery':'投射物辅助','control':'减速控制','chain':'连锁辅助','burning':'燃烧辅助','shock':'感电辅助','ambush':'预置伏击辅助','inward_pull':'冲量方向辅助','frost_lock':'冻结控制辅助'}[data['support_program_examples'][key]['family']],related=related))
+        if key=='encircling_cleave':
+            body+='<p>正式售价4校准碎片，测试供应读取当前目录；占用原五槽中的1槽。预览复用已实际购买并安装的合法Main夹具。'+link('rules','encircling_cleave','查看整圆覆盖与单次伤害取舍')+'。</p>'
+            related+=' · '+link('rules','encircling_cleave')+' · '+link('town_services','skill_merchant','宝石商人')
+        cards.append(add('supports',key,s['name'],s['description'],body,{'area':'范围辅助','projectile':'投射物辅助','resource':'资源辅助','element':'分量专注','delivery':'投射物辅助','control':'减速控制','chain':'连锁辅助','burning':'燃烧辅助','shock':'感电辅助','ambush':'预置伏击辅助','inward_pull':'冲量方向辅助','frost_lock':'冻结控制辅助','encircling_cleave':'近战覆盖辅助'}[data['support_program_examples'][key]['family']],related=related))
     for key,e in data['equipment'].items():
         body = facts([('格数',' × '.join(map(number,e['size']))),('固有属性',lines(e['stats_text']))])+details('可出现的词缀',links('affixes',e['eligible_affixes']))
         related=link('rules','equipment')
@@ -1925,6 +1965,8 @@ def build(data, art):
         rule_defs.append(('jewel_crafting', RULE_TITLES['jewel_crafting'], '背包中的三种普通珠宝可回收或整体重铸；保留底材与稀有度。', jewel_crafting_rule(data,link,facts), 'implemented'))
     if 'chaos_defense' in data:
         rule_defs.append(('chaos_defense', RULE_TITLES['chaos_defense'], '独立0%–75%混抗规则；现有双戒最高50%，可选蚀影巡逻沿原名额与完成奖励。', chaos_defense_rule(data,link,facts), 'implemented'))
+    if 'encircling_cleave' in data:
+        rule_defs.append(('encircling_cleave', RULE_TITLES['encircling_cleave'], '仅裂刃斩：180度前方半圆改为360度整圆，主命中×0.75、魔力×1.25；半径与冷却保持。', encircling_cleave_rule(data,link,facts), 'implemented'))
     for key,name,summary,body,status in rule_defs: cards.append(add('rules',key,name,summary,body,{'implemented':'已实现规则','research':'研究来源','planned':'未实现边界'}[status],status))
     category_counts={cat:sum(x['cat']==cat for x in records) for cat,_ in CATEGORIES}
     nav=''.join(f'<a href="#category-{cat}" id="category-{cat}" class="nav-link" data-category="{cat}"><span>{label}</span><span>{category_counts[cat]}</span></a>' for cat,label in CATEGORIES)
@@ -1980,6 +2022,15 @@ def main():
         if args.check:
             if not target.exists() or target.read_bytes()!=source.read_bytes():
                 raise SystemExit('Frost Lock reference image differs from original asset bytes')
+        elif not target.exists() or target.read_bytes()!=source.read_bytes():
+            target.parent.mkdir(parents=True,exist_ok=True)
+            target.write_bytes(source.read_bytes())
+    if 'encircling_cleave' in data:
+        source=ROOT/data['encircling_cleave']['icon_source'].removeprefix('res://')
+        target=REF/data['encircling_cleave']['icon_file']
+        if args.check:
+            if not target.exists() or target.read_bytes()!=source.read_bytes():
+                raise SystemExit('Encircling cleave reference image differs from original asset bytes')
         elif not target.exists() or target.read_bytes()!=source.read_bytes():
             target.parent.mkdir(parents=True,exist_ok=True)
             target.write_bytes(source.read_bytes())

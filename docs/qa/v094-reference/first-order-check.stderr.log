@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/a51485f153de/v094-encircling-cleave/docs/qa/v094-reference/check-reference.py", line 119, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/scratch/a51485f153de/v094-encircling-cleave/docs/qa/v094-reference/check-reference.py", line 112, in main
+    assert builder.build(data,art)==html,'Current HTML must be deterministic'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Current HTML must be deterministic

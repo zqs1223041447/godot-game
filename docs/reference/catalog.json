@@ -47022,6 +47022,731 @@
 		},
 		"transfer_rule": "已有余烬燃烧的目标死亡才扩散；继承同一原始每秒伤害与原绝对截止时间，按距离再按ID选最多8个存活可见目标，不穿墙、不选出生保护目标"
 	},
+	"encircling_cleave": {
+		"active_uid": "item_000008",
+		"actual_main_checks": 121.0,
+		"actual_main_fixture": {
+			"path": "docs/qa/v094-integration/owned-fixture.json",
+			"sha256": "4b1a8dae93c0a541158972284590461e1f57ffee4c07d7079982ebcd297263df"
+		},
+		"actual_main_report": {
+			"path": "docs/qa/v094-integration/main-result.json",
+			"sha256": "e4070b1a8522cae34508461f7875684d3ad99168a2f7c512e7bf4c0836e24d2a"
+		},
+		"actual_main_run": {
+			"path": "docs/qa/v094-integration/main-run.json",
+			"sha256": "7193e3c95e0308afcd08cf47a9a5e9f1956bf281c97cbb53904b13a979da6135"
+		},
+		"actual_main_samples": [
+			{
+				"expected": {
+					"components": {
+						"physical": 56.784000000000006
+					},
+					"details": [
+						{
+							"base": 72.8,
+							"before_defense": 56.784000000000006,
+							"final": 56.784000000000006,
+							"increased": 0.04,
+							"modifiers": [
+								"melee_physical_increased",
+								"support:encircling_cleave"
+							],
+							"more": 0.75,
+							"resistance": 0.0,
+							"type": "physical"
+						}
+					],
+					"total": 56.784000000000006
+				},
+				"facing": "(1.0, 0.0)",
+				"packet": {
+					"assembly": {
+						"added": {},
+						"added_effectiveness": 2.8,
+						"base_coefficient": 2.8,
+						"intrinsic": {
+							"physical": 72.8
+						},
+						"stage": "hit_base"
+					},
+					"base": {
+						"physical": 72.8
+					},
+					"role": "direct",
+					"skill_id": "cleave",
+					"tags": [
+						"hit",
+						"attack",
+						"melee",
+						"area"
+					]
+				},
+				"probe": "full_circle",
+				"receipts": [
+					{
+						"assembly": {
+							"added": {},
+							"added_effectiveness": 2.8,
+							"base_coefficient": 2.8,
+							"intrinsic": {
+								"physical": 72.8
+							},
+							"stage": "hit_base"
+						},
+						"before_defense_components": {
+							"physical": 56.784000000000006
+						},
+						"cast_id": 1,
+						"components": {
+							"physical": 56.784000000000006
+						},
+						"critical": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"details": [
+							{
+								"base": 72.8,
+								"before_defense": 56.784000000000006,
+								"final": 56.784000000000006,
+								"increased": 0.04,
+								"modifiers": [
+									"melee_physical_increased",
+									"support:encircling_cleave"
+								],
+								"more": 0.75,
+								"resistance": 0.0,
+								"type": "physical"
+							}
+						],
+						"effect_id": "",
+						"health_lost": 56.784000000000006,
+						"phase": "direct",
+						"prevented_components": {
+							"physical": 0.0
+						},
+						"projectile_id": 0,
+						"shield_spent": 0.0,
+						"skill_id": "cleave",
+						"tags": [
+							"hit",
+							"attack",
+							"melee",
+							"area"
+						],
+						"target_id": 1,
+						"total": 56.784000000000006
+					},
+					{
+						"assembly": {
+							"added": {},
+							"added_effectiveness": 2.8,
+							"base_coefficient": 2.8,
+							"intrinsic": {
+								"physical": 72.8
+							},
+							"stage": "hit_base"
+						},
+						"before_defense_components": {
+							"physical": 56.784000000000006
+						},
+						"cast_id": 1,
+						"components": {
+							"physical": 56.784000000000006
+						},
+						"critical": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"details": [
+							{
+								"base": 72.8,
+								"before_defense": 56.784000000000006,
+								"final": 56.784000000000006,
+								"increased": 0.04,
+								"modifiers": [
+									"melee_physical_increased",
+									"support:encircling_cleave"
+								],
+								"more": 0.75,
+								"resistance": 0.0,
+								"type": "physical"
+							}
+						],
+						"effect_id": "",
+						"health_lost": 56.784000000000006,
+						"phase": "direct",
+						"prevented_components": {
+							"physical": 0.0
+						},
+						"projectile_id": 0,
+						"shield_spent": 0.0,
+						"skill_id": "cleave",
+						"tags": [
+							"hit",
+							"attack",
+							"melee",
+							"area"
+						],
+						"target_id": 2,
+						"total": 56.784000000000006
+					},
+					{
+						"assembly": {
+							"added": {},
+							"added_effectiveness": 2.8,
+							"base_coefficient": 2.8,
+							"intrinsic": {
+								"physical": 72.8
+							},
+							"stage": "hit_base"
+						},
+						"before_defense_components": {
+							"physical": 56.784000000000006
+						},
+						"cast_id": 1,
+						"components": {
+							"physical": 56.784000000000006
+						},
+						"critical": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"details": [
+							{
+								"base": 72.8,
+								"before_defense": 56.784000000000006,
+								"final": 56.784000000000006,
+								"increased": 0.04,
+								"modifiers": [
+									"melee_physical_increased",
+									"support:encircling_cleave"
+								],
+								"more": 0.75,
+								"resistance": 0.0,
+								"type": "physical"
+							}
+						],
+						"effect_id": "",
+						"health_lost": 56.784000000000006,
+						"phase": "direct",
+						"prevented_components": {
+							"physical": 0.0
+						},
+						"projectile_id": 0,
+						"shield_spent": 0.0,
+						"skill_id": "cleave",
+						"tags": [
+							"hit",
+							"attack",
+							"melee",
+							"area"
+						],
+						"target_id": 3,
+						"total": 56.784000000000006
+					},
+					{
+						"assembly": {
+							"added": {},
+							"added_effectiveness": 2.8,
+							"base_coefficient": 2.8,
+							"intrinsic": {
+								"physical": 72.8
+							},
+							"stage": "hit_base"
+						},
+						"before_defense_components": {
+							"physical": 56.784000000000006
+						},
+						"cast_id": 1,
+						"components": {
+							"physical": 56.784000000000006
+						},
+						"critical": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"details": [
+							{
+								"base": 72.8,
+								"before_defense": 56.784000000000006,
+								"final": 56.784000000000006,
+								"increased": 0.04,
+								"modifiers": [
+									"melee_physical_increased",
+									"support:encircling_cleave"
+								],
+								"more": 0.75,
+								"resistance": 0.0,
+								"type": "physical"
+							}
+						],
+						"effect_id": "",
+						"health_lost": 56.784000000000006,
+						"phase": "direct",
+						"prevented_components": {
+							"physical": 0.0
+						},
+						"projectile_id": 0,
+						"shield_spent": 0.0,
+						"skill_id": "cleave",
+						"tags": [
+							"hit",
+							"attack",
+							"melee",
+							"area"
+						],
+						"target_id": 4,
+						"total": 56.784000000000006
+					},
+					{
+						"assembly": {
+							"added": {},
+							"added_effectiveness": 2.8,
+							"base_coefficient": 2.8,
+							"intrinsic": {
+								"physical": 72.8
+							},
+							"stage": "hit_base"
+						},
+						"before_defense_components": {
+							"physical": 56.784000000000006
+						},
+						"cast_id": 1,
+						"components": {
+							"physical": 56.784000000000006
+						},
+						"critical": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"details": [
+							{
+								"base": 72.8,
+								"before_defense": 56.784000000000006,
+								"final": 56.784000000000006,
+								"increased": 0.04,
+								"modifiers": [
+									"melee_physical_increased",
+									"support:encircling_cleave"
+								],
+								"more": 0.75,
+								"resistance": 0.0,
+								"type": "physical"
+							}
+						],
+						"effect_id": "",
+						"health_lost": 56.784000000000006,
+						"phase": "direct",
+						"prevented_components": {
+							"physical": 0.0
+						},
+						"projectile_id": 0,
+						"shield_spent": 0.0,
+						"skill_id": "cleave",
+						"tags": [
+							"hit",
+							"attack",
+							"melee",
+							"area"
+						],
+						"target_id": 5,
+						"total": 56.784000000000006
+					},
+					{
+						"assembly": {
+							"added": {},
+							"added_effectiveness": 2.8,
+							"base_coefficient": 2.8,
+							"intrinsic": {
+								"physical": 72.8
+							},
+							"stage": "hit_base"
+						},
+						"before_defense_components": {
+							"physical": 56.784000000000006
+						},
+						"cast_id": 1,
+						"components": {
+							"physical": 56.784000000000006
+						},
+						"critical": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"details": [
+							{
+								"base": 72.8,
+								"before_defense": 56.784000000000006,
+								"final": 56.784000000000006,
+								"increased": 0.04,
+								"modifiers": [
+									"melee_physical_increased",
+									"support:encircling_cleave"
+								],
+								"more": 0.75,
+								"resistance": 0.0,
+								"type": "physical"
+							}
+						],
+						"effect_id": "",
+						"health_lost": 56.784000000000006,
+						"phase": "direct",
+						"prevented_components": {
+							"physical": 0.0
+						},
+						"projectile_id": 0,
+						"shield_spent": 0.0,
+						"skill_id": "cleave",
+						"tags": [
+							"hit",
+							"attack",
+							"melee",
+							"area"
+						],
+						"target_id": 6,
+						"total": 56.784000000000006
+					},
+					{
+						"assembly": {
+							"added": {},
+							"added_effectiveness": 2.8,
+							"base_coefficient": 2.8,
+							"intrinsic": {
+								"physical": 72.8
+							},
+							"stage": "hit_base"
+						},
+						"before_defense_components": {
+							"physical": 56.784000000000006
+						},
+						"cast_id": 1,
+						"components": {
+							"physical": 56.784000000000006
+						},
+						"critical": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"details": [
+							{
+								"base": 72.8,
+								"before_defense": 56.784000000000006,
+								"final": 56.784000000000006,
+								"increased": 0.04,
+								"modifiers": [
+									"melee_physical_increased",
+									"support:encircling_cleave"
+								],
+								"more": 0.75,
+								"resistance": 0.0,
+								"type": "physical"
+							}
+						],
+						"effect_id": "",
+						"health_lost": 56.784000000000006,
+						"phase": "direct",
+						"prevented_components": {
+							"physical": 0.0
+						},
+						"projectile_id": 0,
+						"shield_spent": 0.0,
+						"skill_id": "cleave",
+						"tags": [
+							"hit",
+							"attack",
+							"melee",
+							"area"
+						],
+						"target_id": 7,
+						"total": 56.784000000000006
+					},
+					{
+						"assembly": {
+							"added": {},
+							"added_effectiveness": 2.8,
+							"base_coefficient": 2.8,
+							"intrinsic": {
+								"physical": 72.8
+							},
+							"stage": "hit_base"
+						},
+						"before_defense_components": {
+							"physical": 56.784000000000006
+						},
+						"cast_id": 1,
+						"components": {
+							"physical": 56.784000000000006
+						},
+						"critical": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"details": [
+							{
+								"base": 72.8,
+								"before_defense": 56.784000000000006,
+								"final": 56.784000000000006,
+								"increased": 0.04,
+								"modifiers": [
+									"melee_physical_increased",
+									"support:encircling_cleave"
+								],
+								"more": 0.75,
+								"resistance": 0.0,
+								"type": "physical"
+							}
+						],
+						"effect_id": "",
+						"health_lost": 56.784000000000006,
+						"phase": "direct",
+						"prevented_components": {
+							"physical": 0.0
+						},
+						"projectile_id": 0,
+						"shield_spent": 0.0,
+						"skill_id": "cleave",
+						"tags": [
+							"hit",
+							"attack",
+							"melee",
+							"area"
+						],
+						"target_id": 8,
+						"total": 56.784000000000006
+					},
+					{
+						"assembly": {
+							"added": {},
+							"added_effectiveness": 2.8,
+							"base_coefficient": 2.8,
+							"intrinsic": {
+								"physical": 72.8
+							},
+							"stage": "hit_base"
+						},
+						"before_defense_components": {
+							"physical": 56.784000000000006
+						},
+						"cast_id": 1,
+						"components": {
+							"physical": 56.784000000000006
+						},
+						"critical": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"details": [
+							{
+								"base": 72.8,
+								"before_defense": 56.784000000000006,
+								"final": 56.784000000000006,
+								"increased": 0.04,
+								"modifiers": [
+									"melee_physical_increased",
+									"support:encircling_cleave"
+								],
+								"more": 0.75,
+								"resistance": 0.0,
+								"type": "physical"
+							}
+						],
+						"effect_id": "",
+						"health_lost": 56.784000000000006,
+						"phase": "direct",
+						"prevented_components": {
+							"physical": 0.0
+						},
+						"projectile_id": 0,
+						"shield_spent": 0.0,
+						"skill_id": "cleave",
+						"tags": [
+							"hit",
+							"attack",
+							"melee",
+							"area"
+						],
+						"target_id": 9,
+						"total": 56.784000000000006
+					}
+				],
+				"targets": [
+					1,
+					3,
+					4,
+					5,
+					8,
+					9
+				]
+			}
+		],
+		"compatible_supports": [
+			"breadth",
+			"concentrate",
+			"efficiency",
+			"quickcast",
+			"physical_focus",
+			"encircling_cleave"
+		],
+		"equipment_vocabulary": 51,
+		"examples": {
+			"after": {
+				"added_effectiveness": 2.8,
+				"base_coefficient": 2.8,
+				"cooldown": 1.4,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n周身范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n环斩覆盖 360 度；命中伤害额外降低 25%，魔力消耗倍率 125%。\n角度扩大不增加半径；上方面积倍率仅指范围词缀，每个目标最多命中一次。\n近身扇区 360 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 56.78\n固有：物理 72.80；附加：无；附加效用 2.80",
+				"initial_count": 0,
+				"mana": 15.0,
+				"recipe": {
+					"half_angle": 3.141592653589793,
+					"radius": 95.0
+				},
+				"resolved": {
+					"components": {
+						"physical": 56.784000000000006
+					},
+					"details": [
+						{
+							"base": 72.8,
+							"before_defense": 56.784000000000006,
+							"final": 56.784000000000006,
+							"increased": 0.04,
+							"modifiers": [
+								"melee_physical_increased",
+								"support:encircling_cleave"
+							],
+							"more": 0.75,
+							"resistance": 0.0,
+							"type": "physical"
+						}
+					],
+					"total": 56.784000000000006
+				},
+				"summary": "非暴击命中预估（未计敌方防御）：每次命中 56.78"
+			},
+			"before": {
+				"added_effectiveness": 2.8,
+				"base_coefficient": 2.8,
+				"cooldown": 1.4,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n扇形范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 75.71\n固有：物理 72.80；附加：无；附加效用 2.80",
+				"initial_count": 0,
+				"mana": 12.0,
+				"recipe": {
+					"half_angle": 1.5707963267948966,
+					"radius": 95.0
+				},
+				"resolved": {
+					"components": {
+						"physical": 75.712
+					},
+					"details": [
+						{
+							"base": 72.8,
+							"before_defense": 75.712,
+							"final": 75.712,
+							"increased": 0.04,
+							"modifiers": [
+								"melee_physical_increased"
+							],
+							"more": 1.0,
+							"resistance": 0.0,
+							"type": "physical"
+						}
+					],
+					"total": 75.712
+				},
+				"summary": "非暴击命中预估（未计敌方防御）：每次命中 75.71"
+			}
+		},
+		"group_id": "group_000009",
+		"icon_file": "originals/encircling_cleave.png",
+		"icon_sha256": "029dd3e73ca913cd91505f2d986f946d2b73b250caa63450b2f23d94bfe4dc51",
+		"icon_source": "res://assets/ui/grimoire/encircling_cleave.png",
+		"maximum_supports": 5,
+		"merchant_quote": {
+			"code": "",
+			"cost": {
+				"calibration_shard": 4
+			},
+			"definition_id": "support:encircling_cleave",
+			"materials": {},
+			"name": "环斩辅助",
+			"ok": true,
+			"operation": "buy",
+			"reason": "",
+			"target": "support:encircling_cleave"
+		},
+		"normal_reward_pool_includes_support": false,
+		"policy": {
+			"arc_degrees": 360.0,
+			"base_arc_degrees": 180.0,
+			"enabled": true,
+			"hit_multiplier": 0.75,
+			"mana_multiplier": 1.25
+		},
+		"save_version": 52,
+		"scope": "Lawful purchased and installed actual-Main group9 fixture rehydrated read-only; two cast previews only. No Main, maps, combat matrices, RNG, save writes, historical exporter, source coverage or art generation.",
+		"skills": [
+			"cleave"
+		],
+		"source_policy": 49,
+		"support_id": "encircling_cleave",
+		"support_uid": "item_000009",
+		"test_offer": {
+			"available": true,
+			"catalog_id": "support:encircling_cleave",
+			"category": "",
+			"definition_id": "support:encircling_cleave",
+			"description": "仅辅助裂刃斩：180度前方半圆改为360度整圆，半径仍由范围加成决定；主命中伤害×0.75，魔力消耗×1.25，冷却不变。每个目标仍只结算一次，占用1个辅助槽。",
+			"icon_path": "",
+			"id": "support:encircling_cleave",
+			"kind": "support_gem",
+			"name": "环斩辅助",
+			"preview": {
+				"capabilities": [],
+				"category": "",
+				"definition_id": "support:encircling_cleave",
+				"description": "仅辅助裂刃斩：180度前方半圆改为360度整圆，半径仍由范围加成决定；主命中伤害×0.75，魔力消耗×1.25，冷却不变。每个目标仍只结算一次，占用1个辅助槽。",
+				"family": "encircling_cleave",
+				"glyph": "",
+				"icon": "res://assets/ui/grimoire/encircling_cleave.png",
+				"icon_texture": "(res://assets/ui/grimoire/encircling_cleave.png):<CompressedTexture2D#-9223371907519216172>",
+				"kind": "support_gem",
+				"name": "环斩辅助",
+				"requires": [],
+				"short_name": "环斩辅助",
+				"size": [
+					1,
+					1
+				],
+				"skill_id": "",
+				"skills": [
+					"cleave"
+				],
+				"support_id": "encircling_cleave",
+				"uid": "item_000001"
+			},
+			"price_label": "测试免费",
+			"quantity": 1,
+			"reason": "",
+			"size": [
+				1,
+				1
+			],
+			"supply_kind": "gem"
+		}
+	},
 	"encounters": {
 		"enemy_armour_80": {
 			"description": "怪物护甲 +80；按单次物理命中大小减伤，元素与混沌不变",
@@ -124995,7 +125720,7 @@
 		},
 		"timing": "施放时冻结；分配、退款和换装只影响新施放，旧飞行、母子箭、返回与独立爆炸保持各自快照"
 	},
-	"save_version": 51,
+	"save_version": 52,
 	"schema_version": 3,
 	"sectors": [
 		{
@@ -186669,7 +187394,8 @@
 				"concentrate",
 				"efficiency",
 				"quickcast",
-				"physical_focus"
+				"physical_focus",
+				"encircling_cleave"
 			],
 			"cooldown": 1.4,
 			"description": "向面前半圆横扫，半径 95，造成 280% 物理攻击命中。近战与范围加成生效；不借用长弓本地伤害。",
@@ -604171,6 +604897,81 @@
 			"family": "burning",
 			"native_recipe_eligibility": true
 		},
+		"encircling_cleave": {
+			"examples": {
+				"cleave": {
+					"after": {
+						"added_effectiveness": 2.8,
+						"base_coefficient": 2.8,
+						"cooldown": 1.4,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n周身范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n环斩覆盖 360 度；命中伤害额外降低 25%，魔力消耗倍率 125%。\n角度扩大不增加半径；上方面积倍率仅指范围词缀，每个目标最多命中一次。\n近身扇区 360 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 56.78\n固有：物理 72.80；附加：无；附加效用 2.80",
+						"initial_count": 0,
+						"mana": 15.0,
+						"recipe": {
+							"half_angle": 3.141592653589793,
+							"radius": 95.0
+						},
+						"resolved": {
+							"components": {
+								"physical": 56.784000000000006
+							},
+							"details": [
+								{
+									"base": 72.8,
+									"before_defense": 56.784000000000006,
+									"final": 56.784000000000006,
+									"increased": 0.04,
+									"modifiers": [
+										"melee_physical_increased",
+										"support:encircling_cleave"
+									],
+									"more": 0.75,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 56.784000000000006
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每次命中 56.78"
+					},
+					"before": {
+						"added_effectiveness": 2.8,
+						"base_coefficient": 2.8,
+						"cooldown": 1.4,
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n扇形范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 75.71\n固有：物理 72.80；附加：无；附加效用 2.80",
+						"initial_count": 0,
+						"mana": 12.0,
+						"recipe": {
+							"half_angle": 1.5707963267948966,
+							"radius": 95.0
+						},
+						"resolved": {
+							"components": {
+								"physical": 75.712
+							},
+							"details": [
+								{
+									"base": 72.8,
+									"before_defense": 75.712,
+									"final": 75.712,
+									"increased": 0.04,
+									"modifiers": [
+										"melee_physical_increased"
+									],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 75.712
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每次命中 75.71"
+					}
+				}
+			},
+			"family": "encircling_cleave",
+			"native_recipe_eligibility": true
+		},
 		"fire_focus": {
 			"examples": {
 				"meteor": {
@@ -606143,6 +606944,25 @@
 			"skills": [
 				"meteor",
 				"tornado"
+			]
+		},
+		"encircling_cleave": {
+			"description": "仅辅助裂刃斩：180度前方半圆改为360度整圆，半径仍由范围加成决定；主命中伤害×0.75，魔力消耗×1.25，冷却不变。每个目标仍只结算一次，占用1个辅助槽。",
+			"family": "encircling_cleave",
+			"name": "环斩辅助",
+			"operations": [
+				{
+					"op": "primary_hit_more",
+					"value": -0.25
+				},
+				{
+					"op": "mana_multiplier",
+					"value": 1.25
+				}
+			],
+			"requires": [],
+			"skills": [
+				"cleave"
 			]
 		},
 		"fire_focus": {
