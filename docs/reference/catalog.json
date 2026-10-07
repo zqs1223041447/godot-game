@@ -88388,6 +88388,109 @@
 			"step": 2.0
 		}
 	},
+	"jewel_crafting": {
+		"actual_main_example": {
+			"balance_after": 56,
+			"balance_before": 64,
+			"cost": 8,
+			"description": "前缀 · 丰茂：最大生命 +16.0\n后缀 · 复苏：护盾恢复 +0.6 / 秒",
+			"exact_main_result_verified": true,
+			"fixture": "docs/qa/v091-root-ui/main-after-reforge.json",
+			"fixture_sha256": "ed3de9281e9e78ad66c739095ed238d49a5bb5b8ef3a5ab4ecbf4707513777d2",
+			"name": "魔法 · 烬心晶玉",
+			"result": {
+				"affixes": [
+					{
+						"id": "vitality",
+						"value": 16.0
+					},
+					{
+						"id": "recharge",
+						"value": 0.6
+					}
+				],
+				"base": "emberheart",
+				"id": "jewel_000004",
+				"rarity": "magic"
+			},
+			"scope": "Isolated test game data from the accepted actual Main UI run; never a user's normal save",
+			"source": {
+				"affixes": [
+					{
+						"id": "force",
+						"value": 4.0
+					},
+					{
+						"id": "tempo",
+						"value": 0.08
+					}
+				],
+				"base": "emberheart",
+				"id": "jewel_000004",
+				"rarity": "magic"
+			},
+			"ui_log": "docs/qa/v091-root-ui/ui.log",
+			"ui_log_sha256": "051acd976637c6c0a783613941438f8633f63b6dd01de0697822533e1d16bbd7",
+			"whole_build_valid": true
+		},
+		"affix_counts": {
+			"magic": {
+				"max_prefixes": 1,
+				"min_prefixes": 1,
+				"suffixes": 1
+			},
+			"rare": {
+				"max_prefixes": 2,
+				"min_prefixes": 1,
+				"suffixes": 2
+			}
+		},
+		"base_ids": [
+			"emberheart",
+			"tideglass",
+			"windweave"
+		],
+		"equipment_crafting_unchanged": true,
+		"material_id": "calibration_shard",
+		"natural_generator_unchanged": true,
+		"new_currency_or_grants": false,
+		"operations": {
+			"reforge": {
+				"description": "保留珠宝身份、底材和稀有度，重新随机全部合法词缀及数值；魔法8枚、稀有16枚校准碎片。",
+				"label": "整体重铸",
+				"operation": "reforge",
+				"risk": "全部原词缀会被替换，结果可能相同或更差，碎片仍会消耗。"
+			},
+			"salvage": {
+				"description": "消耗这颗普通珠宝，魔法返还1枚、稀有返还2枚校准碎片。",
+				"label": "回收",
+				"operation": "salvage",
+				"risk": "这颗珠宝会被消耗，无法撤销。"
+			}
+		},
+		"preserves": [
+			"id",
+			"base",
+			"rarity",
+			"location"
+		],
+		"quote_seconds": 120,
+		"rarities": [
+			"magic",
+			"rare"
+		],
+		"reforge_costs": {
+			"magic": 8,
+			"rare": 16
+		},
+		"rules_version": "ordinary-jewel-crafting-v1",
+		"salvage_units": {
+			"magic": 1,
+			"rare": 2
+		},
+		"save_version": 50,
+		"source": "scripts/items/jewel_craft_rules.gd"
+	},
 	"jewel_rarities": {
 		"magic": {
 			"color": "#8eb8ff",
