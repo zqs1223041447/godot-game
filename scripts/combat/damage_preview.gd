@@ -144,6 +144,8 @@ static func details(cast: Dictionary) -> String:
 	if cast.skill_id in ["nova", "meteor", "cleave"] and cast.recipe.has("radius"):
 		var base_radius: float = float(cast.recipe.get("base_radius", cast.recipe.radius))
 		lines.append("%s范围：半径 %.2f → %.2f；面积 ×%.4f，半径 ×%.4f（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。" % ["周身" if bool(cast.get("encircling_cleave_profile", {}).get("enabled", false)) else "扇形" if cast.skill_id == "cleave" else "圆形", base_radius, float(cast.recipe.radius), float(cast.recipe.get("area_multiplier", 1.0)), float(cast.recipe.radius) / base_radius])
+	if cast.skill_id == "dash":
+		lines.append_array(long_stride_lines(cast))
 	if cast.skill_id == "cleave":
 		lines.append_array(encircling_cleave_lines(cast))
 		lines.append("近身扇区 %.0f 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。" % rad_to_deg(float(cast.recipe.half_angle)*2.0))
@@ -283,4 +285,13 @@ static func encircling_cleave_lines(cast: Dictionary) -> Array[String]:
 	if not bool(profile.get("enabled", false)): return lines
 	lines.append("环斩覆盖 %.0f 度；命中伤害额外降低 %.0f%%，魔力消耗倍率 %.0f%%。" % [float(profile.arc_degrees), (1.0-float(profile.hit_multiplier))*100.0, float(profile.mana_multiplier)*100.0])
 	lines.append("角度扩大不增加半径；上方面积倍率仅指范围词缀，每个目标最多命中一次。")
+	return lines
+
+
+static func long_stride_lines(cast: Dictionary) -> Array[String]:
+	var lines: Array[String] = []
+	var profile: Dictionary = cast.get("long_stride_profile", {})
+	if not bool(profile.get("enabled", false)): return lines
+	lines.append("长跃请求距离 %.0f → %.0f；实际移动受墙体与地图边界截断，不能穿墙。" % [float(profile.base_distance),float(profile.requested_distance)])
+	lines.append("本次新增保护 %.1f → %.1f 秒；已有保护保留。魔力消耗倍率 %.0f%%，冷却不变。" % [float(profile.base_immunity_grant),float(profile.immunity_grant),float(profile.mana_multiplier)*100.0])
 	return lines

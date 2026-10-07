@@ -12,6 +12,7 @@ const Combat = preload("res://scripts/combat/combat_data.gd")
 const Compiler = preload("res://scripts/combat/skill_compiler.gd")
 const Supports = preload("res://scripts/combat/support_registry.gd")
 const BurnRules = preload("res://scripts/combat/burn_rules.gd")
+const LongStrideRules = preload("res://scripts/combat/long_stride_support_rules.gd")
 const EncirclingRules = preload("res://scripts/combat/encircling_cleave_support_rules.gd")
 const FrostLockRules = preload("res://scripts/combat/frost_lock_rules.gd")
 const AmbushRules = preload("res://scripts/combat/ambush_support_rules.gd")
@@ -148,6 +149,13 @@ static func view(model: RefCounted, uid: String) -> Dictionary:
 				_append_numeric_stat(freeze_stats, "解冻后保护", FrostLockRules.PLAYER_POLICY.immunity_seconds, " 秒")
 				result.base_stats = freeze_stats
 				result.description = "冻结期间不刷新时长；解冻后短时间不能再次冻结。外力位移与持续伤害仍生效，原有减速保留。"
+			elif support_id == "long_stride":
+				result.function = "冲刺请求距离增加，但本次不再获得冲刺保护。"
+				var stride_stats: Array[Dictionary] = []
+				_append_numeric_stat(stride_stats, "请求距离", LongStrideRules.POLICY.requested_distance)
+				_append_numeric_stat(stride_stats, "本次新增保护", LongStrideRules.POLICY.immunity_grant, " 秒")
+				result.base_stats = stride_stats
+				result.description = "实际移动受墙体与地图边界截断；冷却不变，已有保护不会被清除或缩短。"
 			elif support_id == "encircling_cleave":
 				result.function = "将裂刃斩改为攻击自身周围一整圈。"
 				var sweep_stats: Array[Dictionary] = []

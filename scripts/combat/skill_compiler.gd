@@ -8,6 +8,7 @@ const Extension = preload("res://scripts/combat/projectile_support_rules.gd")
 const Ambush = preload("res://scripts/combat/ambush_support_rules.gd")
 const InwardPull = preload("res://scripts/combat/inward_pull_support_rules.gd")
 const EncirclingCleave = preload("res://scripts/combat/encircling_cleave_support_rules.gd")
+const LongStride = preload("res://scripts/combat/long_stride_support_rules.gd")
 const Area = preload("res://scripts/combat/area_support_rules.gd")
 const Critical=preload("res://scripts/combat/critical_strike_rules.gd")
 const Resolute = preload("res://scripts/combat/resolute_technique_rules.gd")
@@ -245,6 +246,8 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 		var profile: Dictionary = EncirclingCleave.POLICY.duplicate(true)
 		profile.radius = float(recipe.radius)
 		result.encircling_cleave_profile = profile
+	if canonical.has("long_stride"):
+		result.long_stride_profile = LongStride.POLICY.duplicate(true)
 	_append_conversion_profile(result, packets, compiled_snapshot)
 	_append_penetration_profile(result, packets, compiled_snapshot)
 	var hit_policy: Dictionary = Resolute.compiled_profile(compiled_snapshot)
@@ -362,6 +365,8 @@ static func _failure(error: String) -> Dictionary:
 
 
 static func _snapshot_error(snapshot: Dictionary) -> String:
+	if snapshot.has("long_stride_profile"):
+		return "施放快照已编译；必须从基础构筑快照重新编译"
 	if snapshot.has("encircling_cleave_profile"):
 		return "施放快照已编译；必须从基础构筑快照重新编译"
 	# initial_count is reserved for compiled projectile snapshots, including empty supports.

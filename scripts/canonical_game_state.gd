@@ -596,7 +596,9 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	var loaded:=super.load_build(path)
 	if loaded and old_version>0 and old_version<Rules.VERSION:
 		migrated_from_legacy=true
-		if old_version == Rules.V51_VERSION:
+		if old_version == Rules.V52_VERSION:
+			migration_message="旧存档已原字节备份，长跃辅助已加入正式宝石商人；仅辅助冲刺，提高请求距离但不再授予本次保护。原物品、天赋和旅程保持，不额外赠物或赠点。"
+		elif old_version == Rules.V51_VERSION:
 			migration_message="旧存档已原字节备份，环斩辅助已加入正式宝石商人；仅辅助裂刃斩，以主命中伤害总降25%和魔力消耗乘数125%换取360度环形命中。原物品、天赋和旅程保持，不额外赠物或赠点。"
 		elif old_version == Rules.V50_VERSION:
 			migration_message="旧存档已原字节备份，纹刻指环新增混沌抗性后缀；旧装备保持原值，新掉落或主动制作才使用新词池，不额外赠物、材料或天赋点。"

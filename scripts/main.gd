@@ -19,6 +19,7 @@ const Build = preload("res://scripts/canonical_game_state.gd")
 const Gear = preload("res://scripts/items/equipment_catalog.gd")
 const GroupCooldowns = preload("res://scripts/combat/skill_cooldown_ledger.gd")
 const AreaRules = preload("res://scripts/combat/area_support_rules.gd")
+const LongStride = preload("res://scripts/combat/long_stride_support_rules.gd")
 const Data = preload("res://scripts/game_data.gd")
 const Hud = preload("res://scripts/game_hud.gd")
 const Jewels = preload("res://scripts/jewel_data.gd")
@@ -1233,6 +1234,11 @@ func _execute_compiled(compiled: Dictionary, group_id: String = "", main_uid: St
 		return false
 	var id: String = str(compiled.skill_id)
 	if not Data.SKILLS.has(id): return false
+	var stride_selected: bool = compiled.get("support_ids", []).has("long_stride")
+	if stride_selected or compiled.has("long_stride_profile"):
+		if id!="dash" or not stride_selected or not LongStride.profile_error(compiled.get("long_stride_profile")).is_empty():
+			hud.notify("长跃辅助配置无效")
+			return false
 	var skill: Dictionary = Data.SKILLS[id]
 	var mana_cost: float = float(compiled.mana)
 	var remaining: float = group_cooldowns.remaining(group_id, main_uid) if not group_id.is_empty() else float(cooldowns.get(id, 0.0))
@@ -1287,12 +1293,13 @@ func _execute_compiled(compiled: Dictionary, group_id: String = "", main_uid: St
 			if direction.length_squared() < 0.1:
 				direction = player_facing
 			var start: Vector2 = player_pos
-			player_pos = _clamp_to_arena(player_pos + direction * 175.0, PLAYER_RADIUS)
+			var requested_distance: float = float(compiled.long_stride_profile.requested_distance) if stride_selected else 175.0
+			player_pos = _clamp_to_arena(player_pos + direction * requested_distance, PLAYER_RADIUS)
 			if _geometry.has_walls(): player_pos = _geometry.move(start,player_pos,PLAYER_RADIUS,_camp_movement if _world_mode=="map" else null)
 			elif _world_mode=="map":_camp_movement.append([start,player_pos])
 			if _world_mode in ["map","map_complete"]:View.update_follow_camera(self,player_pos,ARENA)
 			visual_cues.emit_cue("dash", start, {"destination": player_pos, "color": color})
-			invulnerable = maxf(invulnerable, 0.6)
+			if not stride_selected: invulnerable = maxf(invulnerable, 0.6)
 			for i: int in range(14):
 				_add_particle(start.lerp(player_pos, i / 14.0), Vector2.ZERO, color, 9.0 - i * 0.4, 0.38)
 		"ward":
