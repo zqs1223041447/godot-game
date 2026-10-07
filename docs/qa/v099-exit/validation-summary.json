@@ -1,0 +1,28 @@
+{
+  "baseline": "d7e4121ddff09624de796f7857520926bd610d4e",
+  "production_files": [
+    "scripts/game_hud.gd",
+    "scripts/main.gd"
+  ],
+  "runtime_checks": 120,
+  "runtime_failures": 0,
+  "hud_checks": 7,
+  "hud_failures": 0,
+  "note": "First runtime run passed; root HUD startup/environment attempts 1/2 failed before the final isolated/imported run. Only new text glyph coverage checked; no font mutation. No battle suite or export run.",
+  "sha256": {
+    "scripts/main.gd": "f070dcfab43405a741ba431c30f43b65c5d8039bc6fc140e72c6ab96df809755",
+    "scripts/game_hud.gd": "5d64d11066878ad169c01c7289a0818c5e8477212edd2f1b01c3dd971b6fb363",
+    "tests/safe_map_exit_test.gd": "14bf9cd3bab9d90db28c0beaad993b8160e0416bd2708b9da6137097fed4c82c",
+    "tests/safe_exit_hud_test.gd": "38fa10442727c107ccd117aae42c6a7cdbb3f0845651819f0e023c764650726f"
+  },
+  "evidence_sha256": {
+    "docs/qa/v099-exit/import.log": "0617611b472eaa7e16affd4c890c897cc11480e8a30756e57f9ae6749a1158fc",
+    "docs/qa/v099-root-ui/attempt01.exit": "e726b440cc164001999e718b51780d80314709efe06e7857282377be9111127b",
+    "docs/qa/v099-root-ui/attempt01.log": "93fbb6dabcbff23b2487a5d37c8b268686b47cf9745780b40d25a8ba396ea5f1",
+    "docs/qa/v099-root-ui/attempt02.exit": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+    "docs/qa/v099-root-ui/attempt02.log": "6a0d6378a9b8f465185439c5e7fea4e368485b72c7c46008c7e9daa4c00a9fe7",
+    "docs/qa/v099-root-ui/attempt03.exit": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "docs/qa/v099-root-ui/attempt03.log": "8a74e54ac548462b60ffa883199932606237c5ba0945090ad32cb5e5213cb2fb",
+    "docs/qa/v099-exit/first-run.log.txt": "fb6a9d9826061f9bacefd96adacbb553aaf34e6390449fc3db4e3d4a5d323760"
+  }
+}

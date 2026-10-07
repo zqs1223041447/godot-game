@@ -20,11 +20,14 @@ the session open. Forced process termination or an OS crash is outside this fix.
 The pause/death buttons use the same “保存并退出” label and display the returned
 failure reason. No new discard-progress exit is added.
 
-Validation in progress: one shared resource import completed without errors;
-the root HUD route/text checks passed 7/7 after isolated-data/import setup was
-corrected. The two earlier setup failures are preserved under
-`../v099-root-ui/`. Actual Main/model fault-injection results will be recorded
-here before integration. Newly added strings use existing bundled glyphs.
+Validation: one shared resource import completed without errors. The root HUD
+route/text checks passed 7/7 after isolated-data/import setup was corrected;
+the two earlier setup failures are preserved under `../v099-root-ui/`.
+The actual Main/HUD/CanonicalGameState suite passed its first run: 120 checks,
+0 failures, exit 0, including real completion failures, recovery, reload, and
+exactly-once reward claims. See [runtime-validation.md](runtime-validation.md)
+for the group results, raw logs, command, isolation, and production input hashes.
+Newly added strings use existing bundled glyphs.
 
 No save schema, balance, map generation, combat, font, or large reference-catalog
 changes are needed. No package or release was created.
