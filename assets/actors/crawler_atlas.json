@@ -1,0 +1,4557 @@
+{
+  "asset": "cairnback",
+  "version": 1,
+  "atlas_file": "crawler_atlas.png",
+  "frame_width": 128,
+  "frame_height": 192,
+  "columns": 16,
+  "rows": 9,
+  "frame_count": 144,
+  "fps": 12,
+  "direction_order": [
+    "E",
+    "SE",
+    "S",
+    "SW",
+    "W",
+    "NW",
+    "N",
+    "NE"
+  ],
+  "animation_offsets": {
+    "idle": 0,
+    "walk": 4,
+    "attack": 12
+  },
+  "animation_frames": {
+    "idle": 4,
+    "walk": 8,
+    "attack": 6
+  },
+  "frame_index": "direction*18 + animation_offset + frame",
+  "foot_anchor_px": [
+    64,
+    142
+  ],
+  "ground_origin": [
+    0,
+    0,
+    0
+  ],
+  "camera_elevation_degrees": 55,
+  "camera_ortho_scale": 6.138973712921143,
+  "camera_shift_y": 0.23958347737789154,
+  "model_forward": "-Y",
+  "root_yaw_formula_degrees": "90 - 45 * direction",
+  "samples": 48,
+  "transparent": true,
+  "has_baked_shadow": false,
+  "global_projected_bounds": [
+    3.363817097415506,
+    80.68794800228426,
+    124.63617917424419,
+    181.94666543973588
+  ],
+  "test_only": false,
+  "frames": [
+    {
+      "index": 0,
+      "direction": 0,
+      "animation": "idle",
+      "frame": 0,
+      "head_top_anchor_px": [
+        80.37,
+        115.65
+      ],
+      "render_seconds": 0.591,
+      "alpha_bounds_px": [
+        5,
+        90,
+        99,
+        169
+      ],
+      "body_size_px": [
+        94,
+        79
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        5,
+        91,
+        99,
+        168
+      ]
+    },
+    {
+      "index": 1,
+      "direction": 0,
+      "animation": "idle",
+      "frame": 1,
+      "head_top_anchor_px": [
+        80.39,
+        115.52
+      ],
+      "render_seconds": 0.368,
+      "alpha_bounds_px": [
+        5,
+        90,
+        99,
+        169
+      ],
+      "body_size_px": [
+        94,
+        79
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        5,
+        91,
+        99,
+        168
+      ]
+    },
+    {
+      "index": 2,
+      "direction": 0,
+      "animation": "idle",
+      "frame": 2,
+      "head_top_anchor_px": [
+        80.16,
+        115.61
+      ],
+      "render_seconds": 0.324,
+      "alpha_bounds_px": [
+        5,
+        90,
+        99,
+        169
+      ],
+      "body_size_px": [
+        94,
+        79
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        5,
+        91,
+        99,
+        168
+      ]
+    },
+    {
+      "index": 3,
+      "direction": 0,
+      "animation": "idle",
+      "frame": 3,
+      "head_top_anchor_px": [
+        80.14,
+        115.75
+      ],
+      "render_seconds": 0.35,
+      "alpha_bounds_px": [
+        5,
+        90,
+        99,
+        169
+      ],
+      "body_size_px": [
+        94,
+        79
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        5,
+        91,
+        99,
+        168
+      ]
+    },
+    {
+      "index": 4,
+      "direction": 0,
+      "animation": "walk",
+      "frame": 0,
+      "head_top_anchor_px": [
+        80.48,
+        115.41
+      ],
+      "render_seconds": 0.399,
+      "alpha_bounds_px": [
+        5,
+        90,
+        99,
+        167
+      ],
+      "body_size_px": [
+        94,
+        77
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        5,
+        90,
+        99,
+        167
+      ]
+    },
+    {
+      "index": 5,
+      "direction": 0,
+      "animation": "walk",
+      "frame": 1,
+      "head_top_anchor_px": [
+        80.26,
+        115.36
+      ],
+      "render_seconds": 0.353,
+      "alpha_bounds_px": [
+        5,
+        90,
+        99,
+        169
+      ],
+      "body_size_px": [
+        94,
+        79
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        5,
+        91,
+        99,
+        168
+      ]
+    },
+    {
+      "index": 6,
+      "direction": 0,
+      "animation": "walk",
+      "frame": 2,
+      "head_top_anchor_px": [
+        80.04,
+        115.47
+      ],
+      "render_seconds": 0.403,
+      "alpha_bounds_px": [
+        5,
+        91,
+        100,
+        169
+      ],
+      "body_size_px": [
+        95,
+        78
+      ],
+      "visual_top_anchor_px": [
+        64,
+        91
+      ],
+      "alpha_bounds_8_px": [
+        5,
+        91,
+        100,
+        169
+      ]
+    },
+    {
+      "index": 7,
+      "direction": 0,
+      "animation": "walk",
+      "frame": 3,
+      "head_top_anchor_px": [
+        80.26,
+        115.36
+      ],
+      "render_seconds": 0.476,
+      "alpha_bounds_px": [
+        5,
+        90,
+        99,
+        169
+      ],
+      "body_size_px": [
+        94,
+        79
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        5,
+        91,
+        99,
+        169
+      ]
+    },
+    {
+      "index": 8,
+      "direction": 0,
+      "animation": "walk",
+      "frame": 4,
+      "head_top_anchor_px": [
+        80.48,
+        115.41
+      ],
+      "render_seconds": 0.479,
+      "alpha_bounds_px": [
+        5,
+        90,
+        99,
+        168
+      ],
+      "body_size_px": [
+        94,
+        78
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        5,
+        90,
+        99,
+        168
+      ]
+    },
+    {
+      "index": 9,
+      "direction": 0,
+      "animation": "walk",
+      "frame": 5,
+      "head_top_anchor_px": [
+        80.26,
+        115.9
+      ],
+      "render_seconds": 0.481,
+      "alpha_bounds_px": [
+        5,
+        90,
+        99,
+        168
+      ],
+      "body_size_px": [
+        94,
+        78
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        5,
+        91,
+        99,
+        168
+      ]
+    },
+    {
+      "index": 10,
+      "direction": 0,
+      "animation": "walk",
+      "frame": 6,
+      "head_top_anchor_px": [
+        80.04,
+        116.24
+      ],
+      "render_seconds": 0.48,
+      "alpha_bounds_px": [
+        5,
+        91,
+        100,
+        168
+      ],
+      "body_size_px": [
+        95,
+        77
+      ],
+      "visual_top_anchor_px": [
+        64,
+        91
+      ],
+      "alpha_bounds_8_px": [
+        5,
+        91,
+        100,
+        168
+      ]
+    },
+    {
+      "index": 11,
+      "direction": 0,
+      "animation": "walk",
+      "frame": 7,
+      "head_top_anchor_px": [
+        80.26,
+        115.9
+      ],
+      "render_seconds": 0.539,
+      "alpha_bounds_px": [
+        5,
+        90,
+        99,
+        167
+      ],
+      "body_size_px": [
+        94,
+        77
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        5,
+        91,
+        99,
+        167
+      ]
+    },
+    {
+      "index": 12,
+      "direction": 0,
+      "animation": "attack",
+      "frame": 0,
+      "head_top_anchor_px": [
+        80.26,
+        115.63
+      ],
+      "render_seconds": 0.54,
+      "alpha_bounds_px": [
+        5,
+        90,
+        99,
+        169
+      ],
+      "body_size_px": [
+        94,
+        79
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        5,
+        91,
+        99,
+        168
+      ]
+    },
+    {
+      "index": 13,
+      "direction": 0,
+      "animation": "attack",
+      "frame": 1,
+      "head_top_anchor_px": [
+        76.37,
+        114.56
+      ],
+      "render_seconds": 0.676,
+      "alpha_bounds_px": [
+        3,
+        90,
+        96,
+        168
+      ],
+      "body_size_px": [
+        93,
+        78
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        3,
+        90,
+        96,
+        167
+      ]
+    },
+    {
+      "index": 14,
+      "direction": 0,
+      "animation": "attack",
+      "frame": 2,
+      "head_top_anchor_px": [
+        87.17,
+        116.62
+      ],
+      "render_seconds": 0.576,
+      "alpha_bounds_px": [
+        10,
+        90,
+        104,
+        167
+      ],
+      "body_size_px": [
+        94,
+        77
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        10,
+        91,
+        104,
+        167
+      ]
+    },
+    {
+      "index": 15,
+      "direction": 0,
+      "animation": "attack",
+      "frame": 3,
+      "head_top_anchor_px": [
+        88.89,
+        117.76
+      ],
+      "render_seconds": 0.468,
+      "alpha_bounds_px": [
+        10,
+        91,
+        104,
+        168
+      ],
+      "body_size_px": [
+        94,
+        77
+      ],
+      "visual_top_anchor_px": [
+        64,
+        91
+      ],
+      "alpha_bounds_8_px": [
+        11,
+        92,
+        103,
+        168
+      ]
+    },
+    {
+      "index": 16,
+      "direction": 0,
+      "animation": "attack",
+      "frame": 4,
+      "head_top_anchor_px": [
+        83.97,
+        116.65
+      ],
+      "render_seconds": 0.468,
+      "alpha_bounds_px": [
+        7,
+        91,
+        101,
+        168
+      ],
+      "body_size_px": [
+        94,
+        77
+      ],
+      "visual_top_anchor_px": [
+        64,
+        91
+      ],
+      "alpha_bounds_8_px": [
+        7,
+        91,
+        100,
+        168
+      ]
+    },
+    {
+      "index": 17,
+      "direction": 0,
+      "animation": "attack",
+      "frame": 5,
+      "head_top_anchor_px": [
+        80.26,
+        115.63
+      ],
+      "render_seconds": 0.487,
+      "alpha_bounds_px": [
+        5,
+        90,
+        99,
+        169
+      ],
+      "body_size_px": [
+        94,
+        79
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        5,
+        91,
+        99,
+        168
+      ]
+    },
+    {
+      "index": 18,
+      "direction": 1,
+      "animation": "idle",
+      "frame": 0,
+      "head_top_anchor_px": [
+        75.57,
+        125.13
+      ],
+      "render_seconds": 0.472,
+      "alpha_bounds_px": [
+        19,
+        90,
+        108,
+        177
+      ],
+      "body_size_px": [
+        89,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        90,
+        108,
+        177
+      ]
+    },
+    {
+      "index": 19,
+      "direction": 1,
+      "animation": "idle",
+      "frame": 1,
+      "head_top_anchor_px": [
+        75.59,
+        125.01
+      ],
+      "render_seconds": 0.463,
+      "alpha_bounds_px": [
+        19,
+        90,
+        108,
+        177
+      ],
+      "body_size_px": [
+        89,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        90,
+        108,
+        176
+      ]
+    },
+    {
+      "index": 20,
+      "direction": 1,
+      "animation": "idle",
+      "frame": 2,
+      "head_top_anchor_px": [
+        75.43,
+        124.97
+      ],
+      "render_seconds": 0.472,
+      "alpha_bounds_px": [
+        19,
+        90,
+        108,
+        177
+      ],
+      "body_size_px": [
+        89,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        90,
+        108,
+        177
+      ]
+    },
+    {
+      "index": 21,
+      "direction": 1,
+      "animation": "idle",
+      "frame": 3,
+      "head_top_anchor_px": [
+        75.41,
+        125.09
+      ],
+      "render_seconds": 0.499,
+      "alpha_bounds_px": [
+        19,
+        90,
+        108,
+        177
+      ],
+      "body_size_px": [
+        89,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        90,
+        108,
+        177
+      ]
+    },
+    {
+      "index": 22,
+      "direction": 1,
+      "animation": "walk",
+      "frame": 0,
+      "head_top_anchor_px": [
+        75.65,
+        124.96
+      ],
+      "render_seconds": 0.822,
+      "alpha_bounds_px": [
+        19,
+        89,
+        108,
+        176
+      ],
+      "body_size_px": [
+        89,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        89
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        89,
+        108,
+        175
+      ]
+    },
+    {
+      "index": 23,
+      "direction": 1,
+      "animation": "walk",
+      "frame": 1,
+      "head_top_anchor_px": [
+        75.73,
+        124.86
+      ],
+      "render_seconds": 0.595,
+      "alpha_bounds_px": [
+        19,
+        89,
+        110,
+        175
+      ],
+      "body_size_px": [
+        91,
+        86
+      ],
+      "visual_top_anchor_px": [
+        64,
+        89
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        90,
+        110,
+        175
+      ]
+    },
+    {
+      "index": 24,
+      "direction": 1,
+      "animation": "walk",
+      "frame": 2,
+      "head_top_anchor_px": [
+        75.68,
+        124.87
+      ],
+      "render_seconds": 0.709,
+      "alpha_bounds_px": [
+        19,
+        90,
+        111,
+        175
+      ],
+      "body_size_px": [
+        92,
+        85
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        90,
+        110,
+        175
+      ]
+    },
+    {
+      "index": 25,
+      "direction": 1,
+      "animation": "walk",
+      "frame": 3,
+      "head_top_anchor_px": [
+        75.73,
+        124.86
+      ],
+      "render_seconds": 1.214,
+      "alpha_bounds_px": [
+        19,
+        90,
+        110,
+        175
+      ],
+      "body_size_px": [
+        91,
+        85
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        90,
+        110,
+        175
+      ]
+    },
+    {
+      "index": 26,
+      "direction": 1,
+      "animation": "walk",
+      "frame": 4,
+      "head_top_anchor_px": [
+        75.65,
+        124.96
+      ],
+      "render_seconds": 0.857,
+      "alpha_bounds_px": [
+        19,
+        90,
+        108,
+        177
+      ],
+      "body_size_px": [
+        89,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        90,
+        108,
+        176
+      ]
+    },
+    {
+      "index": 27,
+      "direction": 1,
+      "animation": "walk",
+      "frame": 5,
+      "head_top_anchor_px": [
+        75.27,
+        125.24
+      ],
+      "render_seconds": 0.634,
+      "alpha_bounds_px": [
+        19,
+        90,
+        107,
+        178
+      ],
+      "body_size_px": [
+        88,
+        88
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        91,
+        106,
+        177
+      ]
+    },
+    {
+      "index": 28,
+      "direction": 1,
+      "animation": "walk",
+      "frame": 6,
+      "head_top_anchor_px": [
+        75.01,
+        125.42
+      ],
+      "render_seconds": 0.645,
+      "alpha_bounds_px": [
+        19,
+        91,
+        106,
+        178
+      ],
+      "body_size_px": [
+        87,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        91
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        91,
+        106,
+        178
+      ]
+    },
+    {
+      "index": 29,
+      "direction": 1,
+      "animation": "walk",
+      "frame": 7,
+      "head_top_anchor_px": [
+        75.27,
+        125.24
+      ],
+      "render_seconds": 0.782,
+      "alpha_bounds_px": [
+        19,
+        89,
+        107,
+        177
+      ],
+      "body_size_px": [
+        88,
+        88
+      ],
+      "visual_top_anchor_px": [
+        64,
+        89
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        90,
+        107,
+        177
+      ]
+    },
+    {
+      "index": 30,
+      "direction": 1,
+      "animation": "attack",
+      "frame": 0,
+      "head_top_anchor_px": [
+        75.5,
+        125.05
+      ],
+      "render_seconds": 0.667,
+      "alpha_bounds_px": [
+        19,
+        90,
+        108,
+        177
+      ],
+      "body_size_px": [
+        89,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        90,
+        108,
+        177
+      ]
+    },
+    {
+      "index": 31,
+      "direction": 1,
+      "animation": "attack",
+      "frame": 1,
+      "head_top_anchor_px": [
+        72.74,
+        121.72
+      ],
+      "render_seconds": 0.719,
+      "alpha_bounds_px": [
+        17,
+        89,
+        105,
+        173
+      ],
+      "body_size_px": [
+        88,
+        84
+      ],
+      "visual_top_anchor_px": [
+        64,
+        89
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        89,
+        105,
+        173
+      ]
+    },
+    {
+      "index": 32,
+      "direction": 1,
+      "animation": "attack",
+      "frame": 2,
+      "head_top_anchor_px": [
+        80.39,
+        130.05
+      ],
+      "render_seconds": 0.732,
+      "alpha_bounds_px": [
+        22,
+        92,
+        114,
+        181
+      ],
+      "body_size_px": [
+        92,
+        89
+      ],
+      "visual_top_anchor_px": [
+        64,
+        92
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        92,
+        114,
+        180
+      ]
+    },
+    {
+      "index": 33,
+      "direction": 1,
+      "animation": "attack",
+      "frame": 3,
+      "head_top_anchor_px": [
+        81.6,
+        132.18
+      ],
+      "render_seconds": 0.782,
+      "alpha_bounds_px": [
+        22,
+        93,
+        113,
+        181
+      ],
+      "body_size_px": [
+        91,
+        88
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        23,
+        93,
+        113,
+        181
+      ]
+    },
+    {
+      "index": 34,
+      "direction": 1,
+      "animation": "attack",
+      "frame": 4,
+      "head_top_anchor_px": [
+        78.12,
+        128.22
+      ],
+      "render_seconds": 0.887,
+      "alpha_bounds_px": [
+        20,
+        91,
+        110,
+        178
+      ],
+      "body_size_px": [
+        90,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        91
+      ],
+      "alpha_bounds_8_px": [
+        20,
+        91,
+        110,
+        178
+      ]
+    },
+    {
+      "index": 35,
+      "direction": 1,
+      "animation": "attack",
+      "frame": 5,
+      "head_top_anchor_px": [
+        75.5,
+        125.05
+      ],
+      "render_seconds": 1.005,
+      "alpha_bounds_px": [
+        19,
+        90,
+        108,
+        177
+      ],
+      "body_size_px": [
+        89,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        90,
+        108,
+        177
+      ]
+    },
+    {
+      "index": 36,
+      "direction": 2,
+      "animation": "idle",
+      "frame": 0,
+      "head_top_anchor_px": [
+        64.0,
+        129.06
+      ],
+      "render_seconds": 0.853,
+      "alpha_bounds_px": [
+        29,
+        82,
+        99,
+        167
+      ],
+      "body_size_px": [
+        70,
+        85
+      ],
+      "visual_top_anchor_px": [
+        64,
+        82
+      ],
+      "alpha_bounds_8_px": [
+        30,
+        82,
+        98,
+        167
+      ]
+    },
+    {
+      "index": 37,
+      "direction": 2,
+      "animation": "idle",
+      "frame": 1,
+      "head_top_anchor_px": [
+        64.0,
+        128.94
+      ],
+      "render_seconds": 0.595,
+      "alpha_bounds_px": [
+        29,
+        82,
+        99,
+        167
+      ],
+      "body_size_px": [
+        70,
+        85
+      ],
+      "visual_top_anchor_px": [
+        64,
+        82
+      ],
+      "alpha_bounds_8_px": [
+        30,
+        82,
+        98,
+        167
+      ]
+    },
+    {
+      "index": 38,
+      "direction": 2,
+      "animation": "idle",
+      "frame": 2,
+      "head_top_anchor_px": [
+        64.0,
+        128.84
+      ],
+      "render_seconds": 1.025,
+      "alpha_bounds_px": [
+        29,
+        82,
+        99,
+        167
+      ],
+      "body_size_px": [
+        70,
+        85
+      ],
+      "visual_top_anchor_px": [
+        64,
+        82
+      ],
+      "alpha_bounds_8_px": [
+        30,
+        82,
+        98,
+        167
+      ]
+    },
+    {
+      "index": 39,
+      "direction": 2,
+      "animation": "idle",
+      "frame": 3,
+      "head_top_anchor_px": [
+        64.0,
+        128.97
+      ],
+      "render_seconds": 0.821,
+      "alpha_bounds_px": [
+        29,
+        82,
+        99,
+        167
+      ],
+      "body_size_px": [
+        70,
+        85
+      ],
+      "visual_top_anchor_px": [
+        64,
+        82
+      ],
+      "alpha_bounds_8_px": [
+        30,
+        82,
+        98,
+        167
+      ]
+    },
+    {
+      "index": 40,
+      "direction": 2,
+      "animation": "walk",
+      "frame": 0,
+      "head_top_anchor_px": [
+        64.0,
+        128.92
+      ],
+      "render_seconds": 0.787,
+      "alpha_bounds_px": [
+        29,
+        82,
+        99,
+        167
+      ],
+      "body_size_px": [
+        70,
+        85
+      ],
+      "visual_top_anchor_px": [
+        64,
+        82
+      ],
+      "alpha_bounds_8_px": [
+        30,
+        82,
+        98,
+        167
+      ]
+    },
+    {
+      "index": 41,
+      "direction": 2,
+      "animation": "walk",
+      "frame": 1,
+      "head_top_anchor_px": [
+        64.33,
+        128.95
+      ],
+      "render_seconds": 0.788,
+      "alpha_bounds_px": [
+        29,
+        82,
+        98,
+        169
+      ],
+      "body_size_px": [
+        69,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        82
+      ],
+      "alpha_bounds_8_px": [
+        29,
+        82,
+        98,
+        168
+      ]
+    },
+    {
+      "index": 42,
+      "direction": 2,
+      "animation": "walk",
+      "frame": 2,
+      "head_top_anchor_px": [
+        64.47,
+        128.99
+      ],
+      "render_seconds": 0.704,
+      "alpha_bounds_px": [
+        29,
+        82,
+        98,
+        170
+      ],
+      "body_size_px": [
+        69,
+        88
+      ],
+      "visual_top_anchor_px": [
+        64,
+        82
+      ],
+      "alpha_bounds_8_px": [
+        29,
+        82,
+        98,
+        169
+      ]
+    },
+    {
+      "index": 43,
+      "direction": 2,
+      "animation": "walk",
+      "frame": 3,
+      "head_top_anchor_px": [
+        64.33,
+        128.95
+      ],
+      "render_seconds": 1.052,
+      "alpha_bounds_px": [
+        29,
+        82,
+        98,
+        168
+      ],
+      "body_size_px": [
+        69,
+        86
+      ],
+      "visual_top_anchor_px": [
+        64,
+        82
+      ],
+      "alpha_bounds_8_px": [
+        29,
+        82,
+        98,
+        168
+      ]
+    },
+    {
+      "index": 44,
+      "direction": 2,
+      "animation": "walk",
+      "frame": 4,
+      "head_top_anchor_px": [
+        64.0,
+        128.92
+      ],
+      "render_seconds": 0.665,
+      "alpha_bounds_px": [
+        29,
+        82,
+        99,
+        167
+      ],
+      "body_size_px": [
+        70,
+        85
+      ],
+      "visual_top_anchor_px": [
+        64,
+        82
+      ],
+      "alpha_bounds_8_px": [
+        30,
+        82,
+        99,
+        166
+      ]
+    },
+    {
+      "index": 45,
+      "direction": 2,
+      "animation": "walk",
+      "frame": 5,
+      "head_top_anchor_px": [
+        63.67,
+        128.95
+      ],
+      "render_seconds": 0.961,
+      "alpha_bounds_px": [
+        30,
+        82,
+        100,
+        169
+      ],
+      "body_size_px": [
+        70,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        82
+      ],
+      "alpha_bounds_8_px": [
+        30,
+        82,
+        99,
+        168
+      ]
+    },
+    {
+      "index": 46,
+      "direction": 2,
+      "animation": "walk",
+      "frame": 6,
+      "head_top_anchor_px": [
+        63.53,
+        128.99
+      ],
+      "render_seconds": 0.94,
+      "alpha_bounds_px": [
+        30,
+        82,
+        100,
+        170
+      ],
+      "body_size_px": [
+        70,
+        88
+      ],
+      "visual_top_anchor_px": [
+        64,
+        82
+      ],
+      "alpha_bounds_8_px": [
+        30,
+        83,
+        99,
+        169
+      ]
+    },
+    {
+      "index": 47,
+      "direction": 2,
+      "animation": "walk",
+      "frame": 7,
+      "head_top_anchor_px": [
+        63.67,
+        128.95
+      ],
+      "render_seconds": 0.709,
+      "alpha_bounds_px": [
+        30,
+        82,
+        100,
+        168
+      ],
+      "body_size_px": [
+        70,
+        86
+      ],
+      "visual_top_anchor_px": [
+        64,
+        82
+      ],
+      "alpha_bounds_8_px": [
+        30,
+        82,
+        99,
+        168
+      ]
+    },
+    {
+      "index": 48,
+      "direction": 2,
+      "animation": "attack",
+      "frame": 0,
+      "head_top_anchor_px": [
+        64.0,
+        128.95
+      ],
+      "render_seconds": 0.633,
+      "alpha_bounds_px": [
+        29,
+        82,
+        99,
+        167
+      ],
+      "body_size_px": [
+        70,
+        85
+      ],
+      "visual_top_anchor_px": [
+        64,
+        82
+      ],
+      "alpha_bounds_8_px": [
+        30,
+        82,
+        98,
+        167
+      ]
+    },
+    {
+      "index": 49,
+      "direction": 2,
+      "animation": "attack",
+      "frame": 1,
+      "head_top_anchor_px": [
+        64.0,
+        124.69
+      ],
+      "render_seconds": 0.649,
+      "alpha_bounds_px": [
+        29,
+        80,
+        99,
+        162
+      ],
+      "body_size_px": [
+        70,
+        82
+      ],
+      "visual_top_anchor_px": [
+        64,
+        80
+      ],
+      "alpha_bounds_8_px": [
+        30,
+        80,
+        98,
+        162
+      ]
+    },
+    {
+      "index": 50,
+      "direction": 2,
+      "animation": "attack",
+      "frame": 2,
+      "head_top_anchor_px": [
+        64.0,
+        135.61
+      ],
+      "render_seconds": 0.85,
+      "alpha_bounds_px": [
+        29,
+        84,
+        99,
+        173
+      ],
+      "body_size_px": [
+        70,
+        89
+      ],
+      "visual_top_anchor_px": [
+        64,
+        84
+      ],
+      "alpha_bounds_8_px": [
+        30,
+        84,
+        98,
+        172
+      ]
+    },
+    {
+      "index": 51,
+      "direction": 2,
+      "animation": "attack",
+      "frame": 3,
+      "head_top_anchor_px": [
+        64.0,
+        138.15
+      ],
+      "render_seconds": 1.083,
+      "alpha_bounds_px": [
+        30,
+        86,
+        99,
+        173
+      ],
+      "body_size_px": [
+        69,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        86
+      ],
+      "alpha_bounds_8_px": [
+        30,
+        86,
+        98,
+        173
+      ]
+    },
+    {
+      "index": 52,
+      "direction": 2,
+      "animation": "attack",
+      "frame": 4,
+      "head_top_anchor_px": [
+        64.0,
+        133.01
+      ],
+      "render_seconds": 0.92,
+      "alpha_bounds_px": [
+        29,
+        83,
+        99,
+        170
+      ],
+      "body_size_px": [
+        70,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        83
+      ],
+      "alpha_bounds_8_px": [
+        30,
+        84,
+        98,
+        169
+      ]
+    },
+    {
+      "index": 53,
+      "direction": 2,
+      "animation": "attack",
+      "frame": 5,
+      "head_top_anchor_px": [
+        64.0,
+        128.95
+      ],
+      "render_seconds": 1.018,
+      "alpha_bounds_px": [
+        29,
+        82,
+        99,
+        167
+      ],
+      "body_size_px": [
+        70,
+        85
+      ],
+      "visual_top_anchor_px": [
+        64,
+        82
+      ],
+      "alpha_bounds_8_px": [
+        30,
+        82,
+        98,
+        167
+      ]
+    },
+    {
+      "index": 54,
+      "direction": 3,
+      "animation": "idle",
+      "frame": 0,
+      "head_top_anchor_px": [
+        52.43,
+        125.13
+      ],
+      "render_seconds": 1.1,
+      "alpha_bounds_px": [
+        19,
+        90,
+        109,
+        177
+      ],
+      "body_size_px": [
+        90,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        20,
+        91,
+        109,
+        176
+      ]
+    },
+    {
+      "index": 55,
+      "direction": 3,
+      "animation": "idle",
+      "frame": 1,
+      "head_top_anchor_px": [
+        52.41,
+        125.01
+      ],
+      "render_seconds": 0.768,
+      "alpha_bounds_px": [
+        19,
+        90,
+        109,
+        177
+      ],
+      "body_size_px": [
+        90,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        20,
+        91,
+        109,
+        176
+      ]
+    },
+    {
+      "index": 56,
+      "direction": 3,
+      "animation": "idle",
+      "frame": 2,
+      "head_top_anchor_px": [
+        52.57,
+        124.97
+      ],
+      "render_seconds": 0.974,
+      "alpha_bounds_px": [
+        19,
+        90,
+        109,
+        177
+      ],
+      "body_size_px": [
+        90,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        20,
+        91,
+        109,
+        176
+      ]
+    },
+    {
+      "index": 57,
+      "direction": 3,
+      "animation": "idle",
+      "frame": 3,
+      "head_top_anchor_px": [
+        52.59,
+        125.09
+      ],
+      "render_seconds": 0.982,
+      "alpha_bounds_px": [
+        19,
+        90,
+        109,
+        177
+      ],
+      "body_size_px": [
+        90,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        20,
+        91,
+        109,
+        176
+      ]
+    },
+    {
+      "index": 58,
+      "direction": 3,
+      "animation": "walk",
+      "frame": 0,
+      "head_top_anchor_px": [
+        52.35,
+        124.96
+      ],
+      "render_seconds": 0.961,
+      "alpha_bounds_px": [
+        19,
+        90,
+        109,
+        177
+      ],
+      "body_size_px": [
+        90,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        20,
+        90,
+        109,
+        176
+      ]
+    },
+    {
+      "index": 59,
+      "direction": 3,
+      "animation": "walk",
+      "frame": 1,
+      "head_top_anchor_px": [
+        52.73,
+        125.24
+      ],
+      "render_seconds": 1.018,
+      "alpha_bounds_px": [
+        21,
+        91,
+        109,
+        178
+      ],
+      "body_size_px": [
+        88,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        91
+      ],
+      "alpha_bounds_8_px": [
+        21,
+        91,
+        109,
+        177
+      ]
+    },
+    {
+      "index": 60,
+      "direction": 3,
+      "animation": "walk",
+      "frame": 2,
+      "head_top_anchor_px": [
+        52.99,
+        125.42
+      ],
+      "render_seconds": 0.869,
+      "alpha_bounds_px": [
+        22,
+        91,
+        109,
+        178
+      ],
+      "body_size_px": [
+        87,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        91
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        91,
+        109,
+        178
+      ]
+    },
+    {
+      "index": 61,
+      "direction": 3,
+      "animation": "walk",
+      "frame": 3,
+      "head_top_anchor_px": [
+        52.73,
+        125.24
+      ],
+      "render_seconds": 0.969,
+      "alpha_bounds_px": [
+        21,
+        90,
+        109,
+        177
+      ],
+      "body_size_px": [
+        88,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        21,
+        90,
+        109,
+        177
+      ]
+    },
+    {
+      "index": 62,
+      "direction": 3,
+      "animation": "walk",
+      "frame": 4,
+      "head_top_anchor_px": [
+        52.35,
+        124.96
+      ],
+      "render_seconds": 1.108,
+      "alpha_bounds_px": [
+        19,
+        89,
+        109,
+        176
+      ],
+      "body_size_px": [
+        90,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        89
+      ],
+      "alpha_bounds_8_px": [
+        20,
+        89,
+        109,
+        175
+      ]
+    },
+    {
+      "index": 63,
+      "direction": 3,
+      "animation": "walk",
+      "frame": 5,
+      "head_top_anchor_px": [
+        52.27,
+        124.86
+      ],
+      "render_seconds": 1.11,
+      "alpha_bounds_px": [
+        18,
+        90,
+        109,
+        175
+      ],
+      "body_size_px": [
+        91,
+        85
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        18,
+        90,
+        109,
+        175
+      ]
+    },
+    {
+      "index": 64,
+      "direction": 3,
+      "animation": "walk",
+      "frame": 6,
+      "head_top_anchor_px": [
+        52.32,
+        124.87
+      ],
+      "render_seconds": 0.958,
+      "alpha_bounds_px": [
+        17,
+        90,
+        109,
+        175
+      ],
+      "body_size_px": [
+        92,
+        85
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        18,
+        90,
+        109,
+        174
+      ]
+    },
+    {
+      "index": 65,
+      "direction": 3,
+      "animation": "walk",
+      "frame": 7,
+      "head_top_anchor_px": [
+        52.27,
+        124.86
+      ],
+      "render_seconds": 0.797,
+      "alpha_bounds_px": [
+        18,
+        90,
+        109,
+        175
+      ],
+      "body_size_px": [
+        91,
+        85
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        18,
+        90,
+        109,
+        175
+      ]
+    },
+    {
+      "index": 66,
+      "direction": 3,
+      "animation": "attack",
+      "frame": 0,
+      "head_top_anchor_px": [
+        52.5,
+        125.05
+      ],
+      "render_seconds": 1.23,
+      "alpha_bounds_px": [
+        19,
+        90,
+        109,
+        177
+      ],
+      "body_size_px": [
+        90,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        20,
+        91,
+        109,
+        176
+      ]
+    },
+    {
+      "index": 67,
+      "direction": 3,
+      "animation": "attack",
+      "frame": 1,
+      "head_top_anchor_px": [
+        55.26,
+        121.72
+      ],
+      "render_seconds": 1.21,
+      "alpha_bounds_px": [
+        23,
+        89,
+        111,
+        173
+      ],
+      "body_size_px": [
+        88,
+        84
+      ],
+      "visual_top_anchor_px": [
+        64,
+        89
+      ],
+      "alpha_bounds_8_px": [
+        23,
+        89,
+        111,
+        173
+      ]
+    },
+    {
+      "index": 68,
+      "direction": 3,
+      "animation": "attack",
+      "frame": 2,
+      "head_top_anchor_px": [
+        47.61,
+        130.05
+      ],
+      "render_seconds": 0.881,
+      "alpha_bounds_px": [
+        14,
+        92,
+        106,
+        181
+      ],
+      "body_size_px": [
+        92,
+        89
+      ],
+      "visual_top_anchor_px": [
+        64,
+        92
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        92,
+        106,
+        180
+      ]
+    },
+    {
+      "index": 69,
+      "direction": 3,
+      "animation": "attack",
+      "frame": 3,
+      "head_top_anchor_px": [
+        46.4,
+        132.18
+      ],
+      "render_seconds": 0.949,
+      "alpha_bounds_px": [
+        15,
+        93,
+        106,
+        181
+      ],
+      "body_size_px": [
+        91,
+        88
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        93,
+        105,
+        181
+      ]
+    },
+    {
+      "index": 70,
+      "direction": 3,
+      "animation": "attack",
+      "frame": 4,
+      "head_top_anchor_px": [
+        49.88,
+        128.22
+      ],
+      "render_seconds": 0.694,
+      "alpha_bounds_px": [
+        18,
+        91,
+        108,
+        179
+      ],
+      "body_size_px": [
+        90,
+        88
+      ],
+      "visual_top_anchor_px": [
+        64,
+        91
+      ],
+      "alpha_bounds_8_px": [
+        18,
+        91,
+        108,
+        178
+      ]
+    },
+    {
+      "index": 71,
+      "direction": 3,
+      "animation": "attack",
+      "frame": 5,
+      "head_top_anchor_px": [
+        52.5,
+        125.05
+      ],
+      "render_seconds": 0.753,
+      "alpha_bounds_px": [
+        19,
+        90,
+        109,
+        177
+      ],
+      "body_size_px": [
+        90,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        20,
+        91,
+        109,
+        176
+      ]
+    },
+    {
+      "index": 72,
+      "direction": 4,
+      "animation": "idle",
+      "frame": 0,
+      "head_top_anchor_px": [
+        47.63,
+        115.65
+      ],
+      "render_seconds": 0.721,
+      "alpha_bounds_px": [
+        29,
+        90,
+        123,
+        169
+      ],
+      "body_size_px": [
+        94,
+        79
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        29,
+        90,
+        123,
+        169
+      ]
+    },
+    {
+      "index": 73,
+      "direction": 4,
+      "animation": "idle",
+      "frame": 1,
+      "head_top_anchor_px": [
+        47.61,
+        115.52
+      ],
+      "render_seconds": 0.801,
+      "alpha_bounds_px": [
+        29,
+        90,
+        123,
+        169
+      ],
+      "body_size_px": [
+        94,
+        79
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        29,
+        90,
+        123,
+        168
+      ]
+    },
+    {
+      "index": 74,
+      "direction": 4,
+      "animation": "idle",
+      "frame": 2,
+      "head_top_anchor_px": [
+        47.84,
+        115.61
+      ],
+      "render_seconds": 1.03,
+      "alpha_bounds_px": [
+        29,
+        90,
+        123,
+        169
+      ],
+      "body_size_px": [
+        94,
+        79
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        29,
+        90,
+        123,
+        169
+      ]
+    },
+    {
+      "index": 75,
+      "direction": 4,
+      "animation": "idle",
+      "frame": 3,
+      "head_top_anchor_px": [
+        47.86,
+        115.75
+      ],
+      "render_seconds": 0.744,
+      "alpha_bounds_px": [
+        29,
+        90,
+        123,
+        169
+      ],
+      "body_size_px": [
+        94,
+        79
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        29,
+        91,
+        123,
+        169
+      ]
+    },
+    {
+      "index": 76,
+      "direction": 4,
+      "animation": "walk",
+      "frame": 0,
+      "head_top_anchor_px": [
+        47.52,
+        115.41
+      ],
+      "render_seconds": 0.77,
+      "alpha_bounds_px": [
+        29,
+        90,
+        123,
+        168
+      ],
+      "body_size_px": [
+        94,
+        78
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        29,
+        90,
+        123,
+        168
+      ]
+    },
+    {
+      "index": 77,
+      "direction": 4,
+      "animation": "walk",
+      "frame": 1,
+      "head_top_anchor_px": [
+        47.74,
+        115.9
+      ],
+      "render_seconds": 0.902,
+      "alpha_bounds_px": [
+        29,
+        90,
+        123,
+        168
+      ],
+      "body_size_px": [
+        94,
+        78
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        29,
+        90,
+        123,
+        168
+      ]
+    },
+    {
+      "index": 78,
+      "direction": 4,
+      "animation": "walk",
+      "frame": 2,
+      "head_top_anchor_px": [
+        47.96,
+        116.24
+      ],
+      "render_seconds": 1.103,
+      "alpha_bounds_px": [
+        28,
+        91,
+        123,
+        168
+      ],
+      "body_size_px": [
+        95,
+        77
+      ],
+      "visual_top_anchor_px": [
+        64,
+        91
+      ],
+      "alpha_bounds_8_px": [
+        28,
+        91,
+        123,
+        168
+      ]
+    },
+    {
+      "index": 79,
+      "direction": 4,
+      "animation": "walk",
+      "frame": 3,
+      "head_top_anchor_px": [
+        47.74,
+        115.9
+      ],
+      "render_seconds": 0.928,
+      "alpha_bounds_px": [
+        29,
+        90,
+        123,
+        167
+      ],
+      "body_size_px": [
+        94,
+        77
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        29,
+        90,
+        123,
+        167
+      ]
+    },
+    {
+      "index": 80,
+      "direction": 4,
+      "animation": "walk",
+      "frame": 4,
+      "head_top_anchor_px": [
+        47.52,
+        115.41
+      ],
+      "render_seconds": 1.012,
+      "alpha_bounds_px": [
+        29,
+        90,
+        123,
+        168
+      ],
+      "body_size_px": [
+        94,
+        78
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        29,
+        90,
+        123,
+        167
+      ]
+    },
+    {
+      "index": 81,
+      "direction": 4,
+      "animation": "walk",
+      "frame": 5,
+      "head_top_anchor_px": [
+        47.74,
+        115.36
+      ],
+      "render_seconds": 0.952,
+      "alpha_bounds_px": [
+        29,
+        90,
+        123,
+        168
+      ],
+      "body_size_px": [
+        94,
+        78
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        29,
+        90,
+        123,
+        168
+      ]
+    },
+    {
+      "index": 82,
+      "direction": 4,
+      "animation": "walk",
+      "frame": 6,
+      "head_top_anchor_px": [
+        47.96,
+        115.47
+      ],
+      "render_seconds": 0.774,
+      "alpha_bounds_px": [
+        28,
+        91,
+        123,
+        169
+      ],
+      "body_size_px": [
+        95,
+        78
+      ],
+      "visual_top_anchor_px": [
+        64,
+        91
+      ],
+      "alpha_bounds_8_px": [
+        28,
+        91,
+        123,
+        169
+      ]
+    },
+    {
+      "index": 83,
+      "direction": 4,
+      "animation": "walk",
+      "frame": 7,
+      "head_top_anchor_px": [
+        47.74,
+        115.36
+      ],
+      "render_seconds": 0.768,
+      "alpha_bounds_px": [
+        29,
+        90,
+        123,
+        169
+      ],
+      "body_size_px": [
+        94,
+        79
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        29,
+        90,
+        123,
+        169
+      ]
+    },
+    {
+      "index": 84,
+      "direction": 4,
+      "animation": "attack",
+      "frame": 0,
+      "head_top_anchor_px": [
+        47.74,
+        115.63
+      ],
+      "render_seconds": 0.644,
+      "alpha_bounds_px": [
+        29,
+        90,
+        123,
+        169
+      ],
+      "body_size_px": [
+        94,
+        79
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        29,
+        90,
+        123,
+        169
+      ]
+    },
+    {
+      "index": 85,
+      "direction": 4,
+      "animation": "attack",
+      "frame": 1,
+      "head_top_anchor_px": [
+        51.63,
+        114.56
+      ],
+      "render_seconds": 0.801,
+      "alpha_bounds_px": [
+        32,
+        90,
+        125,
+        168
+      ],
+      "body_size_px": [
+        93,
+        78
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        32,
+        90,
+        125,
+        168
+      ]
+    },
+    {
+      "index": 86,
+      "direction": 4,
+      "animation": "attack",
+      "frame": 2,
+      "head_top_anchor_px": [
+        40.83,
+        116.62
+      ],
+      "render_seconds": 0.791,
+      "alpha_bounds_px": [
+        24,
+        90,
+        119,
+        167
+      ],
+      "body_size_px": [
+        95,
+        77
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        24,
+        91,
+        118,
+        167
+      ]
+    },
+    {
+      "index": 87,
+      "direction": 4,
+      "animation": "attack",
+      "frame": 3,
+      "head_top_anchor_px": [
+        39.11,
+        117.76
+      ],
+      "render_seconds": 0.674,
+      "alpha_bounds_px": [
+        24,
+        91,
+        117,
+        169
+      ],
+      "body_size_px": [
+        93,
+        78
+      ],
+      "visual_top_anchor_px": [
+        64,
+        91
+      ],
+      "alpha_bounds_8_px": [
+        25,
+        91,
+        117,
+        168
+      ]
+    },
+    {
+      "index": 88,
+      "direction": 4,
+      "animation": "attack",
+      "frame": 4,
+      "head_top_anchor_px": [
+        44.03,
+        116.65
+      ],
+      "render_seconds": 1.178,
+      "alpha_bounds_px": [
+        27,
+        91,
+        121,
+        169
+      ],
+      "body_size_px": [
+        94,
+        78
+      ],
+      "visual_top_anchor_px": [
+        64,
+        91
+      ],
+      "alpha_bounds_8_px": [
+        27,
+        91,
+        121,
+        168
+      ]
+    },
+    {
+      "index": 89,
+      "direction": 4,
+      "animation": "attack",
+      "frame": 5,
+      "head_top_anchor_px": [
+        47.74,
+        115.63
+      ],
+      "render_seconds": 0.625,
+      "alpha_bounds_px": [
+        29,
+        90,
+        123,
+        169
+      ],
+      "body_size_px": [
+        94,
+        79
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        29,
+        90,
+        123,
+        169
+      ]
+    },
+    {
+      "index": 90,
+      "direction": 5,
+      "animation": "idle",
+      "frame": 0,
+      "head_top_anchor_px": [
+        52.43,
+        106.17
+      ],
+      "render_seconds": 1.101,
+      "alpha_bounds_px": [
+        19,
+        93,
+        109,
+        176
+      ],
+      "body_size_px": [
+        90,
+        83
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        20,
+        93,
+        109,
+        175
+      ]
+    },
+    {
+      "index": 91,
+      "direction": 5,
+      "animation": "idle",
+      "frame": 1,
+      "head_top_anchor_px": [
+        52.41,
+        106.02
+      ],
+      "render_seconds": 0.637,
+      "alpha_bounds_px": [
+        19,
+        93,
+        109,
+        175
+      ],
+      "body_size_px": [
+        90,
+        82
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        20,
+        93,
+        109,
+        175
+      ]
+    },
+    {
+      "index": 92,
+      "direction": 5,
+      "animation": "idle",
+      "frame": 2,
+      "head_top_anchor_px": [
+        52.57,
+        106.25
+      ],
+      "render_seconds": 0.816,
+      "alpha_bounds_px": [
+        19,
+        93,
+        109,
+        176
+      ],
+      "body_size_px": [
+        90,
+        83
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        20,
+        93,
+        109,
+        175
+      ]
+    },
+    {
+      "index": 93,
+      "direction": 5,
+      "animation": "idle",
+      "frame": 3,
+      "head_top_anchor_px": [
+        52.59,
+        106.4
+      ],
+      "render_seconds": 0.844,
+      "alpha_bounds_px": [
+        19,
+        93,
+        109,
+        176
+      ],
+      "body_size_px": [
+        90,
+        83
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        20,
+        93,
+        109,
+        175
+      ]
+    },
+    {
+      "index": 94,
+      "direction": 5,
+      "animation": "walk",
+      "frame": 0,
+      "head_top_anchor_px": [
+        52.35,
+        105.87
+      ],
+      "render_seconds": 0.877,
+      "alpha_bounds_px": [
+        19,
+        93,
+        109,
+        174
+      ],
+      "body_size_px": [
+        90,
+        81
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        20,
+        93,
+        109,
+        174
+      ]
+    },
+    {
+      "index": 95,
+      "direction": 5,
+      "animation": "walk",
+      "frame": 1,
+      "head_top_anchor_px": [
+        52.27,
+        106.4
+      ],
+      "render_seconds": 0.919,
+      "alpha_bounds_px": [
+        18,
+        93,
+        109,
+        176
+      ],
+      "body_size_px": [
+        91,
+        83
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        18,
+        93,
+        109,
+        176
+      ]
+    },
+    {
+      "index": 96,
+      "direction": 5,
+      "animation": "walk",
+      "frame": 2,
+      "head_top_anchor_px": [
+        52.32,
+        106.83
+      ],
+      "render_seconds": 0.99,
+      "alpha_bounds_px": [
+        18,
+        93,
+        109,
+        177
+      ],
+      "body_size_px": [
+        91,
+        84
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        18,
+        93,
+        109,
+        177
+      ]
+    },
+    {
+      "index": 97,
+      "direction": 5,
+      "animation": "walk",
+      "frame": 3,
+      "head_top_anchor_px": [
+        52.27,
+        106.4
+      ],
+      "render_seconds": 1.048,
+      "alpha_bounds_px": [
+        18,
+        93,
+        109,
+        176
+      ],
+      "body_size_px": [
+        91,
+        83
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        18,
+        93,
+        109,
+        176
+      ]
+    },
+    {
+      "index": 98,
+      "direction": 5,
+      "animation": "walk",
+      "frame": 4,
+      "head_top_anchor_px": [
+        52.35,
+        105.87
+      ],
+      "render_seconds": 0.892,
+      "alpha_bounds_px": [
+        20,
+        93,
+        109,
+        175
+      ],
+      "body_size_px": [
+        89,
+        82
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        20,
+        93,
+        109,
+        175
+      ]
+    },
+    {
+      "index": 99,
+      "direction": 5,
+      "animation": "walk",
+      "frame": 5,
+      "head_top_anchor_px": [
+        52.73,
+        106.02
+      ],
+      "render_seconds": 0.852,
+      "alpha_bounds_px": [
+        21,
+        93,
+        109,
+        174
+      ],
+      "body_size_px": [
+        88,
+        81
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        93,
+        109,
+        174
+      ]
+    },
+    {
+      "index": 100,
+      "direction": 5,
+      "animation": "walk",
+      "frame": 6,
+      "head_top_anchor_px": [
+        52.99,
+        106.29
+      ],
+      "render_seconds": 0.8,
+      "alpha_bounds_px": [
+        22,
+        93,
+        110,
+        174
+      ],
+      "body_size_px": [
+        88,
+        81
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        93,
+        109,
+        173
+      ]
+    },
+    {
+      "index": 101,
+      "direction": 5,
+      "animation": "walk",
+      "frame": 7,
+      "head_top_anchor_px": [
+        52.73,
+        106.02
+      ],
+      "render_seconds": 0.883,
+      "alpha_bounds_px": [
+        21,
+        93,
+        109,
+        173
+      ],
+      "body_size_px": [
+        88,
+        80
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        93,
+        109,
+        173
+      ]
+    },
+    {
+      "index": 102,
+      "direction": 5,
+      "animation": "attack",
+      "frame": 0,
+      "head_top_anchor_px": [
+        52.5,
+        106.21
+      ],
+      "render_seconds": 0.961,
+      "alpha_bounds_px": [
+        19,
+        93,
+        109,
+        176
+      ],
+      "body_size_px": [
+        90,
+        83
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        20,
+        93,
+        109,
+        175
+      ]
+    },
+    {
+      "index": 103,
+      "direction": 5,
+      "animation": "attack",
+      "frame": 1,
+      "head_top_anchor_px": [
+        55.26,
+        107.4
+      ],
+      "render_seconds": 0.827,
+      "alpha_bounds_px": [
+        23,
+        94,
+        111,
+        176
+      ],
+      "body_size_px": [
+        88,
+        82
+      ],
+      "visual_top_anchor_px": [
+        64,
+        94
+      ],
+      "alpha_bounds_8_px": [
+        23,
+        94,
+        111,
+        176
+      ]
+    },
+    {
+      "index": 104,
+      "direction": 5,
+      "animation": "attack",
+      "frame": 2,
+      "head_top_anchor_px": [
+        47.61,
+        103.2
+      ],
+      "render_seconds": 1.496,
+      "alpha_bounds_px": [
+        14,
+        90,
+        106,
+        173
+      ],
+      "body_size_px": [
+        92,
+        83
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        90,
+        106,
+        173
+      ]
+    },
+    {
+      "index": 105,
+      "direction": 5,
+      "animation": "attack",
+      "frame": 3,
+      "head_top_anchor_px": [
+        46.4,
+        103.34
+      ],
+      "render_seconds": 0.807,
+      "alpha_bounds_px": [
+        15,
+        90,
+        106,
+        173
+      ],
+      "body_size_px": [
+        91,
+        83
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        90,
+        105,
+        173
+      ]
+    },
+    {
+      "index": 106,
+      "direction": 5,
+      "animation": "attack",
+      "frame": 4,
+      "head_top_anchor_px": [
+        49.88,
+        105.08
+      ],
+      "render_seconds": 1.274,
+      "alpha_bounds_px": [
+        18,
+        92,
+        108,
+        174
+      ],
+      "body_size_px": [
+        90,
+        82
+      ],
+      "visual_top_anchor_px": [
+        64,
+        92
+      ],
+      "alpha_bounds_8_px": [
+        18,
+        92,
+        108,
+        174
+      ]
+    },
+    {
+      "index": 107,
+      "direction": 5,
+      "animation": "attack",
+      "frame": 5,
+      "head_top_anchor_px": [
+        52.5,
+        106.21
+      ],
+      "render_seconds": 1.671,
+      "alpha_bounds_px": [
+        19,
+        93,
+        109,
+        176
+      ],
+      "body_size_px": [
+        90,
+        83
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        20,
+        93,
+        109,
+        175
+      ]
+    },
+    {
+      "index": 108,
+      "direction": 6,
+      "animation": "idle",
+      "frame": 0,
+      "head_top_anchor_px": [
+        64.0,
+        102.25
+      ],
+      "render_seconds": 0.794,
+      "alpha_bounds_px": [
+        29,
+        93,
+        99,
+        180
+      ],
+      "body_size_px": [
+        70,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        29,
+        94,
+        98,
+        180
+      ]
+    },
+    {
+      "index": 109,
+      "direction": 6,
+      "animation": "idle",
+      "frame": 1,
+      "head_top_anchor_px": [
+        64.0,
+        102.09
+      ],
+      "render_seconds": 1.222,
+      "alpha_bounds_px": [
+        29,
+        93,
+        99,
+        180
+      ],
+      "body_size_px": [
+        70,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        29,
+        93,
+        98,
+        180
+      ]
+    },
+    {
+      "index": 110,
+      "direction": 6,
+      "animation": "idle",
+      "frame": 2,
+      "head_top_anchor_px": [
+        64.0,
+        102.37
+      ],
+      "render_seconds": 0.969,
+      "alpha_bounds_px": [
+        29,
+        93,
+        99,
+        180
+      ],
+      "body_size_px": [
+        70,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        29,
+        94,
+        98,
+        180
+      ]
+    },
+    {
+      "index": 111,
+      "direction": 6,
+      "animation": "idle",
+      "frame": 3,
+      "head_top_anchor_px": [
+        64.0,
+        102.52
+      ],
+      "render_seconds": 0.802,
+      "alpha_bounds_px": [
+        29,
+        93,
+        99,
+        180
+      ],
+      "body_size_px": [
+        70,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        29,
+        94,
+        98,
+        180
+      ]
+    },
+    {
+      "index": 112,
+      "direction": 6,
+      "animation": "walk",
+      "frame": 0,
+      "head_top_anchor_px": [
+        64.0,
+        101.91
+      ],
+      "render_seconds": 1.597,
+      "alpha_bounds_px": [
+        29,
+        93,
+        99,
+        180
+      ],
+      "body_size_px": [
+        70,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        29,
+        93,
+        98,
+        180
+      ]
+    },
+    {
+      "index": 113,
+      "direction": 6,
+      "animation": "walk",
+      "frame": 1,
+      "head_top_anchor_px": [
+        63.67,
+        102.31
+      ],
+      "render_seconds": 0.762,
+      "alpha_bounds_px": [
+        29,
+        93,
+        99,
+        180
+      ],
+      "body_size_px": [
+        70,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        30,
+        93,
+        99,
+        180
+      ]
+    },
+    {
+      "index": 114,
+      "direction": 6,
+      "animation": "walk",
+      "frame": 2,
+      "head_top_anchor_px": [
+        63.53,
+        102.71
+      ],
+      "render_seconds": 0.86,
+      "alpha_bounds_px": [
+        30,
+        93,
+        99,
+        180
+      ],
+      "body_size_px": [
+        69,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        30,
+        94,
+        99,
+        180
+      ]
+    },
+    {
+      "index": 115,
+      "direction": 6,
+      "animation": "walk",
+      "frame": 3,
+      "head_top_anchor_px": [
+        63.67,
+        102.31
+      ],
+      "render_seconds": 0.84,
+      "alpha_bounds_px": [
+        29,
+        93,
+        99,
+        180
+      ],
+      "body_size_px": [
+        70,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        30,
+        93,
+        99,
+        180
+      ]
+    },
+    {
+      "index": 116,
+      "direction": 6,
+      "animation": "walk",
+      "frame": 4,
+      "head_top_anchor_px": [
+        64.0,
+        101.91
+      ],
+      "render_seconds": 1.133,
+      "alpha_bounds_px": [
+        29,
+        93,
+        99,
+        180
+      ],
+      "body_size_px": [
+        70,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        29,
+        93,
+        98,
+        180
+      ]
+    },
+    {
+      "index": 117,
+      "direction": 6,
+      "animation": "walk",
+      "frame": 5,
+      "head_top_anchor_px": [
+        64.33,
+        102.31
+      ],
+      "render_seconds": 0.883,
+      "alpha_bounds_px": [
+        29,
+        93,
+        98,
+        180
+      ],
+      "body_size_px": [
+        69,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        29,
+        94,
+        98,
+        180
+      ]
+    },
+    {
+      "index": 118,
+      "direction": 6,
+      "animation": "walk",
+      "frame": 6,
+      "head_top_anchor_px": [
+        64.47,
+        102.71
+      ],
+      "render_seconds": 0.898,
+      "alpha_bounds_px": [
+        29,
+        94,
+        98,
+        180
+      ],
+      "body_size_px": [
+        69,
+        86
+      ],
+      "visual_top_anchor_px": [
+        64,
+        94
+      ],
+      "alpha_bounds_8_px": [
+        29,
+        94,
+        98,
+        180
+      ]
+    },
+    {
+      "index": 119,
+      "direction": 6,
+      "animation": "walk",
+      "frame": 7,
+      "head_top_anchor_px": [
+        64.33,
+        102.31
+      ],
+      "render_seconds": 0.866,
+      "alpha_bounds_px": [
+        29,
+        93,
+        98,
+        180
+      ],
+      "body_size_px": [
+        69,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        29,
+        94,
+        98,
+        180
+      ]
+    },
+    {
+      "index": 120,
+      "direction": 6,
+      "animation": "attack",
+      "frame": 0,
+      "head_top_anchor_px": [
+        64.0,
+        102.31
+      ],
+      "render_seconds": 0.9,
+      "alpha_bounds_px": [
+        29,
+        93,
+        99,
+        180
+      ],
+      "body_size_px": [
+        70,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        29,
+        94,
+        98,
+        180
+      ]
+    },
+    {
+      "index": 121,
+      "direction": 6,
+      "animation": "attack",
+      "frame": 1,
+      "head_top_anchor_px": [
+        64.0,
+        104.43
+      ],
+      "render_seconds": 0.913,
+      "alpha_bounds_px": [
+        29,
+        95,
+        99,
+        183
+      ],
+      "body_size_px": [
+        70,
+        88
+      ],
+      "visual_top_anchor_px": [
+        64,
+        95
+      ],
+      "alpha_bounds_8_px": [
+        30,
+        95,
+        98,
+        182
+      ]
+    },
+    {
+      "index": 122,
+      "direction": 6,
+      "animation": "attack",
+      "frame": 2,
+      "head_top_anchor_px": [
+        64.0,
+        97.64
+      ],
+      "render_seconds": 0.745,
+      "alpha_bounds_px": [
+        29,
+        91,
+        99,
+        175
+      ],
+      "body_size_px": [
+        70,
+        84
+      ],
+      "visual_top_anchor_px": [
+        64,
+        91
+      ],
+      "alpha_bounds_8_px": [
+        29,
+        91,
+        98,
+        175
+      ]
+    },
+    {
+      "index": 123,
+      "direction": 6,
+      "animation": "attack",
+      "frame": 3,
+      "head_top_anchor_px": [
+        64.0,
+        97.37
+      ],
+      "render_seconds": 0.623,
+      "alpha_bounds_px": [
+        29,
+        91,
+        99,
+        175
+      ],
+      "body_size_px": [
+        70,
+        84
+      ],
+      "visual_top_anchor_px": [
+        64,
+        91
+      ],
+      "alpha_bounds_8_px": [
+        30,
+        91,
+        98,
+        175
+      ]
+    },
+    {
+      "index": 124,
+      "direction": 6,
+      "animation": "attack",
+      "frame": 4,
+      "head_top_anchor_px": [
+        64.0,
+        100.29
+      ],
+      "render_seconds": 0.78,
+      "alpha_bounds_px": [
+        29,
+        92,
+        99,
+        178
+      ],
+      "body_size_px": [
+        70,
+        86
+      ],
+      "visual_top_anchor_px": [
+        64,
+        92
+      ],
+      "alpha_bounds_8_px": [
+        29,
+        93,
+        98,
+        178
+      ]
+    },
+    {
+      "index": 125,
+      "direction": 6,
+      "animation": "attack",
+      "frame": 5,
+      "head_top_anchor_px": [
+        64.0,
+        102.31
+      ],
+      "render_seconds": 0.721,
+      "alpha_bounds_px": [
+        29,
+        93,
+        99,
+        180
+      ],
+      "body_size_px": [
+        70,
+        87
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        29,
+        94,
+        98,
+        180
+      ]
+    },
+    {
+      "index": 126,
+      "direction": 7,
+      "animation": "idle",
+      "frame": 0,
+      "head_top_anchor_px": [
+        75.57,
+        106.17
+      ],
+      "render_seconds": 0.804,
+      "alpha_bounds_px": [
+        19,
+        93,
+        108,
+        175
+      ],
+      "body_size_px": [
+        89,
+        82
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        94,
+        108,
+        175
+      ]
+    },
+    {
+      "index": 127,
+      "direction": 7,
+      "animation": "idle",
+      "frame": 1,
+      "head_top_anchor_px": [
+        75.59,
+        106.02
+      ],
+      "render_seconds": 0.708,
+      "alpha_bounds_px": [
+        19,
+        93,
+        108,
+        175
+      ],
+      "body_size_px": [
+        89,
+        82
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        93,
+        108,
+        175
+      ]
+    },
+    {
+      "index": 128,
+      "direction": 7,
+      "animation": "idle",
+      "frame": 2,
+      "head_top_anchor_px": [
+        75.43,
+        106.25
+      ],
+      "render_seconds": 0.892,
+      "alpha_bounds_px": [
+        19,
+        93,
+        108,
+        175
+      ],
+      "body_size_px": [
+        89,
+        82
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        94,
+        108,
+        175
+      ]
+    },
+    {
+      "index": 129,
+      "direction": 7,
+      "animation": "idle",
+      "frame": 3,
+      "head_top_anchor_px": [
+        75.41,
+        106.4
+      ],
+      "render_seconds": 0.922,
+      "alpha_bounds_px": [
+        19,
+        93,
+        108,
+        175
+      ],
+      "body_size_px": [
+        89,
+        82
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        94,
+        108,
+        175
+      ]
+    },
+    {
+      "index": 130,
+      "direction": 7,
+      "animation": "walk",
+      "frame": 0,
+      "head_top_anchor_px": [
+        75.65,
+        105.87
+      ],
+      "render_seconds": 0.888,
+      "alpha_bounds_px": [
+        19,
+        93,
+        109,
+        175
+      ],
+      "body_size_px": [
+        90,
+        82
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        93,
+        108,
+        175
+      ]
+    },
+    {
+      "index": 131,
+      "direction": 7,
+      "animation": "walk",
+      "frame": 1,
+      "head_top_anchor_px": [
+        75.27,
+        106.02
+      ],
+      "render_seconds": 0.968,
+      "alpha_bounds_px": [
+        19,
+        93,
+        107,
+        174
+      ],
+      "body_size_px": [
+        88,
+        81
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        94,
+        106,
+        174
+      ]
+    },
+    {
+      "index": 132,
+      "direction": 7,
+      "animation": "walk",
+      "frame": 2,
+      "head_top_anchor_px": [
+        75.01,
+        106.29
+      ],
+      "render_seconds": 0.896,
+      "alpha_bounds_px": [
+        19,
+        93,
+        106,
+        173
+      ],
+      "body_size_px": [
+        87,
+        80
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        94,
+        106,
+        173
+      ]
+    },
+    {
+      "index": 133,
+      "direction": 7,
+      "animation": "walk",
+      "frame": 3,
+      "head_top_anchor_px": [
+        75.27,
+        106.02
+      ],
+      "render_seconds": 0.857,
+      "alpha_bounds_px": [
+        19,
+        93,
+        107,
+        173
+      ],
+      "body_size_px": [
+        88,
+        80
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        94,
+        107,
+        173
+      ]
+    },
+    {
+      "index": 134,
+      "direction": 7,
+      "animation": "walk",
+      "frame": 4,
+      "head_top_anchor_px": [
+        75.65,
+        105.87
+      ],
+      "render_seconds": 0.828,
+      "alpha_bounds_px": [
+        19,
+        93,
+        108,
+        174
+      ],
+      "body_size_px": [
+        89,
+        81
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        93,
+        108,
+        174
+      ]
+    },
+    {
+      "index": 135,
+      "direction": 7,
+      "animation": "walk",
+      "frame": 5,
+      "head_top_anchor_px": [
+        75.73,
+        106.4
+      ],
+      "render_seconds": 0.77,
+      "alpha_bounds_px": [
+        19,
+        93,
+        110,
+        176
+      ],
+      "body_size_px": [
+        91,
+        83
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        93,
+        110,
+        176
+      ]
+    },
+    {
+      "index": 136,
+      "direction": 7,
+      "animation": "walk",
+      "frame": 6,
+      "head_top_anchor_px": [
+        75.68,
+        106.83
+      ],
+      "render_seconds": 0.732,
+      "alpha_bounds_px": [
+        19,
+        94,
+        111,
+        177
+      ],
+      "body_size_px": [
+        92,
+        83
+      ],
+      "visual_top_anchor_px": [
+        64,
+        94
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        94,
+        110,
+        176
+      ]
+    },
+    {
+      "index": 137,
+      "direction": 7,
+      "animation": "walk",
+      "frame": 7,
+      "head_top_anchor_px": [
+        75.73,
+        106.4
+      ],
+      "render_seconds": 0.685,
+      "alpha_bounds_px": [
+        19,
+        93,
+        110,
+        176
+      ],
+      "body_size_px": [
+        91,
+        83
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        93,
+        110,
+        176
+      ]
+    },
+    {
+      "index": 138,
+      "direction": 7,
+      "animation": "attack",
+      "frame": 0,
+      "head_top_anchor_px": [
+        75.5,
+        106.21
+      ],
+      "render_seconds": 1.102,
+      "alpha_bounds_px": [
+        19,
+        93,
+        108,
+        175
+      ],
+      "body_size_px": [
+        89,
+        82
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        94,
+        108,
+        175
+      ]
+    },
+    {
+      "index": 139,
+      "direction": 7,
+      "animation": "attack",
+      "frame": 1,
+      "head_top_anchor_px": [
+        72.74,
+        107.4
+      ],
+      "render_seconds": 0.751,
+      "alpha_bounds_px": [
+        17,
+        94,
+        105,
+        176
+      ],
+      "body_size_px": [
+        88,
+        82
+      ],
+      "visual_top_anchor_px": [
+        64,
+        94
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        95,
+        105,
+        176
+      ]
+    },
+    {
+      "index": 140,
+      "direction": 7,
+      "animation": "attack",
+      "frame": 2,
+      "head_top_anchor_px": [
+        80.39,
+        103.2
+      ],
+      "render_seconds": 1.173,
+      "alpha_bounds_px": [
+        22,
+        90,
+        114,
+        173
+      ],
+      "body_size_px": [
+        92,
+        83
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        90,
+        114,
+        173
+      ]
+    },
+    {
+      "index": 141,
+      "direction": 7,
+      "animation": "attack",
+      "frame": 3,
+      "head_top_anchor_px": [
+        81.6,
+        103.34
+      ],
+      "render_seconds": 0.981,
+      "alpha_bounds_px": [
+        22,
+        90,
+        113,
+        173
+      ],
+      "body_size_px": [
+        91,
+        83
+      ],
+      "visual_top_anchor_px": [
+        64,
+        90
+      ],
+      "alpha_bounds_8_px": [
+        23,
+        91,
+        113,
+        173
+      ]
+    },
+    {
+      "index": 142,
+      "direction": 7,
+      "animation": "attack",
+      "frame": 4,
+      "head_top_anchor_px": [
+        78.12,
+        105.08
+      ],
+      "render_seconds": 0.988,
+      "alpha_bounds_px": [
+        20,
+        92,
+        110,
+        174
+      ],
+      "body_size_px": [
+        90,
+        82
+      ],
+      "visual_top_anchor_px": [
+        64,
+        92
+      ],
+      "alpha_bounds_8_px": [
+        20,
+        93,
+        110,
+        174
+      ]
+    },
+    {
+      "index": 143,
+      "direction": 7,
+      "animation": "attack",
+      "frame": 5,
+      "head_top_anchor_px": [
+        75.5,
+        106.21
+      ],
+      "render_seconds": 0.668,
+      "alpha_bounds_px": [
+        19,
+        93,
+        108,
+        175
+      ],
+      "body_size_px": [
+        89,
+        82
+      ],
+      "visual_top_anchor_px": [
+        64,
+        93
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        94,
+        108,
+        175
+      ]
+    }
+  ],
+  "total_render_seconds": 119.347,
+  "atlas_size_px": [
+    2048,
+    1728
+  ],
+  "atlas_sha256": "6041778de3be8806873d18c9a8ca21e930aaec32a81386fcb0be181be24c242c",
+  "all_frame_alpha_bounds_px": [
+    3,
+    80,
+    125,
+    183
+  ],
+  "alpha_body_height_range_px": [
+    77,
+    89
+  ],
+  "alpha_body_width_range_px": [
+    69,
+    95
+  ],
+  "recommended_display_scale": 0.64,
+  "qa": {
+    "all_frames_present": true,
+    "all_frames_rgba": true,
+    "all_frames_unclipped": true,
+    "shared_anchor": true,
+    "baked_floor_or_shadow": false,
+    "atlas_tiles_match_native_frames": true
+  },
+  "asset_id": "crawler",
+  "display_name": "Cairnback",
+  "source_files": [
+    "generate_cairnback.py",
+    "cairnback.blend"
+  ]
+}

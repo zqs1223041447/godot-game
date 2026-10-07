@@ -1,6 +1,7 @@
 class_name WorldMarkers
 extends RefCounted
 ## Screen-sized readable cues, separated from the widened physical world.
+const ActorCatalog=preload("res://scripts/visuals/actor_sprite_catalog.gd")
 const View=preload("res://scripts/visuals/world_view.gd")
 const Monsters=preload("res://scripts/monsters/monster_catalog.gd")
 const MAX_FULL_NAMES: int=8
@@ -17,15 +18,17 @@ static func name_ids(arena: Node2D, enemies: Array, preferences: VisualSettings)
 		for enemy: Dictionary in enemies:
 			if float(enemy.health)<=0: continue
 			var distance: float=Vector2(enemy.pos).distance_squared_to(mouse_world)
-			if distance<pow(float(enemy.radius)+7.0/zoom,2) and distance<hover_distance:
+			var bounds:Rect2=ActorCatalog.enemy_visual_bounds(enemy).grow(7.0/zoom)
+			if bounds.has_point(mouse_world-Vector2(enemy.pos)) and distance<hover_distance:
 				hover_id=int(enemy.id)
 				hover_distance=distance
 	var examples: bool=arena.demo_mode and enemies.size()<=MAX_FULL_NAMES
 	var candidates: Array[Dictionary]=[]
 	for enemy: Dictionary in enemies:
 		if float(enemy.health)<=0: continue
-		var at: Vector2=transform*Vector2(enemy.pos)
-		if not View.SCREEN_PLAYFIELD.grow(8).has_point(at): continue
+		var local_bounds:Rect2=ActorCatalog.enemy_visual_bounds(enemy)
+		var screen_bounds:Rect2=transform*Rect2(Vector2(enemy.pos)+local_bounds.position,local_bounds.size)
+		if not View.SCREEN_PLAYFIELD.grow(8).intersects(screen_bounds): continue
 		var rarity: String=str(enemy.get("rarity","normal"))
 		var priority: int=100 if int(enemy.id)==hover_id else 80 if rarity=="boss" else 50 if rarity=="rare" else 10 if examples else 0
 		if priority==0: continue
@@ -59,8 +62,8 @@ static func name_origin(arena:Node2D,enemy:Dictionary,preferences:VisualSettings
 	var anchor:Vector2=View.world_to_screen(arena,enemy.pos)
 	var font_size:int=roundi(12*preferences.font_scale)
 	var width:float=arena._font.get_string_size(caption(enemy),HORIZONTAL_ALIGNMENT_LEFT,-1,font_size).x
-	var radius:float=float(enemy.radius)*View.zoom_for(arena)
-	var origin:=Vector2(-width*0.5,-ceilf(radius*1.4)-21)
+	var head:Vector2=ActorCatalog.enemy_head_anchor(enemy)*View.zoom_for(arena)
+	var origin:=head+Vector2(-width*0.5,-21)
 	origin.x=clampf(anchor.x+origin.x,View.SCREEN_PLAYFIELD.position.x+3,View.SCREEN_PLAYFIELD.end.x-width-3)-anchor.x
 	origin.y=maxf(View.SCREEN_PLAYFIELD.position.y+font_size+3,anchor.y+origin.y)-anchor.y
 	return origin
@@ -79,7 +82,8 @@ static func draw_enemy(arena: Node2D, enemy: Dictionary, preferences: VisualSett
 	var tier: Color=Monsters.RARITIES.get(rarity,Monsters.RARITIES.normal).color
 	# Cancel only the camera scale for annotations. Actor geometry and physics stay world-sized.
 	arena.draw_set_transform(p,0,Vector2.ONE/zoom)
-	var badge:=Vector2(0,-radius*1.25-5)
+	var head:Vector2=ActorCatalog.enemy_head_anchor(enemy)*zoom
+	var badge:=head+Vector2(0,-5)
 	if rarity=="magic":
 		arena.draw_colored_polygon(PackedVector2Array([badge+Vector2(0,-3),badge+Vector2(2.5,0),badge+Vector2(0,3),badge+Vector2(-2.5,0)]),tier)
 	elif rarity in ["rare","boss"]:
@@ -104,7 +108,7 @@ static func draw_enemy(arena: Node2D, enemy: Dictionary, preferences: VisualSett
 			var at:=Vector2((i-1)*4,radius+5)
 			arena.draw_colored_polygon(PackedVector2Array([at+Vector2(0,-1.8),at+Vector2(1.2,0),at+Vector2(0,1.8),at+Vector2(-1.2,0)]),Color("c9b990"))
 	var bar_width:float=maxf(16,radius*2)
-	var header:float=ceilf(radius*1.4)+12
+	var header:float=-head.y+12
 	var health_ratio:float=clampf(float(enemy.health)/maxf(1,float(enemy.max_health)),0,1)
 	if health_ratio<1:
 		var bar:=Rect2(Vector2(-bar_width*0.5,-header),Vector2(bar_width,3))

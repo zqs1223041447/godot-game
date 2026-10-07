@@ -1,6 +1,6 @@
 class_name ForegroundArenaLayer
 extends Node2D
-## Explicit final world stage, after all retained actor pieces and before HUD.
+## Explicit final overlay stage, after foot-sorted actors/scenery and before HUD.
 ## Read-through properties use the authoritative arena; drawing targets this item.
 const Visuals=preload("res://scripts/visuals/arena_visuals.gd")
 var source:Node2D

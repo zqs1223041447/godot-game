@@ -1,5 +1,6 @@
 class_name FantasyEnvironment
 extends RefCounted
+const GroundTile = preload("res://assets/environment/garden_ground.png")
 const CampSigns = preload("res://scripts/visuals/map_camp_signs.gd")
 ## Sunlit, weathered flagstone garden. Deterministic marks, never gameplay RNG.
 static func draw(arena: Node2D) -> void:
@@ -22,34 +23,14 @@ static func draw(arena: Node2D) -> void:
 	arena.draw_rect(bounds.grow(10),Color("b0a88c"))
 	arena.draw_rect(bounds.grow(6),Color("74765e"))
 	arena.draw_rect(bounds,Color("6f785e"))
-	# Broad, irregular flagstones replace the old technical grid and circular reticle.
-	var stone_y: float=bounds.position.y
-	var courses: Array[float]=[72.0,82.0,69.0,86.0,77.0,76.0]
-	var row:int=0
-	while stone_y<bounds.end.y:
-		var stone_x: float=bounds.position.x-(43 if row%2 else 0)
-		var col: int=0
-		while stone_x<bounds.end.x:
-			var width: float=87+float((col*23+row*19)%49)
-			var cell:=Rect2(Vector2(stone_x+1.6,stone_y+1.6),Vector2(width-2.6,courses[row%courses.size()]-2.6)).intersection(bounds.grow(-1))
-			stone_x+=width
-			col+=1
-			if cell.size.x<5 or cell.size.y<5:
-				continue
-			var shape:=_stone(cell,2+float((col*7+row*3)%6))
-			var shade: float=float((col*11+row*7)%9)*0.008
-			arena.draw_colored_polygon(shape,Color(0.70+shade,0.64+shade,0.49+shade) if spring else Color(0.62+shade,0.56+shade,0.43+shade) if broken else Color(0.54+shade,0.56+shade,0.47+shade))
-			arena.draw_line(shape[0]+Vector2(1,1),shape[1]+Vector2(-1,1),Color(0.78,0.76,0.61,0.38),1.2,true)
-			if (col+row*3)%5==0 and cell.size.x>55:
-				var crack:=cell.position+Vector2(cell.size.x*0.65,0)
-				arena.draw_polyline(PackedVector2Array([crack,crack+Vector2(-9,13),crack+Vector2(-5,22)]),Color(0.30,0.34,0.26,0.23),1,true)
-			if (col*3+row)%7==0:
-				var p:=cell.position+Vector2(cell.size.x*0.25,cell.size.y*0.7)
-				arena.draw_line(p,p+Vector2(15,2),Color(0.78,0.76,0.64,0.13),1,true)
-			if (col+row)%6==0:
-				arena.draw_line(cell.position+Vector2(1,9),cell.position+Vector2(1,31),Color(0.28,0.37,0.18,0.27),2,true)
-		stone_y+=courses[row%courses.size()]
-		row+=1
+	# A shared painterly stone albedo replaces thousands of flat, repeated cells.
+	# Mirrored repeat avoids visible edge discontinuities; geometry stays unchanged.
+	arena.texture_repeat = CanvasItem.TEXTURE_REPEAT_MIRROR
+	var ground_scale := 0.4
+	arena.draw_set_transform(bounds.position, 0.0, Vector2.ONE * ground_scale)
+	arena.draw_texture_rect(GroundTile, Rect2(Vector2.ZERO, bounds.size / ground_scale), true,
+		Color("f1e3be") if spring else Color("e4dfc8") if ginkgo else Color("d4d7c1"))
+	arena.draw_set_transform(Vector2.ZERO)
 	# Borders are physical worn blocks, with moss at joints rather than glowing lines.
 	for x: int in range(floori(bounds.position.x),ceili(bounds.end.x),52):
 		for y: float in [bounds.position.y-5,bounds.end.y+3]:
@@ -76,7 +57,10 @@ static func draw(arena: Node2D) -> void:
 	_draw_routes(arena, geometry.get("landmarks", {}).get("route_segments", []))
 	arena.draw_colored_polygon(PackedVector2Array([bounds.position+Vector2(24,12),bounds.position+Vector2(bounds.size.x*0.25,12),Vector2(bounds.position.x+bounds.size.x*0.55,bounds.end.y-11),Vector2(bounds.position.x+bounds.size.x*0.4,bounds.end.y-11)]),Color(0.96,0.89,0.63,0.035))
 	if broken:
-		for wall: Rect2 in geometry.walls:
+		var dimensional: Array = geometry.get("dimensional_wall_indices", [])
+		for wall_index: int in range(geometry.walls.size()):
+			if wall_index in dimensional: continue
+			var wall: Rect2 = geometry.walls[wall_index]
 			if ginkgo: _draw_ginkgo_planter(arena, wall)
 			elif spring: _draw_spring_basin(arena, wall)
 			else: _draw_ruin_wall(arena,wall)
@@ -119,9 +103,9 @@ static func _draw_routes(canvas: Node2D, segments: Array) -> void:
 	# Worn flagstones mark authored, collision-verified routes. No new obstacles.
 	var index := 0
 	for stone: PackedVector2Array in route_stones(segments):
-		canvas.draw_colored_polygon(stone, Color(0.73,0.66,0.48,0.96) if index%3 else Color(0.67,0.61,0.46,0.96))
-		canvas.draw_line(stone[1],stone[2],Color(0.85,0.77,0.57,0.75),1.2,true)
-		canvas.draw_line(stone[5],stone[6],Color(0.41,0.39,0.29,0.65),1.2,true)
+		canvas.draw_colored_polygon(stone, Color(0.73,0.66,0.48,0.16) if index%3 else Color(0.67,0.61,0.46,0.12))
+		canvas.draw_line(stone[1],stone[2],Color(0.85,0.77,0.57,0.18),1.2,true)
+		canvas.draw_line(stone[5],stone[6],Color(0.41,0.39,0.29,0.12),1.2,true)
 		index += 1
 
 static func _shrub(arena: Node2D, p: Vector2, radius: float) -> void:

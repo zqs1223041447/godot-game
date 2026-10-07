@@ -1,0 +1,6147 @@
+{
+  "version": 1,
+  "actor": "hero",
+  "generator": "Blender 4.3.2 procedural mesh, Cycles CPU",
+  "frame_width": 128,
+  "frame_height": 192,
+  "atlas_columns": 16,
+  "atlas_rows": 9,
+  "atlas_width": 2048,
+  "atlas_height": 1728,
+  "fps": 12,
+  "foot_anchor": [
+    64,
+    158
+  ],
+  "directions": [
+    "east",
+    "southeast",
+    "south",
+    "southwest",
+    "west",
+    "northwest",
+    "north",
+    "northeast"
+  ],
+  "direction_yaw_degrees": [
+    90,
+    45,
+    0,
+    -45,
+    -90,
+    -135,
+    -180,
+    -225
+  ],
+  "animation_offsets": {
+    "idle": 0,
+    "walk": 4,
+    "attack": 12
+  },
+  "animation_counts": {
+    "idle": 4,
+    "walk": 8,
+    "attack": 6
+  },
+  "frame_index_formula": "direction * 18 + animation_offset + animation_frame",
+  "camera": {
+    "projection": "orthographic",
+    "elevation_degrees": 55,
+    "direction": [
+      0,
+      -0.5735764363510462,
+      0.8191520442889918
+    ],
+    "ortho_scale": 1.5800000429153442,
+    "sensor_fit": "VERTICAL"
+  },
+  "light": {
+    "key_position": [
+      -3,
+      -4,
+      8
+    ],
+    "model_rotation_independent": true
+  },
+  "alpha": "RGBA; transparent background; no baked ground or shadow",
+  "head_anchor_semantics": "projected top-of-head attachment point; frame-specific, in local frame pixels",
+  "frames": [
+    {
+      "index": 0,
+      "direction": 0,
+      "direction_name": "east",
+      "animation": "idle",
+      "animation_frame": 0,
+      "atlas_rect": [
+        0,
+        0,
+        128,
+        192
+      ],
+      "file": "frames/hero_000.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        60.404,
+        32.253
+      ],
+      "alpha_bounds": [
+        34,
+        24,
+        95,
+        176
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        35,
+        24,
+        94,
+        176
+      ],
+      "transparent_edge_padding_ltrb": [
+        34,
+        24,
+        33,
+        16
+      ],
+      "alpha_sha256": "73a335bf63e079f2805b7b0685bfc3e4a438bfdbf309957788b262dccdae9c40",
+      "png_sha256": "3b6a66278663a771b419419014697271d26aa7b655ad5ce8ac6ff14e39e2e198"
+    },
+    {
+      "index": 1,
+      "direction": 0,
+      "direction_name": "east",
+      "animation": "idle",
+      "animation_frame": 1,
+      "atlas_rect": [
+        128,
+        0,
+        128,
+        192
+      ],
+      "file": "frames/hero_001.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        61.397,
+        32.229
+      ],
+      "alpha_bounds": [
+        34,
+        24,
+        95,
+        177
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        34,
+        24,
+        94,
+        176
+      ],
+      "transparent_edge_padding_ltrb": [
+        34,
+        24,
+        33,
+        15
+      ],
+      "alpha_sha256": "b5914794b8230ee8e5ac47ed73fba3c340f7200fc4f8e6dadbd7bad8c5c144fe",
+      "png_sha256": "9bef223bff81a7e16d184bd99de1d821934462ffc92470f1c0aa89427ceaf1ea"
+    },
+    {
+      "index": 2,
+      "direction": 0,
+      "direction_name": "east",
+      "animation": "idle",
+      "animation_frame": 2,
+      "atlas_rect": [
+        256,
+        0,
+        128,
+        192
+      ],
+      "file": "frames/hero_002.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        60.404,
+        32.253
+      ],
+      "alpha_bounds": [
+        34,
+        24,
+        95,
+        176
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        35,
+        24,
+        94,
+        176
+      ],
+      "transparent_edge_padding_ltrb": [
+        34,
+        24,
+        33,
+        16
+      ],
+      "alpha_sha256": "73a335bf63e079f2805b7b0685bfc3e4a438bfdbf309957788b262dccdae9c40",
+      "png_sha256": "8fbd7df7b1eccb4bac871272e814a1edf4236c20a901c78e670fc59d3d74944f"
+    },
+    {
+      "index": 3,
+      "direction": 0,
+      "direction_name": "east",
+      "animation": "idle",
+      "animation_frame": 3,
+      "atlas_rect": [
+        384,
+        0,
+        128,
+        192
+      ],
+      "file": "frames/hero_003.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        59.411,
+        32.285
+      ],
+      "alpha_bounds": [
+        35,
+        24,
+        95,
+        176
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        35,
+        24,
+        94,
+        176
+      ],
+      "transparent_edge_padding_ltrb": [
+        35,
+        24,
+        33,
+        16
+      ],
+      "alpha_sha256": "35c6d9b0970f5592aee426746b2be3c7f6f9478aab00a873b4e98c987f278d2b",
+      "png_sha256": "5a86e5fe4660c55b418170421059bffa6d1310282268e703e293f1c2a9ed5995"
+    },
+    {
+      "index": 4,
+      "direction": 0,
+      "direction_name": "east",
+      "animation": "walk",
+      "animation_frame": 0,
+      "atlas_rect": [
+        512,
+        0,
+        128,
+        192
+      ],
+      "file": "frames/hero_004.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        60.404,
+        32.253
+      ],
+      "alpha_bounds": [
+        34,
+        24,
+        95,
+        176
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        34,
+        24,
+        94,
+        176
+      ],
+      "transparent_edge_padding_ltrb": [
+        34,
+        24,
+        33,
+        16
+      ],
+      "alpha_sha256": "a052a89cecec3fb87e4d778e879e47ce2fe5cef7b7c4c95cfad91a3093d6e586",
+      "png_sha256": "3ce8f8e9cf9e5123fcadeb25d33888b39afdc3cb9f789f7cd5369a01d26fd2a8"
+    },
+    {
+      "index": 5,
+      "direction": 0,
+      "direction_name": "east",
+      "animation": "walk",
+      "animation_frame": 1,
+      "atlas_rect": [
+        640,
+        0,
+        128,
+        192
+      ],
+      "file": "frames/hero_005.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        60.404,
+        31.747
+      ],
+      "alpha_bounds": [
+        33,
+        23,
+        99,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        33,
+        23,
+        99,
+        174
+      ],
+      "transparent_edge_padding_ltrb": [
+        33,
+        23,
+        29,
+        17
+      ],
+      "alpha_sha256": "c880fdec94d85a224b9d5d74e4883e7bb4a6d4f5d7921b790f28a01eb3b883dd",
+      "png_sha256": "09125ba751ea7e40815e486df61f645d03224226ba316081b9374e3ef78b2741"
+    },
+    {
+      "index": 6,
+      "direction": 0,
+      "direction_name": "east",
+      "animation": "walk",
+      "animation_frame": 2,
+      "atlas_rect": [
+        768,
+        0,
+        128,
+        192
+      ],
+      "file": "frames/hero_006.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        60.405,
+        31.211
+      ],
+      "alpha_bounds": [
+        31,
+        23,
+        104,
+        173
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        32,
+        23,
+        104,
+        173
+      ],
+      "transparent_edge_padding_ltrb": [
+        31,
+        23,
+        24,
+        19
+      ],
+      "alpha_sha256": "bab3f63ca47d284bdd81605dcb5d03f53d8d9be55136743f277ccbf73dace53a",
+      "png_sha256": "f467f50aeefa070ddebc95af78b5a4fca28a3276b9221ebae67345921191a6fb"
+    },
+    {
+      "index": 7,
+      "direction": 0,
+      "direction_name": "east",
+      "animation": "walk",
+      "animation_frame": 3,
+      "atlas_rect": [
+        896,
+        0,
+        128,
+        192
+      ],
+      "file": "frames/hero_007.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        60.404,
+        31.747
+      ],
+      "alpha_bounds": [
+        34,
+        23,
+        99,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        34,
+        23,
+        99,
+        174
+      ],
+      "transparent_edge_padding_ltrb": [
+        34,
+        23,
+        29,
+        17
+      ],
+      "alpha_sha256": "a569f28eea022287e29998ad1e0fdcf294a8c744deefcc4ff62553714e128827",
+      "png_sha256": "4a9064a238bfef87dc58e9e1ec36e7aef290a5b4091bff1c09c69c41061e1a06"
+    },
+    {
+      "index": 8,
+      "direction": 0,
+      "direction_name": "east",
+      "animation": "walk",
+      "animation_frame": 4,
+      "atlas_rect": [
+        1024,
+        0,
+        128,
+        192
+      ],
+      "file": "frames/hero_008.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        60.404,
+        32.253
+      ],
+      "alpha_bounds": [
+        35,
+        24,
+        95,
+        176
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        35,
+        24,
+        94,
+        176
+      ],
+      "transparent_edge_padding_ltrb": [
+        35,
+        24,
+        33,
+        16
+      ],
+      "alpha_sha256": "2ea32172e80c54863db5a53c6aa2860fe01bcb2f40d4ba862838fe19a68b8277",
+      "png_sha256": "8d9ada83fb191b4026102bd1f85534faae89359d5288d17b3f59ae58e2a2b6df"
+    },
+    {
+      "index": 9,
+      "direction": 0,
+      "direction_name": "east",
+      "animation": "walk",
+      "animation_frame": 5,
+      "atlas_rect": [
+        1152,
+        0,
+        128,
+        192
+      ],
+      "file": "frames/hero_009.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        60.404,
+        31.643
+      ],
+      "alpha_bounds": [
+        31,
+        23,
+        104,
+        177
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        32,
+        23,
+        104,
+        176
+      ],
+      "transparent_edge_padding_ltrb": [
+        31,
+        23,
+        24,
+        15
+      ],
+      "alpha_sha256": "020160944ed423b8191803a2aa6e3c26ea64eaffd05779d8b6c4bf1a94306a53",
+      "png_sha256": "44a472ab1254cfb4f5b41ff002d060657a774459f0c2334030434516e40abb10"
+    },
+    {
+      "index": 10,
+      "direction": 0,
+      "direction_name": "east",
+      "animation": "walk",
+      "animation_frame": 6,
+      "atlas_rect": [
+        1280,
+        0,
+        128,
+        192
+      ],
+      "file": "frames/hero_010.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        60.405,
+        31.064
+      ],
+      "alpha_bounds": [
+        25,
+        23,
+        110,
+        176
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        25,
+        23,
+        110,
+        176
+      ],
+      "transparent_edge_padding_ltrb": [
+        25,
+        23,
+        18,
+        16
+      ],
+      "alpha_sha256": "43c4ce196ed0c558eb27979870f90cb879a09c8ac355747f21eeb733f3eabe61",
+      "png_sha256": "fcb0a64784630cb5c34c823fe11d48e9883d78da74c71bc82f62602da2d0fe43"
+    },
+    {
+      "index": 11,
+      "direction": 0,
+      "direction_name": "east",
+      "animation": "walk",
+      "animation_frame": 7,
+      "atlas_rect": [
+        1408,
+        0,
+        128,
+        192
+      ],
+      "file": "frames/hero_011.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        60.404,
+        31.643
+      ],
+      "alpha_bounds": [
+        32,
+        23,
+        104,
+        177
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        32,
+        23,
+        104,
+        176
+      ],
+      "transparent_edge_padding_ltrb": [
+        32,
+        23,
+        24,
+        15
+      ],
+      "alpha_sha256": "b93a168574356cb5ad720cbfb556b361570a7046e77e9fca115e5bbb8aa9e8a4",
+      "png_sha256": "040d3781cb6a1cfdd94c412e4b7f166185f3eb88c66795976b10faf21f5f218a"
+    },
+    {
+      "index": 12,
+      "direction": 0,
+      "direction_name": "east",
+      "animation": "attack",
+      "animation_frame": 0,
+      "atlas_rect": [
+        1536,
+        0,
+        128,
+        192
+      ],
+      "file": "frames/hero_012.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        59.808,
+        32.251
+      ],
+      "alpha_bounds": [
+        35,
+        24,
+        96,
+        177
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        35,
+        24,
+        96,
+        177
+      ],
+      "transparent_edge_padding_ltrb": [
+        35,
+        24,
+        32,
+        15
+      ],
+      "alpha_sha256": "56002da9217c09ca6211d33e3ad3056629abb6e7aefc298db9cb7f52dbfcd3ee",
+      "png_sha256": "785117f43b047d13c5e6dc0b72c3d1023dc85510360a310b0e7b9909e5742c3b"
+    },
+    {
+      "index": 13,
+      "direction": 0,
+      "direction_name": "east",
+      "animation": "attack",
+      "animation_frame": 1,
+      "atlas_rect": [
+        1664,
+        0,
+        128,
+        192
+      ],
+      "file": "frames/hero_013.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        59.064,
+        32.26
+      ],
+      "alpha_bounds": [
+        35,
+        24,
+        97,
+        178
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        35,
+        24,
+        97,
+        178
+      ],
+      "transparent_edge_padding_ltrb": [
+        35,
+        24,
+        31,
+        14
+      ],
+      "alpha_sha256": "60089c807b249bb37a56a8c3b7d3a0c44c5685efb5b35c4a62409298d3152432",
+      "png_sha256": "723c99083fa6a61515034c6797e2daa81629ddda1a5ab023d002c9d708c4d9ea"
+    },
+    {
+      "index": 14,
+      "direction": 0,
+      "direction_name": "east",
+      "animation": "attack",
+      "animation_frame": 2,
+      "atlas_rect": [
+        1792,
+        0,
+        128,
+        192
+      ],
+      "file": "frames/hero_014.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        61.521,
+        32.245
+      ],
+      "alpha_bounds": [
+        34,
+        24,
+        94,
+        176
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        34,
+        24,
+        93,
+        176
+      ],
+      "transparent_edge_padding_ltrb": [
+        34,
+        24,
+        34,
+        16
+      ],
+      "alpha_sha256": "6f9637976755867a80e56833909680c90531d9a323121f56140a87cec1b9eda6",
+      "png_sha256": "49f01817cc81eec58eba703f0714ae59158e8f99f7b1884d3f3b72bbb75bbd0b"
+    },
+    {
+      "index": 15,
+      "direction": 0,
+      "direction_name": "east",
+      "animation": "attack",
+      "animation_frame": 3,
+      "atlas_rect": [
+        1920,
+        0,
+        128,
+        192
+      ],
+      "file": "frames/hero_015.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        63.534,
+        32.335
+      ],
+      "alpha_bounds": [
+        32,
+        24,
+        98,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        32,
+        24,
+        98,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        32,
+        24,
+        30,
+        17
+      ],
+      "alpha_sha256": "6edc7e378217f496c5270a7b7c601f28f75399ef736a985c4d3e65e1fee4119b",
+      "png_sha256": "76caa2c7c83ef59a5246186e770af734e8ee471c5826a949233298c443625a7b"
+    },
+    {
+      "index": 16,
+      "direction": 0,
+      "direction_name": "east",
+      "animation": "attack",
+      "animation_frame": 4,
+      "atlas_rect": [
+        0,
+        192,
+        128,
+        192
+      ],
+      "file": "frames/hero_016.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        61.894,
+        32.286
+      ],
+      "alpha_bounds": [
+        33,
+        24,
+        96,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        33,
+        24,
+        96,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        33,
+        24,
+        32,
+        17
+      ],
+      "alpha_sha256": "12b4d29de7468a3b4bbf03018a63bc946e4a3bc8215d3a537278e521a62c38f5",
+      "png_sha256": "c24780d5b393fac8d5efda76497dc298a394f2d0c7abd929afb347c24f289883"
+    },
+    {
+      "index": 17,
+      "direction": 0,
+      "direction_name": "east",
+      "animation": "attack",
+      "animation_frame": 5,
+      "atlas_rect": [
+        128,
+        192,
+        128,
+        192
+      ],
+      "file": "frames/hero_017.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        60.404,
+        32.253
+      ],
+      "alpha_bounds": [
+        34,
+        24,
+        95,
+        176
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        35,
+        24,
+        94,
+        176
+      ],
+      "transparent_edge_padding_ltrb": [
+        34,
+        24,
+        33,
+        16
+      ],
+      "alpha_sha256": "73a335bf63e079f2805b7b0685bfc3e4a438bfdbf309957788b262dccdae9c40",
+      "png_sha256": "355e0e674f62b39b847d25b51ad90f6c4ee5fbb90147ba8ba4d8546f8945b9ff"
+    },
+    {
+      "index": 18,
+      "direction": 1,
+      "direction_name": "southeast",
+      "animation": "idle",
+      "animation_frame": 0,
+      "atlas_rect": [
+        256,
+        192,
+        128,
+        192
+      ],
+      "file": "frames/hero_018.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        61.457,
+        30.17
+      ],
+      "alpha_bounds": [
+        30,
+        27,
+        111,
+        179
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        30,
+        27,
+        111,
+        179
+      ],
+      "transparent_edge_padding_ltrb": [
+        30,
+        27,
+        17,
+        13
+      ],
+      "alpha_sha256": "47bb8b8e76c12fa99319250267122bc088840b54a4566afdda70b88311360559",
+      "png_sha256": "5c3997740128e2c86e0d10721dc4e781f4b0448ef4536ee23756eea39956f1ea"
+    },
+    {
+      "index": 19,
+      "direction": 1,
+      "direction_name": "southeast",
+      "animation": "idle",
+      "animation_frame": 1,
+      "atlas_rect": [
+        384,
+        192,
+        128,
+        192
+      ],
+      "file": "frames/hero_019.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        62.16,
+        30.721
+      ],
+      "alpha_bounds": [
+        30,
+        27,
+        110,
+        179
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        30,
+        27,
+        110,
+        179
+      ],
+      "transparent_edge_padding_ltrb": [
+        30,
+        27,
+        18,
+        13
+      ],
+      "alpha_sha256": "1a4aea82c66d2aa474c8502ce44b75ee3fcadc498cc2cf75bd7f0162fa95cb3c",
+      "png_sha256": "f604636804af6fdb33780632745ce8201aadea8d47d9e57fb5b8da5073441f64"
+    },
+    {
+      "index": 20,
+      "direction": 1,
+      "direction_name": "southeast",
+      "animation": "idle",
+      "animation_frame": 2,
+      "atlas_rect": [
+        512,
+        192,
+        128,
+        192
+      ],
+      "file": "frames/hero_020.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        61.457,
+        30.17
+      ],
+      "alpha_bounds": [
+        30,
+        27,
+        111,
+        179
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        30,
+        27,
+        111,
+        179
+      ],
+      "transparent_edge_padding_ltrb": [
+        30,
+        27,
+        17,
+        13
+      ],
+      "alpha_sha256": "47bb8b8e76c12fa99319250267122bc088840b54a4566afdda70b88311360559",
+      "png_sha256": "16996c09cd4ac5f7144e5307c935000aab66666c8a80c71ecd30458c699a0240"
+    },
+    {
+      "index": 21,
+      "direction": 1,
+      "direction_name": "southeast",
+      "animation": "idle",
+      "animation_frame": 3,
+      "atlas_rect": [
+        640,
+        192,
+        128,
+        192
+      ],
+      "file": "frames/hero_021.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        60.755,
+        29.627
+      ],
+      "alpha_bounds": [
+        30,
+        26,
+        112,
+        179
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        30,
+        26,
+        111,
+        179
+      ],
+      "transparent_edge_padding_ltrb": [
+        30,
+        26,
+        16,
+        13
+      ],
+      "alpha_sha256": "284e39445a345552853b6da9031708954cf7550132294ee42770c16d7c18d840",
+      "png_sha256": "e546acba12c67eea16028848950238e49950e7ba9b866d98e2641eb27cb67d3d"
+    },
+    {
+      "index": 22,
+      "direction": 1,
+      "direction_name": "southeast",
+      "animation": "walk",
+      "animation_frame": 0,
+      "atlas_rect": [
+        768,
+        192,
+        128,
+        192
+      ],
+      "file": "frames/hero_022.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        61.457,
+        30.17
+      ],
+      "alpha_bounds": [
+        30,
+        27,
+        111,
+        178
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        31,
+        27,
+        111,
+        178
+      ],
+      "transparent_edge_padding_ltrb": [
+        30,
+        27,
+        17,
+        14
+      ],
+      "alpha_sha256": "d227c444f1a741fb90854727a7350beb1ca947dc640e658f7db97fc7c0f63e71",
+      "png_sha256": "761007f1e8e4aed4e398687b0cd0a5274eee44940ecfa48c5cdcc86957825e8e"
+    },
+    {
+      "index": 23,
+      "direction": 1,
+      "direction_name": "southeast",
+      "animation": "walk",
+      "animation_frame": 1,
+      "atlas_rect": [
+        896,
+        192,
+        128,
+        192
+      ],
+      "file": "frames/hero_023.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        61.413,
+        29.649
+      ],
+      "alpha_bounds": [
+        30,
+        26,
+        107,
+        183
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        31,
+        26,
+        107,
+        183
+      ],
+      "transparent_edge_padding_ltrb": [
+        30,
+        26,
+        21,
+        9
+      ],
+      "alpha_sha256": "5ba65c6169c4a2a16c6653538eb13e750e9297f3179cdf23a9d242f608a83810",
+      "png_sha256": "515c235e459edcfdfcecede1cbd3162b6d9344306f881e20538180510771df78"
+    },
+    {
+      "index": 24,
+      "direction": 1,
+      "direction_name": "southeast",
+      "animation": "walk",
+      "animation_frame": 2,
+      "atlas_rect": [
+        1024,
+        192,
+        128,
+        192
+      ],
+      "file": "frames/hero_024.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        61.394,
+        29.107
+      ],
+      "alpha_bounds": [
+        30,
+        25,
+        105,
+        184
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        30,
+        26,
+        105,
+        184
+      ],
+      "transparent_edge_padding_ltrb": [
+        30,
+        25,
+        23,
+        8
+      ],
+      "alpha_sha256": "761f9f593bf96ede0d46c465e07b6c3d5ce42bfef4e0257d6c3bd0b9f8da732f",
+      "png_sha256": "0140fab5c3d0572491c7eb9f98bc1188031db9a8f5c24e817d0ad693c1d90d4a"
+    },
+    {
+      "index": 25,
+      "direction": 1,
+      "direction_name": "southeast",
+      "animation": "walk",
+      "animation_frame": 3,
+      "atlas_rect": [
+        1152,
+        192,
+        128,
+        192
+      ],
+      "file": "frames/hero_025.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        61.413,
+        29.649
+      ],
+      "alpha_bounds": [
+        30,
+        26,
+        107,
+        183
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        31,
+        26,
+        107,
+        183
+      ],
+      "transparent_edge_padding_ltrb": [
+        30,
+        26,
+        21,
+        9
+      ],
+      "alpha_sha256": "b5c64d3af4699eeda12c217d4fa07b84955ed2a174637bc18edface4d46ae689",
+      "png_sha256": "0279dfa20c2a577f833e931e1346e649d8596cca72d86aec492dbf86698e615c"
+    },
+    {
+      "index": 26,
+      "direction": 1,
+      "direction_name": "southeast",
+      "animation": "walk",
+      "animation_frame": 4,
+      "atlas_rect": [
+        1280,
+        192,
+        128,
+        192
+      ],
+      "file": "frames/hero_026.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        61.457,
+        30.17
+      ],
+      "alpha_bounds": [
+        30,
+        27,
+        111,
+        179
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        30,
+        27,
+        111,
+        179
+      ],
+      "transparent_edge_padding_ltrb": [
+        30,
+        27,
+        17,
+        13
+      ],
+      "alpha_sha256": "a6310b42c267612c77b49ef0e06d827a53bb263defa7bf73a436dbf1831a5669",
+      "png_sha256": "63c6e18db55bb81b8b6470b576ea953f531b9b8f0bca8ddff070fe2a219b8167"
+    },
+    {
+      "index": 27,
+      "direction": 1,
+      "direction_name": "southeast",
+      "animation": "walk",
+      "animation_frame": 5,
+      "atlas_rect": [
+        1408,
+        192,
+        128,
+        192
+      ],
+      "file": "frames/hero_027.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        61.502,
+        29.576
+      ],
+      "alpha_bounds": [
+        30,
+        26,
+        115,
+        185
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        30,
+        26,
+        114,
+        185
+      ],
+      "transparent_edge_padding_ltrb": [
+        30,
+        26,
+        13,
+        7
+      ],
+      "alpha_sha256": "d5365912a5e41f9c330b97f1bd9c21998c2f283e3afd4cf1d5db59f02c2a03dc",
+      "png_sha256": "6e42872301afc9a858d39868d86bf551e94f5b93654285af31e9488c8c5e288f"
+    },
+    {
+      "index": 28,
+      "direction": 1,
+      "direction_name": "southeast",
+      "animation": "walk",
+      "animation_frame": 6,
+      "atlas_rect": [
+        1536,
+        192,
+        128,
+        192
+      ],
+      "file": "frames/hero_028.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        61.522,
+        29.003
+      ],
+      "alpha_bounds": [
+        30,
+        26,
+        116,
+        187
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        30,
+        26,
+        116,
+        187
+      ],
+      "transparent_edge_padding_ltrb": [
+        30,
+        26,
+        12,
+        5
+      ],
+      "alpha_sha256": "edd3def6e657d532a7e6a90c9d8f527f1c4f0462c07784a557aa54ab9872ae1f",
+      "png_sha256": "c1284b1777903f0ec21b77c403a6c6c7a820ba7a28ddd6de6cd3795c4540fffa"
+    },
+    {
+      "index": 29,
+      "direction": 1,
+      "direction_name": "southeast",
+      "animation": "walk",
+      "animation_frame": 7,
+      "atlas_rect": [
+        1664,
+        192,
+        128,
+        192
+      ],
+      "file": "frames/hero_029.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        61.502,
+        29.576
+      ],
+      "alpha_bounds": [
+        30,
+        26,
+        115,
+        184
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        30,
+        26,
+        114,
+        184
+      ],
+      "transparent_edge_padding_ltrb": [
+        30,
+        26,
+        13,
+        8
+      ],
+      "alpha_sha256": "2a3d63f8939d1986bcdd038a60a4790c62edd57073046f715979c7c4e7c8494c",
+      "png_sha256": "23da537a5eeb3db17913001af83769565c7fb4100be486af6755b3e43c6e55c7"
+    },
+    {
+      "index": 30,
+      "direction": 1,
+      "direction_name": "southeast",
+      "animation": "attack",
+      "animation_frame": 0,
+      "atlas_rect": [
+        1792,
+        192,
+        128,
+        192
+      ],
+      "file": "frames/hero_030.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        61.049,
+        29.827
+      ],
+      "alpha_bounds": [
+        30,
+        26,
+        110,
+        182
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        30,
+        27,
+        110,
+        182
+      ],
+      "transparent_edge_padding_ltrb": [
+        30,
+        26,
+        18,
+        10
+      ],
+      "alpha_sha256": "84f3d2ff56da2ddeb0af67d9a70fac679303f7ad8c0e37fec2e21254aef9cb38",
+      "png_sha256": "887b22041e245a2d9497bfbe295a1ea7d4cf456236534d272147926d5501429c"
+    },
+    {
+      "index": 31,
+      "direction": 1,
+      "direction_name": "southeast",
+      "animation": "attack",
+      "animation_frame": 1,
+      "atlas_rect": [
+        1920,
+        192,
+        128,
+        192
+      ],
+      "file": "frames/hero_031.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        60.532,
+        29.408
+      ],
+      "alpha_bounds": [
+        30,
+        26,
+        110,
+        185
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        30,
+        26,
+        110,
+        185
+      ],
+      "transparent_edge_padding_ltrb": [
+        30,
+        26,
+        18,
+        7
+      ],
+      "alpha_sha256": "61278a87b28904bfa98fe6f511bbb7086b994b9e93f32b74c3700641ad2b242e",
+      "png_sha256": "9fa5fe7095278c22aaac29590cbe3856998ddab9ccfb7e72f7261f2642448d40"
+    },
+    {
+      "index": 32,
+      "direction": 1,
+      "direction_name": "southeast",
+      "animation": "attack",
+      "animation_frame": 2,
+      "atlas_rect": [
+        0,
+        384,
+        128,
+        192
+      ],
+      "file": "frames/hero_032.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        62.24,
+        30.807
+      ],
+      "alpha_bounds": [
+        30,
+        27,
+        111,
+        179
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        30,
+        27,
+        111,
+        179
+      ],
+      "transparent_edge_padding_ltrb": [
+        30,
+        27,
+        17,
+        13
+      ],
+      "alpha_sha256": "86227f9f26b9dfae55bd2b93b5816a67c8075d5454bae2f27999d59b55a921c2",
+      "png_sha256": "a46de609ac5cfa889b3ed3fd0c2343288bb5180bd85c2d22da0e0246c2d12aa0"
+    },
+    {
+      "index": 33,
+      "direction": 1,
+      "direction_name": "southeast",
+      "animation": "attack",
+      "animation_frame": 3,
+      "atlas_rect": [
+        128,
+        384,
+        128,
+        192
+      ],
+      "file": "frames/hero_033.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        63.584,
+        32.035
+      ],
+      "alpha_bounds": [
+        30,
+        28,
+        114,
+        179
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        30,
+        28,
+        113,
+        179
+      ],
+      "transparent_edge_padding_ltrb": [
+        30,
+        28,
+        14,
+        13
+      ],
+      "alpha_sha256": "e6bc561e4b7061795e911bf6a4cf488aa75f790d8e2d5140748507086a2ef394",
+      "png_sha256": "ae3b464e89e219fec0316bbb17066924d60b8f099406aecc3ad88c7f6b618473"
+    },
+    {
+      "index": 34,
+      "direction": 1,
+      "direction_name": "southeast",
+      "animation": "attack",
+      "animation_frame": 4,
+      "atlas_rect": [
+        256,
+        384,
+        128,
+        192
+      ],
+      "file": "frames/hero_034.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        62.466,
+        31.051
+      ],
+      "alpha_bounds": [
+        30,
+        27,
+        112,
+        179
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        31,
+        28,
+        112,
+        179
+      ],
+      "transparent_edge_padding_ltrb": [
+        30,
+        27,
+        16,
+        13
+      ],
+      "alpha_sha256": "bd99fd9ebbbd34354eb47a11bc35b8a817556969390ae932be66be8245bd940c",
+      "png_sha256": "caf1870603caf8733af89a6498f22089358665d8f2c6a232e136183477a490b3"
+    },
+    {
+      "index": 35,
+      "direction": 1,
+      "direction_name": "southeast",
+      "animation": "attack",
+      "animation_frame": 5,
+      "atlas_rect": [
+        384,
+        384,
+        128,
+        192
+      ],
+      "file": "frames/hero_035.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        61.457,
+        30.17
+      ],
+      "alpha_bounds": [
+        30,
+        27,
+        111,
+        179
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        30,
+        27,
+        111,
+        179
+      ],
+      "transparent_edge_padding_ltrb": [
+        30,
+        27,
+        17,
+        13
+      ],
+      "alpha_sha256": "47bb8b8e76c12fa99319250267122bc088840b54a4566afdda70b88311360559",
+      "png_sha256": "dc032887888bb833890fe35a5ed474f1b8175e02367b3af5a09339eb1d08df1a"
+    },
+    {
+      "index": 36,
+      "direction": 2,
+      "direction_name": "south",
+      "animation": "idle",
+      "animation_frame": 0,
+      "atlas_rect": [
+        512,
+        384,
+        128,
+        192
+      ],
+      "file": "frames/hero_036.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        64.0,
+        29.307
+      ],
+      "alpha_bounds": [
+        12,
+        26,
+        111,
+        176
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        12,
+        26,
+        111,
+        176
+      ],
+      "transparent_edge_padding_ltrb": [
+        12,
+        26,
+        17,
+        16
+      ],
+      "alpha_sha256": "8e7f138f1b30558a56ced154e8152df4f1cd413df9be7cbd24e6f7cd977db949",
+      "png_sha256": "68f10d8714017003302ad8ff2dcc5b3fa7409c0582a9eaf068b2ac4543d7fbe2"
+    },
+    {
+      "index": 37,
+      "direction": 2,
+      "direction_name": "south",
+      "animation": "idle",
+      "animation_frame": 1,
+      "atlas_rect": [
+        640,
+        384,
+        128,
+        192
+      ],
+      "file": "frames/hero_037.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        64.0,
+        30.097
+      ],
+      "alpha_bounds": [
+        12,
+        27,
+        111,
+        176
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        12,
+        27,
+        111,
+        176
+      ],
+      "transparent_edge_padding_ltrb": [
+        12,
+        27,
+        17,
+        16
+      ],
+      "alpha_sha256": "021947e04822d4b74baf6d214c3708d88b19a96b0390bc6a517222d0b97380e6",
+      "png_sha256": "594fd2d3b44300ee5357db6259edb789f22b76a60072daae075eae32b0738eb9"
+    },
+    {
+      "index": 38,
+      "direction": 2,
+      "direction_name": "south",
+      "animation": "idle",
+      "animation_frame": 2,
+      "atlas_rect": [
+        768,
+        384,
+        128,
+        192
+      ],
+      "file": "frames/hero_038.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        64.0,
+        29.307
+      ],
+      "alpha_bounds": [
+        12,
+        26,
+        111,
+        176
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        12,
+        26,
+        111,
+        176
+      ],
+      "transparent_edge_padding_ltrb": [
+        12,
+        26,
+        17,
+        16
+      ],
+      "alpha_sha256": "8e7f138f1b30558a56ced154e8152df4f1cd413df9be7cbd24e6f7cd977db949",
+      "png_sha256": "ebadb27e6fec33be0040024e9d48336812d2624b5d7763e571277ae900e1aaf2"
+    },
+    {
+      "index": 39,
+      "direction": 2,
+      "direction_name": "south",
+      "animation": "idle",
+      "animation_frame": 3,
+      "atlas_rect": [
+        896,
+        384,
+        128,
+        192
+      ],
+      "file": "frames/hero_039.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        64.0,
+        28.526
+      ],
+      "alpha_bounds": [
+        12,
+        25,
+        111,
+        176
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        12,
+        26,
+        111,
+        176
+      ],
+      "transparent_edge_padding_ltrb": [
+        12,
+        25,
+        17,
+        16
+      ],
+      "alpha_sha256": "78afe6c46e2b0425469fa28aa64702789bcba59e2dfc439707e1fa52fa4ae464",
+      "png_sha256": "278d388e39c6aa852adc319aa2c733bb4da7b51bb0a70928a90ae0cfaf07ed79"
+    },
+    {
+      "index": 40,
+      "direction": 2,
+      "direction_name": "south",
+      "animation": "walk",
+      "animation_frame": 0,
+      "atlas_rect": [
+        1024,
+        384,
+        128,
+        192
+      ],
+      "file": "frames/hero_040.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        64.0,
+        29.307
+      ],
+      "alpha_bounds": [
+        12,
+        26,
+        111,
+        174
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        12,
+        26,
+        111,
+        174
+      ],
+      "transparent_edge_padding_ltrb": [
+        12,
+        26,
+        17,
+        18
+      ],
+      "alpha_sha256": "8b2984205b0dba93e4857dd1f157c093377f0f821d2f58e0df47cfac7dded661",
+      "png_sha256": "db1f62a3f230da9c83ccb1ad027b69183655cb71797438975881ac30f49ed1de"
+    },
+    {
+      "index": 41,
+      "direction": 2,
+      "direction_name": "south",
+      "animation": "walk",
+      "animation_frame": 1,
+      "atlas_rect": [
+        1152,
+        384,
+        128,
+        192
+      ],
+      "file": "frames/hero_041.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        63.936,
+        28.75
+      ],
+      "alpha_bounds": [
+        12,
+        25,
+        111,
+        181
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        13,
+        26,
+        111,
+        181
+      ],
+      "transparent_edge_padding_ltrb": [
+        12,
+        25,
+        17,
+        11
+      ],
+      "alpha_sha256": "263f80d334de7cbcd8424ffbfc29357fa66017c77e53b9ae749a7a082a3d71d8",
+      "png_sha256": "a86d17dfe90fc38f53ccc88b17c3e45048a5596bd0d6e3c34505c02a6d5310b4"
+    },
+    {
+      "index": 42,
+      "direction": 2,
+      "direction_name": "south",
+      "animation": "walk",
+      "animation_frame": 2,
+      "atlas_rect": [
+        1280,
+        384,
+        128,
+        192
+      ],
+      "file": "frames/hero_042.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        63.91,
+        28.193
+      ],
+      "alpha_bounds": [
+        12,
+        25,
+        111,
+        185
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        13,
+        25,
+        111,
+        184
+      ],
+      "transparent_edge_padding_ltrb": [
+        12,
+        25,
+        17,
+        7
+      ],
+      "alpha_sha256": "2cdc43758f321bd24ab5d102d5e436a8424a25cd7f4c7799ba14231b8c32e212",
+      "png_sha256": "debcfd1718cabdfaf0b024d7db73511c2a34a87a897949ad9af4920101d8278d"
+    },
+    {
+      "index": 43,
+      "direction": 2,
+      "direction_name": "south",
+      "animation": "walk",
+      "animation_frame": 3,
+      "atlas_rect": [
+        1408,
+        384,
+        128,
+        192
+      ],
+      "file": "frames/hero_043.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        63.936,
+        28.75
+      ],
+      "alpha_bounds": [
+        12,
+        25,
+        111,
+        180
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        13,
+        26,
+        111,
+        180
+      ],
+      "transparent_edge_padding_ltrb": [
+        12,
+        25,
+        17,
+        12
+      ],
+      "alpha_sha256": "d8d721a1fc55124ca1d77274b65352b40ab7ae25f97f2aa0f277f174a3ce6ef1",
+      "png_sha256": "64597ed7a610a33086dba70db4a5f358437c1f348f1ccad8f294ab6bde5916e9"
+    },
+    {
+      "index": 44,
+      "direction": 2,
+      "direction_name": "south",
+      "animation": "walk",
+      "animation_frame": 4,
+      "atlas_rect": [
+        1536,
+        384,
+        128,
+        192
+      ],
+      "file": "frames/hero_044.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        64.0,
+        29.307
+      ],
+      "alpha_bounds": [
+        12,
+        26,
+        111,
+        176
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        12,
+        26,
+        111,
+        176
+      ],
+      "transparent_edge_padding_ltrb": [
+        12,
+        26,
+        17,
+        16
+      ],
+      "alpha_sha256": "d2241f8a63a0c5223330673a85e0131da9a80476714c633ca6105491e0e44aba",
+      "png_sha256": "78292981c89c56b4a5925fc3c5dacb9ba8486a72ca20f34fdb7afd1c74b89849"
+    },
+    {
+      "index": 45,
+      "direction": 2,
+      "direction_name": "south",
+      "animation": "walk",
+      "animation_frame": 5,
+      "atlas_rect": [
+        1664,
+        384,
+        128,
+        192
+      ],
+      "file": "frames/hero_045.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        64.064,
+        28.75
+      ],
+      "alpha_bounds": [
+        12,
+        25,
+        111,
+        185
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        12,
+        26,
+        110,
+        185
+      ],
+      "transparent_edge_padding_ltrb": [
+        12,
+        25,
+        17,
+        7
+      ],
+      "alpha_sha256": "7ab1b1f0d0c8486883dabf6c4beafe452524a3477cf2eaf4c06d0801e2d0c6c1",
+      "png_sha256": "40ebf158f3697d2dc125954e3de9512ce991648116258a1bd2ef761c9e2830ce"
+    },
+    {
+      "index": 46,
+      "direction": 2,
+      "direction_name": "south",
+      "animation": "walk",
+      "animation_frame": 6,
+      "atlas_rect": [
+        1792,
+        384,
+        128,
+        192
+      ],
+      "file": "frames/hero_046.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        64.09,
+        28.193
+      ],
+      "alpha_bounds": [
+        11,
+        25,
+        110,
+        189
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        11,
+        25,
+        110,
+        189
+      ],
+      "transparent_edge_padding_ltrb": [
+        11,
+        25,
+        18,
+        3
+      ],
+      "alpha_sha256": "babf8f3323b5bb1de9daad069ab73b0e2a58f075f445a38a85d3a0464bebecc7",
+      "png_sha256": "e89b6f52ac9a3142da26ada581a64f00e789cd3d3a97c268ae2b165f4e277756"
+    },
+    {
+      "index": 47,
+      "direction": 2,
+      "direction_name": "south",
+      "animation": "walk",
+      "animation_frame": 7,
+      "atlas_rect": [
+        1920,
+        384,
+        128,
+        192
+      ],
+      "file": "frames/hero_047.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        64.064,
+        28.75
+      ],
+      "alpha_bounds": [
+        12,
+        25,
+        111,
+        185
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        12,
+        26,
+        110,
+        184
+      ],
+      "transparent_edge_padding_ltrb": [
+        12,
+        25,
+        17,
+        7
+      ],
+      "alpha_sha256": "ea888a85fc12738857c80ee4590b4496b3150450ae9d7a2d914b8b451fe631d5",
+      "png_sha256": "e1c2ccc7932aa0748ca047331c603ba4b934bbaee8ad34aef97051ff1ac6ced6"
+    },
+    {
+      "index": 48,
+      "direction": 2,
+      "direction_name": "south",
+      "animation": "attack",
+      "animation_frame": 0,
+      "atlas_rect": [
+        0,
+        576,
+        128,
+        192
+      ],
+      "file": "frames/hero_048.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        64.018,
+        28.832
+      ],
+      "alpha_bounds": [
+        12,
+        25,
+        111,
+        176
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        12,
+        26,
+        111,
+        176
+      ],
+      "transparent_edge_padding_ltrb": [
+        12,
+        25,
+        17,
+        16
+      ],
+      "alpha_sha256": "cfb26f898d982ccd91ac86cd3947282a7c21a9d6f50b9b03f1c185883f84b14e",
+      "png_sha256": "162eb7888e7bbd8efef1e649c21a5e210115995c300e0b3d669ce4a5a41a6239"
+    },
+    {
+      "index": 49,
+      "direction": 2,
+      "direction_name": "south",
+      "animation": "attack",
+      "animation_frame": 1,
+      "atlas_rect": [
+        128,
+        576,
+        128,
+        192
+      ],
+      "file": "frames/hero_049.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        64.031,
+        28.242
+      ],
+      "alpha_bounds": [
+        12,
+        25,
+        111,
+        176
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        12,
+        25,
+        111,
+        176
+      ],
+      "transparent_edge_padding_ltrb": [
+        12,
+        25,
+        17,
+        16
+      ],
+      "alpha_sha256": "3a9332c226fb33293dd9cc393b9c6aade7159a38352e32499ab53d8d0dcbb1d3",
+      "png_sha256": "6f12390c92d7674b332ea9c14e637702642bbddb7ab024ea4fbf9d4f0e040f30"
+    },
+    {
+      "index": 50,
+      "direction": 2,
+      "direction_name": "south",
+      "animation": "attack",
+      "animation_frame": 2,
+      "atlas_rect": [
+        256,
+        576,
+        128,
+        192
+      ],
+      "file": "frames/hero_050.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        63.99,
+        30.206
+      ],
+      "alpha_bounds": [
+        12,
+        27,
+        111,
+        176
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        12,
+        27,
+        111,
+        176
+      ],
+      "transparent_edge_padding_ltrb": [
+        12,
+        27,
+        17,
+        16
+      ],
+      "alpha_sha256": "302011938d8300a664df626069857b1cb233b237fd70d1522e3f6dc21f4c9277",
+      "png_sha256": "c2f25bf7f42857388c57e6cc420684d4ceb5402c164807abd80d7c7cfa1498f0"
+    },
+    {
+      "index": 51,
+      "direction": 2,
+      "direction_name": "south",
+      "animation": "attack",
+      "animation_frame": 3,
+      "atlas_rect": [
+        384,
+        576,
+        128,
+        192
+      ],
+      "file": "frames/hero_051.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        63.877,
+        31.852
+      ],
+      "alpha_bounds": [
+        12,
+        28,
+        111,
+        176
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        12,
+        29,
+        111,
+        176
+      ],
+      "transparent_edge_padding_ltrb": [
+        12,
+        28,
+        17,
+        16
+      ],
+      "alpha_sha256": "0fd1ae4aee9a968539ed9211de5a81d5aad8e11b4500f853317df6319371edcd",
+      "png_sha256": "b56853e932f5ca71ef359c0e7e43a8cc0bd0b2765b9ad84cbc17913237ac9a1e"
+    },
+    {
+      "index": 52,
+      "direction": 2,
+      "direction_name": "south",
+      "animation": "attack",
+      "animation_frame": 4,
+      "atlas_rect": [
+        512,
+        576,
+        128,
+        192
+      ],
+      "file": "frames/hero_052.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        63.936,
+        30.509
+      ],
+      "alpha_bounds": [
+        11,
+        27,
+        111,
+        176
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        12,
+        27,
+        111,
+        176
+      ],
+      "transparent_edge_padding_ltrb": [
+        11,
+        27,
+        17,
+        16
+      ],
+      "alpha_sha256": "3b9d2a47e638dd421b6237fa74a460bd5e8821723e8c75a1fd38402f4935ee17",
+      "png_sha256": "7d2246b89be7829fe108f78eb5feeacd28c8187c064b3349116cb18544c47c0c"
+    },
+    {
+      "index": 53,
+      "direction": 2,
+      "direction_name": "south",
+      "animation": "attack",
+      "animation_frame": 5,
+      "atlas_rect": [
+        640,
+        576,
+        128,
+        192
+      ],
+      "file": "frames/hero_053.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        64.0,
+        29.307
+      ],
+      "alpha_bounds": [
+        12,
+        26,
+        111,
+        176
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        12,
+        26,
+        111,
+        176
+      ],
+      "transparent_edge_padding_ltrb": [
+        12,
+        26,
+        17,
+        16
+      ],
+      "alpha_sha256": "8e7f138f1b30558a56ced154e8152df4f1cd413df9be7cbd24e6f7cd977db949",
+      "png_sha256": "f3e35ce9b0c7da2d98a9cb3f2540f01baff7a25c90355c32fdc7a9ede82316ff"
+    },
+    {
+      "index": 54,
+      "direction": 3,
+      "direction_name": "southwest",
+      "animation": "idle",
+      "animation_frame": 0,
+      "atlas_rect": [
+        768,
+        576,
+        128,
+        192
+      ],
+      "file": "frames/hero_054.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        66.543,
+        30.17
+      ],
+      "alpha_bounds": [
+        8,
+        25,
+        99,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        9,
+        25,
+        99,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        8,
+        25,
+        29,
+        17
+      ],
+      "alpha_sha256": "c6a6e627099597c3c6e14df867957a40895c5656ef8f0e76f66d56c12dd2dd43",
+      "png_sha256": "ad2f9baeaefc9b0d629e19107204709520800803f458ba3ac4f88098c18140a3"
+    },
+    {
+      "index": 55,
+      "direction": 3,
+      "direction_name": "southwest",
+      "animation": "idle",
+      "animation_frame": 1,
+      "atlas_rect": [
+        896,
+        576,
+        128,
+        192
+      ],
+      "file": "frames/hero_055.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        65.84,
+        30.721
+      ],
+      "alpha_bounds": [
+        8,
+        25,
+        99,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        9,
+        26,
+        99,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        8,
+        25,
+        29,
+        17
+      ],
+      "alpha_sha256": "6ae666bda77cd7dd703d04367000792fd743a42fcd38b0709b8b6b25d087f9f8",
+      "png_sha256": "6b9bdb3e12e25ba99155b32a01444375dc65ee5c3f2610a36c8bffcdef45a42f"
+    },
+    {
+      "index": 56,
+      "direction": 3,
+      "direction_name": "southwest",
+      "animation": "idle",
+      "animation_frame": 2,
+      "atlas_rect": [
+        1024,
+        576,
+        128,
+        192
+      ],
+      "file": "frames/hero_056.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        66.543,
+        30.17
+      ],
+      "alpha_bounds": [
+        8,
+        25,
+        99,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        9,
+        25,
+        99,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        8,
+        25,
+        29,
+        17
+      ],
+      "alpha_sha256": "c6a6e627099597c3c6e14df867957a40895c5656ef8f0e76f66d56c12dd2dd43",
+      "png_sha256": "6b8306e471d61c197dad0dfc345d1afd51eaa5294090514c949de9a34e1905a4"
+    },
+    {
+      "index": 57,
+      "direction": 3,
+      "direction_name": "southwest",
+      "animation": "idle",
+      "animation_frame": 3,
+      "atlas_rect": [
+        1152,
+        576,
+        128,
+        192
+      ],
+      "file": "frames/hero_057.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        67.245,
+        29.627
+      ],
+      "alpha_bounds": [
+        8,
+        24,
+        99,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        9,
+        24,
+        99,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        8,
+        24,
+        29,
+        17
+      ],
+      "alpha_sha256": "f9b75303d656a134c0fce303645993c01c885a35d7f2a2434087d250ea03c0f2",
+      "png_sha256": "4f828fe625477fa810d3a8a0a97d49e85865689e36b3de72ac0d7d5d161bea4e"
+    },
+    {
+      "index": 58,
+      "direction": 3,
+      "direction_name": "southwest",
+      "animation": "walk",
+      "animation_frame": 0,
+      "atlas_rect": [
+        1280,
+        576,
+        128,
+        192
+      ],
+      "file": "frames/hero_058.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        66.543,
+        30.17
+      ],
+      "alpha_bounds": [
+        8,
+        25,
+        99,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        9,
+        25,
+        99,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        8,
+        25,
+        29,
+        17
+      ],
+      "alpha_sha256": "777d404a707b4c7dc985c6b394a42976ca7c3f64933222f4b218c1e43a0c8e46",
+      "png_sha256": "1efee52048cc68ea166a54ec055d424c1c827030a1bb68900705f09cd7df8b3e"
+    },
+    {
+      "index": 59,
+      "direction": 3,
+      "direction_name": "southwest",
+      "animation": "walk",
+      "animation_frame": 1,
+      "atlas_rect": [
+        1408,
+        576,
+        128,
+        192
+      ],
+      "file": "frames/hero_059.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        66.498,
+        29.576
+      ],
+      "alpha_bounds": [
+        6,
+        24,
+        100,
+        182
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        6,
+        25,
+        99,
+        182
+      ],
+      "transparent_edge_padding_ltrb": [
+        6,
+        24,
+        28,
+        10
+      ],
+      "alpha_sha256": "2fe5b044984814bee2fa7c2692ed800ce1e7f8f55abbef1d2edab2b830de3a19",
+      "png_sha256": "27ef8accd0ca06e5a254d6b0d5b19693bdff9800fb50cf3a295e42cdefad9c34"
+    },
+    {
+      "index": 60,
+      "direction": 3,
+      "direction_name": "southwest",
+      "animation": "walk",
+      "animation_frame": 2,
+      "atlas_rect": [
+        1536,
+        576,
+        128,
+        192
+      ],
+      "file": "frames/hero_060.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        66.478,
+        29.003
+      ],
+      "alpha_bounds": [
+        5,
+        24,
+        100,
+        185
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        5,
+        24,
+        100,
+        184
+      ],
+      "transparent_edge_padding_ltrb": [
+        5,
+        24,
+        28,
+        7
+      ],
+      "alpha_sha256": "8856fc01728f4f5462f132cf8c6ef6ab82e61c968bfc86fa5d9fdc90db2572bb",
+      "png_sha256": "1eca850206c046d0086f5741b0d2c66b382736fb100f9eae948e5be46b4f753b"
+    },
+    {
+      "index": 61,
+      "direction": 3,
+      "direction_name": "southwest",
+      "animation": "walk",
+      "animation_frame": 3,
+      "atlas_rect": [
+        1664,
+        576,
+        128,
+        192
+      ],
+      "file": "frames/hero_061.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        66.498,
+        29.576
+      ],
+      "alpha_bounds": [
+        6,
+        24,
+        100,
+        181
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        6,
+        25,
+        99,
+        181
+      ],
+      "transparent_edge_padding_ltrb": [
+        6,
+        24,
+        28,
+        11
+      ],
+      "alpha_sha256": "bf09b6068ebbc09194c6a2dd70b3e38997e261d7e1febfd52a8baf34844f5818",
+      "png_sha256": "d96ec17c5ab4b27b1a17c48a7218c1de8789c42e80b54f90a5dd6e0b51a7ef23"
+    },
+    {
+      "index": 62,
+      "direction": 3,
+      "direction_name": "southwest",
+      "animation": "walk",
+      "animation_frame": 4,
+      "atlas_rect": [
+        1792,
+        576,
+        128,
+        192
+      ],
+      "file": "frames/hero_062.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        66.543,
+        30.17
+      ],
+      "alpha_bounds": [
+        8,
+        25,
+        99,
+        174
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        9,
+        25,
+        99,
+        174
+      ],
+      "transparent_edge_padding_ltrb": [
+        8,
+        25,
+        29,
+        18
+      ],
+      "alpha_sha256": "aa8c9749d713e5d1bc7ff11caeedc80c79d133e8611f74640a9d31e999a87434",
+      "png_sha256": "96c6160c8ad3f821d27402a5120f12f687114eec3b79aab217853c72abefb9fc"
+    },
+    {
+      "index": 63,
+      "direction": 3,
+      "direction_name": "southwest",
+      "animation": "walk",
+      "animation_frame": 5,
+      "atlas_rect": [
+        1920,
+        576,
+        128,
+        192
+      ],
+      "file": "frames/hero_063.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        66.587,
+        29.649
+      ],
+      "alpha_bounds": [
+        9,
+        24,
+        99,
+        171
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        10,
+        24,
+        99,
+        170
+      ],
+      "transparent_edge_padding_ltrb": [
+        9,
+        24,
+        29,
+        21
+      ],
+      "alpha_sha256": "b81f25feb822e11326d1cffa03daef441b46c878934fac4005846810ffe80490",
+      "png_sha256": "8e4877a360cd0bbf81cd5f7417846727cd3d0bff448df6dc007560643c76ea2f"
+    },
+    {
+      "index": 64,
+      "direction": 3,
+      "direction_name": "southwest",
+      "animation": "walk",
+      "animation_frame": 6,
+      "atlas_rect": [
+        0,
+        768,
+        128,
+        192
+      ],
+      "file": "frames/hero_064.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        66.606,
+        29.107
+      ],
+      "alpha_bounds": [
+        9,
+        24,
+        103,
+        173
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        9,
+        24,
+        102,
+        172
+      ],
+      "transparent_edge_padding_ltrb": [
+        9,
+        24,
+        25,
+        19
+      ],
+      "alpha_sha256": "0bfcab455b77458355a4af995056f91b38cd13f595dee7b80bd69789d84bad08",
+      "png_sha256": "044dc8275c25f1154517b78738b21265cd0d3f2f61085fd8e475bc92efc4acb6"
+    },
+    {
+      "index": 65,
+      "direction": 3,
+      "direction_name": "southwest",
+      "animation": "walk",
+      "animation_frame": 7,
+      "atlas_rect": [
+        128,
+        768,
+        128,
+        192
+      ],
+      "file": "frames/hero_065.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        66.587,
+        29.649
+      ],
+      "alpha_bounds": [
+        9,
+        24,
+        99,
+        169
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        10,
+        24,
+        99,
+        169
+      ],
+      "transparent_edge_padding_ltrb": [
+        9,
+        24,
+        29,
+        23
+      ],
+      "alpha_sha256": "621e426a38be6c0a343b148d6916406b30aca1f78e85fe95aeffdd46fc602d90",
+      "png_sha256": "bbf3368bbc6b86e1875ee475852af90cebd6562b7d9a6939967f3a8ba247b9d1"
+    },
+    {
+      "index": 66,
+      "direction": 3,
+      "direction_name": "southwest",
+      "animation": "attack",
+      "animation_frame": 0,
+      "atlas_rect": [
+        256,
+        768,
+        128,
+        192
+      ],
+      "file": "frames/hero_066.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        66.977,
+        29.848
+      ],
+      "alpha_bounds": [
+        7,
+        24,
+        99,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        7,
+        25,
+        99,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        7,
+        24,
+        29,
+        17
+      ],
+      "alpha_sha256": "396fd1be8f427506a2cb24dc17f845a914e822283fd6d85e7d8b6399a67d2c9b",
+      "png_sha256": "dfed2cbd73da34608b5a22862ca96599e7b134a51d7e3c3ac98e588619a89a6c"
+    },
+    {
+      "index": 67,
+      "direction": 3,
+      "direction_name": "southwest",
+      "animation": "attack",
+      "animation_frame": 1,
+      "atlas_rect": [
+        384,
+        768,
+        128,
+        192
+      ],
+      "file": "frames/hero_067.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        67.513,
+        29.444
+      ],
+      "alpha_bounds": [
+        6,
+        24,
+        99,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        6,
+        24,
+        99,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        6,
+        24,
+        29,
+        17
+      ],
+      "alpha_sha256": "2e3ebeb544c7b5caec55ba89a07fba157e1ef8ad236fd22c025bb41ea8095421",
+      "png_sha256": "db43939741545ce0de4b1ac0d939891a8c33c3c1b0c2885a62f3d3b8b5f8a6a8"
+    },
+    {
+      "index": 68,
+      "direction": 3,
+      "direction_name": "southwest",
+      "animation": "attack",
+      "animation_frame": 2,
+      "atlas_rect": [
+        512,
+        768,
+        128,
+        192
+      ],
+      "file": "frames/hero_068.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        65.746,
+        30.795
+      ],
+      "alpha_bounds": [
+        9,
+        25,
+        99,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        9,
+        26,
+        99,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        9,
+        25,
+        29,
+        17
+      ],
+      "alpha_sha256": "1a1f3ae11ffd7cca7e3b5f9f19f6fd989d2240846573465badf99d9ea7dfd9e2",
+      "png_sha256": "5bf715478e2f22e228ae1dddfacfe6356febb3caf3c2c73665a93dc403eacc2e"
+    },
+    {
+      "index": 69,
+      "direction": 3,
+      "direction_name": "southwest",
+      "animation": "attack",
+      "animation_frame": 3,
+      "atlas_rect": [
+        640,
+        768,
+        128,
+        192
+      ],
+      "file": "frames/hero_069.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        64.242,
+        31.893
+      ],
+      "alpha_bounds": [
+        5,
+        27,
+        99,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        5,
+        27,
+        99,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        5,
+        27,
+        29,
+        17
+      ],
+      "alpha_sha256": "2c8ed03165e4dc226acf40e2d788d7b85748052e073f6f57f5b0a5d89f51cb73",
+      "png_sha256": "7fa54218e3b6482014778b5562c658c9131c9db3c4a093a232a5e642eba3652b"
+    },
+    {
+      "index": 70,
+      "direction": 3,
+      "direction_name": "southwest",
+      "animation": "attack",
+      "animation_frame": 4,
+      "atlas_rect": [
+        768,
+        768,
+        128,
+        192
+      ],
+      "file": "frames/hero_070.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        65.444,
+        30.977
+      ],
+      "alpha_bounds": [
+        7,
+        26,
+        99,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        8,
+        26,
+        99,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        7,
+        26,
+        29,
+        17
+      ],
+      "alpha_sha256": "2a40a0b5c5bd99e0c9f6489f499825ca7d555dc48de609de8d8c9a2e5547909f",
+      "png_sha256": "a0de3d973125c559af33e2e0cc05f498eb58bef2b15b101452c69511ca087ddd"
+    },
+    {
+      "index": 71,
+      "direction": 3,
+      "direction_name": "southwest",
+      "animation": "attack",
+      "animation_frame": 5,
+      "atlas_rect": [
+        896,
+        768,
+        128,
+        192
+      ],
+      "file": "frames/hero_071.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        66.543,
+        30.17
+      ],
+      "alpha_bounds": [
+        8,
+        25,
+        99,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        9,
+        25,
+        99,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        8,
+        25,
+        29,
+        17
+      ],
+      "alpha_sha256": "c6a6e627099597c3c6e14df867957a40895c5656ef8f0e76f66d56c12dd2dd43",
+      "png_sha256": "1cf3d6d254e62c9cfe3c828cd8df66fa71e77323714841f003ee2f8638430d1b"
+    },
+    {
+      "index": 72,
+      "direction": 4,
+      "direction_name": "west",
+      "animation": "idle",
+      "animation_frame": 0,
+      "atlas_rect": [
+        1024,
+        768,
+        128,
+        192
+      ],
+      "file": "frames/hero_072.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        67.596,
+        32.253
+      ],
+      "alpha_bounds": [
+        33,
+        5,
+        94,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        34,
+        5,
+        94,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        33,
+        5,
+        34,
+        17
+      ],
+      "alpha_sha256": "170371b75804994372e09d7bab5e17b52ebf3cc8a8ecd3085b2c53c1b4e982f8",
+      "png_sha256": "29e2d89ae498b3e9209010874284f1912014d8fec45298667616e53c2e4ad37a"
+    },
+    {
+      "index": 73,
+      "direction": 4,
+      "direction_name": "west",
+      "animation": "idle",
+      "animation_frame": 1,
+      "atlas_rect": [
+        1152,
+        768,
+        128,
+        192
+      ],
+      "file": "frames/hero_073.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        66.603,
+        32.229
+      ],
+      "alpha_bounds": [
+        34,
+        5,
+        95,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        34,
+        5,
+        94,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        34,
+        5,
+        33,
+        17
+      ],
+      "alpha_sha256": "3d1c843ea4184a8a77a689c789b767eabaaeb59a2da7c6ff2f6c83edb0e04a62",
+      "png_sha256": "084a39936ae51c0633309df57080c173f2d1c47324dc89cb2ce76aa54b9050ec"
+    },
+    {
+      "index": 74,
+      "direction": 4,
+      "direction_name": "west",
+      "animation": "idle",
+      "animation_frame": 2,
+      "atlas_rect": [
+        1280,
+        768,
+        128,
+        192
+      ],
+      "file": "frames/hero_074.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        67.596,
+        32.253
+      ],
+      "alpha_bounds": [
+        33,
+        5,
+        94,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        34,
+        5,
+        94,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        33,
+        5,
+        34,
+        17
+      ],
+      "alpha_sha256": "170371b75804994372e09d7bab5e17b52ebf3cc8a8ecd3085b2c53c1b4e982f8",
+      "png_sha256": "9d919540740173515d6ff06aba3bb149b37b4eba95ee378a5f9cb4dd98c7cbf6"
+    },
+    {
+      "index": 75,
+      "direction": 4,
+      "direction_name": "west",
+      "animation": "idle",
+      "animation_frame": 3,
+      "atlas_rect": [
+        1408,
+        768,
+        128,
+        192
+      ],
+      "file": "frames/hero_075.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        68.589,
+        32.285
+      ],
+      "alpha_bounds": [
+        33,
+        5,
+        93,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        34,
+        5,
+        93,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        33,
+        5,
+        35,
+        17
+      ],
+      "alpha_sha256": "2359fd11d4877cc6247bdde5a018ab2e70d06bd7e733d24fb613f42e1340cdcd",
+      "png_sha256": "1114f3b3f8972c64257dfdaafec887c5b119a6768fb07ec3dbd6d10039a93f69"
+    },
+    {
+      "index": 76,
+      "direction": 4,
+      "direction_name": "west",
+      "animation": "walk",
+      "animation_frame": 0,
+      "atlas_rect": [
+        1536,
+        768,
+        128,
+        192
+      ],
+      "file": "frames/hero_076.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        67.596,
+        32.253
+      ],
+      "alpha_bounds": [
+        33,
+        5,
+        95,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        34,
+        5,
+        94,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        33,
+        5,
+        33,
+        17
+      ],
+      "alpha_sha256": "401e9c2b3348ade009ead19b0fd10d1cd0bb13e254324decc7167cb5a93c6551",
+      "png_sha256": "9a0171ddd384232cfb4a1e109d3e3337509f2f4359105d412319bcaa1af90ce0"
+    },
+    {
+      "index": 77,
+      "direction": 4,
+      "direction_name": "west",
+      "animation": "walk",
+      "animation_frame": 1,
+      "atlas_rect": [
+        1664,
+        768,
+        128,
+        192
+      ],
+      "file": "frames/hero_077.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        67.596,
+        31.643
+      ],
+      "alpha_bounds": [
+        29,
+        3,
+        95,
+        174
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        29,
+        4,
+        95,
+        174
+      ],
+      "transparent_edge_padding_ltrb": [
+        29,
+        3,
+        33,
+        18
+      ],
+      "alpha_sha256": "cc98d27820f2956f1aa507596363cd0d335e608d70c2a0e9be44db0c49e91a3f",
+      "png_sha256": "6f7f54437b1e17e577c4fbda8535f1152f041b510256f7d6cf6850c550cbdb96"
+    },
+    {
+      "index": 78,
+      "direction": 4,
+      "direction_name": "west",
+      "animation": "walk",
+      "animation_frame": 2,
+      "atlas_rect": [
+        1792,
+        768,
+        128,
+        192
+      ],
+      "file": "frames/hero_078.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        67.595,
+        31.064
+      ],
+      "alpha_bounds": [
+        24,
+        2,
+        97,
+        174
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        24,
+        3,
+        96,
+        174
+      ],
+      "transparent_edge_padding_ltrb": [
+        24,
+        2,
+        31,
+        18
+      ],
+      "alpha_sha256": "c199cc7571b215a5115d90abb00fae6826c2301445756a1e9f0e1c8c93372c1b",
+      "png_sha256": "a5c7004f644dc1fc2177e74d1081024b841af230b5493286b85514cf0709653c"
+    },
+    {
+      "index": 79,
+      "direction": 4,
+      "direction_name": "west",
+      "animation": "walk",
+      "animation_frame": 3,
+      "atlas_rect": [
+        1920,
+        768,
+        128,
+        192
+      ],
+      "file": "frames/hero_079.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        67.596,
+        31.643
+      ],
+      "alpha_bounds": [
+        29,
+        3,
+        94,
+        173
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        29,
+        4,
+        94,
+        173
+      ],
+      "transparent_edge_padding_ltrb": [
+        29,
+        3,
+        34,
+        19
+      ],
+      "alpha_sha256": "94537de2645fb1e897569dff692b215acf9ebf68cebfd5e6e98273db512eea80",
+      "png_sha256": "cb5ea18e4ed02e8eb7c7cc24372c99818a84717a6039a2b51c5d6146a2b3de9c"
+    },
+    {
+      "index": 80,
+      "direction": 4,
+      "direction_name": "west",
+      "animation": "walk",
+      "animation_frame": 4,
+      "atlas_rect": [
+        0,
+        960,
+        128,
+        192
+      ],
+      "file": "frames/hero_080.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        67.596,
+        32.253
+      ],
+      "alpha_bounds": [
+        33,
+        5,
+        93,
+        174
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        34,
+        5,
+        93,
+        173
+      ],
+      "transparent_edge_padding_ltrb": [
+        33,
+        5,
+        35,
+        18
+      ],
+      "alpha_sha256": "a719b86e83ec847142fbcb1a43058574a24b1da7a4cd5f1600cc9cfcef66817b",
+      "png_sha256": "f6d9dad1a14c6ab6b75daa491e797d3751e31422d4701f59a11aca57f2c53b14"
+    },
+    {
+      "index": 81,
+      "direction": 4,
+      "direction_name": "west",
+      "animation": "walk",
+      "animation_frame": 5,
+      "atlas_rect": [
+        128,
+        960,
+        128,
+        192
+      ],
+      "file": "frames/hero_081.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        67.596,
+        31.747
+      ],
+      "alpha_bounds": [
+        24,
+        5,
+        96,
+        173
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        24,
+        5,
+        96,
+        172
+      ],
+      "transparent_edge_padding_ltrb": [
+        24,
+        5,
+        32,
+        19
+      ],
+      "alpha_sha256": "845844ccfba8b20149d9b37dc761bf5837e127795bd760409532b44fd5a45d63",
+      "png_sha256": "236a4b0433433e9179b1dcea0b7fb5e77aba24f24ca465522074540016b813c8"
+    },
+    {
+      "index": 82,
+      "direction": 4,
+      "direction_name": "west",
+      "animation": "walk",
+      "animation_frame": 6,
+      "atlas_rect": [
+        256,
+        960,
+        128,
+        192
+      ],
+      "file": "frames/hero_082.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        67.595,
+        31.211
+      ],
+      "alpha_bounds": [
+        18,
+        5,
+        103,
+        173
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        18,
+        5,
+        102,
+        172
+      ],
+      "transparent_edge_padding_ltrb": [
+        18,
+        5,
+        25,
+        19
+      ],
+      "alpha_sha256": "f1f03c0a2196b3da82886dd74b81cdc908079b8525316102874a208dcc270843",
+      "png_sha256": "4fafec22fe80573a11f946184b82044e484b4d92ea0241284b23fcb7d26b6716"
+    },
+    {
+      "index": 83,
+      "direction": 4,
+      "direction_name": "west",
+      "animation": "walk",
+      "animation_frame": 7,
+      "atlas_rect": [
+        384,
+        960,
+        128,
+        192
+      ],
+      "file": "frames/hero_083.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        67.596,
+        31.747
+      ],
+      "alpha_bounds": [
+        24,
+        5,
+        96,
+        174
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        24,
+        5,
+        96,
+        173
+      ],
+      "transparent_edge_padding_ltrb": [
+        24,
+        5,
+        32,
+        18
+      ],
+      "alpha_sha256": "af29353c995079ca40e2b9f2efa7e1f67b0bcc37b85ad7634e751f9e59a751f3",
+      "png_sha256": "cc9e6722e25c13f4148b4d54acd4f670ebb16c1b60ddf67287c7c921da66f297"
+    },
+    {
+      "index": 84,
+      "direction": 4,
+      "direction_name": "west",
+      "animation": "attack",
+      "animation_frame": 0,
+      "atlas_rect": [
+        512,
+        960,
+        128,
+        192
+      ],
+      "file": "frames/hero_084.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        68.192,
+        32.281
+      ],
+      "alpha_bounds": [
+        32,
+        4,
+        94,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        32,
+        4,
+        93,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        32,
+        4,
+        34,
+        17
+      ],
+      "alpha_sha256": "03d3b9486092ae2289aaf0d84d314acbbd39699db40e7363b7438430acad1d98",
+      "png_sha256": "83edcb8c1398bce0223159fa5594329ac89f2c923094b2ffde902ec1b56463f1"
+    },
+    {
+      "index": 85,
+      "direction": 4,
+      "direction_name": "west",
+      "animation": "attack",
+      "animation_frame": 1,
+      "atlas_rect": [
+        640,
+        960,
+        128,
+        192
+      ],
+      "file": "frames/hero_085.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        68.936,
+        32.311
+      ],
+      "alpha_bounds": [
+        30,
+        3,
+        93,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        31,
+        4,
+        93,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        30,
+        3,
+        35,
+        17
+      ],
+      "alpha_sha256": "03acfb98e923b751cc047e70ee283ef1d816e850e1af3c5397b74c228f0e35b0",
+      "png_sha256": "d191c330d0efed498897915da1090ae02140f1181370d6975b7ed53d3ffb9328"
+    },
+    {
+      "index": 86,
+      "direction": 4,
+      "direction_name": "west",
+      "animation": "attack",
+      "animation_frame": 2,
+      "atlas_rect": [
+        768,
+        960,
+        128,
+        192
+      ],
+      "file": "frames/hero_086.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        66.479,
+        32.229
+      ],
+      "alpha_bounds": [
+        34,
+        6,
+        94,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        34,
+        6,
+        94,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        34,
+        6,
+        34,
+        17
+      ],
+      "alpha_sha256": "910fda33945e3f8634beaf17a2846b77fd9120b105742ce2aff551b856f749b2",
+      "png_sha256": "2899ed88234d8dfe313c46e795cbc45a1fdbf26f4670b8cbc5dae1bea54651eb"
+    },
+    {
+      "index": 87,
+      "direction": 4,
+      "direction_name": "west",
+      "animation": "attack",
+      "animation_frame": 3,
+      "atlas_rect": [
+        896,
+        960,
+        128,
+        192
+      ],
+      "file": "frames/hero_087.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        64.466,
+        32.133
+      ],
+      "alpha_bounds": [
+        29,
+        10,
+        96,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        30,
+        10,
+        96,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        29,
+        10,
+        32,
+        17
+      ],
+      "alpha_sha256": "ba227f7920810f3966409ff2f2ba5ddc77bd3481ce1ae8ab5b026bb8bd1881ee",
+      "png_sha256": "f718f217f4425f6bb5d10a288d73e53b3570ad2207ab0aeb98af2e4864d33d00"
+    },
+    {
+      "index": 88,
+      "direction": 4,
+      "direction_name": "west",
+      "animation": "attack",
+      "animation_frame": 4,
+      "atlas_rect": [
+        1024,
+        960,
+        128,
+        192
+      ],
+      "file": "frames/hero_088.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        66.106,
+        32.182
+      ],
+      "alpha_bounds": [
+        32,
+        8,
+        95,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        32,
+        8,
+        95,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        32,
+        8,
+        33,
+        17
+      ],
+      "alpha_sha256": "dc25460bbe9f7cdd25d73c3e21866a516fab6a462d313ad918c30c54f59abef3",
+      "png_sha256": "fc5de68b975366e6408169c35a84ffc1fe6d3d26da2329c9becadbc4ff015834"
+    },
+    {
+      "index": 89,
+      "direction": 4,
+      "direction_name": "west",
+      "animation": "attack",
+      "animation_frame": 5,
+      "atlas_rect": [
+        1152,
+        960,
+        128,
+        192
+      ],
+      "file": "frames/hero_089.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        67.596,
+        32.253
+      ],
+      "alpha_bounds": [
+        33,
+        5,
+        94,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        34,
+        5,
+        94,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        33,
+        5,
+        34,
+        17
+      ],
+      "alpha_sha256": "170371b75804994372e09d7bab5e17b52ebf3cc8a8ecd3085b2c53c1b4e982f8",
+      "png_sha256": "b125b9c027e978e4f91b84a45841d731c158346fb6779cce8cc68530be5fc709"
+    },
+    {
+      "index": 90,
+      "direction": 5,
+      "direction_name": "northwest",
+      "animation": "idle",
+      "animation_frame": 0,
+      "atlas_rect": [
+        1280,
+        960,
+        128,
+        192
+      ],
+      "file": "frames/hero_090.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        66.543,
+        34.336
+      ],
+      "alpha_bounds": [
+        17,
+        3,
+        98,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        17,
+        3,
+        98,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        17,
+        3,
+        30,
+        17
+      ],
+      "alpha_sha256": "52c6a02ba3f9da47021683fa84df1a22c5aa6c368c62cb338c2d5217e13a47ec",
+      "png_sha256": "578dca3898b6ab6e292ad275fe449776b4bd2fd0f141e2ee9c5a3fa3910698a8"
+    },
+    {
+      "index": 91,
+      "direction": 5,
+      "direction_name": "northwest",
+      "animation": "idle",
+      "animation_frame": 1,
+      "atlas_rect": [
+        1408,
+        960,
+        128,
+        192
+      ],
+      "file": "frames/hero_091.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        65.84,
+        33.736
+      ],
+      "alpha_bounds": [
+        18,
+        3,
+        98,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        18,
+        3,
+        98,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        18,
+        3,
+        30,
+        17
+      ],
+      "alpha_sha256": "ee223f4afac3b0d2c48feefcab6aa6535c56818fe32fa932e607023f5795bda0",
+      "png_sha256": "29a11ff066445c4fba0dae3076752595f825c53a7b8e4539d887f4cec75081dd"
+    },
+    {
+      "index": 92,
+      "direction": 5,
+      "direction_name": "northwest",
+      "animation": "idle",
+      "animation_frame": 2,
+      "atlas_rect": [
+        1536,
+        960,
+        128,
+        192
+      ],
+      "file": "frames/hero_092.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        66.543,
+        34.336
+      ],
+      "alpha_bounds": [
+        17,
+        3,
+        98,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        17,
+        3,
+        98,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        17,
+        3,
+        30,
+        17
+      ],
+      "alpha_sha256": "52c6a02ba3f9da47021683fa84df1a22c5aa6c368c62cb338c2d5217e13a47ec",
+      "png_sha256": "282a764b551f942b3a726a5325aad8a7d76c01c1dfeda4f61fe7f9da9f22a340"
+    },
+    {
+      "index": 93,
+      "direction": 5,
+      "direction_name": "northwest",
+      "animation": "idle",
+      "animation_frame": 3,
+      "atlas_rect": [
+        1664,
+        960,
+        128,
+        192
+      ],
+      "file": "frames/hero_093.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        67.245,
+        34.943
+      ],
+      "alpha_bounds": [
+        16,
+        4,
+        98,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        17,
+        4,
+        98,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        16,
+        4,
+        30,
+        17
+      ],
+      "alpha_sha256": "d7f86dceb4bcd3e848214d62373bedf11ff71e5018490873b54089bc6b65acf1",
+      "png_sha256": "e5a7926e6e81657531ed9ca470e05b5da64b47e141be11643ebd1d9a79e974eb"
+    },
+    {
+      "index": 94,
+      "direction": 5,
+      "direction_name": "northwest",
+      "animation": "walk",
+      "animation_frame": 0,
+      "atlas_rect": [
+        1792,
+        960,
+        128,
+        192
+      ],
+      "file": "frames/hero_094.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        66.543,
+        34.336
+      ],
+      "alpha_bounds": [
+        17,
+        3,
+        98,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        17,
+        3,
+        98,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        17,
+        3,
+        30,
+        17
+      ],
+      "alpha_sha256": "11bb34a9e399e077ed908647eb08ec1400bc73901cbf458582e1a100ef26522c",
+      "png_sha256": "b17c8e6481541abc0acf32e2acd9caf06e053ebba50e0fdefbd0917fd5b41e84"
+    },
+    {
+      "index": 95,
+      "direction": 5,
+      "direction_name": "northwest",
+      "animation": "walk",
+      "animation_frame": 1,
+      "atlas_rect": [
+        1920,
+        960,
+        128,
+        192
+      ],
+      "file": "frames/hero_095.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        66.587,
+        33.741
+      ],
+      "alpha_bounds": [
+        21,
+        2,
+        97,
+        166
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        21,
+        2,
+        97,
+        166
+      ],
+      "transparent_edge_padding_ltrb": [
+        21,
+        2,
+        31,
+        26
+      ],
+      "alpha_sha256": "ed1e66eb897da741d66d55311f55f1c826a84a84c95bb93eb26abf5783233269",
+      "png_sha256": "8042677673ae8ed2d3fadf66be5f457f9b2c89bb3caa5d9c44812beb6d5d1802"
+    },
+    {
+      "index": 96,
+      "direction": 5,
+      "direction_name": "northwest",
+      "animation": "walk",
+      "animation_frame": 2,
+      "atlas_rect": [
+        0,
+        1152,
+        128,
+        192
+      ],
+      "file": "frames/hero_096.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        66.606,
+        33.168
+      ],
+      "alpha_bounds": [
+        23,
+        2,
+        98,
+        166
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        23,
+        2,
+        98,
+        165
+      ],
+      "transparent_edge_padding_ltrb": [
+        23,
+        2,
+        30,
+        26
+      ],
+      "alpha_sha256": "e1fb50662725fa08207c2b29bcd3c71e0a7b8c30baf1497820660265250c53ad",
+      "png_sha256": "3db56b0ad778644b5f73d1950c22fff40a80a410e0d82e8501d3087b691fa141"
+    },
+    {
+      "index": 97,
+      "direction": 5,
+      "direction_name": "northwest",
+      "animation": "walk",
+      "animation_frame": 3,
+      "atlas_rect": [
+        128,
+        1152,
+        128,
+        192
+      ],
+      "file": "frames/hero_097.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        66.587,
+        33.741
+      ],
+      "alpha_bounds": [
+        21,
+        2,
+        98,
+        165
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        21,
+        2,
+        97,
+        164
+      ],
+      "transparent_edge_padding_ltrb": [
+        21,
+        2,
+        30,
+        27
+      ],
+      "alpha_sha256": "979a6d9cc2ee53e4e9a1ff241aeaf8bf3bd5d4100774621f99b184fe02499d46",
+      "png_sha256": "15ed685519e31bd250f942155066054fd4582ca6411d71642bf7bec0b675bcf2"
+    },
+    {
+      "index": 98,
+      "direction": 5,
+      "direction_name": "northwest",
+      "animation": "walk",
+      "animation_frame": 4,
+      "atlas_rect": [
+        256,
+        1152,
+        128,
+        192
+      ],
+      "file": "frames/hero_098.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        66.543,
+        34.336
+      ],
+      "alpha_bounds": [
+        17,
+        3,
+        98,
+        173
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        17,
+        3,
+        98,
+        173
+      ],
+      "transparent_edge_padding_ltrb": [
+        17,
+        3,
+        30,
+        19
+      ],
+      "alpha_sha256": "07e05431b4a167c01764921188b71483db6815b5d0c4396f30f2b282a1e3fc09",
+      "png_sha256": "8711ed596b25af03ddf1ea65bdad4c8e02d3eaa1b5f0f033e1992f5ad52996c1"
+    },
+    {
+      "index": 99,
+      "direction": 5,
+      "direction_name": "northwest",
+      "animation": "walk",
+      "animation_frame": 5,
+      "atlas_rect": [
+        384,
+        1152,
+        128,
+        192
+      ],
+      "file": "frames/hero_099.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        66.498,
+        33.815
+      ],
+      "alpha_bounds": [
+        13,
+        3,
+        99,
+        180
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        14,
+        3,
+        98,
+        180
+      ],
+      "transparent_edge_padding_ltrb": [
+        13,
+        3,
+        29,
+        12
+      ],
+      "alpha_sha256": "48813123e75e05f9048bd0eb24233b31074a9ca2206032de2e483f0f17d5d932",
+      "png_sha256": "d67eefaaeee933cc953f25230c3c9e1369097e1d45842373355de0848526a237"
+    },
+    {
+      "index": 100,
+      "direction": 5,
+      "direction_name": "northwest",
+      "animation": "walk",
+      "animation_frame": 6,
+      "atlas_rect": [
+        512,
+        1152,
+        128,
+        192
+      ],
+      "file": "frames/hero_100.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        66.478,
+        33.272
+      ],
+      "alpha_bounds": [
+        12,
+        3,
+        99,
+        183
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        12,
+        3,
+        98,
+        183
+      ],
+      "transparent_edge_padding_ltrb": [
+        12,
+        3,
+        29,
+        9
+      ],
+      "alpha_sha256": "9fdb97b3b96f7f7b255b80ae29c530063a2d1de763766e000662b68a553157e3",
+      "png_sha256": "c2fe59fae6fb9e5bd588f5fdefb86aa615c98c0d2db14cdd0c825fd63b8c2790"
+    },
+    {
+      "index": 101,
+      "direction": 5,
+      "direction_name": "northwest",
+      "animation": "walk",
+      "animation_frame": 7,
+      "atlas_rect": [
+        640,
+        1152,
+        128,
+        192
+      ],
+      "file": "frames/hero_101.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        66.498,
+        33.815
+      ],
+      "alpha_bounds": [
+        13,
+        3,
+        98,
+        181
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        14,
+        3,
+        98,
+        181
+      ],
+      "transparent_edge_padding_ltrb": [
+        13,
+        3,
+        30,
+        11
+      ],
+      "alpha_sha256": "4825fee23f0f92245d69dab733916043efc13ec5979ba944eda27d90cd3e4314",
+      "png_sha256": "fc9c54d88f6f167286d180e42e46c70febce73e688287a835c205b330b0b5a39"
+    },
+    {
+      "index": 102,
+      "direction": 5,
+      "direction_name": "northwest",
+      "animation": "attack",
+      "animation_frame": 0,
+      "atlas_rect": [
+        768,
+        1152,
+        128,
+        192
+      ],
+      "file": "frames/hero_102.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        66.951,
+        34.704
+      ],
+      "alpha_bounds": [
+        17,
+        3,
+        98,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        18,
+        3,
+        98,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        17,
+        3,
+        30,
+        17
+      ],
+      "alpha_sha256": "bc4697d5b13087bb1e5e44919723da2122fd8c4eefeaf04e8353779b05f4576b",
+      "png_sha256": "209a9f014604ab7325799e1c73b0d1d22faabd1329b5c9dd43011a5ef61babde"
+    },
+    {
+      "index": 103,
+      "direction": 5,
+      "direction_name": "northwest",
+      "animation": "attack",
+      "animation_frame": 1,
+      "atlas_rect": [
+        896,
+        1152,
+        128,
+        192
+      ],
+      "file": "frames/hero_103.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        67.468,
+        35.163
+      ],
+      "alpha_bounds": [
+        18,
+        4,
+        98,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        18,
+        4,
+        98,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        18,
+        4,
+        30,
+        17
+      ],
+      "alpha_sha256": "6f89dfa04ae38986d62b66f759f515ee2729631ac481904473bfa0afac8fc9d7",
+      "png_sha256": "5a6188e5470e677a75921d82ed47b8d85ae6f7187c5520007f005dd2bb0ab8cf"
+    },
+    {
+      "index": 104,
+      "direction": 5,
+      "direction_name": "northwest",
+      "animation": "attack",
+      "animation_frame": 2,
+      "atlas_rect": [
+        1024,
+        1152,
+        128,
+        192
+      ],
+      "file": "frames/hero_104.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        65.76,
+        33.667
+      ],
+      "alpha_bounds": [
+        17,
+        3,
+        98,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        17,
+        3,
+        98,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        17,
+        3,
+        30,
+        17
+      ],
+      "alpha_sha256": "851b5dedc178b7e790736ddc7d3a1a3a4fefebd0e8c9c2a4ccb24c74de7f753a",
+      "png_sha256": "8b521697a4c3c2d5e7e613162c40d14f044982f74116976f14f2a879453c09af"
+    },
+    {
+      "index": 105,
+      "direction": 5,
+      "direction_name": "northwest",
+      "animation": "attack",
+      "animation_frame": 3,
+      "atlas_rect": [
+        1152,
+        1152,
+        128,
+        192
+      ],
+      "file": "frames/hero_105.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        64.416,
+        32.432
+      ],
+      "alpha_bounds": [
+        15,
+        3,
+        98,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        15,
+        4,
+        98,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        15,
+        3,
+        30,
+        17
+      ],
+      "alpha_sha256": "e658821497b4eba967f1da84de1a7b6a1711ffc5db5c9b932832a7132639beff",
+      "png_sha256": "4f3b965486343426e89dd3e355496901b50bdbb676947709c9f37334f4439875"
+    },
+    {
+      "index": 106,
+      "direction": 5,
+      "direction_name": "northwest",
+      "animation": "attack",
+      "animation_frame": 4,
+      "atlas_rect": [
+        1280,
+        1152,
+        128,
+        192
+      ],
+      "file": "frames/hero_106.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        65.534,
+        33.417
+      ],
+      "alpha_bounds": [
+        16,
+        3,
+        98,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        16,
+        4,
+        97,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        16,
+        3,
+        30,
+        17
+      ],
+      "alpha_sha256": "8132b66d6075a5ee6cbc8cd7843636ea3a9f5cbdf04ae712b282ab473ee9430d",
+      "png_sha256": "232c0c4d38dff3f21ebd224999efdc1f13ec747077bfaad5f2717cbf436e843d"
+    },
+    {
+      "index": 107,
+      "direction": 5,
+      "direction_name": "northwest",
+      "animation": "attack",
+      "animation_frame": 5,
+      "atlas_rect": [
+        1408,
+        1152,
+        128,
+        192
+      ],
+      "file": "frames/hero_107.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        66.543,
+        34.336
+      ],
+      "alpha_bounds": [
+        17,
+        3,
+        98,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        17,
+        3,
+        98,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        17,
+        3,
+        30,
+        17
+      ],
+      "alpha_sha256": "52c6a02ba3f9da47021683fa84df1a22c5aa6c368c62cb338c2d5217e13a47ec",
+      "png_sha256": "5e6675630a72633bfc05823ccb80dd3f04437507d490940d2ef2c750b6429a00"
+    },
+    {
+      "index": 108,
+      "direction": 6,
+      "direction_name": "north",
+      "animation": "idle",
+      "animation_frame": 0,
+      "atlas_rect": [
+        1536,
+        1152,
+        128,
+        192
+      ],
+      "file": "frames/hero_108.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        64.0,
+        35.199
+      ],
+      "alpha_bounds": [
+        17,
+        24,
+        116,
+        170
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        17,
+        24,
+        116,
+        169
+      ],
+      "transparent_edge_padding_ltrb": [
+        17,
+        24,
+        12,
+        22
+      ],
+      "alpha_sha256": "bc2449bf80d85b35513f3513c4df0f8e987953f611cd1620271767cffdf27bd9",
+      "png_sha256": "fdb1182508fb8c2060eb23e5e4527af93b13058f3826694b678306f22c70d5f1"
+    },
+    {
+      "index": 109,
+      "direction": 6,
+      "direction_name": "north",
+      "animation": "idle",
+      "animation_frame": 1,
+      "atlas_rect": [
+        1664,
+        1152,
+        128,
+        192
+      ],
+      "file": "frames/hero_109.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        64.0,
+        34.36
+      ],
+      "alpha_bounds": [
+        17,
+        24,
+        116,
+        170
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        17,
+        24,
+        116,
+        169
+      ],
+      "transparent_edge_padding_ltrb": [
+        17,
+        24,
+        12,
+        22
+      ],
+      "alpha_sha256": "5b822f02fc5dc99fda953af25f67c194a2376fa7f901aff485068f8c6c869b94",
+      "png_sha256": "42c2fcebfb078e93d1ef299aa632d17d9d5745f031f3ba4472f1c30c7fe916e3"
+    },
+    {
+      "index": 110,
+      "direction": 6,
+      "direction_name": "north",
+      "animation": "idle",
+      "animation_frame": 2,
+      "atlas_rect": [
+        1792,
+        1152,
+        128,
+        192
+      ],
+      "file": "frames/hero_110.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        64.0,
+        35.199
+      ],
+      "alpha_bounds": [
+        17,
+        24,
+        116,
+        170
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        17,
+        24,
+        116,
+        169
+      ],
+      "transparent_edge_padding_ltrb": [
+        17,
+        24,
+        12,
+        22
+      ],
+      "alpha_sha256": "bc2449bf80d85b35513f3513c4df0f8e987953f611cd1620271767cffdf27bd9",
+      "png_sha256": "b35cc300a28cf871f282231ac5f2ae964d94c189816596ddbebc2e0a2319f7d6"
+    },
+    {
+      "index": 111,
+      "direction": 6,
+      "direction_name": "north",
+      "animation": "idle",
+      "animation_frame": 3,
+      "atlas_rect": [
+        1920,
+        1152,
+        128,
+        192
+      ],
+      "file": "frames/hero_111.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        64.0,
+        36.044
+      ],
+      "alpha_bounds": [
+        17,
+        24,
+        116,
+        170
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        17,
+        25,
+        116,
+        169
+      ],
+      "transparent_edge_padding_ltrb": [
+        17,
+        24,
+        12,
+        22
+      ],
+      "alpha_sha256": "c85c9a0b1077dbf525d776b3abb67fb9c500a8a4307c0dd1b7e6ef5788ebe2fe",
+      "png_sha256": "4eb0d8144186c1f0c6ecd233cf8632a8a991a6c55ca07b7a466b4d16e13bd58a"
+    },
+    {
+      "index": 112,
+      "direction": 6,
+      "direction_name": "north",
+      "animation": "walk",
+      "animation_frame": 0,
+      "atlas_rect": [
+        0,
+        1344,
+        128,
+        192
+      ],
+      "file": "frames/hero_112.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        64.0,
+        35.199
+      ],
+      "alpha_bounds": [
+        17,
+        24,
+        116,
+        170
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        17,
+        24,
+        116,
+        169
+      ],
+      "transparent_edge_padding_ltrb": [
+        17,
+        24,
+        12,
+        22
+      ],
+      "alpha_sha256": "c133c336dacd97ed8fa97b3ee0e6a10e4c96de7c6778d1c0bf612c2b0d1abff9",
+      "png_sha256": "a2ce8f289dc539687739eb531e27a3d1f12ab26af156521ed653f2467434c920"
+    },
+    {
+      "index": 113,
+      "direction": 6,
+      "direction_name": "north",
+      "animation": "walk",
+      "animation_frame": 1,
+      "atlas_rect": [
+        128,
+        1344,
+        128,
+        192
+      ],
+      "file": "frames/hero_113.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        64.064,
+        34.641
+      ],
+      "alpha_bounds": [
+        17,
+        23,
+        116,
+        174
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        17,
+        23,
+        115,
+        173
+      ],
+      "transparent_edge_padding_ltrb": [
+        17,
+        23,
+        12,
+        18
+      ],
+      "alpha_sha256": "5a75d1206e9b57ebb3d952acec483f7eb13f068757ae0d2bff79dd81b9f2b77a",
+      "png_sha256": "85874d01788bc118f5dc2de4fbfbbe5503215797f50fbad94b8e0de8af497e64"
+    },
+    {
+      "index": 114,
+      "direction": 6,
+      "direction_name": "north",
+      "animation": "walk",
+      "animation_frame": 2,
+      "atlas_rect": [
+        256,
+        1344,
+        128,
+        192
+      ],
+      "file": "frames/hero_114.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        64.09,
+        34.083
+      ],
+      "alpha_bounds": [
+        17,
+        23,
+        116,
+        179
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        17,
+        23,
+        115,
+        178
+      ],
+      "transparent_edge_padding_ltrb": [
+        17,
+        23,
+        12,
+        13
+      ],
+      "alpha_sha256": "293c9167cd3c2cdb816a2bcd02104dbc6dcc182e2b6884917f2a7c5670f2ff08",
+      "png_sha256": "0806ef52e2e3b64c94cdebf7d5bf46e64084a29a403daed9903c685fe1115e9d"
+    },
+    {
+      "index": 115,
+      "direction": 6,
+      "direction_name": "north",
+      "animation": "walk",
+      "animation_frame": 3,
+      "atlas_rect": [
+        384,
+        1344,
+        128,
+        192
+      ],
+      "file": "frames/hero_115.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        64.064,
+        34.641
+      ],
+      "alpha_bounds": [
+        17,
+        23,
+        116,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        17,
+        23,
+        115,
+        174
+      ],
+      "transparent_edge_padding_ltrb": [
+        17,
+        23,
+        12,
+        17
+      ],
+      "alpha_sha256": "dbda01cc5c98d7c839869b27fad8c0be53d184b4c46cdf02a63580ab5c7eb3ee",
+      "png_sha256": "8f6870325c03819f51355be1c8f88cfb26d12dca914391265c0ed11c586dfbfb"
+    },
+    {
+      "index": 116,
+      "direction": 6,
+      "direction_name": "north",
+      "animation": "walk",
+      "animation_frame": 4,
+      "atlas_rect": [
+        512,
+        1344,
+        128,
+        192
+      ],
+      "file": "frames/hero_116.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        64.0,
+        35.199
+      ],
+      "alpha_bounds": [
+        17,
+        24,
+        116,
+        168
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        17,
+        24,
+        116,
+        168
+      ],
+      "transparent_edge_padding_ltrb": [
+        17,
+        24,
+        12,
+        24
+      ],
+      "alpha_sha256": "a6a897e0a05cb5fe6562c8a1384d054613a754e8496eda32c2028e32e559b408",
+      "png_sha256": "dd8468a8833c6a91129f5d5c69709e7527614d6ee235011df82157bfaefe6720"
+    },
+    {
+      "index": 117,
+      "direction": 6,
+      "direction_name": "north",
+      "animation": "walk",
+      "animation_frame": 5,
+      "atlas_rect": [
+        640,
+        1344,
+        128,
+        192
+      ],
+      "file": "frames/hero_117.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        63.936,
+        34.641
+      ],
+      "alpha_bounds": [
+        17,
+        24,
+        116,
+        178
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        18,
+        24,
+        116,
+        178
+      ],
+      "transparent_edge_padding_ltrb": [
+        17,
+        24,
+        12,
+        14
+      ],
+      "alpha_sha256": "a4d5947fb84e7ed6784f3c7335cf8dc024c1899b85541e015e082ac1319bb82e",
+      "png_sha256": "a34d71ccc298cd56592c56c9178e3fcd959931142cd45bce2b22cec4400c5e7f"
+    },
+    {
+      "index": 118,
+      "direction": 6,
+      "direction_name": "north",
+      "animation": "walk",
+      "animation_frame": 6,
+      "atlas_rect": [
+        768,
+        1344,
+        128,
+        192
+      ],
+      "file": "frames/hero_118.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        63.91,
+        34.083
+      ],
+      "alpha_bounds": [
+        18,
+        23,
+        117,
+        183
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        18,
+        24,
+        117,
+        183
+      ],
+      "transparent_edge_padding_ltrb": [
+        18,
+        23,
+        11,
+        9
+      ],
+      "alpha_sha256": "9357472dc3271798035eb2afc01bf97cef0ba7463898b1c5daa5505d0e9d2480",
+      "png_sha256": "6add4cc6d2ea75f6bd1334bc67c5863bcabf5271c1af042699009104a1f31fd1"
+    },
+    {
+      "index": 119,
+      "direction": 6,
+      "direction_name": "north",
+      "animation": "walk",
+      "animation_frame": 7,
+      "atlas_rect": [
+        896,
+        1344,
+        128,
+        192
+      ],
+      "file": "frames/hero_119.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        63.936,
+        34.641
+      ],
+      "alpha_bounds": [
+        17,
+        24,
+        116,
+        179
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        18,
+        24,
+        116,
+        179
+      ],
+      "transparent_edge_padding_ltrb": [
+        17,
+        24,
+        12,
+        13
+      ],
+      "alpha_sha256": "13bcc5e3c7b0af48aab60add3e17a6ac128657e5ed7e38d782400ab9675374a2",
+      "png_sha256": "e7e48bba0cfcc949ca72189658bd9e426dbae05405afed98c262b7d9f25204bf"
+    },
+    {
+      "index": 120,
+      "direction": 6,
+      "direction_name": "north",
+      "animation": "attack",
+      "animation_frame": 0,
+      "atlas_rect": [
+        1024,
+        1344,
+        128,
+        192
+      ],
+      "file": "frames/hero_120.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        63.982,
+        35.699
+      ],
+      "alpha_bounds": [
+        17,
+        24,
+        116,
+        170
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        17,
+        25,
+        116,
+        169
+      ],
+      "transparent_edge_padding_ltrb": [
+        17,
+        24,
+        12,
+        22
+      ],
+      "alpha_sha256": "9f2444366fdb9c3b38f82dbe4310f8346fcc977271349db764df0f0d22c1aab8",
+      "png_sha256": "800ac87c579e32988f06e858d3a8101ab05c51ff9e7418289b00864ea36c3240"
+    },
+    {
+      "index": 121,
+      "direction": 6,
+      "direction_name": "north",
+      "animation": "attack",
+      "animation_frame": 1,
+      "atlas_rect": [
+        1152,
+        1344,
+        128,
+        192
+      ],
+      "file": "frames/hero_121.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        63.969,
+        36.329
+      ],
+      "alpha_bounds": [
+        17,
+        25,
+        116,
+        170
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        18,
+        25,
+        116,
+        169
+      ],
+      "transparent_edge_padding_ltrb": [
+        17,
+        25,
+        12,
+        22
+      ],
+      "alpha_sha256": "a43655e7fc83f3a90d61e5ed7dd8c6d66ffa0bc87b9f74eaeb60cb08878a4444",
+      "png_sha256": "b5a53f417ec244a6fcb0b06eb51bddec0f842113379277ede35e9b57adec8113"
+    },
+    {
+      "index": 122,
+      "direction": 6,
+      "direction_name": "north",
+      "animation": "attack",
+      "animation_frame": 2,
+      "atlas_rect": [
+        1280,
+        1344,
+        128,
+        192
+      ],
+      "file": "frames/hero_122.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        64.01,
+        34.267
+      ],
+      "alpha_bounds": [
+        17,
+        24,
+        116,
+        170
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        17,
+        24,
+        116,
+        169
+      ],
+      "transparent_edge_padding_ltrb": [
+        17,
+        24,
+        12,
+        22
+      ],
+      "alpha_sha256": "f4c9007eded86072f624d8bd868ba46d1cc6ff8a28e43de7eace69b561071d6b",
+      "png_sha256": "39f5d0da127b95287306cb8578edfc80cd4c5414596914ebcd829c4238ca8f90"
+    },
+    {
+      "index": 123,
+      "direction": 6,
+      "direction_name": "north",
+      "animation": "attack",
+      "animation_frame": 3,
+      "atlas_rect": [
+        1408,
+        1344,
+        128,
+        192
+      ],
+      "file": "frames/hero_123.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        64.123,
+        32.615
+      ],
+      "alpha_bounds": [
+        16,
+        23,
+        116,
+        175
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        17,
+        23,
+        116,
+        175
+      ],
+      "transparent_edge_padding_ltrb": [
+        16,
+        23,
+        12,
+        17
+      ],
+      "alpha_sha256": "09ac192f9eda535ef2a2ef405feb83f48388fbc171efd1424a834abe72d2b59b",
+      "png_sha256": "1915bfd28178f5ef4580fbc3ad32ae9e6cefe5f2697f3b8416e9111ae313ea1f"
+    },
+    {
+      "index": 124,
+      "direction": 6,
+      "direction_name": "north",
+      "animation": "attack",
+      "animation_frame": 4,
+      "atlas_rect": [
+        1536,
+        1344,
+        128,
+        192
+      ],
+      "file": "frames/hero_124.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        64.064,
+        33.959
+      ],
+      "alpha_bounds": [
+        17,
+        23,
+        116,
+        170
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        17,
+        23,
+        116,
+        169
+      ],
+      "transparent_edge_padding_ltrb": [
+        17,
+        23,
+        12,
+        22
+      ],
+      "alpha_sha256": "adc1bf067a12870d1645cbea909efcda906a629c0d046266ec4f5efd38a7b75a",
+      "png_sha256": "02aba6317573b96143d962d92db0f801f6e19de5558a7387b17bd286768b3fee"
+    },
+    {
+      "index": 125,
+      "direction": 6,
+      "direction_name": "north",
+      "animation": "attack",
+      "animation_frame": 5,
+      "atlas_rect": [
+        1664,
+        1344,
+        128,
+        192
+      ],
+      "file": "frames/hero_125.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        64.0,
+        35.199
+      ],
+      "alpha_bounds": [
+        17,
+        24,
+        116,
+        170
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        17,
+        24,
+        116,
+        169
+      ],
+      "transparent_edge_padding_ltrb": [
+        17,
+        24,
+        12,
+        22
+      ],
+      "alpha_sha256": "bc2449bf80d85b35513f3513c4df0f8e987953f611cd1620271767cffdf27bd9",
+      "png_sha256": "0018c058ba28ffffc42b24a95cc7a41822580d043e4e4a5077b379dde84b45b9"
+    },
+    {
+      "index": 126,
+      "direction": 7,
+      "direction_name": "northeast",
+      "animation": "idle",
+      "animation_frame": 0,
+      "atlas_rect": [
+        1792,
+        1344,
+        128,
+        192
+      ],
+      "file": "frames/hero_126.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        61.457,
+        34.336
+      ],
+      "alpha_bounds": [
+        29,
+        31,
+        119,
+        171
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        29,
+        31,
+        119,
+        171
+      ],
+      "transparent_edge_padding_ltrb": [
+        29,
+        31,
+        9,
+        21
+      ],
+      "alpha_sha256": "e4dd8eddbc0c516b01763c81a623ded74b00ffc5a8ad8d743d409a7a1179d105",
+      "png_sha256": "cf8e3a7683898904d10c4a55235bdb82812076e283c56f2e21cc04a17d2c2a59"
+    },
+    {
+      "index": 127,
+      "direction": 7,
+      "direction_name": "northeast",
+      "animation": "idle",
+      "animation_frame": 1,
+      "atlas_rect": [
+        1920,
+        1344,
+        128,
+        192
+      ],
+      "file": "frames/hero_127.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        62.16,
+        33.736
+      ],
+      "alpha_bounds": [
+        29,
+        31,
+        119,
+        171
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        29,
+        31,
+        119,
+        171
+      ],
+      "transparent_edge_padding_ltrb": [
+        29,
+        31,
+        9,
+        21
+      ],
+      "alpha_sha256": "5c26625cf4cdcc5d4c8e6c1ee1953f7ab7b1e1db5e3339209dad9d27aa5481eb",
+      "png_sha256": "cfaa692709a5ab7febecab0ad8acb07b8cc9185b783280c1e8051c6e2ef877e3"
+    },
+    {
+      "index": 128,
+      "direction": 7,
+      "direction_name": "northeast",
+      "animation": "idle",
+      "animation_frame": 2,
+      "atlas_rect": [
+        0,
+        1536,
+        128,
+        192
+      ],
+      "file": "frames/hero_128.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        61.457,
+        34.336
+      ],
+      "alpha_bounds": [
+        29,
+        31,
+        119,
+        171
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        29,
+        31,
+        119,
+        171
+      ],
+      "transparent_edge_padding_ltrb": [
+        29,
+        31,
+        9,
+        21
+      ],
+      "alpha_sha256": "e4dd8eddbc0c516b01763c81a623ded74b00ffc5a8ad8d743d409a7a1179d105",
+      "png_sha256": "9aadbbf2e7eef47f87a1aef40e8eccda4e8c20c4cf4ce5a1376489e75b0e0d62"
+    },
+    {
+      "index": 129,
+      "direction": 7,
+      "direction_name": "northeast",
+      "animation": "idle",
+      "animation_frame": 3,
+      "atlas_rect": [
+        128,
+        1536,
+        128,
+        192
+      ],
+      "file": "frames/hero_129.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        60.755,
+        34.943
+      ],
+      "alpha_bounds": [
+        29,
+        31,
+        119,
+        171
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        29,
+        32,
+        119,
+        171
+      ],
+      "transparent_edge_padding_ltrb": [
+        29,
+        31,
+        9,
+        21
+      ],
+      "alpha_sha256": "984d0d03ee6b36e740f9488fccc29ccb3da0f9557f1274033ec59a446f763f9c",
+      "png_sha256": "79466f99efa6b27bf160ee9d86baceb4f32a186e1823f4490dc0b3df5a20a677"
+    },
+    {
+      "index": 130,
+      "direction": 7,
+      "direction_name": "northeast",
+      "animation": "walk",
+      "animation_frame": 0,
+      "atlas_rect": [
+        256,
+        1536,
+        128,
+        192
+      ],
+      "file": "frames/hero_130.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        61.457,
+        34.336
+      ],
+      "alpha_bounds": [
+        29,
+        31,
+        119,
+        170
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        29,
+        31,
+        119,
+        169
+      ],
+      "transparent_edge_padding_ltrb": [
+        29,
+        31,
+        9,
+        22
+      ],
+      "alpha_sha256": "ccb2e8ddac3ea086a1339ca311e6b75ca806984bf0d8499c6c816d6b223cecff",
+      "png_sha256": "ce14cf16e197f9e10649317e4824378352052e997b2358dbb79e233cda38e150"
+    },
+    {
+      "index": 131,
+      "direction": 7,
+      "direction_name": "northeast",
+      "animation": "walk",
+      "animation_frame": 1,
+      "atlas_rect": [
+        384,
+        1536,
+        128,
+        192
+      ],
+      "file": "frames/hero_131.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        61.502,
+        33.815
+      ],
+      "alpha_bounds": [
+        28,
+        31,
+        122,
+        177
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        29,
+        31,
+        122,
+        177
+      ],
+      "transparent_edge_padding_ltrb": [
+        28,
+        31,
+        6,
+        15
+      ],
+      "alpha_sha256": "70295d07acf34d4cbc24a8dd1300f3669fe8ed48abca360d2518b716c2d41481",
+      "png_sha256": "b11ea054643c9a6764f01364c12e32cbce9ec136b2168c52ab892846cb785152"
+    },
+    {
+      "index": 132,
+      "direction": 7,
+      "direction_name": "northeast",
+      "animation": "walk",
+      "animation_frame": 2,
+      "atlas_rect": [
+        512,
+        1536,
+        128,
+        192
+      ],
+      "file": "frames/hero_132.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        61.522,
+        33.272
+      ],
+      "alpha_bounds": [
+        27,
+        30,
+        123,
+        180
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        28,
+        30,
+        123,
+        180
+      ],
+      "transparent_edge_padding_ltrb": [
+        27,
+        30,
+        5,
+        12
+      ],
+      "alpha_sha256": "f212e7c9c18d9f76571f0e674317fc86a732e475df85a86fc1a960c43176314a",
+      "png_sha256": "7b96e27776474f8380005256b16dc6375e26c4c6e8b0aa4cf8a998d3c2370ab9"
+    },
+    {
+      "index": 133,
+      "direction": 7,
+      "direction_name": "northeast",
+      "animation": "walk",
+      "animation_frame": 3,
+      "atlas_rect": [
+        640,
+        1536,
+        128,
+        192
+      ],
+      "file": "frames/hero_133.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        61.502,
+        33.815
+      ],
+      "alpha_bounds": [
+        28,
+        31,
+        122,
+        178
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        29,
+        31,
+        122,
+        178
+      ],
+      "transparent_edge_padding_ltrb": [
+        28,
+        31,
+        6,
+        14
+      ],
+      "alpha_sha256": "8bb70eb964750555b274850064a88d14db666958e53a9212cae9e8ae4352b12d",
+      "png_sha256": "182b9b77bc5da5035f79ab93dfd34a9addfa792046cc32c29cfa7a92bd891272"
+    },
+    {
+      "index": 134,
+      "direction": 7,
+      "direction_name": "northeast",
+      "animation": "walk",
+      "animation_frame": 4,
+      "atlas_rect": [
+        768,
+        1536,
+        128,
+        192
+      ],
+      "file": "frames/hero_134.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        61.457,
+        34.336
+      ],
+      "alpha_bounds": [
+        29,
+        31,
+        119,
+        171
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        29,
+        31,
+        119,
+        171
+      ],
+      "transparent_edge_padding_ltrb": [
+        29,
+        31,
+        9,
+        21
+      ],
+      "alpha_sha256": "ea3855f37602865001ae18d3de3470a349e8a4bd771889a5bc6d9b11fcb028ec",
+      "png_sha256": "97bf38578d9b6e7cc6ce7625debe85e1c91e6f84095d6b1f6052dda346f957e7"
+    },
+    {
+      "index": 135,
+      "direction": 7,
+      "direction_name": "northeast",
+      "animation": "walk",
+      "animation_frame": 5,
+      "atlas_rect": [
+        896,
+        1536,
+        128,
+        192
+      ],
+      "file": "frames/hero_135.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        61.413,
+        33.741
+      ],
+      "alpha_bounds": [
+        29,
+        30,
+        119,
+        170
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        29,
+        31,
+        118,
+        170
+      ],
+      "transparent_edge_padding_ltrb": [
+        29,
+        30,
+        9,
+        22
+      ],
+      "alpha_sha256": "7bac778edb91a28f48329088350f90fe7df8940c51817df11653863b69f0bedb",
+      "png_sha256": "a0d5239134e8b0b2ba01dbf6ee26ec18cfc9443ffc53cab98995a1d15c89cde8"
+    },
+    {
+      "index": 136,
+      "direction": 7,
+      "direction_name": "northeast",
+      "animation": "walk",
+      "animation_frame": 6,
+      "atlas_rect": [
+        1024,
+        1536,
+        128,
+        192
+      ],
+      "file": "frames/hero_136.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        61.394,
+        33.168
+      ],
+      "alpha_bounds": [
+        25,
+        29,
+        119,
+        172
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        26,
+        30,
+        119,
+        172
+      ],
+      "transparent_edge_padding_ltrb": [
+        25,
+        29,
+        9,
+        20
+      ],
+      "alpha_sha256": "1eeac397c2ee2d6e48233a2d46e969527a5486cd0dcdf2b67e94574be13e9a67",
+      "png_sha256": "e92d4ff6bc14b4d917679418ea89d3c70efd20c208f5c972cb8f6c4b92665b5e"
+    },
+    {
+      "index": 137,
+      "direction": 7,
+      "direction_name": "northeast",
+      "animation": "walk",
+      "animation_frame": 7,
+      "atlas_rect": [
+        1152,
+        1536,
+        128,
+        192
+      ],
+      "file": "frames/hero_137.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        61.413,
+        33.741
+      ],
+      "alpha_bounds": [
+        29,
+        30,
+        119,
+        170
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        29,
+        31,
+        118,
+        170
+      ],
+      "transparent_edge_padding_ltrb": [
+        29,
+        30,
+        9,
+        22
+      ],
+      "alpha_sha256": "953bbffa73b5d15b7ffda3f38cc37d4a9fc0910e81c06104c99244ed3b5ae08b",
+      "png_sha256": "f090a46da1c096d6490e4ec54dac602096f4277c9676f3dbdd9538d20b19522f"
+    },
+    {
+      "index": 138,
+      "direction": 7,
+      "direction_name": "northeast",
+      "animation": "attack",
+      "animation_frame": 0,
+      "atlas_rect": [
+        1280,
+        1536,
+        128,
+        192
+      ],
+      "file": "frames/hero_138.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        61.023,
+        34.683
+      ],
+      "alpha_bounds": [
+        29,
+        31,
+        121,
+        171
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        29,
+        32,
+        121,
+        171
+      ],
+      "transparent_edge_padding_ltrb": [
+        29,
+        31,
+        7,
+        21
+      ],
+      "alpha_sha256": "99757df13b53eb7388b0ca4ac90dd1ede7f7d963b735023d769483e2cdc52179",
+      "png_sha256": "0887aa3db8cefafae466115d1e3c645974cdc9dad43a2724f52abc3130673103"
+    },
+    {
+      "index": 139,
+      "direction": 7,
+      "direction_name": "northeast",
+      "animation": "attack",
+      "animation_frame": 1,
+      "atlas_rect": [
+        1408,
+        1536,
+        128,
+        192
+      ],
+      "file": "frames/hero_139.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        60.487,
+        35.127
+      ],
+      "alpha_bounds": [
+        29,
+        31,
+        122,
+        171
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        29,
+        32,
+        122,
+        171
+      ],
+      "transparent_edge_padding_ltrb": [
+        29,
+        31,
+        6,
+        21
+      ],
+      "alpha_sha256": "3999255acbb873b8931ace66338a10e82b78b61433045b8ae26cf3c294c09109",
+      "png_sha256": "61c73a87375d260fe7fd697e8656eba7d787d3a03c5f524d41b903fcd0b4fe17"
+    },
+    {
+      "index": 140,
+      "direction": 7,
+      "direction_name": "northeast",
+      "animation": "attack",
+      "animation_frame": 2,
+      "atlas_rect": [
+        1536,
+        1536,
+        128,
+        192
+      ],
+      "file": "frames/hero_140.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        62.254,
+        33.678
+      ],
+      "alpha_bounds": [
+        29,
+        31,
+        119,
+        171
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        29,
+        31,
+        119,
+        171
+      ],
+      "transparent_edge_padding_ltrb": [
+        29,
+        31,
+        9,
+        21
+      ],
+      "alpha_sha256": "4ffbc282c1655ca5c19cf942a4789297da19497d2af2b61da97b8e6a68ca2863",
+      "png_sha256": "ad012293e5a0d7b8c1b8824c279676a2946249dccdedf9428b7a9a890460ff49"
+    },
+    {
+      "index": 141,
+      "direction": 7,
+      "direction_name": "northeast",
+      "animation": "attack",
+      "animation_frame": 3,
+      "atlas_rect": [
+        1664,
+        1536,
+        128,
+        192
+      ],
+      "file": "frames/hero_141.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        63.758,
+        32.575
+      ],
+      "alpha_bounds": [
+        29,
+        30,
+        123,
+        179
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        29,
+        30,
+        123,
+        178
+      ],
+      "transparent_edge_padding_ltrb": [
+        29,
+        30,
+        5,
+        13
+      ],
+      "alpha_sha256": "b31d5afa1bac28c84d165e751935c4665fc51998f7a2910d96a14b7ceba1631e",
+      "png_sha256": "3b83d2398c28cba744b48a7748c16e7ba55858070759aaaabe57d7dd00aa3bda"
+    },
+    {
+      "index": 142,
+      "direction": 7,
+      "direction_name": "northeast",
+      "animation": "attack",
+      "animation_frame": 4,
+      "atlas_rect": [
+        1792,
+        1536,
+        128,
+        192
+      ],
+      "file": "frames/hero_142.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        62.556,
+        33.49
+      ],
+      "alpha_bounds": [
+        29,
+        31,
+        121,
+        172
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        29,
+        31,
+        120,
+        172
+      ],
+      "transparent_edge_padding_ltrb": [
+        29,
+        31,
+        7,
+        20
+      ],
+      "alpha_sha256": "69dfab425c893234f958b20bdd971ebce0f0221725f3294efaa6bd1d07bb92cf",
+      "png_sha256": "5324acd0355ba999826fe93ecd9fa22072e12c5bf9f5a34a5762c79cd94f7058"
+    },
+    {
+      "index": 143,
+      "direction": 7,
+      "direction_name": "northeast",
+      "animation": "attack",
+      "animation_frame": 5,
+      "atlas_rect": [
+        1920,
+        1536,
+        128,
+        192
+      ],
+      "file": "frames/hero_143.png",
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        61.457,
+        34.336
+      ],
+      "alpha_bounds": [
+        29,
+        31,
+        119,
+        171
+      ],
+      "solid_alpha_bounds_threshold_8": [
+        29,
+        31,
+        119,
+        171
+      ],
+      "transparent_edge_padding_ltrb": [
+        29,
+        31,
+        9,
+        21
+      ],
+      "alpha_sha256": "e4dd8eddbc0c516b01763c81a623ded74b00ffc5a8ad8d743d409a7a1179d105",
+      "png_sha256": "ff7b6ff249e00fc7c1ccafee8352330dcc4f0d500ed6d63cce4c48eb3e88e43f"
+    }
+  ],
+  "atlas_file": "hero_atlas.png",
+  "atlas_sha256": "4d7adbfb94471611b88d241a86f7097b8ba431409006fdbf420915b349fd4387",
+  "bounds_semantics": "[left, top, right_exclusive, bottom_exclusive] in frame-local pixels; alpha_bounds includes every nonzero-alpha pixel",
+  "validation": {
+    "frames": 144,
+    "unique_pngs": 144,
+    "all_frames_rgba": true,
+    "constant_foot_anchor": [
+      64,
+      158
+    ],
+    "minimum_transparent_edge_padding_ltrb": [
+      5,
+      2,
+      5,
+      3
+    ],
+    "aggregate_alpha_bounds": [
+      5,
+      2,
+      123,
+      189
+    ],
+    "median_full_alpha_height": 152.0,
+    "clipped_or_insufficient_padding": [],
+    "renderer": "Cycles CPU, 40 samples, no unavailable denoiser",
+    "no_baked_ground_or_shadow": true,
+    "atlas_crop_pixel_equality": true
+  }
+}

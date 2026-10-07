@@ -1,0 +1,61 @@
+{
+  "baseline": "181216b77b4f19078e5e33f6fd1b108afea828ca",
+  "required_main_parent": "89739c40ea6ebb183ebf59c990302ca0156d4aaa",
+  "source_sha256": {
+    "scripts/main.gd": "1814f3d34a1ac518fe5442ee5362395c80c3a2231df5a64baaca868a64f9fd0c",
+    "scripts/visuals/actor_sprite_catalog.gd": "3ed12d6fd1a7c803a4ef1e8c61e3c02115d07ab960a1d5c346724da9df499922",
+    "scripts/visuals/actor_visual.gd": "0b2d81ce5272b4329b9e026dbe8553aebba57fbb32da3bb9fd761706537cb7ec",
+    "scripts/visuals/arena_visuals.gd": "e92c78421f38a5f14fadaefc4af35c3e03b6d469840ec914dd7d97ad528102a5",
+    "scripts/visuals/dimensional_prop_manager.gd": "f69b8525ba7ee5ed402b83ba26af017d18bcea26f845cab5e50c80da3c204687",
+    "scripts/visuals/fantasy_environment.gd": "9cffb2994a36ff556c075216e08a0f6c498bd46da7939ca01ab643e22b8dea8c",
+    "scripts/visuals/foreground_arena_layer.gd": "e77d765a02ef384894912aa34ea95fb4575e14bc1102d783814ed23dfde27ead",
+    "scripts/visuals/retained_actor_layer.gd": "c0d16f72126e3dfcbe5e5694ed76d029dd6ee21423b5e0dc2635d45a124e0d86",
+    "scripts/visuals/world_markers.gd": "855608f83d9d01770a7831dae2fad310959318508670aef017d5e067905837a2"
+  },
+  "asset_sha256": {
+    "assets/actors/crawler_atlas.json": "b563f97ab76b2f28d37255b89ceee5724e26a8c159bc1d3b7812a29d4ab2cf91",
+    "assets/actors/crawler_atlas.png": "6041778de3be8806873d18c9a8ca21e930aaec32a81386fcb0be181be24c242c",
+    "assets/actors/crawler_atlas.png.import": "fffdadefa40702ff990f93fdffcb7f409c5462a15774fecdbe42bbfb4a7c52d0",
+    "assets/actors/hero_atlas.json": "16012509ce8b5a3978150848c733d31bea5fa8942116341529d86904d34c561a",
+    "assets/actors/hero_atlas.png": "4d7adbfb94471611b88d241a86f7097b8ba431409006fdbf420915b349fd4387",
+    "assets/actors/hero_atlas.png.import": "5059d6c981db4b8a83a4e1231ff65522de0ec1603bdc66eb8db255fea6da7a11",
+    "assets/environment/dimensional_manifest.json": "61754d79ed574b100ff4c69693ef040c1691e09868118950525816338d0a38ba",
+    "assets/environment/garden_ground.png": "878aa626c418bccc39999a934cb549b04e33df606347ad17c6e455f32858af74",
+    "assets/environment/garden_ground.png.import": "afc6f92d467f5ebfd1bd69dfcc1ae6c09a8b190fec07f38e6827bbdee7421413",
+    "assets/environment/ginkgo_tree.png": "e38fe8a27650bd1d9bbade078dec124abccdbe2b0e766217987c73dbe58a618e",
+    "assets/environment/ginkgo_tree.png.import": "52a9480b77d81c04e6759f991b8258158ef3d3c5067bfd7d8c4c5373389e37b1",
+    "assets/environment/ruin_wall.png": "0757e10859efb0817a46d7af1617019d70dfac06f119bac2809b1d8b765cce49",
+    "assets/environment/ruin_wall.png.import": "3ca3dec5939bd115cac0e4c25630af85cc0134fe805301de63a04360788a7bc7",
+    "assets/environment/stone_planter.png": "78a28e737d84dac5442c6b8e73faa3bc7351d6a62ba1b7e06199a4837c64277c",
+    "assets/environment/stone_planter.png.import": "12321850592de3a6e31a117d1ccbb3943be34f8a3699eb7617647ae4b6c07807"
+  },
+  "existing_actor_checks": 7914,
+  "existing_prop_checks": 15,
+  "new_test_runs_by_integrator": 0,
+  "tested_actor_inputs_all_match": true,
+  "main_methods_total": 162,
+  "main_methods_unchanged": 158,
+  "changed_main_methods": [
+    "_ready",
+    "_process",
+    "_draw",
+    "_refresh_world_geometry"
+  ],
+  "runtime_scope": "Presentation only: no authoritative collision, movement, combat, RNG, rewards, schema or save transaction edits",
+  "last_art_only_change": "Route polygon/edge color alpha lowered; route vertices and collision geometry unchanged; fresh native screenshot observed by root",
+  "native_review": {
+    "mode": "Actual Main broken_ruins entry, walking and automatic kills; Linux cloud screenshot, not FPS measurement",
+    "delivered_utc": "2026-10-07T12:55:00Z",
+    "library_id": "libfile_9fa6f7a7121081918bb82e8087851a04",
+    "screenshot_local_path": "/workspace/scratch/a51485f153de/dimensional-art-gameplay.png",
+    "screenshot_sha256": "c198d2ab8a4f6d648fc89b5cdb40f2cf812e999b11bcfeb36fb105eec523b70a",
+    "screenshot_in_runtime_assets": false
+  },
+  "limits": [
+    "First slice: hero, crawler, wall, planter, ginkgo tree and ground",
+    "Other monster families retain fallback artwork",
+    "Hero atlas is not a complete equipment appearance system",
+    "No FPS improvement claim or Windows validation",
+    "Missing assets are cached per process; final preview used a fresh process"
+  ]
+}

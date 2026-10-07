@@ -8,6 +8,8 @@ const VisualCueRuntime = preload("res://scripts/visuals/combat_cues.gd")
 const Visuals = preload("res://scripts/visuals/arena_visuals.gd")
 const RetainedActors = preload("res://scripts/visuals/retained_actor_layer.gd")
 const ForegroundLayer = preload("res://scripts/visuals/foreground_arena_layer.gd")
+var world_depth: Node2D
+var dimensional_props: RefCounted
 var retained_actors: Node2D
 var foreground_layer: Node2D
 # Diagnostic reference path; runtime state and simulation do not consult it.
@@ -192,14 +194,18 @@ func _ready() -> void:
 	state.changed.connect(_on_build_changed)
 	static_environment = preload("res://scripts/visuals/static_arena_layer.gd").new()
 	static_environment.name = "StaticArenaBackground"
+	static_environment.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	static_environment.z_index = -1
 	static_environment.show_behind_parent = true
 	static_environment.configure(ARENA, _font)
 	add_child(static_environment)
 	View.setup_camera(self, ARENA)
 	retained_actors = RetainedActors.new()
-	retained_actors.name = "RetainedActors"
-	add_child(retained_actors)
+	retained_actors.name = "WorldDepth"
+	world_depth = retained_actors
+	add_child(world_depth)
+	if ResourceLoader.exists("res://scripts/visuals/dimensional_prop_manager.gd"):
+		dimensional_props = load("res://scripts/visuals/dimensional_prop_manager.gd").new()
 	foreground_layer = ForegroundLayer.new()
 	foreground_layer.name = "ForegroundWorld"
 	foreground_layer.source = self
@@ -574,6 +580,8 @@ func _process(delta: float) -> void:
 		return
 	if not alive or hud.is_blocking():
 		return
+	# Presentation time also advances in town; paused/dead frames stay still.
+	if is_instance_valid(retained_actors): retained_actors.advance(delta)
 	# Fixed world observations keep moving-target / return aiming consistent.
 	_simulation_accumulator = minf(0.25, _simulation_accumulator + delta)
 	while _simulation_accumulator >= 1.0 / 60.0 and alive:
@@ -2325,6 +2333,7 @@ func _draw() -> void:
 		foreground_layer.visible = use_retained_actors
 		if use_retained_actors:
 			retained_actors.sync(self)
+			if dimensional_props != null: dimensional_props.update_player(player_pos)
 			foreground_layer.queue_redraw()
 			Visuals.draw_before_actors(self, visual_settings, static_environment == null)
 		else: Visuals.draw_scene(self, visual_settings, static_environment == null)
@@ -2503,9 +2512,14 @@ func _refresh_world_geometry() -> void:
 	var configured: bool = _geometry.configure_exploration(id,ARENA) if exploring else _geometry.configure(id,ARENA)
 	assert(configured,"Current map must have an authoritative geometry definition")
 	if not configured: return
+	# Scenery receives a display-only snapshot. Its coverage metadata never enters
+	# the authoritative geometry used for collision, paths, projectiles or saves.
+	var presentation_geometry: Dictionary = world_geometry()
+	if dimensional_props != null and is_instance_valid(world_depth):
+		presentation_geometry = dimensional_props.configure(world_depth, presentation_geometry)
 	if is_instance_valid(static_environment) and static_environment.has_method("set_geometry"):
 		static_environment.configure(ARENA,_font)
-		static_environment.set_geometry(world_geometry())
+		static_environment.set_geometry(presentation_geometry)
 func _terrain_visible(from: Vector2, to: Vector2) -> bool:
 	return not _geometry.has_walls() or _geometry.visible(from,to)
 

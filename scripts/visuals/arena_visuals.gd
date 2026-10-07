@@ -214,7 +214,7 @@ static func draw_after_actors(arena:Node2D,preferences:Settings)->void:
 	for shot: Dictionary in arena.projectiles:
 		draw_projectile(arena,shot,preferences)
 	stamp = _diagnostic_mark("projectiles",stamp)
-	draw_player(arena,preferences)
+	# Player body is a foot-sorted WorldDepth actor; only status overlays remain here.
 	if arena.has_method("burn_statuses"): BurnArt.draw(arena, arena.burn_statuses(), preferences.effects_level)
 	if arena.has_method("shock_statuses"): ShockArt.draw(arena, arena.shock_statuses(), preferences.effects_level)
 	if arena.has_method("freeze_statuses"): FreezeArt.draw(arena, arena.freeze_statuses(), preferences.effects_level)

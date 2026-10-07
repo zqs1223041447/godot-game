@@ -1,0 +1,203 @@
+{
+  "wall": {
+    "path": "assets/environment/ruin_wall.png",
+    "file": "ruin_wall.png",
+    "world_footprint": [
+      96,
+      64
+    ],
+    "pixels_per_world": 2,
+    "canvas_px": [
+      512,
+      512
+    ],
+    "anchor_px": [
+      256.0,
+      439.99979
+    ],
+    "base_center_anchor": [
+      256.0,
+      375.9998
+    ],
+    "visual_bounds": [
+      152,
+      232,
+      353,
+      439
+    ],
+    "visual_bounds_format": "[left,top,right_exclusive,bottom_exclusive] alpha>1/255",
+    "ground_corners_px": [
+      [
+        160.00002,
+        439.99979
+      ],
+      [
+        352.0,
+        439.99979
+      ],
+      [
+        352.0,
+        311.99982
+      ],
+      [
+        160.00002,
+        311.99982
+      ]
+    ],
+    "height_world": 70,
+    "mesh_bounds_world": [
+      [
+        -51.64682,
+        -41.8585,
+        -0.12311
+      ],
+      [
+        48.00253,
+        39.11687,
+        71.87877
+      ]
+    ],
+    "camera_ortho_scale": 12.800002098083496,
+    "fully_transparent_pixels": 222612,
+    "partially_transparent_pixels": 1703,
+    "min_alpha": 0.0,
+    "max_alpha": 1.0,
+    "anchor_definition": "Projection of ground footprint front-edge center; this anchor is intended for depth sorting. base_center_anchor is provided for footprint-centered placement.",
+    "sha256": "0757e10859efb0817a46d7af1617019d70dfac06f119bac2809b1d8b765cce49",
+    "texture": "res://assets/environment/ruin_wall.png"
+  },
+  "planter": {
+    "path": "assets/environment/stone_planter.png",
+    "file": "stone_planter.png",
+    "world_footprint": [
+      160,
+      120
+    ],
+    "pixels_per_world": 2,
+    "canvas_px": [
+      512,
+      512
+    ],
+    "anchor_px": [
+      256.0,
+      449.99987
+    ],
+    "base_center_anchor": [
+      256.0,
+      329.99991
+    ],
+    "visual_bounds": [
+      90,
+      162,
+      418,
+      450
+    ],
+    "visual_bounds_format": "[left,top,right_exclusive,bottom_exclusive] alpha>1/255",
+    "ground_corners_px": [
+      [
+        96.00002,
+        449.99987
+      ],
+      [
+        415.99997,
+        449.99987
+      ],
+      [
+        415.99997,
+        209.99994
+      ],
+      [
+        96.00002,
+        209.99994
+      ]
+    ],
+    "height_world": 45,
+    "mesh_bounds_world": [
+      [
+        -82.51087,
+        -73.47825,
+        -0.18596
+      ],
+      [
+        80.11753,
+        74.00325,
+        56.70962
+      ]
+    ],
+    "camera_ortho_scale": 12.800002098083496,
+    "fully_transparent_pixels": 169648,
+    "partially_transparent_pixels": 2518,
+    "min_alpha": 0.0,
+    "max_alpha": 1.0,
+    "anchor_definition": "Projection of ground footprint front-edge center; this anchor is intended for depth sorting. base_center_anchor is provided for footprint-centered placement.",
+    "sha256": "78a28e737d84dac5442c6b8e73faa3bc7351d6a62ba1b7e06199a4837c64277c",
+    "texture": "res://assets/environment/stone_planter.png"
+  },
+  "tree": {
+    "path": "assets/environment/ginkgo_tree.png",
+    "file": "ginkgo_tree.png",
+    "world_footprint": [
+      80,
+      80
+    ],
+    "pixels_per_world": 2,
+    "canvas_px": [
+      512,
+      768
+    ],
+    "anchor_px": [
+      256.0,
+      644.99984
+    ],
+    "base_center_anchor": [
+      256.0,
+      564.99982
+    ],
+    "visual_bounds": [
+      90,
+      287,
+      454,
+      612
+    ],
+    "visual_bounds_format": "[left,top,right_exclusive,bottom_exclusive] alpha>1/255",
+    "ground_corners_px": [
+      [
+        175.99998,
+        644.99984
+      ],
+      [
+        336.0,
+        644.99984
+      ],
+      [
+        336.0,
+        484.99981
+      ],
+      [
+        175.99998,
+        484.99981
+      ]
+    ],
+    "height_world": 180,
+    "mesh_bounds_world": [
+      [
+        -82.46926,
+        -79.96764,
+        -0.75345
+      ],
+      [
+        98.14622,
+        92.43234,
+        180.0
+      ]
+    ],
+    "camera_ortho_scale": 19.199996948242188,
+    "fully_transparent_pixels": 334033,
+    "partially_transparent_pixels": 12371,
+    "min_alpha": 0.0,
+    "max_alpha": 1.0,
+    "anchor_definition": "Projection of ground footprint front-edge center; this anchor is intended for depth sorting. base_center_anchor is provided for footprint-centered placement.",
+    "sha256": "e38fe8a27650bd1d9bbade078dec124abccdbe2b0e766217987c73dbe58a618e",
+    "texture": "res://assets/environment/ginkgo_tree.png"
+  }
+}

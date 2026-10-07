@@ -1,0 +1,34 @@
+{
+  "baseline": "181216b77b4f19078e5e33f6fd1b108afea828ca",
+  "branch": "codex/v105-dimensional-art",
+  "actor_tests": {
+    "retained_actor_layer": 184,
+    "retained_visibility": 6502,
+    "actor_sprite_depth": 329,
+    "actor_depth_main": 13,
+    "actor_atlas_resources": 886
+  },
+  "total_checks": 7914,
+  "failures": 0,
+  "scope": "Headless production resource, canvas-command bounds, live node/Camera2D lifecycle, atlas animation and actual Main integration. Not a graphical performance or native screenshot acceptance.",
+  "startup": "30-frame isolated headless Main passed",
+  "source_sha256": {
+    "scripts/main.gd": "1814f3d34a1ac518fe5442ee5362395c80c3a2231df5a64baaca868a64f9fd0c",
+    "scripts/visuals/actor_sprite_catalog.gd": "3ed12d6fd1a7c803a4ef1e8c61e3c02115d07ab960a1d5c346724da9df499922",
+    "scripts/visuals/actor_visual.gd": "0b2d81ce5272b4329b9e026dbe8553aebba57fbb32da3bb9fd761706537cb7ec",
+    "scripts/visuals/retained_actor_layer.gd": "c0d16f72126e3dfcbe5e5694ed76d029dd6ee21423b5e0dc2635d45a124e0d86",
+    "scripts/visuals/arena_visuals.gd": "e92c78421f38a5f14fadaefc4af35c3e03b6d469840ec914dd7d97ad528102a5",
+    "scripts/visuals/foreground_arena_layer.gd": "e77d765a02ef384894912aa34ea95fb4575e14bc1102d783814ed23dfde27ead",
+    "scripts/visuals/world_markers.gd": "855608f83d9d01770a7831dae2fad310959318508670aef017d5e067905837a2",
+    "tests/retained_actor_layer_test.gd": "6c28d639bd54c88cb0457407af99574cd18741ca9006ef8bc64b28329c8ecbad",
+    "tests/retained_visibility_test.gd": "46192460a34a28112267e4dcac1ebcce8d982d7add01819473b627fa1ab5a065",
+    "tests/actor_sprite_depth_test.gd": "a5face29ea502b67484df488c5384bda485435831363133f63117e9f4067562b",
+    "tests/actor_depth_main_test.gd": "db706d73956ab854c61462cf17bb764d548bc8cfbb6e8547ed89f7131b9a4ad7",
+    "tests/actor_atlas_resources_test.gd": "ee24c33605856d7689ad6e9c42afdb576d6f3c57f768155bed88c63f3f9faceb"
+  },
+  "limits": [
+    "Other monster families remain unrotated vector fallbacks in the same shared depth",
+    "No Windows export, long soak or historical aggregate regression was run",
+    "Assets are cached per process; restart a pre-asset preview rather than expecting live missing-asset cache replacement"
+  ]
+}
