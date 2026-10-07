@@ -16,13 +16,23 @@ const TARGETS: Dictionary = {
 		"families": ["runesong", "prismedge", "farweave", "coalglow", "rimeecho", "sparkthread",
 			"attack_added_physical", "attack_added_fire", "spell_added_cold", "spell_added_lightning",
 			"whetstone_edge", "tempered_edge"]},
+	"targeted_reforge_fire_resistance": {"id": "fire_resistance", "label": "火焰抗性",
+		"families": ["emberward", "ring_emberward"]},
+	"targeted_reforge_cold_resistance": {"id": "cold_resistance", "label": "冰霜抗性",
+		"families": ["rimeward", "ring_rimeward"]},
+	"targeted_reforge_lightning_resistance": {"id": "lightning_resistance", "label": "闪电抗性",
+		"families": ["stormward", "ring_stormward"]},
+	"targeted_reforge_chaos_resistance": {"id": "chaos_resistance", "label": "混沌抗性",
+		"families": ["ring_voidward"]},
 }
 const COSTS: Dictionary = {"magic": 16, "rare": 40}
 
 
 static func operation_ids() -> Array[String]:
 	return ["targeted_reforge_critical", "targeted_reforge_life_leech",
-		"targeted_reforge_mana_leech", "targeted_reforge_damage"]
+		"targeted_reforge_mana_leech", "targeted_reforge_damage",
+		"targeted_reforge_fire_resistance", "targeted_reforge_cold_resistance",
+		"targeted_reforge_lightning_resistance", "targeted_reforge_chaos_resistance"]
 
 
 static func metadata(operation: String) -> Dictionary:

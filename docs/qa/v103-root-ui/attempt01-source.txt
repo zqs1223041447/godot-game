@@ -1,0 +1,55 @@
+extends SceneTree
+const CraftControls = preload("res://scripts/ui/crafting_controls.gd")
+const TargetRules = preload("res://scripts/items/targeted_reforge_rules.gd")
+var checks := 0
+var failures := 0
+var requests: Array[Dictionary] = []
+func expect(value: bool, label: String) -> void:
+	checks += 1
+	if not value:
+		failures += 1
+		push_error(label)
+func _initialize() -> void: call_deferred("run")
+func run() -> void:
+	var controls := CraftControls.new()
+	root.add_child(controls)
+	await process_frame
+	controls.craft_requested.connect(func(op: String, uid: String, source: Dictionary): requests.append({"op":op,"uid":uid,"source":source}))
+	var entries: Array = []
+	for operation in TargetRules.operation_ids():
+		var entry := TargetRules.metadata(operation)
+		entry.merge({"available":true,"reason":"","cost":{"calibration_shard":40}})
+		entries.append(entry)
+	var original := var_to_bytes(entries)
+	controls.set_operations_context("ring",{"serial":1},100,entries)
+	expect(controls._target_select.item_count == 8 and controls._operation_buttons.size() == 2, "Eight choices share existing row, no extra button grid")
+	var labels := ["火焰抗性","冰霜抗性","闪电抗性","混沌抗性"]
+	for index in range(4,8):
+		controls._select_target(index)
+		expect(controls._target_select.get_item_text(index) == labels[index-4], "Correct resistance label")
+		expect(not controls._target_button.disabled and controls._target_button.text.contains("40"), "Existing rare price visible")
+		expect(controls._target_button.tooltip_text.contains("全部原词缀") and controls._target_button.tooltip_text.contains("不保证高阶"), "Risk preserved")
+		controls._capture_targeted()
+		controls._request_targeted()
+		expect(requests.back().op == entries[index].operation and requests.back().uid == "ring", "Exact selected target and item emitted")
+	expect(var_to_bytes(entries) == original, "Metadata not mutated")
+	entries[7].available = false
+	entries[7].reason = "此底材没有可用的混沌抗性词缀"
+	controls.set_operations_context("body",{"serial":2},100,entries)
+	controls._select_target(7)
+	var before := requests.size()
+	controls._request_targeted()
+	expect(controls._target_button.disabled and controls._target_select.is_item_disabled(7), "Unavailable chaos body craft disabled")
+	expect(controls._target_button.tooltip_text.contains("没有可用"), "Unavailable reason accessible")
+	expect(requests.size() == before, "Disabled target does not emit")
+	controls._select_target(4)
+	controls._capture_targeted()
+	controls._select_target(5)
+	controls._request_targeted()
+	expect(requests.size() == before, "Changing resistance during press cancels stale click")
+	controls.set_operations_context("body",{"serial":2},0,entries)
+	expect(controls._target_button.disabled, "Insufficient shards disable request")
+	controls.queue_free()
+	await process_frame
+	print("Resistance crafting controls: %d checks, %d failures" % [checks,failures])
+	quit(0 if failures == 0 else 1)
