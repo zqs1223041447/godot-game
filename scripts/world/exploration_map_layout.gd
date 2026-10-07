@@ -15,13 +15,14 @@ const LANDMARK_RADIUS := 64.0
 
 
 static func layout(map_id: Variant, bounds: Rect2) -> Dictionary:
-	if not map_id is String or map_id not in ["old_garden", "broken_ruins", "sunwell_terrace", "ginkgo_arcade"]:
+	if not map_id is String or map_id not in ["old_garden", "broken_ruins", "sunwell_terrace", "ginkgo_arcade", "ruins_garden"]:
 		return _failure("未知探索地图")
 	if not bounds.position.is_finite() or not bounds.size.is_finite() or not bounds.end.is_finite():
 		return _failure("探索地图边界必须有限")
 	if bounds.size.x < MINIMUM_SIZE.x or bounds.size.y < MINIMUM_SIZE.y:
 		return _failure("探索地图边界不足，不能缩放固定布局")
 	var names: Array[String] = ["西侧据点", "北侧据点", "东侧据点"]
+	if map_id == "ruins_garden": names = ["西壁驻点", "北拱驻点", "东岩驻点"]
 	var relative_walls: Array[Rect2] = []
 	var obstacle_style := ""
 	if map_id == "broken_ruins":
@@ -39,7 +40,7 @@ static func layout(map_id: Variant, bounds: Rect2) -> Dictionary:
 			Rect2(2700, 940, 280, 280)])
 	var sites: Array = _site_centers(map_id)
 	var counts: Array[int] = []
-	counts.assign([3,5] if map_id=="old_garden" else [4,8])
+	counts.assign([3,5] if map_id in ["old_garden", "ruins_garden"] else [4,8])
 	var camps: Array[Dictionary] = []
 	var outposts: Array[Dictionary] = []
 	var offsets: Array[Vector2] = [ENTRY, BOSS_CENTER]
@@ -105,6 +106,8 @@ static func _site_centers(map_id: String) -> Array:
 		"broken_ruins":[Vector2(1320,2120),Vector2(670,1180),Vector2(1420,370),Vector2(1790,1150),Vector2(2760,2100),Vector2(3010,1120)],
 		"sunwell_terrace":[Vector2(1340,2140),Vector2(650,1160),Vector2(1740,1350),Vector2(1810,420),Vector2(2920,2070),Vector2(3010,1220)],
 		"ginkgo_arcade":[Vector2(1290,2100),Vector2(420,1080),Vector2(1120,750),Vector2(1820,470),Vector2(2690,1810),Vector2(3150,1320)]}
+	if map_id == "ruins_garden":
+		return [Vector2(1300,2000),Vector2(700,1080),Vector2(850,500),Vector2(1840,360),Vector2(2680,820),Vector2(2990,1750)]
 	return sites.get(map_id,[]).duplicate()
 
 
@@ -125,11 +128,16 @@ static func _route_lines(map_id: String) -> Array:
 			[Vector2(570,1800),Vector2(420,1080),Vector2(460,720),Vector2(1120,750),Vector2(1820,470),Vector2(2530,470),BOSS_CENTER],
 			[Vector2(420,1080),Vector2(1120,1320),Vector2(1120,750)],
 			[Vector2(1820,470),Vector2(2520,750),Vector2(2530,1810),Vector2(2690,1810)]]}
+	if map_id == "ruins_garden":
+		return [[ENTRY,Vector2(1300,2000),Vector2(2000,2000),Vector2(2990,1750),Vector2(2680,820),BOSS_CENTER],
+			[Vector2(1300,2000),Vector2(650,1700),Vector2(700,1080),Vector2(850,500),Vector2(1840,360),Vector2(2680,820)],
+			[Vector2(1300,2000),Vector2(1840,1300),Vector2(1840,360)]]
 	return routes.get(map_id,[]).duplicate(true)
 
 
 static func description(map_id: String) -> String:
 	var descriptions: Dictionary = {
+		"ruins_garden": "遗迹断墙、石拱与岩石共享原生碰撞轮廓；沿草土和旧石路绕行。六处3或5怪驻点分布于庭园，24普通根怪与首领入场时全部在场；可先挑战首领，清理全部怪物及后代后完成。首领近身震地锁定起手位置，及时离开圆圈。",
 		"old_garden": "开阔的大庭院，六处大小不同的驻点沿开阔环线与中央通路分布。入图时24个普通根怪与首领全部在场，靠近后投入战斗；可先挑战首领。清理全部怪物及后代后完成。首领近身震地锁定起手位置，及时离开圆圈。",
 		"broken_ruins": "两道错位长残墙划分探索路线，沿墙端绕行；墙体阻挡移动、弹体与视线。六处4或8怪驻点分列墙端与内廊；共36个普通根怪与首领入图全部在场，可自由选择顺序或先挑战首领；清理全部怪物及后代后完成。首领落印锁定你的起手位置。",
 		"sunwell_terrace": "四座实体泉池形成宽阔的池间通道，阻挡移动、弹体与视线。六处4或8怪驻点分列池间十字与外环；西泉偏重壳与霜纹，北门混合编排，东阶偏掠行与雷纹。36个普通根怪与首领入图时全部在场，可自由探索或先挑战首领；清理全部怪物及后代后完成。首领两次回响均锁定起手位置。",

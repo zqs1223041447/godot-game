@@ -1,0 +1,257 @@
+extends SceneTree
+## Focused real menu/native identity transactions; no battle simulation or render.
+const Model = preload("res://scripts/canonical_game_state.gd")
+const Encounter = preload("res://scripts/encounters/encounter_admission.gd")
+const Rules = preload("res://scripts/save/canonical_build_rules.gd")
+const FIXTURE := "res://docs/qa/v115-native-map-entry/earned-v114-save.json"
+const SAVE := "user://build_save.json"
+const QA := "res://docs/qa/v116-ruins-garden-entry/entry-result.json"
+class FaultModel extends Model:
+	var fail_save := false
+	func _write_bytes(path: String, bytes: PackedByteArray) -> Error:
+		return ERR_CANT_CREATE if fail_save else super._write_bytes(path, bytes)
+var arena: Node2D
+var panel: Control
+var checks := 0
+var failures: Array[String] = []
+var receipt: Dictionary = {}
+
+func _initialize() -> void: call_deferred("boss_mapping_checks" if "--boss-only" in OS.get_cmdline_user_args() else "run")
+func check(value: bool, label: String) -> bool:
+	checks += 1
+	if not value:
+		failures.append(label)
+		printerr("RUINS_GARDEN_FAIL: " + label)
+	return value
+func accepted(result: Dictionary, label: String) -> bool:
+	return check(bool(result.get("ok", false)), label + ": " + str(result.get("reason", "")))
+func snapshot() -> Dictionary:
+	return {"state": var_to_bytes(arena.state.snapshot()), "disk": FileAccess.get_file_as_bytes(SAVE),
+		"world": var_to_bytes(arena.world_context()), "draft": var_to_bytes(arena.map_draft()),
+		"geometry": var_to_bytes(arena.world_geometry()), "geometry_id": arena._geometry.get_instance_id(),
+		"runtime": var_to_bytes(Encounter._snapshot(arena.monster_runtime)), "enemies": var_to_bytes(arena.enemies),
+		"rng": arena.rng.state, "run_revision": arena.run_revision}
+func unchanged(before: Dictionary, label: String) -> void:
+	var after := snapshot()
+	for key: String in before: check(before[key] == after[key], label + " preserves " + key)
+func released(candidate: RefCounted, label: String) -> void:
+	check(not candidate._space.is_valid() and candidate._bodies.is_empty() and candidate._shapes.is_empty()
+		and candidate._query_circle == null and not candidate.physics_ready(), label)
+func button(text: String) -> Button:
+	for child: Node in panel._content.get_children():
+		if child is Button and child.text == text: return child
+	return null
+func choose(option: OptionButton, value: Variant) -> bool:
+	for index: int in range(option.item_count):
+		if option.get_item_metadata(index) == value:
+			option.select(index)
+			option.item_selected.emit(index)
+			return true
+	return false
+func menu_draft(tier: int = 1) -> bool:
+	panel.open_service("map_device")
+	if not check(choose(panel._map_select, "ruins_garden"), "Actual map device lists 遗迹庭园 with its own ID"): return false
+	if not check(choose(panel._tier_select, tier), "Actual tier selector includes tier %d" % tier): return false
+	var prepare := button("准备地图")
+	if not check(prepare != null, "Actual prepare button exists"): return false
+	prepare.pressed.emit()
+	return check(arena.map_draft().map_id == "ruins_garden" and arena.map_draft().tier == tier,
+		"Menu prepares the selected native map and tier")
+func settle() -> void:
+	for unused: int in range(12):
+		if not arena.map_preparation_pending():
+			await process_frame
+			return
+		await physics_frame
+	check(false, "Native menu operation settles within twelve physics frames")
+func start_ticket(ticket: Dictionary, retrying: bool = false) -> void:
+	ticket.result = await arena.retry_native_map(arena.world_context().revision) if retrying else await arena.open_map(arena.map_draft().revision)
+	ticket.done = true
+func native_candidate() -> RefCounted:
+	return arena._native_entry_session._entry.geometry_ref()
+
+func cancellation_checks() -> void:
+	for mode: String in ["close", "change_selection", "native_failure"]:
+		if not menu_draft(): return
+		var before := snapshot()
+		panel._map_launch.pressed.emit()
+		if not check(arena.map_preparation_pending(), "Native entry waits before committing: " + mode): return
+		var candidate := native_candidate()
+		check(arena._geometry != candidate and candidate._space.is_valid(), "Pending geometry is detached: " + mode)
+		if mode == "close": panel.hide()
+		elif mode == "change_selection": choose(panel._map_select, "old_garden")
+		else: candidate._release_native()
+		await settle()
+		unchanged(before, "Rejected native entry " + mode)
+		released(candidate, "Rejected native entry releases resources: " + mode)
+
+func menu_success() -> bool:
+	if not menu_draft(): return false
+	var before := snapshot()
+	check(arena.start_map(arena.map_draft().revision).get("code") == "preparation_required", "Synchronous API blocks a native map without preparation")
+	unchanged(before, "Unprepared synchronous native entry")
+	var old_id: int = arena.state.normal_journey().next_run_id
+	panel._map_launch.pressed.emit()
+	if not check(arena.map_preparation_pending(), "Actual launch button starts asynchronous preparation"): return false
+	var candidate := native_candidate()
+	panel._map_launch.pressed.emit()
+	var duplicate: Dictionary = await arena.open_map(arena.map_draft().revision)
+	check(not duplicate.ok and duplicate.code == "entry_busy", "Button and API duplicate requests cannot start a second native entry")
+	await settle()
+	if not check(arena.world_context().mode == "map" and arena.world_context().map_id == "ruins_garden", "Actual UI entry reaches its own formal map"): return false
+	check(arena._geometry == candidate and candidate.physics_ready(), "UI commits the identical prepared native geometry")
+	check(arena.world_geometry().id == "ruins_garden" and arena.world_geometry().source_map_id == "ruins_garden", "Collision authority exposes the new identity, never old_garden")
+	check(arena.state.normal_journey().active_run.map_id == "ruins_garden" and arena._normal_run_id == old_id
+		and arena.state.normal_journey().next_run_id == old_id + 1 and arena.state.crafting_balance() == 4,
+		"One free entry writes exactly one independently identified active run")
+	check(arena.enemies.size() == 25 and arena.map_spawn_records().size() == 25 and arena._camp_landmarks.route_segments.size() == 14,
+		"Native formal map adopts 25 roots and the two validated detours")
+	check(arena.retained_actors._hero_presentation.is_empty(), "New formal map uses the unchanged animated hero")
+	check(arena.dimensional_props.diagnostics().study_instances == 3
+		and arena.static_environment._study_ground.diagnostics().ready, "Explicit new identity loads original modules and verified grass/soil ground")
+	check(not panel.visible and not panel._map_launch_pending, "Successful asynchronous UI entry dismisses and unlocks the panel")
+	var loaded := Model.new()
+	check(loaded.load_build(SAVE) and loaded.normal_journey() == arena.state.normal_journey(), "Saved active native identity reloads exactly")
+	return true
+
+func progression_checks() -> bool:
+	# Exercise the existing trusted canonical completion boundary directly.
+	# This is not a combat-clear test and does not claim earned natural kills.
+	var run_id: int = arena._normal_run_id
+	var old_progress: Dictionary = arena.state.normal_journey().best_tiers.duplicate(true)
+	if not accepted(arena.state.normal_complete_map(run_id, arena.state.revision(), SAVE), "Controlled existing completion transaction for native ID"): return false
+	var journey: Dictionary = arena.state.normal_journey()
+	check(journey.pending_map_reward.map_id == "ruins_garden" and journey.pending_map_reward.shards == 4
+		and journey.best_tiers.ruins_garden == 1, "Completion and pending reward belong to the new map alone")
+	for id: String in old_progress:
+		if id != "ruins_garden": check(journey.best_tiers[id] == old_progress[id], "New map completion preserves old progress: " + id)
+	var saved := snapshot()
+	check(not arena.state.normal_complete_map(run_id, arena.state.revision(), SAVE).ok, "Repeated completion cannot duplicate reward")
+	unchanged(saved, "Duplicate completion")
+	if not accepted(arena.return_to_town(arena.world_context().revision), "Native completed receipt returns through existing town path"): return false
+	if not accepted(arena.claim_normal_rewards(arena.world_context().revision), "Existing town claim consumes the new-map receipt once"): return false
+	check(arena.state.crafting_balance() == 8 and arena.state.normal_journey().pending_map_reward.is_empty(), "Controlled receipt gives the existing four-shard reward")
+	saved = snapshot()
+	check(not arena.claim_normal_rewards(arena.world_context().revision).ok, "Repeated claim rejects")
+	unchanged(saved, "Duplicate reward claim")
+	return true
+
+func paid_entry_retry_checks() -> void:
+	if not menu_draft(2): return
+	var before := snapshot()
+	arena.state.fail_save = true
+	var failed: Dictionary = await arena.open_map(arena.map_draft().revision)
+	check(not failed.ok and failed.code == "save_failed", "Paid native entry rejects an actual canonical writer failure")
+	unchanged(before, "Failed paid native entry")
+	arena.state.fail_save = false
+	var ticket := {"done": false, "result": {}}
+	start_ticket(ticket)
+	var candidate := native_candidate()
+	await settle()
+	if not accepted(ticket.result, "Paid native tier-II entry"): return
+	check(arena._geometry == candidate and arena.state.crafting_balance() == 4 and arena.state.normal_journey().active_run.map_id == "ruins_garden",
+		"Paid native entry spends four once and preserves its identity")
+	before = snapshot()
+	check(not arena.retry_normal_map(arena.world_context().revision).ok, "Synchronous retry cannot replace a native map with a rectangle fallback")
+	unchanged(before, "Unprepared synchronous retry")
+	arena.state.fail_save = true
+	failed = await arena.retry_native_map(arena.world_context().revision)
+	check(not failed.ok, "Failed native retry save rejects")
+	unchanged(before, "Failed native retry")
+	check(arena._geometry == candidate and candidate.physics_ready(), "Failed retry keeps live native geometry and all its resources")
+	arena.state.fail_save = false
+	var previous_run: int = arena._normal_run_id
+	# This is the actual restart button/key dispatch, not a private commit call.
+	arena.restart_run()
+	if not check(arena.map_preparation_pending(), "Ordinary restart dispatch prepares the same native map"): return
+	var replacement := native_candidate()
+	arena.restart_run()
+	await settle()
+	check(arena._normal_run_id == previous_run + 1 and arena.state.crafting_balance() == 0
+		and arena.state.normal_journey().active_run.map_id == "ruins_garden", "Repeated restart commits one same-ID run and one four-shard fee")
+	check(arena._geometry == replacement and replacement != candidate and replacement.physics_ready(), "Restart transfers a new fully prepared native candidate")
+	released(candidate, "Successful native retry releases previous native ownership")
+	check(arena.retained_actors._hero_presentation.is_empty(), "Retry preserves the ordinary animated hero")
+	before = snapshot()
+	failed = await arena.retry_native_map(arena.world_context().revision)
+	check(not failed.ok, "Insufficient-funds native retry rejects")
+	unchanged(before, "Unaffordable native retry")
+	var loaded := Model.new()
+	check(loaded.load_build(SAVE) and loaded.normal_journey().active_run.map_id == "ruins_garden"
+		and loaded.normal_journey().best_tiers.ruins_garden == 1 and loaded.normal_journey().best_tiers.old_garden == 1,
+		"Native retry save reloads independent new and old progress")
+	if not accepted(arena.return_to_town(arena.world_context().revision), "Abandon native tier II normally"): return
+	released(replacement, "Town releases the final native map")
+	if not accepted(arena.craft_normal_map("old_garden", 1, [], [], arena.map_draft().revision), "Prepare unchanged old garden"): return
+	if not accepted(arena.start_map(arena.map_draft().revision), "Old garden retains synchronous ordinary entry"): return
+	check(arena.world_geometry().id == "old_garden" and arena.enemies.size() == 25
+		and arena._camp_landmarks.route_segments.size() == 12 and arena.static_environment._study_ground == null,
+		"Old garden retains its original routes, root budget and presentation")
+	accepted(arena.return_to_town(arena.world_context().revision), "Leave old map without affecting new progression")
+
+func run() -> void:
+	if not OS.get_environment("XDG_DATA_HOME").begins_with("/tmp/godot-m1-v116-"):
+		printerr("RUINS_GARDEN_BLOCKED: isolated XDG directory required"); quit(78); return
+	var original := FileAccess.get_file_as_bytes(FIXTURE)
+	var file := FileAccess.open(SAVE, FileAccess.WRITE)
+	file.store_buffer(original); file.close()
+	arena = load("res://scenes/main.tscn").instantiate()
+	root.add_child(arena)
+	arena.set_process(false); arena.hud.set_process(false); arena.auto_fire = false
+	await process_frame
+	for unused in range(4): arena.hud.close_panel()
+	var model := FaultModel.new()
+	if not check(model.load_build(SAVE) and model.snapshot().version == Rules.VERSION, "Real migrated canonical save loads"):
+		finish(); return
+	arena._replace_build(model, SAVE)
+	panel = arena.hud._town_view
+	panel.feedback.connect(func(message: String): print("RUINS_MENU_FEEDBACK: " + message))
+	if not check(model.normal_journey().best_tiers.old_garden == 1 and model.normal_journey().best_tiers.ruins_garden == 0
+		and model.crafting_balance() == 4, "Earned old progression supplies no native unlock or extra currency"):
+		finish(); return
+	await cancellation_checks()
+	if await menu_success():
+		if await progression_checks(): await paid_entry_retry_checks()
+	check(FileAccess.get_file_as_bytes(FIXTURE) == original, "The original earned v114 fixture remains byte-identical")
+	finish()
+func finish() -> void:
+	var result := {"checks": checks, "failures": failures.size(), "failed_labels": failures,
+		"method": "Real Main, menu signals, native async entry/retry and save transactions; controlled existing canonical completion receipt, no combat/render"}
+	var output := FileAccess.open(QA, FileAccess.WRITE)
+	output.store_string(JSON.stringify(result, "\t") + "\n"); output.close()
+	print("RUINS_GARDEN_RESULT " + JSON.stringify(result))
+	if is_instance_valid(arena): arena.queue_free()
+	quit(1 if not failures.is_empty() else 0)
+
+
+func boss_mapping_checks() -> void:
+	var maps = load("res://scripts/world/map_compiler.gd")
+	var bosses = load("res://scripts/monsters/map_boss_profiles.gd")
+	var admission = load("res://scripts/world/map_admission.gd")
+	var monsters = load("res://scripts/monsters/monster_catalog.gd")
+	var runtime = load("res://scripts/monsters/monster_runtime.gd").new()
+	var profile: Dictionary = maps.compile_normal("ruins_garden", 1, [], []).profile
+	var original: Dictionary = maps.compile_normal("old_garden", 1, [], []).profile
+	var rule: Dictionary = bosses.definition(profile.boss_attack_id)
+	var old_rule: Dictionary = bosses.definition(original.boss_attack_id)
+	check(profile.boss_attack_id == "ruins_garden_slam" and rule.map_id == "ruins_garden", "Native boss attack has its own strict map identity")
+	check(original.boss_attack_id == "garden_slam" and old_rule.map_id == "old_garden", "Old garden retains its own attack identity")
+	check(rule.profile == old_rule.profile and rule.target_rule == old_rule.target_rule and rule.trigger_distance == old_rule.trigger_distance,
+		"Native slam reuses exact original damage, radius, timing and targeting values")
+	check(bosses.profile_reason(profile).is_empty() and bosses.profile_reason(original).is_empty(), "Both original and native bindings validate")
+	var mixed: Dictionary = profile.duplicate(true)
+	mixed.boss_attack_id = original.boss_attack_id
+	check(not bosses.profile_reason(mixed).is_empty(), "Native map cannot claim the old garden attack ID")
+	mixed = original.duplicate(true)
+	mixed.boss_attack_id = profile.boss_attack_id
+	check(not bosses.profile_reason(mixed).is_empty(), "Old garden cannot claim the native map attack ID")
+	var admitted: Dictionary = admission.create_root(runtime, profile, "rift_warden", profile.wave, Vector2(3222,424), "map_boss", "", [], true)
+	if accepted(admitted, "Real detached boss admission accepts the explicit native binding"):
+		check(admitted.enemy.map_boss_attack_id == "ruins_garden_slam" and bosses.for_enemy(admitted.enemy).map_id == "ruins_garden",
+			"Actual root retains the native attack rather than an old-map alias")
+		check(not monsters.telegraph_policy(admitted.enemy).is_empty(), "Existing attack runtime resolves the admitted native boss policy")
+	var result := {"checks": checks, "failures": failures.size(), "failed_labels": failures, "method": "Native boss identity mapping only; detached real root, no Main/physics/save/combat"}
+	var output := FileAccess.open("res://docs/qa/v116-ruins-garden-entry/boss-result.json", FileAccess.WRITE)
+	output.store_string(JSON.stringify(result, "\t") + "\n"); output.close()
+	print("RUINS_BOSS_RESULT " + JSON.stringify(result))
+	quit(1 if not failures.is_empty() else 0)

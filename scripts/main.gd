@@ -83,6 +83,8 @@ var ARENA: Rect2 = View.WORLD_ARENA
 const ExplorationLayout = preload("res://scripts/world/exploration_map_layout.gd")
 const ExplorationPlan = preload("res://scripts/world/exploration_map_plan.gd")
 const PreparedMapEntry = preload("res://scripts/world/prepared_map_entry.gd")
+const ModularSession = preload("res://scripts/studies/modular_study_session.gd")
+var _native_entry_session: RefCounted
 const EXPLORATION_AGGRO_RADIUS := 450.0
 var _map_spawn_records: Dictionary = {}
 var _map_mechanism_config: Dictionary = {}
@@ -383,6 +385,9 @@ func _quit_game() -> void:
 
 func restart_run(camp_plan: Dictionary = {}) -> void:
 	if _world_mode in ["map", "map_complete"] and not _is_test_profile() and not _normal_reset_authorized:
+		if _map_run.profile.get("id") == "ruins_garden":
+			_retry_native_from_button()
+			return
 		var retried: Dictionary = retry_normal_map(_world_revision)
 		if not retried.ok and is_instance_valid(hud): hud.notify(retried.reason)
 		return
@@ -397,7 +402,7 @@ func restart_run(camp_plan: Dictionary = {}) -> void:
 		# straight route metadata. Other ordinary callers keep their object.
 		var leaving_study:bool=_geometry.snapshot().get("encounter_mode","")=="modular_study"
 		if camp_plan.get("prepared_geometry",false) or leaving_study:
-			if leaving_study:_geometry.configure("town",View.WORLD_ARENA)
+			if leaving_study and _geometry != camp_plan.geometry:_geometry.configure("town",View.WORLD_ARENA)
 			_geometry=camp_plan.geometry
 		# All initial identities and positions were admitted before any fee.
 		_map_run=camp_plan.run
@@ -2783,10 +2788,60 @@ func start_map_prepared(expected_revision:Variant,prepared:Variant,mechanism_con
 	prepared.finish_use(bool(result.ok))
 	return result
 
+func cancel_map_preparation() -> void:
+	if _native_entry_session != null: _native_entry_session.cancel_entry()
+
+func map_preparation_pending() -> bool:
+	return _native_entry_session != null
+
+# Native setup is async only at this explicit public UI boundary. Legacy callers
+# retain the synchronous start_map contract; they cannot obtain a blank fallback.
+func open_map(expected_revision: Variant) -> Dictionary:
+	if _native_entry_session != null: return _world_failure("entry_busy", "地图正在准备，请稍候")
+	if _map_draft_profile.id != "ruins_garden": return start_map(expected_revision)
+	if _world_mode != "town" or not expected_revision is int or expected_revision != _map_draft_revision or _is_test_profile():
+		return _world_failure("stale_map", "地图草案或所在区域已变化")
+	return await _prepare_native_entry(false)
+
+func retry_native_map(expected_revision: Variant) -> Dictionary:
+	if _native_entry_session != null: return _world_failure("entry_busy", "地图正在准备，请稍候")
+	if not _world_revision_ok(expected_revision) or _is_test_profile() or _world_mode != "map" or _map_run.profile.get("id") != "ruins_garden":
+		return _world_failure("stale_run", "当前不能重新开启遗迹庭园")
+	return await _prepare_native_entry(true)
+
+func _retry_native_from_button() -> void:
+	var result: Dictionary = await retry_native_map(_world_revision)
+	if not result.ok and is_instance_valid(hud): hud.notify(result.reason)
+
+func _prepare_native_entry(retrying: bool) -> Dictionary:
+	var session = ModularSession.new()
+	_native_entry_session = session
+	# Hold the current live run during the two-frame native synchronization.
+	# Failure/cancellation restores its prior process state and all game data.
+	var processing := is_processing()
+	set_process(false)
+	var prepared: Dictionary = await session.prepare_entry(self, false, retrying)
+	var result: Dictionary = session.enter(self) if prepared.ok else _world_failure("preparation_failed", str(prepared.reason))
+	_native_entry_session = null
+	set_process(processing)
+	return result
+
+func retry_map_prepared(expected_revision: Variant, prepared: Variant) -> Dictionary:
+	if not prepared is PreparedMapEntry: return _world_failure("invalid_prepared_map", "Prepared map owner is invalid")
+	if not _world_revision_ok(expected_revision) or _is_test_profile() or _world_mode != "map" or _normal_run_id <= 0 or _map_run.profile.get("id") != "ruins_garden" or _normal_completion_pending:
+		prepared.cancel()
+		return _world_failure("stale_run", "当前不能重新开启遗迹庭园")
+	var reason: String = prepared.begin_use(map_entry_preparation_context())
+	if not reason.is_empty(): return _world_failure("stale_prepared_map", reason)
+	var result := _retry_map_transaction(expected_revision, prepared)
+	prepared.finish_use(bool(result.ok))
+	return result
+
 func start_map(expected_revision:Variant,mechanism_config:Variant={})->Dictionary:
 	return _start_map_transaction(expected_revision,mechanism_config)
 
 func _start_map_transaction(expected_revision:Variant,mechanism_config:Variant={},prepared:Variant=null)->Dictionary:
+	if _map_draft_profile.id == "ruins_garden" and prepared == null:return _world_failure("preparation_required","遗迹庭园必须先准备原生地形")
 	if _world_mode!="town" or not expected_revision is int or expected_revision!=_map_draft_revision:return _world_failure("stale_map","地图草案或所在区域已变化")
 	var reason:String=MapCompiler.profile_reason(_map_draft_profile)
 	if not reason.is_empty():return _world_failure("invalid_map",reason)
@@ -2807,8 +2862,12 @@ func _start_map_transaction(expected_revision:Variant,mechanism_config:Variant={
 	_world_mode="map";_world_revision+=1;_map_draft_revision+=1;restart_run(camp_plan);world_context_changed.emit()
 	return _world_ok()
 func retry_normal_map(expected_revision:Variant)->Dictionary:
+	if _map_run.profile.get("id") == "ruins_garden":return _world_failure("preparation_required","遗迹庭园重开必须先准备原生地形")
+	return _retry_map_transaction(expected_revision)
+
+func _retry_map_transaction(expected_revision:Variant,prepared:Variant=null)->Dictionary:
 	if not _world_revision_ok(expected_revision) or _is_test_profile() or _world_mode!="map" or _normal_run_id<=0:return _world_failure("stale_run","当前不能重新开启正式地图，请返回城镇")
-	var camp_plan:Dictionary=_prepare_camp_run(_map_run.profile,int(state.normal_journey().next_run_id))
+	var camp_plan:Dictionary=_prepare_camp_run(_map_run.profile,int(state.normal_journey().next_run_id),{},prepared)
 	if not camp_plan.ok:return _world_failure("invalid_camp",camp_plan.reason)
 	var began:Dictionary=state.normal_start_map(_map_run.profile,state.revision(),build_save_path,_normal_run_id)
 	if not began.ok:return _world_failure(str(began.get("error_code","save_failed")),began.reason)

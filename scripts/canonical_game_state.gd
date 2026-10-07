@@ -628,7 +628,9 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	var loaded:=super.load_build(path)
 	if loaded and old_version>0 and old_version<Rules.VERSION:
 		migrated_from_legacy=true
-		if old_version == Rules.V52_VERSION:
+		if old_version == Rules.V53_VERSION:
+			migration_message="旧存档已原字节备份，遗迹庭园 I 已开放；旧四图进度、进行中地图、待领奖励与领取序号保持，不额外赠送碎片、物品或天赋点。"
+		elif old_version == Rules.V52_VERSION:
 			migration_message="旧存档已原字节备份，长跃辅助已加入正式宝石商人；仅辅助冲刺，提高请求距离但不再授予本次保护。原物品、天赋和旅程保持，不额外赠物或赠点。"
 		elif old_version == Rules.V51_VERSION:
 			migration_message="旧存档已原字节备份，环斩辅助已加入正式宝石商人；仅辅助裂刃斩，以主命中伤害总降25%和魔力消耗乘数125%换取360度环形命中。原物品、天赋和旅程保持，不额外赠物或赠点。"

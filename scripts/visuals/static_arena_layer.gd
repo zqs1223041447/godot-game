@@ -59,7 +59,7 @@ func world_geometry() -> Dictionary:
 
 func _update_study_ground() -> void:
 	_study_ground_error = ""
-	if _geometry.get("id", "") == "modular_study":
+	if _geometry.get("id", "") in ["modular_study", "ruins_garden"]:
 		if not is_instance_valid(_study_ground):
 			_study_ground = StudyGround.new(); _study_ground.name = "StudyGround"
 			add_child(_study_ground); move_child(_study_ground, 0)

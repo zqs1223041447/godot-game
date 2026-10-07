@@ -1,5 +1,5 @@
 extends "res://scripts/world/map_geometry.gd"
-## Bounded, research-only geometry for the four unchanged v111 ground contours.
+## Bounded native geometry for the explicit map and unchanged v111 study contours.
 ## Call install(), allow two physics frames, then require physics_ready() before
 ## assigning this adapter to Main. Native circle/ray queries fail closed until
 ## the isolated static space has synchronized. No scene bodies or game RNG.
@@ -8,6 +8,7 @@ const MAX_VERTICES := 99
 const SOURCE_MAP_ID := "old_garden"
 const CONTACT_PRECISION := 0.001
 
+var _source_map_id := SOURCE_MAP_ID
 var _study_active := false
 var _native_ready := false
 var _space := RID()
@@ -22,7 +23,8 @@ var _presentation: Dictionary = {}
 var _query_circle: CircleShape2D
 
 
-func install(bounds: Rect2, polygons: Array[PackedVector2Array], spawn: Vector2, presentation: Dictionary) -> Dictionary:
+func install(bounds: Rect2, polygons: Array[PackedVector2Array], spawn: Vector2, presentation: Dictionary, map_id: String = SOURCE_MAP_ID) -> Dictionary:
+	if map_id not in [SOURCE_MAP_ID, "ruins_garden"]: return _failure("Unsupported native map identity")
 	if not bounds.position.is_finite() or not bounds.size.is_finite() or not bounds.end.is_finite() or bounds.size.x <= 0.0 or bounds.size.y <= 0.0:
 		return _failure("Study bounds must be finite and positive")
 	if not spawn.is_finite() or not bounds.has_point(spawn):
@@ -78,7 +80,8 @@ func install(bounds: Rect2, polygons: Array[PackedVector2Array], spawn: Vector2,
 	_presentation = presentation.duplicate(true)
 	_study_active = true
 	_native_ready = false
-	_id = "modular_study"
+	_source_map_id = map_id
+	_id = "modular_study" if map_id == SOURCE_MAP_ID else map_id
 	_bounds = bounds
 	# These boxes supply only the base class's finite corner waypoint graph.
 	# They are never collision truth, legal-point projection or rendered walls.
@@ -124,7 +127,7 @@ func configure(id: String, bounds: Rect2) -> bool:
 
 
 func configure_exploration(id: String, bounds: Rect2) -> bool:
-	if _study_active and id == SOURCE_MAP_ID and bounds == _bounds:
+	if _study_active and id == _source_map_id and bounds == _bounds:
 		return true
 	var configured := super.configure_exploration(id, bounds)
 	if configured and _study_active:
@@ -136,8 +139,8 @@ func snapshot() -> Dictionary:
 	if not _study_active:
 		return super.snapshot()
 	var result := _presentation.duplicate(true)
-	result.id = "modular_study"
-	result.source_map_id = SOURCE_MAP_ID
+	result.id = _id
+	result.source_map_id = _source_map_id
 	result.bounds = _bounds
 	result.spawn = _spawn
 	result.revision = _revision

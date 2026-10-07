@@ -152,7 +152,7 @@ static func _landmark_reason(profile: Dictionary, landmarks: Variant) -> String:
 	var camps: Variant = landmarks.get("camps")
 	if not camps is Array or camps.size() != CAMP_IDS.size():
 		return "地图必须包含三个据点"
-	var expected_count := 8 if profile.id == "old_garden" else 12
+	var expected_count := 8 if profile.id in ["old_garden", "ruins_garden"] else 12
 	var total := 0
 	var seen: Dictionary = {}
 	for camp: Variant in camps:

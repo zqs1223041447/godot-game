@@ -35,6 +35,7 @@ static func plan(profile: Variant, live_runtime: Variant, seed_value: Variant, b
 	if not layout.ok: return _failure(layout.reason)
 	var geometry: RefCounted
 	if prepared == null:
+		if profile.id == "ruins_garden": return _failure("遗迹庭园必须先准备原生地形")
 		geometry = Geometry.new()
 		if not geometry.configure_exploration(profile.id, bounds): return _failure("探索地图几何无效")
 	else:

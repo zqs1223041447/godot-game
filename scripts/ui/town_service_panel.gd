@@ -39,6 +39,7 @@ var _map_launch: Button
 var _map_selection_dirty := false
 var _map_status_queued := false
 var _map_prepared_revision := -1
+var _map_launch_pending := false
 
 func setup(value: Node) -> void:
 	arena = value
@@ -123,7 +124,9 @@ func setup(value: Node) -> void:
 	_gem_dialog.get_ok_button().add_theme_color_override("font_focus_color", ThemeStyle.TEXT)
 	_gem_dialog.get_cancel_button().add_theme_color_override("font_focus_color", ThemeStyle.TEXT)
 	visibility_changed.connect(func():
-		if not is_visible_in_tree(): _cancel_gem_purchase())
+		if not is_visible_in_tree():
+			_cancel_gem_purchase()
+			arena.cancel_map_preparation())
 	refresh_world()
 	_select("skill_merchant" if bool(arena.world_context().get("test_mode", false)) else "map_device")
 
@@ -189,9 +192,10 @@ func _refresh_map_status() -> void:
 		_map_summary.text += "\n入场 %d 校准碎片 · 完成奖励 %d" % [int(draft.get("cost", 0)), int(draft.get("completion_reward", 0))]
 		if not str(draft.get("reason", "")).is_empty(): _map_summary.text += "\n" + str(draft.reason)
 	# Currency updates never prepare changed controls or adopt an external draft.
-	_map_launch.disabled = _map_selection_dirty or int(draft.revision) != _map_prepared_revision or not bool(draft.get("can_start", draft.valid))
+	_map_launch.disabled = _map_launch_pending or _map_selection_dirty or int(draft.revision) != _map_prepared_revision or not bool(draft.get("can_start", draft.valid))
 
 func _mark_map_selection_dirty() -> void:
+	arena.cancel_map_preparation()
 	_map_selection_dirty = true
 	if is_instance_valid(_map_launch): _map_launch.disabled = true
 
@@ -223,6 +227,7 @@ func _clear() -> void:
 		child.queue_free()
 
 func _select(id: String) -> void:
+	arena.cancel_map_preparation()
 	_cancel_gem_purchase()
 	if not bool(arena.world_context().get("test_mode", false)) and id not in ["map_device", "crafter", "passive_reset", "skill_merchant"]: id = "map_device"
 	_service = id
@@ -342,10 +347,7 @@ func _build_map() -> void:
 	launch.text = "开启地图"
 	launch.disabled = not bool(draft.get("can_start", draft.valid))
 	var revision: int = int(draft.revision)
-	launch.pressed.connect(func():
-		var result: Dictionary = arena.start_map(revision)
-		_result(result)
-		if result.ok: hide())
+	launch.pressed.connect(_launch_map.bind(revision))
 	_content.add_child(launch)
 	_map_select.item_selected.connect(func(_index: int):
 		_update_tiers(options, 1)
@@ -353,6 +355,22 @@ func _build_map() -> void:
 	_tier_select.item_selected.connect(func(_index: int): _mark_map_selection_dirty())
 	for check: CheckBox in _normal.values()+_special.values():
 		check.toggled.connect(func(_value: bool): _mark_map_selection_dirty())
+
+func _launch_map(revision: int) -> void:
+	if _map_launch_pending: return
+	_map_launch_pending = true
+	_map_launch.disabled = true
+	_map_launch.text = "准备地形…"
+	var result: Dictionary = await arena.open_map(revision)
+	_map_launch_pending = false
+	if is_instance_valid(_map_launch): _map_launch.text = "开启地图"
+	if result.ok:
+		_result(result)
+		hide()
+	elif is_visible_in_tree():
+		_result(result)
+		_refresh_map_status()
+
 
 func _update_tiers(options: Dictionary, selected: int) -> void:
 	_tier_select.clear()

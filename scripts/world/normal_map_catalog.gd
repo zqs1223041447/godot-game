@@ -2,7 +2,7 @@ class_name NormalMapCatalog
 extends RefCounted
 ## Pure, detached progression metadata. No save, inventory or RNG access.
 const Maps = preload("res://scripts/world/map_catalog.gd")
-const WAVES: Dictionary = {"old_garden": [1, 4, 8], "broken_ruins": [2, 5, 9], "sunwell_terrace": [3, 6, 10], "ginkgo_arcade": [3, 6, 10]}
+const WAVES: Dictionary = {"ruins_garden": [1, 4, 8], "old_garden": [1, 4, 8], "broken_ruins": [2, 5, 9], "sunwell_terrace": [3, 6, 10], "ginkgo_arcade": [3, 6, 10]}
 const LABELS: Array[String] = ["I", "II", "III"]
 const COSTS: Array[int] = [0, 4, 8]
 const BASE_REWARDS: Array[int] = [4, 8, 12]

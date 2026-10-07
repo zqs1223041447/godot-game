@@ -1,0 +1,329 @@
+extends SceneTree
+## Focused schema53→54 boundary. No Main, native rendering or combat replay.
+const Store = preload("res://scripts/save/canonical_build_store.gd")
+const Game = preload("res://scripts/canonical_game_state.gd")
+const Rules = preload("res://scripts/save/canonical_build_rules.gd")
+const Migration = preload("res://scripts/save/ruins_garden_migration.gd")
+const LongStride = preload("res://scripts/save/long_stride_gem_migration.gd")
+const Encircling = preload("res://scripts/save/encircling_cleave_gem_migration.gd")
+const Chaos = preload("res://scripts/save/chaos_resistance_affix_migration.gd")
+const FourthMap = preload("res://scripts/save/fourth_map_migration.gd")
+const Journey = preload("res://scripts/world/normal_journey_state.gd")
+const NormalMaps = preload("res://scripts/world/normal_map_catalog.gd")
+const FIXTURE := "res://docs/qa/v115-native-map-entry/earned-v114-save.json"
+const EVIDENCE := "res://docs/qa/v116-ruins-garden-entry/"
+const MAP_ID := "ruins_garden"
+var checks := 0
+var failures: Array[String] = []
+var evidence := {"cases": {}}
+var frozen53: GDScript
+var frozen_journey: GDScript
+var completed := false
+
+class BackupFailIO extends Store.Legacy:
+	func _backup_legacy_save(_path: String) -> Error: return ERR_CANT_CREATE
+
+class ExternalIO extends Store.Legacy:
+	func _backup_legacy_save(path: String) -> Error:
+		var result := super._backup_legacy_save(path)
+		if result == OK:
+			var file := FileAccess.open(path, FileAccess.WRITE)
+			file.store_string("external writer")
+			file.close()
+		return result
+
+
+func check(ok: bool, label: String) -> bool:
+	checks += 1
+	if not ok:
+		failures.append(label)
+		push_error(label)
+	return ok
+
+
+func write(path: String, bytes: PackedByteArray) -> void:
+	var file := FileAccess.open(path, FileAccess.WRITE)
+	if not check(file != null, "Open isolated output: " + path): return
+	file.store_buffer(bytes)
+	file.close()
+
+
+func serialized(value: Dictionary) -> PackedByteArray:
+	return (JSON.stringify(value, "  ", false, true) + "\n").to_utf8_buffer()
+
+
+func digest(bytes: PackedByteArray) -> String:
+	var hash := HashingContext.new()
+	hash.start(HashingContext.HASH_SHA256)
+	hash.update(bytes)
+	return hash.finish().hex_encode()
+
+
+func expected(source: Dictionary) -> Dictionary:
+	var candidate := source.duplicate(true)
+	candidate.version = 54
+	candidate.journey.best_tiers[MAP_ID] = 0
+	return candidate
+
+
+func frozen_oracle() -> bool:
+	var manifest: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(EVIDENCE + "migration-frozen-manifest.json"))
+	for original: String in manifest.files:
+		var record: Dictionary = manifest.files[original]
+		var bytes := FileAccess.get_file_as_bytes("res://" + record.path)
+		if not check(digest(bytes) == record.sha256 and bytes.size() == int(record.bytes), "Pinned released53 source hash: " + original): return false
+	var journey_source := FileAccess.get_file_as_string(EVIDENCE + "migration-frozen-normal_journey_state.gd.txt")
+	write("user://migration-frozen-journey.gd", journey_source.trim_prefix("class_name NormalJourneyState\n").to_utf8_buffer())
+	frozen_journey = load("user://migration-frozen-journey.gd")
+	if not check(frozen_journey != null, "Pinned released four-map Journey loads"): return false
+	var rules_source := FileAccess.get_file_as_string(EVIDENCE + "migration-frozen-canonical_build_rules.gd.txt")
+	frozen53 = GDScript.new()
+	frozen53.source_code = rules_source.trim_prefix("class_name CanonicalBuildRules\n").replace('preload("res://scripts/world/normal_journey_state.gd")', 'preload("user://migration-frozen-journey.gd")')
+	return check(frozen53.reload() == OK, "Pinned released53 Rules loads with only class registration removed and Journey pinned")
+
+
+func migration_case(source: Dictionary, bytes: PackedByteArray, label: String) -> void:
+	var original := var_to_bytes(source)
+	var wanted := expected(source)
+	check(frozen53.reason(source).is_empty() and Rules.reason_v53(source).is_empty(), "Released and frozen53 both validate: " + label)
+	check(frozen53.decode(JSON.parse_string(bytes.get_string_from_utf8())) == source and Rules.decode_v53(JSON.parse_string(bytes.get_string_from_utf8())) == source, "Complete53 decode retains exact state: " + label)
+	seed(1165354)
+	var control := randi()
+	seed(1165354)
+	var result := Migration.migrate_v53(source)
+	if not check(result == wanted and var_to_bytes(source) == original and randi() == control, "Only version/new zero key change; source and global RNG untouched: " + label): return
+	for field: String in Rules.FIELDS:
+		if field not in ["version", "journey"]: check(result[field] == source[field], "Nonjourney field preserved: " + label + "/" + field)
+	var restored: Dictionary = result.journey.duplicate(true)
+	restored.best_tiers.erase(MAP_ID)
+	check(restored == source.journey, "All old progress, active/pending, counters and reward ordinals preserved: " + label)
+	var path := "user://migration-" + label + ".json"
+	write(path, bytes)
+	var game := Game.new()
+	var events := [0]
+	game.changed.connect(func(): events[0] += 1)
+	if not check(game.load_build(path) and game.snapshot() == wanted, "Real53 loader commits54: " + label): return
+	check(game.save_attempts == 1 and game.successful_saves == 1 and events[0] == 1, "Exactly one atomic write and changed event: " + label)
+	check(FileAccess.get_file_as_bytes(path + ".v53-backup.json") == bytes and not FileAccess.file_exists(path + ".tmp"), "Byte-exact original53 backup precedes commit: " + label)
+	check(game.migrated_from_legacy and game.migration_message.contains("遗迹庭园 I") and game.migration_message.contains("旧四图进度") and game.migration_message.contains("不额外赠送"), "Migration message matches narrow map-only change")
+	var saved := FileAccess.get_file_as_bytes(path)
+	check(game.load_build(path) and game.snapshot() == wanted and game.save_attempts == 1 and FileAccess.get_file_as_bytes(path) == saved and not game.migrated_from_legacy and game.migration_message.is_empty(), "Repeated54 load has no rewrite or migration notice")
+	var reopened := Store.new()
+	check(reopened.load_build(path) and reopened.snapshot() == wanted and reopened.save_attempts == 0 and FileAccess.get_file_as_bytes(path + ".v53-backup.json") == bytes, "Independent54 reload preserves backup and state")
+	evidence.cases[label] = {"source_sha256":digest(bytes), "source_bytes":bytes.size(), "saved_sha256":digest(saved), "revision":source.revision, "best_tiers":result.journey.best_tiers, "active_run":result.journey.active_run, "pending_map_reward":result.journey.pending_map_reward}
+	completed = true
+
+
+func reject_bytes(bytes: PackedByteArray, label: String, version: int = 53) -> void:
+	var path := "user://rejected-" + label + ".json"
+	write(path, bytes)
+	var game := Game.new()
+	var before := game.snapshot()
+	var events := [0]
+	game.changed.connect(func(): events[0] += 1)
+	check(not game.load_build(path) and game.snapshot() == before and FileAccess.get_file_as_bytes(path) == bytes, "Invalid source cannot replace memory or disk: " + label)
+	check(game.save_attempts == 0 and game.successful_saves == 0 and events[0] == 0 and not game.migrated_from_legacy and game.migration_message.is_empty(), "Invalid source rejects before writes, events and success notice")
+	check(not FileAccess.file_exists(path + ".v%d-backup.json" % version) and not FileAccess.file_exists(path + ".tmp"), "Invalid source rejects before backup or temporary write")
+	check(game.save_build(path) != OK and FileAccess.get_file_as_bytes(path) == bytes, "Rejected save path remains protected")
+
+
+func strict_checks(source: Dictionary) -> void:
+	var calls := [0]
+	var permissive := func(_value: Dictionary) -> String: calls[0] += 1; return ""
+	for mutation: String in ["new_map_key", "missing_old_key", "unknown_map_key", "new_active_identity", "new_pending_identity", "wrong_active_fee", "extra_active_field", "invalid_pending_reward", "fractional_revision", "bool_revision", "extra_envelope_field", "missing_journey", "bad_claim_ordinal", "invalid_talent", "over_budget", "wrong_source", "missing_location", "bad_binding", "bad_ledger", "bad_currency", "unknown_gem", "serial_reuse", "duplicate_group", "bad_progress", "bad_crafting"]:
+		var bad := source.duplicate(true)
+		match mutation:
+			"new_map_key": bad.journey.best_tiers[MAP_ID] = 0
+			"missing_old_key": bad.journey.best_tiers.erase("ginkgo_arcade")
+			"unknown_map_key": bad.journey.best_tiers.unrecognized = 0
+			"new_active_identity", "wrong_active_fee", "extra_active_field":
+				bad.journey.active_run = {"run_id":1, "map_id":MAP_ID if mutation == "new_active_identity" else "old_garden", "tier":1, "normal_ids":[], "special_ids":[], "fee_paid":4 if mutation == "wrong_active_fee" else 0}
+				if mutation == "extra_active_field": bad.journey.active_run.runtime_profile = {}
+			"new_pending_identity", "invalid_pending_reward": bad.journey.pending_map_reward = {"run_id":1, "map_id":MAP_ID if mutation == "new_pending_identity" else "old_garden", "tier":1, "shards":999 if mutation == "invalid_pending_reward" else 4}
+			"fractional_revision": bad.revision = 0.5
+			"bool_revision": bad.revision = true
+			"extra_envelope_field": bad.runtime_geometry = {}
+			"missing_journey": bad.erase("journey")
+			"bad_claim_ordinal": bad.journey.claimed_gems = 1
+			"invalid_talent": bad.talents.allocated.append("unknown"); bad.talents.normal_points -= 1
+			"over_budget": bad.talents.normal_points += 1
+			"wrong_source": bad.talents.source_version = "3.29.2"
+			"missing_location": bad.locations.erase(bad.locations.keys()[0])
+			"bad_binding": bad.bindings[0].keycode = KEY_C
+			"bad_ledger": bad.migration_ledger.normal_budget_at_migration += 1
+			"bad_currency":
+				for item: Dictionary in bad.items.values():
+					if item.kind == "currency": item.payload.quantity = -1; break
+			"unknown_gem":
+				for item: Dictionary in bad.items.values():
+					if item.kind == "skill_gem": item.definition_id = "skill:unknown"; break
+			"serial_reuse": bad.next_item_serial = 1
+			"duplicate_group": bad.skill_groups[1].id = bad.skill_groups[0].id
+			"bad_progress": bad.progress.xp = -1
+			"bad_crafting": bad.crafting.materials = {"calibration_shard":4}
+		Store.Items.metadata_for_items(source.items)
+		calls[0] = 0
+		check(Rules.reason_v53(bad) == frozen53.reason(bad), "Exact released53 native reason retained: " + mutation)
+		check(not Rules.reason_v53(bad, permissive).is_empty() and Rules.decode_v53(bad).is_empty() and Migration.migrate_v53(bad, permissive).is_empty() and calls[0] == 0, "Full53 legality precedes callbacks and warmed metadata: " + mutation)
+		reject_bytes(serialized(bad), "old53-" + mutation)
+	for mutation: String in ["missing_new_key", "unknown_new_key", "renamed_old_key", "bool_new_tier", "fractional_new_tier", "negative_new_tier", "too_high_new_tier"]:
+		var bad := expected(source)
+		match mutation:
+			"missing_new_key": bad.journey.best_tiers.erase(MAP_ID)
+			"unknown_new_key": bad.journey.best_tiers.unrecognized = 0
+			"renamed_old_key": bad.journey.best_tiers.erase("old_garden"); bad.journey.best_tiers.old_garden_renamed = 1
+			"bool_new_tier": bad.journey.best_tiers[MAP_ID] = true
+			"fractional_new_tier": bad.journey.best_tiers[MAP_ID] = 1.5
+			"negative_new_tier": bad.journey.best_tiers[MAP_ID] = -1
+			"too_high_new_tier": bad.journey.best_tiers[MAP_ID] = 4
+		check(not Rules.reason(bad).is_empty() and Rules.decode(bad).is_empty(), "Current54 exact five-key/tier domain: " + mutation)
+		reject_bytes(serialized(bad), "new54-" + mutation, 54)
+	check(Rules.decode(source).is_empty() and Rules.decode_v53(expected(source)).is_empty() and Migration.migrate_v53(expected(source)).is_empty(), "Version gates remain exact")
+	check(Migration.migrate_v53(source, func(_value: Dictionary) -> String: return "additional restriction").is_empty(), "Callback can add restrictions only")
+	reject_bytes('{"version":53,"broken":'.to_utf8_buffer(), "broken-json")
+	completed = true
+
+
+func historical_chain_checks() -> void:
+	for label: String in ["old_garden-pending", "sunwell_terrace-active"]:
+		var bytes := FileAccess.get_file_as_bytes("res://docs/qa/v083-save/fixtures/v49-" + label + ".json")
+		var old49 := Rules.decode_v49(JSON.parse_string(bytes.get_string_from_utf8()))
+		if not check(not old49.is_empty(), "Genuine49 active/pending input remains legal: " + label): return
+		var old50 := FourthMap.migrate_v49(old49)
+		var old51 := Chaos.migrate_v50(old50)
+		var old52 := Encircling.migrate_v51(old51)
+		var old53 := LongStride.migrate_v52(old52)
+		var versions := {50:old50, 51:old51, 52:old52, 53:old53}
+		for version: int in versions:
+			var prior: Dictionary = versions[version]
+			if not check(not prior.is_empty() and prior.version == version and prior.journey.best_tiers.keys().size() == 4 and not prior.journey.best_tiers.has(MAP_ID), "Historical migration keeps its own version and four maps: %d" % version): return
+			var decoder := Callable(Rules, "decode_v%d" % version)
+			var validator := Callable(Rules, "reason_v%d" % version)
+			check(decoder.call(JSON.parse_string(JSON.stringify(prior))) == prior and str(validator.call(prior)).is_empty(), "Historical50..53 decoder remains valid")
+			for mutation: String in ["new_key", "new_active", "new_pending"]:
+				var bad := prior.duplicate(true)
+				if mutation == "new_key": bad.journey.best_tiers[MAP_ID] = 0
+				if mutation == "new_active": bad.journey.pending_map_reward = {}; bad.journey.active_run = {"run_id":1,"map_id":MAP_ID,"tier":1,"normal_ids":[],"special_ids":[],"fee_paid":0}
+				if mutation == "new_pending": bad.journey.active_run = {}; bad.journey.pending_map_reward = {"run_id":1,"map_id":MAP_ID,"tier":1,"shards":4}
+				check(decoder.call(bad).is_empty() and not str(validator.call(bad)).is_empty(), "Schema%d rejects54 vocabulary: %s" % [version,mutation])
+			var path := "user://chain%d-%s.json" % [version,label]
+			var old_bytes := serialized(prior)
+			write(path, old_bytes)
+			var store := Store.new()
+			check(store.load_build(path) and store.snapshot() == expected(old53) and store.save_attempts == 1, "Actual old%d→54 loader chain preserves run/reward: %s" % [version,label])
+			check(FileAccess.get_file_as_bytes(path + ".v%d-backup.json" % version) == old_bytes, "Chain backs up original version bytes only")
+		check(old53.journey.active_run == old49.journey.active_run and old53.journey.pending_map_reward == old49.journey.pending_map_reward, "All historical intermediate migrations preserve active/pending identity")
+	completed = true
+
+
+func failure_checks(source: Dictionary, bytes: PackedByteArray) -> void:
+	for failure: String in ["backup", "collision", "external", "atomic"]:
+		var path := "user://failure-" + failure + ".json"
+		write(path, bytes)
+		var game := Game.new()
+		var before := game.snapshot()
+		var events := [0]
+		game.changed.connect(func(): events[0] += 1)
+		if failure == "backup": game._io = BackupFailIO.new()
+		if failure == "collision": write(path + ".v53-backup.json", "retained backup".to_utf8_buffer())
+		if failure == "external": game._io = ExternalIO.new()
+		if failure == "atomic": check(DirAccess.make_dir_absolute(path + ".tmp") == OK, "Create real temporary-path write failure")
+		check(not game.load_build(path) and game.snapshot() == before and game.successful_saves == 0 and events[0] == 0 and not game.migrated_from_legacy and game.migration_message.is_empty(), "Failed migration never publishes memory/event/notice: " + failure)
+		check(FileAccess.get_file_as_bytes(path) == ("external writer".to_utf8_buffer() if failure == "external" else bytes), "Failed migration preserves original/concurrent writer bytes: " + failure)
+		check(game.save_attempts == (1 if failure == "atomic" else 0), "Backup and concurrency guard precede commit attempts")
+		if failure == "collision": check(FileAccess.get_file_as_string(path + ".v53-backup.json") == "retained backup", "Never overwrite conflicting backup")
+		if failure in ["external", "atomic"]: check(FileAccess.get_file_as_bytes(path + ".v53-backup.json") == bytes, "Failed commit retains byte-exact old backup")
+		check(game.save_build(path) != OK and game.snapshot() == before, "Failed migration destination stays protected")
+		if failure == "atomic":
+			check(DirAccess.remove_absolute(path + ".tmp") == OK, "Remove actual write fault")
+			check(game.load_build(path) and game.snapshot() == expected(source) and events[0] == 1 and game.successful_saves == 1, "Safe retry reuses backup and commits once")
+			check(FileAccess.get_file_as_bytes(path + ".v53-backup.json") == bytes and not FileAccess.file_exists(path + ".tmp"), "Retry retains exact original and leaves no partial file")
+	completed = true
+
+
+func current_map_checks(source: Dictionary) -> void:
+	var value := expected(source)
+	check(Journey.empty() == Store.new().snapshot().journey and Journey.reason(Journey.empty()).is_empty(), "New-game default adds fifth zero progress key")
+	check(Journey.empty_v53() == frozen_journey.empty() and Journey.decode_v53(Journey.empty_v53()) == frozen_journey.empty(), "Historical four-map defaults and decoder stay exact")
+	var old_journey: Dictionary = value.journey.duplicate(true)
+	for tier: int in range(1,4):
+		var compiled := Journey.Maps.compile_normal(MAP_ID, tier, [], [])
+		if not check(compiled.ok, "New map tier compiles: %d" % tier): return
+		check(compiled.profile.fee == [0,4,8][tier-1] and compiled.profile.base_completion_reward == [4,8,12][tier-1], "New map uses existing tier economy")
+		check(NormalMaps.definition(MAP_ID,tier).wave == [1,4,8][tier-1] and NormalMaps.definition(MAP_ID,tier).ordinary_target == 24, "New map uses declared waves and ordinary budget")
+		var started := Journey.start(value.journey, compiled.profile)
+		if not check(started.ok and Journey.reason(started.journey).is_empty(), "Current54 pure start accepts new identity after its own prior tier"): return
+		value.journey = started.journey
+		check(Rules.reason(value).is_empty() and Rules.decode(JSON.parse_string(JSON.stringify(value))) == value, "Current54 active new-map identity roundtrips")
+		var done := Journey.complete(value.journey, started.run_id)
+		if not check(done.ok and done.reward == [4,8,12][tier-1], "Current54 completion applies existing reward"): return
+		value.journey = done.journey
+		check(Rules.reason(value).is_empty() and Rules.decode(JSON.parse_string(JSON.stringify(value))) == value, "Current54 pending new-map reward roundtrips")
+		for map_id: String in Journey.V53_MAP_IDS: check(value.journey.best_tiers[map_id] == old_journey.best_tiers[map_id], "New tier cannot change old map progress: " + map_id)
+		value.journey.pending_map_reward = {} # Pure boundary fixture, not a reward claim or currency grant.
+	check(not Journey.start(expected(source).journey, Journey.Maps.compile_normal(MAP_ID,2,[],[]).profile).ok, "Old-garden completion never unlocks new-map tier II")
+	check(Rules.SourceTree._execution_policy(54) == 49 and Rules.equipment_vocabulary_for_save_version(54) == 51 and Journey.GEM_DEFINITIONS == frozen_journey.GEM_DEFINITIONS, "Source policy, equipment vocabulary and frozen reward table stay unchanged")
+	completed = true
+
+
+func _initialize() -> void:
+	var isolation := OS.get_environment("XDG_DATA_HOME")
+	if not isolation.begins_with("/tmp/godot-m1-v116-migration-") or not OS.get_user_data_dir().begins_with(isolation + "/"):
+		push_error("Requires isolated v116 migration XDG storage")
+		quit(78)
+		return
+	call_deferred("_run")
+
+
+func _run() -> void:
+	check(Rules.VERSION == 54 and Rules.V53_VERSION == 53, "Exactly schema54 with frozen53")
+	if not frozen_oracle(): finish(); return
+	var bytes := FileAccess.get_file_as_bytes(FIXTURE)
+	var source := Rules.decode_v53(JSON.parse_string(bytes.get_string_from_utf8()))
+	if not check(not source.is_empty() and source.version == 53 and source.revision == 34, "Real v115 earned save decodes unchanged"): finish(); return
+	evidence.fixture = {"path":FIXTURE,"sha256":digest(bytes),"bytes":bytes.size()}
+	migration_case(source, bytes, "earned-v115")
+	check(completed, "Earned fixture migration completed")
+	# Synthetic envelope boundary cases are distinct from the immutable earned save.
+	# They prove preservation of four different values and each old run identity.
+	for map_id: String in Journey.V53_MAP_IDS:
+		var old := source.duplicate(true)
+		old.journey.best_tiers = {"old_garden":3,"broken_ruins":2,"sunwell_terrace":1,"ginkgo_arcade":0}
+		var started: Dictionary = frozen_journey.start(old.journey, Journey.Maps.compile_normal(map_id,1,[],[]).profile)
+		if not check(started.ok, "Controlled frozen53 active envelope starts: " + map_id): finish(); return
+		old.journey = started.journey
+		completed = false
+		migration_case(old, serialized(old), map_id + "-active")
+		check(completed, "Active migration completed: " + map_id)
+		var done: Dictionary = frozen_journey.complete(old.journey, started.run_id)
+		if not check(done.ok, "Controlled frozen53 pending envelope completes"): finish(); return
+		old.journey = done.journey
+		completed = false
+		migration_case(old, serialized(old), map_id + "-pending")
+		check(completed, "Pending migration completed: " + map_id)
+	for entry: Array in [[strict_checks,"strict53/54 envelopes"],[current_map_checks,"new-map progression"]]:
+		completed = false
+		entry[0].call(source)
+		check(completed, "Focused section completed: " + entry[1])
+	completed = false
+	historical_chain_checks()
+	check(completed, "Historical50..53 loader chains completed")
+	completed = false
+	failure_checks(source,bytes)
+	check(completed, "Backup and atomic failure cases completed")
+	check(FileAccess.get_file_as_bytes(FIXTURE) == bytes, "Checked-in earned fixture byte-identical after all tests")
+	finish()
+
+
+func finish() -> void:
+	evidence.checks = checks
+	evidence.failures = failures
+	evidence.user_data_dir = OS.get_user_data_dir()
+	var output := OS.get_environment("RUINS_GARDEN_MIGRATION_REPORT")
+	if not output.is_empty():
+		var file := FileAccess.open(output,FileAccess.WRITE)
+		if file != null:
+			file.store_string(JSON.stringify(evidence,"\t",true,true) + "\n")
+			file.close()
+	print("Ruins Garden migration: %d checks, %d failures" % [checks,failures.size()])
+	quit(1 if not failures.is_empty() else 0)

@@ -36,7 +36,7 @@ func _init() -> void:
 
 
 func configure(geometry: Dictionary) -> bool:
-	if geometry.get("id") != "modular_study":
+	if geometry.get("id") not in ["modular_study", "ruins_garden"]:
 		return _fail("Natural ground requires modular_study geometry")
 	if not geometry.get("bounds") is Rect2 or geometry.get("bounds") != EXPECTED_BOUNDS:
 		return _fail("Natural ground bounds differ from the authored study")
@@ -67,7 +67,7 @@ func configure(geometry: Dictionary) -> bool:
 		return _fail("Natural ground mask does not match the module polygons")
 	if _ground_ready and _polygon_hash == polygon_hash:
 		return true
-	_geometry = {"id": "modular_study", "bounds": EXPECTED_BOUNDS, "module_polygons": polygons}
+	_geometry = {"id": geometry.id, "bounds": EXPECTED_BOUNDS, "module_polygons": polygons}
 	_polygon_hash = polygon_hash
 	if _ground_material == null:
 		_build_material()

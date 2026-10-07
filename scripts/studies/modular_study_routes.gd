@@ -1,5 +1,5 @@
 extends RefCounted
-## Two bounded research detours on the unchanged v111 native assembly.
+## Two bounded detours for the study and formal map on the v111 native assembly.
 ## The caller owns installation/readiness and adopts the same geometry later.
 ## Never mutate source landmarks, rebuild collision space or consume game RNG.
 const StudyGeometry = preload("res://scripts/studies/modular_study_geometry.gd")
@@ -16,12 +16,13 @@ static func prepare(original_landmarks: Dictionary, geometry: RefCounted) -> Dic
 	if not geometry is StudyGeometry or not geometry.physics_ready():
 		return _failure("Study route geometry is not ready")
 	var snapshot: Dictionary = geometry.snapshot()
-	if snapshot.get("id") != "modular_study" or snapshot.get("source_map_id") != "old_garden" or not snapshot.get("bounds") is Rect2:
+	var map_id: String = str(snapshot.get("source_map_id", ""))
+	if map_id not in ["old_garden", "ruins_garden"] or snapshot.get("id") != ("modular_study" if map_id == "old_garden" else map_id) or not snapshot.get("bounds") is Rect2:
 		return _failure("Study routes require the native old_garden assembly")
 	var bounds: Rect2 = snapshot.bounds
 	if bounds.size != Layout.MINIMUM_SIZE or not StudyGeometry._plain_metadata(original_landmarks):
 		return _failure("Study routes require bounded detached old_garden landmarks")
-	var source: Dictionary = Layout.layout("old_garden", bounds)
+	var source: Dictionary = Layout.layout(map_id, bounds)
 	var originals: Variant = original_landmarks.get("route_segments")
 	if not source.ok or not originals is Array or originals.size() != SOURCE_SEGMENTS:
 		return _failure("Study routes require the twelve original segments")

@@ -35,7 +35,7 @@ func clear() -> void:
 	_study_source_to_world = 0.0
 
 func configure(depth: Node2D, geometry: Dictionary) -> Dictionary:
-	if geometry.get("id", "") == "modular_study": return configure_modules(depth, geometry)
+	if geometry.get("id", "") in ["modular_study", "ruins_garden"]: return configure_modules(depth, geometry)
 	if not is_instance_valid(depth): return geometry.duplicate(true)
 	_load_assets()
 	if _depth == depth and _source == geometry: return _presentation.duplicate(true)
@@ -152,7 +152,7 @@ func _study_sprite(layer: Dictionary, stable_name: String, source_to_world: floa
 
 func _validate_study_geometry(depth: Node2D, geometry: Dictionary) -> String:
 	if not is_instance_valid(depth) or depth.is_queued_for_deletion(): return "Study depth parent is unavailable"
-	if geometry.get("id", "") != "modular_study": return "Modules require explicit modular_study geometry"
+	if geometry.get("id", "") not in ["modular_study", "ruins_garden"]: return "Modules require explicit modular_study geometry"
 	var bounds: Variant = geometry.get("bounds")
 	if not bounds is Rect2 or not bounds.position.is_finite() or not bounds.size.is_finite() or not bounds.end.is_finite() or not bounds.has_area():
 		return "Study bounds must be a finite, positive Rect2"

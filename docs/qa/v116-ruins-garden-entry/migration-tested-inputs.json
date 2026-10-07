@@ -1,0 +1,118 @@
+{
+  "base_commit": "9ad500573285146af473828d5549f659b94f1c38",
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "captured_after_passing_run": true,
+  "attempts": [
+    {
+      "label": "migration-attempt01",
+      "exit_code": 1,
+      "test_executed": false,
+      "cause": "Test-local inferred Dictionary parse error; fixed explicit type"
+    },
+    {
+      "label": "migration-attempt02",
+      "exit_code": 0,
+      "checks": 575,
+      "failures": 0,
+      "xdg_root": "/tmp/godot-m1-v116-migration-attempt02"
+    }
+  ],
+  "files": {
+    "scripts/world/normal_journey_state.gd": {
+      "sha256": "e2c7d342a7c6e9082348c10dea127cb087621fca02e2de2913c4629345b836d1",
+      "bytes": 11604
+    },
+    "scripts/save/canonical_build_rules.gd": {
+      "sha256": "eae847bd08b3d13fc2b5a468eadcb744ebe872fee71a9bb1f57acfb5364d15bd",
+      "bytes": 38358
+    },
+    "scripts/save/canonical_build_store.gd": {
+      "sha256": "de05ad6c5654bb359d94d1b7e4fac13a81d9a8d6d8011981f2d49ac79b7c011f",
+      "bytes": 30283
+    },
+    "scripts/save/long_stride_gem_migration.gd": {
+      "sha256": "197f3bcdc9c9f02669af0943518d1afad4eaa2cdef86e9289f1b583e8c1fffb1",
+      "bytes": 637
+    },
+    "scripts/save/ruins_garden_migration.gd": {
+      "sha256": "e6d7838cca221b4ae6b53ad762bc6ddfc5d2f1bcdac5962ea2a9f666843536b3",
+      "bytes": 713
+    },
+    "scripts/canonical_game_state.gd": {
+      "sha256": "778898b1028c17144ab48d6fc946866b7f9108a661bd8d976fc754734012b5d6",
+      "bytes": 74636
+    },
+    "tests/ruins_garden_migration_test.gd": {
+      "sha256": "5b03d370799ad631031a95ad758a42268ada2e06238f57effe14ef02de3a7f9c",
+      "bytes": 22141
+    },
+    "scripts/world/map_catalog.gd": {
+      "sha256": "4f906c2f6d3c063c5e162ed75bb2b440fe0ba263a46c6c66e16427d77edc3dc7",
+      "bytes": 4592
+    },
+    "scripts/world/normal_map_catalog.gd": {
+      "sha256": "a3d5d7a58fc481c2b258a0c083b8bdb4dd5a483121a0e2d4796bfbe676597ddb",
+      "bytes": 1408
+    },
+    "scripts/world/map_compiler.gd": {
+      "sha256": "c800ccaf90a9807cc753fc694c19c614e52fff8226fdcaa27f0f5fdc2fcb5851",
+      "bytes": 4925
+    },
+    "scripts/items/gem_catalog.gd": {
+      "sha256": "791ab28f928503413133b0832a1cde944635a5da6e5b6a18d101a41c063aafe5",
+      "bytes": 6149
+    },
+    "scripts/items/equipment_catalog.gd": {
+      "sha256": "fa616367c66f7048317eac29feed3e607a610c9d47e96aa7da4e9261fa0dd6ea",
+      "bytes": 42307
+    },
+    "scripts/passives/source_tree_runtime.gd": {
+      "sha256": "635c6424e28ae1681ef8192bd9a40002e2a8a2aa383ba0606d71e3c0f3d9a9a9",
+      "bytes": 16712
+    },
+    "docs/qa/v115-native-map-entry/earned-v114-save.json": {
+      "sha256": "57cc365e657146a5bd65274297f158ad4363948d1e9c4f915f80e79c0511d1c8",
+      "bytes": 15240
+    },
+    "docs/qa/v116-ruins-garden-entry/migration-README.md": {
+      "sha256": "ed2a2f7a9ebe7a441d0fc4f32d90550d891a653c3d64ab271513c380b285ca5b",
+      "bytes": 5174
+    },
+    "docs/qa/v116-ruins-garden-entry/migration-attempt01-exit-code.txt": {
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "bytes": 2
+    },
+    "docs/qa/v116-ruins-garden-entry/migration-attempt01-test.gd.txt": {
+      "sha256": "c9993306acba0f4a5c1f0819511ac5bb2063579aa9d88cd3ad22bcdb7868b76b",
+      "bytes": 22130
+    },
+    "docs/qa/v116-ruins-garden-entry/migration-attempt01.log": {
+      "sha256": "f6f07388b158cf5bd3fd90d3caebce7c4342b02dd45e4986bf5fb02a6d5fa0e6",
+      "bytes": 420
+    },
+    "docs/qa/v116-ruins-garden-entry/migration-attempt02-exit-code.txt": {
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    "docs/qa/v116-ruins-garden-entry/migration-attempt02-result.json": {
+      "sha256": "d8ff96f79ee83ad74e0b185dae9102b11a8fa6fe15dff8093fe5e1ec7f9af1b4",
+      "bytes": 5202
+    },
+    "docs/qa/v116-ruins-garden-entry/migration-attempt02.log": {
+      "sha256": "131e59f8118d810f94e739574c02caeb2fbdf011d9a7dae90d73169a9f2288cc",
+      "bytes": 120
+    },
+    "docs/qa/v116-ruins-garden-entry/migration-frozen-canonical_build_rules.gd.txt": {
+      "sha256": "32d9406070dc8e471ba70c0b586e9ab4b8baadf8fbc71f8bb345f54c1ce51530",
+      "bytes": 37502
+    },
+    "docs/qa/v116-ruins-garden-entry/migration-frozen-manifest.json": {
+      "sha256": "1b194833eae0bb52046d2af1d588fdbf3caa3fc4c8ee6fabffb9c57993e0beba",
+      "bytes": 583
+    },
+    "docs/qa/v116-ruins-garden-entry/migration-frozen-normal_journey_state.gd.txt": {
+      "sha256": "4e6a776c3ee1ec188f8c782d9aca23b1fb884c37a337544ae333d6988046ed6a",
+      "bytes": 11167
+    }
+  }
+}

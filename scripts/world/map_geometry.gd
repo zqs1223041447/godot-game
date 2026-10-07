@@ -30,6 +30,8 @@ func configure(id: String, bounds: Rect2) -> bool:
 
 ## Explicit opt-in keeps historical geometry and normal/town callers unchanged.
 func configure_exploration(id: String, bounds: Rect2) -> bool:
+	# This map has no rectangle fallback; its prepared native instance is mandatory.
+	if id == "ruins_garden": return false
 	var planned: Dictionary = ExplorationLayout.layout(id, bounds)
 	if not planned.ok: return false
 	if id == _id and bounds == _bounds and _encounter_mode == "exploration": return true

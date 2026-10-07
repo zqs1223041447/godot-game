@@ -1,6 +1,6 @@
 extends RefCounted
-## Research-only pre-fee entry; legacy post-entry install remains for old fixtures.
-## Formal map definitions and normal saves are never modified by this adapter.
+## Shared pre-fee native entry for the explicit formal map and isolated study.
+## Main owns fee/save transactions; legacy post-entry install remains for fixtures.
 const StudyGeometry = preload("res://scripts/studies/modular_study_geometry.gd")
 const MANIFEST := "res://art-studies/v111/exports/manifest.json"
 const COLLISIONS := "res://art-studies/v111/exports/collisions.json"
@@ -8,7 +8,8 @@ const ASSEMBLY := "res://art-studies/v111/exports/assembly-layout.json"
 const HERO := "res://assets/actors/studies/hero_direction_study.json"
 const ORIGIN_FROM_BOUNDS := Vector2(450, 1450)
 
-static func layout(bounds: Rect2) -> Dictionary:
+static func layout(bounds: Rect2, map_id: String = "old_garden") -> Dictionary:
+	if map_id not in ["old_garden", "ruins_garden"]: return {"ok": false, "error": "Unsupported modular map identity"}
 	var manifest: Variant = JSON.parse_string(FileAccess.get_file_as_string(MANIFEST))
 	var collisions: Variant = JSON.parse_string(FileAccess.get_file_as_string(COLLISIONS))
 	var assembly: Variant = JSON.parse_string(FileAccess.get_file_as_string(ASSEMBLY))
@@ -42,7 +43,7 @@ static func layout(bounds: Rect2) -> Dictionary:
 	var gate_rear := gate_position + Vector2(portal.end.godot_local_world[0], portal.end.godot_local_world[1])
 	return {"ok": true, "polygons": polygons, "instances": instances, "solid_probes": probes,
 		"gate_front": gate_front, "gate_rear": gate_rear,
-		"presentation": {"module_instances": instances, "study_origin": origin, "source_map_id": "old_garden"}}
+		"presentation": {"module_instances": instances, "study_origin": origin, "source_map_id": map_id}}
 
 static func install(arena: Node2D, use_static_hero: bool = true) -> Dictionary:
 	if arena.world_context().mode != "map" or str(arena._map_run.profile.id) != "old_garden" or arena.enemies.size() != 25:
@@ -105,26 +106,35 @@ var _entry: RefCounted
 var _preparing := false
 var _draft_revision := -1
 var _hero_definition: Dictionary = {}
+var _retrying := false
+var _world_revision := -1
 
 
-func prepare_entry(arena: Node2D) -> Dictionary:
+func prepare_entry(arena: Node2D, use_static_hero: bool = true, retrying: bool = false) -> Dictionary:
 	if _preparing or (_entry != null and _entry.phase() in ["preparing", "ready", "in_use"]):
 		return {"ok": false, "reason": "Study entry preparation is already pending"}
-	if not arena.world_context().normal_town or arena.map_draft().map_id != "old_garden" or not arena.state.normal_journey().active_run.is_empty():
-		return {"ok": false, "reason": "Study preparation requires the ordinary old_garden town draft"}
+	var context: Dictionary = arena.world_context()
+	var map_id: String = str(arena._map_run.profile.id) if retrying else str(arena.map_draft().map_id)
+	if retrying:
+		if context.mode != "map" or context.test_mode or map_id != "ruins_garden" or arena._normal_completion_pending or arena.state.normal_journey().active_run.get("run_id", 0) != arena._normal_run_id:
+			return {"ok": false, "reason": "Native retry requires the active ruins_garden run"}
+	elif not context.normal_town or map_id not in ["old_garden", "ruins_garden"] or not arena.state.normal_journey().active_run.is_empty():
+		return {"ok": false, "reason": "Native preparation requires a settled matching town draft"}
+	_retrying = retrying
+	_world_revision = int(context.revision)
 	_preparing = true
 	_hero_definition.clear()
 	_draft_revision = int(arena.map_draft().revision)
 	_entry = PreparedEntry.new(arena.map_entry_preparation_context())
 	var bounds: Rect2 = View.exploration_arena()
-	var original: Dictionary = ExplorationLayout.layout("old_garden", bounds)
-	var assembly: Dictionary = layout(bounds)
+	var original: Dictionary = ExplorationLayout.layout(map_id, bounds)
+	var assembly: Dictionary = layout(bounds, map_id)
 	if not original.ok or not assembly.ok:
 		return _preparation_failed("Study layout is unavailable")
 	var candidate = StudyGeometry.new()
 	if not _entry.attach(candidate, Callable(candidate, "_release_native")):
 		return _preparation_failed("Study geometry ownership could not be established")
-	var installed: Dictionary = candidate.install(bounds, assembly.polygons, original.landmarks.entry, assembly.presentation)
+	var installed: Dictionary = candidate.install(bounds, assembly.polygons, original.landmarks.entry, assembly.presentation, map_id)
 	if not installed.ok:
 		return _preparation_failed(str(installed.error))
 	var tree: SceneTree = arena.get_tree()
@@ -139,13 +149,14 @@ func prepare_entry(arena: Node2D) -> Dictionary:
 	var routes: Dictionary = StudyRoutes.prepare(original.landmarks, candidate)
 	if not routes.ok:
 		return _preparation_failed(str(routes.reason))
-	var decoded: Variant = JSON.parse_string(FileAccess.get_file_as_string(HERO))
-	if not decoded is Dictionary:
-		return _preparation_failed("Study hero definition is unavailable")
-	var hero_check: Dictionary = load("res://scripts/visuals/actor_sprite_catalog.gd").prepare_presentation(decoded)
-	if not hero_check.ok:
-		return _preparation_failed(str(hero_check.reason))
-	_hero_definition = decoded.duplicate(true)
+	if use_static_hero:
+		var decoded: Variant = JSON.parse_string(FileAccess.get_file_as_string(HERO))
+		if not decoded is Dictionary:
+			return _preparation_failed("Study hero definition is unavailable")
+		var hero_check: Dictionary = load("res://scripts/visuals/actor_sprite_catalog.gd").prepare_presentation(decoded)
+		if not hero_check.ok:
+			return _preparation_failed(str(hero_check.reason))
+		_hero_definition = decoded.duplicate(true)
 	if not _entry.ready(routes.landmarks, bounds):
 		return _preparation_failed("Study preparation lost ownership")
 	_preparing = false
@@ -162,7 +173,7 @@ func cancel_entry() -> void:
 func enter(arena: Node2D) -> Dictionary:
 	if _preparing or _entry == null:
 		return {"ok": false, "reason": "Study entry is not prepared"}
-	var result: Dictionary = arena.start_map_prepared(_draft_revision, _entry)
+	var result: Dictionary = arena.retry_map_prepared(_world_revision, _entry) if _retrying else arena.start_map_prepared(_draft_revision, _entry)
 	if not result.ok: return result
 	# A committed gameplay transaction must never be reported as a failed entry
 	# because of a later display-only resource problem. The definition was

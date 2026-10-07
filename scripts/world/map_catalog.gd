@@ -2,6 +2,7 @@ class_name MapCatalog
 extends RefCounted
 const Encounters=preload("res://scripts/encounters/encounter_catalog.gd")
 const MAPS={
+	"ruins_garden":{"name":"遗迹庭园","description":"沿古典断墙、拱门与岩石之间探索六处驻点。24个普通根怪与首领入场时全部在场；清理全部怪物和后代完成挑战。模块轮廓同时阻挡移动、弹体和视线。","wave":4,"ordinary_target":24,"boss_id":"rift_warden","boss_attack_id":"ruins_garden_slam","native_entry":true},
 	"old_garden":{"name":"旧庭试炼","description":"开阔庭院，无实体残墙。靠近任意据点木牌激活整组8个根怪，可同时挑战多组。三个据点共24根怪，全部击败后前往首领入口，再清理首领和后代。首领近身震地锁定起手位置，看到预警走出圆圈。","wave":4,"ordinary_target":24,"boss_id":"rift_warden","boss_attack_id":"garden_slam"},
 	"broken_ruins":{"name":"断垣试炼","description":"两道错位残墙需绕行；贯穿不穿墙，撞墙不触发到期效果。三个据点可自由选择推进顺序，每组12根怪可同时出场。全部36根怪击败后前往首领入口，再清理首领和后代。首领落印锁定你的起手位置，及时走开；墙体阻挡视线。","wave":5,"ordinary_target":36,"boss_id":"rift_warden","boss_attack_id":"ruins_mark"},
 	"sunwell_terrace":{"name":"晴泉台地","description":"四座实体泉池阻挡移动、弹体和视线，沿池间通道绕行。西泉据点偏重壳与霜纹，北门据点混合编排，东阶据点偏掠行与雷纹；霜纹、雷纹分别从第4、5波出现。三个据点自由顺序，每组12根怪可同场挑战，共36根怪。清理后在南侧入口激活首领；两次回响均锁定起手位置，持续离开预警范围。","wave":6,"ordinary_target":36,"boss_id":"rift_warden","boss_attack_id":"sunwell_echo"},
@@ -13,7 +14,9 @@ const SPECIAL={
 	"chaos_patrol":{"name":"蚀影巡逻","description":"原本生成重壳体的普通名额改为蚀影守卫，保留原稀有度与机制；灰烬、分裂、孵化和首领不变。纯混沌攻击蓄力1秒，锁定你的起手位置，走出圆圈即可避开；守卫有25%混沌抗性。","minimum_wave":5,"species":"brute","template":"chaos_guard"}}
 static func options(test_mode:bool=true)->Dictionary:
 	var maps:Array[Dictionary]=[];var special:Array[Dictionary]=[];var normal:Array[Dictionary]=[]
-	for id:String in MAPS:var row:Dictionary=MAPS[id].duplicate(true);row.id=id;maps.append(row)
+	for id:String in MAPS:
+		if test_mode and id == "ruins_garden": continue
+		var row:Dictionary=MAPS[id].duplicate(true);row.id=id;maps.append(row)
 	for id:String in SPECIAL:
 		var row:Dictionary=SPECIAL[id].duplicate(true);row.id=id
 		row["completion_reward_bonus"]=0 if test_mode else 2
