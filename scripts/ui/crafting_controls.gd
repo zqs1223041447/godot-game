@@ -211,12 +211,12 @@ func _blocked_reason(operation: String) -> String:
 	if not _disabled_reason.strip_edges().is_empty():
 		return _disabled_reason
 	if _item_id.is_empty() or _source_instance.is_empty():
-		return "请先选择可制作的装备。"
+		return "请先选择可制作的物品。"
 	if _metadata_mode:
 		var entry: Dictionary = _operations.get(operation,{})
 		if not entry.get("available",false):
 			var reason := str(entry.get("reason",""))
-			return reason if not reason.is_empty() else "此装备不适用这项工艺"
+			return reason if not reason.is_empty() else "此物品不适用这项工艺"
 		return ""
 	var quote: Dictionary = _salvage_quote if operation == "salvage" else _recalibrate_quote
 	var ok: Variant = quote.get("ok", false)

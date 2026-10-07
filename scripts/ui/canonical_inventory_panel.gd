@@ -399,7 +399,7 @@ func _refresh_crafting() -> void:
 	_craft_quotes.clear()
 	var item: Dictionary = model.item(_selected_uid)
 	_discard.disabled = item.is_empty() or not model.can_discard_item(_selected_uid)
-	var source: Dictionary = item.get("payload",{}) if item.get("kind","") == "equipment" else {}
+	var source: Dictionary = item.get("payload",{}) if item.get("kind","") in ["equipment", "jewel"] else {}
 	if item.get("kind", "") in ["skill_gem", "support_gem"] and model.has_method("gem_recycle_info"):
 		var info: Dictionary = _trade_arena.normal_gem_recycle_info(_selected_uid) if _trade_arena != null else {"available":false,"reason":"请先返回正式城镇","credit":1}
 		_craft_metadata.clear()
@@ -462,9 +462,10 @@ func _request_craft(operation: String,uid: String,source: Dictionary) -> void:
 	_pending_craft = {"quote":quote.duplicate(true),"source":source.duplicate(true)}
 	var name_value: String = model.item_definition(uid).name
 	if operation == "salvage":
-		_craft_dialog.title = "确认回收装备"
+		var is_jewel: bool = model.item(uid).get("kind", "") == "jewel"
+		_craft_dialog.title = "确认回收珠宝" if is_jewel else "确认回收装备"
 		_craft_dialog.ok_button_text = "确认回收"
-		_craft_dialog.dialog_text = "回收「%s」？\n获得校准碎片 %d 枚。\n这件装备将被消耗，无法恢复。" % [name_value,int(quote.materials.get("calibration_shard",0))]
+		_craft_dialog.dialog_text = "回收「%s」？\n获得校准碎片 %d 枚。\n%s将被消耗，无法恢复。" % [name_value,int(quote.materials.get("calibration_shard",0)),"这颗珠宝" if is_jewel else "这件装备"]
 	elif operation == "recalibrate":
 		_craft_dialog.title = "确认数值校准"
 		_craft_dialog.ok_button_text = "确认消耗并校准"
