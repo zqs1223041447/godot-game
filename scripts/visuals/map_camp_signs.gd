@@ -24,16 +24,16 @@ func set_encounter_state(camps: Array, boss_phase: String) -> void:
 func _draw() -> void:
 	draw_count += 1
 	var index := 0
-	for camp: Dictionary in _landmarks.get("camps", []):
+	for camp: Dictionary in _landmarks.get("outposts", _landmarks.get("camps", [])):
 		var state := str(_states.get(str(camp.id), "dormant"))
-		_sign(Vector2(camp.get("sign_position", camp.trigger_center)), ["I", "II", "III"][index % 3], state, false)
+		_sign(Vector2(camp.get("sign_position", camp.get("trigger_center", camp.get("center", Vector2.ZERO)))), ["I", "II", "III", "IV", "V", "VI"][index % 6], state, false)
 		index += 1
 	var boss: Dictionary = _landmarks.get("boss", {})
 	if not boss.is_empty():
-		_sign(Vector2(boss.get("sign_position", boss.trigger_center)), "首领", "cleared" if _boss == "defeated" else "active" if _boss in ["ready", "active"] else "dormant", true)
+		_sign(Vector2(boss.get("sign_position", boss.get("trigger_center", boss.get("center", Vector2.ZERO)))), "首领", "cleared" if _boss == "defeated" else "active" if _boss in ["ready", "active"] else "dormant", true)
 
 func _sign(center: Vector2, caption: String, state: String, boss: bool) -> void:
-	var cloth := Color("998768") if state == "dormant" else Color("af784a") if state == "active" else Color("748765")
+	var cloth := Color("998768") if state in ["dormant", "resident"] else Color("af784a") if state == "active" else Color("748765")
 	var width := 44.0 if boss else 32.0
 	draw_line(center + Vector2(-width / 2, 8), center + Vector2(-width / 2, -37), Color("554936"), 4.0, true)
 	var flag := PackedVector2Array([center + Vector2(-width / 2, -37), center + Vector2(width / 2 + 8, -37), center + Vector2(width / 2, -24), center + Vector2(width / 2 + 8, -11), center + Vector2(-width / 2, -11)])
@@ -53,7 +53,7 @@ func _sign(center: Vector2, caption: String, state: String, boss: bool) -> void:
 		draw_line(center + Vector2(9, 11), center + Vector2(-9, 23), Color("6a5642"), 2.0, true)
 
 static func draw_ground(canvas: Node2D, landmarks: Dictionary) -> void:
-	for camp: Dictionary in landmarks.get("camps", []):
+	for camp: Dictionary in landmarks.get("outposts", landmarks.get("camps", [])):
 		var center := Vector2(camp.center)
 		# Flat, worn paving: decoration is not an unmodelled collision obstacle.
 		canvas.draw_rect(Rect2(center - Vector2(122, 93), Vector2(244, 186)), Color(0.43, 0.37, 0.25, 0.10))

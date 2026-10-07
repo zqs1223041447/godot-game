@@ -1,8 +1,7 @@
-class_name ExplorationMapPlan
 extends RefCounted
 ## Fully detached entry transaction. The caller commits this checkpoint only
 ## after admission succeeds and any entry fee has been accepted.
-const Layout = preload("res://scripts/world/exploration_map_layout.gd")
+const Layout = preload("res://docs/qa/v090-routes/baseline_layout.gd")
 const Geometry = preload("res://scripts/world/map_geometry.gd")
 const CampState = preload("res://scripts/world/map_camp_state.gd")
 const CampAdmission = preload("res://scripts/world/map_camp_admission.gd")
@@ -34,9 +33,6 @@ static func plan(profile: Variant, live_runtime: Variant, seed_value: Variant, b
 	if not layout.ok: return _failure(layout.reason)
 	var geometry = Geometry.new()
 	if not geometry.configure_exploration(profile.id, bounds): return _failure("探索地图几何无效")
-	reason = _routes_reason(layout.landmarks, geometry)
-	if not reason.is_empty(): return _failure(reason)
-	for outpost: Dictionary in layout.landmarks.outposts: outpost["root_ids"] = []
 	var state = CampState.new()
 	var selected: Dictionary = state.begin(profile, layout.landmarks, seed_value, monster_policy)
 	if not selected.ok: return _failure(selected.reason)
@@ -59,12 +55,6 @@ static func plan(profile: Variant, live_runtime: Variant, seed_value: Variant, b
 			ordinal += 1
 			enemy.exploration_awake = false
 			enemy.map_spawn_key = "%s/%d/%s/%d" % [profile.id, seed_value, camp.id, ordinal]
-			for outpost: Dictionary in layout.landmarks.outposts:
-				if outpost.source_group == camp.id and outpost.ordinals.has(ordinal):
-					enemy["map_outpost_id"] = outpost.id
-					outpost.root_ids.append(int(enemy.id))
-					break
-			if not enemy.has("map_outpost_id"): return _failure("探索驻点成员没有对应位置")
 			spawn_records.append(_spawn_record(enemy, camp.id, ordinal))
 			ordinary_roots.append(enemy)
 			root_ids.append(enemy.id)
@@ -97,21 +87,7 @@ static func plan(profile: Variant, live_runtime: Variant, seed_value: Variant, b
 static func _spawn_record(enemy: Dictionary, source_group: String, ordinal: int) -> Dictionary:
 	return {"spawn_key": enemy.map_spawn_key, "actor_id": enemy.id, "root_id": enemy.root_id,
 		"source_group": source_group, "ordinal": ordinal, "template_id": enemy.template_id,
-		"position": enemy.pos, "encounter_id": "", "reward_route": "standard",
-		"outpost_id": str(enemy.get("map_outpost_id", ""))}
-
-
-static func _routes_reason(landmarks: Dictionary, geometry: RefCounted) -> String:
-	# Route paint cannot promise passage through a physical obstacle. Sweep the
-	# complete width, not only a sampled centerline or the player's smaller body.
-	for segment: Dictionary in landmarks.get("route_segments", []):
-		var radius: float = float(segment.width) * 0.5
-		if not geometry.is_clear(segment.from, radius) or not geometry.is_clear(segment.to, radius) or geometry.sweep(segment.from, segment.to, radius).hit:
-			return "探索路线与实体障碍或边界相交"
-	for outpost: Dictionary in landmarks.get("outposts", []):
-		if not geometry.is_clear(outpost.center, 27.5) or not geometry.is_clear(outpost.sign_position, 15.0):
-			return "探索驻点中心或路标受阻"
-	return ""
+		"position": enemy.pos, "encounter_id": "", "reward_route": "standard"}
 
 
 static func _roots_reason(roots: Array[Dictionary], total: int, geometry: RefCounted, entry: Vector2) -> String:

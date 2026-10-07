@@ -73,6 +73,7 @@ static func draw(arena: Node2D) -> void:
 		arena.draw_line(corner+Vector2(-6,-11),corner+Vector2(5,-11),Color("e0ceb0"),1,true)
 		arena.draw_polyline(PackedVector2Array([corner+Vector2(-2,-8),corner+Vector2(3,-4),corner+Vector2(-1,1)]),Color("746e57"),1.3,true)
 	# Dappled daylight is a restrained tint, never an opaque object or gameplay hazard.
+	_draw_routes(arena, geometry.get("landmarks", {}).get("route_segments", []))
 	arena.draw_colored_polygon(PackedVector2Array([bounds.position+Vector2(24,12),bounds.position+Vector2(bounds.size.x*0.25,12),Vector2(bounds.position.x+bounds.size.x*0.55,bounds.end.y-11),Vector2(bounds.position.x+bounds.size.x*0.4,bounds.end.y-11)]),Color(0.96,0.89,0.63,0.035))
 	if broken:
 		for wall: Rect2 in geometry.walls:
@@ -89,6 +90,39 @@ static func _stone(rect: Rect2, cut: float) -> PackedVector2Array:
 	var b: Vector2=rect.end
 	var c: float=minf(cut,minf(rect.size.x,rect.size.y)*0.25)
 	return PackedVector2Array([a+Vector2(c,0),Vector2(b.x-c*0.7,a.y+0.7),Vector2(b.x,a.y+c),b-Vector2(0,c*1.3),b-Vector2(c,0),Vector2(a.x+c,b.y-0.5),Vector2(a.x,b.y-c),a+Vector2(0,c)])
+
+
+static func route_stones(segments: Array) -> Array[PackedVector2Array]:
+	var stones: Array[PackedVector2Array] = []
+	for segment: Variant in segments:
+		if not segment is Dictionary or not segment.get("from") is Vector2 or not segment.get("to") is Vector2: continue
+		var start: Vector2 = segment["from"]
+		var end: Vector2 = segment["to"]
+		if not start.is_finite() or not end.is_finite(): continue
+		var delta := end-start
+		var length := delta.length()
+		var width := float(segment.get("width", 72.0))
+		if not is_finite(length) or length < 8.0 or not is_finite(width) or width <= 0.0: continue
+		var direction := delta/length
+		var side := direction.orthogonal()*minf(width*0.42, 32.0)
+		var count := maxi(1, ceili(length/48.0))
+		for index: int in range(count):
+			var a := start+direction*(length*float(index)/count+3.0)
+			var b := start+direction*(length*float(index+1)/count-3.0)
+			var bevel := direction*3.0
+			var inset := side.normalized()*3.0
+			stones.append(PackedVector2Array([a-side+bevel,a-side+inset,a+side-inset,a+side+bevel,b+side-bevel,b+side-inset,b-side+inset,b-side-bevel]))
+	return stones
+
+
+static func _draw_routes(canvas: Node2D, segments: Array) -> void:
+	# Worn flagstones mark authored, collision-verified routes. No new obstacles.
+	var index := 0
+	for stone: PackedVector2Array in route_stones(segments):
+		canvas.draw_colored_polygon(stone, Color(0.73,0.66,0.48,0.96) if index%3 else Color(0.67,0.61,0.46,0.96))
+		canvas.draw_line(stone[1],stone[2],Color(0.85,0.77,0.57,0.75),1.2,true)
+		canvas.draw_line(stone[5],stone[6],Color(0.41,0.39,0.29,0.65),1.2,true)
+		index += 1
 
 static func _shrub(arena: Node2D, p: Vector2, radius: float) -> void:
 	arena.draw_circle(p,radius,Color("405638"))

@@ -1765,6 +1765,13 @@ static func combat_outcome_text(row: Dictionary) -> String:
 
 static func exploration_progress_text(context: Dictionary) -> String:
 	var headline := "%s · %d / %d" % [str(context.get("map_name", "地图")), int(context.get("ordinary_kills", 0)), int(context.get("ordinary_target", 0))]
+	var outpost_text := ""
+	var outposts: Array = context.get("outpost_states", [])
+	if not outposts.is_empty():
+		var cleared := 0
+		for outpost: Dictionary in outposts:
+			if str(outpost.get("state", "")) == "cleared": cleared += 1
+		outpost_text = "驻点 %d/%d · " % [cleared, outposts.size()]
 	var phase := str(context.get("boss_phase", "active"))
 	var complete := str(context.get("mode", "")) == "map_complete"
-	return headline + "\n" + ("地图已清理" if complete else "首领已击败 · 继续清理" if phase == "defeated" else "寻找敌人 · 首领驻守")
+	return headline + "\n" + outpost_text + ("地图已清理" if complete else "首领已击败 · 继续清理" if phase == "defeated" else "首领驻守" if not outposts.is_empty() else "寻找敌人 · 首领驻守")

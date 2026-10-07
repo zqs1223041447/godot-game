@@ -1694,6 +1694,8 @@ func _finish_enemy_death(enemy:Dictionary,legacy_particles:bool=true,at:float=-1
 	var death: Dictionary = monster_runtime.process_death(enemy)
 	if not death.processed:
 		return
+	if _world_mode=="map" and int(enemy.get("generation",0))>0:
+		_exploration_awake_dirty=true
 	if not ember_source.is_empty() and ember_source.provenance.get("ember_generation",-1)==0:
 		_ember_deaths.append({"id":int(enemy.id),"origin":Vector2(enemy.pos),"at":elapsed if at<0.0 else at,"status":ember_source.duplicate(true)})
 	visual_cues.emit_cue("death", Vector2(enemy.pos), {"radius": float(enemy.radius), "color": Monsters.RARITIES[enemy.rarity].color, "target_id": int(enemy.id)})
@@ -2365,9 +2367,33 @@ func _boss_phase()->String:
 		return "resident"
 	return "ready" if _map_run.ready_for_boss() else "sealed"
 
+func _outpost_states()->Array[Dictionary]:
+	var result:Array[Dictionary]=[]
+	if _world_mode not in ["map","map_complete"]:return result
+	var awake:Dictionary={};var living:Dictionary={};var pending:Dictionary={}
+	for enemy:Dictionary in enemies:
+		if float(enemy.health)<=0.0:continue
+		var root_id:int=int(enemy.root_id)
+		living[root_id]=int(living.get(root_id,0))+1
+		if bool(enemy.get("exploration_awake",false)):awake[root_id]=int(awake.get(root_id,0))+1
+	for child:Dictionary in monster_runtime.queue:
+		var root_id:int=int(child.root_id)
+		pending[root_id]=int(pending.get(root_id,0))+1
+	for outpost:Dictionary in _camp_landmarks.get("outposts",[]):
+		var defeated:=0;var awake_count:=0;var living_count:=0;var pending_count:=0
+		for id:int in outpost.get("root_ids",[]):
+			if _map_run.defeated.has(id):defeated+=1
+			awake_count+=int(awake.get(id,0));living_count+=int(living.get(id,0));pending_count+=int(pending.get(id,0))
+		result.append({"id":outpost.id,"source_group":outpost.source_group,"name":outpost.name,
+			"root_count":outpost.root_count,"roots_spawned":outpost.root_ids.size(),
+			"roots_defeated":defeated,"awake_count":awake_count,
+			"living_count":living_count,"pending_descendants":pending_count,
+			"state":"cleared" if defeated>=int(outpost.root_count) and living_count==0 and pending_count==0 else "active" if awake_count>0 or pending_count>0 else "resident"})
+	return result
+
 func _sync_camp_presentation()->void:
 	if is_instance_valid(static_environment) and static_environment.has_method("set_encounter_state"):
-		static_environment.set_encounter_state(_camp_states(),_boss_phase())
+		static_environment.set_encounter_state(_outpost_states() if _camp_landmarks.has("outposts") else _camp_states(),_boss_phase())
 
 func _refresh_world_geometry() -> void:
 	var id: String = str(_map_run.profile.get("id","old_garden")) if _world_mode in ["map","map_complete"] else _world_mode
@@ -2432,7 +2458,7 @@ func world_context()->Dictionary:
 		"initial_monsters":_map_spawn_records.size(),"awake_monsters":_exploration_awake_count(),
 		"exploration_description":ExplorationLayout.description(str(_map_run.profile.get("id",""))) if _world_mode in ["map","map_complete"] else "",
 		"map_id":str(_map_run.profile.get("id","")),"map_name":str(_map_run.profile.get("name","")),
-		"camp_states":_camp_states(),"boss_phase":_boss_phase(),
+		"camp_states":_camp_states(),"outpost_states":_outpost_states(),"boss_phase":_boss_phase(),
 		"ordinary_kills":run.ordinary_kills,"ordinary_target":run.ordinary_target,"boss_defeated":run.boss_defeated,
 		"can_return":_world_mode in ["map","map_complete"],"supply_enabled":test and test_supply_enabled,
 		"normal_town":normal_town,"can_enter_normal_town":not test and _world_mode=="normal","can_leave_normal_town":normal_town,

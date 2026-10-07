@@ -38,7 +38,8 @@ static func layout(map_id: Variant, bounds: Rect2) -> Dictionary:
 		relative_walls.assign([Rect2(1300, 1050, 1000, 480), Rect2(640, 820, 280, 280),
 			Rect2(2700, 940, 280, 280)])
 	var sites: Array = _site_centers(map_id)
-	var counts: Array[int] = [3,5] if map_id=="old_garden" else [4,8]
+	var counts: Array[int] = []
+	counts.assign([3,5] if map_id=="old_garden" else [4,8])
 	var camps: Array[Dictionary] = []
 	var outposts: Array[Dictionary] = []
 	var offsets: Array[Vector2] = [ENTRY, BOSS_CENTER]
@@ -103,7 +104,7 @@ static func _site_centers(map_id: String) -> Array:
 		"old_garden":[Vector2(1300,2000),Vector2(700,1080),Vector2(850,500),Vector2(1840,360),Vector2(2680,820),Vector2(2990,1750)],
 		"broken_ruins":[Vector2(1320,2120),Vector2(670,1180),Vector2(1420,370),Vector2(1790,1150),Vector2(2760,2100),Vector2(3010,1120)],
 		"sunwell_terrace":[Vector2(1340,2140),Vector2(650,1160),Vector2(1740,1350),Vector2(1810,420),Vector2(2920,2070),Vector2(3010,1220)],
-		"ginkgo_arcade":[Vector2(1290,2100),Vector2(570,1320),Vector2(1120,750),Vector2(1820,470),Vector2(2690,1810),Vector2(3150,1320)]}
+		"ginkgo_arcade":[Vector2(1290,2100),Vector2(420,1080),Vector2(1120,750),Vector2(1820,470),Vector2(2690,1810),Vector2(3150,1320)]}
 	return sites.get(map_id,[]).duplicate()
 
 
@@ -121,8 +122,8 @@ static func _route_lines(map_id: String) -> Array:
 			[Vector2(1790,2140),Vector2(1740,1350),Vector2(1810,420)],
 			[Vector2(650,1160),Vector2(650,1350),Vector2(1740,1350),Vector2(3010,1220)]],
 		"ginkgo_arcade":[[ENTRY,Vector2(570,1800),Vector2(1290,2100),Vector2(1940,2020),Vector2(2690,1810),Vector2(3150,1320),Vector2(3250,750),BOSS_CENTER],
-			[Vector2(570,1800),Vector2(570,1320),Vector2(460,720),Vector2(1120,750),Vector2(1820,470),Vector2(2530,470),BOSS_CENTER],
-			[Vector2(570,1320),Vector2(1120,1320),Vector2(1120,750)],
+			[Vector2(570,1800),Vector2(420,1080),Vector2(460,720),Vector2(1120,750),Vector2(1820,470),Vector2(2530,470),BOSS_CENTER],
+			[Vector2(420,1080),Vector2(1120,1320),Vector2(1120,750)],
 			[Vector2(1820,470),Vector2(2520,750),Vector2(2530,1810),Vector2(2690,1810)]]}
 	return routes.get(map_id,[]).duplicate(true)
 
