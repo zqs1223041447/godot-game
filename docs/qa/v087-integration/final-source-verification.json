@@ -1,0 +1,65 @@
+{
+  "base": "1530db974ca912057de77db5b4f1d644a0471287",
+  "source_inputs": {
+    "docs/qa/v087-integration/main-attempt01-inputs.json": {
+      "inputs": 8,
+      "mismatches": []
+    },
+    "docs/qa/v087-integration/rules-attempt01-inputs.json": {
+      "inputs": 4,
+      "mismatches": []
+    },
+    "docs/qa/v087-reference/focused-reference-input-sha256.json": {
+      "inputs": 233,
+      "mismatches": []
+    },
+    "docs/qa/v087-integration/unchanged-exploration-inputs.json": {
+      "inputs": 10,
+      "mismatches": []
+    }
+  },
+  "unchanged_exploration_files": 10,
+  "functional_checks": 317,
+  "runtime_checks_repeated": false,
+  "evidence": {
+    "docs/qa/v087-integration/font-check.json": "6c2c577d4f123b36d19620f775eb88f95e93e999c9f9255b343272747fec1755",
+    "docs/qa/v087-integration/import-result.json": "9c683436b41bc86b6d487a6ae06e36178785e3d44f52448f02fe84e48746e80d",
+    "docs/qa/v087-integration/import.log.txt": "cd12d4e631ecd2d8ab54f20db70c51953f52d3a13d98f14691b7dd92eb3aa30d",
+    "docs/qa/v087-integration/main-attempt01-inputs.json": "2f20f25771ea43112bf89ff3a480729f290b1f58e5ba09916c5bab90a332664a",
+    "docs/qa/v087-integration/main-attempt01-result.json": "f89c9ef77c388d1afbca658955a34797b2c0338690f6464ef5ce98a62af45fd1",
+    "docs/qa/v087-integration/main-attempt01.log.txt": "6fc0a55cef1b04dd3f61cd2ca2941d163219adb0014dba00eba9656f29789080",
+    "docs/qa/v087-integration/rules-attempt01-inputs.json": "58a0a67ac35c3cd3f5708f9ba438ed501a3ec81d34a42dc1af063230d74e14ea",
+    "docs/qa/v087-integration/rules-attempt01-result.json": "2fa3f48852e3c7c1417f34fc4abe5b52bf02fea23abd91317e510bea849a8abb",
+    "docs/qa/v087-integration/rules-attempt01.log.txt": "afcd8794ec9cfdd345b0d8f0f26cd07eced41336acee6594ad5b45c58f23bf9b",
+    "docs/qa/v087-integration/stage.md": "b70fbbde16f47ec1453c7e9f665e8e22da4facd7361ec0c6f4331a788fe7149e",
+    "docs/qa/v087-integration/unchanged-exploration-inputs.json": "e7ba97af0d50fe72423010a0ac3ca43c2fb26f905bdb0bc11864efff618ede77",
+    "docs/qa/v087-gameplay/README.md": "539664243445c357f9ab9101251cc280758c2fb4ab4d0d488191814ff896e9c1",
+    "docs/qa/v087-gameplay/main-result.json": "2afc1ea5e44fb3b3c64cac3442d5e2aee1d2396ca3b7a8fa2a029e1c4dafe029",
+    "docs/qa/v087-reference/README.md": "6985a03a653d8eff35480c6225b28b4c59581f4882357be3188057e8e8ad611a",
+    "docs/qa/v087-reference/build-input-sha256.json": "c1a6559f6286d110af01583524dca8a1a50f7db784013845fa37177d22041ac0",
+    "docs/qa/v087-reference/build-result.json": "fc620a0168195d9a54560dc58280ab8f22ea74fd27df9d7b3ddf5fa6a0d4386c",
+    "docs/qa/v087-reference/build.stderr.log.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docs/qa/v087-reference/build.stdout.log.txt": "a06b580b84e417779a45e785d0aacd0d5965e4683e825e011f555b20e953f6ba",
+    "docs/qa/v087-reference/catalog-format-preservation.json": "74c38e8897725e4282704d1ee022e675a3b47f1b1195c68cf0b625c0d1b11645",
+    "docs/qa/v087-reference/check-reference.py": "9c6d33352758ffaf1eb0f4b928325b9209200e47b7e6c49dae29b667eefb0473",
+    "docs/qa/v087-reference/export-fragment.gd": "b67c6f939a85e3759d531ddee64b8a4472dceabef96b8605057cc8f6d935317f",
+    "docs/qa/v087-reference/focused-reference-input-sha256.json": "c1a6559f6286d110af01583524dca8a1a50f7db784013845fa37177d22041ac0",
+    "docs/qa/v087-reference/focused-reference-result.json": "e905d604b6746fe88c82c3a572c0b285dfa3f428304ef77c99add5748238607a",
+    "docs/qa/v087-reference/focused-reference.stderr.log.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docs/qa/v087-reference/focused-reference.stdout.log.txt": "01785d6211ca4e6573c23265443ea5731fa6dc72d2daf0e699d9bccb9e077505",
+    "docs/qa/v087-reference/frost-chill-fragment-input-sha256.json": "c1a6559f6286d110af01583524dca8a1a50f7db784013845fa37177d22041ac0",
+    "docs/qa/v087-reference/frost-chill-fragment-result.json": "8fbcab43805af84f93b08691991b5ad9568c265332b0277ca1876dc335a10b0f",
+    "docs/qa/v087-reference/frost-chill-fragment.json": "108e2e27678b8135258cc7cd12ce8bc83dd2a9e2c54b02f4610a4d98e37ee688",
+    "docs/qa/v087-reference/frost-chill-fragment.stderr.log.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docs/qa/v087-reference/frost-chill-fragment.stdout.log.txt": "a19a9c8295b28cad3d4599cdb0ff0dfda55bcaed46953f27f83fc93fde693b8a",
+    "docs/qa/v087-reference/merge-fragment.py": "126d57b4d5b9bb60bda71714fa72127a7c41150e9107631ee079a380394e793e",
+    "docs/qa/v087-reference/merge-input-sha256.json": "c1a6559f6286d110af01583524dca8a1a50f7db784013845fa37177d22041ac0",
+    "docs/qa/v087-reference/merge-result.json": "26871f69a967c180b96596898ac1814b20de06ddb6a434f5fc61770c98c879ca",
+    "docs/qa/v087-reference/merge.stderr.log.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docs/qa/v087-reference/merge.stdout.log.txt": "74c38e8897725e4282704d1ee022e675a3b47f1b1195c68cf0b625c0d1b11645",
+    "docs/qa/v087-reference/preservation.json": "e8f731099e4dd15f23a45211c6258d37e52b44e5b8d653b4d395ccbacaad103f",
+    "docs/qa/v087-reference/run-reference-checks.py": "1fd6c5b27c08b6f2053aec9dee332c55388566b6fb9cc29a4b616f6b4f3b81a1",
+    "docs/qa/v087-root-ui/exit-code.txt": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "docs/qa/v087-root-ui/visual.log": "25666a82f8a8e5c7c677011947f96fda84b44de9caa6db1815ecb9c40d60a9b7"
+  }
+}

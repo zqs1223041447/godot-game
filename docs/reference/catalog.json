@@ -69999,6 +69999,211 @@
 		"pool_id": "forgeblade_v34",
 		"save_version": 34
 	},
+	"frost_guard_chill": {
+		"actual_main_checks": 174,
+		"actual_main_inputs": {
+			"path": "docs/qa/v087-integration/main-attempt01-inputs.json",
+			"sha256": "2f20f25771ea43112bf89ff3a480729f290b1f58e5ba09916c5bab90a332664a"
+		},
+		"actual_main_report": {
+			"path": "docs/qa/v087-gameplay/main-result.json",
+			"sha256": "2afc1ea5e44fb3b3c64cac3442d5e2aee1d2396ca3b7a8fa2a029e1c4dafe029"
+		},
+		"actual_main_run": {
+			"path": "docs/qa/v087-integration/main-attempt01-result.json",
+			"sha256": "f89c9ef77c388d1afbca658955a34797b2c0338690f6464ef5ce98a62af45fd1"
+		},
+		"base_profile": {
+			"damage_multiplier": 0.8,
+			"radius": 90.0,
+			"recovery_seconds": 1.8,
+			"windup_seconds": 0.9
+		},
+		"equipment_vocabulary": 46,
+		"event": {
+			"attack_age": 0.9,
+			"attack_id": 1,
+			"balance_version": "original-telegraphed-area-v1",
+			"center": [
+				0.0,
+				0.0
+			],
+			"chill_policy": {
+				"duration": 1.2,
+				"movement_speed_reduced": 0.25
+			},
+			"packet": {
+				"base": {
+					"cold": 16.080000000000002
+				},
+				"skill_id": "locked_circle",
+				"tags": [
+					"attack",
+					"area",
+					"hit"
+				]
+			},
+			"profile": {
+				"damage_multiplier": 0.8,
+				"radius": 90.0,
+				"recovery_seconds": 1.8,
+				"windup_seconds": 0.9
+			},
+			"profile_id": "locked_circle",
+			"radius": 90.0,
+			"schema_version": 1,
+			"shape": "circle",
+			"source_id": 1,
+			"step_time": 0.9,
+			"type": "circle_attack"
+		},
+		"policy": {
+			"duration": 1.2,
+			"movement_speed_reduced": 0.25
+		},
+		"recovery": {
+			"attack_id": 1,
+			"center": [
+				0.0,
+				0.0
+			],
+			"chill_policy": {
+				"duration": 1.2,
+				"movement_speed_reduced": 0.25
+			},
+			"elapsed": 0.9,
+			"packet": {
+				"base": {
+					"cold": 16.080000000000002
+				},
+				"skill_id": "locked_circle",
+				"tags": [
+					"attack",
+					"area",
+					"hit"
+				]
+			},
+			"phase": "recovery",
+			"profile": {
+				"damage_multiplier": 0.8,
+				"radius": 90.0,
+				"recovery_seconds": 1.8,
+				"windup_seconds": 0.9
+			},
+			"source_id": 1
+		},
+		"save_version": 50,
+		"scope": "Detached MonsterCatalog and Telegraph runtime snapshot only. The existing damage examples and four-map data remain exact historical bytes. Actual Main evidence is read only; no Main, player build, damage settlement or map regeneration runs here.",
+		"source": {
+			"attack_speed": 1.1764705882352942,
+			"attack_timer": 0.5,
+			"contact_weights": {
+				"cold": 1.0
+			},
+			"damage": 20.1,
+			"damage_delay": 0.0,
+			"death_processed": false,
+			"death_spawns": [],
+			"defense_stats": {},
+			"equipment_pool": "",
+			"flash": 0.0,
+			"generation": 0,
+			"health": 140.6,
+			"id": 1,
+			"kind": 2,
+			"knockback": [
+				0.0,
+				0.0
+			],
+			"max_health": 140.6,
+			"max_shield": 0.0,
+			"mechanism_ids": [],
+			"mechanism_policy": "poe-passive-v1",
+			"mechanism_revision": 1,
+			"mechanism_schema": 1,
+			"mechanism_stats": {},
+			"name": "霜纹守卫",
+			"pos": [
+				100.0,
+				0.0
+			],
+			"radius": 22.0,
+			"rarity": "normal",
+			"resistances": {
+				"fire": 0.0
+			},
+			"reward_eligible": true,
+			"root_id": 1,
+			"shield": 0.0,
+			"shield_regen": 0.0,
+			"slow": 0.0,
+			"spawn": 0.0,
+			"speed": 48.6,
+			"template_id": "frost_guard",
+			"wave": 4,
+			"xp_reward": 6
+		},
+		"source_policy": 49,
+		"sources": {
+			"catalog": "scripts/monsters/monster_catalog.gd",
+			"main": "scripts/main.gd",
+			"profiles": "scripts/monsters/telegraph_profiles.gd",
+			"rules": "scripts/combat/chill_rules.gd",
+			"runtime": "scripts/combat/player_chill_runtime.gd",
+			"telegraph": "scripts/combat/telegraphed_area_runtime.gd"
+		},
+		"start": {
+			"attack_id": 1,
+			"center": [
+				0.0,
+				0.0
+			],
+			"chill_policy": {
+				"duration": 1.2,
+				"movement_speed_reduced": 0.25
+			},
+			"elapsed": 0.0,
+			"packet": {
+				"base": {
+					"cold": 16.080000000000002
+				},
+				"skill_id": "locked_circle",
+				"tags": [
+					"attack",
+					"area",
+					"hit"
+				]
+			},
+			"phase": "windup",
+			"profile": {
+				"damage_multiplier": 0.8,
+				"radius": 90.0,
+				"recovery_seconds": 1.8,
+				"windup_seconds": 0.9
+			},
+			"source_id": 1
+		},
+		"telegraph_policy": {
+			"base_attack_speed": 1.1764705882352942,
+			"chill_policy": {
+				"duration": 1.2,
+				"movement_speed_reduced": 0.25
+			},
+			"hold_pursuit_during_action": true,
+			"minimum_attack_speed": 0.2,
+			"name": "霜纹锁点寒击",
+			"profile": {
+				"damage_multiplier": 0.8,
+				"radius": 90.0,
+				"recovery_seconds": 1.8,
+				"windup_seconds": 0.9
+			},
+			"profile_id": "locked_circle",
+			"recovery_scaling": "base_attack_speed_divided_by_current_attack_speed",
+			"replaces_contact": true,
+			"trigger_distance": 150.0
+		}
+	},
 	"frost_lock": {
 		"admission": "按当前命中结算边界elapsed附加，立即阻止tick末新预警起手；下一敌方阶段开始暂停，不追溯取消本tick已经结算的攻击",
 		"bounds": "仅新增一枚霜锁辅助及其灰白冰晶；不支持玩家被冻、碎冰、传播或新的冻结天赋。静态资料验证不等于原生、Windows或打包验收",
@@ -70976,7 +71181,7 @@
 		},
 		"whole_build_valid": true
 	},
-	"game_version": "0.86.0",
+	"game_version": "0.87.0",
 	"ginkgo_arcade": {
 		"actual_freeze_seconds": 0.24,
 		"actual_main_checks": 212.0,

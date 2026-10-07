@@ -49,6 +49,22 @@ DAMAGE_NAMES = {'physical':'物理','fire':'火焰','cold':'冰霜','lightning':
 def component_text(components):
     return ' + '.join(f'{DAMAGE_NAMES[k]} {number(v)}' for k,v in ((key,components.get(key,0)) for key in DAMAGE_NAMES) if v) or '无'
 def percent(value): return number(value*100)+'%'
+def frost_chill_hint(data, link):
+    chill=data['frost_guard_chill'];policy=chill['policy']
+    return '<p>霜纹寒击实际命中且玩家存活、护盾／魔力／生命实际支出的冰霜份额大于零时，施加 '+percent(policy['movement_speed_reduced'])+' 移动减速，持续 '+number(policy['duration'])+' 秒。同强度只刷新截止，不叠强度或累计时长；不追加伤害，不冻结玩家。'+link('rules','frost_guard_chill','冰缓准入、保护与时间边界')+'。</p>'
+
+def frost_chill_rule(data, link, facts):
+    chill=data['frost_guard_chill'];policy=chill['policy'];attack=chill['telegraph_policy']['profile']
+    body=facts([('移动速度降低',percent(policy['movement_speed_reduced'])),('持续时间',number(policy['duration'])+' 秒'),('单玩家状态','新截止=max(旧截止,本次命中时刻＋'+number(policy['duration'])+'秒)'),('原预警 / 半径',number(attack['windup_seconds'])+' 秒 / '+number(attack['radius'])),('原基础恢复 / 伤害倍率',number(chill['base_profile']['recovery_seconds'])+' 秒 / '+number(attack['damage_multiplier'])+' × 来源接触基底')])
+    body+='<p>本批新增霜纹守卫遭遇行为。只有实际通过空间、视线、攻击闪避与保护边界的霜纹锁点寒击才检查冰缓；结算后玩家必须存活。共享Defense收据中，护盾支出＋魔力先承伤支出＋生命损失按防御后冰霜分量占比分配，正值才触发。过量伤害不计；该份额只用于状态准入，不是第二笔伤害或额外浮字。</p>'
+    body+='<p>走开、墙体遮挡、攻击闪避、无敌、结界保护、零实际冰霜损伤及致死命中均不新附冰缓。结界阻止新的受击；已经存在的冰缓仍按原截止自然结束，不被结界主动清除。回城、死亡、地图完成、重开或切换档案清空状态。</p>'
+    body+='<p>普通移动只在有效时间段乘'+number(1.0-policy['movement_speed_reduced'])+'，跨截止的一步分段处理；命中前已经完成的本步移动不回算。状态查询与重复绘制不改变时钟或截止，暂停冻结模拟时钟。闪步仍沿原175距离与碰撞规则；攻击速度、技能冷却、药剂、护盾恢复、伤害和奖励保持原路径。</p>'
+    body+='<p>含冰缓上下文的raw_at先按真实int/float类型检查有限非负数，只接受当前结算窗口内的时刻；字符串、bool、负值、NaN、Infinity、旧时刻或未来时刻在资源、命中熵和反馈改变前拒绝。没有冰缓来源的路径继续沿旧处理，不强加该新状态的时间合同。</p>'
+    body+='<p>大地图仍在入场一次生成25／37个真实实体、450警戒距离与原Camera跟随。没有恢复地图入侵、增加赛季、掉落、货币或源stat支持；schema50、源政策49、装备词汇46保持。玩家冰霜脉冲对敌人的既有0.36移动倍率及辅助规则不变。</p>'
+    body+='<p>当前参数与状态标签读取MonsterCatalog、TelegraphedAreaRuntime和ChillRules的纯快照；原伤害示例数值与旧地图资料保留。实际Main验收与这次有限资料检查各有范围，不将纯导出当成自然战斗或Release验收。</p>'
+    body+='<p><a href="../FROST_GUARD_CHILL.zh-CN.md">霜纹冰缓合同</a> · <a href="../qa/v087-reference/README.md">有限导出与保全记录</a> · <a href="../'+esc(chill['actual_main_report']['path'].removeprefix('docs/'))+'">实际Main结果</a> · '+link('monsters','frost_guard')+' · '+link('map_specials','frost_patrol')+'</p>'
+    return body
+
 def sunwell_value(key,value):
     return f'<strong data-sunwell-value="{esc(key)}" data-value="{esc(value)}">{number(value)}</strong>'
 
@@ -1403,7 +1419,11 @@ def build(data, art):
                 body+='<p>这提供物理/混沌与元素构筑之间的取舍；混沌或物理技能若装备附加了元素伤害，其元素分量仍按对应抗性结算。数值是本游戏测试预算，无额外掉落倍率，不代表PoE地图经济。</p>'
             else:
                 consumer='已有元素预警攻击和共享防御链；雷纹锁点震击按显式规则施加感电' if data['monsters'][special['template']]['telegraph_policy'].get('shock_policy') else '已有冰冷预警攻击和共享防御链；不增加冻结或感电'
+                if special['id']=='frost_patrol' and 'frost_guard_chill' in data:
+                    consumer='已有冰霜预警攻击和共享防御链；实际正值冰霜损伤且玩家存活后施加有限移动冰缓'
                 body=facts([('最低波次',number(special['minimum_wave'])),('匹配原物种',link('monsters',special['species'])),('替换为',link('monsters',special['template'])),('保留','原抽签稀有度、机制、血伤速度与XP；灰烬名额优先'),('真实消费者',consumer),('分层','独立于生命/速度普通词缀，最多1个特殊词缀')])
+                if special['id']=='frost_patrol' and 'frost_guard_chill' in data:
+                    body+=frost_chill_hint(data,link)
             related_maps=links('maps',[m['id'] for m in town['options']['maps'] if m['wave']>=special['minimum_wave']])
             if 'ginkgo_arcade' in data and data['ginkgo_arcade']['definition']['wave']>=special['minimum_wave']:
                 related_maps+=' · '+link('maps','ginkgo_arcade',data['ginkgo_arcade']['definition']['name'])
@@ -1414,7 +1434,12 @@ def build(data, art):
         if a.get('natural_selection'):
             n=a['natural_selection']
             body+=facts([('自然出现',f'第 {n["minimum_wave"]} 波起，已成功普通入场序号除 {n["admission_modulus"]} 余 {n["admission_remainder"]}，且原抽签为 '+link('monsters',n['source_template'])),('保留原抽签','同物种的白/蓝/金、共享词缀、基础生命/伤害/移动与经验；没有强升蓝或额外奖励'),('防御示例','初始等级合法天赋路径：'+esc(' → '.join(a['example']['allocated_path']))+'。数值在攻击成功命中条件下，现有攻击闪避另可阻止命中。')])
-        cards.append(add('monster_attacks',key,a['name'],a['description'],body,'已实装 · 原创规则',related=links('monsters',a['integrated_templates'])))
+        attack_name=a['name'];attack_description=a['description']
+        if key=='locked_circle_cold' and 'frost_guard_chill' in data:
+            attack_name=data['frost_guard_chill']['telegraph_policy']['name']
+            attack_description='保留原完整预警、伤害、恢复与自然名额；锁点攻击可走开或被攻击闪避。实际正值冰霜损伤且玩家存活后施加有限移动冰缓，不施加冻结或感电。'
+            body+=frost_chill_hint(data,link)+'<p>上方伤害与抗性示例保留原数值；冰缓不新增伤害账。</p>'
+        cards.append(add('monster_attacks',key,attack_name,attack_description,body,'已实装 · 原创规则',related=links('monsters',a['integrated_templates'])))
     for key,m in data['monsters'].items():
         e=m['runtime_example']; tier=data['monster_rarities'][m['rarity']]['name']
         children=' · '.join(link('monsters',x['template'])+' × '+str(x['count']) for x in m['death_spawns']) or '无'
@@ -1432,6 +1457,9 @@ def build(data, art):
             body+=details('出现条件与专属装备奖励',f'<p>第 {encounter["minimum_wave"]} 波及之后，普通成功入场计数每逢 {encounter["ordinary_admission_interval"]} 的倍数出现。初始入场计入该计数；满员未入场不递增，重开重置。</p><p>符合奖励资格的原始怪物死亡时，仅结算一次：{encounter["reward_count"]} 件 {esc(data["equipment_rarities"][encounter["reward_rarity"]]["name"])} {esc(TYPES[encounter["reward_pool"]])} 装备。可用底材：{links("equipment",data["equipment_pools"][encounter["reward_pool"]]["base_ids"])}。逻辑defense在实际奖励入口映射当前防御池，详见 {link("rules","elemental_defense_affixes")}；显式旧池仍保留历史结果。</p><p>出生节奏、分量、抗性与掉落保障均为本游戏原创平衡。</p>')
         example_note='这是正式第二档的普通模板；第三档沿同波掠行体再应用上述预算，不接受蓝金稀有度或新增机制。' if key=='mist_skitter' else '包含模板固有稀有度与机制。后续波次、普通随机稀有度和机制组合会改变这些值。'
         body+=details(f'第 {m["example_wave"]} 波模板示例',facts([(label,number(e[field])) for label,field in [('生命','max_health'),('护盾','max_shield'),('攻击基底 · 防御前','damage'),('速度','speed'),('攻击频率','attack_speed'),('经验奖励','xp_reward')]])+'<p>'+example_note+'</p>')
+        if key=='frost_guard' and 'frost_guard_chill' in data:
+            summary+='；寒击可对存活玩家施加有限移动冰缓'
+            body+=frost_chill_hint(data,link)
         cards.append(add('monsters',key,m['name'],summary,body,tier,related=link('rules','shared')+' · '+link('defenses','fire_resistance')))
 
     total_weight=sum(p['weight'] for p in data['current_loot_profile'])
@@ -1752,6 +1780,9 @@ def build(data, art):
         rule_defs.append(('source_critical','暴击与构筑作用域','全局、法术、近战与投射攻击暴击进入冻结施放，独立爆炸另取全局属性。',body,'implemented'))
     if 'exploration_maps' in data:
         rule_defs.append(('exploration_maps', '主动探索地图与未来机制边界', '四图全体入场；未来机制目前只接受空配置，没有赛季内容与新掉落。', exploration_rule_body(data, facts), 'implemented'))
+    if 'frost_guard_chill' in data:
+        policy=data['frost_guard_chill']['policy']
+        rule_defs.append(('frost_guard_chill', '霜纹寒击与玩家冰缓', '霜纹寒击造成实际冰霜损伤后，存活玩家移动减速'+percent(policy['movement_speed_reduced'])+'，持续'+number(policy['duration'])+'秒；不追加伤害。', frost_chill_rule(data,link,facts), 'implemented'))
     for key,name,summary,body,status in rule_defs: cards.append(add('rules',key,name,summary,body,{'implemented':'已实现规则','research':'研究来源','planned':'未实现边界'}[status],status))
     category_counts={cat:sum(x['cat']==cat for x in records) for cat,_ in CATEGORIES}
     nav=''.join(f'<a href="#category-{cat}" id="category-{cat}" class="nav-link" data-category="{cat}"><span>{label}</span><span>{category_counts[cat]}</span></a>' for cat,label in CATEGORIES)

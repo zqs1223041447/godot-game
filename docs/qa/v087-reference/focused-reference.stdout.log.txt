@@ -1,0 +1,70 @@
+{
+  "baseline_commit": "1530db9",
+  "preserved_raw_top_level_count": 84,
+  "byte_identical_card_count": 3775,
+  "only_game_version_label_changed": [
+    "supports-ambush",
+    "supports-breadth",
+    "supports-chain_extension",
+    "supports-chain_reach",
+    "supports-cold_focus",
+    "supports-concentrate",
+    "supports-efficiency",
+    "supports-ember_proliferation",
+    "supports-fire_focus",
+    "supports-focus",
+    "supports-frost_lock",
+    "supports-heavy_projectiles",
+    "supports-ignite",
+    "supports-inward_pull",
+    "supports-lightning_focus",
+    "supports-lingering_chill",
+    "supports-physical_focus",
+    "supports-pierce",
+    "supports-quickcast",
+    "supports-shock",
+    "supports-swift_projectiles",
+    "supports-volley"
+  ],
+  "replaced_current_cards": [
+    "map_specials-frost_patrol",
+    "monster_attacks-locked_circle_cold",
+    "monsters-frost_guard"
+  ],
+  "new_current_cards": [
+    "rules-frost_guard_chill"
+  ],
+  "preserved_anchor_count": 3845,
+  "all_four_map_cards_and_map_device_byte_identical": true,
+  "original_frost_damage_diagram_byte_identical": true,
+  "all_old_damage_examples_raw_tokens_preserved": true,
+  "new_snapshot_only_float_roundtrip_differences": [],
+  "protected_file_count": 77,
+  "protected_png_count": 71,
+  "coverage_and_png_bytes_preserved": true,
+  "no_new_pngs": true,
+  "actual_main_provenance": {
+    "actual_main_report": {
+      "path": "docs/qa/v087-gameplay/main-result.json",
+      "sha256": "2afc1ea5e44fb3b3c64cac3442d5e2aee1d2396ca3b7a8fa2a029e1c4dafe029"
+    },
+    "actual_main_run": {
+      "path": "docs/qa/v087-integration/main-attempt01-result.json",
+      "sha256": "f89c9ef77c388d1afbca658955a34797b2c0338690f6464ef5ce98a62af45fd1"
+    },
+    "actual_main_inputs": {
+      "path": "docs/qa/v087-integration/main-attempt01-inputs.json",
+      "sha256": "2f20f25771ea43112bf89ff3a480729f290b1f58e5ba09916c5bab90a332664a"
+    }
+  },
+  "actual_main_checks": 174,
+  "actual_main_failures": 0,
+  "main_source_fingerprints_match": true,
+  "additional_authorities_byte_equal_v086": [
+    "scripts/monsters/telegraph_profiles.gd"
+  ],
+  "build_matches": true,
+  "builder_backward_compatible_with_entire_old_catalog": true,
+  "all_local_links_resolve": true,
+  "scope": "Static/source/provenance only. No gameplay rerun, full export, map regeneration, native F8 visual or release validation."
+}
