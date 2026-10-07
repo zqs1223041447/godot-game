@@ -17,11 +17,12 @@ func run() -> void:
 	if not arena.save_build(): fail("Study save failed"); return
 	var draft: Dictionary = arena.craft_normal_map("old_garden", 1, [], [], arena.map_draft().revision)
 	if not draft.ok: fail(draft.reason); return
-	var entered: Dictionary = arena.start_map(arena.map_draft().revision)
+	var session = Session.new()
+	var prepared: Dictionary = await session.prepare_entry(arena)
+	if not prepared.ok: fail(prepared.reason); return
+	var entered: Dictionary = session.enter(arena)
 	if not entered.ok: fail(entered.reason); return
 	arena.set_process(false)
-	var installed: Dictionary = await Session.install(arena)
-	if not installed.ok: fail(installed.error); return
 	var badge_layer := CanvasLayer.new()
 	badge_layer.layer = 40
 	root.add_child(badge_layer)

@@ -1,5 +1,5 @@
 extends RefCounted
-## Research-only installation on an already admitted old_garden roster.
+## Research-only pre-fee entry; legacy post-entry install remains for old fixtures.
 ## Formal map definitions and normal saves are never modified by this adapter.
 const StudyGeometry = preload("res://scripts/studies/modular_study_geometry.gd")
 const MANIFEST := "res://art-studies/v111/exports/manifest.json"
@@ -93,3 +93,89 @@ static func install(arena: Node2D, use_static_hero: bool = true) -> Dictionary:
 	arena.retained_actors.sync(arena)
 	arena.set_process(processing)
 	return {"ok": true, "error": "", "geometry": candidate, "layout": prepared, "roots": 25, "remapped_roots": 0}
+
+
+# New entry path: build a detached candidate while Main remains in town. The
+# legacy install() stays available for the already-recorded v112/v114 fixtures.
+const PreparedEntry = preload("res://scripts/world/prepared_map_entry.gd")
+const StudyRoutes = preload("res://scripts/studies/modular_study_routes.gd")
+const ExplorationLayout = preload("res://scripts/world/exploration_map_layout.gd")
+const View = preload("res://scripts/visuals/world_view.gd")
+var _entry: RefCounted
+var _preparing := false
+var _draft_revision := -1
+var _hero_definition: Dictionary = {}
+
+
+func prepare_entry(arena: Node2D) -> Dictionary:
+	if _preparing or (_entry != null and _entry.phase() in ["preparing", "ready", "in_use"]):
+		return {"ok": false, "reason": "Study entry preparation is already pending"}
+	if not arena.world_context().normal_town or arena.map_draft().map_id != "old_garden" or not arena.state.normal_journey().active_run.is_empty():
+		return {"ok": false, "reason": "Study preparation requires the ordinary old_garden town draft"}
+	_preparing = true
+	_hero_definition.clear()
+	_draft_revision = int(arena.map_draft().revision)
+	_entry = PreparedEntry.new(arena.map_entry_preparation_context())
+	var bounds: Rect2 = View.exploration_arena()
+	var original: Dictionary = ExplorationLayout.layout("old_garden", bounds)
+	var assembly: Dictionary = layout(bounds)
+	if not original.ok or not assembly.ok:
+		return _preparation_failed("Study layout is unavailable")
+	var candidate = StudyGeometry.new()
+	if not _entry.attach(candidate, Callable(candidate, "_release_native")):
+		return _preparation_failed("Study geometry ownership could not be established")
+	var installed: Dictionary = candidate.install(bounds, assembly.polygons, original.landmarks.entry, assembly.presentation)
+	if not installed.ok:
+		return _preparation_failed(str(installed.error))
+	var tree: SceneTree = arena.get_tree()
+	await tree.physics_frame
+	await tree.physics_frame
+	if not is_instance_valid(arena) or _entry.phase() != "preparing":
+		return _preparation_failed("Study entry preparation was cancelled")
+	if not _entry.matches_context(arena.map_entry_preparation_context()):
+		return _preparation_failed("Map draft or live state changed during preparation")
+	if not candidate.physics_ready():
+		return _preparation_failed("Study native collision is not ready")
+	var routes: Dictionary = StudyRoutes.prepare(original.landmarks, candidate)
+	if not routes.ok:
+		return _preparation_failed(str(routes.reason))
+	var decoded: Variant = JSON.parse_string(FileAccess.get_file_as_string(HERO))
+	if not decoded is Dictionary:
+		return _preparation_failed("Study hero definition is unavailable")
+	var hero_check: Dictionary = load("res://scripts/visuals/actor_sprite_catalog.gd").prepare_presentation(decoded)
+	if not hero_check.ok:
+		return _preparation_failed(str(hero_check.reason))
+	_hero_definition = decoded.duplicate(true)
+	if not _entry.ready(routes.landmarks, bounds):
+		return _preparation_failed("Study preparation lost ownership")
+	_preparing = false
+	return {"ok": true, "reason": "", "entry": _entry}
+
+
+func cancel_entry() -> void:
+	if _entry != null:
+		if _entry.phase() in ["in_use", "transferred"]: return
+		_entry.cancel()
+	_hero_definition.clear()
+
+
+func enter(arena: Node2D) -> Dictionary:
+	if _preparing or _entry == null:
+		return {"ok": false, "reason": "Study entry is not prepared"}
+	var result: Dictionary = arena.start_map_prepared(_draft_revision, _entry)
+	if not result.ok: return result
+	# A committed gameplay transaction must never be reported as a failed entry
+	# because of a later display-only resource problem. The definition was
+	# already checked before fees; the normal hero remains a legal fallback.
+	if not _hero_definition.is_empty():
+		var selected: Dictionary = arena.retained_actors.set_hero_presentation(_hero_definition)
+		if not selected.ok: result["presentation_warning"] = str(selected.reason)
+	arena.retained_actors.sync(arena)
+	return result
+
+
+func _preparation_failed(reason: String) -> Dictionary:
+	if _entry != null: _entry.cancel()
+	_preparing = false
+	_hero_definition.clear()
+	return {"ok": false, "reason": reason}

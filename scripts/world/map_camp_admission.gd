@@ -7,6 +7,7 @@ const Encounter = preload("res://scripts/encounters/encounter_admission.gd")
 const Admission = preload("res://scripts/world/map_admission.gd")
 const Compiler = preload("res://scripts/world/map_compiler.gd")
 const Geometry = preload("res://scripts/world/map_geometry.gd")
+const PreparedEntry = preload("res://scripts/world/prepared_map_entry.gd")
 const GROUP_COUNTS: Dictionary = {"old_garden": 8, "broken_ruins": 12, "sunwell_terrace": 12, "ginkgo_arcade": 12}
 const PLAYER_CLEARANCE: float = 230.0
 const LIVE_CAP: int = 100
@@ -14,7 +15,7 @@ const LIVE_CAP: int = 100
 
 static func plan(runtime: RefCounted, profile: Variant, entries: Variant,
 		geometry: RefCounted, player_pos: Variant, available: Variant,
-		context: String = "ordinary") -> Dictionary:
+		context: String = "ordinary", prepared: Variant = null) -> Dictionary:
 	var reason: String = Compiler.profile_reason(profile)
 	if not reason.is_empty(): return _failure(reason)
 	# Fixed test profiles also require the factory's exact integer wave type.
@@ -32,7 +33,14 @@ static func plan(runtime: RefCounted, profile: Variant, entries: Variant,
 	if typeof(available) != TYPE_INT or available < count or available > LIVE_CAP:
 		return _failure("营地整组容量不足或无效")
 	var shape: Dictionary = geometry.snapshot()
-	if shape.id != profile.id or not shape.bounds.position.is_finite() \
+	var same_map: bool = shape.id == profile.id
+	if not same_map and prepared is PreparedEntry:
+		# The sole opt-in bridge uses the same owned collision object already
+		# checked by ExplorationMapPlan. A source_map_id label alone is not enough.
+		same_map = prepared.phase() == "in_use" and prepared.geometry_ref() == geometry \
+			and shape.id == "modular_study" and shape.get("source_map_id") == "old_garden" \
+			and profile.id == "old_garden" and geometry.has_method("physics_ready") and geometry.physics_ready()
+	if not same_map or not shape.bounds.position.is_finite() \
 		or not shape.bounds.size.is_finite() or shape.bounds.size.x <= 0.0 or shape.bounds.size.y <= 0.0:
 		return _failure("营地地形与地图不符")
 	var staged = Runtime.new(runtime.templates)

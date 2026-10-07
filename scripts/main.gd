@@ -82,6 +82,7 @@ const EncounterAdmission = preload("res://scripts/encounters/encounter_admission
 var ARENA: Rect2 = View.WORLD_ARENA
 const ExplorationLayout = preload("res://scripts/world/exploration_map_layout.gd")
 const ExplorationPlan = preload("res://scripts/world/exploration_map_plan.gd")
+const PreparedMapEntry = preload("res://scripts/world/prepared_map_entry.gd")
 const EXPLORATION_AGGRO_RADIUS := 450.0
 var _map_spawn_records: Dictionary = {}
 var _map_mechanism_config: Dictionary = {}
@@ -390,6 +391,14 @@ func restart_run(camp_plan: Dictionary = {}) -> void:
 		if not camp_plan.get("ok",false):
 			if is_instance_valid(hud):hud.notify(str(camp_plan.get("reason","地图据点不可用")))
 			return
+		# The optional native geometry is the same instance that admitted all
+		# roots before the fee/save. A later ordinary retry exits the study and
+		# adopts its ordinary plan instead of retaining native walls under old
+		# straight route metadata. Other ordinary callers keep their object.
+		var leaving_study:bool=_geometry.snapshot().get("encounter_mode","")=="modular_study"
+		if camp_plan.get("prepared_geometry",false) or leaving_study:
+			if leaving_study:_geometry.configure("town",View.WORLD_ARENA)
+			_geometry=camp_plan.geometry
 		# All initial identities and positions were admitted before any fee.
 		_map_run=camp_plan.run
 		_world_mode="map";_world_revision+=1
@@ -2757,11 +2766,31 @@ func craft_normal_map(map_id:Variant,tier:Variant,normal_ids:Variant,special_ids
 	if int(tier)>mini(int(state.normal_journey().best_tiers[map_id])+1,3):return _world_failure("tier_locked","请先完成本地图前一档挑战")
 	_map_draft_profile=compiled.profile;_map_draft_revision+=1;world_context_changed.emit()
 	return {"ok":true,"code":"","reason":"","draft":map_draft()}
+func map_entry_preparation_context()->PackedByteArray:
+	return var_to_bytes([get_instance_id(),_world_mode,_world_revision,_map_draft_revision,
+		_map_draft_profile,state.get_instance_id(),state.revision(),build_save_path,_normal_completion_pending,run_revision,
+		rng.seed,rng.state,EncounterAdmission._snapshot(monster_runtime),monster_runtime.templates])
+
+func start_map_prepared(expected_revision:Variant,prepared:Variant,mechanism_config:Variant={})->Dictionary:
+	if not prepared is PreparedMapEntry:
+		return _world_failure("invalid_prepared_map","Prepared map owner is invalid")
+	if _world_mode != "town" or _is_test_profile() or _normal_completion_pending or not state.normal_journey().active_run.is_empty():
+		prepared.cancel()
+		return _world_failure("invalid_prepared_map","Prepared entry requires a settled ordinary town")
+	var reason:String=prepared.begin_use(map_entry_preparation_context())
+	if not reason.is_empty():return _world_failure("stale_prepared_map",reason)
+	var result:Dictionary=_start_map_transaction(expected_revision,mechanism_config,prepared)
+	prepared.finish_use(bool(result.ok))
+	return result
+
 func start_map(expected_revision:Variant,mechanism_config:Variant={})->Dictionary:
+	return _start_map_transaction(expected_revision,mechanism_config)
+
+func _start_map_transaction(expected_revision:Variant,mechanism_config:Variant={},prepared:Variant=null)->Dictionary:
 	if _world_mode!="town" or not expected_revision is int or expected_revision!=_map_draft_revision:return _world_failure("stale_map","地图草案或所在区域已变化")
 	var reason:String=MapCompiler.profile_reason(_map_draft_profile)
 	if not reason.is_empty():return _world_failure("invalid_map",reason)
-	var camp_plan:Dictionary=_prepare_camp_run(_map_draft_profile,int(state.normal_journey().next_run_id) if not _is_test_profile() else run_revision+1,mechanism_config)
+	var camp_plan:Dictionary=_prepare_camp_run(_map_draft_profile,int(state.normal_journey().next_run_id) if not _is_test_profile() else run_revision+1,mechanism_config,prepared)
 	if not camp_plan.ok:return _world_failure("invalid_camp",camp_plan.reason)
 	if not _is_test_profile():
 		var recovered:Dictionary=_recover_normal_active()
@@ -2809,10 +2838,10 @@ func claim_normal_rewards(expected_revision:Variant)->Dictionary:
 	var response:Dictionary=_world_ok()
 	for key:String in ["claimed_shards","claimed_gems","claimed_flasks"]:response[key]=int(result[key])
 	return response
-func _prepare_camp_run(profile:Dictionary,sequence:int,mechanism_config:Variant={})->Dictionary:
+func _prepare_camp_run(profile:Dictionary,sequence:int,mechanism_config:Variant={},prepared:Variant=null)->Dictionary:
 	var seed_text:String=JSON.stringify([rng.seed,sequence,profile.id,profile.get("journey_tier",0),"map-camps-v1"])
 	var seed_value:int=seed_text.sha256_text().substr(0,15).hex_to_int()
-	return ExplorationPlan.plan(profile,monster_runtime,seed_value,View.exploration_arena(),MAX_ENEMIES,Monsters.CURRENT_ROLL_POLICY,mechanism_config)
+	return ExplorationPlan.plan(profile,monster_runtime,seed_value,View.exploration_arena(),MAX_ENEMIES,Monsters.CURRENT_ROLL_POLICY,mechanism_config,prepared)
 
 func _camp_triggered(marker:Dictionary)->bool:
 	if CampLayout.trigger_crossed(player_pos,player_pos,marker.trigger_center,float(marker.trigger_radius)):return true

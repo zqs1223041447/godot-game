@@ -1,0 +1,897 @@
+{
+	"candidate_diagnostics": [
+		{
+			"clear": false,
+			"label": "original_segment_0",
+			"points": [
+				"(362.0, 2184.0)",
+				"(1342.0, 2104.0)"
+			],
+			"radius": 51.0,
+			"segments": [
+				{
+					"end_clear": true,
+					"forward": {
+						"fraction": 0.633413314819336,
+						"hit": true,
+						"normal": "(-0.510539, -0.859855)",
+						"point": "(982.7451, 2133.327)",
+						"wall": 3
+					},
+					"from": "(362.0, 2184.0)",
+					"reverse": {
+						"fraction": 0.216440200805664,
+						"hit": true,
+						"normal": "(0.490261, -0.871576)",
+						"point": "(1129.889, 2121.315)",
+						"wall": 3
+					},
+					"start_clear": true,
+					"to": "(1342.0, 2104.0)"
+				}
+			]
+		},
+		{
+			"clear": false,
+			"label": "original_segment_10",
+			"points": [
+				"(1342.0, 2104.0)",
+				"(1882.0, 1404.0)"
+			],
+			"radius": 51.0,
+			"segments": [
+				{
+					"end_clear": true,
+					"forward": {
+						"fraction": 0.144103527069092,
+						"hit": true,
+						"normal": "(-0.062378, 0.998053)",
+						"point": "(1419.816, 2003.128)",
+						"wall": 2
+					},
+					"from": "(1342.0, 2104.0)",
+					"reverse": {
+						"fraction": 0.631014823913574,
+						"hit": true,
+						"normal": "(0.645942, -0.763386)",
+						"point": "(1541.252, 1845.71)",
+						"wall": 2
+					},
+					"start_clear": true,
+					"to": "(1882.0, 1404.0)"
+				}
+			]
+		},
+		{
+			"clear": false,
+			"label": "rejected_tight_rock_bend",
+			"points": [
+				"(362.0, 2184.0)",
+				"(1062.0, 2134.0)",
+				"(1342.0, 2104.0)"
+			],
+			"radius": 51.0,
+			"segments": [
+				{
+					"end_clear": false,
+					"forward": {
+						"fraction": 0.87083101272583,
+						"hit": true,
+						"normal": "(-0.518978, -0.854787)",
+						"point": "(971.5817, 2140.458)",
+						"wall": 3
+					},
+					"from": "(362.0, 2184.0)",
+					"reverse": {
+						"fraction": 0.0,
+						"hit": true,
+						"normal": "(-0.10278, -0.994704)",
+						"point": "(1062.0, 2134.0)",
+						"wall": 3
+					},
+					"start_clear": true,
+					"to": "(1062.0, 2134.0)"
+				},
+				{
+					"end_clear": true,
+					"forward": {
+						"fraction": 0.0,
+						"hit": true,
+						"normal": "(-0.10278, -0.994704)",
+						"point": "(1062.0, 2134.0)",
+						"wall": 3
+					},
+					"from": "(1062.0, 2134.0)",
+					"reverse": {
+						"fraction": 0.728549957275391,
+						"hit": true,
+						"normal": "(0.447214, -0.894427)",
+						"point": "(1138.006, 2125.856)",
+						"wall": 3
+					},
+					"start_clear": false,
+					"to": "(1342.0, 2104.0)"
+				}
+			]
+		},
+		{
+			"clear": false,
+			"label": "rejected_tight_arch_bend",
+			"points": [
+				"(1342.0, 2104.0)",
+				"(1502.0, 2004.0)",
+				"(1882.0, 1404.0)"
+			],
+			"radius": 51.0,
+			"segments": [
+				{
+					"end_clear": false,
+					"forward": {
+						"fraction": 0.904595375061035,
+						"hit": true,
+						"normal": "(-0.110432, 0.993884)",
+						"point": "(1486.735, 2013.541)",
+						"wall": 2
+					},
+					"from": "(1342.0, 2104.0)",
+					"reverse": {
+						"fraction": 0.0,
+						"hit": true,
+						"normal": "(0.143859, 0.989598)",
+						"point": "(1502.0, 2004.0)",
+						"wall": 2
+					},
+					"start_clear": true,
+					"to": "(1502.0, 2004.0)"
+				},
+				{
+					"end_clear": true,
+					"forward": {
+						"fraction": 0.0,
+						"hit": true,
+						"normal": "(0.143859, 0.989598)",
+						"point": "(1502.0, 2004.0)",
+						"wall": 2
+					},
+					"from": "(1502.0, 2004.0)",
+					"reverse": {
+						"fraction": 0.859768867492676,
+						"hit": true,
+						"normal": "(0.992278, 0.124035)",
+						"point": "(1555.288, 1919.861)",
+						"wall": 2
+					},
+					"start_clear": false,
+					"to": "(1882.0, 1404.0)"
+				}
+			]
+		},
+		{
+			"clear": true,
+			"label": "selected_rock_bend",
+			"points": [
+				"(362.0, 2184.0)",
+				"(1062.0, 2084.0)",
+				"(1342.0, 2104.0)"
+			],
+			"radius": 51.0,
+			"segments": [
+				{
+					"end_clear": true,
+					"forward": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(1062.0, 2084.0)",
+						"wall": -1
+					},
+					"from": "(362.0, 2184.0)",
+					"reverse": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(362.0, 2184.0)",
+						"wall": -1
+					},
+					"start_clear": true,
+					"to": "(1062.0, 2084.0)"
+				},
+				{
+					"end_clear": true,
+					"forward": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(1342.0, 2104.0)",
+						"wall": -1
+					},
+					"from": "(1062.0, 2084.0)",
+					"reverse": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(1062.0, 2084.0)",
+						"wall": -1
+					},
+					"start_clear": true,
+					"to": "(1342.0, 2104.0)"
+				}
+			]
+		},
+		{
+			"clear": true,
+			"label": "selected_arch_bend",
+			"points": [
+				"(1342.0, 2104.0)",
+				"(1542.0, 2024.0)",
+				"(1882.0, 1404.0)"
+			],
+			"radius": 51.0,
+			"segments": [
+				{
+					"end_clear": true,
+					"forward": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(1542.0, 2024.0)",
+						"wall": -1
+					},
+					"from": "(1342.0, 2104.0)",
+					"reverse": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(1342.0, 2104.0)",
+						"wall": -1
+					},
+					"start_clear": true,
+					"to": "(1542.0, 2024.0)"
+				},
+				{
+					"end_clear": true,
+					"forward": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(1882.0, 1404.0)",
+						"wall": -1
+					},
+					"from": "(1542.0, 2024.0)",
+					"reverse": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(1542.0, 2024.0)",
+						"wall": -1
+					},
+					"start_clear": true,
+					"to": "(1882.0, 1404.0)"
+				}
+			]
+		}
+	],
+	"checks": 64,
+	"contours": 4,
+	"failed_labels": [
+		"Unready geometry fails closed with no proposed landmarks"
+	],
+	"failures": 1,
+	"geometry_unchanged": true,
+	"input_unchanged": true,
+	"method": "Session.layout, original StudyGeometry native sweeps and movement; no Main or battle ticks",
+	"original_predicate_reason": "探索路线与实体障碍或边界相交",
+	"player_paths": [
+		{
+			"all_steps_clear": true,
+			"direction": 1,
+			"end": "(1342.0, 2104.0)",
+			"original_segment": 0,
+			"reached": true,
+			"steps": 32
+		},
+		{
+			"all_steps_clear": true,
+			"direction": -1,
+			"end": "(362.0, 2184.0)",
+			"original_segment": 0,
+			"reached": true,
+			"steps": 32
+		},
+		{
+			"all_steps_clear": true,
+			"direction": 1,
+			"end": "(1882.0, 1404.0)",
+			"original_segment": 10,
+			"reached": true,
+			"steps": 30
+		},
+		{
+			"all_steps_clear": true,
+			"direction": -1,
+			"end": "(1342.0, 2104.0)",
+			"original_segment": 10,
+			"reached": true,
+			"steps": 30
+		}
+	],
+	"prepared_predicate_reason": "",
+	"route_audits": [
+		{
+			"clear": true,
+			"points": [
+				"(362.0, 2184.0)",
+				"(1062.0, 2084.0)"
+			],
+			"radius": 51.0,
+			"segments": [
+				{
+					"end_clear": true,
+					"forward": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(1062.0, 2084.0)",
+						"wall": -1
+					},
+					"from": "(362.0, 2184.0)",
+					"reverse": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(362.0, 2184.0)",
+						"wall": -1
+					},
+					"start_clear": true,
+					"to": "(1062.0, 2084.0)"
+				}
+			]
+		},
+		{
+			"clear": true,
+			"points": [
+				"(1062.0, 2084.0)",
+				"(1342.0, 2104.0)"
+			],
+			"radius": 51.0,
+			"segments": [
+				{
+					"end_clear": true,
+					"forward": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(1342.0, 2104.0)",
+						"wall": -1
+					},
+					"from": "(1062.0, 2084.0)",
+					"reverse": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(1062.0, 2084.0)",
+						"wall": -1
+					},
+					"start_clear": true,
+					"to": "(1342.0, 2104.0)"
+				}
+			]
+		},
+		{
+			"clear": true,
+			"points": [
+				"(1342.0, 2104.0)",
+				"(2042.0, 2104.0)"
+			],
+			"radius": 36.0,
+			"segments": [
+				{
+					"end_clear": true,
+					"forward": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(2042.0, 2104.0)",
+						"wall": -1
+					},
+					"from": "(1342.0, 2104.0)",
+					"reverse": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(1342.0, 2104.0)",
+						"wall": -1
+					},
+					"start_clear": true,
+					"to": "(2042.0, 2104.0)"
+				}
+			]
+		},
+		{
+			"clear": true,
+			"points": [
+				"(2042.0, 2104.0)",
+				"(3032.0, 1854.0)"
+			],
+			"radius": 36.0,
+			"segments": [
+				{
+					"end_clear": true,
+					"forward": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(3032.0, 1854.0)",
+						"wall": -1
+					},
+					"from": "(2042.0, 2104.0)",
+					"reverse": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(2042.0, 2104.0)",
+						"wall": -1
+					},
+					"start_clear": true,
+					"to": "(3032.0, 1854.0)"
+				}
+			]
+		},
+		{
+			"clear": true,
+			"points": [
+				"(3032.0, 1854.0)",
+				"(2722.0, 924.0)"
+			],
+			"radius": 36.0,
+			"segments": [
+				{
+					"end_clear": true,
+					"forward": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(2722.0, 924.0)",
+						"wall": -1
+					},
+					"from": "(3032.0, 1854.0)",
+					"reverse": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(3032.0, 1854.0)",
+						"wall": -1
+					},
+					"start_clear": true,
+					"to": "(2722.0, 924.0)"
+				}
+			]
+		},
+		{
+			"clear": true,
+			"points": [
+				"(2722.0, 924.0)",
+				"(3222.0, 424.0)"
+			],
+			"radius": 36.0,
+			"segments": [
+				{
+					"end_clear": true,
+					"forward": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(3222.0, 424.0)",
+						"wall": -1
+					},
+					"from": "(2722.0, 924.0)",
+					"reverse": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(2722.0, 924.0)",
+						"wall": -1
+					},
+					"start_clear": true,
+					"to": "(3222.0, 424.0)"
+				}
+			]
+		},
+		{
+			"clear": true,
+			"points": [
+				"(1342.0, 2104.0)",
+				"(692.0, 1804.0)"
+			],
+			"radius": 36.0,
+			"segments": [
+				{
+					"end_clear": true,
+					"forward": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(692.0, 1804.0)",
+						"wall": -1
+					},
+					"from": "(1342.0, 2104.0)",
+					"reverse": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(1342.0, 2104.0)",
+						"wall": -1
+					},
+					"start_clear": true,
+					"to": "(692.0, 1804.0)"
+				}
+			]
+		},
+		{
+			"clear": true,
+			"points": [
+				"(692.0, 1804.0)",
+				"(742.0, 1184.0)"
+			],
+			"radius": 36.0,
+			"segments": [
+				{
+					"end_clear": true,
+					"forward": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(742.0, 1184.0)",
+						"wall": -1
+					},
+					"from": "(692.0, 1804.0)",
+					"reverse": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(692.0, 1804.0)",
+						"wall": -1
+					},
+					"start_clear": true,
+					"to": "(742.0, 1184.0)"
+				}
+			]
+		},
+		{
+			"clear": true,
+			"points": [
+				"(742.0, 1184.0)",
+				"(892.0, 604.0)"
+			],
+			"radius": 36.0,
+			"segments": [
+				{
+					"end_clear": true,
+					"forward": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(892.0, 604.0)",
+						"wall": -1
+					},
+					"from": "(742.0, 1184.0)",
+					"reverse": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(742.0, 1184.0)",
+						"wall": -1
+					},
+					"start_clear": true,
+					"to": "(892.0, 604.0)"
+				}
+			]
+		},
+		{
+			"clear": true,
+			"points": [
+				"(892.0, 604.0)",
+				"(1882.0, 464.0)"
+			],
+			"radius": 36.0,
+			"segments": [
+				{
+					"end_clear": true,
+					"forward": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(1882.0, 464.0)",
+						"wall": -1
+					},
+					"from": "(892.0, 604.0)",
+					"reverse": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(892.0, 604.0)",
+						"wall": -1
+					},
+					"start_clear": true,
+					"to": "(1882.0, 464.0)"
+				}
+			]
+		},
+		{
+			"clear": true,
+			"points": [
+				"(1882.0, 464.0)",
+				"(2722.0, 924.0)"
+			],
+			"radius": 36.0,
+			"segments": [
+				{
+					"end_clear": true,
+					"forward": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(2722.0, 924.0)",
+						"wall": -1
+					},
+					"from": "(1882.0, 464.0)",
+					"reverse": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(1882.0, 464.0)",
+						"wall": -1
+					},
+					"start_clear": true,
+					"to": "(2722.0, 924.0)"
+				}
+			]
+		},
+		{
+			"clear": true,
+			"points": [
+				"(1342.0, 2104.0)",
+				"(1542.0, 2024.0)"
+			],
+			"radius": 51.0,
+			"segments": [
+				{
+					"end_clear": true,
+					"forward": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(1542.0, 2024.0)",
+						"wall": -1
+					},
+					"from": "(1342.0, 2104.0)",
+					"reverse": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(1342.0, 2104.0)",
+						"wall": -1
+					},
+					"start_clear": true,
+					"to": "(1542.0, 2024.0)"
+				}
+			]
+		},
+		{
+			"clear": true,
+			"points": [
+				"(1542.0, 2024.0)",
+				"(1882.0, 1404.0)"
+			],
+			"radius": 51.0,
+			"segments": [
+				{
+					"end_clear": true,
+					"forward": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(1882.0, 1404.0)",
+						"wall": -1
+					},
+					"from": "(1542.0, 2024.0)",
+					"reverse": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(1542.0, 2024.0)",
+						"wall": -1
+					},
+					"start_clear": true,
+					"to": "(1882.0, 1404.0)"
+				}
+			]
+		},
+		{
+			"clear": true,
+			"points": [
+				"(1882.0, 1404.0)",
+				"(1882.0, 464.0)"
+			],
+			"radius": 36.0,
+			"segments": [
+				{
+					"end_clear": true,
+					"forward": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(1882.0, 464.0)",
+						"wall": -1
+					},
+					"from": "(1882.0, 1404.0)",
+					"reverse": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(1882.0, 1404.0)",
+						"wall": -1
+					},
+					"start_clear": true,
+					"to": "(1882.0, 464.0)"
+				}
+			]
+		}
+	],
+	"route_count": 14,
+	"segment_mapping": [
+		{
+			"original_index": 0,
+			"prepared_indices": [
+				0,
+				1
+			],
+			"validation_radius": 51.0
+		},
+		{
+			"original_index": 1,
+			"prepared_indices": [
+				2
+			],
+			"validation_radius": 36.0
+		},
+		{
+			"original_index": 2,
+			"prepared_indices": [
+				3
+			],
+			"validation_radius": 36.0
+		},
+		{
+			"original_index": 3,
+			"prepared_indices": [
+				4
+			],
+			"validation_radius": 36.0
+		},
+		{
+			"original_index": 4,
+			"prepared_indices": [
+				5
+			],
+			"validation_radius": 36.0
+		},
+		{
+			"original_index": 5,
+			"prepared_indices": [
+				6
+			],
+			"validation_radius": 36.0
+		},
+		{
+			"original_index": 6,
+			"prepared_indices": [
+				7
+			],
+			"validation_radius": 36.0
+		},
+		{
+			"original_index": 7,
+			"prepared_indices": [
+				8
+			],
+			"validation_radius": 36.0
+		},
+		{
+			"original_index": 8,
+			"prepared_indices": [
+				9
+			],
+			"validation_radius": 36.0
+		},
+		{
+			"original_index": 9,
+			"prepared_indices": [
+				10
+			],
+			"validation_radius": 36.0
+		},
+		{
+			"original_index": 10,
+			"prepared_indices": [
+				11,
+				12
+			],
+			"validation_radius": 51.0
+		},
+		{
+			"original_index": 11,
+			"prepared_indices": [
+				13
+			],
+			"validation_radius": 36.0
+		}
+	],
+	"selected_bends": [
+		"(1062.0, 2084.0)",
+		"(1542.0, 2024.0)"
+	],
+	"untouched_segment_5": {
+		"extra_radius_51": {
+			"clear": false,
+			"points": [
+				"(1342.0, 2104.0)",
+				"(692.0, 1804.0)"
+			],
+			"radius": 51.0,
+			"segments": [
+				{
+					"end_clear": true,
+					"forward": {
+						"fraction": 0.441803932189941,
+						"hit": true,
+						"normal": "(-0.116841, 0.993151)",
+						"point": "(1054.827, 1971.459)",
+						"wall": 0
+					},
+					"from": "(1342.0, 2104.0)",
+					"reverse": {
+						"fraction": 0.501495361328125,
+						"hit": true,
+						"normal": "(-0.734803, 0.67828)",
+						"point": "(1017.972, 1954.449)",
+						"wall": 0
+					},
+					"start_clear": true,
+					"to": "(692.0, 1804.0)"
+				}
+			]
+		},
+		"formal_radius_36": {
+			"clear": true,
+			"points": [
+				"(1342.0, 2104.0)",
+				"(692.0, 1804.0)"
+			],
+			"radius": 36.0,
+			"segments": [
+				{
+					"end_clear": true,
+					"forward": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(692.0, 1804.0)",
+						"wall": -1
+					},
+					"from": "(1342.0, 2104.0)",
+					"reverse": {
+						"fraction": 1.0,
+						"hit": false,
+						"normal": "(0.0, 0.0)",
+						"point": "(1342.0, 2104.0)",
+						"wall": -1
+					},
+					"start_clear": true,
+					"to": "(692.0, 1804.0)"
+				}
+			]
+		}
+	},
+	"vertices": 99
+}

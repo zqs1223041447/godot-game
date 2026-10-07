@@ -11,12 +11,13 @@ const Runtime = preload("res://scripts/monsters/monster_runtime.gd")
 const Monsters = preload("res://scripts/monsters/monster_catalog.gd")
 const Compiler = preload("res://scripts/world/map_compiler.gd")
 const RunState = preload("res://scripts/world/map_run_state.gd")
+const PreparedEntry = preload("res://scripts/world/prepared_map_entry.gd")
 const LIVE_CAP := 100
 
 
 static func plan(profile: Variant, live_runtime: Variant, seed_value: Variant, bounds: Rect2,
 		capacity: Variant = LIVE_CAP, monster_policy: String = Monsters.CURRENT_ROLL_POLICY,
-		mechanism_config: Variant = {}) -> Dictionary:
+		mechanism_config: Variant = {}, prepared: Variant = null) -> Dictionary:
 	var reason := Compiler.profile_reason(profile)
 	if not reason.is_empty(): return _failure(reason)
 	# Future mechanisms require an explicit implementation and reward route.
@@ -32,8 +33,15 @@ static func plan(profile: Variant, live_runtime: Variant, seed_value: Variant, b
 		return _failure("探索地图怪物标识空间不足")
 	var layout: Dictionary = Layout.layout(profile.id, bounds)
 	if not layout.ok: return _failure(layout.reason)
-	var geometry = Geometry.new()
-	if not geometry.configure_exploration(profile.id, bounds): return _failure("探索地图几何无效")
+	var geometry: RefCounted
+	if prepared == null:
+		geometry = Geometry.new()
+		if not geometry.configure_exploration(profile.id, bounds): return _failure("探索地图几何无效")
+	else:
+		reason = _prepared_reason(prepared, profile, bounds, layout.landmarks)
+		if not reason.is_empty(): return _failure(reason)
+		geometry = prepared.geometry_ref()
+		layout.landmarks = prepared.landmarks()
 	reason = _routes_reason(layout.landmarks, geometry)
 	if not reason.is_empty(): return _failure(reason)
 	for outpost: Dictionary in layout.landmarks.outposts: outpost["root_ids"] = []
@@ -49,7 +57,7 @@ static func plan(profile: Variant, live_runtime: Variant, seed_value: Variant, b
 	var spawn_records: Array[Dictionary] = []
 	for camp: Dictionary in layout.landmarks.camps:
 		var group: Dictionary = CampAdmission.plan(staged, profile, state.entries(camp.id), geometry,
-			layout.landmarks.entry, capacity - ordinary_roots.size())
+			layout.landmarks.entry, capacity - ordinary_roots.size(), "ordinary", prepared)
 		if not group.ok: return _failure(group.error)
 		# Carry each complete group's lineage checkpoint into the following group.
 		Encounter._restore(staged, group.runtime_checkpoint)
@@ -72,7 +80,7 @@ static func plan(profile: Variant, live_runtime: Variant, seed_value: Variant, b
 	var boss_entry := {"template_id": profile.boss_id, "rarity": "", "mechanisms": [],
 		"position": layout.landmarks.boss.center}
 	var boss_plan: Dictionary = CampAdmission.plan(staged, profile, [boss_entry], geometry,
-		layout.landmarks.entry, capacity - ordinary_roots.size(), "map_boss")
+		layout.landmarks.entry, capacity - ordinary_roots.size(), "map_boss", prepared)
 	if not boss_plan.ok: return _failure(boss_plan.error)
 	Encounter._restore(staged, boss_plan.runtime_checkpoint)
 	var boss: Dictionary = boss_plan.enemies[0]
@@ -87,11 +95,64 @@ static func plan(profile: Variant, live_runtime: Variant, seed_value: Variant, b
 	var run = RunState.new()
 	if not run.begin(profile) or not run.register_initial_group(ordinary_roots, boss):
 		return _failure("探索地图全体根怪登记失败")
-	return {"ok": true, "reason": "", "state": state, "landmarks": layout.landmarks,
+	var result: Dictionary = {"ok": true, "reason": "", "state": state, "landmarks": layout.landmarks,
 		"roots": roots, "ordinary_roots": ordinary_roots, "boss": boss,
 		"runtime_checkpoint": Encounter._snapshot(staged), "run": run,
 		"geometry": geometry, "bounds": bounds, "mechanism_config": {},
 		"optional_encounters": [], "spawn_records": spawn_records}
+	if prepared != null: result["prepared_geometry"] = true
+	return result
+
+
+static func _prepared_reason(prepared: Variant, profile: Dictionary, bounds: Rect2, original: Dictionary) -> String:
+	if not prepared is PreparedEntry or prepared.phase() != "in_use":
+		return "Prepared geometry must belong to an active entry transaction"
+	var geometry: RefCounted = prepared.geometry_ref()
+	if not geometry is Geometry or not geometry.has_method("physics_ready") or not geometry.physics_ready():
+		return "Prepared native collision is not ready"
+	var snapshot: Dictionary = geometry.snapshot()
+	if prepared.bounds() != bounds or snapshot.get("bounds") != bounds \
+		or snapshot.get("source_map_id") != profile.id or snapshot.get("spawn") != original.entry:
+		return "Prepared geometry does not match this map, bounds or entry"
+	var supplied: Dictionary = prepared.landmarks()
+	var wanted: Dictionary = original.duplicate(true)
+	var routes: Variant = supplied.get("route_segments")
+	# This first adapter may only reroute paths. Identities, counts, positions,
+	# entry and every source group remain the ordinary catalogue definition.
+	supplied.erase("route_segments")
+	wanted.erase("route_segments")
+	if var_to_bytes(supplied) != var_to_bytes(wanted):
+		return "Prepared landmarks changed a non-route map field"
+	if not routes is Array or routes.is_empty() or routes.size() > 32:
+		return "Prepared route list is invalid"
+	var cursor := 0
+	for source: Dictionary in original.route_segments:
+		var from: Vector2 = source.from
+		var chain: Array[Dictionary] = []
+		# Every original route is represented, in order, by a continuous chain
+		# with unchanged endpoints. Dropping a blocked connector is not valid.
+		while cursor < routes.size():
+			var route: Variant = routes[cursor]
+			if not route is Dictionary or not route.get("from") is Vector2 or not route.get("to") is Vector2 \
+				or not route.from.is_finite() or not route.to.is_finite() or route.from != from \
+				or typeof(route.get("width")) not in [TYPE_INT, TYPE_FLOAT] or float(route.width) != 72.0:
+				return "Prepared route width, order or endpoints are invalid"
+			chain.append(route)
+			cursor += 1
+			from = route.to
+			if from == source.to: break
+		if chain.is_empty() or from != source.to:
+			return "Prepared route chain omitted an original connection"
+		# Preserve original width checks for untouched routes. New bends must
+		# additionally clear the real player's radius, without narrowing paint.
+		var radius := 36.0 if chain.size() == 1 else 51.0
+		for route: Dictionary in chain:
+			if not geometry.is_clear(route.from, radius) or not geometry.is_clear(route.to, radius) \
+				or geometry.sweep(route.from, route.to, radius).hit or geometry.sweep(route.to, route.from, radius).hit:
+				return "Prepared route lacks required width or player clearance"
+	if cursor != routes.size():
+		return "Prepared route list has extra disconnected segments"
+	return ""
 
 
 static func _spawn_record(enemy: Dictionary, source_group: String, ordinal: int) -> Dictionary:

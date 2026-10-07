@@ -1,5 +1,12 @@
 # Modular study: playable closure and formal-entry conditions
 
+v115 update: the isolated study now has pre-fee native preparation, same-instance
+admission, bounded detours for the two blocked routes and ordinary-retry cleanup.
+See [v115 entry evidence](../qa/v115-native-map-entry/README.md). The v114 audit
+below is retained as historical evidence; its first two entry gaps are addressed
+by the opt-in adapter. A new formal map identity/progression contract remains
+unselected and no production menu entry is added.
+
 This read-only v114 follow-up is based on v113 `bf8aacfb2c13b96fb6f489338fa7a7252ab190df`. It adds one focused integration fixture and evidence, with no gameplay, geometry, art, map catalogue, save schema or economic changes. The independent research area is playable through the existing completion/return/claim loop. It is **not yet a formal selectable map**.
 
 ## Verified current loop

@@ -1,0 +1,179 @@
+extends SceneTree
+## One short native-only test: no Main, map entry, import or art rendering.
+const Routes = preload("res://scripts/studies/modular_study_routes.gd")
+const Session = preload("res://scripts/studies/modular_study_session.gd")
+const Geometry = preload("res://scripts/studies/modular_study_geometry.gd")
+const BaseGeometry = preload("res://scripts/world/map_geometry.gd")
+const Layout = preload("res://scripts/world/exploration_map_layout.gd")
+const Plan = preload("res://scripts/world/exploration_map_plan.gd")
+const QA := "res://docs/qa/v115-native-map-entry/routes-result.json"
+var checks := 0
+var failures: Array[String] = []
+var report: Dictionary = {"method": "Session.layout, original StudyGeometry native sweeps and movement; no Main or battle ticks"}
+
+
+func _initialize() -> void:
+	call_deferred("run")
+
+
+func check(condition: bool, label: String) -> void:
+	checks += 1
+	if not condition:
+		failures.append(label)
+		push_error(label)
+
+
+func run() -> void:
+	var bounds := Layout.WORLD_BOUNDS
+	var original: Dictionary = Layout.layout("old_garden", bounds).landmarks
+	# Unknown plain data must survive deeply detached, even on split routes.
+	original["study_test_metadata"] = {"nested": [{"value": 7}]}
+	original.route_segments[0]["study_test_metadata"] = {"nested": [8]}
+	var before := original.duplicate(true)
+	var assembly: Dictionary = Session.layout(bounds)
+	check(assembly.ok, "Read original assembly")
+	if not assembly.ok:
+		finish()
+		return
+	var geometry := Geometry.new()
+	var installed: Dictionary = geometry.install(bounds, assembly.polygons, original.entry, assembly.presentation)
+	check(installed.ok, "Install unchanged native assembly")
+	if not installed.ok:
+		finish()
+		return
+	var not_ready: Dictionary = Routes.prepare(original, geometry)
+	check(not not_ready.ok and not_ready.landmarks.is_empty() and not not_ready.reason.is_empty(), "Unready geometry fails closed with no proposed landmarks")
+	check(not Routes.prepare(original, null).ok, "Null geometry is rejected")
+	check(not Routes.prepare(original, BaseGeometry.new()).ok, "Rectangular fallback geometry is rejected")
+	await physics_frame
+	await physics_frame
+	check(geometry.physics_ready(), "All native pieces synchronize")
+	var original_geometry: Dictionary = geometry.snapshot()
+	var vertex_count := 0
+	for polygon: PackedVector2Array in original_geometry.module_polygons:
+		vertex_count += polygon.size()
+	check(original_geometry.module_polygons.size() == 4 and vertex_count == 99, "Keep four contours and 99 vertices")
+	report["contours"] = original_geometry.module_polygons.size()
+	report["vertices"] = vertex_count
+	report["original_predicate_reason"] = Plan._routes_reason(original, geometry)
+	check(not str(report.original_predicate_reason).is_empty(), "Original full-route predicate reproduces the known obstruction")
+	var candidates: Array[Dictionary] = []
+	for candidate: Dictionary in [
+		{"label": "original_segment_0", "points": [Vector2(362, 2184), Vector2(1342, 2104)]},
+		{"label": "original_segment_10", "points": [Vector2(1342, 2104), Vector2(1882, 1404)]},
+		{"label": "rejected_tight_rock_bend", "points": [Vector2(362, 2184), Vector2(1062, 2134), Vector2(1342, 2104)]},
+		{"label": "rejected_tight_arch_bend", "points": [Vector2(1342, 2104), Vector2(1502, 2004), Vector2(1882, 1404)]},
+		{"label": "selected_rock_bend", "points": [Vector2(362, 2184), Vector2(1062, 2084), Vector2(1342, 2104)]},
+		{"label": "selected_arch_bend", "points": [Vector2(1342, 2104), Vector2(1542, 2024), Vector2(1882, 1404)]}]:
+		var diagnostic := path_audit(candidate.points, geometry, Routes.CLEARANCE_RADIUS)
+		diagnostic["label"] = candidate.label
+		candidates.append(diagnostic)
+	report["candidate_diagnostics"] = candidates
+	check(not candidates[0].clear and candidates[0].segments[0].forward.wall == 3, "Original segment zero hits original rock contour three at radius 51")
+	check(not candidates[1].clear and candidates[1].segments[0].forward.wall == 2, "Original segment ten hits original arch contour two at radius 51")
+	check(not candidates[2].clear and not candidates[3].clear, "Retain two unsuccessful tighter candidate diagnostics")
+	check(candidates[4].clear and candidates[5].clear, "Both selected single bends are native-clear at radius 51")
+	var prepared: Dictionary = Routes.prepare(original, geometry)
+	check(prepared.ok and prepared.reason.is_empty(), "Prepare exact deterministic detours")
+	check(original == before, "Success and failure leave every source field unchanged")
+	if not prepared.ok:
+		report["prepare_failure"] = prepared
+		finish()
+		return
+	var landmarks: Dictionary = prepared.landmarks
+	check(landmarks.route_segments.size() == 14, "Exactly two extra segments, one bend per blocked original")
+	check(landmarks.size() == original.size(), "No top-level landmark fields added or removed")
+	for field: Variant in original:
+		if field != "route_segments":
+			check(landmarks[field] == original[field], "Preserve complete non-route field %s" % field)
+	var cursor := 0
+	for index: int in range(12):
+		var source: Dictionary = original.route_segments[index]
+		if index == 0 or index == 10:
+			var first: Dictionary = landmarks.route_segments[cursor]
+			var second: Dictionary = landmarks.route_segments[cursor + 1]
+			check(first.from == source.from and second.to == source.to and first.to == second.from, "Keep original segment %d endpoints and connected order" % index)
+			for field: Variant in source:
+				if field != "from" and field != "to":
+					check(first[field] == source[field] and second[field] == source[field], "Keep split route %d metadata %s" % [index, field])
+			check_player_path([first.from, first.to, second.to], geometry, index)
+			cursor += 2
+		else:
+			check(landmarks.route_segments[cursor] == source, "Original segment %d is untouched and ordered" % index)
+			cursor += 1
+	var all_segments: Array[Dictionary] = []
+	for segment: Dictionary in landmarks.route_segments:
+		var audit := path_audit([segment.from, segment.to], geometry, Routes.CLEARANCE_RADIUS)
+		all_segments.append(audit)
+		check(float(segment.width) == 72.0 and audit.clear, "Every full-width-plus-player segment passes native sweeps both ways")
+	report["route_audits_radius_51"] = all_segments
+	report["prepared_predicate_reason"] = Plan._routes_reason(landmarks, geometry)
+	check(str(report.prepared_predicate_reason).is_empty(), "Whole production route and outpost predicate passes")
+	check(Routes.prepare(original, geometry) == prepared, "Repeated outputs are value-stable")
+	var invalid: Dictionary = original.duplicate(true)
+	invalid.route_segments[1].to += Vector2(1, 0)
+	var invalid_before := invalid.duplicate(true)
+	var rejected: Dictionary = Routes.prepare(invalid, geometry)
+	check(not rejected.ok and rejected.landmarks.is_empty() and invalid == invalid_before, "Changed source route fails without mutation")
+	invalid = original.duplicate(true)
+	invalid["shared_object"] = RefCounted.new()
+	check(not Routes.prepare(invalid, geometry).ok, "Shared-object metadata is rejected rather than falsely called detached")
+	landmarks.study_test_metadata.nested[0].value = -1
+	landmarks.route_segments[0].study_test_metadata.nested[0] = -1
+	landmarks.outposts[0].positions[0] = Vector2.ZERO
+	check(original == before, "Editing returned nested route, actor and unknown metadata cannot mutate input")
+	check(landmarks.route_segments[1].study_test_metadata.nested[0] == 8, "Split segments do not alias each other's nested metadata")
+	check(Routes.prepare(original, geometry).landmarks != landmarks, "Editing one output cannot contaminate later outputs")
+	check(geometry.snapshot() == original_geometry, "Preparation preserves exact geometry, revision, contours and presentation")
+	report["selected_bends"] = [Vector2(1062, 2084), Vector2(1542, 2024)]
+	report["input_unchanged"] = original == before
+	report["geometry_unchanged"] = geometry.snapshot() == original_geometry
+	report["route_count"] = 14
+	finish()
+
+
+func path_audit(points: Array, geometry: RefCounted, radius: float) -> Dictionary:
+	var result: Dictionary = {"clear": true, "radius": radius, "points": points, "segments": []}
+	for index: int in range(1, points.size()):
+		var start: Vector2 = points[index - 1]
+		var end: Vector2 = points[index]
+		var forward: Dictionary = geometry.sweep(start, end, radius)
+		var reverse: Dictionary = geometry.sweep(end, start, radius)
+		var start_clear: bool = geometry.is_clear(start, radius)
+		var end_clear: bool = geometry.is_clear(end, radius)
+		result.clear = result.clear and start_clear and end_clear and not forward.hit and not reverse.hit
+		result.segments.append({"from": start, "to": end, "start_clear": start_clear, "end_clear": end_clear, "forward": forward, "reverse": reverse})
+	return result
+
+
+func check_player_path(points: Array, geometry: RefCounted, original_index: int) -> void:
+	for direction: int in [1, -1]:
+		var ordered := points.duplicate()
+		if direction < 0:
+			ordered.reverse()
+		var position: Vector2 = ordered[0]
+		var clear := true
+		var steps := 0
+		for index: int in range(1, ordered.size()):
+			var goal: Vector2 = ordered[index]
+			while position.distance_to(goal) > 0.01 and steps < 100:
+				var target := position.move_toward(goal, 32.0)
+				clear = clear and not geometry.sweep(position, target, Routes.PLAYER_RADIUS).hit
+				position = geometry.move(position, target, Routes.PLAYER_RADIUS)
+				clear = clear and geometry.is_clear(position, Routes.PLAYER_RADIUS)
+				steps += 1
+		check(clear and position.distance_to(ordered.back()) < 0.01, "Player reaches unchanged endpoint along added segments %d direction %d" % [original_index, direction])
+		if not report.has("player_paths"):
+			report["player_paths"] = []
+		report.player_paths.append({"original_segment": original_index, "direction": direction, "reached": position.distance_to(ordered.back()) < 0.01, "all_steps_clear": clear, "steps": steps, "end": position})
+
+
+func finish() -> void:
+	report["checks"] = checks
+	report["failures"] = failures.size()
+	report["failed_labels"] = failures
+	var file := FileAccess.open(QA, FileAccess.WRITE)
+	if file != null:
+		file.store_string(JSON.stringify(report, "\t") + "\n")
+	print("Modular study routes: %d checks, %d failures" % [checks, failures.size()])
+	quit(1 if not failures.is_empty() else 0)
