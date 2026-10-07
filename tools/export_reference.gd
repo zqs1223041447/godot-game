@@ -24,6 +24,9 @@ const CraftPlanner = preload("res://scripts/items/crafting_transaction_planner.g
 const Telegraphs = preload("res://scripts/combat/telegraphed_area_runtime.gd")
 const TelegraphProfiles = preload("res://scripts/monsters/telegraph_profiles.gd")
 const Arena = preload("res://scripts/main.gd")
+# Historical fixed-arena examples retain their original geometry. Main.ARENA
+# is instance state now; current exploration snapshots use their own layout.
+const LEGACY_REFERENCE_BOUNDS: Rect2 = preload("res://scripts/visuals/world_view.gd").WORLD_ARENA
 const EncounterCatalog = preload("res://scripts/encounters/encounter_catalog.gd")
 const EncounterCompiler = preload("res://scripts/encounters/encounter_compiler.gd")
 const Canonical = preload("res://scripts/canonical_game_state.gd")
@@ -132,7 +135,7 @@ static func collect() -> Dictionary:
 	result["town_maps"] = town_map_examples()
 	result["map_camps"]={}
 	for map_id:String in Maps.MAPS:
-		var camp_layout:Dictionary=CampLayoutData.layout(map_id,Arena.ARENA)
+		var camp_layout:Dictionary=CampLayoutData.layout(map_id,LEGACY_REFERENCE_BOUNDS)
 		assert(camp_layout.ok)
 		result.map_camps[map_id]=camp_layout.landmarks
 	result["normal_journey"] = normal_journey_examples()
@@ -744,7 +747,7 @@ static func town_map_examples()->Dictionary:
 		var replacements:Dictionary={}
 		for species:String in ["crawler","brute","skitter"]:
 			replacements[species]=MapRules.special_template(compiled.profile,{"template":species,"rarity":"normal","mechanisms":[]})
-		var geometry:=MapGeometryData.new();geometry.configure(map.id,Arena.ARENA)
+		var geometry:=MapGeometryData.new();geometry.configure(map.id,LEGACY_REFERENCE_BOUNDS)
 		var layout:Dictionary=geometry.snapshot();var walls:Array=[]
 		for wall:Rect2 in layout.walls:walls.append({"position":wall.position,"size":wall.size})
 		examples[map.id]={"compiled":compiled.profile,"special_replacements":replacements,
@@ -753,7 +756,7 @@ static func town_map_examples()->Dictionary:
 				"wall_triggers_natural_end":false,"area_line_of_sight":true}}
 		if layout.has("obstacle_style"):
 			examples[map.id].geometry.obstacle_style=layout.obstacle_style
-			examples[map.id].geometry.entry=CampLayoutData.layout(map.id,Arena.ARENA).landmarks.entry
+			examples[map.id].geometry.entry=CampLayoutData.layout(map.id,LEGACY_REFERENCE_BOUNDS).landmarks.entry
 	var defenses:Dictionary={}
 	var aegis:Dictionary=MapRules.compile("old_garden",[],["elemental_aegis"]).profile
 	var packet:Dictionary=Damage.packet({"physical":100.0,"fire":100.0,"cold":100.0,"lightning":100.0,"chaos":100.0},["hit"],"reference_aegis")
@@ -1656,7 +1659,7 @@ static func map_boss_examples()->Dictionary:
 
 static func mist_skitter_examples(enemy: Dictionary) -> Dictionary:
 	var map_id: String = "sunwell_terrace"
-	var layout: Dictionary = CampLayoutData.layout(map_id, Arena.ARENA).landmarks
+	var layout: Dictionary = CampLayoutData.layout(map_id, LEGACY_REFERENCE_BOUNDS).landmarks
 	var baseline: Dictionary = Monsters.make_enemy(1, "skitter", int(enemy.wave), Vector2.ZERO, "ordinary")
 	var baseline_evasion: float = float(AttackRules.monster_profile(int(baseline.kind)).evasion)
 	var chances: Array = []
@@ -1700,7 +1703,7 @@ static func mist_skitter_examples(enemy: Dictionary) -> Dictionary:
 
 static func sunwell_examples()->Dictionary:
 	var map_id:String="sunwell_terrace"
-	var layout:Dictionary=CampLayoutData.layout(map_id,Arena.ARENA).landmarks
+	var layout:Dictionary=CampLayoutData.layout(map_id,LEGACY_REFERENCE_BOUNDS).landmarks
 	var tiers:Array=[];var roster:Dictionary={}
 	var ordinary_ids:Array=[]
 	for entry:Dictionary in Maps.options(false).normal_modifiers:
