@@ -1,0 +1,56 @@
+[
+  {
+    "label": "lazy_ember",
+    "command": [
+      "/usr/local/bin/godot",
+      "--headless",
+      "--path",
+      "/workspace/scratch/a51485f153de/v097-burn-shadow-plan",
+      "--script",
+      "/workspace/scratch/a51485f153de/v097-burn-shadow-plan/docs/qa/v097-batch/density-candidate.gd"
+    ],
+    "environment": {
+      "XDG_DATA_HOME": "/tmp/godot-m1-v095-lazy_ember-piyw03d_/data",
+      "XDG_CACHE_HOME": "/tmp/godot-m1-v095-lazy_ember-piyw03d_/cache",
+      "XDG_CONFIG_HOME": "/tmp/godot-m1-v095-lazy_ember-piyw03d_/config",
+      "V095_INSTRUMENTED": "0",
+      "V095_PROFILE_OUT": "/workspace/scratch/a51485f153de/v097-burn-shadow-plan/docs/qa/v097-batch/lazy_ember.json",
+      "V095_MODE": "ember_deaths"
+    },
+    "frames": {
+      "ember_deaths": 20
+    },
+    "started_at_unix": 1791364144.0125728,
+    "exit_code": 0,
+    "elapsed_seconds": 11.677307336009108,
+    "first_error": "",
+    "completion_marker": true
+  },
+  {
+    "label": "lazy_no_burn",
+    "command": [
+      "/usr/local/bin/godot",
+      "--headless",
+      "--path",
+      "/workspace/scratch/a51485f153de/v097-burn-shadow-plan",
+      "--script",
+      "/workspace/scratch/a51485f153de/v097-burn-shadow-plan/docs/qa/v097-batch/density-candidate.gd"
+    ],
+    "environment": {
+      "XDG_DATA_HOME": "/tmp/godot-m1-v095-lazy_no_burn-yrqjgsaf/data",
+      "XDG_CACHE_HOME": "/tmp/godot-m1-v095-lazy_no_burn-yrqjgsaf/cache",
+      "XDG_CONFIG_HOME": "/tmp/godot-m1-v095-lazy_no_burn-yrqjgsaf/config",
+      "V095_INSTRUMENTED": "0",
+      "V095_PROFILE_OUT": "/workspace/scratch/a51485f153de/v097-burn-shadow-plan/docs/qa/v097-batch/lazy_no_burn.json",
+      "V095_MODE": "no_burn"
+    },
+    "frames": {
+      "no_burn": 4
+    },
+    "started_at_unix": 1791364534.2264278,
+    "exit_code": 0,
+    "elapsed_seconds": 6.385505397003726,
+    "first_error": "",
+    "completion_marker": true
+  }
+]

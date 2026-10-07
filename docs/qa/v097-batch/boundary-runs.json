@@ -1,0 +1,36 @@
+[
+  {
+    "label": "boundary_before",
+    "command": [
+      "/usr/local/bin/godot",
+      "--headless",
+      "--path",
+      "/workspace/scratch/a51485f153de/v097-burn-shadow-plan",
+      "--script",
+      "res://tools/diagnostics/lazy_burn_batch_boundary.gd"
+    ],
+    "candidate": false,
+    "start_unix": 1791363652.0245008,
+    "exit_code": 0,
+    "seconds": 9.054473373005749,
+    "error": "",
+    "complete": true
+  },
+  {
+    "label": "boundary_after",
+    "command": [
+      "/usr/local/bin/godot",
+      "--headless",
+      "--path",
+      "/workspace/scratch/a51485f153de/v097-burn-shadow-plan",
+      "--script",
+      "res://tools/diagnostics/lazy_burn_batch_boundary.gd"
+    ],
+    "candidate": true,
+    "start_unix": 1791363661.0823946,
+    "exit_code": -9,
+    "seconds": 4.576468158993521,
+    "error": "SCRIPT ERROR: Assertion failed: Expected whole-batch guard choice: eligible [{ \"eligible\": false, \"reason\": \"Unsupported snapshot gate: critical_modifiers\", \"events\": 3 }]",
+    "complete": false
+  }
+]

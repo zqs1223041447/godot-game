@@ -1,0 +1,54 @@
+{
+	"absolute_tolerance": 1e-10,
+	"after": {
+		"bytes": 1331232,
+		"sha256": "7f1b2baceae0dbbef794c73ad44299b23f8d1f6c61aac3971ae1f5fa5d5dd1f0"
+	},
+	"allowed_float_paths": [
+		"$.enemies[index].health",
+		"$.v095_latest_state.projectile_ids[3][monster_id].health",
+		"$.total_damage",
+		"$.feedback[1 or 2][bucket].amount",
+		"$.feedback[1 or 2][bucket].shield_spent",
+		"$.feedback[1 or 2][bucket].health_lost"
+	],
+	"before": {
+		"bytes": 1331232,
+		"sha256": "7f1b2baceae0dbbef794c73ad44299b23f8d1f6c61aac3971ae1f5fa5d5dd1f0"
+	},
+	"difference_details_truncated": false,
+	"differences": [],
+	"exact_discrete_difference_count": 0,
+	"exact_input_bytes_equal": true,
+	"health_tolerance_requires_same_alive_classification": true,
+	"input_errors": [],
+	"numeric": {
+		"difference_count": 0,
+		"max_absolute_error": 0.0,
+		"max_absolute_path": "",
+		"max_relative_error": 0.0,
+		"max_relative_path": "",
+		"rejected_count": 0,
+		"tolerated_count": 0
+	},
+	"ok": true,
+	"rejected_difference_count": 0,
+	"relative_tolerance": 1e-12,
+	"root_kind": "final_observation",
+	"skipped_burn_trace": {
+		"after_entry_count": 0,
+		"array_count": 1,
+		"arrays": [
+			{
+				"after_count": 0,
+				"after_sha256": "94bf92b2324937e11252f56b57b662364bac4819af35574fc179c86e67b589cb",
+				"before_count": 0,
+				"before_sha256": "94bf92b2324937e11252f56b57b662364bac4819af35574fc179c86e67b589cb",
+				"path": "$[\"burn_trace\"]"
+			}
+		],
+		"before_entry_count": 0,
+		"changed_array_count": 0
+	},
+	"tolerance_rule": "abs_error <= max(1e-10, 1e-12 * max(abs(before), abs(after)))"
+}

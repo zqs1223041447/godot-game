@@ -1,0 +1,210 @@
+extends SceneTree
+const Guard = preload("res://tools/diagnostics/burn_batch_guard.gd")
+const Burn = preload("res://scripts/combat/burn_runtime.gd")
+const BurnRules = preload("res://scripts/combat/burn_rules.gd")
+const Ember = preload("res://scripts/combat/ember_proliferation_rules.gd")
+const Combat = preload("res://scripts/combat/combat_data.gd")
+const Compiler = preload("res://scripts/combat/skill_compiler.gd")
+const DT := 1.0 / 60.0
+var checks := 0
+var failures := 0
+
+
+func _initialize() -> void: call_deferred("run")
+
+
+func check(value: bool, label: String) -> void:
+	checks += 1
+	if not value: failures += 1; push_error(label)
+
+
+func enemy(id: int = 1, health: float = 1000.0) -> Dictionary:
+	return {"id":id, "health":health, "shield":0.0, "armour":0.0, "spawn":0.0,
+		"resistances":{}, "pos":Vector2(id, 0)}
+
+
+func statuses(id: int = 1, raw_dps: float = 8.0, at: float = 0.0, duration: float = 3.0) -> Array:
+	var runtime := Burn.new()
+	var applied: Dictionary = runtime.apply("monster", id, 0, raw_dps, duration, at,
+		{"skill_id":"tornado", "ember_generation":0, "ember_expiry":at + duration})
+	assert(applied.ok)
+	return runtime.statuses()
+
+
+func hit(id: int = 1, fire: float = 10.0, at: float = 0.005) -> Dictionary:
+	return {"type":"hit", "time":at, "sequence":1, "target_id":id,
+		"payload":{"base":{"fire":fire}, "tags":["hit", "projectile", "attack"], "skill_id":"tornado", "role":"parent"},
+		"snapshot":{"modifiers":[], "burn_policy":BurnRules.PLAYER_POLICY.duplicate(true), "burn_proliferation":Ember.POLICY.duplicate(true)}}
+
+
+func admit(events: Variant, monsters: Variant = [], burns: Variant = []) -> Dictionary:
+	return Guard.plan(events, [enemy()] if monsters is Array and monsters.is_empty() else monsters,
+		statuses() if burns is Array and burns.is_empty() else burns, 0.0, DT, DT)
+
+
+func rejected(plan: Dictionary, label: String) -> void:
+	check(not plan.ok and not plan.eligible and not plan.reason.is_empty() and plan.bounds.is_empty() and plan.burn_ids.is_empty(), label)
+
+
+func run() -> void:
+	if not OS.get_environment("XDG_DATA_HOME").begins_with("/tmp/godot-m1-v097-guard-"): quit(78); return
+	if OS.get_environment("V097_GUARD_CRITICAL_ONLY") == "1":
+		critical_metadata_case()
+		print("BURN_BATCH_GUARD_CRITICAL_METADATA ", checks, " checks / ", failures, " failures")
+		var focused := FileAccess.open("res://docs/qa/v097-batch-guard/critical-metadata-results.json", FileAccess.WRITE)
+		focused.store_string(JSON.stringify({"checks":checks, "failures":failures, "scope":"Only the actual v095 zero-chance critical metadata compiler fixture"}, "\t"))
+		focused.close()
+		quit(1 if failures else 0)
+		return
+	var events: Array = [hit()]
+	var monsters: Array = [enemy()]
+	var burns: Array = statuses()
+	var original: PackedByteArray = var_to_bytes([events, monsters, burns])
+	var plan: Dictionary = admit(events, monsters, burns)
+	check(plan.ok and plan.eligible, "Ordinary frozen nonlethal ember batch admitted")
+	check(plan.last_boundary == 0.005 and plan.budget_end == DT, "Causal watermark is distinct from conservative budget end")
+	check(plan.bounds[1].direct_upper >= 20.0 and plan.bounds[1].burn_upper >= 16.0 * DT, "Direct and existing burn ceilings include full interval")
+	check(plan.burn_ids == [1], "Burn IDs are detached sorted identities")
+	check(var_to_bytes([events, monsters, burns]) == original, "All input bytes remain unchanged")
+	plan.bounds[1].health = 1.0
+	plan.burn_ids.clear()
+	check(admit(events, monsters, burns).bounds[1].health == 1000.0, "Mutating output cannot mutate caller or subsequent plans")
+	rejected(admit([hit(1, 500.0)]), "Potentially lethal direct batch falls back")
+	rejected(admit([hit(1, 249.99)]), "Near-half budget includes burn and falls back")
+	check(admit([hit(1, 248.0)]).eligible, "Conservative headroom accepts safely below half")
+	var shielded := enemy(2); shielded.shield = 1.0
+	rejected(admit(events, [enemy(), shielded]), "Positive shield anywhere rejects complete batch")
+	var expiring := statuses(1, 8.0, 0.0, DT)
+	rejected(admit(events, monsters, expiring), "Expiry equal to end rejects")
+	for gate: String in ["leech", "leech_modifiers", "shock_policy", "freeze_policy", "resolute_technique", "precise_technique", "precise_technique_profile", "source_special", "spatial_modifiers", "resource_modifiers"]:
+		var gated := hit(); gated.snapshot[gate] = {}
+		rejected(admit([gated]), "Unsupported snapshot gate: " + gate)
+	for kind: String in ["explosion", "spawn_rejected", "unknown"]:
+		rejected(admit([{"type":kind, "time":0.001}]), "Whole batch fallback for event kind: " + kind)
+	for kind: String in Guard.BENIGN:
+		check(admit([{"type":kind, "time":0.001}]).eligible, "Known harmless event permitted: " + kind)
+	var critical := hit(); critical.snapshot.critical_roll = {"critical":true, "multiplier":2.0, "chance":0.5}
+	check(admit([critical]).bounds[1].direct_upper >= 40.0, "Frozen ordinary critical multiplier comes from Damage authority")
+	var two: Array = [hit(1, 130.0, 0.005), hit(1, 130.0, 0.01)]
+	rejected(admit(two), "Multiple individually safe direct hits accumulate")
+	var stronger := hit(1, 100.0)
+	stronger.snapshot.fire_dot_multiplier = 2.0
+	stronger.snapshot.burn_faster = 1.0
+	var authoritative: Dictionary = BurnRules.from_fire_hit(100.0, BurnRules.PLAYER_POLICY, 2.0, 1.0)
+	plan = admit([stronger])
+	check(plan.eligible and plan.bounds[1].max_raw_dps == authoritative.raw_dps, "New stronger burn uses exact authoritative DPS")
+	check(plan.bounds[1].burn_upper >= 2.0 * authoritative.raw_dps * DT, "New maximum burn charges full oldlast-to-end width")
+	var new_target := hit(2, 30.0)
+	plan = admit([new_target], [enemy(2), enemy(1)])
+	check(plan.eligible and plan.burn_ids == [1, 2] and plan.bounds[2].burn_from == 0.0, "Possible new burn included without applying it")
+	var short_burn := hit(); short_burn.snapshot.burn_policy.duration = 0.001
+	rejected(admit([short_burn]), "Possible new burn expiring inside batch rejects")
+	var zero := hit(2, 0.0)
+	plan = admit([zero], [enemy(), enemy(2)])
+	check(plan.eligible and plan.burn_ids == [1] and plan.bounds[2].max_raw_dps == 0.0, "Zero fire never invents a burn")
+	var absent := hit(2); absent.snapshot.erase("burn_policy"); absent.snapshot.erase("burn_proliferation")
+	plan = admit([absent], [enemy(), enemy(2)])
+	check(plan.eligible and plan.burn_ids == [1], "Absent burn policy never invents an application")
+	for delta: float in [0.0, -DT, DT * 1.000001, INF, NAN]:
+		rejected(Guard.plan(events, monsters, burns, 0.0, DT, delta), "Invalid or oversized actual delta rejected")
+	check(Guard.plan(events, monsters, burns, 0.0, DT, DT).eligible, "Exactly 1/60 remains allowed")
+	rejected(Guard.plan(events, monsters, burns, 0.0, DT * 0.5, DT), "Original delta must match clock interval")
+	rejected(admit([hit(1, 10.0, 0.01), hit(1, 10.0, 0.009)]), "True raw time reversal falls back")
+	var tied: Array = [hit(1, 1.0, 0.008498710574771513), hit(1, 1.0, 0.008495442978210952), hit(1, 1.0, 0.008485886630782776)]
+	plan = admit(tied)
+	check(plan.eligible and plan.last_boundary == float(tied[0].time), "Original adjacent raw-offset tie chain retained")
+	rejected(admit([hit(1, 1.0, DT * 2.0)]), "Out-of-window raw event offset falls back")
+	for invalid: Variant in [null, {}, [null], [{"type":"hit", "time":true}], [{"type":"hit", "time":NAN}], [{"type":"hit", "time":0.001}]]:
+		rejected(admit(invalid), "Malformed event batch safely falls back")
+	for invalid: Variant in [null, {}, [enemy(), enemy()], [{"id":true, "health":1000.0}], [{"id":1, "health":NAN}], [{"id":1, "health":0.0}]]:
+		rejected(admit(events, invalid), "Malformed complete monster set safely falls back")
+	var missing := statuses(2)
+	rejected(admit(events, monsters, missing), "Missing status target rejects full set")
+	var no_ember := statuses(); no_ember[0].provenance.clear()
+	rejected(admit(events, monsters, no_ember), "Active ordinary burns alone do not enter ember candidate")
+	var wrong_remaining := statuses(); wrong_remaining[0].remaining = 1.0
+	rejected(admit(events, monsters, wrong_remaining), "Inconsistent detached burn clock rejects")
+	var many: Array = []
+	for id: int in range(1, 102): many.append(enemy(id))
+	rejected(admit(events, many), "101-current-monster domain is rejected")
+	var bad := hit(); bad.payload.base.fire = INF
+	rejected(admit([bad]), "Infinite packet amount rejected before resolver")
+	bad = hit(); bad.payload.base["unknown"] = 1.0
+	rejected(admit([bad]), "Unknown damage type rejected")
+	bad = hit(); bad.snapshot.modifiers = [{"mode":"more", "value":INF}]
+	rejected(admit([bad]), "Nonfinite modifier rejected")
+	bad = hit(); bad.snapshot.critical_roll = {"multiplier":1000001.0}
+	rejected(admit([bad]), "Invalid critical multiplier rejected")
+	bad = hit(); bad.payload.conversion = {"unsupported":true}
+	rejected(admit([bad]), "Unsupported conversion rejected by authoritative resolver")
+	var penetrated := hit(); penetrated.payload.base = {"cold":10.0}; penetrated.payload.penetration = {"cold":0.06}
+	var resistant := enemy(); resistant.resistances = {"cold":-10.0, "fire":-10.0}; resistant.armour = 1000.0
+	check(admit([penetrated], [resistant]).eligible, "Penetration and lower resistance clamp remain below 2x ceiling")
+	var converted := hit(); converted.payload.base = {"physical":100.0, "fire":10.0}
+	converted.payload.conversion = {"source_type":"physical", "target_type":"fire", "fraction":0.4, "source_base":100.0, "remaining_base":60.0, "converted_base":40.0}
+	plan = admit([converted])
+	check(plan.eligible and plan.bounds[1].max_raw_dps == 15.0, "Supported conversion fire seed comes from resolver detail")
+	bad = hit(); bad.payload.base.fire = 1e308
+	rejected(admit([bad]), "Finite input whose direct bound overflows rejects")
+	bad = hit(); bad.payload.base.fire = 1e-300
+	bad.snapshot.modifiers = [{"mode":"more", "value":-0.999999999999}, {"mode":"more", "value":-0.999999999999}]
+	rejected(admit([bad]), "Positive input whose authoritative component underflows to zero rejects")
+	bad = hit(); bad.payload.base = {"physical":1e10, "fire":1e-30}
+	rejected(admit([bad], [enemy(1, 1e15)]), "Absorbed before-defense positive term rejects")
+	var huge_health := enemy(1, 1e100)
+	rejected(admit(events, [huge_health]), "Sub-ULP target resource budget falls back")
+	var high_time := 1e15
+	rejected(Guard.plan(events, monsters, burns, high_time, high_time + DT, DT), "Sub-ULP batch clock falls back")
+	compiled_case()
+	check(var_to_bytes([events, monsters, burns]) == original, "All success and fallback calls preserve original snapshots")
+	print("BURN_BATCH_GUARD ", checks, " checks / ", failures, " failures")
+	var file := FileAccess.open("res://docs/qa/v097-batch-guard/results.json", FileAccess.WRITE)
+	file.store_string(JSON.stringify({"checks":checks, "failures":failures,
+		"scope":"Pure preflight guard fixtures, no Main execution, no performance or all-float equivalence claim"}, "\t"))
+	file.close()
+	quit(1 if failures else 0)
+
+
+func compiled_case() -> void:
+	var snapshot: Dictionary = Combat.snapshot({"damage":10.0}, [])
+	var compiled: Dictionary = Compiler.compile_group("tornado", snapshot, [])
+	check(compiled.ok, "Real compiler fixture admitted")
+	if not compiled.ok: return
+	var event := hit()
+	event.snapshot = compiled.snapshot
+	event.payload = compiled.packets.parent
+	var plan: Dictionary = admit([event])
+	check(plan.eligible, "Actual ordinary Combat/Compiler snapshot keys stay eligible: " + plan.reason)
+
+
+func critical_metadata_case() -> void:
+	var compiled: Dictionary = Compiler.compile_group("tornado", Combat.snapshot({"damage":0.1, "crit_base_chance":0.0}, []), ["ember_proliferation"])
+	check(compiled.ok, "Actual boundary compiler fixture admitted")
+	if not compiled.ok: return
+	check(compiled.snapshot.has("critical_modifiers") and not compiled.snapshot.has("critical_roll"), "Zero-chance source leaves critical metadata but no frozen critical roll")
+	var event := hit()
+	event.snapshot = compiled.snapshot
+	event.payload = compiled.packets.parent
+	var before := var_to_bytes(event)
+	var plan: Dictionary = admit([event])
+	check(plan.eligible, "Actual boundary critical metadata is harmless at hit settlement: " + plan.reason)
+	check(var_to_bytes(event) == before, "Focused admission leaves exact compiled snapshot untouched")
+	for invalid: Dictionary in [{}, {"base_chance":NAN, "base_multiplier":1.5}, {"base_chance":0.0, "base_multiplier":0.5}]:
+		var bad := event.duplicate(true)
+		bad.snapshot.critical_modifiers = invalid
+		rejected(admit([bad]), "Original critical metadata validator rejects malformed or out-of-range values")
+	var bad_profile := event.duplicate(true)
+	bad_profile.snapshot.critical = {"primary":{"chance":2.0, "multiplier":1.5}}
+	rejected(admit([bad_profile]), "Original critical runtime validator rejects invalid compiled profile")
+	var frozen := event.duplicate(true)
+	frozen.snapshot.critical_roll = {"critical":true, "multiplier":2.0, "chance":0.5}
+	var frozen_plan: Dictionary = admit([frozen], [enemy()], statuses(1, 0.0000001))
+	check(frozen_plan.eligible and float(frozen_plan.bounds[1].direct_upper) > float(plan.bounds[1].direct_upper), "Frozen critical multiplier participates in direct upper budget")
+	var damage: Dictionary = Guard.Damage.resolve(frozen.payload, frozen.snapshot.modifiers, {}, 2.0)
+	var fire := 0.0
+	for detail: Dictionary in damage.details:
+		if detail.type == "fire": fire += float(detail.before_defense)
+	var burn: Dictionary = BurnRules.from_fire_hit(fire, frozen.snapshot.burn_policy)
+	check(float(frozen_plan.bounds[1].max_raw_dps) == float(burn.raw_dps), "Frozen critical fire seed reaches authoritative burn bound")
+	var explosion := event.duplicate(true); explosion.type = "explosion"
+	rejected(admit([explosion]), "Undefined secondary critical roll requires untouched original explosion path")

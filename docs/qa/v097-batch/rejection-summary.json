@@ -1,0 +1,134 @@
+{
+  "baseline": "d2d188ab3aa284a1abbb7d9e382eaf976678aab2",
+  "status": "rejected_diagnostic_candidate",
+  "production_diff_paths": [],
+  "production_integrated": false,
+  "main_updated": false,
+  "reason": "Material pickup positions and visible feedback sequence differ. A nonlethal batch bound does not preserve future threshold ordering after altered floating-point accumulation.",
+  "ember20": {
+    "mean_us": {
+      "before": 179541.35,
+      "after": 175283.7,
+      "change_fraction": -0.023714035791754906
+    },
+    "p50_us": {
+      "before": 151529,
+      "after": 69188,
+      "change_fraction": -0.5434009331547096
+    },
+    "p95_us": {
+      "before": 831212,
+      "after": 931080,
+      "change_fraction": 0.1201474473419537
+    },
+    "max_us": {
+      "before": 831212,
+      "after": 931080,
+      "change_fraction": 0.1201474473419537
+    }
+  },
+  "no_burn4": {
+    "mean_us": {
+      "before": 77687.0,
+      "after": 85852.0,
+      "change_fraction": 0.10510123958963535
+    },
+    "p50_us": {
+      "before": 76944,
+      "after": 84616,
+      "change_fraction": 0.09970887918486171
+    },
+    "p95_us": {
+      "before": 83316,
+      "after": 91161,
+      "change_fraction": 0.09415958519372025
+    },
+    "max_us": {
+      "before": 83316,
+      "after": 91161,
+      "change_fraction": 0.09415958519372025
+    }
+  },
+  "strict_failures": 140,
+  "numeric": {
+    "difference_count": 6045,
+    "max_absolute_error": 1.2505552149377763e-10,
+    "max_absolute_path": "$[3][\"total_damage\"]",
+    "max_relative_error": 1.0,
+    "max_relative_path": "$[16][\"v095_latest_state\"][\"projectile_ids\"][3][8][\"health\"]",
+    "rejected_count": 0,
+    "tolerated_count": 6045
+  },
+  "nonzero_difference_stream_rows": 6185,
+  "pickup_position_differences": 11,
+  "save_rng_counts_exact_in_sampled_observations": true,
+  "full_death_callback_order_certified": false,
+  "baseline20_4_reused": true,
+  "new_gameplay_sample_frames": 24,
+  "sampling_repeated": false,
+  "archives": [
+    {
+      "path": "boundary_after_fixed.bin.gz",
+      "raw_bytes": 297680,
+      "raw_sha256": "9274e8dc188662a5fd5d00ef625b3b82b84c04f955c5feb540e56c4eb6702436",
+      "bytes": 34129,
+      "sha256": "85880f06d0a78ccc4c422147bce3b3cffe874698c1f1edadc480031b14c3a2c7"
+    },
+    {
+      "path": "boundary_before.bin.gz",
+      "raw_bytes": 299796,
+      "raw_sha256": "4b70e85952d29aa1230b361a4c86448cb9cf0d25afb8ff34c86dfbc2e2cbbcc4",
+      "bytes": 34152,
+      "sha256": "05d1d21d36dac6bbdbbe2546505944916dc0cfd0edfde8ac380e4332c6c2982f"
+    },
+    {
+      "path": "lazy_ember-ember_deaths-final.bin.gz",
+      "raw_bytes": 1491432,
+      "raw_sha256": "883e5b426a30c74ab9d1c8c6fb71131172cf736065e667c07fec1a46e0f827f0",
+      "bytes": 43001,
+      "sha256": "b658fe7ac788da5c13e152f286ce614e9da861c0888b33f7eb8135aba9bb70e0"
+    },
+    {
+      "path": "lazy_ember-ember_deaths.bin.gz",
+      "raw_bytes": 30888228,
+      "raw_sha256": "635415d1e547c6f1374bb16a3507db189ddf19e5020ff3a425fa08bc9fed1429",
+      "bytes": 876685,
+      "sha256": "cde9ab05f3171c2fa097bd61f3dcd27226ff03fd4b130bb0354ec35738b858d5"
+    },
+    {
+      "path": "lazy_ember-ember_deaths.save.gz",
+      "raw_bytes": 13693,
+      "raw_sha256": "2ac20e9b6cfaa597aefddb20059ef490ab86bc10e5b89c36127323405c1f1eba",
+      "bytes": 1899,
+      "sha256": "38a927c2f6a0481d67eee1be053093d3ff8115c496c0c04239cca66dd386062a"
+    },
+    {
+      "path": "lazy_ember.final-analysis.differences.jsonl.gz",
+      "raw_bytes": 2761582,
+      "raw_sha256": "7480f7ff8d8ddbc79e906a682acb327e0084e0422c17f103985195cb1a32751d",
+      "bytes": 103821,
+      "sha256": "b765bd1fb388b23d01aa5d32077554a7606af73529545536b36c0b868f3f743c"
+    },
+    {
+      "path": "lazy_no_burn-no_burn-final.bin.gz",
+      "raw_bytes": 1331232,
+      "raw_sha256": "7f1b2baceae0dbbef794c73ad44299b23f8d1f6c61aac3971ae1f5fa5d5dd1f0",
+      "bytes": 37546,
+      "sha256": "d6fff00056b1ebc2a6191cf32e5e53e988d3a85cbcfc39dd8cb2d3d4eb2ad85d"
+    },
+    {
+      "path": "lazy_no_burn-no_burn.bin.gz",
+      "raw_bytes": 5324164,
+      "raw_sha256": "5323da3ea47335c394b78d3a7e63fd61beb6506ee73614f32d241336e5f48c28",
+      "bytes": 146508,
+      "sha256": "985b2e0163cb66c422a7726cef34620ccc63a3bf021b37f08f79419bcd1154b4"
+    },
+    {
+      "path": "lazy_no_burn-no_burn.save.gz",
+      "raw_bytes": 12200,
+      "raw_sha256": "26aedc4587bb032d72d04ebc61df6795d89d5bd170759a017d872f0f9b3e3651",
+      "bytes": 1716,
+      "sha256": "ead5d3436105292b720f6f05ab0d9c06606c3a1c171fbacd25c97c4ae8d4e24c"
+    }
+  ]
+}

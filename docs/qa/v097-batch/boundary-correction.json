@@ -1,0 +1,24 @@
+[
+  {
+    "input_hashes": {
+      "tools/diagnostics/burn_batch_guard.gd": "588826373de32c29107bd6af93771020bcc4275fd8a075b97e86fe8d1be61942",
+      "tools/diagnostics/lazy_burn_batch_main.gd": "6501e6a81415135a486b4dfef2c27bb1130735b34f5207f216e10b50020c7616",
+      "tools/diagnostics/lazy_burn_batch_boundary.gd": "23b8e32f66e81fa8c7a99e90197d314c78b7280e0de49ddbde630840cf13c816"
+    },
+    "label": "boundary_after_fixed",
+    "command": [
+      "/usr/local/bin/godot",
+      "--headless",
+      "--path",
+      "/workspace/scratch/a51485f153de/v097-burn-shadow-plan",
+      "--script",
+      "res://tools/diagnostics/lazy_burn_batch_boundary.gd"
+    ],
+    "candidate": true,
+    "start_unix": 1791364065.8850472,
+    "exit_code": 0,
+    "seconds": 7.369802718996652,
+    "error": "",
+    "complete": true
+  }
+]

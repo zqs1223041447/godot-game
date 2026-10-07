@@ -8,8 +8,6 @@ const Damage = preload("res://scripts/combat/damage_resolver.gd")
 const BurnRules = preload("res://scripts/combat/burn_rules.gd")
 const BurnRuntime = preload("res://scripts/combat/burn_runtime.gd")
 const Ember = preload("res://scripts/combat/ember_proliferation_rules.gd")
-const CriticalRules = preload("res://scripts/combat/critical_strike_rules.gd")
-const CriticalRuntime = preload("res://scripts/combat/critical_strike_runtime.gd")
 const MAX_TARGETS := 100
 const MAX_DELTA := 1.0 / 60.0
 const MIN_NORMAL := 2.2250738585072014e-308
@@ -18,7 +16,7 @@ const BENIGN: Array[String] = ["terrain_hit", "terminated", "return_started", "s
 # interaction with settlement. Source-special gates are deliberately excluded.
 const SNAPSHOT_FIELDS: Array[String] = ["base_damage", "modifiers", "effects", "projectile_count",
 	"tornado_recipe", "explosion_recipe", "added_damage", "added_damage_sources", "weapon_profile",
-	"initial_count", "compiled_skill_id", "compiled_packets", "accuracy", "critical", "critical_roll", "critical_modifiers",
+	"initial_count", "compiled_skill_id", "compiled_packets", "accuracy", "critical", "critical_roll",
 	"burn_policy", "burn_proliferation", "fire_dot_multiplier", "burn_faster"]
 
 
@@ -158,10 +156,6 @@ static func _hit_bound(event: Dictionary) -> Dictionary:
 	for key: Variant in snapshot:
 		if not (key is String or key is StringName) or str(key) not in SNAPSHOT_FIELDS:
 			return _hit_failure("Unsupported snapshot gate: " + str(key))
-	var critical_error: String = CriticalRules.error(snapshot)
-	if not critical_error.is_empty(): return _hit_failure("Invalid critical metadata: " + critical_error)
-	critical_error = CriticalRuntime.snapshot_error(snapshot)
-	if not critical_error.is_empty(): return _hit_failure("Invalid compiled critical profile: " + critical_error)
 	if snapshot.has("burn_proliferation") and snapshot.burn_proliferation != Ember.POLICY:
 		return _hit_failure("Unsupported ember policy")
 	if snapshot.has("accuracy") and not _nonnegative(snapshot.accuracy): return _hit_failure("Invalid frozen accuracy")

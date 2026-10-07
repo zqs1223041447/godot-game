@@ -1,0 +1,32 @@
+TRANSCRIPTION, NOT THE RETAINED ORIGINAL LOG FILE
+
+The first run's run.log was overwritten by the corrected full rerun. The
+following lines are copied verbatim from the exec_command tool result that
+read that original log. No missing lines or source state are invented.
+
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ERROR: Conservative headroom accepts safely below half
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/burn_batch_guard_test.gd:18)
+       [1] run (res://tests/burn_batch_guard_test.gd:66)
+BURN_BATCH_GUARD 77 checks / 1 failures
+
+EXACT FAILED FIXTURE LINE, TRANSCRIBED FROM THE ORIGINAL APPLY_PATCH
+
+	check(admit([hit(1, 249.0)]).eligible, "Conservative headroom accepts safely below half")
+
+EXACT CORRECTION
+
+	check(admit([hit(1, 248.0)]).eligible, "Conservative headroom accepts safely below half")
+
+The initial full test source was not retained as a separate file before this
+correction. This snippet records only the exact changed line, not an asserted
+reconstruction or hash of the full original file. The guard correctly rejected
+249 fire: direct upper approximately 498 plus full-interval strengthened burn
+upper approximately 2.49 exceeds the 500 half-health admission threshold.
+
+The first shell command ran Godot, then cat. Its shell exit was therefore cat's
+exit code and is NOT evidence that the failing Godot test exited zero. The
+reported 77 checks / 1 failures is the authoritative observed test outcome.

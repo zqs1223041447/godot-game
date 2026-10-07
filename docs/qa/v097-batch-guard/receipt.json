@@ -1,0 +1,38 @@
+{
+  "suite": "burn_batch_guard_test.gd",
+  "checks": 11,
+  "failures": 0,
+  "process_exit_code": 0,
+  "process_wall_time_seconds": 0.492499938,
+  "exit_evidence": "Standalone functions.exec/exec_command result, chunk ace94c; no trailing command masked the Godot exit",
+  "test_command": "V097_GUARD_CRITICAL_ONLY=1 XDG_DATA_HOME=/tmp/godot-m1-v097-guard-data XDG_CONFIG_HOME=/tmp/godot-m1-v097-guard-config XDG_CACHE_HOME=/tmp/godot-m1-v097-guard-cache godot --headless --path . --script tests/burn_batch_guard_test.gd > docs/qa/v097-batch-guard/critical-metadata-after.log 2>&1",
+  "generation_command": "python3 docs/qa/v097-batch-guard/generate_receipt.py",
+  "guard_sha256": "588826373de32c29107bd6af93771020bcc4275fd8a075b97e86fe8d1be61942",
+  "test_sha256": "59a23dde008fbeb05d154c0b47998cf952f70f117d13a3996a77b7b697426758",
+  "scope": "Final source: eleven-check focused compiler-metadata/critical-validation regression only; no subsequent full-suite rerun",
+  "prior_full_validation": {
+    "checks": 78,
+    "failures": 0,
+    "process_exit_code": 0,
+    "receipt": "full-run-receipt.json",
+    "guard_sha256": "29ae6ca07cf7399f987374608db4da0272f331ae8ad32280eb0930f48365fc87",
+    "test_sha256": "4b1e243f5a4591a6715fc8b257f51c4b3f4770d414622adb81a8c00935d021ec"
+  },
+  "focused_failure_before_fix": {
+    "checks": 4,
+    "failures": 1,
+    "process_exit_code": 1,
+    "wall_time_seconds": 0.512153301,
+    "exit_evidence": "exec_command chunk 250986",
+    "guard_source": "pre-critical-metadata-guard.gd.txt",
+    "test_source": "whitelist-only-test.gd.txt",
+    "test_sha256": "5b98f2b859a6d39da0eb6702b793bd6db48161708c20543064b46f85f494e973"
+  },
+  "whitelist_only_validation": {
+    "checks": 4,
+    "failures": 0,
+    "process_exit_code": 0,
+    "receipt": "whitelist-only-receipt.json"
+  },
+  "history": "Initial 77/1; corrected overlapping full run 77/0; expanded overlapping full run 78/0; focused metadata before4/1 and whitelist-only4/0; validators focused11/0 then strengthened-assertion focused11/0. Counts are not added."
+}

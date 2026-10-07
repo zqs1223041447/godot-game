@@ -1,0 +1,62 @@
+{
+	"candidate": true,
+	"rows": [
+		{
+			"decisions": [
+				{
+					"eligible": true,
+					"events": 3,
+					"reason": "preflight_nonlethal_zero_shield",
+					"target_advances": 7
+				}
+			],
+			"kills": 0,
+			"mode": "eligible"
+		},
+		{
+			"decisions": [
+				{
+					"eligible": false,
+					"events": 3,
+					"reason": "Nonlethal headroom not established for target 5"
+				}
+			],
+			"kills": 1,
+			"mode": "lethal"
+		},
+		{
+			"decisions": [
+				{
+					"eligible": false,
+					"events": 3,
+					"reason": "Every current monster must have zero shield"
+				}
+			],
+			"kills": 0,
+			"mode": "shield"
+		},
+		{
+			"decisions": [
+				{
+					"eligible": false,
+					"events": 3,
+					"reason": "Existing burn expires at or before batch end"
+				}
+			],
+			"kills": 0,
+			"mode": "expiry"
+		},
+		{
+			"decisions": [
+				{
+					"eligible": false,
+					"events": 3,
+					"reason": "Unsupported snapshot gate: future_gate"
+				}
+			],
+			"kills": 0,
+			"mode": "future_gate"
+		}
+	],
+	"scope": "Controlled actual Main boundaries using catalog actors and legal fresh Model; explicit resource setup is a fixture, not natural encounter balance."
+}

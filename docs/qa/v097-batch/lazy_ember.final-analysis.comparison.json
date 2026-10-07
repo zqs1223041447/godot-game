@@ -1,0 +1,550 @@
+{
+	"absolute_tolerance": 1e-10,
+	"after": {
+		"bytes": 30888228,
+		"sha256": "635415d1e547c6f1374bb16a3507db189ddf19e5020ff3a425fa08bc9fed1429"
+	},
+	"allowed_float_paths": [
+		"$.enemies[index].health",
+		"$.v095_latest_state.projectile_ids[3][monster_id].health",
+		"$.total_damage",
+		"$.feedback[1 or 2][bucket].amount",
+		"$.feedback[1 or 2][bucket].shield_spent",
+		"$.feedback[1 or 2][bucket].health_lost"
+	],
+	"before": {
+		"bytes": 30888452,
+		"sha256": "54f8bb9cb9393695328879f2b768ddc26bbd294a43fded6b742c3405ef24de7d"
+	},
+	"diff_stream_rows": 6185,
+	"difference_details_truncated": true,
+	"differences": [
+		{
+			"after": {
+				"bytes": 12,
+				"sha256": "1e264512893483f0eb60788e1ebab5a583986a5768d7f7e75596d915082d6511",
+				"type": "float",
+				"value": 0.04100191023119766
+			},
+			"before": {
+				"bytes": 12,
+				"sha256": "c7e0983bd453fc6704aac6d13ed4a8d8ff86c28071711364febf79c721df1cd3",
+				"type": "float",
+				"value": 0.04100191023119497
+			},
+			"category": "exact",
+			"kind": "exact_typed_bytes",
+			"path": "$[16][\"hits\"][27][\"health_lost\"]"
+		},
+		{
+			"after": {
+				"bytes": 1268,
+				"sha256": "daedd389c31bc778a35f7979b414326493521ce07fb7ca27caabc519a701a2ef",
+				"type": "Array"
+			},
+			"before": {
+				"bytes": 1268,
+				"sha256": "b82dbb1063232bc1690d714778a823860b7b59e374c55f1958a7b6e067d9c159",
+				"type": "Array"
+			},
+			"category": "exact",
+			"kind": "dictionary_key_identity_or_insertion_order",
+			"path": "$[16][\"feedback\"][2]"
+		},
+		{
+			"after": {
+				"bytes": 8,
+				"sha256": "e2df51c8b4db0bfcba71d91495d7e72f8927d1479a8600d8b7b64a26555f4a12",
+				"type": "int",
+				"value": 219
+			},
+			"before": {
+				"bytes": 8,
+				"sha256": "5751ced43edfba8ce73f2758eb122e356a9ba5c966ed323d6eeb58d4ee28d8d8",
+				"type": "int",
+				"value": 209
+			},
+			"category": "exact",
+			"kind": "exact_typed_bytes",
+			"path": "$[16][\"feedback\"][2][\"2:monster:8:burn\"][\"sequence\"]"
+		},
+		{
+			"after": {
+				"bytes": 8,
+				"sha256": "e2df51c8b4db0bfcba71d91495d7e72f8927d1479a8600d8b7b64a26555f4a12",
+				"type": "int",
+				"value": 219
+			},
+			"before": {
+				"bytes": 8,
+				"sha256": "5751ced43edfba8ce73f2758eb122e356a9ba5c966ed323d6eeb58d4ee28d8d8",
+				"type": "int",
+				"value": 209
+			},
+			"category": "exact",
+			"kind": "exact_typed_bytes",
+			"path": "$[16][\"feedback\"][2][\"2:monster:8:burn\"][StringName:sha256=16655df561b3ef34ec922bc59e7f83500f66db633b07ce47dd708a54d07b11a3]"
+		},
+		{
+			"after": {
+				"bytes": 8,
+				"sha256": "1778ccf2e6db6496cc43c7a55bfecf6e89e181a5b9889a308af337120be0f6d4",
+				"type": "int",
+				"value": 220
+			},
+			"before": {
+				"bytes": 8,
+				"sha256": "e7e0a5655cf69ced3d21399fa92cd59b5bccdeee29d6f4c7a2dbf1bb4e642472",
+				"type": "int",
+				"value": 210
+			},
+			"category": "exact",
+			"kind": "exact_typed_bytes",
+			"path": "$[16][\"feedback\"][2][\"2:monster:8:hit\"][\"sequence\"]"
+		},
+		{
+			"after": {
+				"bytes": 8,
+				"sha256": "1778ccf2e6db6496cc43c7a55bfecf6e89e181a5b9889a308af337120be0f6d4",
+				"type": "int",
+				"value": 220
+			},
+			"before": {
+				"bytes": 8,
+				"sha256": "e7e0a5655cf69ced3d21399fa92cd59b5bccdeee29d6f4c7a2dbf1bb4e642472",
+				"type": "int",
+				"value": 210
+			},
+			"category": "exact",
+			"kind": "exact_typed_bytes",
+			"path": "$[16][\"feedback\"][2][\"2:monster:8:hit\"][StringName:sha256=16655df561b3ef34ec922bc59e7f83500f66db633b07ce47dd708a54d07b11a3]"
+		},
+		{
+			"after": {
+				"bytes": 8,
+				"sha256": "71a2750f6e623d4be43b4016565932528ef35544dcbcc9e4d5528be69383d2cb",
+				"type": "int",
+				"value": 221
+			},
+			"before": {
+				"bytes": 8,
+				"sha256": "f8267082a4c16dcd192cdd609b46afedf49d4af55c51d15a951b9b8901479414",
+				"type": "int",
+				"value": 211
+			},
+			"category": "exact",
+			"kind": "exact_typed_bytes",
+			"path": "$[16][\"feedback\"][2][\"2:monster:10:burn\"][\"sequence\"]"
+		},
+		{
+			"after": {
+				"bytes": 8,
+				"sha256": "71a2750f6e623d4be43b4016565932528ef35544dcbcc9e4d5528be69383d2cb",
+				"type": "int",
+				"value": 221
+			},
+			"before": {
+				"bytes": 8,
+				"sha256": "f8267082a4c16dcd192cdd609b46afedf49d4af55c51d15a951b9b8901479414",
+				"type": "int",
+				"value": 211
+			},
+			"category": "exact",
+			"kind": "exact_typed_bytes",
+			"path": "$[16][\"feedback\"][2][\"2:monster:10:burn\"][StringName:sha256=16655df561b3ef34ec922bc59e7f83500f66db633b07ce47dd708a54d07b11a3]"
+		},
+		{
+			"after": {
+				"bytes": 8,
+				"sha256": "f3e41411dffe06f36a758aadb024f11e6db15d1565896cd35848f1590a815cc1",
+				"type": "int",
+				"value": 222
+			},
+			"before": {
+				"bytes": 8,
+				"sha256": "4587f124b28ee8fd5bbf08ae1ad3716dee2172d1a85cb882cede37f5c3316905",
+				"type": "int",
+				"value": 212
+			},
+			"category": "exact",
+			"kind": "exact_typed_bytes",
+			"path": "$[16][\"feedback\"][2][\"2:monster:10:hit\"][\"sequence\"]"
+		},
+		{
+			"after": {
+				"bytes": 8,
+				"sha256": "f3e41411dffe06f36a758aadb024f11e6db15d1565896cd35848f1590a815cc1",
+				"type": "int",
+				"value": 222
+			},
+			"before": {
+				"bytes": 8,
+				"sha256": "4587f124b28ee8fd5bbf08ae1ad3716dee2172d1a85cb882cede37f5c3316905",
+				"type": "int",
+				"value": 212
+			},
+			"category": "exact",
+			"kind": "exact_typed_bytes",
+			"path": "$[16][\"feedback\"][2][\"2:monster:10:hit\"][StringName:sha256=16655df561b3ef34ec922bc59e7f83500f66db633b07ce47dd708a54d07b11a3]"
+		},
+		{
+			"after": {
+				"bytes": 8,
+				"sha256": "5751ced43edfba8ce73f2758eb122e356a9ba5c966ed323d6eeb58d4ee28d8d8",
+				"type": "int",
+				"value": 209
+			},
+			"before": {
+				"bytes": 8,
+				"sha256": "b0993b33fc7f1ccdbcdcb5ac552c919af65fb92bfb610abeb5586a43aae58345",
+				"type": "int",
+				"value": 213
+			},
+			"category": "exact",
+			"kind": "exact_typed_bytes",
+			"path": "$[16][\"feedback\"][2][\"2:monster:11:burn\"][\"sequence\"]"
+		},
+		{
+			"after": {
+				"bytes": 8,
+				"sha256": "5751ced43edfba8ce73f2758eb122e356a9ba5c966ed323d6eeb58d4ee28d8d8",
+				"type": "int",
+				"value": 209
+			},
+			"before": {
+				"bytes": 8,
+				"sha256": "b0993b33fc7f1ccdbcdcb5ac552c919af65fb92bfb610abeb5586a43aae58345",
+				"type": "int",
+				"value": 213
+			},
+			"category": "exact",
+			"kind": "exact_typed_bytes",
+			"path": "$[16][\"feedback\"][2][\"2:monster:11:burn\"][StringName:sha256=16655df561b3ef34ec922bc59e7f83500f66db633b07ce47dd708a54d07b11a3]"
+		},
+		{
+			"after": {
+				"bytes": 8,
+				"sha256": "e7e0a5655cf69ced3d21399fa92cd59b5bccdeee29d6f4c7a2dbf1bb4e642472",
+				"type": "int",
+				"value": 210
+			},
+			"before": {
+				"bytes": 8,
+				"sha256": "37ce98b74a07d480a609ac8e0b78f7e1987ecaf34550ac2f8bda5476d99a9d98",
+				"type": "int",
+				"value": 214
+			},
+			"category": "exact",
+			"kind": "exact_typed_bytes",
+			"path": "$[16][\"feedback\"][2][\"2:monster:11:hit\"][\"sequence\"]"
+		},
+		{
+			"after": {
+				"bytes": 8,
+				"sha256": "e7e0a5655cf69ced3d21399fa92cd59b5bccdeee29d6f4c7a2dbf1bb4e642472",
+				"type": "int",
+				"value": 210
+			},
+			"before": {
+				"bytes": 8,
+				"sha256": "37ce98b74a07d480a609ac8e0b78f7e1987ecaf34550ac2f8bda5476d99a9d98",
+				"type": "int",
+				"value": 214
+			},
+			"category": "exact",
+			"kind": "exact_typed_bytes",
+			"path": "$[16][\"feedback\"][2][\"2:monster:11:hit\"][StringName:sha256=16655df561b3ef34ec922bc59e7f83500f66db633b07ce47dd708a54d07b11a3]"
+		},
+		{
+			"after": {
+				"bytes": 8,
+				"sha256": "f8267082a4c16dcd192cdd609b46afedf49d4af55c51d15a951b9b8901479414",
+				"type": "int",
+				"value": 211
+			},
+			"before": {
+				"bytes": 8,
+				"sha256": "3b1cb99d8b1642e0220823ecdb959a601ee53b9ff5b1e725d7eabc3e666c7923",
+				"type": "int",
+				"value": 215
+			},
+			"category": "exact",
+			"kind": "exact_typed_bytes",
+			"path": "$[16][\"feedback\"][2][\"2:monster:12:burn\"][\"sequence\"]"
+		},
+		{
+			"after": {
+				"bytes": 8,
+				"sha256": "f8267082a4c16dcd192cdd609b46afedf49d4af55c51d15a951b9b8901479414",
+				"type": "int",
+				"value": 211
+			},
+			"before": {
+				"bytes": 8,
+				"sha256": "3b1cb99d8b1642e0220823ecdb959a601ee53b9ff5b1e725d7eabc3e666c7923",
+				"type": "int",
+				"value": 215
+			},
+			"category": "exact",
+			"kind": "exact_typed_bytes",
+			"path": "$[16][\"feedback\"][2][\"2:monster:12:burn\"][StringName:sha256=16655df561b3ef34ec922bc59e7f83500f66db633b07ce47dd708a54d07b11a3]"
+		},
+		{
+			"after": {
+				"bytes": 8,
+				"sha256": "4587f124b28ee8fd5bbf08ae1ad3716dee2172d1a85cb882cede37f5c3316905",
+				"type": "int",
+				"value": 212
+			},
+			"before": {
+				"bytes": 8,
+				"sha256": "a45efee5e8cdb4802ea8b1a30899b411c17530a3e7b188c610db2d7f502e0d0c",
+				"type": "int",
+				"value": 216
+			},
+			"category": "exact",
+			"kind": "exact_typed_bytes",
+			"path": "$[16][\"feedback\"][2][\"2:monster:12:hit\"][\"sequence\"]"
+		},
+		{
+			"after": {
+				"bytes": 8,
+				"sha256": "4587f124b28ee8fd5bbf08ae1ad3716dee2172d1a85cb882cede37f5c3316905",
+				"type": "int",
+				"value": 212
+			},
+			"before": {
+				"bytes": 8,
+				"sha256": "a45efee5e8cdb4802ea8b1a30899b411c17530a3e7b188c610db2d7f502e0d0c",
+				"type": "int",
+				"value": 216
+			},
+			"category": "exact",
+			"kind": "exact_typed_bytes",
+			"path": "$[16][\"feedback\"][2][\"2:monster:12:hit\"][StringName:sha256=16655df561b3ef34ec922bc59e7f83500f66db633b07ce47dd708a54d07b11a3]"
+		},
+		{
+			"after": {
+				"bytes": 8,
+				"sha256": "b0993b33fc7f1ccdbcdcb5ac552c919af65fb92bfb610abeb5586a43aae58345",
+				"type": "int",
+				"value": 213
+			},
+			"before": {
+				"bytes": 8,
+				"sha256": "1f85372c2fc307a91501120fbf5ac148b7aa1d4e53ddfb27de6cced804e53a47",
+				"type": "int",
+				"value": 217
+			},
+			"category": "exact",
+			"kind": "exact_typed_bytes",
+			"path": "$[16][\"feedback\"][2][\"2:monster:17:burn\"][\"sequence\"]"
+		},
+		{
+			"after": {
+				"bytes": 8,
+				"sha256": "b0993b33fc7f1ccdbcdcb5ac552c919af65fb92bfb610abeb5586a43aae58345",
+				"type": "int",
+				"value": 213
+			},
+			"before": {
+				"bytes": 8,
+				"sha256": "1f85372c2fc307a91501120fbf5ac148b7aa1d4e53ddfb27de6cced804e53a47",
+				"type": "int",
+				"value": 217
+			},
+			"category": "exact",
+			"kind": "exact_typed_bytes",
+			"path": "$[16][\"feedback\"][2][\"2:monster:17:burn\"][StringName:sha256=16655df561b3ef34ec922bc59e7f83500f66db633b07ce47dd708a54d07b11a3]"
+		}
+	],
+	"exact_discrete_difference_count": 140,
+	"exact_input_bytes_equal": false,
+	"health_tolerance_requires_same_alive_classification": true,
+	"input_errors": [],
+	"numeric": {
+		"difference_count": 6045,
+		"max_absolute_error": 1.2505552149377763e-10,
+		"max_absolute_path": "$[3][\"total_damage\"]",
+		"max_relative_error": 1.0,
+		"max_relative_path": "$[16][\"v095_latest_state\"][\"projectile_ids\"][3][8][\"health\"]",
+		"rejected_count": 0,
+		"tolerated_count": 6045
+	},
+	"numeric_max_absolute_error_overflowed": false,
+	"ok": false,
+	"per_frame_exact_bytes_equal": [
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false
+	],
+	"rejected_difference_count": 140,
+	"relative_tolerance": 1e-12,
+	"root_kind": "frame_array",
+	"skipped_burn_trace": {
+		"after_entry_count": 640,
+		"array_count": 20,
+		"arrays": [
+			{
+				"after_count": 32,
+				"after_sha256": "758ca52a400420d336329e25e22aed77cd41a266f178bb58a16c2c4a11a5e137",
+				"before_count": 32,
+				"before_sha256": "ccf5cfcfcbec8fddf90d0effc92c1fffd343023560848f33fdca0b402b127d27",
+				"path": "$[0][\"burn_trace\"]"
+			},
+			{
+				"after_count": 32,
+				"after_sha256": "c22371d56506e75648fde2544010cd847c55251caba1bef585d6197a6111667c",
+				"before_count": 32,
+				"before_sha256": "e237bcc68d03eeedf1639a051a7dbbd3d77e70112e9ce8799cb24faf1b53e102",
+				"path": "$[1][\"burn_trace\"]"
+			},
+			{
+				"after_count": 32,
+				"after_sha256": "001d28c38c6cd3a77b527cc310fb9afe571b825c58ab0563680b5e6a7b25ba88",
+				"before_count": 32,
+				"before_sha256": "4a54180f8844ae2951df3653d6674c5e7a9e61cfa513f35d8fdb857b8b52991a",
+				"path": "$[2][\"burn_trace\"]"
+			},
+			{
+				"after_count": 32,
+				"after_sha256": "0072b5b06abf5c8a1df7219d0417293ceaab9b4dbb57cfe630129bc5c36ad087",
+				"before_count": 32,
+				"before_sha256": "83a600dbc0d8c13440bf18c79f20512f7d5f70285cf7f132ad26e7df3066be8b",
+				"path": "$[3][\"burn_trace\"]"
+			},
+			{
+				"after_count": 32,
+				"after_sha256": "c24898208444c4d19c2e05eacdbc605e363f2dce68a6c879d3f6a190b7836db2",
+				"before_count": 32,
+				"before_sha256": "6029aaa667410e3c5530b1b3b4b91d2354b676e715ffbf82bc1d5e1b3b3952ac",
+				"path": "$[4][\"burn_trace\"]"
+			},
+			{
+				"after_count": 32,
+				"after_sha256": "4016f051395a195dece93cfd4a6fb6ebff4b93aaeed7c39d936f844dac20f41c",
+				"before_count": 32,
+				"before_sha256": "ebbd39fe3d5c299742bf6fea574ff375cb5c33f8ce2aff264898439bb08ce999",
+				"path": "$[5][\"burn_trace\"]"
+			},
+			{
+				"after_count": 32,
+				"after_sha256": "ff618523c7eb531c6b916f6c49e49b2ebb491797491649f4caf06f39550bbc82",
+				"before_count": 32,
+				"before_sha256": "f35c3b76fb97a116537b4be499cc3cbb7ffce583e8920c631693915728f27f95",
+				"path": "$[6][\"burn_trace\"]"
+			},
+			{
+				"after_count": 32,
+				"after_sha256": "8c61875c5407babf89fb9e4b652c182c85565108d8438fe0273b8975b1e72834",
+				"before_count": 32,
+				"before_sha256": "0964b9d5d25dc975bad38d90398781addcd1e7b3f0f5b61884d7b1e40f435b92",
+				"path": "$[7][\"burn_trace\"]"
+			},
+			{
+				"after_count": 32,
+				"after_sha256": "833916876c923b403ba75c7ccad4096e43926a74952cb81d98af5abb0dafb46a",
+				"before_count": 32,
+				"before_sha256": "37a8520bc567bd21a69dfd486902baabe1606103743086e1f4e210e4fa52dde0",
+				"path": "$[8][\"burn_trace\"]"
+			},
+			{
+				"after_count": 32,
+				"after_sha256": "360a3792b2fcc8ecfc615fa1cfdd1666e002500f20663f69f3999aa549e868ac",
+				"before_count": 32,
+				"before_sha256": "f22c2befb100f07810c66ff308190d200c897128e36ae1447d4ee07d6adbba5b",
+				"path": "$[9][\"burn_trace\"]"
+			},
+			{
+				"after_count": 32,
+				"after_sha256": "01cafd7f5ddb5d85278b4ff70110b1d6cf3d8f3a6ba79f7e4aca0d57931f349f",
+				"before_count": 32,
+				"before_sha256": "34f53258d0e9159740e2c1f0f688bca4791ac1a783cb417cf85e849d3011d18c",
+				"path": "$[10][\"burn_trace\"]"
+			},
+			{
+				"after_count": 32,
+				"after_sha256": "6dcae45bbc75012bc5e426fa2346c400a521e2556ed3c13a8bfe416c527d5ed8",
+				"before_count": 32,
+				"before_sha256": "9d6df16d8cc4051a4aa4c40df075a71e4e25826a317a174efddeb2c2703682a1",
+				"path": "$[11][\"burn_trace\"]"
+			},
+			{
+				"after_count": 32,
+				"after_sha256": "ba06adf99391a68a930b58a17776111b343c0cdde9daf2e4fd13dafef514acc5",
+				"before_count": 32,
+				"before_sha256": "8278c4a0640b8283dd1bf1f417e7aa3e49406bb6d2dc2eca0f0473a131e33ed2",
+				"path": "$[12][\"burn_trace\"]"
+			},
+			{
+				"after_count": 32,
+				"after_sha256": "3c4876f8ae39d5817f76e2fa4a20d83d08ec6cbce3b64df6ceb1b257e59f5625",
+				"before_count": 32,
+				"before_sha256": "acca406d37da5ad079676ed4dc61439ba8b67d2bc9c4a4e01936bd3db46759f4",
+				"path": "$[13][\"burn_trace\"]"
+			},
+			{
+				"after_count": 32,
+				"after_sha256": "31ec756ab07a6b53173008dfcbeba710a0673a91c1d6e4197e2988fb314ddff3",
+				"before_count": 32,
+				"before_sha256": "6e549802546bee30a56d0a7613882cd869b0ace8bfeadb45b66e1e015a3fc630",
+				"path": "$[14][\"burn_trace\"]"
+			},
+			{
+				"after_count": 32,
+				"after_sha256": "874e82c1b337905a7f4b27c0ddf253c492fae4593f927a0a508ecec91b0c3e74",
+				"before_count": 32,
+				"before_sha256": "87a8311001f5bdc9e3fe8267c6b26ecb9103edf47870629bf7336e59f672c136",
+				"path": "$[15][\"burn_trace\"]"
+			},
+			{
+				"after_count": 32,
+				"after_sha256": "9aadcdf969174ba8cfbd877cfb56cfb5d86dc40fb2c8e6926854aa442166a4fd",
+				"before_count": 32,
+				"before_sha256": "6da9e761b26fef1a8a4d40a62467a0d685513ae5c7e69368500bf004b3ac96eb",
+				"path": "$[16][\"burn_trace\"]"
+			},
+			{
+				"after_count": 32,
+				"after_sha256": "50374caed877bf0ab5a4e11ee7bfc29b9d6d48302a4f3b8616d7a492512a0f04",
+				"before_count": 32,
+				"before_sha256": "5e49c5bafcef7b8598d719d578f5057456d235e4d6c3dd7f092f380577b2a826",
+				"path": "$[17][\"burn_trace\"]"
+			},
+			{
+				"after_count": 32,
+				"after_sha256": "c1a6d8064cb870762518aa703a2d364bb64c4ba84bb75e5a7a317119827a70f6",
+				"before_count": 32,
+				"before_sha256": "1fbbad1516dac2a3d2a4a97b05ff67ceb4dd4cb1571cea827c13896e4ddf628d",
+				"path": "$[18][\"burn_trace\"]"
+			},
+			{
+				"after_count": 32,
+				"after_sha256": "d775c75e6bc422a62f5a2a663283a0ed8b212c9b5912b6b9719bb9048da24d36",
+				"before_count": 32,
+				"before_sha256": "675afd4a7a5e0ec2e7d78f6a36ae44a2744c9a3f25f6ef5f717d08638a4d39fd",
+				"path": "$[19][\"burn_trace\"]"
+			}
+		],
+		"before_entry_count": 640,
+		"changed_array_count": 20
+	},
+	"tolerance_rule": "abs_error <= max(1e-10, 1e-12 * max(abs(before), abs(after)))"
+}

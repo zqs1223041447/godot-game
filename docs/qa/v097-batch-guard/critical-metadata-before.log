@@ -1,0 +1,9 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ERROR: Actual boundary critical metadata is harmless at hit settlement: Unsupported snapshot gate: critical_modifiers
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/burn_batch_guard_test.gd:18)
+       [1] critical_metadata_case (res://tests/burn_batch_guard_test.gd:190)
+       [2] run (res://tests/burn_batch_guard_test.gd:52)
+BURN_BATCH_GUARD_CRITICAL_METADATA 4 checks / 1 failures

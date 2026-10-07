@@ -1,0 +1,14 @@
+{
+  "suite": "burn_batch_guard_test.gd",
+  "checks": 78,
+  "failures": 0,
+  "process_exit_code": 0,
+  "process_wall_time_seconds": 0.499974042,
+  "exit_evidence": "Standalone functions.exec/exec_command result, chunk 0501a3; no trailing command masked the Godot exit",
+  "test_command": "XDG_DATA_HOME=/tmp/godot-m1-v097-guard-data XDG_CONFIG_HOME=/tmp/godot-m1-v097-guard-config XDG_CACHE_HOME=/tmp/godot-m1-v097-guard-cache godot --headless --path . --script tests/burn_batch_guard_test.gd > docs/qa/v097-batch-guard/run.log 2>&1",
+  "generation_command": "python3 docs/qa/v097-batch-guard/generate_receipt.py",
+  "guard_sha256": "29ae6ca07cf7399f987374608db4da0272f331ae8ad32280eb0930f48365fc87",
+  "test_sha256": "4b1e243f5a4591a6715fc8b257f51c4b3f4770d414622adb81a8c00935d021ec",
+  "scope": "Pure preflight guard fixtures only; no Main integration or performance claim",
+  "history": "Initial 77/1; corrected overlapping full run 77/0; final overlapping full run 78/0"
+}
