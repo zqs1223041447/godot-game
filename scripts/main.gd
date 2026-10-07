@@ -2026,7 +2026,7 @@ func _advance_proliferating_burns(to_time:float)->void:
 			var expiry:float=float(status.provenance.get("ember_expiry",float(status.last_time)+float(status.remaining)))
 			var end:float=minf(to_time,expiry)
 			if end<=float(status.last_time):continue
-			var rate:Dictionary=Defense.incoming_burn(float(status.raw_dps),target.get("resistances",{}).get("fire",0.0),0.0,1.0,"monster")
+			var rate:Dictionary=Defense.monster_burn_prediction(float(status.raw_dps),target.get("resistances",{}).get("fire",0.0))
 			assert(rate.ok,"Validated burn defense")
 			if float(rate.damage_total)<=0.0:continue
 			var death_at:float=float(status.last_time)+(float(target.get("shield",0.0))+float(target.health))/float(rate.damage_total)
