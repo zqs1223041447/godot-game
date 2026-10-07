@@ -3,7 +3,7 @@ extends RefCounted
 ## Map-only attack metadata. Damage remains the existing contact-component packet.
 const Profiles=preload("res://scripts/monsters/telegraph_profiles.gd")
 const DEFINITIONS={
-	"ruins_garden_slam":{"id":"ruins_garden_slam","map_id":"ruins_garden","name":"庭园震地","target_rule":"self_at_start","trigger_distance":140.0,"profile":{"radius":130.0,"windup_seconds":0.9,"recovery_seconds":1.7,"damage_multiplier":1.4}},
+	"ruins_garden_slam":{"id":"ruins_garden_slam","map_id":"ruins_garden","name":"庭园缠印","target_rule":"player_at_start","trigger_distance":420.0,"profile":{"radius":90.0,"windup_seconds":1.15,"recovery_seconds":1.9,"damage_multiplier":0.65},"pulse_count":2,"pulse_interval":1.0,"second_pulse":{"shape":"annulus","inner_radius":90.0,"radius":210.0,"windup_seconds":1.0},"profile_id":"ruins_garden_inner_outer","balance_version":"original-ruins-garden-inner-outer-v1"},
 	"garden_slam":{"id":"garden_slam","map_id":"old_garden","name":"近身震地","target_rule":"self_at_start","trigger_distance":140.0,"profile":{"radius":130.0,"windup_seconds":0.9,"recovery_seconds":1.7,"damage_multiplier":1.4}},
 	"ruins_mark":{"id":"ruins_mark","map_id":"broken_ruins","name":"断垣落印","target_rule":"player_at_start","trigger_distance":420.0,"profile":{"radius":75.0,"windup_seconds":1.0,"recovery_seconds":1.5,"damage_multiplier":1.15}},
 	"sunwell_echo":{"id":"sunwell_echo","map_id":"sunwell_terrace","name":"泉脉双响","target_rule":"player_at_start","trigger_distance":420.0,"profile":{"radius":85.0,"windup_seconds":0.8,"recovery_seconds":1.9,"damage_multiplier":0.65},"pulse_count":2,"pulse_interval":0.8},

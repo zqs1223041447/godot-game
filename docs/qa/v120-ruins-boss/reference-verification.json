@@ -1,0 +1,125 @@
+{
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "checks": {
+    "bounded_native_export": {
+      "exit_code": 0,
+      "checks": 49
+    },
+    "repeated_native_export": {
+      "exit_code": 0,
+      "checks": 49,
+      "byte_identical": true
+    },
+    "single_member_merge": {
+      "exit_code": 0
+    },
+    "html_rebuild_check": {
+      "exit_code": 0
+    },
+    "focused_static_test": {
+      "exit_code": 0
+    },
+    "javascript_syntax": {
+      "exit_code": 0
+    },
+    "python_syntax": {
+      "exit_code": 0
+    },
+    "svg_render_and_visual_inspection": {
+      "exit_code": 0,
+      "pixel_check": "passed"
+    },
+    "browser_interaction": {
+      "status": "blocked",
+      "checks_run": 0
+    }
+  },
+  "scope": "F8 reference only; gameplay and Main owned by separate current tests",
+  "not_run": [
+    "Full historical Godot export",
+    "Historical v119 single-circle test against v120 data",
+    "Browser page load/search/click/history",
+    "Game F8 key-launch acceptance"
+  ],
+  "isolated_user_data_files": {
+    "godot-v120-reference": [
+      "data/godot-game-preview-v021/logs/godot2026-10-08T08.14.44.log",
+      "data/godot-game-preview-v021/logs/godot.log",
+      "cache/fontconfig/6333f38776742d18e214673cd2c24e34-le64.cache-9",
+      "cache/fontconfig/a4e60e8d1e10d2fdff3fe3037a1845fb-le64.cache-9",
+      "cache/fontconfig/6aa41aa22e18b8fa06a12da28ea9c28b-le64.cache-9",
+      "cache/fontconfig/12c5eb5b0d6d6fd1848053bcdafabe09-le64.cache-9",
+      "cache/fontconfig/bbd3eebb6912613e2596f2fd46535a95-le64.cache-9",
+      "cache/fontconfig/0bd3dc0958fa2205aaaa8ebb13e2872b-le64.cache-9",
+      "cache/fontconfig/c57959a16110560c8d0fcea73374aeeb-le64.cache-9",
+      "cache/fontconfig/3047814df9a2f067bd2d96a2b9c36e5a-le64.cache-9",
+      "cache/fontconfig/d589a48862398ed80a3d6066f4f56f4c-le64.cache-9",
+      "cache/fontconfig/6cc790b63b123a6a96ee260fcdad32a9-le64.cache-9",
+      "cache/fontconfig/9b89f8e3dae116d678bbf48e5f21f69b-le64.cache-9",
+      "cache/fontconfig/188ac73a183f12857f63bb60a4a6d603-le64.cache-9",
+      "cache/fontconfig/e52a45a1c8c8fe895fc0fc8c4e6999b8-le64.cache-9",
+      "cache/fontconfig/d3e5c4ee2ceb1fc347f91d4cefc53bc0-le64.cache-9",
+      "cache/fontconfig/95530828ff6c81d309f8258d8d02a23e-le64.cache-9",
+      "cache/fontconfig/f1f2465696798768e9653f19e17ccdc8-le64.cache-9",
+      "cache/fontconfig/fe547fea3a41b43a38975d292a2b19c7-le64.cache-9",
+      "cache/fontconfig/707971e003b4ae6c8121c3a920e507f5-le64.cache-9",
+      "cache/fontconfig/e13b20fdb08344e0e664864cc2ede53d-le64.cache-9",
+      "cache/fontconfig/d82eb4fd963d448e2fcb7d7b793b5df3-le64.cache-9",
+      "cache/fontconfig/7ef2298fde41cc6eeb7af42e48b7d293-le64.cache-9",
+      "cache/fontconfig/573ec803664ed168555e0e8b6d0f0c7f-le64.cache-9",
+      "cache/fontconfig/5d4427f94dd6de4274e26256ab6bdd24-le64.cache-9",
+      "cache/fontconfig/57e423e26b20ab21d0f2f29c145174c3-le64.cache-9",
+      "cache/fontconfig/32b6488e5b8292a2e95c79d947e009e8-le64.cache-9",
+      "cache/fontconfig/c855463f699352c367813e37f3f70ea7-le64.cache-9",
+      "cache/fontconfig/e0aa53bcfa504e64f87823c16bc01eb6-le64.cache-9",
+      "cache/fontconfig/467c019e582ee353435ea5c21d137ef6-le64.cache-9",
+      "cache/fontconfig/3830d5c3ddfd5cd38a049b759396e72e-le64.cache-9",
+      "cache/fontconfig/4c599c202bc5c08e2d34565a40eac3b2-le64.cache-9",
+      "cache/fontconfig/CACHEDIR.TAG"
+    ],
+    "godot-v120-reference-repeat": [
+      "data/godot-game-preview-v021/logs/godot.log",
+      "cache/fontconfig/6333f38776742d18e214673cd2c24e34-le64.cache-9",
+      "cache/fontconfig/a4e60e8d1e10d2fdff3fe3037a1845fb-le64.cache-9",
+      "cache/fontconfig/6aa41aa22e18b8fa06a12da28ea9c28b-le64.cache-9",
+      "cache/fontconfig/12c5eb5b0d6d6fd1848053bcdafabe09-le64.cache-9",
+      "cache/fontconfig/bbd3eebb6912613e2596f2fd46535a95-le64.cache-9",
+      "cache/fontconfig/0bd3dc0958fa2205aaaa8ebb13e2872b-le64.cache-9",
+      "cache/fontconfig/c57959a16110560c8d0fcea73374aeeb-le64.cache-9",
+      "cache/fontconfig/3047814df9a2f067bd2d96a2b9c36e5a-le64.cache-9",
+      "cache/fontconfig/d589a48862398ed80a3d6066f4f56f4c-le64.cache-9",
+      "cache/fontconfig/6cc790b63b123a6a96ee260fcdad32a9-le64.cache-9",
+      "cache/fontconfig/9b89f8e3dae116d678bbf48e5f21f69b-le64.cache-9",
+      "cache/fontconfig/188ac73a183f12857f63bb60a4a6d603-le64.cache-9",
+      "cache/fontconfig/e52a45a1c8c8fe895fc0fc8c4e6999b8-le64.cache-9",
+      "cache/fontconfig/d3e5c4ee2ceb1fc347f91d4cefc53bc0-le64.cache-9",
+      "cache/fontconfig/95530828ff6c81d309f8258d8d02a23e-le64.cache-9",
+      "cache/fontconfig/f1f2465696798768e9653f19e17ccdc8-le64.cache-9",
+      "cache/fontconfig/fe547fea3a41b43a38975d292a2b19c7-le64.cache-9",
+      "cache/fontconfig/707971e003b4ae6c8121c3a920e507f5-le64.cache-9",
+      "cache/fontconfig/e13b20fdb08344e0e664864cc2ede53d-le64.cache-9",
+      "cache/fontconfig/d82eb4fd963d448e2fcb7d7b793b5df3-le64.cache-9",
+      "cache/fontconfig/7ef2298fde41cc6eeb7af42e48b7d293-le64.cache-9",
+      "cache/fontconfig/573ec803664ed168555e0e8b6d0f0c7f-le64.cache-9",
+      "cache/fontconfig/5d4427f94dd6de4274e26256ab6bdd24-le64.cache-9",
+      "cache/fontconfig/57e423e26b20ab21d0f2f29c145174c3-le64.cache-9",
+      "cache/fontconfig/32b6488e5b8292a2e95c79d947e009e8-le64.cache-9",
+      "cache/fontconfig/c855463f699352c367813e37f3f70ea7-le64.cache-9",
+      "cache/fontconfig/e0aa53bcfa504e64f87823c16bc01eb6-le64.cache-9",
+      "cache/fontconfig/467c019e582ee353435ea5c21d137ef6-le64.cache-9",
+      "cache/fontconfig/3830d5c3ddfd5cd38a049b759396e72e-le64.cache-9",
+      "cache/fontconfig/4c599c202bc5c08e2d34565a40eac3b2-le64.cache-9",
+      "cache/fontconfig/CACHEDIR.TAG"
+    ]
+  },
+  "sha256": {
+    "tools/build_reference.py": "916b34b5c7015fac839c8662dd505a5b108646ca88ba9628ebc4a19d09d4c5c1",
+    "tests/ruins_garden_attack_reference_test.py": "3af07699c3e4cfc0c077642797a794b2c49c43addb1ea1e09d59671fa1e387a2",
+    "docs/reference/catalog.json": "ccb51fa89d04991f12c7620d946babe61f2ee001b4e0e967b1fd153c345009a6",
+    "docs/reference/index.html": "8c66408c23d5ad0033a569e4b6ecaccc1ecaa20ebed83b0eda64de439acbd571",
+    "docs/qa/v120-ruins-boss/ruins-garden-fragment.json": "ab53c020f4ec6872b7d7632be5ee83a64d06b74c2bba281b87f747102a6e4cd0",
+    "docs/qa/v120-ruins-boss/reference-README.md": "46b7d8c487a11e816f887c950a7ede5d08c0b77b49abd1075740c34bf6a87119",
+    "docs/qa/v120-ruins-boss/reference-static-report.json": "ba1a5bf4a13f22d1f093310792973caa32e68778904eb70d2577bcff9d0f637b",
+    "docs/qa/v120-ruins-boss/reference-svg-report.json": "875be05159af0aecf7f82e8896ab8dde7ccee5d90f8d8a0375fc385652f0721d"
+  }
+}

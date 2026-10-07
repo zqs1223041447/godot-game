@@ -1,0 +1,95 @@
+{
+  "baseline_commit": "8c10337d337ecee0f9d3c8fbcfaf1766ad2103d1",
+  "godot_version": "4.6.3.stable.official.7d41c59c4",
+  "checks": {
+    "new_runtime_geometry_renderer": {
+      "checks": 100,
+      "failures": 0
+    },
+    "actual_main": {
+      "checks": 341,
+      "failures": 0,
+      "groups": 13
+    },
+    "unchanged_ginkgo_renderer": {
+      "checks": 90,
+      "failures": 0
+    },
+    "bounded_reference_exports": {
+      "checks_per_run": 49,
+      "runs_final": 2,
+      "byte_identical": true
+    },
+    "old_four_short_trajectories": {
+      "byte_identical": true
+    },
+    "reference_static": "passed",
+    "deterministic_build": "passed",
+    "merge_idempotence": "passed",
+    "python_javascript_syntax": "passed",
+    "git_diff_check": "passed",
+    "browser_interaction": "blocked_before_page_load_by_socket_permission",
+    "reference_svg_raster_visual": "passed",
+    "gameplay_pixel_capture": "not_run",
+    "full_suite_migration_600_second": "not_run"
+  },
+  "source_sha256": {
+    "scripts/monsters/map_boss_profiles.gd": "588d568cac7930df053283587b1626e95f6b6f018d03c7f02821cca682c4bd3b",
+    "scripts/combat/telegraphed_area_runtime.gd": "59afb64d1fb4c70bd171a7ef9a9b315f0c3cd26a32e0c940a24bc30256d2d756",
+    "scripts/visuals/telegraph_renderer.gd": "fd3a22477529ac197a3efae063d62dcb7a59d9895fd831dcb9512632a3d59a49",
+    "scripts/world/exploration_map_layout.gd": "516a4d92ff0be206b6b4d4aecdb6019132803f3eb6e8be9f4467ffc1102a6159",
+    "scripts/main.gd": "5a5cfd012336e2bdc8aeb012037fd80ff0f982915a624afc5e5c4dfb0f28adcc",
+    "scripts/monsters/telegraph_profiles.gd": "de60d4f6bd3035235534d1643d792472c45dc26ba849f80efbba023aaa678369",
+    "scripts/monsters/monster_catalog.gd": "499b12aa0dcc91ecb39c0f303745930ad853fb5b3b576b3c561714c771c44309",
+    "scripts/world/map_catalog.gd": "a33aac21ff45d56af4aef17f6aa5530becfc19e597f9bdc2aec6b68f68a770ee",
+    "scripts/world/normal_map_catalog.gd": "a3d5d7a58fc481c2b258a0c083b8bdb4dd5a483121a0e2d4796bfbe676597ddb",
+    "project.godot": "726cc44c81cd41cf5c0bd443189e519118f2cff25f5e600f8e1af06b3a801c98",
+    "tools/build_reference.py": "916b34b5c7015fac839c8662dd505a5b108646ca88ba9628ebc4a19d09d4c5c1",
+    "tools/export_ruins_garden_reference.gd": "4d8e38f400a5fb33b202988a3b4dfa179676b5bdec7404350bd26682924e174b",
+    "tools/merge_ruins_garden_reference.py": "12885199bc670aa1d3a1acb4dfbc2258c7e00b91f6941a7c31a6333d35bce778",
+    "tests/ruins_garden_boss_runtime_test.gd": "d87b4b65a2564f855d0664662b3d2e8a39671eec96f6a074182b878ea318d250",
+    "tests/ruins_garden_boss_main_test.gd": "023c728835163f86e0ffa5b2cbbb87cba1e2d5a84933dc00f0d494c94ca770a7",
+    "tests/ruins_garden_boss_legacy_probe.gd": "c3e4cbc54e7c6efd8d4a326aeb87b42e61ff84ca01ab2744115f5083a134e80f",
+    "tests/ruins_garden_attack_reference_test.py": "3af07699c3e4cfc0c077642797a794b2c49c43addb1ea1e09d59671fa1e387a2",
+    "docs/reference/catalog.json": "ccb51fa89d04991f12c7620d946babe61f2ee001b4e0e967b1fd153c345009a6",
+    "docs/reference/index.html": "8c66408c23d5ad0033a569e4b6ecaccc1ecaa20ebed83b0eda64de439acbd571"
+  },
+  "evidence_sha256": {
+    "docs/qa/v120-ruins-boss/README.md": "d2d17c24c9d49ac0dd2ab6e9ffe270b71e1d1590ec9109ab21d40e29e1591200",
+    "docs/qa/v120-ruins-boss/legacy-after.bin": "b127b6932036c79bbcd6c077e1ecc64c2dfa9e1b8191da908f366f3059f1b583",
+    "docs/qa/v120-ruins-boss/legacy-after.log": "5c0a7a8835ac6fe0abe5af14b2a8744718a8939561603220f1777899dc123b18",
+    "docs/qa/v120-ruins-boss/legacy-before.bin": "b127b6932036c79bbcd6c077e1ecc64c2dfa9e1b8191da908f366f3059f1b583",
+    "docs/qa/v120-ruins-boss/legacy-before.log": "5c0a7a8835ac6fe0abe5af14b2a8744718a8939561603220f1777899dc123b18",
+    "docs/qa/v120-ruins-boss/legacy-renderer.log": "7df93712c26c8497c2748ee53c7418df35ed742c47c62740ff73d847e5ae1f69",
+    "docs/qa/v120-ruins-boss/main-formal-initial-save.json": "042096c05d133dbdc5aab2f23e55d7432eb1cf91244ce337f6966ca41320a488",
+    "docs/qa/v120-ruins-boss/main-import.log": "d3a8626e01b9671b2a724aed4954d5522e7d807bd9e902e1384741d38f739ee4",
+    "docs/qa/v120-ruins-boss/main-preflight.log": "015ece5655a071ce6652f3312335e0a243115cd7cd4ccaa43882569ab020fc0f",
+    "docs/qa/v120-ruins-boss/main-report.md": "77e71b2d4c83a72978bcd46e84f5940125a02e407591fce369710ae7061c9a37",
+    "docs/qa/v120-ruins-boss/main-result.json": "4c3432f78ec2bae1a828fe7d945ca105bed39a510570510f2e62e54d17d464c4",
+    "docs/qa/v120-ruins-boss/main-run.log": "fb9052e345f5c804d327e1d1f5232da7931ec25b695f8ca79dc4edddb2d0d1e8",
+    "docs/qa/v120-ruins-boss/preservation.json": "b6742dac3147dc0893820f3514c75d20e084eb8c87658ad84435e3199331f608",
+    "docs/qa/v120-ruins-boss/reference-README.md": "46b7d8c487a11e816f887c950a7ede5d08c0b77b49abd1075740c34bf6a87119",
+    "docs/qa/v120-ruins-boss/reference-attack-diagram.png": "a749c5879fd9927c3d19d98689902a0edd0a6e96b8fb6664aeb48cc21d3ab2ba",
+    "docs/qa/v120-ruins-boss/reference-attack-diagram.svg": "4072dfb961245bc4291d0df8c8dd211a2c5ff6c8a6e35873f291eaad280b3680",
+    "docs/qa/v120-ruins-boss/reference-browser-probe.py": "74e056b2e1bb39b473a543d7fd412610614b6a57bd943ea70b7b7c75f53afa99",
+    "docs/qa/v120-ruins-boss/reference-browser-report.json": "33064dcfc89aede3affdb74acf28446b3fbfec6c0875248585b7963ff1ef2004",
+    "docs/qa/v120-ruins-boss/reference-browser.log": "506e066db1e914a18e6e800ed8a1d1ab96a4b3b701b5d5632408a07db6be9aab",
+    "docs/qa/v120-ruins-boss/reference-build-check.log": "65d47533eaf556129a1f3a295db12ab1bc36a8df0770c71cb9378490d54d03ba",
+    "docs/qa/v120-ruins-boss/reference-export-repeat.log": "776e2cdc44960398f2acd22f17435287502c890bed8f4b926981a1c98e3dc2a2",
+    "docs/qa/v120-ruins-boss/reference-export.log": "776e2cdc44960398f2acd22f17435287502c890bed8f4b926981a1c98e3dc2a2",
+    "docs/qa/v120-ruins-boss/reference-js-check.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docs/qa/v120-ruins-boss/reference-merge-check.log": "ef4a0651f73f4da26700588a5e0bfa8b30f0b23a2e083ee041bdaa58239b20f4",
+    "docs/qa/v120-ruins-boss/reference-static-report.json": "ba1a5bf4a13f22d1f093310792973caa32e68778904eb70d2577bcff9d0f637b",
+    "docs/qa/v120-ruins-boss/reference-static.log": "61f1bcff0844660c35c773bd32568611a26189cb898d2c1c5c692fea4529acb0",
+    "docs/qa/v120-ruins-boss/reference-svg-render.log": "7c9efca890f72431a5dd23e130f0326d22c95956c9e0e7d9f126828cf4420e52",
+    "docs/qa/v120-ruins-boss/reference-svg-report.json": "875be05159af0aecf7f82e8896ab8dde7ccee5d90f8d8a0375fc385652f0721d",
+    "docs/qa/v120-ruins-boss/reference-verification.json": "51f8169383086d488d8f37fab44314714bbef2d02a11e7141e00227b24b533a9",
+    "docs/qa/v120-ruins-boss/ruins-garden-fragment.json": "ab53c020f4ec6872b7d7632be5ee83a64d06b74c2bba281b87f747102a6e4cd0",
+    "docs/qa/v120-ruins-boss/runtime-first.log": "c4197616ce55ba8d38a80478dcd42115a331d538da1e1b8ec78e36226fdf526f",
+    "docs/qa/v120-ruins-boss/runtime-result.json": "22334ad7b605228bab3bf1e3eb1c74249ac93ff21547ac1199c8a0f8aa411686"
+  },
+  "evidence_log_whitespace_normalized": [
+    "main-import.log",
+    "reference-browser.log"
+  ]
+}

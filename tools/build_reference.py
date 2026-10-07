@@ -298,6 +298,35 @@ def ginkgo_map_body(data, link, facts, details):
     body+='<p>'+esc(ginkgo['scope'])+' Main使用受控完整怪群死亡与静态站位，不是自然战斗录像；不宣称全战斗、600秒稳定性或Release通过。</p><p><a href="../GINKGO_ARCADE.zh-CN.md">银杏回廊内容合同</a> · <a href="../qa/v083-reference/README.md">本批窄导出与保全证据</a> · <a href="../'+esc(ginkgo['actual_main_report']['path'].removeprefix('docs/'))+'">实际Main结果</a></p>'
     return body
 
+def ruins_garden_attack_body(boss, facts):
+    """The v120 ruins attack uses only its bounded runtime definition."""
+    profile = boss['profile']; second = boss['second_pulse']
+    def value(key, amount):
+        return '<strong data-ruins-attack-value="' + esc(key) + '" data-value="' + esc(amount) + '">' + number(amount) + '</strong>'
+    body = '<h4>' + esc(boss['name']) + ' · 玩家锁点，内圈后外环</h4>' + facts([
+        ('起手锁点', '两段均锁定玩家起手位置；玩家移动、首领移动或第二段开始都不重新锁点'),
+        ('启动距离', value('trigger-distance', boss['trigger_distance'])),
+        ('第一段', '完整预警 ' + value('first-windup', profile['windup_seconds']) + ' 秒后，半径 ' + value('first-radius', profile['radius']) + ' 的实心圆命中'),
+        ('第二段', '第一段后额外完整预警 ' + value('second-windup', second['windup_seconds']) + ' 秒；同一圆心，内半径 ' + value('inner-radius', second['inner_radius']) + '、外半径 ' + value('outer-radius', second['radius']) + ' 的空心环命中'),
+        ('段数 / 结算间隔', value('pulse-count', boss['pulse_count']) + ' 段；第一段结算至第二段结算间隔 ' + value('pulse-interval', boss['pulse_interval']) + ' 秒局部动作时间，包含第二段完整预警'),
+        ('防御前预算', '每段 ' + value('stage-multiplier', profile['damage_multiplier']) + ' × 起手冻结的首领接触分量；合计名义预算 ' + value('combined-multiplier', profile['damage_multiplier'] * boss['pulse_count']) + ' 倍'),
+        ('时序与恢复', '两段预警均不被攻速压缩；第二段结束后才进入基础 ' + value('base-recovery', profile['recovery_seconds']) + ' 秒恢复，实际恢复沿当前攻速与既有上下限'),
+        ('安全边界', '第一段须完全离开实心圆；第二段只有 d＋角色半径＜内半径，或 d＞外半径＋角色半径，才在几何上完全避开；身体接触边界仍命中')])
+    body += '<p>可以先退出内圈，再进入第二段的内侧安全区；也可继续远离外环。原生障碍阻断结算视线仍有效。伤害沿共享防御链，免疫、闪避、护盾与其他减伤仍按原规则结算；名义预算不是保证生命损失，也不保证两段都命中。</p>'
+    first_radius = number(profile['radius']); inner = number(second['inner_radius']); outer = number(second['radius'])
+    ring = f'M-{outer} 0a{outer} {outer} 0 1 0 {number(2 * second["radius"])} 0a{outer} {outer} 0 1 0 -{number(2 * second["radius"])} 0Z M-{inner} 0a{inner} {inner} 0 1 0 {number(2 * second["inner_radius"])} 0a{inner} {inner} 0 1 0 -{number(2 * second["inner_radius"])} 0Z'
+    body += '<figure><figcaption>' + esc(boss['name']) + ' · 同比例两阶段范围示意</figcaption><svg data-ruins-attack-diagram="inner-outer" viewBox="-260 -290 1080 570" role="img" aria-label="第一段半径' + first_radius + '实心圆，第二段内半径' + inner + '外半径' + outer + '空心环；两段锁定同一玩家起手点">'
+    body += '<rect x="-260" y="-290" width="1080" height="570" fill="#f4efdf"/>'
+    body += '<g data-ruins-attack-stage="1" transform="translate(0 0)"><text x="0" y="-250" text-anchor="middle" fill="#493523" font-size="22">第一段 · 实心圆</text><text x="0" y="-218" text-anchor="middle" fill="#695744" font-size="18">完整预警 ' + number(profile['windup_seconds']) + ' 秒</text>'
+    body += f'<circle data-ruins-attack-shape="circle" cx="0" cy="0" r="{first_radius}" fill="#d9b677" fill-opacity=".35" stroke="#775537" stroke-width="3"/><path data-ruins-attack-center="frozen-player-start" d="M-7 0H7M0 -7V7" stroke="#315b64" stroke-width="3"/><text x="0" y="132" text-anchor="middle" fill="#493523" font-size="19">半径 {first_radius}</text></g>'
+    body += '<g data-ruins-attack-stage="2" transform="translate(550 0)"><text x="0" y="-250" text-anchor="middle" fill="#493523" font-size="22">第二段 · 空心环</text><text x="0" y="-218" text-anchor="middle" fill="#695744" font-size="18">再完整预警 ' + number(second['windup_seconds']) + ' 秒</text>'
+    body += f'<path data-ruins-attack-shape="annulus" data-inner-radius="{inner}" data-outer-radius="{outer}" d="{ring}" fill="#8d718e" fill-opacity=".28" fill-rule="evenodd" stroke="#775c79" stroke-width="3"/><path data-ruins-attack-center="frozen-player-start" d="M-7 0H7M0 -7V7" stroke="#315b64" stroke-width="3"/><text x="0" y="34" text-anchor="middle" fill="#315b64" font-size="18">内侧安全区</text><text x="0" y="245" text-anchor="middle" fill="#493523" font-size="19">内半径 {inner} / 外半径 {outer}</text></g></svg>'
+    body += '<figcaption>两图使用相同尺度，十字均为同一个冻结的玩家起手点；分栏只为展示前后时序。第二段危险区只填外环，内心留空。图示不表示角色体型或实际站位，身体须完全离开危险区域。</figcaption></figure>'
+    body += '<p>冻结暂停该来源的局部动作时钟；来源死亡、移除或恢复出生保护，以及玩家死亡、重开、返城会取消待结算攻击。起手期间不叠加贴身接触攻击。</p>'
+    body += '<p>攻击 ID 保持 ' + esc(boss['id']) + '；事件 profile_id 与伤害包 skill_id：' + esc(boss['profile_id']) + '；balance_version：' + esc(boss['balance_version']) + '。<a href="../qa/v120-ruins-boss/reference-README.md">本次同源图鉴导出与保全记录</a>。下方 v119 记录保留为原生地形与Plan的历史证据，不证明本次两段攻击。</p>'
+    return body
+
+
 def exploration_map_body(data, map_id, link, facts, details):
     """Current cards use the bounded exploration fragment, never legacy camp coords."""
     exploration = data['exploration_maps']
@@ -391,6 +420,8 @@ def exploration_map_body(data, map_id, link, facts, details):
         for label, evidence in [('实际Main报告', rule['actual_main_report']), ('实际Main日志', rule['actual_main_log']), ('实际角色夹具', rule['actual_main_fixture']), ('本次Main测试输入', rule['runtime_tested_inputs']), ('最终运行态检查', rule['current_runtime_report']), ('最终运行态日志', rule['current_runtime_log'])]:
             body += '<p><a href="../' + esc(evidence['path'].removeprefix('docs/')) + '">' + label + '</a>；SHA256：' + esc(evidence['sha256']) + '</p>'
         body += '<p><a href="../GINKGO_INNER_OUTER.zh-CN.md">内圈后外环合同</a> · <a href="../qa/v101-reference/README.md">有限导出与保全记录</a></p>'
+    elif map_id == 'ruins_garden' and boss.get('profile_id') == 'ruins_garden_inner_outer':
+        body += ruins_garden_attack_body(boss, facts)
     else:
         body += '<h4>' + esc(boss['name']) + '</h4>' + facts([
             ('锁定点', '首领起手位置' if boss['target_rule'] == 'self_at_start' else '玩家起手位置；后续不追踪'),
@@ -406,7 +437,7 @@ def exploration_map_body(data, map_id, link, facts, details):
     roster_header = '<th>驻点</th>' if route_distribution else ''
     body += details('同源初始实体示例 · 独立Plan，不是角色战斗录像', '<p>使用本图I档、空地图词缀和固定种子 ' + str(plan['seed']) + '，只调用已验证的脱离运行态Plan。无角色装备、奖励或存档写入；具体物种是此种子示例，不表示每次相同。全部生成记录包含稳定spawn_key、actor/root ID、来源组、序号、物种、位置、空encounter_id和standard奖励路线。</p><div class="table-scroll"><table><thead><tr><th>来源组</th>' + roster_header + '<th>序号</th><th>物种</th><th>坐标 x / y</th></tr></thead><tbody>' + roster_rows + '</tbody></table></div>')
     if native:
-        body += '<p>原合法根怪收益、首领奖励和有限死亡后代规则保留；后代不增加普通奖励。本图使用独立正式进度。此图鉴增量不修改存档、玩法或美术。</p>'
+        body += '<p>原合法根怪收益、首领奖励和有限死亡后代规则保留；后代不增加普通奖励。本图使用独立正式进度。' + ('本次首领攻击独立更新；地图怪数、奖励、地形和存档结构保持。' if boss.get('profile_id') == 'ruins_garden_inner_outer' else '此图鉴增量不修改存档、玩法或美术。') + '</p>'
         body += '<p>' + esc(native['scope']) + ' 下方历史四图资料不作为本图的验证证据。</p><p>' + link('rules', 'exploration_maps', '探索规则与历史资料边界') + ' · <a href="../' + esc(native['evidence_path'].removeprefix('docs/')) + '">遗迹庭园有界导出与保全记录</a></p>'
     else:
         body += '<p>原合法根怪收益、首领奖励和有限死亡后代规则保留；后代不增加普通奖励。存档仍为schema ' + str(exploration['save_version']) + '，源政策 ' + str(exploration['source_policy']) + '，装备词汇 ' + str(exploration['equipment_vocabulary']) + '。原持久profile与历史地图描述保持，当前显示读取新的探索描述。</p>'

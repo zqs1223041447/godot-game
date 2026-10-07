@@ -87,7 +87,7 @@ static func _read_state(raw: Variant) -> Dictionary:
 	var inner: Variant = raw.get("inner_radius", 0.0)
 	if shape not in ["circle", "annulus"] or not _number(inner): return {}
 	if shape == "annulus":
-		if raw.get("visual_pattern", "") != "ginkgo_shelter_slam" or raw.get("pulse_index", 0) != 1: return {}
+		if raw.get("visual_pattern", "") not in ["ginkgo_shelter_slam", "ruins_garden_slam"] or raw.get("pulse_index", 0) != 1: return {}
 		if float(inner) <= 0.0 or float(inner) >= float(radius): return {}
 	elif float(inner) != 0.0: return {}
 	var age: float = float(elapsed)
@@ -104,7 +104,7 @@ static func _read_state(raw: Variant) -> Dictionary:
 		clampf((age - windup_seconds) / recovery_seconds, 0.0, 1.0)
 	return {"source_id": int(source_id), "center": center, "radius": float(radius),
 		"phase": phase, "progress": progress, "shape":shape, "inner_radius":float(inner),
-		"pattern": raw.get("visual_pattern", "") if raw.get("visual_pattern", "") in ["garden_slam", "ruins_mark", "ember_burn", "sunwell_echo", "ginkgo_shelter_slam", "chaos_guard"] else "",
+		"pattern": raw.get("visual_pattern", "") if raw.get("visual_pattern", "") in ["garden_slam", "ruins_mark", "ember_burn", "sunwell_echo", "ginkgo_shelter_slam", "ruins_garden_slam", "chaos_guard"] else "",
 		"pulse_index": clampi(int(raw.get("pulse_index",0)),0,1) if typeof(raw.get("pulse_index",0)) == TYPE_INT else 0,
 		"element": raw.get("visual_element", "") if raw.get("visual_element", "") in ["cold", "lightning"] else ""}
 

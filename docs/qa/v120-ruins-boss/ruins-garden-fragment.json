@@ -1,0 +1,2232 @@
+{
+	"ruins_garden": {
+		"boss_definition": {
+			"balance_version": "original-ruins-garden-inner-outer-v1",
+			"id": "ruins_garden_slam",
+			"map_id": "ruins_garden",
+			"name": "庭园缠印",
+			"profile": {
+				"damage_multiplier": 0.65,
+				"radius": 90.0,
+				"recovery_seconds": 1.9,
+				"windup_seconds": 1.15
+			},
+			"profile_id": "ruins_garden_inner_outer",
+			"pulse_count": 2,
+			"pulse_interval": 1.0,
+			"second_pulse": {
+				"inner_radius": 90.0,
+				"radius": 210.0,
+				"shape": "annulus",
+				"windup_seconds": 1.0
+			},
+			"target_rule": "player_at_start",
+			"trigger_distance": 420.0
+		},
+		"description": "遗迹断墙、石拱与岩石共享原生碰撞轮廓；沿草土和旧石路绕行。六处3或5怪驻点分布于庭园，24普通根怪与首领入场时全部在场；可先挑战首领，清理全部怪物及后代后完成。首领庭园缠印锁定玩家起手位置：先离开内圈，再进入环内或继续远离外环；两段不追踪。",
+		"geometry": {
+			"bounds": {
+				"position": [
+					42.0,
+					104.0
+				],
+				"size": [
+					3600.0,
+					2400.0
+				]
+			},
+			"encounter_mode": "modular_study",
+			"id": "ruins_garden",
+			"landmarks": {
+				"boss": {
+					"center": [
+						3222.0,
+						424.0
+					],
+					"id": "rift_warden",
+					"name": "裂隙守卫",
+					"sign_position": [
+						3042.0,
+						574.0
+					],
+					"trigger_center": [
+						3222.0,
+						424.0
+					],
+					"trigger_radius": 64.0
+				},
+				"camps": [
+					{
+						"center": [
+							1342.0,
+							2104.0
+						],
+						"id": "camp_west",
+						"name": "西壁驻点",
+						"positions": [
+							[
+								1342.0,
+								2060.0
+							],
+							[
+								1294.0,
+								2138.0
+							],
+							[
+								1394.0,
+								2132.0
+							],
+							[
+								658.0,
+								1184.0
+							],
+							[
+								708.0,
+								1120.0
+							],
+							[
+								780.0,
+								1124.0
+							],
+							[
+								830.0,
+								1192.0
+							],
+							[
+								742.0,
+								1234.0
+							]
+						],
+						"root_count": 8,
+						"sign_position": [
+							1342.0,
+							2254.0
+						],
+						"trigger_center": [
+							1342.0,
+							2104.0
+						],
+						"trigger_radius": 64.0
+					},
+					{
+						"center": [
+							892.0,
+							604.0
+						],
+						"id": "camp_north",
+						"name": "北拱驻点",
+						"positions": [
+							[
+								892.0,
+								560.0
+							],
+							[
+								844.0,
+								638.0
+							],
+							[
+								944.0,
+								632.0
+							],
+							[
+								1798.0,
+								464.0
+							],
+							[
+								1848.0,
+								400.0
+							],
+							[
+								1920.0,
+								404.0
+							],
+							[
+								1970.0,
+								472.0
+							],
+							[
+								1882.0,
+								514.0
+							]
+						],
+						"root_count": 8,
+						"sign_position": [
+							892.0,
+							754.0
+						],
+						"trigger_center": [
+							892.0,
+							604.0
+						],
+						"trigger_radius": 64.0
+					},
+					{
+						"center": [
+							2722.0,
+							924.0
+						],
+						"id": "camp_east",
+						"name": "东岩驻点",
+						"positions": [
+							[
+								2722.0,
+								880.0
+							],
+							[
+								2674.0,
+								958.0
+							],
+							[
+								2774.0,
+								952.0
+							],
+							[
+								2948.0,
+								1854.0
+							],
+							[
+								2998.0,
+								1790.0
+							],
+							[
+								3070.0,
+								1794.0
+							],
+							[
+								3120.0,
+								1862.0
+							],
+							[
+								3032.0,
+								1904.0
+							]
+						],
+						"root_count": 8,
+						"sign_position": [
+							2722.0,
+							1074.0
+						],
+						"trigger_center": [
+							2722.0,
+							924.0
+						],
+						"trigger_radius": 64.0
+					}
+				],
+				"distribution_version": "route_outposts_v1",
+				"entry": [
+					362.0,
+					2184.0
+				],
+				"outposts": [
+					{
+						"center": [
+							1342.0,
+							2104.0
+						],
+						"id": "camp_west_1",
+						"name": "西壁驻点 · 1",
+						"ordinals": [
+							1,
+							2,
+							3
+						],
+						"positions": [
+							[
+								1342.0,
+								2060.0
+							],
+							[
+								1294.0,
+								2138.0
+							],
+							[
+								1394.0,
+								2132.0
+							]
+						],
+						"root_count": 3,
+						"root_ids": [
+							1,
+							2,
+							3
+						],
+						"sign_position": [
+							1342.0,
+							2254.0
+						],
+						"source_group": "camp_west"
+					},
+					{
+						"center": [
+							742.0,
+							1184.0
+						],
+						"id": "camp_west_2",
+						"name": "西壁驻点 · 2",
+						"ordinals": [
+							4,
+							5,
+							6,
+							7,
+							8
+						],
+						"positions": [
+							[
+								658.0,
+								1184.0
+							],
+							[
+								708.0,
+								1120.0
+							],
+							[
+								780.0,
+								1124.0
+							],
+							[
+								830.0,
+								1192.0
+							],
+							[
+								742.0,
+								1234.0
+							]
+						],
+						"root_count": 5,
+						"root_ids": [
+							4,
+							5,
+							6,
+							7,
+							8
+						],
+						"sign_position": [
+							742.0,
+							1334.0
+						],
+						"source_group": "camp_west"
+					},
+					{
+						"center": [
+							892.0,
+							604.0
+						],
+						"id": "camp_north_1",
+						"name": "北拱驻点 · 1",
+						"ordinals": [
+							1,
+							2,
+							3
+						],
+						"positions": [
+							[
+								892.0,
+								560.0
+							],
+							[
+								844.0,
+								638.0
+							],
+							[
+								944.0,
+								632.0
+							]
+						],
+						"root_count": 3,
+						"root_ids": [
+							9,
+							10,
+							11
+						],
+						"sign_position": [
+							892.0,
+							754.0
+						],
+						"source_group": "camp_north"
+					},
+					{
+						"center": [
+							1882.0,
+							464.0
+						],
+						"id": "camp_north_2",
+						"name": "北拱驻点 · 2",
+						"ordinals": [
+							4,
+							5,
+							6,
+							7,
+							8
+						],
+						"positions": [
+							[
+								1798.0,
+								464.0
+							],
+							[
+								1848.0,
+								400.0
+							],
+							[
+								1920.0,
+								404.0
+							],
+							[
+								1970.0,
+								472.0
+							],
+							[
+								1882.0,
+								514.0
+							]
+						],
+						"root_count": 5,
+						"root_ids": [
+							12,
+							13,
+							14,
+							15,
+							16
+						],
+						"sign_position": [
+							1882.0,
+							614.0
+						],
+						"source_group": "camp_north"
+					},
+					{
+						"center": [
+							2722.0,
+							924.0
+						],
+						"id": "camp_east_1",
+						"name": "东岩驻点 · 1",
+						"ordinals": [
+							1,
+							2,
+							3
+						],
+						"positions": [
+							[
+								2722.0,
+								880.0
+							],
+							[
+								2674.0,
+								958.0
+							],
+							[
+								2774.0,
+								952.0
+							]
+						],
+						"root_count": 3,
+						"root_ids": [
+							17,
+							18,
+							19
+						],
+						"sign_position": [
+							2722.0,
+							1074.0
+						],
+						"source_group": "camp_east"
+					},
+					{
+						"center": [
+							3032.0,
+							1854.0
+						],
+						"id": "camp_east_2",
+						"name": "东岩驻点 · 2",
+						"ordinals": [
+							4,
+							5,
+							6,
+							7,
+							8
+						],
+						"positions": [
+							[
+								2948.0,
+								1854.0
+							],
+							[
+								2998.0,
+								1790.0
+							],
+							[
+								3070.0,
+								1794.0
+							],
+							[
+								3120.0,
+								1862.0
+							],
+							[
+								3032.0,
+								1904.0
+							]
+						],
+						"root_count": 5,
+						"root_ids": [
+							20,
+							21,
+							22,
+							23,
+							24
+						],
+						"sign_position": [
+							3032.0,
+							2004.0
+						],
+						"source_group": "camp_east"
+					}
+				],
+				"route_segments": [
+					{
+						"from": [
+							362.0,
+							2184.0
+						],
+						"to": [
+							1062.0,
+							2084.0
+						],
+						"width": 72.0
+					},
+					{
+						"from": [
+							1062.0,
+							2084.0
+						],
+						"to": [
+							1342.0,
+							2104.0
+						],
+						"width": 72.0
+					},
+					{
+						"from": [
+							1342.0,
+							2104.0
+						],
+						"to": [
+							2042.0,
+							2104.0
+						],
+						"width": 72.0
+					},
+					{
+						"from": [
+							2042.0,
+							2104.0
+						],
+						"to": [
+							3032.0,
+							1854.0
+						],
+						"width": 72.0
+					},
+					{
+						"from": [
+							3032.0,
+							1854.0
+						],
+						"to": [
+							2722.0,
+							924.0
+						],
+						"width": 72.0
+					},
+					{
+						"from": [
+							2722.0,
+							924.0
+						],
+						"to": [
+							3222.0,
+							424.0
+						],
+						"width": 72.0
+					},
+					{
+						"from": [
+							1342.0,
+							2104.0
+						],
+						"to": [
+							692.0,
+							1804.0
+						],
+						"width": 72.0
+					},
+					{
+						"from": [
+							692.0,
+							1804.0
+						],
+						"to": [
+							742.0,
+							1184.0
+						],
+						"width": 72.0
+					},
+					{
+						"from": [
+							742.0,
+							1184.0
+						],
+						"to": [
+							892.0,
+							604.0
+						],
+						"width": 72.0
+					},
+					{
+						"from": [
+							892.0,
+							604.0
+						],
+						"to": [
+							1882.0,
+							464.0
+						],
+						"width": 72.0
+					},
+					{
+						"from": [
+							1882.0,
+							464.0
+						],
+						"to": [
+							2722.0,
+							924.0
+						],
+						"width": 72.0
+					},
+					{
+						"from": [
+							1342.0,
+							2104.0
+						],
+						"to": [
+							1542.0,
+							2024.0
+						],
+						"width": 72.0
+					},
+					{
+						"from": [
+							1542.0,
+							2024.0
+						],
+						"to": [
+							1882.0,
+							1404.0
+						],
+						"width": 72.0
+					},
+					{
+						"from": [
+							1882.0,
+							1404.0
+						],
+						"to": [
+							1882.0,
+							464.0
+						],
+						"width": 72.0
+					}
+				]
+			},
+			"module_instances": [
+				{
+					"id": "wall_A",
+					"module_id": "short_wall",
+					"position": [
+						1213.53857421875,
+						1949.3846435546875
+					]
+				},
+				{
+					"id": "gate_A",
+					"module_id": "walkable_arch",
+					"position": [
+						1596.615478515625,
+						1987.84619140625
+					]
+				},
+				{
+					"id": "rock_A",
+					"module_id": "moss_rock",
+					"position": [
+						1125.84619140625,
+						2389.384765625
+					]
+				}
+			],
+			"module_polygons": [
+				[
+					[
+						1360.117919921875,
+						1950.87109375
+					],
+					[
+						1360.8753662109375,
+						1950.666259765625
+					],
+					[
+						1362.770263671875,
+						1949.7083740234375
+					],
+					[
+						1363.1787109375,
+						1949.2841796875
+					],
+					[
+						1363.3760986328125,
+						1948.7686767578125
+					],
+					[
+						1373.0755615234375,
+						1883.8553466796875
+					],
+					[
+						1372.916015625,
+						1883.32861328125
+					],
+					[
+						1372.5372314453125,
+						1882.88330078125
+					],
+					[
+						1370.880126953125,
+						1881.591796875
+					],
+					[
+						1370.133056640625,
+						1881.3743896484375
+					],
+					[
+						1066.9605712890625,
+						1850.9176025390625
+					],
+					[
+						1066.2071533203125,
+						1851.1195068359375
+					],
+					[
+						1064.3114013671875,
+						1852.069091796875
+					],
+					[
+						1063.89990234375,
+						1852.494384765625
+					],
+					[
+						1063.7010498046875,
+						1853.0120849609375
+					],
+					[
+						1054.011962890625,
+						1917.653076171875
+					],
+					[
+						1054.05126953125,
+						1918.1923828125
+					],
+					[
+						1054.5345458984375,
+						1918.89306640625
+					],
+					[
+						1056.191650390625,
+						1920.19482421875
+					],
+					[
+						1056.94287109375,
+						1920.4144287109375
+					]
+				],
+				[
+					[
+						1683.8935546875,
+						1980.6673583984375
+					],
+					[
+						1683.94873046875,
+						1981.2559814453125
+					],
+					[
+						1684.278076171875,
+						1981.781005859375
+					],
+					[
+						1684.830078125,
+						1982.1605224609375
+					],
+					[
+						1685.5184326171875,
+						1982.3353271484375
+					],
+					[
+						1699.2923583984375,
+						1983.4537353515625
+					],
+					[
+						1699.9976806640625,
+						1983.2705078125
+					],
+					[
+						1706.331787109375,
+						1980.3583984375
+					],
+					[
+						1791.5679931640625,
+						1989.1644287109375
+					],
+					[
+						1792.29296875,
+						1989.11962890625
+					],
+					[
+						1792.93896484375,
+						1988.8463134765625
+					],
+					[
+						1794.076171875,
+						1987.7286376953125
+					],
+					[
+						1794.2879638671875,
+						1987.1912841796875
+					],
+					[
+						1804.8580322265625,
+						1916.673828125
+					],
+					[
+						1804.6883544921875,
+						1915.839111328125
+					],
+					[
+						1804.224365234375,
+						1915.056884765625
+					],
+					[
+						1803.8271484375,
+						1914.61669921875
+					],
+					[
+						1803.262939453125,
+						1914.3232421875
+					],
+					[
+						1801.469482421875,
+						1913.7879638671875
+					],
+					[
+						1697.3253173828125,
+						1903.313232421875
+					],
+					[
+						1696.6158447265625,
+						1903.3564453125
+					],
+					[
+						1695.9805908203125,
+						1903.6187744140625
+					],
+					[
+						1695.51611328125,
+						1904.0601806640625
+					],
+					[
+						1695.2933349609375,
+						1904.6136474609375
+					]
+				],
+				[
+					[
+						1475.737548828125,
+						1957.1676025390625
+					],
+					[
+						1481.020263671875,
+						1961.245849609375
+					],
+					[
+						1481.6505126953125,
+						1961.5634765625
+					],
+					[
+						1495.345703125,
+						1963.2078857421875
+					],
+					[
+						1496.065185546875,
+						1963.1746826171875
+					],
+					[
+						1496.712890625,
+						1962.9158935546875
+					],
+					[
+						1497.1875,
+						1962.4715576171875
+					],
+					[
+						1497.4149169921875,
+						1961.9114990234375
+					],
+					[
+						1508.8148193359375,
+						1885.8577880859375
+					],
+					[
+						1508.7620849609375,
+						1885.276611328125
+					],
+					[
+						1508.4417724609375,
+						1884.7562255859375
+					],
+					[
+						1507.90283203125,
+						1884.3758544921875
+					],
+					[
+						1507.2271728515625,
+						1884.193359375
+					],
+					[
+						1403.0830078125,
+						1873.7186279296875
+					],
+					[
+						1401.184814453125,
+						1873.882568359375
+					],
+					[
+						1400.5439453125,
+						1874.05859375
+					],
+					[
+						1400.0252685546875,
+						1874.4136962890625
+					],
+					[
+						1399.62548828125,
+						1875.17041015625
+					],
+					[
+						1388.3743896484375,
+						1946.35498046875
+					],
+					[
+						1388.4267578125,
+						1946.94921875
+					],
+					[
+						1388.7586669921875,
+						1947.4794921875
+					],
+					[
+						1390.8140869140625,
+						1948.923583984375
+					],
+					[
+						1391.7740478515625,
+						1949.2606201171875
+					]
+				],
+				[
+					[
+						981.5924682617188,
+						2203.465087890625
+					],
+					[
+						981.1890869140625,
+						2238.298828125
+					],
+					[
+						983.3012084960938,
+						2250.52978515625
+					],
+					[
+						1004.1482543945313,
+						2339.119873046875
+					],
+					[
+						1007.7608032226563,
+						2346.860595703125
+					],
+					[
+						1016.966552734375,
+						2360.9375
+					],
+					[
+						1032.2357177734375,
+						2372.69384765625
+					],
+					[
+						1057.538818359375,
+						2387.8056640625
+					],
+					[
+						1058.0697021484375,
+						2388.024169921875
+					],
+					[
+						1158.181640625,
+						2413.565673828125
+					],
+					[
+						1237.0657958984375,
+						2409.77587890625
+					],
+					[
+						1249.7550048828125,
+						2406.653564453125
+					],
+					[
+						1257.4326171875,
+						2402.73828125
+					],
+					[
+						1263.5855712890625,
+						2398.2900390625
+					],
+					[
+						1265.2574462890625,
+						2396.459716796875
+					],
+					[
+						1265.606201171875,
+						2395.754150390625
+					],
+					[
+						1264.8369140625,
+						2381.22021484375
+					],
+					[
+						1257.706787109375,
+						2363.602783203125
+					],
+					[
+						1192.281982421875,
+						2266.846435546875
+					],
+					[
+						1138.5086669921875,
+						2193.7958984375
+					],
+					[
+						1129.076171875,
+						2183.840087890625
+					],
+					[
+						1115.6568603515625,
+						2171.795166015625
+					],
+					[
+						1105.7325439453125,
+						2166.231689453125
+					],
+					[
+						1093.3609619140625,
+						2162.478271484375
+					],
+					[
+						1070.8624267578125,
+						2158.005615234375
+					],
+					[
+						1060.629150390625,
+						2159.06298828125
+					],
+					[
+						1032.80859375,
+						2165.0283203125
+					],
+					[
+						1021.3119506835938,
+						2169.207763671875
+					],
+					[
+						990.3494873046875,
+						2188.988037109375
+					],
+					[
+						985.5634155273438,
+						2194.226318359375
+					],
+					[
+						985.3136596679688,
+						2194.612548828125
+					],
+					[
+						981.6968994140625,
+						2202.981689453125
+					]
+				]
+			],
+			"revision": 1,
+			"source_map_id": "ruins_garden",
+			"spawn": [
+				362.0,
+				2184.0
+			],
+			"study_origin": [
+				492.0,
+				1554.0
+			],
+			"walls": []
+		},
+		"id": "ruins_garden",
+		"name": "遗迹庭园",
+		"native_entry": true,
+		"native_reference": {
+			"contour_count": 4,
+			"detour_clearance_radius": 51.0,
+			"evidence_path": "docs/qa/v119-reference/README.md",
+			"prepared_route_count": 14,
+			"route_width": 72.0,
+			"scope": "只读取正式目录并运行脱离角色的原生地形准备与单个I档Plan；不加载Main、不收费、不读写玩家存档、不运行战斗或渲染。",
+			"source_route_segments": [
+				{
+					"from": [
+						362.0,
+						2184.0
+					],
+					"to": [
+						1342.0,
+						2104.0
+					],
+					"width": 72.0
+				},
+				{
+					"from": [
+						1342.0,
+						2104.0
+					],
+					"to": [
+						2042.0,
+						2104.0
+					],
+					"width": 72.0
+				},
+				{
+					"from": [
+						2042.0,
+						2104.0
+					],
+					"to": [
+						3032.0,
+						1854.0
+					],
+					"width": 72.0
+				},
+				{
+					"from": [
+						3032.0,
+						1854.0
+					],
+					"to": [
+						2722.0,
+						924.0
+					],
+					"width": 72.0
+				},
+				{
+					"from": [
+						2722.0,
+						924.0
+					],
+					"to": [
+						3222.0,
+						424.0
+					],
+					"width": 72.0
+				},
+				{
+					"from": [
+						1342.0,
+						2104.0
+					],
+					"to": [
+						692.0,
+						1804.0
+					],
+					"width": 72.0
+				},
+				{
+					"from": [
+						692.0,
+						1804.0
+					],
+					"to": [
+						742.0,
+						1184.0
+					],
+					"width": 72.0
+				},
+				{
+					"from": [
+						742.0,
+						1184.0
+					],
+					"to": [
+						892.0,
+						604.0
+					],
+					"width": 72.0
+				},
+				{
+					"from": [
+						892.0,
+						604.0
+					],
+					"to": [
+						1882.0,
+						464.0
+					],
+					"width": 72.0
+				},
+				{
+					"from": [
+						1882.0,
+						464.0
+					],
+					"to": [
+						2722.0,
+						924.0
+					],
+					"width": 72.0
+				},
+				{
+					"from": [
+						1342.0,
+						2104.0
+					],
+					"to": [
+						1882.0,
+						1404.0
+					],
+					"width": 72.0
+				},
+				{
+					"from": [
+						1882.0,
+						1404.0
+					],
+					"to": [
+						1882.0,
+						464.0
+					],
+					"width": 72.0
+				}
+			],
+			"vertex_count": 99
+		},
+		"ordinary_target": 24,
+		"plan_example": {
+			"mechanism_config": {
+
+			},
+			"optional_encounters": [],
+			"roots": [
+				{
+					"actor_id": 1,
+					"awake": false,
+					"generation": 0,
+					"outpost_id": "camp_west_1",
+					"position": [
+						1342.0,
+						2060.0
+					],
+					"radius": 14.0,
+					"rarity": "magic",
+					"reward_eligible": true,
+					"root_id": 1,
+					"spawn_key": "ruins_garden/119001/camp_west/1",
+					"template_id": "splitter"
+				},
+				{
+					"actor_id": 2,
+					"awake": false,
+					"generation": 0,
+					"outpost_id": "camp_west_1",
+					"position": [
+						1294.0,
+						2138.0
+					],
+					"radius": 14.0,
+					"rarity": "normal",
+					"reward_eligible": true,
+					"root_id": 2,
+					"spawn_key": "ruins_garden/119001/camp_west/2",
+					"template_id": "crawler"
+				},
+				{
+					"actor_id": 3,
+					"awake": false,
+					"generation": 0,
+					"outpost_id": "camp_west_1",
+					"position": [
+						1394.0,
+						2132.0
+					],
+					"radius": 14.0,
+					"rarity": "magic",
+					"reward_eligible": true,
+					"root_id": 3,
+					"spawn_key": "ruins_garden/119001/camp_west/3",
+					"template_id": "crawler"
+				},
+				{
+					"actor_id": 4,
+					"awake": false,
+					"generation": 0,
+					"outpost_id": "camp_west_2",
+					"position": [
+						658.0,
+						1184.0
+					],
+					"radius": 14.0,
+					"rarity": "magic",
+					"reward_eligible": true,
+					"root_id": 4,
+					"spawn_key": "ruins_garden/119001/camp_west/4",
+					"template_id": "crawler"
+				},
+				{
+					"actor_id": 5,
+					"awake": false,
+					"generation": 0,
+					"outpost_id": "camp_west_2",
+					"position": [
+						708.0,
+						1120.0
+					],
+					"radius": 14.0,
+					"rarity": "magic",
+					"reward_eligible": true,
+					"root_id": 5,
+					"spawn_key": "ruins_garden/119001/camp_west/5",
+					"template_id": "crawler"
+				},
+				{
+					"actor_id": 6,
+					"awake": false,
+					"generation": 0,
+					"outpost_id": "camp_west_2",
+					"position": [
+						780.0,
+						1124.0
+					],
+					"radius": 10.0,
+					"rarity": "normal",
+					"reward_eligible": true,
+					"root_id": 6,
+					"spawn_key": "ruins_garden/119001/camp_west/6",
+					"template_id": "skitter"
+				},
+				{
+					"actor_id": 7,
+					"awake": false,
+					"generation": 0,
+					"outpost_id": "camp_west_2",
+					"position": [
+						830.0,
+						1192.0
+					],
+					"radius": 14.0,
+					"rarity": "magic",
+					"reward_eligible": true,
+					"root_id": 7,
+					"spawn_key": "ruins_garden/119001/camp_west/7",
+					"template_id": "splitter"
+				},
+				{
+					"actor_id": 8,
+					"awake": false,
+					"generation": 0,
+					"outpost_id": "camp_west_2",
+					"position": [
+						742.0,
+						1234.0
+					],
+					"radius": 14.0,
+					"rarity": "normal",
+					"reward_eligible": true,
+					"root_id": 8,
+					"spawn_key": "ruins_garden/119001/camp_west/8",
+					"template_id": "crawler"
+				},
+				{
+					"actor_id": 9,
+					"awake": false,
+					"generation": 0,
+					"outpost_id": "camp_north_1",
+					"position": [
+						892.0,
+						560.0
+					],
+					"radius": 14.0,
+					"rarity": "normal",
+					"reward_eligible": true,
+					"root_id": 9,
+					"spawn_key": "ruins_garden/119001/camp_north/1",
+					"template_id": "crawler"
+				},
+				{
+					"actor_id": 10,
+					"awake": false,
+					"generation": 0,
+					"outpost_id": "camp_north_1",
+					"position": [
+						844.0,
+						638.0
+					],
+					"radius": 10.0,
+					"rarity": "normal",
+					"reward_eligible": true,
+					"root_id": 10,
+					"spawn_key": "ruins_garden/119001/camp_north/2",
+					"template_id": "skitter"
+				},
+				{
+					"actor_id": 11,
+					"awake": false,
+					"generation": 0,
+					"outpost_id": "camp_north_1",
+					"position": [
+						944.0,
+						632.0
+					],
+					"radius": 14.0,
+					"rarity": "magic",
+					"reward_eligible": true,
+					"root_id": 11,
+					"spawn_key": "ruins_garden/119001/camp_north/3",
+					"template_id": "splitter"
+				},
+				{
+					"actor_id": 12,
+					"awake": false,
+					"generation": 0,
+					"outpost_id": "camp_north_2",
+					"position": [
+						1798.0,
+						464.0
+					],
+					"radius": 10.0,
+					"rarity": "normal",
+					"reward_eligible": true,
+					"root_id": 12,
+					"spawn_key": "ruins_garden/119001/camp_north/4",
+					"template_id": "skitter"
+				},
+				{
+					"actor_id": 13,
+					"awake": false,
+					"generation": 0,
+					"outpost_id": "camp_north_2",
+					"position": [
+						1848.0,
+						400.0
+					],
+					"radius": 14.0,
+					"rarity": "magic",
+					"reward_eligible": true,
+					"root_id": 13,
+					"spawn_key": "ruins_garden/119001/camp_north/5",
+					"template_id": "splitter"
+				},
+				{
+					"actor_id": 14,
+					"awake": false,
+					"generation": 0,
+					"outpost_id": "camp_north_2",
+					"position": [
+						1920.0,
+						404.0
+					],
+					"radius": 14.0,
+					"rarity": "normal",
+					"reward_eligible": true,
+					"root_id": 14,
+					"spawn_key": "ruins_garden/119001/camp_north/6",
+					"template_id": "crawler"
+				},
+				{
+					"actor_id": 15,
+					"awake": false,
+					"generation": 0,
+					"outpost_id": "camp_north_2",
+					"position": [
+						1970.0,
+						472.0
+					],
+					"radius": 14.0,
+					"rarity": "magic",
+					"reward_eligible": true,
+					"root_id": 15,
+					"spawn_key": "ruins_garden/119001/camp_north/7",
+					"template_id": "splitter"
+				},
+				{
+					"actor_id": 16,
+					"awake": false,
+					"generation": 0,
+					"outpost_id": "camp_north_2",
+					"position": [
+						1882.0,
+						514.0
+					],
+					"radius": 10.0,
+					"rarity": "magic",
+					"reward_eligible": true,
+					"root_id": 16,
+					"spawn_key": "ruins_garden/119001/camp_north/8",
+					"template_id": "skitter"
+				},
+				{
+					"actor_id": 17,
+					"awake": false,
+					"generation": 0,
+					"outpost_id": "camp_east_1",
+					"position": [
+						2722.0,
+						880.0
+					],
+					"radius": 10.0,
+					"rarity": "normal",
+					"reward_eligible": true,
+					"root_id": 17,
+					"spawn_key": "ruins_garden/119001/camp_east/1",
+					"template_id": "skitter"
+				},
+				{
+					"actor_id": 18,
+					"awake": false,
+					"generation": 0,
+					"outpost_id": "camp_east_1",
+					"position": [
+						2674.0,
+						958.0
+					],
+					"radius": 14.0,
+					"rarity": "normal",
+					"reward_eligible": true,
+					"root_id": 18,
+					"spawn_key": "ruins_garden/119001/camp_east/2",
+					"template_id": "crawler"
+				},
+				{
+					"actor_id": 19,
+					"awake": false,
+					"generation": 0,
+					"outpost_id": "camp_east_1",
+					"position": [
+						2774.0,
+						952.0
+					],
+					"radius": 10.0,
+					"rarity": "normal",
+					"reward_eligible": true,
+					"root_id": 19,
+					"spawn_key": "ruins_garden/119001/camp_east/3",
+					"template_id": "skitter"
+				},
+				{
+					"actor_id": 20,
+					"awake": false,
+					"generation": 0,
+					"outpost_id": "camp_east_2",
+					"position": [
+						2948.0,
+						1854.0
+					],
+					"radius": 14.0,
+					"rarity": "normal",
+					"reward_eligible": true,
+					"root_id": 20,
+					"spawn_key": "ruins_garden/119001/camp_east/4",
+					"template_id": "crawler"
+				},
+				{
+					"actor_id": 21,
+					"awake": false,
+					"generation": 0,
+					"outpost_id": "camp_east_2",
+					"position": [
+						2998.0,
+						1790.0
+					],
+					"radius": 10.0,
+					"rarity": "magic",
+					"reward_eligible": true,
+					"root_id": 21,
+					"spawn_key": "ruins_garden/119001/camp_east/5",
+					"template_id": "skitter"
+				},
+				{
+					"actor_id": 22,
+					"awake": false,
+					"generation": 0,
+					"outpost_id": "camp_east_2",
+					"position": [
+						3070.0,
+						1794.0
+					],
+					"radius": 14.0,
+					"rarity": "magic",
+					"reward_eligible": true,
+					"root_id": 22,
+					"spawn_key": "ruins_garden/119001/camp_east/6",
+					"template_id": "splitter"
+				},
+				{
+					"actor_id": 23,
+					"awake": false,
+					"generation": 0,
+					"outpost_id": "camp_east_2",
+					"position": [
+						3120.0,
+						1862.0
+					],
+					"radius": 14.0,
+					"rarity": "normal",
+					"reward_eligible": true,
+					"root_id": 23,
+					"spawn_key": "ruins_garden/119001/camp_east/7",
+					"template_id": "crawler"
+				},
+				{
+					"actor_id": 24,
+					"awake": false,
+					"generation": 0,
+					"outpost_id": "camp_east_2",
+					"position": [
+						3032.0,
+						1904.0
+					],
+					"radius": 14.0,
+					"rarity": "magic",
+					"reward_eligible": true,
+					"root_id": 24,
+					"spawn_key": "ruins_garden/119001/camp_east/8",
+					"template_id": "crawler"
+				},
+				{
+					"actor_id": 25,
+					"awake": false,
+					"generation": 0,
+					"outpost_id": "",
+					"position": [
+						3222.0,
+						424.0
+					],
+					"radius": 27.5,
+					"rarity": "boss",
+					"reward_eligible": true,
+					"root_id": 25,
+					"spawn_key": "ruins_garden/119001/boss",
+					"template_id": "rift_warden"
+				}
+			],
+			"seed": 119001,
+			"spawn_records": [
+				{
+					"actor_id": 1,
+					"encounter_id": "",
+					"ordinal": 1,
+					"outpost_id": "camp_west_1",
+					"position": [
+						1342.0,
+						2060.0
+					],
+					"reward_route": "standard",
+					"root_id": 1,
+					"source_group": "camp_west",
+					"spawn_key": "ruins_garden/119001/camp_west/1",
+					"template_id": "splitter"
+				},
+				{
+					"actor_id": 2,
+					"encounter_id": "",
+					"ordinal": 2,
+					"outpost_id": "camp_west_1",
+					"position": [
+						1294.0,
+						2138.0
+					],
+					"reward_route": "standard",
+					"root_id": 2,
+					"source_group": "camp_west",
+					"spawn_key": "ruins_garden/119001/camp_west/2",
+					"template_id": "crawler"
+				},
+				{
+					"actor_id": 3,
+					"encounter_id": "",
+					"ordinal": 3,
+					"outpost_id": "camp_west_1",
+					"position": [
+						1394.0,
+						2132.0
+					],
+					"reward_route": "standard",
+					"root_id": 3,
+					"source_group": "camp_west",
+					"spawn_key": "ruins_garden/119001/camp_west/3",
+					"template_id": "crawler"
+				},
+				{
+					"actor_id": 4,
+					"encounter_id": "",
+					"ordinal": 4,
+					"outpost_id": "camp_west_2",
+					"position": [
+						658.0,
+						1184.0
+					],
+					"reward_route": "standard",
+					"root_id": 4,
+					"source_group": "camp_west",
+					"spawn_key": "ruins_garden/119001/camp_west/4",
+					"template_id": "crawler"
+				},
+				{
+					"actor_id": 5,
+					"encounter_id": "",
+					"ordinal": 5,
+					"outpost_id": "camp_west_2",
+					"position": [
+						708.0,
+						1120.0
+					],
+					"reward_route": "standard",
+					"root_id": 5,
+					"source_group": "camp_west",
+					"spawn_key": "ruins_garden/119001/camp_west/5",
+					"template_id": "crawler"
+				},
+				{
+					"actor_id": 6,
+					"encounter_id": "",
+					"ordinal": 6,
+					"outpost_id": "camp_west_2",
+					"position": [
+						780.0,
+						1124.0
+					],
+					"reward_route": "standard",
+					"root_id": 6,
+					"source_group": "camp_west",
+					"spawn_key": "ruins_garden/119001/camp_west/6",
+					"template_id": "skitter"
+				},
+				{
+					"actor_id": 7,
+					"encounter_id": "",
+					"ordinal": 7,
+					"outpost_id": "camp_west_2",
+					"position": [
+						830.0,
+						1192.0
+					],
+					"reward_route": "standard",
+					"root_id": 7,
+					"source_group": "camp_west",
+					"spawn_key": "ruins_garden/119001/camp_west/7",
+					"template_id": "splitter"
+				},
+				{
+					"actor_id": 8,
+					"encounter_id": "",
+					"ordinal": 8,
+					"outpost_id": "camp_west_2",
+					"position": [
+						742.0,
+						1234.0
+					],
+					"reward_route": "standard",
+					"root_id": 8,
+					"source_group": "camp_west",
+					"spawn_key": "ruins_garden/119001/camp_west/8",
+					"template_id": "crawler"
+				},
+				{
+					"actor_id": 9,
+					"encounter_id": "",
+					"ordinal": 1,
+					"outpost_id": "camp_north_1",
+					"position": [
+						892.0,
+						560.0
+					],
+					"reward_route": "standard",
+					"root_id": 9,
+					"source_group": "camp_north",
+					"spawn_key": "ruins_garden/119001/camp_north/1",
+					"template_id": "crawler"
+				},
+				{
+					"actor_id": 10,
+					"encounter_id": "",
+					"ordinal": 2,
+					"outpost_id": "camp_north_1",
+					"position": [
+						844.0,
+						638.0
+					],
+					"reward_route": "standard",
+					"root_id": 10,
+					"source_group": "camp_north",
+					"spawn_key": "ruins_garden/119001/camp_north/2",
+					"template_id": "skitter"
+				},
+				{
+					"actor_id": 11,
+					"encounter_id": "",
+					"ordinal": 3,
+					"outpost_id": "camp_north_1",
+					"position": [
+						944.0,
+						632.0
+					],
+					"reward_route": "standard",
+					"root_id": 11,
+					"source_group": "camp_north",
+					"spawn_key": "ruins_garden/119001/camp_north/3",
+					"template_id": "splitter"
+				},
+				{
+					"actor_id": 12,
+					"encounter_id": "",
+					"ordinal": 4,
+					"outpost_id": "camp_north_2",
+					"position": [
+						1798.0,
+						464.0
+					],
+					"reward_route": "standard",
+					"root_id": 12,
+					"source_group": "camp_north",
+					"spawn_key": "ruins_garden/119001/camp_north/4",
+					"template_id": "skitter"
+				},
+				{
+					"actor_id": 13,
+					"encounter_id": "",
+					"ordinal": 5,
+					"outpost_id": "camp_north_2",
+					"position": [
+						1848.0,
+						400.0
+					],
+					"reward_route": "standard",
+					"root_id": 13,
+					"source_group": "camp_north",
+					"spawn_key": "ruins_garden/119001/camp_north/5",
+					"template_id": "splitter"
+				},
+				{
+					"actor_id": 14,
+					"encounter_id": "",
+					"ordinal": 6,
+					"outpost_id": "camp_north_2",
+					"position": [
+						1920.0,
+						404.0
+					],
+					"reward_route": "standard",
+					"root_id": 14,
+					"source_group": "camp_north",
+					"spawn_key": "ruins_garden/119001/camp_north/6",
+					"template_id": "crawler"
+				},
+				{
+					"actor_id": 15,
+					"encounter_id": "",
+					"ordinal": 7,
+					"outpost_id": "camp_north_2",
+					"position": [
+						1970.0,
+						472.0
+					],
+					"reward_route": "standard",
+					"root_id": 15,
+					"source_group": "camp_north",
+					"spawn_key": "ruins_garden/119001/camp_north/7",
+					"template_id": "splitter"
+				},
+				{
+					"actor_id": 16,
+					"encounter_id": "",
+					"ordinal": 8,
+					"outpost_id": "camp_north_2",
+					"position": [
+						1882.0,
+						514.0
+					],
+					"reward_route": "standard",
+					"root_id": 16,
+					"source_group": "camp_north",
+					"spawn_key": "ruins_garden/119001/camp_north/8",
+					"template_id": "skitter"
+				},
+				{
+					"actor_id": 17,
+					"encounter_id": "",
+					"ordinal": 1,
+					"outpost_id": "camp_east_1",
+					"position": [
+						2722.0,
+						880.0
+					],
+					"reward_route": "standard",
+					"root_id": 17,
+					"source_group": "camp_east",
+					"spawn_key": "ruins_garden/119001/camp_east/1",
+					"template_id": "skitter"
+				},
+				{
+					"actor_id": 18,
+					"encounter_id": "",
+					"ordinal": 2,
+					"outpost_id": "camp_east_1",
+					"position": [
+						2674.0,
+						958.0
+					],
+					"reward_route": "standard",
+					"root_id": 18,
+					"source_group": "camp_east",
+					"spawn_key": "ruins_garden/119001/camp_east/2",
+					"template_id": "crawler"
+				},
+				{
+					"actor_id": 19,
+					"encounter_id": "",
+					"ordinal": 3,
+					"outpost_id": "camp_east_1",
+					"position": [
+						2774.0,
+						952.0
+					],
+					"reward_route": "standard",
+					"root_id": 19,
+					"source_group": "camp_east",
+					"spawn_key": "ruins_garden/119001/camp_east/3",
+					"template_id": "skitter"
+				},
+				{
+					"actor_id": 20,
+					"encounter_id": "",
+					"ordinal": 4,
+					"outpost_id": "camp_east_2",
+					"position": [
+						2948.0,
+						1854.0
+					],
+					"reward_route": "standard",
+					"root_id": 20,
+					"source_group": "camp_east",
+					"spawn_key": "ruins_garden/119001/camp_east/4",
+					"template_id": "crawler"
+				},
+				{
+					"actor_id": 21,
+					"encounter_id": "",
+					"ordinal": 5,
+					"outpost_id": "camp_east_2",
+					"position": [
+						2998.0,
+						1790.0
+					],
+					"reward_route": "standard",
+					"root_id": 21,
+					"source_group": "camp_east",
+					"spawn_key": "ruins_garden/119001/camp_east/5",
+					"template_id": "skitter"
+				},
+				{
+					"actor_id": 22,
+					"encounter_id": "",
+					"ordinal": 6,
+					"outpost_id": "camp_east_2",
+					"position": [
+						3070.0,
+						1794.0
+					],
+					"reward_route": "standard",
+					"root_id": 22,
+					"source_group": "camp_east",
+					"spawn_key": "ruins_garden/119001/camp_east/6",
+					"template_id": "splitter"
+				},
+				{
+					"actor_id": 23,
+					"encounter_id": "",
+					"ordinal": 7,
+					"outpost_id": "camp_east_2",
+					"position": [
+						3120.0,
+						1862.0
+					],
+					"reward_route": "standard",
+					"root_id": 23,
+					"source_group": "camp_east",
+					"spawn_key": "ruins_garden/119001/camp_east/7",
+					"template_id": "crawler"
+				},
+				{
+					"actor_id": 24,
+					"encounter_id": "",
+					"ordinal": 8,
+					"outpost_id": "camp_east_2",
+					"position": [
+						3032.0,
+						1904.0
+					],
+					"reward_route": "standard",
+					"root_id": 24,
+					"source_group": "camp_east",
+					"spawn_key": "ruins_garden/119001/camp_east/8",
+					"template_id": "crawler"
+				},
+				{
+					"actor_id": 25,
+					"encounter_id": "",
+					"ordinal": 1,
+					"outpost_id": "",
+					"position": [
+						3222.0,
+						424.0
+					],
+					"reward_route": "standard",
+					"root_id": 25,
+					"source_group": "boss",
+					"spawn_key": "ruins_garden/119001/boss",
+					"template_id": "rift_warden"
+				}
+			],
+			"total": 25
+		},
+		"test_available": false,
+		"tiers": [
+			{
+				"eligible_special_ids": [],
+				"maximum_modifier_bonus": 2,
+				"profile": {
+					"base_completion_reward": 4,
+					"boss_attack_id": "ruins_garden_slam",
+					"boss_id": "rift_warden",
+					"completion_reward": 4,
+					"description": "沿古典断墙、拱门与岩石之间探索六处驻点。24个普通根怪与首领入场时全部在场；清理全部怪物和后代完成挑战。模块轮廓同时阻挡移动、弹体和视线。",
+					"encounter_profile": {
+						"additions": {
+							"armour": 0.0,
+							"shield_from_base_health": 0.0
+						},
+						"definitions": [],
+						"modifier_ids": [],
+						"multipliers": {
+							"attack_speed": 1.0,
+							"damage": 1.0,
+							"max_health": 1.0,
+							"speed": 1.0
+						},
+						"resource_policy": {
+							"armour": "add_flat_then_existing_hit_size_formula",
+							"attack_speed": "multiply_contact_rate_and_recovery_only",
+							"damage": "multiply_canonical_once",
+							"health": "preserve_current_to_max_ratio",
+							"max_health": "multiply_canonical_once",
+							"max_shield": "add_fraction_of_unmodified_canonical_max_health",
+							"rounding": "float_no_integer_rounding",
+							"shield": "add_same_bonus_preserve_missing_amount",
+							"shield_regen": "unchanged",
+							"speed": "multiply_canonical_once",
+							"telegraph_windup": "unchanged"
+						},
+						"reward_budget": {
+							"creates_map_items": false,
+							"enabled": false,
+							"grants_rewards": false,
+							"proposed_bonus_fraction": null,
+							"status": "metadata_only"
+						},
+						"risk_parameters": [],
+						"source": {
+							"balance_source": "original_game_balance",
+							"catalog": "res://scripts/encounters/encounter_catalog.gd",
+							"definition_revision": 2,
+							"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+							"monster_schema_version": 1,
+							"policy_version": 2,
+							"schema_version": 1
+						}
+					},
+					"fee": 0,
+					"id": "ruins_garden",
+					"journey_tier": 1,
+					"name": "遗迹庭园 · I",
+					"native_entry": true,
+					"normal_ids": [],
+					"normal_map": true,
+					"ordinary_target": 24,
+					"special_ids": [],
+					"summary": "遗迹庭园 · I",
+					"wave": 1
+				}
+			},
+			{
+				"eligible_special_ids": [
+					"elemental_aegis",
+					"frost_patrol"
+				],
+				"maximum_modifier_bonus": 4,
+				"profile": {
+					"base_completion_reward": 8,
+					"boss_attack_id": "ruins_garden_slam",
+					"boss_id": "rift_warden",
+					"completion_reward": 8,
+					"description": "沿古典断墙、拱门与岩石之间探索六处驻点。24个普通根怪与首领入场时全部在场；清理全部怪物和后代完成挑战。模块轮廓同时阻挡移动、弹体和视线。",
+					"encounter_profile": {
+						"additions": {
+							"armour": 0.0,
+							"shield_from_base_health": 0.0
+						},
+						"definitions": [],
+						"modifier_ids": [],
+						"multipliers": {
+							"attack_speed": 1.0,
+							"damage": 1.0,
+							"max_health": 1.0,
+							"speed": 1.0
+						},
+						"resource_policy": {
+							"armour": "add_flat_then_existing_hit_size_formula",
+							"attack_speed": "multiply_contact_rate_and_recovery_only",
+							"damage": "multiply_canonical_once",
+							"health": "preserve_current_to_max_ratio",
+							"max_health": "multiply_canonical_once",
+							"max_shield": "add_fraction_of_unmodified_canonical_max_health",
+							"rounding": "float_no_integer_rounding",
+							"shield": "add_same_bonus_preserve_missing_amount",
+							"shield_regen": "unchanged",
+							"speed": "multiply_canonical_once",
+							"telegraph_windup": "unchanged"
+						},
+						"reward_budget": {
+							"creates_map_items": false,
+							"enabled": false,
+							"grants_rewards": false,
+							"proposed_bonus_fraction": null,
+							"status": "metadata_only"
+						},
+						"risk_parameters": [],
+						"source": {
+							"balance_source": "original_game_balance",
+							"catalog": "res://scripts/encounters/encounter_catalog.gd",
+							"definition_revision": 2,
+							"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+							"monster_schema_version": 1,
+							"policy_version": 2,
+							"schema_version": 1
+						}
+					},
+					"fee": 4,
+					"id": "ruins_garden",
+					"journey_tier": 2,
+					"name": "遗迹庭园 · II",
+					"native_entry": true,
+					"normal_ids": [],
+					"normal_map": true,
+					"ordinary_target": 24,
+					"special_ids": [],
+					"summary": "遗迹庭园 · II",
+					"wave": 4
+				}
+			},
+			{
+				"eligible_special_ids": [
+					"elemental_aegis",
+					"frost_patrol",
+					"storm_patrol",
+					"chaos_patrol"
+				],
+				"maximum_modifier_bonus": 4,
+				"profile": {
+					"base_completion_reward": 12,
+					"boss_attack_id": "ruins_garden_slam",
+					"boss_id": "rift_warden",
+					"completion_reward": 12,
+					"description": "沿古典断墙、拱门与岩石之间探索六处驻点。24个普通根怪与首领入场时全部在场；清理全部怪物和后代完成挑战。模块轮廓同时阻挡移动、弹体和视线。",
+					"encounter_profile": {
+						"additions": {
+							"armour": 0.0,
+							"shield_from_base_health": 0.0
+						},
+						"definitions": [],
+						"modifier_ids": [],
+						"multipliers": {
+							"attack_speed": 1.0,
+							"damage": 1.0,
+							"max_health": 1.0,
+							"speed": 1.0
+						},
+						"resource_policy": {
+							"armour": "add_flat_then_existing_hit_size_formula",
+							"attack_speed": "multiply_contact_rate_and_recovery_only",
+							"damage": "multiply_canonical_once",
+							"health": "preserve_current_to_max_ratio",
+							"max_health": "multiply_canonical_once",
+							"max_shield": "add_fraction_of_unmodified_canonical_max_health",
+							"rounding": "float_no_integer_rounding",
+							"shield": "add_same_bonus_preserve_missing_amount",
+							"shield_regen": "unchanged",
+							"speed": "multiply_canonical_once",
+							"telegraph_windup": "unchanged"
+						},
+						"reward_budget": {
+							"creates_map_items": false,
+							"enabled": false,
+							"grants_rewards": false,
+							"proposed_bonus_fraction": null,
+							"status": "metadata_only"
+						},
+						"risk_parameters": [],
+						"source": {
+							"balance_source": "original_game_balance",
+							"catalog": "res://scripts/encounters/encounter_catalog.gd",
+							"definition_revision": 2,
+							"monster_catalog": "res://scripts/monsters/monster_catalog.gd",
+							"monster_schema_version": 1,
+							"policy_version": 2,
+							"schema_version": 1
+						}
+					},
+					"fee": 8,
+					"id": "ruins_garden",
+					"journey_tier": 3,
+					"name": "遗迹庭园 · III",
+					"native_entry": true,
+					"normal_ids": [],
+					"normal_map": true,
+					"ordinary_target": 24,
+					"special_ids": [],
+					"summary": "遗迹庭园 · III",
+					"wave": 8
+				}
+			}
+		]
+	}
+}
