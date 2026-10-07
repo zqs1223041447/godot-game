@@ -1,0 +1,538 @@
+{
+  "production": {
+    "README.md": "5016b74648977a85a6ebe761ef9a5f76c8250fc9b966c132010c62453b1390b8",
+    "data/passive_balance.json": "21e2dbcf4d9d90ef4c25f5129b1af465b696cac649c74bf892793b67ba774e5a",
+    "data/passive_source/data.json": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+    "data/passive_source/localization_zh_CN.json": "1a26b2e90afb5ba23e2250135286a658beff484a331500d8c2b869a3e8f2a87e",
+    "data/passive_source/normalized_tree.json": "5807df8d3a8d29cdd0402c7ceaf79680439beab4812c945b29c94fc6f0a13b05",
+    "data/passive_source/source_manifest.json": "d8474b3a0e0e9b1dead6e76b7491e40c12ef88686958582e6cf51830aebe2302",
+    "data/passives/official_tree_runtime.json": "9774a8ec1fe16199e775fe99a20853837ca8c7725c48dfcd9d6ee69646ff934f",
+    "data/poe_passive_registry.json": "41ebe8d9a6a6927d930db3565a8d7acaa15f1a7d8f34b40f6baeb5c9662f3bc3",
+    "data/reference/poe_affixes/DELIVERY_MANIFEST.json": "257f7970f5f1ea071ba5bf9f48a1a87ff0d7ac2a3d3569d172d583776d3b2c15",
+    "data/reference/poe_affixes/design/godot_mapping.json": "cee72f41560afc7f3bfda8b4baee8051acb9672f87a531cfdba3d90062552391",
+    "data/reference/poe_affixes/filter_spec.json": "09a6d5bfbba978d01a141f66336933347aaaa1ae312201fc8ecfd548f5d9f0b8",
+    "data/reference/poe_affixes/normalized/bases.json": "be85dd836d97f1170d801758e28ae492381a93761aaee4f1b1f8bb3c0d562422",
+    "data/reference/poe_affixes/normalized/coverage.json": "23240be687eba9d2235076d403532602b00dfe27c1b54d3bbeb90c8516d976d2",
+    "data/reference/poe_affixes/normalized/families.json": "a253759c146a4ec7ea7b7d9624d8246c55f745cde93d1cf52771fa590042ed0b",
+    "data/reference/poe_affixes/normalized/mods.json": "082a8e859c1c704bb2f99e754d9836b10eac5788e538eaf2b0614972741ce877",
+    "data/reference/poe_affixes/normalized/profiles.json": "292c68ff76208de38b7aa5780d99b3dba0810448dee335d83b6742f56d5c4877",
+    "data/reference/poe_affixes/normalized/stats.json": "571462d27c97ce93849937a039446c26c40c03265e82631ff31e4fd7741514d9",
+    "data/reference/poe_affixes/source_manifest.json": "41ed989fdb99ca77a8ae874d8c146c2532b0dd90b37721edcfe566a4d6b790c5",
+    "data/reference/poe_affixes/validation.json": "a0b7cd6d1a2b3423b56b62b7b4be7180f10096da61f1f58d30c862ec113ff5fd",
+    "docs/EXPLORATION_MAPS.zh-CN.md": "5d938281e1e70383f372d0316637361591b5d3deb164971b4e1d7384bd1a0564",
+    "project.godot": "726cc44c81cd41cf5c0bd443189e519118f2cff25f5e600f8e1af06b3a801c98",
+    "scripts/build_state.gd": "574fe676565b3a68ccf589f2abee6fedec65c4d66009a5c4d56067a449002e79",
+    "scripts/canonical_game_state.gd": "cf377a5aaf461e38d585cf1f3df03ecd0e82a16a07233c8396a591b75a115220",
+    "scripts/combat/ambush_support_rules.gd": "da39741b4a2b92d4627892b2608115752b233b43b2a185c5cb9b6e28f37cea00",
+    "scripts/combat/area_support_rules.gd": "5692b2c50caf98eb085fcdcd476531730ff7fbebc86259fc2b55e8b2e89ab3b5",
+    "scripts/combat/attack_hit_rules.gd": "30c58c7ee72644a72873e07a7e1711a223a9fceb7740ad4a37dd85b184d21093",
+    "scripts/combat/burn_rules.gd": "3c22b93054ea7f51d75a1086bea33fbf1124a7cfe4a75bd49db86e9c411aeb47",
+    "scripts/combat/burn_runtime.gd": "2ff6b2974b82bf65637702a2f9aa3e7e4e04521cf2280a55be4700e10337b5e3",
+    "scripts/combat/chill_rules.gd": "3b83f5e761f6e0c6aeb2cca18576a1a24684ddd7553903eebd3817358cca344e",
+    "scripts/combat/cold_ailment_duration_rules.gd": "afb29cc125a4dde4a1b6f9df56accfef05ad89e4a69ca610eda27cda521e75c2",
+    "scripts/combat/combat_data.gd": "dfc12c3056544f7226c2e1be7051664d03a5dcb07228671b1048ad5f7617f65d",
+    "scripts/combat/combat_feedback_runtime.gd": "a365ad6e143c93b526b222849b1eec2aeb98ffc66d094d42c2d298bdfd644e4c",
+    "scripts/combat/critical_strike_rules.gd": "05670279ed3f6e6092a2afbf64fc5575df704e69c8963f9476dfbd07751519cd",
+    "scripts/combat/critical_strike_runtime.gd": "d5678da1780b90c5015b3fa70a2fe0cb447b440606b017dd24b73fc5348bc0ae",
+    "scripts/combat/damage_base_compiler.gd": "7c12ba22cc623c87a805a903a957e5841b4f8c0b26cb3b0ca8dae60cf8c9de8d",
+    "scripts/combat/damage_preview.gd": "5ae9c99fff8c1fb826102c95d8cab5d1bd65333cc105547bd18cdc813265e62e",
+    "scripts/combat/damage_resolver.gd": "720dc69a7446334e8aec3ac15bdf7c1717fa7b96db5657e0c9622513121a4e23",
+    "scripts/combat/delivery_support_rules.gd": "08e8815f5cdb2c7db3c7fcb23cb6b6c1b9cc259c94c76da1a1394118cd3b2159",
+    "scripts/combat/element_support_rules.gd": "15967f974ac24e49ea9545897f4288277ab2874575c863ceeb69be611162c75a",
+    "scripts/combat/ember_event_clock.gd": "53e3d1ab85311b433a18ca307db06eef82178553a3eff73389c01f01808b9ae6",
+    "scripts/combat/ember_proliferation_rules.gd": "df17905689837b35388ef46fef5b7697f79b0258baa1c7a5f0f6bb5974aac31c",
+    "scripts/combat/ember_proliferation_support_rules.gd": "5553df1188d0b92986a150cf812ce8152b03aed3e0009798635087de41465abc",
+    "scripts/combat/flask_modifier_rules.gd": "86b11f9ea2dc214ff619755bfa5e203444bec2686fe5b264101e090daa7f6968",
+    "scripts/combat/flask_runtime.gd": "0cfe1669ed60af48cc80b23c32a126841601820e9f564cc35115aa322478f9e0",
+    "scripts/combat/freeze_runtime.gd": "460b00777986e6d81dd72d8cc947dc6b278e7906cb84b0c949de4e64c822689e",
+    "scripts/combat/frost_lock_rules.gd": "d54ce8ee005b38631c9e051443731e7bcc379e7becc7faf7bd7326ca197a9ffb",
+    "scripts/combat/frost_lock_support_rules.gd": "f9df3a2e3e8e2c8f927a46bf5c75b56993267247158cb1975474534e13dfa84e",
+    "scripts/combat/hit_penetration_rules.gd": "6b0733c563548a9034cd5169b1736287cbffc4b40a14cdf71f37a729c377fc88",
+    "scripts/combat/ignite_support_rules.gd": "23271171b1fd62f18d8e107dd1e6ad8001a40ca9780d08e2db325de374a1793e",
+    "scripts/combat/inward_pull_support_rules.gd": "b1d42ee63673f098a622e14fe2afc3c400677dffc3d898cb34e363475d4c12e3",
+    "scripts/combat/leech_rules.gd": "c1037a4c12f9668cfcf4ca070474bad01adf384695eadd447e7036986c33caba",
+    "scripts/combat/leech_runtime.gd": "fa2b94cc94ffea671124de3986ecd80f0f1ac8feb4ad1e6f2fba554ae1ef8696",
+    "scripts/combat/physical_fire_conversion_rules.gd": "77d5729f7c4904c2ae6ed2b0c79abb5ae9cf4627357cc4e9e55e52ea14de0326",
+    "scripts/combat/player_chill_runtime.gd": "73a4aa5b8bc8ee8f377e1f653f0637effb8aa5c81db5851f9161de1f3456405a",
+    "scripts/combat/player_trap_runtime.gd": "0578c4f7a665f0ad412c9082dc933136609b30f3b2fd0f92a58b31640b0a431c",
+    "scripts/combat/precise_technique_rules.gd": "de4954139b08e9569c741b4d566c9881004e1b025cd3a734434e2ed3a35c1179",
+    "scripts/combat/projectile_runtime.gd": "dbba5008038b3d35d5bc69ca5b2fe98127645fd0bec6f707cd3e8020a9bc4984",
+    "scripts/combat/projectile_support_rules.gd": "46591b5824d3128c0d25ffa0bd62addfb6a7b2f587019f8f4ebf1abdbb04b6e5",
+    "scripts/combat/resolute_technique_rules.gd": "0631c5247fc062f9e6c1cccbbf6f4ca56532963087a3b79a20c3b133d700e093",
+    "scripts/combat/resource_support_rules.gd": "6b01ff6c2a9704a8a9519cd8ad35f83f6f70471988eadcb091d99764a1e18413",
+    "scripts/combat/shock_rules.gd": "15d4d44793995c1e5f98a0ece88c7d32bee7e694e411a0f8b768057e1cdb23df",
+    "scripts/combat/shock_runtime.gd": "0f7c3b8d0b1993643d1dbc489bdbde106c995faef56680bbbaaec19707a4ecf4",
+    "scripts/combat/shock_support_rules.gd": "65bc199e49adc8a1a7d7fec01e38b9070887be3a977dbe738d3a28c2aebd10df",
+    "scripts/combat/skill_compiler.gd": "df6aef2d2fb0254727fe6f325c83b578eaa4fe99e896c69cc19cc5b90cbbf4d7",
+    "scripts/combat/skill_cooldown_ledger.gd": "e9bc7568d7f5b13c10e75ca3e2843c165a7a48668023f98cac9243788fd8473e",
+    "scripts/combat/source_resource_rules.gd": "cc84a561c34a3894f3599c39379d72bf4917e29fc2973f984a8aa63dc9dd03dc",
+    "scripts/combat/source_spatial_rules.gd": "3aec2921d0ee3025fac7e6edb010c6df03f1e027718e15716a77f3c43877c9cc",
+    "scripts/combat/spatial_target_index.gd": "7f1b14e9f340b0740b6c19288f015a572eea6edf20f73693179e8565ccda8ef4",
+    "scripts/combat/support_catalog.gd": "3bd43dfd250397fc4058fffd4f69402312417cfa9491f06175cb0568909894d3",
+    "scripts/combat/support_program.gd": "437a6ab0082ae80e916f1bb57c4e71fe4c3f5d0a147db5e7a97f86615712e0dd",
+    "scripts/combat/support_registry.gd": "6e0953837610025194fa3393486835085563fe5af4190c84fd94028078cbb198",
+    "scripts/combat/telegraphed_area_runtime.gd": "122fa910e1bc326c5a4afc756c8662c180e5347c36f8782d4877155c71c72093",
+    "scripts/encounters/encounter_admission.gd": "a88a587b40c6942ee5fe8a84ca3c56e97514d237dce4bb39f2c1fe628b35b849",
+    "scripts/encounters/encounter_catalog.gd": "47b79db49886188f536bf7509adcbf143d8d424df48a841efc4b8a895d8dcb20",
+    "scripts/encounters/encounter_compiler.gd": "f2487c405291aac0a7c8f44153b3b3d6d3f6d83d5801f7e41f41d62b4e62d11b",
+    "scripts/game_data.gd": "1ca97c45c243d6144e2a79d6d93762203c8bb76122adb0175a2ec80b2d77216b",
+    "scripts/game_hud.gd": "84388f66f3449ddb384820e815537043c6e2449292e9e31ea928f7e8d8542213",
+    "scripts/inventory_panel.gd": "51a5475f52dc91c5d29027d8b664c5a00a09da8ceae67d427b8d3a414292ac02",
+    "scripts/item_grid_view.gd": "37b6656f6a68e7f60b5c99ff294c725719b440c4c5c4979cd1e47966a7132561",
+    "scripts/items/build_affix_profile.gd": "325c970baa227ad7ad1a1f815c63a60825d087918310cfb12b7435a655d4b7be",
+    "scripts/items/crafting_expansion_rules.gd": "b690c538a2274b2451f2caa195d30ce0f670284a6b718959c677f0ed30ad2eff",
+    "scripts/items/crafting_rules.gd": "553ac091068d50cbb2fcf0f74e779dd0078ec00abcbc7c5c76e5bc8128576249",
+    "scripts/items/crafting_transaction_planner.gd": "fdf425b8154c7847666a3a0c64874c040d9d750e4666d65bde14ecbe4ef8294f",
+    "scripts/items/currency_catalog.gd": "0be41da90e8bb8551f10a10371b95712c2f8a88551574a68c2fcac39c7972b74",
+    "scripts/items/defense_rating_affix_profile.gd": "bd2782e04a18ab1fde0c40ee852fa14b0848f6e6d177356764d53b2e0171f215",
+    "scripts/items/elemental_defense_affix_profile.gd": "0e7eb38fddff3eea5a488a31aaef90bf77b9c8259bc38eaee090ac92f1eec113",
+    "scripts/items/equipment_catalog.gd": "9391d4c70e9ccb800336b29c3156312d3a5e0e225da20e87517cbe26631508a4",
+    "scripts/items/equipment_slots.gd": "9605098a16073537f771cfd1e71e36d201f582928900d192e164dc26f93ca497",
+    "scripts/items/flask_catalog.gd": "5895bb0bdcb6765cbbb733e3ca5713fc8d541508745009845f892e44e3ad0fe5",
+    "scripts/items/forgeblade_profile.gd": "9e6c595b23acdbb7edcc88c71fc14eb6e07379ce04436ffe07ea0f5e4693fe14",
+    "scripts/items/gem_catalog.gd": "abaf69de2ee7bdeee44bfc47025dfba1bd846f6a6bd1359ec57154e7e854f906",
+    "scripts/items/gem_trade_rules.gd": "f4a57e88dae94a8493977a3e50e7bfc4a35e39579a71776c4282a60c4cf18616",
+    "scripts/items/glove_ring_affix_profile.gd": "be84a134158ccdd766e01b6f78c5e7bfe19f8483aeb3f3523c73ff671fdd3166",
+    "scripts/items/item_location_rules.gd": "7b215b19093b693216f47a1b0f2c35b3a1aced96acab8a27a3eb5f2a7e8a867a",
+    "scripts/items/item_transfer_plan.gd": "e19bacba06c9c3fa175e60694d9eafc1a2381db15747c4e1bf5e8fe67edad760",
+    "scripts/items/nine_slot_equipment_profile.gd": "4138bfd9c5229f40566a7ebde21c5552e3fce26c5ce0e306b2a66688fb5a2801",
+    "scripts/items/paged_bag_layout.gd": "7df7297acabc4957120a91383e7145e627df18eebd095d9f50d1f738ad5f215e",
+    "scripts/items/targeted_reforge_rules.gd": "c0aab3ecf3bc7f006ac8d10865e373c402a1abda21f1a52fdc3166f572f1c7ad",
+    "scripts/items/unified_item_catalog.gd": "ae499e3e68f30269fa2359d2a21a4d7226a2d4d984b41fa38f48f69f226d5fbc",
+    "scripts/items/weapon_local_rules.gd": "73e4308828e856a741ef00386d33150a008bdb3f07ef31a031a204d71fe93b8d",
+    "scripts/jewel_data.gd": "60122964b76b93fc529cdfe314d0f54cd507c7e3f19a66b89a609fb9018acc93",
+    "scripts/main.gd": "115c5d777146b77cc54b533251f333eb8071a665ab35cdc93a2aae1eea06c0fc",
+    "scripts/mechanics/defense_rules.gd": "a211d7714f8b23cd382dbe5093328104ee95c8022b99813329aa2f8534c45361",
+    "scripts/mechanics/iron_reflexes_rules.gd": "0db661a4ba5122a153d933976f6c9f16ee8454a08fb5758769f66ea9c6168545",
+    "scripts/mechanics/mechanic_registry.gd": "506d248d7edf0888c320c1e6f16d81da1bb4f942122d10427d755a667d8b0cc1",
+    "scripts/mechanics/passive_balance_adapter.gd": "4b860a7aa2318a2a41de0018a5ff528ebfb0e6cd808a1168c75a857a95a7e496",
+    "scripts/mechanics/source_monster_grants.gd": "d38e3150aefc38a8e2315aab2c82c0bdfd424adbb8d79fdcaf3e366942ed178d",
+    "scripts/mechanics/zealots_oath_rules.gd": "955beb07e3875b83ffead95106699f469013aa6ae7528d478da3898f6e728189",
+    "scripts/monsters/map_boss_profiles.gd": "3c20c96c264295ef9ef56bd4300477aa7219801bec7c63b562c19f3b268bbaa7",
+    "scripts/monsters/monster_catalog.gd": "ea0f1f775827e2607fc38f11284df71c52a0998cf6fe64f5fe77fb25f34ed8d7",
+    "scripts/monsters/monster_runtime.gd": "6280cbf52cdf373af0fe8d564b77b2ad1f1e934b207d37988f69bbdd404751a3",
+    "scripts/monsters/source_shield_budget.gd": "849c22298f70bf94cd43242a115719391d0d5bd9482e8a89001dac120a07aa88",
+    "scripts/monsters/telegraph_profiles.gd": "fb258eb68317a3b3e2b39e93f64af0797413a3cb99a889ebac2de495f00a2c33",
+    "scripts/passive_data.gd": "0181b25f45dddab5f106c5342f8a68a70820126beb59576be34b42f48a77857d",
+    "scripts/passive_panel.gd": "8a6e1ee97c9ba205261488303775e2154ab85163dfdc46f75b7c808cd1a0f6f1",
+    "scripts/passive_tree_view.gd": "bc68b06c8b5a7db80a2a1c2a6661dace2e6e0c85099351d26b543899694c7afa",
+    "scripts/passives/allocation_rules.gd": "3c2c1c6d3625393726c6562c515124c12c1facfe9680ef37f2a48d2b95a9f0da",
+    "scripts/passives/source_stat_patterns.gd": "ca28724f9a628a46368ef39b37f0cace52184861a87aa7f664228b443e87a636",
+    "scripts/passives/source_tree_allocation_rules.gd": "631792b2ecf06481c6cc43165cd9f97688d578f6cd5cf394905b0c9beb814ef3",
+    "scripts/passives/source_tree_data.gd": "d8863d372b77b043974afa5398f0cd3a22965e6caf2af51205163ad10dff024b",
+    "scripts/passives/source_tree_localization.gd": "b2037b0ffd771d64e3c5d39e5c253153724852d269fe4d71b3356a1dfdd867a8",
+    "scripts/passives/source_tree_runtime.gd": "635c6424e28ae1681ef8192bd9a40002e2a8a2aa383ba0606d71e3c0f3d9a9a9",
+    "scripts/save/active_skill_migration.gd": "b47562ffd79f0240673d50876212fe766615e7752f8435e3dd73b79ddba95492",
+    "scripts/save/ambush_gem_migration.gd": "4c55c6c1e7da7263fd6db0f9d2357510d52c81e2f83e8c2a913a5ff1fc5f4692",
+    "scripts/save/canonical_build_migration.gd": "1c2878c7ecf8ad6fa879332f849e58586056f70ce8a11efe4ceb1d79cbcf0058",
+    "scripts/save/canonical_build_rules.gd": "e5fb7dd04f50b55ed5620414810821bc4d58bbd328577ea01d091f1f9a87c99f",
+    "scripts/save/canonical_build_store.gd": "cb63ea3a75bc5be2f6d8a7b6dec0b4ac6fa9bceb91a555db3d13c47eaf0e60b2",
+    "scripts/save/cold_ailment_duration_migration.gd": "eb2fc90a975c8447b1540096801d7e6414be3c92d6b2538fed1c100d57ef346d",
+    "scripts/save/currency_item_migration.gd": "4f7c31f07ec7e12faa503ffc773b7177d70d11769a45bf8a05a3bdb13e0ffcb5",
+    "scripts/save/defense_rating_affix_migration.gd": "74f82f234133a5625f3f86622d9e2307d017bd578faac1c5e2da43e84a3f3a46",
+    "scripts/save/elemental_conversion_migration.gd": "77190375f6aef7bd41d9533ccbaa52c0cb72f4fca71d8ad1a2f9b9d4ad9374e5",
+    "scripts/save/elemental_defense_affix_migration.gd": "88133344470820488311d799926cdfdcbc440cd702cc12d1a18f7666a8c51156",
+    "scripts/save/elemental_resistance_cap_migration.gd": "3be242eb5cf1efad3f6cb5d8115bffd2ca45cbd7e6b7da3753a65f495d80f84c",
+    "scripts/save/ember_gem_migration.gd": "c68d558d0b24a61571bc17a142692a8124bdd225239624739f787ec78deed373",
+    "scripts/save/equipment_affix_migration.gd": "d655c9c455de2b690c5a100028d456c41593165579eb527de92225158b20d426",
+    "scripts/save/faster_burn_migration.gd": "16242c0a8d10848ce6fe7c51314fed829fc80af2ca5034dc79dd559697bd3cfb",
+    "scripts/save/fire_dot_migration.gd": "86fd4711901ad99bf11c7d8c8e564ae1f37c522c21b8a009fbb91f9fbb80b647",
+    "scripts/save/flask_item_migration.gd": "ef8fb7108ccd9f2d22728b0e209fd5a1b30f62b06427693b3742bf871a1f61db",
+    "scripts/save/forgeblade_migration.gd": "d78eea2028b49f5fe3a4abb88c7ef61096ecc3b01c5fde1f183d161e52239de8",
+    "scripts/save/fourth_map_migration.gd": "039464ef54d86c302e35d608dc6394ea457a6228bab56d59be98954d166b2a45",
+    "scripts/save/frost_lock_gem_migration.gd": "4cba94a664c47a05de45a10b9a3710ca77c971fb1d8c8a8d2e5af269ffe69f17",
+    "scripts/save/glove_ring_affix_migration.gd": "51bfe0b3a918552c91fab94ca92bebe3f6115a9966dbd2a91993fdcac10815db",
+    "scripts/save/ignite_gem_migration.gd": "dfe892f797b9b964e7493f2957c97e6a59be6431d285e099d0ccee4538dd093c",
+    "scripts/save/inward_pull_gem_migration.gd": "5a634c84b0f4820eecf9f22a21ffdc6edd910d96f15ddf4ae2dacf2f3bd539d0",
+    "scripts/save/iron_reflexes_migration.gd": "e57ea3cc48b25af3e8781bc8c2cef7c2e72c277766c5330907effc882fdc4c99",
+    "scripts/save/mana_guard_migration.gd": "d6f1bc71ab1900989ea775150a10cdbcc2e86cace10c8ef06d120b3d8375241f",
+    "scripts/save/normal_journey_migration.gd": "24575eddd16c77833ea01deadad32794dfc41cf137f378f1da64164e2803229c",
+    "scripts/save/paged_bag_migration.gd": "051afead9dd6e9c1428fb61fc07584ef9564764dacd555ca43e3300c21c1aea6",
+    "scripts/save/physical_fire_conversion_migration.gd": "3dfbf6cf9fa5776e1f74f984e8946a994aeb75c3f88e7dc1de3353c7ee75e6f8",
+    "scripts/save/precise_technique_migration.gd": "a948589ae6108e622908721be3292e9ee1901d7efbf022c998f5caca7d18a13c",
+    "scripts/save/reserved_hotkey_migration.gd": "919f4a3b44a69c2950f4c3f5fa65ffc2d59ed06166ae4a22e8dee5f4b7b0e10b",
+    "scripts/save/resolute_technique_migration.gd": "ced4e5adda9f14ce052a1ce07a4723fc2487c922a9ec12d89b3463d99f8a9ff5",
+    "scripts/save/shock_gem_migration.gd": "94d07363b86416171b9ad8a4a0bfefdd9b3f3e61bb60654cc135d59047c85968",
+    "scripts/save/source_critical_migration.gd": "a5f0ab3f0028490050dbe0a5dffbe7bee313eda4ab1b5e504be639251b280d6f",
+    "scripts/save/source_flask_migration.gd": "d430c047d6f2d7b9388f6fb5de69d43aff07172dc5eb76e12122b8eb7f01aaf4",
+    "scripts/save/source_leech_migration.gd": "e562f62f6bec0a62b93a156ac73fe634c7c82f250ab450467aaca1ab9adeba9c",
+    "scripts/save/source_recharge_migration.gd": "552808d6087ef405943b3ff04d9795972aa8c84f70a97da3c6d4af54d011bb0a",
+    "scripts/save/source_resource_migration.gd": "7178122e08f7e887731e6369a0117d578216ba4af3331ee0726f7f14c317d4ca",
+    "scripts/save/source_spatial_migration.gd": "63e0c3b00e87b24f7deb575a74dedd9c021b90a4a60990f0076be942b34f6548",
+    "scripts/save/third_map_migration.gd": "0554e8bfa7196dd07ab336517e95469153ac915537c75b88b51be24775b93832",
+    "scripts/save/zealots_oath_migration.gd": "e356f095b4f3f19b233e20d53c805f3ca3f1f39cf39f3f447786cc8ceb94b1e5",
+    "scripts/skill_support_panel.gd": "3a5a9342eb877cd45db317af9c7ee6b18c8c24c4855a53e76e94a3261fa98cf1",
+    "scripts/town/town_catalog.gd": "235225d644ea65dd02ff75a398440cde198689bca0127b0c61cd3f4927fe63c0",
+    "scripts/ui/canonical_character_panel.gd": "444d180a2e71dd2fc8887c4f54f1d27213575fd728fa889b93b93d4998f233fc",
+    "scripts/ui/canonical_inventory_panel.gd": "7b8a987960647dffbea988cc0382ea53120e4981f5e71772ca7f49808486d734",
+    "scripts/ui/canonical_passive_panel.gd": "7feb6fd5d6b40cf5d8aed54e4465630c6ba0f3cc37ffb432e15e7d65ce8bd054",
+    "scripts/ui/canonical_skill_panel.gd": "a575f577f2206e8c0acd3c1de2ff08787118045cdcaa2b7c9acf3ad6c3128327",
+    "scripts/ui/crafting_controls.gd": "328cf47c2ee6770c94ff0c03b7bfc2c0cef39575b2c1f0ad29206f4e1343ca86",
+    "scripts/ui/dock_visual_style.gd": "c1e85d52a89807bb1f2c8cc2cdfcf0fc883323bc51817c2213d8ca0f7b3e8c79",
+    "scripts/ui/docked_menu_state.gd": "9e250bff9e8a5831299716b3f02c047385bbebd0e5220cdc4a0591acdb54a85a",
+    "scripts/ui/encounter_controls.gd": "a9bbb9c0a4399c150c3bd0711953d4ce8e7b00b5f334e59602d705ceeb126338",
+    "scripts/ui/flask_slot.gd": "8357bf8646f9fbd141164d91d8298d8dccca883f01e7e7303d2c498a6fc8a1f7",
+    "scripts/ui/gem_icon.gd": "d2c04a867292424d87fa5e24c8547848ccd4482340809c41391c6e882b855f48",
+    "scripts/ui/item_hover_card.gd": "75769615bd59d86a358c4b689909cd2ae13a395653da3e7edcae3988fa95df81",
+    "scripts/ui/item_rarity_style.gd": "91f621ae90506cb8782138fd53f08302c958db6f9f543b4ac4a4e367304fcf44",
+    "scripts/ui/menu_route_state.gd": "ac436fb6810705df8531c55c484f483817d49e918edaae417ae0c07b3f19b623",
+    "scripts/ui/skill_group_rows.gd": "704039dbfc409c58d44cac0c8e0d5514f7722ed091c3bafab8b63588d925a0c2",
+    "scripts/ui/source_passive_tree_view.gd": "7e393571017e6d247dd4578f44ab39bae36e370c19ebeb370e37c87ecc701e84",
+    "scripts/ui/town_service_panel.gd": "1abb70807f88b6ea1b3a90edb7792014fbdfcd6481986c900a0cb630a76dcfa6",
+    "scripts/ui/town_square_view.gd": "97941b8089f6813c593c03cc5be81d8d14b4736d6db4be4e40af7b4b2008e461",
+    "scripts/ui/unified_bag_grid.gd": "bf4d3b393c486c11251edeec904cdd3f60c9446077f479d952ff84c42e12cc4c",
+    "scripts/ui/unified_item_presentation.gd": "5235d67105581b44a2d112d6a6ad8f9c655305fd7c1b92f2805e424a2e2d95c8",
+    "scripts/visuals/ambush_trap_renderer.gd": "a76d895aa4e8cba95d863e42464077d71e5665c76c3e81f429b413d7a7a2525c",
+    "scripts/visuals/arena_visuals.gd": "9429ba9b70639b07634528552bc8237bcd4b25527318c093b2c9883aaed69898",
+    "scripts/visuals/burn_status_renderer.gd": "325f9d1c19977e1e47518ed97c96bf3efbcba6c7d5d36760215178ef467d7a9d",
+    "scripts/visuals/chill_status_renderer.gd": "4787efd117e871dc065159236dbcc6b299e450769c9313b2c9ee2483205bac3e",
+    "scripts/visuals/combat_cue_renderer.gd": "642cc3732d6448103ecce9a4440f1cc84d2cb479769c70835020586a63fc534e",
+    "scripts/visuals/combat_cues.gd": "e793f12a2c4680f2105350605bba4f97fc22f53209613ea7743f172fdb21d19b",
+    "scripts/visuals/combat_feedback_renderer.gd": "95d5e545075d478791d35e6e44fbff670b8c4f177c6fe4bb5442efee4a234404",
+    "scripts/visuals/equipment_art.gd": "9688436adde48c6576ab6b66f79cc68a477fb5b536b87034182a0c9f2558b3ba",
+    "scripts/visuals/equipment_painterly_art.gd": "86ad4a399323fc325abdd34c77e59ef7c6cc9565ae1d769a7e47402b27148fba",
+    "scripts/visuals/fantasy_actors.gd": "6d1948000018b03af847f4d297b32acb83c3f8e5397f87b960b384f45882bf6a",
+    "scripts/visuals/fantasy_environment.gd": "d603b7307f81911804f626a748495a91ba4f25150bb164538784dec7a376fa16",
+    "scripts/visuals/fantasy_palette.gd": "a088fd528408a731cb4b0bba2ac56029e95e3ad7096514817295ecdc4f6181b5",
+    "scripts/visuals/foreground_arena_layer.gd": "492221e5f9e9e2a67b70c72dc62b8ac8431873fb184adb9a903cb8da0dbb5a08",
+    "scripts/visuals/freeze_status_renderer.gd": "d923e07821284931fcef684a9238b2af527ee2b5092fb46722f08d5ccf3069d5",
+    "scripts/visuals/jewel_emblem.gd": "980e16d4b752a7f869fbc93cf0bdce46552d1344358375165bddde0e9edb413a",
+    "scripts/visuals/map_camp_signs.gd": "a45adb0e55f0d818b88adb86ff6ee0e1f9f6bbe3dc52e51b5a3a6b21653cfdb5",
+    "scripts/visuals/material_frame.gd": "d2b9e536cedbe27c992ad0bc19061e94e242cd41326faa6d65aa058c25440c67",
+    "scripts/visuals/retained_actor_layer.gd": "959d0f102e8ae255cb8ca2420c11e6c2b114f1f3d476fcb433e12cd0e455bb20",
+    "scripts/visuals/shock_status_renderer.gd": "1815536923b4f4586a81ac13587f5e37d2a5ab5efd79fd0a2beb2b486a60274f",
+    "scripts/visuals/skill_emblem.gd": "25cd2841d879622f7a2d59cfd840d111e3ed7b31e432f07b126f34c15f08fa62",
+    "scripts/visuals/static_arena_layer.gd": "738e0595eb26f5305ecff687a3c6b95aed7345239eb5a1755a331067d2d4ccb6",
+    "scripts/visuals/telegraph_renderer.gd": "cc7db745df6e075fdffdf151d63ebc31111bdf10c073aea0e765fc33941fc56c",
+    "scripts/visuals/visual_settings.gd": "a06225057e169dd8ca7426f63345375f633fbb3317fbf167b220982d803c527a",
+    "scripts/visuals/visual_theme.gd": "5d93724c4876a49bfa80c2b5af1553e370c0a2571654d773c84339731c7b4792",
+    "scripts/visuals/world_markers.gd": "ce925752cb67b3a9e19fcf431730039eb908b12a1f256701707d875d45c3ea75",
+    "scripts/visuals/world_view.gd": "eb715eb2ab912fa2e20e5d676161098539ad01fd6b4d84aa578b0a4084d5ebf2",
+    "scripts/world/exploration_map_layout.gd": "ffc8b3aab2338d808906220793f8184021238c19580f40adc74034cc5752575b",
+    "scripts/world/exploration_map_plan.gd": "3509c9f1475025d097786291342a88f24db96b728bd5af30ae1ec3b948ca2689",
+    "scripts/world/ginkgo_roster_rules.gd": "4b7e1804a1407051f1a00392d0255aacfd7f8a6fe6a80cf9add72ba9702de5b0",
+    "scripts/world/map_admission.gd": "39c4d7dc34993587a081759f423192c1db2b6e8267c91854ef729f36ae4368c2",
+    "scripts/world/map_camp_admission.gd": "d4902ad9a65ee77187b63c664ad34af5eeaaa2e9055d09e07b76e83798fd0625",
+    "scripts/world/map_camp_layout.gd": "b210d19d777b9e29ff1b67d70edc18f480ad44fc5668b0cfa45c527b672f5016",
+    "scripts/world/map_camp_state.gd": "5d45c963e0403bb74f21cea1191a358119c6ea3bd9c5846f55aa9495660adf8a",
+    "scripts/world/map_catalog.gd": "57c42b8dddaa4b7a37a2040a4605e39f7d5c6a46f67db0ff22bdbdfd5102ef18",
+    "scripts/world/map_compiler.gd": "c800ccaf90a9807cc753fc694c19c614e52fff8226fdcaa27f0f5fdc2fcb5851",
+    "scripts/world/map_defense_rules.gd": "add71a7859890a0ae1b4060acc3559156a9361a35f5f96fdc66e9df2b42e287b",
+    "scripts/world/map_geometry.gd": "4f76d248111f31568b49548f624503e3ffccd51f7f1f7be86ee240e2f392d461",
+    "scripts/world/map_run_state.gd": "7e71db299865764749160113b3030e416cab264893cefcb3fb75789e9a06a21d",
+    "scripts/world/mist_skitter_roster_rules.gd": "d3a4174e83f08bd664cd007583129aef28c306b5870b9de59ddb7a9611673be7",
+    "scripts/world/normal_journey_state.gd": "4e6a776c3ee1ec188f8c782d9aca23b1fb884c37a337544ae333d6988046ed6a",
+    "scripts/world/normal_map_catalog.gd": "60b8883d7e0d86d8691962bad50cfea8476d40d313354222ef23f6d369ed10b4",
+    "scripts/world/sunwell_roster_rules.gd": "8cc8b064b938e41b0ea61b786a60afedaa5640846d061897864f56433abef3eb"
+  },
+  "protected_reference": {
+    "docs/reference/.gdignore": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mtime_ns": 1791349248364004680
+    },
+    "docs/reference/BUILD.md": {
+      "sha256": "b56f8164ccf1001e76f3b0026276e7c08629ec9bf29a3c098ee8c78637c84a95",
+      "mtime_ns": 1791349248368148387
+    },
+    "docs/reference/art/equipment/ashwood_bow.png": {
+      "sha256": "4514a87cbb7bbaf00db65bb5c1f0f4253e0805cf21a9ad077d8df506b40d61a5",
+      "mtime_ns": 1791349248368645942
+    },
+    "docs/reference/art/equipment/azure_charm.png": {
+      "sha256": "988f5fa14b7226af12ba221d26c6106c101a7ab4b72466ef78e8e2d00c0aec2f",
+      "mtime_ns": 1791349248368767774
+    },
+    "docs/reference/art/equipment/cinder_reed.png": {
+      "sha256": "29054db37ea1073aa9b0a5c0df9484c7e22c94e10f88696c5337d21c475cf33a",
+      "mtime_ns": 1791349248368767774
+    },
+    "docs/reference/art/equipment/detonation_charm.png": {
+      "sha256": "db7e2916dfec0a858bfcc1b475c5c1513c17dbf16d87171df6245be6af863850",
+      "mtime_ns": 1791349248368767774
+    },
+    "docs/reference/art/equipment/ember_wand.png": {
+      "sha256": "7c9831c2b56f0d8ab59ddcfbb89aa4c8a21c6872af45f1fd7c5295763bf32457",
+      "mtime_ns": 1791349248368767774
+    },
+    "docs/reference/art/equipment/emberhide_vest.png": {
+      "sha256": "a61d79a066dcefbc48724c4799eb7587c3074a08c586fe7e5d0acedf994fc140",
+      "mtime_ns": 1791349248368767774
+    },
+    "docs/reference/art/equipment/gale_spindle.png": {
+      "sha256": "f1053366890f84955cfac5f7c7d1b9c96d9e8865df55b79e6f8de17342327b1a",
+      "mtime_ns": 1791349248368767774
+    },
+    "docs/reference/art/equipment/guardian_robe.png": {
+      "sha256": "e0f41a620825c4bc50177bbf6784002c528162233e8c605d6abaf75231204631",
+      "mtime_ns": 1791349248368767774
+    },
+    "docs/reference/art/equipment/nine_slot_etched_ring.png": {
+      "sha256": "e9edc5ee67c65295108a865818e21029f06d772e5dfd500c160f7d0d6f9c130f",
+      "mtime_ns": 1791349248368767774
+    },
+    "docs/reference/art/equipment/nine_slot_folded_belt.png": {
+      "sha256": "3f597158d759eaac2a49e1c9c293ed90f899330aa29c376f1bd25134f276c001",
+      "mtime_ns": 1791349248368767774
+    },
+    "docs/reference/art/equipment/nine_slot_slate_helmet.png": {
+      "sha256": "c4ecb1f1a4486d390e019b00bad452b1d8f16a67664d241521ba3ef1ff7abab6",
+      "mtime_ns": 1791349248368767774
+    },
+    "docs/reference/art/equipment/nine_slot_threaded_gloves.png": {
+      "sha256": "ee3e62f4cb21738ea5cfc5f736e8ef9f3851c719b746cb4cd3f40eb40c054a0b",
+      "mtime_ns": 1791349248368767774
+    },
+    "docs/reference/art/equipment/nine_slot_trail_boots.png": {
+      "sha256": "75932149205a633fe537cde6c3aebc841673435fb8dae395b62431bcc8bc0370",
+      "mtime_ns": 1791349248368767774
+    },
+    "docs/reference/art/equipment/prism_bow.png": {
+      "sha256": "d49a5e61186eb6d86d3f65724c64e3cf67be49f9541a54f6da312977483fa438",
+      "mtime_ns": 1791349248368767774
+    },
+    "docs/reference/art/equipment/pulse_seed.png": {
+      "sha256": "6ede221a5d80e2e000eb47cc6eed235ce136e85fca20d1e193d15a00289e0973",
+      "mtime_ns": 1791349248368767774
+    },
+    "docs/reference/art/equipment/return_mantle.png": {
+      "sha256": "0e4827a07e156818c6c035633868b0bb9bd2deba7f899bbf317cd3bc006077ee",
+      "mtime_ns": 1791349248368767774
+    },
+    "docs/reference/art/equipment/runewood_focus.png": {
+      "sha256": "e70c1be722825f874269463b8476620d449fd2d830d65252e1b35a83a72521a4",
+      "mtime_ns": 1791349248368767774
+    },
+    "docs/reference/art/equipment/storm_charm.png": {
+      "sha256": "efc0aad04a3f86ee2355175a74ea9e5c9e438ec49ae2f44b89cb3d88773c8b9b",
+      "mtime_ns": 1791349248368767774
+    },
+    "docs/reference/art/equipment/swift_blade.png": {
+      "sha256": "f0687e1d05616fef33b062295312823d48392e8ce3d42cc5cb071b67ac8744d7",
+      "mtime_ns": 1791349248368767774
+    },
+    "docs/reference/art/equipment/tidebound_coat.png": {
+      "sha256": "7fea59d9afcdfd89808d558a9746f06903e17b404252bbdece800bdf1ab85db1",
+      "mtime_ns": 1791349248368767774
+    },
+    "docs/reference/art/equipment/vitality_armor.png": {
+      "sha256": "4b919805e9ead651db6030b922cbe8c17093f9178fce3e1acfde6b5ee55218a4",
+      "mtime_ns": 1791349248368767774
+    },
+    "docs/reference/art/equipment/wayglass_token.png": {
+      "sha256": "af3333d9b3c09d0018b1adc028db76d619fa6d17f133c07c1294404cadb7660b",
+      "mtime_ns": 1791349248368767774
+    },
+    "docs/reference/art/equipment/woven_bastion.png": {
+      "sha256": "eb69a746c2f65ba33d13f5bfb29b37244ae1377807a005c90243fa9ccdff168b",
+      "mtime_ns": 1791349248368767774
+    },
+    "docs/reference/art/flasks/life.png": {
+      "sha256": "549ca4ae17e8841bb130ec5ad8075b28c86cf165484a3e907c654ebddf69d4ed",
+      "mtime_ns": 1791349248368767774
+    },
+    "docs/reference/art/flasks/mana.png": {
+      "sha256": "84a4b5fd0de12a49aac07578b02c8c366428c44a4ff9200326f88892b7bf3c44",
+      "mtime_ns": 1791349248371863262
+    },
+    "docs/reference/art/jewels/branchfinder.png": {
+      "sha256": "bca8a787b4a1100972b6f8d1086834c51f146d82fb6c4a249301f9bb73e5f83b",
+      "mtime_ns": 1791349248371863262
+    },
+    "docs/reference/art/jewels/emberheart.png": {
+      "sha256": "984ca007725c5fb1fed26d9a4030f4a6844afda4171def0040349f66fa51868f",
+      "mtime_ns": 1791349248372144751
+    },
+    "docs/reference/art/jewels/tideglass.png": {
+      "sha256": "180f163ed6832ad9eb13d87cc3f6dfc1860e73cc11e14e844881c918096c0465",
+      "mtime_ns": 1791349248372144751
+    },
+    "docs/reference/art/jewels/windweave.png": {
+      "sha256": "a77c1e87ae032d342434c5138264323a90763105aacb6eafb37c2be5754828bb",
+      "mtime_ns": 1791349248372144751
+    },
+    "docs/reference/art/manifest.json": {
+      "sha256": "f2008c3c86505df53031757edff134f00a9136dc4b5f1fa18c9a9e16a9aad0d5",
+      "mtime_ns": 1791349248372144751
+    },
+    "docs/reference/art/monsters/brood_host.png": {
+      "sha256": "2f26086ea27f387ebdbb42710cca0199f329178079946a5f18f4faed80883b59",
+      "mtime_ns": 1791349248372144751
+    },
+    "docs/reference/art/monsters/brute.png": {
+      "sha256": "68c3913fe46da6c3747445bf2fd7ac46c51cb352c41cda71eeb98127ecdc3d74",
+      "mtime_ns": 1791349248373090667
+    },
+    "docs/reference/art/monsters/crawler.png": {
+      "sha256": "ac57de1da952535d74de0671197c491537c9c64002d4de7966bcfd1764fd3127",
+      "mtime_ns": 1791349248373090667
+    },
+    "docs/reference/art/monsters/ember_guard.png": {
+      "sha256": "4ffbf573f5b322f7e8774a75d095d03cb0a83003e675d380bf34676630e38a3a",
+      "mtime_ns": 1791349248373090667
+    },
+    "docs/reference/art/monsters/frost_guard.png": {
+      "sha256": "97ae258818be95535a1067f1b3239441048ee543c29fff739dd3924392453223",
+      "mtime_ns": 1791349248373090667
+    },
+    "docs/reference/art/monsters/rift_warden.png": {
+      "sha256": "51cf855ee9a452fb2d33b7cd2212e567e8eb1eadedb21137dda08744edd3ad65",
+      "mtime_ns": 1791349248373090667
+    },
+    "docs/reference/art/monsters/skitter.png": {
+      "sha256": "f5999dc46427f0bea9cebf74f2d5a80ae5615bed19ecb78e3ff3d8f978b504fe",
+      "mtime_ns": 1791349248373090667
+    },
+    "docs/reference/art/monsters/splitter.png": {
+      "sha256": "10b3e39bddb3af3df66e73bfdc13b7a14aa9c2582392f52bdbd34da7b800de34",
+      "mtime_ns": 1791349248373090667
+    },
+    "docs/reference/art/monsters/storm_skitter.png": {
+      "sha256": "1d33d9784d18e91e7f2ba248a85424550c96dab6d7f723a151c21cede5e9c93b",
+      "mtime_ns": 1791349248373090667
+    },
+    "docs/reference/art/skills/bolt.png": {
+      "sha256": "5a51d1cf9f90fe92b0ec4ca9125f959d8006ad73020744e02a676fbff761f377",
+      "mtime_ns": 1791349248373090667
+    },
+    "docs/reference/art/skills/chain.png": {
+      "sha256": "29c43db9a6e488c08fc12a5015b6e51574e72eae16bddd02b83819ccaf56ffec",
+      "mtime_ns": 1791349248374600044
+    },
+    "docs/reference/art/skills/cleave.png": {
+      "sha256": "b91060f3d51ed3c22f7ac5434a0a787418cd1789b6a38b6a64583497a1e3252e",
+      "mtime_ns": 1791349248374600044
+    },
+    "docs/reference/art/skills/dash.png": {
+      "sha256": "2a0c685f41391956d3788ebb1e61e4924dbc0dd9b2c3a54f9972936ded800ad9",
+      "mtime_ns": 1791349248374600044
+    },
+    "docs/reference/art/skills/frost.png": {
+      "sha256": "4b198b26acc9fed35d614dcd7901343b8ef5d784324b37c6a58828c5f9e9a1ef",
+      "mtime_ns": 1791349248374600044
+    },
+    "docs/reference/art/skills/meteor.png": {
+      "sha256": "81f3c56e66a23a58101139c7d5f83ba06fc4c66dc30d60adb3fe16c14fd358b8",
+      "mtime_ns": 1791349248374600044
+    },
+    "docs/reference/art/skills/nova.png": {
+      "sha256": "412a1d14c656042108f31bc75a516fc6b2880c80b3c422a4ef8a251e70e49ca3",
+      "mtime_ns": 1791349248374600044
+    },
+    "docs/reference/art/skills/shade_bolt.png": {
+      "sha256": "f1933b016e383b1f432979d7278a2b777c318326fdf4372035af7ed798e9c458",
+      "mtime_ns": 1791349248374600044
+    },
+    "docs/reference/art/skills/tornado.png": {
+      "sha256": "4a08cf612119ac172d222d613968370d2b42c28e6e7f3038d25ec799811aa406",
+      "mtime_ns": 1791349248374600044
+    },
+    "docs/reference/art/skills/ward.png": {
+      "sha256": "f38d3a771eaeae602d6642cf191cd44233317b3d9fe49630b17ff43a12487190",
+      "mtime_ns": 1791349248374600044
+    },
+    "docs/reference/art/supports/breadth.png": {
+      "sha256": "2b745adda3393785238f51617bfaa722164c9175e30d2aa6397a9148eb24633b",
+      "mtime_ns": 1791349248374600044
+    },
+    "docs/reference/art/supports/chain_extension.png": {
+      "sha256": "967bb0716631bceb8f4852e8a7a40c2fe1f54d1873bf86700237096813617c6b",
+      "mtime_ns": 1791349248376180949
+    },
+    "docs/reference/art/supports/chain_reach.png": {
+      "sha256": "c82d205f8520b3c56ab1b8d1e76f70bf423a8adb337e820bdbb479003ea0ffdf",
+      "mtime_ns": 1791349248376180949
+    },
+    "docs/reference/art/supports/cold_focus.png": {
+      "sha256": "e786bfcc4d7d68935b09145f218d1cacc24ed0f68c4f80e5d6da009425b111aa",
+      "mtime_ns": 1791349248376180949
+    },
+    "docs/reference/art/supports/concentrate.png": {
+      "sha256": "e91b4d482aa4bbee5a3808999f39147c46f7698201f9749fbfba34b42d452df4",
+      "mtime_ns": 1791349248376180949
+    },
+    "docs/reference/art/supports/efficiency.png": {
+      "sha256": "be646f29d9bf387d641bd9fba1eae6936b65c32620dd527b9ac54c4a800fe7b5",
+      "mtime_ns": 1791349248376180949
+    },
+    "docs/reference/art/supports/fire_focus.png": {
+      "sha256": "a6e305c9b3e6a41a4b05c3910cb11c3db2c0b562cd90eb5a536b9c99e1bb1cb3",
+      "mtime_ns": 1791349248376180949
+    },
+    "docs/reference/art/supports/focus.png": {
+      "sha256": "dd581c70b94a0fd919b7f6e5f6a722c4da74e32b5ff799623ba1ffe14c7f39e4",
+      "mtime_ns": 1791349248376180949
+    },
+    "docs/reference/art/supports/heavy_projectiles.png": {
+      "sha256": "eb04c2697c83c0e13ffb0323238cf6267058b197f88d55af8c3dafd400a9e8fc",
+      "mtime_ns": 1791349248376180949
+    },
+    "docs/reference/art/supports/lightning_focus.png": {
+      "sha256": "3231bffedafb00b29957b40bbe014ba21d8db2c16b02593e5c7ce86841f34b98",
+      "mtime_ns": 1791349248376180949
+    },
+    "docs/reference/art/supports/lingering_chill.png": {
+      "sha256": "96f7ea452ad1a58b516d53e4822361e8caf1bab7cf9177eb1812d4953b095f04",
+      "mtime_ns": 1791349248376180949
+    },
+    "docs/reference/art/supports/physical_focus.png": {
+      "sha256": "19d9a11d569f82f227d7f53aa4a116ea921ab40ecd3165ee5a44451369c454ef",
+      "mtime_ns": 1791349248376180949
+    },
+    "docs/reference/art/supports/pierce.png": {
+      "sha256": "02369af9ffd35c406f44d328c54fa3ea36ba596422e282778b04f40729e15d3a",
+      "mtime_ns": 1791349248376180949
+    },
+    "docs/reference/art/supports/quickcast.png": {
+      "sha256": "c58545704c32c26f3cb51c2de24efdaf3227151431a24d56f0b7a917b904dd65",
+      "mtime_ns": 1791349248376180949
+    },
+    "docs/reference/art/supports/swift_projectiles.png": {
+      "sha256": "832e967ef2a572c4bf0f44f98b500f22df9b5361b94b2ec23f8f35f1a5e39484",
+      "mtime_ns": 1791349248376180949
+    },
+    "docs/reference/art/supports/volley.png": {
+      "sha256": "38616cd69c06b8e5753c4b0fc681b00a95ee50dd4b9e9a1a705bef7822bcd5d7",
+      "mtime_ns": 1791349248376180949
+    },
+    "docs/reference/originals/ambush.png": {
+      "sha256": "41002fc3ed5977230d475e6a428a02f87bca46393eaf15601f9b60987c71ea00",
+      "mtime_ns": 1791349248543996465
+    },
+    "docs/reference/originals/ember_proliferation.png": {
+      "sha256": "ef4de82eaada6cbc74200bba9d1466aee441d25b46d40fc348ea544a6b76cc84",
+      "mtime_ns": 1791349248551996099
+    },
+    "docs/reference/originals/forgeblade.png": {
+      "sha256": "9b42c8c196e0fe2d6cf947cfc0648a7be8f5aa47a82582a0091d662a7fa44c73",
+      "mtime_ns": 1791349248555995917
+    },
+    "docs/reference/originals/frost_lock.png": {
+      "sha256": "dad5f51c2f10b2ca932ba0fe5a4f3ed608e94eea41c30e6392af964b4450e673",
+      "mtime_ns": 1791349248567995369
+    },
+    "docs/reference/originals/ignite.png": {
+      "sha256": "7be32c4ceb7e701d60362109a2336885f79cfdd77ca322eaf290c454d4a17fbf",
+      "mtime_ns": 1791349248575995004
+    },
+    "docs/reference/originals/inward_pull.png": {
+      "sha256": "386149d3ff0ecf93b2b70a7dda1af281c5e24a6bffb32f59352b00b239f47b8f",
+      "mtime_ns": 1791349248583994639
+    },
+    "docs/reference/originals/shock.png": {
+      "sha256": "40bd93320cc088e1eeb38413f63731af92ac7904b2866609d4c12f871ef9a662",
+      "mtime_ns": 1791349248587994456
+    },
+    "docs/reference/reference.css": {
+      "sha256": "effec6de6fa1aeb530bfaba4783bcecd13a232466d8384291f15214759e96ed3",
+      "mtime_ns": 1791349248591994274
+    },
+    "docs/reference/reference.js": {
+      "sha256": "98da0c764af965a5e975df9c674ee0fcd1278bcf4c301273d007235ff3e47c43",
+      "mtime_ns": 1791349248591994274
+    },
+    "docs/reference/source-tree-coverage.json": {
+      "sha256": "69c1a7463fb4de489a532ff507607d725e7ff3be29576765ba0445cc722de93d",
+      "mtime_ns": 1791349248631992448
+    }
+  }
+}

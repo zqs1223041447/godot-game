@@ -149,6 +149,7 @@ def exploration_map_body(data, map_id, link, facts, details):
     geometry = entry['geometry']
     marks = geometry['landmarks']
     plan = entry['plan_example']
+    route_distribution = exploration.get('route_distribution')
     bounds = geometry['bounds']
     ox, oy = bounds['position']
     width, height = bounds['size']
@@ -158,10 +159,16 @@ def exploration_map_body(data, map_id, link, facts, details):
         ('投入战斗', '距离不超过 ' + number(exploration['aggro_radius']) + ' 且有视线，或真实生命/护盾受损后唤醒；醒后持续追击'),
         ('远处怪物', '始终在场并参与真实命中；未醒时停留原位，路标只指路'),
         ('入口净距', '全部初始怪物离入口至少 ' + number(exploration['entry_clearance']) + '，避免刚入图即被默认自动索敌命中'),
-        ('顺序', '三个怪群可任意顺序，也可先挑战首领'),
+        ('顺序', '六处驻点可任意顺序，也可先挑战首领' if route_distribution else '三个怪群可任意顺序，也可先挑战首领'),
         ('完成', '全部普通根怪、首领、仍活着的后代与待出生后代队列均清空'),
         ('地图等级', '按入图配置固定；时间经过不会自动升波或追加普通刷怪'),
         ('主流程', '城镇选择地图 → 探索全清 → 返城领奖；竞技练习保留旧入侵玩法')])
+    if route_distribution:
+        body += facts([
+            ('驻点分布', '6处驻点，' + ('3怪与5怪各3处，共24个普通根怪' if entry['ordinary_target'] == 24 else '4怪与8怪各3处，共36个普通根怪')),
+            ('探索路线', '同源路线宽 ' + number(route_distribution['route_width']) + '，全宽经几何可走性验证；木牌仅指路，不触发出生'),
+            ('来源编排', '原3个来源组各拆为2处空间驻点；来源组只保留物种、稀有度与奖励编排，不表示3个可见怪群'),
+            ('驻点旗标', '未接战、交战中、已清理按真实成员和有限后代状态显示；仍有活后代或待出生队列时不会提前清理')])
     rows = []
     for tier in entry['tiers']:
         profile = tier['profile']
@@ -170,19 +177,24 @@ def exploration_map_body(data, map_id, link, facts, details):
     body += '<div class="table-scroll"><table><caption>原正式三档经济；地图等级为固定怪物强度</caption><thead><tr><th>地图阶级</th><th>地图等级</th><th>入场碎片</th><th>基础完成碎片</th><th>词缀最多加奖</th><th>可选特殊词缀</th></tr></thead><tbody>' + ''.join(rows) + '</tbody></table></div>'
     body += '<p>普通词缀每项 +1，最多两项；特殊词缀每项 +2，最多一项，仍按地图等级门槛开放。完成本图上一档解锁下一档；返城领取完成奖励，待领奖时不能再次入图。独立测试地图免费，固定地图等级 ' + str(entry['test_profile']['wave']) + '，不增加正式完成奖励。</p>'
     drawing = f'<rect x="{ox}" y="{oy}" width="{width}" height="{height}" fill="#e5dfc3"/>'
+    if route_distribution:
+        for index, segment in enumerate(marks['route_segments']):
+            x1, y1 = segment['from']; x2, y2 = segment['to']
+            drawing += f'<line data-exploration-route="{index}" x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#c0ae82" stroke-width="{segment["width"]}" stroke-linecap="round"/>'
     for index, wall in enumerate(geometry['walls']):
         x, y = wall['position']; w, h = wall['size']
         drawing += f'<rect data-exploration-wall="{index}" x="{x}" y="{y}" width="{w}" height="{h}" fill="#a9b994" stroke="#617655" stroke-width="8"/>'
     for record in plan['spawn_records']:
         x, y = record['position']; boss = record['source_group'] == 'boss'
         drawing += f'<circle data-exploration-spawn="{esc(record["spawn_key"])}" data-template="{esc(record["template_id"])}" cx="{x}" cy="{y}" r="{18 if boss else 11}" fill="{"#a04e36" if boss else "#476a4b"}"/>'
-    for camp in marks['camps']:
+    for camp in (marks['outposts'] if route_distribution else marks['camps']):
         x, y = camp['sign_position']
         drawing += f'<path data-exploration-sign="{esc(camp["id"])}" d="M{x} {y-20}v40M{x-20} {y-20}h40v22h-40z" stroke="#7c673a" stroke-width="6" fill="#dac897"/><text x="{x}" y="{y+64}" text-anchor="middle" fill="#493d29" font-size="42">{esc(camp["name"])}</text>'
     ex, ey = marks['entry']; bx, by = marks['boss']['center']; sx, sy = marks['boss']['sign_position']
     drawing += f'<circle data-exploration-entry="true" cx="{ex}" cy="{ey}" r="24" fill="#2b7480"/><text x="{ex+42}" y="{ey+14}" fill="#285e64" font-size="45">入口</text>'
     drawing += f'<text x="{bx}" y="{by-55}" text-anchor="middle" fill="#7d3f2e" font-size="45">首领</text><path data-exploration-sign="boss" d="M{sx} {sy-20}v40M{sx-20} {sy-20}h40v22h-40z" stroke="#7c673a" stroke-width="6" fill="#dac897"/>'
-    body += f'<figure><figcaption>{esc(entry["name"])} · 当前同源探索平面图</figcaption><svg data-exploration-layout="{esc(map_id)}" viewBox="{ox} {oy} {width} {height}" role="img" aria-label="当前探索地图的真实障碍、全部初始怪物、入口与路标">{drawing}</svg><figcaption>矩形为真实阻挡足印，绿点为普通根怪，红点为首领，蓝点为入口；木牌仅指路。点大小只为阅读，不表示碰撞半径或唤醒距离。坐标来自 ExplorationMapLayout、ExplorationMapPlan 与 WorldView，没有触发出生区域。</figcaption></figure>'
+    diagram_caption = '浅褐线按真实72宽绘制可走路线；六处驻点牌与首领牌只指路。本平面图展示初始分布，不是旗标状态截图。' if route_distribution else ''
+    body += f'<figure><figcaption>{esc(entry["name"])} · 当前同源探索平面图</figcaption><svg data-exploration-layout="{esc(map_id)}" viewBox="{ox} {oy} {width} {height}" role="img" aria-label="当前探索地图的真实障碍、全部初始怪物、入口与路标">{drawing}</svg><figcaption>{diagram_caption}矩形为真实阻挡足印，绿点为普通根怪，红点为首领，蓝点为入口；木牌仅指路。点大小只为阅读，不表示碰撞半径或唤醒距离。坐标来自 ExplorationMapLayout、ExplorationMapPlan 与 WorldView，没有触发出生区域。</figcaption></figure>'
     body += '<p>实体障碍阻挡移动、冲刺、击退、弹体与视线。贯穿及返回飞行仍会碰墙；范围命中、连锁与敌方预警沿用共享视线检查。相机跟随角色并限制在探索世界边界，HUD尺寸独立。入口和全部怪物在入图前整批验证，失败不扣入场费。</p>'
     boss = entry['boss_definition']; profile = boss['profile']
     body += '<h4>' + esc(boss['name']) + '</h4>' + facts([
@@ -195,24 +207,33 @@ def exploration_map_body(data, map_id, link, facts, details):
         ('伤害边界', '沿共享防御链；完整移出预警圆或以实体障碍阻断结算视线')])
     if 'pulse_count' in boss:
         body += '<p>各响共用起手锁点，间隔 ' + number(boss['pulse_interval']) + ' 秒；第一响结束后立即返回原圈仍可能被后续回响命中。</p>'
-    roster_rows = ''.join('<tr><td>' + esc(record['source_group']) + '</td><td>' + str(record['ordinal']) + '</td><td>' + link('monsters', record['template_id']) + '</td><td>' + ' / '.join(str(v) for v in record['position']) + '</td></tr>' for record in plan['spawn_records'])
-    body += details('同源初始实体示例 · 独立Plan，不是角色战斗录像', '<p>使用本图I档、空地图词缀和固定种子 ' + str(plan['seed']) + '，只调用已验证的脱离运行态Plan。无角色装备、奖励或存档写入；具体物种是此种子示例，不表示每次相同。全部生成记录包含稳定spawn_key、actor/root ID、来源组、序号、物种、位置、空encounter_id和standard奖励路线。</p><div class="table-scroll"><table><thead><tr><th>来源组</th><th>序号</th><th>物种</th><th>坐标 x / y</th></tr></thead><tbody>' + roster_rows + '</tbody></table></div>')
+    roster_rows = ''.join('<tr><td>' + esc(record['source_group']) + '</td>' + ('<td>' + esc(record['outpost_id'] or '首领') + '</td>' if route_distribution else '') + '<td>' + str(record['ordinal']) + '</td><td>' + link('monsters', record['template_id']) + '</td><td>' + ' / '.join(str(v) for v in record['position']) + '</td></tr>' for record in plan['spawn_records'])
+    roster_header = '<th>驻点</th>' if route_distribution else ''
+    body += details('同源初始实体示例 · 独立Plan，不是角色战斗录像', '<p>使用本图I档、空地图词缀和固定种子 ' + str(plan['seed']) + '，只调用已验证的脱离运行态Plan。无角色装备、奖励或存档写入；具体物种是此种子示例，不表示每次相同。全部生成记录包含稳定spawn_key、actor/root ID、来源组、序号、物种、位置、空encounter_id和standard奖励路线。</p><div class="table-scroll"><table><thead><tr><th>来源组</th>' + roster_header + '<th>序号</th><th>物种</th><th>坐标 x / y</th></tr></thead><tbody>' + roster_rows + '</tbody></table></div>')
     body += '<p>原合法根怪收益、首领奖励和有限死亡后代规则保留；后代不增加普通奖励。存档仍为schema ' + str(exploration['save_version']) + '，源政策 ' + str(exploration['source_policy']) + '，装备词汇 ' + str(exploration['equipment_vocabulary']) + '。原持久profile与历史地图描述保持，当前显示读取新的探索描述。</p>'
-    body += '<p>' + link('rules', 'exploration_maps', '探索运行态、未来机制边界与证据') + ' · <a href="../EXPLORATION_MAPS.zh-CN.md">探索地图合同</a> · <a href="../qa/v086-reference/README.md">有限导出与保全记录</a></p>'
+    reference_readme = 'v090-reference' if route_distribution else 'v086-reference'
+    body += '<p>' + link('rules', 'exploration_maps', '探索运行态、未来机制边界与证据') + ' · <a href="../EXPLORATION_MAPS.zh-CN.md">探索地图合同</a> · <a href="../qa/' + reference_readme + '/README.md">有限导出与保全记录</a></p>'
     return body
 
 
 def exploration_rule_body(data, facts):
     entry = data['exploration_maps']
+    route_distribution = entry.get('route_distribution')
     body = facts([
         ('已实现', '四张大地图、入图全体真实实体、感知/受伤唤醒、醒后追击、全清完成与跟随相机'),
         ('唯一当前配置', 'mechanism_config={}；非空配置在扣费前拒绝，optional_encounters=[]'),
         ('生成记录', 'spawn_key独立于actor ID游标且在本图内稳定；保留根/实体ID、来源组、序号、物种、位置、空encounter_id、standard奖励路线直到本图结束'),
         ('奖励边界', '当前只允许standard；未知路线拒绝，不回退普通奖励'),
         ('持续存档', 'schema50 / source49 / equipment46保持；不把临时探索或未来机制状态写入旧profile')])
+    if route_distribution:
+        body += facts([
+            ('当前空间分布', '每图6处驻点与1位首领；旧庭3/5怪各3处，其余地图4/8怪各3处，入图仍为25/37个根实体'),
+            ('同源路网', 'route_segments逐段提供端点与72真实路宽；全宽避开实体障碍和边界，原3个来源组仅保留编排'),
+            ('驻点身份与状态', '生成记录新增outpost_id，有限后代继承驻点；旗标按真实根怪、后代和待出生队列判定未接战/交战中/已清理')])
     body += '<h4>未来设计，尚未实现</h4><p>两类赛季机制目前仅保留设计边界与空运行态接口：先生成修饰，再按未来机制选择是否封印/激活，随后沿既有有限死亡后代规则处理，最后由单一排他掉落路线结算。封印/激活属于遭遇状态，不复用战斗冰冻。若未来实现essence_only，它必须替代standard，不能在普通奖励后追加一份。</p><p>当前没有赛季地图生成器、封印互动、精华掉落或可选择的新机制，也没有新增经济来源。</p>'
     body += '<h4>验证范围</h4><p>' + esc(entry['scope']) + '</p>'
-    for label, evidence in [('独立Plan验证', entry['plan_test']), ('Main组合验收', entry['main_acceptance']), ('原始Main结果（保留1项夹具失败）', entry['actual_main_report']), ('10项输入窄补结果', entry['focused_input_report'])]:
+    evidence_rows = [('布局与Plan验证（28,135项，36配置）', entry['layout_test']), ('实际Main验证（185项）', entry['actual_main_report']), ('对应冻结输入SHA256', entry['tested_inputs'])] if route_distribution else [('独立Plan验证', entry['plan_test']), ('Main组合验收', entry['main_acceptance']), ('原始Main结果（保留1项夹具失败）', entry['actual_main_report']), ('10项输入窄补结果', entry['focused_input_report'])]
+    for label, evidence in evidence_rows:
         body += '<p><a href="../' + esc(evidence['path'].removeprefix('docs/')) + '">' + label + '</a>；导出时原件SHA256：' + esc(evidence['sha256']) + '</p>'
     return body
 

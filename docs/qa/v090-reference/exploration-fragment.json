@@ -1,0 +1,7162 @@
+{
+	"maps": {
+		"broken_ruins": {
+			"description": "两道错位长残墙划分探索路线，沿墙端绕行；墙体阻挡移动、弹体与视线。六处4或8怪驻点分列墙端与内廊；共36个普通根怪与首领入图全部在场，可自由选择顺序或先挑战首领；清理全部怪物及后代后完成。首领落印锁定你的起手位置。",
+			"geometry": {
+				"bounds": {
+					"position": [
+						42.0,
+						104.0
+					],
+					"size": [
+						3600.0,
+						2400.0
+					]
+				},
+				"encounter_mode": "exploration",
+				"id": "broken_ruins",
+				"landmarks": {
+					"boss": {
+						"center": [
+							3222.0,
+							424.0
+						],
+						"id": "rift_warden",
+						"name": "裂隙守卫",
+						"sign_position": [
+							3042.0,
+							574.0
+						],
+						"trigger_center": [
+							3222.0,
+							424.0
+						],
+						"trigger_radius": 64.0
+					},
+					"camps": [
+						{
+							"center": [
+								1362.0,
+								2224.0
+							],
+							"id": "camp_west",
+							"name": "西侧据点",
+							"positions": [
+								[
+									1284.0,
+									2204.0
+								],
+								[
+									1337.0,
+									2267.0
+								],
+								[
+									1389.0,
+									2184.0
+								],
+								[
+									1442.0,
+									2248.0
+								],
+								[
+									607.0,
+									1256.0
+								],
+								[
+									646.0,
+									1198.0
+								],
+								[
+									720.0,
+									1178.0
+								],
+								[
+									792.0,
+									1211.0
+								],
+								[
+									820.0,
+									1284.0
+								],
+								[
+									777.0,
+									1357.0
+								],
+								[
+									702.0,
+									1386.0
+								],
+								[
+									626.0,
+									1336.0
+								]
+							],
+							"root_count": 12,
+							"sign_position": [
+								1362.0,
+								2374.0
+							],
+							"trigger_center": [
+								1362.0,
+								2224.0
+							],
+							"trigger_radius": 64.0
+						},
+						{
+							"center": [
+								1462.0,
+								474.0
+							],
+							"id": "camp_north",
+							"name": "北侧据点",
+							"positions": [
+								[
+									1384.0,
+									454.0
+								],
+								[
+									1437.0,
+									517.0
+								],
+								[
+									1489.0,
+									434.0
+								],
+								[
+									1542.0,
+									498.0
+								],
+								[
+									1727.0,
+									1226.0
+								],
+								[
+									1766.0,
+									1168.0
+								],
+								[
+									1840.0,
+									1148.0
+								],
+								[
+									1912.0,
+									1181.0
+								],
+								[
+									1940.0,
+									1254.0
+								],
+								[
+									1897.0,
+									1327.0
+								],
+								[
+									1822.0,
+									1356.0
+								],
+								[
+									1746.0,
+									1306.0
+								]
+							],
+							"root_count": 12,
+							"sign_position": [
+								1462.0,
+								624.0
+							],
+							"trigger_center": [
+								1462.0,
+								474.0
+							],
+							"trigger_radius": 64.0
+						},
+						{
+							"center": [
+								2802.0,
+								2204.0
+							],
+							"id": "camp_east",
+							"name": "东侧据点",
+							"positions": [
+								[
+									2724.0,
+									2184.0
+								],
+								[
+									2777.0,
+									2247.0
+								],
+								[
+									2829.0,
+									2164.0
+								],
+								[
+									2882.0,
+									2228.0
+								],
+								[
+									2947.0,
+									1196.0
+								],
+								[
+									2986.0,
+									1138.0
+								],
+								[
+									3060.0,
+									1118.0
+								],
+								[
+									3132.0,
+									1151.0
+								],
+								[
+									3160.0,
+									1224.0
+								],
+								[
+									3117.0,
+									1297.0
+								],
+								[
+									3042.0,
+									1326.0
+								],
+								[
+									2966.0,
+									1276.0
+								]
+							],
+							"root_count": 12,
+							"sign_position": [
+								2802.0,
+								2354.0
+							],
+							"trigger_center": [
+								2802.0,
+								2204.0
+							],
+							"trigger_radius": 64.0
+						}
+					],
+					"distribution_version": "route_outposts_v1",
+					"entry": [
+						362.0,
+						2184.0
+					],
+					"outposts": [
+						{
+							"center": [
+								1362.0,
+								2224.0
+							],
+							"id": "camp_west_1",
+							"name": "西侧据点 · 1",
+							"ordinals": [
+								1,
+								2,
+								3,
+								4
+							],
+							"positions": [
+								[
+									1284.0,
+									2204.0
+								],
+								[
+									1337.0,
+									2267.0
+								],
+								[
+									1389.0,
+									2184.0
+								],
+								[
+									1442.0,
+									2248.0
+								]
+							],
+							"root_count": 4,
+							"sign_position": [
+								1362.0,
+								2374.0
+							],
+							"source_group": "camp_west"
+						},
+						{
+							"center": [
+								712.0,
+								1284.0
+							],
+							"id": "camp_west_2",
+							"name": "西侧据点 · 2",
+							"ordinals": [
+								5,
+								6,
+								7,
+								8,
+								9,
+								10,
+								11,
+								12
+							],
+							"positions": [
+								[
+									607.0,
+									1256.0
+								],
+								[
+									646.0,
+									1198.0
+								],
+								[
+									720.0,
+									1178.0
+								],
+								[
+									792.0,
+									1211.0
+								],
+								[
+									820.0,
+									1284.0
+								],
+								[
+									777.0,
+									1357.0
+								],
+								[
+									702.0,
+									1386.0
+								],
+								[
+									626.0,
+									1336.0
+								]
+							],
+							"root_count": 8,
+							"sign_position": [
+								712.0,
+								1434.0
+							],
+							"source_group": "camp_west"
+						},
+						{
+							"center": [
+								1462.0,
+								474.0
+							],
+							"id": "camp_north_1",
+							"name": "北侧据点 · 1",
+							"ordinals": [
+								1,
+								2,
+								3,
+								4
+							],
+							"positions": [
+								[
+									1384.0,
+									454.0
+								],
+								[
+									1437.0,
+									517.0
+								],
+								[
+									1489.0,
+									434.0
+								],
+								[
+									1542.0,
+									498.0
+								]
+							],
+							"root_count": 4,
+							"sign_position": [
+								1462.0,
+								624.0
+							],
+							"source_group": "camp_north"
+						},
+						{
+							"center": [
+								1832.0,
+								1254.0
+							],
+							"id": "camp_north_2",
+							"name": "北侧据点 · 2",
+							"ordinals": [
+								5,
+								6,
+								7,
+								8,
+								9,
+								10,
+								11,
+								12
+							],
+							"positions": [
+								[
+									1727.0,
+									1226.0
+								],
+								[
+									1766.0,
+									1168.0
+								],
+								[
+									1840.0,
+									1148.0
+								],
+								[
+									1912.0,
+									1181.0
+								],
+								[
+									1940.0,
+									1254.0
+								],
+								[
+									1897.0,
+									1327.0
+								],
+								[
+									1822.0,
+									1356.0
+								],
+								[
+									1746.0,
+									1306.0
+								]
+							],
+							"root_count": 8,
+							"sign_position": [
+								1832.0,
+								1404.0
+							],
+							"source_group": "camp_north"
+						},
+						{
+							"center": [
+								2802.0,
+								2204.0
+							],
+							"id": "camp_east_1",
+							"name": "东侧据点 · 1",
+							"ordinals": [
+								1,
+								2,
+								3,
+								4
+							],
+							"positions": [
+								[
+									2724.0,
+									2184.0
+								],
+								[
+									2777.0,
+									2247.0
+								],
+								[
+									2829.0,
+									2164.0
+								],
+								[
+									2882.0,
+									2228.0
+								]
+							],
+							"root_count": 4,
+							"sign_position": [
+								2802.0,
+								2354.0
+							],
+							"source_group": "camp_east"
+						},
+						{
+							"center": [
+								3052.0,
+								1224.0
+							],
+							"id": "camp_east_2",
+							"name": "东侧据点 · 2",
+							"ordinals": [
+								5,
+								6,
+								7,
+								8,
+								9,
+								10,
+								11,
+								12
+							],
+							"positions": [
+								[
+									2947.0,
+									1196.0
+								],
+								[
+									2986.0,
+									1138.0
+								],
+								[
+									3060.0,
+									1118.0
+								],
+								[
+									3132.0,
+									1151.0
+								],
+								[
+									3160.0,
+									1224.0
+								],
+								[
+									3117.0,
+									1297.0
+								],
+								[
+									3042.0,
+									1326.0
+								],
+								[
+									2966.0,
+									1276.0
+								]
+							],
+							"root_count": 8,
+							"sign_position": [
+								3052.0,
+								1374.0
+							],
+							"source_group": "camp_east"
+						}
+					],
+					"route_segments": [
+						{
+							"from": [
+								362.0,
+								2184.0
+							],
+							"to": [
+								742.0,
+								2204.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								742.0,
+								2204.0
+							],
+							"to": [
+								1362.0,
+								2224.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								1362.0,
+								2224.0
+							],
+							"to": [
+								1922.0,
+								2284.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								1922.0,
+								2284.0
+							],
+							"to": [
+								2802.0,
+								2204.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								2802.0,
+								2204.0
+							],
+							"to": [
+								3092.0,
+								1784.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								3092.0,
+								1784.0
+							],
+							"to": [
+								3052.0,
+								1224.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								3052.0,
+								1224.0
+							],
+							"to": [
+								3222.0,
+								424.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								362.0,
+								2184.0
+							],
+							"to": [
+								692.0,
+								1904.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								692.0,
+								1904.0
+							],
+							"to": [
+								712.0,
+								1284.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								712.0,
+								1284.0
+							],
+							"to": [
+								742.0,
+								454.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								742.0,
+								454.0
+							],
+							"to": [
+								1462.0,
+								474.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								1462.0,
+								474.0
+							],
+							"to": [
+								1882.0,
+								474.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								1882.0,
+								474.0
+							],
+							"to": [
+								3222.0,
+								424.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								1362.0,
+								2224.0
+							],
+							"to": [
+								1782.0,
+								1954.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								1782.0,
+								1954.0
+							],
+							"to": [
+								1832.0,
+								1254.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								1832.0,
+								1254.0
+							],
+							"to": [
+								1882.0,
+								474.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								1832.0,
+								1254.0
+							],
+							"to": [
+								2272.0,
+								824.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								2272.0,
+								824.0
+							],
+							"to": [
+								2762.0,
+								824.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								2762.0,
+								824.0
+							],
+							"to": [
+								3052.0,
+								1224.0
+							],
+							"width": 72.0
+						}
+					]
+				},
+				"obstacle_style": "",
+				"revision": 1,
+				"spawn": [
+					362.0,
+					2184.0
+				],
+				"walls": [
+					{
+						"position": [
+							1162.0,
+							604.0
+						],
+						"size": [
+							100.0,
+							1260.0
+						]
+					},
+					{
+						"position": [
+							2422.0,
+							1004.0
+						],
+						"size": [
+							100.0,
+							1100.0
+						]
+					}
+				]
+			},
+			"plan_example": {
+				"mechanism_config": {
+
+				},
+				"optional_encounters": [],
+				"roots": [
+					{
+						"actor_id": 1,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_1",
+						"position": [
+							1284.0,
+							2204.0
+						],
+						"radius": 14.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 1,
+						"spawn_key": "broken_ruins/90001/camp_west/1",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 2,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_1",
+						"position": [
+							1337.0,
+							2267.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 2,
+						"spawn_key": "broken_ruins/90001/camp_west/2",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 3,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_1",
+						"position": [
+							1389.0,
+							2184.0
+						],
+						"radius": 14.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 3,
+						"spawn_key": "broken_ruins/90001/camp_west/3",
+						"template_id": "splitter"
+					},
+					{
+						"actor_id": 4,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_1",
+						"position": [
+							1442.0,
+							2248.0
+						],
+						"radius": 14.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 4,
+						"spawn_key": "broken_ruins/90001/camp_west/4",
+						"template_id": "splitter"
+					},
+					{
+						"actor_id": 5,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_2",
+						"position": [
+							607.0,
+							1256.0
+						],
+						"radius": 14.0,
+						"rarity": "rare",
+						"reward_eligible": true,
+						"root_id": 5,
+						"spawn_key": "broken_ruins/90001/camp_west/5",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 6,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_2",
+						"position": [
+							646.0,
+							1198.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 6,
+						"spawn_key": "broken_ruins/90001/camp_west/6",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 7,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_2",
+						"position": [
+							720.0,
+							1178.0
+						],
+						"radius": 10.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 7,
+						"spawn_key": "broken_ruins/90001/camp_west/7",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 8,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_2",
+						"position": [
+							792.0,
+							1211.0
+						],
+						"radius": 14.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 8,
+						"spawn_key": "broken_ruins/90001/camp_west/8",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 9,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_2",
+						"position": [
+							820.0,
+							1284.0
+						],
+						"radius": 10.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 9,
+						"spawn_key": "broken_ruins/90001/camp_west/9",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 10,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_2",
+						"position": [
+							777.0,
+							1357.0
+						],
+						"radius": 22.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 10,
+						"spawn_key": "broken_ruins/90001/camp_west/10",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 11,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_2",
+						"position": [
+							702.0,
+							1386.0
+						],
+						"radius": 14.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 11,
+						"spawn_key": "broken_ruins/90001/camp_west/11",
+						"template_id": "splitter"
+					},
+					{
+						"actor_id": 12,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_2",
+						"position": [
+							626.0,
+							1336.0
+						],
+						"radius": 14.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 12,
+						"spawn_key": "broken_ruins/90001/camp_west/12",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 13,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_1",
+						"position": [
+							1384.0,
+							454.0
+						],
+						"radius": 14.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 13,
+						"spawn_key": "broken_ruins/90001/camp_north/1",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 14,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_1",
+						"position": [
+							1437.0,
+							517.0
+						],
+						"radius": 10.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 14,
+						"spawn_key": "broken_ruins/90001/camp_north/2",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 15,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_1",
+						"position": [
+							1489.0,
+							434.0
+						],
+						"radius": 22.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 15,
+						"spawn_key": "broken_ruins/90001/camp_north/3",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 16,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_1",
+						"position": [
+							1542.0,
+							498.0
+						],
+						"radius": 14.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 16,
+						"spawn_key": "broken_ruins/90001/camp_north/4",
+						"template_id": "splitter"
+					},
+					{
+						"actor_id": 17,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1727.0,
+							1226.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 17,
+						"spawn_key": "broken_ruins/90001/camp_north/5",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 18,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1766.0,
+							1168.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 18,
+						"spawn_key": "broken_ruins/90001/camp_north/6",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 19,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1840.0,
+							1148.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 19,
+						"spawn_key": "broken_ruins/90001/camp_north/7",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 20,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1912.0,
+							1181.0
+						],
+						"radius": 14.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 20,
+						"spawn_key": "broken_ruins/90001/camp_north/8",
+						"template_id": "splitter"
+					},
+					{
+						"actor_id": 21,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1940.0,
+							1254.0
+						],
+						"radius": 10.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 21,
+						"spawn_key": "broken_ruins/90001/camp_north/9",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 22,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1897.0,
+							1327.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 22,
+						"spawn_key": "broken_ruins/90001/camp_north/10",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 23,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1822.0,
+							1356.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 23,
+						"spawn_key": "broken_ruins/90001/camp_north/11",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 24,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1746.0,
+							1306.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 24,
+						"spawn_key": "broken_ruins/90001/camp_north/12",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 25,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_1",
+						"position": [
+							2724.0,
+							2184.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 25,
+						"spawn_key": "broken_ruins/90001/camp_east/1",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 26,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_1",
+						"position": [
+							2777.0,
+							2247.0
+						],
+						"radius": 22.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 26,
+						"spawn_key": "broken_ruins/90001/camp_east/2",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 27,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_1",
+						"position": [
+							2829.0,
+							2164.0
+						],
+						"radius": 10.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 27,
+						"spawn_key": "broken_ruins/90001/camp_east/3",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 28,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_1",
+						"position": [
+							2882.0,
+							2228.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 28,
+						"spawn_key": "broken_ruins/90001/camp_east/4",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 29,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_2",
+						"position": [
+							2947.0,
+							1196.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 29,
+						"spawn_key": "broken_ruins/90001/camp_east/5",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 30,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_2",
+						"position": [
+							2986.0,
+							1138.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 30,
+						"spawn_key": "broken_ruins/90001/camp_east/6",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 31,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3060.0,
+							1118.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 31,
+						"spawn_key": "broken_ruins/90001/camp_east/7",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 32,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3132.0,
+							1151.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 32,
+						"spawn_key": "broken_ruins/90001/camp_east/8",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 33,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3160.0,
+							1224.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 33,
+						"spawn_key": "broken_ruins/90001/camp_east/9",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 34,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3117.0,
+							1297.0
+						],
+						"radius": 10.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 34,
+						"spawn_key": "broken_ruins/90001/camp_east/10",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 35,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3042.0,
+							1326.0
+						],
+						"radius": 22.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 35,
+						"spawn_key": "broken_ruins/90001/camp_east/11",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 36,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_2",
+						"position": [
+							2966.0,
+							1276.0
+						],
+						"radius": 22.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 36,
+						"spawn_key": "broken_ruins/90001/camp_east/12",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 37,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "",
+						"position": [
+							3222.0,
+							424.0
+						],
+						"radius": 27.5,
+						"rarity": "boss",
+						"reward_eligible": true,
+						"root_id": 37,
+						"spawn_key": "broken_ruins/90001/boss",
+						"template_id": "rift_warden"
+					}
+				],
+				"scope": "Detached I-tier empty-modifier Plan example; no Main execution, player equipment, save, combat or rewards.",
+				"seed": 90001,
+				"spawn_records": [
+					{
+						"actor_id": 1,
+						"encounter_id": "",
+						"ordinal": 1,
+						"outpost_id": "camp_west_1",
+						"position": [
+							1284.0,
+							2204.0
+						],
+						"reward_route": "standard",
+						"root_id": 1,
+						"source_group": "camp_west",
+						"spawn_key": "broken_ruins/90001/camp_west/1",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 2,
+						"encounter_id": "",
+						"ordinal": 2,
+						"outpost_id": "camp_west_1",
+						"position": [
+							1337.0,
+							2267.0
+						],
+						"reward_route": "standard",
+						"root_id": 2,
+						"source_group": "camp_west",
+						"spawn_key": "broken_ruins/90001/camp_west/2",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 3,
+						"encounter_id": "",
+						"ordinal": 3,
+						"outpost_id": "camp_west_1",
+						"position": [
+							1389.0,
+							2184.0
+						],
+						"reward_route": "standard",
+						"root_id": 3,
+						"source_group": "camp_west",
+						"spawn_key": "broken_ruins/90001/camp_west/3",
+						"template_id": "splitter"
+					},
+					{
+						"actor_id": 4,
+						"encounter_id": "",
+						"ordinal": 4,
+						"outpost_id": "camp_west_1",
+						"position": [
+							1442.0,
+							2248.0
+						],
+						"reward_route": "standard",
+						"root_id": 4,
+						"source_group": "camp_west",
+						"spawn_key": "broken_ruins/90001/camp_west/4",
+						"template_id": "splitter"
+					},
+					{
+						"actor_id": 5,
+						"encounter_id": "",
+						"ordinal": 5,
+						"outpost_id": "camp_west_2",
+						"position": [
+							607.0,
+							1256.0
+						],
+						"reward_route": "standard",
+						"root_id": 5,
+						"source_group": "camp_west",
+						"spawn_key": "broken_ruins/90001/camp_west/5",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 6,
+						"encounter_id": "",
+						"ordinal": 6,
+						"outpost_id": "camp_west_2",
+						"position": [
+							646.0,
+							1198.0
+						],
+						"reward_route": "standard",
+						"root_id": 6,
+						"source_group": "camp_west",
+						"spawn_key": "broken_ruins/90001/camp_west/6",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 7,
+						"encounter_id": "",
+						"ordinal": 7,
+						"outpost_id": "camp_west_2",
+						"position": [
+							720.0,
+							1178.0
+						],
+						"reward_route": "standard",
+						"root_id": 7,
+						"source_group": "camp_west",
+						"spawn_key": "broken_ruins/90001/camp_west/7",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 8,
+						"encounter_id": "",
+						"ordinal": 8,
+						"outpost_id": "camp_west_2",
+						"position": [
+							792.0,
+							1211.0
+						],
+						"reward_route": "standard",
+						"root_id": 8,
+						"source_group": "camp_west",
+						"spawn_key": "broken_ruins/90001/camp_west/8",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 9,
+						"encounter_id": "",
+						"ordinal": 9,
+						"outpost_id": "camp_west_2",
+						"position": [
+							820.0,
+							1284.0
+						],
+						"reward_route": "standard",
+						"root_id": 9,
+						"source_group": "camp_west",
+						"spawn_key": "broken_ruins/90001/camp_west/9",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 10,
+						"encounter_id": "",
+						"ordinal": 10,
+						"outpost_id": "camp_west_2",
+						"position": [
+							777.0,
+							1357.0
+						],
+						"reward_route": "standard",
+						"root_id": 10,
+						"source_group": "camp_west",
+						"spawn_key": "broken_ruins/90001/camp_west/10",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 11,
+						"encounter_id": "",
+						"ordinal": 11,
+						"outpost_id": "camp_west_2",
+						"position": [
+							702.0,
+							1386.0
+						],
+						"reward_route": "standard",
+						"root_id": 11,
+						"source_group": "camp_west",
+						"spawn_key": "broken_ruins/90001/camp_west/11",
+						"template_id": "splitter"
+					},
+					{
+						"actor_id": 12,
+						"encounter_id": "",
+						"ordinal": 12,
+						"outpost_id": "camp_west_2",
+						"position": [
+							626.0,
+							1336.0
+						],
+						"reward_route": "standard",
+						"root_id": 12,
+						"source_group": "camp_west",
+						"spawn_key": "broken_ruins/90001/camp_west/12",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 13,
+						"encounter_id": "",
+						"ordinal": 1,
+						"outpost_id": "camp_north_1",
+						"position": [
+							1384.0,
+							454.0
+						],
+						"reward_route": "standard",
+						"root_id": 13,
+						"source_group": "camp_north",
+						"spawn_key": "broken_ruins/90001/camp_north/1",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 14,
+						"encounter_id": "",
+						"ordinal": 2,
+						"outpost_id": "camp_north_1",
+						"position": [
+							1437.0,
+							517.0
+						],
+						"reward_route": "standard",
+						"root_id": 14,
+						"source_group": "camp_north",
+						"spawn_key": "broken_ruins/90001/camp_north/2",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 15,
+						"encounter_id": "",
+						"ordinal": 3,
+						"outpost_id": "camp_north_1",
+						"position": [
+							1489.0,
+							434.0
+						],
+						"reward_route": "standard",
+						"root_id": 15,
+						"source_group": "camp_north",
+						"spawn_key": "broken_ruins/90001/camp_north/3",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 16,
+						"encounter_id": "",
+						"ordinal": 4,
+						"outpost_id": "camp_north_1",
+						"position": [
+							1542.0,
+							498.0
+						],
+						"reward_route": "standard",
+						"root_id": 16,
+						"source_group": "camp_north",
+						"spawn_key": "broken_ruins/90001/camp_north/4",
+						"template_id": "splitter"
+					},
+					{
+						"actor_id": 17,
+						"encounter_id": "",
+						"ordinal": 5,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1727.0,
+							1226.0
+						],
+						"reward_route": "standard",
+						"root_id": 17,
+						"source_group": "camp_north",
+						"spawn_key": "broken_ruins/90001/camp_north/5",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 18,
+						"encounter_id": "",
+						"ordinal": 6,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1766.0,
+							1168.0
+						],
+						"reward_route": "standard",
+						"root_id": 18,
+						"source_group": "camp_north",
+						"spawn_key": "broken_ruins/90001/camp_north/6",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 19,
+						"encounter_id": "",
+						"ordinal": 7,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1840.0,
+							1148.0
+						],
+						"reward_route": "standard",
+						"root_id": 19,
+						"source_group": "camp_north",
+						"spawn_key": "broken_ruins/90001/camp_north/7",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 20,
+						"encounter_id": "",
+						"ordinal": 8,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1912.0,
+							1181.0
+						],
+						"reward_route": "standard",
+						"root_id": 20,
+						"source_group": "camp_north",
+						"spawn_key": "broken_ruins/90001/camp_north/8",
+						"template_id": "splitter"
+					},
+					{
+						"actor_id": 21,
+						"encounter_id": "",
+						"ordinal": 9,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1940.0,
+							1254.0
+						],
+						"reward_route": "standard",
+						"root_id": 21,
+						"source_group": "camp_north",
+						"spawn_key": "broken_ruins/90001/camp_north/9",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 22,
+						"encounter_id": "",
+						"ordinal": 10,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1897.0,
+							1327.0
+						],
+						"reward_route": "standard",
+						"root_id": 22,
+						"source_group": "camp_north",
+						"spawn_key": "broken_ruins/90001/camp_north/10",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 23,
+						"encounter_id": "",
+						"ordinal": 11,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1822.0,
+							1356.0
+						],
+						"reward_route": "standard",
+						"root_id": 23,
+						"source_group": "camp_north",
+						"spawn_key": "broken_ruins/90001/camp_north/11",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 24,
+						"encounter_id": "",
+						"ordinal": 12,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1746.0,
+							1306.0
+						],
+						"reward_route": "standard",
+						"root_id": 24,
+						"source_group": "camp_north",
+						"spawn_key": "broken_ruins/90001/camp_north/12",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 25,
+						"encounter_id": "",
+						"ordinal": 1,
+						"outpost_id": "camp_east_1",
+						"position": [
+							2724.0,
+							2184.0
+						],
+						"reward_route": "standard",
+						"root_id": 25,
+						"source_group": "camp_east",
+						"spawn_key": "broken_ruins/90001/camp_east/1",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 26,
+						"encounter_id": "",
+						"ordinal": 2,
+						"outpost_id": "camp_east_1",
+						"position": [
+							2777.0,
+							2247.0
+						],
+						"reward_route": "standard",
+						"root_id": 26,
+						"source_group": "camp_east",
+						"spawn_key": "broken_ruins/90001/camp_east/2",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 27,
+						"encounter_id": "",
+						"ordinal": 3,
+						"outpost_id": "camp_east_1",
+						"position": [
+							2829.0,
+							2164.0
+						],
+						"reward_route": "standard",
+						"root_id": 27,
+						"source_group": "camp_east",
+						"spawn_key": "broken_ruins/90001/camp_east/3",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 28,
+						"encounter_id": "",
+						"ordinal": 4,
+						"outpost_id": "camp_east_1",
+						"position": [
+							2882.0,
+							2228.0
+						],
+						"reward_route": "standard",
+						"root_id": 28,
+						"source_group": "camp_east",
+						"spawn_key": "broken_ruins/90001/camp_east/4",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 29,
+						"encounter_id": "",
+						"ordinal": 5,
+						"outpost_id": "camp_east_2",
+						"position": [
+							2947.0,
+							1196.0
+						],
+						"reward_route": "standard",
+						"root_id": 29,
+						"source_group": "camp_east",
+						"spawn_key": "broken_ruins/90001/camp_east/5",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 30,
+						"encounter_id": "",
+						"ordinal": 6,
+						"outpost_id": "camp_east_2",
+						"position": [
+							2986.0,
+							1138.0
+						],
+						"reward_route": "standard",
+						"root_id": 30,
+						"source_group": "camp_east",
+						"spawn_key": "broken_ruins/90001/camp_east/6",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 31,
+						"encounter_id": "",
+						"ordinal": 7,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3060.0,
+							1118.0
+						],
+						"reward_route": "standard",
+						"root_id": 31,
+						"source_group": "camp_east",
+						"spawn_key": "broken_ruins/90001/camp_east/7",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 32,
+						"encounter_id": "",
+						"ordinal": 8,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3132.0,
+							1151.0
+						],
+						"reward_route": "standard",
+						"root_id": 32,
+						"source_group": "camp_east",
+						"spawn_key": "broken_ruins/90001/camp_east/8",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 33,
+						"encounter_id": "",
+						"ordinal": 9,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3160.0,
+							1224.0
+						],
+						"reward_route": "standard",
+						"root_id": 33,
+						"source_group": "camp_east",
+						"spawn_key": "broken_ruins/90001/camp_east/9",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 34,
+						"encounter_id": "",
+						"ordinal": 10,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3117.0,
+							1297.0
+						],
+						"reward_route": "standard",
+						"root_id": 34,
+						"source_group": "camp_east",
+						"spawn_key": "broken_ruins/90001/camp_east/10",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 35,
+						"encounter_id": "",
+						"ordinal": 11,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3042.0,
+							1326.0
+						],
+						"reward_route": "standard",
+						"root_id": 35,
+						"source_group": "camp_east",
+						"spawn_key": "broken_ruins/90001/camp_east/11",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 36,
+						"encounter_id": "",
+						"ordinal": 12,
+						"outpost_id": "camp_east_2",
+						"position": [
+							2966.0,
+							1276.0
+						],
+						"reward_route": "standard",
+						"root_id": 36,
+						"source_group": "camp_east",
+						"spawn_key": "broken_ruins/90001/camp_east/12",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 37,
+						"encounter_id": "",
+						"ordinal": 1,
+						"outpost_id": "",
+						"position": [
+							3222.0,
+							424.0
+						],
+						"reward_route": "standard",
+						"root_id": 37,
+						"source_group": "boss",
+						"spawn_key": "broken_ruins/90001/boss",
+						"template_id": "rift_warden"
+					}
+				],
+				"total": 37
+			}
+		},
+		"ginkgo_arcade": {
+			"description": "中央花圃与两座银杏基台形成内外绕行路线，阻挡移动、弹体与视线。六处4或8怪驻点沿内外廊分布，共36个普通根怪与首领入图时全部在场，可自由探索或先挑战首领；清理全部怪物及后代后完成。回廊震击锁定首领起手位置，可退圈或借花圃阻断视线。",
+			"geometry": {
+				"bounds": {
+					"position": [
+						42.0,
+						104.0
+					],
+					"size": [
+						3600.0,
+						2400.0
+					]
+				},
+				"encounter_mode": "exploration",
+				"id": "ginkgo_arcade",
+				"landmarks": {
+					"boss": {
+						"center": [
+							3222.0,
+							424.0
+						],
+						"id": "rift_warden",
+						"name": "裂隙守卫",
+						"sign_position": [
+							3042.0,
+							574.0
+						],
+						"trigger_center": [
+							3222.0,
+							424.0
+						],
+						"trigger_radius": 64.0
+					},
+					"camps": [
+						{
+							"center": [
+								1332.0,
+								2204.0
+							],
+							"id": "camp_west",
+							"name": "西叶据点",
+							"positions": [
+								[
+									1254.0,
+									2184.0
+								],
+								[
+									1307.0,
+									2247.0
+								],
+								[
+									1359.0,
+									2164.0
+								],
+								[
+									1412.0,
+									2228.0
+								],
+								[
+									357.0,
+									1156.0
+								],
+								[
+									396.0,
+									1098.0
+								],
+								[
+									470.0,
+									1078.0
+								],
+								[
+									542.0,
+									1111.0
+								],
+								[
+									570.0,
+									1184.0
+								],
+								[
+									527.0,
+									1257.0
+								],
+								[
+									452.0,
+									1286.0
+								],
+								[
+									376.0,
+									1236.0
+								]
+							],
+							"root_count": 12,
+							"sign_position": [
+								1332.0,
+								2354.0
+							],
+							"trigger_center": [
+								1332.0,
+								2204.0
+							],
+							"trigger_radius": 64.0
+						},
+						{
+							"center": [
+								1162.0,
+								854.0
+							],
+							"id": "camp_north",
+							"name": "北廊据点",
+							"positions": [
+								[
+									1084.0,
+									834.0
+								],
+								[
+									1137.0,
+									897.0
+								],
+								[
+									1189.0,
+									814.0
+								],
+								[
+									1242.0,
+									878.0
+								],
+								[
+									1757.0,
+									546.0
+								],
+								[
+									1796.0,
+									488.0
+								],
+								[
+									1870.0,
+									468.0
+								],
+								[
+									1942.0,
+									501.0
+								],
+								[
+									1970.0,
+									574.0
+								],
+								[
+									1927.0,
+									647.0
+								],
+								[
+									1852.0,
+									676.0
+								],
+								[
+									1776.0,
+									626.0
+								]
+							],
+							"root_count": 12,
+							"sign_position": [
+								1162.0,
+								1004.0
+							],
+							"trigger_center": [
+								1162.0,
+								854.0
+							],
+							"trigger_radius": 64.0
+						},
+						{
+							"center": [
+								2732.0,
+								1914.0
+							],
+							"id": "camp_east",
+							"name": "东荫据点",
+							"positions": [
+								[
+									2654.0,
+									1894.0
+								],
+								[
+									2707.0,
+									1957.0
+								],
+								[
+									2759.0,
+									1874.0
+								],
+								[
+									2812.0,
+									1938.0
+								],
+								[
+									3087.0,
+									1396.0
+								],
+								[
+									3126.0,
+									1338.0
+								],
+								[
+									3200.0,
+									1318.0
+								],
+								[
+									3272.0,
+									1351.0
+								],
+								[
+									3300.0,
+									1424.0
+								],
+								[
+									3257.0,
+									1497.0
+								],
+								[
+									3182.0,
+									1526.0
+								],
+								[
+									3106.0,
+									1476.0
+								]
+							],
+							"root_count": 12,
+							"sign_position": [
+								2732.0,
+								2064.0
+							],
+							"trigger_center": [
+								2732.0,
+								1914.0
+							],
+							"trigger_radius": 64.0
+						}
+					],
+					"distribution_version": "route_outposts_v1",
+					"entry": [
+						362.0,
+						2184.0
+					],
+					"outposts": [
+						{
+							"center": [
+								1332.0,
+								2204.0
+							],
+							"id": "camp_west_1",
+							"name": "西叶据点 · 1",
+							"ordinals": [
+								1,
+								2,
+								3,
+								4
+							],
+							"positions": [
+								[
+									1254.0,
+									2184.0
+								],
+								[
+									1307.0,
+									2247.0
+								],
+								[
+									1359.0,
+									2164.0
+								],
+								[
+									1412.0,
+									2228.0
+								]
+							],
+							"root_count": 4,
+							"sign_position": [
+								1332.0,
+								2354.0
+							],
+							"source_group": "camp_west"
+						},
+						{
+							"center": [
+								462.0,
+								1184.0
+							],
+							"id": "camp_west_2",
+							"name": "西叶据点 · 2",
+							"ordinals": [
+								5,
+								6,
+								7,
+								8,
+								9,
+								10,
+								11,
+								12
+							],
+							"positions": [
+								[
+									357.0,
+									1156.0
+								],
+								[
+									396.0,
+									1098.0
+								],
+								[
+									470.0,
+									1078.0
+								],
+								[
+									542.0,
+									1111.0
+								],
+								[
+									570.0,
+									1184.0
+								],
+								[
+									527.0,
+									1257.0
+								],
+								[
+									452.0,
+									1286.0
+								],
+								[
+									376.0,
+									1236.0
+								]
+							],
+							"root_count": 8,
+							"sign_position": [
+								462.0,
+								1334.0
+							],
+							"source_group": "camp_west"
+						},
+						{
+							"center": [
+								1162.0,
+								854.0
+							],
+							"id": "camp_north_1",
+							"name": "北廊据点 · 1",
+							"ordinals": [
+								1,
+								2,
+								3,
+								4
+							],
+							"positions": [
+								[
+									1084.0,
+									834.0
+								],
+								[
+									1137.0,
+									897.0
+								],
+								[
+									1189.0,
+									814.0
+								],
+								[
+									1242.0,
+									878.0
+								]
+							],
+							"root_count": 4,
+							"sign_position": [
+								1162.0,
+								1004.0
+							],
+							"source_group": "camp_north"
+						},
+						{
+							"center": [
+								1862.0,
+								574.0
+							],
+							"id": "camp_north_2",
+							"name": "北廊据点 · 2",
+							"ordinals": [
+								5,
+								6,
+								7,
+								8,
+								9,
+								10,
+								11,
+								12
+							],
+							"positions": [
+								[
+									1757.0,
+									546.0
+								],
+								[
+									1796.0,
+									488.0
+								],
+								[
+									1870.0,
+									468.0
+								],
+								[
+									1942.0,
+									501.0
+								],
+								[
+									1970.0,
+									574.0
+								],
+								[
+									1927.0,
+									647.0
+								],
+								[
+									1852.0,
+									676.0
+								],
+								[
+									1776.0,
+									626.0
+								]
+							],
+							"root_count": 8,
+							"sign_position": [
+								1862.0,
+								724.0
+							],
+							"source_group": "camp_north"
+						},
+						{
+							"center": [
+								2732.0,
+								1914.0
+							],
+							"id": "camp_east_1",
+							"name": "东荫据点 · 1",
+							"ordinals": [
+								1,
+								2,
+								3,
+								4
+							],
+							"positions": [
+								[
+									2654.0,
+									1894.0
+								],
+								[
+									2707.0,
+									1957.0
+								],
+								[
+									2759.0,
+									1874.0
+								],
+								[
+									2812.0,
+									1938.0
+								]
+							],
+							"root_count": 4,
+							"sign_position": [
+								2732.0,
+								2064.0
+							],
+							"source_group": "camp_east"
+						},
+						{
+							"center": [
+								3192.0,
+								1424.0
+							],
+							"id": "camp_east_2",
+							"name": "东荫据点 · 2",
+							"ordinals": [
+								5,
+								6,
+								7,
+								8,
+								9,
+								10,
+								11,
+								12
+							],
+							"positions": [
+								[
+									3087.0,
+									1396.0
+								],
+								[
+									3126.0,
+									1338.0
+								],
+								[
+									3200.0,
+									1318.0
+								],
+								[
+									3272.0,
+									1351.0
+								],
+								[
+									3300.0,
+									1424.0
+								],
+								[
+									3257.0,
+									1497.0
+								],
+								[
+									3182.0,
+									1526.0
+								],
+								[
+									3106.0,
+									1476.0
+								]
+							],
+							"root_count": 8,
+							"sign_position": [
+								3192.0,
+								1574.0
+							],
+							"source_group": "camp_east"
+						}
+					],
+					"route_segments": [
+						{
+							"from": [
+								362.0,
+								2184.0
+							],
+							"to": [
+								612.0,
+								1904.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								612.0,
+								1904.0
+							],
+							"to": [
+								1332.0,
+								2204.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								1332.0,
+								2204.0
+							],
+							"to": [
+								1982.0,
+								2124.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								1982.0,
+								2124.0
+							],
+							"to": [
+								2732.0,
+								1914.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								2732.0,
+								1914.0
+							],
+							"to": [
+								3192.0,
+								1424.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								3192.0,
+								1424.0
+							],
+							"to": [
+								3292.0,
+								854.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								3292.0,
+								854.0
+							],
+							"to": [
+								3222.0,
+								424.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								612.0,
+								1904.0
+							],
+							"to": [
+								462.0,
+								1184.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								462.0,
+								1184.0
+							],
+							"to": [
+								502.0,
+								824.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								502.0,
+								824.0
+							],
+							"to": [
+								1162.0,
+								854.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								1162.0,
+								854.0
+							],
+							"to": [
+								1862.0,
+								574.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								1862.0,
+								574.0
+							],
+							"to": [
+								2572.0,
+								574.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								2572.0,
+								574.0
+							],
+							"to": [
+								3222.0,
+								424.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								462.0,
+								1184.0
+							],
+							"to": [
+								1162.0,
+								1424.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								1162.0,
+								1424.0
+							],
+							"to": [
+								1162.0,
+								854.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								1862.0,
+								574.0
+							],
+							"to": [
+								2562.0,
+								854.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								2562.0,
+								854.0
+							],
+							"to": [
+								2572.0,
+								1914.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								2572.0,
+								1914.0
+							],
+							"to": [
+								2732.0,
+								1914.0
+							],
+							"width": 72.0
+						}
+					]
+				},
+				"obstacle_style": "ginkgo_planters",
+				"revision": 1,
+				"spawn": [
+					362.0,
+					2184.0
+				],
+				"walls": [
+					{
+						"position": [
+							1342.0,
+							1154.0
+						],
+						"size": [
+							1000.0,
+							480.0
+						]
+					},
+					{
+						"position": [
+							682.0,
+							924.0
+						],
+						"size": [
+							280.0,
+							280.0
+						]
+					},
+					{
+						"position": [
+							2742.0,
+							1044.0
+						],
+						"size": [
+							280.0,
+							280.0
+						]
+					}
+				]
+			},
+			"plan_example": {
+				"mechanism_config": {
+
+				},
+				"optional_encounters": [],
+				"roots": [
+					{
+						"actor_id": 1,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_1",
+						"position": [
+							1254.0,
+							2184.0
+						],
+						"radius": 10.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 1,
+						"spawn_key": "ginkgo_arcade/90001/camp_west/1",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 2,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_1",
+						"position": [
+							1307.0,
+							2247.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 2,
+						"spawn_key": "ginkgo_arcade/90001/camp_west/2",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 3,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_1",
+						"position": [
+							1359.0,
+							2164.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"reward_eligible": true,
+						"root_id": 3,
+						"spawn_key": "ginkgo_arcade/90001/camp_west/3",
+						"template_id": "brood_host"
+					},
+					{
+						"actor_id": 4,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_1",
+						"position": [
+							1412.0,
+							2228.0
+						],
+						"radius": 14.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 4,
+						"spawn_key": "ginkgo_arcade/90001/camp_west/4",
+						"template_id": "splitter"
+					},
+					{
+						"actor_id": 5,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_2",
+						"position": [
+							357.0,
+							1156.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"reward_eligible": true,
+						"root_id": 5,
+						"spawn_key": "ginkgo_arcade/90001/camp_west/5",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 6,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_2",
+						"position": [
+							396.0,
+							1098.0
+						],
+						"radius": 10.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 6,
+						"spawn_key": "ginkgo_arcade/90001/camp_west/6",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 7,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_2",
+						"position": [
+							470.0,
+							1078.0
+						],
+						"radius": 10.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 7,
+						"spawn_key": "ginkgo_arcade/90001/camp_west/7",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 8,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_2",
+						"position": [
+							542.0,
+							1111.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"reward_eligible": true,
+						"root_id": 8,
+						"spawn_key": "ginkgo_arcade/90001/camp_west/8",
+						"template_id": "ember_guard"
+					},
+					{
+						"actor_id": 9,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_2",
+						"position": [
+							570.0,
+							1184.0
+						],
+						"radius": 10.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 9,
+						"spawn_key": "ginkgo_arcade/90001/camp_west/9",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 10,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_2",
+						"position": [
+							527.0,
+							1257.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 10,
+						"spawn_key": "ginkgo_arcade/90001/camp_west/10",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 11,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_2",
+						"position": [
+							452.0,
+							1286.0
+						],
+						"radius": 22.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 11,
+						"spawn_key": "ginkgo_arcade/90001/camp_west/11",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 12,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_2",
+						"position": [
+							376.0,
+							1236.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"reward_eligible": true,
+						"root_id": 12,
+						"spawn_key": "ginkgo_arcade/90001/camp_west/12",
+						"template_id": "brood_host"
+					},
+					{
+						"actor_id": 13,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_1",
+						"position": [
+							1084.0,
+							834.0
+						],
+						"radius": 22.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 13,
+						"spawn_key": "ginkgo_arcade/90001/camp_north/1",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 14,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_1",
+						"position": [
+							1137.0,
+							897.0
+						],
+						"radius": 22.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 14,
+						"spawn_key": "ginkgo_arcade/90001/camp_north/2",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 15,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_1",
+						"position": [
+							1189.0,
+							814.0
+						],
+						"radius": 14.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 15,
+						"spawn_key": "ginkgo_arcade/90001/camp_north/3",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 16,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_1",
+						"position": [
+							1242.0,
+							878.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"reward_eligible": true,
+						"root_id": 16,
+						"spawn_key": "ginkgo_arcade/90001/camp_north/4",
+						"template_id": "ember_guard"
+					},
+					{
+						"actor_id": 17,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1757.0,
+							546.0
+						],
+						"radius": 22.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 17,
+						"spawn_key": "ginkgo_arcade/90001/camp_north/5",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 18,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1796.0,
+							488.0
+						],
+						"radius": 14.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 18,
+						"spawn_key": "ginkgo_arcade/90001/camp_north/6",
+						"template_id": "splitter"
+					},
+					{
+						"actor_id": 19,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1870.0,
+							468.0
+						],
+						"radius": 22.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 19,
+						"spawn_key": "ginkgo_arcade/90001/camp_north/7",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 20,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1942.0,
+							501.0
+						],
+						"radius": 22.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 20,
+						"spawn_key": "ginkgo_arcade/90001/camp_north/8",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 21,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1970.0,
+							574.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 21,
+						"spawn_key": "ginkgo_arcade/90001/camp_north/9",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 22,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1927.0,
+							647.0
+						],
+						"radius": 14.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 22,
+						"spawn_key": "ginkgo_arcade/90001/camp_north/10",
+						"template_id": "splitter"
+					},
+					{
+						"actor_id": 23,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1852.0,
+							676.0
+						],
+						"radius": 22.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 23,
+						"spawn_key": "ginkgo_arcade/90001/camp_north/11",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 24,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1776.0,
+							626.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"reward_eligible": true,
+						"root_id": 24,
+						"spawn_key": "ginkgo_arcade/90001/camp_north/12",
+						"template_id": "ember_guard"
+					},
+					{
+						"actor_id": 25,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_1",
+						"position": [
+							2654.0,
+							1894.0
+						],
+						"radius": 22.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 25,
+						"spawn_key": "ginkgo_arcade/90001/camp_east/1",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 26,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_1",
+						"position": [
+							2707.0,
+							1957.0
+						],
+						"radius": 10.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 26,
+						"spawn_key": "ginkgo_arcade/90001/camp_east/2",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 27,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_1",
+						"position": [
+							2759.0,
+							1874.0
+						],
+						"radius": 10.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 27,
+						"spawn_key": "ginkgo_arcade/90001/camp_east/3",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 28,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_1",
+						"position": [
+							2812.0,
+							1938.0
+						],
+						"radius": 22.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 28,
+						"spawn_key": "ginkgo_arcade/90001/camp_east/4",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 29,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3087.0,
+							1396.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 29,
+						"spawn_key": "ginkgo_arcade/90001/camp_east/5",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 30,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3126.0,
+							1338.0
+						],
+						"radius": 10.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 30,
+						"spawn_key": "ginkgo_arcade/90001/camp_east/6",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 31,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3200.0,
+							1318.0
+						],
+						"radius": 22.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 31,
+						"spawn_key": "ginkgo_arcade/90001/camp_east/7",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 32,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3272.0,
+							1351.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"reward_eligible": true,
+						"root_id": 32,
+						"spawn_key": "ginkgo_arcade/90001/camp_east/8",
+						"template_id": "ember_guard"
+					},
+					{
+						"actor_id": 33,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3300.0,
+							1424.0
+						],
+						"radius": 10.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 33,
+						"spawn_key": "ginkgo_arcade/90001/camp_east/9",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 34,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3257.0,
+							1497.0
+						],
+						"radius": 22.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 34,
+						"spawn_key": "ginkgo_arcade/90001/camp_east/10",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 35,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3182.0,
+							1526.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 35,
+						"spawn_key": "ginkgo_arcade/90001/camp_east/11",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 36,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3106.0,
+							1476.0
+						],
+						"radius": 10.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 36,
+						"spawn_key": "ginkgo_arcade/90001/camp_east/12",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 37,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "",
+						"position": [
+							3222.0,
+							424.0
+						],
+						"radius": 27.5,
+						"rarity": "boss",
+						"reward_eligible": true,
+						"root_id": 37,
+						"spawn_key": "ginkgo_arcade/90001/boss",
+						"template_id": "rift_warden"
+					}
+				],
+				"scope": "Detached I-tier empty-modifier Plan example; no Main execution, player equipment, save, combat or rewards.",
+				"seed": 90001,
+				"spawn_records": [
+					{
+						"actor_id": 1,
+						"encounter_id": "",
+						"ordinal": 1,
+						"outpost_id": "camp_west_1",
+						"position": [
+							1254.0,
+							2184.0
+						],
+						"reward_route": "standard",
+						"root_id": 1,
+						"source_group": "camp_west",
+						"spawn_key": "ginkgo_arcade/90001/camp_west/1",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 2,
+						"encounter_id": "",
+						"ordinal": 2,
+						"outpost_id": "camp_west_1",
+						"position": [
+							1307.0,
+							2247.0
+						],
+						"reward_route": "standard",
+						"root_id": 2,
+						"source_group": "camp_west",
+						"spawn_key": "ginkgo_arcade/90001/camp_west/2",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 3,
+						"encounter_id": "",
+						"ordinal": 3,
+						"outpost_id": "camp_west_1",
+						"position": [
+							1359.0,
+							2164.0
+						],
+						"reward_route": "standard",
+						"root_id": 3,
+						"source_group": "camp_west",
+						"spawn_key": "ginkgo_arcade/90001/camp_west/3",
+						"template_id": "brood_host"
+					},
+					{
+						"actor_id": 4,
+						"encounter_id": "",
+						"ordinal": 4,
+						"outpost_id": "camp_west_1",
+						"position": [
+							1412.0,
+							2228.0
+						],
+						"reward_route": "standard",
+						"root_id": 4,
+						"source_group": "camp_west",
+						"spawn_key": "ginkgo_arcade/90001/camp_west/4",
+						"template_id": "splitter"
+					},
+					{
+						"actor_id": 5,
+						"encounter_id": "",
+						"ordinal": 5,
+						"outpost_id": "camp_west_2",
+						"position": [
+							357.0,
+							1156.0
+						],
+						"reward_route": "standard",
+						"root_id": 5,
+						"source_group": "camp_west",
+						"spawn_key": "ginkgo_arcade/90001/camp_west/5",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 6,
+						"encounter_id": "",
+						"ordinal": 6,
+						"outpost_id": "camp_west_2",
+						"position": [
+							396.0,
+							1098.0
+						],
+						"reward_route": "standard",
+						"root_id": 6,
+						"source_group": "camp_west",
+						"spawn_key": "ginkgo_arcade/90001/camp_west/6",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 7,
+						"encounter_id": "",
+						"ordinal": 7,
+						"outpost_id": "camp_west_2",
+						"position": [
+							470.0,
+							1078.0
+						],
+						"reward_route": "standard",
+						"root_id": 7,
+						"source_group": "camp_west",
+						"spawn_key": "ginkgo_arcade/90001/camp_west/7",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 8,
+						"encounter_id": "",
+						"ordinal": 8,
+						"outpost_id": "camp_west_2",
+						"position": [
+							542.0,
+							1111.0
+						],
+						"reward_route": "standard",
+						"root_id": 8,
+						"source_group": "camp_west",
+						"spawn_key": "ginkgo_arcade/90001/camp_west/8",
+						"template_id": "ember_guard"
+					},
+					{
+						"actor_id": 9,
+						"encounter_id": "",
+						"ordinal": 9,
+						"outpost_id": "camp_west_2",
+						"position": [
+							570.0,
+							1184.0
+						],
+						"reward_route": "standard",
+						"root_id": 9,
+						"source_group": "camp_west",
+						"spawn_key": "ginkgo_arcade/90001/camp_west/9",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 10,
+						"encounter_id": "",
+						"ordinal": 10,
+						"outpost_id": "camp_west_2",
+						"position": [
+							527.0,
+							1257.0
+						],
+						"reward_route": "standard",
+						"root_id": 10,
+						"source_group": "camp_west",
+						"spawn_key": "ginkgo_arcade/90001/camp_west/10",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 11,
+						"encounter_id": "",
+						"ordinal": 11,
+						"outpost_id": "camp_west_2",
+						"position": [
+							452.0,
+							1286.0
+						],
+						"reward_route": "standard",
+						"root_id": 11,
+						"source_group": "camp_west",
+						"spawn_key": "ginkgo_arcade/90001/camp_west/11",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 12,
+						"encounter_id": "",
+						"ordinal": 12,
+						"outpost_id": "camp_west_2",
+						"position": [
+							376.0,
+							1236.0
+						],
+						"reward_route": "standard",
+						"root_id": 12,
+						"source_group": "camp_west",
+						"spawn_key": "ginkgo_arcade/90001/camp_west/12",
+						"template_id": "brood_host"
+					},
+					{
+						"actor_id": 13,
+						"encounter_id": "",
+						"ordinal": 1,
+						"outpost_id": "camp_north_1",
+						"position": [
+							1084.0,
+							834.0
+						],
+						"reward_route": "standard",
+						"root_id": 13,
+						"source_group": "camp_north",
+						"spawn_key": "ginkgo_arcade/90001/camp_north/1",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 14,
+						"encounter_id": "",
+						"ordinal": 2,
+						"outpost_id": "camp_north_1",
+						"position": [
+							1137.0,
+							897.0
+						],
+						"reward_route": "standard",
+						"root_id": 14,
+						"source_group": "camp_north",
+						"spawn_key": "ginkgo_arcade/90001/camp_north/2",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 15,
+						"encounter_id": "",
+						"ordinal": 3,
+						"outpost_id": "camp_north_1",
+						"position": [
+							1189.0,
+							814.0
+						],
+						"reward_route": "standard",
+						"root_id": 15,
+						"source_group": "camp_north",
+						"spawn_key": "ginkgo_arcade/90001/camp_north/3",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 16,
+						"encounter_id": "",
+						"ordinal": 4,
+						"outpost_id": "camp_north_1",
+						"position": [
+							1242.0,
+							878.0
+						],
+						"reward_route": "standard",
+						"root_id": 16,
+						"source_group": "camp_north",
+						"spawn_key": "ginkgo_arcade/90001/camp_north/4",
+						"template_id": "ember_guard"
+					},
+					{
+						"actor_id": 17,
+						"encounter_id": "",
+						"ordinal": 5,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1757.0,
+							546.0
+						],
+						"reward_route": "standard",
+						"root_id": 17,
+						"source_group": "camp_north",
+						"spawn_key": "ginkgo_arcade/90001/camp_north/5",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 18,
+						"encounter_id": "",
+						"ordinal": 6,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1796.0,
+							488.0
+						],
+						"reward_route": "standard",
+						"root_id": 18,
+						"source_group": "camp_north",
+						"spawn_key": "ginkgo_arcade/90001/camp_north/6",
+						"template_id": "splitter"
+					},
+					{
+						"actor_id": 19,
+						"encounter_id": "",
+						"ordinal": 7,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1870.0,
+							468.0
+						],
+						"reward_route": "standard",
+						"root_id": 19,
+						"source_group": "camp_north",
+						"spawn_key": "ginkgo_arcade/90001/camp_north/7",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 20,
+						"encounter_id": "",
+						"ordinal": 8,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1942.0,
+							501.0
+						],
+						"reward_route": "standard",
+						"root_id": 20,
+						"source_group": "camp_north",
+						"spawn_key": "ginkgo_arcade/90001/camp_north/8",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 21,
+						"encounter_id": "",
+						"ordinal": 9,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1970.0,
+							574.0
+						],
+						"reward_route": "standard",
+						"root_id": 21,
+						"source_group": "camp_north",
+						"spawn_key": "ginkgo_arcade/90001/camp_north/9",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 22,
+						"encounter_id": "",
+						"ordinal": 10,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1927.0,
+							647.0
+						],
+						"reward_route": "standard",
+						"root_id": 22,
+						"source_group": "camp_north",
+						"spawn_key": "ginkgo_arcade/90001/camp_north/10",
+						"template_id": "splitter"
+					},
+					{
+						"actor_id": 23,
+						"encounter_id": "",
+						"ordinal": 11,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1852.0,
+							676.0
+						],
+						"reward_route": "standard",
+						"root_id": 23,
+						"source_group": "camp_north",
+						"spawn_key": "ginkgo_arcade/90001/camp_north/11",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 24,
+						"encounter_id": "",
+						"ordinal": 12,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1776.0,
+							626.0
+						],
+						"reward_route": "standard",
+						"root_id": 24,
+						"source_group": "camp_north",
+						"spawn_key": "ginkgo_arcade/90001/camp_north/12",
+						"template_id": "ember_guard"
+					},
+					{
+						"actor_id": 25,
+						"encounter_id": "",
+						"ordinal": 1,
+						"outpost_id": "camp_east_1",
+						"position": [
+							2654.0,
+							1894.0
+						],
+						"reward_route": "standard",
+						"root_id": 25,
+						"source_group": "camp_east",
+						"spawn_key": "ginkgo_arcade/90001/camp_east/1",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 26,
+						"encounter_id": "",
+						"ordinal": 2,
+						"outpost_id": "camp_east_1",
+						"position": [
+							2707.0,
+							1957.0
+						],
+						"reward_route": "standard",
+						"root_id": 26,
+						"source_group": "camp_east",
+						"spawn_key": "ginkgo_arcade/90001/camp_east/2",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 27,
+						"encounter_id": "",
+						"ordinal": 3,
+						"outpost_id": "camp_east_1",
+						"position": [
+							2759.0,
+							1874.0
+						],
+						"reward_route": "standard",
+						"root_id": 27,
+						"source_group": "camp_east",
+						"spawn_key": "ginkgo_arcade/90001/camp_east/3",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 28,
+						"encounter_id": "",
+						"ordinal": 4,
+						"outpost_id": "camp_east_1",
+						"position": [
+							2812.0,
+							1938.0
+						],
+						"reward_route": "standard",
+						"root_id": 28,
+						"source_group": "camp_east",
+						"spawn_key": "ginkgo_arcade/90001/camp_east/4",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 29,
+						"encounter_id": "",
+						"ordinal": 5,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3087.0,
+							1396.0
+						],
+						"reward_route": "standard",
+						"root_id": 29,
+						"source_group": "camp_east",
+						"spawn_key": "ginkgo_arcade/90001/camp_east/5",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 30,
+						"encounter_id": "",
+						"ordinal": 6,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3126.0,
+							1338.0
+						],
+						"reward_route": "standard",
+						"root_id": 30,
+						"source_group": "camp_east",
+						"spawn_key": "ginkgo_arcade/90001/camp_east/6",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 31,
+						"encounter_id": "",
+						"ordinal": 7,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3200.0,
+							1318.0
+						],
+						"reward_route": "standard",
+						"root_id": 31,
+						"source_group": "camp_east",
+						"spawn_key": "ginkgo_arcade/90001/camp_east/7",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 32,
+						"encounter_id": "",
+						"ordinal": 8,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3272.0,
+							1351.0
+						],
+						"reward_route": "standard",
+						"root_id": 32,
+						"source_group": "camp_east",
+						"spawn_key": "ginkgo_arcade/90001/camp_east/8",
+						"template_id": "ember_guard"
+					},
+					{
+						"actor_id": 33,
+						"encounter_id": "",
+						"ordinal": 9,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3300.0,
+							1424.0
+						],
+						"reward_route": "standard",
+						"root_id": 33,
+						"source_group": "camp_east",
+						"spawn_key": "ginkgo_arcade/90001/camp_east/9",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 34,
+						"encounter_id": "",
+						"ordinal": 10,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3257.0,
+							1497.0
+						],
+						"reward_route": "standard",
+						"root_id": 34,
+						"source_group": "camp_east",
+						"spawn_key": "ginkgo_arcade/90001/camp_east/10",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 35,
+						"encounter_id": "",
+						"ordinal": 11,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3182.0,
+							1526.0
+						],
+						"reward_route": "standard",
+						"root_id": 35,
+						"source_group": "camp_east",
+						"spawn_key": "ginkgo_arcade/90001/camp_east/11",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 36,
+						"encounter_id": "",
+						"ordinal": 12,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3106.0,
+							1476.0
+						],
+						"reward_route": "standard",
+						"root_id": 36,
+						"source_group": "camp_east",
+						"spawn_key": "ginkgo_arcade/90001/camp_east/12",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 37,
+						"encounter_id": "",
+						"ordinal": 1,
+						"outpost_id": "",
+						"position": [
+							3222.0,
+							424.0
+						],
+						"reward_route": "standard",
+						"root_id": 37,
+						"source_group": "boss",
+						"spawn_key": "ginkgo_arcade/90001/boss",
+						"template_id": "rift_warden"
+					}
+				],
+				"total": 37
+			}
+		},
+		"old_garden": {
+			"description": "开阔的大庭院，六处大小不同的驻点沿开阔环线与中央通路分布。入图时24个普通根怪与首领全部在场，靠近后投入战斗；可先挑战首领。清理全部怪物及后代后完成。首领近身震地锁定起手位置，及时离开圆圈。",
+			"geometry": {
+				"bounds": {
+					"position": [
+						42.0,
+						104.0
+					],
+					"size": [
+						3600.0,
+						2400.0
+					]
+				},
+				"encounter_mode": "exploration",
+				"id": "old_garden",
+				"landmarks": {
+					"boss": {
+						"center": [
+							3222.0,
+							424.0
+						],
+						"id": "rift_warden",
+						"name": "裂隙守卫",
+						"sign_position": [
+							3042.0,
+							574.0
+						],
+						"trigger_center": [
+							3222.0,
+							424.0
+						],
+						"trigger_radius": 64.0
+					},
+					"camps": [
+						{
+							"center": [
+								1342.0,
+								2104.0
+							],
+							"id": "camp_west",
+							"name": "西侧据点",
+							"positions": [
+								[
+									1342.0,
+									2060.0
+								],
+								[
+									1294.0,
+									2138.0
+								],
+								[
+									1394.0,
+									2132.0
+								],
+								[
+									658.0,
+									1184.0
+								],
+								[
+									708.0,
+									1120.0
+								],
+								[
+									780.0,
+									1124.0
+								],
+								[
+									830.0,
+									1192.0
+								],
+								[
+									742.0,
+									1234.0
+								]
+							],
+							"root_count": 8,
+							"sign_position": [
+								1342.0,
+								2254.0
+							],
+							"trigger_center": [
+								1342.0,
+								2104.0
+							],
+							"trigger_radius": 64.0
+						},
+						{
+							"center": [
+								892.0,
+								604.0
+							],
+							"id": "camp_north",
+							"name": "北侧据点",
+							"positions": [
+								[
+									892.0,
+									560.0
+								],
+								[
+									844.0,
+									638.0
+								],
+								[
+									944.0,
+									632.0
+								],
+								[
+									1798.0,
+									464.0
+								],
+								[
+									1848.0,
+									400.0
+								],
+								[
+									1920.0,
+									404.0
+								],
+								[
+									1970.0,
+									472.0
+								],
+								[
+									1882.0,
+									514.0
+								]
+							],
+							"root_count": 8,
+							"sign_position": [
+								892.0,
+								754.0
+							],
+							"trigger_center": [
+								892.0,
+								604.0
+							],
+							"trigger_radius": 64.0
+						},
+						{
+							"center": [
+								2722.0,
+								924.0
+							],
+							"id": "camp_east",
+							"name": "东侧据点",
+							"positions": [
+								[
+									2722.0,
+									880.0
+								],
+								[
+									2674.0,
+									958.0
+								],
+								[
+									2774.0,
+									952.0
+								],
+								[
+									2948.0,
+									1854.0
+								],
+								[
+									2998.0,
+									1790.0
+								],
+								[
+									3070.0,
+									1794.0
+								],
+								[
+									3120.0,
+									1862.0
+								],
+								[
+									3032.0,
+									1904.0
+								]
+							],
+							"root_count": 8,
+							"sign_position": [
+								2722.0,
+								1074.0
+							],
+							"trigger_center": [
+								2722.0,
+								924.0
+							],
+							"trigger_radius": 64.0
+						}
+					],
+					"distribution_version": "route_outposts_v1",
+					"entry": [
+						362.0,
+						2184.0
+					],
+					"outposts": [
+						{
+							"center": [
+								1342.0,
+								2104.0
+							],
+							"id": "camp_west_1",
+							"name": "西侧据点 · 1",
+							"ordinals": [
+								1,
+								2,
+								3
+							],
+							"positions": [
+								[
+									1342.0,
+									2060.0
+								],
+								[
+									1294.0,
+									2138.0
+								],
+								[
+									1394.0,
+									2132.0
+								]
+							],
+							"root_count": 3,
+							"sign_position": [
+								1342.0,
+								2254.0
+							],
+							"source_group": "camp_west"
+						},
+						{
+							"center": [
+								742.0,
+								1184.0
+							],
+							"id": "camp_west_2",
+							"name": "西侧据点 · 2",
+							"ordinals": [
+								4,
+								5,
+								6,
+								7,
+								8
+							],
+							"positions": [
+								[
+									658.0,
+									1184.0
+								],
+								[
+									708.0,
+									1120.0
+								],
+								[
+									780.0,
+									1124.0
+								],
+								[
+									830.0,
+									1192.0
+								],
+								[
+									742.0,
+									1234.0
+								]
+							],
+							"root_count": 5,
+							"sign_position": [
+								742.0,
+								1334.0
+							],
+							"source_group": "camp_west"
+						},
+						{
+							"center": [
+								892.0,
+								604.0
+							],
+							"id": "camp_north_1",
+							"name": "北侧据点 · 1",
+							"ordinals": [
+								1,
+								2,
+								3
+							],
+							"positions": [
+								[
+									892.0,
+									560.0
+								],
+								[
+									844.0,
+									638.0
+								],
+								[
+									944.0,
+									632.0
+								]
+							],
+							"root_count": 3,
+							"sign_position": [
+								892.0,
+								754.0
+							],
+							"source_group": "camp_north"
+						},
+						{
+							"center": [
+								1882.0,
+								464.0
+							],
+							"id": "camp_north_2",
+							"name": "北侧据点 · 2",
+							"ordinals": [
+								4,
+								5,
+								6,
+								7,
+								8
+							],
+							"positions": [
+								[
+									1798.0,
+									464.0
+								],
+								[
+									1848.0,
+									400.0
+								],
+								[
+									1920.0,
+									404.0
+								],
+								[
+									1970.0,
+									472.0
+								],
+								[
+									1882.0,
+									514.0
+								]
+							],
+							"root_count": 5,
+							"sign_position": [
+								1882.0,
+								614.0
+							],
+							"source_group": "camp_north"
+						},
+						{
+							"center": [
+								2722.0,
+								924.0
+							],
+							"id": "camp_east_1",
+							"name": "东侧据点 · 1",
+							"ordinals": [
+								1,
+								2,
+								3
+							],
+							"positions": [
+								[
+									2722.0,
+									880.0
+								],
+								[
+									2674.0,
+									958.0
+								],
+								[
+									2774.0,
+									952.0
+								]
+							],
+							"root_count": 3,
+							"sign_position": [
+								2722.0,
+								1074.0
+							],
+							"source_group": "camp_east"
+						},
+						{
+							"center": [
+								3032.0,
+								1854.0
+							],
+							"id": "camp_east_2",
+							"name": "东侧据点 · 2",
+							"ordinals": [
+								4,
+								5,
+								6,
+								7,
+								8
+							],
+							"positions": [
+								[
+									2948.0,
+									1854.0
+								],
+								[
+									2998.0,
+									1790.0
+								],
+								[
+									3070.0,
+									1794.0
+								],
+								[
+									3120.0,
+									1862.0
+								],
+								[
+									3032.0,
+									1904.0
+								]
+							],
+							"root_count": 5,
+							"sign_position": [
+								3032.0,
+								2004.0
+							],
+							"source_group": "camp_east"
+						}
+					],
+					"route_segments": [
+						{
+							"from": [
+								362.0,
+								2184.0
+							],
+							"to": [
+								1342.0,
+								2104.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								1342.0,
+								2104.0
+							],
+							"to": [
+								2042.0,
+								2104.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								2042.0,
+								2104.0
+							],
+							"to": [
+								3032.0,
+								1854.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								3032.0,
+								1854.0
+							],
+							"to": [
+								2722.0,
+								924.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								2722.0,
+								924.0
+							],
+							"to": [
+								3222.0,
+								424.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								1342.0,
+								2104.0
+							],
+							"to": [
+								692.0,
+								1804.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								692.0,
+								1804.0
+							],
+							"to": [
+								742.0,
+								1184.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								742.0,
+								1184.0
+							],
+							"to": [
+								892.0,
+								604.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								892.0,
+								604.0
+							],
+							"to": [
+								1882.0,
+								464.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								1882.0,
+								464.0
+							],
+							"to": [
+								2722.0,
+								924.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								1342.0,
+								2104.0
+							],
+							"to": [
+								1882.0,
+								1404.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								1882.0,
+								1404.0
+							],
+							"to": [
+								1882.0,
+								464.0
+							],
+							"width": 72.0
+						}
+					]
+				},
+				"obstacle_style": "",
+				"revision": 1,
+				"spawn": [
+					362.0,
+					2184.0
+				],
+				"walls": []
+			},
+			"plan_example": {
+				"mechanism_config": {
+
+				},
+				"optional_encounters": [],
+				"roots": [
+					{
+						"actor_id": 1,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_1",
+						"position": [
+							1342.0,
+							2060.0
+						],
+						"radius": 14.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 1,
+						"spawn_key": "old_garden/90001/camp_west/1",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 2,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_1",
+						"position": [
+							1294.0,
+							2138.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 2,
+						"spawn_key": "old_garden/90001/camp_west/2",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 3,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_1",
+						"position": [
+							1394.0,
+							2132.0
+						],
+						"radius": 14.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 3,
+						"spawn_key": "old_garden/90001/camp_west/3",
+						"template_id": "splitter"
+					},
+					{
+						"actor_id": 4,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_2",
+						"position": [
+							658.0,
+							1184.0
+						],
+						"radius": 14.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 4,
+						"spawn_key": "old_garden/90001/camp_west/4",
+						"template_id": "splitter"
+					},
+					{
+						"actor_id": 5,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_2",
+						"position": [
+							708.0,
+							1120.0
+						],
+						"radius": 14.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 5,
+						"spawn_key": "old_garden/90001/camp_west/5",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 6,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_2",
+						"position": [
+							780.0,
+							1124.0
+						],
+						"radius": 10.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 6,
+						"spawn_key": "old_garden/90001/camp_west/6",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 7,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_2",
+						"position": [
+							830.0,
+							1192.0
+						],
+						"radius": 14.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 7,
+						"spawn_key": "old_garden/90001/camp_west/7",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 8,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_2",
+						"position": [
+							742.0,
+							1234.0
+						],
+						"radius": 14.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 8,
+						"spawn_key": "old_garden/90001/camp_west/8",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 9,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_1",
+						"position": [
+							892.0,
+							560.0
+						],
+						"radius": 10.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 9,
+						"spawn_key": "old_garden/90001/camp_north/1",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 10,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_1",
+						"position": [
+							844.0,
+							638.0
+						],
+						"radius": 10.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 10,
+						"spawn_key": "old_garden/90001/camp_north/2",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 11,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_1",
+						"position": [
+							944.0,
+							632.0
+						],
+						"radius": 14.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 11,
+						"spawn_key": "old_garden/90001/camp_north/3",
+						"template_id": "splitter"
+					},
+					{
+						"actor_id": 12,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1798.0,
+							464.0
+						],
+						"radius": 14.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 12,
+						"spawn_key": "old_garden/90001/camp_north/4",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 13,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1848.0,
+							400.0
+						],
+						"radius": 14.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 13,
+						"spawn_key": "old_garden/90001/camp_north/5",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 14,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1920.0,
+							404.0
+						],
+						"radius": 10.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 14,
+						"spawn_key": "old_garden/90001/camp_north/6",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 15,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1970.0,
+							472.0
+						],
+						"radius": 10.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 15,
+						"spawn_key": "old_garden/90001/camp_north/7",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 16,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1882.0,
+							514.0
+						],
+						"radius": 14.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 16,
+						"spawn_key": "old_garden/90001/camp_north/8",
+						"template_id": "splitter"
+					},
+					{
+						"actor_id": 17,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_1",
+						"position": [
+							2722.0,
+							880.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 17,
+						"spawn_key": "old_garden/90001/camp_east/1",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 18,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_1",
+						"position": [
+							2674.0,
+							958.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 18,
+						"spawn_key": "old_garden/90001/camp_east/2",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 19,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_1",
+						"position": [
+							2774.0,
+							952.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 19,
+						"spawn_key": "old_garden/90001/camp_east/3",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 20,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_2",
+						"position": [
+							2948.0,
+							1854.0
+						],
+						"radius": 14.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 20,
+						"spawn_key": "old_garden/90001/camp_east/4",
+						"template_id": "splitter"
+					},
+					{
+						"actor_id": 21,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_2",
+						"position": [
+							2998.0,
+							1790.0
+						],
+						"radius": 10.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 21,
+						"spawn_key": "old_garden/90001/camp_east/5",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 22,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3070.0,
+							1794.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 22,
+						"spawn_key": "old_garden/90001/camp_east/6",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 23,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3120.0,
+							1862.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 23,
+						"spawn_key": "old_garden/90001/camp_east/7",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 24,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3032.0,
+							1904.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 24,
+						"spawn_key": "old_garden/90001/camp_east/8",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 25,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "",
+						"position": [
+							3222.0,
+							424.0
+						],
+						"radius": 27.5,
+						"rarity": "boss",
+						"reward_eligible": true,
+						"root_id": 25,
+						"spawn_key": "old_garden/90001/boss",
+						"template_id": "rift_warden"
+					}
+				],
+				"scope": "Detached I-tier empty-modifier Plan example; no Main execution, player equipment, save, combat or rewards.",
+				"seed": 90001,
+				"spawn_records": [
+					{
+						"actor_id": 1,
+						"encounter_id": "",
+						"ordinal": 1,
+						"outpost_id": "camp_west_1",
+						"position": [
+							1342.0,
+							2060.0
+						],
+						"reward_route": "standard",
+						"root_id": 1,
+						"source_group": "camp_west",
+						"spawn_key": "old_garden/90001/camp_west/1",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 2,
+						"encounter_id": "",
+						"ordinal": 2,
+						"outpost_id": "camp_west_1",
+						"position": [
+							1294.0,
+							2138.0
+						],
+						"reward_route": "standard",
+						"root_id": 2,
+						"source_group": "camp_west",
+						"spawn_key": "old_garden/90001/camp_west/2",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 3,
+						"encounter_id": "",
+						"ordinal": 3,
+						"outpost_id": "camp_west_1",
+						"position": [
+							1394.0,
+							2132.0
+						],
+						"reward_route": "standard",
+						"root_id": 3,
+						"source_group": "camp_west",
+						"spawn_key": "old_garden/90001/camp_west/3",
+						"template_id": "splitter"
+					},
+					{
+						"actor_id": 4,
+						"encounter_id": "",
+						"ordinal": 4,
+						"outpost_id": "camp_west_2",
+						"position": [
+							658.0,
+							1184.0
+						],
+						"reward_route": "standard",
+						"root_id": 4,
+						"source_group": "camp_west",
+						"spawn_key": "old_garden/90001/camp_west/4",
+						"template_id": "splitter"
+					},
+					{
+						"actor_id": 5,
+						"encounter_id": "",
+						"ordinal": 5,
+						"outpost_id": "camp_west_2",
+						"position": [
+							708.0,
+							1120.0
+						],
+						"reward_route": "standard",
+						"root_id": 5,
+						"source_group": "camp_west",
+						"spawn_key": "old_garden/90001/camp_west/5",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 6,
+						"encounter_id": "",
+						"ordinal": 6,
+						"outpost_id": "camp_west_2",
+						"position": [
+							780.0,
+							1124.0
+						],
+						"reward_route": "standard",
+						"root_id": 6,
+						"source_group": "camp_west",
+						"spawn_key": "old_garden/90001/camp_west/6",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 7,
+						"encounter_id": "",
+						"ordinal": 7,
+						"outpost_id": "camp_west_2",
+						"position": [
+							830.0,
+							1192.0
+						],
+						"reward_route": "standard",
+						"root_id": 7,
+						"source_group": "camp_west",
+						"spawn_key": "old_garden/90001/camp_west/7",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 8,
+						"encounter_id": "",
+						"ordinal": 8,
+						"outpost_id": "camp_west_2",
+						"position": [
+							742.0,
+							1234.0
+						],
+						"reward_route": "standard",
+						"root_id": 8,
+						"source_group": "camp_west",
+						"spawn_key": "old_garden/90001/camp_west/8",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 9,
+						"encounter_id": "",
+						"ordinal": 1,
+						"outpost_id": "camp_north_1",
+						"position": [
+							892.0,
+							560.0
+						],
+						"reward_route": "standard",
+						"root_id": 9,
+						"source_group": "camp_north",
+						"spawn_key": "old_garden/90001/camp_north/1",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 10,
+						"encounter_id": "",
+						"ordinal": 2,
+						"outpost_id": "camp_north_1",
+						"position": [
+							844.0,
+							638.0
+						],
+						"reward_route": "standard",
+						"root_id": 10,
+						"source_group": "camp_north",
+						"spawn_key": "old_garden/90001/camp_north/2",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 11,
+						"encounter_id": "",
+						"ordinal": 3,
+						"outpost_id": "camp_north_1",
+						"position": [
+							944.0,
+							632.0
+						],
+						"reward_route": "standard",
+						"root_id": 11,
+						"source_group": "camp_north",
+						"spawn_key": "old_garden/90001/camp_north/3",
+						"template_id": "splitter"
+					},
+					{
+						"actor_id": 12,
+						"encounter_id": "",
+						"ordinal": 4,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1798.0,
+							464.0
+						],
+						"reward_route": "standard",
+						"root_id": 12,
+						"source_group": "camp_north",
+						"spawn_key": "old_garden/90001/camp_north/4",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 13,
+						"encounter_id": "",
+						"ordinal": 5,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1848.0,
+							400.0
+						],
+						"reward_route": "standard",
+						"root_id": 13,
+						"source_group": "camp_north",
+						"spawn_key": "old_garden/90001/camp_north/5",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 14,
+						"encounter_id": "",
+						"ordinal": 6,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1920.0,
+							404.0
+						],
+						"reward_route": "standard",
+						"root_id": 14,
+						"source_group": "camp_north",
+						"spawn_key": "old_garden/90001/camp_north/6",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 15,
+						"encounter_id": "",
+						"ordinal": 7,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1970.0,
+							472.0
+						],
+						"reward_route": "standard",
+						"root_id": 15,
+						"source_group": "camp_north",
+						"spawn_key": "old_garden/90001/camp_north/7",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 16,
+						"encounter_id": "",
+						"ordinal": 8,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1882.0,
+							514.0
+						],
+						"reward_route": "standard",
+						"root_id": 16,
+						"source_group": "camp_north",
+						"spawn_key": "old_garden/90001/camp_north/8",
+						"template_id": "splitter"
+					},
+					{
+						"actor_id": 17,
+						"encounter_id": "",
+						"ordinal": 1,
+						"outpost_id": "camp_east_1",
+						"position": [
+							2722.0,
+							880.0
+						],
+						"reward_route": "standard",
+						"root_id": 17,
+						"source_group": "camp_east",
+						"spawn_key": "old_garden/90001/camp_east/1",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 18,
+						"encounter_id": "",
+						"ordinal": 2,
+						"outpost_id": "camp_east_1",
+						"position": [
+							2674.0,
+							958.0
+						],
+						"reward_route": "standard",
+						"root_id": 18,
+						"source_group": "camp_east",
+						"spawn_key": "old_garden/90001/camp_east/2",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 19,
+						"encounter_id": "",
+						"ordinal": 3,
+						"outpost_id": "camp_east_1",
+						"position": [
+							2774.0,
+							952.0
+						],
+						"reward_route": "standard",
+						"root_id": 19,
+						"source_group": "camp_east",
+						"spawn_key": "old_garden/90001/camp_east/3",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 20,
+						"encounter_id": "",
+						"ordinal": 4,
+						"outpost_id": "camp_east_2",
+						"position": [
+							2948.0,
+							1854.0
+						],
+						"reward_route": "standard",
+						"root_id": 20,
+						"source_group": "camp_east",
+						"spawn_key": "old_garden/90001/camp_east/4",
+						"template_id": "splitter"
+					},
+					{
+						"actor_id": 21,
+						"encounter_id": "",
+						"ordinal": 5,
+						"outpost_id": "camp_east_2",
+						"position": [
+							2998.0,
+							1790.0
+						],
+						"reward_route": "standard",
+						"root_id": 21,
+						"source_group": "camp_east",
+						"spawn_key": "old_garden/90001/camp_east/5",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 22,
+						"encounter_id": "",
+						"ordinal": 6,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3070.0,
+							1794.0
+						],
+						"reward_route": "standard",
+						"root_id": 22,
+						"source_group": "camp_east",
+						"spawn_key": "old_garden/90001/camp_east/6",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 23,
+						"encounter_id": "",
+						"ordinal": 7,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3120.0,
+							1862.0
+						],
+						"reward_route": "standard",
+						"root_id": 23,
+						"source_group": "camp_east",
+						"spawn_key": "old_garden/90001/camp_east/7",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 24,
+						"encounter_id": "",
+						"ordinal": 8,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3032.0,
+							1904.0
+						],
+						"reward_route": "standard",
+						"root_id": 24,
+						"source_group": "camp_east",
+						"spawn_key": "old_garden/90001/camp_east/8",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 25,
+						"encounter_id": "",
+						"ordinal": 1,
+						"outpost_id": "",
+						"position": [
+							3222.0,
+							424.0
+						],
+						"reward_route": "standard",
+						"root_id": 25,
+						"source_group": "boss",
+						"spawn_key": "old_garden/90001/boss",
+						"template_id": "rift_warden"
+					}
+				],
+				"total": 25
+			}
+		},
+		"sunwell_terrace": {
+			"description": "四座实体泉池形成宽阔的池间通道，阻挡移动、弹体与视线。六处4或8怪驻点分列池间十字与外环；西泉偏重壳与霜纹，北门混合编排，东阶偏掠行与雷纹。36个普通根怪与首领入图时全部在场，可自由探索或先挑战首领；清理全部怪物及后代后完成。首领两次回响均锁定起手位置。",
+			"geometry": {
+				"bounds": {
+					"position": [
+						42.0,
+						104.0
+					],
+					"size": [
+						3600.0,
+						2400.0
+					]
+				},
+				"encounter_mode": "exploration",
+				"id": "sunwell_terrace",
+				"landmarks": {
+					"boss": {
+						"center": [
+							3222.0,
+							424.0
+						],
+						"id": "rift_warden",
+						"name": "裂隙守卫",
+						"sign_position": [
+							3042.0,
+							574.0
+						],
+						"trigger_center": [
+							3222.0,
+							424.0
+						],
+						"trigger_radius": 64.0
+					},
+					"camps": [
+						{
+							"center": [
+								1382.0,
+								2244.0
+							],
+							"id": "camp_west",
+							"name": "西泉据点",
+							"positions": [
+								[
+									1304.0,
+									2224.0
+								],
+								[
+									1357.0,
+									2287.0
+								],
+								[
+									1409.0,
+									2204.0
+								],
+								[
+									1462.0,
+									2268.0
+								],
+								[
+									587.0,
+									1236.0
+								],
+								[
+									626.0,
+									1178.0
+								],
+								[
+									700.0,
+									1158.0
+								],
+								[
+									772.0,
+									1191.0
+								],
+								[
+									800.0,
+									1264.0
+								],
+								[
+									757.0,
+									1337.0
+								],
+								[
+									682.0,
+									1366.0
+								],
+								[
+									606.0,
+									1316.0
+								]
+							],
+							"root_count": 12,
+							"sign_position": [
+								1382.0,
+								2394.0
+							],
+							"trigger_center": [
+								1382.0,
+								2244.0
+							],
+							"trigger_radius": 64.0
+						},
+						{
+							"center": [
+								1782.0,
+								1454.0
+							],
+							"id": "camp_north",
+							"name": "北门据点",
+							"positions": [
+								[
+									1704.0,
+									1434.0
+								],
+								[
+									1757.0,
+									1497.0
+								],
+								[
+									1809.0,
+									1414.0
+								],
+								[
+									1862.0,
+									1478.0
+								],
+								[
+									1747.0,
+									496.0
+								],
+								[
+									1786.0,
+									438.0
+								],
+								[
+									1860.0,
+									418.0
+								],
+								[
+									1932.0,
+									451.0
+								],
+								[
+									1960.0,
+									524.0
+								],
+								[
+									1917.0,
+									597.0
+								],
+								[
+									1842.0,
+									626.0
+								],
+								[
+									1766.0,
+									576.0
+								]
+							],
+							"root_count": 12,
+							"sign_position": [
+								1782.0,
+								1604.0
+							],
+							"trigger_center": [
+								1782.0,
+								1454.0
+							],
+							"trigger_radius": 64.0
+						},
+						{
+							"center": [
+								2962.0,
+								2174.0
+							],
+							"id": "camp_east",
+							"name": "东阶据点",
+							"positions": [
+								[
+									2884.0,
+									2154.0
+								],
+								[
+									2937.0,
+									2217.0
+								],
+								[
+									2989.0,
+									2134.0
+								],
+								[
+									3042.0,
+									2198.0
+								],
+								[
+									2947.0,
+									1296.0
+								],
+								[
+									2986.0,
+									1238.0
+								],
+								[
+									3060.0,
+									1218.0
+								],
+								[
+									3132.0,
+									1251.0
+								],
+								[
+									3160.0,
+									1324.0
+								],
+								[
+									3117.0,
+									1397.0
+								],
+								[
+									3042.0,
+									1426.0
+								],
+								[
+									2966.0,
+									1376.0
+								]
+							],
+							"root_count": 12,
+							"sign_position": [
+								2962.0,
+								2324.0
+							],
+							"trigger_center": [
+								2962.0,
+								2174.0
+							],
+							"trigger_radius": 64.0
+						}
+					],
+					"distribution_version": "route_outposts_v1",
+					"entry": [
+						362.0,
+						2184.0
+					],
+					"outposts": [
+						{
+							"center": [
+								1382.0,
+								2244.0
+							],
+							"id": "camp_west_1",
+							"name": "西泉据点 · 1",
+							"ordinals": [
+								1,
+								2,
+								3,
+								4
+							],
+							"positions": [
+								[
+									1304.0,
+									2224.0
+								],
+								[
+									1357.0,
+									2287.0
+								],
+								[
+									1409.0,
+									2204.0
+								],
+								[
+									1462.0,
+									2268.0
+								]
+							],
+							"root_count": 4,
+							"sign_position": [
+								1382.0,
+								2394.0
+							],
+							"source_group": "camp_west"
+						},
+						{
+							"center": [
+								692.0,
+								1264.0
+							],
+							"id": "camp_west_2",
+							"name": "西泉据点 · 2",
+							"ordinals": [
+								5,
+								6,
+								7,
+								8,
+								9,
+								10,
+								11,
+								12
+							],
+							"positions": [
+								[
+									587.0,
+									1236.0
+								],
+								[
+									626.0,
+									1178.0
+								],
+								[
+									700.0,
+									1158.0
+								],
+								[
+									772.0,
+									1191.0
+								],
+								[
+									800.0,
+									1264.0
+								],
+								[
+									757.0,
+									1337.0
+								],
+								[
+									682.0,
+									1366.0
+								],
+								[
+									606.0,
+									1316.0
+								]
+							],
+							"root_count": 8,
+							"sign_position": [
+								692.0,
+								1414.0
+							],
+							"source_group": "camp_west"
+						},
+						{
+							"center": [
+								1782.0,
+								1454.0
+							],
+							"id": "camp_north_1",
+							"name": "北门据点 · 1",
+							"ordinals": [
+								1,
+								2,
+								3,
+								4
+							],
+							"positions": [
+								[
+									1704.0,
+									1434.0
+								],
+								[
+									1757.0,
+									1497.0
+								],
+								[
+									1809.0,
+									1414.0
+								],
+								[
+									1862.0,
+									1478.0
+								]
+							],
+							"root_count": 4,
+							"sign_position": [
+								1782.0,
+								1604.0
+							],
+							"source_group": "camp_north"
+						},
+						{
+							"center": [
+								1852.0,
+								524.0
+							],
+							"id": "camp_north_2",
+							"name": "北门据点 · 2",
+							"ordinals": [
+								5,
+								6,
+								7,
+								8,
+								9,
+								10,
+								11,
+								12
+							],
+							"positions": [
+								[
+									1747.0,
+									496.0
+								],
+								[
+									1786.0,
+									438.0
+								],
+								[
+									1860.0,
+									418.0
+								],
+								[
+									1932.0,
+									451.0
+								],
+								[
+									1960.0,
+									524.0
+								],
+								[
+									1917.0,
+									597.0
+								],
+								[
+									1842.0,
+									626.0
+								],
+								[
+									1766.0,
+									576.0
+								]
+							],
+							"root_count": 8,
+							"sign_position": [
+								1852.0,
+								674.0
+							],
+							"source_group": "camp_north"
+						},
+						{
+							"center": [
+								2962.0,
+								2174.0
+							],
+							"id": "camp_east_1",
+							"name": "东阶据点 · 1",
+							"ordinals": [
+								1,
+								2,
+								3,
+								4
+							],
+							"positions": [
+								[
+									2884.0,
+									2154.0
+								],
+								[
+									2937.0,
+									2217.0
+								],
+								[
+									2989.0,
+									2134.0
+								],
+								[
+									3042.0,
+									2198.0
+								]
+							],
+							"root_count": 4,
+							"sign_position": [
+								2962.0,
+								2324.0
+							],
+							"source_group": "camp_east"
+						},
+						{
+							"center": [
+								3052.0,
+								1324.0
+							],
+							"id": "camp_east_2",
+							"name": "东阶据点 · 2",
+							"ordinals": [
+								5,
+								6,
+								7,
+								8,
+								9,
+								10,
+								11,
+								12
+							],
+							"positions": [
+								[
+									2947.0,
+									1296.0
+								],
+								[
+									2986.0,
+									1238.0
+								],
+								[
+									3060.0,
+									1218.0
+								],
+								[
+									3132.0,
+									1251.0
+								],
+								[
+									3160.0,
+									1324.0
+								],
+								[
+									3117.0,
+									1397.0
+								],
+								[
+									3042.0,
+									1426.0
+								],
+								[
+									2966.0,
+									1376.0
+								]
+							],
+							"root_count": 8,
+							"sign_position": [
+								3052.0,
+								1474.0
+							],
+							"source_group": "camp_east"
+						}
+					],
+					"route_segments": [
+						{
+							"from": [
+								362.0,
+								2184.0
+							],
+							"to": [
+								692.0,
+								2204.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								692.0,
+								2204.0
+							],
+							"to": [
+								1382.0,
+								2244.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								1382.0,
+								2244.0
+							],
+							"to": [
+								1832.0,
+								2244.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								1832.0,
+								2244.0
+							],
+							"to": [
+								2962.0,
+								2174.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								2962.0,
+								2174.0
+							],
+							"to": [
+								3052.0,
+								1324.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								3052.0,
+								1324.0
+							],
+							"to": [
+								2952.0,
+								604.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								2952.0,
+								604.0
+							],
+							"to": [
+								3222.0,
+								424.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								362.0,
+								2184.0
+							],
+							"to": [
+								692.0,
+								1264.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								692.0,
+								1264.0
+							],
+							"to": [
+								692.0,
+								604.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								692.0,
+								604.0
+							],
+							"to": [
+								1852.0,
+								524.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								1852.0,
+								524.0
+							],
+							"to": [
+								2952.0,
+								604.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								1832.0,
+								2244.0
+							],
+							"to": [
+								1782.0,
+								1454.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								1782.0,
+								1454.0
+							],
+							"to": [
+								1852.0,
+								524.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								692.0,
+								1264.0
+							],
+							"to": [
+								692.0,
+								1454.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								692.0,
+								1454.0
+							],
+							"to": [
+								1782.0,
+								1454.0
+							],
+							"width": 72.0
+						},
+						{
+							"from": [
+								1782.0,
+								1454.0
+							],
+							"to": [
+								3052.0,
+								1324.0
+							],
+							"width": 72.0
+						}
+					]
+				},
+				"obstacle_style": "spring_basin",
+				"revision": 1,
+				"spawn": [
+					362.0,
+					2184.0
+				],
+				"walls": [
+					{
+						"position": [
+							1022.0,
+							884.0
+						],
+						"size": [
+							540.0,
+							360.0
+						]
+					},
+					{
+						"position": [
+							2122.0,
+							884.0
+						],
+						"size": [
+							540.0,
+							360.0
+						]
+					},
+					{
+						"position": [
+							1022.0,
+							1664.0
+						],
+						"size": [
+							540.0,
+							360.0
+						]
+					},
+					{
+						"position": [
+							2122.0,
+							1664.0
+						],
+						"size": [
+							540.0,
+							360.0
+						]
+					}
+				]
+			},
+			"plan_example": {
+				"mechanism_config": {
+
+				},
+				"optional_encounters": [],
+				"roots": [
+					{
+						"actor_id": 1,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_1",
+						"position": [
+							1304.0,
+							2224.0
+						],
+						"radius": 22.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 1,
+						"spawn_key": "sunwell_terrace/90001/camp_west/1",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 2,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_1",
+						"position": [
+							1357.0,
+							2287.0
+						],
+						"radius": 22.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 2,
+						"spawn_key": "sunwell_terrace/90001/camp_west/2",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 3,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_1",
+						"position": [
+							1409.0,
+							2204.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"reward_eligible": true,
+						"root_id": 3,
+						"spawn_key": "sunwell_terrace/90001/camp_west/3",
+						"template_id": "brood_host"
+					},
+					{
+						"actor_id": 4,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_1",
+						"position": [
+							1462.0,
+							2268.0
+						],
+						"radius": 14.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 4,
+						"spawn_key": "sunwell_terrace/90001/camp_west/4",
+						"template_id": "splitter"
+					},
+					{
+						"actor_id": 5,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_2",
+						"position": [
+							587.0,
+							1236.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"reward_eligible": true,
+						"root_id": 5,
+						"spawn_key": "sunwell_terrace/90001/camp_west/5",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 6,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_2",
+						"position": [
+							626.0,
+							1178.0
+						],
+						"radius": 10.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 6,
+						"spawn_key": "sunwell_terrace/90001/camp_west/6",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 7,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_2",
+						"position": [
+							700.0,
+							1158.0
+						],
+						"radius": 22.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 7,
+						"spawn_key": "sunwell_terrace/90001/camp_west/7",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 8,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_2",
+						"position": [
+							772.0,
+							1191.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"reward_eligible": true,
+						"root_id": 8,
+						"spawn_key": "sunwell_terrace/90001/camp_west/8",
+						"template_id": "ember_guard"
+					},
+					{
+						"actor_id": 9,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_2",
+						"position": [
+							800.0,
+							1264.0
+						],
+						"radius": 22.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 9,
+						"spawn_key": "sunwell_terrace/90001/camp_west/9",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 10,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_2",
+						"position": [
+							757.0,
+							1337.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 10,
+						"spawn_key": "sunwell_terrace/90001/camp_west/10",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 11,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_2",
+						"position": [
+							682.0,
+							1366.0
+						],
+						"radius": 22.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 11,
+						"spawn_key": "sunwell_terrace/90001/camp_west/11",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 12,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_west_2",
+						"position": [
+							606.0,
+							1316.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"reward_eligible": true,
+						"root_id": 12,
+						"spawn_key": "sunwell_terrace/90001/camp_west/12",
+						"template_id": "brood_host"
+					},
+					{
+						"actor_id": 13,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_1",
+						"position": [
+							1704.0,
+							1434.0
+						],
+						"radius": 14.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 13,
+						"spawn_key": "sunwell_terrace/90001/camp_north/1",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 14,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_1",
+						"position": [
+							1757.0,
+							1497.0
+						],
+						"radius": 22.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 14,
+						"spawn_key": "sunwell_terrace/90001/camp_north/2",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 15,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_1",
+						"position": [
+							1809.0,
+							1414.0
+						],
+						"radius": 10.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 15,
+						"spawn_key": "sunwell_terrace/90001/camp_north/3",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 16,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_1",
+						"position": [
+							1862.0,
+							1478.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"reward_eligible": true,
+						"root_id": 16,
+						"spawn_key": "sunwell_terrace/90001/camp_north/4",
+						"template_id": "ember_guard"
+					},
+					{
+						"actor_id": 17,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1747.0,
+							496.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 17,
+						"spawn_key": "sunwell_terrace/90001/camp_north/5",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 18,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1786.0,
+							438.0
+						],
+						"radius": 14.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 18,
+						"spawn_key": "sunwell_terrace/90001/camp_north/6",
+						"template_id": "splitter"
+					},
+					{
+						"actor_id": 19,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1860.0,
+							418.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 19,
+						"spawn_key": "sunwell_terrace/90001/camp_north/7",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 20,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1932.0,
+							451.0
+						],
+						"radius": 22.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 20,
+						"spawn_key": "sunwell_terrace/90001/camp_north/8",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 21,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1960.0,
+							524.0
+						],
+						"radius": 10.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 21,
+						"spawn_key": "sunwell_terrace/90001/camp_north/9",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 22,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1917.0,
+							597.0
+						],
+						"radius": 14.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 22,
+						"spawn_key": "sunwell_terrace/90001/camp_north/10",
+						"template_id": "splitter"
+					},
+					{
+						"actor_id": 23,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1842.0,
+							626.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 23,
+						"spawn_key": "sunwell_terrace/90001/camp_north/11",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 24,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1766.0,
+							576.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"reward_eligible": true,
+						"root_id": 24,
+						"spawn_key": "sunwell_terrace/90001/camp_north/12",
+						"template_id": "ember_guard"
+					},
+					{
+						"actor_id": 25,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_1",
+						"position": [
+							2884.0,
+							2154.0
+						],
+						"radius": 10.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 25,
+						"spawn_key": "sunwell_terrace/90001/camp_east/1",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 26,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_1",
+						"position": [
+							2937.0,
+							2217.0
+						],
+						"radius": 10.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 26,
+						"spawn_key": "sunwell_terrace/90001/camp_east/2",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 27,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_1",
+						"position": [
+							2989.0,
+							2134.0
+						],
+						"radius": 10.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 27,
+						"spawn_key": "sunwell_terrace/90001/camp_east/3",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 28,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_1",
+						"position": [
+							3042.0,
+							2198.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 28,
+						"spawn_key": "sunwell_terrace/90001/camp_east/4",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 29,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_2",
+						"position": [
+							2947.0,
+							1296.0
+						],
+						"radius": 10.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 29,
+						"spawn_key": "sunwell_terrace/90001/camp_east/5",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 30,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_2",
+						"position": [
+							2986.0,
+							1238.0
+						],
+						"radius": 22.0,
+						"rarity": "magic",
+						"reward_eligible": true,
+						"root_id": 30,
+						"spawn_key": "sunwell_terrace/90001/camp_east/6",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 31,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3060.0,
+							1218.0
+						],
+						"radius": 10.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 31,
+						"spawn_key": "sunwell_terrace/90001/camp_east/7",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 32,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3132.0,
+							1251.0
+						],
+						"radius": 22.0,
+						"rarity": "rare",
+						"reward_eligible": true,
+						"root_id": 32,
+						"spawn_key": "sunwell_terrace/90001/camp_east/8",
+						"template_id": "ember_guard"
+					},
+					{
+						"actor_id": 33,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3160.0,
+							1324.0
+						],
+						"radius": 10.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 33,
+						"spawn_key": "sunwell_terrace/90001/camp_east/9",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 34,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3117.0,
+							1397.0
+						],
+						"radius": 14.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 34,
+						"spawn_key": "sunwell_terrace/90001/camp_east/10",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 35,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3042.0,
+							1426.0
+						],
+						"radius": 10.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 35,
+						"spawn_key": "sunwell_terrace/90001/camp_east/11",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 36,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "camp_east_2",
+						"position": [
+							2966.0,
+							1376.0
+						],
+						"radius": 22.0,
+						"rarity": "normal",
+						"reward_eligible": true,
+						"root_id": 36,
+						"spawn_key": "sunwell_terrace/90001/camp_east/12",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 37,
+						"awake": false,
+						"generation": 0,
+						"outpost_id": "",
+						"position": [
+							3222.0,
+							424.0
+						],
+						"radius": 27.5,
+						"rarity": "boss",
+						"reward_eligible": true,
+						"root_id": 37,
+						"spawn_key": "sunwell_terrace/90001/boss",
+						"template_id": "rift_warden"
+					}
+				],
+				"scope": "Detached I-tier empty-modifier Plan example; no Main execution, player equipment, save, combat or rewards.",
+				"seed": 90001,
+				"spawn_records": [
+					{
+						"actor_id": 1,
+						"encounter_id": "",
+						"ordinal": 1,
+						"outpost_id": "camp_west_1",
+						"position": [
+							1304.0,
+							2224.0
+						],
+						"reward_route": "standard",
+						"root_id": 1,
+						"source_group": "camp_west",
+						"spawn_key": "sunwell_terrace/90001/camp_west/1",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 2,
+						"encounter_id": "",
+						"ordinal": 2,
+						"outpost_id": "camp_west_1",
+						"position": [
+							1357.0,
+							2287.0
+						],
+						"reward_route": "standard",
+						"root_id": 2,
+						"source_group": "camp_west",
+						"spawn_key": "sunwell_terrace/90001/camp_west/2",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 3,
+						"encounter_id": "",
+						"ordinal": 3,
+						"outpost_id": "camp_west_1",
+						"position": [
+							1409.0,
+							2204.0
+						],
+						"reward_route": "standard",
+						"root_id": 3,
+						"source_group": "camp_west",
+						"spawn_key": "sunwell_terrace/90001/camp_west/3",
+						"template_id": "brood_host"
+					},
+					{
+						"actor_id": 4,
+						"encounter_id": "",
+						"ordinal": 4,
+						"outpost_id": "camp_west_1",
+						"position": [
+							1462.0,
+							2268.0
+						],
+						"reward_route": "standard",
+						"root_id": 4,
+						"source_group": "camp_west",
+						"spawn_key": "sunwell_terrace/90001/camp_west/4",
+						"template_id": "splitter"
+					},
+					{
+						"actor_id": 5,
+						"encounter_id": "",
+						"ordinal": 5,
+						"outpost_id": "camp_west_2",
+						"position": [
+							587.0,
+							1236.0
+						],
+						"reward_route": "standard",
+						"root_id": 5,
+						"source_group": "camp_west",
+						"spawn_key": "sunwell_terrace/90001/camp_west/5",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 6,
+						"encounter_id": "",
+						"ordinal": 6,
+						"outpost_id": "camp_west_2",
+						"position": [
+							626.0,
+							1178.0
+						],
+						"reward_route": "standard",
+						"root_id": 6,
+						"source_group": "camp_west",
+						"spawn_key": "sunwell_terrace/90001/camp_west/6",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 7,
+						"encounter_id": "",
+						"ordinal": 7,
+						"outpost_id": "camp_west_2",
+						"position": [
+							700.0,
+							1158.0
+						],
+						"reward_route": "standard",
+						"root_id": 7,
+						"source_group": "camp_west",
+						"spawn_key": "sunwell_terrace/90001/camp_west/7",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 8,
+						"encounter_id": "",
+						"ordinal": 8,
+						"outpost_id": "camp_west_2",
+						"position": [
+							772.0,
+							1191.0
+						],
+						"reward_route": "standard",
+						"root_id": 8,
+						"source_group": "camp_west",
+						"spawn_key": "sunwell_terrace/90001/camp_west/8",
+						"template_id": "ember_guard"
+					},
+					{
+						"actor_id": 9,
+						"encounter_id": "",
+						"ordinal": 9,
+						"outpost_id": "camp_west_2",
+						"position": [
+							800.0,
+							1264.0
+						],
+						"reward_route": "standard",
+						"root_id": 9,
+						"source_group": "camp_west",
+						"spawn_key": "sunwell_terrace/90001/camp_west/9",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 10,
+						"encounter_id": "",
+						"ordinal": 10,
+						"outpost_id": "camp_west_2",
+						"position": [
+							757.0,
+							1337.0
+						],
+						"reward_route": "standard",
+						"root_id": 10,
+						"source_group": "camp_west",
+						"spawn_key": "sunwell_terrace/90001/camp_west/10",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 11,
+						"encounter_id": "",
+						"ordinal": 11,
+						"outpost_id": "camp_west_2",
+						"position": [
+							682.0,
+							1366.0
+						],
+						"reward_route": "standard",
+						"root_id": 11,
+						"source_group": "camp_west",
+						"spawn_key": "sunwell_terrace/90001/camp_west/11",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 12,
+						"encounter_id": "",
+						"ordinal": 12,
+						"outpost_id": "camp_west_2",
+						"position": [
+							606.0,
+							1316.0
+						],
+						"reward_route": "standard",
+						"root_id": 12,
+						"source_group": "camp_west",
+						"spawn_key": "sunwell_terrace/90001/camp_west/12",
+						"template_id": "brood_host"
+					},
+					{
+						"actor_id": 13,
+						"encounter_id": "",
+						"ordinal": 1,
+						"outpost_id": "camp_north_1",
+						"position": [
+							1704.0,
+							1434.0
+						],
+						"reward_route": "standard",
+						"root_id": 13,
+						"source_group": "camp_north",
+						"spawn_key": "sunwell_terrace/90001/camp_north/1",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 14,
+						"encounter_id": "",
+						"ordinal": 2,
+						"outpost_id": "camp_north_1",
+						"position": [
+							1757.0,
+							1497.0
+						],
+						"reward_route": "standard",
+						"root_id": 14,
+						"source_group": "camp_north",
+						"spawn_key": "sunwell_terrace/90001/camp_north/2",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 15,
+						"encounter_id": "",
+						"ordinal": 3,
+						"outpost_id": "camp_north_1",
+						"position": [
+							1809.0,
+							1414.0
+						],
+						"reward_route": "standard",
+						"root_id": 15,
+						"source_group": "camp_north",
+						"spawn_key": "sunwell_terrace/90001/camp_north/3",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 16,
+						"encounter_id": "",
+						"ordinal": 4,
+						"outpost_id": "camp_north_1",
+						"position": [
+							1862.0,
+							1478.0
+						],
+						"reward_route": "standard",
+						"root_id": 16,
+						"source_group": "camp_north",
+						"spawn_key": "sunwell_terrace/90001/camp_north/4",
+						"template_id": "ember_guard"
+					},
+					{
+						"actor_id": 17,
+						"encounter_id": "",
+						"ordinal": 5,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1747.0,
+							496.0
+						],
+						"reward_route": "standard",
+						"root_id": 17,
+						"source_group": "camp_north",
+						"spawn_key": "sunwell_terrace/90001/camp_north/5",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 18,
+						"encounter_id": "",
+						"ordinal": 6,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1786.0,
+							438.0
+						],
+						"reward_route": "standard",
+						"root_id": 18,
+						"source_group": "camp_north",
+						"spawn_key": "sunwell_terrace/90001/camp_north/6",
+						"template_id": "splitter"
+					},
+					{
+						"actor_id": 19,
+						"encounter_id": "",
+						"ordinal": 7,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1860.0,
+							418.0
+						],
+						"reward_route": "standard",
+						"root_id": 19,
+						"source_group": "camp_north",
+						"spawn_key": "sunwell_terrace/90001/camp_north/7",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 20,
+						"encounter_id": "",
+						"ordinal": 8,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1932.0,
+							451.0
+						],
+						"reward_route": "standard",
+						"root_id": 20,
+						"source_group": "camp_north",
+						"spawn_key": "sunwell_terrace/90001/camp_north/8",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 21,
+						"encounter_id": "",
+						"ordinal": 9,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1960.0,
+							524.0
+						],
+						"reward_route": "standard",
+						"root_id": 21,
+						"source_group": "camp_north",
+						"spawn_key": "sunwell_terrace/90001/camp_north/9",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 22,
+						"encounter_id": "",
+						"ordinal": 10,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1917.0,
+							597.0
+						],
+						"reward_route": "standard",
+						"root_id": 22,
+						"source_group": "camp_north",
+						"spawn_key": "sunwell_terrace/90001/camp_north/10",
+						"template_id": "splitter"
+					},
+					{
+						"actor_id": 23,
+						"encounter_id": "",
+						"ordinal": 11,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1842.0,
+							626.0
+						],
+						"reward_route": "standard",
+						"root_id": 23,
+						"source_group": "camp_north",
+						"spawn_key": "sunwell_terrace/90001/camp_north/11",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 24,
+						"encounter_id": "",
+						"ordinal": 12,
+						"outpost_id": "camp_north_2",
+						"position": [
+							1766.0,
+							576.0
+						],
+						"reward_route": "standard",
+						"root_id": 24,
+						"source_group": "camp_north",
+						"spawn_key": "sunwell_terrace/90001/camp_north/12",
+						"template_id": "ember_guard"
+					},
+					{
+						"actor_id": 25,
+						"encounter_id": "",
+						"ordinal": 1,
+						"outpost_id": "camp_east_1",
+						"position": [
+							2884.0,
+							2154.0
+						],
+						"reward_route": "standard",
+						"root_id": 25,
+						"source_group": "camp_east",
+						"spawn_key": "sunwell_terrace/90001/camp_east/1",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 26,
+						"encounter_id": "",
+						"ordinal": 2,
+						"outpost_id": "camp_east_1",
+						"position": [
+							2937.0,
+							2217.0
+						],
+						"reward_route": "standard",
+						"root_id": 26,
+						"source_group": "camp_east",
+						"spawn_key": "sunwell_terrace/90001/camp_east/2",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 27,
+						"encounter_id": "",
+						"ordinal": 3,
+						"outpost_id": "camp_east_1",
+						"position": [
+							2989.0,
+							2134.0
+						],
+						"reward_route": "standard",
+						"root_id": 27,
+						"source_group": "camp_east",
+						"spawn_key": "sunwell_terrace/90001/camp_east/3",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 28,
+						"encounter_id": "",
+						"ordinal": 4,
+						"outpost_id": "camp_east_1",
+						"position": [
+							3042.0,
+							2198.0
+						],
+						"reward_route": "standard",
+						"root_id": 28,
+						"source_group": "camp_east",
+						"spawn_key": "sunwell_terrace/90001/camp_east/4",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 29,
+						"encounter_id": "",
+						"ordinal": 5,
+						"outpost_id": "camp_east_2",
+						"position": [
+							2947.0,
+							1296.0
+						],
+						"reward_route": "standard",
+						"root_id": 29,
+						"source_group": "camp_east",
+						"spawn_key": "sunwell_terrace/90001/camp_east/5",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 30,
+						"encounter_id": "",
+						"ordinal": 6,
+						"outpost_id": "camp_east_2",
+						"position": [
+							2986.0,
+							1238.0
+						],
+						"reward_route": "standard",
+						"root_id": 30,
+						"source_group": "camp_east",
+						"spawn_key": "sunwell_terrace/90001/camp_east/6",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 31,
+						"encounter_id": "",
+						"ordinal": 7,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3060.0,
+							1218.0
+						],
+						"reward_route": "standard",
+						"root_id": 31,
+						"source_group": "camp_east",
+						"spawn_key": "sunwell_terrace/90001/camp_east/7",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 32,
+						"encounter_id": "",
+						"ordinal": 8,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3132.0,
+							1251.0
+						],
+						"reward_route": "standard",
+						"root_id": 32,
+						"source_group": "camp_east",
+						"spawn_key": "sunwell_terrace/90001/camp_east/8",
+						"template_id": "ember_guard"
+					},
+					{
+						"actor_id": 33,
+						"encounter_id": "",
+						"ordinal": 9,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3160.0,
+							1324.0
+						],
+						"reward_route": "standard",
+						"root_id": 33,
+						"source_group": "camp_east",
+						"spawn_key": "sunwell_terrace/90001/camp_east/9",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 34,
+						"encounter_id": "",
+						"ordinal": 10,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3117.0,
+							1397.0
+						],
+						"reward_route": "standard",
+						"root_id": 34,
+						"source_group": "camp_east",
+						"spawn_key": "sunwell_terrace/90001/camp_east/10",
+						"template_id": "crawler"
+					},
+					{
+						"actor_id": 35,
+						"encounter_id": "",
+						"ordinal": 11,
+						"outpost_id": "camp_east_2",
+						"position": [
+							3042.0,
+							1426.0
+						],
+						"reward_route": "standard",
+						"root_id": 35,
+						"source_group": "camp_east",
+						"spawn_key": "sunwell_terrace/90001/camp_east/11",
+						"template_id": "skitter"
+					},
+					{
+						"actor_id": 36,
+						"encounter_id": "",
+						"ordinal": 12,
+						"outpost_id": "camp_east_2",
+						"position": [
+							2966.0,
+							1376.0
+						],
+						"reward_route": "standard",
+						"root_id": 36,
+						"source_group": "camp_east",
+						"spawn_key": "sunwell_terrace/90001/camp_east/12",
+						"template_id": "brute"
+					},
+					{
+						"actor_id": 37,
+						"encounter_id": "",
+						"ordinal": 1,
+						"outpost_id": "",
+						"position": [
+							3222.0,
+							424.0
+						],
+						"reward_route": "standard",
+						"root_id": 37,
+						"source_group": "boss",
+						"spawn_key": "sunwell_terrace/90001/boss",
+						"template_id": "rift_warden"
+					}
+				],
+				"total": 37
+			}
+		}
+	},
+	"route_distribution": {
+		"outpost_count": 6,
+		"route_width": 72.0,
+		"source_group_count": 3,
+		"version": "route_outposts_v1"
+	}
+}

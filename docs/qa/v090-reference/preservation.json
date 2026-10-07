@@ -1,0 +1,81 @@
+{
+  "ok": true,
+  "baseline_commit": "8944b8f",
+  "preserved_raw_top_level_count": 85,
+  "preserved_map_economy_and_boss_raw_tokens": true,
+  "backward_compatible_builder_old_catalog_exact": true,
+  "changed_cards_only": [
+    "maps-broken_ruins",
+    "maps-ginkgo_arcade",
+    "maps-old_garden",
+    "maps-sunwell_terrace",
+    "rules-exploration_maps"
+  ],
+  "unchanged_card_count": 3796,
+  "layouts": {
+    "broken_ruins": {
+      "route_segments": 19,
+      "actual_route_width": 72,
+      "outpost_signs": 6,
+      "boss_signs": 1,
+      "initial_entities": 37,
+      "main_record_path": "entries[0]"
+    },
+    "ginkgo_arcade": {
+      "route_segments": 18,
+      "actual_route_width": 72,
+      "outpost_signs": 6,
+      "boss_signs": 1,
+      "initial_entities": 37,
+      "main_record_path": "entries[2]"
+    },
+    "old_garden": {
+      "route_segments": 12,
+      "actual_route_width": 72,
+      "outpost_signs": 6,
+      "boss_signs": 1,
+      "initial_entities": 25,
+      "main_record_path": "full_run.records"
+    },
+    "sunwell_terrace": {
+      "route_segments": 16,
+      "actual_route_width": 72,
+      "outpost_signs": 6,
+      "boss_signs": 1,
+      "initial_entities": 37,
+      "main_record_path": "entries[1]"
+    }
+  },
+  "all_local_links_and_assets_resolve": true,
+  "duplicate_anchors": false,
+  "frozen_production_and_document_count": 224,
+  "frozen_production_and_documents_unchanged": true,
+  "protected_reference_file_count": 77,
+  "protected_png_count": 71,
+  "protected_reference_bytes_and_mtime_unchanged": true,
+  "no_new_pngs": true,
+  "evidence": {
+    "layout_test": {
+      "path": "docs/qa/v090-routes/layout-result.json",
+      "sha256": "b54fcd5f416e0999f52d5675b45dbfeaa3b5fc4ca0efc30aad8d0892a834a04c"
+    },
+    "actual_main_report": {
+      "path": "docs/qa/v090-routes/main-result.json",
+      "sha256": "44b231fdc72a50c4d3341d3e0a787aeb8ce67f2e26d6261380e638bbb7537883"
+    },
+    "tested_inputs": {
+      "path": "docs/qa/v090-routes/tested-inputs.json",
+      "sha256": "f3d2756ec67b36672eb9daea6a035454c596eccac627edfd79f3f980d5157bcb"
+    }
+  },
+  "tested_input_count": 9,
+  "tested_inputs_match": true,
+  "build_matches": true,
+  "game_version_preserved": "0.87.0",
+  "current_output_sha256": {
+    "tools/build_reference.py": "d10a796a9d92871df8181580a779711ea4029a3522da307955e490ee25523aec",
+    "docs/reference/catalog.json": "f9e3dbf32bc63bacc7882d9858cf8458aee0570516d676fa1bc9e3e5dcb91580",
+    "docs/reference/index.html": "be4ee84948802485ab8fcc86fe870718f3965e0943fa4004ee2c2ed871d4e030"
+  },
+  "scope": "Output/source/provenance only; no production test rerun, Main, combat, native F8 visual or release validation."
+}
