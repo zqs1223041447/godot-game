@@ -44,8 +44,10 @@ static func quote(context: Variant, operation: Variant, uid: Variant) -> Diction
 	if balance < debit: return _failure("insufficient_materials", "背包中的校准碎片不足。")
 	if credit > Currency.INVENTORY_LIMIT - (balance - debit):
 		return _failure("material_overflow", "校准碎片总量已达上限。")
-	rule.item_id = uid
-	rule.revision = context.revision
+	# Bracket insertion preserves String keys; dot insertion creates StringName
+	# keys in Godot and would fail the deliberately strict quote boundary.
+	rule["item_id"] = uid
+	rule["revision"] = context.revision
 	return rule
 
 

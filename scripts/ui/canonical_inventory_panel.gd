@@ -302,7 +302,16 @@ func refresh() -> void:
 func _on_model_changed() -> void:
 	if bool(_pending_craft.get("gem", false)): _cancel_craft()
 	_refresh_dirty = true
-	if is_visible_in_tree(): refresh()
+	if is_visible_in_tree():
+		refresh()
+		# Model.changed can arrive while an atomic commit still holds its busy guard.
+		if model.item(_selected_uid).get("kind", "") == "jewel":
+			_refresh_jewel_crafting_after_commit.call_deferred()
+
+
+func _refresh_jewel_crafting_after_commit() -> void:
+	if is_visible_in_tree() and model != null and model.item(_selected_uid).get("kind", "") == "jewel":
+		_refresh_crafting()
 
 
 func _on_visibility_changed() -> void:
@@ -512,8 +521,9 @@ func _confirm_craft() -> void:
 		feedback.emit("宝石已回收" if bool(gem_result.get("ok", false)) else str(gem_result.get("reason", "操作未完成")))
 		refresh()
 		return
+	var jewel_craft: bool = model.item(issued.quote.item_id).get("kind", "") == "jewel"
 	var result: Dictionary = model.execute_crafting(issued.quote.handle,issued.source)
-	if result.ok: feedback.emit("装备工艺已保存")
+	if result.ok: feedback.emit("珠宝工艺已保存" if jewel_craft else "装备工艺已保存")
 	else: feedback.emit(str(result.get("reason","操作未完成")))
 	refresh()
 
