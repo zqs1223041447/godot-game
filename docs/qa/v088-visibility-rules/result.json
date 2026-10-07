@@ -1,0 +1,158 @@
+{
+	"art_sha256": "6d1948000018b03af847f4d297b32acb83c3f8e5397f87b960b384f45882bf6a",
+	"checks": 4982,
+	"command_vertices": 319200,
+	"draw_commands": 33984,
+	"failures": 0,
+	"geometry_cases": 832,
+	"layer_sha256": "959d0f102e8ae255cb8ca2420c11e6c2b114f1f3d476fcb433e12cd0e455bb20",
+	"seconds": 0.279907,
+	"templates": [
+		{
+			"cases": 96,
+			"legal_rarities": [
+				"normal",
+				"magic",
+				"rare"
+			],
+			"minimum_radial_slack": 10.3137084989848,
+			"template": "crawler",
+			"widest_stroke": 3.8
+		},
+		{
+			"cases": 96,
+			"legal_rarities": [
+				"normal",
+				"magic",
+				"rare"
+			],
+			"minimum_radial_slack": 10.3137084989848,
+			"template": "skitter",
+			"widest_stroke": 3.0
+		},
+		{
+			"cases": 32,
+			"legal_rarities": [
+				"normal"
+			],
+			"minimum_radial_slack": 10.3137084989848,
+			"template": "mist_skitter",
+			"widest_stroke": 3.0
+		},
+		{
+			"cases": 96,
+			"legal_rarities": [
+				"normal",
+				"magic",
+				"rare"
+			],
+			"minimum_radial_slack": 10.113708451301,
+			"template": "brute",
+			"widest_stroke": 6.0
+		},
+		{
+			"cases": 96,
+			"legal_rarities": [
+				"normal",
+				"magic",
+				"rare"
+			],
+			"minimum_radial_slack": 10.3137084989848,
+			"template": "splitter",
+			"widest_stroke": 3.8
+		},
+		{
+			"cases": 96,
+			"legal_rarities": [
+				"normal",
+				"magic",
+				"rare"
+			],
+			"minimum_radial_slack": 10.113708451301,
+			"template": "brood_host",
+			"widest_stroke": 6.0
+		},
+		{
+			"cases": 32,
+			"legal_rarities": [
+				"boss"
+			],
+			"minimum_radial_slack": 10.113708451301,
+			"template": "rift_warden",
+			"widest_stroke": 6.0
+		},
+		{
+			"cases": 96,
+			"legal_rarities": [
+				"normal",
+				"magic",
+				"rare"
+			],
+			"minimum_radial_slack": 10.113708451301,
+			"template": "frost_guard",
+			"widest_stroke": 6.0
+		},
+		{
+			"cases": 96,
+			"legal_rarities": [
+				"normal",
+				"magic",
+				"rare"
+			],
+			"minimum_radial_slack": 10.3137084989848,
+			"template": "storm_skitter",
+			"widest_stroke": 3.0
+		},
+		{
+			"cases": 96,
+			"legal_rarities": [
+				"normal",
+				"magic",
+				"rare"
+			],
+			"minimum_radial_slack": 9.02713461211342,
+			"template": "ember_guard",
+			"widest_stroke": 6.0
+		}
+	],
+	"test_sha256": "a9b8d4c0a4dc8d775d7078af682661dc0cfc003ce9d4a7334de055ca721b65b9",
+	"transforms": [
+		{
+			"aa_margin": 4.0,
+			"canvas": "[X: (1.0, 0.0), Y: (0.0, 1.0), O: (0.0, 0.0)]",
+			"case": 0,
+			"viewport_local": "[P: (0.0, 0.0), S: (640.0, 360.0)]"
+		},
+		{
+			"aa_margin": 4.0,
+			"canvas": "[X: (1.0, 0.0), Y: (0.0, 1.0), O: (-1200.0, 430.0)]",
+			"case": 1,
+			"viewport_local": "[P: (1200.0, -430.0), S: (640.0, 360.0)]"
+		},
+		{
+			"aa_margin": 11.4285707473755,
+			"canvas": "[X: (0.35, 0.0), Y: (0.0, 0.35), O: (170.0, 90.0)]",
+			"case": 2,
+			"viewport_local": "[P: (-485.7143, -257.1429), S: (1828.571, 1028.571)]"
+		},
+		{
+			"aa_margin": 1.59999990463257,
+			"canvas": "[X: (2.5, 0.0), Y: (0.0, 2.5), O: (-410.0, -180.0)]",
+			"case": 3,
+			"viewport_local": "[P: (164.0, 71.99999), S: (256.0, 144.0)]"
+		},
+		{
+			"aa_margin": 4.0,
+			"canvas": "[X: (0.707107, 0.707107), Y: (-0.707107, 0.707107), O: (190.0, -80.0)]",
+			"case": 4,
+			"viewport_local": "[P: (-77.78175, -261.6295), S: (707.1068, 707.1068)]"
+		},
+		{
+			"aa_margin": 4.611079454422,
+			"canvas": "[X: (0.628695, -0.162941), Y: (0.799546, 1.612891), O: (894.147, 180.3509)]",
+			"case": 5,
+			"viewport_local": "[P: (-1385.83, -226.4093), S: (1153.624, 288.9223)]"
+		}
+	],
+	"verification": "Headless geometry commands and live Node/Camera2D lifecycle; no raster or performance claim"
+}

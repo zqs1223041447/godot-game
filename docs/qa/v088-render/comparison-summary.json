@@ -1,0 +1,278 @@
+{
+  "method": "Headless force_draw, serial baseline/candidate then candidate/baseline; 24 measured redraws per case per round; existing diagnostic clocks on both. CPU command submission only, no GPU or gameplay tick/FPS.",
+  "p95": "nearest rank",
+  "cases": [
+    {
+      "label": "authored_entry",
+      "variants": {
+        "before": {
+          "n": 48,
+          "outside_actors": 37,
+          "outside_draws": {
+            "body": 0,
+            "limbs": 1776,
+            "shadow": 1776
+          },
+          "stats": {
+            "actor_us": {
+              "mean": 1527.46,
+              "median": 1433.5,
+              "p95": 1882,
+              "max": 2305
+            },
+            "all_world_submission_us": {
+              "mean": 2319.46,
+              "median": 2238.5,
+              "p95": 3127,
+              "max": 3350
+            },
+            "sync_us": {
+              "mean": 293.62,
+              "median": 263.5,
+              "p95": 492,
+              "max": 645
+            }
+          },
+          "state_unchanged": true
+        },
+        "after": {
+          "n": 48,
+          "outside_actors": 37,
+          "outside_draws": {
+            "body": 0,
+            "limbs": 0,
+            "shadow": 0
+          },
+          "stats": {
+            "actor_us": {
+              "mean": 216.17,
+              "median": 154.0,
+              "p95": 557,
+              "max": 1101
+            },
+            "all_world_submission_us": {
+              "mean": 1018.9,
+              "median": 912.5,
+              "p95": 1454,
+              "max": 2200
+            },
+            "sync_us": {
+              "mean": 216.17,
+              "median": 154.0,
+              "p95": 557,
+              "max": 1101
+            }
+          },
+          "state_unchanged": true
+        }
+      },
+      "same_state_all_variants": true,
+      "actor_us_mean_change_pct": -85.85,
+      "all_world_submission_us_mean_change_pct": -56.07
+    },
+    {
+      "label": "west_group_view",
+      "variants": {
+        "before": {
+          "n": 48,
+          "outside_actors": 25,
+          "outside_draws": {
+            "body": 0,
+            "limbs": 1200,
+            "shadow": 1200
+          },
+          "stats": {
+            "actor_us": {
+              "mean": 1587.29,
+              "median": 1515.5,
+              "p95": 2088,
+              "max": 3151
+            },
+            "all_world_submission_us": {
+              "mean": 2560.15,
+              "median": 2470.0,
+              "p95": 3230,
+              "max": 5207
+            },
+            "sync_us": {
+              "mean": 313.27,
+              "median": 251.0,
+              "p95": 488,
+              "max": 1447
+            }
+          },
+          "state_unchanged": true
+        },
+        "after": {
+          "n": 48,
+          "outside_actors": 25,
+          "outside_draws": {
+            "body": 0,
+            "limbs": 0,
+            "shadow": 0
+          },
+          "stats": {
+            "actor_us": {
+              "mean": 741.31,
+              "median": 645.0,
+              "p95": 1438,
+              "max": 2635
+            },
+            "all_world_submission_us": {
+              "mean": 1677.21,
+              "median": 1531.5,
+              "p95": 2375,
+              "max": 3580
+            },
+            "sync_us": {
+              "mean": 251.04,
+              "median": 212.0,
+              "p95": 305,
+              "max": 1348
+            }
+          },
+          "state_unchanged": true
+        }
+      },
+      "same_state_all_variants": true,
+      "actor_us_mean_change_pct": -53.3,
+      "all_world_submission_us_mean_change_pct": -34.49
+    },
+    {
+      "label": "boss_view",
+      "variants": {
+        "before": {
+          "n": 48,
+          "outside_actors": 24,
+          "outside_draws": {
+            "body": 0,
+            "limbs": 1152,
+            "shadow": 1152
+          },
+          "stats": {
+            "actor_us": {
+              "mean": 1555.9,
+              "median": 1433.5,
+              "p95": 2219,
+              "max": 3100
+            },
+            "all_world_submission_us": {
+              "mean": 2606.67,
+              "median": 2481.5,
+              "p95": 3727,
+              "max": 4256
+            },
+            "sync_us": {
+              "mean": 288.92,
+              "median": 247.0,
+              "p95": 494,
+              "max": 618
+            }
+          },
+          "state_unchanged": true
+        },
+        "after": {
+          "n": 48,
+          "outside_actors": 24,
+          "outside_draws": {
+            "body": 0,
+            "limbs": 0,
+            "shadow": 0
+          },
+          "stats": {
+            "actor_us": {
+              "mean": 596.67,
+              "median": 566.0,
+              "p95": 845,
+              "max": 869
+            },
+            "all_world_submission_us": {
+              "mean": 1575,
+              "median": 1481.5,
+              "p95": 2074,
+              "max": 2240
+            },
+            "sync_us": {
+              "mean": 249.75,
+              "median": 218.5,
+              "p95": 458,
+              "max": 494
+            }
+          },
+          "state_unchanged": true
+        }
+      },
+      "same_state_all_variants": true,
+      "actor_us_mean_change_pct": -61.65,
+      "all_world_submission_us_mean_change_pct": -39.58
+    },
+    {
+      "label": "all_visible_control",
+      "variants": {
+        "before": {
+          "n": 48,
+          "outside_actors": 0,
+          "outside_draws": {
+            "body": 0,
+            "limbs": 0,
+            "shadow": 0
+          },
+          "stats": {
+            "actor_us": {
+              "mean": 1666.12,
+              "median": 1492.0,
+              "p95": 2598,
+              "max": 2868
+            },
+            "all_world_submission_us": {
+              "mean": 2922.4,
+              "median": 2718.0,
+              "p95": 4093,
+              "max": 4427
+            },
+            "sync_us": {
+              "mean": 276.62,
+              "median": 233.0,
+              "p95": 470,
+              "max": 613
+            }
+          },
+          "state_unchanged": true
+        },
+        "after": {
+          "n": 48,
+          "outside_actors": 0,
+          "outside_draws": {
+            "body": 0,
+            "limbs": 0,
+            "shadow": 0
+          },
+          "stats": {
+            "actor_us": {
+              "mean": 1628.73,
+              "median": 1522.5,
+              "p95": 2346,
+              "max": 2793
+            },
+            "all_world_submission_us": {
+              "mean": 2848.48,
+              "median": 2715.5,
+              "p95": 3775,
+              "max": 4085
+            },
+            "sync_us": {
+              "mean": 334.23,
+              "median": 301.0,
+              "p95": 503,
+              "max": 713
+            }
+          },
+          "state_unchanged": true
+        }
+      },
+      "same_state_all_variants": true,
+      "actor_us_mean_change_pct": -2.24,
+      "all_world_submission_us_mean_change_pct": -2.53
+    }
+  ]
+}

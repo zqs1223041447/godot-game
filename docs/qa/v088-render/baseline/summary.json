@@ -1,0 +1,173 @@
+{
+  "driver": "headless",
+  "world_draw_count": 81,
+  "result": [
+    {
+      "case": "authored_entry",
+      "actors": 37,
+      "inside_padded": 0,
+      "outside_padded": 37,
+      "outside_draws": {
+        "body": 0,
+        "limbs": 888,
+        "shadow": 888
+      },
+      "state_equal": true,
+      "samples": 24,
+      "timing": {
+        "foreground_us": {
+          "mean_us": 723.4,
+          "p95_us": 1014,
+          "max_us": 1306
+        },
+        "limbs_us": {
+          "mean_us": 966.5,
+          "p95_us": 1367,
+          "max_us": 1377
+        },
+        "main_prefix_us": {
+          "mean_us": 328.4,
+          "p95_us": 508,
+          "max_us": 632
+        },
+        "markers_us": {
+          "mean_us": 201.6,
+          "p95_us": 255,
+          "max_us": 330
+        },
+        "shadows_us": {
+          "mean_us": 288.8,
+          "p95_us": 423,
+          "max_us": 676
+        },
+        "sync_us": {
+          "mean_us": 297.7,
+          "p95_us": 476,
+          "max_us": 596
+        },
+        "draw_submission_us": {
+          "mean_us": 2307.0,
+          "p95_us": 2717,
+          "max_us": 2743
+        },
+        "actor_submission_us": {
+          "mean_us": 1553.0,
+          "p95_us": 1900,
+          "max_us": 2015
+        }
+      }
+    },
+    {
+      "case": "west_group_view",
+      "actors": 37,
+      "inside_padded": 16,
+      "outside_padded": 21,
+      "outside_draws": {
+        "body": 0,
+        "limbs": 504,
+        "shadow": 504
+      },
+      "state_equal": true,
+      "samples": 24,
+      "timing": {
+        "foreground_us": {
+          "mean_us": 949.0,
+          "p95_us": 1635,
+          "max_us": 3852
+        },
+        "limbs_us": {
+          "mean_us": 949.6,
+          "p95_us": 1200,
+          "max_us": 1228
+        },
+        "main_prefix_us": {
+          "mean_us": 445,
+          "p95_us": 1910,
+          "max_us": 1980
+        },
+        "markers_us": {
+          "mean_us": 285.6,
+          "p95_us": 380,
+          "max_us": 1129
+        },
+        "shadows_us": {
+          "mean_us": 299.5,
+          "p95_us": 464,
+          "max_us": 523
+        },
+        "sync_us": {
+          "mean_us": 406.4,
+          "p95_us": 1876,
+          "max_us": 1934
+        },
+        "draw_submission_us": {
+          "mean_us": 2643.1,
+          "p95_us": 4117,
+          "max_us": 7016
+        },
+        "actor_submission_us": {
+          "mean_us": 1655.4,
+          "p95_us": 3118,
+          "max_us": 3246
+        }
+      }
+    },
+    {
+      "case": "boss_view",
+      "actors": 37,
+      "inside_padded": 13,
+      "outside_padded": 24,
+      "outside_draws": {
+        "body": 0,
+        "limbs": 576,
+        "shadow": 576
+      },
+      "state_equal": true,
+      "samples": 24,
+      "timing": {
+        "foreground_us": {
+          "mean_us": 1028.1,
+          "p95_us": 1425,
+          "max_us": 1549
+        },
+        "limbs_us": {
+          "mean_us": 985.2,
+          "p95_us": 1349,
+          "max_us": 1359
+        },
+        "main_prefix_us": {
+          "mean_us": 334.5,
+          "p95_us": 588,
+          "max_us": 710
+        },
+        "markers_us": {
+          "mean_us": 390.7,
+          "p95_us": 795,
+          "max_us": 809
+        },
+        "shadows_us": {
+          "mean_us": 272.9,
+          "p95_us": 402,
+          "max_us": 421
+        },
+        "sync_us": {
+          "mean_us": 304.1,
+          "p95_us": 557,
+          "max_us": 680
+        },
+        "draw_submission_us": {
+          "mean_us": 2620.7,
+          "p95_us": 3070,
+          "max_us": 3274
+        },
+        "actor_submission_us": {
+          "mean_us": 1562.1,
+          "p95_us": 2076,
+          "max_us": 2182
+        }
+      }
+    }
+  ],
+  "scope": "headless Godot CPU command submission with explicit force_draw; no GPU, gameplay tick or FPS measurement",
+  "p95_definition": "nearest-rank ceil(0.95*n)-1"
+}
