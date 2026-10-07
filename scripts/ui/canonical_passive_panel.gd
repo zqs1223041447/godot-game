@@ -30,6 +30,7 @@ var _loaded_graph := ""
 var _refreshing := false
 var _socket_uid := ""
 var _refresh_dirty: bool = true
+var _model_refresh_queued := false
 var refresh_generation: int = 0
 
 class WrappedLabel extends Label:
@@ -192,7 +193,15 @@ func refresh()->void:
 
 func _on_model_changed()->void:
 	_refresh_dirty=true
-	if is_visible_in_tree():refresh()
+	# changed is emitted inside the model transaction; query capabilities after it ends.
+	if is_visible_in_tree() and not _model_refresh_queued:
+		_model_refresh_queued = true
+		_refresh_after_model_commit.call_deferred()
+
+
+func _refresh_after_model_commit()->void:
+	_model_refresh_queued = false
+	if is_visible_in_tree() and _refresh_dirty: refresh()
 
 
 func _on_visibility_changed()->void:
@@ -275,8 +284,14 @@ func _refresh_details()->void:
 	_detail.text="%s\n%s\n%s\n\n%s\n\n%s"%[Localization.node_name(selected_node_id),selected_node_id,status,display_lines,Localization.TERM_NOTE]
 	_detail.tooltip_text=Localization.TERM_NOTE+"\n\n词缀后的状态按完整源词条逐行判断。只有当前节点或所选专精的全部词缀均已接入游戏，才允许分配。"
 	_mastery.tooltip_text=display_lines
-	_allocate.disabled=_subtree!="standard" or allocated or not model.available_passives().has(selected_node_id) or execution.status!="full"
-	_refund.disabled=_subtree!="standard" or not allocated or selected_node_id==Data.start_for_class(int(snapshot.talents.class_id))
+	if _subtree == "standard":
+		var preview: Dictionary = model.passive_action_preview(selected_node_id, effect_id)
+		_apply_action_preview(preview, allocated)
+	else:
+		_allocate.disabled = true
+		_refund.disabled = true
+		_allocate.tooltip_text = "此子树仅供浏览"
+		_refund.tooltip_text = "此子树仅供浏览"
 	_socket_uid=""
 	for uid:String in snapshot.locations:
 		if snapshot.locations[uid].kind=="passive_socket" and snapshot.locations[uid].node_id==selected_node_id:_socket_uid=uid
@@ -288,6 +303,21 @@ func _refresh_details()->void:
 	_return.disabled=_socket_uid.is_empty()
 	if not _socket_uid.is_empty():_detail.text+="\n\n"+str(model.item_definition(_socket_uid).name)
 	elif is_socket and _jewel.selected>=0:_detail.text+="\n\n候选范围仅为预览，镶嵌后生效"
+
+
+func _apply_action_preview(preview: Dictionary, allocated: bool) -> void:
+	var allocation: Dictionary = preview.get("allocate", {})
+	var refund: Dictionary = preview.get("refund", {})
+	_allocate.disabled = not bool(allocation.get("allowed", false))
+	_refund.disabled = not bool(refund.get("allowed", false))
+	_allocate.tooltip_text = str(allocation.get("reason", "无法分配")) if _allocate.disabled else "分配此节点，消耗 1 点"
+	_refund.tooltip_text = str(refund.get("reason", "无法退还")) if _refund.disabled else "退还此节点，获得 1 点"
+	# Only the action relevant to the selected node adds a reason to its details.
+	var selected_action: Dictionary = refund if allocated else allocation
+	if not bool(selected_action.get("allowed", false)):
+		var reason := str(selected_action.get("reason", ""))
+		if not reason.is_empty():
+			_detail.text += "\n\n" + ("无法退还：" if allocated else "无法分配：") + reason
 
 
 func _node_clicked(id:String,button:int,double_click:bool)->void:
