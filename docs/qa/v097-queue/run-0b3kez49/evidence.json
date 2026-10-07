@@ -1,0 +1,66 @@
+{
+  "baseline_commit": "d2d188ab3aa284a1abbb7d9e382eaf976678aab2",
+  "command": [
+    "/usr/local/bin/godot",
+    "--headless",
+    "--path",
+    "/workspace/scratch/a51485f153de/v097-burn-shadow-plan",
+    "--script",
+    "res://tests/burn_deadline_shadow_test.gd",
+    "--",
+    "--only=_caller_owned_refresh,_validation_atomicity,_extremes,_oracle_values"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 1.83,
+  "timed_out": false,
+  "script_errors": false,
+  "passed": true,
+  "summary": {
+    "baseline_commit": "d2d188ab3aa284a1abbb7d9e382eaf976678aab2",
+    "categories": [
+      "caller-modeled-weaker/equal/stronger-refresh",
+      "schema/types/reasons/nonfinite/atomic-errors",
+      "pool/quotient/sum-overflow/rate-underflow/ULP/fallback",
+      "pinned-old-complete-prediction-oracle"
+    ],
+    "checks": 3028,
+    "engine": "4.6.3-stable (official)",
+    "failures": 0,
+    "oracle_cases": 500,
+    "scope": "Pure bounded shadow queue only; no scheduler equivalence, battle, rendering or performance claim",
+    "selected_groups": [
+      "_caller_owned_refresh",
+      "_validation_atomicity",
+      "_extremes",
+      "_oracle_values"
+    ]
+  },
+  "source_sha256": {
+    "docs/qa/v097-queue/old_complete_prediction.gd": "462036f94fa70ef0fc32523264137c11a61f24212eef2b0a153362bf0bcbb8c9",
+    "docs/qa/v097-queue/oracle_manifest.json": "c638867297ae3c85c7f0d4d6ecade32d2dfda59dfd5d848b1c1b5a46c6fc27e9",
+    "docs/qa/v097-queue/original-main-prediction.txt": "3e2c0936247e55154e129d7242b480ce0e51890cedf463bacc420bee1ad4a3fc",
+    "docs/qa/v097-queue/run_checks.py": "454c32857d1c116c78d8ffad385c9a87f74deba21c1fb06698bcf6e485528729",
+    "project.godot": "726cc44c81cd41cf5c0bd443189e519118f2cff25f5e600f8e1af06b3a801c98",
+    "scripts/combat/damage_base_compiler.gd": "7c12ba22cc623c87a805a903a957e5841b4f8c0b26cb3b0ca8dae60cf8c9de8d",
+    "scripts/combat/damage_resolver.gd": "720dc69a7446334e8aec3ac15bdf7c1717fa7b96db5657e0c9622513121a4e23",
+    "scripts/combat/hit_penetration_rules.gd": "6b0733c563548a9034cd5169b1736287cbffc4b40a14cdf71f37a729c377fc88",
+    "scripts/items/weapon_local_rules.gd": "73e4308828e856a741ef00386d33150a008bdb3f07ef31a031a204d71fe93b8d",
+    "scripts/main.gd": "115c5d777146b77cc54b533251f333eb8071a665ab35cdc93a2aae1eea06c0fc",
+    "scripts/mechanics/defense_rules.gd": "a4d88c005dfd27fe6408e86ea9b96a34fe01c786c24c8965113dd20498224226",
+    "tests/burn_deadline_shadow_test.gd": "c0a5385556cc7abc821c4944315f25cbed6ef79e78922ed4e9af82b088c08950",
+    "tools/diagnostics/burn_deadline_shadow.gd": "a103b9d113a2448a6dbff1009ed8f692c82f1260e1f06bbf8cf298ad8396c9f9"
+  },
+  "changed_inputs": [],
+  "log_sha256": "b25dc7eb8d21e265eef5635468425f338f9f8d07245ab3b93af138ee8704b548",
+  "xdg": {
+    "XDG_DATA_HOME": "/tmp/godot-m1-v097-queue-0b3kez49/data",
+    "XDG_CONFIG_HOME": "/tmp/godot-m1-v097-queue-0b3kez49/config",
+    "XDG_CACHE_HOME": "/tmp/godot-m1-v097-queue-0b3kez49/cache"
+  },
+  "copied_cache_used": true,
+  "editor_or_import_run": false,
+  "battle_or_benchmark_run": false,
+  "production_queue_references": [],
+  "oracle_mechanical_adapter_verified": true,
+  "scope": "Pure queue and pinned original complete prediction scan only; no gameplay/scheduler or speedup claim"
+}

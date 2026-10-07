@@ -1,0 +1,121 @@
+#!/usr/bin/env python3
+"""One short pure shadow-queue run. Preserve every log, source byte and exit."""
+from __future__ import annotations
+
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import shutil
+import subprocess
+import sys
+import tempfile
+import time
+
+ROOT = Path(__file__).resolve().parents[3]
+QA = Path(__file__).resolve().parent
+BASELINE = "d2d188ab3aa284a1abbb7d9e382eaf976678aab2"
+QUEUE = "tools/diagnostics/burn_deadline_shadow.gd"
+TEST = "tests/burn_deadline_shadow_test.gd"
+ORACLE = "docs/qa/v097-queue/old_complete_prediction.gd"
+
+
+def sha(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def original_prediction(main: str) -> str:
+    start = main.index("\t\tvar states:Array[Dictionary]=[]\n", main.index("func _advance_proliferating_burns("))
+    end = main.index("\t\tif states.is_empty():break\n", start)
+    return main[start:end]
+
+
+def adapted_scan(original: str) -> str:
+    # Mechanical adapter only: dedent; supplied statuses; omit actor mutation;
+    # record predicted scalars without changing the original expression/order.
+    body = "".join(line[1:] for line in original.splitlines(keepends=True))
+    body = body.replace("\tfor status:Dictionary in burn_runtime.statuses():", "\tvar predictions:Dictionary={}\n\tfor status:Dictionary in statuses:")
+    body = body.replace('\t\t\tburn_runtime.remove("monster",int(status.target_id));continue', "\t\t\tcontinue")
+    body = body.replace("\t\tif death_at<=end:\n", '\t\tpredictions[int(status.target_id)]={"death_at":death_at,"expiry":expiry,"damage_rate":rate.damage_total}\n\t\tif death_at<=end:\n')
+    return body
+
+
+def main() -> int:
+    if sys.platform != "linux" or not (ROOT / ".godot/global_script_class_cache.cfg").is_file():
+        print("Requires Linux and the existing copied .godot cache; never imports", file=sys.stderr)
+        return 78
+    manifest = json.loads((QA / "oracle_manifest.json").read_text())
+    if manifest["baseline_commit"] != BASELINE:
+        raise ValueError("Wrong baseline manifest")
+    for path, expected in manifest["production_sha256"].items():
+        if sha(ROOT / path) != expected:
+            raise ValueError(f"Production input differs from pinned baseline: {path}")
+    original = original_prediction((ROOT / "scripts/main.gd").read_text())
+    if original != (QA / "original-main-prediction.txt").read_text():
+        raise ValueError("Original complete prediction excerpt changed")
+    oracle_text = (ROOT / ORACLE).read_text()
+    oracle_body = oracle_text.split("static func scan(statuses: Array, targets: Dictionary, to_time: float) -> Dictionary:\n", 1)[1].split('\treturn {"states":', 1)[0]
+    if oracle_body != adapted_scan(original):
+        raise ValueError("Oracle is not the documented mechanical original scan adapter")
+    if re.search(r"^class_name\s", (ROOT / QUEUE).read_text(), re.MULTILINE):
+        raise ValueError("Shadow queue must not register a class")
+    references = []
+    for path in (ROOT / "scripts").rglob("*"):
+        if path.is_file() and path.suffix in {".gd", ".tscn", ".tres"} and "burn_deadline_shadow" in path.read_text():
+            references.append(str(path.relative_to(ROOT)))
+    if references:
+        raise ValueError(f"Production must have no shadow queue reference: {references}")
+    run_root = Path(tempfile.mkdtemp(prefix="godot-m1-v097-queue-", dir="/tmp"))
+    token = run_root.name.removeprefix("godot-m1-v097-queue-")
+    evidence_dir = QA / ("run-" + token)
+    evidence_dir.mkdir()
+    env = os.environ.copy()
+    for kind in ("DATA", "CONFIG", "CACHE"):
+        target = run_root / kind.lower()
+        target.mkdir()
+        env[f"XDG_{kind}_HOME"] = str(target)
+    paths = sorted(set(manifest["production_sha256"]) | {QUEUE, TEST, ORACLE, "docs/qa/v097-queue/run_checks.py", "docs/qa/v097-queue/oracle_manifest.json", "docs/qa/v097-queue/original-main-prediction.txt"})
+    source_sha256 = {path: sha(ROOT / path) for path in paths}
+    # Preserve first attempt sources, including parse or assertion failures.
+    for path in [QUEUE, TEST, ORACLE, "docs/qa/v097-queue/run_checks.py"]:
+        destination = evidence_dir / "source" / (path + ".txt")
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ROOT / path, destination)
+    command = ["/usr/local/bin/godot", "--headless", "--path", str(ROOT), "--script", "res://" + TEST]
+    started = time.monotonic()
+    timed_out = False
+    try:
+        result = subprocess.run(command, env=env, capture_output=True, text=True, timeout=35)
+        output = result.stdout + result.stderr
+        exit_code = result.returncode
+    except subprocess.TimeoutExpired as error:
+        timed_out = True
+        def decoded(value: str | bytes | None) -> str:
+            return value.decode(errors="replace") if isinstance(value, bytes) else (value or "")
+        output = decoded(error.stdout) + decoded(error.stderr) + "\n35-second process guard exceeded\n"
+        exit_code = 124
+    elapsed = time.monotonic() - started
+    log = evidence_dir / "godot.log.txt"
+    log.write_text(output)
+    (evidence_dir / "exit-code.txt").write_text(str(exit_code) + "\n")
+    records = re.findall(r"^BURN_DEADLINE_SHADOW (.+)$", output, re.MULTILINE)
+    summary = json.loads(records[-1]) if records else {}
+    changed = [path for path in paths if sha(ROOT / path) != source_sha256[path]]
+    script_errors = any(marker in output for marker in ("SCRIPT ERROR:", "Parse Error:", "ERROR:"))
+    passed = exit_code == 0 and not script_errors and not changed and summary.get("failures") == 0 and summary.get("oracle_cases", 0) > 0
+    evidence = {"baseline_commit": BASELINE, "command": command, "exit_code": exit_code,
+        "elapsed_seconds": round(elapsed, 3), "timed_out": timed_out, "script_errors": script_errors,
+        "passed": passed, "summary": summary, "source_sha256": source_sha256,
+        "changed_inputs": changed, "log_sha256": sha(log), "xdg": {key: env[key] for key in ["XDG_DATA_HOME", "XDG_CONFIG_HOME", "XDG_CACHE_HOME"]},
+        "copied_cache_used": True, "editor_or_import_run": False, "battle_or_benchmark_run": False,
+        "production_queue_references": references, "oracle_mechanical_adapter_verified": True,
+        "scope": "Pure queue and pinned original complete prediction scan only; no gameplay/scheduler or speedup claim"}
+    (evidence_dir / "evidence.json").write_text(json.dumps(evidence, indent=2) + "\n")
+    print(output, end="" if output.endswith("\n") else "\n")
+    print("Evidence:", evidence_dir.relative_to(ROOT))
+    return 0 if passed else (exit_code or 1)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

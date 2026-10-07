@@ -1,0 +1,20 @@
+{
+  "base_commit": "d2d188ab3aa284a1abbb7d9e382eaf976678aab2",
+  "production_diff_paths": [],
+  "production_shadow_references": [],
+  "final_source_sha256": {
+    "tools/diagnostics/burn_deadline_shadow.gd": "a103b9d113a2448a6dbff1009ed8f692c82f1260e1f06bbf8cf298ad8396c9f9",
+    "tools/diagnostics/burn_read_dependency_shadow.gd": "2251aa432575d639feb438baedcdd17726bf870ba7cd21258df9be53006d1647",
+    "tests/burn_deadline_shadow_test.gd": "c0a5385556cc7abc821c4944315f25cbed6ef79e78922ed4e9af82b088c08950",
+    "tests/burn_read_dependency_shadow_test.gd": "b30c823b4627bd2312917558f6cc09d057ce059e9ac6976388d1ee3558a2a575"
+  },
+  "read_dependency_evidence": {
+    "first_checks": 626,
+    "first_failed": 0,
+    "superseded_reset_assertions": 1,
+    "reset_only_checks": 4,
+    "reset_only_failed": 0,
+    "full_set_repeated": false
+  },
+  "scope": "Pure tool-side queue and read plan only. No production integration or switch, performance sample, map/schema/UI change, or export."
+}

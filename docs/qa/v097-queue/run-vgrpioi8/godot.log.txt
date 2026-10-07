@@ -1,0 +1,40 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+BURN_DEADLINE_SHADOW {"baseline_commit":"d2d188ab3aa284a1abbb7d9e382eaf976678aab2","categories":["100-capacity/101-reject/repeated-updates","mid/root/remove/reuse/clear/configure/ticket-invalidation","exact/near-ties/death-expiry/pop-cutoff","caller-modeled-weaker/equal/stronger-refresh","schema/types/reasons/nonfinite/atomic-errors","pool/quotient/sum-overflow/rate-underflow/ULP/fallback","detached-input/peek/entries/snapshot/upsert/pop","pinned-old-complete-prediction-oracle","deterministic-mixed-operation-reference-model"],"checks":22699,"engine":"4.6.3-stable (official)","failures":5,"oracle_cases":500,"scope":"Pure bounded shadow queue only; no scheduler equivalence, battle, rendering or performance claim"}
+ERROR: Initial caller snapshot
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/burn_deadline_shadow_test.gd:38)
+       [1] _caller_owned_refresh (res://tests/burn_deadline_shadow_test.gd:169)
+       [2] _initialize (res://tests/burn_deadline_shadow_test.gd:20)
+ERROR: Caller submits unchanged DPS after weaker application
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/burn_deadline_shadow_test.gd:38)
+       [1] _caller_owned_refresh (res://tests/burn_deadline_shadow_test.gd:177)
+       [2] _initialize (res://tests/burn_deadline_shadow_test.gd:20)
+SCRIPT ERROR: Invalid access to property or key 'death_at' on a base object of type 'Dictionary'.
+          at: _caller_owned_refresh (res://tests/burn_deadline_shadow_test.gd:178)
+          GDScript backtrace (most recent call first):
+              [0] _caller_owned_refresh (res://tests/burn_deadline_shadow_test.gd:178)
+              [1] _initialize (res://tests/burn_deadline_shadow_test.gd:20)
+ERROR: Allowed signed zero fields
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/burn_deadline_shadow_test.gd:38)
+       [1] _validation_atomicity (res://tests/burn_deadline_shadow_test.gd:244)
+       [2] _initialize (res://tests/burn_deadline_shadow_test.gd:21)
+ERROR: upsert: expected rejection fallback_required_unrepresentable_death_at, got { "ok": true, "reason": "", "replaced": true, "entry": { "target_id": 1, "last_time": 0.0, "raw_dps": 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0, "expires_at": 1.0, "shield": 0.0, "health": 0.0, "fire_resistance": 0.0, "damage_rate": 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0, "death_at": 0.0, "deadline": 0.0, "kind": "death", "generation": 3, "queue_id": -9223372008954264139 } }
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/burn_deadline_shadow_test.gd:38)
+       [1] _atomic_rejection (res://tests/burn_deadline_shadow_test.gd:79)
+       [2] _extremes (res://tests/burn_deadline_shadow_test.gd:272)
+       [3] _initialize (res://tests/burn_deadline_shadow_test.gd:22)
+ERROR: upsert: rejection has no state mutation
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/burn_deadline_shadow_test.gd:38)
+       [1] _atomic_rejection (res://tests/burn_deadline_shadow_test.gd:80)
+       [2] _extremes (res://tests/burn_deadline_shadow_test.gd:272)
+       [3] _initialize (res://tests/burn_deadline_shadow_test.gd:22)

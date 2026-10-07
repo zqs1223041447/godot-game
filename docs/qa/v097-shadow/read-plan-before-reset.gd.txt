@@ -4,7 +4,7 @@ extends RefCounted
 const Clock = preload("res://scripts/combat/ember_event_clock.gd")
 const MAX_TARGETS := 100
 const OPERATIONS: Array[String] = ["contact", "refresh", "expiry", "burn_death", "direct_lethal", "observation", "batch_exit", "phase_exit", "reset"]
-const BARRIERS: Array[String] = ["burn_death", "direct_lethal", "observation", "batch_exit", "phase_exit"]
+const BARRIERS: Array[String] = ["burn_death", "direct_lethal", "observation", "batch_exit", "phase_exit", "reset"]
 
 
 ## Only a clock plan; the original events and admission order are untouched.
@@ -43,12 +43,6 @@ static func read_plan(rows: Variant, operation: Variant, at: Variant, targets: V
 	if not target_error.is_empty(): return _failure(target_error)
 	var pending_error: String = _ids_error(pending_burn_ids)
 	if not pending_error.is_empty(): return _failure(pending_error)
-	# Existing restart/map/death cleanup discards statuses. Clearing a queue must
-	# never integrate damage through a later UI or wall-clock timestamp.
-	if operation == "reset":
-		return {"ok":true, "reason":"", "operation":"reset", "at":float(at),
-			"mode":"discard", "materialize_ids":[], "first_positive_feedback_ids":[],
-			"drain_due_before_reads":false, "clear_queue":true, "shadow_only":true}
 	var by_id: Dictionary = {}
 	for row: Variant in rows:
 		if not row is Dictionary or row.size() != 4 or not row.has_all(["target_id", "last_time", "expires_at", "raw_dps"]):

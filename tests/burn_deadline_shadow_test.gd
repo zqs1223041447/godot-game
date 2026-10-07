@@ -1,0 +1,404 @@
+extends SceneTree
+## One short pure batch. No Main instance, battle loop, benchmark or import.
+const Queue = preload("res://tools/diagnostics/burn_deadline_shadow.gd")
+const Oracle = preload("res://docs/qa/v097-queue/old_complete_prediction.gd")
+const MAX_FINITE: float = 1.7976931348623157e308
+var checks: int = 0
+var failures: int = 0
+var oracle_cases: int = 0
+var categories: Array[String] = []
+
+
+func _initialize() -> void:
+	if OS.get_name() != "Linux" or not OS.get_environment("XDG_DATA_HOME").begins_with("/tmp/godot-m1-v097-queue-") or not OS.get_user_data_dir().begins_with(OS.get_environment("XDG_DATA_HOME") + "/"):
+		push_error("Use the isolated v097 queue runner")
+		quit(78)
+		return
+	var groups: Array[String] = ["_capacity_and_updates", "_removal_and_tickets", "_exact_order_and_expiry", "_caller_owned_refresh", "_validation_atomicity", "_extremes", "_detached_aliases", "_oracle_values", "_model_sequence"]
+	var selected: Array[String] = groups.duplicate()
+	var args: PackedStringArray = OS.get_cmdline_user_args()
+	if not args.is_empty():
+		if args.size() != 1 or not args[0].begins_with("--only="):
+			push_error("Expected only an explicit --only= group selection")
+			quit(78)
+			return
+		selected.assign(args[0].trim_prefix("--only=").split(","))
+		for group: String in selected:
+			if group not in groups:
+				push_error("Unknown focused group: " + group)
+				quit(78)
+				return
+	for group: String in selected:
+		call(group)
+	var report: Dictionary = {"checks": checks, "failures": failures, "oracle_cases": oracle_cases,
+		"categories": categories, "selected_groups": selected, "baseline_commit": "d2d188ab3aa284a1abbb7d9e382eaf976678aab2",
+		"engine": Engine.get_version_info().string, "scope": "Pure bounded shadow queue only; no scheduler equivalence, battle, rendering or performance claim"}
+	print("BURN_DEADLINE_SHADOW ", JSON.stringify(report))
+	quit(1 if failures else 0)
+
+
+func _check(value: bool, label: String) -> void:
+	checks += 1
+	if not value:
+		failures += 1
+		if failures <= 30:
+			push_error(label)
+
+
+func _row(id: int = 1, health: Variant = 10.0, expiry: Variant = 100.0) -> Dictionary:
+	return {"target_id": id, "last_time": 0.0, "raw_dps": 1.0,
+		"expires_at": expiry, "shield": 0.0, "health": health, "fire_resistance": 0.0}
+
+
+func _adjacent(value: float, direction: int = 1) -> float:
+	var bits := PackedByteArray()
+	bits.resize(8)
+	bits.encode_double(0, value)
+	bits.encode_u64(0, bits.decode_u64(0) + direction)
+	return bits.decode_double(0)
+
+
+func _negative_zero() -> float:
+	# Construct bits explicitly: the compiler can deduplicate -0.0 literals
+	# with an existing +0.0 constant in this test's constant pool.
+	var bits := PackedByteArray()
+	bits.resize(8)
+	bits.encode_u32(4, 0x80000000)
+	return bits.decode_double(0)
+
+
+func _before(left: Dictionary, right: Dictionary) -> bool:
+	return left.deadline < right.deadline or (left.deadline == right.deadline and left.target_id < right.target_id)
+
+
+func _invariants(queue: RefCounted, label: String) -> void:
+	var snap: Dictionary = queue.snapshot()
+	_check(snap.heap.size() == snap.positions.size() and snap.heap.size() <= 100, label + ": bounded one-to-one heap/index")
+	var seen: Dictionary = {}
+	for index: int in range(snap.heap.size()):
+		var entry: Dictionary = snap.heap[index]
+		_check(not seen.has(entry.target_id), label + ": unique current ID")
+		seen[entry.target_id] = true
+		_check(snap.positions.get(entry.target_id, -1) == index, label + ": index agrees")
+		_check(queue.is_current(entry), label + ": current ticket")
+		if index > 0:
+			_check(not _before(entry, snap.heap[(index - 1) / 2]), label + ": exact heap order")
+	var sorted: Array = queue.entries()
+	for index: int in range(1, sorted.size()):
+		_check(_before(sorted[index - 1], sorted[index]), label + ": exact sorted order")
+	_check(queue.peek() == ({} if sorted.is_empty() else sorted[0]), label + ": minimum agrees")
+
+
+func _atomic_rejection(queue: RefCounted, method: String, args: Array, expected: String) -> void:
+	var before: PackedByteArray = var_to_bytes(queue.snapshot())
+	var result: Dictionary = queue.callv(method, args)
+	_check(result.get("ok") == false and result.get("reason") == expected, method + ": expected rejection " + expected + ", got " + str(result))
+	_check(var_to_bytes(queue.snapshot()) == before, method + ": rejection has no state mutation")
+	if method == "pop_due":
+		_check(result.entries.is_empty(), "Rejected pop has no entries")
+
+
+func _capacity_and_updates() -> void:
+	categories.append("100-capacity/101-reject/repeated-updates")
+	var queue := Queue.new()
+	var rows: Array = []
+	for id: int in range(100, 0, -1):
+		rows.append(_row(id, float(id), 1000.0))
+	_check(queue.configure(rows).ok, "Configure 100 identities")
+	_invariants(queue, "capacity")
+	var overflow: Array = rows.duplicate(true)
+	overflow.append(_row(101))
+	_atomic_rejection(queue, "configure", [overflow], "target_capacity_exceeded")
+	_atomic_rejection(queue, "upsert", [_row(101)], "target_capacity_exceeded")
+	for index: int in range(1200):
+		var id: int = index % 100 + 1
+		var old: Dictionary = queue.snapshot().heap[queue.snapshot().positions[id]]
+		var result: Dictionary = queue.upsert(_row(id, float((index * 73) % 233 + 1), 1000.0))
+		_check(result.ok and result.replaced, "Replace at capacity")
+		_check(not queue.is_current(old) and queue.is_current(result.entry), "Replacement invalidates ticket")
+		_check(queue.snapshot().heap.size() == 100 and queue.snapshot().positions.size() == 100, "No stale-node or identity growth")
+		if index % 100 == 0:
+			_invariants(queue, "repeated replacement")
+	_invariants(queue, "final replacement")
+
+
+func _removal_and_tickets() -> void:
+	categories.append("mid/root/remove/reuse/clear/configure/ticket-invalidation")
+	var queue := Queue.new()
+	var rows: Array = []
+	for id: int in range(1, 12):
+		rows.append(_row(id, float((id * 7) % 11 + 1)))
+	_check(queue.configure(rows).ok, "Ticket fixture")
+	var middle: Dictionary = queue.snapshot().heap[4]
+	var untouched: Dictionary = queue.peek()
+	_check(queue.remove(middle.target_id).removed, "Remove middle")
+	_check(not queue.is_current(middle) and queue.is_current(untouched), "Remove only invalidates removed ticket")
+	_invariants(queue, "middle removal")
+	_check(queue.remove(untouched.target_id).removed and not queue.is_current(untouched), "Remove root")
+	_invariants(queue, "root removal")
+	var reused: Dictionary = queue.upsert(_row(middle.target_id)).entry
+	_check(not queue.is_current(middle) and queue.is_current(reused), "Identity reuse has fresh generation")
+	_check(not queue.remove(999).removed, "Removing missing ID is successful no-op")
+	var before_clear: Dictionary = queue.peek()
+	queue.clear()
+	_check(queue.peek().is_empty() and queue.entries().is_empty() and queue.snapshot().positions.is_empty(), "Clear empties all bounded storage")
+	_check(not queue.is_current(before_clear), "Clear invalidates")
+	_check(queue.upsert(_row(before_clear.target_id)).ok and not queue.is_current(before_clear), "Clear then reuse cannot revive ticket")
+	var before_configure: Dictionary = queue.peek()
+	_check(queue.configure([_row(before_configure.target_id)]).ok and not queue.is_current(before_configure), "Whole replacement invalidates same-ID ticket")
+	var other := Queue.new()
+	_check(other.upsert(_row()).ok and not other.is_current(queue.peek()), "Foreign-queue ticket rejected")
+	for malformed: Variant in [null, [], false, {}, {"target_id": 1, "generation": 1}, {"target_id": 1.0, "generation": 1, "queue_id": 1}]:
+		_check(not queue.is_current(malformed), "Malformed ticket false")
+	var popped: Dictionary = queue.pop_due(100.0)
+	_check(popped.ok and popped.entries.size() == 1 and not queue.is_current(popped.entries[0]), "Pop invalidates ticket")
+	_check(queue.configure([]).ok and queue.peek().is_empty(), "Empty configure succeeds")
+	_invariants(queue, "empty queue")
+
+
+func _exact_order_and_expiry() -> void:
+	categories.append("exact/near-ties/death-expiry/pop-cutoff")
+	var queue := Queue.new()
+	_check(queue.configure([_row(7, 10.0), _row(1, _adjacent(10.0)), _row(2, 10.0)]).ok, "Exact and near ties")
+	var ordered: Array = queue.entries()
+	_check([ordered[0].target_id, ordered[1].target_id, ordered[2].target_id] == [2, 7, 1], "Near-time values do not tie; exact ties use ID")
+	_check(queue.pop_due(_adjacent(10.0, -1)).entries.is_empty(), "Before deadline returns none")
+	var due: Dictionary = queue.pop_due(10.0)
+	_check(due.entries.size() == 2 and due.entries[0].target_id == 2 and due.entries[1].target_id == 7, "Exact cutoff includes exact ties only")
+	_check(queue.peek().target_id == 1, "Adjacent later float stays queued")
+	_check(queue.pop_due(_adjacent(10.0)).entries.size() == 1, "Adjacent later cutoff includes near tie")
+	_check(queue.configure([_row(10, 10.0, 10.0), _row(5, 100.0, 10.0), _row(8, 9.0, 10.0)]).ok, "Death/expiry fixture")
+	ordered = queue.entries()
+	_check(ordered[0].target_id == 8 and ordered[0].kind == "death", "Death before expiry")
+	_check(ordered[1].target_id == 5 and ordered[1].kind == "expiry", "Expiry before death")
+	_check(ordered[2].target_id == 10 and ordered[2].kind == "death" and ordered[2].deadline == 10.0, "Exact expiry death is a death ticket before caller expiry removal")
+	_check(queue.pop_due(10.0).entries.size() == 3, "All due entries, no duplicate expiry ticket")
+	_check(queue.pop_due(0.0).ok, "Cutoff query imposes no invented gameplay clock")
+
+
+func _caller_owned_refresh() -> void:
+	categories.append("caller-modeled-weaker/equal/stronger-refresh")
+	var queue := Queue.new()
+	var active: Dictionary = _row(1, 40.0, 10.0)
+	active.raw_dps = 4.0
+	active["revision"] = 7
+	_check(queue.upsert(active).ok, "Initial caller snapshot")
+	# A weaker incoming burn is rejected by the caller's burn rules; the caller
+	# submits its settled old DPS and expiry, not that rejected application.
+	var weaker_result: Dictionary = active.duplicate(true)
+	weaker_result.last_time = 2.0
+	weaker_result.health = 32.0
+	weaker_result.revision = 8
+	var old: Dictionary = queue.peek()
+	_check(queue.upsert(weaker_result).ok, "Caller submits unchanged DPS after weaker application")
+	_check(queue.peek().death_at == 10.0 and queue.peek().expires_at == 10.0 and not queue.is_current(old), "Weaker case retains caller rate/expiry but replaces ticket")
+	var equal_result: Dictionary = weaker_result.duplicate(true)
+	equal_result.expires_at = 12.0
+	equal_result.revision = 9
+	_check(queue.upsert(equal_result).ok and queue.peek().death_at == 10.0 and queue.peek().expires_at == 12.0, "Equal-rate caller refresh extends expiry")
+	var stronger: Dictionary = equal_result.duplicate(true)
+	stronger.raw_dps = 8.0
+	_check(queue.upsert(stronger).ok and queue.peek().death_at == 6.0, "Stronger caller snapshot recomputes deadline")
+	var plain: Dictionary = stronger.duplicate(true)
+	plain.erase("revision")
+	_check(queue.upsert(plain).ok and not queue.peek().has("revision"), "Caller revision is optional metadata; internal generation owns validity")
+
+
+func _validation_atomicity() -> void:
+	categories.append("schema/types/reasons/nonfinite/atomic-errors")
+	var queue := Queue.new()
+	_check(queue.upsert(_row()).ok, "Atomicity fixture")
+	for bad: Variant in [null, false, true, 1, 1.0, "rows", {}]:
+		_atomic_rejection(queue, "configure", [bad], "rows_must_be_array")
+	for bad: Variant in [null, false, 1, 1.0, "row", []]:
+		_atomic_rejection(queue, "upsert", [bad], "row_must_be_dictionary")
+	for key: String in Queue.REQUIRED_KEYS:
+		var missing: Dictionary = _row()
+		missing.erase(key)
+		_atomic_rejection(queue, "upsert", [missing], "missing_row_key:" + key)
+	for key: Variant in ["unknown", &"unknown", 7]:
+		var extra: Dictionary = _row()
+		extra[key] = 1
+		_atomic_rejection(queue, "upsert", [extra], "unknown_or_non_string_row_key")
+	var reasons: Dictionary = {"target_id": "target_id_must_be_positive_integer", "last_time": "last_time_must_be_finite_nonnegative_number",
+		"raw_dps": "raw_dps_must_be_finite_positive_number", "expires_at": "expires_at_must_be_finite_number",
+		"shield": "shield_must_be_finite_nonnegative_number", "health": "health_must_be_finite_positive_number",
+		"fire_resistance": "fire_resistance_must_be_finite_number", "revision": "revision_must_be_nonnegative_integer"}
+	for field: String in reasons:
+		for bad: Variant in [null, false, true, "1", &"1", [], {}, Vector2.ZERO, NAN, INF, -INF]:
+			var invalid: Dictionary = _row()
+			invalid[field] = bad
+			_atomic_rejection(queue, "upsert", [invalid], reasons[field])
+			_atomic_rejection(queue, "configure", [[_row(2), invalid]], reasons[field])
+	for field: String in ["target_id", "last_time", "raw_dps", "shield", "health", "revision"]:
+		var negative: Dictionary = _row()
+		negative[field] = -1
+		_atomic_rejection(queue, "upsert", [negative], reasons[field])
+	for field: String in ["target_id", "raw_dps", "health"]:
+		for zero: Variant in [0, 0.0, -0.0]:
+			var invalid: Dictionary = _row()
+			invalid[field] = zero
+			_atomic_rejection(queue, "upsert", [invalid], reasons[field])
+	for field: String in ["target_id", "revision"]:
+		var floated: Dictionary = _row()
+		floated[field] = 1.0
+		_atomic_rejection(queue, "upsert", [floated], reasons[field])
+	for expiry: Variant in [-1, -0.0, 0.0]:
+		var invalid: Dictionary = _row()
+		invalid.expires_at = expiry
+		_atomic_rejection(queue, "upsert", [invalid], "expires_at_must_exceed_last_time")
+	_atomic_rejection(queue, "configure", [[_row(2), _row(2)]], "duplicate_target_id")
+	for bad: Variant in [null, true, false, "1", [], {}, 0, -1, 1.0, NAN, INF]:
+		_atomic_rejection(queue, "remove", [bad], "target_id_must_be_positive_integer")
+	for bad: Variant in [null, true, false, "1", [], {}, -1, NAN, INF, -INF]:
+		_atomic_rejection(queue, "pop_due", [bad], "to_time_must_be_finite_nonnegative_number")
+	var signed: Dictionary = _row()
+	signed.last_time = _negative_zero()
+	signed.shield = _negative_zero()
+	signed.fire_resistance = _negative_zero()
+	signed["revision"] = 0
+	_check(queue.upsert(signed).ok, "Allowed signed zero fields")
+	_check(var_to_bytes(_negative_zero()) != var_to_bytes(0.0), "Negative-zero fixture has distinct IEEE bits")
+	_check(var_to_bytes(queue.peek().last_time) == var_to_bytes(_negative_zero()) and var_to_bytes(queue.peek().shield) == var_to_bytes(_negative_zero()), "Input signed zero is preserved")
+	var integers: Dictionary = {"target_id": 1, "last_time": 0, "raw_dps": 1, "expires_at": 100, "shield": 0, "health": 10, "fire_resistance": -1}
+	_check(queue.upsert(integers).ok and typeof(queue.peek().raw_dps) == TYPE_INT, "Validated integers stay integers in stored row")
+
+
+func _extremes() -> void:
+	categories.append("pool/quotient/sum-overflow/rate-underflow/ULP/fallback")
+	var queue := Queue.new()
+	_check(queue.upsert(_row()).ok, "Extreme fixture")
+	var overflow: Dictionary = _row(1, MAX_FINITE, MAX_FINITE)
+	overflow.shield = MAX_FINITE
+	_atomic_rejection(queue, "upsert", [overflow], "fallback_required_pool_overflow")
+	_atomic_rejection(queue, "configure", [[_row(2), overflow]], "fallback_required_pool_overflow")
+	var quotient: Dictionary = _row(1, MAX_FINITE, MAX_FINITE)
+	quotient.raw_dps = 0.5
+	_atomic_rejection(queue, "upsert", [quotient], "fallback_required_unrepresentable_death_at")
+	var sum_overflow: Dictionary = _row(1, 1.0e308, MAX_FINITE)
+	sum_overflow.last_time = 1.0e308
+	_atomic_rejection(queue, "upsert", [sum_overflow], "fallback_required_unrepresentable_death_at")
+	var rate_underflow: Dictionary = _row()
+	rate_underflow.raw_dps = _adjacent(0.0)
+	rate_underflow.fire_resistance = 0.75
+	_atomic_rejection(queue, "upsert", [rate_underflow], "fallback_required_unrepresentable_damage_rate")
+	var tiny: Dictionary = _row(1, _adjacent(0.0), 1.0)
+	tiny.raw_dps = MAX_FINITE
+	_check(queue.upsert(tiny).ok and queue.peek().death_at == _adjacent(0.0), "Positive zero division underflow advances exactly one ULP")
+	tiny.last_time = _negative_zero()
+	_atomic_rejection(queue, "upsert", [tiny], "fallback_required_unrepresentable_death_at")
+	var large_clock: Dictionary = _row(1, 1.0, _adjacent(1.0e100))
+	large_clock.last_time = 1.0e100
+	_check(queue.upsert(large_clock).ok and queue.peek().death_at == large_clock.expires_at and queue.peek().kind == "death", "Rounded positive lifetime advances one ULP and exact expiry is death")
+	var integer_clock: Dictionary = _row(1, 1.0, 9007199254740993)
+	integer_clock.last_time = 9007199254740992
+	_atomic_rejection(queue, "upsert", [integer_clock], "fallback_required_unrepresentable_expiry")
+	# Exercise scalar exhaustion directly in this pure white-box test; no ID
+	# history is needed and no public operation wraps/recycles the counter.
+	queue._generation = Queue.MAX_GENERATION
+	_atomic_rejection(queue, "upsert", [_row()], "fallback_required_generation_exhausted")
+	_atomic_rejection(queue, "configure", [[_row()]], "fallback_required_generation_exhausted")
+	queue.clear()
+	_atomic_rejection(queue, "upsert", [_row()], "fallback_required_generation_exhausted")
+
+
+func _detached_aliases() -> void:
+	categories.append("detached-input/peek/entries/snapshot/upsert/pop")
+	var queue := Queue.new()
+	var row: Dictionary = _row()
+	var result: Dictionary = queue.upsert(row)
+	var ticket: Dictionary = result.entry.duplicate(true)
+	row.health = 999.0
+	result.entry.health = 888.0
+	result.entry.generation = -1
+	_check(queue.peek().health == 10.0 and queue.is_current(ticket), "Input and upsert result detached")
+	var peeked: Dictionary = queue.peek()
+	peeked.deadline = -5.0
+	var listed: Array = queue.entries()
+	listed[0].health = 777.0
+	listed.clear()
+	var snap: Dictionary = queue.snapshot()
+	snap.heap[0].raw_dps = 123.0
+	snap.positions.clear()
+	snap.generation = -99
+	_check(queue.peek().deadline == 10.0 and queue.peek().health == 10.0 and queue.peek().raw_dps == 1.0, "Read returns detached")
+	_invariants(queue, "alias mutations")
+	var rows: Array = [_row(2)]
+	_check(queue.configure(rows).ok, "Detached configure")
+	rows[0].target_id = 999
+	rows.clear()
+	_check(queue.peek().target_id == 2, "Configure input detached")
+	var popped: Dictionary = queue.pop_due(10.0)
+	popped.entries[0].health = 321.0
+	_check(queue.upsert(_row(2)).ok and queue.peek().health == 10.0, "Popped row cannot alias reused ID")
+
+
+func _oracle_values() -> void:
+	categories.append("pinned-old-complete-prediction-oracle")
+	var queue := Queue.new()
+	var clocks: Array = [0, _negative_zero(), 2.0, 1000.0, 1.0e100]
+	var rates: Array = [1, 0.125, 37.0, 1.0e100, MAX_FINITE]
+	var fires: Array = [-MAX_FINITE, _negative_zero(), 0.25, 0.75, MAX_FINITE]
+	var pools: Array = [[0, 1], [_negative_zero(), 0.1], [3.0, 17.0], [1000.0, 0.001]]
+	for clock_value: Variant in clocks:
+		for raw: Variant in rates:
+			for fire: Variant in fires:
+				for pool: Array in pools:
+					var row: Dictionary = _row()
+					row.last_time = clock_value
+					row.expires_at = maxf(_adjacent(float(clock_value)), float(clock_value) + 100.0)
+					row.raw_dps = raw
+					row.fire_resistance = fire
+					row.shield = pool[0]
+					row.health = pool[1]
+					var old: Dictionary = Oracle.from_rows([row], float(row.expires_at))
+					var expected: Dictionary = old.predictions[row.target_id]
+					var result: Dictionary = queue.upsert(row)
+					_check(result.ok, "Oracle grid is supported")
+					if not result.ok:
+						continue
+					oracle_cases += 1
+					_check(var_to_bytes(result.entry.death_at) == var_to_bytes(expected.death_at), "Original predicted death uses exact double bytes")
+					_check(var_to_bytes(result.entry.damage_rate) == var_to_bytes(expected.damage_rate), "Rate from existing complete defense receipt")
+					_check(result.entry.deadline == old.cut, "Queue deadline equals original complete scan cutoff at expiry")
+					_check(result.entry.kind == ("death" if old.death_times.has(row.target_id) else "expiry"), "Queue kind equals original scan admission")
+	var rows: Array = [_row(3, 2.0, 20.0), _row(1, 5.0, 20.0), _row(2, 2.0, 20.0)]
+	var old: Dictionary = Oracle.from_rows(rows, 20.0)
+	_check(queue.configure(rows).ok and queue.peek().deadline == old.cut, "Complete multi-target scan minimum matches")
+	_check(queue.pop_due(old.cut).entries.size() == 2, "Complete scan exact-death boundary has both deaths")
+
+
+func _model_sequence() -> void:
+	categories.append("deterministic-mixed-operation-reference-model")
+	var queue := Queue.new()
+	var model: Dictionary = {}
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 970073
+	for step: int in range(360):
+		var id: int = int(rng.randi() % 50) + 1
+		match step % 7:
+			0, 1, 2, 3:
+				var row: Dictionary = _row(id, float(rng.randi() % 40 + 1), 100.0)
+				_check(queue.upsert(row).ok, "Model upsert")
+				model[id] = row.health
+			4:
+				_check(queue.remove(id).removed == model.has(id), "Model remove presence")
+				model.erase(id)
+			5:
+				var cutoff: float = float(rng.randi() % 41)
+				var expected: Array = []
+				for key: int in model:
+					if model[key] <= cutoff:
+						expected.append({"target_id": key, "deadline": model[key]})
+				expected.sort_custom(_before)
+				var actual: Array = queue.pop_due(cutoff).entries
+				_check(actual.size() == expected.size(), "Model due count")
+				for index: int in range(mini(actual.size(), expected.size())):
+					_check(actual[index].target_id == expected[index].target_id and actual[index].deadline == expected[index].deadline, "Model due exact order")
+					model.erase(actual[index].target_id)
+			6:
+				if step % 49 == 48:
+					queue.clear()
+					model.clear()
+		_check(queue.entries().size() == model.size(), "Model live count")
+		_invariants(queue, "mixed operation")

@@ -1,0 +1,26 @@
+{
+  "baseline_commit": "d2d188ab3aa284a1abbb7d9e382eaf976678aab2",
+  "acceptance": "Initial full suite plus passing affected-only correction; not a fresh full-suite run",
+  "first_attempt_preserved": "run-vgrpioi8/evidence.json",
+  "affected_pass": "run-0b3kez49/evidence.json",
+  "queue_sha256": "a103b9d113a2448a6dbff1009ed8f692c82f1260e1f06bbf8cf298ad8396c9f9",
+  "queue_identical_across_runs": true,
+  "final_test_sha256": "c0a5385556cc7abc821c4944315f25cbed6ef79e78922ed4e9af82b088c08950",
+  "unchanged_test_functions_verified": [
+    "_capacity_and_updates",
+    "_removal_and_tickets",
+    "_exact_order_and_expiry",
+    "_detached_aliases",
+    "_model_sequence",
+    "_check",
+    "_row",
+    "_adjacent",
+    "_before",
+    "_invariants",
+    "_atomic_rejection"
+  ],
+  "all_final_inputs_match_affected_run": true,
+  "production_baseline_hashes_unchanged": true,
+  "no_new_godot_run": true,
+  "scope": "Pure diagnostic queue only; no scheduler equivalence or benchmark claim"
+}
