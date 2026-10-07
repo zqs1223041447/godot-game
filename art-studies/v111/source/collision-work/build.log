@@ -1,0 +1,172 @@
+short_wall polygons 1 vertices 20 minimum_margin_m 0.019550199053152365
+walkable_arch polygons 2 vertices 47 minimum_margin_m 0.017172378323371935
+moss_rock polygons 1 vertices 32 minimum_margin_m 0.018888824087799492
+{
+  "verification": {
+    "module_count": 3,
+    "collision_polygon_count": 4,
+    "expected_polygon_count": 4,
+    "all_polygons_valid": true,
+    "all_base_footprints_covered_after_threshold_exemption": true,
+    "arch_two_disjoint_blocking_legs": true,
+    "source_module_blend_hash_unchanged": true,
+    "source_definitions_hash_unchanged": true,
+    "independent_serialized_qa_file": "source/collision-work/independent-verification.json",
+    "physics_engine_not_run": true,
+    "assembled_layout_not_tested": true
+  },
+  "portal_validation": {
+    "module_id": "walkable_arch",
+    "source_object_name": "Hero arch • authored gate • worn crown",
+    "basis_origin_local_xy_metres": [
+      -0.003785014,
+      0.91364193
+    ],
+    "across_unit_xy": [
+      0.992546154,
+      -0.121869327
+    ],
+    "through_unit_xy": [
+      0.121869327,
+      0.992546154
+    ],
+    "character_height_metres": 1.8,
+    "character_radius_metres": 0.3,
+    "raw_body_band_opening": {
+      "left_inner_axis_metres": -1.312795601598573,
+      "right_inner_axis_metres": 1.3132018501589025,
+      "clear_width_metres": 2.6259974517574753,
+      "minimum_euclidean_leg_separation_metres": 2.625997451757475,
+      "component_count": 2
+    },
+    "buffered_collision_opening": {
+      "left_inner_axis_metres": -1.287795601598573,
+      "right_inner_axis_metres": 1.2882018501589028,
+      "clear_width_metres": 2.575997451757476,
+      "minimum_euclidean_leg_separation_metres": 2.575997451757475,
+      "component_count": 2
+    },
+    "remaining_character_center_width_metres": 1.9759974517574759,
+    "threshold": {
+      "classification": "walkable_low_authored_sill",
+      "maximum_sill_height_above_flat_ground_metres": 0.150079146027565,
+      "maximum_step_above_flat_ground_metres": 0.150079146027565,
+      "step_up_required": true,
+      "maximum_low_face_classification_height_metres": 0.3,
+      "low_triangle_count": 172,
+      "body_band_top_including_sill_metres": 1.951079146027565,
+      "exemption_polygon_ground_xy_metres": [
+        [
+          -1.386165424,
+          0.427213073
+        ],
+        [
+          1.220258246,
+          0.10718453
+        ],
+        [
+          1.378998645,
+          1.400021506
+        ],
+        [
+          -1.227425026,
+          1.720050048
+        ]
+      ],
+      "removed_low_sill_projection_area_m2": 3.367927489080767,
+      "visual_mesh_parts": [
+        "walkable_arch",
+        "walkable_arch_sill"
+      ],
+      "policy": "Only the low sill inside the actual open portal is nonblocking. Foundations outside the opening stay solid. The visual sill remains. Flat 2D collision treats this as walkable ground; a 3D controller must support a 0.151m step or an equivalent ramp."
+    },
+    "actual_mesh_horizontal_section_checks": [
+      {
+        "height_above_conservative_sill_top_metres": 0.1,
+        "local_z_metres": 0.250079146027565,
+        "section_segment_count": 80,
+        "left_inner_axis_metres": -1.3127957466062672,
+        "right_inner_axis_metres": 1.3132021077136273,
+        "clear_width_metres": 2.6259978543198947,
+        "minimum_euclidean_leg_separation_metres": 2.625997873152364,
+        "component_count": 2
+      },
+      {
+        "height_above_conservative_sill_top_metres": 0.9,
+        "local_z_metres": 1.050079146027565,
+        "section_segment_count": 80,
+        "left_inner_axis_metres": -1.3127957021233083,
+        "right_inner_axis_metres": 1.313201948473052,
+        "clear_width_metres": 2.6259976505963603,
+        "minimum_euclidean_leg_separation_metres": 2.6259976624699344,
+        "component_count": 2
+      },
+      {
+        "height_above_conservative_sill_top_metres": 1.8,
+        "local_z_metres": 1.950079146027565,
+        "section_segment_count": 80,
+        "left_inner_axis_metres": -1.3127955926994372,
+        "right_inner_axis_metres": 1.3132018628335622,
+        "clear_width_metres": 2.6259974555329997,
+        "minimum_euclidean_leg_separation_metres": 2.625997463960718,
+        "component_count": 2
+      }
+    ],
+    "verified_centerline": {
+      "start": {
+        "ground_xy_metres": [
+          -0.163995694,
+          -0.392836266
+        ],
+        "local_xyz_metres": [
+          -0.163995694,
+          -0.392836266,
+          0.0
+        ],
+        "foot_relative_screen_pixel": [
+          -7.774610693,
+          15.255354321
+        ],
+        "full_frame_screen_pixel": [
+          632.225389307,
+          375.255354321
+        ],
+        "godot_local_world": [
+          -11.960939528,
+          23.469775878
+        ]
+      },
+      "end": {
+        "ground_xy_metres": [
+          0.156829898,
+          2.220078856
+        ],
+        "local_xyz_metres": [
+          0.156829898,
+          2.220078856,
+          0.0
+        ],
+        "foot_relative_screen_pixel": [
+          7.434898877,
+          -86.214264091
+        ],
+        "full_frame_screen_pixel": [
+          647.434898877,
+          273.785735909
+        ],
+        "godot_local_world": [
+          11.438305965,
+          -132.637329371
+        ]
+      },
+      "minimum_distance_to_arch_blockers_metres": 1.2879987258787375,
+      "minimum_clearance_after_character_radius_metres": 0.9879987258787375,
+      "swept_capsule_radius_metres": 0.3,
+      "swept_capsule_intersects_arch_blocker": false
+    },
+    "conservative_ceiling_local_z_lower_bound_over_swept_path_metres": 2.778808116912842,
+    "conservative_headroom_above_sill_lower_bound_metres": 2.628728970885277,
+    "passes_1p8m_tall_0p3m_radius_geometric_test": true,
+    "scope": "Valid for this isolated arch on flat z=0 ground with a walkable 0.15008m sill. Other modules are independent instances, not obstacles overlaid at local origin. The eventual assembled layout requires its own path and overlap validation. This is a geometric test, not a Godot physics or animation test."
+  }
+}

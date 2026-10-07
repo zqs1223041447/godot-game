@@ -1,0 +1,30 @@
+{
+  "result": "PASS",
+  "observation_time_utc": "2026-10-07T17:30:00Z",
+  "application": "Godot native sample started with run.sh",
+  "review_source": "Primary task native desktop observation, followed by local inspection of supplied screenshot",
+  "observed_states": [
+    "default textured receiving ground",
+    "F2 untextured receiving ground"
+  ],
+  "observations": [
+    "No rectangular old-ground-color backing visible",
+    "No white edge fringe visible",
+    "Independent ground shadow decals visible",
+    "Three modules suitable for next bounded assembly step"
+  ],
+  "screenshot": "qa/native-window.png",
+  "screenshot_state": "default textured receiving ground only",
+  "screenshot_unmodified": true,
+  "screenshot_dimensions": [
+    1180,
+    812
+  ],
+  "screenshot_sha256": "b08b5b3c47f9e8bfcbeccc33e44695e2bbeb67409b8d27405872ef517fa1d549",
+  "scope_limits": [
+    "Screenshot includes native window letterboxing and is not relabeled as an exact 1280x720 viewport export",
+    "No actor animation or character occlusion tested",
+    "No main-game integration tested",
+    "No dynamic light, arbitrary rotation or object-to-object cast shadows claimed"
+  ]
+}

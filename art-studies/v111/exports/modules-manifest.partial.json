@@ -1,0 +1,403 @@
+{
+  "modules": [
+    {
+      "id": "short_wall",
+      "source_object_name": "Low west wall \u2022 vegetation-softened edge",
+      "source_scene_transform": {
+        "location": [
+          -4.0,
+          4.800000190734863,
+          -0.005022771190851927
+        ],
+        "rotation_euler": [
+          0.0,
+          0.0,
+          1.4486232995986938
+        ],
+        "scale": [
+          0.4399999976158142,
+          0.5699999928474426,
+          0.3400000035762787
+        ],
+        "matrix_world": [
+          [
+            0.05362250283360481,
+            -0.565751314163208,
+            0.0,
+            -4.0
+          ],
+          [
+            0.4367203116416931,
+            0.0694655179977417,
+            0.0,
+            4.800000190734863
+          ],
+          [
+            0.0,
+            0.0,
+            0.3400000035762787,
+            -0.005022771190851927
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "source_foot_world_metres": [
+        -3.9998388290405273,
+        3.988354206085205,
+        -0.005022771190851927
+      ],
+      "normalization_translation_metres": [
+        3.9998388290405273,
+        -3.988354206085205,
+        0.005022771190851927
+      ],
+      "source_transform_baked": true,
+      "parts": [
+        "short_wall"
+      ],
+      "module_foot_local_metres": [
+        0,
+        0,
+        0
+      ],
+      "source_asset": "modular_fort_01_wall_thin_straight_03",
+      "collision_basis": "flat receiving ground z=0; module geometry foot is exactly zero",
+      "pixel_density": {
+        "x": 47.407407407407405,
+        "ground_y": 38.83387469221887,
+        "height_z": 27.191771797382927
+      },
+      "sprite": {
+        "image": "exports/short_wall.png",
+        "source_pixel_rect": {
+          "x": 532,
+          "y": 226,
+          "width": 216,
+          "height": 139
+        },
+        "foot_source_pixel": [
+          640,
+          360
+        ],
+        "foot_local_pixel": [
+          108,
+          134
+        ],
+        "sprite_centered": false,
+        "source_pixels_per_metre_x": 47.407407407407405
+      },
+      "parts_rendered_together": [
+        "short_wall"
+      ],
+      "neighbor_objects_in_render": [],
+      "old_terrain_in_render": false,
+      "shadow": {
+        "image": "exports/short_wall_shadow.png",
+        "source_pixel_rect": {
+          "x": 477,
+          "y": 206,
+          "width": 477,
+          "height": 214
+        },
+        "foot_source_pixel": [
+          640,
+          360
+        ],
+        "foot_local_pixel": [
+          163,
+          154
+        ],
+        "sprite_centered": false,
+        "source_pixels_per_metre_x": 47.407407407407405,
+        "blend": "straight-alpha neutral black source-over",
+        "ground_receiver_z_metres": 0,
+        "sun_ray_direction": [
+          0.7568907737731934,
+          0.2046998292207718,
+          -0.6206563711166382
+        ],
+        "alpha_floor_removed": 0.008,
+        "dynamic_lighting": false,
+        "method": "Cycles native simple shadow catcher approximation, target module only, zero RGB, no ground texture; alpha remapped max(0,(a-0.008)/0.992)"
+      }
+    },
+    {
+      "id": "walkable_arch",
+      "source_object_name": "Hero arch \u2022 authored gate \u2022 worn crown",
+      "source_scene_transform": {
+        "location": [
+          1.75,
+          4.449999809265137,
+          -0.025212163105607033
+        ],
+        "rotation_euler": [
+          0.0,
+          0.0,
+          1.4486232995986938
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "matrix_world": [
+          [
+            0.12186932563781738,
+            -0.9925461411476135,
+            0.0,
+            1.75
+          ],
+          [
+            0.9925461411476135,
+            0.12186932563781738,
+            0.0,
+            4.449999809265137
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            -0.025212163105607033
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "source_foot_world_metres": [
+        1.7537850141525269,
+        3.536357879638672,
+        -0.025212157517671585
+      ],
+      "normalization_translation_metres": [
+        -1.7537850141525269,
+        -3.536357879638672,
+        0.025212157517671585
+      ],
+      "source_transform_baked": true,
+      "parts": [
+        "walkable_arch",
+        "walkable_arch_sill"
+      ],
+      "module_foot_local_metres": [
+        0,
+        0,
+        0
+      ],
+      "source_asset": "modular_fort_01_wall_thin_gate_01",
+      "collision_basis": "flat receiving ground z=0; module geometry foot is exactly zero",
+      "pixel_density": {
+        "x": 47.407407407407405,
+        "ground_y": 38.83387469221887,
+        "height_z": 27.191771797382927
+      },
+      "sprite": {
+        "image": "exports/walkable_arch.png",
+        "source_pixel_rect": {
+          "x": 500,
+          "y": 187,
+          "width": 280,
+          "height": 178
+        },
+        "foot_source_pixel": [
+          640,
+          360
+        ],
+        "foot_local_pixel": [
+          140,
+          173
+        ],
+        "sprite_centered": false,
+        "source_pixels_per_metre_x": 47.407407407407405
+      },
+      "parts_rendered_together": [
+        "walkable_arch",
+        "walkable_arch_sill"
+      ],
+      "neighbor_objects_in_render": [],
+      "old_terrain_in_render": false,
+      "ground_detail": {
+        "image": "exports/walkable_arch_sill.png",
+        "source_pixel_rect": {
+          "x": 507,
+          "y": 282,
+          "width": 273,
+          "height": 79
+        },
+        "foot_source_pixel": [
+          640,
+          360
+        ],
+        "foot_local_pixel": [
+          133,
+          78
+        ],
+        "sprite_centered": false,
+        "source_pixels_per_metre_x": 47.407407407407405
+      },
+      "shadow": {
+        "image": "exports/walkable_arch_shadow.png",
+        "source_pixel_rect": {
+          "x": 445,
+          "y": 182,
+          "width": 590,
+          "height": 238
+        },
+        "foot_source_pixel": [
+          640,
+          360
+        ],
+        "foot_local_pixel": [
+          195,
+          178
+        ],
+        "sprite_centered": false,
+        "source_pixels_per_metre_x": 47.407407407407405,
+        "blend": "straight-alpha neutral black source-over",
+        "ground_receiver_z_metres": 0,
+        "sun_ray_direction": [
+          0.7568907737731934,
+          0.2046998292207718,
+          -0.6206563711166382
+        ],
+        "alpha_floor_removed": 0.008,
+        "dynamic_lighting": false,
+        "method": "Cycles native simple shadow catcher approximation, target module only, zero RGB, no ground texture; alpha remapped max(0,(a-0.008)/0.992)"
+      }
+    },
+    {
+      "id": "moss_rock",
+      "source_object_name": "Scanned moss rock 01",
+      "source_scene_transform": {
+        "location": [
+          -7.0,
+          -3.4000000953674316,
+          0.21238256990909576
+        ],
+        "rotation_euler": [
+          0.0,
+          0.0,
+          0.3141592741012573
+        ],
+        "scale": [
+          1.399999976158142,
+          1.399999976158142,
+          1.399999976158142
+        ],
+        "matrix_world": [
+          [
+            1.3314791917800903,
+            -0.43262380361557007,
+            0.0,
+            -7.0
+          ],
+          [
+            0.43262380361557007,
+            1.3314791917800903,
+            0.0,
+            -3.4000000953674316
+          ],
+          [
+            0.0,
+            0.0,
+            1.399999976158142,
+            0.21238256990909576
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "source_foot_world_metres": [
+        -6.762246131896973,
+        -4.986733913421631,
+        0.21238256990909576
+      ],
+      "normalization_translation_metres": [
+        6.762246131896973,
+        4.986733913421631,
+        -0.21238256990909576
+      ],
+      "source_transform_baked": true,
+      "parts": [
+        "moss_rock"
+      ],
+      "module_foot_local_metres": [
+        0,
+        0,
+        0
+      ],
+      "source_asset": "rock_moss_set_01_rock01",
+      "collision_basis": "flat receiving ground z=0; module geometry foot is exactly zero",
+      "pixel_density": {
+        "x": 47.407407407407405,
+        "ground_y": 38.83387469221887,
+        "height_z": 27.191771797382927
+      },
+      "sprite": {
+        "image": "exports/moss_rock.png",
+        "source_pixel_rect": {
+          "x": 542,
+          "y": 164,
+          "width": 193,
+          "height": 200
+        },
+        "foot_source_pixel": [
+          640,
+          360
+        ],
+        "foot_local_pixel": [
+          98,
+          196
+        ],
+        "sprite_centered": false,
+        "source_pixels_per_metre_x": 47.407407407407405
+      },
+      "parts_rendered_together": [
+        "moss_rock"
+      ],
+      "neighbor_objects_in_render": [],
+      "old_terrain_in_render": false,
+      "shadow": {
+        "image": "exports/moss_rock_shadow.png",
+        "source_pixel_rect": {
+          "x": 487,
+          "y": 132,
+          "width": 372,
+          "height": 303
+        },
+        "foot_source_pixel": [
+          640,
+          360
+        ],
+        "foot_local_pixel": [
+          153,
+          228
+        ],
+        "sprite_centered": false,
+        "source_pixels_per_metre_x": 47.407407407407405,
+        "blend": "straight-alpha neutral black source-over",
+        "ground_receiver_z_metres": 0,
+        "sun_ray_direction": [
+          0.7568907737731934,
+          0.2046998292207718,
+          -0.6206563711166382
+        ],
+        "alpha_floor_removed": 0.008,
+        "dynamic_lighting": false,
+        "method": "Cycles native simple shadow catcher approximation, target module only, zero RGB, no ground texture; alpha remapped max(0,(a-0.008)/0.992)"
+      }
+    }
+  ]
+}

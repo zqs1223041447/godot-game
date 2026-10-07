@@ -1,0 +1,2358 @@
+{
+  "schema": "fixed-orientation-modular-ground-collision-v1",
+  "source_module_blend": "source/modules.blend",
+  "source_module_blend_sha256": "2f6ffcd31cf04d2e347be087f111ead2e71968d2aab61a4a36cc1943a8fbb424",
+  "source_definitions": "source/module-definitions.json",
+  "source_definitions_sha256": "a605f1b6f55d121ec72ecfebe361e6c24f51519a142c63fe6d16258ff32f6af2",
+  "frozen_source_scene_sha256": "b9f9ec71ff24d593bbe85b6294aeca24e2d0ca86ddea6370206bb2bdb127ffd7",
+  "source_is_actual_normalized_mesh": true,
+  "coordinate_contract": {
+    "length_unit": "metres",
+    "local_mesh_foot": [
+      0,
+      0,
+      0
+    ],
+    "ground_collision_plane": "module local z=0; flat receiving ground",
+    "full_frame_foot_pixel": [
+      640,
+      360
+    ],
+    "full_frame_resolution_pixel": [
+      1280,
+      720
+    ],
+    "camera_elevation_degrees": 55,
+    "pixel_density": {
+      "ground_x": 47.407407407407405,
+      "ground_y": 38.83387469221887,
+      "height_z": 27.191771797382927
+    },
+    "foot_relative_screen_pixel_formula": [
+      "x_px = 47.407407407407405 * x_m",
+      "y_px = -38.83387469221887 * y_m - 27.191771797382927 * z_m"
+    ],
+    "full_frame_screen_formula": "[640,360] + foot_relative_screen_pixel",
+    "cropped_sprite_pixel_formula": "cropped_sprite_foot_pixel + foot_relative_screen_pixel, where cropped_sprite_foot_pixel = [640-crop_left,360-crop_top]. Crop coordinates do not change any metre-space or Godot-local collision vertex.",
+    "godot_local_world_formula": [
+      "x_world = 72.9344729345 * x_m",
+      "y_world = -59.7444226034 * y_m"
+    ],
+    "godot_camera_zoom": 0.65,
+    "collision_z_metres": 0,
+    "repeated_first_polygon_point": false,
+    "winding": "outer CCW in metre XY; screen and Godot winding is reversed; holes if any CW in metre XY",
+    "instancing": "Add an instance XY metre translation to the local metre vertices; add its projected foot-relative pixel/Godot translation to the corresponding local coordinates. Do not reapply the source-scene rotation/scale or normalization translation. These were already baked.",
+    "foot_definition": "From the complete source mesh transformed by its original matrix_world: select vertices <= global minimum z + 0.30m; foot=(midpoint of selected x range, minimum selected y, global minimum z). Translate the entire module by -foot. For the arch both visual parts together are one module.",
+    "depth_reference": "Use the instance ground foot. For Godot Y-sort depth is -59.7444226034 * instance_ground_y_m. An arch or tall wall may require split visual layers/anchors for correct character occlusion.",
+    "character_radius": "Collision polygons include nominal 25mm asset margin, not the character radius. A .3m metre-space circle maps to an ellipse of radii [21.88034188035,17.92332678102] in Godot units. A same-radius Godot circle is not equivalent.",
+    "independent_module_coordinates": true
+  },
+  "generation": {
+    "body_height_metres": 1.8,
+    "validation_character_radius_metres": 0.3,
+    "method": "Clip actual normalized mesh triangles to the vertical body band; project to ground XY and union filled clipping-plane sections. Use a conservative convex hull for the scanned rock. Remove only low walkable sill inside the arch portal. Apply 8mm simplification, nominal 25mm outward buffer, and 1mm final simplification, then verify base containment.",
+    "script": "source/collision-work/build_collisions.py",
+    "extract_script": "source/collision-work/extract_modules.py",
+    "blender_version": "4.3.2",
+    "external_assets_downloaded": false,
+    "source_saved_or_rendered_by_collision_work": false
+  },
+  "modules": [
+    {
+      "module_id": "short_wall",
+      "source_object_name": "Low west wall • vegetation-softened edge",
+      "source_asset": "modular_fort_01_wall_thin_straight_03",
+      "mesh_parts": [
+        "short_wall"
+      ],
+      "source_scene_transform": {
+        "location": [
+          -4.0,
+          4.800000190734863,
+          -0.005022771190851927
+        ],
+        "rotation_euler": [
+          0.0,
+          0.0,
+          1.4486232995986938
+        ],
+        "scale": [
+          0.4399999976158142,
+          0.5699999928474426,
+          0.3400000035762787
+        ],
+        "matrix_world": [
+          [
+            0.05362250283360481,
+            -0.565751314163208,
+            0.0,
+            -4.0
+          ],
+          [
+            0.4367203116416931,
+            0.0694655179977417,
+            0.0,
+            4.800000190734863
+          ],
+          [
+            0.0,
+            0.0,
+            0.3400000035762787,
+            -0.005022771190851927
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "source_foot_world_metres": [
+        -3.9998388290405273,
+        3.988354206085205,
+        -0.005022771190851927
+      ],
+      "normalization_translation_metres": [
+        3.9998388290405273,
+        -3.988354206085205,
+        0.005022771190851927
+      ],
+      "source_transform_baked": true,
+      "classification": "short_wall",
+      "foot": {
+        "ground_xy_metres": [
+          0.0,
+          0.0
+        ],
+        "local_xyz_metres": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "foot_relative_screen_pixel": [
+          0.0,
+          -0.0
+        ],
+        "full_frame_screen_pixel": [
+          640.0,
+          360.0
+        ],
+        "godot_local_world": [
+          0.0,
+          -0.0
+        ]
+      },
+      "measured_low_vertices_foot_residual_metres": [
+        1.1920928955078125e-07,
+        0.0,
+        0.0
+      ],
+      "mesh_local_aabb_metres": [
+        [
+          -2.1624464988708496,
+          0.0,
+          0.0
+        ],
+        [
+          2.1624467372894287,
+          1.6232542991638184,
+          2.6498429775238037
+        ]
+      ],
+      "body_band_local_z_metres": [
+        -0.001,
+        1.801
+      ],
+      "ground_support_plane_local_z_metres": 0,
+      "polygon_count": 1,
+      "ground_collision_area_m2": 5.003099100049608,
+      "polygons": [
+        {
+          "outer": {
+            "ground_xy_metres": [
+              [
+                2.009739475,
+                -0.024879207
+              ],
+              [
+                2.020124819,
+                -0.02145078
+              ],
+              [
+                2.046106534,
+                -0.00541829
+              ],
+              [
+                2.051705638,
+                0.001682166
+              ],
+              [
+                2.054412606,
+                0.010309955
+              ],
+              [
+                2.187400951,
+                1.096827636
+              ],
+              [
+                2.185213744,
+                1.105643614
+              ],
+              [
+                2.180021093,
+                1.113096246
+              ],
+              [
+                2.157299268,
+                1.134714281
+              ],
+              [
+                2.147057031,
+                1.138352397
+              ],
+              [
+                -2.009721251,
+                1.648136901
+              ],
+              [
+                -2.02005152,
+                1.64475853
+              ],
+              [
+                -2.046043948,
+                1.628863536
+              ],
+              [
+                -2.051686351,
+                1.621744937
+              ],
+              [
+                -2.054412855,
+                1.61308022
+              ],
+              [
+                -2.187260154,
+                0.531120985
+              ],
+              [
+                -2.186720859,
+                0.522094679
+              ],
+              [
+                -2.180094577,
+                0.510367053
+              ],
+              [
+                -2.157374293,
+                0.488577367
+              ],
+              [
+                -2.147073484,
+                0.484902379
+              ]
+            ],
+            "foot_relative_screen_pixel": [
+              [
+                95.276538074,
+                0.966156007
+              ],
+              [
+                95.768880308,
+                0.833016903
+              ],
+              [
+                97.000606056,
+                0.210413195
+              ],
+              [
+                97.266045061,
+                -0.065325024
+              ],
+              [
+                97.394375396,
+                -0.400375501
+              ],
+              [
+                103.699008047,
+                -42.594066975
+              ],
+              [
+                103.595318234,
+                -42.93642556
+              ],
+              [
+                103.349148113,
+                -43.225840138
+              ],
+              [
+                102.271965298,
+                -44.0653522
+              ],
+              [
+                101.786407396,
+                -44.206634341
+              ],
+              [
+                -95.275674121,
+                -64.003541889
+              ],
+              [
+                -95.765405393,
+                -63.872346653
+              ],
+              [
+                -96.997639016,
+                -63.255082448
+              ],
+              [
+                -97.265130714,
+                -62.978639666
+              ],
+              [
+                -97.3943872,
+                -62.642155132
+              ],
+              [
+                -103.692333227,
+                -20.625485778
+              ],
+              [
+                -103.666766649,
+                -20.274959342
+              ],
+              [
+                -103.352631799,
+                -19.819530183
+              ],
+              [
+                -102.275522039,
+                -18.973352248
+              ],
+              [
+                -101.78718739,
+                -18.830638224
+              ]
+            ],
+            "full_frame_screen_pixel": [
+              [
+                735.276538074,
+                360.966156007
+              ],
+              [
+                735.768880308,
+                360.833016903
+              ],
+              [
+                737.000606056,
+                360.210413195
+              ],
+              [
+                737.266045061,
+                359.934674976
+              ],
+              [
+                737.394375396,
+                359.599624499
+              ],
+              [
+                743.699008047,
+                317.405933025
+              ],
+              [
+                743.595318234,
+                317.06357444
+              ],
+              [
+                743.349148113,
+                316.774159862
+              ],
+              [
+                742.271965298,
+                315.9346478
+              ],
+              [
+                741.786407396,
+                315.793365659
+              ],
+              [
+                544.724325879,
+                295.996458111
+              ],
+              [
+                544.234594607,
+                296.127653347
+              ],
+              [
+                543.002360984,
+                296.744917552
+              ],
+              [
+                542.734869286,
+                297.021360334
+              ],
+              [
+                542.6056128,
+                297.357844868
+              ],
+              [
+                536.307666773,
+                339.374514222
+              ],
+              [
+                536.333233351,
+                339.725040658
+              ],
+              [
+                536.647368201,
+                340.180469817
+              ],
+              [
+                537.724477961,
+                341.026647752
+              ],
+              [
+                538.21281261,
+                341.169361776
+              ]
+            ],
+            "godot_local_world": [
+              [
+                146.579289345,
+                1.486393857
+              ],
+              [
+                147.336738936,
+                1.281564465
+              ],
+              [
+                149.231701625,
+                0.323712608
+              ],
+              [
+                149.640069324,
+                -0.100500036
+              ],
+              [
+                149.837500609,
+                -0.615962309
+              ],
+              [
+                159.536935458,
+                -65.529333808
+              ],
+              [
+                159.377412668,
+                -66.056039324
+              ],
+              [
+                158.998689404,
+                -66.501292519
+              ],
+              [
+                157.341485074,
+                -67.792849538
+              ],
+              [
+                156.594472916,
+                -68.010206678
+              ],
+              [
+                -146.577960187,
+                -98.466987522
+              ],
+              [
+                -147.331392912,
+                -98.265148697
+              ],
+              [
+                -149.227136948,
+                -97.315511458
+              ],
+              [
+                -149.638662637,
+                -96.890214871
+              ],
+              [
+                -149.837518769,
+                -96.372546357
+              ],
+              [
+                -159.526666503,
+                -31.731516581
+              ],
+              [
+                -159.487333306,
+                -31.192245141
+              ],
+              [
+                -159.004048921,
+                -30.491584897
+              ],
+              [
+                -157.346956982,
+                -29.189772689
+              ],
+              [
+                -156.595672907,
+                -28.970212652
+              ]
+            ]
+          },
+          "holes": []
+        }
+      ],
+      "geometry_stats": {
+        "triangles_intersecting_body_band": 24,
+        "cap_segment_counts_lower_upper": [
+          0,
+          24
+        ],
+        "surface_projection_polygon_count": 14,
+        "raw_union_area_m2": 4.737996871237449,
+        "convex_hull_area_m2": 4.737996869660757
+      },
+      "tolerances": {
+        "clip_vertical_guard_metres": 0.001,
+        "section_endpoint_snap_metres": 1e-07,
+        "simplify_metres": 0.008,
+        "nominal_outward_margin_metres": 0.025,
+        "final_simplify_metres": 0.001,
+        "buffer_segments_per_quadrant": 8,
+        "polygon_rounding_metres": 1e-09,
+        "maximum_boundary_displacement_from_base_metres": 0.034,
+        "measured_minimum_final_boundary_offset_from_base_metres": 0.019550199053152365,
+        "raw_base_area_not_covered_m2": 0.0,
+        "raw_slab_projection_area_m2": 4.737996871237449,
+        "convex_hull_extra_area_m2": 0,
+        "margin_note": "25mm is the nominal buffer after 8mm simplification, followed by 1mm simplification. It is not a guaranteed uniform 25mm offset from raw mesh; the measured minimum offset is reported. Combined boundary displacement is at most 34mm, excluding the intentionally conservative rock convex hull. Exact base containment is verified.",
+        "rock_hull_note": null
+      },
+      "reuse_contract": "XY translation only, fixed authored orientation and scale; do not mirror, rotate, or scale this mesh, sprite, or its collider independently."
+    },
+    {
+      "module_id": "walkable_arch",
+      "source_object_name": "Hero arch • authored gate • worn crown",
+      "source_asset": "modular_fort_01_wall_thin_gate_01",
+      "mesh_parts": [
+        "walkable_arch",
+        "walkable_arch_sill"
+      ],
+      "source_scene_transform": {
+        "location": [
+          1.75,
+          4.449999809265137,
+          -0.025212163105607033
+        ],
+        "rotation_euler": [
+          0.0,
+          0.0,
+          1.4486232995986938
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "matrix_world": [
+          [
+            0.12186932563781738,
+            -0.9925461411476135,
+            0.0,
+            1.75
+          ],
+          [
+            0.9925461411476135,
+            0.12186932563781738,
+            0.0,
+            4.449999809265137
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            -0.025212163105607033
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "source_foot_world_metres": [
+        1.7537850141525269,
+        3.536357879638672,
+        -0.025212157517671585
+      ],
+      "normalization_translation_metres": [
+        -1.7537850141525269,
+        -3.536357879638672,
+        0.025212157517671585
+      ],
+      "source_transform_baked": true,
+      "classification": "walkable_arch",
+      "foot": {
+        "ground_xy_metres": [
+          0.0,
+          0.0
+        ],
+        "local_xyz_metres": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "foot_relative_screen_pixel": [
+          0.0,
+          -0.0
+        ],
+        "full_frame_screen_pixel": [
+          640.0,
+          360.0
+        ],
+        "godot_local_world": [
+          0.0,
+          -0.0
+        ]
+      },
+      "measured_low_vertices_foot_residual_metres": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mesh_local_aabb_metres": [
+        [
+          -2.8303871154785156,
+          0.0,
+          0.0
+        ],
+        [
+          2.8303871154785156,
+          1.8854494094848633,
+          3.476663827896118
+        ]
+      ],
+      "body_band_local_z_metres": [
+        -0.001,
+        1.951079146027565
+      ],
+      "ground_support_plane_local_z_metres": 0,
+      "polygon_count": 2,
+      "ground_collision_area_m2": 3.869055976299979,
+      "polygons": [
+        {
+          "outer": {
+            "ground_xy_metres": [
+              [
+                1.196663634,
+                0.120159569
+              ],
+              [
+                1.197421306,
+                0.110307712
+              ],
+              [
+                1.201936836,
+                0.101518903
+              ],
+              [
+                1.20950484,
+                0.095166071
+              ],
+              [
+                1.218943097,
+                0.09224161
+              ],
+              [
+                1.407796933,
+                0.073521568
+              ],
+              [
+                1.417467642,
+                0.076588594
+              ],
+              [
+                1.504314233,
+                0.125331162
+              ],
+              [
+                2.672981999,
+                -0.0220636
+              ],
+              [
+                2.682922167,
+                -0.021314158
+              ],
+              [
+                2.691779313,
+                -0.016740366
+              ],
+              [
+                2.707371288,
+                0.001967872
+              ],
+              [
+                2.71027565,
+                0.010962016
+              ],
+              [
+                2.855200769,
+                1.191281096
+              ],
+              [
+                2.8528738,
+                1.20525253
+              ],
+              [
+                2.846513284,
+                1.218344598
+              ],
+              [
+                2.841066214,
+                1.225713384
+              ],
+              [
+                2.83332985,
+                1.230624415
+              ],
+              [
+                2.808740842,
+                1.239583493
+              ],
+              [
+                1.380826676,
+                1.414909584
+              ],
+              [
+                1.371098981,
+                1.414186693
+              ],
+              [
+                1.362388402,
+                1.409796201
+              ],
+              [
+                1.356021045,
+                1.402406521
+              ],
+              [
+                1.352966284,
+                1.393142664
+              ]
+            ],
+            "foot_relative_screen_pixel": [
+              [
+                56.730720427,
+                -4.666261646
+              ],
+              [
+                56.766639692,
+                -4.283675865
+              ],
+              [
+                56.980709262,
+                -3.942372358
+              ],
+              [
+                57.339488711,
+                -3.695667276
+              ],
+              [
+                57.786932006,
+                -3.582099124
+              ],
+              [
+                66.74000275,
+                -2.855127359
+              ],
+              [
+                67.198465991,
+                -2.974231862
+              ],
+              [
+                71.315637713,
+                -4.86709464
+              ],
+              [
+                126.719146619,
+                0.856815078
+              ],
+              [
+                127.190384213,
+                0.827711341
+              ],
+              [
+                127.610278542,
+                0.650093276
+              ],
+              [
+                128.349453653,
+                -0.076420095
+              ],
+              [
+                128.487141926,
+                -0.425697556
+              ],
+              [
+                135.357666086,
+                -46.262060805
+              ],
+              [
+                135.247350519,
+                -46.804625722
+              ],
+              [
+                134.945814945,
+                -47.313041451
+              ],
+              [
+                134.687583479,
+                -47.599199963
+              ],
+              [
+                134.320822519,
+                -47.789914325
+              ],
+              [
+                133.155121399,
+                -48.137830038
+              ],
+              [
+                65.461412788,
+                -54.946421486
+              ],
+              [
+                65.000247988,
+                -54.918348827
+              ],
+              [
+                64.587302021,
+                -54.747849011
+              ],
+              [
+                64.285442133,
+                -54.460879104
+              ],
+              [
+                64.140623834,
+                -54.101127642
+              ]
+            ],
+            "full_frame_screen_pixel": [
+              [
+                696.730720427,
+                355.333738354
+              ],
+              [
+                696.766639692,
+                355.716324135
+              ],
+              [
+                696.980709262,
+                356.057627642
+              ],
+              [
+                697.339488711,
+                356.304332724
+              ],
+              [
+                697.786932006,
+                356.417900876
+              ],
+              [
+                706.74000275,
+                357.144872641
+              ],
+              [
+                707.198465991,
+                357.025768138
+              ],
+              [
+                711.315637713,
+                355.13290536
+              ],
+              [
+                766.719146619,
+                360.856815078
+              ],
+              [
+                767.190384213,
+                360.827711341
+              ],
+              [
+                767.610278542,
+                360.650093276
+              ],
+              [
+                768.349453653,
+                359.923579905
+              ],
+              [
+                768.487141926,
+                359.574302444
+              ],
+              [
+                775.357666086,
+                313.737939195
+              ],
+              [
+                775.247350519,
+                313.195374278
+              ],
+              [
+                774.945814945,
+                312.686958549
+              ],
+              [
+                774.687583479,
+                312.400800037
+              ],
+              [
+                774.320822519,
+                312.210085675
+              ],
+              [
+                773.155121399,
+                311.862169962
+              ],
+              [
+                705.461412788,
+                305.053578514
+              ],
+              [
+                705.000247988,
+                305.081651173
+              ],
+              [
+                704.587302021,
+                305.252150989
+              ],
+              [
+                704.285442133,
+                305.539120896
+              ],
+              [
+                704.140623834,
+                305.898872358
+              ]
+            ],
+            "godot_local_world": [
+              [
+                87.278031426,
+                -7.17886407
+              ],
+              [
+                87.333291834,
+                -6.590270562
+              ],
+              [
+                87.662629634,
+                -6.065188243
+              ],
+              [
+                88.214598017,
+                -5.685641963
+              ],
+              [
+                88.902972317,
+                -5.510921729
+              ],
+              [
+                102.676927307,
+                -4.392503629
+              ],
+              [
+                103.382255371,
+                -4.575741327
+              ],
+              [
+                109.716365712,
+                -7.487837908
+              ],
+              [
+                194.95253326,
+                1.318177043
+              ],
+              [
+                195.677514174,
+                1.273402063
+              ],
+              [
+                196.32350545,
+                1.000143501
+              ],
+              [
+                197.460697928,
+                -0.117569376
+              ],
+              [
+                197.67252604,
+                -0.654919316
+              ],
+              [
+                208.242563209,
+                -71.172401239
+              ],
+              [
+                208.072846952,
+                -72.007116496
+              ],
+              [
+                207.60894607,
+                -72.789294539
+              ],
+              [
+                207.21166689,
+                -73.229538404
+              ],
+              [
+                206.647419259,
+                -73.522945116
+              ],
+              [
+                204.854032921,
+                -74.058200058
+              ],
+              [
+                100.709865828,
+                -84.532956132
+              ],
+              [
+                100.00038152,
+                -84.489767427
+              ],
+              [
+                99.365080032,
+                -84.227460017
+              ],
+              [
+                98.900680205,
+                -83.785967852
+              ],
+              [
+                98.677882822,
+                -83.232504065
+              ]
+            ]
+          },
+          "holes": []
+        },
+        {
+          "outer": {
+            "ground_xy_metres": [
+              [
+                -1.657349193,
+                0.513497818
+              ],
+              [
+                -1.584919421,
+                0.445235212
+              ],
+              [
+                -1.576277906,
+                0.439919685
+              ],
+              [
+                -1.388504336,
+                0.412395859
+              ],
+              [
+                -1.378638951,
+                0.412950138
+              ],
+              [
+                -1.369758868,
+                0.417283401
+              ],
+              [
+                -1.36325127,
+                0.424718737
+              ],
+              [
+                -1.360132728,
+                0.43409465
+              ],
+              [
+                -1.203830084,
+                1.707077696
+              ],
+              [
+                -1.204552978,
+                1.716805393
+              ],
+              [
+                -1.208943474,
+                1.725515972
+              ],
+              [
+                -1.216333158,
+                1.731883327
+              ],
+              [
+                -1.225597018,
+                1.734938085
+              ],
+              [
+                -2.65351084,
+                1.910263065
+              ],
+              [
+                -2.679537149,
+                1.907518826
+              ],
+              [
+                -2.688324886,
+                1.904573551
+              ],
+              [
+                -2.695435767,
+                1.898629282
+              ],
+              [
+                -2.700917163,
+                1.885962892
+              ],
+              [
+                -2.855180178,
+                0.69447939
+              ],
+              [
+                -2.85446192,
+                0.684531166
+              ],
+              [
+                -2.849911607,
+                0.675655486
+              ],
+              [
+                -2.821730077,
+                0.651484683
+              ],
+              [
+                -2.808567921,
+                0.64584315
+              ]
+            ],
+            "foot_relative_screen_pixel": [
+              [
+                -78.570628409,
+                -19.941109919
+              ],
+              [
+                -75.136920699,
+                -17.290208431
+              ],
+              [
+                -74.727248877,
+                -17.083785922
+              ],
+              [
+                -65.825390744,
+                -16.014929112
+              ],
+              [
+                -65.357698418,
+                -16.036453913
+              ],
+              [
+                -64.936716705,
+                -16.204731306
+              ],
+              [
+                -64.628208356,
+                -16.493474212
+              ],
+              [
+                -64.480366364,
+                -16.857577243
+              ],
+              [
+                -57.070463241,
+                -66.292441336
+              ],
+              [
+                -57.104733772,
+                -66.670205503
+              ],
+              [
+                -57.312875804,
+                -67.008471036
+              ],
+              [
+                -57.663201564,
+                -67.255740102
+              ],
+              [
+                -58.10237715,
+                -67.374368192
+              ],
+              [
+                -125.796069452,
+                -74.182916495
+              ],
+              [
+                -127.029909286,
+                -74.076347062
+              ],
+              [
+                -127.446513114,
+                -73.961970622
+              ],
+              [
+                -127.783621547,
+                -73.731131624
+              ],
+              [
+                -128.04348032,
+                -73.239246622
+              ],
+              [
+                -135.35668992,
+                -26.969325608
+              ],
+              [
+                -135.32263917,
+                -26.582997523
+              ],
+              [
+                -135.106920628,
+                -26.238320478
+              ],
+              [
+                -133.770907354,
+                -25.299674544
+              ],
+              [
+                -133.146923662,
+                -25.080591958
+              ]
+            ],
+            "full_frame_screen_pixel": [
+              [
+                561.429371591,
+                340.058890081
+              ],
+              [
+                564.863079301,
+                342.709791569
+              ],
+              [
+                565.272751123,
+                342.916214078
+              ],
+              [
+                574.174609256,
+                343.985070888
+              ],
+              [
+                574.642301582,
+                343.963546087
+              ],
+              [
+                575.063283295,
+                343.795268694
+              ],
+              [
+                575.371791644,
+                343.506525788
+              ],
+              [
+                575.519633636,
+                343.142422757
+              ],
+              [
+                582.929536759,
+                293.707558664
+              ],
+              [
+                582.895266228,
+                293.329794497
+              ],
+              [
+                582.687124196,
+                292.991528964
+              ],
+              [
+                582.336798436,
+                292.744259898
+              ],
+              [
+                581.89762285,
+                292.625631808
+              ],
+              [
+                514.203930548,
+                285.817083505
+              ],
+              [
+                512.970090714,
+                285.923652938
+              ],
+              [
+                512.553486886,
+                286.038029378
+              ],
+              [
+                512.216378453,
+                286.268868376
+              ],
+              [
+                511.95651968,
+                286.760753378
+              ],
+              [
+                504.64331008,
+                333.030674392
+              ],
+              [
+                504.67736083,
+                333.417002477
+              ],
+              [
+                504.893079372,
+                333.761679522
+              ],
+              [
+                506.229092646,
+                334.700325456
+              ],
+              [
+                506.853076338,
+                334.919408042
+              ]
+            ],
+            "godot_local_world": [
+              [
+                -120.87788986,
+                -30.678630645
+              ],
+              [
+                -115.595262614,
+                -26.600320664
+              ],
+              [
+                -114.964998272,
+                -26.282747572
+              ],
+              [
+                -101.269831913,
+                -24.63835248
+              ],
+              [
+                -100.550305258,
+                -24.671467559
+              ],
+              [
+                -99.902641085,
+                -24.930355855
+              ],
+              [
+                -99.428012855,
+                -25.374575711
+              ],
+              [
+                -99.200563638,
+                -25.934734219
+              ],
+              [
+                -87.800712679,
+                -101.988371287
+              ],
+              [
+                -87.853436572,
+                -102.569546927
+              ],
+              [
+                -88.173655084,
+                -103.08995544
+              ],
+              [
+                -88.712617791,
+                -103.470369388
+              ],
+              [
+                -89.388272538,
+                -103.652874141
+              ],
+              [
+                -193.532414541,
+                -114.127563839
+              ],
+              [
+                -195.430629671,
+                -113.963610864
+              ],
+              [
+                -196.071558637,
+                -113.78764711
+              ],
+              [
+                -196.590186995,
+                -113.432510191
+              ],
+              [
+                -196.989969723,
+                -112.675764034
+              ],
+              [
+                -208.241061415,
+                -41.491270166
+              ],
+              [
+                -208.188675647,
+                -40.896919267
+              ],
+              [
+                -207.856800966,
+                -40.36664689
+              ],
+              [
+                -205.801395929,
+                -38.922576221
+              ],
+              [
+                -204.841421019,
+                -38.585526089
+              ]
+            ]
+          },
+          "holes": []
+        }
+      ],
+      "geometry_stats": {
+        "triangles_intersecting_body_band": 252,
+        "cap_segment_counts_lower_upper": [
+          0,
+          80
+        ],
+        "surface_projection_polygon_count": 230,
+        "raw_union_area_m2": 6.970434366041392,
+        "convex_hull_area_m2": 7.0487799592075735,
+        "threshold_exclusion": {
+          "classification": "walkable_low_authored_sill",
+          "maximum_sill_height_above_flat_ground_metres": 0.150079146027565,
+          "maximum_step_above_flat_ground_metres": 0.150079146027565,
+          "step_up_required": true,
+          "maximum_low_face_classification_height_metres": 0.3,
+          "low_triangle_count": 172,
+          "body_band_top_including_sill_metres": 1.951079146027565,
+          "exemption_polygon_ground_xy_metres": [
+            [
+              -1.386165424,
+              0.427213073
+            ],
+            [
+              1.220258246,
+              0.10718453
+            ],
+            [
+              1.378998645,
+              1.400021506
+            ],
+            [
+              -1.227425026,
+              1.720050048
+            ]
+          ],
+          "removed_low_sill_projection_area_m2": 3.367927489080767,
+          "visual_mesh_parts": [
+            "walkable_arch",
+            "walkable_arch_sill"
+          ],
+          "policy": "Only the low sill inside the actual open portal is nonblocking. Foundations outside the opening stay solid. The visual sill remains. Flat 2D collision treats this as walkable ground; a 3D controller must support a 0.151m step or an equivalent ramp."
+        }
+      },
+      "tolerances": {
+        "clip_vertical_guard_metres": 0.001,
+        "section_endpoint_snap_metres": 1e-07,
+        "simplify_metres": 0.008,
+        "nominal_outward_margin_metres": 0.025,
+        "final_simplify_metres": 0.001,
+        "buffer_segments_per_quadrant": 8,
+        "polygon_rounding_metres": 1e-09,
+        "maximum_boundary_displacement_from_base_metres": 0.034,
+        "measured_minimum_final_boundary_offset_from_base_metres": 0.017172378323371935,
+        "raw_base_area_not_covered_m2": 0.0,
+        "raw_slab_projection_area_m2": 3.602506876960625,
+        "convex_hull_extra_area_m2": 0,
+        "margin_note": "25mm is the nominal buffer after 8mm simplification, followed by 1mm simplification. It is not a guaranteed uniform 25mm offset from raw mesh; the measured minimum offset is reported. Combined boundary displacement is at most 34mm, excluding the intentionally conservative rock convex hull. Exact base containment is verified.",
+        "rock_hull_note": null
+      },
+      "reuse_contract": "XY translation only, fixed authored orientation and scale; do not mirror, rotate, or scale this mesh, sprite, or its collider independently.",
+      "walkable_threshold": {
+        "classification": "walkable_low_authored_sill",
+        "maximum_sill_height_above_flat_ground_metres": 0.150079146027565,
+        "maximum_step_above_flat_ground_metres": 0.150079146027565,
+        "step_up_required": true,
+        "maximum_low_face_classification_height_metres": 0.3,
+        "low_triangle_count": 172,
+        "body_band_top_including_sill_metres": 1.951079146027565,
+        "exemption_polygon_ground_xy_metres": [
+          [
+            -1.386165424,
+            0.427213073
+          ],
+          [
+            1.220258246,
+            0.10718453
+          ],
+          [
+            1.378998645,
+            1.400021506
+          ],
+          [
+            -1.227425026,
+            1.720050048
+          ]
+        ],
+        "removed_low_sill_projection_area_m2": 3.367927489080767,
+        "visual_mesh_parts": [
+          "walkable_arch",
+          "walkable_arch_sill"
+        ],
+        "policy": "Only the low sill inside the actual open portal is nonblocking. Foundations outside the opening stay solid. The visual sill remains. Flat 2D collision treats this as walkable ground; a 3D controller must support a 0.151m step or an equivalent ramp."
+      }
+    },
+    {
+      "module_id": "moss_rock",
+      "source_object_name": "Scanned moss rock 01",
+      "source_asset": "rock_moss_set_01_rock01",
+      "mesh_parts": [
+        "moss_rock"
+      ],
+      "source_scene_transform": {
+        "location": [
+          -7.0,
+          -3.4000000953674316,
+          0.21238256990909576
+        ],
+        "rotation_euler": [
+          0.0,
+          0.0,
+          0.3141592741012573
+        ],
+        "scale": [
+          1.399999976158142,
+          1.399999976158142,
+          1.399999976158142
+        ],
+        "matrix_world": [
+          [
+            1.3314791917800903,
+            -0.43262380361557007,
+            0.0,
+            -7.0
+          ],
+          [
+            0.43262380361557007,
+            1.3314791917800903,
+            0.0,
+            -3.4000000953674316
+          ],
+          [
+            0.0,
+            0.0,
+            1.399999976158142,
+            0.21238256990909576
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "source_foot_world_metres": [
+        -6.762246131896973,
+        -4.986733913421631,
+        0.21238256990909576
+      ],
+      "normalization_translation_metres": [
+        6.762246131896973,
+        4.986733913421631,
+        -0.21238256990909576
+      ],
+      "source_transform_baked": true,
+      "classification": "scanned_rock",
+      "foot": {
+        "ground_xy_metres": [
+          0.0,
+          0.0
+        ],
+        "local_xyz_metres": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "foot_relative_screen_pixel": [
+          0.0,
+          -0.0
+        ],
+        "full_frame_screen_pixel": [
+          640.0,
+          360.0
+        ],
+        "godot_local_world": [
+          0.0,
+          -0.0
+        ]
+      },
+      "measured_low_vertices_foot_residual_metres": [
+        2.384185791015625e-07,
+        0.0,
+        0.0
+      ],
+      "mesh_local_aabb_metres": [
+        [
+          -1.9586305618286133,
+          -0.37992334365844727,
+          0.0
+        ],
+        [
+          1.8914422988891602,
+          3.8478569984436035,
+          2.061777353286743
+        ]
+      ],
+      "body_band_local_z_metres": [
+        -0.001,
+        1.801
+      ],
+      "ground_support_plane_local_z_metres": 0,
+      "polygon_count": 1,
+      "ground_collision_area_m2": 10.993262878764293,
+      "polygons": [
+        {
+          "outer": {
+            "ground_xy_metres": [
+              [
+                -1.977853868,
+                3.111915435
+              ],
+              [
+                -1.983384657,
+                2.528872505
+              ],
+              [
+                -1.954425369,
+                2.324151457
+              ],
+              [
+                -1.668592964,
+                0.841330231
+              ],
+              [
+                -1.619061558,
+                0.711767395
+              ],
+              [
+                -1.492842386,
+                0.476148942
+              ],
+              [
+                -1.283487762,
+                0.279373484
+              ],
+              [
+                -0.936558021,
+                0.026431458
+              ],
+              [
+                -0.929279597,
+                0.02277196
+              ],
+              [
+                0.443348989,
+                -0.404737739
+              ],
+              [
+                1.524925756,
+                -0.341306572
+              ],
+              [
+                1.698906207,
+                -0.289043235
+              ],
+              [
+                1.804173731,
+                -0.223509597
+              ],
+              [
+                1.888535566,
+                -0.149057592
+              ],
+              [
+                1.911459036,
+                -0.118421758
+              ],
+              [
+                1.916241074,
+                -0.106609658
+              ],
+              [
+                1.905693098,
+                0.136658347
+              ],
+              [
+                1.807932047,
+                0.43153642
+              ],
+              [
+                0.910896448,
+                2.051040633
+              ],
+              [
+                0.173613896,
+                3.273757684
+              ],
+              [
+                0.044286261,
+                3.440401308
+              ],
+              [
+                -0.139704859,
+                3.642006977
+              ],
+              [
+                -0.275777401,
+                3.735126381
+              ],
+              [
+                -0.445403052,
+                3.797953608
+              ],
+              [
+                -0.753879665,
+                3.872817507
+              ],
+              [
+                -0.894187336,
+                3.855117981
+              ],
+              [
+                -1.275633221,
+                3.75526828
+              ],
+              [
+                -1.433262109,
+                3.685314882
+              ],
+              [
+                -1.857786416,
+                3.354233492
+              ],
+              [
+                -1.923408177,
+                3.266555841
+              ],
+              [
+                -1.926832847,
+                3.260090122
+              ],
+              [
+                -1.976422004,
+                3.120008954
+              ]
+            ],
+            "foot_relative_screen_pixel": [
+              [
+                -93.764924113,
+                -120.847734056
+              ],
+              [
+                -94.02712448,
+                -98.205917972
+              ],
+              [
+                -92.654239716,
+                -90.255806447
+              ],
+              [
+                -79.103666441,
+                -32.672112765
+              ],
+              [
+                -76.755510898,
+                -27.640685827
+              ],
+              [
+                -70.771787188,
+                -18.490708348
+              ],
+              [
+                -60.846827236,
+                -10.84915487
+              ],
+              [
+                -44.399787662,
+                -1.026435928
+              ],
+              [
+                -44.05473645,
+                -0.884323441
+              ],
+              [
+                21.018026145,
+                15.71753464
+              ],
+              [
+                72.292776581,
+                13.254256649
+              ],
+              [
+                80.540738702,
+                11.224668769
+              ],
+              [
+                85.531199099,
+                8.679743682
+              ],
+              [
+                89.530574981,
+                5.78848385
+              ],
+              [
+                90.617317262,
+                4.598775711
+              ],
+              [
+                90.844021286,
+                4.1400661
+              ],
+              [
+                90.34396909,
+                -5.306973123
+              ],
+              [
+                85.709371117,
+                -16.758231259
+              ],
+              [
+                43.183239016,
+                -79.649854931
+              ],
+              [
+                8.230584699,
+                -127.132695673
+              ],
+              [
+                2.099496818,
+                -133.604113286
+              ],
+              [
+                -6.623045167,
+                -141.433242573
+              ],
+              [
+                -13.073891603,
+                -145.049429839
+              ],
+              [
+                -21.115403947,
+                -147.4892545
+              ],
+              [
+                -35.739480415,
+                -150.396509773
+              ],
+              [
+                -42.391103336,
+                -149.709168598
+              ],
+              [
+                -60.47446381,
+                -145.831617821
+              ],
+              [
+                -67.947240723,
+                -143.115056329
+              ],
+              [
+                -88.072837499,
+                -130.257883117
+              ],
+              [
+                -91.183795058,
+                -126.853020205
+              ],
+              [
+                -91.346149784,
+                -126.601931283
+              ],
+              [
+                -93.697043153,
+                -121.162036758
+              ]
+            ],
+            "full_frame_screen_pixel": [
+              [
+                546.235075887,
+                239.152265944
+              ],
+              [
+                545.97287552,
+                261.794082028
+              ],
+              [
+                547.345760284,
+                269.744193553
+              ],
+              [
+                560.896333559,
+                327.327887235
+              ],
+              [
+                563.244489102,
+                332.359314173
+              ],
+              [
+                569.228212812,
+                341.509291652
+              ],
+              [
+                579.153172764,
+                349.15084513
+              ],
+              [
+                595.600212338,
+                358.973564072
+              ],
+              [
+                595.94526355,
+                359.115676559
+              ],
+              [
+                661.018026145,
+                375.71753464
+              ],
+              [
+                712.292776581,
+                373.254256649
+              ],
+              [
+                720.540738702,
+                371.224668769
+              ],
+              [
+                725.531199099,
+                368.679743682
+              ],
+              [
+                729.530574981,
+                365.78848385
+              ],
+              [
+                730.617317262,
+                364.598775711
+              ],
+              [
+                730.844021286,
+                364.1400661
+              ],
+              [
+                730.34396909,
+                354.693026877
+              ],
+              [
+                725.709371117,
+                343.241768741
+              ],
+              [
+                683.183239016,
+                280.350145069
+              ],
+              [
+                648.230584699,
+                232.867304327
+              ],
+              [
+                642.099496818,
+                226.395886714
+              ],
+              [
+                633.376954833,
+                218.566757427
+              ],
+              [
+                626.926108397,
+                214.950570161
+              ],
+              [
+                618.884596053,
+                212.5107455
+              ],
+              [
+                604.260519585,
+                209.603490227
+              ],
+              [
+                597.608896664,
+                210.290831402
+              ],
+              [
+                579.52553619,
+                214.168382179
+              ],
+              [
+                572.052759277,
+                216.884943671
+              ],
+              [
+                551.927162501,
+                229.742116883
+              ],
+              [
+                548.816204942,
+                233.146979795
+              ],
+              [
+                548.653850216,
+                233.398068717
+              ],
+              [
+                546.302956847,
+                238.837963242
+              ]
+            ],
+            "godot_local_world": [
+              [
+                -144.253729404,
+                -185.919590855
+              ],
+              [
+                -144.657114585,
+                -151.086027649
+              ],
+              [
+                -142.544984178,
+                -138.855086841
+              ],
+              [
+                -121.697948372,
+                -50.26478887
+              ],
+              [
+                -118.085401381,
+                -42.524132042
+              ],
+              [
+                -108.879672597,
+                -28.447243613
+              ],
+              [
+                -93.610503439,
+                -16.691007492
+              ],
+              [
+                -68.307365634,
+                -1.579132197
+              ],
+              [
+                -67.776517616,
+                -1.360497602
+              ],
+              [
+                32.335424839,
+                24.180822522
+              ],
+              [
+                111.219656278,
+                20.391164075
+              ],
+              [
+                123.908828773,
+                17.268721182
+              ],
+              [
+                131.586460153,
+                13.353451819
+              ],
+              [
+                137.739346124,
+                8.905359769
+              ],
+              [
+                139.411257327,
+                7.075039555
+              ],
+              [
+                139.760032748,
+                6.369332461
+              ],
+              [
+                138.990721678,
+                -8.164574035
+              ],
+              [
+                131.860570949,
+                -25.781894245
+              ],
+              [
+                66.435752333,
+                -122.538238355
+              ],
+              [
+                12.662437999,
+                -195.588762574
+              ],
+              [
+                3.229995104,
+                -205.54478967
+              ],
+              [
+                -10.189300258,
+                -217.589603958
+              ],
+              [
+                -20.113679389,
+                -223.152968984
+              ],
+              [
+                -32.485236841,
+                -226.906545384
+              ],
+              [
+                -54.983816023,
+                -231.379245804
+              ],
+              [
+                -65.217082056,
+                -230.321797843
+              ],
+              [
+                -93.037636631,
+                -224.356335109
+              ],
+              [
+                -104.534216497,
+                -220.177009737
+              ],
+              [
+                -135.496673076,
+                -200.396743257
+              ],
+              [
+                -140.282761627,
+                -195.158492622
+              ],
+              [
+                -140.532538129,
+                -194.772201974
+              ],
+              [
+                -144.149297158,
+                -186.403133474
+              ]
+            ]
+          },
+          "holes": []
+        }
+      ],
+      "geometry_stats": {
+        "triangles_intersecting_body_band": 10450,
+        "cap_segment_counts_lower_upper": [
+          0,
+          244
+        ],
+        "surface_projection_polygon_count": 10450,
+        "raw_union_area_m2": 10.277764906219714,
+        "convex_hull_area_m2": 10.690062803572744
+      },
+      "tolerances": {
+        "clip_vertical_guard_metres": 0.001,
+        "section_endpoint_snap_metres": 1e-07,
+        "simplify_metres": 0.008,
+        "nominal_outward_margin_metres": 0.025,
+        "final_simplify_metres": 0.001,
+        "buffer_segments_per_quadrant": 8,
+        "polygon_rounding_metres": 1e-09,
+        "maximum_boundary_displacement_from_base_metres": 0.034,
+        "measured_minimum_final_boundary_offset_from_base_metres": 0.018888824087799492,
+        "raw_base_area_not_covered_m2": 0.0,
+        "raw_slab_projection_area_m2": 10.277764906219714,
+        "convex_hull_extra_area_m2": 0.4122978973530298,
+        "margin_note": "25mm is the nominal buffer after 8mm simplification, followed by 1mm simplification. It is not a guaranteed uniform 25mm offset from raw mesh; the measured minimum offset is reported. Combined boundary displacement is at most 34mm, excluding the intentionally conservative rock convex hull. Exact base containment is verified.",
+        "rock_hull_note": "A convex hull fills scanned-rock concave notches and scan gaps; its extra area is independent of and not bounded by the 34mm simplification/buffer bound."
+      },
+      "reuse_contract": "XY translation only, fixed authored orientation and scale; do not mirror, rotate, or scale this mesh, sprite, or its collider independently."
+    }
+  ],
+  "portal_validation": {
+    "module_id": "walkable_arch",
+    "source_object_name": "Hero arch • authored gate • worn crown",
+    "basis_origin_local_xy_metres": [
+      -0.003785014,
+      0.91364193
+    ],
+    "across_unit_xy": [
+      0.992546154,
+      -0.121869327
+    ],
+    "through_unit_xy": [
+      0.121869327,
+      0.992546154
+    ],
+    "character_height_metres": 1.8,
+    "character_radius_metres": 0.3,
+    "raw_body_band_opening": {
+      "left_inner_axis_metres": -1.312795601598573,
+      "right_inner_axis_metres": 1.3132018501589025,
+      "clear_width_metres": 2.6259974517574753,
+      "minimum_euclidean_leg_separation_metres": 2.625997451757475,
+      "component_count": 2
+    },
+    "buffered_collision_opening": {
+      "left_inner_axis_metres": -1.287795601598573,
+      "right_inner_axis_metres": 1.2882018501589028,
+      "clear_width_metres": 2.575997451757476,
+      "minimum_euclidean_leg_separation_metres": 2.575997451757475,
+      "component_count": 2
+    },
+    "remaining_character_center_width_metres": 1.9759974517574759,
+    "threshold": {
+      "classification": "walkable_low_authored_sill",
+      "maximum_sill_height_above_flat_ground_metres": 0.150079146027565,
+      "maximum_step_above_flat_ground_metres": 0.150079146027565,
+      "step_up_required": true,
+      "maximum_low_face_classification_height_metres": 0.3,
+      "low_triangle_count": 172,
+      "body_band_top_including_sill_metres": 1.951079146027565,
+      "exemption_polygon_ground_xy_metres": [
+        [
+          -1.386165424,
+          0.427213073
+        ],
+        [
+          1.220258246,
+          0.10718453
+        ],
+        [
+          1.378998645,
+          1.400021506
+        ],
+        [
+          -1.227425026,
+          1.720050048
+        ]
+      ],
+      "removed_low_sill_projection_area_m2": 3.367927489080767,
+      "visual_mesh_parts": [
+        "walkable_arch",
+        "walkable_arch_sill"
+      ],
+      "policy": "Only the low sill inside the actual open portal is nonblocking. Foundations outside the opening stay solid. The visual sill remains. Flat 2D collision treats this as walkable ground; a 3D controller must support a 0.151m step or an equivalent ramp."
+    },
+    "actual_mesh_horizontal_section_checks": [
+      {
+        "height_above_conservative_sill_top_metres": 0.1,
+        "local_z_metres": 0.250079146027565,
+        "section_segment_count": 80,
+        "left_inner_axis_metres": -1.3127957466062672,
+        "right_inner_axis_metres": 1.3132021077136273,
+        "clear_width_metres": 2.6259978543198947,
+        "minimum_euclidean_leg_separation_metres": 2.625997873152364,
+        "component_count": 2
+      },
+      {
+        "height_above_conservative_sill_top_metres": 0.9,
+        "local_z_metres": 1.050079146027565,
+        "section_segment_count": 80,
+        "left_inner_axis_metres": -1.3127957021233083,
+        "right_inner_axis_metres": 1.313201948473052,
+        "clear_width_metres": 2.6259976505963603,
+        "minimum_euclidean_leg_separation_metres": 2.6259976624699344,
+        "component_count": 2
+      },
+      {
+        "height_above_conservative_sill_top_metres": 1.8,
+        "local_z_metres": 1.950079146027565,
+        "section_segment_count": 80,
+        "left_inner_axis_metres": -1.3127955926994372,
+        "right_inner_axis_metres": 1.3132018628335622,
+        "clear_width_metres": 2.6259974555329997,
+        "minimum_euclidean_leg_separation_metres": 2.625997463960718,
+        "component_count": 2
+      }
+    ],
+    "verified_centerline": {
+      "start": {
+        "ground_xy_metres": [
+          -0.163995694,
+          -0.392836266
+        ],
+        "local_xyz_metres": [
+          -0.163995694,
+          -0.392836266,
+          0.0
+        ],
+        "foot_relative_screen_pixel": [
+          -7.774610693,
+          15.255354321
+        ],
+        "full_frame_screen_pixel": [
+          632.225389307,
+          375.255354321
+        ],
+        "godot_local_world": [
+          -11.960939528,
+          23.469775878
+        ]
+      },
+      "end": {
+        "ground_xy_metres": [
+          0.156829898,
+          2.220078856
+        ],
+        "local_xyz_metres": [
+          0.156829898,
+          2.220078856,
+          0.0
+        ],
+        "foot_relative_screen_pixel": [
+          7.434898877,
+          -86.214264091
+        ],
+        "full_frame_screen_pixel": [
+          647.434898877,
+          273.785735909
+        ],
+        "godot_local_world": [
+          11.438305965,
+          -132.637329371
+        ]
+      },
+      "minimum_distance_to_arch_blockers_metres": 1.2879987258787375,
+      "minimum_clearance_after_character_radius_metres": 0.9879987258787375,
+      "swept_capsule_radius_metres": 0.3,
+      "swept_capsule_intersects_arch_blocker": false
+    },
+    "conservative_ceiling_local_z_lower_bound_over_swept_path_metres": 2.778808116912842,
+    "conservative_headroom_above_sill_lower_bound_metres": 2.628728970885277,
+    "passes_1p8m_tall_0p3m_radius_geometric_test": true,
+    "scope": "Valid for this isolated arch on flat z=0 ground with a walkable 0.15008m sill. Other modules are independent instances, not obstacles overlaid at local origin. The eventual assembled layout requires its own path and overlap validation. This is a geometric test, not a Godot physics or animation test."
+  },
+  "verification": {
+    "module_count": 3,
+    "collision_polygon_count": 4,
+    "expected_polygon_count": 4,
+    "all_polygons_valid": true,
+    "all_base_footprints_covered_after_threshold_exemption": true,
+    "arch_two_disjoint_blocking_legs": true,
+    "source_module_blend_hash_unchanged": true,
+    "source_definitions_hash_unchanged": true,
+    "independent_serialized_qa_file": "source/collision-work/independent-verification.json",
+    "physics_engine_not_run": true,
+    "assembled_layout_not_tested": true
+  },
+  "limitations": [
+    "Collision is a body-height ground occupancy projection, not a visible alpha contour or a full 3D collider.",
+    "Flat z=0 receiving ground only; terrain slopes, stairs other than the declared walkable sill, jumps, crouching, and taller/wider bodies need new validation.",
+    "The low sill is deliberately walkable. A 3D controller needs enough step height or an equivalent ramp; the mesh alone does not implement stepping.",
+    "Keep fixed orientation and scale. Translation-only instancing is supported.",
+    "Rock convex-hull filling is deliberately conservative and can extend beyond the nominal 25mm margin.",
+    "These are separate reusable modules; the assembled arrangement, collisions between placed instances, and visual occlusion/Y-sort require separate testing."
+  ]
+}

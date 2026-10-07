@@ -1,0 +1,135 @@
+{
+  "result": "PASS",
+  "method": "Existing Blender PNGs, deterministic technical alpha compositing",
+  "new_asset_downloads": false,
+  "blender_rerendered": false,
+  "native_gameplay_screenshot": false,
+  "shadow_normalization": [
+    {
+      "id": "short_wall",
+      "raw_edge_alpha_max": 11,
+      "removed_alpha_floor": 12,
+      "output_sha256": "4b62653567f7c7a1ad9c7a70ac988e8690018b17e2ffa50694ea584eae4314c7"
+    },
+    {
+      "id": "walkable_arch",
+      "raw_edge_alpha_max": 16,
+      "removed_alpha_floor": 17,
+      "output_sha256": "199edf5a6545d3a6078d03ab8b318ca580ef7ca8363a8eef0899a01101b096ad"
+    },
+    {
+      "id": "moss_rock",
+      "raw_edge_alpha_max": 4,
+      "removed_alpha_floor": 5,
+      "output_sha256": "c7af397efd3638667dc379d3d97c9382c6fd4eb9242a84f4feebfb13fb00dac5"
+    }
+  ],
+  "export_checks": [
+    {
+      "module": "short_wall",
+      "layer": "sprite",
+      "rgba": true,
+      "size": [
+        216,
+        139
+      ],
+      "common_source_foot": [
+        640,
+        360
+      ],
+      "transparent_border": true,
+      "sha256": "aa7118119ea130d5eb47e52bbeeb8e330821cb6bd7ca8d990c6456ed1122e850"
+    },
+    {
+      "module": "short_wall",
+      "layer": "shadow",
+      "rgba": true,
+      "size": [
+        477,
+        214
+      ],
+      "common_source_foot": [
+        640,
+        360
+      ],
+      "transparent_border": true,
+      "sha256": "4b62653567f7c7a1ad9c7a70ac988e8690018b17e2ffa50694ea584eae4314c7"
+    },
+    {
+      "module": "walkable_arch",
+      "layer": "sprite",
+      "rgba": true,
+      "size": [
+        280,
+        178
+      ],
+      "common_source_foot": [
+        640,
+        360
+      ],
+      "transparent_border": true,
+      "sha256": "cda89321bc230319fe92eb95a8964ce139ae694ccde98437d532348416c8533a"
+    },
+    {
+      "module": "walkable_arch",
+      "layer": "shadow",
+      "rgba": true,
+      "size": [
+        590,
+        238
+      ],
+      "common_source_foot": [
+        640,
+        360
+      ],
+      "transparent_border": true,
+      "sha256": "199edf5a6545d3a6078d03ab8b318ca580ef7ca8363a8eef0899a01101b096ad"
+    },
+    {
+      "module": "walkable_arch",
+      "layer": "ground_detail",
+      "rgba": true,
+      "size": [
+        273,
+        79
+      ],
+      "common_source_foot": [
+        640,
+        360
+      ],
+      "transparent_border": true,
+      "sha256": "bc151295f987e8bd6be98587635e9a4a1202d3c28556bef8dafe7a4bf35d18a6"
+    },
+    {
+      "module": "moss_rock",
+      "layer": "sprite",
+      "rgba": true,
+      "size": [
+        193,
+        200
+      ],
+      "common_source_foot": [
+        640,
+        360
+      ],
+      "transparent_border": true,
+      "sha256": "126b968c8053cc28b71def903ce78cd0b5c1f04aa7921b6819e3cffb180457ea"
+    },
+    {
+      "module": "moss_rock",
+      "layer": "shadow",
+      "rgba": true,
+      "size": [
+        372,
+        303
+      ],
+      "common_source_foot": [
+        640,
+        360
+      ],
+      "transparent_border": true,
+      "sha256": "c7af397efd3638667dc379d3d97c9382c6fd4eb9242a84f4feebfb13fb00dac5"
+    }
+  ],
+  "source_module_blend_unchanged": true
+}

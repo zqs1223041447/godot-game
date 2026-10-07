@@ -1,0 +1,157 @@
+{
+  "result": "PASS",
+  "module_count": 3,
+  "serialized_polygon_count": 4,
+  "serialized_collision_vertices_checked": 99,
+  "source_v108_blend_sha256_unchanged": true,
+  "module_blend_sha256_unchanged": true,
+  "module_definitions_sha256_unchanged": true,
+  "all_source_triangles_preserved_in_derivative_modules": true,
+  "original_mesh_comparison_tolerance_metres": 2e-06,
+  "maximum_screen_mapping_rounding_error_pixel": 4.997744440515817e-10,
+  "maximum_godot_mapping_rounding_error_units": 4.955467147738091e-10,
+  "independent_actual_blender_camera_projection_checks": [
+    {
+      "local_metres": [
+        0,
+        0,
+        0
+      ],
+      "actual_full_frame_pixel": [
+        640.0,
+        359.9999141693115
+      ],
+      "analytic_full_frame_pixel": [
+        640.0,
+        360.0
+      ],
+      "max_difference_pixel": 8.58306884765625e-05
+    },
+    {
+      "local_metres": [
+        1,
+        0,
+        0
+      ],
+      "actual_full_frame_pixel": [
+        687.4073791503906,
+        359.9999141693115
+      ],
+      "analytic_full_frame_pixel": [
+        687.4074074074074,
+        360.0
+      ],
+      "max_difference_pixel": 8.58306884765625e-05
+    },
+    {
+      "local_metres": [
+        0,
+        1,
+        0
+      ],
+      "actual_full_frame_pixel": [
+        640.0,
+        321.166033744812
+      ],
+      "analytic_full_frame_pixel": [
+        640.0,
+        321.16612530778116
+      ],
+      "max_difference_pixel": 9.156296914625273e-05
+    },
+    {
+      "local_metres": [
+        0,
+        0,
+        1
+      ],
+      "actual_full_frame_pixel": [
+        640.0,
+        332.8081512451172
+      ],
+      "analytic_full_frame_pixel": [
+        640.0,
+        332.8082282026171
+      ],
+      "max_difference_pixel": 7.69574999139877e-05
+    },
+    {
+      "local_metres": [
+        -2,
+        1.5,
+        2
+      ],
+      "actual_full_frame_pixel": [
+        545.1852035522461,
+        247.36554622650146
+      ],
+      "analytic_full_frame_pixel": [
+        545.1851851851852,
+        247.36564436690583
+      ],
+      "max_difference_pixel": 9.814040436140203e-05
+    }
+  ],
+  "per_module": [
+    {
+      "module_id": "short_wall",
+      "serialized_polygon_count": 1,
+      "serialized_polygons_valid": true,
+      "base_uncovered_area_after_serialization_m2": 0.0,
+      "maximum_normalized_source_vertex_difference_metres": 6.743857501343174e-07,
+      "maximum_normalized_source_triangle_centroid_difference_metres": 3.554820639567891e-07,
+      "original_triangle_count": 406,
+      "derivative_triangle_count": 406,
+      "local_foot_residual_metres": [
+        1.1920928955078125e-07,
+        0.0,
+        0.0
+      ],
+      "minimum_margin_after_serialization_metres": 0.019550198887993156,
+      "rock_hull_extra_area_m2": 0
+    },
+    {
+      "module_id": "walkable_arch",
+      "serialized_polygon_count": 2,
+      "serialized_polygons_valid": true,
+      "base_uncovered_area_after_serialization_m2": 0.0,
+      "maximum_normalized_source_vertex_difference_metres": 6.419616707723741e-07,
+      "maximum_normalized_source_triangle_centroid_difference_metres": 4.5025355790086156e-07,
+      "original_triangle_count": 896,
+      "derivative_triangle_count": 896,
+      "local_foot_residual_metres": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "minimum_margin_after_serialization_metres": 0.017172378750112776,
+      "rock_hull_extra_area_m2": 0
+    },
+    {
+      "module_id": "moss_rock",
+      "serialized_polygon_count": 1,
+      "serialized_polygons_valid": true,
+      "base_uncovered_area_after_serialization_m2": 0.0,
+      "maximum_normalized_source_vertex_difference_metres": 1.0663444198855665e-06,
+      "maximum_normalized_source_triangle_centroid_difference_metres": 9.537907246235167e-07,
+      "original_triangle_count": 11000,
+      "derivative_triangle_count": 11000,
+      "local_foot_residual_metres": [
+        2.384185791015625e-07,
+        0.0,
+        0.0
+      ],
+      "minimum_margin_after_serialization_metres": 0.018888823949963295,
+      "rock_hull_extra_area_m2": 0.4122978973530298
+    }
+  ],
+  "arch_true_circle_sweep_radius_metres": 0.3,
+  "arch_centerline_exact_minimum_distance_to_serialized_colliders_metres": 1.287998725300474,
+  "arch_character_side_clearance_metres": 0.9879987253004741,
+  "arch_two_disjoint_legs": true,
+  "arch_geometric_passage_1p8m_by_radius_0p3m": true,
+  "flat_ground_local_z_metres": 0,
+  "nominal_margin_metres": 0.025,
+  "margin_error_note": "Nominal 25mm outward buffer after 8mm simplification and before 1mm simplification. Measured actual minimum offset is per-module; boundary displacement bound is 34mm excluding rock hull filling.",
+  "no_game_physics_or_assembled_layout_test": true
+}

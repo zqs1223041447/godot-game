@@ -1,0 +1,37 @@
+{
+	"all_201_portal_sweep_poses_clear": true,
+	"arch_two_separate_blockers": true,
+	"character_radius_metres": 0.3,
+	"forward_safe_fraction": 1.0,
+	"godot_version": "4.6.3-stable (official)",
+	"loaded_png_images": 8,
+	"module_instances": 3,
+	"projected_body_shape": "64-sided conservative projected ellipse, <0.13% radius inflation",
+	"result": "PASS",
+	"reverse_safe_fraction": 1.0,
+	"scope": "Native Godot PhysicsServer2D on the assembled layout; no actor animation, 3D stepping or complete game integration test",
+	"solid_blocker_probes": [
+		{
+			"blocked": true,
+			"instance": "wall_A",
+			"polygon_index": 0
+		},
+		{
+			"blocked": true,
+			"instance": "gate_A",
+			"polygon_index": 0
+		},
+		{
+			"blocked": true,
+			"instance": "gate_A",
+			"polygon_index": 1
+		},
+		{
+			"blocked": true,
+			"instance": "rock_A",
+			"polygon_index": 0
+		}
+	],
+	"static_blocker_bodies": 4,
+	"visual_capture": false
+}

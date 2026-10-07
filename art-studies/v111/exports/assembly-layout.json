@@ -1,0 +1,96 @@
+{
+  "schema": "three-module-translation-only-assembly-v1",
+  "viewport": [
+    1280,
+    720
+  ],
+  "screen_origin": [
+    640,
+    360
+  ],
+  "runtime_space": "source pixels; 1 source px = 1 Godot unit; no Camera2D zoom",
+  "runtime_collision_array": "foot_relative_screen_pixel",
+  "background": "qa/assembly-ground.png",
+  "instances": [
+    {
+      "id": "wall_A",
+      "module": "short_wall",
+      "ground_xy_metres": [
+        -3.6,
+        2.65
+      ],
+      "foot_screen_pixel_exact": [
+        469.33333333333337,
+        257.09023206562
+      ],
+      "foot_screen_pixel": [
+        469,
+        257
+      ],
+      "maximum_foot_rounding_error_pixel": 0.33333333333337123,
+      "probe_points_screen_pixel": [
+        [
+          469.0059208622113,
+          225.3902236235
+        ]
+      ]
+    },
+    {
+      "id": "gate_A",
+      "module": "walkable_arch",
+      "ground_xy_metres": [
+        1.65,
+        2.0
+      ],
+      "foot_screen_pixel_exact": [
+        718.2222222222222,
+        282.33225061556226
+      ],
+      "foot_screen_pixel": [
+        718,
+        282
+      ],
+      "maximum_foot_rounding_error_pixel": 0.3322506155622591,
+      "probe_points_screen_pixel": [
+        [
+          814.059243007052,
+          256.4354222775
+        ],
+        [
+          621.8666732488923,
+          235.369116528
+        ]
+      ]
+    },
+    {
+      "id": "rock_A",
+      "module": "moss_rock",
+      "ground_xy_metres": [
+        -4.8,
+        -4.7
+      ],
+      "foot_screen_pixel_exact": [
+        412.44444444444446,
+        542.5192110534288
+      ],
+      "foot_screen_pixel": [
+        412,
+        543
+      ],
+      "maximum_foot_rounding_error_pixel": 0.48078894657123783,
+      "probe_points_screen_pixel": [
+        [
+          399.21745634990924,
+          486.839016152
+        ]
+      ]
+    }
+  ],
+  "render_order": [
+    "ground",
+    "all_shadows",
+    "all_ground_details",
+    "foot_y_sorted_sprites"
+  ],
+  "claim": "Technical composite of the real exported renders, not a Godot screenshot"
+}

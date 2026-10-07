@@ -1,0 +1,486 @@
+{
+  "module_blend": "source/modules.blend",
+  "module_blend_sha256": "2f6ffcd31cf04d2e347be087f111ead2e71968d2aab61a4a36cc1943a8fbb424",
+  "definitions_sha256": "a605f1b6f55d121ec72ecfebe361e6c24f51519a142c63fe6d16258ff32f6af2",
+  "source_scene_sha256": "b9f9ec71ff24d593bbe85b6294aeca24e2d0ca86ddea6370206bb2bdb127ffd7",
+  "blender_version": "4.3.2",
+  "module_count": 3,
+  "modules": [
+    {
+      "id": "short_wall",
+      "source_object_name": "Low west wall • vegetation-softened edge",
+      "source_scene_transform": {
+        "location": [
+          -4.0,
+          4.800000190734863,
+          -0.005022771190851927
+        ],
+        "rotation_euler": [
+          0.0,
+          0.0,
+          1.4486232995986938
+        ],
+        "scale": [
+          0.4399999976158142,
+          0.5699999928474426,
+          0.3400000035762787
+        ],
+        "matrix_world": [
+          [
+            0.05362250283360481,
+            -0.565751314163208,
+            0.0,
+            -4.0
+          ],
+          [
+            0.4367203116416931,
+            0.0694655179977417,
+            0.0,
+            4.800000190734863
+          ],
+          [
+            0.0,
+            0.0,
+            0.3400000035762787,
+            -0.005022771190851927
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "source_foot_world_metres": [
+        -3.9998388290405273,
+        3.988354206085205,
+        -0.005022771190851927
+      ],
+      "normalization_translation_metres": [
+        3.9998388290405273,
+        -3.988354206085205,
+        0.005022771190851927
+      ],
+      "source_transform_baked": true,
+      "parts": [
+        "short_wall"
+      ],
+      "module_foot_local_metres": [
+        0,
+        0,
+        0
+      ],
+      "source_asset": "modular_fort_01_wall_thin_straight_03",
+      "collision_basis": "flat receiving ground z=0; module geometry foot is exactly zero",
+      "pixel_density": {
+        "x": 47.407407407407405,
+        "ground_y": 38.83387469221887,
+        "height_z": 27.191771797382927
+      },
+      "parts_extracted": [
+        {
+          "object_name": "short_wall",
+          "vertices": 378,
+          "triangles": 406,
+          "polygons": 406,
+          "matrix_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "modifiers": []
+        }
+      ],
+      "mesh_local_aabb_metres": [
+        [
+          -2.1624464988708496,
+          0.0,
+          0.0
+        ],
+        [
+          2.1624467372894287,
+          1.6232542991638184,
+          2.6498429775238037
+        ]
+      ],
+      "measured_local_foot_metres": [
+        1.1920928955078125e-07,
+        0.0,
+        0.0
+      ],
+      "vertices_including_split_seams": 378,
+      "triangles": 406
+    },
+    {
+      "id": "walkable_arch",
+      "source_object_name": "Hero arch • authored gate • worn crown",
+      "source_scene_transform": {
+        "location": [
+          1.75,
+          4.449999809265137,
+          -0.025212163105607033
+        ],
+        "rotation_euler": [
+          0.0,
+          0.0,
+          1.4486232995986938
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "matrix_world": [
+          [
+            0.12186932563781738,
+            -0.9925461411476135,
+            0.0,
+            1.75
+          ],
+          [
+            0.9925461411476135,
+            0.12186932563781738,
+            0.0,
+            4.449999809265137
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            -0.025212163105607033
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "source_foot_world_metres": [
+        1.7537850141525269,
+        3.536357879638672,
+        -0.025212157517671585
+      ],
+      "normalization_translation_metres": [
+        -1.7537850141525269,
+        -3.536357879638672,
+        0.025212157517671585
+      ],
+      "source_transform_baked": true,
+      "parts": [
+        "walkable_arch",
+        "walkable_arch_sill"
+      ],
+      "module_foot_local_metres": [
+        0,
+        0,
+        0
+      ],
+      "source_asset": "modular_fort_01_wall_thin_gate_01",
+      "collision_basis": "flat receiving ground z=0; module geometry foot is exactly zero",
+      "pixel_density": {
+        "x": 47.407407407407405,
+        "ground_y": 38.83387469221887,
+        "height_z": 27.191771797382927
+      },
+      "parts_extracted": [
+        {
+          "object_name": "walkable_arch",
+          "vertices": 405,
+          "triangles": 761,
+          "polygons": 697,
+          "matrix_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "modifiers": []
+        },
+        {
+          "object_name": "walkable_arch_sill",
+          "vertices": 95,
+          "triangles": 135,
+          "polygons": 135,
+          "matrix_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "modifiers": []
+        }
+      ],
+      "mesh_local_aabb_metres": [
+        [
+          -2.8303871154785156,
+          0.0,
+          0.0
+        ],
+        [
+          2.8303871154785156,
+          1.8854494094848633,
+          3.476663827896118
+        ]
+      ],
+      "measured_local_foot_metres": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "vertices_including_split_seams": 500,
+      "triangles": 896
+    },
+    {
+      "id": "moss_rock",
+      "source_object_name": "Scanned moss rock 01",
+      "source_scene_transform": {
+        "location": [
+          -7.0,
+          -3.4000000953674316,
+          0.21238256990909576
+        ],
+        "rotation_euler": [
+          0.0,
+          0.0,
+          0.3141592741012573
+        ],
+        "scale": [
+          1.399999976158142,
+          1.399999976158142,
+          1.399999976158142
+        ],
+        "matrix_world": [
+          [
+            1.3314791917800903,
+            -0.43262380361557007,
+            0.0,
+            -7.0
+          ],
+          [
+            0.43262380361557007,
+            1.3314791917800903,
+            0.0,
+            -3.4000000953674316
+          ],
+          [
+            0.0,
+            0.0,
+            1.399999976158142,
+            0.21238256990909576
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "source_foot_world_metres": [
+        -6.762246131896973,
+        -4.986733913421631,
+        0.21238256990909576
+      ],
+      "normalization_translation_metres": [
+        6.762246131896973,
+        4.986733913421631,
+        -0.21238256990909576
+      ],
+      "source_transform_baked": true,
+      "parts": [
+        "moss_rock"
+      ],
+      "module_foot_local_metres": [
+        0,
+        0,
+        0
+      ],
+      "source_asset": "rock_moss_set_01_rock01",
+      "collision_basis": "flat receiving ground z=0; module geometry foot is exactly zero",
+      "pixel_density": {
+        "x": 47.407407407407405,
+        "ground_y": 38.83387469221887,
+        "height_z": 27.191771797382927
+      },
+      "parts_extracted": [
+        {
+          "object_name": "moss_rock",
+          "vertices": 6078,
+          "triangles": 11000,
+          "polygons": 11000,
+          "matrix_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "modifiers": []
+        }
+      ],
+      "mesh_local_aabb_metres": [
+        [
+          -1.9586305618286133,
+          -0.37992334365844727,
+          0.0
+        ],
+        [
+          1.8914422988891602,
+          3.8478569984436035,
+          2.061777353286743
+        ]
+      ],
+      "measured_local_foot_metres": [
+        2.384185791015625e-07,
+        0.0,
+        0.0
+      ],
+      "vertices_including_split_seams": 6078,
+      "triangles": 11000
+    }
+  ],
+  "camera_projection_checks": [
+    {
+      "local_metres": [
+        0,
+        0,
+        0
+      ],
+      "actual_full_frame_pixel": [
+        640.0,
+        359.9999141693115
+      ]
+    },
+    {
+      "local_metres": [
+        1,
+        0,
+        0
+      ],
+      "actual_full_frame_pixel": [
+        687.4073791503906,
+        359.9999141693115
+      ]
+    },
+    {
+      "local_metres": [
+        0,
+        1,
+        0
+      ],
+      "actual_full_frame_pixel": [
+        640.0,
+        321.166033744812
+      ]
+    },
+    {
+      "local_metres": [
+        0,
+        0,
+        1
+      ],
+      "actual_full_frame_pixel": [
+        640.0,
+        332.8081512451172
+      ]
+    },
+    {
+      "local_metres": [
+        -2,
+        1.5,
+        2
+      ],
+      "actual_full_frame_pixel": [
+        545.1852035522461,
+        247.36554622650146
+      ]
+    }
+  ]
+}
+Blender 4.3.2
+Read blend: "/workspace/scratch/a51485f153de/art-work/v111-modular-environment/source/modules.blend"
+
+Blender quit
