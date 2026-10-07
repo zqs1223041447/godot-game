@@ -1311,7 +1311,7 @@ func _build_pause_panel() -> void:
 	actions.add_child(resume)
 	actions.add_child(_button("显示设置", "VisualSettingsButton", open_panel.bind("settings"), 150))
 	actions.add_child(_button("重新开始", "RestartButton", _restart, 150))
-	actions.add_child(_button("退出（未保存）" if not _state.save_block_reason().is_empty() else "保存并退出", "ExitButton", _exit_game, 180))
+	actions.add_child(_button("保存并退出", "ExitButton", _exit_game, 180))
 	var reference_button: Button = _button("离线图鉴 F8", "ReferenceCatalogButton", _arena.open_reference_catalog, 180)
 	reference_button.tooltip_text = "在浏览器查看装备、技能、珠宝与机制；保持战斗暂停"
 	_panel_body.add_child(reference_button)
@@ -1487,10 +1487,9 @@ func _restart() -> void:
 
 
 func _exit_game() -> void:
-	if bool(_arena.call("save_build")):
-		get_tree().quit()
-	else:
-		notify("构筑保存失败，请检查存储权限后重试")
+	var result: Dictionary = _arena.call("request_safe_exit")
+	if not bool(result.get("ok", false)):
+		notify(str(result.get("reason", "保存失败，请重试")))
 
 
 func _apply_presentation() -> void:

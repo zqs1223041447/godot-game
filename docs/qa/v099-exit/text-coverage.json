@@ -1,0 +1,28 @@
+{
+  "scope": "Only newly introduced runtime strings in the two changed production files",
+  "font_sha256": "8e84c0eaf389a86424df39a7e162519de7bd63297fc97679089a4d2a522e5ccc",
+  "font_unchanged": true,
+  "files": [
+    {
+      "path": "scripts/main.gd",
+      "new_strings": [
+        "busy",
+        "当前操作尚未结束，请重试",
+        "completion_save_failed",
+        "地图结算保存失败，暂不能退出：",
+        "进度保存失败，请检查保存目录后重试"
+      ],
+      "missing_codepoints": [],
+      "sha256": "f070dcfab43405a741ba431c30f43b65c5d8039bc6fc140e72c6ab96df809755"
+    },
+    {
+      "path": "scripts/game_hud.gd",
+      "new_strings": [
+        "request_safe_exit",
+        "保存失败，请重试"
+      ],
+      "missing_codepoints": [],
+      "sha256": "5d64d11066878ad169c01c7289a0818c5e8477212edd2f1b01c3dd971b6fb363"
+    }
+  ]
+}

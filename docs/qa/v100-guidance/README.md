@@ -31,3 +31,13 @@ missing-wall errors are retained, and only its affected query group was rerun.
 See [runtime-validation.md](runtime-validation.md). All new runtime strings have
 bundled glyphs; the font is unchanged. This batch does not rerun historical
 combat suites, regenerate the reference catalogue, or export a package.
+
+## Local integration with safe exit
+
+The independently tested guidance changes were normally merged with accepted
+safe-exit commit `042a36be4979279b83d8b3a5d1fc611c6d5fb6fc`, without conflicts.
+All 162 Main and 91 HUD method bodies match their appropriate tested parent;
+the sets of changed methods are disjoint. One combined Main dependency parse
+passed in 4.035 seconds with exit 0 and no errors. Parent runtime/UI results
+are reused, not represented as new full-file runs on the merged source.
+See [merge-verification.json](merge-verification.json).

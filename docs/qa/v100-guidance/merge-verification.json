@@ -1,0 +1,44 @@
+{
+  "base": "d7e4121ddff09624de796f7857520926bd610d4e",
+  "safe_exit_parent": "042a36be4979279b83d8b3a5d1fc611c6d5fb6fc",
+  "guidance_parent": "1b95e27343862523c8699b93e44ac946d8f18acb",
+  "method": "All top-level GDScript method bodies match the appropriate tested parent, with disjoint method-change sets; no gameplay suites rerun.",
+  "files": [
+    {
+      "path": "scripts/main.gd",
+      "methods_checked": 162,
+      "safe_exit_methods": [
+        "_exit_tree",
+        "_notification",
+        "_ready",
+        "request_safe_exit"
+      ],
+      "guidance_methods": [
+        "exploration_cleanup_hint"
+      ],
+      "merged_sha256": "eee89d17948d7c653c4f2f9b1615ed3e091345940c2a1bec4f3be00127940017"
+    },
+    {
+      "path": "scripts/game_hud.gd",
+      "methods_checked": 91,
+      "safe_exit_methods": [
+        "_build_pause_panel",
+        "_exit_game"
+      ],
+      "guidance_methods": [
+        "_build_world_controls",
+        "_process",
+        "_refresh_cleanup_hint",
+        "_refresh_world",
+        "_tick_cleanup_hint",
+        "cleanup_hint_view"
+      ],
+      "merged_sha256": "b9c59f26698984edd383e2ccdcd9c35d76173e824aee6a5fdabbffea3d6cabb0"
+    }
+  ],
+  "parse": {
+    "exit_code": 0,
+    "elapsed_seconds": 4.035,
+    "errors": []
+  }
+}
