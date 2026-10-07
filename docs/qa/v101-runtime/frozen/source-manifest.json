@@ -1,0 +1,21 @@
+{
+  "base_commit": "bdea0872bc3542aa784cb616dfbf43fb4b1b984d",
+  "transformations": [
+    "Remove global class_name to avoid project class collisions",
+    "Frozen runtime imports frozen map boss profiles; no behavioral transformation"
+  ],
+  "files": [
+    {
+      "source": "scripts/combat/telegraphed_area_runtime.gd",
+      "base_sha256": "6c81759656ec31c2e5b46e72e6091f12f7e15800d025d3d7c3cca27fb66b9b90",
+      "frozen_path": "docs/qa/v101-runtime/frozen/telegraphed_area_runtime.gd",
+      "frozen_sha256": "11d016335aa99dc91e4606aff431d1663aa5c4412799c8e31d8f67eb00925cf3"
+    },
+    {
+      "source": "scripts/monsters/map_boss_profiles.gd",
+      "base_sha256": "3c20c96c264295ef9ef56bd4300477aa7219801bec7c63b562c19f3b268bbaa7",
+      "frozen_path": "docs/qa/v101-runtime/frozen/map_boss_profiles.gd",
+      "frozen_sha256": "38525be1a9d78f38d3eb5dfba0af8411d1dee8240cdd28037ffca64d0b0cf045"
+    }
+  ]
+}

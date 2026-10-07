@@ -1,0 +1,39 @@
+extends SceneTree
+class Preview:
+	extends Node2D
+	const Renderer = preload("res://scripts/visuals/telegraph_renderer.gd")
+	const Font = preload("res://assets/fonts/arena_sans.otf")
+	func _draw() -> void:
+		draw_rect(Rect2(0,0,1280,720),Color("736e58"))
+		for y in range(90,640,70):
+			for x in range(25,1250,100):
+				draw_style_box(panel_style(),Rect2(x,y,96,66))
+		draw_string(Font,Vector2(50,55),"银杏回廊 · 两段招式预览",HORIZONTAL_ALIGNMENT_LEFT,-1,26,Color("f8ecd0"))
+		draw_string(Font,Vector2(150,105),"第一段：内圈震击",HORIZONTAL_ALIGNMENT_LEFT,-1,20,Color("f8ecd0"))
+		draw_string(Font,Vector2(760,105),"第二段：外环攻击",HORIZONTAL_ALIGNMENT_LEFT,-1,20,Color("f8ecd0"))
+		var first := {"source_id":1,"center":Vector2(320,370),"phase":"windup","elapsed":1.1,"visual_pattern":"ginkgo_shelter_slam","pulse_index":0,"pulse_count":2,"shape":"circle","inner_radius":0.0,"profile":{"radius":130.0,"windup_seconds":1.4,"recovery_seconds":1.9}}
+		var second := first.duplicate(true)
+		second.source_id = 2
+		second.center = Vector2(940,370)
+		second.shape = "annulus"
+		second.inner_radius = 130.0
+		second.pulse_index = 1
+		second.elapsed = 0.8
+		second.profile.radius = 240.0
+		second.profile.windup_seconds = 1.0
+		Renderer.draw(self,[first,second])
+		draw_string(Font,Vector2(240,675),"先退开内圈",HORIZONTAL_ALIGNMENT_LEFT,-1,20,Color("f8ecd0"))
+		draw_string(Font,Vector2(770,675),"再回到内侧，或继续远离",HORIZONTAL_ALIGNMENT_LEFT,-1,20,Color("f8ecd0"))
+	func panel_style() -> StyleBoxFlat:
+		var style := StyleBoxFlat.new()
+		style.bg_color = Color("8c896c")
+		style.border_color = Color("5f634c")
+		style.set_border_width_all(1)
+		style.set_corner_radius_all(5)
+		return style
+func _initialize() -> void:
+	root.title = "Ginkgo attack preview"
+	root.size = Vector2i(1180,664)
+	root.content_scale_size = Vector2i(1280,720)
+	root.content_scale_mode = Window.CONTENT_SCALE_MODE_CANVAS_ITEMS
+	root.add_child.call_deferred(Preview.new())

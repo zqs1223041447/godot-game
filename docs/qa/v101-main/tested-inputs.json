@@ -1,0 +1,32 @@
+{
+  "main_run": {
+    "checks": 453,
+    "failures": 0,
+    "groups": 16,
+    "exit_code": 0,
+    "duration_seconds": 5.353,
+    "report": "first/main-result.json",
+    "stdout": "first/stdout.log",
+    "stderr": "first/stderr.log",
+    "manifest": "first/run.json"
+  },
+  "fixture": {
+    "path": "first/formal-initial-save.json",
+    "sha256": "962e0ecef87f5a4f772f8b616c3b448f410ec64fada5f6f4e5de6fa0eaa79b60",
+    "origin": "Exact canonical state.snapshot() from the first fresh isolated formal tierI map entry; fixture data, not a user profile"
+  },
+  "post_run_input_changes": {
+    "scripts/combat/telegraphed_area_runtime.gd": {
+      "tested_sha256": "85f653485d3da1392591fc9f3081628fe9dac8aa689ff08804cf7b8d1bed5512",
+      "current_sha256": "e846533c6f6cd1c9e5c4726a17c0ebfddaae69add0ac8e22a361fbc6a1f773cb"
+    }
+  },
+  "note": "Coordinator reported a subsequent invalid-annulus guard change: inner_radius=0 is now rejected. Valid inner_radius=130 and all actual Main cases are unaffected; this Main run predates that one-line guard correction and was not repeated.",
+  "runtime_archive": {
+    "path": "first/telegraphed-area-runtime-tested.gd.txt",
+    "sha256": "85f653485d3da1392591fc9f3081628fe9dac8aa689ff08804cf7b8d1bed5512",
+    "reconstruction": "Removed the one verified post-run zero-inner-radius guard from final source; archive SHA exactly matches the pre-run manifest",
+    "final_runtime_sha256": "e846533c6f6cd1c9e5c4726a17c0ebfddaae69add0ac8e22a361fbc6a1f773cb",
+    "final_pure_runtime_result": "779 checks, 0 failures (coordinator-confirmed separate final-source run)"
+  }
+}

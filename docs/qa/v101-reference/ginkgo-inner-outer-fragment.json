@@ -1,0 +1,330 @@
+{
+	"boss_definition": {
+		"balance_version": "original-ginkgo-inner-outer-v1",
+		"id": "ginkgo_shelter_slam",
+		"map_id": "ginkgo_arcade",
+		"name": "回廊震击",
+		"profile": {
+			"damage_multiplier": 0.6,
+			"radius": 130.0,
+			"recovery_seconds": 1.9,
+			"windup_seconds": 1.4
+		},
+		"profile_id": "ginkgo_inner_outer",
+		"pulse_count": 2,
+		"pulse_interval": 1.0,
+		"second_pulse": {
+			"inner_radius": 130.0,
+			"radius": 240.0,
+			"shape": "annulus",
+			"windup_seconds": 1.0
+		},
+		"target_rule": "self_at_start",
+		"trigger_distance": 240.0
+	},
+	"description": "中央花圃与两座银杏基台形成内外绕行路线，阻挡移动、弹体与视线。六处4或8怪驻点沿内外廊分布，共36个普通根怪与首领入图时全部在场，可自由探索或先挑战首领；清理全部怪物及后代后完成。回廊震击锁定起手位置，先震击内圈，再攻击外环；可先退后进或继续远离，也可借花圃阻断视线。",
+	"game_version": "0.87.0",
+	"ginkgo_inner_outer": {
+		"actual_main_checks": 453,
+		"actual_main_fixture": {
+			"path": "docs/qa/v101-main/first/formal-initial-save.json",
+			"sha256": "962e0ecef87f5a4f772f8b616c3b448f410ec64fada5f6f4e5de6fa0eaa79b60"
+		},
+		"actual_main_log": {
+			"path": "docs/qa/v101-main/first/stdout.log",
+			"sha256": "8394e1fcdcbeccbcd1deb8b63a9d70eab00bf4129ad27e698c2dd3fc6af01df6"
+		},
+		"actual_main_method": "Actual main.tscn, current lawful fresh formal character and full resident roster. Held-input leave/reenter uses real ticks. Boundary, wall, freeze, health and death controls are integration probes, not natural combat footage.",
+		"actual_main_report": {
+			"path": "docs/qa/v101-main/first/main-result.json",
+			"sha256": "0ef3ffa9b2416d1dc52d984c1c95c94d6e2d0fbfa03f38b39c6c3bf2a5d9f243"
+		},
+		"balance_version": "original-ginkgo-inner-outer-v1",
+		"combined_damage_multiplier": 1.2,
+		"current_runtime_checks": 779,
+		"current_runtime_log": {
+			"path": "docs/qa/v101-runtime/runtime-first.log.txt",
+			"sha256": "a3b610f8fcac76a65973e8d1e4c0c830e47e39524f2915b8cefa52c874f5a346"
+		},
+		"current_runtime_report": {
+			"path": "docs/qa/v101-runtime/validation.json",
+			"sha256": "25b035224bc13273cc05c640484371f030a8083c9882f480bc972cd0ad4f4e6d"
+		},
+		"equipment_vocabulary": 51,
+		"event_schema_version": 1,
+		"example_events": [
+			{
+				"applied": false,
+				"attack_age": 1.4,
+				"attack_id": 1.0,
+				"balance_version": "original-ginkgo-inner-outer-v1",
+				"center": [
+					3222.0,
+					424.0
+				],
+				"inner_radius": 0.0,
+				"inside": false,
+				"packet": {
+					"base": {
+						"physical": 17.138399999999997
+					},
+					"skill_id": "ginkgo_inner_outer",
+					"tags": [
+						"attack",
+						"area",
+						"hit"
+					]
+				},
+				"player_position": [
+					3222.0,
+					604.0
+				],
+				"profile": {
+					"damage_multiplier": 0.6,
+					"radius": 130.0,
+					"recovery_seconds": 1.8479299537288063,
+					"windup_seconds": 1.4
+				},
+				"profile_id": "ginkgo_inner_outer",
+				"pulse_count": 2.0,
+				"pulse_index": 0.0,
+				"radius": 130.0,
+				"schema_version": 1.0,
+				"shape": "circle",
+				"source_id": 37.0,
+				"step_time": 0.00100000000000055,
+				"type": "circle_attack",
+				"visual_pattern": "ginkgo_shelter_slam"
+			},
+			{
+				"applied": false,
+				"attack_age": 2.4,
+				"attack_id": 1.0,
+				"balance_version": "original-ginkgo-inner-outer-v1",
+				"center": [
+					3222.0,
+					424.0
+				],
+				"inner_radius": 130.0,
+				"inside": false,
+				"packet": {
+					"base": {
+						"physical": 17.138399999999997
+					},
+					"skill_id": "ginkgo_inner_outer",
+					"tags": [
+						"attack",
+						"area",
+						"hit"
+					]
+				},
+				"player_position": [
+					3222.0,
+					524.0
+				],
+				"profile": {
+					"damage_multiplier": 0.6,
+					"radius": 240.0,
+					"recovery_seconds": 1.8479299537288063,
+					"windup_seconds": 1.0
+				},
+				"profile_id": "ginkgo_inner_outer",
+				"pulse_count": 2.0,
+				"pulse_index": 1.0,
+				"radius": 240.0,
+				"schema_version": 1.0,
+				"shape": "annulus",
+				"source_id": 37.0,
+				"step_time": 0.00100000000000077,
+				"type": "annulus_attack",
+				"visual_pattern": "ginkgo_shelter_slam"
+			}
+		],
+		"example_group": "held_input_leave_reenter",
+		"example_initial_attack": {
+			"attack_id": 1.0,
+			"balance_version": "original-ginkgo-inner-outer-v1",
+			"center": [
+				3222.0,
+				424.0
+			],
+			"elapsed": 0.0,
+			"inner_radius": 0.0,
+			"packet": {
+				"base": {
+					"physical": 17.138399999999997
+				},
+				"skill_id": "ginkgo_inner_outer",
+				"tags": [
+					"attack",
+					"area",
+					"hit"
+				]
+			},
+			"phase": "windup",
+			"profile": {
+				"damage_multiplier": 0.6,
+				"radius": 130.0,
+				"recovery_seconds": 1.8479299537288063,
+				"windup_seconds": 1.4
+			},
+			"profile_id": "ginkgo_inner_outer",
+			"pulse_count": 2.0,
+			"pulse_index": 0.0,
+			"pulse_interval": 1.0,
+			"pulses_emitted": 0.0,
+			"second_pulse": {
+				"inner_radius": 130.0,
+				"radius": 240.0,
+				"shape": "annulus",
+				"windup_seconds": 1.0
+			},
+			"shape": "circle",
+			"source_id": 37.0,
+			"visual_pattern": "ginkgo_shelter_slam"
+		},
+		"example_outer_snapshot": {
+			"attack_id": 1.0,
+			"balance_version": "original-ginkgo-inner-outer-v1",
+			"center": [
+				3222.0,
+				424.0
+			],
+			"elapsed": 0.0,
+			"inner_radius": 130.0,
+			"packet": {
+				"base": {
+					"physical": 17.138399999999997
+				},
+				"skill_id": "ginkgo_inner_outer",
+				"tags": [
+					"attack",
+					"area",
+					"hit"
+				]
+			},
+			"phase": "windup",
+			"profile": {
+				"damage_multiplier": 0.6,
+				"radius": 240.0,
+				"recovery_seconds": 1.8479299537288063,
+				"windup_seconds": 1.0
+			},
+			"profile_id": "ginkgo_inner_outer",
+			"pulse_count": 2.0,
+			"pulse_index": 1.0,
+			"pulse_interval": 1.0,
+			"pulses_emitted": 1.0,
+			"second_pulse": {
+				"inner_radius": 130.0,
+				"radius": 240.0,
+				"shape": "annulus",
+				"windup_seconds": 1.0
+			},
+			"shape": "annulus",
+			"source_id": 37.0,
+			"visual_pattern": "ginkgo_shelter_slam"
+		},
+		"example_policy": {
+			"base_attack_speed": 1.1764705882352942,
+			"hold_pursuit_during_action": true,
+			"minimum_attack_speed": 0.2,
+			"name": "回廊震击",
+			"profile": {
+				"damage_multiplier": 0.6,
+				"radius": 130.0,
+				"recovery_seconds": 1.8479299537288063,
+				"windup_seconds": 1.4
+			},
+			"profile_id": "locked_circle",
+			"recovery_scaling": "base_attack_speed_divided_by_current_attack_speed",
+			"replaces_contact": true,
+			"target_rule": "self_at_start",
+			"trigger_distance": 240.0,
+			"visual_pattern": "ginkgo_shelter_slam"
+		},
+		"example_source": {
+			"accuracy": 100.0,
+			"armour": 0.0,
+			"attack_speed": 1.2096205882352942,
+			"attack_timer": 0.5,
+			"contact_weights": {
+				"physical": 1.0
+			},
+			"damage": 28.563999999999997,
+			"damage_delay": 0.0,
+			"death_processed": false,
+			"death_spawns": [
+				{
+					"count": 4.0,
+					"template": "crawler"
+				}
+			],
+			"defense_stats": {
+
+			},
+			"equipment_pool": "",
+			"evasion": 0.0,
+			"exploration_awake": false,
+			"flash": 0.0,
+			"generation": 0.0,
+			"health": 501.6,
+			"id": 37.0,
+			"kind": 2.0,
+			"knockback": [
+				0.0,
+				0.0
+			],
+			"map_boss_attack_id": "ginkgo_shelter_slam",
+			"map_spawn_key": "ginkgo_arcade/726758670844766806/boss",
+			"max_health": 501.6,
+			"max_shield": 7.8,
+			"mechanism_ids": [
+				"ember_mastery",
+				"aegis_mastery"
+			],
+			"mechanism_policy": "poe-passive-v1",
+			"mechanism_revision": 1.0,
+			"mechanism_schema": 1.0,
+			"mechanism_stats": {
+				"attack_speed": 0.03315,
+				"damage": 1.404,
+				"max_shield": 7.8,
+				"shield_regen": 1.2675
+			},
+			"name": "裂隙守卫",
+			"pos": [
+				3222.0,
+				424.0
+			],
+			"radius": 27.5,
+			"rarity": "boss",
+			"resistances": {
+				"fire": 0.0
+			},
+			"reward_eligible": true,
+			"root_id": 37.0,
+			"shield": 7.8,
+			"shield_regen": 1.2675,
+			"slow": 0.0,
+			"spawn": 0.6,
+			"speed": 47.2,
+			"template_id": "rift_warden",
+			"wave": 3.0,
+			"xp_reward": 48.0
+		},
+		"main_source_boundary": "Main453在最后的非法内半径0拒绝检查之前运行；合法内半径130与既有路径不变。最终源文件由纯运行态779项检查覆盖；不宣称Main输入SHA与最终运行态源文件相同。",
+		"player_radius": 15.0,
+		"profile_id": "ginkgo_inner_outer",
+		"runtime_tested_inputs": {
+			"path": "docs/qa/v101-main/first/run.json",
+			"sha256": "e5fb9318dd29f458b82496d948a9a65d9bd15fc937518978af95cde47a42d3f9"
+		},
+		"safe_inner_distance": 115.0,
+		"safe_outer_distance": 255.0,
+		"save_version": 53,
+		"scope": "实际Main报告复用：合法新角色与自然入图首领，实际按键退圈再进内心；其他边界、资源、冻结与死亡情形为明确控制的集成探针，不是自然战斗录像。参考导出只读取既有夹具、事件和政策；不重放Main，不另造构筑，不重跑地图或战斗矩阵。",
+		"source_policy": 49
+	},
+	"save_version": 53
+}

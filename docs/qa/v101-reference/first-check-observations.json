@@ -1,0 +1,9 @@
+{
+  "stage": "Static reference checks after first merge",
+  "runtime_export_passed": true,
+  "findings": [
+    "Export dependency includes original index.html intentionally changed by the merge; verify that hash against the pinned baseline instead of final output.",
+    "Godot JSON parse/stringify alters several report-only doubles by approximately 2e-16; retain raw export and project recorded example dictionaries directly from original Main JSON."
+  ],
+  "correction": "Only Python reference checker and narrow merge adjusted; no Godot rerun or runtime source change."
+}

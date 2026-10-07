@@ -353,16 +353,44 @@ def exploration_map_body(data, map_id, link, facts, details):
     body += f'<figure><figcaption>{esc(entry["name"])} · 当前同源探索平面图</figcaption><svg data-exploration-layout="{esc(map_id)}" viewBox="{ox} {oy} {width} {height}" role="img" aria-label="当前探索地图的真实障碍、全部初始怪物、入口与路标">{drawing}</svg><figcaption>{diagram_caption}矩形为真实阻挡足印，绿点为普通根怪，红点为首领，蓝点为入口；木牌仅指路。点大小只为阅读，不表示碰撞半径或唤醒距离。坐标来自 ExplorationMapLayout、ExplorationMapPlan 与 WorldView，没有触发出生区域。</figcaption></figure>'
     body += '<p>实体障碍阻挡移动、冲刺、击退、弹体与视线。贯穿及返回飞行仍会碰墙；范围命中、连锁与敌方预警沿用共享视线检查。相机跟随角色并限制在探索世界边界，HUD尺寸独立。入口和全部怪物在入图前整批验证，失败不扣入场费。</p>'
     boss = entry['boss_definition']; profile = boss['profile']
-    body += '<h4>' + esc(boss['name']) + '</h4>' + facts([
-        ('锁定点', '首领起手位置' if boss['target_rule'] == 'self_at_start' else '玩家起手位置；后续不追踪'),
-        ('攻击半径 / 启动距离', number(profile['radius']) + ' / ' + number(boss['trigger_distance'])),
-        ('每段完整预警', number(profile['windup_seconds']) + ' 秒；攻速不缩短'),
-        ('基础恢复', number(profile['recovery_seconds']) + ' 秒；实际恢复由当前攻速与既有上下限决定'),
-        ('每响防御前倍率', number(profile['damage_multiplier']) + ' × 本图首领当前接触分量'),
-        ('响数', str(boss.get('pulse_count', 1))),
-        ('伤害边界', '沿共享防御链；完整移出预警圆或以实体障碍阻断结算视线')])
-    if 'pulse_count' in boss:
-        body += '<p>各响共用起手锁点，间隔 ' + number(boss['pulse_interval']) + ' 秒；第一响结束后立即返回原圈仍可能被后续回响命中。</p>'
+    current_ginkgo = map_id == 'ginkgo_arcade' and 'ginkgo_inner_outer' in data
+    if current_ginkgo:
+        rule = data['ginkgo_inner_outer']; second = boss['second_pulse']
+        def value(key, amount):
+            return '<strong data-ginkgo-inner-outer-value="' + esc(key) + '" data-value="' + esc(amount) + '">' + number(amount) + '</strong>'
+        body += '<h4>' + esc(boss['name']) + ' · 内圈后外环</h4>' + facts([
+            ('起手锁点', '两段均锁定首领起手位置；玩家移动、首领移动或第二段开始都不重新锁点'),
+            ('启动距离', value('trigger-distance', boss['trigger_distance'])),
+            ('第一段', '完整预警 ' + value('first-windup', profile['windup_seconds']) + ' 秒后，半径 ' + value('first-radius', profile['radius']) + ' 的实心圆命中'),
+            ('第二段', '第一段后额外完整预警 ' + value('second-windup', second['windup_seconds']) + ' 秒；同一圆心，内半径 ' + value('inner-radius', second['inner_radius']) + '、外半径 ' + value('outer-radius', second['radius']) + ' 的空心环命中'),
+            ('防御前预算', '每段 ' + value('stage-multiplier', profile['damage_multiplier']) + ' × 起手冻结的首领接触分量；合计名义预算 ' + value('combined-multiplier', rule['combined_damage_multiplier']) + ' 倍'),
+            ('时序与恢复', '两段预警均不被攻速压缩；第二段结束后才进入基础 ' + value('base-recovery', profile['recovery_seconds']) + ' 秒恢复，实际恢复沿当前攻速与原上下限'),
+            ('站位边界', '角色身体接触内、外边界均命中；第二段只有 d＋角色半径＜内半径，或 d＞外半径＋角色半径，才在几何上完全避开'),
+            ('当前角色体型', '半径 ' + value('player-radius', rule['player_radius']) + '；第二段中心距离 d＜' + value('safe-inner-distance', rule['safe_inner_distance']) + ' 或 d＞' + value('safe-outer-distance', rule['safe_outer_distance']) + ' 才完全避开；等号不安全')])
+        body += '<p>可以先退出内圈，再进入第二段的内侧安全区；也可继续远离外环。花圃阻断结算视线仍有效。命中沿原防御链，已有免疫、闪避、护盾与其他减伤可能阻止或减轻损伤；两段名义预算不是保证生命损失，也不保证两段都打中。</p>'
+        body += '<p>第一段画实心圆，第二段只画空心环并保留安全内心。冻结暂停该来源的局部动作时钟；来源死亡、移除或恢复出生保护，以及玩家死亡、重开、返城会取消待结算攻击。起手期间不叠加贴身接触攻击。</p>'
+        body += '<h4>本次两段攻击政策与独立证据</h4><p>事件 profile_id 与伤害包 skill_id：' + esc(rule['profile_id']) + '；balance_version：' + esc(rule['balance_version']) + '。事件 schema 与当前存档版本保持。下列报告才是本次两段行为证据；catalog.ginkgo_arcade 的 v83 单圈与 exploration_maps 的旧布局验收保留为历史资料，不证明新攻击。</p>'
+        body += '<p>' + esc(rule['scope']) + '</p><p>' + esc(rule['main_source_boundary']) + '</p>'
+        first_event, second_event = rule['example_events']
+        body += facts([
+            ('实际Main检查', value('main-checks', rule['actual_main_checks']) + ' 项；完整结果与控制条件见原报告'),
+            ('实际退圈再进示例', '两段局部结算时刻 ' + value('example-first-age', first_event['attack_age']) + ' / ' + value('example-second-age', second_event['attack_age']) + ' 秒；两段均未命中'),
+            ('该首领实际恢复', value('example-scaled-recovery', rule['example_policy']['profile']['recovery_seconds']) + ' 秒；原攻速策略由基础恢复缩放'),
+            ('该次冻结单段伤害包', component_text(first_event['packet']['base']) + '；防御前分量，不是扣血量')])
+        for label, evidence in [('实际Main报告', rule['actual_main_report']), ('实际Main日志', rule['actual_main_log']), ('实际角色夹具', rule['actual_main_fixture']), ('本次Main测试输入', rule['runtime_tested_inputs']), ('最终运行态检查', rule['current_runtime_report']), ('最终运行态日志', rule['current_runtime_log'])]:
+            body += '<p><a href="../' + esc(evidence['path'].removeprefix('docs/')) + '">' + label + '</a>；SHA256：' + esc(evidence['sha256']) + '</p>'
+        body += '<p><a href="../GINKGO_INNER_OUTER.zh-CN.md">内圈后外环合同</a> · <a href="../qa/v101-reference/README.md">有限导出与保全记录</a></p>'
+    else:
+        body += '<h4>' + esc(boss['name']) + '</h4>' + facts([
+            ('锁定点', '首领起手位置' if boss['target_rule'] == 'self_at_start' else '玩家起手位置；后续不追踪'),
+            ('攻击半径 / 启动距离', number(profile['radius']) + ' / ' + number(boss['trigger_distance'])),
+            ('每段完整预警', number(profile['windup_seconds']) + ' 秒；攻速不缩短'),
+            ('基础恢复', number(profile['recovery_seconds']) + ' 秒；实际恢复由当前攻速与既有上下限决定'),
+            ('每响防御前倍率', number(profile['damage_multiplier']) + ' × 本图首领当前接触分量'),
+            ('响数', str(boss.get('pulse_count', 1))),
+            ('伤害边界', '沿共享防御链；完整移出预警圆或以实体障碍阻断结算视线')])
+        if 'pulse_count' in boss:
+            body += '<p>各响共用起手锁点，间隔 ' + number(boss['pulse_interval']) + ' 秒；第一响结束后立即返回原圈仍可能被后续回响命中。</p>'
     roster_rows = ''.join('<tr><td>' + esc(record['source_group']) + '</td>' + ('<td>' + esc(record['outpost_id'] or '首领') + '</td>' if route_distribution else '') + '<td>' + str(record['ordinal']) + '</td><td>' + link('monsters', record['template_id']) + '</td><td>' + ' / '.join(str(v) for v in record['position']) + '</td></tr>' for record in plan['spawn_records'])
     roster_header = '<th>驻点</th>' if route_distribution else ''
     body += details('同源初始实体示例 · 独立Plan，不是角色战斗录像', '<p>使用本图I档、空地图词缀和固定种子 ' + str(plan['seed']) + '，只调用已验证的脱离运行态Plan。无角色装备、奖励或存档写入；具体物种是此种子示例，不表示每次相同。全部生成记录包含稳定spawn_key、actor/root ID、来源组、序号、物种、位置、空encounter_id和standard奖励路线。</p><div class="table-scroll"><table><thead><tr><th>来源组</th>' + roster_header + '<th>序号</th><th>物种</th><th>坐标 x / y</th></tr></thead><tbody>' + roster_rows + '</tbody></table></div>')

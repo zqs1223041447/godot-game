@@ -1,0 +1,24 @@
+{
+  "base": "bdea0872bc3542aa784cb616dfbf43fb4b1b984d",
+  "runtime_checks": 779,
+  "main_checks": 453,
+  "renderer_checks": 90,
+  "failures": 0,
+  "main_scope": "Actual controlled Main routes, snapshots and lineage, not natural play or hardware performance",
+  "source_boundary": {
+    "Main_runtime_tested_sha256": "85f653485d3da1392591fc9f3081628fe9dac8aa689ff08804cf7b8d1bed5512",
+    "final_runtime_sha256": "e846533c6f6cd1c9e5c4726a17c0ebfddaae69add0ac8e22a361fbc6a1f773cb",
+    "sole_delta": "Reject annulus inner_radius=0; final pure runtime suite covers the guard, valid130 path unchanged; no Main rerun"
+  },
+  "current_production_sha256": {
+    "scripts/combat/telegraphed_area_runtime.gd": "e846533c6f6cd1c9e5c4726a17c0ebfddaae69add0ac8e22a361fbc6a1f773cb",
+    "scripts/monsters/map_boss_profiles.gd": "f46ed710d941229b9ea1afaac3740326d92eaf87f682eed46510a592a8a11664",
+    "scripts/visuals/telegraph_renderer.gd": "4019eb56957d2f47b23e5e54a586df692caa6c20a1d4cde4836d57ba106ee247",
+    "scripts/world/exploration_map_layout.gd": "07e1c2efdca329ec4f661264d5228797d5950f4c21e4eb021aac40d35ae08e2d"
+  },
+  "main_unchanged": true,
+  "save_schema_unchanged": true,
+  "spawn_layout_changed": false,
+  "screenshots": "Root delivered an actual Renderer static preview, explicitly not combat footage",
+  "reference": "One current Ginkgo card changed; 3810 other cards, 89 top-level JSON sections and nested geometry/roster/economy tokens preserved; 16 numeric facts and 21134 links checked"
+}

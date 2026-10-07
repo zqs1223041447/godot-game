@@ -28,5 +28,11 @@ Only Ginkgo receives the new `ginkgo_inner_outer` receipt policy and
 old circle receipts and formulas. The second event is `annulus_attack`, with
 an explicit `inner_radius`; snapshots expose current-stage warning geometry.
 
-Stage backup status: shared import passed; targeted runtime, Main and renderer
-checks are in progress. No Windows export or release is part of this batch.
+Validation: shared import passed; pure runtime 779/0, actual Main 453/0 and
+renderer 90/0. Main ran before the one-line rejection of an invalid zero inner
+radius; its exact input source is archived, and the final pure suite covers the
+tightened guard. The legal radius-130 path is unchanged. No Main replay was
+needed. A bounded F8 export reuses that real Main report and lawful fixture;
+all 3,810 unrelated cards and all map geometry/roster/economy tokens are preserved.
+The root's static renderer preview was sent separately and is not a combat or
+frame-rate claim. No Windows export or release is part of this batch.
