@@ -1,0 +1,48 @@
+{
+  "baseline": "e2fa6db67fb9c4c7f201c795df12bdeb9b699832",
+  "accepted_source_hashes_match": true,
+  "existing_checks": {
+    "source_and_pixels": 2359,
+    "runtime": 2307,
+    "total": 4666,
+    "later_hero_hurt_static": 5,
+    "previous_v105_reused_not_rerun": 7914
+  },
+  "integrator_additional_gameplay_tests": 0,
+  "integrator_model_renders": 0,
+  "native_screenshot": {
+    "path": "/workspace/scratch/a51485f153de/monster-families-gameplay.png",
+    "sha256": "460c7f84132f3f9b6e187a022b499603ac13835661ed3d90eb77d6c1394c551a",
+    "owner": "root",
+    "scope": "Actual Main broken_ruins entry, movement and automatic kills; not FPS evidence"
+  },
+  "production_files": [
+    "scripts/visuals/actor_sprite_catalog.gd",
+    "scripts/visuals/actor_visual.gd"
+  ],
+  "pending_equipment_appearance": [
+    "sword",
+    "bow",
+    "unarmed"
+  ],
+  "source_only": true,
+  "delivery_scope": "Development branch backup only; main integration paused for art-direction review",
+  "art_direction_final_approval": false,
+  "reference_art": {
+    "static_checks_passed": 108,
+    "static_checks_total": 108,
+    "template_thumbnails": 11,
+    "source_families": 4,
+    "html_image_links_checked": 75,
+    "catalog_sha256_unchanged": "2288116f1a2275dcd54f7079fbfbfa5d36477caf72a97fd4c6930c65501e1530",
+    "html_only_two_placeholder_replacements": true,
+    "method": "Lossless original pixels, transparent crop plus 8px border; no runtime tint applied",
+    "source_pngs_unchanged": true
+  },
+  "source_metadata_normalization": {
+    "file": "tools/art/brute/frame_table.csv",
+    "change": "CRLF to LF matching repository Git text normalization; CSV fields and ordering unchanged",
+    "before_sha256": "d57a2781d9f0043480f3bcee8e0bab351b2e66e9ac88fb365f67e0c9d5811ecd",
+    "after_sha256": "5539aebfc6cd9e2a7ba509f0805b5aecce4f42bbc610d6a0823748bb071f1d26"
+  }
+}

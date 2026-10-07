@@ -1,0 +1,4132 @@
+{
+  "asset_id": "skitter",
+  "display_name": "Featherback Skitter",
+  "source_files": [
+    "generate_skitter.py",
+    "skitter.blend"
+  ],
+  "frame_size_px": [
+    128,
+    192
+  ],
+  "atlas_size_px": [
+    2048,
+    1728
+  ],
+  "columns": 16,
+  "rows": 9,
+  "fps": 12,
+  "direction_order": [
+    "E",
+    "SE",
+    "S",
+    "SW",
+    "W",
+    "NW",
+    "N",
+    "NE"
+  ],
+  "yaw_formula_degrees": "90 - 45 * direction",
+  "animation_offsets": {
+    "idle": 0,
+    "walk": 4,
+    "attack": 12
+  },
+  "animation_counts": {
+    "idle": 4,
+    "walk": 8,
+    "attack": 6
+  },
+  "frame_index_formula": "direction * 18 + offset + frame",
+  "anchor_px": [
+    64,
+    142
+  ],
+  "camera_elevation_degrees": 55,
+  "orthographic_scale": 4.741366863250732,
+  "fixed_key_light_world": [
+    -3,
+    -4,
+    8
+  ],
+  "cycles_threads": 3,
+  "denoising": false,
+  "no_floor_or_baked_shadow": true,
+  "suggested_world_body_height": 45,
+  "recommended_display_scale": 0.59,
+  "frames": [
+    {
+      "index": 0,
+      "direction": 0,
+      "animation": "idle",
+      "frame": 0,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        15.338924933576315,
+        97.0160980562431,
+        108.03848796891435,
+        174.6998138099165
+      ],
+      "alpha_bounds_px": [
+        14,
+        96,
+        109,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        96,
+        109,
+        175
+      ]
+    },
+    {
+      "index": 1,
+      "direction": 0,
+      "animation": "idle",
+      "frame": 1,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        15.338924933576315,
+        96.91889392676862,
+        108.01367062082693,
+        174.6998138099165
+      ],
+      "alpha_bounds_px": [
+        15,
+        96,
+        109,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        96,
+        109,
+        175
+      ]
+    },
+    {
+      "index": 2,
+      "direction": 0,
+      "animation": "idle",
+      "frame": 2,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        15.338924933576315,
+        97.0160980562431,
+        108.0717917783785,
+        174.6998138099165
+      ],
+      "alpha_bounds_px": [
+        14,
+        96,
+        109,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        96,
+        109,
+        175
+      ]
+    },
+    {
+      "index": 3,
+      "direction": 0,
+      "animation": "idle",
+      "frame": 3,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        15.338924933576315,
+        97.11329050938167,
+        108.0924334785189,
+        174.6998138099165
+      ],
+      "alpha_bounds_px": [
+        15,
+        96,
+        109,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        96,
+        109,
+        175
+      ]
+    },
+    {
+      "index": 4,
+      "direction": 0,
+      "animation": "walk",
+      "frame": 0,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        15.338924933576315,
+        96.83372166736746,
+        107.93952269890069,
+        174.6998138099165
+      ],
+      "alpha_bounds_px": [
+        15,
+        96,
+        109,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        96,
+        109,
+        176
+      ]
+    },
+    {
+      "index": 5,
+      "direction": 0,
+      "animation": "walk",
+      "frame": 1,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        15.338924933576315,
+        96.0854729678046,
+        108.05559605715047,
+        174.6998138099165
+      ],
+      "alpha_bounds_px": [
+        15,
+        95,
+        109,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        95,
+        109,
+        176
+      ]
+    },
+    {
+      "index": 6,
+      "direction": 0,
+      "animation": "walk",
+      "frame": 2,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        15.338924933576315,
+        95.86182810478073,
+        108.13903177867215,
+        174.6998138099165
+      ],
+      "alpha_bounds_px": [
+        15,
+        95,
+        109,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        95,
+        109,
+        175
+      ]
+    },
+    {
+      "index": 7,
+      "direction": 0,
+      "animation": "walk",
+      "frame": 3,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        15.338924933576315,
+        96.0376530699775,
+        108.05559605715047,
+        174.6998138099165
+      ],
+      "alpha_bounds_px": [
+        15,
+        95,
+        109,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        95,
+        109,
+        175
+      ]
+    },
+    {
+      "index": 8,
+      "direction": 0,
+      "animation": "walk",
+      "frame": 4,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        15.338924933576315,
+        96.79530724408227,
+        107.93952269890069,
+        174.6998138099165
+      ],
+      "alpha_bounds_px": [
+        15,
+        96,
+        109,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        96,
+        109,
+        175
+      ]
+    },
+    {
+      "index": 9,
+      "direction": 0,
+      "animation": "walk",
+      "frame": 5,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        15.338924933576315,
+        96.93449914491109,
+        108.0555912298118,
+        172.81107514816213
+      ],
+      "alpha_bounds_px": [
+        15,
+        96,
+        109,
+        174
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        96,
+        109,
+        174
+      ]
+    },
+    {
+      "index": 10,
+      "direction": 0,
+      "animation": "walk",
+      "frame": 6,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        15.338924933576315,
+        97.13149158155609,
+        108.13903177867215,
+        172.02873445893317
+      ],
+      "alpha_bounds_px": [
+        15,
+        96,
+        109,
+        173
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        96,
+        109,
+        173
+      ]
+    },
+    {
+      "index": 11,
+      "direction": 0,
+      "animation": "walk",
+      "frame": 7,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        15.338924933576315,
+        96.98260550159628,
+        108.0555912298118,
+        172.81107514816213
+      ],
+      "alpha_bounds_px": [
+        15,
+        96,
+        109,
+        174
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        96,
+        109,
+        174
+      ]
+    },
+    {
+      "index": 12,
+      "direction": 0,
+      "animation": "attack",
+      "frame": 0,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        15.338924933576315,
+        97.0160980562431,
+        108.05559605715047,
+        174.6998138099165
+      ],
+      "alpha_bounds_px": [
+        14,
+        96,
+        109,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        96,
+        109,
+        175
+      ]
+    },
+    {
+      "index": 13,
+      "direction": 0,
+      "animation": "attack",
+      "frame": 1,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        12.530586872635794,
+        97.40746391898769,
+        104.8078784580716,
+        174.6998138099165
+      ],
+      "alpha_bounds_px": [
+        12,
+        96,
+        106,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        12,
+        97,
+        105,
+        175
+      ]
+    },
+    {
+      "index": 14,
+      "direction": 0,
+      "animation": "attack",
+      "frame": 2,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.107017874327674,
+        96.81378071114787,
+        114.54506949205435,
+        174.6998138099165
+      ],
+      "alpha_bounds_px": [
+        21,
+        96,
+        115,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        96,
+        115,
+        175
+      ]
+    },
+    {
+      "index": 15,
+      "direction": 0,
+      "animation": "attack",
+      "frame": 3,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.77400160327985,
+        97.3501840590519,
+        115.92876819290689,
+        174.6998138099165
+      ],
+      "alpha_bounds_px": [
+        22,
+        96,
+        117,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        97,
+        117,
+        175
+      ]
+    },
+    {
+      "index": 16,
+      "direction": 0,
+      "animation": "attack",
+      "frame": 4,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        19.68178706468342,
+        97.23773102340428,
+        111.91412164511277,
+        174.6998138099165
+      ],
+      "alpha_bounds_px": [
+        19,
+        96,
+        113,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        96,
+        113,
+        175
+      ]
+    },
+    {
+      "index": 17,
+      "direction": 0,
+      "animation": "attack",
+      "frame": 5,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        15.338924933576315,
+        97.0160980562431,
+        108.05559605715047,
+        174.6998138099165
+      ],
+      "alpha_bounds_px": [
+        14,
+        96,
+        109,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        96,
+        109,
+        175
+      ]
+    },
+    {
+      "index": 18,
+      "direction": 1,
+      "animation": "idle",
+      "frame": 0,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        13.201920033727,
+        86.4013394460975,
+        113.3839690318179,
+        181.17887427237704
+      ],
+      "alpha_bounds_px": [
+        12,
+        86,
+        114,
+        182
+      ],
+      "alpha_bounds_8_px": [
+        13,
+        86,
+        114,
+        182
+      ]
+    },
+    {
+      "index": 19,
+      "direction": 1,
+      "animation": "idle",
+      "frame": 1,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        13.201920033727,
+        86.29681821390332,
+        113.3839690318179,
+        181.17887427237704
+      ],
+      "alpha_bounds_px": [
+        12,
+        86,
+        114,
+        182
+      ],
+      "alpha_bounds_8_px": [
+        13,
+        86,
+        114,
+        182
+      ]
+    },
+    {
+      "index": 20,
+      "direction": 1,
+      "animation": "idle",
+      "frame": 2,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        13.201920033727,
+        86.4013394460975,
+        113.3839690318179,
+        181.17887427237704
+      ],
+      "alpha_bounds_px": [
+        12,
+        86,
+        114,
+        182
+      ],
+      "alpha_bounds_8_px": [
+        13,
+        86,
+        114,
+        182
+      ]
+    },
+    {
+      "index": 21,
+      "direction": 1,
+      "animation": "idle",
+      "frame": 3,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        13.201920033727,
+        86.50585929386784,
+        113.3839690318179,
+        181.17887427237704
+      ],
+      "alpha_bounds_px": [
+        12,
+        86,
+        114,
+        182
+      ],
+      "alpha_bounds_8_px": [
+        13,
+        86,
+        114,
+        182
+      ]
+    },
+    {
+      "index": 22,
+      "direction": 1,
+      "animation": "walk",
+      "frame": 0,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        8.620471516338476,
+        88.06874784838259,
+        117.96541754920642,
+        177.42597135355345
+      ],
+      "alpha_bounds_px": [
+        7,
+        88,
+        119,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        8,
+        88,
+        119,
+        178
+      ]
+    },
+    {
+      "index": 23,
+      "direction": 1,
+      "animation": "walk",
+      "frame": 1,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        9.962346154979492,
+        87.7792416755159,
+        116.62353808322675,
+        176.63643625912525
+      ],
+      "alpha_bounds_px": [
+        9,
+        87,
+        117,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        9,
+        87,
+        117,
+        177
+      ]
+    },
+    {
+      "index": 24,
+      "direction": 1,
+      "animation": "walk",
+      "frame": 2,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        13.201920033727,
+        86.68283260867855,
+        113.3839690318179,
+        178.50779483486724
+      ],
+      "alpha_bounds_px": [
+        12,
+        86,
+        114,
+        180
+      ],
+      "alpha_bounds_8_px": [
+        13,
+        86,
+        114,
+        179
+      ]
+    },
+    {
+      "index": 25,
+      "direction": 1,
+      "animation": "walk",
+      "frame": 3,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        16.441493912474513,
+        85.125542064439,
+        110.14439998040905,
+        181.94383548127905
+      ],
+      "alpha_bounds_px": [
+        16,
+        84,
+        111,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        16,
+        85,
+        111,
+        183
+      ]
+    },
+    {
+      "index": 26,
+      "direction": 1,
+      "animation": "walk",
+      "frame": 4,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        17.78336855111553,
+        84.315844929559,
+        108.80252051442937,
+        184.9317771912006
+      ],
+      "alpha_bounds_px": [
+        17,
+        84,
+        110,
+        186
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        84,
+        109,
+        186
+      ]
+    },
+    {
+      "index": 27,
+      "direction": 1,
+      "animation": "walk",
+      "frame": 5,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        16.441493912474513,
+        84.07993962074856,
+        110.14439998040905,
+        183.83257388345393
+      ],
+      "alpha_bounds_px": [
+        16,
+        84,
+        111,
+        185
+      ],
+      "alpha_bounds_8_px": [
+        16,
+        84,
+        111,
+        185
+      ]
+    },
+    {
+      "index": 28,
+      "direction": 1,
+      "animation": "walk",
+      "frame": 6,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        13.201920033727,
+        85.20413774964834,
+        113.3839690318179,
+        181.17887427237704
+      ],
+      "alpha_bounds_px": [
+        12,
+        85,
+        114,
+        182
+      ],
+      "alpha_bounds_8_px": [
+        13,
+        85,
+        114,
+        182
+      ]
+    },
+    {
+      "index": 29,
+      "direction": 1,
+      "animation": "walk",
+      "frame": 7,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        9.962346154979492,
+        86.7336431861498,
+        116.62353808322675,
+        178.52517466130013
+      ],
+      "alpha_bounds_px": [
+        9,
+        86,
+        117,
+        180
+      ],
+      "alpha_bounds_8_px": [
+        9,
+        86,
+        117,
+        179
+      ]
+    },
+    {
+      "index": 30,
+      "direction": 1,
+      "animation": "attack",
+      "frame": 0,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        13.201920033727,
+        86.4013394460975,
+        113.3839690318179,
+        181.17887427237704
+      ],
+      "alpha_bounds_px": [
+        12,
+        86,
+        114,
+        182
+      ],
+      "alpha_bounds_8_px": [
+        13,
+        86,
+        114,
+        182
+      ]
+    },
+    {
+      "index": 31,
+      "direction": 1,
+      "animation": "attack",
+      "frame": 1,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        13.568435722024539,
+        86.37115578134697,
+        111.68883457685914,
+        178.74509645106258
+      ],
+      "alpha_bounds_px": [
+        13,
+        86,
+        113,
+        180
+      ],
+      "alpha_bounds_8_px": [
+        13,
+        86,
+        112,
+        180
+      ]
+    },
+    {
+      "index": 32,
+      "direction": 1,
+      "animation": "attack",
+      "frame": 2,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        12.423072385842737,
+        87.63985681644598,
+        116.98612914518795,
+        181.80691334016282
+      ],
+      "alpha_bounds_px": [
+        12,
+        87,
+        118,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        12,
+        87,
+        118,
+        183
+      ]
+    },
+    {
+      "index": 33,
+      "direction": 1,
+      "animation": "attack",
+      "frame": 3,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        12.056561524883868,
+        88.75408753706375,
+        118.68126842748538,
+        184.93749839841965
+      ],
+      "alpha_bounds_px": [
+        11,
+        88,
+        120,
+        186
+      ],
+      "alpha_bounds_8_px": [
+        11,
+        88,
+        119,
+        186
+      ]
+    },
+    {
+      "index": 34,
+      "direction": 1,
+      "animation": "attack",
+      "frame": 4,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        12.69796035890056,
+        87.51022458553362,
+        115.71478192447287,
+        182.623628867663
+      ],
+      "alpha_bounds_px": [
+        12,
+        87,
+        117,
+        184
+      ],
+      "alpha_bounds_8_px": [
+        12,
+        87,
+        117,
+        183
+      ]
+    },
+    {
+      "index": 35,
+      "direction": 1,
+      "animation": "attack",
+      "frame": 5,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        13.201920033727,
+        86.4013394460975,
+        113.3839690318179,
+        181.17887427237704
+      ],
+      "alpha_bounds_px": [
+        12,
+        86,
+        114,
+        182
+      ],
+      "alpha_bounds_8_px": [
+        13,
+        86,
+        114,
+        182
+      ]
+    },
+    {
+      "index": 36,
+      "direction": 2,
+      "animation": "idle",
+      "frame": 0,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        82.28410483294189,
+        105.77211039278748,
+        171.28089664307143
+      ],
+      "alpha_bounds_px": [
+        21,
+        81,
+        107,
+        172
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        82,
+        107,
+        172
+      ]
+    },
+    {
+      "index": 37,
+      "direction": 2,
+      "animation": "idle",
+      "frame": 1,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        82.07506375297736,
+        105.77211039278748,
+        171.28089664307143
+      ],
+      "alpha_bounds_px": [
+        21,
+        81,
+        107,
+        172
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        82,
+        107,
+        172
+      ]
+    },
+    {
+      "index": 38,
+      "direction": 2,
+      "animation": "idle",
+      "frame": 2,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        82.28410483294189,
+        105.77211039278748,
+        171.28089664307143
+      ],
+      "alpha_bounds_px": [
+        21,
+        81,
+        107,
+        172
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        82,
+        107,
+        172
+      ]
+    },
+    {
+      "index": 39,
+      "direction": 2,
+      "animation": "idle",
+      "frame": 3,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        82.49314591290644,
+        105.77211039278748,
+        171.28089664307143
+      ],
+      "alpha_bounds_px": [
+        21,
+        81,
+        107,
+        172
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        82,
+        107,
+        172
+      ]
+    },
+    {
+      "index": 40,
+      "direction": 2,
+      "animation": "walk",
+      "frame": 0,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        81.86602267301281,
+        105.77211039278748,
+        176.58830377387392
+      ],
+      "alpha_bounds_px": [
+        21,
+        81,
+        107,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        81,
+        107,
+        177
+      ]
+    },
+    {
+      "index": 41,
+      "direction": 2,
+      "animation": "walk",
+      "frame": 1,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        82.21180468154571,
+        105.77211039278748,
+        175.03379956189502
+      ],
+      "alpha_bounds_px": [
+        21,
+        81,
+        107,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        82,
+        107,
+        176
+      ]
+    },
+    {
+      "index": 42,
+      "direction": 2,
+      "animation": "walk",
+      "frame": 2,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        82.5997174768297,
+        105.77211039278748,
+        171.28089664307143
+      ],
+      "alpha_bounds_px": [
+        21,
+        82,
+        107,
+        172
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        82,
+        106,
+        172
+      ]
+    },
+    {
+      "index": 43,
+      "direction": 2,
+      "animation": "walk",
+      "frame": 3,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        82.21180468154571,
+        105.77211039278748,
+        173.1450612462466
+      ],
+      "alpha_bounds_px": [
+        21,
+        81,
+        107,
+        174
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        82,
+        107,
+        174
+      ]
+    },
+    {
+      "index": 44,
+      "direction": 2,
+      "animation": "walk",
+      "frame": 4,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        81.86602267301281,
+        105.77211039278748,
+        176.58830377387392
+      ],
+      "alpha_bounds_px": [
+        21,
+        81,
+        107,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        81,
+        106,
+        177
+      ]
+    },
+    {
+      "index": 45,
+      "direction": 2,
+      "animation": "walk",
+      "frame": 5,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        82.21180468154571,
+        105.77211039278748,
+        175.03379956189502
+      ],
+      "alpha_bounds_px": [
+        21,
+        81,
+        107,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        21,
+        82,
+        106,
+        175
+      ]
+    },
+    {
+      "index": 46,
+      "direction": 2,
+      "animation": "walk",
+      "frame": 6,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        82.5997174768297,
+        105.77211039278748,
+        171.28089664307143
+      ],
+      "alpha_bounds_px": [
+        21,
+        82,
+        107,
+        172
+      ],
+      "alpha_bounds_8_px": [
+        21,
+        82,
+        107,
+        172
+      ]
+    },
+    {
+      "index": 47,
+      "direction": 2,
+      "animation": "walk",
+      "frame": 7,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        82.21180468154571,
+        105.77211039278748,
+        173.1450612462466
+      ],
+      "alpha_bounds_px": [
+        21,
+        81,
+        107,
+        174
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        82,
+        106,
+        174
+      ]
+    },
+    {
+      "index": 48,
+      "direction": 2,
+      "animation": "attack",
+      "frame": 0,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        82.28410483294189,
+        105.77211039278748,
+        171.28089664307143
+      ],
+      "alpha_bounds_px": [
+        21,
+        81,
+        107,
+        172
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        82,
+        107,
+        172
+      ]
+    },
+    {
+      "index": 49,
+      "direction": 2,
+      "animation": "attack",
+      "frame": 1,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        83.02074679837655,
+        105.77211039278748,
+        168.2719523745145
+      ],
+      "alpha_bounds_px": [
+        21,
+        82,
+        107,
+        169
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        83,
+        107,
+        169
+      ]
+    },
+    {
+      "index": 50,
+      "direction": 2,
+      "animation": "attack",
+      "frame": 2,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        85.87280713809601,
+        105.77211039278748,
+        173.13116604392206
+      ],
+      "alpha_bounds_px": [
+        21,
+        85,
+        107,
+        174
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        86,
+        107,
+        174
+      ]
+    },
+    {
+      "index": 51,
+      "direction": 2,
+      "animation": "attack",
+      "frame": 3,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        87.72510557453977,
+        105.77211039278748,
+        176.8369153126797
+      ],
+      "alpha_bounds_px": [
+        21,
+        87,
+        107,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        87,
+        107,
+        177
+      ]
+    },
+    {
+      "index": 52,
+      "direction": 2,
+      "animation": "attack",
+      "frame": 4,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        84.90867244225858,
+        105.77211039278748,
+        173.51650415637954
+      ],
+      "alpha_bounds_px": [
+        21,
+        84,
+        107,
+        175
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        84,
+        107,
+        174
+      ]
+    },
+    {
+      "index": 53,
+      "direction": 2,
+      "animation": "attack",
+      "frame": 5,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        82.28410483294189,
+        105.77211039278748,
+        171.28089664307143
+      ],
+      "alpha_bounds_px": [
+        21,
+        81,
+        107,
+        172
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        82,
+        107,
+        172
+      ]
+    },
+    {
+      "index": 54,
+      "direction": 3,
+      "animation": "idle",
+      "frame": 0,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        14.616030968182102,
+        86.4013394460975,
+        114.79807996627301,
+        181.17887427237704
+      ],
+      "alpha_bounds_px": [
+        14,
+        86,
+        115,
+        182
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        86,
+        115,
+        182
+      ]
+    },
+    {
+      "index": 55,
+      "direction": 3,
+      "animation": "idle",
+      "frame": 1,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        14.616030968182102,
+        86.29681821390332,
+        114.79807996627301,
+        181.17887427237704
+      ],
+      "alpha_bounds_px": [
+        14,
+        86,
+        115,
+        182
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        86,
+        115,
+        182
+      ]
+    },
+    {
+      "index": 56,
+      "direction": 3,
+      "animation": "idle",
+      "frame": 2,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        14.616030968182102,
+        86.4013394460975,
+        114.79807996627301,
+        181.17887427237704
+      ],
+      "alpha_bounds_px": [
+        14,
+        86,
+        115,
+        182
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        86,
+        115,
+        182
+      ]
+    },
+    {
+      "index": 57,
+      "direction": 3,
+      "animation": "idle",
+      "frame": 3,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        14.616030968182102,
+        86.50585929386784,
+        114.79807996627301,
+        181.17887427237704
+      ],
+      "alpha_bounds_px": [
+        14,
+        86,
+        115,
+        182
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        86,
+        115,
+        182
+      ]
+    },
+    {
+      "index": 58,
+      "direction": 3,
+      "animation": "walk",
+      "frame": 0,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        19.197479485570625,
+        84.315844929559,
+        110.21663144888447,
+        184.9317771912006
+      ],
+      "alpha_bounds_px": [
+        18,
+        84,
+        111,
+        186
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        84,
+        111,
+        186
+      ]
+    },
+    {
+      "index": 59,
+      "direction": 3,
+      "animation": "walk",
+      "frame": 1,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        17.855600019590945,
+        84.07993962074856,
+        111.55850608752549,
+        183.83257388345393
+      ],
+      "alpha_bounds_px": [
+        17,
+        83,
+        112,
+        185
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        84,
+        112,
+        184
+      ]
+    },
+    {
+      "index": 60,
+      "direction": 3,
+      "animation": "walk",
+      "frame": 2,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        14.616030968182102,
+        85.20413774964834,
+        114.79807996627301,
+        181.17887427237704
+      ],
+      "alpha_bounds_px": [
+        14,
+        85,
+        115,
+        182
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        85,
+        115,
+        182
+      ]
+    },
+    {
+      "index": 61,
+      "direction": 3,
+      "animation": "walk",
+      "frame": 3,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        11.376461916773259,
+        86.7336431861498,
+        118.03765384502051,
+        178.52517466130013
+      ],
+      "alpha_bounds_px": [
+        10,
+        86,
+        119,
+        179
+      ],
+      "alpha_bounds_8_px": [
+        11,
+        86,
+        119,
+        179
+      ]
+    },
+    {
+      "index": 62,
+      "direction": 3,
+      "animation": "walk",
+      "frame": 4,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        10.034582450793572,
+        88.06874784838259,
+        119.37952848366152,
+        177.42597135355345
+      ],
+      "alpha_bounds_px": [
+        9,
+        88,
+        120,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        9,
+        88,
+        120,
+        178
+      ]
+    },
+    {
+      "index": 63,
+      "direction": 3,
+      "animation": "walk",
+      "frame": 5,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        11.376461916773259,
+        87.7792416755159,
+        118.03765384502051,
+        176.63643625912525
+      ],
+      "alpha_bounds_px": [
+        11,
+        87,
+        119,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        11,
+        87,
+        119,
+        177
+      ]
+    },
+    {
+      "index": 64,
+      "direction": 3,
+      "animation": "walk",
+      "frame": 6,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        14.616030968182102,
+        86.68283260867855,
+        114.79807996627301,
+        178.50779483486724
+      ],
+      "alpha_bounds_px": [
+        14,
+        86,
+        115,
+        180
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        86,
+        115,
+        179
+      ]
+    },
+    {
+      "index": 65,
+      "direction": 3,
+      "animation": "walk",
+      "frame": 7,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        17.855600019590945,
+        85.125542064439,
+        111.55850608752549,
+        181.94383548127905
+      ],
+      "alpha_bounds_px": [
+        17,
+        85,
+        112,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        85,
+        112,
+        183
+      ]
+    },
+    {
+      "index": 66,
+      "direction": 3,
+      "animation": "attack",
+      "frame": 0,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        14.616030968182102,
+        86.4013394460975,
+        114.79807996627301,
+        181.17887427237704
+      ],
+      "alpha_bounds_px": [
+        14,
+        86,
+        115,
+        182
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        86,
+        115,
+        182
+      ]
+    },
+    {
+      "index": 67,
+      "direction": 3,
+      "animation": "attack",
+      "frame": 1,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        16.31116542314087,
+        86.37115578134697,
+        114.43156427797547,
+        178.74509645106258
+      ],
+      "alpha_bounds_px": [
+        16,
+        86,
+        115,
+        180
+      ],
+      "alpha_bounds_8_px": [
+        16,
+        86,
+        115,
+        179
+      ]
+    },
+    {
+      "index": 68,
+      "direction": 3,
+      "animation": "attack",
+      "frame": 2,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        11.013870854812055,
+        87.63985681644598,
+        115.57692761415726,
+        181.80691334016282
+      ],
+      "alpha_bounds_px": [
+        10,
+        87,
+        117,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        10,
+        87,
+        116,
+        183
+      ]
+    },
+    {
+      "index": 69,
+      "direction": 3,
+      "animation": "attack",
+      "frame": 3,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        9.318731572514615,
+        88.75408753706375,
+        115.94343847511612,
+        184.93749839841965
+      ],
+      "alpha_bounds_px": [
+        8,
+        88,
+        117,
+        186
+      ],
+      "alpha_bounds_8_px": [
+        9,
+        88,
+        117,
+        186
+      ]
+    },
+    {
+      "index": 70,
+      "direction": 3,
+      "animation": "attack",
+      "frame": 4,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        12.285218075527126,
+        87.51022458553362,
+        115.30203964109944,
+        182.623628867663
+      ],
+      "alpha_bounds_px": [
+        11,
+        87,
+        116,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        12,
+        87,
+        116,
+        183
+      ]
+    },
+    {
+      "index": 71,
+      "direction": 3,
+      "animation": "attack",
+      "frame": 5,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        14.616030968182102,
+        86.4013394460975,
+        114.79807996627301,
+        181.17887427237704
+      ],
+      "alpha_bounds_px": [
+        14,
+        86,
+        115,
+        182
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        86,
+        115,
+        182
+      ]
+    },
+    {
+      "index": 72,
+      "direction": 4,
+      "animation": "idle",
+      "frame": 0,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        19.961512031085647,
+        97.0160980562431,
+        112.66107506642368,
+        174.6998138099165
+      ],
+      "alpha_bounds_px": [
+        19,
+        96,
+        113,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        96,
+        113,
+        176
+      ]
+    },
+    {
+      "index": 73,
+      "direction": 4,
+      "animation": "idle",
+      "frame": 1,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        19.986329379173064,
+        96.91889392676862,
+        112.66107506642368,
+        174.6998138099165
+      ],
+      "alpha_bounds_px": [
+        19,
+        96,
+        113,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        96,
+        113,
+        176
+      ]
+    },
+    {
+      "index": 74,
+      "direction": 4,
+      "animation": "idle",
+      "frame": 2,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        19.928208221621503,
+        97.0160980562431,
+        112.66107506642368,
+        174.6998138099165
+      ],
+      "alpha_bounds_px": [
+        19,
+        96,
+        113,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        96,
+        113,
+        176
+      ]
+    },
+    {
+      "index": 75,
+      "direction": 4,
+      "animation": "idle",
+      "frame": 3,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        19.9075665214811,
+        97.11329050938167,
+        112.66107506642368,
+        174.6998138099165
+      ],
+      "alpha_bounds_px": [
+        19,
+        96,
+        113,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        96,
+        113,
+        176
+      ]
+    },
+    {
+      "index": 76,
+      "direction": 4,
+      "animation": "walk",
+      "frame": 0,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        20.06047730109931,
+        96.79530724408227,
+        112.66107506642368,
+        174.6998138099165
+      ],
+      "alpha_bounds_px": [
+        19,
+        96,
+        113,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        96,
+        113,
+        175
+      ]
+    },
+    {
+      "index": 77,
+      "direction": 4,
+      "animation": "walk",
+      "frame": 1,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        19.944408770188204,
+        96.93449914491109,
+        112.66107506642368,
+        172.81107514816213
+      ],
+      "alpha_bounds_px": [
+        19,
+        95,
+        113,
+        174
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        96,
+        113,
+        174
+      ]
+    },
+    {
+      "index": 78,
+      "direction": 4,
+      "animation": "walk",
+      "frame": 2,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        19.860968221327845,
+        97.13149158155609,
+        112.66107506642368,
+        172.02873445893317
+      ],
+      "alpha_bounds_px": [
+        19,
+        96,
+        113,
+        173
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        96,
+        113,
+        173
+      ]
+    },
+    {
+      "index": 79,
+      "direction": 4,
+      "animation": "walk",
+      "frame": 3,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        19.944408770188204,
+        96.98260550159628,
+        112.66107506642368,
+        172.81107514816213
+      ],
+      "alpha_bounds_px": [
+        19,
+        96,
+        113,
+        174
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        96,
+        113,
+        174
+      ]
+    },
+    {
+      "index": 80,
+      "direction": 4,
+      "animation": "walk",
+      "frame": 4,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        20.06047730109931,
+        96.83372166736746,
+        112.66107506642368,
+        174.6998138099165
+      ],
+      "alpha_bounds_px": [
+        19,
+        96,
+        113,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        96,
+        113,
+        175
+      ]
+    },
+    {
+      "index": 81,
+      "direction": 4,
+      "animation": "walk",
+      "frame": 5,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        19.944403942849533,
+        96.0854729678046,
+        112.66107506642368,
+        174.6998138099165
+      ],
+      "alpha_bounds_px": [
+        19,
+        95,
+        113,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        95,
+        113,
+        175
+      ]
+    },
+    {
+      "index": 82,
+      "direction": 4,
+      "animation": "walk",
+      "frame": 6,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        19.860968221327845,
+        95.86182810478073,
+        112.66107506642368,
+        174.6998138099165
+      ],
+      "alpha_bounds_px": [
+        19,
+        95,
+        114,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        95,
+        113,
+        176
+      ]
+    },
+    {
+      "index": 83,
+      "direction": 4,
+      "animation": "walk",
+      "frame": 7,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        19.944403942849533,
+        96.0376530699775,
+        112.66107506642368,
+        174.6998138099165
+      ],
+      "alpha_bounds_px": [
+        19,
+        95,
+        113,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        95,
+        113,
+        175
+      ]
+    },
+    {
+      "index": 84,
+      "direction": 4,
+      "animation": "attack",
+      "frame": 0,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        19.944403942849533,
+        97.0160980562431,
+        112.66107506642368,
+        174.6998138099165
+      ],
+      "alpha_bounds_px": [
+        19,
+        96,
+        113,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        96,
+        113,
+        176
+      ]
+    },
+    {
+      "index": 85,
+      "direction": 4,
+      "animation": "attack",
+      "frame": 1,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        23.1921215419284,
+        97.40746391898769,
+        115.4694131273642,
+        174.6998138099165
+      ],
+      "alpha_bounds_px": [
+        22,
+        96,
+        116,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        97,
+        116,
+        176
+      ]
+    },
+    {
+      "index": 86,
+      "direction": 4,
+      "animation": "attack",
+      "frame": 2,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        13.454930507945647,
+        96.81378071114787,
+        105.89298212567232,
+        174.6998138099165
+      ],
+      "alpha_bounds_px": [
+        13,
+        95,
+        106,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        13,
+        96,
+        106,
+        176
+      ]
+    },
+    {
+      "index": 87,
+      "direction": 4,
+      "animation": "attack",
+      "frame": 3,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        12.071231807093106,
+        97.3501840590519,
+        105.22599839672014,
+        174.6998138099165
+      ],
+      "alpha_bounds_px": [
+        11,
+        96,
+        106,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        11,
+        97,
+        106,
+        176
+      ]
+    },
+    {
+      "index": 88,
+      "direction": 4,
+      "animation": "attack",
+      "frame": 4,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        16.085878354887228,
+        97.23773102340428,
+        108.31821293531658,
+        174.6998138099165
+      ],
+      "alpha_bounds_px": [
+        15,
+        96,
+        109,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        96,
+        109,
+        176
+      ]
+    },
+    {
+      "index": 89,
+      "direction": 4,
+      "animation": "attack",
+      "frame": 5,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        19.944403942849533,
+        97.0160980562431,
+        112.66107506642368,
+        174.6998138099165
+      ],
+      "alpha_bounds_px": [
+        19,
+        96,
+        113,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        96,
+        113,
+        176
+      ]
+    },
+    {
+      "index": 90,
+      "direction": 5,
+      "animation": "idle",
+      "frame": 0,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        14.616030968182102,
+        90.85811119031695,
+        114.79807996627301,
+        181.89789204314886
+      ],
+      "alpha_bounds_px": [
+        14,
+        90,
+        116,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        90,
+        115,
+        183
+      ]
+    },
+    {
+      "index": 91,
+      "direction": 5,
+      "animation": "idle",
+      "frame": 1,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        14.616030968182102,
+        90.76087020848283,
+        114.79807996627301,
+        181.89789204314886
+      ],
+      "alpha_bounds_px": [
+        14,
+        90,
+        116,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        90,
+        115,
+        183
+      ]
+    },
+    {
+      "index": 92,
+      "direction": 5,
+      "animation": "idle",
+      "frame": 2,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        14.616030968182102,
+        90.85811119031695,
+        114.79807996627301,
+        181.89789204314886
+      ],
+      "alpha_bounds_px": [
+        14,
+        90,
+        116,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        90,
+        115,
+        183
+      ]
+    },
+    {
+      "index": 93,
+      "direction": 5,
+      "animation": "idle",
+      "frame": 3,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        14.616030968182102,
+        90.9553359487525,
+        114.79807996627301,
+        181.89789204314886
+      ],
+      "alpha_bounds_px": [
+        14,
+        90,
+        116,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        90,
+        115,
+        183
+      ]
+    },
+    {
+      "index": 94,
+      "direction": 5,
+      "animation": "walk",
+      "frame": 0,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        10.034582450793572,
+        90.93771215809195,
+        119.37952848366152,
+        178.14498912432526
+      ],
+      "alpha_bounds_px": [
+        9,
+        90,
+        120,
+        179
+      ],
+      "alpha_bounds_8_px": [
+        9,
+        90,
+        120,
+        179
+      ]
+    },
+    {
+      "index": 95,
+      "direction": 5,
+      "animation": "walk",
+      "frame": 1,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        11.376461916773259,
+        91.11146822147347,
+        118.03765384502051,
+        179.24418847774763
+      ],
+      "alpha_bounds_px": [
+        10,
+        90,
+        119,
+        180
+      ],
+      "alpha_bounds_8_px": [
+        11,
+        90,
+        119,
+        180
+      ]
+    },
+    {
+      "index": 96,
+      "direction": 5,
+      "animation": "walk",
+      "frame": 2,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        14.616030968182102,
+        89.55246984592466,
+        114.79807996627301,
+        181.89789204314886
+      ],
+      "alpha_bounds_px": [
+        14,
+        89,
+        115,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        89,
+        115,
+        183
+      ]
+    },
+    {
+      "index": 97,
+      "direction": 5,
+      "animation": "walk",
+      "frame": 3,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        17.855600019590945,
+        88.35199137761606,
+        111.55850608752549,
+        184.55159560855012
+      ],
+      "alpha_bounds_px": [
+        17,
+        87,
+        112,
+        186
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        88,
+        112,
+        185
+      ]
+    },
+    {
+      "index": 98,
+      "direction": 5,
+      "animation": "walk",
+      "frame": 4,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        19.197479485570625,
+        88.60971834373001,
+        110.21663144888447,
+        185.65079496197245
+      ],
+      "alpha_bounds_px": [
+        18,
+        88,
+        111,
+        187
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        88,
+        111,
+        186
+      ]
+    },
+    {
+      "index": 99,
+      "direction": 5,
+      "animation": "walk",
+      "frame": 5,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        17.855600019590945,
+        89.46284281013877,
+        111.55850608752549,
+        182.66285711984872
+      ],
+      "alpha_bounds_px": [
+        17,
+        88,
+        112,
+        184
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        89,
+        112,
+        183
+      ]
+    },
+    {
+      "index": 100,
+      "direction": 5,
+      "animation": "walk",
+      "frame": 6,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        14.616030968182102,
+        91.12433973002256,
+        114.79807996627301,
+        179.22681251911257
+      ],
+      "alpha_bounds_px": [
+        14,
+        90,
+        116,
+        180
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        90,
+        115,
+        180
+      ]
+    },
+    {
+      "index": 101,
+      "direction": 5,
+      "animation": "walk",
+      "frame": 7,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        11.376461916773259,
+        91.09681100814933,
+        118.03765384502051,
+        177.35544998904624
+      ],
+      "alpha_bounds_px": [
+        11,
+        90,
+        119,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        11,
+        90,
+        119,
+        178
+      ]
+    },
+    {
+      "index": 102,
+      "direction": 5,
+      "animation": "attack",
+      "frame": 0,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        14.616030968182102,
+        90.85811119031695,
+        114.79807996627301,
+        181.89789204314886
+      ],
+      "alpha_bounds_px": [
+        14,
+        90,
+        116,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        90,
+        115,
+        183
+      ]
+    },
+    {
+      "index": 103,
+      "direction": 5,
+      "animation": "attack",
+      "frame": 1,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        16.31116542314087,
+        91.87598015566655,
+        114.43156427797547,
+        181.59765996781596
+      ],
+      "alpha_bounds_px": [
+        15,
+        91,
+        115,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        16,
+        91,
+        115,
+        182
+      ]
+    },
+    {
+      "index": 104,
+      "direction": 5,
+      "animation": "attack",
+      "frame": 2,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        11.013870854812055,
+        86.20368969078422,
+        115.57692761415726,
+        182.53588668610294
+      ],
+      "alpha_bounds_px": [
+        10,
+        85,
+        116,
+        184
+      ],
+      "alpha_bounds_8_px": [
+        10,
+        86,
+        116,
+        183
+      ]
+    },
+    {
+      "index": 105,
+      "direction": 5,
+      "animation": "attack",
+      "frame": 3,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        9.318731572514615,
+        86.3903606580239,
+        115.94343847511612,
+        182.8361148071115
+      ],
+      "alpha_bounds_px": [
+        8,
+        85,
+        117,
+        184
+      ],
+      "alpha_bounds_8_px": [
+        9,
+        86,
+        117,
+        184
+      ]
+    },
+    {
+      "index": 106,
+      "direction": 5,
+      "animation": "attack",
+      "frame": 4,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        12.285218075527126,
+        88.79322459476386,
+        115.30203964109944,
+        182.31071164102215
+      ],
+      "alpha_bounds_px": [
+        11,
+        88,
+        116,
+        184
+      ],
+      "alpha_bounds_8_px": [
+        12,
+        88,
+        116,
+        183
+      ]
+    },
+    {
+      "index": 107,
+      "direction": 5,
+      "animation": "attack",
+      "frame": 5,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        14.616030968182102,
+        90.85811119031695,
+        114.79807996627301,
+        181.89789204314886
+      ],
+      "alpha_bounds_px": [
+        14,
+        90,
+        116,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        90,
+        115,
+        183
+      ]
+    },
+    {
+      "index": 108,
+      "direction": 6,
+      "animation": "idle",
+      "frame": 0,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        84.91850379154036,
+        105.77211039278748,
+        172.66340677859642
+      ],
+      "alpha_bounds_px": [
+        21,
+        84,
+        107,
+        174
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        84,
+        106,
+        174
+      ]
+    },
+    {
+      "index": 109,
+      "direction": 6,
+      "animation": "idle",
+      "frame": 1,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        84.82669973934804,
+        105.77211039278748,
+        172.66340677859642
+      ],
+      "alpha_bounds_px": [
+        21,
+        84,
+        107,
+        174
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        84,
+        106,
+        174
+      ]
+    },
+    {
+      "index": 110,
+      "direction": 6,
+      "animation": "idle",
+      "frame": 2,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        84.74914482778752,
+        105.77211039278748,
+        172.66340677859642
+      ],
+      "alpha_bounds_px": [
+        21,
+        84,
+        107,
+        174
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        84,
+        106,
+        174
+      ]
+    },
+    {
+      "index": 111,
+      "direction": 6,
+      "animation": "idle",
+      "frame": 3,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        84.84421811967766,
+        105.77211039278748,
+        172.66340677859642
+      ],
+      "alpha_bounds_px": [
+        21,
+        84,
+        107,
+        174
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        84,
+        106,
+        174
+      ]
+    },
+    {
+      "index": 112,
+      "direction": 6,
+      "animation": "walk",
+      "frame": 0,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        84.93543750726786,
+        105.77211039278748,
+        177.9708139093989
+      ],
+      "alpha_bounds_px": [
+        21,
+        84,
+        107,
+        179
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        84,
+        107,
+        179
+      ]
+    },
+    {
+      "index": 113,
+      "direction": 6,
+      "animation": "walk",
+      "frame": 1,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        84.83352172079196,
+        105.77211039278748,
+        174.5275712087186
+      ],
+      "alpha_bounds_px": [
+        21,
+        84,
+        107,
+        175
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        84,
+        106,
+        175
+      ]
+    },
+    {
+      "index": 114,
+      "direction": 6,
+      "animation": "walk",
+      "frame": 2,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        84.75430062305136,
+        105.77211039278748,
+        172.66340282427208
+      ],
+      "alpha_bounds_px": [
+        21,
+        84,
+        107,
+        173
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        84,
+        106,
+        173
+      ]
+    },
+    {
+      "index": 115,
+      "direction": 6,
+      "animation": "walk",
+      "frame": 3,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        84.83352172079196,
+        105.77211039278748,
+        176.41630178877134
+      ],
+      "alpha_bounds_px": [
+        21,
+        84,
+        107,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        21,
+        84,
+        106,
+        177
+      ]
+    },
+    {
+      "index": 116,
+      "direction": 6,
+      "animation": "walk",
+      "frame": 4,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        84.93543750726786,
+        105.77211039278748,
+        177.97080600075023
+      ],
+      "alpha_bounds_px": [
+        21,
+        84,
+        107,
+        179
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        84,
+        107,
+        179
+      ]
+    },
+    {
+      "index": 117,
+      "direction": 6,
+      "animation": "walk",
+      "frame": 5,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        84.8335256751163,
+        105.77211039278748,
+        174.52756330006994
+      ],
+      "alpha_bounds_px": [
+        21,
+        84,
+        107,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        84,
+        106,
+        175
+      ]
+    },
+    {
+      "index": 118,
+      "direction": 6,
+      "animation": "walk",
+      "frame": 6,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        84.75430062305136,
+        105.77211039278748,
+        172.66340677859642
+      ],
+      "alpha_bounds_px": [
+        21,
+        84,
+        107,
+        174
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        84,
+        107,
+        174
+      ]
+    },
+    {
+      "index": 119,
+      "direction": 6,
+      "animation": "walk",
+      "frame": 7,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        84.8335256751163,
+        105.77211039278748,
+        176.41630969742
+      ],
+      "alpha_bounds_px": [
+        21,
+        84,
+        107,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        84,
+        107,
+        177
+      ]
+    },
+    {
+      "index": 120,
+      "direction": 6,
+      "animation": "attack",
+      "frame": 0,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        84.83347168258597,
+        105.77211039278748,
+        172.66340677859642
+      ],
+      "alpha_bounds_px": [
+        21,
+        84,
+        107,
+        174
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        84,
+        106,
+        174
+      ]
+    },
+    {
+      "index": 121,
+      "direction": 6,
+      "animation": "attack",
+      "frame": 1,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        85.11896833130159,
+        105.77211039278748,
+        172.23881515717005
+      ],
+      "alpha_bounds_px": [
+        21,
+        84,
+        107,
+        173
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        84,
+        106,
+        173
+      ]
+    },
+    {
+      "index": 122,
+      "direction": 6,
+      "animation": "attack",
+      "frame": 2,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        80.61178544498004,
+        105.77211039278748,
+        173.56566496270852
+      ],
+      "alpha_bounds_px": [
+        21,
+        80,
+        107,
+        175
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        80,
+        106,
+        174
+      ]
+    },
+    {
+      "index": 123,
+      "direction": 6,
+      "animation": "attack",
+      "frame": 3,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        82.31378031738848,
+        105.77211039278748,
+        173.9902605384592
+      ],
+      "alpha_bounds_px": [
+        21,
+        81,
+        107,
+        175
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        82,
+        106,
+        175
+      ]
+    },
+    {
+      "index": 124,
+      "direction": 6,
+      "animation": "attack",
+      "frame": 4,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        83.72860063286082,
+        105.77211039278748,
+        173.24722124663873
+      ],
+      "alpha_bounds_px": [
+        21,
+        83,
+        107,
+        174
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        83,
+        106,
+        174
+      ]
+    },
+    {
+      "index": 125,
+      "direction": 6,
+      "animation": "attack",
+      "frame": 5,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        22.227889607212525,
+        84.83347168258597,
+        105.77211039278748,
+        172.66340677859642
+      ],
+      "alpha_bounds_px": [
+        21,
+        84,
+        107,
+        174
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        84,
+        106,
+        174
+      ]
+    },
+    {
+      "index": 126,
+      "direction": 7,
+      "animation": "idle",
+      "frame": 0,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        13.201920033727,
+        90.85811119031695,
+        113.3839690318179,
+        181.89789221620185
+      ],
+      "alpha_bounds_px": [
+        12,
+        90,
+        114,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        13,
+        90,
+        114,
+        183
+      ]
+    },
+    {
+      "index": 127,
+      "direction": 7,
+      "animation": "idle",
+      "frame": 1,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        13.201920033727,
+        90.76087020848283,
+        113.3839690318179,
+        181.89789221620185
+      ],
+      "alpha_bounds_px": [
+        12,
+        90,
+        114,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        13,
+        90,
+        114,
+        183
+      ]
+    },
+    {
+      "index": 128,
+      "direction": 7,
+      "animation": "idle",
+      "frame": 2,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        13.201920033727,
+        90.85811119031695,
+        113.3839690318179,
+        181.89789221620185
+      ],
+      "alpha_bounds_px": [
+        12,
+        90,
+        114,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        13,
+        90,
+        114,
+        183
+      ]
+    },
+    {
+      "index": 129,
+      "direction": 7,
+      "animation": "idle",
+      "frame": 3,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        13.201920033727,
+        90.9553359487525,
+        113.3839690318179,
+        181.89789221620185
+      ],
+      "alpha_bounds_px": [
+        12,
+        90,
+        114,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        13,
+        90,
+        114,
+        183
+      ]
+    },
+    {
+      "index": 130,
+      "direction": 7,
+      "animation": "walk",
+      "frame": 0,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        17.78336855111553,
+        88.60971834373001,
+        108.80252534176805,
+        185.65079513502542
+      ],
+      "alpha_bounds_px": [
+        17,
+        88,
+        110,
+        186
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        88,
+        109,
+        186
+      ]
+    },
+    {
+      "index": 131,
+      "direction": 7,
+      "animation": "walk",
+      "frame": 1,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        16.441493912474513,
+        89.46284676446311,
+        110.14439998040905,
+        182.66285711984872
+      ],
+      "alpha_bounds_px": [
+        16,
+        89,
+        111,
+        184
+      ],
+      "alpha_bounds_8_px": [
+        16,
+        89,
+        111,
+        184
+      ]
+    },
+    {
+      "index": 132,
+      "direction": 7,
+      "animation": "walk",
+      "frame": 2,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        13.201920033727,
+        91.12433973002256,
+        113.3839690318179,
+        179.22681286521853
+      ],
+      "alpha_bounds_px": [
+        12,
+        90,
+        114,
+        180
+      ],
+      "alpha_bounds_8_px": [
+        13,
+        90,
+        114,
+        180
+      ]
+    },
+    {
+      "index": 133,
+      "direction": 7,
+      "animation": "walk",
+      "frame": 3,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        9.962346154979492,
+        91.09681100814933,
+        116.62353808322675,
+        177.35544998904624
+      ],
+      "alpha_bounds_px": [
+        9,
+        90,
+        117,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        9,
+        90,
+        117,
+        178
+      ]
+    },
+    {
+      "index": 134,
+      "direction": 7,
+      "animation": "walk",
+      "frame": 4,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        8.620471516338476,
+        90.93771215809195,
+        117.96541754920642,
+        178.14498929737826
+      ],
+      "alpha_bounds_px": [
+        8,
+        90,
+        119,
+        179
+      ],
+      "alpha_bounds_8_px": [
+        8,
+        90,
+        119,
+        179
+      ]
+    },
+    {
+      "index": 135,
+      "direction": 7,
+      "animation": "walk",
+      "frame": 5,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        9.962346154979492,
+        91.11146822147347,
+        116.62353808322675,
+        179.2441886508006
+      ],
+      "alpha_bounds_px": [
+        9,
+        90,
+        118,
+        180
+      ],
+      "alpha_bounds_8_px": [
+        9,
+        90,
+        117,
+        180
+      ]
+    },
+    {
+      "index": 136,
+      "direction": 7,
+      "animation": "walk",
+      "frame": 6,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        13.201920033727,
+        89.55246984592466,
+        113.3839690318179,
+        181.89789221620185
+      ],
+      "alpha_bounds_px": [
+        12,
+        88,
+        114,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        13,
+        89,
+        114,
+        183
+      ]
+    },
+    {
+      "index": 137,
+      "direction": 7,
+      "animation": "walk",
+      "frame": 7,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        16.441493912474513,
+        88.35199137761606,
+        110.14439998040905,
+        184.55159578160308
+      ],
+      "alpha_bounds_px": [
+        16,
+        87,
+        111,
+        185
+      ],
+      "alpha_bounds_8_px": [
+        16,
+        88,
+        111,
+        185
+      ]
+    },
+    {
+      "index": 138,
+      "direction": 7,
+      "animation": "attack",
+      "frame": 0,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        13.201920033727,
+        90.85811119031695,
+        113.3839690318179,
+        181.89789221620185
+      ],
+      "alpha_bounds_px": [
+        12,
+        90,
+        114,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        13,
+        90,
+        114,
+        183
+      ]
+    },
+    {
+      "index": 139,
+      "direction": 7,
+      "animation": "attack",
+      "frame": 1,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        13.568435722024539,
+        91.8759781785044,
+        111.68883457685914,
+        181.59766014086892
+      ],
+      "alpha_bounds_px": [
+        13,
+        91,
+        112,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        13,
+        91,
+        112,
+        182
+      ]
+    },
+    {
+      "index": 140,
+      "direction": 7,
+      "animation": "attack",
+      "frame": 2,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        12.423072385842737,
+        86.20368969078422,
+        116.98612914518795,
+        182.5358868591559
+      ],
+      "alpha_bounds_px": [
+        11,
+        85,
+        118,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        12,
+        86,
+        118,
+        183
+      ]
+    },
+    {
+      "index": 141,
+      "direction": 7,
+      "animation": "attack",
+      "frame": 3,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        12.056561524883868,
+        86.3903606580239,
+        118.68126842748538,
+        182.8361149801645
+      ],
+      "alpha_bounds_px": [
+        11,
+        85,
+        120,
+        184
+      ],
+      "alpha_bounds_8_px": [
+        12,
+        86,
+        119,
+        184
+      ]
+    },
+    {
+      "index": 142,
+      "direction": 7,
+      "animation": "attack",
+      "frame": 4,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        12.69796035890056,
+        88.79322459476386,
+        115.71478192447287,
+        182.31071181407515
+      ],
+      "alpha_bounds_px": [
+        12,
+        88,
+        117,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        12,
+        88,
+        116,
+        183
+      ]
+    },
+    {
+      "index": 143,
+      "direction": 7,
+      "animation": "attack",
+      "frame": 5,
+      "anchor_px": [
+        64,
+        142
+      ],
+      "geometry_bounds_px": [
+        13.201920033727,
+        90.85811119031695,
+        113.3839690318179,
+        181.89789221620185
+      ],
+      "alpha_bounds_px": [
+        12,
+        90,
+        114,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        13,
+        90,
+        114,
+        183
+      ]
+    }
+  ],
+  "test_only": false,
+  "all_frame_alpha_bounds_px": [
+    7,
+    80,
+    120,
+    187
+  ],
+  "alpha_body_width_range_px": [
+    86,
+    112
+  ],
+  "alpha_body_height_range_px": [
+    77,
+    102
+  ],
+  "atlas_sha256": "0cdaef527071191f24b317a98ef2e6d85627bb1f60bc2a032bd446b3f59f8175",
+  "qa": {
+    "all_144_rgba_frames": true,
+    "all_frames_unclipped": true,
+    "shared_ground_anchor": [
+      64,
+      142
+    ],
+    "baked_ground_or_shadow": false,
+    "tiles_match_native_frames": true,
+    "animation_damage_events": false,
+    "ground_anchor_measured_px": [
+      64.0,
+      141.99999046325684
+    ],
+    "six_foot_two_eye_model_verified": true,
+    "rgba_all_channel_pixel_equality": true
+  },
+  "display_scale_note": "0.59 is provisional; parent integration chooses a uniform scale from measured silhouette bounds and target 40–45 world units.",
+  "frame_width": 128,
+  "frame_height": 192,
+  "foot_anchor_px": [
+    64,
+    142
+  ],
+  "frame_count": 144
+}

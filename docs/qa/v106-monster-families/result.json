@@ -1,0 +1,156 @@
+{
+  "baseline": "e2fa6db67fb9c4c7f201c795df12bdeb9b699832",
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "new_checks": {
+    "source_and_raw_pixels": 2359,
+    "native_headless_runtime": 2307,
+    "unique_total": 4666
+  },
+  "unresolved_failures": 0,
+  "reused_v105_checks": 7914,
+  "reused_v105_evidence": "docs/qa/v105-actors/result.json",
+  "formal_editor_import_runs": 1,
+  "main_startup": "One isolated 30-frame real Main startup: exit 0, playable arena ready, no SCRIPT ERROR or ERROR",
+  "resources": {
+    "brute": {
+      "alpha_bounds": [
+        5.0,
+        62.0,
+        123.0,
+        185.0
+      ],
+      "display_scale": 0.729167,
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        0.0,
+        -70.0000305175781
+      ],
+      "new_pixels_checked": true,
+      "sha256": "678b3c921b54ec0aa25502f23ec73100b4f966e5a23ff81eb057c7d317f33b34",
+      "texture_instance_id": -9223371988637055550
+    },
+    "crawler": {
+      "alpha_bounds": [
+        3.0,
+        80.0,
+        125.0,
+        183.0
+      ],
+      "display_scale": 0.64,
+      "foot_anchor": [
+        64.0,
+        142.0
+      ],
+      "head_anchor": [
+        0.0,
+        -39.6800003051758
+      ],
+      "new_pixels_checked": false,
+      "sha256": "6041778de3be8806873d18c9a8ca21e930aaec32a81386fcb0be181be24c242c",
+      "texture_instance_id": -9223371997075995200
+    },
+    "rift_warden": {
+      "alpha_bounds": [
+        7.0,
+        29.0,
+        121.0,
+        186.0
+      ],
+      "display_scale": 0.72,
+      "foot_anchor": [
+        64.0,
+        158.0
+      ],
+      "head_anchor": [
+        0.0,
+        -92.8800048828125
+      ],
+      "new_pixels_checked": true,
+      "sha256": "339757907a0add4a03effaa8bf0aac838f726603fb0ca6cdf9c504fcda44bd1b",
+      "texture_instance_id": -9223371983184460330
+    },
+    "skitter": {
+      "alpha_bounds": [
+        7.0,
+        80.0,
+        120.0,
+        187.0
+      ],
+      "display_scale": 0.5,
+      "foot_anchor": [
+        64.0,
+        142.0
+      ],
+      "head_anchor": [
+        0.0,
+        -31.0
+      ],
+      "new_pixels_checked": true,
+      "sha256": "0cdaef527071191f24b317a98ef2e6d85627bb1f60bc2a032bd446b3f59f8175",
+      "texture_instance_id": -9223371994089650726
+    }
+  },
+  "source_sha256": {
+    "scripts/visuals/actor_sprite_catalog.gd": "a34ba5a7ac276a858231aa8dff924fff2ab09c6644d9799bb994bf62c0aadb1b",
+    "scripts/visuals/actor_visual.gd": "9430b44b682fe7e6c6b1319c25e95f2e3d47e0a0e46788c860c13700aac4fff5",
+    "tests/monster_family_atlas_v106_test.gd": "173fcbb23a2080157489be68fb35e72ad01ebae0157a75a47b64f299ee469305",
+    "tests/monster_family_source_v106_test.py": "03d7806cce9ba2c5c2eab442743de855d4f4f78367f16c594a8fe7879ac1c2f0",
+    "assets/actors/brute_atlas.json": "ed0626fb81bcbb16cae9f11957565002297cb43bcfdc0e8c1c9eec26cba9e67f",
+    "assets/actors/brute_atlas.png": "678b3c921b54ec0aa25502f23ec73100b4f966e5a23ff81eb057c7d317f33b34",
+    "assets/actors/brute_atlas.png.import": "6d66f05430f282a71174483b6cc71bb20a1c811605ef4db0bbac30379c2c969f",
+    "assets/actors/crawler_atlas.json": "b563f97ab76b2f28d37255b89ceee5724e26a8c159bc1d3b7812a29d4ab2cf91",
+    "assets/actors/crawler_atlas.png": "6041778de3be8806873d18c9a8ca21e930aaec32a81386fcb0be181be24c242c",
+    "assets/actors/crawler_atlas.png.import": "fffdadefa40702ff990f93fdffcb7f409c5462a15774fecdbe42bbfb4a7c52d0",
+    "assets/actors/hero_atlas.json": "16012509ce8b5a3978150848c733d31bea5fa8942116341529d86904d34c561a",
+    "assets/actors/hero_atlas.png": "4d7adbfb94471611b88d241a86f7097b8ba431409006fdbf420915b349fd4387",
+    "assets/actors/hero_atlas.png.import": "5059d6c981db4b8a83a4e1231ff65522de0ec1603bdc66eb8db255fea6da7a11",
+    "assets/actors/rift_warden_atlas.json": "2ef7be651a36f3034f881f6adecb98adfebeaf9d17a6b700dc067f082611e6b3",
+    "assets/actors/rift_warden_atlas.png": "339757907a0add4a03effaa8bf0aac838f726603fb0ca6cdf9c504fcda44bd1b",
+    "assets/actors/rift_warden_atlas.png.import": "0645623939be3dd45cad1837d3c4bad9fc432432b392cb49c25c1b3c3270f885",
+    "assets/actors/skitter_atlas.json": "02ea1442ed1cdf1be2ae22ec4d155cfe70a08661140ec19bbc0a42aa341607db",
+    "assets/actors/skitter_atlas.png": "0cdaef527071191f24b317a98ef2e6d85627bb1f60bc2a032bd446b3f59f8175",
+    "assets/actors/skitter_atlas.png.import": "1708ce7e806c257be1518af141740c1b62f5508006fd41e06173e7250aa4e037"
+  },
+  "initial_failure": {
+    "scope": "Python test-only manifest field-name assumption for rift_warden",
+    "attempt01_checks": 2359,
+    "attempt01_failures": 144,
+    "fix": "Accept frame or animation_frame from the source render schema; production data and code not changed",
+    "affected_only_retry_checks": 584,
+    "affected_only_retry_failures": 0,
+    "preserved_initial_source": "attempt01-sources/monster_family_source_v106_test.py.txt",
+    "preserved_initial_log": "source-pixels-attempt01.txt",
+    "preserved_initial_report": "source-pixels-attempt01.json"
+  },
+  "scope_limits": [
+    "Native screenshots and visual composition are owned by root; no screenshot was taken by this worker",
+    "No frame-rate benchmark, 600-second soak, Windows export, packaging, commit or push",
+    "Existing v105 7914 checks reused, not rerun",
+    "Runtime authoritative-byte/RNG assertions use real typed Godot fixture arrays; this is not a JSON equality assertion"
+  ],
+  "generated_old_sidecars_removed": 289,
+  "post_validation_delta": {
+    "checks": 5,
+    "failures": 0,
+    "assertions": {
+      "exact_authorized_hurt_line": true,
+      "only_authorized_line_changed_since_runtime": true,
+      "non_hurt_hero_white_and_enemy_family_tint_unchanged": true,
+      "hero_hurt_uses_original_v105_full_flash": true,
+      "enemy_hurt_retains_identical_family_lerp": true
+    },
+    "previous_actor_visual_sha256": "15f2436f40fe90ce5e1d7d716f9b6309373758c9afda8692100a93226fc7b18f",
+    "current_actor_visual_sha256": "9430b44b682fe7e6c6b1319c25e95f2e3d47e0a0e46788c860c13700aac4fff5",
+    "scope": "Only authorized hero hurt restoration; all earlier family/runtime results reused",
+    "dependency_parse": {
+      "command": "godot --headless --path . --check-only --script res://scripts/visuals/actor_visual.gd",
+      "exit_code": 0,
+      "script_errors": 0,
+      "main_started": false
+    },
+    "note": "Root restored the original full-strength hero hurt flash. The enemy family tint/75% hurt blend is identical. Only five static checks and dependency parse were performed; the 4666 checks, formal import and 30-frame Main startup were not rerun."
+  }
+}

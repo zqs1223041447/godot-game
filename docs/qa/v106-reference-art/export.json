@@ -1,0 +1,670 @@
+{
+	"status": "pass",
+	"mode": "export_and_verify",
+	"method": "Godot Image.load_from_file / get_region / blit_rect; CPU pixels only",
+	"runtime_catalog": "ActorSpriteCatalog.enemy_key / enemy_tint / frame_index / frame_rect",
+	"source_atlas_sha256": {
+		"res://assets/actors/brute_atlas.png": "678b3c921b54ec0aa25502f23ec73100b4f966e5a23ff81eb057c7d317f33b34",
+		"res://assets/actors/crawler_atlas.png": "6041778de3be8806873d18c9a8ca21e930aaec32a81386fcb0be181be24c242c",
+		"res://assets/actors/skitter_atlas.png": "0cdaef527071191f24b317a98ef2e6d85627bb1f60bc2a032bd446b3f59f8175",
+		"res://assets/actors/rift_warden_atlas.png": "339757907a0add4a03effaa8bf0aac838f726603fb0ca6cdf9c504fcda44bd1b"
+	},
+	"source_atlases_unchanged": true,
+	"template_count": 11,
+	"family_count": 4,
+	"checks": [
+		{
+			"id": "brood_host",
+			"family": "brute",
+			"png_sha256": "4ba8588147fa79a082f250cc8482d8abad75b746cb84fb6d8d7ea922bbc18554",
+			"format": "RGBA8",
+			"image_size": [
+				115,
+				112
+			],
+			"nonempty_pixels": 7119,
+			"core_pixels_equal_source": true,
+			"complete_image_equals_expected": true,
+			"transparent_border_8px": true,
+			"used_bounds_match": true
+		},
+		{
+			"id": "brute",
+			"family": "brute",
+			"png_sha256": "4ba8588147fa79a082f250cc8482d8abad75b746cb84fb6d8d7ea922bbc18554",
+			"format": "RGBA8",
+			"image_size": [
+				115,
+				112
+			],
+			"nonempty_pixels": 7119,
+			"core_pixels_equal_source": true,
+			"complete_image_equals_expected": true,
+			"transparent_border_8px": true,
+			"used_bounds_match": true
+		},
+		{
+			"id": "chaos_guard",
+			"family": "brute",
+			"png_sha256": "4ba8588147fa79a082f250cc8482d8abad75b746cb84fb6d8d7ea922bbc18554",
+			"format": "RGBA8",
+			"image_size": [
+				115,
+				112
+			],
+			"nonempty_pixels": 7119,
+			"core_pixels_equal_source": true,
+			"complete_image_equals_expected": true,
+			"transparent_border_8px": true,
+			"used_bounds_match": true
+		},
+		{
+			"id": "crawler",
+			"family": "crawler",
+			"png_sha256": "a4a441730bf2e8951ea0c24711eccdda7c52ae660693baffad124c6a706100a5",
+			"format": "RGBA8",
+			"image_size": [
+				86,
+				101
+			],
+			"nonempty_pixels": 4167,
+			"core_pixels_equal_source": true,
+			"complete_image_equals_expected": true,
+			"transparent_border_8px": true,
+			"used_bounds_match": true
+		},
+		{
+			"id": "ember_guard",
+			"family": "brute",
+			"png_sha256": "4ba8588147fa79a082f250cc8482d8abad75b746cb84fb6d8d7ea922bbc18554",
+			"format": "RGBA8",
+			"image_size": [
+				115,
+				112
+			],
+			"nonempty_pixels": 7119,
+			"core_pixels_equal_source": true,
+			"complete_image_equals_expected": true,
+			"transparent_border_8px": true,
+			"used_bounds_match": true
+		},
+		{
+			"id": "frost_guard",
+			"family": "brute",
+			"png_sha256": "4ba8588147fa79a082f250cc8482d8abad75b746cb84fb6d8d7ea922bbc18554",
+			"format": "RGBA8",
+			"image_size": [
+				115,
+				112
+			],
+			"nonempty_pixels": 7119,
+			"core_pixels_equal_source": true,
+			"complete_image_equals_expected": true,
+			"transparent_border_8px": true,
+			"used_bounds_match": true
+		},
+		{
+			"id": "mist_skitter",
+			"family": "skitter",
+			"png_sha256": "a59598eb0ad2b4348cb47257df12754e6cf6725398d902f02ddc7900d8da1316",
+			"format": "RGBA8",
+			"image_size": [
+				102,
+				107
+			],
+			"nonempty_pixels": 3137,
+			"core_pixels_equal_source": true,
+			"complete_image_equals_expected": true,
+			"transparent_border_8px": true,
+			"used_bounds_match": true
+		},
+		{
+			"id": "rift_warden",
+			"family": "rift_warden",
+			"png_sha256": "b781261369d78b3188d2adf48bd79789e5371644e3c19e598968a736115ca7b6",
+			"format": "RGBA8",
+			"image_size": [
+				110,
+				142
+			],
+			"nonempty_pixels": 7750,
+			"core_pixels_equal_source": true,
+			"complete_image_equals_expected": true,
+			"transparent_border_8px": true,
+			"used_bounds_match": true
+		},
+		{
+			"id": "skitter",
+			"family": "skitter",
+			"png_sha256": "a59598eb0ad2b4348cb47257df12754e6cf6725398d902f02ddc7900d8da1316",
+			"format": "RGBA8",
+			"image_size": [
+				102,
+				107
+			],
+			"nonempty_pixels": 3137,
+			"core_pixels_equal_source": true,
+			"complete_image_equals_expected": true,
+			"transparent_border_8px": true,
+			"used_bounds_match": true
+		},
+		{
+			"id": "splitter",
+			"family": "crawler",
+			"png_sha256": "a4a441730bf2e8951ea0c24711eccdda7c52ae660693baffad124c6a706100a5",
+			"format": "RGBA8",
+			"image_size": [
+				86,
+				101
+			],
+			"nonempty_pixels": 4167,
+			"core_pixels_equal_source": true,
+			"complete_image_equals_expected": true,
+			"transparent_border_8px": true,
+			"used_bounds_match": true
+		},
+		{
+			"id": "storm_skitter",
+			"family": "skitter",
+			"png_sha256": "a59598eb0ad2b4348cb47257df12754e6cf6725398d902f02ddc7900d8da1316",
+			"format": "RGBA8",
+			"image_size": [
+				102,
+				107
+			],
+			"nonempty_pixels": 3137,
+			"core_pixels_equal_source": true,
+			"complete_image_equals_expected": true,
+			"transparent_border_8px": true,
+			"used_bounds_match": true
+		}
+	],
+	"entries": [
+		{
+			"category": "monsters",
+			"id": "brood_host",
+			"name": "孵化重壳体",
+			"file": "monsters/brood_host.png",
+			"source_renderer": "Godot Image.load_from_file + get_region; lossless source atlas frame",
+			"source_catalog": "MonsterCatalog.TEMPLATES + ActorSpriteCatalog",
+			"entry_type": "template",
+			"family": "brute",
+			"source_atlas": "res://assets/actors/brute_atlas.png",
+			"source_atlas_sha256": "678b3c921b54ec0aa25502f23ec73100b4f966e5a23ff81eb057c7d317f33b34",
+			"source_frame": {
+				"direction_index": 2,
+				"direction": "south",
+				"animation": "idle",
+				"seconds": 0,
+				"frame_index": 36
+			},
+			"source_frame_rect": [
+				512,
+				384,
+				128,
+				192
+			],
+			"source_crop_rect_in_frame": [
+				15,
+				82,
+				99,
+				96
+			],
+			"image_size": [
+				115,
+				112
+			],
+			"transparent_border_px": 8,
+			"runtime_tint": [
+				0.920000016689301,
+				0.829999983310699,
+				1.0,
+				1.0
+			],
+			"tint_applied": false,
+			"capture": "Original family atlas frame, transparent outer crop only plus 8px transparent padding; unscaled and untinted. No rarity glyph or status overlays."
+		},
+		{
+			"category": "monsters",
+			"id": "brute",
+			"name": "重壳体",
+			"file": "monsters/brute.png",
+			"source_renderer": "Godot Image.load_from_file + get_region; lossless source atlas frame",
+			"source_catalog": "MonsterCatalog.TEMPLATES + ActorSpriteCatalog",
+			"entry_type": "template",
+			"family": "brute",
+			"source_atlas": "res://assets/actors/brute_atlas.png",
+			"source_atlas_sha256": "678b3c921b54ec0aa25502f23ec73100b4f966e5a23ff81eb057c7d317f33b34",
+			"source_frame": {
+				"direction_index": 2,
+				"direction": "south",
+				"animation": "idle",
+				"seconds": 0,
+				"frame_index": 36
+			},
+			"source_frame_rect": [
+				512,
+				384,
+				128,
+				192
+			],
+			"source_crop_rect_in_frame": [
+				15,
+				82,
+				99,
+				96
+			],
+			"image_size": [
+				115,
+				112
+			],
+			"transparent_border_px": 8,
+			"runtime_tint": [
+				1.0,
+				1.0,
+				1.0,
+				1.0
+			],
+			"tint_applied": false,
+			"capture": "Original family atlas frame, transparent outer crop only plus 8px transparent padding; unscaled and untinted. No rarity glyph or status overlays."
+		},
+		{
+			"category": "monsters",
+			"id": "chaos_guard",
+			"name": "蚀影守卫",
+			"file": "monsters/chaos_guard.png",
+			"source_renderer": "Godot Image.load_from_file + get_region; lossless source atlas frame",
+			"source_catalog": "MonsterCatalog.TEMPLATES + ActorSpriteCatalog",
+			"entry_type": "template",
+			"family": "brute",
+			"source_atlas": "res://assets/actors/brute_atlas.png",
+			"source_atlas_sha256": "678b3c921b54ec0aa25502f23ec73100b4f966e5a23ff81eb057c7d317f33b34",
+			"source_frame": {
+				"direction_index": 2,
+				"direction": "south",
+				"animation": "idle",
+				"seconds": 0,
+				"frame_index": 36
+			},
+			"source_frame_rect": [
+				512,
+				384,
+				128,
+				192
+			],
+			"source_crop_rect_in_frame": [
+				15,
+				82,
+				99,
+				96
+			],
+			"image_size": [
+				115,
+				112
+			],
+			"transparent_border_px": 8,
+			"runtime_tint": [
+				0.879999995231628,
+				0.759999990463257,
+				1.0,
+				1.0
+			],
+			"tint_applied": false,
+			"capture": "Original family atlas frame, transparent outer crop only plus 8px transparent padding; unscaled and untinted. No rarity glyph or status overlays."
+		},
+		{
+			"category": "monsters",
+			"id": "crawler",
+			"name": "巡游体",
+			"file": "monsters/crawler.png",
+			"source_renderer": "Godot Image.load_from_file + get_region; lossless source atlas frame",
+			"source_catalog": "MonsterCatalog.TEMPLATES + ActorSpriteCatalog",
+			"entry_type": "template",
+			"family": "crawler",
+			"source_atlas": "res://assets/actors/crawler_atlas.png",
+			"source_atlas_sha256": "6041778de3be8806873d18c9a8ca21e930aaec32a81386fcb0be181be24c242c",
+			"source_frame": {
+				"direction_index": 2,
+				"direction": "south",
+				"animation": "idle",
+				"seconds": 0,
+				"frame_index": 36
+			},
+			"source_frame_rect": [
+				512,
+				384,
+				128,
+				192
+			],
+			"source_crop_rect_in_frame": [
+				29,
+				82,
+				70,
+				85
+			],
+			"image_size": [
+				86,
+				101
+			],
+			"transparent_border_px": 8,
+			"runtime_tint": [
+				1.0,
+				1.0,
+				1.0,
+				1.0
+			],
+			"tint_applied": false,
+			"capture": "Original family atlas frame, transparent outer crop only plus 8px transparent padding; unscaled and untinted. No rarity glyph or status overlays."
+		},
+		{
+			"category": "monsters",
+			"id": "ember_guard",
+			"name": "灰烬守卫",
+			"file": "monsters/ember_guard.png",
+			"source_renderer": "Godot Image.load_from_file + get_region; lossless source atlas frame",
+			"source_catalog": "MonsterCatalog.TEMPLATES + ActorSpriteCatalog",
+			"entry_type": "template",
+			"family": "brute",
+			"source_atlas": "res://assets/actors/brute_atlas.png",
+			"source_atlas_sha256": "678b3c921b54ec0aa25502f23ec73100b4f966e5a23ff81eb057c7d317f33b34",
+			"source_frame": {
+				"direction_index": 2,
+				"direction": "south",
+				"animation": "idle",
+				"seconds": 0,
+				"frame_index": 36
+			},
+			"source_frame_rect": [
+				512,
+				384,
+				128,
+				192
+			],
+			"source_crop_rect_in_frame": [
+				15,
+				82,
+				99,
+				96
+			],
+			"image_size": [
+				115,
+				112
+			],
+			"transparent_border_px": 8,
+			"runtime_tint": [
+				1.0,
+				0.800000011920929,
+				0.649999976158142,
+				1.0
+			],
+			"tint_applied": false,
+			"capture": "Original family atlas frame, transparent outer crop only plus 8px transparent padding; unscaled and untinted. No rarity glyph or status overlays."
+		},
+		{
+			"category": "monsters",
+			"id": "frost_guard",
+			"name": "霜纹守卫",
+			"file": "monsters/frost_guard.png",
+			"source_renderer": "Godot Image.load_from_file + get_region; lossless source atlas frame",
+			"source_catalog": "MonsterCatalog.TEMPLATES + ActorSpriteCatalog",
+			"entry_type": "template",
+			"family": "brute",
+			"source_atlas": "res://assets/actors/brute_atlas.png",
+			"source_atlas_sha256": "678b3c921b54ec0aa25502f23ec73100b4f966e5a23ff81eb057c7d317f33b34",
+			"source_frame": {
+				"direction_index": 2,
+				"direction": "south",
+				"animation": "idle",
+				"seconds": 0,
+				"frame_index": 36
+			},
+			"source_frame_rect": [
+				512,
+				384,
+				128,
+				192
+			],
+			"source_crop_rect_in_frame": [
+				15,
+				82,
+				99,
+				96
+			],
+			"image_size": [
+				115,
+				112
+			],
+			"transparent_border_px": 8,
+			"runtime_tint": [
+				0.800000011920929,
+				0.939999997615814,
+				1.0,
+				1.0
+			],
+			"tint_applied": false,
+			"capture": "Original family atlas frame, transparent outer crop only plus 8px transparent padding; unscaled and untinted. No rarity glyph or status overlays."
+		},
+		{
+			"category": "monsters",
+			"id": "mist_skitter",
+			"name": "雾羽掠行体",
+			"file": "monsters/mist_skitter.png",
+			"source_renderer": "Godot Image.load_from_file + get_region; lossless source atlas frame",
+			"source_catalog": "MonsterCatalog.TEMPLATES + ActorSpriteCatalog",
+			"entry_type": "template",
+			"family": "skitter",
+			"source_atlas": "res://assets/actors/skitter_atlas.png",
+			"source_atlas_sha256": "0cdaef527071191f24b317a98ef2e6d85627bb1f60bc2a032bd446b3f59f8175",
+			"source_frame": {
+				"direction_index": 2,
+				"direction": "south",
+				"animation": "idle",
+				"seconds": 0,
+				"frame_index": 36
+			},
+			"source_frame_rect": [
+				512,
+				384,
+				128,
+				192
+			],
+			"source_crop_rect_in_frame": [
+				21,
+				81,
+				86,
+				91
+			],
+			"image_size": [
+				102,
+				107
+			],
+			"transparent_border_px": 8,
+			"runtime_tint": [
+				0.779999971389771,
+				1.0,
+				0.920000016689301,
+				1.0
+			],
+			"tint_applied": false,
+			"capture": "Original family atlas frame, transparent outer crop only plus 8px transparent padding; unscaled and untinted. No rarity glyph or status overlays."
+		},
+		{
+			"category": "monsters",
+			"id": "rift_warden",
+			"name": "裂隙守卫",
+			"file": "monsters/rift_warden.png",
+			"source_renderer": "Godot Image.load_from_file + get_region; lossless source atlas frame",
+			"source_catalog": "MonsterCatalog.TEMPLATES + ActorSpriteCatalog",
+			"entry_type": "template",
+			"family": "rift_warden",
+			"source_atlas": "res://assets/actors/rift_warden_atlas.png",
+			"source_atlas_sha256": "339757907a0add4a03effaa8bf0aac838f726603fb0ca6cdf9c504fcda44bd1b",
+			"source_frame": {
+				"direction_index": 2,
+				"direction": "south",
+				"animation": "idle",
+				"seconds": 0,
+				"frame_index": 36
+			},
+			"source_frame_rect": [
+				512,
+				384,
+				128,
+				192
+			],
+			"source_crop_rect_in_frame": [
+				17,
+				51,
+				94,
+				126
+			],
+			"image_size": [
+				110,
+				142
+			],
+			"transparent_border_px": 8,
+			"runtime_tint": [
+				1.0,
+				1.0,
+				1.0,
+				1.0
+			],
+			"tint_applied": false,
+			"capture": "Original family atlas frame, transparent outer crop only plus 8px transparent padding; unscaled and untinted. No rarity glyph or status overlays."
+		},
+		{
+			"category": "monsters",
+			"id": "skitter",
+			"name": "掠行体",
+			"file": "monsters/skitter.png",
+			"source_renderer": "Godot Image.load_from_file + get_region; lossless source atlas frame",
+			"source_catalog": "MonsterCatalog.TEMPLATES + ActorSpriteCatalog",
+			"entry_type": "template",
+			"family": "skitter",
+			"source_atlas": "res://assets/actors/skitter_atlas.png",
+			"source_atlas_sha256": "0cdaef527071191f24b317a98ef2e6d85627bb1f60bc2a032bd446b3f59f8175",
+			"source_frame": {
+				"direction_index": 2,
+				"direction": "south",
+				"animation": "idle",
+				"seconds": 0,
+				"frame_index": 36
+			},
+			"source_frame_rect": [
+				512,
+				384,
+				128,
+				192
+			],
+			"source_crop_rect_in_frame": [
+				21,
+				81,
+				86,
+				91
+			],
+			"image_size": [
+				102,
+				107
+			],
+			"transparent_border_px": 8,
+			"runtime_tint": [
+				1.0,
+				1.0,
+				1.0,
+				1.0
+			],
+			"tint_applied": false,
+			"capture": "Original family atlas frame, transparent outer crop only plus 8px transparent padding; unscaled and untinted. No rarity glyph or status overlays."
+		},
+		{
+			"category": "monsters",
+			"id": "splitter",
+			"name": "裂殖巡游体",
+			"file": "monsters/splitter.png",
+			"source_renderer": "Godot Image.load_from_file + get_region; lossless source atlas frame",
+			"source_catalog": "MonsterCatalog.TEMPLATES + ActorSpriteCatalog",
+			"entry_type": "template",
+			"family": "crawler",
+			"source_atlas": "res://assets/actors/crawler_atlas.png",
+			"source_atlas_sha256": "6041778de3be8806873d18c9a8ca21e930aaec32a81386fcb0be181be24c242c",
+			"source_frame": {
+				"direction_index": 2,
+				"direction": "south",
+				"animation": "idle",
+				"seconds": 0,
+				"frame_index": 36
+			},
+			"source_frame_rect": [
+				512,
+				384,
+				128,
+				192
+			],
+			"source_crop_rect_in_frame": [
+				29,
+				82,
+				70,
+				85
+			],
+			"image_size": [
+				86,
+				101
+			],
+			"transparent_border_px": 8,
+			"runtime_tint": [
+				0.870000004768372,
+				1.0,
+				0.800000011920929,
+				1.0
+			],
+			"tint_applied": false,
+			"capture": "Original family atlas frame, transparent outer crop only plus 8px transparent padding; unscaled and untinted. No rarity glyph or status overlays."
+		},
+		{
+			"category": "monsters",
+			"id": "storm_skitter",
+			"name": "雷纹掠行体",
+			"file": "monsters/storm_skitter.png",
+			"source_renderer": "Godot Image.load_from_file + get_region; lossless source atlas frame",
+			"source_catalog": "MonsterCatalog.TEMPLATES + ActorSpriteCatalog",
+			"entry_type": "template",
+			"family": "skitter",
+			"source_atlas": "res://assets/actors/skitter_atlas.png",
+			"source_atlas_sha256": "0cdaef527071191f24b317a98ef2e6d85627bb1f60bc2a032bd446b3f59f8175",
+			"source_frame": {
+				"direction_index": 2,
+				"direction": "south",
+				"animation": "idle",
+				"seconds": 0,
+				"frame_index": 36
+			},
+			"source_frame_rect": [
+				512,
+				384,
+				128,
+				192
+			],
+			"source_crop_rect_in_frame": [
+				21,
+				81,
+				86,
+				91
+			],
+			"image_size": [
+				102,
+				107
+			],
+			"transparent_border_px": 8,
+			"runtime_tint": [
+				1.0,
+				0.939999997615814,
+				0.720000028610229,
+				1.0
+			],
+			"tint_applied": false,
+			"capture": "Original family atlas frame, transparent outer crop only plus 8px transparent padding; unscaled and untinted. No rarity glyph or status overlays."
+		}
+	],
+	"failures": [],
+	"scope": "Lossless untinted source frames only; no editor import, runtime scene, combat, GPU capture, resize, recolor, or generated design."
+}

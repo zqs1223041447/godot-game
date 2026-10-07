@@ -1,0 +1,5589 @@
+{
+  "asset_id": "rift_warden",
+  "display_name": "Rift Warden / \u65ad\u51a0\u9057\u8ff9\u5b88\u95e8\u8005",
+  "source_files": [
+    "generate_rift_warden.py",
+    "rift_warden.blend"
+  ],
+  "frame_size_px": [
+    128,
+    192
+  ],
+  "atlas_size_px": [
+    2048,
+    1728
+  ],
+  "atlas_columns": 16,
+  "atlas_rows": 9,
+  "fps": 12,
+  "direction_order": [
+    "E",
+    "SE",
+    "S",
+    "SW",
+    "W",
+    "NW",
+    "N",
+    "NE"
+  ],
+  "direction_yaw_degrees": [
+    90,
+    45,
+    0,
+    -45,
+    -90,
+    -135,
+    -180,
+    -225
+  ],
+  "animation_offsets": {
+    "idle": 0,
+    "walk": 4,
+    "attack": 12
+  },
+  "animation_counts": {
+    "idle": 4,
+    "walk": 8,
+    "attack": 6
+  },
+  "frame_index_formula": "direction * 18 + animation_offset + animation_frame",
+  "foot_anchor_px": [
+    64,
+    158
+  ],
+  "foot_anchor_world": [
+    0,
+    0,
+    0
+  ],
+  "recommended_world_scale": 0.72,
+  "camera": {
+    "elevation_degrees": 55,
+    "projection": "orthographic",
+    "ortho_scale": 5.2,
+    "sensor_fit": "VERTICAL",
+    "fixed_camera": true
+  },
+  "render": {
+    "engine": "Cycles CPU",
+    "samples": 40,
+    "threads": 3,
+    "denoising": false,
+    "key_position": [
+      -3,
+      -4,
+      8
+    ],
+    "transparent": true,
+    "ground_plane": false,
+    "baked_floor_shadow": false
+  },
+  "art": {
+    "silhouette": "Tall ancient stone mask, broken architectural crown, stepped copper-stone shoulders, long split olive mantle and stoles, massive stone hands and feet",
+    "palette": "warm grey limestone, old copper, deep olive fabric, small amber core",
+    "new_attack_logic": false,
+    "external_assets": false
+  },
+  "frames": [
+    {
+      "index": 0,
+      "direction": 0,
+      "direction_name": "E",
+      "animation": "idle",
+      "animation_frame": 0,
+      "atlas_rect": [
+        0,
+        0,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_000.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        56.062,
+        59.098
+      ],
+      "alpha_bounds_px": [
+        33,
+        49,
+        89,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        33,
+        50,
+        88,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        49
+      ]
+    },
+    {
+      "index": 1,
+      "direction": 0,
+      "direction_name": "E",
+      "animation": "idle",
+      "animation_frame": 1,
+      "atlas_rect": [
+        128,
+        0,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_001.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        57.089,
+        58.644
+      ],
+      "alpha_bounds_px": [
+        33,
+        49,
+        89,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        33,
+        49,
+        88,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        49
+      ]
+    },
+    {
+      "index": 2,
+      "direction": 0,
+      "direction_name": "E",
+      "animation": "idle",
+      "animation_frame": 2,
+      "atlas_rect": [
+        256,
+        0,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_002.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        56.062,
+        59.098
+      ],
+      "alpha_bounds_px": [
+        33,
+        49,
+        89,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        33,
+        50,
+        88,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        49
+      ]
+    },
+    {
+      "index": 3,
+      "direction": 0,
+      "direction_name": "E",
+      "animation": "idle",
+      "animation_frame": 3,
+      "atlas_rect": [
+        384,
+        0,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_003.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        55.04,
+        59.566
+      ],
+      "alpha_bounds_px": [
+        33,
+        50,
+        89,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        33,
+        50,
+        88,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        50
+      ]
+    },
+    {
+      "index": 4,
+      "direction": 0,
+      "direction_name": "E",
+      "animation": "walk",
+      "animation_frame": 0,
+      "atlas_rect": [
+        512,
+        0,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_004.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        57.089,
+        58.983
+      ],
+      "alpha_bounds_px": [
+        33,
+        49,
+        89,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        33,
+        50,
+        88,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        49
+      ]
+    },
+    {
+      "index": 5,
+      "direction": 0,
+      "direction_name": "E",
+      "animation": "walk",
+      "animation_frame": 1,
+      "atlas_rect": [
+        640,
+        0,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_005.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        57.09,
+        58.498
+      ],
+      "alpha_bounds_px": [
+        33,
+        49,
+        96,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        33,
+        49,
+        95,
+        176
+      ],
+      "visual_top_anchor_px": [
+        64,
+        49
+      ]
+    },
+    {
+      "index": 6,
+      "direction": 0,
+      "direction_name": "E",
+      "animation": "walk",
+      "animation_frame": 2,
+      "atlas_rect": [
+        768,
+        0,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_006.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        57.091,
+        57.95
+      ],
+      "alpha_bounds_px": [
+        33,
+        49,
+        99,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        33,
+        49,
+        98,
+        176
+      ],
+      "visual_top_anchor_px": [
+        64,
+        49
+      ]
+    },
+    {
+      "index": 7,
+      "direction": 0,
+      "direction_name": "E",
+      "animation": "walk",
+      "animation_frame": 3,
+      "atlas_rect": [
+        896,
+        0,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_007.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        57.09,
+        58.498
+      ],
+      "alpha_bounds_px": [
+        33,
+        49,
+        96,
+        175
+      ],
+      "alpha_bounds_8_px": [
+        33,
+        49,
+        96,
+        175
+      ],
+      "visual_top_anchor_px": [
+        64,
+        49
+      ]
+    },
+    {
+      "index": 8,
+      "direction": 0,
+      "direction_name": "E",
+      "animation": "walk",
+      "animation_frame": 4,
+      "atlas_rect": [
+        1024,
+        0,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_008.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        57.089,
+        58.983
+      ],
+      "alpha_bounds_px": [
+        33,
+        49,
+        89,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        33,
+        50,
+        89,
+        176
+      ],
+      "visual_top_anchor_px": [
+        64,
+        49
+      ]
+    },
+    {
+      "index": 9,
+      "direction": 0,
+      "direction_name": "E",
+      "animation": "walk",
+      "animation_frame": 5,
+      "atlas_rect": [
+        1152,
+        0,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_009.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        57.09,
+        58.282
+      ],
+      "alpha_bounds_px": [
+        33,
+        49,
+        95,
+        175
+      ],
+      "alpha_bounds_8_px": [
+        33,
+        49,
+        95,
+        175
+      ],
+      "visual_top_anchor_px": [
+        64,
+        49
+      ]
+    },
+    {
+      "index": 10,
+      "direction": 0,
+      "direction_name": "E",
+      "animation": "walk",
+      "animation_frame": 6,
+      "atlas_rect": [
+        1280,
+        0,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_010.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        57.091,
+        57.645
+      ],
+      "alpha_bounds_px": [
+        33,
+        48,
+        98,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        33,
+        49,
+        98,
+        176
+      ],
+      "visual_top_anchor_px": [
+        64,
+        48
+      ]
+    },
+    {
+      "index": 11,
+      "direction": 0,
+      "direction_name": "E",
+      "animation": "walk",
+      "animation_frame": 7,
+      "atlas_rect": [
+        1408,
+        0,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_011.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        57.09,
+        58.282
+      ],
+      "alpha_bounds_px": [
+        33,
+        49,
+        95,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        33,
+        49,
+        95,
+        176
+      ],
+      "visual_top_anchor_px": [
+        64,
+        49
+      ]
+    },
+    {
+      "index": 12,
+      "direction": 0,
+      "direction_name": "E",
+      "animation": "attack",
+      "animation_frame": 0,
+      "atlas_rect": [
+        1536,
+        0,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_012.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        56.062,
+        59.098
+      ],
+      "alpha_bounds_px": [
+        33,
+        49,
+        89,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        33,
+        50,
+        88,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        49
+      ]
+    },
+    {
+      "index": 13,
+      "direction": 0,
+      "direction_name": "E",
+      "animation": "attack",
+      "animation_frame": 1,
+      "atlas_rect": [
+        1664,
+        0,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_013.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        53.592,
+        59.179
+      ],
+      "alpha_bounds_px": [
+        34,
+        50,
+        97,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        34,
+        50,
+        96,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        50
+      ]
+    },
+    {
+      "index": 14,
+      "direction": 0,
+      "direction_name": "E",
+      "animation": "attack",
+      "animation_frame": 2,
+      "atlas_rect": [
+        1792,
+        0,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_014.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        51.126,
+        58.656
+      ],
+      "alpha_bounds_px": [
+        35,
+        36,
+        103,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        35,
+        36,
+        103,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        36
+      ]
+    },
+    {
+      "index": 15,
+      "direction": 0,
+      "direction_name": "E",
+      "animation": "attack",
+      "animation_frame": 3,
+      "atlas_rect": [
+        1920,
+        0,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_015.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        82.559,
+        64.906
+      ],
+      "alpha_bounds_px": [
+        23,
+        55,
+        105,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        23,
+        56,
+        105,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        55
+      ]
+    },
+    {
+      "index": 16,
+      "direction": 0,
+      "direction_name": "E",
+      "animation": "attack",
+      "animation_frame": 4,
+      "atlas_rect": [
+        0,
+        192,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_016.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        70.864,
+        61.187
+      ],
+      "alpha_bounds_px": [
+        27,
+        52,
+        96,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        27,
+        52,
+        96,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        52
+      ]
+    },
+    {
+      "index": 17,
+      "direction": 0,
+      "direction_name": "E",
+      "animation": "attack",
+      "animation_frame": 5,
+      "atlas_rect": [
+        128,
+        192,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_017.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        56.062,
+        59.098
+      ],
+      "alpha_bounds_px": [
+        33,
+        49,
+        89,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        33,
+        50,
+        88,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        49
+      ]
+    },
+    {
+      "index": 18,
+      "direction": 1,
+      "direction_name": "SE",
+      "animation": "idle",
+      "animation_frame": 0,
+      "atlas_rect": [
+        256,
+        192,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_018.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        58.387,
+        54.5
+      ],
+      "alpha_bounds_px": [
+        27,
+        47,
+        102,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        27,
+        47,
+        102,
+        183
+      ],
+      "visual_top_anchor_px": [
+        64,
+        47
+      ]
+    },
+    {
+      "index": 19,
+      "direction": 1,
+      "direction_name": "SE",
+      "animation": "idle",
+      "animation_frame": 1,
+      "atlas_rect": [
+        384,
+        192,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_019.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        59.113,
+        54.641
+      ],
+      "alpha_bounds_px": [
+        27,
+        47,
+        102,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        27,
+        48,
+        102,
+        183
+      ],
+      "visual_top_anchor_px": [
+        64,
+        47
+      ]
+    },
+    {
+      "index": 20,
+      "direction": 1,
+      "direction_name": "SE",
+      "animation": "idle",
+      "animation_frame": 2,
+      "atlas_rect": [
+        512,
+        192,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_020.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        58.387,
+        54.5
+      ],
+      "alpha_bounds_px": [
+        27,
+        47,
+        102,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        27,
+        47,
+        102,
+        183
+      ],
+      "visual_top_anchor_px": [
+        64,
+        47
+      ]
+    },
+    {
+      "index": 21,
+      "direction": 1,
+      "direction_name": "SE",
+      "animation": "idle",
+      "animation_frame": 3,
+      "atlas_rect": [
+        640,
+        192,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_021.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        57.664,
+        54.376
+      ],
+      "alpha_bounds_px": [
+        27,
+        47,
+        102,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        27,
+        48,
+        102,
+        183
+      ],
+      "visual_top_anchor_px": [
+        64,
+        47
+      ]
+    },
+    {
+      "index": 22,
+      "direction": 1,
+      "direction_name": "SE",
+      "animation": "walk",
+      "animation_frame": 0,
+      "atlas_rect": [
+        768,
+        192,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_022.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        59.113,
+        54.98
+      ],
+      "alpha_bounds_px": [
+        27,
+        48,
+        102,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        27,
+        48,
+        102,
+        183
+      ],
+      "visual_top_anchor_px": [
+        64,
+        48
+      ]
+    },
+    {
+      "index": 23,
+      "direction": 1,
+      "direction_name": "SE",
+      "animation": "walk",
+      "animation_frame": 1,
+      "atlas_rect": [
+        896,
+        192,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_023.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        59.021,
+        54.464
+      ],
+      "alpha_bounds_px": [
+        26,
+        47,
+        105,
+        185
+      ],
+      "alpha_bounds_8_px": [
+        26,
+        47,
+        104,
+        185
+      ],
+      "visual_top_anchor_px": [
+        64,
+        47
+      ]
+    },
+    {
+      "index": 24,
+      "direction": 1,
+      "direction_name": "SE",
+      "animation": "walk",
+      "animation_frame": 2,
+      "atlas_rect": [
+        1024,
+        192,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_024.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        58.983,
+        53.904
+      ],
+      "alpha_bounds_px": [
+        25,
+        46,
+        106,
+        186
+      ],
+      "alpha_bounds_8_px": [
+        25,
+        47,
+        106,
+        185
+      ],
+      "visual_top_anchor_px": [
+        64,
+        46
+      ]
+    },
+    {
+      "index": 25,
+      "direction": 1,
+      "direction_name": "SE",
+      "animation": "walk",
+      "animation_frame": 3,
+      "atlas_rect": [
+        1152,
+        192,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_025.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        59.021,
+        54.464
+      ],
+      "alpha_bounds_px": [
+        26,
+        47,
+        105,
+        184
+      ],
+      "alpha_bounds_8_px": [
+        26,
+        47,
+        104,
+        184
+      ],
+      "visual_top_anchor_px": [
+        64,
+        47
+      ]
+    },
+    {
+      "index": 26,
+      "direction": 1,
+      "direction_name": "SE",
+      "animation": "walk",
+      "animation_frame": 4,
+      "atlas_rect": [
+        1280,
+        192,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_026.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        59.113,
+        54.98
+      ],
+      "alpha_bounds_px": [
+        27,
+        48,
+        102,
+        182
+      ],
+      "alpha_bounds_8_px": [
+        27,
+        48,
+        102,
+        182
+      ],
+      "visual_top_anchor_px": [
+        64,
+        48
+      ]
+    },
+    {
+      "index": 27,
+      "direction": 1,
+      "direction_name": "SE",
+      "animation": "walk",
+      "animation_frame": 5,
+      "atlas_rect": [
+        1408,
+        192,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_027.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        59.207,
+        54.311
+      ],
+      "alpha_bounds_px": [
+        26,
+        47,
+        102,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        26,
+        47,
+        102,
+        178
+      ],
+      "visual_top_anchor_px": [
+        64,
+        47
+      ]
+    },
+    {
+      "index": 28,
+      "direction": 1,
+      "direction_name": "SE",
+      "animation": "walk",
+      "animation_frame": 6,
+      "atlas_rect": [
+        1536,
+        192,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_028.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        59.247,
+        53.688
+      ],
+      "alpha_bounds_px": [
+        26,
+        47,
+        103,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        26,
+        47,
+        103,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        47
+      ]
+    },
+    {
+      "index": 29,
+      "direction": 1,
+      "direction_name": "SE",
+      "animation": "walk",
+      "animation_frame": 7,
+      "atlas_rect": [
+        1664,
+        192,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_029.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        59.207,
+        54.311
+      ],
+      "alpha_bounds_px": [
+        26,
+        47,
+        102,
+        179
+      ],
+      "alpha_bounds_8_px": [
+        26,
+        47,
+        102,
+        178
+      ],
+      "visual_top_anchor_px": [
+        64,
+        47
+      ]
+    },
+    {
+      "index": 30,
+      "direction": 1,
+      "direction_name": "SE",
+      "animation": "attack",
+      "animation_frame": 0,
+      "atlas_rect": [
+        1792,
+        192,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_030.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        58.387,
+        54.5
+      ],
+      "alpha_bounds_px": [
+        27,
+        47,
+        106,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        27,
+        47,
+        105,
+        183
+      ],
+      "visual_top_anchor_px": [
+        64,
+        47
+      ]
+    },
+    {
+      "index": 31,
+      "direction": 1,
+      "direction_name": "SE",
+      "animation": "attack",
+      "animation_frame": 1,
+      "atlas_rect": [
+        1920,
+        192,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_031.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        56.641,
+        53.15
+      ],
+      "alpha_bounds_px": [
+        26,
+        46,
+        115,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        26,
+        46,
+        115,
+        183
+      ],
+      "visual_top_anchor_px": [
+        64,
+        46
+      ]
+    },
+    {
+      "index": 32,
+      "direction": 1,
+      "direction_name": "SE",
+      "animation": "attack",
+      "animation_frame": 2,
+      "atlas_rect": [
+        0,
+        384,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_032.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        54.897,
+        51.199
+      ],
+      "alpha_bounds_px": [
+        25,
+        44,
+        120,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        25,
+        44,
+        120,
+        183
+      ],
+      "visual_top_anchor_px": [
+        64,
+        44
+      ]
+    },
+    {
+      "index": 33,
+      "direction": 1,
+      "direction_name": "SE",
+      "animation": "attack",
+      "animation_frame": 3,
+      "atlas_rect": [
+        128,
+        384,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_033.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        77.123,
+        75.656
+      ],
+      "alpha_bounds_px": [
+        23,
+        68,
+        114,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        23,
+        68,
+        113,
+        183
+      ],
+      "visual_top_anchor_px": [
+        64,
+        68
+      ]
+    },
+    {
+      "index": 34,
+      "direction": 1,
+      "direction_name": "SE",
+      "animation": "attack",
+      "animation_frame": 4,
+      "atlas_rect": [
+        256,
+        384,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_034.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        68.854,
+        65.162
+      ],
+      "alpha_bounds_px": [
+        25,
+        58,
+        107,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        25,
+        58,
+        107,
+        183
+      ],
+      "visual_top_anchor_px": [
+        64,
+        58
+      ]
+    },
+    {
+      "index": 35,
+      "direction": 1,
+      "direction_name": "SE",
+      "animation": "attack",
+      "animation_frame": 5,
+      "atlas_rect": [
+        384,
+        384,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_035.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        58.387,
+        54.5
+      ],
+      "alpha_bounds_px": [
+        27,
+        47,
+        102,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        27,
+        47,
+        102,
+        183
+      ],
+      "visual_top_anchor_px": [
+        64,
+        47
+      ]
+    },
+    {
+      "index": 36,
+      "direction": 2,
+      "direction_name": "S",
+      "animation": "idle",
+      "animation_frame": 0,
+      "atlas_rect": [
+        512,
+        384,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_036.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        64.0,
+        52.595
+      ],
+      "alpha_bounds_px": [
+        17,
+        51,
+        111,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        51,
+        111,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        51
+      ]
+    },
+    {
+      "index": 37,
+      "direction": 2,
+      "direction_name": "S",
+      "animation": "idle",
+      "animation_frame": 1,
+      "atlas_rect": [
+        640,
+        384,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_037.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        64.0,
+        52.983
+      ],
+      "alpha_bounds_px": [
+        17,
+        51,
+        111,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        51,
+        111,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        51
+      ]
+    },
+    {
+      "index": 38,
+      "direction": 2,
+      "direction_name": "S",
+      "animation": "idle",
+      "animation_frame": 2,
+      "atlas_rect": [
+        768,
+        384,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_038.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        64.0,
+        52.595
+      ],
+      "alpha_bounds_px": [
+        17,
+        51,
+        111,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        51,
+        111,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        51
+      ]
+    },
+    {
+      "index": 39,
+      "direction": 2,
+      "direction_name": "S",
+      "animation": "idle",
+      "animation_frame": 3,
+      "atlas_rect": [
+        896,
+        384,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_039.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        64.0,
+        52.226
+      ],
+      "alpha_bounds_px": [
+        17,
+        50,
+        111,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        51,
+        111,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        50
+      ]
+    },
+    {
+      "index": 40,
+      "direction": 2,
+      "direction_name": "S",
+      "animation": "walk",
+      "animation_frame": 0,
+      "atlas_rect": [
+        1024,
+        384,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_040.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        64.0,
+        53.322
+      ],
+      "alpha_bounds_px": [
+        17,
+        52,
+        111,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        52,
+        111,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        52
+      ]
+    },
+    {
+      "index": 41,
+      "direction": 2,
+      "direction_name": "S",
+      "animation": "walk",
+      "animation_frame": 1,
+      "atlas_rect": [
+        1152,
+        384,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_041.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        63.868,
+        52.73
+      ],
+      "alpha_bounds_px": [
+        17,
+        51,
+        111,
+        180
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        51,
+        111,
+        180
+      ],
+      "visual_top_anchor_px": [
+        64,
+        51
+      ]
+    },
+    {
+      "index": 42,
+      "direction": 2,
+      "direction_name": "S",
+      "animation": "walk",
+      "animation_frame": 2,
+      "atlas_rect": [
+        1280,
+        384,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_042.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        63.813,
+        52.138
+      ],
+      "alpha_bounds_px": [
+        17,
+        50,
+        111,
+        182
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        51,
+        111,
+        182
+      ],
+      "visual_top_anchor_px": [
+        64,
+        50
+      ]
+    },
+    {
+      "index": 43,
+      "direction": 2,
+      "direction_name": "S",
+      "animation": "walk",
+      "animation_frame": 3,
+      "atlas_rect": [
+        1408,
+        384,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_043.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        63.868,
+        52.73
+      ],
+      "alpha_bounds_px": [
+        17,
+        51,
+        111,
+        180
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        51,
+        111,
+        180
+      ],
+      "visual_top_anchor_px": [
+        64,
+        51
+      ]
+    },
+    {
+      "index": 44,
+      "direction": 2,
+      "direction_name": "S",
+      "animation": "walk",
+      "animation_frame": 4,
+      "atlas_rect": [
+        1536,
+        384,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_044.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        64.0,
+        53.322
+      ],
+      "alpha_bounds_px": [
+        17,
+        52,
+        111,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        52,
+        111,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        52
+      ]
+    },
+    {
+      "index": 45,
+      "direction": 2,
+      "direction_name": "S",
+      "animation": "walk",
+      "animation_frame": 5,
+      "atlas_rect": [
+        1664,
+        384,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_045.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        64.132,
+        52.73
+      ],
+      "alpha_bounds_px": [
+        17,
+        51,
+        111,
+        180
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        51,
+        111,
+        180
+      ],
+      "visual_top_anchor_px": [
+        64,
+        51
+      ]
+    },
+    {
+      "index": 46,
+      "direction": 2,
+      "direction_name": "S",
+      "animation": "walk",
+      "animation_frame": 6,
+      "atlas_rect": [
+        1792,
+        384,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_046.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        64.187,
+        52.138
+      ],
+      "alpha_bounds_px": [
+        17,
+        50,
+        111,
+        182
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        50,
+        111,
+        182
+      ],
+      "visual_top_anchor_px": [
+        64,
+        50
+      ]
+    },
+    {
+      "index": 47,
+      "direction": 2,
+      "direction_name": "S",
+      "animation": "walk",
+      "animation_frame": 7,
+      "atlas_rect": [
+        1920,
+        384,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_047.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        64.132,
+        52.73
+      ],
+      "alpha_bounds_px": [
+        17,
+        51,
+        111,
+        180
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        51,
+        111,
+        179
+      ],
+      "visual_top_anchor_px": [
+        64,
+        51
+      ]
+    },
+    {
+      "index": 48,
+      "direction": 2,
+      "direction_name": "S",
+      "animation": "attack",
+      "animation_frame": 0,
+      "atlas_rect": [
+        0,
+        576,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_048.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        64.0,
+        52.595
+      ],
+      "alpha_bounds_px": [
+        17,
+        51,
+        111,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        51,
+        111,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        51
+      ]
+    },
+    {
+      "index": 49,
+      "direction": 2,
+      "direction_name": "S",
+      "animation": "attack",
+      "animation_frame": 1,
+      "atlas_rect": [
+        128,
+        576,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_049.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        64.0,
+        50.653
+      ],
+      "alpha_bounds_px": [
+        17,
+        48,
+        111,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        49,
+        111,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        48
+      ]
+    },
+    {
+      "index": 50,
+      "direction": 2,
+      "direction_name": "S",
+      "animation": "attack",
+      "animation_frame": 2,
+      "atlas_rect": [
+        256,
+        576,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_050.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        64.0,
+        48.111
+      ],
+      "alpha_bounds_px": [
+        16,
+        46,
+        112,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        46,
+        111,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        46
+      ]
+    },
+    {
+      "index": 51,
+      "direction": 2,
+      "direction_name": "S",
+      "animation": "attack",
+      "animation_frame": 3,
+      "atlas_rect": [
+        384,
+        576,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_051.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        64.0,
+        80.108
+      ],
+      "alpha_bounds_px": [
+        18,
+        78,
+        110,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        18,
+        78,
+        110,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        78
+      ]
+    },
+    {
+      "index": 52,
+      "direction": 2,
+      "direction_name": "S",
+      "animation": "attack",
+      "animation_frame": 4,
+      "atlas_rect": [
+        512,
+        576,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_052.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        64.0,
+        66.809
+      ],
+      "alpha_bounds_px": [
+        17,
+        64,
+        111,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        65,
+        111,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        64
+      ]
+    },
+    {
+      "index": 53,
+      "direction": 2,
+      "direction_name": "S",
+      "animation": "attack",
+      "animation_frame": 5,
+      "atlas_rect": [
+        640,
+        576,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_053.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        64.0,
+        52.595
+      ],
+      "alpha_bounds_px": [
+        17,
+        51,
+        111,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        51,
+        111,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        51
+      ]
+    },
+    {
+      "index": 54,
+      "direction": 3,
+      "direction_name": "SW",
+      "animation": "idle",
+      "animation_frame": 0,
+      "atlas_rect": [
+        768,
+        576,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_054.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        69.613,
+        54.5
+      ],
+      "alpha_bounds_px": [
+        26,
+        46,
+        103,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        27,
+        46,
+        103,
+        183
+      ],
+      "visual_top_anchor_px": [
+        64,
+        46
+      ]
+    },
+    {
+      "index": 55,
+      "direction": 3,
+      "direction_name": "SW",
+      "animation": "idle",
+      "animation_frame": 1,
+      "atlas_rect": [
+        896,
+        576,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_055.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        68.887,
+        54.641
+      ],
+      "alpha_bounds_px": [
+        27,
+        46,
+        103,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        27,
+        46,
+        103,
+        183
+      ],
+      "visual_top_anchor_px": [
+        64,
+        46
+      ]
+    },
+    {
+      "index": 56,
+      "direction": 3,
+      "direction_name": "SW",
+      "animation": "idle",
+      "animation_frame": 2,
+      "atlas_rect": [
+        1024,
+        576,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_056.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        69.613,
+        54.5
+      ],
+      "alpha_bounds_px": [
+        26,
+        46,
+        103,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        27,
+        46,
+        103,
+        183
+      ],
+      "visual_top_anchor_px": [
+        64,
+        46
+      ]
+    },
+    {
+      "index": 57,
+      "direction": 3,
+      "direction_name": "SW",
+      "animation": "idle",
+      "animation_frame": 3,
+      "atlas_rect": [
+        1152,
+        576,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_057.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        70.336,
+        54.376
+      ],
+      "alpha_bounds_px": [
+        26,
+        46,
+        103,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        27,
+        46,
+        103,
+        183
+      ],
+      "visual_top_anchor_px": [
+        64,
+        46
+      ]
+    },
+    {
+      "index": 58,
+      "direction": 3,
+      "direction_name": "SW",
+      "animation": "walk",
+      "animation_frame": 0,
+      "atlas_rect": [
+        1280,
+        576,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_058.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        68.887,
+        54.98
+      ],
+      "alpha_bounds_px": [
+        26,
+        46,
+        103,
+        182
+      ],
+      "alpha_bounds_8_px": [
+        27,
+        47,
+        103,
+        182
+      ],
+      "visual_top_anchor_px": [
+        64,
+        46
+      ]
+    },
+    {
+      "index": 59,
+      "direction": 3,
+      "direction_name": "SW",
+      "animation": "walk",
+      "animation_frame": 1,
+      "atlas_rect": [
+        1408,
+        576,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_059.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        68.793,
+        54.311
+      ],
+      "alpha_bounds_px": [
+        27,
+        46,
+        104,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        27,
+        46,
+        103,
+        178
+      ],
+      "visual_top_anchor_px": [
+        64,
+        46
+      ]
+    },
+    {
+      "index": 60,
+      "direction": 3,
+      "direction_name": "SW",
+      "animation": "walk",
+      "animation_frame": 2,
+      "atlas_rect": [
+        1536,
+        576,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_060.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        68.753,
+        53.688
+      ],
+      "alpha_bounds_px": [
+        25,
+        45,
+        104,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        25,
+        45,
+        104,
+        176
+      ],
+      "visual_top_anchor_px": [
+        64,
+        45
+      ]
+    },
+    {
+      "index": 61,
+      "direction": 3,
+      "direction_name": "SW",
+      "animation": "walk",
+      "animation_frame": 3,
+      "atlas_rect": [
+        1664,
+        576,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_061.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        68.793,
+        54.311
+      ],
+      "alpha_bounds_px": [
+        27,
+        46,
+        104,
+        179
+      ],
+      "alpha_bounds_8_px": [
+        27,
+        46,
+        103,
+        178
+      ],
+      "visual_top_anchor_px": [
+        64,
+        46
+      ]
+    },
+    {
+      "index": 62,
+      "direction": 3,
+      "direction_name": "SW",
+      "animation": "walk",
+      "animation_frame": 4,
+      "atlas_rect": [
+        1792,
+        576,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_062.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        68.887,
+        54.98
+      ],
+      "alpha_bounds_px": [
+        26,
+        46,
+        103,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        27,
+        47,
+        103,
+        183
+      ],
+      "visual_top_anchor_px": [
+        64,
+        46
+      ]
+    },
+    {
+      "index": 63,
+      "direction": 3,
+      "direction_name": "SW",
+      "animation": "walk",
+      "animation_frame": 5,
+      "atlas_rect": [
+        1920,
+        576,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_063.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        68.979,
+        54.464
+      ],
+      "alpha_bounds_px": [
+        23,
+        46,
+        103,
+        185
+      ],
+      "alpha_bounds_8_px": [
+        23,
+        46,
+        102,
+        185
+      ],
+      "visual_top_anchor_px": [
+        64,
+        46
+      ]
+    },
+    {
+      "index": 64,
+      "direction": 3,
+      "direction_name": "SW",
+      "animation": "walk",
+      "animation_frame": 6,
+      "atlas_rect": [
+        0,
+        768,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_064.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        69.017,
+        53.904
+      ],
+      "alpha_bounds_px": [
+        21,
+        45,
+        103,
+        185
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        45,
+        103,
+        185
+      ],
+      "visual_top_anchor_px": [
+        64,
+        45
+      ]
+    },
+    {
+      "index": 65,
+      "direction": 3,
+      "direction_name": "SW",
+      "animation": "walk",
+      "animation_frame": 7,
+      "atlas_rect": [
+        128,
+        768,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_065.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        68.979,
+        54.464
+      ],
+      "alpha_bounds_px": [
+        23,
+        46,
+        103,
+        184
+      ],
+      "alpha_bounds_8_px": [
+        23,
+        46,
+        102,
+        184
+      ],
+      "visual_top_anchor_px": [
+        64,
+        46
+      ]
+    },
+    {
+      "index": 66,
+      "direction": 3,
+      "direction_name": "SW",
+      "animation": "attack",
+      "animation_frame": 0,
+      "atlas_rect": [
+        256,
+        768,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_066.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        69.613,
+        54.5
+      ],
+      "alpha_bounds_px": [
+        22,
+        46,
+        103,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        23,
+        46,
+        103,
+        183
+      ],
+      "visual_top_anchor_px": [
+        64,
+        46
+      ]
+    },
+    {
+      "index": 67,
+      "direction": 3,
+      "direction_name": "SW",
+      "animation": "attack",
+      "animation_frame": 1,
+      "atlas_rect": [
+        384,
+        768,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_067.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        71.359,
+        53.15
+      ],
+      "alpha_bounds_px": [
+        13,
+        45,
+        104,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        13,
+        45,
+        104,
+        183
+      ],
+      "visual_top_anchor_px": [
+        64,
+        45
+      ]
+    },
+    {
+      "index": 68,
+      "direction": 3,
+      "direction_name": "SW",
+      "animation": "attack",
+      "animation_frame": 2,
+      "atlas_rect": [
+        512,
+        768,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_068.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        73.103,
+        51.199
+      ],
+      "alpha_bounds_px": [
+        7,
+        43,
+        105,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        7,
+        43,
+        104,
+        183
+      ],
+      "visual_top_anchor_px": [
+        64,
+        43
+      ]
+    },
+    {
+      "index": 69,
+      "direction": 3,
+      "direction_name": "SW",
+      "animation": "attack",
+      "animation_frame": 3,
+      "atlas_rect": [
+        640,
+        768,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_069.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        50.877,
+        75.656
+      ],
+      "alpha_bounds_px": [
+        14,
+        67,
+        105,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        67,
+        105,
+        183
+      ],
+      "visual_top_anchor_px": [
+        64,
+        67
+      ]
+    },
+    {
+      "index": 70,
+      "direction": 3,
+      "direction_name": "SW",
+      "animation": "attack",
+      "animation_frame": 4,
+      "atlas_rect": [
+        768,
+        768,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_070.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        59.146,
+        65.162
+      ],
+      "alpha_bounds_px": [
+        22,
+        56,
+        102,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        23,
+        57,
+        102,
+        183
+      ],
+      "visual_top_anchor_px": [
+        64,
+        56
+      ]
+    },
+    {
+      "index": 71,
+      "direction": 3,
+      "direction_name": "SW",
+      "animation": "attack",
+      "animation_frame": 5,
+      "atlas_rect": [
+        896,
+        768,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_071.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        69.613,
+        54.5
+      ],
+      "alpha_bounds_px": [
+        26,
+        46,
+        103,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        27,
+        46,
+        103,
+        183
+      ],
+      "visual_top_anchor_px": [
+        64,
+        46
+      ]
+    },
+    {
+      "index": 72,
+      "direction": 4,
+      "direction_name": "W",
+      "animation": "idle",
+      "animation_frame": 0,
+      "atlas_rect": [
+        1024,
+        768,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_072.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        71.938,
+        59.098
+      ],
+      "alpha_bounds_px": [
+        39,
+        46,
+        95,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        40,
+        46,
+        95,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        46
+      ]
+    },
+    {
+      "index": 73,
+      "direction": 4,
+      "direction_name": "W",
+      "animation": "idle",
+      "animation_frame": 1,
+      "atlas_rect": [
+        1152,
+        768,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_073.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        70.911,
+        58.644
+      ],
+      "alpha_bounds_px": [
+        39,
+        46,
+        95,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        40,
+        46,
+        95,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        46
+      ]
+    },
+    {
+      "index": 74,
+      "direction": 4,
+      "direction_name": "W",
+      "animation": "idle",
+      "animation_frame": 2,
+      "atlas_rect": [
+        1280,
+        768,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_074.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        71.938,
+        59.098
+      ],
+      "alpha_bounds_px": [
+        39,
+        46,
+        95,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        40,
+        46,
+        95,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        46
+      ]
+    },
+    {
+      "index": 75,
+      "direction": 4,
+      "direction_name": "W",
+      "animation": "idle",
+      "animation_frame": 3,
+      "atlas_rect": [
+        1408,
+        768,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_075.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        72.96,
+        59.566
+      ],
+      "alpha_bounds_px": [
+        39,
+        46,
+        95,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        40,
+        47,
+        95,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        46
+      ]
+    },
+    {
+      "index": 76,
+      "direction": 4,
+      "direction_name": "W",
+      "animation": "walk",
+      "animation_frame": 0,
+      "atlas_rect": [
+        1536,
+        768,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_076.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        70.911,
+        58.983
+      ],
+      "alpha_bounds_px": [
+        39,
+        46,
+        95,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        40,
+        46,
+        95,
+        176
+      ],
+      "visual_top_anchor_px": [
+        64,
+        46
+      ]
+    },
+    {
+      "index": 77,
+      "direction": 4,
+      "direction_name": "W",
+      "animation": "walk",
+      "animation_frame": 1,
+      "atlas_rect": [
+        1664,
+        768,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_077.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        70.91,
+        58.282
+      ],
+      "alpha_bounds_px": [
+        32,
+        46,
+        95,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        33,
+        46,
+        95,
+        175
+      ],
+      "visual_top_anchor_px": [
+        64,
+        46
+      ]
+    },
+    {
+      "index": 78,
+      "direction": 4,
+      "direction_name": "W",
+      "animation": "walk",
+      "animation_frame": 2,
+      "atlas_rect": [
+        1792,
+        768,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_078.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        70.909,
+        57.645
+      ],
+      "alpha_bounds_px": [
+        29,
+        45,
+        95,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        30,
+        45,
+        95,
+        176
+      ],
+      "visual_top_anchor_px": [
+        64,
+        45
+      ]
+    },
+    {
+      "index": 79,
+      "direction": 4,
+      "direction_name": "W",
+      "animation": "walk",
+      "animation_frame": 3,
+      "atlas_rect": [
+        1920,
+        768,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_079.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        70.91,
+        58.282
+      ],
+      "alpha_bounds_px": [
+        32,
+        46,
+        95,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        33,
+        46,
+        95,
+        176
+      ],
+      "visual_top_anchor_px": [
+        64,
+        46
+      ]
+    },
+    {
+      "index": 80,
+      "direction": 4,
+      "direction_name": "W",
+      "animation": "walk",
+      "animation_frame": 4,
+      "atlas_rect": [
+        0,
+        960,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_080.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        70.911,
+        58.983
+      ],
+      "alpha_bounds_px": [
+        39,
+        46,
+        95,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        39,
+        46,
+        95,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        46
+      ]
+    },
+    {
+      "index": 81,
+      "direction": 4,
+      "direction_name": "W",
+      "animation": "walk",
+      "animation_frame": 5,
+      "atlas_rect": [
+        128,
+        960,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_081.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        70.91,
+        58.498
+      ],
+      "alpha_bounds_px": [
+        32,
+        46,
+        96,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        33,
+        46,
+        95,
+        175
+      ],
+      "visual_top_anchor_px": [
+        64,
+        46
+      ]
+    },
+    {
+      "index": 82,
+      "direction": 4,
+      "direction_name": "W",
+      "animation": "walk",
+      "animation_frame": 6,
+      "atlas_rect": [
+        256,
+        960,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_082.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        70.909,
+        57.95
+      ],
+      "alpha_bounds_px": [
+        30,
+        45,
+        96,
+        175
+      ],
+      "alpha_bounds_8_px": [
+        30,
+        45,
+        95,
+        175
+      ],
+      "visual_top_anchor_px": [
+        64,
+        45
+      ]
+    },
+    {
+      "index": 83,
+      "direction": 4,
+      "direction_name": "W",
+      "animation": "walk",
+      "animation_frame": 7,
+      "atlas_rect": [
+        384,
+        960,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_083.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        70.91,
+        58.498
+      ],
+      "alpha_bounds_px": [
+        32,
+        46,
+        96,
+        175
+      ],
+      "alpha_bounds_8_px": [
+        33,
+        46,
+        95,
+        175
+      ],
+      "visual_top_anchor_px": [
+        64,
+        46
+      ]
+    },
+    {
+      "index": 84,
+      "direction": 4,
+      "direction_name": "W",
+      "animation": "attack",
+      "animation_frame": 0,
+      "atlas_rect": [
+        512,
+        960,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_084.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        71.938,
+        59.098
+      ],
+      "alpha_bounds_px": [
+        39,
+        46,
+        95,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        40,
+        46,
+        95,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        46
+      ]
+    },
+    {
+      "index": 85,
+      "direction": 4,
+      "direction_name": "W",
+      "animation": "attack",
+      "animation_frame": 1,
+      "atlas_rect": [
+        640,
+        960,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_085.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        74.408,
+        59.179
+      ],
+      "alpha_bounds_px": [
+        31,
+        46,
+        94,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        32,
+        46,
+        94,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        46
+      ]
+    },
+    {
+      "index": 86,
+      "direction": 4,
+      "direction_name": "W",
+      "animation": "attack",
+      "animation_frame": 2,
+      "atlas_rect": [
+        768,
+        960,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_086.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        76.874,
+        58.656
+      ],
+      "alpha_bounds_px": [
+        25,
+        35,
+        93,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        25,
+        36,
+        93,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        35
+      ]
+    },
+    {
+      "index": 87,
+      "direction": 4,
+      "direction_name": "W",
+      "animation": "attack",
+      "animation_frame": 3,
+      "atlas_rect": [
+        896,
+        960,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_087.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        45.441,
+        64.906
+      ],
+      "alpha_bounds_px": [
+        23,
+        53,
+        105,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        23,
+        53,
+        105,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        53
+      ]
+    },
+    {
+      "index": 88,
+      "direction": 4,
+      "direction_name": "W",
+      "animation": "attack",
+      "animation_frame": 4,
+      "atlas_rect": [
+        1024,
+        960,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_088.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        57.136,
+        61.187
+      ],
+      "alpha_bounds_px": [
+        32,
+        49,
+        101,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        32,
+        49,
+        101,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        49
+      ]
+    },
+    {
+      "index": 89,
+      "direction": 4,
+      "direction_name": "W",
+      "animation": "attack",
+      "animation_frame": 5,
+      "atlas_rect": [
+        1152,
+        960,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_089.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        71.938,
+        59.098
+      ],
+      "alpha_bounds_px": [
+        39,
+        46,
+        95,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        40,
+        46,
+        95,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        46
+      ]
+    },
+    {
+      "index": 90,
+      "direction": 5,
+      "direction_name": "NW",
+      "animation": "idle",
+      "animation_frame": 0,
+      "atlas_rect": [
+        1280,
+        960,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_090.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        69.613,
+        63.696
+      ],
+      "alpha_bounds_px": [
+        25,
+        50,
+        101,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        26,
+        50,
+        101,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        50
+      ]
+    },
+    {
+      "index": 91,
+      "direction": 5,
+      "direction_name": "NW",
+      "animation": "idle",
+      "animation_frame": 1,
+      "atlas_rect": [
+        1408,
+        960,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_091.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        68.887,
+        62.648
+      ],
+      "alpha_bounds_px": [
+        26,
+        48,
+        101,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        26,
+        49,
+        101,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        48
+      ]
+    },
+    {
+      "index": 92,
+      "direction": 5,
+      "direction_name": "NW",
+      "animation": "idle",
+      "animation_frame": 2,
+      "atlas_rect": [
+        1536,
+        960,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_092.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        69.613,
+        63.696
+      ],
+      "alpha_bounds_px": [
+        25,
+        50,
+        101,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        26,
+        50,
+        101,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        50
+      ]
+    },
+    {
+      "index": 93,
+      "direction": 5,
+      "direction_name": "NW",
+      "animation": "idle",
+      "animation_frame": 3,
+      "atlas_rect": [
+        1664,
+        960,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_093.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        70.336,
+        64.756
+      ],
+      "alpha_bounds_px": [
+        26,
+        50,
+        101,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        26,
+        51,
+        101,
+        178
+      ],
+      "visual_top_anchor_px": [
+        64,
+        50
+      ]
+    },
+    {
+      "index": 94,
+      "direction": 5,
+      "direction_name": "NW",
+      "animation": "walk",
+      "animation_frame": 0,
+      "atlas_rect": [
+        1792,
+        960,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_094.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        68.887,
+        62.987
+      ],
+      "alpha_bounds_px": [
+        25,
+        49,
+        101,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        26,
+        49,
+        101,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        49
+      ]
+    },
+    {
+      "index": 95,
+      "direction": 5,
+      "direction_name": "NW",
+      "animation": "walk",
+      "animation_frame": 1,
+      "atlas_rect": [
+        1920,
+        960,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_095.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        68.979,
+        62.316
+      ],
+      "alpha_bounds_px": [
+        23,
+        48,
+        102,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        24,
+        49,
+        102,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        48
+      ]
+    },
+    {
+      "index": 96,
+      "direction": 5,
+      "direction_name": "NW",
+      "animation": "walk",
+      "animation_frame": 2,
+      "atlas_rect": [
+        0,
+        1152,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_096.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        69.017,
+        61.691
+      ],
+      "alpha_bounds_px": [
+        22,
+        48,
+        103,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        48,
+        103,
+        176
+      ],
+      "visual_top_anchor_px": [
+        64,
+        48
+      ]
+    },
+    {
+      "index": 97,
+      "direction": 5,
+      "direction_name": "NW",
+      "animation": "walk",
+      "animation_frame": 3,
+      "atlas_rect": [
+        128,
+        1152,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_097.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        68.979,
+        62.316
+      ],
+      "alpha_bounds_px": [
+        23,
+        48,
+        102,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        24,
+        49,
+        102,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        48
+      ]
+    },
+    {
+      "index": 98,
+      "direction": 5,
+      "direction_name": "NW",
+      "animation": "walk",
+      "animation_frame": 4,
+      "atlas_rect": [
+        256,
+        1152,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_098.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        68.887,
+        62.987
+      ],
+      "alpha_bounds_px": [
+        25,
+        49,
+        101,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        26,
+        49,
+        101,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        49
+      ]
+    },
+    {
+      "index": 99,
+      "direction": 5,
+      "direction_name": "NW",
+      "animation": "walk",
+      "animation_frame": 5,
+      "atlas_rect": [
+        384,
+        1152,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_099.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        68.793,
+        62.469
+      ],
+      "alpha_bounds_px": [
+        25,
+        48,
+        101,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        26,
+        49,
+        101,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        48
+      ]
+    },
+    {
+      "index": 100,
+      "direction": 5,
+      "direction_name": "NW",
+      "animation": "walk",
+      "animation_frame": 6,
+      "atlas_rect": [
+        512,
+        1152,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_100.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        68.753,
+        61.907
+      ],
+      "alpha_bounds_px": [
+        25,
+        48,
+        102,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        25,
+        48,
+        102,
+        176
+      ],
+      "visual_top_anchor_px": [
+        64,
+        48
+      ]
+    },
+    {
+      "index": 101,
+      "direction": 5,
+      "direction_name": "NW",
+      "animation": "walk",
+      "animation_frame": 7,
+      "atlas_rect": [
+        640,
+        1152,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_101.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        68.793,
+        62.469
+      ],
+      "alpha_bounds_px": [
+        25,
+        48,
+        101,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        26,
+        49,
+        101,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        48
+      ]
+    },
+    {
+      "index": 102,
+      "direction": 5,
+      "direction_name": "NW",
+      "animation": "attack",
+      "animation_frame": 0,
+      "atlas_rect": [
+        768,
+        1152,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_102.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        69.613,
+        63.696
+      ],
+      "alpha_bounds_px": [
+        23,
+        50,
+        101,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        23,
+        50,
+        101,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        50
+      ]
+    },
+    {
+      "index": 103,
+      "direction": 5,
+      "direction_name": "NW",
+      "animation": "attack",
+      "animation_frame": 1,
+      "atlas_rect": [
+        896,
+        1152,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_103.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        71.359,
+        65.207
+      ],
+      "alpha_bounds_px": [
+        13,
+        48,
+        102,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        13,
+        49,
+        102,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        48
+      ]
+    },
+    {
+      "index": 104,
+      "direction": 5,
+      "direction_name": "NW",
+      "animation": "attack",
+      "animation_frame": 2,
+      "atlas_rect": [
+        1024,
+        1152,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_104.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        73.103,
+        66.113
+      ],
+      "alpha_bounds_px": [
+        8,
+        29,
+        103,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        8,
+        29,
+        103,
+        176
+      ],
+      "visual_top_anchor_px": [
+        64,
+        29
+      ]
+    },
+    {
+      "index": 105,
+      "direction": 5,
+      "direction_name": "NW",
+      "animation": "attack",
+      "animation_frame": 3,
+      "atlas_rect": [
+        1152,
+        1152,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_105.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        50.877,
+        54.156
+      ],
+      "alpha_bounds_px": [
+        14,
+        41,
+        106,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        42,
+        105,
+        183
+      ],
+      "visual_top_anchor_px": [
+        64,
+        41
+      ]
+    },
+    {
+      "index": 106,
+      "direction": 5,
+      "direction_name": "NW",
+      "animation": "attack",
+      "animation_frame": 4,
+      "atlas_rect": [
+        1280,
+        1152,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_106.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        59.146,
+        57.211
+      ],
+      "alpha_bounds_px": [
+        21,
+        44,
+        103,
+        180
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        44,
+        103,
+        180
+      ],
+      "visual_top_anchor_px": [
+        64,
+        44
+      ]
+    },
+    {
+      "index": 107,
+      "direction": 5,
+      "direction_name": "NW",
+      "animation": "attack",
+      "animation_frame": 5,
+      "atlas_rect": [
+        1408,
+        1152,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_107.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        69.613,
+        63.696
+      ],
+      "alpha_bounds_px": [
+        25,
+        50,
+        101,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        26,
+        50,
+        101,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        50
+      ]
+    },
+    {
+      "index": 108,
+      "direction": 6,
+      "direction_name": "N",
+      "animation": "idle",
+      "animation_frame": 0,
+      "atlas_rect": [
+        1536,
+        1152,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_108.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        64.0,
+        65.601
+      ],
+      "alpha_bounds_px": [
+        17,
+        59,
+        111,
+        175
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        59,
+        111,
+        175
+      ],
+      "visual_top_anchor_px": [
+        64,
+        59
+      ]
+    },
+    {
+      "index": 109,
+      "direction": 6,
+      "direction_name": "N",
+      "animation": "idle",
+      "animation_frame": 1,
+      "atlas_rect": [
+        1664,
+        1152,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_109.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        64.0,
+        64.306
+      ],
+      "alpha_bounds_px": [
+        17,
+        59,
+        111,
+        174
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        59,
+        111,
+        174
+      ],
+      "visual_top_anchor_px": [
+        64,
+        59
+      ]
+    },
+    {
+      "index": 110,
+      "direction": 6,
+      "direction_name": "N",
+      "animation": "idle",
+      "animation_frame": 2,
+      "atlas_rect": [
+        1792,
+        1152,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_110.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        64.0,
+        65.601
+      ],
+      "alpha_bounds_px": [
+        17,
+        59,
+        111,
+        175
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        59,
+        111,
+        175
+      ],
+      "visual_top_anchor_px": [
+        64,
+        59
+      ]
+    },
+    {
+      "index": 111,
+      "direction": 6,
+      "direction_name": "N",
+      "animation": "idle",
+      "animation_frame": 3,
+      "atlas_rect": [
+        1920,
+        1152,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_111.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        64.0,
+        66.906
+      ],
+      "alpha_bounds_px": [
+        17,
+        59,
+        111,
+        175
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        60,
+        111,
+        175
+      ],
+      "visual_top_anchor_px": [
+        64,
+        59
+      ]
+    },
+    {
+      "index": 112,
+      "direction": 6,
+      "direction_name": "N",
+      "animation": "walk",
+      "animation_frame": 0,
+      "atlas_rect": [
+        0,
+        1344,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_112.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        64.0,
+        64.645
+      ],
+      "alpha_bounds_px": [
+        17,
+        59,
+        111,
+        175
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        59,
+        111,
+        175
+      ],
+      "visual_top_anchor_px": [
+        64,
+        59
+      ]
+    },
+    {
+      "index": 113,
+      "direction": 6,
+      "direction_name": "N",
+      "animation": "walk",
+      "animation_frame": 1,
+      "atlas_rect": [
+        128,
+        1344,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_113.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        64.132,
+        64.051
+      ],
+      "alpha_bounds_px": [
+        17,
+        58,
+        111,
+        174
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        58,
+        111,
+        174
+      ],
+      "visual_top_anchor_px": [
+        64,
+        58
+      ]
+    },
+    {
+      "index": 114,
+      "direction": 6,
+      "direction_name": "N",
+      "animation": "walk",
+      "animation_frame": 2,
+      "atlas_rect": [
+        256,
+        1344,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_114.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        64.187,
+        63.457
+      ],
+      "alpha_bounds_px": [
+        17,
+        57,
+        111,
+        173
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        57,
+        111,
+        173
+      ],
+      "visual_top_anchor_px": [
+        64,
+        57
+      ]
+    },
+    {
+      "index": 115,
+      "direction": 6,
+      "direction_name": "N",
+      "animation": "walk",
+      "animation_frame": 3,
+      "atlas_rect": [
+        384,
+        1344,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_115.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        64.132,
+        64.051
+      ],
+      "alpha_bounds_px": [
+        17,
+        58,
+        111,
+        174
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        58,
+        111,
+        174
+      ],
+      "visual_top_anchor_px": [
+        64,
+        58
+      ]
+    },
+    {
+      "index": 116,
+      "direction": 6,
+      "direction_name": "N",
+      "animation": "walk",
+      "animation_frame": 4,
+      "atlas_rect": [
+        512,
+        1344,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_116.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        64.0,
+        64.645
+      ],
+      "alpha_bounds_px": [
+        17,
+        59,
+        111,
+        175
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        59,
+        111,
+        175
+      ],
+      "visual_top_anchor_px": [
+        64,
+        59
+      ]
+    },
+    {
+      "index": 117,
+      "direction": 6,
+      "direction_name": "N",
+      "animation": "walk",
+      "animation_frame": 5,
+      "atlas_rect": [
+        640,
+        1344,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_117.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        63.868,
+        64.051
+      ],
+      "alpha_bounds_px": [
+        17,
+        58,
+        111,
+        175
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        59,
+        111,
+        174
+      ],
+      "visual_top_anchor_px": [
+        64,
+        58
+      ]
+    },
+    {
+      "index": 118,
+      "direction": 6,
+      "direction_name": "N",
+      "animation": "walk",
+      "animation_frame": 6,
+      "atlas_rect": [
+        768,
+        1344,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_118.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        63.813,
+        63.457
+      ],
+      "alpha_bounds_px": [
+        17,
+        58,
+        111,
+        174
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        58,
+        111,
+        173
+      ],
+      "visual_top_anchor_px": [
+        64,
+        58
+      ]
+    },
+    {
+      "index": 119,
+      "direction": 6,
+      "direction_name": "N",
+      "animation": "walk",
+      "animation_frame": 7,
+      "atlas_rect": [
+        896,
+        1344,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_119.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        63.868,
+        64.051
+      ],
+      "alpha_bounds_px": [
+        17,
+        58,
+        111,
+        175
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        59,
+        111,
+        174
+      ],
+      "visual_top_anchor_px": [
+        64,
+        58
+      ]
+    },
+    {
+      "index": 120,
+      "direction": 6,
+      "direction_name": "N",
+      "animation": "attack",
+      "animation_frame": 0,
+      "atlas_rect": [
+        1024,
+        1344,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_120.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        64.0,
+        65.601
+      ],
+      "alpha_bounds_px": [
+        17,
+        59,
+        111,
+        175
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        59,
+        111,
+        175
+      ],
+      "visual_top_anchor_px": [
+        64,
+        59
+      ]
+    },
+    {
+      "index": 121,
+      "direction": 6,
+      "direction_name": "N",
+      "animation": "attack",
+      "animation_frame": 1,
+      "atlas_rect": [
+        1152,
+        1344,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_121.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        64.0,
+        67.704
+      ],
+      "alpha_bounds_px": [
+        17,
+        61,
+        111,
+        174
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        61,
+        111,
+        174
+      ],
+      "visual_top_anchor_px": [
+        64,
+        61
+      ]
+    },
+    {
+      "index": 122,
+      "direction": 6,
+      "direction_name": "N",
+      "animation": "attack",
+      "animation_frame": 2,
+      "atlas_rect": [
+        1280,
+        1344,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_122.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        64.0,
+        69.202
+      ],
+      "alpha_bounds_px": [
+        16,
+        46,
+        112,
+        173
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        46,
+        111,
+        173
+      ],
+      "visual_top_anchor_px": [
+        64,
+        46
+      ]
+    },
+    {
+      "index": 123,
+      "direction": 6,
+      "direction_name": "N",
+      "animation": "attack",
+      "animation_frame": 3,
+      "atlas_rect": [
+        1408,
+        1344,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_123.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        64.0,
+        49.704
+      ],
+      "alpha_bounds_px": [
+        18,
+        45,
+        110,
+        182
+      ],
+      "alpha_bounds_8_px": [
+        18,
+        45,
+        110,
+        182
+      ],
+      "visual_top_anchor_px": [
+        64,
+        45
+      ]
+    },
+    {
+      "index": 124,
+      "direction": 6,
+      "direction_name": "N",
+      "animation": "attack",
+      "animation_frame": 4,
+      "atlas_rect": [
+        1536,
+        1344,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_124.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        64.0,
+        55.564
+      ],
+      "alpha_bounds_px": [
+        17,
+        51,
+        111,
+        179
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        51,
+        111,
+        178
+      ],
+      "visual_top_anchor_px": [
+        64,
+        51
+      ]
+    },
+    {
+      "index": 125,
+      "direction": 6,
+      "direction_name": "N",
+      "animation": "attack",
+      "animation_frame": 5,
+      "atlas_rect": [
+        1664,
+        1344,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_125.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        64.0,
+        65.601
+      ],
+      "alpha_bounds_px": [
+        17,
+        59,
+        111,
+        175
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        59,
+        111,
+        175
+      ],
+      "visual_top_anchor_px": [
+        64,
+        59
+      ]
+    },
+    {
+      "index": 126,
+      "direction": 7,
+      "direction_name": "NE",
+      "animation": "idle",
+      "animation_frame": 0,
+      "atlas_rect": [
+        1792,
+        1344,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_126.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        58.387,
+        63.696
+      ],
+      "alpha_bounds_px": [
+        25,
+        53,
+        102,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        25,
+        53,
+        101,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        53
+      ]
+    },
+    {
+      "index": 127,
+      "direction": 7,
+      "direction_name": "NE",
+      "animation": "idle",
+      "animation_frame": 1,
+      "atlas_rect": [
+        1920,
+        1344,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_127.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        59.113,
+        62.648
+      ],
+      "alpha_bounds_px": [
+        25,
+        52,
+        101,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        25,
+        53,
+        101,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        52
+      ]
+    },
+    {
+      "index": 128,
+      "direction": 7,
+      "direction_name": "NE",
+      "animation": "idle",
+      "animation_frame": 2,
+      "atlas_rect": [
+        0,
+        1536,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_128.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        58.387,
+        63.696
+      ],
+      "alpha_bounds_px": [
+        25,
+        53,
+        102,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        25,
+        53,
+        101,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        53
+      ]
+    },
+    {
+      "index": 129,
+      "direction": 7,
+      "direction_name": "NE",
+      "animation": "idle",
+      "animation_frame": 3,
+      "atlas_rect": [
+        128,
+        1536,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_129.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        57.664,
+        64.756
+      ],
+      "alpha_bounds_px": [
+        25,
+        54,
+        102,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        25,
+        54,
+        101,
+        178
+      ],
+      "visual_top_anchor_px": [
+        64,
+        54
+      ]
+    },
+    {
+      "index": 130,
+      "direction": 7,
+      "direction_name": "NE",
+      "animation": "walk",
+      "animation_frame": 0,
+      "atlas_rect": [
+        256,
+        1536,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_130.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        59.113,
+        62.987
+      ],
+      "alpha_bounds_px": [
+        25,
+        53,
+        102,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        25,
+        53,
+        101,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        53
+      ]
+    },
+    {
+      "index": 131,
+      "direction": 7,
+      "direction_name": "NE",
+      "animation": "walk",
+      "animation_frame": 1,
+      "atlas_rect": [
+        384,
+        1536,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_131.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        59.207,
+        62.469
+      ],
+      "alpha_bounds_px": [
+        25,
+        52,
+        101,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        25,
+        52,
+        101,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        52
+      ]
+    },
+    {
+      "index": 132,
+      "direction": 7,
+      "direction_name": "NE",
+      "animation": "walk",
+      "animation_frame": 2,
+      "atlas_rect": [
+        512,
+        1536,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_132.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        59.247,
+        61.907
+      ],
+      "alpha_bounds_px": [
+        24,
+        52,
+        103,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        25,
+        52,
+        103,
+        176
+      ],
+      "visual_top_anchor_px": [
+        64,
+        52
+      ]
+    },
+    {
+      "index": 133,
+      "direction": 7,
+      "direction_name": "NE",
+      "animation": "walk",
+      "animation_frame": 3,
+      "atlas_rect": [
+        640,
+        1536,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_133.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        59.207,
+        62.469
+      ],
+      "alpha_bounds_px": [
+        25,
+        52,
+        101,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        25,
+        52,
+        101,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        52
+      ]
+    },
+    {
+      "index": 134,
+      "direction": 7,
+      "direction_name": "NE",
+      "animation": "walk",
+      "animation_frame": 4,
+      "atlas_rect": [
+        768,
+        1536,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_134.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        59.113,
+        62.987
+      ],
+      "alpha_bounds_px": [
+        25,
+        53,
+        102,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        25,
+        53,
+        101,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        53
+      ]
+    },
+    {
+      "index": 135,
+      "direction": 7,
+      "direction_name": "NE",
+      "animation": "walk",
+      "animation_frame": 5,
+      "atlas_rect": [
+        896,
+        1536,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_135.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        59.021,
+        62.316
+      ],
+      "alpha_bounds_px": [
+        25,
+        52,
+        105,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        26,
+        52,
+        104,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        52
+      ]
+    },
+    {
+      "index": 136,
+      "direction": 7,
+      "direction_name": "NE",
+      "animation": "walk",
+      "animation_frame": 6,
+      "atlas_rect": [
+        1024,
+        1536,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_136.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        58.983,
+        61.691
+      ],
+      "alpha_bounds_px": [
+        25,
+        51,
+        106,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        25,
+        52,
+        106,
+        176
+      ],
+      "visual_top_anchor_px": [
+        64,
+        51
+      ]
+    },
+    {
+      "index": 137,
+      "direction": 7,
+      "direction_name": "NE",
+      "animation": "walk",
+      "animation_frame": 7,
+      "atlas_rect": [
+        1152,
+        1536,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_137.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        59.021,
+        62.316
+      ],
+      "alpha_bounds_px": [
+        25,
+        52,
+        105,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        26,
+        52,
+        104,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        52
+      ]
+    },
+    {
+      "index": 138,
+      "direction": 7,
+      "direction_name": "NE",
+      "animation": "attack",
+      "animation_frame": 0,
+      "atlas_rect": [
+        1280,
+        1536,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_138.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        58.387,
+        63.696
+      ],
+      "alpha_bounds_px": [
+        25,
+        53,
+        106,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        25,
+        53,
+        105,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        53
+      ]
+    },
+    {
+      "index": 139,
+      "direction": 7,
+      "direction_name": "NE",
+      "animation": "attack",
+      "animation_frame": 1,
+      "atlas_rect": [
+        1408,
+        1536,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_139.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        56.641,
+        65.207
+      ],
+      "alpha_bounds_px": [
+        24,
+        49,
+        115,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        24,
+        49,
+        115,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        49
+      ]
+    },
+    {
+      "index": 140,
+      "direction": 7,
+      "direction_name": "NE",
+      "animation": "attack",
+      "animation_frame": 2,
+      "atlas_rect": [
+        1536,
+        1536,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_140.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        54.897,
+        66.113
+      ],
+      "alpha_bounds_px": [
+        23,
+        29,
+        121,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        24,
+        29,
+        121,
+        176
+      ],
+      "visual_top_anchor_px": [
+        64,
+        29
+      ]
+    },
+    {
+      "index": 141,
+      "direction": 7,
+      "direction_name": "NE",
+      "animation": "attack",
+      "animation_frame": 3,
+      "atlas_rect": [
+        1664,
+        1536,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_141.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        77.123,
+        54.156
+      ],
+      "alpha_bounds_px": [
+        23,
+        46,
+        114,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        23,
+        46,
+        113,
+        182
+      ],
+      "visual_top_anchor_px": [
+        64,
+        46
+      ]
+    },
+    {
+      "index": 142,
+      "direction": 7,
+      "direction_name": "NE",
+      "animation": "attack",
+      "animation_frame": 4,
+      "atlas_rect": [
+        1792,
+        1536,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_142.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        68.854,
+        57.211
+      ],
+      "alpha_bounds_px": [
+        25,
+        48,
+        106,
+        180
+      ],
+      "alpha_bounds_8_px": [
+        26,
+        48,
+        106,
+        180
+      ],
+      "visual_top_anchor_px": [
+        64,
+        48
+      ]
+    },
+    {
+      "index": 143,
+      "direction": 7,
+      "direction_name": "NE",
+      "animation": "attack",
+      "animation_frame": 5,
+      "atlas_rect": [
+        1920,
+        1536,
+        128,
+        192
+      ],
+      "file": "frames/rift_warden_143.png",
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_anchor_px": [
+        58.387,
+        63.696
+      ],
+      "alpha_bounds_px": [
+        25,
+        53,
+        102,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        25,
+        53,
+        101,
+        177
+      ],
+      "visual_top_anchor_px": [
+        64,
+        53
+      ]
+    }
+  ],
+  "all_frame_alpha_bounds_px": [
+    7,
+    29,
+    121,
+    186
+  ],
+  "body_height_range_px": [
+    99,
+    148
+  ],
+  "body_width_range_px": [
+    56,
+    98
+  ],
+  "atlas_sha256": "339757907a0add4a03effaa8bf0aac838f726603fb0ca6cdf9c504fcda44bd1b",
+  "qa": {
+    "all_144_frames_present": true,
+    "unclipped": true,
+    "RGBA": true,
+    "native_pixels_match_atlas": true,
+    "fixed_world_origin_anchor": true,
+    "baked_ground_shadow": false
+  },
+  "idle_body_height_range_px": [
+    115,
+    137
+  ],
+  "source_generator_sha256": "3d20757f2634d9ffaa63cb9c663396728a3d00abbad5fb8780db48f8903dd811"
+}

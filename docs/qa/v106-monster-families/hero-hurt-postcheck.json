@@ -1,0 +1,20 @@
+{
+  "checks": 5,
+  "failures": 0,
+  "assertions": {
+    "exact_authorized_hurt_line": true,
+    "only_authorized_line_changed_since_runtime": true,
+    "non_hurt_hero_white_and_enemy_family_tint_unchanged": true,
+    "hero_hurt_uses_original_v105_full_flash": true,
+    "enemy_hurt_retains_identical_family_lerp": true
+  },
+  "previous_actor_visual_sha256": "15f2436f40fe90ce5e1d7d716f9b6309373758c9afda8692100a93226fc7b18f",
+  "current_actor_visual_sha256": "9430b44b682fe7e6c6b1319c25e95f2e3d47e0a0e46788c860c13700aac4fff5",
+  "scope": "Only authorized hero hurt restoration; all earlier family/runtime results reused",
+  "dependency_parse": {
+    "command": "godot --headless --path . --check-only --script res://scripts/visuals/actor_visual.gd",
+    "exit_code": 0,
+    "script_errors": 0,
+    "main_started": false
+  }
+}

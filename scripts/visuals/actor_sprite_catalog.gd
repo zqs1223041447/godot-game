@@ -14,6 +14,9 @@ const CLIPS := {"idle": Vector2i(0, 4), "walk": Vector2i(4, 8), "attack": Vector
 const DEFINITIONS := {
 	"hero": {"path": "res://assets/actors/hero_atlas.png", "display_scale": 0.5, "foot_anchor": Vector2(64, 158)},
 	"crawler": {"path": "res://assets/actors/crawler_atlas.png", "display_scale": 0.64, "foot_anchor": Vector2(64, 142)},
+	"skitter": {"path": "res://assets/actors/skitter_atlas.png", "display_scale": 0.5, "foot_anchor": Vector2(64, 142)},
+	"brute": {"path": "res://assets/actors/brute_atlas.png", "display_scale": 0.729167, "foot_anchor": Vector2(64, 158)},
+	"rift_warden": {"path": "res://assets/actors/rift_warden_atlas.png", "display_scale": 0.72, "foot_anchor": Vector2(64, 158)},
 }
 static var _resources: Dictionary = {}
 
@@ -33,7 +36,24 @@ static func frame_rect(index: int) -> Rect2:
 	return Rect2(Vector2((safe % COLUMNS) * FRAME_SIZE.x, (safe / COLUMNS) * FRAME_SIZE.y), Vector2(FRAME_SIZE))
 
 static func enemy_key(enemy: Dictionary) -> String:
-	return "crawler" if str(enemy.get("template_id", "")) == "crawler" else ""
+	var template := str(enemy.get("template_id", ""))
+	if template in ["crawler", "splitter"]: return "crawler"
+	if template in ["skitter", "mist_skitter", "storm_skitter"]: return "skitter"
+	if template in ["brute", "brood_host", "frost_guard", "chaos_guard", "ember_guard"]: return "brute"
+	if template == "rift_warden": return "rift_warden"
+	return ""
+
+static func enemy_tint(enemy: Dictionary) -> Color:
+	# Shared family atlases retain bounded, non-emissive identity accents.
+	match str(enemy.get("template_id", "")):
+		"splitter": return Color(0.87, 1.0, 0.80)
+		"mist_skitter": return Color(0.78, 1.0, 0.92)
+		"storm_skitter": return Color(1.0, 0.94, 0.72)
+		"brood_host": return Color(0.92, 0.83, 1.0)
+		"frost_guard": return Color(0.80, 0.94, 1.0)
+		"chaos_guard": return Color(0.88, 0.76, 1.0)
+		"ember_guard": return Color(1.0, 0.80, 0.65)
+	return Color.WHITE
 
 static func resource(key: String) -> Dictionary:
 	if _resources.has(key): return _resources[key]

@@ -33,7 +33,8 @@ class Part extends Node2D:
 		elif not actor.atlas.is_empty():
 			var scale_value: float = actor.atlas.display_scale
 			var destination := Rect2(-Vector2(actor.atlas.foot_anchor) * scale_value, Vector2(Catalog.FRAME_SIZE) * scale_value)
-			var tint := Color(1.22, 1.13, 1.02) if actor.hurt else Color.WHITE
+			var tint: Color = Color.WHITE if actor.is_hero else Catalog.enemy_tint(actor.enemy)
+			if actor.hurt: tint = Color(1.22,1.13,1.02) if actor.is_hero else tint.lerp(Color(1.22,1.13,1.02),0.75)
 			draw_texture_rect_region(actor.atlas.texture, destination, Catalog.frame_rect(actor.frame), tint)
 			if actor.is_hero: _draw_hero_wards()
 		elif actor.is_hero:

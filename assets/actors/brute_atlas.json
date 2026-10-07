@@ -1,0 +1,7031 @@
+{
+  "asset_id": "brute",
+  "display_name": "Hearthward / 遗迹重甲守卫",
+  "family": "heavy_guard",
+  "version": 1,
+  "atlas_file": "brute_atlas.png",
+  "frame_width": 128,
+  "frame_height": 192,
+  "columns": 16,
+  "rows": 9,
+  "frame_count": 144,
+  "fps": 12,
+  "direction_order": [
+    "E",
+    "SE",
+    "S",
+    "SW",
+    "W",
+    "NW",
+    "N",
+    "NE"
+  ],
+  "animation_offsets": {
+    "idle": 0,
+    "walk": 4,
+    "attack": 12
+  },
+  "animation_frames": {
+    "idle": 4,
+    "walk": 8,
+    "attack": 6
+  },
+  "frame_index": "direction*18 + animation_offset + frame",
+  "foot_anchor_px": [
+    64,
+    158
+  ],
+  "ground_origin": [
+    0,
+    0,
+    0
+  ],
+  "model_forward": "-Y",
+  "root_yaw_formula_degrees": "90 - 45 * direction",
+  "camera_elevation_degrees": 55,
+  "camera_ortho_scale": 5.294735908508301,
+  "camera_sensor_fit": "VERTICAL",
+  "camera_position": [
+    0.0,
+    -5.735764503479004,
+    8.191520690917969
+  ],
+  "camera_shift_y": 0.322916716337204,
+  "key_light_position": [
+    -3,
+    -4,
+    8
+  ],
+  "lighting_fixed_in_world": true,
+  "transparent": true,
+  "has_baked_shadow": false,
+  "cycles_samples": 40,
+  "cycles_threads": 3,
+  "denoising": false,
+  "global_projected_bounds": [
+    5.468251868313246,
+    62.1986504498188,
+    122.53174813168675,
+    184.76591020014018
+  ],
+  "test_only": false,
+  "frames": [
+    {
+      "index": 0,
+      "direction": 0,
+      "animation": "idle",
+      "frame": 0,
+      "file": "frames/000.png",
+      "atlas_rect": [
+        0,
+        0,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.673,
+        89.411
+      ],
+      "mesh_projected_bounds": [
+        40.36167943669349,
+        65.45728101572436,
+        89.87035614442753,
+        177.18072790237892
+      ],
+      "render_seconds": 0.884,
+      "alpha_bounds_px": [
+        39,
+        66,
+        90,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        40,
+        66,
+        90,
+        177
+      ],
+      "body_size_px": [
+        51,
+        112
+      ],
+      "visual_top_anchor_px": [
+        64,
+        66
+      ]
+    },
+    {
+      "index": 1,
+      "direction": 0,
+      "animation": "idle",
+      "frame": 1,
+      "file": "frames/001.png",
+      "atlas_rect": [
+        128,
+        0,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        63.243,
+        89.251
+      ],
+      "mesh_projected_bounds": [
+        40.554371243312914,
+        65.20765860315146,
+        89.87035614442753,
+        177.18072790237892
+      ],
+      "render_seconds": 0.354,
+      "alpha_bounds_px": [
+        39,
+        65,
+        90,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        40,
+        66,
+        90,
+        177
+      ],
+      "body_size_px": [
+        51,
+        113
+      ],
+      "visual_top_anchor_px": [
+        64,
+        65
+      ]
+    },
+    {
+      "index": 2,
+      "direction": 0,
+      "animation": "idle",
+      "frame": 2,
+      "file": "frames/002.png",
+      "atlas_rect": [
+        256,
+        0,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.661,
+        89.35
+      ],
+      "mesh_projected_bounds": [
+        40.36167943669349,
+        65.4938525295198,
+        89.87035614442753,
+        177.18072790237892
+      ],
+      "render_seconds": 0.37,
+      "alpha_bounds_px": [
+        39,
+        66,
+        90,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        40,
+        66,
+        90,
+        177
+      ],
+      "body_size_px": [
+        51,
+        112
+      ],
+      "visual_top_anchor_px": [
+        64,
+        66
+      ]
+    },
+    {
+      "index": 3,
+      "direction": 0,
+      "animation": "idle",
+      "frame": 3,
+      "file": "frames/003.png",
+      "atlas_rect": [
+        384,
+        0,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.092,
+        89.513
+      ],
+      "mesh_projected_bounds": [
+        40.170783761259365,
+        65.7465339211066,
+        89.87035614442753,
+        177.18072790237892
+      ],
+      "render_seconds": 0.379,
+      "alpha_bounds_px": [
+        39,
+        66,
+        90,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        39,
+        66,
+        90,
+        177
+      ],
+      "body_size_px": [
+        51,
+        112
+      ],
+      "visual_top_anchor_px": [
+        64,
+        66
+      ]
+    },
+    {
+      "index": 4,
+      "direction": 0,
+      "animation": "walk",
+      "frame": 0,
+      "file": "frames/004.png",
+      "atlas_rect": [
+        512,
+        0,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.667,
+        89.38
+      ],
+      "mesh_projected_bounds": [
+        40.36167943669349,
+        65.47550442963863,
+        89.87035614442753,
+        177.18072790237892
+      ],
+      "render_seconds": 0.345,
+      "alpha_bounds_px": [
+        39,
+        66,
+        91,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        40,
+        66,
+        90,
+        177
+      ],
+      "body_size_px": [
+        52,
+        112
+      ],
+      "visual_top_anchor_px": [
+        64,
+        66
+      ]
+    },
+    {
+      "index": 5,
+      "direction": 0,
+      "animation": "walk",
+      "frame": 1,
+      "file": "frames/005.png",
+      "atlas_rect": [
+        640,
+        0,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.671,
+        87.612
+      ],
+      "mesh_projected_bounds": [
+        40.37214498085622,
+        65.25747176764915,
+        93.197603789527,
+        177.03482475403513
+      ],
+      "render_seconds": 0.312,
+      "alpha_bounds_px": [
+        39,
+        65,
+        94,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        40,
+        65,
+        94,
+        177
+      ],
+      "body_size_px": [
+        55,
+        113
+      ],
+      "visual_top_anchor_px": [
+        64,
+        65
+      ]
+    },
+    {
+      "index": 6,
+      "direction": 0,
+      "animation": "walk",
+      "frame": 2,
+      "file": "frames/006.png",
+      "atlas_rect": [
+        768,
+        0,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.672,
+        86.667
+      ],
+      "mesh_projected_bounds": [
+        40.37851249285609,
+        64.97316674582213,
+        94.63501234615043,
+        176.68159445660902
+      ],
+      "render_seconds": 0.333,
+      "alpha_bounds_px": [
+        39,
+        65,
+        95,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        40,
+        65,
+        95,
+        177
+      ],
+      "body_size_px": [
+        56,
+        112
+      ],
+      "visual_top_anchor_px": [
+        64,
+        65
+      ]
+    },
+    {
+      "index": 7,
+      "direction": 0,
+      "animation": "walk",
+      "frame": 3,
+      "file": "frames/007.png",
+      "atlas_rect": [
+        896,
+        0,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.671,
+        87.612
+      ],
+      "mesh_projected_bounds": [
+        40.37214498085622,
+        65.25747176764915,
+        93.197603789527,
+        176.50618083978918
+      ],
+      "render_seconds": 0.359,
+      "alpha_bounds_px": [
+        39,
+        65,
+        94,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        40,
+        65,
+        94,
+        177
+      ],
+      "body_size_px": [
+        55,
+        112
+      ],
+      "visual_top_anchor_px": [
+        64,
+        65
+      ]
+    },
+    {
+      "index": 8,
+      "direction": 0,
+      "animation": "walk",
+      "frame": 4,
+      "file": "frames/008.png",
+      "atlas_rect": [
+        1024,
+        0,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.667,
+        89.38
+      ],
+      "mesh_projected_bounds": [
+        40.36167943669349,
+        65.47550442963863,
+        89.87035614442753,
+        176.84823471724982
+      ],
+      "render_seconds": 0.367,
+      "alpha_bounds_px": [
+        39,
+        66,
+        90,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        40,
+        66,
+        90,
+        177
+      ],
+      "body_size_px": [
+        51,
+        111
+      ],
+      "visual_top_anchor_px": [
+        64,
+        66
+      ]
+    },
+    {
+      "index": 9,
+      "direction": 0,
+      "animation": "walk",
+      "frame": 5,
+      "file": "frames/009.png",
+      "atlas_rect": [
+        1152,
+        0,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.661,
+        90.421
+      ],
+      "mesh_projected_bounds": [
+        39.82515495053704,
+        65.03354718392677,
+        93.38211250027693,
+        176.14800613813608
+      ],
+      "render_seconds": 0.402,
+      "alpha_bounds_px": [
+        39,
+        65,
+        94,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        40,
+        65,
+        94,
+        177
+      ],
+      "body_size_px": [
+        55,
+        112
+      ],
+      "visual_top_anchor_px": [
+        64,
+        65
+      ]
+    },
+    {
+      "index": 10,
+      "direction": 0,
+      "animation": "walk",
+      "frame": 6,
+      "file": "frames/010.png",
+      "atlas_rect": [
+        1280,
+        0,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.658,
+        90.639
+      ],
+      "mesh_projected_bounds": [
+        39.39099481207716,
+        64.65775605932927,
+        94.81955780085963,
+        175.6470189299033
+      ],
+      "render_seconds": 0.311,
+      "alpha_bounds_px": [
+        39,
+        65,
+        95,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        40,
+        65,
+        95,
+        176
+      ],
+      "body_size_px": [
+        56,
+        112
+      ],
+      "visual_top_anchor_px": [
+        64,
+        65
+      ]
+    },
+    {
+      "index": 11,
+      "direction": 0,
+      "animation": "walk",
+      "frame": 7,
+      "file": "frames/011.png",
+      "atlas_rect": [
+        1408,
+        0,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.661,
+        90.421
+      ],
+      "mesh_projected_bounds": [
+        39.82515495053704,
+        65.03354718392677,
+        93.38211250027693,
+        176.30516542021897
+      ],
+      "render_seconds": 0.323,
+      "alpha_bounds_px": [
+        39,
+        65,
+        94,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        40,
+        65,
+        94,
+        177
+      ],
+      "body_size_px": [
+        55,
+        112
+      ],
+      "visual_top_anchor_px": [
+        64,
+        65
+      ]
+    },
+    {
+      "index": 12,
+      "direction": 0,
+      "animation": "attack",
+      "frame": 0,
+      "file": "frames/012.png",
+      "atlas_rect": [
+        1536,
+        0,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.667,
+        89.38
+      ],
+      "mesh_projected_bounds": [
+        40.36167943669349,
+        65.47550442963863,
+        89.87035614442753,
+        177.18072790237892
+      ],
+      "render_seconds": 0.34,
+      "alpha_bounds_px": [
+        39,
+        66,
+        90,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        40,
+        66,
+        90,
+        177
+      ],
+      "body_size_px": [
+        51,
+        112
+      ],
+      "visual_top_anchor_px": [
+        64,
+        66
+      ]
+    },
+    {
+      "index": 13,
+      "direction": 0,
+      "animation": "attack",
+      "frame": 1,
+      "file": "frames/013.png",
+      "atlas_rect": [
+        1664,
+        0,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.74,
+        88.926
+      ],
+      "mesh_projected_bounds": [
+        38.643246595374976,
+        64.83713675633737,
+        89.87035614442753,
+        176.9103370707736
+      ],
+      "render_seconds": 0.362,
+      "alpha_bounds_px": [
+        38,
+        65,
+        90,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        38,
+        65,
+        90,
+        177
+      ],
+      "body_size_px": [
+        52,
+        112
+      ],
+      "visual_top_anchor_px": [
+        64,
+        65
+      ]
+    },
+    {
+      "index": 14,
+      "direction": 0,
+      "animation": "attack",
+      "frame": 2,
+      "file": "frames/014.png",
+      "atlas_rect": [
+        1792,
+        0,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.163,
+        89.948
+      ],
+      "mesh_projected_bounds": [
+        41.09617389114746,
+        66.59724227153775,
+        98.8731276115904,
+        177.18072790237892
+      ],
+      "render_seconds": 0.412,
+      "alpha_bounds_px": [
+        40,
+        66,
+        100,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        40,
+        67,
+        99,
+        177
+      ],
+      "body_size_px": [
+        60,
+        112
+      ],
+      "visual_top_anchor_px": [
+        64,
+        66
+      ]
+    },
+    {
+      "index": 15,
+      "direction": 0,
+      "animation": "attack",
+      "frame": 3,
+      "file": "frames/015.png",
+      "atlas_rect": [
+        1920,
+        0,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        67.656,
+        90.471
+      ],
+      "mesh_projected_bounds": [
+        41.66372108597132,
+        67.11023765366988,
+        100.73361476084096,
+        177.18072790237892
+      ],
+      "render_seconds": 0.335,
+      "alpha_bounds_px": [
+        41,
+        67,
+        102,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        41,
+        67,
+        101,
+        177
+      ],
+      "body_size_px": [
+        61,
+        111
+      ],
+      "visual_top_anchor_px": [
+        64,
+        67
+      ]
+    },
+    {
+      "index": 16,
+      "direction": 0,
+      "animation": "attack",
+      "frame": 4,
+      "file": "frames/016.png",
+      "atlas_rect": [
+        0,
+        192,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        64.887,
+        89.839
+      ],
+      "mesh_projected_bounds": [
+        41.03874308281458,
+        66.26928675701387,
+        92.71130613427792,
+        177.18072790237892
+      ],
+      "render_seconds": 0.411,
+      "alpha_bounds_px": [
+        40,
+        66,
+        93,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        40,
+        66,
+        93,
+        177
+      ],
+      "body_size_px": [
+        53,
+        112
+      ],
+      "visual_top_anchor_px": [
+        64,
+        66
+      ]
+    },
+    {
+      "index": 17,
+      "direction": 0,
+      "animation": "attack",
+      "frame": 5,
+      "file": "frames/017.png",
+      "atlas_rect": [
+        128,
+        192,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.667,
+        89.38
+      ],
+      "mesh_projected_bounds": [
+        40.36167943669349,
+        65.47550442963863,
+        89.87035614442753,
+        177.18072790237892
+      ],
+      "render_seconds": 0.402,
+      "alpha_bounds_px": [
+        39,
+        66,
+        90,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        40,
+        66,
+        90,
+        177
+      ],
+      "body_size_px": [
+        51,
+        112
+      ],
+      "visual_top_anchor_px": [
+        64,
+        66
+      ]
+    },
+    {
+      "index": 18,
+      "direction": 1,
+      "animation": "idle",
+      "frame": 0,
+      "file": "frames/018.png",
+      "atlas_rect": [
+        256,
+        192,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.315,
+        88.389
+      ],
+      "mesh_projected_bounds": [
+        20.55924666237867,
+        71.93686014215906,
+        110.22473073792497,
+        182.19719090177523
+      ],
+      "render_seconds": 0.559,
+      "alpha_bounds_px": [
+        20,
+        72,
+        111,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        21,
+        72,
+        111,
+        183
+      ],
+      "body_size_px": [
+        91,
+        111
+      ],
+      "visual_top_anchor_px": [
+        64,
+        72
+      ]
+    },
+    {
+      "index": 19,
+      "direction": 1,
+      "animation": "idle",
+      "frame": 1,
+      "file": "frames/019.png",
+      "atlas_rect": [
+        384,
+        192,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.696,
+        88.551
+      ],
+      "mesh_projected_bounds": [
+        20.922199169190257,
+        71.89095409478557,
+        109.77316044700108,
+        182.19719090177523
+      ],
+      "render_seconds": 0.529,
+      "alpha_bounds_px": [
+        21,
+        72,
+        111,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        21,
+        72,
+        110,
+        183
+      ],
+      "body_size_px": [
+        90,
+        111
+      ],
+      "visual_top_anchor_px": [
+        64,
+        72
+      ]
+    },
+    {
+      "index": 20,
+      "direction": 1,
+      "animation": "idle",
+      "frame": 2,
+      "file": "frames/020.png",
+      "atlas_rect": [
+        512,
+        192,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.358,
+        88.339
+      ],
+      "mesh_projected_bounds": [
+        20.64051133181902,
+        71.93205099466962,
+        110.71424240890515,
+        182.19719090177523
+      ],
+      "render_seconds": 0.428,
+      "alpha_bounds_px": [
+        20,
+        72,
+        112,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        21,
+        72,
+        111,
+        183
+      ],
+      "body_size_px": [
+        92,
+        111
+      ],
+      "visual_top_anchor_px": [
+        64,
+        72
+      ]
+    },
+    {
+      "index": 21,
+      "direction": 1,
+      "animation": "idle",
+      "frame": 3,
+      "file": "frames/021.png",
+      "atlas_rect": [
+        640,
+        192,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        61.977,
+        88.18
+      ],
+      "mesh_projected_bounds": [
+        20.282633814204885,
+        71.9829671372959,
+        111.19294271022363,
+        182.19719090177523
+      ],
+      "render_seconds": 0.577,
+      "alpha_bounds_px": [
+        20,
+        72,
+        112,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        20,
+        72,
+        112,
+        183
+      ],
+      "body_size_px": [
+        92,
+        111
+      ],
+      "visual_top_anchor_px": [
+        64,
+        72
+      ]
+    },
+    {
+      "index": 22,
+      "direction": 1,
+      "animation": "walk",
+      "frame": 0,
+      "file": "frames/022.png",
+      "atlas_rect": [
+        768,
+        192,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.336,
+        88.364
+      ],
+      "mesh_projected_bounds": [
+        20.599682308846305,
+        71.93431532242316,
+        110.46995992206678,
+        182.19719090177523
+      ],
+      "render_seconds": 0.563,
+      "alpha_bounds_px": [
+        20,
+        72,
+        111,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        21,
+        72,
+        111,
+        183
+      ],
+      "body_size_px": [
+        91,
+        111
+      ],
+      "visual_top_anchor_px": [
+        64,
+        72
+      ]
+    },
+    {
+      "index": 23,
+      "direction": 1,
+      "animation": "walk",
+      "frame": 1,
+      "file": "frames/023.png",
+      "atlas_rect": [
+        896,
+        192,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        63.541,
+        87.006
+      ],
+      "mesh_projected_bounds": [
+        22.28970126260529,
+        71.17282065541055,
+        113.01774715220807,
+        183.92211427631167
+      ],
+      "render_seconds": 0.584,
+      "alpha_bounds_px": [
+        22,
+        71,
+        114,
+        185
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        71,
+        114,
+        184
+      ],
+      "body_size_px": [
+        92,
+        114
+      ],
+      "visual_top_anchor_px": [
+        64,
+        71
+      ]
+    },
+    {
+      "index": 24,
+      "direction": 1,
+      "animation": "walk",
+      "frame": 2,
+      "file": "frames/024.png",
+      "atlas_rect": [
+        1024,
+        192,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        64.039,
+        86.23
+      ],
+      "mesh_projected_bounds": [
+        23.027169816350444,
+        70.66581218077417,
+        114.06970509190222,
+        184.33675269728857
+      ],
+      "render_seconds": 0.536,
+      "alpha_bounds_px": [
+        23,
+        71,
+        115,
+        185
+      ],
+      "alpha_bounds_8_px": [
+        23,
+        71,
+        115,
+        185
+      ],
+      "body_size_px": [
+        92,
+        114
+      ],
+      "visual_top_anchor_px": [
+        64,
+        71
+      ]
+    },
+    {
+      "index": 25,
+      "direction": 1,
+      "animation": "walk",
+      "frame": 3,
+      "file": "frames/025.png",
+      "atlas_rect": [
+        1152,
+        192,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        63.541,
+        87.006
+      ],
+      "mesh_projected_bounds": [
+        22.28970126260529,
+        71.17282065541055,
+        113.01774715220807,
+        182.99093393295774
+      ],
+      "render_seconds": 0.487,
+      "alpha_bounds_px": [
+        22,
+        71,
+        114,
+        184
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        71,
+        114,
+        183
+      ],
+      "body_size_px": [
+        92,
+        113
+      ],
+      "visual_top_anchor_px": [
+        64,
+        71
+      ]
+    },
+    {
+      "index": 26,
+      "direction": 1,
+      "animation": "walk",
+      "frame": 4,
+      "file": "frames/026.png",
+      "atlas_rect": [
+        1280,
+        192,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.336,
+        88.364
+      ],
+      "mesh_projected_bounds": [
+        20.599682308846305,
+        71.93431532242316,
+        110.46995992206678,
+        180.90763497068014
+      ],
+      "render_seconds": 0.467,
+      "alpha_bounds_px": [
+        20,
+        72,
+        111,
+        182
+      ],
+      "alpha_bounds_8_px": [
+        21,
+        72,
+        111,
+        181
+      ],
+      "body_size_px": [
+        91,
+        110
+      ],
+      "visual_top_anchor_px": [
+        64,
+        72
+      ]
+    },
+    {
+      "index": 27,
+      "direction": 1,
+      "animation": "walk",
+      "frame": 5,
+      "file": "frames/027.png",
+      "atlas_rect": [
+        1408,
+        192,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        61.131,
+        88.993
+      ],
+      "mesh_projected_bounds": [
+        19.04062314873036,
+        72.04241350902456,
+        108.462767111923,
+        178.30824671571645
+      ],
+      "render_seconds": 0.488,
+      "alpha_bounds_px": [
+        19,
+        72,
+        109,
+        179
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        72,
+        109,
+        179
+      ],
+      "body_size_px": [
+        90,
+        107
+      ],
+      "visual_top_anchor_px": [
+        64,
+        72
+      ]
+    },
+    {
+      "index": 28,
+      "direction": 1,
+      "animation": "walk",
+      "frame": 6,
+      "file": "frames/028.png",
+      "atlas_rect": [
+        1536,
+        192,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        60.631,
+        89.041
+      ],
+      "mesh_projected_bounds": [
+        18.4339112161476,
+        71.89591218243493,
+        107.64820973163762,
+        177.66824042247117
+      ],
+      "render_seconds": 0.449,
+      "alpha_bounds_px": [
+        19,
+        72,
+        108,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        72,
+        108,
+        178
+      ],
+      "body_size_px": [
+        89,
+        106
+      ],
+      "visual_top_anchor_px": [
+        64,
+        72
+      ]
+    },
+    {
+      "index": 29,
+      "direction": 1,
+      "animation": "walk",
+      "frame": 7,
+      "file": "frames/029.png",
+      "atlas_rect": [
+        1664,
+        192,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        61.131,
+        88.993
+      ],
+      "mesh_projected_bounds": [
+        19.04062314873036,
+        72.04241350902456,
+        108.462767111923,
+        179.20036216425905
+      ],
+      "render_seconds": 0.486,
+      "alpha_bounds_px": [
+        19,
+        72,
+        109,
+        180
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        72,
+        109,
+        180
+      ],
+      "body_size_px": [
+        90,
+        108
+      ],
+      "visual_top_anchor_px": [
+        64,
+        72
+      ]
+    },
+    {
+      "index": 30,
+      "direction": 1,
+      "animation": "attack",
+      "frame": 0,
+      "file": "frames/030.png",
+      "atlas_rect": [
+        1792,
+        192,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.336,
+        88.364
+      ],
+      "mesh_projected_bounds": [
+        20.599682308846305,
+        71.93431532242316,
+        110.46995992206678,
+        182.19719090177523
+      ],
+      "render_seconds": 0.416,
+      "alpha_bounds_px": [
+        20,
+        72,
+        111,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        21,
+        72,
+        111,
+        183
+      ],
+      "body_size_px": [
+        91,
+        111
+      ],
+      "visual_top_anchor_px": [
+        64,
+        72
+      ]
+    },
+    {
+      "index": 31,
+      "direction": 1,
+      "animation": "attack",
+      "frame": 1,
+      "file": "frames/031.png",
+      "atlas_rect": [
+        1920,
+        192,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.499,
+        87.989
+      ],
+      "mesh_projected_bounds": [
+        19.022004768429298,
+        71.82817761911397,
+        106.44172831336402,
+        181.9268000314283
+      ],
+      "render_seconds": 0.412,
+      "alpha_bounds_px": [
+        19,
+        72,
+        107,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        72,
+        107,
+        182
+      ],
+      "body_size_px": [
+        88,
+        111
+      ],
+      "visual_top_anchor_px": [
+        64,
+        72
+      ]
+    },
+    {
+      "index": 32,
+      "direction": 1,
+      "animation": "attack",
+      "frame": 2,
+      "file": "frames/032.png",
+      "atlas_rect": [
+        0,
+        384,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        64.138,
+        90.389
+      ],
+      "mesh_projected_bounds": [
+        21.174431319686313,
+        72.55442507444717,
+        120.80412065491424,
+        182.19719090177523
+      ],
+      "render_seconds": 0.551,
+      "alpha_bounds_px": [
+        21,
+        73,
+        121,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        21,
+        73,
+        121,
+        183
+      ],
+      "body_size_px": [
+        100,
+        110
+      ],
+      "visual_top_anchor_px": [
+        64,
+        73
+      ]
+    },
+    {
+      "index": 33,
+      "direction": 1,
+      "animation": "attack",
+      "frame": 3,
+      "file": "frames/033.png",
+      "atlas_rect": [
+        128,
+        384,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        66.062,
+        92.411
+      ],
+      "mesh_projected_bounds": [
+        22.739793149521077,
+        73.11597619901822,
+        122.53174813168675,
+        182.19719090177523
+      ],
+      "render_seconds": 0.438,
+      "alpha_bounds_px": [
+        23,
+        73,
+        123,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        23,
+        73,
+        123,
+        183
+      ],
+      "body_size_px": [
+        100,
+        110
+      ],
+      "visual_top_anchor_px": [
+        64,
+        73
+      ]
+    },
+    {
+      "index": 34,
+      "direction": 1,
+      "animation": "attack",
+      "frame": 4,
+      "file": "frames/034.png",
+      "atlas_rect": [
+        256,
+        384,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        63.935,
+        90.118
+      ],
+      "mesh_projected_bounds": [
+        21.328034037874737,
+        72.45641799245102,
+        116.2371015644461,
+        182.19719090177523
+      ],
+      "render_seconds": 0.439,
+      "alpha_bounds_px": [
+        21,
+        73,
+        117,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        73,
+        117,
+        183
+      ],
+      "body_size_px": [
+        96,
+        110
+      ],
+      "visual_top_anchor_px": [
+        64,
+        73
+      ]
+    },
+    {
+      "index": 35,
+      "direction": 1,
+      "animation": "attack",
+      "frame": 5,
+      "file": "frames/035.png",
+      "atlas_rect": [
+        384,
+        384,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.336,
+        88.364
+      ],
+      "mesh_projected_bounds": [
+        20.599682308846305,
+        71.93431532242316,
+        110.46995992206678,
+        182.19719090177523
+      ],
+      "render_seconds": 0.434,
+      "alpha_bounds_px": [
+        20,
+        72,
+        111,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        21,
+        72,
+        111,
+        183
+      ],
+      "body_size_px": [
+        91,
+        111
+      ],
+      "visual_top_anchor_px": [
+        64,
+        72
+      ]
+    },
+    {
+      "index": 36,
+      "direction": 2,
+      "animation": "idle",
+      "frame": 0,
+      "file": "frames/036.png",
+      "atlas_rect": [
+        512,
+        384,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.943,
+        87.458
+      ],
+      "mesh_projected_bounds": [
+        15.749263544787013,
+        82.89657571187765,
+        113.46334763045593,
+        177.83670730940204
+      ],
+      "render_seconds": 0.48,
+      "alpha_bounds_px": [
+        15,
+        82,
+        114,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        82,
+        114,
+        178
+      ],
+      "body_size_px": [
+        99,
+        96
+      ],
+      "visual_top_anchor_px": [
+        64,
+        82
+      ]
+    },
+    {
+      "index": 37,
+      "direction": 2,
+      "animation": "idle",
+      "frame": 1,
+      "file": "frames/037.png",
+      "atlas_rect": [
+        640,
+        384,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.913,
+        87.74
+      ],
+      "mesh_projected_bounds": [
+        15.733498224852497,
+        83.07771085598795,
+        113.4746345101787,
+        177.83670730940204
+      ],
+      "render_seconds": 0.448,
+      "alpha_bounds_px": [
+        15,
+        82,
+        114,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        82,
+        114,
+        178
+      ],
+      "body_size_px": [
+        99,
+        96
+      ],
+      "visual_top_anchor_px": [
+        64,
+        82
+      ]
+    },
+    {
+      "index": 38,
+      "direction": 2,
+      "animation": "idle",
+      "frame": 2,
+      "file": "frames/038.png",
+      "atlas_rect": [
+        768,
+        384,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        63.017,
+        87.449
+      ],
+      "mesh_projected_bounds": [
+        15.739701469740353,
+        82.89657571187765,
+        113.44614281188191,
+        177.83670730940204
+      ],
+      "render_seconds": 0.462,
+      "alpha_bounds_px": [
+        15,
+        82,
+        114,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        82,
+        114,
+        178
+      ],
+      "body_size_px": [
+        99,
+        96
+      ],
+      "visual_top_anchor_px": [
+        64,
+        82
+      ]
+    },
+    {
+      "index": 39,
+      "direction": 2,
+      "animation": "idle",
+      "frame": 3,
+      "file": "frames/039.png",
+      "atlas_rect": [
+        896,
+        384,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        63.048,
+        87.17
+      ],
+      "mesh_projected_bounds": [
+        15.756110889666715,
+        82.71975788160091,
+        113.4339567858618,
+        177.83670730940204
+      ],
+      "render_seconds": 0.474,
+      "alpha_bounds_px": [
+        15,
+        82,
+        114,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        82,
+        114,
+        178
+      ],
+      "body_size_px": [
+        99,
+        96
+      ],
+      "visual_top_anchor_px": [
+        64,
+        82
+      ]
+    },
+    {
+      "index": 40,
+      "direction": 2,
+      "animation": "walk",
+      "frame": 0,
+      "file": "frames/040.png",
+      "atlas_rect": [
+        1024,
+        384,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.98,
+        87.453
+      ],
+      "mesh_projected_bounds": [
+        15.744413342163888,
+        82.89635528177627,
+        113.45484464599987,
+        177.83670730940204
+      ],
+      "render_seconds": 0.515,
+      "alpha_bounds_px": [
+        15,
+        82,
+        114,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        82,
+        114,
+        178
+      ],
+      "body_size_px": [
+        99,
+        96
+      ],
+      "visual_top_anchor_px": [
+        64,
+        82
+      ]
+    },
+    {
+      "index": 41,
+      "direction": 2,
+      "animation": "walk",
+      "frame": 1,
+      "file": "frames/041.png",
+      "atlas_rect": [
+        1152,
+        384,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        64.679,
+        87.081
+      ],
+      "mesh_projected_bounds": [
+        15.934626012237537,
+        82.5307504613056,
+        113.52444202766856,
+        179.9619886052282
+      ],
+      "render_seconds": 0.469,
+      "alpha_bounds_px": [
+        15,
+        82,
+        114,
+        180
+      ],
+      "alpha_bounds_8_px": [
+        16,
+        82,
+        114,
+        180
+      ],
+      "body_size_px": [
+        99,
+        98
+      ],
+      "visual_top_anchor_px": [
+        64,
+        82
+      ]
+    },
+    {
+      "index": 42,
+      "direction": 2,
+      "animation": "walk",
+      "frame": 2,
+      "file": "frames/042.png",
+      "atlas_rect": [
+        1280,
+        384,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.383,
+        86.713
+      ],
+      "mesh_projected_bounds": [
+        15.997635418150757,
+        82.16513076403312,
+        113.86227031197964,
+        180.54237579253464
+      ],
+      "render_seconds": 0.462,
+      "alpha_bounds_px": [
+        15,
+        81,
+        114,
+        182
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        82,
+        114,
+        181
+      ],
+      "body_size_px": [
+        99,
+        101
+      ],
+      "visual_top_anchor_px": [
+        64,
+        81
+      ]
+    },
+    {
+      "index": 43,
+      "direction": 2,
+      "animation": "walk",
+      "frame": 3,
+      "file": "frames/043.png",
+      "atlas_rect": [
+        1408,
+        384,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        64.679,
+        87.081
+      ],
+      "mesh_projected_bounds": [
+        15.934626012237537,
+        82.5307504613056,
+        113.52444202766856,
+        179.05034067053828
+      ],
+      "render_seconds": 0.496,
+      "alpha_bounds_px": [
+        15,
+        82,
+        114,
+        180
+      ],
+      "alpha_bounds_8_px": [
+        16,
+        82,
+        114,
+        179
+      ],
+      "body_size_px": [
+        99,
+        98
+      ],
+      "visual_top_anchor_px": [
+        64,
+        82
+      ]
+    },
+    {
+      "index": 44,
+      "direction": 2,
+      "animation": "walk",
+      "frame": 4,
+      "file": "frames/044.png",
+      "atlas_rect": [
+        1536,
+        384,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.98,
+        87.453
+      ],
+      "mesh_projected_bounds": [
+        15.744413342163888,
+        82.89635528177627,
+        113.45484464599987,
+        177.78930480828868
+      ],
+      "render_seconds": 0.752,
+      "alpha_bounds_px": [
+        15,
+        82,
+        114,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        82,
+        114,
+        178
+      ],
+      "body_size_px": [
+        99,
+        96
+      ],
+      "visual_top_anchor_px": [
+        64,
+        82
+      ]
+    },
+    {
+      "index": 45,
+      "direction": 2,
+      "animation": "walk",
+      "frame": 5,
+      "file": "frames/045.png",
+      "atlas_rect": [
+        1664,
+        384,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        61.281,
+        87.097
+      ],
+      "mesh_projected_bounds": [
+        15.495488148001783,
+        82.5307504613056,
+        113.4828392201419,
+        179.90261499562104
+      ],
+      "render_seconds": 0.564,
+      "alpha_bounds_px": [
+        15,
+        82,
+        114,
+        181
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        82,
+        114,
+        180
+      ],
+      "body_size_px": [
+        99,
+        99
+      ],
+      "visual_top_anchor_px": [
+        64,
+        82
+      ]
+    },
+    {
+      "index": 46,
+      "direction": 2,
+      "animation": "walk",
+      "frame": 6,
+      "file": "frames/046.png",
+      "atlas_rect": [
+        1792,
+        384,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        60.578,
+        86.736
+      ],
+      "mesh_projected_bounds": [
+        15.367926089886168,
+        82.16513076403312,
+        113.5210053867725,
+        180.4779043383413
+      ],
+      "render_seconds": 0.508,
+      "alpha_bounds_px": [
+        15,
+        81,
+        114,
+        181
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        82,
+        114,
+        181
+      ],
+      "body_size_px": [
+        99,
+        100
+      ],
+      "visual_top_anchor_px": [
+        64,
+        81
+      ]
+    },
+    {
+      "index": 47,
+      "direction": 2,
+      "animation": "walk",
+      "frame": 7,
+      "file": "frames/047.png",
+      "atlas_rect": [
+        1920,
+        384,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        61.281,
+        87.097
+      ],
+      "mesh_projected_bounds": [
+        15.495488148001783,
+        82.5307504613056,
+        113.4828392201419,
+        178.99096713841445
+      ],
+      "render_seconds": 0.475,
+      "alpha_bounds_px": [
+        15,
+        82,
+        114,
+        180
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        82,
+        114,
+        179
+      ],
+      "body_size_px": [
+        99,
+        98
+      ],
+      "visual_top_anchor_px": [
+        64,
+        82
+      ]
+    },
+    {
+      "index": 48,
+      "direction": 2,
+      "animation": "attack",
+      "frame": 0,
+      "file": "frames/048.png",
+      "atlas_rect": [
+        0,
+        576,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.98,
+        87.453
+      ],
+      "mesh_projected_bounds": [
+        15.744413342163888,
+        82.89635528177627,
+        113.45484464599987,
+        177.83670730940204
+      ],
+      "render_seconds": 0.536,
+      "alpha_bounds_px": [
+        15,
+        82,
+        114,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        82,
+        114,
+        178
+      ],
+      "body_size_px": [
+        99,
+        96
+      ],
+      "visual_top_anchor_px": [
+        64,
+        82
+      ]
+    },
+    {
+      "index": 49,
+      "direction": 2,
+      "animation": "attack",
+      "frame": 1,
+      "file": "frames/049.png",
+      "atlas_rect": [
+        128,
+        576,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        63.137,
+        87.187
+      ],
+      "mesh_projected_bounds": [
+        16.489170168299935,
+        80.50246975916373,
+        113.09487920693567,
+        177.56631647779673
+      ],
+      "render_seconds": 0.9,
+      "alpha_bounds_px": [
+        16,
+        80,
+        113,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        16,
+        80,
+        113,
+        178
+      ],
+      "body_size_px": [
+        97,
+        98
+      ],
+      "visual_top_anchor_px": [
+        64,
+        80
+      ]
+    },
+    {
+      "index": 50,
+      "direction": 2,
+      "animation": "attack",
+      "frame": 2,
+      "file": "frames/050.png",
+      "atlas_rect": [
+        256,
+        576,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        63.032,
+        90.108
+      ],
+      "mesh_projected_bounds": [
+        15.561398165287656,
+        85.22256992567158,
+        114.23345346566683,
+        177.83670730940204
+      ],
+      "render_seconds": 0.589,
+      "alpha_bounds_px": [
+        15,
+        84,
+        115,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        85,
+        115,
+        178
+      ],
+      "body_size_px": [
+        100,
+        94
+      ],
+      "visual_top_anchor_px": [
+        64,
+        84
+      ]
+    },
+    {
+      "index": 51,
+      "direction": 2,
+      "animation": "attack",
+      "frame": 3,
+      "file": "frames/051.png",
+      "atlas_rect": [
+        384,
+        576,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        63.26,
+        92.859
+      ],
+      "mesh_projected_bounds": [
+        16.460293739135537,
+        87.6466898526339,
+        114.79274407670266,
+        177.83670730940204
+      ],
+      "render_seconds": 0.625,
+      "alpha_bounds_px": [
+        16,
+        87,
+        115,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        16,
+        87,
+        115,
+        178
+      ],
+      "body_size_px": [
+        99,
+        91
+      ],
+      "visual_top_anchor_px": [
+        64,
+        87
+      ]
+    },
+    {
+      "index": 52,
+      "direction": 2,
+      "animation": "attack",
+      "frame": 4,
+      "file": "frames/052.png",
+      "atlas_rect": [
+        512,
+        576,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        63.022,
+        89.765
+      ],
+      "mesh_projected_bounds": [
+        15.753495584330715,
+        84.91517542857001,
+        113.91302020395419,
+        177.83670730940204
+      ],
+      "render_seconds": 0.585,
+      "alpha_bounds_px": [
+        15,
+        84,
+        114,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        84,
+        114,
+        178
+      ],
+      "body_size_px": [
+        99,
+        94
+      ],
+      "visual_top_anchor_px": [
+        64,
+        84
+      ]
+    },
+    {
+      "index": 53,
+      "direction": 2,
+      "animation": "attack",
+      "frame": 5,
+      "file": "frames/053.png",
+      "atlas_rect": [
+        640,
+        576,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.98,
+        87.453
+      ],
+      "mesh_projected_bounds": [
+        15.744413342163888,
+        82.89635528177627,
+        113.45484464599987,
+        177.83670730940204
+      ],
+      "render_seconds": 0.574,
+      "alpha_bounds_px": [
+        15,
+        82,
+        114,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        82,
+        114,
+        178
+      ],
+      "body_size_px": [
+        99,
+        96
+      ],
+      "visual_top_anchor_px": [
+        64,
+        82
+      ]
+    },
+    {
+      "index": 54,
+      "direction": 3,
+      "animation": "idle",
+      "frame": 0,
+      "file": "frames/054.png",
+      "atlas_rect": [
+        768,
+        576,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        64.191,
+        87.164
+      ],
+      "mesh_projected_bounds": [
+        17.532888815481023,
+        68.83665342499076,
+        104.74648739457051,
+        182.6439831943754
+      ],
+      "render_seconds": 0.577,
+      "alpha_bounds_px": [
+        16,
+        69,
+        106,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        69,
+        105,
+        183
+      ],
+      "body_size_px": [
+        90,
+        114
+      ],
+      "visual_top_anchor_px": [
+        64,
+        69
+      ]
+    },
+    {
+      "index": 55,
+      "direction": 3,
+      "animation": "idle",
+      "frame": 1,
+      "file": "frames/055.png",
+      "atlas_rect": [
+        896,
+        576,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        63.766,
+        87.292
+      ],
+      "mesh_projected_bounds": [
+        18.443780211324594,
+        68.71634017392917,
+        104.49362411253882,
+        182.6439831943754
+      ],
+      "render_seconds": 0.666,
+      "alpha_bounds_px": [
+        18,
+        69,
+        105,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        18,
+        69,
+        105,
+        183
+      ],
+      "body_size_px": [
+        87,
+        114
+      ],
+      "visual_top_anchor_px": [
+        64,
+        69
+      ]
+    },
+    {
+      "index": 56,
+      "direction": 3,
+      "animation": "idle",
+      "frame": 2,
+      "file": "frames/056.png",
+      "atlas_rect": [
+        1024,
+        576,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        64.251,
+        87.2
+      ],
+      "mesh_projected_bounds": [
+        18.008355648384082,
+        68.8085951677907,
+        104.80318548512744,
+        182.6439831943754
+      ],
+      "render_seconds": 0.644,
+      "alpha_bounds_px": [
+        17,
+        69,
+        106,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        69,
+        105,
+        183
+      ],
+      "body_size_px": [
+        89,
+        114
+      ],
+      "visual_top_anchor_px": [
+        64,
+        69
+      ]
+    },
+    {
+      "index": 57,
+      "direction": 3,
+      "animation": "idle",
+      "frame": 3,
+      "file": "frames/057.png",
+      "atlas_rect": [
+        1152,
+        576,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        64.676,
+        87.076
+      ],
+      "mesh_projected_bounds": [
+        17.072789603188653,
+        68.93686415002048,
+        105.05377064168462,
+        182.6439831943754
+      ],
+      "render_seconds": 0.524,
+      "alpha_bounds_px": [
+        16,
+        69,
+        106,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        16,
+        69,
+        105,
+        183
+      ],
+      "body_size_px": [
+        90,
+        114
+      ],
+      "visual_top_anchor_px": [
+        64,
+        69
+      ]
+    },
+    {
+      "index": 58,
+      "direction": 3,
+      "animation": "walk",
+      "frame": 0,
+      "file": "frames/058.png",
+      "atlas_rect": [
+        1280,
+        576,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        64.221,
+        87.182
+      ],
+      "mesh_projected_bounds": [
+        17.770155367508934,
+        68.82236400012793,
+        104.77492289622371,
+        181.35442734076366
+      ],
+      "render_seconds": 0.544,
+      "alpha_bounds_px": [
+        16,
+        69,
+        106,
+        182
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        69,
+        105,
+        182
+      ],
+      "body_size_px": [
+        90,
+        113
+      ],
+      "visual_top_anchor_px": [
+        64,
+        69
+      ]
+    },
+    {
+      "index": 59,
+      "direction": 3,
+      "animation": "walk",
+      "frame": 1,
+      "file": "frames/059.png",
+      "atlas_rect": [
+        1408,
+        576,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.42,
+        87.793
+      ],
+      "mesh_projected_bounds": [
+        19.74327572036622,
+        68.71217834199453,
+        106.30313009901236,
+        178.76839649503253
+      ],
+      "render_seconds": 0.555,
+      "alpha_bounds_px": [
+        19,
+        69,
+        107,
+        179
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        69,
+        106,
+        179
+      ],
+      "body_size_px": [
+        88,
+        110
+      ],
+      "visual_top_anchor_px": [
+        64,
+        69
+      ]
+    },
+    {
+      "index": 60,
+      "direction": 3,
+      "animation": "walk",
+      "frame": 2,
+      "file": "frames/060.png",
+      "atlas_rect": [
+        1536,
+        576,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.917,
+        87.833
+      ],
+      "mesh_projected_bounds": [
+        20.54313119412644,
+        68.4909568820683,
+        106.91282909934252,
+        178.13387465373853
+      ],
+      "render_seconds": 0.637,
+      "alpha_bounds_px": [
+        20,
+        68,
+        107,
+        179
+      ],
+      "alpha_bounds_8_px": [
+        20,
+        69,
+        107,
+        178
+      ],
+      "body_size_px": [
+        87,
+        111
+      ],
+      "visual_top_anchor_px": [
+        64,
+        68
+      ]
+    },
+    {
+      "index": 61,
+      "direction": 3,
+      "animation": "walk",
+      "frame": 3,
+      "file": "frames/061.png",
+      "atlas_rect": [
+        1664,
+        576,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.42,
+        87.793
+      ],
+      "mesh_projected_bounds": [
+        19.74327572036622,
+        68.71217834199453,
+        106.30313009901236,
+        179.66051202105845
+      ],
+      "render_seconds": 0.556,
+      "alpha_bounds_px": [
+        19,
+        69,
+        107,
+        180
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        69,
+        106,
+        180
+      ],
+      "body_size_px": [
+        88,
+        111
+      ],
+      "visual_top_anchor_px": [
+        64,
+        69
+      ]
+    },
+    {
+      "index": 62,
+      "direction": 3,
+      "animation": "walk",
+      "frame": 4,
+      "file": "frames/062.png",
+      "atlas_rect": [
+        1792,
+        576,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        64.221,
+        87.182
+      ],
+      "mesh_projected_bounds": [
+        17.770155367508934,
+        68.82236400012793,
+        104.77492289622371,
+        182.6439831943754
+      ],
+      "render_seconds": 0.542,
+      "alpha_bounds_px": [
+        16,
+        69,
+        106,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        69,
+        105,
+        183
+      ],
+      "body_size_px": [
+        90,
+        114
+      ],
+      "visual_top_anchor_px": [
+        64,
+        69
+      ]
+    },
+    {
+      "index": 63,
+      "direction": 3,
+      "animation": "walk",
+      "frame": 5,
+      "file": "frames/063.png",
+      "atlas_rect": [
+        1920,
+        576,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        63.024,
+        85.844
+      ],
+      "mesh_projected_bounds": [
+        15.28900438820137,
+        68.33039559362157,
+        103.16979977964431,
+        184.35645260614288
+      ],
+      "render_seconds": 0.558,
+      "alpha_bounds_px": [
+        14,
+        68,
+        104,
+        185
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        69,
+        104,
+        185
+      ],
+      "body_size_px": [
+        90,
+        117
+      ],
+      "visual_top_anchor_px": [
+        64,
+        68
+      ]
+    },
+    {
+      "index": 64,
+      "direction": 3,
+      "animation": "walk",
+      "frame": 6,
+      "file": "frames/064.png",
+      "atlas_rect": [
+        0,
+        768,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.529,
+        85.076
+      ],
+      "mesh_projected_bounds": [
+        14.265131801842706,
+        67.94928168295337,
+        102.48329293599184,
+        184.76591020014018
+      ],
+      "render_seconds": 0.522,
+      "alpha_bounds_px": [
+        13,
+        68,
+        103,
+        185
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        68,
+        103,
+        185
+      ],
+      "body_size_px": [
+        90,
+        117
+      ],
+      "visual_top_anchor_px": [
+        64,
+        68
+      ]
+    },
+    {
+      "index": 65,
+      "direction": 3,
+      "animation": "walk",
+      "frame": 7,
+      "file": "frames/065.png",
+      "atlas_rect": [
+        128,
+        768,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        63.024,
+        85.844
+      ],
+      "mesh_projected_bounds": [
+        15.28900438820137,
+        68.33039559362157,
+        103.16979977964431,
+        183.42527226278898
+      ],
+      "render_seconds": 0.536,
+      "alpha_bounds_px": [
+        14,
+        68,
+        104,
+        184
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        69,
+        104,
+        184
+      ],
+      "body_size_px": [
+        90,
+        116
+      ],
+      "visual_top_anchor_px": [
+        64,
+        68
+      ]
+    },
+    {
+      "index": 66,
+      "direction": 3,
+      "animation": "attack",
+      "frame": 0,
+      "file": "frames/066.png",
+      "atlas_rect": [
+        256,
+        768,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        64.221,
+        87.182
+      ],
+      "mesh_projected_bounds": [
+        17.770155367508934,
+        68.82236400012793,
+        104.77492289622371,
+        182.6439831943754
+      ],
+      "render_seconds": 0.534,
+      "alpha_bounds_px": [
+        16,
+        69,
+        106,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        69,
+        105,
+        183
+      ],
+      "body_size_px": [
+        90,
+        114
+      ],
+      "visual_top_anchor_px": [
+        64,
+        69
+      ]
+    },
+    {
+      "index": 67,
+      "direction": 3,
+      "animation": "attack",
+      "frame": 1,
+      "file": "frames/067.png",
+      "atlas_rect": [
+        384,
+        768,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        64.281,
+        86.989
+      ],
+      "mesh_projected_bounds": [
+        21.892676298507205,
+        66.99519015197674,
+        104.02132158295137,
+        182.3735924015118
+      ],
+      "render_seconds": 0.523,
+      "alpha_bounds_px": [
+        21,
+        67,
+        105,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        21,
+        67,
+        104,
+        183
+      ],
+      "body_size_px": [
+        84,
+        116
+      ],
+      "visual_top_anchor_px": [
+        64,
+        67
+      ]
+    },
+    {
+      "index": 68,
+      "direction": 3,
+      "animation": "attack",
+      "frame": 2,
+      "file": "frames/068.png",
+      "atlas_rect": [
+        512,
+        768,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.493,
+        89.268
+      ],
+      "mesh_projected_bounds": [
+        9.430318413424658,
+        70.71831885018129,
+        105.23589099508226,
+        182.6447939800734
+      ],
+      "render_seconds": 0.535,
+      "alpha_bounds_px": [
+        9,
+        71,
+        106,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        9,
+        71,
+        105,
+        183
+      ],
+      "body_size_px": [
+        97,
+        112
+      ],
+      "visual_top_anchor_px": [
+        64,
+        71
+      ]
+    },
+    {
+      "index": 69,
+      "direction": 3,
+      "animation": "attack",
+      "frame": 3,
+      "file": "frames/069.png",
+      "atlas_rect": [
+        640,
+        768,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        60.891,
+        91.553
+      ],
+      "mesh_projected_bounds": [
+        8.022985868165193,
+        72.86691891008985,
+        105.58312573296544,
+        182.64479645954034
+      ],
+      "render_seconds": 0.523,
+      "alpha_bounds_px": [
+        7,
+        73,
+        106,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        8,
+        73,
+        106,
+        183
+      ],
+      "body_size_px": [
+        99,
+        110
+      ],
+      "visual_top_anchor_px": [
+        64,
+        73
+      ]
+    },
+    {
+      "index": 70,
+      "direction": 3,
+      "animation": "attack",
+      "frame": 4,
+      "file": "frames/070.png",
+      "atlas_rect": [
+        768,
+        768,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.681,
+        88.985
+      ],
+      "mesh_projected_bounds": [
+        13.141082214068504,
+        70.3400374429481,
+        104.99617340483036,
+        182.6447939800734
+      ],
+      "render_seconds": 0.502,
+      "alpha_bounds_px": [
+        12,
+        70,
+        106,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        13,
+        71,
+        105,
+        183
+      ],
+      "body_size_px": [
+        94,
+        113
+      ],
+      "visual_top_anchor_px": [
+        64,
+        70
+      ]
+    },
+    {
+      "index": 71,
+      "direction": 3,
+      "animation": "attack",
+      "frame": 5,
+      "file": "frames/071.png",
+      "atlas_rect": [
+        896,
+        768,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        64.221,
+        87.182
+      ],
+      "mesh_projected_bounds": [
+        17.770155367508934,
+        68.82236400012793,
+        104.77492289622371,
+        182.6439831943754
+      ],
+      "render_seconds": 0.422,
+      "alpha_bounds_px": [
+        16,
+        69,
+        106,
+        183
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        69,
+        105,
+        183
+      ],
+      "body_size_px": [
+        90,
+        114
+      ],
+      "visual_top_anchor_px": [
+        64,
+        69
+      ]
+    },
+    {
+      "index": 72,
+      "direction": 4,
+      "animation": "idle",
+      "frame": 0,
+      "file": "frames/072.png",
+      "atlas_rect": [
+        1024,
+        768,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.327,
+        87.679
+      ],
+      "mesh_projected_bounds": [
+        38.1296416941631,
+        63.53632343045507,
+        87.63832056330651,
+        177.8620115091957
+      ],
+      "render_seconds": 0.331,
+      "alpha_bounds_px": [
+        37,
+        64,
+        89,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        38,
+        64,
+        88,
+        178
+      ],
+      "body_size_px": [
+        52,
+        114
+      ],
+      "visual_top_anchor_px": [
+        64,
+        64
+      ]
+    },
+    {
+      "index": 73,
+      "direction": 4,
+      "animation": "idle",
+      "frame": 1,
+      "file": "frames/073.png",
+      "atlas_rect": [
+        1152,
+        768,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        64.757,
+        87.469
+      ],
+      "mesh_projected_bounds": [
+        38.1296416941631,
+        63.39307768182701,
+        87.44562875668709,
+        177.8620115091957
+      ],
+      "render_seconds": 0.334,
+      "alpha_bounds_px": [
+        37,
+        64,
+        89,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        38,
+        64,
+        88,
+        178
+      ],
+      "body_size_px": [
+        52,
+        114
+      ],
+      "visual_top_anchor_px": [
+        64,
+        64
+      ]
+    },
+    {
+      "index": 74,
+      "direction": 4,
+      "animation": "idle",
+      "frame": 2,
+      "file": "frames/074.png",
+      "atlas_rect": [
+        1280,
+        768,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.339,
+        87.74
+      ],
+      "mesh_projected_bounds": [
+        38.1296416941631,
+        63.55848935852423,
+        87.63832056330651,
+        177.8620115091957
+      ],
+      "render_seconds": 0.339,
+      "alpha_bounds_px": [
+        37,
+        64,
+        89,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        38,
+        64,
+        88,
+        178
+      ],
+      "body_size_px": [
+        52,
+        114
+      ],
+      "visual_top_anchor_px": [
+        64,
+        64
+      ]
+    },
+    {
+      "index": 75,
+      "direction": 4,
+      "animation": "idle",
+      "frame": 3,
+      "file": "frames/075.png",
+      "atlas_rect": [
+        1408,
+        768,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.908,
+        87.953
+      ],
+      "mesh_projected_bounds": [
+        38.1296416941631,
+        63.70685065525615,
+        87.82921623874063,
+        177.8620115091957
+      ],
+      "render_seconds": 0.318,
+      "alpha_bounds_px": [
+        37,
+        64,
+        89,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        38,
+        64,
+        89,
+        178
+      ],
+      "body_size_px": [
+        52,
+        114
+      ],
+      "visual_top_anchor_px": [
+        64,
+        64
+      ]
+    },
+    {
+      "index": 76,
+      "direction": 4,
+      "animation": "walk",
+      "frame": 0,
+      "file": "frames/076.png",
+      "atlas_rect": [
+        1536,
+        768,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.333,
+        87.709
+      ],
+      "mesh_projected_bounds": [
+        38.1296416941631,
+        63.54726116384296,
+        87.63832056330651,
+        177.65426005824594
+      ],
+      "render_seconds": 0.34,
+      "alpha_bounds_px": [
+        38,
+        64,
+        89,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        38,
+        64,
+        88,
+        178
+      ],
+      "body_size_px": [
+        51,
+        114
+      ],
+      "visual_top_anchor_px": [
+        64,
+        64
+      ]
+    },
+    {
+      "index": 77,
+      "direction": 4,
+      "animation": "walk",
+      "frame": 1,
+      "file": "frames/077.png",
+      "atlas_rect": [
+        1664,
+        768,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.329,
+        88.726
+      ],
+      "mesh_projected_bounds": [
+        34.802396210473,
+        63.72495979645808,
+        87.62785501914378,
+        176.9882750677654
+      ],
+      "render_seconds": 0.326,
+      "alpha_bounds_px": [
+        34,
+        64,
+        89,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        34,
+        64,
+        88,
+        178
+      ],
+      "body_size_px": [
+        55,
+        114
+      ],
+      "visual_top_anchor_px": [
+        64,
+        64
+      ]
+    },
+    {
+      "index": 78,
+      "direction": 4,
+      "animation": "walk",
+      "frame": 2,
+      "file": "frames/078.png",
+      "atlas_rect": [
+        1792,
+        768,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.328,
+        88.934
+      ],
+      "mesh_projected_bounds": [
+        33.36499197666831,
+        63.6087709212043,
+        87.62148750714391,
+        176.46911529943324
+      ],
+      "render_seconds": 0.329,
+      "alpha_bounds_px": [
+        33,
+        64,
+        89,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        33,
+        64,
+        88,
+        177
+      ],
+      "body_size_px": [
+        56,
+        113
+      ],
+      "visual_top_anchor_px": [
+        64,
+        64
+      ]
+    },
+    {
+      "index": 79,
+      "direction": 4,
+      "animation": "walk",
+      "frame": 3,
+      "file": "frames/079.png",
+      "atlas_rect": [
+        1920,
+        768,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.329,
+        88.726
+      ],
+      "mesh_projected_bounds": [
+        34.802396210473,
+        63.72495979645808,
+        87.62785501914378,
+        176.98919787350874
+      ],
+      "render_seconds": 0.326,
+      "alpha_bounds_px": [
+        34,
+        64,
+        89,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        34,
+        64,
+        88,
+        178
+      ],
+      "body_size_px": [
+        55,
+        114
+      ],
+      "visual_top_anchor_px": [
+        64,
+        64
+      ]
+    },
+    {
+      "index": 80,
+      "direction": 4,
+      "animation": "walk",
+      "frame": 4,
+      "file": "frames/080.png",
+      "atlas_rect": [
+        0,
+        960,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.333,
+        87.709
+      ],
+      "mesh_projected_bounds": [
+        38.1296416941631,
+        63.54726116384296,
+        87.63832056330651,
+        177.8620115091957
+      ],
+      "render_seconds": 0.326,
+      "alpha_bounds_px": [
+        37,
+        64,
+        89,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        38,
+        64,
+        88,
+        178
+      ],
+      "body_size_px": [
+        52,
+        114
+      ],
+      "visual_top_anchor_px": [
+        64,
+        64
+      ]
+    },
+    {
+      "index": 81,
+      "direction": 4,
+      "animation": "walk",
+      "frame": 5,
+      "file": "frames/081.png",
+      "atlas_rect": [
+        128,
+        960,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.339,
+        85.967
+      ],
+      "mesh_projected_bounds": [
+        34.61788749972307,
+        62.726080761678375,
+        88.17484721087231,
+        177.70719766959283
+      ],
+      "render_seconds": 0.322,
+      "alpha_bounds_px": [
+        34,
+        62,
+        89,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        34,
+        63,
+        88,
+        178
+      ],
+      "body_size_px": [
+        55,
+        116
+      ],
+      "visual_top_anchor_px": [
+        64,
+        62
+      ]
+    },
+    {
+      "index": 82,
+      "direction": 4,
+      "animation": "walk",
+      "frame": 6,
+      "file": "frames/082.png",
+      "atlas_rect": [
+        256,
+        960,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.342,
+        85.032
+      ],
+      "mesh_projected_bounds": [
+        33.180440037731,
+        62.1986504498188,
+        88.6090073493322,
+        177.34905463649392
+      ],
+      "render_seconds": 0.324,
+      "alpha_bounds_px": [
+        33,
+        62,
+        89,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        33,
+        63,
+        88,
+        178
+      ],
+      "body_size_px": [
+        56,
+        116
+      ],
+      "visual_top_anchor_px": [
+        64,
+        62
+      ]
+    },
+    {
+      "index": 83,
+      "direction": 4,
+      "animation": "walk",
+      "frame": 7,
+      "file": "frames/083.png",
+      "atlas_rect": [
+        384,
+        960,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.339,
+        85.967
+      ],
+      "mesh_projected_bounds": [
+        34.61788749972307,
+        62.726080761678375,
+        88.17484721087231,
+        177.28001880694757
+      ],
+      "render_seconds": 0.352,
+      "alpha_bounds_px": [
+        34,
+        62,
+        89,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        34,
+        63,
+        88,
+        178
+      ],
+      "body_size_px": [
+        55,
+        116
+      ],
+      "visual_top_anchor_px": [
+        64,
+        62
+      ]
+    },
+    {
+      "index": 84,
+      "direction": 4,
+      "animation": "attack",
+      "frame": 0,
+      "file": "frames/084.png",
+      "atlas_rect": [
+        512,
+        960,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.333,
+        87.709
+      ],
+      "mesh_projected_bounds": [
+        38.1296416941631,
+        63.54726116384296,
+        87.63832056330651,
+        177.8620115091957
+      ],
+      "render_seconds": 0.341,
+      "alpha_bounds_px": [
+        37,
+        64,
+        89,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        38,
+        64,
+        88,
+        178
+      ],
+      "body_size_px": [
+        52,
+        114
+      ],
+      "visual_top_anchor_px": [
+        64,
+        64
+      ]
+    },
+    {
+      "index": 85,
+      "direction": 4,
+      "animation": "attack",
+      "frame": 1,
+      "file": "frames/085.png",
+      "atlas_rect": [
+        640,
+        960,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.26,
+        87.512
+      ],
+      "mesh_projected_bounds": [
+        38.1296416941631,
+        63.566848435555,
+        89.35675772744375,
+        177.5916206775904
+      ],
+      "render_seconds": 0.318,
+      "alpha_bounds_px": [
+        37,
+        64,
+        90,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        38,
+        64,
+        90,
+        178
+      ],
+      "body_size_px": [
+        53,
+        114
+      ],
+      "visual_top_anchor_px": [
+        64,
+        64
+      ]
+    },
+    {
+      "index": 86,
+      "direction": 4,
+      "animation": "attack",
+      "frame": 2,
+      "file": "frames/086.png",
+      "atlas_rect": [
+        768,
+        960,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.837,
+        88.362
+      ],
+      "mesh_projected_bounds": [
+        29.12686590418148,
+        63.87546375199962,
+        86.90382610885254,
+        177.86282229489368
+      ],
+      "render_seconds": 0.37,
+      "alpha_bounds_px": [
+        29,
+        64,
+        88,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        29,
+        64,
+        88,
+        178
+      ],
+      "body_size_px": [
+        59,
+        114
+      ],
+      "visual_top_anchor_px": [
+        64,
+        64
+      ]
+    },
+    {
+      "index": 87,
+      "direction": 4,
+      "animation": "attack",
+      "frame": 3,
+      "file": "frames/087.png",
+      "atlas_rect": [
+        896,
+        960,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        60.344,
+        89.258
+      ],
+      "mesh_projected_bounds": [
+        27.266385239159042,
+        64.49155995187006,
+        86.33628107543805,
+        177.86282477436063
+      ],
+      "render_seconds": 0.341,
+      "alpha_bounds_px": [
+        27,
+        65,
+        87,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        27,
+        65,
+        87,
+        178
+      ],
+      "body_size_px": [
+        60,
+        113
+      ],
+      "visual_top_anchor_px": [
+        64,
+        65
+      ]
+    },
+    {
+      "index": 88,
+      "direction": 4,
+      "animation": "attack",
+      "frame": 4,
+      "file": "frames/088.png",
+      "atlas_rect": [
+        1024,
+        960,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        63.113,
+        88.237
+      ],
+      "mesh_projected_bounds": [
+        35.28868954290334,
+        63.83118615275197,
+        86.96125691718542,
+        177.86282229489368
+      ],
+      "render_seconds": 0.332,
+      "alpha_bounds_px": [
+        35,
+        64,
+        88,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        35,
+        64,
+        88,
+        178
+      ],
+      "body_size_px": [
+        53,
+        114
+      ],
+      "visual_top_anchor_px": [
+        64,
+        64
+      ]
+    },
+    {
+      "index": 89,
+      "direction": 4,
+      "animation": "attack",
+      "frame": 5,
+      "file": "frames/089.png",
+      "atlas_rect": [
+        1152,
+        960,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.333,
+        87.709
+      ],
+      "mesh_projected_bounds": [
+        38.1296416941631,
+        63.54726116384296,
+        87.63832056330651,
+        177.8620115091957
+      ],
+      "render_seconds": 0.318,
+      "alpha_bounds_px": [
+        37,
+        64,
+        89,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        38,
+        64,
+        88,
+        178
+      ],
+      "body_size_px": [
+        52,
+        114
+      ],
+      "visual_top_anchor_px": [
+        64,
+        64
+      ]
+    },
+    {
+      "index": 90,
+      "direction": 5,
+      "animation": "idle",
+      "frame": 0,
+      "file": "frames/090.png",
+      "atlas_rect": [
+        1280,
+        960,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.685,
+        88.701
+      ],
+      "mesh_projected_bounds": [
+        17.775269262075028,
+        73.97167087118754,
+        107.44075333762133,
+        175.85741513784944
+      ],
+      "render_seconds": 0.355,
+      "alpha_bounds_px": [
+        17,
+        74,
+        108,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        74,
+        107,
+        176
+      ],
+      "body_size_px": [
+        91,
+        102
+      ],
+      "visual_top_anchor_px": [
+        64,
+        74
+      ]
+    },
+    {
+      "index": 91,
+      "direction": 5,
+      "animation": "idle",
+      "frame": 1,
+      "file": "frames/091.png",
+      "atlas_rect": [
+        1408,
+        960,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.304,
+        88.169
+      ],
+      "mesh_projected_bounds": [
+        18.226839552998925,
+        73.52397763886349,
+        107.07780083080974,
+        175.85741513784944
+      ],
+      "render_seconds": 0.363,
+      "alpha_bounds_px": [
+        17,
+        73,
+        107,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        18,
+        74,
+        107,
+        176
+      ],
+      "body_size_px": [
+        90,
+        103
+      ],
+      "visual_top_anchor_px": [
+        64,
+        73
+      ]
+    },
+    {
+      "index": 92,
+      "direction": 5,
+      "animation": "idle",
+      "frame": 2,
+      "file": "frames/092.png",
+      "atlas_rect": [
+        1536,
+        960,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.642,
+        88.751
+      ],
+      "mesh_projected_bounds": [
+        17.28575759109485,
+        73.92234232570367,
+        107.35948866818097,
+        175.85741513784944
+      ],
+      "render_seconds": 0.353,
+      "alpha_bounds_px": [
+        16,
+        74,
+        107,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        74,
+        107,
+        176
+      ],
+      "body_size_px": [
+        91,
+        102
+      ],
+      "visual_top_anchor_px": [
+        64,
+        74
+      ]
+    },
+    {
+      "index": 93,
+      "direction": 5,
+      "animation": "idle",
+      "frame": 3,
+      "file": "frames/093.png",
+      "atlas_rect": [
+        1664,
+        960,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        66.023,
+        89.287
+      ],
+      "mesh_projected_bounds": [
+        16.807057289776367,
+        74.37966274389207,
+        107.71736618579511,
+        175.85741513784944
+      ],
+      "render_seconds": 0.37,
+      "alpha_bounds_px": [
+        16,
+        75,
+        108,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        16,
+        75,
+        108,
+        176
+      ],
+      "body_size_px": [
+        92,
+        101
+      ],
+      "visual_top_anchor_px": [
+        64,
+        75
+      ]
+    },
+    {
+      "index": 94,
+      "direction": 5,
+      "animation": "walk",
+      "frame": 0,
+      "file": "frames/094.png",
+      "atlas_rect": [
+        1792,
+        960,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.664,
+        88.726
+      ],
+      "mesh_projected_bounds": [
+        17.530040077933215,
+        73.94667881292449,
+        107.4003176911537,
+        174.567859245496
+      ],
+      "render_seconds": 0.384,
+      "alpha_bounds_px": [
+        17,
+        74,
+        108,
+        175
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        74,
+        107,
+        174
+      ],
+      "body_size_px": [
+        91,
+        101
+      ],
+      "visual_top_anchor_px": [
+        64,
+        74
+      ]
+    },
+    {
+      "index": 95,
+      "direction": 5,
+      "animation": "walk",
+      "frame": 1,
+      "file": "frames/095.png",
+      "atlas_rect": [
+        1920,
+        960,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        64.459,
+        89.332
+      ],
+      "mesh_projected_bounds": [
+        14.982252847791926,
+        73.21810490338189,
+        105.71029873739471,
+        176.47760595860538
+      ],
+      "render_seconds": 0.359,
+      "alpha_bounds_px": [
+        14,
+        73,
+        106,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        73,
+        106,
+        176
+      ],
+      "body_size_px": [
+        92,
+        104
+      ],
+      "visual_top_anchor_px": [
+        64,
+        73
+      ]
+    },
+    {
+      "index": 96,
+      "direction": 5,
+      "animation": "walk",
+      "frame": 2,
+      "file": "frames/096.png",
+      "atlas_rect": [
+        0,
+        1152,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        63.961,
+        89.371
+      ],
+      "mesh_projected_bounds": [
+        13.930294908097771,
+        72.73725431504741,
+        104.97283018364956,
+        177.68739534227785
+      ],
+      "render_seconds": 0.378,
+      "alpha_bounds_px": [
+        13,
+        73,
+        105,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        13,
+        73,
+        105,
+        178
+      ],
+      "body_size_px": [
+        92,
+        105
+      ],
+      "visual_top_anchor_px": [
+        64,
+        73
+      ]
+    },
+    {
+      "index": 97,
+      "direction": 5,
+      "animation": "walk",
+      "frame": 3,
+      "file": "frames/097.png",
+      "atlas_rect": [
+        128,
+        1152,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        64.459,
+        89.332
+      ],
+      "mesh_projected_bounds": [
+        14.982252847791926,
+        73.21810490338189,
+        105.71029873739471,
+        177.3697214458896
+      ],
+      "render_seconds": 0.357,
+      "alpha_bounds_px": [
+        14,
+        73,
+        106,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        73,
+        106,
+        177
+      ],
+      "body_size_px": [
+        92,
+        104
+      ],
+      "visual_top_anchor_px": [
+        64,
+        73
+      ]
+    },
+    {
+      "index": 98,
+      "direction": 5,
+      "animation": "walk",
+      "frame": 4,
+      "file": "frames/098.png",
+      "atlas_rect": [
+        256,
+        1152,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.664,
+        88.726
+      ],
+      "mesh_projected_bounds": [
+        17.530040077933215,
+        73.94667881292449,
+        107.4003176911537,
+        175.85741513784944
+      ],
+      "render_seconds": 0.358,
+      "alpha_bounds_px": [
+        17,
+        74,
+        108,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        74,
+        107,
+        176
+      ],
+      "body_size_px": [
+        91,
+        102
+      ],
+      "visual_top_anchor_px": [
+        64,
+        74
+      ]
+    },
+    {
+      "index": 99,
+      "direction": 5,
+      "animation": "walk",
+      "frame": 5,
+      "file": "frames/099.png",
+      "atlas_rect": [
+        384,
+        1152,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        66.869,
+        87.394
+      ],
+      "mesh_projected_bounds": [
+        19.537232888077,
+        74.06629236038519,
+        108.95937685126964,
+        173.54554671686432
+      ],
+      "render_seconds": 0.352,
+      "alpha_bounds_px": [
+        19,
+        74,
+        109,
+        174
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        74,
+        109,
+        174
+      ],
+      "body_size_px": [
+        90,
+        100
+      ],
+      "visual_top_anchor_px": [
+        64,
+        74
+      ]
+    },
+    {
+      "index": 100,
+      "direction": 5,
+      "animation": "walk",
+      "frame": 6,
+      "file": "frames/100.png",
+      "atlas_rect": [
+        512,
+        1152,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        67.369,
+        86.63
+      ],
+      "mesh_projected_bounds": [
+        20.351790268362386,
+        73.93797929239358,
+        109.5660887838524,
+        172.30332701689963
+      ],
+      "render_seconds": 0.352,
+      "alpha_bounds_px": [
+        20,
+        74,
+        109,
+        173
+      ],
+      "alpha_bounds_8_px": [
+        20,
+        74,
+        109,
+        172
+      ],
+      "body_size_px": [
+        89,
+        99
+      ],
+      "visual_top_anchor_px": [
+        64,
+        74
+      ]
+    },
+    {
+      "index": 101,
+      "direction": 5,
+      "animation": "walk",
+      "frame": 7,
+      "file": "frames/101.png",
+      "atlas_rect": [
+        640,
+        1152,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        66.869,
+        87.394
+      ],
+      "mesh_projected_bounds": [
+        19.537232888077,
+        74.06629236038519,
+        108.95937685126964,
+        172.61436629602704
+      ],
+      "render_seconds": 0.368,
+      "alpha_bounds_px": [
+        19,
+        74,
+        109,
+        173
+      ],
+      "alpha_bounds_8_px": [
+        19,
+        74,
+        109,
+        173
+      ],
+      "body_size_px": [
+        90,
+        99
+      ],
+      "visual_top_anchor_px": [
+        64,
+        74
+      ]
+    },
+    {
+      "index": 102,
+      "direction": 5,
+      "animation": "attack",
+      "frame": 0,
+      "file": "frames/102.png",
+      "atlas_rect": [
+        768,
+        1152,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.664,
+        88.726
+      ],
+      "mesh_projected_bounds": [
+        17.530040077933215,
+        73.94667881292449,
+        107.4003176911537,
+        175.85741513784944
+      ],
+      "render_seconds": 0.442,
+      "alpha_bounds_px": [
+        17,
+        74,
+        108,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        74,
+        107,
+        176
+      ],
+      "body_size_px": [
+        91,
+        102
+      ],
+      "visual_top_anchor_px": [
+        64,
+        74
+      ]
+    },
+    {
+      "index": 103,
+      "direction": 5,
+      "animation": "attack",
+      "frame": 1,
+      "file": "frames/103.png",
+      "atlas_rect": [
+        896,
+        1152,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.501,
+        88.449
+      ],
+      "mesh_projected_bounds": [
+        21.558271686635983,
+        75.1630431246722,
+        108.9779952315707,
+        175.58702430624413
+      ],
+      "render_seconds": 0.358,
+      "alpha_bounds_px": [
+        21,
+        75,
+        109,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        21,
+        75,
+        109,
+        175
+      ],
+      "body_size_px": [
+        88,
+        101
+      ],
+      "visual_top_anchor_px": [
+        64,
+        75
+      ]
+    },
+    {
+      "index": 104,
+      "direction": 5,
+      "animation": "attack",
+      "frame": 2,
+      "file": "frames/104.png",
+      "atlas_rect": [
+        1024,
+        1152,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        63.862,
+        87.921
+      ],
+      "mesh_projected_bounds": [
+        7.19587934508575,
+        74.23873032189411,
+        106.8255686803137,
+        175.85822592354742
+      ],
+      "render_seconds": 0.373,
+      "alpha_bounds_px": [
+        7,
+        74,
+        107,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        7,
+        74,
+        107,
+        176
+      ],
+      "body_size_px": [
+        100,
+        102
+      ],
+      "visual_top_anchor_px": [
+        64,
+        74
+      ]
+    },
+    {
+      "index": 105,
+      "direction": 5,
+      "animation": "attack",
+      "frame": 3,
+      "file": "frames/105.png",
+      "atlas_rect": [
+        1152,
+        1152,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        61.938,
+        87.318
+      ],
+      "mesh_projected_bounds": [
+        5.468251868313246,
+        73.67015236129077,
+        105.26020685047892,
+        175.85822840301438
+      ],
+      "render_seconds": 0.358,
+      "alpha_bounds_px": [
+        5,
+        73,
+        105,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        5,
+        74,
+        105,
+        176
+      ],
+      "body_size_px": [
+        100,
+        103
+      ],
+      "visual_top_anchor_px": [
+        64,
+        73
+      ]
+    },
+    {
+      "index": 106,
+      "direction": 5,
+      "animation": "attack",
+      "frame": 4,
+      "file": "frames/106.png",
+      "atlas_rect": [
+        1280,
+        1152,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        64.065,
+        87.958
+      ],
+      "mesh_projected_bounds": [
+        11.762898435553886,
+        73.79555959707743,
+        106.67196596212526,
+        175.85822592354742
+      ],
+      "render_seconds": 0.386,
+      "alpha_bounds_px": [
+        11,
+        74,
+        107,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        11,
+        74,
+        107,
+        176
+      ],
+      "body_size_px": [
+        96,
+        102
+      ],
+      "visual_top_anchor_px": [
+        64,
+        74
+      ]
+    },
+    {
+      "index": 107,
+      "direction": 5,
+      "animation": "attack",
+      "frame": 5,
+      "file": "frames/107.png",
+      "atlas_rect": [
+        1408,
+        1152,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.664,
+        88.726
+      ],
+      "mesh_projected_bounds": [
+        17.530040077933215,
+        73.94667881292449,
+        107.4003176911537,
+        175.85741513784944
+      ],
+      "render_seconds": 0.38,
+      "alpha_bounds_px": [
+        17,
+        74,
+        108,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        17,
+        74,
+        107,
+        176
+      ],
+      "body_size_px": [
+        91,
+        102
+      ],
+      "visual_top_anchor_px": [
+        64,
+        74
+      ]
+    },
+    {
+      "index": 108,
+      "direction": 6,
+      "animation": "idle",
+      "frame": 0,
+      "file": "frames/108.png",
+      "atlas_rect": [
+        1536,
+        1152,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.057,
+        89.632
+      ],
+      "mesh_projected_bounds": [
+        14.536652369544079,
+        79.80007293808787,
+        112.25073645521299,
+        168.52803716008563
+      ],
+      "render_seconds": 0.476,
+      "alpha_bounds_px": [
+        14,
+        79,
+        113,
+        169
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        79,
+        113,
+        169
+      ],
+      "body_size_px": [
+        99,
+        90
+      ],
+      "visual_top_anchor_px": [
+        64,
+        79
+      ]
+    },
+    {
+      "index": 109,
+      "direction": 6,
+      "animation": "idle",
+      "frame": 1,
+      "file": "frames/109.png",
+      "atlas_rect": [
+        1664,
+        1152,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.087,
+        88.98
+      ],
+      "mesh_projected_bounds": [
+        14.52536548982129,
+        79.29025242433052,
+        112.26650609796624,
+        168.52803716008563
+      ],
+      "render_seconds": 0.448,
+      "alpha_bounds_px": [
+        14,
+        78,
+        113,
+        169
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        79,
+        113,
+        169
+      ],
+      "body_size_px": [
+        99,
+        91
+      ],
+      "visual_top_anchor_px": [
+        64,
+        78
+      ]
+    },
+    {
+      "index": 110,
+      "direction": 6,
+      "animation": "idle",
+      "frame": 2,
+      "file": "frames/110.png",
+      "atlas_rect": [
+        1792,
+        1152,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        64.983,
+        89.641
+      ],
+      "mesh_projected_bounds": [
+        14.55385718811808,
+        79.75660036569434,
+        112.26029853025965,
+        168.52803716008563
+      ],
+      "render_seconds": 0.388,
+      "alpha_bounds_px": [
+        14,
+        79,
+        113,
+        169
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        79,
+        113,
+        169
+      ],
+      "body_size_px": [
+        99,
+        90
+      ],
+      "visual_top_anchor_px": [
+        64,
+        79
+      ]
+    },
+    {
+      "index": 111,
+      "direction": 6,
+      "animation": "idle",
+      "frame": 3,
+      "file": "frames/111.png",
+      "atlas_rect": [
+        1920,
+        1152,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        64.952,
+        90.296
+      ],
+      "mesh_projected_bounds": [
+        14.566043214138205,
+        80.21156399368223,
+        112.24388911033328,
+        168.52803716008563
+      ],
+      "render_seconds": 0.429,
+      "alpha_bounds_px": [
+        14,
+        79,
+        113,
+        169
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        79,
+        113,
+        169
+      ],
+      "body_size_px": [
+        99,
+        90
+      ],
+      "visual_top_anchor_px": [
+        64,
+        79
+      ]
+    },
+    {
+      "index": 112,
+      "direction": 6,
+      "animation": "walk",
+      "frame": 0,
+      "file": "frames/112.png",
+      "atlas_rect": [
+        0,
+        1344,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.02,
+        89.637
+      ],
+      "mesh_projected_bounds": [
+        14.54515535400013,
+        79.79525265118599,
+        112.25558665783612,
+        167.9621995037617
+      ],
+      "render_seconds": 0.395,
+      "alpha_bounds_px": [
+        14,
+        79,
+        113,
+        169
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        79,
+        113,
+        168
+      ],
+      "body_size_px": [
+        99,
+        90
+      ],
+      "visual_top_anchor_px": [
+        64,
+        79
+      ]
+    },
+    {
+      "index": 113,
+      "direction": 6,
+      "animation": "walk",
+      "frame": 1,
+      "file": "frames/113.png",
+      "atlas_rect": [
+        128,
+        1344,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        63.321,
+        89.257
+      ],
+      "mesh_projected_bounds": [
+        14.475557972331437,
+        79.34267302643559,
+        112.06537398776246,
+        170.44986633157953
+      ],
+      "render_seconds": 0.372,
+      "alpha_bounds_px": [
+        14,
+        78,
+        113,
+        171
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        79,
+        113,
+        171
+      ],
+      "body_size_px": [
+        99,
+        93
+      ],
+      "visual_top_anchor_px": [
+        64,
+        78
+      ]
+    },
+    {
+      "index": 114,
+      "direction": 6,
+      "animation": "walk",
+      "frame": 2,
+      "file": "frames/114.png",
+      "atlas_rect": [
+        256,
+        1344,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.617,
+        88.888
+      ],
+      "mesh_projected_bounds": [
+        14.137729688020364,
+        78.92478782336974,
+        112.00236458184924,
+        172.2228710231763
+      ],
+      "render_seconds": 0.381,
+      "alpha_bounds_px": [
+        14,
+        78,
+        113,
+        173
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        78,
+        112,
+        172
+      ],
+      "body_size_px": [
+        99,
+        95
+      ],
+      "visual_top_anchor_px": [
+        64,
+        78
+      ]
+    },
+    {
+      "index": 115,
+      "direction": 6,
+      "animation": "walk",
+      "frame": 3,
+      "file": "frames/115.png",
+      "atlas_rect": [
+        384,
+        1344,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        63.321,
+        89.257
+      ],
+      "mesh_projected_bounds": [
+        14.475557972331437,
+        79.34267302643559,
+        112.06537398776246,
+        171.36151426626944
+      ],
+      "render_seconds": 0.431,
+      "alpha_bounds_px": [
+        14,
+        78,
+        113,
+        172
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        79,
+        113,
+        172
+      ],
+      "body_size_px": [
+        99,
+        94
+      ],
+      "visual_top_anchor_px": [
+        64,
+        78
+      ]
+    },
+    {
+      "index": 116,
+      "direction": 6,
+      "animation": "walk",
+      "frame": 4,
+      "file": "frames/116.png",
+      "atlas_rect": [
+        512,
+        1344,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.02,
+        89.637
+      ],
+      "mesh_projected_bounds": [
+        14.54515535400013,
+        79.79525265118599,
+        112.25558665783612,
+        168.52803716008563
+      ],
+      "render_seconds": 0.428,
+      "alpha_bounds_px": [
+        14,
+        79,
+        113,
+        169
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        79,
+        113,
+        169
+      ],
+      "body_size_px": [
+        99,
+        90
+      ],
+      "visual_top_anchor_px": [
+        64,
+        79
+      ]
+    },
+    {
+      "index": 117,
+      "direction": 6,
+      "animation": "walk",
+      "frame": 5,
+      "file": "frames/117.png",
+      "atlas_rect": [
+        640,
+        1344,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        66.719,
+        89.291
+      ],
+      "mesh_projected_bounds": [
+        14.51716077985811,
+        79.2989882777873,
+        112.50450752917948,
+        169.9434988782987
+      ],
+      "render_seconds": 0.437,
+      "alpha_bounds_px": [
+        14,
+        79,
+        113,
+        170
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        79,
+        113,
+        170
+      ],
+      "body_size_px": [
+        99,
+        91
+      ],
+      "visual_top_anchor_px": [
+        64,
+        79
+      ]
+    },
+    {
+      "index": 118,
+      "direction": 6,
+      "animation": "walk",
+      "frame": 6,
+      "file": "frames/118.png",
+      "atlas_rect": [
+        768,
+        1344,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        67.422,
+        88.935
+      ],
+      "mesh_projected_bounds": [
+        14.478998936046239,
+        78.88099292761963,
+        112.63207391011383,
+        171.80768822342972
+      ],
+      "render_seconds": 0.411,
+      "alpha_bounds_px": [
+        14,
+        78,
+        113,
+        173
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        78,
+        113,
+        172
+      ],
+      "body_size_px": [
+        99,
+        95
+      ],
+      "visual_top_anchor_px": [
+        64,
+        78
+      ]
+    },
+    {
+      "index": 119,
+      "direction": 6,
+      "animation": "walk",
+      "frame": 7,
+      "file": "frames/119.png",
+      "atlas_rect": [
+        896,
+        1344,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        66.719,
+        89.291
+      ],
+      "mesh_projected_bounds": [
+        14.51716077985811,
+        79.2989882777873,
+        112.50450752917948,
+        170.8551468517303
+      ],
+      "render_seconds": 0.458,
+      "alpha_bounds_px": [
+        14,
+        79,
+        113,
+        172
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        79,
+        113,
+        171
+      ],
+      "body_size_px": [
+        99,
+        93
+      ],
+      "visual_top_anchor_px": [
+        64,
+        79
+      ]
+    },
+    {
+      "index": 120,
+      "direction": 6,
+      "animation": "attack",
+      "frame": 0,
+      "file": "frames/120.png",
+      "atlas_rect": [
+        1024,
+        1344,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.02,
+        89.637
+      ],
+      "mesh_projected_bounds": [
+        14.54515535400013,
+        79.79525265118599,
+        112.25558665783612,
+        168.52803716008563
+      ],
+      "render_seconds": 0.399,
+      "alpha_bounds_px": [
+        14,
+        79,
+        113,
+        169
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        79,
+        113,
+        169
+      ],
+      "body_size_px": [
+        99,
+        90
+      ],
+      "visual_top_anchor_px": [
+        64,
+        79
+      ]
+    },
+    {
+      "index": 121,
+      "direction": 6,
+      "animation": "attack",
+      "frame": 1,
+      "file": "frames/121.png",
+      "atlas_rect": [
+        1152,
+        1344,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        64.863,
+        89.251
+      ],
+      "mesh_projected_bounds": [
+        14.905116470245588,
+        81.04680201331489,
+        111.51082983170006,
+        168.25764628973866
+      ],
+      "render_seconds": 0.407,
+      "alpha_bounds_px": [
+        15,
+        80,
+        113,
+        168
+      ],
+      "alpha_bounds_8_px": [
+        15,
+        80,
+        112,
+        168
+      ],
+      "body_size_px": [
+        98,
+        88
+      ],
+      "visual_top_anchor_px": [
+        64,
+        80
+      ]
+    },
+    {
+      "index": 122,
+      "direction": 6,
+      "animation": "attack",
+      "frame": 2,
+      "file": "frames/122.png",
+      "atlas_rect": [
+        1280,
+        1344,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        64.968,
+        88.202
+      ],
+      "mesh_projected_bounds": [
+        13.766542211514434,
+        78.82961837845299,
+        112.43860183471234,
+        168.5288479457836
+      ],
+      "render_seconds": 0.396,
+      "alpha_bounds_px": [
+        13,
+        78,
+        113,
+        169
+      ],
+      "alpha_bounds_8_px": [
+        13,
+        78,
+        113,
+        169
+      ],
+      "body_size_px": [
+        100,
+        91
+      ],
+      "visual_top_anchor_px": [
+        64,
+        78
+      ]
+    },
+    {
+      "index": 123,
+      "direction": 6,
+      "animation": "attack",
+      "frame": 3,
+      "file": "frames/123.png",
+      "atlas_rect": [
+        1408,
+        1344,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        64.74,
+        86.87
+      ],
+      "mesh_projected_bounds": [
+        13.207260246116078,
+        77.85170052743148,
+        111.53970626086446,
+        168.52885042525057
+      ],
+      "render_seconds": 0.405,
+      "alpha_bounds_px": [
+        13,
+        77,
+        112,
+        169
+      ],
+      "alpha_bounds_8_px": [
+        13,
+        77,
+        112,
+        169
+      ],
+      "body_size_px": [
+        99,
+        92
+      ],
+      "visual_top_anchor_px": [
+        64,
+        77
+      ]
+    },
+    {
+      "index": 124,
+      "direction": 6,
+      "animation": "attack",
+      "frame": 4,
+      "file": "frames/124.png",
+      "atlas_rect": [
+        1536,
+        1344,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        64.978,
+        88.312
+      ],
+      "mesh_projected_bounds": [
+        14.08697979604581,
+        78.89738941479813,
+        112.24650441566928,
+        168.5288479457836
+      ],
+      "render_seconds": 0.413,
+      "alpha_bounds_px": [
+        13,
+        78,
+        113,
+        169
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        78,
+        113,
+        169
+      ],
+      "body_size_px": [
+        100,
+        91
+      ],
+      "visual_top_anchor_px": [
+        64,
+        78
+      ]
+    },
+    {
+      "index": 125,
+      "direction": 6,
+      "animation": "attack",
+      "frame": 5,
+      "file": "frames/125.png",
+      "atlas_rect": [
+        1664,
+        1344,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.02,
+        89.637
+      ],
+      "mesh_projected_bounds": [
+        14.54515535400013,
+        79.79525265118599,
+        112.25558665783612,
+        168.52803716008563
+      ],
+      "render_seconds": 0.425,
+      "alpha_bounds_px": [
+        14,
+        79,
+        113,
+        169
+      ],
+      "alpha_bounds_8_px": [
+        14,
+        79,
+        113,
+        169
+      ],
+      "body_size_px": [
+        99,
+        90
+      ],
+      "visual_top_anchor_px": [
+        64,
+        79
+      ]
+    },
+    {
+      "index": 126,
+      "direction": 7,
+      "animation": "idle",
+      "frame": 0,
+      "file": "frames/126.png",
+      "atlas_rect": [
+        1792,
+        1344,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        63.809,
+        89.926
+      ],
+      "mesh_projected_bounds": [
+        23.25350828261076,
+        77.11944501113962,
+        110.46711983015646,
+        176.12530155706494
+      ],
+      "render_seconds": 0.448,
+      "alpha_bounds_px": [
+        23,
+        77,
+        111,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        23,
+        77,
+        111,
+        176
+      ],
+      "body_size_px": [
+        88,
+        99
+      ],
+      "visual_top_anchor_px": [
+        64,
+        77
+      ]
+    },
+    {
+      "index": 127,
+      "direction": 7,
+      "animation": "idle",
+      "frame": 1,
+      "file": "frames/127.png",
+      "atlas_rect": [
+        1920,
+        1344,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        64.234,
+        89.428
+      ],
+      "mesh_projected_bounds": [
+        23.506371564642436,
+        76.77752255497562,
+        109.55622411149415,
+        176.12530155706494
+      ],
+      "render_seconds": 0.419,
+      "alpha_bounds_px": [
+        23,
+        77,
+        111,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        23,
+        77,
+        110,
+        176
+      ],
+      "body_size_px": [
+        88,
+        99
+      ],
+      "visual_top_anchor_px": [
+        64,
+        77
+      ]
+    },
+    {
+      "index": 128,
+      "direction": 7,
+      "animation": "idle",
+      "frame": 2,
+      "file": "frames/128.png",
+      "atlas_rect": [
+        0,
+        1536,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        63.749,
+        89.89
+      ],
+      "mesh_projected_bounds": [
+        23.19681019205383,
+        77.12058502496883,
+        109.99164867443466,
+        176.12530155706494
+      ],
+      "render_seconds": 0.422,
+      "alpha_bounds_px": [
+        23,
+        77,
+        111,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        23,
+        77,
+        111,
+        176
+      ],
+      "body_size_px": [
+        88,
+        99
+      ],
+      "visual_top_anchor_px": [
+        64,
+        77
+      ]
+    },
+    {
+      "index": 129,
+      "direction": 7,
+      "animation": "idle",
+      "frame": 3,
+      "file": "frames/129.png",
+      "atlas_rect": [
+        128,
+        1536,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        63.324,
+        90.39
+      ],
+      "mesh_projected_bounds": [
+        22.946225035496646,
+        77.42291301022676,
+        110.92721039681135,
+        176.12530155706494
+      ],
+      "render_seconds": 0.399,
+      "alpha_bounds_px": [
+        23,
+        77,
+        112,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        23,
+        78,
+        111,
+        176
+      ],
+      "body_size_px": [
+        89,
+        99
+      ],
+      "visual_top_anchor_px": [
+        64,
+        77
+      ]
+    },
+    {
+      "index": 130,
+      "direction": 7,
+      "animation": "walk",
+      "frame": 0,
+      "file": "frames/130.png",
+      "atlas_rect": [
+        256,
+        1536,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        63.779,
+        89.908
+      ],
+      "mesh_projected_bounds": [
+        23.225072780957547,
+        77.11986875155029,
+        110.2298489553098,
+        176.12530155706494
+      ],
+      "render_seconds": 0.446,
+      "alpha_bounds_px": [
+        23,
+        77,
+        111,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        23,
+        77,
+        111,
+        176
+      ],
+      "body_size_px": [
+        88,
+        99
+      ],
+      "visual_top_anchor_px": [
+        64,
+        77
+      ]
+    },
+    {
+      "index": 131,
+      "direction": 7,
+      "animation": "walk",
+      "frame": 1,
+      "file": "frames/131.png",
+      "atlas_rect": [
+        384,
+        1536,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.58,
+        88.545
+      ],
+      "mesh_projected_bounds": [
+        21.696869900987636,
+        76.74335146389805,
+        108.25671995681503,
+        173.81942815361262
+      ],
+      "render_seconds": 0.466,
+      "alpha_bounds_px": [
+        21,
+        77,
+        109,
+        174
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        77,
+        109,
+        174
+      ],
+      "body_size_px": [
+        88,
+        97
+      ],
+      "visual_top_anchor_px": [
+        64,
+        77
+      ]
+    },
+    {
+      "index": 132,
+      "direction": 7,
+      "animation": "walk",
+      "frame": 2,
+      "file": "frames/132.png",
+      "atlas_rect": [
+        512,
+        1536,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.083,
+        87.768
+      ],
+      "mesh_projected_bounds": [
+        21.087166577838744,
+        76.38926017435837,
+        107.45687312869231,
+        172.57957699050763
+      ],
+      "render_seconds": 0.415,
+      "alpha_bounds_px": [
+        21,
+        75,
+        108,
+        173
+      ],
+      "alpha_bounds_8_px": [
+        21,
+        76,
+        108,
+        173
+      ],
+      "body_size_px": [
+        87,
+        98
+      ],
+      "visual_top_anchor_px": [
+        64,
+        75
+      ]
+    },
+    {
+      "index": 133,
+      "direction": 7,
+      "animation": "walk",
+      "frame": 3,
+      "file": "frames/133.png",
+      "atlas_rect": [
+        640,
+        1536,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        62.58,
+        88.545
+      ],
+      "mesh_projected_bounds": [
+        21.696869900987636,
+        76.74335146389805,
+        108.25671995681503,
+        172.8882478102587
+      ],
+      "render_seconds": 0.508,
+      "alpha_bounds_px": [
+        21,
+        77,
+        109,
+        174
+      ],
+      "alpha_bounds_8_px": [
+        22,
+        77,
+        109,
+        173
+      ],
+      "body_size_px": [
+        88,
+        97
+      ],
+      "visual_top_anchor_px": [
+        64,
+        77
+      ]
+    },
+    {
+      "index": 134,
+      "direction": 7,
+      "animation": "walk",
+      "frame": 4,
+      "file": "frames/134.png",
+      "atlas_rect": [
+        768,
+        1536,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        63.779,
+        89.908
+      ],
+      "mesh_projected_bounds": [
+        23.225072780957547,
+        77.11986875155029,
+        110.2298489553098,
+        174.83574570345317
+      ],
+      "render_seconds": 0.561,
+      "alpha_bounds_px": [
+        23,
+        77,
+        111,
+        175
+      ],
+      "alpha_bounds_8_px": [
+        23,
+        77,
+        111,
+        175
+      ],
+      "body_size_px": [
+        88,
+        98
+      ],
+      "visual_top_anchor_px": [
+        64,
+        77
+      ]
+    },
+    {
+      "index": 135,
+      "direction": 7,
+      "animation": "walk",
+      "frame": 5,
+      "file": "frames/135.png",
+      "atlas_rect": [
+        896,
+        1536,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        64.976,
+        90.544
+      ],
+      "mesh_projected_bounds": [
+        24.830200220355685,
+        76.33552674809248,
+        112.71099993461738,
+        176.73828331186246
+      ],
+      "render_seconds": 0.356,
+      "alpha_bounds_px": [
+        24,
+        77,
+        113,
+        177
+      ],
+      "alpha_bounds_8_px": [
+        24,
+        77,
+        113,
+        177
+      ],
+      "body_size_px": [
+        89,
+        100
+      ],
+      "visual_top_anchor_px": [
+        64,
+        77
+      ]
+    },
+    {
+      "index": 136,
+      "direction": 7,
+      "animation": "walk",
+      "frame": 6,
+      "file": "frames/136.png",
+      "atlas_rect": [
+        1024,
+        1536,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.471,
+        90.595
+      ],
+      "mesh_projected_bounds": [
+        25.516707064008152,
+        75.8131031437543,
+        113.73487684379477,
+        177.94489248353003
+      ],
+      "render_seconds": 0.368,
+      "alpha_bounds_px": [
+        25,
+        76,
+        115,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        25,
+        76,
+        114,
+        178
+      ],
+      "body_size_px": [
+        90,
+        102
+      ],
+      "visual_top_anchor_px": [
+        64,
+        76
+      ]
+    },
+    {
+      "index": 137,
+      "direction": 7,
+      "animation": "walk",
+      "frame": 7,
+      "file": "frames/137.png",
+      "atlas_rect": [
+        1152,
+        1536,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        64.976,
+        90.544
+      ],
+      "mesh_projected_bounds": [
+        24.830200220355685,
+        76.33552674809248,
+        112.71099993461738,
+        177.63039887663007
+      ],
+      "render_seconds": 0.491,
+      "alpha_bounds_px": [
+        24,
+        77,
+        113,
+        178
+      ],
+      "alpha_bounds_8_px": [
+        24,
+        77,
+        113,
+        178
+      ],
+      "body_size_px": [
+        89,
+        101
+      ],
+      "visual_top_anchor_px": [
+        64,
+        77
+      ]
+    },
+    {
+      "index": 138,
+      "direction": 7,
+      "animation": "attack",
+      "frame": 0,
+      "file": "frames/138.png",
+      "atlas_rect": [
+        1280,
+        1536,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        63.779,
+        89.908
+      ],
+      "mesh_projected_bounds": [
+        23.225072780957547,
+        77.11986875155029,
+        110.2298489553098,
+        176.12530155706494
+      ],
+      "render_seconds": 0.358,
+      "alpha_bounds_px": [
+        23,
+        77,
+        111,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        23,
+        77,
+        111,
+        176
+      ],
+      "body_size_px": [
+        88,
+        99
+      ],
+      "visual_top_anchor_px": [
+        64,
+        77
+      ]
+    },
+    {
+      "index": 139,
+      "direction": 7,
+      "animation": "attack",
+      "frame": 1,
+      "file": "frames/139.png",
+      "atlas_rect": [
+        1408,
+        1536,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        63.719,
+        89.448
+      ],
+      "mesh_projected_bounds": [
+        23.97867841704862,
+        76.9122460402136,
+        106.10732802431153,
+        175.85491072545963
+      ],
+      "render_seconds": 0.359,
+      "alpha_bounds_px": [
+        23,
+        77,
+        107,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        24,
+        77,
+        107,
+        176
+      ],
+      "body_size_px": [
+        84,
+        99
+      ],
+      "visual_top_anchor_px": [
+        64,
+        77
+      ]
+    },
+    {
+      "index": 140,
+      "direction": 7,
+      "animation": "attack",
+      "frame": 2,
+      "file": "frames/140.png",
+      "atlas_rect": [
+        1536,
+        1536,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.507,
+        89.042
+      ],
+      "mesh_projected_bounds": [
+        22.76410468209901,
+        77.0530082868266,
+        118.56968158657534,
+        176.12530155706494
+      ],
+      "render_seconds": 0.365,
+      "alpha_bounds_px": [
+        23,
+        77,
+        120,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        23,
+        77,
+        119,
+        176
+      ],
+      "body_size_px": [
+        97,
+        99
+      ],
+      "visual_top_anchor_px": [
+        64,
+        77
+      ]
+    },
+    {
+      "index": 141,
+      "direction": 7,
+      "animation": "attack",
+      "frame": 3,
+      "file": "frames/141.png",
+      "atlas_rect": [
+        1664,
+        1536,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        67.109,
+        88.176
+      ],
+      "mesh_projected_bounds": [
+        22.416874267034558,
+        77.49466513087798,
+        119.9770141318348,
+        176.12530155706494
+      ],
+      "render_seconds": 0.346,
+      "alpha_bounds_px": [
+        22,
+        77,
+        121,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        23,
+        77,
+        121,
+        176
+      ],
+      "body_size_px": [
+        99,
+        99
+      ],
+      "visual_top_anchor_px": [
+        64,
+        77
+      ]
+    },
+    {
+      "index": 142,
+      "direction": 7,
+      "animation": "attack",
+      "frame": 4,
+      "file": "frames/142.png",
+      "atlas_rect": [
+        1792,
+        1536,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        65.319,
+        89.091
+      ],
+      "mesh_projected_bounds": [
+        23.00382659516964,
+        76.97259492026808,
+        114.85892210875024,
+        176.12530155706494
+      ],
+      "render_seconds": 0.364,
+      "alpha_bounds_px": [
+        23,
+        77,
+        116,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        23,
+        77,
+        115,
+        176
+      ],
+      "body_size_px": [
+        93,
+        99
+      ],
+      "visual_top_anchor_px": [
+        64,
+        77
+      ]
+    },
+    {
+      "index": 143,
+      "direction": 7,
+      "animation": "attack",
+      "frame": 5,
+      "file": "frames/143.png",
+      "atlas_rect": [
+        1920,
+        1536,
+        128,
+        192
+      ],
+      "foot_anchor_px": [
+        64.0,
+        158.0
+      ],
+      "head_top_anchor_px": [
+        63.779,
+        89.908
+      ],
+      "mesh_projected_bounds": [
+        23.225072780957547,
+        77.11986875155029,
+        110.2298489553098,
+        176.12530155706494
+      ],
+      "render_seconds": 0.358,
+      "alpha_bounds_px": [
+        23,
+        77,
+        111,
+        176
+      ],
+      "alpha_bounds_8_px": [
+        23,
+        77,
+        111,
+        176
+      ],
+      "body_size_px": [
+        88,
+        99
+      ],
+      "visual_top_anchor_px": [
+        64,
+        77
+      ]
+    }
+  ],
+  "total_render_seconds": 63.589,
+  "atlas_size_px": [
+    2048,
+    1728
+  ],
+  "all_frame_alpha_bounds_px": [
+    5,
+    62,
+    123,
+    185
+  ],
+  "alpha_body_height_range_px": [
+    88,
+    117
+  ],
+  "alpha_body_width_range_px": [
+    51,
+    100
+  ],
+  "unique_render_count": 136,
+  "atlas_sha256": "678b3c921b54ec0aa25502f23ec73100b4f966e5a23ff81eb057c7d317f33b34",
+  "source_files": [
+    "generate_heavy_guard.py",
+    "pack_heavy_guard.py",
+    "heavy_guard.blend",
+    "heavy_guard_atlas_source.blend"
+  ],
+  "qa": {
+    "all_frames_present": true,
+    "all_frames_rgba": true,
+    "all_frames_unclipped": true,
+    "shared_world_ground_anchor": true,
+    "native_frame_pixels_preserved": true,
+    "has_baked_floor_or_shadow": false
+  },
+  "scale_reference": {
+    "reference_frame_index": 36,
+    "reference_direction": "S",
+    "reference_animation": "idle",
+    "reference_body_height_px": 96,
+    "target_world_body_height": 70,
+    "recommended_uniform_scale": 0.729167,
+    "semantics": "Multiply Sprite2D source pixels uniformly into world units; parent may choose final scale after game QA."
+  },
+  "head_top_anchor_semantics": "Projection of highest actual modeled head vertex in world Z for each pose; visual alpha top is separately recorded."
+}
