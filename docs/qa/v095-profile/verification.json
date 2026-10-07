@@ -1,0 +1,50 @@
+{
+  "accepted": true,
+  "checks": [
+    {
+      "mode": "ember_deaths",
+      "suffix": ".bin",
+      "exact_bytes_equal": true,
+      "bytes": 30888452,
+      "sha256": "54f8bb9cb9393695328879f2b768ddc26bbd294a43fded6b742c3405ef24de7d"
+    },
+    {
+      "mode": "ember_deaths",
+      "suffix": "-final.bin",
+      "exact_bytes_equal": true,
+      "bytes": 1491432,
+      "sha256": "9f29791c3a0a255d3de995209b16319a4d79b37f797cd79be0b4d1e639ffba0d"
+    },
+    {
+      "mode": "ember_deaths",
+      "suffix": ".save",
+      "exact_bytes_equal": true,
+      "bytes": 13693,
+      "sha256": "2ac20e9b6cfaa597aefddb20059ef490ab86bc10e5b89c36127323405c1f1eba"
+    },
+    {
+      "mode": "no_burn",
+      "suffix": ".bin",
+      "exact_bytes_equal": true,
+      "bytes": 5324164,
+      "sha256": "5323da3ea47335c394b78d3a7e63fd61beb6506ee73614f32d241336e5f48c28"
+    },
+    {
+      "mode": "no_burn",
+      "suffix": "-final.bin",
+      "exact_bytes_equal": true,
+      "bytes": 1331232,
+      "sha256": "7f1b2baceae0dbbef794c73ad44299b23f8d1f6c61aac3971ae1f5fa5d5dd1f0"
+    },
+    {
+      "mode": "no_burn",
+      "suffix": ".save",
+      "exact_bytes_equal": true,
+      "bytes": 12200,
+      "sha256": "26aedc4587bb032d72d04ebc61df6795d89d5bd170759a017d872f0f9b3e3651"
+    }
+  ],
+  "per_frame_sha256_equal": true,
+  "incoming_profile_call_counts_equal": true,
+  "production_improvement_claim": false
+}

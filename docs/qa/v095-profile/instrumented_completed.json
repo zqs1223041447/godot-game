@@ -1,0 +1,2296 @@
+{
+  "base_commit": "eaf298a8cbd22c8387da28da118a15afdcd2afb5",
+  "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+  "engine": "4.6.3-stable (official)",
+  "instrumented": true,
+  "production_without_wrappers": false,
+  "rows": [
+    {
+      "calls": {},
+      "extra_counts": {},
+      "final_inventory": 41,
+      "final_observation_bytes": 1491432,
+      "final_observation_sha256": "9f29791c3a0a255d3de995209b16319a4d79b37f797cd79be0b4d1e639ffba0d",
+      "frames": 20,
+      "initial_enemies": 100,
+      "initial_inventory": 38,
+      "kills": 20,
+      "mode": "ember_deaths",
+      "observation_bytes": 30888452,
+      "observation_sha256": "54f8bb9cb9393695328879f2b768ddc26bbd294a43fded6b742c3405ef24de7d",
+      "phases": {},
+      "reward_kills": 20,
+      "samples": [
+        {
+          "burns": 100,
+          "cpu_us": 1008622,
+          "enemies": 100,
+          "feedback": 0,
+          "frame": 0,
+          "hits": 342,
+          "kills": 0,
+          "meter": {
+            "advance_total/other": {
+              "calls": 343,
+              "us": 843939
+            },
+            "advance_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "advance_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/planning": {
+              "calls": 9263,
+              "us": 33049
+            },
+            "defense_profile_body/settlement": {
+              "calls": 9263,
+              "us": 35711
+            },
+            "defense_profile_call_envelope/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_call_envelope/planning": {
+              "calls": 9263,
+              "us": 48850
+            },
+            "defense_profile_call_envelope/settlement": {
+              "calls": 9263,
+              "us": 53994
+            },
+            "eligible_monster_numeric_zero_calls": [
+              0,
+              9263,
+              9263
+            ],
+            "incoming_burn/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "incoming_burn/planning": {
+              "calls": 9263,
+              "us": 128454
+            },
+            "incoming_burn/settlement": {
+              "calls": 9263,
+              "us": 145074
+            },
+            "settlement_total/other": {
+              "calls": 686,
+              "us": 409570
+            },
+            "settlement_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "settlement_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/other": {
+              "calls": 9263,
+              "us": 54349
+            },
+            "trace_build/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/settlement": {
+              "calls": 0,
+              "us": 0
+            }
+          },
+          "observation_sha256": "f2302b036a3046638c0c11a563dec123300ae521a1a3ed2c74a92d8adae194b7",
+          "particles": 180,
+          "pending_feedback": 200,
+          "pickups": 0,
+          "projectiles": 180
+        },
+        {
+          "burns": 100,
+          "cpu_us": 74087,
+          "enemies": 100,
+          "feedback": 0,
+          "frame": 1,
+          "hits": 0,
+          "kills": 0,
+          "meter": {
+            "advance_total/other": {
+              "calls": 1,
+              "us": 14672
+            },
+            "advance_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "advance_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/planning": {
+              "calls": 100,
+              "us": 328
+            },
+            "defense_profile_body/settlement": {
+              "calls": 100,
+              "us": 354
+            },
+            "defense_profile_call_envelope/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_call_envelope/planning": {
+              "calls": 100,
+              "us": 528
+            },
+            "defense_profile_call_envelope/settlement": {
+              "calls": 100,
+              "us": 504
+            },
+            "eligible_monster_numeric_zero_calls": [
+              0,
+              100,
+              100
+            ],
+            "incoming_burn/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "incoming_burn/planning": {
+              "calls": 100,
+              "us": 1748
+            },
+            "incoming_burn/settlement": {
+              "calls": 100,
+              "us": 1472
+            },
+            "settlement_total/other": {
+              "calls": 2,
+              "us": 5183
+            },
+            "settlement_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "settlement_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/other": {
+              "calls": 100,
+              "us": 724
+            },
+            "trace_build/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/settlement": {
+              "calls": 0,
+              "us": 0
+            }
+          },
+          "observation_sha256": "0dc8a604b23fd2e713ba25d17f8fe4bb187b970d28cfcdd8a252c0316196891f",
+          "particles": 180,
+          "pending_feedback": 200,
+          "pickups": 0,
+          "projectiles": 180
+        },
+        {
+          "burns": 100,
+          "cpu_us": 42409,
+          "enemies": 100,
+          "feedback": 0,
+          "frame": 2,
+          "hits": 0,
+          "kills": 0,
+          "meter": {
+            "advance_total/other": {
+              "calls": 1,
+              "us": 15802
+            },
+            "advance_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "advance_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/planning": {
+              "calls": 100,
+              "us": 287
+            },
+            "defense_profile_body/settlement": {
+              "calls": 100,
+              "us": 648
+            },
+            "defense_profile_call_envelope/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_call_envelope/planning": {
+              "calls": 100,
+              "us": 420
+            },
+            "defense_profile_call_envelope/settlement": {
+              "calls": 100,
+              "us": 811
+            },
+            "eligible_monster_numeric_zero_calls": [
+              0,
+              100,
+              100
+            ],
+            "incoming_burn/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "incoming_burn/planning": {
+              "calls": 100,
+              "us": 1122
+            },
+            "incoming_burn/settlement": {
+              "calls": 100,
+              "us": 6168
+            },
+            "settlement_total/other": {
+              "calls": 2,
+              "us": 9626
+            },
+            "settlement_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "settlement_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/other": {
+              "calls": 100,
+              "us": 759
+            },
+            "trace_build/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/settlement": {
+              "calls": 0,
+              "us": 0
+            }
+          },
+          "observation_sha256": "b7830e16c5b57d05a5995760733ffe63226763c51235a91b55e15dfaf45e5a65",
+          "particles": 180,
+          "pending_feedback": 200,
+          "pickups": 0,
+          "projectiles": 180
+        },
+        {
+          "burns": 100,
+          "cpu_us": 179724,
+          "enemies": 100,
+          "feedback": 0,
+          "frame": 3,
+          "hits": 20,
+          "kills": 0,
+          "meter": {
+            "advance_total/other": {
+              "calls": 21,
+              "us": 135819
+            },
+            "advance_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "advance_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/planning": {
+              "calls": 1300,
+              "us": 4557
+            },
+            "defense_profile_body/settlement": {
+              "calls": 1300,
+              "us": 7225
+            },
+            "defense_profile_call_envelope/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_call_envelope/planning": {
+              "calls": 1300,
+              "us": 6534
+            },
+            "defense_profile_call_envelope/settlement": {
+              "calls": 1300,
+              "us": 9727
+            },
+            "eligible_monster_numeric_zero_calls": [
+              0,
+              1300,
+              1300
+            ],
+            "incoming_burn/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "incoming_burn/planning": {
+              "calls": 1300,
+              "us": 17964
+            },
+            "incoming_burn/settlement": {
+              "calls": 1300,
+              "us": 23016
+            },
+            "settlement_total/other": {
+              "calls": 42,
+              "us": 69278
+            },
+            "settlement_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "settlement_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/other": {
+              "calls": 1300,
+              "us": 14214
+            },
+            "trace_build/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/settlement": {
+              "calls": 0,
+              "us": 0
+            }
+          },
+          "observation_sha256": "c1a41c4b10aad0d26f5c8d10b3368860e4ad8745f7407da42572b477cb795247",
+          "particles": 180,
+          "pending_feedback": 200,
+          "pickups": 0,
+          "projectiles": 180
+        },
+        {
+          "burns": 100,
+          "cpu_us": 263065,
+          "enemies": 100,
+          "feedback": 0,
+          "frame": 4,
+          "hits": 41,
+          "kills": 0,
+          "meter": {
+            "advance_total/other": {
+              "calls": 42,
+              "us": 217093
+            },
+            "advance_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "advance_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/planning": {
+              "calls": 2400,
+              "us": 8392
+            },
+            "defense_profile_body/settlement": {
+              "calls": 2400,
+              "us": 8477
+            },
+            "defense_profile_call_envelope/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_call_envelope/planning": {
+              "calls": 2400,
+              "us": 13451
+            },
+            "defense_profile_call_envelope/settlement": {
+              "calls": 2400,
+              "us": 13055
+            },
+            "eligible_monster_numeric_zero_calls": [
+              0,
+              2400,
+              2400
+            ],
+            "incoming_burn/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "incoming_burn/planning": {
+              "calls": 2400,
+              "us": 37345
+            },
+            "incoming_burn/settlement": {
+              "calls": 2400,
+              "us": 38602
+            },
+            "settlement_total/other": {
+              "calls": 84,
+              "us": 104760
+            },
+            "settlement_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "settlement_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/other": {
+              "calls": 2400,
+              "us": 13103
+            },
+            "trace_build/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/settlement": {
+              "calls": 0,
+              "us": 0
+            }
+          },
+          "observation_sha256": "f6d79d5d2892bed465925678dd4d7c7d88b1d7bbe58b72126092df0303554d09",
+          "particles": 180,
+          "pending_feedback": 200,
+          "pickups": 0,
+          "projectiles": 180
+        },
+        {
+          "burns": 100,
+          "cpu_us": 178741,
+          "enemies": 100,
+          "feedback": 0,
+          "frame": 5,
+          "hits": 31,
+          "kills": 0,
+          "meter": {
+            "advance_total/other": {
+              "calls": 32,
+              "us": 140867
+            },
+            "advance_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "advance_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/planning": {
+              "calls": 1700,
+              "us": 5480
+            },
+            "defense_profile_body/settlement": {
+              "calls": 1700,
+              "us": 6474
+            },
+            "defense_profile_call_envelope/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_call_envelope/planning": {
+              "calls": 1700,
+              "us": 8247
+            },
+            "defense_profile_call_envelope/settlement": {
+              "calls": 1700,
+              "us": 9172
+            },
+            "eligible_monster_numeric_zero_calls": [
+              0,
+              1700,
+              1700
+            ],
+            "incoming_burn/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "incoming_burn/planning": {
+              "calls": 1700,
+              "us": 23840
+            },
+            "incoming_burn/settlement": {
+              "calls": 1700,
+              "us": 23983
+            },
+            "settlement_total/other": {
+              "calls": 64,
+              "us": 70636
+            },
+            "settlement_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "settlement_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/other": {
+              "calls": 1700,
+              "us": 9190
+            },
+            "trace_build/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/settlement": {
+              "calls": 0,
+              "us": 0
+            }
+          },
+          "observation_sha256": "f03bb0789a6c10f9af5bdeb8a21eaa9dac0ca7da2f1517329206c159708abbc8",
+          "particles": 180,
+          "pending_feedback": 200,
+          "pickups": 0,
+          "projectiles": 180
+        },
+        {
+          "burns": 100,
+          "cpu_us": 149990,
+          "enemies": 100,
+          "feedback": 0,
+          "frame": 6,
+          "hits": 23,
+          "kills": 0,
+          "meter": {
+            "advance_total/other": {
+              "calls": 24,
+              "us": 114138
+            },
+            "advance_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "advance_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/planning": {
+              "calls": 1400,
+              "us": 5294
+            },
+            "defense_profile_body/settlement": {
+              "calls": 1400,
+              "us": 4666
+            },
+            "defense_profile_call_envelope/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_call_envelope/planning": {
+              "calls": 1400,
+              "us": 7517
+            },
+            "defense_profile_call_envelope/settlement": {
+              "calls": 1400,
+              "us": 6828
+            },
+            "eligible_monster_numeric_zero_calls": [
+              0,
+              1400,
+              1400
+            ],
+            "incoming_burn/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "incoming_burn/planning": {
+              "calls": 1400,
+              "us": 19067
+            },
+            "incoming_burn/settlement": {
+              "calls": 1400,
+              "us": 18855
+            },
+            "settlement_total/other": {
+              "calls": 48,
+              "us": 56874
+            },
+            "settlement_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "settlement_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/other": {
+              "calls": 1400,
+              "us": 7119
+            },
+            "trace_build/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/settlement": {
+              "calls": 0,
+              "us": 0
+            }
+          },
+          "observation_sha256": "074be9c3a175d96c1a2349a08152bd4e21a53c86cde6960f0c4c719e4fbe96f9",
+          "particles": 180,
+          "pending_feedback": 200,
+          "pickups": 0,
+          "projectiles": 180
+        },
+        {
+          "burns": 100,
+          "cpu_us": 138882,
+          "enemies": 100,
+          "feedback": 0,
+          "frame": 7,
+          "hits": 20,
+          "kills": 0,
+          "meter": {
+            "advance_total/other": {
+              "calls": 21,
+              "us": 109271
+            },
+            "advance_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "advance_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/planning": {
+              "calls": 1200,
+              "us": 4569
+            },
+            "defense_profile_body/settlement": {
+              "calls": 1200,
+              "us": 5689
+            },
+            "defense_profile_call_envelope/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_call_envelope/planning": {
+              "calls": 1200,
+              "us": 6538
+            },
+            "defense_profile_call_envelope/settlement": {
+              "calls": 1200,
+              "us": 7547
+            },
+            "eligible_monster_numeric_zero_calls": [
+              0,
+              1200,
+              1200
+            ],
+            "incoming_burn/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "incoming_burn/planning": {
+              "calls": 1200,
+              "us": 18036
+            },
+            "incoming_burn/settlement": {
+              "calls": 1200,
+              "us": 18769
+            },
+            "settlement_total/other": {
+              "calls": 42,
+              "us": 53495
+            },
+            "settlement_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "settlement_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/other": {
+              "calls": 1200,
+              "us": 6867
+            },
+            "trace_build/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/settlement": {
+              "calls": 0,
+              "us": 0
+            }
+          },
+          "observation_sha256": "9267dc20c703cc73b053916a8d14a5ea2b357428baeae2fcab5fba81fda58a2a",
+          "particles": 180,
+          "pending_feedback": 200,
+          "pickups": 0,
+          "projectiles": 180
+        },
+        {
+          "burns": 100,
+          "cpu_us": 78317,
+          "enemies": 100,
+          "feedback": 0,
+          "frame": 8,
+          "hits": 11,
+          "kills": 0,
+          "meter": {
+            "advance_total/other": {
+              "calls": 12,
+              "us": 55349
+            },
+            "advance_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "advance_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/planning": {
+              "calls": 700,
+              "us": 2685
+            },
+            "defense_profile_body/settlement": {
+              "calls": 700,
+              "us": 2271
+            },
+            "defense_profile_call_envelope/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_call_envelope/planning": {
+              "calls": 700,
+              "us": 4005
+            },
+            "defense_profile_call_envelope/settlement": {
+              "calls": 700,
+              "us": 3403
+            },
+            "eligible_monster_numeric_zero_calls": [
+              0,
+              700,
+              700
+            ],
+            "incoming_burn/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "incoming_burn/planning": {
+              "calls": 700,
+              "us": 9986
+            },
+            "incoming_burn/settlement": {
+              "calls": 700,
+              "us": 8955
+            },
+            "settlement_total/other": {
+              "calls": 24,
+              "us": 26716
+            },
+            "settlement_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "settlement_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/other": {
+              "calls": 700,
+              "us": 3456
+            },
+            "trace_build/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/settlement": {
+              "calls": 0,
+              "us": 0
+            }
+          },
+          "observation_sha256": "eae7f3f0622bd74adbeb294f4b9f59ac8312ddfc35c72b012bfce9b5e4789dda",
+          "particles": 180,
+          "pending_feedback": 200,
+          "pickups": 0,
+          "projectiles": 180
+        },
+        {
+          "burns": 100,
+          "cpu_us": 81520,
+          "enemies": 100,
+          "feedback": 0,
+          "frame": 9,
+          "hits": 29,
+          "kills": 0,
+          "meter": {
+            "advance_total/other": {
+              "calls": 30,
+              "us": 47593
+            },
+            "advance_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "advance_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/planning": {
+              "calls": 500,
+              "us": 1637
+            },
+            "defense_profile_body/settlement": {
+              "calls": 500,
+              "us": 2059
+            },
+            "defense_profile_call_envelope/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_call_envelope/planning": {
+              "calls": 500,
+              "us": 2290
+            },
+            "defense_profile_call_envelope/settlement": {
+              "calls": 500,
+              "us": 2803
+            },
+            "eligible_monster_numeric_zero_calls": [
+              0,
+              500,
+              500
+            ],
+            "incoming_burn/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "incoming_burn/planning": {
+              "calls": 500,
+              "us": 6531
+            },
+            "incoming_burn/settlement": {
+              "calls": 500,
+              "us": 6822
+            },
+            "settlement_total/other": {
+              "calls": 60,
+              "us": 21279
+            },
+            "settlement_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "settlement_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/other": {
+              "calls": 500,
+              "us": 3152
+            },
+            "trace_build/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/settlement": {
+              "calls": 0,
+              "us": 0
+            }
+          },
+          "observation_sha256": "e2f27b303a176224a9930049a7a4a94a739c64f1288b5b9c81f105d59457fc15",
+          "particles": 180,
+          "pending_feedback": 200,
+          "pickups": 0,
+          "projectiles": 180
+        },
+        {
+          "burns": 100,
+          "cpu_us": 218487,
+          "enemies": 100,
+          "feedback": 0,
+          "frame": 10,
+          "hits": 43,
+          "kills": 0,
+          "meter": {
+            "advance_total/other": {
+              "calls": 44,
+              "us": 174060
+            },
+            "advance_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "advance_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/planning": {
+              "calls": 1800,
+              "us": 6676
+            },
+            "defense_profile_body/settlement": {
+              "calls": 1800,
+              "us": 7190
+            },
+            "defense_profile_call_envelope/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_call_envelope/planning": {
+              "calls": 1800,
+              "us": 9278
+            },
+            "defense_profile_call_envelope/settlement": {
+              "calls": 1800,
+              "us": 10670
+            },
+            "eligible_monster_numeric_zero_calls": [
+              0,
+              1800,
+              1800
+            ],
+            "incoming_burn/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "incoming_burn/planning": {
+              "calls": 1800,
+              "us": 27080
+            },
+            "incoming_burn/settlement": {
+              "calls": 1800,
+              "us": 27051
+            },
+            "settlement_total/other": {
+              "calls": 88,
+              "us": 83540
+            },
+            "settlement_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "settlement_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/other": {
+              "calls": 1800,
+              "us": 11353
+            },
+            "trace_build/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/settlement": {
+              "calls": 0,
+              "us": 0
+            }
+          },
+          "observation_sha256": "98d25558481eab25379f77d6def455c6c251997bf8ff63e9f3917aaf213b2571",
+          "particles": 180,
+          "pending_feedback": 200,
+          "pickups": 0,
+          "projectiles": 180
+        },
+        {
+          "burns": 100,
+          "cpu_us": 348749,
+          "enemies": 100,
+          "feedback": 0,
+          "frame": 11,
+          "hits": 70,
+          "kills": 0,
+          "meter": {
+            "advance_total/other": {
+              "calls": 71,
+              "us": 291904
+            },
+            "advance_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "advance_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/planning": {
+              "calls": 3300,
+              "us": 11604
+            },
+            "defense_profile_body/settlement": {
+              "calls": 3300,
+              "us": 12276
+            },
+            "defense_profile_call_envelope/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_call_envelope/planning": {
+              "calls": 3300,
+              "us": 16475
+            },
+            "defense_profile_call_envelope/settlement": {
+              "calls": 3300,
+              "us": 17862
+            },
+            "eligible_monster_numeric_zero_calls": [
+              0,
+              3300,
+              3300
+            ],
+            "incoming_burn/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "incoming_burn/planning": {
+              "calls": 3300,
+              "us": 46597
+            },
+            "incoming_burn/settlement": {
+              "calls": 3300,
+              "us": 48176
+            },
+            "settlement_total/other": {
+              "calls": 142,
+              "us": 144318
+            },
+            "settlement_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "settlement_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/other": {
+              "calls": 3300,
+              "us": 19032
+            },
+            "trace_build/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/settlement": {
+              "calls": 0,
+              "us": 0
+            }
+          },
+          "observation_sha256": "31df54e6eae2c7b1e7344ca066335c4abec23c65a290f09af806a011bea31536",
+          "particles": 180,
+          "pending_feedback": 200,
+          "pickups": 0,
+          "projectiles": 180
+        },
+        {
+          "burns": 100,
+          "cpu_us": 232898,
+          "enemies": 100,
+          "feedback": 20,
+          "frame": 12,
+          "hits": 45,
+          "kills": 0,
+          "meter": {
+            "advance_total/other": {
+              "calls": 46,
+              "us": 184401
+            },
+            "advance_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "advance_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/planning": {
+              "calls": 2000,
+              "us": 6678
+            },
+            "defense_profile_body/settlement": {
+              "calls": 2000,
+              "us": 8644
+            },
+            "defense_profile_call_envelope/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_call_envelope/planning": {
+              "calls": 2000,
+              "us": 10143
+            },
+            "defense_profile_call_envelope/settlement": {
+              "calls": 2000,
+              "us": 12099
+            },
+            "eligible_monster_numeric_zero_calls": [
+              0,
+              2000,
+              2000
+            ],
+            "incoming_burn/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "incoming_burn/planning": {
+              "calls": 2000,
+              "us": 28683
+            },
+            "incoming_burn/settlement": {
+              "calls": 2000,
+              "us": 32962
+            },
+            "settlement_total/other": {
+              "calls": 92,
+              "us": 90179
+            },
+            "settlement_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "settlement_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/other": {
+              "calls": 2000,
+              "us": 10622
+            },
+            "trace_build/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/settlement": {
+              "calls": 0,
+              "us": 0
+            }
+          },
+          "observation_sha256": "4d6b4bf2a386f86ed80ddd9a78e75a2e962d446ddc250d3b4c25e1a886cd64df",
+          "particles": 180,
+          "pending_feedback": 182,
+          "pickups": 0,
+          "projectiles": 180
+        },
+        {
+          "burns": 100,
+          "cpu_us": 335038,
+          "enemies": 100,
+          "feedback": 48,
+          "frame": 13,
+          "hits": 62,
+          "kills": 0,
+          "meter": {
+            "advance_total/other": {
+              "calls": 63,
+              "us": 277613
+            },
+            "advance_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "advance_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/planning": {
+              "calls": 2900,
+              "us": 12651
+            },
+            "defense_profile_body/settlement": {
+              "calls": 2900,
+              "us": 12936
+            },
+            "defense_profile_call_envelope/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_call_envelope/planning": {
+              "calls": 2900,
+              "us": 17228
+            },
+            "defense_profile_call_envelope/settlement": {
+              "calls": 2900,
+              "us": 18558
+            },
+            "eligible_monster_numeric_zero_calls": [
+              0,
+              2900,
+              2900
+            ],
+            "incoming_burn/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "incoming_burn/planning": {
+              "calls": 2900,
+              "us": 42583
+            },
+            "incoming_burn/settlement": {
+              "calls": 2900,
+              "us": 45387
+            },
+            "settlement_total/other": {
+              "calls": 126,
+              "us": 137064
+            },
+            "settlement_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "settlement_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/other": {
+              "calls": 2900,
+              "us": 21405
+            },
+            "trace_build/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/settlement": {
+              "calls": 0,
+              "us": 0
+            }
+          },
+          "observation_sha256": "165ae3bce42dda18e5d04d5948483b8b57bee2c080bc02917c318afebcf6b192",
+          "particles": 180,
+          "pending_feedback": 136,
+          "pickups": 0,
+          "projectiles": 180
+        },
+        {
+          "burns": 100,
+          "cpu_us": 312738,
+          "enemies": 100,
+          "feedback": 48,
+          "frame": 14,
+          "hits": 37,
+          "kills": 0,
+          "meter": {
+            "advance_total/other": {
+              "calls": 38,
+              "us": 261849
+            },
+            "advance_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "advance_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/planning": {
+              "calls": 1900,
+              "us": 7132
+            },
+            "defense_profile_body/settlement": {
+              "calls": 1900,
+              "us": 8331
+            },
+            "defense_profile_call_envelope/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_call_envelope/planning": {
+              "calls": 1900,
+              "us": 10247
+            },
+            "defense_profile_call_envelope/settlement": {
+              "calls": 1900,
+              "us": 11823
+            },
+            "eligible_monster_numeric_zero_calls": [
+              0,
+              1900,
+              1900
+            ],
+            "incoming_burn/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "incoming_burn/planning": {
+              "calls": 1900,
+              "us": 52303
+            },
+            "incoming_burn/settlement": {
+              "calls": 1900,
+              "us": 32830
+            },
+            "settlement_total/other": {
+              "calls": 76,
+              "us": 115719
+            },
+            "settlement_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "settlement_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/other": {
+              "calls": 1900,
+              "us": 15545
+            },
+            "trace_build/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/settlement": {
+              "calls": 0,
+              "us": 0
+            }
+          },
+          "observation_sha256": "1a816f8288bce89efa10b6c6bd0a1c4c6b9cdeb99354a7317966151743a38f8e",
+          "particles": 180,
+          "pending_feedback": 150,
+          "pickups": 0,
+          "projectiles": 180
+        },
+        {
+          "burns": 100,
+          "cpu_us": 269221,
+          "enemies": 100,
+          "feedback": 48,
+          "frame": 15,
+          "hits": 27,
+          "kills": 0,
+          "meter": {
+            "advance_total/other": {
+              "calls": 28,
+              "us": 215931
+            },
+            "advance_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "advance_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/planning": {
+              "calls": 1500,
+              "us": 6695
+            },
+            "defense_profile_body/settlement": {
+              "calls": 1500,
+              "us": 7795
+            },
+            "defense_profile_call_envelope/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_call_envelope/planning": {
+              "calls": 1500,
+              "us": 12081
+            },
+            "defense_profile_call_envelope/settlement": {
+              "calls": 1500,
+              "us": 11643
+            },
+            "eligible_monster_numeric_zero_calls": [
+              0,
+              1500,
+              1500
+            ],
+            "incoming_burn/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "incoming_burn/planning": {
+              "calls": 1500,
+              "us": 34182
+            },
+            "incoming_burn/settlement": {
+              "calls": 1500,
+              "us": 38291
+            },
+            "settlement_total/other": {
+              "calls": 56,
+              "us": 116198
+            },
+            "settlement_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "settlement_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/other": {
+              "calls": 1500,
+              "us": 14544
+            },
+            "trace_build/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/settlement": {
+              "calls": 0,
+              "us": 0
+            }
+          },
+          "observation_sha256": "8b06fade66a02542e268b238ca6125425d5c213ff46534dc9a88ad92431c5871",
+          "particles": 180,
+          "pending_feedback": 153,
+          "pickups": 0,
+          "projectiles": 180
+        },
+        {
+          "burns": 87,
+          "cpu_us": 390531,
+          "enemies": 87,
+          "feedback": 48,
+          "frame": 16,
+          "hits": 59,
+          "kills": 13,
+          "meter": {
+            "advance_total/other": {
+              "calls": 60,
+              "us": 328178
+            },
+            "advance_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "advance_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/planning": {
+              "calls": 3312,
+              "us": 13313
+            },
+            "defense_profile_body/settlement": {
+              "calls": 3324,
+              "us": 13256
+            },
+            "defense_profile_call_envelope/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_call_envelope/planning": {
+              "calls": 3312,
+              "us": 18393
+            },
+            "defense_profile_call_envelope/settlement": {
+              "calls": 3324,
+              "us": 18487
+            },
+            "eligible_monster_numeric_zero_calls": [
+              0,
+              3312,
+              3324
+            ],
+            "incoming_burn/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "incoming_burn/planning": {
+              "calls": 3312,
+              "us": 46051
+            },
+            "incoming_burn/settlement": {
+              "calls": 3324,
+              "us": 50877
+            },
+            "settlement_total/other": {
+              "calls": 116,
+              "us": 174856
+            },
+            "settlement_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "settlement_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/other": {
+              "calls": 3312,
+              "us": 19479
+            },
+            "trace_build/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/settlement": {
+              "calls": 0,
+              "us": 0
+            }
+          },
+          "observation_sha256": "7cebb2eafa1adf8d3a28310266a81f3963aa710b81011941a5410b037de1835a",
+          "particles": 180,
+          "pending_feedback": 138,
+          "pickups": 3,
+          "projectiles": 180
+        },
+        {
+          "burns": 80,
+          "cpu_us": 219619,
+          "enemies": 80,
+          "feedback": 48,
+          "frame": 17,
+          "hits": 36,
+          "kills": 7,
+          "meter": {
+            "advance_total/other": {
+              "calls": 37,
+              "us": 172191
+            },
+            "advance_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "advance_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/planning": {
+              "calls": 1647,
+              "us": 5456
+            },
+            "defense_profile_body/settlement": {
+              "calls": 1652,
+              "us": 6743
+            },
+            "defense_profile_call_envelope/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_call_envelope/planning": {
+              "calls": 1647,
+              "us": 7752
+            },
+            "defense_profile_call_envelope/settlement": {
+              "calls": 1652,
+              "us": 9759
+            },
+            "eligible_monster_numeric_zero_calls": [
+              0,
+              1647,
+              1652
+            ],
+            "incoming_burn/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "incoming_burn/planning": {
+              "calls": 1647,
+              "us": 23209
+            },
+            "incoming_burn/settlement": {
+              "calls": 1652,
+              "us": 25273
+            },
+            "settlement_total/other": {
+              "calls": 70,
+              "us": 90757
+            },
+            "settlement_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "settlement_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/other": {
+              "calls": 1647,
+              "us": 10073
+            },
+            "trace_build/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/settlement": {
+              "calls": 0,
+              "us": 0
+            }
+          },
+          "observation_sha256": "76025d65097f11b9efb17824bc394fb1537452823360c154f7a34c95cedd731e",
+          "particles": 180,
+          "pending_feedback": 137,
+          "pickups": 5,
+          "projectiles": 180
+        },
+        {
+          "burns": 80,
+          "cpu_us": 80904,
+          "enemies": 80,
+          "feedback": 48,
+          "frame": 18,
+          "hits": 14,
+          "kills": 0,
+          "meter": {
+            "advance_total/other": {
+              "calls": 15,
+              "us": 57933
+            },
+            "advance_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "advance_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/planning": {
+              "calls": 720,
+              "us": 2291
+            },
+            "defense_profile_body/settlement": {
+              "calls": 720,
+              "us": 2824
+            },
+            "defense_profile_call_envelope/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_call_envelope/planning": {
+              "calls": 720,
+              "us": 3402
+            },
+            "defense_profile_call_envelope/settlement": {
+              "calls": 720,
+              "us": 3911
+            },
+            "eligible_monster_numeric_zero_calls": [
+              0,
+              720,
+              720
+            ],
+            "incoming_burn/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "incoming_burn/planning": {
+              "calls": 720,
+              "us": 8823
+            },
+            "incoming_burn/settlement": {
+              "calls": 720,
+              "us": 9708
+            },
+            "settlement_total/other": {
+              "calls": 30,
+              "us": 30184
+            },
+            "settlement_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "settlement_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/other": {
+              "calls": 720,
+              "us": 4223
+            },
+            "trace_build/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/settlement": {
+              "calls": 0,
+              "us": 0
+            }
+          },
+          "observation_sha256": "cbf69ad8cb6bf6f4ee337b5ca2ac25a95181c0a0f66c4d147996410967fa4f30",
+          "particles": 0,
+          "pending_feedback": 140,
+          "pickups": 5,
+          "projectiles": 180
+        },
+        {
+          "burns": 80,
+          "cpu_us": 84473,
+          "enemies": 80,
+          "feedback": 48,
+          "frame": 19,
+          "hits": 13,
+          "kills": 0,
+          "meter": {
+            "advance_total/other": {
+              "calls": 14,
+              "us": 60829
+            },
+            "advance_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "advance_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/planning": {
+              "calls": 640,
+              "us": 3459
+            },
+            "defense_profile_body/settlement": {
+              "calls": 640,
+              "us": 2378
+            },
+            "defense_profile_call_envelope/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_call_envelope/planning": {
+              "calls": 640,
+              "us": 4672
+            },
+            "defense_profile_call_envelope/settlement": {
+              "calls": 640,
+              "us": 3315
+            },
+            "eligible_monster_numeric_zero_calls": [
+              0,
+              640,
+              640
+            ],
+            "incoming_burn/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "incoming_burn/planning": {
+              "calls": 640,
+              "us": 11412
+            },
+            "incoming_burn/settlement": {
+              "calls": 640,
+              "us": 9236
+            },
+            "settlement_total/other": {
+              "calls": 28,
+              "us": 28966
+            },
+            "settlement_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "settlement_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/other": {
+              "calls": 640,
+              "us": 3457
+            },
+            "trace_build/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/settlement": {
+              "calls": 0,
+              "us": 0
+            }
+          },
+          "observation_sha256": "55e2bd5390485d041f2a694fa0960de3c8ed46265d83700c55e9b3eb931242b3",
+          "particles": 52,
+          "pending_feedback": 143,
+          "pickups": 5,
+          "projectiles": 180
+        }
+      ],
+      "tick": {
+        "max_us": 1008622,
+        "mean_us": 234400.75,
+        "n": 20,
+        "over_16_7_ms": 20,
+        "over_33_3_ms": 20,
+        "p50_us": 218487,
+        "p95_us": 1008622
+      }
+    },
+    {
+      "calls": {},
+      "extra_counts": {},
+      "final_inventory": 38,
+      "final_observation_bytes": 1331232,
+      "final_observation_sha256": "7f1b2baceae0dbbef794c73ad44299b23f8d1f6c61aac3971ae1f5fa5d5dd1f0",
+      "frames": 4,
+      "initial_enemies": 100,
+      "initial_inventory": 38,
+      "kills": 0,
+      "mode": "no_burn",
+      "observation_bytes": 5324164,
+      "observation_sha256": "5323da3ea47335c394b78d3a7e63fd61beb6506ee73614f32d241336e5f48c28",
+      "phases": {},
+      "reward_kills": 0,
+      "samples": [
+        {
+          "burns": 0,
+          "cpu_us": 83946,
+          "enemies": 100,
+          "feedback": 0,
+          "frame": 0,
+          "hits": 342,
+          "kills": 0,
+          "meter": {
+            "advance_total/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "advance_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "advance_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_call_envelope/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_call_envelope/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_call_envelope/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "eligible_monster_numeric_zero_calls": [
+              0,
+              0,
+              0
+            ],
+            "incoming_burn/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "incoming_burn/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "incoming_burn/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "settlement_total/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "settlement_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "settlement_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/settlement": {
+              "calls": 0,
+              "us": 0
+            }
+          },
+          "observation_sha256": "ded679817f0dd08c73e2b8081d6503f193662961231a8186211c3d5cbf5aac6b",
+          "particles": 180,
+          "pending_feedback": 100,
+          "pickups": 0,
+          "projectiles": 180
+        },
+        {
+          "burns": 0,
+          "cpu_us": 76240,
+          "enemies": 100,
+          "feedback": 0,
+          "frame": 1,
+          "hits": 342,
+          "kills": 0,
+          "meter": {
+            "advance_total/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "advance_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "advance_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_call_envelope/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_call_envelope/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_call_envelope/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "eligible_monster_numeric_zero_calls": [
+              0,
+              0,
+              0
+            ],
+            "incoming_burn/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "incoming_burn/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "incoming_burn/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "settlement_total/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "settlement_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "settlement_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/settlement": {
+              "calls": 0,
+              "us": 0
+            }
+          },
+          "observation_sha256": "1ae7a8912dc9c432f960dc38dade45e7d2ace0ccc6509558f200faa4c4356490",
+          "particles": 180,
+          "pending_feedback": 100,
+          "pickups": 0,
+          "projectiles": 180
+        },
+        {
+          "burns": 0,
+          "cpu_us": 79481,
+          "enemies": 100,
+          "feedback": 0,
+          "frame": 2,
+          "hits": 342,
+          "kills": 0,
+          "meter": {
+            "advance_total/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "advance_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "advance_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_call_envelope/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_call_envelope/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_call_envelope/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "eligible_monster_numeric_zero_calls": [
+              0,
+              0,
+              0
+            ],
+            "incoming_burn/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "incoming_burn/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "incoming_burn/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "settlement_total/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "settlement_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "settlement_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/settlement": {
+              "calls": 0,
+              "us": 0
+            }
+          },
+          "observation_sha256": "7c19c769aa694dae6f53b6c490302ffb1d0521bc459f02b524a324c7f5f94174",
+          "particles": 180,
+          "pending_feedback": 100,
+          "pickups": 0,
+          "projectiles": 180
+        },
+        {
+          "burns": 0,
+          "cpu_us": 73652,
+          "enemies": 100,
+          "feedback": 0,
+          "frame": 3,
+          "hits": 342,
+          "kills": 0,
+          "meter": {
+            "advance_total/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "advance_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "advance_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_body/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_call_envelope/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_call_envelope/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "defense_profile_call_envelope/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "eligible_monster_numeric_zero_calls": [
+              0,
+              0,
+              0
+            ],
+            "incoming_burn/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "incoming_burn/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "incoming_burn/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "settlement_total/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "settlement_total/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "settlement_total/settlement": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/other": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/planning": {
+              "calls": 0,
+              "us": 0
+            },
+            "trace_build/settlement": {
+              "calls": 0,
+              "us": 0
+            }
+          },
+          "observation_sha256": "a87ad3d8f9c4a0b97b6bb8311741ef94e6ba0753d8024e38f57246cc353b423b",
+          "particles": 180,
+          "pending_feedback": 100,
+          "pickups": 0,
+          "projectiles": 180
+        }
+      ],
+      "tick": {
+        "max_us": 83946,
+        "mean_us": 78329.75,
+        "n": 4,
+        "over_16_7_ms": 4,
+        "over_33_3_ms": 4,
+        "p50_us": 79481,
+        "p95_us": 83946
+      }
+    }
+  ],
+  "scope": "Headless script CPU; nested inclusive phases are not additive. Stress volleys are controlled carriers, not a claim one player naturally emits180 every tick. Catalog monsters retain AI and attack scheduling; player protected for the benchmark. No rendering/WindowsFPS measurement."
+}

@@ -1,0 +1,9 @@
+# 诊断之后的限定候选
+
+根线程在当前短诊断通过且确认profile函数体首峰68.760ms后，批准只改DefenseRules.incoming_burn原有monster、ratio/max_fire_bonus数值零的分支。原始有效诊断以eaf298a为基线，本文之后的候选不属于诊断的原输入；原计时与输入指纹保持，不作覆盖。
+
+该分支只含已知fire_resistance字段与已知monster actor，原来构造完整防御profile后仅取一个标量。候选保raw最先验证，其后相同finite fire检查与原错误文字、相同0..75clamp和乘法、原资源检查及原完整receipt。玩家、非零/非法ratio或最大火抗参数继续原路径；不添加rate接口、缓存、状态投影或改变burn_trace字段。
+
+接受前必须通过最新eaf基线的typed-byte比较，并只补候选20余烬帧/4无燃烧帧，与已完成有效clean样本逐帧、最终状态及原存档字节相同。采用干净生产tick而非带计时包装数值判断实际收益；没有保证收益，若不足或出现行为差异撤回。该候选只能改善已定位成本的一部分，不能称所有怪群卡顿或Windows60FPS已解决。
+
+完整诊断观察与存档以固定mtime的gzip归档，解压与原字节的大小/SHA在observation-archives.json；原bin/save保留本地，避免把多份重复几十MB原件加入仓库。

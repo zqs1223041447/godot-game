@@ -1,0 +1,29 @@
+[
+  {
+    "label": "clean",
+    "command": [
+      "/usr/local/bin/godot",
+      "--headless",
+      "--path",
+      "/workspace/scratch/a51485f153de/v095-burn-profile-audit",
+      "--script",
+      "res://tools/diagnostics/burn_profile_allocation_audit.gd"
+    ],
+    "environment": {
+      "XDG_DATA_HOME": "/tmp/godot-m1-v095-clean-_4irnnlw/data",
+      "XDG_CACHE_HOME": "/tmp/godot-m1-v095-clean-_4irnnlw/cache",
+      "XDG_CONFIG_HOME": "/tmp/godot-m1-v095-clean-_4irnnlw/config",
+      "V095_INSTRUMENTED": "0",
+      "V095_PROFILE_OUT": "/workspace/scratch/a51485f153de/v095-burn-profile-audit/docs/qa/v095-profile/clean.json"
+    },
+    "frames": {
+      "ember_deaths": 20,
+      "no_burn": 4
+    },
+    "started_at_unix": 1791357484.3475168,
+    "exit_code": -9,
+    "elapsed_seconds": 11.786776419001399,
+    "first_error": "ERROR: Fresh diagnostic save rejected",
+    "completion_marker": false
+  }
+]
