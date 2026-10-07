@@ -4,6 +4,7 @@ extends RefCounted
 ## The authoritative geometry and collision are never edited.
 const MANIFEST_PATH := "res://assets/environment/dimensional_manifest.json"
 const STUDY_MANIFEST_PATH := "res://art-studies/v111/exports/manifest.json"
+const GroundDressing = preload("res://scripts/visuals/ruins_garden_ground_dressing.gd")
 const STUDY_MODULE_IDS := ["short_wall", "walkable_arch", "moss_rock"]
 var _source: Dictionary = {}
 var _presentation: Dictionary = {}
@@ -19,8 +20,12 @@ var _study_error := ""
 var _study_image_loads := 0
 var _study_instances := 0
 var _study_source_to_world := 0.0
+var _ground_dressing: Node2D
+var _ground_dressing_error := ""
 
 func clear() -> void:
+	_ground_dressing = null
+	_ground_dressing_error = ""
 	for node: Node2D in _nodes:
 		if is_instance_valid(node):
 			if node.get_parent() != null: node.get_parent().remove_child(node)
@@ -124,6 +129,17 @@ func configure_modules(depth: Node2D, geometry: Dictionary, manifest_path: Strin
 			detail_foot.add_child(_study_sprite(definition.ground_detail, "Sill", _study_source_to_world))
 			details.add_child(detail_foot)
 		_study_instances += 1
+	if geometry.id == "ruins_garden":
+		var dressing := GroundDressing.new()
+		if dressing.configure(geometry):
+			# Absolute z=-1 and an unsorted subtree keep every decoration below
+			# actors/enemies/drops, even beside them or beyond the camera edge.
+			_depth.add_child(dressing)
+			_nodes.append(dressing)
+			_ground_dressing = dressing
+		else:
+			_ground_dressing_error = str(dressing.diagnostics().error)
+			dressing.free()
 	return _presentation.duplicate(true)
 
 func _study_ground_batch(stable_name: String) -> Node2D:
@@ -333,4 +349,6 @@ func diagnostics() -> Dictionary:
 		for module: Dictionary in assets.modules.values(): study_textures += module.size()
 	return {"props":_nodes.size(),"trees":_trees.size(),"shared_textures":_textures.size(),
 		"study_error":_study_error,"study_instances":_study_instances,"study_shared_textures":study_textures,
-		"study_image_loads":_study_image_loads,"study_source_to_world":_study_source_to_world}
+		"study_image_loads":_study_image_loads,"study_source_to_world":_study_source_to_world,
+		"ground_dressing_error":_ground_dressing_error,
+		"ground_dressing":_ground_dressing.diagnostics() if is_instance_valid(_ground_dressing) else {}}

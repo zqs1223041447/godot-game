@@ -1,0 +1,76 @@
+{
+  "schema": "sparse-ground-dressing-example-v1",
+  "viewport": [
+    1280,
+    720
+  ],
+  "base_reference": "../v111-modular-environment/exports/assembly-layout.json",
+  "instances": [
+    {
+      "id": "fern_wall_outer",
+      "module": "fern_low",
+      "foot_screen_pixel": [
+        354,
+        261
+      ],
+      "minimum_distance_to_existing_collision_pixels": 4.901223895729531,
+      "no_existing_obstacle_footprint_overlap": true,
+      "outside_sample_route_keep_clear": true
+    },
+    {
+      "id": "fern_gate_outer",
+      "module": "fern_low",
+      "foot_screen_pixel": [
+        867,
+        293
+      ],
+      "minimum_distance_to_existing_collision_pixels": 6.440547208825151,
+      "no_existing_obstacle_footprint_overlap": true,
+      "outside_sample_route_keep_clear": true
+    },
+    {
+      "id": "fern_rock_outer",
+      "module": "fern_low",
+      "foot_screen_pixel": [
+        308,
+        521
+      ],
+      "minimum_distance_to_existing_collision_pixels": 11.055140549611231,
+      "no_existing_obstacle_footprint_overlap": true,
+      "outside_sample_route_keep_clear": true
+    },
+    {
+      "id": "pebbles_wall_front",
+      "module": "pebble_trio",
+      "foot_screen_pixel": [
+        488,
+        281
+      ],
+      "minimum_distance_to_existing_collision_pixels": 14.256023383592131,
+      "no_existing_obstacle_footprint_overlap": true,
+      "outside_sample_route_keep_clear": true
+    },
+    {
+      "id": "pebbles_rock_front",
+      "module": "pebble_trio",
+      "foot_screen_pixel": [
+        450,
+        585
+      ],
+      "minimum_distance_to_existing_collision_pixels": 12.44610858312514,
+      "no_existing_obstacle_footprint_overlap": true,
+      "outside_sample_route_keep_clear": true
+    }
+  ],
+  "new_collision_count": 0,
+  "exported_asset_types": 2,
+  "new_decoration_instance_count": 5,
+  "route_keep_clear_rect_source_pixel": [
+    595,
+    315,
+    205,
+    405
+  ],
+  "scope": "Technical example only. Root handles actual live-map placement and gameplay review.",
+  "render_kind": "Real PNG alpha composite, not a native Godot screenshot"
+}

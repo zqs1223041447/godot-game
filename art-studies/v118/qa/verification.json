@@ -1,0 +1,73 @@
+{
+  "result": "PASS",
+  "module_count": 2,
+  "rgba_exports": 4,
+  "new_collision_count": 0,
+  "batch_completed": {
+    "result": "PASS",
+    "rendered_modules": 2,
+    "rendered_images": 4,
+    "batch_count": 1,
+    "frozen_source_unchanged": true,
+    "frozen_v111_manifest_unchanged": true
+  },
+  "export_checks": [
+    {
+      "module": "fern_low",
+      "layer": "sprite",
+      "size": [
+        40,
+        34
+      ],
+      "transparent_border": true,
+      "alpha_identical_to_raw": true,
+      "sha256": "2e5a5cc9cb519ae0fa2478ca1b7c223cb533e43b3ee46d151265f6456193b30e"
+    },
+    {
+      "module": "fern_low",
+      "layer": "shadow",
+      "size": [
+        88,
+        75
+      ],
+      "transparent_border": true,
+      "alpha_identical_to_raw": true,
+      "sha256": "d49996a724ce69bebf3514667b962ec6725869be3b2d06f236607d8feed10691"
+    },
+    {
+      "module": "pebble_trio",
+      "layer": "sprite",
+      "size": [
+        42,
+        27
+      ],
+      "transparent_border": true,
+      "alpha_identical_to_raw": true,
+      "sha256": "3636f1327721deefc5c702fc331341067fb55134ae8c2e61054fe13443a89989"
+    },
+    {
+      "module": "pebble_trio",
+      "layer": "shadow",
+      "size": [
+        83,
+        64
+      ],
+      "transparent_border": true,
+      "alpha_identical_to_raw": true,
+      "sha256": "8714dd0071bd26149ee49ce920675756c6a48e94f5bfd36e3fdb0c869b35f2ff"
+    }
+  ],
+  "all_shadow_alpha_preserved": true,
+  "source_v108_unchanged": true,
+  "reference_v111_manifest_unchanged": true,
+  "same_camera_projection_and_sun_as_v111": true,
+  "sample_placements": 5,
+  "sample_placement_envelopes_outside_existing_blockers": true,
+  "sample_route_keep_clear": true,
+  "no_sample_decoration_envelope_overlaps": true,
+  "not_tested": [
+    "Native live-map integration",
+    "Actor/enemy/drop visibility in the live game"
+  ],
+  "required_runtime_condition": "Decorations must remain below actors, enemies and drops"
+}
