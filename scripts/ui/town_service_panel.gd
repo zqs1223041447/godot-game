@@ -187,10 +187,13 @@ func _refresh_map_status() -> void:
 	_map_status_queued = false
 	if not is_visible_in_tree() or _service != "map_device" or not is_instance_valid(_map_summary) or not is_instance_valid(_map_launch): return
 	var draft: Dictionary = arena.map_draft()
-	_map_summary.text = str(draft.summary)
-	if not bool(arena.world_context().get("test_mode", false)):
-		_map_summary.text += "\n入场 %d 校准碎片 · 完成奖励 %d" % [int(draft.get("cost", 0)), int(draft.get("completion_reward", 0))]
-		if not str(draft.get("reason", "")).is_empty(): _map_summary.text += "\n" + str(draft.reason)
+	if _map_selection_dirty:
+		_map_summary.text = "配置已更改 · 请准备地图"
+	else:
+		_map_summary.text = str(draft.summary)
+		if not bool(arena.world_context().get("test_mode", false)):
+			_map_summary.text += "\n入场 %d 校准碎片 · 完成奖励 %d" % [int(draft.get("cost", 0)), int(draft.get("completion_reward", 0))]
+			if not str(draft.get("reason", "")).is_empty(): _map_summary.text += "\n" + str(draft.reason)
 	# Currency updates never prepare changed controls or adopt an external draft.
 	_map_launch.disabled = _map_launch_pending or _map_selection_dirty or int(draft.revision) != _map_prepared_revision or not bool(draft.get("can_start", draft.valid))
 
@@ -198,6 +201,7 @@ func _mark_map_selection_dirty() -> void:
 	arena.cancel_map_preparation()
 	_map_selection_dirty = true
 	if is_instance_valid(_map_launch): _map_launch.disabled = true
+	_queue_map_status_refresh()
 
 static func _has_pending_rewards(context: Dictionary) -> bool:
 	for key: String in ["pending_map_reward", "pending_gems", "pending_flasks"]:
