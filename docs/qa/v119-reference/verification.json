@@ -1,0 +1,48 @@
+{
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "checks": {
+    "bounded_native_export": {
+      "exit_code": 0,
+      "checks": 49
+    },
+    "second_export": {
+      "exit_code": 0,
+      "byte_identical": true
+    },
+    "merge_check": {
+      "exit_code": 0
+    },
+    "html_rebuild_check": {
+      "exit_code": 0
+    },
+    "focused_static_test": {
+      "exit_code": 0
+    },
+    "javascript_syntax": {
+      "exit_code": 0
+    },
+    "python_syntax": {
+      "exit_code": 0
+    },
+    "diff_whitespace": {
+      "exit_code": 0
+    }
+  },
+  "not_run": [
+    "Main",
+    "fees/save transactions",
+    "full historical runtime export",
+    "combat",
+    "600s performance",
+    "browser/UI rendering"
+  ],
+  "user_data_files": "Only the Godot log in each isolated XDG directory; no build_save.json",
+  "outputs_sha256": {
+    "tools/export_ruins_garden_reference.gd": "4d8e38f400a5fb33b202988a3b4dfa179676b5bdec7404350bd26682924e174b",
+    "tools/merge_ruins_garden_reference.py": "12885199bc670aa1d3a1acb4dfbc2258c7e00b91f6941a7c31a6333d35bce778",
+    "tools/build_reference.py": "02fe7a4c34588377bd17715bec772e3c9474cfc5784426b158bbeba46a14c34a",
+    "tests/ruins_garden_reference_test.py": "e91a1eedd172af8dfbcd09c19d46906939e59b9b75b5a323ac0870f6a3f091bf",
+    "docs/reference/catalog.json": "11f8c2e6c6982e4ba1d753d75e28265cec9ce5952de7cfc1a59e9692c5902e5d",
+    "docs/reference/index.html": "5c1a7d764dd623120c482be320060a033e1e7d1caae0b1bd7107584f2773ff94"
+  }
+}

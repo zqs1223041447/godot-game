@@ -131,3 +131,22 @@ node --check docs/reference/reference.js
 本次Godot导出一次21.377秒、exit0，无错误行或输入漂移。HTML构建、确定性重建、JS语法与聚焦资料检查通过；168个HTML权威数值、3817个唯一锚点及所有内部/本地资源链接核对完成。完整旧catalog只接受72处明确的新章节/新族、当前词池资格/版本、主动当前奖励样本变化，投影后与独立发布v61语义hash一致；原三抗预算与历史显式制作seed保持。源政策38及英文源树、中文展示、执行覆盖逐字节保持，61张运行时PNG与68张图鉴PNG原字节保持。
 
 字体只运行collect_required与cmap，177份运行时文本需要1652字符，发现唯一新增缺字“革”。首次旧字体结果完整保留；随后同源仅补“革”，定向验证0.949秒确认177份文字输入未变、原1656字形/度量保持，最终1657映射覆盖1652需求。完整字体证明见[本批记录](../qa/v062-reference/README.md)，没有重复全量字形扫描、历史完整战斗或GUI截图。完整规则见[护甲闪避说明](../DEFENSE_RATING_AFFIXES.zh-CN.md)。
+
+## v119 遗迹庭园：有界原生地图增量
+
+新增入口 `index.html#maps-ruins_garden`；地图装置列出五图。新增字段仅为 `catalog.exploration_maps.maps.ruins_garden`，不刷新历史构筑、四图数据或源执行覆盖。正式城镇选择地图/阶级/词缀 → 准备地图 → 开启地图；遗迹庭园不在历史免费测试选项内。
+
+```sh
+XDG_DATA_HOME=/tmp/godot-v119-reference/data XDG_CONFIG_HOME=/tmp/godot-v119-reference/config XDG_CACHE_HOME=/tmp/godot-v119-reference/cache \
+  godot --headless --path . --script res://tools/export_ruins_garden_reference.gd
+python3 tools/merge_ruins_garden_reference.py
+python3 tools/build_reference.py
+python3 tools/merge_ruins_garden_reference.py --check
+python3 tools/build_reference.py --check
+python3 tests/ruins_garden_reference_test.py
+node --check docs/reference/reference.js
+```
+
+单图导出复用正式目录、原生模块轮廓、准备后的两个绕行与一个脱离角色的I档Plan。SVG直接画4条/99顶点原生轮廓、14段真实路网、25初始实体、入口和7路标，不使用包围盒假墙。三档经济与首领预警均读取实际目录。旧3815卡中仅地图装置和探索规则补充当前入口与历史证据边界；其余3813卡、完整旧catalog原字节、美术和历史QA保持。旧catalog交给新版生成器时，整页HTML也与原版逐字节相同。
+
+无Main、收费/存档事务、战斗、全量历史导出或渲染。运行范围、保全基线和日志见[本批有界导出记录](../qa/v119-reference/README.md)。

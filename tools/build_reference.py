@@ -305,6 +305,7 @@ def exploration_map_body(data, map_id, link, facts, details):
     geometry = entry['geometry']
     marks = geometry['landmarks']
     plan = entry['plan_example']
+    native = entry.get('native_reference')
     route_distribution = exploration.get('route_distribution')
     bounds = geometry['bounds']
     ox, oy = bounds['position']
@@ -318,7 +319,7 @@ def exploration_map_body(data, map_id, link, facts, details):
         ('顺序', '六处驻点可任意顺序，也可先挑战首领' if route_distribution else '三个怪群可任意顺序，也可先挑战首领'),
         ('完成', '全部普通根怪、首领、仍活着的后代与待出生后代队列均清空'),
         ('地图等级', '按入图配置固定；时间经过不会自动升波或追加普通刷怪'),
-        ('主流程', '城镇选择地图 → 探索全清 → 返城领奖；竞技练习保留旧入侵玩法')])
+        ('主流程', '正式城镇地图装置 → 选择遗迹庭园、阶级与词缀 → 准备地图 → 开启地图 → 探索全清 → 返城领奖' if native else '城镇选择地图 → 探索全清 → 返城领奖；竞技练习保留旧入侵玩法')])
     if route_distribution:
         body += facts([
             ('驻点分布', '6处驻点，' + ('3怪与5怪各3处，共24个普通根怪' if entry['ordinary_target'] == 24 else '4怪与8怪各3处，共36个普通根怪')),
@@ -331,7 +332,7 @@ def exploration_map_body(data, map_id, link, facts, details):
         special_links = '、'.join(link('map_specials', key) for key in tier['eligible_special_ids']) or '当前等级未达特殊词缀门槛'
         rows.append('<tr><th scope="row">' + esc(profile['name']) + '</th><td>' + str(profile['wave']) + '</td><td>' + str(profile['fee']) + '</td><td>' + str(profile['completion_reward']) + '</td><td>' + str(tier['maximum_modifier_bonus']) + '</td><td>' + special_links + '</td></tr>')
     body += '<div class="table-scroll"><table><caption>原正式三档经济；地图等级为固定怪物强度</caption><thead><tr><th>地图阶级</th><th>地图等级</th><th>入场碎片</th><th>基础完成碎片</th><th>词缀最多加奖</th><th>可选特殊词缀</th></tr></thead><tbody>' + ''.join(rows) + '</tbody></table></div>'
-    body += '<p>普通词缀每项 +1，最多两项；特殊词缀每项 +2，最多一项，仍按地图等级门槛开放。完成本图上一档解锁下一档；返城领取完成奖励，待领奖时不能再次入图。独立测试地图免费，固定地图等级 ' + str(entry['test_profile']['wave']) + '，不增加正式完成奖励。</p>'
+    body += '<p>普通词缀每项 +1，最多两项；特殊词缀每项 +2，最多一项，仍按地图等级门槛开放。完成本图上一档解锁下一档；返城领取完成奖励，待领奖时不能再次入图。' + ('遗迹庭园是独立正式地图，不属于历史免费测试地图入口；I档费用为0也仍使用正式进度。更改地图、阶级或词缀后须重新准备；开启时先完成原生地形验证，失败不扣费。</p>' if native else '独立测试地图免费，固定地图等级 ' + str(entry['test_profile']['wave']) + '，不增加正式完成奖励。</p>')
     drawing = f'<rect x="{ox}" y="{oy}" width="{width}" height="{height}" fill="#e5dfc3"/>'
     if route_distribution:
         for index, segment in enumerate(marks['route_segments']):
@@ -340,6 +341,9 @@ def exploration_map_body(data, map_id, link, facts, details):
     for index, wall in enumerate(geometry['walls']):
         x, y = wall['position']; w, h = wall['size']
         drawing += f'<rect data-exploration-wall="{index}" x="{x}" y="{y}" width="{w}" height="{h}" fill="#a9b994" stroke="#617655" stroke-width="8"/>'
+    for index, polygon in enumerate(geometry.get('module_polygons', [])):
+        points = ' '.join(f'{x},{y}' for x, y in polygon)
+        drawing += f'<polygon data-exploration-contour="{index}" points="{points}" fill="#a9b994" stroke="#617655" stroke-width="8"/>'
     for record in plan['spawn_records']:
         x, y = record['position']; boss = record['source_group'] == 'boss'
         drawing += f'<circle data-exploration-spawn="{esc(record["spawn_key"])}" data-template="{esc(record["template_id"])}" cx="{x}" cy="{y}" r="{18 if boss else 11}" fill="{"#a04e36" if boss else "#476a4b"}"/>'
@@ -350,7 +354,14 @@ def exploration_map_body(data, map_id, link, facts, details):
     drawing += f'<circle data-exploration-entry="true" cx="{ex}" cy="{ey}" r="24" fill="#2b7480"/><text x="{ex+42}" y="{ey+14}" fill="#285e64" font-size="45">入口</text>'
     drawing += f'<text x="{bx}" y="{by-55}" text-anchor="middle" fill="#7d3f2e" font-size="45">首领</text><path data-exploration-sign="boss" d="M{sx} {sy-20}v40M{sx-20} {sy-20}h40v22h-40z" stroke="#7c673a" stroke-width="6" fill="#dac897"/>'
     diagram_caption = '浅褐线按真实72宽绘制可走路线；六处驻点牌与首领牌只指路。本平面图展示初始分布，不是旗标状态截图。' if route_distribution else ''
-    body += f'<figure><figcaption>{esc(entry["name"])} · 当前同源探索平面图</figcaption><svg data-exploration-layout="{esc(map_id)}" viewBox="{ox} {oy} {width} {height}" role="img" aria-label="当前探索地图的真实障碍、全部初始怪物、入口与路标">{drawing}</svg><figcaption>{diagram_caption}矩形为真实阻挡足印，绿点为普通根怪，红点为首领，蓝点为入口；木牌仅指路。点大小只为阅读，不表示碰撞半径或唤醒距离。坐标来自 ExplorationMapLayout、ExplorationMapPlan 与 WorldView，没有触发出生区域。</figcaption></figure>'
+    footprint = '多边形为四条实际原生阻挡轮廓（不是包围盒）' if native else '矩形为真实阻挡足印'
+    coordinate_sources = 'ModularStudySession、ModularStudyGeometry.snapshot、ModularStudyRoutes.prepare 与 ExplorationMapPlan' if native else 'ExplorationMapLayout、ExplorationMapPlan 与 WorldView'
+    body += f'<figure><figcaption>{esc(entry["name"])} · 当前同源探索平面图</figcaption><svg data-exploration-layout="{esc(map_id)}" viewBox="{ox} {oy} {width} {height}" role="img" aria-label="当前探索地图的真实障碍、全部初始怪物、入口与路标">{drawing}</svg><figcaption>{diagram_caption}{footprint}，绿点为普通根怪，红点为首领，蓝点为入口；木牌仅指路。点大小只为阅读，不表示碰撞半径或唤醒距离。坐标来自 {coordinate_sources}，没有触发出生区域。</figcaption></figure>'
+    if native:
+        body += facts([
+            ('原生轮廓', str(native['contour_count']) + '条，' + str(native['vertex_count']) + '个顶点；移动、弹体和视线共用同源轮廓'),
+            ('准备后路线', str(len(native['source_route_segments'])) + '条原连接经两处绕行成为' + str(native['prepared_route_count']) + '段；图中展示准备后的实际端点'),
+            ('净距边界', '所有路线通过半路宽' + number(native['route_width'] / 2) + '验证；两处绕行的四条新腿额外通过半径' + number(native['detour_clearance_radius']) + '验证，不把该额外净距扩大到全部路段')])
     body += '<p>实体障碍阻挡移动、冲刺、击退、弹体与视线。贯穿及返回飞行仍会碰墙；范围命中、连锁与敌方预警沿用共享视线检查。相机跟随角色并限制在探索世界边界，HUD尺寸独立。入口和全部怪物在入图前整批验证，失败不扣入场费。</p>'
     boss = entry['boss_definition']; profile = boss['profile']
     current_ginkgo = map_id == 'ginkgo_arcade' and 'ginkgo_inner_outer' in data
@@ -394,28 +405,35 @@ def exploration_map_body(data, map_id, link, facts, details):
     roster_rows = ''.join('<tr><td>' + esc(record['source_group']) + '</td>' + ('<td>' + esc(record['outpost_id'] or '首领') + '</td>' if route_distribution else '') + '<td>' + str(record['ordinal']) + '</td><td>' + link('monsters', record['template_id']) + '</td><td>' + ' / '.join(str(v) for v in record['position']) + '</td></tr>' for record in plan['spawn_records'])
     roster_header = '<th>驻点</th>' if route_distribution else ''
     body += details('同源初始实体示例 · 独立Plan，不是角色战斗录像', '<p>使用本图I档、空地图词缀和固定种子 ' + str(plan['seed']) + '，只调用已验证的脱离运行态Plan。无角色装备、奖励或存档写入；具体物种是此种子示例，不表示每次相同。全部生成记录包含稳定spawn_key、actor/root ID、来源组、序号、物种、位置、空encounter_id和standard奖励路线。</p><div class="table-scroll"><table><thead><tr><th>来源组</th>' + roster_header + '<th>序号</th><th>物种</th><th>坐标 x / y</th></tr></thead><tbody>' + roster_rows + '</tbody></table></div>')
-    body += '<p>原合法根怪收益、首领奖励和有限死亡后代规则保留；后代不增加普通奖励。存档仍为schema ' + str(exploration['save_version']) + '，源政策 ' + str(exploration['source_policy']) + '，装备词汇 ' + str(exploration['equipment_vocabulary']) + '。原持久profile与历史地图描述保持，当前显示读取新的探索描述。</p>'
-    reference_readme = 'v090-reference' if route_distribution else 'v086-reference'
-    body += '<p>' + link('rules', 'exploration_maps', '探索运行态、未来机制边界与证据') + ' · <a href="../EXPLORATION_MAPS.zh-CN.md">探索地图合同</a> · <a href="../qa/' + reference_readme + '/README.md">有限导出与保全记录</a></p>'
+    if native:
+        body += '<p>原合法根怪收益、首领奖励和有限死亡后代规则保留；后代不增加普通奖励。本图使用独立正式进度。此图鉴增量不修改存档、玩法或美术。</p>'
+        body += '<p>' + esc(native['scope']) + ' 下方历史四图资料不作为本图的验证证据。</p><p>' + link('rules', 'exploration_maps', '探索规则与历史资料边界') + ' · <a href="../' + esc(native['evidence_path'].removeprefix('docs/')) + '">遗迹庭园有界导出与保全记录</a></p>'
+    else:
+        body += '<p>原合法根怪收益、首领奖励和有限死亡后代规则保留；后代不增加普通奖励。存档仍为schema ' + str(exploration['save_version']) + '，源政策 ' + str(exploration['source_policy']) + '，装备词汇 ' + str(exploration['equipment_vocabulary']) + '。原持久profile与历史地图描述保持，当前显示读取新的探索描述。</p>'
+        reference_readme = 'v090-reference' if route_distribution else 'v086-reference'
+        body += '<p>' + link('rules', 'exploration_maps', '探索运行态、未来机制边界与证据') + ' · <a href="../EXPLORATION_MAPS.zh-CN.md">探索地图合同</a> · <a href="../qa/' + reference_readme + '/README.md">有限导出与保全记录</a></p>'
     return body
 
 
 def exploration_rule_body(data, facts):
     entry = data['exploration_maps']
     route_distribution = entry.get('route_distribution')
+    native = entry['maps'].get('ruins_garden', {}).get('native_reference')
     body = facts([
-        ('已实现', '四张大地图、入图全体真实实体、感知/受伤唤醒、醒后追击、全清完成与跟随相机'),
+        ('已实现', ('五张大地图（含正式遗迹庭园）' if native else '四张大地图') + '、入图全体真实实体、感知/受伤唤醒、醒后追击、全清完成与跟随相机'),
         ('唯一当前配置', 'mechanism_config={}；非空配置在扣费前拒绝，optional_encounters=[]'),
         ('生成记录', 'spawn_key独立于actor ID游标且在本图内稳定；保留根/实体ID、来源组、序号、物种、位置、空encounter_id、standard奖励路线直到本图结束'),
         ('奖励边界', '当前只允许standard；未知路线拒绝，不回退普通奖励'),
-        ('持续存档', ('schema53 / source49 / equipment51；' if 'long_stride' in data else 'schema52 / source49 / equipment51；' if 'encircling_cleave' in data else 'schema51 / source49 / equipment51；' if 'chaos_defense' in data else 'schema50 / source49 / equipment46保持；')+'不把临时探索或未来机制状态写入旧profile')])
+        ('前四图历史持续存档记录' if native else '持续存档', ('schema53 / source49 / equipment51；' if 'long_stride' in data else 'schema52 / source49 / equipment51；' if 'encircling_cleave' in data else 'schema51 / source49 / equipment51；' if 'chaos_defense' in data else 'schema50 / source49 / equipment46保持；')+'不把临时探索或未来机制状态写入旧profile')])
     if route_distribution:
         body += facts([
-            ('当前空间分布', '每图6处驻点与1位首领；旧庭3/5怪各3处，其余地图4/8怪各3处，入图仍为25/37个根实体'),
+            ('当前空间分布', ('每图6处驻点与1位首领；旧庭和遗迹庭园3/5怪各3处，其余地图4/8怪各3处，入图仍为25/37个根实体' if native else '每图6处驻点与1位首领；旧庭3/5怪各3处，其余地图4/8怪各3处，入图仍为25/37个根实体')),
             ('同源路网', 'route_segments逐段提供端点与72真实路宽；全宽避开实体障碍和边界，原3个来源组仅保留编排'),
             ('驻点身份与状态', '生成记录新增outpost_id，有限后代继承驻点；旗标按真实根怪、后代和待出生队列判定未接战/交战中/已清理')])
     body += '<h4>未来设计，尚未实现</h4><p>两类赛季机制目前仅保留设计边界与空运行态接口：先生成修饰，再按未来机制选择是否封印/激活，随后沿既有有限死亡后代规则处理，最后由单一排他掉落路线结算。封印/激活属于遭遇状态，不复用战斗冰冻。若未来实现essence_only，它必须替代standard，不能在普通奖励后追加一份。</p><p>当前没有赛季地图生成器、封印互动、精华掉落或可选择的新机制，也没有新增经济来源。</p>'
-    body += '<h4>验证范围</h4><p>' + esc(entry['scope']) + '</p>'
+    if native:
+        body += '<h4>遗迹庭园独立验证</h4><p>' + esc(native['scope']) + ' <a href="#maps-ruins_garden">遗迹庭园卡片</a> · <a href="../' + esc(native['evidence_path'].removeprefix('docs/')) + '">本图有界验证记录</a>。下面保留的旧版本号与历史验收只覆盖前四图。</p>'
+    body += '<h4>' + ('前四图历史验证范围' if native else '验证范围') + '</h4><p>' + esc(entry['scope']) + '</p>'
     evidence_rows = [('布局与Plan验证（28,135项，36配置）', entry['layout_test']), ('实际Main验证（185项）', entry['actual_main_report']), ('对应冻结输入SHA256', entry['tested_inputs'])] if route_distribution else [('独立Plan验证', entry['plan_test']), ('Main组合验收', entry['main_acceptance']), ('原始Main结果（保留1项夹具失败）', entry['actual_main_report']), ('10项输入窄补结果', entry['focused_input_report'])]
     for label, evidence in evidence_rows:
         body += '<p><a href="../' + esc(evidence['path'].removeprefix('docs/')) + '">' + label + '</a>；导出时原件SHA256：' + esc(evidence['sha256']) + '</p>'
@@ -1598,6 +1616,8 @@ def build(data, art):
             if key == 'map_device' and 'exploration_maps' in data:
                 summary = '从城镇进入固定等级的大地图，全部初始怪物入图即在场，自由探索并全清返城领奖。'
                 body = facts([('地图', ' · '.join(link('maps', mid, entry['name']) for mid, entry in data['exploration_maps']['maps'].items())), ('正式成长', '每图独立I/II/III，费用0/4/8、基础完成奖4/8/12校准碎片，另计原地图词缀奖励'), ('入图', '一次建立全部真实普通根怪与首领；远处实体可被命中，唤醒后持续追击'), ('结束', '全部根怪、首领、活后代和待出生队列清空后完成，返城领取冻结奖励'), ('独立入口', '竞技练习保留旧入侵；免费测试地图与正式档案隔离')]) + '<p>' + link('rules', 'exploration_maps', '探索规则与未来机制边界') + '</p>'
+                if 'ruins_garden' in data['exploration_maps']['maps']:
+                    body += '<p>遗迹庭园：正式城镇选择地图、阶级与词缀 → 准备地图 → 开启地图；原生地形准备通过后才入图。它有独立正式进度，不属于历史免费测试地图入口。</p>'
             cards.append(add('town_services',key,service['name'],summary,body,'正式购买 · 测试供应' if key=='skill_merchant' else ('探索地图入口' if key=='map_device' and 'exploration_maps' in data else '可选测试服务')))
         if 'exploration_maps' in data:
             for key, m in data['exploration_maps']['maps'].items():
@@ -2030,7 +2050,7 @@ def build(data, art):
         body=facts(rows)+'<p>'+esc(critical['balance_change'])+'。</p><p>'+esc(critical['chance_formula'])+'；'+esc(critical['multiplier_formula'])+'。</p><p>'+esc(critical['cast_rule'])+'。</p><p>'+esc(critical['secondary_rule'])+'。</p><p>'+esc(critical['damage_order'])+'。</p><p>'+esc(critical['randomness'])+'。</p><p>'+esc(critical['example_scope'])+'。</p><p>'+esc(critical['legacy_rule'])+f'。本批{len(critical["new_complete_ordinary_nodes"])}个新增完整普通节点，0个新增精通效果；45个新节点可从七起点经受支持路径抵达，余1个仍被未实现邻接效果隔开。可达不代表123点能同时全部分配。</p><p>玩家普通攻击和八种伤害主动共用实现；闪步与护盾不抽取暴击。K预估列出非暴击命中伤害以及最终概率/倍率，不冒称平均伤害或DPS。幸运、局部武器、条件、暴击触发和异常机制继续锁定。</p>'
         rule_defs.append(('source_critical','暴击与构筑作用域','全局、法术、近战与投射攻击暴击进入冻结施放，独立爆炸另取全局属性。',body,'implemented'))
     if 'exploration_maps' in data:
-        rule_defs.append(('exploration_maps', '主动探索地图与未来机制边界', '四图全体入场；未来机制目前只接受空配置，没有赛季内容与新掉落。', exploration_rule_body(data, facts), 'implemented'))
+        rule_defs.append(('exploration_maps', '主动探索地图与未来机制边界', ('五图全体入场；遗迹庭园独立正式入口，旧四图证据保留。' if 'ruins_garden' in data['exploration_maps']['maps'] else '四图全体入场；') + '未来机制目前只接受空配置，没有赛季内容与新掉落。', exploration_rule_body(data, facts), 'implemented'))
     if 'frost_guard_chill' in data:
         policy=data['frost_guard_chill']['policy']
         rule_defs.append(('frost_guard_chill', '霜纹寒击与玩家冰缓', '霜纹寒击造成实际冰霜损伤后，存活玩家移动减速'+percent(policy['movement_speed_reduced'])+'，持续'+number(policy['duration'])+'秒；不追加伤害。', frost_chill_rule(data,link,facts), 'implemented'))
