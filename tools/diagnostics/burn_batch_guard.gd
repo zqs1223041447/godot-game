@@ -1,0 +1,271 @@
+extends RefCounted
+## Diagnostic preflight only. Pass the COMPLETE original batch/current monster
+## set/BurnRuntime.statuses() before any Main settlement side effect. A rejected
+## batch runs original Main untouched; no partially executed batch is rolled back.
+## The caller must separately require an empty ShockRuntime and no pending deaths.
+const Dependency = preload("res://tools/diagnostics/burn_read_dependency_shadow.gd")
+const Damage = preload("res://scripts/combat/damage_resolver.gd")
+const BurnRules = preload("res://scripts/combat/burn_rules.gd")
+const BurnRuntime = preload("res://scripts/combat/burn_runtime.gd")
+const Ember = preload("res://scripts/combat/ember_proliferation_rules.gd")
+const MAX_TARGETS := 100
+const MAX_DELTA := 1.0 / 60.0
+const MIN_NORMAL := 2.2250738585072014e-308
+const BENIGN: Array[String] = ["terrain_hit", "terminated", "return_started", "split", "evaded"]
+# An allowlist makes future snapshot gates fall back without guessing their
+# interaction with settlement. Source-special gates are deliberately excluded.
+const SNAPSHOT_FIELDS: Array[String] = ["base_damage", "modifiers", "effects", "projectile_count",
+	"tornado_recipe", "explosion_recipe", "added_damage", "added_damage_sources", "weapon_profile",
+	"initial_count", "compiled_skill_id", "compiled_packets", "accuracy", "critical", "critical_roll",
+	"burn_policy", "burn_proliferation", "fire_dot_multiplier", "burn_faster"]
+
+
+static func plan(events: Variant, enemies: Variant, statuses: Variant, start: float,
+		end: float, original_delta: float) -> Dictionary:
+	if not _nonnegative(start) or not _positive(end) or end <= start:
+		return _failure("Invalid or unrepresentable batch interval", start)
+	if not _positive(original_delta) or original_delta > MAX_DELTA or start + original_delta != end:
+		return _failure("Original delta must be positive, at most 1/60, and reproduce end", start)
+	if not enemies is Array or enemies.is_empty() or enemies.size() > MAX_TARGETS:
+		return _failure("Complete current monster array must contain 1..100 targets", start)
+	if not statuses is Array or statuses.is_empty() or statuses.size() > MAX_TARGETS:
+		return _failure("Active monster burn array must contain 1..100 statuses", start)
+	var bounds: Dictionary = {}
+	for enemy: Variant in enemies:
+		var reason: String = _enemy_error(enemy)
+		if not reason.is_empty(): return _failure(reason, start)
+		var id: int = int(enemy.id)
+		if bounds.has(id): return _failure("Duplicate current monster ID", start)
+		bounds[id] = {"health":float(enemy.health), "direct_upper":0.0, "max_raw_dps":0.0,
+			"burn_from":start, "burn_upper":0.0, "total_upper":0.0}
+	var burn_set: Dictionary = {}
+	var has_ember := false
+	var initial_clock := start
+	for status: Variant in statuses:
+		var reason: String = _status_error(status, bounds, end)
+		if not reason.is_empty(): return _failure(reason, start)
+		var id: int = int(status.target_id)
+		if burn_set.has(id): return _failure("Duplicate active burn target", start)
+		burn_set[id] = true
+		has_ember = has_ember or status.provenance.has("ember_generation")
+		initial_clock = maxf(initial_clock, float(status.last_time))
+		bounds[id].max_raw_dps = float(status.raw_dps)
+		bounds[id].burn_from = float(status.last_time)
+	if not has_ember: return _failure("No active ember state", start)
+	# This authority uses Clock.offsets and preserves adjacent raw tie chains.
+	var prepared: Dictionary = Dependency.prepare_events(events, start, end, initial_clock)
+	if not prepared.ok: return _failure(str(prepared.reason), start)
+	var last_boundary := initial_clock
+	for index: int in range(events.size()):
+		var event: Dictionary = events[index]
+		var raw: float = float(event.time)
+		if raw > original_delta or (raw > 0.0 and start + raw <= start):
+			return _failure("Event offset is outside delta or below the absolute clock ULP", start)
+		if not event.get("type") is String:
+			return _failure("Event kind must be a String", start)
+		if event.type == "explosion":
+			return _failure("Explosion requires unfrozen secondary RNG", start)
+		if event.type in BENIGN: continue
+		if event.type != "hit": return _failure("Unsupported event kind: " + event.type, start)
+		if not _id(event.get("target_id")) or not bounds.has(event.target_id):
+			return _failure("Hit target is missing from complete current monsters", start)
+		var hit: Dictionary = _hit_bound(event)
+		if not hit.ok: return _failure(str(hit.reason), start)
+		last_boundary = maxf(last_boundary, float(prepared.records[index].burn_at))
+		var id: int = int(event.target_id)
+		var row: Dictionary = bounds[id]
+		var direct: float = _upper_sum(float(row.direct_upper), float(hit.direct_upper))
+		if direct < 0.0: return _failure("Direct budget overflow or absorbed positive term", start)
+		row.direct_upper = direct
+		if float(hit.raw_dps) <= 0.0: continue
+		var at: float = float(prepared.records[index].burn_at)
+		var expiry: float = at + float(hit.duration)
+		if not _positive(expiry) or expiry <= at or expiry <= end:
+			return _failure("Possible new burn expiry is unrepresentable or inside batch", start)
+		# Full end-oldlast width overcounts every possible refresh. Original Main
+		# alone decides equal/stronger/weaker replacement and actual application.
+		row.max_raw_dps = maxf(float(row.max_raw_dps), float(hit.raw_dps))
+		if not burn_set.has(id): row.burn_from = start
+		burn_set[id] = true
+	for id: int in bounds:
+		var row: Dictionary = bounds[id]
+		if float(row.max_raw_dps) > 0.0:
+			var width: float = end - float(row.burn_from)
+			if width < 0.0 or (width > 0.0 and not _positive(width)):
+				return _failure("Unrepresentable burn interval", start)
+			var raw_budget: float = _upper_product(float(row.max_raw_dps), width)
+			if raw_budget < 0.0: return _failure("Burn budget overflow or underflow", start)
+			row.burn_upper = _upper_product(raw_budget, 2.0)
+			if float(row.burn_upper) < 0.0: return _failure("Burn mitigation bound overflow", start)
+		row.total_upper = _upper_sum(float(row.direct_upper), float(row.burn_upper))
+		if float(row.total_upper) < 0.0: return _failure("Combined budget is not representable", start)
+		var health: float = float(row.health)
+		if float(row.total_upper) >= health * 0.5:
+			return _failure("Nonlethal headroom not established for target " + str(id), start)
+		if float(row.total_upper) > 0.0 and health - float(row.total_upper) == health:
+			return _failure("Damage budget is below target health ULP", start)
+	var burn_ids: Array = burn_set.keys()
+	burn_ids.sort()
+	return {"ok":true, "reason":"", "eligible":true, "last_boundary":last_boundary, "budget_end":end,
+		"burn_ids":burn_ids, "bounds":bounds}
+
+
+static func _enemy_error(enemy: Variant) -> String:
+	if not enemy is Dictionary or not _id(enemy.get("id")) or not _positive(enemy.get("health")):
+		return "Current monsters require positive integer IDs and finite positive health"
+	if not _nonnegative(enemy.get("shield", 0.0)) or float(enemy.get("shield", 0.0)) != 0.0:
+		return "Every current monster must have zero shield"
+	for key: String in ["armour", "spawn", "evasion", "evasion_entropy"]:
+		if not _nonnegative(enemy.get(key, 0.0)): return "Invalid monster field: " + key
+	if not enemy.get("resistances", {}) is Dictionary: return "Monster resistances must be a dictionary"
+	for type: Variant in enemy.get("resistances", {}):
+		if not type is String or type not in Damage.TYPES or not _finite(enemy.resistances[type]):
+			return "Unknown or nonfinite monster resistance"
+	return ""
+
+
+static func _status_error(status: Variant, bounds: Dictionary, end: float) -> String:
+	if not status is Dictionary or not status.has_all(["target_kind", "target_id", "source_id", "raw_dps", "remaining", "last_time", "provenance"]):
+		return "Expected complete BurnRuntime.statuses records"
+	if status.target_kind != "monster" or not _id(status.target_id) or not bounds.has(status.target_id):
+		return "Only live current monster statuses are supported"
+	if typeof(status.source_id) != TYPE_INT or int(status.source_id) < 0:
+		return "Invalid burn source ID"
+	if not _nonnegative(status.last_time) or float(status.last_time) > end:
+		return "Burn clock is invalid or later than batch end"
+	if not _positive(status.raw_dps) or not _positive(status.remaining): return "Invalid positive burn rate or remaining time"
+	var reason: String = BurnRules.rate_duration_error(status.raw_dps, status.remaining)
+	if not reason.is_empty(): return reason
+	reason = BurnRuntime._provenance_error(status.provenance)
+	if not reason.is_empty(): return reason
+	var expiry: float = float(status.provenance.get("ember_expiry", float(status.last_time) + float(status.remaining)))
+	if not _positive(expiry) or expiry <= end or expiry <= float(status.last_time):
+		return "Existing burn expires at or before batch end"
+	# Runtime ember expiry is authoritative. Inconsistent detached state is not
+	# evidence for eligibility even when both independent values are finite.
+	if status.provenance.has("ember_expiry") and float(status.remaining) != expiry - float(status.last_time):
+		return "Detached ember remaining time disagrees with expiry"
+	return ""
+
+
+static func _hit_bound(event: Dictionary) -> Dictionary:
+	if not event.get("payload") is Dictionary or not event.get("snapshot") is Dictionary:
+		return _hit_failure("Hit requires original payload and snapshot dictionaries")
+	var packet: Dictionary = event.payload
+	var snapshot: Dictionary = event.snapshot
+	for key: Variant in snapshot:
+		if not (key is String or key is StringName) or str(key) not in SNAPSHOT_FIELDS:
+			return _hit_failure("Unsupported snapshot gate: " + str(key))
+	if snapshot.has("burn_proliferation") and snapshot.burn_proliferation != Ember.POLICY:
+		return _hit_failure("Unsupported ember policy")
+	if snapshot.has("accuracy") and not _nonnegative(snapshot.accuracy): return _hit_failure("Invalid frozen accuracy")
+	if not packet.get("base") is Dictionary or not _strings(packet.get("tags")) or not packet.get("skill_id") is String:
+		return _hit_failure("Invalid damage packet structure")
+	if not packet.tags.has("hit") or packet.tags.has("dot"):
+		return _hit_failure("Only direct hit damage packets are supported")
+	if not packet.get("role", "") is String:
+		return _hit_failure("Invalid packet role")
+	for type: Variant in packet.base:
+		if not type is String or type not in Damage.TYPES or not _nonnegative(packet.base[type]):
+			return _hit_failure("Unknown or invalid base damage type")
+	var modifiers: Variant = snapshot.get("modifiers", [])
+	if not modifiers is Array: return _hit_failure("Modifiers must be an array")
+	for modifier: Variant in modifiers:
+		if not modifier is Dictionary or modifier.get("mode") not in ["increased", "more"] or not _finite(modifier.get("value")):
+			return _hit_failure("Invalid damage modifier")
+		for field: String in ["all_tags", "skills", "damage_types"]:
+			if not _strings(modifier.get(field, [])): return _hit_failure("Invalid modifier scope")
+		for type: String in modifier.get("damage_types", []):
+			if type not in Damage.TYPES: return _hit_failure("Unknown modifier damage type")
+	var critical: Variant = snapshot.get("critical_roll", {})
+	if not critical is Dictionary or not _positive(critical.get("multiplier", 1.0)):
+		return _hit_failure("Invalid frozen critical result")
+	var multiplier: float = float(critical.get("multiplier", 1.0))
+	if multiplier < 1.0 or multiplier > 1000000.0: return _hit_failure("Frozen critical multiplier outside authority range")
+	# No damage modifier, conversion, penetration or critical formula is copied.
+	var resolved: Dictionary = Damage.resolve(packet, modifiers, {}, multiplier)
+	if resolved.has("error"): return _hit_failure("Damage authority rejected packet: " + str(resolved.error))
+	if not _nonnegative(resolved.get("total")) or not resolved.get("details") is Array:
+		return _hit_failure("Damage authority returned an invalid amount")
+	var before := 0.0
+	var fire := 0.0
+	for detail: Variant in resolved.details:
+		if not detail is Dictionary or detail.get("type") not in Damage.TYPES or not _nonnegative(detail.get("before_defense")):
+			return _hit_failure("Damage authority returned an invalid detail")
+		var amount: float = float(detail.before_defense)
+		before = _upper_sum(before, amount)
+		if before < 0.0: return _hit_failure("Before-defense sum overflow or absorbed term")
+		# Authority currently emits one final detail per type; reject a future
+		# duplicate instead of rounding the fire seed away from actual Main.
+		if detail.type == "fire":
+			if fire != 0.0: return _hit_failure("Multiple fire details require an audited seed sum")
+			fire = amount
+	var direct: float = _upper_product(before, 2.0)
+	if direct < 0.0: return _hit_failure("Direct mitigation bound overflow")
+	var result := {"ok":true, "reason":"", "direct_upper":direct, "raw_dps":0.0, "duration":0.0}
+	if snapshot.has("burn_policy") and packet.get("role", "") in ["direct", "parent", "child"] and packet.skill_id in ["meteor", "tornado"] and fire > 0.0:
+		var burn: Dictionary = BurnRules.from_fire_hit(fire, snapshot.burn_policy,
+			snapshot.get("fire_dot_multiplier", 0.0), snapshot.get("burn_faster", 0.0))
+		if not burn.ok: return _hit_failure("Burn authority rejected possible application: " + str(burn.reason))
+		if not _positive(burn.raw_dps) or not _positive(burn.duration): return _hit_failure("Subnormal burn result requires original path")
+		result.raw_dps = float(burn.raw_dps)
+		result.duration = float(burn.duration)
+	return result
+
+
+# Outward rounding helps keep diagnostic arithmetic conservative. It does not
+# establish formal equivalence of every possible float settlement order. Values
+# that overflow, underflow or lose a positive summand are rejected wholesale.
+static func _upper_product(left: float, right: float) -> float:
+	if left == 0.0 or right == 0.0: return 0.0
+	var product := left * right
+	return _next_up(product) if _positive(product) else -1.0
+
+
+static func _upper_sum(left: float, right: float) -> float:
+	if right == 0.0: return left
+	if left == 0.0: return _next_up(right) if _positive(right) else -1.0
+	var total := left + right
+	if not _positive(total) or total <= left or total <= right: return -1.0
+	return _next_up(total)
+
+
+static func _next_up(value: float) -> float:
+	var bits := PackedByteArray()
+	bits.resize(8)
+	bits.encode_double(0, value)
+	bits.encode_u64(0, bits.decode_u64(0) + 1)
+	var result: float = bits.decode_double(0)
+	return result if _positive(result) else -1.0
+
+
+static func _finite(value: Variant) -> bool:
+	return typeof(value) in [TYPE_INT, TYPE_FLOAT] and is_finite(float(value))
+
+
+static func _nonnegative(value: Variant) -> bool:
+	return _finite(value) and (float(value) == 0.0 or float(value) >= MIN_NORMAL)
+
+
+static func _positive(value: Variant) -> bool:
+	return _finite(value) and float(value) >= MIN_NORMAL
+
+
+static func _id(value: Variant) -> bool:
+	return typeof(value) == TYPE_INT and int(value) > 0
+
+
+static func _strings(value: Variant) -> bool:
+	if not value is Array: return false
+	for entry: Variant in value:
+		if not entry is String: return false
+	return true
+
+
+static func _hit_failure(reason: String) -> Dictionary:
+	return {"ok":false, "reason":reason}
+
+
+static func _failure(reason: String, start: float) -> Dictionary:
+	return {"ok":false, "reason":reason, "eligible":false,
+		"last_boundary":start if _nonnegative(start) else 0.0, "burn_ids":[], "bounds":{}}
