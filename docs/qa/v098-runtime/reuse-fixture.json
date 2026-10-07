@@ -1,0 +1,36 @@
+{
+  "source": "Exact final saved bytes from main3 run, copied after process exited; no added scene run or synthesized equipment",
+  "version": 53,
+  "revision": 41,
+  "group_id": "group_000008",
+  "active_uid": "item_000010",
+  "support_uids": {
+    "long_stride": "item_000011",
+    "efficiency": "item_000012",
+    "quickcast": "item_000013"
+  },
+  "final_support_locations": {
+    "item_000011": {
+      "kind": "bag",
+      "page": 0,
+      "x": 11,
+      "y": 0
+    },
+    "item_000012": {
+      "kind": "bag",
+      "page": 0,
+      "x": 8,
+      "y": 1
+    },
+    "item_000013": {
+      "kind": "bag",
+      "page": 0,
+      "x": 9,
+      "y": 1
+    }
+  },
+  "main_report": "main3-result.json",
+  "fixture": "owned-fixture-after-runtime.json",
+  "compiled_plain_and_stride_serialized": false,
+  "compiled_observations": "Test asserted plain owned cast restored byte-for-byte after unlink and frozen stride profile retained; full compiled dictionaries were not serialized."
+}

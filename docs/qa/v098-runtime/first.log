@@ -1,0 +1,22 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+LONG_STRIDE_SECTION compiler_contract checks=64 failures=0
+LONG_STRIDE_SECTION old_compiler_oracle checks=74 failures=0
+godot-game: playable arena ready
+ERROR: Move actual support into bag long_stride: {"displaced_uid":"","error_code":"no_change","locations":{},"moved_uid":"","ok":false,"reason":"","revision":-1}
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/long_stride_runtime_test.gd:32)
+       [1] accepted (res://tests/long_stride_runtime_test.gd:37)
+       [2] link_supports (res://tests/long_stride_runtime_test.gd:132)
+       [3] actual_owned_setup (res://tests/long_stride_runtime_test.gd:146)
+       [4] section (res://tests/long_stride_runtime_test.gd:41)
+       [5] run (res://tests/long_stride_runtime_test.gd:284)
+ERROR: Section finishes normally: actual_owned_setup
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/long_stride_runtime_test.gd:32)
+       [1] section (res://tests/long_stride_runtime_test.gd:42)
+       [2] run (res://tests/long_stride_runtime_test.gd:284)
+LONG_STRIDE_SECTION actual_owned_setup checks=9 failures=2
+LONG_STRIDE_RUNTIME 148 checks, 2 failures

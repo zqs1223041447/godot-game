@@ -1,0 +1,47 @@
+{
+  "production_base_commit": "62f19eb71b6196c793b682454776667e79eb9c1e",
+  "final_test_source_sha256": "82b317cd7942293839609bb5d5c5081c98de9820882846ca2be6a2d4be1f62e5",
+  "first_test_source_sha256": "5b1e005790794ac9d13719ca85ffec6a8e0580b02dc1bc43971d2316a67a874a",
+  "inputs": {
+    "tests/long_stride_runtime_test.gd": "82b317cd7942293839609bb5d5c5081c98de9820882846ca2be6a2d4be1f62e5",
+    "scripts/main.gd": "e5e01cce3dd6c0bc28806a564c16e40b9e45611d69040076324f9151848ce168",
+    "scripts/combat/skill_compiler.gd": "5744f06fb099042336ddc41c73cf3b2a8980eac42ea7f05b9ec4167eca03e82b",
+    "scripts/combat/support_registry.gd": "17548161e61953736596cfbc4c7ec78e483924aca11744b0699b140495445c81",
+    "scripts/combat/long_stride_support_rules.gd": "ff4f0cc288dc5fec90fb1423e64f5923141c5c98b25ac11b34443e233523c9c1",
+    "scripts/combat/resource_support_rules.gd": "6b01ff6c2a9704a8a9519cd8ad35f83f6f70471988eadcb091d99764a1e18413",
+    "scripts/visuals/world_view.gd": "eb715eb2ab912fa2e20e5d676161098539ad01fd6b4d84aa578b0a4084d5ebf2",
+    "scripts/world/map_geometry.gd": "4f76d248111f31568b49548f624503e3ffccd51f7f1f7be86ee240e2f392d461",
+    "scripts/world/exploration_map_layout.gd": "ffc8b3aab2338d808906220793f8184021238c19580f40adc74034cc5752575b",
+    "scripts/canonical_game_state.gd": "065d88dce77f6613fdd8e9a105b45038a537ce43975aaaca05d720694ee6875c",
+    "scripts/save/canonical_build_store.gd": "c9936ff5e68b597a79adafffe13083603fad2d7774f987422dfe774a0168abd6",
+    "scripts/save/canonical_build_rules.gd": "32d9406070dc8e471ba70c0b586e9ab4b8baadf8fbc71f8bb345f54c1ce51530",
+    "docs/qa/v094-integration/owned-fixture.json": "4b1a8dae93c0a541158972284590461e1f57ffee4c07d7079982ebcd297263df",
+    "docs/qa/v098-runtime/legacy_skill_compiler_d2d188a.gd": "277996327766f8e4042f9aaf61a1b6cd62917be49762d81810641fe121928c18",
+    "docs/qa/v098-runtime/legacy_support_registry_d2d188a.gd": "a3179ad52b838575c1f0f4d56a639ed946fa0ceca4f7555f2e9f9bb9ac77cc3e"
+  },
+  "runs": [
+    {
+      "name": "first",
+      "exit_status": 1,
+      "result": "first-result.json",
+      "log": "first.log",
+      "compiler_checks_passed": 138,
+      "fixture_failure": "moving already bag-owned support returned no_change; helper assumed ok"
+    },
+    {
+      "name": "main2",
+      "exit_status": 0,
+      "result": "main2-result.json",
+      "log": "main2.log",
+      "checks": 249
+    },
+    {
+      "name": "main3",
+      "exit_status": 0,
+      "result": "main3-result.json",
+      "log": "main3.log",
+      "checks": 265
+    }
+  ],
+  "reuse_fixture_sha256": "2a7a92b544cf3ae54795f25da99f4e5832b4bef29406108dd5179d6f48410698"
+}

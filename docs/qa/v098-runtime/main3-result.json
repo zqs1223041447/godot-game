@@ -1,0 +1,135 @@
+{
+	"checks": 265,
+	"failures": 0,
+	"failures_detail": [],
+	"samples": [
+		{
+			"case": "open_world",
+			"cooldown": 3.0,
+			"end": "(517.0, 404.0)",
+			"mana": 12.0,
+			"protection": 0.6,
+			"start": "(342.0, 404.0)",
+			"supports": []
+		},
+		{
+			"case": "open_world",
+			"cooldown": 3.0,
+			"end": "(622.0, 404.0)",
+			"mana": 14.399999999999977,
+			"protection": 0.0,
+			"start": "(342.0, 404.0)",
+			"supports": [
+				"long_stride"
+			]
+		},
+		{
+			"case": "open_world",
+			"cooldown": 3.4499999999999997,
+			"end": "(622.0, 404.0)",
+			"mana": 11.519999999999982,
+			"protection": 0.0,
+			"start": "(342.0, 404.0)",
+			"supports": [
+				"long_stride",
+				"efficiency"
+			]
+		},
+		{
+			"case": "open_world",
+			"cooldown": 2.4000000000000004,
+			"end": "(622.0, 404.0)",
+			"mana": 20.159999999999968,
+			"protection": 0.0,
+			"start": "(342.0, 404.0)",
+			"supports": [
+				"long_stride",
+				"quickcast"
+			]
+		},
+		{
+			"case": "open_world",
+			"cooldown": 2.76,
+			"end": "(622.0, 404.0)",
+			"mana": 16.128000000000043,
+			"protection": 0.0,
+			"start": "(342.0, 404.0)",
+			"supports": [
+				"long_stride",
+				"efficiency",
+				"quickcast"
+			]
+		},
+		{
+			"camera": "(1146.98, 1234.0)",
+			"case": "wall_sweep",
+			"end": "(1146.98, 1234.0)",
+			"path": [
+				[
+					"(1102.0, 1234.0)",
+					"(1146.98, 1234.0)"
+				]
+			],
+			"start": "(1102.0, 1234.0)",
+			"supports": []
+		},
+		{
+			"camera": "(1146.98, 1357.744)",
+			"case": "wall_slide",
+			"end": "(1146.98, 1357.744)",
+			"path": [
+				[
+					"(1102.0, 1234.0)",
+					"(1146.98, 1279.0)"
+				],
+				[
+					"(1146.98, 1279.0)",
+					"(1146.98, 1357.744)"
+				]
+			],
+			"start": "(1102.0, 1234.0)",
+			"supports": []
+		},
+		{
+			"camera": "(1146.98, 1234.0)",
+			"case": "wall_sweep",
+			"end": "(1146.98, 1234.0)",
+			"path": [
+				[
+					"(1102.0, 1234.0)",
+					"(1146.98, 1234.0)"
+				]
+			],
+			"start": "(1102.0, 1234.0)",
+			"supports": [
+				"long_stride"
+			]
+		},
+		{
+			"camera": "(1146.98, 1431.99)",
+			"case": "wall_slide",
+			"end": "(1146.98, 1431.99)",
+			"path": [
+				[
+					"(1102.0, 1234.0)",
+					"(1146.98, 1279.0)"
+				],
+				[
+					"(1146.98, 1279.0)",
+					"(1146.98, 1431.99)"
+				]
+			],
+			"start": "(1102.0, 1234.0)",
+			"supports": [
+				"long_stride"
+			]
+		}
+	],
+	"scope": "Controlled actual Main using one legal saved model; pinned d2d188a compiler and support registry for24 representative old casts. No natural combat, DPS, FPS or Windows claim.",
+	"sections": {
+		"actual_geometry_and_group": 98,
+		"actual_open_movement": 69,
+		"actual_owned_setup": 18,
+		"malformed_policy_and_gates": 79
+	}
+}
