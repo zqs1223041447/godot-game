@@ -1,0 +1,171 @@
+#!/usr/bin/env python3
+"""Static provenance, numeric-fact and exact-preservation checks; no Godot run."""
+import ast
+from html.parser import HTMLParser
+import importlib.util
+import json
+import math
+from pathlib import Path
+import re
+
+ROOT = Path(__file__).resolve().parents[3]
+QA = Path(__file__).resolve().parent
+REF = ROOT / 'docs/reference'
+
+
+def module(name, path):
+    spec = importlib.util.spec_from_file_location(name, path)
+    result = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(result)
+    return result
+
+
+P = module('projection_v103', QA / 'project-reference.py')
+load, sha, baseline = P.load, P.sha, P.baseline
+ARTICLE = r'<article\b[^>]*\bid="([^"]+)"[^>]*>.*?</article>'
+PAYLOAD = r'<script id="reference-data" type="application/json">(.*?)</script>'
+
+
+def cards(html): return {m[1]: m[0] for m in re.finditer(ARTICLE, html, re.S)}
+def payload(html): return json.loads(re.search(PAYLOAD, html, re.S)[1])
+
+
+class Page(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.ids, self.links, self.assets = [], [], []
+        self.facts, self.costs, self.crafting = {}, {}, {}
+
+    def handle_starttag(self, tag, pairs):
+        attrs = dict(pairs)
+        if 'id' in attrs: self.ids.append(attrs['id'])
+        if 'href' in attrs: self.links.append(attrs['href'])
+        if 'src' in attrs: self.assets.append(attrs['src'])
+        for field, target in [('data-craft-evidence-value', self.facts), ('data-targeted-cost', self.costs), ('data-craft-value', self.crafting)]:
+            if field in attrs:
+                assert attrs[field] not in target
+                target[attrs[field]] = float(attrs['data-value'])
+
+
+def strip_page(html):
+    html = re.sub(ARTICLE + r'\n?', '', html, flags=re.S)
+    html = re.sub(PAYLOAD, '<PAYLOAD>', html, flags=re.S)
+    html = re.sub(r'数据指纹 [a-f0-9]{16}', '数据指纹 <DIGEST>', html)
+    return re.sub(r'(<span>(?:全部条目|制作与回收)</span><span>)\d+(</span>)', r'\g<1><COUNT>\2', html)
+
+
+def main():
+    old_raw = baseline('docs/reference/catalog.json').decode()
+    raw = (REF / 'catalog.json').read_text()
+    old, data = json.loads(old_raw), json.loads(raw)
+    expected = json.loads(old_raw)
+    expected['crafting'].update(P.entries())
+    assert data == expected
+    old_tokens, new_tokens = P.tokens(old_raw), P.tokens(raw)
+    assert old_tokens.keys() == new_tokens.keys()
+    assert {k for k in old_tokens if old_tokens[k] != new_tokens[k]} == {'crafting'}
+    old_craft, new_craft = P.tokens(old_tokens['crafting']), P.tokens(new_tokens['crafting'])
+    assert len(old_craft) == 11 and len(new_craft) == 15
+    assert all(new_craft[k] == value for k, value in old_craft.items())
+    assert list(new_craft)[len(old_craft):] == P.IDS
+    assert data['save_version'] == old['save_version'] == 53
+    assert data['game_version'] == old['game_version']
+    old_html = baseline('docs/reference/index.html').decode()
+    html = (REF / 'index.html').read_text()
+    previous, current = cards(old_html), cards(html)
+    changed = {'crafting-calibration_shard', 'currencies-calibration_shard', 'town_services-crafter'}
+    added = {'crafting-' + op for op in P.IDS}
+    assert {k for k in previous if previous[k] != current[k]} == changed
+    assert current.keys() - previous.keys() == added and not previous.keys() - current.keys()
+    before_payload, after_payload = payload(old_html), payload(html)
+    assert all(before_payload[k] == after_payload[k] for k in before_payload if k != 'records')
+    before_records = {r['id']: r for r in before_payload['records']}
+    after_records = {r['id']: r for r in after_payload['records']}
+    assert after_records.keys() - before_records.keys() == added
+    # Related-link-only currency changes do not enter the existing search body.
+    assert {k for k in before_records if before_records[k] != after_records[k]} == changed - {'currencies-calibration_shard'}
+    assert strip_page(html) == strip_page(old_html)
+    assert '6项现有工艺与8种定向重铸' in current['town_services-crafter']
+    page = Page()
+    page.feed(html)
+    assert len(page.ids) == len(set(page.ids))
+    for link in page.links:
+        if link.startswith('#'): assert link[1:] in page.ids, link
+        elif not re.match(r'^[a-z]+:', link): assert (REF / link.split('#')[0]).resolve().is_file(), link
+    for asset in page.assets:
+        if not re.match(r'^[a-z]+:', asset): assert (REF / asset).is_file(), asset
+    expected_facts = {}
+    family_names = {'fire': ['emberward', 'ring_emberward'], 'cold': ['rimeward', 'ring_rimeward'],
+        'lightning': ['stormward', 'ring_stormward'], 'chaos': ['ring_voidward']}
+    for op in P.IDS:
+        item = data['crafting'][op]
+        element = op.removeprefix('targeted_reforge_').removesuffix('_resistance')
+        assert item['catalog_vocabulary'] == 51 and item['cost_by_rarity'] == {'magic': 16, 'rare': 40}
+        assert item['target_family_ids'] == family_names[element]
+        expected_bases = ['nine_slot_etched_ring'] + ([] if element == 'chaos' else ['emberhide_vest'])
+        assert item['eligible_base_ids'] == expected_bases
+        for entry in item['eligibility']:
+            assert entry['minimum_item_level_by_rarity'] == {'magic': 1, 'rare': 1}
+            for tier in entry['target_tiers_at_maximum_level']:
+                assert tier['kind'] == 'suffix'
+        for family in item['target_family_ids']:
+            definition = data['affixes'][family]
+            assert definition['kind'] == 'suffix' and definition['stat'] == element + '_resistance'
+            assert [(t['level'], t['min'], t['max'], t['weight']) for t in definition['tiers']] == [(1, 8, 12, 100), (8, 13, 18, 60), (16, 19, 25, 30)]
+        sample = item['example']
+        assert sample['save_version'] == 53 and sample['full_candidate_valid']
+        assert sample['quote']['ok'] and sample['transaction_result']['ok']
+        assert all(sample['source'][k] == sample['after_instance'][k] for k in ['id', 'base_id', 'item_level', 'rarity'])
+        assert any(a['id'] in item['target_family_ids'] for a in sample['after_instance']['affixes'])
+        assert not any(k.startswith('maximum_') for k in sample['after_definition']['stats'])
+        assert sample['balance_before'] - sample['balance_after'] == item['cost_by_rarity'][sample['source']['rarity']]
+        for rarity, amount in item['cost_by_rarity'].items(): assert page.costs[op + '-' + rarity] == amount
+        for name, key in [('amount', 'balance_before'), ('before', 'balance_before'), ('after', 'balance_after')]:
+            assert page.crafting[op + '-' + name] == sample[key]
+        for fact in item['evidence']['facts']: expected_facts[op + '-' + fact['key']] = fact['value']
+        card = current['crafting-' + op]
+        assert '实际保存后重新穿戴' in card and '不提高最大抗性' in card and '固定示例种子' not in card
+        assert '合法源存档' in card and 'transactions-report.json' in card and 'RESISTANCE_TARGETED_REFORGE.zh-CN.md' in card
+        assert op in after_records['crafting-' + op]['search']
+    assert page.facts == expected_facts and len(expected_facts) == 48
+    assert data['equipment']['emberhide_vest']['stats']['fire_resistance'] == .15
+    authority = load(QA / 'authority-fragment.json')
+    assert authority['old_helper_checks'] == 10 and authority['new_helper_checks'] == 4
+    assert len(authority['definitions']) == 14
+    run = load(QA / 'export-run.json')
+    assert run['exit_code'] == 0 and run['export_count'] == 1 and run['inputs_unchanged']
+    for filename in ['export.stdout.log.txt', 'export.stderr.log.txt']:
+        assert 'ERROR' not in (QA / filename).read_text()
+    for path, fingerprint in load(QA / 'export-input-sha256.json').items():
+        content = baseline(path) if path in ['docs/reference/catalog.json', 'docs/reference/index.html'] else (ROOT / path).read_bytes()
+        assert sha(content) == fingerprint, path
+    for filename in ['source-hashes.sha256', 'artifact-hashes.sha256']:
+        for line in (P.TX / filename).read_text().splitlines():
+            fingerprint, path = line.split(maxsplit=1)
+            candidate = ROOT / path
+            if not candidate.exists(): candidate = P.TX / path
+            assert sha(candidate.read_bytes()) == fingerprint, path
+    model_run = load(P.TX / 'execution.json')
+    assert model_run['checks'] == 1684 and model_run['failures'] == 0
+    builder = module('builder_v103_check', ROOT / 'tools/build_reference.py')
+    assert builder.build(data, load(REF / 'art/manifest.json')) == html
+    old_tree, new_tree = ast.parse(baseline('tools/build_reference.py').decode()), ast.parse((ROOT / 'tools/build_reference.py').read_text())
+    for tree in [old_tree, new_tree]:
+        tree.body = [node for node in tree.body if not isinstance(node, ast.FunctionDef) or node.name != 'build']
+    assert ast.dump(old_tree) == ast.dump(new_tree)
+    assets = ['docs/reference/reference.css', 'docs/reference/reference.js', 'docs/reference/art/manifest.json', 'assets/fonts/arena_sans.otf']
+    for path in assets: assert (ROOT / path).read_bytes() == baseline(path), path
+    preservation = {'raw_top_level_sha256': {k: sha(v.encode()) for k, v in old_tokens.items() if k != 'crafting'},
+        'all_eleven_old_crafting_entry_sha256': {k: sha(v.encode()) for k, v in old_craft.items()}, 'unchanged_assets': assets}
+    preserved_cards = {k: sha(v.encode()) for k, v in previous.items() if k not in changed}
+    result = {'passed': True, 'baseline_commit': P.BASE, 'added_cards': sorted(added), 'changed_cards': sorted(changed),
+        'preserved_card_count': len(preserved_cards), 'card_count': len(current), 'old_crafting_entries_preserved': len(old_craft),
+        'raw_top_level_preserved': len(old_tokens) - 1, 'numeric_profile_facts': len(expected_facts),
+        'unique_ids': len(page.ids), 'verified_links': len(page.links), 'export_count': 1, 'actual_model_checks': 1684,
+        'scope': 'Static bounded F8 proof; original model/rule evidence reused. No full exporter, model, battle, render or native-input rerun.'}
+    for filename, record in [('preservation.json', preservation), ('card-sha256.json', preserved_cards), ('final-result.json', result)]:
+        (QA / filename).write_text(json.dumps(record, ensure_ascii=False, indent=2) + '\n')
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+
+
+if __name__ == '__main__': main()

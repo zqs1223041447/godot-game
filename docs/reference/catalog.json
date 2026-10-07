@@ -13533,6 +13533,1884 @@
 			"target_id": "mana_leech",
 			"target_label": "魔力偷取",
 			"targeted": true
+		},
+		"targeted_reforge_fire_resistance": {
+			"catalog_vocabulary": 51,
+			"cost_by_rarity": {
+				"magic": 16,
+				"rare": 40
+			},
+			"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的火焰抗性词缀。",
+			"eligibility": [
+				{
+					"base_id": "nine_slot_etched_ring",
+					"minimum_item_level_by_rarity": {
+						"magic": 1,
+						"rare": 1
+					},
+					"target_family_ids": [
+						"ring_emberward"
+					],
+					"target_tiers_at_maximum_level": [
+						{
+							"group": "fire_resistance",
+							"id": "ring_emberward",
+							"kind": "suffix",
+							"max": 12,
+							"min": 8,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "fire_resistance",
+							"id": "ring_emberward",
+							"kind": "suffix",
+							"max": 18,
+							"min": 13,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "fire_resistance",
+							"id": "ring_emberward",
+							"kind": "suffix",
+							"max": 25,
+							"min": 19,
+							"tier": 3,
+							"weight": 30
+						}
+					]
+				},
+				{
+					"base_id": "emberhide_vest",
+					"minimum_item_level_by_rarity": {
+						"magic": 1,
+						"rare": 1
+					},
+					"target_family_ids": [
+						"emberward"
+					],
+					"target_tiers_at_maximum_level": [
+						{
+							"group": "fire_resistance",
+							"id": "emberward",
+							"kind": "suffix",
+							"max": 12,
+							"min": 8,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "fire_resistance",
+							"id": "emberward",
+							"kind": "suffix",
+							"max": 18,
+							"min": 13,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "fire_resistance",
+							"id": "emberward",
+							"kind": "suffix",
+							"max": 25,
+							"min": 19,
+							"tier": 3,
+							"weight": 30
+						}
+					]
+				}
+			],
+			"eligibility_maximum_item_level": 30,
+			"eligibility_note": "仅下列底材存在可达合法结果；物品等级仍限制阶级，最终以当前装备报价为准。普通、固定、已穿戴装备不可用；无合法目标不收费。",
+			"eligible_base_ids": [
+				"nine_slot_etched_ring",
+				"emberhide_vest"
+			],
+			"evidence": {
+				"facts": [
+					{
+						"key": "fire-raw_resistances",
+						"label": "火焰原始抗性",
+						"percent": true,
+						"value": 0.39
+					},
+					{
+						"key": "fire-effective_resistances",
+						"label": "火焰有效抗性",
+						"percent": true,
+						"value": 0.39
+					},
+					{
+						"key": "fire-maximum_resistances",
+						"label": "火焰有效上限",
+						"percent": true,
+						"value": 0.75
+					},
+					{
+						"key": "cold-raw_resistances",
+						"label": "冰霜原始抗性",
+						"percent": true,
+						"value": 0.0
+					},
+					{
+						"key": "cold-effective_resistances",
+						"label": "冰霜有效抗性",
+						"percent": true,
+						"value": 0.0
+					},
+					{
+						"key": "cold-maximum_resistances",
+						"label": "冰霜有效上限",
+						"percent": true,
+						"value": 0.75
+					},
+					{
+						"key": "lightning-raw_resistances",
+						"label": "闪电原始抗性",
+						"percent": true,
+						"value": 0.0
+					},
+					{
+						"key": "lightning-effective_resistances",
+						"label": "闪电有效抗性",
+						"percent": true,
+						"value": 0.0
+					},
+					{
+						"key": "lightning-maximum_resistances",
+						"label": "闪电有效上限",
+						"percent": true,
+						"value": 0.75
+					},
+					{
+						"key": "chaos-raw",
+						"label": "混沌原始抗性",
+						"percent": true,
+						"value": 0.0
+					},
+					{
+						"key": "chaos-effective",
+						"label": "混沌有效抗性",
+						"percent": true,
+						"value": 0.0
+					},
+					{
+						"key": "chaos-cap",
+						"label": "混沌有效上限",
+						"percent": true,
+						"value": 0.75
+					}
+				],
+				"links": [
+					{
+						"href": "../RESISTANCE_TARGETED_REFORGE.zh-CN.md",
+						"label": "四抗规则与阶级、后缀取舍"
+					},
+					{
+						"href": "../qa/v103-reference/README.md",
+						"label": "本批范围与原始凭据"
+					},
+					{
+						"href": "../qa/v103-transactions/first/transactions-report.json",
+						"label": "真实事务报告"
+					},
+					{
+						"href": "../qa/v103-transactions/first/emberhide_vest-magic-fire_resistance-before.save",
+						"label": "合法源存档"
+					},
+					{
+						"href": "../qa/v103-transactions/first/emberhide_vest-magic-fire_resistance.save",
+						"label": "保存并穿戴后的存档"
+					}
+				],
+				"scope": "以下数值来自同一真实模型事务的保存、穿戴与重载结果。源装备在背包，重铸时不直接改变角色防御；这些是穿戴新装备后的完整角色值，不是只归因于该词缀的提升量。百分比为原始比例×100；本工艺不提高最大抗性，也不保证更强。",
+				"title": "实际保存后重新穿戴的角色抗性"
+			},
+			"example": {
+				"actual_model_record": "emberhide_vest-magic-fire_resistance",
+				"actual_model_report": "docs/qa/v103-transactions/first/transactions-report.json",
+				"after_definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"后缀 · 护火 T3：火焰抗性 +24%",
+						"前缀 · 深汲 T1：最大魔力 +8"
+					],
+					"base_id": "emberhide_vest",
+					"base_name": "灰烬皮甲",
+					"description": "最大生命 +8，火焰抗性 +15%。火焰抗性降低火焰命中与燃烧伤害；默认上限75%，最大抗性天赋可提高至本游戏安全上限83%，仍需另外取得足够原始抗性。\n后缀 · 护火 T3：火焰抗性 +24%\n前缀 · 深汲 T1：最大魔力 +8",
+					"effects": [],
+					"id": "gear_000004",
+					"item_level": 30.0,
+					"name": "魔法 · 灰烬皮甲",
+					"rarity": "magic",
+					"size": "(2, 3)",
+					"slot": "armor",
+					"stats": {
+						"fire_resistance": 0.39,
+						"max_health": 8.0,
+						"max_mana": 8.0
+					}
+				},
+				"after_instance": {
+					"affixes": [
+						{
+							"id": "emberward",
+							"tier": 3,
+							"value": 24
+						},
+						{
+							"id": "deepwell",
+							"tier": 1,
+							"value": 8
+						}
+					],
+					"base_id": "emberhide_vest",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "magic"
+				},
+				"balance_after": 0,
+				"balance_before": 16,
+				"before_definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"前缀 · 雾织 T2：闪避值 +332",
+						"后缀 · 藏炭 T1：火焰伤害提高 +5%"
+					],
+					"base_id": "emberhide_vest",
+					"base_name": "灰烬皮甲",
+					"description": "最大生命 +8，火焰抗性 +15%。火焰抗性降低火焰命中与燃烧伤害；默认上限75%，最大抗性天赋可提高至本游戏安全上限83%，仍需另外取得足够原始抗性。\n前缀 · 雾织 T2：闪避值 +332\n后缀 · 藏炭 T1：火焰伤害提高 +5%",
+					"effects": [],
+					"id": "gear_000004",
+					"item_level": 30.0,
+					"name": "魔法 · 灰烬皮甲",
+					"rarity": "magic",
+					"size": "(2, 3)",
+					"slot": "armor",
+					"stats": {
+						"evasion": 332.0,
+						"fire_increased": 0.05,
+						"fire_resistance": 0.15,
+						"max_health": 8.0
+					}
+				},
+				"equipped_snapshot": "docs/qa/v103-transactions/first/emberhide_vest-magic-fire_resistance.save",
+				"full_candidate_valid": true,
+				"generation": {
+					"pool": "defense_v39",
+					"seed": 103000,
+					"source": {
+						"affixes": [
+							{
+								"id": "mistweave",
+								"tier": 2,
+								"value": 332
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "emberhide_vest",
+						"id": "gear_000004",
+						"item_level": 30,
+						"rarity": "magic"
+					}
+				},
+				"profiles": {
+					"after": {
+						"base_cap": 0.75,
+						"effective_resistances": {
+							"cold": 0.0,
+							"fire": 0.39,
+							"lightning": 0.0
+						},
+						"maximum_resistances": {
+							"cold": 0.75,
+							"fire": 0.75,
+							"lightning": 0.75
+						},
+						"ok": true,
+						"raw_resistances": {
+							"cold": 0.0,
+							"fire": 0.39,
+							"lightning": 0.0
+						},
+						"reason": "",
+						"safety_cap": 0.83
+					},
+					"before": {
+						"base_cap": 0.75,
+						"effective_resistances": {
+							"cold": 0.0,
+							"fire": 0.0,
+							"lightning": 0.0
+						},
+						"maximum_resistances": {
+							"cold": 0.75,
+							"fire": 0.75,
+							"lightning": 0.75
+						},
+						"ok": true,
+						"raw_resistances": {
+							"cold": 0.0,
+							"fire": 0.0,
+							"lightning": 0.0
+						},
+						"reason": "",
+						"safety_cap": 0.83
+					},
+					"chaos_after": {
+						"cap": 0.75,
+						"effective": 0.0,
+						"ok": true,
+						"raw": 0.0,
+						"reason": ""
+					},
+					"chaos_before": {
+						"cap": 0.75,
+						"effective": 0.0,
+						"ok": true,
+						"raw": 0.0,
+						"reason": ""
+					}
+				},
+				"quote": {
+					"code": "",
+					"consumes_item": false,
+					"cost": {
+						"calibration_shard": 16
+					},
+					"handle": "-9223371759711943233:2",
+					"item_id": "gear_000004",
+					"materials": {},
+					"ok": true,
+					"operation": "targeted_reforge_fire_resistance",
+					"reason": "",
+					"revision": 0,
+					"rules_version": "original-targeted-reforge-v1-affix27",
+					"source_instance": {
+						"affixes": [
+							{
+								"id": "mistweave",
+								"tier": 2,
+								"value": 332
+							},
+							{
+								"id": "coalglow",
+								"tier": 1,
+								"value": 5
+							}
+						],
+						"base_id": "emberhide_vest",
+						"id": "gear_000004",
+						"item_level": 30,
+						"rarity": "magic"
+					}
+				},
+				"revision_after": 1,
+				"revision_before": 0,
+				"save_version": 53,
+				"source": {
+					"affixes": [
+						{
+							"id": "mistweave",
+							"tier": 2,
+							"value": 332
+						},
+						{
+							"id": "coalglow",
+							"tier": 1,
+							"value": 5
+						}
+					],
+					"base_id": "emberhide_vest",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "magic"
+				},
+				"source_snapshot": "docs/qa/v103-transactions/first/emberhide_vest-magic-fire_resistance-before.save",
+				"transaction_result": {
+					"code": "",
+					"cost": {
+						"calibration_shard": 16
+					},
+					"item_id": "gear_000004",
+					"materials": {},
+					"ok": true,
+					"operation": "targeted_reforge_fire_resistance",
+					"reason": "",
+					"revision": 1
+				}
+			},
+			"example_note": "这是实际模型报价、确认和原子保存的已完成示例。源装备由真实目录生成，费用与余额来自合法源/结果存档；保留原UID，全部词缀重新生成。模型报告覆盖重新穿戴与重载，不预告玩家下一次随机结果。",
+			"kind": "operation",
+			"name": "定向重铸 · 火焰抗性",
+			"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+			"rule": {
+				"consumes_item": false,
+				"cost": {
+					"magic": 16,
+					"rare": 40
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的火焰抗性词缀。",
+				"label": "定向重铸",
+				"operation": "targeted_reforge_fire_resistance",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"rules_version": "original-targeted-reforge-v1-affix27",
+				"target_id": "fire_resistance",
+				"target_label": "火焰抗性",
+				"targeted": true
+			},
+			"rules_version": "original-targeted-reforge-v1-affix27",
+			"selection_note": "先按目录正权重抽取可完成的目标家族与阶级，再从合法池补足；保持稀有度，不保留原词缀，也不保证高阶或更强。",
+			"target_family_ids": [
+				"emberward",
+				"ring_emberward"
+			],
+			"target_id": "fire_resistance",
+			"target_label": "火焰抗性",
+			"targeted": true
+		},
+		"targeted_reforge_cold_resistance": {
+			"catalog_vocabulary": 51,
+			"cost_by_rarity": {
+				"magic": 16,
+				"rare": 40
+			},
+			"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的冰霜抗性词缀。",
+			"eligibility": [
+				{
+					"base_id": "nine_slot_etched_ring",
+					"minimum_item_level_by_rarity": {
+						"magic": 1,
+						"rare": 1
+					},
+					"target_family_ids": [
+						"ring_rimeward"
+					],
+					"target_tiers_at_maximum_level": [
+						{
+							"group": "cold_resistance",
+							"id": "ring_rimeward",
+							"kind": "suffix",
+							"max": 12,
+							"min": 8,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "cold_resistance",
+							"id": "ring_rimeward",
+							"kind": "suffix",
+							"max": 18,
+							"min": 13,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "cold_resistance",
+							"id": "ring_rimeward",
+							"kind": "suffix",
+							"max": 25,
+							"min": 19,
+							"tier": 3,
+							"weight": 30
+						}
+					]
+				},
+				{
+					"base_id": "emberhide_vest",
+					"minimum_item_level_by_rarity": {
+						"magic": 1,
+						"rare": 1
+					},
+					"target_family_ids": [
+						"rimeward"
+					],
+					"target_tiers_at_maximum_level": [
+						{
+							"group": "cold_resistance",
+							"id": "rimeward",
+							"kind": "suffix",
+							"max": 12,
+							"min": 8,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "cold_resistance",
+							"id": "rimeward",
+							"kind": "suffix",
+							"max": 18,
+							"min": 13,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "cold_resistance",
+							"id": "rimeward",
+							"kind": "suffix",
+							"max": 25,
+							"min": 19,
+							"tier": 3,
+							"weight": 30
+						}
+					]
+				}
+			],
+			"eligibility_maximum_item_level": 30,
+			"eligibility_note": "仅下列底材存在可达合法结果；物品等级仍限制阶级，最终以当前装备报价为准。普通、固定、已穿戴装备不可用；无合法目标不收费。",
+			"eligible_base_ids": [
+				"nine_slot_etched_ring",
+				"emberhide_vest"
+			],
+			"evidence": {
+				"facts": [
+					{
+						"key": "fire-raw_resistances",
+						"label": "火焰原始抗性",
+						"percent": true,
+						"value": 0.15
+					},
+					{
+						"key": "fire-effective_resistances",
+						"label": "火焰有效抗性",
+						"percent": true,
+						"value": 0.15
+					},
+					{
+						"key": "fire-maximum_resistances",
+						"label": "火焰有效上限",
+						"percent": true,
+						"value": 0.75
+					},
+					{
+						"key": "cold-raw_resistances",
+						"label": "冰霜原始抗性",
+						"percent": true,
+						"value": 0.15
+					},
+					{
+						"key": "cold-effective_resistances",
+						"label": "冰霜有效抗性",
+						"percent": true,
+						"value": 0.15
+					},
+					{
+						"key": "cold-maximum_resistances",
+						"label": "冰霜有效上限",
+						"percent": true,
+						"value": 0.75
+					},
+					{
+						"key": "lightning-raw_resistances",
+						"label": "闪电原始抗性",
+						"percent": true,
+						"value": 0.15
+					},
+					{
+						"key": "lightning-effective_resistances",
+						"label": "闪电有效抗性",
+						"percent": true,
+						"value": 0.15
+					},
+					{
+						"key": "lightning-maximum_resistances",
+						"label": "闪电有效上限",
+						"percent": true,
+						"value": 0.75
+					},
+					{
+						"key": "chaos-raw",
+						"label": "混沌原始抗性",
+						"percent": true,
+						"value": 0.0
+					},
+					{
+						"key": "chaos-effective",
+						"label": "混沌有效抗性",
+						"percent": true,
+						"value": 0.0
+					},
+					{
+						"key": "chaos-cap",
+						"label": "混沌有效上限",
+						"percent": true,
+						"value": 0.75
+					}
+				],
+				"links": [
+					{
+						"href": "../RESISTANCE_TARGETED_REFORGE.zh-CN.md",
+						"label": "四抗规则与阶级、后缀取舍"
+					},
+					{
+						"href": "../qa/v103-reference/README.md",
+						"label": "本批范围与原始凭据"
+					},
+					{
+						"href": "../qa/v103-transactions/first/transactions-report.json",
+						"label": "真实事务报告"
+					},
+					{
+						"href": "../qa/v103-transactions/first/emberhide_vest-rare-cold_resistance-before.save",
+						"label": "合法源存档"
+					},
+					{
+						"href": "../qa/v103-transactions/first/emberhide_vest-rare-cold_resistance.save",
+						"label": "保存并穿戴后的存档"
+					}
+				],
+				"scope": "以下数值来自同一真实模型事务的保存、穿戴与重载结果。源装备在背包，重铸时不直接改变角色防御；这些是穿戴新装备后的完整角色值，不是只归因于该词缀的提升量。百分比为原始比例×100；本工艺不提高最大抗性，也不保证更强。",
+				"title": "实际保存后重新穿戴的角色抗性"
+			},
+			"example": {
+				"actual_model_record": "emberhide_vest-rare-cold_resistance",
+				"actual_model_report": "docs/qa/v103-transactions/first/transactions-report.json",
+				"after_definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"后缀 · 护寒 T2：冰霜抗性 +15%",
+						"前缀 · 雾织 T1：闪避值 +210",
+						"后缀 · 护雷 T2：闪电抗性 +15%",
+						"前缀 · 根泉 T3：最大生命 +27"
+					],
+					"base_id": "emberhide_vest",
+					"base_name": "灰烬皮甲",
+					"description": "最大生命 +8，火焰抗性 +15%。火焰抗性降低火焰命中与燃烧伤害；默认上限75%，最大抗性天赋可提高至本游戏安全上限83%，仍需另外取得足够原始抗性。\n后缀 · 护寒 T2：冰霜抗性 +15%\n前缀 · 雾织 T1：闪避值 +210\n后缀 · 护雷 T2：闪电抗性 +15%\n前缀 · 根泉 T3：最大生命 +27",
+					"effects": [],
+					"id": "gear_000004",
+					"item_level": 30.0,
+					"name": "稀有 · 灰烬皮甲",
+					"rarity": "rare",
+					"size": "(2, 3)",
+					"slot": "armor",
+					"stats": {
+						"cold_resistance": 0.15,
+						"evasion": 210.0,
+						"fire_resistance": 0.15,
+						"lightning_resistance": 0.15,
+						"max_health": 35.0
+					}
+				},
+				"after_instance": {
+					"affixes": [
+						{
+							"id": "rimeward",
+							"tier": 2,
+							"value": 15
+						},
+						{
+							"id": "mistweave",
+							"tier": 1,
+							"value": 210
+						},
+						{
+							"id": "stormward",
+							"tier": 2,
+							"value": 15
+						},
+						{
+							"id": "rootwell",
+							"tier": 3,
+							"value": 27
+						}
+					],
+					"base_id": "emberhide_vest",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "rare"
+				},
+				"balance_after": 0,
+				"balance_before": 40,
+				"before_definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"前缀 · 雾织 T2：闪避值 +332",
+						"前缀 · 根泉 T1：最大生命 +14",
+						"前缀 · 铁革 T3：护甲 +92",
+						"后缀 · 循迹 T1：移动速度提高 +1%",
+						"后缀 · 霜回 T2：冰霜伤害提高 +14%",
+						"后缀 · 引霆 T1：闪电伤害提高 +6%"
+					],
+					"base_id": "emberhide_vest",
+					"base_name": "灰烬皮甲",
+					"description": "最大生命 +8，火焰抗性 +15%。火焰抗性降低火焰命中与燃烧伤害；默认上限75%，最大抗性天赋可提高至本游戏安全上限83%，仍需另外取得足够原始抗性。\n前缀 · 雾织 T2：闪避值 +332\n前缀 · 根泉 T1：最大生命 +14\n前缀 · 铁革 T3：护甲 +92\n后缀 · 循迹 T1：移动速度提高 +1%\n后缀 · 霜回 T2：冰霜伤害提高 +14%\n后缀 · 引霆 T1：闪电伤害提高 +6%",
+					"effects": [],
+					"id": "gear_000004",
+					"item_level": 30.0,
+					"name": "稀有 · 灰烬皮甲",
+					"rarity": "rare",
+					"size": "(2, 3)",
+					"slot": "armor",
+					"stats": {
+						"armour": 92.0,
+						"cold_increased": 0.14,
+						"evasion": 332.0,
+						"fire_resistance": 0.15,
+						"lightning_increased": 0.06,
+						"max_health": 22.0,
+						"move_speed_increased": 0.01
+					}
+				},
+				"equipped_snapshot": "docs/qa/v103-transactions/first/emberhide_vest-rare-cold_resistance.save",
+				"full_candidate_valid": true,
+				"generation": {
+					"pool": "defense_v39",
+					"seed": 103000,
+					"source": {
+						"affixes": [
+							{
+								"id": "mistweave",
+								"tier": 2,
+								"value": 332
+							},
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 14
+							},
+							{
+								"id": "ironhide",
+								"tier": 3,
+								"value": 92
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 1
+							},
+							{
+								"id": "rimeecho",
+								"tier": 2,
+								"value": 14
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 6
+							}
+						],
+						"base_id": "emberhide_vest",
+						"id": "gear_000004",
+						"item_level": 30,
+						"rarity": "rare"
+					}
+				},
+				"profiles": {
+					"after": {
+						"base_cap": 0.75,
+						"effective_resistances": {
+							"cold": 0.15,
+							"fire": 0.15,
+							"lightning": 0.15
+						},
+						"maximum_resistances": {
+							"cold": 0.75,
+							"fire": 0.75,
+							"lightning": 0.75
+						},
+						"ok": true,
+						"raw_resistances": {
+							"cold": 0.15,
+							"fire": 0.15,
+							"lightning": 0.15
+						},
+						"reason": "",
+						"safety_cap": 0.83
+					},
+					"before": {
+						"base_cap": 0.75,
+						"effective_resistances": {
+							"cold": 0.0,
+							"fire": 0.0,
+							"lightning": 0.0
+						},
+						"maximum_resistances": {
+							"cold": 0.75,
+							"fire": 0.75,
+							"lightning": 0.75
+						},
+						"ok": true,
+						"raw_resistances": {
+							"cold": 0.0,
+							"fire": 0.0,
+							"lightning": 0.0
+						},
+						"reason": "",
+						"safety_cap": 0.83
+					},
+					"chaos_after": {
+						"cap": 0.75,
+						"effective": 0.0,
+						"ok": true,
+						"raw": 0.0,
+						"reason": ""
+					},
+					"chaos_before": {
+						"cap": 0.75,
+						"effective": 0.0,
+						"ok": true,
+						"raw": 0.0,
+						"reason": ""
+					}
+				},
+				"quote": {
+					"code": "",
+					"consumes_item": false,
+					"cost": {
+						"calibration_shard": 40
+					},
+					"handle": "-9223371401098951223:2",
+					"item_id": "gear_000004",
+					"materials": {},
+					"ok": true,
+					"operation": "targeted_reforge_cold_resistance",
+					"reason": "",
+					"revision": 0,
+					"rules_version": "original-targeted-reforge-v1-affix27",
+					"source_instance": {
+						"affixes": [
+							{
+								"id": "mistweave",
+								"tier": 2,
+								"value": 332
+							},
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 14
+							},
+							{
+								"id": "ironhide",
+								"tier": 3,
+								"value": 92
+							},
+							{
+								"id": "trailstep",
+								"tier": 1,
+								"value": 1
+							},
+							{
+								"id": "rimeecho",
+								"tier": 2,
+								"value": 14
+							},
+							{
+								"id": "sparkthread",
+								"tier": 1,
+								"value": 6
+							}
+						],
+						"base_id": "emberhide_vest",
+						"id": "gear_000004",
+						"item_level": 30,
+						"rarity": "rare"
+					}
+				},
+				"revision_after": 1,
+				"revision_before": 0,
+				"save_version": 53,
+				"source": {
+					"affixes": [
+						{
+							"id": "mistweave",
+							"tier": 2,
+							"value": 332
+						},
+						{
+							"id": "rootwell",
+							"tier": 1,
+							"value": 14
+						},
+						{
+							"id": "ironhide",
+							"tier": 3,
+							"value": 92
+						},
+						{
+							"id": "trailstep",
+							"tier": 1,
+							"value": 1
+						},
+						{
+							"id": "rimeecho",
+							"tier": 2,
+							"value": 14
+						},
+						{
+							"id": "sparkthread",
+							"tier": 1,
+							"value": 6
+						}
+					],
+					"base_id": "emberhide_vest",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "rare"
+				},
+				"source_snapshot": "docs/qa/v103-transactions/first/emberhide_vest-rare-cold_resistance-before.save",
+				"transaction_result": {
+					"code": "",
+					"cost": {
+						"calibration_shard": 40
+					},
+					"item_id": "gear_000004",
+					"materials": {},
+					"ok": true,
+					"operation": "targeted_reforge_cold_resistance",
+					"reason": "",
+					"revision": 1
+				}
+			},
+			"example_note": "这是实际模型报价、确认和原子保存的已完成示例。源装备由真实目录生成，费用与余额来自合法源/结果存档；保留原UID，全部词缀重新生成。模型报告覆盖重新穿戴与重载，不预告玩家下一次随机结果。",
+			"kind": "operation",
+			"name": "定向重铸 · 冰霜抗性",
+			"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+			"rule": {
+				"consumes_item": false,
+				"cost": {
+					"magic": 16,
+					"rare": 40
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的冰霜抗性词缀。",
+				"label": "定向重铸",
+				"operation": "targeted_reforge_cold_resistance",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"rules_version": "original-targeted-reforge-v1-affix27",
+				"target_id": "cold_resistance",
+				"target_label": "冰霜抗性",
+				"targeted": true
+			},
+			"rules_version": "original-targeted-reforge-v1-affix27",
+			"selection_note": "先按目录正权重抽取可完成的目标家族与阶级，再从合法池补足；保持稀有度，不保留原词缀，也不保证高阶或更强。",
+			"target_family_ids": [
+				"rimeward",
+				"ring_rimeward"
+			],
+			"target_id": "cold_resistance",
+			"target_label": "冰霜抗性",
+			"targeted": true
+		},
+		"targeted_reforge_lightning_resistance": {
+			"catalog_vocabulary": 51,
+			"cost_by_rarity": {
+				"magic": 16,
+				"rare": 40
+			},
+			"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的闪电抗性词缀。",
+			"eligibility": [
+				{
+					"base_id": "nine_slot_etched_ring",
+					"minimum_item_level_by_rarity": {
+						"magic": 1,
+						"rare": 1
+					},
+					"target_family_ids": [
+						"ring_stormward"
+					],
+					"target_tiers_at_maximum_level": [
+						{
+							"group": "lightning_resistance",
+							"id": "ring_stormward",
+							"kind": "suffix",
+							"max": 12,
+							"min": 8,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "lightning_resistance",
+							"id": "ring_stormward",
+							"kind": "suffix",
+							"max": 18,
+							"min": 13,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "lightning_resistance",
+							"id": "ring_stormward",
+							"kind": "suffix",
+							"max": 25,
+							"min": 19,
+							"tier": 3,
+							"weight": 30
+						}
+					]
+				},
+				{
+					"base_id": "emberhide_vest",
+					"minimum_item_level_by_rarity": {
+						"magic": 1,
+						"rare": 1
+					},
+					"target_family_ids": [
+						"stormward"
+					],
+					"target_tiers_at_maximum_level": [
+						{
+							"group": "lightning_resistance",
+							"id": "stormward",
+							"kind": "suffix",
+							"max": 12,
+							"min": 8,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "lightning_resistance",
+							"id": "stormward",
+							"kind": "suffix",
+							"max": 18,
+							"min": 13,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "lightning_resistance",
+							"id": "stormward",
+							"kind": "suffix",
+							"max": 25,
+							"min": 19,
+							"tier": 3,
+							"weight": 30
+						}
+					]
+				}
+			],
+			"eligibility_maximum_item_level": 30,
+			"eligibility_note": "仅下列底材存在可达合法结果；物品等级仍限制阶级，最终以当前装备报价为准。普通、固定、已穿戴装备不可用；无合法目标不收费。",
+			"eligible_base_ids": [
+				"nine_slot_etched_ring",
+				"emberhide_vest"
+			],
+			"evidence": {
+				"facts": [
+					{
+						"key": "fire-raw_resistances",
+						"label": "火焰原始抗性",
+						"percent": true,
+						"value": 0.0
+					},
+					{
+						"key": "fire-effective_resistances",
+						"label": "火焰有效抗性",
+						"percent": true,
+						"value": 0.0
+					},
+					{
+						"key": "fire-maximum_resistances",
+						"label": "火焰有效上限",
+						"percent": true,
+						"value": 0.75
+					},
+					{
+						"key": "cold-raw_resistances",
+						"label": "冰霜原始抗性",
+						"percent": true,
+						"value": 0.0
+					},
+					{
+						"key": "cold-effective_resistances",
+						"label": "冰霜有效抗性",
+						"percent": true,
+						"value": 0.0
+					},
+					{
+						"key": "cold-maximum_resistances",
+						"label": "冰霜有效上限",
+						"percent": true,
+						"value": 0.75
+					},
+					{
+						"key": "lightning-raw_resistances",
+						"label": "闪电原始抗性",
+						"percent": true,
+						"value": 0.11
+					},
+					{
+						"key": "lightning-effective_resistances",
+						"label": "闪电有效抗性",
+						"percent": true,
+						"value": 0.11
+					},
+					{
+						"key": "lightning-maximum_resistances",
+						"label": "闪电有效上限",
+						"percent": true,
+						"value": 0.75
+					},
+					{
+						"key": "chaos-raw",
+						"label": "混沌原始抗性",
+						"percent": true,
+						"value": 0.0
+					},
+					{
+						"key": "chaos-effective",
+						"label": "混沌有效抗性",
+						"percent": true,
+						"value": 0.0
+					},
+					{
+						"key": "chaos-cap",
+						"label": "混沌有效上限",
+						"percent": true,
+						"value": 0.75
+					}
+				],
+				"links": [
+					{
+						"href": "../RESISTANCE_TARGETED_REFORGE.zh-CN.md",
+						"label": "四抗规则与阶级、后缀取舍"
+					},
+					{
+						"href": "../qa/v103-reference/README.md",
+						"label": "本批范围与原始凭据"
+					},
+					{
+						"href": "../qa/v103-transactions/first/transactions-report.json",
+						"label": "真实事务报告"
+					},
+					{
+						"href": "../qa/v103-transactions/first/nine_slot_etched_ring-magic-lightning_resistance-before.save",
+						"label": "合法源存档"
+					},
+					{
+						"href": "../qa/v103-transactions/first/nine_slot_etched_ring-magic-lightning_resistance.save",
+						"label": "保存并穿戴后的存档"
+					}
+				],
+				"scope": "以下数值来自同一真实模型事务的保存、穿戴与重载结果。源装备在背包，重铸时不直接改变角色防御；这些是穿戴新装备后的完整角色值，不是只归因于该词缀的提升量。百分比为原始比例×100；本工艺不提高最大抗性，也不保证更强。",
+				"title": "实际保存后重新穿戴的角色抗性"
+			},
+			"example": {
+				"actual_model_record": "nine_slot_etched_ring-magic-lightning_resistance",
+				"actual_model_report": "docs/qa/v103-transactions/first/transactions-report.json",
+				"after_definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"后缀 · 护雷 T1：闪电抗性 +11%"
+					],
+					"base_id": "nine_slot_etched_ring",
+					"base_name": "纹刻指环",
+					"description": "最大生命 +4，最大魔力 +2。\n后缀 · 护雷 T1：闪电抗性 +11%",
+					"effects": [],
+					"id": "gear_000004",
+					"item_level": 30.0,
+					"name": "魔法 · 纹刻指环",
+					"rarity": "magic",
+					"size": "(1, 1)",
+					"slot": "ring",
+					"stats": {
+						"lightning_resistance": 0.11,
+						"max_health": 4.0,
+						"max_mana": 2.0
+					}
+				},
+				"after_instance": {
+					"affixes": [
+						{
+							"id": "ring_stormward",
+							"tier": 1,
+							"value": 11
+						}
+					],
+					"base_id": "nine_slot_etched_ring",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "magic"
+				},
+				"balance_after": 0,
+				"balance_before": 16,
+				"before_definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"前缀 · 坚生 T1：最大生命 +4",
+						"后缀 · 重创 T2：全局暴击伤害倍率 +9个百分点"
+					],
+					"base_id": "nine_slot_etched_ring",
+					"base_name": "纹刻指环",
+					"description": "最大生命 +4，最大魔力 +2。\n前缀 · 坚生 T1：最大生命 +4\n后缀 · 重创 T2：全局暴击伤害倍率 +9个百分点",
+					"effects": [],
+					"id": "gear_000004",
+					"item_level": 30.0,
+					"name": "魔法 · 纹刻指环",
+					"rarity": "magic",
+					"size": "(1, 1)",
+					"slot": "ring",
+					"stats": {
+						"crit_multiplier_add": 0.09,
+						"max_health": 8.0,
+						"max_mana": 2.0
+					}
+				},
+				"equipped_snapshot": "docs/qa/v103-transactions/first/nine_slot_etched_ring-magic-lightning_resistance.save",
+				"full_candidate_valid": true,
+				"generation": {
+					"pool": "build_nine_slot_v51",
+					"seed": 103006,
+					"source": {
+						"affixes": [
+							{
+								"id": "nine_slot_prefix_vitality",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "global_critical_multiplier",
+								"tier": 2,
+								"value": 9
+							}
+						],
+						"base_id": "nine_slot_etched_ring",
+						"id": "gear_000004",
+						"item_level": 30,
+						"rarity": "magic"
+					}
+				},
+				"profiles": {
+					"after": {
+						"base_cap": 0.75,
+						"effective_resistances": {
+							"cold": 0.0,
+							"fire": 0.0,
+							"lightning": 0.11
+						},
+						"maximum_resistances": {
+							"cold": 0.75,
+							"fire": 0.75,
+							"lightning": 0.75
+						},
+						"ok": true,
+						"raw_resistances": {
+							"cold": 0.0,
+							"fire": 0.0,
+							"lightning": 0.11
+						},
+						"reason": "",
+						"safety_cap": 0.83
+					},
+					"before": {
+						"base_cap": 0.75,
+						"effective_resistances": {
+							"cold": 0.0,
+							"fire": 0.0,
+							"lightning": 0.0
+						},
+						"maximum_resistances": {
+							"cold": 0.75,
+							"fire": 0.75,
+							"lightning": 0.75
+						},
+						"ok": true,
+						"raw_resistances": {
+							"cold": 0.0,
+							"fire": 0.0,
+							"lightning": 0.0
+						},
+						"reason": "",
+						"safety_cap": 0.83
+					},
+					"chaos_after": {
+						"cap": 0.75,
+						"effective": 0.0,
+						"ok": true,
+						"raw": 0.0,
+						"reason": ""
+					},
+					"chaos_before": {
+						"cap": 0.75,
+						"effective": 0.0,
+						"ok": true,
+						"raw": 0.0,
+						"reason": ""
+					}
+				},
+				"quote": {
+					"code": "",
+					"consumes_item": false,
+					"cost": {
+						"calibration_shard": 16
+					},
+					"handle": "-9223370584417630771:2",
+					"item_id": "gear_000004",
+					"materials": {},
+					"ok": true,
+					"operation": "targeted_reforge_lightning_resistance",
+					"reason": "",
+					"revision": 0,
+					"rules_version": "original-targeted-reforge-v1-affix27",
+					"source_instance": {
+						"affixes": [
+							{
+								"id": "nine_slot_prefix_vitality",
+								"tier": 1,
+								"value": 4
+							},
+							{
+								"id": "global_critical_multiplier",
+								"tier": 2,
+								"value": 9
+							}
+						],
+						"base_id": "nine_slot_etched_ring",
+						"id": "gear_000004",
+						"item_level": 30,
+						"rarity": "magic"
+					}
+				},
+				"revision_after": 1,
+				"revision_before": 0,
+				"save_version": 53,
+				"source": {
+					"affixes": [
+						{
+							"id": "nine_slot_prefix_vitality",
+							"tier": 1,
+							"value": 4
+						},
+						{
+							"id": "global_critical_multiplier",
+							"tier": 2,
+							"value": 9
+						}
+					],
+					"base_id": "nine_slot_etched_ring",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "magic"
+				},
+				"source_snapshot": "docs/qa/v103-transactions/first/nine_slot_etched_ring-magic-lightning_resistance-before.save",
+				"transaction_result": {
+					"code": "",
+					"cost": {
+						"calibration_shard": 16
+					},
+					"item_id": "gear_000004",
+					"materials": {},
+					"ok": true,
+					"operation": "targeted_reforge_lightning_resistance",
+					"reason": "",
+					"revision": 1
+				}
+			},
+			"example_note": "这是实际模型报价、确认和原子保存的已完成示例。源装备由真实目录生成，费用与余额来自合法源/结果存档；保留原UID，全部词缀重新生成。模型报告覆盖重新穿戴与重载，不预告玩家下一次随机结果。",
+			"kind": "operation",
+			"name": "定向重铸 · 闪电抗性",
+			"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+			"rule": {
+				"consumes_item": false,
+				"cost": {
+					"magic": 16,
+					"rare": 40
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的闪电抗性词缀。",
+				"label": "定向重铸",
+				"operation": "targeted_reforge_lightning_resistance",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"rules_version": "original-targeted-reforge-v1-affix27",
+				"target_id": "lightning_resistance",
+				"target_label": "闪电抗性",
+				"targeted": true
+			},
+			"rules_version": "original-targeted-reforge-v1-affix27",
+			"selection_note": "先按目录正权重抽取可完成的目标家族与阶级，再从合法池补足；保持稀有度，不保留原词缀，也不保证高阶或更强。",
+			"target_family_ids": [
+				"stormward",
+				"ring_stormward"
+			],
+			"target_id": "lightning_resistance",
+			"target_label": "闪电抗性",
+			"targeted": true
+		},
+		"targeted_reforge_chaos_resistance": {
+			"catalog_vocabulary": 51,
+			"cost_by_rarity": {
+				"magic": 16,
+				"rare": 40
+			},
+			"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的混沌抗性词缀。",
+			"eligibility": [
+				{
+					"base_id": "nine_slot_etched_ring",
+					"minimum_item_level_by_rarity": {
+						"magic": 1,
+						"rare": 1
+					},
+					"target_family_ids": [
+						"ring_voidward"
+					],
+					"target_tiers_at_maximum_level": [
+						{
+							"group": "chaos_resistance",
+							"id": "ring_voidward",
+							"kind": "suffix",
+							"max": 12,
+							"min": 8,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "chaos_resistance",
+							"id": "ring_voidward",
+							"kind": "suffix",
+							"max": 18,
+							"min": 13,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "chaos_resistance",
+							"id": "ring_voidward",
+							"kind": "suffix",
+							"max": 25,
+							"min": 19,
+							"tier": 3,
+							"weight": 30
+						}
+					]
+				}
+			],
+			"eligibility_maximum_item_level": 30,
+			"eligibility_note": "仅下列底材存在可达合法结果；物品等级仍限制阶级，最终以当前装备报价为准。普通、固定、已穿戴装备不可用；无合法目标不收费。",
+			"eligible_base_ids": [
+				"nine_slot_etched_ring"
+			],
+			"evidence": {
+				"facts": [
+					{
+						"key": "fire-raw_resistances",
+						"label": "火焰原始抗性",
+						"percent": true,
+						"value": 0.0
+					},
+					{
+						"key": "fire-effective_resistances",
+						"label": "火焰有效抗性",
+						"percent": true,
+						"value": 0.0
+					},
+					{
+						"key": "fire-maximum_resistances",
+						"label": "火焰有效上限",
+						"percent": true,
+						"value": 0.75
+					},
+					{
+						"key": "cold-raw_resistances",
+						"label": "冰霜原始抗性",
+						"percent": true,
+						"value": 0.12
+					},
+					{
+						"key": "cold-effective_resistances",
+						"label": "冰霜有效抗性",
+						"percent": true,
+						"value": 0.12
+					},
+					{
+						"key": "cold-maximum_resistances",
+						"label": "冰霜有效上限",
+						"percent": true,
+						"value": 0.75
+					},
+					{
+						"key": "lightning-raw_resistances",
+						"label": "闪电原始抗性",
+						"percent": true,
+						"value": 0.0
+					},
+					{
+						"key": "lightning-effective_resistances",
+						"label": "闪电有效抗性",
+						"percent": true,
+						"value": 0.0
+					},
+					{
+						"key": "lightning-maximum_resistances",
+						"label": "闪电有效上限",
+						"percent": true,
+						"value": 0.75
+					},
+					{
+						"key": "chaos-raw",
+						"label": "混沌原始抗性",
+						"percent": true,
+						"value": 0.08
+					},
+					{
+						"key": "chaos-effective",
+						"label": "混沌有效抗性",
+						"percent": true,
+						"value": 0.08
+					},
+					{
+						"key": "chaos-cap",
+						"label": "混沌有效上限",
+						"percent": true,
+						"value": 0.75
+					}
+				],
+				"links": [
+					{
+						"href": "../RESISTANCE_TARGETED_REFORGE.zh-CN.md",
+						"label": "四抗规则与阶级、后缀取舍"
+					},
+					{
+						"href": "../qa/v103-reference/README.md",
+						"label": "本批范围与原始凭据"
+					},
+					{
+						"href": "../qa/v103-transactions/first/transactions-report.json",
+						"label": "真实事务报告"
+					},
+					{
+						"href": "../qa/v103-transactions/first/nine_slot_etched_ring-rare-chaos_resistance-before.save",
+						"label": "合法源存档"
+					},
+					{
+						"href": "../qa/v103-transactions/first/nine_slot_etched_ring-rare-chaos_resistance.save",
+						"label": "保存并穿戴后的存档"
+					}
+				],
+				"scope": "以下数值来自同一真实模型事务的保存、穿戴与重载结果。源装备在背包，重铸时不直接改变角色防御；这些是穿戴新装备后的完整角色值，不是只归因于该词缀的提升量。百分比为原始比例×100；本工艺不提高最大抗性，也不保证更强。",
+				"title": "实际保存后重新穿戴的角色抗性"
+			},
+			"example": {
+				"actual_model_record": "nine_slot_etched_ring-rare-chaos_resistance",
+				"actual_model_report": "docs/qa/v103-transactions/first/transactions-report.json",
+				"after_definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"后缀 · 护虚 T1：混沌抗性 +8%",
+						"后缀 · 轻步 T1：移动速度提高 +2%",
+						"后缀 · 护寒 T1：冰霜抗性 +12%",
+						"前缀 · 澄意 T1：最大魔力 +3",
+						"前缀 · 坚生 T2：最大生命 +7"
+					],
+					"base_id": "nine_slot_etched_ring",
+					"base_name": "纹刻指环",
+					"description": "最大生命 +4，最大魔力 +2。\n后缀 · 护虚 T1：混沌抗性 +8%\n后缀 · 轻步 T1：移动速度提高 +2%\n后缀 · 护寒 T1：冰霜抗性 +12%\n前缀 · 澄意 T1：最大魔力 +3\n前缀 · 坚生 T2：最大生命 +7",
+					"effects": [],
+					"id": "gear_000004",
+					"item_level": 30.0,
+					"name": "稀有 · 纹刻指环",
+					"rarity": "rare",
+					"size": "(1, 1)",
+					"slot": "ring",
+					"stats": {
+						"chaos_resistance": 0.08,
+						"cold_resistance": 0.12,
+						"max_health": 11.0,
+						"max_mana": 5.0,
+						"move_speed_increased": 0.02
+					}
+				},
+				"after_instance": {
+					"affixes": [
+						{
+							"id": "ring_voidward",
+							"tier": 1,
+							"value": 8
+						},
+						{
+							"id": "nine_slot_suffix_stride",
+							"tier": 1,
+							"value": 2
+						},
+						{
+							"id": "ring_rimeward",
+							"tier": 1,
+							"value": 12
+						},
+						{
+							"id": "nine_slot_prefix_clarity",
+							"tier": 1,
+							"value": 3
+						},
+						{
+							"id": "nine_slot_prefix_vitality",
+							"tier": 2,
+							"value": 7
+						}
+					],
+					"base_id": "nine_slot_etched_ring",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "rare"
+				},
+				"balance_after": 0,
+				"balance_before": 40,
+				"before_definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"前缀 · 坚生 T1：最大生命 +6",
+						"前缀 · 澄意 T1：最大魔力 +3",
+						"前缀 · 灵汲 T2：攻击伤害偷取为魔力 +0.23%",
+						"后缀 · 护火 T1：火焰抗性 +11%",
+						"后缀 · 耐守 T1：最大生命 +3",
+						"后缀 · 轻步 T1：移动速度提高 +2%"
+					],
+					"base_id": "nine_slot_etched_ring",
+					"base_name": "纹刻指环",
+					"description": "最大生命 +4，最大魔力 +2。\n前缀 · 坚生 T1：最大生命 +6\n前缀 · 澄意 T1：最大魔力 +3\n前缀 · 灵汲 T2：攻击伤害偷取为魔力 +0.23%\n后缀 · 护火 T1：火焰抗性 +11%\n后缀 · 耐守 T1：最大生命 +3\n后缀 · 轻步 T1：移动速度提高 +2%",
+					"effects": [],
+					"id": "gear_000004",
+					"item_level": 30.0,
+					"name": "稀有 · 纹刻指环",
+					"rarity": "rare",
+					"size": "(1, 1)",
+					"slot": "ring",
+					"stats": {
+						"attack_mana_leech": 0.0023,
+						"fire_resistance": 0.11,
+						"max_health": 13.0,
+						"max_mana": 5.0,
+						"move_speed_increased": 0.02
+					}
+				},
+				"equipped_snapshot": "docs/qa/v103-transactions/first/nine_slot_etched_ring-rare-chaos_resistance.save",
+				"full_candidate_valid": true,
+				"generation": {
+					"pool": "build_nine_slot_v51",
+					"seed": 103008,
+					"source": {
+						"affixes": [
+							{
+								"id": "nine_slot_prefix_vitality",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "nine_slot_prefix_clarity",
+								"tier": 1,
+								"value": 3
+							},
+							{
+								"id": "attack_mana_leech",
+								"tier": 2,
+								"value": 23
+							},
+							{
+								"id": "ring_emberward",
+								"tier": 1,
+								"value": 11
+							},
+							{
+								"id": "nine_slot_suffix_endurance",
+								"tier": 1,
+								"value": 3
+							},
+							{
+								"id": "nine_slot_suffix_stride",
+								"tier": 1,
+								"value": 2
+							}
+						],
+						"base_id": "nine_slot_etched_ring",
+						"id": "gear_000004",
+						"item_level": 30,
+						"rarity": "rare"
+					}
+				},
+				"profiles": {
+					"after": {
+						"base_cap": 0.75,
+						"effective_resistances": {
+							"cold": 0.12,
+							"fire": 0.0,
+							"lightning": 0.0
+						},
+						"maximum_resistances": {
+							"cold": 0.75,
+							"fire": 0.75,
+							"lightning": 0.75
+						},
+						"ok": true,
+						"raw_resistances": {
+							"cold": 0.12,
+							"fire": 0.0,
+							"lightning": 0.0
+						},
+						"reason": "",
+						"safety_cap": 0.83
+					},
+					"before": {
+						"base_cap": 0.75,
+						"effective_resistances": {
+							"cold": 0.0,
+							"fire": 0.0,
+							"lightning": 0.0
+						},
+						"maximum_resistances": {
+							"cold": 0.75,
+							"fire": 0.75,
+							"lightning": 0.75
+						},
+						"ok": true,
+						"raw_resistances": {
+							"cold": 0.0,
+							"fire": 0.0,
+							"lightning": 0.0
+						},
+						"reason": "",
+						"safety_cap": 0.83
+					},
+					"chaos_after": {
+						"cap": 0.75,
+						"effective": 0.08,
+						"ok": true,
+						"raw": 0.08,
+						"reason": ""
+					},
+					"chaos_before": {
+						"cap": 0.75,
+						"effective": 0.0,
+						"ok": true,
+						"raw": 0.0,
+						"reason": ""
+					}
+				},
+				"quote": {
+					"code": "",
+					"consumes_item": false,
+					"cost": {
+						"calibration_shard": 40
+					},
+					"handle": "-9223370234528791095:2",
+					"item_id": "gear_000004",
+					"materials": {},
+					"ok": true,
+					"operation": "targeted_reforge_chaos_resistance",
+					"reason": "",
+					"revision": 0,
+					"rules_version": "original-targeted-reforge-v1-affix27",
+					"source_instance": {
+						"affixes": [
+							{
+								"id": "nine_slot_prefix_vitality",
+								"tier": 1,
+								"value": 6
+							},
+							{
+								"id": "nine_slot_prefix_clarity",
+								"tier": 1,
+								"value": 3
+							},
+							{
+								"id": "attack_mana_leech",
+								"tier": 2,
+								"value": 23
+							},
+							{
+								"id": "ring_emberward",
+								"tier": 1,
+								"value": 11
+							},
+							{
+								"id": "nine_slot_suffix_endurance",
+								"tier": 1,
+								"value": 3
+							},
+							{
+								"id": "nine_slot_suffix_stride",
+								"tier": 1,
+								"value": 2
+							}
+						],
+						"base_id": "nine_slot_etched_ring",
+						"id": "gear_000004",
+						"item_level": 30,
+						"rarity": "rare"
+					}
+				},
+				"revision_after": 1,
+				"revision_before": 0,
+				"save_version": 53,
+				"source": {
+					"affixes": [
+						{
+							"id": "nine_slot_prefix_vitality",
+							"tier": 1,
+							"value": 6
+						},
+						{
+							"id": "nine_slot_prefix_clarity",
+							"tier": 1,
+							"value": 3
+						},
+						{
+							"id": "attack_mana_leech",
+							"tier": 2,
+							"value": 23
+						},
+						{
+							"id": "ring_emberward",
+							"tier": 1,
+							"value": 11
+						},
+						{
+							"id": "nine_slot_suffix_endurance",
+							"tier": 1,
+							"value": 3
+						},
+						{
+							"id": "nine_slot_suffix_stride",
+							"tier": 1,
+							"value": 2
+						}
+					],
+					"base_id": "nine_slot_etched_ring",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "rare"
+				},
+				"source_snapshot": "docs/qa/v103-transactions/first/nine_slot_etched_ring-rare-chaos_resistance-before.save",
+				"transaction_result": {
+					"code": "",
+					"cost": {
+						"calibration_shard": 40
+					},
+					"item_id": "gear_000004",
+					"materials": {},
+					"ok": true,
+					"operation": "targeted_reforge_chaos_resistance",
+					"reason": "",
+					"revision": 1
+				}
+			},
+			"example_note": "这是实际模型报价、确认和原子保存的已完成示例。源装备由真实目录生成，费用与余额来自合法源/结果存档；保留原UID，全部词缀重新生成。模型报告覆盖重新穿戴与重载，不预告玩家下一次随机结果。",
+			"kind": "operation",
+			"name": "定向重铸 · 混沌抗性",
+			"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+			"rule": {
+				"consumes_item": false,
+				"cost": {
+					"magic": 16,
+					"rare": 40
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的混沌抗性词缀。",
+				"label": "定向重铸",
+				"operation": "targeted_reforge_chaos_resistance",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"rules_version": "original-targeted-reforge-v1-affix27",
+				"target_id": "chaos_resistance",
+				"target_label": "混沌抗性",
+				"targeted": true
+			},
+			"rules_version": "original-targeted-reforge-v1-affix27",
+			"selection_note": "先按目录正权重抽取可完成的目标家族与阶级，再从合法池补足；保持稀有度，不保留原词缀，也不保证高阶或更强。",
+			"target_family_ids": [
+				"ring_voidward"
+			],
+			"target_id": "chaos_resistance",
+			"target_label": "混沌抗性",
+			"targeted": true
 		}
 	},
 	"currencies": {

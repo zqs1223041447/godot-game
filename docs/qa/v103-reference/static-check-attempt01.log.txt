@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/a51485f153de/v103-resistance-reforge/docs/qa/v103-reference/check-reference.py", line 170, in <module>
+    if __name__ == '__main__': main()
+                               ^^^^^^
+  File "/workspace/scratch/a51485f153de/v103-resistance-reforge/docs/qa/v103-reference/check-reference.py", line 85, in main
+    assert {k for k in before_records if before_records[k] != after_records[k]} == changed
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

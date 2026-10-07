@@ -783,9 +783,7 @@ static func crafting_examples() -> Dictionary:
 		"maximum": Canonical.ShardCatalog.INVENTORY_LIMIT, "rules": metadata,
 		"max_revision": Canonical.Rules.MAX_SERIAL, "save_version": Canonical.Rules.VERSION}}
 	for operation: String in Craft.operation_ids():
-		var instance: Dictionary = _local_instance(["whetstone_edge"], "magic")
-		if Craft.Targeted.operation_ids().has(operation) and operation != "targeted_reforge_damage":
-			instance = _local_instance(["global_critical_chance"], "magic", "wayglass_token")
+		var instance: Dictionary = _crafting_example_instance(operation)
 		instance.id = "gear_000001"
 		if operation == "enchant": instance.rarity = "normal"; instance.affixes = []
 		var model := Canonical.new()
@@ -822,6 +820,18 @@ static func crafting_examples() -> Dictionary:
 		if presentation.get("targeted", false):
 			result[operation].merge(_targeted_crafting_constraints(operation), true)
 	return result
+
+
+## The four resistance targets need a legal resistance-bearing base. Keep all
+## historical operation witnesses exact rather than rerolling their examples.
+static func _crafting_example_instance(operation: String) -> Dictionary:
+	if operation in ["targeted_reforge_fire_resistance", "targeted_reforge_cold_resistance",
+		"targeted_reforge_lightning_resistance", "targeted_reforge_chaos_resistance"]:
+		return _crafting_probe_instance("nine_slot_etched_ring", 16, "magic")
+	var instance: Dictionary = _local_instance(["whetstone_edge"], "magic")
+	if Craft.Targeted.operation_ids().has(operation) and operation != "targeted_reforge_damage":
+		instance = _local_instance(["global_critical_chance"], "magic", "wayglass_token")
+	return instance
 
 
 ## Eligibility is proven by production quotes for legal catalog instances,

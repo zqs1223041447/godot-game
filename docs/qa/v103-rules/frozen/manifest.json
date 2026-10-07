@@ -1,0 +1,72 @@
+{
+  "baseline_commit": "b7d98c5b94c2c39f6f258835b28cfc32c4cd34d9",
+  "comparison": "Typed var_to_bytes equality for original four targeted operations and six original operations. Frozen rule sources; unchanged shared dependency closure is hash-guarded.",
+  "frozen": [
+    {
+      "original_path": "scripts/items/targeted_reforge_rules.gd",
+      "path": "docs/qa/v103-rules/frozen/targeted_reforge_rules.gd",
+      "source_sha256": "c0aab3ecf3bc7f006ac8d10865e373c402a1abda21f1a52fdc3166f572f1c7ad",
+      "transformed_sha256": "a8dde579755448feae62c2da67562fb8eaff6fc864ead515cffd4f1d9cf7e391"
+    },
+    {
+      "original_path": "scripts/items/crafting_rules.gd",
+      "path": "docs/qa/v103-rules/frozen/crafting_rules.gd",
+      "source_sha256": "553ac091068d50cbb2fcf0f74e779dd0078ec00abcbc7c5c76e5bc8128576249",
+      "transformed_sha256": "493289c0114770e14ba20f13e398eeda02a8002b53b7b209dff376c376d9b530"
+    }
+  ],
+  "shared_unchanged_dependencies": [
+    {
+      "path": "scripts/combat/damage_resolver.gd",
+      "sha256": "720dc69a7446334e8aec3ac15bdf7c1717fa7b96db5657e0c9622513121a4e23"
+    },
+    {
+      "path": "scripts/combat/hit_penetration_rules.gd",
+      "sha256": "6b0733c563548a9034cd5169b1736287cbffc4b40a14cdf71f37a729c377fc88"
+    },
+    {
+      "path": "scripts/items/build_affix_profile.gd",
+      "sha256": "325c970baa227ad7ad1a1f815c63a60825d087918310cfb12b7435a655d4b7be"
+    },
+    {
+      "path": "scripts/items/chaos_resistance_affix_profile.gd",
+      "sha256": "2f3f4c8cdafd76db036c161b2b9268516de5cb04ae0fd64797496ceb62d809a8"
+    },
+    {
+      "path": "scripts/items/crafting_expansion_rules.gd",
+      "sha256": "b690c538a2274b2451f2caa195d30ce0f670284a6b718959c677f0ed30ad2eff"
+    },
+    {
+      "path": "scripts/items/defense_rating_affix_profile.gd",
+      "sha256": "bd2782e04a18ab1fde0c40ee852fa14b0848f6e6d177356764d53b2e0171f215"
+    },
+    {
+      "path": "scripts/items/elemental_defense_affix_profile.gd",
+      "sha256": "0e7eb38fddff3eea5a488a31aaef90bf77b9c8259bc38eaee090ac92f1eec113"
+    },
+    {
+      "path": "scripts/items/equipment_catalog.gd",
+      "sha256": "fa616367c66f7048317eac29feed3e607a610c9d47e96aa7da4e9261fa0dd6ea"
+    },
+    {
+      "path": "scripts/items/forgeblade_profile.gd",
+      "sha256": "9e6c595b23acdbb7edcc88c71fc14eb6e07379ce04436ffe07ea0f5e4693fe14"
+    },
+    {
+      "path": "scripts/items/glove_ring_affix_profile.gd",
+      "sha256": "be84a134158ccdd766e01b6f78c5e7bfe19f8483aeb3f3523c73ff671fdd3166"
+    },
+    {
+      "path": "scripts/items/nine_slot_equipment_profile.gd",
+      "sha256": "4138bfd9c5229f40566a7ebde21c5552e3fce26c5ce0e306b2a66688fb5a2801"
+    },
+    {
+      "path": "scripts/items/weapon_local_rules.gd",
+      "sha256": "73e4308828e856a741ef00386d33150a008bdb3f07ef31a031a204d71fe93b8d"
+    },
+    {
+      "path": "scripts/mechanics/defense_rules.gd",
+      "sha256": "a4d88c005dfd27fe6408e86ea9b96a34fe01c786c24c8965113dd20498224226"
+    }
+  ]
+}

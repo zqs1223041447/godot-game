@@ -1,0 +1,4497 @@
+{
+	"boundaries": [
+		{
+			"operation": "targeted_reforge_fire_resistance",
+			"passed": true
+		},
+		{
+			"operation": "targeted_reforge_cold_resistance",
+			"passed": true
+		},
+		{
+			"operation": "targeted_reforge_lightning_resistance",
+			"passed": true
+		},
+		{
+			"operation": "targeted_reforge_chaos_resistance",
+			"passed": true
+		}
+	],
+	"checks": 1683,
+	"failure_count": 0,
+	"failures": [],
+	"full_bag": {
+		"balance_after": 258,
+		"balance_before": 298,
+		"fillers": 198
+	},
+	"inventory_dialog": {
+		"balance": 60,
+		"confirmation": "重铸「稀有 · 纹刻指环」？\n消耗校准碎片 40 枚。\n保证至少一个「混沌抗性」方向的合法词缀。\n全部原词缀将被替换，其他词缀随机，不保证高阶或更高数值。",
+		"crafted": {
+			"affixes": [
+				{
+					"id": "ring_voidward",
+					"tier": 1,
+					"value": 8
+				},
+				{
+					"id": "nine_slot_suffix_stride",
+					"tier": 1,
+					"value": 2
+				},
+				{
+					"id": "ring_rimeward",
+					"tier": 1,
+					"value": 12
+				},
+				{
+					"id": "nine_slot_prefix_clarity",
+					"tier": 1,
+					"value": 3
+				},
+				{
+					"id": "nine_slot_prefix_vitality",
+					"tier": 2,
+					"value": 7
+				}
+			],
+			"base_id": "nine_slot_etched_ring",
+			"id": "gear_000004",
+			"item_level": 30,
+			"rarity": "rare"
+		},
+		"generation": {
+			"pool": "build_nine_slot_v51",
+			"seed": 103008,
+			"source": {
+				"affixes": [
+					{
+						"id": "nine_slot_prefix_vitality",
+						"tier": 1,
+						"value": 6
+					},
+					{
+						"id": "nine_slot_prefix_clarity",
+						"tier": 1,
+						"value": 3
+					},
+					{
+						"id": "attack_mana_leech",
+						"tier": 2,
+						"value": 23
+					},
+					{
+						"id": "ring_emberward",
+						"tier": 1,
+						"value": 11
+					},
+					{
+						"id": "nine_slot_suffix_endurance",
+						"tier": 1,
+						"value": 3
+					},
+					{
+						"id": "nine_slot_suffix_stride",
+						"tier": 1,
+						"value": 2
+					}
+				],
+				"base_id": "nine_slot_etched_ring",
+				"id": "gear_000004",
+				"item_level": 30,
+				"rarity": "rare"
+			}
+		},
+		"operation": "targeted_reforge_chaos_resistance",
+		"source": {
+			"affixes": [
+				{
+					"id": "nine_slot_prefix_vitality",
+					"tier": 1,
+					"value": 6
+				},
+				{
+					"id": "nine_slot_prefix_clarity",
+					"tier": 1,
+					"value": 3
+				},
+				{
+					"id": "attack_mana_leech",
+					"tier": 2,
+					"value": 23
+				},
+				{
+					"id": "ring_emberward",
+					"tier": 1,
+					"value": 11
+				},
+				{
+					"id": "nine_slot_suffix_endurance",
+					"tier": 1,
+					"value": 3
+				},
+				{
+					"id": "nine_slot_suffix_stride",
+					"tier": 1,
+					"value": 2
+				}
+			],
+			"base_id": "nine_slot_etched_ring",
+			"id": "gear_000004",
+			"item_level": 30,
+			"rarity": "rare"
+		}
+	},
+	"metadata": [
+		{
+			"base": "nine_slot_etched_ring",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的火焰抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_fire_resistance",
+				"reason": "定向重铸仅适用于魔法或稀有装备。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "fire_resistance",
+				"target_label": "火焰抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_fire_resistance",
+			"rarity": "normal"
+		},
+		{
+			"base": "nine_slot_etched_ring",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的冰霜抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_cold_resistance",
+				"reason": "定向重铸仅适用于魔法或稀有装备。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "cold_resistance",
+				"target_label": "冰霜抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_cold_resistance",
+			"rarity": "normal"
+		},
+		{
+			"base": "nine_slot_etched_ring",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的闪电抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_lightning_resistance",
+				"reason": "定向重铸仅适用于魔法或稀有装备。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "lightning_resistance",
+				"target_label": "闪电抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_lightning_resistance",
+			"rarity": "normal"
+		},
+		{
+			"base": "nine_slot_etched_ring",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的混沌抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_chaos_resistance",
+				"reason": "定向重铸仅适用于魔法或稀有装备。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "chaos_resistance",
+				"target_label": "混沌抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_chaos_resistance",
+			"rarity": "normal"
+		},
+		{
+			"base": "nine_slot_etched_ring",
+			"entry": {
+				"available": true,
+				"cost": {
+					"calibration_shard": 16
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的火焰抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_fire_resistance",
+				"reason": "",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "fire_resistance",
+				"target_label": "火焰抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_fire_resistance",
+			"rarity": "magic"
+		},
+		{
+			"base": "nine_slot_etched_ring",
+			"entry": {
+				"available": true,
+				"cost": {
+					"calibration_shard": 16
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的冰霜抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_cold_resistance",
+				"reason": "",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "cold_resistance",
+				"target_label": "冰霜抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_cold_resistance",
+			"rarity": "magic"
+		},
+		{
+			"base": "nine_slot_etched_ring",
+			"entry": {
+				"available": true,
+				"cost": {
+					"calibration_shard": 16
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的闪电抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_lightning_resistance",
+				"reason": "",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "lightning_resistance",
+				"target_label": "闪电抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_lightning_resistance",
+			"rarity": "magic"
+		},
+		{
+			"base": "nine_slot_etched_ring",
+			"entry": {
+				"available": true,
+				"cost": {
+					"calibration_shard": 16
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的混沌抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_chaos_resistance",
+				"reason": "",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "chaos_resistance",
+				"target_label": "混沌抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_chaos_resistance",
+			"rarity": "magic"
+		},
+		{
+			"base": "nine_slot_etched_ring",
+			"entry": {
+				"available": true,
+				"cost": {
+					"calibration_shard": 40
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的火焰抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_fire_resistance",
+				"reason": "",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "fire_resistance",
+				"target_label": "火焰抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_fire_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "nine_slot_etched_ring",
+			"entry": {
+				"available": true,
+				"cost": {
+					"calibration_shard": 40
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的冰霜抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_cold_resistance",
+				"reason": "",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "cold_resistance",
+				"target_label": "冰霜抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_cold_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "nine_slot_etched_ring",
+			"entry": {
+				"available": true,
+				"cost": {
+					"calibration_shard": 40
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的闪电抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_lightning_resistance",
+				"reason": "",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "lightning_resistance",
+				"target_label": "闪电抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_lightning_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "nine_slot_etched_ring",
+			"entry": {
+				"available": true,
+				"cost": {
+					"calibration_shard": 40
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的混沌抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_chaos_resistance",
+				"reason": "",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "chaos_resistance",
+				"target_label": "混沌抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_chaos_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "nine_slot_trail_boots",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的火焰抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_fire_resistance",
+				"reason": "此底材与物品等级没有可用的火焰抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "fire_resistance",
+				"target_label": "火焰抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_fire_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "nine_slot_trail_boots",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的冰霜抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_cold_resistance",
+				"reason": "此底材与物品等级没有可用的冰霜抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "cold_resistance",
+				"target_label": "冰霜抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_cold_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "nine_slot_trail_boots",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的闪电抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_lightning_resistance",
+				"reason": "此底材与物品等级没有可用的闪电抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "lightning_resistance",
+				"target_label": "闪电抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_lightning_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "nine_slot_trail_boots",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的混沌抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_chaos_resistance",
+				"reason": "此底材与物品等级没有可用的混沌抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "chaos_resistance",
+				"target_label": "混沌抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_chaos_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "nine_slot_folded_belt",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的火焰抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_fire_resistance",
+				"reason": "此底材与物品等级没有可用的火焰抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "fire_resistance",
+				"target_label": "火焰抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_fire_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "nine_slot_folded_belt",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的冰霜抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_cold_resistance",
+				"reason": "此底材与物品等级没有可用的冰霜抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "cold_resistance",
+				"target_label": "冰霜抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_cold_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "nine_slot_folded_belt",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的闪电抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_lightning_resistance",
+				"reason": "此底材与物品等级没有可用的闪电抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "lightning_resistance",
+				"target_label": "闪电抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_lightning_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "nine_slot_folded_belt",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的混沌抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_chaos_resistance",
+				"reason": "此底材与物品等级没有可用的混沌抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "chaos_resistance",
+				"target_label": "混沌抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_chaos_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "nine_slot_threaded_gloves",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的火焰抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_fire_resistance",
+				"reason": "此底材与物品等级没有可用的火焰抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "fire_resistance",
+				"target_label": "火焰抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_fire_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "nine_slot_threaded_gloves",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的冰霜抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_cold_resistance",
+				"reason": "此底材与物品等级没有可用的冰霜抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "cold_resistance",
+				"target_label": "冰霜抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_cold_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "nine_slot_threaded_gloves",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的闪电抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_lightning_resistance",
+				"reason": "此底材与物品等级没有可用的闪电抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "lightning_resistance",
+				"target_label": "闪电抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_lightning_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "nine_slot_threaded_gloves",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的混沌抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_chaos_resistance",
+				"reason": "此底材与物品等级没有可用的混沌抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "chaos_resistance",
+				"target_label": "混沌抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_chaos_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "nine_slot_slate_helmet",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的火焰抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_fire_resistance",
+				"reason": "此底材与物品等级没有可用的火焰抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "fire_resistance",
+				"target_label": "火焰抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_fire_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "nine_slot_slate_helmet",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的冰霜抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_cold_resistance",
+				"reason": "此底材与物品等级没有可用的冰霜抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "cold_resistance",
+				"target_label": "冰霜抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_cold_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "nine_slot_slate_helmet",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的闪电抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_lightning_resistance",
+				"reason": "此底材与物品等级没有可用的闪电抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "lightning_resistance",
+				"target_label": "闪电抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_lightning_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "nine_slot_slate_helmet",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的混沌抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_chaos_resistance",
+				"reason": "此底材与物品等级没有可用的混沌抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "chaos_resistance",
+				"target_label": "混沌抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_chaos_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "cinder_reed",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的火焰抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_fire_resistance",
+				"reason": "此底材与物品等级没有可用的火焰抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "fire_resistance",
+				"target_label": "火焰抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_fire_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "cinder_reed",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的冰霜抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_cold_resistance",
+				"reason": "此底材与物品等级没有可用的冰霜抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "cold_resistance",
+				"target_label": "冰霜抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_cold_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "cinder_reed",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的闪电抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_lightning_resistance",
+				"reason": "此底材与物品等级没有可用的闪电抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "lightning_resistance",
+				"target_label": "闪电抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_lightning_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "cinder_reed",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的混沌抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_chaos_resistance",
+				"reason": "此底材与物品等级没有可用的混沌抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "chaos_resistance",
+				"target_label": "混沌抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_chaos_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "gale_spindle",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的火焰抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_fire_resistance",
+				"reason": "此底材与物品等级没有可用的火焰抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "fire_resistance",
+				"target_label": "火焰抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_fire_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "gale_spindle",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的冰霜抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_cold_resistance",
+				"reason": "此底材与物品等级没有可用的冰霜抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "cold_resistance",
+				"target_label": "冰霜抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_cold_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "gale_spindle",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的闪电抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_lightning_resistance",
+				"reason": "此底材与物品等级没有可用的闪电抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "lightning_resistance",
+				"target_label": "闪电抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_lightning_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "gale_spindle",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的混沌抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_chaos_resistance",
+				"reason": "此底材与物品等级没有可用的混沌抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "chaos_resistance",
+				"target_label": "混沌抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_chaos_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "woven_bastion",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的火焰抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_fire_resistance",
+				"reason": "此底材与物品等级没有可用的火焰抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "fire_resistance",
+				"target_label": "火焰抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_fire_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "woven_bastion",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的冰霜抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_cold_resistance",
+				"reason": "此底材与物品等级没有可用的冰霜抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "cold_resistance",
+				"target_label": "冰霜抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_cold_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "woven_bastion",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的闪电抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_lightning_resistance",
+				"reason": "此底材与物品等级没有可用的闪电抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "lightning_resistance",
+				"target_label": "闪电抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_lightning_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "woven_bastion",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的混沌抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_chaos_resistance",
+				"reason": "此底材与物品等级没有可用的混沌抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "chaos_resistance",
+				"target_label": "混沌抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_chaos_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "tidebound_coat",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的火焰抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_fire_resistance",
+				"reason": "此底材与物品等级没有可用的火焰抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "fire_resistance",
+				"target_label": "火焰抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_fire_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "tidebound_coat",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的冰霜抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_cold_resistance",
+				"reason": "此底材与物品等级没有可用的冰霜抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "cold_resistance",
+				"target_label": "冰霜抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_cold_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "tidebound_coat",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的闪电抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_lightning_resistance",
+				"reason": "此底材与物品等级没有可用的闪电抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "lightning_resistance",
+				"target_label": "闪电抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_lightning_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "tidebound_coat",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的混沌抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_chaos_resistance",
+				"reason": "此底材与物品等级没有可用的混沌抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "chaos_resistance",
+				"target_label": "混沌抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_chaos_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "wayglass_token",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的火焰抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_fire_resistance",
+				"reason": "此底材与物品等级没有可用的火焰抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "fire_resistance",
+				"target_label": "火焰抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_fire_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "wayglass_token",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的冰霜抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_cold_resistance",
+				"reason": "此底材与物品等级没有可用的冰霜抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "cold_resistance",
+				"target_label": "冰霜抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_cold_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "wayglass_token",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的闪电抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_lightning_resistance",
+				"reason": "此底材与物品等级没有可用的闪电抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "lightning_resistance",
+				"target_label": "闪电抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_lightning_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "wayglass_token",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的混沌抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_chaos_resistance",
+				"reason": "此底材与物品等级没有可用的混沌抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "chaos_resistance",
+				"target_label": "混沌抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_chaos_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "pulse_seed",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的火焰抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_fire_resistance",
+				"reason": "此底材与物品等级没有可用的火焰抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "fire_resistance",
+				"target_label": "火焰抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_fire_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "pulse_seed",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的冰霜抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_cold_resistance",
+				"reason": "此底材与物品等级没有可用的冰霜抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "cold_resistance",
+				"target_label": "冰霜抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_cold_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "pulse_seed",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的闪电抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_lightning_resistance",
+				"reason": "此底材与物品等级没有可用的闪电抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "lightning_resistance",
+				"target_label": "闪电抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_lightning_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "pulse_seed",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的混沌抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_chaos_resistance",
+				"reason": "此底材与物品等级没有可用的混沌抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "chaos_resistance",
+				"target_label": "混沌抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_chaos_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "runewood_focus",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的火焰抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_fire_resistance",
+				"reason": "此底材与物品等级没有可用的火焰抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "fire_resistance",
+				"target_label": "火焰抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_fire_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "runewood_focus",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的冰霜抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_cold_resistance",
+				"reason": "此底材与物品等级没有可用的冰霜抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "cold_resistance",
+				"target_label": "冰霜抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_cold_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "runewood_focus",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的闪电抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_lightning_resistance",
+				"reason": "此底材与物品等级没有可用的闪电抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "lightning_resistance",
+				"target_label": "闪电抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_lightning_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "runewood_focus",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的混沌抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_chaos_resistance",
+				"reason": "此底材与物品等级没有可用的混沌抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "chaos_resistance",
+				"target_label": "混沌抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_chaos_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "emberhide_vest",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的火焰抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_fire_resistance",
+				"reason": "定向重铸仅适用于魔法或稀有装备。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "fire_resistance",
+				"target_label": "火焰抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_fire_resistance",
+			"rarity": "normal"
+		},
+		{
+			"base": "emberhide_vest",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的冰霜抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_cold_resistance",
+				"reason": "定向重铸仅适用于魔法或稀有装备。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "cold_resistance",
+				"target_label": "冰霜抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_cold_resistance",
+			"rarity": "normal"
+		},
+		{
+			"base": "emberhide_vest",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的闪电抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_lightning_resistance",
+				"reason": "定向重铸仅适用于魔法或稀有装备。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "lightning_resistance",
+				"target_label": "闪电抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_lightning_resistance",
+			"rarity": "normal"
+		},
+		{
+			"base": "emberhide_vest",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的混沌抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_chaos_resistance",
+				"reason": "定向重铸仅适用于魔法或稀有装备。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "chaos_resistance",
+				"target_label": "混沌抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_chaos_resistance",
+			"rarity": "normal"
+		},
+		{
+			"base": "emberhide_vest",
+			"entry": {
+				"available": true,
+				"cost": {
+					"calibration_shard": 16
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的火焰抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_fire_resistance",
+				"reason": "",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "fire_resistance",
+				"target_label": "火焰抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_fire_resistance",
+			"rarity": "magic"
+		},
+		{
+			"base": "emberhide_vest",
+			"entry": {
+				"available": true,
+				"cost": {
+					"calibration_shard": 16
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的冰霜抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_cold_resistance",
+				"reason": "",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "cold_resistance",
+				"target_label": "冰霜抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_cold_resistance",
+			"rarity": "magic"
+		},
+		{
+			"base": "emberhide_vest",
+			"entry": {
+				"available": true,
+				"cost": {
+					"calibration_shard": 16
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的闪电抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_lightning_resistance",
+				"reason": "",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "lightning_resistance",
+				"target_label": "闪电抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_lightning_resistance",
+			"rarity": "magic"
+		},
+		{
+			"base": "emberhide_vest",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的混沌抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_chaos_resistance",
+				"reason": "此底材与物品等级没有可用的混沌抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "chaos_resistance",
+				"target_label": "混沌抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_chaos_resistance",
+			"rarity": "magic"
+		},
+		{
+			"base": "emberhide_vest",
+			"entry": {
+				"available": true,
+				"cost": {
+					"calibration_shard": 40
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的火焰抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_fire_resistance",
+				"reason": "",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "fire_resistance",
+				"target_label": "火焰抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_fire_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "emberhide_vest",
+			"entry": {
+				"available": true,
+				"cost": {
+					"calibration_shard": 40
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的冰霜抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_cold_resistance",
+				"reason": "",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "cold_resistance",
+				"target_label": "冰霜抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_cold_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "emberhide_vest",
+			"entry": {
+				"available": true,
+				"cost": {
+					"calibration_shard": 40
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的闪电抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_lightning_resistance",
+				"reason": "",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "lightning_resistance",
+				"target_label": "闪电抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_lightning_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "emberhide_vest",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的混沌抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_chaos_resistance",
+				"reason": "此底材与物品等级没有可用的混沌抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "chaos_resistance",
+				"target_label": "混沌抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_chaos_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "ashwood_bow",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的火焰抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_fire_resistance",
+				"reason": "此底材与物品等级没有可用的火焰抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "fire_resistance",
+				"target_label": "火焰抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_fire_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "ashwood_bow",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的冰霜抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_cold_resistance",
+				"reason": "此底材与物品等级没有可用的冰霜抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "cold_resistance",
+				"target_label": "冰霜抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_cold_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "ashwood_bow",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的闪电抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_lightning_resistance",
+				"reason": "此底材与物品等级没有可用的闪电抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "lightning_resistance",
+				"target_label": "闪电抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_lightning_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "ashwood_bow",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的混沌抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_chaos_resistance",
+				"reason": "此底材与物品等级没有可用的混沌抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "chaos_resistance",
+				"target_label": "混沌抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_chaos_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "forgeblade",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的火焰抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_fire_resistance",
+				"reason": "此底材与物品等级没有可用的火焰抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "fire_resistance",
+				"target_label": "火焰抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_fire_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "forgeblade",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的冰霜抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_cold_resistance",
+				"reason": "此底材与物品等级没有可用的冰霜抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "cold_resistance",
+				"target_label": "冰霜抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_cold_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "forgeblade",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的闪电抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_lightning_resistance",
+				"reason": "此底材与物品等级没有可用的闪电抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "lightning_resistance",
+				"target_label": "闪电抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_lightning_resistance",
+			"rarity": "rare"
+		},
+		{
+			"base": "forgeblade",
+			"entry": {
+				"available": false,
+				"cost": {
+
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的混沌抗性词缀。",
+				"label": "定向重铸",
+				"materials": {
+
+				},
+				"operation": "targeted_reforge_chaos_resistance",
+				"reason": "此底材与物品等级没有可用的混沌抗性词缀；装备和碎片均不会消耗。",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "chaos_resistance",
+				"target_label": "混沌抗性",
+				"targeted": true
+			},
+			"operation": "targeted_reforge_chaos_resistance",
+			"rarity": "rare"
+		}
+	],
+	"schema": 53,
+	"sections": {
+		"atomic_transactions": {
+			"checks": 777,
+			"completed": true,
+			"milliseconds": 42856
+		},
+		"full_bag": {
+			"checks": 12,
+			"completed": true,
+			"milliseconds": 3575
+		},
+		"inventory_dialog": {
+			"checks": 19,
+			"completed": true,
+			"milliseconds": 4364
+		},
+		"metadata_matrix": {
+			"checks": 662,
+			"completed": true,
+			"milliseconds": 7154
+		},
+		"rejected_boundaries": {
+			"checks": 213,
+			"completed": true,
+			"milliseconds": 7950
+		}
+	},
+	"transactions": [
+		{
+			"cost": 16,
+			"crafted": {
+				"affixes": [
+					{
+						"id": "emberward",
+						"tier": 3,
+						"value": 24
+					},
+					{
+						"id": "deepwell",
+						"tier": 1,
+						"value": 8
+					}
+				],
+				"base_id": "emberhide_vest",
+				"id": "gear_000004",
+				"item_level": 30,
+				"rarity": "magic"
+			},
+			"generation": {
+				"pool": "defense_v39",
+				"seed": 103000,
+				"source": {
+					"affixes": [
+						{
+							"id": "mistweave",
+							"tier": 2,
+							"value": 332
+						},
+						{
+							"id": "coalglow",
+							"tier": 1,
+							"value": 5
+						}
+					],
+					"base_id": "emberhide_vest",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "magic"
+				}
+			},
+			"name": "emberhide_vest-magic-fire_resistance",
+			"operation": "targeted_reforge_fire_resistance",
+			"presentation": {
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的火焰抗性词缀。",
+				"label": "定向重铸",
+				"operation": "targeted_reforge_fire_resistance",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "fire_resistance",
+				"target_label": "火焰抗性",
+				"targeted": true
+			},
+			"profiles": {
+				"after": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.39,
+						"lightning": 0.0
+					},
+					"maximum_resistances": {
+						"cold": 0.75,
+						"fire": 0.75,
+						"lightning": 0.75
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.39,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"before": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"maximum_resistances": {
+						"cold": 0.75,
+						"fire": 0.75,
+						"lightning": 0.75
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"chaos_after": {
+					"cap": 0.75,
+					"effective": 0.0,
+					"ok": true,
+					"raw": 0.0,
+					"reason": ""
+				},
+				"chaos_before": {
+					"cap": 0.75,
+					"effective": 0.0,
+					"ok": true,
+					"raw": 0.0,
+					"reason": ""
+				}
+			},
+			"quote": {
+				"code": "",
+				"consumes_item": false,
+				"cost": {
+					"calibration_shard": 16
+				},
+				"handle": "-9223371759711943233:2",
+				"item_id": "gear_000004",
+				"materials": {
+
+				},
+				"ok": true,
+				"operation": "targeted_reforge_fire_resistance",
+				"reason": "",
+				"revision": 0,
+				"rules_version": "original-targeted-reforge-v1-affix27",
+				"source_instance": {
+					"affixes": [
+						{
+							"id": "mistweave",
+							"tier": 2,
+							"value": 332
+						},
+						{
+							"id": "coalglow",
+							"tier": 1,
+							"value": 5
+						}
+					],
+					"base_id": "emberhide_vest",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "magic"
+				}
+			},
+			"result": {
+				"code": "",
+				"cost": {
+					"calibration_shard": 16
+				},
+				"item_id": "gear_000004",
+				"materials": {
+
+				},
+				"ok": true,
+				"operation": "targeted_reforge_fire_resistance",
+				"reason": "",
+				"revision": 1
+			},
+			"snapshot_file": "emberhide_vest-magic-fire_resistance.save",
+			"source_crafting_revision": 0,
+			"source_snapshot_file": "emberhide_vest-magic-fire_resistance-before.save"
+		},
+		{
+			"cost": 40,
+			"crafted": {
+				"affixes": [
+					{
+						"id": "emberward",
+						"tier": 2,
+						"value": 16
+					},
+					{
+						"id": "lanternveil",
+						"tier": 2,
+						"value": 12
+					},
+					{
+						"id": "stormward",
+						"tier": 3,
+						"value": 21
+					},
+					{
+						"id": "rootwell",
+						"tier": 2,
+						"value": 22
+					}
+				],
+				"base_id": "emberhide_vest",
+				"id": "gear_000004",
+				"item_level": 30,
+				"rarity": "rare"
+			},
+			"generation": {
+				"pool": "defense_v39",
+				"seed": 103000,
+				"source": {
+					"affixes": [
+						{
+							"id": "mistweave",
+							"tier": 2,
+							"value": 332
+						},
+						{
+							"id": "rootwell",
+							"tier": 1,
+							"value": 14
+						},
+						{
+							"id": "ironhide",
+							"tier": 3,
+							"value": 92
+						},
+						{
+							"id": "trailstep",
+							"tier": 1,
+							"value": 1
+						},
+						{
+							"id": "rimeecho",
+							"tier": 2,
+							"value": 14
+						},
+						{
+							"id": "sparkthread",
+							"tier": 1,
+							"value": 6
+						}
+					],
+					"base_id": "emberhide_vest",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "rare"
+				}
+			},
+			"name": "emberhide_vest-rare-fire_resistance",
+			"operation": "targeted_reforge_fire_resistance",
+			"presentation": {
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的火焰抗性词缀。",
+				"label": "定向重铸",
+				"operation": "targeted_reforge_fire_resistance",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "fire_resistance",
+				"target_label": "火焰抗性",
+				"targeted": true
+			},
+			"profiles": {
+				"after": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.31,
+						"lightning": 0.21
+					},
+					"maximum_resistances": {
+						"cold": 0.75,
+						"fire": 0.75,
+						"lightning": 0.75
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.31,
+						"lightning": 0.21
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"before": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"maximum_resistances": {
+						"cold": 0.75,
+						"fire": 0.75,
+						"lightning": 0.75
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"chaos_after": {
+					"cap": 0.75,
+					"effective": 0.0,
+					"ok": true,
+					"raw": 0.0,
+					"reason": ""
+				},
+				"chaos_before": {
+					"cap": 0.75,
+					"effective": 0.0,
+					"ok": true,
+					"raw": 0.0,
+					"reason": ""
+				}
+			},
+			"quote": {
+				"code": "",
+				"consumes_item": false,
+				"cost": {
+					"calibration_shard": 40
+				},
+				"handle": "-9223371634268699191:2",
+				"item_id": "gear_000004",
+				"materials": {
+
+				},
+				"ok": true,
+				"operation": "targeted_reforge_fire_resistance",
+				"reason": "",
+				"revision": 0,
+				"rules_version": "original-targeted-reforge-v1-affix27",
+				"source_instance": {
+					"affixes": [
+						{
+							"id": "mistweave",
+							"tier": 2,
+							"value": 332
+						},
+						{
+							"id": "rootwell",
+							"tier": 1,
+							"value": 14
+						},
+						{
+							"id": "ironhide",
+							"tier": 3,
+							"value": 92
+						},
+						{
+							"id": "trailstep",
+							"tier": 1,
+							"value": 1
+						},
+						{
+							"id": "rimeecho",
+							"tier": 2,
+							"value": 14
+						},
+						{
+							"id": "sparkthread",
+							"tier": 1,
+							"value": 6
+						}
+					],
+					"base_id": "emberhide_vest",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "rare"
+				}
+			},
+			"result": {
+				"code": "",
+				"cost": {
+					"calibration_shard": 40
+				},
+				"item_id": "gear_000004",
+				"materials": {
+
+				},
+				"ok": true,
+				"operation": "targeted_reforge_fire_resistance",
+				"reason": "",
+				"revision": 1
+			},
+			"snapshot_file": "emberhide_vest-rare-fire_resistance.save",
+			"source_crafting_revision": 0,
+			"source_snapshot_file": "emberhide_vest-rare-fire_resistance-before.save"
+		},
+		{
+			"cost": 16,
+			"crafted": {
+				"affixes": [
+					{
+						"id": "rimeward",
+						"tier": 2,
+						"value": 18
+					}
+				],
+				"base_id": "emberhide_vest",
+				"id": "gear_000004",
+				"item_level": 30,
+				"rarity": "magic"
+			},
+			"generation": {
+				"pool": "defense_v39",
+				"seed": 103000,
+				"source": {
+					"affixes": [
+						{
+							"id": "mistweave",
+							"tier": 2,
+							"value": 332
+						},
+						{
+							"id": "coalglow",
+							"tier": 1,
+							"value": 5
+						}
+					],
+					"base_id": "emberhide_vest",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "magic"
+				}
+			},
+			"name": "emberhide_vest-magic-cold_resistance",
+			"operation": "targeted_reforge_cold_resistance",
+			"presentation": {
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的冰霜抗性词缀。",
+				"label": "定向重铸",
+				"operation": "targeted_reforge_cold_resistance",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "cold_resistance",
+				"target_label": "冰霜抗性",
+				"targeted": true
+			},
+			"profiles": {
+				"after": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.18,
+						"fire": 0.15,
+						"lightning": 0.0
+					},
+					"maximum_resistances": {
+						"cold": 0.75,
+						"fire": 0.75,
+						"lightning": 0.75
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 0.18,
+						"fire": 0.15,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"before": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"maximum_resistances": {
+						"cold": 0.75,
+						"fire": 0.75,
+						"lightning": 0.75
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"chaos_after": {
+					"cap": 0.75,
+					"effective": 0.0,
+					"ok": true,
+					"raw": 0.0,
+					"reason": ""
+				},
+				"chaos_before": {
+					"cap": 0.75,
+					"effective": 0.0,
+					"ok": true,
+					"raw": 0.0,
+					"reason": ""
+				}
+			},
+			"quote": {
+				"code": "",
+				"consumes_item": false,
+				"cost": {
+					"calibration_shard": 16
+				},
+				"handle": "-9223371517683825203:2",
+				"item_id": "gear_000004",
+				"materials": {
+
+				},
+				"ok": true,
+				"operation": "targeted_reforge_cold_resistance",
+				"reason": "",
+				"revision": 0,
+				"rules_version": "original-targeted-reforge-v1-affix27",
+				"source_instance": {
+					"affixes": [
+						{
+							"id": "mistweave",
+							"tier": 2,
+							"value": 332
+						},
+						{
+							"id": "coalglow",
+							"tier": 1,
+							"value": 5
+						}
+					],
+					"base_id": "emberhide_vest",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "magic"
+				}
+			},
+			"result": {
+				"code": "",
+				"cost": {
+					"calibration_shard": 16
+				},
+				"item_id": "gear_000004",
+				"materials": {
+
+				},
+				"ok": true,
+				"operation": "targeted_reforge_cold_resistance",
+				"reason": "",
+				"revision": 1
+			},
+			"snapshot_file": "emberhide_vest-magic-cold_resistance.save",
+			"source_crafting_revision": 0,
+			"source_snapshot_file": "emberhide_vest-magic-cold_resistance-before.save"
+		},
+		{
+			"cost": 40,
+			"crafted": {
+				"affixes": [
+					{
+						"id": "rimeward",
+						"tier": 2,
+						"value": 15
+					},
+					{
+						"id": "mistweave",
+						"tier": 1,
+						"value": 210
+					},
+					{
+						"id": "stormward",
+						"tier": 2,
+						"value": 15
+					},
+					{
+						"id": "rootwell",
+						"tier": 3,
+						"value": 27
+					}
+				],
+				"base_id": "emberhide_vest",
+				"id": "gear_000004",
+				"item_level": 30,
+				"rarity": "rare"
+			},
+			"generation": {
+				"pool": "defense_v39",
+				"seed": 103000,
+				"source": {
+					"affixes": [
+						{
+							"id": "mistweave",
+							"tier": 2,
+							"value": 332
+						},
+						{
+							"id": "rootwell",
+							"tier": 1,
+							"value": 14
+						},
+						{
+							"id": "ironhide",
+							"tier": 3,
+							"value": 92
+						},
+						{
+							"id": "trailstep",
+							"tier": 1,
+							"value": 1
+						},
+						{
+							"id": "rimeecho",
+							"tier": 2,
+							"value": 14
+						},
+						{
+							"id": "sparkthread",
+							"tier": 1,
+							"value": 6
+						}
+					],
+					"base_id": "emberhide_vest",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "rare"
+				}
+			},
+			"name": "emberhide_vest-rare-cold_resistance",
+			"operation": "targeted_reforge_cold_resistance",
+			"presentation": {
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的冰霜抗性词缀。",
+				"label": "定向重铸",
+				"operation": "targeted_reforge_cold_resistance",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "cold_resistance",
+				"target_label": "冰霜抗性",
+				"targeted": true
+			},
+			"profiles": {
+				"after": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.15,
+						"fire": 0.15,
+						"lightning": 0.15
+					},
+					"maximum_resistances": {
+						"cold": 0.75,
+						"fire": 0.75,
+						"lightning": 0.75
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 0.15,
+						"fire": 0.15,
+						"lightning": 0.15
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"before": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"maximum_resistances": {
+						"cold": 0.75,
+						"fire": 0.75,
+						"lightning": 0.75
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"chaos_after": {
+					"cap": 0.75,
+					"effective": 0.0,
+					"ok": true,
+					"raw": 0.0,
+					"reason": ""
+				},
+				"chaos_before": {
+					"cap": 0.75,
+					"effective": 0.0,
+					"ok": true,
+					"raw": 0.0,
+					"reason": ""
+				}
+			},
+			"quote": {
+				"code": "",
+				"consumes_item": false,
+				"cost": {
+					"calibration_shard": 40
+				},
+				"handle": "-9223371401098951223:2",
+				"item_id": "gear_000004",
+				"materials": {
+
+				},
+				"ok": true,
+				"operation": "targeted_reforge_cold_resistance",
+				"reason": "",
+				"revision": 0,
+				"rules_version": "original-targeted-reforge-v1-affix27",
+				"source_instance": {
+					"affixes": [
+						{
+							"id": "mistweave",
+							"tier": 2,
+							"value": 332
+						},
+						{
+							"id": "rootwell",
+							"tier": 1,
+							"value": 14
+						},
+						{
+							"id": "ironhide",
+							"tier": 3,
+							"value": 92
+						},
+						{
+							"id": "trailstep",
+							"tier": 1,
+							"value": 1
+						},
+						{
+							"id": "rimeecho",
+							"tier": 2,
+							"value": 14
+						},
+						{
+							"id": "sparkthread",
+							"tier": 1,
+							"value": 6
+						}
+					],
+					"base_id": "emberhide_vest",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "rare"
+				}
+			},
+			"result": {
+				"code": "",
+				"cost": {
+					"calibration_shard": 40
+				},
+				"item_id": "gear_000004",
+				"materials": {
+
+				},
+				"ok": true,
+				"operation": "targeted_reforge_cold_resistance",
+				"reason": "",
+				"revision": 1
+			},
+			"snapshot_file": "emberhide_vest-rare-cold_resistance.save",
+			"source_crafting_revision": 0,
+			"source_snapshot_file": "emberhide_vest-rare-cold_resistance-before.save"
+		},
+		{
+			"cost": 16,
+			"crafted": {
+				"affixes": [
+					{
+						"id": "stormward",
+						"tier": 1,
+						"value": 8
+					}
+				],
+				"base_id": "emberhide_vest",
+				"id": "gear_000004",
+				"item_level": 30,
+				"rarity": "magic"
+			},
+			"generation": {
+				"pool": "defense_v39",
+				"seed": 103000,
+				"source": {
+					"affixes": [
+						{
+							"id": "mistweave",
+							"tier": 2,
+							"value": 332
+						},
+						{
+							"id": "coalglow",
+							"tier": 1,
+							"value": 5
+						}
+					],
+					"base_id": "emberhide_vest",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "magic"
+				}
+			},
+			"name": "emberhide_vest-magic-lightning_resistance",
+			"operation": "targeted_reforge_lightning_resistance",
+			"presentation": {
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的闪电抗性词缀。",
+				"label": "定向重铸",
+				"operation": "targeted_reforge_lightning_resistance",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "lightning_resistance",
+				"target_label": "闪电抗性",
+				"targeted": true
+			},
+			"profiles": {
+				"after": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.15,
+						"lightning": 0.08
+					},
+					"maximum_resistances": {
+						"cold": 0.75,
+						"fire": 0.75,
+						"lightning": 0.75
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.15,
+						"lightning": 0.08
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"before": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"maximum_resistances": {
+						"cold": 0.75,
+						"fire": 0.75,
+						"lightning": 0.75
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"chaos_after": {
+					"cap": 0.75,
+					"effective": 0.0,
+					"ok": true,
+					"raw": 0.0,
+					"reason": ""
+				},
+				"chaos_before": {
+					"cap": 0.75,
+					"effective": 0.0,
+					"ok": true,
+					"raw": 0.0,
+					"reason": ""
+				}
+			},
+			"quote": {
+				"code": "",
+				"consumes_item": false,
+				"cost": {
+					"calibration_shard": 16
+				},
+				"handle": "-9223371284514077241:2",
+				"item_id": "gear_000004",
+				"materials": {
+
+				},
+				"ok": true,
+				"operation": "targeted_reforge_lightning_resistance",
+				"reason": "",
+				"revision": 0,
+				"rules_version": "original-targeted-reforge-v1-affix27",
+				"source_instance": {
+					"affixes": [
+						{
+							"id": "mistweave",
+							"tier": 2,
+							"value": 332
+						},
+						{
+							"id": "coalglow",
+							"tier": 1,
+							"value": 5
+						}
+					],
+					"base_id": "emberhide_vest",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "magic"
+				}
+			},
+			"result": {
+				"code": "",
+				"cost": {
+					"calibration_shard": 16
+				},
+				"item_id": "gear_000004",
+				"materials": {
+
+				},
+				"ok": true,
+				"operation": "targeted_reforge_lightning_resistance",
+				"reason": "",
+				"revision": 1
+			},
+			"snapshot_file": "emberhide_vest-magic-lightning_resistance.save",
+			"source_crafting_revision": 0,
+			"source_snapshot_file": "emberhide_vest-magic-lightning_resistance-before.save"
+		},
+		{
+			"cost": 40,
+			"crafted": {
+				"affixes": [
+					{
+						"id": "stormward",
+						"tier": 1,
+						"value": 11
+					},
+					{
+						"id": "trailstep",
+						"tier": 1,
+						"value": 2
+					},
+					{
+						"id": "coalglow",
+						"tier": 3,
+						"value": 20
+					},
+					{
+						"id": "deepwell",
+						"tier": 1,
+						"value": 9
+					},
+					{
+						"id": "rootwell",
+						"tier": 2,
+						"value": 17
+					},
+					{
+						"id": "mistweave",
+						"tier": 1,
+						"value": 200
+					}
+				],
+				"base_id": "emberhide_vest",
+				"id": "gear_000004",
+				"item_level": 30,
+				"rarity": "rare"
+			},
+			"generation": {
+				"pool": "defense_v39",
+				"seed": 103000,
+				"source": {
+					"affixes": [
+						{
+							"id": "mistweave",
+							"tier": 2,
+							"value": 332
+						},
+						{
+							"id": "rootwell",
+							"tier": 1,
+							"value": 14
+						},
+						{
+							"id": "ironhide",
+							"tier": 3,
+							"value": 92
+						},
+						{
+							"id": "trailstep",
+							"tier": 1,
+							"value": 1
+						},
+						{
+							"id": "rimeecho",
+							"tier": 2,
+							"value": 14
+						},
+						{
+							"id": "sparkthread",
+							"tier": 1,
+							"value": 6
+						}
+					],
+					"base_id": "emberhide_vest",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "rare"
+				}
+			},
+			"name": "emberhide_vest-rare-lightning_resistance",
+			"operation": "targeted_reforge_lightning_resistance",
+			"presentation": {
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的闪电抗性词缀。",
+				"label": "定向重铸",
+				"operation": "targeted_reforge_lightning_resistance",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "lightning_resistance",
+				"target_label": "闪电抗性",
+				"targeted": true
+			},
+			"profiles": {
+				"after": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.15,
+						"lightning": 0.11
+					},
+					"maximum_resistances": {
+						"cold": 0.75,
+						"fire": 0.75,
+						"lightning": 0.75
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.15,
+						"lightning": 0.11
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"before": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"maximum_resistances": {
+						"cold": 0.75,
+						"fire": 0.75,
+						"lightning": 0.75
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"chaos_after": {
+					"cap": 0.75,
+					"effective": 0.0,
+					"ok": true,
+					"raw": 0.0,
+					"reason": ""
+				},
+				"chaos_before": {
+					"cap": 0.75,
+					"effective": 0.0,
+					"ok": true,
+					"raw": 0.0,
+					"reason": ""
+				}
+			},
+			"quote": {
+				"code": "",
+				"consumes_item": false,
+				"cost": {
+					"calibration_shard": 40
+				},
+				"handle": "-9223371167929203255:2",
+				"item_id": "gear_000004",
+				"materials": {
+
+				},
+				"ok": true,
+				"operation": "targeted_reforge_lightning_resistance",
+				"reason": "",
+				"revision": 0,
+				"rules_version": "original-targeted-reforge-v1-affix27",
+				"source_instance": {
+					"affixes": [
+						{
+							"id": "mistweave",
+							"tier": 2,
+							"value": 332
+						},
+						{
+							"id": "rootwell",
+							"tier": 1,
+							"value": 14
+						},
+						{
+							"id": "ironhide",
+							"tier": 3,
+							"value": 92
+						},
+						{
+							"id": "trailstep",
+							"tier": 1,
+							"value": 1
+						},
+						{
+							"id": "rimeecho",
+							"tier": 2,
+							"value": 14
+						},
+						{
+							"id": "sparkthread",
+							"tier": 1,
+							"value": 6
+						}
+					],
+					"base_id": "emberhide_vest",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "rare"
+				}
+			},
+			"result": {
+				"code": "",
+				"cost": {
+					"calibration_shard": 40
+				},
+				"item_id": "gear_000004",
+				"materials": {
+
+				},
+				"ok": true,
+				"operation": "targeted_reforge_lightning_resistance",
+				"reason": "",
+				"revision": 1
+			},
+			"snapshot_file": "emberhide_vest-rare-lightning_resistance.save",
+			"source_crafting_revision": 0,
+			"source_snapshot_file": "emberhide_vest-rare-lightning_resistance-before.save"
+		},
+		{
+			"cost": 16,
+			"crafted": {
+				"affixes": [
+					{
+						"id": "ring_emberward",
+						"tier": 3,
+						"value": 21
+					},
+					{
+						"id": "nine_slot_prefix_aegis",
+						"tier": 3,
+						"value": 8
+					}
+				],
+				"base_id": "nine_slot_etched_ring",
+				"id": "gear_000004",
+				"item_level": 30,
+				"rarity": "magic"
+			},
+			"generation": {
+				"pool": "build_nine_slot_v51",
+				"seed": 103006,
+				"source": {
+					"affixes": [
+						{
+							"id": "nine_slot_prefix_vitality",
+							"tier": 1,
+							"value": 4
+						},
+						{
+							"id": "global_critical_multiplier",
+							"tier": 2,
+							"value": 9
+						}
+					],
+					"base_id": "nine_slot_etched_ring",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "magic"
+				}
+			},
+			"name": "nine_slot_etched_ring-magic-fire_resistance",
+			"operation": "targeted_reforge_fire_resistance",
+			"presentation": {
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的火焰抗性词缀。",
+				"label": "定向重铸",
+				"operation": "targeted_reforge_fire_resistance",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "fire_resistance",
+				"target_label": "火焰抗性",
+				"targeted": true
+			},
+			"profiles": {
+				"after": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.21,
+						"lightning": 0.0
+					},
+					"maximum_resistances": {
+						"cold": 0.75,
+						"fire": 0.75,
+						"lightning": 0.75
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.21,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"before": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"maximum_resistances": {
+						"cold": 0.75,
+						"fire": 0.75,
+						"lightning": 0.75
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"chaos_after": {
+					"cap": 0.75,
+					"effective": 0.0,
+					"ok": true,
+					"raw": 0.0,
+					"reason": ""
+				},
+				"chaos_before": {
+					"cap": 0.75,
+					"effective": 0.0,
+					"ok": true,
+					"raw": 0.0,
+					"reason": ""
+				}
+			},
+			"quote": {
+				"code": "",
+				"consumes_item": false,
+				"cost": {
+					"calibration_shard": 16
+				},
+				"handle": "-9223371051344329265:2",
+				"item_id": "gear_000004",
+				"materials": {
+
+				},
+				"ok": true,
+				"operation": "targeted_reforge_fire_resistance",
+				"reason": "",
+				"revision": 0,
+				"rules_version": "original-targeted-reforge-v1-affix27",
+				"source_instance": {
+					"affixes": [
+						{
+							"id": "nine_slot_prefix_vitality",
+							"tier": 1,
+							"value": 4
+						},
+						{
+							"id": "global_critical_multiplier",
+							"tier": 2,
+							"value": 9
+						}
+					],
+					"base_id": "nine_slot_etched_ring",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "magic"
+				}
+			},
+			"result": {
+				"code": "",
+				"cost": {
+					"calibration_shard": 16
+				},
+				"item_id": "gear_000004",
+				"materials": {
+
+				},
+				"ok": true,
+				"operation": "targeted_reforge_fire_resistance",
+				"reason": "",
+				"revision": 1
+			},
+			"snapshot_file": "nine_slot_etched_ring-magic-fire_resistance.save",
+			"source_crafting_revision": 0,
+			"source_snapshot_file": "nine_slot_etched_ring-magic-fire_resistance-before.save"
+		},
+		{
+			"cost": 40,
+			"crafted": {
+				"affixes": [
+					{
+						"id": "ring_emberward",
+						"tier": 1,
+						"value": 11
+					},
+					{
+						"id": "nine_slot_suffix_endurance",
+						"tier": 1,
+						"value": 3
+					},
+					{
+						"id": "ring_stormward",
+						"tier": 3,
+						"value": 23
+					},
+					{
+						"id": "attack_life_leech",
+						"tier": 1,
+						"value": 30
+					}
+				],
+				"base_id": "nine_slot_etched_ring",
+				"id": "gear_000004",
+				"item_level": 30,
+				"rarity": "rare"
+			},
+			"generation": {
+				"pool": "build_nine_slot_v51",
+				"seed": 103031,
+				"source": {
+					"affixes": [
+						{
+							"id": "attack_mana_leech",
+							"tier": 1,
+							"value": 13
+						},
+						{
+							"id": "attack_life_leech",
+							"tier": 1,
+							"value": 20
+						},
+						{
+							"id": "nine_slot_prefix_vitality",
+							"tier": 1,
+							"value": 6
+						},
+						{
+							"id": "nine_slot_suffix_endurance",
+							"tier": 1,
+							"value": 2
+						},
+						{
+							"id": "ring_stormward",
+							"tier": 1,
+							"value": 11
+						},
+						{
+							"id": "ring_voidward",
+							"tier": 3,
+							"value": 22
+						}
+					],
+					"base_id": "nine_slot_etched_ring",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "rare"
+				}
+			},
+			"name": "nine_slot_etched_ring-rare-fire_resistance",
+			"operation": "targeted_reforge_fire_resistance",
+			"presentation": {
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的火焰抗性词缀。",
+				"label": "定向重铸",
+				"operation": "targeted_reforge_fire_resistance",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "fire_resistance",
+				"target_label": "火焰抗性",
+				"targeted": true
+			},
+			"profiles": {
+				"after": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.11,
+						"lightning": 0.23
+					},
+					"maximum_resistances": {
+						"cold": 0.75,
+						"fire": 0.75,
+						"lightning": 0.75
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.11,
+						"lightning": 0.23
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"before": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"maximum_resistances": {
+						"cold": 0.75,
+						"fire": 0.75,
+						"lightning": 0.75
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"chaos_after": {
+					"cap": 0.75,
+					"effective": 0.0,
+					"ok": true,
+					"raw": 0.0,
+					"reason": ""
+				},
+				"chaos_before": {
+					"cap": 0.75,
+					"effective": 0.0,
+					"ok": true,
+					"raw": 0.0,
+					"reason": ""
+				}
+			},
+			"quote": {
+				"code": "",
+				"consumes_item": false,
+				"cost": {
+					"calibration_shard": 40
+				},
+				"handle": "-9223370934725900855:2",
+				"item_id": "gear_000004",
+				"materials": {
+
+				},
+				"ok": true,
+				"operation": "targeted_reforge_fire_resistance",
+				"reason": "",
+				"revision": 0,
+				"rules_version": "original-targeted-reforge-v1-affix27",
+				"source_instance": {
+					"affixes": [
+						{
+							"id": "attack_mana_leech",
+							"tier": 1,
+							"value": 13
+						},
+						{
+							"id": "attack_life_leech",
+							"tier": 1,
+							"value": 20
+						},
+						{
+							"id": "nine_slot_prefix_vitality",
+							"tier": 1,
+							"value": 6
+						},
+						{
+							"id": "nine_slot_suffix_endurance",
+							"tier": 1,
+							"value": 2
+						},
+						{
+							"id": "ring_stormward",
+							"tier": 1,
+							"value": 11
+						},
+						{
+							"id": "ring_voidward",
+							"tier": 3,
+							"value": 22
+						}
+					],
+					"base_id": "nine_slot_etched_ring",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "rare"
+				}
+			},
+			"result": {
+				"code": "",
+				"cost": {
+					"calibration_shard": 40
+				},
+				"item_id": "gear_000004",
+				"materials": {
+
+				},
+				"ok": true,
+				"operation": "targeted_reforge_fire_resistance",
+				"reason": "",
+				"revision": 1
+			},
+			"snapshot_file": "nine_slot_etched_ring-rare-fire_resistance.save",
+			"source_crafting_revision": 0,
+			"source_snapshot_file": "nine_slot_etched_ring-rare-fire_resistance-before.save"
+		},
+		{
+			"cost": 16,
+			"crafted": {
+				"affixes": [
+					{
+						"id": "ring_rimeward",
+						"tier": 2,
+						"value": 16
+					},
+					{
+						"id": "nine_slot_prefix_vitality",
+						"tier": 1,
+						"value": 4
+					}
+				],
+				"base_id": "nine_slot_etched_ring",
+				"id": "gear_000004",
+				"item_level": 30,
+				"rarity": "magic"
+			},
+			"generation": {
+				"pool": "build_nine_slot_v51",
+				"seed": 103006,
+				"source": {
+					"affixes": [
+						{
+							"id": "nine_slot_prefix_vitality",
+							"tier": 1,
+							"value": 4
+						},
+						{
+							"id": "global_critical_multiplier",
+							"tier": 2,
+							"value": 9
+						}
+					],
+					"base_id": "nine_slot_etched_ring",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "magic"
+				}
+			},
+			"name": "nine_slot_etched_ring-magic-cold_resistance",
+			"operation": "targeted_reforge_cold_resistance",
+			"presentation": {
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的冰霜抗性词缀。",
+				"label": "定向重铸",
+				"operation": "targeted_reforge_cold_resistance",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "cold_resistance",
+				"target_label": "冰霜抗性",
+				"targeted": true
+			},
+			"profiles": {
+				"after": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.16,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"maximum_resistances": {
+						"cold": 0.75,
+						"fire": 0.75,
+						"lightning": 0.75
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 0.16,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"before": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"maximum_resistances": {
+						"cold": 0.75,
+						"fire": 0.75,
+						"lightning": 0.75
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"chaos_after": {
+					"cap": 0.75,
+					"effective": 0.0,
+					"ok": true,
+					"raw": 0.0,
+					"reason": ""
+				},
+				"chaos_before": {
+					"cap": 0.75,
+					"effective": 0.0,
+					"ok": true,
+					"raw": 0.0,
+					"reason": ""
+				}
+			},
+			"quote": {
+				"code": "",
+				"consumes_item": false,
+				"cost": {
+					"calibration_shard": 16
+				},
+				"handle": "-9223370817688042031:2",
+				"item_id": "gear_000004",
+				"materials": {
+
+				},
+				"ok": true,
+				"operation": "targeted_reforge_cold_resistance",
+				"reason": "",
+				"revision": 0,
+				"rules_version": "original-targeted-reforge-v1-affix27",
+				"source_instance": {
+					"affixes": [
+						{
+							"id": "nine_slot_prefix_vitality",
+							"tier": 1,
+							"value": 4
+						},
+						{
+							"id": "global_critical_multiplier",
+							"tier": 2,
+							"value": 9
+						}
+					],
+					"base_id": "nine_slot_etched_ring",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "magic"
+				}
+			},
+			"result": {
+				"code": "",
+				"cost": {
+					"calibration_shard": 16
+				},
+				"item_id": "gear_000004",
+				"materials": {
+
+				},
+				"ok": true,
+				"operation": "targeted_reforge_cold_resistance",
+				"reason": "",
+				"revision": 1
+			},
+			"snapshot_file": "nine_slot_etched_ring-magic-cold_resistance.save",
+			"source_crafting_revision": 0,
+			"source_snapshot_file": "nine_slot_etched_ring-magic-cold_resistance-before.save"
+		},
+		{
+			"cost": 40,
+			"crafted": {
+				"affixes": [
+					{
+						"id": "ring_rimeward",
+						"tier": 1,
+						"value": 11
+					},
+					{
+						"id": "global_critical_chance",
+						"tier": 1,
+						"value": 16
+					},
+					{
+						"id": "global_critical_multiplier",
+						"tier": 2,
+						"value": 9
+					},
+					{
+						"id": "nine_slot_prefix_clarity",
+						"tier": 1,
+						"value": 4
+					}
+				],
+				"base_id": "nine_slot_etched_ring",
+				"id": "gear_000004",
+				"item_level": 30,
+				"rarity": "rare"
+			},
+			"generation": {
+				"pool": "build_nine_slot_v51",
+				"seed": 103008,
+				"source": {
+					"affixes": [
+						{
+							"id": "nine_slot_prefix_vitality",
+							"tier": 1,
+							"value": 6
+						},
+						{
+							"id": "nine_slot_prefix_clarity",
+							"tier": 1,
+							"value": 3
+						},
+						{
+							"id": "attack_mana_leech",
+							"tier": 2,
+							"value": 23
+						},
+						{
+							"id": "ring_emberward",
+							"tier": 1,
+							"value": 11
+						},
+						{
+							"id": "nine_slot_suffix_endurance",
+							"tier": 1,
+							"value": 3
+						},
+						{
+							"id": "nine_slot_suffix_stride",
+							"tier": 1,
+							"value": 2
+						}
+					],
+					"base_id": "nine_slot_etched_ring",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "rare"
+				}
+			},
+			"name": "nine_slot_etched_ring-rare-cold_resistance",
+			"operation": "targeted_reforge_cold_resistance",
+			"presentation": {
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的冰霜抗性词缀。",
+				"label": "定向重铸",
+				"operation": "targeted_reforge_cold_resistance",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "cold_resistance",
+				"target_label": "冰霜抗性",
+				"targeted": true
+			},
+			"profiles": {
+				"after": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.11,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"maximum_resistances": {
+						"cold": 0.75,
+						"fire": 0.75,
+						"lightning": 0.75
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 0.11,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"before": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"maximum_resistances": {
+						"cold": 0.75,
+						"fire": 0.75,
+						"lightning": 0.75
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"chaos_after": {
+					"cap": 0.75,
+					"effective": 0.0,
+					"ok": true,
+					"raw": 0.0,
+					"reason": ""
+				},
+				"chaos_before": {
+					"cap": 0.75,
+					"effective": 0.0,
+					"ok": true,
+					"raw": 0.0,
+					"reason": ""
+				}
+			},
+			"quote": {
+				"code": "",
+				"consumes_item": false,
+				"cost": {
+					"calibration_shard": 40
+				},
+				"handle": "-9223370701069613623:2",
+				"item_id": "gear_000004",
+				"materials": {
+
+				},
+				"ok": true,
+				"operation": "targeted_reforge_cold_resistance",
+				"reason": "",
+				"revision": 0,
+				"rules_version": "original-targeted-reforge-v1-affix27",
+				"source_instance": {
+					"affixes": [
+						{
+							"id": "nine_slot_prefix_vitality",
+							"tier": 1,
+							"value": 6
+						},
+						{
+							"id": "nine_slot_prefix_clarity",
+							"tier": 1,
+							"value": 3
+						},
+						{
+							"id": "attack_mana_leech",
+							"tier": 2,
+							"value": 23
+						},
+						{
+							"id": "ring_emberward",
+							"tier": 1,
+							"value": 11
+						},
+						{
+							"id": "nine_slot_suffix_endurance",
+							"tier": 1,
+							"value": 3
+						},
+						{
+							"id": "nine_slot_suffix_stride",
+							"tier": 1,
+							"value": 2
+						}
+					],
+					"base_id": "nine_slot_etched_ring",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "rare"
+				}
+			},
+			"result": {
+				"code": "",
+				"cost": {
+					"calibration_shard": 40
+				},
+				"item_id": "gear_000004",
+				"materials": {
+
+				},
+				"ok": true,
+				"operation": "targeted_reforge_cold_resistance",
+				"reason": "",
+				"revision": 1
+			},
+			"snapshot_file": "nine_slot_etched_ring-rare-cold_resistance.save",
+			"source_crafting_revision": 0,
+			"source_snapshot_file": "nine_slot_etched_ring-rare-cold_resistance-before.save"
+		},
+		{
+			"cost": 16,
+			"crafted": {
+				"affixes": [
+					{
+						"id": "ring_stormward",
+						"tier": 1,
+						"value": 11
+					}
+				],
+				"base_id": "nine_slot_etched_ring",
+				"id": "gear_000004",
+				"item_level": 30,
+				"rarity": "magic"
+			},
+			"generation": {
+				"pool": "build_nine_slot_v51",
+				"seed": 103006,
+				"source": {
+					"affixes": [
+						{
+							"id": "nine_slot_prefix_vitality",
+							"tier": 1,
+							"value": 4
+						},
+						{
+							"id": "global_critical_multiplier",
+							"tier": 2,
+							"value": 9
+						}
+					],
+					"base_id": "nine_slot_etched_ring",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "magic"
+				}
+			},
+			"name": "nine_slot_etched_ring-magic-lightning_resistance",
+			"operation": "targeted_reforge_lightning_resistance",
+			"presentation": {
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的闪电抗性词缀。",
+				"label": "定向重铸",
+				"operation": "targeted_reforge_lightning_resistance",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "lightning_resistance",
+				"target_label": "闪电抗性",
+				"targeted": true
+			},
+			"profiles": {
+				"after": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.11
+					},
+					"maximum_resistances": {
+						"cold": 0.75,
+						"fire": 0.75,
+						"lightning": 0.75
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.11
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"before": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"maximum_resistances": {
+						"cold": 0.75,
+						"fire": 0.75,
+						"lightning": 0.75
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"chaos_after": {
+					"cap": 0.75,
+					"effective": 0.0,
+					"ok": true,
+					"raw": 0.0,
+					"reason": ""
+				},
+				"chaos_before": {
+					"cap": 0.75,
+					"effective": 0.0,
+					"ok": true,
+					"raw": 0.0,
+					"reason": ""
+				}
+			},
+			"quote": {
+				"code": "",
+				"consumes_item": false,
+				"cost": {
+					"calibration_shard": 16
+				},
+				"handle": "-9223370584417630771:2",
+				"item_id": "gear_000004",
+				"materials": {
+
+				},
+				"ok": true,
+				"operation": "targeted_reforge_lightning_resistance",
+				"reason": "",
+				"revision": 0,
+				"rules_version": "original-targeted-reforge-v1-affix27",
+				"source_instance": {
+					"affixes": [
+						{
+							"id": "nine_slot_prefix_vitality",
+							"tier": 1,
+							"value": 4
+						},
+						{
+							"id": "global_critical_multiplier",
+							"tier": 2,
+							"value": 9
+						}
+					],
+					"base_id": "nine_slot_etched_ring",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "magic"
+				}
+			},
+			"result": {
+				"code": "",
+				"cost": {
+					"calibration_shard": 16
+				},
+				"item_id": "gear_000004",
+				"materials": {
+
+				},
+				"ok": true,
+				"operation": "targeted_reforge_lightning_resistance",
+				"reason": "",
+				"revision": 1
+			},
+			"snapshot_file": "nine_slot_etched_ring-magic-lightning_resistance.save",
+			"source_crafting_revision": 0,
+			"source_snapshot_file": "nine_slot_etched_ring-magic-lightning_resistance-before.save"
+		},
+		{
+			"cost": 40,
+			"crafted": {
+				"affixes": [
+					{
+						"id": "ring_stormward",
+						"tier": 1,
+						"value": 10
+					},
+					{
+						"id": "ring_emberward",
+						"tier": 1,
+						"value": 8
+					},
+					{
+						"id": "nine_slot_prefix_clarity",
+						"tier": 1,
+						"value": 3
+					},
+					{
+						"id": "global_critical_chance",
+						"tier": 1,
+						"value": 16
+					},
+					{
+						"id": "attack_life_leech",
+						"tier": 2,
+						"value": 39
+					}
+				],
+				"base_id": "nine_slot_etched_ring",
+				"id": "gear_000004",
+				"item_level": 30,
+				"rarity": "rare"
+			},
+			"generation": {
+				"pool": "build_nine_slot_v51",
+				"seed": 103008,
+				"source": {
+					"affixes": [
+						{
+							"id": "nine_slot_prefix_vitality",
+							"tier": 1,
+							"value": 6
+						},
+						{
+							"id": "nine_slot_prefix_clarity",
+							"tier": 1,
+							"value": 3
+						},
+						{
+							"id": "attack_mana_leech",
+							"tier": 2,
+							"value": 23
+						},
+						{
+							"id": "ring_emberward",
+							"tier": 1,
+							"value": 11
+						},
+						{
+							"id": "nine_slot_suffix_endurance",
+							"tier": 1,
+							"value": 3
+						},
+						{
+							"id": "nine_slot_suffix_stride",
+							"tier": 1,
+							"value": 2
+						}
+					],
+					"base_id": "nine_slot_etched_ring",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "rare"
+				}
+			},
+			"name": "nine_slot_etched_ring-rare-lightning_resistance",
+			"operation": "targeted_reforge_lightning_resistance",
+			"presentation": {
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的闪电抗性词缀。",
+				"label": "定向重铸",
+				"operation": "targeted_reforge_lightning_resistance",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "lightning_resistance",
+				"target_label": "闪电抗性",
+				"targeted": true
+			},
+			"profiles": {
+				"after": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.08,
+						"lightning": 0.1
+					},
+					"maximum_resistances": {
+						"cold": 0.75,
+						"fire": 0.75,
+						"lightning": 0.75
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.08,
+						"lightning": 0.1
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"before": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"maximum_resistances": {
+						"cold": 0.75,
+						"fire": 0.75,
+						"lightning": 0.75
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"chaos_after": {
+					"cap": 0.75,
+					"effective": 0.0,
+					"ok": true,
+					"raw": 0.0,
+					"reason": ""
+				},
+				"chaos_before": {
+					"cap": 0.75,
+					"effective": 0.0,
+					"ok": true,
+					"raw": 0.0,
+					"reason": ""
+				}
+			},
+			"quote": {
+				"code": "",
+				"consumes_item": false,
+				"cost": {
+					"calibration_shard": 40
+				},
+				"handle": "-9223370467799202359:2",
+				"item_id": "gear_000004",
+				"materials": {
+
+				},
+				"ok": true,
+				"operation": "targeted_reforge_lightning_resistance",
+				"reason": "",
+				"revision": 0,
+				"rules_version": "original-targeted-reforge-v1-affix27",
+				"source_instance": {
+					"affixes": [
+						{
+							"id": "nine_slot_prefix_vitality",
+							"tier": 1,
+							"value": 6
+						},
+						{
+							"id": "nine_slot_prefix_clarity",
+							"tier": 1,
+							"value": 3
+						},
+						{
+							"id": "attack_mana_leech",
+							"tier": 2,
+							"value": 23
+						},
+						{
+							"id": "ring_emberward",
+							"tier": 1,
+							"value": 11
+						},
+						{
+							"id": "nine_slot_suffix_endurance",
+							"tier": 1,
+							"value": 3
+						},
+						{
+							"id": "nine_slot_suffix_stride",
+							"tier": 1,
+							"value": 2
+						}
+					],
+					"base_id": "nine_slot_etched_ring",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "rare"
+				}
+			},
+			"result": {
+				"code": "",
+				"cost": {
+					"calibration_shard": 40
+				},
+				"item_id": "gear_000004",
+				"materials": {
+
+				},
+				"ok": true,
+				"operation": "targeted_reforge_lightning_resistance",
+				"reason": "",
+				"revision": 1
+			},
+			"snapshot_file": "nine_slot_etched_ring-rare-lightning_resistance.save",
+			"source_crafting_revision": 0,
+			"source_snapshot_file": "nine_slot_etched_ring-rare-lightning_resistance-before.save"
+		},
+		{
+			"cost": 16,
+			"crafted": {
+				"affixes": [
+					{
+						"id": "ring_voidward",
+						"tier": 1,
+						"value": 10
+					}
+				],
+				"base_id": "nine_slot_etched_ring",
+				"id": "gear_000004",
+				"item_level": 30,
+				"rarity": "magic"
+			},
+			"generation": {
+				"pool": "build_nine_slot_v51",
+				"seed": 103006,
+				"source": {
+					"affixes": [
+						{
+							"id": "nine_slot_prefix_vitality",
+							"tier": 1,
+							"value": 4
+						},
+						{
+							"id": "global_critical_multiplier",
+							"tier": 2,
+							"value": 9
+						}
+					],
+					"base_id": "nine_slot_etched_ring",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "magic"
+				}
+			},
+			"name": "nine_slot_etched_ring-magic-chaos_resistance",
+			"operation": "targeted_reforge_chaos_resistance",
+			"presentation": {
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的混沌抗性词缀。",
+				"label": "定向重铸",
+				"operation": "targeted_reforge_chaos_resistance",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "chaos_resistance",
+				"target_label": "混沌抗性",
+				"targeted": true
+			},
+			"profiles": {
+				"after": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"maximum_resistances": {
+						"cold": 0.75,
+						"fire": 0.75,
+						"lightning": 0.75
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"before": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"maximum_resistances": {
+						"cold": 0.75,
+						"fire": 0.75,
+						"lightning": 0.75
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"chaos_after": {
+					"cap": 0.75,
+					"effective": 0.1,
+					"ok": true,
+					"raw": 0.1,
+					"reason": ""
+				},
+				"chaos_before": {
+					"cap": 0.75,
+					"effective": 0.0,
+					"ok": true,
+					"raw": 0.0,
+					"reason": ""
+				}
+			},
+			"quote": {
+				"code": "",
+				"consumes_item": false,
+				"cost": {
+					"calibration_shard": 16
+				},
+				"handle": "-9223370351147219513:2",
+				"item_id": "gear_000004",
+				"materials": {
+
+				},
+				"ok": true,
+				"operation": "targeted_reforge_chaos_resistance",
+				"reason": "",
+				"revision": 0,
+				"rules_version": "original-targeted-reforge-v1-affix27",
+				"source_instance": {
+					"affixes": [
+						{
+							"id": "nine_slot_prefix_vitality",
+							"tier": 1,
+							"value": 4
+						},
+						{
+							"id": "global_critical_multiplier",
+							"tier": 2,
+							"value": 9
+						}
+					],
+					"base_id": "nine_slot_etched_ring",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "magic"
+				}
+			},
+			"result": {
+				"code": "",
+				"cost": {
+					"calibration_shard": 16
+				},
+				"item_id": "gear_000004",
+				"materials": {
+
+				},
+				"ok": true,
+				"operation": "targeted_reforge_chaos_resistance",
+				"reason": "",
+				"revision": 1
+			},
+			"snapshot_file": "nine_slot_etched_ring-magic-chaos_resistance.save",
+			"source_crafting_revision": 0,
+			"source_snapshot_file": "nine_slot_etched_ring-magic-chaos_resistance-before.save"
+		},
+		{
+			"cost": 40,
+			"crafted": {
+				"affixes": [
+					{
+						"id": "ring_voidward",
+						"tier": 1,
+						"value": 8
+					},
+					{
+						"id": "nine_slot_suffix_stride",
+						"tier": 1,
+						"value": 2
+					},
+					{
+						"id": "ring_rimeward",
+						"tier": 1,
+						"value": 12
+					},
+					{
+						"id": "nine_slot_prefix_clarity",
+						"tier": 1,
+						"value": 3
+					},
+					{
+						"id": "nine_slot_prefix_vitality",
+						"tier": 2,
+						"value": 7
+					}
+				],
+				"base_id": "nine_slot_etched_ring",
+				"id": "gear_000004",
+				"item_level": 30,
+				"rarity": "rare"
+			},
+			"generation": {
+				"pool": "build_nine_slot_v51",
+				"seed": 103008,
+				"source": {
+					"affixes": [
+						{
+							"id": "nine_slot_prefix_vitality",
+							"tier": 1,
+							"value": 6
+						},
+						{
+							"id": "nine_slot_prefix_clarity",
+							"tier": 1,
+							"value": 3
+						},
+						{
+							"id": "attack_mana_leech",
+							"tier": 2,
+							"value": 23
+						},
+						{
+							"id": "ring_emberward",
+							"tier": 1,
+							"value": 11
+						},
+						{
+							"id": "nine_slot_suffix_endurance",
+							"tier": 1,
+							"value": 3
+						},
+						{
+							"id": "nine_slot_suffix_stride",
+							"tier": 1,
+							"value": 2
+						}
+					],
+					"base_id": "nine_slot_etched_ring",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "rare"
+				}
+			},
+			"name": "nine_slot_etched_ring-rare-chaos_resistance",
+			"operation": "targeted_reforge_chaos_resistance",
+			"presentation": {
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的混沌抗性词缀。",
+				"label": "定向重铸",
+				"operation": "targeted_reforge_chaos_resistance",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "chaos_resistance",
+				"target_label": "混沌抗性",
+				"targeted": true
+			},
+			"profiles": {
+				"after": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.12,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"maximum_resistances": {
+						"cold": 0.75,
+						"fire": 0.75,
+						"lightning": 0.75
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 0.12,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"before": {
+					"base_cap": 0.75,
+					"effective_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"maximum_resistances": {
+						"cold": 0.75,
+						"fire": 0.75,
+						"lightning": 0.75
+					},
+					"ok": true,
+					"raw_resistances": {
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"reason": "",
+					"safety_cap": 0.83
+				},
+				"chaos_after": {
+					"cap": 0.75,
+					"effective": 0.08,
+					"ok": true,
+					"raw": 0.08,
+					"reason": ""
+				},
+				"chaos_before": {
+					"cap": 0.75,
+					"effective": 0.0,
+					"ok": true,
+					"raw": 0.0,
+					"reason": ""
+				}
+			},
+			"quote": {
+				"code": "",
+				"consumes_item": false,
+				"cost": {
+					"calibration_shard": 40
+				},
+				"handle": "-9223370234528791095:2",
+				"item_id": "gear_000004",
+				"materials": {
+
+				},
+				"ok": true,
+				"operation": "targeted_reforge_chaos_resistance",
+				"reason": "",
+				"revision": 0,
+				"rules_version": "original-targeted-reforge-v1-affix27",
+				"source_instance": {
+					"affixes": [
+						{
+							"id": "nine_slot_prefix_vitality",
+							"tier": 1,
+							"value": 6
+						},
+						{
+							"id": "nine_slot_prefix_clarity",
+							"tier": 1,
+							"value": 3
+						},
+						{
+							"id": "attack_mana_leech",
+							"tier": 2,
+							"value": 23
+						},
+						{
+							"id": "ring_emberward",
+							"tier": 1,
+							"value": 11
+						},
+						{
+							"id": "nine_slot_suffix_endurance",
+							"tier": 1,
+							"value": 3
+						},
+						{
+							"id": "nine_slot_suffix_stride",
+							"tier": 1,
+							"value": 2
+						}
+					],
+					"base_id": "nine_slot_etched_ring",
+					"id": "gear_000004",
+					"item_level": 30,
+					"rarity": "rare"
+				}
+			},
+			"result": {
+				"code": "",
+				"cost": {
+					"calibration_shard": 40
+				},
+				"item_id": "gear_000004",
+				"materials": {
+
+				},
+				"ok": true,
+				"operation": "targeted_reforge_chaos_resistance",
+				"reason": "",
+				"revision": 1
+			},
+			"snapshot_file": "nine_slot_etched_ring-rare-chaos_resistance.save",
+			"source_crafting_revision": 0,
+			"source_snapshot_file": "nine_slot_etched_ring-rare-chaos_resistance-before.save"
+		}
+	],
+	"vocabulary": 51
+}

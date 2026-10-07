@@ -1,0 +1,9 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ERROR: Bounded sample includes every tier, including low tier at high ilvl
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/resistance_targeted_reforge_test.gd:61)
+       [1] _test_current_matrix (res://tests/resistance_targeted_reforge_test.gd:183)
+       [2] _initialize (res://tests/resistance_targeted_reforge_test.gd:47)
+Resistance targeted reforge: 20267 checks, 1 failures; 480 current quotes, 448 current plans; 96 old-target quotes, 768 old-target plans; 24 old-six quotes, 192 old-six plans

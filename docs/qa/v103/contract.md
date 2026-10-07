@@ -29,6 +29,17 @@ No new item fields, save schema, affixes, pools, assets or crafting buttons.
 The dynamic metadata dropdown and existing confirmation dialog already support
 these targets; only rules declarations change in production.
 
-Focused rules, canonical transactions and real confirmation flow are being
-checked before main integration. Resource cache is reused; the CraftingRules
-dependency parse passed without repeating the project import.
+Focused rules, canonical transactions and real confirmation flow are verified.
+The final affected rules matrix passed 17,944 checks; the original four-target
+and six-operation byte comparisons passed earlier and were not repeated.
+The over-strong small-sample tier assertion and later consumer-key correction
+are preserved in the rules evidence, not summed as independent passes.
+Actual transactions and the inventory confirmation flow passed 1,684 checks
+on their first run. Root controls retain 22 unaffected checks from the first
+run plus the corrected three-check insufficient-funds group; the initial
+metadata fixture error is preserved separately.
+
+Resource cache is reused; the CraftingRules dependency parse passed without
+repeating the project import. The reference tool now chooses a legal ring for
+the four new targets while preserving the old operation examples. No whole
+reference export or historical battle suite is rerun.

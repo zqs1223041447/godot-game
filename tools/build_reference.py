@@ -1525,7 +1525,7 @@ def build(data, art):
             mark='<svg viewBox="0 0 64 64" width="48" height="48" aria-hidden="true"><path d="M32 5 L51 22 L42 53 L16 42 L12 21 Z M32 5 L29 30 L42 53 M12 21 L29 30 L51 22" fill="#dfc99a" stroke="#79571f" stroke-width="2"/></svg>'
             body='<figure class="defense-flow"><figcaption>实际规则示例 · '+esc(sample['before_definition']['base_name'])+'</figcaption><ol><li><span class="flow-step">01 · 原物品</span><strong>'+esc(sample['before_definition']['base_name'])+'</strong><span>'+lines('\n'.join(sample['before_definition']['affix_lines']))+'</span></li><li><span class="flow-step">02 · '+action+'校准碎片</span>'+mark+f'<strong data-craft-value="{key}-amount" data-value="{amount}">{amount}</strong></li><li><span class="flow-step">03 · 余额与结果</span>'+f'<strong><span data-craft-value="{key}-before" data-value="{sample["balance_before"]}">{sample["balance_before"]}</span> → <span data-craft-value="{key}-after" data-value="{sample["balance_after"]}">{sample["balance_after"]}</span></strong>'
             body+='<span>原装备被消耗，空位释放</span>' if key=='salvage' else '<span>'+lines('\n'.join(sample['after_definition']['affix_lines']))+'</span>'
-            body+='</li></ol><p class="fine">演示使用合法背包装备与固定示例种子；收益、成本和结果来自实际规则/规划器，真实碎片物品与完整当前版本候选通过当前校验。它不预告玩家下一次随机结果。</p></figure>'
+            body+='</li></ol><p class="fine">'+esc(c.get('example_note','演示使用合法背包装备与固定示例种子；收益、成本和结果来自实际规则/规划器，真实碎片物品与完整当前版本候选通过当前校验。它不预告玩家下一次随机结果。'))+'</p></figure>'
             preconditions={'salvage':'背包中未穿戴的随机魔法或稀有装备','recalibrate':'背包中未穿戴的随机魔法或稀有装备','enchant':'背包中未穿戴的随机普通装备','elevate':'背包中未穿戴的随机魔法装备，能达到合法稀有词缀数','augment':'背包中的随机魔法或稀有装备，必须存在合法空位','reforge':'背包中未穿戴的随机魔法或稀有装备'}
             preserves={'salvage':'消耗选中装备，其余物品保持','recalibrate':'物品ID、底材、等级、稀有度、词缀种类/顺序/阶级；只重掷数值','enchant':'物品ID、底材、物品等级和位置','elevate':'物品ID、底材、物品等级、位置及已有全部词缀','augment':'物品ID、底材、物品等级、位置及已有全部词缀','reforge':'物品ID、底材、物品等级、位置和稀有度；全部词缀重新生成'}
             if c.get('targeted'):
@@ -1535,6 +1535,11 @@ def build(data, art):
                 eligibility='；'.join(link('equipment',entry['base_id'])+'：'+ ' / '.join(('魔法' if rarity=='magic' else '稀有')+'物品等级≥'+number(level) for rarity,level in entry['minimum_item_level_by_rarity'].items()) for entry in c['eligibility'])
                 body+=facts([('保证目标',esc(c['target_label'])),('目标家族',links('affixes',c['target_family_ids'])),('费用',costs),('最低物品等级',eligibility),('抽取边界',esc(c['selection_note'])),('规则版本',esc(c['rules_version']))])
             body+=facts([('可用底材',links('equipment',c['eligible_base_ids'])),('前置条件',preconditions[key]),('风险',esc(c['risk'])),('保存顺序','完整候选验证 → 原子写盘 → 内存提交与刷新'),('失败保护','拒绝或写盘失败不动装备、材料和序号；取消不收费，失败重试保持种子'),('保持字段',preserves[key])])
+            if c.get('evidence'):
+                evidence=c['evidence']
+                body+='<h3>'+esc(evidence['title'])+'</h3><p>'+esc(evidence['scope'])+'</p>'
+                body+=facts([(row['label'], '<span data-craft-evidence-value="'+esc(key+'-'+row['key'])+'" data-value="'+esc(row['value'])+'">'+esc(percent(row['value']) if row.get('percent') else number(row['value']))+'</span>') for row in evidence['facts']])
+                body+='<p>'+' · '.join('<a href="'+esc(row['href'])+'">'+esc(row['label'])+'</a>' for row in evidence['links'])+'</p>'
             related=link('crafting','calibration_shard')+' · '+link('equipment',source['base_id'])+' · '+links('affixes',[a['id'] for a in source['affixes']])
         cards.append(add('crafting',key,c['name'],c['description'],body,'材料' if c['kind']=='material' else '制作操作',related=related))
     for key,f in data.get('flasks',{}).items():
@@ -1586,6 +1591,10 @@ def build(data, art):
                 body+='<p>当前可用四张地图：'+' · '.join(link('maps',entry['id'],entry['name']) for entry in current_maps)+'。正式地图各有I/II/III独立成长；独立测试地图免费，正式入场沿分档费用。</p>'
             body+='<p>重进测试档不重新复制或覆盖。退出后恢复正常档并进入正式城镇。被替换的旧model拒绝迟到写入；原确认、拖拽与面板一并关闭。</p>'
             summary = '正式付费购买与独立测试供应' if key=='skill_merchant' else service['description']
+            if key == 'crafter':
+                target_count=sum(bool(entry.get('targeted')) for entry in data['crafting'].values())
+                basic_count=sum(entry['kind']=='operation' and not entry.get('targeted') for entry in data['crafting'].values())
+                summary=f'使用背包中的真实碎片进行{basic_count}项现有工艺与{target_count}种定向重铸；资格和费用以当前装备报价为准。'
             if key == 'map_device' and 'exploration_maps' in data:
                 summary = '从城镇进入固定等级的大地图，全部初始怪物入图即在场，自由探索并全清返城领奖。'
                 body = facts([('地图', ' · '.join(link('maps', mid, entry['name']) for mid, entry in data['exploration_maps']['maps'].items())), ('正式成长', '每图独立I/II/III，费用0/4/8、基础完成奖4/8/12校准碎片，另计原地图词缀奖励'), ('入图', '一次建立全部真实普通根怪与首领；远处实体可被命中，唤醒后持续追击'), ('结束', '全部根怪、首领、活后代和待出生队列清空后完成，返城领取冻结奖励'), ('独立入口', '竞技练习保留旧入侵；免费测试地图与正式档案隔离')]) + '<p>' + link('rules', 'exploration_maps', '探索规则与未来机制边界') + '</p>'
