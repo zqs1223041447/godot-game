@@ -563,6 +563,9 @@ func unbind_group(group_id: Variant, expected_revision: Variant, path: String) -
 
 const Craft = preload("res://scripts/items/crafting_rules.gd")
 const CraftPlanner = preload("res://scripts/items/crafting_transaction_planner.gd")
+const JewelCraft = preload("res://scripts/items/jewel_craft_rules.gd")
+const JewelPlanner = preload("res://scripts/items/jewel_craft_planner.gd")
+const JEWEL_QUOTE_LIFETIME_MSEC := 120000
 var _craft_quotes: Dictionary = {}
 var _craft_sequence := 0
 var _gem_trade_quotes: Dictionary = {}
@@ -682,6 +685,8 @@ func crafting_balance() -> int:
 ## rolled result. The already validated store owns instances; the selected
 ## instance is checked by the real craft rules. Clicking still requires quote.
 func crafting_operations(uid: Variant, path: String = "user://build_save.json") -> Array[Dictionary]:
+	if uid is String and _current.items.has(uid) and _current.items[uid].kind == "jewel":
+		return _jewel_crafting_operations(uid, path)
 	var blocked := ""
 	var source: Dictionary = {}
 	if not uid is String or not _current.items.has(uid): blocked = "请先选择背包中的随机装备"
@@ -713,6 +718,8 @@ func crafting_operations(uid: Variant, path: String = "user://build_save.json") 
 
 
 func crafting_quote(operation: Variant, uid: Variant, path: String = "user://build_save.json") -> Dictionary:
+	if uid is String and _current.items.has(uid) and _current.items[uid].kind == "jewel":
+		return _jewel_crafting_quote(operation, uid, path)
 	if int(_current.crafting.revision) >= Rules.MAX_SERIAL: return _craft_failure("revision_limit","制作修订已达上限")
 	if not uid is String or not _current.items.has(uid): return _craft_failure("not_owned","当前没有此物品")
 	var owned: Dictionary = _current.items[uid]
@@ -748,6 +755,7 @@ func execute_crafting(handle: Variant, source_instance: Variant) -> Dictionary:
 	if _busy: return _craft_failure("busy","当前操作尚未结束")
 	if not handle is String or not _craft_quotes.has(handle): return _craft_failure("unknown_quote","报价已失效")
 	var issued: Dictionary = _craft_quotes[handle]
+	if issued.get("kind", "") == "jewel": return _execute_jewel_crafting(handle, source_instance)
 	var quote: Dictionary = issued.quote
 	if not CraftPlanner._same_data(source_instance,quote.source_instance): return _craft_failure("source_mismatch","装备已变化")
 	if not CraftPlanner._same_data(_current,issued.snapshot):
@@ -798,6 +806,114 @@ func _craft_context(uid: String,path: String) -> Dictionary:
 
 static func _craft_failure(code: String, reason: String) -> Dictionary:
 	return {"ok":false,"code":code,"reason":reason}
+
+
+func _jewel_craft_guard(uid: String, path: String) -> Dictionary:
+	if _busy: return _craft_failure("busy", "当前操作尚未结束")
+	if not Legacy._save_paths_match(_path, path): return _craft_failure("profile_changed", "请使用当前已打开的存档")
+	if revision() >= Rules.MAX_SERIAL or int(_current.crafting.revision) >= Rules.MAX_SERIAL:
+		return _craft_failure("revision_limit", "制作修订已达上限")
+	if not _current.items.has(uid) or _current.items[uid].kind != "jewel": return _craft_failure("not_owned", "当前没有这颗珠宝")
+	if _current.locations[uid].kind != "bag": return _craft_failure("item_equipped", "请先把珠宝放入背包；已插孔或待安置的珠宝不能制作")
+	if not save_block_reason(path).is_empty(): return _craft_failure("save_read_only", "当前存档受写保护")
+	return {"ok": true}
+
+
+func _jewel_crafting_operations(uid: String, path: String) -> Array[Dictionary]:
+	var guard := _jewel_craft_guard(uid, path)
+	var total := ShardCatalog.total_quantity(_current.items)
+	var result: Array[Dictionary] = []
+	for operation: String in JewelCraft.operation_ids():
+		var entry := JewelCraft.operation_metadata(operation)
+		entry.merge({"cost": {}, "materials": {}, "available": false, "reason": guard.get("reason", "")})
+		if guard.ok:
+			var rule := JewelCraft.operation_quote(_current.items[uid].payload, operation)
+			if not rule.ok: entry.reason = rule.reason
+			else:
+				entry.cost = rule.cost.duplicate(true)
+				entry.materials = rule.materials.duplicate(true)
+				var debit: int = rule.cost.get(Craft.MATERIAL_ID, 0)
+				var credit: int = rule.materials.get(Craft.MATERIAL_ID, 0)
+				if not total.ok: entry.reason = "校准碎片库存无效"
+				elif crafting_balance() < debit: entry.reason = "背包中的校准碎片不足"
+				elif credit > ShardCatalog.INVENTORY_LIMIT - (int(total.quantity) - debit): entry.reason = "全库存校准碎片总量已达上限"
+				else: entry.available = true
+		result.append(entry)
+	return result
+
+
+func _jewel_craft_context(uid: String, path: String) -> Dictionary:
+	return {"revision": int(_current.crafting.revision), "jewels": {uid: _current.items[uid].payload.duplicate(true)},
+		"locations": {uid: _current.locations[uid].duplicate(true)}, "materials": {Craft.MATERIAL_ID: crafting_balance()},
+		"save_writable": save_block_reason(path).is_empty()}
+
+
+func _jewel_crafting_quote(operation: Variant, uid: String, path: String) -> Dictionary:
+	var guard := _jewel_craft_guard(uid, path)
+	if not guard.ok: return guard
+	if not Rules.reason(_current, _talent_validator, _socket_ids).is_empty(): return _craft_failure("invalid_build", "构筑数据无效")
+	var quote := JewelPlanner.quote(_jewel_craft_context(uid, path), operation, uid)
+	if not quote.ok: return quote
+	# Preflight the actual currency stacks and released cell, without rolling.
+	var trial := snapshot()
+	var released: Dictionary = {}
+	if quote.consumes_item:
+		released = trial.locations[uid].duplicate(true)
+		trial.items.erase(uid)
+		trial.locations.erase(uid)
+	var balance := crafting_balance() - int(quote.cost.get(Craft.MATERIAL_ID, 0)) + int(quote.materials.get(Craft.MATERIAL_ID, 0))
+	var currency := _set_bag_currency_balance(trial, balance, released)
+	if not currency.ok: return _craft_failure(currency.error_code, currency.reason)
+	var disk := _canonical_disk_stamp(path)
+	if not disk.ok: return _craft_failure("save_unreadable", "存档无法读取")
+	if bool(disk.get("exists", false)) != _disk_expected_exists or (_disk_expected_exists and FileAccess.get_file_as_bytes(path) != _disk_bytes):
+		return _craft_failure("save_changed", "存档已变化，请重新读取后制作")
+	_craft_sequence += 1
+	var handle := "%d:%d" % [get_instance_id(), _craft_sequence]
+	while _craft_quotes.size() >= 8: _craft_quotes.erase(_craft_quotes.keys()[0])
+	_craft_quotes[handle] = {"kind": "jewel", "quote": quote.duplicate(true), "snapshot": snapshot(),
+		"path": path, "disk": disk.duplicate(true), "expires_msec": Time.get_ticks_msec() + JEWEL_QUOTE_LIFETIME_MSEC}
+	var visible := quote.duplicate(true)
+	visible.handle = handle
+	return visible
+
+
+func _execute_jewel_crafting(handle: String, source_instance: Variant) -> Dictionary:
+	var issued: Dictionary = _craft_quotes[handle]
+	var quote: Dictionary = issued.quote
+	if Time.get_ticks_msec() >= int(issued.expires_msec):
+		_craft_quotes.erase(handle)
+		return _craft_failure("expired_quote", "珠宝报价已到期，请重新获取报价")
+	if not CraftPlanner._same_data(source_instance, quote.source_instance): return _craft_failure("source_mismatch", "所选珠宝已变化")
+	var guard := _jewel_craft_guard(quote.item_id, issued.path)
+	if not guard.ok: return guard
+	if not CraftPlanner._same_data(_current, issued.snapshot):
+		_craft_quotes.erase(handle)
+		return _craft_failure("stale_quote", "构筑已变化，请重新获取报价")
+	if _canonical_disk_stamp(issued.path) != issued.disk:
+		_reject(issued.path, "存档已被外部修改")
+		return _craft_failure("save_changed", "存档已变化，珠宝与碎片保持原样")
+	var seed_text := JSON.stringify({"rules": JewelCraft.RULES_VERSION + ":" + quote.operation,
+		"revision": int(_current.crafting.revision), "item": quote.source_instance}, "", true, true)
+	var plan := JewelPlanner.plan(_jewel_craft_context(quote.item_id, issued.path), quote, seed_text.sha256_text().substr(0, 15).hex_to_int())
+	if not plan.ok: return plan
+	var candidate := snapshot()
+	var released: Dictionary = {}
+	if quote.consumes_item:
+		released = candidate.locations[quote.item_id].duplicate(true)
+		candidate.items.erase(quote.item_id)
+		candidate.locations.erase(quote.item_id)
+	else:
+		candidate.items[quote.item_id] = Items.wrap_jewel(plan.candidate.jewels[quote.item_id])
+	candidate.crafting = {"revision": plan.candidate.revision}
+	var currency := _set_bag_currency_balance(candidate, int(plan.candidate.materials[Craft.MATERIAL_ID]), released)
+	if not currency.ok: return _craft_failure(currency.error_code, currency.reason)
+	candidate.revision += 1
+	var result := _commit(candidate, issued.path)
+	if not result.ok: return _craft_failure(result.error_code, result.reason)
+	_craft_quotes.clear()
+	return {"ok": true, "code": "", "reason": "", "operation": quote.operation, "item_id": quote.item_id,
+		"cost": quote.cost.duplicate(true), "materials": quote.materials.duplicate(true), "revision": int(_current.crafting.revision)}
 
 
 func _set_bag_currency_balance(candidate: Dictionary, target_balance: int,

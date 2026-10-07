@@ -33,6 +33,7 @@ RULE_TITLES['precise_technique'] = '精准技艺：严格命中条件与全局�
 RULE_TITLES['inward_pull'] = '牵引辅助：朝真实爆发圆心反转冲量'
 RULE_TITLES['glove_ring_affixes'] = '精瞄手套与三抗戒指：前后缀取舍'
 RULE_TITLES['frost_lock'] = '霜锁辅助：短冻结、解冻免疫与攻击接续'
+RULE_TITLES['jewel_crafting'] = '普通珠宝：回收与整体重铸'
 RULE_TITLES['cold_ailment_duration'] = '冰霜异常持续时间：精确20%与施放快照'
 RULE_TITLES['source_monster_movement'] = '流岚疾行：旧固定投影与当前源移动词条'
 RULE_TITLES['source_monster_damage_life'] = '烬火与苍林：源伤害提高与最大生命提高'
@@ -49,6 +50,43 @@ DAMAGE_NAMES = {'physical':'物理','fire':'火焰','cold':'冰霜','lightning':
 def component_text(components):
     return ' + '.join(f'{DAMAGE_NAMES[k]} {number(v)}' for k,v in ((key,components.get(key,0)) for key in DAMAGE_NAMES) if v) or '无'
 def percent(value): return number(value*100)+'%'
+def merge_jewel_crafting_fragment(data, fragment):
+    """Merge one bounded game-data fragment; every unrelated value is preserved."""
+    if set(fragment) != {'jewel_crafting'}:
+        raise ValueError('Expected only the jewel_crafting fragment')
+    rule=fragment['jewel_crafting']
+    if rule['base_ids'] != ['emberheart','tideglass','windweave'] or rule['rarities'] != ['magic','rare']:
+        raise ValueError('Unexpected ordinary jewel scope')
+    if set(rule['operations']) != {'salvage','reforge'} or rule['material_id'] != 'calibration_shard':
+        raise ValueError('Unexpected jewel operation or material')
+    result=dict(data)
+    result['jewel_crafting']=json.loads(json.dumps(rule,ensure_ascii=False))
+    return result
+
+
+def jewel_crafting_rule(data, link, facts):
+    rule=data['jewel_crafting']
+    rows=[]
+    for rarity,label in [('magic','魔法'),('rare','稀有')]:
+        counts=rule['affix_counts'][rarity]
+        prefix=number(counts['min_prefixes']) if counts['min_prefixes']==counts['max_prefixes'] else number(counts['min_prefixes'])+'–'+number(counts['max_prefixes'])
+        def value(kind,amount):
+            return '<strong data-jewel-craft="'+kind+'-'+rarity+'" data-value="'+number(amount)+'">'+number(amount)+'</strong>'
+        rows.append('<tr><th>'+label+'</th><td>'+value('salvage',rule['salvage_units'][rarity])+'</td><td>'+value('reforge',rule['reforge_costs'][rarity])+'</td><td>'+prefix+'前缀 / '+number(counts['suffixes'])+'后缀</td></tr>')
+    body=facts([('可用珠宝',' · '.join(link('jewels',base) for base in rule['base_ids'])),('材料',link('crafting','calibration_shard')),('所在位置','背包；已插孔、待安置与特殊寻枝晶玉均不可制作')])
+    body+='<div class="table-scroll"><table><thead><tr><th>稀有度</th><th>回收收益（碎片）</th><th>整体重铸消耗（碎片）</th><th>重铸词缀数量</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
+    body+='<p>在已有工匠范围选择普通珠宝，再查看报价并确认。整体重铸保留UID、底材、稀有度和背包位置，全部原词缀被替换；同族不重复，只取该底材既有词池与原数值步长。结果可能相同或更差，费用仍会消耗。</p>'
+    body+='<p>回收仅消耗选中的一颗。收益合入背包碎片堆，必要时复用这颗珠宝释放的1×1格；两页满包时也能使用原格。待安置碎片不计可消费余额。</p>'
+    body+='<p>报价'+number(rule['quote_seconds'])+'秒到期；取消不收费。换物、换档、构筑或磁盘变化使旧报价失效。材料不足、货币栈落位或保存失败时珠宝、碎片和修订均不变化；重复确认不会重复扣费。</p>'
+    body+='<p>没有珠宝校准、升格、补缀或定向重铸，没有新底材、词族、货币与自动赠物。正式来源与独立免费测试供应保持原边界；自然珠宝随机流和装备六工艺、定向制作保持。</p>'
+    example=rule.get('actual_main_example')
+    if example:
+        body+='<p>隔离测试夹具的实际Main确认示例：'+esc(example['name'])+'，'+number(example['balance_before'])+' → '+number(example['balance_after'])+'碎片，身份与底材保留。该记录来自测试数据，不是用户正式档或掉落概率。</p>'
+        body+='<details><summary>这次实际重铸结果</summary><div class="detail-body">'+lines(example['description'])+'</div></details>'
+    body+='<p><a href="../JEWEL_CRAFTING.zh-CN.md">规则与事务合同</a> · <a href="../qa/v091-jewel-crafting/README.md">集中验证</a> · '+link('rules','allocation')+'</p>'
+    return body
+
+
 def frost_chill_hint(data, link):
     chill=data['frost_guard_chill'];policy=chill['policy']
     return '<p>霜纹寒击实际命中且玩家存活、护盾／魔力／生命实际支出的冰霜份额大于零时，施加 '+percent(policy['movement_speed_reduced'])+' 移动减速，持续 '+number(policy['duration'])+' 秒。同强度只刷新截止，不叠强度或累计时长；不追加伤害，不冻结玩家。'+link('rules','frost_guard_chill','冰缓准入、保护与时间边界')+'。</p>'
@@ -1228,7 +1266,11 @@ def build(data, art):
             summary='镶入已分配的珠宝孔后，提供已掷出的角色属性加值。普通珠宝不改变连通规则。'
             body=facts([('前缀词池',links('jewel_affixes',j['prefixes'])),('后缀词池',links('jewel_affixes',j['suffixes']))])
             for example in j['examples']: body+=details('初始实例 · '+example['name'],'<p>'+lines(example['description'])+'</p>')
-        cards.append(add('jewels',key,j['name'],summary,body,TYPES[j['kind']],related=link('rules','allocation')))
+        related=link('rules','allocation')
+        if j['kind']=='ordinary' and 'jewel_crafting' in data:
+            body+='<p>背包中的魔法与稀有珠宝可在工匠处回收或整体重铸；'+link('rules','jewel_crafting','价格、数量与风险')+'。</p>'
+            related+=' · '+link('rules','jewel_crafting')
+        cards.append(add('jewels',key,j['name'],summary,body,TYPES[j['kind']],related=related))
     for key,j in data['jewel_affixes'].items():
         bases=[k for k,v in data['jewels'].items() if key in v.get('prefixes',[])+v.get('suffixes',[])]
         cards.append(add('jewel_affixes',key,j['name'],j['range_text'],facts([('掷值步长',number(j['step'])),('可用珠宝',links('jewels',bases))]),TYPES[j['kind']],related=link('rules','allocation')))
@@ -1339,6 +1381,8 @@ def build(data, art):
         body=diagram+facts([('占用','1×1 背包格'),('单堆与全库存上限',number(c['stack_limit'])),('持久数量来源',esc(c['quantity_source'])),('保存版本',number(c['save_version']))])
         body+='<p>只有背包中的堆可用于制作。回收优先合入已有堆，否则使用被回收装备释放的格子；零数量堆被移除。拖到同种堆可合并，整堆丢弃需要确认。旧余额先原字节备份再转为真实物品；仅迁移满包时可保留在待安置区，该区域的碎片不能用于校准。</p>'
         body+='<p>该上限沿用本游戏原型的旧材料边界，不是PoE原版堆叠规则。实例数量随游戏过程变化，本页定义中的1枚仅为合法格式示例。</p>'
+        if 'jewel_crafting' in data:
+            body+='<p>同一碎片堆也用于'+link('rules','jewel_crafting','普通珠宝回收与整体重铸')+'，珠宝费用和收益独立于装备阶级公式，不新增材料钱包。</p>'
         cards.append(add('currencies',key,c['name'],c['description'],body,'物品化制作材料',related=' · '.join(link('crafting',op) for op,entry in data['crafting'].items() if entry['kind']=='operation')))
     for key,e in data['encounters'].items():
         body=encounter_diagram(key,e,data['monsters'])+facts([('操作',esc(e['operation'])),('实际规则',esc(e['description'])),('作用字段',esc(e['field'])),('固定来源','物种/波次/稀有度/机制生成标准怪物后，始终读取未加本轮普通词缀的基准；死亡子怪各按自己的标准值应用一次'),('保持','体型、身份、稀有度、原机制、RNG与奖励资格不变'),('风险说明','初版可调预算；实战难度未合并评分'),('奖励','无额外经验、掉落、制作材料或地图物品'),('生命周期','最多2普通；F7确认重开或城镇制图后生效，不随构筑保存')])
@@ -1804,6 +1848,8 @@ def build(data, art):
     if 'frost_guard_chill' in data:
         policy=data['frost_guard_chill']['policy']
         rule_defs.append(('frost_guard_chill', '霜纹寒击与玩家冰缓', '霜纹寒击造成实际冰霜损伤后，存活玩家移动减速'+percent(policy['movement_speed_reduced'])+'，持续'+number(policy['duration'])+'秒；不追加伤害。', frost_chill_rule(data,link,facts), 'implemented'))
+    if 'jewel_crafting' in data:
+        rule_defs.append(('jewel_crafting', RULE_TITLES['jewel_crafting'], '背包中的三种普通珠宝可回收或整体重铸；保留底材与稀有度。', jewel_crafting_rule(data,link,facts), 'implemented'))
     for key,name,summary,body,status in rule_defs: cards.append(add('rules',key,name,summary,body,{'implemented':'已实现规则','research':'研究来源','planned':'未实现边界'}[status],status))
     category_counts={cat:sum(x['cat']==cat for x in records) for cat,_ in CATEGORIES}
     nav=''.join(f'<a href="#category-{cat}" id="category-{cat}" class="nav-link" data-category="{cat}"><span>{label}</span><span>{category_counts[cat]}</span></a>' for cat,label in CATEGORIES)
