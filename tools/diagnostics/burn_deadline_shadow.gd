@@ -1,0 +1,244 @@
+extends RefCounted
+## Pure diagnostic queue, deliberately unused by production. This predicts
+## deadlines from caller-owned scalar snapshots; it never settles damage,
+## advances BurnRuntime, expires statuses, chooses transfers or changes actors.
+## Float prediction uncertainty and scheduler equivalence remain unproved.
+const Defense = preload("res://scripts/mechanics/defense_rules.gd")
+const MAX_TARGETS: int = 100
+const MAX_GENERATION: int = 9223372036854775807
+const REQUIRED_KEYS: Array[String] = ["target_id", "last_time", "raw_dps", "expires_at", "shield", "health", "fire_resistance"]
+
+var _heap: Array[Dictionary] = []
+var _positions: Dictionary = {}
+# One bounded scalar, never a historical-ID dictionary. Never reset on clear.
+# Exhaustion rejects future inserts/replacements instead of recycling tickets.
+var _generation: int = 0
+
+
+func configure(rows: Variant) -> Dictionary:
+	if not rows is Array:
+		return _failure("rows_must_be_array")
+	if rows.size() > MAX_TARGETS:
+		return _failure("target_capacity_exceeded")
+	var planned: Array[Dictionary] = []
+	var identities: Dictionary = {}
+	for row: Variant in rows:
+		var result: Dictionary = _plan_row(row)
+		if not result.ok:
+			return result
+		var node: Dictionary = result.entry
+		if identities.has(node.target_id):
+			return _failure("duplicate_target_id")
+		identities[node.target_id] = true
+		planned.append(node)
+	if rows.size() > MAX_GENERATION - _generation:
+		return _failure("fallback_required_generation_exhausted")
+	# Everything that can reject has completed. Build locally before replacement.
+	var next_positions: Dictionary = {}
+	var next_generation: int = _generation
+	for index: int in range(planned.size()):
+		next_generation += 1
+		planned[index]["generation"] = next_generation
+		planned[index]["queue_id"] = get_instance_id()
+		next_positions[planned[index].target_id] = index
+	_heap = planned
+	_positions = next_positions
+	_generation = next_generation
+	for index: int in range(_heap.size() / 2 - 1, -1, -1):
+		_sift_down(index)
+	return {"ok": true, "reason": "", "count": _heap.size()}
+
+
+func upsert(row: Variant) -> Dictionary:
+	var result: Dictionary = _plan_row(row)
+	if not result.ok:
+		return result
+	var node: Dictionary = result.entry
+	var replacing: bool = _positions.has(node.target_id)
+	if not replacing and _heap.size() >= MAX_TARGETS:
+		return _failure("target_capacity_exceeded")
+	if _generation == MAX_GENERATION:
+		return _failure("fallback_required_generation_exhausted")
+	_generation += 1
+	node["generation"] = _generation
+	node["queue_id"] = get_instance_id()
+	if replacing:
+		var index: int = _positions[node.target_id]
+		_heap[index] = node
+		_repair(index)
+	else:
+		_positions[node.target_id] = _heap.size()
+		_heap.append(node)
+		_sift_up(_heap.size() - 1)
+	return {"ok": true, "reason": "", "replaced": replacing, "entry": node.duplicate(true)}
+
+
+func remove(id: Variant) -> Dictionary:
+	if typeof(id) != TYPE_INT or id <= 0:
+		return {"ok": false, "reason": "target_id_must_be_positive_integer", "removed": false}
+	if not _positions.has(id):
+		return {"ok": true, "reason": "", "removed": false}
+	_remove_at(_positions[id])
+	return {"ok": true, "reason": "", "removed": true}
+
+
+func peek() -> Dictionary:
+	return {} if _heap.is_empty() else _heap[0].duplicate(true)
+
+
+func pop_due(to_time: Variant) -> Dictionary:
+	if not _finite_number(to_time) or float(to_time) < 0.0:
+		return {"ok": false, "reason": "to_time_must_be_finite_nonnegative_number", "entries": []}
+	var due: Array[Dictionary] = []
+	# A cutoff query has no implied gameplay clock. Callers own chronological
+	# settlement, including settling a death ticket before removing its expiry.
+	while not _heap.is_empty() and float(_heap[0].deadline) <= float(to_time):
+		due.append(_heap[0].duplicate(true))
+		_remove_at(0)
+	return {"ok": true, "reason": "", "entries": due}
+
+
+func entries() -> Array:
+	var result: Array[Dictionary] = _heap.duplicate(true)
+	result.sort_custom(_less)
+	return result
+
+
+func snapshot() -> Dictionary:
+	return {"heap": _heap.duplicate(true), "positions": _positions.duplicate(true), "generation": _generation}
+
+
+func clear() -> void:
+	_heap.clear()
+	_positions.clear()
+
+
+func is_current(ticket: Variant) -> bool:
+	if not ticket is Dictionary:
+		return false
+	if typeof(ticket.get("target_id")) != TYPE_INT or typeof(ticket.get("generation")) != TYPE_INT or typeof(ticket.get("queue_id")) != TYPE_INT:
+		return false
+	if ticket.queue_id != get_instance_id() or not _positions.has(ticket.target_id):
+		return false
+	return _heap[_positions[ticket.target_id]].generation == ticket.generation
+
+
+func _plan_row(row: Variant) -> Dictionary:
+	if not row is Dictionary:
+		return _failure("row_must_be_dictionary")
+	for key: Variant in row:
+		if typeof(key) != TYPE_STRING or (key not in REQUIRED_KEYS and key != "revision"):
+			return _failure("unknown_or_non_string_row_key")
+	for key: String in REQUIRED_KEYS:
+		if not row.has(key):
+			return _failure("missing_row_key:" + key)
+	if typeof(row.target_id) != TYPE_INT or row.target_id <= 0:
+		return _failure("target_id_must_be_positive_integer")
+	if not _finite_number(row.last_time) or float(row.last_time) < 0.0:
+		return _failure("last_time_must_be_finite_nonnegative_number")
+	if not _finite_number(row.raw_dps) or float(row.raw_dps) <= 0.0:
+		return _failure("raw_dps_must_be_finite_positive_number")
+	if not _finite_number(row.expires_at):
+		return _failure("expires_at_must_be_finite_number")
+	if float(row.expires_at) <= float(row.last_time):
+		return _failure("expires_at_must_exceed_last_time")
+	if not _finite_number(row.shield) or float(row.shield) < 0.0:
+		return _failure("shield_must_be_finite_nonnegative_number")
+	if not _finite_number(row.health) or float(row.health) <= 0.0:
+		return _failure("health_must_be_finite_positive_number")
+	if not _finite_number(row.fire_resistance):
+		return _failure("fire_resistance_must_be_finite_number")
+	if row.has("revision") and (typeof(row.revision) != TYPE_INT or row.revision < 0):
+		return _failure("revision_must_be_nonnegative_integer")
+	var rate: Dictionary = Defense.incoming_burn(row.raw_dps, row.fire_resistance, 0.0, 1.0, "monster")
+	if not rate.get("ok", false):
+		return _failure("fallback_required_defense_rejection:" + str(rate.get("reason", "")))
+	if not _finite_number(rate.get("damage_total")) or float(rate.damage_total) <= 0.0:
+		return _failure("fallback_required_unrepresentable_damage_rate")
+	var pool: float = float(row.shield) + float(row.health)
+	if not is_finite(pool):
+		return _failure("fallback_required_pool_overflow")
+	var last: float = float(row.last_time)
+	var death_at: float = last + pool / float(rate.damage_total)
+	if not is_finite(death_at):
+		return _failure("fallback_required_unrepresentable_death_at")
+	if death_at <= last:
+		death_at = _next_double(last)
+	if not is_finite(death_at) or death_at <= last:
+		return _failure("fallback_required_unrepresentable_death_at")
+	var node: Dictionary = row.duplicate(true)
+	node["damage_rate"] = rate.damage_total
+	node["death_at"] = death_at
+	node["deadline"] = minf(death_at, float(row.expires_at))
+	node["kind"] = "death" if death_at <= float(row.expires_at) else "expiry"
+	return {"ok": true, "reason": "", "entry": node}
+
+
+static func _finite_number(value: Variant) -> bool:
+	return typeof(value) in [TYPE_INT, TYPE_FLOAT] and is_finite(float(value))
+
+
+static func _next_double(value: float) -> float:
+	var bits := PackedByteArray()
+	bits.resize(8)
+	# Preserve Main's original bit increment exactly. In particular, -0.0
+	# underflow produces a negative subnormal; the caller rejects that result
+	# for fallback instead of repairing production prediction arithmetic here.
+	bits.encode_double(0, value)
+	bits.encode_u64(0, bits.decode_u64(0) + 1)
+	return bits.decode_double(0)
+
+
+static func _less(left: Dictionary, right: Dictionary) -> bool:
+	if left.deadline != right.deadline:
+		return left.deadline < right.deadline
+	return left.target_id < right.target_id
+
+
+func _swap(left: int, right: int) -> void:
+	var held: Dictionary = _heap[left]
+	_heap[left] = _heap[right]
+	_heap[right] = held
+	_positions[_heap[left].target_id] = left
+	_positions[_heap[right].target_id] = right
+
+
+func _sift_up(index: int) -> void:
+	while index > 0:
+		var parent: int = (index - 1) / 2
+		if not _less(_heap[index], _heap[parent]):
+			break
+		_swap(index, parent)
+		index = parent
+
+
+func _sift_down(index: int) -> void:
+	while index * 2 + 1 < _heap.size():
+		var child: int = index * 2 + 1
+		if child + 1 < _heap.size() and _less(_heap[child + 1], _heap[child]):
+			child += 1
+		if not _less(_heap[child], _heap[index]):
+			break
+		_swap(index, child)
+		index = child
+
+
+func _repair(index: int) -> void:
+	if index > 0 and _less(_heap[index], _heap[(index - 1) / 2]):
+		_sift_up(index)
+	else:
+		_sift_down(index)
+
+
+func _remove_at(index: int) -> void:
+	_positions.erase(_heap[index].target_id)
+	var last: Dictionary = _heap.pop_back()
+	if index == _heap.size():
+		return
+	_heap[index] = last
+	_positions[last.target_id] = index
+	_repair(index)
+
+
+static func _failure(reason: String) -> Dictionary:
+	return {"ok": false, "reason": reason}
