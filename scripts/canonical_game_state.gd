@@ -249,7 +249,33 @@ func available_passives() -> Array[String]:
 	return SourceTree.available(_current)
 
 
+## Detached selection-time eligibility, using the transaction's own candidate
+## and final-state validator. This does not check disk access or promise a save;
+## the eventual command independently rebuilds, validates and persists again.
+func passive_action_preview(node_id: Variant, mastery_effect: Variant = 0) -> Dictionary:
+	var current_revision := revision()
+	return {
+		"revision": current_revision,
+		"allocate": _passive_plan_preview(_plan_passive_allocation(node_id, mastery_effect, current_revision)),
+		"refund": _passive_plan_preview(_plan_passive_refund(node_id, current_revision)),
+	}
+
+
+func _passive_plan_preview(plan: Dictionary) -> Dictionary:
+	if not plan.ok:
+		return {"allowed": false, "error_code": str(plan.error_code), "reason": str(plan.reason)}
+	var candidate := _prepare_candidate(plan.candidate)
+	var reason: String = Rules.reason(candidate, _talent_validator, _socket_ids)
+	return {"allowed": reason.is_empty(), "error_code": "" if reason.is_empty() else "invalid_candidate", "reason": reason}
+
+
 func allocate_passive(node_id: Variant, mastery_effect: Variant, expected_revision: Variant, path: String) -> Dictionary:
+	var plan := _plan_passive_allocation(node_id, mastery_effect, expected_revision)
+	if not plan.ok: return plan
+	return _commit(plan.candidate, path)
+
+
+func _plan_passive_allocation(node_id: Variant, mastery_effect: Variant, expected_revision: Variant) -> Dictionary:
 	if _busy: return _failure("busy","当前操作尚未结束")
 	if not expected_revision is int or expected_revision != revision(): return _failure("stale_revision","天赋配置已变化")
 	if not node_id is String or not mastery_effect is int or not SourceTree.Data.standard_ids().has(node_id): return _failure("unknown_node","未知源天赋")
@@ -263,10 +289,16 @@ func allocate_passive(node_id: Variant, mastery_effect: Variant, expected_revisi
 	candidate.talents.allocated.append(node_id)
 	candidate.talents.normal_points -= 1
 	candidate.revision += 1
-	return _commit(candidate,path)
+	return {"ok": true, "candidate": candidate}
 
 
 func refund_passive(node_id: Variant, expected_revision: Variant, path: String) -> Dictionary:
+	var plan := _plan_passive_refund(node_id, expected_revision)
+	if not plan.ok: return plan
+	return _commit(plan.candidate, path)
+
+
+func _plan_passive_refund(node_id: Variant, expected_revision: Variant) -> Dictionary:
 	if _busy: return _failure("busy","当前操作尚未结束")
 	if not expected_revision is int or expected_revision != revision(): return _failure("stale_revision","天赋配置已变化")
 	if not node_id is String or not _current.talents.allocated.has(node_id): return _failure("not_allocated","此天赋尚未分配")
@@ -275,7 +307,7 @@ func refund_passive(node_id: Variant, expected_revision: Variant, path: String) 
 	candidate.talents.masteries.erase(node_id)
 	candidate.talents.normal_points += 1
 	candidate.revision += 1
-	return _commit(candidate,path)
+	return {"ok": true, "candidate": candidate}
 
 
 func select_class(class_id: Variant, expected_revision: Variant, path: String) -> Dictionary:
