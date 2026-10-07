@@ -10,7 +10,7 @@ const POLICY: Dictionary = {
 }
 const SUPPORTS: Dictionary = {"encircling_cleave": {
 	"name": "环斩辅助",
-	"description": "仅辅助裂刃斩：180°前方半圆改为360°整圆，半径仍由范围加成决定；主命中伤害×0.75，魔力消耗×1.25，冷却不变。每个目标仍只结算一次，占用1个辅助槽。",
+	"description": "仅辅助裂刃斩：180度前方半圆改为360度整圆，半径仍由范围加成决定；主命中伤害×0.75，魔力消耗×1.25，冷却不变。每个目标仍只结算一次，占用1个辅助槽。",
 	"skills": SKILLS, "requires": [], "family": "encircling_cleave",
 	"operations": [{"op": "primary_hit_more", "value": -0.25}, {"op": "mana_multiplier", "value": 1.25}],
 }}

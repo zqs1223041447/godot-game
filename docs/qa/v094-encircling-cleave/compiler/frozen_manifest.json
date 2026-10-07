@@ -1,0 +1,21 @@
+{
+  "base_commit": "c5690b933e7ed56210241e8124d45eefc5ee2596",
+  "files": [
+    {
+      "source": "scripts/combat/support_registry.gd",
+      "source_sha256": "6e0953837610025194fa3393486835085563fe5af4190c84fd94028078cbb198",
+      "fixture": "docs/qa/v094-encircling-cleave/compiler/frozen/support_registry.gd",
+      "fixture_sha256": "58c0fea910761155a19d2b864841a4bb71b2a64c6dc16719f7806de51a22021a"
+    },
+    {
+      "source": "scripts/combat/skill_compiler.gd",
+      "source_sha256": "df6aef2d2fb0254727fe6f325c83b578eaa4fe99e896c69cc19cc5b90cbbf4d7",
+      "fixture": "docs/qa/v094-encircling-cleave/compiler/frozen/skill_compiler.gd",
+      "fixture_sha256": "db0e5febd4e851d0d10b3090c7faa276837ddf880ea798cd93a981f30e75e762"
+    }
+  ],
+  "adaptations": [
+    "Remove class_name to avoid global class collisions",
+    "Redirect frozen SkillCompiler Supports preload to the frozen SupportRegistry"
+  ]
+}
