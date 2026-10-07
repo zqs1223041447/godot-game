@@ -1822,10 +1822,17 @@ func player_defense_profile() -> Dictionary:
 func hit_player_components(components: Variant, source_id: int = 0, delivery_tags: Array = [], hit_context:Dictionary={}) -> bool:
 	if not alive or invulnerable > 0.0:
 		return false
-	var at:float=float(hit_context.get("at",_burn_incoming_time if _burn_incoming_time>=0.0 else elapsed))
+	var raw_at:Variant=hit_context.get("at",_burn_incoming_time if _burn_incoming_time>=0.0 else elapsed)
+	if hit_context.has("chill_policy"):
+		if not chill_runtime.application_error(source_id,raw_at,hit_context.chill_policy).is_empty():return false
+		# Incoming chill belongs to this settlement window. Validate before any
+		# type conversion, entropy draw or resource change; empty states cannot
+		# revive from a delayed context, and future times cannot move the floor.
+		var window_start:float=_burn_step_start if _burn_step_active else elapsed
+		if float(raw_at)<window_start or float(raw_at)>elapsed:return false
+	var at:float=float(raw_at)
 	if not is_finite(at) or at<shock_runtime.read_floor():return false
 	if hit_context.has("shock_policy") and not ShockRules.policy_error(hit_context.shock_policy).is_empty():return false
-	if hit_context.has("chill_policy") and not chill_runtime.application_error(source_id,at,hit_context.chill_policy).is_empty():return false
 	var shock_increase:float=_shock_hit_increase("player",0,at)
 	var mana_ratio:Variant=_stats.get("damage_taken_from_mana_before_life",0.0)
 	var settlement: Dictionary
