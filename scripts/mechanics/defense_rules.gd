@@ -8,6 +8,7 @@ extends RefCounted
 const Damage = preload("res://scripts/combat/damage_resolver.gd")
 const STAGE: String = "hit_mitigation"
 const FIRE_RESISTANCE_CAP: float = 0.75
+const CHAOS_RESISTANCE_CAP: float = 0.75
 const ELEMENTAL_RESISTANCE_SAFETY_CAP: float = 0.83
 const ELEMENTS: Array[String] = ["fire", "cold", "lightning"]
 const ACTORS: Array[String] = ["player", "monster"]
@@ -111,6 +112,30 @@ static func _effective_elemental_resistance(raw: float, bonus: float) -> float:
 	return clampf(raw, 0.0, _maximum_elemental_resistance(bonus))
 
 
+## Original hit defense. Chaos is independent from the three elemental caps.
+## This rule does not grant chaos resistance through the source talent tree.
+static func chaos_resistance_profile(stats: Dictionary, actor: String = "player") -> Dictionary:
+	if not ACTORS.has(actor): return _failure("Unknown defense actor")
+	var amount: Variant = stats.get("chaos_resistance", 0.0)
+	if not _finite_number(amount): return _failure("Chaos resistance must be a finite scalar")
+	var raw: float = float(amount)
+	return {"ok": true, "reason": "", "raw": raw, "cap": CHAOS_RESISTANCE_CAP,
+		"effective": clampf(raw, 0.0, CHAOS_RESISTANCE_CAP)}
+
+
+static func chaos_resistance_metadata() -> Dictionary:
+	return {
+		"id": "chaos_resistance", "name": "混沌抗性", "kind": "hit_defense",
+		"stage": STAGE, "stat": "chaos_resistance", "damage_type": "chaos",
+		"supported_actors": ACTORS.duplicate(), "schema_version": 1,
+		"origin": "original", "source_refs": [], "balance_version": "original-chaos-defense-v1",
+		"minimum_effective": 0.0, "maximum_effective": CHAOS_RESISTANCE_CAP,
+		"stacking": "additive_raw_then_clamp", "settlement_order": ["resistance", "shield", "mana_guard", "health"],
+		"description": "本项目原创混沌命中防御，玩家与怪物共享；有效抗性为 0%–75%，独立于火焰、冰冷、闪电及其最大抗性加成。减伤后依次消耗护盾、可选魔力分担和生命；不会绕过护盾，不产生中毒或其他持续伤害，也不表示来源天赋已开放混沌抗性。",
+		"unsupported": ["source_talent_grants", "maximum_chaos_resistance_add", "chaos_bypass", "poison", "penetration"],
+	}
+
+
 static func incoming_hit(components: Variant, defense_stats: Variant, shield: Variant,
 		health: Variant, actor: String = "player", hit_taken_increased: Variant = 0.0,
 		mana: Variant = 0.0, ratio: Variant = 0.0) -> Dictionary:
@@ -136,7 +161,8 @@ static func incoming_hit(components: Variant, defense_stats: Variant, shield: Va
 	return result
 
 
-## Source-tree defense adapter. The legacy fire-only schema remains stable.
+## Defense adapter for source/equipment/monster stats; not a talent grant list.
+## The legacy fire-only schema remains stable. Chaos is opt-in and independent.
 ## Both actors use this same formula; armour is hit-size dependent and never a
 ## permanently cached percentage. Elemental caps precede shield, then life.
 static func source_profile(stats: Dictionary, actor: String = "player") -> Dictionary:
@@ -158,6 +184,11 @@ static func source_profile(stats: Dictionary, actor: String = "player") -> Dicti
 			if not resistance.ok: return resistance
 			effective = resistance.effective_resistances
 			break
+	if stats.has("chaos_resistance"):
+		var chaos: Dictionary = chaos_resistance_profile(stats, actor)
+		if not chaos.ok: return chaos
+		raw["chaos"] = chaos.raw
+		effective["chaos"] = chaos.effective
 	return {"ok":true,"reason":"","actor":actor,"armour":float(stats.get("armour",0.0)),"raw_resistances":raw,"effective_resistances":effective}
 
 

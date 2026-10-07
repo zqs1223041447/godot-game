@@ -22,12 +22,16 @@ func start(enemy: Variant, target_center: Vector2, overrides: Variant = {}, visu
 	var ember_burn:bool=enemy.get("template_id","")=="ember_guard" and not enemy.has("map_boss_attack_id")
 	var storm_shock:bool=enemy.get("template_id","")=="storm_skitter" and not enemy.has("map_boss_attack_id")
 	var frost_chill:bool=enemy.get("template_id","")=="frost_guard" and not enemy.has("map_boss_attack_id")
+	var chaos_guard:bool=enemy.get("template_id","")=="chaos_guard" and not enemy.has("map_boss_attack_id")
 	if ember_burn and visual_pattern.is_empty():visual_pattern="ember_burn"
 	if storm_shock and visual_pattern.is_empty():visual_pattern="storm_shock"
+	if chaos_guard and visual_pattern.is_empty():visual_pattern="chaos_guard"
 	if visual_pattern=="ember_burn":
 		if not ember_burn:return _failure("Burn pattern must match the ember guard")
 	elif visual_pattern=="storm_shock":
 		if not storm_shock:return _failure("Shock pattern must match the storm skitter")
+	elif visual_pattern=="chaos_guard":
+		if not chaos_guard:return _failure("Chaos pattern must match the chaos guard")
 	elif not visual_pattern.is_empty() and (not BossProfiles.enemy_reason(enemy,visual_pattern).is_empty() or enemy.get("map_boss_attack_id")!=visual_pattern):return _failure("Visual pattern must match the authoritative map boss")
 	var source_id: int = int(enemy.id)
 	if _states.has(source_id):

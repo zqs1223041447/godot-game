@@ -194,7 +194,7 @@ static func draw_enemy(arena: Node2D, enemy: Dictionary, preferences: VisualSett
 				_draw_ember_guard(arena, r, gait, hurt)
 			else:
 				_draw_brute(arena, r, gait, hurt, boss)
-	var element: String = "cold" if str(enemy.get("template_id", "")) == "frost_guard" else "lightning" if str(enemy.get("template_id", "")) == "storm_skitter" else ""
+	var element: String = "cold" if str(enemy.get("template_id", "")) == "frost_guard" else "lightning" if str(enemy.get("template_id", "")) == "storm_skitter" else "chaos" if str(enemy.get("template_id", "")) == "chaos_guard" else ""
 	if not element.is_empty(): _draw_element_ward(arena, r, element, hurt)
 	if str(enemy.get("template_id", "")) == "mist_skitter": _draw_mist_feathers(arena, r, hurt)
 	arena.draw_set_transform(Vector2.ZERO)
@@ -204,13 +204,15 @@ static func draw_enemy(arena: Node2D, enemy: Dictionary, preferences: VisualSett
 static func _draw_element_ward(arena: CanvasItem, radius: float, element: String, hurt: bool) -> void:
 	# Small carved mineral or brass crest, inside the existing collision silhouette.
 	var r: float = radius * 0.45
-	var tint: Color = Color("b3c5c8") if element == "cold" else Color("c7ad70")
+	var tint: Color = Color("b3c5c8") if element == "cold" else Color("b5a0b9") if element == "chaos" else Color("c7ad70")
 	if hurt: tint = tint.lightened(0.25)
 	var shape: Array = [Vector2(-r,0),Vector2(0,-r),Vector2(r,0),Vector2(0,r)]
 	_cached_blob(arena, shape, Color("514d42"), tint, 1.2)
 	if element == "cold":
 		_path(arena,[Vector2(-r*0.65,0),Vector2(0,-r*0.65),Vector2(r*0.65,0),Vector2(0,r*0.65),Vector2(-r*0.65,0)],tint,1.3)
 		arena.draw_line(Vector2(-r*0.55,0),Vector2(r*0.55,0),tint,1.0,true)
+	elif element == "chaos":
+		_path(arena,[Vector2(-r*0.7,-r*0.5),Vector2(r*0.2,-r*0.5),Vector2(r*0.55,0),Vector2(-r*0.2,0),Vector2(-r*0.55,r*0.5),Vector2(r*0.7,r*0.5)],tint,1.4)
 	else:
 		_path(arena,[Vector2(r*0.05,-r*0.8),Vector2(-r*0.5,0),Vector2(r*0.3,-r*0.05),Vector2(-r*0.05,r*0.8)],tint,1.5)
 
@@ -515,7 +517,7 @@ static func draw_enemy_body(canvas:CanvasItem,enemy:Dictionary)->void:
 		2:
 			if str(enemy.get("template_id",""))=="ember_guard":_draw_ember_guard_body(canvas,r,hurt)
 			else:_draw_brute_body(canvas,r,hurt,str(enemy.get("rarity","normal"))=="boss")
-	var element:String="cold" if str(enemy.get("template_id",""))=="frost_guard" else "lightning" if str(enemy.get("template_id",""))=="storm_skitter" else ""
+	var element:String="cold" if str(enemy.get("template_id",""))=="frost_guard" else "lightning" if str(enemy.get("template_id",""))=="storm_skitter" else "chaos" if str(enemy.get("template_id",""))=="chaos_guard" else ""
 	if not element.is_empty():_draw_element_ward(canvas,r,element,hurt)
 	if str(enemy.get("template_id", "")) == "mist_skitter": _draw_mist_feathers(canvas, r, hurt)
 

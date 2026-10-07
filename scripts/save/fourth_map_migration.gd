@@ -10,4 +10,4 @@ static func migrate_v49(source: Variant, validate_talents: Callable = Callable()
 	var candidate: Dictionary = source.duplicate(true)
 	candidate.version = 50
 	candidate.journey.best_tiers["ginkgo_arcade"] = 0
-	return candidate if Rules.reason(candidate, validate_talents, socket_ids).is_empty() else {}
+	return candidate if Rules.reason_v50(candidate, validate_talents, socket_ids).is_empty() else {}

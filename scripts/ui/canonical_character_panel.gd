@@ -44,6 +44,7 @@ const STAT_ROWS: Array[Dictionary] = [
 	{"id":"fire_resistance","label":"火焰抗性","format":"resistance"},
 	{"id":"cold_resistance","label":"冰冷抗性","format":"resistance"},
 	{"id":"lightning_resistance","label":"闪电抗性","format":"resistance"},
+	{"id":"chaos_resistance","label":"混沌抗性","format":"chaos_resistance"},
 ]
 
 
@@ -61,6 +62,7 @@ func refresh() -> void:
 	_progress.text = "Lv.%d   ·   经验 %d   ·   未用天赋点 %d" % [int(model.level), int(model.xp), int(model.talent_points)]
 	var stats: Dictionary = model.get_stats()
 	var resistance_profile: Dictionary = model.get_resistance_profile() if model.has_method("get_resistance_profile") else {}
+	var chaos: Dictionary = model.get_chaos_resistance_profile() if model.has_method("get_chaos_resistance_profile") else {}
 	var conversion: Dictionary = model.get_defense_conversion_profile() if model.has_method("get_defense_conversion_profile") else {}
 	var tips: Dictionary = defense_tooltips(conversion)
 	for id: String in _defense_cards:
@@ -87,6 +89,10 @@ func refresh() -> void:
 			"decimal": formatted = "%.2f" % value
 			"percent": formatted = "%.1f%%" % (value * 100.0)
 			"multiplier": formatted = "%.2f×" % value
+			"chaos_resistance":
+				var display := chaos_resistance_display(chaos)
+				formatted = display.text
+				_resistance_cards[id].tooltip_text = display.tooltip
 			"resistance":
 				var element: String = id.trim_suffix("_resistance")
 				if bool(resistance_profile.get("ok", false)):
@@ -191,3 +197,10 @@ func _build() -> void:
 		elif str(row.id).ends_with("_resistance"):
 			_resistance_cards[str(row.id)] = card
 			card.tooltip_text = "显示当前有效抗性；基础上限为75%，天赋可提高当前上限。"
+
+
+static func chaos_resistance_display(profile: Dictionary) -> Dictionary:
+	if not bool(profile.get("ok", false)):
+		return {"text":"—", "tooltip":str(profile.get("reason", "混沌抗性资料不可用"))}
+	return {"text":"%.0f%%" % (float(profile.effective)*100.0),
+		"tooltip":"原始混沌抗性 %.1f%% · 当前上限 %.0f%%\n只降低混沌伤害；护盾仍按原规则先承伤。" % [float(profile.raw)*100.0, float(profile.cap)*100.0]}

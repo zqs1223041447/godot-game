@@ -20,6 +20,7 @@ const TELEGRAPH_TEMPLATES: Dictionary = {
 	"ember_guard": {"trigger_distance": 150.0},
 	"frost_guard": {"trigger_distance": 150.0},
 	"storm_skitter": {"trigger_distance": 140.0},
+	"chaos_guard": {"trigger_distance": 150.0},
 }
 const ELEMENTAL_ENCOUNTERS: Dictionary = {
 	"frost_guard": {"source_template": "brute", "minimum_wave": 4, "admission_modulus": 8, "admission_remainder": 4, "element": "cold"},
@@ -64,6 +65,8 @@ const TEMPLATES: Dictionary = {
 		"death_spawns": [{"template": "crawler", "count": 4}]},
 	"frost_guard": {"name": "霜纹守卫", "kind": 2, "rarity": "normal", "mechanisms": [], "death_spawns": [], "contact_weights": {"cold": 1.0}},
 	"storm_skitter": {"name": "雷纹掠行体", "kind": 1, "rarity": "normal", "mechanisms": [], "death_spawns": [], "contact_weights": {"lightning": 1.0}},
+	"chaos_guard": {"name": "蚀影守卫", "kind": 2, "rarity": "normal", "mechanisms": [], "death_spawns": [],
+		"defense_stats": {"chaos_resistance": 0.25}, "contact_weights": {"chaos": 1.0}},
 	"ember_guard": {"name": "灰烬守卫", "kind": 2, "rarity": "rare", "mechanisms": [], "death_spawns": [],
 		"defense_stats": {"fire_resistance": 0.25}, "contact_weights": {"physical": 0.5, "fire": 0.5},
 		"equipment_pool": "defense"},
@@ -121,6 +124,8 @@ static func telegraph_policy(enemy: Dictionary) -> Dictionary:
 	if typeof(speed) not in [TYPE_INT, TYPE_FLOAT] or not is_finite(float(speed)) or float(speed) <= 0.0:
 		return {}
 	var base: Dictionary = TelegraphProfiles.resolve(map_rule.profile if not map_rule.is_empty() else TelegraphProfiles.ELEMENTAL.get(id, {})).profile
+	if id == "chaos_guard" and map_rule.is_empty():
+		base = TelegraphProfiles.resolve(TelegraphProfiles.CHAOS_GUARD).profile
 	var recovery: float = float(base.recovery_seconds) * BASE_ATTACK_SPEED / maxf(0.2, float(speed))
 	recovery = clampf(recovery, float(TelegraphProfiles.LIMITS.recovery_seconds.minimum), float(TelegraphProfiles.LIMITS.recovery_seconds.maximum))
 	base.recovery_seconds = recovery
@@ -138,6 +143,8 @@ static func telegraph_policy(enemy: Dictionary) -> Dictionary:
 		policy.shock_policy=Shock.ENEMY_POLICY.duplicate(true);policy.visual_pattern="storm_shock";policy.name="雷纹锁点震击"
 	if id=="frost_guard" and map_rule.is_empty():
 		policy.chill_policy=Chill.ENEMY_POLICY.duplicate(true);policy.name="霜纹锁点寒击"
+	if id == "chaos_guard" and map_rule.is_empty():
+		policy.target_rule = "player_at_start"; policy.visual_pattern = "chaos_guard"; policy.name = "蚀影锁点重击"
 	if not map_rule.is_empty():
 		policy.target_rule=map_rule.target_rule;policy.visual_pattern=map_rule.id;policy.name=map_rule.name
 	return policy
@@ -216,7 +223,7 @@ static func validate_templates(templates: Dictionary) -> Array[String]:
 			errors.append("%s: 未知/预留稀有度" % id)
 		if not entry.get("kind") is int or int(entry.kind) < 0 or int(entry.kind) >= SPECIES.size():
 			errors.append("%s: 物种无效" % id)
-		var defense: Dictionary = Defense.defense_profile(entry.get("defense_stats", {}), "monster")
+		var defense: Dictionary = _template_defense_profile(id, entry.get("defense_stats", {}))
 		if not defense.ok:
 			errors.append("%s: 防御定义无效: %s" % [id, defense.reason])
 		var weights: Variant = entry.get("contact_weights", {"physical": 1.0})
@@ -278,6 +285,24 @@ static func _has_cycle(id: String, templates: Dictionary, visiting: Dictionary, 
 	visited[id] = true
 	return false
 
+## Only the authored chaos template extends the strict historical stat schema.
+## Project the single new field explicitly; every other key still must pass the
+## legacy validator, so an arbitrary template cannot acquire unknown defenses.
+static func _template_defense_profile(template_id: String, stats: Variant) -> Dictionary:
+	if template_id != "chaos_guard":
+		return Defense.defense_profile(stats, "monster")
+	if not stats is Dictionary or not stats.has("chaos_resistance"):
+		return {"ok": false, "reason": "蚀影守卫必须显式定义混沌抗性"}
+	var legacy: Dictionary = stats.duplicate(true)
+	legacy.erase("chaos_resistance")
+	var result: Dictionary = Defense.defense_profile(legacy, "monster")
+	if not result.ok: return result
+	var chaos: Dictionary = Defense.chaos_resistance_profile({"chaos_resistance": stats.chaos_resistance}, "monster")
+	if not chaos.ok: return chaos
+	result.raw_resistances.chaos = chaos.raw
+	result.effective_resistances.chaos = chaos.effective
+	return result
+
 static func make_enemy(id: int, template_id: String, wave: int, position: Vector2, context: String = "ordinary",
 		rarity_override: String = "", mechanisms_override: Array = [], templates: Dictionary = TEMPLATES) -> Dictionary:
 	if not validate_templates(templates).is_empty():
@@ -324,7 +349,7 @@ static func make_enemy(id: int, template_id: String, wave: int, position: Vector
 		base_recharge_rate = shield_supply.base_recharge_rate
 		recharge_inputs = modifiers.duplicate(true)
 		recharge_inputs.shield_regen = base_recharge_rate
-	var defense: Dictionary = Defense.defense_profile(template.get("defense_stats", {}), "monster")
+	var defense: Dictionary = _template_defense_profile(template_id, template.get("defense_stats", {}))
 	var recharge:=Defense.recharge_profile(recharge_inputs,"monster")
 	if not recharge.ok:return {}
 	var result:Dictionary={"id": id, "template_id": template_id, "name": template.get("name", template_id), "kind": kind,
@@ -382,6 +407,8 @@ static func mechanism_text(enemy: Dictionary) -> String:
 	for element: String in ["cold", "lightning"]:
 		if float(enemy.get("contact_weights", {}).get(element, 0.0)) > 0.0:
 			labels.append("冰冷预警攻击" if element == "cold" else "闪电预警攻击")
+	if enemy.get("template_id", "") == "chaos_guard":
+		labels.append("纯混沌预警攻击；锁定起手位置，可走出圆圈")
 	return " · ".join(labels) if not labels.is_empty() else "无额外机制"
 
 
@@ -395,4 +422,6 @@ static func resistance_text(enemy: Dictionary, compact: bool = false) -> String:
 		var value: float = float(values.get(element,0.0))
 		if not is_zero_approx(value):
 			labels.append("%s%s%d%%" % [names[element],"" if compact else " ",roundi(value*100.0)])
+	if values.has("chaos") and not is_zero_approx(float(values.chaos)):
+		labels.append("混抗%s%d%%" % ["" if compact else " ", roundi(float(values.chaos) * 100.0)])
 	return " · ".join(labels)

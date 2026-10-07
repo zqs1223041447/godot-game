@@ -228,7 +228,10 @@ static func _stats_for(candidate: Dictionary) -> Dictionary:
 		if candidate.locations[uid].kind != "equipment": continue
 		var definition: Dictionary = Items.definition_for_instance(candidate.items[uid])
 		for stat: String in definition.get("stats", {}):
-			if stats.has(stat): stats[stat] += float(definition.stats[stat])
+			if stat == "chaos_resistance":
+				# Admit only actual equipped supply; old no-source stat shapes stay frozen.
+				stats[stat] = float(stats.get(stat, 0.0)) + float(definition.stats[stat])
+			elif stats.has(stat): stats[stat] += float(definition.stats[stat])
 	stats = SourceTree.apply_stats(stats,candidate)
 	for rate: String in ["attack_speed", "move_speed", "mana_regen"]:
 		stats[rate] *= 1.0 + float(stats[rate + "_increased"])
@@ -593,7 +596,9 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	var loaded:=super.load_build(path)
 	if loaded and old_version>0 and old_version<Rules.VERSION:
 		migrated_from_legacy=true
-		if old_version == Rules.V49_VERSION:
+		if old_version == Rules.V50_VERSION:
+			migration_message="旧存档已原字节备份，纹刻指环新增混沌抗性后缀；旧装备保持原值，新掉落或主动制作才使用新词池，不额外赠物、材料或天赋点。"
+		elif old_version == Rules.V49_VERSION:
 			migration_message="旧存档已原字节备份，银杏回廊 I 已开放；旧三图进度、进行中地图、待领奖励与领取序号保持，不额外赠送碎片、物品或天赋点。"
 		elif old_version == Rules.V48_VERSION:
 			migration_message="旧存档已原字节备份，冰霜异常状态持续时间提高20%的源天赋已开放，可延长冰霜脉冲的冰缓及霜锁冻结；原物品、天赋和旅程保持，不额外赠物或赠点。"
@@ -1139,6 +1144,10 @@ func get_mana_guard_profile() -> Dictionary:
 
 func get_resistance_profile() -> Dictionary:
 	return Defense.resistance_profile(get_stats(), "player")
+
+
+func get_chaos_resistance_profile() -> Dictionary:
+	return Defense.chaos_resistance_profile(get_stats(), "player")
 
 
 func get_defense_conversion_profile() -> Dictionary:

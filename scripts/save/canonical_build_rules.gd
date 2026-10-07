@@ -47,7 +47,8 @@ const V46_VERSION := 46
 const V47_VERSION := 47
 const V48_VERSION := 48
 const V49_VERSION := 49
-const VERSION := 50
+const V50_VERSION := 50
+const VERSION := 51
 const LEGACY_MAX_ITEMS := 1024
 const V17_MAX_ITEMS := LEGACY_MAX_ITEMS + 1
 const MAX_ITEMS := V17_MAX_ITEMS + 2 # Two once-only migration bottles; bag capacity is unchanged.
@@ -88,6 +89,12 @@ static func decode_v28(raw: Variant) -> Dictionary:
 
 static func decode_v29(raw: Variant) -> Dictionary:
 	return _decode(raw, true, V29_VERSION, true)
+
+
+## Freeze complete schema50: source policy49, equipment46 and all four maps.
+static func decode_v50(raw: Variant) -> Dictionary:
+	var decoded := _decode(raw, true, V50_VERSION, true)
+	return decoded if reason_v50(decoded).is_empty() else {}
 
 
 ## Freeze the full three-map schema49 envelope before adding a fourth map.
@@ -337,6 +344,13 @@ static func reason_v29(value: Variant, validate_talents: Callable = Callable(), 
 	return _reason(value, V29_VERSION, true, true, MAX_ITEMS, validate_talents, socket_ids)
 
 
+static func reason_v50(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
+	# Native frozen legality remains mandatory even with a permissive callback.
+	var native_reason := _reason(value, V50_VERSION, true, true, MAX_ITEMS, Callable(), socket_ids)
+	if not native_reason.is_empty(): return native_reason
+	return str(validate_talents.call(value)) if validate_talents.is_valid() else ""
+
+
 static func reason_v49(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
 	# Frozen source policy49, equipment46 and three-map legality precede callbacks.
 	var native_reason := _reason(value, V49_VERSION, true, true, MAX_ITEMS, Callable(), socket_ids)
@@ -578,6 +592,7 @@ static func _reason(value: Variant, expected_version: int, paged: bool, allow_cu
 ## Source-only schemas35/36/38/40/41/44/45/48/49, gem-only42/43/47 and map-only50 define no equipment vocabularies.
 ## Keep save-to-equipment mapping explicit and the Catalog API historically strict.
 static func equipment_vocabulary_for_save_version(save_version: int) -> int:
+	if save_version >= 51: return 51
 	if save_version >= 46: return 46
 	if save_version >= V39_VERSION: return 39
 	if save_version >= V37_VERSION: return 37
