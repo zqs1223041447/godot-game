@@ -1,0 +1,91 @@
+extends SceneTree
+## Offline deterministic presentation data. Never run from Main or a draw call.
+const Session = preload("res://scripts/studies/modular_study_session.gd")
+const Geometry = preload("res://scripts/studies/modular_study_geometry.gd")
+const Layout = preload("res://scripts/world/exploration_map_layout.gd")
+const PROFILE := "res://assets/environment/studies/natural_ground/profile.json"
+const MASK := "res://assets/environment/studies/natural_ground/mix_mask.png"
+const SIZE := Vector2i(512, 384)
+const PAINT_HALF_WIDTH := 24.0
+const FILTER_MARGIN := 10.0
+const PLAYER_RADIUS := 15.0
+const MASK_SEED := 113
+func _initialize() -> void: call_deferred("run")
+func run() -> void:
+	var bounds: Rect2 = Layout.WORLD_BOUNDS
+	var layout: Dictionary = Session.layout(bounds)
+	if not layout.ok: printerr(layout); quit(1); return
+	var source: Dictionary = Layout.layout("old_garden", bounds)
+	var geometry = Geometry.new()
+	var installed: Dictionary = geometry.install(bounds, layout.polygons, source.landmarks.entry, layout.presentation)
+	if not installed.ok: printerr(installed); quit(1); return
+	await physics_frame
+	await physics_frame
+	if not geometry.physics_ready(): printerr("Native study geometry not ready"); quit(1); return
+	var candidates: Array = source.landmarks.route_segments.duplicate(true)
+	var through: Vector2 = (Vector2(layout.gate_rear) - Vector2(layout.gate_front)).normalized()
+	candidates.append({"from": Vector2(layout.gate_front) - through * 140.0, "to": Vector2(layout.gate_rear) + through * 60.0, "study_gate_approach": true})
+	var routes: Array[Dictionary] = []
+	var rejected: Array[Dictionary] = []
+	var validation_radius := PAINT_HALF_WIDTH + FILTER_MARGIN + PLAYER_RADIUS
+	for segment: Dictionary in candidates:
+		var start: Vector2 = segment["from"]
+		var end: Vector2 = segment["to"]
+		var hit: Dictionary = geometry.sweep(start, end, validation_radius)
+		if geometry.is_clear(start, validation_radius) and geometry.is_clear(end, validation_radius) and not hit.hit:
+			routes.append({"from": start, "to": end})
+		else:
+			rejected.append({"from": [start.x,start.y], "to": [end.x,end.y], "first_contour": hit.wall})
+	var noise := FastNoiseLite.new()
+	noise.seed = MASK_SEED
+	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
+	noise.fractal_type = FastNoiseLite.FRACTAL_NONE
+	noise.frequency = 1.0 / 520.0
+	var image := Image.create(SIZE.x, SIZE.y, false, Image.FORMAT_RGBA8)
+	var road_pixels := 0
+	var min_grass := 1.0
+	var max_grass := 0.0
+	var focus: Vector2 = (Vector2(layout.gate_front) + Vector2(layout.gate_rear)) * 0.5
+	for y in SIZE.y:
+		for x in SIZE.x:
+			var uv := (Vector2(x,y) + Vector2(0.5,0.5)) / Vector2(SIZE)
+			var point: Vector2 = bounds.position + uv * bounds.size
+			var n := noise.get_noise_2d(point.x, point.y)
+			var broad := noise.get_noise_2d(point.x * 0.43 + 177.0, point.y * 0.43 - 319.0)
+			var grass := clampf(0.70 + n * 0.55 + broad * 0.18, 0.22, 0.94)
+			var nearest := INF
+			for route: Dictionary in routes:
+				var closest := Geometry2D.get_closest_point_to_segment(point, route["from"], route["to"])
+				nearest = minf(nearest, point.distance_to(closest))
+			var stone := 1.0 - smoothstep(PAINT_HALF_WIDTH - 10.0, PAINT_HALF_WIDTH, nearest)
+			# Stone remains a local worn approach, not a new map-wide paving grid.
+			stone *= 1.0 - smoothstep(450.0, 1250.0, point.distance_to(focus))
+			stone *= 0.82 + 0.18 * clampf(n + 0.5, 0.0, 1.0)
+			grass *= 1.0 - stone * 0.85
+			var variation := clampf(0.5 + broad * 0.38, 0.0, 1.0)
+			image.set_pixel(x,y,Color(grass,stone,variation,1.0))
+			if stone > 0.01: road_pixels += 1
+			min_grass = minf(min_grass, grass); max_grass = maxf(max_grass, grass)
+	if image.save_png(MASK) != OK: printerr("Mask PNG write failed"); quit(1); return
+	var profile: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(PROFILE))
+	var hasher := HashingContext.new()
+	hasher.start(HashingContext.HASH_SHA256)
+	hasher.update(var_to_bytes(layout.polygons))
+	profile.module_polygons_sha256 = hasher.finish().hex_encode()
+	profile.mask_sha256 = FileAccess.get_sha256(MASK)
+	profile.mask_seed = MASK_SEED
+	profile.mask_channels = {"r": "low-frequency grass weight", "g": "native-clear local stone route", "b": "restrained macro variation", "a": "opaque"}
+	profile.paint_half_width_world = PAINT_HALF_WIDTH
+	profile.paint_validation_radius_world = validation_radius
+	profile.route_segments = []
+	for route: Dictionary in routes:
+		profile.route_segments.append({"from": [route["from"].x,route["from"].y], "to": [route["to"].x,route["to"].y]})
+	FileAccess.open(PROFILE,FileAccess.WRITE).store_string(JSON.stringify(profile,"  ",true,true)+"\n")
+	var report := {"method": "Offline local FastNoiseLite113 mask; native-circle route admission against four original study contours", "engine": Engine.get_version_info().string,
+		"size": [SIZE.x,SIZE.y], "opaque_pixels": SIZE.x*SIZE.y, "stone_pixels_over_0p01": road_pixels,
+		"grass_weight_min": min_grass,"grass_weight_max":max_grass,"accepted_routes":routes.size(),"rejected_routes":rejected,
+		"paint_half_width_world":PAINT_HALF_WIDTH,"filter_margin_world":FILTER_MARGIN,"player_radius_world":PLAYER_RADIUS,"full_paint_validation_radius":validation_radius,
+		"module_polygons_sha256":profile.module_polygons_sha256,"mask_sha256":profile.mask_sha256,"runtime_generation":false,"gameplay_rng_used":false}
+	FileAccess.open("res://docs/qa/v113-natural-ground/mask-generation.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  ",true,true)+"\n")
+	print("STUDY_GROUND_MASK_READY ",JSON.stringify(report))
+	quit()

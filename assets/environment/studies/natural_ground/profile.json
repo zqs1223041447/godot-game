@@ -1,0 +1,144 @@
+{
+  "bounds": [
+    42.0,
+    104.0,
+    3600.0,
+    2400.0
+  ],
+  "mask_channels": {
+    "a": "opaque",
+    "b": "restrained macro variation",
+    "g": "native-clear local stone route",
+    "r": "low-frequency grass weight"
+  },
+  "mask_path": "res://assets/environment/studies/natural_ground/mix_mask.png",
+  "mask_seed": 113,
+  "mask_sha256": "478161ef61546be712f74dee5c93d4d98661df0fabc1ff492bb944d4ed55a488",
+  "mask_size": [
+    512.0,
+    384.0
+  ],
+  "module_polygons_sha256": "05a48fe618a0bb7f41cbc838ac58e14870132f1a7eedbf47ca3a3ffce06a5d28",
+  "paint_half_width_world": 32.0,
+  "paint_validation_radius_world": 57.0,
+  "route_segments": [
+    {
+      "from": [
+        1342.0,
+        2104.0
+      ],
+      "to": [
+        2042.0,
+        2104.0
+      ]
+    },
+    {
+      "from": [
+        2042.0,
+        2104.0
+      ],
+      "to": [
+        3032.0,
+        1854.0
+      ]
+    },
+    {
+      "from": [
+        3032.0,
+        1854.0
+      ],
+      "to": [
+        2722.0,
+        924.0
+      ]
+    },
+    {
+      "from": [
+        2722.0,
+        924.0
+      ],
+      "to": [
+        3222.0,
+        424.0
+      ]
+    },
+    {
+      "from": [
+        692.0,
+        1804.0
+      ],
+      "to": [
+        742.0,
+        1184.0
+      ]
+    },
+    {
+      "from": [
+        742.0,
+        1184.0
+      ],
+      "to": [
+        892.0,
+        604.0
+      ]
+    },
+    {
+      "from": [
+        892.0,
+        604.0
+      ],
+      "to": [
+        1882.0,
+        464.0
+      ]
+    },
+    {
+      "from": [
+        1882.0,
+        464.0
+      ],
+      "to": [
+        2722.0,
+        924.0
+      ]
+    },
+    {
+      "from": [
+        1882.0,
+        1404.0
+      ],
+      "to": [
+        1882.0,
+        464.0
+      ]
+    },
+    {
+      "from": [
+        1563.9013671875,
+        2149.769287109375
+      ],
+      "to": [
+        1616.947998046875,
+        1795.8717041015625
+      ]
+    }
+  ],
+  "schema": "study_natural_ground_v1",
+  "textures": {
+    "grass": "res://assets/environment/studies/natural_ground/aerial_grass_rock_diff_1k.jpg",
+    "soil": "res://assets/environment/studies/natural_ground/forest_ground_04_diff_1k.jpg",
+    "stone": "res://assets/environment/studies/natural_ground/medieval_blocks_05_diff_1k.jpg"
+  },
+  "tile_repeats_per_ground_metre": {
+    "grass": 0.085,
+    "grass_secondary": 0.063,
+    "soil": 0.31,
+    "stone": 0.5
+  },
+  "wear_scale_world": 140.0,
+  "wear_seed": 1137,
+  "world_units_per_ground_metre": [
+    72.9344729345,
+    59.7444226034
+  ]
+}
