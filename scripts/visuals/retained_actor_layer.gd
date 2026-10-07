@@ -37,8 +37,39 @@ var _pieces:Dictionary={}
 var synchronization_count:=0
 var measured_sync_usec:=0
 
+static func _body_extent(radius:float,aa_margin:float)->float:
+	# Current Art local geometry fits |x|,|y| <= 1.5*r+8: wings reach
+	# 1.5*r+0.9, gait is bounded by 1.2 and toes add at most 4 units.
+	# sqrt(2) covers arbitrary facing; 3 covers the widest 6-unit stroke.
+	# Shadow offset/ellipse, horns and elemental/mist crests fit this bound.
+	return sqrt(2.0)*(1.5*maxf(radius,0.0)+8.0)+3.0+aa_margin
+
+static func _visibility_frame(arena:Node2D)->Dictionary:
+	var viewport_rect:Rect2=arena.get_viewport_rect()
+	var canvas:Transform2D=arena.get_global_transform_with_canvas()
+	if not viewport_rect.position.is_finite() or not viewport_rect.size.is_finite() or viewport_rect.size.x<=0.0 or viewport_rect.size.y<=0.0:
+		return {"ok":false}
+	if not canvas.x.is_finite() or not canvas.y.is_finite() or not canvas.origin.is_finite() or is_zero_approx(canvas.determinant()):
+		return {"ok":false}
+	var inverse:Transform2D=canvas.affine_inverse()
+	var first:Vector2=inverse*viewport_rect.position
+	var rect:=Rect2(first,Vector2.ZERO)
+	for corner:Vector2 in [Vector2(viewport_rect.end.x,viewport_rect.position.y),viewport_rect.end,Vector2(viewport_rect.position.x,viewport_rect.end.y)]:
+		rect=rect.expand(inverse*corner)
+	# Conservatively include two screen pixels on each axis for antialiasing.
+	return {"ok":true,"rect":rect,"aa_margin":2.0*(inverse.x.length()+inverse.y.length())}
+
+static func _actor_visible(enemy:Dictionary,frame:Dictionary)->bool:
+	if not bool(frame.ok):return true
+	var radius:float=float(enemy.radius)
+	var position:Vector2=enemy.pos
+	if not is_finite(radius) or not position.is_finite():return true
+	var padded:Rect2=Rect2(frame.rect).grow(_body_extent(radius,float(frame.aa_margin)))
+	return position.x>=padded.position.x and position.x<=padded.end.x and position.y>=padded.position.y and position.y<=padded.end.y
+
 func sync(arena:Node2D)->void:
 	var began:int=Time.get_ticks_usec() if Visuals.diagnostic_profile_enabled else 0
+	var frame:Dictionary=_visibility_frame(arena)
 	var ordered:Array=arena.enemies.duplicate()
 	ordered.sort_custom(func(a:Dictionary,b:Dictionary)->bool:return a.pos.y<b.pos.y)
 	var retained_ids:Dictionary={};var order:=0
@@ -49,9 +80,12 @@ func sync(arena:Node2D)->void:
 			for part:StringName in [&"shadow",&"limbs",&"body"]:
 				var piece:=Piece.new();piece.part=part;add_child(piece);group.append(piece)
 			_pieces[id]=group
+		var on_screen:bool=_actor_visible(enemy,frame)
 		for piece:Piece in _pieces[id]:
 			if piece.get_index()!=order:move_child(piece,order)
-			order+=1;piece.configure(enemy,arena.visual_settings,float(arena.elapsed),arena.player_pos)
+			order+=1
+			piece.visible=on_screen
+			if on_screen:piece.configure(enemy,arena.visual_settings,float(arena.elapsed),arena.player_pos)
 	for id:int in _pieces.keys():
 		if not retained_ids.has(id):
 			for piece:Piece in _pieces[id]:remove_child(piece);piece.queue_free()
