@@ -17,5 +17,3 @@ static func build_snapshot() -> Dictionary:
 		"preserves": ["id", "base", "rarity", "location"], "save_version": Canonical.Rules.VERSION,
 		"source": "scripts/items/jewel_craft_rules.gd", "natural_generator_unchanged": true,
 		"equipment_crafting_unchanged": true, "new_currency_or_grants": false}
-
-
