@@ -25,6 +25,9 @@ static func draw(canvas: CanvasItem, states: Variant, settings: Settings = null)
 			"circle":
 				canvas.draw_circle(primitive.center, primitive.radius, primitive.color,
 					primitive.filled, primitive.width, true)
+			"annulus":
+				canvas.draw_arc(primitive.center, (primitive.radius + primitive.inner_radius) * 0.5,
+					0.0, TAU, 129, primitive.color, primitive.radius - primitive.inner_radius, true)
 			"polyline":
 				canvas.draw_polyline(primitive.points, primitive.color, primitive.width, true)
 
@@ -80,6 +83,13 @@ static func _read_state(raw: Variant) -> Dictionary:
 		return {}
 	if not _profile_number(recovery, "recovery_seconds"):
 		return {}
+	var shape: Variant = raw.get("shape", "circle")
+	var inner: Variant = raw.get("inner_radius", 0.0)
+	if shape not in ["circle", "annulus"] or not _number(inner): return {}
+	if shape == "annulus":
+		if raw.get("visual_pattern", "") != "ginkgo_shelter_slam" or raw.get("pulse_index", 0) != 1: return {}
+		if float(inner) <= 0.0 or float(inner) >= float(radius): return {}
+	elif float(inner) != 0.0: return {}
 	var age: float = float(elapsed)
 	var windup_seconds: float = float(windup)
 	var recovery_seconds: float = float(recovery)
@@ -93,7 +103,7 @@ static func _read_state(raw: Variant) -> Dictionary:
 	var progress: float = clampf(age / windup_seconds, 0.0, 1.0) if phase == "windup" else \
 		clampf((age - windup_seconds) / recovery_seconds, 0.0, 1.0)
 	return {"source_id": int(source_id), "center": center, "radius": float(radius),
-		"phase": phase, "progress": progress,
+		"phase": phase, "progress": progress, "shape":shape, "inner_radius":float(inner),
 		"pattern": raw.get("visual_pattern", "") if raw.get("visual_pattern", "") in ["garden_slam", "ruins_mark", "ember_burn", "sunwell_echo", "ginkgo_shelter_slam", "chaos_guard"] else "",
 		"pulse_index": clampi(int(raw.get("pulse_index",0)),0,1) if typeof(raw.get("pulse_index",0)) == TYPE_INT else 0,
 		"element": raw.get("visual_element", "") if raw.get("visual_element", "") in ["cold", "lightning"] else ""}
@@ -110,6 +120,9 @@ static func _profile_number(value: Variant, field: String) -> bool:
 
 static func _append_state(state: Dictionary, effects: int, fills: Array[Dictionary],
 		boundaries: Array[Dictionary], marks: Array[Dictionary]) -> void:
+	if state.shape == "annulus":
+		_append_annulus(state, effects, fills, boundaries, marks)
+		return
 	var radius: float = state.radius
 	var progress: float = state.progress
 	var winding: bool = state.phase == "windup"
@@ -170,6 +183,35 @@ static func _append_state(state: Dictionary, effects: int, fills: Array[Dictiona
 		var cut := PackedVector2Array([at - tangent * size, at - direction * size * 0.65,
 			at + tangent * size * 0.65 - direction * size * 0.2])
 		marks.append(_line(state, "earth_mark", cut, Color(pigment, 0.5 * fade), minf(1.5, radius * 0.06)))
+
+
+static func _append_annulus(state: Dictionary, effects: int, fills: Array[Dictionary],
+		boundaries: Array[Dictionary], marks: Array[Dictionary]) -> void:
+	# The safe center has no fill or charge rune, including reduced effects mode.
+	var winding: bool = state.phase == "windup"
+	var progress: float = state.progress
+	var fade: float = 1.0 if winding else (1.0 - progress) * (1.0 - progress)
+	var pigment: Color = Color("d7c48b").lerp(Color("bc925a"), progress) if winding else ASH
+	fills.append({"kind":"annulus", "role":"ground_tint", "source_id":state.source_id,
+		"phase":state.phase, "center":state.center, "radius":state.radius,
+		"inner_radius":state.inner_radius, "color":Color(SOIL, lerpf(0.035,0.085,progress) if winding else 0.065 * fade)})
+	for inner: bool in [false, true]:
+		var boundary := state.duplicate()
+		boundary.radius = state.inner_radius if inner else state.radius
+		var role := ("danger_inner_boundary" if inner else "danger_boundary") if winding else ("recovery_inner_boundary" if inner else "recovery_boundary")
+		boundaries.append(_circle(boundary, role, Color(INK,0.78 * fade), false, 3.8))
+		boundaries.append(_circle(boundary, role, Color(pigment,0.94 * fade), false, 1.5))
+	var middle: float = (float(state.radius) + float(state.inner_radius)) * 0.5
+	var p: Vector2 = state.center + Vector2(0,-middle)
+	var rune := PackedVector2Array([p+Vector2(0,12),p+Vector2(-17,-1),p+Vector2(-12,-10),p+Vector2(0,-5),p+Vector2(12,-10),p+Vector2(17,-1)])
+	marks.append(_line(state,"rune_base",rune,Color(INK,0.6 * fade),3.0))
+	var charged := _trace(rune,progress if winding else 1.0)
+	if charged.size() >= 2:
+		marks.append(_line(state,"rune_charge",charged,Color(pigment,0.92 * fade),1.6))
+	if effects > 0:
+		var q: Vector2 = state.center + Vector2(0,middle)
+		var leaf := PackedVector2Array([q+Vector2(-8,0),q+Vector2(0,-5),q+Vector2(8,0),q+Vector2(0,5),q+Vector2(-8,0)])
+		marks.append(_line(state,"earth_mark",leaf,Color(pigment,0.5 * fade),1.5))
 
 
 static func _circle(state: Dictionary, role: String, color: Color, filled: bool, width: float) -> Dictionary:
