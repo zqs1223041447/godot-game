@@ -37,7 +37,8 @@ func source_checks() -> void:
 	check(occurrences == NODES,"Exact effect occurs only in five existing small nodes")
 	for id: String in NODES:
 		check(Source.Data.node(id).stats == [LINE] and Source.Data.standard_ids().has(id) and Source.node_effect(id).status == "full" and Source.node_effect(id,0,54).status != "full","Existing pure standard node opens only in55: "+id)
-	for line: String in ["10% increased Elemental Damage with Attack Skills","24% increased Elemental Damage with Attack Skills","12% more Elemental Damage with Attack Skills",LINE+" while Chilled",LINE+"."," "+LINE,LINE+"\n"]:
+	check(not Source.line_effect("24% increased Elemental Damage with Attack Skills",55).supported,"Frozen55 still rejects later notable24% effect")
+	for line: String in ["10% increased Elemental Damage with Attack Skills","12% more Elemental Damage with Attack Skills",LINE+" while Chilled",LINE+"."," "+LINE,LINE+"\n"]:
 		check(not Source.line_effect(line).supported and Locale.display_line(line).contains(Locale.NOT_IMPLEMENTED),"Other amounts, MORE and conditions stay unsupported: "+line)
 	check(Locale.display_line(LINE) == "攻击技能造成的元素伤害提高12%" and Locale.line_status(LINE).implemented,"Chinese copy states element component and has an actual consumer")
 	for anchor: Dictionary in Locale.STAT_CONSUMER_GROUPS.damage_and_rates.code_checks:

@@ -1,0 +1,50 @@
+{
+  "baseline": "ded595477a73f91c1b1e60bf0d93919c88941103",
+  "schema": 56,
+  "results": [
+    {
+      "suite": "one_with_nature_passive_test",
+      "exit_code": 0,
+      "checks": 119,
+      "failures": 0
+    },
+    {
+      "suite": "one_with_nature_migration_test",
+      "exit_code": 0,
+      "checks": 89,
+      "failures": 0
+    },
+    {
+      "suite": "attack_elemental_passive_test",
+      "exit_code": 0,
+      "checks": 103,
+      "failures": 0
+    },
+    {
+      "suite": "attack_elemental_passive_migration_test",
+      "exit_code": 0,
+      "checks": 50,
+      "failures": 0
+    }
+  ],
+  "source_sha256": {
+    "scripts/passives/source_stat_patterns.gd": "3ba5f6adcd7c7802f24baefe96534054a23f067cb81484de53a9fb3dd036ac7c",
+    "scripts/passives/source_tree_runtime.gd": "9a830bc85becccff85267758677cf0429ae7d0dc69ebd1029a5281795d4bd81b",
+    "scripts/save/canonical_build_rules.gd": "e244bbd27bb7cbbb04d5c1444072b6a327f2283f063ecdcbcaca60e2d9a8359c",
+    "scripts/save/canonical_build_store.gd": "0d4ab7d08ded6ff1f2628b18e7e923f3ec88178b85c6d64a54b57acec4699af7",
+    "scripts/save/attack_elemental_passive_migration.gd": "13885d4b4da8a3c151b0e4ca98fb0a0a0b29870ed799a5bfef418b3a33dabad6",
+    "scripts/save/one_with_nature_migration.gd": "59461f5639ca20e779511c1e9d6460daf5dc767f30d4683c5d844aafad4d2ef6",
+    "scripts/canonical_game_state.gd": "cab146d5644fc036339c3a9c04775e95654e6a491a5a34978c70976b3b454829",
+    "data/passive_source/localization_zh_CN.json": "984f47e68161a6288bebb9453eee847a58a933725553af3f387f71b58f4314d4",
+    "scripts/combat/combat_data.gd": "dfc12c3056544f7226c2e1be7051664d03a5dcb07228671b1048ad5f7617f65d",
+    "scripts/combat/damage_resolver.gd": "720dc69a7446334e8aec3ac15bdf7c1717fa7b96db5657e0c9622513121a4e23",
+    "tests/one_with_nature_passive_test.gd": "ba830e2e677dc80bc0dcf86efc405dd5a5d70cf9457b55a32e5e300836ac190a",
+    "tests/one_with_nature_migration_test.gd": "8755aa4662440c5e7fb0ebc8e7c36c925247d09241cfb321710fbc1e9a318a80",
+    "tests/attack_elemental_passive_test.gd": "88b02e24a10e0ae5ef8a5b8e1dc2a88139fab341ad1b11ab8729dcd37a26a4ba",
+    "tests/attack_elemental_passive_migration_test.gd": "85a16b5a4b313f61b48f5d9b2adebaa6fecfbeb2841fd9c9c28d8ba182b18713",
+    "docs/qa/one-with-nature/schema55-town.json": "65b01e7040806c545ce0c2d25ad83474c5e945cdd812c75f5be1315661c5f49d",
+    "docs/qa/one-with-nature/schema55-active.json": "5b01edf277731fb6073361d055c8a2ecee30df3c535c493b5ff3101f56422758",
+    "docs/qa/v115-native-map-entry/earned-v114-save.json": "57cc365e657146a5bd65274297f158ad4363948d1e9c4f915f80e79c0511d1c8"
+  },
+  "scope": "Only exact notable15842 +56 preservation boundary and two directly related prior suites; each process ≤45 seconds"
+}

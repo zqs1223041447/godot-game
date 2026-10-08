@@ -1,0 +1,197 @@
+{
+	"active_sha256": "5b01edf277731fb6073361d055c8a2ecee30df3c535c493b5ff3101f56422758",
+	"active_stats": {
+		"accuracy": 303.59999999999997,
+		"accuracy_increased": 0.15,
+		"additional_skill_slots": 0.0,
+		"area_increased": 0.0,
+		"area_size_increased": 0.0,
+		"armour": 0.0,
+		"armour_increased": 0.0,
+		"attack_added_fire": 0.0,
+		"attack_added_physical": 0.0,
+		"attack_crit_chance_increased": 0.0,
+		"attack_elemental_increased": 0.12,
+		"attack_life_leech": 0.0,
+		"attack_mana_leech": 0.0,
+		"attack_physical_increased": 0.0,
+		"attack_speed": 1.836,
+		"attack_speed_increased": 0.08,
+		"chaos_increased": 0.0,
+		"cold_ailment_duration_increased": 0.0,
+		"cold_increased": 0.0,
+		"cold_resistance": 0.0,
+		"crit_base_chance": 0.05,
+		"crit_base_multiplier": 1.5,
+		"crit_chance_increased": 0.0,
+		"crit_multiplier_add": 0.0,
+		"damage": 26.0,
+		"damage_taken_from_mana_before_life": 0.0,
+		"damaging_ailments_faster": 0.0,
+		"dexterity": 82.0,
+		"elemental_increased": 0.0,
+		"evasion": 40.599999999999994,
+		"evasion_increased": 0.0,
+		"fire_dot_multiplier_add": 0.0,
+		"fire_increased": 0.0,
+		"fire_resistance": 0.0,
+		"flask_charges_gained_increased": 0.0,
+		"flask_life_recovery_increased": 0.0,
+		"flask_mana_recovery_increased": 0.0,
+		"global_increased": 0.0,
+		"intelligence": 14.0,
+		"life_leech_max_rate_increased": 0.0,
+		"life_leech_rate_increased": 0.0,
+		"life_regen": 0.0,
+		"life_regen_percent": 0.0,
+		"lightning_increased": 0.0,
+		"lightning_resistance": 0.0,
+		"mana_cost_efficiency_increased": 0.0,
+		"mana_cost_increased": 0.0,
+		"mana_leech_max_rate_increased": 0.0,
+		"mana_leech_rate_increased": 0.0,
+		"mana_regen": 12.0,
+		"mana_regen_increased": 0.0,
+		"max_health": 141.0,
+		"max_mana": 137.0,
+		"max_shield": 90.9,
+		"maximum_cold_resistance_add": 0.0,
+		"maximum_fire_resistance_add": 0.0,
+		"maximum_lightning_resistance_add": 0.0,
+		"melee_area_size_increased": 0.0,
+		"melee_crit_chance_increased": 0.0,
+		"melee_crit_multiplier_add": 0.0,
+		"melee_physical_increased": 0.02,
+		"move_speed": 240.0,
+		"move_speed_increased": 0.0,
+		"physical_attack_life_leech": 0.0,
+		"physical_attack_mana_leech": 0.0,
+		"physical_increased": 0.0,
+		"projectile_attack_crit_chance_increased": 0.0,
+		"projectile_attack_crit_multiplier_add": 0.0,
+		"projectile_count": 0.0,
+		"projectile_increased": 0.0,
+		"projectile_speed_increased": 0.0,
+		"resolute_technique": 0.0,
+		"shield_recharge_delay": 4.0,
+		"shield_recharge_rate": 16.0,
+		"shield_recharge_rate_increased": 0.0,
+		"shield_recharge_start_faster": 0.0,
+		"shield_regen": 16.0,
+		"spell_added_cold": 0.0,
+		"spell_added_lightning": 0.0,
+		"spell_area_size_increased": 0.0,
+		"spell_crit_chance_increased": 0.0,
+		"spell_crit_multiplier_add": 0.0,
+		"spell_increased": 0.0,
+		"strength": 14.0
+	},
+	"baseline": "ded595477a73f91c1b1e60bf0d93919c88941103",
+	"checks": "Actual earned level5, class switch, six paid prerequisites and existing free old_garden entry; no injected funds, items or unlocks",
+	"earned_fixture_sha256": "57cc365e657146a5bd65274297f158ad4363948d1e9c4f915f80e79c0511d1c8",
+	"nodes_policy55": {
+		"15842": {
+			"grants": [
+				{
+					"mode": "flat",
+					"stat": "fire_resistance",
+					"value": 0.08
+				},
+				{
+					"mode": "flat",
+					"stat": "cold_resistance",
+					"value": 0.08
+				},
+				{
+					"mode": "flat",
+					"stat": "lightning_resistance",
+					"value": 0.08
+				},
+				{
+					"mode": "increased",
+					"stat": "attack_crit_chance_increased",
+					"value": 0.24
+				}
+			],
+			"status": "partial",
+			"supported": [
+				"+8% to all Elemental Resistances",
+				"24% increased Critical Strike Chance for Attacks"
+			],
+			"unsupported": [
+				"24% increased Elemental Damage with Attack Skills"
+			]
+		},
+		"18670": {
+			"grants": [
+				{
+					"mode": "increased",
+					"stat": "attack_elemental_increased",
+					"value": 0.12
+				}
+			],
+			"status": "full",
+			"supported": [
+				"12% increased Elemental Damage with Attack Skills"
+			],
+			"unsupported": []
+		},
+		"25511": {
+			"grants": [
+				{
+					"mode": "increased",
+					"stat": "attack_elemental_increased",
+					"value": 0.12
+				}
+			],
+			"status": "full",
+			"supported": [
+				"12% increased Elemental Damage with Attack Skills"
+			],
+			"unsupported": []
+		},
+		"30894": {
+			"grants": [
+				{
+					"mode": "increased",
+					"stat": "attack_elemental_increased",
+					"value": 0.12
+				}
+			],
+			"status": "full",
+			"supported": [
+				"12% increased Elemental Damage with Attack Skills"
+			],
+			"unsupported": []
+		},
+		"56646": {
+			"grants": [
+				{
+					"mode": "increased",
+					"stat": "attack_elemental_increased",
+					"value": 0.12
+				}
+			],
+			"status": "full",
+			"supported": [
+				"12% increased Elemental Damage with Attack Skills"
+			],
+			"unsupported": []
+		},
+		"64878": {
+			"grants": [
+				{
+					"mode": "increased",
+					"stat": "attack_elemental_increased",
+					"value": 0.12
+				}
+			],
+			"status": "full",
+			"supported": [
+				"12% increased Elemental Damage with Attack Skills"
+			],
+			"unsupported": []
+		}
+	},
+	"town_sha256": "65b01e7040806c545ce0c2d25ad83474c5e945cdd812c75f5be1315661c5f49d"
+}

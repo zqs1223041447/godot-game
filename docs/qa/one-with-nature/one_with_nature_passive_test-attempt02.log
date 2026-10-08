@@ -1,0 +1,39 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ERROR: Explicit valid equipment fixture supplies6% INC and attack-added fire
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/attack_elemental_passive_test.gd:24)
+       [1] check (res://tests/one_with_nature_passive_test.gd:11)
+       [2] transaction_checks (res://tests/one_with_nature_passive_test.gd:59)
+       [3] run (res://tests/one_with_nature_passive_test.gd:114)
+ERROR: Before notable: actual equipment6 + prior node12: 0.12000000 expected 0.18000000
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/attack_elemental_passive_test.gd:24)
+       [1] check (res://tests/one_with_nature_passive_test.gd:11)
+       [2] close (res://tests/attack_elemental_passive_test.gd:26)
+       [3] transaction_checks (res://tests/one_with_nature_passive_test.gd:60)
+       [4] run (res://tests/one_with_nature_passive_test.gd:114)
+ERROR: Actual equipment6 + prior12 + target24 INC sums: 0.36000000 expected 0.42000000
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/attack_elemental_passive_test.gd:24)
+       [1] check (res://tests/one_with_nature_passive_test.gd:11)
+       [2] close (res://tests/attack_elemental_passive_test.gd:26)
+       [3] transaction_checks (res://tests/one_with_nature_passive_test.gd:75)
+       [4] run (res://tests/one_with_nature_passive_test.gd:114)
+godot-game: playable arena ready
+ERROR: Actual attack contains elemental component: basic
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/attack_elemental_passive_test.gd:24)
+       [1] check (res://tests/one_with_nature_passive_test.gd:11)
+       [2] transaction_checks (res://tests/one_with_nature_passive_test.gd:94)
+       [3] run (res://tests/one_with_nature_passive_test.gd:114)
+SCRIPT ERROR: Invalid access to property or key 'fire' on a base object of type 'Dictionary'.
+          at: transaction_checks (res://tests/one_with_nature_passive_test.gd:95)
+          GDScript backtrace (most recent call first):
+              [0] transaction_checks (res://tests/one_with_nature_passive_test.gd:95)
+              [1] run (res://tests/one_with_nature_passive_test.gd:114)
+ONE_WITH_NATURE_PASSIVE checks=89 failures=4

@@ -19,6 +19,7 @@ const EncirclingCleaveGemMigration = preload("res://scripts/save/encircling_clea
 const LongStrideGemMigration = preload("res://scripts/save/long_stride_gem_migration.gd")
 const RuinsGardenMigration = preload("res://scripts/save/ruins_garden_migration.gd")
 const AttackElementalMigration = preload("res://scripts/save/attack_elemental_passive_migration.gd")
+const OneWithNatureMigration = preload("res://scripts/save/one_with_nature_migration.gd")
 const ShockGemMigration = preload("res://scripts/save/shock_gem_migration.gd")
 const FireDotMigration = preload("res://scripts/save/fire_dot_migration.gd")
 const FasterBurnMigration = preload("res://scripts/save/faster_burn_migration.gd")
@@ -102,8 +103,9 @@ func _init() -> void:
 	var source_v52: Dictionary = EncirclingCleaveGemMigration.migrate_v51(source_v51, _talent_validator, _socket_ids)
 	var source_v53: Dictionary = LongStrideGemMigration.migrate_v52(source_v52, _talent_validator, _socket_ids)
 	var source_v54: Dictionary = RuinsGardenMigration.migrate_v53(source_v53, _talent_validator, _socket_ids)
-	_current = AttackElementalMigration.migrate_v54(source_v54, _talent_validator, _socket_ids)
-	assert(not _current.is_empty() and Rules.reason(_current).is_empty(), "The built-in canonical fixture must migrate to v55")
+	var source_v55: Dictionary = AttackElementalMigration.migrate_v54(source_v54, _talent_validator, _socket_ids)
+	_current = OneWithNatureMigration.migrate_v55(source_v55, _talent_validator, _socket_ids)
+	assert(not _current.is_empty() and Rules.reason(_current).is_empty(), "The built-in canonical fixture must migrate to v56")
 	_current.migration_ledger.from_version = 0
 
 
@@ -167,7 +169,9 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	var old_version := int(raw.version)
 	if old_version > Rules.VERSION: return _reject(path, "存档属于未来版本，已保护原文件")
 	var candidate: Dictionary = {}
-	if old_version == Rules.V54_VERSION:
+	if old_version == Rules.V55_VERSION:
+		candidate = Rules.decode_v55(raw)
+	elif old_version == Rules.V54_VERSION:
 		candidate = Rules.decode_v54(raw)
 	elif old_version == Rules.V53_VERSION:
 		candidate = Rules.decode_v53(raw)
@@ -356,8 +360,10 @@ func load_build(path: String = "user://build_save.json") -> bool:
 		candidate = LongStrideGemMigration.migrate_v52(candidate, _talent_validator, _socket_ids)
 	if old_version < Rules.V54_VERSION:
 		candidate = RuinsGardenMigration.migrate_v53(candidate, _talent_validator, _socket_ids)
-	if old_version < Rules.VERSION:
+	if old_version < Rules.V55_VERSION:
 		candidate = AttackElementalMigration.migrate_v54(candidate, _talent_validator, _socket_ids)
+	if old_version < Rules.VERSION:
+		candidate = OneWithNatureMigration.migrate_v55(candidate, _talent_validator, _socket_ids)
 	var reason: String = Rules.reason(candidate, _talent_validator, _socket_ids)
 	if not reason.is_empty(): return _reject(path, reason)
 	var loaded_revision: int = int(candidate.revision)

@@ -23,9 +23,9 @@ func check(ok: bool, label: String) -> void:
 func write(path: String, bytes: PackedByteArray) -> void:
 	var file := FileAccess.open(path,FileAccess.WRITE)
 	file.store_buffer(bytes)
-func expected(source: Dictionary) -> Dictionary:
+func expected(source: Dictionary, version: int = 55) -> Dictionary:
 	var copy: Dictionary = source.duplicate(true)
-	copy.version = 55
+	copy.version = version
 	return copy
 func success_case(source: Dictionary, version: int) -> void:
 	var path := "user://upgrade-%d.json" % version
@@ -34,8 +34,8 @@ func success_case(source: Dictionary, version: int) -> void:
 	var game := Game.new()
 	var events := [0]
 	game.changed.connect(func():events[0] += 1)
-	var wanted: Dictionary = expected(source if version == 54 else Prior.migrate_v53(source))
-	check(game.load_build(path) and game.snapshot() == wanted,"Actual%d load publishes exact55 state" % version)
+	var wanted: Dictionary = expected(source if version == 54 else Prior.migrate_v53(source),Rules.VERSION)
+	check(game.load_build(path) and game.snapshot() == wanted,"Actual%d load publishes exact current state" % version)
 	check(game.save_attempts == 1 and game.successful_saves == 1 and events[0] == 1,"Migration commits exactly once")
 	check(FileAccess.get_file_as_bytes(path+".v%d-backup.json" % version) == bytes,"Original bytes backed up before mutation")
 	check(game.migrated_from_legacy,"Explicit migration notice")
@@ -63,7 +63,7 @@ func failure_case(source: Dictionary, failure: String) -> void:
 	if failure in ["external","atomic"]: check(FileAccess.get_file_as_bytes(path+".v54-backup.json") == bytes,"Failed final commit retains original backup")
 	if failure == "collision": check(FileAccess.get_file_as_string(path+".v54-backup.json") == "existing backup","Existing backup never overwritten")
 	if failure == "atomic":
-		check(DirAccess.remove_absolute(path+".tmp") == OK and store.load_build(path) and store.snapshot() == expected(source) and events[0] == 1,"Fault removal permits one successful retry")
+		check(DirAccess.remove_absolute(path+".tmp") == OK and store.load_build(path) and store.snapshot() == expected(source,Rules.VERSION) and events[0] == 1,"Fault removal permits one successful retry")
 func _initialize() -> void:
 	if not OS.get_environment("XDG_DATA_HOME").begins_with("/tmp/godot-attack-elemental-"): quit(78); return
 	var source53: Dictionary = Rules.decode_v53(JSON.parse_string(FileAccess.get_file_as_string(FIXTURE)))
